@@ -1,0 +1,18 @@
+CREATE TABLE IF NOT EXISTS option_header (
+   `option_id` INT UNSIGNED NOT NULL AUTO_INCREMENT`,
+   `access_level` VARCHAR(20) NOT NULL DEFAULT 'both',
+   `option_type` VARCHAR(40) NOT NULL,
+   `description` VARCHAR(200) DEFAULT NULL,
+   `module` VARCHAR(40) NOT NULL DEFAULT 'system',
+   `efid` INT(10) NOT NULL DEFAULT '',
+   `status` INT(2) DEFAULT '1',
+   `rev_enabled` INT(2) DEFAULT '1',
+   `rev_number` INT(10) NOT NULL DEFAULT '',
+   `created_by` VARCHAR(40) NOT NULL DEFAULT '',
+   `creation_date` DATE NOT NULL DEFAULT '',
+   `last_update_by` VARCHAR(40) NOT NULL DEFAULT '',
+   `last_update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`org_id`),
+    UNIQUE KEY (`type`),
+     
+)ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;;

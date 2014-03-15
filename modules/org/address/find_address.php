@@ -1,0 +1,1 @@
+<?php require_once('address.inc') ?><?php$search_form = search::search_form('address', 'find_address', 'address_search');if(!empty($pagination)){$pagination_statement = $pagination->show_pagination($pagination, 'find_address', $pageno, $query_string );}//include_find_page();?><?php  require_once(INC_BASICS . DS ."find_page.inc") ?>

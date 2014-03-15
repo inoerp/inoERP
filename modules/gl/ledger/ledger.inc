@@ -1,0 +1,1 @@
+<?php //values for balancing segmentsif (!empty($$class->coa_structure_id)) { $coa = coa::find_by_structure($$class->coa_structure_id); $balancing_qualifier = $option_line_id = $coa->balancing; $ol = new option_line(); $old = $ol->findBy_id($balancing_qualifier); $value_group_headerid = $old->value_group_id;} else { $value_group_headerid = null;}?>

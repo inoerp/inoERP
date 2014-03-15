@@ -1,0 +1,1 @@
+<?php include_once("../../../include/basics/header.inc"); ?><?php require_once ('class.legal_org.inc'); ?><script src="legal_org.js"></script><!--Put the navigation & other stuffs at the left Menu--><div id="left-block">           <?php path::path_block(); ?></div>

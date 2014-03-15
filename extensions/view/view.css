@@ -1,0 +1,20 @@
+/* 
+    Document   : view
+    Created on : Sep 7, 2013, 3:53:58 PM
+    Author     : dasn
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+ul#sql_query li{
+display: inline-block;
+}
+
+ul.view_filters{
+display: block;
+clear: both;
+}
+ul.view_filters li{
+display: inline-block;
+margin-right: 30px;
+}

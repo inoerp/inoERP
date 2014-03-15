@@ -1,0 +1,42 @@
+#content_header{
+height : 100px;
+border-bottom: 4px groove rgb(179,220,237);
+background : #eee;
+}
+
+#content_header .left{
+float : left;
+width : 33%;
+margin-left: 10px;
+
+}
+
+.right {
+float: right;
+width : 62%;
+padding-left: 20px;
+border-left: 4px groove rgb(179,220,237);
+}
+
+span.longHeading{
+font: lighter 16px 'Segoe UI Light',Segoe UI,Tahoma Light,Arial Light,Helvetica Light,sans-serif;
+}
+
+ul.summary_list li {
+display: inline-block;
+width: 45%;
+valign : top;
+padding : 0px 10px;
+height : 170px;
+overflow: hidden;
+}
+
+ul.summary_list li .subject_summary{
+display: block;
+font-size: 1.2em;
+font-weight: bold;
+margin-bottom: 10px;
+padding: 6px 12px;
+border-bottom: 1px solid;
+overflow: hidden;
+}

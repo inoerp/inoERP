@@ -1,0 +1,10 @@
+#
+# http://www.robotstxt.org/wc/robots.html
+# http://www.sxw.org.uk/computing/robots/check.html
+
+User-agent: *
+Disallow: /
+
+# Directories
+Disallow: /includes/
+Disallow: /modules/
