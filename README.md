@@ -37,6 +37,7 @@ Ex : One calendar INO_CORP for Corporate and INO_USA, INO_UK for specific countr
 101.2.3	Credit Memo
 101.2.4	Prepayment
 101.3	PO Matching 
+
 2.3.1 Multi select matching
 101.4	AP Payments
 101.4.1	Single Invoice Payment
