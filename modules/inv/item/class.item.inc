@@ -147,7 +147,7 @@ class item extends dbObject {
  ];
  public $initial_search = [
 		 'item_id',
-		  "org_id",
+		 "org_id",
 		 "item_number",
 		 "item_type",
 		 "uom_id",
@@ -169,11 +169,25 @@ class item extends dbObject {
 		 "item_description",
 		 "item_type",
 		 "make_buy"];
- 
  public $otherField = [
 		 "org.org"
  ];
- 
+ public $fields_inForm_notInDataBase = [
+		 'item_category',
+		 'item_catalog',
+		 'item_reference',
+		 'item_template'
+ ];
+ public $search = [
+		 '_show_update_path' => 1,
+		 '_update_action_meassge' => 'Update',
+		 '_show_view_path' => 1,
+ ];
+ public $pageTitle = " Item - Create & Update Items"; //page Title
+ public $option_lists = [
+		 'item_types' => 'ITEM_TYPE',
+		 'item_status' => 'ITEM_STATUS',
+ ];
  public $item_id;
  public $org_id;
  public $org;
@@ -292,6 +306,10 @@ class item extends dbObject {
  public $last_update_by;
  public $last_update_date;
  public $time;
+ public $item_category;
+ public $item_catalog;
+ public $item_reference;
+ public $item_template;
 
  Public static function item_types() {
 	$option_header = option_header::find_by_name('ITEM_TYPE');
@@ -333,35 +351,84 @@ class item extends dbObject {
 	return $data;
  }
 
- public static function find_item_id_from_itemNumber_OrgId($item_number, $org_id) {
+ public function findBy_itemNumber_OrgId($org_id = "") {
 	global $db;
-	$sql = "SELECT item_id FROM " . self::$table_name;
-	$sql .= " where item_number= '{$item_number}' ";
-	$sql .= " AND org_id= '{$org_id}' ";
+	$sql = "SELECT * FROM " . self::$table_name;
+	$sql .= " where item_number = :item_number ";
+	$sql .= " AND org_id = :org_id ";
 	$sql .= " LIMIT 1 ";
+	$param_a = ['item_number', 'org_id'];
+	$org_id_i = !empty($org_id) ? $org_id : $this->org_id;
+	$value_a = ['item_number' => $this->item_number, 'org_id' => $org_id_i];
+	$result = $db->findBy_sql($sql, $param_a, $value_a);
+	return !(empty($result)) ? array_pop($result) : false;
+ }
 
-	$result = $db->query($sql);
-	if ($result && mysql_num_rows($result)) {
-	 while ($row = $db->fetch_array($result)) {
-		$item_id = $row['item_id'];
-	 }//end of while Loop
-	 return $item_id;
-	} else {
-	 return false;
+ public static function find_all_assigned_orgs($item_number) {
+	global $db;
+	$sql = "SELECT * FROM " .
+					self::$table_name .
+					" where item_number= '{$item_number}' ";
+	$result = $db->find_by_sql($sql);
+	return $result;
+ }
+
+ public static function find_all_assigned_org_ids($item_number) {
+	global $db;
+	$sql = "SELECT org_id FROM " .
+					self::$table_name .
+					" where item_number= '{$item_number}' ";
+	$result = $db->find_by_sql($sql);
+	$assigned_inventory_orgs_array = [];
+
+	foreach ($result as $orgs) {
+	 $assigned_inventory_orgs_array[] = $orgs->org_id;
+	}
+
+	return $assigned_inventory_orgs_array;
+ }
+
+ public function _before_save() {
+	if (empty($this->item_id)) {
+//before creating item, check if the entered org is a master org or not;
+//if the entered org is a master org then create the item else check if item exists in any master org
+//items can be created only in master org
+	 $org = new org();
+	 $is_master_org = false;
+	 $all_master_orgs = $org->findAll_item_master();
+	 foreach ($all_master_orgs as $master_orgs) {
+		if ($master_orgs->org_id == $this->org_id) {
+		 $is_master_org = true;
+		 return;
+		}
+	 }
+	 if ($is_master_org) {
+		return 1;
+	 } else {
+		//verify if item number exists in master org
+		$inv = new inventory();
+		$inv_i = $inv->findBy_org_id($this->org_id);
+		$item_exists_inItemMaster = $this->findBy_itemNumber_OrgId($inv_i->master_org_id);
+		if ($item_exists_inItemMaster) {
+		 return 1;
+		} else {
+		 echo " Items can be created only in master org ";
+		 return -99;
+		}
+	 }
 	}
  }
 
- public static function find_item_number_by_itemNumber_OrgId($item_number, $org_id="") {
+ public static function find_item_number_by_itemNumber_OrgId($item_number, $org_id = "") {
 	global $db;
 	$sql = "SELECT * FROM ";
 	$sql .= self::$table_name;
 	$sql .= " where item_number LIKE '%{$item_number}%' ";
-	if(!empty($org_id)){
-	$sql .= " AND org_id  = '{$org_id}' ";
+	if (!empty($org_id)) {
+	 $sql .= " AND org_id  = '{$org_id}' ";
 	}
 	$result = $db->find_by_sql($sql);
 	$data = array();
-	$return_array = array();
 	foreach ($result as $row) {
 	 $data[] = array(
 			 'label' => $row->item_number,
@@ -374,59 +441,6 @@ class item extends dbObject {
 //	$return_array['jsonvalue'] = $data;
 
 	return $data;
- }
-
- public static function find_by_itemNumber_OrgId($item_number, $org_id) {
-	$item_id = self::find_item_id_from_itemNumber_OrgId($item_number, $org_id);
-	$result = self::find_by_id($item_id);
-	return $result;
- }
-
- public static function find_all_assigned_orgs($item_number) {
-	global $db;
-	$sql = "SELECT * FROM " .
-					self::$table_name .
-					" where item_number= '{$item_number}' ";
-	$result = $db->result_array_assoc($sql);
-	return $result;
- }
-
- public static function find_all_assigned_org_ids($item_number) {
-	global $db;
-	$sql = "SELECT org_id FROM " .
-					self::$table_name .
-					" where item_number= '{$item_number}' ";
-	$result = $db->result_array_assoc($sql);
-	$assigned_inventory_orgs_array = [];
-
-	foreach ($result as $orgs) {
-	 $assigned_inventory_orgs_array[] = $orgs['org_id'];
-	}
-
-	return $assigned_inventory_orgs_array;
- }
-
- public function save() {
-	if (empty($this->item_id)) {
-//before creating item, check if the entered org is a master org or not;
-//if the entered org is a master org then create the item else show error message that
-//items can be created only in master org
-
-	 $all_master_orgs = org::find_all_item_master_orgIds_array();
-	 if (in_array($this->org_id, $all_master_orgs[0])) {
-		$this->create();
-	 } else {
-		$this->msg = " Items can be created only in master org ";
-	 }
-	} else {
-	 $entered_item = self::find_by_id($this->item_id);
-	 if (($entered_item->org_id) == ($this->org_id)) {
-		$this->update($this->item_id);
-	 } else {
-		$this->copy($this->item_id);
-	 }
-	}
-	return $this->msg;
  }
 
  public function copy($item_id) {

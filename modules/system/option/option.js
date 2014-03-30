@@ -72,7 +72,7 @@ $(document).ready(function() {
  });
  
 
-deleteData('json.option.php');
+deleteData('modules/system/option/json.option.php');
  save('json.option.php', '#option_header', 'line_id_cb', 'option_line_code', '#option_header_id');
  remove_row();
 });

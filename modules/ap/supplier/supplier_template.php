@@ -36,7 +36,7 @@
 							<?php form::number_field_d('supplier_number'); ?>
 						 </li>               
 						 <li><label>Supplier Name : </label>
-							<?php $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly);
+							<?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly);
 // echo form::text_field('supplier_name', $$class->supplier_name, '20', '', 1, '', 'supplier_name', $readonly, 'select_supplier_name') ?>
 						 </li>
 						 <li><label>Supplier Type : </label>

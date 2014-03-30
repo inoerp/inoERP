@@ -61,8 +61,7 @@ $(document).ready(function() {
  });
 
 
- deleteData('json.option.php');
-// save('json.option.php', '#option_header', 'line_id_cb', 'option_line_code', '#option_header_id');
+ deleteData('form.php?class_name=option_header&line_class_name=option_line&detail_class_name=option_detail');
  remove_row();
 
  //context menu

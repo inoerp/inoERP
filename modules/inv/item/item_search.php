@@ -1,6 +1,7 @@
 <?php include_once("../../../includes/basics/basics.inc"); ?>
 <?php
  global $db;
+ $org = new org();
 // if the 'term' variable is not sent with the request, exit
 if (!isset($_REQUEST['term']) ){
  echo "exit";
@@ -10,7 +11,7 @@ $item_number = $_REQUEST['term'];
 if(!empty($_GET['org_id'])){
 $org_id = $_GET['org_id'];
 }else{
- $master_org = org::find_all_item_master();
+ $master_org = $org->findAll_item_master();
  $org_id = $master_org[0]->org_id;
 }
 //echo $org_id;

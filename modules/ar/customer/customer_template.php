@@ -12,7 +12,7 @@
 			<!--    End of place for showing error messages-->
 
 			<div id ="form_header">
-			 <form action=""  method="post" id="customer"  name="customer">
+			 <form action=""  method="post" id="customer_header"  name="customer_header">
 				<div id="tabsHeader">
          <ul class="tabMain">
           <li><a href="#tabsHeader-1">Basic Info</a></li>
@@ -26,7 +26,7 @@
 					 <div class="large_shadow_box"> 
 						<ul class="column five_column">
 						 <li>
-							<label><img class="ar_customer_id_popup" src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
+							<label><img class="ar_customer_id_popup select_popup" src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
 							 Customer Id : </label>
 							<?php form::number_field_drs('ar_customer_id'); ?>
 							<a name="show" href="?ar_customer_id=" class="show ar_customer_id">
@@ -109,12 +109,17 @@
 					 </div>
 					</div>
 					<div id="tabsHeader-5" class="tabContent">
-					 <div> 
 						<div id="show_attachment" class="show_attachment">
-						 <input type="button" class="attachment_button button" value="Attachements" id="attachment_button" name="">
-						 <?php echo file::attachment_statement($customer_file); ?>
+						 <div id="file_upload_form">
+							<ul class="inRow asperWidth">
+							 <li><input type="file" id="attachments" class="attachments" name="attachments[]" multiple/></li>
+							 <li> <input type="button" value="Attach" form="file_upload" name="attach_submit" id="attach_submit" class="submit button"></li>
+							 <li class="show_loading_small"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/small_loading.gif"/></li>
+							</ul>
+						 </div>
+						 <div id="uploaded_file_details"></div>
+						 <?php echo file::attachment_statement($file); ?>
 						</div>
-					 </div>
 					</div>
 				 </div>
 
@@ -274,10 +279,17 @@
 					<!--                end of tab3 div three_column-->
 					<!--end of tab3 (sales)!!!!start of purchasing tab-->
 					<div id="tabsLine-6" class="tabContent">
-					 <div id="show_attachments_site" class="show_attachment">
-						<input type="button" class="attachment_button button" value="Attachements" id="site_attachment_button" name="">
-						<?php echo file::attachment_statement($site_file); ?>
-					 </div>
+						<div id="show_attachment" class="show_attachment">
+						 <div id="file_upload_form">
+							<ul class="inRow asperWidth">
+							 <li><input type="file" id="attachments" class="attachments" name="attachments[]" multiple/></li>
+							 <li> <input type="button" value="Attach" form="file_upload" name="attach_submit" id="attach_submit" class="submit button"></li>
+							 <li class="show_loading_small"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/small_loading.gif"/></li>
+							</ul>
+						 </div>
+						 <div id="uploaded_file_details"></div>
+						 <?php echo file::attachment_statement($file); ?>
+						</div>
 					</div>
 					<!--end of tab4(purchasing)!!! start of MFG tab-->
 					<div id="tabsLine-7" class="tabContent">

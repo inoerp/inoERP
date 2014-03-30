@@ -19,42 +19,33 @@
          <ul class="tabMain">
           <li><a href="#tabsHeader-1">Basic Info</a></li>
           <li><a href="#tabsHeader-2">Inv Assignment</a></li>
-          <li><a href="#tabsHeader-3">Categories</a></li>
-          <li><a href="#tabsHeader-4">Catalogs</a></li>
-          <li><a href="#tabsHeader-5">Cross References</a></li>
-					<li><a href="#tabsHeader-6">Actions</a></li>
+          <li><a href="#tabsHeader-3">Attachments</a></li>
+					<li><a href="#tabsHeader-4">Actions</a></li>
          </ul>
 				 <div class="tabContainer"> 
 					<div id="tabsHeader-1" class="tabContent">
 					 <div class="large_shadow_box"> 
 						<ul class="column five_column">
 						 <li>
-							<label><img class="item_id_popup" src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
-							 Item Id : </label>
-							<?php echo form::text_field('item_id', $item->item_id, '15', '25', '', 'System Number', 'item_id', $readonly) ?>
-							<a name="show" href="?item_id=" class="show item_id">
-							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-						 </li>
-						 <li>
 							<label> Inventory Org : </label>
 							<?php
 							if (!empty($item->org_id)) {
-							 echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $item->org_id, 'org_id', $readonly, '', '', 1);
+							 echo form::select_field_from_object('org_id', $org->findAll_inventory(), 'org_id', 'org', $item->org_id, 'org_id', $readonly, '', '', 1);
 							} else {
-							 echo form::select_field_from_object('org_id', org::find_all_item_master(), 'org_id', 'org', $item->org_id, 'org_id', $readonly, '', '', 1);
+							 echo form::select_field_from_object('org_id', $org->findAll_item_master(), 'org_id', 'org', $item->org_id, 'org_id', $readonly, '', '', 1);
 							}
 							?> 
 						 </li>
-						 <li><label><a href="find_item_number.php" class="item_number_popup">
-								<img src="<?php echo HOME_URL; ?>themes/images/serach.png"/></a>Item Number : </label>
-							<?php echo form::text_field_d('item_number'); ?>
-							<a name="show" href="item.php?item_number=" class="show item_number">
-							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-						 </li>               
-						 <li><label>Item Description : </label>
-							<?php echo form::text_field_d('item_description'); ?>
+						 <li>
+							<label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="item_id select_popup clickable">
+							 Item Id : </label>
+							<?php echo form::text_field('item_id', $item->item_id, '15', '25', '', 'System Number', 'item_id', $readonly) ?>
+							<a name="show" href="?item_id=" class="show item_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
-
+						 <li><label>Item Number<img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete item_number clickable"> : </label><?php $f->text_field_dm('item_number', 'select_item_number'); ?>
+							<a name="show" href="?item_id=" class="show item_number"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+						 </li>
+						 <li><label> Description : </label><?php $f->text_field_d('item_description'); ?></li>
 						</ul>
 					 </div>
 					</div>
@@ -64,41 +55,31 @@
 					 </div>
 					</div>
 					<div id="tabsHeader-3" class="tabContent">
-					 <div class="large_shadow_box"> 
-						<ul class="column five_column">
-						 <li><label>Inventory Category : </label><?php echo form::text_field_d('item_description'); ?></li>               
-						 <li><label>Purchasing Category : </label><?php echo form::text_field_d('item_description'); ?></li>
-						 <li><label>Sales Category : </label><?php echo form::text_field_d('item_description'); ?></li>
-						 <li><label>Financial Category : </label><?php echo form::text_field_d('item_description'); ?></li>
-						</ul>
+					 <div> 
+						<div id="show_attachment" class="show_attachment">
+						 <div id="file_upload_form">
+							<ul class="inRow asperWidth">
+							 <li><input type="file" id="attachments" class="attachments" name="attachments[]" multiple/></li>
+							 <li> <input type="button" value="Attach" form="file_upload" name="attach_submit" id="attach_submit" class="submit button"></li>
+							 <li class="show_loading_small"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/small_loading.gif"/></li>
+							</ul>
+						 </div>
+						 <div id="uploaded_file_details"></div>
+						 <?php echo file::attachment_statement($file); ?>
+						</div>
 					 </div>
 					</div>
 					<div id="tabsHeader-4" class="tabContent">
-					 <div class="large_shadow_box"> 
-						<ul class="column five_column">
-						 <li><label>Physical : </label><?php echo form::text_field_d('item_description'); ?></li>               
-						 <li><label>Marketing : </label><?php echo form::text_field_d('item_description'); ?></li>
-						 <li><label>Specification : </label><?php echo form::text_field_d('item_description'); ?></li>
-						</ul>
-					 </div>
-					</div>
-					<div id="tabsHeader-5" class="tabContent">
-					 <div> 
-						<ul>
-						 <li><label>Cross Item : </label><?php echo form::text_field_d('item_description'); ?></li>               
-						 <li><label>MPN : </label><?php echo form::text_field_d('item_description'); ?></li>
-						 <li><label>Customer Item : </label><?php echo form::text_field_d('item_description'); ?></li>
-						 <li><label>Replaced Item : </label><?php echo form::text_field_d('item_description'); ?></li>
-						</ul>
-					 </div>
-					</div>
-					<div id="tabsHeader-6" class="tabContent">
 					 <div> 
 						<ul class="column four_column">
-						 <li id="copy_header"><label>Copy Document : </label>
-							<input type="button" class="button" id="copy_docHeader" value="Item Master">
+						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_template select_popup">
+							 Item/Template: </label><input type="text" class="text_field select_item_template item_template" id="item_template">
+							<button class="button non_clickable apply_item_template " id="apply_item_template">Apply</button>
 						 </li>
-						</ul>
+						 <li><label>View & Update</label><button class="button non_clickable item_category " id="item_category">Categories</button></li>
+						 <li><label>View & Update</label><button class="button non_clickable item_catalog" id="item_catalog">Catalogs</button></li>
+						 <li><label>View & Update</label><button class="button non_clickable item_reference" id="item_reference">References</button></li>
+            </ul>
 					 </div>
 					</div>
 				 </div>
@@ -121,10 +102,10 @@
 					 <div class="first_rowset"> 
 						<ul class="column five_column"> 
 						 <li><label>Item Type : </label> 
-							<?php echo form::select_field_from_object('item_type', item::item_types(), 'option_line_code', 'option_line_code', $item->item_type, 'item_type', $readonly); ?>
+							<?php echo $f->select_field_from_object('item_type', item::item_types(), 'option_line_code', 'option_line_code', $item->item_type, 'item_type', '', 1, $readonly); ?>
 						 </li> 
 						 <li><label>UOM : </label>
-							<?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom', $item->uom_id, 'uom_id', $readonly); ?>
+							<?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom', $item->uom_id, 'uom_id',  '', 1, $readonly); ?>
 						 </li>
 						 <li><label>Item Status : </label>
 							<?php echo form::select_field_from_object('item_status', item::item_status(), 'option_line_id', 'option_line_code', $item->item_status, 'item_status', $readonly); ?>
@@ -363,9 +344,9 @@
 							<?php echo form::select_field_from_object('wip_supply_subinventory', subinventory::find_all_of_org_id($item->org_id), 'subinventory_id', 'subinventory', $item->wip_supply_subinventory, '', $readonly, 'subinventory_id', '', ''); ?>
 						 </li>
 						 <li><label>Supply Locator: </label> 
-								 <?php echo form::select_field_from_object('wip_supply_locator', locator::find_all_of_subinventory($item->wip_supply_subinventory), 'locator_id', 'locator', $item->wip_supply_locator, '', $readonly, 'locator_id', '', ''); ?>
+							<?php echo form::select_field_from_object('wip_supply_locator', locator::find_all_of_subinventory($item->wip_supply_subinventory), 'locator_id', 'locator', $item->wip_supply_locator, '', $readonly, 'locator_id', '', ''); ?>
 						 </li>
-			
+
 						</ul>
 					 </div>
 					 <div class="second_rowset">
@@ -458,13 +439,13 @@
 					 </div> 
 					 <div class="second_rowset">
 						<ul class="three_column">
-						 <li><label>Material Ac: </label><?php form::account_field('material_ac_id'); ?></li>
-						 <li><label>Material OH Ac: </label><?php form::account_field('material_ac_id'); ?></li>
-						 <li><label>OverHead Ac: </label> <?php form::account_field('material_ac_id'); ?></li>
-						 <li><label>Resource Ac: </label> <?php form::account_field('resource_ac'); ?></li>
-						 <li><label>Expense Ac: </label><?php form::account_field('expense_ac'); ?></li>
-						 <li><label>OSP Ac: </label> <?php form::account_field('material_ac_id'); ?> </li>
-						 <li><label>Sales Ac: </label><?php form::account_field('sales_ac'); ?> </li>
+						 <li><label>Material Ac: </label><?php $f->ac_field_d('material_ac_id'); ?></li>
+						 <li><label>Material OH Ac: </label><?php $f->ac_field_d('material_ac_id'); ?></li>
+						 <li><label>OverHead Ac: </label> <?php $f->ac_field_d('material_ac_id'); ?></li>
+						 <li><label>Resource Ac: </label> <?php $f->ac_field_d('resource_ac'); ?></li>
+						 <li><label>Expense Ac: </label><?php $f->ac_field_d('expense_ac'); ?></li>
+						 <li><label>OSP Ac: </label> <?php $f->ac_field_d('material_ac_id'); ?> </li>
+						 <li><label>Sales Ac: </label><?php $f->ac_field_d('sales_ac'); ?> </li>
 						</ul>
 					 </div> 
 					</div>

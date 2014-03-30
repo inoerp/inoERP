@@ -92,7 +92,7 @@ $(document).ready(function() {
  });
 
 //set the line price
- $('#content').on('focusout', '.unit_price', function() {
+ $('#content').on('focusout', '.unit_price,.line_quantity', function() {
 	var unitPrice = $(this).val();
 	var trClass = '.' + $(this).closest('tr').attr('class');
 	var lineQuantity = ($(this).closest('.tabContainer').find(trClass).find('.line_quantity').val());

@@ -66,15 +66,15 @@
 					 <!--              end of tab1-->
 
 					 <div id="tabsLine-2" class="tabContent">
-						<div class="three_column"> 
+						<div class="column four_column"> 
 						 <ul>
 							<li><label>Enterprise Name : </label> 
-						 <?php  echo $f->select_field_from_object('enterprise_org_id', org::find_all_enterprise(),'org_id', 'org', $$class->enterprise_org_id,'enterprise_org_id','','', $readonly); ?>
-							</li>
+						 <?php  echo $f->select_field_from_object('enterprise_org_id', org::find_all_enterprise(),'org_id', 'org', $$class->enterprise_org_id,'enterprise_org_id','','', $readonly1); ?>
 							</li>
 							<li><label>Legal Org : </label> 
-							 <?php  echo $f->select_field_from_object('legal_org_id', org::find_all_legal(),'org_id', 'org', $$class->legal_org_id,'legal_org_id','legal_org_id','', $readonly); ?></li>
+							 <?php  echo $f->select_field_from_object('legal_org_id', org::find_all_legal(),'org_id', 'org', $$class->legal_org_id,'legal_org_id','legal_org_id','', $readonly1); ?></li>
 							<li><label>Ledger: </label> <?php echo $f->text_field_dr('ledger'); ?></li>
+							<li><label>Cash Ac: </label> <?php $f->ac_field_d('cash_ac_id'); ?></li>
 						 </ul>
 						</div> 
 					 </div>

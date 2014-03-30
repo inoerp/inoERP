@@ -1,4 +1,4 @@
-function setValFromSelectPage(supplier_id, supplier_number, supplier_number) {
+function setValFromSelectPage(supplier_id, supplier_number, supplier_name) {
  this.supplier_id = supplier_id;
  this.supplier_number = supplier_number;
  this.supplier_name = supplier_name;

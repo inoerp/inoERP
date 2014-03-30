@@ -1,3 +1,23 @@
+function setValFromSelectPage(item_number, combination) {
+ this.item_number = item_number;
+ this.combination = combination;
+}
+
+setValFromSelectPage.prototype.setVal = function() {
+ var item_number = this.item_number;
+ var combination = this.combination;
+ var fieldClass = '.' + localStorage.getItem("field_class");
+ fieldClass = fieldClass.replace(/\s+/g, '.');
+ if (item_number) {
+	$("#item_template").val(item_number);
+ }
+ if (combination) {
+	$('#content').find(fieldClass).val(combination);
+	localStorage.removeItem("field_class");
+ }
+};
+
+
 $(document).ready(function() {
  //creating tabs
  $(function() {
@@ -5,6 +25,9 @@ $(document).ready(function() {
 	$("#tabsLine").tabs();
  });
 
+ $('#org_id,.disable_autocomplete.item_number').on('change', function() {
+	$('#item_id').val('');
+ });
 
 //query mode for item
  $("#item_id").bind('keydown', 'Ctrl+q', function() {
@@ -12,134 +35,140 @@ $(document).ready(function() {
 	getAllOrgName();
  });
 
- //copy Item
- $('#content').on('click', '#copy_docHeader', function() {
-	$('#item_id').val('');
-	$('#item_number').val('');
-	$('#item_description').val('');
-	$('#org_id').val('');
-	alert('Item copied \nSelect Org, Enter Item Number & Description \nMaky any other necessary changes & Save the record!')
- });
 
-//Show the org name after the item_id is selected
- $("#org_id.getOrgName").blur(function() {
-	getOrgName();
- });
 
-//ajax for uom - unit of measures
- $('#uom').autocomplete({source: '../uom/uom_search.php', minLength: 2});
-
-//ajax for accounts
- $('#material_ac').autocomplete({
-	source: '../../gl/coa_combination/coa_search.php',
-	minLength: 2});
-
- $('#material_oh_ac').autocomplete({
-	source: '../../gl/coa_combination/coa_search.php',
-	minLength: 2});
-
- $('#overhead_ac').autocomplete({
-	source: '../../gl/coa_combination/coa_search.php',
-	minLength: 2});
-
- $('#resource_ac').autocomplete({
-	source: '../../gl/coa_combination/coa_search.php',
-	minLength: 2});
-
- $('#expense_ac').autocomplete({
-	source: '../../gl/coa_combination/coa_search.php',
-	minLength: 2});
-
- $('#osp_ac').autocomplete({
-	source: '../../gl/coa_combination/coa_search.php',
-	minLength: 2});
-
- $('#sales_ac').autocomplete({
-	source: '../../gl/coa_combination/coa_search.php',
-	minLength: 2});
-
-//item number jquery
- $('#item_number').autocomplete({source: 'item_search.php', minLength: 2});
-
-//selecting item
-
- $(".item_id_popup").on("click", function() {
-	localStorage.idValue = "";
-	void window.open('find_item.php', '_blank',
+ $(".item_id.select_popup").on("click", function() {
+	void window.open('select.php?class_name=item', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
-// function setParnetWindowValues(itemId, itemNumber, itemDescription, orgId)
-// {
-//	if ((typeof localStorage.idValue !== 'undefined') && (localStorage.idValue.length > 0)) {
-//	 var RowDivId = 'tr#' + localStorage.idValue;
-//	 window.opener.$(RowDivId).find(".item_id").val(itemId);
-//	 window.opener.$(RowDivId).find(".item_number").val(itemNumber);
-//	 window.opener.$(RowDivId).find(".item_description").val(itemDescription);
-//	 window.opener.$(RowDivId).find(".org_id").val(orgId);
-//	} else {
-//	 window.opener.$(".item_id").val(itemId);
-//	 window.opener.$(".item_number").val(itemNumber);
-//	 window.opener.$(".item_description").val(itemDescription);
-//	 window.opener.$(".org_id").val(orgId);
-//	}
-// }
-//
-// $(".quick_select").on("click", function() {
-//	var itemId = $(this).val();
-//	var itemNumber = $(this).closest("td").siblings("td.item_number").html();
-//	var itemDescription = $(this).closest("td").siblings("td.item_description").html();
-//	var orgId = $(this).closest("td").siblings("td.org_id").html();
-//	setParnetWindowValues(itemId, itemNumber, itemDescription, orgId);
-//	window.close();
-// });
-
-
-//Get the item_id on refresh button click
- $('a.show.item_id').click(function() {
+ //Get the item_id on find button click
+ $('a.show.item_id').click(function(e) {
 	var item_id = $('#item_id').val();
-	$(this).attr('href', '?item_id=' + item_id);
-
+	$(this).attr('href', modepath() + 'item_id=' + item_id);
  });
 
- $('a.show.item_number').click(function() {
+
+ $('a.show.item_number').click(function(e) {
+	var org_id = $('#org_id').val();
 	var item_number = $('#item_number').val();
-	if ($('#org_id').val().length > 0) {
-	 var org_id = $('#org_id').val();
-	 $(this).attr('href', '?item_number=' + item_number + '&org_id=' + org_id);
+	var itemDefined = false;
+	$('#inventory_assignment').find('li :checked').each(function() {
+	 if ($(this).closest('li').data('org_id') == org_id) {
+		itemDefined = true;
+		return;
+	 }
+	});
+	if (itemDefined) {
+	 if (org_id) {
+		$(this).attr('href', modepath() + 'item_number=' + item_number + '&org_id=' + org_id);
+	 } else {
+		e.preventDefault();
+		alert("Select the Organization or Query by item_id ");
+	 }
 	} else {
-	 alert("Query Error!!! \n Select the query mode by pressing Ctrl + Q \n Select the organization name");
+	 e.preventDefault();
+	 alert('Item is not defined in the organization.Select a differnt organization');
 	}
 
-
  });
+
+ //get locatot on Subinventory change
+ $('#content').on('change', '.wip_supply_subinventory', function() {
+	var subInventoryId = $(this).val();
+	if (subInventoryId > 0) {
+	 getLocator('../locator/json.locator.php', subInventoryId, 'oneSubinventory', '');
+	}
+ });
+//popu for selecting accounts
+ $('#content').on('click', '.account_popup', function() {
+	var fieldClass = $(this).closest('li').find('.select_account').prop('class');
+	localStorage.setItem("field_class", fieldClass);
+	var openUrl = 'select.php?class_name=coa_combination';
+	void window.open(openUrl, '_blank',
+					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
+ //context menu
+ function beforeContextMenu() {
+	$('#item_number').val('');
+	$('#item_description').val('');
+	$('#org_id').val('');
+	return true;
+ }
+ var classContextMenu = new contextMenuMain();
+ classContextMenu.docHedaderId = 'item_id';
+ classContextMenu.btn1DivId = 'item_id';
+ classContextMenu.beforeCopy = beforeContextMenu;
+ classContextMenu.contextMenu();
+
+ //save class
+ var classSave = new saveMainClass();
+ classSave.json_url = 'form.php?class_name=item';
+ classSave.form_header_id = 'item';
+ classSave.primary_column_id = 'item_id';
+ classSave.single_line = false;
+ classSave.savingOnlyHeader = true;
+ classSave.enable_select = true;
+ classSave.headerClassName = 'item';
+ classSave.saveMain();
+
+//select template
+ var itemTemplate = new autoCompleteMain();
+ itemTemplate.json_url = 'modules/inv/item/item_search.php';
+ itemTemplate.select_class = 'select_item_template';
+ itemTemplate.min_length = 2;
+ itemTemplate.autoComplete();
  
-  //get locatot on Subinventory change
- $('#content').on('change','.wip_supply_subinventory', function(){
-var subInventoryId = $(this).val();
-if(subInventoryId > 0){
-getLocator('../locator/json.locator.php', subInventoryId, 'oneSubinventory', '');
+  $(".select_item_template.select_popup").on("click", function() {
+	void window.open('select.php?class_name=item', '_blank',
+					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
+function applyTemplate() {
+ var itemNumber = $('#item_template').val();
+ var orgId = $('#org_id').val();
+ $.ajax({
+	url: 'form.php',
+	type: 'get',
+	data: {
+	 class_name: 'item',
+	 mode: '9',
+	 item_number: itemNumber,
+	 org_id: orgId
+	},
+	beforeSend: function() {
+	 $('.show_loading_small').show();
+	},
+	complete: function() {
+	 $('.show_loading_small').hide();
+	}
+ }).done(function(result) {
+	var newContent = $(result).find('div#content').html();
+	if (newContent) {
+	 $(newContent).find('#form_line').find(':input').each(function() {
+		if ($(this).val()) {
+		var asisClass = '.' + $(this).prop('class');
+		if (asisClass.length > 1) {
+		 var asisClass_d = asisClass.replace(/\s+/g, '.');
+		 if (('#content ' + asisClass_d).length > 0) {
+			$('#content').find(asisClass_d).val($(this).val());
+		 }
+		}
+		}
+	 });
+	}
+ }).fail(function() {
+	alert("Template update failed");
+ });
 }
 
-})
-//
+$('#apply_item_template').on('click', function() {
+ applyTemplate();
+});
 
-//Get the item id on fly after clicking the submit header
-//enables the account field
-//  $('#item #submit_header').click(function() {
-//    var itemId = $('#item_id').val();
-//    $('#item_id').attr('action', 'item.php?item_id=' + itemId);
-//    
-//  });
-
-//script for item_segment_values.php
-//change the save & delete button values
- onClick_add_new_row('tr.item0', 'tbody.item_values', 3);
-
-//Save record
-// save('json.item.php', '#item', '', 'item', '#item_id', '');
-
-//delete line
- deleteData('json.item.php');
 
 });
+
+
+
