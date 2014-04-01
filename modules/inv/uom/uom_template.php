@@ -6,18 +6,6 @@
 	 <div id="content">
 		<div id="structure">
 		 <div id="uom_divId">
-
-			<div id="uom_search">
-			 <?php
-			 if (empty($readonly)) {
-				$search_form = search::search_form('uom', 'uom', 'loactor_search');
-				if (!empty($pagination)) {
-				 $pagination_statement = $pagination->show_pagination($pagination, 'uom', $pageno, $query_string);
-				}
-				echo!(empty($search_form)) ? $search_form : "";
-			 }
-			 ?>
-			</div>
 			<div id="form_top">
 			</div>
 			<!--    START OF FORM HEADER-->
@@ -25,77 +13,82 @@
 			<div class="show_loading_small"></div>
 			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 			<!--    End of place for showing error messages-->
-			<div id ="form_header">
+			<div id ="form_header"><span class="heading">UOM </span>
 			 <form action=""  method="post" id="uom"  name="uom">
+				<div class="large_shadow_box">
+				 <ul class="column five_column"> 
+					<li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="uom_id select_popup clickable">
+						UOM Id : </label> 
+					 <?php $f->text_field_ds('uom_id') ?>
+					 <a name="show" href="form.php?class_name=uom" class="show uom_id">	<img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
+					</li> 
+					<li><label>UOM :</label>
+					 <?php $f->text_field_d('uom_name'); ?>
+					</li>
+					<li><label>Class :</label>
+					 <?php echo form::select_field_from_object('class', uom::uom_class(), 'option_line_code', 'option_line_code', $$class->class, 'class', $readonly); ?>
+					</li>
+					<li><label>Description :</label>
+					 <?php $f->text_field_d('description'); ?>
+					</li>
+					<li><label>Primary :</label>
+					 <?php $f->checkBox_field_d('primary_cb'); ?>
+					</li>
+					<li><label>Extra Field : </label>
+					 <?php echo form::extra_field($uom->ef_id, '10', $readonly); ?>
+					</li>
+					<li><label>Status : </label>
+					 <?php echo form::status_field($uom->status, $readonly); ?>
+					</li>
+					<li><label>Revision : </label>
+					 <?php echo form::revision_enabled_field($uom->rev_enabled_cb, $readonly); ?>
+					</li>
+					<li><label>Revision No: </label>
+					 <?php echo form::text_field('rev_number', $uom->rev_number, '10', '', '', '', '', $readonly); ?>
+					</li>
+				 </ul>
+				</div>
 				<div id ="form_line" class="form_line"><span class="heading">UOM Details </span>
-				 <table class="form_table">
-					<?php echo uom::$table_line_tr ?>
-					<tbody class="uom_values">
-					 <?php
-					 $count = 0;
-					 foreach ($search_result as $uom) {
-						?>         
- 					 <tr class="uom<?php echo $count ?>">
- 						<td>    
- 						 <ul class="inline_action">
- 							<li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
- 							<li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
- 							<li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($uom->uom_id); ?>"></li>           
- 						 </ul>
- 						</td>
- 						<td>
-							<?php form::text_field_wids('uom_id'); ?>
- 						</td>
- 						<td>    
-							<?php form::text_field_wid('uom'); ?>
- 						</td>
- 						<td>
-							<?php echo form::select_field_from_object('class', uom::uom_class(), 'option_line_code', 'option_line_code', $$class->class, 'class', $readonly); ?>
- 						</td>
- 						<td>
-							<?php form::text_field_wid('description'); ?>
- 						</td>
- 						<td>
-							<?php echo form::checkBox_field('primary', $$class->primary, '', $readonly); ?>
- 						</td>
- 						<td>
-							<?php form::text_field_wid('primary_uom'); ?>
- 						</td>
- 						<td>  
- 						 <input type="image"  src="<?php echo HOME_URL; ?>themes/images/multiply.png" alt="multiply"/> 
- 						</td>
- 						<td>
-							<?php form::text_field_wid('primary_relation'); ?>
- 						</td>
- 						<td>
-							<?php echo form::text_field_wids('ef_id', '10', $readonly); ?>
- 						</td>
- 						<td>                      
-							<?php echo form::status_field($$class->status, $readonly); ?>
- 						</td>
- 						<td>
-							<?php echo form::checkBox_field('rev_enabled_cb' . $count, $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?>
- 						</td> 
- 						<td>
-							<?php form::text_field_wids('rev_number'); ?>
+				 <div id="tabs">
+					<ul class="tabMain">
+					 <li><a href="#tabsLine-1">Relationship</a></li>
+					 <li><a href="#tabsLine-2">Future</a></li>
+					</ul>
+					<div class="tabContainer"> 
+					 <div id="tabsLine-1" class="tabContent">
+						<div class="three_column"> 
+						 <ul> 
+							<li><label>Primary UOM Id : </label>
+							 <?php $f->text_field_dsr('primary_uom_id'); ?>
+							</li>
+							<li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="primary_uom_id select_popup clickable">
+								Primary UOM : </label>
+							 <?php $f->text_field_d('primary_uom'); ?>
+							</li>
+							<li><label> Operator : </label>
+							 <input type="image"  src="<?php echo HOME_URL; ?>themes/images/multiply.png" alt="multiply"/> 
+							</li> 
+							<li><label>Primary Relation : </label>
+							 <?php $f->text_field_d('primary_relation'); ?>
+							</li> 
+						 </ul> 
+						</div> 
+						<!--end of tab1 div three_column-->
+					 </div> 
+					 <div id="tabsLine-2"  class="tabContent">
+						<div> 
+						</div> 
+						<!--                end of tab2 div three_column-->
+					 </div>
+					 <!--end of tab5-->
+					</div>
 
- 						</td> 
-
- 					 </tr>
-						<?php
-						$count = $count + 1;
-					 }
-					 ?>
-					</tbody>
-				 </table>
+				 </div> 
 				</div> 
 			 </form>
 			</div>
 			<!--END OF FORM HEADER-->
-			<div id="pagination" style="clear: both;">
-			 <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
-			 ?>
-			</div>
+
 		 </div>
 		</div>
 		<!--   end of structure-->

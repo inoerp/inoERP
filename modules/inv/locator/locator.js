@@ -1,15 +1,15 @@
-function setValFromSelectPage(subinventory_id, combination) {
- this.subinventory_id = subinventory_id;
+function setValFromSelectPage(locator_id, combination) {
+ this.locator_id = locator_id;
  this.combination = combination;
 }
 
 setValFromSelectPage.prototype.setVal = function() {
- var subinventory_id = this.subinventory_id;
+ var locator_id = this.locator_id;
  var combination = this.combination;
  var fieldClass = '.' + localStorage.getItem("field_class");
  fieldClass = fieldClass.replace(/\s+/g, '.');
- if (subinventory_id) {
-	$("#subinventory_id").val(subinventory_id);
+ if (locator_id) {
+	$("#locator_id").val(locator_id);
  }
  if (combination) {
 	$('#content').find(fieldClass).val(combination);
@@ -20,15 +20,15 @@ setValFromSelectPage.prototype.setVal = function() {
 
 $(document).ready(function() {
  //selecting Id
- $(".subinventory_id.select_popup").on("click", function() {
-	void window.open('select.php?class_name=subinventory', '_blank',
+ $(".locator_id.select_popup").on("click", function() {
+	void window.open('select.php?class_name=locator', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //Get the subinventory_id on find button click
- $('a.show.subinventory_id').click(function() {
-	var subinventory_id = $('#subinventory_id').val();
-	$(this).attr('href', modepath() + 'subinventory_id=' + subinventory_id);
+ //Get the locator_id on find button click
+ $('a.show.locator_id').click(function() {
+	var locator_id = $('#locator_id').val();
+	$(this).attr('href', modepath() + 'locator_id=' + locator_id);
  });
 
  //popu for selecting accounts
@@ -42,21 +42,19 @@ $(document).ready(function() {
 
  //context menu
  var classContextMenu = new contextMenuMain();
- classContextMenu.docHedaderId = 'subinventory_id';
- classContextMenu.btn1DivId = 'subinventory_id';
+ classContextMenu.docHedaderId = 'locator_id';
+ classContextMenu.btn1DivId = 'locator_id';
  classContextMenu.contextMenu();
-
-
 
  //save class
  var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=subinventory';
- classSave.form_header_id = 'subinventory';
- classSave.primary_column_id = 'subinventory_id';
+ classSave.json_url = 'form.php?class_name=locator';
+ classSave.form_header_id = 'locator';
+ classSave.primary_column_id = 'locator_id';
  classSave.single_line = false;
  classSave.savingOnlyHeader = true;
  classSave.enable_select = true;
- classSave.headerClassName = 'subinventory';
+ classSave.headerClassName = 'locator';
  classSave.saveMain();
 
 

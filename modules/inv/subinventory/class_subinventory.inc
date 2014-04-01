@@ -6,8 +6,7 @@ class subinventory extends dbObject {
  public static $primary_column = "subinventory_id";
  public static $key_column = 'subinventory';
  public static $module = "inv";
- public static $multi_select_template_path = 'modules/inv/subinventory/multi_action/subinventory_template.php';
- 
+ public static $multi_select_template_path = 'modules/inv/subinventory/multi_action/subinventory_template_ma.php';
 //  data base variables as stored database column name
  public $field_a = [
 		 "subinventory_id",
@@ -61,13 +60,21 @@ class subinventory extends dbObject {
  public $checkbox = ["rev_enabled_cb",
 		 "allow_negative_balance_cb"
  ];
- 
  public $requiredField = [
 		 "org_id",
 		 "type",
 		 "subinventory"
  ];
- 
+ public $search = [
+		 '_show_update_path' => 1,
+		 '_update_action_meassge' => 'Update',
+		 '_show_view_path' => 1,
+ ];
+ public $pageTitle = " Subinventory - Create & Update Subinventories"; //page Title
+ public $option_lists = [
+		 'subinventory_type' => 'SUBINVENTORY_TYPE',
+		 'locator_control' => 'LOCATOR_CONTROL',
+ ];
  public $subinventory_id;
  public $org;
  public $org_id;
@@ -112,13 +119,13 @@ VAR;
                 <th>Description</th>
                 <th>Locator Control</th>
                 <th>Negative Balance</th>
+								<th>Cost Group</th>
                </tr>
               </thead>
 VAR;
  public static $tabs_header2_tr = <<<'VAR'
               <thead> 
                <tr>
-                <th>Cost Group</th>
                 <th>Material</th>
                 <th>MOH</th>
                 <th>Over Head</th>
@@ -151,34 +158,52 @@ VAR;
 	return $locator_control;
  }
 
+ public function findAll_ofOrgid() {
+	if (!empty($this->org_id)) {
+	 $sql = " SELECT * FROM ";
+	 $sql .= self::$table_name;
+	 $sql .= " WHERE org_id = :org_id ";
+
+	 $param_a = ['org_id'];
+	 $value_a = ['org_id' => $this->org_id];
+	 $result = $this->findBy_sql($sql, $param_a, $value_a);
+	} else {
+	 $result = $this;
+	}
+	return $result;
+ }
+
  public static function find_all_of_org_id($org_id) {
 	if (!empty($org_id)) {
 	 $sql = " SELECT * FROM ";
 	 $sql .= self::$table_name;
-	 $sql .= " WHERE org_id = $org_id ";
-	 $result = self::find_by_sql($sql);
+	 $sql .= " WHERE org_id = :org_id ";
+
+	 $param_a = ['org_id'];
+	 $value_a = ['org_id' => $org_id];
+	 $result = $this->findBy_sql($sql, $param_a, $value_a);
 	} else {
 	 $result = null_instantitae('subinventory');
 	}
 	return $result;
  }
-    public static function search_add_extra_fields( &$arr ){
+
+ public static function search_add_extra_fields(&$arr) {
 	$org = new org;
-	if(!(is_array($arr))){
+	if (!(is_array($arr))) {
 	 return false;
 	}
-	foreach($arr as &$obj){
+	foreach ($arr as &$obj) {
 	 $primary_column = parent::$primary_column;
-	 if(!empty($obj->$primary_column)){
+	 if (!empty($obj->$primary_column)) {
 		$org_i = $org->findBy_id($obj->$primary_column);
 		$obj->org = $org_i->org;
 		$obj->description = $org_i->description;
 	 }
 	}
-	
  }
- 
-  public function multi_select_hidden_fields() {
+
+ public function multi_select_hidden_fields() {
 	$multi_select_hidden = [
 			'mode',
 			'show_block'
@@ -186,7 +211,6 @@ VAR;
 
 	return $multi_select_hidden;
  }
- 
 
 }
 

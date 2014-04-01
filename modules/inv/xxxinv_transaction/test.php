@@ -1,6 +1,5 @@
 <?php
 include_once("../../../include/basics/header.inc");
-include_once("inv_transaction_functions.inc"); 
 
 $inv_transaction = new inv_transaction;
 //
@@ -53,22 +52,28 @@ global $db;
 ////  echo '<pre>';
 //  echo '<br /> TABLE_NAME]  is : ' . $rows['TABLE_NAME'];
 //}
-//$query1= "ALTER TABLE inv_transaction 
-//  ADD `lot_number` INT(12)  AFTER item_id,
-//  ADD `serial_number` INT(12)  AFTER lot_number";
-////
+$query1= "ALTER TABLE inv_transaction 
+  ADD `wip_wo_bom_id` INT(12)  AFTER document_id";
+//////
 ////$query1="ALTER TABLE inv_transaction ADD UNIQUE INDEX (inv_transaction_number, inventory_id)";
 //// ADD `serial_generation` varchar(50) NOT NULL AFTER serial_uniqueness,
 //// ADD `serial_prefix` varchar(50) NOT NULL AFTER serial_generation,
-//// ADD `serial_starting_number` varchar(50) NOT NULL AFTER serial_prefix ";
-////$query1= "ALTER TABLE inv_transaction 
-//// CHANGE `rev_start_number` rev_number  varchar(256)";
-//////
-//////
+////// ADD `serial_starting_number` varchar(50) NOT NULL AFTER serial_prefix ";
+//$query1= "ALTER TABLE inv_transaction 
+// CHANGE `inv_transaction_id` inv_transaction_id int(12)";
+
+// CHANGE `transfer_to_gl` transfer_to_gl_cb tinyint(1),
+// CHANGE `transaction_rev_enabled` transaction_rev_enabled_cb tinyint(1)";
+
+//$query1 = "alter table inv_transaction modify column inv_transaction_id int(12) auto_increment";
+//////////
 //$result1 = $db->query($query1);
 //$query = "RENAME TABLE mtl_transactions TO inv_transaction ";
 //$result = $db->query($query);
-$query = "SHOW COLUMNS FROM inv_transaction ";
+//$query = "SELECT * FROM inv_transaction ";
+
+//$query = inv_transaction::find_by_id('55');
+//$query = "SELECT * FROM inv_transaction ";
 ////////
 //echo '<h2>New values </h2>' ;
 ////////$query="Select * from information_schema.tables where table_name='enterprise'";
@@ -79,20 +84,33 @@ $query = "SHOW COLUMNS FROM inv_transaction ";
 //
 echo '<h2>New values </h2>' ;
 
-   $all_columns = array();
-    $all_columns_sql = " SHOW COLUMNS FROM  ". 'inv_transaction' ;
-    $all_columns_result = $db->query($all_columns_sql);
-    if ($all_columns_result && mysql_num_rows($all_columns_result)) {
-   while ($row = $db->fetch_array($all_columns_result)) {
-    array_push($all_columns, $row['Field']);
-   }
-   }
-   print_r($all_columns);
+	 $query = "SHOW COLUMNS FROM inv_transaction ";
+//$query = "Select *  FROM all_po_v ";
+////
+//echo '<h2>New values </h2>' ;
+//
+////echo "<pre>"; 
+////print_r(po_header::find_all());
 ////$query="Select * from information_schema.tables where table_name='enterprise'";
-//$result = $db->query($query);
+$result = $db->query($query);
+////
+//echo "<pre>";
+//print_r($result);
+//echo "<pre>";
+////
+while ($rows = $db->fetch_array($result)) {
+// echo '<br /> field_name is ' . $rows['Field'];
+ echo "<pre>";
+ print_r($rows);
+}
+//   
+//   $result = $db->result_array_assoc($query);
+//   print_r($all_columns);
+////$query="Select * from information_schema.tables where table_name='enterprise'";
+
 //while($rows = $db->fetch_array($result)){
 //  echo '<pre>';
-//  print_r($rows);
+//  print_r($query);
 //  echo '<pre>';
 //}
 

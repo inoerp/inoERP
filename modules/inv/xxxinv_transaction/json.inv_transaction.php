@@ -1,19 +1,12 @@
 <?php include_once("../../../include/basics/header.inc"); ?>
 <script src="inv_transaction.js"></script>
 
-<div id="new_search_criteria">
-  <?php
-  if (!empty($_GET["new_search_criteria"])) {
-    $new_search_criteria = $_GET["new_search_criteria"];
-    $value= '<?php echo htmlentities($_POST[\''.$new_search_criteria.'\']) ; ?>';
-    
-     }
-  ?>
-  <li><label><?php echo $new_search_criteria ;?> : </label>
-    <input type="search" name="<?php echo $new_search_criteria ;?>" id="<?php echo $new_search_criteria ;?>" 
-           value="" 
-           maxlength="50" >
-  </li>
-</div>
+<div id="json_save_header"> <?php 
+//echo '<br/>in json inv trnx file';
+//echo '<pre>';
+//print_r($_POST);
+//echo '<pre>';
+json_save('inventory', 'inv_transaction', 'item_id', 'inv_transaction_id'); ?></div>
+<div id="json_delete_line"> <?php  json_delete('inv_transaction'); ?> </div>
 
 <?php include_template('footer.inc') ?>

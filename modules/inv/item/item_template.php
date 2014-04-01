@@ -105,7 +105,7 @@
 							<?php echo $f->select_field_from_object('item_type', item::item_types(), 'option_line_code', 'option_line_code', $item->item_type, 'item_type', '', 1, $readonly); ?>
 						 </li> 
 						 <li><label>UOM : </label>
-							<?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom', $item->uom_id, 'uom_id',  '', 1, $readonly); ?>
+							<?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->uom_id, 'uom_id',  '', 1, $readonly); ?>
 						 </li>
 						 <li><label>Item Status : </label>
 							<?php echo form::select_field_from_object('item_status', item::item_status(), 'option_line_id', 'option_line_code', $item->item_status, 'item_status', $readonly); ?>
@@ -222,13 +222,13 @@
 						<ul>
 						 <div class="large_box itemMaster_physical"><box_heading>Item Information </box_heading> 
 							<li><label>Weight UOM : </label>
-							 <?php echo form::select_field_from_object('weight_uom_id', uom::find_all(), 'uom_id', 'uom', $item->weight_uom_id, 'weight_uom_id', $readonly); ?></li>
+							 <?php echo form::select_field_from_object('weight_uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->weight_uom_id, 'weight_uom_id', $readonly); ?></li>
 							<li><label>Weight : </label><?php echo form::text_field_d('weight'); ?></li> 
 							<li><label>Volume UOM : </label>
-							 <?php echo form::select_field_from_object('volume_uom_id', uom::find_all(), 'uom_id', 'uom', $item->volume_uom_id, 'volume_uom_id', $readonly); ?></li>
+							 <?php echo form::select_field_from_object('volume_uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->volume_uom_id, 'volume_uom_id', $readonly); ?></li>
 							<li><label>Volume : </label><?php echo form::text_field_d('volume'); ?></li>
 							<li><label>Dimension UOM : </label>
-							 <?php echo form::select_field_from_object('dimension_uom_id', uom::find_all(), 'uom_id', 'uom', $item->dimension_uom_id, 'dimension_uom_id', $readonly); ?></li>
+							 <?php echo form::select_field_from_object('dimension_uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->dimension_uom_id, 'dimension_uom_id', $readonly); ?></li>
 							<li><label>Length : </label><?php echo form::text_field_d('length'); ?></li>
 							<li><label>Width : </label><?php echo form::text_field_d('width'); ?></li>
 							<li><label>Volume : </label><?php echo form::text_field_d('volume'); ?></li>

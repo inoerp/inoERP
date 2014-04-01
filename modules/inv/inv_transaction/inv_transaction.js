@@ -1,148 +1,149 @@
+function setValFromSelectPage(inv_transaction_header_id, combination, item_id, item_number, item_description, uom_id) {
+ this.inv_transaction_header_id = inv_transaction_header_id;
+ this.combination = combination;
+ this.item_id = item_id;
+ this.item_number = item_number;
+ this.item_description = item_description;
+ this.uom_id = uom_id;
+
+}
+
+setValFromSelectPage.prototype.setVal = function() {
+ var inv_transaction_header_id = this.inv_transaction_header_id;
+ var combination = this.combination;
+ var item_id = this.item_id;
+ var item_number = this.item_number;
+ var item_description = this.item_description;
+ var uom_id = this.uom_id;
+
+ var rowClass = '.' + localStorage.getItem("row_class");
+ var fieldClass = '.' + localStorage.getItem("field_class");
+ if (inv_transaction_header_id) {
+	$("#inv_transaction_header_id").val(inv_transaction_header_id);
+ }
+ rowClass = rowClass.replace(/\s+/g, '.');
+ fieldClass = fieldClass.replace(/\s+/g, '.');
+ if (combination) {
+	$('#content').find(rowClass).find(fieldClass).val(combination);
+ }
+ if (item_id) {
+	$('#content').find(rowClass).find('.item_id').val(item_id);
+ }
+ if (item_number) {
+	$('#content').find(rowClass).find('.item_number').val(item_number);
+ }
+ if (item_description) {
+	$('#content').find(rowClass).find('.item_description').val(item_description);
+ }
+ if (uom_id) {
+	$('#content').find(rowClass).find('.uom_id').val(uom_id);
+ }
+ localStorage.removeItem("row_class");
+ localStorage.removeItem("field_class");
+
+};
+
 $(document).ready(function() {
-//Make subinevntory locator changes after selcting transaction type
- var Mandatory_Fields = ["#org_id", "First Select Inventory Org", "#transaction_type_id", "First Select Transaction Type Id"];
- select_mandatory_fields(Mandatory_Fields);
+ //mandatory and field sequence
+ var mandatoryCheck = new mandatoryFieldMain();
+ mandatoryCheck.header_id = 'inv_transaction_header_id';
+// mandatoryCheck.mandatoryHeader();
+ mandatoryCheck.form_area = 'form_header';
+ mandatoryCheck.mandatory_fields = ["bu_org_id", "transaction_type_id"];
+ mandatoryCheck.mandatory_messages = ["First Select BU Org", "First Select Transaction Type"];
+// mandatoryCheck.mandatoryField();
+
 
  $("#transaction_type_id").on("change", function() {
-	$("tr.transfer_info").find("td select").each(function() {
-	 $(this).val("");
-	})
+	$('.transaction_type_id').val($(this).val());
+//	$("tr.transfer_info").find("td select").each(function() {
+//	 $(this).val("");
+//	})
 	var transaction_type_id = $(this).val();
 	switch (transaction_type_id) {
 	 case "1":
-		$(".from_subinventory_id").attr("disabled", false);
-		$(".from_locator_id").attr("disabled", false);
-		$("#account_id").attr("required", true);
-		$(".to_subinventory_id").attr("disabled", true);
-//		$(".to_locator_id").val("");
-		$(".to_locator_id").attr("disabled", true);
+		$(".from_subinventory_id").prop("disabled", false);
+		$(".from_locator_id").prop("disabled", false);
+		$(".account_id").prop("required", true);
+		$(".to_subinventory_id").val('');
+		$(".to_subinventory_id").prop("disabled", true);
+		$(".to_locator_id").val('');
+		$(".to_locator_id").prop("disabled", true);
 		break;
 
 	 case "2":
-		$(".to_subinventory_id").attr("disabled", false);
-		$(".to_locator_id").attr("disabled", false);
-    $("#account_id").attr("required", true);
-		$(".from_subinventory_id").attr("disabled", true);
-//		$(".from_locator_id").val("");
-		$(".from_locator_id").attr("disabled", true);
+		$(".to_subinventory_id").prop("disabled", false);
+		$(".to_locator_id").prop("disabled", false);
+		$(".account_id").prop("required", true);
+		$(".from_subinventory_id").val('');
+		$(".from_subinventory_id").prop("disabled", true);
+		$(".from_locator_id").val("");
+		$(".from_locator_id").prop("disabled", true);
+		break;
+
+	 case "3":
+		$(".to_subinventory_id").prop("disabled", false);
+		$(".to_locator_id").prop("disabled", false);
+		$(".from_subinventory_id").prop("disabled", false);
+		$(".from_locator_id").prop("disabled", false);
 		break;
 
 	 default:
-		$(".to_subinventory_id").attr("disabled", false);
-		$(".to_locator_id").attr("disabled", false);
-		$(".from_subinventory_id").attr("disabled", false);
-		$(".from_locator_id").attr("disabled", false);
+		$(".to_subinventory_id").prop("disabled", true);
+		$(".to_locator_id").prop("disabled", true);
+		$(".from_subinventory_id").prop("disabled", true);
+		$(".from_locator_id").prop("disabled", true);
 	}
-
  });
 
-//get Subinventory Name
+
+ //get Subinventory Name
  $("#org_id").on("change", function() {
-	getSubInventoryName();
+	getSubInventory('modules/inv/subinventory/json_subinventory.php', $("#org_id").val());
+	$('.org_id').val($(this).val());
  });
 
- function getSubInventoryName() {
-	$('#loading').show();
-	var org_id = $(".form_table #org_id").val();
-	$.ajax({
-	 url: '../subinventory/json.subinventory.php',
-	 data: {org_id: org_id,
-		find_all_subinventory: 1},
-	 type: 'get'
-	}).done(function(result) {
-	 var div = $(result).filter('div#json_subinventory_find_all').html();
-	 $(".form_table .from_subinventory_id").append(div);
-	 $(".form_table .to_subinventory_id").append(div);
-	 $('#loading').hide();
-	}).fail(function() {
-	 alert("org name loading failed");
-	 $('#loading').hide();
-	});
-	$(".form_table .from_subinventory_id").attr("disabled", false);
+ function callGetLocatorForFrom(subinventory_id, rowIdValue) {
+	var subinventory_type = "from_subinventory_id";
+	getLocator('modules/inv/locator/json_locator.php', subinventory_id, subinventory_type, rowIdValue);
  }
 
-//get locator name
-function getLocator(subinventory_id, subinventory_type, idValue) {
-$('#loading').show();
-$.ajax({
- url: '../locator/json.locator.php',
- data: {subinventory_id: subinventory_id,
-	find_all_locator: 1},
- type: 'get'
-}).done(function(result) {
-//   var div = $('#json_locator', $(data)).html();
- var div = $(result).filter('div#json_locator_find_all').html();
-
- if (subinventory_type == "from_subinventory_id") {
-	$(idValue + " .from_locator_id").find('option').remove();
-	$(idValue + " .from_locator_id").append(div);
+ function callGetLocatorForTo(subinventory_id, rowIdValue) {
+	var subinventory_type = "to_subinventory_id";
+	getLocator('modules/inv/locator/json_locator.php', subinventory_id, subinventory_type, rowIdValue);
  }
- if (subinventory_type == "to_subinventory_id") {
-	$(idValue + " .to_locator_id").find('option').remove();
-	$(idValue + " .to_locator_id").append(div);
- }
- $('#loading').hide();
-}).fail(function() {
- alert("Locator name loading failed");
- $('#loading').hide();
-});
-$(".form_table .from_locator_id").attr("disabled", false);
-}
 
-function callGetLocatorForFrom(subinventory_id, rowIdValue) {
-var subinventory_type = "from_subinventory_id";
-getLocator(subinventory_id, subinventory_type, rowIdValue);
-}
+ $(".form_table").on("change", ".from_subinventory_id", function() {
+	var rowIdValue = $(this).closest("tr").attr("id");
+	var idValue = "tr#" + rowIdValue;
+	var subinventory_id = $(this).val();
+	callGetLocatorForFrom(subinventory_id, idValue);
+ });
 
-function callGetLocatorForTo(subinventory_id, rowIdValue) {
-var subinventory_type = "to_subinventory_id";
-getLocator(subinventory_id, subinventory_type, rowIdValue);
-}
+ $(".form_table").on("change", ".to_subinventory_id", function() {
+	var rowIdValue = $(this).closest("tr").attr("id");
+	var idValue = "tr#" + rowIdValue;
+	var subinventory_id = $(this).val();
+	callGetLocatorForTo(subinventory_id, idValue);
+ });
 
-$(".form_table").on("change", ".from_subinventory_id", function() {
-var rowIdValue = $(this).closest("tr").attr("id");
-var idValue = "tr#" + rowIdValue;
-var subinventory_id = $(this).val();
-callGetLocatorForFrom(subinventory_id, idValue);
-});
+ var classSave = new saveMainClass();
+ classSave.json_url = 'form.php?class_name=inv_transaction';
+ classSave.line_key_field = 'item_id';
+ classSave.single_line = false;
+ classSave.savingOnlyHeader = false;
+ classSave.lineClassName = 'inv_transaction';
+ classSave.saveMain();
 
-$(".form_table").on("change", ".to_subinventory_id", function() {
-var rowIdValue = $(this).closest("tr").attr("id");
-var idValue = "tr#" + rowIdValue;
-var subinventory_id = $(this).val();
-callGetLocatorForTo(subinventory_id, idValue);
-});
-
-
-//ajax for char of account combinations
- $('.account').autocomplete({source: '../../gl/coa_combination/coa_search.php', minLength: 2});
-
-itemNumber_autoComplete('../item/item_search.php');
-
-
- function popup() {
-	$("#content").on("click", ".popup.itemId", function() {
-	 var idValue = $(this).closest("tr").attr("id");
-	 localStorage.idValue = idValue;
-	 var link = '../item/find_item.php?org_id=' + $("#org_id").val() + '&RowDivId=' + idValue;
-	 void window.open(link, '_blank',
-					 'width=900,height=900,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');
-	 return false;
-	}).one();
- }
- popup();
-
-//add new line
- onClick_add_new_row('tr.inv_transaction_row0', 'tbody.inv_transaction_values', 5);
-//$("#inv_transaction").on(function(){
-// itemNumber_autoComplete();
-//}).one();
-//Save record
- save('json.inv_transaction.php', '#inv_transaction', 'inv_transaction_id_cb', 'item_id', '#inv_transaction_id');
-
-//delete line
- deleteData('json.inv_transaction.php');
-
+ //add new row in multi action template
+ $("#content").on("click", ".add_row_img", function() {
+	var addNewRow = new add_new_rowMain();
+	addNewRow.trClass = 'inv_transaction_line';
+	addNewRow.tbodyClass = 'form_data_line_tbody';
+	addNewRow.noOfTabs = 5;
+	addNewRow.removeDefault = true;
+	addNewRow.add_new_row();
+ });
 
 });
 

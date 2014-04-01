@@ -113,11 +113,106 @@ var subinventory_id = $(this).val();
 callGetLocatorForTo(subinventory_id, idValue);
 });
 
+// function getLocator(subinventory_id, subinventory_type, objectCount) {
+//	$('#loading').show();
+//	var idValue = "#" + localStorage.rowIdValue;
+//	$.ajax({
+//	 url: '../locator/json.locator.php',
+//	 data: {subinventory_id: subinventory_id,
+//		find_all_locator: 1},
+//	 type: 'get'
+//	}).done(function(result) {
+////   var div = $('#json_locator', $(data)).html();
+//	 var div = $(result).filter('div#json_locator_find_all').html();
+//	 if (subinventory_type == "from_subinventory_id") {
+//		$(idValue + ".from_locator_id").find('option').remove();
+//		$(idValue + ".from_locator_id").append(div);
+////		if (objectCount > 0) {
+////		 $(".form_table .from_locator_id #new_object" + objectCount).find('option').remove();
+////		 $(".form_table .from_locator_id #new_object" + objectCount).append(div);
+////		} else {
+////		 $(".form_table .from_locator_id").find('option').remove();
+////		 $(".form_table .from_locator_id").append(div);
+////		}
+//	 }
+//	 if (subinventory_type == "to_subinventory_id") {
+//		$(idValue + ".to_locator_id").find('option').remove();
+//		$(idValue + ".to_locator_id").append(div);
+////		if (objectCount > 0) {
+////		 $(".form_table .to_locator_id #new_object" + objectCount).find('option').remove();
+////		 $(".form_table .to_locator_id #new_object" + objectCount).append(div);
+////		} else {
+////		 $(".form_table .to_locator_id").find('option').remove();
+////		 $(".form_table .to_locator_id").append(div);
+////		}
+//	 }
+//	 $('#loading').hide();
+//	}).fail(function() {
+//	 alert("Locator name loading failed");
+//	 $('#loading').hide();
+//	});
+//	$(".form_table .from_locator_id").attr("disabled", false);
+// }
+//
+// function callGetLocatorForFrom(subinventory_id) {
+////	var subinventory_id = $(".from_subinventory_id").val();
+//	var subinventory_type = "from_subinventory_id";
+//	getLocator(subinventory_id, subinventory_type);
+// }
+//
+// function callGetLocatorForTo(subinventory_id) {
+////	var subinventory_id = $(".to_subinventory_id").val();
+//	var subinventory_type = "to_subinventory_id";
+//	getLocator(subinventory_id, subinventory_type);
+// }
+//
+// $(".form_table").on("change", ".from_subinventory_id", function() {
+//	localStorage.rowIdValue = $(this).closest("tr").attr("id");
+//	var subinventory_id = $(this).val();
+//	callGetLocatorForFrom(subinventory_id);
+// });
+//
+// $(".form_table").on("change", ".to_subinventory_id", function() {
+//	localStorage.rowIdValue = $(this).closest("tr").attr("id");
+//	var subinventory_id = $(this).val();
+//	callGetLocatorForTo(subinventory_id);
+// });
 
 //ajax for char of account combinations
  $('.account').autocomplete({source: '../../gl/coa_combination/coa_search.php', minLength: 2});
 
-itemNumber_autoComplete('../item/item_search.php');
+ function itemNumber_autoComplete() {
+	$('#content').on("focus", ".item_number", function() {
+	 if (!$(this).data("autocomplete")) {
+		$(this).autocomplete({
+		 source: function(request, response) {
+			$.ajax({
+			 url: "../item/item_search.php",
+			 dataType: "json",
+			 data: {
+				org_id: $("#org_id").val(),
+				term: request.term
+			 },
+			 success: function(data) {
+				response(data);
+			 },
+			 error: function(result) {
+				alert("Error" + result);
+			 }
+			});
+		 },
+		 select: function(event, ui) {
+			$(this).val(ui.item.item_number);
+			$(this).closest("td").siblings().find('input.item_id[type="text"]').val(ui.item.item_id);
+			$(this).closest("td").siblings().find('input.item_description[type="text"]').val(ui.item.description);
+		 },
+		 minLength: 2
+		});
+	 }
+	});
+ }
+
+ itemNumber_autoComplete();
 
 
  function popup() {
@@ -133,7 +228,7 @@ itemNumber_autoComplete('../item/item_search.php');
  popup();
 
 //add new line
- onClick_add_new_row('tr.inv_transaction_row0', 'tbody.inv_transaction_values', 5);
+ onClick_add_new_row('tr.inv_transaction_row0', 'tbody.inv_transaction_values', 4);
 //$("#inv_transaction").on(function(){
 // itemNumber_autoComplete();
 //}).one();

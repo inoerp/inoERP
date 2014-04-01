@@ -6,7 +6,7 @@ class locator extends subinventory {
  public static $primary_column = "locator_id";
  public static $key_column = 'locator';
  public static $module = "inv";
- public static $multi_select_template_path = 'modules/inv/locator/multi_action/locator_template.php';
+ public static $multi_select_template_path = 'modules/inv/locator/multi_action/locator_template_ma.php';
 //  data base variables as stored database column name
  public $field_a = [
 		 "locator_id",
@@ -49,7 +49,17 @@ class locator extends subinventory {
 		 "org_id",
 		 "subinventory_id"
  ];
- 
+ public $search = [
+		 '_show_update_path' => 1,
+		 '_update_action_meassge' => 'Update',
+		 '_show_view_path' => 1,
+ ];
+ public $pageTitle = " Locator - Create & Update Locators"; //page Title
+// public $option_lists = [
+//		 'subinventory_type' => 'SUBINVENTORY_TYPE',
+//		 'locator_control' => 'LOCATOR_CONTROL',
+// ];
+// 
  public $locator_id;
  public $org_id;
  public $org;
@@ -107,6 +117,21 @@ VAR;
 	 $loc_structure .= ($value->option_line_code) . '-';
 	}
 	return substr($loc_structure, 0, -1);
+ }
+
+ public function findAll_ofSubinventory() {
+	if (!empty($this->subinventory_id)) {
+	 $sql = " SELECT * FROM ";
+	 $sql .= self::$table_name;
+	 $sql .= " WHERE subinventory_id = :subinventory_id ";
+
+	 $param_a = ['subinventory_id'];
+	 $value_a = ['subinventory_id' => $this->subinventory_id];
+	 $result = $this->findBy_sql($sql, $param_a, $value_a);
+	} else {
+	 $result = $this;
+	}
+	return $result;
  }
 
  public static function find_all_of_subinventory($subinventory_id = "") {

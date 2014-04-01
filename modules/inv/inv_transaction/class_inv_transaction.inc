@@ -1,49 +1,64 @@
 <?php
 
-class inv_transaction extends transaction_type {
+class inv_transaction extends dbObject {
 
  protected static $table_name = "inv_transaction";
- public static $field_array = [
-		 "inv_transaction_id",
-		 "transaction_type_id",
-		 "item_id",
-		 "org_id",
-		 "item_number",
-		 "uom_id",
-		 "lot_number",
-		 "serial_number",
-		 "logical_transaction_cb",
-		 "document_type",
-		 "document_number",
-		 "document_id",
-		 "reason",
-		 "reference",
-		 "description",
-		 "from_org_id",
-		 "from_subinventory_id",
-		 "from_locator_id",
-		 "quantity",
-		 "from_account_id",
-		 "to_org_id",
-		 "to_subinventory_id",
-		 "to_locator_id",
-		 "to_account_id",
-		 "unit_cost",
-		 "costed_amount",
-		 "transfer_to_gl_cb",
-		 "ef_id",
+ public static $primary_column = "inv_transaction_id";
+ public static $key_column = 'item_id';
+ public static $module = "inv";
+ public static $allowed_inv_transactions = [
+		 '1' => 'Miscellaneous Issue',
+		 '2' => 'Miscellaneous Receipt',
+		 '3' => 'Subinventory Transfer'
+ ];
+ public $field_a = [
+		 'inv_transaction_id',
+		 'transaction_type_id',
+		 'org_id',
+		 'status',
+		 'receipt_line_id',
+		 'item_number',
+		 'item_id',
+		 'uom_id',
+		 'lot_number',
+		 'serial_number',
+		 'logical_transaction_cb',
+		 'document_type',
+		 'document_number',
+		 'document_id',
 		 'wip_wo_bom_id',
-		 "transaction_rev_enabled_cb",
-		 "rev_start_number",
-		 "created_by",
-		 "creation_date",
-		 "last_update_by",
-		 "last_update_date"];
+		 'po_header_id',
+		 'po_line_id',
+		 'po_detail_id',
+		 'reason',
+		 'reference',
+		 'description',
+		 'from_org_id',
+		 'from_subinventory_id',
+		 'from_locator_id',
+		 'quantity',
+		 'from_account_id',
+		 'to_org_id',
+		 'to_subinventory_id',
+		 'to_locator_id',
+		 'to_account_id',
+		 'unit_cost',
+		 'costed_amount',
+		 'transfer_to_gl_cb',
+		 'ef_id',
+		 'transaction_rev_enabled_cb',
+		 'rev_start_number',
+		 'created_by',
+		 'creation_date',
+		 'last_update_by',
+		 'last_update_date',
+ ];
  //variables used for showing data
 
- public static $initial_search_array = [
+ public $initial_search = [
 		 "inv_transaction_id",
 		 "transaction_type_id",
+		 'status',
 		 "item_id",
 		 "org_id",
 		 "item_number",
@@ -51,9 +66,10 @@ class inv_transaction extends transaction_type {
 		 "document_type",
 		 "document_number"
  ];
- public static $column_array = [
+ public $column = [
 		 "inv_transaction_id",
 		 "transaction_type_id",
+		 'status',
 		 "item_number",
 		 "document_type",
 		 "document_number",
@@ -61,38 +77,55 @@ class inv_transaction extends transaction_type {
 		 "reference",
 		 "created_by",
 		 "creation_date"];
- public static $account_array = ["from_account_id",
+ public $account = [
+		 "from_account_id",
 		 "to_account_id",
 		 "account_id"];
- public static $checkbox_array = ["logical_transaction_cb",
+ public $checkbox = [
+		 "logical_transaction_cb",
 		 "transfer_to_gl_cb",
 		 "transaction_rev_enabled_cb"];
- public static $fields_inForm_notInDataBase = [
+ public $fields_inForm_notInDataBase = [
 		 "account_id",
 		 'item_description'
  ];
- public static $fields_inHeader_needsToBeInserted_inPOST = [
+ public $fields_inHeader_needsToBeInserted_inPOST = [
 		 "org_id",
 		 "transaction_type_id"
  ];
- public static $requiredField_array = [
+ public $requiredField = [
 		 "item_number",
 		 "uom_id",
 		 "quantity",
 		 "org_id",
 		 "item_id",
-		 "transaction_type_id"];
- public static $primary_column = "inv_transaction_id";
+		 "transaction_type_id"
+ ];
+ public $search = [
+		 '_show_view_path' => 1,
+ ];
+ public $pageTitle = " Transaction - Create & View Transactions"; //page Title
+ public $option_lists = [
+		 'inv_transaction_class' => 'TRANSACTION_TYPE_CLASS'
+ ];
  public $inv_transaction_id;
  public $transaction_type_id;
  public $org_id;
- public $item_id;
- public $item_description_ref;
- public $item_revision_ref;
- public $uom_id;
+ public $status;
+ public $receipt_line_id;
  public $item_number;
+ public $item_id;
+ public $uom_id;
  public $lot_number;
  public $serial_number;
+ public $logical_transaction_cb;
+ public $document_type;
+ public $document_number;
+ public $document_id;
+ public $wip_wo_bom_id;
+ public $po_header_id;
+ public $po_line_id;
+ public $po_detail_id;
  public $reason;
  public $reference;
  public $description;
@@ -101,24 +134,16 @@ class inv_transaction extends transaction_type {
  public $from_locator_id;
  public $quantity;
  public $from_account_id;
- public $account;
- public $account_id;
- public $unit_cost;
  public $to_org_id;
  public $to_subinventory_id;
  public $to_locator_id;
  public $to_account_id;
+ public $unit_cost;
  public $costed_amount;
  public $transfer_to_gl_cb;
- public $logical_transaction_cb;
- public $document_type;
- public $document_number;
- public $document_id;
  public $ef_id;
  public $transaction_rev_enabled_cb;
  public $rev_start_number;
- public $wip_wo_bom_id;
- public $po_detail_id;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -176,26 +201,26 @@ class inv_transaction extends transaction_type {
 	if (!(empty($this->transaction_type_id))) {
 	 switch ($this->transaction_type_id) {
 		case 1 :
-		 array_push(self::$requiredField_array, 'to_account_id');
-		 array_push(self::$requiredField_array, 'from_subinventory_id');
-		 $this->from_account_id = "";
+		 array_push($this->requiredField, 'to_account_id');
+		 array_push($this->requiredField, 'from_subinventory_id');
+		 $this->from_account_id = null;
 		 $this->to_account_id = $this->account_id;
 		 break;
 
 		case 2 :
-		 array_push(self::$requiredField_array, 'from_account_id');
-		 array_push(self::$requiredField_array, 'to_subinventory_id');
+		 array_push($this->requiredField, 'from_account_id');
+		 array_push($this->requiredField, 'to_subinventory_id');
 		 $this->from_account_id = $this->account_id;
-		 $this->to_account_id = "";
+		 $this->to_account_id = null;
 		 break;
 
 		case 3 :
-		 array_push(self::$requiredField_array, 'to_subinventory_id');
-		 array_push(self::$requiredField_array, 'from_subinventory_id');
+		 array_push($this->requiredField, 'to_subinventory_id');
+		 array_push($this->requiredField, 'from_subinventory_id');
 		 break;
 
 		case 6 :
-		 array_push(self::$requiredField_array, 'wip_wo_bom_id');
+		 array_push($this->requiredField, 'wip_wo_bom_id');
 		 break;
 
 		default:
@@ -204,19 +229,50 @@ class inv_transaction extends transaction_type {
 	}
  }
 
- public function save() {
-	$update_result = onhand::update_onhand($this->item_id, $this->org_id, $this->uom_id, $this->quantity, $this->from_org_id, $this->from_subinventory_id, $this->from_locator_id, $this->to_org_id, $this->to_subinventory_id, $this->to_locator_id, $this->lot_number, $this->serial_number);
-
-	if (((!empty($this->to_subinventory_id)) && ($update_result['to_update_staus'] == 1)) || ((!empty($this->from_subinventory_id)) && ($update_result['from_update_staus'] == 1))) {
-	 $this->create();
-	} else {
-	 $this->msg = 0;
-	}
-	return $this->msg;
- }
-
  public function _after_save() {
 	global $db;
+	$onhand = new onhand();
+
+	switch ($this->transaction_type_id) {
+	 case 1 :
+		$onhand->setProperty('_from_org_id', $this->org_id);
+		$onhand->setProperty('_from_subinventory_id', $this->from_subinventory_id);
+		$onhand->setProperty('_from_locator_id', $this->from_locator_id);
+		$onhand->setProperty('_transaction_quantity', $this->quantity);
+		$onhand->item_id = $this->item_id;
+		$update_result = $onhand->updateOnhand();
+		break;
+
+	 case 2 :
+		$onhand->setProperty('_to_org_id', $this->org_id);
+		$onhand->setProperty('_to_subinventory_id', $this->to_subinventory_id);
+		$onhand->setProperty('_to_locator_id', $this->to_locator_id);
+		$onhand->setProperty('_transaction_quantity', $this->quantity);
+		$onhand->item_id = $this->item_id;
+		$update_result = $onhand->updateOnhand();
+		break;
+
+	 case 3 :
+		$onhand->setProperty('_from_subinventory_id', $this->from_subinventory_id);
+		$onhand->setProperty('_from_locator_id', $this->from_locator_id);
+		$onhand->setProperty('_to_subinventory_id', $this->to_subinventory_id);
+		$onhand->setProperty('_to_locator_id', $this->to_locator_id);
+		$onhand->setProperty('_transaction_quantity', $this->quantity);
+		$onhand->item_id = $this->item_id;
+		$onhand->org_id = $this->org_id;
+		$update_result = $onhand->updateOnhand();
+		break;
+
+	 default:
+		break;
+	}
+
+	if ($update_result > 0) {
+	 $this->status = 'Success';
+	} else {
+	 $this->status = 'Error';
+	}
+	$this->save();
 
 	//update the item issue quantity on WO
 	if (($this->transaction_type_id == 6) && (!empty($this->wip_wo_bom_id))) {
@@ -277,7 +333,7 @@ class inv_transaction extends transaction_type {
 	 $quantity = $this->quantity;
 	 $document_number = $this->document_number;
 	 $document_id = $this->document_id;
-	 	 foreach ($all_bom_lines as $bomline) {
+	 foreach ($all_bom_lines as $bomline) {
 		if ($bomline->wip_supply_type == 'ASSEMBLY_PULL') {
 		 $inv_transaction = new inv_transaction;
 		 $inv_transaction->org_id = $org_id;
@@ -304,7 +360,7 @@ class inv_transaction extends transaction_type {
 		}
 	 }
 	}
-	
+
 	//update on WO Return
 	if (($this->transaction_type_id == 13) && (!empty($this->document_id))) {
 	 //update issued quantity
@@ -330,7 +386,7 @@ class inv_transaction extends transaction_type {
 	 $quantity = $this->quantity;
 	 $document_number = $this->document_number;
 	 $document_id = $this->document_id;
-	 	 foreach ($all_bom_lines as $bomline) {
+	 foreach ($all_bom_lines as $bomline) {
 		if ($bomline->wip_supply_type == 'ASSEMBLY_PULL') {
 		 $inv_transaction = new inv_transaction;
 		 $inv_transaction->org_id = $org_id;
