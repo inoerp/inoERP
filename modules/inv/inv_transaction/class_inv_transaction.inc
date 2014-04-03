@@ -31,7 +31,9 @@ class inv_transaction extends dbObject {
 		 'po_line_id',
 		 'po_detail_id',
 		 'reason',
-		 'reference',
+		 'reference_type',
+		 'reference_key_name',
+		 'reference_key_value',
 		 'description',
 		 'from_org_id',
 		 'from_subinventory_id',
@@ -127,7 +129,9 @@ class inv_transaction extends dbObject {
  public $po_line_id;
  public $po_detail_id;
  public $reason;
- public $reference;
+ public $reference_type;
+ public $reference_key_name;
+ public $reference_key_value;
  public $description;
  public $from_org_id;
  public $from_subinventory_id;
@@ -244,6 +248,7 @@ class inv_transaction extends dbObject {
 		break;
 
 	 case 2 :
+	 case 5 :
 		$onhand->setProperty('_to_org_id', $this->org_id);
 		$onhand->setProperty('_to_subinventory_id', $this->to_subinventory_id);
 		$onhand->setProperty('_to_locator_id', $this->to_locator_id);

@@ -174,14 +174,12 @@ VAR;
  }
 
  public static function find_all_of_org_id($org_id) {
+	global $db;
 	if (!empty($org_id)) {
 	 $sql = " SELECT * FROM ";
 	 $sql .= self::$table_name;
-	 $sql .= " WHERE org_id = :org_id ";
-
-	 $param_a = ['org_id'];
-	 $value_a = ['org_id' => $org_id];
-	 $result = $this->findBy_sql($sql, $param_a, $value_a);
+	 $sql .= " WHERE org_id = '{$org_id}' ";
+	 $result = $db::find_by_sql($sql);
 	} else {
 	 $result = null_instantitae('subinventory');
 	}

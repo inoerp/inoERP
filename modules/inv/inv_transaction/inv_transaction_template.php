@@ -27,7 +27,7 @@
          <td><lable>Transaction Type </lable>
 				 <?php
 				 echo!(empty($id_array)) ? form::select_field_from_object('transaction_type_id', transaction_type::find_some_byIdArray($id_array), 'transaction_type_id', 'transaction_type', $$class->transaction_type_id, 'transaction_type_id', $readonly) :
-								 form::select_field_from_object('transaction_type_id', transaction_type::find_all(), 'transaction_type_id', 'transaction_type', $$class->transaction_type_id, 'transaction_type_id', $readonly);
+								 form::select_field_from_object('transaction_type_id', transaction_type::find_all(), 'transaction_type_id', 'transaction_type', $$class->transaction_type_id, 'transaction_type_id', 1);
 				 ?>
          </td>
          </tr>
@@ -92,6 +92,8 @@
 							 <th>To SubInv</th>
 							 <th>To Locator</th>
 							 <th>Ef Id</th>
+							 <th>Description</th>
+							 <th>Reason</th>
 							</tr>
 						 </thead>
 						 <tbody class="form_data_line_tbody">
@@ -108,9 +110,9 @@
 							 <td>
 								<?php echo $f->select_field_from_object('to_locator_id', locator::find_all_of_subinventory($$class->to_subinventory_id), 'locator_id', 'locator', $$class->to_locator_id, '', 'to_locator_id', '', $readonly); ?>
 							 </td>
-							 <td>
-								<?php echo form::extra_field($$class->ef_id, '10', $readonly); ?>
-							 </td>
+							 <td><?php echo form::extra_field($$class->ef_id, '10', $readonly); ?></td>
+							 <td><?php form::text_field_wid('description'); ?>							</td>
+							 <td><?php form::text_field_wid('reason'); ?>							</td>
 							</tr>
 						 </tbody>
 						</table>
@@ -122,21 +124,24 @@
 							 <th>Document Type</th>
 							 <th>Doc. Number</th>
 							 <th>Doc. Id</th>
-							 <th>Reason</th>
-							 <th>Reference</th>
-							 <th>Description</th>
+
+							 <th>Ref Type</th>
+							 <th>Ref Name</th>
+							 <th>Ref Value</th>
+							 <th>Ref Doc</th>
 							 <th>WO BOM Line Id</th>
 							 <th>PO Detail Id</th>
 							</tr>
 						 </thead>
 						 <tbody class="form_data_line_tbody">
 							<tr class="inv_transaction_line0" id="tab3_1">
-							 <td><?php form::text_field_wid('document_type'); ?>							</td>
-							 <td><?php form::text_field_wids('document_number'); ?> 							</td>
+							 <td><?php form::text_field_wids('document_type'); ?>							</td>
+							 <td><?php form::text_field_wid('document_number'); ?> 							</td>
 							 <td><?php form::text_field_wids('document_id'); ?>							</td>
-							 <td><?php form::text_field_wid('reason'); ?>							</td>
-							 <td><?php form::text_field_wid('reference'); ?>							</td>
-							 <td><?php form::text_field_wid('description'); ?>							</td>
+							 <td><?php form::text_field_wids('reference_type'); ?>							</td>
+							 <td><?php form::text_field_wid('reference_key_name'); ?>							</td>
+							 <td><?php form::text_field_wid('reference_key_value'); ?>							</td>
+							 <td><?php echo!empty($ref_doc_stmt) ? $ref_doc_stmt : ''; ?></td>
 							 <td><?php form::text_field_wids('wip_wo_bom_id'); ?>							</td>
 							 <td><?php form::text_field_wids('po_detail_id'); ?>							</td>
 							</tr>
@@ -171,7 +176,6 @@
 							<tr>
 							 <th>Lot</th>
 							 <th>Serial</th>
-							 <th>View Document</th>
 							</tr>
 						 </thead>
 						 <tbody class="form_data_line_tbody">
@@ -182,7 +186,6 @@
 							 <td>
 								<?php form::text_field_wid('serial_number'); ?>
 							 </td>
-							 <td><?php echo!(empty($view_doc_statement)) ? $view_doc_statement : ''; ?>							</td>
 							</tr>
 						 </tbody>
 						</table>
