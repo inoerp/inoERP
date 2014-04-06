@@ -1,45 +1,59 @@
-$(document).ready(function() {
+function setValFromSelectPage(org_id, bom_material_element_id, material_element) {
+ this.org_id = org_id;
+ this.bom_material_element_id = bom_material_element_id;
+ this.material_element = material_element;
+}
+
+setValFromSelectPage.prototype.setVal = function() {
+ var org_id = this.org_id;
+ var material_element = this.material_element;
+ var bom_material_element_id = this.bom_material_element_id;
  
+ if (org_id) {
+	$("#org_id").val(org_id);
+ }
+ if (bom_material_element_id) {
+	$("#bom_material_element_id").val(bom_material_element_id);
+ }
+  if (material_element) {
+	$("#material_element").val(material_element);
+ }
+};
+
+
+$(document).ready(function() {
  //selecting data
- $(".bom_material_element_popup").on("click", function() {
+ $(".bom_material_element_id.select_popup").on("click", function() {
 	localStorage.idValue = "";
-	void window.open('find_bom_material_element.php', '_blank',
+	void window.open('select.php?class_name=bom_material_element', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
- 
-  function setParnetWindowValues(bom_material_element_id, bom_material_element, orgId)
- {
-	if ((typeof localStorage.idValue !== 'undefined') && (localStorage.idValue.length > 0)) {
-	 var RowDivId = 'tr#' + localStorage.idValue;
-	 window.opener.$(RowDivId).find(".bom_material_element_id").val(bom_material_element_id);
-	 window.opener.$(RowDivId).find(".bom_material_element").val(bom_material_element);
-	 window.opener.$(RowDivId).find(".org_id").val(orgId);
-	} else {
-	 window.opener.$(".bom_material_element_id").val(bom_material_element_id);
-	 window.opener.$(".bom_material_element").val(bom_material_element);
-	 window.opener.$(".org_id").val(orgId);
-	}
- }
 
- $(".quick_select").on("click", function() {
-	var bom_material_element_id = $(this).val();
-	var bom_material_element = $(this).closest("td").siblings("td.bom_material_element").html();
-	var orgId = $(this).closest("td").siblings("td.org_id").html();
-	setParnetWindowValues(bom_material_element_id, bom_material_element, orgId);
-	window.close();
- });
- 
+
  //Get the bom_material_element_id on refresh button click
  $('a.show.bom_material_element_id_show').click(function() {
 	var bom_material_element_id = $('#bom_material_element_id').val();
-	$(this).attr('href', '?bom_material_element_id=' + bom_material_element_id);
- });
- 
-//Save record
- save('json.bom_material_element.php', '#bom_material_element', '', 'bom_material_element', '#bom_material_element_id', '');
+	$(this).attr('href', modepath() + 'bom_material_element_id=' + bom_material_element_id);
+	 });
 
-//delete line
- deleteData('json.bom_material_element.php');
+ //context menu
+ var classContextMenu = new contextMenuMain();
+ classContextMenu.docHedaderId = 'bom_material_element_id';
+ classContextMenu.btn1DivId = 'bom_material_element_id';
+ classContextMenu.contextMenu();
+
+
+
+ //save class
+ var classSave = new saveMainClass();
+ classSave.json_url = 'form.php?class_name=bom_material_element';
+ classSave.form_header_id = 'bom_material_element';
+ classSave.primary_column_id = 'bom_material_element_id';
+ classSave.single_line = false;
+ classSave.savingOnlyHeader = true;
+ classSave.enable_select = true;
+ classSave.headerClassName = 'bom_material_element';
+ classSave.saveMain();
 
 });
 

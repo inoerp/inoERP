@@ -11,7 +11,7 @@
 			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 			<!--    End of place for showing error messages-->
 
-			<div id ="form_header">
+			<div id ="form_header"><span class="heading">Routing </span>
 			 <form action=""  method="bom_routingst" id="bom_routing_header"  name="bom_routing_header">
 				<div id="tabsHeader">
          <ul class="tabMain">
@@ -30,17 +30,17 @@
 							<a name="show" href="bom_routing.php?bom_routing_header_id=" class="show bom_routing_header_id">
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
-						 <li><label>Item Id : </label>
-							<?php form::text_field_drm('item_id'); ?>
+						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="item_id select_popup clickable">
+							 Item Id : </label><?php form::text_field_drm('item_id'); ?>
 						 </li>
 						 <li><label>Item Number(2) : </label>
-							<?php echo !(empty($item_number_statement)) ? $item_number_statement : form::text_field_dm('item_number'); ?>
+							<?php $f->text_field_d('item_number', 'select_item_number'); ?>
 						 </li>
 						 <li><label>Description: </label>
-							<?php echo !(empty($item_description_statement)) ? $item_description_statement : form::text_field_widr('item_description'); ?>
+							<?php form::text_field_widr('item_description'); ?>
 						 </li>
 						 <li><label>UOM : </label>
-							<?php echo !(empty($item_uom_statement)) ? $item_uom_statement : form::select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom', $$class->uom, 'uom'); ?>
+							<?php echo $f->select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, '', '',1, $readonly ); ?>
 						 </li>
 						</ul>
 					 </div>
@@ -110,7 +110,7 @@
  							 </ul>
  							</td>
  							<td><?php form::text_field_wid2sr('bom_routing_line_id'); ?></td>
-							<td><?php form::number_field_wid2sm('routing_sequence'); ?></td>
+							<td><?php $f->text_field_d2s('routing_sequence', 'lines_number');?></td>
  							<td><?php echo form::select_field_from_object('standard_operation_id', bom_standard_operation::find_all(), 'bom_standard_operation_id', 'standard_operation', $$class_second->standard_operation_id, '', $readonly); ?></td>
  							<td><?php echo form::checkBox_field('referenced_cb', $$class_second->referenced_cb); ?></td>
 							<td><?php echo form::select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class_second->department_id, '', $readonly,'','',1); ?></td>
@@ -164,7 +164,7 @@
 												$class_third = 'bom_routing_detail';
 												$$class_third = &$bom_routing_detail;
 												?>
-												<tr class="bom_routing_detail<?php echo $count . '-' . $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
+												<tr class="bom_routing_detail<?php echo $count . '-' . $detailCount; ?><?php echo $detailCount != 0 ? 'new_object' : '' ?>">
 												 <td>   
 													<ul class="inline_action">
 													 <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
@@ -175,11 +175,11 @@
 													</ul>
 												 </td>
 												 <td><?php form::text_field_wid3sr('bom_routing_detail_id'); ?></td>
-												 <td><?php form::text_field_wid3sm('resource_sequence'); ?></td>
+												 <td><?php $f->text_field_d3s('resource_sequence', 'detail_number');?></td>
 												 <td><?php echo form::select_field_from_object('resource_id', bom_resource::find_all(), 'bom_resource_id', 'resource', $$class_third->resource_id, '', $readonly, 'resource_id', '',1); ?></td>
 												 <td><?php echo form::select_field_from_object('charge_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_third->charge_basis, '', $readonly, 'default_basis','',1); ?></td>
-												 <td><?php form::number_field_wid3sm('usage') ?></td>
-												 <td><?php echo form::select_field_from_object('schedule', bom_header::bom_schedule_option(), 'option_line_code', 'option_line_value', $$class_third->schedule, '', $readonly, '','',1); ?></td>
+												 <td><?php form::number_field_wid3sm('resource_usage') ?></td>
+												 <td><?php echo form::select_field_from_object('resource_schedule', bom_header::bom_schedule_option(), 'option_line_code', 'option_line_value', $$class_third->resource_schedule, '', $readonly, '','',1); ?></td>
 												 <td><?php form::number_field_wid3s('assigned_units') ?></td>
 												 <td><?php echo form::checkBox_field('twenty_four_hr_cb', $$class_third->twenty_four_hr_cb); ?></td>
 												 <td><?php echo form::checkBox_field('standard_rate_cb', $$class_third->standard_rate_cb); ?></td>

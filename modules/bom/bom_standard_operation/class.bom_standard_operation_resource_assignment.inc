@@ -1,17 +1,21 @@
 <?php
 
-class bom_standard_operation_resource_assignment extends bom_standard_operation {
+class bom_standard_operation_resource_assignment extends dbObject {
 
  protected static $table_name = "bom_standard_operation_resource_assignment";
+ public static $primary_column = "bom_standard_operation_resource_assignment_id";
+ public static $parent_primary_column = "bom_standard_operation_id";
+ public static $key_column = 'resource_sequence';
+ public static $module = "bom";
 //  data base variables as stored database column name
- public static $field_array = [
+ public $field_a = [
 		 'bom_standard_operation_resource_assignment_id',
-		 'bom_standard_operation_id',
 		 'resource_sequence',
+		 'bom_standard_operation_id',
 		 'charge_basis',
 		 'resource_id',
-		 'usage',
-		 'schedule',
+		 'resource_usage',
+		 'resource_schedule',
 		 'assigned_units',
 		 'twenty_four_hr_cb',
 		 'standard_rate_cb',
@@ -22,36 +26,22 @@ class bom_standard_operation_resource_assignment extends bom_standard_operation 
 		 'last_update_date'
  ];
 //variables used for showing data
- public static $initial_search_array = [
-
- ];
- public static $column_array = [
-
- ];
- public static $account_array = [
- ];
- public static $checkbox_array = [
+ public $checkbox = [
 		 'twenty_four_hr_cb',
 		 'standard_rate_cb'
  ];
- public static $fields_inForm_notInDataBase = [
- ];
- public static $fields_inHeader_needsToBeInserted_inPOST = [
- ];
- public static $base_encoded_array = [];
- public static $requiredField_array = [
+ public $requiredField = [
 		 'bom_standard_operation_id',
 		 'resource_sequence',
 		 'resource_id'
  ];
- public static $primary_column = "bom_standard_operation_resource_assignment_id";
  public $bom_standard_operation_id;
  public $cost_type_id;
  public $bom_standard_operation_resource_assignment_id;
  public $charge_basis;
  public $resource_id;
- public $usage;
- public $schedule;
+ public $resource_usage;
+ public $resource_schedule;
  public $assigned_units;
  public $twenty_four_hr_cb;
  public $standard_rate_cb;

@@ -11,15 +11,16 @@
 			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 			<!--    End of place for showing error messages-->
 			<div id="form_all">
+			 <span class="heading">Department</span>
 			 <form action=""  method="post" id="bom_department"  name="bom_department" class="bom_department">
 				<div id ="form_header">
 				 <div id="tabsHeader">
-					<div class="large_shadow_box"><span class="heading"></span>
+					<div class="large_shadow_box">
 					 <ul class="column five_column">
 						<li>
-						 <label><img id="bom_department_popup" class="showPointer bom_department_popup" src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
+						 <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_department_id select_popup clickable">
 							Department Id : </label>
-						 <?php echo form::text_field_d('bom_department_id'); ?>
+						 <?php echo $f->text_field_dsr('bom_department_id'); ?>
 						 <a name="show" class="show bom_department_id_show">
 							<img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						</li>
@@ -33,7 +34,7 @@
 						 <?php echo form::text_field_d('description'); ?>
 						</li>
 						<li><label>Department Type : </label>
-						 <?php echo form::select_field_from_object('department_type', bom_header::bom_department_type(), 'option_line_id', 'option_line_code', $$class->department_type, 'department_type', $readonly, 'department_type'); ?>
+						 <?php echo form::select_field_from_object('department_type', $class::bom_department_type(), 'option_line_id', 'option_line_code', $$class->department_type, 'department_type', $readonly, 'department_type'); ?>
 						</li>
 						<li><label>Ef Id : </label>
 						 <?php echo form::extra_field($$class->ef_id, '10', $readonly); ?>
@@ -82,7 +83,7 @@
  								 <li><?php echo form::hidden_field('bom_department_id', $$class->bom_department_id); ?></li>
  								</ul>
  							 </td>
- 							 <td><?php form::text_field_wid2('bom_department_resource_assignment_id'); ?></td>
+ 							 <td><?php $f->text_field_wid2sr('bom_department_resource_assignment_id'); ?></td>
  							 <td>
 								 <?php echo form::select_field_from_object('cost_type_id', bom_cost_type::find_all(), 'bom_cost_type_id', 'cost_type', $$class_second->cost_type_id, '', $readonly, 'cost_type_id'); ?>
  							 </td>

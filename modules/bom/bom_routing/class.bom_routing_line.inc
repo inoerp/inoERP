@@ -1,9 +1,15 @@
 <?php
 
-class bom_routing_line extends bom_routing_header {
+class bom_routing_line extends dbObject {
 
  protected static $table_name = "bom_routing_line";
- public static $field_array = [
+ public static $primary_column = "bom_routing_line_id";
+ public static $parent_primary_column = "bom_routing_header_id";
+ public static $multi_search_primary_column = "bom_routing_header_id"; //this value is used in multi search hidden value
+ public static $key_column = 'routing_sequence';
+ public static $module = "bom";
+ 
+ public $field_a = [
 		 'bom_routing_line_id',
 		 'bom_routing_header_id',
 		 'routing_sequence',
@@ -29,34 +35,21 @@ class bom_routing_line extends bom_routing_header {
 		 'last_update_by',
 		 'last_update_date'
  ];
- public static $initial_search_array = [
- ];
- public static $column_array = [
- ];
- public static $account_array = [
- ];
- public static $checkbox_array = [
+
+ public $checkbox = [
 		 "count_point_cb",
 		 'backflush_cb',
 		 'auto_charge_cb',
 		 'referenced_cb',
 		 'include_in_rollup_cb'
  ];
- public static $addressField_array = [
- ];
- public static $fields_inForm_notInDataBase = [
- ];
- public static $fields_inHeader_needsToBeInserted_inPOST = [
- ];
- public static $base_encoded_array = [];
- public static $requiredField_array = [
+ 
+ public $requiredField = [
 		 'bom_routing_header_id',
 		 'routing_sequence',
 		 'department_id'
  ];
- public static $otherField_array = [
- ];
- public static $primary_column = "bom_routing_line_id";
+ 
  public $bom_routing_line_id;
  public $bom_routing_header_id;
  public $routing_sequence;

@@ -3,8 +3,11 @@
 class bom_material_element extends dbObject {
 
  protected static $table_name = "bom_material_element";
+ public static $key_column = 'material_element';
+ public static $primary_column = "bom_material_element_id";
+ public static $module = "bom";
 //  data base variables as stored database column name
- public static $field_array = [
+ public $field_a = [
 		 'bom_material_element_id',
 		 'material_element',
 		 'description',
@@ -18,35 +21,32 @@ class bom_material_element extends dbObject {
 		 'last_update_date'
  ];
 //variables used for showing data
- public static $initial_search_array = [
+ public $initial_search = [
 		 'bom_material_element_id',
 		 'material_element',
 		 'description',
 		 'org_id',
 		 'status'
  ];
- public static $column_array = [
+ public $column = [
 		 'bom_material_element_id',
 		 'material_element',
 		 'description',
 		 'org_id',
 		 'status'
  ];
- public static $account_array = [
- ];
- public static $checkbox_array = [
- ];
- public static $fields_inForm_notInDataBase = [
- ];
- public static $fields_inHeader_needsToBeInserted_inPOST = [
- ];
- public static $base_encoded_array = [];
- public static $requiredField_array = [
+ public $requiredField = [
 		 'material_element',
 		 'description',
 		 'org_id'
  ];
- public static $primary_column = "bom_material_element_id";
+ public $search = [
+		 '_show_update_path' => 1,
+		 '_update_action_meassge' => 'Update',
+		 '_show_view_path' => 1,
+ ];
+ public $pageTitle = " Material Element - Create & Update BOM Material Element "; //page Title
+ 
  public $bom_material_element_id;
  public $material_element;
  public $description;
@@ -60,12 +60,6 @@ class bom_material_element extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
-
-// Public static function resource_type() {
-//	$option_header = option_header::find_by_exact_name('RESOURCE_TYPE');
-//	$resource_type = option_line::find_by_option_id($option_header->option_header_id);
-//	return $resource_type;
-// }
 
 
  public function _before_showing() {

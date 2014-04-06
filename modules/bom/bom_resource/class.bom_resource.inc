@@ -3,8 +3,11 @@
 class bom_resource extends dbObject {
 
  protected static $table_name = "bom_resource";
+ public static $primary_column = "bom_resource_id";
+ public static $key_column = 'resource';
+ public static $module = "bom";
 //  data base variables as stored database column name
- public static $field_array = [
+ public $field_a = [
 		 'bom_resource_id',
 		 'resource',
 		 'description',
@@ -29,7 +32,7 @@ class bom_resource extends dbObject {
 		 'last_update_date',
  ];
 //variables used for showing data
- public static $initial_search_array = [
+ public $initial_search = [
 		 'bom_resource_id',
 		 'resource',
 		 'description',
@@ -37,7 +40,7 @@ class bom_resource extends dbObject {
 		 'status',
 		 'resource_type'
  ];
- public static $column_array = [
+ public $column = [
 		 'bom_resource_id',
 		 'resource',
 		 'description',
@@ -45,30 +48,38 @@ class bom_resource extends dbObject {
 		 'status',
 		 'resource_type'
  ];
- public static $account_array = [
+ public $account = [
 		 'absorption_ac_id',
 		 'variance_ac_id'
  ];
- public static $checkbox_array = [
+ public $checkbox = [
 		 'osp_cb',
 		 'costed_cb',
 		 'standard_rate_cb'
  ];
- public static $fields_inForm_notInDataBase = [
+ public $fields_inForm_notInDataBase = [
 		 "osp_item_number",
 		 "osp_item_description"
  ];
- public static $fields_inHeader_needsToBeInserted_inPOST = [
- ];
- public static $base_encoded_array = [];
- public static $requiredField_array = [
+ public $requiredField = [
 		 'resource',
 		 'org_id',
 		 'resource_type',
 		 'charge_type',
 		 'uom'
  ];
- public static $primary_column = "bom_resource_id";
+ public $search = [
+		 '_show_update_path' => 1,
+		 '_update_action_meassge' => 'Update',
+		 '_show_view_path' => 1,
+//		 '_extra_path' => array('form.php?class_name=ar_payment_header&mode=9' => 'Pay',
+//				 'form.php?class_name=ar_transaction_header&mode=9&transaction_type=DEBIT_MEMO' => 'Credit')
+ ];
+ public $pageTitle = " Resources - Create & Update Resources "; //page Title
+ public $option_lists = [
+		 'resource_type' => 'RESOURCE_TYPE',
+		 'charge_type' => 'CHARGE_TYPE',
+ ];
  public $bom_resource_id;
  public $resource;
  public $description;
@@ -95,8 +106,7 @@ class bom_resource extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
- 
- 
+
  Public static function resource_type() {
 	$option_header = option_header::find_by_exact_name('RESOURCE_TYPE');
 	$bom_resource_type = option_line::find_by_option_id($option_header->option_header_id);

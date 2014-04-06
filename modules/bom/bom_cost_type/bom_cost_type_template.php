@@ -10,18 +10,16 @@
 			<div class="error"></div><div id="loading"></div>
 			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 			<!--    End of place for showing error messages-->
-			<div id="form_all">
 			 <form action=""  method="post" id="bom_cost_type"  name="bom_cost_type">
 				<div id ="form_header">
 				 <div id="tabsHeader">
-					<div class="large_shadow_box"><span class="heading"></span>
+					<div class="large_shadow_box">
 					 <ul class="column four_column">
 						<li>
-						 <label><img id="bom_cost_type_popup" class="showPointer bom_cost_type_popup" src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
-							Cost Type Id : </label>
-						 <?php echo form::text_field_d('bom_cost_type_id'); ?>
-						 <a name="show" class="show bom_cost_type_id_show">
-							<img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+						 <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_cost_type_id select_popup clickable">
+              Cost Type Id : </label>
+						 <?php echo $f->text_field_ds('bom_cost_type_id'); ?>
+						 <a name="show" class="show bom_cost_type_id_show"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						</li>
 						<li><label>Inventory : </label>
 						 <?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly); ?>
@@ -86,7 +84,6 @@
 				 </div>
 				</div> 
 			 </form>
-			</div>
 			<!--END OF FORM -->
 		 </div>
 		</div>

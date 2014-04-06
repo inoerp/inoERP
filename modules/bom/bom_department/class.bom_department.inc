@@ -4,9 +4,11 @@ class bom_department extends dbObject {
 
  protected static $table_name = "bom_department";
  public static $primary_column = "bom_department_id";
+ public static $dependent_classes = ['bom_department_resource_assignment'];
  public static $key_column = 'department';
  public static $module = "bom";
-//  data base variables as stored database column name
+ 
+ //  data base variables as stored database column name
  public $field_a = [
 		 'bom_department_id',
 		 'department',
@@ -45,14 +47,13 @@ class bom_department extends dbObject {
 		 'org_id'
  ];
  public $search = [
-		 '_update_path' => 'modules/bom/bom_department/bom_department.php',
-		 '_show_update_path' => 1,
+		  '_show_update_path' => 1,
 		 '_update_action_meassge' => 'Update',
 		 '_show_view_path' => 1,
  ];
  public $pageTitle = " BOM Departments - Find All Departments "; //page Title
  public $option_list = [
-//		 'calendar_option_line_code' => 'GL_CALENDAR_NAME',
+		 'bom_department_type' => 'BOM_DEPARTMENT_TYPE',
  ]; //list of search fields which have options
  public $bom_department_id;
  public $department;
@@ -70,6 +71,12 @@ class bom_department extends dbObject {
  public $time;
  public $msg;
 
+  Public static function bom_department_type() {
+	$option_header = option_header::find_by_exact_name('BOM_DEPARTMENT_TYPE');
+	$resource_type = option_line::find_by_option_id($option_header->option_header_id);
+	return $resource_type;
+ }
+ 
  public function _before_showing() {
 	
  }

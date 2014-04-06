@@ -26,8 +26,7 @@
 						 <li><label>Org Name(1) : </label>
 							<?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $bom_header->org_id, 'org_id', $readonly, '', ''); ?>
 						 </li>
-						 <li><label><a href=" " class="popup bom_header_id">
-               <img src="<?php echo HOME_URL; ?>themes/images/serach.png"/></a>
+						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_header_id select_popup clickable">
 							 BOM Id : </label>
 							<?php echo form::text_field('bom_header_id', $bom_header->bom_header_id, '15', '25', '', 'System Number', 'bom_header_id', $readonly) ?>
 							<a name="show" href="bom.php?bom_header_id=" class="show bom_header_id">
@@ -37,13 +36,13 @@
 							<?php form::text_field_drm('item_id'); ?>
 						 </li>
 						 <li><label>Item Number(2) : </label>
-							<?php form::text_field_dm('item_number'); ?>
+							<?php $f->text_field_d('item_number', 'select_item_number'); ?>
 						 </li>
 						 <li><label>Description: </label>
 							<?php form::text_field_widr('item_description'); ?>
 						 </li>
 						 <li><label>UOM : </label>
-							<?php echo form::select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom', $$class->uom, 'uom'); ?>
+							<?php echo form::select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom'); ?>
 						 </li>
 						</ul>
 					 </div>
@@ -126,14 +125,17 @@
  							 </ul>
  							</td>
  							<td><?php form::text_field_wid2sr('bom_line_id'); ?></td>
- 							<td><?php form::text_field_wid2sm('bom_sequence'); ?></td>
- 							<td><?php echo !empty($routing_line_details) ? form::select_field_from_object('routing_sequence', $routing_line_details, 'bom_routing_line_id', 'routing_sequence', $$class_second->routing_sequence, '',$readonly, 'usage_basis','',1) : form::text_field_wid2sm('routing_sequence'); ?></td>
- 							<td><?php echo form::text_field('component_item_id', $$class_second->component_item_id, '8', '50', 1, '', '', 1, 'item_id'); ?></td>
- 							<td><?php echo form::text_field('component_item_number', $$class_second->component_item_number, '20', '50', 1, '', '', '', 'item_number'); ?></td>
- 							<td><?php echo form::text_field('component_description', $$class_second->component_description, '20', '50', '', '', '', 1, 'item_description'); ?></td>
- 							<td><?php echo form::select_field_from_object('component_uom', uom::find_all(), 'uom_id', 'uom', $$class_second->component_uom, '', '', 'uom'); ?></td>
- 							<td><?php echo form::select_field_from_object('usage_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_second->usage_basis, '', $readonly, 'usage_basis','',1); ?></td>
-							<td><?php form::number_field_wid2s('usage_quantity'); ?></td>
+ 							<td><?php $f->text_field_d2s('bom_sequence', 'lines_number');?></td>
+ 							<td><?php echo!empty($routing_line_details) ? form::select_field_from_object('routing_sequence', $routing_line_details, 'bom_routing_line_id', 'routing_sequence', $$class_second->routing_sequence, '', $readonly, 'usage_basis', '', 1) : form::text_field_wid2sm('routing_sequence'); ?></td>
+ 							<td><?php $f->text_field_wid2sr('component_item_id', 'item_id'); ?></td>
+ 							<td><?php $f->text_field_wid2('component_item_number', 'select_item_number'); ?>
+ 							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
+ 							<td><?php $f->text_field_wid2('component_description', 'item_description'); ?></td>
+ 							<td><?php
+								echo $f->select_field_from_object('component_uom', uom::find_all(), 'uom_id', 'uom_name', $$class_second->component_uom, '', '', '', $readonly);
+								?></td>
+ 							<td><?php echo form::select_field_from_object('usage_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_second->usage_basis, '', $readonly, 'usage_basis', '', 1); ?></td>
+ 							<td><?php form::number_field_wid2s('usage_quantity'); ?></td>
 
  						 </tr>
 							<?php
@@ -194,9 +196,9 @@
  						 <tr class="bom_line<?php echo $count ?>">
  							<td><?php form::text_field_wid2('planning_percentage'); ?></td>
  							<td><?php form::text_field_wid2('yield'); ?></td>
-							<td><?php echo form::select_field_from_object('wip_supply_type', bom_header::wip_supply_type(), 'option_line_code', 'option_line_value', $$class_second->wip_supply_type, '', $readonly, '', '',''); ?></td>
- 							<td><?php echo form::select_field_from_object('supply_sub_inventory', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_second->supply_sub_inventory, '', $readonly, 'subinventory_id', '',''); ?></td>
- 							<td><?php echo form::select_field_from_object('supply_locator', locator::find_all_of_subinventory($$class_second->supply_sub_inventory), 'locator_id', 'locator', $$class_second->supply_locator, '', $readonly, 'locator_id', '',''); ?></td>
+ 							<td><?php echo form::select_field_from_object('wip_supply_type', bom_header::wip_supply_type(), 'option_line_code', 'option_line_value', $$class_second->wip_supply_type, '', $readonly, '', '', ''); ?></td>
+ 							<td><?php echo form::select_field_from_object('supply_sub_inventory', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_second->supply_sub_inventory, '', $readonly, 'subinventory_id', '', ''); ?></td>
+ 							<td><?php echo form::select_field_from_object('supply_locator', locator::find_all_of_subinventory($$class_second->supply_sub_inventory), 'locator_id', 'locator', $$class_second->supply_locator, '', $readonly, 'locator_id', '', ''); ?></td>
  							<td>
 								<?php echo form::checkBox_field('include_in_cost_rollup_cb', $$class_second->include_in_cost_rollup_cb, 'include_in_cost_rollup_cb', $readonly); ?>
  							</td>
@@ -213,9 +215,6 @@
 				 </div>
 				</div>
 			 </form>
-			 <ul class="inline download_action">
-				<li class="export_to_excel"><img  src="<?php echo HOME_URL; ?>themes/images/excel_16.png"  alt="export to excel" /></li>
-			 </ul>
 			</div>
 
 			<!--END OF FORM HEADER-->

@@ -46,14 +46,11 @@ class bom_cost_type extends dbObject {
 		 'multi_org_cb',
  ];
  public $search = [
-		 '_update_path' => 'modules/bom/bom_cost_type/bom_cost_type',
 		 '_show_update_path' => 1,
 		 '_update_action_meassge' => 'Update',
 		 '_show_view_path' => 1,
-//		 '_view_action_meassge' => 'View',
-//		 '_extra_path' => '',
  ];
- public $pageTitle = " Cost Type - Find All Cost Types "; //page Title
+ public $pageTitle = " Cost Type - Create & Update BOM Cost Types "; //page Title
  public $option_list = [
 //		 'calendar_option_line_code' => 'GL_CALENDAR_NAME',
  ]; //list of search fields which have options

@@ -10,16 +10,16 @@
 			<div class="error"></div><div id="loading"></div>
 			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 			<!--    End of place for showing error messages-->
-			<div id="form_all">
+			<div id="form_all"><span class="heading">Material Element</span>
 			 <form action=""  method="post" id="bom_material_element"  name="bom_material_element">
 				<div id ="form_header">
 				 <div id="tabsHeader">
-					<div class="large_shadow_box"><span class="heading"></span>
+					<div class="large_shadow_box">
 					 <ul class="column four_column">
 						<li>
-						 <label><img id="bom_material_element_popup" class="showPointer bom_material_element_popup" src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
+						 <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_material_element_id select_popup clickable">
 							Material Element Id : </label>
-						 <?php echo form::text_field_d('bom_material_element_id'); ?>
+						 <?php echo $f->text_field_dsr('bom_material_element_id'); ?>
 						 <a name="show" class="show bom_material_element_id_show">
 							<img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						</li>

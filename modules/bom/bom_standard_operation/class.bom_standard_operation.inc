@@ -3,8 +3,12 @@
 class bom_standard_operation extends dbObject {
 
  protected static $table_name = "bom_standard_operation";
+ public static $primary_column = "bom_standard_operation_id";
+ public static $dependent_classes = ['bom_standard_operation_resource_assignment'];
+ public static $key_column = 'department_id';
+ public static $module = "bom";
 //  data base variables as stored database column name
- public static $field_array = [
+ public $field_a = [
 		 'bom_standard_operation_id',
 		 'standard_operation',
 		 'description',
@@ -21,39 +25,40 @@ class bom_standard_operation extends dbObject {
 		 'last_update_date'
  ];
 //variables used for showing data
- public static $initial_search_array = [
+ public $initial_search = [
 		 'bom_standard_operation_id',
 		 'standard_operation',
 		 'department_id',
 		 'description',
 		 'org_id'
  ];
- public static $column_array = [
+ public $column = [
 		 'bom_standard_operation_id',
 		 'standard_operation',
 		 'department_id',
 		 'description',
 		 'org_id'
  ];
- public static $account_array = [
- ];
- public static $checkbox_array = [
+ public $checkbox = [
 		 'count_point_cb',
 		 'auto_charge_cb',
 		 'backflush_cb'
  ];
- public static $fields_inForm_notInDataBase = [
- ];
- public static $fields_inHeader_needsToBeInserted_inPOST = [
- ];
- public static $base_encoded_array = [];
- public static $requiredField_array = [
+ public $requiredField = [
 		 'standard_operation',
 		 'description',
 		 'org_id',
 		 'department_id'
  ];
- public static $primary_column = "bom_standard_operation_id";
+ public $search = [
+		 '_show_update_path' => 1,
+		 '_update_action_meassge' => 'Update',
+		 '_show_view_path' => 1,
+ ];
+ public $pageTitle = " Standard Operations - Find All Departments "; //page Title
+ public $option_list = [
+//		 'bom_department_type' => 'BOM_DEPARTMENT_TYPE',
+ ]; //list of search fields which have options
  public $bom_standard_operation_id;
  public $standard_operation;
  public $description;

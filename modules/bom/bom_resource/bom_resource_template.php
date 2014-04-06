@@ -12,20 +12,20 @@
 			<div class="error"></div><div id="loading"></div>
 			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 			<!--    End of place for showing error messages-->
-
-			<form action=""  method="post" id="bom_resource"  name="bom_resource">
+       
+			<form action=""  method="post" id="bom_resource"  name="bom_resource"><span class="heading">Resources</span>
 			 <div id ="form_header">
 				<div id="tabsHeader">
-				 <div class="large_shadow_box"><span class="heading"></span>
+				 <div class="large_shadow_box">
 					<ul class="column five_column">
 					 <li>
-						<label><img id="bom_resource_id_find_popup" class="bom_resource_popup showPointer" src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
+						<label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_resource_id select_popup clickable">
 						 Resource Id : </label>
-						<?php echo form::text_field_d('bom_resource_id'); ?>
-						<a name="show" class="show bom_resource_id_show"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+						<?php $f->text_field_dsr('bom_resource_id'); ?>
+						<a name="show" class="show bom_resource_id_show clickable"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 					 </li>
 					 <li><label>Inventory : </label>
-						<?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly); ?>
+						<?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1); ?>
 					 </li>
 					 <li><label>Resource : </label>
 						<?php echo form::text_field_d('resource'); ?>
@@ -34,13 +34,13 @@
 						<?php echo form::text_field_d('description'); ?>
 					 </li>
 					 <li><label>Resource Type : </label>
-						<?php echo form::select_field_from_object('resource_type', bom_resource::resource_type(), 'option_line_code', 'option_line_code', $$class->resource_type, 'resource_type', $readonly); ?>
+						<?php echo $f->select_field_from_object('resource_type', bom_resource::resource_type(), 'option_line_code', 'option_line_code', $$class->resource_type, '', '', 1, $readonly1); ?>
 					 </li>
 					 <li><label>Charge Type : </label>
-						<?php echo form::select_field_from_object('charge_type', bom_resource::charge_type(), 'option_line_code', 'option_line_code', $$class->charge_type, 'charge_type', $readonly); ?>
+						<?php echo $f->select_field_from_object('charge_type', bom_resource::charge_type(), 'option_line_code', 'option_line_code', $$class->charge_type, '', '', 1, $readonly); ?>
 					 </li> 
 					 <li><label>UOM : </label>
-					 <?php echo form::select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom', $$class->uom, 'uom'); ?>
+						<?php echo $f->select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom', '', 1, $readonly1); ?>
 					 </li>
 					 <li><label>Ef Id : </label>
 						<?php echo form::extra_field($$class->ef_id, '10', $readonly); ?>
@@ -66,12 +66,15 @@
 				 <div class="tabContainer"> 
 					<div id="tabsLine-1" class="tabContent">
 					 <div class="first_rowset"> 
-						<ul class="column five_column"> 
+						<ul class="column four_column"> 
 						 <li><label>Costed : </label>
 							<?php echo form::checkBox_field('costed_cb', $$class->costed_cb, 'costed_cb', $readonly); ?>
 						 </li>
-						 <li><label>Absorption Ac: </label><?php form::account_field('absorption_ac_id'); ?></li>
-						 <li><label>Variance Ac: </label><?php form::account_field('variance_ac_id'); ?></li>
+						 <li><label>Absorption Ac: </label><?php
+							$f = new inoform();
+							$f->ac_field_d('absorption_ac_id');
+							?></li>
+						 <li><label>Variance Ac: </label><?php $f->ac_field_d('variance_ac_id'); ?></li>
 						 <li><label>Standard Rate : </label>
 							<?php echo form::checkBox_field('standard_rate_cb', $$class->standard_rate_cb, 'standard_rate_cb', $readonly); ?>
 						 </li>
@@ -91,15 +94,12 @@
 						 <li><label>OSP Resource : </label> 
 							<?php echo form::checkBox_field('osp_cb', $$class->osp_cb, '', $readonly); ?>
 						 </li>
-						 <li><label>Item Id : </label>
-							<?php form::text_field_dr('osp_item_id'); ?>
-						 </li>
+						 <li><label>Item Id : </label><?php $f->text_field_wids('osp_item_id', 'item_id'); ?></li>
 						 <li><label>Item Number : </label>
-							<?php form::text_field_d('osp_item_number'); ?>
+							<?php $f->text_field_wid('osp_item_number', 'select_item_number'); ?>
+							<img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup">
 						 </li>
-						 <li><label>Description: </label>
-							<?php form::text_field_widr('osp_item_description'); ?>
-						 </li>
+						 <li><label>Description: </label><?php $f->text_field_wid('osp_item_description', 'item_description'); ?></li>
 						</ul>
 					 </div>
 					 <div class="second_rowset">

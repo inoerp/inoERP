@@ -1,8 +1,4 @@
-<?php include_once("../../../include/basics/header.inc"); ?>
-<script src="bom_resource.js"></script>
-
-<div id="json_save_header"> <?php json_save('bom', 'bom_resource', 'resource', 'bom_resource_id'); ?></div>
-<div id="json_delete_line"> <?php  json_delete('bom_resource'); ?> </div>
+<?php include_once("../../../include/basics/basic.inc"); ?>
 <div id="json_bom_resource_find_all">
   <?php
   if(!empty($_GET['org_id']) && ($_GET['find_all_bom_resource'] = 1)){
@@ -20,7 +16,3 @@
   ?>
 
 </div>
-
-
-
-<?php include_template('footer.inc') ?>

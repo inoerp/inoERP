@@ -10,16 +10,16 @@
 			<div class="error"></div><div id="loading"></div>
 			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 			<!--    End of place for showing error messages-->
-			<div id="form_all">
+			<div id="form_all"><span class="heading">Over Head</span>
 			 <form action=""  method="post" id="bom_overhead"  name="bom_overhead">
 				<div id ="form_header">
 				 <div id="tabsHeader">
-					<div class="large_shadow_box"><span class="heading"></span>
+					<div class="large_shadow_box">
 					 <ul class="column five_column">
 						<li>
-						 <label><img id="bom_overhead_popup" class="showPointer bom_overhead_popup" src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
+						 <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_overhead_id select_popup clickable">
 							Overhead Id : </label>
-						 <?php echo form::text_field_d('bom_overhead_id'); ?>
+						 <?php echo $f->text_field_ds('bom_overhead_id'); ?>
 						 <a name="show" class="show bom_overhead_id_show">
 							<img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						</li>
@@ -44,20 +44,21 @@
 						<li><label>Status : </label>                      
 						 <?php echo form::status_field($$class->status, $readonly); ?>
 						</li>
-						<li><label>Absorption Ac: </label><?php form::account_field('absorption_ac_id'); ?></li>
+						<li><label>Absorption Ac: </label><?php $f->ac_field_d('absorption_ac_id'); ?></li>
 					 </ul>
 					</div>
 
 				 </div>
 				</div>
 			 </form>
-			 <div id ="form_line" class="form_line"><span class="heading"> Over Head Details </span>
-				<div id="tabsLine">
-				 <ul class="tabMain">
-					<li><a href="#tabsLine-1">Resource Assignment</a></li>
-					<li><a href="#tabsLine-2">Rate Assignment</a></li>
-				 </ul>
-				 <div class="tabContainer"> 
+			 <span class="heading"> Over Head Details </span>
+			 <div id="tabsLine">
+				<ul class="tabMain">
+				 <li><a href="#tabsLine-1">Resource Assignment</a></li>
+				 <li><a href="#tabsLine-2">Rate Assignment</a></li>
+				</ul>
+				<div class="tabContainer"> 
+				 <div id ="form_line" class="form_line">
 					<form action=""  method="post" id="bom_overhead_resource_assignment_line"  name="bom_overhead_resource_assignment_line">
 					 <div id="tabsLine-1" class="tabContent">
 						<table class="form_line_data_table">
@@ -99,49 +100,50 @@
 						</table>
 					 </div>
 					</form>
-					<form action=""  method="post" id="bom_overhead_rate_assignment_line"  name="bom_overhead_rate_assignment_line">
-					 <div id="tabsLine-2" class="tabContent">
-						<table class="form_line_data_table">
-						 <thead> 
-							<tr>
-							 <th>Action</th>
-							 <th>Rate Assignment Id</th>
-							 <th>Department</th>
-							 <th>Default Basis</th>
-							 <th>Rate</th>
-							</tr>
-						 </thead>
-						 <tbody class="form_data_line_tbody2 bom_overhead_rate_assignment_values" >
+				 </div> 
+				 <form action=""  method="post" id="bom_overhead_rate_assignment_line"  name="bom_overhead_rate_assignment_line">
+					<div id="tabsLine-2" class="tabContent">
+					 <table class="form_line_data_table">
+						<thead> 
+						 <tr>
+							<th>Action</th>
+							<th>Rate Assignment Id</th>
+							<th>Department</th>
+							<th>Default Basis</th>
+							<th>Rate</th>
+						 </tr>
+						</thead>
+						<tbody class="form_data_line_tbody2 bom_overhead_rate_assignment_values" >
+						 <?php
+						 $count = 0;
+						 foreach ($bom_overhead_rate_assignment_object as $bom_overhead_rate_assignment) {
+							?>         
+ 						 <tr class="bom_overhead_rate_assignment<?php echo $count ?>">
+ 							<td>    
+ 							 <ul class="inline_action">
+ 								<li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
+ 								<li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+ 								<li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($bom_overhead_rate_assignment->bom_overhead_rate_assignment_id); ?>"></li>           
+ 								<li><?php echo form::hidden_field('bom_overhead_id', $$class->bom_overhead_id); ?></li>
+ 							 </ul>
+ 							</td>
+ 							<td><?php form::text_field_wid3('bom_overhead_rate_assignment_id'); ?></td>
+ 							<td><?php form::text_field_wid3('department_id'); ?></td>
+ 							<td><?php echo form::select_field_from_object('default_basis', bom_header::bom_charge_basis(), 'option_line_id', 'option_line_code', $$class_third->default_basis, '', $readonly, 'default_basis'); ?> </td>
+ 							<td><?php form::text_field_wid3('rate'); ?></td>
+ 						 </tr>
 							<?php
-							$count = 0;
-							foreach ($bom_overhead_rate_assignment_object as $bom_overhead_rate_assignment) {
-							 ?>         
- 							<tr class="bom_overhead_rate_assignment<?php echo $count ?>">
- 							 <td>    
- 								<ul class="inline_action">
- 								 <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
- 								 <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
- 								 <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($bom_overhead_rate_assignment->bom_overhead_rate_assignment_id); ?>"></li>           
- 								 <li><?php echo form::hidden_field('bom_overhead_id', $$class->bom_overhead_id); ?></li>
- 								</ul>
- 							 </td>
- 							 <td><?php form::text_field_wid3('bom_overhead_rate_assignment_id'); ?></td>
- 							 <td><?php form::text_field_wid3('department_id'); ?></td>
- 							 <td><?php echo form::select_field_from_object('default_basis', bom_header::bom_charge_basis(), 'option_line_id', 'option_line_code', $$class_third->default_basis, '', $readonly, 'default_basis'); ?> </td>
- 							 <td><?php form::text_field_wid3('rate'); ?></td>
- 							</tr>
-							 <?php
-							 $count = $count + 1;
-							}
-							?>
-						 </tbody>
-						</table>
-					 </div>
-					</form>
-				 </div>
-
+							$count = $count + 1;
+						 }
+						 ?>
+						</tbody>
+					 </table>
+					</div>
+				 </form>
 				</div>
-			 </div> 
+
+			 </div>
+
 			</div>
 			<!--END OF FORM -->
 		 </div>

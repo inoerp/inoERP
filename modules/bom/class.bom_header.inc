@@ -1,9 +1,9 @@
 <?php
 
 class bom_header extends dbObject {
-
  protected static $table_name = "bom_header";
  public static $primary_column = "bom_header_id";
+ public static $dependent_classes = ['bom_line'];
  public static $key_column = 'item_id';
  public static $module = "bom";
  public $field_a = [
@@ -47,18 +47,16 @@ class bom_header extends dbObject {
 		 'bom_revision',
 		 'effective_date'
  ];
+
+ public $pageTitle = " BOM - Create & Update BOM "; //page Title
+ 
  public $search = [
-		 '_update_path' => 'modules/bom/bom',
 		 '_show_update_path' => 1,
-		 '_update_action_meassge' => 'Update BOM',
+		 '_update_action_meassge' => 'Update',
 		 '_show_view_path' => 1,
-//		 '_view_action_meassge' => 'View',
-		 '_extra_path' => [ 'modules/bom/indented_bom' => 'Indented BOM'],
+		 '_extra_path' => array('form.php?class_name=indented_bom&mode=9' => 'Indented BOM')
  ];
- public $pageTitle = " Option - Find All Options "; //page Title
- public $option_list = [
-//		 'calendar_option_line_code' => 'GL_CALENDAR_NAME',
- ];
+
  public $bom_header_id;
  public $item_id;
  public $org_id;
@@ -167,12 +165,6 @@ class bom_header extends dbObject {
 	$option_header = option_header::find_by_name('BOM_OVERHEAD_TYPE');
 	$bom_overhead_type = option_line::find_by_option_id($option_header->option_header_id);
 	return $bom_overhead_type;
- }
-
- Public static function bom_department_type() {
-	$option_header = option_header::find_by_exact_name('BOM_DEPARTMENT_TYPE');
-	$resource_type = option_line::find_by_option_id($option_header->option_header_id);
-	return $resource_type;
  }
 
  Public static function bom_schedule_option() {
