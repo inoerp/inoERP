@@ -181,6 +181,16 @@ class bom_header extends dbObject {
 	$result_array = self::find_by_sql($sql);
 	return !empty($result_array) ? array_shift($result_array) : false;
  }
+ 
+  public function findBy_itemId() {
+	$sql = "SELECT * FROM " .
+					self::$table_name .
+					" where item_id= :item_id LIMIT 1 ";
+	$param_a = ['item_id'];
+	$value_a = ['item_id'=>$this->item_id];
+	$result_array = $this->findBy_sql($sql, $param_a, $value_a);
+	return !empty($result_array) ? array_shift($result_array) : false;
+ }
 
 }
 

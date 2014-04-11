@@ -83,6 +83,7 @@ class bom_routing_detail extends dbObject {
 
  public static function find_by_routing_lineId($routing_line_id) {
 	$sql = "SELECT * FROM " . self::$table_name . " where bom_routing_line_id = '{$routing_line_id}'";
+	
 	$result_array = self::find_by_sql($sql);
 	return $result_array;
  }

@@ -82,7 +82,7 @@
 							<?php form::text_field_widr('item_description'); ?>
 						 </li>
 						 <li><label>UOM : </label>
-							<?php echo form::select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom', $$class->uom, 'uom'); ?>
+							<?php echo form::select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom'); ?>
 						 </li>
 						 <li><label>Total Quantity : </label>
 							<?php form::number_field_dr('total_quantity'); ?>

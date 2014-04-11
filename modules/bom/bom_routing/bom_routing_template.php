@@ -25,8 +25,8 @@
 						 <li><label>Org Name(1) : </label>
 							<?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $bom_routing_header->org_id, 'org_id', $readonly, '', ''); ?>
 						 </li>
-						 <li><label>Routing Id : </label>
-							<?php echo form::text_field('bom_routing_header_id', $bom_routing_header->bom_routing_header_id, '15', '25', '', 'System Number', 'bom_routing_header_id', $readonly) ?>
+						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_routing_header_id select_popup clickable">
+							 Routing Id : </label><?php echo form::text_field('bom_routing_header_id', $bom_routing_header->bom_routing_header_id, '15', '25', '', 'System Number', 'bom_routing_header_id', $readonly) ?>
 							<a name="show" href="bom_routing.php?bom_routing_header_id=" class="show bom_routing_header_id">
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
@@ -40,7 +40,7 @@
 							<?php form::text_field_widr('item_description'); ?>
 						 </li>
 						 <li><label>UOM : </label>
-							<?php echo $f->select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, '', '',1, $readonly ); ?>
+							<?php echo $f->select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, '', '','', $readonly ); ?>
 						 </li>
 						</ul>
 					 </div>

@@ -31,11 +31,8 @@
 						<a name="show" class="show wip_wo_headerid_show">
 						 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 					 </li>
-					 <li><label>WO Number : </label>
-						<?php echo form::text_field_d('wo_number'); ?>
-					 </li>
-					 <li>
-						<label> Inventory Org : </label>
+					 <li><label>WO Number : </label> <?php echo form::text_field_d('wo_number'); ?></li>
+					 <li><label> Inventory Org : </label>
 						<?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly, '', '', 1); ?>
 					 </li>
 					 <li><label>Date(2) : </label>
@@ -50,24 +47,14 @@
 				<div id="tabsHeader-2" class="tabContent">
 				 <div class="large_shadow_box"> 
 					<ul class="column six_column"> 
-					 <li><label>Item Id : </label>
-						<?php form::text_field_drm('item_id'); ?>
-					 </li>
-					 <li><label>Item Number : </label>
-						<?php form::text_field_dr('item_number'); ?>
-					 </li>
-					 <li><label>Description: </label>
-						<?php form::text_field_widr('item_description'); ?>
-					 </li>
+					 <li><label>Item Id : </label><?php form::text_field_drm('item_id'); ?></li>
+					 <li><label>Item Number : </label><?php form::text_field_dr('item_number'); ?></li>
+					 <li><label>Description: </label><?php form::text_field_widr('item_description'); ?></li>
 					 <li><label>UOM : </label>
-						<?php echo form::select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom', $$class->uom, 'uom'); ?>
+						<?php echo form::select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom'); ?>
 					 </li>
-					 <li><label>Total Quantity : </label>
-						<?php form::number_field_dr('total_quantity'); ?>
-					 </li>
-					 <li><label>Completed Quantity : </label>
-						<?php form::number_field_wid2sr('completed_quantity'); ?>
-					 </li>
+					 <li><label>Total Quantity : </label><?php form::number_field_dr('total_quantity'); ?></li>
+					 <li><label>Completed Quantity : </label><?php form::number_field_wid2sr('completed_quantity'); ?></li>
 					 <li><label>SO Number : </label><?php echo form::text_field_dr('sales_order_header_id'); ?></li>               
 					 <li><label>Line Number : </label><?php echo form::text_field_dr('sales_order_line_id'); ?></li>
 					</ul>
@@ -104,60 +91,41 @@
 						</thead>
 						<tbody class="form_data_line_tbody wip_wo_routing_line_values" >
 						 <?php
-						 $count = 0;
 						 $detailCount = 0;
-						 foreach ($wip_wo_routing_line_object as $wip_wo_routing_line) {
-							$wip_wo_routing_line_id = $wip_wo_routing_line->wip_wo_routing_line_id;
-							if ((!empty($wip_wo_routing_line_id)) && (empty($wip_wo_routing_detail_object))) {
-							 $wip_wo_routing_detail_object = wip_wo_routing_detail::find_by_wipWo_lineId($wip_wo_routing_line_id);
-							} elseif (empty($wip_wo_routing_detail_object)) {
-							 $wip_wo_routing_detail_object = array();
-							}
-							if (count($wip_wo_routing_detail_object) == 0) {
-							 $wip_wo_routing_detail = new wip_wo_routing_detail();
-							 $wip_wo_routing_detail_object = array();
-							 array_push($wip_wo_routing_detail_object, $wip_wo_routing_detail);
-							}
+						 foreach ($wip_wo_routing_detail_object as $wip_wo_routing_detail) {
+							$class_third = 'wip_wo_routing_detail';
+							$$class_third = &$wip_wo_routing_detail;
 							?>
+ 						 <tr class="wip_move_transaction<?php echo $detailCount ?>">
+ 							<td>    
+ 							 <ul class="inline_action">
+ 								<li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
+ 								<li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+ 								<li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($wip_wo_routing_line->wip_wo_routing_line_id); ?>"></li>           
+ 								<li><?php echo form::hidden_field('wip_wo_header_id', $$class->wip_wo_header_id); ?></li>
+ 								<li><?php echo form::hidden_field('org_id', $$class->org_id); ?></li>
+ 								<li><?php echo form::hidden_field('transaction_type', $$class->transaction_type); ?></li>
+ 								<li><?php echo form::hidden_field('transaction_date', $$class->transaction_date); ?></li>
+ 								<li><?php echo form::hidden_field('wip_wo_routing_line_id', $$class_third->wip_wo_routing_line_id); ?></li>
+ 								<li><?php echo form::hidden_field('wip_wo_routing_detail_id', $$class_third->wip_wo_routing_detail_id); ?></li>
+ 							 </ul>
+ 							</td>
+ 							<td><?php form::number_field_wid3sr('routing_sequence'); ?></td>
+ 							<td><?php echo form::select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class_third->department_id, 'department_id', 1); ?></td>
+ 							<td><?php form::text_field_wid3sr('resource_sequence'); ?></td>
+ 							<td><?php echo form::select_field_from_object('resource_id', bom_resource::find_all(), 'bom_resource_id', 'resource', $$class_third->resource_id, '', 1, 'resource_id', '', 1); ?></td>
+ 							<td><?php form::number_field_wids('transaction_quantity'); ?></td>
+ 							<td><?php form::number_field_wid3sr('required_quantity'); ?></td>
+ 							<td><?php form::number_field_wid3sr('applied_quantity'); ?></td>
+ 							<td><?php form::number_field_wid('reason'); ?></td>
+ 							<td><?php form::number_field_wid('reference'); ?></td>
+ 							<td><?php echo form::text_field_dsr('wip_resource_transaction_id'); ?></td>
+ 						 </tr>
 							<?php
-							foreach ($wip_wo_routing_detail_object as $wip_wo_routing_detail) {
-							 $class_third = 'wip_wo_routing_detail';
-							 $$class_third = &$wip_wo_routing_detail;
-							 ?>
-							 <tr class="wip_move_transaction<?php echo $detailCount ?>">
-								<td>    
-								 <ul class="inline_action">
-									<li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-									<li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-									<li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($wip_wo_routing_line->wip_wo_routing_line_id); ?>"></li>           
-									<li><?php echo form::hidden_field('wip_wo_header_id', $$class->wip_wo_header_id); ?></li>
-									<li><?php echo form::hidden_field('org_id', $$class->org_id); ?></li>
-									<li><?php echo form::hidden_field('transaction_type', $$class->transaction_type); ?></li>
-									<li><?php echo form::hidden_field('transaction_date', $$class->transaction_date); ?></li>
-									<li><?php echo form::hidden_field('wip_wo_routing_line_id', $$class_second->wip_wo_routing_line_id); ?></li>
-									<li><?php echo form::hidden_field('wip_wo_routing_detail_id', $$class_third->wip_wo_routing_detail_id); ?></li>
-								 </ul>
-								</td>
-								<td><?php form::number_field_wid2sr('routing_sequence'); ?></td>
-								<td><?php echo form::select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class_second->department_id, 'department_id', 1); ?></td>
-								<td><?php form::text_field_wid3sr('resource_sequence'); ?></td>
-								<td><?php echo form::select_field_from_object('resource_id', bom_resource::find_all(), 'bom_resource_id', 'resource', $$class_third->resource_id, '', 1, 'resource_id', '', 1); ?></td>
-								<td><?php form::number_field_wids('transaction_quantity'); ?></td>
-								<td><?php form::number_field_wid3sr('required_quantity'); ?></td>
-								<td><?php form::number_field_wid3sr('applied_quantity'); ?></td>
-								<td><?php form::number_field_wid('reason'); ?></td>
-								<td><?php form::number_field_wid('reference'); ?></td>
-								<td><?php echo form::text_field_dsr('wip_resource_transaction_id'); ?></td>
-							 </tr>
-							 <?php
-							 $detailCount++;
-							}
-							?>
-
-							<?php
-							$count = $count + 1;
+							$detailCount++;
 						 }
 						 ?>
+
 						</tbody>
 					 </table>
 

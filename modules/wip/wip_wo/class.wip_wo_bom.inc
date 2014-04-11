@@ -3,8 +3,12 @@
 class wip_wo_bom extends dbObject {
 
  protected static $table_name = "wip_wo_bom";
+ public static $primary_column = "wip_wo_bom_id";
+ public static $parent_primary_column = "wip_wo_header_id";
+ public static $key_column = 'bom_sequence';
+ public static $module = "wip";
 //  data base variables as stored database column name
- public static $field_array = [
+ public $field_a = [
 		 'wip_wo_bom_id',
 		 'wip_wo_header_id',
 		 'bom_sequence',
@@ -24,25 +28,16 @@ class wip_wo_bom extends dbObject {
 		 'last_update_date'
  ];
 //variables used for showing data
- public static $initial_search_array = [
- ];
- public static $column_array = [
- ];
- public static $account_array = [
- ];
- public static $checkbox_array = [
- ];
- public static $fields_inForm_notInDataBase = [
+ public $fields_inForm_notInDataBase = [
 		 "component_item_number",
 		 "component_description",
 		 "component_uom",
 		 'open_quantity'
  ];
- public static $fields_inHeader_needsToBeInserted_inPOST = [
-		  'wip_wo_header_id'
+ public $fields_inHeader_needsToBeInserted_inPOST = [
+		 'wip_wo_header_id'
  ];
- public static $base_encoded_array = [];
- public static $requiredField_array = [
+ public $requiredField = [
 		 'wip_wo_header_id',
 		 'bom_sequence',
 		 'routing_sequence',
@@ -50,7 +45,6 @@ class wip_wo_bom extends dbObject {
 		 'usage_basis',
 		 'usage_quantity'
  ];
- public static $primary_column = "wip_wo_bom_id";
  public $wip_wo_bom_id;
  public $wip_wo_header_id;
  public $bom_sequence;
@@ -83,8 +77,8 @@ class wip_wo_bom extends dbObject {
 	$result = self::find_by_sql($sql);
 	return $result;
  }
- 
-  public static function find_by_wipWoHeaderId_and_routingSequence($wip_wo_header_id, $routing_sequence) {
+
+ public static function find_by_wipWoHeaderId_and_routingSequence($wip_wo_header_id, $routing_sequence) {
 	global $db;
 	$sql = "SELECT * FROM " .
 					self::$table_name .
@@ -92,6 +86,18 @@ class wip_wo_bom extends dbObject {
 					 AND routing_sequence= '{$routing_sequence}' ";
 	$result = self::find_by_sql($sql);
 	return $result;
+ }
+
+ public function findBy_woHeaderId_routingSeq() {
+	$sql = " SELECT * FROM ";
+	$sql .= self::$table_name;
+	$sql .= " WHERE wip_wo_header_id = :wip_wo_header_id ";
+	$sql .= " AND routing_sequence = :routing_sequence ";
+
+	$param_a = ['wip_wo_header_id', 'routing_sequence'];
+	$value_a = ['wip_wo_header_id' => $this->wip_wo_header_id, 'routing_sequence' => $this->routing_sequence];
+	$result = $this->findBy_sql($sql, $param_a, $value_a);
+	return !empty($result) ? $result : false;
  }
 
 }

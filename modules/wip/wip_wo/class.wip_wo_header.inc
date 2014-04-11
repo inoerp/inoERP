@@ -3,8 +3,13 @@
 class wip_wo_header extends dbObject {
 
  protected static $table_name = "wip_wo_header";
+ public static $dependent_classes = ['wip_wo_routing_line', 'wip_wo_routing_detail', 'wip_wo_bom'];
+ public static $primary_column = "wip_wo_header_id";
+ public static $primary_column2 = "wo_number";
+ public static $key_column = 'item_id';
+ public static $module = "wip";
 //  data base variables as stored database column name
- public static $field_array = [
+ public $field_a = [
 		 'wip_wo_header_id',
 		 'item_id',
 		 'wo_number',
@@ -39,14 +44,7 @@ class wip_wo_header extends dbObject {
 		 'last_update_date'
  ];
 //variables used for showing data
- public static $initial_search_array = [
-		 'wip_wo_header_id',
-		 'item_id',
-		 'wo_number',
-		 'org_id',
-		 'start_date'
-		];
- public static $column_array = [
+ public $initial_search = [
 		 'wip_wo_header_id',
 		 'item_id',
 		 'wo_number',
@@ -56,22 +54,28 @@ class wip_wo_header extends dbObject {
 		 'start_date',
 		 'wo_status'
  ];
- public static $account_array = [
+ public $column = [
+		 'wip_wo_header_id',
+		 'item_id',
+		 'wo_number',
+		 'org_id',
+		 'wip_class',
+		 'wo_type',
+		 'start_date',
+		 'wo_status'
  ];
- public static $checkbox_array = [
+ public $checkbox = [
 		 'bom_exploded_cb',
 		 'routing_exploded_cb'
  ];
- public static $fields_inForm_notInDataBase = [
+ public $fields_inForm_notInDataBase = [
 		 'remaining_quantity',
 		 "item_number",
 		 "item_description",
 		 "uom",
+		 'processing_lt'
  ];
- public static $fields_inHeader_needsToBeInserted_inPOST = [
- ];
- public static $base_encoded_array = [];
- public static $requiredField_array = [
+ public $requiredField = [
 		 'item_id',
 		 'org_id',
 		 'wip_class',
@@ -80,8 +84,18 @@ class wip_wo_header extends dbObject {
 		 'quantity',
 		 'nettable_quantity'
  ];
- public static $primary_column = "wip_wo_header_id";
- public static $primary_column2 = "wo_number";
+ public $search = [
+		 '_show_update_path' => 1,
+		 '_show_view_path' => 1,
+		 '_extra_path' => array('form.php?class_name=wip_move_transaction&mode=9' => 'Move',
+				 'form.php?class_name=wip_materail_transaction&mode=9' => 'Material Tnx',
+				 'form.php?class_name=wip_resource_transaction&mode=9' => 'Resource Tnx',)
+ ];
+ public $pageTitle = " WO - WIP Work Order "; //page Title
+ public $option_lists = [
+		 'wip_wo_type' => 'WIP_WO_TYPE',
+		 'wip_wo_status' => 'WIP_WO_STATUS',
+ ];
  public $wip_wo_header_id;
  public $item_id;
  public $wo_number;
@@ -120,6 +134,7 @@ class wip_wo_header extends dbObject {
  public $item_number;
  public $item_description;
  public $uom;
+ public $processing_lt;
 
  Public static function wip_wo_type() {
 	$option_header = option_header::find_by_name('WIP_WO_TYPE');
@@ -145,24 +160,28 @@ class wip_wo_header extends dbObject {
 
  public function _after_save() {
 	global $db;
-//	echo '<br/> entered WO number is ' . $this->wo_number;
 	if ((!empty($this->wip_wo_header_id)) && empty($this->wo_number)) {
 	 $wip_wo_header_id = $this->wip_wo_header_id;
 	 $org_id = $this->org_id;
 	 $wo_number = $org_id . '-' . $wip_wo_header_id;
-//	 echo '<br/> New WO number is ' . $wo_number;
 	 $this->msg = $this->update_woNumber($wip_wo_header_id, $wo_number);
 	}
 
 	//copy the BOM
 	if ((!empty($this->item_id)) && (empty($this->bom_exploded_cb))) {
 	 $wip_wo_header_id1 = $this->wip_wo_header_id;
-	 $bomHeaderOfItem = bom_header::find_by_itemId($this->item_id);
-	 $bomHeaderId = $bomHeaderOfItem->bom_header_id;
-	 $bomLineOfItem = bom_line::find_all_by_bomHeaderId($bomHeaderId);
-	 foreach ($bomLineOfItem as $bom_line) {
-		$wip_wo_bom = new wip_wo_bom;
-		foreach (wip_wo_bom::$field_array as $key => $value) {
+	 $boh = new bom_header();
+	 $boh->item_id = $this->item_id;
+	 $boh_i = $boh->findBy_itemId();
+
+	 $bol = new bom_line();
+	 $bol->bom_header_id = $boh_i->bom_header_id;
+	 $bol_i = $bol->findBy_parentId($bol->bom_header_id);
+
+	 foreach ($bol_i as $bom_line) {
+		$wip_wo_bom = new wip_wo_bom();
+//		$routing_sequence_value = 10;
+		foreach ($wip_wo_bom->field_a as $key => $value) {
 		 if (!empty($bom_line->$value)) {
 			$wip_wo_bom->$value = $bom_line->$value;
 			if ($value == 'routing_sequence') {
@@ -178,24 +197,17 @@ class wip_wo_header extends dbObject {
 			$wip_wo_bom->$value = NULL;
 		 }
 		}
-
 		$wip_wo_bom->required_quantity = $bom_line->usage_quantity * $this->quantity;
 		$wip_wo_bom->wip_wo_header_id = $wip_wo_header_id1;
-		$time = time();
-		$wip_wo_bom->creation_date = strftime("%Y-%m-%d %H:%M:%S", $time);
-		$wip_wo_bom->created_by = $_SESSION['username'];
-		$wip_wo_bom->last_update_date = $wip_wo_bom->creation_date;
-		$wip_wo_bom->last_update_by = $wip_wo_bom->created_by;
-
-		$new_entry = $wip_wo_bom->save();
-	 }
-
-	 if ($new_entry == 1 or $new_entry == 2) {
-		echo "WO BOM is sucefully updated";
-		$this->bom_exploded_cb = 1;
-		$this->save();
-	 } else {
-		echo "WO BOM updation failed";
+		$wip_wo_bom->audit_trial();
+		try {
+		 $wip_wo_bom->save();
+		 $this->bom_exploded_cb = 1;
+		 $this->save();
+		 echo "<br> BOM is sucessfully copied";
+		} catch (Exception $e) {
+		 echo "<br> System failed to copy the BOM!" . __LINE__ . $e->getMessage();
+		}
 	 }
 	}
 
@@ -203,16 +215,20 @@ class wip_wo_header extends dbObject {
 	//copy the Routing
 	if ((!empty($this->item_id)) && (empty($this->routing_exploded_cb))) {
 	 $wip_wo_header_id2 = $this->wip_wo_header_id;
-	 $routingLineOfItem = bom_routing_line::find_by_itemId($this->item_id);
+	 $brh = new bom_routing_header();
+	 $brh->item_id = $this->item_id;
+	 $brh_i = $brh->findBy_itemId();
+	 $brl = new bom_routing_line();
+	 $brl_i = $brl->findBy_parentId($brh_i->bom_routing_header_id);
 
 	 $routingSeqCount = 0;
-	 foreach ($routingLineOfItem as $routing_line) {
+	 foreach ($brl_i as $routing_line) {
 		$routing_line_id = $routing_line->bom_routing_line_id;
-		$routingDetailValues = bom_routing_detail::find_by_routing_lineId($routing_line_id);
-
+		$brd = new bom_routing_detail();
+		$brd_i = $brd->findBy_parentId($routing_line_id);
 		//insert the routing line in WO_Routing_Line
 		$wip_wo_routing_line = new wip_wo_routing_line();
-		foreach (wip_wo_routing_line::$field_array as $key => $value) {
+		foreach ($wip_wo_routing_line->field_a as $key => $value) {
 		 if (!empty($routing_line->$value)) {
 			$wip_wo_routing_line->$value = $routing_line->$value;
 		 } else {
@@ -224,21 +240,14 @@ class wip_wo_header extends dbObject {
 		 $wip_wo_routing_line->queue_quantity = $this->quantity;
 		}
 		$routingSeqCount++;
-
 		$wip_wo_routing_line->wip_wo_header_id = $wip_wo_header_id2;
-		$time = time();
-		$wip_wo_routing_line->creation_date = strftime("%Y-%m-%d %H:%M:%S", $time);
-		$wip_wo_routing_line->created_by = $_SESSION['username'];
-		$wip_wo_routing_line->last_update_date = $wip_wo_routing_line->creation_date;
-		$wip_wo_routing_line->last_update_by = $wip_wo_routing_line->created_by;
-
-		$new_wo_routing_line_entry = $wip_wo_routing_line->save();
-		if ($new_wo_routing_line_entry == 1 OR $new_wo_routing_line_entry == 2) {
-		 //insert the routing detail Lines
-
-		 foreach ($routingDetailValues as $routing_details) {
+		$wip_wo_routing_line->audit_trial();
+		try {
+		 $wip_wo_routing_line->save();
+		 echo "<br> Routing is sucessfully copied !";
+		 foreach ($brd_i as $routing_details) {
 			$wip_wo_routing_detail = new wip_wo_routing_detail();
-			foreach (wip_wo_routing_detail::$field_array as $key => $value) {
+			foreach ($brd->field_a as $key => $value) {
 			 if (!empty($routing_details->$value)) {
 				$wip_wo_routing_detail->$value = $routing_details->$value;
 			 } else {
@@ -246,47 +255,38 @@ class wip_wo_header extends dbObject {
 			 }
 			}//end of for detail line value assignment
 
-			$wip_wo_routing_detail->required_quantity = $this->quantity * $routing_details->usage;
+			$wip_wo_routing_detail->required_quantity = $this->quantity * $routing_details->resource_usage;
 			$wip_wo_routing_detail->wip_wo_header_id = $wip_wo_header_id2;
 			$wip_wo_routing_detail->wip_wo_routing_line_id = $wip_wo_routing_line->wip_wo_routing_line_id;
-			$time = time();
-			$wip_wo_routing_detail->creation_date = strftime("%Y-%m-%d %H:%M:%S", $time);
-			$wip_wo_routing_detail->created_by = $_SESSION['username'];
-			$wip_wo_routing_detail->last_update_date = $wip_wo_routing_line->creation_date;
-			$wip_wo_routing_detail->last_update_by = $wip_wo_routing_line->created_by;
-
-			$new_wo_routing_detail_entry = $wip_wo_routing_detail->save();
+			$wip_wo_routing_detail->audit_trial();
+			try {
+			 $wip_wo_routing_detail->save();
+			 echo "<br> Routing details are sucessfully copied !";
+			} catch (Exception $e) {
+			 echo "<br> System failed to copy the Routing Details!" . __LINE__ . $e->getMessage();
+			}
 		 }
-		}//end of routing detail insertion
+		} catch (Exception $e) {
+		 echo "<br> System failed to copy the Routing!" . __LINE__ . $e->getMessage();
+		}
 	 }//end of each routing line insertion
-
-	 if ($new_wo_routing_detail_entry == 1 or $new_wo_routing_detail_entry == 2) {
-		echo "WO Routing is sucefully updated";
-		$this->routing_exploded_cb = 1;
-		$this->save();
-	 } else {
-		echo "WO Routing updation failed";
-	 }
+	 $this->routing_exploded_cb = 1;
+	 $this->save();
 	}//end of routing copy
-	//end of Copy Routing
-
-	return $this->msg;
  }
 
  private function update_woNumber($wip_wo_header_id, $wo_number) {
-	global $db;
-
+	global $dbc;
 	$sql = " UPDATE " . self::$table_name;
 	$sql .= " SET wo_number = '{$wo_number}'  ";
-	$sql .= " WHERE wip_wo_header_id = $wip_wo_header_id  ";
-	if ($db->query($sql)) {
-	 $this->msg = 1;
-	 $this->wo_number = $wo_number;
-	} else {
-	 $this->msg = 0;
+	$sql .= " WHERE wip_wo_header_id =  '{$wip_wo_header_id }' ";
+	try {
+	 $dbc->ddlexecute($sql);
+	 return true;
+	} catch (Exception $e) {
+	 echo "<br> WIP WO Number Update Failed" . $e->getMessage();
+	 return false;
 	}
-
-	return $this->msg;
  }
 
  public function _before_showing() {

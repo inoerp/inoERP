@@ -3,8 +3,12 @@
 class wip_resource_transaction extends dbObject {
 
  protected static $table_name = "wip_resource_transaction";
+ public static $dependent_classes = ['wip_wo_bom', 'wip_wo_routing_line', 'wip_wo_routing_detail'];
+ public static $primary_column = "wip_resource_transaction_id";
+ public static $key_column = 'wip_wo_routing_detail_id';
+ public static $module = "wip";
 //  data base variables as stored database column name
- public static $field_array = [
+ public $field_a = [
 		 'wip_resource_transaction_id',
 		 'wip_wo_routing_line_id',
 		 'wip_wo_routing_detail_id',
@@ -24,7 +28,7 @@ class wip_resource_transaction extends dbObject {
 		 'last_update_date'
  ];
 //variables used for showing data
- public static $initial_search_array = [
+ public $initial_search = [
 		 'wip_resource_transaction_id',
 		 'wip_wo_header_id',
 		 'org_id',
@@ -32,7 +36,7 @@ class wip_resource_transaction extends dbObject {
 		 'item_number',
 		 'item_id'
  ];
- public static $column_array = [
+ public $column = [
 		 'wip_resource_transaction_id',
 		 'wip_wo_header_id',
 		 'org_id',
@@ -42,26 +46,25 @@ class wip_resource_transaction extends dbObject {
 		 'transaction_date',
 		 'transaction_quantity'
  ];
- public static $account_array = [
+ public $account = [
 		 'scrap_account_id'
  ];
- public static $checkbox_array = [
- ];
- public static $fields_inForm_notInDataBase = [
+ public $fields_inForm_notInDataBase = [
 		 'remaining_quantity',
+		 'item_id',
+		 'item_number',
 		 "item_description",
 		 "uom",
 		 'available_quantity',
 		 'total_quantity',
 		 'department_id'
  ];
- public static $fields_inHeader_needsToBeInserted_inPOST = [
+ public $fields_inHeader_needsToBeInserted_inPOST = [
 		 'org_id',
 		 'transaction_type',
 		 'transaction_date'
  ];
- public static $base_encoded_array = [];
- public static $requiredField_array = [
+ public $requiredField = [
 		 'wip_wo_routing_line_id',
 		 'wip_wo_routing_detail_id',
 		 'wip_wo_header_id',
@@ -70,13 +73,22 @@ class wip_resource_transaction extends dbObject {
 		 'transaction_date',
 		 'transaction_quantity'
  ];
- public static $primary_column = "wip_resource_transaction_id";
+ 
+  public $search = [
+		 '_show_update_path' => 1,
+		 '_show_view_path' => 1,
+ ];
+ public $pageTitle = " Resource Trnx - WIP Work Order  Resource Transaction "; //page Title
+ public $option_lists = [
+//		 'wip_wo_type' => 'WIP_WO_TYPE',
+//		 'wip_wo_status' => 'WIP_WO_STATUS',
+ ];
+ 
  public $wip_resource_transaction_id;
  public $wip_wo_header_id;
  public $wip_wo_routing_line_id;
  public $wip_wo_routing_detail_id;
  public $org_id;
-
  public $transaction_type;
  public $transaction_date;
  public $transaction_quantity;
@@ -97,7 +109,7 @@ class wip_resource_transaction extends dbObject {
  public $total_quantity;
  public $available_quantity;
  public $department_id;
-  public $wo_number;
+ public $wo_number;
  public $item_number;
  public $item_id;
  public $routing_sequence;
@@ -112,15 +124,18 @@ class wip_resource_transaction extends dbObject {
 	global $db;
 	//Insert in WIP WO BOM - item issues for operational pull
 	if ((!empty($this->wip_resource_transaction_id)) && (!(empty($this->wip_wo_routing_detail_id))) && (!(empty($this->transaction_quantity)))) {
-	 
-	 $wip_wo_routing_detail = wip_wo_routing_detail::find_by_id($this->wip_wo_routing_detail_id);
-	 $applied_quantity = $wip_wo_routing_detail->applied_quantity;
-	 $wip_wo_routing_detail->applied_quantity = $applied_quantity + $this->transaction_quantity;
-//	 echo '<pre>';
-//	 print_r($wip_wo_routing_detail);
-	 $this->msg = $wip_wo_routing_detail->save();
- }
- return $this->msg;
+	 $wip_wo_routing_detail = new wip_wo_routing_detail();
+	 $wip_wo_routing_detail_i = $wip_wo_routing_detail->findBy_id($this->wip_wo_routing_detail_id);
+	 $wip_wo_routing_detail->wip_wo_routing_detail_id = $wip_wo_routing_detail_i->wip_wo_routing_detail_id;
+	 $wip_wo_routing_detail->applied_quantity = $wip_wo_routing_detail_i->applied_quantity + $this->transaction_quantity;
+	 try {
+		$wip_wo_routing_detail->audit_trial();
+		$wip_wo_routing_detail->save();
+		echo "<br> The resource quantity is sucessfully applied ";
+	 } catch (Exception $e) {
+		echo "<br> Resource quantity application " . $e->getMessage();
+	 }
+	}
  }
 
  public function save() {
@@ -137,7 +152,7 @@ class wip_resource_transaction extends dbObject {
 	
  }
 
- public function _before_submit() {
+ public function _before_save() {
 	
  }
 

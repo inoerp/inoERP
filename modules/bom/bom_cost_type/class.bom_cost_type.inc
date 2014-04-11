@@ -9,6 +9,7 @@ class bom_cost_type extends dbObject {
 //  data base variables as stored database column name
  public $field_a = [
 		 'bom_cost_type_id',
+		 'cost_type_code',
 		 'cost_type',
 		 'description',
 		 'org_id',
@@ -24,12 +25,14 @@ class bom_cost_type extends dbObject {
 //variables used for showing data
  public $initial_search = [
 		 'bom_cost_type_id',
+		 'cost_type_code',
 		 'cost_type',
 		 'description',
 		 'org_id'
  ];
  public $column = [
 		 'bom_cost_type_id',
+		 'cost_type_code',
 		 'cost_type',
 		 'description',
 		 'org_id',
@@ -41,13 +44,13 @@ class bom_cost_type extends dbObject {
  ];
  public $requiredField = [
 		 'cost_type',
+		 'cost_type_code',
 		 'description',
 		 'org_id',
 		 'multi_org_cb',
  ];
  public $search = [
 		 '_show_update_path' => 1,
-		 '_update_action_meassge' => 'Update',
 		 '_show_view_path' => 1,
  ];
  public $pageTitle = " Cost Type - Create & Update BOM Cost Types "; //page Title
@@ -55,6 +58,7 @@ class bom_cost_type extends dbObject {
 //		 'calendar_option_line_code' => 'GL_CALENDAR_NAME',
  ]; //list of search fields which have options
  public $bom_cost_type_id;
+ public $cost_type_code;
  public $cost_type;
  public $description;
  public $org_id;

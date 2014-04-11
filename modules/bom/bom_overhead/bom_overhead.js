@@ -27,6 +27,8 @@ setValFromSelectPage.prototype.setVal = function() {
  if (overhead) {
 	$("#overhead").val(overhead);
  }
+ 
+
 };
 
 $(document).ready(function() {

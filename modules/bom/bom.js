@@ -25,6 +25,8 @@ setValFromSelectPage.prototype.setVal = function() {
 	}
  });
 
+  localStorage.removeItem("row_class");
+ localStorage.removeItem("field_class");
 };
 
 $(document).ready(function() {

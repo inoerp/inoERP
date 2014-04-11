@@ -23,8 +23,11 @@ setValFromSelectPage.prototype.setVal = function() {
  });
 
  if (bom_routing_header_id) {
-	$('#bom_routing_header_id').val(combination);
+	$('#bom_routing_header_id').val(bom_routing_header_id);
  }
+
+ localStorage.removeItem("row_class");
+ localStorage.removeItem("field_class");
 };
 
 
@@ -46,8 +49,8 @@ $(document).ready(function() {
  if (!($('.detail_number:first').val())) {
 	$('.detail_number:first').val('10');
  }
- 
-  //selecting Header Id
+
+ //selecting Header Id
  $(".bom_routing_header_id.select_popup").on("click", function() {
 	void window.open('select.php?class_name=bom_routing_header', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
@@ -60,9 +63,8 @@ $(document).ready(function() {
 
  //Get the bom_routing_id on find button click
  $('#form_header a.show').click(function() {
-	var bom_routingId = $('#bom_routing_header_id').val();
-//$(this).prop('href','bom_routing.php?bom_routing_header_id=' + bom_routingId);
-	$(this).attr('href', 'bom_routing.php?bom_routing_header_id=' + bom_routingId);
+	var bom_routing_header_id = $('#bom_routing_header_id').val();
+	$(this).attr('href', modepath() + 'bom_routing_header_id=' + bom_routing_header_id);
  });
 
 //add or show linw details

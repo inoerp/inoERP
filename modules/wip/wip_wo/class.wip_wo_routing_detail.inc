@@ -3,15 +3,19 @@
 class wip_wo_routing_detail extends dbObject {
 
  protected static $table_name = "wip_wo_routing_detail";
- public static $field_array = [
+  public static $primary_column = "wip_wo_routing_detail_id";
+ public static $key_column = 'resource_sequence';
+ public static $module = "wip";
+ 
+ public $field_a = [
 		 'wip_wo_routing_detail_id',
 		 'wip_wo_header_id',
 		 'wip_wo_routing_line_id',
 		 'resource_sequence',
 		 'charge_basis',
 		 'resource_id',
-		 'usage',
-		 'schedule',
+		 'resource_usage',
+		 'resource_schedule',
 		 'assigned_units',
 		 'charge_type',
 		 'standard_rate_cb',
@@ -22,43 +26,34 @@ class wip_wo_routing_detail extends dbObject {
 		 'last_update_by',
 		 'last_update_date'
  ];
- public static $initial_search_array = [
- ];
- public static $column_array = [
- ];
- public static $account_array = [
- ];
- public static $checkbox_array = [
+
+ public $checkbox = [
 		 'twenty_four_hr_cb',
 		 'standard_rate_cb'
  ];
- public static $addressField_array = [
- ];
- public static $fields_inForm_notInDataBase = [
- ];
- public static $fields_inHeader_needsToBeInserted_inPOST = [
+
+ public $fields_inHeader_needsToBeInserted_inPOST = [
 		 'wip_wo_header_id',
 		 'wip_wo_routing_line_id'
  ];
- public static $base_encoded_array = [];
- public static $requiredField_array = [
+ 
+ public $requiredField = [
 		 'wip_wo_header_id',
+		 'resource_sequence',
 		 'wip_wo_routing_line_id',
 		 'resource_sequence',
 		 'charge_basis',
 		 'resource_id'
  ];
- public static $otherField_array = [
- ];
- public static $primary_column = "wip_wo_routing_detail_id";
+
  public $wip_wo_routing_detail_id;
  public $wip_wo_routing_line_id;
  public $wip_wo_header_id;
  public $resource_sequence;
  public $charge_basis;
  public $resource_id;
- public $usage;
- public $schedule;
+ public $resource_usage;
+ public $resource_schedule;
  public $assigned_units;
  public $twenty_four_hr_cb;
  public $charge_type;
