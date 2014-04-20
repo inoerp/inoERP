@@ -64,13 +64,29 @@ class cst_item_cost_line extends dbObject {
 	
  }
 
+ public function findBy_headerId_elementId() {
+	$sql = " SELECT * FROM  ";
+	$sql .= self::$table_name;
+	$sql .= " WHERE cst_item_cost_header_id =:cst_item_cost_header_id "
+					. " AND cost_element_type = :cost_element_type "
+					. " AND cost_element_id = :cost_element_id ";
+	$sql .= " LIMIT 1 ";
+
+	$param_a = ['cst_item_cost_header_id', 'cost_element_id', 'cost_element_type'];
+	$value_a = ['cst_item_cost_header_id' => $this->cst_item_cost_header_id,
+			'cost_element_type' => $this->cost_element_type,
+			'cost_element_id' => $this->cost_element_id
+	];
+	$result = $this->findBy_sql($sql, $param_a, $value_a);
+	return !empty($result) ? array_pop($result) : false;
+ }
+
  Public static function cost_element_types() {
 	$option_header = option_header::find_by_name('CST_COST_ELEMENT_TYPE');
 	$lines = option_line::find_by_option_id($option_header->option_header_id);
 	return $lines;
  }
 
- 
 }
 
 //end of cst_item_cost_line class

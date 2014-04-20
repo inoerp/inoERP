@@ -99,7 +99,7 @@ $(document).ready(function() {
  });
 
 
- deleteData('form.php?class_name=item_cost_header&line_class_name=item_cost_line&detail_class_name=item_cost_detail');
+ deleteData('form.php?class_name=cst_item_cost_header&line_class_name=cst_item_cost_line');
 
 //remove po lines
  $("#remove_row").click(function() {
@@ -110,9 +110,9 @@ $(document).ready(function() {
 
  //context menu
  var classContextMenu = new contextMenuMain();
- classContextMenu.docHedaderId = 'item_cost_header_id';
- classContextMenu.docLineId = 'item_cost_line_id';
- classContextMenu.btn1DivId = 'item_cost_header';
+ classContextMenu.docHedaderId = 'cst_item_cost_header_id';
+ classContextMenu.docLineId = 'cst_item_cost_line_id';
+ classContextMenu.btn1DivId = 'cst_item_cost_header';
  classContextMenu.btn2DivId = 'form_line';
  classContextMenu.trClass = 'item_cost_line';
  classContextMenu.tbodyClass = 'form_data_line_tbody';
@@ -142,7 +142,7 @@ $(document).ready(function() {
 	 localStorage.removeItem("reset_link");
 	 localStorage.setItem("reset_link", link);
 	 localStorage.removeItem("jsfile");
-	 localStorage.setItem("jsfile", "modules/ar/receipt/extra_item_cost.js");
+//	 localStorage.setItem("jsfile", "modules/ar/receipt/extra_item_cost.js");
 	 void window.open(link, '_blank',
 					 'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
 	 return false;

@@ -7,6 +7,7 @@ class cst_item_cost_header extends dbObject {
  public static $primary_column = "cst_item_cost_header_id";
  public static $key_column = 'item_id';
  public static $module = "cst"; //same as gl_journal_source
+// public static $js_fileName = 'modules/cst/item_cost/item_cost.js';
 // public static $gl_journal_category = "AR_RECEIPTS";
  public $field_a = [
 		 'cst_item_cost_header_id',
@@ -23,14 +24,13 @@ class cst_item_cost_header extends dbObject {
 		 'last_update_date'
  ];
  public $initial_search = [
-		 'cst_item_cost_header_id',
-		 'bom_cost_type',
 		 'item_id',
 		 'based_on_rollup_cb',
 		 'include_in_rollup_cb',
  ];
  public $column = [
 		 'cst_item_cost_header_id',
+		 'org_id',
 		 'bom_cost_type',
 		 'item_id',
 		 'based_on_rollup_cb',
@@ -65,6 +65,24 @@ class cst_item_cost_header extends dbObject {
 //		 'receipt_types' => 'AR_RECEIPT_TYPE',
 //		 'po_status' => 'PO_STATUS',
  ];
+ public $search_functions = [
+		 'Cost Type' => 'search_bom_cost_type',
+		 'Item From' => 'search_item_number_from',
+		 'Item To' => 'search_item_number_to',
+ ];
+ public $prg_standard_cost_update_parameters = [
+		 'Organization' => 'search_org_name',
+		 'Cost Type' => 'search_bom_cost_type',
+		 'Item Number From' => 'search_item_number_from',
+		 'Item Number To' => 'search_item_number_to',
+		 'Item Id From' => 'search_item_id_from',
+		 'Item Id To' => 'search_item_id_to'
+ ];
+ public $prg_standard_cost_update_details = [
+		 'name' => 'Standard Cost Update',
+		 'description' => 'Update Frozen Cost from a different cost type',
+		 'Item To' => 'search_item_number_to'
+ ];
  public $cst_item_cost_header_id;
  public $bom_cost_type;
  public $org_id;
@@ -81,6 +99,78 @@ class cst_item_cost_header extends dbObject {
  public $item_description;
  public $uom;
  public $action;
+ public $message = '';
+ public $parameters;
+
+ Public static function transaction_action() {
+	$option_header = option_header::find_by_name('CST_COST_ACTION');
+	$lines = option_line::find_by_option_id($option_header->option_header_id);
+	return $lines;
+ }
+
+ public function search_bom_cost_type() {
+	$stmt = '';
+	$stmt .= '<select id="bom_cost_type" class="select bom_cost_type" name="bom_cost_type" style="background-color: pink;">';
+	$stmt .= '<option value=""></option>';
+	$stmt .= '<option value="FROZEN">Frozen</option>
+ <option value="PENDING">Pending</option>
+<option value="GLOBAL">Global</option>
+<option value="FUTURE">Future</option>
+<option value="AVERAGE">Average</option>
+</select>';
+	return $stmt;
+ }
+
+ public function search_org_name() {
+	global $f;
+	$stmt = $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', '', 'org_id', '', 1);
+	return $stmt;
+ }
+
+ public function search_item_id_from() {
+	$stmt = '<input id="item_id_from" class="textfield select_item_id item_id_from" '
+					. 'type="text" title="" placeholder="From Item Id" size="20" maxlength="256" value="" '
+					. 'name="from_item_id[]" >';
+	return $stmt;
+ }
+
+ public function search_item_id_to() {
+	$stmt = '<input id="item_id_to" class="textfield select_item_id item_id_to" '
+					. 'type="text" title="" placeholder="To Item Id" size="20" maxlength="256" value="" '
+					. 'name="to_item_id[]" >';
+	return $stmt;
+ }
+
+ public function search_item_number_from() {
+	$stmt = '<input id="item_number_from" class="textfield select_item_number item_number_from" '
+					. 'type="text" title="" placeholder="From Item" size="20" maxlength="256" value="" '
+					. 'name="from_item_number[]" >';
+	return $stmt;
+ }
+
+ public function search_item_number_to() {
+	$stmt = '<input id="item_number_to" class="textfield select_item_number item_number_to" '
+					. 'type="text" title="" placeholder="To Item" size="20" maxlength="256" value="" '
+					. 'name="to_item_number[]" >';
+	return $stmt;
+ }
+
+ public function findBy_ItemId_CostType() {
+	$sql = " SELECT * FROM  ";
+	$sql .= self::$table_name;
+	$sql .= " WHERE bom_cost_type =:bom_cost_type AND item_id = :item_id ";
+	$sql .= " LIMIT 1 ";
+
+	$param_a = ['bom_cost_type', 'item_id'];
+	$value_a = ['bom_cost_type' => $this->bom_cost_type, 'item_id' => $this->item_id];
+	$result = $this->findBy_sql($sql, $param_a, $value_a);
+	return !empty($result) ? array_pop($result) : false;
+ }
+
+ public function find_frozen_cost() {
+	$this->bom_cost_type = 'FROZEN';
+	return $this->findBy_ItemId_CostType();
+ }
 
  private function _update_journalHeaderId() {
 	$arth = new cst_item_cost_header();
@@ -94,8 +184,16 @@ class cst_item_cost_header extends dbObject {
  }
 
  public function _before_save() {
-	if (($this->action == 'confirm_receipt')) {
-	 $this->_confirm_receipt();
+
+	/* Check the cost type - If its FROZEN then show error message */
+	if ((isset($this->bom_cost_type)) && ($this->bom_cost_type == 'FROZEN')) {
+	 echo " You can't create/update item cost for frozen cost type. <br>"
+	 . " Create Item cost in pending(or any user defined cost type)and then run standard cost update. ";
+	 return -99;
+	}
+	if ((!empty($this->cst_item_cost_header_id)) && ($this->action == 'COST_UPDATE') && (($this->bom_cost_type != 'FROZEN'))) {
+	 pa($this);
+	 $this->_update_standard_cost();
 	 return 10;
 	}
 	if ((!empty($this->cst_item_cost_header_id)) && ($this->action === 'create_accounting')) {
@@ -139,65 +237,170 @@ class cst_item_cost_header extends dbObject {
 	}
  }
 
- private function _confirm_receipt() {
-	//find all interface lines group by customer name & invoice number
-	//create interface headers for each customer
-	echo "<br> in confirm receipt";
-	$ar_int = new cst_item_cost_interface();
-	$all_lines = $ar_int->findAll_groupByCustomer();
-	foreach ($all_lines as $ar_customer_site) {
-	 //create a new receipt header
-	 $arrh = new $this;
-	 $total_header_amount = 0;
-	 $ar_int_i = $ar_int->findBy_id($ar_customer_site[0]);
-	 foreach ($arrh->field_a as $key => $value) {
-		$arrh->$value = isset($ar_int_i->$value) ? $ar_int_i->$value : null;
+ public function _after_save() {
+	
+ }
+
+ private function _update_standard_cost() {
+	/*
+	 * 1. First check if frozen cost exists for the item_id 
+	 * 2. Copy the header and create/update frozen
+	 * 3. Copy all the line and update with the new frozen cost header id
+	 */
+	$this->findBy_id($this->cst_item_cost_header_id);
+	$ich = new cst_item_cost_header();
+	foreach ($this->field_a as $key => $value) {
+	 $ich->$value = $this->$value;
+	}
+	$existing_fozen_cost = $this->find_frozen_cost();
+	if (!empty($existing_fozen_cost)) {
+	 $ich->cst_item_cost_header_id = $existing_fozen_cost->cst_item_cost_header_id;
+	} else {
+	 $ich->cst_item_cost_header_id = null;
+	}
+	$ich->bom_cost_type = 'FROZEN';
+	$ich->audit_trial();
+	try {
+	 $ich->save();
+	 if (!empty($ich->cst_item_cost_header_id)) {
+		$this->message .=" <br>Item cost heade is sucessfully updated for cst_item_cost_header_id " . $ich->cst_item_cost_header_id;
+		//save cost line
+		$this->_update_standard_cost_lines($ich);
 	 }
-	 $arrh->header_amount = $ar_int_i->amount;
+	} catch (Excption $e) {
+	 echo "<br>Saving frozen cost header failed!" . $e->getMessage();
+	}
+ }
+
+ private function _update_standard_cost_lines(&$header_obj) {
+	$icl = new cst_item_cost_line();
+	$all_cost_lines = $icl->findBy_parentId($this->cst_item_cost_header_id);
+	if (empty($all_cost_lines)) {
+	 $this->message .= "<br/>Leaving Standard cost update as no cost line exists";
+	 return;
+	}
+	foreach ($all_cost_lines as $cost_line) {
+	 foreach ($icl->field_a as $key => $value) {
+		$icl->$value = $cost_line->$value;
+	 }
+	 //check if line already exists by searching cost_element_id and header_id
+	 $icl->cst_item_cost_header_id = $header_obj->cst_item_cost_header_id;
+	 $icl->cost_element_id = $cost_line->cost_element_id;
+	 $icl->cost_element_type = $cost_line->cost_element_type;
+	 $existing_line = $icl->findBy_headerId_elementId();
+	 if (!empty($existing_line)) {
+		$icl->cst_item_cost_line_id = $existing_line->cst_item_cost_line_id;
+	 } else {
+		$icl->cst_item_cost_line_id = null;
+	 }
 	 try {
-		$arrh->audit_trial();
-		$arrh->save();
-		$arrh->_after_save();
-		foreach ($ar_customer_site as $site_key => $ar_int_id) {
-		 $arrl = new cst_item_cost_line();
-		 $ar_int_j = $ar_int->findBy_id($ar_int_id);
-		 foreach ($arrl->field_a as $arrl_key => $value) {
-			$arrl->$value = isset($ar_int_j->$value) ? $ar_int_j->$value : null;
-		 }
-		 $arrl->cst_item_cost_header_id = $arrh->cst_item_cost_header_id;
-		 $arrl->line_number = $site_key + 1;
-		 $arrl->amount = $ar_int_j->amount;
-		 $total_header_amount += $ar_int_j->amount;
-		 try {
-			$arrl->audit_trial();
-			$arrl->save();
-			$arrl->_after_save();
-			$ar_int->cst_item_cost_interface_id = $ar_int_id;
-			try {
-			 $ar_int->delete();
-			} catch (Exception $e) {
-			 echo "<br>Deleting Interface Line Failed" . $e->getMessage();
-			}
-		 } catch (Exception $e) {
-			echo "<br>Creating receipt line failed" . $e->getMessage();
-		 }
-		}
-		//update the header amount for receipt
-		$arrh->header_amount = $total_header_amount;
-		try {
-		 $arrh->audit_trial();
-		 $arrh->save();
-		} catch (Exception $e) {
-		 echo "<br>Updating receipt amount header failed" . $e->getMessage();
-		}
+		$icl->audit_trial();
+		$icl->save();
 	 } catch (Exception $e) {
-		echo "<br>Creating receipt header failed" . $e->getMessage();
+		echo "<br>Saving frozen cost line failed!" . $e->getMessage();
 	 }
 	}
  }
 
- public function _after_save() {
-	
+ public function prg_standard_cost_update($parameters, $program_id=null) {
+	global $p;
+	$p = new sys_program();
+	if(!empty($program_id)){
+	 $p->findBy_id($program_id);
+	}else{
+	 return ;
+	}
+
+	if (!empty($parameters['org_id'][0])) {
+	 $org_id = $parameters['org_id'][0];
+	 $this->message .= '<br> Entered Org Id is : ' . $org_id;
+	} else {
+	 $this->message .= '<br> Error! : No org id found @ cst_item_cost_header ' . __LINE__;
+	 $p->message = $this->message;
+	 $p->status = 'Error';
+	 $p->save();
+	 return -99;
+	}
+
+	if (!empty($parameters['bom_cost_type'][0])) {
+	 $bom_cost_type = $parameters['bom_cost_type'][0];
+	 $this->message .= '<br> Entered BOM Cost Type is : ' . $bom_cost_type;
+	} else {
+	 $this->message .= '<br> Error! : No BOM Cost Type is found @ cst_item_cost_header ' . __LINE__;
+	 $p->message = $this->message;
+	 $p->status = 'Error';
+	 $p->save();
+	 return -99;
+	}
+
+	if (isset($parameters['from_item_id'][0])) {
+	 $this->message .= "<br/>Using Standard cost update by Item Id ";
+	 $from_item_id = $parameters['from_item_id'][0];
+	 if (!empty($parameters['to_item_id'][0])) {
+		$to_item_id = $parameters['to_item_id'][0];
+	 } else {
+		$to_item_id = $from_item_id;
+	 }
+	 $item = new item();
+	 $item_range = $item->findBy_itemIdRange($from_item_id, $to_item_id);
+	 foreach ($item_range as $items) {
+		$ich = new cst_item_cost_header();
+		$ich->item_id = $items->item_id;
+		$ich->bom_cost_type = $bom_cost_type;
+		$ich_i = $ich->findBy_ItemId_CostType();
+		if (!empty($ich_i)) {
+		 $ich->cst_item_cost_header_id = $ich_i->cst_item_cost_header_id;
+		 try {
+			$ich->_update_standard_cost();
+			$this->message .= "<br/>Standard cost update is sucessfully updated for item_id - " . $ich->item_id .
+							' bom_cost_type : ' . $ich->bom_cost_type;
+		 } catch (Exception $e) {
+			$this->message .= "<br/>Standard cost update fialed for Item id " . $ich->item_id . $e->getMessage();
+		 }
+		} else {
+		 $this->message .= "<br/>Leaving Standard cost update as no cost exists item_id - " . $ich->item_id .
+						 ' bom_cost_type : ' . $ich->bom_cost_type;
+		}
+	 }
+	 $p->message = $this->message;
+	 $p->status = 'Completed';
+	 $p->save();
+	 return 10;
+	}
+
+	if (isset($parameters['from_item_number'][0])) {
+	 $from_item_number = $parameters['from_item_number'][0];
+	 if (!empty($parameters['to_item_number'][0])) {
+		$to_item_number = $parameters['to_item_number'][0];
+	 } else {
+		$to_item_number = $from_item_number;
+	 }
+	 $item = new item();
+	 $item_range = $item->findBy_itemNumberRange_OrgId($from_item_number, $to_item_number, $org_id);
+
+	 foreach ($item_range as $items) {
+		$ich = new cst_item_cost_header();
+		$ich->item_id = $items->item_id;
+		$ich->bom_cost_type = $bom_cost_type;
+		$ich_i = $ich->findBy_ItemId_CostType();
+		if (!empty($ich_i)) {
+		 $ich->cst_item_cost_header_id = $ich_i->cst_item_cost_header_id;
+		 try {
+			$ich->_update_standard_cost();
+		 } catch (Exception $e) {
+			$this->message .= "<br/>Standard cost update fialed for Item id " . $ich->item_id . $e->getMessage();
+		 }
+		} else {
+		 $this->message .= "<br/>Leaving Standard cost update as no cost exists";
+		}
+	 }
+	 $p->message = $this->message;
+	 $p->status = 'Completed';
+	 $p->save();
+	 return 10;
+	}
+	echo $this->message;
+	return;
  }
 
  private function _save_journal_header() {
@@ -291,148 +494,6 @@ class cst_item_cost_header extends dbObject {
 	}
  }
 
- public static function instantiate_extra_fields(&$array_of_objects) {
-	if (count($array_of_objects) > 0) {
-	 foreach ($array_of_objects as &$this_object) {
-		$supplier_details = supplier::find_by_id($this_object->ar_customer_id);
-		$this_object->supplier_name = $supplier_details->supplier_name;
-		$this_object->customer_number = $supplier_details->customer_number;
-		$ar_customer_site_details = ar_customer_site::find_by_id($this_object->ar_customer_site_id);
-		$this_object->ar_customer_site_name = $ar_customer_site_details->ar_customer_site_name;
-	 }
-	}
-	return $array_of_objects;
- }
-
- Public static function receipt_types() {
-	$option_header = option_header::find_by_name('AR_RECEIPT_TYPE');
-	$transaction_types = option_line::find_by_option_id($option_header->option_header_id);
-	return $transaction_types;
- }
-
- /* 1. Reverse the journal header
-	* 2. Update the PO lines
-	* 3. Update the transaction header & line 
-	*/
-
- private function _cancel_transaction() {
-	if (empty($this->cst_item_cost_header_id)) {
-	 echo "<br>Cancellation failed!. No transaction header id found.";
-	}
-	if (!empty($this->gl_journal_header_id)) {
-	 $gjh = new gl_journal_header();
-	 $gjh_i = $gjh->findBy_id($this->gl_journal_header_id);
-	 foreach ($gjh_i as $key => $value) {
-		$gjh->$key = $value;
-	 }
-	 $gjh->status = 'REVERSED';
-	 try {
-		$gjh->_before_save();
-	 } catch (Exception $e) {
-		echo "Journal Reversal Failed!. Error @ class_cst_item_cost_header _cancel_transaction" . $e->getMessage();
-		return;
-	 }
-	}
-
-	//update PO & invoice
-	try {
-	 $this->_cancel_transaction_poInv_lines();
-	 try {
-		$this->_cancel_transaction_header();
-	 } catch (Exception $e) {
-		echo "PO Header Update Failed!. Error @ class_cst_item_cost_header _cancel_transaction" . $e->getMessage();
-		return;
-	 }
-	} catch (Exception $e) {
-	 echo "PO Detail Update Failed!. Error @ class_cst_item_cost_header _cancel_transaction" . $e->getMessage();
-	 return;
-	}
- }
-
- private function _cancel_transaction_header() {
-	$new_apth = new cst_item_cost_header();
-	$new_apth_i = $new_apth->findBy_id($this->cst_item_cost_header_id);
-	$new_apth->approval_status = 'CANCELLED';
-	$new_apth->header_amount = '0.0';
-	$new_apth->cst_item_cost_header_id = $new_apth_i->cst_item_cost_header_id;
-	$new_apth->audit_trial();
-	pa($new_apth);
-	try {
-	 $new_apth->save();
-	} catch (Exception $e) {
-	 echo "AR Transaction Lines Update Failed!. Error @ class_cst_item_cost_header _transaction_cancell_poInv_lines " . $e->getMessage();
-	 return;
-	}
- }
-
- private function _cancel_transaction_poInv_lines() {
-	$aptl = new cst_item_cost_line();
-	$all_lines = $aptl->findBy_parentId($this->cst_item_cost_header_id);
-	foreach ($all_lines as $lines) {
-
-	 if (!empty($lines->po_detail_id)) {
-		$po_detail = new po_detail();
-		$po_detail_i = $po_detail->findBy_id($lines->po_detail_id);
-		$po_detail->po_detail_id = $po_detail_i->po_detail_id;
-		$po_detail->invoiced_quantity = $po_detail->invoiced_quantity - $lines->inv_line_quantity;
-		$po_detail->audit_trial();
-		try {
-		 $po_detail->save();
-		} catch (Exception $e) {
-		 echo "PO Details Update Failed!. Error @ class_cst_item_cost_header _transaction_cancell_poInv_lines " . $e->getMessage();
-		 return;
-		}
-	 }
-//update the invlice details
-	 $aptd = new cst_item_cost_detail();
-	 $all_details = $aptd->findBy_parentId($lines->cst_item_cost_line_id);
-	 foreach ($all_details as $details) {
-		$new_aptd = new cst_item_cost_detail();
-		$new_aptd_i = $new_aptd->findBy_id($details->cst_item_cost_detail_id);
-		$new_aptd->status = 'Cancelled';
-		$new_aptd->amount = '0.0';
-		$new_aptd->cst_item_cost_detail_id = $new_aptd_i->cst_item_cost_detail_id;
-		$new_aptd->audit_trial();
-		try {
-		 $new_aptd->save();
-		} catch (Exception $e) {
-		 echo "AR Transaction Details Update Failed!. Error @ class_cst_item_cost_header _transaction_cancell_poInv_lines " . $e->getMessage();
-		 return;
-		}
-	 }
-
-	 //update the invoice lines
-	 $new_aptl = new cst_item_cost_line();
-	 $new_aptl_i = $new_aptl->findBy_id($lines->cst_item_cost_line_id);
-	 $new_aptl->status = 'Cancelled';
-	 $new_aptl->inv_line_quantity = '0.0';
-	 $new_aptl->inv_line_price = '0.0';
-	 $new_aptl->cst_item_cost_line_id = $new_aptl_i->cst_item_cost_line_id;
-	 $new_aptl->audit_trial();
-	 try {
-		$new_aptl->save();
-	 } catch (Exception $e) {
-		echo "AP Transaction Lines Update Failed!. Error @ class_cst_item_cost_header _transaction_cancell_poInv_lines " . $e->getMessage();
-		return;
-	 }
-	}
- }
-
- public function get_details_from_sd_so_header() {
-	if (empty($this->sd_so_header_id)) {
-	 return false;
-	}
-	$po = new sd_so_header();
-	$po_i = $po->findBy_id($this->sd_so_header_id);
-	$this->bu_org_id = $po_i->bu_org_id;
-	$this->transaction_type = 'INVOICE';
-	$this->so_number = $po_i->so_number;
-	$this->ar_customer_id = $po_i->ar_customer_id;
-	$this->ar_customer_site_id = $po_i->ar_customer_site_id;
-	$this->document_currency = $po_i->currency;
-	$this->receipt_term_id = $po_i->receipt_term_id;
- }
-
  public function multi_select_input_fields() {
 	$multi_select_input = [
 	];
@@ -444,7 +505,8 @@ class cst_item_cost_header extends dbObject {
 			'action_class_name',
 			'mode',
 			'action',
-			'show_block'
+			'show_block',
+			'program_name'
 	];
 
 	return $multi_select_hidden;

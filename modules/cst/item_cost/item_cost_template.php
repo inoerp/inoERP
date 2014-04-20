@@ -104,11 +104,15 @@
 					 <div> 
 						<ul class="column five_column">
 						 <li><label>Action</label>
-							<?php echo $f->select_field_from_object('receipt_action', ar_transaction_header::transaction_action(), 'option_line_code', 'option_line_value', '', 'receipt_action', '', '', $readonly); ?>
+							<?php echo $f->select_field_from_object('cost_action', cst_item_cost_header::transaction_action(), 'option_line_code', 'option_line_value', '', 'cost_action', '', '', $readonly); ?>
 						 </li>
 						 <li id="document_print"><label>Document Print : </label>
 							<a class="button" target="_blank"
-								 href="po_print.php?cst_item_cost_header_id=<?php echo!(empty($$class->cst_item_cost_header_id)) ? $$class->cst_item_cost_header_id : ""; ?>" >Transaction</a>
+								 href="po_print.php?cst_item_cost_header_id=<?php echo!(empty($$class->cst_item_cost_header_id)) ? $$class->cst_item_cost_header_id : ""; ?>" >Indented BOM</a>
+						 </li>
+						 <li id="document_print"><label>Document Print : </label>
+							<a class="button" target="_blank"
+								 href="po_print.php?cst_item_cost_header_id=<?php echo!(empty($$class->cst_item_cost_header_id)) ? $$class->cst_item_cost_header_id : ""; ?>" >BOM Cost</a>
 						 </li>
 						</ul>
 
@@ -186,7 +190,7 @@
  							 <ul class="inline_action">
  								<li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add" /></li>
  								<li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove" /> </li>
- 								<li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($cst_item_cost_line->line_number); ?>"></li>           
+ 								<li><input type="checkbox" name="line_id_cb" value="<?php echo $$class_second->cst_item_cost_line_id;?>"></li>           
  								<li><?php echo form::hidden_field('cst_item_cost_header_id', $$class->cst_item_cost_header_id); ?></li>
  							 </ul>
  							</td>
@@ -223,5 +227,6 @@
  </div>
 
 </div>
+http://www.inoideas.com/inoerp/multi_select.php?class_name=cst_item_cost_header&action=COST_UPDATE&mode=9&show_block=1
 
 <?php include_template('footer.inc') ?>
