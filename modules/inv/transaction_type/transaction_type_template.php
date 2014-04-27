@@ -6,26 +6,6 @@
 	 <div id="content">
 		<div id="structure">
 		 <div id="transaction_type_divId">
-			<?php
-			$current_page_path = "transaction_type.php";
-			if (empty($readonly)) {
-			 form::form_button($current_page_path);
-			 $readonly = "";
-			} else {
-			 $readonly = 1;
-			}
-			?>
-			<div id="transaction_type_searchId">
-			 <?php
-			 if (empty($readonly)) {
-				$search_form = search::search_form('transaction_type', 'transaction_type', 'transaction_type_search');
-				if (!empty($pagination)) {
-				 $pagination_statement = $pagination->show_pagination($pagination, 'transaction_type', $pageno, $query_string);
-				}
-				echo!(empty($search_form)) ? $search_form : "";
-			 }
-			 ?>
-			</div>
 			<div id="form_top">
 			</div>
 			<!--    START OF FORM HEADER-->
@@ -33,91 +13,75 @@
 			<div class="show_loading_small"></div>
 			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 			<!--    End of place for showing error messages-->
-			<div id ="form_header">
-			 <form action=""  method="post" id="transaction_type"  name="transaction_type">
+			<div id ="form_header"><span class="heading">Transaction Type </span>
+			 <form action=""  method="post" id="transaction_type_form"  name="transaction_type_form">
+				<div class="large_shadow_box">
+				 <ul class="column four_column"> 
+					<li> 
+					 <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="transaction_type_id select_popup clickable">
+						Transaction Type Id : </label> 
+					 <?php $f->text_field_ds('transaction_type_id') ?>
+					 <a name="show" href="form.php?class_name=transaction_type" class="show transaction_type_id">	<img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
+					</li> 
+					<li><label>Trnx. Number :</label>
+					 <?php form::text_field_wid('transaction_type_number'); ?>
+					</li>
+					<li><label>Transaction Type :</label>
+					 <?php form::text_field_wid('transaction_type'); ?>
+					</li>
+					<li><label>Type Class :</label>
+					 <?php echo $f->select_field_from_object('type_class', transaction_type::transaction_type_class(), 'option_line_code', 'description', $$class->type_class, '', '', 1, $readonly1); ?>
+					</li>
+					<li><label>Action :</label>
+					 <?php echo $f->select_field_from_object('transaction_action', transaction_type::transaction_action(), 'option_line_code', 'description', $$class->transaction_action, '', '', 1, $readonly); ?>
+					</li>
+
+				 </ul>
+				</div>
 				<div id ="form_line" class="form_line"><span class="heading">Transaction Type Details </span>
 				 <div id="tabs">
 					<ul class="tabMain">
-					 <li><a href="#tabsLine-1">Mandatory</a></li>
-					 <li><a href="#tabsLine-2">Other Info</a></li>
+					 <li><a href="#tabsLine-1">Basic Info</a></li>
+					 <li><a href="#tabsLine-2">Future</a></li>
 					</ul>
 					<div class="tabContainer"> 
-					<div id="tabsLine-1"  class="tabContent">
-					 <table class="form_table">
-						<?php echo transaction_type::$tabs_header1_tr ?>
-						<tbody class="transaction_type_values">
-						 <?php
-						 $count = 0;
-						 foreach ($search_result as $transaction_type) {
-							?>         
- 						 <tr class="transaction_type<?php echo $count ?>">
- 							<td>    
- 							 <ul class="inline_action">
- 								<li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
- 								<li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
- 								<li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($transaction_type->transaction_type_id); ?>"></li>           
- 							 </ul>
- 							</td>
- 							<td><?php form::text_field_widsr('transaction_type_id'); ?></td>
-							<td><?php form::text_field_widsm('transaction_type_number'); ?></td>
-							<td><?php form::text_field_widm('transaction_type'); ?></td>
- 							<td><?php echo form::select_field_from_object('type_class', transaction_type::transaction_type_class(), 'option_line_code', 'description', $$class->type_class, '', $readonly,'max_width_150'); ?></td>
- 							<td><?php echo form::select_field_from_object('transaction_action', transaction_type::transaction_action(), 'option_line_code', 'description', $$class->transaction_action, '', $readonly,'max_width_150'); ?></td>
- 							<td><?php form::text_field_wid('description'); ?></td>
- 							<td><?php echo form::checkBox_field('allow_negative_balance_cb' . $count, $$class->allow_negative_balance_cb, 'allow_negative_balance_cb', $readonly); ?></td>
- 						 </tr>
-							<?php
-							$count = $count + 1;
-						 }
-						 ?>
-						</tbody>
-					 </table>
+					 <div id="tabsLine-1" class="tabContent">
+						<div> 
+						 <ul class="column four_column"> 
+							<li><label>Description :</label>
+							 <?php $f->text_field_wid('description'); ?>
+							</li>
+							<li><label>Allow Negative Balance : </label>
+							 <?php echo form::checkBox_field_d('allow_negative_balance_cb'); ?>
+							</li> 
+							<li><label>Extra Field : </label>
+							 <?php echo form::extra_field($transaction_type->ef_id, '10', $readonly); ?>
+							</li>
+							<li><label>Status : </label>
+							 <?php echo form::status_field($transaction_type->status, $readonly); ?>
+							</li>
+							<li><label>Revision : </label>
+							 <?php echo form::revision_enabled_field($transaction_type->rev_enabled_cb, $readonly); ?>
+							</li>
+							<li><label>Revision No: </label>
+							 <?php echo form::text_field('rev_number', $transaction_type->rev_number, '10', '', '', '', '', $readonly); ?>
+							</li>
+						 </ul> 
+						</div> 
+						<!--end of tab1 div three_column-->
+					 </div> 
+					 <div id="tabsLine-2"  class="tabContent">
+						<!--                end of tab2 div three_column-->
+					 </div>
+					 <!--end of tab5-->
 					</div>
-					<div id="tabsLine-2" class="tabContent scrollElement" >
-					 <table class="form_table">
-						<?php echo transaction_type::$tabs_header2_tr ?>
-						<tbody class="transaction_type_values">
-						 <?php
-						 $count = 0;
-						 foreach ($search_result as $transaction_type) {
-							?>         
- 						 <tr class="transaction_type<?php echo $count ?>">
- 							<td>
-								<?php form::account_field('account_id'); ?>
- 							</td>
- 							<td>
-								<?php echo form::extra_field($$class->ef_id, '10', $readonly); ?>
- 							</td>
- 							<td>                      
-								<?php echo form::status_field($$class->status, $readonly); ?>
- 							</td>
- 							<td>
-								<?php echo form::checkBox_field('rev_enabled_cb' . $count, $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?>
- 							</td> 
- 							<td>
-								<?php form::text_field_wid('rev_number'); ?>
 
- 							</td> 
- 						 </tr>
-							<?php
-							$count = $count + 1;
-						 }
-						 ?>
-						</tbody>
-						<!--                  Showing a blank form for new entry-->
-
-					 </table>
-					</div>
-					</div>
-					</div>
+				 </div> 
 				</div> 
 			 </form>
 			</div>
 			<!--END OF FORM HEADER-->
-			<div id="pagination" style="clear: both;">
-			 <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
-			 ?>
-			</div>
+
 		 </div>
 		</div>
 		<!--   end of structure-->

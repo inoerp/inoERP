@@ -42,7 +42,7 @@
 							?>
 						 </li>
 						 <li><label>Date </label>
-<?php echo $f->date_fieldFromToday_mr('receipt_date', ino_date($$class->receipt_date), $readonly1); ?></li>
+							<?php echo $f->date_fieldFromToday_mr('receipt_date', ino_date($$class->receipt_date), $readonly1); ?></li>
 						</ul>
 					 </div>
 					</div>
@@ -57,7 +57,7 @@
 							</ul>
 						 </div>
 						 <div id="uploaded_file_details"></div>
-<?php echo file::attachment_statement($file); ?>
+						 <?php echo file::attachment_statement($file); ?>
 						</div>
 					 </div>
 					</div>
@@ -80,7 +80,7 @@
 					<div> 
 					 <div id="comments">
 						<div id="comment_list">
-						<?php echo!(empty($comments)) ? $comments : ""; ?>
+						 <?php echo!(empty($comments)) ? $comments : ""; ?>
 						</div>
 						<?php
 						$reference_table = 'inv_receipt_header';
@@ -96,7 +96,6 @@
 			 </div>
 
 			</div>
-
 			<div id="form_line" class="form_line"><span class="heading">Receipt Lines</span>
 			 <form action=""  method="post" id="po_site"  name="inv_receipt_line">
 				<div id="tabsLine">
@@ -128,19 +127,9 @@
 						<tbody class="form_data_line_tbody">
 						 <?php
 						 $count = 0;
-						 foreach ($inv_receipt_line_object as $inv_receipt_line) {
-
-//							if (!empty($inv_receipt_line->po_detail_id)) {
-//							 $po_all = new po_all_v();
-//							 $po_all->po_detail_id = $inv_receipt_line->po_detail_id;
-//							 $po_all_i = $po_all->findBy_poDetailId();
-//							 $inv_receipt_line->po_number = $po_all_i->po_number;
-//							 $inv_receipt_line->po_line_number = $po_all_i->line_number;
-//							 $inv_receipt_line->shipment_number = $po_all_i->shipment_number;
-//							}
-
+						   foreach ($inv_receipt_line_object as $inv_receipt_line) {
 							$f->readonly2 = !empty($inv_receipt_line->inv_receipt_line_id) ? true : false;
-							?>         
+						?>         
  						 <tr class="inv_receipt_line<?php echo $count ?>">
  							<td>    
  							 <ul class="inline_action">
@@ -149,7 +138,7 @@
  								<li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($inv_receipt_line->line_number); ?>"></li>           
 								 <?php echo form::hidden_field('inv_receipt_header_id', $$class->inv_receipt_header_id); ?>
 								 <?php echo form::hidden_field('org_id', $$class->org_id); ?>
-                <?php echo form::hidden_field('transaction_type_id', $$class->transaction_type_id); ?>
+								 <?php echo form::hidden_field('transaction_type_id', $$class->transaction_type_id); ?>
  							 </ul>
  							</td>
  							<td><?php form::text_field_wid2sr('inv_receipt_line_id'); ?></td>
@@ -194,10 +183,10 @@
  							<td><?php $f->text_field_wid2sr('item_id'); ?></td>
  							<td><?php $f->text_field_d2s('item_number'); ?></td>
  							<td><?php $f->text_field_d2('item_description'); ?></td>
- 							<td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $inv_receipt_line->uom_id, '','','', $readonly); ?></td>
- 							<td><?php echo $f->number_field('transaction_quantity', $$class_second->transaction_quantity, '8', '', '', 1, $readonly); ?></td>
- 							<td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_second->subinventory_id, '', 'subinventory_id', '', $readonly); ?></td>
- 							<td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_second->subinventory_id), 'locator_id', 'locator', $$class_second->locator_id, '', 'locator_id', '', $readonly); ?></td>
+ 							<td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $inv_receipt_line->uom_id, '', '', '', $readonly1); ?></td>
+ 							<td><?php echo $f->number_field('transaction_quantity', $$class_second->transaction_quantity, '8', '', '', 1, $readonly1); ?></td>
+ 							<td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_second->subinventory_id, '', 'subinventory_id', '', $readonly1); ?></td>
+ 							<td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_second->subinventory_id), 'locator_id', 'locator', $$class_second->locator_id, '', 'locator_id', '', $readonly1); ?></td>
  						 </tr>
 							<?php
 							$count = $count + 1;

@@ -180,16 +180,16 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
 	$from_onhand_sql .= " WHERE item_id = '{$this->item_id}' ";
 	$from_onhand_sql .= " AND  	org_id = '{$this->_from_org_id}' ";
 
-	if (!empty($this->_from_subinvenfromry_id)) {
-	 $from_onhand_sql .= " AND  	subinvenfromry_id = '{$this->_from_subinvenfromry_id}' ";
+	if (!empty($this->_from_subinventory_id)) {
+	 $from_onhand_sql .= " AND  subinventory_id = '{$this->_from_subinventory_id}' ";
 	}
-	if (!empty($this->_from_locafromr_id)) {
-	 $from_onhand_sql .= " AND  	locafromr_id = '{$this->_from_locafromr_id}' ";
+	if (!empty($this->_from_locator_id)) {
+	 $from_onhand_sql .= " AND locator_id = '{$this->_from_locator_id}' ";
 	}
 	$from_onhand_sql .= " LIMIT 1 ";
 
 	$from_onhand_result_a = $this->findBy_sql($from_onhand_sql);
-	$from_onhand_result = array_pop($from_onhand_result_a);
+	$from_onhand_result = !empty($from_onhand_result_a) ? array_pop($from_onhand_result_a) : false;
 	if ($from_onhand_result) {
 	 $this->onhand = $from_onhand_result->onhand - $this->_transaction_quantity;
 	 $this->reservable_onhand = $from_onhand_result->reservable_onhand - $this->_transaction_quantity;
@@ -215,7 +215,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
 	 return -99;
 	}
  }
- 
+
  private function _update_to_onhand() {
 	$to_onhand_sql = " SELECT *  FROM onhand";
 	$to_onhand_sql .= " WHERE item_id = '{$this->item_id}' ";
@@ -230,9 +230,8 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
 	$to_onhand_sql .= " LIMIT 1 ";
 
 	$to_onhand_result_a = $this->findBy_sql($to_onhand_sql);
-	$to_onhand_result = array_pop($to_onhand_result_a);
+	$to_onhand_result = !empty($to_onhand_result_a) ? array_pop($to_onhand_result_a) : false;
 	if ($to_onhand_result) {
-	 pa($to_onhand_result);
 	 $this->onhand = $to_onhand_result->onhand + $this->_transaction_quantity;
 	 $this->reservable_onhand = $to_onhand_result->reservable_onhand + $this->_transaction_quantity;
 	 $this->transactable_onhand = $to_onhand_result->transactable_onhand + $this->_transaction_quantity;
@@ -313,25 +312,18 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
 	}
  }
 
- public static function onhand_page() {
-	echo '<table class="normal"><thead><tr>';
-	foreach (self::$field_array as $key => $value) {
-	 echo '<th>' . $value . '</th>';
+ public function findOnhand_byItemId($item_id = '') {
+	if (!empty($item_id)) {
+	 $this->item_id = $item_id;
 	}
-	echo '</tr></thead><tbody>';
+	$sql = " SELECT * FROM  ";
+	$sql .= self::$table_name;
+	$sql .= " WHERE item_id =:item_id ";
 
-	$onhand = self::find_all();
-//    echo '<pre>';
-//    print_r($onhand);
-//    echo '<pre>';
-	foreach ($onhand as $record) {
-	 echo '<tr>';
-	 foreach (self::$field_array as $key => $value) {
-		echo '<td>' . $record->$value . '</td>';
-	 }
-	 echo '</tr>';
-	}
-	echo ' </tbody> </table>';
+	$param_a = ['item_id'];
+	$value_a = ['item_id' => $this->item_id];
+	$result = $this->findBy_sql($sql, $param_a, $value_a);
+	return !empty($result) ? $result : false;
  }
 
 }

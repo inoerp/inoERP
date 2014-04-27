@@ -192,5 +192,37 @@ $(document).ready(function() {
  classSave.lineClassName = 'inv_receipt_line';
  classSave.enable_select = true;
  classSave.saveMain();
+ 
+ 
+ //all actions
+//Popup for adding receipt lines
+ function add_receipt_lines() {
+	var inv_receipt_header_id = $("#inv_receipt_header_id").val();
+	if (inv_receipt_header_id) {
+	 var link = 'multi_select.php?class_name=po_all_v&action=multi_receipt&mode=9&action_class_name=inv_receipt_line&';
+     link +='po_status=APPROVED&inv_receipt_header_id=' + inv_receipt_header_id+'&org_id='+$('#org_id').val();
+	 localStorage.removeItem("reset_link");
+	 localStorage.setItem("reset_link", link);
+	 localStorage.removeItem("jsfile");
+	 localStorage.setItem("jsfile", "modules/inv/receipt/extra/extra_inv_receipt.js");
+	 void window.open(link, '_blank',
+					 'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+	 return false;
+	} else {
+	 alert('No Receipt Header ID/nEnter or Save The Header Details ');
+	}
+ }
+ 
+  $('#transaction_action').on('change', function() {
+	var selected_value = $(this).val();
+	switch (selected_value) {
+	 case 'ADD_LINES' :
+		add_receipt_lines();
+		break;
+
+	 default :
+		break;
+	}
+ });
 
 });

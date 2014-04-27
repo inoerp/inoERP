@@ -14,9 +14,11 @@
 			<div class="error"></div><div id="loading"></div>
 			<div class="show_loading_small"></div>
 			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
+			<?php echo (!empty($hidden_stmt)) ? $hidden_stmt : ""; ?> 
+			<!--start of hidden data-->
 			<!--    End of place for showing error messages-->
 			<div id ="form_header">
-			 <form action="inv_transaction.php"  method="post" id="inv_transaction"  name="inv_transaction">
+			 <form action=""  method="post" id="inv_transaction"  name="inv_transaction">
         <!--create empty form or a single id when search is not clicked and the id is referred from other page -->
         <span class="heading">Inventory Transaction </span> 
         <table class="form_table">
@@ -124,7 +126,6 @@
 							 <th>Document Type</th>
 							 <th>Doc. Number</th>
 							 <th>Doc. Id</th>
-
 							 <th>Ref Type</th>
 							 <th>Ref Name</th>
 							 <th>Ref Value</th>
@@ -155,7 +156,7 @@
 							 <th>Account</th>
 							 <th>Unit Cost</th>
 							 <th>Costed Amount</th>
-							 <th>Transferred To GL<th>
+							 <th>Journal Header Id<th>
 							</tr>
 						 </thead>
 						 <tbody class="form_data_line_tbody">
@@ -163,9 +164,7 @@
 							 <td><?php $f->ac_field_wid('account_id'); ?></td>
 							 <td><?php form::text_field_wid('unit_cost'); ?></td>
 							 <td><?php form::text_field_wid('costed_amount'); ?></td>
-							 <td>
-								<?php echo form::checkBox_field('transfer_to_gl_cb', $$class->transfer_to_gl_cb, 'transfer_to_gl_cb', $readonly); ?>
-							 </td> 
+							  <td><?php form::text_field_wid('gl_journal_header_id'); ?></td>
 							</tr>
 						 </tbody>
 						</table>

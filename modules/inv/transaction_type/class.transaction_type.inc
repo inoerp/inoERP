@@ -3,7 +3,10 @@
 class transaction_type extends dbObject {
 
  protected static $table_name = "transaction_type";
- public static $field_array = [
+ public static $primary_column = "transaction_type_id";
+ public static $key_column = 'transaction_type';
+ public static $module = "inv"; //same as gl_journal_source
+ public $field_a = [
 		 "transaction_type_id",
 		 'transaction_type_number',
 		 "transaction_type",
@@ -21,7 +24,7 @@ class transaction_type extends dbObject {
 		 "last_update_by",
 		 "last_update_date"
  ];
- public static $initial_search_array = [
+ public $initial_search = [
 		 "transaction_type_id",
 		 'transaction_type_number',
 		 "transaction_type",
@@ -29,7 +32,7 @@ class transaction_type extends dbObject {
 		 "transaction_action",
 		 "description"
  ];
- public static $column_array = [
+ public $column = [
 		 "transaction_type_id",
 		 'transaction_type_number',
 		 "transaction_type",
@@ -39,21 +42,21 @@ class transaction_type extends dbObject {
 		 "allow_negative_balance_cb",
 		 "account_id"
  ];
- public static $account_array = [
+ public $account = [
 		 "account_id"
  ];
- public static $checkbox_array = [
+ public $checkbox = [
 		 "rev_enabled_cb",
 		 "allow_negative_balance_cb"
  ];
- public static $base_encoded_array = [];
- public static $requiredField_array = [
+ 
+ public $requiredField = [
 		 "transaction_type",
 		 'transaction_type_number',
 		 "type_class",
 		 "transaction_action"
  ];
- public static $primary_column = "transaction_type_id";
+ 
  public $transaction_type_id;
  public $transaction_type;
  public $transaction_type_number;
@@ -72,38 +75,24 @@ class transaction_type extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
- Public static $tab_header = <<<'VAR'
-            <ul class="tabMain">
-                          <li><a href="#tabsHeader-1">Mandatory</a></li>
-                          <li><a href="#tabsHeader-2">Other Info</a></li>
-            </ul>
-VAR;
- public static $tabs_header1_tr = <<<'VAR'
-              <thead> 
-               <tr>
-								<th>Action</th>
-								<th>Type Id</th>
-								<th>Number</th>
-								<th>Transaction Type</th>
-								<th>Class</th>
-								<th>Trnx Action</th>
-								<th>Description</th>
-								<th>Negative Balance</th>
-							</tr>
-              </thead>
-VAR;
- public static $tabs_header2_tr = <<<'VAR'
-              <thead> 
-               <tr>
-								<th>Account No</th>
-								<th>EF Id</th>
-								<th>Status</th>
-								<th>Rev Enabled</th>
-								<th>Rev#</th>
-							</tr>
-              </thead>
-VAR;
-
+ 
+  public $search = [
+		 '_show_update_path' => 1,
+		 '_update_action_meassge' => 'Update',
+		 '_show_view_path' => 1,
+ ];
+ public $pageTitle = " INV - Transaction Type  "; //page Title
+ public $option_lists = [
+		 'transaction_type_class' => 'TRANSACTION_TYPE_CLASS',
+		 'transaction_action' => 'INV_TRANSACTION_ACTION',
+ ];
+// public $search_functions = [
+//		 'Cost Type' => 'search_bom_cost_type',
+//		 'Item From' => 'search_item_number_from',
+//		 'Item To' => 'search_item_number_to',
+//		 'Organization' => 'search_org_name',
+// ];
+ 
  Public static function transaction_type_class() {
 	$option_header = option_header::find_by_name('TRANSACTION_TYPE_CLASS');
 	$transaction_type_class = option_line::find_by_option_id($option_header->option_header_id);

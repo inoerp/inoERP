@@ -147,10 +147,7 @@ class item extends dbObject {
  ];
  public $initial_search = [
 		 'item_id',
-		 "org_id",
 		 "item_number",
-		 "item_type",
-		 "uom_id",
 		 "item_status"
  ];
  public $column = [
@@ -160,7 +157,8 @@ class item extends dbObject {
 		 "item_description",
 		 "item_type",
 		 "uom_id",
-		 "item_status"
+		 "item_status",
+		 'processing_lt'
  ];
  public $requiredField = [
 		 "item_number",
@@ -183,10 +181,16 @@ class item extends dbObject {
 		 '_update_action_meassge' => 'Update',
 		 '_show_view_path' => 1,
  ];
+  public $search_functions = [
+		 'Item From' => 'search_item_number_from',
+		 'Item To' => 'search_item_number_to',
+		 'Organization' => 'search_org_name',
+ ];
  public $pageTitle = " Item - Create & Update Items"; //page Title
  public $option_lists = [
 		 'item_types' => 'ITEM_TYPE',
 		 'item_status' => 'ITEM_STATUS',
+		 'planning_method' => 'MP_PLANNING_METHOD',
  ];
  public $item_id;
  public $org_id;
@@ -317,6 +321,12 @@ class item extends dbObject {
 	return $coa_account_types;
  }
 
+ Public static function planning_method() {
+	$option_header = option_header::find_by_name('MP_PLANNING_METHOD');
+	$ol = option_line::find_by_option_id($option_header->option_header_id);
+	return $ol;
+ }
+
  Public static function item_status() {
 	$option_header = option_header::find_by_name('ITEM_STATUS');
 	$coa_account_types = option_line::find_by_option_id($option_header->option_header_id);
@@ -362,6 +372,30 @@ class item extends dbObject {
 	$value_a = ['item_number' => $this->item_number, 'org_id' => $org_id_i];
 	$result = $db->findBy_sql($sql, $param_a, $value_a);
 	return !(empty($result)) ? array_pop($result) : false;
+ }
+
+ public function findBy_itemNumberRange_OrgId($item_number1, $item_number2, $org_id = "") {
+	global $db;
+	$sql = "SELECT * FROM " . self::$table_name;
+	$sql .= " where item_number BETWEEN :item_number1 AND  :item_number2";
+	$sql .= " AND org_id = :org_id ";
+	$param_a = ['item_number1', 'item_number2', 'org_id'];
+	$org_id_i = !empty($org_id) ? $org_id : $this->org_id;
+	$value_a = ['item_number1' => $item_number1,
+			'item_number2' => $item_number2,
+			'org_id' => $org_id_i];
+	$result = $db->findBy_sql($sql, $param_a, $value_a);
+	return !(empty($result)) ? $result : false;
+ }
+
+ public function findBy_itemIdRange($item_id1, $item_id2) {
+	global $db;
+	$sql = " SELECT * FROM " . self::$table_name;
+	$sql .= " where item_id BETWEEN :item_id1 AND  :item_id2";
+	$param_a = ['item_id1', 'item_id2'];
+	$value_a = ['item_id1' => $item_id1, 'item_id2' => $item_id2];
+	$result = $db->findBy_sql($sql, $param_a, $value_a);
+	return !(empty($result)) ? $result : false;
  }
 
  public static function find_all_assigned_orgs($item_number) {
@@ -435,7 +469,8 @@ class item extends dbObject {
 			 'item_number' => $row->item_number,
 			 'item_id' => $row->item_id,
 			 'item_description' => $row->item_description,
-			 'uom_id' => $row->uom_id
+			 'uom_id' => $row->uom_id,
+			 'processing_lt' => $row->processing_lt
 	 );
 	}
 //	$return_array['jsonvalue'] = $data;
