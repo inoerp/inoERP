@@ -33,10 +33,10 @@
 						 <?php echo form::text_field_d('description'); ?>
 						</li>
 						<li><label>Overhead Type : </label>
-						 <?php echo form::select_field_from_object('overhead_type', bom_header::bom_overhead_type(), 'option_line_id', 'option_line_code', $$class->overhead_type, 'overhead_type', $readonly, 'overhead_type'); ?>
+						 <?php echo form::select_field_from_object('overhead_type', bom_header::bom_overhead_type(), 'option_line_code', 'option_line_value', $$class->overhead_type, 'overhead_type', $readonly, 'overhead_type'); ?>
 						</li>
 						<li><label>Default Basis : </label>
-						 <?php echo form::select_field_from_object('default_basis', bom_header::bom_charge_basis(), 'option_line_id', 'option_line_code', $$class->default_basis, 'default_basis', $readonly, 'default_basis'); ?>
+						 <?php echo form::select_field_from_object('default_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class->default_basis, 'default_basis', $readonly, 'default_basis'); ?>
 						</li>
 						<li><label>Ef Id : </label>
 						 <?php echo form::extra_field($$class->ef_id, '10', $readonly); ?>
@@ -67,6 +67,7 @@
 							 <th>Action</th>
 							 <th>Resource Assignment Id</th>
 							 <th>Cost Type</th>
+							 <th>Description</th>
 							 <th>Resource</th>
 							</tr>
 						 </thead>
@@ -74,6 +75,13 @@
 							<?php
 							$count = 0;
 							foreach ($bom_overhead_resource_assignment_object as $bom_overhead_resource_assignment) {
+							 if (!empty($bom_overhead_resource_assignment->bom_cost_type)) {
+								$bcy = new bom_cost_type();
+								$bcy_i = $bcy->find_by_keyColumn($bom_overhead_resource_assignment->bom_cost_type);
+								$bom_overhead_resource_assignment->bom_cost_type_description = $bcy_i->description;
+							 } else {
+								$bom_overhead_resource_assignment->bom_cost_type_description = null;
+							 }
 							 ?>         
  							<tr class="bom_overhead_resource_assignment<?php echo $count ?>">
  							 <td>    
@@ -85,9 +93,8 @@
  								</ul>
  							 </td>
  							 <td><?php form::text_field_wid2('bom_overhead_resource_assignment_id'); ?></td>
- 							 <td>
-								 <?php echo form::select_field_from_object('cost_type_id', bom_cost_type::find_all(), 'bom_cost_type_id', 'cost_type', $$class_second->cost_type_id, '', $readonly, 'cost_type_id'); ?>
- 							 </td>
+ 							 <td><?php echo $f->select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'cost_type_code', 'cost_type', $$class_second->bom_cost_type, '', '', 1, $readonly); ?></td>
+ 							 <td><?php $f->text_field_wid2r('bom_cost_type_description'); ?></td>
  							 <td>
 								 <?php echo form::select_field_from_object('resource_id', bom_resource::find_all(), 'bom_resource_id', 'resource', $$class_second->resource_id, '', $readonly, 'resource_id'); ?>
  							 </td>
@@ -108,7 +115,7 @@
 						 <tr>
 							<th>Action</th>
 							<th>Rate Assignment Id</th>
-							<th>Department</th>
+							<th>Cost Type</th>
 							<th>Default Basis</th>
 							<th>Rate</th>
 						 </tr>
@@ -117,6 +124,8 @@
 						 <?php
 						 $count = 0;
 						 foreach ($bom_overhead_rate_assignment_object as $bom_overhead_rate_assignment) {
+							$class_third = 'bom_overhead_rate_assignment';
+							$$class_third = & $bom_overhead_rate_assignment;
 							?>         
  						 <tr class="bom_overhead_rate_assignment<?php echo $count ?>">
  							<td>    
@@ -128,8 +137,8 @@
  							 </ul>
  							</td>
  							<td><?php form::text_field_wid3('bom_overhead_rate_assignment_id'); ?></td>
- 							<td><?php form::text_field_wid3('department_id'); ?></td>
- 							<td><?php echo form::select_field_from_object('default_basis', bom_header::bom_charge_basis(), 'option_line_id', 'option_line_code', $$class_third->default_basis, '', $readonly, 'default_basis'); ?> </td>
+ 							<td><?php echo $f->select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'cost_type_code', 'cost_type', $$class_third->bom_cost_type, '', '', 1, $readonly); ?></td>
+ 							 <td><?php echo form::select_field_from_object('default_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_third->default_basis, '', $readonly, 'default_basis'); ?> </td>
  							<td><?php form::text_field_wid3('rate'); ?></td>
  						 </tr>
 							<?php

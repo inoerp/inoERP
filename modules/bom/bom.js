@@ -115,7 +115,8 @@ $(document).ready(function() {
  });
 
 //get the attachement form
- deleteData('json.bom.php');
+ deleteData('form.php?class_name=bom_header&line_class_name=bom_line');
+ 
 // save('json.bom.php', '#bom_header', 'line_id_cb', 'component_item_id', '#bom_header_id');
  var classSave = new saveMainClass();
  classSave.json_url = 'form.php?class_name=bom_header';

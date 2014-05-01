@@ -1,156 +1,170 @@
-<?php
-include_once("../../include/basics/header.inc");
-//$inv_transaction = new inv_transaction;
-
- for($i=0 ; $i<=5; $i++){
-	$var0 =10 ;
-$var1 =11 ;
-$var2 =12 ;
-$var3 =13 ;
-	echo '<br/>$var'.$i. " is " . ${"var".$i};
- }
-
-//
-// $data = array(
-//    array("firstname" => "Ma ry", "lastname" => "Joh & nson", "a!ge" => 25),
-//    array("firstname" => "Amanda", "lastname" => "Miller", "a_ge" => 18),
-//    array("firstname" => "James", "lastname" => "Brown", "age" => 31),
-//    array("firstname" => "Patricia", "lastname" => "Williams", "age" => 7),
-//    array("firstname" => "Michael", "lastname" => "Davis", "age" => 43),
-//    array("firstname" => "Sarah", "lastname" => "Miller", "age" => 24),
-//    array("firstname" => "Patrick", "lastname" => "Miller", "age" => 27)
-//  );
-//   
-//      function cleanData(&$str)
-//  {
-//    if($str == 't') $str = 'TRUE';
-//    if($str == 'f') $str = 'FALSE';
-//    if(preg_match("/^0/", $str) || preg_match("/^\+?\d{8,}$/", $str) || preg_match("/^\d{4}.\d{1,2}.\d{1,2}/", $str)) {
-//      $str = "'$str";
-//    }
-//    if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
-//    $str = mb_convert_encoding($str, 'UTF-16LE', 'UTF-8');
-//  }
-//  
-// echo serialize($data);
-//echo '<br/><br/><br/>';
-// echo json_encode($data);
-?>
-
-<?php
-global $db;
-//$inv_transaction_types = inv_transaction::inv_transaction_types();
-//  echo '<pre>';
-//  print_r($inv_transaction_types);
-//  echo '<pre>';
-
-////
-////$query="Select * from information_schema.tables where table_name='inv_transaction'";
-//
-//$query="select *
-//from information_schema.key_column_usage
-//where constraint_schema = 'inoideas_erp'" ;
-//
-////"AND TABLE_NAME LIKE '%inv_transaction%'"
-//
-//$result = $db->query($query);
-//while($rows = $db->fetch_array($result)){
-////  echo '<pre>';
-////  print_r($rows);
-////  echo '<pre>';
-//  echo '<br /> TABLE_NAME]  is : ' . $rows['TABLE_NAME'];
-//}
-//$query1= " ALTER TABLE receipt_line 
-//  ADD `lot_number` VARCHAR(256)  AFTER country_of_origin ,
-//	ADD `serial_number` VARCHAR(256)  AFTER lot_number " ; 
-//	ADD `received_quantity` INT(12)  AFTER uom_id ,
-//	ADD `receving_account_id` INT(12)  AFTER uom_id ,
-//	ADD `accrual_account_id` INT(12)  AFTER receving_account_id ";
-////////
-////$query1="ALTER TABLE inv_transaction ADD UNIQUE INDEX (inv_transaction_number, inventory_id)";
-//// ADD `serial_generation` varchar(50) NOT NULL AFTER serial_uniqueness,
-//// ADD `serial_prefix` varchar(50) NOT NULL AFTER serial_generation,
-//////// ADD `serial_starting_number` varchar(50) NOT NULL AFTER serial_prefix ";
-//$query1= "ALTER TABLE receipt_header 
-// CHANGE `receipt_id` receipt_header_id int(12)";
-//
-//// CHANGE `transfer_to_gl` transfer_to_gl_cb tinyint(1),
-//// CHANGE `transaction_rev_enabled` transaction_rev_enabled_cb tinyint(1)";
-//
-////$query1 = "alter table inv_transaction modify column inv_transaction_id int(12) auto_increment";
-////////////
-//$result1 = $db->query($query1);
-//$query = "RENAME TABLE mtl_transactions TO inv_transaction ";
-//$result = $db->query($query);
-//$query = "SELECT * FROM inv_transaction ";
-
-//$query = inv_transaction::find_by_id('55');
-//$query = "SELECT * FROM inv_transaction ";
-////////
-//echo '<h2>New values </h2>' ;
-////////$query="Select * from information_schema.tables where table_name='enterprise'";
-//$result = $db->query($query);
-//while($rows = $db->fetch_array($result)){
-//  echo '<br /> field_name is '.$rows['Field'];
-//}
-//
-echo '<h2>New values </h2>' ;
-////
-//   $all_columns = array();
-//    $all_columns_sql = " SHOW COLUMNS FROM  ". 'receipt_header' ;
-//    $all_columns_result = $db->query($all_columns_sql);
-//    if ($all_columns_result && mysql_num_rows($all_columns_result)) {
-//   while ($row = $db->fetch_array($all_columns_result)) {
-//    array_push($all_columns, $row['Field']);
-//   }
-//   }
-////   
-
-//echo '<br> Transaction types of inventory <pre>';
-// print_r(transaction_type::find_transaction_types_byClass('INVENTORY'));
-
-//$query = "SHOW COLUMNS FROM bom_line ";
-//	 
-////$query="Select * from information_schema.tables where table_name LIKE '%receipt%' ";
-//
-//   $result = $db->result_array_assoc($query);
-//	 echo "<pre>";
-////	  print_r($result);
-//foreach ($result as $array){
-// echo '<br>Filed is : '. $array['Field'];
-//}
-		
-//	echo '<br>------------------------------end-------------------<br>'; 
-//	 $query = "SHOW COLUMNS FROM receipt_line ";
-//   $result = $db->result_array_assoc($query);
-//	 echo "<pre>";
-////	  print_r($result);
-//foreach ($result as $array){
-// echo '<br>Filed is : '. $array['Field'];
-//}
+<div id="all_contents">
+ <div id="content_left"></div>
+ <div id="content_right">
+	<div id="content_right_left">
+	 <div id="content_top"></div>
+	 <div id="content">
+		<div id="structure">
+		 <div id="bom_resource_divId">
+			<div id="form_top">
+			</div>
+			<!--    START OF FORM HEADER-->
+			<div class="error"></div><div id="loading"></div>
+			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
+			<!--    End of place for showing error messages-->
 
 
-?>
-<!--  <select name="inventory_id" id="inventory_id" > 
-   
-<?php
-//  $inv_transaction_masters= inventory_org::find_all_inv_transaction_master();
-//  echo '<pre>';
-//  print_r($inv_transaction_masters);
-//  echo '<pre>';
-//  foreach ($inv_transaction_masters as $key=>$value) {
-//    echo '<option value="' . $value->inventory_id .'"';
-////    echo $types[$i]->option_line_code == $org->type ? 'selected' : 'NONE';
-//    echo '>' . $value->code . ' (inventory id '. $value->inventory_id .') </option>';
-//  }
-?> 
-<option value="" ></option> 
-  </select> -->
-<!--   end of structure-->
+			<div id ="form_header">
+			 <form action=""  method="post" id="bom_resource"  name="bom_resource"><span class="heading">Resources</span>
+				<div id="tabsHeader">
+				 <ul class="tabMain">
+          <li><a href="#tabsHeader-1">Basic Info</a></li>
+          <li><a href="#tabsHeader-2">OSP</a></li>
+					<li><a href="#tabsHeader-3">OSP</a></li>
+          <li><a href="#tabsHeader-4">Employee</a></li>
+          <li><a href="#tabsHeader-5">Equipment</a></li>
+         </ul>
+				 <div class="tabContainer">
+					<div id="tabsHeader-1" class="tabContent">
+					 <div class="large_shadow_box">
+						<ul class="column five_column">
+						 <li>
+							<label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_resource_id select_popup clickable">
+							 Resource Id : </label>
+							<?php $f->text_field_dsr('bom_resource_id'); ?>
+							<a name="show" class="show bom_resource_id_show clickable"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+						 </li>
+						 <li><label>Inventory : </label>
+							<?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1); ?>
+						 </li>
+						 <li><label>Resource : </label>
+							<?php echo form::text_field_d('resource'); ?>
+						 </li>
+						 <li><label>Description : </label>
+							<?php echo form::text_field_d('description'); ?>
+						 </li>
+						 <li><label>Resource Type : </label>
+							<?php echo $f->select_field_from_object('resource_type', bom_resource::resource_type(), 'option_line_code', 'option_line_code', $$class->resource_type, '', '', 1, $readonly1); ?>
+						 </li>
+						 <li><label>Charge Type : </label>
+							<?php echo $f->select_field_from_object('charge_type', bom_resource::charge_type(), 'option_line_code', 'option_line_code', $$class->charge_type, '', '', 1, $readonly); ?>
+						 </li> 
+						 <li><label>UOM : </label>
+							<?php echo $f->select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom', '', 1, $readonly1); ?>
+						 </li>
+						 <li><label>Ef Id : </label>
+							<?php echo form::extra_field($$class->ef_id, '10', $readonly); ?>
+						 </li>
+						 <li><label>Status : </label>                      
+							<?php echo form::status_field($$class->status, $readonly); ?>
+						 </li>
+						</ul>
+					 </div>
+					</div>
 
-<?php
-execution_time();
-include_template('footer.inc')
-?>
+					<div id="tabsHeader-2" class="tabContent">
+					 <div class="large_shadow_box">
+						<ul class="column four_column"> 
+						 <li><label>Costed : </label>
+							<?php echo form::checkBox_field('costed_cb', $$class->costed_cb, 'costed_cb', $readonly); ?>
+						 </li>
+						 <li><label>Absorption Ac: </label><?php
+							$f = new inoform();
+							$f->ac_field_d('absorption_ac_id');
+							?></li>
+						 <li><label>Variance Ac: </label><?php $f->ac_field_d('variance_ac_id'); ?></li>
+						 <li><label>Standard Rate : </label>
+							<?php echo form::checkBox_field('standard_rate_cb', $$class->standard_rate_cb, 'standard_rate_cb', $readonly); ?>
+						 </li>
+						</ul>
+					 </div>
+					</div>
+
+					<div id="tabsHeader-3" class="tabContent">
+					 <div class="large_shadow_box">
+						<ul class="column five_column"> 
+						 <li><label>OSP Resource : </label> 
+							<?php echo form::checkBox_field('osp_cb', $$class->osp_cb, '', $readonly); ?>
+						 </li>
+						 <li><label>Item Id : </label><?php $f->text_field_wids('osp_item_id', 'item_id'); ?></li>
+						 <li><label>Item Number : </label>
+							<?php $f->text_field_wid('osp_item_number', 'select_item_number'); ?>
+							<img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup">
+						 </li>
+						 <li><label>Description: </label><?php $f->text_field_wid('osp_item_description', 'item_description'); ?></li>
+						</ul>
+					 </div>
+					</div>
+					<div id="tabsHeader-4" class="tabContent">
+					 <div class="large_shadow_box">
+
+					 </div>
+					</div>
+					<div id="tabsHeader-5" class="tabContent">
+					 <div class="large_shadow_box">
+
+					 </div>
+					</div>
+				 </div>
 
 
+        </div>
+			 </form>
+			</div>
+
+			<div id="form_line" class="form_line"><span class="heading">Resource Cost Lines </span>
+			 <form action=""  method="post" id="bom_resource_cost_line"  name="bom_resource_cost_line">
+				<div id="tabsLine">
+				 <div class="tabContainer">
+					 <table class="form_line_data_table">
+						<thead> 
+						 <tr>
+							<th>Action</th>
+							<th>Resource Cost Id</th>
+							<th>Cost Type</th>
+							<th>Description</th>
+							<th>Rate</th>
+						 </tr>
+						</thead>
+						<tbody class="form_data_line_tbody">
+						 <?php
+						 $count = 0;
+						 foreach ($bom_resource_cost_line_object as $bom_resource_cost_line) {
+							?>         
+ 						 <tr class="bom_resource_cost_line<?php echo $count ?>">
+ 							<td>    
+ 							 <ul class="inline_action">
+ 								<li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
+ 								<li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+ 								<li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class_second->bom_resource_cost_id); ?>"></li>           
+ 								<li><?php echo form::hidden_field('bom_resource_id', $$class->bom_resource_id); ?></li>
+ 							 </ul>
+ 							</td>
+ 							<td><?php form::text_field_wid2sr('bom_resource_cost_id'); ?></td>
+							<td><?php echo $f->select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'cost_type_code', 'cost_type', $$class_second->bom_cost_type, '', '', 1, $readonly); ?></td>
+							<td><?php form::text_field_wid2sr('bom_cost_type_description'); ?></td>
+							<td><?php form::text_field_wid2sr('resource_rate'); ?></td>
+						 </tr>
+							<?php
+							$count = $count + 1;
+						 }
+						 ?>
+						</tbody>
+					 </table>
+				 </div>
+				</div>
+			 </form>
+			</div>
+			<!--END OF FORM HEADER-->
+		 </div>
+		</div>
+		<!--   end of structure-->
+	 </div>
+	 <div id="content_bottom"></div>
+	</div>
+	<div id="content_right_right"></div>
+ </div>
+
+</div>
+
+<?php include_template('footer.inc') ?>

@@ -47,7 +47,7 @@ class wip_wo_completion extends inv_transaction {
 		 'to_account_id',
 		 'unit_cost',
 		 'costed_amount',
-		 'transfer_to_gl_cb',
+		 'gl_journal_header_id',
 		 'ef_id',
 		 'transaction_rev_enabled_cb',
 		 'rev_start_number',
@@ -86,7 +86,6 @@ class wip_wo_completion extends inv_transaction {
 		 "account_id"];
  public $checkbox = [
 		 "logical_transaction_cb",
-		 "transfer_to_gl_cb",
 		 "transaction_rev_enabled_cb"];
  public $fields_inHeader_needsToBeInserted_inPOST = [
 		 "org_id",
@@ -103,7 +102,7 @@ class wip_wo_completion extends inv_transaction {
  public $search = [
 		 '_show_view_path' => 1,
  ];
- public $pageTitle = " Transaction - Create & View Transactions"; //page Title
+ public $pageTitle = " WIP - Create & View WO Completion"; //page Title
  public $option_lists = [
 		 'inv_transaction_class' => 'TRANSACTION_TYPE_CLASS'
  ];
@@ -111,10 +110,12 @@ class wip_wo_completion extends inv_transaction {
 		 "account_id",
 		 'item_description',
 		 'wip_wo_bom_id',
+		 'wip_wo_header_id',
 		 'bom_sequence'
  ];
  public $wip_wo_bom_id;
  public $bom_sequence;
+ public $wip_wo_header_id;
 
 }
 

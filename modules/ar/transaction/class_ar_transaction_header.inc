@@ -7,8 +7,9 @@ class ar_transaction_header extends dbObject {
  public static $primary_column = "ar_transaction_header_id";
  public static $primary_column2 = "transaction_number";
  public static $key_column = 'ar_customer_id';
- public static $module = "ap"; //same as gl_journal_source
+ public static $module = "ar"; //same as gl_journal_source
  public static $gl_journal_category = "AR_TRANSACTIONS";
+ public static $js_fileName = 'modules/ar/transaction/ar_transaction.js';
  public $account = [
 		 'receivable_ac_id'
  ];
@@ -359,7 +360,7 @@ class ar_transaction_header extends dbObject {
  }
 
  Public static function ar_approval_status() {
-	$option_header = option_header::find_by_name('AP_APPROVAL_STATUS');
+	$option_header = option_header::find_by_name('APPROVAL_STATUS');
 	$ar_approval_status = option_line::find_by_option_id($option_header->option_header_id);
 	return $ar_approval_status;
  }

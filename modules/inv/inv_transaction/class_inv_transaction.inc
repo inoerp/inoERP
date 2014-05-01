@@ -227,6 +227,7 @@ class inv_transaction extends dbObject {
 		case 6 :
 		case 7 :
 		 array_push($this->requiredField, 'wip_wo_bom_id');
+		 array_push($this->requiredField, 'wip_wo_header_id');
 		 $this->reference_key_name = !empty($this->reference_key_name) ? $this->reference_key_name : 'wip_wo_header';
 		 $this->reference_key_value = !empty($this->reference_key_value) ? $this->reference_key_value : $this->wip_wo_header_id;
 		 break;
@@ -325,6 +326,44 @@ class inv_transaction extends dbObject {
 	return $journal_line_a;
  }
 
+ private function _cretae_wipJournal_line_array($element_value_a, $wip_accounting_group_id, $dr_cr, $line_number = '999', $variance=false) {
+	$journal_line_a = [];
+	$wip_acg = new wip_accounting_group();
+	$wip_acg->findBy_id($wip_accounting_group_id);
+	$total_amount = 0;
+	foreach ($element_value_a as $key => $value) {
+	 if (!empty($value)) {
+		$total_amount += $value * $this->quantity;
+		$journal_line['line_number'] = $line_number;
+		$line_number++;
+		$journal_line['amount'] = $value * $this->quantity;
+		switch ($key) {
+		 case 'mat' :
+			$journal_line['account_id'] = ($variance == true) ? $wip_acg->var_material_ac_id : $wip_acg->material_ac_id;
+			break;
+		 case 'moh' :
+			$journal_line['account_id'] = ($variance == true) ? $wip_acg->var_material_oh_ac_id : $wip_acg->material_oh_ac_id;
+			break;
+		 case 'oh' :
+			$journal_line['account_id'] = ($variance == true) ? $wip_acg->var_overhead_ac_id : $wip_acg->overhead_ac_id;
+			break;
+		 case 'res' :
+			$journal_line['account_id'] = ($variance == true) ? $wip_acg->var_resource_ac_id : $wip_acg->resource_ac_id;
+			break;
+		 case 'osp' :
+			$journal_line['account_id'] = ($variance == true) ? $wip_acg->var_osp_ac_id : $wip_acg->osp_ac_id;
+			break;
+		 case 'default' :
+			$journal_line['account_id'] = ($variance == true) ? $wip_acg->var_material_ac_id : $wip_acg->material_ac_id;
+			break;
+		}
+		$journal_line['dr_cr'] = $dr_cr;
+		array_push($journal_line_a, $journal_line);
+	 }
+	}
+	return $journal_line_a;
+ }
+
  public function _after_save() {
 	global $db;
 	$onhand = new onhand();
@@ -354,6 +393,7 @@ class inv_transaction extends dbObject {
 	switch ($this->transaction_type_id) {
 	 case 1 :
 	 case 6 :
+	 case 12 :
 	 case 13 :
 		$onhand->setProperty('_from_org_id', $this->org_id);
 		$onhand->setProperty('_from_subinventory_id', $this->from_subinventory_id);
@@ -361,8 +401,24 @@ class inv_transaction extends dbObject {
 		$onhand->setProperty('_transaction_quantity', $this->quantity);
 		$onhand->item_id = $this->item_id;
 		$update_result = $onhand->updateOnhand();
-		//create journals
+		//create journals for Misc Issue/ WIP Return 
 		$journal_line_a = $this->_cretae_journal_line_array($element_value_a, $this->from_subinventory_id, 'cr', 1);
+		$line_number = 1;
+		if ($this->transaction_type_id == 6 || $this->transaction_type_id == 12 || $this->transaction_type_id == 13) {
+		  $line_number = 1;
+		 foreach ($journal_line_a as $journal_line) {
+			if ($journal_line['line_number'] > $line_number) {
+			 $line_number = $journal_line['line_number'];
+			}
+		 }
+		 $line_number++;
+		 //get journal lines from wip
+		 $woh = new wip_wo_header();
+		 $woh->findBy_id($this->wip_wo_header_id);
+		 $wip_accounting_group_id = $woh->wip_accounting_group_id;
+		 $wip_journal_line_a = $this->_cretae_wipJournal_line_array($element_value_a, $wip_accounting_group_id, 'dr', $line_number);
+		 $journal_line_a = array_merge($journal_line_a, $wip_journal_line_a);
+		}
 		if ($this->transaction_type_id == 1) {
 		 $total_amount = 0;
 		 $line_number = 1;
@@ -386,6 +442,7 @@ class inv_transaction extends dbObject {
 	 case 2 :
 	 case 5 :
 	 case 7 :
+	 case 10 :
 	 case 11 :
 		$onhand->setProperty('_to_org_id', $this->org_id);
 		$onhand->setProperty('_to_subinventory_id', $this->to_subinventory_id);
@@ -393,8 +450,64 @@ class inv_transaction extends dbObject {
 		$onhand->setProperty('_transaction_quantity', $this->quantity);
 		$onhand->item_id = $this->item_id;
 		$update_result = $onhand->updateOnhand();
-		//create journals
+		//create journals for  Misc Receipt/ WIP Assembly Completion
 		$journal_line_a = $this->_cretae_journal_line_array($element_value_a, $this->to_subinventory_id, 'dr', 1);
+
+
+		if ($this->transaction_type_id == 5) {
+		 $po_v = new po_all_v();
+		 $po_v->po_detail_id = $this->po_detail_id;
+		 $po_v_i = $po_v->findBy_poDetailId();
+		 $accural_amount = $this->quantity * $po_v_i->unit_price;
+		 $total_amount = 0;
+		 $line_number = 1;
+		 foreach ($journal_line_a as $journal_line) {
+			$total_amount += $journal_line['amount'];
+			if ($journal_line['line_number'] > $line_number) {
+			 $line_number = $journal_line['line_number'];
+			}
+		 }
+		 $line_number++;
+		 if (!empty($accural_amount)) {
+			$journal_line['line_number'] = $line_number;
+			$journal_line['amount'] = $accural_amount;
+			$journal_line['account_id'] = $po_v_i->accrual_ac_id;
+			$journal_line['dr_cr'] = 'cr';
+			array_push($journal_line_a, $journal_line);
+		 }
+
+		 //PPV if the Accrual & Standard Cost Amounts are differnt
+		 if ($accural_amount - $total_amount != 0) {
+			$line_number++;
+			$ppv_amount = $accural_amount - $total_amount;
+			$journal_line['line_number'] = $line_number;
+			$journal_line['amount'] = $ppv_amount;
+			$journal_line['account_id'] = $po_v_i->ppv_ac_id;
+			if ($ppv_amount > 0) {
+			 $journal_line['dr_cr'] = 'dr';
+			} else {
+			 $journal_line['dr_cr'] = 'cr';
+			}
+			array_push($journal_line_a, $journal_line);
+		 }
+		}
+
+		if ($this->transaction_type_id == 7 || $this->transaction_type_id == 11 || $this->transaction_type_id == 10) {
+		 $line_number = 1;
+		 foreach ($journal_line_a as $journal_line) {
+			if ($journal_line['line_number'] > $line_number) {
+			 $line_number = $journal_line['line_number'];
+			}
+		 }
+		 $line_number++;
+		 //get journal lines from wip
+		 $woh = new wip_wo_header();
+		 $woh->findBy_id($this->wip_wo_header_id);
+			 $wip_accounting_group_id = $woh->wip_accounting_group_id;
+		 $wip_journal_line_a = $this->_cretae_wipJournal_line_array($element_value_a, $wip_accounting_group_id, 'cr', $line_number);
+		 $journal_line_a = array_merge($journal_line_a, $wip_journal_line_a);
+		}
+
 		if ($this->transaction_type_id == 2) {
 		 $total_amount = 0;
 		 $line_number = 1;
@@ -413,6 +526,7 @@ class inv_transaction extends dbObject {
 			array_push($journal_line_a, $journal_line);
 		 }
 		}
+
 		break;
 
 	 case 3 :
@@ -427,7 +541,7 @@ class inv_transaction extends dbObject {
 		$journal_line_from_a = $this->_cretae_journal_line_array($element_value_a, $this->from_subinventory_id, 'cr', 1);
 		$line_number = 1;
 		foreach ($journal_line_from_a as $journal_line) {
-		 	 if ($journal_line['line_number'] > $line_number) {
+		 if ($journal_line['line_number'] > $line_number) {
 			$line_number = $journal_line['line_number'];
 		 }
 		}

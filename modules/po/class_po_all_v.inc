@@ -2,7 +2,7 @@
 
 class po_all_v extends dbObject {
 
- protected static $table_name = "all_po_v";
+ protected static $table_name = "po_all_v";
  public static $primary_column = "po_header_id";
  public $field_a = [
 		 'po_header_id',
@@ -24,7 +24,7 @@ class po_all_v extends dbObject {
 		 'payment_term_description',
 		 'po_line_id',
 		 'line_type',
-		 'line_number',
+		 'po_line_number',
 		 'item_id',
 		 'item_description',
 		 'line_description',
@@ -44,7 +44,11 @@ class po_all_v extends dbObject {
 		 'po_received_quantity',
 		 'need_by_date',
 		 'promise_date',
-		 'ship_to_org'
+		 'ship_to_org',
+		 'charge_ac_id',
+		 'accrual_ac_id',
+		 'budget_ac_id',
+		 'ppv_ac_id',
  ];
  public $initial_search = [
 		 "po_header_id",
@@ -65,7 +69,7 @@ class po_all_v extends dbObject {
 		 'unit_price',
 		 'line_quantity',
 		 'po_number',
-		 'line_number',
+		 'po_line_number',
 		 'shipment_number',
 		 'quantity',
 		 'received_quantity',
@@ -73,8 +77,12 @@ class po_all_v extends dbObject {
 		 'delivered_quantity',
 		 'invoiced_quantity',
 		 'paid_quantity',
+		 'supplier_id',
+		 'supplier_site_id',
 		 'supplier_name',
+		 'supplier_number',
 		 'supplier_site_name',
+		 'supplier_site_number',
 		 'item_number',
 		 'item_description',
 		 'item_id',
@@ -96,7 +104,7 @@ class po_all_v extends dbObject {
 		 '_show_view_path' => 1,
 //		 '_view_action_meassge' => 'View',
 		 '_extra_path' => array('form.php?class_name=ap_transaction_header&mode=9' => 'Invoice',
-				 'form.php?class_name=receipt_header&mode=9' => 'Receive')
+				 'form.php?class_name=inv_receipt_header&mode=9' => 'Receive')
  ];
  public $pageTitle = " PO - Find All Purchase Order Headers "; //page Title
  public $option_lists = [
@@ -122,7 +130,7 @@ class po_all_v extends dbObject {
  public $payment_term_description;
  public $po_line_id;
  public $line_type;
- public $line_number;
+ public $po_line_number;
  public $item_id;
  public $item_description;
  public $line_description;
@@ -146,6 +154,10 @@ class po_all_v extends dbObject {
  //extra fields
  public $receipt_line_id;
  public $received_quantity;
+ public $charge_ac_id;
+ public $accrual_ac_id;
+ public $budget_ac_id;
+ public $ppv_ac_id;
 
  public function __set($name, $value) {
 	$this->$name = $value;
@@ -160,11 +172,12 @@ payment_term_id,
 supplier_name, supplier_number,
 supplier_site_name, supplier_site_number,
 payment_term, payment_term_description,
-po_line_id, line_type, line_number,	item_id, item_description, line_description, line_quantity, unit_price, line_price,
+po_line_id, line_type, po_line_number,	item_id, item_description, line_description, line_quantity, unit_price, line_price,
 item_number, uom_id, item_status,
 po_detail_id, shipment_number, ship_to_id, sub_inventory_id, locator_id, requestor, quantity,
 need_by_date, promise_date,
 received_quantity, accepted_quantity, delivered_quantity, invoiced_quantity, paid_quantity,
+charge_ac_id, accrual_ac_id,budget_ac_id, ppv_ac_id,
 ship_to_org, created_by, creation_date, last_update_by, last_update_date
 )
 AS
@@ -182,6 +195,7 @@ po_detail.po_detail_id, po_detail.shipment_number, po_detail.ship_to_inventory, 
 po_detail.locator_id, po_detail.requestor, po_detail.quantity, po_detail.need_by_date, po_detail.promise_date,
 po_detail.received_quantity, po_detail.accepted_quantity, po_detail.delivered_quantity, 
 po_detail.invoiced_quantity, po_detail.paid_quantity,
+po_detail.charge_ac_id, po_detail.accrual_ac_id,po_detail.budget_ac_id, po_detail.ppv_ac_id,
 org.org,
 po_header.created_by, po_header.creation_date, po_header.last_update_by, po_header.last_update_date
 
@@ -195,6 +209,18 @@ LEFT JOIN po_detail ON po_line.po_line_id = po_detail.po_line_id
 LEFT JOIN org ON po_detail.ship_to_inventory = org.org_id
 
 ";
+ }
+
+ public function findBy_poDetailId() {
+	$sql = " SELECT * FROM ";
+	$sql .= self::$table_name;
+	$sql .= " WHERE po_detail_id = :po_detail_id ";
+	$sql .= " LIMIT 1 ";
+
+	$param_a = ['po_detail_id'];
+	$value_a = ['po_detail_id' => $this->po_detail_id];
+	$result = $this->findBy_sql($sql, $param_a, $value_a);
+	return !empty($result) ? array_pop($result) : false;
  }
 
 }

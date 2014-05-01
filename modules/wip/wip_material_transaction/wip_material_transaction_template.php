@@ -168,7 +168,7 @@
 							 <th>Account</th>
 							 <th>Unit Cost</th>
 							 <th>Costed Amount</th>
-							 <th>Transferred To GL<th>
+							 <th>Journal Id<th>
 							</tr>
 						 </thead>
 						 <tbody class="inv_transaction_values form_data_line_tbody">
@@ -176,9 +176,7 @@
 							 <td><?php $f->ac_field_wid('account_id'); ?></td>
 							 <td><?php form::text_field_wid('unit_cost'); ?></td>
 							 <td><?php form::text_field_wid('costed_amount'); ?></td>
-							 <td>
-								<?php echo form::checkBox_field('transfer_to_gl_cb', $$class->transfer_to_gl_cb, 'transfer_to_gl_cb', $readonly); ?>
-							 </td> 
+							 <td><?php form::text_field_wid('gl_journal_header_id'); ?></td>
 							</tr>
 						 </tbody>
 						</table>

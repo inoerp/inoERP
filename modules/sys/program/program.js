@@ -29,4 +29,6 @@ $(document).ready(function() {
  classContextMenu.btn1DivId = 'program_id';
  classContextMenu.contextMenu();
 
+deleteData('form.php?class_name=sys_program' , 'sys_program_id');
+
 });

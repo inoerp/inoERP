@@ -5,14 +5,14 @@
 	 <div id="content_top"></div>
 	 <div id="content">
 		<div id="structure">
-		 <div id="po_divId">
+		 <div id="po_requisition_divId">
 			<!--    START OF FORM HEADER-->
 			<div class="error"></div><div id="loading"></div>
 			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 			<!--    End of place for showing error messages-->
-
+      <span class="heading">Requisition Header </span>
 			<div id ="form_header">
-			 <form action=""  method="post" id="po_header"  name="po_header">
+			 <form action=""  method="post" id="po_requisition_header"  name="po_requisition_header">
 				<div id="tabsHeader">
          <ul class="tabMain">
           <li><a href="#tabsHeader-1">Basic Info</a></li>
@@ -25,25 +25,26 @@
 					<div id="tabsHeader-1" class="tabContent">
 					 <div class="large_shadow_box"> 
 						<ul class="column five_column">
-						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="po_header_id select_popup">
-							 PO Header Id : </label>
-							<?php echo form::text_field('po_header_id', $po_header->po_header_id, '15', '25', '', 'System Number', 'po_header_id', $readonly) ?>
-							<a name="show" href="po.php?po_header_id=" class="show po_header_id">
+						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="po_requisition_header_id select_popup clickable">
+							 Requisition  Id : </label>
+							<?php echo form::text_field('po_requisition_header_id', $po_requisition_header->po_requisition_header_id, '15', '25', '', 'System Number', 'po_requisition_header_id', $readonly) ?>
+							<a name="show" href="po_requisition.php?po_requisition_header_id=" class="show po_requisition_header_id">
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
-						 <li><label>PO Number : </label>
-							<?php echo form::text_field_d('po_number'); ?>
+						 <li><label>Requisition Number : </label>
+							<?php echo form::text_field_d('po_requisition_number'); ?>
 						 </li>
 						 <li><label>BU Name(1) : </label>
-							<?php echo form::select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $po_header->bu_org_id, 'bu_org_id', $readonly, '', ''); ?>
+							<?php echo form::select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $po_requisition_header->bu_org_id, 'bu_org_id', $readonly, '', ''); ?>
 						 </li>
-						 <li><label>PO Type(2) : </label>
-							<?php echo form::select_field_from_object('po_type', po_header::po_types(), 'option_line_code', 'option_line_value', $po_header->po_type, 'po_type', $readonly, '', ''); ?>
+						 <li><label>Requisition Type(2) : </label>
+							<?php echo form::select_field_from_object('po_requisition_type', po_requisition_header::po_requisition_types(), 'option_line_code', 'option_line_value', $po_requisition_header->po_requisition_type, 'po_requisition_type', $readonly, '', ''); ?>
 						 </li>
-						 <li><label><input type="button"  class="find_popup supplierId"> Supplier Id(3) : </label>
+						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supplier_id select_popup clickable">
+							 Supplier Id : </label>
 							<?php echo form::text_field_dsrm('supplier_id'); ?>
 						 </li>
-						 <li><label class="auto_complete">Supplier Name(3) : </label><?php echo $supplier_name_stmt; ?></li>
+						 <li><label class="auto_complete">Supplier Name : </label><?php echo $supplier_name_stmt; ?></li>
 						 <li><label class="auto_complete">Supplier Number : </label><?php echo $supplier_number_stmt; ?></li>
 						 <li><label>Supplier Site : </label>
 							<?php
@@ -60,7 +61,7 @@
 							<?php echo form::extra_field($$class->ef_id, '10', $readonly); ?>
 						 </li>
 						 <li><label>Status : </label>                      
-							<span class="button"><?php echo!empty($$class->po_status) ? $$class->po_status : ""; ?></span>
+							<span class="button"><?php echo!empty($$class->requisition_status) ? $$class->requisition_status : ""; ?></span>
 						 </li>
 						 <li><label>Revision : </label>
 							<?php echo form::checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?>
@@ -81,16 +82,10 @@
 					 <div> 
 						<ul class="column five_column">
 						 <li><label>Currency : </label>
-							<?php echo!(empty($po_currency_statement)) ? $po_currency_statement : form::text_field_d('currency'); ?>
+							<?php echo!(empty($po_requisition_currency_statement)) ? $po_requisition_currency_statement : form::text_field_d('currency'); ?>
 						 </li>
 						 <li><label>Payment Term : </label>
-							<?php echo!(empty($po_paymentTerm_statement)) ? $po_paymentTerm_statement : form::text_field_d('payment_term_id'); ?>
-						 </li>
-						 <li><label>Agreement Start Date : </label>
-							<?php echo form::date_field('agreement_start_date', $$class->agreement_start_date) ?>
-						 </li>
-						 <li><label>Agreement End Date : </label>
-							<?php echo form::date_field('agreement_end_date', $$class->agreement_start_date) ?>
+							<?php echo!(empty($po_requisition_paymentTerm_statement)) ? $po_requisition_paymentTerm_statement : form::text_field_d('payment_term_id'); ?>
 						 </li>
 						 <li><label>Exchange Rate Type : </label>
 							<?php echo form::text_field_d('exchange_rate_type'); ?>
@@ -101,9 +96,6 @@
 						 <li><label>Header Amount : </label>
 							<?php form::number_field_d('header_amount'); ?>
 						 </li>
-						 <li><label>Released Amount : </label>
-							<?php form::number_field_d('released_amount'); ?>
-						 </li>
 						</ul>
 					 </div>
 					</div>
@@ -111,14 +103,14 @@
 					 <div> 
 						<ul class="column five_column">
 						 <li><label>Ship To Site Id : 
-							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup"></label>
+							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_po_requisitionpup"></label>
 							<?php echo form::text_field_d('ship_to_id'); ?>
 						 </li>
 						 <li><label>Ship To Site Address : </label>
 							<?php echo form::text_field_d('ship_to_address'); ?>
 						 </li>
 						 <li><label>Bill To Site Id :
-							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup"></label>
+							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_po_requisitionpup"></label>
 							<?php echo form::text_field_d('bill_to_id'); ?>
 						 </li>
 						 <li><label>Bill To Site Address :</label>
@@ -137,7 +129,7 @@
 					 <div> 
 						<div id="show_attachment" class="show_attachment">
 						 <input type="button" class="attachment_button button" value="Attachements" id="attachment_button" name="">
-						 <?php echo file::attachment_statement($po_file); ?>
+						 <?php echo file::attachment_statement($po_requisition_file); ?>
 						 <div id="supplier_header_level_attachement" >
 						 </div>
 						 <div id="supplier_line_level_attachement" >
@@ -150,20 +142,14 @@
 						<ul class="column four_column">
 						 <li id="document_print"><label>Document Print : </label>
 							<a class="button" target="_blank"
-								 href="po_print.php?po_header_id=<?php echo!(empty($$class->po_header_id)) ? $$class->po_header_id : ""; ?>" >Print PO</a>
+								 href="po_requisition_print.php?po_requisition_header_id=<?php echo!(empty($$class->po_requisition_header_id)) ? $$class->po_requisition_header_id : ""; ?>" >Print Requisition</a>
 						 </li>
 						 <li id="document_status"><label>Change Status : </label>
-							<?php echo form::select_field_from_object('po_status', po_header::po_status(), 'option_line_code', 'option_line_value', $po_header->po_status, 'set_po_status', $readonly, '', ''); ?>
-						 </li>
-						 <li id="copy_header"><label>Copy Document : </label>
-							<input type="button" class="button" id="copy_docHeader" value="PO Header">
-						 </li>
-						 <li id="copy_line"><label></label>
-							<input type="button" class="button" id="copy_docLine" value="PO Lines">
+							<?php echo form::select_field_from_object('requisition_status', po_requisition_header::po_requisition_status(), 'option_line_code', 'option_line_value', $po_requisition_header->requisition_status, 'set_requisition_status', $readonly, '', ''); ?>
 						 </li>
 						</ul>
 
-						<div id="comment" class="shoe_comments">
+						<div id="comment" class="show_comments">
 						</div>
 					 </div>
 					</div>
@@ -173,8 +159,8 @@
 			 </form>
 			</div>
 
-			<div id="form_line" class="form_line"><span class="heading">PO Lines & Shipments </span>
-			 <form action=""  method="post" id="po_site"  name="po_line">
+			<div id="form_line" class="form_line"><span class="heading">Requisition Lines & Shipments </span>
+			 <form action=""  method="po_requisitionst" id="po_requisition_site"  name="po_requisition_line">
 				<div id="tabsLine">
 				 <ul class="tabMain">
 					<li><a href="#tabsLine-1">Basic</a></li>
@@ -201,21 +187,21 @@
 						<tbody class="form_data_line_tbody">
 						 <?php
 						 $count = 0;
-						 foreach ($po_line_object as $po_line) {
+						 foreach ($po_requisition_line_object as $po_requisition_line) {
 							?>         
- 						 <tr class="po_line<?php echo $count ?>">
+ 						 <tr class="po_requisition_line<?php echo $count ?>">
  							<td>    
  							 <ul class="inline_action">
  								<li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
  								<li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
- 								<li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($po_line->item_description); ?>"></li>           
- 								<li><?php echo form::hidden_field('po_header_id', $po_header->po_header_id); ?></li>
+ 								<li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($po_requisition_line->item_description); ?>"></li>           
+ 								<li><?php echo form::hidden_field('po_requisition_header_id', $po_requisition_header->po_requisition_header_id); ?></li>
  							 </ul>
  							</td>
- 							<td><?php form::text_field_wid2sr('po_line_id'); ?></td>
- 							<!--<td><?php // form::text_field_wid2s('line_number');                ?></td>-->
+ 							<td><?php form::text_field_wid2sr('po_requisition_line_id'); ?></td>
+ 							<!--<td><?php // form::text_field_wid2s('line_number');                 ?></td>-->
  							<td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
- 							<td><?php echo form::select_field_from_object('line_type', po_line::po_line_types(), 'option_line_id', 'option_line_code', $$class_second->line_type, 'line_type', $readonly); ?></td>
+ 							<td><?php echo form::select_field_from_object('line_type', po_requisition_line::po_requisition_line_types(), 'option_line_id', 'option_line_code', $$class_second->line_type, 'line_type', $readonly); ?></td>
  							<td><?php form::text_field_wid2sr('item_id'); ?></td>
  							<td><?php form::text_field_wid2('item_number', 'select_item_number'); ?>
  							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
@@ -228,19 +214,19 @@
  							<td class="add_detail_values"><img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
  							 <!--</td></tr>-->	
 								<?php
-								$po_line_id = $po_line->po_line_id;
-								if (!empty($po_line_id)) {
-								 $po_detail_object = po_detail::find_by_po_lineId($po_line_id);
+								$po_requisition_line_id = $po_requisition_line->po_requisition_line_id;
+								if (!empty($po_requisition_line_id)) {
+								 $po_requisition_detail_object = po_requisition_detail::find_by_po_requisition_lineId($po_requisition_line_id);
 								} else {
-								 $po_detail_object = array();
+								 $po_requisition_detail_object = array();
 								}
-								if (count($po_detail_object) == 0) {
-								 $po_detail = new po_detail();
-								 $po_detail_object = array();
-								 array_push($po_detail_object, $po_detail);
+								if (count($po_requisition_detail_object) == 0) {
+								 $po_requisition_detail = new po_requisition_detail();
+								 $po_requisition_detail_object = array();
+								 array_push($po_requisition_detail_object, $po_requisition_detail);
 								}
 								?>
-        <!--						 <tr><td>-->
+         <!--						 <tr><td>-->
  							 <div class="class_detail_form">
  								<fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
  								 <div class="tabsDetail">
@@ -269,24 +255,24 @@
  										 <tbody class="form_data_detail_tbody">
 											 <?php
 											 $detailCount = 0;
-											 foreach ($po_detail_object as $po_detail) {
-												$class_third = 'po_detail';
-												$$class_third = &$po_detail;
+											 foreach ($po_requisition_detail_object as $po_requisition_detail) {
+												$class_third = 'po_requisition_detail';
+												$$class_third = &$po_requisition_detail;
 												?>
-												<tr class="po_detail<?php echo $count . '-' . $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
+												<tr class="po_requisition_detail<?php echo $count . '-' . $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
 												 <td>   
 													<ul class="inline_action">
 													 <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
 													 <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-													 <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($po_detail->po_detail_id); ?>"></li>           
-													 <li><?php echo form::hidden_field('po_line_id', $po_line->po_line_id); ?></li>
-													 <li><?php echo form::hidden_field('po_header_id', $po_header->po_header_id); ?></li>
+													 <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($po_requisition_detail->po_requisition_detail_id); ?>"></li>           
+													 <li><?php echo form::hidden_field('po_requisition_line_id', $po_requisition_line->po_requisition_line_id); ?></li>
+													 <li><?php echo form::hidden_field('po_requisition_header_id', $po_requisition_header->po_requisition_header_id); ?></li>
 
 													</ul>
 												 </td>
-												 <td><?php form::text_field_wid3sr('po_detail_id'); ?></td>
+												 <td><?php form::text_field_wid3sr('po_requisition_detail_id'); ?></td>
 												 <td><?php form::number_field_wid3s('shipment_number', 'detail_number'); ?></td>
-												 <!--<td><?php // echo form::text_field('shipment_number', $$class_third->shipment_number, '8', '20', 1, 'Auto no', '', $readonly, 'details_number');											        ?></td>-->
+												 <!--<td><?php // echo form::text_field('shipment_number', $$class_third->shipment_number, '8', '20', 1, 'Auto no', '', $readonly, 'details_number');											         ?></td>-->
 												 <td><?php echo form::select_field_from_object('ship_to_inventory', org::find_all_inventory(), 'org_id', 'org', $$class_third->ship_to_inventory, '', $readonly); ?></td>
 												 <td><?php form::text_field_wid3('ship_to_location_id'); ?></td>
 												 <td><?php form::number_field_wid3s('quantity'); ?></td>
@@ -313,11 +299,11 @@
  										 <tbody class="form_data_detail_tbody">
 											 <?php
 											 $detailCount = 0;
-											 foreach ($po_detail_object as $po_detail) {
-												$class_third = 'po_detail';
-												$$class_third = &$po_detail;
+											 foreach ($po_requisition_detail_object as $po_requisition_detail) {
+												$class_third = 'po_requisition_detail';
+												$$class_third = &$po_requisition_detail;
 												?>
-												<tr class="po_detail<?php echo $count . '-' . $detailCount; ?> <?php echo $detailCount != 0 ? ' new_object' : '' ?>">
+												<tr class="po_requisition_detail<?php echo $count . '-' . $detailCount; ?> <?php echo $detailCount != 0 ? ' new_object' : '' ?>">
 												 <td><?php form::text_field_wid3('sub_inventory_id'); ?></td>
 												 <td><?php form::text_field_wid3('locator_id'); ?></td>
 												 <td><?php form::text_field_wid3('requestor'); ?></td>
@@ -342,11 +328,11 @@
  										 <tbody class="form_data_detail_tbody">
 											 <?php
 											 $detailCount = 0;
-											 foreach ($po_detail_object as $po_detail) {
-												$class_third = 'po_detail';
-												$$class_third = &$po_detail;
+											 foreach ($po_requisition_detail_object as $po_requisition_detail) {
+												$class_third = 'po_requisition_detail';
+												$$class_third = &$po_requisition_detail;
 												?>
-												<tr class="po_detail<?php echo $count . '-' . $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
+												<tr class="po_requisition_detail<?php echo $count . '-' . $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
 												 <td><?php $f->ac_field_d3m('charge_ac_id'); ?></td>
 												 <td><?php $f->ac_field_d3m('accrual_ac_id'); ?></td>
 												 <td><?php $f->ac_field_d3('budget_ac_id'); ?></td>
@@ -373,11 +359,11 @@
  										 <tbody class="form_data_detail_tbody">
 											 <?php
 											 $detailCount = 0;
-											 foreach ($po_detail_object as $po_detail) {
-												$class_third = 'po_detail';
-												$$class_third = &$po_detail;
+											 foreach ($po_requisition_detail_object as $po_requisition_detail) {
+												$class_third = 'po_requisition_detail';
+												$$class_third = &$po_requisition_detail;
 												?>
-												<tr class="po_detail<?php echo $count . '-' . $detailCount; ?> <?php echo $detailCount != 0 ? ' new_object' : '' ?>">
+												<tr class="po_requisition_detail<?php echo $count . '-' . $detailCount; ?> <?php echo $detailCount != 0 ? ' new_object' : '' ?>">
 												 <td><?php form::number_field_wid3sr('received_quantity'); ?></td>
 												 <td><?php form::number_field_wid3sr('accepted_quantity'); ?></td>
 												 <td><?php form::number_field_wid3sr('delivered_quantity'); ?></td>
@@ -422,9 +408,9 @@
 						<tbody class="form_data_line_tbody">
 						 <?php
 						 $count = 0;
-						 foreach ($po_line_object as $po_line) {
+						 foreach ($po_requisition_line_object as $po_requisition_line) {
 							?>         
- 						 <tr class="po_line<?php echo $count ?>">
+ 						 <tr class="po_requisition_line<?php echo $count ?>">
  							<td><?php form::number_field_wid2('unit_price'); ?></td>
  							<td><?php form::number_field_wid2('line_price'); ?></td>
  							<td><?php form::text_field_wid2('line_description'); ?></td>
@@ -450,9 +436,9 @@
 						<tbody class="form_data_line_tbody">
 						 <?php
 						 $count = 0;
-						 foreach ($po_line_object as $po_line) {
+						 foreach ($po_requisition_line_object as $po_requisition_line) {
 							?>         
- 						 <tr class="po_line<?php echo $count ?>">
+ 						 <tr class="po_requisition_line<?php echo $count ?>">
  							<td></td>
  						 </tr>
 							<?php

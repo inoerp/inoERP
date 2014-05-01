@@ -14,7 +14,7 @@ class wip_wo_header extends dbObject {
 		 'item_id',
 		 'wo_number',
 		 'org_id',
-		 'wip_class',
+		 'wip_accounting_group_id',
 		 'wo_type',
 		 'wo_status',
 		 'start_date',
@@ -49,7 +49,6 @@ class wip_wo_header extends dbObject {
 		 'item_id',
 		 'wo_number',
 		 'org_id',
-		 'wip_class',
 		 'wo_type',
 		 'start_date',
 		 'wo_status'
@@ -59,7 +58,6 @@ class wip_wo_header extends dbObject {
 		 'item_id',
 		 'wo_number',
 		 'org_id',
-		 'wip_class',
 		 'wo_type',
 		 'start_date',
 		 'wo_status'
@@ -78,7 +76,7 @@ class wip_wo_header extends dbObject {
  public $requiredField = [
 		 'item_id',
 		 'org_id',
-		 'wip_class',
+		 'wip_accounting_group_id',
 		 'wo_type',
 		 'start_date',
 		 'quantity',
@@ -100,7 +98,7 @@ class wip_wo_header extends dbObject {
  public $item_id;
  public $wo_number;
  public $org_id;
- public $wip_class;
+ public $wip_accounting_group_id;
  public $wo_type;
  public $wo_status;
  public $start_date;
@@ -282,6 +280,7 @@ class wip_wo_header extends dbObject {
 	$sql .= " WHERE wip_wo_header_id =  '{$wip_wo_header_id }' ";
 	try {
 	 $dbc->ddlexecute($sql);
+	 $this->wo_number = $wo_number;
 	 return true;
 	} catch (Exception $e) {
 	 echo "<br> WIP WO Number Update Failed" . $e->getMessage();

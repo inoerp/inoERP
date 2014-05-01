@@ -1,21 +1,21 @@
 <?php
 
-class po_header extends dbObject {
+class po_requisition_header extends dbObject {
 
- protected static $table_name = "po_header";
- public static $dependent_classes = ['po_line', 'po_detail'];
- public static $primary_column = "po_header_id";
- public static $primary_column2 = "po_number";
- public static $key_column = 'supplier_id';
+ protected static $table_name = "po_requisition_header";
+ public static $dependent_classes = ['po_requisition_line', 'po_requisition_detail'];
+ public static $primary_column = "po_requisition_header_id";
+ public static $primary_column2 = "po_requisition_number";
+ public static $key_column = 'bu_org_id';
  public static $module = "po";
  public $checkbox = [
 		 "rev_enabled_cb"
  ];
  public $field_a = [
-		 'po_header_id',
+		 'po_requisition_header_id',
 		 'bu_org_id',
-		 'po_type',
-		 'po_number',
+		 'po_requisition_type',
+		 'po_requisition_number',
 		 'supplier_id',
 		 'supplier_site_id',
 		 'buyer',
@@ -25,13 +25,10 @@ class po_header extends dbObject {
 		 'header_amount',
 		 'currency',
 		 'payment_term_id',
-		 'agreement_start_date',
-		 'aggrement_end_date',
 		 'exchange_rate_type',
 		 'exchange_rate',
-		 'released_amount',
 		 "ef_id",
-		 "po_status",
+		 "requisition_status",
 		 "rev_enabled_cb",
 		 "rev_number",
 		 "created_by",
@@ -40,8 +37,8 @@ class po_header extends dbObject {
 		 "last_update_date"
  ];
  public $initial_search = [
-		 "po_header_id",
-		 "po_number",
+		 "po_requisition_header_id",
+		 "po_requisition_number",
 		 "supplier_id",
 		 "supplier_name",
 		 "supplier_number",
@@ -49,9 +46,9 @@ class po_header extends dbObject {
 		 "buyer"
  ];
  public $column = [
-		 "po_header_id",
-		 "po_number",
-		 "po_status",
+		 "po_requisition_header_id",
+		 "po_requisition_number",
+		 "requisition_status",
 		 "supplier_id",
 		 "creation_date",
 		 "buyer",
@@ -59,12 +56,7 @@ class po_header extends dbObject {
 		 "supplier_site_name",
  ];
  public $requiredField = [
-		 'supplier_id',
-		 'supplier_site_id',
-		 'ship_to_id',
-		 'bill_to_id',
-		 'currency',
-		 'payment_term_id'
+		 'bu_org_id'
  ];
  public $addressField = [
 		 'ship_to_id',
@@ -78,22 +70,20 @@ class po_header extends dbObject {
 		 "bill_to_address"
  ];
  public $search = [
-		  '_show_update_path' => 1,
+		 '_show_update_path' => 1,
 		 '_update_action_meassge' => 'Update PO',
 		 '_show_view_path' => 1,
-//		 '_view_action_meassge' => 'View',
-		 '_extra_path' => array('form.php?class_name=ap_transaction_header&mode=9'=>'Invoice',
-'form.php?class_name=receipt_header&mode=9'=>'Receive'				 )
+		 '_extra_path' => array('form.php?class_name=po_header&mode=9' => 'Create PO')
  ];
- public $pageTitle = " PO - Purchase Orders "; //page Title
+ public $pageTitle = " Purchasing - Create & Update Requisitions "; //page Title
  public $option_lists = [
-		 'po_type' => 'PO_TYPE',
-		 'po_status' => 'PO_STATUS',
+		 'requisition_type' => 'PO_REQUISTION_TYPE',
+		 'requisition_status' => 'PO_REQUISTION_STATUS',
  ];
- public $po_header_id;
+ public $po_requisition_header_id;
  public $bu_org_id;
- public $po_type;
- public $po_number;
+ public $po_requisition_type;
+ public $po_requisition_number;
  public $supplier_id;
  public $supplier_site_id;
  public $buyer;
@@ -109,7 +99,7 @@ class po_header extends dbObject {
  public $exchange_rate;
  public $released_amount;
  public $ef_id;
- public $po_status;
+ public $requisition_status;
  public $rev_enabled_cb;
  public $rev_number;
  public $created_by;
@@ -139,29 +129,29 @@ class po_header extends dbObject {
 
  public function _after_save() {
 	global $db;
-	echo '<br/> entered PO number is ' . $this->po_number;
-	if ((!empty($this->po_header_id)) && empty($this->po_number)) {
-	 $po_header_id = $this->po_header_id;
+	echo '<br/> entered Requisition number is ' . $this->po_requisition_number;
+	if ((!empty($this->po_requisition_header_id)) && empty($this->po_requisition_number)) {
+	 $po_requisition_header_id = $this->po_requisition_header_id;
 	 $bu_org_id = $this->bu_org_id;
-	 $po_number = $bu_org_id . '-' . $po_header_id;
-	 echo '<br/> New PO number is ' . $po_number;
-	 $this->msg = $this->update_poNumber($po_header_id, $po_number);
+	 $po_requisition_number = $bu_org_id . '-' . $po_requisition_header_id;
+	 echo '<br/> New PO number is ' . $po_requisition_number;
+	 $this->msg = $this->update_po_requisitionNumber($po_requisition_header_id, $po_requisition_number);
 	}
 
 	return $this->msg;
  }
 
- private function update_poNumber($po_header_id, $po_number) {
+ private function update_po_requisitionNumber($po_requisition_header_id, $po_requisition_number) {
 	global $db;
 
 	$sql = " UPDATE " . self::$table_name;
-	$sql .= " SET po_number = '{$po_number}'  ";
-	$sql .= " WHERE po_header_id = $po_header_id  ";
+	$sql .= " SET po_requisition_number = '{$po_requisition_number}'  ";
+	$sql .= " WHERE po_requisition_header_id = $po_requisition_header_id  ";
 
 //	    echo "<br/>$sql is <br/>" . $sql;
 	if ($db->query($sql)) {
 	 $this->msg = 1;
-	 $this->po_number = $po_number;
+	 $this->po_requisition_number = $po_requisition_number;
 	} else {
 	 $this->msg = 0;
 	}
@@ -182,29 +172,29 @@ class po_header extends dbObject {
 	return $array_of_objects;
  }
 
- Public static function po_types() {
-	$option_header = option_header::find_by_name('PO_TYPE');
-	$po_types = option_line::find_by_option_id($option_header->option_header_id);
-	return $po_types;
+ Public static function po_requisition_types() {
+	$option_header = option_header::find_by_name('PO_REQUISITION_TYPE');
+	$po_requisition_types = option_line::find_by_option_id($option_header->option_header_id);
+	return $po_requisition_types;
  }
 
- Public static function po_status() {
+ Public static function po_requisition_status() {
 	$option_header = option_header::find_by_name('PO_STATUS');
-	$po_status = option_line::find_by_option_id($option_header->option_header_id);
-	return $po_status;
+	$po_requisition_status = option_line::find_by_option_id($option_header->option_header_id);
+	return $po_requisition_status;
  }
 
- public function copy($po_header_id) {
+ public function copy($po_requisition_header_id) {
 	global $db;
-	$sql1 = " CREATE TEMPORARY TABLE tmptable SELECT * FROM po_header WHERE `po_header_id` = '{$po_header_id}' ";
+	$sql1 = " CREATE TEMPORARY TABLE tmptable SELECT * FROM po_requisition_header WHERE `po_requisition_header_id` = '{$po_requisition_header_id}' ";
 	if ($db->query($sql1)) {
-	 $sql2 = "  UPDATE tmptable SET `po_header_id` = '' ,
+	 $sql2 = "  UPDATE tmptable SET `po_requisition_header_id` = '' ,
            `org_id` = '{$this->org_id}' 
-          WHERE `po_header_id` = '{$po_header_id}' ";
+          WHERE `po_requisition_header_id` = '{$po_requisition_header_id}' ";
 	 if ($db->query($sql2)) {
-		$sql3 = " INSERT INTO `po_header` SELECT * FROM tmptable WHERE `po_header_id` = '' ";
+		$sql3 = " INSERT INTO `po_requisition_header` SELECT * FROM tmptable WHERE `po_requisition_header_id` = '' ";
 		if ($db->query($sql3)) {
-		 $this->po_header_id = $db->insert_id();
+		 $this->po_requisition_header_id = $db->insert_id();
 		 $this->msg = 1;
 		} else {
 		 $this->msg = 0;
@@ -217,7 +207,7 @@ class po_header extends dbObject {
  public function save() {
 	$primary_column = static::$primary_column;
 	if (empty($this->$primary_column)) {
-	 $this->po_status = 'Entered';
+	 $this->requisition_status = 'Entered';
 	 $this->create();
 	} else {
 	 $this->update($this->$primary_column);
@@ -227,5 +217,5 @@ class po_header extends dbObject {
 
 }
 
-//end of po_header class
+//end of po_requisition_header class
 ?>

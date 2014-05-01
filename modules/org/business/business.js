@@ -29,14 +29,14 @@ $(document).ready(function() {
   });
 
 //popu for selecting accounts
- $('#content').on('click', '.account_popup', function() {
-	var rowClass = $(this).closest('tr').prop('class');
-	var fieldClass = $(this).closest('td').find('.select_account').prop('class');
-	localStorage.setItem("row_class", rowClass);
-	localStorage.setItem("field_class", fieldClass);
-	void window.open('select.php?class_name=coa_combination', '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
+// $('#content').on('click', '.account_popup', function() {
+//	var rowClass = $(this).closest('tr').prop('class');
+//	var fieldClass = $(this).closest('td').find('.select_account').prop('class');
+//	localStorage.setItem("row_class", rowClass);
+//	localStorage.setItem("field_class", fieldClass);
+//	void window.open('select.php?class_name=coa_combination', '_blank',
+//					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+// });
  
 	 	 //context menu
  var classContextMenu = new contextMenuMain();

@@ -10,7 +10,7 @@ class bom_overhead_resource_assignment extends bom_overhead {
  public $field_a = [
 		 'bom_overhead_resource_assignment_id',
 		 'bom_overhead_id',
-		 'cost_type_id',
+		 'bom_cost_type',
 		 'resource_id',
 		 'created_by',
 		 'creation_date',
@@ -19,21 +19,21 @@ class bom_overhead_resource_assignment extends bom_overhead {
  ];
 
  public $fields_inForm_notInDataBase = [
-		 'cost_type_description',
+		 'bom_cost_type_description',
 		 'resource_description'
  ];
 
  public $requiredField= [
 		 'bom_overhead_id',
-		 'cost_type_id',
+		 'bom_cost_type',
 		 'resource_id'
  ];
  
  public $bom_overhead_id;
- public $cost_type_id;
+ public $bom_cost_type;
  public $bom_overhead_resource_assignment_id;
  public $resource_id;
- public $cost_type_description;
+ public $bom_cost_type_description;
  public $resource_description;
  public $created_by;
  public $creation_date;
@@ -49,6 +49,18 @@ class bom_overhead_resource_assignment extends bom_overhead {
 					" where bom_overhead_id= '{$bom_overheadId}' ";
 	$result = self::find_by_sql($sql);
 	return $result;
+ }
+ 
+   public function findBy_resourceId_bomCostType() {
+	$sql = " SELECT * FROM  ";
+	$sql .= self::$table_name;
+	$sql .= " WHERE bom_cost_type =:bom_cost_type AND bom_resource_id = :bom_resource_id ";
+	$sql .= " LIMIT 1 ";
+
+	$param_a = ['bom_cost_type', 'bom_resource_id'];
+	$value_a = ['bom_cost_type' => $this->bom_cost_type, 'bom_resource_id' => $this->bom_resource_id];
+	$result = $this->findBy_sql($sql, $param_a, $value_a);
+	return !empty($result) ? array_pop($result) : false;
  }
 
 }

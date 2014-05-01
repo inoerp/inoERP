@@ -149,13 +149,12 @@ class inventory extends org {
 	$lines = option_line::find_by_option_id($option_header->option_header_id);
 	return $lines;
  }
- 
-  Public static function costing_methods() {
+
+ Public static function costing_methods() {
 	$option_header = option_header::find_by_name('COSTING_METHODS');
 	$lines = option_line::find_by_option_id($option_header->option_header_id);
 	return $lines;
  }
-
 
  public static function find_all_item_master() {
 	$sql = " SELECT * FROM " .
@@ -164,8 +163,8 @@ class inventory extends org {
 	$result = self::find_by_sql($sql);
 	return $result;
  }
- 
-  public function findAll_itemMaster() {
+
+ public function findAll_itemMaster() {
 	global $db;
 	$sql = " SELECT * FROM " .
 					self::$table_name .
@@ -183,21 +182,47 @@ class inventory extends org {
 	return !empty($result) ? array_pop($result) : false;
  }
 
-   public static function search_add_extra_fields( &$arr ){
+ public function findRelatedDetail_ByOrgId($org_id='') {
+	global $db;
+	if(!empty($org_id)){
+	 $orgid = $org_id;
+	}else{
+	 $orgid = $this->org_id;
+	}
+	$sql = " SELECT org.org , org.org_id , org.code , org.type , 
+	 org.description, org.enterprise_org_id , org.legal_org_id, 
+	 org.business_org_id , org.inventory_org_id , org.status, legal.ledger_id,
+	 legal.legal_id, legal.legal_org_type, legal. country_of_registration, 
+	 legal.balancing_segments, business.business_id, business.business_org_type, 
+	 business.cash_ac_id, business.manager ";
+
+	$sql .= " FROM  org
+      LEFT JOIN inventory ON org.org_id = inventory.org_id
+      LEFT JOIN legal ON legal.org_id = org.legal_org_id
+      LEFT JOIN business ON business.org_id = org.business_org_id ";
+	
+	$sql .= " WHERE org.org_id = :org_id LIMIT 1";
+	
+	$value_a = ['org_id' => $orgid];
+	$result = $db->findBySql($sql, $value_a);
+	return !empty($result) ? array_pop($result) : false;
+ }
+
+ public static function search_add_extra_fields(&$arr) {
 	$org = new org;
-	if(!(is_array($arr))){
+	if (!(is_array($arr))) {
 	 return false;
 	}
-	foreach($arr as &$obj){
+	foreach ($arr as &$obj) {
 	 $primary_column = parent::$primary_column;
-	 if(!empty($obj->$primary_column)){
+	 if (!empty($obj->$primary_column)) {
 		$org_i = $org->findBy_id($obj->$primary_column);
 		$obj->org = $org_i->org;
 		$obj->description = $org_i->description;
 	 }
 	}
-	
  }
+
 }
 
 //end of inventory_org class

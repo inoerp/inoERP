@@ -173,6 +173,7 @@ class wip_move_transaction extends dbObject {
 	$inv_transaction->document_number = $this->wo_number;
 	$inv_transaction->document_id = $this->wip_wo_header_id;
 	$inv_transaction->reference = 'wip_wo_header_id';
+	$inv_transaction->wip_wo_header_id = $this->wip_wo_header_id;
 	$inv_transaction->audit_trial();
 	$inv_transaction_satus = $inv_transaction->save();
 	$inv_transaction->_after_save();
@@ -180,9 +181,7 @@ class wip_move_transaction extends dbObject {
 	 //update issued quantity
 	 $update_wo_bom_class = new wip_wo_bom();
 	 $update_wo_bom_class->wip_wo_bom_id = $bom_lines->wip_wo_bom_id;
-//	 foreach ($update_wo_bom_class->field_a as $key => $value) {
-//		$update_wo_bom_class->$value = $bom_lines->$value;
-//	 }
+
 	 if ($toOrFrom == 'from') {
 		$update_wo_bom_class->issued_quantity = $quantity + $bom_lines->issued_quantity;
 	 } elseif ($toOrFrom == 'to') {
@@ -220,8 +219,8 @@ class wip_move_transaction extends dbObject {
 	 $to_operation_step = $this->to_operation_step . '_quantity';
 
 	 /*
-	  * 1. start of from opertion quantity update
-	  */
+		* 1. start of from opertion quantity update
+		*/
 	 // $this->_update_fromOperation(&$wwrl_from);
 	 if (isset($wwrl_from_i->$from_operation_step)) {
 		$begining_from_quantity = $wwrl_from_i->$from_operation_step;
@@ -246,7 +245,7 @@ class wip_move_transaction extends dbObject {
 	 $to_routing_step = $this->to_operation_step;
 	 $wwb = new wip_wo_bom();
 	 $wwb->wip_wo_header_id = $wip_wo_header_id;
-	 
+
 	 //Moving from 10 to 10 OR 20 to 20
 	 if (($from_routing_sequence == $to_routing_sequence ) && ( $from_routing_step != $to_routing_step)) {
 		//check if auto count & backflush is enabled
@@ -312,7 +311,7 @@ class wip_move_transaction extends dbObject {
 			//back flush
 			foreach ($all_wo_bom_lines as $bom_lines) {
 			 //reduce onhand
-			  if ($bom_lines->wip_supply_type == 'OPERATION_PULL') {
+			 if ($bom_lines->wip_supply_type == 'OPERATION_PULL') {
 				$this->update_moveTransaction_andAll($bom_lines, 'from', $transaction_type_id = 6);
 			 }
 			}
@@ -367,7 +366,7 @@ class wip_move_transaction extends dbObject {
 		if (($wwrl_to_i->count_point_cb == 1) && ($wwrl_to_i->backflush_cb == 1)) {
 		 $wwb->routing_sequence = $to_routing_sequence;
 		 $all_wo_bom_lines = $wwb->findBy_woHeaderId_routingSeq();
-		  if (($to_routing_step != 'queue') && (!empty($all_wo_bom_lines))) {
+		 if (($to_routing_step != 'queue') && (!empty($all_wo_bom_lines))) {
 			//back flush
 			foreach ($all_wo_bom_lines as $bom_lines) {
 			 //reduce onhand

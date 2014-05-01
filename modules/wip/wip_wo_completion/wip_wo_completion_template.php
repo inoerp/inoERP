@@ -142,22 +142,23 @@
 							 <th>Document Type</th>
 							 <th>Doc. Number</th>
 							 <th>Doc. Id</th>
-							 <th>Reason</th>
-							 <th>Reference</th>
-							 <th>Description</th>
-							 <th>View Document</th>
+							 <th>Ref Type</th>
+							 <th>Ref Name</th>
+							 <th>Ref Value</th>
+							 <th>Ref Doc</th>
+							 <th>WO BOM Line Id</th>
 							</tr>
 						 </thead>
-						 <tbody class="inv_transaction_values">
+						 <tbody class="inv_transaction_values form_data_line_tbody">
 							<tr class="inv_transaction_row0" id="tab3_1">
-							 <td><?php form::text_field_widr('document_type'); ?>							</td>
-							 <td><?php form::text_field_widsr('document_number'); ?> 							</td>
-							 <td><?php form::text_field_widsr('document_id'); ?>							</td>
-							 <td><?php form::text_field_wid('reason'); ?>							</td>
-							 <td><?php form::text_field_widsr('reference'); ?>							</td>
-							 <td><?php form::text_field_wid('description'); ?>							</td>
-							 <td><?php echo!(empty($view_doc_statement)) ? $view_doc_statement : ''; ?>							</td>
-
+							 <td><?php form::text_field_wids('document_type'); ?>							</td>
+							 <td><?php form::text_field_wid('document_number'); ?> 							</td>
+							 <td><?php form::text_field_wids('document_id'); ?>							</td>
+							 <td><?php form::text_field_wids('reference_type'); ?>							</td>
+							 <td><?php echo $f->text_field('reference_key_name', 'wip_wo_header', '10', ''); ?>							</td>
+							 <td><?php echo $f->text_field('reference_key_value', $$class->wip_wo_header_id, '8', ''); ?>							</td>
+							 <td><?php echo!empty($ref_doc_stmt) ? $ref_doc_stmt : ''; ?></td>
+							 <td><?php form::text_field_wids('wip_wo_bom_id'); ?></td>
 							</tr>
 						 </tbody>
 						</table>
@@ -169,24 +170,15 @@
 							 <th>Account</th>
 							 <th>Unit Cost</th>
 							 <th>Costed Amount</th>
-							 <th>Transferred To GL<th>
+							 <th>Journal Id<th>
 							</tr>
 						 </thead>
 						 <tbody class="inv_transaction_values">
 							<tr class="inv_transaction_row0" id="tab4_1">
-							 <td>
-								<?php form::account_field('account_id'); ?>
-							 </td>
-							 <td>
-								<?php form::text_field_wid('unit_cost'); ?>
-							 </td>
-							 <td>
-								<?php form::text_field_wid('costed_amount'); ?>
-							 </td>
-							 <td>
-								<?php echo form::checkBox_field('transfer_to_gl_cb', $$class->transfer_to_gl_cb, 'transfer_to_gl_cb', $readonly); ?>
-							 </td> 
-
+							 <td><?php form::account_field('account_id'); ?></td>
+							 <td><?php form::text_field_wid('unit_cost'); ?></td>
+							 <td><?php form::text_field_wid('costed_amount'); ?></td>
+							 <td><?php form::text_field_wid('gl_journal_header_id'); ?></td>
 							</tr>
 						 </tbody>
 						</table>

@@ -36,7 +36,8 @@ class bom_line extends bom_header {
  public $fields_inForm_notInDataBase = [
 		 "component_item_number",
 		 "component_description",
-		 "component_uom"
+		 "component_uom",
+		 
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
 		 "bom_header_id"

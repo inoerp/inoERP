@@ -25,7 +25,7 @@ if ((!empty($_REQUEST['action'])) && ($_REQUEST['action'] = 'search')) {
 }
 ?>
 
-<div id="json_delete_line"> <?php json_delete('supplier'); ?> </div>
+<!--<div id="json_delete_line"> <?php // json_delete('supplier'); ?> </div>-->
 <div id="supplier_attachment">
  <div id="supplier_header_level_attachement">
 	<?php

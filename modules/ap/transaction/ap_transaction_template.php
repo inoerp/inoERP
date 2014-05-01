@@ -273,7 +273,7 @@
  							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
  							<td><?php $f->text_field_wid2('item_description'); ?></td>
  							<td><?php
-								echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom', $$class_second->uom_id, '', '', '', $readonly1);
+								echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', '', $readonly1);
 								?></td>
  							<td><?php form::number_field_wid2s('inv_line_quantity'); ?></td>
  							<td class="add_detail_values"><img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />

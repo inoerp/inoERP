@@ -569,6 +569,44 @@ class cst_item_cost_header extends dbObject {
 	}
  }
 
+ private function _update_linesum_by_resource_overhead(&$linesum, $routing_line_i, $bom_cost_type) {
+	foreach ($routing_line_i as $routing_line) {
+	 $routing_detail = new bom_routing_detail();
+	 $routing_detail_i = $routing_detail->findBy_parentId($routing_line->bom_routing_line_id);
+	 foreach ($routing_detail_i as $routing_detail) {
+
+		if (!empty($routing_detail->resource_id)) {
+		 $linesum_newdata = new stdClass();
+		 $resource_cost = new bom_resource_cost();
+		 $resource_cost->bom_resource_id = $routing_detail->resource_id;
+		 $resource_cost->bom_cost_type = $bom_cost_type;
+		 $resource_cost_i = $resource_cost->findBy_resourceId_bomCostType();
+		 $linesum_newdata->amount = $resource_cost_i->resource_rate * $routing_detail->resource_usage;
+		 $linesum_newdata->cost_element_type = 'RES';
+		 $linesum_newdata->cost_element_id = $routing_detail->resource_id;
+		 $linesum_newdata->cost_basis = $routing_detail->charge_basis;
+		 array_push($linesum, $linesum_newdata);
+
+		 //overhead
+		 $boh = new bom_overhead_v();
+		 $boh->resource_id = $routing_detail->resource_id;
+		 $boh->resource_bom_cost_type = $bom_cost_type;
+		 $boh_i = $boh->findBy_resourceId_bomCostType();
+		 if (!empty($boh_i)) {
+			foreach ($boh_i as $overhead) {
+			 $linesum_newOHdata = new stdClass();
+			 $linesum_newOHdata->amount = $overhead->rate * $linesum_newdata->amount;
+			 $linesum_newOHdata->cost_element_type = 'OH';
+			 $linesum_newOHdata->cost_element_id = $overhead->bom_overhead_id;
+			 $linesum_newOHdata->cost_basis = $overhead->default_basis;
+			 array_push($linesum, $linesum_newOHdata);
+			}
+		 }
+		}
+	 }
+	}
+ }
+
  private function _cost_rollup_cost_lines($header_obj) {
 	global $dbc;
 	$line_sums = [];
@@ -578,6 +616,11 @@ class cst_item_cost_header extends dbObject {
 	if (empty($boh_i)) {
 	 return;
 	}
+	$roh = new bom_routing_header();
+	$roh->item_id = $header_obj->item_id;
+	$roh_i = $roh->findBy_itemId();
+	$rol = new bom_routing_line();
+	$rol_i = $rol->findBy_parentId($roh_i->bom_routing_header_id);
 	$bol = new bom_line();
 	$bol_i = $bol->findBy_parentId($boh_i->bom_header_id);
 	if (empty($bol_i)) {
@@ -617,6 +660,8 @@ class cst_item_cost_header extends dbObject {
 		}
 	 }
 	}
+	$this->_update_linesum_by_resource_overhead($line_sums, $rol_i, $header_obj->bom_cost_type);
+	pa($line_sums);
 	$this->_add_update_cost_lines($header_obj, $line_sums);
  }
 

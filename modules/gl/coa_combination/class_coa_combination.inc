@@ -48,6 +48,8 @@ class coa_combination extends dbObject {
 //		 '_view_path' => 'modules/gl/coa/ledger_view',
 //		 '_show_view_path' => 1,
  ];
+ 
+ public $coa_combination_id;
 
  function __construct() {
 	if (!empty(static::$table_name)) {
@@ -99,6 +101,17 @@ class coa_combination extends dbObject {
 	$value_a = [ 'coa_id' => $this->coa_id, 'combination' => $combination];
 	$result = $db->findBy_sql($sql, $param_a, $value_a);
 	return !(empty($result)) ? $result : false;
+ }
+ 
+  public function findBy_exactCombination($combination) {
+	global $db;
+	$sql = " SELECT * FROM "
+					. self::$table_name
+					. " where  combination = :combination LIMIT 1";
+	$param_a = ['combination'];
+	$value_a = ['combination' => $combination];
+	$result = $db->findBy_sql($sql, $param_a, $value_a);
+	return !(empty($result)) ? array_pop($result) : false;
  }
 
  public function searchBy_coaId_combination() {

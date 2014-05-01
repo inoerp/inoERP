@@ -97,6 +97,22 @@ class legal extends dbObject {
 	return !empty($result_array) ? array_shift($result_array) : false;
  }
 
+ public function findBy_orgId($org_id = '') {
+	if (!empty($org_id)) {
+	 $orgid = $org_id;
+	} else {
+	 $orgid = $this->org_id;
+	}
+	global $db;
+	$sql = " SELECT * FROM ";
+	$sql .= self::$table_name;
+	$sql .= " WHERE org_id = :org_id ";
+	$sql .= " LIMIT 1 ";
+	$value_a = ['org_id' => $orgid];
+	$result = $db->findBySql($sql, $value_a);
+	return !empty($result) ? array_pop($result) : false;
+ }
+
  public function _before_showing() {
 
 	if (!empty($this->org_id)) {
@@ -114,21 +130,20 @@ class legal extends dbObject {
 	 }
 	}
  }
- 
-  public static function search_add_extra_fields( &$arr ){
+
+ public static function search_add_extra_fields(&$arr) {
 	$org = new org;
-	if(!(is_array($arr))){
+	if (!(is_array($arr))) {
 	 return false;
 	}
-	foreach($arr as &$obj){
+	foreach ($arr as &$obj) {
 	 $primary_column = self::$primary_column;
-	 if(!empty($obj->$primary_column)){
+	 if (!empty($obj->$primary_column)) {
 		$org_i = $org->findBy_id($obj->$primary_column);
 		$obj->org = $org_i->org;
 		$obj->description = $org_i->description;
 	 }
 	}
-	
  }
 
 }

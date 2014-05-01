@@ -25,7 +25,7 @@ setValFromSelectPage.prototype.setVal = function() {
  var component_obj = [{id: 'component_item_id', data: this.item_id},
 	{id: 'component_item_number', data: this.item_number},
 	{id: 'component_description', data: this.item_description},
-	{id: 'uom', data: this.uom_id}
+	{id: 'component_uom', data: this.uom_id}
  ];
 
  if (itemType === 'header') {
@@ -52,11 +52,11 @@ $(document).ready(function() {
 //mandatory and field sequence
  var mandatoryCheck = new mandatoryFieldMain();
  mandatoryCheck.header_id = 'wip_wo_header_id';
-// mandatoryCheck.mandatoryHeader();
+ mandatoryCheck.mandatoryHeader();
  mandatoryCheck.form_area = 'form_header';
- mandatoryCheck.mandatory_fields = ["org_id", "wip_class"];
- mandatoryCheck.mandatory_messages = ["First Select Org", "No WIP Class"];
-// mandatoryCheck.mandatoryField();
+ mandatoryCheck.mandatory_fields = ["org_id",'wo_type', "wip_accounting_group_id"];
+ mandatoryCheck.mandatory_messages = ["First Select Org",'No Work Order Type', "No WIP Accounting Group"];
+ mandatoryCheck.mandatoryField();
 
 //setting the first line & shipment number
  if (!($('.lines_number:first').val())) {
@@ -126,6 +126,7 @@ $(document).ready(function() {
  //get Subinventory Name
  $("#org_id").on("change", function() {
 	getSubInventory('modules/inv/subinventory/json_subinventory.php', $("#org_id").val());
+	getWipAccountingGroup('modules/wip/accounting_group/json_accounting_group.php', $("#org_id").val());
 	$('.org_id').val($(this).val());
  });
 

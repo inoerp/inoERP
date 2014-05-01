@@ -120,7 +120,7 @@
  							 <ul class="inline_action">
  								<li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
  								<li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
- 								<li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($bom_line->item_description); ?>"></li>           
+ 								<li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class_second->bom_line_id); ?>"></li>           
  								<li><?php echo form::hidden_field('bom_header_id', $bom_header->bom_header_id); ?></li>
  							 </ul>
  							</td>

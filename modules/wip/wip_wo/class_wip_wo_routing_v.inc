@@ -11,7 +11,7 @@ class wip_wo_routing_v extends dbObject {
 		 'item_id',
 		 'wo_number',
 		 'org_id',
-		 'wip_class',
+		 'wip_accounting_group_id',
 		 'quantity',
 		 'completed_quantity',
 		 'routing_sequence',
@@ -73,7 +73,7 @@ class wip_wo_routing_v extends dbObject {
  public $item_id;
  public $wo_number;
  public $org_id;
- public $wip_class;
+ public $wip_accounting_group_id;
  public $quantity;
  public $completed_quantity;
  public $routing_sequence;
@@ -97,14 +97,14 @@ class wip_wo_routing_v extends dbObject {
 	$sql = "
 CREATE OR REPLACE VIEW wip_wo_routing_v
 (
-item_number, item_description, uom_id, item_id, wo_number, org_id, wip_class, quantity, completed_quantity,
+item_number, item_description, uom_id, item_id, wo_number, org_id, wip_accounting_group_id, quantity, completed_quantity,
 routing_sequence, department_id, wip_wo_routing_detail_id, wip_wo_routing_line_id, wip_wo_header_id,
 resource_sequence, resource_id,resource_usage,resource_schedule,required_quantity, applied_quantity, 
 charge_type
 )
 AS
 SELECT item.item_number, item.item_description, item.uom_id,
-wwh.item_id, wwh.wo_number, wwh.org_id, wwh.wip_class, wwh.quantity, wwh.completed_quantity,
+wwh.item_id, wwh.wo_number, wwh.org_id, wwh.wip_accounting_group_id, wwh.quantity, wwh.completed_quantity,
 wwrl.routing_sequence,wwrl.department_id,
 wwrd.wip_wo_routing_detail_id, wwrd.wip_wo_routing_line_id, wwrd.wip_wo_header_id,wwrd.resource_sequence,wwrd.resource_id,wwrd.resource_usage,wwrd.resource_schedule,wwrd.required_quantity, wwrd.applied_quantity, wwrd.charge_type
 FROM wip_wo_routing_detail wwrd

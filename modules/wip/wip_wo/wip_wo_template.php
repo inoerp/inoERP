@@ -40,12 +40,13 @@
 							<li><label>WO Type (2) : </label>
 							 <?php echo form::select_field_from_object('wo_type', wip_wo_header::wip_wo_type(), 'option_line_id', 'option_line_code', $$class->wo_type, 'wo_type', $readonly, 'wo_type'); ?>
 							</li>
-							<li><label>Accounting Class : </label>
-							 <?php echo form::text_field_dm('wip_class'); ?>
+							<li><label>Accounting Group (3) : </label>
+							 <?php echo $f->select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_orgId($$class->org_id),'wip_accounting_group_id', 'wip_accounting_group', $$class->wip_accounting_group_id,'wip_accounting_group_id','',1,'readonly1' ); ?>
+							 
 							</li>
 							<li><label>Item Id : </label><?php $f->text_field_drm('item_id'); ?>
 							</li>
-							<li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup_header clickable">Item Number(2) : </label>
+							<li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup clickable">Item Number(2) : </label>
 							 <?php $f->text_field_d('item_number', 'select_item_number'); ?>
 							 <?php echo $f->hidden_field_withId('processing_lt', $$class->processing_lt); ?>
 							</li>

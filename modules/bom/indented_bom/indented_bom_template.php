@@ -23,11 +23,11 @@
 					<div class="large_shadow_box"> 
 					 <ul class="column four_column">
 						<li><label>Org Name(1) : </label>
-						 <?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $bom_header->org_id, 'org_id', $readonly, '', ''); ?>
+						 <?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly, '', ''); ?>
 						</li>
-						<li><label>BOM Id : </label>
-						 <?php echo form::text_field('bom_header_id', $bom_header->bom_header_id, '15', '25', '', 'System Number', 'bom_header_id', $readonly) ?>
-						 <a name="show" href="bom.php?bom_header_id=" class="show bom_header_id">
+						<li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_header_id select_popup clickable">
+							BOM Id : </label>
+						 <?php echo form::text_field_d('bom_header_id') ?><a name="show" href="bom.php?bom_header_id=" class="show bom_header_id">
 							<img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						</li>
 						<li><label>Item Id : </label>
@@ -40,7 +40,7 @@
 						 <?php form::text_field_widr('item_description'); ?>
 						</li>
 						<li><label>UOM : </label>
-						 <?php echo form::select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom', $$class->uom, 'uom'); ?>
+						 <?php echo form::select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom'); ?>
 						</li>
 					 </ul>
 					</div>
@@ -109,7 +109,13 @@
 						<?php
 						global $rowCount;
 						$rowCount = 0;
-						foreach ($bom_line_object as $indented_bom_lines0) {
+						foreach ($bom_line_object as &$indented_bom_lines0) {
+						 if (!empty($indented_bom_lines0->component_item_id)) {
+							$item = item::find_by_id($indented_bom_lines0->component_item_id);
+							$indented_bom_lines0->component_item_number = $item->item_number;
+							$indented_bom_lines0->component_description = $item->item_description;
+							$indented_bom_lines0->component_uom = $item->uom_id;
+						 }
 						 $level = 0;
 						 ?>         
  						<tr class="bom_line<?php echo $rowCount ?>">
@@ -120,7 +126,6 @@
 							echo $indented_bom_statment;
 							?>
  						</tr>
- 						<!--end of BOM Level 0 and Beginning of Indented BOM Levels -->
 						 <?php
 						 show_indentedBom($indented_bom_lines0, 'tab1', 1);
 						 ?>
@@ -148,7 +153,7 @@
 						<?php
 						global $rowCount;
 						$rowCount = 0;
-						foreach ($bom_line_object as $indented_bom_lines0) {
+						foreach ($bom_line_object as &$indented_bom_lines0) {
 						 $level = 0;
 						 ?>         
  						<tr class="bom_line<?php echo $rowCount ?>">
@@ -159,12 +164,8 @@
 							echo $indented_bom_statment;
 							?>
  						</tr>
- 						<!--end of BOM Level 0 and Beginning of Indented BOM Levels -->
 						 <?php
 						 show_indentedBom($indented_bom_lines0, 'tab2', 1);
-						 ?>
-						 <?php
-//							 End of check of indented BOM Level 1
 						 $rowCount = $rowCount + 1;
 						}
 						?>
@@ -189,7 +190,7 @@
 						<?php
 						global $rowCount;
 						$rowCount = 0;
-						foreach ($bom_line_object as $indented_bom_lines0) {
+						foreach ($bom_line_object as &$indented_bom_lines0) {
 						 $level = 0;
 						 ?>         
  						<tr class="bom_line<?php echo $rowCount ?>">
@@ -200,12 +201,8 @@
 							echo $indented_bom_statment;
 							?>
  						</tr>
- 						<!--end of BOM Level 0 and Beginning of Indented BOM Levels -->
 						 <?php
 						 show_indentedBom($indented_bom_lines0, 'tab3', 1);
-						 ?>
-						 <?php
-//							 End of check of indented BOM Level 1
 						 $rowCount = $rowCount + 1;
 						}
 						?>
@@ -215,10 +212,6 @@
 				 </div>
 				</div>
 			 </div>
-
-			 <ul class="inline download_action">
-				<li class="export_to_excel"><img  src="<?php echo HOME_URL; ?>themes/images/excel_16.png"  alt="export to excel" /></li>
-			 </ul>
 			</div>
 
 			<!--END OF FORM HEADER-->
@@ -233,4 +226,49 @@
 
 </div>
 
+<script type="text/javascript">
+ function setValFromSelectPage(bom_header_id, item_id, item_number, item_description, uom_id) {
+	this.bom_header_id = bom_header_id;
+	this.item_id = item_id;
+	this.item_number = item_number;
+	this.item_description = item_description;
+	this.uom_id = uom_id;
+ }
+
+ setValFromSelectPage.prototype.setVal = function() {
+	var bom_header_id = this.bom_header_id;
+	$("#bom_header_id").val(bom_header_id);
+	var rowClass = '.' + localStorage.getItem("row_class");
+	rowClass = rowClass.replace(/\s+/g, '.');
+
+	var item_obj = [{id: 'item_id', data: this.item_id},
+	 {id: 'item_number', data: this.item_number},
+	 {id: 'item_description', data: this.item_description},
+	 {id: 'uom', data: this.uom_id}
+	];
+
+	$(item_obj).each(function(i, value) {
+	 if (value.data) {
+		var fieldClass = '.' + value.id;
+		$('#content').find(rowClass).find(fieldClass).val(value.data);
+	 }
+	});
+
+	localStorage.removeItem("row_class");
+	localStorage.removeItem("field_class");
+ };
+ $(document).ready(function() {
+	//Popup for selecting bom
+	$(".bom_header_id.select_popup").click(function() {
+	 void window.open('select.php?class_name=bom_header', '_blank',
+					 'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+	 return false;
+	});
+
+	//Get the bom_id on find button click
+	$('#form_header a.show.bom_header_id').click(function() {
+	 var headerId = $('#bom_header_id').val();
+	 $(this).attr('href', modepath() + 'bom_header_id=' + headerId);
+	});
+ });</script>
 <?php include_template('footer.inc') ?>

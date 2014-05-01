@@ -10,7 +10,7 @@ class bom_overhead_rate_assignment extends bom_overhead {
  public $field_a = [
 		 'bom_overhead_rate_assignment_id',
 		 'bom_overhead_id',
-		 'department_id',
+		 'bom_cost_type',
 		 'default_basis',
 		 'rate',
 		 'created_by',
@@ -24,11 +24,11 @@ class bom_overhead_rate_assignment extends bom_overhead {
  ];
  public $requiredField = [
 		 'bom_overhead_id',
-		 'department_id',
+		 'bom_cost_type',
 		 'rate'
  ];
  public $bom_overhead_id;
- public $department_id;
+ public $bom_cost_type;
  public $bom_overhead_rate_assignment_id;
  public $rate;
  public $default_basis;
