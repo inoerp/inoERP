@@ -1,0 +1,9 @@
+This project is still in beta stage and that’s why there is no installation file. 
+You can see the live demo @demo.inoideas.org
+
+Follow the below steps to install in any unix server
+
+1.	Upload all the files in the given structure to your server
+2.	Change the DB settings @ include\basics\dbsettings.inc
+3.	Cahnge the basics.inc file - line 4 to 7 - HOME_DIR, HOME_URL, HOME_URL_WOS, SITE_NAME
+4.	Import the database file to MySQL or MariaDB database (includes\db)
