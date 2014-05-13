@@ -72,6 +72,13 @@ class po_detail extends dbObject {
 		 'need_by_date',
 		 'promise_date'
  ];
+ public $notUpdatedFromWebForm = [
+		 "received_quantity",
+		 "accepted_quantity",
+		 'delivered_quantity',
+		 'invoiced_quantity',
+		 'paid_quantity',
+ ];
  public $fields_inForm_notInDataBase = [
 		 "po_number",
 		 "supplier_name",

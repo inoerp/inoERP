@@ -16,8 +16,35 @@ function start_next_program() {
 	$$class = new $class;
 	try {
 	 $result = call_user_func(array($$class, $p->program_name), $p->parameters);
-	 $p->message = "Program $p->program_name is sucessfully completed <br>" . $result . '<br>' . execution_time();
+	 $result_message = is_array($result) ? $result[0] : $result;
+	 $result_output = is_array($result) ? $result[1] : null;
+	 $p->message = "Program $p->program_name is sucessfully completed <br>" . $result_message . '<br>' . execution_time();
 	 $p->status = 'Completed';
+	 try {
+		if (!empty($result_output)) {
+		 $op_file_name = $p->program_name . '_' . time() . '.xls';
+		 $module_name = $class::$module;
+		 $file_path = HOME_DIR . "/files/outputs/modules/$module_name/$p->program_name/$op_file_name";
+		 $file = fopen($file_path, 'w');
+		 $headerData = [];
+		 foreach ($result_output[0] as $key => $value) {
+			array_push($headerData, $key);
+		 }
+		 fputcsv($file, $headerData);
+
+		 foreach ($result_output as $obj) {
+			$rowData = [];
+			foreach ($obj as $key => $value) {
+			 array_push($rowData, $value);
+			}
+			fputcsv($file, $rowData);
+		 }
+		 fclose($file);
+		 $p->output_path = "/files/outputs/modules/$module_name/$p->program_name/$op_file_name";
+		}
+	 } catch (Exception $e) {
+		$p->output_path = null;
+	 }
 	 $p->audit_trial();
 	 $p->save();
 	} catch (Exception $e) {

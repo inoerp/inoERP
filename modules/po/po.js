@@ -161,18 +161,18 @@ $(document).ready(function() {
  });
 
 //popu for selecting items
- $('#content').on('click', '.select_item_number.select_popup', function() {
-	var rowClass = $(this).closest('tr').prop('class');
-	var fieldClass = $(this).closest('td').find('.select_item_number').prop('class');
-	localStorage.setItem("row_class", rowClass);
-	localStorage.setItem("field_class", fieldClass);
-	var openUrl = 'select.php?class_name=item';
-	if ($(this).siblings('.code_combination_id').val()) {
-	 openUrl += '&item_number=' + $(this).siblings('.item_number').val();
-	}
-	void window.open(openUrl, '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
+// $('#content').on('click', '.select_item_number.select_popup', function() {
+//	var rowClass = $(this).closest('tr').prop('class');
+//	var fieldClass = $(this).closest('td').find('.select_item_number').prop('class');
+//	localStorage.setItem("row_class", rowClass);
+//	localStorage.setItem("field_class", fieldClass);
+//	var openUrl = 'select.php?class_name=item';
+//	if ($(this).siblings('.code_combination_id').val()) {
+//	 openUrl += '&item_number=' + $(this).siblings('.item_number').val();
+//	}
+//	void window.open(openUrl, '_blank',
+//					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+// });
 
  //Popup for selecting address 
  $(".address_popup").click(function() {
@@ -271,12 +271,13 @@ $(document).ready(function() {
  var classContextMenu = new contextMenuMain();
  classContextMenu.docHedaderId = 'po_header_id';
  classContextMenu.docLineId = 'po_line_id';
+ classContextMenu.docDetailId = 'po_detail_id';
  classContextMenu.btn1DivId = 'po_header';
  classContextMenu.btn2DivId = 'form_line';
  classContextMenu.trClass = 'po_line';
  classContextMenu.tbodyClass = 'form_data_line_tbody';
  classContextMenu.noOfTabbs = 3;
- //classContextMenu.contextMenu();
+ classContextMenu.contextMenu();
 
 //get the attachement form
 // get_attachment_form('../../extensions/file/json.file.php');
@@ -285,7 +286,7 @@ $(document).ready(function() {
  classSave.json_url = 'form.php?class_name=po_header';
  classSave.form_header_id = 'po_header';
  classSave.primary_column_id = 'po_header_id';
- classSave.line_key_field = 'item_id';
+ classSave.line_key_field = 'item_description';
  classSave.single_line = false;
  classSave.savingOnlyHeader = false;
  classSave.headerClassName = 'po_header';

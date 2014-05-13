@@ -116,6 +116,17 @@ class ar_customer extends dbObject {
 	return !(empty($result)) ? $result : false;
  }
  
+  public function findBy_customer_name($limit = 30) {
+	global $db;
+	$sql = " SELECT * FROM "
+					. self::$table_name
+					. " where customer_name LIKE :customer_name LIMIT $limit";
+	$param_a = ['customer_name'];
+	$customer_name = '%' . $this->customer_name . '%';
+	$value_a = [ 'customer_name' => $customer_name];
+	$result = $db->findBy_sql($sql, $param_a, $value_a);
+	return !(empty($result)) ? $result : false;
+ }
  
   public function searchBy_customer_name() {
 	$result = $this->findBy_customer_name();

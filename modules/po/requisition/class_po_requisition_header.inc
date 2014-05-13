@@ -71,14 +71,14 @@ class po_requisition_header extends dbObject {
  ];
  public $search = [
 		 '_show_update_path' => 1,
-		 '_update_action_meassge' => 'Update PO',
+		 '_update_action_meassge' => 'Update',
 		 '_show_view_path' => 1,
 		 '_extra_path' => array('form.php?class_name=po_header&mode=9' => 'Create PO')
  ];
  public $pageTitle = " Purchasing - Create & Update Requisitions "; //page Title
  public $option_lists = [
-		 'requisition_type' => 'PO_REQUISTION_TYPE',
-		 'requisition_status' => 'PO_REQUISTION_STATUS',
+		 'po_requisition_type' => 'PO_REQUISITION_TYPE',
+		 'requisition_status' => 'PO_STATUS',
  ];
  public $po_requisition_header_id;
  public $bu_org_id;
@@ -113,6 +113,8 @@ class po_requisition_header extends dbObject {
  public $supplier_site_name;
  public $ship_to_address;
  public $bill_to_address;
+ public $multi_action_class_pc;
+ public $multi_action_class_pc_value;
 
  public function __set($name, $value) {
 	switch ($value) {
@@ -125,6 +127,15 @@ class po_requisition_header extends dbObject {
 		$this->$name = $value;
 		break;
 	}
+ }
+
+ public function _before_save() {
+	$primary_column = self::$primary_column;
+	if (empty($this->$primary_column)) {
+	 $this->requisition_status = 'Entered';
+	}
+
+	return;
  }
 
  public function _after_save() {
@@ -142,21 +153,17 @@ class po_requisition_header extends dbObject {
  }
 
  private function update_po_requisitionNumber($po_requisition_header_id, $po_requisition_number) {
-	global $db;
-
+	global $dbc;
 	$sql = " UPDATE " . self::$table_name;
 	$sql .= " SET po_requisition_number = '{$po_requisition_number}'  ";
-	$sql .= " WHERE po_requisition_header_id = $po_requisition_header_id  ";
-
-//	    echo "<br/>$sql is <br/>" . $sql;
-	if ($db->query($sql)) {
-	 $this->msg = 1;
+	$sql .= " WHERE po_requisition_header_id = '{$po_requisition_header_id}'  ";
+	try {
+	 $dbc->ddlexecute($sql);
 	 $this->po_requisition_number = $po_requisition_number;
-	} else {
+	} catch (Exception $e) {
 	 $this->msg = 0;
+	 echo "<br>Error in updating Requisition number" . $e->getMessage();
 	}
-
-	return $this->msg;
  }
 
  public static function instantiate_extra_fields(&$array_of_objects) {
@@ -172,13 +179,13 @@ class po_requisition_header extends dbObject {
 	return $array_of_objects;
  }
 
- Public static function po_requisition_types() {
+ Public static function po_requisition_type() {
 	$option_header = option_header::find_by_name('PO_REQUISITION_TYPE');
 	$po_requisition_types = option_line::find_by_option_id($option_header->option_header_id);
 	return $po_requisition_types;
  }
 
- Public static function po_requisition_status() {
+ Public static function requisition_status() {
 	$option_header = option_header::find_by_name('PO_STATUS');
 	$po_requisition_status = option_line::find_by_option_id($option_header->option_header_id);
 	return $po_requisition_status;
@@ -204,17 +211,16 @@ class po_requisition_header extends dbObject {
 	return $this->msg;
  }
 
- public function save() {
-	$primary_column = static::$primary_column;
-	if (empty($this->$primary_column)) {
-	 $this->requisition_status = 'Entered';
-	 $this->create();
-	} else {
-	 $this->update($this->$primary_column);
-	}
-	return $this->msg;
- }
-
+// public function save() {
+//	$primary_column = static::$primary_column;
+//	if (empty($this->$primary_column)) {
+//	 $this->requisition_status = 'Entered';
+//	 $this->create();
+//	} else {
+//	 $this->update($this->$primary_column);
+//	}
+//	return $this->msg;
+// }
 }
 
 //end of po_requisition_header class

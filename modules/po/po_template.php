@@ -32,7 +32,7 @@
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
 						 <li><label>PO Number : </label>
-							<?php echo form::text_field_d('po_number'); ?>
+							<?php  $f->text_field_d('po_number', 'primary_column2'); ?>
 						 </li>
 						 <li><label>BU Name(1) : </label>
 							<?php echo form::select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $po_header->bu_org_id, 'bu_org_id', $readonly, '', ''); ?>
@@ -189,11 +189,11 @@
 							<th>Action</th>
 							<th>Line Id</th>
 							<th>Line#</th>
+							<th>Receiving Org</th>
 							<th>Type</th>
-							<th>Item Id</th>
+							<!--<th>Item Id</th>-->
 							<th>Item Number</th>
 							<th>Item Description</th>
-							<th>UOM</th>
 							<th>Quantity</th>
 							<th>Shipment Details</th>
 						 </tr>
@@ -213,16 +213,14 @@
  							 </ul>
  							</td>
  							<td><?php form::text_field_wid2sr('po_line_id'); ?></td>
- 							<!--<td><?php // form::text_field_wid2s('line_number');                ?></td>-->
+ 							<!--<td><?php // form::text_field_wid2s('line_number');                 ?></td>-->
  							<td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
- 							<td><?php echo form::select_field_from_object('line_type', po_line::po_line_types(), 'option_line_id', 'option_line_code', $$class_second->line_type, 'line_type', $readonly); ?></td>
- 							<td><?php form::text_field_wid2sr('item_id'); ?></td>
+ 							<td><?php echo $f->select_field_from_object('receving_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->receving_org_id, '', '', 1, $readonly); ?></td>
+ 							<td><?php echo form::select_field_from_object('line_type', po_line::po_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, 'line_type', $readonly); ?></td>
+ 							<!--<td><?php // form::text_field_wid2sr('item_id'); ?></td>-->
  							<td><?php form::text_field_wid2('item_number', 'select_item_number'); ?>
  							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
  							<td><?php form::text_field_wid2('item_description'); ?></td>
- 							<td><?php
-								echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id');
-								?></td>
  							<td><?php form::number_field_wid2s('line_quantity'); ?></td>
 
  							<td class="add_detail_values"><img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
@@ -240,7 +238,7 @@
 								 array_push($po_detail_object, $po_detail);
 								}
 								?>
-        <!--						 <tr><td>-->
+         <!--						 <tr><td>-->
  							 <div class="class_detail_form">
  								<fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
  								 <div class="tabsDetail">
@@ -258,7 +256,7 @@
  											 <th>Action</th>
  											 <th>Shipment Id</th>
  											 <th>Shipment Number</th>
- 											 <th>Inventory</th>
+ 											 <!--<th>Inventory</th>-->
  											 <th>Ship To Location</th>
  											 <th>Quantity</th>
  											 <th>Need By Date</th>
@@ -286,8 +284,8 @@
 												 </td>
 												 <td><?php form::text_field_wid3sr('po_detail_id'); ?></td>
 												 <td><?php form::number_field_wid3s('shipment_number', 'detail_number'); ?></td>
-												 <!--<td><?php // echo form::text_field('shipment_number', $$class_third->shipment_number, '8', '20', 1, 'Auto no', '', $readonly, 'details_number');											        ?></td>-->
-												 <td><?php echo form::select_field_from_object('ship_to_inventory', org::find_all_inventory(), 'org_id', 'org', $$class_third->ship_to_inventory, '', $readonly); ?></td>
+												 <!--<td><?php // echo form::text_field('shipment_number', $$class_third->shipment_number, '8', '20', 1, 'Auto no', '', $readonly, 'details_number');											         ?></td>-->
+												 <!--<td><?php // echo form::select_field_from_object('ship_to_inventory', org::find_all_inventory(), 'org_id', 'org', $$class_third->ship_to_inventory, '', $readonly); ?></td>-->
 												 <td><?php form::text_field_wid3('ship_to_location_id'); ?></td>
 												 <td><?php form::number_field_wid3s('quantity'); ?></td>
 												 <td><?php echo form::date_fieldFromToday('need_by_date', ino_date($$class_third->need_by_date)); ?></td>
@@ -412,6 +410,7 @@
 					 <table class="form_line_data_table">
 						<thead> 
 						 <tr>
+							<th>UOM</th>
 							<th>Unit Price</th>
 							<th>Line Price</th>
 							<th>Line Description</th>
@@ -425,6 +424,9 @@
 						 foreach ($po_line_object as $po_line) {
 							?>         
  						 <tr class="po_line<?php echo $count ?>">
+ 							<td><?php
+								echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id');
+								?></td>
  							<td><?php form::number_field_wid2('unit_price'); ?></td>
  							<td><?php form::number_field_wid2('line_price'); ?></td>
  							<td><?php form::text_field_wid2('line_description'); ?></td>

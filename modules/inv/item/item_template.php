@@ -46,6 +46,8 @@
 							<a name="show" href="?item_id=" class="show item_number"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
 						 <li><label> Description : </label><?php $f->text_field_d('item_description'); ?></li>
+						 <li><label> Product Line : </label>
+							<?php echo $f->select_field_from_object('product_line', item::product_line(), 'option_line_code', 'option_line_value', $$class->product_line, 'product_line', '', '', $readonly); ?></li>
 						</ul>
 					 </div>
 					</div>
@@ -95,26 +97,22 @@
           <li><a href="#tabsLine-4">Purchasing</a></li>
           <li><a href="#tabsLine-5">Manufacturing</a></li>
           <li><a href="#tabsLine-6">Planning</a></li>
-          <li><a href="#tabsLine-7">Financial</a></li>
+					<li><a href="#tabsLine-7">Planning-2</a></li>
+          <li><a href="#tabsLine-8">Financial</a></li>
          </ul>
 				 <div class="tabContainer"> 
 					<div id="tabsLine-1" class="tabContent">
 					 <div class="first_rowset"> 
 						<ul class="column five_column"> 
 						 <li><label>Item Type : </label> 
-							<?php echo $f->select_field_from_object('item_type', item::item_types(), 'option_line_code', 'option_line_code', $item->item_type, 'item_type', '', 1, $readonly); ?>
+							<?php echo $f->select_field_from_object('item_type', item::item_types(), 'option_line_code', 'option_line_value', $item->item_type, 'item_type', '', 1, $readonly); ?>
 						 </li> 
 						 <li><label>UOM : </label>
-							<?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->uom_id, 'uom_id',  '', 1, $readonly); ?>
+							<?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->uom_id, 'uom_id', '', 1, $readonly); ?>
 						 </li>
+						 <li><label> Product Line % : </label><?php echo $f->number_field('product_line_percentage', $$class->product_line_percentage, '8'); ?></li>
 						 <li><label>Item Status : </label>
 							<?php echo form::select_field_from_object('item_status', item::item_status(), 'option_line_id', 'option_line_code', $item->item_status, 'item_status', $readonly); ?>
-						 </li>
-						 <li><label>Revision : </label>
-							<?php echo form::checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?>
-						 </li>
-						 <li><label>Revision No: </label>
-							<?php echo form::text_field('rev_number', $item->rev_number, '10', '', '', '', '', $readonly); ?>
 						 </li>
 						</ul>
 					 </div>
@@ -377,7 +375,7 @@
 							<?php echo form::text_field_d('planner'); ?>
 						 </li>
 						 <li><label>Planning Method: </label>
-							<?php echo $f->select_field_from_object('planning_method', item::planning_method(), 'option_line_code', 'option_line_value', $$class->planning_method) ; ?>
+							<?php echo $f->select_field_from_object('planning_method', item::planning_method(), 'option_line_code', 'option_line_value', $$class->planning_method); ?>
 						 </li>
 						 <li><label>Forecast Method: </label>
 							<?php echo form::text_field_d('forecast_method'); ?>
@@ -388,7 +386,7 @@
 						</ul>
 					 </div>
 					 <div class="second_rowset">
-						<ul class="small_box order_modifiers"><box_heading>Order Modifiers </box_heading> 
+						<ul class="large_box order_modifiers"><box_heading>Order Modifiers </box_heading> 
 						 <li><label>Fix Order Quantity : </label>
 							<?php echo form::number_field_d('fix_order_quantity'); ?>
 						 </li>
@@ -411,10 +409,43 @@
 						 <li><label>Planning Time Fence : </label><?php echo form::text_field_d('planning_timefence'); ?></li>
 						 <li><label>Release Time Fence : </label><?php echo form::text_field_d('release_timefence'); ?></li>
 						</ul> 
+						<ul class="small_box saftey_stock"><box_heading>Safety Stock </box_heading> 
+						 <li><label>Quantity : </label><?php echo form::text_field_d('saftey_stock_quantity'); ?></li>
+						 <li><label>Days: </label><?php echo form::text_field_d('saftey_stock_days'); ?></li>
+						 <li><label>Percentage : </label><?php echo form::text_field_d('saftey_stock_percentage'); ?></li>
+						</ul> 
 					 </div> 
 					</div>
-					<!--end of tab6 (planning)...start of lead times-->
 					<div id="tabsLine-7" class="tabContent">
+					 <div class="first_rowset"> 
+						<ul class="column five_column"> 
+						 <li><label>Rounding : </label>
+							<?php echo $f->select_field_from_object('rounding_option', item::rounding_option(), 'option_line_code', 'option_line_value', $$class->rounding_option,'rounding_option','','',$readonly); ?>
+						 </li>
+						</ul>
+					 </div>
+					 <div class="second_rowset">
+						<ul class="small_box rule"><box_heading>Min Max Planning </box_heading> 
+						 <li><label>Min Quantity : </label> 
+							<?php
+							$f = new inoform();
+							echo $f->number_field('minmax_min_quantity', $$class->minmax_min_quantity)
+							?>
+						 </li>
+						 <li><label>Max Quantity : </label> 
+							<?php echo $f->number_field('minmax_max_quantity', $$class->minmax_max_quantity) ?>
+						 </li>
+						 <li><label>Number of Bins : </label> 
+							<?php echo $f->number_field('minmax_multibin_number', $$class->minmax_multibin_number) ?>
+						 </li>
+						 <li><label>Bin Size : </label> 
+							<?php echo $f->number_field('minmax_multibin_size', $$class->minmax_multibin_size) ?>
+						 </li>
+						</ul>
+					 </div>
+					</div> 
+					<!--end of tab6 (planning)...start of lead times-->
+					<div id="tabsLine-8" class="tabContent">
 					 <div class="first_rowset"> 
 						<ul class="column five_column"> 
 						 <li><label>Invoicable: </label>

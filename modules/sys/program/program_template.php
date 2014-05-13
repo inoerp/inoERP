@@ -34,8 +34,17 @@
 
 			<!--END OF FORM HEADER-->
 			<div id ="form_line" class="form_line">
+			 <span class="heading">Output </span><?php
+			 if (!empty($$class->output_path)) {
+				echo "<a href='" . HOME_URL_WOS . $$class->output_path . "' target='new'> View </a> ";
+			 }
+			 ?>
 			 <span class="heading">Parameters </span>
-				<?php echo '<pre>'; print_r(unserialize($$class->parameters)); echo '</pre>'; ?>
+			 <?php
+			 echo '<pre>';
+			 print_r(unserialize($$class->parameters));
+			 echo '</pre>';
+			 ?>
 			 <span class="heading">Message Details </span><?php echo $$class->message; ?>
 			</div>     
 		 </div>

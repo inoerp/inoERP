@@ -32,17 +32,20 @@
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
 						 <li><label>Requisition Number : </label>
-							<?php echo form::text_field_d('po_requisition_number'); ?>
+							<?php
+							$f = new inoform();
+							echo $f->text_field_d('po_requisition_number', 'search_data');
+							?>
 						 </li>
 						 <li><label>BU Name(1) : </label>
 							<?php echo form::select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $po_requisition_header->bu_org_id, 'bu_org_id', $readonly, '', ''); ?>
 						 </li>
 						 <li><label>Requisition Type(2) : </label>
-							<?php echo form::select_field_from_object('po_requisition_type', po_requisition_header::po_requisition_types(), 'option_line_code', 'option_line_value', $po_requisition_header->po_requisition_type, 'po_requisition_type', $readonly, '', ''); ?>
+							<?php echo form::select_field_from_object('po_requisition_type', po_requisition_header::po_requisition_type(), 'option_line_code', 'option_line_value', $po_requisition_header->po_requisition_type, 'po_requisition_type', $readonly, '', ''); ?>
 						 </li>
 						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supplier_id select_popup clickable">
 							 Supplier Id : </label>
-							<?php echo form::text_field_dsrm('supplier_id'); ?>
+							<?php echo form::text_field_dsr('supplier_id'); ?>
 						 </li>
 						 <li><label class="auto_complete">Supplier Name : </label><?php echo $supplier_name_stmt; ?></li>
 						 <li><label class="auto_complete">Supplier Number : </label><?php echo $supplier_number_stmt; ?></li>
@@ -145,7 +148,7 @@
 								 href="po_requisition_print.php?po_requisition_header_id=<?php echo!(empty($$class->po_requisition_header_id)) ? $$class->po_requisition_header_id : ""; ?>" >Print Requisition</a>
 						 </li>
 						 <li id="document_status"><label>Change Status : </label>
-							<?php echo form::select_field_from_object('requisition_status', po_requisition_header::po_requisition_status(), 'option_line_code', 'option_line_value', $po_requisition_header->requisition_status, 'set_requisition_status', $readonly, '', ''); ?>
+							<?php echo form::select_field_from_object('requisition_status', po_requisition_header::requisition_status(), 'option_line_code', 'option_line_value', $po_requisition_header->requisition_status, 'set_requisition_status', $readonly, '', ''); ?>
 						 </li>
 						</ul>
 
@@ -199,9 +202,9 @@
  							 </ul>
  							</td>
  							<td><?php form::text_field_wid2sr('po_requisition_line_id'); ?></td>
- 							<!--<td><?php // form::text_field_wid2s('line_number');                 ?></td>-->
+ 							<!--<td><?php // form::text_field_wid2s('line_number');                     ?></td>-->
  							<td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
- 							<td><?php echo form::select_field_from_object('line_type', po_requisition_line::po_requisition_line_types(), 'option_line_id', 'option_line_code', $$class_second->line_type, 'line_type', $readonly); ?></td>
+ 							<td><?php echo form::select_field_from_object('line_type', po_requisition_line::po_requisition_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, 'line_type', $readonly); ?></td>
  							<td><?php form::text_field_wid2sr('item_id'); ?></td>
  							<td><?php form::text_field_wid2('item_number', 'select_item_number'); ?>
  							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
@@ -226,7 +229,7 @@
 								 array_push($po_requisition_detail_object, $po_requisition_detail);
 								}
 								?>
-         <!--						 <tr><td>-->
+             <!--						 <tr><td>-->
  							 <div class="class_detail_form">
  								<fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
  								 <div class="tabsDetail">
@@ -272,7 +275,7 @@
 												 </td>
 												 <td><?php form::text_field_wid3sr('po_requisition_detail_id'); ?></td>
 												 <td><?php form::number_field_wid3s('shipment_number', 'detail_number'); ?></td>
-												 <!--<td><?php // echo form::text_field('shipment_number', $$class_third->shipment_number, '8', '20', 1, 'Auto no', '', $readonly, 'details_number');											         ?></td>-->
+												 <!--<td><?php // echo form::text_field('shipment_number', $$class_third->shipment_number, '8', '20', 1, 'Auto no', '', $readonly, 'details_number');											             ?></td>-->
 												 <td><?php echo form::select_field_from_object('ship_to_inventory', org::find_all_inventory(), 'org_id', 'org', $$class_third->ship_to_inventory, '', $readonly); ?></td>
 												 <td><?php form::text_field_wid3('ship_to_location_id'); ?></td>
 												 <td><?php form::number_field_wid3s('quantity'); ?></td>
@@ -291,6 +294,7 @@
  										<table class="form form_detail_data_table detail">
  										 <thead>
  											<tr>
+ 											 <th>Order Number</th>
  											 <th>Sub inventory</th>
  											 <th>Locator</th>
  											 <th>Requestor</th>
@@ -304,6 +308,7 @@
 												$$class_third = &$po_requisition_detail;
 												?>
 												<tr class="po_requisition_detail<?php echo $count . '-' . $detailCount; ?> <?php echo $detailCount != 0 ? ' new_object' : '' ?>">
+												 <td><?php form::text_field_wid3('order_number'); ?></td>
 												 <td><?php form::text_field_wid3('sub_inventory_id'); ?></td>
 												 <td><?php form::text_field_wid3('locator_id'); ?></td>
 												 <td><?php form::text_field_wid3('requestor'); ?></td>

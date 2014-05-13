@@ -1,11 +1,13 @@
 <?php
 
+// public $rev_enabled_cb;  needs to be dropped - use item rev only
 class item extends dbObject {
 
  protected static $table_name = "item";
  public static $primary_column = "item_id";
  public static $key_column = 'item_number';
  public static $module = "inv";
+// public static $js_fileName = 'modules/inv/item/js/multi_select.js';
  public $account = [
 		 "material_ac_id",
 		 "material_oh_ac_id",
@@ -44,6 +46,8 @@ class item extends dbObject {
 		 "org_id",
 		 "item_number",
 		 "item_description",
+		 'product_line',
+		 'product_line_percentage',
 		 "locator_control",
 		 "long_description",
 		 "uom_id",
@@ -88,6 +92,14 @@ class item extends dbObject {
 		 "fix_lot_multiplier",
 		 "minimum_order_quantity",
 		 "maximum_order_quantity",
+		 'rounding_option',
+		 'minmax_min_quantity',
+		 'minmax_max_quantity',
+		 'minmax_multibin_number',
+		 'minmax_multibin_size',
+		 'saftey_stock_days',
+		 'saftey_stock_quantity',
+		 'saftey_stock_percentage',
 		 "forecast_method",
 		 "forecast_control",
 		 "demand_timefence",
@@ -110,7 +122,6 @@ class item extends dbObject {
 		 "ap_payment_term",
 		 "ar_payment_term",
 		 "ef_id",
-		 "rev_number",
 		 "created_by",
 		 "creation_date",
 		 "last_update_by",
@@ -174,14 +185,20 @@ class item extends dbObject {
 		 'item_category',
 		 'item_catalog',
 		 'item_reference',
-		 'item_template'
+		 'item_template',
+		 'action',
+		 'multibin_minmax_quantity',
+		 'overwrite_minmax_min_quantity',
+		 'overwrite_minmax_max_quantity',
+		 'overwrite_minmax_multibin_number',
+		 'overwrite_minmax_multibin_size'
  ];
  public $search = [
 		 '_show_update_path' => 1,
 		 '_update_action_meassge' => 'Update',
 		 '_show_view_path' => 1,
  ];
-  public $search_functions = [
+ public $search_functions = [
 		 'Item From' => 'search_item_number_from',
 		 'Item To' => 'search_item_number_to',
 		 'Organization' => 'search_org_name',
@@ -192,11 +209,25 @@ class item extends dbObject {
 		 'item_status' => 'ITEM_STATUS',
 		 'planning_method' => 'MP_PLANNING_METHOD',
  ];
+ public $prg_minmax_update_parameters = [
+		 'Organization' => 'search_org_name',
+		 'Min Max Planner ' => 'search_minmax_planner',
+		 'Item Number From' => 'search_item_number_from',
+		 'Item Number To' => 'search_item_number_to',
+		 'Item Id From' => 'search_item_id_from',
+		 'Item Id To' => 'search_item_id_to'
+ ];
+ public $prg_minmax_update_details = [
+		 'name' => 'Min Max Attribute Update ',
+		 'description' => 'Update Item Attributes related to Min Max ',
+ ];
  public $item_id;
  public $org_id;
  public $org;
  public $item_number;
  public $item_description;
+ public $product_line;
+ public $product_line_percentage;
  public $locator_control;
  public $allow_negative_balance_cb;
  public $long_description;
@@ -269,6 +300,14 @@ class item extends dbObject {
  public $fix_lot_multiplier;
  public $minimum_order_quantity;
  public $maximum_order_quantity;
+ public $saftey_stock_days;
+ public $saftey_stock_quantity;
+ public $saftey_stock_percentage;
+ public $minmax_min_quantity;
+ public $minmax_max_quantity;
+ public $minmax_multibin_number;
+ public $minmax_multibin_size;
+ public $rounding_option;
  public $forecast_method;
  public $forecast_control;
  public $demand_timefence;
@@ -314,6 +353,24 @@ class item extends dbObject {
  public $item_catalog;
  public $item_reference;
  public $item_template;
+ public $action;
+ public $multibin_minmax_quantity;
+ public $overwrite_minmax_min_quantity;
+ public $overwrite_minmax_max_quantity;
+ public $overwrite_minmax_multibin_number;
+ public $overwrite_minmax_multibin_size;
+
+ Public static function product_line() {
+	$option_header = option_header::find_by_name('INV_ITEM_PRODUCT_LINE');
+	$ol = option_line::find_by_option_id($option_header->option_header_id);
+	return $ol;
+ }
+
+ Public static function rounding_option() {
+	$option_header = option_header::find_by_name('SYS_ROUNDING_OPTION');
+	$ol = option_line::find_by_option_id($option_header->option_header_id);
+	return $ol;
+ }
 
  Public static function item_types() {
 	$option_header = option_header::find_by_name('ITEM_TYPE');
@@ -339,6 +396,239 @@ class item extends dbObject {
 	return $mfg_item_types;
  }
 
+ public function _before_save() {
+	if (($this->action == 'update_item_minmax')) {
+	 echo "<br> saving minmax details before Item SAVE";
+	 $this->_update_item_minmax();
+	 return 10;
+	}
+	if (empty($this->item_id)) {
+//before creating item, check if the entered org is a master org or not;
+//if the entered org is a master org then create the item else check if item exists in any master org
+//items can be created only in master org
+	 $org = new org();
+	 $is_master_org = false;
+	 $all_master_orgs = $org->findAll_item_master();
+	 foreach ($all_master_orgs as $master_orgs) {
+		if ($master_orgs->org_id == $this->org_id) {
+		 $is_master_org = true;
+		 return;
+		}
+	 }
+	 if ($is_master_org) {
+		return 1;
+	 } else {
+		//verify if item number exists in master org
+		$inv = new inventory();
+		$inv_i = $inv->findBy_org_id($this->org_id);
+		$item_exists_inItemMaster = $this->findBy_itemNumber_OrgId($inv_i->master_org_id);
+		if ($item_exists_inItemMaster) {
+		 return 1;
+		} else {
+		 echo " Items can be created only in master org ";
+		 return -99;
+		}
+	 }
+	}
+ }
+
+ private function _update_item_minmax() {
+	if (empty($this->item_id)) {
+	 echo "<br>No Item Id found";
+	 return;
+	}
+	echo "<br>acutal minmax_min_quantity" . $this->minmax_min_quantity;
+	if (!empty($this->overwrite_minmax_min_quantity)) {
+	 $this->minmax_min_quantity = $this->overwrite_minmax_min_quantity;
+	}
+	if (!empty($this->overwrite_minmax_max_quantity)) {
+	 $this->minmax_max_quantity = $this->overwrite_minmax_max_quantity;
+	}
+	if (!empty($this->overwrite_minmax_multibin_number)) {
+	 $this->minmax_multibin_number = $this->overwrite_minmax_multibin_number;
+	}
+	if (!empty($this->overwrite_minmax_multibin_size)) {
+	 $this->minmax_multibin_size = $this->overwrite_minmax_multibin_size;
+	}
+	echo "<br>ovwer written minmax_min_quantity" . $this->minmax_min_quantity;
+	$item_n = new item();
+	$item_n->findBy_id($this->item_id);
+	switch ($item_n->rounding_option) {
+	 case 'ROUND_UP' :
+		$this->multibin_minmax_quantity = ceil($this->multibin_minmax_quantity);
+		$this->minmax_multibin_number = ceil($this->minmax_multibin_number);
+		$this->minmax_multibin_size = ceil($this->minmax_multibin_size);
+		$this->minmax_min_quantity = ceil($this->minmax_min_quantity);
+		$this->minmax_max_quantity = ceil($this->minmax_max_quantity);
+		break;
+
+	 case 'ROUND_DOWN' :
+		$this->multibin_minmax_quantity = floor($this->multibin_minmax_quantity);
+		$this->minmax_multibin_number = floor($this->minmax_multibin_number);
+		$this->minmax_multibin_size = floor($this->minmax_multibin_size);
+		$this->minmax_min_quantity = floor($this->minmax_min_quantity);
+		$this->minmax_max_quantity = floor($this->minmax_max_quantity);
+		break;
+
+	 case 'ROUND' :
+		$this->multibin_minmax_quantity = round($this->multibin_minmax_quantity);
+		$this->minmax_multibin_number = round($this->minmax_multibin_number);
+		$this->minmax_multibin_size = round($this->minmax_multibin_size);
+		$this->minmax_min_quantity = round($this->minmax_min_quantity);
+		$this->minmax_max_quantity = round($this->minmax_max_quantity);
+		break;
+
+	 case 'default':
+		break;
+	}
+	if ($item_n->planning_method == 'MULTI_MINMAX') {
+	 if (!empty($this->overwrite_minmax_min_quantity)) {
+		$item_n->minmax_min_quantity = $item_n->minmax_max_quantity = $this->overwrite_minmax_min_quantity;
+	 } else {
+		$item_n->minmax_min_quantity = $item_n->minmax_max_quantity = $this->multibin_minmax_quantity;
+	 }
+	 $item_n->minmax_multibin_number = $this->minmax_multibin_number;
+	 $item_n->minmax_multibin_size = $this->minmax_multibin_size;
+	} else {
+	 $item_n->minmax_min_quantity = $this->minmax_min_quantity;
+	 $item_n->minmax_max_quantity = $this->minmax_max_quantity;
+	 $item_n->minmax_multibin_number = 0;
+	 $item_n->minmax_multibin_size = 0;
+	}
+	$item_n->audit_trial();
+	try {
+	 $item_n->save();
+	 echo "<br>Update of Min Max numbers for " . $item_n->item_number . ' is sucessfully updated ';
+	} catch (Exception $e) {
+	 echo "<br>Update of Min Max numbers for " . $item_n->item_number . ' is failed!' . $e->getMessage();
+	}
+	return;
+ }
+
+ public function prg_minmax_update($seralized_parameters) {
+	$parameters = unserialize($seralized_parameters);
+	$this->message = '<br> Starting Min Max Item Updates....<br>';
+	$mms = new fp_minmax_suggestion_v();
+
+	if (!empty($parameters['org_id'][0])) {
+	 $org_id = $parameters['org_id'][0];
+	 $this->message .= '<br> Entered Org Id is : ' . $org_id;
+	} else {
+	 $this->message .= '<br> Error! : No org id found @ item ' . __LINE__;
+	 return $this->message;
+	}
+
+	if (!empty($parameters['fp_minmax_header_id'][0])) {
+	 $fp_minmax_header_id = $parameters['fp_minmax_header_id'][0];
+	 $mms->plan_id = $fp_minmax_header_id;
+	 $this->message .= '<br> Entered Min Max Header Id is : ' . $fp_minmax_header_id;
+	} else {
+	 $this->message .= '<br> Error! : No Min Max Header Id is found @ fp_minmax_header ' . __LINE__;
+	 return $this->message;
+	}
+
+	if (!empty($parameters['item_id'][0])) {
+	 $this->message .= "<br/>Using Min Max Item Update by Item Id ";
+	 $item_id = $parameters['item_id'][0];
+	 try {
+		$mms->item_id = $item_id;
+		$mms_i = $mms->findBy_planId_itemId();
+		$mm_item = new item();
+		foreach ($mms->field_a as $key => $value) {
+		 if (property_exists($mm_item, $value)) {
+			$mm_item->$value = $mms_i->$value;
+		 }
+		}
+		$mm_item->_update_item_minmax();
+		$this->message .= "<br/> Min Max Item Update is sucessfully updated for item_id - " . $item_id .
+						' min max header id : ' . $fp_minmax_header_id;
+	 } catch (Exception $e) {
+		$this->message .= "<br/> Min Max Item Updat fialed for Item id " . $item_id . $e->getMessage();
+	 }
+	 return $this->message;
+	}
+
+	if (!empty($parameters['from_item_id'][0])) {
+	 $this->message .= "<br/>Using  Min Max Planner by Item Id Range ";
+	 $from_item_id = $parameters['from_item_id'][0];
+	 if (!empty($parameters['to_item_id'][0])) {
+		$to_item_id = $parameters['to_item_id'][0];
+	 } else {
+		$to_item_id = $from_item_id;
+	 }
+	 $item = new item();
+	 $item_range = $item->findBy_itemIdRange($from_item_id, $to_item_id);
+	 foreach ($item_range as $item_record) {
+		$mms->item_id = $item_record->item_id;
+		$mms_i = $mms->findBy_planId_itemId();
+		$mm_item = new item();
+		foreach ($mms->field_a as $key => $value) {
+		 if (property_exists($mm_item, $value)) {
+			$mm_item->$value = $mms_i->$value;
+		 }
+		}
+		try {
+		 $mm_item->_update_item_minmax();
+		 $this->message .= "<br>Min Max Item Attributes is sucessfully updated for item_id - " . $mms->plan_id .
+						 ' fp_minmax_header_id : ' . $fp_minmax_header_id;
+		} catch (Exception $e) {
+		 $this->message .= "<br>Min Max Plannerp failed for Item id " . $mms_records->item_id . $e->getMessage();
+		}
+	 }
+	 return $this->message;
+	}
+
+	if (!empty($parameters['from_item_number'][0])) {
+	 $this->message .= "<br/>Using  Min Max Planner by Item Number Range ";
+	 $from_item_number = $parameters['from_item_number'][0];
+	 if (!empty($parameters['to_item_number'][0])) {
+		$to_item_number = $parameters['to_item_number'][0];
+	 } else {
+		$to_item_number = $from_item_number;
+	 }
+	 $item = new item();
+	 $item_range = $item->findBy_itemNumberRange_OrgId($from_item_number, $to_item_number, $org_id);
+	 foreach ($item_range as $item_record) {
+		$mms->item_id = $item_record->item_id;
+		$mms_i = $mms->findBy_planId_itemId();
+		$mm_item = new item();
+		foreach ($mms->field_a as $key => $value) {
+		 if (property_exists($mm_item, $value)) {
+			$mm_item->$value = $mms_i->$value;
+		 }
+		}
+		try {
+		 $mm_item->_update_item_minmax();
+		 $this->message .= "<br>Min Max Item Attributes is sucessfully updated for item_id - " . $mms->plan_id .
+						 ' fp_minmax_header_id : ' . $fp_minmax_header_id;
+		} catch (Exception $e) {
+		 $this->message .= "<br>Min Max Plannerp failed for Item id " . $mms_records->item_id . $e->getMessage();
+		}
+	 }
+	 return $this->message;
+	}
+
+	//if no item id/number is given
+	$this->message .= "<br/>Updating Min Max Attributes for all Items ";
+	$mms_all = $mms->findBy_planId();
+	foreach ($mms_all as $mms_records) {
+	 $mm_item = new item();
+	 foreach ($mms->field_a as $key => $value) {
+		if (property_exists($mm_item, $value)) {
+		 $mm_item->$value = $mms_records->$value;
+		}
+	 }
+	 try {
+		$mm_item->_update_item_minmax();
+		$this->message .= "<br>Min Max Item Attributes is sucessfully updated for item_id - " . $mms_records->item_id .
+						' fp_minmax_header_id : ' . $mms->plan_id;
+	 } catch (Exception $e) {
+		$this->message .= "<br>Min Max Plannerp failed for Item id " . $mms_records->item_id . $e->getMessage();
+	 }
+	}
+	return $this->message;
+ }
+
  public static function find_item_number_by_item_number($item_number) {
 	global $db;
 	$sql = "SELECT * FROM "
@@ -359,6 +649,40 @@ class item extends dbObject {
 	}
 
 	return $data;
+ }
+
+ public static function find_by_itemNumber_orgId($item_number, $org_id) {
+	global $db;
+	$sql = "SELECT * FROM ";
+	$sql .= self::$table_name;
+	$sql .= " where item_number LIKE '%{$item_number}%' ";
+	$sql .= " AND org_id  = '{$org_id}' ";
+	$sql .= " LIMIT 1 ";
+	$result = $db->find_by_sql($sql);
+	return !(empty($result)) ? array_pop($result) : false;
+ }
+
+ public function findAll_ofOrgId($org_id = "") {
+	global $db;
+	$sql = "SELECT * FROM " . self::$table_name;
+	$sql .= " WHERE org_id = :org_id ";
+	$param_a = ['org_id'];
+	$org_id_i = !empty($org_id) ? $org_id : $this->org_id;
+	$value_a = ['org_id' => $org_id_i];
+	$result = $db->findBy_sql($sql, $param_a, $value_a);
+	return !(empty($result)) ? $result : false;
+ }
+
+ public function findAll_minmax_ofOrgId($org_id = "") {
+	global $db;
+	$sql = "SELECT * FROM " . self::$table_name;
+	$sql .= " WHERE org_id = :org_id ";
+	$sql .= " AND planning_method = 'MULTI_MINMAX' OR planning_method = 'MINMAX' ";
+	$param_a = ['org_id'];
+	$org_id_i = !empty($org_id) ? $org_id : $this->org_id;
+	$value_a = ['org_id' => $org_id_i];
+	$result = $db->findBy_sql($sql, $param_a, $value_a);
+	return !(empty($result)) ? $result : false;
  }
 
  public function findBy_itemNumber_OrgId($org_id = "") {
@@ -422,37 +746,6 @@ class item extends dbObject {
 	return $assigned_inventory_orgs_array;
  }
 
- public function _before_save() {
-	if (empty($this->item_id)) {
-//before creating item, check if the entered org is a master org or not;
-//if the entered org is a master org then create the item else check if item exists in any master org
-//items can be created only in master org
-	 $org = new org();
-	 $is_master_org = false;
-	 $all_master_orgs = $org->findAll_item_master();
-	 foreach ($all_master_orgs as $master_orgs) {
-		if ($master_orgs->org_id == $this->org_id) {
-		 $is_master_org = true;
-		 return;
-		}
-	 }
-	 if ($is_master_org) {
-		return 1;
-	 } else {
-		//verify if item number exists in master org
-		$inv = new inventory();
-		$inv_i = $inv->findBy_org_id($this->org_id);
-		$item_exists_inItemMaster = $this->findBy_itemNumber_OrgId($inv_i->master_org_id);
-		if ($item_exists_inItemMaster) {
-		 return 1;
-		} else {
-		 echo " Items can be created only in master org ";
-		 return -99;
-		}
-	 }
-	}
- }
-
  public static function find_item_number_by_itemNumber_OrgId($item_number, $org_id = "") {
 	global $db;
 	$sql = "SELECT * FROM ";
@@ -496,6 +789,27 @@ class item extends dbObject {
 	 }
 	}
 	return $this->msg;
+ }
+
+ public function multi_select_input_fields() {
+	$multi_select_input = [
+			'overwrite_minmax_min_quantity',
+			'overwrite_minmax_max_quantity',
+			'overwrite_minmax_multibin_number',
+			'overwrite_minmax_multibin_size'
+	];
+	return $multi_select_input;
+ }
+
+ public function multi_select_hidden_fields() {
+	$multi_select_hidden = [
+			'action_class_name',
+			'mode',
+			'action',
+			'show_block',
+	];
+
+	return $multi_select_hidden;
  }
 
 }

@@ -38,7 +38,7 @@
 							 <?php echo form::text_field_d('wo_number'); ?>
 							</li>
 							<li><label>WO Type (2) : </label>
-							 <?php echo form::select_field_from_object('wo_type', wip_wo_header::wip_wo_type(), 'option_line_id', 'option_line_code', $$class->wo_type, 'wo_type', $readonly, 'wo_type'); ?>
+							 <?php echo form::select_field_from_object('wo_type', wip_wo_header::wip_wo_type(), 'option_line_code', 'option_line_value', $$class->wo_type, 'wo_type', $readonly, 'wo_type'); ?>
 							</li>
 							<li><label>Accounting Group (3) : </label>
 							 <?php echo $f->select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_orgId($$class->org_id),'wip_accounting_group_id', 'wip_accounting_group', $$class->wip_accounting_group_id,'wip_accounting_group_id','',1,'readonly1' ); ?>

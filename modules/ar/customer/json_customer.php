@@ -14,7 +14,7 @@ if ((!empty($_REQUEST['action'])) && ($_REQUEST['action'] = 'search')) {
 	$customer->org_id = $primary_column1;
 	$data = $customer->searchBy_customerName_orgId();
  } else {
-	$data = $supplier->searchBy_customer_name();
+	$data = $customer->searchBy_customer_name();
  }
 // JSON data
  echo json_encode($data);

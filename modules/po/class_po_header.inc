@@ -8,6 +8,7 @@ class po_header extends dbObject {
  public static $primary_column2 = "po_number";
  public static $key_column = 'supplier_id';
  public static $module = "po";
+ public static $js_fileName = 'modules/po/js/multi_select.js';
  public $checkbox = [
 		 "rev_enabled_cb"
  ];
@@ -54,9 +55,7 @@ class po_header extends dbObject {
 		 "po_status",
 		 "supplier_id",
 		 "creation_date",
-		 "buyer",
-		 "supplier_name",
-		 "supplier_site_name",
+		 "buyer"
  ];
  public $requiredField = [
 		 'supplier_id',
@@ -75,15 +74,18 @@ class po_header extends dbObject {
 		 "supplier_number",
 		 "supplier_site_name",
 		 "ship_to_address",
-		 "bill_to_address"
+		 "bill_to_address",
+		 'multi_action_class_pc',
+		 'multi_action_class_pc_value',
+		 'action'
  ];
  public $search = [
-		  '_show_update_path' => 1,
+		 '_show_update_path' => 1,
 		 '_update_action_meassge' => 'Update PO',
 		 '_show_view_path' => 1,
 //		 '_view_action_meassge' => 'View',
-		 '_extra_path' => array('form.php?class_name=ap_transaction_header&mode=9'=>'Invoice',
-'form.php?class_name=receipt_header&mode=9'=>'Receive'				 )
+		 '_extra_path' => array('form.php?class_name=ap_transaction_header&mode=9' => 'Invoice',
+				 'form.php?class_name=receipt_header&mode=9' => 'Receive')
  ];
  public $pageTitle = " PO - Purchase Orders "; //page Title
  public $option_lists = [
@@ -123,6 +125,9 @@ class po_header extends dbObject {
  public $supplier_site_name;
  public $ship_to_address;
  public $bill_to_address;
+ public $multi_action_class_pc;
+ public $multi_action_class_pc_value;
+ public $action;
 
  public function __set($name, $value) {
 	switch ($value) {
@@ -134,6 +139,101 @@ class po_header extends dbObject {
 	 default:
 		$this->$name = $value;
 		break;
+	}
+ }
+
+ public function _before_save() {
+	if (($this->action == 'convert_requisition')) {
+	 echo "<br> saving before PO SAVE";
+	 $this->_convert_requisition_toPO();
+	 return 10;
+	}
+ }
+
+ private function _convert_requisition_toPO_header($i, &$PO_cretaed) {
+	global $dbc;
+	$poh = new po_header();
+	$poh->bu_org_id = $_POST['bu_org_id'][$i];
+	$poh->po_type = 'STANDARD';
+	$poh->supplier_id = $_POST['supplier_id'][$i];
+	$poh->supplier_site_id = $_POST['supplier_site_id'][$i];
+	$poh->ship_to_id = $_POST['ship_to_inventory'][$i];
+	$poh->bill_to_id = $_POST['ship_to_inventory'][$i];
+	$poh->supplier_id = $_POST['supplier_id'][$i];
+	$poh->currency = $_POST['currency'][$i];
+	$poh->payment_term_id = $_POST['payment_term_id'][$i];
+	$poh->audit_trial();
+	$poh->save();
+	echo "<br> PO header is succefully created. Header Id - " . $poh->po_header_id;
+	$dbc->confirm();
+	$record_saved = ['supplier_id' => $poh->supplier_id,
+			'supplier_site_id' => $poh->supplier_site_id,
+			'po_header_id' => $poh->po_header_id];
+	array_push($PO_cretaed, $record_saved);
+	return $poh->po_header_id;
+ }
+
+ private function _convert_requisition_toPO() {
+	global $dbc;
+	if (empty($_POST)) {
+	 return;
+	}
+	$PO_cretaed = [];
+	$line_number = 0;
+	for ($i = 0; $i < count($_POST['po_requisition_detail_id']); $i++) {
+	 $line_number ++;
+	 $po_header_id = null;
+	 foreach ($PO_cretaed as $po_recods) {
+		if (array_search($_POST['supplier_site_id'][$i], $po_recods)) {
+		 $po_header_id = $po_recods['po_header_id'];
+		 $line_number = 1;
+		 break;
+		}
+	 }
+	 if (empty($po_header_id)) {
+		$po_header_id = $this->_convert_requisition_toPO_header($i, $PO_cretaed);
+	 }
+	 if (!empty($po_header_id)) {
+		$pol = new po_line();
+		$pol->line_number = $line_number;
+		$pol->line_type = 'GOODS';
+		$pol->po_header_id = $po_header_id;
+		$pol->item_id = $_POST['item_id'][$i];
+		$item = new item();
+		$item->findBy_id($pol->item_id);
+		$pol->item_description = $item->item_description;
+		$pol->uom_id = $item->uom_id;
+		$pol->line_quantity = $_POST['line_quantity'][$i];
+		$pol->unit_price = $_POST['unit_price'][$i];
+		$pol->line_price = $pol->line_quantity * $pol->unit_price;
+		$pol->reference_doc_type = 'po_requisition_details';
+		$pol->reference_doc_number = $_POST['po_requisition_detail_id'][$i];
+		$pol->audit_trial();
+		$pol->save();
+		echo "<br> PO Line is succefully created. Line Id - " . $pol->po_line_id;
+
+		$pod = new po_detail();
+		$pod->po_header_id = $po_header_id;
+		$pod->po_line_id = $pol->po_line_id;
+		$pod->shipment_number = 1;
+		$pod->need_by_date = $_POST['need_by_date'][$i];
+		$pod->ship_to_inventory = $_POST['ship_to_inventory'][$i];
+		$inv = new inventory();
+		$inv_i = $inv->findBy_org_id($pod->ship_to_inventory);
+		//ac id needs to be modified to req accounts
+		$pod->charge_ac_id = $inv_i->expense_ac_id;
+		$pod->accrual_ac_id = $inv_i->inv_ap_accrual_ac_id;
+		$pod->ppv_ac_id = $inv_i->inv_ppv_ac_id;
+		$pod->audit_trial();
+		$pod->save();
+		echo "<br> PO Detail is succefully created. Detail Id - " . $pod->po_detail_id;
+
+		$po_rd = new po_requisition_detail();
+		$po_rd->findBy_id($_POST['po_requisition_detail_id'][$i]);
+		$po_rd->order_number = $po_header_id;
+		$po_rd->audit_trial();
+		$po_rd->save();
+	 }
 	}
  }
 
@@ -152,21 +252,17 @@ class po_header extends dbObject {
  }
 
  private function update_poNumber($po_header_id, $po_number) {
-	global $db;
-
+	global $dbc;
 	$sql = " UPDATE " . self::$table_name;
 	$sql .= " SET po_number = '{$po_number}'  ";
-	$sql .= " WHERE po_header_id = $po_header_id  ";
-
-//	    echo "<br/>$sql is <br/>" . $sql;
-	if ($db->query($sql)) {
-	 $this->msg = 1;
+	$sql .= " WHERE po_header_id = '{$po_header_id}'  ";
+	try {
+	 $dbc->ddlexecute($sql);
 	 $this->po_number = $po_number;
-	} else {
+	} catch (Exception $e) {
 	 $this->msg = 0;
+	 echo "<br>Error in updating PO number" . $e->getMessage();
 	}
-
-	return $this->msg;
  }
 
  public static function instantiate_extra_fields(&$array_of_objects) {
@@ -223,6 +319,27 @@ class po_header extends dbObject {
 	 $this->update($this->$primary_column);
 	}
 	return $this->msg;
+ }
+
+ //multi select used for req to PO conversion
+
+ public function multi_select_input_fields() {
+	$multi_select_input = [
+			'select_supplier_name',
+			'supplier_site_name'
+	];
+	return $multi_select_input;
+ }
+
+ public function multi_select_hidden_fields() {
+	$multi_select_hidden = [
+			'action_class_name',
+			'mode',
+			'action',
+			'show_block',
+	];
+
+	return $multi_select_hidden;
  }
 
 }

@@ -271,12 +271,13 @@ $(document).ready(function() {
  var classContextMenu = new contextMenuMain();
  classContextMenu.docHedaderId = 'po_requisition_header_id';
  classContextMenu.docLineId = 'po_requisition_line_id';
+ classContextMenu.docDetailId = 'po_requisition_detail_id';
  classContextMenu.btn1DivId = 'po_requisition_header';
  classContextMenu.btn2DivId = 'form_line';
  classContextMenu.trClass = 'po_requisition_line';
  classContextMenu.tbodyClass = 'form_data_line_tbody';
  classContextMenu.noOfTabbs = 3;
- //classContextMenu.contextMenu();
+ classContextMenu.contextMenu();
 
 //get the attachement form
 // get_attachment_form('../../extensions/file/json.file.php');

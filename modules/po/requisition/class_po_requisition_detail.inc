@@ -34,6 +34,7 @@ class po_requisition_detail extends dbObject {
 		 'budget_ac_id',
 		 'ppv_ac_id',
 		 "ef_id",
+		 'order_number',
 		 "received_quantity",
 		 "accepted_quantity",
 		 'delivered_quantity',
@@ -100,6 +101,7 @@ class po_requisition_detail extends dbObject {
  public $accrual_ac_id;
  public $budget_ac_id;
  public $ppv_ac_id;
+ public $order_number;
  public $created_by;
  public $creation_date;
  public $last_update_by;
