@@ -157,11 +157,17 @@ class po_header extends dbObject {
 	$poh->po_type = 'STANDARD';
 	$poh->supplier_id = $_POST['supplier_id'][$i];
 	$poh->supplier_site_id = $_POST['supplier_site_id'][$i];
-	$poh->ship_to_id = $_POST['ship_to_inventory'][$i];
-	$poh->bill_to_id = $_POST['ship_to_inventory'][$i];
+	$poh->ship_to_id = $_POST['receving_org_id'][$i];
+	$poh->bill_to_id = $_POST['receving_org_id'][$i];
 	$poh->supplier_id = $_POST['supplier_id'][$i];
 	$poh->currency = $_POST['currency'][$i];
 	$poh->payment_term_id = $_POST['payment_term_id'][$i];
+	if (empty($poh->payment_term_id)) {
+	 $poh->payment_term_id = supplier_site::find_by_id($poh->supplier_site_id)->payment_term_id;
+	}
+	if (empty($poh->payment_term_id)) {
+	 $poh->payment_term_id = po_purchasing_control::find_by_org_id($poh->bu_org_id )->payment_term_id;
+	}
 	$poh->audit_trial();
 	$poh->save();
 	echo "<br> PO header is succefully created. Header Id - " . $poh->po_header_id;
@@ -186,7 +192,7 @@ class po_header extends dbObject {
 	 foreach ($PO_cretaed as $po_recods) {
 		if (array_search($_POST['supplier_site_id'][$i], $po_recods)) {
 		 $po_header_id = $po_recods['po_header_id'];
-		 $line_number = 1;
+		 $line_number++;
 		 break;
 		}
 	 }
@@ -194,10 +200,16 @@ class po_header extends dbObject {
 		$po_header_id = $this->_convert_requisition_toPO_header($i, $PO_cretaed);
 	 }
 	 if (!empty($po_header_id)) {
+		$po_rd = new po_requisition_detail();
+		$po_rd->findBy_id($_POST['po_requisition_detail_id'][$i]);
+		if (!empty($po_rd->order_number)) {
+		 continue;
+		}
 		$pol = new po_line();
 		$pol->line_number = $line_number;
 		$pol->line_type = 'GOODS';
 		$pol->po_header_id = $po_header_id;
+		$pol->receving_org_id = $_POST['receving_org_id'][$i];
 		$pol->item_id = $_POST['item_id'][$i];
 		$item = new item();
 		$item->findBy_id($pol->item_id);
@@ -217,19 +229,16 @@ class po_header extends dbObject {
 		$pod->po_line_id = $pol->po_line_id;
 		$pod->shipment_number = 1;
 		$pod->need_by_date = $_POST['need_by_date'][$i];
-		$pod->ship_to_inventory = $_POST['ship_to_inventory'][$i];
 		$inv = new inventory();
-		$inv_i = $inv->findBy_org_id($pod->ship_to_inventory);
+		$inv_i = $inv->findBy_org_id($pol->receving_org_id);
 		//ac id needs to be modified to req accounts
-		$pod->charge_ac_id = $inv_i->expense_ac_id;
+		$pod->charge_ac_id = $inv_i->material_ac_id;
 		$pod->accrual_ac_id = $inv_i->inv_ap_accrual_ac_id;
 		$pod->ppv_ac_id = $inv_i->inv_ppv_ac_id;
 		$pod->audit_trial();
 		$pod->save();
 		echo "<br> PO Detail is succefully created. Detail Id - " . $pod->po_detail_id;
 
-		$po_rd = new po_requisition_detail();
-		$po_rd->findBy_id($_POST['po_requisition_detail_id'][$i]);
 		$po_rd->order_number = $po_header_id;
 		$po_rd->audit_trial();
 		$po_rd->save();

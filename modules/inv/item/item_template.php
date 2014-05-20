@@ -262,9 +262,6 @@
 						 <li><label>Picking Rule : </label> 
 							<?php echo form::text_field_d('picking_rule'); ?>
 						 </li>
-						 <li><label>Sourcing Rule : </label> 
-							<?php echo form::text_field_d('sourcing_rule'); ?>
-						 </li>
 						</ul>
 					 </div>
 					</div> 
@@ -279,6 +276,8 @@
 						 <li><label>ASL usage mandatory : </label> 
 							<?php echo form::checkBox_field('use_asl_cb', $$class->use_asl_cb, '', $readonly); ?>
 						 </li>
+						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_popup select_sourcing_rule clickable">
+							 Sourcing Rule : </label><?php $f->text_field_d('sourcing_rule') ?></li>
 						 <li><label>Invoice Matching : </label> 
 							<?php echo form::text_field_d('invoice_matching'); ?>
 						 </li>
@@ -420,7 +419,7 @@
 					 <div class="first_rowset"> 
 						<ul class="column five_column"> 
 						 <li><label>Rounding : </label>
-							<?php echo $f->select_field_from_object('rounding_option', item::rounding_option(), 'option_line_code', 'option_line_value', $$class->rounding_option,'rounding_option','','',$readonly); ?>
+							<?php echo $f->select_field_from_object('rounding_option', item::rounding_option(), 'option_line_code', 'option_line_value', $$class->rounding_option, 'rounding_option', '', '', $readonly); ?>
 						 </li>
 						</ul>
 					 </div>

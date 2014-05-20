@@ -1,110 +1,103 @@
 <?php
 
-class fp_minmax_header extends dbObject {
+class fp_mrp_header extends dbObject {
 
- protected static $table_name = "fp_minmax_header";
- public static $primary_column = "fp_minmax_header_id";
- public static $dependent_classes = ['fp_minmax_line'];
- public static $key_column = 'plan_name';
+ protected static $table_name = "fp_mrp_header";
+ public static $primary_column = "fp_mrp_header_id";
+ public static $key_column = 'mrp_name';
  public static $module = "fp";
  public $field_a = [
-		 'fp_minmax_header_id',
+		 'fp_mrp_header_id',
 		 'org_id',
-		 'plan_name',
-		 'planning_horizon_days',
+		 'mrp_name',
 		 'description',
 		 'status',
 		 'demand_source',
+		 'planning_horizon_days',
 		 'created_by',
 		 'creation_date',
 		 'last_update_by',
-		 'last_update_date'
+		 'last_update_date',
  ];
  public $initial_search = [
-		 'fp_minmax_header_id',
-		 'org_id',
-		 'plan_name',
+		 'fp_mrp_header_id',
+		 'mrp_name',
 		 'description',
-		 'status',
 		 'demand_source',
  ];
  public $column = [
-		 'fp_minmax_header_id',
+		 'fp_mrp_header_id',
 		 'org_id',
-		 'plan_name',
-		 'planning_horizon_days',
+		 'mrp_name',
 		 'description',
 		 'status',
 		 'demand_source',
  ];
  public $requiredField = [
 		 'org_id',
-		 'plan_name',
+		 'mrp_name',
 		 'planning_horizon_days',
 		 'demand_source',
  ];
+
  public $search = [
-		 '_update_path' => 'form.php?class_name=minmax_header',
+		 '_update_path' => 'form.php?class_name=mrp_header',
 		 '_show_update_path' => 1,
 		 '_update_action_meassge' => 'Update',
 		 '_show_view_path' => 1,
 //		 '_view_action_meassge' => 'View',
 //		 '_extra_path' => '',
  ];
- public $pageTitle = " Min Max Planner "; //page Title
- public $prg_minmax_planner_parameters = [
+ public $pageTitle = " MRP "; //page Title
+ public $prg_mrp_planner_parameters = [
 		 'Organization' => 'search_org_name',
-		 'Min Max Planner ' => 'search_minmax_planner',
+		 'Min Max Planner ' => 'search_mrp_planner',
 		 'Item Number From' => 'search_item_number_from',
 		 'Item Number To' => 'search_item_number_to',
 		 'Item Id From' => 'search_item_id_from',
 		 'Item Id To' => 'search_item_id_to'
  ];
- public $prg_minmax_planner_details = [
+ public $prg_mrp_planner_details = [
 		 'name' => 'Min Max Demand Calculator',
 		 'description' => 'Calculate the Min Max Size',
  ];
- public $prg_minmax_program_parameters = [
+ public $prg_mrp_program_parameters = [
 		 'Organization' => 'search_org_name',
-		 'Min Max Type ' => 'search_minmax_type',
+		 'Min Max Type ' => 'search_mrp_type',
 		 'Item Number From' => 'search_item_number_from',
 		 'Item Number To' => 'search_item_number_to',
 		 'Item Id From' => 'search_item_id_from',
 		 'Item Id To' => 'search_item_id_to'
  ];
- public $prg_minmax_program_details = [
+ public $prg_mrp_program_details = [
 		 'name' => 'Create Supply as per MinMax Program',
 		 'description' => 'Create Supply as per MinMax Program',
  ];
- public $fp_minmax_header_id;
+ public $fp_mrp_header_id;
  public $org_id;
- public $plan_name;
- public $planning_horizon_days;
+ public $mrp_name;
  public $description;
  public $status;
  public $demand_source;
- public $ar_customer_id;
+  public $planning_horizon_days;
  public $created_by;
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
- public $planning_method;
- public $order_quantity;
- public $total_order_quantity;
 
- public function prepare_minmax_demand_calculator($fp_minmax_header_id) {
-	$mmd = new fp_minmax_demand();
+ public function prepare_mrp_demand_calculator($fp_mrp_header_id) {
+	$mmd = new fp_mrp_demand();
 	try {
-	 $mmd->deleteBy_planId($fp_minmax_header_id);
+	 $mmd->deleteBy_planId($fp_mrp_header_id);
 	} catch (Exception $e) {
-	 echo "<br>Deleting the existing record failed!. Error @ fp_minmax_header @ " . __LINE__;
+	 echo "<br>Deleting the existing record failed!. Error @ fp_mrp_header @ " . __LINE__;
 	}
  }
 
- public function prg_minmax_planner($seralized_parameters) {
+ public function prg_mrp_planner($seralized_parameters) {
 	$parameters = unserialize($seralized_parameters);
 	$this->message = '<br> Starting Min Max Planner....<br>';
-	$mmh = new fp_minmax_header();
+	$mmh = new fp_mrp_header();
 
 	if (!empty($parameters['org_id'][0])) {
 	 $org_id = $parameters['org_id'][0];
@@ -114,17 +107,17 @@ class fp_minmax_header extends dbObject {
 	 return $this->message;
 	}
 
-	if (!empty($parameters['fp_minmax_header_id'][0])) {
-	 $fp_minmax_header_id = $parameters['fp_minmax_header_id'][0];
-	 $this->message .= '<br> Entered Min Max Header Id is : ' . $fp_minmax_header_id;
-	 $mmh->findBy_id($fp_minmax_header_id);
+	if (!empty($parameters['fp_mrp_header_id'][0])) {
+	 $fp_mrp_header_id = $parameters['fp_mrp_header_id'][0];
+	 $this->message .= '<br> Entered Min Max Header Id is : ' . $fp_mrp_header_id;
+	 $mmh->findBy_id($fp_mrp_header_id);
 	 if ($mmh->org_id != $org_id) {
-		$this->message .= '<br> Error! : Entered Min Max does not belong to the entered Org @ fp_minmax_header ' . __LINE__;
+		$this->message .= '<br> Error! : Entered Min Max does not belong to the entered Org @ fp_mrp_header ' . __LINE__;
 		return $this->message;
 	 }
-	 $this->prepare_minmax_demand_calculator($fp_minmax_header_id);
+	 $this->prepare_mrp_demand_calculator($fp_mrp_header_id);
 	} else {
-	 $this->message .= '<br> Error! : No Min Max Header Id is found @ fp_minmax_header ' . __LINE__;
+	 $this->message .= '<br> Error! : No Min Max Header Id is found @ fp_mrp_header ' . __LINE__;
 	 return $this->message;
 	}
 
@@ -132,9 +125,9 @@ class fp_minmax_header extends dbObject {
 	 $this->message .= "<br/>Using Min Max Planner by Item Id ";
 	 $item_id = $parameters['item_id'][0];
 	 try {
-		$this->minmax_demand_calculator($item_id, $mmh);
+		$this->mrp_demand_calculator($item_id, $mmh);
 		$this->message .= "<br/> Min Max Planner is sucessfully updated for item_id - " . $item_id .
-						' bom_cost_type : ' . $fp_minmax_header_id;
+						' bom_cost_type : ' . $fp_mrp_header_id;
 	 } catch (Exception $e) {
 		$this->message .= "<br/> Min Max Planner fialed for Item id " . $item_id . $e->getMessage();
 	 }
@@ -154,9 +147,9 @@ class fp_minmax_header extends dbObject {
 	 $item_range = $item->findBy_itemIdRange($from_item_id, $to_item_id);
 	 foreach ($item_range as $items) {
 		try {
-		 $this->minmax_demand_calculator($items->item_id, $mmh);
+		 $this->mrp_demand_calculator($items->item_id, $mmh);
 		 $this->message .= "<br>Min Max Planner is sucessfully updated for item_id - " . $items->item_id .
-						 ' bom_cost_type : ' . $fp_minmax_header_id;
+						 ' bom_cost_type : ' . $fp_mrp_header_id;
 		} catch (Exception $e) {
 		 $this->message .= "<br>Min Max Plannerp failed for Item id " . $items->item_id . $e->getMessage();
 		}
@@ -176,7 +169,7 @@ class fp_minmax_header extends dbObject {
 
 	 foreach ($item_range as $items) {
 		try {
-		 $this->minmax_demand_calculator($items->item_id, $mmh);
+		 $this->mrp_demand_calculator($items->item_id, $mmh);
 		 $this->message .= "<br>Min Max Planner is sucessfully updated for item_id - " . $items->item_id .
 						 ' bom_cost_type : ' . $bom_cost_type;
 		} catch (Exception $e) {
@@ -194,9 +187,9 @@ class fp_minmax_header extends dbObject {
 	$this->message .= "<br/>Using  Min Max Planner for All Items ";
 	foreach ($fcl_i as $items) {
 	 try {
-		$this->minmax_demand_calculator($items->item_id, $mmh);
+		$this->mrp_demand_calculator($items->item_id, $mmh);
 		$this->message .= "<br>Min Max Planner is sucessfully updated for item_id - " . $items->item_id .
-						' bom_cost_type : ' . $fp_minmax_header_id;
+						' bom_cost_type : ' . $fp_mrp_header_id;
 	 } catch (Exception $e) {
 		$this->message .= "<br>Min Max Plannerp failed for Item id " . $items->item_id . $e->getMessage();
 	 }
@@ -204,7 +197,7 @@ class fp_minmax_header extends dbObject {
 	return $this->message;
  }
 
- public function minmax_demand_calculator($item_id, $mmh) {
+ public function mrp_demand_calculator($item_id, $mmh) {
 	$fctl = new fp_forecast_line();
 	$fctl->item_id = $item_id;
 	$fctl->fp_forecast_header_id = $mmh->demand_source;
@@ -212,11 +205,11 @@ class fp_minmax_header extends dbObject {
 	if (empty($forecast_lines)) {
 	 return;
 	}
-	$mmd = new fp_minmax_demand();
+	$mmd = new fp_mrp_demand();
 	foreach ($forecast_lines as $forecast) {
-	 $mmd->fp_minmax_demand_id = null;
+	 $mmd->fp_mrp_demand_id = null;
 	 $mmd->item_id = $forecast->item_id;
-	 $mmd->plan_id = $mmh->fp_minmax_header_id;
+	 $mmd->plan_id = $mmh->fp_mrp_header_id;
 	 $mmd->quantity = $forecast->total_original;
 	 $mmd->demand_item_id = $fctl->item_id;
 	 $mmd->toplevel_demand_item_id = $fctl->item_id;
@@ -224,11 +217,11 @@ class fp_minmax_header extends dbObject {
 	 $mmd->source = $forecast->fp_forecast_header_id;
 	 $mmd->audit_trial();
 	 $mmd->save();
-	 $this->_minmax_demand_calculator_forComponents($item_id, $mmd);
+	 $this->_mrp_demand_calculator_forComponents($item_id, $mmd);
 	}
  }
 
- private function _minmax_demand_calculator_forComponents($item_id, $mmd) {
+ private function _mrp_demand_calculator_forComponents($item_id, $mmd) {
 //	$mmd->audit_trial();
 //	$mmd->save();
 
@@ -248,9 +241,9 @@ class fp_minmax_header extends dbObject {
 	if (empty($bol_i)) {
 	 return;
 	}
-	$mmd_n = new fp_minmax_demand();
+	$mmd_n = new fp_mrp_demand();
 	foreach ($bol_i as $items) {
-	 $mmd_n->fp_minmax_demand_id = null;
+	 $mmd_n->fp_mrp_demand_id = null;
 	 $mmd_n->item_id = $items->component_item_id;
 	 $mmd_n->plan_id = $mmd->plan_id;
 	 $mmd_n->quantity = $mmd->quantity * $items->usage_quantity;
@@ -263,18 +256,18 @@ class fp_minmax_header extends dbObject {
 	 $boh->item_id = $items->component_item_id;
 	 $boh_i = $boh->findBy_itemId();
 	 if (!empty($boh_i)) {
-		$this->_minmax_demand_calculator_forComponents($items->component_item_id, $mmd_n);
+		$this->_mrp_demand_calculator_forComponents($items->component_item_id, $mmd_n);
 	 }
 	}
  }
 
- private function _get_minmax_attributes($item_id) {
+ private function _get_mrp_attributes($item_id) {
 	global $db;
 	$sql = "
 				 SELECT item.item_number, item.item_description, item.planning_method, item.make_buy, item.uom_id,
 				 item.sourcing_rule_id,
 				 org_v.org_id, org_v.currency_code, org_v.business_org_id, cic.standard_cost, cic.purchase_price,
-				 item.minmax_min_quantity, item.minmax_max_quantity, item.minmax_multibin_number, item.minmax_multibin_size, 
+				 item.mrp_min_quantity, item.mrp_max_quantity, item.mrp_multibin_number, item.mrp_multibin_size, 
 				 item.minimum_order_quantity, item.fix_lot_multiplier, 
 				 onhand_wo_o.item_id as item_id , onhand_wo_o.onhand as onhand, onhand_wo_o.open_wo as open_wo,
 								open_po_req_o.open_req open_req , open_po_req_o.open_po as open_po, open_po_req_o.open_req_intf as open_req_intf,
@@ -323,24 +316,24 @@ class fp_minmax_header extends dbObject {
 //insert into requisition interface
  }
 
- private function _create_supply_for_minmax($item_id) {
+ private function _create_supply_for_mrp($item_id) {
 	if (isset($all_attributes)) {
 	 unset($all_attributes);
 	}
-	$all_attributes = $this->_get_minmax_attributes($item_id);
+	$all_attributes = $this->_get_mrp_attributes($item_id);
 	if (!$all_attributes) {
 	 return;
 	}
 	$all_attributes->total_order_quantity = null;
-	if ($all_attributes->total_supply > $all_attributes->minmax_min_quantity) {
+	if ($all_attributes->total_supply > $all_attributes->mrp_min_quantity) {
 	 $all_attributes->order_quantity = null;
 	 return $all_attributes;
 	}
 
 	//for min max
 	if ($all_attributes->planning_method == 'MINMAX') {
-	 if (!empty($all_attributes->minmax_max_quantity)) {
-		$all_attributes->order_quantity = $all_attributes->minmax_max_quantity - $all_attributes->total_supply;
+	 if (!empty($all_attributes->mrp_max_quantity)) {
+		$all_attributes->order_quantity = $all_attributes->mrp_max_quantity - $all_attributes->total_supply;
 	 } else if ($all_attributes->total_supply < 0) {
 		$all_attributes->order_quantity = abs($all_attributes->total_supply);
 	 } else {
@@ -364,9 +357,9 @@ class fp_minmax_header extends dbObject {
 	 return $all_attributes;
 	} // for multi min max
 	else if ($all_attributes->planning_method == 'MULTI_MINMAX') {
-	 if (!empty($all_attributes->minmax_max_quantity)) {
-		$required_quantity = $all_attributes->minmax_max_quantity - $all_attributes->total_supply;
-		$all_attributes->order_quantity = $all_attributes->minmax_multibin_size;
+	 if (!empty($all_attributes->mrp_max_quantity)) {
+		$required_quantity = $all_attributes->mrp_max_quantity - $all_attributes->total_supply;
+		$all_attributes->order_quantity = $all_attributes->mrp_multibin_size;
 	 } else if ($all_attributes->total_supply < 0) {
 		$all_attributes->order_quantity = abs($all_attributes->total_supply);
 	 } else {
@@ -389,7 +382,7 @@ class fp_minmax_header extends dbObject {
 	 } else {
 		$no_of_orders = 0;
 	 }
-  $all_attributes->total_order_quantity = $no_of_orders * $all_attributes->order_quantity;
+	 $all_attributes->total_order_quantity = $no_of_orders * $all_attributes->order_quantity;
 	 if ($all_attributes->make_buy == 'Buy') {
 		//cretae requisition
 		while ($no_of_orders > 0) {
@@ -469,7 +462,7 @@ class fp_minmax_header extends dbObject {
 	$woh->_after_save();
  }
 
- public function prg_minmax_program($seralized_parameters) {
+ public function prg_mrp_program($seralized_parameters) {
 	$output_a = [];
 	$parameters = unserialize($seralized_parameters);
 	$this->message = '<br> Starting Min Max Program....<br>';
@@ -478,7 +471,7 @@ class fp_minmax_header extends dbObject {
 	 $org_id = $parameters['org_id'][0];
 	 $this->message .= '<br> Entered Org Id is : ' . $org_id;
 	} else {
-	 $this->message .= '<br> Error! : No org id found @ fp_minmax_header ' . __LINE__;
+	 $this->message .= '<br> Error! : No org id found @ fp_mrp_header ' . __LINE__;
 	 return $this->message;
 	}
 
@@ -491,7 +484,7 @@ class fp_minmax_header extends dbObject {
 	 $this->message .= "<br/>Using Min Max program by Item Id ";
 	 $item_id = $parameters['item_id'][0];
 	 try {
-		$op = $this->_create_supply_for_minmax($item_id);
+		$op = $this->_create_supply_for_mrp($item_id);
 		array_push($output_a, $op);
 		$this->message .= "<br/> Min Max Planner is sucessfully updated for item_id - " . $item_id;
 	 } catch (Exception $e) {
@@ -512,7 +505,7 @@ class fp_minmax_header extends dbObject {
 	 $item_range = $item->findBy_itemIdRange($from_item_id, $to_item_id);
 	 foreach ($item_range as $items) {
 		try {
-		 $op = $this->_create_supply_for_minmax($items->item_id);
+		 $op = $this->_create_supply_for_mrp($items->item_id);
 		 array_push($output_a, $op);
 		 $this->message .= "<br>Min Max Program is sucessfully updated for item_id - " . $items->item_id;
 		} catch (Exception $e) {
@@ -534,7 +527,7 @@ class fp_minmax_header extends dbObject {
 
 	 foreach ($item_range as $items) {
 		try {
-		 $op = $this->_create_supply_for_minmax($items->item_id);
+		 $op = $this->_create_supply_for_mrp($items->item_id);
 		 array_push($output_a, $op);
 		 $this->message .= "<br>Min Max Planner is sucessfully updated for item_id - " . $items->item_id;
 		} catch (Exception $e) {
@@ -546,11 +539,11 @@ class fp_minmax_header extends dbObject {
 
 	//if no item id/number is given
 	$item = new item();
-	$item_i = $item->findAll_minmax_ofOrgId($org_id);
+	$item_i = $item->findAll_mrp_ofOrgId($org_id);
 	$this->message .= "<br/>Using  Min Max Planner for All Items ";
 	foreach ($item_i as $items) {
 	 try {
-		$op = $this->_create_supply_for_minmax($items->item_id);
+		$op = $this->_create_supply_for_mrp($items->item_id);
 		if (!empty($op)) {
 		 array_push($output_a, $op);
 		}

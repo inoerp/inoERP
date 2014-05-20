@@ -116,7 +116,7 @@ class item extends dbObject {
 		 "ef2",
 		 "atp",
 		 "picking_rule",
-		 "sourcing_rule",
+		 "sourcing_rule_id",
 		 "ap_tax",
 		 "sales_tax",
 		 "ap_payment_term",
@@ -186,6 +186,7 @@ class item extends dbObject {
 		 'item_catalog',
 		 'item_reference',
 		 'item_template',
+		 'sourcing_rule',
 		 'action',
 		 'multibin_minmax_quantity',
 		 'overwrite_minmax_min_quantity',
@@ -334,7 +335,7 @@ class item extends dbObject {
  public $ef2;
  public $atp;
  public $picking_rule;
- public $sourcing_rule;
+ public $sourcing_rule_id;
  public $sales_ac;
  public $cogs_ac;
  public $deffered_cogs_ac;
@@ -359,6 +360,7 @@ class item extends dbObject {
  public $overwrite_minmax_max_quantity;
  public $overwrite_minmax_multibin_number;
  public $overwrite_minmax_multibin_size;
+ public $sourcing_rule;
 
  Public static function product_line() {
 	$option_header = option_header::find_by_name('INV_ITEM_PRODUCT_LINE');
@@ -397,6 +399,9 @@ class item extends dbObject {
  }
 
  public function _before_save() {
+	if(!empty($this->sourcing_rule)){
+	 	 $this->sourcing_rule_id = po_sourcing_rule_header::find_by_sourcingRule($this->sourcing_rule)->po_sourcing_rule_header_id;
+	}
 	if (($this->action == 'update_item_minmax')) {
 	 echo "<br> saving minmax details before Item SAVE";
 	 $this->_update_item_minmax();

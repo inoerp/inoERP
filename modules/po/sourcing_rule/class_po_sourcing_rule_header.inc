@@ -59,6 +59,16 @@ public $last_update_date;
 	
  }
 
+  public static function find_by_sourcingRule($sourcing_rule) {
+	global $db;
+	$sql = "SELECT * FROM ";
+	$sql .= self::$table_name;
+	$sql .= " where sourcing_rule = '{$sourcing_rule}' ";
+	$sql .= " LIMIT 1 ";
+	$result = $db->find_by_sql($sql);
+	return !(empty($result)) ? array_pop($result) : false;
+ }
+ 
  public function findBy_itemId() {
 	$sql = "SELECT * FROM " .
 					self::$table_name .

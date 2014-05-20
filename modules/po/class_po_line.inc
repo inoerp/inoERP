@@ -89,7 +89,6 @@ class po_line extends dbObject {
     $item_s = item::find_by_itemNumber_orgId($this->item_number, $this->receving_org_id);
 			$this->item_id = $item_s->item_id;
 	 }
-	 return;
 	} else {
 	 echo "<br> Saving line data failed!. No receving org. Error @ po_line @" . __LINE__;
 	 return -99;

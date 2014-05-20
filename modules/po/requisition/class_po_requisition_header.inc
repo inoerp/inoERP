@@ -56,7 +56,8 @@ class po_requisition_header extends dbObject {
 		 "supplier_site_name",
  ];
  public $requiredField = [
-		 'bu_org_id'
+		 'bu_org_id',
+		 'po_requisition_type',
  ];
  public $addressField = [
 		 'ship_to_id',
@@ -75,7 +76,7 @@ class po_requisition_header extends dbObject {
 		 '_show_view_path' => 1,
 		 '_extra_path' => array('form.php?class_name=po_header&mode=9' => 'Create PO')
  ];
- public $pageTitle = " Purchasing - Create & Update Requisitions "; //page Title
+ public $pageTitle = " Requisition - Purchasing "; //page Title
  public $option_lists = [
 		 'po_requisition_type' => 'PO_REQUISITION_TYPE',
 		 'requisition_status' => 'PO_STATUS',

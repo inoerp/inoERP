@@ -1,5 +1,4 @@
 <?php
-
 set_time_limit(120);
 include_once ('../../../includes/basics/basics.inc');
 
@@ -11,7 +10,10 @@ function start_next_program() {
 	foreach ($p->field_a as $key => $value) {
 	 $p->$value = $p_toStart->$value;
 	}
-
+		//update the status to inprogress
+	$p->status = 'inprogress';
+	$p->save();
+	
 	$class = $p->class;
 	$$class = new $class;
 	try {

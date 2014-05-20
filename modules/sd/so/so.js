@@ -276,7 +276,7 @@ $(document).ready(function() {
  classSave.json_url = 'form.php?class_name=sd_so_header';
  classSave.form_header_id = 'so_header';
  classSave.primary_column_id = 'sd_so_header_id';
- classSave.line_key_field = 'item_id';
+ classSave.line_key_field = 'item_description';
  classSave.single_line = false;
  classSave.savingOnlyHeader = false;
  classSave.enable_select = true;

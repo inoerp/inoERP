@@ -78,6 +78,7 @@ $(document).ready(function() {
 	$('.shipment_number:first').val('1');
  }
 
+lineDetail_QuantityValidation();
 // $('.need_by_date:first').datepicker("setDate", new Date());
 // $('.promise_date:first').datepicker("setDate", new Date());
 
@@ -115,12 +116,12 @@ $(document).ready(function() {
 	}
  });
  
-  $("#content").on("focusout", '.ship_to_inventory', function() {
-	var ship_to_inventory = $(this).val();
+  $("#content").on("focusout", '.receving_org_id', function() {
+	var receving_org_id = $(this).val();
 	var rowTrClass = $(this).closest("tr").attr("class");
 	var classValue = "tr." + rowTrClass;
 	var classValue1 = classValue.replace(/ /g, '.');
-	getAllInventoryAccounts('modules/org/inventory/json_inventory.php', ship_to_inventory, classValue1);
+	getAllInventoryAccounts('modules/org/inventory/json_inventory.php', receving_org_id, classValue1);
  });
 
 
@@ -286,7 +287,7 @@ $(document).ready(function() {
  classSave.json_url = 'form.php?class_name=po_requisition_header';
  classSave.form_header_id = 'po_requisition_header';
  classSave.primary_column_id = 'po_requisition_header_id';
- classSave.line_key_field = 'item_id';
+ classSave.line_key_field = 'line_number';
  classSave.single_line = false;
  classSave.savingOnlyHeader = false;
  classSave.headerClassName = 'po_requisition_header';

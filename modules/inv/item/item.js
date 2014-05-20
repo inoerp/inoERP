@@ -1,14 +1,17 @@
-function setValFromSelectPage(item_id, item_number, item_description, uom_id, combination) {
+function setValFromSelectPage(item_id, item_number, item_description, uom_id, 
+combination, sourcing_rule) {
  this.item_id = item_id;
  this.item_number = item_number;
  this.item_description = item_description;
  this.uom_id = uom_id;
  this.combination = combination;
+ this.sourcing_rule = sourcing_rule;
 }
 
 setValFromSelectPage.prototype.setVal = function() {
  var item_number = this.item_number;
  var combination = this.combination;
+ var sourcing_rule = this.sourcing_rule;
  var fieldClass = '.' + localStorage.getItem("field_class");
  fieldClass = fieldClass.replace(/\s+/g, '.');
 
@@ -30,11 +33,15 @@ setValFromSelectPage.prototype.setVal = function() {
 	 }
 	});
  }
-localStorage.removeItem("item_type");
+ localStorage.removeItem("item_type");
 
  if (combination) {
 	$('#content').find(fieldClass).val(combination);
 	localStorage.removeItem("field_class");
+ }
+ 
+  if (sourcing_rule) {
+	$('#content').find('.sourcing_rule').val(sourcing_rule);
  }
 };
 
@@ -64,6 +71,12 @@ $(document).ready(function() {
 	}
 	void window.open('select.php?class_name=item', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
+ $('#content').on('click', '.select_sourcing_rule', function() {
+	void window.open('select.php?class_name=po_sourcing_rule_header', '_blank',
+					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+
  });
 
  //Get the item_id on find button click

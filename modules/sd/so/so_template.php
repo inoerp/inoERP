@@ -85,7 +85,7 @@
 							<?php echo form::select_field_from_object('document_currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->document_currency, 'document_currency', $readonly, '', '', 1); ?>
 						 </li>
 						 <li><label>Payment Term : </label>
-							<?php  $f->text_field_d('payment_term_id');	?>
+							<?php $f->text_field_d('payment_term_id'); ?>
 						 </li>
 						 <li><label>Payment Term Date : </label>
 							<?php echo form::date_fieldAnyDay('payment_term_date', $$class->payment_term_date) ?>
@@ -209,7 +209,8 @@
 				 <ul class="tabMain">
 					<li><a href="#tabsLine-1">Basic</a></li>
 					<li><a href="#tabsLine-2">Other Info</a></li>
-					<li><a href="#tabsLine-3">Notes</a></li>
+					<li><a href="#tabsLine-3">Dates</a></li>
+					<li><a href="#tabsLine-4">Notes</a></li>
 				 </ul>
 				 <div class="tabContainer">
 					<div id="tabsLine-1" class="tabContent">
@@ -220,10 +221,11 @@
 							<th>Line Id</th>
 							<th>Line#</th>
 							<th>Type</th>
-							<th>Item Id</th>
+							<th>Shipping Org</th>
 							<th>Item Number</th>
 							<th>Item Description</th>
 							<th>UOM</th>
+							<th>Line Status</th>
 							<th>Quantity</th>
 						 </tr>
 						</thead>
@@ -242,16 +244,17 @@
  							 </ul>
  							</td>
  							<td><?php form::text_field_wid2sr('sd_so_line_id'); ?></td>
- 							<!--<td><?php // form::text_field_wid2s('line_number');                 ?></td>-->
+ 							<!--<td><?php // form::text_field_wid2s('line_number');                  ?></td>-->
  							<td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
  							<td><?php echo form::select_field_from_object('line_type', sd_so_line::sd_so_line_types(), 'option_line_id', 'option_line_code', $$class_second->line_type, 'line_type', $readonly); ?></td>
- 							<td><?php form::text_field_wid2sr('item_id'); ?></td>
+ 							<td><?php echo $f->select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->shipping_org_id, '', '', 1, $readonly); ?></td>
  							<td><?php form::text_field_wid2('item_number', 'select_item_number'); ?>
  							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
  							<td><?php form::text_field_wid2('item_description'); ?></td>
  							<td><?php
 								echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id');
 								?></td>
+							<td><?php $f->text_field_d2r('line_status'); ?></td>
  							<td><?php form::number_field_wid2s('line_quantity'); ?></td>
  						 </tr>
 							<?php
@@ -292,7 +295,36 @@
 						<!--                  Showing a blank form for new entry-->
 					 </table>
 					</div>
-					<div id="tabsLine-3" class="tabContent">
+					<div id="tabsLine-3" class="scrollElement tabContent">
+					 <table class="form_line_data_table">
+						<thead> 
+						 <tr>
+							<th>Requested Date</th>
+							<th>Promise Date </th>
+							<th>Schedule Ship Date</th>
+							<th>Actual Ship Date</th>
+							 </tr>
+						</thead>
+						<tbody class="form_data_line_tbody">
+						 <?php
+						 $count = 0;
+						 foreach ($sd_so_line_object as $sd_so_line) {
+							?>         
+ 						 <tr class="sd_so_line<?php echo $count ?>">
+							<td><?php echo $f->date_fieldFromToday('requested_date', $$class_second->requested_date) ?></td>
+							<td><?php echo $f->date_fieldFromToday('promise_date', $$class_second->promise_date) ?></td>
+							<td><?php echo $f->date_fieldFromToday('schedule_ship_date', $$class_second->schedule_ship_date) ?></td>
+							<td><?php echo $f->date_fieldFromToday('actual_ship_date', $$class_second->actual_ship_date, 1) ?></td>
+ 						 </tr>
+							<?php
+							$count = $count + 1;
+						 }
+						 ?>
+						</tbody>
+						<!--                  Showing a blank form for new entry-->
+					 </table>
+					</div>
+					<div id="tabsLine-4" class="tabContent">
 					 <table class="form_line_data_table">
 						<thead> 
 						 <tr>

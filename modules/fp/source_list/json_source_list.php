@@ -8,6 +8,10 @@ if ((!empty($_GET['source_list_line_type'])) && ($_GET['find_source_list_line_ty
 	 $class = 'fp_forecast_header';
 	 break;
 
+		case 'DEMAND_ENTRY' :
+	 $class = 'fp_mds_header';
+	 break;
+	
 	case 'default' :
 	 $class = 'fp_forecast_header';
 	 break;

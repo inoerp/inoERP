@@ -7,7 +7,6 @@ class po_requisition_line extends dbObject {
  public static $parent_primary_column = "po_requisition_header_id";
  public static $key_column = 'line_number';
  public static $module = "po_requisition";
-
  public $checkbox = [
 		 "rev_enabled_cb"
  ];
@@ -16,6 +15,7 @@ class po_requisition_line extends dbObject {
 		 'po_requisition_header_id',
 		 'line_type',
 		 'line_number',
+		 'receving_org_id',
 		 'item_id',
 		 'item_description',
 		 'line_description',
@@ -48,22 +48,21 @@ class po_requisition_line extends dbObject {
  public $requiredField = [
 		 'po_requisition_header_id',
 		 'line_number',
-		 'item_description'
+		 'item_description',
+		 'receving_org_id',
  ];
-
  public $fields_inForm_notInDataBase = [
 		 "po_requisition_number",
 		 "item_number"
  ];
- 
  public $fields_inHeader_needsToBeInserted_inPOST = [
 		 "po_requisition_header_id"
  ];
- 
  public $po_requisition_line_id;
  public $po_requisition_header_id;
  public $line_type;
  public $line_number;
+ public $receving_org_id;
  public $item_id;
  public $item_description;
  public $line_description;
@@ -84,6 +83,18 @@ class po_requisition_line extends dbObject {
  public $time;
  public $msg;
  public $item_number;
+
+ public function _before_save() {
+	if (!(empty($this->receving_org_id))) {
+	 if (!(empty($this->item_number))) {
+		$item_s = item::find_by_itemNumber_orgId($this->item_number, $this->receving_org_id);
+		$this->item_id = $item_s->item_id;
+	 }
+	} else {
+	 echo "<br> Saving line data failed!. No receving org. Error @ po_line @" . __LINE__;
+	 return -99;
+	}
+ }
 
  public function _after_save() {
 	

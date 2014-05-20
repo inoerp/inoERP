@@ -38,22 +38,22 @@ setValFromSelectPage.prototype.setVal = function() {
  }
  rowClass = rowClass.replace(/\s+/g, '.');
  fieldClass = fieldClass.replace(/\s+/g, '.');
-  if(combination){
- $('#content').find(rowClass).find(fieldClass).val(combination);
+ if (combination) {
+	$('#content').find(rowClass).find(fieldClass).val(combination);
  }
- if(item_id){
- $('#content').find(rowClass).find('.item_id').val(item_id);
+ if (item_id) {
+	$('#content').find(rowClass).find('.item_id').val(item_id);
  }
- if(item_number){
- $('#content').find(rowClass).find('.item_number').val(item_number);
+ if (item_number) {
+	$('#content').find(rowClass).find('.item_number').val(item_number);
  }
- if(item_description){
- $('#content').find(rowClass).find('.item_description').val(item_description);
+ if (item_description) {
+	$('#content').find(rowClass).find('.item_description').val(item_description);
  }
- if(uom_id){
- $('#content').find(rowClass).find('.uom_id').val(uom_id);
+ if (uom_id) {
+	$('#content').find(rowClass).find('.uom_id').val(uom_id);
  }
- 
+
  localStorage.removeItem("row_class");
  localStorage.removeItem("row_class");
 
@@ -77,7 +77,7 @@ $(document).ready(function() {
  if (!($('.shipment_number:first').val())) {
 	$('.shipment_number:first').val('1');
  }
-
+lineDetail_QuantityValidation();
 // $('.need_by_date:first').datepicker("setDate", new Date());
 // $('.promise_date:first').datepicker("setDate", new Date());
 
@@ -114,13 +114,13 @@ $(document).ready(function() {
 	 getSupplierSiteDetails('modules/ap/supplier/json_supplier.php', supplier_site_id);
 	}
  });
- 
-  $("#content").on("focusout", '.ship_to_inventory', function() {
-	var ship_to_inventory = $(this).val();
+
+   $("#content").on("focusout", '.receving_org_id', function() {
+	var receving_org_id = $(this).val();
 	var rowTrClass = $(this).closest("tr").attr("class");
 	var classValue = "tr." + rowTrClass;
 	var classValue1 = classValue.replace(/ /g, '.');
-	getAllInventoryAccounts('modules/org/inventory/json_inventory.php', ship_to_inventory, classValue1);
+	getAllInventoryAccounts('modules/org/inventory/json_inventory.php', receving_org_id, classValue1);
  });
 
 
@@ -135,8 +135,8 @@ $(document).ready(function() {
  coaCombination.select_class = 'select_account';
  coaCombination.min_length = 4;
  coaCombination.autoComplete();
- 
- 
+
+
  //selecting PO Header Id
  $(".po_header_id.select_popup").on("click", function() {
 	void window.open('select.php?class_name=po_all_v', '_blank',
@@ -294,3 +294,4 @@ $(document).ready(function() {
  classSave.detailClassName = 'po_detail';
  classSave.saveMain();
 });
+

@@ -21,7 +21,6 @@ class po_requisition_detail extends dbObject {
 		 'po_requisition_line_id',
 		 'po_requisition_header_id',
 		 'shipment_number',
-		 'ship_to_inventory',
 		 'sub_inventory_id',
 		 'locator_id',
 		 'requestor',
@@ -86,7 +85,6 @@ class po_requisition_detail extends dbObject {
  public static $otherField_array = [
  ];
  public $po_requisition_detail_id;
- public $ship_to_inventory;
  public $po_requisition_line_id;
  public $po_requisition_header_id;
  public $shipment_number;
@@ -122,6 +120,14 @@ class po_requisition_detail extends dbObject {
 	$sql = "SELECT * FROM " . self::$table_name . " where po_requisition_line_id = '{$po_requisition_line_id}'";
 	$result_array = self::find_by_sql($sql);
 	return $result_array;
+ }
+ 
+  public function _before_save() {
+	if (!empty($this->order_number)) {
+	 echo " Action not allowed!. <br>"
+	 . " Requisition has already been converted to order# ". $this->order_number;
+	 return -99;
+	} 
  }
 
  public function _after_save() {

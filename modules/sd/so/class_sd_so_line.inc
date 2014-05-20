@@ -7,7 +7,6 @@ class sd_so_line extends dbObject {
  public static $parent_primary_column = "sd_so_header_id";
  public static $key_column = 'line_number';
  public static $module = "sd";
-
  public $checkbox = [
 		 "rev_enabled_cb"
  ];
@@ -17,6 +16,11 @@ class sd_so_line extends dbObject {
 		 'line_type',
 		 'line_number',
 		 'item_id',
+		 'shipping_org_id',
+		 'line_status',
+		 'requested_date',
+		 'promise_date',
+		 'schedule_ship_date',
 		 'item_description',
 		 'line_description',
 		 'uom_id',
@@ -50,16 +54,14 @@ class sd_so_line extends dbObject {
 		 'line_number',
 		 'item_description'
  ];
-
  public $fields_inForm_notInDataBase = [
 		 "so_number",
-		 "item_number"
+		 "item_number",
+		 'actual_ship_date'
  ];
- 
  public $fields_inHeader_needsToBeInserted_inPOST = [
 		 "sd_so_header_id"
  ];
- 
  public $sd_so_line_id;
  public $sd_so_header_id;
  public $line_type;
@@ -81,12 +83,52 @@ class sd_so_line extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
+ public $shipping_org_id;
+ public $line_status;
+ public $requested_date;
+ public $promise_date;
+ public $schedule_ship_date;
+ public $actual_ship_date;
  public $time;
  public $msg;
  public $item_number;
 
+ public function _before_save() {
+	if (!(empty($this->shipping_org_id))) {
+	 if (!(empty($this->item_number))) {
+		$item_s = item::find_by_itemNumber_orgId($this->item_number, $this->shipping_org_id);
+		$this->item_id = $item_s->item_id;
+	 }
+	} else {
+	 echo "<br> Saving line data failed!. No shipping organization. Error @ po_line @" . __LINE__;
+	 return -99;
+	}
+
+	if ((empty($this->line_status)) && (!empty($this->schedule_ship_date))) {
+	 $this->line_status = 'AWAITING_PICKING';
+	} else if (($this->line_status = 'ENTERED') && (!empty($this->schedule_ship_date))) {
+	 $this->line_status = 'AWAITING_PICKING';
+	} else if ((empty($this->line_status)) && (empty($this->schedule_ship_date))) {
+	 $this->line_status = 'ENTERED';
+	}
+ }
+
  public function _after_save() {
 	
+ }
+
+ public function findAll_ByOrgId($org_id, $status='') {
+	$sql = " SELECT * FROM " .
+					self::$table_name .
+					" WHERE shipping_org_id= :shipping_org_id  ";
+	if(!empty($status)){
+	 $sql .= " AND line_status = :line_status ";
+	 $value_a = ['shipping_org_id' => $org_id, 'line_status' => $status];
+	}else{
+	$value_a = ['shipping_org_id' => $org_id];
+	}
+	$result_array = $this->findBySql($sql, $value_a);
+	return !empty($result_array) ? $result_array : false;
  }
 
  Public static function sd_so_line_types() {
@@ -122,5 +164,6 @@ class sd_so_line extends dbObject {
  }
 
 }
+
 //end of sd_so_line class
 ?>

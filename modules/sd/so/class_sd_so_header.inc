@@ -44,9 +44,6 @@ class sd_so_header extends dbObject {
 		 "sd_so_header_id",
 		 "so_number",
 		 "ar_customer_id",
-		 "customer_name",
-		 "customer_number",
-		 "customer_site_name",
 		 "sales_person"
  ];
  public $column = [
@@ -55,9 +52,6 @@ class sd_so_header extends dbObject {
 		 "approval_status",
 		 "ar_customer_id",
 		 "creation_date",
-		 "sales_person",
-		 "customer_name",
-		 "customer_site_name",
  ];
  public $requiredField = [
 		 'ar_customer_id',
@@ -81,7 +75,6 @@ class sd_so_header extends dbObject {
  ];
  public $search = [
 		 '_show_update_path' => 1,
-		 '_update_action_meassge' => 'Update PO',
 		 '_show_view_path' => 1,
 //		 '_view_action_meassge' => 'View',
 		 '_extra_path' => array('form.php?class_name=ar_transaction_header&mode=9' => 'Invoice',

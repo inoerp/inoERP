@@ -151,6 +151,18 @@ class bom_header extends dbObject {
 	return !empty($result_array) ? array_pop($result_array) : false;
  }
 
+ public function findBy_orgId($org_id) {
+	IF (!empty($org_id)) {
+	 $this->org_id = $org_id;
+	}
+	$sql = "SELECT * FROM " .
+					self::$table_name .
+					" where org_id= :org_id ";
+	$value_a = ['org_id' => $this->org_id];
+	$result_array = $this->findBySql($sql, $value_a);
+	return !empty($result_array) ? $result_array : false;
+ }
+
  private function _explosion($item_id, &$level_array, $level = 0) {
 	$boh = new bom_header();
 	$boh->item_id = $item_id;
@@ -249,7 +261,7 @@ class bom_header extends dbObject {
 
  public function prg_varify_circular_bom($seralized_parameters) {
 	$parameters = unserialize($seralized_parameters);
-  $parent_ref_items = [];
+	$parent_ref_items = [];
 	if (!empty($parameters['org_id'][0])) {
 	 $org_id = $parameters['org_id'][0];
 	 $this->message .= '<br> Entered Org Id is : ' . $org_id;

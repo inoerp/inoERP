@@ -76,14 +76,41 @@ class fp_source_list_header extends dbObject {
 	return $ol;
  }
 
- public function findBy_itemId() {
-	$sql = "SELECT * FROM " .
-					self::$table_name .
-					" where item_id= :item_id LIMIT 1 ";
-	$param_a = ['item_id'];
-	$value_a = ['item_id' => $this->item_id];
-	$result_array = $this->findBy_sql($sql, $param_a, $value_a);
-	return !empty($result_array) ? array_pop($result_array) : false;
+ public static function find_by_sourceListType($lisType) {
+	global $db;
+	$sql = " SELECT * FROM ";
+	$sql .= self::$table_name;
+	$sql .= " WHERE source_list_type = :source_list_type";
+	$value_a = ['source_list_type' => $lisType];
+	$result = $db->findBySql($sql, $value_a);
+	return !empty($result) ? $result : false;
+ }
+
+ public static function find_all_demandPlan() {
+	return self::find_by_sourceListType('DEMAND_PLAN');
+ }
+
+ public function findAll_forecastLines_byHeaderId($header_id = '') {
+	if (!empty($header_id)) {
+	 $this->fp_source_list_header_id = $header_id;
+	}
+	$srll = new fp_source_list_line();
+	$srll_i = $srll->findBy_parentId($this->fp_source_list_header_id);
+
+	$count = 1;
+	foreach ($srll_i as $forecast) {
+	 if (!empty($forecast)) {
+		$fcl = new fp_forecast_line();
+		$fcl_i = $fcl->findBy_parentId($forecast->source_list_id);
+		if($count == 1){
+		 $all_demand = $fcl_i;
+		}else{
+		$all_demand = array_merge($all_demand, $fcl_i);
+		}
+	 }
+	 $count++;
+	}
+	return $all_demand;
  }
 
 }
