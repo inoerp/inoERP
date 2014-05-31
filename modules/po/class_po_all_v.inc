@@ -52,19 +52,10 @@ class po_all_v extends dbObject {
 		 'ppv_ac_id',
  ];
  public $initial_search = [
-		 "po_header_id",
 		 "po_number",
-		 "supplier_id",
-		 "supplier_name",
 		 "supplier_number",
 		 "supplier_site_name",
 		 "item_number",
-		 "item_id",
-		 'item_description',
-		 "ship_to_id",
-		 "ship_to_org",
-		 "need_by_date",
-		 "buyer"
  ];
  public $column = [
 		 'po_number',
@@ -78,7 +69,7 @@ class po_all_v extends dbObject {
 		 'received_quantity',
 		 'unit_price',
 		 'line_price',
-		 		 'uom_id',
+		 'uom_id',
 		 'po_header_id',
 		 'po_type',
 		 'item_status',
@@ -159,6 +150,37 @@ class po_all_v extends dbObject {
  public $option_lists = [
 		 'po_type' => 'PO_TYPE',
 		 'po_status' => 'PO_STATUS',
+ ];
+ public $ra_open_po_by_supplier_parameters = [
+		 'Organization' => 'search_org_name',
+		 'Number of Suppliers' => 'search_no_of_suppliers',
+ ];
+ public $ra_open_po_by_supplier_settings = [
+		 '_chart_name' => 'Open PO By Supplier',
+		 '_x_axis_text' => 'Supplier',
+		 '_chart_type' => array('clustered_column', 'clustered_bar'),
+		 '_legend' => ''
+ ];
+ public $ra_po_purchase_type_usage_settings = [
+		 '_chart_name' => 'Purchase Type Usage',
+		 '_x_axis_text' => 'PO Type',
+		 '_right_margin' => '100',
+				 '_chart_width' => '400',
+		 '_chart_height' => '400',
+		 '_chart_type' => array('pie', 'clustered_bar'),
+		 '_legend' => ''
+ ];
+ public $ra_report_set_purchasing_analysis_settings = [
+		 '_chart_name' => 'Purchasing Analysis',
+		 '_chart_width' => '350',
+		 '_chart_height' => '350',
+		 '_x_axis_text' => 'Supplier',
+		 '_chart_type' => array('clustered_column', 'clustered_bar'),
+		 '_legend' => ''
+ ];
+ public $ra_report_set_purchasing_analysis = [
+		 'ra_open_po_by_supplier',
+		 'ra_po_purchase_type_usage',
  ];
  public $po_header_id;
  public $bu_org_id;
@@ -274,7 +296,39 @@ LEFT JOIN org ON po_detail.ship_to_inventory = org.org_id
 	$result = $this->findBy_sql($sql, $param_a, $value_a);
 	return !empty($result) ? array_pop($result) : false;
  }
+ public function ra_report_set_purchasing_analysis() {
+	$result_a = [];
+	$result_a['ra_open_po_by_supplier'] = $this->ra_open_po_by_supplier();
+	$result_a['ra_po_purchase_type_usage'] = $this->ra_po_purchase_type_usage();
+	return $result_a;
+ }
+ 
+ public function ra_open_po_by_supplier() {
+	$legend = [];
+	$sql = " SELECT supplier_name, sum(quantity) as 'All', 
+					sum(open_quantity) as 'Open'  FROM ";
+	$sql .= self::$table_name;
+	$sql .= " GROUP BY supplier_name ";
+	$sql .= " ORDER BY quantity desc ";
+	$sql .= " LIMIT 5 ";
+	$result = $this->findBySql($sql);
+	$result_f = ra_conevrt_data($result, 'supplier_name', $legend);
+	$this->ra_open_po_by_supplier_settings['_legend'] = $legend;
+	return !empty($result_f) ? ($result_f) : false;
+ }
 
+  public function ra_po_purchase_type_usage() {
+	$legend = [];
+	$sql = " SELECT po_status, sum(quantity) FROM ";
+	$sql .= self::$table_name;
+	$sql .= " GROUP BY po_status ";
+	$sql .= " ORDER BY quantity desc ";
+	$sql .= " LIMIT 5 ";
+	$result = $this->findBySql($sql);
+	$result_f = ra_conevrt_data_pie($result);
+	return !empty($result_f) ? ($result_f) : false;
+ }
+ 
 }
 
 //end of po_detail class

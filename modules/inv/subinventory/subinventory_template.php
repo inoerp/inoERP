@@ -27,7 +27,7 @@
 					 <?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $subinventory->org_id, 'org_id', $readonly); ?>
 					</li>
 					<li><label>Type :</label>
-					 <?php echo form::select_field_from_object('type', subinventory::subinventory_type(), 'option_line_code', 'option_line_code', $$class->type, 'type', $readonly); ?>
+					 <?php echo form::select_field_from_object('type', subinventory::subinventory_type(), 'option_line_code', 'option_line_value', $$class->type, 'type', $readonly); ?>
 					</li>
 					<li><label>Sub Inventory :</label>
 					 <?php form::text_field_wid('subinventory'); ?>
@@ -57,8 +57,8 @@
 					</ul>
 					<div class="tabContainer"> 
 					 <div id="tabsLine-1" class="tabContent">
-						<div class="three_column"> 
-						 <ul> 
+						<div > 
+						 <ul class="column four_column"> 
 							<li><label>Locator Control : </label>
 							 <?php echo form::select_field_from_object('locator_control', subinventory::locator_control(), 'option_line_code', 'option_line_code', $$class->locator_control, 'locator_control', $readonly); ?>	 
 							</li>
@@ -68,6 +68,9 @@
 							<li><label>Cost Group : </label>
 							 <?php form::text_field_wid('default_cost_group'); ?>
 							</li> 
+							<li><label>Shipment Picking Priority : </label>
+							 <?php echo form::number_field('shipment_pick_priority', $$class->shipment_pick_priority); ?>
+							</li>
 						 </ul> 
 						</div> 
 						<!--end of tab1 div three_column-->

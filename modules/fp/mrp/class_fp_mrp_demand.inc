@@ -10,6 +10,7 @@ class fp_mrp_demand extends dbObject {
  public $field_a = [
 		 'fp_mrp_demand_id',
 		 'fp_mrp_header_id',
+		 'org_id',
 		 'item_id',
 		 'demand_date',
 		 'quantity',
@@ -38,6 +39,7 @@ class fp_mrp_demand extends dbObject {
  public $column = [
 		 'fp_mrp_demand_id',
 		 'fp_mrp_header_id',
+		 'org_id',
 		 'item_id',
 		 'demand_date',
 		 'quantity',
@@ -50,6 +52,7 @@ class fp_mrp_demand extends dbObject {
  ];
  public $requiredField = [
 		 'fp_mrp_header_id',
+		 'org_id',
 		 'item_id',
 		 'demand_date',
 		 'quantity',
@@ -68,6 +71,7 @@ class fp_mrp_demand extends dbObject {
  public $pageTitle = " MRP Demand "; //page Title
  public $fp_mrp_demand_id;
  public $fp_mrp_header_id;
+ public $org_id;
  public $item_id;
  public $demand_date;
  public $quantity;
@@ -82,13 +86,35 @@ class fp_mrp_demand extends dbObject {
  public $last_update_by;
  public $last_update_date;
 
- public function prepare_mrp_demand_calculator($fp_mrp_header_id) {
+ public function prepare_mrp_demand_calculator($fp_mrp_header_id, &$msg) {
 	$mrpd = new fp_mrp_demand();
+	$return = 1;
 	try {
 	 $mrpd->deleteBy_parentId($fp_mrp_header_id);
 	} catch (Exception $e) {
-	 echo "<br>Deleting the existing record failed!. Error @ fp_mrp_header @ " . __LINE__;
+	 $return = -99;
+	 $msg .= "<br>Failed to delete existing demand!. Error @ fp_mrp_header @ " . __LINE__. $e->getMessage();
+	 echo $msg;
 	}
+
+	$mrpplo = new fp_mrp_planned_order();
+	try {
+	 $mrpplo->deleteBy_parentId($fp_mrp_header_id);
+	} catch (Exception $e) {
+	 $return = -99;
+	 $msg .= "<br>Failed to delete existing planned order!. Error @ fp_mrp_header @ " . __LINE__. $e->getMessage();
+	 echo $msg;
+	}
+
+	$mrpexp = new fp_mrp_exception();
+	try {
+	 $mrpexp->deleteBy_parentId($fp_mrp_header_id);
+	} catch (Exception $e) {
+	 $return = -99;
+	 $msg .= "<br>Failed to delete existing exception!. Error @ fp_mrp_header @ " . __LINE__. $e->getMessage();
+	 echo $msg;
+	}
+	return $return;
  }
 
  public function prg_mrp_demand_calculator($seralized_parameters) {
@@ -98,6 +124,7 @@ class fp_mrp_demand extends dbObject {
 
 	if (!empty($parameters['org_id'][0])) {
 	 $org_id = $parameters['org_id'][0];
+	 $this->org_id = $org_id;
 	 $this->message .= '<br> Entered Org Id is : ' . $org_id;
 	} else {
 	 $this->message .= '<br> Error! : No org id found @ fp_mrp_demand ' . __LINE__;
@@ -108,6 +135,7 @@ class fp_mrp_demand extends dbObject {
 	$llc = new fp_mrp_lowlevel_code();
 	$llc->create_lowlevel_code($org_id);
 
+
 	if (!empty($parameters['fp_mrp_header_id'][0])) {
 	 $fp_mrp_header_id = $parameters['fp_mrp_header_id'][0];
 	 $this->message .= '<br> Entered MRP Header Id is : ' . $fp_mrp_header_id;
@@ -116,7 +144,12 @@ class fp_mrp_demand extends dbObject {
 		$this->message .= '<br> Error! : Entered MRP does not belong to the entered Org @ fp_mrp_demand ' . __LINE__;
 		return $this->message;
 	 }
-	 $this->prepare_mrp_demand_calculator($fp_mrp_header_id);
+	 $msg = '';
+	 $prepartion_result = $this->prepare_mrp_demand_calculator($fp_mrp_header_id, $this->message);
+	 if($prepartion_result == -99){
+		echo $this->message;
+		return -99;
+	 }
 	} else {
 	 $this->message .= '<br> Error! : No MRP Header Id is found @ fp_mrp_header ' . __LINE__;
 	 return $this->message;
@@ -139,27 +172,32 @@ class fp_mrp_demand extends dbObject {
  }
 
  public function mrp_create_demand_and_plannedOrder($item_id, $mrph) {
+	$mdsh = new fp_mds_header();
+	$mdsh->findBy_id($mrph->demand_source);
 	$mdsl = new fp_mds_line();
 	$mdsl->item_id = $item_id;
 	$mdsl->fp_mds_header_id = $mrph->demand_source;
 	$demand_lines = $mdsl->findBy_ItemId_headerId();
 	if (!empty($demand_lines)) {
-	 $this->mrp_create_demand_fromMDS($item_id, $mrph, $demand_lines);
-	 }
-	$mrpd = new fp_mrp_demand();
+	 $this->mrp_create_demand_fromMDS($item_id, $mrph, $demand_lines, $mdsh->org_id);
+	}
+
 	$mrp_plo = new fp_mrp_planned_order();
+	$mrp_plo->item_id = $item_id;
+	$mrp_plo->fp_mrp_header_id = $mrph->fp_mrp_header_id;
 	$all_planned_orders = $mrp_plo->create_planned_orders($item_id, $mrph->fp_mrp_header_id);
-	if(!empty($all_planned_orders)){
-	 foreach($all_planned_orders as $planned_order){
-	$this->_mrp_demand_calculator_forComponents($item_id, $planned_order);
+	if (!empty($all_planned_orders)) {
+	 foreach ($all_planned_orders as $planned_order) {
+		$this->_mrp_demand_calculator_forComponents($item_id, $planned_order);
 	 }
- }
+	}
  }
 
- public function mrp_create_demand_fromMDS($item_id, $mrph, $demand_lines) {
+ public function mrp_create_demand_fromMDS($item_id, $mrph, $demand_lines, $demand_org_id) {
 	$mrpd = new fp_mrp_demand();
 	foreach ($demand_lines as $demand_line) {
 	 $mrpd->fp_mrp_demand_id = null;
+	 $mrpd->org_id = $demand_org_id;
 	 $mrpd->item_id = $demand_line->item_id;
 	 $mrpd->fp_mrp_header_id = $mrph->fp_mrp_header_id;
 	 $mrpd->demand_date = $demand_line->demand_date;
@@ -172,11 +210,12 @@ class fp_mrp_demand extends dbObject {
 	 $mrpd->source_line_id = $demand_line->source_line_id;
 	 $mrpd->audit_trial();
 	 $mrpd->save();
+//	 pa($mrpd);
 	}
  }
 
  private function _mrp_demand_calculator_forComponents($item_id, $all_planned_orders) {
-	pa($all_planned_orders);
+//	pa($all_planned_orders);
 	$boh = new bom_header();
 	$boh->item_id = $item_id;
 	$boh_i = $boh->findBy_itemId();
@@ -193,10 +232,11 @@ class fp_mrp_demand extends dbObject {
 	if (empty($bol_i)) {
 	 return;
 	}
-	pa($bol_i);
+//	pa($bol_i);
 	$mrpd_n = new fp_mrp_demand();
 	foreach ($bol_i as $items) {
 	 $mrpd_n->fp_mrp_demand_id = null;
+	 $mrpd_n->org_id = $all_planned_orders->org_id;
 	 $mrpd_n->item_id = $items->component_item_id;
 	 $mrpd_n->fp_mrp_header_id = $all_planned_orders->fp_mrp_header_id;
 	 if (!empty($all_planned_orders->need_by_date)) {

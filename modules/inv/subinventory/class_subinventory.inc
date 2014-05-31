@@ -17,6 +17,7 @@ class subinventory extends dbObject {
 		 "locator_control",
 		 "allow_negative_balance_cb",
 		 "default_cost_group",
+		 'shipment_pick_priority',
 		 "material_ac_id",
 		 "material_oh_ac_id",
 		 "overhead_ac_id",
@@ -35,12 +36,8 @@ class subinventory extends dbObject {
 //variables used for showing data
  public $initial_search = [
 		 "subinventory",
-		 "inventory_id",
 		 "subinventory_id",
-		 "org_id",
-		 "org",
 		 "description",
-		 "master_org"
  ];
  public $column = ["subinventory_id",
 		 "org_id",
@@ -48,7 +45,6 @@ class subinventory extends dbObject {
 		 "subinventory",
 		 "description",
 		 "created_by",
-		 "org"
  ];
  public $account = ["material_ac_id",
 		 "material_oh_ac_id",
@@ -65,10 +61,14 @@ class subinventory extends dbObject {
 		 "type",
 		 "subinventory"
  ];
+ 
  public $search = [
 		 '_show_update_path' => 1,
 		 '_update_action_meassge' => 'Update',
 		 '_show_view_path' => 1,
+ ];
+  public $search_functions = [
+		 'Organization' => 'search_org_name_onevalue'
  ];
  public $pageTitle = " Subinventory - Create & Update Subinventories"; //page Title
  public $option_lists = [
@@ -84,6 +84,7 @@ class subinventory extends dbObject {
  public $locator_control;
  public $allow_negative_balance_cb;
  public $default_cost_group;
+ public $shipment_pick_priority;
  public $material_ac_id;
  public $material_oh_ac_id;
  public $overhead_ac_id;
@@ -156,6 +157,13 @@ VAR;
 	$option_header = option_header::find_by_exact_name('LOCATOR_CONTROL');
 	$locator_control = option_line::find_by_option_id($option_header->option_header_id);
 	return $locator_control;
+ }
+ 
+public function _before_showing(){
+ if(!empty($this->org_id)){
+	$this->org = org::find_by_id($this->org_id)->org;
+ }
+	
  }
 
  public function findAll_ofOrgid() {

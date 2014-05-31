@@ -25,6 +25,8 @@ class sd_so_line extends dbObject {
 		 'line_description',
 		 'uom_id',
 		 'line_quantity',
+		 'picked_quantity',
+		 'shipped_quantity',
 		 'unit_price',
 		 'line_price',
 		 'reference_doc_type',
@@ -71,6 +73,8 @@ class sd_so_line extends dbObject {
  public $line_description;
  public $uom_id;
  public $line_quantity;
+ public $picked_quantity;
+ public $shipped_quantity;
  public $unit_price;
  public $line_price;
  public $reference_doc_type;

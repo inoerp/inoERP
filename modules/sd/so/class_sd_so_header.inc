@@ -7,6 +7,7 @@ class sd_so_header extends dbObject {
  public static $primary_column = "sd_so_header_id";
  public static $primary_column2 = "so_number";
  public static $key_column = 'ar_customer_id';
+ public static $js_fileName = 'modules/sd/so/js/multi_select_so.js';
  public static $module = "sd";
  public $checkbox = [
 		 "rev_enabled_cb"
@@ -71,7 +72,10 @@ class sd_so_header extends dbObject {
 		 "customer_site_name",
 		 "ship_to_address",
 		 "bill_to_address",
-		 'sales_action'
+		 'sales_action',
+		 		 'multi_action_class_pc',
+		 'multi_action_class_pc_value',
+		 'action'
  ];
  public $search = [
 		 '_show_update_path' => 1,
@@ -120,6 +124,14 @@ class sd_so_header extends dbObject {
  public $ship_to_address;
  public $bill_to_address;
  public $sales_action;
+ public $pick_from_subinventory;
+ public $pick_from_locator;
+ public $staging_subinventory;
+ public $staging_locator;
+  public $multi_action_class_pc;
+ public $multi_action_class_pc_value; 
+ public $action;
+ 
 
  public function __set($name, $value) {
 	switch ($value) {
@@ -134,13 +146,24 @@ class sd_so_header extends dbObject {
 	}
  }
 
+ public function _before_save() {
+	if(empty($this->approval_status)){
+	 $this->approval_status = 'Entered';
+	}
+	if (($this->action == 'sales_order_picking')) {
+	 echo "<br> Starting Sales Line Picking.";
+//	 $this->_convert_requisition_toPO();
+	 return 10;
+	}
+ }
+
  public function _after_save() {
 	global $db;
-		if ((!empty($this->sd_so_header_id)) && empty($this->so_number)) {
+	if ((!empty($this->sd_so_header_id)) && empty($this->so_number)) {
 	 $sd_so_header_id = $this->sd_so_header_id;
 	 $bu_org_id = $this->bu_org_id;
 	 $so_number = $bu_org_id . '-' . $sd_so_header_id;
-	 $this->so_number =  $so_number;
+	 $this->so_number = $so_number;
 	 echo '<br/> New SO number is ' . $so_number;
 	 $this->msg = $this->update_soNumber();
 	}
@@ -155,13 +178,13 @@ class sd_so_header extends dbObject {
 	$sql .= " SET so_number = :so_number  ";
 	$sql .= " WHERE sd_so_header_id = :sd_so_header_id  ";
 	$param_a = ['so_number', 'sd_so_header_id'];
-	$value_a = ['sd_so_header_id' => $this->sd_so_header_id , 'so_number' => $this->so_number];
-	
-	try{
-	 $db->findBy_sql($sql,$param_a, $value_a);
+	$value_a = ['sd_so_header_id' => $this->sd_so_header_id, 'so_number' => $this->so_number];
+
+	try {
+	 $db->findBy_sql($sql, $param_a, $value_a);
 	 return true;
-	}catch(Exception $e){
-	 echo "<br>SO Number update failed!".$e->getMessage();
+	} catch (Exception $e) {
+	 echo "<br>SO Number update failed!" . $e->getMessage();
 	 return false;
 	}
  }
@@ -211,15 +234,35 @@ class sd_so_header extends dbObject {
 	return $this->msg;
  }
 
- public function save() {
-	$primary_column = static::$primary_column;
-	if (empty($this->$primary_column)) {
-	 $this->approval_status = 'Entered';
-	 $this->create();
-	} else {
-	 $this->update($this->$primary_column);
-	}
-	return $this->msg;
+ private function _pick_sales_order(){
+	
+ }
+// public function save() {
+//	$primary_column = static::$primary_column;
+//	if (empty($this->$primary_column)) {
+//	 $this->approval_status = 'Entered';
+//	 $this->create();
+//	} else {
+//	 $this->update($this->$primary_column);
+//	}
+//	return $this->msg;
+// }
+
+ public function multi_select_input_fields() {
+	$multi_select_input = [
+	];
+	return $multi_select_input;
+ }
+
+ public function multi_select_hidden_fields() {
+	$multi_select_hidden = [
+			'action_class_name',
+			'mode',
+			'action',
+			'show_block',
+	];
+
+	return $multi_select_hidden;
  }
 
 }

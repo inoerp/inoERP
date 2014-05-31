@@ -271,6 +271,8 @@
 							<th>Unit Price</th>
 							<th>Line Price</th>
 							<th>Line Description</th>
+							<th>Picked Quantity </th>
+							<th>Shipped Quantity</th>
 							<th>Ref Doc Type</th>
 							<th>Ref Number</th>
 						 </tr>
@@ -283,7 +285,9 @@
  						 <tr class="sd_so_line<?php echo $count ?>">
  							<td><?php form::number_field_wid2('unit_price'); ?></td>
  							<td><?php form::number_field_wid2('line_price'); ?></td>
- 							<td><?php form::text_field_wid2('line_description'); ?></td>
+							<td><?php form::text_field_wid2('line_description'); ?></td>
+							<td><?php form::number_field_wid2('picked_quantity'); ?></td>
+							<td><?php form::number_field_wid2('shipped_quantity'); ?></td>
  							<td><?php form::text_field_wid2('reference_doc_type'); ?></td>
  							<td><?php form::text_field_wid2('reference_doc_number'); ?></td>
  						 </tr>

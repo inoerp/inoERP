@@ -351,7 +351,7 @@ class fp_minmax_header extends dbObject {
 	 }
 	 if ($all_attributes->fix_lot_multiplier > 1) {
 		$reminder = fmod($all_attributes->order_quantity, $all_attributes->fix_lot_multiplier);
-		$all_attributes->order_quantity +=!empty($reminder) ? $reminder : 0;
+		$all_attributes->order_quantity +=!empty($reminder) ? ($all_attributes->fix_lot_multiplier - $reminder) : 0;
 	 }
 	 $all_attributes->total_order_quantity = $all_attributes->order_quantity;
 	 if ($all_attributes->make_buy == 'Buy') {
