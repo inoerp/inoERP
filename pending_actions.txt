@@ -1,1 +1,0 @@
-1. remove ship_to_inventory from po_detail
