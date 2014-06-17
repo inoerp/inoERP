@@ -2,11 +2,23 @@
 
 class bom_resource extends dbObject {
 
- protected static $table_name = "bom_resource";
+ public static $table_name = "bom_resource";
  public static $primary_column = "bom_resource_id";
  public static $dependent_classes = ['bom_resource_cost'];
  public static $key_column = 'resource';
  public static $module = "bom";
+    public static $system_info = [
+		 'name' => 'Resource',
+		 'number' => '2406',
+		 'description' => 'BOM Resources',
+		 'version' => '1.1.1.3',
+		 'db_version' => '1001',
+		 'mod_version' => '1.1.x-1.1',
+		 'dependent_class' => array('bom_resource_cost'),
+		 'primary_entity_cb' => '',
+		 'module_name' => 'bom',
+		 'weight' => 6
+ ];
 //  data base variables as stored database column name
  public $field_a = [
 		 'bom_resource_id',

@@ -2,7 +2,7 @@
 
 class ar_customer_bu extends dbObject {
 
- protected static $table_name = "ar_customer_bu";
+ public static $table_name = "ar_customer_bu";
  public static $primary_column = "ar_customer_bu_id";
  public static $dependent_classes = ['ar_customer', 'ar_customer_site'];
  public static $key_column = 'ar_customer_id';

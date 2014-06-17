@@ -1,13 +1,41 @@
-function setValFromSelectPage(ar_customer_id, customer_number, customer_name) {
+function setValFromSelectPage(ar_customer_id, customer_number, customer_name,
+				address_id, address_name, address, country, postal_code) {
  this.ar_customer_id = ar_customer_id;
  this.customer_number = customer_number;
  this.customer_name = customer_name;
+ this.address_id = address_id;
+ this.address_name = address_name;
+ this.address = address;
+ this.country = country;
+ this.postal_code = postal_code;
 }
 
 setValFromSelectPage.prototype.setVal = function() {
  var ar_customer_id = this.ar_customer_id;
  var customer_number = this.customer_number;
  var customer_name = this.customer_name;
+ var address_id = this.address_id;
+ var address_name = this.address_name;
+ var address = this.address;
+ var country = this.country;
+ var postal_code = this.postal_code;
+ var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass");
+ addressPopupDivClass = addressPopupDivClass.replace(/\s+/g, '.');
+ if (address_id) {
+	$('#content').find(addressPopupDivClass).find('.address_id').val(address_id);
+ }
+ if (address_name) {
+	$('#content').find(addressPopupDivClass).find('.address_name').val(address_name);
+ }
+ if (address) {
+	$('#content').find(addressPopupDivClass).find('.address').val(address);
+ }
+ if (country) {
+	$('#content').find(addressPopupDivClass).find('.country').val(country);
+ }
+ if (postal_code) {
+	$('#content').find(addressPopupDivClass).find('.postal_code').val(postal_code);
+ }
 
  if (ar_customer_id) {
 	$("#ar_customer_id").val(ar_customer_id);
@@ -32,8 +60,8 @@ $(document).ready(function() {
 
  //Popup for selecting address 
  $(".address_popup").click(function() {
-	localStorage.addressPopupDivId = $(this).parent().siblings().first().attr("id");
-	;
+	var addressPopupDivClass = $(this).closest('div').prop('class');
+	localStorage.setItem("addressPopupDivClass", addressPopupDivClass);
 	void window.open('select.php?class_name=address', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
 	return false;

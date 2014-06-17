@@ -65,9 +65,8 @@
 					<li><a href="#tabsLine-2">Finance</a></li>
           <li><a href="#tabsLine-3">Profile</a></li>
 					<li><a href="#tabsLine-4">Sales</a></li>
-          <li><a href="#tabsLine-5">Address</a></li>
-          <li><a href="#tabsLine-6">Attachments</a></li>
-          <li><a href="#tabsLine-7">Contact</a></li>
+          <li><a href="#tabsLine-5">Attachments</a></li>
+          <li><a href="#tabsLine-6">Contact</a></li>
          </ul>
 				 <div class="tabContainer">
 					<div id="tabsLine-1" class="tabContent">
@@ -151,21 +150,8 @@
 						</li> 
 					 </ul>
 					</div>
-					<!--end of tab5 (Manufacturing)!! start of planning -->
+
 					<div id="tabsLine-5" class="tabContent">
-					 <div> 
-						<ul class="column five_column">
-						 <li><label>Site Address Id : 
-							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup"></label>
-							<?php echo form::text_field_d('site_address_id'); ?>
-						 </li>
-						</ul>
-						<div class="site address_details">
-						 <?php echo!empty($site_address_id) ? $site_address_id : ""; ?>
-						</div>  
-					 </div>
-					</div>	
-					<div id="tabsLine-6" class="tabContent">
 						<div id="show_attachment" class="show_attachment">
 						 <div id="file_upload_form">
 							<ul class="inRow asperWidth">
@@ -179,7 +165,7 @@
 						</div>
 					</div>
 					<!--end of tab4(purchasing)!!! start of MFG tab-->
-					<div id="tabsLine-7" class="tabContent">
+					<div id="tabsLine-6" class="tabContent">
 
 					</div>
 				 </div>

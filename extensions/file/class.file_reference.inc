@@ -1,10 +1,11 @@
 <?php
 
-class file_reference extends file {
+class file_reference extends dbObject {
 
- protected static $table_name = "file_reference";
+ public static $table_name = "file_reference";
 //  data base variables as stored database column name
- public static $field_array = ["file_reference_id",
+ public $field_a = [
+		 "file_reference_id",
 		 "file_id",
 		 "reference_table",
 		 "reference_id",

@@ -2,7 +2,7 @@
 
 class inventory extends org {
 
- protected static $table_name = "inventory";
+ public static $table_name = "inventory";
  public static $primary_column = "inventory_id";
  public static $key_column = 'org_id';
  public static $module = "org"; //same as gl_journal_source

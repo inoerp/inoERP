@@ -2,7 +2,7 @@
 
 class gl_journal_line extends dbObject {
 
- protected static $table_name = "gl_journal_line";
+ public static $table_name = "gl_journal_line";
  public static $primary_column = "gl_journal_line_id";
  public static $parent_primary_column = "gl_journal_header_id";
  public static $query_order_by_field = "line_num";

@@ -2,7 +2,7 @@
 
 class bom_department_resource_assignment extends dbObject {
 
- protected static $table_name = "bom_department_resource_assignment";
+ public static $table_name = "bom_department_resource_assignment";
  public static $primary_column = "bom_department_resource_assignment_id";
  public static $parent_primary_column = "bom_department_id";
  public static $key_column = 'resource_id';

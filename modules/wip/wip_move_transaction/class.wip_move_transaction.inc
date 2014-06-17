@@ -2,7 +2,7 @@
 
 class wip_move_transaction extends dbObject {
 
- protected static $table_name = "wip_move_transaction";
+ public static $table_name = "wip_move_transaction";
  public static $primary_column = "wip_move_transaction_id";
  public static $dependent_classes = ['wip_wo_routing_line', 'wip_wo_routing_detail'];
  public static $key_column = 'wip_wo_header_id';

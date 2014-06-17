@@ -2,7 +2,7 @@
 
 class po_shipment extends po_line {
 
- protected static $table_name = "po_shipment";
+ public static $table_name = "po_shipment";
  public static $account_array = [
  ];
  public static $checkbox_array = [

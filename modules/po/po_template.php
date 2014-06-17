@@ -150,7 +150,7 @@
 						<ul class="column four_column">
 						 <li id="document_print"><label>Document Print : </label>
 							<a class="button" target="_blank"
-								 href="po_print.php?po_header_id=<?php echo!(empty($$class->po_header_id)) ? $$class->po_header_id : ""; ?>" >Print PO</a>
+								 href="<?php echo HOME_URL ?>modules/po/po_print.php?po_header_id=<?php echo!(empty($$class->po_header_id)) ? $$class->po_header_id : ""; ?>" >Print PO</a>
 						 </li>
 						 <li id="document_status"><label>Change Status : </label>
 							<?php echo form::select_field_from_object('po_status', po_header::po_status(), 'option_line_code', 'option_line_value', $po_header->po_status, 'set_po_status', $readonly, '', ''); ?>

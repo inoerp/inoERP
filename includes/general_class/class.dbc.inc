@@ -3,16 +3,32 @@
 class dbc {
 
  public $connection;
+ public $rollback;
+// public $pending_transaction;
 
  function __construct() {
 	try {
 	 $this->connection = new PDO('mysql:host=' . DB_SERVER . '; dbname=' . DB_NAME . ';charset=utf8', DB_USER, DB_PASS);
 	 $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//	 $this->connection->setAttribute(PDO::ATTR_PERSISTENT, true);
+	 $this->connection->setAttribute(PDO::ATTR_AUTOCOMMIT, false);
+	 $this->rollback = false;
+//	 $this->pending_transaction = true;
+	 $this->connection->beginTransaction();
 	} catch (PDOException $e) {
 	 print "Data Base Connection Error!: " . $e->getMessage() . "<br/>";
 	 die();
 	}
 	$this->open_connection();
+ }
+
+ public function confirm() {
+	 if ($this->rollback) {
+		$this->connection->rollBack();
+	 } else {
+		$this->connection->commit();
+	 }
+	 $this->connection->beginTransaction();
  }
 
  private function open_connection() {

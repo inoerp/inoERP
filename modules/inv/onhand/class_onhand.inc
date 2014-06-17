@@ -2,7 +2,7 @@
 
 class onhand extends dbObject {
 
- protected static $table_name = "onhand";
+ public static $table_name = "onhand";
  protected static $view_name = "onhand_v";
  public static $primary_column = "onhand_id";
  public static $key_column = 'item_id';
@@ -269,7 +269,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
 	if (!empty($this->_from_org_id)) {
 	 try {
 		$this->_update_from_onhand();
-		return 1;
+//		return 1;
 	 } catch (Exception $e) {
 		echo "<br>From Onhand Update Failed <br> Line # " . __LINE__ . '<br>' . $e->getMessage();
 		return -99;
@@ -280,7 +280,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
 	if (!empty($this->_to_org_id)) {
 	 try {
 		$this->_update_to_onhand();
-		return 1;
+//		return 1;
 	 } catch (Exception $e) {
 		echo "<br>From Onhand Update Failed <br> Line # " . __LINE__ . '<br>' . $e->getMessage();
 		return -99;
@@ -293,7 +293,6 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
 		$this->_from_org_id = $this->org_id;
 		try {
 		 $this->_update_from_onhand();
-		 return 1;
 		} catch (Exception $e) {
 		 echo "<br>From Onhand Update Failed <br> Line # " . __LINE__ . '<br>' . $e->getMessage();
 		 return -99;
@@ -303,13 +302,13 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
 		$this->_to_org_id = $this->org_id;
 		try {
 		 $this->_update_to_onhand();
-		 return 1;
 		} catch (Exception $e) {
 		 echo "<br>From Onhand Update Failed <br> Line # " . __LINE__ . '<br>' . $e->getMessage();
 		 return -99;
 		}
 	 }
 	}
+	return 1;
  }
 
  public function findOnhand_byItemId($item_id = '') {

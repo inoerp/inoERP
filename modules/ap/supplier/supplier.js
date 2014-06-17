@@ -1,13 +1,42 @@
-function setValFromSelectPage(supplier_id, supplier_number, supplier_name) {
+function setValFromSelectPage(supplier_id, supplier_number, supplier_name,
+address_id, address_name, address, country, postal_code) {
  this.supplier_id = supplier_id;
  this.supplier_number = supplier_number;
  this.supplier_name = supplier_name;
+  this.address_id = address_id;
+ this.address_name = address_name;
+ this.address = address;
+ this.country = country;
+ this.postal_code = postal_code;
 }
 
 setValFromSelectPage.prototype.setVal = function() {
  var supplier_id = this.supplier_id;
  var supplier_number = this.supplier_number;
  var supplier_name = this.supplier_name;
+  var address_id = this.address_id;
+ var address_name = this.address_name;
+ var address = this.address;
+ var country = this.country;
+ var postal_code = this.postal_code;
+ var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass");
+ addressPopupDivClass = addressPopupDivClass.replace(/\s+/g, '.');
+ if (address_id) {
+	$('#content').find(addressPopupDivClass).find('.address_id').val(address_id);
+ }
+ if (address_name) {
+	$('#content').find(addressPopupDivClass).find('.address_name').val(address_name);
+ }
+ if (address) {
+	$('#content').find(addressPopupDivClass).find('.address').val(address);
+ }
+ if (country) {
+	$('#content').find(addressPopupDivClass).find('.country').val(country);
+ }
+ if (postal_code) {
+	$('#content').find(addressPopupDivClass).find('.postal_code').val(postal_code);
+ }
+
 
  if (supplier_id) {
 	$("#supplier_id").val(supplier_id);
@@ -24,7 +53,7 @@ setValFromSelectPage.prototype.setVal = function() {
 
 $(document).ready(function() {
 //selecting supplier
- $("a.select.header_id_popup").click(function() {
+ $(".supplier_id_popup").click(function() {
 	void window.open('select.php?class_name=supplier', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
 	return false;
@@ -39,12 +68,13 @@ $(document).ready(function() {
 
  //Popup for selecting address 
  $(".address_popup").click(function() {
-	localStorage.addressPopupDivId = $(this).parent().siblings().first().attr("id");
-	;
-	void window.open('../../org/address/find_address.php', '_blank',
+	var addressPopupDivClass = $(this).closest('div').prop('class');
+	localStorage.setItem("addressPopupDivClass", addressPopupDivClass);
+	void window.open('select.php?class_name=address', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
 	return false;
  });
+
 
  $('a.show.supplier_number').click(function() {
 	var supplier_number = $('#supplier_number').val();

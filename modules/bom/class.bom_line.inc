@@ -1,8 +1,8 @@
 <?php
 
-class bom_line extends bom_header {
+class bom_line extends dbObject {
 
- protected static $table_name = "bom_line";
+ public static $table_name = "bom_line";
  public static $primary_column = "bom_line_id";
  public static $parent_primary_column = "bom_header_id";
  public static $key_column = 'bom_sequence';

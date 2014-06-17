@@ -1,21 +1,38 @@
 <?php
-
 /*
  * lOADER file to initiate the system
  * File 'll called from all inc files in respecive modules/extension.
  * This file 'll call all the required functions
  * 1. Call theme
  * 2. Role 
- *  
+ *  privillages - comment & content
+
  */
+
 $continue = true;
 $readonly1 = false; // readonly controls mode 9 & 2. readonly1 controls values which cant be updated once saved
+$read_access = false;
+$write_access = false;
+$update_access = false;
+$access_level = null;
+//homepage
+function url(){
+  return sprintf(
+    "%s://%s%s",
+    isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http',
+    $_SERVER['SERVER_NAME'],
+    $_SERVER['REQUEST_URI']
+  );
+}
+
 //even on mode 9
-if (!empty($_GET['mode'])) {
- $mode = $_GET['mode'];
-} else {
- $path_access = -99;
- $mode = 1;
+if (empty($mode)) {
+ if (!empty($_GET['mode'])) {
+	$mode = $_GET['mode'];
+ } else {
+	$path_access = -99;
+	$mode = 1;
+ }
 }
 
 if ($mode > 8) {
@@ -24,16 +41,31 @@ if ($mode > 8) {
  $readonly = true;
 }
 
-
 if ($continue) {
  include_once (dirname(__FILE__) . '/../basics/basics.inc');
  global $f;
  global $ie;
+ global $s;
+ global $dbc;
 } else {
  return;
 }
+/*Check session*/
+if(empty($_SESSION['user_id'])){
+$_SESSION['orginal_page'] = $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
+}
+/* -----------------------------------------------------------------------------------------------------
+  Check if delete request. If yes, complete and return
+ */
+if ((!empty($_GET['delete'])) && ($_GET['delete'] == 1)) {
 
-pa($_POST);
+ $data_array = $_GET;
+ ino_delete($data_array);
+
+ $continue = false;
+ return;
+}
+
 /* ---------------------------------------------------------------------------------------------------------------
   check if its a search or select page
  * First search for select if not found then check for search page
@@ -63,6 +95,9 @@ defined('THEME_URL') ? null : define("THEME_URL", HOME_URL . 'themes' . DS . $se
  * First call the role path to verify if the role/user has access to the page.
  * If the page need login, redirect users to login page
  */
+if(!empty($_POST['className']) && $_POST['className'] == 'comment'){
+ $dont_check_login = true;
+}
 if (!empty($dont_check_login)) {
  //do nothing
 } else {
@@ -73,6 +108,7 @@ if (!empty($dont_check_login)) {
  * Get all the varibles fro $_GET 
  * 
  */
+$current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $pageno = !(empty($_GET['pageno'])) ? (int) $_GET['pageno'] : 1;
 if (empty($_GET['per_page'])) {
  $per_page = 10;
@@ -127,8 +163,8 @@ if ((!empty($class_names)) && (!(is_array($class_names)))) {
 }
 
 
-//add comment class for contents
-if (in_array('content', $class_names)) {
+//add comment class for all if not POST
+if (empty($_POST)) {
  array_push($class_names, 'comment');
 }
 
@@ -163,15 +199,15 @@ if (($continue) && (!empty($class_names))) {
 
 	//if not posted
 	if (empty($_POST)) {
-	 $class_id = $class . '_id';
+	 $class_id = property_exists($class, 'primary_column') ? $class::$primary_column : $class_id = $class . '_id';
 	 if (!empty($_GET[$class_id])) {
 		$class_id_value = $_GET[$class_id];
 	 }
 
 	 //-------------------------------------------------------------------------------------
 	 if (!empty($class_id_value)) {
-		$class_values = $$class->findBy_id($class_id_value);
-		foreach ($class_values as $key => $value) {
+		$$class->findBy_id($class_id_value);
+		foreach ($$class as $key => $value) {
 		 if ((!empty($value)) && (property_exists($$class, $key))) {
 			$$class->$key = $value;
 		 }
@@ -227,10 +263,12 @@ if (($continue) && (!empty($class_names))) {
 		}
 
 		$whereFields = array();
+		$existing_search = [];
 //to check number of criterias
 		$noof_criteria = 0;
 		foreach ($search_array as $key => $value) {
 		 if (!empty($_GET[$value])) {
+			array_push($existing_search, $value);
 			if (strpos($value, '_id') !== false) {
 			 $whereFields[] = sprintf("`%s` = %s ", $value, trim(mysql_prep($_GET[$value])));
 			} else {
@@ -250,6 +288,12 @@ if (($continue) && (!empty($class_names))) {
 		 $sql = "SELECT * FROM " . $table_name;
 		 $count_sql = "SELECT COUNT(*) FROM " . $table_name;
 		 $all_download_sql = "SELECT * FROM  " . $table_name;
+		}
+
+		if (!empty($_GET['group_by'])) {
+		 $sql .= " GROUP BY " . $_GET['group_by'];
+		 $count_sql .= " GROUP BY " . $_GET['group_by'];
+		 $all_download_sql .= " GROUP BY " . $_GET['group_by'];
 		}
 
 		if ((!empty($search_order_by)) && (!empty($search_asc_desc))) {
@@ -283,16 +327,19 @@ if (($continue) && (!empty($class_names))) {
 		}
 
 		$search_result = $class::find_by_sql($sql);
-		$search = new search();
+		if (method_exists($class, 'search_add_extra_fields')) {
+		 $class::search_add_extra_fields($search_result);
+		}
+//		$search = new search();
 		if (property_exists($class, 'search')) {
 		 foreach ($$class->search as $searchParaKey => $searchParaValue) {
-			$search->setProperty($searchParaKey, $searchParaValue);
+			$s->setProperty($searchParaKey, $searchParaValue);
 		 }
 		}
-		$search->setProperty('result', $search_result);
-		$search->setProperty('_searching_class', $class);
-		$search->setProperty('primary_column_s', $primary_column);
-		$search->setProperty('column_array_s', $column_array);
+		$s->setProperty('result', $search_result);
+		$s->setProperty('_searching_class', $class);
+		$s->setProperty('primary_column_s', $primary_column);
+		$s->setProperty('column_array_s', $column_array);
 		$search_result_statement = $search->search_result_op();
 	 }
 	}
@@ -314,6 +361,7 @@ if (($continue) && (!empty($class_names))) {
 	 $inosave->setProperty('_primary_column', $primary_column);
 	 $inosave->setProperty('_primary_column2', $primary_column2);
 	 $inosave->json_save();
+	 $dbc->confirm();
 	 $continue = false;
 	 return;
 	}//end of POST
@@ -326,6 +374,7 @@ if (($continue) && (!empty($class_names))) {
 //Assign dependet classes to class_second & class_third and so on
 $class_first = $class = $class_names[0];
 $$class_first = $$class_names[0];
+$class_id_first = property_exists($class, 'primary_column') ? $class::$primary_column : $class_id = $class . '_id';
 
 if (isset($class_names[1])) {
  $class_second = $class_names[1];
@@ -358,16 +407,16 @@ if (isset($class_names[3])) {
 $primary_column = $class::$primary_column;
 if (!empty($$class->$primary_column)) {
  $readonly1 = true;
- } else {
+} else {
  $readonly1 = false;
 }
 
 if ($readonly) {
  $f->readonly = $readonly;
-} else {
- $f->readonly = $readonly1;
 }
-
+//else {
+// $f->readonly = $readonly1;
+//}
 ////set the page level informations
 $pageTitle = property_exists($$class, 'pageTitle') ? $$class->pageTitle : 'inoERP';
 
@@ -399,21 +448,20 @@ if ($continue) {
 	$js_file_paths = [];
 	foreach ($js_file_names as $key => $js_file_name) {
 	 if (strpos($js_file_name, 'modules')) {
-		$js_file_path = substr($js_file_name, strpos($js_file_name, 'modules'));
+		$js_file_path = str_replace('\\','/', substr($js_file_name, strpos($js_file_name, 'modules')));
 	 } else if (strpos($js_file_name, 'extensions')) {
-		$js_file_path = substr($js_file_name, strpos($js_file_name, 'extensions'));
+		$js_file_path = str_replace('\\','/',substr($js_file_name, strpos($js_file_name, 'extensions')));
 	 }
 	 array_push($js_file_paths, $js_file_path);
 	}
  }
 
-
  $css_file_paths = [];
  foreach ($css_file_names as $key => $css_file_name) {
 	if (strpos($css_file_name, 'modules')) {
-	 $css_file_path = substr($css_file_name, strpos($css_file_name, 'modules'));
+	 $css_file_path = str_replace('\\','/',substr($css_file_name, strpos($css_file_name, 'modules')));
 	} else if (strpos($css_file_name, 'extensions')) {
-	 $css_file_path = substr($css_file_name, strpos($css_file_name, 'extensions'));
+	 $css_file_path = str_replace('\\','/',substr($css_file_name, strpos($css_file_name, 'extensions')));
 	}
 	array_push($css_file_paths, $css_file_path);
  }
@@ -425,6 +473,30 @@ if ($continue) {
  $continue = false;
  echo "<h2>Could n't call the header</h2>";
  return;
+}
+//change mode for contents
+
+if (!empty($_SESSION['user_roles'])) {
+ if (in_array('ADMIN', $_SESSION['user_roles'])) {
+	$access_level = 9;
+	$read_access = $write_access = $update_access = true;
+ } else {
+	if(!empty($_SESSION['role_access'])){
+	 	foreach ($_SESSION['role_access'] as $obj_name => $acc_level) {
+	 if ($obj_name == $class) {
+		$access_level = $acc_level;
+		break;
+	 }
+	}
+	}
+
+ }
+ 
+ if ((!empty($access_level)) && ($access_level != 9)) {
+	require_once 'loader_access.inc';
+ }
+}else{
+ $mode=2;
 }
 
 /* --------------------------------------------------------------------------------------------------------------

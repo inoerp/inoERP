@@ -2,7 +2,7 @@
 
 class file extends dbObject {
 
- protected static $table_name = "file";
+ public static $table_name = "file";
 //  data base variables as stored database column name
  public $field_a = [
 		 "file_id",
@@ -140,7 +140,6 @@ class file extends dbObject {
  public function upload_file($FILES) {
 	$errors = [];
 	$uploaded_file_ids = [];
-
 	foreach ($FILES as $new_files) {
 	 $extension_t = explode(".", $new_files["name"]);
 	 $extension = end($extension_t);
@@ -173,7 +172,7 @@ class file extends dbObject {
 		pa($errors);
 		return;
 	 }
-	 if (!is_dir($this->_file_dir)) {
+	  if (!is_dir($this->_file_dir)) {
 		mkdir("$this->_file_dir", 0777, true); // Create directory if it does not exist
 	 }
 	 if (is_dir("$this->_file_dir/" . $this->file_name) == false) {
@@ -195,11 +194,7 @@ class file extends dbObject {
 	 }
 
 	 if (($upload_status) && ($this->_upload_type == 'data_base')) {
-		$time = time();
-		$this->creation_date = strftime("%d-%m-%Y %H:%M:%S", $time);
-		$this->created_by = $_SESSION['username'];
-		$this->last_update_date = $this->creation_date;
-		$this->last_update_by = $this->created_by;
+		$this->audit_trial();
 		$new_entry = $this->save();
 		if ($new_entry == 1) {
 		 $msg = "File is sucessfully uploaded!";

@@ -2,12 +2,24 @@
 
 class ap_payment_header extends dbObject {
 
- protected static $table_name = "ap_payment_header";
+ public static $table_name = "ap_payment_header";
  public static $dependent_classes = ['ap_payment_line'];
  public static $primary_column = "ap_payment_header_id";
  public static $primary_column2 = "payment_number";
  public static $key_column = 'supplier_id';
  public static $module = "ap"; //same as gl_journal_source
+ public static $system_info = [
+		 'name' => 'AP Payment',
+		 'number' => '1204',
+		 'description' => 'Allows making payment to supplier and reimubrse employee expenses',
+		 'version' => '1.1.1.3',
+		 'db_version' => '1001',
+		 'mod_version' => '1.1.x-1.1',
+		 'dependent_class' => array('ap_payment_line', 'ap_payment_interface', 'ap_payment_v'),
+		 'primary_entity_cb' => '',
+		 'module_name' => 'ap',
+		 'weight' => 4
+ ];
  public static $gl_journal_category = "AP_PAYMENTS";
  public $checkbox = [
 //		 "rev_enabled_cb"

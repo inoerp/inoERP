@@ -2,7 +2,7 @@
 
 class ap_transaction_line extends dbObject {
 
- protected static $table_name = "ap_transaction_line";
+ public static $table_name = "ap_transaction_line";
  public static $primary_column = "ap_transaction_line_id";
  public static $parent_primary_column = "ap_transaction_header_id";
  public static $multi_search_primary_column = "ap_transaction_header_id"; //this value is used in multi search hidden value

@@ -18,8 +18,8 @@ if (!empty($msg)) {
 		 <div id="structure">
 			<div id="contents">
 			 <div id ="form_header">
-				<div class="error"></div><div id="loading"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/loading.gif"/></div>
-				<div class="show_loading_small"></div>
+				<div class="error"></div><div id="loading"></div>
+				<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 				<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 			 </div>
 			 <div id="list_contents">

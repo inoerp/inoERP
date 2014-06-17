@@ -2,7 +2,7 @@
 
 class payment_term extends dbObject {
 
- protected static $table_name = "payment_term";
+ public static $table_name = "payment_term";
  public static $account_array = [
  ];
  public static $checkbox_array = [

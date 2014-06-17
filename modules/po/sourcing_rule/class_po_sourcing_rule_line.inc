@@ -2,7 +2,7 @@
 
 class po_sourcing_rule_line extends dbObject {
 
- protected static $table_name = "po_sourcing_rule_line";
+ public static $table_name = "po_sourcing_rule_line";
  public static $primary_column = "po_sourcing_rule_line_id";
  public static $parent_primary_column = "po_sourcing_rule_header_id";
  public static $key_column = 'sourcing_type';

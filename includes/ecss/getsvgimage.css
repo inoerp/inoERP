@@ -1,0 +1,172 @@
+ul#charts_in_report li {
+    display: inline-block;
+margin-right: 100px;  
+}
+
+.chart rect {
+ fill: steelblue;
+}
+
+.line_class_0.line{
+ stroke:  rgba(153, 216, 49, 0.8);
+ stroke-width : 0.2em;
+}
+
+rect.line_class_0 {
+ fill:   rgba(153, 216, 49, 0.8);
+}
+
+.line_class_1.line{
+ stroke: rgba(9, 195, 132, 0.7);
+ stroke-width : 0.2em;
+}
+
+rect.line_class_1 {
+ fill:  rgba(9, 195, 132, 0.7);
+}
+
+.line_class_2.line{
+ stroke: rgba(210, 40, 90, 0.7);
+ stroke-width : 0.2em;
+}
+
+rect.line_class_2 {
+ fill:  rgba(210, 40, 90, 0.7);
+}
+
+
+.line_class_3.line{
+ stroke: rgba(211, 213, 143, 0.9);
+ stroke-width : 0.2em;
+}
+
+rect.line_class_3 {
+ fill:  rgba(211, 213, 143, 0.9);
+}
+
+.line_class_4.line{
+ stroke: rgba(40, 140, 90, 0.7);
+ stroke-width : 0.2em;
+}
+
+rect.line_class_4 {
+ fill:  rgba(40, 140, 90, 0.7);
+}
+
+.line_class_5.line{
+ stroke: rgba(10, 180, 180, 0.8);
+ stroke-width : 0.2em;
+}
+
+rect.line_class_5 {
+ fill:  rgba(10, 180, 180, 0.8);
+}
+
+.line_class_6.line{
+ stroke: rgba(237, 167, 5, 0.9);
+ stroke-width : 0.2em;
+}
+
+rect.line_class_6 {
+ fill:  rgba(237, 167, 5, 0.9);
+}
+
+.line_class_7.line{
+ stroke: rgba(5, 237, 5, 0.9);
+ stroke-width : 0.2em;
+}
+
+rect.line_class_7 {
+ fill: rgba(5, 237, 5, 0.9)
+}
+
+.line_class_8.line{
+ stroke: rgba(5, 206, 237, 0.9);
+ stroke-width : 0.2em;
+}
+
+rect.line_class_7 {
+ fill: rgba(5, 206, 237, 0.9);
+}
+
+
+.chart_xaxis_title{
+ text-anchor : middle;
+ font-size: 0.9em;
+ font-weight: bold;
+}
+
+.chart_value_text {
+ display: block;
+ text-anchor : end;
+ fill : #000;
+ font-size: 0.8em;
+}
+
+
+
+.chart .cluster_class_0, rect.data_class_0   {
+ fill: rgba(153, 216, 49, 0.8);
+}
+
+
+.chart .cluster_class_1, rect.data_class_1 {
+ fill: rgba(9, 195, 132, 0.7);
+}
+
+.chart .cluster_class_2, rect.data_class_2 {
+ fill: rgba(210, 40, 90, 0.7);
+}
+
+.chart .cluster_class_3, rect.data_class_3 {
+ fill: rgba(40, 140, 90, 0.7);
+}
+
+.chart .cluster_class_4, rect.data_class_4 {
+ fill: rgba(10, 180, 180, 0.8);
+}
+
+.chart .cluster_class_5, rect.data_class_5 {
+ fill: rgba(211, 213, 143, 0.9);
+}
+
+.chart .cluster_class_6, rect.data_class_6 {
+ fill: rgba(237, 167, 5, 0.9);
+}
+
+.chart .cluster_class_7, rect.data_class_7 {
+ fill: rgba(5, 237, 5, 0.9);
+}
+
+.chart .cluster_class_8, rect.data_class_8 {
+ fill: rgba(5, 206, 237, 0.9);
+}
+
+.chart_label_text {
+ display: block;
+ text-anchor : end;
+ fill : #000;
+ font-size: 0.8em;
+
+}
+
+.chart_label_text.x_axis {
+ text-anchor : start;
+}
+
+.chart_name{
+ font-size: 1.2em;
+ margin-left:2em;    
+}
+
+.major_grid{
+ stroke : #000; 
+ stroke-opacity : 0.6;
+ stroke-width: 0.02em;
+}
+
+.minor_grid{
+ stroke : #000; 
+ stroke-opacity : 0.4;
+ stroke-width: 0.01em;
+}

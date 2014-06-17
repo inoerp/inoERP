@@ -2,7 +2,7 @@
 
 class option_header extends dbObject {
 
- protected static $table_name = "option_header";
+ public static $table_name = "option_header";
  public static $dependent_classes = ['option_line', 'option_detail'];
  public static $primary_column = "option_header_id";
  public static $key_column = 'option_type';

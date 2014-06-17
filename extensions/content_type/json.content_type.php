@@ -1,9 +1,4 @@
-<?php
-$class_names = [
-		'content_type'
-];
-?>
-<?php include_once("../../includes/functions/loader.inc"); ?>
+<?php include_once("../../includes/basics/basics.inc"); ?>
 <div id="json_drop_column" ><div class="json_message">
 	<?php
 	if (!empty($_GET['delete']) && $_GET['delete'] == 1) {
@@ -27,7 +22,8 @@ $class_names = [
 	<?php
 	if (!empty($_GET['delete']) && $_GET['delete'] == 2) {
 	 $content_name = $_GET['content_name'];
-	 $result = content_type::drop_table($content_name);
+	 $ct = new content_type();
+	 $result = $ct->drop_table($content_name);
 	 if ($result == 111) {
 		echo 'Content type is dropped!';
 	 } else {

@@ -69,9 +69,11 @@ class inoform {
  public $readonly2;
  public $readonly3;
  public $readonly4;
- public $ac_field_length=28;
+ public $ac_field_length = 28;
 
- public static function form_button_withImage($current_page_path = "", $homeUrl = HOME_URL_WOS) {
+ public static function form_button_withImage($current_page_path = "", $homeUrl = '' ) {
+	$home_url_wos = rtrim(HOME_URL, '/');
+	$homeUrl = empty($homeUrl) ? $home_url_wos : $homeUrl;
 	if (empty($current_page_path)) {
 	 $current_page_path = thisPage_url();
 	}
@@ -80,10 +82,10 @@ class inoform {
         <li class="show_loading_small"><img src="$homeUrl/themes/images/form/small_loading_bar.gif"></li>	
         <li><input type="button" class="button_image"  name="refresh"/>
 				 <img src="$homeUrl/themes/images/form/refresh.png" id="refresh_button" alt="Refresh" Title="Refresh" class="showPointer"></li>
-				<li><a  href="$current_page_path">
-				 <img src="$homeUrl/themes/images/form/new_object.png" id="new_object_button" alt="New Object" Title="New Object" class="showPointer"></a> </li> 
-				<li><input type="button" class="button_image add_row_img new_line" id="new_line" name="new_line"/> 
-				 <img src="$homeUrl/themes/images/form/new_line.png" alt="New Line" Title="New Line" class="showPointer add_row_img"></li>
+				<li><a id="new_object_button" href="$current_page_path">
+				 <img src="$homeUrl/themes/images/form/new_object.png" alt="New Object" Title="New Object" class="showPointer"></a> </li> 
+				<li><a id="new_page_button" href="$current_page_path">
+				 <img src="$homeUrl/themes/images/form/new_line.png" alt="New Page" Title="New Page" class="showPointer"></a> </li> 
 				<li><input type="button" class="button_image save" name="save" id="save_button">
 				 <img src="$homeUrl/themes/images/form/save.png" id="save" alt="Save" Title="Save" class="showPointer"></li>
 				<li><input type="button" class="button_image delete"  name="delete_row" id="delete_row">
@@ -116,7 +118,7 @@ EOD;
  public function hidden_field_withId($name, $value) {
 	$bracketName = $name . '[]';
 	$value = htmlentities($value);
-	$element_hidden_field = "<input type=\"hidden\" id=\"hidden_$name \" name=\"$bracketName\" value=\"$value\" class=\"hidden $name\" >";
+	$element_hidden_field = "<input type=\"hidden\" id=\"hidden_$name\" name=\"$bracketName\" value=\"$value\" class=\"hidden $name\" >";
 	return $element_hidden_field;
  }
 
@@ -142,6 +144,14 @@ EOD;
 	 maxlength=\"$maxlength\" size=\"$size\" class=\"textfield $div_class $name\" "
 					. "placeholder=\"$place_holder\"  $required $idvalue $readonly title=\"$title\" >";
 	return $element_text_field;
+ }
+
+ public function seq_field($value) {
+	$this->text_field('seq_number', $value, '6', '', 'seq_number', '', 1);
+ }
+
+ public function seq_field_d($value) {
+	echo $this->text_field('seq_number', $value, '6', '', 'seq_number', '', 1);
  }
 
  public function text_field_ap($array) {
@@ -204,284 +214,298 @@ EOD;
 	return $element_text_field;
  }
 
+ public function address_field($field_name, $div_class = "") {
+	global $class, $$class;
+	$text_field = $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
+	$text_field .= '<img src="' . HOME_URL . 'themes/images/serach.png" class="address_id select_popup">';
+	return $text_field;
+ }
+
+ public function address_field_d($field_name, $div_class = "") {
+	global $class, $$class;
+	$text_field = $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
+	$text_field .= '<img src="' . HOME_URL . 'themes/images/serach.png" class="address_id select_popup">';
+	echo $text_field;
+ }
+
 //d - default , r- readonly, s- small size, m - mandatory
 //textfields
- public function text_field_d($field_name) {
+ public function text_field_d($field_name, $div_class = "") {
 	global $readonly, $class, $$class;
-	echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $field_name, '', $this->readonly);
+	echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
  }
 
- public function text_field_ds($field_name) {
+ public function text_field_ds($field_name, $div_class = "") {
 	global $readonly, $class, $$class;
-	echo $this->text_field($field_name, $$class->$field_name, '8', $field_name, $field_name, '', $this->readonly);
+	echo $this->text_field($field_name, $$class->$field_name, '8', $field_name, $div_class, '', $this->readonly);
  }
 
- public function text_field_dr($field_name) {
+ public function text_field_dr($field_name, $div_class = "") {
 	global $class, $$class;
-	echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $field_name, '', 1);
+	echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', 1);
  }
 
- public function text_field_dm($field_name) {
+ public function text_field_dm($field_name, $div_class = "") {
 	global $readonly, $class, $$class;
-	echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $field_name, 1, $this->readonly);
+	echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, 1, $this->readonly);
  }
 
- public function text_field_dl($field_name) {
+ public function text_field_dl($field_name, $div_class = "") {
 	global $readonly, $class, $$class;
-	echo $this->text_field($field_name, $$class->$field_name, '40', $field_name, $field_name, '', $this->readonly);
+	echo $this->text_field($field_name, $$class->$field_name, '40', $field_name, $div_class, '', $this->readonly);
  }
 
- public function text_field_dsr($field_name) {
+ public function text_field_dsr($field_name, $div_class = "") {
 	global $class, $$class;
-	echo $this->text_field($field_name, $$class->$field_name, '8', $field_name, $field_name, '', 1);
+	echo $this->text_field($field_name, $$class->$field_name, '8', $field_name, $div_class, '', 1);
  }
 
- public function text_field_drm($field_name) {
+ public function text_field_drm($field_name, $div_class = "") {
 	global $class, $$class;
-	echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $field_name, 1, 1);
+	echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, 1, 1);
  }
 
- public function text_field_dsrm($field_name) {
+ public function text_field_dsrm($field_name, $div_class = "") {
 	global $class, $$class;
-	echo $this->text_field($field_name, $$class->$field_name, '8', $field_name, $field_name, 1, 1);
+	echo $this->text_field($field_name, $$class->$field_name, '8', $field_name, $div_class, 1, 1);
  }
 
- public function text_field_d2($field_name) {
+ public function text_field_d2($field_name, $div_class = "") {
 	global $readonly, $class_second, $$class_second;
-	echo $this->text_field($field_name, $$class_second->$field_name, '20', $field_name, $field_name, '', $this->readonly2);
+	echo $this->text_field($field_name, $$class_second->$field_name, '20', $field_name, $div_class, '', $this->readonly2);
  }
 
- public function text_field_d2s($field_name) {
+ public function text_field_d2s($field_name, $div_class = "") {
 	global $readonly, $class_second, $$class_second;
-	echo $this->text_field($field_name, $$class_second->$field_name, '8', $field_name, $field_name, '', $this->readonly2);
+	echo $this->text_field($field_name, $$class_second->$field_name, '8', $field_name, $div_class, '', $this->readonly2);
  }
 
- public function text_field_d2r($field_name) {
+ public function text_field_d2r($field_name, $div_class = "") {
 	global $class_second, $$class_second;
-	echo $this->text_field($field_name, $$class_second->$field_name, '20', $field_name, $field_name, '', 1);
+	echo $this->text_field($field_name, $$class_second->$field_name, '20', $field_name, $div_class, '', 1);
  }
 
- public function text_field_d2m($field_name) {
+ public function text_field_d2m($field_name, $div_class = "") {
 	global $readonly, $class_second, $$class_second;
-	echo $this->text_field($field_name, $$class_second->$field_name, '20', $field_name, $field_name, 1, $this->readonly2);
+	echo $this->text_field($field_name, $$class_second->$field_name, '20', $field_name, $div_class, 1, $this->readonly2);
  }
 
- public function text_field_d2l($field_name) {
+ public function text_field_d2l($field_name, $div_class = "") {
 	global $readonly, $class_second, $$class_second;
-	echo $this->text_field($field_name, $$class_second->$field_name, '40', $field_name, $field_name, '', $this->readonly2);
+	echo $this->text_field($field_name, $$class_second->$field_name, '40', $field_name, $div_class, '', $this->readonly2);
  }
 
- public function text_field_d2sr($field_name) {
+ public function text_field_d2sr($field_name, $div_class = "") {
 	global $class_second, $$class_second;
-	echo $this->text_field($field_name, $$class_second->$field_name, '8', $field_name, $field_name, '', 1);
+	echo $this->text_field($field_name, $$class_second->$field_name, '8', $field_name, $div_class, '', 1);
  }
 
- public static function text_field_d2rm($field_name) {
+ public static function text_field_d2rm($field_name, $div_class = "") {
 	global $class_second, $$class_second;
-	echo $this->text_field($field_name, $$class_second->$field_name, '20', $field_name, $field_name, 1, 1);
+	echo $this->text_field($field_name, $$class_second->$field_name, '20', $field_name, $div_class, 1, 1);
  }
 
- public function text_field_d2srm($field_name) {
+ public function text_field_d2srm($field_name, $div_class = "") {
 	global $class_second, $$class_second;
-	echo $this->text_field($field_name, $$class_second->$field_name, '8', $field_name, $field_name, 1, 1);
+	echo $this->text_field($field_name, $$class_second->$field_name, '8', $field_name, $div_class, 1, 1);
  }
 
- public function text_field_d3($field_name) {
+ public function text_field_d3($field_name, $div_class = "") {
 	global $readonly, $class_third, $$class_third;
-	echo $this->text_field($field_name, $$class_third->$field_name, '20', $field_name, $field_name, '', $this->readonly3);
+	echo $this->text_field($field_name, $$class_third->$field_name, '20', $field_name, $div_class, '', $this->readonly3);
  }
 
- public function text_field_d3s($field_name) {
+ public function text_field_d3s($field_name, $div_class = "") {
 	global $readonly, $class_third, $$class_third;
-	echo $this->text_field($field_name, $$class_third->$field_name, '8', $field_name, $field_name, '', $this->readonly3);
+	echo $this->text_field($field_name, $$class_third->$field_name, '8', $field_name, $div_class, '', $this->readonly3);
  }
 
- public function text_field_d3r($field_name) {
+ public function text_field_d3r($field_name, $div_class = "") {
 	global $class_third, $$class_third;
-	echo $this->text_field($field_name, $$class_third->$field_name, '20', $field_name, $field_name, '', 1);
+	echo $this->text_field($field_name, $$class_third->$field_name, '20', $field_name, $div_class, '', 1);
  }
 
- public function text_field_d3m($field_name) {
+ public function text_field_d3m($field_name, $div_class = "") {
 	global $readonly, $class_third, $$class_third;
-	echo $this->text_field($field_name, $$class_third->$field_name, '20', $field_name, $field_name, 1, $this->readonly3);
+	echo $this->text_field($field_name, $$class_third->$field_name, '20', $field_name, $div_class, 1, $this->readonly3);
  }
 
- public function text_field_d3l($field_name) {
+ public function text_field_d3l($field_name, $div_class = "") {
 	global $readonly, $class_third, $$class_third;
-	echo $this->text_field($field_name, $$class_third->$field_name, '40', $field_name, $field_name, '', $this->readonly3);
+	echo $this->text_field($field_name, $$class_third->$field_name, '40', $field_name, $div_class, '', $this->readonly3);
  }
 
- public function text_field_d3sr($field_name) {
+ public function text_field_d3sr($field_name, $div_class = "") {
 	global $class_third, $$class_third;
-	echo $this->text_field($field_name, $$class_third->$field_name, '8', $field_name, $field_name, '', 1);
+	echo $this->text_field($field_name, $$class_third->$field_name, '8', $field_name, $div_class, '', 1);
  }
 
- public function text_field_d3rm($field_name) {
+ public function text_field_d3rm($field_name, $div_class = "") {
 	global $class_third, $$class_third;
-	echo $this->text_field($field_name, $$class_third->$field_name, '20', $field_name, $field_name, 1, 1);
+	echo $this->text_field($field_name, $$class_third->$field_name, '20', $field_name, $div_class, 1, 1);
  }
 
- public function text_field_d3srm($field_name) {
+ public function text_field_d3srm($field_name, $div_class = "") {
 	global $class_third, $$class_third;
-	echo $this->text_field($field_name, $$class_third->$field_name, '8', $field_name, $field_name, 1, 1);
+	echo $this->text_field($field_name, $$class_third->$field_name, '8', $field_name, $div_class, 1, 1);
  }
 
- public function text_field_wid($field_name) {
+ public function text_field_wid($field_name, $div_class = "") {
 	global $readonly, $class, $$class;
-	echo $this->text_field($field_name, $$class->$field_name, '20', '', $field_name, '', $this->readonly);
+	echo $this->text_field($field_name, $$class->$field_name, '20', '', $div_class, '', $this->readonly);
  }
 
- public function text_field_wids($field_name) {
+ public function text_field_wids($field_name, $div_class = "") {
 	global $readonly, $class, $$class;
-	echo $this->text_field($field_name, $$class->$field_name, '8', '', $field_name, '', $this->readonly);
+	echo $this->text_field($field_name, $$class->$field_name, '8', '', $div_class, '', $this->readonly);
  }
 
- public function text_field_widm($field_name) {
+ public function text_field_widm($field_name, $div_class = "") {
 	global $readonly, $class, $$class;
-	echo $this->text_field($field_name, $$class->$field_name, '20', '', $field_name, 1, $this->readonly);
+	echo $this->text_field($field_name, $$class->$field_name, '20', '', $div_class, 1, $this->readonly);
  }
 
- public function text_field_widr($field_name) {
+ public function text_field_widr($field_name, $div_class = "") {
 	global $class, $$class;
-	echo $this->text_field($field_name, $$class->$field_name, '20', '', $field_name, '', 1);
+	echo $this->text_field($field_name, $$class->$field_name, '20', '', $div_class, '', 1);
  }
 
- public function text_field_widrm($field_name) {
+ public function text_field_widrm($field_name, $div_class = "") {
 	global $class, $$class;
-	echo $this->text_field($field_name, $$class->$field_name, '20', '', $field_name, 1, 1);
+	echo $this->text_field($field_name, $$class->$field_name, '20', '', $div_class, 1, 1);
  }
 
- public function text_field_widsm($field_name) {
+ public function text_field_widsm($field_name, $div_class = "") {
 	global $readonly, $class, $$class;
-	echo $this->text_field($field_name, $$class->$field_name, '8', '', $field_name, 1, $this->readonly);
+	echo $this->text_field($field_name, $$class->$field_name, '8', '', $div_class, 1, $this->readonly);
  }
 
- public function text_field_widsr($field_name) {
+ public function text_field_widsr($field_name, $div_class = "") {
 	global $class, $$class;
-	echo $this->text_field($field_name, $$class->$field_name, '8', '', $field_name, '', 1);
+	echo $this->text_field($field_name, $$class->$field_name, '8', '', $div_class, '', 1);
  }
 
- public function text_field_widsrm($field_name) {
+ public function text_field_widsrm($field_name, $div_class = "") {
 	global $class, $$class;
-	echo $this->text_field($field_name, $$class->$field_name, '8', '', $field_name, 1, 1);
+	echo $this->text_field($field_name, $$class->$field_name, '8', '', $div_class, 1, 1);
  }
 
- public function text_field_wid2($field_name, $div_class="") {
+ public function text_field_wid2($field_name, $div_class = "") {
 	global $class_second, $$class_second;
 	echo $this->text_field($field_name, $$class_second->$field_name, '20', '', $div_class, '', $this->readonly2);
  }
 
- public function text_field_wid2s($field_name, $div_class="") {
+ public function text_field_wid2s($field_name, $div_class = "") {
 	global $class_second, $$class_second;
 	echo $this->text_field($field_name, $$class_second->$field_name, '8', '', $div_class, '', $this->readonly2);
  }
 
- public function text_field_wid2m($field_name, $div_class="") {
+ public function text_field_wid2m($field_name, $div_class = "") {
 	global $class_second, $$class_second;
 	echo $this->text_field($field_name, $$class_second->$field_name, '20', '', $div_class, 1, $this->readonly2);
  }
 
- public function text_field_wid2r($field_name, $div_class="") {
+ public function text_field_wid2r($field_name, $div_class = "") {
 	global $class_second, $$class_second;
 	echo $this->text_field($field_name, $$class_second->$field_name, '20', '', $div_class, '', 1);
  }
 
- public function text_field_wid2rm($field_name, $div_class="") {
+ public function text_field_wid2rm($field_name, $div_class = "") {
 	global $class_second, $$class_second;
 	echo $this->text_field($field_name, $$class_second->$field_name, '20', '', $div_class, 1, 1);
  }
 
- public function text_field_wid2sm($field_name, $div_class="") {
+ public function text_field_wid2sm($field_name, $div_class = "") {
 	global $class_second, $$class_second;
 	echo $this->text_field($field_name, $$class_second->$field_name, '8', '', $div_class, 1, $this->readonly2);
  }
 
- public function text_field_wid2sr($field_name, $div_class="") {
+ public function text_field_wid2sr($field_name, $div_class = "") {
 	global $class_second, $$class_second;
 	echo $this->text_field($field_name, $$class_second->$field_name, '8', '', $div_class, '', 1);
  }
 
- public function text_field_wid2srm($field_name, $div_class="") {
+ public function text_field_wid2srm($field_name, $div_class = "") {
 	global $class_second, $$class_second;
 	echo $this->text_field($field_name, $$class_second->$field_name, '8', '', $div_class, 1, 1);
  }
 
- public function text_field_wid3($field_name, $div_class="") {
+ public function text_field_wid3($field_name, $div_class = "") {
 	global $class_third, $$class_third;
 	echo $this->text_field($field_name, $$class_third->$field_name, '20', '', $div_class, '', $this->readonly3);
  }
 
- public function text_field_wid3s($field_name, $div_class="") {
+ public function text_field_wid3s($field_name, $div_class = "") {
 	global $class_third, $$class_third;
 	echo $this->text_field($field_name, $$class_third->$field_name, '8', '', $div_class, '', $this->readonly3);
  }
 
- public function text_field_wid3m($field_name, $div_class="") {
+ public function text_field_wid3m($field_name, $div_class = "") {
 	global $class_third, $$class_third;
 	echo $this->text_field($field_name, $$class_third->$field_name, '20', '', $div_class, 1, $this->readonly3);
  }
 
- public function text_field_wid3r($field_name, $div_class="") {
+ public function text_field_wid3r($field_name, $div_class = "") {
 	global $class_third, $$class_third;
 	echo $this->text_field($field_name, $$class_third->$field_name, '20', '', $div_class, '', 1);
  }
 
- public function text_field_wid3rm($field_name, $div_class="") {
+ public function text_field_wid3rm($field_name, $div_class = "") {
 	global $class_third, $$class_third;
 	echo $this->text_field($field_name, $$class_third->$field_name, '20', '', $div_class, 1, 1);
  }
 
- public function text_field_wid3sm($field_name, $div_class="") {
+ public function text_field_wid3sm($field_name, $div_class = "") {
 	global $class_third, $$class_third;
 	echo $this->text_field($field_name, $$class_third->$field_name, '8', '', $div_class, 1, $this->readonly3);
  }
 
- public function text_field_wid3sr($field_name, $div_class="") {
+ public function text_field_wid3sr($field_name, $div_class = "") {
 	global $class_third, $$class_third;
 	echo $this->text_field($field_name, $$class_third->$field_name, '8', '', $div_class, '', 1);
  }
 
- public function text_field_wid3srm($field_name, $div_class="") {
+ public function text_field_wid3srm($field_name, $div_class = "") {
 	global $class_third, $$class_third;
 	echo $this->text_field($field_name, $$class_third->$field_name, '8', '', $div_class, 1, 1);
  }
 
- public function text_field_wid4($field_name, $div_class="") {
+ public function text_field_wid4($field_name, $div_class = "") {
 	global $class_fourth, $$class_fourth;
 	echo $this->text_field($field_name, $$class_fourth->$field_name, '20', '', $div_class, '', $this->readonly4);
  }
 
- public function text_field_wid4s($field_name, $div_class="") {
+ public function text_field_wid4s($field_name, $div_class = "") {
 	global $class_fourth, $$class_fourth;
 	echo $this->text_field($field_name, $$class_fourth->$field_name, '8', '', $div_class, '', $this->readonly4);
  }
 
- public function text_field_wid4m($field_name, $div_class="") {
+ public function text_field_wid4m($field_name, $div_class = "") {
 	global $class_fourth, $$class_fourth;
 	echo $this->text_field($field_name, $$class_fourth->$field_name, '20', '', $div_class, 1, $this->readonly4);
  }
 
- public function text_field_wid4r($field_name, $div_class="") {
+ public function text_field_wid4r($field_name, $div_class = "") {
 	global $class_fourth, $$class_fourth;
 	echo $this->text_field($field_name, $$class_fourth->$field_name, '20', '', $div_class, '', 1);
  }
 
- public function text_field_wid4rm($field_name, $div_class="") {
+ public function text_field_wid4rm($field_name, $div_class = "") {
 	global $class_fourth, $$class_fourth;
 	echo $this->text_field($field_name, $$class_fourth->$field_name, '20', '', $div_class, 1, 1);
  }
 
- public function text_field_wid4sm($field_name, $div_class="") {
+ public function text_field_wid4sm($field_name, $div_class = "") {
 	global $class_fourth, $$class_fourth;
 	echo $this->text_field($field_name, $$class_fourth->$field_name, '8', '', $div_class, 1, $this->readonly4);
  }
 
- public function text_field_wid4sr($field_name, $div_class="") {
+ public function text_field_wid4sr($field_name, $div_class = "") {
 	global $class_fourth, $$class_fourth;
 	echo $this->text_field($field_name, $$class_fourth->$field_name, '8', '', $div_class, '', 1);
  }
 
- public function text_field_wid4srm($field_name, $div_class="") {
+ public function text_field_wid4srm($field_name, $div_class = "") {
 	global $class_fourth, $$class_fourth;
 	echo $this->text_field($field_name, $$class_fourth->$field_name, '8', '', $div_class, 1, 1);
  }
@@ -494,6 +518,34 @@ EOD;
  /* --------------------End of default number fields and begining of accoun fields-------------
 	* accounfields
 	*/
+
+ public function account_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $maxlength = "256") {
+	$bracketName = $name . '[]';
+	$value = htmlentities($value);
+	if ($readonly == 1) {
+	 $readonly = 'readonly';
+	} else {
+	 $readonly = '';
+	}
+	if ($required == 1) {
+	 $required = 'required';
+	} else {
+	 $required = '';
+	}
+	if (!empty($id)) {
+	 $idvalue = 'id="' . $id . '"';
+	} else {
+	 $idvalue = "";
+	}
+	$element_text_field = "<span class='acField_withSearchImage'>";
+	$element_text_field .= "<input type=\"text\" name=\"$bracketName\" value=\"$value\" 
+	 maxlength=\"$maxlength\" size=\"$size\" class=\"textfield $div_class $name\" "
+					. "placeholder=\"$place_holder\"  $required $idvalue $readonly title=\"$title\" >";
+	$element_text_field .= $this->accpup_stmt();
+	$element_text_field .= "</span>";
+	;
+	return $element_text_field;
+ }
 
  public function accpup_stmt() {
 	return "<img src=\"" . HOME_URL . "/themes/images/serach.png\" class=\"account_popup\" >";
@@ -509,148 +561,124 @@ EOD;
 	}
  }
 
-public function ac_field_d($field_name) {
+ public function ac_field_d($field_name) {
 	global $class, $$class;
-	echo $this->text_field($field_name, $this->_get_account($$class->$field_name), $this->ac_field_length, $field_name, 'select_account', '', $this->readonly);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class->$field_name), $this->ac_field_length, $field_name, 'select_account', '', $this->readonly);
  }
 
  public function ac_field_dm($field_name) {
 	global $class, $$class;
-	echo $this->text_field($field_name, $this->_get_account($$class->$field_name), $this->ac_field_length, $field_name, 'select_account', 1, $this->readonly);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class->$field_name), $this->ac_field_length, $field_name, 'select_account', 1, $this->readonly);
  }
 
  public function ac_field_dr($field_name) {
 	global $class, $$class;
-	echo $this->text_field($field_name, $this->_get_account($$class->$field_name), $this->ac_field_length, $field_name, 'select_account', '', 1);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class->$field_name), $this->ac_field_length, $field_name, 'select_account', '', 1);
  }
 
  public function ac_field_drm($field_name) {
 	global $class, $$class;
-	echo $this->text_field($field_name, $this->_get_account($$class->$field_name), $this->ac_field_length, $field_name, 'select_account', 1, 1);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class->$field_name), $this->ac_field_length, $field_name, 'select_account', 1, 1);
  }
 
  public function ac_field_d2($field_name) {
 	global $class_second, $$class_second;
-	echo $this->text_field($field_name, $this->_get_account($$class_second->$field_name), $this->ac_field_length, $field_name, 'select_account', '', $this->readonly2);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class_second->$field_name), $this->ac_field_length, $field_name, 'select_account', '', $this->readonly2);
  }
 
  public function ac_field_d2m($field_name) {
 	global $class_second, $$class_second;
-	echo $this->text_field($field_name, $this->_get_account($$class_second->$field_name), $this->ac_field_length, $field_name, 'select_account', 1, $this->readonly2);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class_second->$field_name), $this->ac_field_length, $field_name, 'select_account', 1, $this->readonly2);
  }
 
  public function ac_field_d2r($field_name) {
 	global $class_second, $$class_second;
-	echo $this->text_field($field_name, $this->_get_account($$class_second->$field_name), $this->ac_field_length, $field_name, 'select_account', '', 1);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class_second->$field_name), $this->ac_field_length, $field_name, 'select_account', '', 1);
  }
 
  public function ac_field_d2rm($field_name) {
 	global $class_second, $$class_second;
-	echo $this->text_field($field_name, $this->_get_account($$class_second->$field_name), $this->ac_field_length, $field_name, 'select_account', 1, 1);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class_second->$field_name), $this->ac_field_length, $field_name, 'select_account', 1, 1);
  }
 
  public function ac_field_d3($field_name) {
 	global $class_third, $$class_third;
-	echo $this->text_field($field_name, $this->_get_account($$class_third->$field_name), $this->ac_field_length, $field_name, 'select_account', '', $this->readonly3);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class_third->$field_name), $this->ac_field_length, $field_name, 'select_account', '', $this->readonly3);
  }
 
  public function ac_field_d3m($field_name) {
 	global $class_third, $$class_third;
-	echo $this->text_field($field_name, $this->_get_account($$class_third->$field_name), $this->ac_field_length, $field_name, 'select_account', 1, $this->readonly3);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class_third->$field_name), $this->ac_field_length, $field_name, 'select_account', 1, $this->readonly3);
  }
 
  public function ac_field_d3r($field_name) {
 	global $class_third, $$class_third;
-	echo $this->text_field($field_name, $this->_get_account($$class_third->$field_name), $this->ac_field_length, $field_name, 'select_account', '', 1);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class_third->$field_name), $this->ac_field_length, $field_name, 'select_account', '', 1);
  }
 
  public function ac_field_d3rm($field_name) {
 	global $class_third, $$class_third;
-	echo $this->text_field($field_name, $this->_get_account($$class_third->$field_name), $this->ac_field_length, $field_name, 'select_account', 1, 1);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class_third->$field_name), $this->ac_field_length, $field_name, 'select_account', 1, 1);
  }
 
  public function ac_field_wid($field_name) {
 	global $class, $$class;
-	echo $this->text_field($field_name, $this->_get_account($$class->$field_name), $this->ac_field_length, '', 'select_account', '', $this->readonly);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class->$field_name), $this->ac_field_length, '', 'select_account', '', $this->readonly);
  }
 
  public function ac_field_widm($field_name) {
 	global $class, $$class;
-	echo $this->text_field($field_name, $this->_get_account($$class->$field_name), $this->ac_field_length, '', 'select_account', 1, $this->readonly);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class->$field_name), $this->ac_field_length, '', 'select_account', 1, $this->readonly);
  }
 
  public function ac_field_widr($field_name) {
 	global $class, $$class;
-	echo $this->text_field($field_name, $this->_get_account($$class->$field_name), $this->ac_field_length, '', 'select_account', '', 1);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class->$field_name), $this->ac_field_length, '', 'select_account', '', 1);
  }
 
  public function ac_field_widrm($field_name) {
 	global $class, $$class;
-	echo $this->text_field($field_name, $this->_get_account($$class->$field_name), $this->ac_field_length, '', 'select_account', 1, 1);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class->$field_name), $this->ac_field_length, '', 'select_account', 1, 1);
  }
 
  public function ac_field_wid2($field_name) {
 	global $class_second, $$class_second;
-	echo $this->text_field($field_name, $this->_get_account($$class_second->$field_name), $this->ac_field_length, '', 'select_account', '', $this->readonly2);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class_second->$field_name), $this->ac_field_length, '', 'select_account', '', $this->readonly2);
  }
 
  public function ac_field_wid2m($field_name) {
 	global $class_second, $$class_second;
-	echo $this->text_field($field_name, $this->_get_account($$class_second->$field_name), $this->ac_field_length, '', 'select_account', 1, $this->readonly2);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class_second->$field_name), $this->ac_field_length, '', 'select_account', 1, $this->readonly2);
  }
 
  public function ac_field_wid2r($field_name) {
 	global $class_second, $$class_second;
-	echo $this->text_field($field_name, $this->_get_account($$class_second->$field_name), $this->ac_field_length, '', 'select_account', '', 1);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class_second->$field_name), $this->ac_field_length, '', 'select_account', '', 1);
  }
 
  public function ac_field_wid2rm($field_name) {
 	global $class_second, $$class_second;
-	echo $this->text_field($field_name, $this->_get_account($$class_second->$field_name), $this->ac_field_length, '', 'select_account', 1, 1);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class_second->$field_name), $this->ac_field_length, '', 'select_account', 1, 1);
  }
 
  public function ac_field_wid3($field_name) {
 	global $class_third, $$class_third;
-	echo $this->text_field($field_name, $this->_get_account($$class_third->$field_name), $this->ac_field_length, '', 'select_account', '', $this->readonly3);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class_third->$field_name), $this->ac_field_length, '', 'select_account', '', $this->readonly3);
  }
 
  public function ac_field_wid3m($field_name) {
 	global $class_third, $$class_third;
-	echo $this->text_field($field_name, $this->_get_account($$class_third->$field_name), $this->ac_field_length, '', 'select_account', 1, $this->readonly3);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class_third->$field_name), $this->ac_field_length, '', 'select_account', 1, $this->readonly3);
  }
 
  public function ac_field_wid3r($field_name) {
 	global $class_third, $$class_third;
-	echo $this->text_field($field_name, $this->_get_account($$class_third->$field_name), $this->ac_field_length, '', 'select_account', '', 1);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class_third->$field_name), $this->ac_field_length, '', 'select_account', '', 1);
  }
 
  public function ac_field_wid3rm($field_name) {
 	global $class_third, $$class_third;
-	echo $this->text_field($field_name, $this->_get_account($$class_third->$field_name), $this->ac_field_length, '', 'select_account', 1, 1);
-	echo $this->accpup_stmt();
+	echo $this->account_field($field_name, $this->_get_account($$class_third->$field_name), $this->ac_field_length, '', 'select_account', 1, 1);
  }
 
  /* --------------------End of default accoun fields and begining of text area -----------------------------
@@ -682,7 +710,7 @@ public function ac_field_d($field_name) {
 
  public function date_field($name, $value, $size = "20", $id = "", $div_class = "", $required = "", $readonly = "") {
 	if ($readonly == 1) {
-	 $readonly = 'disabled';
+	 $readonly = 'readonly';
 	} else {
 	 $readonly = '';
 	}
@@ -701,7 +729,7 @@ public function ac_field_d($field_name) {
 	 $idvalue = "";
 	}
 	$element_date_field = "<input type=\"text\" name=\"$bracketName\" value=\"$value\" 	size=\"$size\" "
-					. "class=\"$div_class $name\"  $required $readonly $idvalue>";
+					. "class=\"date $div_class $readonly $name\"  $required $readonly $idvalue>";
 	return $element_date_field;
  }
 
@@ -709,23 +737,37 @@ public function ac_field_d($field_name) {
 	return $this->date_field($name, $value, '20', '', 'dateFromToday');
  }
 
- public function date_fieldFromToday_m($name, $value) {
-	return $this->date_field($name, $value, '20', '', 'dateFromToday', 1);
+ public function date_fieldFromToday_r($name, $value, $readonly) {
+	return $this->date_field($name, $value, '20', '', 'dateFromToday', '', $readonly);
+ }
+
+ public function date_fieldFromToday_mr($name, $value, $readonly) {
+	return $this->date_field($name, $value, '20', '', 'dateFromToday', 1, $readonly);
  }
 
  public function date_fieldAnyDay($name, $value) {
 	return $this->date_field($name, $value, '20', '', 'anyDate');
  }
 
- public function date_fieldAnyDay_m($name, $value) {
-	return $this->date_field($name, $value, '20', '', 'anyDate', 1);
+ public function date_fieldAnyDay_r($name, $value, $readonly) {
+	return $this->date_field($name, $value, '20', '', 'anyDate', '', $readonly);
  }
 
- public function select_field_from_array($name, $array, $value, $id = "", $class_name = "", $required = "", $readonly = "") {
+ public function date_fieldAnyDay_m($name, $value, $readonly) {
+	return $this->date_field($name, $value, '20', '', 'anyDate', 1, $readonly);
+ }
+
+ public function select_field_from_array($name, $array, $value, $id = "", $class_name = "", $required = "", $readonly = "", $disabled='') {
 	if ($readonly == 1) {
-	 $readonly = 'disabled';
+	 $readonly = 'readonly';
 	} else {
 	 $readonly = '';
+	}
+
+	if ($disabled == 1) {
+	 $disabled = 'disabled';
+	} else {
+	 $disabled = '';
 	}
 
 	if ($required == 1) {
@@ -736,7 +778,7 @@ public function ac_field_d($field_name) {
 
 	$bracketName = $name . '[]';
 	$idvalue = $this->_convert_id($id);
-	$element_select_field = "<Select name=\"$bracketName\" class=\"from_array select $class_name\" $idvalue $required $this->readonly >";
+	$element_select_field = "<Select name=\"$bracketName\" class=\"from_array select $class_name $name\" $idvalue $required $readonly $disabled >";
 	$element_select_field .= "<option value=\"\" ></option>";
 	foreach ($array as $key => $arraValue) {
 	 if ($key == $value) {
@@ -777,7 +819,7 @@ public function ac_field_d($field_name) {
 	} else {
 	 $disabled = '';
 	}
-	$element_select_field = "<Select name=\"$bracketName\" class=\" select $divClass $name  \" $idvalue $readonly $required $disabled>";
+	$element_select_field = "<Select name=\"$bracketName\" class=\"select $divClass $name\" $idvalue $readonly $required $disabled>";
 	$element_select_field .= "<option value=\"\" ></option>";
 	if ((is_array($object)) && (count($object) > 0 )) {
 	 foreach ($object as $record) {

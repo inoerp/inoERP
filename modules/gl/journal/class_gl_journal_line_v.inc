@@ -2,7 +2,7 @@
 
 class gl_journal_line_v extends dbObject {
 
- protected static $table_name = "gl_journal_line_v";
+ public static $table_name = "gl_journal_line_v";
  
  public $initial_search = [
 		 'combination',

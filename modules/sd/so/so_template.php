@@ -108,37 +108,37 @@
 						 <li><label>Header Amount : </label>
 							<?php form::number_field_d('header_amount'); ?>
 						 </li>
-						 <li><label>Released Amount : </label>
-							<?php form::number_field_d('released_amount'); ?>
+						 <li><label>Tax Amount : </label>
+							<?php form::number_field_d('tax_amount'); ?>
 						 </li>
 						</ul>
 					 </div>
 					</div>
 					<div id="tabsHeader-3" class="tabContent">
-					 <div> 
-						<ul class="column five_column">
-						 <li><label>Ship To Site Id : 
-							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup"></label>
-							<?php echo form::text_field_d('ship_to_id'); ?>
+					 <div class="left_half shipto address_details">
+						<ul class="column two_column">
+						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
+							 Ship To Site Id : </label>
+							<?php $f->text_field_d('ship_to_id','address_id'); ?>
 						 </li>
-						 <li><label>Ship To Site Address : </label>
-							<?php echo form::text_field_d('ship_to_address'); ?>
-						 </li>
-						 <li><label>Bill To Site Id :
-							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup"></label>
-							<?php echo form::text_field_d('bill_to_id'); ?>
-						 </li>
-						 <li><label>Bill To Site Address :</label>
-							<?php echo form::text_field_d('bill_to_address'); ?>
-						 </li>
+						 <li><label>Address Name : </label><?php $f->text_field_dr('ship_to_address_name', 'address_name'); ?></li>
+						 <li><label>Address :</label> <?php $f->text_field_dr('ship_to_address','address'); ?></li>
+						 <li><label>Country  : </label> <?php $f->text_field_dr('ship_to_country','country'); ?></li>
+						 <li><label>Postal Code  : </label><?php echo $f->text_field_dr('ship_to_postal_code','postal_code'); ?></li>
 						</ul>
-						<div class="shipto address_details">
-						 <?php echo!empty($ship_to_id) ? $ship_to_id : ""; ?>
-						</div> 
-						<div class="billto address_details">
-						 <?php echo!empty($bill_to_id) ? $bill_to_id : ""; ?>
-						</div> 
-					 </div>
+					 </div> 
+					 <div class="right_half billto address_details">
+						<ul class="column two_column">
+						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
+							 Bill To Site Id :</label>
+							<?php $f->text_field_d('bill_to_id','address_id'); ?>
+						 </li>
+						 <li><label>Address Name :</label><?php $f->text_field_dr('bill_to_address_name','address_name'); ?> </li>
+						 <li><label>Address :</label> <?php $f->text_field_dr('bill_to_address','address'); ?></li>
+						 <li><label>Country  : </label> <?php $f->text_field_dr('bill_to_country','country'); ?></li>
+						 <li><label>Postal Code  : </label><?php echo $f->text_field_dr('bill_to_postal_code','postal_code'); ?></li>
+						</ul>
+					 </div> 
 					</div>
 					<div id="tabsHeader-4" class="tabContent">
 					 <div> 
@@ -241,10 +241,11 @@
  								<li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
  								<li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($sd_so_line->item_description); ?>"></li>           
  								<li><?php echo form::hidden_field('sd_so_header_id', $sd_so_header->sd_so_header_id); ?></li>
+ 								<li><?php echo form::hidden_field('tax_code_value', $$class_second->tax_code_value); ?></li>
  							 </ul>
  							</td>
  							<td><?php form::text_field_wid2sr('sd_so_line_id'); ?></td>
- 							<!--<td><?php // form::text_field_wid2s('line_number');                  ?></td>-->
+ 							<!--<td><?php // form::text_field_wid2s('line_number');                       ?></td>-->
  							<td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
  							<td><?php echo form::select_field_from_object('line_type', sd_so_line::sd_so_line_types(), 'option_line_id', 'option_line_code', $$class_second->line_type, 'line_type', $readonly); ?></td>
  							<td><?php echo $f->select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->shipping_org_id, '', '', 1, $readonly); ?></td>
@@ -254,7 +255,7 @@
  							<td><?php
 								echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id');
 								?></td>
-							<td><?php $f->text_field_d2r('line_status'); ?></td>
+ 							<td><?php $f->text_field_wid2r('line_status'); ?></td>
  							<td><?php form::number_field_wid2s('line_quantity'); ?></td>
  						 </tr>
 							<?php
@@ -267,9 +268,11 @@
 					<div id="tabsLine-2" class="scrollElement tabContent">
 					 <table class="form_line_data_table">
 						<thead> 
-						 <tr>
+						 <tr><th>Line Id</th>
 							<th>Unit Price</th>
 							<th>Line Price</th>
+							<th>Tax Code</th>
+							<th>Tax Amount</th>
 							<th>Line Description</th>
 							<th>Picked Quantity </th>
 							<th>Shipped Quantity</th>
@@ -283,11 +286,14 @@
 						 foreach ($sd_so_line_object as $sd_so_line) {
 							?>         
  						 <tr class="sd_so_line<?php echo $count ?>">
+ 							<td><?php form::text_field_wid2sr('sd_so_line_id'); ?></td>
  							<td><?php form::number_field_wid2('unit_price'); ?></td>
  							<td><?php form::number_field_wid2('line_price'); ?></td>
-							<td><?php form::text_field_wid2('line_description'); ?></td>
-							<td><?php form::number_field_wid2('picked_quantity'); ?></td>
-							<td><?php form::number_field_wid2('shipped_quantity'); ?></td>
+ 							<td><?php echo $f->select_field_from_object('tax_code_id', mdm_tax_code::find_all_outTax_by_inv_org_id($$class_second->shipping_org_id), 'mdm_tax_code_id', 'tax_code', $$class_second->tax_code_id, '', 'output_tax') ?></td>
+ 							<td><?php form::number_field_wid2('tax_amount'); ?></td>
+ 							<td><?php form::text_field_wid2('line_description'); ?></td>
+ 							<td><?php form::number_field_wid2sr('picked_quantity'); ?></td>
+ 							<td><?php form::number_field_wid2sr('shipped_quantity'); ?></td>
  							<td><?php form::text_field_wid2('reference_doc_type'); ?></td>
  							<td><?php form::text_field_wid2('reference_doc_number'); ?></td>
  						 </tr>
@@ -302,12 +308,12 @@
 					<div id="tabsLine-3" class="scrollElement tabContent">
 					 <table class="form_line_data_table">
 						<thead> 
-						 <tr>
+						 <tr><th>Line Id</th>
 							<th>Requested Date</th>
 							<th>Promise Date </th>
 							<th>Schedule Ship Date</th>
 							<th>Actual Ship Date</th>
-							 </tr>
+						 </tr>
 						</thead>
 						<tbody class="form_data_line_tbody">
 						 <?php
@@ -315,10 +321,11 @@
 						 foreach ($sd_so_line_object as $sd_so_line) {
 							?>         
  						 <tr class="sd_so_line<?php echo $count ?>">
-							<td><?php echo $f->date_fieldFromToday('requested_date', $$class_second->requested_date) ?></td>
-							<td><?php echo $f->date_fieldFromToday('promise_date', $$class_second->promise_date) ?></td>
-							<td><?php echo $f->date_fieldFromToday('schedule_ship_date', $$class_second->schedule_ship_date) ?></td>
-							<td><?php echo $f->date_fieldFromToday('actual_ship_date', $$class_second->actual_ship_date, 1) ?></td>
+ 							<td><?php form::text_field_wid2sr('sd_so_line_id'); ?></td>
+ 							<td><?php echo $f->date_fieldFromToday('requested_date', $$class_second->requested_date) ?></td>
+ 							<td><?php echo $f->date_fieldFromToday('promise_date', $$class_second->promise_date) ?></td>
+ 							<td><?php echo $f->date_fieldFromToday('schedule_ship_date', $$class_second->schedule_ship_date) ?></td>
+ 							<td><?php echo $f->date_fieldFromToday('actual_ship_date', $$class_second->actual_ship_date, 1) ?></td>
  						 </tr>
 							<?php
 							$count = $count + 1;

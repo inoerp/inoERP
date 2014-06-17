@@ -2,7 +2,7 @@
 
 class inv_receipt_line extends dbObject {
 
- protected static $table_name = "inv_receipt_line";
+ public static $table_name = "inv_receipt_line";
  public static $primary_column = "inv_receipt_line_id";
  public static $parent_primary_column = "inv_receipt_header_id";
  public static $multi_select_template_path = "modules/inv/receipt/receipt_template.php";

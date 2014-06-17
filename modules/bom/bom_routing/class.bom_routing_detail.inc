@@ -1,7 +1,7 @@
 <?php
 
 class bom_routing_detail extends dbObject {
- protected static $table_name = "bom_routing_detail";
+ public static $table_name = "bom_routing_detail";
  public static $primary_column = "bom_routing_detail_id";
  public static $parent_primary_column = "bom_routing_line_id";
  public static $key_column = 'resource_sequence';

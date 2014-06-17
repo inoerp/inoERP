@@ -453,11 +453,11 @@
 						 <li><label>Invoice Matching: </label>
 							<?php echo form::text_field_d('demand_timefence'); ?>
 						 </li>
-						 <li><label>AP Tax: </label>
-							<?php echo form::text_field_d('demand_timefence'); ?>
+						 <li><label>Output Tax Class: </label>
+							<?php echo $f->select_field_from_object('op_tax_class', item::product_tax_class(), 'option_line_code', 'option_line_value', $$class->op_tax_class, '','output_tax')?>
 						 </li>
-						 <li><label>Sales Tax: </label>
-							<?php echo form::text_field_d('demand_timefence'); ?>
+						 <li><label>Input Tax Class: </label>
+							<?php echo $f->select_field_from_object('ip_tax_class', item::product_tax_class(), 'option_line_code', 'option_line_value', $$class->ip_tax_class, '','input_tax')?>
 						 </li>
 						 <li><label>AP Payment Term: </label>
 							<?php echo form::text_field_d('demand_timefence'); ?>
@@ -472,10 +472,10 @@
 						 <li><label>Material Ac: </label><?php $f->ac_field_d('material_ac_id'); ?></li>
 						 <li><label>Material OH Ac: </label><?php $f->ac_field_d('material_ac_id'); ?></li>
 						 <li><label>OverHead Ac: </label> <?php $f->ac_field_d('material_ac_id'); ?></li>
-						 <li><label>Resource Ac: </label> <?php $f->ac_field_d('resource_ac'); ?></li>
-						 <li><label>Expense Ac: </label><?php $f->ac_field_d('expense_ac'); ?></li>
+						 <li><label>Resource Ac: </label> <?php $f->ac_field_d('resource_ac_id'); ?></li>
+						 <li><label>Expense Ac: </label><?php $f->ac_field_d('expense_ac_id'); ?></li>
 						 <li><label>OSP Ac: </label> <?php $f->ac_field_d('material_ac_id'); ?> </li>
-						 <li><label>Sales Ac: </label><?php $f->ac_field_d('sales_ac'); ?> </li>
+						 <li><label>Sales Ac: </label><?php $f->ac_field_d('sales_ac_id'); ?> </li>
 						</ul>
 					 </div> 
 					</div>

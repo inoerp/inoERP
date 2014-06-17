@@ -216,7 +216,9 @@ class form {
 EOD;
  }
 
- public static function form_button_withImage($current_page_path = "", $homeUrl = HOME_URL_WOS) {
+ public static function form_button_withImage($current_page_path = "", $homeUrl = '') {
+	$home_url_wos = rtrim(HOME_URL, '/');
+	$homeUrl = empty($homeUrl) ? $home_url_wos : $homeUrl;
 	if (empty($current_page_path)) {
 	 $current_page_path = thisPage_url();
 	}
@@ -225,10 +227,10 @@ EOD;
         <li class="show_loading_small"><img src="$homeUrl/themes/images/form/small_loading_bar.gif"></li>	
         <li><input type="button" class="button_image"  name="refresh"/>
 				 <img src="$homeUrl/themes/images/form/refresh.png" id="refresh_button" alt="Refresh" Title="Refresh" class="showPointer"></li>
-				<li><a  href="$current_page_path">
-				 <img src="$homeUrl/themes/images/form/new_object.png" id="new_object_button" alt="New Object" Title="New Object" class="showPointer"></a> </li> 
-				<li><input type="button" class="button_image add_row_img new_line" id="new_line" name="new_line"/> 
-				 <img src="$homeUrl/themes/images/form/new_line.png" alt="New Line" Title="New Line" class="showPointer add_row_img"></li>
+				<li><a id="new_object_button" href="$current_page_path">
+				 <img src="$homeUrl/themes/images/form/new_object.png" alt="New Object" Title="New Object" class="showPointer"></a> </li> 
+				<li><a id="new_page_button" href="$current_page_path">
+				 <img src="$homeUrl/themes/images/form/new_line.png" alt="New Page" Title="New Page" class="showPointer"></a> </li> 
 				<li><input type="button" class="button_image save" name="save" id="save_button">
 				 <img src="$homeUrl/themes/images/form/save.png" id="save" alt="Save" Title="Save" class="showPointer"></li>
 				<li><input type="button" class="button_image delete"  name="delete_row" id="delete_row">
@@ -1111,7 +1113,7 @@ EOD;
 	} else {
 	 $disabled = '';
 	}
-	$element_select_field = "<Select name=\"$bracketName\" class=\" select $divClass $name  \" $idvalue $readonly $required $disabled>";
+	$element_select_field = "<Select name=\"$bracketName\" class=\"select $divClass $name\" $idvalue $readonly $required $disabled>";
 	$element_select_field .= "<option value=\"\" ></option>";
 	if ((is_array($object)) && (count($object) > 0 )) {
 	 foreach ($object as $record) {
@@ -1241,8 +1243,13 @@ EOD;
 	} else {
 	 $checked = "";
 	}
+	if(!empty($id)){
+	 $id_stmt = 'id="'.$id.'"';
+	}else{
+	 $id_stmt = null;
+	}
 
-	$element_extra_field = "<input type=\"checkbox\" name=\"$bracketName\"  class=\"checkBox $name\" id=\"$id\" 
+	$element_extra_field = "<input type=\"checkbox\" name=\"$bracketName\"  class=\"checkBox $name\" $id_stmt 
 	 value=\"1\"  $checked $readonly>";
 	return $element_extra_field;
  }

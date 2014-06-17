@@ -1,10 +1,22 @@
 <?php
 class bom_overhead extends dbObject {
- protected static $table_name = "bom_overhead";
+ public static $table_name = "bom_overhead";
  public static $primary_column = "bom_overhead_id";
  public static $dependent_classes = ['bom_overhead_resource_assignment', 'bom_overhead_rate_assignment'];
  public static $key_column = 'overhead';
  public static $module = "bom";
+   public static $system_info = [
+		 'name' => 'Overheads',
+		 'number' => '2405',
+		 'description' => 'BOM Overheads',
+		 'version' => '1.1.1.3',
+		 'db_version' => '1001',
+		 'mod_version' => '1.1.x-1.1',
+		 'dependent_class' => array('bom_overhead_resource_assignment','bom_overhead_rate_assignment'),
+		 'primary_entity_cb' => '',
+		 'module_name' => 'bom',
+		 'weight' => 5
+ ];
 //  data base variables as stored database column name
  public $field_a = [
 		 'bom_overhead_id',

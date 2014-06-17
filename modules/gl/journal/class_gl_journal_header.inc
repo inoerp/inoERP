@@ -2,7 +2,7 @@
 
 class gl_journal_header extends dbObject {
 
- protected static $table_name = "gl_journal_header";
+ public static $table_name = "gl_journal_header";
  public static $dependent_classes = ['gl_journal_line'];
  public static $primary_column = "gl_journal_header_id";
  public static $multi_search_primary_column = "gl_journal_header_id";

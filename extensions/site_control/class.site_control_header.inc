@@ -2,7 +2,7 @@
 
 class site_control_header extends dbObject {
 
- protected static $table_name = "site_control_header";
+ public static $table_name = "site_control_header";
  public static $field_array = [
 		 'site_control_header_id',
 		 'default_home_page',

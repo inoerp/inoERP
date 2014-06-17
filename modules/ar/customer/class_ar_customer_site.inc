@@ -2,12 +2,12 @@
 
 class ar_customer_site extends dbObject {
 
- protected static $table_name = "ar_customer_site";
+ public static $table_name = "ar_customer_site";
  public static $primary_column = "ar_customer_site_id";
  public static $parent_primary_column = "ar_customer_id";
  public static $key_column = 'customer_site_name';
  public static $module = "ar";
- public  $field_a = [
+ public $field_a = [
 		 'ar_customer_site_id',
 		 'ar_customer_id',
 		 'customer_site_number',
@@ -44,7 +44,6 @@ class ar_customer_site extends dbObject {
 		 'last_update_by',
 		 'last_update_date'
  ];
-
  public $requiredField = [
 		 "ar_customer_id",
 		 "customer_site_number",
@@ -54,11 +53,14 @@ class ar_customer_site extends dbObject {
 		 "site_address_id"
  ];
  public $fields_inForm_notInDataBase = [
+		 'site_address_name',
+		 'site_address',
+		 'site_country',
+		 'site_postal_code',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
 		 'ar_customer_id'
  ];
-
  public $ar_customer_site_id;
  public $ar_customer_id;
  public $customer_site_number;
@@ -96,11 +98,26 @@ class ar_customer_site extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
+ public $site_address_name;
+ public $site_address;
+ public $site_country;
+ public $site_postal_code;
 
  Public static function customer_site_types() {
 	$option_header = option_header::find_by_name('CUSTOMER_SITE_TYPE');
 	$coa_account_types = option_line::find_by_option_id($option_header->option_header_id);
 	return $coa_account_types;
+ }
+ 
+  public function _before_showing() {
+	$address = new address();
+	if (!empty($this->site_address_id)) {
+	 $address->findBy_id($this->site_address_id);
+	 $this->site_address_name = $address->address_name;
+	 $this->site_address = $address->address;
+	 $this->site_country = $address->country;
+	 $this->site_postal_code = $address->postal_code;
+	}
  }
 
  public static function find_all_sitesOfCustomer_array($customer_id = "") {
@@ -110,7 +127,7 @@ class ar_customer_site extends dbObject {
 	$sql .= " WHERE ar_customer_id = '{$customer_id}' ";
 	$final_array = [];
 	$result_array = $db->find_by_sql($sql);
-	foreach ($result_array as $obj	) {
+	foreach ($result_array as $obj) {
 	 $key = $obj->ar_customer_site_id;
 	 $value = $obj->ar_customer_site_id . "-" . $obj->customer_site_name;
 	 $final_array[$key] = $value;

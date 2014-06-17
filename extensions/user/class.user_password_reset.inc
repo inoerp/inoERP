@@ -2,36 +2,25 @@
 
 class user_password_reset extends dbObject {
 
- protected static $table_name = "user_password_reset";
+ public static $table_name = "user_password_reset";
+ public static $parent_primary_column = "user_id";
+ public static $primary_column = "user_password_reset_id";
+ public static $key_column = 'user_id';
+ public static $module = "extension";
 //  data base variables as stored database column name
- public static $field_array = [
+ public $field_a = [
 		 "user_password_reset_id",
 		 "user_id",
 		 "code",
 		 "status",
 		 "creation_date"
  ];
-//variables used for showing data
- public static $initial_search_array = [
- ];
- public static $column_array = [
- ];
- public static $account_array = [
- ];
- public static $checkbox_array = [
- ];
- public static $fields_inForm_notInDataBase = [
- ];
- public static $fields_inHeader_needsToBeInserted_inPOST = [
- ];
- public static $base_encoded_array = [];
- public static $requiredField_array = [
+ public $requiredField = [
 		 "user_id",
 		 "code",
 		 "status",
 		 "creation_date"
  ];
- public static $primary_column = "user_password_reset_id";
  public $user_password_reset_id;
  public $user_id;
  public $username;
@@ -50,37 +39,55 @@ class user_password_reset extends dbObject {
 	
  }
 
- private static function codeThePassword($password) {
+ private function _codeThePassword($password) {
 	return hash('sha256', crypt($password, 'xjkhrwq$@323sqjheq51234$$'));
  }
 
- public static function findUnUsedRecord_by_user_id($user_id) {
+ public function findBy_userId($user_id) {
 	$sql = " SELECT * FROM ";
 	$sql .= self::$table_name;
-	$sql .= " WHERE user_id = '{$user_id}' ";
-	$sql .= " AND status IS NULL ";
-	$sql .= " LIMIT 1 ";
-
-	$result = self::find_by_sql($sql);
-	return !empty($result) ? array_shift($result) : false;
+	$sql .= " WHERE user_id = :user_id ";
+	$sql .= " AND status IS NULL"
+					. " ORDER BY user_password_reset_id LIMIT 1";
+	$value_a = ['user_id' => $user_id];
+	$result = $this->findBySql($sql, $value_a);
+	return !empty($result) ? array_pop($result) : false;
  }
- 
- public static function generateResetPassword($user) {
-	global $db;
-		$username = $user->username;
+
+ private function _findUnUsedRecord_by_user_id($user_id) {
+	$sql = " SELECT * FROM ";
+	$sql .= self::$table_name;
+	$sql .= " WHERE user_id = :user_id ";
+	$sql .= " AND status IS NULL ";
+	$value_a = ['user_id' => $user_id];
+	$result = $this->findBySql($sql, $value_a);
+	return !empty($result) ? ($result) : false;
+ }
+
+ private function _delete_existing_records($user_id) {
+	$existing_records = $this->_findUnUsedRecord_by_user_id($user_id);
+	if ($existing_records) {
+	 $upr_d = new user_password_reset();
+	 foreach ($existing_records as $record) {
+		$upr_d->user_password_reset_id = $record->user_password_reset_id;
+		$upr_d->delete();
+	 }
+	}
+ }
+
+ public function generateResetPassword($user) {
+	global $dbc;
+	$username = $user->username;
 	$email = $user->email;
 	$user_id = $user->user_id;
 	if ($user->user_id) {
 	 $time = time();
 	 //check if any unused password is available
-	 $unused_password = self::findUnUsedRecord_by_user_id($user_id);
-	 if ($unused_password) {
-		$code = $unused_password->code;
-			 } else {
-		$code = self::codeThePassword($time . $username . $email);
-	 }
+	 $this->_delete_existing_records($user_id);
+	 $code = $this->_codeThePassword($time . $username . $email);
+
 	 $url = HOME_URL . 'extensions/user/reset_password.php?user_id=' . $user_id . '&code=' . $code;
-	 $link = "<a target='_blank' href='".$url."'>Reset Password</a>";
+	 $link = "<a target='_blank' href='" . $url . "'>Reset Password</a>";
 	 $to = $email;
 	 $subject = "New password reset request @" . SITE_NAME;
 	 $message = "<html> <body>Dear " . $user->username . '<br><br>';
@@ -92,26 +99,24 @@ class user_password_reset extends dbObject {
 	 $headers .= "Content-type: text/html\r\n";
 
 	 if (mail($to, $subject, $message, $headers)) {
-		$msg = "New password reset details have been sucessfully sent";
-		$new_password_request = new self;
+//		$msg = "New password reset details have been sucessfully sent";
+		$new_password_request = new user_password_reset();
 		$new_password_request->code = $code;
 		$new_password_request->user_id = $user_id;
 		$new_password_request->email = $email;
 		$new_password_request->status = 0;
 		$new_password_request->creation_date = strftime("%Y-%m-%d %H:%M:%S", $time);
-		if ($unused_password) {
-		 $new_password_request->user_password_reset_id = $unused_password->user_password_reset_id;
-		}
+		$new_password_request->user_password_reset_id = null;
 
-		$msg = $new_password_request->save();
+		$new_password_request->save();
+		$dbc->confirm();
 	 } else {
-		$msg = "mail failed!";
+		echo "Failed to send email !";
 	 }//email complete
 	}//new user registration complete
 	else {
-	 $msg = "New user registration Failed!" . mysql_error();
+	 echo "<br>Sorry, Couldn't complete the password reset request!" . mysql_error();
 	}// registraion failed
-	return $msg;
  }
 
 }

@@ -2,7 +2,7 @@
 
 class gl_balance extends dbObject {
 
- protected static $table_name = "gl_balance";
+ public static $table_name = "gl_balance";
  public static $primary_column = "gl_balance_id";
  public static $key_column = 'coa_combination_id';
  public static $module = "gl";

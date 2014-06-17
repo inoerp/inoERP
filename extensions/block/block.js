@@ -1,29 +1,64 @@
+function getBlockForm() {
+ $('#loading').show();
+ var block_id = $("#block_id").val();
+ $.ajax({
+	url: '../block/block.php',
+	data: {reference_table: 'block',
+	 reference_id: block_id},
+	type: 'get'
+ }).done(function(data) {
+	var div = $('#block', $(data)).html();
+	$("#new_block").append(div);
+	$('#loading').hide();
+ }).fail(function() {
+	alert("Block block loading failed");
+	$('#loading').hide();
+ });
+// $(".form_table #subinventory_id").attr("disabled",false);
+}
+
+function deleteBlock(block_id) {
+ $('#loading').show();
+ $.ajax({
+	url: 'json.block.php',
+	data: {delete: '1',
+	 block_id: block_id},
+	type: 'get'
+ }).done(function(data) {
+	var div = $('#json_delete_block', $(data)).html();
+	$(".error").append(div);
+	$('#loading').hide();
+ }).fail(function() {
+	alert("Block delete failed");
+	$('#loading').hide();
+ });
+// $(".form_table #subinventory_id").attr("disabled",false);
+}
+
+function updateBlock(block_id, ulclass) {
+ $('#loading').show();
+ $.ajax({
+	url: '../block/json.block.php',
+	data: {update: '1',
+	 block_id: block_id},
+	type: 'get'
+ }).done(function(data) {
+	var div = $('#json_update_block', $(data)).html();
+	$(ulclass).append(div);
+	$('#loading').hide();
+ }).fail(function() {
+	alert("Block update failed");
+	$('#loading').hide();
+ });
+// $(".form_table #subinventory_id").attr("disabled",false);
+}
+
 $(document).ready(function() {
 
 //get the block form
  $("#block_button").click(function() {
 	getBlockForm();
  });
-
- function getBlockForm() {
-	$('#loading').show();
-	var block_id = $("#block_id").val();
-	$.ajax({
-	 url: '../block/block.php',
-	 data: {reference_table: 'block',
-		reference_id: block_id},
-	 type: 'get'
-	}).done(function(data) {
-	 var div = $('#block', $(data)).html();
-	 $("#new_block").append(div);
-	 $('#loading').hide();
-	}).fail(function() {
-	 alert("Block block loading failed");
-	 $('#loading').hide();
-	});
-// $(".form_table #subinventory_id").attr("disabled",false);
- }
-
 
 //Delete from block list
  $("#delete_row").click(function() {
@@ -43,23 +78,6 @@ $(document).ready(function() {
 	}
  });
 
- function deleteBlock(block_id) {
-	$('#loading').show();
-	$.ajax({
-	 url: 'json.block.php',
-	 data: {delete: '1',
-		block_id: block_id},
-	 type: 'get'
-	}).done(function(data) {
-	 var div = $('#json_delete_block', $(data)).html();
-	 $(".error").append(div);
-	 $('#loading').hide();
-	}).fail(function() {
-	 alert("Block delete failed");
-	 $('#loading').hide();
-	});
-// $(".form_table #subinventory_id").attr("disabled",false);
- }
 
 //Update the block form
  $(".update_button").click(function() {
@@ -70,31 +88,13 @@ $(document).ready(function() {
 	}
  });
 
- function updateBlock(block_id, ulclass) {
-	$('#loading').show();
-	$.ajax({
-	 url: '../block/json.block.php',
-	 data: {update: '1',
-		block_id: block_id},
-	 type: 'get'
-	}).done(function(data) {
-	 var div = $('#json_update_block', $(data)).html();
-	 $(ulclass).append(div);
-	 $('#loading').hide();
-	}).fail(function() {
-	 alert("Block update failed");
-	 $('#loading').hide();
-	});
-// $(".form_table #subinventory_id").attr("disabled",false);
- }
-
 //dont allow enable/disbale on blocks page
- $('#content').on('click', '.enabled_cb', function() {
-	alert('You can\'t enable/disbale blocks from this page \nNavigate to the block page to change the status');
- });
+// $('#content').on('click', '.enabled_cb', function() {
+//	alert('You can\'t enable/disbale blocks from this page \nNavigate to the block page to change the status');
+// });
 
- save('json.block.php', '#block_header', 'line_id_cb', 'block_id', '#block_id', '', '');
- 
+// save('json.block.php', '#block_header', 'line_id_cb', 'block_id', '#block_id', '', '');
+
  //updating block ids through observere
  // Define the target. #content or any higher level
  var target = $("#content")[0];
@@ -113,15 +113,15 @@ $(document).ready(function() {
 	 var addedNodes = mutation.addedNodes;  // All newly added nodes
 	 if (addedNodes) {
 		$(addedNodes).each(function() {
-     if($(this).hasClass('json_message')){
-			$(this).find('#linids').find('li').each(function(){
-			var idNumber = +$(this).html();
-			var blockName = $(this).attr('class');
-			$('#block_header').find('.name').each(function(){
-			if($(this).val() == blockName){
-			$(this).closest('tr').find('.block_id').val(idNumber);
-			}
-			});
+		 if ($(this).hasClass('json_message')) {
+			$(this).find('#lineids').find('li').each(function() {
+			 var idNumber = +$(this).html();
+			 var blockName = $(this).attr('class');
+			 $('#block_header').find('.name').each(function() {
+				if ($(this).val() == blockName) {
+				 $(this).closest('tr').find('.block_id').val(idNumber);
+				}
+			 });
 			});
 		 }
 		 //all the functions goes here for new nodes
@@ -131,5 +131,16 @@ $(document).ready(function() {
  });
 
 //start it
- observer.observe(target, config);
+// observer.observe(target, config);
+
+ var classSave = new saveMainClass();
+ classSave.json_url = 'form.php?class_name=block';
+ classSave.form_header_id = 'block_header';
+ classSave.primary_column_id = 'block_id';
+ classSave.savingOnlyHeader = true;
+ classSave.headerClassName = 'block';
+ classSave.enable_select = true;
+ classSave.saveMain();
+
+ deleteHeader('form.php?class_name=block', $('#hidden_block_id').val());
 });

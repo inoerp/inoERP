@@ -12,10 +12,9 @@ $(document).ready(function() {
 
 //mass uplaod
  	var fu = new fileUploadMain();
- 	fu.json_url = 'upload.php';
+ 	fu.json_url = 'extensions/file/upload.php';
  	fu.upload_type = 'only_server';
  	fu.class_name = $('.class_name').val();
- 	;
  	fu.directory = 'temp';
  	fu.fileUpload();
 	

@@ -2,13 +2,25 @@
 
 class ar_receipt_header extends dbObject {
 
- protected static $table_name = "ar_receipt_header";
+ public static $table_name = "ar_receipt_header";
  public static $dependent_classes = ['ar_receipt_line'];
  public static $primary_column = "ar_receipt_header_id";
  public static $primary_column2 = "receipt_number";
  public static $key_column = 'ar_customer_id';
  public static $module = "ar"; //same as gl_journal_source
  public static $gl_journal_category = "AR_RECEIPTS";
+ public static $system_info = [
+		 'name' => 'AR Receipt',
+		 'number' => '1303',
+		 'description' => 'Receive money & apply to invoices',
+		 'version' => '1.1.1.3',
+		 'db_version' => '1001',
+		 'mod_version' => '1.1.x-1.1',
+		 'dependent_class' => array('ar_receipt_line', 'ar_receipt_interface'),
+		 'primary_entity_cb' => '',
+		 'module_name' => 'ar',
+		 'weight' => 3
+ ];
  public $checkbox = [
 //		 "rev_enabled_cb"
  ];
@@ -381,9 +393,9 @@ class ar_receipt_header extends dbObject {
 	 $receviable_gjl->code_combination_id = $arth_i->receivable_ac_id;
 	 $receviable_gjl->total_cr = $receipt_lines->amount;
 	 $receviable_gjl->total_ac_cr = $receipt_lines->amount;
-	 if(!empty($this->transaction_number)){
-	 $receviable_gjl->description = 'AR Trnx Receviable of ' . $this->transaction_number;
-	 }else{
+	 if (!empty($this->transaction_number)) {
+		$receviable_gjl->description = 'AR Trnx Receviable of ' . $this->transaction_number;
+	 } else {
 		$receviable_gjl->description = 'AR Trnx Receviable of ' . $this->ar_transaction_header_id;
 	 }
 	 $receviable_gjl->reference_type = 'table';

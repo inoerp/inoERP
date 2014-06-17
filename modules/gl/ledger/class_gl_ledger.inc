@@ -3,7 +3,7 @@
 class gl_ledger extends dbObject {
 
 //protected static variables
- protected static $table_name = "gl_ledger";
+ public static $table_name = "gl_ledger";
  public static $dependent_classes = ['gl_ledger_balancing_values'];
 //public static varibales - required to be accessed with out intantiating the class
  public static $primary_column = "gl_ledger_id";

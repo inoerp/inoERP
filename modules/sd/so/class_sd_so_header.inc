@@ -2,12 +2,11 @@
 
 class sd_so_header extends dbObject {
 
- protected static $table_name = "sd_so_header";
+ public static $table_name = "sd_so_header";
  public static $dependent_classes = ['sd_so_line'];
  public static $primary_column = "sd_so_header_id";
  public static $primary_column2 = "so_number";
  public static $key_column = 'ar_customer_id';
- public static $js_fileName = 'modules/sd/so/js/multi_select_so.js';
  public static $module = "sd";
  public $checkbox = [
 		 "rev_enabled_cb"
@@ -24,6 +23,7 @@ class sd_so_header extends dbObject {
 		 'ship_to_id',
 		 'bill_to_id',
 		 'header_amount',
+		 'tax_amount',
 		 'document_currency',
 		 'payment_term_id',
 		 'payment_term_date',
@@ -70,12 +70,19 @@ class sd_so_header extends dbObject {
 		 "customer_name",
 		 "customer_number",
 		 "customer_site_name",
-		 "ship_to_address",
-		 "bill_to_address",
+		 "ship_to_address_name",
+		 "bill_to_address_name",
 		 'sales_action',
-		 		 'multi_action_class_pc',
-		 'multi_action_class_pc_value',
-		 'action'
+		 'ship_to_phone',
+		 'ship_to_email',
+		 'ship_to_address',
+		 'ship_to_country',
+		 'ship_to_postal_code',
+		 'bill_to_phone',
+		 'bill_to_email',
+		 'bill_to_address',
+		 'bill_to_country',
+		 'bill_to_postal_code',
  ];
  public $search = [
 		 '_show_update_path' => 1,
@@ -100,6 +107,7 @@ class sd_so_header extends dbObject {
  public $ship_to_id;
  public $bill_to_id;
  public $header_amount;
+ public $tax_amount;
  public $document_currency;
  public $payment_term_id;
  public $payment_term_date;
@@ -121,17 +129,21 @@ class sd_so_header extends dbObject {
  public $customer_name;
  public $customer_number;
  public $customer_site_name;
- public $ship_to_address;
- public $bill_to_address;
  public $sales_action;
  public $pick_from_subinventory;
  public $pick_from_locator;
  public $staging_subinventory;
  public $staging_locator;
-  public $multi_action_class_pc;
- public $multi_action_class_pc_value; 
- public $action;
- 
+ public $ship_to_address;
+ public $bill_to_address_name;
+ public $ship_to_phone;
+ public $ship_to_address_name;
+ public $ship_to_country;
+ public $ship_to_postal_code;
+ public $bill_to_phone;
+ public $bill_to_address;
+ public $bill_to_country;
+ public $bill_to_postal_code;
 
  public function __set($name, $value) {
 	switch ($value) {
@@ -146,14 +158,29 @@ class sd_so_header extends dbObject {
 	}
  }
 
- public function _before_save() {
-	if(empty($this->approval_status)){
-	 $this->approval_status = 'Entered';
+ public function _before_showing() {
+	$address = new address();
+	if (!empty($this->ship_to_id)) {
+	 $address_ship_to = $address->findBy_id($this->ship_to_id);
+	 $this->ship_to_address_name = $address_ship_to->address_name;
+	 $this->ship_to_address = $address_ship_to->address;
+	 $this->ship_to_country = $address_ship_to->country;
+	 $this->ship_to_postal_code = $address_ship_to->postal_code;
+	 $this->ship_to_phone = $address_ship_to->phone;
 	}
-	if (($this->action == 'sales_order_picking')) {
-	 echo "<br> Starting Sales Line Picking.";
-//	 $this->_convert_requisition_toPO();
-	 return 10;
+	if (!empty($this->bill_to_id)) {
+	 $address_bill_to = $address->findBy_id($this->bill_to_id);
+	 $this->bill_to_address_name = $address_bill_to->address_name;
+	 $this->bill_to_address = $address_bill_to->address;
+	 $this->bill_to_country = $address_bill_to->country;
+	 $this->bill_to_postal_code = $address_bill_to->postal_code;
+	 $this->bill_to_phone = $address_bill_to->phone;
+	}
+ }
+
+ public function _before_save() {
+	if (empty($this->approval_status)) {
+	 $this->approval_status = 'Entered';
 	}
  }
 
@@ -234,9 +261,10 @@ class sd_so_header extends dbObject {
 	return $this->msg;
  }
 
- private function _pick_sales_order(){
+ private function _pick_sales_order() {
 	
  }
+
 // public function save() {
 //	$primary_column = static::$primary_column;
 //	if (empty($this->$primary_column)) {
@@ -247,24 +275,6 @@ class sd_so_header extends dbObject {
 //	}
 //	return $this->msg;
 // }
-
- public function multi_select_input_fields() {
-	$multi_select_input = [
-	];
-	return $multi_select_input;
- }
-
- public function multi_select_hidden_fields() {
-	$multi_select_hidden = [
-			'action_class_name',
-			'mode',
-			'action',
-			'show_block',
-	];
-
-	return $multi_select_hidden;
- }
-
 }
 
 //end of sd_so_header class

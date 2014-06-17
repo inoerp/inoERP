@@ -9,6 +9,10 @@ if (!empty($_GET['class_name'])) {
 }
 if (!empty($class_names)) {
  include_once("includes/functions/loader.inc");
+  if (empty($access_level) || ($access_level < 2 )) {
+	access_denied();
+	return;
+ }
  $search = new search();
  $search->setProperty('_search_order_by', filter_input(INPUT_GET, 'search_order_by'));
  $search->setProperty('_search_asc_desc', filter_input(INPUT_GET, 'search_asc_desc'));

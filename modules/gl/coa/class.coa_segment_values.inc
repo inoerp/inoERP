@@ -2,7 +2,7 @@
 <?php
 
 class coa_segment_values {
-protected static $table_name = "coa_segment_values";
+public static $table_name = "coa_segment_values";
 public $coa_segment_values_id;
 public $coa_id;
 public $coa_segments;

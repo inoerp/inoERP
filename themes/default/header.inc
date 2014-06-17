@@ -6,7 +6,8 @@
 	<meta name="description" content="inoERP - A Open Source PHP/C++ based Enterprise Management System">
 	<meta name="keywords" content="ERP,PHP ERP,Open Source ERP ">
   <title><?php echo isset($pageTitle) ? $pageTitle . ' - inoERP!' : ' inoERP! ' ?></title>
-  <link href="<?php echo THEME_URL; ?>/layout.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="<?php echo THEME_URL; 
+	echo (!empty($content_class))? '/content_layout.css' : '/layout.css' ?>" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo THEME_URL; ?>/public.css" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo THEME_URL; ?>/menu.css" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo THEME_URL; ?>/jquery.css" media="all" rel="stylesheet" type="text/css" />
@@ -19,11 +20,12 @@
 	 }
 	}
 	?>
-  <script src="<?php echo HOME_URL; ?>includes/js/jquery-2.0.3.min.js"></script>
+	<script src="<?php echo HOME_URL; ?>includes/js/jquery-2.0.3.min.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
   <script src="<?php echo HOME_URL; ?>includes/js/jquery.hotkeys.js"></script>
-  <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+  <script src="<?php echo HOME_URL; ?>includes/js/custom/tinymce/tinymce.min.js"></script>
 	<script src="<?php echo HOME_URL; ?>includes/js/save.js"></script>
+	<script src="<?php echo HOME_URL; ?>includes/js/custom_plugins.js"></script>
 	<script src="<?php echo HOME_URL; ?>includes/js/basics.js"></script>
 	<?php
 	if (!empty($js_file_paths)) {
@@ -39,51 +41,60 @@
   <!--     Check if its a find page
        Exclude the header & left block section-->
 	<div id="header_top_container"><?php
-	 if ((!empty($mode)) && ($mode > 8)) {
+	$show_header_links = true;
+	 if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
 		if (empty($current_page_path)) {
 		 $current_page_path = thisPage_url();
 		}
 		form::form_button_withImage($current_page_path);
+		$show_header_links = false;
 	 }
-	 ?>
-	</div>
+	 ?></div>
 
 	<?php
 	if ($showBlock) {
-	 if (!empty($_SESSION['login_status'])) {
-		echo '<div id="header_top" class="clear"></div>';
-	 }
+	 echo '<div id="header_top" class="clear"></div>';
+//	 if (!empty($_SESSION['login_status'])) {
+//		echo '<div id="header_top" class="clear"></div>';
+//	 }
 	 ?>
- 	<div id="header" class="clear headerBgColor">
- 	 <div class="logo"><h2><?php echo "<a href=\" " . HOME_URL . " \"> " . SITE_NAME . "</a>"; ?>!</h2> </div>
- 	 <div class="user_info">
-		 <?php
-		 if (!empty($_SESSION['login_status'])) {
-			?>
-			<ul><li>
-				Hello <a href="<?php echo HOME_URL; ?>extensions/user/user.php?user_id=<?php echo $_SESSION['user_id']; ?>">
-				 <?php echo $_SESSION['username'] . '!'; ?></a>
-			 <li><a href="<?php echo HOME_URL; ?>extensions/user/user_logout.php">Logout</a> </li>
-			</ul>
-		 <?php } else { ?>
-			<ul class="inRow asperWidth">
-			 <li>
-				<a class="button" href="<?php echo HOME_URL; ?>extensions/user/user_login.php#tabsLine-1">Sign In</a>
-			 <li>
-				<a class="button" href="<?php echo HOME_URL; ?>extensions/user/user_login.php#tabsLine-2">Create Account</a>
-			 </li>
-			</ul>
+  	<div id="header" class="clear headerBgColor">
+  	 <div class="logo"><h2><?php global $si;
+		 echo "<a href=\" " . HOME_URL . " \"> " . $si->site_name . "</a>"; ?>!</h2> </div>
+ 	 <div class="header_right">
+		<?php if($show_header_links) { ?>
+ 		<div class="header_info">
+ 		 <ul class="inRow asperWidth"> 
+ 			<li><a href="http://demo.inoideas.org/">Demo</a></li>
+			<li><a href="https://github.com/inoerp/inoerp_v1">Download</a></li>
+ 			<li><a href="content.php?content_type=documentation&category_id=30">Documentation</a></li>
+ 			<li><a href="content.php?content_type=forum&category_id=1">Forum</a></li>
+ 			<li><a href="">About</a></li>
+ 		 </ul>
+ 		</div>
+		<?php } ?>
+ 		<div class="user_info">
+			<?php
+			if (!empty($_SESSION['login_status'])) {
+			 ?>
+			 <ul class="inRow asperWidth"><li class="white_link">
+				 Hello <a  href="<?php echo HOME_URL; ?>form.php?class_name=user&mode=9&user_id=<?php echo $_SESSION['user_id']; ?>">
+					<?php echo $_SESSION['username'] . '!'; ?></a>
+				<li><a class="login_button"  href="<?php echo HOME_URL; ?>extensions/user/user_logout.php">Logout</a> </li>
+			 </ul>
+			<?php } else { ?>
+			 <ul class="inRow asperWidth">
+				<li class>
+				 <a class="login_button" href="<?php echo HOME_URL; ?>extensions/user/user_login.php#tabsLine-1">Sign In</a>
+				<li>
+				 <a class="login_button" href="<?php echo HOME_URL; ?>extensions/user/user_login.php#tabsLine-2">Register</a>
+				</li>
+			 </ul>
 
-		 <?php } ?>
+			<?php } ?>
+ 		</div>	
  	 </div>
- 	</div>
- 	<div id="header_bottom"></div>
-	 <?php // echo (!empty($header_bottom)) ? "<div id=\"header_bottom\"> $header_bottom </div>" : "" ;   ?>
+
+  	</div>
+  	<div id="header_bottom"></div>
 	<?php } ?>
-	<?php
-	global $path_access;
-//	echo '<br/>path_access is '. $path_access;
-	if ($path_access < 0) {
-	 die("<div class='error message'>You dont have access to this page! :  </dv>");
-	}
-	?>

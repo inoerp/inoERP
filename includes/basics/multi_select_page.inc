@@ -8,7 +8,45 @@ if (!empty($msg)) {
  $show_message .= '</div>';
 }
 ?>
+<script type="text/javascript">
+ $(document).ready(function() {
+	function beforeSave() {
+	 if (($('.action').first().val() === 'confirm_payment') || ($('.action').first().val() === 'confirm_receipt')) {
+		$('.line_id_cb').first().prop('checked', true);
+	 }
+	}
+	$('#multi_select').on('click', '#search_reset_btn', function(e) {
+	 e.preventDefault();
+	 $(this).closest('#searchForm').find('.search_form').find('input:text, select').each(function() {
+		$(this).val('');
+	 });
+	})
+	//multi select save
+	var line_key_field = $('input[type="checkbox"]').first().prop('name');
+	if (line_key_field) {
+	 line_key_field = line_key_field.replace(/\[]/g, " ");
+	}
+	var action_class = $('[name="multi_action_class"]').val();
+	var classSave = new saveMainClass();
+	classSave.json_url = 'form.php?class_name=' + action_class;
+	classSave.single_line = false;
+	classSave.line_key_field = line_key_field;
+	classSave.lineClassName = action_class;
+	if (($('.action').first().val() === 'convert_requisition') ||
+					($('.action').first().val() === 'sales_order_picking')) {
+	 classSave.allLineTogether = true;
+	 classSave.savingOnlyHeader = true;
+	 classSave.headerClassName = action_class;
+	}
+	classSave.saveMain(beforeSave);
+
+ });</script>
 <div id="all_contents">
+ <?php
+ if ($showBlock) {
+	echo " <div id='content_left'></div>";
+ }
+ ?>
  <div id="content_right">
 	<div id="content">
 	 <div id="main">
@@ -19,17 +57,29 @@ if (!empty($msg)) {
 			<div id="list_contents">
 			 <!--			Beginning of line form-->
 			 <div id ="form_line" class="multi_select_line">
-				<div id="searchForm"><?php echo!(empty($search_form)) ? $search_form : ""; ?></div>
+				<div id="searchForm"><?php
+				 echo!(empty($error_msg)) ? $error_msg : "";
+				 echo!(empty($search_form)) ? $search_form : "";
+				 ?>
+				</div>
 				<?php
-				echo '<h2 class="heading">'.$action_message.'</h2>';
+				echo '<h2 class="heading">' . ucwords(str_replace('_', ' ', $action_message)) . '</h2>';
 				if (empty($search_result)) {
+				 echo "	</div> 		 </div> 		</div>	 </div> 	</div>  </div> </div>";
+				 show_footer($showBlock);
 				 return;
 				}
 				?>
 				<div id="tabsLine">
 				 <ul class="tabMain">
 					<?php
-					if (property_exists($class, 'column')) {
+					if (property_exists($class, 'primary_column')) {
+					 $primary_column_v = $class::$primary_column;
+					}
+
+					if (property_exists($class, 'multi_select_column')) {
+					 $column_array = $$class->multi_select_column;
+					} else if (property_exists($class, 'column')) {
 					 $column_array = $$class->column;
 					} else {
 					 $column_array = $class::$column_array;
@@ -53,13 +103,14 @@ if (!empty($msg)) {
 							 if ($i == 0) {
 								echo "<th>Action</th>";
 							 }
+							 echo "<th>Seq#</th>";
 							 $new_start = ($i * ($no_of_columns_per_tab - 1)) + $i;
 							 $new_end = $new_start + ($no_of_columns_per_tab - 1);
 							 for ($j = $new_start; $j <= $new_end; $j++) {
 								if ($j > $total_columns - 1) {
 								 break;
 								}
-								echo '<th>' . $all_columns[$j] . '</th>';
+								echo '<th>' . ucwords(str_replace('_', ' ', $all_columns[$j])) . '</th>';
 							 }
 							 ?>
  						 </tr>
@@ -72,11 +123,16 @@ if (!empty($msg)) {
 							 <tr class="multi_select_value_line<?php echo $count ?>">
 								<?php
 								if ($i == 0) {
-								 echo "<td><input type=\"checkbox\" name=\"line_id_cb\" class=\"line_id_cb\"  value=\"\">";
-								 echo "<input type=\"hidden\" name=\"multi_action_class\" class=\"hidden multi_action_class\"  value=\"$class\">";
+								 if (isset($records->$primary_column_v)) {
+									$primary_column_val = $records->$primary_column_v;
+								 }
+								 echo "<td><input type=\"checkbox\" name=\"line_id_cb\" class=\"line_id_cb\"  value=\"$primary_column_val\">";
+								 echo "<input type=\"hidden\" name=\"multi_action_class\" class=\"hidden multi_action_class\"  value=\"$action_class\">";
 								 echo "<input type=\"hidden\" name=\"$header_id_name\" class=\"hidden $header_id_name\"  value=\"$header_id_value\">";
 								 echo "<input type=\"hidden\" name=\"action\" class=\"hidden action\"  value=\"$action_message\"></td>";
+								 echo!empty($hidden_field_stmt) ? $hidden_field_stmt : '';
 								}
+								echo "<td>$count</td>";
 								$new_start = ($i * ($no_of_columns_per_tab - 1)) + $i;
 								$new_end = $new_start + ($no_of_columns_per_tab - 1);
 								for ($k = $new_start; $k <= $new_end; $k++) {
@@ -127,21 +183,6 @@ if (!empty($msg)) {
 	</div>
  </div>
 </div>
-<script type="text/javascript">
- $(document).ready(function() {
-	//multi select save
-	var line_key_field = $('input[type="checkbox"]').first().prop('name');
-	line_key_field = line_key_field.replace(/\[]/g, " ");
-	var action_class = $('[name="action_class_name"]').val();
-	var calendarSave = new saveMainClass();
-	calendarSave.json_url = 'form.php?class_name=' + action_class;
-	calendarSave.single_line = false;
-	calendarSave.line_key_field = line_key_field;
-	calendarSave.lineClassName = action_class;
-	calendarSave.saveMain();
-	if (localStorage.getItem("jsfile")) {
-	 $.getScript(localStorage.getItem("jsfile"));
-	}
- });</script>
-
-<?php include_template('footer_simple.inc'); ?>
+<?php
+show_footer($showBlock);
+?>

@@ -2,7 +2,7 @@
 
 class fp_mrp_header extends dbObject {
 
- protected static $table_name = "fp_mrp_header";
+ public static $table_name = "fp_mrp_header";
  public static $primary_column = "fp_mrp_header_id";
  public static $key_column = 'mrp_name';
  public static $js_fileName = 'modules/fp/mrp/js/multi_select_mrp_v.js';

@@ -2,7 +2,7 @@
 
 class wip_material_transaction extends inv_transaction {
 
- protected static $table_name = "inv_transaction";
+ public static $table_name = "inv_transaction";
  public static $primary_column = "inv_transaction_id";
  public static $key_column = 'item_id';
  public static $module = "inv";

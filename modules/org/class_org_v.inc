@@ -2,7 +2,7 @@
 
 class org_v extends dbObject {
 
- protected static $table_name = "org_v";
+ public static $table_name = "org_v";
  public static $primary_column = "org_id";
  public static $key_column = 'org';
  public static $module = "org";

@@ -2,11 +2,23 @@
 
 class bom_routing_header extends dbObject {
 
- protected static $table_name = "bom_routing_header";
+ public static $table_name = "bom_routing_header";
  public static $dependent_classes = ['bom_routing_line', 'bom_routing_detail'];
  public static $primary_column = "bom_routing_header_id";
  public static $key_column = 'item_id';
  public static $module = "bom"; //same as gl_journal_source
+ public static $system_info = [
+		 'name' => 'Routing',
+		 'number' => '2407',
+		 'description' => 'Product Routings',
+		 'version' => '1.1.1.3',
+		 'db_version' => '1001',
+		 'mod_version' => '1.1.x-1.1',
+		 'dependent_class' => array('bom_routing_line','bom_routing_detail'),
+		 'primary_entity_cb' => '',
+		 'module_name' => 'bom',
+		 'weight' => 7
+ ];
  public $field_a = [
 		 'bom_routing_header_id',
 		 'item_id',

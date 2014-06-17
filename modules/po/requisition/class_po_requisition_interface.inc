@@ -2,7 +2,7 @@
 
 class po_requisition_interface extends dbObject {
 
- protected static $table_name = "po_requisition_interface";
+ public static $table_name = "po_requisition_interface";
  public static $primary_column = "po_requisition_interface_id";
  public static $key_column = 'bu_org_id';
  public static $module = "po";

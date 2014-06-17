@@ -2,7 +2,7 @@
 
 class inv_transaction extends dbObject {
 
- protected static $table_name = "inv_transaction";
+ public static $table_name = "inv_transaction";
  public static $primary_column = "inv_transaction_id";
  public static $key_column = 'item_id';
  public static $module = "inv";
@@ -31,6 +31,7 @@ class inv_transaction extends dbObject {
 		 'po_header_id',
 		 'po_line_id',
 		 'po_detail_id',
+		 'sd_so_line_id',
 		 'reason',
 		 'reference_type',
 		 'reference_key_name',
@@ -77,7 +78,7 @@ class inv_transaction extends dbObject {
 		 "document_type",
 		 "document_number",
 		 "reason",
-		 "reference",
+		 "reference_type",
 		 "created_by",
 		 "creation_date"];
  public $account = [
@@ -96,7 +97,7 @@ class inv_transaction extends dbObject {
 		 "transaction_type_id"
  ];
  public $requiredField = [
-		 "item_number",
+//		 "item_number",
 		 "uom_id",
 		 "quantity",
 		 "org_id",
@@ -128,6 +129,7 @@ class inv_transaction extends dbObject {
  public $po_header_id;
  public $po_line_id;
  public $po_detail_id;
+ public $sd_so_line_id;
  public $reason;
  public $reference_type;
  public $reference_key_name;
@@ -326,7 +328,7 @@ class inv_transaction extends dbObject {
 	return $journal_line_a;
  }
 
- private function _cretae_wipJournal_line_array($element_value_a, $wip_accounting_group_id, $dr_cr, $line_number = '999', $variance=false) {
+ private function _cretae_wipJournal_line_array($element_value_a, $wip_accounting_group_id, $dr_cr, $line_number = '999', $variance = false) {
 	$journal_line_a = [];
 	$wip_acg = new wip_accounting_group();
 	$wip_acg->findBy_id($wip_accounting_group_id);
@@ -395,6 +397,7 @@ class inv_transaction extends dbObject {
 	 case 6 :
 	 case 12 :
 	 case 13 :
+	 case 15 :
 		$onhand->setProperty('_from_org_id', $this->org_id);
 		$onhand->setProperty('_from_subinventory_id', $this->from_subinventory_id);
 		$onhand->setProperty('_from_locator_id', $this->from_locator_id);
@@ -405,7 +408,7 @@ class inv_transaction extends dbObject {
 		$journal_line_a = $this->_cretae_journal_line_array($element_value_a, $this->from_subinventory_id, 'cr', 1);
 		$line_number = 1;
 		if ($this->transaction_type_id == 6 || $this->transaction_type_id == 12 || $this->transaction_type_id == 13) {
-		  $line_number = 1;
+		 $line_number = 1;
 		 foreach ($journal_line_a as $journal_line) {
 			if ($journal_line['line_number'] > $line_number) {
 			 $line_number = $journal_line['line_number'];
@@ -419,6 +422,7 @@ class inv_transaction extends dbObject {
 		 $wip_journal_line_a = $this->_cretae_wipJournal_line_array($element_value_a, $wip_accounting_group_id, 'dr', $line_number);
 		 $journal_line_a = array_merge($journal_line_a, $wip_journal_line_a);
 		}
+		//form misc issue - debit the entered account
 		if ($this->transaction_type_id == 1) {
 		 $total_amount = 0;
 		 $line_number = 1;
@@ -433,6 +437,27 @@ class inv_transaction extends dbObject {
 			$journal_line['line_number'] = $line_number;
 			$journal_line['amount'] = $total_amount;
 			$journal_line['account_id'] = $this->account_id;
+			$journal_line['dr_cr'] = 'dr';
+			array_push($journal_line_a, $journal_line);
+		 }
+		}
+//for SO Shipment Debit the COGS account
+		if ($this->transaction_type_id == 15) {
+		 $inv = new inventory();
+		 $inv_i = $inv->findBy_org_id($this->org_id);
+		 $total_amount = 0;
+		 $line_number = 1;
+		 foreach ($journal_line_a as $journal_line) {
+			$total_amount += $journal_line['amount'];
+			if ($journal_line['line_number'] > $line_number) {
+			 $line_number = $journal_line['line_number'];
+			}
+		 }
+		 $line_number++;
+		 if (!empty($total_amount)) {
+			$journal_line['line_number'] = $line_number;
+			$journal_line['amount'] = $total_amount;
+			$journal_line['account_id'] = $inv_i->cogs_ac_id;
 			$journal_line['dr_cr'] = 'dr';
 			array_push($journal_line_a, $journal_line);
 		 }
@@ -503,7 +528,7 @@ class inv_transaction extends dbObject {
 		 //get journal lines from wip
 		 $woh = new wip_wo_header();
 		 $woh->findBy_id($this->wip_wo_header_id);
-			 $wip_accounting_group_id = $woh->wip_accounting_group_id;
+		 $wip_accounting_group_id = $woh->wip_accounting_group_id;
 		 $wip_journal_line_a = $this->_cretae_wipJournal_line_array($element_value_a, $wip_accounting_group_id, 'cr', $line_number);
 		 $journal_line_a = array_merge($journal_line_a, $wip_journal_line_a);
 		}
@@ -530,6 +555,7 @@ class inv_transaction extends dbObject {
 		break;
 
 	 case 3 :
+	 case 14 :
 		$onhand->setProperty('_from_subinventory_id', $this->from_subinventory_id);
 		$onhand->setProperty('_from_locator_id', $this->from_locator_id);
 		$onhand->setProperty('_to_subinventory_id', $this->to_subinventory_id);
@@ -556,7 +582,7 @@ class inv_transaction extends dbObject {
 
 	if ($update_result > 0) {
 	 $this->_save_journal_header();
-	 pa($journal_line_a);
+//	 pa($journal_line_a);
 	 foreach ($journal_line_a as $journal_lines) {
 		$this->_save_journal_lines($journal_lines);
 	 }

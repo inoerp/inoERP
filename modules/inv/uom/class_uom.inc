@@ -2,7 +2,7 @@
 
 class uom extends dbObject {
 
- protected static $table_name = "uom";
+ public static $table_name = "uom";
  public static $primary_column = "uom_id";
  public static $key_column = 'uom_name';
  public static $module = "inv";

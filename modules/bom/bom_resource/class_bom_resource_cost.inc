@@ -2,7 +2,7 @@
 
 class bom_resource_cost extends dbObject {
 
- protected static $table_name = "bom_resource_cost";
+ public static $table_name = "bom_resource_cost";
  public static $primary_column = "bom_resource_cost_id";
  public static $parent_primary_column = "bom_resource_id";
  public static $key_column = 'bom_resource_id';

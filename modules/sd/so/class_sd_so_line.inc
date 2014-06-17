@@ -2,7 +2,7 @@
 
 class sd_so_line extends dbObject {
 
- protected static $table_name = "sd_so_line";
+ public static $table_name = "sd_so_line";
  public static $primary_column = "sd_so_line_id";
  public static $parent_primary_column = "sd_so_header_id";
  public static $key_column = 'line_number';
@@ -30,6 +30,8 @@ class sd_so_line extends dbObject {
 		 'unit_price',
 		 'line_price',
 		 'reference_doc_type',
+		 'tax_code_id',
+		 'tax_amount',
 		 'reference_doc_number',
 		 "ef_id",
 		 "created_by",
@@ -59,7 +61,8 @@ class sd_so_line extends dbObject {
  public $fields_inForm_notInDataBase = [
 		 "so_number",
 		 "item_number",
-		 'actual_ship_date'
+		 'actual_ship_date',
+		 'tax_code_value'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
 		 "sd_so_header_id"
@@ -77,6 +80,8 @@ class sd_so_line extends dbObject {
  public $shipped_quantity;
  public $unit_price;
  public $line_price;
+ public $tax_code_id;
+ public $tax_amount;
  public $reference_doc_type;
  public $reference_doc_number;
  public $ef_id;
@@ -96,6 +101,7 @@ class sd_so_line extends dbObject {
  public $time;
  public $msg;
  public $item_number;
+ public $tax_code_value;
 
  public function _before_save() {
 	if (!(empty($this->shipping_org_id))) {
@@ -121,15 +127,15 @@ class sd_so_line extends dbObject {
 	
  }
 
- public function findAll_ByOrgId($org_id, $status='') {
+ public function findAll_ByOrgId($org_id, $status = '') {
 	$sql = " SELECT * FROM " .
 					self::$table_name .
 					" WHERE shipping_org_id= :shipping_org_id  ";
-	if(!empty($status)){
+	if (!empty($status)) {
 	 $sql .= " AND line_status = :line_status ";
 	 $value_a = ['shipping_org_id' => $org_id, 'line_status' => $status];
-	}else{
-	$value_a = ['shipping_org_id' => $org_id];
+	} else {
+	 $value_a = ['shipping_org_id' => $org_id];
 	}
 	$result_array = $this->findBySql($sql, $value_a);
 	return !empty($result_array) ? $result_array : false;

@@ -4,7 +4,7 @@ class gl_ledger_balancing_values extends dbObject {
 
 //protected static variables
  public static $module = "gl";
- protected static $table_name = "gl_ledger_balancing_values";
+ public static $table_name = "gl_ledger_balancing_values";
   public static $parent_primary_column = "gl_ledger_id";
 //protected variables
 //public static varibales - required to be accessed with out intantiating the class

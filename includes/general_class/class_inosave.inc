@@ -28,33 +28,53 @@ class inosave extends dbc {
  private function save_class($class) {
 	global $ie;
 	$cc = new coa_combination();
+	if (!isset($item)) {
+	 $item = new item();
+	}
 	$count = 0;
 	$coa_id = 1;
 	for ($i = 0; $i < count($_POST[$this->_key_field]); $i++) {
 	 $$class = new $class;
-	 if (property_exists($class, 'field_a')) {
-		$field_array = $$class->field_a;
-	 } else {
-		$field_array = $class::$field_array;
-	 }
-
-	 foreach ($field_array as $key => $value) {
-		if (!empty($_POST[$value][$i])) {
-		 $$class->$value = $_POST[$value][$i];
+	 if (property_exists($$class, 'parent_primary_column')) {
+		$parent_primary_column = $class::$parent_primary_column;
+		if ((!empty($parent_primary_column)) && (empty($_POST[$parent_primary_column][0]))) {
+//		 echo "<br>Existing save as no value of $parent_primary_column found! @inosave ".__LINE__;
+		 return;
 		}
 	 }
 
+	 if (property_exists($$class, 'field_a')) {
+		$field_array = $$class->field_a;
+	 }
+	 if (property_exists($$class, 'notUpdatedFromWebForm')) {
+		$field_array = $$class->field_a;
+		foreach ($$class->notUpdatedFromWebForm as $key_nu => $valye_nu) {
+		 if (($key = array_search($valye_nu, $$class->field_a)) !== false) {
+			unset($$class->field_a[$key]);
+		 }
+		}
+	 }
+
+	 foreach ($$class->field_a as $key => $value) {
+		if (isset($_POST[$value][$i])) {
+		 $$class->$value = $_POST[$value][$i];
+		}
+	 }
 	 //check if its multi action data
 	 if (!empty($_POST['multi_action_class'][$i])) {
 		$multi_action_class = $_POST['multi_action_class'][$i];
 		$multi_action_class_primary_column = $multi_action_class::$primary_column;
 		$$class->multi_action_class = $multi_action_class;
-		if(property_exists($$class, 'multi_action_class_pc')){
-		$$class->multi_action_class_pc = $multi_action_class_primary_column;
-		}else{
+		if (property_exists($$class, 'multi_action_class_pc')) {
+		 $$class->multi_action_class_pc = $multi_action_class_primary_column;
+		} else {
 		 $$class->multi_action_class_pc = $multi_action_class_primary_column;
 		}
-		$$class->multi_action_class_pc_value = $_POST[$$class->multi_action_class_pc][$i];
+		if (!empty($_POST[$$class->multi_action_class_pc][$i])) {
+		 $$class->multi_action_class_pc_value = $_POST[$$class->multi_action_class_pc][$i];
+		} else {
+		 $$class->multi_action_class_pc_value = null;
+		}
 	 }
 
 	 //fields in form not in databse is used bring in values from one field and set to another field in _before_save
@@ -70,7 +90,7 @@ class inosave extends dbc {
 	 }
 
 	 if ((empty($_POST['item_id'][$i])) && (!empty($_POST['item_number'][$i])) && (!empty($_POST['org_id']))) {
-		$$class->item_id = item::find_item_id_from_itemNumber_OrgId($_POST['item_number'][$i], $_POST['org_id']);
+		$$class->item_id = $item->findBy_itemNumber_OrgId($_POST['item_number'][$i], $_POST['org_id']);
 	 }
 
 	 if (!empty($$class->account)) {
@@ -119,7 +139,7 @@ class inosave extends dbc {
 
 	 if (!empty($$class->numberField)) {
 		foreach ($$class->numberField as $key => $value) {
-		 if (!empty($_POST[$value][$i])) {
+		 if (isset($_POST[$value][$i])) {
 			$$class->$value = str_replace(array(','), '', $_POST[$value][$i]);
 		 } else {
 			$$class->$value = NUll;
@@ -188,19 +208,21 @@ class inosave extends dbc {
 
 	 /* if before save is less than zero then exist save
 		* if its -99 then show the error message else exist w/o showing any error
+		* 10 means all the data are update and leave save.
+		* Normall return (1,2 or w/o value), completes the after save and then proceed to save
 		*/
 
 	 if (method_exists($$class, '_before_save')) {
-			$before_save_result = $$class->_before_save();
+		$before_save_result = $$class->_before_save();
 		if ($before_save_result < 0) {
 		 if ($before_save_result == -99) {
 			echo "<br> This action is not allowed " . $class . ' : _before_save() ';
 		 }
 		 return;
-		}else if ($before_save_result == 10) {
-			echo "<br> All data are sucessfully saved @ before save "; //before save completed all activities
-			return;
-		 }
+		} else if ($before_save_result == 10) {
+		 echo "<br> All data are sucessfully saved @ before save "; //before save completed all activities
+		 return;
+		}
 	 }
 
 	 $time = time();
@@ -212,25 +234,28 @@ class inosave extends dbc {
 	 }
 	 $$class->last_update_date = $$class->creation_date;
 	 $$class->last_update_by = $$class->created_by;
+//  echo "<br> in Save";	 pa($$class);
 	 $required_field_flag = true;
 	 foreach ($$class->requiredField as $key => $value) {
-		$required_field_flag = $required_field_flag && (!empty($$class->$value));
-		if (empty($$class->$value)) {
+		$required_field_flag = $required_field_flag && (isset($$class->$value));
+		if (!isset($$class->$value)) {
+//		 pa($$class);
 		 echo "<div class='message'> Mandatory $value is missing </div> ";
 		 $error = [ 'Mandatory field is missing!' => "$value is NULL"];
 		 array_push($ie->page_exception, $error);
 		}
 	 }
 
+//pa($$class);
 	 if ($required_field_flag) {
 		try {
-		 $result = $$class->save();
+		 $result = $$class->save_onWebForm();
 		 $error = [ 'Save result :!' => $result];
 		 array_push($ie->message, $error);
 		 $new_entry = true;
 		} catch (Exception $e) {
 		 $new_entry = false;
-		 $$ie->page_exception = ['dbObject findBy id Error : ' => $e->getMessage()];
+		 echo "<br> Save failed!! error@inosavel line " . __LINE__ . '<br>' . $e->getMessage();
 		}
 		if ($new_entry) {
 		 if (method_exists($$class, '_after_save')) {
@@ -243,13 +268,15 @@ class inosave extends dbc {
 			 $file_reference->status = 'show';
 			 $file_reference->reference_table = $class;
 			 $file_reference->reference_id = $$class->{$class::$primary_column};
-			 $file_reference->save();
+			 $file_reference->save_onWebForm();
 			}
 		 }
 //delete files
 		 if (!empty($_POST['delete_file'])) {
+			 $fr = new file_reference();
 			foreach ($_POST['delete_file'] as $key => $file_reference_id) {
-			 file_reference::delete($file_reference_id);
+		 $fr->file_reference_id = $file_reference_id;
+			 $fr->delete();
 			}
 		 }
 //hide files..change status to hide
@@ -264,7 +291,7 @@ class inosave extends dbc {
 			 }
 			 $file_reference->status = 'hide';
 			}
-			$file_reference->save();
+			$file_reference->save_onWebForm();
 		 }
 
 //     add Categories in categoegory reference table
@@ -287,7 +314,7 @@ class inosave extends dbc {
 				if ($values == 'remove') {
 				 $category_reference->delete($category_reference->category_reference_id);
 				} else {
-				 $category_reference->save();
+				 $category_reference->save_onWebForm();
 				}
 			 }
 			}
@@ -311,9 +338,9 @@ class inosave extends dbc {
 	$primaryColumn2 = $this->_primary_column2;
 	$postArray = get_postArray_From_jqSearializedArray($_POST['headerData']);
 	$_POST = $postArray;
-	if ($class == 'user') {
-	 $_POST = user::user_verification_update($_POST);
-	}
+//	if ($class == 'user') {
+//	 $_POST = $$class->user_verification_update($_POST);
+//	}
 
 	if (!empty($_POST)) {
 	 $$class = $this->save_class($class);
@@ -336,7 +363,7 @@ class inosave extends dbc {
 	} else {
 	 global $ie_array_page;
 	 global $ie;
-	 echo '<div class="message"> Error Code - Inosave02! </div> ';
+	 echo '<div class="message"> Action Completed - Inosave02! </div> ';
 	 if (!empty($ie_array_page)) {
 		echo $ie->show_pageErrors($ie_array_page);
 	 }
@@ -351,7 +378,6 @@ class inosave extends dbc {
 	$keyField = $this->_key_field;
 	$primaryColumn = $this->_primary_column;
 	$postArray = get_postArray_From_jqSearializedArray($linedata);
-
 	$_POST = $postArray;
 //	echo 'key $class '.$class . '<pre>'; print_r($_POST);
 	if ((!empty($_POST[$keyField])) && (!empty($_POST[$keyField][0]))) {
@@ -405,7 +431,9 @@ class inosave extends dbc {
 		$_POST = $postArray;
 		if ((!empty($_POST[$keyField])) && (!empty($_POST[$keyField][0]))) {
 		 $$class = $this->save_class($class);
-		 $$primaryColumn = $$class->$primaryColumn;
+		 if (!empty($$class->$primaryColumn)) {
+			$$primaryColumn = $$class->$primaryColumn;
+		 }
 
 		 if ((!empty($$class)) && (count($$class) > 1)) {
 			echo '<div class="message">Data is sucessfully saved! </div>';
@@ -428,7 +456,9 @@ class inosave extends dbc {
 
 		 if ((!empty($_POST[$keyField2])) && (!empty($_POST[$keyField2][0]))) {
 			$detail_lineID_array = [];
-			array_push($detail_lineID_array, $$class->$primaryColumn);
+			if (!empty($$class->$primaryColumn)) {
+			 array_push($detail_lineID_array, $$class->$primaryColumn);
+			}
 			$_POST[$primaryColumn] = $detail_lineID_array;
 			$this->_key_field = $keyField2;
 			$$detail_classname = $this->save_class($detail_classname);

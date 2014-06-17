@@ -1,8 +1,6 @@
 <?php include_once("../../include/basics/basics.inc"); ?>
 <?php
-//  echo '<pre>';
-//  print_r($_POST);
-//  echo '<pre>';
+$dont_check_login = true;
 
 $msg = array();
 $extension = "comment";

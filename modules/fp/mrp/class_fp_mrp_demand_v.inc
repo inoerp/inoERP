@@ -2,7 +2,7 @@
 
 class fp_mrp_demand_v extends dbObject {
 
- protected static $table_name = "fp_mrp_demand_v";
+ public static $table_name = "fp_mrp_demand_v";
  public static $primary_column = "fp_mrp_demand_id";
  public static $key_column = 'item_id';
  public static $module = "fp";

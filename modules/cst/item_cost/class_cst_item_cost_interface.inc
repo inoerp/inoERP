@@ -2,7 +2,7 @@
 
 class cst_item_cost_interface extends dbObject {
 
- protected static $table_name = "cst_item_cost_interface";
+ public static $table_name = "cst_item_cost_interface";
  public static $primary_column = "cst_item_cost_interface_id";
  public static $key_column = 'ar_customer_id';
  public static $module = "ap"; //same as gl_journal_source

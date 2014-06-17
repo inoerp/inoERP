@@ -1,5 +1,6 @@
 function setValFromSelectPage(sd_so_header_id, combination, ar_customer_id, customer_number, customer_name,
-				item_id, item_number, item_description, uom_id) {
+				item_id, item_number, item_description, uom_id, address_id, address_name, address,
+				country, postal_code) {
  this.sd_so_header_id = sd_so_header_id;
  this.combination = combination;
  this.ar_customer_id = ar_customer_id;
@@ -9,6 +10,11 @@ function setValFromSelectPage(sd_so_header_id, combination, ar_customer_id, cust
  this.item_number = item_number;
  this.item_description = item_description;
  this.uom_id = uom_id;
+ this.address_id = address_id;
+ this.address_name = address_name;
+ this.address = address;
+ this.country = country;
+ this.postal_code = postal_code;
 
 }
 
@@ -22,8 +28,31 @@ setValFromSelectPage.prototype.setVal = function() {
  var item_number = this.item_number;
  var item_description = this.item_description;
  var uom_id = this.uom_id;
+ var address_id = this.address_id;
+ var address_name = this.address_name;
+ var address = this.address;
+ var country = this.country;
+ var postal_code = this.postal_code;
+
  var rowClass = '.' + localStorage.getItem("row_class");
  var fieldClass = '.' + localStorage.getItem("field_class");
+ var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass");
+ addressPopupDivClass = addressPopupDivClass.replace(/\s+/g, '.');
+ if (address_id) {
+	$('#form_header').find(addressPopupDivClass).find('.address_id').val(address_id);
+ }
+  if (address_name) {
+	$('#form_header').find(addressPopupDivClass).find('.address_name').val(address_name);
+ }
+  if (address) {
+	$('#form_header').find(addressPopupDivClass).find('.address').val(address);
+ }
+  if (country) {
+	$('#form_header').find(addressPopupDivClass).find('.country').val(country);
+ }
+  if (postal_code) {
+	$('#form_header').find(addressPopupDivClass).find('.postal_code').val(postal_code);
+ }
  if (sd_so_header_id) {
 	$("#sd_so_header_id").val(sd_so_header_id);
  }
@@ -55,7 +84,8 @@ setValFromSelectPage.prototype.setVal = function() {
  }
 
  localStorage.removeItem("row_class");
- localStorage.removeItem("row_class");
+ localStorage.removeItem("field_class");
+ localStorage.removeItem("addressPopupDivId");
 
 };
 
@@ -82,23 +112,6 @@ $(document).ready(function() {
 // $('.promise_date:first').datepicker("setDate", new Date());
 
 
- //default quantity
- $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function() {
-	var lineQuantity = $(this).closest('tr').find('.line_quantity:first').val();
-	if (!$(this).closest("td").find(".quantity:first").val())
-	{
-	 $(this).closest("td").find(".quantity:first").val(lineQuantity);
-	}
- });
-
-//set the line price
- $('#content').on('focusout', '.unit_price,.line_quantity', function() {
-	var unitPrice = $(this).val();
-	var trClass = '.' + $(this).closest('tr').attr('class');
-	var lineQuantity = ($(this).closest('.tabContainer').find(trClass).find('.line_quantity').val());
-	var linePrice = unitPrice * lineQuantity;
-	$(this).closest('tr').find('.line_price').val(linePrice);
- });
 
 //get customer details
  $("#ar_customer_id, #customer_name, #customer_number").on("focusout", function() {
@@ -124,8 +137,17 @@ $(document).ready(function() {
  });
 
 
-//item number auto complete and populate the other details
-// itemNumber_autoComplete('modules/inv/item/item_search.php');
+//get tax code
+ $('#content').on('change', '.shipping_org_id', function() {
+	var org_id = $(this).val();
+	var trClass = '.' + $(this).closest('tr').prop('class');
+	getTaxCodes('modules/mdm/tax_code/json_tax_code.php', org_id, 'OUT', trClass);
+ });
+
+// $('#content').on('change', 'input', function() {
+//	var trClass = '.' + $(this).closest('tr').prop('class');
+//	$('#content').find(trClass).find('input[name="line_id_cb"]').prop('checked', true);
+// });
 
  //Coa auto complete
  var coaCombination = new autoCompleteMain();
@@ -161,24 +183,24 @@ $(document).ready(function() {
  });
 
 //popu for selecting items
- $('#content').on('click', '.select_item_number.select_popup', function() {
-	var rowClass = $(this).closest('tr').prop('class');
-	var fieldClass = $(this).closest('td').find('.select_item_number').prop('class');
-	localStorage.setItem("row_class", rowClass);
-	localStorage.setItem("field_class", fieldClass);
-	var openUrl = 'select.php?class_name=item';
-	if ($(this).siblings('.code_combination_id').val()) {
-	 openUrl += '&item_number=' + $(this).siblings('.item_number').val();
-	}
-	void window.open(openUrl, '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
+// $('#content').on('click', '.select_item_number.select_popup', function() {
+//	var rowClass = $(this).closest('tr').prop('class');
+//	var fieldClass = $(this).closest('td').find('.select_item_number').prop('class');
+//	localStorage.setItem("row_class", rowClass);
+//	localStorage.setItem("field_class", fieldClass);
+//	var openUrl = 'select.php?class_name=item';
+//	if ($(this).siblings('.code_combination_id').val()) {
+//	 openUrl += '&item_number=' + $(this).siblings('.item_number').val();
+//	}
+//	void window.open(openUrl, '_blank',
+//					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+// });
 
  //Popup for selecting address 
  $(".address_popup").click(function() {
-	localStorage.addressPopupDivId = $(this).parent().siblings().first().attr("id");
-	;
-	void window.open('../../select.php?class_name=address', '_blank',
+	var addressPopupDivClass = $(this).closest('div').prop('class');
+	localStorage.setItem("addressPopupDivClass", addressPopupDivClass);
+	void window.open('select.php?class_name=address', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
 	return false;
  });
@@ -233,11 +255,6 @@ $(document).ready(function() {
 	});
  }
 
- copy_line_to_details();
-
-
-
-
  $("#content").on("click", ".add_row_img", function() {
 //	add_new_row('tr.so_line0', 'tbody.form_data_line_tbody', 3);
 	var addNewRow = new add_new_rowMain();
@@ -259,19 +276,27 @@ $(document).ready(function() {
  });
 
  //context menu
+ function beforeContextMenu() {
+	$('.line_status').val('');
+	$('.picked_quantity').val('');
+	$('.shipped_quantity').val('');
+	$('.schedule_ship_date').val('');
+	$('#so_number').val('');
+	return true;
+ }
+
  var classContextMenu = new contextMenuMain();
- classContextMenu.docHedaderId = 'so_header_id';
- classContextMenu.docLineId = 'so_line_id';
+ classContextMenu.docHedaderId = 'sd_so_header_id';
+ classContextMenu.docLineId = 'sd_so_line_id';
  classContextMenu.btn1DivId = 'so_header';
  classContextMenu.btn2DivId = 'form_line';
  classContextMenu.trClass = 'so_line';
  classContextMenu.tbodyClass = 'form_data_line_tbody';
- classContextMenu.noOfTabbs = 3;
- //classContextMenu.contextMenu();
+ classContextMenu.beforeCopy = beforeContextMenu;
+ classContextMenu.noOfTabbs = 4;
+ classContextMenu.contextMenu();
 
-//get the attachement form
-// get_attachment_form('../../extensions/file/json.file.php');
-// deleteData('json.po.php');
+
  var classSave = new saveMainClass();
  classSave.json_url = 'form.php?class_name=sd_so_header';
  classSave.form_header_id = 'so_header';
@@ -283,4 +308,72 @@ $(document).ready(function() {
  classSave.headerClassName = 'sd_so_header';
  classSave.lineClassName = 'sd_so_line';
  classSave.saveMain();
+
+ //default quantity
+ $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function() {
+	var lineQuantity = $(this).closest('tr').find('.line_quantity:first').val();
+	if (!$(this).closest("td").find(".quantity:first").val())
+	{
+	 $(this).closest("td").find(".quantity:first").val(lineQuantity);
+	}
+ });
+
+//set the line price
+ $('#content').on('change', '.unit_price,.line_quantity', function() {
+	var unitPrice = $(this).val();
+	var trClass = '.' + $(this).closest('tr').attr('class');
+	var lineQuantity = ($(this).closest('.tabContainer').find(trClass).find('.line_quantity').val());
+	var linePrice = unitPrice * lineQuantity;
+	$(this).closest('tr').find('.line_price').val(linePrice);
+ });
+
+//calculate the tax amount
+ $('#content').on('change', '.line_quantity, .unit_price, .line_price', function() {
+	var trClass = '.' + $(this).closest('tr').prop('class');
+	var linePrice = +$('#content').find(trClass).find('.line_price').val();
+	var taxCodeVal = 0;
+	if ($('#content').find(trClass).find('.tax_code_value').val()) {
+	 taxCodeVal = $('#content').find(trClass).find('.tax_code_value').val();
+	} else if ($('#content').find(trClass).find('.output_tax').find('option:selected').prop('class')) {
+	 taxCodeVal = $('#content').find(trClass).find('.output_tax').find('option:selected').prop('class');
+	}
+
+	if (taxCodeVal.length >= 3) {
+	 var taxCodeVal_a = taxCodeVal.split('_');
+	} else {
+	 return;
+	}
+	var taxAmount = 0;
+	var taxPercentage = 0;
+	if (taxCodeVal_a[0] === 'p') {
+	 taxPercentage = +taxCodeVal_a[1];
+	} else if (taxCodeVal_a[0] === 'a') {
+	 taxAmount = +taxCodeVal_a[1];
+	}
+	var taxValue = 0;
+	if (taxPercentage) {
+	 taxValue = ((taxPercentage * linePrice) / 100).toFixed(5);
+	} else if (taxAmount) {
+	 taxValue = taxAmount.toFixed(5);
+	}
+
+	$('#content').find(trClass).find('.tax_amount').val(taxValue);
+ });
+
+//total header & tax amount
+ $('#content').on('change', '.line_quantity, .unit_price, .line_price, .tax_amount', function() {
+	var total_tax = 0;
+	$('#form_line').find('.tax_amount').each(function() {
+	 total_tax += (+$(this).val());
+	 $('#tax_amount').val(total_tax);
+	});
+
+	var header_amount = 0;
+	$('#form_line').find('.line_price').each(function() {
+	 header_amount += (+$(this).val());
+	 $('#header_amount').val(header_amount);
+	});
+ });
+
 });
+

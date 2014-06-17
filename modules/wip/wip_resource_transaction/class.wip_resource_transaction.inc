@@ -2,7 +2,7 @@
 
 class wip_resource_transaction extends dbObject {
 
- protected static $table_name = "wip_resource_transaction";
+ public static $table_name = "wip_resource_transaction";
  public static $dependent_classes = ['wip_wo_bom', 'wip_wo_routing_line', 'wip_wo_routing_detail'];
  public static $primary_column = "wip_resource_transaction_id";
  public static $key_column = 'wip_wo_routing_detail_id';

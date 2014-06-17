@@ -2,7 +2,7 @@
 
 class enterprise extends org {
 
- protected static $table_name = "enterprise";
+ public static $table_name = "enterprise";
  public static $primary_column = "enterprise_id";
  public static $key_column = 'org_id';
  public static $module = "org"; //same as gl_journal_source

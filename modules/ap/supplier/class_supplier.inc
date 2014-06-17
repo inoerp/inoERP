@@ -2,13 +2,25 @@
 
 class supplier extends dbObject {
 
- protected static $table_name = "supplier";
+ public static $table_name = "supplier";
  public static $dependent_classes = ['supplier_site'];
  public static $primary_column = "supplier_id";
  public static $key_column = 'supplier_name';
  public static $module = "ap";
  public $checkbox = [
 		 "rev_enabled_cb"
+ ];
+ public static $system_info = [
+		 'name' => 'Supplier',
+		 'number' => '1201',
+		 'description' => 'Define and mainten external/internal suppliers',
+		 'version' => '1.1.1.3',
+		 'db_version' => '1001',
+		 'mod_version' => '1.1.x-1.1',
+		 'dependent_class' => array('supplier_site', 'supplier_all_v', 'supplier_bu'),
+		 'primary_entity_cb' => '',
+		 'module_name' => 'ap',
+		 'weight' => 1
  ];
  public $field_a = [
 		 "supplier_id",
@@ -54,6 +66,12 @@ class supplier extends dbObject {
  public $addressField = [
 		 "address_id"
  ];
+ public $fields_inForm_notInDataBase = [
+		 'header_address_name',
+		 'header_address',
+		 'header_country',
+		 'header_postal_code',
+ ];
  public $search = [
 		 '_update_path' => 'form.php?class_name=supplier',
 		 '_show_update_path' => 1,
@@ -84,6 +102,10 @@ class supplier extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
+ public $header_address_name;
+ public $header_address;
+ public $header_country;
+ public $header_postal_code;
 
  Public static function supplier_types() {
 	$option_header = option_header::find_by_name('SUPPLIER_TYPE');
@@ -101,6 +123,17 @@ class supplier extends dbObject {
 	$option_header = option_header::find_by_name('PO_RECEIPT_ROUTING');
 	$po_receipt_routing = option_line::find_by_option_id($option_header->option_header_id);
 	return $po_receipt_routing;
+ }
+
+ public function _before_showing() {
+	$address = new address();
+	if (!empty($this->address_id)) {
+	 $address->findBy_id($this->address_id);
+	 $this->header_address_name = $address->address_name;
+	 $this->header_address = $address->address;
+	 $this->header_country = $address->country;
+	 $this->header_postal_code = $address->postal_code;
+	}
  }
 
  public static function find_by_supplier_number($supplier_number) {

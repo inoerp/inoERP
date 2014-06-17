@@ -2,11 +2,24 @@
 
 class bom_header extends dbObject {
 
- protected static $table_name = "bom_header";
+ public static $table_name = "bom_header";
  public static $primary_column = "bom_header_id";
  public static $dependent_classes = ['bom_line'];
  public static $key_column = 'item_id';
  public static $module = "bom";
+  public static $system_info = [
+		 'name' => 'BOM',
+		 'number' => '2410',
+		 'description' => 'Define and mainten bill of materials',
+		 'version' => '1.1.1.3',
+		 'db_version' => '1001',
+		 'mod_version' => '1.1.x-1.1',
+		 'dependent_class' => array('bom_line', 'bom_all_v'),
+		 'primary_entity_cb' => '',
+		 'module_name' => 'bom',
+		 'weight' => '10'
+ ];
+	
  public $field_a = [
 		 'bom_header_id',
 		 'item_id',

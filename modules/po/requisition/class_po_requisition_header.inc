@@ -2,12 +2,24 @@
 
 class po_requisition_header extends dbObject {
 
- protected static $table_name = "po_requisition_header";
+ public static $table_name = "po_requisition_header";
  public static $dependent_classes = ['po_requisition_line', 'po_requisition_detail'];
  public static $primary_column = "po_requisition_header_id";
  public static $primary_column2 = "po_requisition_number";
  public static $key_column = 'bu_org_id';
  public static $module = "po";
+      public static $system_info = [
+		 'name' => 'Purchaing Requisition',
+					'number' => '2211',
+		 'description' => 'Create & Mainten Purchaing Requisition',
+		 'version' => '1.1.1.3',
+		 'db_version' => '1001',
+		 'mod_version' => '1.1.x-1.1',
+		 'dependent_class' => array('po_requisition_line','po_requisition_detail'),
+		 'primary_entity_cb' => '',
+		 'module_name' => 'po',
+		 'weight' => 3
+ ];
  public $checkbox = [
 		 "rev_enabled_cb"
  ];

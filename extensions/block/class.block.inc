@@ -2,9 +2,13 @@
 
 class block extends dbObject {
 
- protected static $table_name = "block";
+ public static $table_name = "block";
+ public static $primary_column = "block_id";
+ public static $key_column = "title";
+ public static $dependent_classes = ['block_content'];
+ public static $module = "extension";
 //  data base variables as stored database column name
- public static $field_array = [
+ public $field_a = [
 		 "block_id",
 		 "title",
 		 "show_title_cb",
@@ -13,6 +17,8 @@ class block extends dbObject {
 		 "reference_table",
 		 "name",
 		 "enabled_cb",
+		 'cached_cb',
+		 'restrict_to_role',
 		 "visibility",
 		 "visibility_option",
 		 'visibility_php_cb',
@@ -23,14 +29,15 @@ class block extends dbObject {
 		 "last_update_by",
 		 "last_update_date"
  ];
- public static $base_encoded_array = ["visibility"];
+ public $base_encoded_array = ["visibility"];
  //variables used for showing data
 
- public static $checkbox_array = [
+ public $checkbox = [
 		 "show_title_cb",
 		 "enabled_cb",
 		 "rev_enabled_cb",
-		 'visibility_php_cb'
+		 'visibility_php_cb',
+		 'cached_cb'
  ];
  public static $position_array = [
 		 "header_top" => 'header_top',
@@ -44,18 +51,40 @@ class block extends dbObject {
 		 "footer_top" => "footer_top",
 		 "footer_bottom" => "footer_bottom"
  ];
- public static $column_array = [];
- public static $requiredField_array = [
+ public $requiredField = [
 		 "title",
 		 "position",
 		 "reference_table"
  ];
  public static $visibility_option_array = [
 		 1 => "show",
-		 2 =>" hide",
-		 3 => "custom code" 
+		 2 => " hide",
+		 3 => "custom code"
  ];
- public static $primary_column = "block_id";
+ public $initial_search = [
+		 "block_id",
+		 "title",
+		 "reference_table",
+		 "name"
+ ];
+ public $column = [
+		 "block_id",
+		 "title",
+		 "show_title_cb",
+		 "position",
+		 "weight",
+		 "reference_table",
+		 "name",
+ ];
+ public $pageTitle = " Block ";
+ public $search = [
+		 '_update_path' => 'form.php?class_name=block&custom_block=1',
+		 '_show_update_path' => 1,
+		 '_update_action_meassge' => 'Update',
+		 '_view_path' => 'form.php?class_name=block&custom_block=1',
+		 '_show_view_path' => 1,
+		 '_view_action_meassge' => 'View',
+ ];
  public $block_id;
  public $title;
  public $show_title_cb;
@@ -64,6 +93,8 @@ class block extends dbObject {
  public $reference_table;
  public $name;
  public $enabled_cb;
+ public $cached_cb;
+ public $restrict_to_role;
  public $rev_enabled_cb;
  public $visibility_option;
  public $visibility;
@@ -84,7 +115,6 @@ class block extends dbObject {
  }
 
  public function _after_save() {
-
 	global $db;
 	if ((!empty($_POST['content'][0])) && (!empty($this->block_id))) {
 	 $block_content = new block_content;
@@ -126,6 +156,21 @@ class block extends dbObject {
 	return $result;
  }
 
+ public function findALL_OrderBy_positionWeight() {
+	$sql = " SELECT * FROM ";
+	$sql .= self::$table_name;
+	$sql .= " ORDER BY position, weight";
+	$result = $this->findBySql($sql);
+	return !empty($result) ? $result : false;
+ }
+ 
+ public function findBy_blockName($name){
+	$sql = " SELECT * from block where name = :name ";
+	$value_a = ['name' => $name ];
+	$result = $this->findBySql($sql, $value_a);
+	return !empty($result) ? array_pop($result) : false;
+ }
+
  Public static function block_structure() {
 	$option_header = option_header::find_by_name('LOCATOR_STRUCTURE');
 	$block_class = option_line::find_by_option_id($option_header->option_id);
@@ -150,6 +195,23 @@ class block extends dbObject {
 	return !empty($result) ? $result : false;
  }
 
+ public function findAll_AvailableBlocks() {
+	if (!empty($_SESSION['user_roles'])) {
+	 $roles = join(',', $_SESSION['user_roles']);
+	}
+	$sql = " SELECT * FROM ";
+	$sql .= self::$table_name;
+	$sql .= " WHERE  enabled_cb = 1 AND restrict_to_role IS NULL or restrict_to_role='' ";
+	if (!empty($roles)) {
+	 $sql .= " UNION SELECT * FROM ";
+	 $sql .= self::$table_name;
+	 $sql .= " WHERE  enabled_cb = 1 ";
+	 $sql .= " AND restrict_to_role IN ('{$roles}') ";
+	}
+	$result = $this->findBySql($sql);
+	return !empty($result) ? $result : false;
+ }
+
  Public static function assign_blocks() {
 	$position_array_values = array();
 	$all_block = array();
@@ -167,8 +229,6 @@ class block extends dbObject {
 	$all_active_blocks = self::find_all_enabled();
 	$block_count = 0;
 	foreach ($all_active_blocks as $records) {
-//	 echo '<pre>';
-//	 print_r($records);
 	 $block_count++;
 	 $class_name = $records->reference_table;
 
@@ -325,27 +385,6 @@ class block extends dbObject {
 	echo 'Read more.. </a>';
 	echo '</div>';
 	echo '</div>';
- }
-
- public static function block_block() {
-	echo '<table class="normal"><thead><tr>';
-	foreach (self::$field_array as $key => $value) {
-	 echo '<th>' . $value . '</th>';
-	}
-	echo '</tr></thead><tbody>';
-
-	$block = self::find_all();
-//    echo '<pre>';
-//    print_r($block);
-//    echo '<pre>';
-	foreach ($block as $record) {
-	 echo '<tr>';
-	 foreach (self::$field_array as $key => $value) {
-		echo '<td>' . $record->$value . '</td>';
-	 }
-	 echo '</tr>';
-	}
-	echo ' </tbody> </table>';
  }
 
 }

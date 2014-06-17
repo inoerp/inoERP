@@ -2,7 +2,7 @@
 
 class sd_shipping_control extends dbObject {
 
- protected static $table_name = "sd_shipping_control";
+ public static $table_name = "sd_shipping_control";
  public static $primary_column = "sd_shipping_control_id";
  public static $key_column = 'org_id';
  public static $module = "sd";

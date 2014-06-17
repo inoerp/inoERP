@@ -2,7 +2,7 @@
 
 class address extends dbObject {
 
- protected static $table_name = "address";
+ public static $table_name = "address";
   public static $primary_column = "address_id";
  public static $key_column = 'address_name';
  public static $module = "org";
@@ -10,6 +10,7 @@ class address extends dbObject {
 		 "address_id",
 		 "type",
 		 "address_name",
+		 'mdm_tax_region_id',
 		 "description",
 		 "phone",
 		 "email",
@@ -49,7 +50,8 @@ class address extends dbObject {
 		 "email",
 		 "website",
 		 "country",
-		 "postal_code"
+		 "postal_code",
+		 'address'
  ];
  
  public $requiredField = [
@@ -57,6 +59,10 @@ class address extends dbObject {
 		 "type"
  ];
  
+  public $fields_inForm_notInDataBase = [
+		 "tax_region_name"
+ ];
+	
    public $search = [
 		 '_update_path' => 'form.php?class_name=address',
 		 '_show_update_path' => 1,
@@ -70,6 +76,7 @@ class address extends dbObject {
  public $address_id;
  public $type;
  public $address_name;
+ public $mdm_tax_region_id;
  public $description;
  public $phone;
  public $email;
@@ -87,8 +94,20 @@ class address extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
- public static $dir = __DIR__;
+ public $tax_region_name;
 
+ public function _before_save(){
+	if(!empty($this->tax_region_name)){
+	 $this->mdm_tax_region_id = mdm_tax_region::find_by_keyColumn($this->tax_region_name)->mdm_tax_region_id;
+	}
+ }
+ 
+  public function _before_showing(){
+	if(!empty($this->mdm_tax_region_id)){
+	 $this->tax_region_name = mdm_tax_region::find_by_id($this->mdm_tax_region_id)->tax_region_name;
+	}
+ }
+ 
  Public static function address_types() {
 	$option_header = option_header::find_by_name('ADDRESS_TYPE');
 	$type = option_line::find_by_option_id($option_header->option_header_id);

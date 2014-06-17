@@ -31,7 +31,7 @@ if (!empty($_GET['class_name'])) {
  $search_result_statement .='</table>';
 //	 echo '<pre>';
 //	 print_r($all_search_paths);
- require_once(INC_BASICS . DS . "list_page.inc");
+ require_once(INC_BASICS . DS . "search_page.inc");
 }
 ?>
 <?php 

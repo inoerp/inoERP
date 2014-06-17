@@ -6,6 +6,8 @@ class search extends dbObject {
  private $_query_string;
  private $_hidden_fields;
  private $_searching_table_name;
+ private $_search_mode = 2;
+ private $_show_block = 1;
 //private attrbiutes - to show result
  Private $_update_path;
  Private $_show_update_path;
@@ -15,10 +17,12 @@ class search extends dbObject {
  Private $_view_action_meassge = 'View';
  private $_extra_path = [];
  //to show form
+ public $_search_functions;
  private $_form_post_link = 'search';
  private $_form_name = 'generic_search_form';
  private $_search_order_by;
  private $_search_asc_desc;
+ private $_group_by;
  private $_per_page;
  private $_page_no;
  private $_searching_class;
@@ -72,6 +76,9 @@ class search extends dbObject {
 		case '_extra_path':
 		 $this->$property = is_array($value) ? $value : false;
 
+		case '_group_by':
+		 $this->$property = is_array($value) ? $value : false;
+
 		default:
 		 $this->$property = $value;
 		 break;
@@ -85,6 +92,30 @@ class search extends dbObject {
 	}
  }
 
+ private function _readPath_forComments($comment_id) {
+	$cc = new comment();
+//	$cc->findBy_id($record->{$this->primary_column_s});
+	$cc->findBy_id($comment_id);
+	$class_of_comment = $cc->reference_table;
+	if (property_exists($class_of_comment, 'primary_column')) {
+	 $primary_col = $class_of_comment::$primary_column;
+	} else {
+	 return;
+	}
+	if ($class_of_comment == 'content') {
+	 $search_result = "&nbsp;&nbsp;<a href=\"content.php?class_name=$cc->reference_table&mode=2&$primary_col=" . $cc->reference_id;
+	 $content_type_id_i = content::find_by_id($cc->reference_id);
+	 $content_type_id = !empty($content_type_id_i) ? $content_type_id_i->content_type_id : null;
+	 $content_type_i = !empty($content_type_id) ? content_type::find_by_id($content_type_id) : null;
+	 $content_type = !empty($content_type_i) ? $content_type_i->content_type : null;
+	 $search_result .= "&content_type=$content_type";
+	} else {
+	 $search_result = "&nbsp;&nbsp;<a href=\"form.php?class_name=$cc->reference_table&mode=2&$primary_col=" . $cc->reference_id;
+	}
+	$search_result .= '">' . $this->_view_action_meassge . '</a>';
+	return $search_result;
+ }
+
  public function search_result_op() {
 	if (empty($this->_view_path)) {
 	 $this->_view_path = 'form.php?class_name=' . $this->_searching_class;
@@ -92,45 +123,84 @@ class search extends dbObject {
 	if (empty($this->_update_path)) {
 	 $this->_update_path = 'form.php?class_name=' . $this->_searching_class;
 	}
-	$search_result = "";
-	$search_result .= "<table class=\"normal\"><thead><tr>";
-	foreach ($this->column_array_s as $key => $value) {
-	 $search_result .= '<th>' . $value . '</th>';
+	$no_of_columns_per_tab = 9;
+	$total_columns = count($this->column_array_s) + 1; //1 for action
+	$no_of_tabs = ceil($total_columns / $no_of_columns_per_tab);
+	$search_result = '';
+	$search_result .= '<div id="tabsLine">
+				 <ul class="tabMain">';
+	for ($i = 0; $i < $no_of_tabs; $i++) {
+	 $search_result .= "<li><a href=\"#tabsLine-$i\">Tab No $i </a></li>";
 	}
-	$search_result .= '<th>Action</th>';
-	$search_result .='</tr></thead>';
-	If (!empty($this->result)) {
-	 $search_result .= '<tbody>';
-	 foreach ($this->result as $record) {
+	$search_result .= ' </ul>
+				 <div class="tabContainer"> ';
 
-		$search_result .='<tr>';
-		foreach ($this->column_array_s as $key => $value) {
-		 $search_result .= '<td>';
-		 if (isset($record->$value)) {
-			$search_result .= $record->$value;
-		 }
-		 $search_result .= '</td>';
-		}
-		$search_result .= '<td>';
-		if ($this->_show_view_path) {
-		 $search_result .= "&nbsp;&nbsp;<a href=\"$this->_view_path&mode=2&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_view_action_meassge . '</a>';
-		}
-		if (!empty($this->_extra_path)) {
-		 foreach ($this->_extra_path as $pathname => $pathmsg) {
-			$search_result .= "&nbsp;&nbsp;<a href=\"$pathname&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $pathmsg . '</a>';
-		 }
-		}
-		if ($this->_show_update_path) {
-		 $search_result .= "&nbsp;&nbsp;<a href=\"$this->_update_path&mode=9&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_update_action_meassge . '</a> ';
-		}
-		$search_result .= '</td></tr>';
+	for ($i = 0; $i < $no_of_tabs; $i++) {
+	 $search_result .= "<div id=\"tabsLine-$i\" class='tabContent'>";
+	 $search_result .= "<table class=\"normal\"><thead><tr>";
+	 $search_result .= "<th>Seq#</th>";
+	 if ($i == 0) {
+		$search_result .= "<th>Action</th>";
 	 }
-	 $search_result .= '</tbody>';
-	} else {
-	 $search_result .= 'No Records Found!';
+	 $new_start = ($i * ($no_of_columns_per_tab - 1)) + $i;
+	 $new_end = $new_start + ($no_of_columns_per_tab - 1);
+	 for ($j = $new_start; $j <= $new_end; $j++) {
+		if ($j > $total_columns - 2) {
+		 break;
+		}
+		$search_result .= '<th>' . ucwords(str_replace('_', ' ', $this->column_array_s[$j])) . '</th>';
+	 }
+	 $search_result .='</tr></thead>';
+	 If (!empty($this->result)) {
+		$search_result .= '<tbody class="form_data_line_tbody search_results" >';
+		$count = 0;
+		foreach ($this->result as $record) {
+		 $count++;
+		 $search_result .='<tr>';
+		 $search_result .= "<td>$count</td>";
+		 if ($i == 0) {
+			$search_result .= '<td class="search_result action">';
+			if ($this->_show_view_path) {
+			 if ($this->_searching_class == 'comment') {
+				$search_result .= $this->_readPath_forComments($record->{$this->primary_column_s});
+			 } else if ($this->_searching_class == 'content') {
+				$search_result .= "&nbsp;&nbsp;<a href=\"content.php?mode=2&content_type_id=" . $record->content_type_id . "&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_view_action_meassge . '</a> ';
+			 } else {
+				$search_result .= "&nbsp;&nbsp;<a href=\"$this->_view_path&mode=2&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_view_action_meassge . '</a>';
+			 }
+			}
+			if (!empty($this->_extra_path)) {
+			 foreach ($this->_extra_path as $pathname => $pathmsg) {
+				$search_result .= "&nbsp;&nbsp;<a href=\"$pathname&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $pathmsg . '</a>';
+			 }
+			}
+			if ($this->_show_update_path) {
+			 if ($this->_searching_class == 'content') {
+				$search_result .= "&nbsp;&nbsp;<a href=\"content.php?mode=9&content_type_id=" . $record->content_type_id . "&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_update_action_meassge . '</a> ';
+			 } else {
+				$search_result .= "&nbsp;&nbsp;<a href=\"$this->_update_path&mode=9&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_update_action_meassge . '</a> ';
+			 }
+			}
+			$search_result .= '</td>';
+		 }
+		 $new_start = ($i * ($no_of_columns_per_tab - 1)) + $i;
+		 $new_end = $new_start + ($no_of_columns_per_tab - 1);
+		 for ($k = $new_start; $k <= $new_end; $k++) {
+			if ($k > $total_columns - 2) {
+			 break;
+			}
+			$col_val = $this->column_array_s[$k];
+			$search_result .= '<td>' . ucwords(str_replace('_', ' ', $record->$col_val)) . '</td>';
+		 }
+		 $search_result .= '</tr>';
+		}
+		$search_result .= '</tbody>';
+	 } else {
+		$search_result .= 'No Records Found!';
+	 }
+	 $search_result .= '</table> </div>';
 	}
-	$search_result .= '</table>';
-
+	$search_result .= '</div> </div>';
 	return $search_result;
  }
 
@@ -138,10 +208,14 @@ class search extends dbObject {
 	$hidden_fld_stmt = "";
 	if (!empty($this->_hidden_fields)) {
 	 foreach ($this->_hidden_fields as $key => $value) {
-		$hidden_fld_stmt .= "<input type='hidden' class=\"hidden $key\" name=$key value=$value >";
+		$hidden_fld_stmt .= "<input type='hidden' class=\"hidden $key\" name=\"$key\" value=\"$value\" >";
 	 }
 	}
 	return $hidden_fld_stmt;
+ }
+
+ public function hidden_fields() {
+	return $this->_add_hidden_fields();
  }
 
  public function search_form($class_obj) {
@@ -238,26 +312,38 @@ class search extends dbObject {
 	$search_form_statement .= "<form action=\"\" name=\"$this->_form_name\" method='GET' class=\"search_box $this->_form_name\" id=\"$this->_form_name\">";
 
 	//start of first ul
-	$search_form_statement .= '<ul class="search_form column six_column">';
+	$search_form_statement .= '<ul class="search_form column four_column">';
 	foreach ($this->_initial_search_array as $key => $value) {
 	 if (!empty($_GET[$value]) && !(is_array($_GET[$value]))) {
 		$get_value = filter_input(INPUT_GET, $value);
 	 } else {
 		$get_value = "";
 	 }
-	 $search_form_statement .= "<li><label class=\"label_$value\"> $value : </label>";
+	 $search_form_statement .= "<li><label class=\"label_$value\">" . ucwords(str_replace('_', ' ', $value)) . " : </label>";
 	 $search_form_statement .= "<input type=\"text\" name=\"$value\" class=\"$value text_search \"   size=\"15\" value=\"$get_value\" >";
 	 $search_form_statement .= '</li>';
 	}
 
 	if (!empty($this->option_lists)) {
 	 foreach ($this->option_lists as $key => $value) {
-		$search_form_statement .= "<li><label class=\"label_$key\"> $key : </label>";
+		$search_form_statement .= "<li><label class=\"label_$key\">" . ucwords(str_replace('_', ' ', $key)) . " : </label>";
 		$class_name = ' select_search ' . $key;
 		$option_header = option_header::find_by_name($value);
 		$ol = new option_line;
 		$option_lines = $ol->findBy_parentId($option_header->option_header_id);
 		$search_form_statement .= form::select_field_from_object($key, $option_lines, 'option_line_code', 'option_line_value', $get_value, '', '', $class_name, '', '', 1);
+		$search_form_statement .= '</li>';
+	 }
+	}
+
+	if (!empty($this->_search_functions)) {
+	 foreach ($this->_search_functions as $key => $value) {
+		$search_form_statement .= "<li><label class=\"label_$key\"> $key : </label>";
+		if (method_exists($class_obj, $value)) {
+		 $search_form_statement .= call_user_func(array($class_obj, $value));
+		} else if (function_exists($value)) {
+		 $search_form_statement .= call_user_func($value);
+		}
 		$search_form_statement .= '</li>';
 	 }
 	}
@@ -323,6 +409,16 @@ class search extends dbObject {
 	$search_form_statement .= "<option value=\"desc\"" . $selected_asc . $selected_desc . ">Descending</option>";
 	$search_form_statement .= '</select></li>';
 
+	//Records group by
+	if (!empty($this->_group_by)) {
+	 $search_form_statement .= '<li><label> Group By</label>';
+	 $search_form_statement .= "<select name=\"group_by\" id=\"group_by\" class='select group_by'>";
+	 $search_form_statement .= "<option value='' ></option>";
+	 foreach ($this->_group_by as $key => $value) {
+		$search_form_statement .= "<option value=\"$key\" >$value</option>";
+	 }
+	 $search_form_statement .= '</select></li>';
+	}
 
 	//Records per page
 	$search_form_statement .= '<li><label> Per page</label>';
@@ -345,12 +441,71 @@ class search extends dbObject {
 //	$search_form_statement .="<ul class=\"form_buttons\">";
 	//add the hidden fields if any
 
-	$search_form_statement .= "<li><a href=\"$this->_form_post_link.php?class_name=$class\" class=\"reset button\" id=\"search_reset_btn\" name=\"class_name\" value=\"$class\" > Reset All</a></li>";
+	$reset_link = "$this->_form_post_link.php?class_name=$class&mode=$this->_search_mode&show_block=$this->_show_block";
+	$search_form_statement .= "<li><a href=\"$reset_link\" "
+					. " class=\"reset button\" id=\"search_reset_btn\" name=\"class_name\" value=\"$class\" > Reset All</a></li>";
 	$search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"class_name\" value=\"$class\" class=\"search class_name\" ></li>";
 	$search_form_statement .="<li><input type=\"submit\" form=\"$this->_form_name\" name=\"submit_search\" class=\"search button\" value=\"Search\" id=\"search_submit_btn\"></li>";
 	$search_form_statement .="</ul>";
 	$search_form_statement .="</form> ";
 	return $search_form_statement;
+ }
+
+ public function program_form($class_obj) {
+	$class = $this->_searching_class;
+	if (property_exists($class, 'field_a')) {
+	 $search_array = $class_obj->field_a;
+	}
+//start of the srach statement
+	$program_form_statement = "";
+	$program_form_statement .= "<form action=\"\" name=\"$this->_form_name\" method='POST' class=\"search_box $this->_form_name\" id=\"$this->_form_name\">";
+
+	//start of first ul
+	$program_form_statement .= '<ul class="program_form">';
+	if (!empty($this->_search_functions)) {
+	 foreach ($this->_search_functions as $key => $value) {
+		$program_form_statement .= "<li><label class=\"label_$key\"> $key : </label>";
+		if (method_exists($class_obj, $value)) {
+		 $program_form_statement .= call_user_func(array($class_obj, $value));
+		} else if (function_exists($value)) {
+		 $program_form_statement .= call_user_func($value);
+		}
+		$program_form_statement .= '</li>';
+	 }
+	}
+	foreach ($this->_initial_search_array as $key => $value) {
+	 if (!empty($_GET[$value]) && !(is_array($_GET[$value]))) {
+		$get_value = filter_input(INPUT_GET, $value);
+	 } else {
+		$get_value = "";
+	 }
+	 $program_form_statement .= "<li><label class=\"label_$value\">" . ucwords(str_replace('_', ' ', $value)) . " : </label>";
+	 $program_form_statement .= "<input type=\"text\" name=\"$value\" class=\"$value text_search \"   size=\"15\" value=\"$get_value\" >";
+	 $program_form_statement .= '</li>';
+	}
+
+
+	$program_form_statement .= "<li><label>Dynamic Criteria </label>";
+	$program_form_statement .= "<select name=\"new_search_criteria\" id=\"new_search_criteria\" class=\"new_search_criteria\">";
+	foreach ($search_array as $key => $search_value) {
+	 $program_form_statement .= '<option value="' . htmlentities($search_value) . '"';
+	 $program_form_statement .= '>' . $search_value . '</option>';
+	}
+	$program_form_statement .= '</select>';
+//	$program_form_statement .= '<li><input type="button" class="add button" id="new_search_criteria_add" value="Add"></li>';
+	$program_form_statement .=$this->_add_hidden_fields();
+	$program_form_statement .= "</ul>";
+//end of first ul
+//start of form button ul
+	$program_form_statement .="<ul class=\"form_buttons\">";
+	//add the hidden fields if any
+	$program_form_statement .= "<li><a href=\"$this->_form_post_link.php?class_name=$class&mode=$this->_search_mode&show_block=$this->_show_block\" "
+					. " class=\"reset button\" id=\"search_reset_btn\" name=\"class_name\" value=\"$class\" > Reset All</a></li>";
+	$program_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"class_name\" value=\"$class\" class=\"search class_name\" ></li>";
+	$program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program button\" value=\"Submit\" id=\"save\"></li>";
+	$program_form_statement .="</ul>";
+	$program_form_statement .="</form> ";
+	return $program_form_statement;
  }
 
  public function find_with_pagination() {
@@ -424,4 +579,6 @@ class search extends dbObject {
 }
 
 //end of search class
+$search = new search();
+$s = & $search;
 ?>

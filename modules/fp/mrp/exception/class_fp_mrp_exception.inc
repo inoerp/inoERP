@@ -2,7 +2,7 @@
 
 class fp_mrp_exception extends dbObject {
 
- protected static $table_name = "fp_mrp_exception";
+ public static $table_name = "fp_mrp_exception";
  public static $primary_column = "fp_mrp_exception_id";
  public static $parent_primary_column = "fp_mrp_header_id";
  public static $key_column = 'mrp_id';

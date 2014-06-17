@@ -1,50 +1,41 @@
-$(document).ready(function() {
-// var Mandatory_Fields = ["#username", "First Enter User Name", "#enteredPassword", "First enter password"];
-// select_mandatory_fields_all('#userDiv', Mandatory_Fields);
+function setValFromSelectPage(user_id, address_id) {
+ this.user_id = user_id;
+ this.address_id = address_id;
+}
 
- //dont allow line entry with out bom_header id
- $('#form_line').on("click", function() {
-	if (!$('#user_id').val()) {
-	 alert('No header Id : First enter/save header details');
-	} else {
-	 var headerId = $('#user_id').val();
-	 if (!$(this).find('.user_id').val()) {
-		$(this).find('.user_id').val(headerId);
-	 }
-	}
- });
+setValFromSelectPage.prototype.setVal = function() {
+ var user_id = this.user_id;
+ var address_id = this.address_id;
+ if (user_id) {
+	$("#user_id").val(user_id);
+ }
+  if (address_id) {
+	$("#address_id").val(address_id);
+ }
+};
+
+$(document).ready(function() {
+ //mandatory and field sequence
+ var mandatoryCheck = new mandatoryFieldMain();
+ mandatoryCheck.header_id = 'user_id';
+// mandatoryCheck.mandatoryHeader();
+ mandatoryCheck.form_area = 'form_header';
+ mandatoryCheck.mandatory_fields = ["username", "username"];
+ mandatoryCheck.mandatory_messages = ["First Enter User Name", "No Password"];
+// mandatoryCheck.mandatoryField();
 
  //Get the user_id on find button click
  $('#form_header a.show').click(function() {
 	var user_id = $('#user_id').val();
-	$(this).attr('href', 'user.php?user_id=' + user_id);
+	$(this).attr('href', modepath() + 'user_id=' + user_id);
  });
 
- //Popup for selecting option type
- $(".popup").click(function() {
-	void window.open('find_user.php', '_blank',
+ //Popup for selecting user
+ $(".user_id.select_popup").click(function() {
+		var link = 'select.php?class_name=user';
+	void window.open(link, '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-	return false;
  });
-
- function parentWindow(findElement)
- {
-	$(window.opener.document).find("#user_id").val(findElement);
-	$('#form_box a.show').prop('href', 'user.php?user_id=' + findElement);
- }
-
- $("#selected").click(function() {
-	var findElement = $(".select_option_user_id:checked").val();
-	parentWindow(findElement);
-	window.close();
- });
-
- $(".quick_select").click(function() {
-	var findElement = $(this).val();
-	parentWindow(findElement);
-	window.close();
- });
-
 
  $("#enteredRePassword").on('focusout', function() {
 	var enteredPassword = $("#enteredPassword").val();
@@ -57,13 +48,33 @@ $(document).ready(function() {
 	}
  });
 
- $("#content tbody.form_data_line_tbody").on("click", ".add_row_img", function() {
-	add_new_row('tr.user_role_assignment0', 'tbody.form_data_line_tbody', 1);
- });
+onClick_add_new_row('user_role_assignment', 'form_data_line_tbody', 1)
 
-//Save record
-// save('json.user.php', '#user_header', 'line_id_cb', 'role_id', '#user_id', '', '');
+deleteData('form.php?class_name=user&line_class_name=user_role');
 
- deleteData('json.user.php');
+ //context menu
+ var classContextMenu = new contextMenuMain();
+ classContextMenu.docHedaderId = 'user_header';
+ classContextMenu.docLineId = 'user_role';
+ classContextMenu.btn1DivId = 'user_id';
+ classContextMenu.btn2DivId = 'form_line';
+ classContextMenu.trClass = 'user_role_assignment';
+ classContextMenu.tbodyClass = 'form_data_line_tbody';
+ classContextMenu.noOfTabbs = 1;
+ classContextMenu.contextMenu();
+
+// deleteData('json.po.php');
+ var classSave = new saveMainClass();
+ classSave.json_url = 'form.php?class_name=user';
+ classSave.form_header_id = 'user_header';
+ classSave.primary_column_id = 'user_id';
+ classSave.line_key_field = 'role_code';
+ classSave.single_line = false;
+ classSave.savingOnlyHeader = false;
+ classSave.headerClassName = 'user';
+ classSave.lineClassName = 'user_role';
+ classSave.enable_select = true;
+ classSave.saveMain();
+
 });
 

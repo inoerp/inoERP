@@ -1,7 +1,7 @@
 <?php
 
 class module extends dbObject {
-  protected static $table_name = "module";
+  public static $table_name = "module";
   public $module_id;
   public $name;
   public $number;

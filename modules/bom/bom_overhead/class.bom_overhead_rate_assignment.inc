@@ -1,8 +1,8 @@
 <?php
 
-class bom_overhead_rate_assignment extends bom_overhead {
+class bom_overhead_rate_assignment extends dbObject {
 
- protected static $table_name = "bom_overhead_rate_assignment";
+ public static $table_name = "bom_overhead_rate_assignment";
  public static $primary_column = "bom_overhead_rate_assignment_id";
  public static $key_column = 'bom_overhead_id';
  public static $module = "bom";

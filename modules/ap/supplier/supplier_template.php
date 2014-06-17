@@ -25,10 +25,9 @@
 					 <div class="large_shadow_box"> 
 						<ul class="column five_column">
 						 <li>
-							<label><a href="select.php?class_name=supplier" class="select header_id_popup">
-								<img src="<?php echo HOME_URL; ?>themes/images/serach.png"/></a>
+							<label><img class="supplier_id_popup select_popup clickable"  src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
 							 Supplier Id : </label>
-							<?php form::number_field_drs('supplier_id'); ?>
+							<?php $f->text_field_ds('supplier_id'); ?>
 							<a name="show" href="?supplier_id=" class="show supplier_id">
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
@@ -36,8 +35,10 @@
 							<?php form::number_field_d('supplier_number'); ?>
 						 </li>               
 						 <li><label>Supplier Name : </label>
-							<?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly);
-// echo form::text_field('supplier_name', $$class->supplier_name, '20', '', 1, '', 'supplier_name', $readonly, 'select_supplier_name') ?>
+							<?php
+							echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly);
+// echo form::text_field('supplier_name', $$class->supplier_name, '20', '', 1, '', 'supplier_name', $readonly, 'select_supplier_name') 
+							?>
 						 </li>
 						 <li><label>Supplier Type : </label>
 							<?php echo form::select_field_from_object('supplier_type', supplier::supplier_types(), 'option_line_code', 'option_line_code', $$class->supplier_type, 'supplier_type', $readonly, '', ''); ?>
@@ -80,16 +81,17 @@
 					 </div>
 					</div>
 					<div id="tabsHeader-3" class="tabContent">
-					 <div> 
-						<ul class="column five_column">
-						 <li><label>Corporate Address Id : 
-							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup"></label>
-							<?php form::number_field_drsm('address_id'); ?>
+					 <div class="header_address"> 
+						<ul class="column two_column">
+						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
+							 Corporate Address Id : </label>
+							<?php $f->text_field_d('address_id'); ?>
 						 </li>
+						 <li><label>Address Name : </label><?php $f->text_field_dr('header_address_name', 'address_name'); ?></li>
+						 <li><label>Address :</label> <?php $f->text_field_dr('header_address', 'address'); ?></li>
+						 <li><label>Country  : </label> <?php $f->text_field_dr('header_country', 'country'); ?></li>
+						 <li><label>Postal Code  : </label><?php echo $f->text_field_dr('header_postal_code', 'postal_code'); ?></li>
 						</ul>
-						<div class="address_details">
-						 <?php echo!empty($address_id) ? $address_id : ""; ?>
-						</div>  
 					 </div>
 					</div>
 					<div id="tabsHeader-4" class="tabContent">
@@ -112,13 +114,14 @@
         </div>
 			 </form>
 			</div>
-			<div id ="form_line" class="form_line"><span class="heading"> Supplier Site Details </span>
+			<span class="heading"> Supplier Site Details </span>
+			<div id ="form_line" class="form_line">
 			 <form action=""  method="post" id="supplier_site"  name="supplier_site">
 				<div class="line_before_tab"> 
 				 <ul class="column five_column inline_list"> 
 					<li><label>Site Id : </label> 
 					 <?php // echo form::text_field('supplier_site_id', $supplier_site->supplier_site_id, '15', '25', '', 'System Number', 'supplier_site_id', $readonly) ?>
-					 <?php echo form::select_field_from_array('supplier_site_id', supplier_site::find_all_sitesOfSupplier_array($supplier->supplier_id), $supplier_site->supplier_site_id, 'supplier_site_id', $readonly); ?>
+					 <?php echo form::select_field_from_array('supplier_site_id', supplier_site::find_all_sitesOfSupplier_array($supplier->supplier_id), $supplier_site->supplier_site_id, 'supplier_site_id', 1); ?>
 					 <a name="show" href="?supplier_id=&supplier_site_id=" class="show supplier_site_id">
 						<img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 					</li> 
@@ -256,16 +259,17 @@
 					</div>
 					<!--end of tab2 (purchasing)!!!! start of sales tab-->
 					<div id="tabsLine-4" class="tabContent">
-					 <div> 
-						<ul class="column five_column">
-						 <li><label>Site Address Id : 
-							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup"></label>
-							<?php echo form::text_field_d2('site_address_id'); ?>
+					 <div class="site_address"> 
+						<ul class="column two_column">
+						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
+							 Site Address Id : </label>
+							<?php $f->text_field_d2('site_address_id', 'address_id'); ?>
 						 </li>
+						 <li><label>Address Name : </label><?php $f->text_field_d2r('site_address_name', 'address_name'); ?></li>
+						 <li><label>Address :</label> <?php $f->text_field_d2r('site_address', 'address'); ?></li>
+						 <li><label>Country  : </label> <?php $f->text_field_d2r('site_country', 'country'); ?></li>
+						 <li><label>Postal Code  : </label><?php echo $f->text_field_d2r('site_postal_code', 'postal_code'); ?></li>
 						</ul>
-						<div class="site address_details">
-						 <?php echo!empty($site_address_id) ? $site_address_id : ""; ?>
-						</div>  
 					 </div>
 					</div> 
 					<!--                end of tab3 div three_column-->

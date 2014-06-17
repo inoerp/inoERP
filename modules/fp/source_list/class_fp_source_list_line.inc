@@ -2,7 +2,7 @@
 
 class fp_source_list_line extends dbObject {
 
- protected static $table_name = "fp_source_list_line";
+ public static $table_name = "fp_source_list_line";
  public static $primary_column = "fp_source_list_line_id";
  public static $parent_primary_column = "fp_source_list_header_id";
  public static $key_column = 'source_list_line_type';

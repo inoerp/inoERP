@@ -2,11 +2,10 @@
 
 class supplier_site extends dbObject {
 
- protected static $table_name = "supplier_site";
+ public static $table_name = "supplier_site";
  public static $primary_column = "supplier_site_id";
  public static $key_column = 'supplier_site_name';
  public static $module = "ap";
-
  public $field_a = [
 		 "supplier_site_id",
 		 'supplier_id',
@@ -62,14 +61,12 @@ class supplier_site extends dbObject {
 		 "supplier_site_name",
 		 "supplier_site_ref"
  ];
- 
  public $checkbox = [
 		 "rev_enabled_cb",
 		 "allow_substitute_receipts_cb",
 		 "allow_unordered_receipts_cb",
 		 "debit_memo_onreturn_cb"
  ];
- 
  public $requiredField = [
 		 "supplier_id",
 		 "supplier_site_number",
@@ -78,22 +75,24 @@ class supplier_site extends dbObject {
  public static $addressField = [
 		 "site_address_id"
  ];
-
  public static $fields_inHeader_needsToBeInserted_inPOST = [
 		 'supplier_id'
  ];
-
+ public $fields_inForm_notInDataBase = [
+		 'site_address_name',
+		 'site_address',
+		 'site_country',
+		 'site_postal_code',
+ ];
  public $search = [
 		 '_update_path' => 'form.php?class_name=supplier',
 		 '_update_action_meassge' => 'Update',
-		 
  ];
  public $pageTitle = " Supplier Sites "; //page Title
  public $option_lists = [
 		 'supplier_site_type' => 'SUPPLIER_SITE_TYPE',
 		 'ap_pay_on' => 'AP_PAY_ON'
  ];
- 
  public $supplier_site_id;
  public $supplier_site_number;
  public $supplier_site_name;
@@ -137,6 +136,10 @@ class supplier_site extends dbObject {
  public $time;
  public $msg;
  public $supplier_id;
+ public $site_address_name;
+ public $site_address;
+ public $site_country;
+ public $site_postal_code;
 
  Public static function ap_pay_on() {
 	$option_header = option_header::find_by_name('AP_PAY_ON');
@@ -174,6 +177,17 @@ class supplier_site extends dbObject {
 
 	$result = self::find_by_sql($sql);
 	return $result;
+ }
+
+ public function _before_showing() {
+	$address = new address();
+	if (!empty($this->site_address_id)) {
+	 $address->findBy_id($this->site_address_id);
+	 $this->site_address_name = $address->address_name;
+	 $this->site_address = $address->address;
+	 $this->site_country = $address->country;
+	 $this->site_postal_code = $address->postal_code;
+	}
  }
 
  public function copy($supplier_site_id) {

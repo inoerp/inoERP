@@ -2,7 +2,7 @@
 
 class cst_item_cost_line_pre extends dbObject {
 
- protected static $table_name = "cst_item_cost_line_pre";
+ public static $table_name = "cst_item_cost_line_pre";
  public static $primary_column = "cst_item_cost_line_pre_id";
  public static $parent_primary_column = "cst_item_cost_header_id";
  public static $multi_search_primary_column = "cst_item_cost_header_id"; //this value is used in multi search hidden value

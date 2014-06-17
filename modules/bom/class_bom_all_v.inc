@@ -2,7 +2,7 @@
 
 class bom_all_v extends dbObject {
 
- protected static $table_name = "bom_all_v";
+ public static $table_name = "bom_all_v";
  public static $primary_column = "bom_header_id";
  public $field_a = [
 		 'bom_header_id',

@@ -2,7 +2,7 @@
 
 class ap_payment_interface extends dbObject {
 
- protected static $table_name = "ap_payment_interface";
+ public static $table_name = "ap_payment_interface";
  public static $primary_column = "ap_payment_interface_id";
  public static $key_column = 'supplier_id';
  public static $module = "ap"; //same as gl_journal_source

@@ -2,7 +2,7 @@
 
 class site_control_line extends dbObject {
 
- protected static $table_name = "site_control_line";
+ public static $table_name = "site_control_line";
  public static $field_array = [
 		 'bom_header_id',
 		 'site_control_line_id',

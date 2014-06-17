@@ -2,7 +2,7 @@
 
 class business extends org {
 
- protected static $table_name = "business";
+ public static $table_name = "business";
  public static $primary_column = "business_id";
  public static $key_column = 'org_id';
  public static $module = "org";

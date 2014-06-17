@@ -2,13 +2,25 @@
 
 class po_header extends dbObject {
 
- protected static $table_name = "po_header";
+ public static $table_name = "po_header";
  public static $dependent_classes = ['po_line', 'po_detail'];
  public static $primary_column = "po_header_id";
  public static $primary_column2 = "po_number";
  public static $key_column = 'supplier_id';
  public static $module = "po";
  public static $js_fileName = 'modules/po/js/multi_select.js';
+    public static $system_info = [
+		 'name' => 'Purchasing',
+				'number' => '2210',
+		 'description' => 'Create & Mainten Purchase Order & Related documents/transactions',
+		 'version' => '1.1.1.3',
+		 'db_version' => '1001',
+		 'mod_version' => '1.1.x-1.1',
+		 'dependent_class' => array('po_line', 'po_detail'),
+		 'primary_entity_cb' => '',
+		 'module_name' => 'po',
+		 'weight' => 1
+ ];
  public $checkbox = [
 		 "rev_enabled_cb"
  ];

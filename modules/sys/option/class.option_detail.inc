@@ -2,7 +2,7 @@
 
 class option_detail extends dbObject{
 
- protected static $table_name = "option_detail";
+ public static $table_name = "option_detail";
  public static $primary_column = "option_detail_id";
  public static $key_column = 'option_detail_value';
  public static $module = "sys";

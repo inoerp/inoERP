@@ -2,7 +2,7 @@
 
 class wip_wo_completion extends inv_transaction {
 
- protected static $table_name = "inv_transaction";
+ public static $table_name = "inv_transaction";
  public static $primary_column = "inv_transaction_id";
  public static $dependent_classes = ['wip_wo_header'];
  public static $key_column = 'transaction_type_id';

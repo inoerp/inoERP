@@ -2,7 +2,7 @@
 
 class legal extends dbObject {
 
- protected static $table_name = "legal";
+ public static $table_name = "legal";
  public static $primary_column = "legal_id";
  public static $key_column = 'org_id';
  public static $module = "org";

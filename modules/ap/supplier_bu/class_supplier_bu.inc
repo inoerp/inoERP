@@ -2,7 +2,7 @@
 
 class supplier_bu extends dbObject {
 
- protected static $table_name = "supplier_bu";
+ public static $table_name = "supplier_bu";
  public static $primary_column = "supplier_bu_id";
  public static $dependent_classes = ['supplier', 'supplier_site'];
  public static $key_column = 'supplier_id';

@@ -14,13 +14,17 @@ function autoLoadFromCwd($className) {
 
 function autoLoadModules($className) {
  $paths = explode('_', $className);
+ // echo "paths $paths";
  $path = $paths[0] . '/';
  $path .= $paths[1] . '/';
+// $path .= $paths[2] . '/';
  $filename = getcwd() . "/modules/" . $path . 'class_' . $className . ".inc";
  if (is_readable($filename)) {
 	require $filename;
+ } elseif (is_readable(HOME_DIR . '/modules/' . $path . 'class_' . $className . ".inc")) {
+	require HOME_DIR . '/modules/' . $path . 'class_' . $className . ".inc";
  } else {
-	$filename = getcwd() . "/../../" . $path . 'class_' . $className . ".inc";
+	$filename = HOME_DIR . '/modules/' . $path . 'class_' . $className . ".inc";
 	if (is_readable($filename)) {
 	 require $filename;
 	}
@@ -29,9 +33,9 @@ function autoLoadModules($className) {
 
 function show_reference_doc($class_name, $primar_column_value) {
  $primary_column = $class_name::$primary_column;
- if((!empty($class_name)) && (!empty($primar_column_value)) && (!empty($primary_column))){
- return '<a href=\'form.php?class_name='. $class_name . '&gl_journal_header_id=' . $primar_column_value. '&mode=2\'>View Reference Doc</a>';
- }else{
+ if ((!empty($class_name)) && (!empty($primar_column_value)) && (!empty($primary_column))) {
+	return '<a  href=\'form.php?class_name=' . $class_name . '&' . $primary_column . '=' . $primar_column_value . '&mode=2\' target="_blank">View Reference Doc</a>';
+ } else {
 	return false;
  }
 }
@@ -46,8 +50,11 @@ function autoLoadExtensions($className) {
  $filename = getcwd() . "/extensions/" . $path . 'class_' . $className . ".inc";
  if (is_readable($filename)) {
 	require $filename;
- } elseif (is_readable("../../extensions/" . $path . 'class_' . $className . ".inc")) {
-	require "/extensions/" . $path . 'class_' . $className . ".inc";
+ } else {
+	$filename = HOME_DIR . '/extensions/' . $path . 'class_' . $className . ".inc";
+	if (is_readable($filename)) {
+	 require $filename;
+	}
  }
 }
 
@@ -61,20 +68,60 @@ function pa($array = "") {
  echo '</pre></div>';
 }
 
+function get_class_name_from_path($path) {
+ $arr = explode('/', $path);
+ $last_el = array_pop($arr);
+ $class = str_replace('class_', '', $last_el);
+ $class1 = str_replace('class.', '', $class);
+ return str_replace('.inc', '', $class1);
+}
+
 function get_dbColumns($table_name) {
  if (!empty($table_name)) {
 	global $dbc;
 	$sql_fields = " SHOW COLUMNS FROM  " . $table_name;
 	$prepare = $dbc->connection->prepare($sql_fields);
-	try{
-	$prepare->execute();
-	}catch(Exception $e){
-	 echo " $table_name not found. Error on functions @L72 ". $e->getMessage();
+	try {
+	 $prepare->execute();
+	} catch (Exception $e) {
+	 echo " $table_name not found. Error on functions @L72 " . $e->getMessage();
 	}
-	
+
 	$fields = $prepare->fetchAll(PDO::FETCH_COLUMN, 0);
 	return $fields;
  }
+}
+
+function check_browser() {
+ if (preg_match('/(?i)msie [5-9]/', $_SERVER['HTTP_USER_AGENT'])) {
+	echo ($_SERVER['HTTP_USER_AGENT']);
+	echo "<h2>Sorry! Your browser is outdated and not compatible with this site!!!</h2> "
+	. "Please use any modern browsers such as Firefox, Opera, Chrome, IE 10+ ";
+	exit;
+ }
+}
+
+function access_denied() {
+ echo "<div id='access_denied'>";
+ echo ("<div class='error message noaccess'>You dont have access to this page! :  </div></div>");
+ include_template('footer.inc');
+}
+
+
+function getrwuPrivilage($rwu_role, $user_role) {
+
+ $prv = 0;
+ if($user_role == 'ADMIN'){
+	$prv = 2;
+ }else  if (!empty($rwu_role) && empty($user_role)) {
+	$prv = 0;
+ } else if (empty($rwu_role) || ($rwu_role == 'ANONYMOUS')) {
+	$prv = 2;
+ } else if ($rwu_role == 'BASIC') {
+	$prv = (!empty($user_role) && ($user_role != 'ANONYMOUS')) ? 2 : 0;
+ }
+
+ return $prv;
 }
 
 function find_by_sql($sql = "") {
@@ -83,6 +130,15 @@ function find_by_sql($sql = "") {
  $prepare->execute();
  $result_fetchAll = $prepare->fetchAll(PDO::FETCH_CLASS);
  return $result_fetchAll;
+}
+
+function number_thousand_converted($number) {
+ if ($number > 1000000) {
+	$number = round($number / 1000000, 1) . 'M';
+ } elseif ($number > 1000) {
+	$number = round($number / 1000, 1) . 'K';
+ }
+ return $number;
 }
 
 //search function with $_GET criterias
@@ -180,6 +236,32 @@ function thisPage_url() {
  return $current_path;
 }
 
+function select_per_page() {
+ $content_string = '<div id="noOfcontents">';
+ $content_string .= 'Show<select name="per_page">';
+ $content_string .= '<option value="3"> 3 </option>';
+ $content_string .= '<option value="5"> 5 </option>';
+ $content_string .= '<option value="10"> 10 </option>';
+ $content_string .= '<option value="20"> 20 </option>';
+ $content_string .= '<option value="50"> 50 </option>';
+ $content_string .= '</select>';
+ $content_string .= '<a name="content_per_page" id="content_per_page" '
+				 . 'href="" class="content_per_page button">Per Page</a>';
+ $content_string .= '</div>';
+ return $content_string;
+}
+
+function select_per_page_array() {
+ $array = [
+		 3 => 3,
+		 5 => 5,
+		 10 => 10,
+		 20 => 20,
+		 50 => 50,
+		 'ALL' => 'All'];
+ return $array;
+}
+
 function ino_print_error($error = "") {
  if (!empty($error)) {
 	foreach ($error as $key => $value) {
@@ -232,8 +314,19 @@ function ino_eval($string) {
 
 function include_template($template = "") {
  defined('THEME_DIR') ? null : define('THEME_DIR', DS . 'themes' . DS . 'default');
- is_readable(THEME_DIR . DS . 'header.inc');
- require_once(INC_BASICS . DS . $template);
+ if (is_readable(THEME_DIR . DS . $template)) {
+	require_once(THEME_DIR . DS . $template);
+ } else {
+	require_once(INC_BASICS . DS . $template);
+ }
+}
+
+function show_footer($showBlock = "false") {
+ if ($showBlock) {
+	include_template('footer.inc');
+ } else {
+	include_template('footer_simple.inc');
+ }
 }
 
 function ino_include($theme_dir, $template = "") {
@@ -756,36 +849,305 @@ function json_saveSingleLine($module, $class, $keyField, $primaryColumn, $header
  }
 }
 
-function json_delete($class, $lineName = "") {
- if (!empty($_GET['delete']) && $_GET['delete'] == 1) {
+function ino_delete($data_array) {
+ if (empty($data_array)) {
+	return false;
+ }
+ switch ($data_array['deleteType']) {
+	case 'header':
+	 $class = $data_array['class_name'];
+	 $delete_id = !empty($data_array['delete_id']) ? $data_array['delete_id'] : null;
+	 break;
 
-	if (!empty($_GET['line_id'])) {
-	 $delete_id = $_GET['line_id'];
-	} elseif (!empty($_GET['detail_id'])) {
-	 $delete_id = $_GET['detail_id'];
-	} elseif (!empty($_GET[$lineName])) {
-	 $delete_id = $_GET[$lineName];
-	} else {
-	 $delete_id = "";
-	}
+	case 'line':
+	 $class = $data_array['line_class_name'];
+	 $delete_id = !empty($data_array['delete_id']) ? $data_array['delete_id'] : null;
+	 break;
 
-	if (!empty($delete_id)) {
-	 $result = $class::delete($delete_id);
-	} else {
-	 $result = "Id to delete is not found";
-	}
+	case 'line2':
+	 $class = $data_array['line2_class_name'];
+	 $delete_id = !empty($data_array['delete_id']) ? $data_array['delete_id'] : null;
+	 break;
 
-	if ($result == 1) {
-	 echo 'Line is deleted!';
-	} else {
-	 global $ie_array_page;
-	 global $ie;
-	 echo '<div class="message"> Error Code - F04! </div> ';
-	 if (!empty($ie_array_page)) {
-		echo $ie->show_pageErrors($ie_array_page);
+	case 'detail':
+	 $class = $data_array['detail_class_name'];
+	 $delete_id = !empty($data_array['delete_id']) ? $data_array['delete_id'] : null;
+	 break;
+
+	default :
+	 break;
+ }
+
+ if (empty($delete_id)) {
+	echo "<br>Delete Failed!!! No Id selected for delete.";
+ }
+
+ $$class = new $class;
+ $primary_column = $class::$primary_column;
+ $$class->$primary_column = $delete_id;
+ $$class->delete();
+ return true;
+}
+
+//not used can be deleted
+//function json_delete($class, $lineName = "") {
+// if (!empty($_GET['delete']) && $_GET['delete'] == 1) {
+//
+//	if (!empty($_GET['line_id'])) {
+//	 $delete_id = $_GET['line_id'];
+//	} elseif (!empty($_GET['detail_id'])) {
+//	 $delete_id = $_GET['detail_id'];
+//	} elseif (!empty($_GET[$lineName])) {
+//	 $delete_id = $_GET[$lineName];
+//	} else {
+//	 $delete_id = "";
+//	}
+//
+//	if (!empty($delete_id)) {
+//	 $result = $class::delete($delete_id);
+//	} else {
+//	 $result = "Id to delete is not found";
+//	}
+//
+//	if ($result == 1) {
+//	 echo 'Line is deleted!';
+//	} else {
+//	 global $ie_array_page;
+//	 global $ie;
+//	 echo '<div class="message"> Error Code - F04! </div> ';
+//	 if (!empty($ie_array_page)) {
+//		echo $ie->show_pageErrors($ie_array_page);
+//	 }
+//	}
+// }
+//}
+
+function ra_conevrt_data($data_a, $label, &$legend_a) {
+ $ra_data_a = [];
+ $legend_count = 0;
+ foreach ($data_a as $data) {
+	$data_a = (array) $data;
+	$ra_data_element = [];
+	$ra_data_element['label'] = $data->$label;
+	$ra_data_element['value'] = [];
+	unset($data_a[$label]);
+	foreach ($data_a as $key => $val) {
+	 array_push($ra_data_element['value'], $val);
+	 if ($legend_count == 0) {
+		array_push($legend_a, $key);
 	 }
 	}
+	array_push($ra_data_a, $ra_data_element);
+	$legend_count++;
  }
+ return $ra_data_a;
+}
+
+function ra_conevrt_data_bar_column($data_a, &$legend, $first_value_legend = true) {
+ $legend_a = [];
+ $label_a = [];
+ $final_data_a = [];
+ $count = 0;
+ foreach ($data_a[0] as $key1 => $val1) {
+	if ($count == 0) {
+	 $legend_key_name = $key1;
+	}
+	if ($count == 1) {
+	 $label_key_name = $key1;
+	}
+	if ($count == 2) {
+	 $value_key_name = $key1;
+	}
+	$count++;
+ }
+
+
+ if ($first_value_legend) {
+	$checking_for_legend = 0;
+	$checking_for_label = 1;
+ } else {
+	$checking_for_legend = 1;
+	$checking_for_label = 0;
+ }
+ foreach ($data_a as $data) {
+	$count = 0;
+	foreach ($data as $key => $val) {
+	 if ($count == $checking_for_legend) {
+		!in_array($val, $legend_a) ? array_push($legend_a, $val) : '';
+		break;
+	 }
+	 $count++;
+	}
+ }
+
+ foreach ($data_a as $data1) {
+	$count = 0;
+	foreach ($data1 as $key1 => $val1) {
+	 if ($count == $checking_for_label) {
+		!in_array($val1, $label_a) ? array_push($label_a, $val1) : '';
+		break;
+	 }
+	 $count++;
+	}
+ }
+
+ $legend = $legend_a;
+
+ foreach ($label_a as $label_key => $label_val) {
+	$data = [];
+	$data['label'] = $label_val;
+	$data['value'] = [];
+	foreach ($legend_a as $legend_key => $legend_val) {
+	 $not_found_value = true;
+	 foreach ($data_a as $this_data_a_key => $this_data_a) {
+		if (($this_data_a->$legend_key_name == $legend_val) && ($this_data_a->$label_key_name == $label_val)) {
+		 array_push($data['value'], $this_data_a->$value_key_name);
+		 $not_found_value = false;
+		 unset($data_a[$this_data_a_key]);
+		 break;
+		}
+	 }
+	 if ($not_found_value) {
+		array_push($data['value'], null);
+	 }
+	}
+	array_push($final_data_a, $data);
+ }
+ return $final_data_a;
+}
+
+//bar & column
+function ra_conevrt_data_bar_column_wolegend($data_a) {
+ $ra_data_a = [];
+ foreach ($data_a as $data) {
+	$ra_data_element = [];
+	$count = 0;
+	foreach ($data as $key => $val) {
+	 if ($count == 0) {
+		$ra_data_element['label'] = $val;
+	 } else {
+		$ra_data_element['value'] = $val;
+	 }
+	 $count++;
+	}
+	array_push($ra_data_a, $ra_data_element);
+ }
+ return $ra_data_a;
+}
+
+//pie
+function ra_conevrt_data_pie($data_a) {
+ $ra_data_a = [];
+ foreach ($data_a as $data) {
+	$count = 0;
+	foreach ($data as $key => $value) {
+	 if ($count == 0) {
+		$pie_k = $value;
+	 }
+	 if ($count == 1) {
+		$pie_value = $value;
+	 }
+	 $count++;
+	 $ra_data_a[$pie_k] = !empty($pie_value) ? $pie_value : null;
+	}
+ }
+ return $ra_data_a;
+}
+
+function search_bom_cost_type() {
+ $stmt = '';
+ $stmt .= '<select id="bom_cost_type" class="select bom_cost_type" name="bom_cost_type" style="background-color: pink;">';
+ $stmt .= '<option value=""></option>';
+ $stmt .= '<option value="FROZEN">Frozen</option>
+ <option value="PENDING">Pending</option>
+<option value="GLOBAL">Global</option>
+<option value="FUTURE">Future</option>
+<option value="AVERAGE">Average</option>
+</select>';
+ return $stmt;
+}
+
+function search_mds_name() {
+ $f = new inoform();
+ return $f->select_field_from_object('fp_mds_header_id', fp_mds_header::find_all(), 'fp_mds_header_id', 'mds_name', '', 'fp_mds_header_id', '', 1);
+}
+
+function search_mrp_name() {
+ $f = new inoform();
+ return $f->select_field_from_object('fp_mrp_header_id', fp_mrp_header::find_all(), 'fp_mrp_header_id', 'mrp_name', '', 'fp_mrp_header_id', '', 1);
+}
+
+function search_mrp_name_onevalue() {
+ $f = new inoform();
+ return $f->select_field_from_object('fp_mrp_header_id', fp_mrp_header::find_all(), 'fp_mrp_header_id', 'mrp_name', '', 'fp_mrp_header_id', '', 1, '', '', 1);
+}
+
+function search_minmax_planner() {
+ $f = new inoform();
+ return $f->select_field_from_object('fp_minmax_header_id', fp_minmax_header::find_all(), 'fp_minmax_header_id', 'plan_name', '', 'fp_minmax_header_id', '', 1);
+}
+
+function search_org_name() {
+ global $f;
+ $stmt = $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', '', 'org_id', '', '', '', '', 1);
+ return $stmt;
+}
+
+function search_org_name_onevalue() {
+ global $f;
+ $stmt = $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', '', 'org_id', '', '', '', '', 1, '', 1);
+ return $stmt;
+}
+
+function search_business_org() {
+ global $f;
+ $stmt = $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', '', 'bu_org_id', '', 1, '', '', 1);
+ return $stmt;
+}
+
+function search_minmax_type() {
+ $stmt = '<select class="select planning_method" name="planning_method[]">
+<option value=""></option>
+<option value="MINMAX">Min Max</option>
+<option selected="" value="MULTI_MINMAX">Multi Bin Min Max</option>
+</select>';
+ return $stmt;
+}
+
+function search_item_id_from() {
+ $stmt = '<input id="item_id_from" class="textfield select_item_id item_id_from" '
+				 . 'type="text" title="" placeholder="From Item Id" size="20" maxlength="256" value="" '
+				 . 'name="from_item_id" >';
+ return $stmt;
+}
+
+function adjustment_ac_id() {
+ $stmt = "<input id='adjustment_ac_id' class='textfield select_account adjustment_ac_id ' 
+type='text' title='' placeholder='Adjustment Ac' size='28' maxlength='256' 
+name='adjustment_ac_id'>
+<img class='account_popup' src=" . HOME_URL . "themes/images/serach.png>";
+ return $stmt;
+}
+
+function search_item_id_to() {
+ $stmt = '<input id="item_id_to" class="textfield select_item_id item_id_to" '
+				 . 'type="text" title="" placeholder="To Item Id" size="20" maxlength="256" value="" '
+				 . 'name="to_item_id" >';
+ return $stmt;
+}
+
+function search_item_number_from() {
+ $stmt = '<input id="item_number_from" class="textfield select_item_number item_number_from" '
+				 . 'type="text" title="" placeholder="From Item" size="20" maxlength="256" value="" '
+				 . 'name="from_item_number" >';
+ return $stmt;
+}
+
+function search_item_number_to() {
+ $stmt = '<input id="item_number_to" class="textfield select_item_number item_number_to" '
+				 . 'type="text" title="" placeholder="To Item" size="20" maxlength="256" value="" '
+				 . 'name="to_item_number" >';
+ return $stmt;
 }
 
 function add_new_search_criteria() {
@@ -798,9 +1160,13 @@ function add_new_search_criteria() {
  }
 }
 
-function execution_time() {
+function execution_time($only_value = false) {
  $start_time = $_SERVER["REQUEST_TIME"];
- echo "<br />Execution time :" . (microtime(true) - $start_time) . "</br>";
+ if ($only_value) {
+	return (microtime(true) - $start_time);
+ } else {
+	echo "<br />Execution time :" . (microtime(true) - $start_time) . "</br>";
+ }
 }
 
 function array2csv(array &$array) {

@@ -2,13 +2,25 @@
 
 class ap_transaction_header extends dbObject {
 
- protected static $table_name = "ap_transaction_header";
+ public static $table_name = "ap_transaction_header";
  public static $dependent_classes = ['ap_transaction_line', 'ap_transaction_detail'];
  public static $primary_column = "ap_transaction_header_id";
  public static $primary_column2 = "transaction_number";
  public static $key_column = 'supplier_id';
  public static $module = "ap"; //same as gl_journal_source
  public static $gl_journal_category = "AP_TRANSACTIONS";
+ public static $system_info = [
+		 'name' => ' AP Transaction ',
+		 'number' => '1202',
+		 'description' => 'Create & Mainten Supplier Invoice, Debit Memo, Credit Memo, PrePayments, etc',
+		 'version' => '1.1.1.3',
+		 'db_version' => '1001',
+		 'mod_version' => '1.1.x-1.1',
+		 'dependent_class' => array('ap_transaction_line', 'ap_transaction_detail', 'ap_transaction_v'),
+		 'primary_entity_cb' => '',
+		 'module_name' => 'ap',
+		 'weight' => 2
+ ];
  public $checkbox = [
 //		 "rev_enabled_cb"
  ];
@@ -67,14 +79,14 @@ class ap_transaction_header extends dbObject {
  ];
  public $column = [
 		 'ap_transaction_header_id',
-				 'document_number',
+		 'document_number',
 		 'transaction_type',
 		 'transaction_number',
 		 'header_amount',
 		 'paid_amount',
 		 'supplier_id',
 		 'supplier_site_id',
-		  'bu_org_id',
+		 'bu_org_id',
 		 'ledger_id',
 		 'period_id',
 		 'document_owner',
@@ -103,7 +115,7 @@ class ap_transaction_header extends dbObject {
 		 'action',
 		 'transaction_action'
  ];
-  public $numberField = [
+ public $numberField = [
 		 'header_amount'
  ];
  public $search = [

@@ -2,7 +2,7 @@
 
 class locator extends subinventory {
 
- protected static $table_name = "locator";
+ public static $table_name = "locator";
  public static $primary_column = "locator_id";
  public static $key_column = 'locator';
  public static $module = "inv";

@@ -1,11 +1,31 @@
 <?php
 
-class comment extends dbObject {
+/* Privillages
+ * 2. Read
+ * 3. Write
+ * 4. Update Own
+ * 5. Update Any
+ * 9. Admin
+ */
 
- protected static $table_name = "comment";
+class comment extends dbObject {
+ public static $table_name = "comment";
  public static $primary_column = "comment_id";
  public static $key_column = "comment";
  public static $module = "extension";
+ public static $js_fileName = 'extensions/comment/comment.js';
+ public static $system_info = [
+		 'name' => 'Comment',
+		 'number' => '91113',
+		 'description' => 'Comments for all type of content types and documents',
+		 'version' => '1.1.1.3',
+		 'db_version' => '1001',
+		 'mod_version' => '1.1.x-1.1',
+		 'dependent_class' => '',
+		 'primary_entity_cb' => '',
+		 'module_name' => 'extensions',
+		 'weight' => '13'
+ ];
  public $field_a = [
 		 "comment_id",
 		 "reference_table",
@@ -29,6 +49,33 @@ class comment extends dbObject {
 		 "reference_id",
 		 "comment"
  ];
+ public $initial_search = [
+		 "comment_id",
+		 "reference_table",
+		 "reference_id",
+		 "subject",
+		 "comment",
+ ];
+ public $column = [
+		 "comment_id",
+		 "reference_table",
+		 "reference_id",
+		 "subject",
+		 "published_cb",
+		 "weightage",
+		 "comment_by",
+ ];
+ public $fields_inForm_notInDataBase = [
+		 'multi_action_class_pc',
+		 'multi_action_class_pc_value',
+		 'action'
+ ];
+ public $pageTitle = " Comment - Create & View differnt Comments ";
+ public $search = [
+		 '_view_path' => 'form.php?class_name=',
+		 '_show_view_path' => 1,
+		 '_view_action_meassge' => 'Read',
+ ];
  public $file_id_values;
  public $summary_characters;
  public $comment_summary;
@@ -48,6 +95,83 @@ class comment extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
+ public $multi_action_class_pc;
+ public $multi_action_class_pc_value;
+ public $action;
+
+ public function _before_save() {
+	if (empty($this->subject)) {
+	 $this->subject = substr($this->comment, 0, 50);
+	}
+ }
+
+ private function _enable_block($block_name, $block_title) {
+	$block = new block();
+	$block_i = $block->findBy_blockName($block_name);
+	if (!empty($block_i->block_id)) {
+	 return;
+	}
+	$block->block_id = null;
+	$block->name = $block_name;
+	$block->title = $block_title;
+	$block->reference_table = 'comment';
+	$block->audit_trial();
+	$block->save();
+	return;
+ }
+
+ private function _disable_block($block_name) {
+	$block = new block();
+	$block_i = $block->findBy_blockName($block_name);
+	if (!empty($block_i->block_id)) {
+	 return;
+	}
+	$block->block_id = $block_i->block_id;
+	$block->enabled_cb = 0;
+	$block->audit_trial();
+	$block->save();
+	return;
+ }
+
+ public function _enable() {
+	//cretae the block
+	$this->_enable_block('comment_recent_comments', 'Recent Comments');
+ }
+
+ public function _disable() {
+	//cretae the block
+	$this->_disable_block('comment_recent_comments');
+ }
+
+ public function comment_recent_comments_block($numbers = 10, $start_from = 1) {
+	$numbers = empty($numbers) ? 10 : $numbers;
+	$start_from = empty($start_from) ? 1 : $start_from;
+	$sql = " SELECT comment.comment_id, comment.subject,
+	         content.content_id, content.content_type_id
+					FROM comment
+					LEFT JOIN content ON content.content_id = comment.reference_id 
+					WHERE comment.reference_table = 'content'
+					AND comment.subject IS NOT NULL AND comment.subject !='' ";
+	$sql .=" ORDER BY comment.weightage DESC, comment.creation_date DESC ";
+	$sql .= " LIMIT :lmt_start_from , :lmt_no_of_records  ";
+	$value_a = ['lmt_no_of_records' => $numbers, 'lmt_start_from' => $start_from];
+
+	$result = $this->findBySql($sql, $value_a);
+	$comment_string = '';
+	if (count($result) > 0) {
+	 $comment_string .= '<ul class="documentation_list comment">';
+	 foreach ($result as $records) {
+		$comment_string .= '<li class="comment_subject">';
+		$comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&' . 'content_id=' . $records->content_id .
+						'&content_type_id=' . $records->content_type_id . '#comment_id_' . $records->comment_id . '">';
+		$comment_string .= $records->subject . '</a>';
+		$comment_string .= '</li>';
+	 }
+	 $comment_string .= '</ul>';
+	}
+
+	return $comment_string;
+ }
 
  public static function find_by_reference_table_and_id($reference_table, $reference_id) {
 	global $db;
@@ -130,19 +254,19 @@ class comment extends dbObject {
 					" WHERE reference_table = '{$reference_table}'
            AND reference_id = '{$reference_id}' ";
 	if (!empty($per_page)) {
-	 $comment_string .= '<div id="noOfpages">';
-	 $comment_string .= '<form action="" method="GET">';
-	 $comment_string .= 'Show<select name="per_page">';
-	 $comment_string .= '<option value="3"> 3 </option>';
-	 $comment_string .= '<option value="5"> 5 </option>';
-	 $comment_string .= '<option value="10"> 10 </option>';
-	 $comment_string .= '<option value="20"> 20 </option>';
-	 $comment_string .= '<option value="50"> 50 </option>';
-	 $comment_string .= '</select>';
-	 $comment_string .= '<input type="hidden" value="' . $extension_id . '" name="page_id">';
-	 $comment_string .= '<input type="submit" class="button" value="Per Page" >';
-	 $comment_string .= '</form>';
-	 $comment_string .= '</div>';
+//	 $comment_string .= '<div id="noOfpages">';
+//	 $comment_string .= '<form action="" method="GET">';
+//	 $comment_string .= 'Show<select name="per_page">';
+//	 $comment_string .= '<option value="3"> 3 </option>';
+//	 $comment_string .= '<option value="5"> 5 </option>';
+//	 $comment_string .= '<option value="10"> 10 </option>';
+//	 $comment_string .= '<option value="20"> 20 </option>';
+//	 $comment_string .= '<option value="50"> 50 </option>';
+//	 $comment_string .= '</select>';
+//	 $comment_string .= '<input type="hidden" value="' . $extension_id . '" name="page_id">';
+//	 $comment_string .= '<input type="submit" class="button" value="Per Page" >';
+//	 $comment_string .= '</form>';
+//	 $comment_string .= '</div>';
 	 $total_count = self::count_by_reference_table_and_id($reference_table, $reference_id);
 	 $pagination = new pagination($pageno, $per_page, $total_count);
 	 $sql .=" LIMIT {$per_page} ";
@@ -155,11 +279,11 @@ class comment extends dbObject {
 		$allow_content_update = false;
 		if ((!empty($_SESSION['username'])) && ($records->created_by == $_SESSION['username'])) {
 		 $allow_content_update = true;
-		} elseif ((!empty($_SESSION['user_roles'])) && (in_array('admin', $_SESSION['user_roles']))) {
+		} elseif ((!empty($_SESSION['user_roles'])) && (in_array('ADMIN', $_SESSION['user_roles']))) {
 		 $allow_content_update = true;
 		}
 		$comment_file = file::find_by_reference_table_and_id('comment', $records->comment_id);
-		$comment_string .= '<ul class="commentRecord">';
+		$comment_string .= "<ul id=\"comment_id_$records->comment_id\" class=\"commentRecord\">";
 		$comment_string .= '<li class="header_li">';
 		$comment_string .= '<ul class="header">';
 		$comment_string .= '<li class="comment_by">' . $records->comment_by . '</li>';
@@ -218,6 +342,23 @@ class comment extends dbObject {
 
 
 	return $comment_string;
+ }
+
+ public function multi_select_input_fields() {
+	$multi_select_input = [
+	];
+	return $multi_select_input;
+ }
+
+ public function multi_select_hidden_fields() {
+	$multi_select_hidden = [
+			'action_class_name',
+			'mode',
+			'action',
+			'show_block',
+	];
+
+	return $multi_select_hidden;
  }
 
 }

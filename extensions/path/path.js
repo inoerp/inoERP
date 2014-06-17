@@ -14,15 +14,13 @@ $(document).ready(function() {
  //Get the path_id on find button click
  $('a.show.path_id').click(function() {
 	var pathId = $('#path_id').val();
-//$(this).prop('href','path.php?path_id=' + pathId);
 	$(this).attr('href', modepath() + 'path_id=' + pathId );
  });
-
-////Get the path id on fly after clicking the submit header
-// $('#submit_header').click(function() {
-//	var pathId = $('#path_id').val();
-//	$('#path_header').attr('action', 'path.php?path_id=' + pathId);
-// });
+ 
+  $(".path_id.select_popup").on("click", function() {
+	void window.open('select.php?class_name=path', '_blank',
+					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
 
  var pathSave = new saveMainClass();
  pathSave.json_url = 'form.php?class_name=path';

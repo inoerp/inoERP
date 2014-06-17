@@ -2,7 +2,7 @@
 
 class ap_payment_line extends dbObject {
 
- protected static $table_name = "ap_payment_line";
+ public static $table_name = "ap_payment_line";
  public static $primary_column = "ap_payment_line_id";
  public static $parent_primary_column = "ap_payment_header_id";
  public static $multi_search_primary_column = "ap_payment_header_id"; //this value is used in multi search hidden value

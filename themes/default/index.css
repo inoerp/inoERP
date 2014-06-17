@@ -1,7 +1,22 @@
+#demo_message{
+font-size: 2em;
+font-weight: bold;
+padding: 30px;
+line-height: 1.5em;
+margin-bottom: 400px;
+background-color: rgba(120, 160, 160, 0.12);
+border: 20px solid rgba(120, 160, 160, 0.2);
+}
+
+
 #content_header{
-height : 100px;
-border-bottom: 4px groove rgb(179,220,237);
-background : #eee;
+height : 412px;
+   min-width: 100%;
+background-color: rgba(60, 60, 60, 0.1);
+margin-bottom: 10px;
+padding-top: 5px;
+border-radius: 10px;
+
 }
 
 #content_header .left{
@@ -15,7 +30,7 @@ margin-left: 10px;
 float: right;
 width : 62%;
 padding-left: 20px;
-border-left: 4px groove rgb(179,220,237);
+border-left: 4px groove rgba(179,220,237, 0.8);
 }
 
 span.longHeading{
@@ -24,8 +39,8 @@ font: lighter 16px 'Segoe UI Light',Segoe UI,Tahoma Light,Arial Light,Helvetica 
 
 ul.summary_list li {
 display: inline-block;
-width: 45%;
-valign : top;
+width: 450px;
+vertical-align : top;
 padding : 0px 10px;
 height : 170px;
 overflow: hidden;
@@ -37,6 +52,34 @@ font-size: 1.2em;
 font-weight: bold;
 margin-bottom: 10px;
 padding: 6px 12px;
-border-bottom: 1px solid;
+/*border-bottom: 1px solid;*/
 overflow: hidden;
+}
+.module_message:empty{
+display: none;
+}
+
+
+#module_message{
+     float: right;
+    width: 278px;
+}
+
+#module_message {
+    float: right;
+    color: rgba(6, 104, 143, 1); ;
+    padding: 5px;
+    width: 265px;
+}
+
+#process_folw {
+clear: both;
+display: block;
+width: 980px;
+border-radius: 5px;
+    background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.05);
+float: left;
+text-align: left;
+    padding-top: 10px;
+
 }

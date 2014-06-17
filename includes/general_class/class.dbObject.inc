@@ -12,7 +12,6 @@ class dbObject {
  public static $column_array = [];
  public static $requiredField_array = [];
  public static $position_array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
- public static $primary_column = "";
  public static $key_column = '';
  public static $parent_primary_column = null;
  public $time;
@@ -72,14 +71,16 @@ class dbObject {
 //	return $result_array;
 // }
 
- public function findBy_sql($sql, $param_a, $value_a) {
+ public function findBy_sql($sql, $param_a = '', $value_a = '') {
 	global $dbc;
 	$stmt = $dbc->connection->prepare(" $sql ");
-	foreach ($param_a as $key => $param) {
-	 if (!empty($value_a[$param])) {
-		$stmt->bindValue(":$param", $value_a[$param]);
-	 } else {
-		$stmt->bindValue(":$param", NULL);
+	if (!empty($param_a)) {
+	 foreach ($param_a as $key => $param) {
+		if (!empty($value_a[$param])) {
+		 $stmt->bindValue(":$param", $value_a[$param]);
+		} else {
+		 $stmt->bindValue(":$param", NULL);
+		}
 	 }
 	}
 	try {
@@ -87,10 +88,73 @@ class dbObject {
 	 $result = $stmt->fetchAll(PDO::FETCH_CLASS);
 	 return $result;
 	} catch (PDOException $e) {
-	 $ie->page_exception = ['dbObject findBy id Error : ' => $e->getMessage()];
 	 echo "Record couldnt be fetched !!: " . $e->getMessage();
 	 return 0;
 	}
+ }
+
+// public function findBySql($sql, $value_a = '') {
+//	global $dbc;
+//	$stmt = $dbc->connection->prepare(" $sql ");
+//	if (!empty($value_a)) {
+//	 foreach ($value_a as $key => $value) {
+//		if (!empty($value)) {
+//		 $stmt->bindValue(":$key", $value);
+//		} else {
+//		 $stmt->bindValue(":$key", NULL);
+//		}
+//	 }
+//	}
+//	try {
+//	 $stmt->execute();
+//	 $result = $stmt->fetchAll(PDO::FETCH_CLASS);
+//	 return $result;
+//	} catch (PDOException $e) {
+//	 echo "Record couldnt be fetched !!: " . $e->getMessage();
+//	 return 0;
+//	}
+// }
+
+ public function findBySql($sql, $value_a = '') {
+	global $dbc;
+	$stmt = $dbc->connection->prepare(" $sql ");
+	if (!empty($value_a)) {
+	 foreach ($value_a as $key => $value) {
+		if (!empty($value)) {
+		 if ($key == 'lmt_no_of_records' || $key == 'lmt_start_from') {
+			$stmt->bindValue(":$key", $value, PDO::PARAM_INT);
+		 } else {
+			$stmt->bindValue(":$key", $value);
+		 }
+		} else {
+		 $stmt->bindValue(":$key", NULL);
+		}
+	 }
+	}
+	try {
+	 $stmt->execute();
+	 $result = $stmt->fetchAll(PDO::FETCH_CLASS);
+	 return $result;
+	} catch (PDOException $e) {
+	 echo "Record couldnt be fetched !!: " . $e->getMessage();
+	 return 0;
+	}
+ }
+
+ public function findBySql_array($sql = "") {
+	global $dbc;
+	$prepare = $dbc->connection->prepare($sql);
+	$prepare->execute();
+	$result = $prepare->fetchAll(PDO::FETCH_NUM);
+	return $result;
+ }
+
+ public function findFirstColumn_BySql_array($sql = "") {
+	global $dbc;
+	$prepare = $dbc->connection->prepare($sql);
+	$prepare->execute();
+	$result = $prepare->fetchAll(PDO::FETCH_COLUMN);
+	return $result;
  }
 
  /* End of public functions and start of public static functions  */
@@ -197,25 +261,19 @@ class dbObject {
 	return $result;
  }
 
- public function findAll($id) {
+ public function findAll() {
 	global $ie;
 	global $dbc;
 	$sql = " SELECT * FROM ";
 	$sql.= static::$table_name;
 	$stmt = $dbc->connection->prepare(" $sql ");
-	$stmt->bindParam(':primary_id', $id);
 	try {
 	 $stmt->execute();
-	 $result = $stmt->fetchObject();
+	 $result = $stmt->fetchAll(PDO::FETCH_CLASS);
 	} catch (PDOException $e) {
-	 $ie->page_exception = ['dbObject findBy id Error : ' => $e->getMessage()];
-	 echo "Record couldnt found!!: " . $e->getMessage();
+	 $this->msg = "No Records Found" . $e->getMessage();
 	}
-	if (!empty($result)) {
-	 return $result;
-	} else {
-	 $ie->page_exception = ['dbObject findBy id Error : ' => 'No records found'];
-	}
+	return !empty($result) ? $result : false;
  }
 
  public function findBy_id($id) {
@@ -227,17 +285,18 @@ class dbObject {
 	$sql.= " LIMIT 1 ";
 	$stmt = $dbc->connection->prepare(" $sql ");
 	$stmt->bindParam(':primary_id', $id);
+	$stmt->setFetchMode(PDO::FETCH_INTO, $this);
 	try {
 	 $stmt->execute();
-	 $result = $stmt->fetchObject();
+//	 $result = $stmt->fetchObject();
+	 $result = $stmt->fetch();
 	} catch (PDOException $e) {
-	 $ie->page_exception = ['dbObject findBy id Error : ' => $e->getMessage()];
-	 echo "Record couldnt found!!: " . $e->getMessage();
+	 $this->msg = "No Records Found" . $e->getMessage();
 	}
-	if (!empty($result)) {
+	if (!empty($result)) { //should not be used. Use only when a copy of the class is required
 	 return $result;
 	} else {
-	 $ie->page_exception = ['dbObject findBy id Error : ' => 'No records found'];
+	 return "No Records Found!";
 	}
  }
 
@@ -304,18 +363,36 @@ class dbObject {
 	return array_key_exists($attribute, $object_vars);
  }
 
- protected function audit_trial() {
-	$this->creation_date = current_time();
-	if ((isset($_SESSION)) && (!empty($_SESSION['username']))) {
-	 $this->created_by = $_SESSION['username'];
-	} else {
-	 $this->created_by = 'selfWeb';
+ public function audit_trial() {
+	if (empty($this->creation_date)) {
+	 $this->creation_date = current_time();
 	}
-	$this->last_update_date = $this->creation_date;
-	$this->last_update_by = $this->created_by;
+	if (empty($this->created_by)) {
+	 if ((isset($_SESSION)) && (!empty($_SESSION['username']))) {
+		$this->created_by = $_SESSION['username'];
+	 } else {
+		$this->created_by = 'selfWeb';
+	 }
+	}
+	$this->last_update_date = current_time();
+	if ((isset($_SESSION)) && (!empty($_SESSION['username']))) {
+	 $this->last_update_by = $_SESSION['username'];
+	} else {
+	 $this->last_update_by = 'selfWeb';
+	}
  }
 
  public function save() {
+	$primary_column = static::$primary_column;
+	if (empty($this->$primary_column)) {
+	 $this->create();
+	} else {
+	 $this->update_changesOnly($this->$primary_column);
+	}
+	return $this->msg;
+ }
+
+ public function save_onWebForm() {
 	$primary_column = static::$primary_column;
 	if (empty($this->$primary_column)) {
 	 $this->create();
@@ -327,12 +404,16 @@ class dbObject {
 
  public function create() {
 	global $dbc;
-	$primary_column = static::$primary_column;
+	$parent_class_name = get_called_class();
+	if (property_exists($parent_class_name, 'primary_column')) {
+	 $primary_column = static::$primary_column;
+	}
 	if (property_exists($this, 'field_a')) {
 	 $field_array = $this->field_a;
 	} else {
 	 $field_array = static::$field_array;
 	}
+
 	$field_colums = '';
 	foreach ($field_array as $key => $value) {
 	 $field_colums .= $value . ', ';
@@ -355,7 +436,8 @@ class dbObject {
 	$sql.= $field_values;
 	$sql.= ' ) ';
 	$stmt = $dbc->connection->prepare(" $sql ");
-//Bind parameters
+
+	//Bind parameters
 	foreach ($field_array as $key => $value) {
 	 if (!empty($this->$value)) {
 		$stmt->bindParam(":$value", $this->$value);
@@ -365,59 +447,19 @@ class dbObject {
 	}
 	try {
 	 $stmt->execute();
-	 $this->$primary_column = $dbc->connection->lastInsertId();
+	 if (isset($primary_column)) {
+		$this->$primary_column = $dbc->connection->lastInsertId();
+	 }
 	 $this->msg = 1;
 	} catch (PDOException $e) {
 	 $this->msg = 0;
 	 echo "Record couldnt be saved!!: Error Code : DBO01 " . $e->getMessage() . "<br/>";
 	}
-
-//	$field_arry_colums = array();
-//	$field_arry_values = array();
-//	foreach (static::$field_array as $key => $value) {
-//	 $field_arry_colums[] = sprintf("`%s`", $value);
-//	}
-//	$field_colums = implode(',', $field_arry_colums);
-//
-//	foreach (static::$field_array as $key => $value) {
-//	 if (!empty($this->$value)) {
-//		$field_arry_values[] = sprintf("'%s'", $this->$value);
-//	 } else {
-//		$field_arry_values[] = 'NULL';
-//	 }
-//	}
-//	$field_values = implode(',', $field_arry_values);
-//
-//	$sql = " INSERT INTO ";
-//	$sql.= static::$table_name;
-//	$sql.= ' ( ';
-//	$sql.= $field_colums;
-//	$sql.= ' ) ';
-//	$sql.= 'VALUES';
-//	$sql.= ' ( ';
-//	$sql.= $field_values;
-//	$sql.= ' ) ';
-//
-////	echo '<div class="message"><br/>$sql is : ' . $sql . '</div>';
-//	$primary_column = static::$primary_column;
-//
-//	$prepare = $dbc->connection->prepare($sql);
-//
-//	if ($prepare->execute()) {
-//	 $this->$primary_column = $dbc->connection->lastInsertId();
-//	 $this->msg = 1;
-//	} else {
-//	 echo "\nRecord couldnt be saved:\n";
-//	 $dbc->connection->errorInfo();
-//
-//	 $this->msg = 0;
-//	}
 	return $this->msg;
  }
 
 //update function
  public function update($id) {
-	global $ie;
 	global $dbc;
 	if (property_exists($this, 'field_a')) {
 	 $field_array = $this->field_a;
@@ -426,9 +468,7 @@ class dbObject {
 	}
 	$field_stmt = '';
 	foreach ($field_array as $key => $value) {
-	 if (!empty($this->$value)) {
-		$field_stmt .= $value . ' = :' . $value . ', ';
-	 }
+	 $field_stmt .= $value . ' = :' . $value . ', ';
 	}
 	$field_stmt_f = rtrim($field_stmt, ', ');
 //write SQL
@@ -439,9 +479,56 @@ class dbObject {
 	$sql.= " WHERE " . static::$primary_column . "= :primary_id ";
 
 	$stmt = $dbc->connection->prepare(" $sql ");
+	//Bind parameters
+	foreach ($field_array as $key => $value) {
+	 $stmt->bindParam(":$value", $this->$value);
+	}
+	$time = time();
+	$last_update_date = strftime("%d-%m-%y %H:%M:%S", $time);
+	if (!empty($_SESSION['user_name'])) {
+	 $last_update_by = $_SESSION['user_name'];
+	} else {
+	 $last_update_by = 'admin';
+	}
+	$stmt->bindParam(':last_update_by', $last_update_by);
+	$stmt->bindParam(':last_update_date', $last_update_date);
+	$stmt->bindParam(':primary_id', $id);
+	try {
+	 $stmt->execute();
+	 $this->msg = 1;
+	} catch (PDOException $e) {
+	 $this->msg = 0;
+	 echo "<div class='message'>failing for sql is $sql</div>";
+	 echo "Record could not be updated !!: " . $e->getMessage();
+	}
+	return $this->msg;
+ }
+
+ public function update_changesOnly($id) {
+	global $dbc;
+
+	if (property_exists($this, 'field_a')) {
+	 $field_array = $this->field_a;
+	} else {
+	 $field_array = static::$field_array;
+	}
+	$field_stmt = '';
+	foreach ($field_array as $key => $value) {
+	 if (isset($this->$value)) {
+		$field_stmt .= $value . ' = :' . $value . ', ';
+	 }
+	}
+	$field_stmt_f = rtrim($field_stmt, ', ');
+//write SQL
+	$sql = " UPDATE ";
+	$sql.= static::$table_name;
+	$sql .= " SET ";
+	$sql.= $field_stmt_f;
+	$sql.= " WHERE " . static::$primary_column . "= :primary_id ";
+	$stmt = $dbc->connection->prepare(" $sql ");
 //Bind parameters
 	foreach ($field_array as $key => $value) {
-	 if (!empty($this->$value)) {
+	 if (isset($this->$value)) {
 		$stmt->bindParam(":$value", $this->$value);
 	 }
 	}
@@ -466,24 +553,92 @@ class dbObject {
 	return $this->msg;
  }
 
- public static function delete($id) {
+ public function delete() {
 	global $dbc;
-
+	$primary_column = static::$primary_column;
 	$sql = " DELETE FROM ";
 	$sql .= static::$table_name;
 	$sql .= " WHERE  ";
-	$sql .= static::$primary_column . "= '{$id}' ";
+	$sql .= $primary_column . "= :primary_column ";
 
-//	echo '<div class="message"><br/>$sql is : '. $sql. '</div>';
-	$prepare = $dbc->connection->prepare($sql);
-
-	if ($prepare->execute()) {
-	 return true;
-	} else {
-	 return false;
+	$stmt = $dbc->connection->prepare($sql);
+	$stmt->bindParam(':primary_column', $this->$primary_column);
+//	echo '<div class="message"><br/>$sql is : ' . $sql . ' and primary column is' . $this->$primary_column . '</div>';
+	try {
+	 $stmt->execute();
+	 $this->msg = 1;
+	 echo "<div class='message'>Record is sucessfully deleted.</div>";
+	} catch (PDOException $e) {
+	 $this->msg = 0;
+	 echo "<div class='message'>failing for sql is $sql</div>";
+	 echo "Record could not be updated !!: " . $e->getMessage();
 	}
+	return $this->msg;
  }
 
+ public function deleteBy_parentId($id) {
+	if (empty($id)) {
+	 return false;
+	}
+	$dbc = new dbc();
+	$sql = " DELETE FROM  ";
+	$sql.= static::$table_name;
+	$sql.= " WHERE " . static::$parent_primary_column . "= :primary_id ";
+	$stmt = $dbc->connection->prepare($sql);
+	$stmt->bindParam(':primary_id', $id);
+	try {
+	 $stmt->execute();
+//	 $dbc->connection->commit();
+	 $this->msg = 1;
+	 echo "<div class='message'>Records are sucessfully deleted.</div>";
+	} catch (PDOException $e) {
+	 $this->msg = 0;
+	 echo "<div class='message'>failing for sql is $sql</div>";
+	 echo "Record could not be updated !!: " . $e->getMessage();
+	}
+	return $this->msg;
+ }
+
+ protected function deleteBy_orgId($org_id) {
+	if (empty($id)) {
+	 return false;
+	}
+	$dbc = new dbc();
+	$sql = " DELETE FROM  ";
+	$sql.= static::$table_name;
+	$sql.= " WHERE org_id = :org_id ";
+	$stmt = $dbc->connection->prepare($sql);
+	$stmt->bindParam(':org_id', $org_id);
+	try {
+	 $stmt->execute();
+//	 $dbc->connection->commit();
+	 $this->msg = 1;
+	 echo "<div class='message'>Records are sucessfully deleted.</div>";
+	} catch (PDOException $e) {
+	 $this->msg = 0;
+	 echo "<div class='message'>failing for sql is $sql</div>";
+	 echo "Record could not be updated !!: " . $e->getMessage();
+	}
+	return $this->msg;
+ }
+
+// public static function delete($id) {
+//	global $dbc;
+//
+//	$sql = " DELETE FROM ";
+//	$sql .= static::$table_name;
+//	$sql .= " WHERE  ";
+//	$sql .= static::$primary_column . "= '{$id}' ";
+//
+////	echo '<div class="message"><br/>$sql is : '. $sql. '</div>';
+//	$prepare = $dbc->connection->prepare($sql);
+//
+//	if ($prepare->execute()) {
+//	 return true;
+//	} else {
+//	 return false;
+//	}
+// }
 }
 
 //end of content_type class

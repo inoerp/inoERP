@@ -2,7 +2,7 @@
 
 class bom_routing_line extends dbObject {
 
- protected static $table_name = "bom_routing_line";
+ public static $table_name = "bom_routing_line";
  public static $primary_column = "bom_routing_line_id";
  public static $parent_primary_column = "bom_routing_header_id";
  public static $multi_search_primary_column = "bom_routing_header_id"; //this value is used in multi search hidden value

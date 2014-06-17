@@ -2,7 +2,7 @@
 
 class option_line extends dbObject {
 
- protected static $table_name = "option_line";
+ public static $table_name = "option_line";
  public static $primary_column = "option_line_id";
  public static $key_column = 'option_line_code';
  public static $module = "sys";
@@ -80,7 +80,7 @@ class option_line extends dbObject {
  
  public static function find_by_optionId_lineCode($option_id, $line_code) {
 	$sql = "SELECT * FROM " . self::$table_name .
-					" where option_line_code='{$line_code}' AND option_header_id={$option_id} LIMIT 1";
+					" where option_line_code='{$line_code}' AND option_header_id='{$option_id}' LIMIT 1";
 	$result_array = self::find_by_sql($sql);
 	return !empty($result_array) ? array_shift($result_array) : false;
  }

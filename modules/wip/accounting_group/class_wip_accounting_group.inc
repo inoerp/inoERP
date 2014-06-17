@@ -2,7 +2,7 @@
 
 class wip_accounting_group extends org {
 
- protected static $table_name = "wip_accounting_group";
+ public static $table_name = "wip_accounting_group";
  public static $primary_column = "wip_accounting_group_id";
  public static $key_column = 'wip_accounting_group';
  public static $module = "wip";

@@ -2,7 +2,7 @@
 
 class sys_value_group_line extends dbObject {
 
- protected static $table_name = "sys_value_group_line";
+ public static $table_name = "sys_value_group_line";
  public static $primary_column = "sys_value_group_line_id";
  public static $parent_primary_column = "sys_value_group_header_id";
  public static $key_column = "code";

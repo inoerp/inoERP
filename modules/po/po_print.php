@@ -1,42 +1,21 @@
 <?php
-$module_info = [
-		array(
-				"module" => "po",
-				"class" => "po_header",
-				"key_field" => "po_type",
-				"primary_column" => "po_header_id"
-		),
-		array(
-				"module" => "po",
-				"class" => "po_line",
-				"key_field" => "item_description",
-				"primary_column" => "po_line_id"
-		),
-		array(
-				"module" => "po",
-				"class" => "po_detail",
-				"key_field" => "shipment_number",
-				"primary_column" => "po_detail_id"
-		)
-];
-$pageTitle = " PO - Print ";
-$view_path = "po_view";
-?>
-<?php include_once("../../includes/basics/header_simple.inc"); ?> 
-<?php
+
+include_once("../../includes/basics/basics.inc");
+$po_header = new po_header();
+
 $class = $class_first = 'po_header';
 $$class = $$class_first = &$po_header;
 $class_second = 'po_line';
 $$class_second = &$po_line;
 $class_third = 'po_detail';
 $$class_third = &$po_detail;
-?>
 
-<?php
+
 if (!empty($_GET["po_header_id"])) {
  $po_header_id = htmlentities($_GET["po_header_id"]);
 } elseif (!empty($_POST["po_header_id"][0])) {
  $po_header_id = $_POST["po_header_id"][0];
+ $po_header->findBy_id($po_header_id);
 } else {
  $po_line = new po_line();
  $po_line_object = array();
@@ -89,16 +68,16 @@ $payment_term = payment_term::find_by_id($$class->$document_showVar3);
 
 //row 1 - left side header Info
 $header_info_statement = "";
-if (!empty($$class->$primary_column)) {
+
  $header_info_statement .= "<ul>";
- $header_info_statement .= "<li>$document_type : " . $$class->$document_type_number . "</li>";
- $header_info_statement .= "<li>Revision : " . $$class->$document_revision_number . "</li>";
- $header_info_statement .= "<li>Buyer : " . $$class->$document_showVar1 . "</li>";
- $header_info_statement .= "<li>Currency : " . $$class->$document_showVar2 . "</li>";
- $header_info_statement .= "<li>Payment Term : " . $payment_term->payment_term . "</li>";
- $header_info_statement .= "<li>Amount : " . $$class->$document_showVar4 . "</li>";
+ $header_info_statement .= "<li>$document_type : " . $po_header->$document_type_number . "</li>";
+ $header_info_statement .= "<li>Revision : " . $po_header->$document_revision_number . "</li>";
+ $header_info_statement .= "<li>Buyer : " . $po_header->$document_showVar1 . "</li>";
+ $header_info_statement .= "<li>Currency : " . $po_header->$document_showVar2 . "</li>";
+ $header_info_statement .= "<li>Payment Term : " . $po_header->payment_term_id . "</li>";
+ $header_info_statement .= "<li>Amount : " . $po_header->$document_showVar4 . "</li>";
  $header_info_statement .= "</ul>";
-}
+
 
 //row 1 - right side supplier/customer Info
 $external_entiry_info = "";
@@ -155,8 +134,8 @@ if (!empty($$class->$external_entity_lineId)) {
  		<tbody class="form_data_line_tbody">
  		<td><?php echo $$class_second->line_number; ?></td>
  		<td><?php
-			$line_type = option_line::find_by_id($$class_second->line_type);
-			echo $line_type->option_line_code;
+			$line_type = option_line::find_by_optionId_lineCode(133,$$class_second->line_type);
+			echo $line_type->option_line_value;
 			?></td>
  		<td><?php echo $$class_second->item_number; ?></td>
 		<td><?php echo $$class_second->unit_price; ?></td>

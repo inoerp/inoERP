@@ -2,10 +2,22 @@
 
 class bom_material_element extends dbObject {
 
- protected static $table_name = "bom_material_element";
+ public static $table_name = "bom_material_element";
  public static $key_column = 'material_element';
  public static $primary_column = "bom_material_element_id";
  public static $module = "bom";
+ public static $system_info = [
+		 'name' => 'Material Element',
+		 'number' => '2404',
+		 'description' => 'Material Element of Cost ',
+		 'version' => '1.1.1.3',
+		 'db_version' => '1001',
+		 'mod_version' => '1.1.x-1.1',
+		 'dependent_class' => '',
+		 'primary_entity_cb' => '',
+		 'module_name' => 'bom',
+		 'weight' => 4
+ ];
 //  data base variables as stored database column name
  public $field_a = [
 		 'bom_material_element_id',
@@ -46,7 +58,6 @@ class bom_material_element extends dbObject {
 		 '_show_view_path' => 1,
  ];
  public $pageTitle = " Material Element - Create & Update BOM Material Element "; //page Title
- 
  public $bom_material_element_id;
  public $material_element;
  public $description;
@@ -60,7 +71,6 @@ class bom_material_element extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
-
 
  public function _before_showing() {
 	

@@ -2,10 +2,22 @@
 
 class po_purchasing_control extends dbObject {
 
- protected static $table_name = "po_purchasing_control";
+ public static $table_name = "po_purchasing_control";
  public static $primary_column = "po_purchasing_control_id";
  public static $key_column = 'org_id';
  public static $module = "po";
+       public static $system_info = [
+		 'name' => 'Purchasing Control',
+					 'number' => '2201',
+		 'description' => 'Create & Mainten Purchaing Controls',
+		 'version' => '1.1.1.3',
+		 'db_version' => '1001',
+		 'mod_version' => '1.1.x-1.1',
+		 'dependent_class' => '',
+		 'primary_entity_cb' => '',
+		 'module_name' => 'po',
+		 'weight' => 4
+ ];
  public $field_a = [
 		 'po_purchasing_control_id',
 		 'org_id',

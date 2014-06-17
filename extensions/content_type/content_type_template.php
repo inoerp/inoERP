@@ -10,19 +10,24 @@
 			<div class="error"></div><div id="loading"></div>
 			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
       <div id ="form_header">
+			 <span class="heading">Content Type </span>
 			 <form action=""  method="post" id="content_type_header"  name="content_type_header" class="content_type_header">
 				<div id="tabsHeader">
 				 <ul class="tabMain">
           <li><a href="#tabsHeader-1">Basic Info</a></li>
-          <li><a href="#tabsHeader-2">Categories</a></li>
+          <li><a href="#tabsHeader-2">Comments</a></li>
+					<li><a href="#tabsHeader-3">Categories</a></li>
+					<li><a href="#tabsHeader-4">Actions</a></li>
          </ul>
 				 <div class="tabContainer">
 					<div id="tabsHeader-1" class="tabContent">
 					 <div class="large_shadow_box"> 
 						<ul class="column four_column">
-						 <li class="content_type_id"><label>Type ID : </label>
-							<?php form::number_field_drs('content_type_id'); ?><a name="show" class="show content_type_id">
-							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a></li>
+						 <li class="content_type_id">
+							<label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="content_type_id select_popup clickable">
+							 Type ID : </label>
+							<?php form::number_field_drs('content_type_id'); ?><a name="show" href="form.php?class_name=content_type" class="show content_type clickable">
+							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> </li>
 						 <li class="content_type_label"><label>Content Type : </label>
 							<?php form::text_field_dm('content_type'); ?></li>
 						 <li class="description"><label>Description : </label>
@@ -33,13 +38,36 @@
 							<?php form::text_field_d('subject_label'); ?></li>
 						 <li class="allow_file_cb"> <label>Attachment ? : </label>    
 							<?php echo form::checkBox_field('allow_file_cb', $$class->allow_file_cb); ?></li>
-						 <li class="allow_comment_cb"> <label>Enable Comments ? : </label>    
-							<?php echo form::checkBox_field('allow_comment_cb', $$class->allow_comment_cb); ?></li>
-						 <li><input type="button" class="button drop_table" name="drop_table" id="drop_table" value="Delete Content Type"></li>
+						 <li class="role"><label>Read Role : </label>
+							<?php echo $f->select_field_from_object('read_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->read_role, 'read_role'); ?></li>
+						 <li class="role"><label>Write Role : </label>
+							<?php echo $f->select_field_from_object('write_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->write_role, 'write_role'); ?></li>
+						 <li class="role"> <label>Update Role : </label>  
+							<?php echo $f->select_field_from_object('update_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->update_role, 'update_role'); ?></li>
+					
 						</ul>
 					 </div>
 					</div>
 					<div id="tabsHeader-2" class="tabContent">
+					 <div class="large_shadow_box"> 
+						<ul class="column four_column">
+						 <li class="allow_comment_cb"> <label>Enable Comments ? : </label>    
+							<?php echo form::checkBox_field('allow_comment_cb', $$class->allow_comment_cb); ?></li>
+						 <li class="role"><label>Read Role : </label>
+							<?php echo $f->select_field_from_object('comment_read_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->comment_read_role, 'comment_read_role'); ?></li>
+						 <li class="role"><label>Write Role : </label>
+							<?php echo $f->select_field_from_object('comment_write_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->comment_write_role, 'comment_write_role'); ?></li>
+						 <li class="role"> <label>Update Role : </label>  
+							<?php echo $f->select_field_from_object('comment_update_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->comment_update_role, 'comment_update_role'); ?></li>
+						 <li class="subject_label"><label>Comment Listing : </label>
+							<?php echo $f->select_field_from_array('comment_order_by', content_type::$comment_order_by_a, $$class->comment_order_by); ?></li>
+						 <li class="allow_file_cb"><label>Comments Per Page : </label>    
+							<?php echo $f->select_field_from_array('comments_perpage', select_per_page_array(), $$class->comments_perpage); ?></li>
+					 
+						</ul>
+					 </div>
+					</div>
+					<div id="tabsHeader-3" class="tabContent">
 					 <div> 
 						<ul class="column five_column">
 						 <?php
@@ -54,13 +82,20 @@
 						 echo form::select_field_from_object('category_id', category::major_categories(), 'category_id', 'category', 'category_id', '', $readonly, 'category_id', '', '');
 						 echo '</li>';
 						 ?> 
-						 </li>
+						</ul>
+					 </div>
+					</div>
+					<div id="tabsHeader-4" class="tabContent">
+					 <div class="large_shadow_box"> 
+						<ul class="column four_column">
+						 <li><input type="button" class="button drop_table" name="drop_table" id="drop_table" value="Delete Content Type"></li>
 						</ul>
 					 </div>
 					</div>
 				 </div>
 				</div>
-				<div id="form_line" class="form_line"><span class="heading">Content Type Fields/Columns </span>
+				<span class="heading">Content Type Fields/Columns </span>
+				<div id="form_line" class="form_line">
 				 <div id="tabsLine">
 					<ul class="tabMain">
 					 <li><a href="#tabsLine-1">Main</a></li>
@@ -112,7 +147,7 @@
 								 echo form::text_field('field_name', $$class_second->field_name, 20, 50, 1, 'use small letters', '', $fielNamereadonly, 'field_name')
 								 ?></td>
  							 <td>
-								 <?php echo form::select_field_from_object('field_type', content_type::content_field_type(), 'option_line_code', 'option_line_value', $$class_second->field_type, '', $readonly, 'field_type', '') ?>
+								 <?php echo $f->select_field_from_object('field_type', content_type::content_field_type(), 'option_line_code', 'option_line_value', $$class_second->field_type, '', '', 1, $readonly, 'field_type', '') ?>
  							 </td>
  							 <td><?php form::number_field_wid2s('field_num'); ?></td>    
  							 <td><?php form::text_field_wid2('field_enum'); ?></td>  

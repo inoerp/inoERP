@@ -2,7 +2,7 @@
 
 class fp_minmax_order_v extends dbObject {
 
- protected static $table_name = "fp_minmax_order_v";
+ public static $table_name = "fp_minmax_order_v";
  public static $primary_column = "fp_minmax_demand_id";
  public static $key_column = 'item_id';
  public static $module = "fp";

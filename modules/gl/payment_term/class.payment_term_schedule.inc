@@ -2,7 +2,7 @@
 
 class payment_term_schedule extends payment_term {
 
- protected static $table_name = "payment_term_schedule";
+ public static $table_name = "payment_term_schedule";
  public static $account_array = [
  ];
  public static $checkbox_array = [

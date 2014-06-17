@@ -2,7 +2,7 @@
 
 class wip_wo_bom extends dbObject {
 
- protected static $table_name = "wip_wo_bom";
+ public static $table_name = "wip_wo_bom";
  public static $primary_column = "wip_wo_bom_id";
  public static $parent_primary_column = "wip_wo_header_id";
  public static $key_column = 'bom_sequence';

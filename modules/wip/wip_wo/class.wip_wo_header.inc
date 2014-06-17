@@ -2,7 +2,7 @@
 
 class wip_wo_header extends dbObject {
 
- protected static $table_name = "wip_wo_header";
+ public static $table_name = "wip_wo_header";
  public static $dependent_classes = ['wip_wo_routing_line', 'wip_wo_routing_detail', 'wip_wo_bom'];
  public static $primary_column = "wip_wo_header_id";
  public static $primary_column2 = "wo_number";

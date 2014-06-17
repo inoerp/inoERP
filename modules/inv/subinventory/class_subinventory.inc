@@ -2,7 +2,7 @@
 
 class subinventory extends dbObject {
 
- protected static $table_name = "subinventory";
+ public static $table_name = "subinventory";
  public static $primary_column = "subinventory_id";
  public static $key_column = 'subinventory';
  public static $module = "inv";

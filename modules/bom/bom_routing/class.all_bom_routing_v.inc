@@ -2,7 +2,7 @@
 
 class all_bom_routing_v extends bom_routing_line {
 
- protected static $table_name = "all_bom_routing_v";
+ public static $table_name = "all_bom_routing_v";
  public static $account_array = [
  ];
  public static $checkbox_array = [

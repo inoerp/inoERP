@@ -2,11 +2,23 @@
 
 class ar_customer extends dbObject {
 
- protected static $table_name = 'ar_customer';
+ public static $table_name = 'ar_customer';
  public static $dependent_classes = ['ar_customer_site'];
  public static $primary_column = 'ar_customer_id';
  public static $key_column = 'customer_number';
  public static $module = "ar";
+ public static $system_info = [
+		 'name' => 'Customer',
+		 'number' => '1301',
+		 'description' => 'Define and mainten external/internal customers',
+		 'version' => '1.1.1.3',
+		 'db_version' => '1001',
+		 'mod_version' => '1.1.x-1.1',
+		 'dependent_class' => array('ar_customer_site', 'ar_customer_bu'),
+		 'primary_entity_cb' => '',
+		 'module_name' => 'ar',
+		 'weight' => 1
+ ];
  public $field_a = [
 		 'ar_customer_id',
 		 "customer_number",
@@ -49,13 +61,17 @@ class ar_customer extends dbObject {
  public $addressField = [
 		 "address_id"
  ];
-
+ public $fields_inForm_notInDataBase = [
+		 'header_address_name',
+		 'header_address',
+		 'header_country',
+		 'header_postal_code',
+ ];
  public $requiredField = [
 		 "customer_number",
 		 "customer_name",
 		 "tax_country"
  ];
-
  public $search = [
 		 '_update_path' => 'form.php?class_name=ar_customer',
 		 '_show_update_path' => 1,
@@ -88,6 +104,10 @@ class ar_customer extends dbObject {
  public $time;
  public $msg;
  public $customer_credit_class;
+ public $header_address_name;
+ public $header_address;
+ public $header_country;
+ public $header_postal_code;
 
  Public static function customer_types() {
 	$option_header = option_header::find_by_name('AR_CUSTOMER_TYPE');
@@ -100,8 +120,19 @@ class ar_customer extends dbObject {
 	$customer_credit_class = option_line::find_by_option_id($option_header->option_header_id);
 	return $customer_credit_class;
  }
- 
-  public function findBy_customerName_OrgId($limit = 30) {
+
+ public function _before_showing() {
+	$address = new address();
+	if (!empty($this->address_id)) {
+	 $address->findBy_id($this->address_id);
+	 $this->header_address_name = $address->address_name;
+	 $this->header_address = $address->address;
+	 $this->header_country = $address->country;
+	 $this->header_postal_code = $address->postal_code;
+	}
+ }
+
+ public function findBy_customerName_OrgId($limit = 30) {
 	global $db;
 	$sql = " SELECT ac.customer_name, ac.ar_customer_id, ac.customer_number ";
 	$sql .= " FROM ar_customer ac ";
@@ -115,8 +146,8 @@ class ar_customer extends dbObject {
 	$result = $db->findBy_sql($sql, $param_a, $value_a);
 	return !(empty($result)) ? $result : false;
  }
- 
-  public function findBy_customer_name($limit = 30) {
+
+ public function findBy_customer_name($limit = 30) {
 	global $db;
 	$sql = " SELECT * FROM "
 					. self::$table_name
@@ -127,8 +158,8 @@ class ar_customer extends dbObject {
 	$result = $db->findBy_sql($sql, $param_a, $value_a);
 	return !(empty($result)) ? $result : false;
  }
- 
-  public function searchBy_customer_name() {
+
+ public function searchBy_customer_name() {
 	$result = $this->findBy_customer_name();
 	$data = array();
 	if (!empty($result)) {
@@ -157,7 +188,6 @@ class ar_customer extends dbObject {
 	}
 	return $data;
  }
- 
 
  public static function find_customer_number_by_customer_number($customer_number) {
 	global $db;

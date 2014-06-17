@@ -1,28 +1,3 @@
-<?php
-
-$module_info = [
-		array(
-				"module" => "user",
-				"class" => "user",
-				"key_field" => "username",
-				"primary_column" => "user_id"
-		),
-		array(
-				"module" => "user",
-				"class" => "user_role",
-				"key_field" => "role_id",
-				"primary_column" => "user_role_id"
-		),
-		array(
-				"module" => "user",
-				"class" => "user_password_reset",
-				"key_field" => "role_id",
-				"primary_column" => "user_password_reset_id"
-		)
-];
-$pageTitle = " User - Create & Update all Users ";
-$view_path = "user_view";
-?>
 <?php include_once('../../includes/basics/header_public.inc'); ?>
 <script type='text/javascript' src="user.js" ></script>
 <?php
@@ -33,24 +8,26 @@ if ($session->login_status()) {
 ?>
 <?php
 
+global $dbc;
 $class = $class_first = 'user';
-$$class = $$class_first = &$user;
+$$class = new $class;
 $class_second = 'user_role';
-$$class_second = &$user_role;
+$$class_second = new $class_second;
 $class_third = 'user_password_reset';
-$$class_third = &$user_password_reset;
+$$class_third = new $class_third;
+
 
 if (!empty($_POST['submitLogin'])) { //form is submitted for login
  $username = trim(mysql_prep($_POST['username']));
  $password = trim(mysql_prep($_POST['password']));
 
- $loggedin_user = user::authenticate($username, $password);
+ $loggedin_user = $$class->authenticate($username, $password);
 
  If ($loggedin_user) {
 	$session->login($loggedin_user);
-	$session->assign_role($_SESSION['user_id']);
+//	$session->assign_role($_SESSION['user_id']);
 
-	if (!empty($session->orginal_page)) {
+	if (!empty($_SESSION['orginal_page'])) {
 	 header('Location: http://' . $session->orginal_page);
 	 unset($_SESSION['orginal_page']);
 	 unset($session->orginal_page);
@@ -64,42 +41,48 @@ if (!empty($_POST['submitLogin'])) { //form is submitted for login
 }//end of if post submit
 
 if (!empty($_POST['newUser'])) {
-// echo '<pre>';
-// print_r($_POST);
- $_POST = user::user_verification_update($_POST);
- 
- if(!empty($_POST)){
- $_POST['submit_user'] = 1;
- $$class = Pre_Loading_Function('user', 'user', 'username', 'user_id');
-  }
- 
-  if (!empty($$class->user_id)) {
-	 //Assign basic role
-	 $user_role = new user_role;
-	 $user_role->user_id = $$class->user_id;
-	 $user_role->role_id=261;
-	 $user_role->save();
-	echo '<div class="message error"> Account is sucessfully created!. Please check your mail box. </div>';
+ $new_user = new user();
+ $new_user->username = trim($_POST['username'][0]);
+ $new_user->enteredPassword = trim($_POST['enteredPassword'][0]);
+ $new_user->enteredRePassword = trim($_POST['enteredRePassword'][0]);
+ $new_user->first_name = trim($_POST['first_name'][0]);
+ $new_user->last_name = trim($_POST['last_name'][0]);
+ $new_user->email = trim($_POST['email'][0]);
+ if ($new_user->_before_save() == 1) {
+	$new_user->audit_trial();
+	$new_user->save();
+	$new_user->_after_save();
+	$dbc->confirm();
+ }
+
+ if (!empty($new_user->user_id)) {
+	//Assign basic role
+	$user_role = new user_role();
+	$user_role->user_id = $new_user->user_id;
+	$user_role->role_code = 'BASIC';
+	$user_role->save();
+	$dbc->confirm();
+	echo '<div class="message error"> Account is sucessfully created!. Please check your mail box for further details. </div>';
  } else {
 	echo '<div class="message error"> Account creation failed!. Contact the admin. </div>';
  }
 }
 
 if (!empty($_POST['resetPassword'])) {
-// echo '<pre>';
-// print_r($_POST);
+ $pr = new user_password_reset();
+ $ru = new user();
  if (!empty($_POST['username'][0])) {
 	$username = $_POST['username'][0];
-	$resetUser = user::find_by_username($username);
+	$resetUser = $ru->findBy_userName($username);
  } elseif (!empty($_POST['email'][0])) {
 	$email = $_POST['email'][0];
-	$resetUser = user::find_by_email($email);
+	$resetUser = $ru->findBy_eMail($email);
  } else {
-	echo '<div class="error"> Password reset failed! Enter user name or email id to reset password. </div>';
+	echo '<div class="error"> No record found! Check the entered user name or email. </div>';
  }
 
  if (!empty($resetUser)) {
-	$result_msg = user_password_reset::generateResetPassword($resetUser);
+		$result_msg = $pr->generateResetPassword($resetUser);
 	echo '<div class="error">' . $result_msg . ' A new pasword reset link has been set to the registered email address </div>';
  }
 }
@@ -116,4 +99,4 @@ if (!empty($msg)) {
 }
 ?>
 
-<?php require_once('user_login_template.php') ?>
+<?php require_once('login/user_login_template.php') ?>

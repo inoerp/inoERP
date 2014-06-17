@@ -2,7 +2,7 @@
 
 class fp_forecast_header extends dbObject {
 
- protected static $table_name = "fp_forecast_header";
+ public static $table_name = "fp_forecast_header";
  public static $primary_column = "fp_forecast_header_id";
  public static $dependent_classes = ['fp_forecast_line'];
  public static $key_column = 'forecast';

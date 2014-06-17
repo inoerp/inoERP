@@ -2,7 +2,7 @@
 
 class payment_term_discount extends payment_term {
 
- protected static $table_name = "payment_term_discount";
+ public static $table_name = "payment_term_discount";
  public static $account_array = [
  ];
  public static $checkbox_array = [

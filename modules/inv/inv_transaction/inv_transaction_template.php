@@ -132,6 +132,7 @@
 							 <th>Ref Doc</th>
 							 <th>WO BOM Line Id</th>
 							 <th>PO Detail Id</th>
+							 							 <th>SO Line Id</th>
 							</tr>
 						 </thead>
 						 <tbody class="form_data_line_tbody">
@@ -145,6 +146,7 @@
 							 <td><?php echo!empty($ref_doc_stmt) ? $ref_doc_stmt : ''; ?></td>
 							 <td><?php form::text_field_wids('wip_wo_bom_id'); ?>							</td>
 							 <td><?php form::text_field_wids('po_detail_id'); ?>							</td>
+							 <td><?php form::text_field_wids('sd_so_line_id'); ?>							</td>
 							</tr>
 						 </tbody>
 						</table>

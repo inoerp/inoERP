@@ -28,6 +28,10 @@
 					<li><label>Address Name :</label> 
 					 <?php echo form::text_field('address_name', $address->address_name, '20', '', '', 'Enter a valid address name', 'address_name', $readonly); ?>
 					</li>
+					<li><label><img class="tax_region_id select_popup clickable" src="<?php echo HOME_URL; ?>themes/images/serach.png">
+						Tax Region :</label> 
+					 <?php $f->text_field_d('tax_region_name') ?>
+					</li>
 					<li><label>Description  : </label> 
 					 <?php echo form::text_field('description', $address->description, '20', '250', '', 'Limit to 100 characters', 'description', $readonly); ?>
 					</li>
@@ -57,13 +61,13 @@
 					 <?php echo form::text_field('website', $address->website, '30', '', '', 'Enter a valid website', 'website', $readonly); ?>
 					</li>
 					<li><label>Country  : </label>
-					 	 <?php echo form::text_field('country', $address->country, '30', '', '', 'Enter a valid country', 'country', $readonly); ?>
+					 <?php echo form::text_field('country', $address->country, '30', '', '', 'Enter a valid country', 'country', $readonly); ?>
 					</li>
 					<li><label>Postal Code  : </label>
 					 <?php echo form::text_field('postal_code', $address->postal_code, '30', '', '', 'Enter a postal_code', 'postal_code', $readonly); ?>
 					</li>
 					<li><label>Address :</label>  
-					<?php echo form::text_area('address', $address->address, '3', '22', '', 'Complete Address', 'address', $readonly); ?>
+					 <?php echo form::text_area('address', $address->address, '3', '22', '', 'Complete Address', 'address', $readonly); ?>
 					</li>
 				 </ul>
 				</div> 

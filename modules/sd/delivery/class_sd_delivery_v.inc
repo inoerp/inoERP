@@ -2,7 +2,7 @@
 
 class inv_receipt_v extends dbObject {
 
- protected static $table_name = "inv_receipt_v";
+ public static $table_name = "inv_receipt_v";
  public static $primary_column = "ap_transaction_header_id";
  public $field_a = [
 		 "ap_transaction_header_id",

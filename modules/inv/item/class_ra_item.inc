@@ -3,7 +3,7 @@
 // public $rev_enabled_cb;  needs to be dropped - use item rev only
 class ra_item extends dbObject {
 
- protected static $table_name = "item";
+ public static $table_name = "item";
  public static $primary_column = "item_id";
  public static $key_column = 'item_number';
  public static $module = "inv";

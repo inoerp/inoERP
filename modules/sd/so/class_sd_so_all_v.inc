@@ -2,7 +2,7 @@
 
 class sd_so_all_v extends dbObject {
 
- protected static $table_name = "sd_so_all_v";
+ public static $table_name = "sd_so_all_v";
  public static $primary_column = "sd_so_header_id";
  public $field_a = [
 		 'sd_so_header_id',
@@ -38,6 +38,7 @@ class sd_so_all_v extends dbObject {
 		 'uom_id',
 		 'item_status',
 		 'org',
+		 'shipping_org_id',
 		 'requested_date',
 		 'promise_date',
 		 'schedule_ship_date',
@@ -52,8 +53,7 @@ class sd_so_all_v extends dbObject {
 		 'customer_name',
 		 'customer_site_name',
 		 'item_number',
-		 'line_quantity',
-		 'picked_quantity',
+		 'line_status',
 		 'schedule_ship_date',
  ];
  public $column = [
@@ -73,7 +73,7 @@ class sd_so_all_v extends dbObject {
 		 'customer_name',
 		 'item_number',
 		 'line_quantity',
-'onhand',
+		 'onhand',
 		 'picked_quantity',
 		 'shipped_quantity',
 		 'staging_subinventory',
@@ -81,6 +81,7 @@ class sd_so_all_v extends dbObject {
 		 'so_type',
 		 'sd_so_header_id',
 		 'bu_org_id',
+		 'shipping_org_id',
 		 'ar_customer_id',
 		 'ar_customer_site_id',
 		 'sales_person',
@@ -117,7 +118,7 @@ class sd_so_all_v extends dbObject {
 		 'actual_ship_date',
  ];
  public $search = [
-	 '_update_path' => 'form.php?class_name=sd_so_header',
+		 '_update_path' => 'form.php?class_name=sd_so_header',
 		 '_show_update_path' => 1,
 		 '_view_path' => 'form.php?class_name=sd_so_header',
 		 '_show_view_path' => 1,
@@ -168,6 +169,7 @@ class sd_so_all_v extends dbObject {
  public $uom_id;
  public $item_status;
  public $org;
+ public $shipping_org_id;
  public $requested_date;
  public $promise_date;
  public $schedule_ship_date;
@@ -192,7 +194,7 @@ customer_site_name, customer_site_number, payment_term, payment_term_description
 line_number, item_id, item_description, line_description, line_quantity,  picked_quantity,
 shipped_quantity, unit_price, line_price, line_status, staging_subinventory_id, staging_locator_id,
 staging_subinventory, staging_locator, requested_date, promise_date , schedule_ship_date ,actual_ship_date,
-item_number, uom_id, item_status,  org, created_by,  creation_date, last_update_by,
+item_number, uom_id, item_status,  org, shipping_org_id, created_by,  creation_date, last_update_by,
 last_update_date
 )
 AS
@@ -212,7 +214,7 @@ sd_so_line.unit_price, sd_so_line.line_price, sd_so_line.line_status,
 ssc.staging_subinventory_id,ssc.staging_locator_id,subinventory.subinventory,locator.locator,
 sd_so_line.requested_date, sd_so_line.promise_date , sd_so_line.schedule_ship_date ,sd_so_line.actual_ship_date,
 item.item_number, item.uom_id, item.item_status,
-org.org,
+org.org,sd_so_line.shipping_org_id,
 sd_so_line.created_by, sd_so_line.creation_date, sd_so_line.last_update_by, sd_so_line.last_update_date
 
 FROM sd_so_header 
@@ -228,6 +230,16 @@ LEFT JOIN locator ON locator.locator_id = ssc.staging_locator_id
 LEFT JOIN onhand_summary_v osv ON osv.item_id = sd_so_line.item_id AND osv.org_id = sd_so_line.shipping_org_id
 
 ";
+ }
+
+ public function findBY_soLineId($line_id) {
+	$sql = " SELECT * FROM ";
+	$sql .= self::$table_name;
+	$sql .= " WHERE sd_so_line_id = :sd_so_line_id ";
+	$sql .= " LIMIT 1 ";
+	$value_a = ['sd_so_line_id' => $line_id];
+	$result = $this->findBySql($sql, $value_a);
+	return !empty($result) ? array_pop($result) : false;
  }
 
 }

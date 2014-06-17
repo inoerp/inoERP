@@ -2,7 +2,7 @@
 
 class gl_period extends dbObject {
 
- protected static $table_name = "gl_period";
+ public static $table_name = "gl_period";
  public static $dependent_classes = ['gl_calendar'];
  public static $module = "gl";
  public static $primary_column = "gl_period_id";

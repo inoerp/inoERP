@@ -25,12 +25,23 @@
  * savetype5a - third class form w/o tab
  */
 
-function saveHeader(json_url, headerData, primary_column_id, primary_column_id2, savingOnlyHeader, form_header) {
+function saveHeader(json_url, headerData, primary_column_id, primary_column_id2, savingOnlyHeader,
+				form_header) {
  $.ajax({
 	url: json_url,
 	data: {headerData: headerData,
 	 className: form_header},
-	type: 'post'
+	type: 'post',
+	beforeSend: function() {
+	 $("#save").prop('disabled', true);
+	},
+	complete: function() {
+	 $("#save").prop('disabled', false);
+	 if (savingOnlyHeader) {
+		$('.show_loading_small').hide();
+		$("#save").removeClass("opacity_2");
+	 }
+	}
  }).done(function(result) {
 	var primary_column_class = primary_column_id.replace('#', '.');
 	var div = $(result).filter('div#json_save_header').html();
@@ -45,16 +56,8 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
 	if ($(primary_column_id2).val()) {
 	 $(primary_column_id2).val(header_id2);
 	}
-	if (savingOnlyHeader) {
-	 $('.show_loading_small').hide();
-	 $("#save").removeClass("opacity_2");
-	}
  }).fail(function(error, textStatus, xhr) {
 	alert("save failed \n" + error + textStatus + xhr);
-	if (savingOnlyHeader) {
-	 $('.show_loading_small').hide();
-	 $("#save").removeClass("opacity_2");
-	}
  });
 }
 
@@ -130,7 +133,8 @@ function saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassNa
 
 function saveMainClass(json_url, form_header_id, primary_column_id, single_line,
 				line_key_field, form_line_id, primary_column_id2, enable_select, savingOnlyHeader,
-				headerClassName, lineClassName, detailClassName, lineClassName2, onlyOneLineAtATime) {
+				headerClassName, lineClassName, detailClassName, lineClassName2, onlyOneLineAtATime,
+				allLineTogether) {
  this.json_url = json_url;
  this.form_header_id = form_header_id;
  this.primary_column_id = primary_column_id;
@@ -145,6 +149,7 @@ function saveMainClass(json_url, form_header_id, primary_column_id, single_line,
  this.detailClassName = detailClassName;
  this.lineClassName2 = lineClassName2;
  this.onlyOneLineAtATime = onlyOneLineAtATime;
+ this.allLineTogether = allLineTogether;
 }
 
 saveMainClass.prototype.saveMain = function(beforeSave)
@@ -169,7 +174,8 @@ saveMainClass.prototype.saveMain = function(beforeSave)
  var detailClassName = this.detailClassName;
  var lineClassName2 = this.lineClassName2;
  var onlyOneLineAtATime = this.onlyOneLineAtATime;
-
+ var allLineTogether = this.allLineTogether;
+ var line_key_field_d = '.' + line_key_field;
  $("#save").on('click', function(e) {
 	if (typeof beforeSave === 'function') {
 	 var beforeSaveResult = beforeSave();
@@ -230,7 +236,6 @@ saveMainClass.prototype.saveMain = function(beforeSave)
 //	}
 	$("#save").addClass("opacity_2");
 	$('.show_loading_small').show();
-	$("#save").prop('disabled', true);
 	e.preventDefault();
 //for all form headers - savetype1
 	/*-----------------------------------Completion of mandator fields check & start of header save--------------------------------
@@ -243,11 +248,28 @@ saveMainClass.prototype.saveMain = function(beforeSave)
 	 });
 	 $('select:disabled').attr('disabled', false);
 	}
-	var headerData = $(form_header_id_h).serializeArray();
+	/*---Special for multi select*/
+	if (allLineTogether) {
+	 var allData = [];
+	 $('input[name="line_id_cb"]:checked').each(function() {
+		var trclass = $(this).closest('tr').attr('class');
+		var lineData = [];
+		$("#form_line").find('.' + trclass).each(function() {
+		 var ThisLineData = $(this).find(":input").serializeArray();
+		 lineData = $.merge(lineData, ThisLineData);
+		});
+		allData = $.merge(allData, lineData);
+	 });
+	 if (allData !== null) {
+		saveHeader(json_url, allData, primary_column_id_h, primary_column_id2_h, savingOnlyHeader, headerClassName);
+	 }
+	 return;
+	}
 
+	var headerData = $(form_header_id_h).serializeArray();
 	if (savingOnlyHeader) {
 	 savingOnlyHeader = true;
-	} else if (($('#form_line').html()) && ($(primary_column_id_h).val())) {
+	} else if (($('#form_line').html()) && ($(primary_column_id_h).val()) && ($(line_key_field_d).val())) {
 	 savingOnlyHeader = false;
 	}
 	else {
@@ -306,8 +328,8 @@ saveMainClass.prototype.saveMain = function(beforeSave)
 		} else {
 //		 for option type form - line w/o any tab------------------savetype3b
 		 $('input[name="line_id_cb"]:checked').each(function() {
-						var lineData = $(this).closest("tr").find(":input").serializeArray();
-						var trclass = $(this).closest("tr").attr('class');
+			var lineData = $(this).closest("tr").find(":input").serializeArray();
+			var trclass = $(this).closest("tr").attr('class');
 			if ($(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray()) {
 			 var detailData = $(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray();
 			} else {
@@ -319,7 +341,7 @@ saveMainClass.prototype.saveMain = function(beforeSave)
 	 }
 //i--------------completion of checked line -- start of all lines---------------------------------
 
-	 else if (($('.' + line_key_field).val())) {
+	 else if (($(line_key_field_d).val())) {
 //for forms with tab @line level - PO - savetype4a
 		if ($("#tabsLine-1").html()) {
 		 $("#tabsLine-1 tbody.form_data_line_tbody > tr").each(function() {
@@ -369,7 +391,7 @@ saveMainClass.prototype.saveMain = function(beforeSave)
 			} else {
 			 detailData = "";
 			}
-			saveLineSecondForm(json_url, lineData, trclass, detailData, primary_column_id_h, lineClassName2);
+			saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassName2);
 		 });
 		} else {//if the third form doesnt have any tab-----------------savetype5b------------------------------------------
 		 $("tbody.form_data_line_tbody2 > tr").each(function() {
@@ -380,15 +402,13 @@ saveMainClass.prototype.saveMain = function(beforeSave)
 			} else {
 			 detailData = "";
 			}
-			saveLineSecondForm(json_url, lineData, trclass, detailData, primary_column_id_h, lineClassName2);
+			saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassName2);
 		 });
 		}
 	 }
 	}
  });
 };
-
-
 /*primary_column_id is the primary_column_id of header form
  * form_header = header class name = form
  line_form_id is REQUIRED FOR one header & one line but  header id = form header name
@@ -416,7 +436,6 @@ exportToExcelMain.prototype.exportToExcel = function()
  var divId_h = '#' + this.divId;
  var divId = this.divId;
  var numberOfTabs = this.numberOfTabs;
-
  if (containerType == 'table') {
 	var data = '<table>';
 	var rowData = "";
@@ -504,11 +523,10 @@ exportToExcelMain.prototype.exportToExcel = function()
  }
  window.open('data:application/vnd.ms-excel,' + encodeURIComponent(data));
 };
-
 /*------------------------------------End of Export to Excel & Sratt of Copy--------------------------------*/
 //add new line
 function add_new_rowMain(trClass, tbodyClass, noOfTabs, copyFirstLine,
-				removeDefault, divClassNotToBeCopied, divClassToBeCopied) {
+				removeDefault, divClassNotToBeCopied, divClassToBeCopied, lineNumberIncrementValue) {
  this.trClass = trClass;
  this.tbodyClass = tbodyClass;
  this.copyFirstLine = copyFirstLine;
@@ -516,25 +534,43 @@ function add_new_rowMain(trClass, tbodyClass, noOfTabs, copyFirstLine,
  this.removeDefault = removeDefault;
  this.divClassNotToBeCopied = divClassNotToBeCopied;
  this.divClassToBeCopied = divClassToBeCopied;
+ this.lineNumberIncrementValue = lineNumberIncrementValue;
 }
 
 var objectCount = 491;
-add_new_rowMain.prototype.add_new_row = function() {
- tbodyClass = this.tbodyClass;
- trClass = this.trClass;
- divClassToBeCopied = this.divClassToBeCopied;
+add_new_rowMain.prototype.add_new_row = function(afterAddNewRow) {
+ var tbodyClass = this.tbodyClass;
+ var trClass = this.trClass;
+ var divClassToBeCopied = this.divClassToBeCopied;
+ var lineNumberIncrementValue = this.lineNumberIncrementValue;
  var divClassToBeCopied_c = '.' + divClassToBeCopied;
  trClass = trClass.replace(/tr\./g, '');
  trClass = trClass.replace(/0/g, '');
+ trClass = trClass.replace(/-/g, '');
  tbodyClass = tbodyClass.replace(/tbody\./g, '');
  tbodyClass = '.' + tbodyClass;
  var highest_line_num = 0;
+ var highest_seq_num = 0;
  $('.lines_number').each(function() {
 	if ($(this).val() > highest_line_num) {
 	 highest_line_num = $(this).val();
 	}
  });
- var nextLineSeqNumber = (+highest_line_num + 1);
+
+ if ($('.seq_number').first().val()) {
+	$('.seq_number').each(function() {
+	 if ($(this).val() > highest_line_num) {
+		highest_seq_num = $(this).val();
+	 }
+	});
+ }
+
+ var nextSeqNumber = (+highest_seq_num) + 1;
+
+ if ($(lineNumberIncrementValue).length < 1) {
+	lineNumberIncrementValue = 1;
+ }
+ var nextLineSeqNumber = (+highest_line_num + (+lineNumberIncrementValue));
  if (this.copyFirstLine) {
 	var newtrClass = '.' + $("tr[class*='" + trClass + "']:first").first().prop('class');
  } else {
@@ -558,9 +594,8 @@ add_new_rowMain.prototype.add_new_row = function() {
  $("tr.new_object" + objectCount).find(this.divClassNotToBeCopied).each(function() {
 	$(this).val("");
  });
-
  if (this.removeDefault === true) {
-	$("tr.new_object" + objectCount).find("td input[type=text]").not(divClassToBeCopied_c).each(function() {
+		$("tr.new_object" + objectCount).find("td input[type=text]").not(divClassToBeCopied_c).each(function() {
 	 $(this).val('');
 	});
 	$("tr.new_object" + objectCount).find("td input[type=number]").not(divClassToBeCopied_c).each(function() {
@@ -570,27 +605,37 @@ add_new_rowMain.prototype.add_new_row = function() {
 	 $(this).val('');
 	});
  }
-$("tr.new_object" + objectCount).find("input").removeAttr('readonly');
-
+ $("tr.new_object" + objectCount).find("input").removeAttr('id');
+ $("tr.new_object" + objectCount).find("input").removeAttr('readonly');
+ $("tr.new_object" + objectCount).find("select").removeAttr('disabled');
  $("tr.new_object" + objectCount).find(".class_detail_form").replaceWith("");
+ $("tr.new_object" + objectCount).find(".seq_number").val(nextSeqNumber);
  $('.lines_number:last').val(nextLineSeqNumber);
  $(".new_object" + objectCount).find(".date").each(function() {
 	$(this).attr("id", "date" + dateCount);
-	$(this).attr("class", "date");
+//	$(this).attr("class", "date");
 	dateCount++;
  });
+ if (typeof afterAddNewRow === 'function') {
+	afterAddNewRow();
+ }
  objectCount++;
 };
-
-
 /*------------------------------------End of copy row and start of conext menu----------------------------------*/
-function copy_document(doc_header_id, doc_line_id) {
+function copy_document(doc_header_id, doc_line_id, doc_detail_id) {
  var doc_header_id_h = '#' + doc_header_id;
  var doc_header_id_c = '.' + doc_header_id;
  var doc_line_id_c = '.' + doc_line_id;
+ var doc_detail_id_d = '.' + doc_detail_id;
  $(doc_header_id_h).val('');
  $(doc_header_id_c).val('');
  $(doc_line_id_c).val('');
+ $(doc_detail_id_d).val('');
+  $('.primary_column2').val('');
+ $('#content').find(':input').each(function() {
+	$(this).prop('readonly', false);
+	$(this).prop('disabled', false);
+ });
 }
 
 function copy_header(doc_header_id) {
@@ -601,10 +646,17 @@ function copy_header(doc_header_id) {
  $("#form_line tbody tr").find(':input').each(function() {
 	$(this).val('');
  });
+ $('#content').find(':input').each(function() {
+	$(this).prop('readonly', false);
+	$(this).prop('disabled', false);
+ });
 }
 
 //right click menu
 function rightClickMenu(menuContent) {
+ if (localStorage.getItem("disableContextMenu")) {
+	return;
+ }
  var menu = "<div id='right_click_menu'>" + menuContent + "</div>";
  $("#content").bind("contextmenu", function(event) {
 	event.preventDefault();
@@ -618,11 +670,13 @@ function rightClickMenu(menuContent) {
  });
 }
 
-function contextMenuMain(docHedaderId, docLineId, trClass, tbodyClass, noOfTabbs, btn1DivId, btn2DivId,
+function contextMenuMain(docHedaderId, docLineId, docDetailId,trClass, tbodyClass, noOfTabbs, btn1DivId, btn2DivId,
 				btn2_1DivId, btn6DivId, btn7DivId, btn8DivId,
-				btn9DivId, btn9_1DivId, btn9_2DivId, btn9_3DivId, btn10DivId) {
+				btn9DivId, btn9_1DivId, btn9_2DivId, btn9_3DivId, btn10DivId, btn10_1DivId, btn11DivId,
+				beforeCopy, afterCopy) {
  this.docHedaderId = docHedaderId;
  this.docLineId = docLineId;
+ this.docDetailId = docDetailId;
  this.btn1DivId = btn1DivId;
  this.btn2DivId = btn2DivId;
  this.btn2_1DivId = btn2_1DivId;
@@ -637,6 +691,10 @@ function contextMenuMain(docHedaderId, docLineId, trClass, tbodyClass, noOfTabbs
  this.btn9_2DivId = btn9_2DivId;
  this.btn9_3DivId = btn9_3DivId;
  this.btn10DivId = btn10DivId;
+ this.btn10_1DivId = btn10_1DivId;
+ this.btn11DivId = btn11DivId;
+ this.beforeCopy = beforeCopy;
+ this.afterCopy = afterCopy;
 }
 
 contextMenuMain.prototype.contextMenu = function()
@@ -644,6 +702,8 @@ contextMenuMain.prototype.contextMenu = function()
  var docHedaderId = this.docHedaderId;
  var docLineId = this.docLineId;
  var docLineId_c = '.' + this.docLineId;
+  var docDetailId = this.docDetailId;
+  var docDetailId_c = '.' + this.docDetailId;
  var trClass = this.trClass;
  var trClass_c = '.' + this.trClass;
  var tbodyClass = this.tbodyClass;
@@ -660,7 +720,28 @@ contextMenuMain.prototype.contextMenu = function()
  var btn9_2DivId = this.btn9_2DivId;
  var btn9_3DivId = this.btn9_3DivId;
  var btn10DivId = this.btn10DivId;
-
+ var btn10_1DivId = this.btn10_1DivId;
+ var btn11DivId = this.btn11DivId;
+ var beforeCopy = this.beforeCopy;
+ var afterCopy = this.afterCopy;
+ var methods = {
+	beforeCopyActions: function() {
+	 if (typeof beforeCopy === 'function') {
+		var beforeResult = beforeCopy();
+		if (!beforeResult) {
+		 return;
+		}
+	 }
+	},
+	afterCopyActions: function() {
+	 if (typeof afterCopy === 'function') {
+		var afterResult = afterCopy();
+		if (!afterResult) {
+		 return;
+		}
+	 }
+	}
+ };
  var menuContent = "<ul id='level1'>";
  menuContent += "<li id='menu_button1' class='export_excel'>Export Header</li>";
  menuContent += "<li id='menu_button2' class='end_li_type export_excel'>Export Line";
@@ -689,17 +770,19 @@ contextMenuMain.prototype.contextMenu = function()
  menuContent += "<li id='menu_button9_2' class='end_li_type'>Enable</li>";
  menuContent += "<li id='menu_button9_3' class='end_li_type'>View & Update</li>";
  menuContent += "</ul></li>";
- menuContent += "<li id='menu_button10' class='about'>About inoERP</li>";
+ menuContent += "<li class='end_li_type disable_menu'><span id='menu_button10'>Disable Context Menu</span>";
+ menuContent += "<ul>";
+ menuContent += "<li><span id='menu_button10_1'>Disable All</span></li>";
+ menuContent += "</ul></li>";
+ menuContent += "<li id='menu_button11' class='about'>About inoERP</li>";
  menuContent += "<ul>";
  rightClickMenu(menuContent);
-
  $("#content").on('click', '#menu_button1', function() {
 	var classDnldExcel = new exportToExcelMain();
 	classDnldExcel.containerType = 'div';
 	classDnldExcel.divId = btn1DivId;
 	classDnldExcel.exportToExcel();
  });
-
  $("#content").on('click', '#menu_button2', function() {
 	var classDnldExcel = new exportToExcelMain();
 	classDnldExcel.containerType = 'table';
@@ -707,29 +790,29 @@ contextMenuMain.prototype.contextMenu = function()
 	classDnldExcel.numberOfTabs = 1;
 	classDnldExcel.exportToExcel();
  });
-
  $("#content").on('click', '#menu_button3', function() {
 	window.print();
  });
-
  $("#content").on('click', '#menu_button4', function() {
+	methods.beforeCopyActions();
 	copy_header(docHedaderId);
+	methods.afterCopyActions();
  });
-
  $("#content").on('click', '#menu_button4_1', function() {
+	methods.beforeCopyActions();
 	copy_header(docHedaderId);
+	methods.afterCopyActions();
 	$('#save').trigger('click');
  });
-
  $("#content").on('click', '#menu_button4_2', function() {
-	copy_document(docHedaderId, docLineId);
+	methods.beforeCopyActions();
+	copy_document(docHedaderId, docLineId, docDetailId);
+	methods.afterCopyActions();
  });
-
  $("#content").on('click', '#menu_button4_2_1', function() {
-	copy_document(docHedaderId, docLineId);
+	copy_document(docHedaderId, docLineId, docDetailId);
 	$('#save').trigger('click');
  });
-
  $("#content").on('click', '#menu_button5', function() {
 	var addNewRow = new add_new_rowMain();
 	addNewRow.trClass = trClass;
@@ -740,7 +823,6 @@ contextMenuMain.prototype.contextMenu = function()
 	addNewRow.add_new_row();
 //	add_new_row_withDefault(trClass, tbodyClass_c, noOfTabbs, docLineId_c);
  });
-
  $("#content").on('click', '#menu_button5_1', function() {
 	var addNewRow1 = new add_new_rowMain();
 	addNewRow1.trClass = trClass;
@@ -752,9 +834,14 @@ contextMenuMain.prototype.contextMenu = function()
 	addNewRow1.add_new_row();
 //	add_new_row_withDefault(trClass, tbodyClass_c, noOfTabbs, docLineId_c);
  });
-
+ $("#content").on('click', '#menu_button10', function() {
+	$("#content").unbind("contextmenu");
+ });
+ $("#content").on('click', '#menu_button10_1', function() {
+	localStorage.setItem("disableContextMenu", true);
+	$("#content").unbind("contextmenu");
+ });
 };
-
 /*--------------------------------------End of contect menu & start of autocomplte----------------------
  *  coa_id - primary_column,,,,
  *     */
@@ -772,20 +859,20 @@ function autoCompleteMain(json_url, field_name, primary_column1, primary_column2
 
 autoCompleteMain.prototype.autoComplete = function(e)
 {
-var json_url = this.json_url;
+ var json_url = this.json_url;
  var field_name = this.field_name;
  var primary_column1 = this.primary_column1;
- var primary_column1_h = '#'+primary_column1;
+ var primary_column1_h = '#' + primary_column1;
  var primary_column2 = this.primary_column2;
  var extra_elements = this.extra_elements;
- if(this.select_class ==='undefined'){
-	var select_class = 'select'+field_name;
- }else{
- var select_class = this.select_class;
-}
+ if (this.select_class === 'undefined') {
+	var select_class = 'select' + field_name;
+ } else {
+	var select_class = this.select_class;
+ }
  var select_class_d = '.' + select_class;
  var min_length = this.min_length;
- $('#content').on("focus", select_class_d, function(e) {
+ $('#content').on("focus.nsAutoComplete", select_class_d, function(e) {
 	var primary_column1_v = $(primary_column1_h).val();
 	e.preventDefault();
 	if (!$(this).data("autocomplete")) {
@@ -796,8 +883,8 @@ var json_url = this.json_url;
 			url: json_url,
 			dataType: "json",
 			data: {
-       action : 'search',
-			 field_name : field_name,
+			 action: 'search',
+			 field_name: field_name,
 			 primary_column1: primary_column1_v,
 			 primary_column2: primary_column2,
 			 term: request.term
@@ -816,7 +903,6 @@ var json_url = this.json_url;
 		 if (ui.content.length === 1)
 		 {
 			$(this).val(ui.content[0].label);
-
 			//if extra element
 			if ((typeof extra_elements !== 'undefined') && (extra_elements.length > 0)) {
 			 var elemenType = $(this).parent().prop('tagName');
@@ -835,18 +921,31 @@ var json_url = this.json_url;
 				}
 			 });
 			}
-
 			//close the auto complete
 			$(this).autocomplete("close");
 		 } else if (ui.content.length === 0) {
 			alert('No Data Found');
 			$(this).val('');
+			//if extra element
+			if ((typeof extra_elements !== 'undefined') && (extra_elements.length > 0)) {
+			 var elemenType = $(this).parent().prop('tagName');
+			 $(extra_elements).each(function(i, v) {
+				var v_d = '.' + v;
+				if (elemenType === 'LI') {
+				 $(auto_element).closest("ul").find(v_d).val('');
+				} else if (elemenType === 'TD') {
+				 $(auto_element).closest("td").siblings().find(v_d).val('');
+				}
+			 });
+			}
+			//close the auto complete
+			$(this).autocomplete("close");
 		 }
+
 		},
 		//select
 		select: function(event, ui) {
 		 $(this).val(ui.item.label);
-
 		 //if extra element
 		 if ((typeof extra_elements !== 'undefined') && (extra_elements.length > 0)) {
 			var elemenType = $(this).parent().prop('tagName');
@@ -866,7 +965,6 @@ var json_url = this.json_url;
 				$(auto_element).closest("td").siblings().find(v_d).val(selected_value);
 			 }
 			});
-
 		 }
 
 		 //close the auto complete
@@ -877,7 +975,6 @@ var json_url = this.json_url;
 	}
  });
 };
-
 //file upload
 function fileUploadMain(json_url, module_name, document_type, class_name, upload_type, directory) {
  this.json_url = json_url;
@@ -931,7 +1028,6 @@ fileUploadMain.prototype.fileUpload = function() {
 	});
  });
 };
-
 /*-----------------Completion of file upload and start of mandatory field check--------------------------------*/
 function mandatoryFieldMain(form_area, mandatory_fields, mandatory_messages, header_id) {
  this.form_area = form_area;
@@ -945,7 +1041,6 @@ mandatoryFieldMain.prototype.mandatoryHeader = function()
  var header_id = this.header_id;
  var header_id_h = '#' + header_id;
  var header_id_c = '.' + header_id;
-
  $('#form_line').on("click", function() {
 	if (!$(header_id_h).val()) {
 	 alert('No header Id : First enter/save header details');
@@ -957,8 +1052,6 @@ mandatoryFieldMain.prototype.mandatoryHeader = function()
 	}
  });
 };
-
-
 mandatoryFieldMain.prototype.mandatoryField = function()
 {
  var form_area = this.form_area;
@@ -993,7 +1086,6 @@ mandatoryFieldMain.prototype.mandatoryField = function()
 	 $(this).focusout(function() {
 		return;
 	 });
-
 	} else {
 	 $(mandatory_fields).each(function(i, v) {
 		var entered_fields = '#' + v;

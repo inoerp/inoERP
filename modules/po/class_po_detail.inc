@@ -2,7 +2,7 @@
 
 class po_detail extends dbObject {
 
- protected static $table_name = "po_detail";
+ public static $table_name = "po_detail";
  public static $primary_column = "po_detail_id";
  public static $parent_primary_column = "po_line_id";
  public static $key_column = 'shipment_number';

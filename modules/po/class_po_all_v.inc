@@ -2,7 +2,7 @@
 
 class po_all_v extends dbObject {
 
- protected static $table_name = "po_all_v";
+ public static $table_name = "po_all_v";
  public static $primary_column = "po_header_id";
  public $field_a = [
 		 'po_header_id',

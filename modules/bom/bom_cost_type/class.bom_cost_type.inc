@@ -2,10 +2,22 @@
 
 class bom_cost_type extends dbObject {
 
- protected static $table_name = "bom_cost_type";
+ public static $table_name = "bom_cost_type";
  public static $key_column = 'cost_type';
  public static $primary_column = "bom_cost_type_id";
  public static $module = "bom";
+ public static $system_info = [
+		 'name' => 'Cost Type',
+		 'number' => '2401',
+		 'description' => 'BOM Cost Types',
+		 'version' => '1.1.1.3',
+		 'db_version' => '1001',
+		 'mod_version' => '1.1.x-1.1',
+		 'dependent_class' => array('bom_line', 'bom_all_v'),
+		 'primary_entity_cb' => '',
+		 'module_name' => 'ar',
+		 'weight' => 1
+ ];
 //  data base variables as stored database column name
  public $field_a = [
 		 'bom_cost_type_id',

@@ -2,7 +2,7 @@
 
 class wip_wo_routing_detail extends dbObject {
 
- protected static $table_name = "wip_wo_routing_detail";
+ public static $table_name = "wip_wo_routing_detail";
   public static $primary_column = "wip_wo_routing_detail_id";
  public static $key_column = 'resource_sequence';
  public static $module = "wip";

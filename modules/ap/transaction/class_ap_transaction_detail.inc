@@ -1,6 +1,6 @@
 <?php
 class ap_transaction_detail extends dbObject {
- protected static $table_name = "ap_transaction_detail";
+ public static $table_name = "ap_transaction_detail";
  public static $primary_column = "ap_transaction_detail_id";
  public static $parent_primary_column = "ap_transaction_line_id";
  public static $key_column = 'detail_ac_id';

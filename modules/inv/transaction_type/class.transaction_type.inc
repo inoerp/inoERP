@@ -2,7 +2,7 @@
 
 class transaction_type extends dbObject {
 
- protected static $table_name = "transaction_type";
+ public static $table_name = "transaction_type";
  public static $primary_column = "transaction_type_id";
  public static $key_column = 'transaction_type';
  public static $module = "inv"; //same as gl_journal_source

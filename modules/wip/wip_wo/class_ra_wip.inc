@@ -3,7 +3,7 @@
 // public $rev_enabled_cb;  needs to be dropped - use item rev only
 class ra_wip extends dbObject {
 
- protected static $table_name = "wip_wo_header";
+ public static $table_name = "wip_wo_header";
  public static $primary_column = "wip_wo_header_id";
  public static $primary_column2 = "wo_number";
  public static $key_column = 'item_id';

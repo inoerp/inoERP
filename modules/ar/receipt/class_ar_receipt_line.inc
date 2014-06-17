@@ -1,6 +1,6 @@
 <?php
 class ar_receipt_line extends dbObject {
- protected static $table_name = "ar_receipt_line";
+ public static $table_name = "ar_receipt_line";
  public static $primary_column = "ar_receipt_line_id";
  public static $parent_primary_column = "ar_receipt_header_id";
  public static $multi_search_primary_column = "ar_receipt_header_id"; //this value is used in multi search hidden value

@@ -2,7 +2,7 @@
 
 class coa_combination extends dbObject {
 
- protected static $table_name = "coa_combination";
+ public static $table_name = "coa_combination";
  public static $dependent_classes = ['coa'];
  public static $primary_column = "coa_combination_id";
  public static $key_column = "combination";

@@ -2,7 +2,7 @@
 
 class cst_item_cost_v extends dbObject {
 
- protected static $table_name = "cst_item_cost_v";
+ public static $table_name = "cst_item_cost_v";
  public static $primary_column = "cst_item_cost_header_id";
  public $field_a = [
 		 'item_number',

@@ -2,7 +2,7 @@
 
 class ar_receipt_interface extends dbObject {
 
- protected static $table_name = "ar_receipt_interface";
+ public static $table_name = "ar_receipt_interface";
  public static $primary_column = "ar_receipt_interface_id";
  public static $key_column = 'ar_customer_id';
  public static $module = "ap"; //same as gl_journal_source

@@ -3,7 +3,7 @@
 // public $rev_enabled_cb;  needs to be dropped - use item rev only
 class item extends dbObject {
 
- protected static $table_name = "item";
+ public static $table_name = "item";
  public static $primary_column = "item_id";
  public static $key_column = 'item_number';
  public static $module = "inv";
@@ -117,8 +117,8 @@ class item extends dbObject {
 		 "atp",
 		 "picking_rule",
 		 "sourcing_rule_id",
-		 "ap_tax",
-		 "sales_tax",
+		 "ip_tax_class",
+		 "op_tax_class",
 		 "ap_payment_term",
 		 "ar_payment_term",
 		 "ef_id",
@@ -327,8 +327,8 @@ class item extends dbObject {
  public $shippable_cb;
  public $returnable_cb;
  public $invoiceable;
- public $ap_tax;
- public $sales_tax;
+ public $op_tax_class;
+ public $ip_tax_class;
  public $ap_payment_term;
  public $ar_payment_term;
  public $ef1;
@@ -368,6 +368,12 @@ class item extends dbObject {
 	return $ol;
  }
 
+ Public static function product_tax_class() {
+	$option_header = option_header::find_by_name('INV_ITEM_TAX_CLASS');
+	$ol = option_line::find_by_option_id($option_header->option_header_id);
+	return $ol;
+ }
+
  Public static function rounding_option() {
 	$option_header = option_header::find_by_name('SYS_ROUNDING_OPTION');
 	$ol = option_line::find_by_option_id($option_header->option_header_id);
@@ -399,8 +405,8 @@ class item extends dbObject {
  }
 
  public function _before_save() {
-	if(!empty($this->sourcing_rule)){
-	 	 $this->sourcing_rule_id = po_sourcing_rule_header::find_by_sourcingRule($this->sourcing_rule)->po_sourcing_rule_header_id;
+	if (!empty($this->sourcing_rule)) {
+	 $this->sourcing_rule_id = po_sourcing_rule_header::find_by_sourcingRule($this->sourcing_rule)->po_sourcing_rule_header_id;
 	}
 	if (($this->action == 'update_item_minmax')) {
 	 echo "<br> saving minmax details before Item SAVE";

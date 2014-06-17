@@ -23,6 +23,7 @@ setValFromSelectPage.prototype.setVal = function() {
  var item_description = this.item_description;
  var uom_id = this.uom_id;
  var rowClass = '.' + localStorage.getItem("row_class");
+  rowClass = rowClass.replace(/\s+/g, '.');
  var fieldClass = '.' + localStorage.getItem("field_class");
  if (po_header_id) {
 	$("#po_header_id").val(po_header_id);
@@ -36,7 +37,7 @@ setValFromSelectPage.prototype.setVal = function() {
  if (supplier_name) {
 	$("#supplier_name").val(supplier_name);
  }
- rowClass = rowClass.replace(/\s+/g, '.');
+
  fieldClass = fieldClass.replace(/\s+/g, '.');
  if (combination) {
 	$('#content').find(rowClass).find(fieldClass).val(combination);

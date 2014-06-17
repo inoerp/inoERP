@@ -2,7 +2,7 @@
 
 class ar_transaction_header extends dbObject {
 
- protected static $table_name = "ar_transaction_header";
+ public static $table_name = "ar_transaction_header";
  public static $dependent_classes = ['ar_transaction_line', 'ar_transaction_detail'];
  public static $primary_column = "ar_transaction_header_id";
  public static $primary_column2 = "transaction_number";
@@ -10,6 +10,18 @@ class ar_transaction_header extends dbObject {
  public static $module = "ar"; //same as gl_journal_source
  public static $gl_journal_category = "AR_TRANSACTIONS";
  public static $js_fileName = 'modules/ar/transaction/ar_transaction.js';
+ public static $system_info = [
+		 'name' => 'AR Transaction',
+		 'number' => '1302',
+		 'description' => 'Create & Mainten AR Transactions, such as - Invoice, Debit Memo, Credit Memo etc',
+		 'version' => '1.1.1.3',
+		 'db_version' => '1001',
+		 'mod_version' => '1.1.x-1.1',
+		 'dependent_class' => array('ar_transaction_line', 'ar_transaction_detail'),
+		 'primary_entity_cb' => '',
+		 'module_name' => 'ar',
+		 'weight' => 2
+ ];
  public $account = [
 		 'receivable_ac_id'
  ];
@@ -200,7 +212,7 @@ class ar_transaction_header extends dbObject {
 	 foreach ($asis_data as $key => $value) {
 		$this->$key = $value;
 	 }
-	 
+
 	 //if journal header id excists then save journal lines only else first header & then lines
 	 if (empty($this->gl_journal_header_id)) {
 		try {
@@ -266,15 +278,13 @@ class ar_transaction_header extends dbObject {
 	$gjh->description = $gjh->journal_name . '-' . current_time();
 	$gjh->balance_type = 'A';
 	$gjh->audit_trial();
-	try{
+	try {
 	 $gjh->save();
 	 $this->gl_journal_header_id = $gjh->gl_journal_header_id;
-	 echo "<br> Jounral Header Id #".$this->gl_journal_header_id. ' is created' ;
-	}catch(Exception $e){
-	 echo "<br> Failed Saving Jounral Header".$e->getMessage() ;
+	 echo "<br> Jounral Header Id #" . $this->gl_journal_header_id . ' is created';
+	} catch (Exception $e) {
+	 echo "<br> Failed Saving Jounral Header" . $e->getMessage();
 	}
-	
-	
  }
 
  private function _save_journal_lines() {
@@ -288,8 +298,8 @@ class ar_transaction_header extends dbObject {
 		$new_gjl->gl_journal_header_id = $this->gl_journal_header_id;
 		$new_gjl->line_num = $deatils->detail_number;
 		$new_gjl_i = $new_gjl->findBy_headerId_lineNum();
-		if($new_gjl_i){
-		$new_gjl->gl_journal_line_id = $new_gjl_i->gl_journal_line_id;
+		if ($new_gjl_i) {
+		 $new_gjl->gl_journal_line_id = $new_gjl_i->gl_journal_line_id;
 		}
 		$new_gjl->status = 'U';
 		$new_gjl->code_combination_id = $deatils->detail_ac_id;
@@ -310,7 +320,7 @@ class ar_transaction_header extends dbObject {
 	}
 
 //	save the Receviable Account
-  $receviable_gjl = new gl_journal_line();
+	$receviable_gjl = new gl_journal_line();
 	$receviable_gjl->gl_journal_header_id = $this->gl_journal_header_id;
 	$receviable_gjl->line_num = 999;
 	$receviable_gjl_i = $receviable_gjl->findBy_headerId_lineNum();
@@ -319,7 +329,7 @@ class ar_transaction_header extends dbObject {
 	}
 	$receviable_gjl->status = 'U';
 	$receviable_gjl->code_combination_id = $this->receivable_ac_id;
-		if ($this->transaction_type == 'CREDIT_MEMO') {
+	if ($this->transaction_type == 'CREDIT_MEMO') {
 	 $receviable_gjl->total_cr = $this->header_amount;
 	 $receviable_gjl->total_ac_cr = $this->header_amount;
 	} else {
@@ -450,7 +460,6 @@ class ar_transaction_header extends dbObject {
 	 return;
 	}
  }
-
 
  //needs to be updated after SD SO
  private function _cancel_transaction_poInv_lines() {

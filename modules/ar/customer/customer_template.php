@@ -26,9 +26,9 @@
 					 <div class="large_shadow_box"> 
 						<ul class="column five_column">
 						 <li>
-							<label><img class="ar_customer_id_popup select_popup" src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
+							<label><img class="ar_customer_id_popup select_popup clickable"  src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
 							 Customer Id : </label>
-							<?php form::number_field_drs('ar_customer_id'); ?>
+							<?php $f->text_field_d('ar_customer_id'); ?>
 							<a name="show" href="?ar_customer_id=" class="show ar_customer_id">
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
@@ -96,30 +96,31 @@
 					 </div>
 					</div>
 					<div id="tabsHeader-4" class="tabContent">
-					 <div> 
-						<ul class="column five_column">
-						 <li><label>Corporate Address Id : 
-							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup"></label>
-							<?php form::number_field_drsm('address_id'); ?>
+					 <div class="header_address"> 
+						<ul class="column two_column">
+						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
+							 Corporate Address Id : </label>
+							<?php $f->text_field_d('address_id'); ?>
 						 </li>
+						 <li><label>Address Name : </label><?php $f->text_field_dr('header_address_name', 'address_name'); ?></li>
+						 <li><label>Address :</label> <?php $f->text_field_dr('header_address','address'); ?></li>
+						 <li><label>Country  : </label> <?php $f->text_field_dr('header_country','country'); ?></li>
+						 <li><label>Postal Code  : </label><?php echo $f->text_field_dr('header_postal_code','postal_code'); ?></li>
 						</ul>
-						<div class="address_details">
-						 <?php echo!empty($address_id) ? $address_id : ""; ?>
-						</div>  
 					 </div>
 					</div>
 					<div id="tabsHeader-5" class="tabContent">
-						<div id="show_attachment" class="show_attachment">
-						 <div id="file_upload_form">
-							<ul class="inRow asperWidth">
-							 <li><input type="file" id="attachments" class="attachments" name="attachments[]" multiple/></li>
-							 <li> <input type="button" value="Attach" form="file_upload" name="attach_submit" id="attach_submit" class="submit button"></li>
-							 <li class="show_loading_small"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/small_loading.gif"/></li>
-							</ul>
-						 </div>
-						 <div id="uploaded_file_details"></div>
-						 <?php echo file::attachment_statement($file); ?>
+					 <div id="show_attachment" class="show_attachment">
+						<div id="file_upload_form">
+						 <ul class="inRow asperWidth">
+							<li><input type="file" id="attachments" class="attachments" name="attachments[]" multiple/></li>
+							<li> <input type="button" value="Attach" form="file_upload" name="attach_submit" id="attach_submit" class="submit button"></li>
+							<li class="show_loading_small"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/small_loading.gif"/></li>
+						 </ul>
 						</div>
+						<div id="uploaded_file_details"></div>
+						<?php echo file::attachment_statement($file); ?>
+					 </div>
 					</div>
 				 </div>
 
@@ -264,32 +265,33 @@
 					</div>
 					<!--end of tab2 (purchasing)!!!! start of sales tab-->
 					<div id="tabsLine-5" class="tabContent">
-					 <div> 
-						<ul class="column five_column">
-						 <li><label>Site Address Id : 
-							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup"></label>
-							<?php echo form::text_field_d2('site_address_id'); ?>
+					 <div class="site_address"> 
+						<ul class="column two_column">
+						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
+							 Site Address Id : </label>
+							<?php $f->text_field_d2('site_address_id','address_id'); ?>
 						 </li>
+						 <li><label>Address Name : </label><?php $f->text_field_d2r('site_address_name', 'address_name'); ?></li>
+						 <li><label>Address :</label> <?php $f->text_field_d2r('site_address','address'); ?></li>
+						 <li><label>Country  : </label> <?php $f->text_field_d2r('site_country','country'); ?></li>
+						 <li><label>Postal Code  : </label><?php echo $f->text_field_d2r('site_postal_code','postal_code'); ?></li>
 						</ul>
-						<div class="site address_details">
-						 <?php echo!empty($site_address_id) ? $site_address_id : ""; ?>
-						</div>  
 					 </div>
 					</div> 
 					<!--                end of tab3 div three_column-->
 					<!--end of tab3 (sales)!!!!start of purchasing tab-->
 					<div id="tabsLine-6" class="tabContent">
-						<div id="show_attachment" class="show_attachment">
-						 <div id="file_upload_form">
-							<ul class="inRow asperWidth">
-							 <li><input type="file" id="attachments" class="attachments" name="attachments[]" multiple/></li>
-							 <li> <input type="button" value="Attach" form="file_upload" name="attach_submit" id="attach_submit" class="submit button"></li>
-							 <li class="show_loading_small"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/small_loading.gif"/></li>
-							</ul>
-						 </div>
-						 <div id="uploaded_file_details"></div>
-						 <?php echo file::attachment_statement($file); ?>
+					 <div id="show_attachment" class="show_attachment">
+						<div id="file_upload_form">
+						 <ul class="inRow asperWidth">
+							<li><input type="file" id="attachments" class="attachments" name="attachments[]" multiple/></li>
+							<li> <input type="button" value="Attach" form="file_upload" name="attach_submit" id="attach_submit" class="submit button"></li>
+							<li class="show_loading_small"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/small_loading.gif"/></li>
+						 </ul>
 						</div>
+						<div id="uploaded_file_details"></div>
+						<?php echo file::attachment_statement($file); ?>
+					 </div>
 					</div>
 					<!--end of tab4(purchasing)!!! start of MFG tab-->
 					<div id="tabsLine-7" class="tabContent">

@@ -1,3 +1,56 @@
+function setValFromSelectPage(content_type_id, content_type) {
+ this.content_type_id = content_type_id;
+ this.content_type = content_type;
+}
+
+setValFromSelectPage.prototype.setVal = function() {
+ var content_type_id = this.content_type_id;
+ var content_type = this.content_type;
+ if (content_type_id) {
+	$("#content_type_id").val(content_type_id);
+ }
+ if (content_type) {
+	$("#content_type").val(content_type);
+ }
+};
+
+function dropField(field_name, content_name) {
+ $('.show_loading_small').show();
+ $.ajax({
+	url: 'extensions/content_type/json.content_type.php',
+	data: {delete: '1',
+	 field_name: field_name,
+	 content_name: content_name},
+	type: 'get'
+ }).done(function(result) {
+	var div = $(result).filter('div#json_drop_column').html();
+	$(".error").append(div);
+	$('.show_loading_small').hide();
+ }).fail(function() {
+	alert("Column delete failed");
+	$('#loading').hide();
+ });
+// $(".form_table #subinventory_id").attr("disabled",false);
+}
+
+function dropTable(content_name) {
+ $('.show_loading_small').show();
+ $.ajax({
+	url: 'extensions/content_type/json.content_type.php',
+	data: {delete: '2',
+	 content_name: content_name},
+	type: 'get'
+ }).done(function(result) {
+	var div = $(result).filter('div#json_drop_column').html();
+	$(".error").append(div);
+	$('.show_loading_small').hide();
+ }).fail(function() {
+	alert("Content type drop failed");
+	$('#loading').hide();
+ });
+// $(".form_table #subinventory_id").attr("disabled",false);
+}
+
 $(document).ready(function() {
  $(".field_option").attr("disabled", true);
  $(".field_type").attr('disabled', true);
@@ -18,26 +71,6 @@ $(document).ready(function() {
 	});
  });
 
- function dropField(field_name, content_name) {
-	$('.show_loading_small').show();
-	$.ajax({
-	 url: 'json.content_type.php',
-	 data: {delete: '1',
-		field_name: field_name,
-		content_name: content_name},
-	 type: 'get'
-	}).done(function(result) {
-	 var div = $(result).filter('div#json_drop_column').html();
-	 $(".error").append(div);
-	 $('.show_loading_small').hide();
-	}).fail(function() {
-	 alert("Column delete failed");
-	 $('#loading').hide();
-	});
-// $(".form_table #subinventory_id").attr("disabled",false);
- }
-
-
 //Delete content type : drop table
  $("#drop_table").click(function() {
 	var content_name = $("#content_type").val();
@@ -46,30 +79,11 @@ $(document).ready(function() {
 	}
  });
 
- function dropTable(content_name) {
-	$('.show_loading_small').show();
-	$.ajax({
-	 url: 'json.content_type.php',
-	 data: {delete: '2',
-		content_name: content_name},
-	 type: 'get'
-	}).done(function(result) {
-	 var div = $(result).filter('div#json_drop_column').html();
-	 $(".error").append(div);
-	 $('.show_loading_small').hide();
-	}).fail(function() {
-	 alert("Content type drop failed");
-	 $('#loading').hide();
-	});
-// $(".form_table #subinventory_id").attr("disabled",false);
- }
-
-//Delete major category
-
+ //Delete major category
  function removeCategory(category_id, content_type_id) {
 	$('.show_loading_small').show();
 	$.ajax({
-	 url: '../category/json.category.php',
+	 url: 'extensions/category/json.category.php',
 	 data: {delete: '1',
 		category_id: category_id,
 		content_type_id: content_type_id},
@@ -100,18 +114,29 @@ $(document).ready(function() {
 	}
  });
 
+ //selecting Header Id
+ $(".content_type_id.select_popup").on("click", function() {
+	void window.open('select.php?class_name=content_type', '_blank',
+					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
 //on click refresh
- $('#form_header a.show').click(function() {
+ $('a.show.content_type').click(function() {
 	var content_type_id = $('#content_type_id').val();
-	$(this).attr('href', 'content_type.php?mode=9&content_type_id=' + content_type_id);
+	$(this).attr('href', modepath() + 'content_type_id=' + content_type_id);
  });
 
 //field enable disable
- $("#content tbody.field_values_list").on("click", ".add_row_img", function() {
-	add_new_row('tr.content_type0', 'tbody.field_values_list', 2);
-	$("tbody.field_values_list").find(".field_name:last").attr("readonly", false);
-	$("tbody.field_values_list").find(".field_type:last").attr("disabled", false);
+ $("#content").on("click", ".add_row_img", function() {
+	var addNewRow = new add_new_rowMain();
+	addNewRow.trClass = 'content_type0';
+	addNewRow.tbodyClass = 'field_values_list';
+	addNewRow.noOfTabs = 2;
+	addNewRow.removeDefault = true;
+	addNewRow.add_new_row();
  });
+
+
 
  $('#content').on('blur', '.field_type', function() {
 	if (($(this).val() == 'int') || ($(this).val() == 'varchar')) {
@@ -151,33 +176,42 @@ $(document).ready(function() {
 	}
  });
 
-//save
-// save('json.content_type.php', '#content_type_header', 'line_id_cb', 'content_type', '#content_type_id', '', '');
 
-//$('#save').on('click', function(){
-// $(".error").append('Saving Data');
-//var form_header_id ='#content_type_header';
-//$(form_header_id).find('select').attr('disabled', false);
-//var headerData = $(form_header_id).serializeArray();
-// saveHeader('json.content_type.php', headerData, '#content_type_id', '');
-//});
+ $('#content').on('change', '.field_type', function() {
+	var fieldType = $(this).val();
 
- $('#save').on('click', function() {
-	$(".error").append('Saving Data');
-	var form_header_id = '#content_type_header';
-	$(form_header_id).find('select').attr('disabled', false);
-	var headerData = $(form_header_id).serializeArray();
-	saveHeader('content_type.php', headerData, '#content_type_id', '', true, 'content_type');
-	$(form_header_id).find('select').attr('disabled', true);
+	switch (fieldType) {
+	 case 'enum' :
+		$(this).closest('tr').find('.field_enum').prop('required', true);
+		break;
+
+	 case 'option' :
+		$(this).closest('tr').find('.option_type').prop('required', true);
+		break;
+
+	 case 'int' :
+	 case 'varchar' :
+		$(this).closest('tr').find('.number').prop('required', true);
+		break;
+
+	 case 'default' :
+		$(this).closest('tr').find('.number').prop('required', false);
+		break;
+	}
+
  });
 
-// var classSave = new saveMainClass();
-// classSave.json_url = 'content_type.php';
-// classSave.form_header_id = 'content_type_header';
-// classSave.primary_column_id = 'content_type_id';
-// classSave.single_line = false;
-// classSave.savingOnlyHeader = true;
-// classSave.headerClassName = 'content_type';
-// classSave.saveMain();
+//delete from multi action
+ deleteData('form.php?class_name=content_type&line_class_name=content_type');
+
+ var classSave = new saveMainClass();
+ classSave.json_url = 'form.php?class_name=content_type';
+ classSave.form_header_id = 'content_type_header';
+ classSave.primary_column_id = 'content_type_id';
+ classSave.single_line = false;
+ classSave.savingOnlyHeader = true;
+ classSave.headerClassName = 'content_type';
+ classSave.enable_select = true;
+ classSave.saveMain();
 
 });

@@ -1,13 +1,3 @@
-<?php
-if (!empty($msg)) {
- $show_message = '<div id="dialog_box">';
- foreach ($msg as $key => $value) {
-	$x = $key + 1;
-	$show_message .= 'Message ' . $x . ' : ' . $value . '<br />';
- }
- $show_message .= '</div>';
-}
-?>
 <div id="all_contents">
  <div id="content_left"></div>
  <div id="content_right">
@@ -18,13 +8,13 @@ if (!empty($msg)) {
 		 <div id="structure">
 			<div id="contents">
 			 <div id ="form_header">
-				<div class="error"></div><div id="loading"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/loading.gif"/></div>
-				<div class="show_loading_small"></div>
-				<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
+			<div class="error"></div><div class="show_loading_small"></div><div id="loading"></div>
+			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 			 </div>
 			 <div id="list_contents">
 				<div id="searchForm"><?php echo!(empty($search_form)) ? $search_form : ""; ?></div>
-				<?php
+				<div id="searchResult">
+				 				<?php
 				if (!empty($total_count)) {
 				 ?>
  				<div id="searchResultMessages">
@@ -61,6 +51,8 @@ if (!empty($msg)) {
  				<!--download page completion-->	 
 				<?php }
 				?>
+
+				</div>
 
 			 </div>
 			</div>

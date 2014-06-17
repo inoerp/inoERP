@@ -1,7 +1,7 @@
 <?php
 class inv_receipt_header extends dbObject {
  
- protected static $table_name = "inv_receipt_header";
+ public static $table_name = "inv_receipt_header";
  public static $dependent_classes = ['inv_receipt_line', 'po_all_v'];
  public static $primary_column = "inv_receipt_header_id";
  public static $primary_column2 = "receipt_number";

@@ -3,7 +3,7 @@
  <div id="output">
  </div>
  <!--    START OF FORM HEADER-->
-	<div class="error"></div><div id="loading"></div>
+	<div class="comment_error"></div><div id="loading"></div>
 	<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 	 <form action="<?php echo HOME_URL . 'extensions/comment/post_comment.php'; ?>"  method="post" class="comment"  name="comment" >
 		<!--create empty form or a single id when search is not clicked and the id is referred from other comment -->
@@ -27,16 +27,13 @@
 			 <input type="text"  name="weightage" value="<?php echo htmlentities($comment->comment_by); ?>" 
 							size="25"  maxlength="150" class="comment_by" placeholder="Comment By"> 
 			</li>
-			<!--<li><input type="button"  value="File" id="comment_attachment_button" name=""></li>-->
-<!--<li><input type="button" class="button refresh" value="Refresh" name="refresh"/> </li>-->
+
 			<li><input type="button" name="submit_comment" class="submit_comment" Value="Save"></li>
 			<li> <input type="button" name="delete_comment" class="delete_comment" value="Delete"></li>
-<!--         <li id="loading"><img alt="Loading..." 
-												 src="<?php // echo HOME_URL;   ?>themes/images/small_loading.gif"/></li>-->
 		 </ul>
 		</div>
 		<div id="commentId"><label>Comment : </label>
-		 <textarea required name="comment" class="mediumtext" rows="18" cols="80"><?php
+		 <textarea name="comment" class="mediumtext" rows="18" cols="80"><?php
 			echo (!empty($comment->comment)) ? htmlentities($comment->comment) : "";
 			?> </textarea>
 

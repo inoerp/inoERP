@@ -3,7 +3,7 @@
 
 if (isset($_FILES)) {
   $file = new file();
- if (!empty($_POST['upload_type'])) {
+ if (!empty($_POST['upload_type']) && ($_POST['upload_type'] != 'undefined')) {
 	$file->setProperty('_upload_type', $_POST['upload_type']);
  } else {
 	$file->setProperty('_upload_type', 'data_base');

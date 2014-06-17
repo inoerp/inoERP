@@ -2,7 +2,7 @@
 
 class fp_mrp_planned_order extends dbObject {
 
- protected static $table_name = "fp_mrp_planned_order";
+ public static $table_name = "fp_mrp_planned_order";
  public static $primary_column = "fp_mrp_planned_order_id";
  public static $parent_primary_column = "fp_mrp_header_id";
  public static $key_column = 'item_id';

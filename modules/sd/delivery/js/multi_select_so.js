@@ -1,23 +1,34 @@
 $(document).ready(function() {
+ $('#content').on('click', '.line_status', function (){
+	alert('You can only search lines which are not picked');
+	$(this).attr('readonly', true);
+ });
 
  $('.line_id_cb').on('click', function() {
 	var Onhand = +$(this).closest('tr').find('.onhand').val();
 	var lineQuantity = +$(this).closest('tr').find('.line_quantity').val();
+	var pickedQuantity = +$(this).closest('tr').find('.picked_quantity').val();
 	if (Onhand < lineQuantity) {
 	 $(this).attr('checked', false);
 	 alert('Available Onhand is less than line quantity');
 	}
+
+	if (pickedQuantity >= lineQuantity) {
+	 $(this).attr('checked', false);
+	 alert('All line quantities are in picked status!');
+	}
+
  });
- 
+
  $('.line_id_cb').each(function() {
-		var Onhand = +$(this).closest('tr').find('.onhand').val();
+	var Onhand = +$(this).closest('tr').find('.onhand').val();
 	var lineQuantity = +$(this).closest('tr').find('.line_quantity').val();
 	if (Onhand < lineQuantity) {
 	 $(this).closest('tr').find('input').each(function() {
 		$(this).css('background', 'rgba(255,40,0,0.5)');
 	 });
-	}else{
-	 	 $(this).closest('tr').find('input').each(function() {
+	} else {
+	 $(this).closest('tr').find('input').each(function() {
 		$(this).css('background', 'rgba(204,255,153,0.8)');
 	 });
 	}

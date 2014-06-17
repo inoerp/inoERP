@@ -3,7 +3,7 @@
 class extn_web_tracking extends dbObject {
 
 //protected static variables
- protected static $table_name = "extn_web_tracking";
+ public static $table_name = "extn_web_tracking";
 //protected variables
 //public static varibales - required to be accessed with out instantitaing the class
  public static $primary_column = "extn_web_tracking_id";

@@ -2,7 +2,7 @@
 
 class fp_mds_line extends dbObject {
 
- protected static $table_name = "fp_mds_line";
+ public static $table_name = "fp_mds_line";
  public static $primary_column = "fp_mds_line_id";
  public static $parent_primary_column = "fp_mds_header_id";
  public static $key_column = 'item_id';

@@ -2,7 +2,7 @@
 
 class gl_calendar extends dbObject {
 
- protected static $table_name = "gl_calendar";
+ public static $table_name = "gl_calendar";
  public static $module = "gl";
  public static $primary_column = "gl_calendar_id";
  public static $key_column = "name";

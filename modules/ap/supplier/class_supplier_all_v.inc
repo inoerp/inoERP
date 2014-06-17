@@ -2,7 +2,7 @@
 
 class supplier_all_v extends dbObject {
 
- protected static $table_name = "all_po_v";
+ public static $table_name = "all_po_v";
  public static $primary_column = "supplier_id";
  public $field_a = [
 		 'supplier_id',

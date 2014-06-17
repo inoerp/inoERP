@@ -27,9 +27,26 @@ background: #eed;
 padding: 10px;
 }
 
+.clickable{
+    cursor: pointer; 
+		cursor: hand; 
+}
+
 .account_popup, .select_popup{
 display: inline-block;
 width: 12px;
+}
+
+.major_row{
+    background-color : rgba(131, 121, 153, 0.7);
+    font: 0.9em bold;
+}
+
+
+ul li.checkBox{
+    display: inline-block;
+    margin-right: 5em;
+    
 }
 
 .full_content{
@@ -52,10 +69,6 @@ min-height: 50px;
 }
 ul.text_list li:last-child{
 border: none;
-}
-
-.anyDate, .dateFromToday, .dat {
-width: 90px;
 }
 
 #content_extra img
@@ -374,7 +387,7 @@ ul.commentRecord{
 display: block;
 border: 1px solid;
 margin : 30px 10px;
-width: 900px;
+width: 100%;
 padding: 5px;
 background: #f6f6f6; /* Old browsers */
 background: -moz-linear-gradient(left,  #f6f6f6 0%, #e1e1e1 2%, #e1e1e1 20%, #f1f1f1 20%, #ffffff 100%); /* FF3.6+ */
@@ -514,18 +527,56 @@ table#category_list td.four{
 padding-left: 80px;
 }
 
-.one_tab{
+.one_tab, .tab_0{
 font-weight: bold;
-color: blue;
+background-color:  rgba(10, 180, 180, 0.8);
 }
-.two_tab{
+
+
+.tab_2::before
+{ 
+content:"-";
+}
+
+.tab_3::before
+{ 
+content:"--";
+}
+
+.tab_4::before
+{ 
+content:"---";
+}
+
+
+.two_tab, .tab_1{
 padding-left: 10px;
+    font-weight: bold;
+
 }
-.three_tab{
+
+.three_tab, .tab_2{
 padding-left: 20px;
+    color: rgba(210, 40, 90, 0.7);
+
 }
-.four_tab{
+
+.four_tab, .tab_3{
 padding-left: 30px;
+
+}
+
+
+.tab_4{
+padding-left: 40px;
+}
+
+.tab_5{
+padding-left: 50px;
+}
+
+.tab_6{
+padding-left: 60px;
 }
 
 
@@ -678,4 +729,33 @@ border-right : 4px groove #BADA55;
 
 .max_width_150{
 max-width: 150px;
+}
+.tree_view li{
+    padding-left: 15px;
+}
+.tree_view li.contentContainer, .tree_view li.contentClosed{
+    padding-top:2px;
+    background:url('images/plus.gif ') no-repeat 0px 6px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.tree_view li.contentViewing {
+    padding-top:2px;
+    background:url('images/minus.gif ') no-repeat 0px 6px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.heading1 {
+    background-color: rgba(12, 89, 89, 0.5);
+    margin-left: -10px;
+    margin-right: -10px;
+
+}
+
+.front_page_summary{
+     background-color: rgba(255, 256, 256, 0.8);
+    box-shadow: 1px 1px 1px 2px #888;
+    margin: 10px;
 }

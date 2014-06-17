@@ -14,13 +14,9 @@
 			 <form action="path.php" method="post" size="30" id="path" name="path"  >
 				<div > 
 				 <ul class="two_column"> 
-					<li><label><a href="select.php?class_name=<?php echo $class; ?>" class="select popup">
-								<img src="<?php echo HOME_URL; ?>themes/images/serach.png"/></a>
-						Path Id :</label> 
-					 <input type="text" readonly name="path_id[]" id="path_id" maxlength="30" size="30"
-									placeholder="System Generated No" value="<?php echo $$class->path_id; ?>">
-					 <a name="show" href="path.php?path_id=" class="show path_id">
-							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+					<li><label><img src="<?php echo HOME_URL; ?>themes/default/images/serach.png" class="path_id select_popup clickable">
+						Path Id :</label><?php $f->text_field_ds('path_id') ?>
+					 <a name="show" href="form.php?class_name=path" class="show path_id">	<img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
 					</li>
 					<li><label>Parent Name :</label> 
 					 <select name="parent_id[]" id="parent_id"> 
@@ -48,6 +44,8 @@
 					 <input type="text" required name="description[]" maxlength="100" id="description" size="60" 
 									placeholder="Enter path descrip. Limit 100 characters" value="<?php echo htmlentities($path->description); ?>">
 					</li>
+					<li><label>Class/Obj Name  : </label> <?php $f->text_field_d('obj_class_name') ?></li>
+					<li><label>Mode  : </label> <?php $f->text_field_ds('mode') ?></li>
 					<li><label>Module : </label>
 					 <Select name="module_id[]" id="module"> 
 						<option value="" ></option>   

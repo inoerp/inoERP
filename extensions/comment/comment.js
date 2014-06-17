@@ -1,7 +1,80 @@
+//get the comment form
+function getCommentForm() {
+ $('#loading').show();
+ var content_id = $("#content_id").val();
+ $.ajax({
+	url: 'comment.php',
+	data: {reference_table: 'content',
+	 reference_id: content_id},
+	type: 'get'
+ }).done(function(data) {
+	var div = $('#comment', $(data)).html();
+	$("#new_comment").append(div);
+	$('#loading').hide();
+ }).fail(function() {
+	alert("Comment content loading failed");
+	$('#loading').hide();
+ });
+// $(".form_table #subinventory_id").attr("disabled",false);
+}
+$("#comment_button").click(function() {
+ getCommentForm();
+});
+
+function deleteComment() {
+ $(".delete_button").click(function(e) {
+	var headerId = $(this).val();
+	$(".delete_button").addClass("show_loading_small");
+	$(".delete_button").prop('disabled', true);
+	e.preventDefault();
+	if (confirm("Do you really want to delete ?\n" + headerId)) {
+	 $.ajax({
+		url: 'form.php?class_name=comment',
+		data: {
+		 delete_id: headerId,
+		 deleteType: 'header',
+		 delete: '1'},
+		type: 'get',
+		beforeSend: function() {
+		 $('.show_loading_small').show();
+		},
+		complete: function() {
+		 $('.show_loading_small').hide();
+		}
+	 }).done(function(result) {
+		$(".error").append(result);
+		$(".delete_button").removeClass("show_loading_small");
+		$(".delete_button").prop('disabled', false);
+	 }).fail(function(error, textStatus, xhr) {
+		alert("delete failed \n" + error + textStatus + xhr);
+		$(".delete_button").removeClass("show_loading_small");
+		$(".delete_button").prop('disabled', false);
+	 });
+	}
+ });
+}
+
+function updateComment(comment_id, ulclass) {
+ $('#loading').show();
+ $.ajax({
+	url: 'comment.php',
+	data: {update: '1',
+	 comment_id: comment_id},
+	type: 'get'
+ }).done(function(result) {
+	var div = $(result).filter('div#commentForm').html();
+	$(ulclass).append(div);
+	$('#loading').hide();
+ }).fail(function() {
+	alert("Comment update failed");
+	$('#loading').hide();
+ });
+}
+
 $(document).ready(function() {
  $('.show_loading_small').hide();
- 
-  tinymce.init({
+
+ tinymce.init({
 	selector: '.mediumtext',
 	mode: "exact",
 //    theme: "modern",
@@ -15,71 +88,40 @@ $(document).ready(function() {
 	 $('#attachment_button').click();
 	}
  });
- 
- $('.submit_comment').on('click', function() {
-$('.show_loading_small').show();
-$(this).closest('form').find('textarea').each(function() {
- var divId = $(this).prop('id');
- var data = tinyMCE.get(divId).getContent();
- $(this).html(data);
-});
-var headerData = $(this).closest('form').serializeArray();
-saveHeader('../comment/comment.php', headerData, '#comment_id', '', true, 'comment');
-$(".error").append('<input type="button" value="Reload page" onclick="location.reload();">');
-});
-});
- 
-  //FILE attachment
+
+ //Delete the comment form
+ deleteComment();
+
+
+//Update the comment form
+ $("#content").on('click', '.update_button', function(e) {
+	var comment_id = $(this).val();
+	var ulclass = $(this).closest(".commentRecord").find(".line_li");
+	if (confirm("Are you sure?")) {
+	 updateComment(comment_id, ulclass);
+	}
+	e.stoppropagation();
+ });
+
+
+ //FILE attachment
  var fu = new fileUploadMain();
-fu.json_url = '../file/upload.php';
-fu.fileUpload();
-//   $('#loading').hide();
-// $('.show_loading_small').hide();
-//Beginig of comment post
-// function commentShowResponse(responseText, statusText, xhr, $form) {
-//  $('li#loading').hide();
-//  $("#output").append(responseText);
-//  $('#comment_header').resetForm();
-//  location.reload(true);
-// }
-//
-//
-// var Commentoptions = {
-//  success: commentShowResponse,
-//  error : commentShowResponse,
-//  data: { submit_comment: 'submit_comment' },
-//  clearForm : true
-//   };
-//
-// $('#comment_header').submit(function() {
-//  tinyMCE.triggerSave();
-//  $('li#loading').show();
-//  $(this).ajaxSubmit(Commentoptions);
-//  return false;
+ fu.json_url = 'extensions/file/upload.php';
+ fu.fileUpload();
 
-//End of comment post
+deleteData('form.php?class_name=comment&line_class_name=comment');
 
+ $('.submit_comment').on('click', function() {
+	$('.show_loading_small').show();
+	$(this).closest('form').find('textarea').each(function() {
+	 var divId = $(this).prop('id');
+	 var data = tinyMCE.get(divId).getContent();
+	 $(this).html(data);
+	});
+	var headerData = $(this).closest('form').serializeArray();
+	saveHeader('form.php?class_name=comment', headerData, '#comment_id', '', true, 'comment');
+	$(".comment_error").replaceWith('<input type="button" value="Reload page" onclick="location.reload();">');
+ });
 
-//beginf of get attachment
-//function getAttachmentForm(){
-//       $('#loading').show();
-////var org_id = $(".form_table #org_id").val();
-//$.ajax({
-//     url:'../file/json.file.php' ,
-//     type: 'get'
-//     }).done(function(data){
-//     var div = $('#add_attachments', $(data)).html();
-//        $("#attachment_comment").append(div);
-//        $('#loading').hide();
-//      }).fail(function(){
-//     alert("Attachment loading failed");
-//     $('#loading').hide();
-//     });
-//}
+});
 
-//$("#comment_attachment_button").click(function() {
-// getAttachmentForm();
-//});
-
-//end of getting attachment form
-//

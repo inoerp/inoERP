@@ -2,7 +2,7 @@
 
 class onhand_v extends dbObject {
 
- protected static $table_name = "onhand_v";
+ public static $table_name = "onhand_v";
  public static $primary_column = "onhand_id";
  public $field_a = [
 		 'onhand_id',
