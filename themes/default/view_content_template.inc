@@ -71,7 +71,7 @@
 	</div>
 	<div id="content_right_right"></div>
  </div>
+
  <div id="content_bottom"></div>
 </div>
-
 <?php include_template('footer.inc') ?>

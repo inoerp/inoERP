@@ -1,249 +1,201 @@
-$(document).ready(function() {
-  $('#loading').hide();
-//hiding the loader
-var $loader = $('#loading'), timer;
-$loader.hide().ajaxStart(function()
-    {
-        timer && clearTimeout(timer);
-        timer = setTimeout(function()
-        {
-            $loader.show();
-        },
-        10000);
-    }).ajaxStop(function()
-    {
-        clearTimeout(timer);
-        $loader.hide();
-    });
-    
-//creating tabs
-$(function() {
-    $( "#tabsHeader" ).tabs();
-    $( "#tabsLine" ).tabs();
-  });
-  
-//Refresh the content
-$('.refresh').click(function() {
-    location.reload(true);
-});
-//togle values
-$("#view_query label").click(function (){
-$("#view_query").find("textarea").toggle();
-});
-
-$("#live_display label").click(function (){
-$("#live_display").find("#live_display_data").toggle();
-});
-
-$("#logical_settings label").click(function (){
-$("#logical_settings").find("ul").toggle();
-});
-//function add remove view path
-function remove_view_path(){
-$(".view_path").blur(function() {
-if($(this).val() == 'remove'){
-$(this).remove();
- }
-});
-}
-
-
-function add_view_path(){
-objectcount1 = 100;
-$(".add_new_path").on("click",function() {
-$(".view_path").clone().attr("class","view_path new_object" + objectcount1).appendTo($(this).parent());
-objectcount1++;
-remove_view_path();
-});  
-
-}
-
-remove_view_path();
-add_view_path();
-//
-
-//get table fields
-function select_tableName(){
-$(".all_table_names").blur(function() {
-var tableName = $(this).val();
-var parentId = $(this).parent().parent().attr("id");
-getFieldNames(tableName, parentId);
-});
-}
-select_tableName();
-
-function getFieldNames(tableName, parentId) {
+function getFieldNames(tableName, parentClass) {
  $('#loading').show();
  $.ajax({
-  url: 'json.view.php',
-  data: {tableName: tableName,
-  get_fieldName: 1},
-  type: 'get'
+	url: 'extensions/view/json_view.php',
+	data: {tableName: tableName,
+	 get_fieldName: 1},
+	type: 'get'
  }).done(function(result) {
-  var div = $(result).filter('div#json_filed_names').html();
-//	$("#" + parentId + " .table_fields").replaceWith('<div class="table_fields"></div>');
-  $("#" + parentId + " .table_fields").replaceWith(div);
-   $('#loading').hide();
+	var tableClass = '.'+parentClass.replace(/\s+/g, '.');
+	var div = $(result).filter('div#json_filed_names').html();
+  if(div.length > 5 ){
+	$('#content').find(tableClass).find('.table_fields').empty().append(div);
+ }
+	$('#loading').hide();
  }).fail(function() {
-  alert("table field loading failed");
-  $('#loading').hide();
+	alert("table field loading failed");
+	$('#loading').hide();
  });
  $(".table_fields").attr("disabled", false);
 }
 
-function remove_option(){
-$(".remove_option").click(function() {
-$(this).closest('li').remove();
+$(document).ready(function() {
+ //togle values
+ $("#view_query label").click(function() {
+	$("#view_query").find("textarea").toggle();
+ });
+
+ $("#live_display label").click(function() {
+	$("#live_display").find("#live_display_data").toggle();
+ });
+
+ $("#logical_settings label").click(function() {
+	$("#logical_settings").find("ul").toggle();
+ });
+
+//function add remove view path
+ objectcount1 = 100;
+ $("#content").on("click", '.add_new_path', function() {
+	$(".view_path").first().clone().attr("class", "view_path new_object" + objectcount1).appendTo($(this).parent());
+	objectcount1++;
+ });
+ $("#content").on('change', '.view_path', function() {
+	if ($(this).val() === 'remove') {
+	 if ($('#content').find('.view_path').length > 1) {
+		$(this).remove();
+	 } else {
+		alert('You cant remove the last node');
+	 }
+	}
+ });
+
+
+//get table fields
+ $("#content").on('change', '.all_table_names', function() {
+	var tableName = $(this).val();
+	var parentClass = $(this).closest('ul').attr("class");
+	if(tableName !=='remove_table'){
+	getFieldNames(tableName, parentClass);
+ }
+ });
+
+ $("#content").on('click', '.remove_option', function() {
+	if ($(this).closest('ul').find('li').length > 2) {
+	 $(this).closest('li').remove();
+	} else {
+	 alert('You cant remove first field\nRemove table if required');
+	}
+ });
+
+ $("#content").on('click', '.remove_table', function() {
+	if ($(this).closest('div#display_div').find('ul').length > 1) {
+	 $(this).closest('ul').remove();
+	} else {
+	 alert('You cant remove first table name ');
+	}
 });
-}
-remove_option();
 
-function remove_table(){
-$(".remove_table").click(function() {
-$(this).closest('ul').remove();
-});
-}
-remove_table();
+ var objectCount = 1000;
+	$("#content").on("click",'.add_new_table' ,function() {
+	 $("ul.display_records").first().clone().attr("class", "display_records table_object" + objectCount).appendTo($("#display_div"));
+	 $("#new_object" + objectCount + " .table_fields option").replaceWith("");
+	 objectCount++;
+	});
+ 
 
-var objectCount = 1000;
-function click_add_new_table(){
-$(".add_new_table").on("click",function() {
-  $("ul#display_records0").clone().attr("id", "new_object" + objectCount).appendTo($("#display_div"));
-  $("#new_object" + objectCount + " .table_fields option").replaceWith("");
-  objectCount++;
-  select_tableName();
-	click_add_new_field();
-	
-  remove_table();
-	remove_option();
-	click_add_new_table();
-	remove_option();
-});  
-}
-
-click_add_new_table();
-
-var objectCount1 = 10;
-function click_add_new_field(){
-$(".add_new_field").on("click",function() {
-  $(this).closest("ul").children("#field_records0").clone().attr("id", "new_object" + objectCount1).appendTo($(this).parent());
-  objectCount1++;
-  select_tableName();
-//	click_add_new_field();
-  remove_table();
-	remove_option();
-});  
-}
-
-click_add_new_field();
+ var objectCount1 = 10;
+ $("#content").on("change", 'select.table_fields', function() {
+	if($(this).val() && ($(this).val()!=='remove')){
+	$(this).closest("ul").find('li.field_records').first().clone().attr("class", "field_records record_no" + objectCount1).appendTo($(this).closest('ul'));
+	objectCount1++;
+ }
+ });
 //end of get tables
 
 //condition
-function condition_operator_type_selection(){
-$(".condition_operator_type").blur(function() {
-var conditionValue = $(this).val();
-if(conditionValue == 'database'){
-$(this).closest("td").next(".condition_row_value").children(".condition_row_value_input").remove();
-}else if(conditionValue == 'remove'){
-$(this).closest("tr").remove();
-}else{
-var InputText='<input type="text" class="condition_row_value_input input">';
-$(this).closest("td").next(".condition_row_value").html(InputText);
-}
-});
-}
-condition_operator_type_selection(); 
+ function condition_operator_type_selection() {
+	$(".condition_operator_type").blur(function() {
+	 var conditionValue = $(this).val();
+	 if (conditionValue == 'database') {
+		$(this).closest("td").next(".condition_row_value").children(".condition_row_value_input").remove();
+	 } else if (conditionValue == 'remove') {
+		$(this).closest("tr").remove();
+	 } else {
+		var InputText = '<input type="text" class="condition_row_value_input input">';
+		$(this).closest("td").next(".condition_row_value").html(InputText);
+	 }
+	});
+ }
+ condition_operator_type_selection();
 
 
 //allow to drag & drop
-function remove_from_dragged_element(){
-$(".draggable_element.ui-draggable").dblclick(function() {
-$(this).remove();
-});
-}
+ function remove_from_dragged_element() {
+	$(".draggable_element.ui-draggable").dblclick(function() {
+	 $(this).remove();
+	});
+ }
 
-function drag_drop_condition(){
-$(".draggable_element").draggable(
-				{helper:'clone'},
-        {cursor: "crosshair" });
-		$(".condition_row_parameter").droppable({
-			accept: ".draggable_element",
-			drop: function(event,ui){
-					console.log("Item was Dropped");
-					$(this).append($(ui.draggable).clone());
-					remove_from_dragged_element();
-									}
-		});
-}
-function drag_drop_condition_value(){
-$(".draggable_element").draggable(
-				{helper:'clone'},
-        {cursor: "crosshair" });
-		$(".condition_row_value").droppable({
-			accept: ".draggable_element",
-			drop: function(event,ui){
-					console.log("Item was Dropped");
-					$(this).append($(ui.draggable).clone());
-					remove_from_dragged_element();
-									}
-		});
-}
+ function drag_drop_condition() {
+	$(".draggable_element").draggable(
+					{helper: 'clone'},
+	{cursor: "crosshair"});
+	$(".condition_row_parameter").droppable({
+	 accept: ".draggable_element",
+	 drop: function(event, ui) {
+		console.log("Item was Dropped");
+		$(this).append($(ui.draggable).clone());
+		remove_from_dragged_element();
+	 }
+	});
+ }
+ function drag_drop_condition_value() {
+	$(".draggable_element").draggable(
+					{helper: 'clone'},
+	{cursor: "crosshair"});
+	$(".condition_row_value").droppable({
+	 accept: ".draggable_element",
+	 drop: function(event, ui) {
+		console.log("Item was Dropped");
+		$(this).append($(ui.draggable).clone());
+		remove_from_dragged_element();
+	 }
+	});
+ }
 
-function drag_drop_condition_sort(){
-$(".draggable_element").draggable(
-				{helper:'clone'},
-        {cursor: "crosshair" });
-		$(".sort_fields_field_value").droppable({
-			accept: ".draggable_element",
-			drop: function(event,ui){
-					console.log("Item was Dropped");
-					$(this).append($(ui.draggable).clone());
-					remove_from_dragged_element();
-									}
-		});
-}
-drag_drop_condition();
-drag_drop_condition_value();
-drag_drop_condition_sort();
-remove_from_dragged_element();
+ function drag_drop_condition_sort() {
+	$(".draggable_element").draggable(
+					{helper: 'clone'},
+	{cursor: "crosshair"});
+	$(".sort_fields_field_value").droppable({
+	 accept: ".draggable_element",
+	 drop: function(event, ui) {
+		console.log("Item was Dropped");
+		$(this).append($(ui.draggable).clone());
+		remove_from_dragged_element();
+	 }
+	});
+ }
+ drag_drop_condition();
+ drag_drop_condition_value();
+ drag_drop_condition_sort();
+ remove_from_dragged_element();
 
-var objectCount2 = 500;
-function click_add_new_condition(){
-$(".add_new_conditions").on("click",function() {
-  $("tr.condition_row").clone().appendTo($("table#condition_buttons_table tbody"));
-  objectCount1++;
-    select_tableName();
+ var objectCount2 = 500;
+ function click_add_new_condition() {
+	$(".add_new_conditions").on("click", function() {
+	 $("tr.condition_row").clone().appendTo($("table#condition_buttons_table tbody"));
+	 objectCount1++;
+	 select_tableName();
 //	click_add_new_field();
-  remove_table();
-	remove_option();
-	drag_drop_condition();
-drag_drop_condition_value();
-drag_drop_condition_sort();
-remove_from_dragged_element();
-condition_operator_type_selection();
-});  
-}
+	 
+	 drag_drop_condition();
+	 drag_drop_condition_value();
+	 drag_drop_condition_sort();
+	 remove_from_dragged_element();
+	 condition_operator_type_selection();
+	});
+ }
 
-click_add_new_condition();
+ click_add_new_condition();
 
-var objectCount2 = 1500;
-function click_add_new_sort_criteria(){
-$(".add_new_sort_criteria").on("click",function() {
-  $("tr.sort_fields_row").clone().appendTo($("table#sort_fields_table tbody"));
-  objectCount1++;
-    select_tableName();
+ var objectCount2 = 1500;
+ function click_add_new_sort_criteria() {
+	$(".add_new_sort_criteria").on("click", function() {
+	 $("tr.sort_fields_row").clone().appendTo($("table#sort_fields_table tbody"));
+	 objectCount1++;
+	 select_tableName();
 //	click_add_new_field();
-  remove_table();
-	remove_option();
-	drag_drop_condition();
-drag_drop_condition_value();
-drag_drop_condition_sort();
-remove_from_dragged_element();
-condition_operator_type_selection();
-});  
-}
+	 
+	 drag_drop_condition();
+	 drag_drop_condition_value();
+	 drag_drop_condition_sort();
+	 remove_from_dragged_element();
+	 condition_operator_type_selection();
+	});
+ }
 
-click_add_new_sort_criteria();
+ click_add_new_sort_criteria();
 
 
 
@@ -284,158 +236,158 @@ click_add_new_sort_criteria();
 //$("#sql_query").val(sql);
 //}
 
-function create_sql_query(){
-tableArray = [];
-$(".all_table_names option:selected").each(function(){
-tableName=$(this).val();
-tableArray.push(tableName);
-});
+ function create_sql_query() {
+	tableArray = [];
+	$(".all_table_names option:selected").each(function() {
+	 tableName = $(this).val();
+	 tableArray.push(tableName);
+	});
 
-show_fieldArray = [];
-$("#show_field_buttons .showField_buttons").each(function(){
-fieldName=$(this).val();
-fieldNameSeparated= fieldName.replace(/\./g, '__');
-fieldNameAs= fieldName + ' AS ' + fieldNameSeparated;
-show_fieldArray.push(fieldNameAs);
-});
+	show_fieldArray = [];
+	$("#show_field_buttons .showField_buttons").each(function() {
+	 fieldName = $(this).val();
+	 fieldNameSeparated = fieldName.replace(/\./g, '__');
+	 fieldNameAs = fieldName + ' AS ' + fieldNameSeparated;
+	 show_fieldArray.push(fieldNameAs);
+	});
 
-fieldArray = [];
-$(".table_fields option:selected").each(function(){
-tableName = $(this).closest("ul").children("#table_records").children(".all_table_names").val();
-fieldTableName=tableName+'.'+$(this).val();
-fieldArray.push(fieldTableName);
-});
+	fieldArray = [];
+	$(".table_fields option:selected").each(function() {
+	 tableName = $(this).closest("ul").children("#table_records").children(".all_table_names").val();
+	 fieldTableName = tableName + '.' + $(this).val();
+	 fieldArray.push(fieldTableName);
+	});
 
-filterArray = [];
-$("#condition_buttons_div .condition_buttons").each(function(){
-conditionName=$(this).val();
-filterArray.push(conditionName);
-});
+	filterArray = [];
+	$("#condition_buttons_div .condition_buttons").each(function() {
+	 conditionName = $(this).val();
+	 filterArray.push(conditionName);
+	});
 
-whereClauseArray = [];
-$(".condition_row").each(function(){
-var parameter = $(this).find(".condition_buttons").val();
-var operator = $(this).find(".condition_operator").val();
-var operator_type = $(this).find(".condition_operator_type").val();
-if(operator_type =='database')
-{
-var valueClass="condition_buttons";
-var value = $(this).find(".condition_row_value").children().children().val();
-var whereClause = parameter + " " + operator + " " + value;
-}else{
-var valueClass="condition_row_value_input";
-var value = $(this).find('.' + valueClass).val();
-var whereClause = parameter + " " + operator + " " +'\'' + value + '\'';
-}
+	whereClauseArray = [];
+	$(".condition_row").each(function() {
+	 var parameter = $(this).find(".condition_buttons").val();
+	 var operator = $(this).find(".condition_operator").val();
+	 var operator_type = $(this).find(".condition_operator_type").val();
+	 if (operator_type == 'database')
+	 {
+		var valueClass = "condition_buttons";
+		var value = $(this).find(".condition_row_value").children().children().val();
+		var whereClause = parameter + " " + operator + " " + value;
+	 } else {
+		var valueClass = "condition_row_value_input";
+		var value = $(this).find('.' + valueClass).val();
+		var whereClause = parameter + " " + operator + " " + '\'' + value + '\'';
+	 }
 
-if(parameter){
-whereClauseArray.push(whereClause);
-}
-});
+	 if (parameter) {
+		whereClauseArray.push(whereClause);
+	 }
+	});
 
-sortArray = [];
-$(".sort_fields_row").each(function(){
-sortFieldName = $(this).find(".showField_buttons").val();
-sortFieldValue= $(this).find(".sort_fields_values").val();
-if((sortFieldName) && (sortFieldName.length > 0)){
-sortField = sortFieldName + " " + sortFieldValue;
-sortArray.push(sortField);
-}
-});
+	sortArray = [];
+	$(".sort_fields_row").each(function() {
+	 sortFieldName = $(this).find(".showField_buttons").val();
+	 sortFieldValue = $(this).find(".sort_fields_values").val();
+	 if ((sortFieldName) && (sortFieldName.length > 0)) {
+		sortField = sortFieldName + " " + sortFieldValue;
+		sortArray.push(sortField);
+	 }
+	});
 
-if(whereClauseArray){
-whereClauseArray2 = whereClauseArray.join("\nAND ");
-}
+	if (whereClauseArray) {
+	 whereClauseArray2 = whereClauseArray.join("\nAND ");
+	}
 
-var sql="";
-if((show_fieldArray) && (show_fieldArray.length > 0) &&(tableArray) && (tableArray.length > 0)){
-sql = "SELECT " + show_fieldArray + "\nFROM \n" + tableArray ; 
-}
-if((whereClauseArray2) && (whereClauseArray2.length > 0)){
- sql += "\nWHERE " + whereClauseArray2 ;
-}
+	var sql = "";
+	if ((show_fieldArray) && (show_fieldArray.length > 0) && (tableArray) && (tableArray.length > 0)) {
+	 sql = "SELECT " + show_fieldArray + "\nFROM \n" + tableArray;
+	}
+	if ((whereClauseArray2) && (whereClauseArray2.length > 0)) {
+	 sql += "\nWHERE " + whereClauseArray2;
+	}
 
-if((sortArray) && (sortArray.length > 0)){
-sql += "\nORDER BY " + sortArray ;
-}
+	if ((sortArray) && (sortArray.length > 0)) {
+	 sql += "\nORDER BY " + sortArray;
+	}
 
-if(sql){
-$("#query").val(sql);
-$("#select").val(show_fieldArray);
-$("#from").val(tableArray);
-$("#where").val(whereClauseArray2);
-$("#order_by").val(sortArray);
-$("#filters").val(filterArray);
-}
-}
+	if (sql) {
+	 $("#query").val(sql);
+	 $("#select").val(show_fieldArray);
+	 $("#from").val(tableArray);
+	 $("#where").val(whereClauseArray2);
+	 $("#order_by").val(sortArray);
+	 $("#filters").val(filterArray);
+	}
+ }
 
-function update_conditions(){
- var condition_buttons = "";
- var showField_buttons = "";
-$(fieldArray).each(function(index){
- condition_buttons +='<div class="draggable_element">';
- condition_buttons +='<input type="text" value="' + fieldArray[index]+ '" class="condition_buttons '+fieldArray[index]+'">';
-condition_buttons +='</div>';
-});
-$(fieldArray).each(function(index){
- showField_buttons +='<div class="draggable_element">';
- showField_buttons +='<input type="text" value="' + fieldArray[index]+ '" class="showField_buttons '+fieldArray[index]+'">';
- showField_buttons +='</div>';
-});
-$("#condition_buttons_div").html(condition_buttons);
-$("#show_field_buttons").html(showField_buttons);
-}
+ function update_conditions() {
+	var condition_buttons = "";
+	var showField_buttons = "";
+	$(fieldArray).each(function(index) {
+	 condition_buttons += '<div class="draggable_element">';
+	 condition_buttons += '<input type="text" value="' + fieldArray[index] + '" class="condition_buttons ' + fieldArray[index] + '">';
+	 condition_buttons += '</div>';
+	});
+	$(fieldArray).each(function(index) {
+	 showField_buttons += '<div class="draggable_element">';
+	 showField_buttons += '<input type="text" value="' + fieldArray[index] + '" class="showField_buttons ' + fieldArray[index] + '">';
+	 showField_buttons += '</div>';
+	});
+	$("#condition_buttons_div").html(condition_buttons);
+	$("#show_field_buttons").html(showField_buttons);
+ }
 
-function change_attr_of_selected_elements(){
-$(".table_fields").find(':selected').attr("selected","selected");
-$(".all_table_names").find(':selected').attr("selected","selected");
-}
+ function change_attr_of_selected_elements() {
+	$(".table_fields").find(':selected').attr("selected", "selected");
+	$(".all_table_names").find(':selected').attr("selected", "selected");
+ }
 
-$("#save_tables").click(function(){
-create_sql_query();
-update_conditions();
-drag_drop_condition();
-drag_drop_condition_value();
-drag_drop_condition_sort();
-condition_operator_type_selection();
-remove_from_dragged_element();
-change_attr_of_selected_elements();
-});
+ $("#save_tables").click(function() {
+	create_sql_query();
+	update_conditions();
+	drag_drop_condition();
+	drag_drop_condition_value();
+	drag_drop_condition_sort();
+	condition_operator_type_selection();
+	remove_from_dragged_element();
+	change_attr_of_selected_elements();
+ });
 
-$("#save_query").click(function(){
-create_sql_query();
+ $("#save_query").click(function() {
+	create_sql_query();
 //update_conditions();
 //drag_drop_condition();
 //drag_drop_condition_value();
 //condition_operator_type_selection();
 //remove_from_dragged_element();
-});
+ });
 
 //get the new search criteria
-$("#new_search_criteria_add").click(function(){
-  $('#loading').show();
-var new_search_criteria = $(".new_search_criteria").val();
-$.ajax({
-     url:'json.view.php' ,
-     data : { new_search_criteria : new_search_criteria},
-     type: 'get'
-     }).done(function(result){
+ $("#new_search_criteria_add").click(function() {
+	$('#loading').show();
+	var new_search_criteria = $(".new_search_criteria").val();
+	$.ajax({
+	 url: 'json.view.php',
+	 data: {new_search_criteria: new_search_criteria},
+	 type: 'get'
+	}).done(function(result) {
 //      var div = $('#new_search_criteria', $(data)).html();
-			var div = $(result).filter('div#new_search_criteria').html();
-			$("ul.search_form").append(div);       
-        $('#loading').hide();
-      }).fail(function(){
+	 var div = $(result).filter('div#new_search_criteria').html();
+	 $("ul.search_form").append(div);
+	 $('#loading').hide();
+	}).fail(function() {
 //     alert("org name loading failed");
-     $('#loading').hide();
-     });
-});
+	 $('#loading').hide();
+	});
+ });
 
-$("#submit_view").click(function(){
-var logical_settings = $("ul#logical_settings").html();
-$("#logical_settings_value").val(logical_settings);
+ $("#submit_view").click(function() {
+	var logical_settings = $("ul#logical_settings").html();
+	$("#logical_settings_value").val(logical_settings);
 //alert($("#logical_settings_value").val());
-});
+ });
 
 }
- 
-);  
+
+);

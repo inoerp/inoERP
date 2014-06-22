@@ -1,8 +1,7 @@
-<? ob_start(); ?>
 <?php
-defined('DS')        ? null : define ('DS', '/');
-defined('HOME_DIR')  ? null : define('HOME_DIR', 'C:'.DS.'wamp'.DS.'www'.DS.'inoerp');
-defined('HOME_URL')  ? null : define("HOME_URL", "http://localhost/inoerp/");
+require_once (dirname(__FILE__) . '/../../define_const.inc');
+defined('DS')        ? null : define ('DS', DIRECTORY_SEPARATOR);
+
 /*---------------------Dont Update anything Below--------------------------------------*/
 //Basic Paths 
 defined('INC_PATH')  ? null : define('INC_PATH' , HOME_DIR.DS.'includes');
@@ -25,13 +24,10 @@ defined('INC_PO')  ? null : define('INC_PO' , HOME_DIR.DS.'modules'.DS.'po');
 defined('INC_BOM')  ? null : define('INC_BOM' , HOME_DIR.DS.'modules'.DS.'bom');
 defined('INC_WIP')  ? null : define('INC_WIP' , HOME_DIR.DS.'modules'.DS.'wip');
 
-
-
 //load core objects
 require_once(INC_BASICS.DS."dbsettings.inc"); 
 require_once(INC_FUNCTION.DS."functions.inc");
 require_once(INC_CLASS.DS."class.session.inc"); 
-
 include_once(INC_CLASS.DS."class.dbc.inc"); 
 require_once(INC_CLASS.DS."class.dbObject.inc"); 
 require_once(INC_CLASS.DS."class.form.inc"); 
@@ -174,6 +170,8 @@ require_once(INC_MODULE.DS."sd".DS."delivery".DS."class_sd_delivery_header.inc")
 require_once(INC_MODULE.DS."sd".DS."delivery".DS."class_sd_delivery_line.inc");
 require_once(INC_MODULE.DS."mdm".DS."tax_code".DS."class_mdm_tax_code.inc");
 require_once(INC_MODULE.DS."mdm".DS."tax".DS."region".DS."class_mdm_tax_region.inc");
+require_once(INC_MODULE.DS."mdm".DS."price_list".DS."class_price_list_header.inc");
+require_once(INC_MODULE.DS."mdm".DS."price_list".DS."class_price_list_line.inc");
 
 //include extensions
 
@@ -197,16 +195,4 @@ require_once(INC_EXTENSIONS.DS."site_info".DS."class_site_info.inc");
 require_once(INC_EXTENSIONS.DS."site_control".DS."class.site_control_header.inc");
 require_once(INC_EXTENSIONS.DS."site_control".DS."class.site_control_line.inc");
 require_once(INC_EXTENSIONS.DS."web_tracking".DS."class_web_tracking.inc");
-
-
-
-
-//require_once(INC_USER.DS."class.user.inc"); 
-
-//Third party classes
-require_once(INC_TPARTY.DS."fpdf".DS."fpdf.php");
-require_once(INC_CLASS.DS."class_inopdf.inc"); 
-//require_once(INC_FUNCTION.DS."module_functions.inc");
-//require_once(INC_FUNCTION.DS."extension_functions.inc");
-
 ?>

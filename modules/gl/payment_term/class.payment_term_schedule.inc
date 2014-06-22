@@ -3,12 +3,12 @@
 class payment_term_schedule extends payment_term {
 
  public static $table_name = "payment_term_schedule";
- public static $account_array = [
- ];
- public static $checkbox_array = [
-		 
- ];
- public static $field_array = [
+  public static $primary_column = "payment_term_schedule_id";
+	public static $parent_primary_column = "payment_term_id";
+ public static $key_column = 'payment_term_id';
+ public static $module = "gl";
+ 
+ public $field_a = [
 		 'payment_term_schedule_id',
 		 'payment_term_id',
 		 'seq_number',
@@ -22,25 +22,17 @@ class payment_term_schedule extends payment_term {
 		 "last_update_by",
 		 "last_update_date"
  ];
- public static $initial_search_array = [
- ];
- public static $column_array = [
- ];
- public static $requiredField_array = [
+
+ public $requiredField = [
 		 'payment_term_id',
 		 'seq_number',
 		 'amount_percentage'
  ];
- public static $addressField_array = [
- ];
- public static $fields_inForm_notInDataBase = [
- ];
- public static $fields_inHeader_needsToBeInserted_inPOST = [
+
+ public $fields_inHeader_needsToBeInserted_inPOST = [
 		 "payment_term_id"
  ];
- public static $otherField_array = [
- ];
- public static $primary_column = "payment_term_schedule_id";
+
  public $payment_term_schedule_id;
  public $payment_term_id;
  public $seq_number;

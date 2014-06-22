@@ -22,7 +22,7 @@ include_once("basics.inc");
 	if ($visibility_option == 1) {
 	 if (array_search($block_visibility, $ulr_vars)) {
 		$show_block_flag = 1;
-	 } elseif (!empty($url) && (strpos($url, $block_visibility) !== false)) {
+	 } elseif (!empty($url) && !empty($block_visibility) && (strpos($url, $block_visibility) !== false)) {
 		$show_block_flag = 1;
 	 } else {
 		$show_block_flag = 0;
@@ -32,7 +32,7 @@ include_once("basics.inc");
 	if ($visibility_option == 2) {
 	 if (array_search($block_visibility, $ulr_vars)) {
 		$show_block_flag = 0;
-	 } elseif (!empty($url) && (strpos($url, $block_visibility) !== false)) {
+	 } elseif (!empty($url) && !empty($block_visibility) && (strpos($url, $block_visibility) !== false)) {
 		$show_block_flag = 0;
 	 } else {
 		$show_block_flag = 1;

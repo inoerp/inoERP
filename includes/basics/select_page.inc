@@ -20,7 +20,6 @@ if (!empty($msg)) {
  });
 </script>
 <div id="all_contents">
- <div id="content_right">
 	<div id="content">
 	 <div id="main">
 		<div id="structure">
@@ -82,8 +81,16 @@ if (!empty($msg)) {
 		</div>
 	 </div>
 	</div>
- </div>
 </div>
 
 
-<?php include_template('footer.inc') ?>
+</body>
+</html>
+<?php
+global $dbc;
+// 5. Close connection
+if (isset($dbc)) {
+ $dbc->close_connection();
+}
+?>
+

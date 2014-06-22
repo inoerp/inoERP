@@ -33,7 +33,8 @@ if (!empty($msg)) {
 	classSave.line_key_field = line_key_field;
 	classSave.lineClassName = action_class;
 	if (($('.action').first().val() === 'convert_requisition') ||
-					($('.action').first().val() === 'sales_order_picking')) {
+					($('.action').first().val() === 'sales_order_picking') || 
+					($('.action').first().val() === 'multi_receipt')) {
 	 classSave.allLineTogether = true;
 	 classSave.savingOnlyHeader = true;
 	 classSave.headerClassName = action_class;
@@ -65,7 +66,7 @@ if (!empty($msg)) {
 				<?php
 				echo '<h2 class="heading">' . ucwords(str_replace('_', ' ', $action_message)) . '</h2>';
 				if (empty($search_result)) {
-				 echo "	</div> 		 </div> 		</div>	 </div> 	</div>  </div> </div>";
+				 echo "	</div> 		 </div> 		</div>	 </div> 	</div>  </div> </div></div>";
 				 show_footer($showBlock);
 				 return;
 				}
@@ -183,6 +184,4 @@ if (!empty($msg)) {
 	</div>
  </div>
 </div>
-<?php
-show_footer($showBlock);
-?>
+<?php show_footer($showBlock); ?>

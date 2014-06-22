@@ -1,0 +1,9 @@
+1. Change the DB settings @ include\basics\dbsettings.inc
+2. Change the session_set_cookie_params  in sessions file
+3. Import the database
+4. Change the .htaccess
+
+
+Demo
+1. Chane user module - no registraion/password reset/adding role/user creation
+user_login_template & user_template

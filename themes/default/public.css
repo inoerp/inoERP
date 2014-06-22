@@ -418,12 +418,27 @@ margin: 5px;
 
 ul.commentRecord li.line_li{
 display: block;
-margin-left: 190px;
+margin-left: 141px;
+    
 }
+
+
+ul.commentRecord li.subject:empty{
+display: none;
+}
+
+ul.commentRecord  li .subject{
+    margin-top: -5px;
+display: block;
+background: none repeat scroll 0% 0% rgba(205, 213, 213, 0.7);
+width: 574px;
+padding: 5px;
+}
+
+     
      
 ul.commentRecord li ul.line{
 display: block;
-width: 700px;
 min-height: 100px;
 }
 
@@ -580,87 +595,15 @@ padding-left: 60px;
 }
 
 
-#display_div ul li{
-display: inline-block;
-margin: 5px 2px;
-}
-
-#logical_settings label,
-#view_query label,
-#live_display label{
-display: block;
-background: #bbb;
-padding :5px;
-
-}
-
-#logical_settings li label{
-background: lightgrey;
-padding : 0 5px 5px 10px;
-}
-
-#logical_settings {
-width: 95%;
-margin : 10px 0;
-border: 4px solid #ccc;
-}
-
-#view_query,
-#live_display{
-border: 4px solid #ccc;
-width: 95%;
-margin : 10px 0;
-}
-
-#condition_li table{
-margin: 5px 0;
-width: 100%;
-}
-
-#condition_li table th{
-background : #eee;
-}
-
-#condition_li table tr td{
-min-width: 200px;
-width: 33%;
-border: 1px solid #ddd;
-padding: 2px 10px;
-}
 
 .ui-draggable{
 margin:5px;
-width: 140px;
 background : lightgreen;
+    width: 310px;
 }
 
 .draggable_element{
 display: inline-block;
-}
-
-li#sort_sqlQuery ul li{
-display: inline-block;
-vertical-align: top;
-}
-
-li#sort_sqlQuery {
-display: block;
-border:1px solid #ccc;
-}
-
-li#sort_sqlQuery ul li{
-display: inline-block;
-border-right:2px solid #ccc;
-width: 22%;
-}
-
-li#sort_sqlQuery ul li#sorting_li{
-min-width: 321px;
-}
-
-
-#view_query{
-margin:20px 0px;
 }
 
 table#sort_fields_table tr td{

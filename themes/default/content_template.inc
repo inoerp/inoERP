@@ -41,8 +41,8 @@
 					 <div id="uploaded_file_details"></div>
 					 <?php echo file::attachment_statement($file); ?>
 					</div>
-					<div id="content_elements">
-					 <ul id="content_element" class="inRow asperWidth">
+					<div id="content_element">
+					 <ul>
 						<li> 
 						 <?php
 						 if (!empty($category_select_statement_array)) {
@@ -60,23 +60,21 @@
 						 }
 						 ?>
 						</li>
-						<li id="terms"><label>Tags : </label> 
-						 <?php
-						 $f = new inoform();
-						 echo $f->text_field('terms', $$class->terms, '30')
-						 ?> </li>
-						<li class="published_cb"> <label>Published : </label> 
+						<li> <label>Show in Front Page : </label>
+						 <?php echo form::checkBox_field_d('show_in_fp_cb'); ?></li>
+						<li> <label>Published : </label> 
 						 <?php echo form::checkBox_field('published_cb', $$class->published_cb); ?></li>
 						<li><label>Weight : </label><?php form::text_field_ds('weightage'); ?> </li>
-						<li class="rev_enabled_cb"> <label>Rev enabled : </label>
-						 <?php echo form::checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb); ?></li>
 						<li><label>Rev Number : </label><?php form::text_field_ds('rev_number'); ?></li>
 						<li><label>Parent : </label><?php form::text_field_ds('parent_id'); ?></li>
-						<li class="show_in_fp_cb"> <label>Show in Front Page : </label>
-						 <?php echo form::checkBox_field('show_in_fp_cb', $$class->show_in_fp_cb); ?></li>
+						<li><label>Tags : </label> <?php echo $f->text_field('terms', $$class->terms, '40', ''); ?> </li> 
 					 </ul>
 					</div>
-					<!--<div class="submit"><input type="submit" value="save" name="submit_content" class="button"></div>-->
+					<?php
+					if ($access_level <= 3 & $mode == 9) {
+					 echo '<div id="save" class="submit"><input type="submit" value="Save Post" name="submit_content" class="button"></div>';
+					}
+					?>
 				 </form>
 				</div> 
 			 </div>
@@ -85,11 +83,11 @@
      <!--   end of structure-->
     </div>
    </div>
-   <div id="content_bottom"></div>
+   
   </div>
   <div id="content_right_right"></div>
  </div>
-
+<div id="content_bottom"></div>
 </div>
 
 <?php include_template('footer.inc') ?>

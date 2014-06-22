@@ -38,8 +38,8 @@
 							<?php  $cat = new category();
 							echo $cat->all_child_category_select_option('parent_id', '', $$class->parent_id, 'parent_id', false) ?> 
              </li>
-						 <li><label>Category </label><?php $f->text_field_d('category'); ?></li>
-						 <li><label>Description </label><?php $f->text_field_d('description'); ?></li>
+						 <li><label>Category </label><?php echo $f->text_field('category', $$class->category, '30	 '); ?></li>
+						 <li><label>Description </label><?php echo $f->text_field('description',$$class->description,'80'); ?></li>
 						</ul>
 					 </div>
 					</div>

@@ -1,13 +1,14 @@
 <?php
 
-class payment_term_discount extends payment_term {
+class payment_term_discount extends dbObject {
 
  public static $table_name = "payment_term_discount";
- public static $account_array = [
- ];
- public static $checkbox_array = [
-		  ];
- public static $field_array = [
+ public static $parent_primary_column = "payment_term_id";
+ public static $primary_column = "payment_term_discount_id";
+ public static $key_column = 'payment_term_id';
+ public static $module = "gl";
+
+ public $field_a = [
 		 'payment_term_discount_id',
 		 'payment_term_id',
 		 'seq_number',
@@ -21,24 +22,13 @@ class payment_term_discount extends payment_term {
 		 "last_update_by",
 		 "last_update_date"
  ];
- public static $initial_search_array = [
- ];
- public static $column_array = [
- ];
- public static $requiredField_array = [
+
+ public $requiredField = [
 		 'payment_term_id',
 		 'seq_number',
 		 'discount_percentage'
  ];
- public static $addressField_array = [
- ];
- public static $fields_inForm_notInDataBase = [
- ];
- public static $fields_inHeader_needsToBeInserted_inPOST = [
- ];
- public static $otherField_array = [
- ];
- public static $primary_column = "payment_term_discount_id";
+
  public $payment_term_discount_id;
  public $payment_term_id;
  public $seq_number;
@@ -54,7 +44,7 @@ class payment_term_discount extends payment_term {
  public $time;
  public $msg;
 
-  public static function find_by_payment_termId($term_id) {
+ public static function find_by_payment_termId($term_id) {
 	global $db;
 	$sql = "SELECT * FROM " .
 					self::$table_name .
@@ -62,7 +52,6 @@ class payment_term_discount extends payment_term {
 	$result = self::find_by_sql($sql);
 	return $result;
  }
-
 
 }
 

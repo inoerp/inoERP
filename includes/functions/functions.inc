@@ -107,13 +107,19 @@ function access_denied() {
  include_template('footer.inc');
 }
 
+function site_maintenance($msg) {
+ echo "<div id='site_maintenance'>";
+ include_once(THEME_DIR . '/header.inc');
+ echo ("<div class='error message noaccess'> $msg </div></div>");
+ include_template('footer.inc');
+}
 
 function getrwuPrivilage($rwu_role, $user_role) {
 
  $prv = 0;
- if($user_role == 'ADMIN'){
+ if ($user_role == 'ADMIN') {
 	$prv = 2;
- }else  if (!empty($rwu_role) && empty($user_role)) {
+ } else if (!empty($rwu_role) && empty($user_role)) {
 	$prv = 0;
  } else if (empty($rwu_role) || ($rwu_role == 'ANONYMOUS')) {
 	$prv = 2;

@@ -1,44 +1,53 @@
+ function setValFromSelectPage(payment_term_id){
+	this.payment_term_id = payment_term_id;
+ }
+ 
+setValFromSelectPage.prototype.setVal = function(){
+ payment_term_id = this.payment_term_id;
+ $("#payment_term_id").val(payment_term_id);
+};
+
 $(document).ready(function() {
 //selecting payment_term
- $("#payment_term_id_find_popup").on("click", function() {
-	localStorage.idValue = "";
-	void window.open('find_payment_term.php', '_blank',
+ $(".payment_term_id.select_popup").on("click", function() {
+	void window.open('select.php?class_name=payment_term', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
- 
-   function setParnetWindowValues(payment_termId, payment_term)
- {
-	 window.opener.$(".payment_term_id").val(payment_termId);
-	 window.opener.$(".payment_term").val(payment_term);
-	}
 
-
- $(".quick_select").on("click", function() {
-	var payment_termId = $(this).val();
-	var payment_term = $(this).closest("td").siblings("td.payment_term").html();
-	setParnetWindowValues(payment_termId, payment_term);
-	window.close();
-  });
-
-
- //Get the payment_term_id on refresh button click
- $('#payment_term_id_show').on("click", function() {
-	var payment_term_id = $('#payment_term_id').val();
-//	$(this).attr('href', '?payment_term_id=' + payment_term_id);
-	window.location = '?payment_term_id=' + payment_term_id;
+ $('a.show.payment_term_headerId').on('click',function() {
+	var headerId = $('#payment_term_id').val();
+	$(this).attr('href', modepath() + 'payment_term_id=' + headerId);
+ });
+//add new lines
+ $("#content tbody.form_data_line_tbody").on("click", ".add_row_img", function() {
+	var addNewRow = new add_new_rowMain();
+	addNewRow.trClass = 'payment_term_schedule';
+	addNewRow.tbodyClass = 'form_data_line_tbody';
+	addNewRow.noOfTabs = 1;
+	addNewRow.removeDefault = true;
+	addNewRow.add_new_row();
  });
 
-$("#content tbody.payment_term_schedule_values").on("click", ".add_row_img", function() {
-add_new_row('tr.payment_term_schedule0', 'tbody.payment_term_schedule_values', 1);
-});
+ $("#content tbody.form_data_line_tbody2").on("click", ".add_row_img", function() {
+	var addNewRow = new add_new_rowMain();
+	addNewRow.trClass = 'payment_term_discount';
+	addNewRow.tbodyClass = 'form_data_line_tbody2';
+	addNewRow.noOfTabs = 1;
+	addNewRow.removeDefault = true;
+	addNewRow.add_new_row();
+ });
 
-$("#content tbody.payment_term_discount_values").on("click", ".add_row_img", function() {
-add_new_row('tr.payment_term_discount0', 'tbody.payment_term_discount_values', 1);
-});
-
-// get the attachement form
- get_attachment_form('../../extensions/file/json.file.php');
- deleteData('json.payment_term.php');
- save('json.payment_term.php', '#payment_term_header', 'line_id_cb', 'seq_number', '#payment_term_id');
+ var classSave = new saveMainClass();
+ classSave.json_url = 'form.php?class_name=payment_term';
+ classSave.form_header_id = 'payment_term_header';
+ classSave.primary_column_id = 'payment_term_id';
+ classSave.line_key_field = 'item_description';
+ classSave.single_line = false;
+ classSave.savingOnlyHeader = false;
+ classSave.enable_select = true;
+ classSave.headerClassName = 'payment_term_header';
+ classSave.lineClassName = 'payment_term_schedule';
+ classSave.lineClassName2 = 'payment_term_discount';
+ classSave.saveMain();
 
 });

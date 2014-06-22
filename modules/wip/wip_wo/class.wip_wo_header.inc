@@ -86,7 +86,7 @@ class wip_wo_header extends dbObject {
 		 '_show_update_path' => 1,
 		 '_show_view_path' => 1,
 		 '_extra_path' => array('form.php?class_name=wip_move_transaction&mode=9' => 'Move',
-				 'form.php?class_name=wip_materail_transaction&mode=9' => 'Material Tnx',
+				 'form.php?class_name=wip_material_transaction&mode=9' => 'Material Tnx',
 				 'form.php?class_name=wip_resource_transaction&mode=9' => 'Resource Tnx',)
  ];
  public $pageTitle = " WO - WIP Work Order "; //page Title

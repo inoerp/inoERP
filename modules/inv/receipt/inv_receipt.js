@@ -1,7 +1,7 @@
 function setValFromSelectPage(inv_receipt_header_id, combination, supplier_id, supplier_number,
 				supplier_name, supplier_site_id, supplier_site_name, supplier_site_number,
 				item_id, item_number, item_description, uom_id, po_header_id, po_line_id, po_detail_id,
-				po_number, line_number, shipment_number, quantity, received_quantity) {
+				po_number, po_line_number, shipment_number, quantity, received_quantity) {
  this.inv_receipt_header_id = inv_receipt_header_id;
  this.combination = combination;
  this.supplier_id = supplier_id;
@@ -18,7 +18,7 @@ function setValFromSelectPage(inv_receipt_header_id, combination, supplier_id, s
  this.po_line_id = po_line_id;
  this.po_detail_id = po_detail_id;
  this.po_number = po_number;
- this.line_number = line_number;
+ this.po_line_number = po_line_number;
  this.shipment_number = shipment_number;
  this.quantity = quantity;
  this.received_quantity = received_quantity;
@@ -54,7 +54,7 @@ setValFromSelectPage.prototype.setVal = function() {
 	{id: 'po_detail_id', data: this.po_detail_id},
 	{id: 'po_number', data: this.po_number},
 	{id: 'shipment_number', data: this.shipment_number},
-	{id: 'po_line_number', data: this.line_number},
+	{id: 'po_line_number', data: this.po_line_number},
 	{id: 'shipment_number', data: this.shipment_number},
 	{id: 'received_quantity', data: this.received_quantity},
 	{id: 'quantity', data: this.quantity}

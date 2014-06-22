@@ -1,7 +1,5 @@
 <?php
-
 class session {
-
  private $login_flag = false;
  public $user_id;
  public $username;
@@ -10,9 +8,9 @@ class session {
  public $login_status;
 
  function __construct() {
-	session_set_cookie_params(0, '/', '.' . str_replace('www.', '', $_SERVER['HTTP_HOST']));
-	session_name('inoerp_xxfdgsu');
 	session_start();
+	//	session_set_cookie_params(0, '/', '.' . str_replace('www.', '', $_SERVER['HTTP_HOST']));
+//	session_name('inoerp_xxfdgsu');
 	if (isset($_SESSION['orginal_page'])) {
 	 $this->orginal_page = $_SESSION['orginal_page'];
 	}
@@ -40,15 +38,17 @@ class session {
  public function login($user) {
 	if ($user) {
 	 //generate a new session id for the user
-	 $_SESSION['user_roles'] = null ;
+	 $_SESSION['user_roles'] = null;
 	 $_SESSION['role_access'] = null;
-	 $_SESSION['allowed_path_ids'] = null ;
+	 $_SESSION['allowed_path_ids'] = null;
 	 session_regenerate_id(true);
 	 $_SESSION['user_id'] = $this->user_id = $user->user_id;
 	 $_SESSION['username'] = $this->username = $user->username;
 	 $_SESSION['login_status'] = $this->login_status = true;
 	 $this->login_flag = true;
-	 $this->orginal_page = $_SESSION['orginal_page'];
+	 if (!empty($_SESSION['orginal_page'])) {
+		$this->orginal_page = $_SESSION['orginal_page'];
+	 }
 	 $this->assign_role();
 //	 if (!empty($this->user_roles)) {
 //		$this->assign_role_access();

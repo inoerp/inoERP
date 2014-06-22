@@ -13,13 +13,14 @@
 			$f = new inoform();
 			echo (!empty($show_message)) ? $show_message : "";
 			?> 
-			<span class="heading">Site Information </span>
-			<form action=""  method="post" id="site_info"  name="site_info">
+			
+			<form action=""  method="post" id="site_info"  name="site_info"><span class="heading">Site Information </span>
 			 <div id ="form_header">
 				<div id="tabsHeader">
          <ul class="tabMain">
           <li><a href="#tabsHeader-1">Basic Info</a></li>
-          <li><a href="#tabsHeader-2">Address</a></li>
+          <li><a href="#tabsHeader-2">Maintenance</a></li>
+					<li><a href="#tabsHeader-3">Address</a></li>
          </ul>
 				 <div class="tabContainer"> 
 					<div id="tabsHeader-1" class="tabContent">
@@ -32,6 +33,18 @@
 					 </div>
 					</div>
 					<div id="tabsHeader-2" class="tabContent">
+					 <div class="first_rowset"> 
+						<ul class="column four_column"> 
+						 <li><label>Put in Maintenance Mode: </label> <?php $f->checkBox_field_d('maintenance_cb') ?></li> 
+						</ul>
+						<ul class="inRow asperWidth"> 
+						 <li><label>Maintenance Message: </label> 
+							<textarea name="maintenance_msg" class="plaintext" rows="4" cols="100"><?php echo htmlentities($$class->maintenance_msg); ?> </textarea>
+						 </li> 
+						</ul>
+					 </div>
+					</div>
+					<div id="tabsHeader-3" class="tabContent">
 					</div>
 				 </div>
 
@@ -54,8 +67,7 @@
 						</ul>
 						<ul class="inRow asperWidth"> 
 						 <li><label>Footer Message: </label> 
-							<textarea required name="footer_message" class="plaintext" rows="4" cols="80"><?php
-							 echo htmlentities($$class->footer_message); ?> </textarea>
+							<textarea required name="footer_message" class="plaintext" rows="4" cols="80"><?php echo htmlentities($$class->footer_message); ?> </textarea>
 						 </li> 
 						</ul>
 					 </div>

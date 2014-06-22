@@ -124,13 +124,24 @@ width: 32%;
 }
 
 
-#content_elements{
+#content_element{
     display: block;
     background-color: rgba(105, 149, 144, 0.23);
     padding: 0 2px 2px 5px;
     float: left;
     border: 1px solid #ccc;
+    margin-bottom: 10px;
+        width: 100%;
+       float: left;
 }
+
+#content_element ul li {
+display: inline-block;
+    float: left;
+margin-right: 20px;
+    text-align: left;
+}
+
 
 #content_navigation ul li{
 display: inline-block;
@@ -141,8 +152,7 @@ float: right;
 margin-right: 100px;
 }
 
-#page_element ul li,
-#content_element ul li{
+#page_element ul li{
  display: inline-block;
  margin-right : 36px;
  vertical-align: top;
@@ -152,9 +162,6 @@ margin-right: 100px;
 font-size: 1.4em;
 }
 
-#content_element li:not(:first-child){
-float: right;
-}
 
 ul.summary_list li {
 display: inline-block;

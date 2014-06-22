@@ -73,7 +73,7 @@ class content extends dbObject {
 		 "subject",
 		 'content_type_id'
  ];
- public $pageTitle = " Content - Create & View differnt contents ";
+ public $pageTitle = " Simple & Effective Enterprise Management System ";
  public $search = [
 		 '_update_path' => 'content.php?class_name=content',
 		 '_show_update_path' => 1,
@@ -278,7 +278,9 @@ class content extends dbObject {
 	        category_reference.category_id, category_reference.reference_type  ";
 	$sql .= ' FROM content LEFT JOIN category_reference ON content.content_id = category_reference.reference_id ';
 	$sql .= " LEFT JOIN content_type ct ON ct.content_type_id = content.content_type_id  ";
+	if (!empty($this->content_type_id)) {
 	$sql .= " WHERE content.content_type_id = '{$this->content_type_id}' ";
+	}
 	if (!empty($this->category_id)) {
 	 $sql .= " AND category_reference.category_id = '{$this->category_id}' ";
 	}
@@ -288,7 +290,9 @@ class content extends dbObject {
 
 	$count_sql = " SELECT COUNT(content.content_id) ";
 	$count_sql .= ' FROM content LEFT JOIN category_reference ON content.content_id = category_reference.reference_id ';
+	if (!empty($this->content_type_id)) {
 	$count_sql .= " WHERE content.content_type_id = '{$this->content_type_id}' ";
+	}
 	if (!empty($this->category_id)) {
 	 $count_sql .= " AND category_reference.category_id = '{$this->category_id}' ";
 	}
@@ -672,7 +676,46 @@ class content extends dbObject {
 }
 
 //end of content class
+/* SQL Snippets
+ * Delete contents from content which doesnt belong to any content type
+ * $sql = "
+ * DELETE FROM content WHERE content_id NOT IN(
+    SELECT a.contentId FROM
+(
+    SELECT content.content_id as contentId
+FROM content,
+c_content
+WHERE content.content_id = c_content.content_id
+UNION
+SELECT content.content_id
+FROM content,
+c_forum
+WHERE content.content_id = c_forum.content_id
+UNION
+SELECT content.content_id
+FROM content,
+c_documentation
+WHERE content.content_id = c_documentation.content_id
+    ) a
+) 
+ * "
+ * 
+ * 
+ * DELETE FROM Category reference
+ * DELETE FROM category_reference WHERE 
+category_reference_id NOT IN(
+SELECT a.category_reference_id from (
+SELECT category_reference_id,reference_table FROM 
+category_reference cr,
+content
+WHERE cr.reference_table = 'content'
+AND cr.reference_id = content.content_id
+UNION
+SELECT category_reference_id,reference_table FROM 
+category_reference cr,
+content
+WHERE cr.reference_table != 'content'
+    )a
+)
+ */
 ?>
-
-
-

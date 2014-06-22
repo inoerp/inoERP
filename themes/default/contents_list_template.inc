@@ -11,7 +11,15 @@
 			 <div class="error"></div><div id="loading"></div>
 			 <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 			 <?php
-//			 if ($content_type_name == 'forum') {
+			 $content = new content();
+			 if (empty($content->content_type_id)) {
+				$content_lists = $content->showSummaryList_byConteTypeCategory($pageno, $per_page, $query_string);
+				echo $content_lists. '			</div> 		 </div> 		</div> 	 </div> 	</div> 	<div id="content_right_right"></div>
+                </div>  <div id="content_bottom"></div>  </div>';
+				include_template('footer.inc');
+				return;
+			 }
+			 if (!empty($category_id)) {
 				$content_cat = new category();
 				$all_child_cat = $content_cat->findAll_childOfParent($category_id);
 				if (!empty($all_child_cat)) {
@@ -21,9 +29,9 @@
 				} else {
 				 $category_relation_statement = null;
 				}
-//			 }
+			 }
 
-			 $content = new content();
+
 			 $content->content_type_id = $content_type->content_type_id;
 			 $content->category_id = $category_id;
 			 if ($content->content_type_id == 47) {
@@ -44,7 +52,6 @@
 	</div>
 	<div id="content_right_right"></div>
  </div>
- <div id="content_bottom"></div>
+ <div id="content_bottom"></div> 
 </div>
-
 <?php include_template('footer.inc') ?>

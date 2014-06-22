@@ -75,7 +75,7 @@
 								<ul class="inline_action">
 								 <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
 								 <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-								 <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class_second->bom_sequence); ?>">
+								 <li><input type="checkbox" name="line_id_cb" value="<?php echo !empty($$class_second->bom_sequence)? $$class_second->bom_sequence :''  ?>">
 									<?php echo form::hidden_field('org_id', $$class->org_id); ?>
 									<?php echo form::hidden_field('wip_wo_header_id', $$class->wip_wo_header_id); ?>
 									<?php echo form::hidden_field('transaction_type_id', $$class->transaction_type_id); ?></li>           

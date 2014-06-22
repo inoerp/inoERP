@@ -13,45 +13,132 @@ $class_names[] = 'content';
 ?>
 <?php include_once("includes/functions/loader.inc"); ?>
 <link href="<?php echo HOME_URL; ?>themes/default/index.css" media="all" rel="stylesheet" type="text/css" />
+<script src="<?php echo HOME_URL; ?>includes/js/jssor.slider.mini.js"></script>
 <div id="all_contents">
  <div id="content_header">
-	<div class="left">
-	 <span class="longHeading">inoERP is an open source web based enterprise management system.
+	<div id="process_folw">
+	 <ul><li>
+	 <div id="slider1_container" style="position: relative; width: 600px;
+        height: 300px; overflow: hidden;">
+
+        <!-- Loading Screen -->
+        <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+                background-color: #000; top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+            <div style="position: absolute; display: block; background: url(files/images/loading.gif) no-repeat center center;
+                top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+        </div>
+        
+        <!-- Slides Container -->
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 600px; height: 300px;
+            overflow: hidden;">
+            <div>
+                <a u=image href="#"><img src="files/images/landscape/simple_ui.gif" /></a>
+                <div u=caption t="*" class="captionOrange"  style="position:absolute; left:20px; top: 30px; width:300px; height:30px;"> 
+                Simple & Consistent User Interface
+                </div>
+            </div>
+            <div>
+                <a u=image href="#"><img src="files/images/landscape/easy_navigation.gif" /></a>
+                <div u=caption t="*" class="captionOrange"  style="position:absolute; left:20px; top: 30px; width:300px; height:30px;"> 
+                Easy Navigation - Laptop, Tablet & Mobile
+                </div>
+            </div>
+            <div>
+                <a u=image href="#"><img src="files/images/landscape/dynamic_search.gif" /></a>
+                <div u=caption t="*" class="captionOrange"  style="position:absolute; left:20px; top: 30px; width:300px; height:30px;"> 
+                Powerful & Dynamic Searching Capabilities
+                </div>
+            </div>
+            <div>
+                <a u=image href="#"><img src="files/images/landscape/graphical_reports.gif" /></a>
+                <div u=caption t="*" class="captionOrange"  style="position:absolute; left:20px; top: 30px; width:300px; height:30px;"> 
+                Text & Visual Reporting
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bullet Navigator Skin Begin -->
+        <!-- jssor slider bullet navigator skin 01 -->
+        <style>
+            /*
+            .jssorb01 div           (normal)
+            .jssorb01 div:hover     (normal mouseover)
+            .jssorb01 .av           (active)
+            .jssorb01 .av:hover     (active mouseover)
+            .jssorb01 .dn           (mousedown)
+            */
+            .jssorb01 div, .jssorb01 div:hover, .jssorb01 .av
+            {
+                filter: alpha(opacity=70);
+                opacity: .7;
+                overflow:hidden;
+                cursor: pointer;
+                border: #000 1px solid;
+            }
+            .jssorb01 div { background-color: gray; }
+            .jssorb01 div:hover, .jssorb01 .av:hover { background-color: #d3d3d3; }
+            .jssorb01 .av { background-color: #fff; }
+            .jssorb01 .dn, .jssorb01 .dn:hover { background-color: #555555; }
+        </style>
+        <!-- bullet navigator container -->
+        <div u="navigator" class="jssorb01" style="position: absolute; bottom: 16px; right: 10px;">
+            <!-- bullet navigator item prototype -->
+            <div u="prototype" style="POSITION: absolute; WIDTH: 12px; HEIGHT: 12px;"></div>
+        </div>
+        <!-- Bullet Navigator Skin End -->
+        
+        <!-- Arrow Navigator Skin Begin -->
+        <style>
+            /* jssor slider arrow navigator skin 05 css */
+            /*
+            .jssora05l              (normal)
+            .jssora05r              (normal)
+            .jssora05l:hover        (normal mouseover)
+            .jssora05r:hover        (normal mouseover)
+            .jssora05ldn            (mousedown)
+            .jssora05rdn            (mousedown)
+            */
+            .jssora05l, .jssora05r, .jssora05ldn, .jssora05rdn
+            {
+            	position: absolute;
+            	cursor: pointer;
+            	display: block;
+                background: url(files/images/a17.png) no-repeat;
+                overflow:hidden;
+            }
+            .jssora05l { background-position: -10px -40px; }
+            .jssora05r { background-position: -70px -40px; }
+            .jssora05l:hover { background-position: -130px -40px; }
+            .jssora05r:hover { background-position: -190px -40px; }
+            .jssora05ldn { background-position: -250px -40px; }
+            .jssora05rdn { background-position: -310px -40px; }
+        </style>
+        <!-- Arrow Left -->
+        <span u="arrowleft" class="jssora05l" style="width: 40px; height: 40px; top: 123px; left: 8px;">
+        </span>
+        <!-- Arrow Right -->
+        <span u="arrowright" class="jssora05r" style="width: 40px; height: 40px; top: 123px; right: 8px">
+        </span>
+        <!-- Arrow Navigator Skin End -->
+        <a style="display: none" href="http://www.jssor.com">html slideshow</a>
+    </div>
+		</li>
+		 <li class="release_message">
+				 <span class="longHeading">inoERP is an open source web based enterprise management system.
 		It’s built using open source technologies and has a wide range of features suitable for running 
 		various kind of  businesses.
 	 </span>
+			<span class="heading">inoERP 1.0 Beta1</span>
+			The first beta version of inoERP (inoERP 1.0 Beta1) - has been released. This version is fully functional
+			but not yet ready for production usage. 
+			<br><br>Read the release details <a href="content.php?mode=2&content_id=197&content_type_id=47"> here </a>
+			<br><br>Download the beta version from  <a href="https://github.com/inoerp/inoerp_v1"> GitHub </a>
+			</li>
+	<ul>
 	</div>
-	<div class="right">
-	 <div id="animated_block">
-		<div class="play_button">
-		 <ul class="inRow asperWidth">
-			<li class="clickable"><img class="start_play" src="<?php echo HOME_URL; ?>/themes/default/images/playback_start_16.png"></li>
-			<li class="clickable"><img class="stop_play" src="<?php echo HOME_URL; ?>/themes/default/images/playback_stop_16.png"></li>
-		 </ul>
-		</div>
-		<div id="animated_content">
-		 <div class="content_1">
-			<span class="longHeading"> Automated Kanban</span><br>
-			Automated kanban is a planning tool which uses the basic idea of kanban i.e. replenishment upon consumption, but it enhances the process by completely automating it. It does not need any manual signal as system keeps the track of demand/supply and auto generates the kanban signal.
-			Automated kanban can be used for both external purchasing as well as for internal material movement trough warehouse and production line.
-		 </div>
-		 <div class="content_2">
-			<span class="longHeading"> Total Flexibility Index</span><br>
-			Total Flexibility Index is a value between 0 to infinity, which determines the flexibility model of an organization. TFI helps both the internal organization and customers in mid to long term planning. Organizations make their capital investment decisions on the basis of target TFI. 
-			Customers can determine the maximum supply they can expect from a supplier on the basis of supplier TFI.
-		 </div>
-		 <div class="content_3">
-			<span class="longHeading"> Super BOM</span><br>
-			Super BOM is a consolidated indented bill of material for all the finished goods in a single product family/planning code. Super BOM shows all the important mid-term planning information such as usage, lead times, average daily demand, total on hand, suppliers, ABC Classification, 
-			fixed lot multiplier, fixed dyas supply, minimum order quantity, etc.
-		 </div>
-		</div>
-	 </div>
-	</div>
-	 <div id="process_folw">
-	<img src="<?php HOME_URL ?>files/images/end_to_end_process_v1.png" width="670px">
-	<div id="module_message">Roll Over your mouse on any picture to view the corresponding functionality.</div>
- </div>
  </div>
 
  <div id="summary_content">
@@ -63,110 +150,188 @@ $class_names[] = 'content';
  </div>
  <div id="content_bottom"></div>
 </div>
-<div id="process_content" class="hidden">
- <div class="customer">
-	<p>Customer is an external/internal organization who buys good, product or service from another organization.&nbsp; inoERP customer module supports all the functionalities required to create/manage &amp; maintain different type of customer relationships&nbsp; .</p>
-  <p>You can<br />1.&nbsp;&nbsp;&nbsp; Enter multiple physical addresses as different customer sites for a single customer.<br />2.&nbsp;&nbsp;&nbsp; Assign &amp; Use the same customer in different business units.<br />3.&nbsp;&nbsp;&nbsp; Assign a business purpose for each address. Such as Ship to, Bill to.
-	 <a href="content.php?mode=2&content_id=207&content_type=documentation">Read More .. </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 <a href="demo.inoideas.org/form.php?class_name=ar_customer&mode=9&ar_customer_id=1&ar_customer_site_id=1">View Online Demo .. </a>
- </div>
- <div class="planning">
-	<p>inoERP provides different planning methods to suit different needs.
-	 <br />1.&nbsp;&nbsp;&nbsp; Material Requirement Planning :
-	 <br />MRP is an old, traditional, push based production planning and inventory control system used to 
-	 manage manufacturing processes. The biggest drawback of MRP is that it&rsquo;s a push based system 
-	 and doesn&rsquo;t quickly respond to demand/supply variations.<br />
-	 <br />2.&nbsp;&nbsp;&nbsp; Min Max Planning:<br />Min Max is a very simple but effective material 
-	 replenishment method. For each item, you specify minimum and maximum inventory levels in an 
-	 organization or subinvntory (subinvntory level MinMax is not yet fully functional).
-	 <br />3.&nbsp;&nbsp;&nbsp; Multi-Bin Min Max Planning<br />4.&nbsp;&nbsp;&nbsp; Automated Kanban System</p>
-	<a href="content.php?mode=2&content_id=208&content_type=documentation">Read More .. </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="demo.inoideas.org/form.php?class_name=fp_mrp_header&mode=9">View Online Demo .. </a>
- </div>
- <div class="inventory">
-	<p>Inventory<p>Inventory<p>Inventory<p>Inventory<p>Inventory
-	 <a href="content.php?mode=2&content_id=208&content_type=documentation">Read More .. </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 <a href="demo.inoideas.org/form.php?class_name=org&mode=9">View Online Demo .. </a>
- </div>
- <div class="sales_order">
-	<p>Sales Order<p>Sales Order<p>Sales Order<p>Sales Order
-	 <a href="content.php?mode=2&content_id=208&content_type=documentation">Read More .. </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 <a href="demo.inoideas.org/form.php?class_name=sd_so_header&mode=9">View Online Demo .. </a>
- </div>
- <div class="purchasing">
-	<p>Purchasing<p>Purchasing<p>Purchasing
-	 <a href="content.php?mode=2&content_id=208&content_type=documentation">Read More .. </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 <a href="demo.inoideas.org/form.php?class_name=po_header&mode=9">View Online Demo .. </a>
- </div>
- <div class="supplier">
-	<p>Supplier<p>Supplier<p>Supplier<p>Supplier
-	 <a href="content.php?mode=2&content_id=208&content_type=documentation">Read More .. </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 <a href="demo.inoideas.org/form.php?class_name=supplier&mode=9">View Online Demo .. </a>
- </div>
- <div class="general_ledger">
-	<p>general_ledger<p>general_ledger<p>general_ledger
-	 <a href="content.php?mode=2&content_id=208&content_type=documentation">Read More .. </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 <a href="demo.inoideas.org/form.php?class_name=gl_ledger&mode=9">View Online Demo .. </a>
- </div>
- <div class="payable">
-	<p>payable<p>payable<p>payable<p>payable
-	 <a href="content.php?mode=2&content_id=208&content_type=documentation">Read More .. </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 <a href="demo.inoideas.org/form.php?class_name=ap_transaction_header&mode=9">View Online Demo .. </a>
- </div>
-</div>
 <?php include_template('footer.inc') ?>
 
 <script type="text/javascript">
  $(document).ready(function() {
-	
-	 //summar list
-var maxListCount = 6;
-var shownListCount = 0;
- $('ul.summary_list').on('click', '.remove',function() {
- $(this).closest('li').hide();
- shownListCount++;
- maxListCount++;
-update_summary_list(maxListCount, shownListCount);
- });
-update_summary_list(maxListCount, shownListCount);
-
-
-	$('#process_folw').on('mousemove', function(e) {
-	 var pageCoords = "( " + e.pageX + ", " + e.pageY + " )";
-	 var clientCoords = "( " + e.clientX + ", " + e.clientY + " )";
-	 if (e.clientX > 348 && e.clientX < 425 && e.clientY > 200 && e.clientY < 250) {
-		var content = $('#process_content').find('.customer').html();
-		$("#module_message").html(content);
-	 } else if (e.clientX > 260 && e.clientX < 405 && e.clientY > 370 && e.clientY < 470) {
-		var content = $('#process_content').find('.planning').html();
-		$("#module_message").html(content);
-	 }
-	 else if (e.clientX > 500 && e.clientX < 560 && e.clientY > 370 && e.clientY < 440) {
-		var content = $('#process_content').find('.inventory').html();
-		$("#module_message").html(content);
-	 }
-	 else if (e.clientX > 550 && e.clientX < 600 && e.clientY > 300 && e.clientY < 350) {
-		var content = $('#process_content').find('.sales_order').html();
-		$("#module_message").html(content);
-	 } else if (e.clientX > 550 && e.clientX < 600 && e.clientY > 190 && e.clientY < 250) {
-		var content = $('#process_content').find('.receviable').html();
-		$("#module_message").html(content);
-	 }
-	 else if (e.clientX > 770 && e.clientX < 820 && e.clientY > 300 && e.clientY < 370) {
-		var content = $('#process_content').find('.purchasing').html();
-		$("#module_message").html(content);
-	 } else if (e.clientX > 850 && e.clientX < 925 && e.clientY > 420 && e.clientY < 475) {
-		var content = $('#process_content').find('.supplier').html();
-		$("#module_message").html(content);
-	 } else if (e.clientX > 790 && e.clientX < 830 && e.clientY > 190 && e.clientY < 273) {
-		var content = $('#process_content').find('.general_ledger').html();
-		$("#module_message").html(content);
-	 }
-	 else if (e.clientX > 860 && e.clientX < 903 && e.clientY > 306 && e.clientY < 362) {
-		var content = $('#process_content').find('.payable').html();
-		$("#module_message").html(content);
-	 }
-//	$( ".longHeading").text( "( e.clientX, e.clientY ) : " + clientCoords ); 
+	//summar list
+	var maxListCount = 6;
+	var shownListCount = 0;
+	$('ul.summary_list').on('click', '.remove', function() {
+	 $(this).closest('li').hide();
+	 shownListCount++;
+	 maxListCount++;
+	 update_summary_list(maxListCount, shownListCount);
 	});
+	update_summary_list(maxListCount, shownListCount);
+
+ });
+</script>
+
+<script>
+ jQuery(document).ready(function($) {
+	var _SlideshowTransitions = [
+	 //["Rotate Overlap"]
+	 {$Duration: 1200, $Zoom: 11, $Rotate: -1, $Easing: {$Zoom: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad}, $Opacity: 2, $Round: {$Rotate: 0.5}, $Brother: {$Duration: 1200, $Zoom: 1, $Rotate: 1, $Easing: $JssorEasing$.$EaseSwing, $Opacity: 2, $Round: {$Rotate: 0.5}, $Shift: 90}}
+	 //["Switch"]
+	 , {$Duration: 1400, $Zoom: 1.5, $FlyDirection: 1, $Easing: {$Left: $JssorEasing$.$EaseInWave, $Zoom: $JssorEasing$.$EaseInSine}, $ScaleHorizontal: 0.25, $Opacity: 2, $ZIndex: -10, $Brother: {$Duration: 1400, $Zoom: 1.5, $FlyDirection: 2, $Easing: {$Left: $JssorEasing$.$EaseInWave, $Zoom: $JssorEasing$.$EaseInSine}, $ScaleHorizontal: 0.25, $Opacity: 2, $ZIndex: -10}}
+	 //["Rotate Relay"]
+	 , {$Duration: 1200, $Zoom: 11, $Rotate: 1, $Easing: {$Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad}, $Opacity: 2, $Round: {$Rotate: 1}, $ZIndex: -10, $Brother: {$Duration: 1200, $Zoom: 11, $Rotate: -1, $Easing: {$Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad}, $Opacity: 2, $Round: {$Rotate: 1}, $ZIndex: -10, $Shift: 600}}
+	 //["Doors"]
+	 , {$Duration: 1500, $Cols: 2, $FlyDirection: 1, $ChessMode: {$Column: 3}, $Easing: {$Left: $JssorEasing$.$EaseInOutCubic}, $ScaleHorizontal: 0.5, $Opacity: 2, $Brother: {$Duration: 1500, $Opacity: 2}}
+	 //["Rotate in+ out-"]
+	 , {$Duration: 1500, $Zoom: 1, $Rotate: 0.1, $During: {$Left: [0.6, 0.4], $Top: [0.6, 0.4], $Rotate: [0.6, 0.4], $Zoom: [0.6, 0.4]}, $FlyDirection: 6, $Easing: {$Left: $JssorEasing$.$EaseInQuad, $Top: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad}, $ScaleHorizontal: 0.3, $ScaleVertical: 0.5, $Opacity: 2, $Brother: {$Duration: 1000, $Zoom: 11, $Rotate: -0.5, $Easing: {$Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad}, $Opacity: 2, $Shift: 200}}
+	 //["Fly Twins"]
+	 , {$Duration: 1500, $During: {$Left: [0.6, 0.4]}, $FlyDirection: 1, $Easing: {$Left: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear}, $ScaleHorizontal: 0.3, $Opacity: 2, $Outside: true, $Brother: {$Duration: 1000, $FlyDirection: 2, $Easing: {$Left: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear}, $ScaleHorizontal: 0.3, $Opacity: 2}}
+	 //["Rotate in- out+"]
+	 , {$Duration: 1500, $Zoom: 11, $Rotate: 0.5, $During: {$Left: [0.4, 0.6], $Top: [0.4, 0.6], $Rotate: [0.4, 0.6], $Zoom: [0.4, 0.6]}, $Easing: {$Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad}, $ScaleHorizontal: 0.3, $ScaleVertical: 0.5, $Opacity: 2, $Brother: {$Duration: 1000, $Zoom: 1, $Rotate: -0.5, $Easing: {$Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad}, $Opacity: 2, $Shift: 200}}
+	 //["Rotate Axis up overlap"]
+	 , {$Duration: 1200, $Rotate: -0.1, $FlyDirection: 5, $Easing: {$Left: $JssorEasing$.$EaseInQuad, $Top: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad}, $ScaleHorizontal: 0.25, $ScaleVertical: 0.5, $Opacity: 2, $Brother: {$Duration: 1200, $Rotate: 0.1, $FlyDirection: 10, $Easing: {$Left: $JssorEasing$.$EaseInQuad, $Top: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad}, $ScaleHorizontal: 0.1, $ScaleVertical: 0.7, $Opacity: 2}}
+	 //["Chess Replace TB"]
+	 , {$Duration: 1600, $Rows: 2, $FlyDirection: 1, $ChessMode: {$Row: 3}, $Easing: {$Left: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear}, $Opacity: 2, $Brother: {$Duration: 1600, $Rows: 2, $FlyDirection: 2, $ChessMode: {$Row: 3}, $Easing: {$Left: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear}, $Opacity: 2}}
+	 //["Chess Replace LR"]
+	 , {$Duration: 1600, $Cols: 2, $FlyDirection: 8, $ChessMode: {$Column: 12}, $Easing: {$Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear}, $Opacity: 2, $Brother: {$Duration: 1600, $Cols: 2, $FlyDirection: 4, $ChessMode: {$Column: 12}, $Easing: {$Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear}, $Opacity: 2}}
+	 //["Shift TB"]
+	 , {$Duration: 1200, $FlyDirection: 4, $Easing: {$Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear}, $Opacity: 2, $Brother: {$Duration: 1200, $FlyDirection: 8, $Easing: {$Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear}, $Opacity: 2}}
+	 //["Shift LR"]
+	 , {$Duration: 1200, $FlyDirection: 1, $Easing: {$Left: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear}, $Opacity: 2, $Brother: {$Duration: 1200, $FlyDirection: 2, $Easing: {$Left: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear}, $Opacity: 2}}
+	 //["Return TB"]
+	 , {$Duration: 1200, $FlyDirection: 8, $Easing: {$Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear}, $Opacity: 2, $ZIndex: -10, $Brother: {$Duration: 1200, $FlyDirection: 8, $Easing: {$Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear}, $Opacity: 2, $ZIndex: -10, $Shift: -100}}
+	 //["Return LR"]
+	 , {$Duration: 1200, $Delay: 40, $Cols: 6, $FlyDirection: 1, $Formation: $JssorSlideshowFormations$.$FormationStraight, $Easing: {$Left: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear}, $Opacity: 2, $ZIndex: -10, $Brother: {$Duration: 1200, $Delay: 40, $Cols: 6, $FlyDirection: 1, $Formation: $JssorSlideshowFormations$.$FormationStraight, $Easing: {$Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear}, $Opacity: 2, $ZIndex: -10, $Shift: -100}}
+	 //["Rotate Axis down"]
+	 , {$Duration: 1500, $Rotate: 0.1, $During: {$Left: [0.6, 0.4], $Top: [0.6, 0.4], $Rotate: [0.6, 0.4]}, $FlyDirection: 10, $Easing: {$Left: $JssorEasing$.$EaseInQuad, $Top: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad}, $ScaleHorizontal: 0.1, $ScaleVertical: 0.7, $Opacity: 2, $Brother: {$Duration: 1000, $Rotate: -0.1, $FlyDirection: 5, $Easing: {$Left: $JssorEasing$.$EaseInQuad, $Top: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad}, $ScaleHorizontal: 0.2, $ScaleVertical: 0.5, $Opacity: 2}}
+	 //["Extrude Replace"]
+	 , {$Duration: 1600, $Delay: 40, $Cols: 12, $During: {$Left: [0.4, 0.6]}, $SlideOut: true, $FlyDirection: 2, $Formation: $JssorSlideshowFormations$.$FormationStraight, $Assembly: 260, $Easing: {$Left: $JssorEasing$.$EaseInOutExpo, $Opacity: $JssorEasing$.$EaseInOutQuad}, $ScaleHorizontal: 0.2, $Opacity: 2, $Outside: true, $Round: {$Top: 0.5}, $Brother: {$Duration: 1000, $Delay: 40, $Cols: 12, $FlyDirection: 1, $Formation: $JssorSlideshowFormations$.$FormationStraight, $Assembly: 1028, $Easing: {$Left: $JssorEasing$.$EaseInOutExpo, $Opacity: $JssorEasing$.$EaseInOutQuad}, $ScaleHorizontal: 0.2, $Opacity: 2, $Round: {$Top: 0.5}}}
+	];
+
+	var _CaptionTransitions = [
+	 //CLIP|LR
+	 {$Duration: 900, $Clip: 3, $Easing: $JssorEasing$.$EaseInOutCubic},
+	 //CLIP|TB
+	 {$Duration: 900, $Clip: 12, $Easing: $JssorEasing$.$EaseInOutCubic},
+	 //DDGDANCE|LB
+	 {$Duration: 1800, $Zoom: 1, $FlyDirection: 9, $Easing: {$Left: $JssorEasing$.$EaseInJump, $Top: $JssorEasing$.$EaseInJump, $Zoom: $JssorEasing$.$EaseOutQuad}, $ScaleHorizontal: 0.3, $ScaleVertical: 0.3, $Opacity: 2, $During: {$Left: [0, 0.8], $Top: [0, 0.8]}, $Round: {$Left: 0.8, $Top: 2.5}},
+	 //DDGDANCE|RB
+	 {$Duration: 1800, $Zoom: 1, $FlyDirection: 10, $Easing: {$Left: $JssorEasing$.$EaseInJump, $Top: $JssorEasing$.$EaseInJump, $Zoom: $JssorEasing$.$EaseOutQuad}, $ScaleHorizontal: 0.3, $ScaleVertical: 0.3, $Opacity: 2, $During: {$Left: [0, 0.8], $Top: [0, 0.8]}, $Round: {$Left: 0.8, $Top: 2.5}},
+	 //TORTUOUS|HL
+	 {$Duration: 1500, $Zoom: 1, $FlyDirection: 1, $Easing: {$Left: $JssorEasing$.$EaseOutWave, $Zoom: $JssorEasing$.$EaseOutCubic}, $ScaleHorizontal: 0.2, $Opacity: 2, $During: {$Left: [0, 0.7]}, $Round: {$Left: 1.3}},
+	 //TORTUOUS|VB
+	 {$Duration: 1500, $Zoom: 1, $FlyDirection: 8, $Easing: {$Top: $JssorEasing$.$EaseOutWave, $Zoom: $JssorEasing$.$EaseOutCubic}, $ScaleVertical: 0.2, $Opacity: 2, $During: {$Top: [0, 0.7]}, $Round: {$Top: 1.3}},
+	 //ZMF|10
+	 {$Duration: 600, $Zoom: 11, $Easing: {$Zoom: $JssorEasing$.$EaseInExpo, $Opacity: $JssorEasing$.$EaseLinear}, $Opacity: 2},
+	 //ZML|R
+	 {$Duration: 600, $Zoom: 11, $FlyDirection: 2, $Easing: {$Left: $JssorEasing$.$EaseInCubic, $Zoom: $JssorEasing$.$EaseInCubic}, $ScaleHorizontal: 0.6, $Opacity: 2},
+	 //ZML|B
+	 {$Duration: 600, $Zoom: 11, $FlyDirection: 8, $Easing: {$Top: $JssorEasing$.$EaseInCubic, $Zoom: $JssorEasing$.$EaseInCubic}, $ScaleVertical: 0.6, $Opacity: 2},
+	 //ZMS|B
+	 {$Duration: 700, $Zoom: 1, $FlyDirection: 8, $Easing: {$Top: $JssorEasing$.$EaseInCubic, $Zoom: $JssorEasing$.$EaseInCubic}, $ScaleVertical: 0.6, $Opacity: 2},
+	 //ZM*JDN|LB
+	 {$Duration: 1200, $Zoom: 11, $FlyDirection: 9, $Easing: {$Left: $JssorEasing$.$EaseLinear, $Top: $JssorEasing$.$EaseOutCubic, $Zoom: $JssorEasing$.$EaseInCubic}, $ScaleHorizontal: 0.8, $ScaleVertical: 0.5, $Opacity: 2, $During: {$Top: [0, 0.5]}},
+	 //ZM*JUP|LB
+	 {$Duration: 1200, $Zoom: 11, $FlyDirection: 9, $Easing: {$Left: $JssorEasing$.$EaseLinear, $Top: $JssorEasing$.$EaseInCubic, $Zoom: $JssorEasing$.$EaseInCubic}, $ScaleHorizontal: 0.8, $ScaleVertical: 0.5, $Opacity: 2, $During: {$Top: [0, 0.5]}},
+	 //ZM*JUP|RB
+	 {$Duration: 1200, $Zoom: 11, $FlyDirection: 10, $Easing: {$Left: $JssorEasing$.$EaseLinear, $Top: $JssorEasing$.$EaseInCubic, $Zoom: $JssorEasing$.$EaseInCubic}, $ScaleHorizontal: 0.8, $ScaleVertical: 0.5, $Opacity: 2, $During: {$Top: [0, 0.5]}},
+	 //ZM*WVR|LT
+	 {$Duration: 1200, $Zoom: 11, $FlyDirection: 5, $Easing: {$Left: $JssorEasing$.$EaseLinear, $Top: $JssorEasing$.$EaseInWave}, $ScaleHorizontal: 0.5, $ScaleVertical: 0.3, $Opacity: 2, $Round: {$Rotate: 0.8}},
+	 //ZM*WVR|RT
+	 {$Duration: 1200, $Zoom: 11, $FlyDirection: 6, $Easing: {$Left: $JssorEasing$.$EaseLinear, $Top: $JssorEasing$.$EaseInWave}, $ScaleHorizontal: 0.5, $ScaleVertical: 0.3, $Opacity: 2, $Round: {$Rotate: 0.8}},
+	 //ZM*WVR|TL
+	 {$Duration: 1200, $Zoom: 11, $FlyDirection: 5, $Easing: {$Left: $JssorEasing$.$EaseInWave, $Top: $JssorEasing$.$EaseLinear}, $ScaleHorizontal: 0.3, $ScaleVertical: 0.5, $Opacity: 2, $Round: {$Rotate: 0.8}},
+	 //ZM*WVR|BL
+	 {$Duration: 1200, $Zoom: 11, $FlyDirection: 9, $Easing: {$Left: $JssorEasing$.$EaseInWave, $Top: $JssorEasing$.$EaseLinear}, $ScaleHorizontal: 0.3, $ScaleVertical: 0.5, $Opacity: 2, $Round: {$Rotate: 0.8}},
+	 //RTT|10
+	 {$Duration: 700, $Zoom: 11, $Rotate: 1, $Easing: {$Zoom: $JssorEasing$.$EaseInExpo, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInExpo}, $Opacity: 2, $Round: {$Rotate: 0.8}},
+	 //RTTL|R
+	 {$Duration: 700, $Zoom: 11, $Rotate: 1, $FlyDirection: 2, $Easing: {$Left: $JssorEasing$.$EaseInCubic, $Zoom: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInCubic}, $ScaleHorizontal: 0.6, $Opacity: 2, $Round: {$Rotate: 0.8}},
+	 //RTTL|B
+	 {$Duration: 700, $Zoom: 11, $Rotate: 1, $FlyDirection: 8, $Easing: {$Top: $JssorEasing$.$EaseInCubic, $Zoom: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInCubic}, $ScaleVertical: 0.6, $Opacity: 2, $Round: {$Rotate: 0.8}},
+	 //RTTS|R
+	 {$Duration: 700, $Zoom: 1, $Rotate: 1, $FlyDirection: 2, $Easing: {$Left: $JssorEasing$.$EaseInQuad, $Zoom: $JssorEasing$.$EaseInQuad, $Rotate: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseOutQuad}, $ScaleHorizontal: 0.6, $Opacity: 2, $Round: {$Rotate: 1.2}},
+	 //RTTS|B
+	 {$Duration: 700, $Zoom: 1, $Rotate: 1, $FlyDirection: 8, $Easing: {$Top: $JssorEasing$.$EaseInQuad, $Zoom: $JssorEasing$.$EaseInQuad, $Rotate: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseOutQuad}, $ScaleVertical: 0.6, $Opacity: 2, $Round: {$Rotate: 1.2}},
+	 //RTT*JDN|RT
+	 {$Duration: 1000, $Zoom: 11, $Rotate: .2, $FlyDirection: 6, $Easing: {$Left: $JssorEasing$.$EaseLinear, $Top: $JssorEasing$.$EaseOutCubic, $Zoom: $JssorEasing$.$EaseInCubic}, $ScaleHorizontal: 0.8, $ScaleVertical: 0.5, $Opacity: 2, $During: {$Top: [0, 0.5]}},
+	 //RTT*JDN|LB
+	 {$Duration: 1000, $Zoom: 11, $Rotate: .2, $FlyDirection: 9, $Easing: {$Left: $JssorEasing$.$EaseLinear, $Top: $JssorEasing$.$EaseOutCubic, $Zoom: $JssorEasing$.$EaseInCubic}, $ScaleHorizontal: 0.8, $ScaleVertical: 0.5, $Opacity: 2, $During: {$Top: [0, 0.5]}},
+	 //RTT*JUP|RB
+	 {$Duration: 1000, $Zoom: 11, $Rotate: .2, $FlyDirection: 10, $Easing: {$Left: $JssorEasing$.$EaseLinear, $Top: $JssorEasing$.$EaseInCubic, $Zoom: $JssorEasing$.$EaseInCubic}, $ScaleHorizontal: 0.8, $ScaleVertical: 0.5, $Opacity: 2, $During: {$Top: [0, 0.5]}},
+	 {$Duration: 1200, $Zoom: 11, $Rotate: true, $FlyDirection: 6, $Easing: {$Left: $JssorEasing$.$EaseInCubic, $Top: $JssorEasing$.$EaseLinear, $Zoom: $JssorEasing$.$EaseInCubic}, $ScaleHorizontal: 0.5, $ScaleVertical: 0.8, $Opacity: 2, $During: {$Left: [0, 0.5]}, $Round: {$Rotate: 0.5}},
+	 //RTT*JUP|BR
+	 {$Duration: 1000, $Zoom: 11, $Rotate: .2, $FlyDirection: 10, $Easing: {$Left: $JssorEasing$.$EaseInCubic, $Top: $JssorEasing$.$EaseLinear, $Zoom: $JssorEasing$.$EaseInCubic}, $ScaleHorizontal: 0.5, $ScaleVertical: 0.8, $Opacity: 2, $During: {$Left: [0, 0.5]}},
+	 //R|IB
+	 {$Duration: 900, $FlyDirection: 2, $Easing: {$Left: $JssorEasing$.$EaseInOutBack}, $ScaleHorizontal: 0.6, $Opacity: 2},
+	 //B|IB
+	 {$Duration: 900, $FlyDirection: 8, $Easing: {$Top: $JssorEasing$.$EaseInOutBack}, $ScaleVertical: 0.6, $Opacity: 2},
+	];
+
+	var options = {
+	 $AutoPlay: true, //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+	 $AutoPlaySteps: 1, //[Optional] Steps to go for each navigation request (this options applys only when slideshow disabled), the default value is 1
+	 $AutoPlayInterval: 4000, //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
+	 $PauseOnHover: 1, //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, default value is 1
+
+	 $ArrowKeyNavigation: true, //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
+	 $SlideDuration: 500, //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
+	 $MinDragOffsetToSlide: 20, //[Optional] Minimum drag offset to trigger slide , default value is 20
+	 //$SlideWidth: 600,                                 //[Optional] Width of every slide in pixels, default value is width of 'slides' container
+	 //$SlideHeight: 300,                                //[Optional] Height of every slide in pixels, default value is height of 'slides' container
+	 $SlideSpacing: 0, //[Optional] Space between each slide in pixels, default value is 0
+	 $DisplayPieces: 1, //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
+	 $ParkingPosition: 0, //[Optional] The offset position to park slide (this options applys only when slideshow disabled), default value is 0.
+	 $UISearchMode: 1, //[Optional] The way (0 parellel, 1 recursive, default value is 1) to search UI components (slides container, loading screen, navigator container, arrow navigator container, thumbnail navigator container etc).
+	 $PlayOrientation: 1, //[Optional] Orientation to play slide (for auto play, navigation), 1 horizental, 2 vertical, default value is 1
+	 $DragOrientation: 3, //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
+
+	 $SlideshowOptions: {//[Optional] Options to specify and enable slideshow or not
+		$Class: $JssorSlideshowRunner$, //[Required] Class to create instance of slideshow
+		$Transitions: _SlideshowTransitions, //[Required] An array of slideshow transitions to play slideshow
+		$TransitionsOrder: 1, //[Optional] The way to choose transition to play slide, 1 Sequence, 0 Random
+		$ShowLink: true                                    //[Optional] Whether to bring slide link on top of the slider when slideshow is running, default value is false
+	 },
+	 $CaptionSliderOptions: {//[Optional] Options which specifies how to animate caption
+		$Class: $JssorCaptionSlider$, //[Required] Class to create instance to animate caption
+		$CaptionTransitions: _CaptionTransitions, //[Required] An array of caption transitions to play caption, see caption transition section at jssor slideshow transition builder
+		$PlayInMode: 1, //[Optional] 0 None (no play), 1 Chain (goes after main slide), 3 Chain Flatten (goes after main slide and flatten all caption animations), default value is 1
+		$PlayOutMode: 3                                 //[Optional] 0 None (no play), 1 Chain (goes before main slide), 3 Chain Flatten (goes before main slide and flatten all caption animations), default value is 1
+	 },
+	 $BulletNavigatorOptions: {//[Optional] Options to specify and enable navigator or not
+		$Class: $JssorBulletNavigator$, //[Required] Class to create navigator instance
+		$ChanceToShow: 2, //[Required] 0 Never, 1 Mouse Over, 2 Always
+		$AutoCenter: 0, //[Optional] Auto center navigator in parent container, 0 None, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+		$Steps: 1, //[Optional] Steps to go for each navigation request, default value is 1
+		$Lanes: 1, //[Optional] Specify lanes to arrange items, default value is 1
+		$SpacingX: 10, //[Optional] Horizontal space between each item in pixel, default value is 0
+		$SpacingY: 10, //[Optional] Vertical space between each item in pixel, default value is 0
+		$Orientation: 1                                 //[Optional] The orientation of the navigator, 1 horizontal, 2 vertical, default value is 1
+	 },
+	 $ArrowNavigatorOptions: {
+		$Class: $JssorArrowNavigator$, //[Requried] Class to create arrow navigator instance
+		$ChanceToShow: 2                                //[Required] 0 Never, 1 Mouse Over, 2 Always
+	 }
+	};
+
+	var jssor_slider1 = new $JssorSlider$("slider1_container", options);
+	//responsive code begin
+	//you can remove responsive code if you don't want the slider scales while window resizes
+	function ScaleSlider() {
+	 var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
+	 if (parentWidth)
+		jssor_slider1.$SetScaleWidth(Math.min(parentWidth, 600));
+	 else
+		window.setTimeout(ScaleSlider, 30);
+	}
+
+	ScaleSlider();
+
+	if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
+	 $(window).bind('resize', ScaleSlider);
+	}
+
+
+	//if (navigator.userAgent.match(/(iPhone|iPod|iPad)/)) {
+	//    $(window).bind("orientationchange", ScaleSlider);
+	//}
+	//responsive code end
  });
 </script>

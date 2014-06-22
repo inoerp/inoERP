@@ -48,9 +48,11 @@ if (!empty($class_names)) {
  $s->setProperty('_search_asc_desc', filter_input(INPUT_GET, 'search_asc_desc'));
  $s->setProperty('_per_page', filter_input(INPUT_GET, 'per_page'));
  $s->setProperty('_searching_class', $class);
-  if (!empty($existing_search)) {
+ if (!empty($existing_search)) {
 	foreach ($existing_search as $sk => $sv) {
-	 array_push($$class->initial_search, $sv);
+	 if (array_search($sv, $$class->initial_search) == false) {
+		array_push($$class->initial_search, $sv);
+	 }
 	}
  }
  $s->setProperty('_initial_search_array', $$class->initial_search);

@@ -1,15 +1,17 @@
 <?php
-
 class payment_term extends dbObject {
 
- public static $table_name = "payment_term";
- public static $account_array = [
- ];
- public static $checkbox_array = [
+  public static $table_name = "payment_term";
+ public static $dependent_classes = ['payment_term_discount','payment_term_schedule'];
+ public static $primary_column = "payment_term_id";
+ public static $key_column = 'payment_term';
+ public static $module = "gl";
+ 
+public $checkbox = [
 		 "rev_enabled_cb",
 		 "prepayment_cb"
  ];
- public static $field_array = [
+ public $field_a = [
 		 'payment_term_id',
 		 'payment_term',
 		 'description',
@@ -23,29 +25,29 @@ class payment_term extends dbObject {
 		 "last_update_by",
 		 "last_update_date"
  ];
- public static $initial_search_array = [
+ 
+ public $initial_search = [
 'payment_term_id',
 		 'payment_term',
 		 'description',
  ];
- public static $column_array = [
+ public $column = [
 'payment_term_id',
 		 'payment_term',
 		 'description'
  ];
- public static $requiredField_array = [
+ public $requiredField = [
 		 'payment_term',
 		 'description'
  ];
- public static $addressField_array = [
+
+  public $search = [
+		 '_show_update_path' => 1,
+		 '_show_view_path' => 1,
  ];
- public static $fields_inForm_notInDataBase = [
- ];
- public static $fields_inHeader_needsToBeInserted_inPOST = [
- ];
- public static $otherField_array = [
- ];
- public static $primary_column = "payment_term_id";
+ public $pageTitle = " Payment Term "; //page Title
+
+ 
  public $payment_term_id;
  public $payment_term;
  public $description;

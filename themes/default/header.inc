@@ -1,3 +1,4 @@
+<?php // ob_end_clean();?>
 <!DOCTYPE html>
 <html>
  <head>
@@ -58,6 +59,7 @@
 //		echo '<div id="header_top" class="clear"></div>';
 //	 }
 	 ?>
+	
   	<div id="header" class="clear headerBgColor">
   	 <div class="logo"><h2><?php global $si;
 		 echo "<a href=\" " . HOME_URL . " \"> " . $si->site_name . "</a>"; ?>!</h2> </div>
@@ -69,7 +71,7 @@
 			<li><a href="https://github.com/inoerp/inoerp_v1">Download</a></li>
  			<li><a href="content.php?content_type=documentation&category_id=30">Documentation</a></li>
  			<li><a href="content.php?content_type=forum&category_id=1">Forum</a></li>
- 			<li><a href="">About</a></li>
+ 			<li><a href="content.php?mode=2&content_id=197&content_type_id=47">About</a></li>
  		 </ul>
  		</div>
 		<?php } ?>

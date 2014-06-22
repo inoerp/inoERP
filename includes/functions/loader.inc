@@ -1,31 +1,10 @@
 <?php
-/*
- * lOADER file to initiate the system
- * File 'll called from all inc files in respecive modules/extension.
- * This file 'll call all the required functions
- * 1. Call theme
- * 2. Role 
- *  privillages - comment & content
-
- */
-
 $continue = true;
-$readonly1 = false; // readonly controls mode 9 & 2. readonly1 controls values which cant be updated once saved
+$readonly1 = false; 
 $read_access = false;
 $write_access = false;
 $update_access = false;
 $access_level = null;
-//homepage
-function url(){
-  return sprintf(
-    "%s://%s%s",
-    isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http',
-    $_SERVER['SERVER_NAME'],
-    $_SERVER['REQUEST_URI']
-  );
-}
-
-//even on mode 9
 if (empty($mode)) {
  if (!empty($_GET['mode'])) {
 	$mode = $_GET['mode'];
@@ -34,19 +13,29 @@ if (empty($mode)) {
 	$mode = 1;
  }
 }
-
 if ($mode > 8) {
  $readonly = false;
 } else {
  $readonly = true;
 }
-
 if ($continue) {
  include_once (dirname(__FILE__) . '/../basics/basics.inc');
  global $f;
  global $ie;
  global $s;
  global $dbc;
+ global $si;
+ 
+  /* --------------------------------------------------------------------------------------------------------------
+ * First call the theme class to find out the selected theme.
+ * Select the default theme if no theme found
+ */
+ $selected_theme = 'default';
+defined('THEME_DIR') ? null : define('THEME_DIR', HOME_DIR . DS . 'themes' . DS . $selected_theme);
+defined('THEME_URL') ? null : define("THEME_URL", HOME_URL . 'themes/'  . $selected_theme);
+// if(!empty($si->maintenance_cb) && ($si->maintenance_cb == 1) && ($_SESSION['user_roles'][0] !='ADMIN')){
+//	site_maintenance($si->maintenance_msg);
+// }
 } else {
  return;
 }
@@ -83,13 +72,7 @@ if ((isset($hideBlock)) && ($hideBlock)) {
  $showBlock = true;
 }
 
-/* --------------------------------------------------------------------------------------------------------------
- * First call the theme class to find out the selected theme.
- * Select the default theme if no theme found
- */
-$selected_theme = 'default';
-defined('THEME_DIR') ? null : define('THEME_DIR', HOME_DIR . DS . 'themes' . DS . $selected_theme);
-defined('THEME_URL') ? null : define("THEME_URL", HOME_URL . 'themes' . DS . $selected_theme);
+
 
 /* --------------------------------------------------------------------------------------------------------------
  * First call the role path to verify if the role/user has access to the page.
@@ -233,16 +216,12 @@ if (($continue) && (!empty($class_names))) {
 	 }
 
 	 unset($class_id_value);
-	 ////////////////////////////////////////////////////////////////////
-	 if (isset($mode) && ($mode > 9)) {
-		$data = [ 'Loader Class with primary id @ line 151!' => $$class];
-		array_push($ie->page_exception, $data);
-	 }
-	 /////////////////////////////////////////////////////////////////
-	 //
-	 //Search-------------------------------------------------------------------------------
+/*
+ * ---------------------------------------------------SEARCH-----------------------------------------------
+ */
+
 	 if (!empty($_GET['submit_search']) && ($_GET['search_class'] === $class)) {
-		$search_array = $$class->field_a;
+			$search_array = $$class->field_a;
 		global $search_result_statement;
 		if (empty($_GET['column_array'])) {
 		 if (property_exists($class, 'column')) {
@@ -262,75 +241,40 @@ if (($continue) && (!empty($class_names))) {
 		 }
 		}
 
-		$whereFields = array();
+		$whereFields = [];
+		$sqlWhereFields = [];
 		$existing_search = [];
 //to check number of criterias
 		$noof_criteria = 0;
 		foreach ($search_array as $key => $value) {
 		 if (!empty($_GET[$value])) {
 			array_push($existing_search, $value);
-			if (strpos($value, '_id') !== false) {
-			 $whereFields[] = sprintf("`%s` = %s ", $value, trim(mysql_prep($_GET[$value])));
+			if (strpos($value, '_ID') !== false) {
+			 $whereFields[] = sprintf("%s = %s ", $value, trim(mysql_prep($_GET[$value])));
 			} else {
-			 $whereFields[] = sprintf("`%s` LIKE '%%%s%%'", $value, trim(mysql_prep($_GET[$value])));
+			 $whereFields[] = sprintf("%s LIKE '%%%s%%'", $value, trim(mysql_prep($_GET[$value])));
 			}
 			$noof_criteria++;
 		 }
 		}
-
-		if (count($whereFields) > 0) {
-		 $whereClause = " WHERE " . implode(" AND ", $whereFields);
-		 // And then create the SQL query itself.
-		 $sql = "SELECT * FROM " . $table_name . $whereClause;
-		 $count_sql = "SELECT COUNT(*) FROM " . $table_name . $whereClause;
-		 $all_download_sql = "SELECT * FROM  " . $table_name . $whereClause;
-		} else {
-		 $sql = "SELECT * FROM " . $table_name;
-		 $count_sql = "SELECT COUNT(*) FROM " . $table_name;
-		 $all_download_sql = "SELECT * FROM  " . $table_name;
-		}
-
-		if (!empty($_GET['group_by'])) {
-		 $sql .= " GROUP BY " . $_GET['group_by'];
-		 $count_sql .= " GROUP BY " . $_GET['group_by'];
-		 $all_download_sql .= " GROUP BY " . $_GET['group_by'];
-		}
-
-		if ((!empty($search_order_by)) && (!empty($search_asc_desc))) {
-		 if (is_array($search_order_by)) {
-			$sql .= ' ORDER BY ';
-			$all_download_sql .= ' ORDER BY ';
-			foreach ($search_order_by as $key_oby => $value_oby) {
-			 if (empty($search_asc_desc[$key_oby])) {
-				$search_asc_desc[$key_oby] = ' DESC ';
-			 }
-			 $sql .= $value_oby . ' ' . $search_asc_desc[$key_oby] . ' ,';
-			 $all_download_sql .= $value_oby . ' ' . $search_asc_desc[$key_oby] . ' ,';
-			}
-			$sql = rtrim($sql, ',');
-			$all_download_sql = rtrim($all_download_sql, ',');
-		 } else {
-			$sql .= ' ORDER BY ' . $search_order_by . ' ' . $search_asc_desc;
-			$all_download_sql .= ' ORDER BY ' . $search_order_by . ' ' . $search_asc_desc;
+		if (method_exists($$class, 'search_records')) {
+		 $whereClause = implode(" AND ", $whereFields);
+		 $_GET['whereClause'] = $whereClause;
+		 $total_count = call_user_func(array($$class, 'search_counts'), $_GET);
+		 $search_result = call_user_func(array($$class, 'search_records'), $_GET);
+		 if (!empty($per_page) && !empty($total_count)) {
+			$pagination = new pagination($pageno, $per_page, $total_count);
+			$pagination->setProperty('_query_string', $query_string);
+			$pagination_statement = $pagination->show_pagination();
 		 }
-		}
-//		echo "<br> sql is $sql";
-		$total_count = $class::count_all_by_sql($count_sql);
-
-		if (!empty($per_page)) {
-		 $pagination = new pagination($pageno, $per_page, $total_count);
-		 $pagination->setProperty('_query_string', $query_string);
-		 $pagination_statement = $pagination->show_pagination();
-
-		 $sql .=" LIMIT {$per_page} ";
-		 $sql .=" OFFSET {$pagination->offset()}";
+		} else {
+		 require_once 'loader_search.inc';
 		}
 
-		$search_result = $class::find_by_sql($sql);
 		if (method_exists($class, 'search_add_extra_fields')) {
 		 $class::search_add_extra_fields($search_result);
 		}
-//		$search = new search();
+
 		if (property_exists($class, 'search')) {
 		 foreach ($$class->search as $searchParaKey => $searchParaValue) {
 			$s->setProperty($searchParaKey, $searchParaValue);
@@ -343,14 +287,10 @@ if (($continue) && (!empty($class_names))) {
 		$search_result_statement = $search->search_result_op();
 	 }
 	}
-	//---------------------------------------------------------------------------------------
+	//---------------------------------------END OF SEARCH------------------------------------------------
+	
+	/*-------------------------------------START OF SAVE----------------------------------------------------*/
 	elseif ((empty($_POST['download'])) && !empty($_POST['className'])) {
-	 ////////////////////////////////////////////////
-	 if (isset($mode) && ($mode > 9)) {
-		$data = [ 'POST as in Loader file @ line 229!' => $_POST];
-		array_push($ie->page_exception, $data);
-	 }
-	 ////////////////////////////////////////////////
 	 $inosave = new inosave();
 	 $inosave->setProperty('_module', $module);
 	 $inosave->setProperty('_classname', $class);
@@ -364,8 +304,10 @@ if (($continue) && (!empty($class_names))) {
 	 $dbc->confirm();
 	 $continue = false;
 	 return;
-	}//end of POST
- }//end of for each
+	}
+/*-------------------------------------END OF SAVE----------------------------------------------------*/	
+ }
+ /*-------------------------------------START OF SAVE----------------------------------------------------*/
 } else {
  $continue = false;
  return;

@@ -7,8 +7,8 @@ if ($session->login_status()) {
 }
 ?>
 <?php
-
 global $dbc;
+global $session;
 $class = $class_first = 'user';
 $$class = new $class;
 $class_second = 'user_role';
@@ -26,7 +26,6 @@ if (!empty($_POST['submitLogin'])) { //form is submitted for login
  If ($loggedin_user) {
 	$session->login($loggedin_user);
 //	$session->assign_role($_SESSION['user_id']);
-
 	if (!empty($_SESSION['orginal_page'])) {
 	 header('Location: http://' . $session->orginal_page);
 	 unset($_SESSION['orginal_page']);

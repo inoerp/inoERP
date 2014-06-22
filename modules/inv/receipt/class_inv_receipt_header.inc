@@ -47,7 +47,10 @@ class inv_receipt_header extends dbObject {
 		 "vechile_number",
  ];
  public $fields_inForm_notInDataBase = [
-		 "org"
+		 "org",
+		 		 'multi_action_class_pc',
+		 'multi_action_class_pc_value',
+		 'action'
  ];
  public $requiredField = [
 		 "org_id",
@@ -78,6 +81,17 @@ class inv_receipt_header extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
+  public $multi_action_class_pc;
+ public $multi_action_class_pc_value;
+ public $action;
+ 
+  public function _before_save() {
+	if (($this->action == 'multi_receipt')) {
+	 echo "<br> Starting Receipt.";
+	 pa($_POST);
+	 return 10;
+	}
+ }
 
  public function _after_save() {
 	if ((!empty($this->inv_receipt_header_id)) && empty($this->receipt_number)) {
@@ -89,6 +103,26 @@ class inv_receipt_header extends dbObject {
 	}
 
 	return $this->msg;
+ }
+ 
+  public function multi_select_input_fields() {
+	$multi_select_input = [
+						'transaction_quantity',
+			'subinventory_id',
+			'locator_id',
+	];
+	return $multi_select_input;
+ }
+
+ public function multi_select_hidden_fields() {
+	$multi_select_hidden = [
+			'action_class_name',
+			'mode',
+			'action',
+			'show_block',
+	];
+
+	return $multi_select_hidden;
  }
  
 }

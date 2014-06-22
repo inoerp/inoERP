@@ -1,7 +1,6 @@
 #
+# http://www.robotstxt.org/wc/robots.html
 
-User-agent: *
-Disallow: /
 
 # Directories
 Disallow: /includes/

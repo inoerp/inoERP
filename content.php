@@ -1,5 +1,4 @@
 <?php
-
 $dont_check_login = true;
 $content_class = true;
 $class_names = [
@@ -26,14 +25,21 @@ if ((!empty($_GET['delete'])) && ($_GET['delete'] == 1)) {
 ?>
 <?php
 
+$content_rp = getrwuPrivilage($content_type->read_role, $_SESSION['user_roles'][0]);
+$content_wp = getrwuPrivilage($content_type->write_role, $_SESSION['user_roles'][0]);
+$content_up = getrwuPrivilage($content_type->update_role, $_SESSION['user_roles'][0]);
+$content_privilage = $content_rp + $content_wp + $content_up;
+
 $crp = getrwuPrivilage($content_type->comment_read_role, $_SESSION['user_roles'][0]);
 $cwp = getrwuPrivilage($content_type->comment_write_role, $_SESSION['user_roles'][0]);
 $cup = getrwuPrivilage($content_type->comment_update_role, $_SESSION['user_roles'][0]);
 $comment_privilage = $crp + $cwp + $cup;
 
-if (($update_access) && ($mode == 9)) {
+if (($content_privilage >= 6) && ($mode == 9)) {
  include_once(THEME_DIR . '/content_template.inc');
-} else if (($write_access) && empty($$class->$class_id_first) && ($mode == 9)) {
+} else if (($content_privilage >= 4) && empty($$class->$class_id_first) && ($mode == 9)) {
+ include_once(THEME_DIR . '/content_template.inc');
+} else if (($content_privilage >= 4) && !empty($_SESSION['username']) && ($$class->created_by == $_SESSION['username']) && ($mode == 9)) {
  include_once(THEME_DIR . '/content_template.inc');
 } else if (($mode == 9)) {
  $session->redirect_login();
@@ -45,7 +51,10 @@ if (($update_access) && ($mode == 9)) {
  } elseif ((!empty($category_id)) && ($content_type_name)) {
 	include_once(THEME_DIR . '/contents_list_template.inc');
  } else {
-	include_once(THEME_DIR . '/content_search.php');
+	include_once(THEME_DIR . '/contents_list_template.inc');
+//	echo $content->showSummaryList_byConteTypeCategory($pageno, $per_page, $query_string);
+//	require_once(INC_BASICS . DS . "list_page.inc");
+//	include_once(THEME_DIR . '/content_search.php');
  }
 }
 ?>
