@@ -67,6 +67,7 @@
 				 <ul class="tabMain">
 					<li><a href="#tabsLine-1">Values</a></li>
 					<li><a href="#tabsLine-2">Prices</a></li>
+					<li><a href="#tabsLine-3">Restrictions</a></li>
 				 </ul>
 				 <div class="tabContainer"> 
 					<form action=""  method="post" id="mdm_price_list_line_line"  name="mdm_price_list_line_line">
@@ -77,7 +78,6 @@
 							 <th>Action</th>
 							 <th>Line Id</th>
 							 <th>Type</th>
-							 <th>Org</th>
 							 <th>Item</th>
 							 <th>Description</th>
 							 <th>UOM</th>
@@ -101,9 +101,8 @@
  							 </td>
  							 <td><?php form::number_field_wid2sr('mdm_price_list_line_id'); ?></td>
  							 <td><?php form::text_field_wid2sm('line_type') ?></td>
- 							 <td><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->org_id, '', '', '', $readonly); ?></td>
  							 <td><?php form::text_field_wid2('item_number', 'select_item_number'); ?>
- 								<img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
+ 								<img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number_only select_popup"></td>
  							 <td><?php form::text_field_wid2('item_description'); ?></td>
  							 <td><?php
 								 echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id');
@@ -134,6 +133,28 @@
  							<tr class="mdm_price_list_line<?php echo $count ?>">
 							 <td><?php $f->text_field_wid2('unit_price'); ?></td>
  							 <td><?php $f->text_field_wid2('formula'); ?></td>
+ 							</tr>
+							 <?php
+							 $count = $count + 1;
+							}
+							?>
+						 </tbody>
+						</table>
+					 </div>
+					 					 <div id="tabsLine-3" class="tabContent">
+						<table class="form_table">
+						 <thead> 
+							<tr>
+							 <th>Inventory Org</th>
+							 </tr>
+						 </thead>
+						 <tbody class="form_data_line_tbody mdm_price_list_line_values" >
+							<?php
+							$count = 0;
+							foreach ($mdm_price_list_line_object as $mdm_price_list_line) {
+							 ?>         
+ 							<tr class="mdm_price_list_line<?php echo $count ?>">
+							 <td><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->org_id, '', '', '', $readonly); ?></td>
  							</tr>
 							 <?php
 							 $count = $count + 1;

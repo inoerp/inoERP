@@ -27,6 +27,8 @@ class sd_so_line extends dbObject {
 		 'line_quantity',
 		 'picked_quantity',
 		 'shipped_quantity',
+		 'price_list_header_id',
+		 'price_date',
 		 'unit_price',
 		 'line_price',
 		 'reference_doc_type',
@@ -78,6 +80,8 @@ class sd_so_line extends dbObject {
  public $line_quantity;
  public $picked_quantity;
  public $shipped_quantity;
+ public $price_list_header_id;
+ public $price_date;
  public $unit_price;
  public $line_price;
  public $tax_code_id;

@@ -12,7 +12,7 @@ class mdm_price_list_line extends dbObject {
 		 'mdm_price_list_header_id',
 		 'line_type',
 		 'org_id',
-		 'item_id',
+		 'item_id_m',
 		 'uom_id',
 		 'unit_price',
 		 'formula',
@@ -30,13 +30,13 @@ class mdm_price_list_line extends dbObject {
 		 'mdm_price_list_line_id',
 		 'mdm_price_list_header_id',
 		 'line_type',
-		 'item_id',
+		 'item_id_m',
  ];
  public $column = [
 		 'mdm_price_list_line_id',
 		 'mdm_price_list_header_id',
 		 'line_type',
-		 'item_id',
+		 'item_id_m',
  ];
  public $requiredField = [
 		 'mdm_price_list_header_id',
@@ -54,7 +54,7 @@ class mdm_price_list_line extends dbObject {
  public $mdm_price_list_header_id;
  public $line_type;
  public $org_id;
- public $item_id;
+ public $item_id_m;
  public $uom_id;
  public $unit_price;
  public $formula;
@@ -90,11 +90,31 @@ class mdm_price_list_line extends dbObject {
  }
 
  public function _before_save() {
-	if (!(empty($this->org_id))) {
 	 if (!(empty($this->item_number))) {
-		$item_s = item::find_by_itemNumber_orgId($this->item_number, $this->org_id);
-		$this->item_id = $item_s->item_id;
+		$item_s = item::find_by_itemNumber_fromMasterOrg($this->item_number);
+		$this->item_id_m = $item_s->item_id_m;
 	 }
+	
+ }
+ 
+ public function priceBy_headerId_orgId_ItemId($price_date){
+	$sql = " SELECT * FROM ";
+	$sql .= self::$table_name;
+	$sql .= " WHERE mdm_price_list_header_id = '{$this->mdm_price_list_header_id}' " ;
+	$sql .= " AND item_id_m = '{$this->item_id_m}' " ;
+	$sql .= " AND org_id = '{$this->org_id}' " ;
+	$sql .= " AND $this->effective_start_date < '{$price_date}' " ;
+	$sql .= " AND $this->effective_end_date > '{$price_date}' " ;
+	$sql .= " OR $this->effective_end_date IS NULL " ;
+	
+	$result = $this->findBySql($sql);
+	return !empty($result) ? array_pop($result) : false;
+	
+ }
+ 
+ public function getPrice($price_date){
+	if(!empty($this->org_id)){
+	 $result = $this->priceBy_headerId_orgId_ItemId($price_date);
 	}
  }
 

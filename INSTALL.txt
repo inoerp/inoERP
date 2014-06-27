@@ -1,7 +1,16 @@
+== Requirements ==
+1. HTTP web server Ex. Apache, IIS. 
+2. PHP 5.4+    
+3. MySQL 5.5+
+    
+
+
+== Installation ==
 1. Change the DB settings @ include\basics\dbsettings.inc
 2. Change the session_set_cookie_params  in sessions file
-3. Import the database
+3. Import the database file @  enine\install\inoerp.sql
 4. Change the .htaccess
+5. Login in to the application using user id /password - admin/admin123
 
 
 Demo

@@ -22,6 +22,7 @@ class sd_so_header extends dbObject {
 		 "description",
 		 'ship_to_id',
 		 'bill_to_id',
+		 'price_list_header_id',
 		 'header_amount',
 		 'tax_amount',
 		 'document_currency',
@@ -106,6 +107,7 @@ class sd_so_header extends dbObject {
  public $description;
  public $ship_to_id;
  public $bill_to_id;
+ public $price_list_header_id;
  public $header_amount;
  public $tax_amount;
  public $document_currency;
