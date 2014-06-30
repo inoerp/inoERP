@@ -90,30 +90,42 @@ class mdm_price_list_line extends dbObject {
  }
 
  public function _before_save() {
-	 if (!(empty($this->item_number))) {
-		$item_s = item::find_by_itemNumber_fromMasterOrg($this->item_number);
-		$this->item_id_m = $item_s->item_id_m;
-	 }
-	
+	if (!(empty($this->item_number))) {
+	 $item_s = item::find_by_itemNumber_fromMasterOrg($this->item_number);
+	 $this->item_id_m = $item_s->item_id_m;
+	}
  }
- 
- public function priceBy_headerId_orgId_ItemId($price_date){
+
+ public static function priceBy_headerId_ItemId($item_id_m, $price_date, $mdm_price_list_header_id = '1') {
+	$sql = " 
+	 SELECT *
+		FROM mdm_price_list_line 
+		WHERE  mdm_price_list_header_id = '{$mdm_price_list_header_id}'
+		AND item_id_m = '{$item_id_m}'
+		AND effective_start_date < '{$price_date}'
+		AND(effective_end_date IS NULL OR effective_end_date > '{$price_date}')
+		 LIMIT 1
+";
+	$result = self::find_by_sql($sql);
+	return !empty($result) ? array_pop($result) : false;
+ }
+
+ public function priceBy_headerId_orgId_ItemId($price_date) {
 	$sql = " SELECT * FROM ";
 	$sql .= self::$table_name;
-	$sql .= " WHERE mdm_price_list_header_id = '{$this->mdm_price_list_header_id}' " ;
-	$sql .= " AND item_id_m = '{$this->item_id_m}' " ;
-	$sql .= " AND org_id = '{$this->org_id}' " ;
-	$sql .= " AND $this->effective_start_date < '{$price_date}' " ;
-	$sql .= " AND $this->effective_end_date > '{$price_date}' " ;
-	$sql .= " OR $this->effective_end_date IS NULL " ;
-	
+	$sql .= " WHERE mdm_price_list_header_id = '{$this->mdm_price_list_header_id}' ";
+	$sql .= " AND item_id_m = '{$this->item_id_m}' ";
+	$sql .= " AND org_id = '{$this->org_id}' ";
+	$sql .= " AND $this->effective_start_date < '{$price_date}' ";
+	$sql .= " AND $this->effective_end_date > '{$price_date}' ";
+	$sql .= " OR $this->effective_end_date IS NULL ";
+
 	$result = $this->findBySql($sql);
 	return !empty($result) ? array_pop($result) : false;
-	
  }
- 
- public function getPrice($price_date){
-	if(!empty($this->org_id)){
+
+ public function getPrice($price_date) {
+	if (!empty($this->org_id)) {
 	 $result = $this->priceBy_headerId_orgId_ItemId($price_date);
 	}
  }

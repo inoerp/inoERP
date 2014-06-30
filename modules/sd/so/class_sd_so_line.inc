@@ -15,7 +15,7 @@ class sd_so_line extends dbObject {
 		 'sd_so_header_id',
 		 'line_type',
 		 'line_number',
-		 'item_id',
+		 'item_id_m',
 		 'shipping_org_id',
 		 'line_status',
 		 'requested_date',
@@ -32,6 +32,8 @@ class sd_so_line extends dbObject {
 		 'unit_price',
 		 'line_price',
 		 'reference_doc_type',
+		 'supply_source',
+		 'destination_type',
 		 'tax_code_id',
 		 'tax_amount',
 		 'reference_doc_number',
@@ -44,14 +46,14 @@ class sd_so_line extends dbObject {
  public $initial_search = [
 		 "sd_so_header_id",
 		 "so_number",
-		 "item_id",
+		 "item_id_m",
 		 "item_number",
 		 "item_description"
  ];
  public $column = [
 		 "sd_so_header_id",
 		 "so_number",
-		 "item_id",
+		 "item_id_m",
 		 "item_number",
 		 "item_description"
  ];
@@ -73,7 +75,7 @@ class sd_so_line extends dbObject {
  public $sd_so_header_id;
  public $line_type;
  public $line_number;
- public $item_id;
+ public $item_id_m;
  public $item_description;
  public $line_description;
  public $uom_id;
@@ -88,6 +90,8 @@ class sd_so_line extends dbObject {
  public $tax_amount;
  public $reference_doc_type;
  public $reference_doc_number;
+ public $supply_source;
+ public $destination_type;
  public $ef_id;
  public $po_status;
  public $rev_enabled_cb;
@@ -111,7 +115,7 @@ class sd_so_line extends dbObject {
 	if (!(empty($this->shipping_org_id))) {
 	 if (!(empty($this->item_number))) {
 		$item_s = item::find_by_itemNumber_orgId($this->item_number, $this->shipping_org_id);
-		$this->item_id = $item_s->item_id;
+		$this->item_id_m = $item_s->item_id_m;
 	 }
 	} else {
 	 echo "<br> Saving line data failed!. No shipping organization. Error @ po_line @" . __LINE__;

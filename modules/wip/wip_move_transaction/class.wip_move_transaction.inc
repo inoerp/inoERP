@@ -19,7 +19,7 @@ class wip_move_transaction extends dbObject {
 		 'org_id',
 		 'wo_number',
 		 'item_number',
-		 'item_id',
+		 'item_id_m',
 		 'from_routing_sequence',
 		 'to_routing_sequence',
 		 'from_operation_step',
@@ -44,7 +44,7 @@ class wip_move_transaction extends dbObject {
 		 'org_id',
 		 'wo_number',
 		 'item_number',
-		 'item_id'
+		 'item_id_m'
  ];
  public $column = [
 		 'wip_move_transaction_id',
@@ -52,7 +52,7 @@ class wip_move_transaction extends dbObject {
 		 'org_id',
 		 'wo_number',
 		 'item_number',
-		 'item_id',
+		 'item_id_m',
 		 'from_routing_sequence',
 		 'to_routing_sequence',
 		 'transaction_date',
@@ -86,7 +86,7 @@ class wip_move_transaction extends dbObject {
  public $org_id;
  public $wo_number;
  public $item_number;
- public $item_id;
+ public $item_id_m;
  public $from_routing_sequence;
  public $to_routing_sequence;
  public $from_operation_step;
@@ -154,7 +154,7 @@ class wip_move_transaction extends dbObject {
 	 $inv_transaction->$key = NULL;
 	}
 	$inv_transaction->transaction_type_id = $transaction_type_id;
-	$inv_transaction->item_id = $bom_lines->component_item_id;
+	$inv_transaction->item_id_m = $bom_lines->component_item_id_m;
 	$inv_transaction->org_id = $this->org_id;
 	$inv_transaction->quantity = $this->move_quantity * $bom_lines->usage_quantity;
 
@@ -166,7 +166,7 @@ class wip_move_transaction extends dbObject {
 	 $inv_transaction->to_locator_id = $bom_lines->supply_locator;
 	}
 
-	$item = item::find_by_id($bom_lines->component_item_id);
+	$item = item::find_by_id($bom_lines->component_item_id_m);
 	$inv_transaction->item_number = $item->item_number;
 	$inv_transaction->uom_id = $item->uom_id;
 	$inv_transaction->document_type = 'Work Order';
@@ -518,6 +518,3 @@ class wip_move_transaction extends dbObject {
 
 //end of resource class
 ?>
-
-
-

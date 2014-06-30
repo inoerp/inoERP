@@ -7,7 +7,7 @@ class sd_so_all_v extends dbObject {
  public $field_a = [
 		 'sd_so_header_id',
 		 'bu_org_id',
-		 'so_type',
+		 'document_type',
 		 'so_number',
 		 'ar_customer_id',
 		 'ar_customer_site_id',
@@ -26,7 +26,7 @@ class sd_so_all_v extends dbObject {
 		 'line_status',
 		 'line_type',
 		 'line_number',
-		 'item_id',
+		 'item_id_m',
 		 'item_description',
 		 'line_description',
 		 'line_quantity',
@@ -78,7 +78,7 @@ class sd_so_all_v extends dbObject {
 		 'shipped_quantity',
 		 'staging_subinventory',
 		 'staging_locator',
-		 'so_type',
+		 'document_type',
 		 'sd_so_header_id',
 		 'bu_org_id',
 		 'shipping_org_id',
@@ -99,7 +99,7 @@ class sd_so_all_v extends dbObject {
 		 'sd_so_line_id',
 		 'line_status',
 		 'line_type',
-		 'item_id',
+		 'item_id_m',
 		 'item_description',
 		 'line_description',
 		 'unit_price',
@@ -128,12 +128,11 @@ class sd_so_all_v extends dbObject {
  ];
  public $pageTitle = " SO - Sales Orders "; //page Title
  public $option_lists = [
-		 'so_type' => 'SO_TYPE',
 		 'approval_status' => 'APPROVAL_STATUS',
  ];
  public $sd_so_header_id;
  public $bu_org_id;
- public $so_type;
+ public $document_type;
  public $so_number;
  public $ar_customer_id;
  public $ar_customer_site_id;
@@ -156,7 +155,7 @@ class sd_so_all_v extends dbObject {
  public $line_status;
  public $line_type;
  public $line_number;
- public $item_id;
+ public $item_id_m;
  public $onhand;
  public $item_description;
  public $line_description;
@@ -188,10 +187,10 @@ class sd_so_all_v extends dbObject {
 	$sql = "
 CREATE OR REPLACE VIEW sd_so_all_v
 (
-sd_so_header_id, bu_org_id, so_type, so_number, ar_customer_id, ar_customer_site_id, sales_person,
+sd_so_header_id, bu_org_id, document_type, so_number, ar_customer_id, ar_customer_site_id, sales_person,
 document_currency, header_amount, so_status,  payment_term_id, onhand, customer_name, customer_number, 
 customer_site_name, customer_site_number, payment_term, payment_term_description, sd_so_line_id, line_type,
-line_number, item_id, item_description, line_description, line_quantity,  picked_quantity,
+line_number, item_id_m, item_description, line_description, line_quantity,  picked_quantity,
 shipped_quantity, unit_price, line_price, line_status, staging_subinventory_id, staging_locator_id,
 staging_subinventory, staging_locator, requested_date, promise_date , schedule_ship_date ,actual_ship_date,
 item_number, uom_id, item_status,  org, shipping_org_id, created_by,  creation_date, last_update_by,
@@ -199,7 +198,7 @@ last_update_date
 )
 AS
  SELECT 
-sd_so_header.sd_so_header_id, sd_so_header.bu_org_id, sd_so_header.so_type, sd_so_header.so_number, sd_so_header.ar_customer_id, 
+sd_so_header.sd_so_header_id, sd_so_header.bu_org_id, sd_so_header.document_type, sd_so_header.so_number, sd_so_header.ar_customer_id, 
 sd_so_header.ar_customer_site_id, sd_so_header.sales_person, sd_so_header.document_currency, 
 sd_so_header.header_amount, sd_so_header.so_status,
 sd_so_header.payment_term_id,
@@ -207,7 +206,7 @@ osv.onhand,
 ar_customer.customer_name, ar_customer.customer_number,
 ar_customer_site.customer_site_name, ar_customer_site.customer_site_number,
 payment_term.payment_term, payment_term.description,
-sd_so_line.sd_so_line_id, sd_so_line.line_type, sd_so_line.line_number,	sd_so_line.item_id, 
+sd_so_line.sd_so_line_id, sd_so_line.line_type, sd_so_line.line_number,	sd_so_line.item_id_m, 
 sd_so_line.item_description, sd_so_line.line_description, sd_so_line.line_quantity,
 sd_so_line.picked_quantity, sd_so_line.shipped_quantity,
 sd_so_line.unit_price, sd_so_line.line_price, sd_so_line.line_status,
@@ -222,12 +221,12 @@ LEFT JOIN ar_customer ON sd_so_header.ar_customer_id = ar_customer.ar_customer_i
 LEFT JOIN ar_customer_site ON sd_so_header.ar_customer_site_id = ar_customer_site.ar_customer_site_id
 LEFT JOIN payment_term ON sd_so_header.payment_term_id = payment_term.payment_term_id
 LEFT JOIN sd_so_line ON sd_so_header.sd_so_header_id = sd_so_line.sd_so_header_id
-LEFT JOIN item ON sd_so_line.item_id = item.item_id
+LEFT JOIN item ON sd_so_line.item_id_m = item.item_id_m and item.org_id = sd_so_line.shipping_org_id
 LEFT JOIN org ON sd_so_line.shipping_org_id = org.org_id
 LEFT JOIN sd_shipping_control ssc ON ssc.org_id = sd_so_line.shipping_org_id
 LEFT JOIN subinventory ON subinventory.subinventory_id = ssc.staging_subinventory_id
 LEFT JOIN locator ON locator.locator_id = ssc.staging_locator_id
-LEFT JOIN onhand_summary_v osv ON osv.item_id = sd_so_line.item_id AND osv.org_id = sd_so_line.shipping_org_id
+LEFT JOIN onhand_summary_v osv ON osv.item_id_m = sd_so_line.item_id_m AND osv.org_id = sd_so_line.shipping_org_id
 
 ";
  }

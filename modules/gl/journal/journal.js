@@ -38,7 +38,7 @@ mandatoryCheck.mandatoryHeader();
 mandatoryCheck.form_area = 'form_header';
 mandatoryCheck.mandatory_fields = ["ledger_id", "currency", "gl_period_id"];
 mandatoryCheck.mandatory_messages = ["First Select Ledger", "No Currency", "No GL Period"];
-mandatoryCheck.mandatoryField();
+//mandatoryCheck.mandatoryField();
 
 
 

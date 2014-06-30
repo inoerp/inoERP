@@ -81,17 +81,6 @@ class bom_routing_line extends dbObject {
 	$this->$name = $value;
  }
 
- public function _after_save() {
-	
- }
-
- public function _before_showing() {
-	
- }
-
- public function _before_submit() {
-	
- }
 
  public static function find_by_routing_headerId($routing_header_id) {
 	$sql = "SELECT * FROM " . self::$table_name . " where bom_routing_header_id = '{$routing_header_id}'";
@@ -99,8 +88,8 @@ class bom_routing_line extends dbObject {
 	return $result_array;
  }
 
- public static function find_by_itemId($item_id) {
-	$routingHeaderOfItem = bom_routing_header::find_by_itemId($item_id);
+ public static function find_by_itemId($item_id_m) {
+	$routingHeaderOfItem = bom_routing_header::find_by_itemId($item_id_m);
 	$bom_routing_header_id = $routingHeaderOfItem[0]->bom_routing_header_id;
 	$routing_line_details = self::find_by_routing_headerId($bom_routing_header_id);
 	return $routing_line_details;

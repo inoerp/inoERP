@@ -13,7 +13,7 @@ class wip_wo_bom extends dbObject {
 		 'wip_wo_header_id',
 		 'bom_sequence',
 		 'routing_sequence',
-		 'component_item_id',
+		 'component_item_id_m',
 		 'usage_basis',
 		 'usage_quantity',
 		 'yield',
@@ -41,7 +41,7 @@ class wip_wo_bom extends dbObject {
 		 'wip_wo_header_id',
 		 'bom_sequence',
 		 'routing_sequence',
-		 'component_item_id',
+		 'component_item_id_m',
 		 'usage_basis',
 		 'usage_quantity'
  ];
@@ -49,7 +49,7 @@ class wip_wo_bom extends dbObject {
  public $wip_wo_header_id;
  public $bom_sequence;
  public $routing_sequence;
- public $component_item_id;
+ public $component_item_id_m;
  public $usage_basis;
  public $usage_quantity;
  public $yield;
@@ -104,6 +104,3 @@ class wip_wo_bom extends dbObject {
 
 //end of wip_wo_bom class
 ?>
-
-
-

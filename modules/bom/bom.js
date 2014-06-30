@@ -1,6 +1,6 @@
-function setValFromSelectPage(bom_header_id, item_id, item_number, item_description, uom_id) {
+function setValFromSelectPage(bom_header_id, item_id_m, item_number, item_description, uom_id) {
  this.bom_header_id = bom_header_id;
- this.item_id = item_id;
+ this.item_id_m = item_id_m;
  this.item_number = item_number;
  this.item_description = item_description;
  this.uom_id = uom_id;
@@ -12,7 +12,7 @@ setValFromSelectPage.prototype.setVal = function() {
  var rowClass = '.' + localStorage.getItem("row_class");
  rowClass = rowClass.replace(/\s+/g, '.');
 
- var item_obj = [{id: 'component_item_id', data: this.item_id},
+ var item_obj = [{id: 'component_item_id_m', data: this.item_id_m},
 	{id: 'component_item_number', data: this.item_number},
 	{id: 'component_description', data: this.item_description},
 	{id: 'uom', data: this.uom_id}
@@ -117,12 +117,12 @@ $(document).ready(function() {
 //get the attachement form
  deleteData('form.php?class_name=bom_header&line_class_name=bom_line');
  
-// save('json.bom.php', '#bom_header', 'line_id_cb', 'component_item_id', '#bom_header_id');
+// save('json.bom.php', '#bom_header', 'line_id_cb', 'component_item_id_m', '#bom_header_id');
  var classSave = new saveMainClass();
  classSave.json_url = 'form.php?class_name=bom_header';
  classSave.form_header_id = 'bom_header';
  classSave.primary_column_id = 'bom_header_id';
- classSave.line_key_field = 'item_id';
+ classSave.line_key_field = 'item_id_m';
  classSave.single_line = false;
  classSave.savingOnlyHeader = false;
  classSave.headerClassName = 'bom_header';

@@ -12,7 +12,7 @@ class ap_transaction_line extends dbObject {
 		 'ap_transaction_line_id',
 		 'ap_transaction_header_id',
 		 'line_number',
-		 'item_id',
+		 'item_id_m',
 		 'item_description',
 		 'inv_line_quantity',
 		 'inv_unit_price',
@@ -63,7 +63,7 @@ class ap_transaction_line extends dbObject {
  public $ap_transaction_line_id;
  public $ap_transaction_header_id;
  public $line_number;
- public $item_id;
+ public $item_id_m;
  public $inv_line_quantity;
  public $inv_unit_price;
  public $inv_line_price;

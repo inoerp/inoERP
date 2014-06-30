@@ -132,13 +132,6 @@ class bom_resource extends dbObject {
 	return $charge_type;
  }
 
- public function _before_showing() {
-	
- }
-
- public function _before_submit() {
-	
- }
 
 }
 

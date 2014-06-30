@@ -106,10 +106,10 @@ class fp_mrp_header extends dbObject {
 	$org = new org_v();
 	$org->findBy_id($obj->org_id);
 	$item = new item();
-	$item->findBy_id($obj->item_id);
+	$item->findBy_id($obj->item_id_m);
 	$leadtime = $item->pre_processing_lt + $item->post_processing_lt + $item->processing_lt;
 	$itemcost = new cst_item_cost_v();
-	$itemcost->item_id = $obj->item_id;
+	$itemcost->item_id_m = $obj->item_id_m;
 	$itemcost->bom_cost_type = 'FROZEN';
 	$itemcost_i = $itemcost->findBy_ItemId_CostType();
 	$sourcing_rule_id = $item->sourcing_rule_id;
@@ -125,7 +125,7 @@ class fp_mrp_header extends dbObject {
 		$po_req_interface->po_requisition_type = 'EXTERNAL';
 		$po_req_interface->line_type = 'GOODS';
 		$po_req_interface->requisition_status = 'APPROVED';
-		$po_req_interface->item_id = $obj->item_id;
+		$po_req_interface->item_id_m = $obj->item_id_m;
 		$po_req_interface->uom_id = $item->uom_id;
 		$po_req_interface->item_description = $item->item_description;
 		$po_req_interface->currency = $org->currency_code;
@@ -145,7 +145,7 @@ class fp_mrp_header extends dbObject {
 	$po_req_interface->po_requisition_type = 'EXTERNAL';
 	$po_req_interface->line_type = 'GOODS';
 	$po_req_interface->requisition_status = 'APPROVED';
-	$po_req_interface->item_id = $obj->item_id;
+	$po_req_interface->item_id_m = $obj->item_id_m;
 	$po_req_interface->uom_id = $item->uom_id;
 	$po_req_interface->item_description = $item->item_description;
 	$po_req_interface->currency = $org->currency_code;
@@ -163,11 +163,11 @@ class fp_mrp_header extends dbObject {
 
  private function _cretae_wo($obj) {
 	$item = new item();
-	$item->findBy_id($obj->item_id);
+	$item->findBy_id($obj->item_id_m);
 	$leadtime = $item->pre_processing_lt + $item->post_processing_lt + $item->processing_lt;
 	$woh = new wip_wo_header();
 	$woh->org_id = $obj->org_id;
-	$woh->item_id = $obj->item_id;
+	$woh->item_id_m = $obj->item_id_m;
 	$woh->wo_type = 'STANDARD';
 	$woh->wip_accounting_group_id = 1;
 	$woh->wo_status = 'UN_RELEASED';

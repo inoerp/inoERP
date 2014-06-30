@@ -1,6 +1,6 @@
 function setValFromSelectPage(sd_document_type_id) {
  this.sd_document_type_id = sd_document_type_id;
- }
+}
 
 setValFromSelectPage.prototype.setVal = function() {
  var sd_document_type_id = this.sd_document_type_id;
@@ -11,6 +11,40 @@ setValFromSelectPage.prototype.setVal = function() {
  }
 };
 
+//get Document Type Details
+function getDocumentTypeDetails(json_url, sd_document_type_id) {
+ json_url = (typeof json_url !== 'undefined') ? json_url : 'modules/sd/document_type/json_document_type.php';
+ sd_document_type_id = (typeof sd_document_type_id !== 'undefined') ? sd_document_type_id : '1';
+ $.ajax({
+	url: json_url,
+	type: 'get',
+	dataType: 'json',
+	data: {
+	 sd_document_type_id: sd_document_type_id,
+	 find_document_detail: true,
+	},
+	success: function(result) {
+	 var items = [];
+	 var option_stmt = '<option value=""></option>';
+	 $.each(result, function(key, val) {
+		option_stmt += '<option value="' + val.org_id + '">' + val.org + '</option>';
+		items.push("<li id='" + key + "'>" + val + "</li>");
+	 });
+	 var org_type_id = '#' + org_type + '_id';
+	 $(org_type_id).removeAttr('disabled');
+	 $(org_type_id).empty().append(option_stmt);
+	},
+	complete: function() {
+	 $('.show_loading_small').hide();
+	},
+	beforeSend: function() {
+	 $('.show_loading_small').show();
+	},
+	error: function(request, errorType, errorMessage) {
+	 alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+	}
+ });
+}
 
 $(document).ready(function() {
  //selecting Id

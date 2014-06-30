@@ -33,7 +33,7 @@
 				 </ul>
 				</div>
 				<div id ="form_line" class="form_line"><span class="heading">Document Type Details </span>
-				 <div id="tabs">
+				 <div id="tabsLine">
 					<ul class="tabMain">
 					 <li><a href="#tabsLine-1">Basic Info</a></li>
 					 <li><a href="#tabsLine-2">Defaults</a></li>
@@ -48,8 +48,8 @@
 							<li><label>Category :</label>
 							 <?php echo $f->select_field_from_array('category', sd_document_type::$category_a, $$class->category); ?>
 							</li>
-							<li><label>Entity : </label>
-							 <?php echo $f->select_field_from_array('entity', sd_document_type::$entity_a, $$class->entity); ?>							 
+							<li><label>Supply Source : </label>
+							 <?php echo $f->select_field_from_array('supply_source', sd_document_type::$supply_source_a, $$class->supply_source); ?>							 
 							</li>
 							<li><label>Process Flow :</label>
 							 <?php $f->text_field_wid('process_flow_id'); ?>
@@ -70,6 +70,10 @@
 							<li><label>Ship From Org :</label> 
 							 <?php echo $f->select_field_from_object('default_shipfrom_org_id', org::find_all_inventory(), 'org_id', 'org', $$class->default_shipfrom_org_id, '', '', '', $readonly); ?>
 							</li>
+														<li><label>Destination Type : </label>
+							 <?php echo $f->select_field_from_array('destination_type', sd_document_type::$destination_type_a, $$class->destination_type); ?>							 
+							</li>
+
 							<li><label>AR Transaction Type :</label> <?php $f->text_field_wid('ar_transaction_type'); ?>	</li>
 							<li><label>AR Transaction Source :</label> <?php $f->text_field_wid('ar_transaction_source'); ?>	</li>
 						 </ul> 

@@ -27,8 +27,8 @@ if (!empty($po_header_id)) {
  $po_line_object = po_line::find_by_po_headerId($po_header_id);
  //assign the item number to the object
  foreach ($po_line_object as &$po_lines) {
-	if (!empty($po_lines->item_id)) {
-	 $item = item::find_by_id($po_lines->item_id);
+	if (!empty($po_lines->item_id_m)) {
+	 $item = item::find_by_id($po_lines->item_id_m);
 	 $po_lines->item_number = $item->item_number;
 	}
  }

@@ -1,7 +1,7 @@
-function setValFromSelectPage(wip_wo_header_id, item_id, item_number, item_description,
+function setValFromSelectPage(wip_wo_header_id, item_id_m, item_number, item_description,
 				uom_id, processing_lt) {
  this.wip_wo_header_id = wip_wo_header_id;
- this.item_id = item_id;
+ this.item_id_m = item_id_m;
  this.item_number = item_number;
  this.item_description = item_description;
  this.uom_id = uom_id;
@@ -15,14 +15,14 @@ setValFromSelectPage.prototype.setVal = function() {
  var itemType = localStorage.getItem("itemType");
  rowClass = rowClass.replace(/\s+/g, '.');
 
- var item_obj = [{id: 'item_id', data: this.item_id},
+ var item_obj = [{id: 'item_id_m', data: this.item_id_m},
 	{id: 'item_number', data: this.item_number},
 	{id: 'item_description', data: this.item_description},
 	{id: 'uom', data: this.uom_id},
 	{id: 'processing_lt', data: this.processing_lt}
  ];
 
- var component_obj = [{id: 'component_item_id', data: this.item_id},
+ var component_obj = [{id: 'component_item_id_m', data: this.item_id_m},
 	{id: 'component_item_number', data: this.item_number},
 	{id: 'component_description', data: this.item_description},
 	{id: 'component_uom', data: this.uom_id}

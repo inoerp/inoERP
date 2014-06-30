@@ -41,7 +41,7 @@
 				 </ul>
 				</div>
 				<div id ="form_line" class="form_line"><span class="heading">Inventory Org Details </span>
-				 <div id="tabs">
+				 <div id="tabsLine">
 					<ul class="tabMain">
 					 <li><a href="#tabsLine-1">Basic Info</a></li>
 					 <li><a href="#tabsLine-2">Item Attribute</a></li>
@@ -51,8 +51,8 @@
 					</ul>
 					<div class="tabContainer"> 
 					 <div id="tabsLine-1" class="tabContent">
-						<div class="three_column"> 
-						 <ul> 
+						<div> 
+						 <ul class="column four_column"> 
 							<li><label>Type of Inventory Org : </label> 
 							 <?php echo form::select_field_from_object('type', inventory::inventory_org_types(), 'option_line_code', 'option_line_code', $inventory->type, 'type', $readonly); ?>
 							</li> 
@@ -85,8 +85,8 @@
 					 <!--              end of tab1-->
 
 					 <div id="tabsLine-2"  class="tabContent">
-						<div class="three_column"> 
-						 <ul>
+						<div> 
+						 <ul class="column four_column"> 
 							<li><label>Item Rev Enabled : </label>
 							 <?php echo form::checkBox_field('item_rev_enabled_cb', $inventory->item_rev_enabled_cb, 'item_rev_enabled_cb', $readonly); ?>
 							</li> 
@@ -134,8 +134,8 @@
 					 <!--end of tab2-->
 
 					 <div id="tabsLine-3"  class="tabContent">
-						<div class="three_column"> 
-						 <ul>
+						<div> 
+						 <ul class="column four_column"> 
 							<li><label>Available to promise : </label> 
 							 <input type="text" name="atp" value="<?php echo htmlentities($inventory->atp); ?>" 
 											maxlength="50"  id="atp"> 

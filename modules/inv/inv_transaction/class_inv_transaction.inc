@@ -4,7 +4,7 @@ class inv_transaction extends dbObject {
 
  public static $table_name = "inv_transaction";
  public static $primary_column = "inv_transaction_id";
- public static $key_column = 'item_id';
+ public static $key_column = 'item_id_m';
  public static $module = "inv";
  public static $gl_journal_category = "INV_INVENTORY";
  public static $allowed_inv_transactions = [
@@ -19,7 +19,7 @@ class inv_transaction extends dbObject {
 		 'status',
 		 'receipt_line_id',
 		 'item_number',
-		 'item_id',
+		 'item_id_m',
 		 'uom_id',
 		 'lot_number',
 		 'serial_number',
@@ -63,7 +63,7 @@ class inv_transaction extends dbObject {
 		 "inv_transaction_id",
 		 "transaction_type_id",
 		 'status',
-		 "item_id",
+		 "item_id_m",
 		 "org_id",
 		 "item_number",
 		 "creation_date",
@@ -97,11 +97,10 @@ class inv_transaction extends dbObject {
 		 "transaction_type_id"
  ];
  public $requiredField = [
-//		 "item_number",
 		 "uom_id",
 		 "quantity",
 		 "org_id",
-		 "item_id",
+		 "item_id_m",
 		 "transaction_type_id"
  ];
  public $search = [
@@ -117,7 +116,7 @@ class inv_transaction extends dbObject {
  public $status;
  public $receipt_line_id;
  public $item_number;
- public $item_id;
+ public $item_id_m;
  public $uom_id;
  public $lot_number;
  public $serial_number;
@@ -204,7 +203,7 @@ class inv_transaction extends dbObject {
 	}
  }
 
- public function _before_submit() {
+ public function _before_save() {
 	if (!(empty($this->transaction_type_id))) {
 	 switch ($this->transaction_type_id) {
 		case 1 :
@@ -261,7 +260,12 @@ class inv_transaction extends dbObject {
 	$gjh->description = $gjh->journal_name . '-' . current_time();
 	$gjh->balance_type = 'A';
 	$gjh->audit_trial();
-	$gjh->save();
+	$gjh->gl_journal_header_id = null;
+	if ($gjh->validate_requiredField()) {
+	 $gjh->save();
+	}else{
+	 return;
+	}
 	$this->gl_journal_header_id = $gjh->gl_journal_header_id;
 	echo "<br> The New Journal Header Id is " . $this->gl_journal_header_id;
 	return $gjh->gl_journal_header_id;
@@ -281,13 +285,18 @@ class inv_transaction extends dbObject {
 	 $new_gjl->total_cr = $data_a['amount'];
 	 $new_gjl->total_ac_cr = $data_a['amount'];
 	}
-	$new_gjl->description = 'Inv Transaction Id ' . $this->inv_transaction_id . ' item id ' . $this->item_id;
+	$new_gjl->description = 'Inv Transaction Id ' . $this->inv_transaction_id . ' item id ' . $this->item_id_m;
 	$new_gjl->reference_type = 'table';
 	$new_gjl->reference_key_name = 'inv_transaction';
 	$new_gjl->reference_key_value = $this->inv_transaction_id;
 	$new_gjl->audit_trial();
+	$val_result = $new_gjl->validate_requiredField();
+	if($val_result){
 	$new_gjl->save();
-	$dbc->confirm();
+	}else{
+	  return;
+	}
+//	$dbc->confirm();
  }
 
  private function _cretae_journal_line_array($element_value_a, $subinventory_id, $dr_cr, $line_number = '1') {
@@ -368,6 +377,7 @@ class inv_transaction extends dbObject {
 
  public function _after_save() {
 	global $db;
+	global $dbc;
 	$onhand = new onhand();
 	$journal_line_a = [];
 	$element_array = ['mat', 'moh', 'oh', 'res', 'osp'];
@@ -376,11 +386,18 @@ class inv_transaction extends dbObject {
 	}
 
 	$ich = new cst_item_cost_header();
-	$ich->item_id = $this->item_id;
+	$ich->item_id_m = $this->item_id_m;
 	$ich->bom_cost_type = 'FROZEN';
-	$ich_i = $ich->findBy_ItemId_CostType();
+	$ich->org_id = $this->org_id;
+	$ich_i = $ich->findBy_ItemId_orgId_CostType();
 	$icl = new cst_item_cost_line();
-	$icl_i = $icl->findBy_parentId($ich_i->cst_item_cost_header_id);
+	if (!empty($ich_i)) {
+	 $icl_i = $icl->findBy_parentId($ich_i->cst_item_cost_header_id);
+	} else {
+	 echo "<div class='message'>Frozen cost is not available for the entered item id $ich->item_id_m</div>";
+	 $dbc->rollback = true;
+	 return;
+	}
 	if (!empty($icl_i)) {
 	 foreach ($icl_i as $cost_lines) {
 		$mat += array_search('MAT', ((array) $cost_lines)) ? $cost_lines->amount : 0;
@@ -402,7 +419,7 @@ class inv_transaction extends dbObject {
 		$onhand->setProperty('_from_subinventory_id', $this->from_subinventory_id);
 		$onhand->setProperty('_from_locator_id', $this->from_locator_id);
 		$onhand->setProperty('_transaction_quantity', $this->quantity);
-		$onhand->item_id = $this->item_id;
+		$onhand->item_id_m = $this->item_id_m;
 		$update_result = $onhand->updateOnhand();
 		//create journals for Misc Issue/ WIP Return 
 		$journal_line_a = $this->_cretae_journal_line_array($element_value_a, $this->from_subinventory_id, 'cr', 1);
@@ -473,7 +490,7 @@ class inv_transaction extends dbObject {
 		$onhand->setProperty('_to_subinventory_id', $this->to_subinventory_id);
 		$onhand->setProperty('_to_locator_id', $this->to_locator_id);
 		$onhand->setProperty('_transaction_quantity', $this->quantity);
-		$onhand->item_id = $this->item_id;
+		$onhand->item_id_m = $this->item_id_m;
 		$update_result = $onhand->updateOnhand();
 		//create journals for  Misc Receipt/ WIP Assembly Completion
 		$journal_line_a = $this->_cretae_journal_line_array($element_value_a, $this->to_subinventory_id, 'dr', 1);
@@ -561,7 +578,7 @@ class inv_transaction extends dbObject {
 		$onhand->setProperty('_to_subinventory_id', $this->to_subinventory_id);
 		$onhand->setProperty('_to_locator_id', $this->to_locator_id);
 		$onhand->setProperty('_transaction_quantity', $this->quantity);
-		$onhand->item_id = $this->item_id;
+		$onhand->item_id_m = $this->item_id_m;
 		$onhand->org_id = $this->org_id;
 		$update_result = $onhand->updateOnhand();
 		$journal_line_from_a = $this->_cretae_journal_line_array($element_value_a, $this->from_subinventory_id, 'cr', 1);
@@ -582,7 +599,6 @@ class inv_transaction extends dbObject {
 
 	if ($update_result > 0) {
 	 $this->_save_journal_header();
-//	 pa($journal_line_a);
 	 foreach ($journal_line_a as $journal_lines) {
 		$this->_save_journal_lines($journal_lines);
 	 }
@@ -652,8 +668,8 @@ class inv_transaction extends dbObject {
 		 $inv_transaction = new inv_transaction;
 		 $inv_transaction->org_id = $org_id;
 		 $inv_transaction->transaction_type_id = 6;
-		 $inv_transaction->item_id = $bomline->component_item_id;
-		 $item = item::find_by_id($inv_transaction->item_id);
+		 $inv_transaction->item_id_m = $bomline->component_item_id_m;
+		 $item = item::find_by_id($inv_transaction->item_id_m);
 		 $inv_transaction->uom_id = $item->uom_id;
 		 $inv_transaction->item_number = $item->item_number;
 		 $inv_transaction->quantity = $bomline->usage_quantity * $quantity;
@@ -707,8 +723,8 @@ class inv_transaction extends dbObject {
 		 $inv_transaction = new inv_transaction;
 		 $inv_transaction->org_id = $org_id;
 		 $inv_transaction->transaction_type_id = 7;
-		 $inv_transaction->item_id = $bomline->component_item_id;
-		 $item = item::find_by_id($inv_transaction->item_id);
+		 $inv_transaction->item_id_m = $bomline->component_item_id_m;
+		 $item = item::find_by_id($inv_transaction->item_id_m);
 		 $inv_transaction->uom_id = $item->uom_id;
 		 $inv_transaction->item_number = $item->item_number;
 		 $inv_transaction->quantity = $bomline->usage_quantity * $quantity;

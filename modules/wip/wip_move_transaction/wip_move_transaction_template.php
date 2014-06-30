@@ -73,7 +73,7 @@
 					 <div class="first_rowset"> 
 						<ul class="column six_column"> 
 						 						 <li><label>Item Id : </label>
-							<?php form::text_field_drm('item_id'); ?>
+							<?php form::text_field_drm('item_id_m'); ?>
 						 </li>
 						 <li><label>Item Number : </label>
 							<?php form::text_field_dr('item_number'); ?>

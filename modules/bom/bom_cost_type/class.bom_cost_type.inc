@@ -85,13 +85,6 @@ class bom_cost_type extends dbObject {
  public $time;
  public $msg;
 
- public function _before_showing() {
-	
- }
-
- public function _before_submit() {
-	
- }
 
 }
 

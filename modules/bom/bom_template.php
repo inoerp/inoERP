@@ -33,7 +33,7 @@
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
 						 <li><label>Item Id : </label>
-							<?php form::text_field_drm('item_id'); ?>
+							<?php form::text_field_drm('item_id_m'); ?>
 						 </li>
 						 <li><label>Item Number(2) : </label>
 							<?php $f->text_field_d('item_number', 'select_item_number'); ?>
@@ -66,7 +66,7 @@
 					 <div> 
 						<ul class="column five_column">
 						 <li><label>Common BOM Item Id: </label>
-							<?php form::text_field_widsr('common_bom_item_id'); ?>
+							<?php form::text_field_widsr('common_bom_item_id_m'); ?>
 						 </li>
 						 <li><label>Item Number : </label>
 							<?php form::text_field_wid('commonBom_item_number'); ?>
@@ -127,7 +127,7 @@
  							<td><?php form::text_field_wid2sr('bom_line_id'); ?></td>
  							<td><?php $f->text_field_d2s('bom_sequence', 'lines_number');?></td>
  							<td><?php echo!empty($routing_line_details) ? form::select_field_from_object('routing_sequence', $routing_line_details, 'bom_routing_line_id', 'routing_sequence', $$class_second->routing_sequence, '', $readonly, 'usage_basis', '', 1) : form::text_field_wid2sm('routing_sequence'); ?></td>
- 							<td><?php $f->text_field_wid2sr('component_item_id', 'item_id'); ?></td>
+ 							<td><?php $f->text_field_wid2sr('component_item_id_m', 'item_id_m'); ?></td>
  							<td><?php $f->text_field_wid2('component_item_number', 'select_item_number'); ?>
  							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
  							<td><?php $f->text_field_wid2('component_description', 'item_description'); ?></td>

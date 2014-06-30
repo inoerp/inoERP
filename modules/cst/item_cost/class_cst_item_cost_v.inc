@@ -7,7 +7,7 @@ class cst_item_cost_v extends dbObject {
  public $field_a = [
 		 'item_number',
 		 'item_description',
-		 'item_id',
+		 'item_id_m',
 		 'org_id',
 		 'org',
 		 'standard_cost',
@@ -18,13 +18,13 @@ class cst_item_cost_v extends dbObject {
  ];
  public $initial_search = [
 		 'item_number',
-		 'item_id',
+		 'item_id_m',
 		 'org_id'
  ];
  public $column = [
 		 'item_number',
 		 'item_description',
-		 'item_id',
+		 'item_id_m',
 		 'org_id',
 		 'org',
 		 'bom_cost_type',
@@ -49,7 +49,7 @@ class cst_item_cost_v extends dbObject {
  public $pageTitle = " Item Cost - Find & Update Item Costs "; //page Title
  public $item_number;
  public $item_description;
- public $item_id;
+ public $item_id_m;
  public $org_id;
  public $org;
  public $bom_cost_type;
@@ -66,17 +66,17 @@ class cst_item_cost_v extends dbObject {
 	$sql = "
 CREATE OR REPLACE VIEW cst_item_cost_v
 (
-item_number, item_description, item_id,org_id, org,
+item_number, item_description, item_id_m,org_id, org,
 standard_cost, sales_price, purchase_price, 
 cst_item_cost_header_id, bom_cost_type
 )
 AS
-SELECT  item.item_number, item.item_description, ich.item_id,ich.org_id, org.org,
+SELECT  item.item_number, item.item_description, ich.item_id_m,ich.org_id, org.org,
  sum(icl.amount) as standard_cost, ich.sales_price, ich.purchase_price,
  ich.cst_item_cost_header_id, ich.bom_cost_type
 from cst_item_cost_header ich
 LEFT JOIN cst_item_cost_line icl ON icl.cst_item_cost_header_id = ich.cst_item_cost_header_id
-LEFT JOIN item ON item.item_id = ich.item_id
+LEFT JOIN item ON item.item_id_m = ich.item_id_m
 LEFT JOIN org ON org.org_id = ich.org_id
 GROUP BY ich.cst_item_cost_header_id
 ORDER BY item.item_number
@@ -87,18 +87,18 @@ ORDER BY item.item_number
  public function findBy_ItemId_CostType() {
 	$sql = " SELECT * FROM  ";
 	$sql .= self::$table_name;
-	$sql .= " WHERE bom_cost_type =:bom_cost_type AND item_id = :item_id ";
+	$sql .= " WHERE bom_cost_type =:bom_cost_type AND item_id_m = :item_id_m ";
 	$sql .= " LIMIT 1 ";
 
-	$param_a = ['bom_cost_type', 'item_id'];
-	$value_a = ['bom_cost_type' => $this->bom_cost_type, 'item_id' => $this->item_id];
+	$param_a = ['bom_cost_type', 'item_id_m'];
+	$value_a = ['bom_cost_type' => $this->bom_cost_type, 'item_id_m' => $this->item_id_m];
 	$result = $this->findBy_sql($sql, $param_a, $value_a);
 	return !empty($result) ? array_pop($result) : false;
  }
 
- public function standardCost_byItemId($item_id = '') {
-	if (!empty($item_id)) {
-	 $this->item_id = $item_id;
+ public function standardCost_byItemId($item_id_m = '') {
+	if (!empty($item_id_m)) {
+	 $this->item_id_m = $item_id_m;
 	}
 	$this->bom_cost_type = 'FROZEN';
 	return $this->findBy_ItemId_CostType();

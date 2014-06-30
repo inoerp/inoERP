@@ -217,7 +217,7 @@
  							<td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
  							<td><?php echo $f->select_field_from_object('receving_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->receving_org_id, '', '', 1, $readonly); ?></td>
  							<td><?php echo form::select_field_from_object('line_type', po_line::po_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, 'line_type', $readonly); ?></td>
- 							<!--<td><?php // form::text_field_wid2sr('item_id'); ?></td>-->
+ 							<!--<td><?php // form::text_field_wid2sr('item_id_m'); ?></td>-->
  							<td><?php form::text_field_wid2('item_number', 'select_item_number'); ?>
  							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
  							<td><?php form::text_field_wid2('item_description'); ?></td>

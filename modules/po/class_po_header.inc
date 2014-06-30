@@ -222,9 +222,9 @@ class po_header extends dbObject {
 		$pol->line_type = 'GOODS';
 		$pol->po_header_id = $po_header_id;
 		$pol->receving_org_id = $_POST['receving_org_id'][$i];
-		$pol->item_id = $_POST['item_id'][$i];
+		$pol->item_id_m = $_POST['item_id_m'][$i];
 		$item = new item();
-		$item->findBy_id($pol->item_id);
+		$item->findBy_id($pol->item_id_m);
 		$pol->item_description = $item->item_description;
 		$pol->uom_id = $item->uom_id;
 		$pol->line_quantity = $_POST['line_quantity'][$i];

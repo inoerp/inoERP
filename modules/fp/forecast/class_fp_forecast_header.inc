@@ -64,9 +64,6 @@ class fp_forecast_header extends dbObject {
  public $last_update_by;
  public $last_update_date;
 
- public function _before_submit() {
-	
- }
 
  Public static function fp_bucket() {
 	$option_header = option_header::find_by_name('FP_BUCKET');
@@ -83,9 +80,9 @@ class fp_forecast_header extends dbObject {
  public function findBy_itemId() {
 	$sql = "SELECT * FROM " .
 					self::$table_name .
-					" where item_id= :item_id LIMIT 1 ";
-	$param_a = ['item_id'];
-	$value_a = ['item_id' => $this->item_id];
+					" where item_id_m= :item_id_m LIMIT 1 ";
+	$param_a = ['item_id_m'];
+	$value_a = ['item_id_m' => $this->item_id_m];
 	$result_array = $this->findBy_sql($sql, $param_a, $value_a);
 	return !empty($result_array) ? array_pop($result_array) : false;
  }

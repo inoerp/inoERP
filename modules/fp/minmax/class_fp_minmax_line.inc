@@ -4,12 +4,12 @@ class fp_minmax_line extends dbObject {
 
  public static $table_name = "fp_minmax_line";
  public static $primary_column = "fp_minmax_line_id";
- public static $key_column = 'item_id';
+ public static $key_column = 'item_id_m';
  public static $module = "org";
  public $field_a = [
 		 'fp_minmax_line_id',
 		 'fp_minmax_header_id',
-		 'item_id',
+		 'item_id_m',
 		 'min_quantity',
 		 'max_quantity',
 		 'mb_min_quantity',
@@ -26,12 +26,12 @@ class fp_minmax_line extends dbObject {
  public $initial_search = [
 		 'fp_minmax_line_id',
 		 'fp_minmax_header_id',
-		 'item_id',
+		 'item_id_m',
  ];
  public $column = [
 		 'fp_minmax_line_id',
 		 'fp_minmax_header_id',
-		 'item_id',
+		 'item_id_m',
 		 'min_quantity',
 		 'max_quantity',
 		 'mb_min_quantity',
@@ -41,11 +41,11 @@ class fp_minmax_line extends dbObject {
  ];
  public $requiredField = [
 		 'fp_minmax_header_id',
-		 'item_id',
+		 'item_id_m',
  ];
  public $fp_minmax_line_id;
  public $fp_minmax_header_id;
- public $item_id;
+ public $item_id_m;
  public $min_quantity;
  public $max_quantity;
  public $mb_min_quantity;

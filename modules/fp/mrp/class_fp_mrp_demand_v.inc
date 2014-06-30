@@ -4,7 +4,7 @@ class fp_mrp_demand_v extends dbObject {
 
  public static $table_name = "fp_mrp_demand_v";
  public static $primary_column = "fp_mrp_demand_id";
- public static $key_column = 'item_id';
+ public static $key_column = 'item_id_m';
  public static $module = "fp";
  public $field_a = [
 		 'plan_name',
@@ -15,10 +15,10 @@ class fp_mrp_demand_v extends dbObject {
 		 'forecast_description',
 		 'fp_mrp_demand_id',
 		 'fp_mrp_header_id',
-		 'item_id',
+		 'item_id_m',
 		 'quantity',
-		 'demand_item_id',
-		 'toplevel_demand_item_id',
+		 'demand_item_id_m',
+		 'toplevel_demand_item_id_m',
 		 'demand_type',
 		 'source',
 		 'item_number',
@@ -53,7 +53,7 @@ class fp_mrp_demand_v extends dbObject {
  ];
  public $requiredField = [
 		 'fp_mrp_header_id',
-		 'item_id',
+		 'item_id_m',
  ];
  public $search = [
 		 '_view_path' => 'form.php?class_name=fp_mrp_demand',
@@ -67,15 +67,15 @@ class fp_mrp_demand_v extends dbObject {
 		 'MM Planner' => 'search_mrp_planner',
 		 'Item Number From' => 'search_item_number_from',
 		 'Item Number To' => 'search_item_number_to',
-		 'Item Id From' => 'search_item_id_from',
-		 'Item Id To' => 'search_item_id_to'
+		 'Item Id From' => 'search_item_id_m_from',
+		 'Item Id To' => 'search_item_id_m_to'
  ];
  public $fp_mrp_demand_v_id;
  public $fp_mrp_header_id;
- public $item_id;
+ public $item_id_m;
  public $quantity;
- public $demand_item_id;
- public $toplevel_demand_item_id;
+ public $demand_item_id_m;
+ public $toplevel_demand_item_id_m;
  public $demand_type;
  public $source;
  public $created_by;
@@ -110,8 +110,8 @@ CREATE OR REPLACE VIEW fp_mrp_demand_v
 (
 plan_name, org_id, planning_horizon_days, org, 	 
 forecast,forecast_description, 
-	 fp_mrp_demand_id, fp_mrp_header_id, item_id, quantity,demand_item_id,
-		 toplevel_demand_item_id, demand_type, source,
+	 fp_mrp_demand_id, fp_mrp_header_id, item_id_m, quantity,demand_item_id_m,
+		 toplevel_demand_item_id_m, demand_type, source,
 		 item_number, item_description, 
 		top_level_item_number , top_level_item_description,
 		 demand_item_number ,demand_item_description,
@@ -120,8 +120,8 @@ forecast,forecast_description,
 AS
  SELECT 
 mrph.mrp_name, mrph.org_id, mrph.planning_horizon_days, org.org, 	 
-	 fmd.fp_mrp_demand_id, fmd.fp_mrp_header_id, fmd.item_id, fmd.quantity,fmd.demand_item_id,
-		 fmd.toplevel_demand_item_id, fmd.source_type, fmd.primary_source_type, fmd.source_header_id, fmd.source_line_id,
+	 fmd.fp_mrp_demand_id, fmd.fp_mrp_header_id, fmd.item_id_m, fmd.quantity,fmd.demand_item_id_m,
+		 fmd.toplevel_demand_item_id_m, fmd.source_type, fmd.primary_source_type, fmd.source_header_id, fmd.source_line_id,
 		 fh.forecast as order_number ,fmd.source_line_id as order_line, 
 		 item.item_number, item.item_description, 
 		 item2.item_number as top_level_item_number , item2.item_description as top_level_item_description,
@@ -132,9 +132,9 @@ mrph.mrp_name, mrph.org_id, mrph.planning_horizon_days, org.org,
    FROM fp_mrp_demand fmd
 	 LEFT JOIN fp_mrp_header mrph ON mrph.fp_mrp_header_id = fmd.fp_mrp_header_id
 	 LEFT JOIN fp_forecast_header fh ON fh.fp_forecast_header_id = fmd.source_header_id
-	 LEFT JOIN item ON item.item_id = fmd.item_id
-	 LEFT JOIN item item2 ON item2.item_id = fmd.toplevel_demand_item_id
-	 LEFT JOIN item item3 ON item3.item_id = fmd.demand_item_id
+	 LEFT JOIN item ON item.item_id_m = fmd.item_id_m
+	 LEFT JOIN item item2 ON item2.item_id_m = fmd.toplevel_demand_item_id_m
+	 LEFT JOIN item item3 ON item3.item_id_m = fmd.demand_item_id_m
 	 LEFT JOIN org ON org.org_id = mrph.org_id
 	 
 WHERE fmd.primary_source_type = 'Forecast'
@@ -143,8 +143,8 @@ UNION
 
  SELECT 
 mrph.mrp_name, mrph.org_id, mrph.planning_horizon_days, org.org, 	 
-	 fmd.fp_mrp_demand_id, fmd.fp_mrp_header_id, fmd.item_id, fmd.quantity,fmd.demand_item_id,
-		 fmd.toplevel_demand_item_id, fmd.source_type, fmd.primary_source_type, fmd.source_header_id, fmd.source_line_id,
+	 fmd.fp_mrp_demand_id, fmd.fp_mrp_header_id, fmd.item_id_m, fmd.quantity,fmd.demand_item_id_m,
+		 fmd.toplevel_demand_item_id_m, fmd.source_type, fmd.primary_source_type, fmd.source_header_id, fmd.source_line_id,
 		 ssh.so_number as order_number ,soline.line_number as order_line, 
 		 item.item_number, item.item_description, 
 		 item2.item_number as top_level_item_number , item2.item_description as top_level_item_description,
@@ -156,9 +156,9 @@ mrph.mrp_name, mrph.org_id, mrph.planning_horizon_days, org.org,
 	 LEFT JOIN fp_mrp_header mrph ON mrph.fp_mrp_header_id = fmd.fp_mrp_header_id
 	 LEFT JOIN sd_so_header ssh ON ssh.sd_so_header_id = fmd.source_header_id
 	 LEFT JOIN sd_so_line soline ON soline.sd_so_line_id = fmd.source_line_id
-	 LEFT JOIN item ON item.item_id = fmd.item_id
-	 LEFT JOIN item item2 ON item2.item_id = fmd.toplevel_demand_item_id
-	 LEFT JOIN item item3 ON item3.item_id = fmd.demand_item_id
+	 LEFT JOIN item ON item.item_id_m = fmd.item_id_m
+	 LEFT JOIN item item2 ON item2.item_id_m = fmd.toplevel_demand_item_id_m
+	 LEFT JOIN item item3 ON item3.item_id_m = fmd.demand_item_id_m
 	 LEFT JOIN org ON org.org_id = mrph.org_id
 	 
 WHERE fmd.primary_source_type = 'Sales_Order';

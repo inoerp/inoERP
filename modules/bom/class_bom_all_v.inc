@@ -6,12 +6,12 @@ class bom_all_v extends dbObject {
  public static $primary_column = "bom_header_id";
  public $field_a = [
 		 'bom_header_id',
-		 'item_id',
+		 'item_id_m',
 		 'alternate_bom',
 		 'org_id',
 		 'bom_revision',
 		 'effective_date',
-		 'common_bom_item_id',
+		 'common_bom_item_id_m',
 		 'item_number',
 		 'item_description',
 		 'uom_id',
@@ -28,7 +28,7 @@ class bom_all_v extends dbObject {
  ];
  public $initial_search = [
 		 'bom_header_id',
-		 'item_id',
+		 'item_id_m',
 		 'org_id',
 		 'item_number',
 		 'item_description',
@@ -40,7 +40,7 @@ class bom_all_v extends dbObject {
  ];
  public $column = [
 		 'bom_header_id',
-		 'item_id',
+		 'item_id_m',
 		 'org_id',
 		 'item_number',
 		 'item_description',
@@ -59,12 +59,12 @@ class bom_all_v extends dbObject {
 		 '_extra_path' => array('form.php?class_name=indented_bom&mode=9' => 'Indented BOM')
  ];
  public $bom_header_id;
- public $item_id;
+ public $item_id_m;
  public $alternate_bom;
  public $org_id;
  public $bom_revision;
  public $effective_date;
- public $common_bom_item_id;
+ public $common_bom_item_id_m;
  public $item_number;
  public $item_description;
  public $uom_id;
@@ -87,20 +87,20 @@ class bom_all_v extends dbObject {
 	$sql = "
 CREATE OR REPLACE VIEW bom_all_v
 (
-bom_header_id, item_id, alternate_bom, org_id , bom_revision, effective_date, common_bom_item_id,
+bom_header_id, item_id_m, alternate_bom, org_id , bom_revision, effective_date, common_bom_item_id_m,
 item_number, item_description, uom_id, item_type, item_status, bom_type,
 costing_enabled_cb, make_buy,
 org, org_type, org_status, org_description, org_code
 )
 AS
 SELECT 
-bh.bom_header_id, bh.item_id, bh.alternate_bom, bh.org_id , bh.bom_revision, bh.effective_date, bh.common_bom_item_id,
+bh.bom_header_id, bh.item_id_m, bh.alternate_bom, bh.org_id , bh.bom_revision, bh.effective_date, bh.common_bom_item_id_m,
 item.item_number, item.item_description, item.uom_id, item.item_type, item.item_status, item.bom_type,
 item.costing_enabled_cb, item.make_buy,
 org.org, org.type, org.status, org.description, org.code
 
 FROM bom_header bh
-LEFT JOIN item ON item.item_id = bh.item_id
+LEFT JOIN item ON item.item_id_m = bh.item_id_m
 LEFT JOIN org ON org.org_id = bh.org_id
 
 ";

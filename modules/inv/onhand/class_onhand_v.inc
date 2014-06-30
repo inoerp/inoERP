@@ -13,7 +13,7 @@ class onhand_v extends dbObject {
 		 'locator',
 		 'uom_id',
 		 'onhand',
-		 'item_id',
+		 'item_id_m',
 		 'org_id',
 		 'subinventory_id',
 		 'locator_id',
@@ -40,7 +40,7 @@ class onhand_v extends dbObject {
 		 'locator',
 		 'uom_id',
 		 'onhand',
-		 'item_id',
+		 'item_id_m',
 		 'org_id',
 		 'subinventory_id',
 		 'locator_id',
@@ -54,7 +54,7 @@ class onhand_v extends dbObject {
 		 'locator',
 		 'uom_id',
 		 'onhand',
-		 'item_id',
+		 'item_id_m',
 		 'org_id',
 		 'subinventory_id',
 		 'locator_id',
@@ -121,7 +121,7 @@ class onhand_v extends dbObject {
  public $locator;
  public $uom_id;
  public $onhand;
- public $item_id;
+ public $item_id_m;
  public $org_id;
  public $subinventory_id;
  public $locator_id;
@@ -149,7 +149,7 @@ class onhand_v extends dbObject {
 	 CREATE OR REPLACE VIEW onhand_v
 (onhand_id, item_number, item_description, product_line, org_name, subinventory, locator,
 uom_id,onhand, standard_cost, onhand_value,
-item_id, org_id, subinventory_id, subinventory_type,
+item_id_m, org_id, subinventory_id, subinventory_type,
 locator_id, lot_id, serial_id, reservable_onhand, 
 transactable_onhand, lot_status, serial_status,  
 secondary_uom_id, onhand_status, ef_id, created_by, 
@@ -160,18 +160,19 @@ item.item_number, item.item_description, item.product_line,
 org.org, subinventory.subinventory, locator.locator,
 onhand.uom_id,onhand.onhand,
 cic.standard_cost, (onhand.onhand * cic.standard_cost) as onhand_value,
-onhand.item_id, onhand.org_id, onhand.subinventory_id, subinventory.type,
+onhand.item_id_m, onhand.org_id, onhand.subinventory_id, subinventory.type,
 onhand.locator_id, onhand.lot_id, onhand.serial_id, onhand.reservable_onhand, 
 onhand.transactable_onhand, onhand.lot_status, onhand.serial_status,  
 onhand.secondary_uom_id, onhand.onhand_status, onhand.ef_id, onhand.created_by, 
 onhand.creation_date, onhand.last_update_by, onhand.last_update_date
 
 FROM onhand 
-LEFT JOIN item ON onhand.item_id = item.item_id
+LEFT JOIN item ON onhand.item_id_m = item.item_id_m AND item.org_id = onhand.org_id
 LEFT JOIN org ON onhand.org_id = org.org_id
 LEFT JOIN subinventory ON onhand.subinventory_id = subinventory.subinventory_id
 LEFT JOIN locator ON onhand.locator_id = locator.locator_id
-LEFT JOIN cst_item_cost_v cic ON cic.item_id = onhand.item_id WHERE cic.bom_cost_type='FROZEN'
+LEFT JOIN cst_item_cost_v cic ON cic.item_id_m = onhand.item_id_m AND cic.bom_cost_type='FROZEN'
+     AND cic.org_id = onhand.org_id
 ";
  }
 

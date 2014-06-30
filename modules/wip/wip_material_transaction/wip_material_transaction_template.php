@@ -46,7 +46,7 @@
          </tr>
         </table>
 				<div id ="form_line" class="form_line"><span class="heading">Transaction Details </span>
-				 <div id="tabs">
+				 <div id="tabsLine">
 					<ul class="tabMain">
 					 <li><a href="#tabsLine-1">General Info</a></li>
 					 <li><a href="#tabsLine-2">Transfer Info</a></li>
@@ -83,7 +83,7 @@
 							 </td>
 							 <td><?php echo!empty($bom_sequence_stament) ? $bom_sequence_stament : form::text_field_wids('bom_sequence'); ?></td>
 							 <td><?php form::text_field_widsm('wip_wo_bom_id'); ?></td>
-							 <td><?php form::text_field_wids('item_id'); ?></td>
+							 <td><?php form::text_field_wids('item_id_m'); ?></td>
 							 <td><?php form::text_field_drm('item_number'); ?></td>
 							 <td><?php form::text_field_dr('item_description'); ?></td>
 							 <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, '', $readonly); ?></td>

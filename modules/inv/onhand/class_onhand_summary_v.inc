@@ -13,7 +13,7 @@ class onhand_summary_v extends dbObject {
 		 'locator',
 		 'uom_id',
 		 'onhand',
-		 'item_id',
+		 'item_id_m',
 		 'org_id',
 		 'subinventory_id',
 		 'locator_id',
@@ -40,7 +40,7 @@ class onhand_summary_v extends dbObject {
 		 'locator',
 		 'uom_id',
 		 'onhand',
-		 'item_id',
+		 'item_id_m',
 		 'org_id',
 		 'subinventory_id',
 		 'locator_id',
@@ -54,7 +54,7 @@ class onhand_summary_v extends dbObject {
 		 'locator',
 		 'uom_id',
 		 'onhand',
-		 'item_id',
+		 'item_id_m',
 		 'org_id',
 		 'subinventory_id',
 		 'locator_id',
@@ -75,7 +75,7 @@ class onhand_summary_v extends dbObject {
  public $locator;
  public $uom_id;
  public $onhand;
- public $item_id;
+ public $item_id_m;
  public $org_id;
  public $subinventory_id;
  public $locator_id;
@@ -101,18 +101,18 @@ class onhand_summary_v extends dbObject {
 	$sql = "
 	 CREATE OR REPLACE VIEW onhand_summary_v
 (onhand_id, item_number, item_description, org_name, 
-uom_id,onhand, item_id, org_id, reservable_onhand, 
+uom_id,onhand, item_id_m, org_id, reservable_onhand, 
 transactable_onhand
 )
 AS
 SELECT onhand.onhand_id, item.item_number, item.item_description, 
 org.org, onhand.uom_id, Sum(onhand.onhand),
-onhand.item_id, onhand.org_id,  onhand.reservable_onhand, 
+onhand.item_id_m, onhand.org_id,  onhand.reservable_onhand, 
 onhand.transactable_onhand
 FROM onhand 
-LEFT JOIN item ON onhand.item_id = item.item_id
+LEFT JOIN item ON onhand.item_id_m = item.item_id_m and item.org_id = onhand.org_id
 LEFT JOIN org ON onhand.org_id = org.org_id
-GROUP BY onhand.item_id, onhand.org_id
+GROUP BY onhand.item_id_m, onhand.org_id
 ";
  }
 

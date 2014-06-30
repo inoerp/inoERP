@@ -1,11 +1,11 @@
 function setValFromSelectPage(ar_transaction_header_id, combination, ar_customer_id, customer_number, customer_name,
-				item_id, item_number, item_description, uom_id) {
+				item_id_m, item_number, item_description, uom_id) {
  this.ar_transaction_header_id = ar_transaction_header_id;
  this.combination = combination;
  this.ar_customer_id = ar_customer_id;
  this.customer_number = customer_number;
  this.customer_name = customer_name;
- this.item_id = item_id;
+ this.item_id_m = item_id_m;
  this.item_number = item_number;
  this.item_description = item_description;
  this.uom_id = uom_id;
@@ -18,7 +18,7 @@ setValFromSelectPage.prototype.setVal = function() {
  var customer_number = this.customer_number;
  var customer_name = this.customer_name;
  var combination = this.combination;
- var item_id = this.item_id;
+ var item_id_m = this.item_id_m;
  var item_number = this.item_number;
  var item_description = this.item_description;
  var uom_id = this.uom_id;
@@ -41,8 +41,8 @@ setValFromSelectPage.prototype.setVal = function() {
  if (combination) {
 	$('#content').find(rowClass).find(fieldClass).val(combination);
  }
- if (item_id) {
-	$('#content').find(rowClass).find('.item_id').val(item_id);
+ if (item_id_m) {
+	$('#content').find(rowClass).find('.item_id_m').val(item_id_m);
  }
  if (item_number) {
 	$('#content').find(rowClass).find('.item_number').val(item_number);

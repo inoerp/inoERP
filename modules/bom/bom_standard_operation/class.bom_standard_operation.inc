@@ -96,18 +96,7 @@ class bom_standard_operation extends dbObject {
 // }
 
 
- public function _before_showing() {
-	
- }
-
- public function _before_submit() {
-	
- }
-
 }
 
 //end of resource class
 ?>
-
-
-

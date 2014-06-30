@@ -261,7 +261,7 @@
  							<!--<td><?php // form::text_field_wid2s('line_number');                                                 ?></td>-->
  							<td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
  							<td><?php echo $f->select_field_from_object('line_type', ar_transaction_line::ar_transaction_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, '', 'line_type', '', $readonly); ?></td>
- 							<td><?php $f->text_field_wid2sr('item_id'); ?></td>
+ 							<td><?php $f->text_field_wid2sr('item_id_m'); ?></td>
  							<td><?php $f->text_field_wid2('item_number', 'select_item_number'); ?>
  							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
  							<td><?php $f->text_field_wid2('item_description'); ?></td>

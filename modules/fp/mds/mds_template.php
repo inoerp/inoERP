@@ -109,7 +109,7 @@
  							</td>
  							<td><?php $f->seq_field_d($count); ?></td>
  							<td><?php form::text_field_wid2sr('fp_mds_line_id'); ?></td>
- 							<td><?php form::text_field_wid2sr('item_id'); ?></td>
+ 							<td><?php form::text_field_wid2sr('item_id_m_m'); ?></td>
  							<td><?php form::text_field_wid2('item_number', 'select_item_number'); ?>
  							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
  							<td><?php echo $f->date_fieldAnyDay('demand_date', $$class_second->demand_date); ?></td>

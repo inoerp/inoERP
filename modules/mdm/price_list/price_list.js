@@ -1,6 +1,6 @@
-function setValFromSelectPage(mdm_price_list_header_id, item_id, item_number, item_description, uom_id) {
+function setValFromSelectPage(mdm_price_list_header_id, item_id_m, item_number, item_description, uom_id) {
  this.mdm_price_list_header_id = mdm_price_list_header_id;
- this.item_id = item_id;
+ this.item_id_m = item_id_m;
  this.item_number = item_number;
  this.item_description = item_description;
  this.uom_id = uom_id;
@@ -8,7 +8,7 @@ function setValFromSelectPage(mdm_price_list_header_id, item_id, item_number, it
 
 setValFromSelectPage.prototype.setVal = function() {
  var mdm_price_list_header_id = this.mdm_price_list_header_id;
- var item_id = this.item_id;
+ var item_id_m = this.item_id_m;
  var item_number = this.item_number;
  var item_description = this.item_description;
  var uom_id = this.uom_id;
@@ -23,8 +23,8 @@ setValFromSelectPage.prototype.setVal = function() {
  
   rowClass = rowClass.replace(/\s+/g, '.');
  fieldClass = fieldClass.replace(/\s+/g, '.');
- if (item_id) {
-	$('#content').find(rowClass).find('.item_id').val(item_id);
+ if (item_id_m) {
+	$('#content').find(rowClass).find('.item_id_m').val(item_id_m);
  }
  if (item_number) {
 	$('#content').find(rowClass).find('.item_number').val(item_number);

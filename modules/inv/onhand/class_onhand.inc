@@ -5,12 +5,12 @@ class onhand extends dbObject {
  public static $table_name = "onhand";
  protected static $view_name = "onhand_v";
  public static $primary_column = "onhand_id";
- public static $key_column = 'item_id';
+ public static $key_column = 'item_id_m';
  public static $module = "inv";
 //  data base variables as stored database column name
  public $field_a = [
 		 'onhand_id',
-		 'item_id',
+		 'item_id_m',
 		 'org_id',
 		 'subinventory_id',
 		 'locator_id',
@@ -36,7 +36,7 @@ class onhand extends dbObject {
 		 "locator_id",
 		 "uom_id",
 		 "onhand_id",
-		 "item_id",
+		 "item_id_m",
  ];
 //variables used for showing data
  public $column = [
@@ -49,7 +49,7 @@ class onhand extends dbObject {
 		 "onhand",
 		 "sum_onhand",
 		 "onhand_id",
-		 "item_id",
+		 "item_id_m",
  ];
 // public static $checkbox_array =["rev_enabled"                                 
 //                                 ];
@@ -57,7 +57,7 @@ class onhand extends dbObject {
  public static $group_by = ["locator", "subInventory", "inventory"];
  public $sum_onhand;
  public $onhand_id;
- public $item_id;
+ public $item_id_m;
  public $org_id;
  public $subinventory_id;
  public $locator_id;
@@ -142,7 +142,7 @@ VAR;
  private function create_onhand_v() {
 	$sql = "CREATE OR REPLACE VIEW onhand_v
 (onhand_id, item_number, item_description, org_name, subinventory, locator,
-uom_id,onhand, item_id, org_id, subinventory_id, 
+uom_id,onhand, item_id_m, org_id, subinventory_id, 
 locator_id, lot_id, serial_id, reservable_onhand, 
 transactable_onhand, lot_status, serial_status,  
 secondary_uom_id, onhand_status, ef_id, created_by, 
@@ -151,14 +151,14 @@ AS
 SELECT onhand.onhand_id, 
 item.item_number, item.description, org.org, subinventory.subinventory, locator.locator,
 onhand.uom_id,onhand.onhand,
-onhand.item_id, onhand.org_id, onhand.subinventory_id, 
+onhand.item_id_m, onhand.org_id, onhand.subinventory_id, 
 onhand.locator_id, onhand.lot_id, onhand.serial_id, onhand.reservable_onhand, 
 onhand.transactable_onhand, onhand.lot_status, onhand.serial_status,  
 onhand.secondary_uom_id, onhand.onhand_status, onhand.ef_id, onhand.created_by, 
 onhand.creation_date, onhand.last_update_by, onhand.last_update_date
 
 FROM onhand 
-LEFT JOIN item ON onhand.item_id = item.item_id
+LEFT JOIN item ON onhand.item_id_m = item.item_id_m
 LEFT JOIN org ON onhand.org_id = org.org_id
 LEFT JOIN subinventory ON onhand.subinventory_id = subinventory.subinventory_id
 LEFT JOIN locator ON onhand.locator_id = locator.locator_id
@@ -166,7 +166,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
  }
 
  private function _validate_mandatory_fields() {
-	if (empty($this->item_id)) {
+	if (empty($this->item_id_m)) {
 	 echo "<br>Onhand Update Failed!Error @onhand - Item Id Missing" . __LINE__;
 	 return -99;
 	} else if (empty($this->_transaction_quantity)) {
@@ -177,7 +177,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
 
  private function _update_from_onhand() {
 	$from_onhand_sql = " SELECT * FROM onhand";
-	$from_onhand_sql .= " WHERE item_id = '{$this->item_id}' ";
+	$from_onhand_sql .= " WHERE item_id_m = '{$this->item_id_m}' ";
 	$from_onhand_sql .= " AND  	org_id = '{$this->_from_org_id}' ";
 
 	if (!empty($this->_from_subinventory_id)) {
@@ -218,7 +218,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
 
  private function _update_to_onhand() {
 	$to_onhand_sql = " SELECT *  FROM onhand";
-	$to_onhand_sql .= " WHERE item_id = '{$this->item_id}' ";
+	$to_onhand_sql .= " WHERE item_id_m = '{$this->item_id_m}' ";
 	$to_onhand_sql .= " AND  	org_id = '{$this->_to_org_id}' ";
 
 	if (!empty($this->_to_subinventory_id)) {
@@ -311,16 +311,16 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
 	return 1;
  }
 
- public function findOnhand_byItemId($item_id = '') {
-	if (!empty($item_id)) {
-	 $this->item_id = $item_id;
+ public function findOnhand_byItemId($item_id_m = '') {
+	if (!empty($item_id_m)) {
+	 $this->item_id_m = $item_id_m;
 	}
 	$sql = " SELECT * FROM  ";
 	$sql .= self::$table_name;
-	$sql .= " WHERE item_id =:item_id ";
+	$sql .= " WHERE item_id_m =:item_id_m ";
 
-	$param_a = ['item_id'];
-	$value_a = ['item_id' => $this->item_id];
+	$param_a = ['item_id_m'];
+	$value_a = ['item_id_m' => $this->item_id_m];
 	$result = $this->findBy_sql($sql, $param_a, $value_a);
 	return !empty($result) ? $result : false;
  }

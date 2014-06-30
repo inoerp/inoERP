@@ -1,6 +1,6 @@
 function setValFromSelectPage(inv_receipt_header_id, combination, supplier_id, supplier_number,
 				supplier_name, supplier_site_id, supplier_site_name, supplier_site_number,
-				item_id, item_number, item_description, uom_id, po_header_id, po_line_id, po_detail_id,
+				item_id_m, item_number, item_description, uom_id, po_header_id, po_line_id, po_detail_id,
 				po_number, po_line_number, shipment_number, quantity, received_quantity) {
  this.inv_receipt_header_id = inv_receipt_header_id;
  this.combination = combination;
@@ -10,7 +10,7 @@ function setValFromSelectPage(inv_receipt_header_id, combination, supplier_id, s
  this.supplier_site_id = supplier_site_id;
  this.supplier_site_name = supplier_site_name;
  this.supplier_site_number = supplier_site_number;
- this.item_id = item_id;
+ this.item_id_m = item_id_m;
  this.item_number = item_number;
  this.item_description = item_description;
  this.uom_id = uom_id;
@@ -34,7 +34,7 @@ setValFromSelectPage.prototype.setVal = function() {
  rowClass = rowClass.replace(/\s+/g, '.');
  fieldClass = fieldClass.replace(/\s+/g, '.');
 
- var item_obj = [{id: 'item_id', data: this.item_id},
+ var item_obj = [{id: 'item_id_m', data: this.item_id_m},
 	{id: 'po_line_id', data: this.po_line_id},
 	{id: 'item_number', data: this.item_number},
 	{id: 'item_description', data: this.item_description},

@@ -14,7 +14,7 @@ class sd_so_header extends dbObject {
  public $field_a = [
 		 'sd_so_header_id',
 		 'bu_org_id',
-		 'so_type',
+		 'document_type',
 		 'so_number',
 		 'ar_customer_id',
 		 'ar_customer_site_id',
@@ -34,7 +34,7 @@ class sd_so_header extends dbObject {
 		 'exchange_rate',
 		 'released_amount',
 		 "ef_id",
-		 "approval_status",
+		 'so_status',
 		 "rev_enabled_cb",
 		 "rev_number",
 		 "created_by",
@@ -51,7 +51,7 @@ class sd_so_header extends dbObject {
  public $column = [
 		 "sd_so_header_id",
 		 "so_number",
-		 "approval_status",
+		 "so_status",
 		 "ar_customer_id",
 		 "creation_date",
  ];
@@ -68,6 +68,7 @@ class sd_so_header extends dbObject {
 		 'bill_to_id'
  ];
  public $fields_inForm_notInDataBase = [
+		 'set_so_status',
 		 "customer_name",
 		 "customer_number",
 		 "customer_site_name",
@@ -94,12 +95,11 @@ class sd_so_header extends dbObject {
  ];
  public $pageTitle = " SO - Sales Orders "; //page Title
  public $option_lists = [
-		 'so_type' => 'SO_TYPE',
 		 'approval_status' => 'APPROVAL_STATUS',
  ];
  public $sd_so_header_id;
  public $bu_org_id;
- public $so_type;
+ public $document_type;
  public $so_number;
  public $ar_customer_id;
  public $ar_customer_site_id;
@@ -119,7 +119,8 @@ class sd_so_header extends dbObject {
  public $exchange_rate;
  public $released_amount;
  public $ef_id;
- public $approval_status;
+ public $set_so_status;
+ public $so_status;
  public $rev_enabled_cb;
  public $rev_number;
  public $created_by;
@@ -181,8 +182,12 @@ class sd_so_header extends dbObject {
  }
 
  public function _before_save() {
-	if (empty($this->approval_status)) {
-	 $this->approval_status = 'Entered';
+	if (!empty($this->set_so_status)) {
+	 $this->so_status = $this->set_so_status;
+	}
+
+	if (empty($this->so_status)) {
+	 $this->so_status = 'ENTERED';
 	}
  }
 
@@ -237,8 +242,8 @@ class sd_so_header extends dbObject {
 	return $so_types;
  }
 
- Public static function approval_status() {
-	$option_header = option_header::find_by_name('APPROVAL_STATUS');
+ Public static function so_status() {
+	$option_header = option_header::find_by_name('SD_SO_STATUS');
 	$so_status = option_line::find_by_option_id($option_header->option_header_id);
 	return $so_status;
  }

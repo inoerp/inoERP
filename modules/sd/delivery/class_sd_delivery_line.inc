@@ -15,7 +15,7 @@ class sd_delivery_line extends dbObject {
 		 'sd_so_header_id',
 		 'sd_so_line_id',
 		 'shipping_org_id',
-		 'item_id',
+		 'item_id_m',
 		 'quantity',
 		 'staging_subinventory_id',
 		 'staging_locator_id',
@@ -75,7 +75,7 @@ class sd_delivery_line extends dbObject {
 		 'sd_so_header_id',
 		 'sd_so_line_id',
 		 'shipping_org_id',
-		 'item_id',
+		 'item_id_m',
 		 'picking_date',
  ];
  public $column = [
@@ -84,7 +84,7 @@ class sd_delivery_line extends dbObject {
 		 'sd_so_header_id',
 		 'sd_so_line_id',
 		 'shipping_org_id',
-		 'item_id',
+		 'item_id_m',
 		 'quantity',
 		 'staging_subinventory_id',
 		 'staging_locator_id',
@@ -104,7 +104,7 @@ class sd_delivery_line extends dbObject {
  public $sd_so_header_id;
  public $sd_so_line_id;
  public $shipping_org_id;
- public $item_id;
+ public $item_id_m;
  public $quantity;
  public $staging_subinventory_id;
  public $staging_locator_id;
@@ -159,8 +159,7 @@ class sd_delivery_line extends dbObject {
 	 return 10;
 	} else if (($this->action == 'COMPLETE_SHIPMENT')) {
 	 echo "<br> Starting to complete the shipment ";
-	 pa($this);
-	 $this->_complete_shipment();
+		 $this->_complete_shipment();
 	 return 10;
 	} else {
 	 echo "<br> No Action For Line";
@@ -205,7 +204,7 @@ class sd_delivery_line extends dbObject {
 	$invt->org_id = $this->shipping_org_id;
 	$invt->from_subinventory_id = $this->staging_subinventory_id;
 	$invt->from_locator_id = $this->staging_locator_id;
-	$invt->item_id = $this->item_id;
+	$invt->item_id_m = $this->item_id_m;
 	$invt->uom_id = $this->line_uom_id;
 	$invt->quantity = $this->quantity;
 	$invt->reference_type = 'table';
@@ -214,7 +213,7 @@ class sd_delivery_line extends dbObject {
 	$invt->reason = 'SO Shipping';
 	$invt->sd_so_line_id = $this->sd_so_line_id;
 	$invt->audit_trial();
-	$invt->_before_submit();
+	$invt->_before_save();
 	$invt->save();
 	$invt->_after_save();
 	echo "<br>Sales Order Line Status is Sucessfully Updated";

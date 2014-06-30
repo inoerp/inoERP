@@ -163,6 +163,14 @@ class inventory extends org {
 	$result = self::find_by_sql($sql);
 	return $result;
  }
+ 
+  public static function find_by_org_id($org_id) {
+	$sql = " SELECT * FROM " .
+					self::$table_name .
+					" WHERE org_id= '{$org_id}' ";
+	$result = self::find_by_sql($sql);
+	return !empty($result) ? array_pop($result) : false ;
+ }
 
  public function findAll_itemMaster() {
 	global $db;

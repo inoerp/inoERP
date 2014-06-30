@@ -5,7 +5,7 @@ class cst_item_cost_header extends dbObject {
  public static $table_name = "cst_item_cost_header";
  public static $dependent_classes = ['cst_item_cost_line'];
  public static $primary_column = "cst_item_cost_header_id";
- public static $key_column = 'item_id';
+ public static $key_column = 'item_id_m';
  public static $module = "cst"; //same as gl_journal_source
 // public static $js_fileName = 'modules/cst/item_cost/item_cost.js';
  public static $gl_journal_category = "CST_ADJUSTMENT";
@@ -13,7 +13,7 @@ class cst_item_cost_header extends dbObject {
 		 'cst_item_cost_header_id',
 		 'org_id',
 		 'bom_cost_type',
-		 'item_id',
+		 'item_id_m',
 		 'based_on_rollup_cb',
 		 'include_in_rollup_cb',
 		 'sales_price',
@@ -24,7 +24,7 @@ class cst_item_cost_header extends dbObject {
 		 'last_update_date'
  ];
  public $initial_search = [
-		 'item_id',
+		 'item_id_m',
 		 'based_on_rollup_cb',
 		 'include_in_rollup_cb',
  ];
@@ -32,7 +32,7 @@ class cst_item_cost_header extends dbObject {
 		 'cst_item_cost_header_id',
 		 'org_id',
 		 'bom_cost_type',
-		 'item_id',
+		 'item_id_m',
 		 'based_on_rollup_cb',
 		 'include_in_rollup_cb',
 		 'sales_price',
@@ -41,7 +41,7 @@ class cst_item_cost_header extends dbObject {
  public $requiredField = [
 		 'org_id',
 		 'bom_cost_type',
-		 'item_id',
+		 'item_id_m',
  ];
  public $checkbox = [
 		 "based_on_rollup_cb",
@@ -77,16 +77,16 @@ class cst_item_cost_header extends dbObject {
 		 'Cost Type' => 'search_bom_cost_type',
 		 'Item Number From' => 'search_item_number_from',
 		 'Item Number To' => 'search_item_number_to',
-		 'Item Id From' => 'search_item_id_from',
-		 'Item Id To' => 'search_item_id_to'
+		 'Item Id From' => 'search_item_id_m_from',
+		 'Item Id To' => 'search_item_id_m_to'
  ];
  public $prg_cost_rollup_parameters = [
 		 'Organization' => 'search_org_name',
 		 'Cost Type' => 'search_bom_cost_type',
 		 'Item Number From' => 'search_item_number_from',
 		 'Item Number To' => 'search_item_number_to',
-		 'Item Id From' => 'search_item_id_from',
-		 'Item Id To' => 'search_item_id_to'
+		 'Item Id From' => 'search_item_id_m_from',
+		 'Item Id To' => 'search_item_id_m_to'
  ];
  public $prg_cost_rollup_details = [
 		 'name' => 'Cost Roll Up',
@@ -100,7 +100,7 @@ class cst_item_cost_header extends dbObject {
  public $cst_item_cost_header_id;
  public $bom_cost_type;
  public $org_id;
- public $item_id;
+ public $item_id_m;
  public $based_on_rollup_cb;
  public $include_in_rollup_cb;
  public $sales_price;
@@ -129,21 +129,29 @@ class cst_item_cost_header extends dbObject {
 	return $lines;
  }
 
- public function findBy_ItemId_CostType() {
+ public function findBy_ItemId_orgId_CostType() {
 	$sql = " SELECT * FROM  ";
 	$sql .= self::$table_name;
-	$sql .= " WHERE bom_cost_type =:bom_cost_type AND item_id = :item_id ";
+	$sql .= " WHERE bom_cost_type =:bom_cost_type AND item_id_m = :item_id_m AND org_id = :org_id ";
 	$sql .= " LIMIT 1 ";
+	$value_a = ['bom_cost_type' => $this->bom_cost_type,
+			'item_id_m' => $this->item_id_m, 'org_id' => $this->org_id];
+	$result = $this->findBySql($sql, $value_a);
+	return !empty($result) ? array_pop($result) : false;
+ }
 
-	$param_a = ['bom_cost_type', 'item_id'];
-	$value_a = ['bom_cost_type' => $this->bom_cost_type, 'item_id' => $this->item_id];
-	$result = $this->findBy_sql($sql, $param_a, $value_a);
+ public function find_by_ItemId_orgId_CostType($item_id, $org_id , $bom_cost_type) {
+	$sql = " SELECT * FROM ";
+	$sql .= self::$table_name;
+	$sql .= " WHERE bom_cost_type = '{$bom_cost_type}' ";
+	$sql .= " AND item_id = '{$item_id}' AND org_id = '{$org_id}' ";
+	$result = self::find_by_sql($sql);
 	return !empty($result) ? array_pop($result) : false;
  }
 
  public function find_frozen_cost() {
 	$this->bom_cost_type = 'FROZEN';
-	return $this->findBy_ItemId_CostType();
+	return $this->findBy_ItemId_orgId_CostType();
  }
 
  public function _before_save() {
@@ -157,7 +165,7 @@ class cst_item_cost_header extends dbObject {
 	 return 10;
 	}
 	if ((!empty($this->cst_item_cost_header_id)) && ($this->action == 'COST_ROLLUP') && (($this->bom_cost_type != 'FROZEN'))) {
-	 $this->cost_rollup($this->item_id, $this->bom_cost_type);
+	 $this->cost_rollup($this->item_id_m, $this->bom_cost_type);
 	 return 10;
 	}
 
@@ -209,10 +217,10 @@ class cst_item_cost_header extends dbObject {
  private function _update_standard_cost($parameters) {
 	global $dbc;
 	/*
-	 * 1. First check if frozen cost exists for the item_id 
+	 * 1. First check if frozen cost exists for the item_id_m 
 	 * 2. Copy the header and create/update frozen
 	 * 3. Copy all the line and update with the new frozen cost header id
-	 * $this has 	 item_id & bom_cost_type (Pending), adjustment_Ac as entered parameters & cst_item_cost_header_id if exists
+	 * $this has 	 item_id_m & bom_cost_type (Pending), adjustment_Ac as entered parameters & cst_item_cost_header_id if exists
 	 */
 	$old_records_a = [];
 	$message = "<br><br>Starting to update standard header";
@@ -407,7 +415,7 @@ class cst_item_cost_header extends dbObject {
 
  private function _update_onhandValue_after_costUpdate($old_records_a, $new_records_a, $parameters) {
 	$onhand = new onhand();
-	$onhand_i = $onhand->findOnhand_byItemId($this->item_id);
+	$onhand_i = $onhand->findOnhand_byItemId($this->item_id_m);
 	if (empty($onhand_i)) {
 	 return 10;
 	} else {
@@ -452,55 +460,55 @@ class cst_item_cost_header extends dbObject {
 	 return $this->message;
 	}
 
-	if (!empty($parameters['item_id'][0])) {
+	if (!empty($parameters['item_id_m'][0])) {
 	 $this->message .= "<br>Using Standard cost update by Item Id ";
 	 $ich = new cst_item_cost_header();
-	 $ich->item_id = $parameters['item_id'][0];
+	 $ich->item_id_m = $parameters['item_id_m'][0];
 	 $ich->bom_cost_type = $bom_cost_type;
-	 $ich_i = $ich->findBy_ItemId_CostType();
+	 $ich_i = $ich->findBy_ItemId_orgId_CostType();
 	 if (!empty($ich_i)) {
 		$ich->cst_item_cost_header_id = $ich_i->cst_item_cost_header_id;
 		try {
 		 $this->message .= $ich->_update_standard_cost($parameters);
-		 $this->message .= "<br/>Standard cost update is sucessfully updated for item_id - " . $ich->item_id .
+		 $this->message .= "<br/>Standard cost update is sucessfully updated for item_id_m - " . $ich->item_id_m .
 						 ' bom_cost_type : ' . $ich->bom_cost_type;
 		} catch (Exception $e) {
-		 $this->message .= "<br/>Standard cost update fialed for Item id " . $ich->item_id . $e->getMessage();
+		 $this->message .= "<br/>Standard cost update fialed for Item id " . $ich->item_id_m . $e->getMessage();
 		}
 	 } else {
-		$this->message .= "<br/>Leaving Standard cost update as no cost exists item_id - " . $ich->item_id .
+		$this->message .= "<br/>Leaving Standard cost update as no cost exists item_id_m - " . $ich->item_id_m .
 						' bom_cost_type : ' . $ich->bom_cost_type;
 	 }
 	 return $this->message;
 	}
 
-	if (!empty($parameters['from_item_id'][0])) {
+	if (!empty($parameters['from_item_id_m'][0])) {
 	 $this->message .= "<br>Using Standard cost update by Item Id Range ";
-	 $from_item_id = $parameters['from_item_id'][0];
-	 if (!empty($parameters['to_item_id'][0])) {
-		$to_item_id = $parameters['to_item_id'][0];
+	 $from_item_id_m = $parameters['from_item_id_m'][0];
+	 if (!empty($parameters['to_item_id_m'][0])) {
+		$to_item_id_m = $parameters['to_item_id_m'][0];
 	 } else {
-		$to_item_id = $from_item_id;
+		$to_item_id_m = $from_item_id_m;
 	 }
 	 $item = new item();
-	 $item_range = $item->findBy_itemIdRange($from_item_id, $to_item_id);
+	 $item_range = $item->findBy_itemIdRange($from_item_id_m, $to_item_id_m);
 	 foreach ($item_range as $items) {
 		$ich = new cst_item_cost_header();
-		$ich->item_id = $items->item_id;
+		$ich->item_id_m = $items->item_id_m;
 		$ich->bom_cost_type = $bom_cost_type;
-		$ich_i = $ich->findBy_ItemId_CostType();
+		$ich_i = $ich->findBy_ItemId_orgId_CostType();
 		if (!empty($ich_i)) {
 		 $ich->cst_item_cost_header_id = $ich_i->cst_item_cost_header_id;
 		 try {
 			$this->message .= "<br> Going for standard cost update for item header... ";
 			$this->message .= $ich->_update_standard_cost($parameters);
-			$this->message .= "<br> Standard cost update is sucessfully updated for item_id - " . $ich->item_id .
+			$this->message .= "<br> Standard cost update is sucessfully updated for item_id_m - " . $ich->item_id_m .
 							' bom_cost_type : ' . $ich->bom_cost_type;
 		 } catch (Exception $e) {
-			$this->message .= "<br/>Standard cost update fialed for Item id " . $ich->item_id . $e->getMessage();
+			$this->message .= "<br/>Standard cost update fialed for Item id " . $ich->item_id_m . $e->getMessage();
 		 }
 		} else {
-		 $this->message .= "<br/>Leaving Standard cost update as no cost exists item_id - " . $ich->item_id .
+		 $this->message .= "<br/>Leaving Standard cost update as no cost exists item_id_m - " . $ich->item_id_m .
 						 ' bom_cost_type : ' . $ich->bom_cost_type;
 		}
 	 }
@@ -520,15 +528,15 @@ class cst_item_cost_header extends dbObject {
 
 	 foreach ($item_range as $items) {
 		$ich = new cst_item_cost_header();
-		$ich->item_id = $items->item_id;
+		$ich->item_id_m = $items->item_id_m;
 		$ich->bom_cost_type = $bom_cost_type;
-		$ich_i = $ich->findBy_ItemId_CostType();
+		$ich_i = $ich->findBy_ItemId_orgId_CostType();
 		if (!empty($ich_i)) {
 		 $ich->cst_item_cost_header_id = $ich_i->cst_item_cost_header_id;
 		 try {
 			$ich->_update_standard_cost($parameters);
 		 } catch (Exception $e) {
-			$this->message .= "<br/>Standard cost update fialed for Item id " . $ich->item_id . $e->getMessage();
+			$this->message .= "<br/>Standard cost update fialed for Item id " . $ich->item_id_m . $e->getMessage();
 		 }
 		} else {
 		 $this->message .= "<br/>Leaving Standard cost update as no cost exists";
@@ -611,13 +619,13 @@ class cst_item_cost_header extends dbObject {
 	global $dbc;
 	$line_sums = [];
 	$boh = new bom_header();
-	$boh->item_id = $header_obj->item_id;
+	$boh->item_id_m = $header_obj->item_id_m;
 	$boh_i = $boh->findBy_itemId();
 	if (empty($boh_i)) {
 	 return;
 	}
 	$roh = new bom_routing_header();
-	$roh->item_id = $header_obj->item_id;
+	$roh->item_id_m = $header_obj->item_id_m;
 	$roh_i = $roh->findBy_itemId();
 	$rol = new bom_routing_line();
 	$rol_i = $rol->findBy_parentId($roh_i->bom_routing_header_id);
@@ -630,9 +638,9 @@ class cst_item_cost_header extends dbObject {
 	$icl = new cst_item_cost_line();
 
 	foreach ($bol_i as $bom_lines) {
-	 $ich->item_id = $bom_lines->component_item_id;
+	 $ich->item_id_m = $bom_lines->component_item_id_m;
 	 $ich->bom_cost_type = $header_obj->bom_cost_type;
-	 $ich_i = $ich->findBy_ItemId_CostType();
+	 $ich_i = $ich->findBy_ItemId_orgId_CostType();
 	 if (!empty($ich_i)) {
 		$icl_i = $icl->findBy_parentId($ich_i->cst_item_cost_header_id);
 		if (!empty($icl_i)) {
@@ -665,17 +673,17 @@ class cst_item_cost_header extends dbObject {
 	$this->_add_update_cost_lines($header_obj, $line_sums);
  }
 
- private function _cost_rollup_forItem($item_id, $cost_type) {
+ private function _cost_rollup_forItem($item_id_m, $cost_type) {
 	$ich = new cst_item_cost_header();
-	$ich->item_id = $item_id;
+	$ich->item_id_m = $item_id_m;
 	$ich->bom_cost_type = $cost_type;
-	$existing_cost_type = $ich->findBy_ItemId_CostType();
+	$existing_cost_type = $ich->findBy_ItemId_orgId_CostType();
 	if (!empty($existing_cost_type)) {
 	 $ich->cst_item_cost_header_id = $existing_cost_type->cst_item_cost_header_id;
 	} else {
 	 $ich->cst_item_cost_header_id = null;
 	 $item = new item();
-	 $item_i = $item->findBy_id($item_id);
+	 $item_i = $item->findBy_id($item_id_m);
 	 $ich->org_id = $item_i->org_id;
 	}
 	$ich->audit_trial();
@@ -691,7 +699,7 @@ class cst_item_cost_header extends dbObject {
 	}
  }
 
- public function cost_rollup($item_id, $cost_type) {
+ public function cost_rollup($item_id_m, $cost_type) {
 	global $dbc;
 	/*
 	 * 1. First explode the bom and add low level code 
@@ -701,16 +709,16 @@ class cst_item_cost_header extends dbObject {
 	 *    2.3 _add_update_cost_lines - Add/Updates the cost lines
 	 */
 	$boh = new bom_header();
-	$exploded_bom = $boh->BOM_Explosion($item_id);
+	$exploded_bom = $boh->BOM_Explosion($item_id_m);
 	$exploded_bom_rev = array_reverse($exploded_bom, true);
 	$item = new item();
 
 	foreach ($exploded_bom_rev as $level_items) {
-	 foreach ($level_items as $item_key => $item_id) {
-		$item->findBy_id($item_id);
+	 foreach ($level_items as $item_key => $item_id_m) {
+		$item->findBy_id($item_id_m);
 		if ($item->make_buy == 'Make') {
 		 try {
-			$this->_cost_rollup_forItem($item->item_id, $cost_type);
+			$this->_cost_rollup_forItem($item->item_id_m, $cost_type);
 			$this->message .= "Cost roll up is sucessfully completed for Item Number : $item->item_number & Cost Type : $cost_type";
 		 } catch (Exception $e) {
 			$this->message .= "Cost roll up failed for Item Number : $item->item_number & Cost Type : $cost_type. Error @ " . __LINE__
@@ -743,37 +751,37 @@ class cst_item_cost_header extends dbObject {
 	 return $this->message;
 	}
 
-	if (isset($parameters['item_id'][0])) {
+	if (isset($parameters['item_id_m'][0])) {
 	 $this->message .= "<br/>Using Cost Roll Up by Item Id ";
-	 $item_id = $parameters['item_id'][0];
+	 $item_id_m = $parameters['item_id_m'][0];
 	 try {
-		$this->cost_rollup($item_id, $bom_cost_type);
-		$this->message .= "<br/>Cost Roll Up is sucessfully updated for item_id - " . $item_id .
+		$this->cost_rollup($item_id_m, $bom_cost_type);
+		$this->message .= "<br/>Cost Roll Up is sucessfully updated for item_id_m - " . $item_id_m .
 						' bom_cost_type : ' . $bom_cost_type;
 	 } catch (Exception $e) {
-		$this->message .= "<br/>Cost Roll Up fialed for Item id " . $item_id . $e->getMessage();
+		$this->message .= "<br/>Cost Roll Up fialed for Item id " . $item_id_m . $e->getMessage();
 	 }
 
 	 return $this->message;
 	}
 
-	if (isset($parameters['from_item_id'][0])) {
+	if (isset($parameters['from_item_id_m'][0])) {
 	 $this->message .= "<br/>Using Cost Roll Up by Item Id Range ";
-	 $from_item_id = $parameters['from_item_id'][0];
-	 if (!empty($parameters['to_item_id'][0])) {
-		$to_item_id = $parameters['to_item_id'][0];
+	 $from_item_id_m = $parameters['from_item_id_m'][0];
+	 if (!empty($parameters['to_item_id_m'][0])) {
+		$to_item_id_m = $parameters['to_item_id_m'][0];
 	 } else {
-		$to_item_id = $from_item_id;
+		$to_item_id_m = $from_item_id_m;
 	 }
 	 $item = new item();
-	 $item_range = $item->findBy_itemIdRange($from_item_id, $to_item_id);
+	 $item_range = $item->findBy_itemIdRange($from_item_id_m, $to_item_id_m);
 	 foreach ($item_range as $items) {
 		try {
-		 $this->cost_rollup($items->item_id, $bom_cost_type);
-		 $this->message .= "<br/>Cost Roll Up is sucessfully updated for item_id - " . $items->item_id .
+		 $this->cost_rollup($items->item_id_m, $bom_cost_type);
+		 $this->message .= "<br/>Cost Roll Up is sucessfully updated for item_id_m - " . $items->item_id_m .
 						 ' bom_cost_type : ' . $bom_cost_type;
 		} catch (Exception $e) {
-		 $this->message .= "<br/>Cost Roll Up fialed for Item id " . $items->item_id . $e->getMessage();
+		 $this->message .= "<br/>Cost Roll Up fialed for Item id " . $items->item_id_m . $e->getMessage();
 		}
 	 }
 	 return $this->message;
@@ -791,11 +799,11 @@ class cst_item_cost_header extends dbObject {
 
 	 foreach ($item_range as $items) {
 		try {
-		 $this->cost_rollup($items->item_id, $bom_cost_type);
-		 $this->message .= "<br/>Cost Roll Up is sucessfully updated for item_id - " . $items->item_id .
+		 $this->cost_rollup($items->item_id_m, $bom_cost_type);
+		 $this->message .= "<br/>Cost Roll Up is sucessfully updated for item_id_m - " . $items->item_id_m .
 						 ' bom_cost_type : ' . $bom_cost_type;
 		} catch (Exception $e) {
-		 $this->message .= "<br/>Cost Roll Up fialed for Item id " . $items->item_id . $e->getMessage();
+		 $this->message .= "<br/>Cost Roll Up fialed for Item id " . $items->item_id_m . $e->getMessage();
 		}
 	 }
 	 return $this->message;
@@ -843,7 +851,7 @@ class cst_item_cost_header extends dbObject {
 	 $new_gjl->total_cr = $data_a['amount'];
 	 $new_gjl->total_ac_cr = $data_a['amount'];
 	}
-	$new_gjl->description = 'Cost Adjustment for Item Id' . $this->item_id;
+	$new_gjl->description = 'Cost Adjustment for Item Id' . $this->item_id_m;
 	$new_gjl->reference_type = 'table';
 	$new_gjl->reference_key_name = 'cst_item_cost_header';
 	$new_gjl->reference_key_value = $data_a['cst_item_cost_header'];

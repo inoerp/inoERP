@@ -14,11 +14,12 @@ class sd_document_type extends dbObject {
 		 'type',
 		 'description',
 		 'category',
-		 'entity',
+		 'supply_source',
 		 'process_flow_id',
 		 'default_line_document',
 		 'price_list_header_id',
 		 'default_shipfrom_org_id',
+		 'destination_type',
 		 'ar_transaction_type',
 		 'ar_transaction_source',
 		 'created_by',
@@ -53,26 +54,34 @@ class sd_document_type extends dbObject {
 		 'SALES_AGREEMENT' => 'Sales Agreement',
 		 'SALES_ORDER' => 'Sales Order'
  ];
- public static $entity_a = [
-		 'EXTERNAL' => 'External',
-		 'INTERNAL' => 'Internal'
+ public static $supply_source_a = [
+		 'WIP' => 'Job/Work Order',
+		 'INV' => 'Inventory',
+		 'PUR' => 'Supplier'
  ];
  public static $category_a = [
 		 'ORDER' => 'Order',
 		 'RETURN' => 'Return',
 		 'BOTH' => 'Both',
  ];
+ public static $destination_type_a = [
+		 'EXTERNAL' => 'Customer',
+		 'INTERNAL' => 'Internal'
+ ];
+ 
+ public $sd_document_type_id;
  public $document_type_name;
  public $bu_org_id_r;
  public $level;
  public $type;
- public $entity;
+ public $supply_source;
  public $description;
  public $category;
  public $process_flow_id;
  public $default_line_document;
  public $price_list_header_id;
  public $default_shipfrom_org_id;
+ public $destination_type;
  public $ar_transaction_type;
  public $ar_transaction_source;
  public $created_by;
@@ -86,10 +95,18 @@ class sd_document_type extends dbObject {
  ];
  public $pageTitle = " SD - Document Type  "; //page Title
 
- public static function find_by_transactionNumber($number) {
+ public static function find_all_header_levels() {
 	$sql = " SELECT * FROM ";
 	$sql .= self::$table_name;
-	$sql .= " WHERE sd_document_type_number = '{$number}' LIMIT 1";
+	$sql .= " WHERE level = 'HEADER' ";
+	$result = self::find_by_sql($sql);
+	return !empty($result) ? $result : false;
+ }
+ 
+  public static function find_all_line_levels() {
+	$sql = " SELECT * FROM ";
+	$sql .= self::$table_name;
+	$sql .= " WHERE level = 'LINE' ";
 	$result = self::find_by_sql($sql);
 	return !empty($result) ? $result : false;
  }

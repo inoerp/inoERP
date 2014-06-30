@@ -34,7 +34,7 @@
 				 </ul>
 				</div>
 				<div id ="form_line" class="form_line"><span class="heading">Details </span>
-				 <div id="tabs">
+				 <div id="tabsLine">
 					<ul class="tabMain">
 					 <li><a href="#tabsLine-1">Purchasing Info</a></li>
 					 <li><a href="#tabsLine-2">Future</a></li>

@@ -43,6 +43,7 @@ class item extends dbObject {
  ];
  public $field_a = [
 		 "item_id",
+		 'item_id_m',
 		 "org_id",
 		 "item_number",
 		 "item_description",
@@ -223,6 +224,7 @@ class item extends dbObject {
 		 'description' => 'Update Item Attributes related to Min Max ',
  ];
  public $item_id;
+ public $item_id_m;
  public $org_id;
  public $org;
  public $item_number;
@@ -443,6 +445,53 @@ class item extends dbObject {
 	}
  }
 
+ public function _after_save() {
+	if (empty($this->item_id_m)) {
+	 if (!empty($this->org_id)) {
+		$inv = inventory::find_by_org_id($this->org_id);
+		if (!empty($inv->item_master_cb) && ($inv->item_master_cb == 1)) {
+		 $this->item_id_m = $this->item_id;
+		 $this->audit_trial();
+		 $this->save();
+		} else {
+		 $item_master = $this->findBy_itemNumber_OrgId($inv->master_org_id);
+		 if(!empty($item_master->item_id)){
+		 $this->audit_trial();
+		 $this->item_id_m =  $item_master->item_id;
+		 $this->save();
+		 }
+		}
+	 }
+	}
+ }
+
+ public function findBy_item_id_m($item_id){
+	$sql = " SELECT * FROM " ;
+	$sql .= self::$table_name ;
+	$sql .= " WHERE item_id = item_id_m " ;
+	$sql .= " AND item_id = '{$item_id}' " ;
+	$result = $this->findBySql($sql);
+	return !empty($result) ? array_pop($result) : false;
+ }
+ 
+  public static function find_by_item_id_m($item_id){
+	$sql = " SELECT * FROM " ;
+	$sql .= self::$table_name ;
+	$sql .= " WHERE item_id = item_id_m " ;
+	$sql .= " AND item_id = '{$item_id}' " ;
+	$result = self::find_by_sql($sql);
+	return !empty($result) ? array_pop($result) : false;
+ }
+ 
+   public static function find_by_orgId_item_id_m($item_id, $org_id){
+	$sql = " SELECT * FROM " ;
+	$sql .= self::$table_name ;
+	$sql .= " WHERE item_id = item_id_m " ;
+	$sql .= " AND item_id = '{$item_id}' AND org_id = '{$org_id}' " ;
+	$result = self::find_by_sql($sql);
+	return !empty($result) ? array_pop($result) : false;
+ }
+ 
  private function _update_item_minmax() {
 	if (empty($this->item_id)) {
 	 echo "<br>No Item Id found";
@@ -661,13 +710,24 @@ class item extends dbObject {
 
 	return $data;
  }
-
+ 
  public static function find_by_itemNumber_orgId($item_number, $org_id) {
 	global $db;
 	$sql = "SELECT * FROM ";
 	$sql .= self::$table_name;
 	$sql .= " where item_number LIKE '%{$item_number}%' ";
 	$sql .= " AND org_id  = '{$org_id}' ";
+	$sql .= " LIMIT 1 ";
+	$result = $db->find_by_sql($sql);
+	return !(empty($result)) ? array_pop($result) : false;
+ }
+ 
+  public static function find_by_itemNumber_fromMasterOrg($item_number) {
+	global $db;
+	$sql = "SELECT * FROM ";
+	$sql .= self::$table_name;
+	$sql .= " where item_number LIKE '%{$item_number}%' ";
+	$sql .= " AND item_id_m  = item_id ";
 	$sql .= " LIMIT 1 ";
 	$result = $db->find_by_sql($sql);
 	return !(empty($result)) ? array_pop($result) : false;
@@ -772,6 +832,7 @@ class item extends dbObject {
 			 'label' => $row->item_number,
 			 'item_number' => $row->item_number,
 			 'item_id' => $row->item_id,
+			 'item_id_m' => $row->item_id_m,
 			 'item_description' => $row->item_description,
 			 'uom_id' => $row->uom_id,
 			 'processing_lt' => $row->processing_lt

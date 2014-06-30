@@ -16,7 +16,7 @@ class po_line extends dbObject {
 		 'line_type',
 		 'line_number',
 		 'receving_org_id',
-		 'item_id',
+		 'item_id_m',
 		 'item_description',
 		 'line_description',
 		 'uom_id',
@@ -34,14 +34,14 @@ class po_line extends dbObject {
  public $initial_search = [
 		 "po_header_id",
 		 "po_number",
-		 "item_id",
+		 "item_id_m",
 		 "item_number",
 		 "item_description"
  ];
  public $column = [
 		 "po_header_id",
 		 "po_number",
-		 "item_id",
+		 "item_id_m",
 		 "item_number",
 		 "item_description"
  ];
@@ -62,7 +62,7 @@ class po_line extends dbObject {
  public $line_type;
  public $line_number;
  public $receving_org_id;
- public $item_id;
+ public $item_id_m;
  public $item_description;
  public $line_description;
  public $uom_id;
@@ -87,7 +87,7 @@ class po_line extends dbObject {
 	if (!(empty($this->receving_org_id))) {
 	 if (!(empty($this->item_number))) {
     $item_s = item::find_by_itemNumber_orgId($this->item_number, $this->receving_org_id);
-			$this->item_id = $item_s->item_id;
+			$this->item_id_m = $item_s->item_id_m;
 	 }
 	} else {
 	 echo "<br> Saving line data failed!. No receving org. Error @ po_line @" . __LINE__;

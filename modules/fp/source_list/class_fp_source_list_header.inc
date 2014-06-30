@@ -66,9 +66,6 @@ class fp_source_list_header extends dbObject {
  public $last_update_by;
  public $last_update_date;
 
- public function _before_submit() {
-	
- }
 
  Public static function source_list_type() {
 	$option_header = option_header::find_by_name('FP_SOURCE_LIST_TYPE');
