@@ -345,10 +345,10 @@
 												$$class_third = &$po_detail;
 												?>
 												<tr class="po_detail<?php echo $count . '-' . $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
-												 <td><?php $f->ac_field_d3m('charge_ac_id'); ?></td>
-												 <td><?php $f->ac_field_d3m('accrual_ac_id'); ?></td>
-												 <td><?php $f->ac_field_d3('budget_ac_id'); ?></td>
-												 <td><?php $f->ac_field_d3m('ppv_ac_id'); ?></td>
+												 <td><?php $f->ac_field_wid3m('charge_ac_id'); ?></td>
+												 <td><?php $f->ac_field_wid3m('accrual_ac_id'); ?></td>
+												 <td><?php $f->ac_field_wid3('budget_ac_id'); ?></td>
+												 <td><?php $f->ac_field_wid3m('ppv_ac_id'); ?></td>
 												</tr>
 												<?php
 												$detailCount++;

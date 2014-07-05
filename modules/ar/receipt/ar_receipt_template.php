@@ -121,7 +121,7 @@
 						 <?php
 						 $reference_table = 'ar_receipt_header';
 						 $reference_id = $$class->ar_receipt_header_id;
-						 include_once HOME_DIR . '/extensions/comment/comment.php';
+						 include_once HOME_DIR . '/comment.php';
 						 ?>
 						 <div id="new_comment">
 						 </div>

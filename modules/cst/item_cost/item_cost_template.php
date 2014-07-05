@@ -77,7 +77,7 @@
 						 <?php
 						 $reference_table = 'cst_item_cost_header';
 						 $reference_id = $$class->cst_item_cost_header_id;
-						 include_once HOME_DIR . '/extensions/comment/comment.php';
+						 include_once HOME_DIR . '/comment.php';
 						 ?>
 						 <div id="new_comment">
 						 </div>

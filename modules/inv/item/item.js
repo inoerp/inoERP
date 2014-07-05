@@ -125,13 +125,13 @@ $(document).ready(function() {
 	}
  });
 //popu for selecting accounts
- $('#content').on('click', '.account_popup', function() {
-	var fieldClass = $(this).closest('li').find('.select_account').prop('class');
-	localStorage.setItem("field_class", fieldClass);
-	var openUrl = 'select.php?class_name=coa_combination';
-	void window.open(openUrl, '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
+// $('#content').on('click', '.account_popup', function() {
+//	var fieldClass = $(this).closest('li').find('.select_account').prop('class');
+//	localStorage.setItem("field_class", fieldClass);
+//	var openUrl = 'select.php?class_name=coa_combination';
+//	void window.open(openUrl, '_blank',
+//					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+// });
 
  //context menu
  function beforeContextMenu() {

@@ -77,6 +77,8 @@ class sd_delivery_header extends dbObject {
  ];
  public $search = [
 		 '_show_view_path' => 1,
+		 '_show_update_path' => 1,
+		 '_update_action_meassge' => 'Ship Confirm'
  ];
  public $pageTitle = " Shipment Delivery"; //page Title
  public $sd_delivery_header_id;

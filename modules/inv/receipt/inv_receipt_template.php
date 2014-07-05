@@ -85,7 +85,7 @@
 						<?php
 						$reference_table = 'inv_receipt_header';
 						$reference_id = $$class->inv_receipt_header_id;
-						include_once HOME_DIR . '/extensions/comment/comment.php';
+						include_once HOME_DIR . '/comment.php';
 						?>
 						<div id="new_comment">
 						</div>

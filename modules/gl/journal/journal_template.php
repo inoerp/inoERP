@@ -170,7 +170,7 @@ if (!isset($readonly1)) {
 						<?php
 						$reference_table = 'gl_journal_header';
 						$reference_id = $$class->gl_journal_header_id;
-						include_once HOME_DIR . '/extensions/comment/comment.php';
+						include_once HOME_DIR . '/comment.php';
 						?>
 						<div id="new_comment">
 						</div>

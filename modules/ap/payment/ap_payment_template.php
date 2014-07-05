@@ -124,7 +124,7 @@
 						 <?php
 						 $reference_table = 'ap_payment_header';
 						 $reference_id = $$class->ap_payment_header_id;
-						 include_once HOME_DIR . '/extensions/comment/comment.php';
+						 include_once HOME_DIR . '/comment.php';
 						 ?>
 						 <div id="new_comment">
 						 </div>

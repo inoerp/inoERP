@@ -160,7 +160,7 @@
 						 <?php
 						 $reference_table = 'ap_transaction_header';
 						 $reference_id = $$class->ap_transaction_header_id;
-						 include_once HOME_DIR . '/extensions/comment/comment.php';
+						 include_once HOME_DIR . '/comment.php';
 						 ?>
 						 <div id="new_comment">
 						 </div>
