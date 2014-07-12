@@ -280,6 +280,3 @@ class file extends dbObject {
 
 //end of file class
 ?>
-
-
-

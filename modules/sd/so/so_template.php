@@ -36,7 +36,7 @@
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
 						 <li><label>SO Number : </label>
-							<?php echo form::text_field_d('so_number'); ?>
+							<?php echo $f->text_field_d('so_number','primary_column2'); ?>
 						 </li>
 						 <li><label>BU Name(1) : </label>
 							<?php echo form::select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $sd_so_header->bu_org_id, 'bu_org_id', $readonly1, '', ''); ?>
@@ -149,9 +149,9 @@
 							<?php echo!(empty($comments)) ? $comments : ""; ?>
 						 </div>
 						 <?php
-						 $reference_table = 'sd_so_header_id';
+						 $reference_table = 'sd_so_header';
 						 $reference_id = $$class->sd_so_header_id;
-						 include_once HOME_DIR . DS . 'comment.php';
+						 include_once HOME_DIR . '/comment.php';
 						 ?>
 						 <div id="new_comment">
 						 </div>
@@ -159,19 +159,7 @@
 					 </div>
 					</div>
 					<div id="tabsHeader-5" class="tabContent">
-					 <div> 
-						<div id="show_attachment" class="show_attachment">
-						 <div id="file_upload_form">
-							<ul class="inRow asperWidth">
-							 <li><input type="file" id="attachments" class="attachments" name="attachments[]" multiple/></li>
-							 <li> <input type="button" value="Attach" form="file_upload" name="attach_submit" id="attach_submit" class="submit button"></li>
-							 <li class="show_loading_small"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/small_loading.gif"/></li>
-							</ul>
-						 </div>
-						 <div id="uploaded_file_details"></div>
-						 <?php echo file::attachment_statement($file); ?>
-						</div>
-					 </div>
+					 <div> <?php echo ino_attachement($file) ?> </div>
 					</div>
 
 					<div id="tabsHeader-6" class="tabContent">
@@ -206,7 +194,7 @@
 					<li><a href="#tabsLine-2">Price</a></li>
 					<li><a href="#tabsLine-3">Dates</a></li>
 					<li><a href="#tabsLine-4">References</a></li>
-					<li><a href="#tabsLine-5">Notes</a></li>
+					<li><a href="#tabsLine-5">References-2</a></li>
 				 </ul>
 				 <div class="tabContainer">
 					<div id="tabsLine-1" class="tabContent">
@@ -319,10 +307,10 @@
 							?>         
  						 <tr class="sd_so_line<?php echo $count ?>">
  							<td class="seq_number"><?php echo $count; ?></td>
- 							<td><?php echo $f->date_fieldFromToday('requested_date', $$class_second->requested_date) ?></td>
+ 							<td><?php echo $f->date_fieldFromToday_d('requested_date', $$class_second->requested_date) ?></td>
  							<td><?php echo $f->date_fieldFromToday('promise_date', $$class_second->promise_date) ?></td>
  							<td><?php echo $f->date_fieldFromToday('schedule_ship_date', $$class_second->schedule_ship_date) ?></td>
- 							<td><?php echo $f->date_fieldFromToday('actual_ship_date', $$class_second->actual_ship_date, 1) ?></td>
+							<td><?php echo $f->date_fieldFromToday_r('actual_ship_date', $$class_second->actual_ship_date, 1) ?></td>
  						 </tr>
 							<?php
 							$count = $count + 1;
@@ -374,21 +362,28 @@
 						<!--                  Showing a blank form for new entry-->
 					 </table>
 					</div>
-					<div id="tabsLine-5" class="tabContent">
+						<div id="tabsLine-5" class="scrollElement tabContent">
 					 <table class="form_line_data_table">
 						<thead> 
-						 <tr>
-							<th>Comments</th>
-
+						 <tr><th>Seq#</th>
+							<th>Invoiced Qty</th>
+							<th>ar_transaction_header_id </th>
+							<th>ar_transaction_line_id</th>
+							<th>Invoice/CM # </th>
 						 </tr>
 						</thead>
 						<tbody class="form_data_line_tbody">
 						 <?php
 						 $count = 0;
 						 foreach ($sd_so_line_object as $sd_so_line) {
+							$sd_so_line->ar_transaction_number = null;
 							?>         
  						 <tr class="sd_so_line<?php echo $count ?>">
- 							<td></td>
+ 							<td class="seq_number"><?php echo $count; ?></td>
+ 							<td><?php form::number_field_wid2sr('invoiced_quantity'); ?></td>
+ 							<td><?php form::text_field_wid2r('ar_transaction_header_id'); ?></td>
+ 							<td><?php form::text_field_wid2r('ar_transaction_line_id'); ?></td>
+							<td><?php form::text_field_wid2r('ar_transaction_number'); ?></td>
  						 </tr>
 							<?php
 							$count = $count + 1;
@@ -396,7 +391,6 @@
 						 ?>
 						</tbody>
 						<!--                  Showing a blank form for new entry-->
-
 					 </table>
 					</div>
 				 </div>

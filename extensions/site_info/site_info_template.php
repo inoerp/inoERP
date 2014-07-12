@@ -64,11 +64,13 @@
 						 <li><label>Limit Summary Characters : </label> <?php $f->text_field_d('summary_char_fp') ?></li> 
 						 <li><label>Anonymous User : </label> <?php $f->text_field_d('anonymous_user') ?></li> 
 						 <li><label>Anonymous Role : </label> <?php $f->text_field_d('anonymous_user_role') ?></li> 
+
 						</ul>
 						<ul class="inRow asperWidth"> 
 						 <li><label>Footer Message: </label> 
 							<textarea required name="footer_message" class="plaintext" rows="4" cols="80"><?php echo htmlentities($$class->footer_message); ?> </textarea>
 						 </li> 
+						 <li><label>Site Logo Path : </label> <?php echo HOME_URL.  $f->text_field('logo_path', $$class->logo_path, '60'); ?> </li> 
 						</ul>
 					 </div>
 					</div> 

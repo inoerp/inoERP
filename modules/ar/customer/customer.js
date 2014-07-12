@@ -75,12 +75,7 @@ $(document).ready(function() {
 
  $('a.show.customer_number').click(function() {
 	var customer_number = $('#customer_number').val();
-	if ($('#org_id').val().length > 0) {
-	 var org_id = $('#org_id').val();
-	 $(this).attr('href', modepath() + 'customer_number=' + customer_number + '&org_id=' + org_id);
-	} else {
-	 alert("Query Error!!! \n Select the query mode by pressing Ctrl + Q \n Select the organization name");
-	}
+	$(this).attr('href', modepath() + 'customer_number=' + customer_number);
  });
 
  $('a.show.ar_customer_site_id').click(function() {

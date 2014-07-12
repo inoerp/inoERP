@@ -38,10 +38,7 @@
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>               
 						 <li><label>Customer Name : </label>
-							<?php echo form::text_field_dm('customer_name'); ?>
-							<a name="show" href="customer.php?customer_name=" class="show customer_name">
-							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-
+							<?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', 1, $readonly1 ) ; ?>
 						 </li>
 						 <li><label>Customer Type : </label>
 							<?php echo form::select_field_from_object('customer_type', ar_customer::customer_types(), 'option_line_code', 'option_line_value', $$class->customer_type, 'customer_type', $readonly, '', ''); ?>

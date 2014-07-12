@@ -1,5 +1,4 @@
-<?php include_once('../../includes/basics/header_public.inc'); ?>
-<script type='text/javascript' src="user.js" ></script>
+<?php include_once('../../includes/basics/basics.inc'); ?>
 <?php
 
 if ($session->login_status()) {
@@ -7,8 +6,12 @@ if ($session->login_status()) {
 }
 ?>
 <?php
+
 global $dbc;
 global $session;
+if (!isset($msg)) {
+ $msg = '';
+}
 $class = $class_first = 'user';
 $$class = new $class;
 $class_second = 'user_role';
@@ -34,10 +37,14 @@ if (!empty($_POST['submitLogin'])) { //form is submitted for login
 	 redirect_to(HOME_URL . "index.php");
 	}
  } else {
-	echo "<div class='message error'> Username or password is incorrect <br/> </div>";
+	$msg .= "<div class='message error'> Username or password is incorrect <br/> </div>";
 	//        echo "Actual password is ".$login_status;
  }//en of if else  
 }//end of if post submit
+?>
+<?php include_once('../../includes/basics/header_public.inc'); ?>
+<script type='text/javascript' src="user.js" ></script>
+<?php
 
 if (!empty($_POST['newUser'])) {
  $new_user = new user();
@@ -61,9 +68,9 @@ if (!empty($_POST['newUser'])) {
 	$user_role->role_code = 'BASIC';
 	$user_role->save();
 	$dbc->confirm();
-	echo '<div class="message error"> Account is sucessfully created!. Please check your mail box for further details. </div>';
+	$msg .= '<div class="message error"> Account is sucessfully created!. Please check your mail box for further details. </div>';
  } else {
-	echo '<div class="message error"> Account creation failed!. Contact the admin. </div>';
+	$msg .= '<div class="message error"> Account creation failed!. Contact the admin. </div>';
  }
 }
 
@@ -77,23 +84,28 @@ if (!empty($_POST['resetPassword'])) {
 	$email = $_POST['email'][0];
 	$resetUser = $ru->findBy_eMail($email);
  } else {
-	echo '<div class="error"> No record found! Check the entered user name or email. </div>';
+	$msg .='<div class="error"> No record found! Check the entered user name or email. </div>';
  }
 
  if (!empty($resetUser)) {
-		$result_msg = $pr->generateResetPassword($resetUser);
-	echo '<div class="error">' . $result_msg . ' A new pasword reset link has been set to the registered email address </div>';
+	$result_msg = $pr->generateResetPassword($resetUser);
+	$msg .= '<div class="error">' . $result_msg . ' A new pasword reset link has been set to the registered email address </div>';
  }
 }
 ?>
+
 <?php
 
 if (!empty($msg)) {
  $show_message = '<div class="error">';
+ if(is_array($msg)){
  foreach ($msg as $key => $value) {
 	$x = $key + 1;
 	$show_message .= 'Message ' . $x . ' : ' . $value . '<br />';
  }
+	}else{
+	 $show_message = $msg;
+	}
  $show_message .= '</div>';
 }
 ?>

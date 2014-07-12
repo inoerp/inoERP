@@ -31,13 +31,6 @@ class user_password_reset extends dbObject {
  public $time;
  public $msg;
 
- public function _before_showing() {
-	
- }
-
- public function _before_submit() {
-	
- }
 
  private function _codeThePassword($password) {
 	return hash('sha256', crypt($password, 'xjkhrwq$@323sqjheq51234$$'));
@@ -77,6 +70,7 @@ class user_password_reset extends dbObject {
 
  public function generateResetPassword($user) {
 	global $dbc;
+	global $si;
 	$username = $user->username;
 	$email = $user->email;
 	$user_id = $user->user_id;
@@ -89,11 +83,11 @@ class user_password_reset extends dbObject {
 	 $url = HOME_URL . 'extensions/user/reset_password.php?user_id=' . $user_id . '&code=' . $code;
 	 $link = "<a target='_blank' href='" . $url . "'>Reset Password</a>";
 	 $to = $email;
-	 $subject = "New password reset request @" . SITE_NAME;
+	 $subject = "New password reset request @" . $si->site_name;
 	 $message = "<html> <body>Dear " . $user->username . '<br><br>';
 	 $message .= "Click on the below link to reset your password<p>";
 	 $message .= $link;
-	 $message .='<br><br>Thanks<br>' . SITE_NAME . '</body></html>';
+	 $message .='<br><br>Thanks<br>' . $si->site_name . '</body></html>';
 	 $from = "admin@site.com";
 	 $headers = "From: $from\r\n";
 	 $headers .= "Content-type: text/html\r\n";
@@ -123,6 +117,3 @@ class user_password_reset extends dbObject {
 
 //end of resource class
 ?>
-
-
-

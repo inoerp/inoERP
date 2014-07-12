@@ -19,13 +19,13 @@ class view_path extends dbObject{
      "description",
  ];
  
- public static $column = [
+ public  $column = [
      "column_name",
      "path",
      "description",
  ];
  
- public static $requiredField = [
+ public $requiredField = [
        "column_name",
      "path",
      "description",
@@ -59,6 +59,3 @@ class view_path extends dbObject{
 
 //end of view class
 ?>
-
-
-

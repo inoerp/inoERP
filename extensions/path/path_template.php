@@ -15,21 +15,12 @@
 				<div > 
 				 <ul class="two_column"> 
 					<li><label><img src="<?php echo HOME_URL; ?>themes/default/images/serach.png" class="path_id select_popup clickable">
-						Path Id :</label><?php $f->text_field_ds('path_id') ?>
+						Path Id :</label><?php $f = new inoform();
+						$f->text_field_ds('path_id') ?>
 					 <a name="show" href="form.php?class_name=path" class="show path_id">	<img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
 					</li>
 					<li><label>Parent Name :</label> 
-					 <select name="parent_id[]" id="parent_id"> 
-						<option value="" ></option> 
-						<?php
-						$parent = path::find_all();
-						foreach ($parent as $record) {
-						 echo '<option value="' . $record->path_id . '" ';
-						 echo $record->path_id == $path->parent_id ? 'selected' : 'none ';
-						 echo '>' . $record->name . '</option>';
-						}
-						?> 
-					 </select> 
+					 <?php echo $f->select_field_from_object('parent_id', path::find_all('name'), 'path_id', array('name','module_code'), $$class->parent_id, 'parent_id')?>
 					</li>
 					<li><label>Path Name :</label> 
 					 <input type="text" required name="name[]" id="name" maxlength="60" size="60"
@@ -47,18 +38,7 @@
 					<li><label>Class/Obj Name  : </label> <?php $f->text_field_d('obj_class_name') ?></li>
 					<li><label>Mode  : </label> <?php $f->text_field_ds('mode') ?></li>
 					<li><label>Module : </label>
-					 <Select name="module_id[]" id="module"> 
-						<option value="" ></option>   
-						<?php
-						$module = module::find_all();
-						foreach ($module as $record) {
-						 echo '<option value="' . $record->module_id . '" ';
-						 echo $record->module_id == $path->module_id ? 'selected' : 'none ';
-						 echo '>' . $record->name . '</option>';
-						}
-						?>
-
-					 </select>
+					 <?php echo $f->select_field_from_object('module_code', option_header::modules(), 'option_line_code', 'option_line_value', $$class->module_code, 'module_code', '', 1) ?>
 					</li>
 					<li><label>ID Column name : </label>
 					 <Select name="id_column_name[]" id="id_column_name"> 
@@ -75,10 +55,10 @@
 					 </select>
 					</li>
 
-					<li class="primary_cb"> <label>Primary ? : </label>            
-					 <input type="checkbox" name="primary_cb[]"  value="1"
+					<li class="setup_path_cb"> <label>Setup Path ? : </label>            
+					 <input type="checkbox" name="setup_path_cb[]"  value="1"
 					 <?php
-					 if ($path->primary_cb == 1) {
+					 if ($path->setup_path_cb == 1) {
 						echo " checked";
 					 } else {
 						echo "";

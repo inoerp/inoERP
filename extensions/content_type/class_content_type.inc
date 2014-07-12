@@ -31,6 +31,7 @@ class content_type extends dbObject {
 		 'comment_update_role',
 		 'comment_order_by',
 		 'comments_perpage',
+		 'auto_url_alias_cb',
 		 "rev_enabled_cb",
 		 "rev_number",
 		 "created_by",
@@ -115,6 +116,7 @@ class content_type extends dbObject {
  public $subject_label;
  public $content_label;
  public $summary_display_type;
+ public $auto_url_alias_cb;
  public $rev_enabled_cb;
  public $rev_number;
  public $content_type_id_l;
@@ -297,6 +299,3 @@ class content_type extends dbObject {
 
 //end of content_type class
 ?>
-
-
-

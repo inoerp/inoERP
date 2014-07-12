@@ -60,6 +60,3 @@ class content_type_reference extends dbObject {
 
 //end of bom class
 ?>
-
-
-

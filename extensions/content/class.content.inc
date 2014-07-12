@@ -1,4 +1,5 @@
 <?php
+
 /* Privillages
  * 2. Read
  * 3. Write
@@ -6,6 +7,7 @@
  * 5. Update Any
  * 9. Admin
  */
+
 class content extends dbObject {
 
  public static $table_name = "content";
@@ -65,6 +67,8 @@ class content extends dbObject {
 		 'show_in_fp_cb'
  ];
  public $fields_inForm_notInDataBase = [
+		 'url_alias',
+		 'ext_url_alias_id'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
  ];
@@ -102,6 +106,8 @@ class content extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
+ public $url_alias;
+  public $ext_url_alias_id;
  private $_summary_noof_char = '500';
  private $_subject_noof_char = '60';
  private $_pagination;
@@ -122,6 +128,18 @@ class content extends dbObject {
 		default:
 		 $this->$property = $value;
 		 break;
+	 }
+	}
+ }
+ 
+ public function _before_showing(){
+	global $mode;
+	//check if url alias exists when in mode = 9
+	if(($mode==9) && !empty($this->content_id)){
+	 $url_alis_a = ext_url_alias::find_by_contentId($this->content_id);
+	 if($url_alis_a){
+		$this->url_alias = $url_alis_a->alias;
+		$this->ext_url_alias_id = $url_alis_a->ext_url_alias_id;
 	 }
 	}
  }
@@ -218,6 +236,17 @@ class content extends dbObject {
 		}
 	 }
 	}
+
+	//url alias
+	if ((!empty($content_type)) && (!empty($this->url_alias) || $content_type->auto_url_alias_cb == 1 )) {
+	 $url_alias = new ext_url_alias();
+	 $url_alias->alias = !empty($this->url_alias) ? $this->url_alias : $this->subject;
+	 $url_alias->content_id = $this->content_id;
+	 $url_alias->original_url = "content_id=$this->content_id&content_type=$content_type->content_type";
+	 $url_alias->ext_url_alias_id = !empty($this->ext_url_alias_id) ? $this->ext_url_alias_id : null;
+	 $url_alias->audit_trial();
+	 $url_alias->save();
+	}
  }
 
  Public function frontPage_contents($no_of_articles = 6, $noOfCharacters = '500') {
@@ -279,7 +308,7 @@ class content extends dbObject {
 	$sql .= ' FROM content LEFT JOIN category_reference ON content.content_id = category_reference.reference_id ';
 	$sql .= " LEFT JOIN content_type ct ON ct.content_type_id = content.content_type_id  ";
 	if (!empty($this->content_type_id)) {
-	$sql .= " WHERE content.content_type_id = '{$this->content_type_id}' ";
+	 $sql .= " WHERE content.content_type_id = '{$this->content_type_id}' ";
 	}
 	if (!empty($this->category_id)) {
 	 $sql .= " AND category_reference.category_id = '{$this->category_id}' ";
@@ -291,7 +320,7 @@ class content extends dbObject {
 	$count_sql = " SELECT COUNT(content.content_id) ";
 	$count_sql .= ' FROM content LEFT JOIN category_reference ON content.content_id = category_reference.reference_id ';
 	if (!empty($this->content_type_id)) {
-	$count_sql .= " WHERE content.content_type_id = '{$this->content_type_id}' ";
+	 $count_sql .= " WHERE content.content_type_id = '{$this->content_type_id}' ";
 	}
 	if (!empty($this->category_id)) {
 	 $count_sql .= " AND category_reference.category_id = '{$this->category_id}' ";
@@ -361,7 +390,7 @@ class content extends dbObject {
 	$result = $this->_getContent_byConteTypeCategory($pageno, $per_page, $query_string);
 	$con_count = 0;
 	if (count($result) > 0) {
-	 	 $content_string .='<table id="forum_list" class="top_margin10 form_line_data_table"><thead> 
+	 $content_string .='<table id="forum_list" class="top_margin10 form_line_data_table"><thead> 
 						 <tr class="headerBgColor">
 							<th>Topics</th>
 							<th>Replies</th>
@@ -380,7 +409,7 @@ class content extends dbObject {
 		$content_string .= ' </a>';
 		$content_string .= '</td>';
 		$content_string .= '<td class="no_of_replies">';
-		$content_string .= $no_of_replies. '</td>';
+		$content_string .= $no_of_replies . '</td>';
 		$content_string .= '<td class="created_by">';
 		$content_string .= $records->created_by;
 		$content_string .= '</td><td class="post_date">';
@@ -403,17 +432,18 @@ class content extends dbObject {
 	return $content_string;
  }
 
-  public function findAll_parantContent_of_categoryId($category_id){
+ public function findAll_parantContent_of_categoryId($category_id) {
 	$sql = "SELECT content.content_id, content.subject, content.content_type_id FROM 
 	         content, category_reference cr
 					 where content.parent_id IS NULL 
 					 AND cr.reference_table = 'content'
 					 AND cr.reference_id = content.content_id
 					 AND cr.category_id = :category_id   ";
-					 $value_a = ['category_id' =>  $category_id];
+	$value_a = ['category_id' => $category_id];
 	$result = $this->findBySql($sql, $value_a);
 	return !empty($result) ? $result : false;
  }
+
  public static function content_find_by_id($content_type_name, $content_id) {
 	global $dbc;
 	$table_name = 'c_' . $content_type_name;
@@ -680,42 +710,42 @@ class content extends dbObject {
  * Delete contents from content which doesnt belong to any content type
  * $sql = "
  * DELETE FROM content WHERE content_id NOT IN(
-    SELECT a.contentId FROM
-(
-    SELECT content.content_id as contentId
-FROM content,
-c_content
-WHERE content.content_id = c_content.content_id
-UNION
-SELECT content.content_id
-FROM content,
-c_forum
-WHERE content.content_id = c_forum.content_id
-UNION
-SELECT content.content_id
-FROM content,
-c_documentation
-WHERE content.content_id = c_documentation.content_id
-    ) a
-) 
+  SELECT a.contentId FROM
+  (
+  SELECT content.content_id as contentId
+  FROM content,
+  c_content
+  WHERE content.content_id = c_content.content_id
+  UNION
+  SELECT content.content_id
+  FROM content,
+  c_forum
+  WHERE content.content_id = c_forum.content_id
+  UNION
+  SELECT content.content_id
+  FROM content,
+  c_documentation
+  WHERE content.content_id = c_documentation.content_id
+  ) a
+  )
  * "
  * 
  * 
  * DELETE FROM Category reference
  * DELETE FROM category_reference WHERE 
-category_reference_id NOT IN(
-SELECT a.category_reference_id from (
-SELECT category_reference_id,reference_table FROM 
-category_reference cr,
-content
-WHERE cr.reference_table = 'content'
-AND cr.reference_id = content.content_id
-UNION
-SELECT category_reference_id,reference_table FROM 
-category_reference cr,
-content
-WHERE cr.reference_table != 'content'
-    )a
-)
+  category_reference_id NOT IN(
+  SELECT a.category_reference_id from (
+  SELECT category_reference_id,reference_table FROM
+  category_reference cr,
+  content
+  WHERE cr.reference_table = 'content'
+  AND cr.reference_id = content.content_id
+  UNION
+  SELECT category_reference_id,reference_table FROM
+  category_reference cr,
+  content
+  WHERE cr.reference_table != 'content'
+  )a
+  )
  */
 ?>

@@ -76,6 +76,3 @@ class category_reference extends dbObject {
 
 //end of category class
 ?>
-
-
-

@@ -67,6 +67,3 @@ class block_cache extends dbObject {
 
 //end of block class
 ?>
-
-
-

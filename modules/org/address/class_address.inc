@@ -142,9 +142,9 @@ class address extends dbObject {
 	if (empty($address)){
 	 return ;
 	}
-	$show_adrees_details = $address->address . ',' . $address->postal_code . ','
-					. $address->country . ',' . $address->phone
-					. $address->email . ',' . $address->website;
+	$show_adrees_details = $address->address . '<br>' . $address->postal_code . ','
+					. $address->country . '<br>' . $address->phone
+					. $address->email . '<br>' . $address->website;
 	return $show_adrees_details;
  }
 

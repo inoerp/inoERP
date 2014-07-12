@@ -44,7 +44,8 @@
 							<?php echo $f->select_field_from_object('write_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->write_role, 'write_role'); ?></li>
 						 <li class="role"> <label>Update Role : </label>  
 							<?php echo $f->select_field_from_object('update_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->update_role, 'update_role'); ?></li>
-					
+						 <li class="allow_file_cb"> <label>Auto URL Alias ? : </label>    
+							<?php echo form::checkBox_field('auto_url_alias_cb', $$class->auto_url_alias_cb); ?></li>
 						</ul>
 					 </div>
 					</div>
@@ -63,7 +64,7 @@
 							<?php echo $f->select_field_from_array('comment_order_by', content_type::$comment_order_by_a, $$class->comment_order_by); ?></li>
 						 <li class="allow_file_cb"><label>Comments Per Page : </label>    
 							<?php echo $f->select_field_from_array('comments_perpage', select_per_page_array(), $$class->comments_perpage); ?></li>
-					 
+
 						</ul>
 					 </div>
 					</div>

@@ -81,6 +81,15 @@ class ar_transaction_type extends dbObject {
  ];
  public $pageTitle = " AR - Transaction Type  "; //page Title
 
+
+  public static function find_all_by_buOrgId($bu_org_id) {
+	$sql = " SELECT * FROM ";
+	$sql .= self::$table_name;
+	$sql .= " WHERE bu_org_id = '{$bu_org_id}' ";
+	$result = self::find_by_sql($sql);
+	return !empty($result) ? $result : false;
+ }
+ 
  public static function find_all_header_levels() {
 	$sql = " SELECT * FROM ";
 	$sql .= self::$table_name;

@@ -27,6 +27,7 @@ class sd_so_line extends dbObject {
 		 'line_quantity',
 		 'picked_quantity',
 		 'shipped_quantity',
+		 'invoiced_quantity',
 		 'price_list_header_id',
 		 'price_date',
 		 'unit_price',
@@ -37,6 +38,8 @@ class sd_so_line extends dbObject {
 		 'tax_code_id',
 		 'tax_amount',
 		 'reference_doc_number',
+		 'ar_transaction_header_id',
+		 'ar_transaction_line_id',
 		 "ef_id",
 		 "created_by",
 		 "creation_date",
@@ -66,7 +69,8 @@ class sd_so_line extends dbObject {
 		 "so_number",
 		 "item_number",
 		 'actual_ship_date',
-		 'tax_code_value'
+		 'tax_code_value',
+		 'ar_transaction_number'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
 		 "sd_so_header_id"
@@ -82,6 +86,7 @@ class sd_so_line extends dbObject {
  public $line_quantity;
  public $picked_quantity;
  public $shipped_quantity;
+ public $invoiced_quantity;
  public $price_list_header_id;
  public $price_date;
  public $unit_price;
@@ -90,6 +95,8 @@ class sd_so_line extends dbObject {
  public $tax_amount;
  public $reference_doc_type;
  public $reference_doc_number;
+ public $ar_transaction_header_id;
+ public $ar_transaction_line_id;
  public $supply_source;
  public $destination_type;
  public $ef_id;
@@ -110,6 +117,7 @@ class sd_so_line extends dbObject {
  public $msg;
  public $item_number;
  public $tax_code_value;
+ public $ar_transaction_number;
 
  public function _before_save() {
 	if (!(empty($this->shipping_org_id))) {

@@ -57,6 +57,3 @@ $ur = &$user_role;
 
 //end of user_role class
 ?>
-
-
-

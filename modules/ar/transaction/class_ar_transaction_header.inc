@@ -8,7 +8,7 @@ class ar_transaction_header extends dbObject {
  public static $primary_column2 = "transaction_number";
  public static $key_column = 'ar_customer_id';
  public static $module = "ar"; //same as gl_journal_source
- public static $gl_journal_category = "AR_TRANSACTIONS";
+ public static $gl_journal_category = "AR_INVOICE";
  public static $js_fileName = 'modules/ar/transaction/ar_transaction.js';
  public static $system_info = [
 		 'name' => 'AR Transaction',
@@ -22,6 +22,11 @@ class ar_transaction_header extends dbObject {
 		 'module_name' => 'ar',
 		 'weight' => 2
  ];
+ public static $transaction_status_a = [
+		 'INCOMPLETE' => 'Incomplete',
+		 'COMPLETE' => 'Complete',
+		 'CLOSED' => 'Closed'
+ ];
  public $account = [
 		 'receivable_ac_id'
  ];
@@ -29,6 +34,7 @@ class ar_transaction_header extends dbObject {
 		 'ar_transaction_header_id',
 		 'bu_org_id',
 		 'transaction_type',
+		 'transaction_class',
 		 'transaction_number',
 		 'ar_customer_id',
 		 'ar_customer_site_id',
@@ -38,6 +44,7 @@ class ar_transaction_header extends dbObject {
 		 'bill_to_id',
 		 'header_amount',
 		 'receipt_amount',
+		 'tax_amount',
 		 'currency',
 		 'document_currency',
 		 'receivable_ac_id',
@@ -64,6 +71,9 @@ class ar_transaction_header extends dbObject {
 		 'creation_date',
 		 'last_update_by',
 		 'last_update_date'
+ ];
+ public $notUpdatedFromWebForm = [
+		 'gl_journal_header_id',
  ];
  public $initial_search = [
 		 'ar_transaction_header_id',
@@ -101,7 +111,6 @@ class ar_transaction_header extends dbObject {
 		 'transaction_type',
 		 'ar_customer_id',
 		 'ar_customer_site_id',
-		 'header_amount',
 		 'currency',
 		 'payment_term_id',
 		 'document_date',
@@ -110,13 +119,17 @@ class ar_transaction_header extends dbObject {
 		 'receivable_ac_id'
  ];
  public $fields_inForm_notInDataBase = [
+//		 '', //not updatable through form
+
 		 "customer_name",
 		 "customer_number",
 		 "customer_site_name",
 		 'sd_so_number',
 		 'sd_so_header_id',
 		 'action',
-		 'transaction_action'
+		 'transaction_action',
+		 'multi_action_class_pc',
+		 'multi_action_class_pc_value',
  ];
  public $numberField = [
 		 'header_amount'
@@ -146,6 +159,7 @@ class ar_transaction_header extends dbObject {
  public $ship_to_id;
  public $bill_to_id;
  public $header_amount;
+ public $tax_amount;
  public $receipt_amount;
  public $currency;
  public $document_currency;
@@ -180,6 +194,18 @@ class ar_transaction_header extends dbObject {
  public $multi_action_class_pc_value;
  public $action;
  public $transaction_action;
+ public $transaction_class;
+ public $ship_to_address;
+ public $bill_to_address_name;
+ public $ship_to_phone;
+ public $ship_to_address_name;
+ public $ship_to_country;
+ public $ship_to_postal_code;
+ public $bill_to_phone;
+ public $bill_to_address;
+ public $bill_to_country;
+ public $bill_to_postal_code;
+ private $_max_line_num;
 
  public function __set($name, $value) {
 	switch ($value) {
@@ -194,35 +220,45 @@ class ar_transaction_header extends dbObject {
 	}
  }
 
- private function _update_journalHeaderId() {
-	$arth = new ar_transaction_header();
-	$arth->ar_transaction_header_id = $this->ar_transaction_header_id;
-	$arth->gl_journal_header_id = $this->gl_journal_header_id;
-	$arth->created_by = $this->created_by;
-	$arth->creation_date = $this->creation_date;
-	$arth->last_update_by = $this->last_update_by;
-	$arth->last_update_date = $this->last_update_date;
-	$arth->save();
+// private function _update_journalHeaderId() {
+//	$arth = new ar_transaction_header();
+//	$arth->ar_transaction_header_id = $this->ar_transaction_header_id;
+//	$arth->gl_journal_header_id = $this->gl_journal_header_id;
+//	$arth->created_by = $this->created_by;
+//	$arth->creation_date = $this->creation_date;
+//	$arth->last_update_by = $this->last_update_by;
+//	$arth->last_update_date = $this->last_update_date;
+//	$arth->save();
+// }
+
+ public function _before_showing() {
+	$address = new address();
+	if (!empty($this->ship_to_id)) {
+	 $address_ship_to = $address->findBy_id($this->ship_to_id);
+	 $this->ship_to_address_name = $address_ship_to->address_name;
+	 $this->ship_to_address = $address_ship_to->address;
+	 $this->ship_to_country = $address_ship_to->country;
+	 $this->ship_to_postal_code = $address_ship_to->postal_code;
+	 $this->ship_to_phone = $address_ship_to->phone;
+	}
+	if (!empty($this->bill_to_id)) {
+	 $address_bill_to = $address->findBy_id($this->bill_to_id);
+	 $this->bill_to_address_name = $address_bill_to->address_name;
+	 $this->bill_to_address = $address_bill_to->address;
+	 $this->bill_to_country = $address_bill_to->country;
+	 $this->bill_to_postal_code = $address_bill_to->postal_code;
+	 $this->bill_to_phone = $address_bill_to->phone;
+	}
  }
 
  public function _before_save() {
 
 	if ((!empty($this->ar_transaction_header_id)) && ($this->action === 'create_accounting')) {
-	 $asis_data = $this->findBy_id($this->ar_transaction_header_id);
-	 foreach ($asis_data as $key => $value) {
-		$this->$key = $value;
-	 }
-
 	 //if journal header id excists then save journal lines only else first header & then lines
+	 $this->findBy_id($this->ar_transaction_header_id);
 	 if (empty($this->gl_journal_header_id)) {
 		try {
 		 $this->_save_journal_header();
-		 try {
-			echo "<br>Accounting records are sucessfully created " . $this->gl_journal_header_id;
-			$this->_update_journalHeaderId();
-		 } catch (Exception $e) {
-			echo "<br>Updating gl journal header id failed" . $e->getMessage();
-		 }
 		} catch (Exception $e) {
 		 echo "Create accounting failed" . $e->getMessage();
 		}
@@ -230,11 +266,13 @@ class ar_transaction_header extends dbObject {
 	 if (!empty($this->gl_journal_header_id)) {
 		//check the status is not updated and then save/update journal lines
 		$gjh = new gl_journal_header();
-		$gjh_i = $gjh->findBy_id($this->gl_journal_header_id);
-		if ($gjh_i->status == 'ENTERED') {
+		$gjh->findBy_id($this->gl_journal_header_id);
+		$max_line_num = $gjh->highest_line_num()->max_line_num;
+		$this->_max_line_num = !empty($max_line_num) ? $max_line_num + 1 : 1;
+		if ($gjh->status == 'ENTERED') {
 		 $this->_save_journal_lines();
 		} else {
-		 echo "<br> The Journal Header \" $gjh_i->journal_name \" (id : $this->gl_journal_header_id ) is not in Entered Status."
+		 echo "<br> The Journal Header \" $gjh->journal_name \" (id : $this->gl_journal_header_id ) is not in Entered Status."
 		 . "<br>From Subledger, You can only update Jouranls in Entered Status";
 		 return;
 		}
@@ -270,7 +308,7 @@ class ar_transaction_header extends dbObject {
 	$gjh->currency = $this->document_currency;
 	$gjh->period_id = $this->period_id;
 	$gjh->journal_source = self::$module;
-	$gjh->journal_category = self::$gl_journal_category;
+	$gjh->journal_category = 'AR_' . $this->transaction_class;
 	$gjh->reference_type = 'table';
 	$gjh->reference_key_name = self::$table_name;
 	$gjh->reference_key_value = $this->ar_transaction_header_id;
@@ -282,6 +320,12 @@ class ar_transaction_header extends dbObject {
 	 $gjh->save();
 	 $this->gl_journal_header_id = $gjh->gl_journal_header_id;
 	 echo "<br> Jounral Header Id #" . $this->gl_journal_header_id . ' is created';
+	 //need to create a new insatnce of ar_transaction_header as the gl_journal_header_id is not allowed to updated from webform
+	 $ar_th = new ar_transaction_header();
+	 $ar_th->findBy_id($this->ar_transaction_header_id);
+	 $ar_th->gl_journal_header_id = $gjh->gl_journal_header_id;
+	 $ar_th->audit_trial();
+	 $ar_th->save();
 	} catch (Exception $e) {
 	 echo "<br> Failed Saving Jounral Header" . $e->getMessage();
 	}
@@ -295,11 +339,19 @@ class ar_transaction_header extends dbObject {
 	 $all_details = $artd->findBy_parentId($lines->ar_transaction_line_id);
 	 foreach ($all_details as $deatils) {
 		$new_gjl = new gl_journal_line();
+		$artd->findBy_id($deatils->ar_transaction_detail_id);
 		$new_gjl->gl_journal_header_id = $this->gl_journal_header_id;
-		$new_gjl->line_num = $deatils->detail_number;
-		$new_gjl_i = $new_gjl->findBy_headerId_lineNum();
-		if ($new_gjl_i) {
-		 $new_gjl->gl_journal_line_id = $new_gjl_i->gl_journal_line_id;
+		$new_gjl->reference_key_name = 'ar_transaction_detail';
+		$new_gjl->reference_key_value = $deatils->ar_transaction_detail_id;
+		//check if line lready exists
+		$jl_exists = $new_gjl->findBy_reference_keyName_keyValue();
+		if ($jl_exists) {
+		 $new_gjl->gl_journal_line_id = $jl_exists->gl_journal_line_id;
+		 $new_gjl->line_num = $jl_exists->line_num;
+		} else {
+		 $new_gjl->gl_journal_line_id = null;
+		 $new_gjl->line_num = $this->_max_line_num;
+		 $this->_max_line_num++;
 		}
 		$new_gjl->status = 'U';
 		$new_gjl->code_combination_id = $deatils->detail_ac_id;
@@ -312,36 +364,56 @@ class ar_transaction_header extends dbObject {
 		}
 		$new_gjl->description = 'AR Trnx detail #' . $deatils->detail_number . ' of trxn# ' . $this->transaction_number;
 		$new_gjl->reference_type = 'table';
-		$new_gjl->reference_key_name = 'ar_transaction_detail';
-		$new_gjl->reference_key_value = $deatils->ar_transaction_detail_id;
 		$new_gjl->audit_trial();
 		$new_gjl->save();
+		$artd->journal_created_cb = 1;
+		$artd->audit_trial();
+		$artd->save();
 	 }
 	}
 
 //	save the Receviable Account
 	$receviable_gjl = new gl_journal_line();
 	$receviable_gjl->gl_journal_header_id = $this->gl_journal_header_id;
-	$receviable_gjl->line_num = 999;
-	$receviable_gjl_i = $receviable_gjl->findBy_headerId_lineNum();
-	if ($receviable_gjl_i) {
-	 $receviable_gjl->gl_journal_line_id = $receviable_gjl_i->gl_journal_line_id;
+	$receviable_gjl->reference_key_name = 'ar_transaction_header';
+	$receviable_gjl->reference_key_value = $this->ar_transaction_header_id;
+	//check if line lready exists
+	$jl_exists_receviable = $receviable_gjl->findBy_reference_keyName_keyValue();
+	if ($jl_exists_receviable) {
+	 $receviable_gjl->gl_journal_line_id = $jl_exists_receviable->gl_journal_line_id;
+	 $receviable_gjl->line_num = $jl_exists_receviable->line_num;
+	} else {
+	 $receviable_gjl->gl_journal_line_id = null;
+	 $receviable_gjl->line_num = $this->_max_line_num;
+	 $this->_max_line_num++;
 	}
 	$receviable_gjl->status = 'U';
 	$receviable_gjl->code_combination_id = $this->receivable_ac_id;
 	if ($this->transaction_type == 'CREDIT_MEMO') {
-	 $receviable_gjl->total_cr = $this->header_amount;
-	 $receviable_gjl->total_ac_cr = $this->header_amount;
+	 $receviable_gjl->total_cr = $this->header_amount + $this->tax_amount;
+	 $receviable_gjl->total_ac_cr = $this->header_amount + $this->tax_amount;
 	} else {
-	 $receviable_gjl->total_dr = $this->header_amount;
-	 $receviable_gjl->total_ac_dr = $this->header_amount;
+	 $receviable_gjl->total_dr = $this->header_amount + $this->tax_amount;
+	 $receviable_gjl->total_ac_dr = $this->header_amount + $this->tax_amount;
 	}
 	$receviable_gjl->description = 'AR Trnx Receviable of ' . $this->transaction_number;
 	$receviable_gjl->reference_type = 'table';
-	$receviable_gjl->reference_key_name = 'ar_transaction_header';
-	$receviable_gjl->reference_key_value = $this->ar_transaction_header_id;
+
 	$receviable_gjl->audit_trial();
 	$receviable_gjl->save();
+ }
+
+ public function _post_gl_process($ar_transaction_id) {
+	try {
+	 $this->findBy_id($ar_transaction_id);
+	 $this->transaction_status = 'CLOSED';
+	 $this->audit_trial();
+	 $this->save();
+	 return 1;
+	} catch (Exception $e) {
+	 echo "<br>Updating transaction status failed.Error @ ar_transaction_header @@ " . __LINE__ . $e->getMessage();
+	 return -99;
+	}
  }
 
  public static function instantiate_extra_fields(&$array_of_objects) {
@@ -357,8 +429,8 @@ class ar_transaction_header extends dbObject {
 	return $array_of_objects;
  }
 
- Public static function transaction_types() {
-	$option_header = option_header::find_by_name('AR_TRANSACTION_TYPE');
+ Public static function transaction_class() {
+	$option_header = option_header::find_by_name('AR_TRANSACTION_CLASS');
 	$transaction_types = option_line::find_by_option_id($option_header->option_header_id);
 	return $transaction_types;
  }
@@ -452,7 +524,6 @@ class ar_transaction_header extends dbObject {
 	$new_arth->header_amount = '0.0';
 	$new_arth->ar_transaction_header_id = $new_arth_i->ar_transaction_header_id;
 	$new_arth->audit_trial();
-	pa($new_arth);
 	try {
 	 $new_arth->save();
 	} catch (Exception $e) {
@@ -540,7 +611,8 @@ class ar_transaction_header extends dbObject {
 	$multi_select_hidden = [
 			'action_class_name',
 			'mode',
-			'action'
+			'action',
+			'show_block',
 	];
 
 	return $multi_select_hidden;

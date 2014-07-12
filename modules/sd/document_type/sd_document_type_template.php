@@ -74,7 +74,8 @@
 							 <?php echo $f->select_field_from_array('destination_type', sd_document_type::$destination_type_a, $$class->destination_type); ?>							 
 							</li>
 
-							<li><label>AR Transaction Type :</label> <?php $f->text_field_wid('ar_transaction_type'); ?>	</li>
+							<li><label>AR Transaction Type :</label> 
+							 <?php echo $f->select_field_from_object('ar_transaction_type', ar_transaction_type::find_all(), 'ar_transaction_type_id', 'ar_transaction_type', $$class->ar_transaction_type, 'ar_transaction_type', '', 1, $readonly); ?>	</li>
 							<li><label>AR Transaction Source :</label> <?php $f->text_field_wid('ar_transaction_source'); ?>	</li>
 						 </ul> 
 						</div> 

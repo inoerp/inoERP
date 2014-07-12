@@ -141,6 +141,3 @@ class site_control_line extends dbObject {
 
 //end of inv_transaction class
 ?>
-
-
-

@@ -269,6 +269,3 @@ class page extends dbObject {
 
 //end of page class
 ?>
-
-
-

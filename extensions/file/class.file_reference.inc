@@ -24,6 +24,3 @@ class file_reference extends dbObject {
 
 //end of file_reference class
 ?>
-
-
-

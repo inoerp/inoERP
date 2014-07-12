@@ -70,6 +70,3 @@ class site_control_header extends dbObject {
 
 //end of bom class
 ?>
-
-
-

@@ -22,6 +22,8 @@ $("#comment_button").click(function() {
 });
 
 function deleteComment() {
+ var homeUrl = $('#home_url').val();
+ var daletePath = homeUrl + 'form.php?class_name=comment';
  $(".delete_button").click(function(e) {
 	var headerId = $(this).val();
 	$(".delete_button").addClass("show_loading_small");
@@ -29,7 +31,7 @@ function deleteComment() {
 	e.preventDefault();
 	if (confirm("Do you really want to delete ?\n" + headerId)) {
 	 $.ajax({
-		url: 'form.php?class_name=comment',
+		url: daletePath,
 		data: {
 		 delete_id: headerId,
 		 deleteType: 'header',
@@ -55,9 +57,11 @@ function deleteComment() {
 }
 
 function updateComment(comment_id, ulclass) {
+ var homeUrl = $('#home_url').val();
+  var savePath = homeUrl + 'comment.php';
  $('#loading').show();
  $.ajax({
-	url: 'comment.php',
+	url: savePath,
 	data: {update: '1',
 	 comment_id: comment_id},
 	type: 'get'
@@ -100,16 +104,16 @@ $(document).ready(function() {
 	if (confirm("Are you sure?")) {
 	 updateComment(comment_id, ulclass);
 	}
-	e.stoppropagation();
+	e.stopPropagation();
  });
 
 
- //FILE attachment
- var fu = new fileUploadMain();
- fu.json_url = 'extensions/file/upload.php';
- fu.fileUpload();
+// //FILE attachment
+// var fu = new fileUploadMain();
+// fu.json_url = 'extensions/file/upload.php';
+// fu.fileUpload();
 
-deleteData('form.php?class_name=comment&line_class_name=comment');
+// deleteData('form.php?class_name=comment&line_class_name=comment');
 
  $('.submit_comment').on('click', function() {
 	$('.show_loading_small').show();
@@ -119,7 +123,9 @@ deleteData('form.php?class_name=comment&line_class_name=comment');
 	 $(this).html(data);
 	});
 	var headerData = $(this).closest('form').serializeArray();
-	saveHeader('form.php?class_name=comment', headerData, '#comment_id', '', true, 'comment');
+	var homeUrl = $('#home_url').val();
+	var savePath = homeUrl + 'form.php?class_name=comment';
+	saveHeader(savePath, headerData, '#comment_id', '', true, 'comment');
 	$(".comment_error").replaceWith('<input type="button" value="Reload page" onclick="location.reload();">');
  });
 

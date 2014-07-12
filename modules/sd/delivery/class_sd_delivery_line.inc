@@ -159,7 +159,7 @@ class sd_delivery_line extends dbObject {
 	 return 10;
 	} else if (($this->action == 'COMPLETE_SHIPMENT')) {
 	 echo "<br> Starting to complete the shipment ";
-		 $this->_complete_shipment();
+	 $this->_complete_shipment();
 	 return 10;
 	} else {
 	 echo "<br> No Action For Line";
@@ -184,12 +184,65 @@ class sd_delivery_line extends dbObject {
 	echo "<br>Delivery Line is Sucessfully Deleted";
  }
 
+ private function _update_ar_interface() {
+	$ar_ti = new ar_transaction_interface();
+	$soh = new sd_so_header();
+	$soh->findBy_id($this->sd_so_header_id);
+	$ar_ti->bu_org_id = $soh->bu_org_id;
+	$legal_org_id = org::find_by_id($ar_ti->bu_org_id)->legal_org_id;
+	$ar_ti->ledger_id = legal::find_by_orgId($legal_org_id)->ledger_id;
+	$sd_transaction_type = $soh->document_type;
+	$sd_doc = new sd_document_type();
+	$sd_doc->findBy_id($sd_transaction_type);
+	$ar_ti->transaction_type = $sd_doc->ar_transaction_type;
+	$ar_ti->ar_customer_id = $soh->ar_customer_id;
+	$ar_ti->ar_customer_site_id = $soh->ar_customer_site_id;
+	$ar_ti->currency = $soh->document_currency;
+	$ar_ti->payment_term_id = $soh->payment_term_id;
+	$ar_tp = new ar_transaction_type();
+	$ar_tp->findBy_id($ar_ti->transaction_type);
+	$ar_ti->receivable_ac_id = $ar_tp->receivable_ac_id;
+	$ar_ti->revenue_ac_id = $ar_tp->revenue_ac_id;
+	$ar_ti->tax_code_id = $ar_tp->tax_ac_id;
+	$ar_ti->item_id_m = $this->item_id_m;
+	$ar_ti->inv_line_quantity = $this->quantity;
+	$sol = new sd_so_line();
+	$sol->findBy_id($this->sd_so_line_id);
+	$ar_ti->inv_unit_price = $sol->unit_price;
+	$ar_ti->inv_line_price = $ar_ti->inv_line_quantity * $ar_ti->inv_unit_price;
+	$ar_ti->tax_code_id = $sol->tax_code_id;
+	$ar_ti->item_description = $sol->item_description;
+	$mm_tax = new mdm_tax_code();
+	$mm_tax->findBy_id($ar_ti->tax_code_id);
+	if (!empty($mm_tax->percentage)) {
+	 $ar_ti->tax_amount = ($ar_ti->inv_line_price * $mm_tax->percentage) / 100;
+	} else if (!empty($mm_tax->tax_amount)) {
+	 $ar_ti->tax_amount = $mm_tax->tax_amount;
+	}
+	$ar_ti->line_type = $sol->line_type;
+	$ar_ti->line_description = $sol->line_description;
+	$ar_ti->uom_id = $sol->uom_id;
+	$ar_ti->reference_type = 'table';
+	$ar_ti->reference_key_name = 'sd_so_line';
+	$ar_ti->reference_key_value = $ar_ti->sd_so_line_id = $this->sd_so_line_id;
+	$ar_ti->sd_so_header_id = $this->sd_so_header_id;
+	$ar_ti->audit_trial();
+	try{
+	 pa($ar_ti);
+	$ar_ti->save();
+	}catch(Exception $e){
+	 echo "<br>Transfer to AR Interface Failed. Error @sd_delivery_line @@ ".__LINE__. $e->getMessage();
+	 $this->rollback = true;
+	}
+ }
+
  private function _complete_shipment() {
 	/*
 	 * 1. Update SO Line with the shipment qty and status
 	 * 2. Inventory Trandsaction
 	 * 3. Update the delivery line to SHIPPED
 	 * needs to be manually moved back to stock through sub inventory transfer/move order
+	 * 4. Insert the data in ar_transaction_interface
 	 */
 	$sol = new sd_so_line();
 	$sol->findBy_id($this->sd_so_line_id);
@@ -217,7 +270,9 @@ class sd_delivery_line extends dbObject {
 	$invt->save();
 	$invt->_after_save();
 	echo "<br>Sales Order Line Status is Sucessfully Updated";
-	
+
+	$this->_update_ar_interface();
+
 	$this->delivery_status = 'SHIPPED';
 	$this->audit_trial();
 	$this->save();

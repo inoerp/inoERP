@@ -224,8 +224,8 @@ LEFT JOIN po_requisition_line ON po_requisition_header.po_requisition_header_id 
 LEFT JOIN item ON po_requisition_line.item_id_m = item.item_id_m
 LEFT JOIN po_requisition_detail ON po_requisition_line.po_requisition_line_id = po_requisition_detail.po_requisition_line_id
 LEFT JOIN org ON po_requisition_line.receving_org_id = org.org_id
-WHERE po_requisition_detail.order_number IS NULL OR po_requisition_detail.order_number = ''
-AND po_requisition_header.requisition_status = 'APPROVED'
+WHERE  po_requisition_header.requisition_status = 'APPROVED'
+AND (po_requisition_detail.order_number IS NULL OR po_requisition_detail.order_number = '')
 
 ";
  }

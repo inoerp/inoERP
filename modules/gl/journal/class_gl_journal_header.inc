@@ -94,7 +94,6 @@ class gl_journal_header extends dbObject {
 		 'gl_journal_status' => 'GL_JOURNAL_STATUS',
 		 'gl_balance_type' => 'GL_BALANCE_TYPE',
  ];
-
  public $gl_journal_header_id;
  public $ledger_id;
  public $currency;
@@ -246,9 +245,24 @@ class gl_journal_header extends dbObject {
 	}
  }
 
+ private function _update_referenced_class() {
+	$class = $this->reference_key_name;
+	$$class = new $class;
+	if(method_exists($$class, '_post_gl_process')){
+	 return call_user_func(array($$class,'_post_gl_process' ), $this->reference_key_value );
+	}
+ }
+
  public function _after_save() {
 //update all journals lines as posted
 	if ($this->status == 'POSTED') {
+	 if (!empty($this->reference_key_name) && ($this->reference_key_value)) {
+		if( $this->_update_referenced_class() < 0){
+		 echo "<br>POST to GL process failed!";
+		 $this->rollback = true;
+		 return -99;
+		}
+	 }
 	 $gjl = new gl_journal_line();
 	 $gjl->gl_journal_header_id = $this->gl_journal_header_id;
 	 $gjl->post_all_lines();
@@ -294,6 +308,16 @@ class gl_journal_header extends dbObject {
 	 }
 	}
 	return $this->msg;
+ }
+ 
+ public function highest_line_num(){
+	$sql = " SELECT MAX(gjl.line_num)	 as max_line_num "
+					. " FROM  gl_journal_header gjh LEFT JOIN gl_journal_LINE gjl "
+					. " ON gjh.gl_journal_header_id = gjl.gl_journal_header_id "
+					. " AND gjh.gl_journal_header_id = :gl_journal_header_id  ";
+	$value_a = ['gl_journal_header_id' => $this->gl_journal_header_id];
+	$result = $this->findBySql($sql, $value_a);
+	return !empty($result) ? array_pop($result) : 0 ;
  }
 
 }

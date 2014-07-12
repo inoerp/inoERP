@@ -40,16 +40,14 @@
 		</div>
 		<div id="file_upload_form">
 		 <ul class="inRow asperWidth">
-			<li><input type="file" id="attachments" class="attachments" name="attachments[]" multiple/></li>
-			<li> <input type="button" value="Attach" form="file_upload" name="attach_submit" id="attach_submit" class="submit button"></li>
+			<li><input type="file" id="comment_attachments" class="attachments" name="attachments[]" multiple/></li>
+			<li> <input type="button" value="Attach" form="file_upload" name="attach_submit" id="comment_attach_submit" class="submit button comment_attach_submit"></li>
 			<li class="show_loading_small"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/small_loading.gif"/></li>
 		 </ul>
+		 <div class="uploaded_file_details"></div>
 		</div>
 		<div id="uploaded_file_details">		</div>
 		 <?php echo file::attachment_statement($file); ?>
-		<div id="attachment_comment">
-
-		</div>
 	 </form>
 
  <!--END OF FORM HEADER-->  

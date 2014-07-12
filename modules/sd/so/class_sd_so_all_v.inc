@@ -198,38 +198,44 @@ last_update_date
 )
 AS
  SELECT 
-sd_so_header.sd_so_header_id, sd_so_header.bu_org_id, sd_so_header.document_type, sd_so_header.so_number, sd_so_header.ar_customer_id, 
-sd_so_header.ar_customer_site_id, sd_so_header.sales_person, sd_so_header.document_currency, 
-sd_so_header.header_amount, sd_so_header.so_status,
-sd_so_header.payment_term_id,
+sdsh.sd_so_header_id, sdsh.bu_org_id, sdsh.document_type, sdsh.so_number, sdsh.ar_customer_id, 
+sdsh.ar_customer_site_id, sdsh.sales_person, sdsh.document_currency,  sdsh.header_amount, sdsh.so_status, sdsh.payment_term_id,
 osv.onhand,
 ar_customer.customer_name, ar_customer.customer_number,
 ar_customer_site.customer_site_name, ar_customer_site.customer_site_number,
 payment_term.payment_term, payment_term.description,
-sd_so_line.sd_so_line_id, sd_so_line.line_type, sd_so_line.line_number,	sd_so_line.item_id_m, 
-sd_so_line.item_description, sd_so_line.line_description, sd_so_line.line_quantity,
-sd_so_line.picked_quantity, sd_so_line.shipped_quantity,
-sd_so_line.unit_price, sd_so_line.line_price, sd_so_line.line_status,
+sdsl.sd_so_line_id, sdsl.line_type, sdsl.line_number,	sdsl.item_id_m, 
+sdsl.item_description, sdsl.line_description, sdsl.line_quantity,
+sdsl.picked_quantity, sdsl.shipped_quantity, sdsl.unit_price, sdsl.line_price, sdsl.line_status,
 ssc.staging_subinventory_id,ssc.staging_locator_id,subinventory.subinventory,locator.locator,
-sd_so_line.requested_date, sd_so_line.promise_date , sd_so_line.schedule_ship_date ,sd_so_line.actual_ship_date,
+sdsl.requested_date, sdsl.promise_date , sdsl.schedule_ship_date ,sdsl.actual_ship_date,
 item.item_number, item.uom_id, item.item_status,
-org.org,sd_so_line.shipping_org_id,
-sd_so_line.created_by, sd_so_line.creation_date, sd_so_line.last_update_by, sd_so_line.last_update_date
-
-FROM sd_so_header 
-LEFT JOIN ar_customer ON sd_so_header.ar_customer_id = ar_customer.ar_customer_id
-LEFT JOIN ar_customer_site ON sd_so_header.ar_customer_site_id = ar_customer_site.ar_customer_site_id
-LEFT JOIN payment_term ON sd_so_header.payment_term_id = payment_term.payment_term_id
-LEFT JOIN sd_so_line ON sd_so_header.sd_so_header_id = sd_so_line.sd_so_header_id
-LEFT JOIN item ON sd_so_line.item_id_m = item.item_id_m and item.org_id = sd_so_line.shipping_org_id
-LEFT JOIN org ON sd_so_line.shipping_org_id = org.org_id
-LEFT JOIN sd_shipping_control ssc ON ssc.org_id = sd_so_line.shipping_org_id
+org.org, sdsl.shipping_org_id,
+sdsl.created_by, sdsl.creation_date, sdsl.last_update_by, sdsl.last_update_date
+FROM sd_so_header sdsh
+LEFT JOIN payment_term ON sdsh.payment_term_id = payment_term.payment_term_id,
+ar_customer, 
+ar_customer_site, 
+sd_so_line sdsl
+LEFT JOIN onhand_summary_v osv ON osv.item_id_m = sdsl.item_id_m AND osv.org_id = sdsl.shipping_org_id,
+item,
+org,
+sd_shipping_control ssc 
 LEFT JOIN subinventory ON subinventory.subinventory_id = ssc.staging_subinventory_id
 LEFT JOIN locator ON locator.locator_id = ssc.staging_locator_id
-LEFT JOIN onhand_summary_v osv ON osv.item_id_m = sd_so_line.item_id_m AND osv.org_id = sd_so_line.shipping_org_id
+
+WHERE
+sdsh.sd_so_header_id = sdsl.sd_so_header_id
+AND sdsh.ar_customer_id = ar_customer.ar_customer_id
+AND sdsh.ar_customer_site_id = ar_customer_site.ar_customer_site_id
+AND sdsl.item_id_m = item.item_id_m AND item.org_id = sdsl.shipping_org_id
+AND sdsl.shipping_org_id = org.org_id
+AND ssc.org_id = sdsl.shipping_org_id
 
 ";
  }
+
+ 
 
  public function findBY_soLineId($line_id) {
 	$sql = " SELECT * FROM ";
@@ -243,5 +249,54 @@ LEFT JOIN onhand_summary_v osv ON osv.item_id_m = sd_so_line.item_id_m AND osv.o
 
 }
 
+
+$sql = " 
+ CREATE OR REPLACE VIEW xx_sd_so_all_v
+(
+sd_so_header_id, bu_org_id, document_type, so_number, ar_customer_id, ar_customer_site_id, sales_person,
+document_currency, header_amount, so_status,  payment_term_id, onhand, customer_name, customer_number, 
+customer_site_name, customer_site_number, payment_term, payment_term_description, sd_so_line_id, line_type,
+line_number, item_id_m, item_description, line_description, line_quantity,  picked_quantity,
+shipped_quantity, unit_price, line_price, line_status, staging_subinventory_id, staging_locator_id,
+staging_subinventory, staging_locator, requested_date, promise_date , schedule_ship_date ,actual_ship_date,
+item_number, uom_id, item_status,  org, shipping_org_id, created_by,  creation_date, last_update_by,
+last_update_date
+)
+AS
+ SELECT 
+sdsh.sd_so_header_id, sdsh.bu_org_id, sdsh.document_type, sdsh.so_number, sdsh.ar_customer_id, 
+sdsh.ar_customer_site_id, sdsh.sales_person, sdsh.document_currency,  sdsh.header_amount, sdsh.so_status, sdsh.payment_term_id,
+osv.onhand,
+ar_customer.customer_name, ar_customer.customer_number,
+ar_customer_site.customer_site_name, ar_customer_site.customer_site_number,
+payment_term.payment_term, payment_term.description,
+sdsl.sd_so_line_id, sdsl.line_type, sdsl.line_number,	sdsl.item_id_m, 
+sdsl.item_description, sdsl.line_description, sdsl.line_quantity,
+ssc.staging_subinventory_id,ssc.staging_locator_id,subinventory.subinventory,locator.locator,
+sdsl.requested_date, sdsl.promise_date , sdsl.schedule_ship_date ,sdsl.actual_ship_date,
+sdsl.picked_quantity, sdsl.shipped_quantity, sdsl.unit_price, sdsl.line_price, sdsl.line_status,
+item.item_number, item.uom_id, item.item_status,
+org.org, sdsl.shipping_org_id,
+sdsl.created_by, sdsl.creation_date, sdsl.last_update_by, sdsl.last_update_date
+FROM sd_so_header sdsh
+LEFT JOIN payment_term ON sdsh.payment_term_id = payment_term.payment_term_id,
+ar_customer, 
+ar_customer_site, 
+sd_so_line sdsl
+LEFT JOIN onhand_summary_v osv ON osv.item_id_m = sdsl.item_id_m AND osv.org_id = sdsl.shipping_org_id,
+item,
+org,
+sd_shipping_control ssc 
+LEFT JOIN subinventory ON subinventory.subinventory_id = ssc.staging_subinventory_id
+LEFT JOIN locator ON locator.locator_id = ssc.staging_locator_id
+
+WHERE sdsh.sd_so_header_id= 30
+AND sdsh.sd_so_header_id = sdsl.sd_so_header_id
+AND sdsh.ar_customer_id = ar_customer.ar_customer_id
+AND sdsh.ar_customer_site_id = ar_customer_site.ar_customer_site_id
+AND sdsl.item_id_m = item.item_id_m AND item.org_id = sdsl.shipping_org_id
+AND sdsl.shipping_org_id = org.org_id
+AND ssc.org_id = sdsl.shipping_org_id
+"
 //end of so_detail class
 ?>

@@ -194,7 +194,7 @@ po_requisition_line_id, line_type, po_requisition_line_number,	item_id_m, item_d
 item_number, uom_id, item_status,
 po_requisition_detail_id, shipment_number, ship_to_inventory, sub_inventory_id, locator_id, requestor, quantity,
 need_by_date, promise_date,
-received_quantity, accepted_quantity, delivered_quantity, invoiced_quantity, paid_quantity,	order_number
+received_quantity, accepted_quantity, delivered_quantity, invoiced_quantity, paid_quantity,	order_number,
 ship_to_org, created_by, creation_date, last_update_by, last_update_date
 )
 AS
@@ -211,7 +211,7 @@ item.item_number, item.uom_id, item.item_status,
 po_requisition_detail.po_requisition_detail_id, po_requisition_detail.shipment_number, po_requisition_detail.ship_to_inventory, po_requisition_detail.sub_inventory_id, 
 po_requisition_detail.locator_id, po_requisition_detail.requestor, po_requisition_detail.quantity, po_requisition_detail.need_by_date, po_requisition_detail.promise_date,
 po_requisition_detail.received_quantity, po_requisition_detail.accepted_quantity, po_requisition_detail.delivered_quantity, 
-po_requisition_detail.invoiced_quantity, po_requisition_detail.paid_quantity,	po_requisition_detail.order_number
+po_requisition_detail.invoiced_quantity, po_requisition_detail.paid_quantity,	po_requisition_detail.order_number,
 org.org,
 po_requisition_header.created_by, po_requisition_header.creation_date, po_requisition_header.last_update_by, po_requisition_header.last_update_date
 

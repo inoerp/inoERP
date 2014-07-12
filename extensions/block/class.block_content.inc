@@ -57,6 +57,3 @@ class block_content extends dbObject {
 
 //end of block class
 ?>
-
-
-

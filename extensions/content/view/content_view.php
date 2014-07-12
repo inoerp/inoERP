@@ -40,7 +40,7 @@ if (!empty($category)) {
 $allow_content_update = false;
 if((!empty($_SESSION['username'])) && ($content->created_by == $_SESSION['username'])){
  $allow_content_update = true;
-}elseif((!empty($_SESSION['user_roles']))&&(in_array('admin',$_SESSION['user_roles']))){
+}elseif((!empty($_SESSION['user_roles']))&&(in_array('ADMIN',$_SESSION['user_roles']))){
  $allow_content_update = true;
 }
 

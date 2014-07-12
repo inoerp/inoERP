@@ -288,6 +288,7 @@ $(document).ready(function() {
  classContextMenu.noOfTabbs = 5;
  classContextMenu.contextMenu();
 
+deleteData('form.php?class_name=sd_so_header&line_class_name=sd_so_line');
 
  var classSave = new saveMainClass();
  classSave.json_url = 'form.php?class_name=sd_so_header';
@@ -316,11 +317,11 @@ $(document).ready(function() {
 	var item_id_m = $(this).closest('.tabContainer').find(rowClass).find('.item_id_m').val();
 	var price_date = $(this).closest('.tabContainer').find(rowClass).find('.price_date').val();
 	var price_list_headerId = $(this).closest('#form_line').find(rowClass).find('.price_list_headerId').val();
-	getDocumentTypeDetails(rowClass, item_id_m, price_date, price_list_headerId);
+	getPriceDetails(rowClass, item_id_m, price_date, price_list_headerId);
  });
 
 //set the line price
- $('#content').on('change', '.unit_price,.line_quantity', function() {
+ $('#content').on('blur', '.unit_price,.line_quantity', function() {
 	var trClass = '.' + $(this).closest('tr').attr('class');
 	var unitPrice = +($(this).closest('#form_line').find(trClass).find('.unit_price').val());
 	var lineQuantity = +($(this).closest('#form_line').find(trClass).find('.line_quantity').val());
@@ -329,7 +330,7 @@ $(document).ready(function() {
  });
 
 //calculate the tax amount
- $('#content').on('change', '.line_quantity, .unit_price, .line_price', function() {
+ $('#content').on('blur', '.line_quantity, .unit_price, .line_price', function() {
 	var trClass = '.' + $(this).closest('tr').prop('class');
 	var linePrice = +$('#content').find(trClass).find('.line_price').val();
 	var taxCodeVal = 0;

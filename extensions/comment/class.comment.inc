@@ -254,19 +254,6 @@ class comment extends dbObject {
 					" WHERE reference_table = '{$reference_table}'
            AND reference_id = '{$reference_id}' ";
 	if (!empty($per_page)) {
-//	 $comment_string .= '<div id="noOfpages">';
-//	 $comment_string .= '<form action="" method="GET">';
-//	 $comment_string .= 'Show<select name="per_page">';
-//	 $comment_string .= '<option value="3"> 3 </option>';
-//	 $comment_string .= '<option value="5"> 5 </option>';
-//	 $comment_string .= '<option value="10"> 10 </option>';
-//	 $comment_string .= '<option value="20"> 20 </option>';
-//	 $comment_string .= '<option value="50"> 50 </option>';
-//	 $comment_string .= '</select>';
-//	 $comment_string .= '<input type="hidden" value="' . $extension_id . '" name="page_id">';
-//	 $comment_string .= '<input type="submit" class="button" value="Per Page" >';
-//	 $comment_string .= '</form>';
-//	 $comment_string .= '</div>';
 	 $total_count = self::count_by_reference_table_and_id($reference_table, $reference_id);
 	 $pagination = new pagination($pageno, $per_page, $total_count);
 	 $sql .=" LIMIT {$per_page} ";
@@ -365,6 +352,3 @@ class comment extends dbObject {
 
 //end of comment class
 ?>
-
-
-

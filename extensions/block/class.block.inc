@@ -391,6 +391,3 @@ class block extends dbObject {
 
 //end of block class
 ?>
-
-
-

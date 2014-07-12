@@ -413,6 +413,3 @@ class view extends dbObject {
 
 //end of view class
 ?>
-
-
-

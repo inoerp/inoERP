@@ -209,12 +209,19 @@ class user extends dbObject {
 	global $si ;
 	if ($this->user_id) {
 	 $msg = "New user registration is sucessful!";
-	 $to = $this->email;
 	 $subject = "User Registrtion @ " . $si->site_name;
 	 $message = "Dear " . $this->username . '<br> your regitraton is sucessful';
 	 $replyto = "From : admin@site.com";
-
-	 if (mail($to, $subject, $message)) {
+   $to = $this->email;
+	 $subject = "User Reginstration @" . $si->site_name;
+	 $message = "<html> <body>Dear " . $this->username . ',<br><br>';
+	 $message .= "<p>Welcome to ".  $si->site_name. ' <br>You can now access the site with your registered user '
+					 . ' name & password ';
+	 $message .='<br><br>Thanks<br>' . $si->site_name . '</body></html>';
+	 $from = "admin@".$si->site_name;
+	 $headers = "From: $from\r\n";
+	 $headers .= "Content-type: text/html\r\n";
+	  if (mail($to, $subject, $message, $headers)) {
 		$msg = "mail has been sent";
 	 } else {
 		$msg = "mail failed!";
@@ -230,6 +237,3 @@ class user extends dbObject {
 
 //end of resource class
 ?>
-
-
-

@@ -206,6 +206,3 @@ public function _after_save() {
 
 //end of content_type class
 ?>
-
-
-

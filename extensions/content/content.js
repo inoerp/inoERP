@@ -3,10 +3,10 @@ $(document).ready(function() {
 //get the attachement form
 // get_attachment_form('../file/json.file.php');
 
- //FILE attachment
- var fu = new fileUploadMain();
- fu.json_url = 'extensions/file/upload.php';
- fu.fileUpload();
+// //FILE attachment
+// var fu = new fileUploadMain();
+// fu.json_url = 'extensions/file/upload.php';
+// fu.fileUpload();
 
 // $('a.show.content_id').click(function() {
 //	var content_id = $('.content_id').val();
@@ -32,10 +32,10 @@ $(document).ready(function() {
 	});
 	var headerData = $(form_header_id).serializeArray();
 	saveHeader('content.php', headerData, '#content_id', '', true, 'content');
-
+alert('okey');
  });
 
- deleteHeader('form.php?class_name=content', $('#hidden_content_id').val());
+ deleteHeader('form.php?class_name=content', $('#content_id').val());
 
 // var classSave = new saveMainClass();
 // classSave.json_url = 'content.php';
@@ -45,8 +45,8 @@ $(document).ready(function() {
 //classSave.saveMain();
 
 $('a.show.content_id').on('click', function(){
-var path = 'content.php?mode=2&content_id=' + $('#hidden_content_id').val() 
-				+ '&content_type=' + $('#hidden_content_type').val();
+var path = 'content.php?mode=2&content_id=' + $('#content_id').val() 
+				+ '&content_type=' + $('#content_type').val();
 $(this).attr('href',path);
 });
 

@@ -29,7 +29,7 @@
 					 <?php echo form::select_field_from_object('legal_org_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->legal_org_id, 'legal_org_id', $readonly1, '', '', 1); ?>
 					</li>
 										<li><label>Transaction Class : </label>
-					 <?php echo $f->select_field_from_object('transaction_class', ar_transaction_header::transaction_types(), 'option_line_code', 'option_line_value', $$class->transaction_class, 'transaction_class', '', 1, $readonly1); ?>
+					 <?php echo $f->select_field_from_object('transaction_class', ar_transaction_header::transaction_class(), 'option_line_code', 'option_line_value', $$class->transaction_class, 'transaction_class', '', 1, $readonly1); ?>
 					</li>
 					<li><label>Transaction Type :</label><?php form::text_field_wid('ar_transaction_type'); ?></li>
 					<li><label>Description :</label><?php $f->text_field_wid('description'); ?> 					</li>

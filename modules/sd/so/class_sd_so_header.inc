@@ -192,34 +192,27 @@ class sd_so_header extends dbObject {
  }
 
  public function _after_save() {
-	global $db;
 	if ((!empty($this->sd_so_header_id)) && empty($this->so_number)) {
 	 $sd_so_header_id = $this->sd_so_header_id;
 	 $bu_org_id = $this->bu_org_id;
 	 $so_number = $bu_org_id . '-' . $sd_so_header_id;
 	 $this->so_number = $so_number;
 	 echo '<br/> New SO number is ' . $so_number;
-	 $this->msg = $this->update_soNumber();
+	 $this->audit_trial();
+   $this->update_soNumber();
 	}
 
-	return $this->msg;
+
  }
 
  private function update_soNumber() {
-	global $db;
-
 	$sql = " UPDATE " . self::$table_name;
-	$sql .= " SET so_number = :so_number  ";
-	$sql .= " WHERE sd_so_header_id = :sd_so_header_id  ";
-	$param_a = ['so_number', 'sd_so_header_id'];
-	$value_a = ['sd_so_header_id' => $this->sd_so_header_id, 'so_number' => $this->so_number];
-
+	$sql .= " SET so_number = '{$this->so_number}'  ";
+	$sql .= " WHERE sd_so_header_id = '{$this->sd_so_header_id}'  ";
 	try {
-	 $db->findBy_sql($sql, $param_a, $value_a);
-	 return true;
+	 $this->runSQL($sql);
 	} catch (Exception $e) {
 	 echo "<br>SO Number update failed!" . $e->getMessage();
-	 return false;
 	}
  }
 
