@@ -25,7 +25,7 @@ if ((!empty($_REQUEST['action'])) && ($_REQUEST['action'] = 'search')) {
 }
 ?>
 
-<!--<div id="json_delete_line"> <?php // json_delete('supplier'); ?> </div>-->
+
 <div id="supplier_attachment">
  <div id="supplier_header_level_attachement">
 	<?php
@@ -37,6 +37,7 @@ if ((!empty($_REQUEST['action'])) && ($_REQUEST['action'] = 'search')) {
 	?>
  </div>
 </div>
+
 <div id="supplier_bu_addresses">
  <?php
  if ((!empty($_GET['supplier_id'])) && (!empty($_GET['org_id']))) {
@@ -66,7 +67,8 @@ if ((!empty($_REQUEST['action'])) && ($_REQUEST['action'] = 'search')) {
 		echo form::select_field_from_object('supplier_site_id', supplier_site::find_all_sitesOfSupplier($supplier_id), 'supplier_site_id', 'supplier_site_name', '', 'supplier_site_id');
 	 }
 	}
-	?></div>
+	?>
+ </div>
 </div>
 <!--//supplier site details-->
 <div id="json_supplier_site_details">

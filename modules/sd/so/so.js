@@ -108,18 +108,7 @@ $(document).ready(function() {
 	$('.shipment_number:first').val('1');
  }
 
-// $('.need_by_date:first').datepicker("setDate", new Date());
-// $('.promise_date:first').datepicker("setDate", new Date());
-
-
-
-//get customer details
- $("#ar_customer_id, #customer_name, #customer_number").on("change", function() {
-	if (($("#bu_org_id").val()) && ($('#ar_customer_id').val())) {
-	 var bu_org_id = $("#bu_org_id").val();
-	 getCustomerDetails('modules/ar/customer/json_customer.php', bu_org_id);
-	}
- });
+get_customer_detail_for_bu();
 
  $("#content").on("change", '#ar_customer_site_id', function() {
 	var customer_site_id = $("#ar_customer_site_id").val();
@@ -175,12 +164,6 @@ $(document).ready(function() {
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
-//selecting customer
- $(".ar_customer.select_popup").on("click", function() {
-	localStorage.idValue = "";
-	void window.open('select.php?class_name=ar_customer', '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
 
  //Popup for selecting address 
  $(".address_popup").click(function() {
@@ -288,7 +271,7 @@ $(document).ready(function() {
  classContextMenu.noOfTabbs = 5;
  classContextMenu.contextMenu();
 
-deleteData('form.php?class_name=sd_so_header&line_class_name=sd_so_line');
+ deleteData('form.php?class_name=sd_so_header&line_class_name=sd_so_line');
 
  var classSave = new saveMainClass();
  classSave.json_url = 'form.php?class_name=sd_so_header';

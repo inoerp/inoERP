@@ -26,7 +26,7 @@
 					 <div class="large_shadow_box"> 
 						<ul class="column five_column">
 						 <li>
-							<label><img class="ar_customer_id_popup select_popup clickable"  src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
+							<label><img class="ar_customer_id select_popup clickable"  src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
 							 Customer Id : </label>
 							<?php $f->text_field_d('ar_customer_id'); ?>
 							<a name="show" href="?ar_customer_id=" class="show ar_customer_id">

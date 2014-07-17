@@ -1,5 +1,7 @@
 <?php
+
 class ar_receipt_line extends dbObject {
+
  public static $table_name = "ar_receipt_line";
  public static $primary_column = "ar_receipt_line_id";
  public static $parent_primary_column = "ar_receipt_header_id";
@@ -43,6 +45,26 @@ class ar_receipt_line extends dbObject {
  public $fields_inHeader_needsToBeInserted_inPOST = [
 		 "ar_receipt_header_id"
  ];
+ public $initial_search = [
+		 'ar_receipt_header_id',
+		 'ar_transaction_header_id',
+		 'line_number',
+		 'line_description',
+		 'reference_key_value',
+ ];
+ public $column = [
+		 'ar_receipt_header_id',
+		 'ar_transaction_header_id',
+		 'line_number',
+		 'amount',
+		 'line_description',
+		 'ef_id',
+		 'status',
+		 'line_source',
+		 'reference_type',
+		 'reference_key_name',
+		 'reference_key_value'
+ ];
  public $ar_receipt_line_id;
  public $ar_receipt_header_id;
  public $line_number;
@@ -66,9 +88,9 @@ class ar_receipt_line extends dbObject {
 
  public function _after_save() {
 	if ($this->ar_receipt_line_id) {
-	 	 //update the invoice paid amount
+	 //update the invoice paid amount
 	 try {
-			$this->_update_invoice_amount();
+		$this->_update_invoice_amount();
 	 } catch (Exception $e) {
 		echo "<br>Updating transaction paid amount failed @ ar_receipt_line after save" . $e->getMessage();
 	 }
@@ -91,7 +113,6 @@ class ar_receipt_line extends dbObject {
 	 $arth->receipt_amount = $this->amount + $arth_i->receipt_amount;
 	 if ($arth->receipt_amount <= $arth_i->header_amount) {
 		$arth->audit_trial();
-		pa($arth);
 		$arth->save();
 	 } else {
 		echo "<br>Receipt amount is more than available balance. Or<br>The Transaction# $arth_i->transaction_number is fully paid ";

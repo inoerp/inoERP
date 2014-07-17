@@ -21,6 +21,7 @@ class sd_so_line extends dbObject {
 		 'requested_date',
 		 'promise_date',
 		 'schedule_ship_date',
+		 'actual_ship_date',
 		 'item_description',
 		 'line_description',
 		 'uom_id',
@@ -68,13 +69,17 @@ class sd_so_line extends dbObject {
  public $fields_inForm_notInDataBase = [
 		 "so_number",
 		 "item_number",
-		 'actual_ship_date',
 		 'tax_code_value',
 		 'ar_transaction_number'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
 		 "sd_so_header_id"
  ];
+ 
+ public $notUpdatedFromWebForm = [
+		 'actual_ship_date',
+ ];
+ 
  public $sd_so_line_id;
  public $sd_so_header_id;
  public $line_type;

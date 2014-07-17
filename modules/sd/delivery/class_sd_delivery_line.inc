@@ -228,7 +228,6 @@ class sd_delivery_line extends dbObject {
 	$ar_ti->sd_so_header_id = $this->sd_so_header_id;
 	$ar_ti->audit_trial();
 	try{
-	 pa($ar_ti);
 	$ar_ti->save();
 	}catch(Exception $e){
 	 echo "<br>Transfer to AR Interface Failed. Error @sd_delivery_line @@ ".__LINE__. $e->getMessage();
@@ -247,6 +246,7 @@ class sd_delivery_line extends dbObject {
 	$sol = new sd_so_line();
 	$sol->findBy_id($this->sd_so_line_id);
 	$sol->line_status = 'SHIPPED';
+	$sol->actual_ship_date = current_time(1);
 	$sol->shipped_quantity = $this->quantity;
 	$sol->audit_trial();
 	$sol->save();

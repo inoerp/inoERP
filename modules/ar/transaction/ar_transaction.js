@@ -80,6 +80,24 @@ setValFromSelectPage.prototype.setVal = function() {
 
 };
 
+function header_amount(){
+ 	var header_amount = 0;
+	$('#form_line').find('.inv_line_price').each(function() {
+	 header_amount += (+$(this).val());
+	 $('#header_amount').val(header_amount);
+	});
+	
+	var total_tax = 0;
+	$('#form_line').find('.tax_amount').each(function() {
+	 total_tax += (+$(this).val());
+	 $('#tax_amount').val(total_tax);
+	});
+}
+
+function beforeSave(){
+ header_amount();
+}
+
  function match_transaction() {
 	var ar_transaction_header_id = $("#ar_transaction_header_id").val();
 	if (ar_transaction_header_id) {
@@ -156,12 +174,7 @@ $(document).ready(function() {
 
 
 //get customer details
- $("#ar_customer_id, #customer_name, #customer_number").on("blur", function() {
-	if (($("#bu_org_id").val()) && ($('#ar_customer_id').val())) {
-	 var bu_org_id = $("#bu_org_id").val();
-	 getCustomerDetails('modules/ar/customer/json_customer.php', bu_org_id);
-	}
- });
+get_customer_detail_for_bu();
 
 $("#content").on("change", '#ar_customer_site_id',function() {
 var customer_site_id = $("#ar_customer_site_id").val();
@@ -196,15 +209,6 @@ if (customer_site_id) {
  //selecting PO Header Id
  $(".ar_transaction_header_id.select_popup").on("click", function() {
 	void window.open('select.php?class_name=ar_transaction_header', '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
-
-
-//selecting customer
-//selecting customer
- $(".ar_customer_id.select_popup").on("click", function() {
-	localStorage.idValue = "";
-	void window.open('select.php?class_name=ar_customer', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
@@ -305,7 +309,7 @@ deleteData('form.php?class_name=ar_transaction_header&line_class_name=ar_transac
  classSave.lineClassName = 'ar_transaction_line';
  classSave.detailClassName = 'ar_transaction_detail';
  classSave.enable_select = true;
- classSave.saveMain();
+ classSave.saveMain(beforeSave);
 
 //all actions
 //Popup for selecting match 
@@ -365,20 +369,8 @@ $('#transaction_type').on('change', function(){
  });
 
 //total header & tax amount
- $('#content').on('change', '.inv_line_quantity, .inv_unit_price, .inv_line_price, .tax_amount, .tax_code_id', function() {
-	var header_amount = 0;
-	$('#form_line').find('.inv_line_price').each(function() {
-	 header_amount += (+$(this).val());
-	 $('#header_amount').val(header_amount);
-	});
-	
-	var total_tax = 0;
-	$('#form_line').find('.tax_amount').each(function() {
-	 total_tax += (+$(this).val());
-	 $('#tax_amount').val(total_tax);
-	});
-
-
+ $('#content').on('blur', '.inv_line_quantity, .inv_unit_price, .inv_line_price, .tax_amount, .tax_code_id', function() {
+header_amount();
  });
 
 

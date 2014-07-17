@@ -1,6 +1,6 @@
 <?php
 
-class ar_transaction_interface extends dbObject {
+class xx_ar_transaction_interface extends dbObject {
 
  public static $table_name = "ar_transaction_interface";
  public static $primary_column = "ar_transaction_interface_id";
@@ -127,13 +127,6 @@ class ar_transaction_interface extends dbObject {
 		 '_show_view_path' => 1,
 		 '_extra_path' => array('form.php?class_name=ar_transaction_interface' => 'Import')
  ];
- public $prg_import_ar_transaction_parameters = [
-		 'Business Org' => 'search_business_org',
- ];
- public $prg_import_ar_transaction_details = [
-		 'name' => 'Import AR Transaction ',
-		 'description' => 'Import AR Transactions from Interface ',
- ];
  public $pageTitle = " Import AR Transactions "; //page Title
  public $ar_transaction_interface_id;
  public $ar_transaction_header_id;
@@ -188,56 +181,40 @@ class ar_transaction_interface extends dbObject {
 	$this->$name = $value;
  }
 
- public function distinct_customer_sites() {
-	$sql = " SELECT DISTINCT(ar_customer_site_id) FROM ";
-	$sql .= self::$table_name;
-	$result = $this->findBySql($sql);
-	return !empty($result) ? array_pop($result) : false;
- }
-
- public function findBy_customerSiteId_buOrgId($customer_site_id, $bu_org_id) {
-	$sql = " SELECT * FROM ";
-	$sql .= self::$table_name;
-	$sql .= " WHERE ar_customer_site_id = '{$customer_site_id}' AND bu_org_id = '{$bu_org_id}' ";
-	$result = $this->findBySql($sql);
-	return !empty($result) ? ($result) : false;
- }
-
  private function _create_transaction_from_post() {
 	if (empty($_POST)) {
 	 return;
 	}
-
-//	pa($this);
-//	pa($_POST);
-//  pa($this->findAll());
-
-	$create_trnx_h = $this->_create_transaction_header();
-	if ($create_trnx_h < 0) {
-	 return;
-	}
-	$this->_create_transaction_line_from_post();
+	pa($this);
+	pa($_POST);
+	
+//	$create_trnx_h = $this->_create_transaction_header();
+//	if ($create_trnx_h < 0) {
+//	 return;
+//	}
+//	$this->_create_transaction_line();
  }
 
  private function _create_transaction_header() {
-	$sd_so_header_id = $this->sd_so_header_id;
+	$sd_so_header_id = $_POST['sd_so_header_id'][0];
 	$sd_so = new sd_so_header();
 	$sd_so->findBy_id($sd_so_header_id);
 
 	$ar_th = new ar_transaction_header();
-	$ar_th->bu_org_id = $this->bu_org_id;
-	$ar_th->ledger_id = $this->ledger_id;
+	$ar_th->bu_org_id = $_POST['bu_org_id'][0];
+	$ar_th->ledger_id = $_POST['ledger_id'][0];
 	$ledger = new gl_ledger();
 	$ledger->findBy_id($ar_th->ledger_id);
 
-	$ar_th->transaction_type = $this->transaction_type;
-	$ar_th->ar_customer_id = $this->ar_customer_id;
-	$ar_th->ar_customer_site_id = $this->ar_customer_site_id;
+	$ar_th->transaction_type = $_POST['transaction_type'][0];
+	$ar_th->ar_customer_id = $_POST['ar_customer_id'][0];
+	$ar_th->ar_customer_site_id = $_POST['ar_customer_site_id'][0];
 	$ar_th->ship_to_id = $sd_so->ship_to_id;
 	$ar_th->bill_to_id = $sd_so->bill_to_id;
 	$ar_th->document_currency = $sd_so->document_currency;
 	$ar_th->currency = $ledger->currency_code;
 	$ar_th->bill_to_id = $sd_so->bill_to_id;
+	$ar_th->transaction_type = $_POST['transaction_type'][0];
 	$gp = new gl_period();
 	$ar_th->period_id = $gp->current_open_period($ar_th->ledger_id, 'OPEN')->gl_period_id;
 	$ar_tt = new ar_transaction_type();
@@ -255,7 +232,7 @@ class ar_transaction_interface extends dbObject {
 	try {
 	 $ar_th->save();
 	} catch (Exception $e) {
-
+	 
 	 echo "<br>Failed to create the transaction header. Error @ar_transaction_interface "
 	 . "@@ Line" . __LINE__ . '<br>' . $e->getMessage();
 	 $this->rollback = true;
@@ -268,7 +245,7 @@ class ar_transaction_interface extends dbObject {
 	return $ar_th->ar_transaction_header_id;
  }
 
- private function _create_transaction_line_from_post() {
+ private function _create_transaction_line() {
 	$line_number = 0;
 
 	for ($i = 0; $i < count($_POST['item_description']); $i++) {
@@ -276,7 +253,7 @@ class ar_transaction_interface extends dbObject {
 	 if (empty($this->_ar_transaction_header_id)) {
 		return;
 	 }
-
+	 
 	 //update the sales order line 
 	 $sol = new sd_so_line();
 	 $sol->findBy_id($_POST['sd_so_line_id'][$i]);
@@ -313,72 +290,16 @@ class ar_transaction_interface extends dbObject {
 	 $sol->line_status = 'CLOSED';
 	 $sol->audit_trial();
 	 $sol->save();
-
+	 
 	 //delete interface line
 	 $this->ar_transaction_interface_id = $_POST['ar_transaction_interface_id'][$i];
 	 $this->delete();
-
+	 
 	 //unset all objects
 	 unset($ar_tl);
 	 unset($sol);
 	 unset($this->ar_transaction_interface_id);
 	}
- }
-
- private function _create_transaction_line_prg($all_lines, $ar_transaction_header_id) {
-	$line_number = 0;
-   $msg = '<br>Starting to create transaction lines..';
-	foreach ($all_lines as $obj) {
-	 $line_number ++;
-
-	 //update the sales order line 
-	 $sol = new sd_so_line();
-	 $sol->findBy_id($obj->sd_so_line_id);
-	 if ($sol->line_status != 'SHIPPED') {
-		$msg .= "<br> Line is not available for invoicing. Line Id is " . $obj->sd_so_line_id;
-		continue;
-	 }
-
-	 $ar_tl = new ar_transaction_line();
-	 $ar_tl->ar_transaction_line_id = null;
-	 $ar_tl->line_number = $line_number;
-	 $ar_tl->ar_transaction_header_id = $ar_transaction_header_id;
-	 $ar_tl->item_id_m = $obj->item_id_m;
-	 $ar_tl->item_description = $obj->item_description;
-	 $ar_tl->inv_line_quantity = $obj->inv_line_quantity;
-	 $ar_tl->inv_unit_price = $obj->inv_unit_price;
-	 $ar_tl->inv_line_price = $obj->inv_line_price;
-	 $ar_tl->tax_code_id = $obj->tax_code_id;
-	 $ar_tl->tax_amount = $obj->tax_amount;
-	 $ar_tl->line_type = $obj->line_type;
-	 $ar_tl->uom_id = $obj->uom_id;
-	 $ar_tl->sd_so_header_id = $obj->sd_so_header_id;
-	 $ar_tl->reference_type = 'table';
-	 $ar_tl->reference_key_name = 'sd_so_line_id';
-	 $ar_tl->reference_key_value = $ar_tl->sd_so_line_id = $obj->sd_so_line_id;
-	 $ar_tl->audit_trial();
-	 $ar_tl->save();
-   $msg .= "<br> Line is sucessfully created. Line id id " . $ar_tl->ar_transaction_line_id; 
-
-	 //update so line details
-	 $sol->invoiced_quantity = $ar_tl->inv_line_quantity;
-	 $sol->ar_transaction_header_id = $ar_tl->ar_transaction_header_id;
-	 $sol->ar_transaction_line_id = $ar_tl->ar_transaction_line_id;
-	 $sol->line_status = 'CLOSED';
-	 $sol->audit_trial();
-	 $sol->save();
-	 $msg .= "<br> SO Line is sucessfully updated. Line id id " . $sol->sd_so_line_id; 
-
-	 //delete interface line
-	 $this->ar_transaction_interface_id = $obj->ar_transaction_interface_id;
-	 $this->delete();
-
-	 //unset all objects
-	 unset($ar_tl);
-	 unset($sol);
-	 unset($this->ar_transaction_interface_id);
-	}
-	return $msg;
  }
 
  public function _before_save() {
@@ -437,45 +358,6 @@ WHERE  po_requisition_header.requisition_status = 'APPROVED'
 AND (po_requisition_detail.order_number IS NULL OR po_requisition_detail.order_number = '')
 
 ";
- }
-
- public function prg_import_ar_transaction($seralized_parameters) {
-	/*
-	 *  1. First Import all lines with the same customer site id
-	 */
-	$output_a = [];
-	$parameters = unserialize($seralized_parameters);
-	$this->message = '<br> Starting to Import AR Transactions....<br>';
-	if (!empty($parameters['bu_org_id'][0])) {
-	 $bu_org_id = $parameters['bu_org_id'][0];
-	 $this->message .= '<br> Entered Bu org Id is : ' . $bu_org_id;
-	} else {
-	 $this->message .= '<br> Error! : No BU org id found @ po_requisition_interface ' . __LINE__;
-	 return $this->message;
-	}
-
-//	1. Lines with same customer site id
-	$all_customer_sites = $this->distinct_customer_sites();
-	foreach ($all_customer_sites as $cst_site_id) {
-	 $all_lines = $this->findBy_customerSiteId_buOrgId($cst_site_id, $bu_org_id);
-	 if (empty($all_lines)) {
-		return;
-	 }
-	 //create header on basis of first object
-	 $ar_ti_prg = new ar_transaction_interface();
-	 foreach ($all_lines[0] as $key => $value) {
-		if (property_exists($ar_ti_prg, $key)) {
-		 $ar_ti_prg->$key = $value;
-		}
-	 }
-	 $ar_ti_prg->_create_transaction_header();
-   $this->message .= "<br> Transaction header is succefully created. Header Id/ Number - " . $ar_ti_prg->_ar_transaction_header_id;
-	 
-	 //create lines for each object
-	 $this->message .=$this->_create_transaction_line_prg($all_lines, $ar_ti_prg->_ar_transaction_header_id);
-	}
-
-	return $this->message;
  }
 
  public function multi_select_input_fields() {

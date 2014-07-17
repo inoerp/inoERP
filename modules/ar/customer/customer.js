@@ -51,12 +51,6 @@ setValFromSelectPage.prototype.setVal = function() {
 
 
 $(document).ready(function() {
-//selecting customer
- $(".ar_customer_id_popup").on("click", function() {
-	localStorage.idValue = "";
-	void window.open('select.php?class_name=ar_customer', '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
 
  //Popup for selecting address 
  $(".address_popup").click(function() {

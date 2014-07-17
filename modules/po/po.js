@@ -102,12 +102,7 @@ lineDetail_QuantityValidation();
  });
 
 //get supplier details
- $("#supplier_id, #supplier_name, #supplier_number").on("focusout", function() {
-	if (($("#bu_org_id").val()) && ($('#supplier_id').val())) {
-	 var bu_org_id = $("#bu_org_id").val();
-	 getSupplierDetails('modules/ap/supplier/json_supplier.php', bu_org_id);
-	}
- });
+get_supplier_detail_for_bu();
 
  $("#content").on("change", "#supplier_site_id", function() {
 	var supplier_site_id = $("#supplier_site_id").val();
@@ -141,14 +136,6 @@ lineDetail_QuantityValidation();
  //selecting PO Header Id
  $(".po_header_id.select_popup").on("click", function() {
 	void window.open('select.php?class_name=po_all_v', '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
-
-
-//selecting supplier
- $(".find_popup.supplierId").on("click", function() {
-	localStorage.idValue = "";
-	void window.open('select.php?class_name=supplier', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 

@@ -66,7 +66,7 @@
 						 <li><label>Document Number : </label>
 							<?php echo $f->text_field_d('document_number') ?>
 						 </li>
-						 						 <li><label>Doc Status : </label>
+						 <li><label>Doc Status : </label>
 							<?php echo $f->select_field_from_array('transaction_status', ar_transaction_header::$transaction_status_a, $$class->transaction_status); ?>
 						 </li> 
 						</ul>
@@ -75,21 +75,12 @@
 					<div id="tabsHeader-2" class="tabContent">
 					 <div class="large_shadow_box"> 
 						<ul class="column five_column">
-						 <?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
-						 <li><label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup">
-							 Customer Name(6) : </label><?php echo $customer_name_stmt; ?></li>
-						 <li><label class="auto_complete">Customer Number(6) : </label><?php echo $customer_number_stmt; ?></li>
-						 <li><label>Customer Site(7) : </label>
-							<?php
-							if ((!empty($customer_site_name_statement))) {
-							 echo $customer_site_name_statement;
-							} else {
-							 ?>
- 							<Select name="customer_site_id[]" class="customer_site_id select" id="customer_site_id" >
- 							 <option value="" ></option>
- 							</select> 
-							<?php } ?>
-						 </li>
+						 <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
+							<label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup clickable">
+							 Customer Name : </label> <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
+						 <li><label class="auto_complete">Customer Number : </label><?php $f->text_field_d('customer_number'); ?></li>
+						 <li><label>Customer Site : </label>
+							<?php echo $f->select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
 						 <li><label>SO Number : </label>                      
 							<?php $f->text_field_dr('sd_so_number'); ?>
 						 </li>
@@ -294,9 +285,10 @@
  							<td><?php form::text_field_wid2sr('ar_transaction_line_id'); ?></td>
  							<td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
  							<td><?php echo $f->select_field_from_object('line_type', ar_transaction_line::ar_transaction_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, '', 'line_type', '', $readonly1); ?></td>
- 							<td><?php echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
-						 $f->text_field_wid2('item_number', 'select_item_number');
-							?>
+ 							<td><?php
+								echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
+								$f->text_field_wid2('item_number', 'select_item_number');
+								?>
  							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
  							<td><?php $f->text_field_wid2m('item_description'); ?></td>
  							<td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $ar_transaction_line->uom_id); ?></td>
@@ -316,7 +308,7 @@
 								 array_push($ar_transaction_detail_object, $ar_transaction_detail);
 								}
 								?>
-                                             <!--						 <tr><td>-->
+                                              <!--						 <tr><td>-->
  							 <div class="class_detail_form">
  								<fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
  								 <div class="tabsDetail">

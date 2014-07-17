@@ -36,7 +36,7 @@
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
 						 <li><label>SO Number : </label>
-							<?php echo $f->text_field_d('so_number','primary_column2'); ?>
+							<?php echo $f->text_field_d('so_number', 'primary_column2'); ?>
 						 </li>
 						 <li><label>BU Name(1) : </label>
 							<?php echo form::select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $sd_so_header->bu_org_id, 'bu_org_id', $readonly1, '', ''); ?>
@@ -44,21 +44,12 @@
 						 <li><label>Document Type(2) : </label>
 							<?php echo $f->select_field_from_object('document_type', sd_document_type::find_all_header_levels(), 'sd_document_type_id', 'document_type_name', $sd_so_header->document_type, 'document_type', 'medium', 1, $readonly1); ?>
 						 </li>
-						 <?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
-						 <li><label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer select_popup">
-							 Customer Name(3) : </label><?php echo $customer_name_stmt; ?></li>
-						 <li><label class="auto_complete">Customer Number : </label><?php echo $customer_number_stmt; ?></li>
-						 <li><label>Customer Site(7) : </label>
-							<?php
-							if ((!empty($customer_site_name_statement))) {
-							 echo $customer_site_name_statement;
-							} else {
-							 ?>
- 							<Select name="customer_site_id[]" class="customer_site_id select" id="customer_site_id" >
- 							 <option value="" ></option>
- 							</select> 
-							<?php } ?>
-						 </li>
+						 <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
+							<label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup clickable">
+							 Customer Name : </label> <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
+						 <li><label class="auto_complete">Customer Number : </label><?php $f->text_field_d('customer_number'); ?></li>
+						 <li><label>Customer Site : </label>
+							<?php echo $f->select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
 						 <li><label>Status : </label>                      
 							<span class="button"><?php echo!empty($$class->so_status) ? $$class->so_status : ""; ?></span>
 						 </li>
@@ -234,8 +225,9 @@
  							<td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
  							<td><?php echo $f->select_field_from_object('line_type', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class_second->line_type, '', 'medium', 1, $readonly); ?></td>
  							<td><?php echo $f->select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->shipping_org_id, '', 'small', 1, $readonly); ?></td>
-							<td><?php echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
-							 form::text_field_wid2('item_number', 'select_item_number'); ?>
+ 							<td><?php echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
+						 form::text_field_wid2('item_number', 'select_item_number');
+							?>
  							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
  							<td><?php form::text_field_wid2('item_description'); ?></td>
  							<td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small'); ?></td>
@@ -310,7 +302,7 @@
  							<td><?php echo $f->date_fieldFromToday_d('requested_date', $$class_second->requested_date) ?></td>
  							<td><?php echo $f->date_fieldFromToday('promise_date', $$class_second->promise_date) ?></td>
  							<td><?php echo $f->date_fieldFromToday('schedule_ship_date', $$class_second->schedule_ship_date) ?></td>
-							<td><?php echo $f->date_fieldFromToday_r('actual_ship_date', $$class_second->actual_ship_date, 1) ?></td>
+ 							<td><?php echo $f->date_fieldFromToday_r('actual_ship_date', $$class_second->actual_ship_date, 1) ?></td>
  						 </tr>
 							<?php
 							$count = $count + 1;
@@ -347,8 +339,8 @@
  						 <tr class="sd_so_line<?php echo $count ?>">
  							<td class="seq_number"><?php echo $count; ?></td>
  							<td><?php form::text_field_wid2('line_description'); ?></td>
- 							<td><?php echo $f->select_field_from_array('supply_source', sd_document_type::$supply_source_a, $$class_second->supply_source, '','copyValue'); ?>	</td>
- 							<td> <?php echo $f->select_field_from_array('destination_type', sd_document_type::$destination_type_a, $$class_second->destination_type,'','copyValue'); ?></td>
+ 							<td><?php echo $f->select_field_from_array('supply_source', sd_document_type::$supply_source_a, $$class_second->supply_source, '', 'copyValue'); ?>	</td>
+ 							<td> <?php echo $f->select_field_from_array('destination_type', sd_document_type::$destination_type_a, $$class_second->destination_type, '', 'copyValue'); ?></td>
  							<td><?php form::number_field_wid2sr('picked_quantity'); ?></td>
  							<td><?php form::number_field_wid2sr('shipped_quantity'); ?></td>
  							<td><?php form::text_field_wid2('reference_doc_type'); ?></td>
@@ -362,7 +354,7 @@
 						<!--                  Showing a blank form for new entry-->
 					 </table>
 					</div>
-						<div id="tabsLine-5" class="scrollElement tabContent">
+					<div id="tabsLine-5" class="scrollElement tabContent">
 					 <table class="form_line_data_table">
 						<thead> 
 						 <tr><th>Seq#</th>
@@ -383,7 +375,7 @@
  							<td><?php form::number_field_wid2sr('invoiced_quantity'); ?></td>
  							<td><?php form::text_field_wid2r('ar_transaction_header_id'); ?></td>
  							<td><?php form::text_field_wid2r('ar_transaction_line_id'); ?></td>
-							<td><?php form::text_field_wid2r('ar_transaction_number'); ?></td>
+ 							<td><?php form::text_field_wid2r('ar_transaction_number'); ?></td>
  						 </tr>
 							<?php
 							$count = $count + 1;

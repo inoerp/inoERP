@@ -21,6 +21,16 @@ class ar_receipt_header extends dbObject {
 		 'module_name' => 'ar',
 		 'weight' => 3
  ];
+ public static $receipt_status_a = [
+		 'INCOMPLETE' => 'Incomplete',
+		 'COMPLETE' => 'Complete',
+		 'CLOSED' => 'Closed'
+ ];
+ public $receipt_action_a = [
+		 'VIEW_JOURNAL' => 'View Journal',
+		 'CANCEL' => 'Cancel Receipt',
+		 'CREATE_ACCOUNT' => 'Create Accounting',
+ ];
  public $checkbox = [
 //		 "rev_enabled_cb"
  ];
@@ -62,8 +72,6 @@ class ar_receipt_header extends dbObject {
  public $initial_search = [
 		 'ar_receipt_header_id',
 		 'bu_org_id',
-		 'receipt_type',
-		 'ar_transaction_header_id',
 		 'receipt_number',
 		 'ar_customer_id',
 		 'from_bank_header_id',
@@ -81,7 +89,6 @@ class ar_receipt_header extends dbObject {
 		 'ar_receipt_header_id',
 		 'bu_org_id',
 		 'receipt_type',
-		 'ar_transaction_header_id',
 		 'receipt_number',
 		 'ar_customer_id',
 		 'from_bank_header_id',
@@ -118,6 +125,9 @@ class ar_receipt_header extends dbObject {
 		 'action',
 		 'receipt_action',
 		 'ar_transaction_header_id'
+ ];
+ public $notUpdatedFromWebForm = [
+		 'gl_journal_header_id',
  ];
  public $search = [
 		 '_show_update_path' => 1,
@@ -171,11 +181,12 @@ class ar_receipt_header extends dbObject {
  public $so_number;
  public $sd_so_header_id;
  public $action;
- public $transaction_action;
+ public $receipt_action;
  public $action_class_name;
  public $mode;
  public $multi_action_class_pc;
  public $multi_action_class_pc_value;
+ private $_max_line_num;
 
  public function __set($name, $value) {
 	switch ($value) {
@@ -190,37 +201,22 @@ class ar_receipt_header extends dbObject {
 	}
  }
 
- private function _update_journalHeaderId() {
-	$arth = new ar_receipt_header();
-	$arth->ar_receipt_header_id = $this->ar_receipt_header_id;
-	$arth->gl_journal_header_id = $this->gl_journal_header_id;
-	$arth->created_by = $this->created_by;
-	$arth->creation_date = $this->creation_date;
-	$arth->last_update_by = $this->last_update_by;
-	$arth->last_update_date = $this->last_update_date;
-	$arth->save();
- }
-
  public function _before_save() {
-	if (($this->action == 'confirm_receipt')) {
+	if (($this->receipt_action == 'REVERSE')) {
+	 pa($this);
+	 return -90;
+	}
+		if (($this->action == 'confirm_receipt')) {
 	 $this->_confirm_receipt();
 	 return 10;
 	}
 	if ((!empty($this->ar_receipt_header_id)) && ($this->action === 'create_accounting')) {
-	 $asis_data = $this->findBy_id($this->ar_receipt_header_id);
-	 foreach ($asis_data as $key => $value) {
-		$this->$key = $value;
-	 }
+	 $this->findBy_id($this->ar_receipt_header_id);
+
 	 //if journal header id excists then save journal lines only else first header & then lines
 	 if (empty($this->gl_journal_header_id)) {
 		try {
 		 $this->_save_journal_header();
-		 try {
-			echo "<br>Accounting records are sucessfully created " . $this->gl_journal_header_id;
-			$this->_update_journalHeaderId();
-		 } catch (Exception $e) {
-			echo "<br>Updating gl journal header id failed" . $e->getMessage();
-		 }
 		} catch (Exception $e) {
 		 echo "Create accounting failed" . $e->getMessage();
 		}
@@ -228,8 +224,10 @@ class ar_receipt_header extends dbObject {
 	 if (!empty($this->gl_journal_header_id)) {
 		//check the status is not updated and then save/update journal lines
 		$gjh = new gl_journal_header();
-		$gjh_i = $gjh->findBy_id($this->gl_journal_header_id);
-		if ($gjh_i->status == 'ENTERED') {
+		$gjh->findBy_id($this->gl_journal_header_id);
+		$max_line_num = $gjh->highest_line_num()->max_line_num;
+		$this->_max_line_num = !empty($max_line_num) ? $max_line_num + 1 : 1;
+		if ($gjh->status == 'ENTERED') {
 		 $this->_save_journal_lines();
 		} else {
 		 echo "<br> The Journal Header \" $gjh_i->journal_name \" (id : $this->gl_journal_header_id ) is not in Entered Status."
@@ -241,7 +239,7 @@ class ar_receipt_header extends dbObject {
 	 return 10;
 	}
 
-	if ((!empty($this->ar_receipt_header_id)) && ($this->transaction_action == 'CANCEL')) {
+	if ((!empty($this->ar_receipt_header_id)) && ($this->receipt_action == 'CANCEL')) {
 	 $this->_cancel_transaction();
 	 return 10;
 	}
@@ -305,13 +303,25 @@ class ar_receipt_header extends dbObject {
  }
 
  public function _after_save() {
-	global $db;
 	if ((!empty($this->ar_receipt_header_id)) && empty($this->receipt_number)) {
 	 $ar_receipt_header_id = $this->ar_receipt_header_id;
 	 $bu_org_id = $this->bu_org_id;
 	 $this->receipt_number = $bu_org_id . '-' . $ar_receipt_header_id;
 	 echo '<br/> System created receipt number is ' . $this->receipt_number;
 	 $this->save();
+	}
+ }
+
+ public function _post_gl_process($ar_receipt_header_id) {
+	try {
+	 $this->findBy_id($ar_receipt_header_id);
+	 $this->receipt_status = 'CLOSED';
+	 $this->audit_trial();
+	 $this->save();
+	 return 1;
+	} catch (Exception $e) {
+	 echo "<br>Updating receipt status failed.Error @ ar_transaction_header @@ " . __LINE__ . $e->getMessage();
+	 return -99;
 	}
  }
 
@@ -330,12 +340,58 @@ class ar_receipt_header extends dbObject {
 	$gjh->description = $gjh->journal_name . '-' . current_time();
 	$gjh->balance_type = 'A';
 	$gjh->audit_trial();
-	$gjh->save();
-	$this->gl_journal_header_id = $gjh->gl_journal_header_id;
-	echo "<br> The New Journal Header Id is " . $this->gl_journal_header_id;
+	try {
+	 $gjh->save();
+	 $this->gl_journal_header_id = $gjh->gl_journal_header_id;
+	 echo "<br> Jounral Header Id #" . $this->gl_journal_header_id . ' is created';
+	 //need to create a new insatnce of ar_receipt_header as the gl_journal_header_id is not allowed to updated from webform
+	 $ar_rh = new ar_receipt_header();
+	 $ar_rh->findBy_id($this->ar_receipt_header_id);
+	 $ar_rh->gl_journal_header_id = $gjh->gl_journal_header_id;
+	 $ar_rh->audit_trial();
+	 $ar_rh->save();
+	} catch (Exception $e) {
+	 echo "<br> Failed Saving Jounral Header" . $e->getMessage();
+	}
  }
 
  private function _save_journal_lines() {
+	//	Cr the receviable account 
+	$arrl = new ar_receipt_line();
+	$arth = new ar_transaction_header();
+
+	$all_receipt_lines = $arrl->findBy_parentId($this->ar_receipt_header_id);
+	foreach ($all_receipt_lines as $receipt_lines) {
+	 $ar_transaction_header_id = $receipt_lines->ar_transaction_header_id;
+	 $arth_i = $arth->findBy_id($ar_transaction_header_id);
+	 $receviable_gjl = new gl_journal_line();
+	 $receviable_gjl->gl_journal_header_id = $this->gl_journal_header_id;
+	 $receviable_gjl->reference_type = 'table';
+	 $receviable_gjl->reference_key_name = 'ar_receipt_line';
+	 $receviable_gjl->reference_key_value = $receipt_lines->ar_receipt_line_id;
+	 //check if line lready exists
+	 $jl_exists = $receviable_gjl->findBy_reference_keyName_keyValue();
+	 if ($jl_exists) {
+		$receviable_gjl->gl_journal_line_id = $jl_exists->gl_journal_line_id;
+		$receviable_gjl->line_num = $jl_exists->line_num;
+		$receviable_gjl->status = $jl_exists->status;
+	 } else {
+		$receviable_gjl->gl_journal_line_id = null;
+		$receviable_gjl->line_num = $this->_max_line_num;
+		$receviable_gjl->status = 'U';
+		$this->_max_line_num++;
+	 }
+	 $receviable_gjl->code_combination_id = $arth_i->receivable_ac_id;
+	 $receviable_gjl->total_cr = $receipt_lines->amount;
+	 $receviable_gjl->total_ac_cr = $receipt_lines->amount;
+	 if (!empty($this->transaction_number)) {
+		$receviable_gjl->description = 'AR Trnx Receviable of ' . $this->transaction_number;
+	 } else {
+		$receviable_gjl->description = 'AR Trnx Receviable of ' . $this->ar_transaction_header_id;
+	 }
+	 $receviable_gjl->audit_trial();
+	 $receviable_gjl->save();
+	}
 
 	//	Dr the cash account 
 	$bu_org = new business();
@@ -350,59 +406,31 @@ class ar_receipt_header extends dbObject {
 
 	$cash_gjl = new gl_journal_line();
 	$cash_gjl->gl_journal_header_id = $this->gl_journal_header_id;
-	$cash_gjl->line_num = 1;
-	$cash_gjl_i = $cash_gjl->findBy_headerId_lineNum();
-	if ($cash_gjl_i) {
-	 $cash_gjl->gl_journal_line_id = $cash_gjl_i->gl_journal_line_id;
+	$cash_gjl->reference_type = 'table';
+	$cash_gjl->reference_key_name = 'ar_receipt_header';
+	$cash_gjl->reference_key_value = $this->ar_receipt_header_id;
+	//check if line lready exists
+	$jl_exists_cash = $cash_gjl->findBy_reference_keyName_keyValue();
+	if ($jl_exists_cash) {
+	 $cash_gjl->gl_journal_line_id = $jl_exists_cash->gl_journal_line_id;
+	 $cash_gjl->line_num = $jl_exists_cash->line_num;
+	 $cash_gjl->status = $jl_exists_cash->status;
+	} else {
+	 $cash_gjl->gl_journal_line_id = null;
+	 $cash_gjl->status = 'U';
+	 $cash_gjl->line_num = $this->_max_line_num;
+	 $this->_max_line_num++;
 	}
-	$cash_gjl->status = 'U';
 	$cash_gjl->code_combination_id = $cash_ac_id;
 	$cash_gjl->total_dr = $this->header_amount;
 	$cash_gjl->total_ac_dr = $this->header_amount;
 	$cash_gjl->description = 'AR Receipt of ' . $this->receipt_number;
-	$cash_gjl->reference_type = 'table';
-	$cash_gjl->reference_key_name = 'ar_receipt_header';
-	$cash_gjl->reference_key_value = $this->ar_receipt_header_id;
 	$cash_gjl->audit_trial();
-
 	try {
 	 $cash_gjl->save();
 	 echo "<br> Cash Ac is Cr. Journal Line Id is " . $cash_gjl->gl_journal_line_id;
 	} catch (Exception $e) {
 	 echo "<br>Updating gl journal line for Cash Ac failed" . $e->getMessage();
-	}
-
-
-	//	Cr the receviable account 
-	$arrl = new ar_receipt_line();
-	$arth = new ar_transaction_header();
-	$line_num = 1;
-	$all_receipt_lines = $arrl->findBy_parentId($this->ar_receipt_header_id);
-	foreach ($all_receipt_lines as $receipt_lines) {
-	 $line_num++;
-	 $ar_transaction_header_id = $receipt_lines->ar_transaction_header_id;
-	 $arth_i = $arth->findBy_id($ar_transaction_header_id);
-	 $receviable_gjl = new gl_journal_line();
-	 $receviable_gjl->gl_journal_header_id = $this->gl_journal_header_id;
-	 $receviable_gjl->line_num = $line_num;
-	 $receviable_gjl_i = $receviable_gjl->findBy_headerId_lineNum();
-	 if ($receviable_gjl_i) {
-		$receviable_gjl->gl_journal_line_id = $receviable_gjl_i->gl_journal_line_id;
-	 }
-	 $receviable_gjl->status = 'U';
-	 $receviable_gjl->code_combination_id = $arth_i->receivable_ac_id;
-	 $receviable_gjl->total_cr = $receipt_lines->amount;
-	 $receviable_gjl->total_ac_cr = $receipt_lines->amount;
-	 if (!empty($this->transaction_number)) {
-		$receviable_gjl->description = 'AR Trnx Receviable of ' . $this->transaction_number;
-	 } else {
-		$receviable_gjl->description = 'AR Trnx Receviable of ' . $this->ar_transaction_header_id;
-	 }
-	 $receviable_gjl->reference_type = 'table';
-	 $receviable_gjl->reference_key_name = 'ar_transaction_header';
-	 $receviable_gjl->reference_key_value = $this->ar_transaction_header_id;
-	 $receviable_gjl->audit_trial();
-	 $receviable_gjl->save();
 	}
  }
 
@@ -508,7 +536,6 @@ class ar_receipt_header extends dbObject {
 	$new_apth->header_amount = '0.0';
 	$new_apth->ar_receipt_header_id = $new_apth_i->ar_receipt_header_id;
 	$new_apth->audit_trial();
-	pa($new_apth);
 	try {
 	 $new_apth->save();
 	} catch (Exception $e) {

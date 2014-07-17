@@ -145,7 +145,7 @@ class ar_transaction_header extends dbObject {
  ];
  public $pageTitle = " AR Transaction - Invoice, Debit/Credit Memo, Deposit/Guarentee etc "; //page Title
  public $option_lists = [
-		 'transaction_types' => 'AR_TRANSACTION_TYPE',
+		 'transaction_class' => 'AR_TRANSACTION_CLASS',
 //		 'om_so_status' => 'AR_TRANSACTION_TYPE',
  ];
  public $ar_transaction_header_id;
@@ -288,7 +288,6 @@ class ar_transaction_header extends dbObject {
  }
 
  public function _after_save() {
-	global $db;
 	if (!$this->transaction_number) {
 	 echo '<br/> No transaction number is entered';
 	}
@@ -348,12 +347,13 @@ class ar_transaction_header extends dbObject {
 		if ($jl_exists) {
 		 $new_gjl->gl_journal_line_id = $jl_exists->gl_journal_line_id;
 		 $new_gjl->line_num = $jl_exists->line_num;
+		 $new_gjl->status = $jl_exists->status;
 		} else {
 		 $new_gjl->gl_journal_line_id = null;
 		 $new_gjl->line_num = $this->_max_line_num;
+		 $new_gjl->status = 'U';
 		 $this->_max_line_num++;
 		}
-		$new_gjl->status = 'U';
 		$new_gjl->code_combination_id = $deatils->detail_ac_id;
 		if ($this->transaction_type == 'CREDIT_MEMO') {
 		 $new_gjl->total_dr = $deatils->amount;
