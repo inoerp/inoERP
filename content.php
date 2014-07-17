@@ -14,15 +14,7 @@ if ((!empty($_GET['delete'])) && ($_GET['delete'] == 1)) {
  return;
 }
 ?>
-<?php
 
-//if (((!empty($_SESSION['username'])) && ($content->created_by == $_SESSION['username'])) || ((!empty($_SESSION['user_roles'])) && (in_array('admin', $_SESSION['user_roles'])))) {
-// $allow_content_update = true;
-// if (!empty($_GET['mode'])) {
-//	$mode = $_GET['mode'];
-// }
-//}
-?>
 <?php
 
 $content_rp = getrwuPrivilage($content_type->read_role, $_SESSION['user_roles'][0]);
