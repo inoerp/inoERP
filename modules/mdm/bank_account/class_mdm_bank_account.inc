@@ -40,6 +40,7 @@ class mdm_bank_account extends dbObject {
 		 'last_update_date',
  ];
  public $initial_search = [
+		 'mdm_bank_account_id',
 		 'mdm_bank_header_id',
 		 'mdm_bank_site_id',
 		 'account_number',
@@ -49,6 +50,7 @@ class mdm_bank_account extends dbObject {
 		 "netting_ac_cb",
  ];
  public $column = [
+		 'mdm_bank_account_id',
 		 'mdm_bank_header_id',
 		 'mdm_bank_site_id',
 		 'account_number',
@@ -147,11 +149,6 @@ class mdm_bank_account extends dbObject {
 	return $lines;
  }
 
-public function _before_save(){
-// pa($_POST);
-// pa($this);
-}
-
  public function findBy_org_id($org_id) {
 	global $db;
 	$sql = "SELECT * FROM mdm_bank_account where org_id=:org_id LIMIT 1";
@@ -185,21 +182,6 @@ public function _before_save(){
 	$value_a = ['org_id' => $orgid];
 	$result = $db->findBySql($sql, $value_a);
 	return !empty($result) ? array_pop($result) : false;
- }
-
- public static function search_add_extra_fields(&$arr) {
-	$org = new org;
-	if (!(is_array($arr))) {
-	 return false;
-	}
-	foreach ($arr as &$obj) {
-	 $primary_column = parent::$primary_column;
-	 if (!empty($obj->$primary_column)) {
-		$org_i = $org->findBy_id($obj->$primary_column);
-		$obj->org = $org_i->org;
-		$obj->description = $org_i->description;
-	 }
-	}
  }
 
 }

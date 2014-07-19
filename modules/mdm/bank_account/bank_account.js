@@ -1,6 +1,6 @@
 function setValFromSelectPage(mdm_bank_account_id, combination, ar_customer_id, customer_number, customer_name,
 				supplier_id, supplier_number, supplier_name,
-				mdm_bank_header_id, mdm_bank_site_id, bank_name, branch_name) {
+				mdm_bank_header_id, mdm_bank_site_id, bank_name, branch_name,account_number) {
  this.mdm_bank_account_id = mdm_bank_account_id;
  this.combination = combination;
  this.ar_customer_id = ar_customer_id;
@@ -13,6 +13,7 @@ function setValFromSelectPage(mdm_bank_account_id, combination, ar_customer_id, 
  this.mdm_bank_site_id = mdm_bank_site_id;
  this.bank_name = bank_name;
  this.branch_name = branch_name;
+ this.account_number = account_number;
 }
 
 setValFromSelectPage.prototype.setVal = function() {
@@ -27,6 +28,7 @@ setValFromSelectPage.prototype.setVal = function() {
  var branch_name = this.branch_name;
  var mdm_bank_header_id = this.mdm_bank_header_id;
  var mdm_bank_site_id = this.mdm_bank_site_id;
+ var account_number = this.account_number;
  var bank_name = this.bank_name;
  var fieldClass = '.' + localStorage.getItem("field_class");
  fieldClass = fieldClass.replace(/\s+/g, '.');
@@ -66,6 +68,9 @@ setValFromSelectPage.prototype.setVal = function() {
  }
  if (mdm_bank_header_id) {
 	$("#mdm_bank_header_id").val(mdm_bank_header_id);
+ }
+  if (account_number) {
+	$("#account_number").val(account_number);
  }
 };
 

@@ -37,7 +37,7 @@ class ar_receipt_header extends dbObject {
  public $field_a = [
 		 'ar_receipt_header_id',
 		 'bu_org_id',
-		 'receipt_type',
+		 'ar_receipt_source_id',
 		 'receipt_number',
 		 'ar_customer_id',
 		 'ar_customer_site_id',
@@ -88,7 +88,6 @@ class ar_receipt_header extends dbObject {
  public $column = [
 		 'ar_receipt_header_id',
 		 'bu_org_id',
-		 'receipt_type',
 		 'receipt_number',
 		 'ar_customer_id',
 		 'from_bank_header_id',
@@ -108,7 +107,7 @@ class ar_receipt_header extends dbObject {
  ];
  public $requiredField = [
 		 'bu_org_id',
-		 'receipt_type',
+		 'ar_receipt_source_id',
 		 'ar_customer_id',
 		 'ar_customer_site_id',
 		 'header_amount',
@@ -137,15 +136,11 @@ class ar_receipt_header extends dbObject {
 //		 '_extra_path' => '',
  ];
  public $pageTitle = " inoEMS - AR Receipt  "; //page Title
- public $option_lists = [
-		 'receipt_types' => 'AR_RECEIPT_TYPE',
-//		 'po_status' => 'PO_STATUS',
- ];
  public $ar_receipt_header_id;
  public $bu_org_id;
  public $ar_transaction_header_id;
  public $receipt_number;
- public $receipt_type;
+ public $ar_receipt_source_id;
  public $ar_customer_id;
  public $ar_customer_site_id;
  public $from_bank_header_id;
@@ -206,7 +201,7 @@ class ar_receipt_header extends dbObject {
 	 pa($this);
 	 return -90;
 	}
-		if (($this->action == 'confirm_receipt')) {
+	if (($this->action == 'confirm_receipt')) {
 	 $this->_confirm_receipt();
 	 return 10;
 	}
@@ -355,6 +350,19 @@ class ar_receipt_header extends dbObject {
 	}
  }
 
+ private function _get_cash_ac_fromBU() {
+	$bu_org = new business();
+	$bu_org->org_id = $this->bu_org_id;
+	$bu_org_i = $bu_org->findBy_orgId();
+	if ($bu_org_i->cash_ac_id) {
+	 $cash_ac_id = $bu_org_i->cash_ac_id;
+	} else {
+	 echo "Cash ac doesnot exist.Using default account";
+	 $cash_ac_id = 300;
+	}
+	return $cash_ac_id;
+ }
+
  private function _save_journal_lines() {
 	//	Cr the receviable account 
 	$arrl = new ar_receipt_line();
@@ -394,14 +402,13 @@ class ar_receipt_header extends dbObject {
 	}
 
 	//	Dr the cash account 
-	$bu_org = new business();
-	$bu_org->org_id = $this->bu_org_id;
-	$bu_org_i = $bu_org->findBy_orgId();
-	if ($bu_org_i->cash_ac_id) {
-	 $cash_ac_id = $bu_org_i->cash_ac_id;
-	} else {
-	 echo "Cash ac doesnot exist.Using default account";
-	 $cash_ac_id = 300;
+	$bank_ac = new mdm_bank_account();
+	$bank_ac_id = ar_receipt_source::find_by_id($this->ar_receipt_source_id)->bank_account_id;
+	$bank_ac->findBy_id($bank_ac_id);
+	$cash_ac_id = $bank_ac->cash_ac_id;
+
+	if (empty($cash_ac_id)) {
+	 $cash_ac_id = $this->_get_cash_ac_fromBU();
 	}
 
 	$cash_gjl = new gl_journal_line();

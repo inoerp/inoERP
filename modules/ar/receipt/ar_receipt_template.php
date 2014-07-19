@@ -36,8 +36,6 @@
 						 </li>
 						 <li><label>BU Name(1) : </label>
 							<?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>
-							<a name="show" href="form.php?class_name=ar_receipt_header" class="show bu_org_id">
-							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
 						 <li><label>Ledger Name(2) : </label>
 							<?php echo form::select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', $readonly1, '', '', 1); ?>
@@ -54,8 +52,8 @@
 							}
 							?>
 						 </li>
-						 <li><label>Receipt Type(5) : </label>
-							<?php echo $f->select_field_from_object('receipt_type', ar_receipt_header::receipt_types(), 'option_line_code', 'option_line_value', $ar_receipt_header->receipt_type, 'receipt_type', '', 1, $readonly1); ?>
+						 <li><label>Receipt Source(5) : </label>
+							<?php echo $f->select_field_from_object('ar_receipt_source_id', ar_receipt_source::find_all(), 'ar_receipt_source_id', 'receipt_source', $$class->ar_receipt_source_id, 'ar_receipt_source_id', '', 1, $readonly); ?>
 						 </li>
 						 <li><label>Document Date : </label>
 							<?php echo $f->date_fieldFromToday_d('document_date', $$class->document_date, 1) ?>

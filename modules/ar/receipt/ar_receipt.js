@@ -229,5 +229,6 @@ get_customer_detail_for_bu();
 
  $('#bu_org_id').on('change', function() {
 	getBUDetails($(this).val());
+	get_ar_receipt_source_details($(this).val());
  });
 });

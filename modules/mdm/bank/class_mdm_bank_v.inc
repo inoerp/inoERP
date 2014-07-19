@@ -3,7 +3,7 @@
 class mdm_bank_v extends dbObject {
 
  public static $table_name = "mdm_bank_v";
- public static $primary_column = "mdm_bank_site_id";
+ public static $primary_column = "mdm_bank_header_id";
  public static $key_column = 'branch_name';
  public static $module = "mdm";
  public $field_a = [
