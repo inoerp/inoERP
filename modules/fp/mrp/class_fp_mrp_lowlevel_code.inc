@@ -90,7 +90,7 @@ class fp_mrp_lowlevel_code extends dbObject {
 
 	foreach ($all_boms as $bom) {
 	 $exploded_bom = $boh->BOM_Explosion($bom->item_id_m);
-	 if (empty($lowLevel_code)) {
+	 	 if (empty($lowLevel_code)) {
 		$lowLevel_code = $exploded_bom;
 	 } else {
 		foreach ($exploded_bom as $new_level => $item_a) {

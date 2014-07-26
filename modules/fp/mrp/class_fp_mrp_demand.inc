@@ -29,12 +29,8 @@ class fp_mrp_demand extends dbObject {
 		 'source_type'
  ];
  public $search_functions = [
-		 'Organization' => 'search_org_name_onevalue',
-		 'MRP Planner ' => 'search_mrp_name_onevalue',
-//		 'Item Number From' => 'search_item_number_from',
-//		 'Item Number To' => 'search_item_number_to',
-//		 'Item Id From' => 'search_item_id_m_from',
-//		 'Item Id To' => 'search_item_id_m_to'
+		 'Organization' => 'search_org_name',
+		 'MRP Planner' => 'search_mrp_name',
  ];
  public $column = [
 		 'fp_mrp_demand_id',
@@ -181,12 +177,11 @@ class fp_mrp_demand extends dbObject {
 	if (!empty($demand_lines)) {
 	 $this->mrp_create_demand_fromMDS($item_id_m, $mrph, $demand_lines, $mdsh->org_id);
 	}
-
 	$mrp_plo = new fp_mrp_planned_order();
 	$mrp_plo->item_id_m = $item_id_m;
 	$mrp_plo->fp_mrp_header_id = $mrph->fp_mrp_header_id;
 	$all_planned_orders = $mrp_plo->create_planned_orders($item_id_m, $mrph->fp_mrp_header_id);
-	if (!empty($all_planned_orders)) {
+		if (!empty($all_planned_orders)) {
 	 foreach ($all_planned_orders as $planned_order) {
 		$this->_mrp_demand_calculator_forComponents($item_id_m, $planned_order);
 	 }
@@ -256,6 +251,7 @@ class fp_mrp_demand extends dbObject {
 	 $mrpd_n->source_header_id = $all_planned_orders->source_header_id;
 	 $mrpd_n->source_line_id = $all_planned_orders->source_line_id;
 	 $mrpd_n->audit_trial();
+//	 pa($mrpd_n);
 	 $mrpd_n->save();
 	}
  }

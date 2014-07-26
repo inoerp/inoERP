@@ -47,12 +47,8 @@ class fp_mrp_header extends dbObject {
 		 'fp_mrp_planned_order_id',
  ];
  public $search = [
-		 '_update_path' => 'form.php?class_name=mrp_header',
 		 '_show_update_path' => 1,
-		 '_update_action_meassge' => 'Update',
 		 '_show_view_path' => 1,
-//		 '_view_action_meassge' => 'View',
-//		 '_extra_path' => '',
  ];
  public $pageTitle = " MRP "; //page Title
  public $fp_mrp_header_id;

@@ -39,6 +39,11 @@ class fp_forecast_line extends dbObject {
 		 'current',
 		 'original',
  ];
+  public $fields_inForm_notInDataBase = [
+		 'item_description',
+		 "item_number",
+			'uom_id'
+ ];
  public $fp_forecast_line_id;
  public $fp_forecast_header_id;
  public $item_id_m;
@@ -55,6 +60,9 @@ class fp_forecast_line extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
+ public $item_number;
+ public $item_description;
+ public $uom_id;
 
  public function findBy_ItemId_headerId() {
 	$sql = " SELECT * FROM  ";

@@ -1,24 +1,21 @@
-function setValFromSelectPage(fp_forecast_header_id, forecast, supplier_id, supplier_number, supplier_name,
-				supplier_site_id, supplier_site_name) {
+function setValFromSelectPage(fp_forecast_header_id, forecast, item_id_m, item_number, item_description,
+uom_id) {
  this.fp_forecast_header_id = fp_forecast_header_id;
  this.forecast = forecast;
- this.supplier_id = supplier_id;
- this.supplier_number = supplier_number;
- this.supplier_name = supplier_name;
- this.supplier_site_id = supplier_site_id;
- this.supplier_site_name = supplier_site_name;
+ this.item_id_m = item_id_m;
+ this.item_number = item_number;
+ this.item_description = item_description;
+  this.uom_id = uom_id;
 }
 
 setValFromSelectPage.prototype.setVal = function() {
  var supplier_site_id = this.supplier_site_id;
  var forecast = this.forecast;
  var fp_forecast_header_id = this.fp_forecast_header_id;
- var supplier_id = this.supplier_id;
- var supplier_number = this.supplier_number;
- var supplier_name = this.supplier_name;
- var supplier_site_name = this.supplier_site_name;
- var rowClass = '.' + localStorage.getItem("row_class");
- rowClass = rowClass.replace(/\s+/g, '.');
+ var item_id_m = this.item_id_m;
+ var item_number = this.item_number;
+ var item_description = this.item_description;
+ var uom_id = this.uom_id;
 
  if (fp_forecast_header_id) {
 	$('#content').find('#fp_forecast_header_id').val(fp_forecast_header_id);
@@ -26,28 +23,33 @@ setValFromSelectPage.prototype.setVal = function() {
  if (forecast) {
 	$('#content').find('#forecast').val(forecast);
  }
- if (supplier_id) {
-	$('#content').find(rowClass).find(".supplier_id").val(supplier_id);
- }
- if (supplier_site_id) {
-	$('#content').find(rowClass).find(".supplier_site_id").val(supplier_site_id);
- }
- if (supplier_number) {
-	$('#content').find(rowClass).find(".supplier_number").val(supplier_number);
- }
+  var rowClass = '.' + localStorage.getItem("row_class");
+ var fieldClass = '.' + localStorage.getItem("field_class");
+ rowClass = rowClass.replace(/\s+/g, '.');
+ fieldClass = fieldClass.replace(/\s+/g, '.');
 
- if (supplier_site_name) {
-	$('#content').find(rowClass).find(".supplier_site_name").val(supplier_site_name);
+ if (item_id_m) {
+	$('#content').find(rowClass).find('.item_id_m').val(item_id_m);
  }
-
- if (supplier_name) {
-	$('#content').find(rowClass).find(".supplier_name").val(supplier_name);
-	$('#content').find(rowClass).find(".select_supplier_name").val(supplier_name);
+ if (item_number) {
+	$('#content').find(rowClass).find('.item_number').val(item_number);
+ }
+ if (item_description) {
+	$('#content').find(rowClass).find('.item_description').val(item_description);
+ }
+ if (uom_id) {
+	$('#content').find(rowClass).find('.uom_id').val(uom_id);
  }
 
  localStorage.removeItem("row_class");
+ localStorage.removeItem("row_class");
 
 };
+
+ function afterAddNewRow() {
+	$('#form_line').find('.bucket_type').last().val('WEEKLY');
+//	adjust_date();
+ }
 
 $(document).ready(function() {
 //mandatory and field sequence
@@ -93,10 +95,7 @@ $(document).ready(function() {
 //}
 //
 //adjust_date();
- function afterAddNewRow() {
-	$('#form_line').find('.bucket_type').last().val('WEEKLY');
-//	adjust_date();
- }
+
 
  $('#form_line').on('change', '.start_date, .end_date, .bucket_type', function() {
 	var noOfBucket = 1;

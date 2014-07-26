@@ -88,8 +88,8 @@ class fp_mrp_v extends dbObject {
  ];
  public $pageTitle = " MRP Work Bench "; //page Title
  public $search_functions = [
-		 'Organization' => 'search_org_name_onevalue',
-		 'MRP Planner' => 'search_mrp_name_onevalue',
+		 'Organization' => 'search_org_name',
+		 'MRP Planner' => 'search_mrp_name',
 		 'Item Number From' => 'search_item_number_from',
 		 'Item Number To' => 'search_item_number_to',
 		 'Item Id From' => 'search_item_id_m_from',

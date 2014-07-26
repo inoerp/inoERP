@@ -92,7 +92,7 @@ class bom_header extends dbObject {
  public $last_update_by;
  public $last_update_date;
  public $time;
- public $msg;
+ public $message;
  public $uom;
  public $item_number;
  public $item_description;

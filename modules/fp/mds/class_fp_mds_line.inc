@@ -52,10 +52,8 @@ class fp_mds_line extends dbObject {
 	$sql = " SELECT * FROM  ";
 	$sql .= self::$table_name;
 	$sql .= " WHERE fp_mds_header_id =:fp_mds_header_id AND item_id_m = :item_id_m ";
-
-	$param_a = ['fp_mds_header_id', 'item_id_m'];
 	$value_a = ['fp_mds_header_id' => $this->fp_mds_header_id, 'item_id_m' => $this->item_id_m];
-	$result = $this->findBy_sql($sql, $param_a, $value_a);
+	$result = $this->findBySql($sql, $param_a, $value_a);
 	return !empty($result) ? $result : false;
  }
 

@@ -5,111 +5,114 @@ class onhand_v extends dbObject {
  public static $table_name = "onhand_v";
  public static $primary_column = "onhand_id";
  public $field_a = [
-		 'onhand_id',
-		 'item_number',
-		 'item_description',
-		 'org_name',
-		 'subinventory',
-		 'locator',
-		 'uom_id',
-		 'onhand',
-		 'item_id_m',
-		 'org_id',
-		 'subinventory_id',
-		 'locator_id',
-		 'lot_id',
-		 'serial_id',
-		 'reservable_onhand',
-		 'transactable_onhand',
-		 'lot_status',
-		 'serial_status',
-		 'secondary_uom_id',
-		 'onhand_status',
-		 'ef_id',
-		 'created_by',
-		 'creation_date',
-		 'last_update_by',
-		 'last_update_date',
+   'onhand_id',
+   'item_number',
+   'item_description',
+   'org_name',
+   'subinventory',
+   'locator',
+   'uom_id',
+   'onhand',
+   'item_id_m',
+   'org_id',
+   'subinventory_id',
+   'locator_id',
+   'lot_id',
+   'serial_id',
+   'reservable_onhand',
+   'transactable_onhand',
+   'lot_status',
+   'serial_status',
+   'secondary_uom_id',
+   'onhand_status',
+   'ef_id',
+   'created_by',
+   'creation_date',
+   'last_update_by',
+   'last_update_date',
  ];
  public $initial_search = [
-		 'onhand_id',
-		 'item_number',
-		 'item_description',
-		 'org_name',
-		 'subinventory',
-		 'locator',
-		 'uom_id',
-		 'onhand',
-		 'item_id_m',
-		 'org_id',
-		 'subinventory_id',
-		 'locator_id',
+   'onhand_id',
+   'item_number',
+   'item_description',
+   'org_name',
+   'subinventory',
+   'locator',
+   'uom_id',
+   'onhand',
+   'item_id_m',
+   'org_id',
+   'subinventory_id',
+   'locator_id',
  ];
  public $column = [
-		 'onhand_id',
-		 'item_number',
-		 'item_description',
-		 'org_name',
-		 'subinventory',
-		 'locator',
-		 'uom_id',
-		 'onhand',
-		 'item_id_m',
-		 'org_id',
-		 'subinventory_id',
-		 'locator_id',
+   'onhand_id',
+   'item_number',
+   'item_description',
+   'org_name',
+   'subinventory',
+   'locator',
+   'onhand',
+   'sum_onhand',
+   'uom_id',
+   'item_id_m',
+   'org_id',
+   'subinventory_id',
+   'locator_id',
  ];
  public $dateField = [
  ];
  public $pageTitle = " Onhand - Find Inventory Onhand "; //page Title
  public $search_groupBy = [
-		 'locator' => 'Locator',
-		 'subinventory' => 'Sub Inventory',
-		 'org_id' => 'Inventory Org',
+   'item_number' => 'Item Number'
+//		 'locator' => 'Locator',
+//		 'subinventory' => 'Sub Inventory',
+//		 'org_id' => 'Inventory Org',
  ];
+ public $search_groupBy_sum = 'onhand';
  public $ra_onhand_by_subinventoryType_parameters = [
-		 'Result Limit' => 'ra_result_limit',
-		 'Chart Type' => 'ra_chart_type',
+   'Result Limit' => 'ra_result_limit',
+   'Chart Type' => 'ra_chart_type',
  ];
  public $ra_onhand_by_subinventoryType_settings = [
-		 '_chart_name' => 'Onhand Quantity By Subinventory Type',
-		 '_x_axis_text' => 'Onhand Quantity',
+   '_chart_name' => 'Onhand Quantity By Subinventory Type',
+   '_x_axis_text' => 'Onhand Quantity',
  ];
  public $ra_onhand_value_by_subinventoryType_settings = [
-		 '_chart_name' => 'Onhand Value By Subinventory Type',
-		 '_x_axis_text' => 'Onhand Value',
+   '_chart_name' => 'Onhand Value By Subinventory Type',
+   '_x_axis_text' => 'Onhand Value',
  ];
  public $ra_onhand_by_productLine_settings = [
-		 '_chart_name' => 'Onhand Quantity By Product Line',
-		 '_x_axis_text' => 'Onhand Quantity',
+   '_chart_name' => 'Onhand Quantity By Product Line',
+   '_x_axis_text' => 'Onhand Quantity',
  ];
  public $ra_onhand_value_by_productLine_settings = [
-		 '_chart_name' => 'Onhand Value By Product Line',
-		 '_x_axis_text' => 'Onhand Value',
+   '_chart_name' => 'Onhand Value By Product Line',
+   '_x_axis_text' => 'Onhand Value',
  ];
  public $ra_onhand_by_productLine_subinventoryType_settings = [
-		 '_chart_name' => 'Onhand By Product Line Subinventory Type',
-		 '_chart_width' => '750',
-		 '_chart_height' => '450',
-		 '_x_axis_text' => 'Onhand Quantity',
-		 '_chart_type' => 'clustered_column',
-		 '_gap_between_xaxis_text' =>'50',
-		 '_legend' => ''
+   '_chart_name' => 'Onhand By Product Line Subinventory Type',
+   '_chart_width' => '750',
+   '_chart_height' => '450',
+   '_x_axis_text' => 'Onhand Quantity',
+   '_chart_type' => 'clustered_column',
+   '_gap_between_xaxis_text' => '50',
+   '_legend' => ''
  ];
  public $ra_report_set_onhand_by_subinventoryType_settings = [
-		 '_chart_name' => 'Onhand By Subinventory Type',
-		 '_chart_width' => '350',
-		 '_chart_height' => '350',
-		 '_x_axis_text' => 'Sub Invnetory Type',
-		 '_chart_type' => array('horizonatl_bar', 'vertical_column', 'pie'),
-		 '_legend' => ''
+   '_chart_name' => 'Onhand By Subinventory Type',
+   '_chart_width' => '350',
+   '_chart_height' => '350',
+   '_x_axis_text' => 'Sub Invnetory Type',
+   '_chart_type' => array('horizonatl_bar', 'vertical_column', 'pie'),
+   '_legend' => ''
  ];
  public $ra_report_set_onhand_by_subinventoryType = [
-		 'ra_onhand_by_subinventoryType',
-		 'ra_onhand_value_by_subinventoryType',
-		 'ra_onhand_by_productLine',
-		 'ra_onhand_value_by_productLine',
-		 'ra_onhand_by_productLine_subinventoryType'
+   'ra_onhand_by_subinventoryType',
+   'ra_onhand_value_by_subinventoryType',
+   'ra_onhand_by_productLine',
+   'ra_onhand_value_by_productLine',
+   'ra_onhand_by_productLine_subinventoryType'
  ];
  public $onhand_id;
  public $item_number;
@@ -139,13 +142,8 @@ class onhand_v extends dbObject {
  public $last_update_by;
  public $last_update_date;
 
-
- public function __set($name, $value) {
-	$this->$name = $value;
- }
-
  private function create_onhand_v() {
-	$sql = "
+  $sql = "
 	 CREATE OR REPLACE VIEW onhand_v
 (onhand_id, item_number, item_description, product_line, org_name, subinventory, locator,
 uom_id,onhand, standard_cost, onhand_value,
@@ -176,71 +174,78 @@ LEFT JOIN cst_item_cost_v cic ON cic.item_id_m = onhand.item_id_m AND cic.bom_co
 ";
  }
 
+ public static function find_by_itemId_orgId($item_id, $org_id) {
+  $sql = " SELECT * from onhand_v WHERE item_id_m = '{$item_id}' "
+      . " AND org_id = '{$org_id}' ";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
+
  public function ra_report_set_onhand_by_subinventoryType() {
-	$result_a = [];
-	$result_a['ra_onhand_by_subinventoryType'] = $this->ra_onhand_by_subinventoryType();
-	$result_a['ra_onhand_value_by_subinventoryType'] = $this->ra_onhand_value_by_subinventoryType();
-	$result_a['ra_onhand_by_productLine'] = $this->ra_onhand_by_productLine();
-	$result_a['ra_onhand_value_by_productLine'] = $this->ra_onhand_value_by_productLine();
-	$result_a['ra_onhand_by_productLine_subinventoryType'] = $this->ra_onhand_by_productLine_subinventoryType();
-	return $result_a;
+  $result_a = [];
+  $result_a['ra_onhand_by_subinventoryType'] = $this->ra_onhand_by_subinventoryType();
+  $result_a['ra_onhand_value_by_subinventoryType'] = $this->ra_onhand_value_by_subinventoryType();
+  $result_a['ra_onhand_by_productLine'] = $this->ra_onhand_by_productLine();
+  $result_a['ra_onhand_value_by_productLine'] = $this->ra_onhand_value_by_productLine();
+  $result_a['ra_onhand_by_productLine_subinventoryType'] = $this->ra_onhand_by_productLine_subinventoryType();
+  return $result_a;
  }
 
  public function ra_onhand_by_subinventoryType($limit_no = "5") {
-	$sql = " SELECT subinventory_type, SUM(onhand) as 'Onhand'
+  $sql = " SELECT subinventory_type, SUM(onhand) as 'Onhand'
 				FROM ";
-	$sql .= self::$table_name;
-	$sql .= " GROUP BY subinventory_type ";
-	$sql .= " ORDER BY onhand desc ";
-	$sql .= " LIMIT 5 ";
-	$result = $this->findBySql($sql);
+  $sql .= self::$table_name;
+  $sql .= " GROUP BY subinventory_type ";
+  $sql .= " ORDER BY onhand desc ";
+  $sql .= " LIMIT 5 ";
+  $result = $this->findBySql($sql);
 //	$ret_result = ra_conevrt_data_woarray($result, 'subinventory_type', $legend);
 //	$settings = &$this->ra_onhand_by_subinventoryType_settings;
 //	$settings['legend'] = $legend;
-	return !empty($result) ? $result : false;
+  return !empty($result) ? $result : false;
  }
 
  public function ra_onhand_value_by_subinventoryType() {
-	$sql1 = " SELECT subinventory_type, SUM(onhand_value) as 'onhand_value'
+  $sql1 = " SELECT subinventory_type, SUM(onhand_value) as 'onhand_value'
 				FROM ";
-	$sql1 .= self::$table_name;
-	$sql1 .= " GROUP BY subinventory_type ";
-	$sql1 .= " ORDER BY onhand_value desc ";
-	$sql1 .= " LIMIT 5 ";
-	$result1 = $this->findBySql($sql1);
-	return !empty($result1) ? $result1 : false;
+  $sql1 .= self::$table_name;
+  $sql1 .= " GROUP BY subinventory_type ";
+  $sql1 .= " ORDER BY onhand_value desc ";
+  $sql1 .= " LIMIT 5 ";
+  $result1 = $this->findBySql($sql1);
+  return !empty($result1) ? $result1 : false;
  }
 
  public function ra_onhand_by_productLine($limit_no = "5") {
-	$sql = " SELECT product_line, SUM(onhand) as 'Onhand' FROM ";
-	$sql .= self::$table_name;
-	$sql .= " GROUP BY product_line ";
-	$sql .= " ORDER BY onhand_value desc ";
-	$sql .= " LIMIT $limit_no ";
-	$result = $this->findBySql($sql);
-	return !empty($result) ? $result : false;
+  $sql = " SELECT product_line, SUM(onhand) as 'Onhand' FROM ";
+  $sql .= self::$table_name;
+  $sql .= " GROUP BY product_line ";
+  $sql .= " ORDER BY onhand_value desc ";
+  $sql .= " LIMIT $limit_no ";
+  $result = $this->findBySql($sql);
+  return !empty($result) ? $result : false;
  }
 
  public function ra_onhand_value_by_productLine($limit_no = "5") {
-	$sql = " SELECT product_line, SUM(onhand_value) as 'Onhand Value' FROM ";
-	$sql .= self::$table_name;
-	$sql .= " GROUP BY product_line ";
-	$sql .= " ORDER BY onhand_value desc ";
-	$sql .= " LIMIT $limit_no ";
-	$result = $this->findBySql($sql);
-	return !empty($result) ? $result : false;
+  $sql = " SELECT product_line, SUM(onhand_value) as 'Onhand Value' FROM ";
+  $sql .= self::$table_name;
+  $sql .= " GROUP BY product_line ";
+  $sql .= " ORDER BY onhand_value desc ";
+  $sql .= " LIMIT $limit_no ";
+  $result = $this->findBySql($sql);
+  return !empty($result) ? $result : false;
  }
 
  public function ra_onhand_by_productLine_subinventoryType() {
-	$legend = [];
-	$sql = " SELECT  subinventory_type, product_line , SUM(onhand)
+  $legend = [];
+  $sql = " SELECT  subinventory_type, product_line , SUM(onhand)
 	  FROM onhand_v
 		GROUP BY subinventory_type, product_line
 		ORDER BY subinventory_type, product_line ";
-	$result = $this->findBySql($sql);
-	$result_f = ra_conevrt_data_bar_column($result, $legend);
-	$this->ra_onhand_by_productLine_subinventoryType_settings['_legend'] = $legend;
-	return !empty($result_f) ? $result_f : false;
+  $result = $this->findBySql($sql);
+  $result_f = ra_conevrt_data_bar_column($result, $legend);
+  $this->ra_onhand_by_productLine_subinventoryType_settings['_legend'] = $legend;
+  return !empty($result_f) ? $result_f : false;
  }
 
 }

@@ -203,7 +203,8 @@ class fp_mrp_planned_order extends dbObject {
 	 $mrp_d_f = $mrp_d;
 	 echo "<br> No Merging of demand for " . $item->item_number;
 	}
-	foreach ($mrp_d_f as $demand) {
+	
+		foreach ($mrp_d_f as $demand) {
 	 $demand_date = new DateTime($demand->demand_date);
 	 //ignore past due forecasts and raise past due exception for sales orders
 	 if ($today > $demand_date) {

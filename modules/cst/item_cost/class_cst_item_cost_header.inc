@@ -463,6 +463,7 @@ class cst_item_cost_header extends dbObject {
 	if (!empty($parameters['item_id_m'][0])) {
 	 $this->message .= "<br>Using Standard cost update by Item Id ";
 	 $ich = new cst_item_cost_header();
+	 $ich->org_id = $org_id;
 	 $ich->item_id_m = $parameters['item_id_m'][0];
 	 $ich->bom_cost_type = $bom_cost_type;
 	 $ich_i = $ich->findBy_ItemId_orgId_CostType();
@@ -496,6 +497,7 @@ class cst_item_cost_header extends dbObject {
 		$ich = new cst_item_cost_header();
 		$ich->item_id_m = $items->item_id_m;
 		$ich->bom_cost_type = $bom_cost_type;
+		$ich->org_id = $org_id;
 		$ich_i = $ich->findBy_ItemId_orgId_CostType();
 		if (!empty($ich_i)) {
 		 $ich->cst_item_cost_header_id = $ich_i->cst_item_cost_header_id;
@@ -530,6 +532,7 @@ class cst_item_cost_header extends dbObject {
 		$ich = new cst_item_cost_header();
 		$ich->item_id_m = $items->item_id_m;
 		$ich->bom_cost_type = $bom_cost_type;
+		$ich->org_id = $org_id;
 		$ich_i = $ich->findBy_ItemId_orgId_CostType();
 		if (!empty($ich_i)) {
 		 $ich->cst_item_cost_header_id = $ich_i->cst_item_cost_header_id;

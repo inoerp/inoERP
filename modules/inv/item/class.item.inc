@@ -160,10 +160,12 @@ class item extends dbObject {
  public $initial_search = [
 		 'item_id',
 		 "item_number",
-		 "item_status"
+		 "item_status",
+		 'item_id_m'
  ];
  public $column = [
 		 'item_id',
+		 'item_id_m',
 		 "org_id",
 		 "item_number",
 		 "item_description",
