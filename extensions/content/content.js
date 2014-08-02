@@ -32,7 +32,6 @@ $(document).ready(function() {
 	});
 	var headerData = $(form_header_id).serializeArray();
 	saveHeader('content.php', headerData, '#content_id', '', true, 'content');
-alert('okey');
  });
 
  deleteHeader('form.php?class_name=content', $('#content_id').val());

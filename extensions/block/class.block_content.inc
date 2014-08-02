@@ -29,6 +29,7 @@ class block_content extends dbObject {
      "content"
  ];
  
+ 
  public $block_content_id;
  public $block_id;
  public $info;

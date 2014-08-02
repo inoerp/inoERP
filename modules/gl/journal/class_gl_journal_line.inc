@@ -104,7 +104,7 @@ class gl_journal_line extends dbObject {
  }
 
  public function _before_save() {
-	if ((isset($this->status)) && ($this->status == 'P')) {
+  if ((isset($this->status)) && ($this->status == 'P')) {
 	 echo " You can't modify this Journal Line as its already posted. <br>"
 	 . " You can only reverse the Journal Header. ";
 	 return -99;

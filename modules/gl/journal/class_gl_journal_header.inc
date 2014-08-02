@@ -153,8 +153,7 @@ class gl_journal_header extends dbObject {
  }
 
  public function _before_save() {
-
-	/* Check the existing status - If its POSTED then now other actiity is allowed except Reverse */
+  	/* Check the existing status - If its POSTED then now other actiity is allowed except Reverse */
 	if ((isset($this->existing_status)) && ($this->existing_status == 'POSTED') && ( $this->status != 'REVERSED')) {
 	 echo " You cant save any records as the journal is POSTED. <br>"
 	 . " You can only reverse this Journal. ";

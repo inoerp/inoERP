@@ -33,67 +33,72 @@ class inv_count_header extends dbObject {
  public static $key_column = "count_name";
  public static $module = "inv";
  public static $count_type_a = [
-   'CYCLE_COUNT' => 'Cycle Count',
-   'PHYSICAL_INV' => 'Physical Inventory',
+  'CYCLE_COUNT' => 'Cycle Count',
+  'PHYSICAL_INV' => 'Physical Inventory',
  ];
  public static $approval_required_a = [
-   'NEVER' => 'Never',
-   'ALWAYS' => 'Always',
-   'OUT_OF_TOLERANCE_ALL' => 'Out of tolerance - All criteria',
-   'OUT_OF_TOLERANCE_ANY' => 'Out of tolerance - Any criteria',
+  'NEVER' => 'Never',
+  'ALWAYS' => 'Always',
+  'OUT_OF_TOLERANCE_ALL' => 'Out of tolerance - All criteria',
+  'OUT_OF_TOLERANCE_ANY' => 'Out of tolerance - Any criteria',
  ];
  public static $count_action_a = [
-   'SCHDULE_COUNT' => 'Schedule Count',
-   'UPDATE_COUNT' => 'Update Count',
-   'DELETE_COUNT' => 'Delete All Count',
+  'SCHDULE_COUNT' => 'Schedule Count',
+  'UPDATE_COUNT' => 'Update Count',
+  'DELETE_COUNT' => 'Delete All Count',
  ];
+ 
  public $field_a = [
-   'inv_count_header_id',
-   'count_name',
-   'count_type',
-   'adjustment_ac_id',
-   'org_id',
-   'description',
-   'inv_abc_assignment_header_id',
-   'approval_required',
-   'quantity_variance_positive',
-   'quantity_variance_negative',
-   'value_variance_positive',
-   'value_variance_negative',
-   'status',
-   'created_by',
-   'creation_date',
-   'last_update_by',
-   'last_update_date',
+  'inv_count_header_id',
+  'count_name',
+  'count_type',
+  'adjustment_ac_id',
+  'org_id',
+  'description',
+  'inv_abc_assignment_header_id',
+  'approval_required',
+  'quantity_variance_positive',
+  'quantity_variance_negative',
+  'value_variance_positive',
+  'value_variance_negative',
+  'status',
+  'created_by',
+  'creation_date',
+  'last_update_by',
+  'last_update_date',
  ];
  public $initial_search = [
-   'count_name',
-   'count_type',
-   'description',
+  'count_name',
+  'count_type',
+  'description',
  ];
  public $column = [
-   'inv_count_header_id',
-   'count_name',
-   'count_type',
-   'adjustment_ac_id',
-   'org_id',
-   'description',
-   'inv_abc_assignment_header_id',
+  'inv_count_header_id',
+  'count_name',
+  'count_type',
+  'adjustment_ac_id',
+  'org_id',
+  'description',
+  'inv_abc_assignment_header_id',
  ];
  public $requiredField = [
-   'count_name',
-   'count_type',
-   'adjustment_ac_id',
-   'org_id',
-   'inv_abc_assignment_header_id',
+  'count_name',
+  'count_type',
+  'adjustment_ac_id',
+  'org_id',
+  'inv_abc_assignment_header_id',
  ];
  public $fields_inForm_notInDataBase = [
-   'abc_assignment_name',
-   'count_action'
+  'abc_assignment_name',
+  'count_action',
+  'action',
+  'multi_action_class_pc',
+  'multi_action_class_pc_value',
+  'action_class_name'
  ];
  public $search = [
-   '_show_update_path' => 1,
-   '_show_view_path' => 1,
+  '_show_update_path' => 1,
+  '_show_view_path' => 1,
  ];
  public $pageTitle = " Inventory Count "; //page Title
  public $inv_count_header_id;
@@ -117,6 +122,10 @@ class inv_count_header extends dbObject {
  public $abc_assignment_name;
  public $count_action;
  private $_no_of_working_days;
+ public $multi_action_class_pc;
+ public $multi_action_class_pc_value;
+ public $action;
+ public $action_class_name;
 
  public function _after_save() {
   if (!empty($this->inv_count_header_id) && !empty($_POST['assign_abc_class_value'])) {
@@ -207,7 +216,7 @@ class inv_count_header extends dbObject {
    $offset = ($count) * $no_of_items_to_be_counted_per_day;
    $items_already_scheduled += $no_of_items_to_be_counted_per_day;
    $sql = " SELECT * FROM inv_abc_assignment_line WHERE inv_abc_assignment_header_id = '{$this->inv_abc_assignment_header_id}' "
-       . " AND abc_class = '{$class_code}' ";
+     . " AND abc_class = '{$class_code}' ";
    $sql .=" LIMIT {$no_of_items_to_be_counted_per_day} ";
    $sql .=" OFFSET {$offset} ";
    $result = $this->findBySql($sql);
@@ -239,6 +248,24 @@ class inv_count_header extends dbObject {
     $count++;
    }
   }
+ }
+
+ public function multi_select_input_fields() {
+  $multi_select_input = [
+   'count_entry_actio'
+  ];
+  return $multi_select_input;
+ }
+
+ public function multi_select_hidden_fields() {
+  $multi_select_hidden = [
+   'action_class_name',
+   'mode',
+   'action',
+   'show_block',
+  ];
+
+  return $multi_select_hidden;
  }
 
 }

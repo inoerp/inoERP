@@ -174,6 +174,23 @@ LEFT JOIN cst_item_cost_v cic ON cic.item_id_m = onhand.item_id_m AND cic.bom_co
 ";
  }
 
+ public function findBy_itemIdm_location() {
+  $sql = "SELECT * FROM " . self::$table_name;
+  $sql .= " WHERE item_id_m = '{$this->item_id_m}' ";
+  if (!empty($this->org_id)) {
+   $sql .= " AND org_id = '{$this->org_id}' ";
+  }
+  if (!empty($this->subinventory_id)) {
+   $sql .= " AND subinventory_id = '{$this->subinventory_id}' ";
+  }
+  if (!empty($this->locator_id)) {
+   $sql .= " AND locator_id = '{$this->locator_id}' ";
+  }
+
+  $result = $this->findBySql($sql);
+  return !empty($result) ? $result : false;
+ }
+
  public static function find_by_itemId_orgId($item_id, $org_id) {
   $sql = " SELECT * from onhand_v WHERE item_id_m = '{$item_id}' "
       . " AND org_id = '{$org_id}' ";

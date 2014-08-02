@@ -115,3 +115,7 @@ if (isset($_FILES)) {
 ////  echo '<br/> No Post';
 //// }
 ?>
+
+<?php 
+ $dbc->confirm();
+ ?>

@@ -97,41 +97,41 @@ $(document).ready(function() {
 
  //updating block ids through observere
  // Define the target. #content or any higher level
- var target = $("#content")[0];
+// var target = $("#content")[0];
 
-// Set the configuration for the observer:
- var config = {
-	attributes: true,
-	childList: true,
-	characterData: true,
-	subtree: true
- };
-
-// Create a new instance for the observer
- var observer = new MutationObserver(function(mutations) {
-	mutations.forEach(function(mutation) {
-	 var addedNodes = mutation.addedNodes;  // All newly added nodes
-	 if (addedNodes) {
-		$(addedNodes).each(function() {
-		 if ($(this).hasClass('json_message')) {
-			$(this).find('#lineids').find('li').each(function() {
-			 var idNumber = +$(this).html();
-			 var blockName = $(this).attr('class');
-			 $('#block_header').find('.name').each(function() {
-				if ($(this).val() == blockName) {
-				 $(this).closest('tr').find('.block_id').val(idNumber);
-				}
-			 });
-			});
-		 }
-		 //all the functions goes here for new nodes
-		});
-	 }
-	});
- });
-
-//start it
-// observer.observe(target, config);
+//// Set the configuration for the observer:
+// var config = {
+//	attributes: true,
+//	childList: true,
+//	characterData: true,
+//	subtree: true
+// };
+//
+//// Create a new instance for the observer
+// var observer = new MutationObserver(function(mutations) {
+//	mutations.forEach(function(mutation) {
+//	 var addedNodes = mutation.addedNodes;  // All newly added nodes
+//	 if (addedNodes) {
+//		$(addedNodes).each(function() {
+//		 if ($(this).hasClass('json_message')) {
+//			$(this).find('#lineids').find('li').each(function() {
+//			 var idNumber = +$(this).html();
+//			 var blockName = $(this).attr('class');
+//			 $('#block_header').find('.name').each(function() {
+//				if ($(this).val() == blockName) {
+//				 $(this).closest('tr').find('.block_id').val(idNumber);
+//				}
+//			 });
+//			});
+//		 }
+//		 //all the functions goes here for new nodes
+//		});
+//	 }
+//	});
+// });
+//
+////start it
+//// observer.observe(target, config);
 
  var classSave = new saveMainClass();
  classSave.json_url = 'form.php?class_name=block';

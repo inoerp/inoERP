@@ -37,7 +37,7 @@ class block extends dbObject {
 		 "enabled_cb",
 		 "rev_enabled_cb",
 		 'visibility_php_cb',
-		 'cached_cb'
+		 'cached_cb',
  ];
  public static $position_array = [
 		 "header_top" => 'header_top',
@@ -114,6 +114,10 @@ class block extends dbObject {
 	$this->$name = $value;
  }
 
+ public function _before_save() {
+//	pa($_POST);
+ }
+
  public function _after_save() {
 	global $db;
 	if ((!empty($_POST['content'][0])) && (!empty($this->block_id))) {
@@ -122,28 +126,21 @@ class block extends dbObject {
 		$block_content->content_php_cb = 1;
 		$block_content->content = base64_encode($_POST['content'][0]);
 	 } else {
-		$block_content->content_php_cb = NULL;
+		$block_content->content_php_cb = 0;
 		$block_content->content = $_POST['content'][0];
 	 }
 	 $block_content->block_id = $this->block_id;
 	 if (!empty($_POST['block_content_id'][0])) {
 		$block_content->block_content_id = $_POST['block_content_id'][0];
 	 }
-	 $time = time();
-	 $block_content->creation_date = strftime("%d-%m-%y %H:%M:%S", $time);
-	 $block_content->created_by = $_SESSION['username'];
-	 $block_content->last_update_date = $block_content->creation_date;
-	 $block_content->last_update_by = $block_content->created_by;
-	 $save = $block_content->save();
-	 if ($save) {
-		$return = 1;
-		echo "<br>Block content sucesfully saved";
-	 } else {
-		echo "<br>Block content couldnt be saved";
-		$return = 0;
+	 $block_content->audit_trial();
+	 pa($block_content);
+	 try {
+		$block_content->save();
+		echo "<br>Block content is sucesfully saved";
+	 } catch (Exception $e) {
+		echo "<br>Block content couldnt be saved " . $e->getMessage();
 	 }
-
-	 return $return;
 	}
  }
 
@@ -163,10 +160,10 @@ class block extends dbObject {
 	$result = $this->findBySql($sql);
 	return !empty($result) ? $result : false;
  }
- 
- public function findBy_blockName($name){
+
+ public function findBy_blockName($name) {
 	$sql = " SELECT * from block where name = :name ";
-	$value_a = ['name' => $name ];
+	$value_a = ['name' => $name];
 	$result = $this->findBySql($sql, $value_a);
 	return !empty($result) ? array_pop($result) : false;
  }

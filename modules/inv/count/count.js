@@ -110,17 +110,17 @@ $(document).ready(function() {
 //  var Mandatory_Fields = ["#org_id", "First Select Org Name", "#item_number", "First Select Item Number"];
 // select_mandatory_fields(Mandatory_Fields);
 //
- $('#form_line').on("click", function() {
-  if (!$('#inv_count_header_id').val()) {
-   alert('No header Id : First enter/save header details');
-  } else {
-   var headerId = $('#inv_count_header_id').val();
-   if (!$(this).find('.inv_count_header_id').val()) {
-    $(this).find('.inv_count_header_id').val(headerId);
-   }
-  }
-
- });
+// $('#form_line').on("click", function() {
+//  if (!$('#inv_count_header_id').val()) {
+//   alert('No header Id : First enter/save header details');
+//  } else {
+//   var headerId = $('#inv_count_header_id').val();
+//   if (!$(this).find('.inv_count_header_id').val()) {
+//    $(this).find('.inv_count_header_id').val(headerId);
+//   }
+//  }
+//
+// });
 
 
  //Popup for selecting 
@@ -142,111 +142,12 @@ $(document).ready(function() {
 
  onClick_add_new_row('tr.inv_count_schedule0', 'tbody.inv_count_schedule_values', 1);
 
- $('#form_header').on('change', '.assign_seq_number', function() {
-  if ($(this).val() > +$('#total_no_of_items').val()) {
-   alert('Wrong sequence number');
-   $('#form_header').find('.assign_seq_number').not(':last').closest('tr').find((":input:not([readonly])")).val('');
-   return false;
-  }
-  $(this).closest('tr').nextAll().not(':last').closest('tr').find((":input:not([readonly])")).val('');
-  var thisValue = $(this).val();
-  var doAjax = true;
-  var trClass = $(this).closest('tr').prop('class');
-  var trClass_d = '.' + trClass;
+$('#form_line').on('change','.subinventory_id', function(){
+  	var trClass = '.' + $(this).closest('tr').attr('class');
+	var subinventory_id = $(this).val();
+  getLocator('modules/inv/locator/json_locator.php', subinventory_id, 'subinventory', trClass);
 
-  $(trClass_d).closest('tbody').find('tr').each(function() {
-   if ($(this).attr('class') === trClass) {
-    return false;
-   } else {
-    if (+$(this).find('.assign_seq_number').val() > thisValue) {
-     alert('Wrong sequence number');
-     $('#form_header').find('.assign_seq_number').not(':last').closest('tr').find((":input:not([readonly])")).val('');
-     doAjax = false;
-     return;
-    }
-   }
-  });
-
-  if (doAjax) {
-   invValuationDetails(trClass_d, 'seq_number', +$(this).val());
-  }
- });
-
- $('#form_header').on('change', '.assign_item_percentage', function() {
-  if ($(this).val() > 100) {
-   alert('Invalid Percentage -  Value should be <= 100');
-   $('#form_header').find('.assign_item_percentage').not(':last').closest('tr').find((":input:not([readonly])")).val('');
-   return false;
-  }
-  $(this).closest('tr').nextAll().not(':last').closest('tr').find((":input:not([readonly])")).val('');
-  var thisValue = $(this).val();
-  var doAjax = true;
-  var trClass = $(this).closest('tr').prop('class');
-  var trClass_d = '.' + trClass;
-
-  $(trClass_d).closest('tbody').find('tr').each(function() {
-   if ($(this).attr('class') === trClass) {
-    return false;
-   } else {
-    if (+$(this).find('.assign_item_percentage').val() > thisValue) {
-     alert('Wrong percentage');
-     $('#form_header').find('.assign_item_percentage').not(':last').closest('tr').find((":input:not([readonly])")).val('');
-     doAjax = false;
-     return;
-    }
-   }
-  });
-
-  if (doAjax) {
-   var seq_value = parseInt((+$(this).val()) * (+$('#total_no_of_items').val()) / 100);
-   seq_value = (seq_value == 0) ? 1 : seq_value;
-   invValuationDetails(trClass_d, 'seq_number', seq_value);
-  }
- });
-
- $('#form_header').on('change', '.assign_value, .assign_value_percentage', function() {
-  if ($(this).hasClass('assign_value_percentage')) {
-   var thisClass = 'assign_value_percentage';
-   var element_value = parseInt((+$(this).val()) * (+$('#total_value').val()) / 100);
-  } else {
-   var thisClass = 'assign_value';
-   var element_value = parseInt((+$(this).val()));
-  }
-  var thisClass_d = '.' + 'assign_value';
-  //validate value is less than max mavue
-  if (($(this).val() > 100) && ($(this).hasClass('assign_value_percentage') > 100)) {
-   alert('Invalid Percentage -  Value should be <= 100');
-   $('#form_header').find('.assign_item_percentage').not(':last').closest('tr').find((":input:not([readonly])")).val('');
-   return false;
-  } else if (($(this).val() > $('#total_value').val()) && ($(this).hasClass('assign_value') > 100)) {
-   alert('Invalid Value');
-   $('#form_header').find('.assign_item_percentage').not(':last').closest('tr').find((":input:not([readonly])")).val('');
-   return false;
-  }
-  //
-  $(this).closest('tr').nextAll().not(':last').closest('tr').find((":input:not([readonly])")).val('');
-  var doAjax = true;
-  var trClass = $(this).closest('tr').prop('class');
-  var trClass_d = '.' + trClass;
-
-  $(trClass_d).closest('tbody').find('tr').each(function() {
-   if ($(this).attr('class') === trClass) {
-    return false;
-   } else {
-    if (+$(this).find(thisClass_d).val() > element_value) {
-     alert('Invalid Data ' + $(this).find(thisClass_d).val() + ' : ' + element_value);
-     $('#form_header').find(thisClass_d).not(':last').closest('tr').find((":input:not([readonly])")).val('');
-     doAjax = false;
-     return;
-    }
-   }
-  });
-
-  if (doAjax) {
-   element_value = (element_value == 0) ? 1 : element_value;
-   invValuationDetails(trClass_d, 'cum_value', element_value);
-  }
- });
+});
 
 //context menu
  var classContextMenu = new contextMenuMain();

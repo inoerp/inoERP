@@ -68,7 +68,7 @@ class subinventory extends dbObject {
 		 '_show_view_path' => 1,
  ];
   public $search_functions = [
-		 'Organization' => 'search_org_name_onevalue'
+		 'Organization' => 'search_org_name'
  ];
  public $pageTitle = " Subinventory - Create & Update Subinventories"; //page Title
  public $option_lists = [

@@ -54,17 +54,10 @@
 
 					 </select>
 					</li>
-
-					<li class="setup_path_cb"> <label>Setup Path ? : </label>            
-					 <input type="checkbox" name="setup_path_cb[]"  value="1"
-					 <?php
-					 if ($path->setup_path_cb == 1) {
-						echo " checked";
-					 } else {
-						echo "";
-					 }
-					 ?> >
-					</li>
+           <li> <label>Path Type: </label>
+					 <?php echo $f->select_field_from_object('path_type', path::path_types(), 'option_line_code', 'option_line_value', $$class->path_type, 'path_type') ?></li>
+					 <li> <label>Search Path ? : </label><?php $f->checkBox_field_d('search_path_cb') ; ?> </li>
+           <li> <label>Display Weight: </label><?php echo $f->number_field('display_weight', $$class->display_weight) ; ?> </li>
 				 </ul>
 				</div>
 			 </form> 

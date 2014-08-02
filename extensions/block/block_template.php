@@ -17,7 +17,6 @@
 				 <form action=""  method="post" id="block_header"  name="block_content_header">
 					<!--create empty form or a single id when search is not clicked and the id is referred from other block_content -->
 					<?php
-					$f = new inoform();
 					echo $f->hidden_field_withId('block_id', $$class->block_id);
 					?>	
 					<?php echo $f->hidden_field_withId('block_content_id', $$class_second->block_content_id); ?>	
@@ -49,10 +48,10 @@
 					 <!--Start of  block content-->
 					 <?php if ($$class->reference_table == 'block_content') { ?>
  					 <tr><td colspan="2"><label>Block Content : </label>
- 						 <textarea required name="content" class="noformat" rows="8" cols="80" placeholder=' '><?php echo $$class_second->content; ?></textarea>
+ 						 <textarea required name="content[]" class="noformat" rows="8" cols="80" placeholder=' '><?php echo $$class_second->content; ?></textarea>
  						</td></tr>
  					 <tr> <td>	<label>Block Info : </label><?php form::text_field_d2('info'); ?> </td>
- 						<td><label>Block content contains PHP Code : </label> <?php echo form::checkBox_field('content_php_cb', $$class_second->content_php_cb); ?></td>
+ 						<td><label>Block content contains PHP Code : </label> <?php echo $f->checkBox_field('content_php_cb', $$class_second->content_php_cb); ?></td>
  					 </tr>
 						<?php
 					 }

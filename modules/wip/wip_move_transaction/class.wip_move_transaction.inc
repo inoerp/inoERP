@@ -166,7 +166,7 @@ class wip_move_transaction extends dbObject {
 	 $inv_transaction->to_locator_id = $bom_lines->supply_locator;
 	}
 
-	$item = item::find_by_id($bom_lines->component_item_id_m);
+	$item = item::find_by_item_id_m($bom_lines->component_item_id_m);
 	$inv_transaction->item_number = $item->item_number;
 	$inv_transaction->uom_id = $item->uom_id;
 	$inv_transaction->document_type = 'Work Order';
