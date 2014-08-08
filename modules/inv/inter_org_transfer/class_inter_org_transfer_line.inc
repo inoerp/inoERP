@@ -164,11 +164,20 @@
      $inv_transaction_from->_after_save();
 
      $inv_transaction_to->org_id = $ioh->to_org_id;
-     /*credit value
+     /* credit value
       * If currency is same then use the same standard cost else use the conversion
       */
+     $inventory = new inventory();
+     $from_inventory = $inventory->findRelatedDetail_ByOrgId($ioh->from_org_id);
+     $from_currency = $from_inventory->currency_code;
+     $to_inventory = $inventory->findRelatedDetail_ByOrgId($ioh->to_org_id);
+     $to_currency = $to_inventory->currency_code;
      $stnd_cost = cst_item_cost_v::find_cost_by_itemId_orgId($this->item_id_m, $ioh->from_org_id)->standard_cost;
      $cr_amount = $stnd_cost * $this->transaction_quantity;
+     if($from_currency != $to_currency ){
+      $rate = gl_currency_conversion::find_rate($from_currency, $to_currency);
+      $cr_amount = $cr_amount * $rate;
+     }
      $inv_transaction_to->setProperty('_cr_amount', $cr_amount);
      $inv_transaction_to->to_subinventory_id = $this->to_subinventory_id;
      if (!empty($this->to_locator_id)) {

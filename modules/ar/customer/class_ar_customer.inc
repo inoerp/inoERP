@@ -253,10 +253,14 @@ class ar_customer extends dbObject {
 	}
  }
 
- public static function find_by_customerNumber_OrgId($customer_number, $org_id) {
-	$ar_customer_id = self::find_ar_customer_id_from_customerNumber_OrgId($customer_number, $org_id);
-	$result = self::find_by_id($ar_customer_id);
-	return $result;
+ public static function find_by_customerNumber($customer_number) {
+	$sql = "SELECT ar_customer_id FROM " .
+					self::$table_name .
+					" where customer_number= '{$customer_number}' " .
+					" LIMIT 1";
+
+	$result = self::find_by_sql($sql);
+	return !empty($result) ? array_pop($result) : false ;
  }
 
  public static function find_all_assigned_orgs($ar_customer_id) {

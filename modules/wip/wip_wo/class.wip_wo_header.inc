@@ -6,12 +6,12 @@ class wip_wo_header extends dbObject {
  public static $dependent_classes = ['wip_wo_routing_line', 'wip_wo_routing_detail', 'wip_wo_bom'];
  public static $primary_column = "wip_wo_header_id";
  public static $primary_column2 = "wo_number";
- public static $key_column = 'item_id';
+ public static $key_column = 'item_id_m';
  public static $module = "wip";
 //  data base variables as stored database column name
  public $field_a = [
 		 'wip_wo_header_id',
-		 'item_id',
+		 'item_id_m',
 		 'wo_number',
 		 'org_id',
 		 'wip_accounting_group_id',
@@ -21,8 +21,8 @@ class wip_wo_header extends dbObject {
 		 'completion_date',
 		 'quantity',
 		 'nettable_quantity',
-		 'reference_bom_item_id',
-		 'reference_routing_item_id',
+		 'reference_bom_item_id_m',
+		 'reference_routing_item_id_m',
 		 'bom_exploded_cb',
 		 'routing_exploded_cb',
 		 'completion_sub_inventory',
@@ -46,7 +46,7 @@ class wip_wo_header extends dbObject {
 //variables used for showing data
  public $initial_search = [
 		 'wip_wo_header_id',
-		 'item_id',
+		 'item_id_m',
 		 'wo_number',
 		 'org_id',
 		 'wo_type',
@@ -55,7 +55,7 @@ class wip_wo_header extends dbObject {
  ];
  public $column = [
 		 'wip_wo_header_id',
-		 'item_id',
+		 'item_id_m',
 		 'wo_number',
 		 'org_id',
 		 'wo_type',
@@ -74,7 +74,7 @@ class wip_wo_header extends dbObject {
 		 'processing_lt'
  ];
  public $requiredField = [
-		 'item_id',
+		 'item_id_m',
 		 'org_id',
 		 'wip_accounting_group_id',
 		 'wo_type',
@@ -95,7 +95,7 @@ class wip_wo_header extends dbObject {
 		 'wip_wo_status' => 'WIP_WO_STATUS',
  ];
  public $wip_wo_header_id;
- public $item_id;
+ public $item_id_m;
  public $wo_number;
  public $org_id;
  public $wip_accounting_group_id;
@@ -108,8 +108,8 @@ class wip_wo_header extends dbObject {
  public $last_unit_completed_date;
  public $quantity;
  public $nettable_quantity;
- public $reference_bom_item_id;
- public $reference_routing_item_id;
+ public $reference_bom_item_id_m;
+ public $reference_routing_item_id_m;
  public $bom_exploded_cb;
  public $routing_exploded_cb;
  public $completion_sub_inventory;
@@ -166,10 +166,10 @@ class wip_wo_header extends dbObject {
 	}
 
 	//copy the BOM
-	if ((!empty($this->item_id)) && (empty($this->bom_exploded_cb))) {
+	if ((!empty($this->item_id_m)) && (empty($this->bom_exploded_cb))) {
 	 $wip_wo_header_id1 = $this->wip_wo_header_id;
 	 $boh = new bom_header();
-	 $boh->item_id = $this->item_id;
+	 $boh->item_id_m = $this->item_id_m;
 	 $boh_i = $boh->findBy_itemId();
 
 	 $bol = new bom_line();
@@ -185,7 +185,7 @@ class wip_wo_header extends dbObject {
 			if (!empty($bom_line->$value)) {
 			 $wip_wo_bom->$value = $bom_line->$value;
 			 if ($value == 'routing_sequence') {
-				$routing_of_bom = bom_routing_line::find_by_itemId($this->item_id);
+				$routing_of_bom = bom_routing_line::find_by_itemId($this->item_id_m);
 				foreach ($routing_of_bom as $routing_lines) {
 				 if ($routing_lines->bom_routing_line_id == $bom_line->$value) {
 					$routing_sequence_value = $routing_lines->routing_sequence;
@@ -214,10 +214,10 @@ class wip_wo_header extends dbObject {
 
 	//end of Copy BOM
 	//copy the Routing
-	if ((!empty($this->item_id)) && (empty($this->routing_exploded_cb))) {
+	if ((!empty($this->item_id_m)) && (empty($this->routing_exploded_cb))) {
 	 $wip_wo_header_id2 = $this->wip_wo_header_id;
 	 $brh = new bom_routing_header();
-	 $brh->item_id = $this->item_id;
+	 $brh->item_id_m = $this->item_id_m;
 	 $brh_i = $brh->findBy_itemId();
 	 $brl = new bom_routing_line();
 	 if (!empty($brh_i)) {
@@ -297,18 +297,8 @@ class wip_wo_header extends dbObject {
 	}
  }
 
- public function _before_showing() {
-	
- }
-
- public function _before_submit() {
-	
- }
 
 }
 
 //end of resource class
 ?>
-
-
-

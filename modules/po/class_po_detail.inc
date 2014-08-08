@@ -22,7 +22,7 @@ class po_detail extends dbObject {
 		 'po_header_id',
 		 'shipment_number',
 		 'ship_to_inventory',
-		 'sub_inventory_id',
+		 'subinventory_id',
 		 'locator_id',
 		 'requestor',
 		 'ship_to_location_id',
@@ -96,7 +96,7 @@ class po_detail extends dbObject {
  public $po_line_id;
  public $po_header_id;
  public $shipment_number;
- public $sub_inventory_id;
+ public $subinventory_id;
  public $locator_id;
  public $requestor;
  public $ship_to_location_id;

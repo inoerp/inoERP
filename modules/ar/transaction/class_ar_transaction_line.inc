@@ -12,10 +12,12 @@ class ar_transaction_line extends dbObject {
 		 'ar_transaction_line_id',
 		 'ar_transaction_header_id',
 		 'line_number',
-		 'item_id',
+		 'item_id_m',
 		 'item_description',
 		 'inv_line_quantity',
 		 'inv_unit_price',
+		 'tax_code_id',
+		 'tax_amount',
 		 'inv_line_price',
 		 'line_type',
 		 'line_description',
@@ -48,14 +50,16 @@ class ar_transaction_line extends dbObject {
 		 'inv_line_price',
  ];
  public $fields_inForm_notInDataBase = [
+		 'transaction_type',
 		 "transaction_number",
 		 "item_number",
 		 'customer_name',
 		 'customer_number',
 		 'item_description',
-		 'uom_id',
 		 'invoiced_quantity',
-		 'action'
+		 'action',
+		 'so_order_number',
+		 'so_line_number',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
 		 "ar_transaction_header_id"
@@ -63,10 +67,12 @@ class ar_transaction_line extends dbObject {
  public $ar_transaction_line_id;
  public $ar_transaction_header_id;
  public $line_number;
- public $item_id;
+ public $item_id_m;
  public $inv_line_quantity;
  public $inv_unit_price;
  public $inv_line_price;
+ public $tax_code_id;
+ public $tax_amount;
  public $reference_type;
  public $reference_key_name;
  public $reference_key_value;
@@ -76,7 +82,6 @@ class ar_transaction_line extends dbObject {
  public $fa_asset_category_id;
  public $prj_project_header_id;
  public $prj_project_line_id;
- public $uom;
  public $ef_id;
  public $status;
  public $line_source;
@@ -95,39 +100,44 @@ class ar_transaction_line extends dbObject {
  public $uom_id;
  public $invoiced_quantity;
  public $action;
+ public $transaction_type;
+ public $so_order_number;
+ public $so_line_number;
 
  public function _after_save() {
-	if (($this->action === 'match_transaction')&&(!empty($this->sd_so_line_id)) && (!empty($this->sd_so_detail_id))) {
-	 $ar_th = new ar_transaction_header();
-	 $ar_th_i = $ar_th->findBy_id($this->ar_transaction_header_id);
-	 $om_so_d = new om_so_detail();
-	 $om_so_d_i = $om_so_d->findBy_id($this->sd_so_detail_id);
-	 $ar_td = new ar_transaction_detail();
-	 $ar_td->ar_transaction_line_id = $this->ar_transaction_line_id;
-	 $ar_td->ar_transaction_header_id = $this->ar_transaction_line_id;
-	 $ar_td->detail_number = 1;
-	 $ar_td->account_type = 'ITEM';
-	 $ar_td->description = '';
-	 $ar_td->amount = $this->inv_line_price;
-	 $ar_td->detail_ac_id = $om_so_d_i->charge_ac_id;
-	 $ar_td->status = '';
-	 $ar_td->reference_type = 'table';
-	 $ar_td->reference_key_name = 'om_so_header';
-	 $ar_td->reference_key_value = $this->sd_so_header_id;
-	 $ar_td->sd_so_header_id = $this->sd_so_header_id;
-	 $ar_td->sd_so_line_id = $this->sd_so_line_id;
-	 $ar_td->sd_so_detail_id = $this->sd_so_detail_id;
-	 $ar_td->period_id = $ar_th_i->period_id;
-	 $ar_td->audit_trial();
-	 //update PO details
-	 foreach ($om_so_d_i as $pd_key => $pd_value) {
-		$om_so_d->$pd_key = $pd_value;
+		if (!empty($this->ar_transaction_line_id)) {
+		 
+	 $trnx_details = new ar_transaction_detail();
+	 $trnx_details_i = $trnx_details->findBy_parentId($this->ar_transaction_line_id);
+	 //create transaction details
+	 if (!$trnx_details_i) {
+		$trnx_type = ar_transaction_type::find_by_id($this->transaction_type);
+		$detail_num = 1;
+		$trnx_details->ar_transaction_header_id = $this->ar_transaction_header_id;
+		$trnx_details->ar_transaction_line_id = $this->ar_transaction_line_id;
+		$trnx_details->ar_transaction_detail_id = null;
+		$trnx_details->detail_number = $detail_num;
+		$detail_num++;
+		$trnx_details->detail_ac_id = $trnx_type->revenue_ac_id;
+		$trnx_details->account_type = ($this->line_type == 'GOODS' || 'SERVICES' ) ? 'ITEM' : $this->line_type;
+		$trnx_details->description = 'Revenue';
+		$trnx_details->amount = $this->inv_line_price;
+		$trnx_details->audit_trial();
+		$trnx_details->save();
+		echo "<br> Transaction detail line for revenue is sucessfully created!";
+		if (!empty($this->tax_amount)) {
+		 $trnx_details->ar_transaction_detail_id = null;
+		 $trnx_details->detail_number = $detail_num;
+		 $detail_num++;
+		 $trnx_details->detail_ac_id = $trnx_type->tax_ac_id;
+		 $trnx_details->account_type = 'TAX';
+		 $trnx_details->description = 'Tax';
+		 $trnx_details->amount = $this->tax_amount;
+		 $trnx_details->audit_trial();
+		 $trnx_details->save();
+		 echo "<br> Transaction detail line for tax is sucessfully created!";
+		}
 	 }
-	 
-	 echo "<br>Quanitities are in PO : " . $om_so_d->invoiced_quantity . ' in Inv Line : ' . $this->inv_line_quantity . ' : Submitted by form ' . $this->invoiced_quantity;
-	 $om_so_d->invoiced_quantity = $this->inv_line_quantity + $this->invoiced_quantity;
-	 $om_so_d->save();
-	 $ar_td->save();
 	}
  }
 

@@ -50,7 +50,7 @@
 				 </ul>
 				</div>
 				<div id ="form_line" class="form_line"><span class="heading">Subinventory Details </span>
-				 <div id="tabs">
+				 <div id="tabsLine">
 					<ul class="tabMain">
 					 <li><a href="#tabsLine-1">Basic Info</a></li>
 					 <li><a href="#tabsLine-2">Accounts</a></li>

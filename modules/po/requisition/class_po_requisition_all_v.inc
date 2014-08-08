@@ -25,7 +25,7 @@ class po_requisition_all_v extends dbObject {
 		 'po_requisition_line_id',
 		 'line_type',
 		 'po_requisition_line_number',
-		 'item_id',
+		 'item_id_m',
 		 'item_description',
 		 'line_description',
 		 'line_quantity',
@@ -88,7 +88,7 @@ class po_requisition_all_v extends dbObject {
 		 'po_requisition_line_id',
 		 'line_type',
 		 'po_requisition_line_number',
-		 'item_id',
+		 'item_id_m',
 		 'item_description',
 		 'line_description',
 		 'line_quantity',
@@ -152,7 +152,7 @@ class po_requisition_all_v extends dbObject {
  public $po_requisition_line_id;
  public $line_type;
  public $po_requisition_line_number;
- public $item_id;
+ public $item_id_m;
  public $item_description;
  public $line_description;
  public $line_quantity;
@@ -190,11 +190,11 @@ payment_term_id,
 supplier_name, supplier_number,
 supplier_site_name, supplier_site_number,
 payment_term, payment_term_description,
-po_requisition_line_id, line_type, po_requisition_line_number,	item_id, item_description, line_description, line_quantity, unit_price, line_price,
+po_requisition_line_id, line_type, po_requisition_line_number,	item_id_m, item_description, line_description, line_quantity, unit_price, line_price,
 item_number, uom_id, item_status,
 po_requisition_detail_id, shipment_number, ship_to_inventory, sub_inventory_id, locator_id, requestor, quantity,
 need_by_date, promise_date,
-received_quantity, accepted_quantity, delivered_quantity, invoiced_quantity, paid_quantity,	order_number
+received_quantity, accepted_quantity, delivered_quantity, invoiced_quantity, paid_quantity,	order_number,
 ship_to_org, created_by, creation_date, last_update_by, last_update_date
 )
 AS
@@ -205,13 +205,13 @@ po_requisition_header.payment_term_id,
 supplier.supplier_name, supplier.supplier_number,
 supplier_site.supplier_site_name, supplier_site.supplier_site_number,
 payment_term.payment_term, payment_term.description,
-po_requisition_line.po_requisition_line_id, po_requisition_line.line_type, po_requisition_line.line_number,	po_requisition_line.item_id, po_requisition_line.item_description, po_requisition_line.line_description, 
+po_requisition_line.po_requisition_line_id, po_requisition_line.line_type, po_requisition_line.line_number,	po_requisition_line.item_id_m, po_requisition_line.item_description, po_requisition_line.line_description, 
 po_requisition_line.line_quantity, po_requisition_line.unit_price, po_requisition_line.line_price,
 item.item_number, item.uom_id, item.item_status,
 po_requisition_detail.po_requisition_detail_id, po_requisition_detail.shipment_number, po_requisition_detail.ship_to_inventory, po_requisition_detail.sub_inventory_id, 
 po_requisition_detail.locator_id, po_requisition_detail.requestor, po_requisition_detail.quantity, po_requisition_detail.need_by_date, po_requisition_detail.promise_date,
 po_requisition_detail.received_quantity, po_requisition_detail.accepted_quantity, po_requisition_detail.delivered_quantity, 
-po_requisition_detail.invoiced_quantity, po_requisition_detail.paid_quantity,	po_requisition_detail.order_number
+po_requisition_detail.invoiced_quantity, po_requisition_detail.paid_quantity,	po_requisition_detail.order_number,
 org.org,
 po_requisition_header.created_by, po_requisition_header.creation_date, po_requisition_header.last_update_by, po_requisition_header.last_update_date
 
@@ -220,7 +220,7 @@ LEFT JOIN supplier ON po_requisition_header.supplier_id = supplier.supplier_id
 LEFT JOIN supplier_site ON po_requisition_header.supplier_site_id = supplier_site.supplier_site_id
 LEFT JOIN payment_term ON po_requisition_header.payment_term_id = payment_term.payment_term_id
 LEFT JOIN po_requisition_line ON po_requisition_header.po_requisition_header_id = po_requisition_line.po_requisition_header_id
-LEFT JOIN item ON po_requisition_line.item_id = item.item_id
+LEFT JOIN item ON po_requisition_line.item_id_m = item.item_id_m
 LEFT JOIN po_requisition_detail ON po_requisition_line.po_requisition_line_id = po_requisition_detail.po_requisition_line_id
 LEFT JOIN org ON po_requisition_detail.ship_to_inventory = org.org_id
 

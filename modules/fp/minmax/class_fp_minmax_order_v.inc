@@ -4,14 +4,14 @@ class fp_minmax_order_v extends dbObject {
 
  public static $table_name = "fp_minmax_order_v";
  public static $primary_column = "fp_minmax_demand_id";
- public static $key_column = 'item_id';
+ public static $key_column = 'item_id_m';
  public static $module = "fp";
  public $field_a = [
 		 'plan_name',
 		 'org_id',
 		 'planning_horizon_days',
 		 'org',
-		 'item_id',
+		 'item_id_m',
 		 'item_number',
 		 'total_demand',
 		 'avg_daily_demand',
@@ -29,8 +29,8 @@ class fp_minmax_order_v extends dbObject {
 		 'forecast_description',
 		 'fp_minmax_demand_id',
 		 'plan_id',
-		 'demand_item_id',
-		 'toplevel_demand_item_id',
+		 'demand_item_id_m',
+		 'toplevel_demand_item_id_m',
 		 'demand_type',
 		 'source',
 		 'item_description',
@@ -83,7 +83,7 @@ class fp_minmax_order_v extends dbObject {
 		 'plan_name',
 		 'org_id',
 		 'planning_horizon_days',
-		 'item_id',
+		 'item_id_m',
 		 'total_demand',
 		 'avg_daily_demand',
 		 'saftey_stock_quantity',
@@ -93,8 +93,8 @@ class fp_minmax_order_v extends dbObject {
 		 'forecast_description',
 		 'fp_minmax_demand_id',
 		 'plan_id',
-		 'demand_item_id',
-		 'toplevel_demand_item_id',
+		 'demand_item_id_m',
+		 'toplevel_demand_item_id_m',
 		 'demand_type',
 		 'source',
 		 'item_description',
@@ -120,10 +120,10 @@ class fp_minmax_order_v extends dbObject {
 		 'MM Planner' => 'search_minmax_planner',
 		 'Item Number From' => 'search_item_number_from',
 		 'Item Number To' => 'search_item_number_to',
-		 'Item Id From' => 'search_item_id_from',
-		 'Item Id To' => 'search_item_id_to'
+		 'Item Id From' => 'search_item_id_m_from',
+		 'Item Id To' => 'search_item_id_m_to'
  ];
- public $item_id;
+ public $item_id_m;
  public $item_number;
  public $total_demand;
  public $avg_daily_demand;
@@ -141,8 +141,8 @@ class fp_minmax_order_v extends dbObject {
  public $forecast_description;
  public $fp_minmax_demand_id;
  public $plan_id;
- public $demand_item_id;
- public $toplevel_demand_item_id;
+ public $demand_item_id_m;
+ public $toplevel_demand_item_id_m;
  public $demand_type;
  public $source;
  public $item_description;
@@ -166,42 +166,42 @@ CREATE OR REPLACE VIEW fp_minmax_order_v
 item_number, item_description, planning_method, make_buy,
 minmax_min_quantity, minmax_max_quantity, minmax_multibin_number, minmax_multibin_size, 
 minimum_order_quantity, fix_lot_multiplier, 
-item_id , onhand, open_wo, open_req , open_po, total_supply
+item_id_m , onhand, open_wo, open_req , open_po, total_supply
 )
 AS
  SELECT item.item_number, item.item_description, item.planning_method, item.make_buy,
 item.minmax_min_quantity, item.minmax_max_quantity, item.minmax_multibin_number, item.minmax_multibin_size, 
 item.minimum_order_quantity, item.fix_lot_multiplier, 
-onhand_wo_o.item_id as item_id , onhand_wo_o.onhand as onhand, onhand_wo_o.open_wo as open_wo,
+onhand_wo_o.item_id_m as item_id_m , onhand_wo_o.onhand as onhand, onhand_wo_o.open_wo as open_wo,
        open_po_req_o.open_req open_req , open_po_req_o.open_po as open_po,
 			(IFNULL(onhand_wo_o.onhand,0) + IFNULL(onhand_wo_o.open_wo,0) + 
 			IFNULL(open_po_req_o.open_req,0) + IFNULL(open_po_req_o.open_po,0)) as total_supply
  FROM (
-		SELECT onhand_wo.item_id as item_id , onhand_wo.onhand as onhand, onhand_wo.open_wo as open_wo
+		SELECT onhand_wo.item_id_m as item_id_m , onhand_wo.onhand as onhand, onhand_wo.open_wo as open_wo
 		FROM (
-		SELECT item.item_id as item_id, oh.onhand as onhand, wwh.open_wo as open_wo
+		SELECT item.item_id_m as item_id_m, oh.onhand as onhand, wwh.open_wo as open_wo
 		FROM item 
-		LEFT JOIN (SELECT item_id, sum(onhand) as onhand from onhand  GROUP BY item_id) oh ON oh.item_id = item.item_id
-		LEFT JOIN ( SELECT item_id, sum(nettable_quantity - IFNULL(completed_quantity,0) - IFNULL(scrapped_quantity,0))as open_wo 
-		from wip_wo_header  GROUP BY item_id) wwh ON wwh.item_id = item.item_id
+		LEFT JOIN (SELECT item_id_m, sum(onhand) as onhand from onhand  GROUP BY item_id_m) oh ON oh.item_id_m = item.item_id_m
+		LEFT JOIN ( SELECT item_id_m, sum(nettable_quantity - IFNULL(completed_quantity,0) - IFNULL(scrapped_quantity,0))as open_wo 
+		from wip_wo_header  GROUP BY item_id_m) wwh ON wwh.item_id_m = item.item_id_m
 		WHERE  item.planning_method = 'MULTI_MINMAX' OR item.planning_method = 'MINMAX'
 		) onhand_wo
  )onhand_wo_o
 
 LEFT JOIN (
-						 SELECT open_po_req.item_id as item_id, open_po_req.open_req open_req , open_po_req.open_po as open_po
+						 SELECT open_po_req.item_id_m as item_id_m, open_po_req.open_req open_req , open_po_req.open_po as open_po
 						FROM (
-						SELECT item.item_id as item_id,  prv.open_req as open_req, pav.open_po as open_po
+						SELECT item.item_id_m as item_id_m,  prv.open_req as open_req, pav.open_po as open_po
 						FROM item 
-						LEFT JOIN (SELECT item_id, SUM(open_quantity) as open_po from po_all_v  GROUP BY item_id) pav ON pav.item_id = item.item_id
-						LEFT JOIN ( SELECT item_id, sum(quantity)as open_req from po_requisition_all_v  
-						WHERE order_number IS NULL GROUP BY item_id) prv ON prv.item_id = item.item_id
+						LEFT JOIN (SELECT item_id_m, SUM(open_quantity) as open_po from po_all_v  GROUP BY item_id_m) pav ON pav.item_id_m = item.item_id_m
+						LEFT JOIN ( SELECT item_id_m, sum(quantity)as open_req from po_requisition_all_v  
+						WHERE order_number IS NULL GROUP BY item_id_m) prv ON prv.item_id_m = item.item_id_m
 						WHERE  item.planning_method = 'MULTI_MINMAX' OR item.planning_method = 'MINMAX'
 						) open_po_req 
 	)open_po_req_o 
-ON onhand_wo_o.item_id = open_po_req_o.item_id
+ON onhand_wo_o.item_id_m = open_po_req_o.item_id_m
 
-LEFT JOIN item ON item.item_id = open_po_req_o.item_id
+LEFT JOIN item ON item.item_id_m = open_po_req_o.item_id_m
 
 ";
  }
@@ -222,9 +222,9 @@ LEFT JOIN item ON item.item_id = open_po_req_o.item_id
  public function findBy_planId_itemId() {
 	global $db;
 	$sql = " SELECT * FROM " . self::$table_name;
-	$sql .= " where plan_id = :plan_id AND item_id =:item_id LIMIT 1 ";
-	$param_a = ['plan_id', 'item_id'];
-	$value_a = ['plan_id' => $this->plan_id, 'item_id' => $this->item_id];
+	$sql .= " where plan_id = :plan_id AND item_id_m =:item_id_m LIMIT 1 ";
+	$param_a = ['plan_id', 'item_id_m'];
+	$value_a = ['plan_id' => $this->plan_id, 'item_id_m' => $this->item_id_m];
 	$result = $db->findBy_sql($sql, $param_a, $value_a);
 	return !(empty($result)) ? array_pop($result) : false;
  }

@@ -8,7 +8,7 @@ class wip_wo_routing_v extends dbObject {
 		 'item_number',
 		 'item_description',
 		 'uom_id',
-		 'item_id',
+		 'item_id_m_m',
 		 'wo_number',
 		 'org_id',
 		 'wip_accounting_group_id',
@@ -29,7 +29,7 @@ class wip_wo_routing_v extends dbObject {
  ];
  public $initial_search = [
 		 'item_number',
-		 'item_id',
+		 'item_id_m_m',
 		 'wo_number',
 		 'org_id',
 		 'routing_sequence',
@@ -41,7 +41,7 @@ class wip_wo_routing_v extends dbObject {
  ];
  public $column = [
 		 'item_number',
-		 'item_id',
+		 'item_id_m_m',
 		 'wo_number',
 		 'org_id',
 		 'routing_sequence',
@@ -70,7 +70,7 @@ class wip_wo_routing_v extends dbObject {
  public $item_number;
  public $item_description;
  public $uom_id;
- public $item_id;
+ public $item_id_m_m;
  public $wo_number;
  public $org_id;
  public $wip_accounting_group_id;
@@ -97,20 +97,22 @@ class wip_wo_routing_v extends dbObject {
 	$sql = "
 CREATE OR REPLACE VIEW wip_wo_routing_v
 (
-item_number, item_description, uom_id, item_id, wo_number, org_id, wip_accounting_group_id, quantity, completed_quantity,
+item_number, item_description, uom_id, item_id_m, wo_number, org_id, wip_accounting_group_id, quantity, completed_quantity,
 routing_sequence, department_id, wip_wo_routing_detail_id, wip_wo_routing_line_id, wip_wo_header_id,
 resource_sequence, resource_id,resource_usage,resource_schedule,required_quantity, applied_quantity, 
 charge_type
 )
 AS
 SELECT item.item_number, item.item_description, item.uom_id,
-wwh.item_id, wwh.wo_number, wwh.org_id, wwh.wip_accounting_group_id, wwh.quantity, wwh.completed_quantity,
+wwh.item_id_m, wwh.wo_number, wwh.org_id, wwh.wip_accounting_group_id, wwh.quantity, wwh.completed_quantity,
 wwrl.routing_sequence,wwrl.department_id,
 wwrd.wip_wo_routing_detail_id, wwrd.wip_wo_routing_line_id, wwrd.wip_wo_header_id,wwrd.resource_sequence,wwrd.resource_id,wwrd.resource_usage,wwrd.resource_schedule,wwrd.required_quantity, wwrd.applied_quantity, wwrd.charge_type
 FROM wip_wo_routing_detail wwrd
 LEFT JOIN wip_wo_routing_line wwrl ON wwrl.wip_wo_routing_line_id = wwrd.wip_wo_routing_line_id
 LEFT JOIN wip_wo_header wwh ON wwh.wip_wo_header_id = wwrd.wip_wo_header_id
-LEFT JOIN item ON item.item_id = wwh.item_id";
+LEFT JOIN item ON item.item_id_m = wwh.item_id_m
+
+";
  }
 
  public function findBy_woHeaderId() {

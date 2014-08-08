@@ -88,10 +88,16 @@ class option_header extends dbObject {
 	return $countries;
  }
 
- Public static function currencies() {
+ Public static function modules() {
+	$option_header = self::find_by_name('SYS_MODULE');
+$lines = option_line::find_by_option_id($option_header->option_header_id);
+	return $lines;
+ }
+ 
+  Public static function currencies() {
 	$option_header = self::find_by_name('CURRENCY');
 	$ol = new option_line();
-	$currencies = $ol->findBy_parentId($option_header->option_header_id);
+	$currencies = $ol->findBy_parentId($option_header->option_header_id,'option_line_value');
 	return $currencies;
  }
 

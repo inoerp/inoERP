@@ -16,7 +16,7 @@ class inv_receipt_line extends dbObject {
 		 'subinventory_id',
 		 'transaction_type_id',
 		 'locator_id',
-		 'item_id',
+		 'item_id_m',
 		 'item_description',
 		 'status',
 		 'uom_id',
@@ -73,7 +73,7 @@ class inv_receipt_line extends dbObject {
  public $inv_receipt_header_id;
  public $subinventory_id;
  public $locator_id;
- public $item_id;
+ public $item_id_m;
  public $item_description;
  public $status;
  public $uom_id;
@@ -131,7 +131,7 @@ class inv_receipt_line extends dbObject {
 		$po_d->audit_trial();
 		$po_d->save();
 		echo "<br>PO Received Quantity is Sucessfully Updated ";
-		if (!empty($this->item_id)) {
+		if (!empty($this->item_id_m)) {
 		 try {
 			$this->_create_inv_transactions();
 			echo "<br>INV Transaction Lines are Sucessfully Created ";
@@ -184,7 +184,7 @@ class inv_receipt_line extends dbObject {
 		 $inv_transaction->to_locator_id = $this->locator_id;
 		}
 		$inv_transaction->quantity = $this->transaction_quantity;
-		$inv_transaction->item_id = $this->item_id;
+		$inv_transaction->item_id_m = $this->item_id_m;
 		$inv_transaction->transaction_type_id = $this->transaction_type_id;
 		$inv_transaction->po_detail_id = $this->po_detail_id;
 		$inv_transaction->reference_type = 'table';
@@ -204,7 +204,7 @@ class inv_receipt_line extends dbObject {
 		 $inv_transaction->from_locator_id = $this->locator_id;
 		}
 		$inv_transaction->quantity = $this->transaction_quantity;
-		$inv_transaction->item_id = $this->item_id;
+		$inv_transaction->item_id_m = $this->item_id_m;
 		$inv_transaction->transaction_type_id = $this->transaction_type_id;
 		$inv_transaction->po_detail_id = $this->po_detail_id;
 		$inv_transaction->reference_type = 'table';

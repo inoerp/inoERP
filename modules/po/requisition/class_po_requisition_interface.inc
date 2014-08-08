@@ -16,7 +16,7 @@ class po_requisition_interface extends dbObject {
 		 'buyer',
 		 'description',
 		 'line_type',
-		 'item_id',
+		 'item_id_m',
 		 'item_description',
 		 'currency',
 		 'uom_id',
@@ -36,7 +36,7 @@ class po_requisition_interface extends dbObject {
 		 'po_requisition_interface_id',
 		 'po_requisition_type',
 		 'buyer',
-		 'item_id',
+		 'item_id_m',
 		 'need_by_date',
 		 'reference_key_value',
 		 'requisition_status',
@@ -51,7 +51,7 @@ class po_requisition_interface extends dbObject {
 		 'buyer',
 		 'description',
 		 'line_type',
-		 'item_id',
+		 'item_id_m',
 		 'item_description',
 		 'currency',
 		 'uom_id',
@@ -107,7 +107,7 @@ class po_requisition_interface extends dbObject {
  public $buyer;
  public $description;
  public $line_type;
- public $item_id;
+ public $item_id_m;
  public $item_description;
  public $currency;
  public $uom_id;
@@ -201,7 +201,7 @@ class po_requisition_interface extends dbObject {
 	 $req_line->line_number = $line_number;
 	 $req_line->receving_org_id = $new_req_line->receving_org_id;
 	 $req_line->line_type = $new_req_line->line_type;
-	 $req_line->item_id = $new_req_line->item_id;
+	 $req_line->item_id_m = $new_req_line->item_id_m;
 	 $req_line->item_description = $new_req_line->item_description;
 	 $req_line->line_quantity = $new_req_line->quantity;
 	 $req_line->unit_price = $new_req_line->unit_price;

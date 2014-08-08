@@ -36,7 +36,7 @@ class wip_resource_transaction extends dbObject {
 		 'org_id',
 		 'wo_number',
 		 'item_number',
-		 'item_id'
+		 'item_id_m'
  ];
  public $column = [
 		 'wip_resource_transaction_id',
@@ -44,7 +44,7 @@ class wip_resource_transaction extends dbObject {
 		 'org_id',
 		 'wo_number',
 		 'item_number',
-		 'item_id',
+		 'item_id_m',
 		 'transaction_date',
 		 'transaction_quantity'
  ];
@@ -53,7 +53,7 @@ class wip_resource_transaction extends dbObject {
  ];
  public $fields_inForm_notInDataBase = [
 		 'remaining_quantity',
-		 'item_id',
+		 'item_id_m',
 		 'item_number',
 		 "item_description",
 		 "uom",
@@ -111,7 +111,7 @@ class wip_resource_transaction extends dbObject {
  public $department_id;
  public $wo_number;
  public $item_number;
- public $item_id;
+ public $item_id_m;
  public $routing_sequence;
  public $gl_journal_header_id;
 
@@ -240,6 +240,3 @@ class wip_resource_transaction extends dbObject {
 
 //end of resource class
 ?>
-
-
-

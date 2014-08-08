@@ -3,7 +3,6 @@
  <?php
  if ((!empty($_GET['ship_to_inventory'])) && ($_GET['find_account_details'] = 1)) {
 	$org_id = $_GET['ship_to_inventory'];
-	echo '<br/> in 1';
 	$in = new inventory();
 	$inventory_i = $in->findBy_org_id($org_id);
   $cc = new coa_combination;

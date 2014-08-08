@@ -84,7 +84,7 @@ class ar_receipt_interface extends dbObject {
 		 'amount',
 		 'currency',
 		 'ledger_id',
-		 'period_id'
+
  ];
  public $fields_inForm_notInDataBase = [
 		 "customer_name",

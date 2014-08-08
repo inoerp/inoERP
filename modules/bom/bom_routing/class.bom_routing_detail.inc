@@ -69,17 +69,6 @@ class bom_routing_detail extends dbObject {
 	$this->$name = $value;
  }
 
- public function _after_save() {
-	
- }
-
- public function _before_showing() {
-	
- }
-
- public function _before_submit() {
-	
- }
 
  public static function find_by_routing_lineId($routing_line_id) {
 	$sql = "SELECT * FROM " . self::$table_name . " where bom_routing_line_id = '{$routing_line_id}'";

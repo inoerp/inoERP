@@ -123,12 +123,12 @@ $(document).ready(function() {
 //get the attachement form
  deleteData('form.php?class_name=fp_mds_header&line_class_name=fp_mds_line');
 
-// save('json.mds.php', '#mds_header', 'line_id_cb', 'component_item_id', '#mds_header_id');
+// save('json.mds.php', '#mds_header', 'line_id_cb', 'component_item_id_m', '#mds_header_id');
  var classSave = new saveMainClass();
  classSave.json_url = 'form.php?class_name=fp_mds_header';
  classSave.form_header_id = 'mds_header';
  classSave.primary_column_id = 'fp_mds_header_id';
- classSave.line_key_field = 'item_id';
+ classSave.line_key_field = 'item_id_m';
  classSave.single_line = false;
  classSave.savingOnlyHeader = false;
  classSave.headerClassName = 'fp_mds_header';

@@ -128,7 +128,7 @@ class transaction_type extends dbObject {
  public static function find_by_transactionClass($class) {
 	$sql = " SELECT * FROM ";
 	$sql .= self::$table_name;
-	$sql .= " WHERE type_class = '{$class}' ";
+	$sql .= " WHERE type_class = '{$class}' AND status='active'";
 	$result = self::find_by_sql($sql);
 	return $result;
  }

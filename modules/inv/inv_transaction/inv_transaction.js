@@ -1,7 +1,7 @@
-function setValFromSelectPage(inv_transaction_header_id, combination, item_id, item_number, item_description, uom_id) {
+function setValFromSelectPage(inv_transaction_header_id, combination, item_id_m, item_number, item_description, uom_id) {
  this.inv_transaction_header_id = inv_transaction_header_id;
  this.combination = combination;
- this.item_id = item_id;
+ this.item_id_m = item_id_m;
  this.item_number = item_number;
  this.item_description = item_description;
  this.uom_id = uom_id;
@@ -11,7 +11,7 @@ function setValFromSelectPage(inv_transaction_header_id, combination, item_id, i
 setValFromSelectPage.prototype.setVal = function() {
  var inv_transaction_header_id = this.inv_transaction_header_id;
  var combination = this.combination;
- var item_id = this.item_id;
+ var item_id_m = this.item_id_m;
  var item_number = this.item_number;
  var item_description = this.item_description;
  var uom_id = this.uom_id;
@@ -26,8 +26,8 @@ setValFromSelectPage.prototype.setVal = function() {
  if (combination) {
 	$('#content').find(rowClass).find(fieldClass).val(combination);
  }
- if (item_id) {
-	$('#content').find(rowClass).find('.item_id').val(item_id);
+ if (item_id_m) {
+	$('#content').find(rowClass).find('.item_id_m').val(item_id_m);
  }
  if (item_number) {
 	$('#content').find(rowClass).find('.item_number').val(item_number);
@@ -45,21 +45,18 @@ setValFromSelectPage.prototype.setVal = function() {
 
 $(document).ready(function() {
  //mandatory and field sequence
- var mandatoryCheck = new mandatoryFieldMain();
- mandatoryCheck.header_id = 'inv_transaction_header_id';
-// mandatoryCheck.mandatoryHeader();
- mandatoryCheck.form_area = 'form_header';
- mandatoryCheck.mandatory_fields = ["bu_org_id", "transaction_type_id"];
- mandatoryCheck.mandatory_messages = ["First Select BU Org", "First Select Transaction Type"];
-// mandatoryCheck.mandatoryField();
+// var mandatoryCheck = new mandatoryFieldMain();
+// mandatoryCheck.header_id = 'inv_transaction_header_id';
+//// mandatoryCheck.mandatoryHeader();
+// mandatoryCheck.form_area = 'form_header';
+// mandatoryCheck.mandatory_fields = ["bu_org_id", "transaction_type_id"];
+// mandatoryCheck.mandatory_messages = ["First Select BU Org", "First Select Transaction Type"];
+//// mandatoryCheck.mandatoryField();
 
 
  $("#transaction_type_id").on("change", function() {
-	$('.transaction_type_id').val($(this).val());
-//	$("tr.transfer_info").find("td select").each(function() {
-//	 $(this).val("");
-//	})
-	var transaction_type_id = $(this).val();
+ 	var transaction_type_id = $(this).val();
+	$(".transaction_type_id").val(transaction_type_id);
 	switch (transaction_type_id) {
 	 case "1":
 		$(".from_subinventory_id").prop("disabled", false);
@@ -97,8 +94,9 @@ $(document).ready(function() {
  });
 
 
- //get Subinventory Name
+// //get Subinventory Name
  $("#org_id").on("change", function() {
+	$('.org_id').val($(this).val());
 	getSubInventory('modules/inv/subinventory/json_subinventory.php', $("#org_id").val());
 	$('.org_id').val($(this).val());
  });
@@ -129,7 +127,7 @@ $(document).ready(function() {
 
  var classSave = new saveMainClass();
  classSave.json_url = 'form.php?class_name=inv_transaction';
- classSave.line_key_field = 'item_id';
+ classSave.line_key_field = 'item_id_m';
  classSave.single_line = false;
  classSave.savingOnlyHeader = false;
  classSave.lineClassName = 'inv_transaction';

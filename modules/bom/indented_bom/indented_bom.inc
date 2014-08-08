@@ -1,7 +1,7 @@
 <!--Start of this page-->
 <?php
-if (!empty($$class->item_id)) {
- $item = item::find_by_id($$class->item_id);
+if (!empty($$class->item_id_m)) {
+ $item = item::find_by_id($$class->item_id_m);
  $$class->item_number = $item->item_number;
  $$class->item_description = $item->item_description;
  $$class->uom = $item->uom_id;
@@ -18,7 +18,7 @@ function indentedBom_tab1($indetned_bom_lines) {
  $indented_bom_statment .= form::text_field('routing_sequence', $indetned_bom_lines->routing_sequence, '8');
  $indented_bom_statment .= '</td>';
  $indented_bom_statment .= '<td>';
- $indented_bom_statment .= form::text_field('component_item_id', $indetned_bom_lines->component_item_id, '8');
+ $indented_bom_statment .= form::text_field('component_item_id_m', $indetned_bom_lines->component_item_id_m, '8');
  $indented_bom_statment .= '</td>';
  $indented_bom_statment .= '<td>';
  $indented_bom_statment .= form::text_field('component_item_number', $indetned_bom_lines->component_item_number, '20', '50', 1, '', '', '', 'item_number');
@@ -87,14 +87,14 @@ function show_indentedBom($indented_bom_lines, $tabNumber = 'tab1', $nextLevel =
  $i = $level;
  if ($level < 10) {
 	if (!empty($indented_bom_lines)) {
-	 ${"indentedBom" . $i} = bom_header::find_by_itemId($indented_bom_lines->component_item_id);
+	 ${"indentedBom" . $i} = bom_header::find_by_itemId($indented_bom_lines->component_item_id_m);
 	}
 	if (!empty(${"indentedBom" . $i})) {
 	 echo "";
 	 $bom_header_id = ${"indentedBom" . $i}->bom_header_id;
 	 ${"indented_bom_line_object" . $i} = bom_line::find_all_by_bomHeaderId($bom_header_id);
 	 foreach (${"indented_bom_line_object" . $i} as ${"indented_bom_lines" . $i}) {
-		$item = item::find_by_id(${"indented_bom_lines" . $i}->component_item_id);
+		$item = item::find_by_id(${"indented_bom_lines" . $i}->component_item_id_m);
 		${"indented_bom_lines" . $i}->component_item_number = $item->item_number;
 		${"indented_bom_lines" . $i}->component_description = $item->item_description;
 		${"indented_bom_lines" . $i}->component_uom = $item->uom_id;

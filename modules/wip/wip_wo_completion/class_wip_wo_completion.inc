@@ -19,7 +19,7 @@ class wip_wo_completion extends inv_transaction {
 		 'status',
 		 'receipt_line_id',
 		 'item_number',
-		 'item_id',
+		 'item_id_m',
 		 'uom_id',
 		 'lot_number',
 		 'serial_number',
@@ -62,7 +62,7 @@ class wip_wo_completion extends inv_transaction {
 		 "inv_transaction_id",
 		 "transaction_type_id",
 		 'status',
-		 "item_id",
+		 "item_id_m",
 		 "org_id",
 		 "item_number",
 		 "creation_date",
@@ -96,7 +96,7 @@ class wip_wo_completion extends inv_transaction {
 		 "uom_id",
 		 "quantity",
 		 "org_id",
-		 "item_id",
+		 "item_id_m",
 		 "transaction_type_id"
  ];
  public $search = [

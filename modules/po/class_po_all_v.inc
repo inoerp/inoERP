@@ -25,7 +25,7 @@ class po_all_v extends dbObject {
 		 'po_line_id',
 		 'line_type',
 		 'po_line_number',
-		 'item_id',
+		 'item_id_m',
 		 'item_description',
 		 'line_description',
 		 'line_quantity',
@@ -37,7 +37,7 @@ class po_all_v extends dbObject {
 		 'po_detail_id',
 		 'shipment_number',
 		 'ship_to_id',
-		 'sub_inventory_id',
+		 'subinventory_id',
 		 'locator_id',
 		 'requestor',
 		 'quantity',
@@ -76,10 +76,10 @@ class po_all_v extends dbObject {
 		 'po_detail_id',
 		 'supplier_site_name',
 		 'ship_to_id',
-		 'sub_inventory_id',
+		 'subinventory_id',
 		 'locator_id',
 		 'requestor',
-		 'item_id',
+		 'item_id_m',
 		 'item_description',
 		 'line_description',
 		 'line_quantity',
@@ -125,7 +125,7 @@ class po_all_v extends dbObject {
 		 'supplier_site_number',
 		 'item_number',
 		 'item_description',
-		 'item_id',
+		 'item_id_m',
 		 'uom_id',
 		 'po_header_id',
 		 'po_line_id',
@@ -202,7 +202,7 @@ class po_all_v extends dbObject {
  public $po_line_id;
  public $line_type;
  public $po_line_number;
- public $item_id;
+ public $item_id_m;
  public $item_description;
  public $line_description;
  public $line_quantity;
@@ -214,7 +214,7 @@ class po_all_v extends dbObject {
  public $po_detail_id;
  public $shipment_number;
  public $ship_to_id;
- public $sub_inventory_id;
+ public $subinventory_id;
  public $locator_id;
  public $requestor;
  public $quantity;
@@ -243,9 +243,9 @@ payment_term_id,
 supplier_name, supplier_number,
 supplier_site_name, supplier_site_number,
 payment_term, payment_term_description,
-po_line_id, line_type, po_line_number,	item_id, item_description, line_description, line_quantity, unit_price, line_price,
+po_line_id, line_type, po_line_number,	item_id_m, item_description, line_description, line_quantity, unit_price, line_price,
 item_number, uom_id, item_status,
-po_detail_id, shipment_number, ship_to_id, sub_inventory_id, locator_id, requestor, 
+po_detail_id, shipment_number, ship_to_id, subinventory_id, locator_id, requestor, 
 quantity,received_quantity, open_quantity,
 need_by_date, promise_date,
  accepted_quantity, delivered_quantity, invoiced_quantity, paid_quantity,
@@ -260,10 +260,10 @@ po_header.payment_term_id,
 supplier.supplier_name, supplier.supplier_number,
 supplier_site.supplier_site_name, supplier_site.supplier_site_number,
 payment_term.payment_term, payment_term.description,
-po_line.po_line_id, po_line.line_type, po_line.line_number,	po_line.item_id, po_line.item_description, po_line.line_description, 
+po_line.po_line_id, po_line.line_type, po_line.line_number,	po_line.item_id_m, po_line.item_description, po_line.line_description, 
 po_line.line_quantity, po_line.unit_price, po_line.line_price,
 item.item_number, item.uom_id, item.item_status,
-po_detail.po_detail_id, po_detail.shipment_number, po_line.receving_org_id, po_detail.sub_inventory_id, 
+po_detail.po_detail_id, po_detail.shipment_number, po_line.receving_org_id, po_detail.subinventory_id, 
 po_detail.locator_id, po_detail.requestor, 
 po_detail.quantity, IFNULL(po_detail.received_quantity,0), po_detail.quantity - IFNULL(po_detail.received_quantity,0), 
 po_detail.need_by_date, po_detail.promise_date,
@@ -278,7 +278,7 @@ LEFT JOIN supplier ON po_header.supplier_id = supplier.supplier_id
 LEFT JOIN supplier_site ON po_header.supplier_site_id = supplier_site.supplier_site_id
 LEFT JOIN payment_term ON po_header.payment_term_id = payment_term.payment_term_id
 LEFT JOIN po_line ON po_header.po_header_id = po_line.po_header_id
-LEFT JOIN item ON po_line.item_id = item.item_id
+LEFT JOIN item ON po_line.item_id_m = item.item_id_m
 LEFT JOIN po_detail ON po_line.po_line_id = po_detail.po_line_id
 LEFT JOIN org ON po_detail.ship_to_inventory = org.org_id
 

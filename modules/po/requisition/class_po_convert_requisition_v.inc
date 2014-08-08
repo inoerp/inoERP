@@ -25,7 +25,7 @@ class po_convert_requisition_v extends dbObject {
 		 'po_requisition_line_id',
 		 'line_type',
 		 'po_requisition_line_number',
-		 'item_id',
+		 'item_id_m',
 		 'item_description',
 		 'line_description',
 		 'line_quantity',
@@ -88,7 +88,7 @@ class po_convert_requisition_v extends dbObject {
 		 'po_requisition_line_id',
 		 'line_type',
 		 'po_requisition_line_number',
-		 'item_id',
+		 'item_id_m',
 		 'item_description',
 		 'line_description',
 		 'line_quantity',
@@ -152,7 +152,7 @@ class po_convert_requisition_v extends dbObject {
  public $po_requisition_line_id;
  public $line_type;
  public $po_requisition_line_number;
- public $item_id;
+ public $item_id_m;
  public $item_description;
  public $line_description;
  public $line_quantity;
@@ -190,7 +190,7 @@ payment_term_id,
 supplier_name, supplier_number,
 supplier_site_name, supplier_site_number,
 payment_term, payment_term_description,
-po_requisition_line_id, line_type, po_requisition_line_number,	item_id, item_description, 
+po_requisition_line_id, line_type, po_requisition_line_number,	item_id_m, item_description, 
 line_description, line_quantity, unit_price, line_price,  receving_org_id,
 item_number, uom_id, item_status,
 po_requisition_detail_id, shipment_number, sub_inventory_id, locator_id, requestor, quantity,
@@ -206,7 +206,7 @@ IFNULL(po_requisition_header.payment_term_id, supplier_site.payment_term_id),
 supplier.supplier_name, supplier.supplier_number,
 supplier_site.supplier_site_name, supplier_site.supplier_site_number,
 payment_term.payment_term, payment_term.description,
-po_requisition_line.po_requisition_line_id, po_requisition_line.line_type, po_requisition_line.line_number,	po_requisition_line.item_id, po_requisition_line.item_description, po_requisition_line.line_description, 
+po_requisition_line.po_requisition_line_id, po_requisition_line.line_type, po_requisition_line.line_number,	po_requisition_line.item_id_m, po_requisition_line.item_description, po_requisition_line.line_description, 
 po_requisition_line.line_quantity, po_requisition_line.unit_price, po_requisition_line.line_price,po_requisition_line.receving_org_id,
 item.item_number, item.uom_id, item.item_status,
 po_requisition_detail.po_requisition_detail_id, po_requisition_detail.shipment_number,  po_requisition_detail.sub_inventory_id, 
@@ -221,11 +221,11 @@ LEFT JOIN supplier ON po_requisition_header.supplier_id = supplier.supplier_id
 LEFT JOIN supplier_site ON po_requisition_header.supplier_site_id = supplier_site.supplier_site_id
 LEFT JOIN payment_term ON po_requisition_header.payment_term_id = payment_term.payment_term_id
 LEFT JOIN po_requisition_line ON po_requisition_header.po_requisition_header_id = po_requisition_line.po_requisition_header_id
-LEFT JOIN item ON po_requisition_line.item_id = item.item_id
+LEFT JOIN item ON po_requisition_line.item_id_m = item.item_id_m
 LEFT JOIN po_requisition_detail ON po_requisition_line.po_requisition_line_id = po_requisition_detail.po_requisition_line_id
 LEFT JOIN org ON po_requisition_line.receving_org_id = org.org_id
-WHERE po_requisition_detail.order_number IS NULL OR po_requisition_detail.order_number = ''
-AND po_requisition_header.requisition_status = 'APPROVED'
+WHERE  po_requisition_header.requisition_status = 'APPROVED'
+AND (po_requisition_detail.order_number IS NULL OR po_requisition_detail.order_number = '')
 
 ";
  }

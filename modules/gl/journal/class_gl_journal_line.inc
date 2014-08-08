@@ -104,7 +104,7 @@ class gl_journal_line extends dbObject {
  }
 
  public function _before_save() {
-	if ((isset($this->status)) && ($this->status == 'P')) {
+  if ((isset($this->status)) && ($this->status == 'P')) {
 	 echo " You can't modify this Journal Line as its already posted. <br>"
 	 . " You can only reverse the Journal Header. ";
 	 return -99;
@@ -206,6 +206,18 @@ class gl_journal_line extends dbObject {
 	$result = $db->findBy_sql($sql, $param_a, $value_a);
 	return !empty($result) ? array_pop($result) : false;
  }
+ 
+ 
+ public function findBy_reference_keyName_keyValue() {
+	$sql = " SELECT * FROM " . self::$table_name;
+	$sql .= " WHERE reference_key_name= :reference_key_name AND  reference_key_value = :reference_key_value";
+	$sql .= " LIMIT 1 ";
+	$value_a = ['reference_key_name' => $this->reference_key_name,
+			'reference_key_value' => $this->reference_key_value];
+	$result = $this->findBySql($sql, $value_a);
+	return !empty($result) ? array_pop($result) : false;
+ }
+
 
 }
 

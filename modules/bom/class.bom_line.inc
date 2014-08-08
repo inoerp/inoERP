@@ -12,7 +12,7 @@ class bom_line extends dbObject {
 		 'bom_line_id',
 		 'bom_sequence',
 		 'routing_sequence',
-		 'component_item_id',
+		 'component_item_id_m',
 		 'usage_basis',
 		 'usage_quantity',
 		 'auto_request_material_cb',
@@ -45,7 +45,7 @@ class bom_line extends dbObject {
  public $requiredField = [
 		 'bom_sequence',
 		 'routing_sequence',
-		 'component_item_id',
+		 'component_item_id_m',
 		 'usage_quantity'
  ];
 
@@ -53,7 +53,7 @@ class bom_line extends dbObject {
  public $bom_header_id;
  public $bom_sequence;
  public $routing_sequence;
- public $component_item_id;
+ public $component_item_id_m;
  public $usage_basis;
  public $usage_quantity;
  public $auto_request_material_cb;
@@ -96,18 +96,6 @@ class bom_line extends dbObject {
 	$all_bom_lines = self::find_by_sql($sql);
 
 	return $all_bom_lines;
- }
-
- public function _before_showing() {
-	
- }
-
- public function _before_submit() {
-	
- }
-
- public function _after_save() {
-	
  }
 
 }

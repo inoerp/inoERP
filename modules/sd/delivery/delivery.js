@@ -1,6 +1,6 @@
 function setValFromSelectPage(sd_delivery_header_id, sd_delivery_line_id, ar_customer_id, ar_customer_number,
 				ar_customer_name, ar_customer_site_id, ar_customer_site_name, ar_customer_site_number,
-				item_id, item_number, item_description, uom_id, sd_so_header_id, sd_so_line_id, po_detail_id,
+				item_id_m, item_number, item_description, uom_id, sd_so_header_id, sd_so_line_id, po_detail_id,
 				sd_number, line_number, shipment_number, quantity, shipped_quantity) {
  this.sd_delivery_header_id = sd_delivery_header_id;
  this.sd_delivery_line_id = sd_delivery_line_id;
@@ -10,7 +10,7 @@ function setValFromSelectPage(sd_delivery_header_id, sd_delivery_line_id, ar_cus
  this.ar_customer_site_id = ar_customer_site_id;
  this.ar_customer_site_name = ar_customer_site_name;
  this.ar_customer_site_number = ar_customer_site_number;
- this.item_id = item_id;
+ this.item_id_m = item_id_m;
  this.item_number = item_number;
  this.item_description = item_description;
  this.uom_id = uom_id;
@@ -45,7 +45,7 @@ setValFromSelectPage.prototype.setVal = function() {
  }
 
 
- var item_obj = [{id: 'item_id', data: this.item_id},
+ var item_obj = [{id: 'item_id_m', data: this.item_id_m},
 	{id: 'sd_so_line_id', data: this.sd_so_line_id},
 	{id: 'item_number', data: this.item_number},
 	{id: 'item_description', data: this.item_description},

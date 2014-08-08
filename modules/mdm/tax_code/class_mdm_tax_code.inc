@@ -131,6 +131,18 @@ class mdm_tax_code extends dbObject {
 	return $result;
  }
 
+  public static function find_all_outTax_by_bu_org_id($org_id) {
+	$sql = " 
+	 SELECT *
+	 FROM mdm_tax_code
+	 WHERE org_id = '{$org_id}'
+	 AND in_out = 'OUT'
+	";
+	$result = self::find_by_sql($sql);
+	return $result;
+ }
+
+ 
  public static function find_all_outTax_by_inv_org_id($org_id) {
 	$sql = " 
 	 SELECT mtc.mdm_tax_code_id, mtc.org_id, mtc.tax_code, mtc.tax_type, mtc.dr_cr,mtc.in_out,

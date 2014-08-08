@@ -13,7 +13,7 @@ class ap_transaction_all_v extends dbObject {
 		 "supplier_number",
 		 "supplier_site_name",
 		 "item_number",
-		 "item_id",
+		 "item_id_m",
 		 "ship_to_id",
 		 "ship_to_org",
 		 "need_by_date",
@@ -29,7 +29,7 @@ class ap_transaction_all_v extends dbObject {
 		 "supplier_number",
 		 "supplier_site_name",
 		 "item_number",
-		 "item_id",
+		 "item_id_m",
 		 "ship_to_id",
 		 "ship_to_org",
 		 "need_by_date",
@@ -84,7 +84,7 @@ class ap_transaction_all_v extends dbObject {
  public $ap_transaction_line_id;
  public $line_type;
  public $line_number;
- public $item_id;
+ public $item_id_m;
  public $item_description;
  public $line_description;
  public $line_quantity;
@@ -121,7 +121,7 @@ payment_term_id,
 supplier_name, supplier_number,
 supplier_site_name, supplier_site_number,
 payment_term, payment_term_description,
-ap_transaction_line_id, line_type, line_number,	item_id, item_description, line_description, line_quantity, unit_price, line_price,
+ap_transaction_line_id, line_type, line_number,	item_id_m, item_description, line_description, line_quantity, unit_price, line_price,
 item_number, uom_id, item_status,
 ap_transaction_detail_id, shipment_number, ship_to_id, sub_inventory_id, locator_id, requestor, quantity,
 need_by_date, promise_date,
@@ -136,7 +136,7 @@ ap_transaction_header.payment_term_id,
 supplier.supplier_name, supplier.supplier_number,
 supplier_site.supplier_site_name, supplier_site.supplier_site_number,
 payment_term.payment_term, payment_term.description,
-ap_transaction_line.ap_transaction_line_id, ap_transaction_line.line_type, ap_transaction_line.line_number,	ap_transaction_line.item_id, ap_transaction_line.item_description, ap_transaction_line.line_description, 
+ap_transaction_line.ap_transaction_line_id, ap_transaction_line.line_type, ap_transaction_line.line_number,	ap_transaction_line.item_id_m, ap_transaction_line.item_description, ap_transaction_line.line_description, 
 ap_transaction_line.line_quantity, ap_transaction_line.unit_price, ap_transaction_line.line_price,
 item.item_number, item.uom_id, item.item_status,
 ap_transaction_detail.ap_transaction_detail_id, ap_transaction_detail.shipment_number, ap_transaction_detail.ship_to_inventory, ap_transaction_detail.sub_inventory_id, 
@@ -151,7 +151,7 @@ LEFT JOIN supplier ON ap_transaction_header.supplier_id = supplier.supplier_id
 LEFT JOIN supplier_site ON ap_transaction_header.supplier_site_id = supplier_site.supplier_site_id
 LEFT JOIN payment_term ON ap_transaction_header.payment_term_id = payment_term.payment_term_id
 LEFT JOIN ap_transaction_line ON ap_transaction_header.ap_transaction_header_id = ap_transaction_line.ap_transaction_header_id
-LEFT JOIN item ON ap_transaction_line.item_id = item.item_id
+LEFT JOIN item ON ap_transaction_line.item_id_m = item.item_id_m
 LEFT JOIN ap_transaction_detail ON ap_transaction_line.ap_transaction_line_id = ap_transaction_detail.ap_transaction_line_id
 LEFT JOIN org ON ap_transaction_detail.ship_to_inventory = org.org_id
 

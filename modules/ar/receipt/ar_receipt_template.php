@@ -25,7 +25,7 @@
 					<div id="tabsHeader-1" class="tabContent">
 					 <div class="large_shadow_box"> 
 						<ul class="column five_column">
-						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_receipt_header_id select_popup">
+						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_receipt_header_id select_popup clickable">
 							 Receipt Id : </label>
 							<?php $f->text_field_d('ar_receipt_header_id'); ?>
 							<a name="show" href="po.php?ar_receipt_header_id=" class="show ar_receipt_header_id">
@@ -36,8 +36,6 @@
 						 </li>
 						 <li><label>BU Name(1) : </label>
 							<?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>
-							<a name="show" href="form.php?class_name=ar_receipt_header" class="show bu_org_id">
-							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
 						 <li><label>Ledger Name(2) : </label>
 							<?php echo form::select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', $readonly1, '', '', 1); ?>
@@ -54,37 +52,27 @@
 							}
 							?>
 						 </li>
-						 <li><label>Receipt Type(5) : </label>
-							<?php echo $f->select_field_from_object('receipt_type', ar_receipt_header::receipt_types(), 'option_line_code', 'option_line_value', $ar_receipt_header->receipt_type, 'receipt_type', '', 1, $readonly1); ?>
+						 <li><label>Receipt Source(5) : </label>
+							<?php echo $f->select_field_from_object('ar_receipt_source_id', ar_receipt_source::find_all(), 'ar_receipt_source_id', 'receipt_source', $$class->ar_receipt_source_id, 'ar_receipt_source_id', '', 1, $readonly); ?>
 						 </li>
 						 <li><label>Document Date : </label>
-							<?php echo form::date_fieldFromToday('document_date', $$class->document_date) ?>
+							<?php echo $f->date_fieldFromToday_d('document_date', $$class->document_date, 1) ?>
 						 </li>
 						 <li><label>Document Number : </label>
 							<?php echo $f->text_field_d('document_number') ?>
 						 </li>
-						 <li><label><input type="button"  class="find_popup supplierId"> Customer Id(6) : </label>
-							<?php echo $f->text_field_dsrm('ar_customer_id'); ?>
-						 </li>
-						 <li><label class="auto_complete">Customer Name(6) : </label><?php echo $customer_name_stmt; ?></li>
-						 <li><label class="auto_complete">Customer Number(6) : </label><?php echo $customer_number_stmt; ?></li>
-						 <li><label>Customer Site(7) : </label>
-							<?php
-							if ((!empty($customer_site_name_statement))) {
-							 echo $customer_site_name_statement;
-							} else {
-							 ?>
- 							<Select name="customer_site_id[]" class="customer_site_id select" id="customer_site_id" >
- 							 <option value="" ></option>
- 							</select> 
-							<?php } ?>
-						 </li>
+						 <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
+							<label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup clickable">
+							 Customer Name : </label> <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
+						 <li><label class="auto_complete">Customer Number : </label><?php $f->text_field_d('customer_number'); ?></li>
+						 <li><label>Customer Site : </label>
+							<?php echo $f->select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
 						 <li><label>Ef Id : </label>
 							<?php $f->text_field_d('ef_id'); ?>
 						 </li>
-						 <li><label>Approval Status : </label>                      
-							<span class="button"><?php echo!empty($$class->approval_status) ? $$class->approval_status : ""; ?></span>
-						 </li>
+						 <li><label>Doc Status : </label>
+							<?php echo $f->select_field_from_array('receipt_status', ar_receipt_header::$receipt_status_a, $$class->receipt_status, '', '', '', '', $readonly); ?>
+						 </li> 
 						 <li><label>Description : </label>
 							<?php $f->text_field_d('description'); ?>
 						 </li> 
@@ -121,7 +109,7 @@
 						 <?php
 						 $reference_table = 'ar_receipt_header';
 						 $reference_id = $$class->ar_receipt_header_id;
-						 include_once HOME_DIR . '/extensions/comment/comment.php';
+						 include_once HOME_DIR . '/comment.php';
 						 ?>
 						 <div id="new_comment">
 						 </div>
@@ -137,8 +125,8 @@
 							 <li> <input type="button" value="Attach" form="file_upload" name="attach_submit" id="attach_submit" class="submit button"></li>
 							 <li class="show_loading_small"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/small_loading.gif"/></li>
 							</ul>
+							<div class="uploaded_file_details"></div>
 						 </div>
-						 <div id="uploaded_file_details"></div>
 						 <?php echo file::attachment_statement($file); ?>
 						</div>
 					 </div>
@@ -148,14 +136,11 @@
 					 <div> 
 						<ul class="column five_column">
 						 <li><label>Action</label>
-							<?php echo $f->select_field_from_object('receipt_action', ar_transaction_header::transaction_action(), 'option_line_code', 'option_line_value', '', 'receipt_action', '', '', $readonly); ?>
+							<?php echo $f->select_field_from_array('receipt_action', $$class->receipt_action_a, '', 'receipt_action'); ?>
 						 </li>
 						 <li id="document_print"><label>Document Print : </label>
 							<a class="button" target="_blank"
-								 href="po_print.php?ar_receipt_header_id=<?php echo!(empty($$class->ar_receipt_header_id)) ? $$class->ar_receipt_header_id : ""; ?>" >Transaction</a>
-						 </li>
-						 <li id="document_status"><label>Change Status : </label>
-							<?php echo form::select_field_from_object('approval_status', ar_receipt_header::ar_approval_status(), 'option_line_code', 'option_line_value', $ar_receipt_header->approval_status, 'set_approval_status', $readonly, '', ''); ?>
+								 href="po_print.php?ar_receipt_header_id=<?php echo!(empty($$class->ar_receipt_header_id)) ? $$class->ar_receipt_header_id : ""; ?>" >Receipt</a>
 						 </li>
 						 <li id="copy_header"><label>Copy Document : </label>
 							<input type="button" class="button" id="copy_docHeader" value="Header">
@@ -219,8 +204,8 @@
  							<td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
  							<td><?php $f->text_field_wid2sr('ar_transaction_header_id'); ?></td>
  							<td><?php $f->text_field_wid2('transaction_number', 'select_transaction_number'); ?>
- 							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_transaction_number select_popup"></td>
- 							<td><?php !empty($$class_second->ar_receipt_line_id) ? form::number_field_d2sr('amount') : $f->text_field_d2s('amount'); ?></td>
+ 							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_transaction_number select_popup clickable"></td>
+ 							<td><?php !empty($$class_second->ar_receipt_line_id) ? form::number_field_wid2sr('amount') : $f->text_field_wid2s('amount'); ?></td>
  							<td><?php $f->text_field_wid2r('invoice_amount'); ?></td>
  							<td><?php $f->text_field_wid2r('receipt_amount'); ?></td>
  							<td><?php $f->text_field_wid2r('remaining_amount'); ?></td>

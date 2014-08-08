@@ -31,7 +31,7 @@
 							<img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						</li>
 						<li><label>Item Id : </label>
-						 <?php form::text_field_drm('item_id'); ?>
+						 <?php form::text_field_drm('item_id_m'); ?>
 						</li>
 						<li><label>Item Number(2) : </label>
 						 <?php form::text_field_dm('item_number'); ?>
@@ -64,7 +64,7 @@
 					<div> 
 					 <ul class="column five_column">
 						<li><label>Common BOM Item Id: </label>
-						 <?php form::text_field_widsr('item_id'); ?>
+						 <?php form::text_field_widsr('item_id_m'); ?>
 						</li>
 						<li><label>Item Number : </label>
 						 <?php form::text_field_wid('commonBom_item_number'); ?>
@@ -110,8 +110,8 @@
 						global $rowCount;
 						$rowCount = 0;
 						foreach ($bom_line_object as &$indented_bom_lines0) {
-						 if (!empty($indented_bom_lines0->component_item_id)) {
-							$item = item::find_by_id($indented_bom_lines0->component_item_id);
+						 if (!empty($indented_bom_lines0->component_item_id_m)) {
+							$item = item::find_by_id($indented_bom_lines0->component_item_id_m);
 							$indented_bom_lines0->component_item_number = $item->item_number;
 							$indented_bom_lines0->component_description = $item->item_description;
 							$indented_bom_lines0->component_uom = $item->uom_id;
@@ -227,9 +227,9 @@
 </div>
 
 <script type="text/javascript">
- function setValFromSelectPage(bom_header_id, item_id, item_number, item_description, uom_id) {
+ function setValFromSelectPage(bom_header_id, item_id_m, item_number, item_description, uom_id) {
 	this.bom_header_id = bom_header_id;
-	this.item_id = item_id;
+	this.item_id_m = item_id_m;
 	this.item_number = item_number;
 	this.item_description = item_description;
 	this.uom_id = uom_id;
@@ -241,7 +241,7 @@
 	var rowClass = '.' + localStorage.getItem("row_class");
 	rowClass = rowClass.replace(/\s+/g, '.');
 
-	var item_obj = [{id: 'item_id', data: this.item_id},
+	var item_obj = [{id: 'item_id_m', data: this.item_id_m},
 	 {id: 'item_number', data: this.item_number},
 	 {id: 'item_description', data: this.item_description},
 	 {id: 'uom', data: this.uom_id}

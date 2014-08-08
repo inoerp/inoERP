@@ -67,6 +67,3 @@ class bom_standard_operation_resource_assignment extends dbObject {
 
 //end of bom_standard_operation_resource_assignment class
 ?>
-
-
-

@@ -116,20 +116,19 @@ $(document).ready(function() {
 	});
  }
 
- //Popup for selecting coa
- $("#coa_popup").on("click", function() {
-	localStorage.idValue = "";
+  //selecting Header Id
+ $(".coa_id.select_popup").on("click", function() {
 	void window.open('select.php?class_name=coa', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
  //Get values on refresh button click
  $('a.show.coa_structure_show').click(function() {
-	var headerId = $('#coa_structure_id option:selected').val();
+	var headerId = $('#coa_structure_id').val();
 	$(this).attr('href', modepath() + 'coa_structure_id=' + headerId);
  });
 
- $('a.show.coa_id_show').click(function() {
+ $('a.show.coa_id').click(function() {
 	var headerId = $('#coa_id').val();
 	$(this).attr('href', modepath() + 'coa_id=' + headerId);
  });

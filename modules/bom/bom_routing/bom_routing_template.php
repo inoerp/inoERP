@@ -30,8 +30,8 @@
 							<a name="show" href="bom_routing.php?bom_routing_header_id=" class="show bom_routing_header_id">
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
-						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="item_id select_popup clickable">
-							 Item Id : </label><?php form::text_field_drm('item_id'); ?>
+						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="item_id_m select_popup clickable">
+							 Item Id : </label><?php form::text_field_drm('item_id_m'); ?>
 						 </li>
 						 <li><label>Item Number(2) : </label>
 							<?php $f->text_field_d('item_number', 'select_item_number'); ?>
@@ -55,7 +55,7 @@
 							<?php echo form::date_fieldAnyDay_m('effective_date', $$class->effective_date); ?>
 						 </li>
 						 <li><label>Common Routing Item Id: </label>
-							<?php form::text_field_widsr('common_routing_item_id'); ?>
+							<?php form::text_field_widsr('common_routing_item_id_m'); ?>
 						 </li>
 						 <li><label>Item Number : </label>
 							<?php form::text_field_wid('commonRouting_item_number'); ?>
