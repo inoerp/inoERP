@@ -14,7 +14,7 @@ class sd_so_header extends dbObject {
  public $field_a = [
 		 'sd_so_header_id',
 		 'bu_org_id',
-		 'document_type',
+		 'so_type',
 		 'so_number',
 		 'ar_customer_id',
 		 'ar_customer_site_id',
@@ -22,7 +22,6 @@ class sd_so_header extends dbObject {
 		 "description",
 		 'ship_to_id',
 		 'bill_to_id',
-		 'price_list_header_id',
 		 'header_amount',
 		 'tax_amount',
 		 'document_currency',
@@ -34,7 +33,7 @@ class sd_so_header extends dbObject {
 		 'exchange_rate',
 		 'released_amount',
 		 "ef_id",
-		 'so_status',
+		 "approval_status",
 		 "rev_enabled_cb",
 		 "rev_number",
 		 "created_by",
@@ -51,7 +50,7 @@ class sd_so_header extends dbObject {
  public $column = [
 		 "sd_so_header_id",
 		 "so_number",
-		 "so_status",
+		 "approval_status",
 		 "ar_customer_id",
 		 "creation_date",
  ];
@@ -68,7 +67,6 @@ class sd_so_header extends dbObject {
 		 'bill_to_id'
  ];
  public $fields_inForm_notInDataBase = [
-		 'set_so_status',
 		 "customer_name",
 		 "customer_number",
 		 "customer_site_name",
@@ -95,11 +93,12 @@ class sd_so_header extends dbObject {
  ];
  public $pageTitle = " SO - Sales Orders "; //page Title
  public $option_lists = [
+		 'so_type' => 'SO_TYPE',
 		 'approval_status' => 'APPROVAL_STATUS',
  ];
  public $sd_so_header_id;
  public $bu_org_id;
- public $document_type;
+ public $so_type;
  public $so_number;
  public $ar_customer_id;
  public $ar_customer_site_id;
@@ -107,7 +106,6 @@ class sd_so_header extends dbObject {
  public $description;
  public $ship_to_id;
  public $bill_to_id;
- public $price_list_header_id;
  public $header_amount;
  public $tax_amount;
  public $document_currency;
@@ -119,8 +117,7 @@ class sd_so_header extends dbObject {
  public $exchange_rate;
  public $released_amount;
  public $ef_id;
- public $set_so_status;
- public $so_status;
+ public $approval_status;
  public $rev_enabled_cb;
  public $rev_number;
  public $created_by;
@@ -182,37 +179,40 @@ class sd_so_header extends dbObject {
  }
 
  public function _before_save() {
-	if (!empty($this->set_so_status)) {
-	 $this->so_status = $this->set_so_status;
-	}
-
-	if (empty($this->so_status)) {
-	 $this->so_status = 'ENTERED';
+	if (empty($this->approval_status)) {
+	 $this->approval_status = 'Entered';
 	}
  }
 
  public function _after_save() {
+	global $db;
 	if ((!empty($this->sd_so_header_id)) && empty($this->so_number)) {
 	 $sd_so_header_id = $this->sd_so_header_id;
 	 $bu_org_id = $this->bu_org_id;
 	 $so_number = $bu_org_id . '-' . $sd_so_header_id;
 	 $this->so_number = $so_number;
 	 echo '<br/> New SO number is ' . $so_number;
-	 $this->audit_trial();
-   $this->update_soNumber();
+	 $this->msg = $this->update_soNumber();
 	}
 
-
+	return $this->msg;
  }
 
  private function update_soNumber() {
+	global $db;
+
 	$sql = " UPDATE " . self::$table_name;
-	$sql .= " SET so_number = '{$this->so_number}'  ";
-	$sql .= " WHERE sd_so_header_id = '{$this->sd_so_header_id}'  ";
+	$sql .= " SET so_number = :so_number  ";
+	$sql .= " WHERE sd_so_header_id = :sd_so_header_id  ";
+	$param_a = ['so_number', 'sd_so_header_id'];
+	$value_a = ['sd_so_header_id' => $this->sd_so_header_id, 'so_number' => $this->so_number];
+
 	try {
-	 $this->runSQL($sql);
+	 $db->findBy_sql($sql, $param_a, $value_a);
+	 return true;
 	} catch (Exception $e) {
 	 echo "<br>SO Number update failed!" . $e->getMessage();
+	 return false;
 	}
  }
 
@@ -235,8 +235,8 @@ class sd_so_header extends dbObject {
 	return $so_types;
  }
 
- Public static function so_status() {
-	$option_header = option_header::find_by_name('SD_SO_STATUS');
+ Public static function approval_status() {
+	$option_header = option_header::find_by_name('APPROVAL_STATUS');
 	$so_status = option_line::find_by_option_id($option_header->option_header_id);
 	return $so_status;
  }

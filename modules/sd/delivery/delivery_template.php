@@ -80,7 +80,7 @@
 						<?php
 						$reference_table = 'sd_delivery_header';
 						$reference_id = $$class->sd_delivery_header_id;
-						include_once HOME_DIR . '/comment.php';
+						include_once HOME_DIR . '/extensions/comment/comment.php';
 						?>
 						<div id="new_comment">
 						</div>
@@ -171,7 +171,7 @@
 						 foreach ($sd_delivery_line_object as $sd_delivery_line) {
 							?>         
  						 <tr class="sd_delivery_line<?php echo $count ?>">
- 							<td><?php $f->text_field_wid2sr('item_id_m'); ?></td>
+ 							<td><?php $f->text_field_wid2sr('item_id'); ?></td>
  							<td><?php $f->text_field_d2s('item_number'); ?></td>
  							<td><?php $f->text_field_d2('item_description'); ?></td>
  							<td><?php echo $f->select_field_from_object('line_uom_id', uom::find_all(), 'uom_id', 'uom_name', $sd_delivery_line->line_uom_id, '', '', '', $readonly1); ?></td>

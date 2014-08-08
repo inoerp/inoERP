@@ -51,6 +51,12 @@ setValFromSelectPage.prototype.setVal = function() {
 
 
 $(document).ready(function() {
+//selecting customer
+ $(".ar_customer_id_popup").on("click", function() {
+	localStorage.idValue = "";
+	void window.open('select.php?class_name=ar_customer', '_blank',
+					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
 
  //Popup for selecting address 
  $(".address_popup").click(function() {
@@ -69,7 +75,12 @@ $(document).ready(function() {
 
  $('a.show.customer_number').click(function() {
 	var customer_number = $('#customer_number').val();
-	$(this).attr('href', modepath() + 'customer_number=' + customer_number);
+	if ($('#org_id').val().length > 0) {
+	 var org_id = $('#org_id').val();
+	 $(this).attr('href', modepath() + 'customer_number=' + customer_number + '&org_id=' + org_id);
+	} else {
+	 alert("Query Error!!! \n Select the query mode by pressing Ctrl + Q \n Select the organization name");
+	}
  });
 
  $('a.show.ar_customer_site_id').click(function() {

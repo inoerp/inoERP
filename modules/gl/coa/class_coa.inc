@@ -2,7 +2,7 @@
 
 class coa extends dbObject {
 
- public static $table_name = "coa";
+ protected static $table_name = "coa";
  public static $primary_column = "coa_id";
  public static $key_column = "coa_structure_id"; //same as option_header_id
  public static $module = "gl";

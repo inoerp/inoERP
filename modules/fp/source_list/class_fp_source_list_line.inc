@@ -52,7 +52,17 @@ class fp_source_list_line extends dbObject {
 	return $ol;
  }
 
+ public function _before_showing() {
+	
+ }
 
+ public function _before_submit() {
+	
+ }
+
+ public function _after_save() {
+	
+ }
 
 }
 

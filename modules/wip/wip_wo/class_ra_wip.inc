@@ -6,12 +6,12 @@ class ra_wip extends dbObject {
  public static $table_name = "wip_wo_header";
  public static $primary_column = "wip_wo_header_id";
  public static $primary_column2 = "wo_number";
- public static $key_column = 'item_id_m';
+ public static $key_column = 'item_id';
  public static $module = "wip";
 //  data base variables as stored database column name
  public $field_a = [
 		 'wip_wo_header_id',
-		 'item_id_m',
+		 'item_id',
 		 'wo_number',
 		 'org_id',
 		 'wip_accounting_group_id',
@@ -30,7 +30,7 @@ class ra_wip extends dbObject {
  ];
  public $pageTitle = " WIP Analysis "; //page Title
  public $wip_wo_header_id;
- public $item_id_m;
+ public $item_id;
  public $wo_number;
  public $org_id;
  public $wip_accounting_group_id;
@@ -102,9 +102,9 @@ SELECT item.item_number,
 			SUM(wh.quantity - wh.completed_quantity) as 'Remaining_Quantity'
 			FROM
 			wip_wo_header wh
-            LEFT JOIN item ON item.item_id_m = wh.item_id_m
+            LEFT JOIN item ON item.item_id = wh.item_id
 			WHERE wh.wo_status = 'RELEASED'
-			GROUP BY wh.item_id_m, Past_Due
+			GROUP BY wh.item_id, Past_Due
 			ORDER BY Remaining_Quantity DESC
 			LIMIT 8
  ";
@@ -120,9 +120,9 @@ SELECT item.item_number,
 		IFNULL(cic.standard_cost, 0.01)*Sum(wh.quantity - wh.completed_quantity) as 'Remaining_Value'
 
 		FROM wip_wo_header wh
-		LEFT JOIN cst_item_cost_v cic ON cic.item_id_m = wh.item_id_m AND cic.bom_cost_type='FROZEN'
+		LEFT JOIN cst_item_cost_v cic ON cic.item_id = wh.item_id AND cic.bom_cost_type='FROZEN'
 		WHERE wo_status = 'RELEASED'
-		GROUP BY wh.item_id_m
+		GROUP BY wh.item_id
 		ORDER BY Remaining_Value DESC
 		LIMIT 8
 	";
@@ -135,9 +135,9 @@ SELECT item.item_number,
 		 SELECT item.item_number, Sum(wh.quantity - wh.completed_quantity) as 'Remaining_Quantity'
 
 		 FROM wip_wo_header wh
-		 LEFT JOIN item ON item.item_id_m = wh.item_id_m
+		 LEFT JOIN item ON item.item_id = wh.item_id
 		 WHERE wo_status = 'RELEASED'
-		 GROUP BY wh.item_id_m
+		 GROUP BY wh.item_id
 		 ORDER BY Remaining_Quantity DESC
 		 LIMIT 8
 	";

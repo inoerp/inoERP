@@ -16,7 +16,7 @@ class all_bom_routing_v extends bom_routing_line {
 		 "supplier_number",
 		 "supplier_site_name",
 		 "item_number",
-		 "item_id_m",
+		 "item_id",
 		 "ship_to_id",
 		 "ship_to_org",
 		 "need_by_date",
@@ -33,7 +33,7 @@ class all_bom_routing_v extends bom_routing_line {
 		 "supplier_number",
 		 "supplier_site_name",
 		 "item_number",
-		 "item_id_m",
+		 "item_id",
 		 "ship_to_id",
 		 "ship_to_org",
 		 "need_by_date",
@@ -85,7 +85,7 @@ class all_bom_routing_v extends bom_routing_line {
  public $bom_routing_line_id;
  public $line_type;
  public $line_number;
- public $item_id_m;
+ public $item_id;
  public $item_description;
  public $line_description;
  public $line_quantity;
@@ -123,7 +123,7 @@ payment_term_id,
 supplier_name, supplier_number,
 supplier_site_name, supplier_site_number,
 payment_term, payment_term_description,
-bom_routing_line_id, line_type, line_number,	item_id_m, item_description, line_description, 
+bom_routing_line_id, line_type, line_number,	item_id, item_description, line_description, 
 line_quantity, unit_price, line_price, uom_id,
 item_number, item_status,
 bom_routing_detail_id, shipment_number, ship_to_id, sub_inventory_id, locator_id, requestor, quantity,
@@ -139,7 +139,7 @@ bom_routing_header.payment_term_id,
 supplier.supplier_name, supplier.supplier_number,
 supplier_site.supplier_site_name, supplier_site.supplier_site_number,
 payment_term.payment_term, payment_term.description,
-bom_routing_line.bom_routing_line_id, bom_routing_line.line_type, bom_routing_line.line_number,	bom_routing_line.item_id_m, bom_routing_line.item_description, bom_routing_line.line_description, 
+bom_routing_line.bom_routing_line_id, bom_routing_line.line_type, bom_routing_line.line_number,	bom_routing_line.item_id, bom_routing_line.item_description, bom_routing_line.line_description, 
 bom_routing_line.line_quantity, bom_routing_line.unit_price, bom_routing_line.line_price,bom_routing_line.uom,
 item.item_number, item.item_status,
 bom_routing_detail.bom_routing_detail_id, bom_routing_detail.shipment_number, bom_routing_detail.ship_to_inventory, bom_routing_detail.sub_inventory_id, 
@@ -153,7 +153,7 @@ LEFT JOIN supplier ON bom_routing_header.supplier_id = supplier.supplier_id
 LEFT JOIN supplier_site ON bom_routing_header.supplier_site_id = supplier_site.supplier_site_id
 LEFT JOIN payment_term ON bom_routing_header.payment_term_id = payment_term.payment_term_id
 LEFT JOIN bom_routing_line ON bom_routing_header.bom_routing_header_id = bom_routing_line.bom_routing_header_id
-LEFT JOIN item ON bom_routing_line.item_id_m = item.item_id_m
+LEFT JOIN item ON bom_routing_line.item_id = item.item_id
 LEFT JOIN bom_routing_detail ON bom_routing_line.bom_routing_line_id = bom_routing_detail.bom_routing_line_id
 LEFT JOIN org ON bom_routing_detail.ship_to_inventory = org.org_id
 

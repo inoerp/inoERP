@@ -1,6 +1,6 @@
 <?php
 
-class fp_mrp_header extends dbObject {
+class fp_mrp_header extends dbOraObject {
 
  public static $table_name = "fp_mrp_header";
  public static $primary_column = "fp_mrp_header_id";
@@ -47,8 +47,12 @@ class fp_mrp_header extends dbObject {
 		 'fp_mrp_planned_order_id',
  ];
  public $search = [
+		 '_update_path' => 'form.php?class_name=mrp_header',
 		 '_show_update_path' => 1,
+		 '_update_action_meassge' => 'Update',
 		 '_show_view_path' => 1,
+//		 '_view_action_meassge' => 'View',
+//		 '_extra_path' => '',
  ];
  public $pageTitle = " MRP "; //page Title
  public $fp_mrp_header_id;
@@ -73,6 +77,13 @@ class fp_mrp_header extends dbObject {
 	}
  }
 
+  public static function find_all_planner_code() {
+	$sql = " SELECT * FROM APPS.MTL_PLANNERS "
+					. " WHERE DESCRIPTION IS NOT NULL AND DISABLE_DATE IS NULL "
+					. " ORDER BY DESCRIPTION, ORGANIZATION_ID";
+	return self::find_by_sql($sql);
+ }
+ 
  public function release_planned_order() {
 	$mrpplo = new fp_mrp_planned_order();
 	if (!empty($this->fp_mrp_planned_order_id)) {
@@ -102,10 +113,10 @@ class fp_mrp_header extends dbObject {
 	$org = new org_v();
 	$org->findBy_id($obj->org_id);
 	$item = new item();
-	$item->findBy_id($obj->item_id_m);
+	$item->findBy_id($obj->item_id);
 	$leadtime = $item->pre_processing_lt + $item->post_processing_lt + $item->processing_lt;
 	$itemcost = new cst_item_cost_v();
-	$itemcost->item_id_m = $obj->item_id_m;
+	$itemcost->item_id = $obj->item_id;
 	$itemcost->bom_cost_type = 'FROZEN';
 	$itemcost_i = $itemcost->findBy_ItemId_CostType();
 	$sourcing_rule_id = $item->sourcing_rule_id;
@@ -121,7 +132,7 @@ class fp_mrp_header extends dbObject {
 		$po_req_interface->po_requisition_type = 'EXTERNAL';
 		$po_req_interface->line_type = 'GOODS';
 		$po_req_interface->requisition_status = 'APPROVED';
-		$po_req_interface->item_id_m = $obj->item_id_m;
+		$po_req_interface->item_id = $obj->item_id;
 		$po_req_interface->uom_id = $item->uom_id;
 		$po_req_interface->item_description = $item->item_description;
 		$po_req_interface->currency = $org->currency_code;
@@ -141,7 +152,7 @@ class fp_mrp_header extends dbObject {
 	$po_req_interface->po_requisition_type = 'EXTERNAL';
 	$po_req_interface->line_type = 'GOODS';
 	$po_req_interface->requisition_status = 'APPROVED';
-	$po_req_interface->item_id_m = $obj->item_id_m;
+	$po_req_interface->item_id = $obj->item_id;
 	$po_req_interface->uom_id = $item->uom_id;
 	$po_req_interface->item_description = $item->item_description;
 	$po_req_interface->currency = $org->currency_code;
@@ -159,11 +170,11 @@ class fp_mrp_header extends dbObject {
 
  private function _cretae_wo($obj) {
 	$item = new item();
-	$item->findBy_id($obj->item_id_m);
+	$item->findBy_id($obj->item_id);
 	$leadtime = $item->pre_processing_lt + $item->post_processing_lt + $item->processing_lt;
 	$woh = new wip_wo_header();
 	$woh->org_id = $obj->org_id;
-	$woh->item_id_m = $obj->item_id_m;
+	$woh->item_id = $obj->item_id;
 	$woh->wo_type = 'STANDARD';
 	$woh->wip_accounting_group_id = 1;
 	$woh->wo_status = 'UN_RELEASED';

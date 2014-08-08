@@ -4,7 +4,6 @@ class sys_value_group_header extends dbObject {
 
  public static $table_name = "sys_value_group_header";
  public static $primary_column = "sys_value_group_header_id";
- public static $dependent_classes = ['sys_value_group_line'];
  public static $key_column = "value_group";
  public static $module = "sys";
  public static $access_level_array = [

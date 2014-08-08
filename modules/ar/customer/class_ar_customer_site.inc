@@ -121,16 +121,19 @@ class ar_customer_site extends dbObject {
  }
 
  public static function find_all_sitesOfCustomer_array($customer_id = "") {
+	global $db;
 	$sql = " SELECT * FROM ";
 	$sql .= self::$table_name;
 	$sql .= " WHERE ar_customer_id = '{$customer_id}' ";
 	$final_array = [];
-	$result_array = self::find_by_sql($sql);
+	$result_array = $db->find_by_sql($sql);
 	foreach ($result_array as $obj) {
 	 $key = $obj->ar_customer_site_id;
 	 $value = $obj->ar_customer_site_id . "-" . $obj->customer_site_name;
 	 $final_array[$key] = $value;
 	}
+
+//	$result = self::find_by_sql($sql);
 	return $final_array;
  }
 

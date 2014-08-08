@@ -1,11 +1,11 @@
 function setValFromSelectPage(po_header_id, combination, supplier_id, supplier_number, supplier_name,
-				item_id_m_m, item_number, item_description, uom_id) {
+				item_id, item_number, item_description, uom_id) {
  this.po_header_id = po_header_id;
  this.combination = combination;
  this.supplier_id = supplier_id;
  this.supplier_number = supplier_number;
  this.supplier_name = supplier_name;
- this.item_id_m_m = item_id_m_m;
+ this.item_id = item_id;
  this.item_number = item_number;
  this.item_description = item_description;
  this.uom_id = uom_id;
@@ -18,7 +18,7 @@ setValFromSelectPage.prototype.setVal = function() {
  var supplier_number = this.supplier_number;
  var supplier_name = this.supplier_name;
  var combination = this.combination;
- var item_id_m_m = this.item_id_m_m;
+ var item_id = this.item_id;
  var item_number = this.item_number;
  var item_description = this.item_description;
  var uom_id = this.uom_id;
@@ -42,8 +42,8 @@ setValFromSelectPage.prototype.setVal = function() {
  if (combination) {
 	$('#content').find(rowClass).find(fieldClass).val(combination);
  }
- if (item_id_m_m) {
-	$('#content').find(rowClass).find('.item_id_m_m').val(item_id_m_m);
+ if (item_id) {
+	$('#content').find(rowClass).find('.item_id').val(item_id);
  }
  if (item_number) {
 	$('#content').find(rowClass).find('.item_number').val(item_number);
@@ -102,7 +102,12 @@ lineDetail_QuantityValidation();
  });
 
 //get supplier details
-get_supplier_detail_for_bu();
+ $("#supplier_id, #supplier_name, #supplier_number").on("focusout", function() {
+	if (($("#bu_org_id").val()) && ($('#supplier_id').val())) {
+	 var bu_org_id = $("#bu_org_id").val();
+	 getSupplierDetails('modules/ap/supplier/json_supplier.php', bu_org_id);
+	}
+ });
 
  $("#content").on("change", "#supplier_site_id", function() {
 	var supplier_site_id = $("#supplier_site_id").val();
@@ -139,6 +144,36 @@ get_supplier_detail_for_bu();
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
+//popu for selecting accounts
+ $('#content').on('click', '.account_popup', function() {
+	var rowClass = $(this).closest('tr').prop('class');
+	var fieldClass = $(this).closest('td').find('.select_account').prop('class');
+	localStorage.setItem("row_class", rowClass);
+	localStorage.setItem("field_class", fieldClass);
+	void window.open('select.php?class_name=coa_combination', '_blank',
+					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
+//selecting supplier
+ $(".find_popup.supplierId").on("click", function() {
+	localStorage.idValue = "";
+	void window.open('select.php?class_name=supplier', '_blank',
+					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
+//popu for selecting items
+// $('#content').on('click', '.select_item_number.select_popup', function() {
+//	var rowClass = $(this).closest('tr').prop('class');
+//	var fieldClass = $(this).closest('td').find('.select_item_number').prop('class');
+//	localStorage.setItem("row_class", rowClass);
+//	localStorage.setItem("field_class", fieldClass);
+//	var openUrl = 'select.php?class_name=item';
+//	if ($(this).siblings('.code_combination_id').val()) {
+//	 openUrl += '&item_number=' + $(this).siblings('.item_number').val();
+//	}
+//	void window.open(openUrl, '_blank',
+//					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+// });
 
  //Popup for selecting address 
  $(".address_popup").click(function() {

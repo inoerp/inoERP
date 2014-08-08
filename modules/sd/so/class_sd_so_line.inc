@@ -15,32 +15,24 @@ class sd_so_line extends dbObject {
 		 'sd_so_header_id',
 		 'line_type',
 		 'line_number',
-		 'item_id_m',
+		 'item_id',
 		 'shipping_org_id',
 		 'line_status',
 		 'requested_date',
 		 'promise_date',
 		 'schedule_ship_date',
-		 'actual_ship_date',
 		 'item_description',
 		 'line_description',
 		 'uom_id',
 		 'line_quantity',
 		 'picked_quantity',
 		 'shipped_quantity',
-		 'invoiced_quantity',
-		 'price_list_header_id',
-		 'price_date',
 		 'unit_price',
 		 'line_price',
 		 'reference_doc_type',
-		 'supply_source',
-		 'destination_type',
 		 'tax_code_id',
 		 'tax_amount',
 		 'reference_doc_number',
-		 'ar_transaction_header_id',
-		 'ar_transaction_line_id',
 		 "ef_id",
 		 "created_by",
 		 "creation_date",
@@ -50,14 +42,14 @@ class sd_so_line extends dbObject {
  public $initial_search = [
 		 "sd_so_header_id",
 		 "so_number",
-		 "item_id_m",
+		 "item_id",
 		 "item_number",
 		 "item_description"
  ];
  public $column = [
 		 "sd_so_header_id",
 		 "so_number",
-		 "item_id_m",
+		 "item_id",
 		 "item_number",
 		 "item_description"
  ];
@@ -69,41 +61,29 @@ class sd_so_line extends dbObject {
  public $fields_inForm_notInDataBase = [
 		 "so_number",
 		 "item_number",
-		 'tax_code_value',
-		 'ar_transaction_number'
+		 'actual_ship_date',
+		 'tax_code_value'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
 		 "sd_so_header_id"
  ];
- 
- public $notUpdatedFromWebForm = [
-		 'actual_ship_date',
- ];
- 
  public $sd_so_line_id;
  public $sd_so_header_id;
  public $line_type;
  public $line_number;
- public $item_id_m;
+ public $item_id;
  public $item_description;
  public $line_description;
  public $uom_id;
  public $line_quantity;
  public $picked_quantity;
  public $shipped_quantity;
- public $invoiced_quantity;
- public $price_list_header_id;
- public $price_date;
  public $unit_price;
  public $line_price;
  public $tax_code_id;
  public $tax_amount;
  public $reference_doc_type;
  public $reference_doc_number;
- public $ar_transaction_header_id;
- public $ar_transaction_line_id;
- public $supply_source;
- public $destination_type;
  public $ef_id;
  public $po_status;
  public $rev_enabled_cb;
@@ -122,13 +102,12 @@ class sd_so_line extends dbObject {
  public $msg;
  public $item_number;
  public $tax_code_value;
- public $ar_transaction_number;
 
  public function _before_save() {
 	if (!(empty($this->shipping_org_id))) {
 	 if (!(empty($this->item_number))) {
 		$item_s = item::find_by_itemNumber_orgId($this->item_number, $this->shipping_org_id);
-		$this->item_id_m = $item_s->item_id_m;
+		$this->item_id = $item_s->item_id;
 	 }
 	} else {
 	 echo "<br> Saving line data failed!. No shipping organization. Error @ po_line @" . __LINE__;

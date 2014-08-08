@@ -89,6 +89,13 @@ class bom_department extends dbObject {
 	return $resource_type;
  }
  
+ public function _before_showing() {
+	
+ }
+
+ public function _before_submit() {
+	
+ }
 
 }
 

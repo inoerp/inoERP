@@ -4,7 +4,7 @@ class wip_material_transaction extends inv_transaction {
 
  public static $table_name = "inv_transaction";
  public static $primary_column = "inv_transaction_id";
- public static $key_column = 'item_id_m';
+ public static $key_column = 'item_id';
  public static $module = "inv";
  public static $allowed_inv_transactions = [
 		 '1' => 'Miscellaneous Issue',
@@ -18,7 +18,7 @@ class wip_material_transaction extends inv_transaction {
 		 'status',
 		 'receipt_line_id',
 		 'item_number',
-		 'item_id_m',
+		 'item_id',
 		 'uom_id',
 		 'lot_number',
 		 'serial_number',
@@ -61,7 +61,7 @@ class wip_material_transaction extends inv_transaction {
 		 "inv_transaction_id",
 		 "transaction_type_id",
 		 'status',
-		 "item_id_m",
+		 "item_id",
 		 "org_id",
 		 "item_number",
 		 "creation_date",
@@ -96,7 +96,7 @@ class wip_material_transaction extends inv_transaction {
 		 "uom_id",
 		 "quantity",
 		 "org_id",
-		 "item_id_m",
+		 "item_id",
 		 "transaction_type_id"
  ];
  public $search = [

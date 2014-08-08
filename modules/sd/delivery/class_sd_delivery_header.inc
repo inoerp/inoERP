@@ -62,7 +62,7 @@ class sd_delivery_header extends dbObject {
 		 "org",
 		 'sd_so_header_id',
 		 'sd_so_line_id',
-		 'item_id_m',
+		 'item_id',
 		 'quantity',
 		 'delivery_status',
 		 'picking_date',
@@ -77,8 +77,6 @@ class sd_delivery_header extends dbObject {
  ];
  public $search = [
 		 '_show_view_path' => 1,
-		 '_show_update_path' => 1,
-		 '_update_action_meassge' => 'Ship Confirm'
  ];
  public $pageTitle = " Shipment Delivery"; //page Title
  public $sd_delivery_header_id;
@@ -106,7 +104,7 @@ class sd_delivery_header extends dbObject {
  public $action;
  public $sd_so_header_id;
  public $sd_so_line_id;
- public $item_id_m;
+ public $item_id;
  public $quantity;
  public $delivery_status;
  public $picking_date;
@@ -134,6 +132,7 @@ class sd_delivery_header extends dbObject {
 	$dh->audit_trial();
 	$dh->save();
 	echo "<br> Delivery header is succefully created. Header Id/Delivery Number - " . $dh->sd_delivery_header_id;
+	$dbc->confirm();
 	$dh->delivery_number = $dh->sd_delivery_header_id;
 	$dh->save();
 	return $dh->sd_delivery_header_id;
@@ -175,7 +174,7 @@ class sd_delivery_header extends dbObject {
 		$del_line->sd_so_header_id = $_POST['sd_so_header_id'][$i];
 		$del_line->sd_so_line_id = $_POST['sd_so_line_id'][$i];
 		$del_line->shipping_org_id = $_POST['shipping_org_id'][$i];
-		$del_line->item_id_m = $_POST['item_id_m'][$i];
+		$del_line->item_id = $_POST['item_id'][$i];
 		$del_line->quantity = $_POST['line_quantity'][$i];
 		$del_line->delivery_status = 'AWAITING_SHIPPING';
 		$del_line->picking_date = date("Y-m-d");
@@ -189,7 +188,7 @@ class sd_delivery_header extends dbObject {
 		//update the onhand
 		$del_quantity = $del_line->quantity;
 		$onhand = new onhand();
-		$onhand->item_id_m = $_POST['item_id_m'][$i];
+		$onhand->item_id = $_POST['item_id'][$i];
 		$onhand_i = $onhand->findOnhand_byItemId();
 		foreach ($onhand_i as $oh_data) {
 		 $transaction_quantity = 0;
@@ -212,7 +211,7 @@ class sd_delivery_header extends dbObject {
 		 $invt->to_locator_id = $_POST['staging_locator_id'][$i];
 		 $invt->from_subinventory_id = $oh_data->subinventory_id;
 		 $invt->from_locator_id = $oh_data->locator_id;
-		 $invt->item_id_m = $_POST['item_id_m'][$i];
+		 $invt->item_id = $_POST['item_id'][$i];
 		 $invt->uom_id = $_POST['uom_id'][$i];
 		 $invt->org_id = $_POST['shipping_org_id'][$i];
 		 $invt->quantity = $transaction_quantity;
@@ -222,7 +221,7 @@ class sd_delivery_header extends dbObject {
 		 $invt->reason = 'SO Picking';
 		 $invt->sd_so_line_id = $_POST['sd_so_line_id'][$i];
 		 $invt->audit_trial();
-		 $invt->_before_save();
+		 $invt->_before_submit();
 		 $invt->save();
 		 $invt->_after_save();
 		}

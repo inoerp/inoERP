@@ -145,7 +145,7 @@ $(document).ready(function() {
  classSave.headerClassName = 'wip_wo_completion';
  classSave.saveMain();
  
-// save('../../inv/inv_transaction/json.inv_transaction.php', '#inv_transaction', 'inv_transaction_id_cb', 'item_id_m', '#inv_transaction_id');
+// save('../../inv/inv_transaction/json.inv_transaction.php', '#inv_transaction', 'inv_transaction_id_cb', 'item_id', '#inv_transaction_id');
 
 });
 

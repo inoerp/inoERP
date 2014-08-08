@@ -36,8 +36,9 @@
 						 <li><label>Inventory Org </label>
 							<?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>
 						 </li>
+						 <li><label>Item Id : </label><?php $f->text_field_drm('item_id'); ?>
+						 </li>
 						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup clickable">Item Number(2) : </label>
-							<?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
 							<?php $f->text_field_d('item_number', 'select_item_number'); ?>
 						 </li>
 						 <li><label>Description: </label>
@@ -76,7 +77,7 @@
 						 <?php
 						 $reference_table = 'cst_item_cost_header';
 						 $reference_id = $$class->cst_item_cost_header_id;
-						 include_once HOME_DIR . '/comment.php';
+						 include_once HOME_DIR . '/extensions/comment/comment.php';
 						 ?>
 						 <div id="new_comment">
 						 </div>

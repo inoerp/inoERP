@@ -72,6 +72,13 @@ class bom_material_element extends dbObject {
  public $time;
  public $msg;
 
+ public function _before_showing() {
+	
+ }
+
+ public function _before_submit() {
+	
+ }
 
 }
 

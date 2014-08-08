@@ -10,7 +10,6 @@ if (!empty($_GET['org_id']) && ($_GET['find_all_subinventory'] = 1)) {
  if (empty($subinventory_of_org)) {
 	return false;
  } else {
-	echo '<option value=""></option>';
 	foreach ($subinventory_of_org as $key => $value) {
 	 echo '<option value="' . $value->subinventory_id . '"';
 	 echo '>' . $value->subinventory . '</option>';

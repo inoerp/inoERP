@@ -71,13 +71,16 @@ class fp_mds_header extends dbObject {
  public $last_update_by;
  public $last_update_date;
 
+ public function _before_submit() {
+	
+ }
 
  public function findBy_itemId() {
 	$sql = "SELECT * FROM " .
 					self::$table_name .
-					" where item_id_m= :item_id_m LIMIT 1 ";
-	$param_a = ['item_id_m'];
-	$value_a = ['item_id_m' => $this->item_id_m];
+					" where item_id= :item_id LIMIT 1 ";
+	$param_a = ['item_id'];
+	$value_a = ['item_id' => $this->item_id];
 	$result_array = $this->findBy_sql($sql, $param_a, $value_a);
 	return !empty($result_array) ? array_pop($result_array) : false;
  }
@@ -107,7 +110,7 @@ class fp_mds_header extends dbObject {
 	foreach ($sol_i as $sales_line) {
 	 $msdl->fp_mds_line_id = null;
 	 $msdl->fp_mds_header_id = $mds_header_obj->fp_mds_header_id;
-	 $msdl->item_id_m = $sales_line->item_id_m;
+	 $msdl->item_id = $sales_line->item_id;
 	 $msdl->quantity = $sales_line->line_quantity;
 	 $msdl->demand_date = $sales_line->schedule_ship_date;
 	 $msdl->source_type = 'Sales_Order';
@@ -127,7 +130,7 @@ class fp_mds_header extends dbObject {
 	foreach ($slh_i as $forecast_line) {
 	 $msdl->fp_mds_line_id = null;
 	 $msdl->fp_mds_header_id = $mds_header_obj->fp_mds_header_id;
-	 $msdl->item_id_m = $forecast_line->item_id_m;
+	 $msdl->item_id = $forecast_line->item_id;
 	 $msdl->quantity = $forecast_line->current;
 	 $msdl->demand_date = $forecast_line->start_date;
 	 $msdl->source_type = 'Forecast';

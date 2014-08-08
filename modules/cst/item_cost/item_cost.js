@@ -1,7 +1,7 @@
-function setValFromSelectPage(cst_item_cost_header_id, item_id_m, item_number, item_description,
+function setValFromSelectPage(cst_item_cost_header_id, item_id, item_number, item_description,
 				uom_id) {
  this.cst_item_cost_header_id = cst_item_cost_header_id;
- this.item_id_m = item_id_m;
+ this.item_id = item_id;
  this.item_number = item_number;
  this.item_description = item_description;
  this.uom_id = uom_id;
@@ -9,7 +9,7 @@ function setValFromSelectPage(cst_item_cost_header_id, item_id_m, item_number, i
 
 setValFromSelectPage.prototype.setVal = function() {
  var cst_item_cost_header_id = this.cst_item_cost_header_id;
- var item_obj = [{id: 'item_id_m', data: this.item_id_m},
+ var item_obj = [{id: 'item_id', data: this.item_id},
 	{id: 'item_number', data: this.item_number},
 	{id: 'item_description', data: this.item_description},
 	{id: 'uom_id', data: this.uom_id}

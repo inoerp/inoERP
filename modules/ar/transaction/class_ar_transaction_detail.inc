@@ -1,7 +1,5 @@
 <?php
-
 class ar_transaction_detail extends dbObject {
-
  public static $table_name = "ar_transaction_detail";
  public static $primary_column = "ar_transaction_detail_id";
  public static $parent_primary_column = "ar_transaction_line_id";
@@ -27,7 +25,6 @@ class ar_transaction_detail extends dbObject {
 		 'sd_so_line_id',
 		 'sd_so_detail_id',
 		 'period_id',
-		 'journal_created_cb',
 		 'created_by',
 		 'creation_date',
 		 'last_update_by',
@@ -69,35 +66,12 @@ class ar_transaction_detail extends dbObject {
  public $sd_so_line_id;
  public $sd_so_detail_id;
  public $period_id;
- public $journal_created_cb;
  public $created_by;
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
  public $time;
  public $msg;
-
- private function _validate_delete() {
-	if ($this->journal_created_cb == 1) {
-	 echo "<br>Delete is not allowed as the journal lines have been created! "
-	 . "<br> Create credit memo if required";
-	 return -99;
-	} else {
-	 return 1;
-	}
- }
-
- public function _before_delete() {
-	return $this->_validate_delete();
- }
-
- public function _before_save() {
-//	if (!empty($this->ar_transaction_detail_id) && ($this->journal_created_cb == 1)) {
-//	 echo "<br>Update is not allowed as the journal lines have been created! "
-//	 . "<br> Create credit memo if required";
-//	 return -99;
-//	}
- }
 
  public static function find_by_ar_transaction_lineId($ar_transaction_line_id) {
 	$sql = "SELECT * FROM " . self::$table_name . " where ar_transaction_line_id = '{$ar_transaction_line_id}'";

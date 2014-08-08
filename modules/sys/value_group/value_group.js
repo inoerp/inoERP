@@ -26,11 +26,10 @@ $(document).ready(function() {
  
  
  //Popup for selecting option type
-  $(".sys_value_group_header_id.select_popup").on("click", function() {
-	void window.open('select.php?class_name=sys_value_group_header', '_blank',
+   $("#sys_value_group_header_id_popup").on("click", function() {
+		void window.open('../../../select.php?class_name=sys_value_group_header', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
-
 
  //Check the option_id while entering the option line code
  function copy_sys_value_group_header_id() {
@@ -83,16 +82,15 @@ onClick_add_new_row('tr.sys_value_group_line0', 'tbody.sys_value_group_line_valu
  classContextMenu.contextMenu();
 
 
-//deleteData('json.option.php');
+deleteData('json.option.php');
 // save('json.value_group.php', '#sys_value_group_header', 'line_id_cb', 'code', '#sys_value_group_header_id');
  var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=sys_value_group_header';
+ classSave.json_url = 'value_group.php';
  classSave.form_header_id = 'sys_value_group_header';
  classSave.primary_column_id = 'sys_value_group_header_id';
  classSave.line_key_field = 'code';
  classSave.single_line = false;
  classSave.savingOnlyHeader = false;
- classSave.enable_select = true;
  classSave.headerClassName = 'sys_value_group_header';
  classSave.lineClassName = 'sys_value_group_line';
  classSave.saveMain();

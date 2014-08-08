@@ -120,7 +120,7 @@ if (!isset($readonly1)) {
 							<?php form::number_field_dr('running_toatl_ac_cr'); ?>
 						 </li>
 						 <li><label>Control Total : </label>
-							<?php form::text_field_d('control_total'); ?>
+							<?php form::number_field_d('control_total'); ?>
 						 </li>
 						</ul>
 						<ul class="large_box reference_details">
@@ -170,7 +170,7 @@ if (!isset($readonly1)) {
 						<?php
 						$reference_table = 'gl_journal_header';
 						$reference_id = $$class->gl_journal_header_id;
-						include_once HOME_DIR . '/comment.php';
+						include_once HOME_DIR . '/extensions/comment/comment.php';
 						?>
 						<div id="new_comment">
 						</div>
@@ -267,9 +267,9 @@ if (!isset($readonly1)) {
 							?>         
  						 <tr class="gl_journal_line<?php echo $count ?>">
  							<td><?php form::text_field_wid2l('description'); ?></td>
- 							<td><?php form::text_field_wid2r('reference_type'); ?></td>
- 							<td><?php form::text_field_wid2r('reference_key_name'); ?></td>
- 							<td><?php form::text_field_wid2r('reference_key_value'); ?></td>
+ 							<td><?php form::text_field_wid2('reference_type'); ?></td>
+ 							<td><?php form::text_field_wid2('reference_key_name'); ?></td>
+ 							<td><?php form::text_field_wid2('reference_key_value'); ?></td>
  						 </tr>
 							<?php
 							$count = $count + 1;

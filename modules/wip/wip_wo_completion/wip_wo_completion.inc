@@ -27,10 +27,10 @@ if (!empty($wip_wo_header_id)) {
  $$class->document_id = $wip_wo_header_id;
  $$class->wo_number = $wip_wo->wo_number;
  $$class->document_number = $wip_wo->wo_number;
- $$class->item_id_m = $wip_wo->item_id_m;
+ $$class->item_id = $wip_wo->item_id;
  $$class->reference = 'wip_wo_header_id';
  $$class->total_quantity = $wip_wo->quantity;
- $item = item::find_by_id($$class->item_id_m);
+ $item = item::find_by_id($$class->item_id);
  $$class->item_number = $item->item_number;
  $$class->item_description = $item->item_description;
  $$class->uom_id = $item->uom_id;

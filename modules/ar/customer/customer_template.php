@@ -26,7 +26,7 @@
 					 <div class="large_shadow_box"> 
 						<ul class="column five_column">
 						 <li>
-							<label><img class="ar_customer_id select_popup clickable"  src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
+							<label><img class="ar_customer_id_popup select_popup clickable"  src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
 							 Customer Id : </label>
 							<?php $f->text_field_d('ar_customer_id'); ?>
 							<a name="show" href="?ar_customer_id=" class="show ar_customer_id">
@@ -38,7 +38,10 @@
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>               
 						 <li><label>Customer Name : </label>
-							<?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', 1, $readonly1 ) ; ?>
+							<?php echo form::text_field_dm('customer_name'); ?>
+							<a name="show" href="customer.php?customer_name=" class="show customer_name">
+							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+
 						 </li>
 						 <li><label>Customer Type : </label>
 							<?php echo form::select_field_from_object('customer_type', ar_customer::customer_types(), 'option_line_code', 'option_line_value', $$class->customer_type, 'customer_type', $readonly, '', ''); ?>

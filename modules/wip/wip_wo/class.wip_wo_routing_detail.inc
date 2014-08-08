@@ -74,6 +74,17 @@ class wip_wo_routing_detail extends dbObject {
 	$this->$name = $value;
  }
 
+ public function _after_save() {
+	
+ }
+
+ public function _before_showing() {
+	
+ }
+
+ public function _before_submit() {
+	
+ }
 
  public static function find_by_wipWo_lineId($wip_wo_routing_line_id) {
 	$sql = "SELECT * FROM " . self::$table_name . " where wip_wo_routing_line_id = '{$wip_wo_routing_line_id}'";
@@ -85,3 +96,6 @@ class wip_wo_routing_detail extends dbObject {
 
 //end of bom_detail_line class
 ?>
+
+
+

@@ -68,7 +68,7 @@ class subinventory extends dbObject {
 		 '_show_view_path' => 1,
  ];
   public $search_functions = [
-		 'Organization' => 'search_org_name'
+		 'Organization' => 'search_org_name_onevalue'
  ];
  public $pageTitle = " Subinventory - Create & Update Subinventories"; //page Title
  public $option_lists = [
@@ -194,6 +194,20 @@ public function _before_showing(){
 	return $result;
  }
 
+ public static function search_add_extra_fields(&$arr) {
+	$org = new org;
+	if (!(is_array($arr))) {
+	 return false;
+	}
+	foreach ($arr as &$obj) {
+	 $primary_column = parent::$primary_column;
+	 if (!empty($obj->$primary_column)) {
+		$org_i = $org->findBy_id($obj->$primary_column);
+		$obj->org = $org_i->org;
+		$obj->description = $org_i->description;
+	 }
+	}
+ }
 
  public function multi_select_hidden_fields() {
 	$multi_select_hidden = [

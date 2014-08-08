@@ -66,6 +66,13 @@ class bom_resource_cost extends dbObject {
  public $time;
  public $msg;
  public $bom_cost_type_description;
+ public function _before_showing() {
+	
+ }
+
+ public function _before_submit() {
+	
+ }
  
   public function findBy_resourceId_bomCostType() {
 	$sql = " SELECT * FROM  ";

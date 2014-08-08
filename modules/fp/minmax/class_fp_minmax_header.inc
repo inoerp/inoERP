@@ -2,7 +2,7 @@
 
 class fp_minmax_header extends dbObject {
 
- public static $table_name = "fp_minmax_header";
+ protected static $table_name = "fp_minmax_header";
  public static $primary_column = "fp_minmax_header_id";
  public static $dependent_classes = ['fp_minmax_line'];
  public static $key_column = 'plan_name';
@@ -57,8 +57,8 @@ class fp_minmax_header extends dbObject {
 		 'Min Max Planner ' => 'search_minmax_planner',
 		 'Item Number From' => 'search_item_number_from',
 		 'Item Number To' => 'search_item_number_to',
-		 'Item Id From' => 'search_item_id_m_from',
-		 'Item Id To' => 'search_item_id_m_to'
+		 'Item Id From' => 'search_item_id_from',
+		 'Item Id To' => 'search_item_id_to'
  ];
  public $prg_minmax_planner_details = [
 		 'name' => 'Min Max Demand Calculator',
@@ -69,8 +69,8 @@ class fp_minmax_header extends dbObject {
 		 'Min Max Type ' => 'search_minmax_type',
 		 'Item Number From' => 'search_item_number_from',
 		 'Item Number To' => 'search_item_number_to',
-		 'Item Id From' => 'search_item_id_m_from',
-		 'Item Id To' => 'search_item_id_m_to'
+		 'Item Id From' => 'search_item_id_from',
+		 'Item Id To' => 'search_item_id_to'
  ];
  public $prg_minmax_program_details = [
 		 'name' => 'Create Supply as per MinMax Program',
@@ -128,37 +128,37 @@ class fp_minmax_header extends dbObject {
 	 return $this->message;
 	}
 
-	if (isset($parameters['item_id_m'][0])) {
+	if (isset($parameters['item_id'][0])) {
 	 $this->message .= "<br/>Using Min Max Planner by Item Id ";
-	 $item_id_m = $parameters['item_id_m'][0];
+	 $item_id = $parameters['item_id'][0];
 	 try {
-		$this->minmax_demand_calculator($item_id_m, $mmh);
-		$this->message .= "<br/> Min Max Planner is sucessfully updated for item_id_m - " . $item_id_m .
+		$this->minmax_demand_calculator($item_id, $mmh);
+		$this->message .= "<br/> Min Max Planner is sucessfully updated for item_id - " . $item_id .
 						' bom_cost_type : ' . $fp_minmax_header_id;
 	 } catch (Exception $e) {
-		$this->message .= "<br/> Min Max Planner fialed for Item id " . $item_id_m . $e->getMessage();
+		$this->message .= "<br/> Min Max Planner fialed for Item id " . $item_id . $e->getMessage();
 	 }
 
 	 return $this->message;
 	}
 
-	if (!empty($parameters['from_item_id_m'][0])) {
+	if (!empty($parameters['from_item_id'][0])) {
 	 $this->message .= "<br/>Using  Min Max Planner by Item Id Range ";
-	 $from_item_id_m = $parameters['from_item_id_m'][0];
-	 if (!empty($parameters['to_item_id_m'][0])) {
-		$to_item_id_m = $parameters['to_item_id_m'][0];
+	 $from_item_id = $parameters['from_item_id'][0];
+	 if (!empty($parameters['to_item_id'][0])) {
+		$to_item_id = $parameters['to_item_id'][0];
 	 } else {
-		$to_item_id_m = $from_item_id_m;
+		$to_item_id = $from_item_id;
 	 }
 	 $item = new item();
-	 $item_range = $item->findBy_itemIdRange($from_item_id_m, $to_item_id_m);
+	 $item_range = $item->findBy_itemIdRange($from_item_id, $to_item_id);
 	 foreach ($item_range as $items) {
 		try {
-		 $this->minmax_demand_calculator($items->item_id_m, $mmh);
-		 $this->message .= "<br>Min Max Planner is sucessfully updated for item_id_m - " . $items->item_id_m .
+		 $this->minmax_demand_calculator($items->item_id, $mmh);
+		 $this->message .= "<br>Min Max Planner is sucessfully updated for item_id - " . $items->item_id .
 						 ' bom_cost_type : ' . $fp_minmax_header_id;
 		} catch (Exception $e) {
-		 $this->message .= "<br>Min Max Plannerp failed for Item id " . $items->item_id_m . $e->getMessage();
+		 $this->message .= "<br>Min Max Plannerp failed for Item id " . $items->item_id . $e->getMessage();
 		}
 	 }
 	 return $this->message;
@@ -176,11 +176,11 @@ class fp_minmax_header extends dbObject {
 
 	 foreach ($item_range as $items) {
 		try {
-		 $this->minmax_demand_calculator($items->item_id_m, $mmh);
-		 $this->message .= "<br>Min Max Planner is sucessfully updated for item_id_m - " . $items->item_id_m .
+		 $this->minmax_demand_calculator($items->item_id, $mmh);
+		 $this->message .= "<br>Min Max Planner is sucessfully updated for item_id - " . $items->item_id .
 						 ' bom_cost_type : ' . $bom_cost_type;
 		} catch (Exception $e) {
-		 $this->message .= "<br>Min Max Plannerp failed for Item id " . $items->item_id_m . $e->getMessage();
+		 $this->message .= "<br>Min Max Plannerp failed for Item id " . $items->item_id . $e->getMessage();
 		}
 	 }
 	 return $this->message;
@@ -194,19 +194,19 @@ class fp_minmax_header extends dbObject {
 	$this->message .= "<br/>Using  Min Max Planner for All Items ";
 	foreach ($fcl_i as $items) {
 	 try {
-		$this->minmax_demand_calculator($items->item_id_m, $mmh);
-		$this->message .= "<br>Min Max Planner is sucessfully updated for item_id_m - " . $items->item_id_m .
+		$this->minmax_demand_calculator($items->item_id, $mmh);
+		$this->message .= "<br>Min Max Planner is sucessfully updated for item_id - " . $items->item_id .
 						' bom_cost_type : ' . $fp_minmax_header_id;
 	 } catch (Exception $e) {
-		$this->message .= "<br>Min Max Plannerp failed for Item id " . $items->item_id_m . $e->getMessage();
+		$this->message .= "<br>Min Max Plannerp failed for Item id " . $items->item_id . $e->getMessage();
 	 }
 	}
 	return $this->message;
  }
 
- public function minmax_demand_calculator($item_id_m, $mmh) {
+ public function minmax_demand_calculator($item_id, $mmh) {
 	$fctl = new fp_forecast_line();
-	$fctl->item_id_m = $item_id_m;
+	$fctl->item_id = $item_id;
 	$fctl->fp_forecast_header_id = $mmh->demand_source;
 	$forecast_lines = $fctl->findBy_ItemId_headerId();
 	if (empty($forecast_lines)) {
@@ -215,25 +215,25 @@ class fp_minmax_header extends dbObject {
 	$mmd = new fp_minmax_demand();
 	foreach ($forecast_lines as $forecast) {
 	 $mmd->fp_minmax_demand_id = null;
-	 $mmd->item_id_m = $forecast->item_id_m;
+	 $mmd->item_id = $forecast->item_id;
 	 $mmd->plan_id = $mmh->fp_minmax_header_id;
 	 $mmd->quantity = $forecast->total_original;
-	 $mmd->demand_item_id_m = $fctl->item_id_m;
-	 $mmd->toplevel_demand_item_id_m = $fctl->item_id_m;
+	 $mmd->demand_item_id = $fctl->item_id;
+	 $mmd->toplevel_demand_item_id = $fctl->item_id;
 	 $mmd->demand_type = 'FORECAST';
 	 $mmd->source = $forecast->fp_forecast_header_id;
 	 $mmd->audit_trial();
 	 $mmd->save();
-	 $this->_minmax_demand_calculator_forComponents($item_id_m, $mmd);
+	 $this->_minmax_demand_calculator_forComponents($item_id, $mmd);
 	}
  }
 
- private function _minmax_demand_calculator_forComponents($item_id_m, $mmd) {
+ private function _minmax_demand_calculator_forComponents($item_id, $mmd) {
 //	$mmd->audit_trial();
 //	$mmd->save();
 
 	$boh = new bom_header();
-	$boh->item_id_m = $item_id_m;
+	$boh->item_id = $item_id;
 	$boh_i = $boh->findBy_itemId();
 	if (empty($boh_i)) {
 	 return;
@@ -251,24 +251,24 @@ class fp_minmax_header extends dbObject {
 	$mmd_n = new fp_minmax_demand();
 	foreach ($bol_i as $items) {
 	 $mmd_n->fp_minmax_demand_id = null;
-	 $mmd_n->item_id_m = $items->component_item_id_m;
+	 $mmd_n->item_id = $items->component_item_id;
 	 $mmd_n->plan_id = $mmd->plan_id;
 	 $mmd_n->quantity = $mmd->quantity * $items->usage_quantity;
-	 $mmd_n->demand_item_id_m = $item_id_m;
-	 $mmd_n->toplevel_demand_item_id_m = $mmd->toplevel_demand_item_id_m;
+	 $mmd_n->demand_item_id = $item_id;
+	 $mmd_n->toplevel_demand_item_id = $mmd->toplevel_demand_item_id;
 	 $mmd_n->demand_type = 'FORECAST';
 	 $mmd_n->source = $mmd->source;
 	 $mmd_n->audit_trial();
 	 $mmd_n->save();
-	 $boh->item_id_m = $items->component_item_id_m;
+	 $boh->item_id = $items->component_item_id;
 	 $boh_i = $boh->findBy_itemId();
 	 if (!empty($boh_i)) {
-		$this->_minmax_demand_calculator_forComponents($items->component_item_id_m, $mmd_n);
+		$this->_minmax_demand_calculator_forComponents($items->component_item_id, $mmd_n);
 	 }
 	}
  }
 
- private function _get_minmax_attributes($item_id_m) {
+ private function _get_minmax_attributes($item_id) {
 	global $db;
 	$sql = "
 				 SELECT item.item_number, item.item_description, item.planning_method, item.make_buy, item.uom_id,
@@ -276,58 +276,58 @@ class fp_minmax_header extends dbObject {
 				 org_v.org_id, org_v.currency_code, org_v.business_org_id, cic.standard_cost, cic.purchase_price,
 				 item.minmax_min_quantity, item.minmax_max_quantity, item.minmax_multibin_number, item.minmax_multibin_size, 
 				 item.minimum_order_quantity, item.fix_lot_multiplier, 
-				 onhand_wo_o.item_id_m as item_id_m , onhand_wo_o.onhand as onhand, onhand_wo_o.open_wo as open_wo,
+				 onhand_wo_o.item_id as item_id , onhand_wo_o.onhand as onhand, onhand_wo_o.open_wo as open_wo,
 								open_po_req_o.open_req open_req , open_po_req_o.open_po as open_po, open_po_req_o.open_req_intf as open_req_intf,
 							 (IFNULL(onhand_wo_o.onhand,0) + IFNULL(onhand_wo_o.open_wo,0) + IFNULL(open_po_req_o.open_req_intf,0) +
 							 IFNULL(open_po_req_o.open_req,0) + IFNULL(open_po_req_o.open_po,0)) as total_supply,
 							 (IFNULL(item.pre_processing_lt,0) + IFNULL(item.post_processing_lt,0) + 
 							 IFNULL(item.processing_lt,0)) as leadtime
 					FROM (
-						 SELECT onhand_wo.item_id_m as item_id_m , onhand_wo.onhand as onhand, onhand_wo.open_wo as open_wo
+						 SELECT onhand_wo.item_id as item_id , onhand_wo.onhand as onhand, onhand_wo.open_wo as open_wo
 						 FROM (
-						 SELECT item.item_id_m as item_id_m, oh.onhand as onhand, wwh.open_wo as open_wo
+						 SELECT item.item_id as item_id, oh.onhand as onhand, wwh.open_wo as open_wo
 						 FROM item 
-						 LEFT JOIN (SELECT item_id_m, sum(onhand) as onhand from onhand  GROUP BY item_id_m) oh ON oh.item_id_m = item.item_id_m
-						 LEFT JOIN ( SELECT item_id_m, sum(nettable_quantity - IFNULL(completed_quantity,0) - IFNULL(scrapped_quantity,0))as open_wo 
-						 from wip_wo_header  GROUP BY item_id_m) wwh ON wwh.item_id_m = item.item_id_m
+						 LEFT JOIN (SELECT item_id, sum(onhand) as onhand from onhand  GROUP BY item_id) oh ON oh.item_id = item.item_id
+						 LEFT JOIN ( SELECT item_id, sum(nettable_quantity - IFNULL(completed_quantity,0) - IFNULL(scrapped_quantity,0))as open_wo 
+						 from wip_wo_header  GROUP BY item_id) wwh ON wwh.item_id = item.item_id
 						 WHERE  item.planning_method = 'MULTI_MINMAX' OR item.planning_method = 'MINMAX'
 						 ) onhand_wo
 					)onhand_wo_o
 
 				 LEFT JOIN (
-											SELECT open_po_req.item_id_m as item_id_m, open_po_req.open_req open_req , open_po_req.open_po as open_po,
+											SELECT open_po_req.item_id as item_id, open_po_req.open_req open_req , open_po_req.open_po as open_po,
 											open_po_req.open_req_intf as open_req_intf
 										 FROM (
-										 SELECT item.item_id_m as item_id_m,  prv.open_req as open_req, pav.open_po as open_po, 
+										 SELECT item.item_id as item_id,  prv.open_req as open_req, pav.open_po as open_po, 
 										 proi.open_req_intf as open_req_intf
 										 FROM item 
-										 LEFT JOIN (SELECT item_id_m, SUM(open_quantity) as open_po from po_all_v  GROUP BY item_id_m) pav ON pav.item_id_m = item.item_id_m
-										 LEFT JOIN ( SELECT item_id_m, sum(quantity)as open_req from po_requisition_all_v WHERE order_number = '' OR order_number IS NULL GROUP BY item_id_m) prv ON prv.item_id_m = item.item_id_m
-										 LEFT JOIN ( SELECT item_id_m, sum(quantity)as open_req_intf from po_requisition_interface GROUP BY item_id_m) proi ON proi.item_id_m = item.item_id_m
+										 LEFT JOIN (SELECT item_id, SUM(open_quantity) as open_po from po_all_v  GROUP BY item_id) pav ON pav.item_id = item.item_id
+										 LEFT JOIN ( SELECT item_id, sum(quantity)as open_req from po_requisition_all_v WHERE order_number = '' OR order_number IS NULL GROUP BY item_id) prv ON prv.item_id = item.item_id
+										 LEFT JOIN ( SELECT item_id, sum(quantity)as open_req_intf from po_requisition_interface GROUP BY item_id) proi ON proi.item_id = item.item_id
 										 WHERE  item.planning_method = 'MULTI_MINMAX' OR item.planning_method = 'MINMAX'
 										 ) open_po_req 
 					 )open_po_req_o 
-				 ON onhand_wo_o.item_id_m = open_po_req_o.item_id_m
-				 LEFT JOIN item ON item.item_id_m = open_po_req_o.item_id_m
+				 ON onhand_wo_o.item_id = open_po_req_o.item_id
+				 LEFT JOIN item ON item.item_id = open_po_req_o.item_id
 				 LEFT JOIN org_v ON org_v.org_id = item.org_id
-				 LEFT JOIN cst_item_cost_v cic ON cic.item_id_m = item.item_id_m
-				 WHERE item.item_id_m = :item_id_m 
+				 LEFT JOIN cst_item_cost_v cic ON cic.item_id = item.item_id
+				 WHERE item.item_id = :item_id 
 				 AND cic.bom_cost_type = 'FROZEN';
 				 LIMIT 1 
 ";
 
-	$param_a = ['item_id_m'];
-	$value_a = [ 'item_id_m' => $item_id_m];
+	$param_a = ['item_id'];
+	$value_a = [ 'item_id' => $item_id];
 	$result = $db->findBy_sql($sql, $param_a, $value_a);
 	return !empty($result) ? array_pop($result) : false;
 //insert into requisition interface
  }
 
- private function _create_supply_for_minmax($item_id_m) {
+ private function _create_supply_for_minmax($item_id) {
 	if (isset($all_attributes)) {
 	 unset($all_attributes);
 	}
-	$all_attributes = $this->_get_minmax_attributes($item_id_m);
+	$all_attributes = $this->_get_minmax_attributes($item_id);
 	if (!$all_attributes) {
 	 return;
 	}
@@ -421,7 +421,7 @@ class fp_minmax_header extends dbObject {
 		$po_req_interface->po_requisition_type = 'EXTERNAL';
 		$po_req_interface->line_type = 'GOODS';
 		$po_req_interface->requisition_status = 'APPROVED';
-		$po_req_interface->item_id_m = $obj->item_id_m;
+		$po_req_interface->item_id = $obj->item_id;
 		$po_req_interface->uom_id = $obj->uom_id;
 		$po_req_interface->item_description = $obj->item_description;
 		$po_req_interface->currency = $obj->currency_code;
@@ -439,7 +439,7 @@ class fp_minmax_header extends dbObject {
 	$po_req_interface->po_requisition_type = 'EXTERNAL';
 	$po_req_interface->line_type = 'GOODS';
 	$po_req_interface->requisition_status = 'APPROVED';
-	$po_req_interface->item_id_m = $obj->item_id_m;
+	$po_req_interface->item_id = $obj->item_id;
 	$po_req_interface->uom_id = $obj->uom_id;
 	$po_req_interface->item_description = $obj->item_description;
 	$po_req_interface->currency = $obj->currency_code;
@@ -456,7 +456,7 @@ class fp_minmax_header extends dbObject {
 	$woh = new wip_wo_header();
 
 	$woh->org_id = $obj->org_id;
-	$woh->item_id_m = $obj->item_id_m;
+	$woh->item_id = $obj->item_id;
 	$woh->wo_type = 'STANDARD';
 	$woh->wip_accounting_group_id = 1;
 	$woh->wo_status = 'UN_RELEASED';
@@ -487,36 +487,36 @@ class fp_minmax_header extends dbObject {
 	 $this->message .= '<br> Entered planning method is : ' . $planning_method;
 	}
 
-	if (!empty($parameters['item_id_m'][0])) {
+	if (!empty($parameters['item_id'][0])) {
 	 $this->message .= "<br/>Using Min Max program by Item Id ";
-	 $item_id_m = $parameters['item_id_m'][0];
+	 $item_id = $parameters['item_id'][0];
 	 try {
-		$op = $this->_create_supply_for_minmax($item_id_m);
+		$op = $this->_create_supply_for_minmax($item_id);
 		array_push($output_a, $op);
-		$this->message .= "<br/> Min Max Planner is sucessfully updated for item_id_m - " . $item_id_m;
+		$this->message .= "<br/> Min Max Planner is sucessfully updated for item_id - " . $item_id;
 	 } catch (Exception $e) {
-		$this->message .= "<br/> Min Max Planner fialed for Item id " . $item_id_m . $e->getMessage();
+		$this->message .= "<br/> Min Max Planner fialed for Item id " . $item_id . $e->getMessage();
 	 }
 	 return $this->message;
 	}
 
-	if (!empty($parameters['from_item_id_m'][0])) {
+	if (!empty($parameters['from_item_id'][0])) {
 	 $this->message .= "<br/>Using  Min Max Planner by Item Id Range ";
-	 $from_item_id_m = $parameters['from_item_id_m'][0];
-	 if (!empty($parameters['to_item_id_m'][0])) {
-		$to_item_id_m = $parameters['to_item_id_m'][0];
+	 $from_item_id = $parameters['from_item_id'][0];
+	 if (!empty($parameters['to_item_id'][0])) {
+		$to_item_id = $parameters['to_item_id'][0];
 	 } else {
-		$to_item_id_m = $from_item_id_m;
+		$to_item_id = $from_item_id;
 	 }
 	 $item = new item();
-	 $item_range = $item->findBy_itemIdRange($from_item_id_m, $to_item_id_m);
+	 $item_range = $item->findBy_itemIdRange($from_item_id, $to_item_id);
 	 foreach ($item_range as $items) {
 		try {
-		 $op = $this->_create_supply_for_minmax($items->item_id_m);
+		 $op = $this->_create_supply_for_minmax($items->item_id);
 		 array_push($output_a, $op);
-		 $this->message .= "<br>Min Max Program is sucessfully updated for item_id_m - " . $items->item_id_m;
+		 $this->message .= "<br>Min Max Program is sucessfully updated for item_id - " . $items->item_id;
 		} catch (Exception $e) {
-		 $this->message .= "<br>Min Max Program failed for Item id " . $items->item_id_m . $e->getMessage();
+		 $this->message .= "<br>Min Max Program failed for Item id " . $items->item_id . $e->getMessage();
 		}
 	 }
 	 return $this->message;
@@ -534,11 +534,11 @@ class fp_minmax_header extends dbObject {
 
 	 foreach ($item_range as $items) {
 		try {
-		 $op = $this->_create_supply_for_minmax($items->item_id_m);
+		 $op = $this->_create_supply_for_minmax($items->item_id);
 		 array_push($output_a, $op);
-		 $this->message .= "<br>Min Max Planner is sucessfully updated for item_id_m - " . $items->item_id_m;
+		 $this->message .= "<br>Min Max Planner is sucessfully updated for item_id - " . $items->item_id;
 		} catch (Exception $e) {
-		 $this->message .= "<br>Min Max Program failed for Item id " . $items->item_id_m . $e->getMessage();
+		 $this->message .= "<br>Min Max Program failed for Item id " . $items->item_id . $e->getMessage();
 		}
 	 }
 	 return $this->message;
@@ -550,13 +550,13 @@ class fp_minmax_header extends dbObject {
 	$this->message .= "<br/>Using  Min Max Planner for All Items ";
 	foreach ($item_i as $items) {
 	 try {
-		$op = $this->_create_supply_for_minmax($items->item_id_m);
+		$op = $this->_create_supply_for_minmax($items->item_id);
 		if (!empty($op)) {
 		 array_push($output_a, $op);
 		}
-		$this->message .= "<br>Min Max Program is sucessfully updated for item_id_m - " . $items->item_id_m;
+		$this->message .= "<br>Min Max Program is sucessfully updated for item_id - " . $items->item_id;
 	 } catch (Exception $e) {
-		$this->message .= "<br>Min Max Plannerp failed for Item id " . $items->item_id_m . $e->getMessage();
+		$this->message .= "<br>Min Max Plannerp failed for Item id " . $items->item_id . $e->getMessage();
 	 }
 	}
 

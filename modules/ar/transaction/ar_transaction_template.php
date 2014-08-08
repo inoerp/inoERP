@@ -16,39 +16,38 @@
 				<div id="tabsHeader">
          <ul class="tabMain">
           <li><a href="#tabsHeader-1">Basic Info</a></li>
-					<li><a href="#tabsHeader-2">Basic-2</a></li>
-          <li><a href="#tabsHeader-3">Finance</a></li>
-					<li><a href="#tabsHeader-4">Summary</a></li>
-					<li><a href="#tabsHeader-5">Receipts</a></li>
-					<li><a href="#tabsHeader-6">Notes</a></li>
-					<li><a href="#tabsHeader-7">Attachments</a></li>
-					<li><a href="#tabsHeader-8">Actions</a></li>
+          <li><a href="#tabsHeader-2">Finance</a></li>
+					<li><a href="#tabsHeader-3">Transaction Summary</a></li>
+					<li><a href="#tabsHeader-4">Payments</a></li>
+					<li><a href="#tabsHeader-5">Notes</a></li>
+					<li><a href="#tabsHeader-6">Attachments</a></li>
+					<li><a href="#tabsHeader-7">Actions</a></li>
          </ul>
 				 <div class="tabContainer">
 					<div id="tabsHeader-1" class="tabContent">
 					 <div class="large_shadow_box"> 
 						<ul class="column five_column">
-						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_transaction_header_id select_popup clickable">
+						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_transaction_header_id select_popup">
 							 Transaction Id : </label>
 							<?php $f->text_field_d('ar_transaction_header_id'); ?>
-							<a name="show" href="form.php?class_name=ar_transaction_header" class="show ar_transaction_header_id">	<img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
+							<a name="show" href="po.php?ar_transaction_header_id=" class="show ar_transaction_header_id">
+							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
 						 <li><label>Transaction No : </label>
-							<?php $f->text_field_d('transaction_number', 'primary_column2'); ?>
+							<?php $f->text_field_d('transaction_number','primary_column2'); ?>
 						 </li>
 						 <li><label>BU Name(1) : </label>
 							<?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>
+							<a name="show" href="form.php?class_name=ar_transaction_header" class="show bu_org_id">
+							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
-						 <li><label>Transaction Type(2) : </label>
-							<?php echo $f->select_field_from_object('transaction_type', ar_transaction_type::find_all(), 'ar_transaction_type_id', 'ar_transaction_type', $$class->transaction_type, 'transaction_type', '', 1, $readonly1); ?>
-						 </li>
-						 <li><label>Ledger Name : </label>
+						 <li><label>Ledger Name(2) : </label>
 							<?php echo form::select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', $readonly1, '', '', 1); ?>
 						 </li>
-						 <li><label>Currency: </label>
+						 <li><label>Currency(3): </label>
 							<?php echo form::select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'currency', $readonly1, '', '', 1); ?>
 						 </li>
-						 <li><label>Period Name : </label>
+						 <li><label>Period Name(4) : </label>
 							<?php
 							if (!empty($period_name_stmt)) {
 							 echo $period_name_stmt;
@@ -57,32 +56,34 @@
 							}
 							?>
 						 </li>
-						 <li><label>Transaction Class : </label>                      
-							<?php $f->text_field_dr('transaction_class'); ?>
+						 <li><label>Transaction Type(5) : </label>
+							<?php echo $f->select_field_from_object('transaction_type', ar_transaction_header::transaction_types(), 'option_line_code', 'option_line_value', $ar_transaction_header->transaction_type, 'transaction_type', '', 1, $readonly1); ?>
+						 </li>
+						 <li><label>SO Number : </label>                      
+							<?php $f->text_field_dr('sd_so_number'); ?>
 						 </li>
 						 <li><label>Document Date : </label>
-							<?php echo $f->date_fieldFromToday_d('document_date', $$class->document_date, 1) ?>
+							<?php echo form::date_fieldFromToday('document_date', $$class->document_date) ?>
 						 </li>
 						 <li><label>Document Number : </label>
 							<?php echo $f->text_field_d('document_number') ?>
 						 </li>
-						 <li><label>Doc Status : </label>
-							<?php echo $f->select_field_from_array('transaction_status', ar_transaction_header::$transaction_status_a, $$class->transaction_status); ?>
-						 </li> 
-						</ul>
-					 </div>
-					</div>
-					<div id="tabsHeader-2" class="tabContent">
-					 <div class="large_shadow_box"> 
-						<ul class="column five_column">
-						 <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
-							<label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup clickable">
-							 Customer Name : </label> <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
-						 <li><label class="auto_complete">Customer Number : </label><?php $f->text_field_d('customer_number'); ?></li>
-						 <li><label>Customer Site : </label>
-							<?php echo $f->select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
-						 <li><label>SO Number : </label>                      
-							<?php $f->text_field_dr('sd_so_number'); ?>
+						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup">
+						Customer Id(6) : </label>
+							<?php echo $f->text_field_dsrm('ar_customer_id'); ?>
+						 </li>
+						 <li><label class="auto_complete">Customer Name(6) : </label><?php echo $customer_name_stmt; ?></li>
+						 <li><label class="auto_complete">Customer Number(6) : </label><?php echo $customer_number_stmt; ?></li>
+						 <li><label>Customer Site(7) : </label>
+							<?php
+							if ((!empty($customer_site_name_statement))) {
+							 echo $customer_site_name_statement;
+							} else {
+							 ?>
+ 							<Select name="customer_site_id[]" class="customer_site_id select" id="customer_site_id" >
+ 							 <option value="" ></option>
+ 							</select> 
+							<?php } ?>
 						 </li>
 						 <li><label>Ef Id : </label>
 							<?php $f->text_field_d('ef_id'); ?>
@@ -96,46 +97,23 @@
 						 <li><label>Description : </label>
 							<?php $f->text_field_d('description'); ?>
 						 </li> 
-						</ul>					 <div class="left_half shipto address_details">
-						 <ul class="column two_column">
-							<li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
-								Ship To Site Id : </label>
-							 <?php $f->text_field_d('ship_to_id', 'address_id site_address_id'); ?>
-							</li>
-							<li><label>Address Name : </label><?php $f->text_field_dr('ship_to_address_name', 'address_name'); ?></li>
-							<li><label>Address :</label> <?php $f->text_field_dr('ship_to_address', 'address'); ?></li>
-							<li><label>Country  : </label> <?php $f->text_field_dr('ship_to_country', 'country'); ?></li>
-							<li><label>Postal Code  : </label><?php echo $f->text_field_dr('ship_to_postal_code', 'postal_code'); ?></li>
-						 </ul>
-						</div> 
-						<div class="right_half billto address_details">
-						 <ul class="column two_column">
-							<li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
-								Bill To Site Id :</label>
-							 <?php $f->text_field_d('bill_to_id', 'address_id site_address_id'); ?>
-							</li>
-							<li><label>Address Name :</label><?php $f->text_field_dr('bill_to_address_name', 'address_name'); ?> </li>
-							<li><label>Address :</label> <?php $f->text_field_dr('bill_to_address', 'address'); ?></li>
-							<li><label>Country  : </label> <?php $f->text_field_dr('bill_to_country', 'country'); ?></li>
-							<li><label>Postal Code  : </label><?php echo $f->text_field_dr('bill_to_postal_code', 'postal_code'); ?></li>
-						 </ul>
-						</div> 
-
+						</ul>
 					 </div>
 					</div>
-					<div id="tabsHeader-3" class="tabContent">
+					<div id="tabsHeader-2" class="tabContent">
 					 <div> 
-						<ul class="column five_column">
+						<ul class="column four_column">
 						 <li><label>Doc Currency : </label>
-							<?php echo form::select_field_from_object('document_currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->document_currency, 'document_currency', $readonly1, '', '', 1); ?>
+							<?php echo form::select_field_from_object('document_currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->document_currency, 'document_currency', $readonly, '', '', 1); ?>
 						 </li>
 						 <li><label>Payment Term : </label>
-							<?php
-							echo $f->select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, 'payment_term_id', '', 1, $readonly1);
+							<?php 
+							$f->text_field_d('payment_term_id');
+//							echo $f->select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, 'payment_term_id', '', 1, $readonly1);
 							?>
 						 </li>
 						 <li><label>Payment Term Date : </label>
-							<?php echo $f->date_fieldFromToday_d('payment_term_date', $$class->payment_term_date) ?>
+							<?php echo form::date_fieldAnyDay('payment_term_date', $$class->payment_term_date) ?>
 						 </li>
 						 <li><label>Sales Person : </label>
 							<?php $f->text_field_d('sales_person') ?>
@@ -147,36 +125,33 @@
 							<?php $f->text_field_d('exchange_rate'); ?>
 						 </li>
 						 <li><label>Header Amount : </label>
-							<?php form::number_field_d('header_amount'); ?>
+							<?php form::number_field_dm('header_amount'); ?>
 						 </li>
-						 <li><label>Tax Amount : </label>
-							<?php form::number_field_d('tax_amount'); ?>
+						 <li><label>Receipt Amount : </label>
+							<?php form::number_field_dr('receipt_amount'); ?>
 						 </li>
 						 <li><label>Journal Header Id : </label>
-							<?php $f->text_field_dr('gl_journal_header_id'); ?>
+							<?php $f->text_field_d('gl_journal_header_id'); ?>
 						 </li>
-						 <li><label>Receivable Ac: </label><?php $f->ac_field_dm('receivable_ac_id'); ?></li>
+						 <li><label>Receivable Ac: </label><?php form::ac_field_dm('receivable_ac_id'); ?></li>
+						</ul>
+					 </div>
+					</div>
+					<div id="tabsHeader-3" class="tabContent">
+					 <div> 
+						<ul class="column five_column">
+						 <li><label>Receipt Status : </label>                      
+							<span class="button"><?php echo $f->text_field_d('receipt_status'); ?></span>
+						 </li>
 						</ul>
 					 </div>
 					</div>
 					<div id="tabsHeader-4" class="tabContent">
 					 <div> 
-						<ul class="column five_column">
-						 <li><label>Receipt Status : </label>                      
-							<?php echo $f->text_field_dr('receipt_status'); ?>
-						 </li>
-						 <li><label>Receipt Amount : </label>
-							<?php form::number_field_dr('receipt_amount'); ?>
-						 </li>
-						</ul>
-					 </div>
-					</div>
-					<div id="tabsHeader-5" class="tabContent">
-					 <div> 
 
 					 </div>
 					</div>
-					<div id="tabsHeader-6" class="tabContent">
+					<div id="tabsHeader-5" class="tabContent">
 					 <div> 
 						<div id="comments">
 						 <div id="comment_list">
@@ -185,7 +160,7 @@
 						 <?php
 						 $reference_table = 'ar_transaction_header';
 						 $reference_id = $$class->ar_transaction_header_id;
-						 include_once HOME_DIR . '/comment.php';
+						 include_once HOME_DIR . '/extensions/comment/comment.php';
 						 ?>
 						 <div id="new_comment">
 						 </div>
@@ -193,7 +168,7 @@
 					 </div>
 					</div>
 
-					<div id="tabsHeader-7" class="tabContent">
+					<div id="tabsHeader-6" class="tabContent">
 					 <div> 
 						<div id="show_attachment" class="show_attachment">
 						 <div id="file_upload_form">
@@ -202,14 +177,14 @@
 							 <li> <input type="button" value="Attach" form="file_upload" name="attach_submit" id="attach_submit" class="submit button"></li>
 							 <li class="show_loading_small"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/small_loading.gif"/></li>
 							</ul>
-							<div class="uploaded_file_details"></div>
 						 </div>
+						 <div id="uploaded_file_details"></div>
 						 <?php echo file::attachment_statement($file); ?>
 						</div>
 					 </div>
 					</div>
 
-					<div id="tabsHeader-8" class="tabContent">
+					<div id="tabsHeader-7" class="tabContent">
 					 <div> 
 						<ul class="column five_column">
 						 <li><label>Action</label>
@@ -217,7 +192,7 @@
 						 </li>
 						 <li id="document_print"><label>Document Print : </label>
 							<a class="button" target="_blank"
-								 href="modules/ar/transaction/transaction_print.php?ar_transaction_header_id=<?php echo!(empty($$class->ar_transaction_header_id)) ? $$class->ar_transaction_header_id : ""; ?>" >Transaction</a>
+								 href="om_so_print.php?ar_transaction_header_id=<?php echo!(empty($$class->ar_transaction_header_id)) ? $$class->ar_transaction_header_id : ""; ?>" >Transaction</a>
 						 </li>
 						 <li id="document_status"><label>Change Status : </label>
 							<?php echo form::select_field_from_object('approval_status', ar_transaction_header::ar_approval_status(), 'option_line_code', 'option_line_value', $ar_transaction_header->approval_status, 'set_approval_status', $readonly, '', ''); ?>
@@ -259,40 +234,41 @@
 							<th>Line Id</th>
 							<th>Line#</th>
 							<th>Type</th>
+							<th>Item Id</th>
 							<th>Item Number</th>
 							<th>Item Description</th>
 							<th>UOM</th>
 							<th>Quantity</th>
-							<th>Trnx Details</th>
+							<th>Shipment Details</th>
 						 </tr>
 						</thead>
 						<tbody class="form_data_line_tbody">
 						 <?php
 						 $count = 0;
 						 foreach ($ar_transaction_line_object as $ar_transaction_line) {
-//							$f->readonly2 = !empty($ar_transaction_line->ar_transaction_line_id) ? true : false;
+							$f->readonly2 = !empty($ar_transaction_line->ar_transaction_line_id) ? true : false;
 							?>         
  						 <tr class="ar_transaction_line<?php echo $count ?>">
  							<td>    
  							 <ul class="inline_action">
  								<li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add" /></li>
  								<li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove" /> </li>
- 								<li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($ar_transaction_line->ar_transaction_line_id); ?>"></li>           
- 								<li><?php echo form::hidden_field('ar_transaction_header_id', $$class->ar_transaction_header_id); ?></li>
- 								<li><?php echo form::hidden_field('transaction_type', $$class->transaction_type); ?></li>
+ 								<li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($ar_transaction_line->item_description); ?>"></li>           
+ 								<li><?php echo form::hidden_field('ar_transaction_header_id', $ar_transaction_header->ar_transaction_header_id); ?></li>
  							 </ul>
  							</td>
  							<td><?php form::text_field_wid2sr('ar_transaction_line_id'); ?></td>
+ 							<!--<td><?php // form::text_field_wid2s('line_number');                                                 ?></td>-->
  							<td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
- 							<td><?php echo $f->select_field_from_object('line_type', ar_transaction_line::ar_transaction_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, '', 'line_type', '', $readonly1); ?></td>
- 							<td><?php
-								echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
-								$f->text_field_wid2('item_number', 'select_item_number');
-								?>
+ 							<td><?php echo $f->select_field_from_object('line_type', ar_transaction_line::ar_transaction_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, '', 'line_type', '', $readonly); ?></td>
+ 							<td><?php $f->text_field_wid2sr('item_id'); ?></td>
+ 							<td><?php $f->text_field_wid2('item_number', 'select_item_number'); ?>
  							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
- 							<td><?php $f->text_field_wid2m('item_description'); ?></td>
- 							<td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $ar_transaction_line->uom_id); ?></td>
- 							<td><?php form::number_field_wid2sm('inv_line_quantity'); ?></td>
+ 							<td><?php $f->text_field_wid2('item_description'); ?></td>
+ 							<td><?php
+								echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', '', $readonly);
+								?></td>
+ 							<td><?php form::number_field_wid2s('inv_line_quantity'); ?></td>
  							<td class="add_detail_values"><img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
  							 <!--</td></tr>-->	
 								<?php
@@ -308,7 +284,7 @@
 								 array_push($ar_transaction_detail_object, $ar_transaction_detail);
 								}
 								?>
-                                              <!--						 <tr><td>-->
+                                        <!--						 <tr><td>-->
  							 <div class="class_detail_form">
  								<fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
  								 <div class="tabsDetail">
@@ -329,7 +305,6 @@
  											 <th>Period</th>
  											 <th>Amount</th>
  											 <th>Description</th>
- 											 <th>Journal_Created?</th>
  											</tr>
  										 </thead>
  										 <tbody class="form_data_detail_tbody">
@@ -353,12 +328,11 @@
 												 </td>
 												 <td><?php $f->text_field_wid3sr('ar_transaction_detail_id'); ?></td>
 												 <td><?php $f->text_field_wid3s('detail_number'); ?></td>
-												 <td><?php echo $f->select_field_from_object('account_type', gl_journal_line::gl_journal_line_types(), 'option_line_code', 'option_line_value', $$class_third->account_type, '', 'account_type'); ?></td>
-												 <td><?php $f->ac_field_d3('detail_ac_id'); ?></td>
+												 <td><?php echo form::select_field_from_object('account_type', gl_journal_line::gl_journal_line_types(), 'option_line_code', 'option_line_value', $$class_third->account_type, 'account_type', $readonly); ?></td>
+												 <td><?php $f->ac_field_d3m('detail_ac_id'); ?></td>
 												 <td><?php $f->text_field_wid3s('period_id') ?></td>
 												 <td><?php $f->text_field_wid3s('amount'); ?></td>
 												 <td><?php $f->text_field_wid3('description'); ?></td>
-												 <td><?php echo $f->checkBox_field('journal_created_cb', $$class_third->journal_created_cb, '', '', 1); ?></td>
 												</tr>
 												<?php
 												$detailCount++;
@@ -419,8 +393,6 @@
 						 <tr>
 							<th>Unit Price</th>
 							<th>Line Price</th>
-							<th>Tax Code</th>
-							<th>Tax Amount</th>
 							<th>Line Description</th>
 							<th>Ref Key Name</th>
 							<th>Ref Key Value</th>
@@ -434,10 +406,8 @@
 						 foreach ($ar_transaction_line_object as $ar_transaction_line) {
 							?>         
  						 <tr class="ar_transaction_line<?php echo $count ?>">
- 							<td><?php form::number_field_wid2m('inv_unit_price'); ?></td>
- 							<td><?php form::text_field_wid2m('inv_line_price'); ?></td>
- 							<td><?php echo $f->select_field_from_object('tax_code_id', mdm_tax_code::find_all_outTax_by_bu_org_id($$class->bu_org_id), 'mdm_tax_code_id', 'tax_code', $$class_second->tax_code_id, '', 'output_tax medium', '', '', '', '', '', 'percentage') ?></td>
- 							<td><?php form::number_field_wid2('tax_amount'); ?></td>
+ 							<td><?php form::number_field_wid2('inv_unit_price'); ?></td>
+ 							<td><?php form::text_field_wid2('inv_line_price'); ?></td>
  							<td><?php $f->text_field_wid2('line_description'); ?></td>
  							<td><?php $f->text_field_d2('reference_key_name'); ?></td>
  							<td><?php $f->text_field_d2('reference_key_value'); ?></td>

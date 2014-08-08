@@ -36,14 +36,14 @@ if (!empty($wip_wo_header_id)) {
  $count = 0;
  if (!empty($wip_wo_bom_object)) {
 	foreach ($wip_wo_bom_object as $wip_wo_bom) {
-	 $item = item::find_by_id($wip_wo_bom->component_item_id_m);
+	 $item = item::find_by_id($wip_wo_bom->component_item_id);
 	 $$class_second->component_item_number = $item->item_number;
 	 $$class_second->component_description = $item->item_description;
 	 $$class_second->component_uom = $item->uom_id;
 	 $hidden_stmt .= "<tr class='$wip_wo_bom->bom_sequence'>";
 	 $hidden_stmt .= "<td>" . form::text_field('wip_wo_bom_id', $$class_second->wip_wo_bom_id, '8', '50', 1, '', '', 1, 'wip_wo_bom_id') . "</td>";
 	 $hidden_stmt .= "<td>" . form::text_field('bom_sequence', $$class_second->bom_sequence, '8', '50', 1, '', '', 1, 'bom_sequence') . "</td>";
-	 $hidden_stmt .= "<td>" . form::text_field('component_item_id_m', $$class_second->component_item_id_m, '8', '50', 1, '', '', 1, 'item_id_m') . "</td>";
+	 $hidden_stmt .= "<td>" . form::text_field('component_item_id', $$class_second->component_item_id, '8', '50', 1, '', '', 1, 'item_id') . "</td>";
 	 $hidden_stmt .= "<td>" . form::text_field('component_item_number', $$class_second->component_item_number, '20', '50', '', '', '', '', 'item_number') . "</td>";
 	 $hidden_stmt .= "<td>" . form::text_field('component_description', $$class_second->component_description, '20', '50', '', '', '', 1, 'item_description') . "</td>";
 	 $hidden_stmt .= "<td>" . form::select_field_from_object('component_uom', uom::find_all(), 'uom_id', 'uom_name', $$class_second->component_uom, '', '', 'uom') . "</td>";

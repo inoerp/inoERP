@@ -47,7 +47,7 @@
 				<div id="tabsHeader-2" class="tabContent">
 				 <div class="large_shadow_box"> 
 					<ul class="column six_column"> 
-					 <li><label>Item Id : </label><?php form::text_field_drm('item_id_m'); ?></li>
+					 <li><label>Item Id : </label><?php form::text_field_drm('item_id'); ?></li>
 					 <li><label>Item Number : </label><?php form::text_field_dr('item_number'); ?></li>
 					 <li><label>Description: </label><?php form::text_field_widr('item_description'); ?></li>
 					 <li><label>UOM : </label>

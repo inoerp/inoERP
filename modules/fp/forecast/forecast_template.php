@@ -72,9 +72,8 @@
 							<th>Action</th>
 							<th>Seq#</th>
 							<th>Line Id</th>
+							<th>Item Id</th>
 							<th>Item Number</th>
-							<th>Description</th>
-							<th>UOM</th>
 							<th>Bucket</th>
 							<th>Start Date</th>
 							<th>End Date</th>
@@ -97,14 +96,16 @@
  							</td>
  							<td><?php $f->seq_field_d($count); ?></td>
  							<td><?php form::text_field_wid2sr('fp_forecast_line_id'); ?></td>
-							<td><?php echo $f->hidden_field('item_id_m', $$class_second->item_id_m); ?> 
-							 <?php form::text_field_wid2('item_number', 'select_item_number'); ?>
-							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup clickable"></td>
-							<td><?php form::text_field_wid2r('item_description'); ?></td>
- 							 <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small', '', 1); ?></td>
+ 							<td><?php form::text_field_wid2sr('item_id'); ?></td>
+ 							<td><?php form::text_field_wid2('item_number', 'select_item_number'); ?>
+ 							 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
  							<td><?php echo $f->select_field_from_object('bucket_type', fp_forecast_header::fp_bucket(), 'option_line_code', 'option_line_value', $$class_second->bucket_type, '', '', 1, $readonly); ?></td>
+ 							<!--<td><?php //  echo $f->date_fieldAnyDay('start_date', $$class_second->start_date);  ?></td>-->
+<!-- 							<td><?php // $f = new inoform();
+//						 echo $f->text_field('start_date', $$class_second->start_date, '15', '', 'date'); ?></td>-->
 							<td><?php   echo $f->date_fieldAnyDay('start_date', $$class_second->start_date);  ?></td>
  							<td><?php   echo $f->date_fieldAnyDay('end_date', $$class_second->end_date);  ?></td>
+ 							<!--<td><?php // $f->text_field_wid2('end_date'); ?></td>-->
  							<td><?php $f->text_field_wid2s('no_of_bucket'); ?></td>
  						 </tr>
 							<?php

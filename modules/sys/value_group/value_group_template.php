@@ -24,7 +24,7 @@
 						<div class="large_shadow_box"> 
 						 <ul class="column five_column">
 							<li>
-							 <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sys_value_group_header_id select_popup clickable">
+							 <label><img id="sys_value_group_header_id_popup" class="showPointer popup" src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
 								Value Group Id : </label>
 							 <?php echo form::number_field_drs('sys_value_group_header_id'); ?>
 							 <a name="show" class="show sys_value_group_header_id">
@@ -131,8 +131,8 @@
  							 </td>
  							 <td><?php form::number_field_wid2sr('sys_value_group_line_id'); ?></td>
  							 <td><?php form::text_field_wid2sm('code') ?></td>
- 							 <td><?php form::text_field_wid2('code_value') ?></td>
- 							 <td><?php form::text_field_wid2('description') ?></td>
+ 							 <td><?php form::text_field_wid2s('code_value') ?></td>
+ 							 <td><?php form::text_field_wid2s('description') ?></td>
  							 <td><?php echo form::status_field_d2('status'); ?></td>
  							 <td><?php echo form::date_field('effective_start_date', $$class_second->effective_start_date, '10', '', '', ''); ?></td>
  							 <td><?php echo form::date_field('effective_end_date', $$class_second->effective_end_date, '10', '', '', ''); ?></td>

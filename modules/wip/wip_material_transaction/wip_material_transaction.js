@@ -46,8 +46,8 @@ $(document).ready(function() {
 	var transaction_type_id = $('#transaction_type_id').val();
 	$(this).closest('tr').find('.wip_wo_bom_id').val(bomId);
 
-	var itemId = $('#allData tr.' + bomSeq).find('.component_item_id_m_m').val();
-	$(this).closest('tr').find('.item_id_m_m').val(itemId);
+	var itemId = $('#allData tr.' + bomSeq).find('.component_item_id').val();
+	$(this).closest('tr').find('.item_id').val(itemId);
 
 	var item_number = $('#allData tr.' + bomSeq).find('.component_item_number').val();
 	$(this).closest('tr').find('.item_number').val(item_number);
@@ -183,10 +183,10 @@ $(document).ready(function() {
 	addNewRow.add_new_row();
  });
  
-// save('../../inv/inv_transaction/json.inv_transaction.php', '#inv_transaction', 'inv_transaction_id_cb', 'item_id_m_m', '#inv_transaction_id');
+// save('../../inv/inv_transaction/json.inv_transaction.php', '#inv_transaction', 'inv_transaction_id_cb', 'item_id', '#inv_transaction_id');
  var classSave = new saveMainClass();
  classSave.json_url = 'form.php?class_name=wip_material_transaction';
- classSave.line_key_field = 'item_id_m_m';
+ classSave.line_key_field = 'item_id';
  classSave.single_line = false;
  classSave.savingOnlyHeader = false;
  classSave.lineClassName = 'wip_material_transaction';

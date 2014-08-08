@@ -6,6 +6,10 @@
 	 <div id="content">
 		<div id="structure">
 		 <div id="inv_transaction_divId">
+			<div id="inv_transaction_searchId">
+			</div>
+			<div id="form_top">
+			</div>
 			<!--    START OF FORM HEADER-->
 			<div class="error"></div><div id="loading"></div>
 			<div class="show_loading_small"></div>
@@ -17,19 +21,21 @@
 			 <form action=""  method="post" id="inv_transaction"  name="inv_transaction">
         <!--create empty form or a single id when search is not clicked and the id is referred from other page -->
         <span class="heading">Inventory Transaction </span> 
-        <ul id="form_top_ul" class="inRow asperWidth headerBgColor">
-         <li><lable>Inventory Org </lable>
+        <table class="form_table">
+         <tr>
+          <td><lable>Inventory Org </lable>
 				 <?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly); ?>
-         </li>
-         <li><lable>Transaction Type </lable>
+         </td>
+         <td><lable>Transaction Type </lable>
 				 <?php
 				 echo!(empty($id_array)) ? form::select_field_from_object('transaction_type_id', transaction_type::find_some_byIdArray($id_array), 'transaction_type_id', 'transaction_type', $$class->transaction_type_id, 'transaction_type_id', $readonly) :
 								 form::select_field_from_object('transaction_type_id', transaction_type::find_all(), 'transaction_type_id', 'transaction_type', $$class->transaction_type_id, 'transaction_type_id', 1);
 				 ?>
-         </li>
-        </ul>
+         </td>
+         </tr>
+        </table>
 				<div id ="form_line" class="form_line"><span class="heading">Transaction Details </span>
-				 <div id="tabsLine">
+				 <div id="tabs">
 					<ul class="tabMain">
 					 <li><a href="#tabsLine-1">General Info</a></li>
 					 <li><a href="#tabsLine-2">Transfer </a></li>
@@ -65,16 +71,16 @@
 								</ul>
 							 </td>
 							 <td>
-								<?php echo $f->text_field_dsr('inv_transaction_id', 'lineId'); ?>
+								<?php echo form::text_field('inv_transaction_id', $$class->inv_transaction_id, '7', '20', '', 'sys no', '', 1); ?>
 							 </td>
-							 <td><?php $f->text_field_widsr('item_id_m'); ?></td>
-							 <td><?php $f->text_field_widm('item_number', 'select_item_number'); ?>
+							 <td><?php $f->text_field_widsr('item_id'); ?></td>
+							 <td><?php $f->text_field_wid('item_number', 'select_item_number'); ?>
 								<img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
 							 <td><?php $f->text_field_wid('item_description'); ?></td>
 							 <td>
 								<?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, 'uom_id', $readonly); ?>
 							 </td>
-							 <td><?php form::text_field_widsm('quantity'); ?></td>
+							 <td><?php form::text_field_wids('quantity'); ?></td>
               </tr>
 						 </tbody>
 						</table>

@@ -1,5 +1,5 @@
-function setValFromSelectPage(item_id_m, item_number, item_description, uom_id, bom_routing_header_id) {
- this.item_id_m = item_id_m;
+function setValFromSelectPage(item_id, item_number, item_description, uom_id, bom_routing_header_id) {
+ this.item_id = item_id;
  this.item_number = item_number;
  this.item_description = item_description;
  this.uom_id = uom_id;
@@ -9,7 +9,7 @@ function setValFromSelectPage(item_id_m, item_number, item_description, uom_id, 
 setValFromSelectPage.prototype.setVal = function() {
  var bom_routing_header_id = this.bom_routing_header_id;
 
- var item_obj = [{id: 'item_id_m', data: this.item_id_m},
+ var item_obj = [{id: 'item_id', data: this.item_id},
 	{id: 'item_number', data: this.item_number},
 	{id: 'item_description', data: this.item_description},
 	{id: 'uom_id', data: this.uom_id}
@@ -56,7 +56,7 @@ $(document).ready(function() {
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- $(".item_id_m.select_popup").on("click", function() {
+ $(".item_id.select_popup").on("click", function() {
 	void window.open('select.php?class_name=item', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });

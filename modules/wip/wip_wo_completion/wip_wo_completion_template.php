@@ -43,7 +43,7 @@
          </tr>
         </table>
 				<div id ="form_line" class="form_line"><span class="heading">Work Order Details </span>
-				 <div id="tabsLine">
+				 <div id="tabs">
 					<ul class="tabMain">
 					 <li><a href="#tabsLine-1">General Info</a></li>
 					 <li><a href="#tabsLine-2">Transfer Info</a></li>
@@ -72,11 +72,11 @@
 								<ul class="inline_action">
 								 <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
 								 <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-								 <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class_second->item_id_m_m); ?>"></li>           
+								 <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class_second->bom_sequence); ?>"></li>           
 								</ul>
 							 </td>
 							 <td>
-								<?php form::text_field_widsr('item_id_m_m'); ?>
+								<?php form::text_field_widsr('item_id'); ?>
 							 </td>
 							 <td>
 								<?php form::text_field_drm('item_number'); ?> 

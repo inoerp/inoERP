@@ -5,7 +5,7 @@ class fp_mrp_planned_order extends dbObject {
  public static $table_name = "fp_mrp_planned_order";
  public static $primary_column = "fp_mrp_planned_order_id";
  public static $parent_primary_column = "fp_mrp_header_id";
- public static $key_column = 'item_id_m';
+ public static $key_column = 'item_id';
  public static $module = "fp";
  public $field_a = [
 		 'fp_mrp_planned_order_id',
@@ -13,13 +13,13 @@ class fp_mrp_planned_order extends dbObject {
 		 'fp_mrp_header_id',
 		 'order_type',
 		 'order_action',
-		 'item_id_m',
+		 'item_id',
 		 'quantity',
 		 'need_by_date',
 		 'supplier_id',
 		 'supplier_site_id',
-		 'demand_item_id_m',
-		 'toplevel_demand_item_id_m',
+		 'demand_item_id',
+		 'toplevel_demand_item_id',
 		 'source_type',
 		 'primary_source_type',
 		 'source_header_id',
@@ -38,13 +38,13 @@ class fp_mrp_planned_order extends dbObject {
 		 'org_id',
 		 'order_type',
 		 'order_action',
-		 'item_id_m',
+		 'item_id',
 		 'quantity',
 		 'need_by_date',
 		 'supplier_id',
 		 'supplier_site_id',
-		 'demand_item_id_m',
-		 'toplevel_demand_item_id_m',
+		 'demand_item_id',
+		 'toplevel_demand_item_id',
 		 'source_type',
 		 'primary_source_type',
 		 'source_header_id',
@@ -54,7 +54,7 @@ class fp_mrp_planned_order extends dbObject {
 		 'fp_mrp_header_id',
 		 'org_id',
 		 'order_type',
-		 'item_id_m',
+		 'item_id',
 		 'quantity',
 		 'need_by_date'
  ];
@@ -75,11 +75,11 @@ class fp_mrp_planned_order extends dbObject {
  public $org_id;
  public $order_type;
  public $order_action;
- public $item_id_m;
+ public $item_id;
  public $need_by_date;
  public $quantity;
- public $demand_item_id_m;
- public $toplevel_demand_item_id_m;
+ public $demand_item_id;
+ public $toplevel_demand_item_id;
  public $source_type;
  public $primary_source_type;
  public $source_header_id;
@@ -95,7 +95,7 @@ class fp_mrp_planned_order extends dbObject {
 	$excp = new fp_mrp_exception();
 	$excp->org_id = $org_id;
 	$excp->fp_mrp_header_id = $this->fp_mrp_header_id;
-	$excp->item_id_m = $this->item_id_m;
+	$excp->item_id = $this->item_id;
 	$excp->exception_type = $exception_type;
 	$excp->exception_message = $exception_msg;
 	$excp->detailed_message = $detailed_message;
@@ -147,9 +147,9 @@ class fp_mrp_planned_order extends dbObject {
 	return $final_demand_a;
  }
 
- public function modify_orderQuantity_asPerModifiers($item_id_m, $quantity) {
+ public function modify_orderQuantity_asPerModifiers($item_id, $quantity) {
 	$item = new item();
-	$item->findBy_id($item_id_m);
+	$item->findBy_id($item_id);
 	if (!empty($item->minimum_order_quantity)) {
 	 if ($quantity < $item->minimum_order_quantity) {
 		$quantity = $item->minimum_order_quantity;
@@ -163,11 +163,11 @@ class fp_mrp_planned_order extends dbObject {
 	return $quantity;
  }
 
- public function create_planned_orders($item_id_m, $fp_mrp_header_id) {
+ public function create_planned_orders($item_id, $fp_mrp_header_id) {
 	$mrpd = new fp_mrp_demand();
 	$item = new item();
-	$item->findBy_id($item_id_m);
-	$mrp_d = $mrpd->findBy_ItemId_HeaderId($item_id_m, $fp_mrp_header_id);
+	$item->findBy_id($item_id);
+	$mrp_d = $mrpd->findBy_ItemId_HeaderId($item_id, $fp_mrp_header_id);
 	if (empty($mrp_d)) {
 	 return;
 	}
@@ -175,7 +175,7 @@ class fp_mrp_planned_order extends dbObject {
 //	pa($mrp_d);
 	$mrpexsup = new fp_mrp_existing_supply_v();
 
-	$mrp_supp = $mrpexsup->findBy_ItemId($item_id_m);
+	$mrp_supp = $mrpexsup->findBy_ItemId($item_id);
 //		echo "<h2>Supply </h2>";
 //	pa($mrp_supp);
 	$onhand = 0;
@@ -203,16 +203,15 @@ class fp_mrp_planned_order extends dbObject {
 	 $mrp_d_f = $mrp_d;
 	 echo "<br> No Merging of demand for " . $item->item_number;
 	}
-	
-		foreach ($mrp_d_f as $demand) {
+	foreach ($mrp_d_f as $demand) {
 	 $demand_date = new DateTime($demand->demand_date);
 	 //ignore past due forecasts and raise past due exception for sales orders
 	 if ($today > $demand_date) {
 		if (( $demand->primary_source_type == 'Forecast' ) || ($demand->source_type == 'Forecast')) {
 		 continue;
 		} else {
-		 $msg = "Item $item->item_number (id : $item_id_m) is past due";
-		 $detailed_msg = "Item $item->item_number (id : $item_id_m) is past due "
+		 $msg = "Item $item->item_number (id : $item_id) is past due";
+		 $detailed_msg = "Item $item->item_number (id : $item_id) is past due "
 						 . " Demand date was $demand->demand_date ";
 		 $this->_create_exception('PAST_DUE', $msg, $detailed_msg, $demand->org_id);
 		}
@@ -246,21 +245,21 @@ class fp_mrp_planned_order extends dbObject {
 
 	 $order_quantity = $demand->quantity;
 	 //modify the $order_quantity as per FLM & MOQ
-    $order_quantity_m = $this->modify_orderQuantity_asPerModifiers($item_id_m, $order_quantity);
+    $order_quantity_m = $this->modify_orderQuantity_asPerModifiers($item_id, $order_quantity);
 		$total_open_q += $order_quantity_m - $order_quantity;
 
 	 $plo = new fp_mrp_planned_order();
 	 $plo->fp_mrp_planned_order_id = null;
 	 $plo->fp_mrp_header_id = $demand->fp_mrp_header_id;
 	 $plo->org_id = $demand->org_id;
-	 $plo->item_id_m = $demand->item_id_m;
-	 $item = item::find_by_id($plo->item_id_m);
+	 $plo->item_id = $demand->item_id;
+	 $item = item::find_by_id($plo->item_id);
 	 $plo->order_type = ($item->make_buy == 'Make') ? 'WO' : 'Requisition';
 	 $plo->order_action = 'Release';
 	 $plo->quantity = $order_quantity_m;
 	 $plo->need_by_date = $demand->demand_date;
-	 $plo->demand_item_id_m = $demand->demand_item_id_m;
-	 $plo->toplevel_demand_item_id_m = $demand->toplevel_demand_item_id_m;
+	 $plo->demand_item_id = $demand->demand_item_id;
+	 $plo->toplevel_demand_item_id = $demand->toplevel_demand_item_id;
 	 $plo->source_type = $demand->source_type;
 	 $plo->primary_source_type = $demand->primary_source_type;
 	 $plo->source_header_id = $demand->source_header_id;
@@ -278,7 +277,7 @@ class fp_mrp_planned_order extends dbObject {
 	 if (($compression_days) > 0) {
 		$msg = 'Planned Order (Id : ' . $plo->fp_mrp_planned_order_id . ') is compressed';
 		$detail_msg = " Planned Order (Id :  " . $plo->fp_mrp_planned_order_id . " for Item " .
-						$item->item_number . " (id : $item_id_m) is compressed by  $compression_days " .
+						$item->item_number . " (id : $item_id) is compressed by  $compression_days " .
 						'  days as on MRP run date';
 		$this->_create_exception('COMPRESSED_LT', $msg, $detail_msg, $demand->org_id);
 	 }
@@ -287,7 +286,7 @@ class fp_mrp_planned_order extends dbObject {
 	if (($total_open_q + $onhand) > 0) {
 	 $tonhand = $total_open_q + $onhand;
 	 $msg = 'Exccess for Item# ' . $item->item_number;
-	 $detail_msg = "Item $item->item_number (id : $item_id_m) is expected to have "
+	 $detail_msg = "Item $item->item_number (id : $item_id) is expected to have "
 					 . " $tonhand excess material in the planning horizon ";
 	 $this->_create_exception('EXCESS', $msg, $detail_msg, $mrp_d[0]->org_id);
 	}

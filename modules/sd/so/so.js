@@ -1,12 +1,12 @@
 function setValFromSelectPage(sd_so_header_id, combination, ar_customer_id, customer_number, customer_name,
-				item_id_m, item_number, item_description, uom_id, address_id, address_name, address,
+				item_id, item_number, item_description, uom_id, address_id, address_name, address,
 				country, postal_code) {
  this.sd_so_header_id = sd_so_header_id;
  this.combination = combination;
  this.ar_customer_id = ar_customer_id;
  this.customer_number = customer_number;
  this.customer_name = customer_name;
- this.item_id_m = item_id_m;
+ this.item_id = item_id;
  this.item_number = item_number;
  this.item_description = item_description;
  this.uom_id = uom_id;
@@ -24,7 +24,7 @@ setValFromSelectPage.prototype.setVal = function() {
  var customer_number = this.customer_number;
  var customer_name = this.customer_name;
  var combination = this.combination;
- var item_id_m = this.item_id_m;
+ var item_id = this.item_id;
  var item_number = this.item_number;
  var item_description = this.item_description;
  var uom_id = this.uom_id;
@@ -41,16 +41,16 @@ setValFromSelectPage.prototype.setVal = function() {
  if (address_id) {
 	$('#form_header').find(addressPopupDivClass).find('.address_id').val(address_id);
  }
- if (address_name) {
+  if (address_name) {
 	$('#form_header').find(addressPopupDivClass).find('.address_name').val(address_name);
  }
- if (address) {
+  if (address) {
 	$('#form_header').find(addressPopupDivClass).find('.address').val(address);
  }
- if (country) {
+  if (country) {
 	$('#form_header').find(addressPopupDivClass).find('.country').val(country);
  }
- if (postal_code) {
+  if (postal_code) {
 	$('#form_header').find(addressPopupDivClass).find('.postal_code').val(postal_code);
  }
  if (sd_so_header_id) {
@@ -70,8 +70,8 @@ setValFromSelectPage.prototype.setVal = function() {
  if (combination) {
 	$('#content').find(rowClass).find(fieldClass).val(combination);
  }
- if (item_id_m) {
-	$('#content').find(rowClass).find('.item_id_m').val(item_id_m);
+ if (item_id) {
+	$('#content').find(rowClass).find('.item_id').val(item_id);
  }
  if (item_number) {
 	$('#content').find(rowClass).find('.item_number').val(item_number);
@@ -108,7 +108,18 @@ $(document).ready(function() {
 	$('.shipment_number:first').val('1');
  }
 
-get_customer_detail_for_bu();
+// $('.need_by_date:first').datepicker("setDate", new Date());
+// $('.promise_date:first').datepicker("setDate", new Date());
+
+
+
+//get customer details
+ $("#ar_customer_id, #customer_name, #customer_number").on("focusout", function() {
+	if (($("#bu_org_id").val()) && ($('#ar_customer_id').val())) {
+	 var bu_org_id = $("#bu_org_id").val();
+	 getCustomerDetails('modules/ar/customer/json_customer.php', bu_org_id);
+	}
+ });
 
  $("#content").on("change", '#ar_customer_site_id', function() {
 	var customer_site_id = $("#ar_customer_site_id").val();
@@ -164,6 +175,26 @@ get_customer_detail_for_bu();
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
+//selecting customer
+ $(".ar_customer.select_popup").on("click", function() {
+	localStorage.idValue = "";
+	void window.open('select.php?class_name=ar_customer', '_blank',
+					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
+//popu for selecting items
+// $('#content').on('click', '.select_item_number.select_popup', function() {
+//	var rowClass = $(this).closest('tr').prop('class');
+//	var fieldClass = $(this).closest('td').find('.select_item_number').prop('class');
+//	localStorage.setItem("row_class", rowClass);
+//	localStorage.setItem("field_class", fieldClass);
+//	var openUrl = 'select.php?class_name=item';
+//	if ($(this).siblings('.code_combination_id').val()) {
+//	 openUrl += '&item_number=' + $(this).siblings('.item_number').val();
+//	}
+//	void window.open(openUrl, '_blank',
+//					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+// });
 
  //Popup for selecting address 
  $(".address_popup").click(function() {
@@ -209,11 +240,6 @@ get_customer_detail_for_bu();
 	}
  });
 
-//default data from document type
- $('#document_type').on('change', function() {
-	var document_type_id = $(this).val();
-	getDocumentTypeDetails(document_type_id);
- })
 
 //add or show linw details
  addOrShow_lineDetails('tr.so_line0');
@@ -233,9 +259,8 @@ get_customer_detail_for_bu();
 //	add_new_row('tr.so_line0', 'tbody.form_data_line_tbody', 3);
 	var addNewRow = new add_new_rowMain();
 	addNewRow.trClass = 'so_line';
-	addNewRow.divClassToBeCopied = 'copyValue';
 	addNewRow.tbodyClass = 'form_data_line_tbody';
-	addNewRow.noOfTabs = 5;
+	addNewRow.noOfTabs = 3;
 	addNewRow.removeDefault = true;
 	addNewRow.add_new_row();
 	$(".tabsDetail").tabs();
@@ -268,10 +293,9 @@ get_customer_detail_for_bu();
  classContextMenu.trClass = 'so_line';
  classContextMenu.tbodyClass = 'form_data_line_tbody';
  classContextMenu.beforeCopy = beforeContextMenu;
- classContextMenu.noOfTabbs = 5;
+ classContextMenu.noOfTabbs = 4;
  classContextMenu.contextMenu();
 
- deleteData('form.php?class_name=sd_so_header&line_class_name=sd_so_line');
 
  var classSave = new saveMainClass();
  classSave.json_url = 'form.php?class_name=sd_so_header';
@@ -294,26 +318,17 @@ get_customer_detail_for_bu();
 	}
  });
 
-//price from price list
- $('#content').on('change', '.item_id_m, .item_number, .price_list_header_id, .price_date', function() {
-	var rowClass = '.' + $(this).closest('tr').prop('class');
-	var item_id_m = $(this).closest('.tabContainer').find(rowClass).find('.item_id_m').val();
-	var price_date = $(this).closest('.tabContainer').find(rowClass).find('.price_date').val();
-	var price_list_headerId = $(this).closest('#form_line').find(rowClass).find('.price_list_headerId').val();
-	getPriceDetails(rowClass, item_id_m, price_date, price_list_headerId);
- });
-
 //set the line price
- $('#content').on('blur', '.unit_price,.line_quantity', function() {
+ $('#content').on('change', '.unit_price,.line_quantity', function() {
+	var unitPrice = $(this).val();
 	var trClass = '.' + $(this).closest('tr').attr('class');
-	var unitPrice = +($(this).closest('#form_line').find(trClass).find('.unit_price').val());
-	var lineQuantity = +($(this).closest('#form_line').find(trClass).find('.line_quantity').val());
+	var lineQuantity = ($(this).closest('.tabContainer').find(trClass).find('.line_quantity').val());
 	var linePrice = unitPrice * lineQuantity;
 	$(this).closest('tr').find('.line_price').val(linePrice);
  });
 
 //calculate the tax amount
- $('#content').on('blur', '.line_quantity, .unit_price, .line_price', function() {
+ $('#content').on('change', '.line_quantity, .unit_price, .line_price', function() {
 	var trClass = '.' + $(this).closest('tr').prop('class');
 	var linePrice = +$('#content').find(trClass).find('.line_price').val();
 	var taxCodeVal = 0;
@@ -361,3 +376,4 @@ get_customer_detail_for_bu();
  });
 
 });
+

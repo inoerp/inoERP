@@ -44,7 +44,7 @@
 							 <?php echo $f->select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_orgId($$class->org_id),'wip_accounting_group_id', 'wip_accounting_group', $$class->wip_accounting_group_id,'wip_accounting_group_id','',1,'readonly1' ); ?>
 							 
 							</li>
-							<li><label>Item Id : </label><?php $f->text_field_drm('item_id_m'); ?>
+							<li><label>Item Id : </label><?php $f->text_field_drm('item_id'); ?>
 							</li>
 							<li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup clickable">Item Number(2) : </label>
 							 <?php $f->text_field_d('item_number', 'select_item_number'); ?>
@@ -123,10 +123,10 @@
 						<div> 
 						 <ul class="column five_column">
 							<li><label>Referenced BOM : </label>
-							 <?php echo form::text_field_d('reference_bom_item_id_m'); ?>
+							 <?php echo form::text_field_d('reference_bom_item_id'); ?>
 							</li>
 							<li><label>Referenced Routing :</label>
-							 <?php echo form::text_field_d('reference_routing_item_id_m'); ?>
+							 <?php echo form::text_field_d('reference_routing_item_id'); ?>
 							</li>
 							<li><label>BOM Exploded :</label>
 							 <?php echo form::checkBox_field('bom_exploded_cb', $$class->bom_exploded_cb, 'bom_exploded_cb', 1); ?>
@@ -374,8 +374,8 @@
 							<?php
 							$count = 0;
 							foreach ($wip_wo_bom_object as $wip_wo_bom) {
-							 if (!empty($wip_wo_bom->component_item_id_m)) {
-								$item = item::find_by_id($wip_wo_bom->component_item_id_m);
+							 if (!empty($wip_wo_bom->component_item_id)) {
+								$item = item::find_by_id($wip_wo_bom->component_item_id);
 								$$class_fourth->component_item_number = $item->item_number;
 								$$class_fourth->component_description = $item->item_description;
 								$$class_fourth->component_uom = $item->uom_id;
@@ -393,7 +393,7 @@
  							 <td><?php form::text_field_wid4s('wip_wo_bom_id'); ?></td>
  							 <td><?php form::text_field_wid4sm('bom_sequence'); ?></td>
  							 <td><?php echo!empty($routing_line_details) ? form::select_field_from_object('routing_sequence', $routing_line_details, 'routing_sequence', 'routing_sequence', $$class_fourth->routing_sequence, 'routing_sequence') : form::text_field_wid4s('routing_sequence'); ?></td>
- 							 <td><?php echo $f->text_field('component_item_id_m', $$class_fourth->component_item_id_m, '8', '', 'item_id_m', 1, $readonly); ?></td>
+ 							 <td><?php echo $f->text_field('component_item_id', $$class_fourth->component_item_id, '8', '', 'item_id', 1, $readonly); ?></td>
  							 <td><?php echo $f->text_field('component_item_number', $$class_fourth->component_item_number, '20', '', 'select_item_number', '', $readonly); ?>
  								<img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
  							 <td><?php echo $f->text_field('component_description', $$class_fourth->component_description, '20', '', 'item_description', '', $readonly); ?></td>

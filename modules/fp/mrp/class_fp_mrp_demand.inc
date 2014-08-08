@@ -5,17 +5,17 @@ class fp_mrp_demand extends dbObject {
  public static $table_name = "fp_mrp_demand";
  public static $primary_column = "fp_mrp_demand_id";
  public static $parent_primary_column = "fp_mrp_header_id";
- public static $key_column = 'item_id_m';
+ public static $key_column = 'item_id';
  public static $module = "fp";
  public $field_a = [
 		 'fp_mrp_demand_id',
 		 'fp_mrp_header_id',
 		 'org_id',
-		 'item_id_m',
+		 'item_id',
 		 'demand_date',
 		 'quantity',
-		 'demand_item_id_m',
-		 'toplevel_demand_item_id_m',
+		 'demand_item_id',
+		 'toplevel_demand_item_id',
 		 'source_type',
 		 'primary_source_type',
 		 'source_header_id',
@@ -29,18 +29,22 @@ class fp_mrp_demand extends dbObject {
 		 'source_type'
  ];
  public $search_functions = [
-		 'Organization' => 'search_org_name',
-		 'MRP Planner' => 'search_mrp_name',
+		 'Organization' => 'search_org_name_onevalue',
+		 'MRP Planner ' => 'search_mrp_name_onevalue',
+//		 'Item Number From' => 'search_item_number_from',
+//		 'Item Number To' => 'search_item_number_to',
+//		 'Item Id From' => 'search_item_id_from',
+//		 'Item Id To' => 'search_item_id_to'
  ];
  public $column = [
 		 'fp_mrp_demand_id',
 		 'fp_mrp_header_id',
 		 'org_id',
-		 'item_id_m',
+		 'item_id',
 		 'demand_date',
 		 'quantity',
-		 'demand_item_id_m',
-		 'toplevel_demand_item_id_m',
+		 'demand_item_id',
+		 'toplevel_demand_item_id',
 		 'source_type',
 		 'primary_source_type',
 		 'source_header_id',
@@ -49,7 +53,7 @@ class fp_mrp_demand extends dbObject {
  public $requiredField = [
 		 'fp_mrp_header_id',
 		 'org_id',
-		 'item_id_m',
+		 'item_id',
 		 'demand_date',
 		 'quantity',
  ];
@@ -68,11 +72,11 @@ class fp_mrp_demand extends dbObject {
  public $fp_mrp_demand_id;
  public $fp_mrp_header_id;
  public $org_id;
- public $item_id_m;
+ public $item_id;
  public $demand_date;
  public $quantity;
- public $demand_item_id_m;
- public $toplevel_demand_item_id_m;
+ public $demand_item_id;
+ public $toplevel_demand_item_id;
  public $source_type;
  public $primary_source_type;
  public $source_header_id;
@@ -156,49 +160,50 @@ class fp_mrp_demand extends dbObject {
 	foreach ($all_items as $items) {
 	 try {
 		//all level 0 items
-		$this->mrp_create_demand_and_plannedOrder($items->item_id_m, $mrph);
+		$this->mrp_create_demand_and_plannedOrder($items->item_id, $mrph);
 		//find all level 1 items - Caluclate the planned order and create new demands
-		$this->message .= "<br>MRP Demand Calculator is Successfully updated for item_id_m - " . $items->item_id_m .
+		$this->message .= "<br>MRP Demand Calculator is Successfully updated for item_id - " . $items->item_id .
 						' fp_mrp_header_id : ' . $fp_mrp_header_id;
 	 } catch (Exception $e) {
-		$this->message .= "<br>MRP Demand Calculatorp failed for Item id " . $items->item_id_m . $e->getMessage();
+		$this->message .= "<br>MRP Demand Calculatorp failed for Item id " . $items->item_id . $e->getMessage();
 	 }
 	}
 	return $this->message;
  }
 
- public function mrp_create_demand_and_plannedOrder($item_id_m, $mrph) {
+ public function mrp_create_demand_and_plannedOrder($item_id, $mrph) {
 	$mdsh = new fp_mds_header();
 	$mdsh->findBy_id($mrph->demand_source);
 	$mdsl = new fp_mds_line();
-	$mdsl->item_id_m = $item_id_m;
+	$mdsl->item_id = $item_id;
 	$mdsl->fp_mds_header_id = $mrph->demand_source;
 	$demand_lines = $mdsl->findBy_ItemId_headerId();
 	if (!empty($demand_lines)) {
-	 $this->mrp_create_demand_fromMDS($item_id_m, $mrph, $demand_lines, $mdsh->org_id);
+	 $this->mrp_create_demand_fromMDS($item_id, $mrph, $demand_lines, $mdsh->org_id);
 	}
+
 	$mrp_plo = new fp_mrp_planned_order();
-	$mrp_plo->item_id_m = $item_id_m;
+	$mrp_plo->item_id = $item_id;
 	$mrp_plo->fp_mrp_header_id = $mrph->fp_mrp_header_id;
-	$all_planned_orders = $mrp_plo->create_planned_orders($item_id_m, $mrph->fp_mrp_header_id);
-		if (!empty($all_planned_orders)) {
+	$all_planned_orders = $mrp_plo->create_planned_orders($item_id, $mrph->fp_mrp_header_id);
+	if (!empty($all_planned_orders)) {
 	 foreach ($all_planned_orders as $planned_order) {
-		$this->_mrp_demand_calculator_forComponents($item_id_m, $planned_order);
+		$this->_mrp_demand_calculator_forComponents($item_id, $planned_order);
 	 }
 	}
  }
 
- public function mrp_create_demand_fromMDS($item_id_m, $mrph, $demand_lines, $demand_org_id) {
+ public function mrp_create_demand_fromMDS($item_id, $mrph, $demand_lines, $demand_org_id) {
 	$mrpd = new fp_mrp_demand();
 	foreach ($demand_lines as $demand_line) {
 	 $mrpd->fp_mrp_demand_id = null;
 	 $mrpd->org_id = $demand_org_id;
-	 $mrpd->item_id_m = $demand_line->item_id_m;
+	 $mrpd->item_id = $demand_line->item_id;
 	 $mrpd->fp_mrp_header_id = $mrph->fp_mrp_header_id;
 	 $mrpd->demand_date = $demand_line->demand_date;
 	 $mrpd->quantity = $demand_line->quantity;
-	 $mrpd->demand_item_id_m = $demand_line->item_id_m;
-	 $mrpd->toplevel_demand_item_id_m = $demand_line->item_id_m;
+	 $mrpd->demand_item_id = $demand_line->item_id;
+	 $mrpd->toplevel_demand_item_id = $demand_line->item_id;
 	 $mrpd->source_type = !empty($demand_line->source_type) ? $demand_line->source_type : null;
 	 $mrpd->primary_source_type = $mrpd->source_type;
 	 $mrpd->source_header_id = $demand_line->source_header_id;
@@ -209,10 +214,10 @@ class fp_mrp_demand extends dbObject {
 	}
  }
 
- private function _mrp_demand_calculator_forComponents($item_id_m, $all_planned_orders) {
+ private function _mrp_demand_calculator_forComponents($item_id, $all_planned_orders) {
 //	pa($all_planned_orders);
 	$boh = new bom_header();
-	$boh->item_id_m = $item_id_m;
+	$boh->item_id = $item_id;
 	$boh_i = $boh->findBy_itemId();
 	if (empty($boh_i)) {
 	 return;
@@ -232,10 +237,10 @@ class fp_mrp_demand extends dbObject {
 	foreach ($bol_i as $items) {
 	 $mrpd_n->fp_mrp_demand_id = null;
 	 $mrpd_n->org_id = $all_planned_orders->org_id;
-	 $mrpd_n->item_id_m = $items->component_item_id_m;
+	 $mrpd_n->item_id = $items->component_item_id;
 	 $mrpd_n->fp_mrp_header_id = $all_planned_orders->fp_mrp_header_id;
 	 if (!empty($all_planned_orders->need_by_date)) {
-		$item_details = item::find_by_id($mrpd_n->item_id_m);
+		$item_details = item::find_by_id($mrpd_n->item_id);
 		$total_lt = $item_details->pre_processing_lt + $item_details->processing_lt + $item_details->post_processing_lt;
 		$lt = !empty($total_lt) ? $total_lt : 0;
 		$ltp = 'P' . round($lt) . 'D';
@@ -244,24 +249,23 @@ class fp_mrp_demand extends dbObject {
 		$mrpd_n->demand_date = $date->format('Y-m-d');
 	 }
 	 $mrpd_n->quantity = $all_planned_orders->quantity * $items->usage_quantity;
-	 $mrpd_n->demand_item_id_m = $item_id_m;
-	 $mrpd_n->toplevel_demand_item_id_m = $all_planned_orders->toplevel_demand_item_id_m;
+	 $mrpd_n->demand_item_id = $item_id;
+	 $mrpd_n->toplevel_demand_item_id = $all_planned_orders->toplevel_demand_item_id;
 	 $mrpd_n->source_type = 'Dependent';
 	 $mrpd_n->primary_source_type = $all_planned_orders->primary_source_type;
 	 $mrpd_n->source_header_id = $all_planned_orders->source_header_id;
 	 $mrpd_n->source_line_id = $all_planned_orders->source_line_id;
 	 $mrpd_n->audit_trial();
-//	 pa($mrpd_n);
 	 $mrpd_n->save();
 	}
  }
 
- public function findBy_ItemId_HeaderId($item_id_m, $fp_mrp_header_id) {
+ public function findBy_ItemId_HeaderId($item_id, $fp_mrp_header_id) {
 	$sql = " SELECT * FROM " .
 					self::$table_name .
-					" WHERE item_id_m= :item_id_m  AND fp_mrp_header_id = :fp_mrp_header_id "
+					" WHERE item_id= :item_id  AND fp_mrp_header_id = :fp_mrp_header_id "
 					. " ORDER BY  demand_date ASC ";
-	$value_a = ['item_id_m' => $item_id_m, 'fp_mrp_header_id' => $fp_mrp_header_id];
+	$value_a = ['item_id' => $item_id, 'fp_mrp_header_id' => $fp_mrp_header_id];
 	$result_array = $this->findBySql($sql, $value_a);
 	return !empty($result_array) ? $result_array : false;
  }

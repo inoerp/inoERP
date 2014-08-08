@@ -39,26 +39,20 @@
 						 <li>
 							<label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="item_id select_popup clickable">
 							 Item Id : </label>
-							<?php $f->text_field_dsr('item_id') ?>
+							<?php echo form::text_field('item_id', $item->item_id, '15', '25', '', 'System Number', 'item_id', $readonly) ?>
 							<a name="show" href="?item_id=" class="show item_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
-						 <li><label>Item Number<img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete item_number clickable"> : 
-							</label><?php echo $f->text_field('item_number', $$class->item_number, '15', 'item_number', 'select_item_number', 1 , $readonly_mas ); ?>
+						 <li><label>Item Number<img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete item_number clickable"> : </label><?php $f->text_field_dm('item_number', 'select_item_number'); ?>
 							<a name="show" href="?item_id=" class="show item_number"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
-						 <li><label> Description : </label>
-						<?php echo $f->text_field('item_description', $$class->item_description, '20', 'item_description', '', 1 , $readonly_mas ); ?></li>
+						 <li><label> Description : </label><?php $f->text_field_d('item_description'); ?></li>
 						 <li><label> Product Line : </label>
-							<?php echo $f->select_field_from_object('product_line', item::product_line(), 'option_line_code', 'option_line_value', $$class->product_line, 'product_line', '', '', $readonly_mas); ?></li>
+							<?php echo $f->select_field_from_object('product_line', item::product_line(), 'option_line_code', 'option_line_value', $$class->product_line, 'product_line', '', '', $readonly); ?></li>
 						</ul>
 					 </div>
 					</div>
 					<div id="tabsHeader-2" class="tabContent">
 					 <div class="large_shadow_box"> 
-						<ul class="column five_column">
-						 <li> <label>Master Item Id: </label> <?php echo form::text_field_dr('item_id_m'); ?> </li>
-						</ul>
-						 
 						<?php echo!(empty($assigned_inventory_statement)) ? $assigned_inventory_statement : ""; ?>
 					 </div>
 					</div>
@@ -460,10 +454,10 @@
 							<?php echo form::text_field_d('demand_timefence'); ?>
 						 </li>
 						 <li><label>Output Tax Class: </label>
-							<?php echo $f->select_field_from_object('op_tax_class', item::product_tax_class(), 'option_line_code', 'option_line_value', $$class->op_tax_class, '', 'output_tax') ?>
+							<?php echo $f->select_field_from_object('op_tax_class', item::product_tax_class(), 'option_line_code', 'option_line_value', $$class->op_tax_class, '','output_tax')?>
 						 </li>
 						 <li><label>Input Tax Class: </label>
-							<?php echo $f->select_field_from_object('ip_tax_class', item::product_tax_class(), 'option_line_code', 'option_line_value', $$class->ip_tax_class, '', 'input_tax') ?>
+							<?php echo $f->select_field_from_object('ip_tax_class', item::product_tax_class(), 'option_line_code', 'option_line_value', $$class->ip_tax_class, '','input_tax')?>
 						 </li>
 						 <li><label>AP Payment Term: </label>
 							<?php echo form::text_field_d('demand_timefence'); ?>
