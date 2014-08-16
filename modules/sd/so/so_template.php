@@ -139,11 +139,12 @@
 						 <div id="comment_list">
 							<?php echo!(empty($comments)) ? $comments : ""; ?>
 						 </div>
+             <div id ="display_comment_form">
 						 <?php
 						 $reference_table = 'sd_so_header';
 						 $reference_id = $$class->sd_so_header_id;
-						 include_once HOME_DIR . '/comment.php';
 						 ?>
+              </div>
 						 <div id="new_comment">
 						 </div>
 						</div>

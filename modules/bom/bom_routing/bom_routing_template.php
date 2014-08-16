@@ -105,10 +105,11 @@
  							 <ul class="inline_action">
  								<li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
  								<li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
- 								<li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($bom_routing_line->item_description); ?>"></li>           
+ 								<li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($bom_routing_line->bom_routing_line_id); ?>"></li>           
  								<li><?php echo form::hidden_field('bom_routing_header_id', $bom_routing_header->bom_routing_header_id); ?></li>
  							 </ul>
  							</td>
+              
  							<td><?php form::text_field_wid2sr('bom_routing_line_id'); ?></td>
 							<td><?php $f->text_field_d2s('routing_sequence', 'lines_number');?></td>
  							<td><?php echo form::select_field_from_object('standard_operation_id', bom_standard_operation::find_all(), 'bom_standard_operation_id', 'standard_operation', $$class_second->standard_operation_id, '', $readonly); ?></td>

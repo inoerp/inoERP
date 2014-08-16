@@ -120,6 +120,7 @@
 						<thead> 
 						 <tr>
 							<th>Action</th>
+              <th>Seq#</th>
 							<th>Resource Cost Id</th>
 							<th>Cost Type</th>
 							<th>Description</th>
@@ -147,6 +148,7 @@
  								<li><?php echo form::hidden_field('bom_resource_id', $$class->bom_resource_id); ?></li>
  							 </ul>
  							</td>
+              <td><?php $f->seq_field_d($count) ?></td>
  							<td><?php form::text_field_wid2sr('bom_resource_cost_id'); ?></td>
 							<td><?php echo $f->select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'cost_type_code', 'cost_type', $$class_second->bom_cost_type, '', '', 1, $readonly); ?></td>
 							<td><?php $f->text_field_wid2r('bom_cost_type_description'); ?></td>

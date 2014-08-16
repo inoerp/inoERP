@@ -1,17 +1,11 @@
 <?php
- class hr_empoyee extends dbObject {
+ class hr_employee extends dbObject {
 
-  public static $table_name = "hr_empoyee";
-  public static $primary_column = "hr_empoyee_id";
-  public static $key_column = 'transaction_source';
-  public static $module = "hr"; 
-  public static $template_type = [
-   'header_tab' => 1,
-   'line_tab' => 2,
-   'nooffields_header_tab1' => 5,
-   'nooffields_line_tab1' => 6,
-   'nooffields_line_tab2' => 6,
-  ];
+  public static $table_name = "hr_employee";
+  public static $primary_column = "hr_employee_id";
+  public static $key_column = 'last_name';
+  public static $dependent_classes = ['hr_employee_education', 'hr_employee_experience','hr_employee_termination'];
+  public static $module = "hr";
   public static $source_type_a = [
    'MANUAL' => 'Manual',
    'IMPORT' => 'Import'
@@ -37,6 +31,7 @@
    'marital_status',
    'degree',
    'highest_education',
+   'education_details',
    'no_of_children',
    'home_address_id',
    'home_address',
@@ -50,6 +45,7 @@
    'job_id',
    'position_id',
    'grade_id',
+   'payroll_id',
    'location_id',
    'job_type',
    'supervisor_employee_id',
@@ -61,13 +57,13 @@
    'status',
    'revision_number',
    'work_policy_id',
+   'tax_reg_number',
    'expense_ac_id',
+   'bank_account_id',
    'performance_id',
-   'vechile_number',
+   'vehicle_number',
    'asset_numbers',
    'contract_id',
-   'bank_account_id',
-   'tax_reg_number',
    'passport_number',
    'ledger_id',
    'created_by',
@@ -76,12 +72,14 @@
    'last_update_date',
   ];
   public $initial_search = [
+   'hr_employee_id',
    'identification_id',
    'citizen_number',
    'first_name',
    'last_name',
   ];
   public $column = [
+   'hr_employee_id',
    'identification_id',
    'identification_type',
    'citizen_number',
@@ -89,12 +87,10 @@
    'last_name',
   ];
   public $requiredField = [
-   'hr_employee_id',
    'identification_id',
    'identification_type',
    'first_name',
    'last_name',
-   'phone',
    'email',
    'person_type',
   ];
@@ -118,6 +114,7 @@
   public $marital_status;
   public $degree;
   public $highest_education;
+  public $education_details;
   public $no_of_children;
   public $home_address_id;
   public $home_address;
@@ -131,6 +128,7 @@
   public $job_id;
   public $position_id;
   public $grade_id;
+  public $payroll_id;
   public $location_id;
   public $job_type;
   public $supervisor_employee_id;
@@ -144,7 +142,7 @@
   public $work_policy_id;
   public $expense_ac_id;
   public $performance_id;
-  public $vechile_number;
+  public $vehicle_number;
   public $asset_numbers;
   public $contract_id;
   public $bank_account_id;
@@ -162,14 +160,34 @@
   ];
   public $pageTitle = " HR Employee  "; //page Title
 
-  
-   Public static function marital_status() {
-	$option_header = option_header::find_by_name('HR_MARITAL_STATUS');
-	$ol = new option_line();
-	$option_lines = $ol->findBy_parentId($option_header->option_header_id);
-	return $option_lines;
- }
- 
+  Public static function marital_status() {
+   $option_header = option_header::find_by_name('HR_MARITAL_STATUS');
+   $ol = new option_line();
+   $option_lines = $ol->findBy_parentId($option_header->option_header_id);
+   return $option_lines;
+  }
+
+  Public static function person_type() {
+   $option_header = option_header::find_by_name('HR_PERSON_TYPE');
+   $ol = new option_line();
+   $option_lines = $ol->findBy_parentId($option_header->option_header_id);
+   return $option_lines;
+  }
+
+  Public static function identification_type() {
+   $option_header = option_header::find_by_name('HR_IDENTIFICATION_TYPE');
+   $ol = new option_line();
+   $option_lines = $ol->findBy_parentId($option_header->option_header_id);
+   return $option_lines;
+  }
+
+  Public static function gender() {
+   $option_header = option_header::find_by_name('HR_GENDER');
+   $ol = new option_line();
+   $option_lines = $ol->findBy_parentId($option_header->option_header_id);
+   return $option_lines;
+  }
+
   public static function find_all_header_levels() {
    $sql = " SELECT * FROM ";
    $sql .= self::$table_name;
@@ -194,7 +212,41 @@
    return $result;
   }
 
+  public function _after_save() {
+//   pa($this);
+//   pa($_POST);
+   if (!empty($this->hr_employee_id) && !empty($_POST['degree_name']) && !empty($_POST['education_line_id_cb'])) {
+    $eedu = new hr_employee_education();
+    foreach ($_POST['education_line_id_cb'] as $key => $val) {
+     if (empty($val)) {
+      continue;
+     }
+     foreach ($eedu->field_a as $field_k => $field_v) {
+      $eedu->$field_v = isset($_POST[$field_v][$key]) ? $_POST[$field_v][$key] : null;
+     }
+     $eedu->audit_trial();
+     $eedu->save();
+     unset($eedu);
+    }
+   }
+
+   if (!empty($this->hr_employee_id) && !empty($_POST['organization_name']) && !empty($_POST['experience_line_id_cb'])) {
+    $emp_exp = new hr_employee_experience();
+    foreach ($_POST['experience_line_id_cb'] as $key => $val) {
+     if (empty($val)) {
+      continue;
+     }
+     foreach ($emp_exp->field_a as $field_k => $field_v) {
+      $emp_exp->$field_v = isset($_POST[$field_v][$key]) ? $_POST[$field_v][$key] : null;
+     }
+     $emp_exp->audit_trial();
+     $emp_exp->save();
+     unset($emp_exp);
+    }
+   }
+  }
+
  }
 
-//end of hr_empoyee class
+//end of hr_employee class
 ?>

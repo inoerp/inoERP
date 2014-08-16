@@ -34,6 +34,7 @@
 							<thead> 
 							 <tr>
 								<th>Action</th>
+                <th>Seq#</th>
 								<th>Id</th>
 								<th>Country Code</th>
 								<th>State</th>
@@ -59,6 +60,7 @@
  									<li><?php echo form::hidden_field('country_code', $country_code_h); ?></li>
  								 </ul>
  								</td>
+                <td><?php $f->seq_field_d($count) ?></td>
  								<td><?php form::number_field_drs('mdm_tax_region_id') ?></td>
 								<td><?php $f->text_field_widrm('country_code','line_data'); ?></td>
 								<td><?php $f->text_field_wid('state','dontCopy'); ?></td>
@@ -77,6 +79,7 @@
 						 <table class="form_table">
 							<thead> 
 							 <tr>
+                <th>Seq#</th>
 								<th>Status</th>
 								<th>Regime</th>
 								<th>Jurisdiction</th>
@@ -88,6 +91,7 @@
 							 foreach ($tax_region_object as $tax_region) {
 								?>         
  							 <tr class="tax_region_line<?php echo $count ?>">
+                <td><?php $f->seq_field_d($count) ?></td>
  								<td><?php $f->status_field_d('status'); ?></td>
  								<td><?php form::text_field_wid('tax_regime'); ?></td>
  								<td><?php form::text_field_wid('tax_jurisdiction'); ?></td>
