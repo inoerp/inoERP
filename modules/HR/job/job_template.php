@@ -67,11 +67,12 @@
               <div id="comment_list">
                <?php echo!(empty($comments)) ? $comments : ""; ?>
               </div>
-              <?php
+              <div id ="display_comment_form">
+               <?php
                $reference_table = 'hr_job';
                $reference_id = $$class->hr_job_id;
-               include_once HOME_DIR . '/comment.php';
-              ?>
+               ?>
+              </div>
               <div id="new_comment">
               </div>
              </div>
@@ -89,15 +90,17 @@
           </ul>
           <div class="tabContainer"> 
            <div id="tabsLine-1" class="tabContent">
-            <div><label class="text_area_label">Job Details  :</label><?php echo $f->text_area_ap(array('name' => 'job_details', 'value' => $$class->job_details,
+            <div><label class="text_area_label">Job Details  :</label><?php
+              echo $f->text_area_ap(array('name' => 'job_details', 'value' => $$class->job_details,
                'row_size' => '10', 'column_size' => '90'));
-              ?> 	
+             ?> 	
             </div> 
            </div> 
            <div id="tabsLine-2"  class="tabContent">
-            <div><label class="text_area_label">Primary Responsibility  :</label><?php echo $f->text_area_ap(array('name' => 'primary_responsibility', 'value' => $$class->primary_responsibility,
-              'row_size' => '10', 'column_size' => '90'));
-              ?> 	
+            <div><label class="text_area_label">Primary Responsibility  :</label><?php
+              echo $f->text_area_ap(array('name' => 'primary_responsibility', 'value' => $$class->primary_responsibility,
+               'row_size' => '10', 'column_size' => '90'));
+             ?> 	
             </div> 
            </div>
           </div>

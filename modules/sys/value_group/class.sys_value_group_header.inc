@@ -58,7 +58,6 @@ class sys_value_group_header extends dbObject {
 		 'module_id'
  ];
  public $search = [
-		 '_update_path' => 'modules/sys/value_group/value_group',
 		 '_show_update_path' => 1,
 		 '_update_action_meassge' => 'Update',
 		 '_show_view_path' => 1,

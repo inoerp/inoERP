@@ -1,10 +1,11 @@
 <?php
+
  class hr_employee extends dbObject {
 
   public static $table_name = "hr_employee";
   public static $primary_column = "hr_employee_id";
   public static $key_column = 'last_name';
-  public static $dependent_classes = ['hr_employee_education', 'hr_employee_experience','hr_employee_termination'];
+  public static $dependent_classes = ['hr_employee_education', 'hr_employee_experience', 'hr_employee_termination'];
   public static $module = "hr";
   public static $source_type_a = [
    'MANUAL' => 'Manual',
@@ -86,6 +87,9 @@
    'first_name',
    'last_name',
   ];
+  public $fields_inForm_notInDataBase = [
+   "supervisor_employee_name"
+  ];
   public $requiredField = [
    'identification_id',
    'identification_type',
@@ -153,6 +157,7 @@
   public $creation_date;
   public $last_update_by;
   public $last_update_date;
+  public $supervisor_employee_name;
   public $search = [
    '_show_update_path' => 1,
    '_update_action_meassge' => 'Update',
@@ -210,6 +215,23 @@
    $sql .= " WHERE type_class = '{$class}' AND status='active'";
    $result = self::find_by_sql($sql);
    return $result;
+  }
+
+  public static function find_by_userId($user_id) {
+   $sql = " SELECT * 
+            FROM hr_employee hre, 
+                 user 
+            WHERE user.hr_employee_id = hre.hr_employee_id
+            AND user.user_id = '{$user_id}' LIMIT 1";
+   $result = self::find_by_sql($sql);
+   return !empty($result) ? array_pop($result) : false;
+  }
+
+  public function _before_showing() {
+   if (!empty($this->supervisor_employee_id)) {
+    $emp_details = hr_employee::find_by_id($this->supervisor_employee_id);
+    $this->supervisor_employee_name = $emp_details->first_name . ' ' . $emp_details->last_name;
+   }
   }
 
   public function _after_save() {

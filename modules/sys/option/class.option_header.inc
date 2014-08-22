@@ -88,6 +88,12 @@
    return $countries;
   }
 
+    Public static function document_types() {
+   $option_header = self::find_by_name('SYS_DOCUMENT_TYPE');
+   $countries = option_line::find_by_option_id($option_header->option_header_id);
+   return $countries;
+  }
+  
   Public static function period_types() {
    $option_header = self::find_by_name('SYS_PERIOD_TYPE');
    $lines = option_line::find_by_option_id($option_header->option_header_id);

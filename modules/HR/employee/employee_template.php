@@ -132,7 +132,8 @@
                <?php echo $f->select_field_from_object('position_id', hr_position::find_all(), 'hr_position_id', 'position_name', $$class->position_id, 'position_id'); ?>  </li>
 
               <li><label>Payroll :</label><?php $f->text_field_d('payroll_id'); ?> 					</li>
-              <li><label>Supervisor :</label><?php $f->text_field_d('supervisor_employee_id'); ?> 					</li>
+              <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supervisor_employee_id select_popup clickable">
+                Supervisor :</label><?php $f->text_field_d('supervisor_employee_name'); echo $f->hidden_field_withId('supervisor_employee_id',$$class->supervisor_employee_id);   ?> 					</li>
              </ul> 
             </div> 
            </div> 
@@ -281,8 +282,8 @@
                     </td>
                     <td><?php $f->seq_field_d($count) ?></td>
                     <td><?php $f->text_field_wid3sr('hr_employee_experience_id') ?></td>
-                    <td><?php $f->text_field_wid3m('organization_name'); ?></td>
-                    <td><?php $f->text_field_wid3m('designation'); ?></td>
+                    <td><?php $f->text_field_wid3('organization_name'); ?></td>
+                    <td><?php $f->text_field_wid3('designation'); ?></td>
                     <td><?php echo $f->date_fieldAnyDay('work_start_date', $$class_third->work_start_date); ?></td>
                     <td><?php echo $f->date_fieldAnyDay('work_end_date', $$class_third->work_end_date); ?></td>
                     <td><?php $f->text_field_wid3('employee_number'); ?></td>

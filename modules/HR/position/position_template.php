@@ -37,7 +37,7 @@
               </li>
               <li><label>Position Name :</label><?php $f->text_field_d('position_name'); ?> 					</li>
               <li><label>Organization :</label>
-               <?php echo $f->select_field_from_object('org_id', org::find_all(),'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?> 					</li>
+               <?php echo $f->select_field_from_object('org_id', org::find_all(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?> 					</li>
               <li><label>Start Date :</label><?php echo $f->date_fieldAnyDay('start_date', $$class->start_date); ?> 	</li>
               <li><label>End Date :</label><?php echo $f->date_fieldAnyDay('start_date', $$class->start_date); ?> 	</li>
               <li><label>Job Name :</label>
@@ -68,11 +68,12 @@
               <div id="comment_list">
                <?php echo!(empty($comments)) ? $comments : ""; ?>
               </div>
-              <?php
-               $reference_table = 'hr_position';
-               $reference_id = $$class->hr_position_id;
-               include_once HOME_DIR . '/comment.php';
-              ?>
+              <div id ="display_comment_form">
+               <?php
+                $reference_table = 'hr_position';
+                $reference_id = $$class->hr_position_id;
+               ?>
+              </div>
               <div id="new_comment">
               </div>
              </div>
@@ -90,9 +91,10 @@
           </ul>
           <div class="tabContainer"> 
            <div id="tabsLine-1" class="tabContent">
-            <div><label class="text_area_label">Position Details  :</label><?php echo $f->text_area_ap(array('name' => 'position_details', 'value' => $$class->position_details,
+            <div><label class="text_area_label">Position Details  :</label><?php
+              echo $f->text_area_ap(array('name' => 'position_details', 'value' => $$class->position_details,
                'row_size' => '10', 'column_size' => '90'));
-              ?> 	
+             ?> 	
             </div> 
            </div> 
           </div>
