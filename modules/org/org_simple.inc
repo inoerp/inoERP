@@ -1,1 +1,0 @@
-<?php include_once("../../include/basics/header.inc"); ?><?php require_once ('class.org_header.inc'); ?><?php require_once ('class.org_line.inc'); ?><script src="org.js"></script>

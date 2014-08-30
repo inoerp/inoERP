@@ -1,0 +1,20 @@
+All inoERP code is Copyright by the Original Authors as mentioned on COPYRIGHT.txt file.
+An Online Version is available @ http://inoideas.org
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the Mozilla Public License Version 2.0.
+
+This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE.  See the Mozilla Public License Version 2.0
+for more details.
+
+You should have received a copy of the Mozilla Public License Version 2.0
+along with this program as the file LICENSE.txt; If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+
+Authors :
+1. Nishit R. Das
+
+
