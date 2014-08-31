@@ -1,18 +1,21 @@
-function setValFromSelectPage(po_sourcing_rule_header_id, sourcing_rule, supplier_id, supplier_number, supplier_name,
-				supplier_site_id, supplier_site_name) {
- this.po_sourcing_rule_header_id = po_sourcing_rule_header_id;
- this.sourcing_rule = sourcing_rule;
+function setValFromSelectPage(po_asl_header_id, asl, supplier_id, supplier_number, supplier_name,
+				supplier_site_id, supplier_site_name , item_id_m, item_number, item_description) {
+ this.po_asl_header_id = po_asl_header_id;
+ this.asl = asl;
  this.supplier_id = supplier_id;
  this.supplier_number = supplier_number;
  this.supplier_name = supplier_name;
  this.supplier_site_id = supplier_site_id;
  this.supplier_site_name = supplier_site_name;
+  this.item_id_m_m = item_id_m;
+ this.item_number = item_number;
+ this.item_description = item_description;
 }
 
 setValFromSelectPage.prototype.setVal = function() {
  var supplier_site_id = this.supplier_site_id;
- var sourcing_rule = this.sourcing_rule;
- var po_sourcing_rule_header_id = this.po_sourcing_rule_header_id;
+ var asl = this.asl;
+ var po_asl_header_id = this.po_asl_header_id;
  var supplier_id = this.supplier_id;
  var supplier_number = this.supplier_number;
  var supplier_name = this.supplier_name;
@@ -20,11 +23,11 @@ setValFromSelectPage.prototype.setVal = function() {
  var rowClass = '.' + localStorage.getItem("row_class");
  rowClass = rowClass.replace(/\s+/g, '.');
 
- if (po_sourcing_rule_header_id) {
-	$('#content').find('#po_sourcing_rule_header_id').val(po_sourcing_rule_header_id);
+ if (po_asl_header_id) {
+	$('#content').find('#po_asl_header_id').val(po_asl_header_id);
  }
- if (sourcing_rule) {
-	$('#content').find('#sourcing_rule').val(sourcing_rule);
+ if (asl) {
+	$('#content').find('#asl').val(asl);
  }
  if (supplier_id) {
 	$('#content').find(rowClass).find(".supplier_id").val(supplier_id);
@@ -45,31 +48,44 @@ setValFromSelectPage.prototype.setVal = function() {
 	$('#content').find(rowClass).find(".select_supplier_name").val(supplier_name);
  }
 
+ if (this.item_id_m) {
+  $('#item_id_m').val(this.item_id_m);
+ }
+   if (this.item_number) {
+  $('#item_number').val(this.item_number);
+ }
+   if (this.item_description) {
+  $('#description').val(this.item_description);
+ }
  localStorage.removeItem("row_class");
 
 };
 
+function afterAddNewRow(){
+ $('.supplier_site_id').last().replaceWith('<input class="textfield supplier_site_id" type="text" title="" size="15" maxlength="256" value="" name="supplier_site_id[]" >');
+}
+
 $(document).ready(function() {
 //mandatory and field sequence
  var mandatoryCheck = new mandatoryFieldMain();
- mandatoryCheck.header_id = 'sourcing_rule_header_id';
-// mandatoryCheck.mandatoryHeader();
+ mandatoryCheck.header_id = 'po_asl_header_id';
+ mandatoryCheck.mandatoryHeader();
  mandatoryCheck.form_area = 'form_header';
- mandatoryCheck.mandatory_fields = ["org_id", "item_number"];
+ mandatoryCheck.mandatory_fields = ["bu_org_id", "item_number"];
  mandatoryCheck.mandatory_messages = ["First Select Org", "No Item Number"];
 // mandatoryCheck.mandatoryField();
 
- //Popup for selecting sourcing_rule
- $(".sourcing_rule_header_id.select_popup").click(function() {
-	void window.open('select.php?class_name=po_sourcing_rule_header', '_blank',
+ //Popup for selecting asl
+ $(".asl_header_id.select_popup").click(function() {
+	void window.open('select.php?class_name=po_asl_header', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
 	return false;
  });
 
- //Get the sourcing_rule_id on find button click
- $('a.show.po_sourcing_rule_header_id').click(function() {
-	var headerId = $('#po_sourcing_rule_header_id').val();
-	$(this).attr('href', modepath() + 'po_sourcing_rule_header_id=' + headerId);
+ //Get the asl_id on find button click
+ $('a.show.po_asl_header_id').click(function() {
+	var headerId = $('#po_asl_header_id').val();
+	$(this).attr('href', modepath() + 'po_asl_header_id=' + headerId);
  });
 
  $("#content").on("change", '.supplier_name, .supplier_id', function() {
@@ -95,48 +111,26 @@ $(document).ready(function() {
  });
 
  //add a new row
-// onClick_add_new_row('sourcing_rule_line', 'form_data_line_tbody', 1)
+// onClick_add_new_row('asl_line', 'form_data_line_tbody', 1)
  $("#content").on("click", ".add_row_img", function() {
 	var addNewRow = new add_new_rowMain();
-	addNewRow.trClass = 'sourcing_rule_line0';
+	addNewRow.trClass = 'asl_line0';
 	addNewRow.tbodyClass = 'form_data_line_tbody';
-	addNewRow.noOfTabs = 1;
+	addNewRow.noOfTabs = 2;
 	addNewRow.removeDefault = true;
-	addNewRow.add_new_row();
+  addNewRow.add_new_row(afterAddNewRow);
  });
 
- deleteData('form.php?class_name=po_sourcing_rule_header&line_class_name=po_sourcing_rule_line');
+ deleteData('form.php?class_name=po_asl_header&line_class_name=po_asl_line');
 
- //context menu
- var classContextMenu = new contextMenuMain();
- classContextMenu.docHedaderId = 'po_ourcing_rule_header_id';
- classContextMenu.docLineId = 'po_sourcing_rule_line_id';
- classContextMenu.btn1DivId = 'sourcing_rule_header';
- classContextMenu.btn2DivId = 'form_line';
- classContextMenu.trClass = 'po_sourcing_rule_line';
- classContextMenu.tbodyClass = 'form_data_line_tbody';
- classContextMenu.noOfTabbs = 1;
- classContextMenu.contextMenu();
-
-//remove sourcing_rule lines
+//remove asl lines
  $("#remove_row").click(function() {
-	$('input[name="sourcing_rule_line_id_cb"]:checked').each(function() {
+	$('input[name="asl_line_id_cb"]:checked').each(function() {
 	 $(this).closest('tr').remove();
 	});
  });
 
 //get the attachement form
- deleteData('form.php?class_name=po_sourcing_rule_header&line_class_name=po_sourcing_rule_line');
+ deleteData('form.php?class_name=po_asl_header&line_class_name=po_asl_line');
 
-// save('json.sourcing_rule.php', '#sourcing_rule_header', 'line_id_cb', 'component_item_id', '#sourcing_rule_header_id');
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=po_sourcing_rule_header';
- classSave.form_header_id = 'sourcing_rule_header';
- classSave.primary_column_id = 'po_sourcing_rule_header_id';
- classSave.line_key_field = 'rank';
- classSave.single_line = false;
- classSave.savingOnlyHeader = false;
- classSave.headerClassName = 'po_sourcing_rule_header';
- classSave.lineClassName = 'po_sourcing_rule_line';
- classSave.saveMain();
 });

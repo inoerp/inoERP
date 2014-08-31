@@ -221,7 +221,7 @@
  								<li><?php echo form::hidden_field('tax_code_value', $$class_second->tax_code_value); ?></li>
  							 </ul>
  							</td>
- 							<td class="seq_number"><?php echo $count; ?></td>
+ 							<td><?php $f->seq_field_d($count) ?></td>
  							<td><?php form::text_field_wid2sr('sd_so_line_id'); ?></td>
  							<td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
  							<td><?php echo $f->select_field_from_object('line_type', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class_second->line_type, '', 'medium', 1, $readonly); ?></td>
@@ -265,7 +265,7 @@
 							}
 							?>         
  						 <tr class="sd_so_line<?php echo $count ?>">
- 							<td class="seq_number"><?php echo $count; ?></td>
+ 							<td><?php $f->seq_field_d($count) ?></td>
               <td><?php echo $f->select_field_from_object('price_list_header_id', mdm_price_list_header::find_all_sales_pl(), 'mdm_price_list_header_id', 'price_list', $$class_second->price_list_header_id, '', 'medium copyValue'); ?>
  							</td>
  							<td><?php echo $f->date_fieldAnyDay('price_date', $$class_second->price_date) ?></td>
@@ -299,7 +299,7 @@
 						 foreach ($sd_so_line_object as $sd_so_line) {
 							?>         
  						 <tr class="sd_so_line<?php echo $count ?>">
- 							<td class="seq_number"><?php echo $count; ?></td>
+ 							<td><?php $f->seq_field_d($count) ?></td>
  							<td><?php echo $f->date_fieldFromToday_d('requested_date', $$class_second->requested_date) ?></td>
  							<td><?php echo $f->date_fieldFromToday('promise_date', $$class_second->promise_date) ?></td>
  							<td><?php echo $f->date_fieldFromToday('schedule_ship_date', $$class_second->schedule_ship_date) ?></td>
@@ -338,7 +338,7 @@
 							}
 							?>         
  						 <tr class="sd_so_line<?php echo $count ?>">
- 							<td class="seq_number"><?php echo $count; ?></td>
+ 							<td><?php $f->seq_field_d($count) ?></td>
  							<td><?php form::text_field_wid2('line_description'); ?></td>
  							<td><?php echo $f->select_field_from_array('supply_source', sd_document_type::$supply_source_a, $$class_second->supply_source, '', 'copyValue'); ?>	</td>
  							<td> <?php echo $f->select_field_from_array('destination_type', sd_document_type::$destination_type_a, $$class_second->destination_type, '', 'copyValue'); ?></td>
@@ -372,7 +372,7 @@
 							$sd_so_line->ar_transaction_number = null;
 							?>         
  						 <tr class="sd_so_line<?php echo $count ?>">
- 							<td class="seq_number"><?php echo $count; ?></td>
+ 							<td><?php $f->seq_field_d($count) ?></td>
  							<td><?php form::number_field_wid2sr('invoiced_quantity'); ?></td>
  							<td><?php form::text_field_wid2r('ar_transaction_header_id'); ?></td>
  							<td><?php form::text_field_wid2r('ar_transaction_line_id'); ?></td>

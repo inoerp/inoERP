@@ -45,7 +45,7 @@
              <li><?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
               <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supplier_id select_popup clickable">
                Supplier Name : </label> 
-              <?php echo $f->text_field_D('supplier_name','select_supplier_name'); ?> </li>
+              <?php echo $f->text_field_D('supplier_name', 'select_supplier_name'); ?> </li>
              <li><label class="auto_complete">Supplier Number : </label> <?php $f->text_field_d('supplier_number'); ?></li>
              <li><label>Supplier Site : </label>
               <?php
@@ -200,9 +200,10 @@
                <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
                <td><?php echo $f->select_field_from_object('receving_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->receving_org_id, '', '', 1, $readonly); ?></td>
                <td><?php echo form::select_field_from_object('line_type', po_requisition_line::po_requisition_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, 'line_type', $readonly); ?></td>
-               <td><?php echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
-            form::text_field_wid2('item_number', 'select_item_number');
-              ?>
+               <td><?php
+                echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
+                form::text_field_wid2('item_number', 'select_item_number');
+                ?>
                 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
                <td><?php form::text_field_wid2('item_description'); ?></td>
                <td><?php
@@ -299,10 +300,10 @@
                         <tr class="po_requisition_detail<?php echo $count . '-' . $detailCount; ?> <?php echo $detailCount != 0 ? ' new_object' : '' ?>">
                          <td><?php form::text_field_wid3('order_number'); ?></td>
                          <td>
-   <?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class_second->receving_org_id), 'subinventory_id', 'subinventory', $$class_third->subinventory_id, '', 'subinventory_id copyValue', ''); ?>
+                          <?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class_second->receving_org_id), 'subinventory_id', 'subinventory', $$class_third->subinventory_id, '', 'subinventory_id copyValue', ''); ?>
                          </td>
                          <td>
-   <?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_third->subinventory_id), 'locator_id', 'locator', $$class_third->locator_id, '', 'locator_id copyValue', ''); ?>
+                          <?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_third->subinventory_id), 'locator_id', 'locator', $$class_third->locator_id, '', 'locator_id copyValue', ''); ?>
                          </td>
                          <td><?php $f->text_field_wid3('requestor'); ?></td>
                         </tr>

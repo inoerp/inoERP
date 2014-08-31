@@ -63,7 +63,7 @@
    'doc_currency',
    'payment_term_id',
    'agreement_start_date',
-   'aggrement_end_date',
+   'agreement_end_date',
    'exchange_rate_type',
    'exchange_rate',
 //   'released_amount',
@@ -167,7 +167,7 @@
   public $doc_currency;
   public $payment_term_id;
   public $agreement_start_date;
-  public $aggrement_end_date;
+  public $agreement_end_date;
   public $exchange_rate_type;
   public $exchange_rate;
 //  public $released_amount;
@@ -367,7 +367,7 @@
    $po_header_after_rev->approved_date = current_time();
    $po_header_after_rev->audit_trial();
    $po_header_after_rev->update_changesOnly($po_header_after_rev->po_header_id);
-   $po_header_after_rev->_write_comment($approving_user_id, $comment_msg);
+   $po_header_after_rev->write_comment($approving_user_id, $comment_msg);
   }
 
   private function _convert_requisition_toPO_header($i, &$PO_cretaed) {
