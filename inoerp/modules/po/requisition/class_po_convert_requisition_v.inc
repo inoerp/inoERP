@@ -26,6 +26,7 @@ class po_convert_requisition_v extends dbObject {
 		 'line_type',
 		 'po_requisition_line_number',
 		 'item_id_m',
+  'bpa_po_line_id',
 		 'item_description',
 		 'line_description',
 		 'line_quantity',
@@ -89,6 +90,7 @@ class po_convert_requisition_v extends dbObject {
 		 'line_type',
 		 'po_requisition_line_number',
 		 'item_id_m',
+  'bpa_po_line_id',
 		 'item_description',
 		 'line_description',
 		 'line_quantity',
@@ -153,6 +155,7 @@ class po_convert_requisition_v extends dbObject {
  public $line_type;
  public $po_requisition_line_number;
  public $item_id_m;
+ public $bpa_po_line_id;
  public $item_description;
  public $line_description;
  public $line_quantity;
@@ -190,7 +193,7 @@ payment_term_id,
 supplier_name, supplier_number,
 supplier_site_name, supplier_site_number,
 payment_term, payment_term_description,
-po_requisition_line_id, line_type, po_requisition_line_number,	item_id_m, item_description, 
+po_requisition_line_id, line_type, po_requisition_line_number,	item_id_m, bpa_po_line_id, item_description, 
 line_description, line_quantity, unit_price, line_price,  receving_org_id,
 item_number, uom_id, item_status,
 po_requisition_detail_id, shipment_number, subinventory_id, locator_id, requestor, quantity,
@@ -206,7 +209,8 @@ IFNULL(po_requisition_header.payment_term_id, supplier_site.payment_term_id),
 supplier.supplier_name, supplier.supplier_number,
 supplier_site.supplier_site_name, supplier_site.supplier_site_number,
 payment_term.payment_term, payment_term.description,
-po_requisition_line.po_requisition_line_id, po_requisition_line.line_type, po_requisition_line.line_number,	po_requisition_line.item_id_m, po_requisition_line.item_description, po_requisition_line.line_description, 
+po_requisition_line.po_requisition_line_id, po_requisition_line.line_type, po_requisition_line.line_number,	po_requisition_line.item_id_m,
+po_requisition_line.bpa_po_line_id, po_requisition_line.item_description, po_requisition_line.line_description, 
 po_requisition_line.line_quantity, po_requisition_line.unit_price, po_requisition_line.line_price,po_requisition_line.receving_org_id,
 item.item_number, item.uom_id, item.item_status,
 po_requisition_detail.po_requisition_detail_id, po_requisition_detail.shipment_number,  po_requisition_detail.subinventory_id, 

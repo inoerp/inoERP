@@ -261,7 +261,12 @@ function new_searchCriteria_onClick(json_url) {
 detailObjectCount = 3000;
 dateCount = 30000;
 function onClick_addDetailLine(trClass, tbodyClass, noOfTabs) {
+ var highest_seq_num = 0;
  $("#content").on("click", ".add_row_detail_img", function() {
+  if ($(tbodyClass).find('.detail_seq_number').last().val()) {
+   highest_seq_num = $(tbodyClass).find('.detail_seq_number').last().val();
+  }
+  var nextDetailSeqNumber_seq = (+highest_seq_num) + 1;
   var lastDetailSeqNumber = $('.detail_number:last').val();
   var nextDetailSeqNumber = (+lastDetailSeqNumber + 1);
 //	var nextDetailSeqNumber = (+lastDetailSeqNumber + 0.1).toFixed(1);
@@ -276,7 +281,7 @@ function onClick_addDetailLine(trClass, tbodyClass, noOfTabs) {
   if (noOfTabs > 1) {
    tabCount = 1;
    do {
-    $("#tabsDetail-" + tabCount + "-1 " + trClass).clone().attr("id", "new_object" + detailObjectCount).attr("class", "new_object " + detailObjectCount).appendTo($(closetLineRowClass + " #tabsDetail-" + tabCount + primaryTabNumber + " " + tbodyClass));
+    $("#tabsDetail-" + tabCount + "-1 " + trClass).clone().attr("class", "new_object " + detailObjectCount).appendTo($(closetLineRowClass + " #tabsDetail-" + tabCount + primaryTabNumber + " " + tbodyClass));
     tabCount++;
    }
    while (tabCount <= noOfTabs);
@@ -294,7 +299,8 @@ function onClick_addDetailLine(trClass, tbodyClass, noOfTabs) {
    $(this).val("");
   });
   $('.detail_number:last').val(nextDetailSeqNumber);
-  $(".new_object" + detailObjectCount).find(".date").each(function() {
+   $(".new_object." + detailObjectCount).find(".detail_seq_number").val(nextDetailSeqNumber_seq);
+  $(".new_object." + detailObjectCount).find(".date").each(function() {
    $(this).attr("id", "date" + dateCount);
    $(this).attr("class", "date");
    dateCount++;
@@ -303,19 +309,7 @@ function onClick_addDetailLine(trClass, tbodyClass, noOfTabs) {
  });
 }
 
-//function onClick_addDetailLine(trClass, tbodyClass, noOfTabs, divClassToBeCopied, lineNumberIncrementValue) {
-// $("body table").on("click", ".add_row_detail_img", function() {
-//	var addNewRow = new add_new_rowMain();
-//	addNewRow.trClass = trClass;
-//	addNewRow.tbodyClass = tbodyClass;
-//	addNewRow.noOfTabs = noOfTabs;
-//	addNewRow.removeDefault = true;
-//	addNewRow.divClassToBeCopied = divClassToBeCopied;
-//	addNewRow.lineNumberIncrementValue = lineNumberIncrementValue;
-//	addNewRow.add_new_row();
-// });
-// return 1;
-//}
+
 function onClick_add_new_row(trClass, tbodyClass, noOfTabs, divClassToBeCopied) {
  $("body table").on("click", ".add_row_img", function() {
 //	add_new_row(trClass, tbodyClass, noOfTabs);
@@ -335,6 +329,11 @@ function onClick_add_new_row(trClass, tbodyClass, noOfTabs, divClassToBeCopied) 
 var objectDetailTabCount = 2;
 var detailObjectRowCount = 600;
 function addOrShow_lineDetails(trClassToCopy) {
+ var highest_seq_num = 0;
+ if ($('.form_data_detail_tbody').find('.detail_seq_number').last().val()) {
+   highest_seq_num = $('.form_data_detail_tbody').find('.detail_seq_number').last().val();
+  }
+  var nextDetailSeqNumber_seq = (+highest_seq_num) + 1;
  $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function() {
   var detailExists = $(this).closest("td").find(".form_detail_data_fs").length;
   if (detailExists > 0) {
@@ -368,6 +367,7 @@ function addOrShow_lineDetails(trClassToCopy) {
    $(".tabsDetail").tabs();
    $(this).closest("td").find(".form_detail_data_fs").toggle();
    $(this).closest("td").find(".detail_number:first").val(detailNumber);
+   $(this).closest("td").find(".detail_seq_number").val(nextDetailSeqNumber_seq);
   }
   objectDetailTabCount++;
   detailObjectRowCount++;
@@ -596,7 +596,7 @@ function getExchangeRate(options) {
 }
 
 //get Supplier details - supplier Sites, addresses etc - supplier_id, afterFunction not mandatory
-function getSupplierDetails(jsonurl, org_id, supplier_id, afterFunction) {
+function getSupplierDetails(jsonurl, org_id, supplier_id, trClass) {
  supplier_id = typeof (supplier_id) !== 'undefined' ? supplier_id : $("#supplier_id").val();
  $('.show_loading_small').show();
  $.ajax({
@@ -615,7 +615,11 @@ function getSupplierDetails(jsonurl, org_id, supplier_id, afterFunction) {
   $.each(result, function(key, value) {
    switch (key) {
     case 'supplier_site_id':
+     if(typeof (trClass) !== 'undefined'){
+      $('#content').find(trClass).find('.supplier_site_id').replaceWith(value);
+     }else{
      $("#supplier_site_id").replaceWith(value);
+    }
      break;
 
     case 'payment_term_id':
@@ -624,7 +628,7 @@ function getSupplierDetails(jsonurl, org_id, supplier_id, afterFunction) {
      $('#content').find(className).val(value);
      break;
    }
-
+ 
   });
   $('.show_loading_small').hide();
  }).fail(function() {
@@ -1229,6 +1233,9 @@ function getBPAList(options) {
  var defaults = {
   json_url: 'modules/po/json_po.php',
   bu_org_id: $('#bu_org_id').val(),
+  field_name: 'po_number',
+  replacing_field: 'po_number',
+  trclass: false,
  };
  var settings = $.extend({}, defaults, options);
 
@@ -1238,23 +1245,49 @@ function getBPAList(options) {
   dataType: 'json',
   data: {
    bu_org_id: settings.bu_org_id,
+   supplier_site_id: settings.supplier_site_id,
+   item_id_m: settings.item_id_m,
    find_bpa_list: 1
   },
   success: function(result) {
    if (result) {
-    var select_stmt = '<select id="po_number" class="select "po_number" required name=""po_number[]" style="background-color: pink; max-width:90%;">';
-    $.each(result, function(key, bpa) {
-     $.each(result, function(f_key, f_name) {
-      select_stmt += '<option data-ref_po_hedader_id="' + f_name.po_header_id + '" value="' + f_name.po_number + '">' + f_name.po_number + ' ' + f_name.supplier_name + '</option>';
-     });
+    if (settings.trclass) {
+     var select_stmt = '<select class="select ' + settings.field_name + '" name="' + settings.field_name + '[]" style="max-width:95%;">';
+    } else {
+     var select_stmt = '<select id="' + settings.field_name + '" class="select ' + settings.field_name + '" name="' + settings.field_name + '[]" style="max-width:95%;">';
+    }
+    $.each(result, function(f_key, f_name) {
+     select_stmt += '<option data-ref_po_line_id="' + f_name.po_line_id + '" value="' + f_name.po_header_id + '">' + f_name.po_number + ' Line ' + f_name.po_line_number + '</option>';
     });
     select_stmt += '</select>';
-    $('#po_number').replaceWith(select_stmt);
+    if (settings.trclass) {
+     var trclass_d = '.' + settings.trclass;
+     var replacing_field_d = '.' + settings.replacing_field;
+     $(trclass_d).find(replacing_field_d).replaceWith(select_stmt);
+    } else {
+     var replacing_field_id_h = '#' + settings.replacing_field;
+     $(replacing_field_id_h).replaceWith(select_stmt);
+    }
    } else {
-
+    if (settings.trclass) {
+     var select_stmt = '<select class="select ' + settings.field_name + '" name="' + settings.field_name + '[]" style="max-width:95%;">';
+    } else {
+     var select_stmt = '<select id="' + settings.field_name + '" class="select ' + settings.field_name + '"  name="' + settings.field_name + '[]" style=max-width:95%;">';
+    }
+    select_stmt += '<option></option>';
+    select_stmt += '</select>';
+    if (settings.trclass) {
+     var trclass_d = '.' + settings.trclass;
+     var replacing_field_d = '.' + settings.replacing_field;
+     $(trclass_d).find(replacing_field_d).replaceWith(select_stmt);
+    } else {
+     var replacing_field_id_h = '#' + settings.replacing_field;
+     $(replacing_field_id_h).replaceWith(select_stmt);
+    }
    }
   },
   complete: function() {
+   $('.document_header_id').trigger('changeHeader');
    $('.show_loading_small').hide();
   },
   beforeSend: function() {

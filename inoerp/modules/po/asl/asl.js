@@ -90,16 +90,10 @@ $(document).ready(function() {
 
  $("#content").on("change", '.supplier_name, .supplier_id', function() {
 	var trClass = '.' + $(this).closest('tr').prop('class');
-	function afterFunction(result) {
-	 var supplier_sites = $(result).find('div#json_supplierSites_find_all').html();
-	  $('#content').find(trClass).find('.supplier_site_id').replaceWith(supplier_sites);
-		$('#content').find(trClass).find('.supplier_site_id').removeAttr('id');
-	 trClass = null;
-	}
-	if (($(this).closest('tr').find('.supplier_id').val())) {
-	 var supplier_id = $(this).closest('tr').find('.supplier_id').val();
-	 getSupplierDetails('modules/ap/supplier/json_supplier.php', '', supplier_id, afterFunction);
-	}
+  if (($(this).closest('tr').find('.supplier_id').val())) {
+   var supplier_id = $(this).closest('tr').find('.supplier_id').val();
+   getSupplierDetails('modules/ap/supplier/json_supplier.php', '', supplier_id, trClass);
+  }
  });
 
  //selecting supplier

@@ -435,8 +435,7 @@
     $linedata = $_POST['lineData'];
     if (!empty($linedata)) {
      $postArray = get_postArray_From_jqSearializedArray($linedata);
-
-     if (!empty($lineDetail_data['detailData'])) {
+      if (!empty($lineDetail_data['detailData'])) {
       $_posted_detail_line = $_POST['detailData'];
      }
 

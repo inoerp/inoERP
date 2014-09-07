@@ -1,6 +1,6 @@
 <?php
 
-class sd_so_line extends dbObject {
+class hr_expense_line extends dbObject {
 
  public static $table_name = "sd_so_line";
  public static $primary_column = "sd_so_line_id";

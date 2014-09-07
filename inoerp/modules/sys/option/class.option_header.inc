@@ -7,10 +7,10 @@
   public static $primary_column = "option_header_id";
   public static $key_column = 'option_type';
   public static $module = "sys";
-  public static $access_level_array = [
-   'system' => 'System',
-   'user' => 'User',
-   'both' => 'Both'
+  public static $access_level_a = [
+   'SYSTEM' => 'System',
+   'USER' => 'User',
+   'BOTH' => 'Both'
   ];
   public $field_a = [
    "option_header_id",

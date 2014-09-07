@@ -23,7 +23,9 @@ if ((!empty($_GET['delete'])) && ($_GET['delete'] == 1)) {
 
 if (empty($_POST)) {
  try {
-	if (($update_access)) {
+  if(!empty($_GET['view_type'] ) && $_GET['view_type'] == 'list'){
+   require_once(INC_BASICS . DS . "search_page.inc");
+  }else if (($update_access)) {
 	 require_once ino_include(THEME_DIR, $template_file_names[0]);
 	} else if (($write_access) && (empty($$class->$class_id_first))) {
 	 require_once ino_include(THEME_DIR, $template_file_names[0]);

@@ -94,8 +94,7 @@
                   <td><?php $f->seq_field_d($count) ?></td>
                   <td><?php $f->text_field_widsr('po_asl_document_id') ?></td>
                   <td><?php echo $f->select_field_from_array('document_type', po_asl_document::$document_type_a, $$class->document_type, '', '', 1, '', $readonly1); ?></td>
-                  <td><?php echo $f->select_field_from_array('document_header_id', $document_number_a, $$class->document_header_id); ?>
-                   <?php echo $f->hidden_field('document_line_id', $$class->document_line_id); ?></td>
+                  <td><?php echo $f->select_field_from_array('document_line_id', $document_number_a, $$class->document_line_id); ?></td>
                   <td><?php echo $f->date_fieldAnyDay('start_date', $$class->start_date); ?></td>
                   <td><?php echo $f->date_fieldAnyDay('end_date', $$class->end_date); ?></td>
                   <td><?php $f->text_field_wid('priority'); ?></td>

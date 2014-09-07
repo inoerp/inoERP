@@ -19,6 +19,17 @@ function getFieldNames(tableName, parentClass) {
  $(".table_fields").attr("disabled", false);
 }
 
+function setValFromSelectPage(view_id) {
+ this.view_id = view_id;
+}
+
+setValFromSelectPage.prototype.setVal = function() {
+ var view_id = this.view_id;
+  if (view_id) {
+	$("#view_id").val(view_id);
+ }
+};
+
 $(document).ready(function() {
  //togle values
  $("#view_query label").click(function() {
@@ -387,7 +398,27 @@ $(document).ready(function() {
 	$("#logical_settings_value").val(logical_settings);
 //alert($("#logical_settings_value").val());
  });
+ 
+  //save class
+ var classSave = new saveMainClass();
+ classSave.json_url = 'form.php?class_name=view';
+ classSave.form_header_id = 'view_header';
+ classSave.primary_column_id = 'view_id';
+ classSave.single_line = false;
+ classSave.savingOnlyHeader = true;
+ classSave.enable_select = true;
+ classSave.headerClassName = 'view';
+ classSave.saveMain();
 
-}
+  $(".view_id.select_popup").on("click", function() {
+	void window.open('select.php?class_name=view', '_blank',
+					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+ 
+ //Get the ext_url_alias_id on find button click
+ $('a.show.view_id').click(function(e) {
+	var headerId = $('#view_id').val();
+	$(this).attr('href', modepath() + 'view_id=' + headerId);
+ });
 
-);
+});

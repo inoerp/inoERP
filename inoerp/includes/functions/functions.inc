@@ -16,7 +16,9 @@
   $paths = explode('_', $className);
   // echo "paths $paths";
   $path = $paths[0] . '/';
+  if(!empty($paths[1])){
   $path .= $paths[1] . '/';
+  }
 // $path .= $paths[2] . '/';
   $filename = getcwd() . "/modules/" . $path . 'class_' . $className . ".inc";
   if (is_readable($filename)) {
@@ -53,7 +55,9 @@
 //	$path .= $key>0 ? str_replace('.inc', '', $value).'/' : null;
 // }
   $path = $paths[0] . '/';
+  if(!empty($paths[1])){
   $path .= $paths[1] . '/';
+  }
   $filename = getcwd() . "/extensions/" . $path . 'class_' . $className . ".inc";
   if (is_readable($filename)) {
    require $filename;

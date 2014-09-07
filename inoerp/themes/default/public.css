@@ -35,6 +35,8 @@ padding: 10px;
 .account_popup, .select_popup{
 display: inline-block;
 width: 12px;
+    cursor: pointer; 
+		cursor: hand; 
 }
 
 .major_row{

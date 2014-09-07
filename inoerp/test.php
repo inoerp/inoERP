@@ -22,7 +22,12 @@ include_once("includes/basics/header_public.inc");
 
 //$sys_notification = new sys_notification();
 //  pa($sys_notification->find_openNotification_toUserId('34'));
-  pa(get_dbColumns('sys_document_sequence'));
+pa(get_dbColumns('po_quote_header'));
+pa(get_dbColumns('po_quote_line'));
+pa(get_dbColumns('po_quote_detail'));
+//  pa(get_dbColumns('po_rfq_line'));
+//  pa(get_dbColumns('po_rfq_requirement'));
+  
 //  pa(get_dbColumns('hr_leave_entitlement_line'));
 //  pa(get_dbColumns('hr_approval_limit_assignment'));
   

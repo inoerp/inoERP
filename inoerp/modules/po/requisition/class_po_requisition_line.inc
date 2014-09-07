@@ -17,6 +17,7 @@
    'line_number',
    'receving_org_id',
    'item_id_m',
+   'bpa_po_line_id',
    'item_description',
    'line_description',
    'uom_id',
@@ -72,6 +73,7 @@
   public $line_number;
   public $receving_org_id;
   public $item_id_m;
+  public $bpa_po_line_id;
   public $item_description;
   public $line_description;
   public $uom_id;

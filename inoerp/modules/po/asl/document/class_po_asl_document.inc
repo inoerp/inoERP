@@ -7,13 +7,13 @@
   public static $key_column = 'po_asl_line_id';
   public static $module = "po";
   public static $document_type_a = [
-   'BLANKET_AGREEMENT' => 'Blanket Purchase Agreement'
+   'po_line' => 'Blanket Purchase Agreement'
   ];
   public $field_a = [
    'po_asl_document_id',
    'po_asl_line_id',
    'document_type',
-   'document_header_id',
+//   'document_header_id',
    'document_line_id',
    'start_date',
    'end_date',
@@ -26,17 +26,17 @@
   public $initial_search = [
    'po_asl_line_id',
    'document_type',
-   'document_header_id',
+   'document_line_id',
   ];
   public $requiredField = [
    'po_asl_line_id',
    'document_type',
-   'document_header_id',
+   'document_line_id',
   ];
   public $po_asl_document_id;
   public $po_asl_line_id;
   public $document_type;
-  public $document_header_id;
+//  public $document_header_id;
   public $document_line_id;
   public $start_date;
   public $end_date;

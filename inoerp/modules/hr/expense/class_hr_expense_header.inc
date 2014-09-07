@@ -1,6 +1,6 @@
 <?php
 
-class sd_so_header extends dbObject {
+class hr_expense_header extends dbObject {
 
  public static $table_name = "sd_so_header";
  public static $dependent_classes = ['sd_so_line'];

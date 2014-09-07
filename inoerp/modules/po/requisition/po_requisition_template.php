@@ -80,7 +80,7 @@
              <li><label>Exchange Rate : </label>  <?php form::number_field_d('exchange_rate'); ?>              </li>
              <li><label>Header Amount : </label>  <?php form::number_field_d('header_amount'); ?>              </li>
              <li><label>Payment Term : </label>
-              <?php echo $f->select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, 'payment_term_id', '', 1, $readonly1); ?>
+              <?php echo $f->select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, 'payment_term_id', '', 1, $readonly); ?>
              </li>
             </ul>
            </div>
@@ -405,97 +405,110 @@
              <th>Line Description</th>
              <th>Ref Doc Type</th>
              <th>Ref Number</th>
+             <th>BPA Number</th>
             </tr>
            </thead>
            <tbody class="form_data_line_tbody">
             <?php
              $count = 0;
+             $document_number_a = array(null);
              foreach ($po_requisition_line_object as $po_requisition_line) {
-              ?>         
-              <tr class="po_requisition_line<?php echo $count ?>">
+//echo $$class->bu_org_id . ' : '. $$class->supplier_site_id .  ' : ' . $$class_second->item_id_m ;
+              if (!empty($$class->bu_org_id) && !empty($$class->supplier_site_id) && !empty($$class_second->item_id_m)) {
+               $document_number_obj = po_blanket_v::find_all_active_bpa($$class->bu_org_id, $$class->supplier_site_id, $$class_second->item_id_m);
+               $document_number_a = [];
+               if ($document_number_obj) {
+                foreach ($document_number_obj as $obj) {
+                 $document_number_a[$obj->po_line_id] = $obj->po_number . ' Line# ' . $obj->po_line_number;
+                }
+               }
+              }
+               ?>         
+               <tr class="po_requisition_line<?php echo $count ?>">
 
-               <td><?php echo $f->select_field_from_object('price_list_header_id', mdm_price_list_header::find_all_purchasing_pl(), 'mdm_price_list_header_id', 'price_list', $$class_second->price_list_header_id, '', 'medium copyValue'); ?>
-               </td>
-               <td><?php echo $f->date_fieldAnyDay('price_date', $$class_second->price_date, 'copyValue') ?></td>
-               <td><?php echo $f->number_field('unit_price', $$class_second->unit_price); ?></td>
-               <td><?php echo $f->number_field('line_price', $$class_second->line_price); ?></td>
+                <td><?php echo $f->select_field_from_object('price_list_header_id', mdm_price_list_header::find_all_purchasing_pl(), 'mdm_price_list_header_id', 'price_list', $$class_second->price_list_header_id, '', 'medium copyValue'); ?>
+                </td>
+                <td><?php echo $f->date_fieldAnyDay('price_date', $$class_second->price_date, 'copyValue') ?></td>
+                <td><?php echo $f->number_field('unit_price', $$class_second->unit_price); ?></td>
+                <td><?php echo $f->number_field('line_price', $$class_second->line_price); ?></td>
 
-               <td><?php form::text_field_wid2('line_description'); ?></td>
-               <td><?php form::text_field_wid2('reference_doc_type'); ?></td>
-               <td><?php form::text_field_wid2('reference_doc_number'); ?></td>
+                <td><?php form::text_field_wid2('line_description'); ?></td>
+                <td><?php form::text_field_wid2('reference_doc_type'); ?></td>
+                <td><?php form::text_field_wid2('reference_doc_number'); ?></td>
+                <td><?php echo $f->select_field_from_array('bpa_po_line_id', $document_number_a, $$class_second->bpa_po_line_id); ?></td>
+               </tr>
+               <?php
+               $count = $count + 1;
+              }
+              ?>
+             </tbody>
+             <!--                  Showing a blank form for new entry-->
+            </table>
+           </div>
+           <div id="tabsLine-3" class="tabContent">
+            <table class="form_line_data_table">
+             <thead> 
+              <tr>
+               <th>Comments</th>
+
               </tr>
+             </thead>
+             <tbody class="form_data_line_tbody">
               <?php
-              $count = $count + 1;
-             }
-            ?>
-           </tbody>
-           <!--                  Showing a blank form for new entry-->
-          </table>
-         </div>
-         <div id="tabsLine-3" class="tabContent">
-          <table class="form_line_data_table">
-           <thead> 
-            <tr>
-             <th>Comments</th>
+              $count = 0;
+              foreach ($po_requisition_line_object as $po_requisition_line) {
+               ?>         
+               <tr class="po_requisition_line<?php echo $count ?>">
+                <td></td>
+               </tr>
+               <?php
+               $count = $count + 1;
+              }
+              ?>
+             </tbody>
+             <!--                  Showing a blank form for new entry-->
 
-            </tr>
-           </thead>
-           <tbody class="form_data_line_tbody">
-            <?php
-             $count = 0;
-             foreach ($po_requisition_line_object as $po_requisition_line) {
-              ?>         
-              <tr class="po_requisition_line<?php echo $count ?>">
-               <td></td>
-              </tr>
-              <?php
-              $count = $count + 1;
-             }
-            ?>
-           </tbody>
-           <!--                  Showing a blank form for new entry-->
-
-          </table>
+            </table>
+           </div>
+          </div>
          </div>
-        </div>
+        </form>
+
        </div>
-      </form>
 
+       <!--END OF FORM HEADER-->
+      </div>
      </div>
-
-     <!--END OF FORM HEADER-->
+     <!--   end of structure-->
     </div>
+    <div id="content_bottom"></div>
    </div>
-   <!--   end of structure-->
+   <div id="content_right_right"></div>
   </div>
-  <div id="content_bottom"></div>
- </div>
- <div id="content_right_right"></div>
-</div>
 
-</div>
-<div id="js_data">
- <ul id="js_saving_data">
-  <li class="headerClassName" data-headerClassName="po_requisition_header" ></li>
-  <li class="lineClassName" data-lineClassName="po_requisition_line" ></li>
-  <li class="detailClassName" data-detailClassName="po_requisition_detail" ></li>
-  <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
-  <li class="primary_column_id" data-primary_column_id="po_requisition_header_id" ></li>
-  <li class="form_header_id" data-form_header_id="po_requisition_header" ></li>
-  <li class="line_key_field" data-line_key_field="item_description" ></li>
-  <li class="single_line" data-single_line="false" ></li>
-  <!--<li class="single_line" data-enable_select="true" ></li>-->
-  <li class="form_line_id" data-form_line_id="po_requisition_line" ></li>
- </ul>
- <ul id="js_contextMenu_data">
-  <li class="docHedaderId" data-docHedaderId="po_requisition_header_id" ></li>
-  <li class="docLineId" data-docLineId="po_requisition_line_id" ></li>
-  <li class="docDetailId" data-docDetailId="po_requisition_detail_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="po_requisition_header" ></li>
-  <li class="btn2DivId" data-btn2DivId="form_line" ></li>
-  <li class="trClass" data-docHedaderId="po_requisition_line" ></li>
-  <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>
-  <li class="noOfTabbs" data-noOfTabbs="3" ></li>
- </ul>
-</div>
-<?php include_template('footer.inc') ?>
+  </div>
+  <div id="js_data">
+   <ul id="js_saving_data">
+    <li class="headerClassName" data-headerClassName="po_requisition_header" ></li>
+    <li class="lineClassName" data-lineClassName="po_requisition_line" ></li>
+    <li class="detailClassName" data-detailClassName="po_requisition_detail" ></li>
+    <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
+    <li class="primary_column_id" data-primary_column_id="po_requisition_header_id" ></li>
+    <li class="form_header_id" data-form_header_id="po_requisition_header" ></li>
+    <li class="line_key_field" data-line_key_field="item_description" ></li>
+    <li class="single_line" data-single_line="false" ></li>
+    <!--<li class="single_line" data-enable_select="true" ></li>-->
+    <li class="form_line_id" data-form_line_id="po_requisition_line" ></li>
+   </ul>
+   <ul id="js_contextMenu_data">
+    <li class="docHedaderId" data-docHedaderId="po_requisition_header_id" ></li>
+    <li class="docLineId" data-docLineId="po_requisition_line_id" ></li>
+    <li class="docDetailId" data-docDetailId="po_requisition_detail_id" ></li>
+    <li class="btn1DivId" data-btn1DivId="po_requisition_header" ></li>
+    <li class="btn2DivId" data-btn2DivId="form_line" ></li>
+    <li class="trClass" data-docHedaderId="po_requisition_line" ></li>
+    <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>
+    <li class="noOfTabbs" data-noOfTabbs="3" ></li>
+   </ul>
+  </div>
+  <?php include_template('footer.inc') ?>

@@ -153,6 +153,10 @@ EOD;
   public function seq_field_d($value) {
    echo $this->text_field('seq_number', $value, '6', '', 'seq_number', '', 1);
   }
+  
+    public function seq_field_detail_d($value) {
+   echo $this->text_field('detail_seq_number', $value, '6', '', '', '', 1);
+  }
 
   public function text_field_ap($array) {
    $name = array_key_exists('name', $array) ? $array['name'] : null;

@@ -254,6 +254,7 @@
   }
 
   public static function count_all_by_sql($sql) {
+//   echo "sql is $sql";
    $result = static::find_by_sql_array($sql);
    return !empty($result) ? array_shift2($result) : false;
   }

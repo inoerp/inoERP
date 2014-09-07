@@ -30,7 +30,7 @@
 					 <?php form::text_field_dm('option_type'); ?>
 					</li>
 					<li><label>Access Level* : </label>
-					 <?php echo form::select_field_from_array('access_level', option_header::$access_level_array, $option_header->access_level, 'access_level', $readonly); ?>
+					 <?php echo form::select_field_from_array('access_level', option_header::$access_level_a, $option_header->access_level, 'access_level', $readonly); ?>
 					</li>
 					<li><label>Description : </label>
 					 <?php echo form::text_field_dm('description'); ?>

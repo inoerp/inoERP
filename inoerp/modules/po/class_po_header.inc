@@ -12,7 +12,7 @@
   public static $js_fileName = 'modules/po/js/multi_select.js';
   public static $system_info = [
    'name' => 'Purchasing',
-   'number' => '2210',
+   'number' => '2212',
    'description' => 'Create & Mainten Purchase Order & Related documents/transactions',
    'version' => '1.1.1.3',
    'db_version' => '1001',
@@ -264,6 +264,8 @@
     if (($this->po_type == 'BLANKET_RELEASE') && empty($this->release_number)) {
      echo "<br>You cant approve a relase with a release number";
      return -99;
+    }else{
+ 
     }
     $pur_control = po_purchasing_control::find_by_org_id($this->bu_org_id);
     if (empty($pur_control->po_approval_hierarchy)) {
@@ -412,29 +414,33 @@
    return $poh->po_header_id;
   }
 
-  private function _convert_requisition_toBPArelease($i) {
+  private function _convert_requisition_toBPArelease($i, &$PO_cretaed) {
+   global $dbc;
    $po_rd = new po_requisition_detail();
    $po_rd->findBy_id($_POST['po_requisition_detail_id'][$i]);
    if (!empty($po_rd->order_number)) {
     return;
    }
    $po_rls = new po_header();
-   $po_rls->findBy_id($_POST['po_header_id'][$i]);
+   $bpa_line = new po_line();
+   $bpa_line->findBy_id($_POST['bpa_po_line_id'][$i]);
+   $po_rls->findBy_id($bpa_line->po_header_id);
+   $po_rls->ref_po_header_id = $po_rls->po_header_id;
+   $po_rls->po_header_id = null;
    $po_rls->release_number = $po_rls->_find_relNumber($po_rls->po_header_id);
    $po_rls->po_type = 'BLANKET_RELEASE';
    $po_rls->po_status = 'ENTERED';
    $po_rls->audit_trial();
    $po_rls->save();
-   $bpa_po_line = po_line::find_by_poHeaderId_itemId($_POST['po_header_id'][$i], $_POST['item_id_m'][$i]);
+   echo "<br> PO Header is succefully created. Header Id - " . $po_rls->po_header_id;
    $line_number = 1;
-
    $pol = new po_line();
-   foreach ($bpa_po_line as $k => $v) {
+   foreach ($bpa_line as $k => $v) {
     $pol->$k = $v;
    }
-   $pol->po_line_id = nul;
+   $pol->po_line_id = null;
    $pol->line_number = $line_number;
-   $pol->bpa_line_id = $bpa_po_line->po_line_id;
+   $pol->bpa_line_id = $bpa_line->po_line_id;
    $pol->line_type = 'GOODS';
    $pol->po_header_id = $po_rls->po_header_id;
    $pol->receving_org_id = $_POST['receving_org_id'][$i];
@@ -465,7 +471,7 @@
    $pod->save();
    echo "<br> PO Detail is succefully created. Detail Id - " . $pod->po_detail_id;
 
-   $po_rd->order_number = $po_rls->po_header_id;;
+   $po_rd->order_number = $po_rls->po_header_id;
    $po_rd->audit_trial();
    $po_rd->save();
   }
@@ -480,10 +486,7 @@
    for ($i = 0; $i < count($_POST['po_requisition_detail_id']); $i++) {
     $line_number ++;
     $po_header_id = null;
-    if (!empty($_POST['po_header_id'][$i])) {
-     $this->_convert_requisition_toBPArelease($i);
-     continue;
-    }
+
     foreach ($PO_cretaed as $po_recods) {
      if (array_search($_POST['supplier_site_id'][$i], $po_recods)) {
       $po_header_id = $po_recods['po_header_id'];
@@ -492,7 +495,11 @@
      }
     }
     if (empty($po_header_id)) {
-     $po_header_id = $this->_convert_requisition_toPO_header($i, $PO_cretaed);
+     if (!empty($_POST['bpa_po_line_id'][$i])) {
+      $this->_convert_requisition_toBPArelease($i, $PO_cretaed);
+     } else {
+      $po_header_id = $this->_convert_requisition_toPO_header($i, $PO_cretaed);
+     }
     }
     if (!empty($po_header_id)) {
      $po_rd = new po_requisition_detail();

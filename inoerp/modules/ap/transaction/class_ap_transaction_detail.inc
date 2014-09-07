@@ -5,6 +5,7 @@ class ap_transaction_detail extends dbObject {
  public static $parent_primary_column = "ap_transaction_line_id";
  public static $key_column = 'detail_ac_id';
  public static $module = "ap";
+ public $checkbox = ['journal_created_cb'];
  public $account = [
 		 'detail_ac_id'
  ];
@@ -24,6 +25,7 @@ class ap_transaction_detail extends dbObject {
 		 'po_header_id',
 		 'po_line_id',
 		 'po_detail_id',
+  'journal_created_cb',
 		 'period_id',
 		 'created_by',
 		 'creation_date',
@@ -58,6 +60,7 @@ class ap_transaction_detail extends dbObject {
  public $description;
  public $amount;
  public $detail_ac_id;
+ public $journal_created_cb;
  public $status;
  public $reference_type;
  public $reference_key_name;

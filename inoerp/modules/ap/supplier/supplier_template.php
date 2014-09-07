@@ -34,7 +34,7 @@
 						 <li><label>Supplier Number : </label>
 							<?php form::number_field_d('supplier_number'); ?>
 						 </li>               
-						 <li><label>Supplier Name : </label>
+						 <li><label>Supplier Name : <img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete supplier_name clickable"> : </label>
 							<?php
 							echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly);
 // echo form::text_field('supplier_name', $$class->supplier_name, '20', '', 1, '', 'supplier_name', $readonly, 'select_supplier_name') 
@@ -121,7 +121,7 @@
 				 <ul class="column five_column inline_list"> 
 					<li><label>Site Id : </label> 
 					 <?php // echo form::text_field('supplier_site_id', $supplier_site->supplier_site_id, '15', '25', '', 'System Number', 'supplier_site_id', $readonly) ?>
-					 <?php echo $f->select_field_from_array('supplier_site_id', supplier_site::find_all_sitesOfSupplier_array($supplier->supplier_id), $supplier_site->supplier_site_id, 'supplier_site_id', '', 1); ?>
+					 <?php echo $f->select_field_from_array('supplier_site_id', supplier_site::find_all_sitesOfSupplier_array($supplier->supplier_id), $supplier_site->supplier_site_id, 'supplier_site_id'); ?>
 					 <a name="show" href="?supplier_id=&supplier_site_id=" class="show supplier_site_id">
 						<img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 					</li> 

@@ -240,7 +240,6 @@
            <table class="form_line_data_table">
             <thead> 
              <tr>
-
               <th>Price List</th>
               <th>Pricing Date</th>
               <th>Unit Price</th>
@@ -248,6 +247,8 @@
               <th>Line Description</th>
               <th>Ref Doc Type</th>
               <th>Ref Number</th>
+              <th>On Hold</th>
+              <th>Hold Details</th>
              </tr>
             </thead>
             <tbody class="form_data_line_tbody">
@@ -266,6 +267,8 @@
                 <td><?php form::text_field_wid2('line_description'); ?></td>
                 <td><?php form::text_field_wid2('reference_doc_type'); ?></td>
                 <td><?php form::text_field_wid2('reference_doc_number'); ?></td>
+                <td><?php $f->checkBox_field_wid2('hold_cb'); ?></td>
+                <td><?php $f->text_field_wid2sr('po_line_id'); ?></td>
                </tr>
                <?php
                $count = $count + 1;
@@ -291,11 +294,14 @@
               foreach ($po_line_object as $po_line) {
                if (($$class->po_type == 'BLANKET') && !empty($$class_second->po_line_id)) {
                 $agrrement_details = po_line::find_agreement_details_by_lineId($$class_second->po_line_id);
-//                pa($agrrement_details);
-                $$class_second->agreed_quantity = $agrrement_details->agreed_quantity;
-                $$class_second->agreed_amount = $agrrement_details->agreed_amount;
-                $$class_second->released_quantity = $agrrement_details->released_quantity;
-                $$class_second->released_amount = $agrrement_details->released_amount;
+                if ($agrrement_details) {
+                 $$class_second->agreed_quantity = $agrrement_details->agreed_quantity;
+                 $$class_second->agreed_amount = $agrrement_details->agreed_amount;
+                 $$class_second->released_quantity = $agrrement_details->released_quantity;
+                 $$class_second->released_amount = $agrrement_details->released_amount;
+                }else {
+                $$class_second->agreed_quantity = $$class_second->agreed_amount = $$class_second->released_quantity = $$class_second->released_amount = null;
+               }
                } else {
                 $$class_second->agreed_quantity = $$class_second->agreed_amount = $$class_second->released_quantity = $$class_second->released_amount = null;
                }
