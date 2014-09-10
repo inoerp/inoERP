@@ -32,9 +32,8 @@ Dynamic pull system overcomes this issue by recalculating the bucket size (kanba
 existing actual demand.
 
 
-What is Dynamic pull System
+Modules
 ------------
-
 
 Below are the fully functional ERP Modules available in inoERP
 
