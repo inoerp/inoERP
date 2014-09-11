@@ -9,7 +9,7 @@ Introduction
 ------------
 
 inoERP is an open source php based enterprise management system. 
-The ERP systems contain all the required modules for running a SME manufacturing/distribution organization. 
+The ERP systems contain all the required modules for running any small to midsize businesses.
 The features are very similar to Oracle R12/ Fusion Application and SAP. 
 It also contains a light weight CMS which seamlessly integrates with the ERP
 
