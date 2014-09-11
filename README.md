@@ -16,7 +16,7 @@ It also contains a light weight CMS which seamlessly integrates with the ERP
 Why inoERP 
 ------------
 
-The ideas behind inoERP is to provide a dynamic pull based system where the demand /supply changes frequently and traditional planning systems 
+The idea behind inoERP is to provide a dynamic pull based system where the demand /supply changes frequently and traditional planning systems 
 (such as MRP or Kanban) are incompetent to provide a good inventory turn.
 
 What is Dynamic pull System
