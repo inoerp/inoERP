@@ -20,4 +20,3 @@ notifications:
   webhooks:
     urls:
       - https://webhooks.gitter.im/e/8f00a1cc0caf85febd3b
-phpunit
