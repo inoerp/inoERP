@@ -32,6 +32,9 @@ Dynamic pull system overcomes this issue by recalculating the bucket size (kanba
 (requisitions/purchase order/work order). Each time a new supply is created, system automatically decides the best supply size as per the 
 existing actual demand.
 
+Requirements & Installation
+=========================
+
 == Requirements ==
 
 1. HTTP web server Ex. Apache, IIS. 
