@@ -66,6 +66,9 @@
 
   public function runSQL($sql, $value_a = '') {
    global $dbc;
+   if(empty($dbc->connection)){
+    return false;
+   }
    $stmt = $dbc->connection->prepare(" $sql ");
    if (!empty($value_a)) {
     foreach ($value_a as $key => $value) {
@@ -90,6 +93,9 @@
 
   public function findBy_sql($sql, $param_a = '', $value_a = '') {
    global $dbc;
+      if(empty($dbc->connection)){
+    return false;
+   }
    $stmt = $dbc->connection->prepare(" $sql ");
    if (!empty($param_a)) {
     foreach ($param_a as $key => $param) {
@@ -112,6 +118,9 @@
 
   public function findBySql($sql, $value_a = '') {
    global $dbc;
+      if(empty($dbc->connection)){
+    return false;
+   }
    $stmt = $dbc->connection->prepare(" $sql ");
    if (!empty($value_a)) {
     foreach ($value_a as $key => $value) {

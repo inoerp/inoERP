@@ -8,12 +8,15 @@ class dbc {
 // public $pending_transaction;
 
  function __construct() {
+  if(!(DB_SERVER)){
+   return false;
+  }
 	try {
 	 $this->connection = new PDO('mysql:host=' . DB_SERVER . '; dbname=' . DB_NAME . ';charset=utf8', DB_USER, DB_PASS);
 	 $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 //	 $this->connection->setAttribute(PDO::ATTR_PERSISTENT, true);
 	 $this->connection->setAttribute(PDO::ATTR_AUTOCOMMIT, false);
-	 $this->rollback = false;
+    $this->rollback = false;
 //	 $this->pending_transaction = true;
 	 $this->connection->beginTransaction();
 	} catch (PDOException $e) {
