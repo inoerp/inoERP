@@ -57,7 +57,8 @@
    "supplier_number",
    "receving_org_id",
    "item_number",
-   'po_status'
+   'po_status',
+   'supplier_site_id'
   ];
   public $search_session_field = [
    "receving_org_id",

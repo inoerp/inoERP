@@ -29,6 +29,11 @@ defined('INC_WIP')  ? null : define('INC_WIP' , HOME_DIR.DS.'modules'.DS.'wip');
 
 //load core objects
 require_once(INC_BASICS.DS."dbsettings.inc"); 
+defined('DB_SERVER') ? null : define("DB_SERVER", "");
+defined('DB_USER')   ? null : define("DB_USER", "");
+defined('DB_PASS')   ? null : define("DB_PASS", "");
+defined('DB_NAME')   ? null : define("DB_NAME", "");
+
 require_once(INC_FUNCTION.DS."functions.inc");
 require_once(INC_CLASS.DS."class.session.inc"); 
 require_once(INC_CLASS.DS."class.dbc.inc"); 
@@ -84,6 +89,7 @@ require_once(INC_GL.DS."journal".DS."class_gl_journal_line.inc");
 require_once(INC_GL.DS."journal".DS."class_gl_journal_line_v.inc"); 
 require_once(INC_GL.DS."balance".DS."class_gl_balance_v.inc"); 
 require_once(INC_GL.DS."balance".DS."class_gl_balance.inc"); 
+require_once(INC_MODULE.DS."gl".DS."balance".DS."class_gl_unposted_balance_v.inc");
 require_once(INC_GL.DS."payment_term".DS."class.payment_term.inc"); 
 require_once(INC_GL.DS."payment_term".DS."class.payment_term_schedule.inc"); 
 require_once(INC_GL.DS."payment_term".DS."class.payment_term_discount.inc"); 
@@ -101,6 +107,10 @@ require_once(INC_AP.DS."supplier".DS."class_supplier.inc");
 require_once(INC_AP.DS."supplier".DS."class_supplier_site.inc");
 require_once(INC_AP.DS."supplier_bu".DS."class_supplier_bu.inc");
 require_once(INC_AP.DS."supplier".DS."class_supplier_all_v.inc");
+require_once(INC_MODULE.DS."ap".DS."transaction".DS."po".DS."class_ap_po_matching_v.inc");
+require_once(INC_MODULE.DS."ap".DS."transaction".DS."class_ap_transaction_all_v.inc");
+require_once(INC_MODULE.DS."ap".DS."payment".DS."transaction".DS."class_ap_payment_trnx_v.inc");
+require_once(INC_MODULE.DS."ap".DS."payment".DS."class_ap_payment_all_v.inc");
 //require_once(INC_AP.DS."ap_transaction".DS."class_ap_transaction_header.inc");
 //require_once(INC_AP.DS."ap_transaction".DS."class_ap_transaction_line.inc");
 //require_once(INC_AP.DS."ap_transaction".DS."class_ap_transaction_detail.inc");

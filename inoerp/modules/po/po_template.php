@@ -32,7 +32,7 @@
              <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="po_header_id select_popup clickable">
                PO Header Id : </label>
               <?php $f->text_field_dsr('po_header_id') ?>
-              <a name="show" href="po.php?po_header_id=" class="show po_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+              <a name="show" href="form.php?class_name=po_header" class="show po_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
              </li>
              <li><label>BU Name(1) : </label>
               <?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>
@@ -90,6 +90,7 @@
               <?php echo$f->select_field_from_object('price_list_header_id', mdm_price_list_header::find_all_purchasing_pl(), 'mdm_price_list_header_id', 'price_list', $$class->price_list_header_id); ?>
              </li>
              <li><label>Header Amount : </label><?php echo $f->number_field('header_amount', $$class->header_amount, '15', 'header_amount', '', 1); ?></li>
+             <li><label>Tax Amount : </label><?php echo $f->number_field('tax_amount', $$class->tax_amount, '15', 'tax_amount'); ?></li>
              <li><label>Payment Term : </label>
               <?php echo $f->select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, 'payment_term_id', '', 1, $readonly1); ?>
              </li>
@@ -186,6 +187,7 @@
             <thead> 
              <tr>
               <th>Action</th>
+              <th>Seq#</th>
               <th>Line Id</th>
               <th>Line#</th>
               <th>Receiving Org</th>
@@ -211,6 +213,7 @@
                   <li><?php echo form::hidden_field('po_header_id', $po_header->po_header_id); ?></li>
                  </ul>
                 </td>
+                <td><?php $f->seq_field_d($count) ?></td>
                 <td><?php form::text_field_wid2sr('po_line_id'); ?></td>
                 <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
                 <td><?php echo $f->select_field_from_object('receving_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->receving_org_id, '', 'copyValue', 1, $readonly); ?></td>
@@ -240,10 +243,13 @@
            <table class="form_line_data_table">
             <thead> 
              <tr>
+              <th>Seq#</th>
               <th>Price List</th>
               <th>Pricing Date</th>
               <th>Unit Price</th>
               <th>Line Price</th>
+              <th>Tax Code</th>
+              <th>Tax Amount</th>
               <th>Line Description</th>
               <th>Ref Doc Type</th>
               <th>Ref Number</th>
@@ -257,13 +263,14 @@
               foreach ($po_line_object as $po_line) {
                ?>         
                <tr class="po_line<?php echo $count ?>">
-
+               <td><?php $f->seq_field_d($count) ?></td>
                 <td><?php echo $f->select_field_from_object('price_list_header_id', mdm_price_list_header::find_all_purchasing_pl(), 'mdm_price_list_header_id', 'price_list', $$class_second->price_list_header_id, '', 'medium copyValue'); ?>
                 </td>
                 <td><?php echo $f->date_fieldAnyDay('price_date', $$class_second->price_date, 'copyValue') ?></td>
                 <td><?php echo $f->number_field('unit_price', $$class_second->unit_price); ?></td>
                 <td><?php echo $f->number_field('line_price', $$class_second->line_price); ?></td>
-
+                <td><?php echo $f->select_field_from_object('tax_code_id', mdm_tax_code::find_all_inTax_by_bu_org_id($$class->bu_org_id), 'mdm_tax_code_id', 'tax_code', $$class_second->tax_code_id, '', 'input_tax medium') ?></td>
+                <td><?php form::number_field_wid2('tax_amount'); ?></td>
                 <td><?php form::text_field_wid2('line_description'); ?></td>
                 <td><?php form::text_field_wid2('reference_doc_type'); ?></td>
                 <td><?php form::text_field_wid2('reference_doc_number'); ?></td>
@@ -282,6 +289,7 @@
            <table class="form_line_data_table">
             <thead> 
              <tr>
+              <th>Seq#</th>
               <th>Agreed Quantity</th>
               <th>Released Quantity</th>
               <th>Agreed Amount </th>
@@ -299,14 +307,15 @@
                  $$class_second->agreed_amount = $agrrement_details->agreed_amount;
                  $$class_second->released_quantity = $agrrement_details->released_quantity;
                  $$class_second->released_amount = $agrrement_details->released_amount;
-                }else {
-                $$class_second->agreed_quantity = $$class_second->agreed_amount = $$class_second->released_quantity = $$class_second->released_amount = null;
-               }
+                } else {
+                 $$class_second->agreed_quantity = $$class_second->agreed_amount = $$class_second->released_quantity = $$class_second->released_amount = null;
+                }
                } else {
                 $$class_second->agreed_quantity = $$class_second->agreed_amount = $$class_second->released_quantity = $$class_second->released_amount = null;
                }
                ?>         
                <tr class="po_line<?php echo $count ?>">
+                <td><?php $f->seq_field_d($count) ?></td>
                 <td><?php $f->text_field_wid2r('agreed_quantity'); ?></td>
                 <td><?php $f->text_field_wid2r('agreed_amount'); ?></td>
                 <td><?php $f->text_field_wid2r('released_quantity'); ?></td>

@@ -1,0 +1,44 @@
+#structure{
+    border: 5px solid #ccc;
+    width: 900px;
+}
+
+.button{
+    display: inline-block;
+     margin: 10px;
+    font-size: 15px;
+    line-height : 20px;
+}
+#installation_header{
+    display: block;
+background-color: rgba(105, 149, 144, 0.23);
+padding: 0px 2px 2px 5px;
+border: 1px solid #CCC;
+margin-bottom: 10px;
+width: 892px;
+}
+
+ #installation_header h1, #installation_header h2{
+    display: inline-block;
+}
+
+ul.list-unstyled{
+    display: block;
+    width: 100%;
+}
+
+ul.list-unstyled li{
+    display: block;
+    line-height : 30px;
+    font-size :14px;
+    margin : 10px 0;
+    padding-left : 10px;
+}
+
+ul.list-unstyled li.proceed{
+background: none repeat scroll 0% 0% rgba(144, 238, 144, 0.35);
+}
+
+ul.list-unstyled li.error{
+background: pink;
+}

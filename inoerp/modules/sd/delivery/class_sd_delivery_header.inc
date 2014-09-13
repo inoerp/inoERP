@@ -260,6 +260,7 @@ class sd_delivery_header extends dbObject {
 			'mode',
 			'action',
 			'show_block',
+   'line_status'
 	];
 
 	return $multi_select_hidden;

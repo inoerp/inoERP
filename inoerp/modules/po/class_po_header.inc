@@ -58,6 +58,7 @@
    'ship_to_id',
    'bill_to_id',
    'header_amount',
+   'tax_amount',
    'price_list_header_id',
    'currency',
    'doc_currency',
@@ -162,6 +163,7 @@
   public $ship_to_id;
   public $bill_to_id;
   public $header_amount;
+  public $tax_amount;
   public $price_list_header_id;
   public $currency;
   public $doc_currency;

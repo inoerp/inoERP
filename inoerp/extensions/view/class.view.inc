@@ -110,13 +110,15 @@
   public $last_update_date;
   public $time;
   public $msg;
-
+private $_table_schema;
+  
   function __construct() {
    global $dbc;
    $sql_fields = " SHOW COLUMNS FROM  " . self::$table_name;
    $prepare = $dbc->connection->prepare($sql_fields);
    $prepare->execute();
    self::$field_array = $prepare->fetchAll(PDO::FETCH_COLUMN, 0);
+   $this->_table_schema = DB_NAME;
   }
 
   public function _after_save() {
@@ -155,7 +157,7 @@
   public static function find_all_tables() {
    global $db;
    $query = " SELECT TABLE_NAME from information_schema.tables where TABLE_TYPE ='BASE TABLE' "
-     . " AND TABLE_SCHEMA= 'inoerp' ";
+     . " AND TABLE_SCHEMA= '".DB_NAME."' ";
    $result = $db->find_by_sql($query);
 
    $table_name_array = array();
@@ -164,11 +166,19 @@
    }
    return $table_name_array;
   }
+  
+    public static function count_all_tables() {
+   global $db;
+   $query = " SELECT count(TABLE_NAME) as table_count from information_schema.tables  "
+     . " WHERE TABLE_SCHEMA= '".DB_NAME."' ";
+   $result = $db->find_by_sql($query);
+   return !empty($result) ? array_pop($result) : null ;
+  }
 
   public static function find_all_tables_gen() {
    global $db;
    $query = " SELECT TABLE_NAME from information_schema.tables where TABLE_TYPE ='BASE TABLE' "
-     . " AND TABLE_SCHEMA= 'inoerp' ";
+     . " AND TABLE_SCHEMA= '".DB_NAME."' ";
    $result = $db->find_by_sql($query);
 
    foreach ($result as $object) {
@@ -178,7 +188,7 @@
 
   public function findAll_tables() {
    $query = " SELECT TABLE_NAME from information_schema.tables where TABLE_TYPE ='BASE TABLE' "
-     . " AND TABLE_SCHEMA= 'inoerp' ";
+     . " AND TABLE_SCHEMA= '".DB_NAME."' ";
    $result = $this->findBySql($query);
    $table_name_array = array();
    foreach ($result as $object) {

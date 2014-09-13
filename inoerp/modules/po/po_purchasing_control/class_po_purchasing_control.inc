@@ -33,6 +33,7 @@
    'rev_number',
    'po_approval_hierarchy',
    'req_approval_hierarchy',
+   'tax_ac_id',
    'created_by',
    'creation_date',
    'last_update_by',
@@ -59,6 +60,10 @@
    "ship_to_location",
    "bill_to_location"
   ];
+  
+   public $account = [
+   "tax_ac_id",
+  ];
   public $search = [
    '_show_update_path' => 1,
    '_update_action_meassge' => 'Update',
@@ -80,6 +85,7 @@
   public $ef_id;
   public $po_approval_hierarchy;
   public $req_approval_hierarchy;
+  public $tax_ac_id;
   public $rev_enabled;
   public $rev_number;
   public $created_by;

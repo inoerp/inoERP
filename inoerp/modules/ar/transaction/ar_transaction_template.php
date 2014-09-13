@@ -30,7 +30,7 @@
             <ul class="column five_column">
              <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_transaction_header_id select_popup clickable">
                Transaction Id : </label>
-              <?php $f->text_field_d('ar_transaction_header_id'); ?>
+              <?php $f->text_field_dsr('ar_transaction_header_id'); ?>
               <a name="show" href="form.php?class_name=ar_transaction_header" class="show ar_transaction_header_id">	<img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
              </li>
              <li><label>Transaction No : </label>
@@ -258,6 +258,7 @@
             <thead> 
              <tr>
               <th>Action</th>
+              <th>Seq#</th>
               <th>Line Id</th>
               <th>Line#</th>
               <th>Type</th>
@@ -284,6 +285,7 @@
                   <li><?php echo form::hidden_field('transaction_type', $$class->transaction_type); ?></li>
                  </ul>
                 </td>
+                <td><?php $f->seq_field_d($count) ?></td>
                 <td><?php form::text_field_wid2sr('ar_transaction_line_id'); ?></td>
                 <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
                 <td><?php echo $f->select_field_from_object('line_type', ar_transaction_line::ar_transaction_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, '', 'line_type', '', $readonly1); ?></td>
@@ -324,14 +326,15 @@
                        <thead>
                         <tr>
                          <th>Action</th>
+                         <th>Seq#</th>
                          <th>Detail Id</th>
                          <th>Detail# </th>
                          <th>Type</th>
                          <th>Account</th>
-                         <th>Period</th>
+
                          <th>Amount</th>
                          <th>Description</th>
-                         <th>Journal_Created?</th>
+                         
                         </tr>
                        </thead>
                        <tbody class="form_data_detail_tbody">
@@ -353,14 +356,15 @@
 
                            </ul>
                           </td>
+                          <td><?php $f->seq_field_detail_d($detailCount) ?></td>
                           <td><?php $f->text_field_wid3sr('ar_transaction_detail_id'); ?></td>
                           <td><?php $f->text_field_wid3s('detail_number'); ?></td>
                           <td><?php echo $f->select_field_from_object('account_type', gl_journal_line::gl_journal_line_types(), 'option_line_code', 'option_line_value', $$class_third->account_type, '', 'account_type'); ?></td>
                           <td><?php $f->ac_field_d3('detail_ac_id'); ?></td>
-                          <td><?php $f->text_field_wid3s('period_id') ?></td>
+                          
                           <td><?php $f->text_field_wid3s('amount'); ?></td>
                           <td><?php $f->text_field_wid3('description'); ?></td>
-                          <td><?php echo $f->checkBox_field('journal_created_cb', $$class_third->journal_created_cb, '', '', 1); ?></td>
+                         
                          </tr>
                          <?php
                          $detailCount++;
@@ -373,10 +377,13 @@
                       <table class="form form_detail_data_table detail">
                        <thead>
                         <tr>
+                         <th>Seq#</th>
+                                                  <th>Period</th>
                          <th>Ref Key Name</th>
                          <th>Ref Key Value</th>
                          <th>View Ref Doc</th>
                          <th>Status</th>
+                         <th>Journal_Created?</th>
                         </tr>
                        </thead>
                        <tbody class="form_data_detail_tbody">
@@ -387,10 +394,13 @@
                          $$class_third = &$ar_transaction_detail;
                          ?>
                          <tr class="ar_transaction_detail<?php echo $count . '-' . $detailCount; ?> <?php echo $detailCount != 0 ? ' new_object' : '' ?>">
+                          <td><?php $f->seq_field_detail_d($detailCount) ?></td>
+                          <td><?php $f->text_field_wid3s('period_id') ?></td>
                           <td><?php $f->text_field_d3('reference_key_name'); ?></td>
                           <td><?php $f->text_field_d3('reference_key_value'); ?></td>
                           <td><?php echo!empty($ref_doc_stmt) ? $ref_doc_stmt : '' ?></td>
                           <td><?php $f->text_field_wid3sr('status'); ?></td>
+                           <td><?php echo $f->checkBox_field('journal_created_cb', $$class_third->journal_created_cb, '', '', 1); ?></td>
                          </tr>
                          <?php
                          $detailCount++;
@@ -419,6 +429,7 @@
            <table class="form_line_data_table">
             <thead> 
              <tr>
+              <th>Seq#</th>
               <th>Unit Price</th>
               <th>Line Price</th>
               <th>Tax Code</th>
@@ -436,6 +447,7 @@
               foreach ($ar_transaction_line_object as $ar_transaction_line) {
                ?>         
                <tr class="ar_transaction_line<?php echo $count ?>">
+                <td><?php $f->seq_field_d($count) ?></td>
                 <td><?php form::number_field_wid2m('inv_unit_price'); ?></td>
                 <td><?php form::text_field_wid2m('inv_line_price'); ?></td>
                 <td><?php echo $f->select_field_from_object('tax_code_id', mdm_tax_code::find_all_outTax_by_bu_org_id($$class->bu_org_id), 'mdm_tax_code_id', 'tax_code', $$class_second->tax_code_id, '', 'output_tax medium', '', '', '', '', '', 'percentage') ?></td>
@@ -458,6 +470,7 @@
            <table class="form_line_data_table">
             <thead> 
              <tr>
+              <th>Seq#</th>
               <th>SO Header Id</th>
               <th>SO Line Id</th>
               <th>Is Asset</th>
@@ -472,6 +485,7 @@
               foreach ($ar_transaction_line_object as $ar_transaction_line) {
                ?>         
                <tr class="ar_transaction_line<?php echo $count ?>">
+                <td><?php $f->seq_field_d($count) ?></td>
                 <td><?php $f->text_field_wid2sr('sd_so_header_id'); ?></td>
                 <td><?php $f->text_field_wid2sr('sd_so_line_id'); ?></td>
                 <td><?php form::checkBox_field('asset_cb', $$class_second->asset_cb); ?></td>

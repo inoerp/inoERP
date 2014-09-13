@@ -7,6 +7,10 @@
   public static $parent_primary_column = "po_line_id";
   public static $key_column = 'shipment_number';
   public static $module = "po";
+  public static $invoice_match_type_a = [
+   'TWO_WAY' => '2 Way',
+   'THREE_WAY' => '3 Way',
+  ];
   public $account = [
    'charge_ac_id',
    'accrual_ac_id',
@@ -25,6 +29,7 @@
    'locator_id',
    'requestor',
    'ship_to_location_id',
+   'invoice_match_type',
    'quantity',
    'need_by_date',
    'promise_date',
@@ -97,6 +102,7 @@
   public $subinventory_id;
   public $locator_id;
   public $requestor;
+  public $invoice_match_type;
   public $ship_to_location_id;
   public $quantity;
   public $need_by_date;

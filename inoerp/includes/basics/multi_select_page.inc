@@ -84,7 +84,7 @@
            } else if (property_exists($class, 'column')) {
             $column_array = $$class->column;
            } else {
-            $column_array = $class::$column_array;
+            $column_array = $$class->field_a;
            }
 
            $all_columns = (!empty($multi_selct_input_fields) && is_array($multi_selct_input_fields)) ? array_merge($multi_selct_input_fields, $column_array) : $column_array;
@@ -147,7 +147,9 @@
                   }
                   echo "<td><input type=\"checkbox\" name=\"line_id_cb\" class=\"line_id_cb\"  value=\"$primary_column_val\">";
                   echo "<input type=\"hidden\" name=\"multi_action_class\" class=\"hidden multi_action_class\"  value=\"$action_class\">";
+                  if(!empty($header_id_value)){
                   echo "<input type=\"hidden\" name=\"$header_id_name\" class=\"hidden $header_id_name\"  value=\"$header_id_value\">";
+                  }
                   echo "<input type=\"hidden\" name=\"action\" class=\"hidden action\"  value=\"$action_message\"></td>";
                   echo!empty($hidden_field_stmt) ? $hidden_field_stmt : '';
                  }

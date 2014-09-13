@@ -92,7 +92,7 @@ $(document).ready(function() {
 //selecting wo header id data
  $(".wip_wo_headerid_popup").on("click", function() {
 	localStorage.idValue = "";
-	var link = 'select.php?class_name=wip_wo_header&wo_status=RELEASED';
+	var link = 'select.php?class_name=wip_wo_header&wo_status=%3DRELEASED';
 	void window.open(link, '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });

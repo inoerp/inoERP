@@ -64,8 +64,8 @@
 	
   	<div id="header" class="clear headerBgColor">
   	 <div class="logo">
-			<img src="<?php echo HOME_URL.$si->logo_path ?>" class="logo_image" />
-		<h2><?php echo "<a href=\" " . HOME_URL . " \"> " . $si->site_name . "</a>"; ?>!</h2> </div>
+			<img src="<?php echo HOME_URL ; echo !empty($si->logo_path) ? $si->logo_path : 'files/logo.png' ?>" class="logo_image" />
+		<h2><?php echo "<a href=\" " . HOME_URL . "\"> " ; echo !empty($si->site_name) ? $si->site_name : 'inoERP' ;echo "</a>"; ?>!</h2> </div>
  	 <div class="header_right">
 		<?php if($show_header_links) { ?>
  		<div class="header_info">
@@ -77,6 +77,7 @@
  			<li><a href="content.php?mode=2&content_id=197&content_type_id=47">About</a></li>
  		 </ul>
  		</div>
+
 		<?php } ?>
  		<div class="user_info">
 			<?php

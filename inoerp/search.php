@@ -57,9 +57,15 @@
   if (property_exists($$class, 'option_lists')) {
    $s->option_lists = $$class->option_lists;
   }
-  $s->setProperty('_search_order_by', filter_input(INPUT_GET, 'search_order_by'));
-  $s->setProperty('_search_asc_desc', filter_input(INPUT_GET, 'search_asc_desc'));
-  $s->setProperty('_per_page', filter_input(INPUT_GET, 'per_page'));
+  if(!empty($_GET['search_order_by'][0])){
+  $s->setProperty('_search_order_by', $_GET['search_order_by'][0]);
+  }
+  if(!empty($_GET['search_asc_desc'][0])){
+  $s->setProperty('_search_asc_desc', $_GET['search_asc_desc'][0]);
+  }
+  if(!empty($_GET['per_page'][0])){
+  $s->setProperty('_per_page', $_GET['per_page'][0]);
+  }
   $s->setProperty('_searching_class', $class);
   if (!empty($existing_search)) {
    foreach ($existing_search as $sk => $sv) {
@@ -76,7 +82,7 @@
   if (property_exists($$class, 'search_functions')) {
    $s->setProperty('_search_functions', $$class->search_functions);
   }
-  $search_form = $search->search_form($$class);
+  $search_form = $s->search_form($$class);
 
   require_once(INC_BASICS . DS . "search_page.inc");
  }

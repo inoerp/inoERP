@@ -81,13 +81,12 @@
   public $last_update_by;
   public $last_update_date;
 
-  function __construct() {
-//	if (!empty(static::$table_name)) {
-//	 $this->field_a = get_dbColumns(static::$table_name);
-//	 foreach ($this->field_a as $key => $value) {
-//		$this->$value = '';
-//	 }
-//	}
+    public static function profile_gl_ledger_id_default() {
+   $line_data_array = [];
+   $line_data_array['line_key'] = 'gl_ledger_id';
+   $line_data_array['line_desc'] = 'ledger';
+   $line_data_array['line_values'] = gl_ledger::find_all();
+   return $line_data_array;
   }
 
   public function find_coa_byLedgerId() {

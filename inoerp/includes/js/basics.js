@@ -1,6 +1,7 @@
 //homePageUrl = 'http://www.inoideas.com/inoerp/';
 //move to animated block
 
+ 
 function animateCycle()
 {
  var interval = null;
@@ -466,14 +467,14 @@ function deleteData(json_url, header_id) {
   e.preventDefault();
   $('input[name="detail_id_cb"]:checked').each(function() {
    var detail_id = $(this).val();
-   if (confirm("Are you sure?")) {
+   if (confirm("Are you sure?\nDetail Id #" +detail_id )) {
     deleteLine(json_url, detail_id, 'detail');
    }
   });
 
   $('input[name="line_id_cb"]:checked').each(function() {
    var line_id = $(this).val();
-   if (confirm("Are you sure?")) {
+   if (confirm("Are you sure?\nLine Id #" +line_id )) {
     if ($(this).closest('tbody').hasClass('form_data_line_tbody2')) {
      var lineType = 'line2';
     } else {
@@ -484,9 +485,9 @@ function deleteData(json_url, header_id) {
   });
 
   if (!$('input[name="line_id_cb"]').val()) {
-   if (confirm("Are you sure?")) {
-    var header_id_h = '#' + header_id;
+       var header_id_h = '#' + header_id;
     var headerId = $(header_id_h).val();
+   if (confirm("Are you sure?\nHeader Id #" +headerId )) {
     deleteLine(json_url, headerId, 'header');
    }
   }
@@ -599,7 +600,7 @@ function getExchangeRate(options) {
 function getSupplierDetails(jsonurl, org_id, supplier_id, trClass) {
  supplier_id = typeof (supplier_id) !== 'undefined' ? supplier_id : $("#supplier_id").val();
  $('.show_loading_small').show();
- $.ajax({
+ return $.ajax({
   url: jsonurl,
   data: {supplier_id: supplier_id,
    org_id: org_id,
@@ -1088,6 +1089,52 @@ function getBUDetails(bu_org_id, json_url) {
 
      case 'output_tax' :
       $('#content').find('.output_tax').replaceWith(value);
+      break;
+    }
+
+   });
+  },
+  complete: function() {
+   $('.show_loading_small').hide();
+  },
+  beforeSend: function() {
+   $('.show_loading_small').show();
+  },
+  error: function(request, errorType, errorMessage) {
+   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+  }
+ });
+}
+
+function getLedgerDetails(gl_ledger_id, json_url) {
+ json_url = (typeof json_url !== 'undefined') ? json_url : 'modules/gl/ledger/json_ledger.php';
+ $.ajax({
+  url: json_url,
+  type: 'get',
+  dataType: 'json',
+  data: {
+   gl_ledger_id: gl_ledger_id,
+   find_ledger_details: 1,
+  },
+  success: function(result) {
+   $.each(result, function(key, value) {
+    switch (key) {
+     case 'currency':
+      var className = '.' + key;
+      $('#content').find(className).val(value);
+      $('#content').find('.document_currency').val(value);
+      $('#content').find('.doc_currency').val(value);
+      break;
+
+     case 'period_name_stmt':
+      $('#period_id').replaceWith(value);
+      break;
+
+     case 'coa_id' :
+      $('#coa_id').val(value);
+      break;
+
+     default :
       break;
     }
 

@@ -54,7 +54,7 @@ setValFromSelectPage.prototype.setVal = function() {
 $(document).ready(function() {
 //selecting supplier
  $(".mdm_bank_header_id_popup").click(function() {
-	void window.open('select.php?class_name=supplier', '_blank',
+	void window.open('select.php?class_name=mdm_bank_header', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
 	return false;
  });

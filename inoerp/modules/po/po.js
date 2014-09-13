@@ -102,7 +102,7 @@ $(document).ready(function() {
  });
 
  $('#release_number').on('change', function() {
-    $('#po_header_id').val('');
+  $('#po_header_id').val('');
   $('#po_status').val('');
   $('#action').val('');
  })
@@ -234,36 +234,6 @@ $(document).ready(function() {
  });
 
 
-
-// $('a.show.supplier_number').click(function() {
-//  var supplier_number = $('#supplier_number').val();
-//  if ($('#org_id').val().length > 0) {
-//   var org_id = $('#org_id').val();
-//   $(this).attr('href', modepath() + 'supplier_number=' + supplier_number + '&org_id=' + org_id);
-//  } else {
-//   alert("Query Error!!! \n Select the query mode by pressing Ctrl + Q \n Select the organization name");
-//  }
-// });
-//
-// $('a.show.supplier_site_id').click(function() {
-//  var supplier_id = $('#headerId').val();
-//  var supplier_site_id = $('#supplier_site_id').val();
-//  $(this).attr('href', '?supplier_id=' + supplier_id + '&supplier_site_id=' + supplier_site_id);
-// });
-//
-// $("#supplier_site_name").on("change", function() {
-//  if ($(this).val() == 'newentry') {
-//   if (confirm("Do you want to create a new supplier site?")) {
-//    $(this).replaceWith('<input id="supplier_site_name" class="textfield supplier_site_name" type="text" size="25" maxlength="50" name="supplier_site_name[]">');
-//    $(".show.supplier_site_id").hide();
-//    $("#supplier_site_id").val("");
-//    $("#supplier_site_number").val("");
-//   }
-//
-//  }
-// });
-
-
 //add or show linw details
  addOrShow_lineDetails('tr.po_line0');
 
@@ -343,8 +313,8 @@ $(document).ready(function() {
    price_date: price_date
   });
  });
- 
-  $('#content').on('blur', '.unit_price, .line_quantity , .line_price', function() {
+
+ $('#content').on('blur', '.unit_price, .line_quantity , .line_price', function() {
   var trClass = '.' + $(this).closest('tr').attr('class');
   var unitPrice = +($(this).closest('#form_line').find(trClass).find('.unit_price').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
   var lineQuantity = +($(this).closest('#form_line').find(trClass).find('.line_quantity').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
@@ -352,8 +322,62 @@ $(document).ready(function() {
   $(this).closest('#form_line').find(trClass).find('.line_price').val(linePrice);
  });
 
+ //calculate the tax amount
+ //get tax code
+ $('#content').on('change', 'bu_org_id', function() {
+  var org_id = $(this).val();
+  getTaxCodes('modules/mdm/tax_code/json_tax_code.php', org_id, 'IN');
+ });
+ if ($('#bu_org_id').val()) {
+  getTaxCodes('modules/mdm/tax_code/json_tax_code.php', $('#bu_org_id').val(), 'IN');
+ }
+
+ $('#content').on('blur', '.line_quantity, .unit_price, .line_price, .tax_amount, .tax_code_id', function() {
+  var trClass = '.' + $(this).closest('tr').prop('class');
+  var linePrice = 0;
+  if ($('#content').find(trClass).find('.line_price').val()) {
+   linePrice = +($('#content').find(trClass).find('.line_price').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+  }
+  var taxCodeVal = 0;
+  if ($('#content').find(trClass).find('.tax_code_value').val()) {
+   taxCodeVal = $('#content').find(trClass).find('.tax_code_value').val();
+  } else if ($('#content').find(trClass).find('.input_tax').find('option:selected').prop('class')) {
+   taxCodeVal = $('#content').find(trClass).find('.input_tax').find('option:selected').prop('class');
+  }
+
+  if (taxCodeVal.length >= 3) {
+   var taxCodeVal_a = taxCodeVal.split('_');
+  } else {
+   return;
+  }
+
+  var taxAmount = 0;
+  var taxPercentage = 0;
+  if (taxCodeVal_a[0] === 'p') {
+   taxPercentage = +taxCodeVal_a[1];
+  } else if (taxCodeVal_a[0] === 'a') {
+   taxAmount = +taxCodeVal_a[1];
+  }
+  var taxValue = 0;
+  if (taxPercentage) {
+   taxValue = ((taxPercentage * linePrice) / 100).toFixed(5);
+  } else if (taxAmount) {
+   taxValue = taxAmount.toFixed(5);
+  }
+
+  $('#content').find(trClass).find('.tax_amount').val(taxValue);
+ });
+
 //total header & tax amount
  $('#content').on('blur', '.line_quantity, .unit_price, .line_price', function() {
+
+  var total_tax = 0;
+  $('#form_line').find('.tax_amount').each(function() {
+   total_tax += (+$(this).val());
+   $('#tax_amount').val(total_tax);
+  });
+
+
   var header_amount = 0;
   $('#form_line').find('.line_price').each(function() {
    header_amount += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));

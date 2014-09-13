@@ -105,7 +105,7 @@
     $result = $stmt->fetchAll(PDO::FETCH_CLASS);
     return $result;
    } catch (PDOException $e) {
-    echo "Record couldnt be fetched !!: " . $e->getMessage();
+//    echo "Record couldnt be fetched !!: " . $e->getMessage();
     return 0;
    }
   }
@@ -131,7 +131,7 @@
     $result = $stmt->fetchAll(PDO::FETCH_CLASS);
     return $result;
    } catch (PDOException $e) {
-    echo "Record couldnt be fetched !!: " . $e->getMessage();
+//    echo "Record couldnt be fetched !!: " . $e->getMessage();
     return 0;
    }
   }
@@ -140,7 +140,7 @@
    $comment = new comment();
    $comment->reference_table = static::$table_name;
    $pc = static::$primary_column;
-   $comment->reference_id = $this->$pc ;
+   $comment->reference_id = $this->$pc;
    $comment->comment_by = $comment_by;
    $comment->comment = $comment_msg;
    $comment->subject = $comment_sub;
@@ -392,6 +392,16 @@
   Private function has_attribute($attribute) {
    $object_vars = get_object_vars($this);
    return array_key_exists($attribute, $object_vars);
+  }
+
+  public function set_module_default() {
+   if (property_exists($this, 'module_defaults')) {
+    foreach ($this->module_defaults as $key => $value) {
+     if(empty($this->$key)){
+     $this->$key = $value;
+     }
+    }
+   }
   }
 
   public function validate_requiredField() {

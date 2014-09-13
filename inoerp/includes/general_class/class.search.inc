@@ -23,28 +23,26 @@ class search extends dbObject {
  private $_search_order_by;
  private $_search_asc_desc;
  private $_group_by;
- private $_per_page;
+ private $_per_page = 10;
  private $_page_no;
  private $_searching_class;
  private $_initial_search_array;
- private $_per_page_selected = [
-		 1 => 'per_page_selected_1',
-		 5 => 'per_page_selected_5',
-		 10 => 'per_page_selected_10',
-		 20 => 'per_page_selected_20',
-		 50 => 'per_page_selected_50',
-		 100 => 'per_page_selected_100',
-		 1000 => 'per_page_selected_1000',
-		 10000 => 'per_page_selected_10000',
-		 50000 => 'per_page_selected_50000',
-		 'all' => 'per_page_selected_all',
- ];
  //to show result
  public $primary_column_s;
  public $column_array_s = [];
  public $result = [];
  //to show form
  public $option_lists;
+ private $_per_page_a = [
+  '5' => '5',
+  '10' => '10',
+  '20' => '20',
+  '50' => '50',
+  '100' => '100',
+  '1000' => '1000',
+  '10000' => '10,000',
+  'all' => 'All',
+ ];
 
  public function setProperty($property, $value) {
 	if (property_exists($this, $property)) {
@@ -214,9 +212,12 @@ class search extends dbObject {
 
  private function _add_hidden_fields() {
 	$hidden_fld_stmt = "";
+  
 	if (!empty($this->_hidden_fields)) {
 	 foreach ($this->_hidden_fields as $key => $value) {
-		$hidden_fld_stmt .= "<input type='hidden' class=\"hidden $key\" name=\"$key\" value=\"$value\" >";
+    $bracketName = $key . '[]';
+    $value_i = is_array($value) ? $value[0] : $value;
+		$hidden_fld_stmt .= "<input type='hidden' class=\"hidden $key\" name=\"$bracketName\" value=\"$value_i\" >";
 	 }
 	}
 	return $hidden_fld_stmt;
@@ -227,7 +228,8 @@ class search extends dbObject {
  }
 
  public function search_form($class_obj) {
-	$class = $this->_searching_class;
+  global $f;
+	$class = is_array($this->_searching_class) ? $this->_searching_class[0] : $this->_searching_class;
 	if (property_exists($class, 'field_a')) {
 	 $search_array = $class_obj->field_a;
 	} else {
@@ -256,71 +258,13 @@ class search extends dbObject {
 	}
 	$serialzed_column_array = base64_encode(serialize($column_array));
 
-	$per_page_selected_1 = "";
-	$per_page_selected_5 = "";
-	$per_page_selected_10 = "";
-	$per_page_selected_20 = "";
-	$per_page_selected_50 = "";
-	$per_page_selected_100 = "";
-	$per_page_selected_1000 = "";
-	$per_page_selected_10000 = "";
-	$per_page_selected_50000 = "";
-	$per_page_selected_all = "";
-
-	if (!empty($this->_per_page)) {
-	 switch ($this->_per_page_selected) {
-		case '1':
-		 $per_page_selected_1 = "selected";
-		 break;
-
-		case '5':
-		 $per_page_selected_5 = "selected";
-		 break;
-
-		case '10':
-		 $per_page_selected_10 = "selected";
-		 break;
-
-		case '20':
-		 $per_page_selected_20 = "selected";
-		 break;
-
-		case '50':
-		 $per_page_selected_50 = "selected";
-		 break;
-
-		case '100':
-		 $per_page_selected_100 = "selected";
-		 break;
-
-		case '1000':
-		 $per_page_selected_1000 = "selected";
-		 break;
-
-		case '10000':
-		 $per_page_selected_10000 = "selected";
-		 break;
-
-		case '50000':
-		 $per_page_selected_50000 = "selected";
-		 break;
-
-		case 'all':
-		 $per_page_selected_all = "selected";
-		 break;
-
-		default:
-
-		 break;
-	 }
-	}
-
 //start of the srach statement
 	$search_form_statement = "";
 	$search_form_statement .= "<form action=\"\" name=\"$this->_form_name\" method='GET' class=\"search_box $this->_form_name\" id=\"$this->_form_name\">";
 	$search_form_statement .= "<span id='search_tip' class='clickable'>Searching Tips</span>";
 	//start of first ul
 	$search_form_statement .= '<ul class="search_form column four_column">';
+  $search_form_statement .=$this->_add_hidden_fields();
 	if (!empty($this->option_lists)) {
 	 foreach ($this->option_lists as $key => $value) {
 		if (!empty($_GET[$value]) && !(is_array($_GET[$value]))) {
@@ -335,7 +279,7 @@ class search extends dbObject {
 		$option_header = option_header::find_by_name($value);
 		$ol = new option_line;
 		$option_lines = $ol->findBy_parentId($option_header->option_header_id);
-		$search_form_statement .= form::select_field_from_object($key, $option_lines, 'option_line_code', 'option_line_value', $get_value, '', '', $class_name, '', '', 1);
+		$search_form_statement .= $f->select_field_from_object($key, $option_lines, 'option_line_code', 'option_line_value', $get_value, $key, $class_name);
 		$search_form_statement .= '</li>';
 	 }
 	}
@@ -381,7 +325,6 @@ class search extends dbObject {
 	$search_form_statement .= "<input type=\"hidden\" name=\"column_array\" id=\"column_array\" 
  value=\"$serialzed_column_array\" class=\"hidden\" >";
 	$search_form_statement .= "<input type=\"hidden\" name=\"search_class\" value=\"$class\" class=\"hidden\" ></li>";
-	$search_form_statement .=$this->_add_hidden_fields();
 	$search_form_statement .= "</ul>";
 //end of first ul
 //start of second ul
@@ -444,24 +387,8 @@ class search extends dbObject {
 
 	//Records per page
 	$search_form_statement .= '<li><label> Per page</label>';
-	$search_form_statement .= "<select name=\"per_page\" id=\"per_page\">";
+   $search_form_statement .= $f->select_field_from_array('per_page', $this->_per_page_a, $this->_per_page, 'per_page');
 
-	$search_form_statement .= "<option value=\"5\" $per_page_selected_5 >5</option>";
-	$search_form_statement .= "<option value=\"10\" $per_page_selected_10 >10</option>";
-	$search_form_statement .= "<option value=\"20\" $per_page_selected_20 >20</option>";
-	$search_form_statement .= "<option value=\"50\" $per_page_selected_50 >50</option>";
-	$search_form_statement .= "<option value=\"100\" $per_page_selected_100 >100</option>";
-	$search_form_statement .= "<option value=\"1000\" $per_page_selected_1000 >1000</option>";
-	$search_form_statement .= "<option value=\"10000\" $per_page_selected_10000 >10000</option>";
-	$search_form_statement .= "<option value=\"50000\" $per_page_selected_50000 >50000</option>";
-	$search_form_statement .= "<option value=\"all\" $per_page_selected_all >All</option>";
-	$search_form_statement .= "<option value=\"1\" $per_page_selected_1 >1</option>";
-	$search_form_statement .= "</select></li>";
-//	$search_form_statement .="</ul>";
-//end of second ul
-//start of form button ul
-//	$search_form_statement .="<ul class=\"form_buttons\">";
-	//add the hidden fields if any
 
 	$reset_link = "$this->_form_post_link.php?class_name=$class&mode=$this->_search_mode&show_block=$this->_show_block";
 	$search_form_statement .= "<li><a href=\"$reset_link\" "

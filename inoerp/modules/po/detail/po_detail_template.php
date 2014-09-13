@@ -29,6 +29,7 @@
        <thead>
         <tr>
          <th>Action</th>
+         <th>Seq#</th>
          <th>Shipment Id</th>
          <th>Shipment Number</th>
          <!--<th>Inventory</th>-->
@@ -57,6 +58,7 @@
 
             </ul>
            </td>
+           <td><?php $f->seq_field_detail_d($detailCount) ?></td>
            <td><?php form::text_field_wid3sr('po_detail_id'); ?></td>
            <td><?php echo $f->number_field('shipment_number', $$class_third->shipment_number, '', '', 'detail_number', 1); ?></td>
            <td><?php $f->text_field_wid3('ship_to_location_id'); ?></td>
@@ -76,9 +78,11 @@
       <table class="form form_detail_data_table detail">
        <thead>
         <tr>
+         <th>Seq#</th>
          <th>Sub inventory</th>
          <th>Locator</th>
          <th>Requestor</th>
+         <th>Invoice Match Type</th>
         </tr>
        </thead>
        <tbody class="form_data_detail_tbody">
@@ -89,6 +93,7 @@
           $$class_third = &$po_detail;
           ?>
           <tr class="po_detail<?php echo $count . '-' . $detailCount; ?> <?php echo $detailCount != 0 ? ' new_object' : '' ?>">
+           <td><?php $f->seq_field_detail_d($detailCount) ?></td>
            <td>
             <?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class_second->receving_org_id), 'subinventory_id', 'subinventory', $$class_third->subinventory_id, '', 'subinventory_id copyValue', ''); ?>
            </td>
@@ -96,6 +101,7 @@
             <?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_third->subinventory_id), 'locator_id', 'locator', $$class_third->locator_id, '', 'locator_id copyValue', ''); ?>
            </td>
            <td><?php $f->text_field_wid3('requestor'); ?></td>
+           <td><?php echo $f->select_field_from_array('invoice_match_type', po_detail::$invoice_match_type_a, $$class_third->invoice_match_type); ?></td>
           </tr>
           <?php
           $detailCount++;
@@ -108,6 +114,7 @@
       <table class="form form_detail_data_table detail">
        <thead>
         <tr>
+         <th>Seq#</th>
          <th>Charge Ac</th>
          <th>Accrual Ac</th>
          <th>Budget Ac</th>
@@ -122,6 +129,7 @@
           $$class_third = &$po_detail;
           ?>
           <tr class="po_detail<?php echo $count . '-' . $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
+           <td><?php $f->seq_field_detail_d($detailCount) ?></td>
            <td><?php $f->ac_field_wid3m('charge_ac_id', 'copyValue'); ?></td>
            <td><?php $f->ac_field_wid3m('accrual_ac_id', 'copyValue'); ?></td>
            <td><?php $f->ac_field_wid3('budget_ac_id', 'copyValue'); ?></td>
@@ -138,6 +146,7 @@
       <table class="form form_detail_data_table detail"><lable>Quantities</lable>
        <thead>
         <tr>
+         <th>Seq#</th>
          <th>Received</th>
          <th>Accepted</th>
          <th>Delivered</th>
@@ -153,6 +162,7 @@
           $$class_third = &$po_detail;
           ?>
           <tr class="po_detail<?php echo $count . '-' . $detailCount; ?> <?php echo $detailCount != 0 ? ' new_object' : '' ?>">
+           <td><?php $f->seq_field_detail_d($detailCount) ?></td>
            <td><?php form::number_field_wid3sr('received_quantity'); ?></td>
            <td><?php form::number_field_wid3sr('accepted_quantity'); ?></td>
            <td><?php form::number_field_wid3sr('delivered_quantity'); ?></td>

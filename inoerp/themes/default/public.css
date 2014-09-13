@@ -166,7 +166,7 @@ input[type=number], input[type=search], checkbox, radio button
  }
 
 .select.medium{
-    width: 10em;
+    width: 90%;
 }
 
 .select.small{

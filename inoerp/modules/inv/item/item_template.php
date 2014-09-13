@@ -358,19 +358,15 @@
             </ul>
            </div>
            <div class="second_rowset">
-            <ul class="small_box rule"><box_heading>Cost Information </box_heading> 
+            <ul class="large_box"><box_heading>Cost Information </box_heading> 
              <li><label>Costing Enabled : </label> 
               <?php echo form::checkBox_field('costing_enabled_cb', $$class->costing_enabled_cb, '', $readonly); ?>
              </li>
              <li><label>Inventory Asset : </label>
               <?php echo form::checkBox_field('inventory_asset_cb', $$class->inventory_asset_cb, '', $readonly); ?>
              </li>
-             <li><label>COGS Ac : </label>
-              <?php echo form::text_field_d('cogs_ac'); ?>
-             </li>
-             <li><label>Deferred COGS Ac : </label>
-              <?php echo form::text_field_d('deffered_cogs_ac'); ?>
-             </li>
+             <li><label>COGS Ac : </label>   <?php echo $f->ac_field_d('cogs_ac_id'); ?> </li>
+             <li><label>Deferred COGS Ac : </label>  <?php echo $f->ac_field_d('deffered_cogs_ac_id'); ?> </li>
             </ul>
            </div> 
           </div>

@@ -28,6 +28,8 @@
    'price_date',
    'unit_price',
    'line_price',
+    'tax_code_id',
+   'tax_amount',
    'reference_doc_type',
    'reference_doc_number',
    'hold_cb',
@@ -69,6 +71,7 @@
    'released_amount',
    'agreed_quantity',
    'agreed_amount',
+   'tax_code_value'
   ];
   public $fields_inHeader_needsToBeInserted_inPOST = [
    "po_header_id"
@@ -86,6 +89,8 @@
   public $line_quantity;
   public $unit_price;
   public $line_price;
+    public $tax_code_id;
+  public $tax_amount;
   public $agreed_quantity;
   public $agreed_amount;
   public $price_list_header_id;
@@ -107,6 +112,7 @@
   public $exchange_rate;
   public $released_quantity;
   public $released_amount;
+  public $tax_code_value;
 
   public function _before_save() {
 

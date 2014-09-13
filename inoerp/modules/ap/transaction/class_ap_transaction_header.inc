@@ -29,9 +29,17 @@
    'COMPLETE' => 'Complete',
    'CLOSED' => 'Closed'
   ];
+  
+  public static $payment_status_a = [
+   'UNPAID' => 'Unpaid',
+   'FULLY_PAID' => 'Fully Paid',
+   'PARTITALY_PAID' => 'Partially Paid'
+  ];
+  
   public $action_a = [
    'CREATE_ACCOUNT' => 'Create Accounting',
-   'MATCH' => 'Match Transaction',
+   'MATCH_PO' => 'Match Purchase Order',
+   'APPLY_TRANSACTION' => 'Apply Transaction',
    'PAID' => 'Make Payment',
    'VIEW_JOURNAL' => 'View Journal',
    'CANCEL' => 'Cancel Transaction',
@@ -126,6 +134,7 @@
    'po_number',
    'po_header_id',
    'action',
+   'show_block',
    'transaction_action'
   ];
   public $profile_default = [
@@ -135,7 +144,8 @@
    'bill_to_id' => 'bill_to_address_default'
   ];
   public $numberField = [
-   'header_amount'
+   'header_amount',
+   'tax_amount'
   ];
   public $search = [
    '_show_update_path' => 1,
@@ -197,19 +207,6 @@
   public $action;
   public $transaction_action;
   private $_max_line_num;
-
-  public function __set($name, $value) {
-   switch ($value) {
-    case $value:
-
-
-     break;
-
-    default:
-     $this->$name = $value;
-     break;
-   }
-  }
 
   private function _update_journalHeaderId() {
    $apth = new ap_transaction_header();
@@ -275,7 +272,7 @@
    $gjh->currency = $this->document_currency;
    $gjh->period_id = $this->period_id;
    $gjh->journal_source = self::$module;
-   $gjh->journal_category = 'ap_' . $this->transaction_type;
+   $gjh->journal_category = 'AP_TRANSACTIONS';
    $gjh->reference_type = 'table';
    $gjh->reference_key_name = self::$table_name;
    $gjh->reference_key_value = $this->ap_transaction_header_id;
@@ -324,11 +321,11 @@
      }
      $new_gjl->code_combination_id = $deatils->detail_ac_id;
      if (in_array($this->transaction_type, array('CREDIT_MEMO','DEBIT_MEMO'))) {
-      $new_gjl->total_cr = $deatils->amount;
-      $new_gjl->total_ac_cr = $deatils->amount;
+      $new_gjl->total_cr = abs($deatils->amount);
+      $new_gjl->total_ac_cr = abs($deatils->amount);
      } else {
-      $new_gjl->total_dr = $deatils->amount;
-      $new_gjl->total_ac_dr = $deatils->amount;
+      $new_gjl->total_dr = abs($deatils->amount);
+      $new_gjl->total_ac_dr = abs($deatils->amount);
      }
      $new_gjl->description = 'AP Trnx detail #' . $deatils->detail_number . ' of trxn# ' . $this->transaction_number;
      $new_gjl->reference_type = 'table';
@@ -366,11 +363,11 @@
    $liability_gjl->status = 'U';
    $liability_gjl->code_combination_id = $liability_account_id;
    if (in_array($this->transaction_type, array('CREDIT_MEMO','DEBIT_MEMO'))) {
-    $liability_gjl->total_dr = $this->header_amount + $this->tax_amount;
-    $liability_gjl->total_ac_dr = $this->header_amount + $this->tax_amount;
+    $liability_gjl->total_dr = abs($this->header_amount) + abs($this->tax_amount);
+    $liability_gjl->total_ac_dr = abs($this->header_amount) + abs($this->tax_amount);
    } else {
-    $liability_gjl->total_cr = $this->header_amount + $this->tax_amount;
-    $liability_gjl->total_ac_cr = $this->header_amount + $this->tax_amount;
+    $liability_gjl->total_cr = abs($this->header_amount) + abs($this->tax_amount);
+    $liability_gjl->total_ac_cr =abs($this->header_amount) + abs($this->tax_amount);
    }
    $liability_gjl->description = 'AP Trnx liability of ' . $this->transaction_number;
    $liability_gjl->reference_type = 'table';
@@ -581,7 +578,9 @@
    $multi_select_hidden = [
     'action_class_name',
     'mode',
-    'action'
+    'action',
+    'po_status',
+			'show_block',
    ];
 
    return $multi_select_hidden;

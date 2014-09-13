@@ -107,13 +107,12 @@
   */
  $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
  $pageno = !(empty($_GET['pageno'])) ? (int) $_GET['pageno'] : 1;
- if (empty($_GET['per_page'])) {
-  $per_page = 10;
- } else if ($_GET['per_page'] == "all") {
+ if (!empty($_GET['per_page']) && ($_GET['per_page'] == "all" || $_GET['per_page'][0] == "all")) {
   $per_page = 50000;
- } else {
-  $per_page = (int) $_GET['per_page'];
+ } else if (!empty($_GET['per_page'])) {
+  $per_page = (is_array($_GET['per_page'])) ? $_GET['per_page'][0] : $_GET['per_page'];
  }
+ $per_page = empty($per_page) ? 10 : $per_page;
  $search_order_by = !(empty($_GET['search_order_by'])) ? $_GET['search_order_by'] : '';
  $search_asc_desc = !(empty($_GET['search_asc_desc'])) ? $_GET['search_asc_desc'] : '';
  $query_string = $_SERVER['QUERY_STRING'];
@@ -250,16 +249,16 @@
      $search_array = $$class->field_a;
      global $search_result_statement;
 
-       //pre populate
-  if (method_exists($$class, 'search_pre_populate')) {
-   $ppl = call_user_func(array($$class, 'search_pre_populate'));
-   if (!empty($ppl)) {
-    foreach ($ppl as $search_key => $search_val) {
-     $_GET[$search_key] = $search_val;
-    }
-   }
-  }
-  
+     //pre populate
+     if (method_exists($$class, 'search_pre_populate')) {
+      $ppl = call_user_func(array($$class, 'search_pre_populate'));
+      if (!empty($ppl)) {
+       foreach ($ppl as $search_key => $search_val) {
+        $_GET[$search_key] = $search_val;
+       }
+      }
+     }
+
      if (empty($_GET['column_array'])) {
       if (property_exists($class, 'column')) {
        $column_array = $$class->column;
@@ -355,6 +354,7 @@
 
      $s->setProperty('result', $search_result);
      $s->setProperty('_searching_class', $class);
+     $s->setProperty('_per_page', $per_page);
      $s->setProperty('primary_column_s', $primary_column);
      $s->setProperty('column_array_s', $column_array);
      $search_result_statement = $search->search_result_op();
@@ -485,6 +485,9 @@
    } else if (strpos($css_file_name, 'extensions')) {
     $css_file_path = str_replace('\\', '/', substr($css_file_name, strpos($css_file_name, 'extensions')));
    }
+   else if (strpos($css_file_name, 'engine')) {
+    $css_file_path = str_replace('\\', '/', substr($css_file_name, strpos($css_file_name, 'engine')));
+   }
    array_push($css_file_paths, $css_file_path);
   }
 
@@ -504,17 +507,21 @@
    $read_access = $write_access = $update_access = true;
   } else {
    if (!empty($_SESSION['role_access'])) {
+//    pa($_SESSION['role_access']);
     foreach ($_SESSION['role_access'] as $obj_name => $acc_level) {
      if ($obj_name == $class) {
       $access_level = $acc_level;
       break;
      }
     }
+//    echo "<br> class is $class access_level is $access_level ";
    }
   }
 
   if ((!empty($access_level)) && ($access_level != 9)) {
    require_once 'loader_access.inc';
+  } else if (!empty($access_level) && $access_level == 9) {
+   $read_access = $write_access = $update_access = true;
   }
  } else {
   $mode = 2;

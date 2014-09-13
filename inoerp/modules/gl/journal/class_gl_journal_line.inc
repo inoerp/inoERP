@@ -148,16 +148,17 @@ class gl_journal_line extends dbObject {
 		try {
 		 $gjl->save();
 		} catch (Exception $e) {
+     $this->rollback = true;
 		 echo " GL Journa line status change failed!" . $e->getMessage();
 		}
 	 } catch (Exception $e) {
+    $this->rollback = true;
 		echo " GL Balance Update Failed!" . $e->getMessage();
 	 }
 	}
  }
 
  public function reverse_journal_lines($new_journal_header_id) {
-	pa($this);
 	$old_journal_header_id = $this->gl_journal_header_id;
 	$old_gjl_i = $this->findBy_parentId($old_journal_header_id);
 

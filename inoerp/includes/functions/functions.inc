@@ -16,8 +16,8 @@
   $paths = explode('_', $className);
   // echo "paths $paths";
   $path = $paths[0] . '/';
-  if(!empty($paths[1])){
-  $path .= $paths[1] . '/';
+  if (!empty($paths[1])) {
+   $path .= $paths[1] . '/';
   }
 // $path .= $paths[2] . '/';
   $filename = getcwd() . "/modules/" . $path . 'class_' . $className . ".inc";
@@ -55,8 +55,8 @@
 //	$path .= $key>0 ? str_replace('.inc', '', $value).'/' : null;
 // }
   $path = $paths[0] . '/';
-  if(!empty($paths[1])){
-  $path .= $paths[1] . '/';
+  if (!empty($paths[1])) {
+   $path .= $paths[1] . '/';
   }
   $filename = getcwd() . "/extensions/" . $path . 'class_' . $className . ".inc";
   if (is_readable($filename)) {
@@ -246,9 +246,17 @@
    $current_path .= '?class_name=' . $_GET['class_name'];
   }
   if ((!empty($_GET['mode'])) && (empty($_GET['class_name']))) {
-   $current_path .= '?mode=' . $_GET['mode'];
+   if (is_array($_GET['mode'])) {
+    $current_path .= '?mode=' . $_GET['mode'][0];
+   } else {
+    $current_path .= '?mode=' . $_GET['mode'];
+   }
   } else if (!empty($_GET['mode'])) {
-   $current_path .= '&mode=' . $_GET['mode'];
+      if (is_array($_GET['mode'])) {
+    $current_path .= '&mode=' . $_GET['mode'][0];
+   } else {
+    $current_path .= '&mode=' . $_GET['mode'];
+   }
   }
   return $current_path;
  }
@@ -971,4 +979,15 @@ name='adjustment_ac_id'>
   header("Content-Transfer-Encoding: binary");
  }
 
+ 
+ function translation ($string, $namespace = null, array $values = null)
+{
+    // Redefine arguments
+    $string = (string) $string;
+
+    // Find translation
+    
+    // Return string
+    return empty($values) ? $string : strtr($string, $values);
+}
 ?>

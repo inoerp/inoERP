@@ -350,18 +350,18 @@ get_customer_detail_for_bu();
  });
 
 //total header & tax amount
- $('#content').on('change', '.line_quantity, .unit_price, .line_price, .tax_amount', function() {
-	var total_tax = 0;
+ $('#content').on('blur', '.inv_line_quantity, .inv_unit_price, .inv_line_price', function() {
+  	var total_tax = 0;
 	$('#form_line').find('.tax_amount').each(function() {
-	 total_tax += (+$(this).val());
-	 $('#tax_amount').val(total_tax);
+	 total_tax += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
 	});
-
-	var header_amount = 0;
-	$('#form_line').find('.line_price').each(function() {
-	 header_amount += (+$(this).val());
-	 $('#header_amount').val(header_amount);
-	});
+  $('#tax_amount').val(total_tax);
+  
+  var header_amount = 0;
+  $('#form_line').find('.inv_line_price').each(function() {
+   header_amount += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+  });
+  $('#header_amount').val(header_amount);
  });
 
 });
