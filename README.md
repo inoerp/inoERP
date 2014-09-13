@@ -32,6 +32,26 @@ Dynamic pull system overcomes this issue by recalculating the bucket size (kanba
 (requisitions/purchase order/work order). Each time a new supply is created, system automatically decides the best supply size as per the 
 existing actual demand.
 
+== Requirements ==
+
+1. HTTP web server Ex. Apache, IIS. 
+2. PHP 5.5+    
+3. MySQL 5.5+
+    
+== Auto Installation ==
+
+1. Upload all the files into the web server
+2. Open the index.php /or install.php page and follow the simple 4 steps installation process
+3. Login in to the application using user id /password - admin/admin
+
+== Manual Installation ==
+
+1. Change the DB settings @ include\basics\dbsettings.inc
+2. Change the session_set_cookie_params  in sessions file
+3. Import the database file @  enine\install\inoerp.sql
+4. Change the .htaccess
+5. Login in to the application using user id /password - admin/admin
+ 
 
 Modules
 ------------
