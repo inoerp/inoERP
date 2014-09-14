@@ -44,7 +44,7 @@ Requirements & Installation
 == Auto Installation ==
 
 1. Upload all the files into the web server
-2. Open the index.php /or install.php page and follow the simple 4 steps installation process
+2. Open the index.php /or install.php page and follow the simple 4 steps installation process (mySQL user should have all the privileges equivalent to root a user  to create views. You can change to a lesser privileged user after installation by changing the username & password @ include\basics\dbsettings.inc)
 3. Login in to the application using user id /password - admin/admin
 
 == Manual Installation ==
