@@ -124,8 +124,7 @@
            </div> 
           </div>
           <div id="tabsHeader-4" class="tabContent">
-           <div> 
-            <div id="comments">
+              <div id="comments">
              <div id="comment_list">
               <?php echo!(empty($comments)) ? $comments : ""; ?>
              </div>
@@ -138,7 +137,6 @@
              <div id="new_comment">
              </div>
             </div>
-           </div>
           </div>
           <div id="tabsHeader-5" class="tabContent">
            <div> <?php echo ino_attachement($file) ?> </div>

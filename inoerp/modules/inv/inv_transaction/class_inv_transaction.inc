@@ -21,8 +21,8 @@
    'item_number',
    'item_id_m',
    'uom_id',
-   'lot_number',
-   'serial_number',
+   'lot_number_id',
+   'serial_number_id',
    'logical_transaction_cb',
    'document_type',
    'document_number',
@@ -92,9 +92,16 @@
    "account_id",
    'item_description'
   ];
+    public $profile_default = [
+   'org_id' => 'org_inv_name_default',
+  ];
   public $fields_inHeader_needsToBeInserted_inPOST = [
    "org_id",
-   "transaction_type_id"
+   "transaction_type_id",
+   'serial_generation',
+   'serial_number',
+   'lot_generation',
+   'lot_number'
   ];
   public $requiredField = [
    "uom_id",
@@ -118,8 +125,8 @@
   public $item_number;
   public $item_id_m;
   public $uom_id;
-  public $lot_number;
-  public $serial_number;
+  public $lot_number_id;
+  public $serial_number_id;
   public $logical_transaction_cb;
   public $document_type;
   public $document_number;
@@ -165,6 +172,10 @@
   private $_cr_amount;
   private $_dr_amount;
   private $_adjustment_amount;
+  public $lot_number;
+  public $serial_number;
+  public $serial_generation;
+  public $lot_generation;
 
   public function __set($name, $value) {
    $this->$name = $value;
@@ -577,7 +588,7 @@
      $inv_receving_trnx_a = [2, 17];
      if (!empty($this->_cr_amount) && ($this->transaction_type_id == 20)) {
       $this->_journal_line_for_cr_adjustmet_amount($journal_line_a);
-       } else if ($this->transaction_type_id == 20) {
+     } else if ($this->transaction_type_id == 20) {
       array_push($inv_receving_trnx_a, 20);
      }
 
@@ -598,8 +609,8 @@
        $journal_line['dr_cr'] = 'cr';
        array_push($journal_line_a, $journal_line);
       }
-      }
-    
+     }
+
      break;
 
     case 3 :

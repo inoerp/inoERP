@@ -66,20 +66,21 @@
           <div id="tabsHeader-3" class="tabContent">
            <div> <?php echo ino_attachement($file) ?> </div>
           </div>
-                    <div id="tabsHeader-4" class="tabContent">
-           <div> 
-            <div id="comments">
-             <div id="comment_list">
-              <?php echo!(empty($comments)) ? $comments : ""; ?>
-             </div>
-             <?php
-              $reference_table = 'po_header';
-              $reference_id = $$class->po_header_id;
-              include_once HOME_DIR . '/comment.php';
-             ?>
-             <div id="new_comment">
-             </div>
+          <div id="tabsHeader-4" class="tabContent">
+           <div id="comments">
+            <div id="comment_list">
+             <?php echo!(empty($comments)) ? $comments : ""; ?>
             </div>
+            <div id ="display_comment_form">
+             <?php
+              $reference_table = 'item';
+              $reference_id = $$class->item_id;
+             ?>
+            </div>
+            <div id="new_comment">
+            </div>
+           </div>
+           <div> 
            </div>
           </div>
           <div id="tabsHeader-5" class="tabContent">
@@ -200,10 +201,10 @@
             <ul class="small_box itemMaster_lot">
              <box_heading>Lot Information </box_heading> 
              <li><label>Lot Uniqueness : </label> 
-              <?php echo form::text_field_d('lot_uniqueness'); ?>
+              <?php echo $f->select_field_from_array('lot_uniqueness', item::$ls_uniqueness_a, $$class->lot_uniqueness); ?>
              </li>
              <li><label>Lot Generation : </label> 
-              <?php echo form::text_field_d('lot_generation'); ?>
+              <?php echo $f->select_field_from_array('lot_generation', item::$ls_generation_a, $$class->lot_generation); ?>
              </li> 
              <li><label>Lot Prefix : </label> 
               <?php echo form::text_field_d('lot_prefix'); ?>
@@ -216,10 +217,10 @@
             <ul class="small_box itemMaster_serial">
              <box_heading>Serial Information </box_heading> 
              <li><label>Serial Uniqueness : </label> 
-              <?php echo form::text_field_d('serial_uniqueness'); ?>
+              <?php echo $f->select_field_from_array('serial_uniqueness', item::$ls_uniqueness_a, $$class->serial_uniqueness); ?>
              </li>
              <li><label>Serial Generation : </label> 
-              <?php echo form::text_field_d('serial_generation'); ?>
+              <?php echo $f->select_field_from_array('serial_generation', item::$ls_generation_a, $$class->serial_generation); ?>
              </li> 
              <li><label>Serial Prefix : </label> 
               <?php echo form::text_field_d('serial_prefix'); ?>
