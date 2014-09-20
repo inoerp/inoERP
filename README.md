@@ -54,6 +54,11 @@ Requirements & Installation
 3. Import the database file @  enine\install\inoerp.sql
 4. Change the .htaccess
 5. Login in to the application using user id /password - admin/admin
+
+
+Optional setup
+
+If Auto-Schedule/run of any program is required then schdule the main program modules/sys/program/start_program.php via cron job.
  
 
 Modules
