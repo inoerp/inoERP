@@ -236,6 +236,7 @@ $(document).ready(function() {
 
 //add or show linw details
  addOrShow_lineDetails('tr.po_line0');
+onClick_addDetailLine(4);
 
  //function to coply line to details
  function copy_line_to_details() {
@@ -271,7 +272,7 @@ $(document).ready(function() {
   $(".tabsDetail").tabs();
  });
 
- onClick_addDetailLine('tr.po_detail0-0', 'tbody.form_data_detail_tbody', 4);
+ 
 
 //remove po lines
  $("#remove_row").click(function() {

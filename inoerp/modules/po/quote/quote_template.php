@@ -206,8 +206,9 @@
                 <td class="add_detail_values"><img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
                  <!--</td></tr>-->	
                  <?php
-                 if (!empty($$class_second->po_rfq_line_id)) {
                   $po_quote_detail_object = [];
+                 if (!empty($$class_second->po_rfq_line_id)) {
+                  
                   $rfq_detail_a = po_rfq_detail::find_by_parent_id($$class_second->po_rfq_line_id);
                   foreach ($rfq_detail_a as $rfq_detail) {
                    $po_quote_detail_value = new po_quote_detail();
@@ -238,11 +239,11 @@
                   <fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
                    <div class="tabsDetail">
                     <ul class="tabMain">
-                     <li class="tabLink"><a href="#tabsDetail-1-1">Basic</a></li>
-                     <li class="tabLink"><a href="#tabsDetail-2-1">Description</a></li>
+                     <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>">Basic</a></li>
+                     <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>">Description</a></li>
                     </ul>
                     <div class="tabContainer">
-                     <div id="tabsDetail-1-1" class="tabContent">
+                     <div id="tabsDetail-1-<?php echo $count ?>" class="tabContent">
                       <table class="form form_detail_data_table detail">
                        <thead>
                         <tr>
@@ -263,7 +264,7 @@
                          $class_third = 'po_quote_detail';
                          $$class_third = &$po_quote_detail;
                          ?>
-                         <tr class="po_quote_detail<?php echo $count . '-' . $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
+                         <tr class="po_quote_detail<?php echo $count . '-' . $detailCount; ?>">
                           <td>   
                            <ul class="inline_action">
                             <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
@@ -287,7 +288,7 @@
                        </tbody>
                       </table>
                      </div>
-                     <div id="tabsDetail-2-1" class="tabContent">
+                     <div id="tabsDetail-2-<?php echo $count ?>" class="tabContent">
                       <table class="form form_detail_data_table detail">
                        <thead>
                         <tr>
@@ -305,7 +306,7 @@
                          $$class_third = &$po_quote_detail;
                          ?>
 
-                         <tr class="po_quote_detail<?php echo $count . '-' . $detailCount; ?> <?php echo $detailCount != 0 ? ' new_object' : '' ?>">
+                         <tr class="po_quote_detail<?php echo $count . '-' . $detailCount; ?>">
                           <td><?php $f->seq_field_detail_d($detailCount) ?></td>
                           <td><?php $f->text_field_wid3('target_value'); ?></td>
 

@@ -176,7 +176,7 @@ $(document).ready(function() {
 
 //add or show linw details
  addOrShow_lineDetails('tr.po_quote_line0');
- onClick_addDetailLine('tr.po_quote_detail0-0', 'tbody.form_data_detail_tbody', 4);
+ onClick_addDetailLine(4);
 
 //remove po lines
  $("#remove_row").click(function() {

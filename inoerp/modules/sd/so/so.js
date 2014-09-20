@@ -241,7 +241,7 @@ get_customer_detail_for_bu();
 	$(".tabsDetail").tabs();
  });
 
- onClick_addDetailLine('tr.so_detail0-0', 'tbody.form_data_detail_tbody', 4);
+ onClick_addDetailLine(4);
 
 //remove po lines
  $("#remove_row").click(function() {

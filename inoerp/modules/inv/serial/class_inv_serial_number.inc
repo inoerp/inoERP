@@ -62,7 +62,10 @@
    'subinventory',
    'locator',
    'item_number',
-   'item_description'
+   'item_description',
+   'org_id',
+   'transaction_type',
+   'transaction_type_id'
   ];
   public $requiredField = [
    'item_id_m',
@@ -129,6 +132,27 @@
   public $item_description;
   private $_update_item_starting_serial_number = 0;
   public $message;
+  public $inv_serial_transaction_id;
+  public $transaction_type_id;
+  public $transaction_type;
+  public $from_subinventory;
+  public $to_subinventory;
+  public $from_locator;
+  public $to_locator;
+  public $uom_id;
+  public $lot_number_id;
+  public $document_type;
+  public $document_number;
+  public $document_id;
+  public $inv_transaction_id;
+  public $sd_so_line_id;
+  public $reason;
+  public $from_org_id;
+  public $from_subinventory_id;
+  public $to_org_id;
+  public $to_subinventory_id;
+  public $from_locator_id;
+  public $to_locator_id;
 
   Public static function serail_status() {
    $option_header = option_header::find_by_name('INV_SEARIAL_STATUS');
@@ -170,8 +194,12 @@
    $sql .= self::$table_name;
    $sql .= " WHERE item_id_m = :item_id_m  ";
    $sql .= " AND current_org_id = :current_org_id  ";
-   $sql .= " AND status = :status  ";
-   $value_a = ['item_id_m' => $this->item_id_m, 'current_org_id' => $this->current_org_id, 'status' => $this->status];
+   $value_a = ['item_id_m' => $this->item_id_m, 'current_org_id' => $this->current_org_id];
+   if (!empty($this->status)) {
+    $sql .= " AND status = :status  ";
+    $value_a['status'] = $this->status;
+   }
+
    if (!empty($this->current_subinventory_id)) {
     $sql .= " AND current_subinventory_id = :current_subinventory_id  ";
     $value_a['current_subinventory_id'] = $this->current_subinventory_id;
@@ -202,18 +230,6 @@
    }
    $result = $this->findBySql($sql, $value_a);
    return !empty($result) ? ($result) : false;
-  }
-
-  public function findBy_valuationName_OrgId($valuation_name = '', $org_id = '') {
-   $org_id = empty($org_id) ? $this->scope_org_id : $org_id;
-   $valuation_name = empty($valuation_name) ? $this->valuation_name : $valuation_name;
-   $sql = " SELECT * FROM ";
-   $sql .= self::$table_name;
-   $sql .= " WHERE scope_org_id = '{$org_id}' AND"
-     . " valuation_name = '{$valuation_name}' AND status='active'   LIMIT 1 ";
-
-   $result = $this->findBySql($sql);
-   return !empty($result) ? array_pop($result) : false;
   }
 
   public function prg_create_serial_number($seralized_parameters) {

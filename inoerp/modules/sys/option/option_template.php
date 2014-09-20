@@ -68,7 +68,7 @@
 				 </ul>
 				 <div class="tabContainer">
 					<div id="tabsLine-1" class="tabContent">
-					 <table class="form form_line_data_table">
+					 <table class="form_line_data_table">
 						<thead>
 						 <tr>
 							<th>Action</th>
@@ -80,7 +80,7 @@
 							<th class="add_detail_values_header">Details</th>
 						 </tr>
 						</thead>
-						<tbody id="form_data_line_tbody" class="form_data_line_tbody">
+						<tbody  class="form_data_line_tbody">
 						 <?php
 						 $linecount = 0;
 						 foreach ($option_line_object as $option_line) {
@@ -123,9 +123,6 @@
  										<th>Detail Id</th>
  										<th>Value</th>
  										<th>Description</th>
- 										<th>E Field</th>
- 										<th>Status</th>
- 										<th>Revision</th>
  										<th>Rev #</th>
  										<th>Start Date</th>
  										<th>End Date</th>
@@ -134,7 +131,7 @@
  									<tbody class="form_data_detail_tbody">
 										<?php
 										$detailCount = 0;
-										foreach ($option_detail_object as $option_detail) {
+  										foreach ($option_detail_object as $option_detail) {
 										 ?>
 										 <tr class="option_detail_tr<?php echo $detailCount; ?>">
 											<td>   
@@ -147,15 +144,12 @@
 
 											 </ul>
 											</td>
-											<td><?php echo form::text_field('option_detail_id', $option_detail->option_detail_id, '8', '12', '', 'System number', 'option_line_id'); ?></td>
-											<td><?php echo form::text_field('option_detail_value', $option_detail->option_detail_value, 'required', '20', '50', 'No special characters', ''); ?></td>
-											<td><?php echo form::text_field('description', $option_detail->description, '20'); ?></td>
-											<td><?php echo form::extra_field($option_detail->efid, '5'); ?></td>
-											<td><?php echo form::status_field($option_detail->status); ?></td>
-											<td><?php echo form::revision_enabled_field($option_detail->rev_enabled); ?></td>
-											<td><?php echo form::text_field('rev_number', $option_detail->rev_number, '5'); ?></td>
-											<td><?php echo form::date_field('effective_start_date', $option_detail->effective_start_date, '10', '', '', ''); ?></td>
-											<td><?php echo form::date_field('effective_end_date', $option_detail->effective_end_date, '10', '', '', ''); ?></td>
+											<td><?php $f->text_field_wid3sr('option_detail_id'); ?></td>
+											<td><?php $f->text_field_wid3('option_detail_value'); ?></td>
+                      <td><?php $f->text_field_wid3('description'); ?></td>
+											<td><?php $f->text_field_wid3s('rev_number'); ?></td>
+                      <td><?php echo $f->date_field('effective_start_date', $option_detail->effective_start_date); ?></td>
+											<td><?php echo $f->date_field('effective_end_date', $option_detail->effective_end_date); ?></td>
 										 </tr>
 										 <?php
 										 $detailCount++;

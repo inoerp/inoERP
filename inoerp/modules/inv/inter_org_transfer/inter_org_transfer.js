@@ -1,7 +1,8 @@
 function setValFromSelectPage(inv_interorg_transfer_header_id, combination, supplier_id, supplier_number,
  supplier_name, supplier_site_id, supplier_site_name, supplier_site_number,
  item_id_m, item_number, item_description, uom_id, po_header_id, po_line_id, po_detail_id,
- po_number, po_line_number, shipment_number, quantity, received_quantity) {
+ po_number, po_line_number, shipment_number, quantity, received_quantity,
+ serial_generation, lot_generation) {
  this.inv_interorg_transfer_header_id = inv_interorg_transfer_header_id;
  this.combination = combination;
  this.supplier_id = supplier_id;
@@ -22,6 +23,8 @@ function setValFromSelectPage(inv_interorg_transfer_header_id, combination, supp
  this.shipment_number = shipment_number;
  this.quantity = quantity;
  this.received_quantity = received_quantity;
+  this.serial_generation = serial_generation;
+ this.lot_generation = lot_generation;
 }
 
 setValFromSelectPage.prototype.setVal = function() {
@@ -80,11 +83,22 @@ setValFromSelectPage.prototype.setVal = function() {
    $('#content').find(rowClass).find(fieldClass).val(value.data);
   }
  });
-
+ if (this.serial_generation) {
+  $('#content').find(rowClass).find('.serial_generation').val(this.serial_generation);
+  $('#content').find(rowClass).find('.serial_number').attr('required', true).css('background-color', 'pink');
+ }
+ if (this.lot_generation) {
+  $('#content').find(rowClass).find('.lot_generation').val(this.lot_generation);
+  $('#content').find(rowClass).find('.lot_number').attr('required', true).css('background-color', 'pink');
+ }
  localStorage.removeItem("row_class");
  localStorage.removeItem("row_class");
 
 };
+
+function beforeSave() {
+beforeSave_serial();
+}
 
 $(document).ready(function() {
 
@@ -210,7 +224,7 @@ $(document).ready(function() {
   var addNewRow = new add_new_rowMain();
   addNewRow.trClass = 'inv_interorg_transfer_line';
   addNewRow.tbodyClass = 'form_data_line_tbody';
-  addNewRow.noOfTabs = 3;
+  addNewRow.noOfTabs = 4;
   addNewRow.removeDefault = true;
   addNewRow.add_new_row();
  });
@@ -223,7 +237,7 @@ $(document).ready(function() {
  classContextMenu.btn2DivId = 'form_line';
  classContextMenu.trClass = 'interorg_transfer_line';
  classContextMenu.tbodyClass = 'form_data_line_tbody';
- classContextMenu.noOfTabbs = 3;
+ classContextMenu.noOfTabbs = 4;
  classContextMenu.contextMenu();
 
 
@@ -238,6 +252,39 @@ $(document).ready(function() {
  classSave.lineClassName = 'inv_interorg_transfer_line';
  classSave.enable_select = true;
  classSave.saveMain();
+
+ //add or show linw details
+ addOrShow_lineDetails('tr.inv_interorg_transfer_line0');
+
+ onClick_addDetailLine(1);
+ 
+  $('#content').on('blur', '.from_subinventory_id, .from_locator_id', function() {
+  var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
+  var trClass_d = '.' + trClass;
+  var generation_type = $('#content').find(trClass_d).find('.serial_generation').val();
+
+  if (!generation_type) {
+   var field_stmt = '<input class="textfield serial_number" type="text" size="25" readonly name="serial_number[]" >';
+   $('#content').find(trClass_d).find('.inv_serial_number_id').replaceWith(field_stmt);
+   $('#content').find(trClass_d).find('.serial_number').replaceWith(field_stmt);
+   alert('Item is not serial controlled.\nNo serial informatio \'ll be saved in database');
+   return;
+  }
+  var itemIdM = $('#content').find(trClass_d).find('.item_id_m').val();
+  if (!itemIdM) {
+   return;
+  }
+
+  getSerialNumber({
+   'org_id': $('#from_org_id').val(),
+   'status': 'IN_STORE',
+   'item_id_m': itemIdM,
+   'trclass': trClass,
+   'current_subinventory_id': $('#content').find(trClass_d).find('.from_subinventory_id').val(),
+   'current_locator_id': $('#content').find(trClass_d).find('.from_locator_id').val(),
+  });
+ });
+
 
 
  //all actions

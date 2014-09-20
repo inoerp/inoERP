@@ -27,8 +27,6 @@
    'reference_type',
    'reference_key_name',
    'reference_key_value',
-   'lot_number',
-   'serial_number',
    'created_by',
    'creation_date',
    'last_update_by',
@@ -46,7 +44,14 @@
    'from_current_onhand',
    'from_future_onhand',
    'to_current_onhand',
-   'to_future_onhand'
+   'to_future_onhand',
+    'serial_generation',
+   'serial_number',
+   'inv_serial_number_id',
+   'lot_generation',
+   'lot_number',
+      'lot_number_id',
+   'serial_number_id',
   ];
   public $fields_inHeader_needsToBeInserted_inPOST = [
    "inv_interorg_transfer_header_id",
@@ -82,8 +87,8 @@
   public $reference_key_name;
   public $reference_key_value;
   public $country_of_origin;
-  public $lot_number;
-  public $serial_number;
+  public $lot_number_id;
+  
   public $created_by;
   public $creation_date;
   public $last_update_by;
@@ -92,6 +97,13 @@
   public $from_future_onhand;
   public $to_current_onhand;
   public $to_future_onhand;
+    public $lot_number;
+  public $serial_number;
+  public $serial_number_id;
+  public $inv_serial_number_id;
+  public $serial_generation;
+  public $lot_generation;
+  
 
   public function _after_save() {
    if (!empty($this->inv_interorg_transfer_line_id)) {
@@ -155,8 +167,8 @@
      $inv_transaction_from->account_id = $from_org->inter_org_receivable_ac_id;
      $inv_transaction_from->transaction_type_id = $ioh->transaction_type_id;
      $inv_transaction_from->reference_type = 'table';
-     $inv_transaction_from->reference_key_name = 'inv_interorg_transfer_header';
-     $inv_transaction_from->reference_key_value = $this->inv_interorg_transfer_header_id;
+     $inv_transaction_from->reference_key_name = 'inv_interorg_transfer_line';
+     $inv_transaction_from->reference_key_value = $this->inv_interorg_transfer_line_id;
      $inv_transaction_from->document_type = 'Inter-Org Transfer';
      $inv_transaction_from->document_number = $ioh->order_number;
      $inv_transaction_from->audit_trial();
@@ -189,8 +201,8 @@
      $inv_transaction_to->account_id = $to_org->inter_org_payable_ac_id;
      $inv_transaction_to->transaction_type_id = 20;
      $inv_transaction_to->reference_type = 'table';
-     $inv_transaction_to->reference_key_name = 'inv_interorg_transfer_header';
-     $inv_transaction_to->reference_key_value = $this->inv_interorg_transfer_header_id;
+     $inv_transaction_to->reference_key_name = 'inv_interorg_transfer_line';
+     $inv_transaction_to->reference_key_value = $this->inv_interorg_transfer_line_id;
      $inv_transaction_to->document_type = 'Inter-Org Transfer';
      $inv_transaction_to->document_number = $ioh->order_number;
      $inv_transaction_to->audit_trial();
@@ -208,8 +220,8 @@
      $inv_transaction_from->item_id_m = $this->item_id_m;
      $inv_transaction_from->transaction_type_id = $ioh->transaction_type_id;
      $inv_transaction_from->reference_type = 'table';
-     $inv_transaction_from->reference_key_name = 'inv_interorg_transfer_header';
-     $inv_transaction_from->reference_key_value = $this->inv_interorg_transfer_header_id;
+     $inv_transaction_from->reference_key_name = 'inv_interorg_transfer_line';
+     $inv_transaction_from->reference_key_value = $this->inv_interorg_transfer_line_id;
      $inv_transaction_from->document_type = 'Inter-Org Transfer';
      $inv_transaction_from->document_number = $ioh->order_number;
      $inv_transaction_from->audit_trial();

@@ -226,7 +226,7 @@ $(document).ready(function() {
   $(".tabsDetail").tabs();
  });
 
- onClick_addDetailLine('tr.po_requisition_detail0-0', 'tbody.form_data_detail_tbody', 4);
+ onClick_addDetailLine(4);
 
 //remove po_requisition lines
  $("#remove_row").click(function() {

@@ -51,18 +51,15 @@
            <div> <?php echo ino_attachement($file) ?> </div>
           </div>
           <div id="tabsHeader-3" class="tabContent">
-           <div> 
-            <div id="comments">
-             <div id="comment_list">
-              <?php echo!(empty($comments)) ? $comments : ""; ?>
-             </div>
+           <div id="comments">
+            <div id="comment_list">
+             <?php echo!(empty($comments)) ? $comments : ""; ?>
+            </div>
+            <div id ="display_comment_form">
              <?php
               $reference_table = 'inv_interorg_transfer_header';
               $reference_id = $$class->inv_interorg_transfer_header_id;
-              include_once HOME_DIR . '/comment.php';
              ?>
-             <div id="new_comment">
-             </div>
             </div>
            </div>
           </div>
@@ -92,11 +89,12 @@
          <ul class="tabMain">
           <li><a href="#tabsLine-1">General Info</a></li>
           <li><a href="#tabsLine-2">Transfer </a></li>
-          <li><a href="#tabsLine-3">On hand </a></li>
+          <li><a href="#tabsLine-3">Lot Serial </a></li>
+          <li><a href="#tabsLine-4">On hand </a></li>
          </ul>
          <div class="tabContainer">
           <div id="tabsLine-1" class="tabContent">
-           <table class="form_table">
+           <table class="form_line_data_table">
             <thead> 
              <tr>
               <th>Action</th>
@@ -105,9 +103,8 @@
               <th>Item Description</th>
               <th>UOM</th>
               <th>Quantity</th>
-              <th>Lot Number</th>
-              <th>Serial Number</th>
               <th>Reason</th>
+
              </tr>
             </thead>
             <tbody class="form_data_line_tbody">
@@ -135,10 +132,9 @@
                  ?><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
                 <td><?php $f->text_field_wid2l('item_description'); ?></td>
                 <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, 'uom_id', $readonly); ?>  </td>
-                <td><?php echo $f->number_field('transaction_quantity', $$class_second->transaction_quantity,'','','','',$f->readonly2); ?></td>
-                <td><?php $f->text_field_wid2('lot_number'); ?></td>
-                <td><?php $f->text_field_wid2('serial_number'); ?></td>
+                <td><?php echo $f->number_field('transaction_quantity', $$class_second->transaction_quantity, '', '', '', '', $f->readonly2); ?></td>
                 <td><?php $f->text_field_wid2('reason'); ?>							</td>
+
                </tr>
                <?php
                $count = $count + 1;
@@ -148,7 +144,7 @@
            </table>
           </div>
           <div id="tabsLine-2" class="tabContent">
-           <table class="form_table">
+           <table class="form_line_data_table">
             <thead> 
              <tr>
               <th>From SubInv</th>
@@ -194,7 +190,103 @@
            </table>
           </div>
           <div id="tabsLine-3" class="tabContent">
-           <table class="form_table">
+           <table class="form_line_data_table">
+            <thead> 
+             <tr>
+              <th>Lot Number</th>
+              <th>Serial Number</th>
+             </tr>
+            </thead>
+            <tbody class="form_data_line_tbody">
+             <?php
+              $count = 0;
+              foreach ($inv_interorg_transfer_line_object as $inv_interorg_transfer_line) {
+               ?>    
+               <tr class="inv_interorg_transfer_line<?php echo $count ?>">
+                <td><?php $f->text_field_wid2('lot_number'); ?></td>
+                <td class="add_detail_values">
+                 <?php
+                 echo $f->hidden_field('serial_number_id', $$class_second->serial_number_id);
+                 echo $f->hidden_field('serial_generation', $$class_second->serial_generation);
+                 ?>
+                 <img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+                 <div class="class_detail_form">
+                  <fieldset class="form_detail_data_fs"><legend>Serial</legend>
+                   <div class="tabsDetail">
+                    <ul class="tabMain">
+                     <li class="tabLink"><a href="#tabsDetail-1-1"> Numbers</a></li>
+                    </ul>
+                    <div class="tabContainer">
+                     <div id="tabsDetail-1-1" class="tabContent">
+                      <table class="form form_detail_data_table detail">
+                       <thead>
+                        <tr>
+                         <th>Action</th>
+                         <th>Serial Number</th>
+                        </tr>
+                       </thead>
+                       <tbody class="form_data_detail_tbody">
+                        <?php
+                        $detailCount = 0;
+                        if (!empty($$class->inv_interorg_transfer_line_id)) {
+                         $serial_object = [];
+                         $serial_trnxs = inv_serial_transaction::find_by_invTransactionId($$class->inv_transaction_id);
+                         if (!empty($serial_trnxs)) {
+                          foreach ($serial_trnxs as $serial_trnx) {
+                           $serial_no = new inv_serial_number();
+                           $serial_no->findBy_id($serial_trnx->inv_serial_number_id);
+                           array_push($serial_object, $serial_no);
+                          }
+                         }
+                        }
+                        if (empty($serial_object)) {
+                         $serial_object = array(new inv_serial_number());
+                        }
+                        foreach ($serial_object as $serial_no) {
+                         ?>
+                         <tr class="inv_serial_number<?php echo $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
+                          <td>   
+                           <ul class="inline_action">
+                            <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
+                            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+                            <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($serial_no->inv_serial_number_id); ?>"></li>           
+
+                           </ul>
+                          </td>
+                          <td><?php
+                           echo $f->text_field('serial_number', $serial_no->serial_number, '25');
+                           echo $f->hidden_field('serial_generation', $$class_second->serial_generation);
+                           ?>
+                          </td>
+
+                         </tr>
+                         <?php
+                         $detailCount++;
+                        }
+                        ?>
+                       </tbody>
+                      </table>
+                     </div>
+                    </div>
+                   </div>
+
+
+                  </fieldset>
+
+                 </div>
+
+                </td>
+
+               </tr>
+               <?php
+               $count = $count + 1;
+              }
+             ?>
+            </tbody>
+           </table>
+          </div>
+          <div id="tabsLine-4" class="tabContent">
+           <table class="form_line_data_table">
             <thead> 
              <tr>
               <th>From Current Onhand</th>

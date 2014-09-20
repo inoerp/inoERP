@@ -51,7 +51,7 @@ $(document).ready(function() {
 	$(".tabsDetail").tabs();
  });
 
- onClick_addDetailLine('tr.option_detail_tr0', 'tbody.form_data_detail_tbody', 1);
+ onClick_addDetailLine(1);
 
 //remove option lines
  $("#remove_row").click(function() {

@@ -94,7 +94,7 @@ $(document).ready(function() {
 	$(".tabsDetail").tabs();
  });
 
- onClick_addDetailLine('tr.bom_routing_detail0-0', 'tbody.form_data_detail_tbody', 2);
+ onClick_addDetailLine( 2);
 
  //context menu
  var classContextMenu = new contextMenuMain();

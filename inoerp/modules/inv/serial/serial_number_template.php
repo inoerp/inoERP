@@ -96,7 +96,7 @@
            <div> 
             <ul class="column four_column"> 
              <li><label>Origination Type : </label>
-              <?php echo $f->select_field_from_array('origination_type', inv_serial_number::$origination_type_a, $$class->origination_type,'origination_type','',1,1, 1); ?>             </li>
+              <?php echo $f->select_field_from_array('origination_type', inv_serial_number::$origination_type_a, $$class->origination_type, 'origination_type', '', 1, 1, 1); ?>             </li>
              <li><label>Origination Date : </label>
               <?php echo $f->date_fieldAnyDay_r('origination_date', $$class->origination_date, 1); ?>
              </li>
@@ -132,9 +132,101 @@
           </div> 
           <div id="tabsLine-3"  class="tabContent">
            <div> 
-            <ul class="column five_column">
-             <li id="document_print"><label>Transaction : </label> <?php // echo $result_stmt;      ?>	</li>
-            </ul>
+            <div id ="form_line" class="form_line">
+             <div id="tabsDetail">
+              <ul class="tabMain">
+               <li><a href="#tabsDetail-1">Info-1 </a></li>
+               <li><a href="#tabsDetail-2">Info-2 </a></li>
+              </ul>
+              <div class="tabContainer"> 
+                <div id="tabsDetail-1" class="tabContent">
+                 <table class="form_table">
+                  <thead> 
+                   <tr>
+                    <th>Serial Number</th>
+                    <th>Item Number</th>
+                    <th>Item Description</th>
+                    <th>Org Id</th>
+                    <th>Transaction Type</th>
+                    <th>From Sub Inventory </th>
+                    <th>From Locator </th>
+                    <th>Transaction Details </th>
+                   </tr>
+                  </thead>
+                  <tbody class="form_data_line_tbody inv_serial_transaction_entries_values" >
+                   <?php
+                    $count = 0;
+                    foreach ($inv_serial_transaction_object as $inv_serial_transaction_v) {
+                     $class_second ='inv_serial_transaction_v';
+                     
+                     ?>         
+                     <tr class="inv_serial_transaction_entries<?php echo $count ?>">
+                      <td><?php $f->text_field_wid2r('serial_number'); ?></td>
+                      <td><?php $f->text_field_wid2r('item_number'); ?></td>
+                      <td><?php $f->text_field_wid2r('item_description'); ?></td>
+                      <td><?php $f->text_field_wid2sr('org_id'); ?></td>
+                      <td><?php $f->text_field_wid2r('transaction_type'); ?></td>
+                      <td><?php $f->text_field_wid2r('from_subinventory'); ?></td>
+                      <td><?php $f->text_field_wid2r('from_locator'); ?></td>
+                      <td><a class="button" href="form.php?class_name=inv_transaction&mode=2&inv_transaction_id=<?php echo $$class_second->inv_transaction_id; ?>">View Inv Transaction</a></td>
+                     </tr>
+                     <?php
+                     $count = $count + 1;
+                    }
+                   ?>
+                  </tbody>
+                 </table>
+                </div>
+                <div id="tabsDetail-2" class="tabContent">
+                 <table class="form_table">
+                  <thead> 
+                   <tr>
+                    <th>Item Id M </th>
+                    <th>To Sub Inventory </th>
+                    <th>To Locator </th>
+                    <th>Transaction Id</th>
+                    <th>Transaction Type Id</th>
+                    <th>From Sub Inventory Id</th>
+                    <th>From Locator Id</th>
+                    <th>To Sub Inventory Id</th>
+                    <th>To Locator Id</th>
+                   </tr>
+                  </thead>
+                  <tbody class="form_data_line_tbody inv_serial_transaction_entries_values" >
+                   <?php
+                    $count = 0;
+                    foreach ($inv_serial_transaction_object as $inv_serial_transaction_v) {
+                     $class_second ='inv_serial_transaction_v';
+                     ?>         
+                     <tr class="inv_serial_transaction_entries<?php echo $count ?>">
+                      <td><?php $f->text_field_wid2r('item_id_m'); ?></td>
+                      <td><?php $f->text_field_wid2r('to_subinventory'); ?></td>
+                      <td><?php $f->text_field_wid2r('to_locator'); ?></td>
+                      <td><?php $f->text_field_wid2sr('inv_transaction_id'); ?></td>
+                      <td><?php $f->text_field_wid2sr('transaction_type_id'); ?></td>
+
+                      <td><?php $f->text_field_wid2sr('from_subinventory_id'); ?></td>
+                      <td><?php $f->text_field_wid2sr('from_locator_id'); ?></td>
+                      <td><?php $f->text_field_wid2sr('to_subinventory_id'); ?></td>
+                      <td><?php $f->text_field_wid2sr('to_locator_id'); ?></td>
+                     </tr>
+                     <?php
+                     $count = $count + 1;
+                    }
+                   ?>
+                  </tbody>
+                 </table>
+                </div>
+              </div>
+
+             </div>
+            </div> 
+            <div id="pagination" style="clear: both;">
+             <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
+             ?>
+            </div>
+            <!--END OF FORM -->
+
            </div> 
           </div>
          </div>

@@ -63,6 +63,13 @@ class onhand_v extends dbObject {
  public $dateField = [
  ];
  public $pageTitle = " Onhand - Find Inventory Onhand "; //page Title
+ 
+   public $search = [
+    '_view_path' => 'form.php?class_name=inv_onhand_serial',
+   '_show_view_path' => 1,
+	 '_view_action_meassge' => 'Serial Numbers',
+   '_extra_path' => array('form.php?class_name=inv_onhand_lot&mode=2' => 'Lot Numbers')
+  ];
  public $search_groupBy = [
    'item_number' => 'Item Number'
 //		 'locator' => 'Locator',

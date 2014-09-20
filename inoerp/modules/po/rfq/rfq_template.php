@@ -216,11 +216,11 @@
                   <fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
                    <div class="tabsDetail">
                     <ul class="tabMain">
-                     <li class="tabLink"><a href="#tabsDetail-1-1">Basic</a></li>
-                     <li class="tabLink"><a href="#tabsDetail-2-1">Description</a></li>
+                     <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>">Basic</a></li>
+                     <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>">Description</a></li>
                     </ul>
                     <div class="tabContainer">
-                     <div id="tabsDetail-1-1" class="tabContent">
+                     <div id="tabsDetail-1-<?php echo $count ?>" class="tabContent">
                       <table class="form form_detail_data_table detail">
                        <thead>
                         <tr>
@@ -240,7 +240,7 @@
                          $class_third = 'po_rfq_detail';
                          $$class_third = &$po_rfq_detail;
                          ?>
-                         <tr class="po_rfq_detail<?php echo $count . '-' . $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
+                         <tr class="po_rfq_detail<?php echo $count . '-' . $detailCount; ?>">
                           <td>   
                            <ul class="inline_action">
                             <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
@@ -265,7 +265,7 @@
                        </tbody>
                       </table>
                      </div>
-                     <div id="tabsDetail-2-1" class="tabContent">
+                     <div id="tabsDetail-2-<?php echo $count ?>" class="tabContent">
                       <table class="form form_detail_data_table detail">
                        <thead>
                         <tr>
@@ -282,7 +282,7 @@
                          $$class_third = &$po_rfq_detail;
                          ?>
 
-                         <tr class="po_rfq_detail<?php echo $count . '-' . $detailCount; ?> <?php echo $detailCount != 0 ? ' new_object' : '' ?>">
+                         <tr class="po_rfq_detail<?php echo $count . '-' . $detailCount; ?>">
                           <td><?php $f->seq_field_detail_d($detailCount) ?></td>
                           <td><?php $f->text_field_wid3('target_value'); ?></td>
 

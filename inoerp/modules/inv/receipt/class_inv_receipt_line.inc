@@ -29,8 +29,6 @@ class inv_receipt_line extends dbObject {
 		 "receving_account_id",
 		 "accrual_account_id",
 		 'country_of_origin',
-		 'lot_number',
-		 'serial_number',
 		 'created_by',
 		 'creation_date',
 		 'last_update_by',
@@ -53,7 +51,14 @@ class inv_receipt_line extends dbObject {
 		 'supplier_name',
 		 'supplier_site_id',
 		 'supplier_site_number',
-		 'supplier_site'
+		 'supplier_site',
+      'serial_generation',
+   'serial_number',
+   'inv_serial_number_id',
+   'lot_generation',
+   'lot_number',
+      'lot_number_id',
+   'serial_number_id',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
 		 "inv_receipt_header_id",
@@ -93,8 +98,6 @@ class inv_receipt_line extends dbObject {
  public $time;
  public $msg;
  public $org_id;
- public $lot_number;
- public $serial_number;
  public $po_received_quantity;
  public $transaction_type_id;
  public $po_number;
@@ -111,6 +114,12 @@ class inv_receipt_line extends dbObject {
  public $po_line_number;
  public $quantity;
  public $received_quantity;
+     public $lot_number;
+  public $serial_number;
+  public $serial_number_id;
+  public $inv_serial_number_id;
+  public $serial_generation;
+  public $lot_generation;
 
  Public static function inv_transaction_class() {
 	$option_header = option_header::find_by_name('TRANSACTION_TYPE_CLASS');
@@ -188,8 +197,8 @@ class inv_receipt_line extends dbObject {
 		$inv_transaction->transaction_type_id = $this->transaction_type_id;
 		$inv_transaction->po_detail_id = $this->po_detail_id;
 		$inv_transaction->reference_type = 'table';
-		$inv_transaction->reference_key_name = 'po_header';
-		$inv_transaction->reference_key_value = $this->po_header_id;
+		$inv_transaction->reference_key_name = 'inv_receipt_line';
+		$inv_transaction->reference_key_value = $this->inv_receipt_line_id;
 		$inv_transaction->document_type = 'PO';
 		$inv_transaction->document_number = $this->po_number;
 		$inv_transaction->audit_trial();
@@ -208,8 +217,8 @@ class inv_receipt_line extends dbObject {
 		$inv_transaction->transaction_type_id = $this->transaction_type_id;
 		$inv_transaction->po_detail_id = $this->po_detail_id;
 		$inv_transaction->reference_type = 'table';
-		$inv_transaction->reference_key_name = 'po_header';
-		$inv_transaction->reference_key_value = $this->po_header_id;
+		$inv_transaction->reference_key_name = 'inv_receipt_line';
+		$inv_transaction->reference_key_value = $this->inv_receipt_line_id;
 		$inv_transaction->document_type = 'PO';
 		$inv_transaction->document_number = $this->po_number;
 		$inv_transaction->audit_trial();

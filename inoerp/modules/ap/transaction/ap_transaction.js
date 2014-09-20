@@ -162,6 +162,7 @@ $(document).ready(function() {
 
 //add or show linw details
  addOrShow_lineDetails('tr.ap_transaction_line0');
+onClick_addDetailLine(2);
 
  //function to coply line to details
  function copy_line_to_details() {
@@ -187,7 +188,7 @@ $(document).ready(function() {
   $(".tabsDetail").tabs();
  });
 
- onClick_addDetailLine('tr.ap_transaction_detail0-0', 'tbody.form_data_detail_tbody', 2);
+ 
 
 //remove po lines
  $("#remove_row").click(function() {

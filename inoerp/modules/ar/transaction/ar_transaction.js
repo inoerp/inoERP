@@ -248,6 +248,7 @@ if (customer_site_id) {
 
 //add or show linw details
  addOrShow_lineDetails('tr.ar_transaction_line0');
+onClick_addDetailLine(2);
 
  //function to coply line to details
  function copy_line_to_details() {
@@ -274,7 +275,7 @@ if (customer_site_id) {
 	$(".tabsDetail").tabs();
  });
 
- onClick_addDetailLine('tr.ar_transaction_detail0-0', 'tbody.form_data_detail_tbody', 2);
+ 
 
 //remove po lines
  $("#remove_row").click(function() {

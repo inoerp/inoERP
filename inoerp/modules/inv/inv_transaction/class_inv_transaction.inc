@@ -22,7 +22,6 @@
    'item_id_m',
    'uom_id',
    'lot_number_id',
-   'serial_number_id',
    'logical_transaction_cb',
    'document_type',
    'document_number',
@@ -90,18 +89,19 @@
    "transaction_rev_enabled_cb"];
   public $fields_inForm_notInDataBase = [
    "account_id",
-   'item_description'
+   'item_description',
+   'serial_generation',
+   'serial_number',
+   'inv_serial_number_id',
+   'lot_generation',
+   'lot_number'
   ];
-    public $profile_default = [
+  public $profile_default = [
    'org_id' => 'org_inv_name_default',
   ];
   public $fields_inHeader_needsToBeInserted_inPOST = [
    "org_id",
    "transaction_type_id",
-   'serial_generation',
-   'serial_number',
-   'lot_generation',
-   'lot_number'
   ];
   public $requiredField = [
    "uom_id",
@@ -126,7 +126,6 @@
   public $item_id_m;
   public $uom_id;
   public $lot_number_id;
-  public $serial_number_id;
   public $logical_transaction_cb;
   public $document_type;
   public $document_number;
@@ -174,12 +173,11 @@
   private $_adjustment_amount;
   public $lot_number;
   public $serial_number;
+  public $inv_serial_number_id;
+  public $serial_number_id;
   public $serial_generation;
   public $lot_generation;
-
-  public function __set($name, $value) {
-   $this->$name = $value;
-  }
+  private $_serial_type;
 
   public function setProperty($property, $value) {
    if (property_exists($this, $property)) {
@@ -230,7 +228,168 @@
    }
   }
 
+  private function _create_serial_number($serial_num) {
+   $sn = new inv_serial_number();
+   $sn->item_id_m = $this->item_id_m;
+   $sn->org_id = $sn->current_org_id = $this->org_id;
+   $sn->serial_number = $serial_num;
+   $sn->status = 'IN_STORE';
+   $sn->generation = 'AT_RECEIPT';
+   $sn->origination_type = 'INVENTORY';
+   $sn->origination_date = $sn->activation_date = current_time(1);
+   $sn->current_subinventory_id = $this->to_subinventory_id;
+   $sn->current_locator_id = $this->to_locator_id;
+   $sn->first_inv_transaction_id = $sn->last_inv_transaction_id = $this->inv_transaction_id;
+   $sn->audit_trial();
+   $sn->save();
+   return $sn->inv_serial_number_id;
+  }
+
+  private function _transact_serial_receipt() {
+   pa($_POST);
+   for ($i = 0; $i < $this->quantity; $i++) {
+    $ist = new inv_serial_transaction();
+    if ($this->_serial_type == 'ID') {
+     $existing_serial_details = inv_serial_number::find_by_id($_POST['inv_serial_number_id'][$i]);
+     if (!in_array($existing_serial_details->status, array('DEFINED', 'OUT_STORE', 'INTRANSIT', 'IN_RECEIVING'))) {
+      echo "<br>Entered SN is not available for transaction . Issue @ inv_transaction @@ Line " . __LINE__;
+      $dbc->rollback = 1;
+      return -90;
+     }
+     $ist->inv_serial_number_id = $_POST['inv_serial_number_id'][$i];
+     try {
+      $this->_update_serial_number_receipt($ist->inv_serial_number_id);
+     } catch (Exception $e) {
+      echo "<br> Failed to update serial number. Issue @ inv_transaction @@ Line " . __LINE__;
+      $dbc->rollback = 1;
+      return -90;
+     }
+    } else {
+     $serial_id = $this->_create_serial_number($_POST['serial_number'][$i]);
+     $ist->inv_serial_number_id = $serial_id;
+    }
+    $ist->inv_transaction_id = $this->inv_transaction_id;
+    try {
+     $ist->audit_trial();
+     $ist->save();
+    } catch (Exception $e) {
+     echo "<br>Entered SN is not available for transaction . Issue @ inv_transaction @@ Line " . __LINE__;
+     $dbc->rollback = 1;
+     return -90;
+    }
+   }
+   return 1;
+  }
+
+  private function _transact_serial_issue() {
+   for ($i = 0; $i < $this->quantity; $i++) {
+    $ist = new inv_serial_transaction();
+    $existing_serial_details = inv_serial_number::find_by_id($_POST['inv_serial_number_id'][$i]);
+    if ($existing_serial_details->status != 'IN_STORE') {
+     echo "<br>Entered SN is not available for transaction . Issue @ inv_transaction @@ Line " . __LINE__;
+     $dbc->rollback = 1;
+     return -90;
+    }
+    $ist->inv_serial_number_id = $_POST['inv_serial_number_id'][$i];
+    try {
+     $this->_update_serial_number_issue($ist->inv_serial_number_id);
+    } catch (Exception $e) {
+     echo "<br> Failed to update serial number. Issue @ inv_transaction @@ Line " . __LINE__;
+     $dbc->rollback = 1;
+     return -90;
+    }
+    $ist->inv_transaction_id = $this->inv_transaction_id;
+    $ist->audit_trial();
+    $ist->save();
+   }
+   return 1;
+  }
+
+  private function _transact_serial_number() {
+   global $dbc;
+   $return_val = 1;
+   if ($this->transaction_type_id == 1) {
+    $return_val = $this->_transact_serial_issue();
+   }
+
+   if ($this->transaction_type_id == 2) {
+    $return_val = $this->_transact_serial_receipt();
+   }
+
+   if ($this->transaction_type_id == 3) {
+    $return_val1 = $this->_transact_serial_issue();
+    $return_val2 = $this->_transact_serial_receipt();
+    $return_val = $return_val1 && $return_val2;
+   }
+
+   if ($this->transaction_type_id == 18) {
+    $this->_serial_type = 'ID';
+    $return_val = $this->_transact_serial_issue();
+   }
+
+
+   if (in_array($this->transaction_type_id, array(20, 5, 51))) {
+    $this->_serial_type = 'ID';
+    $return_val = $this->_transact_serial_receipt();
+   }
+
+
+   return $return_val;
+  }
+
+  private function _update_serial_number_receipt($serial_id) {
+   global $dbc;
+   $snu = new inv_serial_number();
+   $snu->findBy_id($serial_id);
+   $snu->status = 'IN_STORE';
+   $snu->activation_date = current_time(1);
+   $snu->current_org_id = $this->org_id;
+   $snu->current_subinventory_id = $this->to_subinventory_id;
+   $snu->current_locator_id = $this->to_locator_id;
+   $snu->last_inv_transaction_id = $this->inv_transaction_id;
+   try {
+    $snu->audit_trial();
+    $snu->save();
+   } catch (Excetion $e) {
+    $dbc->rollback = 1;
+    echo "<br> Failed to update serial number. Issue @ inv_transaction @@ Line " . __LINE__;
+   }
+  }
+
+  private function _update_serial_number_issue($serial_id) {
+   global $dbc;
+   $snu = new inv_serial_number();
+   $snu->findBy_id($serial_id);
+   $snu->status = 'OUT_STORE';
+   $snu->activation_date = current_time(1);
+   $snu->current_org_id = '';
+   $snu->current_subinventory_id = '';
+   $snu->current_locator_id = '';
+   $snu->last_inv_transaction_id = $this->inv_transaction_id;
+   try {
+    $snu->audit_trial();
+    $snu->save();
+   } catch (Excetion $e) {
+    $dbc->rollback = 1;
+    echo "<br> Failed to update serial number. Issue @ inv_transaction @@ Line " . __LINE__;
+   }
+  }
+
   public function _before_save() {
+   if (!empty($_POST['serial_generation'][0])) {
+
+    if (!empty($_POST['inv_serial_number_id']) && count($_POST['inv_serial_number_id']) >= $this->quantity) {
+     $this->_serial_type = 'ID';
+     //good to procedd . $this->_lock_serial_number();
+    } else if (!empty($_POST['serial_number']) && count($_POST['serial_number']) >= $this->quantity) {
+     $this->_serial_type = 'NUMBER';
+     //good to procedd . $this->_lock_serial_number();
+    } else {
+     echo "<br>Incomplete serial numbers for serial controlled items";
+     return -99;
+    }
+   }
+
    if (!(empty($this->transaction_type_id))) {
     switch ($this->transaction_type_id) {
      case 1 :
@@ -404,6 +563,7 @@
   public function _after_save() {
    global $db;
    global $dbc;
+
    $onhand = new onhand();
    $journal_line_a = [];
    $element_array = ['mat', 'moh', 'oh', 'res', 'osp'];
@@ -782,6 +942,11 @@
       $inv_transaction->_after_save();
      }
     }
+   }
+
+   //update serial transaction
+   if ($this->_transact_serial_number() < 0) {
+    return -99;
    }
   }
 

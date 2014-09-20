@@ -197,7 +197,20 @@
                       <tbody class="form_data_detail_tbody">
                        <?php
                         $detailCount = 0;
-                        $serial_object = array(new inv_serial_number());
+                        if (!empty($$class->inv_transaction_id)) {
+                         $serial_object = [];
+                         $serial_trnxs = inv_serial_transaction::find_by_invTransactionId($$class->inv_transaction_id);
+                         if (!empty($serial_trnxs)) {
+                          foreach ($serial_trnxs as $serial_trnx) {
+                           $serial_no = new inv_serial_number();
+                           $serial_no->findBy_id($serial_trnx->inv_serial_number_id);
+                           array_push($serial_object, $serial_no);
+                          }
+                         }
+                        }
+                        if (empty($serial_object)) {
+                         $serial_object = array(new inv_serial_number());
+                        }
                         foreach ($serial_object as $serial_no) {
                          ?>
                          <tr class="inv_serial_number<?php echo $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
@@ -210,10 +223,9 @@
                            </ul>
                           </td>
                           <td><?php
-                           echo $f->text_field('serial_number', $serial_no->serial_number, '25');
-                           echo $f->hidden_field('serial_number_id', $$class->serial_number_id);
-                           echo $f->hidden_field('serial_generation', $$class->serial_generation);
-                           ?>
+                       echo $f->text_field('serial_number', $serial_no->serial_number, '25');
+                       echo $f->hidden_field('serial_generation', $$class->serial_generation);
+                         ?>
                           </td>
 
                          </tr>
@@ -259,6 +271,22 @@
   <div id="content_right_right"></div>
  </div>
 
+</div>
+<div id="js_data">
+ <ul id="js_saving_data">
+  <li class="headerClassName" data-headerClassName="inv_transaction" ></li>
+  <li class="lineClassName" data-lineClassName="inv_transaction" ></li>
+  <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
+   <li class="line_key_field" data-line_key_field="item_id_m" ></li>
+  <li class="single_line" data-single_line="false" ></li>
+   <li class="before_save_function" data-before_save_function="beforeSave" ></li>
+ </ul>
+ <ul id="js_contextMenu_data">
+  <li class="docLineId" data-docLineId="inv_transaction_id" ></li>
+  <li class="btn2DivId" data-btn2DivId="form_line" ></li>
+  <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>
+  <li class="noOfTabbs" data-noOfTabbs="5" ></li>
+ </ul>
 </div>
 
 <?php include_template('footer.inc') ?>
