@@ -25,11 +25,9 @@
 					 <div class="large_shadow_box"> 
 						<ul class="column four_column">
 						 <li>
-							<label><img id="wip_wo_popup" class="showPointer wip_wo_headerid_popup" src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
-							 WO Header Id(1) : </label>
-							<?php echo form::text_field_d('wip_wo_header_id'); ?>
-							<a name="show" class="show wip_wo_headerid_show">
-							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+							<label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="wip_wo_header_id select_popup clickable">
+               WO Header Id(1) : </label> <?php echo $f->text_field_dsr('wip_wo_header_id'); ?>
+							<a name="show" class="show wip_wo_headerid_show"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
 						 <li><label>WO Number : </label>
 							<?php echo form::text_field_d('wo_number'); ?>
@@ -82,7 +80,7 @@
 							<?php form::text_field_widr('item_description'); ?>
 						 </li>
 						 <li><label>UOM : </label>
-							<?php echo form::select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom'); ?>
+							<?php echo $f->select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom_id','uom_id'); ?>
 						 </li>
 						 <li><label>Total Quantity : </label>
 							<?php form::number_field_dr('total_quantity'); ?>
@@ -116,7 +114,7 @@
 							 ?>         
  							<tr class="wip_wo_routing<?php echo $count ?>">
  							 <td><?php form::number_field_wid2sr('routing_sequence'); ?></td>
- 							 <td><?php echo form::select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class_second->department_id, 'department_id', $readonly); ?></td>
+ 							 <td><?php echo $f->select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class_second->department_id, '', '', '', 1); ?></td>
  							 <td><?php form::text_field_wid2r('description'); ?></td>
  							 <td><?php form::number_field_wid2sr('queue_quantity'); ?></td>
  							 <td><?php form::number_field_wid2sr('running_quantity'); ?></td>

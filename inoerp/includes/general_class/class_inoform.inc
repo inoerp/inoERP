@@ -121,6 +121,20 @@ EOD;
    $element_hidden_field = "<input type=\"hidden\" id=\"$name\" name=\"$bracketName\" value=\"$value\" class=\"hidden $name\" >";
    return $element_hidden_field;
   }
+  
+    public function hidden_field_withCLass($name, $value, $class) {
+   $bracketName = $name . '[]';
+   $value = htmlentities($value);
+   $element_hidden_field = "<input type=\"hidden\" name=\"$bracketName\" value=\"$value\" class=\"hidden $class $name\" >";
+   return $element_hidden_field;
+  }
+  
+    public function hidden_field_withIdClass($name, $value, $class) {
+   $bracketName = $name . '[]';
+   $value = htmlentities($value);
+   $element_hidden_field = "<input type=\"hidden\" id=\"$name\" name=\"$bracketName\" value=\"$value\" class=\"hidden $name $class\" >";
+   return $element_hidden_field;
+  }
 
   public function text_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $maxlength = "256") {
    $bracketName = $name . '[]';

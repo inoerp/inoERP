@@ -172,7 +172,8 @@
    'item_id',
    "item_number",
    "item_status",
-   'item_id_m'
+   'item_id_m',
+   'org_id'
   ];
   public $column = [
    'item_id',
@@ -556,7 +557,7 @@
    $sql = " SELECT * FROM ";
    $sql .= self::$table_name;
    $sql .= " WHERE item_id_m = :item_id_m AND org_id = :org_id  LIMIT 1";
-   $value_a = ['item_id_m' => $item_id_m, 'org_id' => $org_id ];
+   $value_a = ['item_id_m' => $item_id_m, 'org_id' => $org_id];
    $result = $this->findBySql($sql, $value_a);
    return !empty($result) ? array_pop($result) : false;
   }
@@ -842,7 +843,7 @@
    return $assigned_inventory_orgs_array;
   }
 
-  public static function find_item_number_by_itemNumber_OrgId($item_number, $org_id = "") {
+  public static function find_item_number_by_itemNumber_OrgId($item_number, $org_id = "", $options = '') {
    global $db;
    $sql = "SELECT * FROM ";
    $sql .= self::$table_name;
@@ -850,6 +851,13 @@
    if (!empty($org_id)) {
     $sql .= " AND org_id  = '{$org_id}' ";
    }
+
+   if (!empty($options)) {
+    foreach ($options as $key => $val) {
+     $sql .= " AND $key  = '{$val}' ";
+    }
+   }
+
    $result = $db->find_by_sql($sql);
    $data = array();
    foreach ($result as $row) {
@@ -861,7 +869,7 @@
      'item_description' => $row->item_description,
      'uom_id' => $row->uom_id,
      'processing_lt' => $row->processing_lt,
-          'lot_generation' => $row->lot_generation,
+     'lot_generation' => $row->lot_generation,
      'serial_generation' => $row->serial_generation
     );
    }

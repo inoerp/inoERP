@@ -203,19 +203,6 @@
   private $_comment_msg;
   public $status;
 
-  public function __set($name, $value) {
-   switch ($value) {
-    case $value:
-
-
-     break;
-
-    default:
-     $this->$name = $value;
-     break;
-   }
-  }
-
   public function _before_delete() {
    $line_exists = po_line::find_by_parent_id($this->po_header_id);
    if ($line_exists) {
@@ -266,8 +253,8 @@
     if (($this->po_type == 'BLANKET_RELEASE') && empty($this->release_number)) {
      echo "<br>You cant approve a relase with a release number";
      return -99;
-    }else{
- 
+    } else {
+     
     }
     $pur_control = po_purchasing_control::find_by_org_id($this->bu_org_id);
     if (empty($pur_control->po_approval_hierarchy)) {

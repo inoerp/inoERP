@@ -13,6 +13,7 @@ if (!empty($_POST)) {
 	$p->audit_trial();
 	try {
 	 $p->save();
+   $dbc->confirm();
 	 echo "<div id='json_save_header'><div class='message'>The program is sucessfully saved; Program Id is " . $p->sys_program_id . '</div></div>';
 	} catch (Exception $e) {
 	 echo " Saving the program failed! " . $e->getMessage();

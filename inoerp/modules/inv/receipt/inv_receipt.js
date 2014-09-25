@@ -1,7 +1,8 @@
 function setValFromSelectPage(inv_receipt_header_id, combination, supplier_id, supplier_number,
  supplier_name, supplier_site_id, supplier_site_name, supplier_site_number,
  item_id_m, item_number, item_description, uom_id, po_header_id, po_line_id, po_detail_id,
- po_number, po_line_number, shipment_number, quantity, received_quantity) {
+ po_number, po_line_number, shipment_number, quantity, received_quantity,
+ serial_generation, lot_generation) {
  this.inv_receipt_header_id = inv_receipt_header_id;
  this.combination = combination;
  this.supplier_id = supplier_id;
@@ -22,6 +23,8 @@ function setValFromSelectPage(inv_receipt_header_id, combination, supplier_id, s
  this.shipment_number = shipment_number;
  this.quantity = quantity;
  this.received_quantity = received_quantity;
+  this.serial_generation = serial_generation;
+ this.lot_generation = lot_generation;
 }
 
 setValFromSelectPage.prototype.setVal = function() {
@@ -80,6 +83,15 @@ setValFromSelectPage.prototype.setVal = function() {
    $('#content').find(rowClass).find(fieldClass).val(value.data);
   }
  });
+ 
+  if (this.serial_generation) {
+  $('#content').find(rowClass).find('.serial_generation').val(this.serial_generation);
+  $('#content').find(rowClass).find('.serial_number').attr('required', true).css('background-color', 'pink');
+ }
+ if (this.lot_generation) {
+  $('#content').find(rowClass).find('.lot_generation').val(this.lot_generation);
+  $('#content').find(rowClass).find('.lot_number').attr('required', true).css('background-color', 'pink');
+ }
 
  localStorage.removeItem("row_class");
  localStorage.removeItem("row_class");
@@ -91,11 +103,7 @@ $(document).ready(function() {
 //mandatory and field sequence
  var mandatoryCheck = new mandatoryFieldMain();
  mandatoryCheck.header_id = 'inv_receipt_header_id';
-// mandatoryCheck.mandatoryHeader();
- mandatoryCheck.form_area = 'form_header';
- mandatoryCheck.mandatory_fields = ["bu_org_id", "receipt_type_id"];
- mandatoryCheck.mandatory_messages = ["First Select BU Org", "No Receipt Type"];
-// mandatoryCheck.mandatoryField();
+ mandatoryCheck.mandatoryHeader();
 
 //setting the first line & shipment number
  if (!($('.lines_number:first').val())) {

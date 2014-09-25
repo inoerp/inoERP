@@ -187,6 +187,9 @@
 
   public function findBy_id($id) {
    global $dbc;
+   if(empty($dbc->connection)){
+    return false;
+   }
    $sql = " SELECT user_id, username, first_name, last_name, email,  phone, hr_employee_id,
             block_notif_count,    created_by,    creation_date,  last_update_by,    last_update_date FROM ";
    $sql.= static::$table_name;
@@ -297,7 +300,11 @@
 
  $ino_user = new user();
  if (!empty($session->user_id)) {
+  try{
   $ino_user->findBy_id($session->user_id);
+  }catch(Exception $e){
+   echo "<br>Clear cache and try again. Error @user @@ line ".__LINE__. '<br>' . $e->getMessage();
+  }
  }
 //end of resource class
 ?>

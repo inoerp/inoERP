@@ -760,6 +760,13 @@
   return $stmt;
  }
 
+  function search_quantity() {
+  $stmt = '<input id="quantity" class="textfield number quantity" '
+    . 'type="number" title="" placeholder="Number" size="20" maxlength="256" value="" '
+    . 'name="quantity" >';
+  return $stmt;
+ }
+ 
  function search_item_id_from() {
   $stmt = '<input id="item_id_from" class="textfield select_item_id item_id_from" '
     . 'type="text" title="" placeholder="From Item Id" size="20" maxlength="256" value="" '
@@ -797,16 +804,19 @@ name='adjustment_ac_id'>
  }
 
  function search_item_number_from() {
-  $stmt = '<input id="item_number_from" class="textfield select_item_number item_number_from" '
+  
+  $stmt = '<input id="item_number_from" class="textfield select_item_number item_number item_number_from" '
     . 'type="text" title="" placeholder="From Item" size="20" maxlength="256" value="" '
     . 'name="from_item_number" >';
+  $stmt .= "<img src='". HOME_URL ."themes/images/serach.png' class='select_item_number select_popup clickable'>";
   return $stmt;
  }
 
  function search_item_number_to() {
-  $stmt = '<input id="item_number_to" class="textfield select_item_number item_number_to" '
+   $stmt = '<input id="item_number_to" class="textfield select_item_number item_number item_number_to" '
     . 'type="text" title="" placeholder="To Item" size="20" maxlength="256" value="" '
     . 'name="to_item_number" >';
+  $stmt .= "<img src='". HOME_URL ."themes/images/serach.png' class='select_item_number select_popup clickable'>";
   return $stmt;
  }
 

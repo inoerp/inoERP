@@ -28,7 +28,7 @@
    'price_date',
    'unit_price',
    'line_price',
-    'tax_code_id',
+   'tax_code_id',
    'tax_amount',
    'reference_doc_type',
    'reference_doc_number',
@@ -89,7 +89,7 @@
   public $line_quantity;
   public $unit_price;
   public $line_price;
-    public $tax_code_id;
+  public $tax_code_id;
   public $tax_amount;
   public $agreed_quantity;
   public $agreed_amount;
@@ -114,7 +114,26 @@
   public $released_amount;
   public $tax_code_value;
 
+  private function _validate_before_save() {
+   $ret = 1;
+   $item = item::find_by_orgId_item_id_m($this->item_id_m, $this->org_id);
+   if ($item) {
+    if (empty($item->purchased_cb)) {
+     $ret = -90;
+     echo "<br> The item is not enabled for Purchasing";
+    }
+   } else {
+    $ret = -90;
+    echo "<br> The item is not assigned to the organization";
+   }
+   return $ret;
+  }
+
   public function _before_save() {
+
+   if ($this->_validate_before_save() < 0) {
+    return -90;
+   }
 
    //change the PO status to Requires reapproval when Qty to Price is changed
    if (!empty($this->po_line_id)) {

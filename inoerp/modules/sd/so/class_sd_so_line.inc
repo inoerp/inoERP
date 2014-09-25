@@ -124,7 +124,26 @@ class sd_so_line extends dbObject {
  public $tax_code_value;
  public $ar_transaction_number;
 
+   private function _validate_before_save() {
+   $ret = 1;
+   $item = item::find_by_orgId_item_id_m($this->item_id_m, $this->org_id);
+   if ($item) {
+    if (empty($item->customer_ordered_cb)) {
+     $ret = -90;
+     echo "<br> The item is not enabled for Sales ";
+    }
+   } else {
+    $ret = -90;
+    echo "<br> The item is not assigned to the organization";
+   }
+   return $ret;
+  }
+  
  public function _before_save() {
+     if ($this->_validate_before_save() < 0) {
+    return -90;
+   }
+   
 	if (!(empty($this->shipping_org_id))) {
 	 if (!(empty($this->item_number))) {
 		$item_s = item::find_by_itemNumber_orgId($this->item_number, $this->shipping_org_id);

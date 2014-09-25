@@ -1,7 +1,7 @@
 //homePageUrl = 'http://www.inoideas.com/inoerp/';
 //move to animated block
 
- 
+
 function animateCycle()
 {
  var interval = null;
@@ -28,6 +28,7 @@ function animateCycle()
  });
 
 }
+
 
 //function treeview
 function treeView() {
@@ -259,49 +260,58 @@ function new_searchCriteria_onClick(json_url) {
 }
 
 //add a new line on clickint add a new detail line
-detailObjectCount = 3000;
-dateCount = 30000;
-function onClick_addDetailLine(trClass, tbodyClass, noOfTabs) {
- var highest_seq_num = 0;
+var detailObjectCount = 2001;
+var dateCount = 30000;
+function onClick_addDetailLine(noOfTabs) {
+ var highest_seq_num = 1;
+ var lastDetailNumber = 1;
  $("#content").on("click", ".add_row_detail_img", function() {
-  if ($(tbodyClass).find('.detail_seq_number').last().val()) {
-   highest_seq_num = $(tbodyClass).find('.detail_seq_number').last().val();
+  var trClass = '.' + $(this).closest("tr").attr('class').replace(/\s+/g, '.');
+  var trClass_wod = trClass.replace(/tr\./g, '');
+  trClass_wod = trClass_wod.replace(/\./g, '');
+  var tbodyClass = 'tbody.' + $(this).closest("tbody").attr('class').replace(/\s+/g, '.');
+  if ($(this).closest('tbody').find('.detail_seq_number').last().val()) {
+   highest_seq_num = +$(this).closest('tbody').find('.detail_seq_number').last().val();
+  } else {
+   highest_seq_num++;
   }
-  var nextDetailSeqNumber_seq = (+highest_seq_num) + 1;
-  var lastDetailSeqNumber = $('.detail_number:last').val();
-  var nextDetailSeqNumber = (+lastDetailSeqNumber + 1);
+  var nextDetailSeqNumber_seq = (highest_seq_num) + 1;
+
+  if ($(this).closest('tbody').find('.detail_number').last().val()) {
+   lastDetailNumber = +$(this).closest('tbody').find('.detail_number').last().val();
+  } else {
+   lastDetailNumber++;
+  }
+  var nextDetailNumber = (lastDetailNumber + 1);
 //	var nextDetailSeqNumber = (+lastDetailSeqNumber + 0.1).toFixed(1);
   var closetLineRowClass = $(this).closest(".class_detail_form").closest('tr').attr('class');
   var closetLineRowClass = '.' + closetLineRowClass;
-  var tabLink = $(this).closest(".tabContent").attr('id');
   if (noOfTabs > 1) {
-   var n = tabLink.lastIndexOf("-");
-   var primaryTabNumber = tabLink.substring(n);
-  }
-
-  if (noOfTabs > 1) {
-   tabCount = 1;
+   var startingTab = $("tr[class*='" + trClass_wod + "']").first().closest('.tabContent').attr('id');
+   var startingTabArray = startingTab.split('-');
+   var startingTabLastNumber = startingTabArray[2];
+   var tabCount = 1;
    do {
-    $("#tabsDetail-" + tabCount + "-1 " + trClass).clone().attr("class", "new_object " + detailObjectCount).appendTo($(closetLineRowClass + " #tabsDetail-" + tabCount + primaryTabNumber + " " + tbodyClass));
+    $("#tabsDetail-" + tabCount + "-" + startingTabLastNumber).find(trClass).clone().attr("class", "new_object" + detailObjectCount).appendTo($(closetLineRowClass + " #tabsDetail-" + tabCount + "-" + startingTabLastNumber + " " + tbodyClass));
     tabCount++;
-   }
-   while (tabCount <= noOfTabs);
+   } while (tabCount <= noOfTabs);
   } else {
-   $(trClass + ':first').clone().attr("class", "new_object " + detailObjectCount).appendTo($(closetLineRowClass + ' ' + tbodyClass));
+   $(trClass + ':first').clone().attr("class", "new_object" + detailObjectCount).appendTo($(closetLineRowClass + ' ' + tbodyClass));
   }
 
-  $("tr.new_object." + detailObjectCount).find("td input[type=text]").each(function() {
+  $("tr.new_object" + detailObjectCount).find("td input[type=text]").each(function() {
    $(this).val("");
   });
-  $("tr.new_object." + detailObjectCount).find("td input[type=number]").each(function() {
+  $("tr.new_object" + detailObjectCount).find("td input[type=number]").each(function() {
    $(this).val("");
   });
-  $("tr.new_object." + detailObjectCount).find("td select").each(function() {
+  $("tr.new_object" + detailObjectCount).find("td select").each(function() {
    $(this).val("");
   });
-  $('.detail_number:last').val(nextDetailSeqNumber);
-   $(".new_object." + detailObjectCount).find(".detail_seq_number").val(nextDetailSeqNumber_seq);
-  $(".new_object." + detailObjectCount).find(".date").each(function() {
+
+  $(".new_object" + detailObjectCount).find(".detail_seq_number").val(nextDetailSeqNumber_seq);
+  $(".new_object" + detailObjectCount).find(".detail_number").val(nextDetailNumber);
+  $(".new_object" + detailObjectCount).find(".date").each(function() {
    $(this).attr("id", "date" + dateCount);
    $(this).attr("class", "date");
    dateCount++;
@@ -332,9 +342,9 @@ var detailObjectRowCount = 600;
 function addOrShow_lineDetails(trClassToCopy) {
  var highest_seq_num = 0;
  if ($('.form_data_detail_tbody').find('.detail_seq_number').last().val()) {
-   highest_seq_num = $('.form_data_detail_tbody').find('.detail_seq_number').last().val();
-  }
-  var nextDetailSeqNumber_seq = (+highest_seq_num) + 1;
+  highest_seq_num = $('.form_data_detail_tbody').find('.detail_seq_number').last().val();
+ }
+ var nextDetailSeqNumber_seq = (+highest_seq_num) + 1;
  $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function() {
   var detailExists = $(this).closest("td").find(".form_detail_data_fs").length;
   if (detailExists > 0) {
@@ -343,9 +353,11 @@ function addOrShow_lineDetails(trClassToCopy) {
 //	 var lineNumber = $(this).closest('tr').find('.lines_number').val();
 //	 var detailNumber = lineNumber + '.1';
    var detailNumber = 1;
-   elementToBeCloned = $(trClassToCopy + " .class_detail_form");
-   clonedElement = elementToBeCloned.clone();
-   clonedElement.find(".new_object").remove();
+   var elementToBeCloned = $(trClassToCopy + " .class_detail_form");
+   var clonedElement = elementToBeCloned.clone();
+   var firstTrClass = '.' + $(clonedElement).find('tbody').find("tr").first().attr('class').replace(/tr\./g, '');
+   ;
+   clonedElement.find("tr").not(firstTrClass).remove();
    $(clonedElement).find('tbody tr').attr("class", "new_object" + detailObjectRowCount);
    clonedElement.find("input").not('.hidden').each(function() {
     $(this).val("");
@@ -467,14 +479,14 @@ function deleteData(json_url, header_id) {
   e.preventDefault();
   $('input[name="detail_id_cb"]:checked').each(function() {
    var detail_id = $(this).val();
-   if (confirm("Are you sure?\nDetail Id #" +detail_id )) {
+   if (confirm("Are you sure?\nDetail Id #" + detail_id)) {
     deleteLine(json_url, detail_id, 'detail');
    }
   });
 
   $('input[name="line_id_cb"]:checked').each(function() {
    var line_id = $(this).val();
-   if (confirm("Are you sure?\nLine Id #" +line_id )) {
+   if (confirm("Are you sure?\nLine Id #" + line_id)) {
     if ($(this).closest('tbody').hasClass('form_data_line_tbody2')) {
      var lineType = 'line2';
     } else {
@@ -485,9 +497,9 @@ function deleteData(json_url, header_id) {
   });
 
   if (!$('input[name="line_id_cb"]').val()) {
-       var header_id_h = '#' + header_id;
-    var headerId = $(header_id_h).val();
-   if (confirm("Are you sure?\nHeader Id #" +headerId )) {
+   var header_id_h = '#' + header_id;
+   var headerId = $(header_id_h).val();
+   if (confirm("Are you sure?\nHeader Id #" + headerId)) {
     deleteLine(json_url, headerId, 'header');
    }
   }
@@ -616,11 +628,11 @@ function getSupplierDetails(jsonurl, org_id, supplier_id, trClass) {
   $.each(result, function(key, value) {
    switch (key) {
     case 'supplier_site_id':
-     if(typeof (trClass) !== 'undefined'){
+     if (typeof (trClass) !== 'undefined') {
       $('#content').find(trClass).find('.supplier_site_id').replaceWith(value);
-     }else{
-     $("#supplier_site_id").replaceWith(value);
-    }
+     } else {
+      $("#supplier_site_id").replaceWith(value);
+     }
      break;
 
     case 'payment_term_id':
@@ -629,7 +641,7 @@ function getSupplierDetails(jsonurl, org_id, supplier_id, trClass) {
      $('#content').find(className).val(value);
      break;
    }
- 
+
   });
   $('.show_loading_small').hide();
  }).fail(function() {
@@ -1440,7 +1452,125 @@ function getBPALineDetails(options) {
   }
  });
 }
+
+function getSerialNumber(options) {
+ var defaults = {
+  json_url: 'modules/inv/serial/json_serial_number.php',
+  org_id: $('#org_id').val(),
+  trclass: false,
+ };
+ var settings = $.extend({}, defaults, options);
+
+ return $.ajax({
+  url: settings.json_url,
+  type: 'get',
+  dataType: 'json',
+  data: {
+   current_org_id: settings.org_id,
+   current_subinventory_id: settings.subinventory_id,
+   current_locator_id: settings.locator_id,
+   status: settings.status,
+   item_id_m: settings.item_id_m,
+   find_serial_list: 1
+  },
+  success: function(result) {
+   if (result) {
+    if (settings.trclass) {
+     var select_stmt = '<select class="select inv_serial_number_id" name="inv_serial_number_id[]" style="max-width:95%;">';
+    } else {
+     var select_stmt = '<select id="inv_serial_number_id" class="select inv_serial_number_id" name="inv_serial_number_id[]" style="max-width:95%;">';
+    }
+    $.each(result, function(f_key, f_name) {
+     select_stmt += '<option data-status="' + f_name.status + '" value="' + f_name.inv_serial_number_id + '">' + f_name.serial_number + '</option>';
+    });
+    select_stmt += '</select>';
+    if (settings.trclass) {
+     var trclass_d = '.' + settings.trclass;
+     $(trclass_d).find('.serial_number').replaceWith(select_stmt);
+    } else {
+     $('#serial_number').replaceWith(select_stmt);
+    }
+   }
+  },
+  complete: function() {
+   $('.show_loading_small').hide();
+  },
+  beforeSend: function() {
+   $('.show_loading_small').show();
+  },
+  error: function(request, errorType, errorMessage) {
+   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+  }
+ });
+}
+
 //end of get default values
+
+
+function beforeSave_serial() {
+ var retValue = 1;
+ $('.add_detail_values').each(function() {
+  if ($(this).children('.serial_generation').val()) {
+   var trClass = '.' + $(this).closest("tr").attr('class').replace(/\s+/g, '.');
+   var qty = +$('#content').find(trClass).find('.quantity').val();
+   var noOfSerialIds = 0;
+   $(this).closest('td').find('.inv_serial_number_id').each(function() {
+    if ($(this).val()) {
+     noOfSerialIds++;
+    }
+   })
+
+   if (noOfSerialIds != qty) {
+    var noOfSerials = 0;
+    $(this).closest('td').find('.serial_number').each(function() {
+     if ($(this).val()) {
+      noOfSerials++;
+     }
+    })
+    if (noOfSerials != qty) {
+     alert('Can\'t save data as no of serial numbers doesnt match quantity');
+     retValue = -10;
+     return false;
+    }
+   }
+  }
+ });
+ return retValue;
+}
+
+function getSerialInStore(orgId) {
+ orgId = (typeof orgId !== 'undefined') ? orgId : $('#org_id').val();
+ $('#content').on('blur', '.item_number', function() {
+  var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
+  var trClass_d = '.' + trClass;
+  var generation_type = $('#content').find(trClass_d).find('.serial_generation').val();
+
+  if (!generation_type) {
+   var field_stmt = '<input class="textfield serial_number" type="text" size="25" readonly name="serial_number[]" >';
+   $('#content').find(trClass_d).find('.inv_serial_number_id').replaceWith(field_stmt);
+   $('#content').find(trClass_d).find('.serial_number').replaceWith(field_stmt);
+   alert('Item is not serial controlled.\nNo serial informatio \'ll be saved in database');
+   return;
+  }
+  var itemIdM = $('#content').find(trClass_d).find('.item_id_m').val();
+  if (!itemIdM) {
+   return;
+  }
+
+  getSerialNumber({
+   'org_id': orgId,
+   'status': 'IN_STORE',
+   'item_id_m': itemIdM,
+   'trclass': trClass,
+   'current_subinventory_id': $('#content').find(trClass_d).find('.from_subinventory_id').val(),
+   'current_locator_id': $('#content').find(trClass_d).find('.from_locator_id').val(),
+  });
+ });
+
+
+
+}
+
 
 //end of global functions
 $(document).ready(function() {
@@ -1566,9 +1696,34 @@ $(document).ready(function() {
  itemNumber.json_url = 'modules/inv/item/item_search.php';
  itemNumber.select_class = 'select_item_number';
  itemNumber.primary_column1 = 'org_id';
- itemNumber.extra_elements = ['item_id', 'item_id_m', 'item_description', 'uom_id', 'processing_lt'];
+ itemNumber.extra_elements = ['item_id', 'item_id_m', 'item_description', 'uom_id', 'processing_lt', 'lot_generation', 'serial_generation'];
  itemNumber.min_length = 2;
  itemNumber.autoComplete();
+
+ //auto complete for allowed BOM
+ var itemNumber = new autoCompleteMain();
+ itemNumber.json_url = 'modules/inv/item/item_search.php';
+ itemNumber.select_class = 'select_item_number_allowedBOM';
+ itemNumber.primary_column1 = 'org_id';
+ itemNumber.extra_elements = ['item_id', 'item_id_m', 'item_description', 'uom_id', 'processing_lt', 'lot_generation', 'serial_generation'];
+ itemNumber.min_length = 2;
+ itemNumber.options = {bom_enabled_cb: "1"};
+ itemNumber.autoComplete();
+
+ $('#form_line').on('blur', '.textfield.select_item_number', function() {
+  var elemenType = $(this).parent().prop('tagName');
+  if (elemenType === 'TD') {
+   var trClass = '.' + $(this).closest("tr").attr('class').replace(/\s+/g, '.');
+   if ($('#form_line').find(trClass).find('.serial_generation').val()) {
+    $('#form_line').find(trClass).find('.serial_number').attr('required', true).css('background-color', 'pink');
+   }
+   if ($('#form_line').find(trClass).find('.lot_generation').val()) {
+    $('#form_line').find(trClass).find('.lot_number').attr('required', true).css('background-color', 'pink');
+   }
+  }
+ });
+
+
 
  //popu for selecting accounts
  $('#content').on('click', '.account_popup', function() {
@@ -1586,11 +1741,25 @@ $(document).ready(function() {
 
  //popu for selecting items
  $('#content').on('click', '.select_item_number.select_popup', function() {
-  var rowClass = $(this).closest('tr').prop('class');
-  var fieldClass = $(this).closest('td').find('.select_item_number').prop('class');
-  localStorage.setItem("row_class", rowClass);
-  localStorage.setItem("field_class", fieldClass);
+
+  var elemenType = $(this).parent().prop('tagName');
+  alert(elemenType);
+  if (elemenType === 'TD') {
+   var rowClass = $(this).closest('tr').prop('class');
+   var fieldClass = $(this).closest('td').find('.select_item_number').prop('class');
+   localStorage.setItem("row_class", rowClass);
+   localStorage.setItem("field_class", fieldClass);
+  } else {
+   var liId = $(this).closest('li').find('.item_number').prop('id');
+   localStorage.setItem("li_divId", liId);
+  }
   var openUrl = 'select.php?class_name=item';
+  if ($(this).siblings('.org_id').val()) {
+   openUrl += '&org_id=' + $(this).siblings('.org_id').val();
+  } else if ($('#org_id').val()) {
+   openUrl += '&org_id=%3D' + $('#org_id').val();
+  }
+
   if ($(this).siblings('.item_number').val()) {
    openUrl += '&item_number=' + $(this).siblings('.item_number').val();
   }
@@ -1953,6 +2122,13 @@ $(document).ready(function() {
   var onlyOneLineAtATime = $('ul#js_saving_data').find('.onlyOneLineAtATime').data('onlyonelineatatime');
   var allLineTogether = $('ul#js_saving_data').find('.allLineTogether').data('alllinetogether');
   var single_line = $('ul#js_saving_data').find('.single_line').data('single_line');
+  var before_save_function = $('ul#js_saving_data').find('.before_save_function').data('before_save_function');
+  if (!before_save_function) {
+   window.beforeSave = function() {
+    return false;
+   }
+  }
+
   classSave.enable_select = true;
   classSave.json_url = 'form.php?class_name=' + headerClassName;
   classSave.form_header_id = form_header_id;
@@ -1976,7 +2152,7 @@ $(document).ready(function() {
   classSave.lineClassName = (typeof lineClassName !== 'undefined') ? lineClassName : null;
   classSave.lineClassName2 = (typeof lineClassName2 !== 'undefined') ? lineClassName2 : null;
   classSave.detailClassName = (typeof detailClassName !== 'undefined') ? detailClassName : null;
-  classSave.saveMain();
+  classSave.saveMain(before_save_function);
  }
 
 //context menu
@@ -2023,3 +2199,9 @@ $(document).ready(function() {
  });
 
 });
+function toUpperCase(str)
+{
+ return str.toLowerCase().replace(/([^a-z])([a-z])(?=[a-z]{2})|^([a-z])/g, function(_, g1, g2, g3) {
+  return (typeof g1 === 'undefined') ? g3.toUpperCase() : g1 + g2.toUpperCase();
+ });
+}

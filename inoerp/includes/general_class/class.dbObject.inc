@@ -319,11 +319,7 @@
    } catch (PDOException $e) {
     $this->msg = "No Records Found" . $e->getMessage();
    }
-   if (!empty($result)) { //should not be used. Use only when a copy of the class is required
-    return $result;
-   } else {
-    return "No Records Found!";
-   }
+   return !empty($result) ? $result : false;
   }
 
   public function findBy_parentId($id, $order_by_field = '', $order_by_seq = 'ASC') {

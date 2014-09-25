@@ -56,7 +56,9 @@ class inv_receipt_header extends dbObject {
 		 "org_id",
 		 "receipt_date"
  ];
- 
+   public $profile_default = [
+   'org_id' => 'org_inv_name_default',
+  ];
   public $search = [
 		 '_show_view_path' => 1,
  ];

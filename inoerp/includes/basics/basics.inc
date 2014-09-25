@@ -153,8 +153,12 @@ require_once(INC_MODULE.DS."inv".DS."count_entries".DS."class_inv_count_entries.
 require_once(INC_MODULE.DS."inv".DS."count_entries".DS."views".DS."class_inv_count_entries_v.inc");
 require_once(INC_MODULE.DS."inv".DS."inter_org_transfer".DS."class_inter_org_transfer_header.inc");
 require_once(INC_MODULE.DS."inv".DS."inter_org_transfer".DS."class_inter_org_transfer_line.inc");
+require_once(INC_MODULE.DS."inv".DS."serial".DS."class_inv_serial_number.inc");
+require_once(INC_MODULE.DS."inv".DS."serial".DS."transaction".DS."class_inv_serial_transaction.inc");
 require_once(INC_BOM.DS."class.bom_header.inc"); 
 require_once(INC_BOM.DS."class.bom_line.inc"); 
+require_once(INC_MODULE.DS."bom".DS."class_bom_commonbom_line.inc");
+require_once(INC_MODULE.DS."bom".DS."class_bom_line_v.inc");
 require_once(INC_BOM.DS."class_bom_all_v.inc"); 
 require_once(INC_BOM.DS."indented_bom".DS."class_indented_bom.inc"); 
 require_once(INC_BOM.DS."bom_resource".DS."class_bom_resource.inc"); 
@@ -172,6 +176,9 @@ require_once(INC_BOM.DS."bom_standard_operation".DS."class.bom_standard_operatio
 require_once(INC_BOM.DS."bom_routing".DS."class.bom_routing_header.inc"); 
 require_once(INC_BOM.DS."bom_routing".DS."class.bom_routing_line.inc"); 
 require_once(INC_BOM.DS."bom_routing".DS."class.bom_routing_detail.inc"); 
+require_once(INC_MODULE.DS."bom".DS."bom_routing".DS."class_bom_routing_v.inc");
+require_once(INC_MODULE.DS."bom".DS."bom_routing".DS."class_bom_routing_line_v.inc");
+
 require_once(INC_WIP.DS."wip_wo".DS."class.wip_wo_header.inc"); 
 require_once(INC_WIP.DS."wip_wo".DS."class.wip_wo_bom.inc"); 
 require_once(INC_WIP.DS."wip_wo".DS."class.wip_wo_routing_line.inc"); 

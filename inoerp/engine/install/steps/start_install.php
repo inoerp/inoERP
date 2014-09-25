@@ -20,6 +20,9 @@
  }
 
  if ($proceed) {
+  //erify db version
+  $db_version = $dbc->connection->getAttribute(PDO::ATTR_CLIENT_VERSION);
+  pa($db_version);
   //verify if any existing data exists
   $existing_tables = view::count_all_tables();
   if (empty($existing_tables->table_count)) {

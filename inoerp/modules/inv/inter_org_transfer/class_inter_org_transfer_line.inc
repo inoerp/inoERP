@@ -172,6 +172,7 @@
      $inv_transaction_from->document_type = 'Inter-Org Transfer';
      $inv_transaction_from->document_number = $ioh->order_number;
      $inv_transaction_from->audit_trial();
+     $inv_transaction_from->_before_save();
      $inv_transaction_from->save();
      $inv_transaction_from->_after_save();
 
@@ -206,6 +207,7 @@
      $inv_transaction_to->document_type = 'Inter-Org Transfer';
      $inv_transaction_to->document_number = $ioh->order_number;
      $inv_transaction_to->audit_trial();
+     $inv_transaction_from->_before_save();
      $inv_transaction_to->save();
      $inv_transaction_to->_after_save();
      break;
@@ -225,6 +227,7 @@
      $inv_transaction_from->document_type = 'Inter-Org Transfer';
      $inv_transaction_from->document_number = $ioh->order_number;
      $inv_transaction_from->audit_trial();
+     $inv_transaction_from->_before_save();
      $inv_transaction_from->save();
      $inv_transaction_from->_after_save();
      break;

@@ -36,14 +36,17 @@
    $count = 0;
    $coa_id = 1;
 
-//    pa($_POST);
+
 // pa($this);
+// pa($_POST);
+// pa($_POST[$this->_key_field]);
    for ($i = 0; $i < count($_POST[$this->_key_field]); $i++) {
     $$class = new $class;
+
     if (property_exists($$class, 'parent_primary_column')) {
      $parent_primary_column = $class::$parent_primary_column;
      if ((!empty($parent_primary_column)) && (empty($_POST[$parent_primary_column][0]))) {
-//		 echo "<br>Existing save as no value of $parent_primary_column found! @inosave ".__LINE__;
+      echo "<br>Existing save as no value of $parent_primary_column found! @inosave " . __LINE__;
       return;
      }
     }
@@ -51,6 +54,7 @@
     if (property_exists($$class, 'field_a')) {
      $field_array = $$class->field_a;
     }
+
     if (property_exists($$class, 'notUpdatedFromWebForm')) {
      $field_array = $$class->field_a;
      foreach ($$class->notUpdatedFromWebForm as $key_nu => $valye_nu) {
@@ -65,6 +69,7 @@
       $$class->$value = $_POST[$value][$i];
      }
     }
+
     //check if its multi action data
     if (!empty($_POST['multi_action_class'][$i])) {
      $multi_action_class = $_POST['multi_action_class'][$i];
@@ -205,7 +210,7 @@
       $category_reference_type = "2";
      }
     }
-//     pa($$class);
+
     //use before save instaed of before submit
     if (method_exists($$class, '_before_submit')) {
      $$class->_before_submit();
@@ -218,6 +223,7 @@
      */
 
     if (method_exists($$class, '_before_save')) {
+//     pa($$class);
      $before_save_result = $$class->_before_save();
      if ($before_save_result < 0) {
       if ($before_save_result == -99) {
@@ -367,7 +373,7 @@
     if (!empty($primaryColumn2)) {
      echo '<div id="primary_column2">' . $$class->$primaryColumn2 . '</div>';
     }
-        if (!empty($primaryColumn3)) {
+    if (!empty($primaryColumn3)) {
      echo '<div id="primary_column3">' . $$class->$primaryColumn3 . '</div>';
     }
    } else {
@@ -435,7 +441,7 @@
     $linedata = $_POST['lineData'];
     if (!empty($linedata)) {
      $postArray = get_postArray_From_jqSearializedArray($linedata);
-      if (!empty($lineDetail_data['detailData'])) {
+     if (!empty($lineDetail_data['detailData'])) {
       $_posted_detail_line = $_POST['detailData'];
      }
 

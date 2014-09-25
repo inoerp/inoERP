@@ -17,13 +17,27 @@
    access_denied();
    return;
   }
-
+  $hidden_field_a = [];
   //pre populate
   if (method_exists($$class, 'search_pre_populate')) {
    $ppl = call_user_func(array($$class, 'search_pre_populate'));
    if (!empty($ppl)) {
     foreach ($ppl as $search_key => $search_val) {
      $_GET[$search_key] = $search_val;
+    }
+   }
+  }
+
+  //hidden fields used for mandatory fields
+  if (method_exists($$class, 'select_hidden_fields')) {
+   $hidden_field_names = $action_class_i->multi_select_hidden_fields();
+   if (!empty($_GET)) {
+    foreach ($hidden_field_names as $hiden_field_name) {
+     if (!empty($_GET[$hiden_field_name])) {
+      $hidden_field_a[$hiden_field_name] = is_array($_GET[$hiden_field_name]) ? $_GET[$hiden_field_name][0] : $_GET[$hiden_field_name];
+     } else {
+      $hidden_field_a[$hiden_field_name] = null;
+     }
     }
    }
   }

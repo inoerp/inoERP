@@ -366,6 +366,7 @@ table.normal td {
  float: left; 
  background: lightgrey;
  border: 1px solid #ccc;
+ min-width: 400px;
 }
 
 table.form {

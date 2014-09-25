@@ -246,7 +246,6 @@
   }
 
   private function _transact_serial_receipt() {
-   pa($_POST);
    for ($i = 0; $i < $this->quantity; $i++) {
     $ist = new inv_serial_transaction();
     if ($this->_serial_type == 'ID') {
@@ -308,6 +307,11 @@
   private function _transact_serial_number() {
    global $dbc;
    $return_val = 1;
+
+   if (in_array($this->transaction_type_id, array(1, 6, 7, 9, 12, 13, 14, 15, 18, 19, 20))) {
+    $this->_serial_type = 'ID';
+   }
+
    if ($this->transaction_type_id == 1) {
     $return_val = $this->_transact_serial_issue();
    }
@@ -323,13 +327,11 @@
    }
 
    if ($this->transaction_type_id == 18) {
-    $this->_serial_type = 'ID';
     $return_val = $this->_transact_serial_issue();
    }
 
 
    if (in_array($this->transaction_type_id, array(20, 5, 51))) {
-    $this->_serial_type = 'ID';
     $return_val = $this->_transact_serial_receipt();
    }
 
@@ -375,7 +377,26 @@
    }
   }
 
+  private function _validate_before_save() {
+   $ret = 1;
+   $item = item::find_by_orgId_item_id_m($this->item_id_m, $this->org_id);
+   if ($item) {
+    if (empty($item->inventory_item_cb) || empty($item->transactable_cb)) {
+     $ret = -90;
+     echo "<br> The item is not enabled for Inventory Transaction";
+    }
+   } else {
+    $ret = -90;
+    echo "<br> The item is not assigned to the organization";
+   }
+   return $ret;
+  }
+
   public function _before_save() {
+   if ($this->_validate_before_save() < 0) {
+    return -90;
+   }
+
    if (!empty($_POST['serial_generation'][0])) {
 
     if (!empty($_POST['inv_serial_number_id']) && count($_POST['inv_serial_number_id']) >= $this->quantity) {

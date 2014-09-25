@@ -196,13 +196,22 @@ saveMainClass.prototype.saveMain = function(beforeSave)
  var line_key_field_d = '.' + line_key_field;
  $("#save").on('click', function(e) {
 
+
+  if ($.isFunction(window.beforeSave)) {
+   var beforeSaveResult = window.beforeSave();
+   if (beforeSaveResult < 0) {
+    return;
+   }
+  }
+
   if (typeof beforeSave === 'function') {
    var beforeSaveResult = beforeSave();
    if (beforeSaveResult < 0) {
     return;
    }
   }
-//verify if header id exists or not - if header id is blank then check header level required fields
+
+  //verify if header id exists or not - if header id is blank then check header level required fields
 //if header id exists then check line level required fields
   var noOfRequiredFileValuesMissing = 0;
   var missingMandatoryValues = [];
@@ -848,7 +857,7 @@ contextMenuMain.prototype.contextMenu = function()
  *     */
 
 function autoCompleteMain(json_url, field_name, primary_column1, primary_column2, select_class, min_length,
- extra_elements) {
+ extra_elements, options) {
  this.json_url = json_url;
  this.field_name = field_name;
  this.primary_column1 = primary_column1;
@@ -856,9 +865,10 @@ function autoCompleteMain(json_url, field_name, primary_column1, primary_column2
  this.select_class = select_class;
  this.extra_elements = extra_elements;
  this.min_length = min_length;
+ this.options = options;
 }
 
-autoCompleteMain.prototype.autoComplete = function(e)
+autoCompleteMain.prototype.autoComplete = function()
 {
  var json_url = this.json_url;
  var field_name = this.field_name;
@@ -866,6 +876,7 @@ autoCompleteMain.prototype.autoComplete = function(e)
  var primary_column1_h = '#' + primary_column1;
  var primary_column2 = this.primary_column2;
  var extra_elements = this.extra_elements;
+ var options = this.options;
  if (this.select_class === 'undefined') {
   var select_class = 'select' + field_name;
  } else {
@@ -888,7 +899,8 @@ autoCompleteMain.prototype.autoComplete = function(e)
        field_name: field_name,
        primary_column1: primary_column1_v,
        primary_column2: primary_column2,
-       term: request.term
+       term: request.term,
+       options : options
       },
       success: function(data) {
        response(data);
@@ -919,6 +931,8 @@ autoCompleteMain.prototype.autoComplete = function(e)
          $(auto_element).closest("ul").find(v_d).val(selected_value);
         } else if (elemenType === 'TD') {
          $(auto_element).closest("tr").find(v_d).val(selected_value);
+         var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
+         $('#form_line').find(trClass).find(v_d).val(selected_value);
         }
        });
       }
@@ -936,6 +950,8 @@ autoCompleteMain.prototype.autoComplete = function(e)
          $(auto_element).closest("ul").find(v_d).val('');
         } else if (elemenType === 'TD') {
          $(auto_element).closest("tr").find(v_d).val('');
+         var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
+         $('#form_line').find(trClass).find(v_d).val();
         }
        });
       }
@@ -963,7 +979,8 @@ autoCompleteMain.prototype.autoComplete = function(e)
        if (elemenType === 'LI') {
         $(auto_element).closest("ul").find(v_d).val(selected_value);
        } else if (elemenType === 'TD') {
-        $(auto_element).closest("tr").find(v_d).val(selected_value);
+        var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
+        $('#form_line').find(trClass).find(v_d).val(selected_value);
        }
       });
      }

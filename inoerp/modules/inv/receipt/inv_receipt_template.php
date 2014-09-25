@@ -43,7 +43,7 @@
               ?>
              </li>
              <li><label>Date </label>
-              <?php echo $f->date_fieldFromToday_mr('receipt_date', ino_date($$class->receipt_date), $readonly1); ?></li>
+              <?php echo $f->date_fieldFromToday('receipt_date', ino_date($$class->receipt_date), $readonly1); ?></li>
             </ul>
            </div>
           </div>
@@ -169,7 +169,7 @@
                ?>         
                <tr class="inv_receipt_line<?php echo $count ?>">
                 <td><?php $f->text_field_wid2sr('item_id_m'); ?></td>
-                <td><?php $f->text_field_d2s('item_number'); ?></td>
+                <td><?php $f->text_field_d2('item_number','select_item_number'); ?></td>
                 <td><?php $f->text_field_d2('item_description'); ?></td>
                 <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $inv_receipt_line->uom_id, '', '', '', $readonly1); ?></td>
                 <td><?php echo $f->number_field('transaction_quantity', $$class_second->transaction_quantity, '8', '', '', 1, $readonly1); ?></td>

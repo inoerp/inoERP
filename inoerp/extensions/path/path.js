@@ -5,7 +5,7 @@ function setValFromSelectPage(path_id) {
 setValFromSelectPage.prototype.setVal = function() {
  var path_id = this.path_id;
  if (path_id) {
-	$("#path_id").val(path_id);
+  $("#path_id").val(path_id);
  }
 };
 
@@ -13,13 +13,13 @@ $(document).ready(function() {
 
  //Get the path_id on find button click
  $('a.show.path_id').click(function() {
-	var pathId = $('#path_id').val();
-	$(this).attr('href', modepath() + 'path_id=' + pathId );
+  var pathId = $('#path_id').val();
+  $(this).attr('href', modepath() + 'path_id=' + pathId);
  });
- 
-  $(".path_id.select_popup").on("click", function() {
-	void window.open('select.php?class_name=path', '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+
+ $(".path_id.select_popup").on("click", function() {
+  void window.open('select.php?class_name=path', '_blank',
+   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
  var pathSave = new saveMainClass();
@@ -28,6 +28,47 @@ $(document).ready(function() {
  pathSave.primary_column_id = 'path_id';
  pathSave.single_line = false;
  pathSave.saveMain();
+
+//$('#path_link').on('blur', function(){
+//  if(!$(this).val()){
+//  return;
+//  }
+//  var className_a = $(this).val().split('=');
+//  var className = className_a[1];
+//$('#obj_class_name').val(className);
+//  var pathName = toUpperCase(className.replace(/_/g, " "));
+//  pathName = pathName.substr(pathName.indexOf(' ')+1);
+//  $('#name, #description').val(pathName);
+//})
+
+ $('#path_link').on('blur', function() {
+  if (!$(this).val()) {
+   return;
+  }
+  var className_a = $(this).val().split('=');
+  var className = className_a[1];
+  if ($(this).val().indexOf("&mode=") >= 0) {
+   var modeIndex = $(this).val().indexOf('&mode=') + 6;
+   var mode = $(this).val().substr(modeIndex, modeIndex + 1);
+  } else {
+   var mode = 2;
+  }
+  $('#mode').val(mode);
+  if (className.indexOf("&") >= 0) {
+   className_v = className.substr(0, className.indexOf('&'));
+   $('#obj_class_name').val(className_v);
+   var pathNameStrign = toUpperCase(className.replace(/_/g, " "));
+   pathName = pathNameStrign.substr(pathNameStrign.indexOf(' ') + 1);
+   pathName = pathName.substr(0, pathName.indexOf('&'));
+   $('#name, #description').val(pathName);
+  } else {
+   $('#obj_class_name').val(className);
+   var pathName = toUpperCase(className.replace(/_/g, " "));
+   pathName = pathName.substr(pathName.indexOf(' ') + 1);
+   $('#name, #description').val(pathName);
+  }
+
+ })
 
 });
 

@@ -67,7 +67,8 @@
               <th>Supplier L/N</th>
               <th>First Trnx Id</th>
               <th>Last Trnx Id</th>
-              <th>CUstomer Site Id</th>
+              <th>Customer Site Id</th>
+              <th>Serial Details</th>
              </tr>
             </thead>
             <tbody class="form_data_line_tbody inv_serial_transaction_entries_values" >
@@ -84,6 +85,7 @@
                 <td><?php $f->text_field_dr('first_inv_transaction_id'); ?>             </td>
                 <td><?php $f->text_field_dr('last_inv_transaction_id'); ?>             </td>
                 <td><?php $f->text_field_dr('ar_customer_site_id'); ?>             </td>
+                <td><a class="button" href="form.php?class_name=inv_serial_number&mode=9&inv_serial_number_id=<?php echo $$class->inv_serial_number_id; ?>">View</a></td>
                </tr>
                <?php
                $count = $count + 1;

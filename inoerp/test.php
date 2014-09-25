@@ -20,10 +20,11 @@ include_once("includes/basics/header_public.inc");
  $db = new dbObject();
  $dbc = new dbc();
 
- pa(view::count_all_tables());
+// pa(view::find_all_tables_gen());
+// pa(view::find_all_tables());
 //$sys_notification = new sys_notification();
 //  pa($sys_notification->find_openNotification_toUserId('34'));
-pa(get_dbColumns('gl_unposted_balance_v'));
+pa(get_dbColumns('bom_routing_line_v'));
 //pa(get_dbColumns('po_quote_line'));
 //pa(get_dbColumns('po_quote_detail'));
 //  pa(get_dbColumns('po_rfq_line'));

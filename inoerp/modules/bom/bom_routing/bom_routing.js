@@ -30,6 +30,9 @@ setValFromSelectPage.prototype.setVal = function() {
  localStorage.removeItem("field_class");
 };
 
+function disableField_forCommonRouting(){
+ $('#form_line').find(':input').attr('required', false).attr('disabled', true).css("background-color", "#ccc");
+}
 
 $(document).ready(function() {
 //mandatory and field sequence
@@ -49,10 +52,21 @@ $(document).ready(function() {
  if (!($('.detail_number:first').val())) {
 	$('.detail_number:first').val('10');
  }
+ 
+ 
+if ($('#commonRouting_item_number').val()){
+   disableField_forCommonRouting();
+}
+
+$('#commonRouting_item_number').on('blur', function(){
+ if($(this).val()){
+ disableField_forCommonRouting();
+}
+});
 
  //selecting Header Id
  $(".bom_routing_header_id.select_popup").on("click", function() {
-	void window.open('select.php?class_name=bom_routing_header', '_blank',
+	void window.open('select.php?class_name=bom_routing_v', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
@@ -111,7 +125,7 @@ $(document).ready(function() {
  classSave.json_url = 'form.php?class_name=bom_routing_header';
  classSave.form_header_id = 'bom_routing_header';
  classSave.primary_column_id = 'bom_routing_header_id';
- classSave.line_key_field = 'routing_sequence';
+ classSave.line_key_field = 'department_id';
  classSave.single_line = false;
  classSave.savingOnlyHeader = false;
  classSave.headerClassName = 'bom_routing_header';

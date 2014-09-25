@@ -22,14 +22,14 @@
 					<li><label>Parent Name :</label> 
 					 <?php echo $f->select_field_from_object('parent_id', path::find_all('name'), 'path_id', array('name','module_code'), $$class->parent_id, 'parent_id')?>
 					</li>
-					<li><label>Path Name :</label> 
-					 <input type="text" required name="name[]" id="name" maxlength="60" size="60"
-									placeholder="Enter a valid path" value="<?php echo htmlentities($path->name); ?>">
-					</li>
-					<li><label>Path Value :</label>  
+          					<li><label>Path Value :</label>  
 					 <input type="text" required name="path_link[]" maxlength="500" id="path_link" size="60" 
 									placeholder="Enter path relative to site home" value="<?php echo htmlentities($path->path_link); ?>">
 					 <!--validation message place for username-->
+					</li>
+					<li><label>Path Name :</label> 
+					 <input type="text" required name="name[]" id="name" maxlength="60" size="60"
+									placeholder="Enter a valid path name" value="<?php echo htmlentities($path->name); ?>">
 					</li>
 					<li><label>Description  : </label> 
 					 <input type="text" required name="description[]" maxlength="100" id="description" size="60" 
