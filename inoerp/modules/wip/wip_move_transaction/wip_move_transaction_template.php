@@ -157,12 +157,8 @@
 					<div id="tabsLine-2" class="tabContent">
 					 <div class="first_rowset"> 
 						<ul class="column five_column"> 
-						 <li><label>Reason : </label> 
-							<?php form::text_field_d('reason'); ?>
-						 </li>
-						 <li><label>Reference : </label> 
-							<?php form::text_field_d('reference'); ?>
-						 </li>
+						 <li><label>Reason : </label> <php form::text_field_d('reason'); ?>  </li>
+						 <li><label>Reference : </label>  <?php form::text_field_d('reference'); ?> </li>
 						 <li><label>Scrap Ac: </label><?php form::account_field('scrap_account_id'); ?></li>
 						 </ul>
 					 </div>

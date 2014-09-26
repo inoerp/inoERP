@@ -6,10 +6,9 @@ class wip_material_transaction extends inv_transaction {
  public static $primary_column = "inv_transaction_id";
  public static $key_column = 'item_id_m';
  public static $module = "inv";
- public static $allowed_inv_transactions = [
-		 '1' => 'Miscellaneous Issue',
-		 '2' => 'Miscellaneous Receipt',
-		 '3' => 'Subinventory Transfer'
+ public static $transaction_type_id_a = [
+		 '6' => 'WIP Issue',
+		 '7' => 'WIP Return',
  ];
  public $field_a = [
 		 'inv_transaction_id',
@@ -20,8 +19,6 @@ class wip_material_transaction extends inv_transaction {
 		 'item_number',
 		 'item_id_m',
 		 'uom_id',
-		 'lot_number',
-		 'serial_number',
 		 'logical_transaction_cb',
 		 'document_type',
 		 'document_number',
@@ -102,7 +99,7 @@ class wip_material_transaction extends inv_transaction {
  public $search = [
 		 '_show_view_path' => 1,
  ];
- public $pageTitle = " Transaction - Create & View Transactions"; //page Title
+ public $pageTitle = " WIP Material Transaction"; //page Title
  public $option_lists = [
 		 'inv_transaction_class' => 'TRANSACTION_TYPE_CLASS'
  ];

@@ -178,6 +178,7 @@
   public $serial_generation;
   public $lot_generation;
   private $_serial_type;
+  private $_serial_number_id;
 
   public function setProperty($property, $value) {
    if (property_exists($this, $property)) {
@@ -250,7 +251,7 @@
     $ist = new inv_serial_transaction();
     if ($this->_serial_type == 'ID') {
      $existing_serial_details = inv_serial_number::find_by_id($_POST['inv_serial_number_id'][$i]);
-     if (!in_array($existing_serial_details->status, array('DEFINED', 'OUT_STORE', 'INTRANSIT', 'IN_RECEIVING'))) {
+     if (!in_array($existing_serial_details->status, array('DEFINED', 'OUT_STORE', 'INTRANSIT', 'IN_RECEIVING', 'IN_WIP'))) {
       echo "<br>Entered SN is not available for transaction . Issue @ inv_transaction @@ Line " . __LINE__;
       $dbc->rollback = 1;
       return -90;
@@ -271,6 +272,7 @@
     try {
      $ist->audit_trial();
      $ist->save();
+     $this->_serial_number_id = $ist->inv_serial_number_id;
     } catch (Exception $e) {
      echo "<br>Entered SN is not available for transaction . Issue @ inv_transaction @@ Line " . __LINE__;
      $dbc->rollback = 1;
@@ -281,6 +283,7 @@
   }
 
   private function _transact_serial_issue() {
+   global $dbc;
    for ($i = 0; $i < $this->quantity; $i++) {
     $ist = new inv_serial_transaction();
     $existing_serial_details = inv_serial_number::find_by_id($_POST['inv_serial_number_id'][$i]);
@@ -307,6 +310,14 @@
   private function _transact_serial_number() {
    global $dbc;
    $return_val = 1;
+   $item = item::find_by_orgId_item_id_m($this->item_id_m, $this->org_id);
+   if (!empty($item->serial_generation) && ($item->serial_generation == 'PRE_DEFINED')) {
+    $this->_serial_type = 'ID';
+   } else if (!empty($item->serial_generation)) {
+    $this->_serial_type = 'NUMBER';
+   } else {
+    return $return_val;
+   }
 
    if (in_array($this->transaction_type_id, array(1, 6, 7, 9, 12, 13, 14, 15, 18, 19, 20))) {
     $this->_serial_type = 'ID';
@@ -326,15 +337,23 @@
     $return_val = $return_val1 && $return_val2;
    }
 
-   if ($this->transaction_type_id == 18) {
+   if (in_array($this->transaction_type_id, array(6, 18, 13))) {
     $return_val = $this->_transact_serial_issue();
    }
 
 
-   if (in_array($this->transaction_type_id, array(20, 5, 51))) {
+   if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 51))) {
     $return_val = $this->_transact_serial_receipt();
    }
 
+   //create serial parent child reltion
+   if ($this->transaction_type_id == 11) {
+    try {
+     inv_serial_number::create_parentChildRelation($this->_serial_number_id, $this->document_id);
+    } catch (Exception $e) {
+     echo "<br>Error @ class_inv_transaction @@Line " . __LINE__. $e->getMessage();
+    }
+   }
 
    return $return_val;
   }
@@ -362,9 +381,18 @@
    global $dbc;
    $snu = new inv_serial_number();
    $snu->findBy_id($serial_id);
-   $snu->status = 'OUT_STORE';
+   if ($this->transaction_type_id == 6) {
+    $snu->status = 'IN_WIP';
+    $snu->current_wip_wo_header_id = $this->document_id;
+   } else {
+    $snu->status = 'OUT_STORE';
+   }
    $snu->activation_date = current_time(1);
-   $snu->current_org_id = '';
+   if ($this->transaction_type_id == 6) {
+    $snu->current_org_id = $this->org_id;
+   } else {
+    $snu->current_org_id = '';
+   }
    $snu->current_subinventory_id = '';
    $snu->current_locator_id = '';
    $snu->last_inv_transaction_id = $this->inv_transaction_id;
@@ -393,6 +421,7 @@
   }
 
   public function _before_save() {
+   pa($this);
    if ($this->_validate_before_save() < 0) {
     return -90;
    }

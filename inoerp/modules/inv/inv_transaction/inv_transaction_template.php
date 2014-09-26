@@ -35,7 +35,7 @@
            <li><a href="#tabsLine-2">Transfer </a></li>
            <li><a href="#tabsLine-3">Reference </a></li>
            <li><a href="#tabsLine-4">Finance </a></li>
-           <li><a href="#tabsLine-5">Transaction </a></li>
+           <li><a href="#tabsLine-5">Lot & Serial </a></li>
           </ul>
           <div class="tabContainer"> 
            <div id="tabsLine-1" class="tabContent">

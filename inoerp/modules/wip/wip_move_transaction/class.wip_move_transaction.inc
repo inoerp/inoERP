@@ -79,6 +79,9 @@ class wip_move_transaction extends dbObject {
 		 'transaction_date',
 		 'move_quantity'
  ];
+   public $profile_default = [
+   'org_id' => 'org_inv_name_default',
+  ];
  public $wip_move_transaction_id;
  public $wip_wo_header_id;
  public $wo_routing_line_id;

@@ -228,6 +228,7 @@
     $sql .= " AND current_locator_id = :current_locator_id  ";
     $value_a['current_locator_id'] = $this->current_locator_id;
    }
+//   echo "<br> sql is $sql, $this->item_id_m, $this->current_org_id, $this->status";
    $result = $this->findBySql($sql, $value_a);
    return !empty($result) ? ($result) : false;
   }
@@ -294,6 +295,30 @@
     }
    }
    return $this->message;
+  }
+
+  public static function find_by_woHeaderId_inWIP($wo_header_id) {
+   $sql = " SELECT * FROM ";
+   $sql .= self::$table_name;
+   $sql .= " WHERE status = 'IN_WIP' ";
+   $sql .= " AND  current_wip_wo_header_id = '{$wo_header_id}' ";
+   $result = self::find_by_sql($sql);
+   return !empty($result) ? $result : false;
+  }
+
+  public static function create_parentChildRelation($parent_serial_id, $wo_header_id, $update_status = true) {
+   $all_child_sn = self::find_by_woHeaderId_inWIP($wo_header_id);
+   $csn = new inv_serial_number();
+   foreach ($all_child_sn as $child_sn) {
+    $csn->findBy_id($child_sn->inv_serial_number_id);
+    $csn->parent_serial_number_id = $parent_serial_id;
+    if ($update_status) {
+     $csn->status = 'OUT_STORE';
+     $csn->current_wip_wo_header_id = '';
+    }
+    $csn->audit_trial();
+    $csn->save();
+   }
   }
 
  }

@@ -1,10 +1,4 @@
 <?php
-//$class = $class_first = 'inv_transaction';
-//$$class = $$class_first = &$inv_transaction;
-//$class_second = 'wip_wo_header';
-//$$class_second = &$wip_wo_header;
-
-$id_array = [11, 13];
 $$class->document_type = 'Work Order';
 
 if (!empty($_GET["transaction_type_id"])) {
@@ -30,9 +24,10 @@ if (!empty($wip_wo_header_id)) {
  $$class->item_id_m = $wip_wo->item_id_m;
  $$class->reference = 'wip_wo_header_id';
  $$class->total_quantity = $wip_wo->quantity;
- $item = item::find_by_id($$class->item_id_m);
+ $item = item::find_by_orgId_item_id_m($$class->item_id_m, $$class->org_id);
  $$class->item_number = $item->item_number;
  $$class->item_description = $item->item_description;
+ $$class->serial_generation = $item->serial_generation;
  $$class->uom_id = $item->uom_id;
  }
 
@@ -50,6 +45,10 @@ if ((!empty($wip_wo_header_id)) && (!empty($$class->transaction_type_id))) {
 	$$class->from_locator_id = $wip_wo->completion_locator;
 	$$class->available_quantity = $wip_wo->completed_quantity;
  }
+}
+
+if(empty($$class->transaction_type_id)){
+ $$class->transaction_type_id = 11;
 }
 
 ?>

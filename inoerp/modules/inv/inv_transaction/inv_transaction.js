@@ -191,10 +191,10 @@ $(document).ready(function() {
 
 
  $('#content').on('blur', '.item_number', function() {
-  var trClass =  $(this).closest("tr").attr('class').replace(/\s+/g, '.');
+  var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
   var trClass_d = '.' + trClass;
   var generation_type = $('#content').find(trClass_d).find('.serial_generation').val();
-  
+
   if (!generation_type) {
    var field_stmt = '<input class="textfield serial_number" type="text" size="25" readonly name="serial_number[]" >';
    $('#content').find(trClass_d).find('.inv_serial_number_id').replaceWith(field_stmt);
@@ -205,33 +205,42 @@ $(document).ready(function() {
    var field_stmt = '<input class="textfield serial_number" type="text" size="25" name="serial_number[]" >';
    $('#content').find(trClass_d).find('.inv_serial_number_id').replaceWith(field_stmt);
    $('#content').find(trClass_d).find('.serial_number').replaceWith(field_stmt);
-   }
+  }
   var itemIdM = $('#content').find(trClass_d).find('.item_id_m').val();
   if (!itemIdM) {
    return;
   }
+  
 
   switch ($('#transaction_type_id').val()) {
    case '2' :
-    if (generation_type === 'PRE_DEFINED'){
-    getSerialNumber({
-     'org_id': $('#org_id').val(),
-     'status': 'DEFINED',
-     'item_id_m': itemIdM,
-     'trclass': trClass
-    });
-   }
+    if (generation_type === 'PRE_DEFINED') {
+     $.when(getSerialNumber({
+      'org_id': $('#org_id').val(),
+      'status': 'DEFINED',
+      'item_id_m': itemIdM,
+      'trclass': trClass
+     })).then(function(data, textStatus, jqXHR) {
+      if ($.trim(data) == 'false' || $.trim(data) == 'undefined') {
+       alert('No Serial Number Found!\nCheck the subinventory, locator and item number');
+      }
+     });
+    }
     break;
 
    case '1' :
    case '3' :
-    getSerialNumber({
+    $.when(getSerialNumber({
      'org_id': $('#org_id').val(),
      'status': 'IN_STORE',
      'item_id_m': itemIdM,
      'trclass': trClass,
      'current_subinventory_id': $('#content').find(trClass_d).find('.from_subinventory_id').val(),
      'current_locator_id': $('#content').find(trClass_d).find('.from_locator_id').val(),
+    })).then(function(data, textStatus, jqXHR) {
+     if ($.trim(data) == 'false' || $.trim(data) == 'undefined') {
+      alert('No Serial Number Found!\nCheck the subinventory, locator and item number');
+     }
     });
     break;
 
@@ -240,7 +249,7 @@ $(document).ready(function() {
     alert('Enter the transaction type');
     break;
   }
-
+$('#content').find(trClass_d).find('.serial_number, .inv_serial_number_id').attr('required', true).css('background-color', 'pink');
 
  });
 

@@ -46,7 +46,7 @@ class wip_wo_routing_line extends dbObject {
  public $requiredField = [
 		 'wip_wo_header_id',
 		 'routing_sequence',
-		 'department_id'
+//		 'department_id'
  ];
  public $wip_wo_routing_line_id;
  public $wip_wo_header_id;

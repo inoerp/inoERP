@@ -253,7 +253,7 @@ $(document).ready(function() {
  classSave.enable_select = true;
  classSave.saveMain();
 
- //add or show linw details
+ //add or show line details
  addOrShow_lineDetails('tr.inv_interorg_transfer_line0');
 
  onClick_addDetailLine(1);

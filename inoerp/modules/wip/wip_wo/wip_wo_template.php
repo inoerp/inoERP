@@ -350,7 +350,9 @@
             </table>
            </div>
           </form>
+         </div>
 
+         <div id ="form_line2" class="form_line2">
           <form action=""  method="post" id="wip_wo_bom_line"  name="wip_wo_bom_line">
            <div id="tabsLine-3" class="tabContent">
             <table class="form_line_data_table">

@@ -111,9 +111,9 @@
              <li><label>Locator: </label> 
               <?php echo $f->select_field_from_object('current_locator_id', locator::find_all_of_subinventory($$class->current_subinventory_id), 'locator_id', 'locator', $$class->current_locator_id, '', 'locator_id', '', 1); ?>
              </li>
-             <li><label>Inventory L/N : </label> <?php $f->text_field_d('inv_lot_number_id'); ?>             </li>
+             <li><label>Inventory L/N : </label> <?php $f->text_field_dr('inv_lot_number_id'); ?>             </li>
              <li><label>COO : </label> <?php $f->text_field_d('country_of_origin'); ?>             </li>
-             <li><label>Parent Id : </label> <?php $f->text_field_d('parent_serial_number_id'); ?>             </li>
+             <li><label>Parent Id : </label> <?php $f->text_field_dr('parent_serial_number_id'); ?>             </li>
             </ul> 
            </div> 
           </div> 
@@ -127,6 +127,8 @@
              <li><label>First Tnx Id : </label> <?php $f->text_field_dr('first_inv_transaction_id'); ?>             </li>
              <li><label>Last Trnx Id : </label> <?php $f->text_field_dr('last_inv_transaction_id'); ?>             </li>
              <li><label>Customer Site Id : </label> <?php $f->text_field_dr('ar_customer_site_id'); ?>             </li>
+             <li><label>Original WO Id : </label> <?php $f->text_field_dr('original_wip_wo_header_id'); ?>             </li>
+             <li><label>Current WO Id : </label> <?php $f->text_field_dr('current_wip_wo_header_id'); ?>             </li>
             </ul> 
            </div> 
           </div> 
