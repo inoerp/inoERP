@@ -84,6 +84,8 @@ class onhand extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
+ public $onhand_id_from;
+ public $onhand_id_to;
  private $_from_org_id;
  private $_from_subinventory_id;
  private $_from_locator_id;
@@ -227,6 +229,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
   try {
    $this->audit_trial();
    $this->save();
+   $this->onhand_id_from = $this->onhand_id;
    echo "<br>Onhand is Sucessfully Updated. The onhand Id is " . $this->onhand_id . ' & Onhand Value is ' . $this->onhand;
    return 1;
   } catch (Exception $e) {
@@ -268,6 +271,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
   try {
    $this->audit_trial();
    $this->save();
+   $this->onhand_id_to = $this->onhand_id;
    echo "<br>Onhand is Sucessfully Updated. The onhand Id is " . $this->onhand_id . ' & Onhand Value is ' . $this->onhand;
    return 1;
   } catch (Exception $e) {

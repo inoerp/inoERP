@@ -190,11 +190,11 @@
                  <td><?php form::text_field_wid2('wip_wo_routing_line_id'); ?></td>
                  <td><?php form::number_field_wid2s('routing_sequence'); ?></td>
                  <td><?php echo form::select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class_second->department_id, 'department_id', $readonly); ?></td>
-                 <td><?php form::text_field_wid2('description'); ?></td>
+                 <td><?php $f->text_field_wid2l('description'); ?></td>
                  <td><?php echo form::checkBox_field('count_point_cb', $$class_second->count_point_cb); ?></td>
                  <td><?php echo form::checkBox_field('auto_charge_cb', $$class_second->auto_charge_cb); ?></td>
                  <td><?php echo form::checkBox_field('backflush_cb', $$class_second->backflush_cb); ?></td>
-                 <td><?php form::number_field_wid2s('minimum_transfer_quantity'); ?></td>
+                 <td><?php form::number_field_wid2('minimum_transfer_quantity'); ?></td>
                  <td class="add_detail_values"><img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
                   <!--</td></tr>-->	
                   <?php
@@ -246,16 +246,15 @@
                             <ul class="inline_action">
                              <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
                              <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-                             <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($wip_wo_routing_detail->wip_wo_routing_detail_id); ?>"></li>           
-                             <li><?php echo form::hidden_field('wip_wo_routing_line_id', $wip_wo_routing_line->wip_wo_routing_line_id); ?></li>
-                             <li><?php echo form::hidden_field('wip_wo_header_id', $$class->wip_wo_header_id); ?></li>
-
+                             <li><input type="checkbox" name="detail_id_cb" value="<?php echo ($wip_wo_routing_detail->wip_wo_routing_detail_id); ?>">
+                             <?php echo form::hidden_field('wip_wo_routing_line_id', $wip_wo_routing_line->wip_wo_routing_line_id); ?>
+                             <?php echo form::hidden_field('wip_wo_header_id', $$class->wip_wo_header_id); ?></li>
                             </ul>
                            </td>
-                           <td><?php form::text_field_wid3sr('wip_wo_routing_detail_id'); ?></td>
-                           <td><?php form::text_field_wid3sm('resource_sequence'); ?></td>
-                           <td><?php echo form::select_field_from_object('resource_id', bom_resource::find_all(), 'bom_resource_id', 'resource', $$class_third->resource_id, '', $readonly, 'resource_id', '', 1); ?></td>
-                           <td><?php echo form::select_field_from_object('charge_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_third->charge_basis, '', $readonly, 'default_basis', '', 1); ?></td>
+                           <td><?php $f->text_field_wid3sr('wip_wo_routing_detail_id'); ?></td>
+                           <td><?php $f->text_field_wid3sr('resource_sequence'); ?></td>
+                           <td><?php echo $f->select_field_from_object('resource_id', bom_resource::find_all(), 'bom_resource_id', 'resource', $$class_third->resource_id, '', '', 1, $readonly); ?></td>
+                           <td><?php echo $f->select_field_from_object('charge_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_third->charge_basis, '', 'small',  1, $readonly); ?></td>
                            <td><?php form::number_field_wid3s('resource_usage') ?></td>
                            <td><?php echo form::select_field_from_object('resource_schedule', bom_header::bom_schedule_option(), 'option_line_code', 'option_line_value', $$class_third->resource_schedule, '', $readonly, 'default_basis', '', 1); ?></td>
                            <td><?php form::number_field_wid3s('assigned_units') ?></td>
@@ -266,7 +265,6 @@
                           $detailCount++;
                          }
                          ?>
-                        </tbody>
                         </tbody>
                        </table>
                       </div>

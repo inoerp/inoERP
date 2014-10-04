@@ -38,7 +38,7 @@
              <?php
               $count = 0;
               foreach ($inv_onhand_serial_object as $inv_onhand_serial) {
-               ?>         
+                ?>         
                <tr class="inv_serial_transaction_entries<?php echo $count ?>">
                 <td><?php $f->text_field_widr('serial_number'); ?></td>
                 <td><?php echo $f->select_field_from_array('origination_type', inv_serial_number::$origination_type_a, $$class->origination_type, 'origination_type', '', 1, 1, 1); ?>             </td>

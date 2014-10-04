@@ -134,7 +134,8 @@ AND brhc.common_routing_item_id_m = brh.item_id_m
   public static function find_by_itemIdM_OrgId($item_id_m, $org_id) {
    $sql = "SELECT * FROM " . self::$table_name . " "
      . " where item_id_m = '{$item_id_m}' "
-     . " AND org_id = '{$org_id}' ";
+     . " AND org_id = '{$org_id}' "
+     . " ORDER BY routing_sequence ASC";
    $result = self::find_by_sql($sql);
    return !empty($result) ? $result : false;
   }

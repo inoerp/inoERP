@@ -1,7 +1,8 @@
-function setValFromSelectPage(wip_wo_header_id, wo_number, org_id) {
+function setValFromSelectPage(wip_wo_header_id, wo_number, org_id, combination) {
  this.wip_wo_header_id = wip_wo_header_id;
  this.wo_number = wo_number;
  this.org_id = org_id;
+ this.combination = combination;
 }
 
 setValFromSelectPage.prototype.setVal = function() {
@@ -16,6 +17,11 @@ setValFromSelectPage.prototype.setVal = function() {
 	 $('#content').find(fieldId).val(value.data);
 	}
  });
+ 
+  if (this.combination) {
+	$('#scrap_account_id').val(this.combination);
+	localStorage.removeItem("field_class");
+ }
 };
 
 $(document).ready(function() {
@@ -70,6 +76,7 @@ $(document).ready(function() {
 		rowClass = '.' + $(this).closest('tr').attr('class');
 	 }
 	});
+  
 	var availableQuantity = $(rowClass).find(fromStep).val();
 	if (availableQuantity) {
 	 $('#available_quantity').val(availableQuantity);

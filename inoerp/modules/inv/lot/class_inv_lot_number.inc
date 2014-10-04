@@ -1,9 +1,9 @@
 <?php
 
- class inv_serial_number extends dbObject {
+ class inv_lot_number extends dbObject {
 
-  public static $table_name = "inv_serial_number";
-  public static $primary_column = "inv_serial_number_id";
+  public static $table_name = "inv_lot_number";
+  public static $primary_column = "inv_lot_number_id";
   public static $key_column = 'item_id_m';
   public static $module = "inv";
   public static $origination_type_a = [
@@ -14,9 +14,20 @@
    'MANUAL' => 'Manual',
    'SYS_GEN' => 'System Generated',
   ];
+  public static $lot_status = [
+   'ACTIVE' => 'Active',
+   'EXPIRED' => 'Expired',
+  ];
+  public static $expiration_action_a = [
+   'NO_TRANSACTION' => 'No Transaction',
+   'WARNING' => 'Warning',
+   'ONLY_RTV' => 'Only Allow RTV',
+   'RTV_MISC' => 'Allow RTV & Misc',
+  ];
   public $field_a = [
-   'inv_serial_number_id',
-   'serial_number',
+   'inv_lot_number_id',
+   'lot_number',
+   'quantity',
    'item_id_m',
    'generation',
    'org_id',
@@ -24,28 +35,23 @@
    'first_inv_transaction_id',
    'reference_key_name',
    'reference_key_value',
-   'status',
    'origination_type',
    'origination_date',
+   'status',
    'activation_date',
-   'current_org_id',
+   'expiration_date',
    'supplier_site_id',
    'po_header_id',
    'supplier_sn',
    'supplier_ln',
-   'inv_lot_number_id',
-   'current_subinventory_id',
-   'current_locator_id',
+   'expiration_action',
    'item_revision',
-   'parent_serial_number_id',
+   'parent_lot_number_id',
    'original_wip_wo_header_id',
-   'current_wip_wo_header_id',
    'last_inv_transaction_id',
    'country_of_origin',
-   'fixed_asset_cb',
    'description',
    'ar_customer_site_id',
-   'fa_asset_id',
    'created_by',
    'creation_date',
    'last_update_by',
@@ -53,6 +59,7 @@
   ];
   public $dateFields = [
    'activation_date',
+   'expiration_date'
   ];
   public $initial_search = [
    'item_id_m',
@@ -65,7 +72,9 @@
    'item_description',
    'org_id',
    'transaction_type',
-   'transaction_type_id'
+   'transaction_type_id',
+   'lot_quantity',
+   'org_name'
   ];
   public $requiredField = [
    'item_id_m',
@@ -75,23 +84,24 @@
   public $profile_default = [
    'org_id' => 'org_inv_name_default',
   ];
-  public $prg_create_serial_number_parameters = [
+  public $prg_create_lot_number_parameters = [
    'Organization' => 'search_org_name',
    'Item Number From' => 'search_item_number_from',
    'Item Number To' => 'search_item_number_to',
    'Number of S/N' => 'search_quantity',
   ];
-  public $prg_create_serial_number_details = [
-   'name' => 'Create Pre Defined Serail Numbers',
-   'description' => 'Create Pre Defined Serail Numbers',
+  public $prg_create_lot_number_details = [
+   'name' => 'Create Pre Defined Lot Numbers',
+   'description' => 'Create Pre Defined Lot Numbers',
   ];
   public $search = [
    '_show_update_path' => 1,
    '_show_view_path' => 1,
   ];
-  public $pageTitle = " Serial Number ";
-  public $inv_serial_number_id;
-  public $serial_number;
+  public $pageTitle = " Lot Number ";
+  public $inv_lot_number_id;
+  public $lot_number;
+  public $quantity;
   public $item_id_m;
   public $generation;
   public $org_id;
@@ -103,56 +113,31 @@
   public $origination_date;
   public $status;
   public $activation_date;
-  public $current_org_id;
+  public $expiration_date;
   public $supplier_site_id;
   public $po_header_id;
   public $supplier_sn;
   public $supplier_ln;
-  public $inv_lot_number_id;
-  public $current_subinventory_id;
-  public $current_locator_id;
+  public $expiration_action;
   public $item_revision;
-  public $parent_serial_number_id;
+  public $parent_lot_number_id;
   public $original_wip_wo_header_id;
-  public $current_wip_wo_header_id;
   public $last_inv_transaction_id;
   public $country_of_origin;
-  public $fixed_asset_cb;
   public $description;
   public $ar_customer_site_id;
-  public $fa_asset_id;
   public $created_by;
   public $creation_date;
   public $last_update_by;
   public $last_update_date;
-  public $org;
-  public $subinventory;
-  public $locator;
   public $item_number;
   public $item_description;
-  private $_update_item_starting_serial_number = 0;
-  public $message;
-  public $inv_serial_transaction_id;
-  public $transaction_type_id;
-  public $transaction_type;
-  public $from_subinventory;
-  public $to_subinventory;
-  public $from_locator;
-  public $to_locator;
-  public $uom_id;
-  public $lot_number_id;
-  public $document_type;
-  public $document_number;
-  public $document_id;
-  public $inv_transaction_id;
-  public $sd_so_line_id;
-  public $reason;
-  public $from_org_id;
-  public $from_subinventory_id;
-  public $to_org_id;
-  public $to_subinventory_id;
-  public $from_locator_id;
-  public $to_locator_id;
+  public $lot_quantity;
+  public $subinventory;
+  public $locator;
+  public $subinventory_id;
+  public $locator_id;
+  public $org_name;
 
   Public static function serail_status() {
    $option_header = option_header::find_by_name('INV_SEARIAL_STATUS');
@@ -161,29 +146,29 @@
   }
 
   public function _before_save() {
-   if (!empty($this->item_id_m) && !empty($this->org_id) && empty($this->inv_serial_number_id)) {
+   if (!empty($this->item_id_m) && !empty($this->org_id) && empty($this->inv_lot_number_id)) {
     $item_i = item::find_by_orgId_item_id_m($this->item_id_m, $this->org_id);
-    if (empty($item_i->serial_generation) || ($item_i->serial_generation != 'PRE_DEFINED')) {
-     echo "<br>Item serial generation is not pre-defined. You can manually generate serial number for SN pre-defined items";
+    if (empty($item_i->lot_generation) || ($item_i->lot_generation != 'PRE_DEFINED')) {
+     echo "<br>Item lot generation is not pre-defined. You can manually generate lot number for lot pre-defined items";
      return -99;
     } else {
-     $this->_update_item_starting_serial_number = 1;
+     $this->_update_item_starting_lot_number = 1;
     }
-   } else if (empty($this->inv_serial_number_id)) {
+   } else if (empty($this->inv_lot_number_id)) {
     echo "<br>Missing Item Number or Org";
     return -99;
    }
   }
 
   public function _after_save() {
-   if (!empty($this->inv_serial_number_id) && ($this->_update_item_starting_serial_number == 1)) {
+   if (!empty($this->inv_lot_number_id) && !empty($this->_update_item_starting_lot_number) && ($this->_update_item_starting_lot_number == 1)) {
     $item = new item();
     $item->org_id = $this->org_id;
     $item->item_id_m = $this->item_id_m;
     $item_i = $item->findBy_orgId_itemIdM();
 
     $item->item_id = $item_i->item_id;
-    $item->serial_starting_number = !empty($item_i->serial_starting_number) ? $item_i->serial_starting_number + 1 : 1;
+    $item->lot_starting_number = !empty($item_i->lot_starting_number) ? $item_i->lot_starting_number + 1 : 1;
     $item->audit_trial();
     $item->save();
    }
@@ -194,49 +179,58 @@
    $sql .= self::$table_name;
    $sql .= " WHERE item_id_m = :item_id_m  ";
    $sql .= " AND current_org_id = :current_org_id  ";
-   $value_a = ['item_id_m' => $this->item_id_m, 'current_org_id' => $this->current_org_id];
+   $value_a = ['item_id_m' => $this->item_id_m, 'org_id' => $this->org_id];
    if (!empty($this->status)) {
     $sql .= " AND status = :status  ";
     $value_a['status'] = $this->status;
    }
-
-   if (!empty($this->current_subinventory_id)) {
-    $sql .= " AND current_subinventory_id = :current_subinventory_id  ";
-    $value_a['current_subinventory_id'] = $this->current_subinventory_id;
-   }
-   if (!empty($this->current_locator_id)) {
-    $sql .= " AND current_locator_id = :current_locator_id  ";
-    $value_a['current_locator_id'] = $this->current_locator_id;
-   }
+//
+//   if (!empty($this->subinventory)) {
+//    $sql .= " AND subinventory_id = :current_subinventory_id  ";
+//    $value_a['current_subinventory_id'] = $this->subinventory_id;
+//   }
+//   if (!empty($this->current_locator_id)) {
+//    $sql .= " AND current_locator_id = :current_locator_id  ";
+//    $value_a['current_locator_id'] = $this->current_locator_id;
+//   }
    $result = $this->findBySql($sql, $value_a);
    return !empty($result) ? ($result) : false;
   }
 
-  public function findBasic_SerialInfo() {
-   $sql = " SELECT inv_serial_number_id,    serial_number,    item_id_m,    generation, org_id, current_org_id, "
-     . " current_subinventory_id,current_locator_id, status FROM ";
-   $sql .= self::$table_name;
-   $sql .= " WHERE item_id_m = :item_id_m  ";
-   $sql .= " AND current_org_id = :current_org_id  ";
-   $sql .= " AND status = :status  ";
-   $value_a = ['item_id_m' => $this->item_id_m, 'current_org_id' => $this->current_org_id, 'status' => $this->status];
-   if (!empty($this->current_subinventory_id)) {
-    $sql .= " AND current_subinventory_id = :current_subinventory_id  ";
-    $value_a['current_subinventory_id'] = $this->current_subinventory_id;
+  public function findBasic_lotInfo() {
+   if (empty($this->subinventory_id)) {
+    $sql = " SELECT inv_lot_number_id,    lot_number,    item_id_m,    generation, org_id , "
+      . " status FROM ";
+    $sql .= self::$table_name;
+    $sql .= " WHERE item_id_m = :item_id_m  ";
+    $sql .= " AND org_id = :org_id  ";
+    $sql .= " AND status = :status  ";
+    $value_a = ['item_id_m' => $this->item_id_m, 'org_id' => $this->org_id, 'status' => $this->status];
+    $result = $this->findBySql($sql, $value_a);
+   } else {
+    $sql = " SELECT iln.inv_lot_number_id,    iln.lot_number,    iln.item_id_m,    iln.generation, iln.org_id
+              FROM inv_lot_number iln,
+              inv_lot_onhand lo,
+              onhand 
+              WHERE lo.inv_lot_number_id = iln.inv_lot_number_id
+              AND onhand.onhand_id = lo.onhand_id
+              AND onhand.item_id_m = '{$this->item_id_m}'
+              AND onhand.subinventory_id = '{$this->subinventory_id}' ";
+    $sql .= " AND iln.org_id = '{$this->org_id}'   ";
+    $sql .= " AND iln.status = '{$this->status}'   ";
+    if (!empty($this->locator_id)) {
+     $sql .= " AND onhand.locator_id = '{$this->locator_id}'   ";
+    }
+    $result = self::find_by_sql($sql);
    }
-   if (!empty($this->current_locator_id)) {
-    $sql .= " AND current_locator_id = :current_locator_id  ";
-    $value_a['current_locator_id'] = $this->current_locator_id;
-   }
-//   echo "<br> sql is $sql, $this->item_id_m, $this->current_org_id, $this->status";
-   $result = $this->findBySql($sql, $value_a);
+
    return !empty($result) ? ($result) : false;
   }
 
-  public function prg_create_serial_number($seralized_parameters) {
+  public function prg_create_lot_number($seralized_parameters) {
    global $dbc;
-   $parameters = unserialize($seralized_parameters);
-   $this->message .= '<br> Starting serial number generation program';
+   $parameters = unlotize($seralized_parameters);
+   $this->message .= '<br> Starting lot number generation program';
 
    if (!empty($parameters['org_id'][0])) {
     $this->org_id = $org_id = $parameters['org_id'][0];
@@ -247,11 +241,11 @@
    }
 
    if (!empty($parameters['quantity'][0])) {
-    $noof_serial_numbers = $parameters['quantity'][0];
-    $this->message .= '<br> Entered Number Of Serial Numbers are : ' . $noof_serial_numbers;
+    $noof_lot_numbers = $parameters['quantity'][0];
+    $this->message .= '<br> Entered Number Of lot Numbers are : ' . $noof_lot_numbers;
    } else {
-    $this->message .= '<br>No parameter found for number of serial numbers. Using default value 1';
-    $noof_serial_numbers = 1;
+    $this->message .= '<br>No parameter found for number of lot numbers. Using default value 1';
+    $noof_lot_numbers = 1;
    }
 
    if (!empty($parameters['from_item_number'][0])) {
@@ -265,13 +259,13 @@
     $item = new item();
     $item_range = $item->findBy_itemNumberRange_OrgId($from_item_number, $to_item_number, $org_id);
     foreach ($item_range as $items) {
-     if ($items->serial_generation != 'PRE_DEFINED') {
+     if ($items->lot_generation != 'PRE_DEFINED') {
       $this->message .= "<br>$items->item_number is not pre defined in org_id $org_id ";
       continue;
      }
 
-     for ($i = 0; $i < $noof_serial_numbers; $i++) {
-      $isn = new inv_serial_number();
+     for ($i = 0; $i < $noof_lot_numbers; $i++) {
+      $isn = new inv_lot_number();
       $isn->item_id_m = $items->item_id_m;
       $isn->org_id = $org_id;
       $isn->current_org_id = $org_id;
@@ -281,13 +275,13 @@
       $isn->origination_date = current_time(1);
       $isn->description = 'Generated by program on' . current_time(1);
       $isn->inv_lot_number_id = null;
-      $starting_serial_number = $items->serial_starting_number + $i;
-      $isn->serial_number = $items->serial_prefix . $starting_serial_number;
+      $starting_lot_number = $items->lot_starting_number + $i;
+      $isn->lot_number = $items->lot_prefix . $starting_lot_number;
       $isn->audit_trial();
       $isn->save();
       $dbc->confirm();
      }
-     $item->serial_starting_number = !empty($items->serial_starting_number) ? $items->serial_starting_number + $i : $i + 1;
+     $item->lot_starting_number = !empty($items->lot_starting_number) ? $items->lot_starting_number + $i : $i + 1;
      $item->item_id = $items->item_id;
      $item->audit_trial();
      $item->save();
@@ -305,21 +299,21 @@
    $result = self::find_by_sql($sql);
    return !empty($result) ? $result : false;
   }
-  
-    public static function find_allChild_bySerialId($serial_id) {
+
+  public static function find_allChild_bylotId($lot_id) {
    $sql = " SELECT * FROM ";
    $sql .= self::$table_name;
-   $sql .= " WHERE parent_serial_number_id = '{$serial_id}' ";
+   $sql .= " WHERE parent_lot_number_id = '{$lot_id}' ";
    $result = self::find_by_sql($sql);
    return !empty($result) ? $result : false;
   }
 
-  public static function create_parentChildRelation($parent_serial_id, $wo_header_id, $update_status = true) {
+  public static function create_parentChildRelation($parent_lot_id, $wo_header_id, $update_status = true) {
    $all_child_sn = self::find_by_woHeaderId_inWIP($wo_header_id);
-   $csn = new inv_serial_number();
+   $csn = new inv_lot_number();
    foreach ($all_child_sn as $child_sn) {
-    $csn->findBy_id($child_sn->inv_serial_number_id);
-    $csn->parent_serial_number_id = $parent_serial_id;
+    $csn->findBy_id($child_sn->inv_lot_number_id);
+    $csn->parent_lot_number_id = $parent_lot_id;
     if ($update_status) {
      $csn->status = 'OUT_STORE';
      $csn->current_wip_wo_header_id = '';
@@ -331,5 +325,5 @@
 
  }
 
-//end of inv_serial_number class
+//end of inv_lot_number class
 ?>

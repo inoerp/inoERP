@@ -68,7 +68,7 @@ class onhand_v extends dbObject {
     '_view_path' => 'form.php?class_name=inv_onhand_serial',
    '_show_view_path' => 1,
 	 '_view_action_meassge' => 'Serial Numbers',
-   '_extra_path' => array('form.php?class_name=inv_onhand_lot&mode=2' => 'Lot Numbers')
+   '_extra_path' => array('form.php?class_name=inv_lot_onhand&mode=2' => 'Lot Numbers')
   ];
  public $search_groupBy = [
    'item_number' => 'Item Number'

@@ -94,7 +94,8 @@
    'serial_number',
    'inv_serial_number_id',
    'lot_generation',
-   'lot_number'
+   'lot_number',
+   'lot_quantity'
   ];
   public $profile_default = [
    'org_id' => 'org_inv_name_default',
@@ -177,8 +178,11 @@
   public $serial_number_id;
   public $serial_generation;
   public $lot_generation;
+  public $lot_quantity;
   private $_serial_type;
   private $_serial_number_id;
+  private $_onhand_id_from;
+  private $_onhand_id_to;
 
   public function setProperty($property, $value) {
    if (property_exists($this, $property)) {
@@ -227,6 +231,181 @@
    } else {
     $this->account_id = $this->from_account_id;
    }
+  }
+
+  private function _create_lot_number($lot_num) {
+   $ln = new inv_lot_number();
+   $ln->item_id_m = $this->item_id_m;
+   $ln->org_id = $this->org_id;
+   $ln->lot_number = $lot_num;
+   $ln->status = 'ACTIVE';
+   $ln->generation = 'AT_RECEIPT';
+   $ln->origination_type = 'INVENTORY';
+   $ln->origination_date = $ln->activation_date = current_time(1);
+   $ln->first_inv_transaction_id = $ln->last_inv_transaction_id = $this->inv_transaction_id;
+   $ln->audit_trial();
+   $ln->save();
+   return $ln->inv_lot_number_id;
+  }
+
+  private function _verify_lot_expiration($existing_lot_details) {
+   $trnx_allowed_status = 1;
+   $exp_date = NEW DateTime($existing_lot_details->lot_expiration_date);
+   $interval = $exp_date->diff(new DateTime());
+   if ($interval->invert == 0) {
+    //period is past
+    switch ($existing_lot_details->expiration_action) {
+     case 'NO_TRANSACTION' :
+      echo "<br>Entered LN is Expired";
+      $dbc->rollback = 1;
+      $trnx_allowed_status = -90;
+      break;
+
+     case 'WARNING' :
+      echo "<br>Entered LN is Expired";
+      break;
+
+     case 'RTV_MISC' :
+      if (!(in_array($this->transaction_type_id, array('1', '2', 21)))) {
+       echo "<br>Entered LN is  Expired";
+       $trnx_allowed_status = -90;
+       $dbc->rollback = 1;
+      }
+      break;
+
+     case 'ONLY_RTV' :
+      if (!($this->transaction_type_id == 21)) {
+       echo "<br>Entered LN is  Expired";
+       $trnx_allowed_status = -90;
+       $dbc->rollback = 1;
+      }
+      break;
+
+     default :
+      break;
+    }
+   }
+   return $trnx_allowed_status;
+  }
+
+  private function _update_lot_onhand($lot_id, $update_type) {
+   global $dbc;
+
+   if (!empty($lot_id) && !empty($this->_onhand_id_from) && ($update_type == 'from' )) {
+    $loh = new inv_lot_onhand();
+    $loh->inv_lot_number_id = $lot_id;
+    $loh->onhand_id = $this->_onhand_id_from;
+    $loh_i = $loh->findBy_lotID_invOnhandId();
+    if ($loh_i) {
+     foreach ($loh_i as $key => $val) {
+      $loh->$key = $val;
+     }
+     $loh->lot_quantity -= $this->quantity;
+     $loh->audit_trial();
+     try {
+      $loh->save();
+     } catch (Exception $e) {
+      $dbc->rollback = 1;
+      echo "<br> Failed to update lot onhand. Issue @ inv_transaction @@ Line " . __LINE__;
+     }
+    } else {
+     $dbc->rollback = 1;
+     echo "<br> Cant complete the transaction as no lot details found. Issue @ inv_transaction @@ Line " . __LINE__;
+    }
+   }
+
+   if (!empty($lot_id) && !empty($this->_onhand_id_to) && ($update_type == 'to')) {
+    $loh = new inv_lot_onhand();
+    $loh->inv_lot_number_id = $lot_id;
+    $loh->onhand_id = $this->_onhand_id_to;
+    $loh_j = $loh->findBy_lotID_invOnhandId();
+    if ($loh_j) {
+     foreach ($loh_j as $key => $val) {
+      $loh->$key = $val;
+     }
+    }
+    $loh->lot_quantity += $this->quantity;
+    $loh->audit_trial();
+    try {
+     $loh->save();
+    } catch (Exception $e) {
+     $dbc->rollback = 1;
+     echo "<br> Failed to update lot onhand. Issue @ inv_transaction @@ Line " . __LINE__;
+    }
+   }
+  }
+
+  private function _transact_lot_receipt() {
+   for ($i = 0; $i < count($_POST['lot_quantity']); $i++) {
+    $ist = new inv_lot_transaction();
+    $ist->lot_quantity = $_POST['lot_quantity'][$i];
+    if ($this->_lot_type == 'ID') {
+     $existing_lot_details = inv_lot_number::find_by_id($_POST['inv_lot_number_id'][$i]);
+     if (!empty($existing_lot_details->lot_expiration_date)) {
+      $trnx_allowed_status = $this->_verify_lot_expiration($existing_lot_details);
+      if ($trnx_allowed_status < 0) {
+       return -90;
+      }
+     }
+     $ist->inv_lot_number_id = $_POST['inv_lot_number_id'][$i];
+     try {
+      $this->_update_lot_onhand($ist->inv_lot_number_id, 'to');
+     } catch (Exception $e) {
+      echo "<br> Failed to update lot onhand. Issue @ inv_transaction @@ Line " . __LINE__;
+      $dbc->rollback = 1;
+      return -90;
+     }
+    } else {
+     $lot_id = $this->_create_lot_number($_POST['lot_number'][$i]);
+     $ist->inv_lot_number_id = $lot_id;
+    }
+    $ist->inv_transaction_id = $this->inv_transaction_id;
+    try {
+     $ist->audit_trial();
+     $ist->save();
+     $this->_lot_number_id = $ist->inv_lot_number_id;
+     try {
+      $this->_update_lot_onhand($ist->inv_lot_number_id, 'to');
+     } catch (Exception $e) {
+      echo "<br> Failed to update lot onhand. Issue @ inv_transaction @@ Line " . __LINE__;
+      $dbc->rollback = 1;
+      return -90;
+     }
+    } catch (Exception $e) {
+     echo "<br>Entered Lot Number is not available for transaction . Issue @ inv_transaction @@ Line " . __LINE__;
+     $dbc->rollback = 1;
+     return -90;
+    }
+   }
+   return 1;
+  }
+
+  private function _transact_lot_issue() {
+   global $dbc;
+
+   for ($i = 0; $i < count($_POST['lot_quantity']); $i++) {
+    $ist = new inv_lot_transaction();
+    $existing_lot_details = inv_lot_number::find_by_id($_POST['inv_lot_number_id'][$i]);
+    if (!empty($existing_lot_details->lot_expiration_date)) {
+     $trnx_allowed_status = $this->_verify_lot_expiration($existing_lot_details);
+     if ($trnx_allowed_status < 0) {
+      return -90;
+     }
+    }
+    $ist->inv_lot_number_id = $_POST['inv_lot_number_id'][$i];
+    $ist->lot_quantity = $_POST['lot_quantity'][$i];
+    try {
+     $this->_update_lot_onhand($ist->inv_lot_number_id, 'from');
+    } catch (Exception $e) {
+     echo "<br> Failed to update lot number. Issue @ inv_transaction @@ Line " . __LINE__;
+     $dbc->rollback = 1;
+     return -90;
+    }
+    $ist->inv_transaction_id = $this->inv_transaction_id;
+    $ist->audit_trial();
+    $ist->save();
+   }
+   return 1;
   }
 
   private function _create_serial_number($serial_num) {
@@ -351,7 +530,58 @@
     try {
      inv_serial_number::create_parentChildRelation($this->_serial_number_id, $this->document_id);
     } catch (Exception $e) {
-     echo "<br>Error @ class_inv_transaction @@Line " . __LINE__. $e->getMessage();
+     echo "<br>Error @ class_inv_transaction @@Line " . __LINE__ . $e->getMessage();
+    }
+   }
+
+   return $return_val;
+  }
+
+  private function _transact_lot_number() {
+   global $dbc;
+   $return_val = 1;
+   $item = item::find_by_orgId_item_id_m($this->item_id_m, $this->org_id);
+   if (!empty($item->lot_generation) && ($item->lot_generation == 'PRE_DEFINED')) {
+    $this->_lot_type = 'ID';
+   } else if (!empty($item->lot_generation)) {
+    $this->_lot_type = 'NUMBER';
+   } else {
+    return $return_val;
+   }
+
+   if (in_array($this->transaction_type_id, array(1, 3, 6, 7, 9, 12, 13, 14, 15, 18, 19, 20))) {
+    $this->_lot_type = 'ID';
+   }
+
+   if ($this->transaction_type_id == 1) {
+    $return_val = $this->_transact_lot_issue();
+   }
+
+   if ($this->transaction_type_id == 2) {
+    $return_val = $this->_transact_lot_receipt();
+   }
+
+   if ($this->transaction_type_id == 3) {
+    $return_val1 = $this->_transact_lot_issue();
+    $return_val2 = $this->_transact_lot_receipt();
+    $return_val = $return_val1 && $return_val2;
+   }
+
+   if (in_array($this->transaction_type_id, array(6, 18, 13))) {
+    $return_val = $this->_transact_lot_issue();
+   }
+
+
+   if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 51))) {
+    $return_val = $this->_transact_lot_receipt();
+   }
+
+   //create lot parent child reltion
+   if ($this->transaction_type_id == 11) {
+    try {
+     inv_lot_number::create_parentChildRelation($this->_lot_number_id, $this->document_id);
+    } catch (Exception $e) {
+     echo "<br>Error @ class_inv_transaction @@Line " . __LINE__ . $e->getMessage();
     }
    }
 
@@ -420,14 +650,31 @@
    return $ret;
   }
 
+  private function _entered_lot_quantity_total() {
+   $ret_quantity = 0;
+   if (!empty($_POST['inv_lot_number_id'])) {
+    foreach ($_POST['inv_lot_number_id'] as $key => $value) {
+     $ret_quantity +=!empty($_POST['lot_quantity'][$key]) ? $_POST['lot_quantity'][$key] : 0;
+    }
+    $this->_lot_type = 'ID';
+    //good to procedd . $this->_lock_lot_number();
+   } else if (!empty($_POST['lot_number'])) {
+    foreach ($_POST['lot_number'] as $key => $value) {
+     $ret_quantity +=!empty($_POST['lot_quantity'][$key]) ? $_POST['lot_quantity'][$key] : 0;
+     $this->_lot_type = 'NUMBER';
+    }
+   }
+
+   return $ret_quantity;
+  }
+
   public function _before_save() {
-   pa($this);
+//   pa($this);
    if ($this->_validate_before_save() < 0) {
     return -90;
    }
-
+//serail verification
    if (!empty($_POST['serial_generation'][0])) {
-
     if (!empty($_POST['inv_serial_number_id']) && count($_POST['inv_serial_number_id']) >= $this->quantity) {
      $this->_serial_type = 'ID';
      //good to procedd . $this->_lock_serial_number();
@@ -436,6 +683,15 @@
      //good to procedd . $this->_lock_serial_number();
     } else {
      echo "<br>Incomplete serial numbers for serial controlled items";
+     return -99;
+    }
+   }
+
+   //lot verification  
+   if (!empty($_POST['lot_generation'][0])) {
+    $entered_lot_quantity_total = $this->_entered_lot_quantity_total();
+    if (empty($entered_lot_quantity_total)) {
+     echo "<br>Incomplete lot numbers for lot controlled items";
      return -99;
     }
    }
@@ -659,6 +915,7 @@
      $onhand->setProperty('_transaction_quantity', $this->quantity);
      $onhand->item_id_m = $this->item_id_m;
      $update_result = $onhand->updateOnhand();
+     $this->_onhand_id_from = $onhand->onhand_id;
      //create journals for Misc Issue/ WIP Return 
      $journal_line_a = $this->_cretae_journal_line_array($element_value_a, $this->from_subinventory_id, 'cr', 1);
 
@@ -736,6 +993,7 @@
      $onhand->setProperty('_transaction_quantity', $this->quantity);
      $onhand->item_id_m = $this->item_id_m;
      $update_result = $onhand->updateOnhand();
+     $this->_onhand_id_to = $onhand->onhand_id;
      //create journals for  Misc Receipt/ WIP Assembly Completion
      $journal_line_a = $this->_cretae_journal_line_array($element_value_a, $this->to_subinventory_id, 'dr', 1);
 
@@ -833,6 +1091,8 @@
      $onhand->item_id_m = $this->item_id_m;
      $onhand->org_id = $this->org_id;
      $update_result = $onhand->updateOnhand();
+     $this->_onhand_id_from = $onhand->onhand_id_from;
+     $this->_onhand_id_to = $onhand->onhand_id_to;
      $journal_line_from_a = $this->_cretae_journal_line_array($element_value_a, $this->from_subinventory_id, 'cr', 1);
      $line_number = 1;
      foreach ($journal_line_from_a as $journal_line) {
@@ -976,7 +1236,11 @@
       $inv_transaction->org_id = $org_id;
       $inv_transaction->transaction_type_id = 7;
       $inv_transaction->item_id_m = $bomline->component_item_id_m;
-      $item = item::find_by_id($inv_transaction->item_id_m);
+      $item = item::find_by_orgId_item_id_m($inv_transaction->item_id_m, $this->org_id);
+      if (!empty($item->serial_generation)) {
+       echo "<br>No Material Issue for serial controlled items";
+       return;
+      }
       $inv_transaction->uom_id = $item->uom_id;
       $inv_transaction->item_number = $item->item_number;
       $inv_transaction->quantity = $bomline->usage_quantity * $quantity;
@@ -996,6 +1260,11 @@
 
    //update serial transaction
    if ($this->_transact_serial_number() < 0) {
+    return -99;
+   }
+
+   //update lot transaction
+   if ($this->_transact_lot_number() < 0) {
     return -99;
    }
   }

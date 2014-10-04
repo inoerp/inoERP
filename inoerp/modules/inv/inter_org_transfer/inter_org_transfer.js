@@ -256,7 +256,9 @@ $(document).ready(function() {
  //add or show line details
  addOrShow_lineDetails('tr.inv_interorg_transfer_line0');
 
- onClick_addDetailLine(1);
+
+ onClick_addDetailLine(2, '.add_row_detail_img1');
+ onClick_addDetailLine(1, '.add_row_detail_img');
  
   $('#content').on('blur', '.from_subinventory_id, .from_locator_id', function() {
   var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
@@ -285,6 +287,32 @@ $(document).ready(function() {
   });
  });
 
+ $('#content').on('blur', '.from_subinventory_id, .from_locator_id', function() {
+  var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
+  var trClass_d = '.' + trClass;
+  var generation_type = $('#content').find(trClass_d).find('.lot_generation').val();
+
+  if (!generation_type) {
+   var field_stmt = '<input class="textfield lot_number" type="text" size="25" readonly name="lot_number[]" >';
+   $('#content').find(trClass_d).find('.inv_lot_number_id').replaceWith(field_stmt);
+   $('#content').find(trClass_d).find('.lot_number').replaceWith(field_stmt);
+   alert('Item is not lot controlled.\nNo lot informatio \'ll be saved in database');
+   return;
+  }
+  var itemIdM = $('#content').find(trClass_d).find('.item_id_m').val();
+  if (!itemIdM) {
+   return;
+  }
+
+  getlotNumber({
+   'org_id': $('#from_org_id').val(),
+   'status': 'IN_STORE',
+   'item_id_m': itemIdM,
+   'trclass': trClass,
+   'current_subinventory_id': $('#content').find(trClass_d).find('.from_subinventory_id').val(),
+   'current_locator_id': $('#content').find(trClass_d).find('.from_locator_id').val(),
+  });
+ });
 
 
  //all actions

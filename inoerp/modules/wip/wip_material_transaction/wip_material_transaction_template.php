@@ -14,7 +14,6 @@
       <div class="error"></div><div id="loading"></div>
       <div class="show_loading_small"></div>
       <?php
-       $f = new inoform();
        echo (!empty($show_message)) ? $show_message : "";
        echo (!empty($hidden_stmt)) ? $hidden_stmt : "";
       ?> 
