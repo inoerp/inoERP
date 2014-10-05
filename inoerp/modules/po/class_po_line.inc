@@ -116,7 +116,7 @@
 
   private function _validate_before_save() {
    $ret = 1;
-   $item = item::find_by_orgId_item_id_m($this->item_id_m, $this->org_id);
+   $item = item::find_by_orgId_item_id_m($this->item_id_m, $this->receving_org_id);
    if ($item) {
     if (empty($item->purchased_cb)) {
      $ret = -90;

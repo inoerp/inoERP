@@ -76,6 +76,9 @@
    'need_by_date',
    'promise_date'
   ];
+  public $numberField = [
+   'quantity',
+  ];
   public $notUpdatedFromWebForm = [
    "received_quantity",
    "accepted_quantity",

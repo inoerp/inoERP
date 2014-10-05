@@ -201,35 +201,37 @@
              <?php
               $count = 0;
               foreach ($inv_interorg_transfer_line_object as $inv_interorg_transfer_line) {
+               $inv_trnx = inv_transaction::find_by_refName_refValue('inv_interorg_transfer_line', $$class_second->inv_interorg_transfer_line_id);
                ?>    
                <tr class="inv_interorg_transfer_line<?php echo $count ?>">
-                               <td class="add_detail_values0">	<?php
-                 echo $f->hidden_field('lot_number_id', $$class_second->lot_number_id);
-                 echo $f->hidden_field('lot_generation', $$class_second->lot_generation);
-                ?> 
-                <img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
-                <div class="class_detail_form">
-                 <fieldset class="form_detail_data_fs"><legend>lot</legend>
-                  <div class="tabsDetail">
-                   <ul class="tabMain">
-                    <li class="tabLink"><a href="#tabsDetail-1-1"> Numbers</a></li>
-                   </ul>
-                   <div class="tabContainer">
-                    <div id="tabsDetail-1-1" class="tabContent">
-                     <table class="form form_detail_data_table detail">
-                      <thead>
-                       <tr>
-                        <th>Action</th>
-                        <th>Lot Number</th>
-                        <th>Quantity</th>
-                       </tr>
-                      </thead>
-                      <tbody class="form_data_detail_tbody_ln">
-                       <?php
+                <td class="add_detail_values0">	<?php
+                 echo !empty($$class_second->lot_number_id) ? $f->hidden_field('lot_number_id', $$class_second->lot_number_id) : $f->hidden_field('lot_number_id','');
+                  echo !empty($$class_second->lot_generation) ? $f->hidden_field('lot_generation', $$class_second->lot_generation) : $f->hidden_field('lot_generation','');
+                 ?> 
+                 <img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+                 <div class="class_detail_form">
+                  <fieldset class="form_detail_data_fs"><legend>lot</legend>
+                   <div class="tabsDetail">
+                    <ul class="tabMain">
+                     <li class="tabLink"><a href="#tabsDetail-1-1"> Numbers</a></li>
+                    </ul>
+                    <div class="tabContainer">
+                     <div id="tabsDetail-1-1" class="tabContent">
+                      <table class="form form_detail_data_table detail">
+                       <thead>
+                        <tr>
+                         <th>Action</th>
+                         <th>Lot Number</th>
+                         <th>Quantity</th>
+                        </tr>
+                       </thead>
+                       <tbody class="form_data_detail_tbody_ln">
+                        <?php
                         $detailCount = 0;
-                        if (!empty($$class->inv_transaction_id)) {
+                        if (!empty($inv_trnx->inv_transaction_id)) {
                          $lot_object = [];
-                         $lot_trnxs = inv_lot_transaction::find_by_invTransactionId($$class->inv_transaction_id);
+//                         pa($inv_trnx);
+                         $lot_trnxs = inv_lot_transaction::find_by_invTransactionId($inv_trnx->inv_transaction_id);
                          if (!empty($lot_trnxs)) {
                           foreach ($lot_trnxs as $lot_trnx) {
                            $lot_no = new inv_lot_number();
@@ -254,32 +256,32 @@
                           </td>
                           <td><?php
                            echo $f->text_field('lot_number', $lot_no->lot_number, '25');
-                           echo $f->hidden_field('lot_generation', $$class_second->lot_generation);
+                           echo !empty($$class_second->lot_generation) ? $f->hidden_field('lot_generation', $$class_second->lot_generation) : null;
                            ?>
                           </td>
-                          <td><?php     echo $f->number_field('lot_quantity', $lot_no->lot_quantity, '25'); ?>
+                          <td><?php echo $f->number_field('lot_quantity', $lot_no->lot_quantity, '25'); ?>
                           </td>
                          </tr>
                          <?php
                          $detailCount++;
                         }
-                       ?>
-                      </tbody>
-                     </table>
+                        ?>
+                       </tbody>
+                      </table>
+                     </div>
                     </div>
                    </div>
-                  </div>
 
 
-                 </fieldset>
+                  </fieldset>
 
-                </div>
-               </td>
+                 </div>
+                </td>
 
                 <td class="add_detail_values1">
                  <?php
-                 echo $f->hidden_field('serial_number_id', $$class_second->serial_number_id);
-                 echo $f->hidden_field('serial_generation', $$class_second->serial_generation);
+                  echo !empty($$class_second->serial_number_id) ? $f->hidden_field('serial_number_id', $$class_second->serial_number_id) : null;
+                  echo !empty($$class_second->serial_generation) ? $f->hidden_field('serial_generation', $$class_second->serial_generation) : null;
                  ?>
                  <img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
                  <div class="class_detail_form">
@@ -300,9 +302,9 @@
                        <tbody class="form_data_detail_tbody">
                         <?php
                         $detailCount = 0;
-                        if (!empty($$class->inv_interorg_transfer_line_id)) {
+                        if (!empty($inv_trnx->inv_transaction_id)) {
                          $serial_object = [];
-                         $serial_trnxs = inv_serial_transaction::find_by_invTransactionId($$class->inv_transaction_id);
+                         $serial_trnxs = inv_serial_transaction::find_by_invTransactionId($inv_trnx->inv_transaction_id);
                          if (!empty($serial_trnxs)) {
                           foreach ($serial_trnxs as $serial_trnx) {
                            $serial_no = new inv_serial_number();
@@ -327,7 +329,8 @@
                           </td>
                           <td><?php
                            echo $f->text_field('serial_number', $serial_no->serial_number, '25');
-                           echo $f->hidden_field('serial_generation', $$class_second->serial_generation);
+                             echo !empty($$class_second->serial_generation) ? $f->hidden_field('serial_generation', $$class_second->serial_generation) : null;
+                           
                            ?>
                           </td>
 

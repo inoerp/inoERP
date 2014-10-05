@@ -33,7 +33,7 @@
           <td><label>WO Number : </label>  <?php $f->text_field_dr('wo_number'); ?> </td>
           <td><label>Transaction Type </label>
            <?php echo $f->select_field_from_array('transaction_type_id', wip_material_transaction::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1); ?>
-           <a name="show" class="show wip_wo_headerid_show"> <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+           <a name="show" class="show wip_wo_headerid_show clickable"> <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
           </td>
          </tr>
         </table>
@@ -177,12 +177,80 @@
              </thead>
              <tbody class="form_data_line_tbody">
               <tr class="inv_transaction_row0" id="tab4_1">
-               <td>	<?php
-                 $f->text_field_wid('lot_number');
-                 echo $f->hidden_field('lot_number_id', $$class->lot_number_id);
-                 echo $f->hidden_field('lot_generation', $$class->lot_generation);
-                ?> </td>
-               <td class="add_detail_values">
+               <td class="add_detail_values0">	<?php
+                 echo!empty($$class->lot_number_id) ? $f->hidden_field('lot_number_id', $$class->lot_number_id) : $f->hidden_field('lot_number_id', '');
+                 echo!empty($$class->lot_generation) ? $f->hidden_field('lot_generation', $$class->lot_generation) : $f->hidden_field('lot_generation', '');
+                ?> 
+                <img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+                <div class="class_detail_form">
+                 <fieldset class="form_detail_data_fs"><legend>lot</legend>
+                  <div class="tabsDetail">
+                   <ul class="tabMain">
+                    <li class="tabLink"><a href="#tabsDetail-1-1"> Numbers</a></li>
+                   </ul>
+                   <div class="tabContainer">
+                    <div id="tabsDetail-1-1" class="tabContent">
+                     <table class="form form_detail_data_table detail">
+                      <thead>
+                       <tr>
+                        <th>Action</th>
+                        <th>Lot Number</th>
+                        <th>Quantity</th>
+                       </tr>
+                      </thead>
+                      <tbody class="form_data_detail_tbody_ln">
+                       <?php
+                        $detailCount = 0;
+                        if (!empty($inv_trnx->inv_transaction_id)) {
+                         $lot_object = [];
+//                         pa($inv_trnx);
+                         $lot_trnxs = inv_lot_transaction::find_by_invTransactionId($inv_trnx->inv_transaction_id);
+                         if (!empty($lot_trnxs)) {
+                          foreach ($lot_trnxs as $lot_trnx) {
+                           $lot_no = new inv_lot_number();
+                           $lot_no->findBy_id($lot_trnx->inv_lot_number_id);
+                           $lot_no->lot_quantity = $lot_trnx->lot_quantity;
+                           array_push($lot_object, $lot_no);
+                          }
+                         }
+                        }
+                        if (empty($lot_object)) {
+                         $lot_object = array(new inv_lot_number());
+                        }
+                        foreach ($lot_object as $lot_no) {
+                         ?>
+                         <tr class="inv_lot_number<?php echo $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
+                          <td>   
+                           <ul class="inline_action">
+                            <li class="add_row_detail_img1"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
+                            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+                            <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($lot_no->inv_lot_number_id); ?>"></li>           
+                           </ul>
+                          </td>
+                          <td><?php
+                           echo $f->text_field('lot_number', $lot_no->lot_number, '25');
+                           echo!empty($$class_second->lot_generation) ? $f->hidden_field('lot_generation', $$class->lot_generation) : null;
+                           ?>
+                          </td>
+                          <td><?php echo $f->number_field('lot_quantity', $lot_no->lot_quantity, '25'); ?>
+                          </td>
+                         </tr>
+                         <?php
+                         $detailCount++;
+                        }
+                       ?>
+                      </tbody>
+                     </table>
+                    </div>
+                   </div>
+                  </div>
+
+
+                 </fieldset>
+
+                </div>
+               </td>
+               <td class="add_detail_values1">
                 <?php
                  echo $f->hidden_field('serial_number_id', $$class->serial_number_id);
                  echo $f->hidden_field('serial_generation', $$class->serial_generation);

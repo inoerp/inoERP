@@ -290,7 +290,6 @@
 
   private function _update_lot_onhand($lot_id, $update_type) {
    global $dbc;
-
    if (!empty($lot_id) && !empty($this->_onhand_id_from) && ($update_type == 'from' )) {
     $loh = new inv_lot_onhand();
     $loh->inv_lot_number_id = $lot_id;
@@ -358,23 +357,23 @@
     } else {
      $lot_id = $this->_create_lot_number($_POST['lot_number'][$i]);
      $ist->inv_lot_number_id = $lot_id;
-    }
-    $ist->inv_transaction_id = $this->inv_transaction_id;
-    try {
-     $ist->audit_trial();
-     $ist->save();
-     $this->_lot_number_id = $ist->inv_lot_number_id;
+     $ist->inv_transaction_id = $this->inv_transaction_id;
      try {
-      $this->_update_lot_onhand($ist->inv_lot_number_id, 'to');
+      $ist->audit_trial();
+      $ist->save();
+      $this->_lot_number_id = $ist->inv_lot_number_id;
+      try {
+       $this->_update_lot_onhand($ist->inv_lot_number_id, 'to');
+      } catch (Exception $e) {
+       echo "<br> Failed to update lot onhand. Issue @ inv_transaction @@ Line " . __LINE__;
+       $dbc->rollback = 1;
+       return -90;
+      }
      } catch (Exception $e) {
-      echo "<br> Failed to update lot onhand. Issue @ inv_transaction @@ Line " . __LINE__;
+      echo "<br>Entered Lot Number is not available for transaction . Issue @ inv_transaction @@ Line " . __LINE__;
       $dbc->rollback = 1;
       return -90;
      }
-    } catch (Exception $e) {
-     echo "<br>Entered Lot Number is not available for transaction . Issue @ inv_transaction @@ Line " . __LINE__;
-     $dbc->rollback = 1;
-     return -90;
     }
    }
    return 1;
@@ -498,7 +497,7 @@
     return $return_val;
    }
 
-   if (in_array($this->transaction_type_id, array(1, 6, 7, 9, 12, 13, 14, 15, 18, 19, 20))) {
+   if (in_array($this->transaction_type_id, array(1, 6, 7, 9, 12, 13, 14, 15, 18, 19, 20, 21))) {
     $this->_serial_type = 'ID';
    }
 
@@ -516,12 +515,12 @@
     $return_val = $return_val1 && $return_val2;
    }
 
-   if (in_array($this->transaction_type_id, array(6, 18, 13))) {
+   if (in_array($this->transaction_type_id, array(6, 18, 13, 21))) {
     $return_val = $this->_transact_serial_issue();
    }
 
 
-   if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 51))) {
+   if (in_array($this->transaction_type_id, array(20, 5, 7, 11))) {
     $return_val = $this->_transact_serial_receipt();
    }
 
@@ -549,7 +548,7 @@
     return $return_val;
    }
 
-   if (in_array($this->transaction_type_id, array(1, 3, 6, 7, 9, 12, 13, 14, 15, 18, 19, 20))) {
+   if (in_array($this->transaction_type_id, array(1, 3, 6, 9, 12, 13, 14, 15, 18, 19, 20, 21))) {
     $this->_lot_type = 'ID';
    }
 
@@ -567,23 +566,22 @@
     $return_val = $return_val1 && $return_val2;
    }
 
-   if (in_array($this->transaction_type_id, array(6, 18, 13))) {
+   if (in_array($this->transaction_type_id, array(6, 18, 13, 21))) {
     $return_val = $this->_transact_lot_issue();
    }
 
-
-   if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 51))) {
+   if (in_array($this->transaction_type_id, array(20, 5, 7, 11))) {
     $return_val = $this->_transact_lot_receipt();
    }
 
    //create lot parent child reltion
-   if ($this->transaction_type_id == 11) {
-    try {
-     inv_lot_number::create_parentChildRelation($this->_lot_number_id, $this->document_id);
-    } catch (Exception $e) {
-     echo "<br>Error @ class_inv_transaction @@Line " . __LINE__ . $e->getMessage();
-    }
-   }
+//   if ($this->transaction_type_id == 11) {
+//    try {
+//     inv_lot_number::create_parentChildRelation($this->_lot_number_id, $this->document_id);
+//    } catch (Exception $e) {
+//     echo "<br>Error @ class_inv_transaction @@Line " . __LINE__ . $e->getMessage();
+//    }
+//   }
 
    return $return_val;
   }
@@ -909,6 +907,7 @@
     case 15 :
     case 16 :
     case 18 :
+    case 21 :
      $onhand->setProperty('_from_org_id', $this->org_id);
      $onhand->setProperty('_from_subinventory_id', $this->from_subinventory_id);
      $onhand->setProperty('_from_locator_id', $this->from_locator_id);
@@ -916,12 +915,13 @@
      $onhand->item_id_m = $this->item_id_m;
      $update_result = $onhand->updateOnhand();
      $this->_onhand_id_from = $onhand->onhand_id;
-     //create journals for Misc Issue/ WIP Return 
+     //create journals for Misc Issue/ WIP Return - from locations
      $journal_line_a = $this->_cretae_journal_line_array($element_value_a, $this->from_subinventory_id, 'cr', 1);
 
+     //Dr accounting
+     //wip transactions
      $line_number = 1;
-     $wip_trnx_a = [6, 12, 13];
-     if (in_array($this->transaction_type_id, $wip_trnx_a)) {
+     if (in_array($this->transaction_type_id, array(6, 12, 13))) {
       $line_number = 1;
       foreach ($journal_line_a as $journal_line) {
        if ($journal_line['line_number'] > $line_number) {
@@ -938,8 +938,7 @@
      }
 
      //form misc issue - debit the entered account
-     $inv_issue_trnx_a = [1, 16, 18];
-     if (in_array($this->transaction_type_id, $inv_issue_trnx_a)) {
+     if (in_array($this->transaction_type_id, array(1, 16, 18))) {
       $total_amount = 0;
       $line_number = 1;
       foreach ($journal_line_a as $journal_line) {
@@ -1053,14 +1052,12 @@
      }
 
      //start of cr
-     $inv_receving_trnx_a = [2, 17];
      if (!empty($this->_cr_amount) && ($this->transaction_type_id == 20)) {
       $this->_journal_line_for_cr_adjustmet_amount($journal_line_a);
      } else if ($this->transaction_type_id == 20) {
       array_push($inv_receving_trnx_a, 20);
      }
-
-     if (in_array($this->transaction_type_id, $inv_receving_trnx_a)) {
+     if (in_array($this->transaction_type_id, array(2, 17))) {
       $total_amount = 0;
       $line_number = 1;
       foreach ($journal_line_a as $journal_line) {
@@ -1079,6 +1076,10 @@
       }
      }
 
+
+     if ($this->transaction_type_id == 21) {
+      $this->_after_save_po_return($journal_line_a);
+     }
      break;
 
     case 3 :
@@ -1269,6 +1270,44 @@
    }
   }
 
+  private function _after_save_po_return(&$journal_line_a) {
+   $po_v = new po_all_v();
+   $po_v->po_detail_id = $this->po_detail_id;
+   $po_v_i = $po_v->findBy_poDetailId();
+   $accural_amount = $this->quantity * $po_v_i->unit_price;
+   $total_amount = 0;
+   $line_number = 1;
+   foreach ($journal_line_a as $journal_line) {
+    $total_amount += $journal_line['amount'];
+    if ($journal_line['line_number'] > $line_number) {
+     $line_number = $journal_line['line_number'];
+    }
+   }
+   $line_number++;
+   if (!empty($accural_amount)) {
+    $journal_line['line_number'] = $line_number;
+    $journal_line['amount'] = $accural_amount;
+    $journal_line['account_id'] = $po_v_i->accrual_ac_id;
+    $journal_line['dr_cr'] = 'dr';
+    array_push($journal_line_a, $journal_line);
+   }
+
+   //PPV if the Accrual & Standard Cost Amounts are differnt
+   if ($accural_amount - $total_amount != 0) {
+    $line_number++;
+    $ppv_amount = $accural_amount - $total_amount;
+    $journal_line['line_number'] = $line_number;
+    $journal_line['amount'] = $ppv_amount;
+    $journal_line['account_id'] = $po_v_i->ppv_ac_id;
+    if ($ppv_amount > 0) {
+     $journal_line['dr_cr'] = 'cr';
+    } else {
+     $journal_line['dr_cr'] = 'dr';
+    }
+    array_push($journal_line_a, $journal_line);
+   }
+  }
+
   private function _journal_line_for_cr_adjustmet_amount(&$journal_line_a) {
    $total_amount = 0;
    $line_number = 1;
@@ -1301,6 +1340,15 @@
     $journal_line['amount'] = abs($ppv_amount);
     array_push($journal_line_a, $journal_line);
    }
+  }
+
+  public static function find_by_refName_refValue($refname, $refvalue) {
+
+   $sql = "SELECT * FROM ";
+   $sql .= self::$table_name;
+   $sql .= " WHERE   reference_key_name = '{$refname}' AND  reference_key_value ='{$refvalue}' LIMIT 1";
+   $result = self::find_by_sql($sql);
+   return !empty($result) ? array_pop($result) : false;
   }
 
  }

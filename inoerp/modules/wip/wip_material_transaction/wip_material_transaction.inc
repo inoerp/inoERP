@@ -49,6 +49,7 @@ if (!empty($wip_wo_header_id)) {
 	 $hidden_stmt .= "<td>" . form::select_field_from_object('supply_sub_inventory', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_second->supply_sub_inventory, '', $readonly, 'sub_inventory', '', '') . "</td>";
 	 $hidden_stmt .= "<td>" . form::select_field_from_object('supply_locator', locator::find_all_of_subinventory($$class_second->supply_sub_inventory), 'locator_id', 'locator', $$class_second->supply_locator, '', $readonly, 'locator_id', '', '') . "</td>";
    $hidden_stmt .= "<td>" .  $f->text_field('serial_generation', $item->serial_generation) . "</td>";
+   $hidden_stmt .= "<td>" .  $f->text_field('lot_generation', $item->lot_generation) . "</td>";
 	 $hidden_stmt .= "</tr>";
 	 $count = $count + 1;
 	}

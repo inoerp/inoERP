@@ -28,6 +28,7 @@ if (!empty($wip_wo_header_id)) {
  $$class->item_number = $item->item_number;
  $$class->item_description = $item->item_description;
  $$class->serial_generation = $item->serial_generation;
+ $$class->lot_generation = $item->lot_generation;
  $$class->uom_id = $item->uom_id;
  }
 

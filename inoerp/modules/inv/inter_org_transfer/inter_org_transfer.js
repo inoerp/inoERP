@@ -97,7 +97,53 @@ setValFromSelectPage.prototype.setVal = function() {
 };
 
 function beforeSave() {
-beforeSave_serial();
+ var retValue = 1;
+ $('.add_detail_values1').each(function() {
+  if ($(this).children('.serial_generation').val()) {
+   var trClass = '.' + $(this).closest("tr").attr('class').replace(/\s+/g, '.');
+   var qty = +$('#content').find(trClass).find('.quantity').val();
+   var noOfSerialIds = 0;
+   $(this).closest('td').find('.inv_serial_number_id').each(function() {
+    if ($(this).val()) {
+     noOfSerialIds++;
+    }
+   })
+
+   if (noOfSerialIds != qty) {
+    var noOfSerials = 0;
+    $(this).closest('td').find('.serial_number').each(function() {
+     if ($(this).val()) {
+      noOfSerials++;
+     }
+    })
+    if (noOfSerials != qty) {
+     alert('Can\'t save data as no of serial numbers doesnt match quantity');
+     retValue = -10;
+     return false;
+    }
+   }
+  }
+
+});
+
+$('.add_detail_values0').each(function() {
+  if ($(this).children('.lot_generation').val()) {
+   var trClass = '.' + $(this).closest("tr").attr('class').replace(/\s+/g, '.');
+   var qty = +$('#content').find(trClass).find('.quantity').val();
+   var lot_quantity = 0;
+   $(this).closest('tr').find('.lot_quantity').each(function() {
+    lot_quantity += $(this).val();
+   });
+    if (lot_quantity != qty) {
+    alert('Can\'t save data as no of lot quantities doesnt match line quantity');
+    retValue = -10;
+    return false;
+   }
+
+  }
+ });
+
+ return retValue;
 }
 
 $(document).ready(function() {
@@ -251,7 +297,7 @@ $(document).ready(function() {
  classSave.headerClassName = 'inv_interorg_transfer_header';
  classSave.lineClassName = 'inv_interorg_transfer_line';
  classSave.enable_select = true;
- classSave.saveMain();
+ classSave.saveMain(beforeSave);
 
  //add or show line details
  addOrShow_lineDetails('tr.inv_interorg_transfer_line0');
@@ -269,7 +315,7 @@ $(document).ready(function() {
    var field_stmt = '<input class="textfield serial_number" type="text" size="25" readonly name="serial_number[]" >';
    $('#content').find(trClass_d).find('.inv_serial_number_id').replaceWith(field_stmt);
    $('#content').find(trClass_d).find('.serial_number').replaceWith(field_stmt);
-   alert('Item is not serial controlled.\nNo serial informatio \'ll be saved in database');
+//   alert('Item is not serial controlled.\nNo serial information \'ll be saved in database');
    return;
   }
   var itemIdM = $('#content').find(trClass_d).find('.item_id_m').val();
@@ -296,7 +342,7 @@ $(document).ready(function() {
    var field_stmt = '<input class="textfield lot_number" type="text" size="25" readonly name="lot_number[]" >';
    $('#content').find(trClass_d).find('.inv_lot_number_id').replaceWith(field_stmt);
    $('#content').find(trClass_d).find('.lot_number').replaceWith(field_stmt);
-   alert('Item is not lot controlled.\nNo lot informatio \'ll be saved in database');
+//   alert('Item is not lot controlled.\nNo lot information \'ll be saved in database');
    return;
   }
   var itemIdM = $('#content').find(trClass_d).find('.item_id_m').val();
@@ -306,11 +352,11 @@ $(document).ready(function() {
 
   getlotNumber({
    'org_id': $('#from_org_id').val(),
-   'status': 'IN_STORE',
+   'status': 'ACTIVE',
    'item_id_m': itemIdM,
    'trclass': trClass,
-   'current_subinventory_id': $('#content').find(trClass_d).find('.from_subinventory_id').val(),
-   'current_locator_id': $('#content').find(trClass_d).find('.from_locator_id').val(),
+   'subinventory_id': $('#content').find(trClass_d).find('.from_subinventory_id').val(),
+   'locator_id': $('#content').find(trClass_d).find('.from_locator_id').val(),
   });
  });
 

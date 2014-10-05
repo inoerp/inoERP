@@ -23,7 +23,7 @@ function setValFromSelectPage(inv_receipt_header_id, combination, supplier_id, s
  this.shipment_number = shipment_number;
  this.quantity = quantity;
  this.received_quantity = received_quantity;
-  this.serial_generation = serial_generation;
+ this.serial_generation = serial_generation;
  this.lot_generation = lot_generation;
 }
 
@@ -83,8 +83,8 @@ setValFromSelectPage.prototype.setVal = function() {
    $('#content').find(rowClass).find(fieldClass).val(value.data);
   }
  });
- 
-  if (this.serial_generation) {
+
+ if (this.serial_generation) {
   $('#content').find(rowClass).find('.serial_generation').val(this.serial_generation);
   $('#content').find(rowClass).find('.serial_number').attr('required', true).css('background-color', 'pink');
  }
@@ -205,7 +205,8 @@ $(document).ready(function() {
  //add or show linw details
  addOrShow_lineDetails('tr.inv_receipt_line0');
 
- onClick_addDetailLine(1);
+ onClick_addDetailLine(2, '.add_row_detail_img1');
+ onClick_addDetailLine(1, '.add_row_detail_img');
 
  $('#content').on('blur', '.subinventory_id, .locator_id', function() {
   var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
@@ -216,7 +217,7 @@ $(document).ready(function() {
    var field_stmt = '<input class="textfield serial_number" type="text" size="25" readonly name="serial_number[]" >';
    $('#content').find(trClass_d).find('.inv_serial_number_id').replaceWith(field_stmt);
    $('#content').find(trClass_d).find('.serial_number').replaceWith(field_stmt);
-   alert('Item is not serial controlled.\nNo serial informatio \'ll be saved in database');
+//   alert('Item is not serial controlled.\nNo serial informatio \'ll be saved in database');
    return;
   } else if (generation_type != 'PRE_DEFINED') {
    var field_stmt = '<input class="textfield serial_number" type="text" size="25" name="serial_number[]" >';
@@ -238,6 +239,68 @@ $(document).ready(function() {
   }
 
  });
+
+ $('#content').on('blur', '.subinventory_id, .locator_id', function() {
+  var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
+  var trClass_d = '.' + trClass;
+  var generation_type = $('#content').find(trClass_d).find('.lot_generation').val();
+
+  if (!generation_type) {
+   var field_stmt = '<input class="textfield lot_number" type="text" size="25" readonly name="lot_number[]" >';
+   $('#content').find(trClass_d).find('.inv_lot_number_id').replaceWith(field_stmt);
+   $('#content').find(trClass_d).find('.lot_number').replaceWith(field_stmt);
+//   alert('Item is not lot controlled.\nNo lot information \'ll be saved in database');
+   return;
+  }
+  var itemIdM = $('#content').find(trClass_d).find('.item_id_m').val();
+  if (!itemIdM) {
+   return;
+  }
+
+  switch ($('#transaction_type_id').val()) {
+   case '5' :
+    if (generation_type === 'PRE_DEFINED') {
+     $.when(getlotNumber({
+      'org_id': $('#org_id').val(),
+      'status': 'ACTIVE',
+      'item_id_m': itemIdM,
+      'trclass': trClass
+     })).then(function(data, textStatus, jqXHR) {
+      if ($.trim(data) == 'false' || $.trim(data) == 'undefined') {
+       alert('No lot Number Found!\nCheck the subinventory, locator and item number');
+      }
+     });
+    }
+    break;
+
+   case '21' :
+    var subinventory_id = $('#content').find(trClass_d).find('.subinventory_id').val();
+    if (!subinventory_id) {
+     alert('No from subinventory');
+     return;
+    }
+    $.when(getlotNumber({
+     'org_id': $('#org_id').val(),
+     'status': 'ACTIVE',
+     'item_id_m': itemIdM,
+     'trclass': trClass,
+     'subinventory_id': subinventory_id,
+     'locator_id': $('#content').find(trClass_d).find('.locator_id').val(),
+    })).then(function(data, textStatus, jqXHR) {
+     if ($.trim(data) == 'false' || $.trim(data) == 'undefined') {
+      alert('No lot Number Found!\nCheck the subinventory, locator and item number');
+     }
+    });
+    break;
+
+   case 'undefined' :
+   case '' :
+    alert('Enter the transaction type');
+    break;
+  }
+  $('#content').find(trClass_d).find('.lot_number, .inv_lot_number_id').attr('required', true).css('background-color', 'pink');
+ });
+
 
  //all actions
 //Popup for adding receipt lines
