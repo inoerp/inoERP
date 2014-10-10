@@ -13,12 +13,19 @@
 			<div id="form_all"><span class="heading">Standard Operation</span>
 			 <form action=""  method="post" id="bom_standard_operation"  name="bom_standard_operation">
 				<div id ="form_header">
-				 <div id="tabsHeader">
-					<div class="large_shadow_box">
-					 <ul class="column five_column">
+         <div id="tabsHeader">
+         <ul class="tabMain">
+          <li><a href="#tabsHeader-1">Basic Info</a></li>
+          <li><a href="#tabsHeader-2">Notes</a></li>
+          <li><a href="#tabsHeader-3">Attachment</a></li>
+         </ul>
+         <div class="tabContainer">
+          <div id="tabsHeader-1" class="tabContent">
+           <div class="large_shadow_box"> 
+    <ul class="column five_column">
 						<li>
 						 <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_standard_operation_id select_popup clickable">
-							Standard Operation Id : </label><?php echo $f->text_field_ds('bom_standard_operation_id'); ?>
+							Operation Id : </label><?php echo $f->text_field_dr('bom_standard_operation_id'); ?>
 						 <a name="show" class="show bom_standard_operation_id_show">
 							<img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> </li>
 						<li><label>Inventory(1) : </label>
@@ -49,9 +56,29 @@
 						 <?php echo form::status_field($$class->status, $readonly); ?>
 						</li>
 					 </ul>
-					</div>
+           </div>
+          </div>
+          <div id="tabsHeader-2" class="tabContent">
+           <div id="comments">
+            <div id="comment_list">
+             <?php echo!(empty($comments)) ? $comments : ""; ?>
+            </div>
+            <div id ="display_comment_form">
+             <?php
+              $reference_table = 'bom_standard_operation';
+              $reference_id = $$class->bom_standard_operation_id;
+             ?>
+            </div>
+            <div id="new_comment">
+            </div>
+           </div>
+          </div>
+          <div id="tabsHeader-3" class="tabContent">
+           <div> <?php echo ino_attachement($file) ?> </div>
+          </div>
+         </div>
 
-				 </div>
+        </div>
 				</div>
 			 </form>
 			 <div id ="form_line" class="form_line"><span class="heading">Standard Operation Details </span>

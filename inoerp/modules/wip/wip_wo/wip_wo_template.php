@@ -150,9 +150,10 @@
        <div id="tabsLine">
         <ul class="tabMain">
          <li><a href="#tabsLine-1">Routing</a></li>
-         <li><a href="#tabsLine-2">Routing-2</a></li>
-         <li><a href="#tabsLine-3">BOM</a></li>
-         <li><a href="#tabsLine-4">BOM-2</a></li>
+         <li><a href="#tabsLine-2">Routing - 2</a></li>
+         <li><a href="#tabsLine-3">Routing - Data Collection</a></li>
+         <li><a href="#tabsLine-4">BOM</a></li>
+         <li><a href="#tabsLine-5">BOM-2</a></li>
         </ul>
         <div class="tabContainer"> 
          <div id ="form_line" class="form_line">
@@ -187,10 +188,10 @@
                    <li><?php echo form::hidden_field('wip_wo_header_id', $$class->wip_wo_header_id); ?></li>
                   </ul>
                  </td>
-                 <td><?php form::text_field_wid2('wip_wo_routing_line_id'); ?></td>
+                 <td><?php $f->text_field_wid2sr('wip_wo_routing_line_id'); ?></td>
                  <td><?php form::number_field_wid2s('routing_sequence'); ?></td>
                  <td><?php echo form::select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class_second->department_id, 'department_id', $readonly); ?></td>
-                 <td><?php $f->text_field_wid2l('description'); ?></td>
+                 <td><?php $f->text_field_wid2('description'); ?></td>
                  <td><?php echo form::checkBox_field('count_point_cb', $$class_second->count_point_cb); ?></td>
                  <td><?php echo form::checkBox_field('auto_charge_cb', $$class_second->auto_charge_cb); ?></td>
                  <td><?php echo form::checkBox_field('backflush_cb', $$class_second->backflush_cb); ?></td>
@@ -247,14 +248,14 @@
                              <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
                              <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
                              <li><input type="checkbox" name="detail_id_cb" value="<?php echo ($wip_wo_routing_detail->wip_wo_routing_detail_id); ?>">
-                             <?php echo form::hidden_field('wip_wo_routing_line_id', $wip_wo_routing_line->wip_wo_routing_line_id); ?>
-                             <?php echo form::hidden_field('wip_wo_header_id', $$class->wip_wo_header_id); ?></li>
+                              <?php echo form::hidden_field('wip_wo_routing_line_id', $wip_wo_routing_line->wip_wo_routing_line_id); ?>
+                              <?php echo form::hidden_field('wip_wo_header_id', $$class->wip_wo_header_id); ?></li>
                             </ul>
                            </td>
                            <td><?php $f->text_field_wid3sr('wip_wo_routing_detail_id'); ?></td>
-                           <td><?php $f->text_field_wid3sr('resource_sequence'); ?></td>
+                           <td><?php $f->text_field_wid3sm('resource_sequence','seq_number'); ?></td>
                            <td><?php echo $f->select_field_from_object('resource_id', bom_resource::find_all(), 'bom_resource_id', 'resource', $$class_third->resource_id, '', '', 1, $readonly); ?></td>
-                           <td><?php echo $f->select_field_from_object('charge_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_third->charge_basis, '', 'small',  1, $readonly); ?></td>
+                           <td><?php echo $f->select_field_from_object('charge_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_third->charge_basis, '', 'small', 1, $readonly); ?></td>
                            <td><?php form::number_field_wid3s('resource_usage') ?></td>
                            <td><?php echo form::select_field_from_object('resource_schedule', bom_header::bom_schedule_option(), 'option_line_code', 'option_line_value', $$class_third->resource_schedule, '', $readonly, 'default_basis', '', 1); ?></td>
                            <td><?php form::number_field_wid3s('assigned_units') ?></td>
@@ -311,6 +312,7 @@
              </tbody>
             </table>
            </div>
+
            <div id="tabsLine-2" class="tabContent">
             <table class="form_line_data_table">
              <thead> 
@@ -347,12 +349,23 @@
              </tbody>
             </table>
            </div>
+           
+                      <div id="tabsLine-3" class="tabContent">
+            <?php
+             $extra_element_label = 'Data Collection Element';
+             $class_name_object = $wip_wo_routing_line_object;
+             $ef_refer_key = 'wip_wo_routing_line';
+             $ef_refer_value = 'wip_wo_routing_line_id';
+             $tr_class = 'wip_wo_routing';
+             include_once 'modules/sys/extra_field/form/add_field_template.php';
+            ?>
+           </div>
           </form>
          </div>
 
          <div id ="form_line2" class="form_line2">
           <form action=""  method="post" id="wip_wo_bom_line"  name="wip_wo_bom_line">
-           <div id="tabsLine-3" class="tabContent">
+           <div id="tabsLine-4" class="tabContent">
             <table class="form_line_data_table">
              <thead> 
               <tr>
@@ -406,7 +419,7 @@
              </tbody>
             </table>
            </div>
-           <div id="tabsLine-4" class="tabContent">
+           <div id="tabsLine-5" class="tabContent">
             <table class="form_line_data_table">
              <thead> 
               <tr>

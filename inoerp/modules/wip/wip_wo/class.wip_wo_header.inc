@@ -180,7 +180,133 @@
    }
   }
 
+  private function _copy_extra_fields($routing_line_id, $wip_wo_routing_line_id) {
+   global $dbc;
+   $all_extra_fields = sys_extra_field_instance::find_by_referenceKeyValue('bom_routing_line', $routing_line_id);
+   foreach ($all_extra_fields as $ef) {
+    $new_efi = new sys_extra_field_instance();
+    foreach ($ef as $key => $value) {
+     if ($value) {
+      $new_efi->$key = $value;
+     }
+    }
+    $new_efi->sys_extra_field_instance_id = null;
+    $new_efi->reference_key_name = 'wip_wo_routing_line';
+    $new_efi->reference_key_value = $wip_wo_routing_line_id;
+    $new_efi->audit_trial();
+    try {
+     $new_efi->save();
+    } catch (Exception $e) {
+     $dbc->rollback = true;
+     echo "<br> System failed to copy extra field details. Error @ wip_wo_header @@ line " . __LINE__ . $e->getMessage();
+    }
+   }
+  }
+
+  private function _copy_routing() {
+   global $dbc;
+   $wip_wo_header_id2 = $this->wip_wo_header_id;
+   $brl_i = bom_routing_line_v::find_by_itemIdM_OrgId($this->item_id_m, $this->org_id);
+   $routingSeqCount = 0;
+   if (!empty($brl_i)) {
+    foreach ($brl_i as $routing_line) {
+     $routing_line_id = $routing_line->bom_routing_line_id;
+     $brd = new bom_routing_detail();
+     $brd_i = $brd->findBy_parentId($routing_line_id);
+     //insert the routing line in WO_Routing_Line
+     $wip_wo_routing_line = new wip_wo_routing_line();
+     foreach ($wip_wo_routing_line->field_a as $key => $value) {
+      if (!empty($routing_line->$value)) {
+       $wip_wo_routing_line->$value = $routing_line->$value;
+      } else {
+       $wip_wo_routing_line->$value = NULL;
+      }
+     }//end of for line value assignment
+
+     if ($routingSeqCount == 0) {
+      $wip_wo_routing_line->queue_quantity = $this->quantity;
+     }
+     $routingSeqCount++;
+     $wip_wo_routing_line->wip_wo_header_id = $wip_wo_header_id2;
+     $wip_wo_routing_line->audit_trial();
+     try {
+      $wip_wo_routing_line->save();
+      echo "<br> Routing is sucessfully copied !";
+      //copy the extra fields
+      $this->_copy_extra_fields($routing_line_id, $wip_wo_routing_line->wip_wo_routing_line_id);
+      foreach ($brd_i as $routing_details) {
+       $wip_wo_routing_detail = new wip_wo_routing_detail();
+       foreach ($brd->field_a as $key => $value) {
+        if (!empty($routing_details->$value)) {
+         $wip_wo_routing_detail->$value = $routing_details->$value;
+        } else {
+         $wip_wo_routing_detail->$value = NULL;
+        }
+       }//end of for detail line value assignment
+
+       $wip_wo_routing_detail->required_quantity = $this->quantity * $routing_details->resource_usage;
+       $wip_wo_routing_detail->wip_wo_header_id = $wip_wo_header_id2;
+       $wip_wo_routing_detail->wip_wo_routing_line_id = $wip_wo_routing_line->wip_wo_routing_line_id;
+       $wip_wo_routing_detail->audit_trial();
+       try {
+        $wip_wo_routing_detail->save();
+        echo "<br> Routing details are sucessfully copied !";
+       } catch (Exception $e) {
+        $dbc->rollback = true;
+        echo "<br> System failed to copy the Routing Details!" . __LINE__ . $e->getMessage();
+       }
+      }
+     } catch (Exception $e) {
+      $dbc->rollback = true;
+      echo "<br> System failed to copy the Routing!" . __LINE__ . $e->getMessage();
+     }
+    }//end of each routing line insertion
+   }
+   $this->routing_exploded_cb = 1;
+  }
+
+  private function _copy_bom() {
+   $wip_wo_header_id1 = $this->wip_wo_header_id;
+   $bol_i = bom_line_v::find_by_itemIdM_OrgId($this->item_id_m, $this->org_id);
+//    pa($bol_i);
+   if (!empty($bol_i)) {
+    foreach ($bol_i as $bom_line) {
+     $wip_wo_bom = new wip_wo_bom();
+//		$routing_sequence_value = 10;
+     foreach ($wip_wo_bom->field_a as $key => $value) {
+      if (!empty($bom_line->$value)) {
+       $wip_wo_bom->$value = $bom_line->$value;
+       if ($value == 'routing_sequence') {
+        $routing_of_bom = bom_routing_line_v::find_by_itemIdM_OrgId($this->item_id_m, $this->org_id);
+        foreach ($routing_of_bom as $routing_lines) {
+         if ($routing_lines->bom_routing_line_id == $bom_line->$value) {
+          $routing_sequence_value = $routing_lines->routing_sequence;
+         }
+        }
+        if (!empty($routing_sequence_value)) {
+         $wip_wo_bom->$value = $routing_sequence_value;
+        }
+       }
+      } else {
+       $wip_wo_bom->$value = NULL;
+      }
+     }
+     $wip_wo_bom->required_quantity = $bom_line->usage_quantity * $this->quantity;
+     $wip_wo_bom->wip_wo_header_id = $wip_wo_header_id1;
+     $wip_wo_bom->audit_trial();
+     try {
+      $wip_wo_bom->save();
+      $this->bom_exploded_cb = 1;
+      echo "<br> BOM is sucessfully copied";
+     } catch (Exception $e) {
+      echo "<br> System failed to copy the BOM!" . __LINE__ . $e->getMessage();
+     }
+    }
+   }
+  }
+
   public function _after_save() {
+   global $dbc;
    if ((!empty($this->wip_wo_header_id)) && empty($this->wo_number)) {
     $wip_wo_header_id = $this->wip_wo_header_id;
     $org_id = $this->org_id;
@@ -190,108 +316,21 @@
 
    //copy the BOM
    if ((!empty($this->item_id_m)) && (empty($this->bom_exploded_cb))) {
-    $wip_wo_header_id1 = $this->wip_wo_header_id;
-    $bol_i = bom_line_v::find_by_itemIdM_OrgId($this->item_id_m, $this->org_id);
-//    pa($bol_i);
-    if (!empty($bol_i)) {
-     foreach ($bol_i as $bom_line) {
-      $wip_wo_bom = new wip_wo_bom();
-//		$routing_sequence_value = 10;
-      foreach ($wip_wo_bom->field_a as $key => $value) {
-       if (!empty($bom_line->$value)) {
-        $wip_wo_bom->$value = $bom_line->$value;
-        if ($value == 'routing_sequence') {
-         $routing_of_bom = bom_routing_line_v::find_by_itemIdM_OrgId($this->item_id_m, $this->org_id);
-         foreach ($routing_of_bom as $routing_lines) {
-          if ($routing_lines->bom_routing_line_id == $bom_line->$value) {
-           $routing_sequence_value = $routing_lines->routing_sequence;
-          }
-         }
-         if (!empty($routing_sequence_value)) {
-          $wip_wo_bom->$value = $routing_sequence_value;
-         }
-        }
-       } else {
-        $wip_wo_bom->$value = NULL;
-       }
-      }
-      $wip_wo_bom->required_quantity = $bom_line->usage_quantity * $this->quantity;
-      $wip_wo_bom->wip_wo_header_id = $wip_wo_header_id1;
-      $wip_wo_bom->audit_trial();
-      try {
-       $wip_wo_bom->save();
-       $this->bom_exploded_cb = 1;
-       $this->save();
-       echo "<br> BOM is sucessfully copied";
-      } catch (Exception $e) {
-       echo "<br> System failed to copy the BOM!" . __LINE__ . $e->getMessage();
-      }
-     }
-    }
+    $this->_copy_bom();
    }
 
-   //end of Copy BOM
    //copy the Routing
    if ((!empty($this->item_id_m)) && (empty($this->routing_exploded_cb))) {
-    $wip_wo_header_id2 = $this->wip_wo_header_id;
-    $brl_i = bom_routing_line_v::find_by_itemIdM_OrgId($this->item_id_m, $this->org_id);
-
-    $routingSeqCount = 0;
-    if (!empty($brl_i)) {
-     foreach ($brl_i as $routing_line) {
-      $routing_line_id = $routing_line->bom_routing_line_id;
-      $brd = new bom_routing_detail();
-      $brd_i = $brd->findBy_parentId($routing_line_id);
-      //insert the routing line in WO_Routing_Line
-      $wip_wo_routing_line = new wip_wo_routing_line();
-      foreach ($wip_wo_routing_line->field_a as $key => $value) {
-       if (!empty($routing_line->$value)) {
-        $wip_wo_routing_line->$value = $routing_line->$value;
-       } else {
-        $wip_wo_routing_line->$value = NULL;
-       }
-      }//end of for line value assignment
-
-      if ($routingSeqCount == 0) {
-       $wip_wo_routing_line->queue_quantity = $this->quantity;
-      }
-      $routingSeqCount++;
-      $wip_wo_routing_line->wip_wo_header_id = $wip_wo_header_id2;
-      $wip_wo_routing_line->audit_trial();
-      try {
-       $wip_wo_routing_line->save();
-       echo "<br> Routing is sucessfully copied !";
-       foreach ($brd_i as $routing_details) {
-        $wip_wo_routing_detail = new wip_wo_routing_detail();
-        foreach ($brd->field_a as $key => $value) {
-         if (!empty($routing_details->$value)) {
-          $wip_wo_routing_detail->$value = $routing_details->$value;
-         } else {
-          $wip_wo_routing_detail->$value = NULL;
-         }
-        }//end of for detail line value assignment
-
-        $wip_wo_routing_detail->required_quantity = $this->quantity * $routing_details->resource_usage;
-        $wip_wo_routing_detail->wip_wo_header_id = $wip_wo_header_id2;
-        $wip_wo_routing_detail->wip_wo_routing_line_id = $wip_wo_routing_line->wip_wo_routing_line_id;
-        $wip_wo_routing_detail->audit_trial();
-        try {
-         $wip_wo_routing_detail->save();
-         echo "<br> Routing details are sucessfully copied !";
-        } catch (Exception $e) {
-         echo "<br> System failed to copy the Routing Details!" . __LINE__ . $e->getMessage();
-        }
-       }
-      } catch (Exception $e) {
-       echo "<br> System failed to copy the Routing!" . __LINE__ . $e->getMessage();
-      }
-     }//end of each routing line insertion
-    }
-
-
-    $this->routing_exploded_cb = 1;
-    $this->save();
+    $this->_copy_routing();
    }//end of routing copy
+   
+   //save again
+   try {
+    $this->save();
+   } catch (Exception $e) {
+    $dbc->rollback = true;
+    echo "<br> Error @ wip_wo_header @@ Line " . __LINE__ . $e->getMessage();
+   }
   }
 
   private function update_woNumber($wip_wo_header_id, $wo_number) {

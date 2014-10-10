@@ -15,11 +15,11 @@ class fp_forecast_line extends dbObject {
 		 'start_date',
 		 'end_date',
 		 'no_of_bucket',
-		 'current',
+//		 'current',
 		 'original',
 		 'created_by',
 		 'creation_date',
-		 'total_current',
+//		 'total_current',
 		 'total_original',
 		 'fp_consumption_id',
 		 'last_update_by',
@@ -42,7 +42,9 @@ class fp_forecast_line extends dbObject {
   public $fields_inForm_notInDataBase = [
 		 'item_description',
 		 "item_number",
-			'uom_id'
+			'uom_id',
+   'current',
+   'total_current'
  ];
  public $fp_forecast_line_id;
  public $fp_forecast_header_id;

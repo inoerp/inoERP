@@ -16,12 +16,14 @@
       ?> 
       <!--    End of place for showing error messages-->
 
-      <form action=""  method="post" id="wip_move_transaction"  name="wip_move_transaction"><span class="heading"> WIP Move Transaction </span>
+      <form action=""  method="post" id="wip_move_transaction"  name="wip_move_transaction"><span class="heading"> Work Order Work Bench </span>
        <div id ="form_header">
         <div id="tabsHeader">
          <ul class="tabMain">
           <li><a href="#tabsHeader-1">Basic Info</a></li>
           <li><a href="#tabsHeader-2">Tracking</a></li>
+          <li><a href="#tabsHeader-3">Notes</a></li>
+          <li><a href="#tabsHeader-4">Attachments</a></li>
          </ul>
          <div class="tabContainer"> 
           <div id="tabsHeader-1" class="tabContent">
@@ -59,6 +61,24 @@
              <li><label>Line Number : </label><?php echo form::text_field_d('sales_order_line_id'); ?></li>
             </ul>
            </div>
+          </div>
+          <div id="tabsHeader-3" class="tabContent">
+           <div id="comments">
+            <div id="comment_list">
+             <?php echo!(empty($comments)) ? $comments : ""; ?>
+            </div>
+            <div id ="display_comment_form">
+             <?php
+              $reference_table = 'wip_move_transaction';
+              $reference_id = $$class->wip_move_transaction_id;
+             ?>
+            </div>
+            <div id="new_comment">
+            </div>
+           </div>
+          </div>
+          <div id="tabsHeader-4" class="tabContent">
+           <div> <?php echo ino_attachement($file) ?> </div>
           </div>
          </div>
         </div>

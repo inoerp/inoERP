@@ -288,10 +288,10 @@
                   <fieldset class="form_detail_data_fs"><legend>Serial</legend>
                    <div class="tabsDetail">
                     <ul class="tabMain">
-                     <li class="tabLink"><a href="#tabsDetail-1-1"> Numbers</a></li>
+                     <li class="tabLink"><a href="#tabsDetail-2-1"> Numbers</a></li>
                     </ul>
                     <div class="tabContainer">
-                     <div id="tabsDetail-1-1" class="tabContent">
+                     <div id="tabsDetail-2-1" class="tabContent">
                       <table class="form form_detail_data_table detail">
                        <thead>
                         <tr>

@@ -8,9 +8,11 @@
      <div id="bom_routing_divId">
       <!--    START OF FORM HEADER-->
       <div class="error"></div><div id="loading"></div>
-      <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
+      <?php
+       echo (!empty($show_message)) ? $show_message : "";
+       $f = new inoform();
+      ?> 
       <!--    End of place for showing error messages-->
-
       <div id ="form_header"><span class="heading">Routing </span>
        <form action=""  method="bom_routingst" id="bom_routing_header"  name="bom_routing_header">
         <div id="tabsHeader">
@@ -85,6 +87,7 @@
           <li><a href="#tabsLine-1">Basic</a></li>
           <li><a href="#tabsLine-2">WIP</a></li>
           <li><a href="#tabsLine-3">Effectivity</a></li>
+          <li><a href="#tabsLine-4">Data Collection</a></li>
          </ul>
          <div class="tabContainer">
           <div id="tabsLine-1" class="tabContent">
@@ -92,12 +95,13 @@
             <thead> 
              <tr>
               <th>Action</th>
+              <th>Seq #</th>
               <th>Line Id</th>
               <th>Routing Seq</th>
               <th>Standard Op</th>
               <th>Referenced</th>
               <th>Department</th>
-              <th>Description</th>
+
               <th>Operation Details</th>
              </tr>
             </thead>
@@ -115,13 +119,12 @@
                   <li><?php echo form::hidden_field('bom_routing_header_id', $bom_routing_header->bom_routing_header_id); ?></li>
                  </ul>
                 </td>
-
+                <td><?php $f->seq_field_d($count) ?></td>
                 <td><?php form::text_field_wid2sr('bom_routing_line_id'); ?></td>
                 <td><?php $f->text_field_d2s('routing_sequence', 'lines_number'); ?></td>
                 <td><?php echo form::select_field_from_object('standard_operation_id', bom_standard_operation::find_all(), 'bom_standard_operation_id', 'standard_operation', $$class_second->standard_operation_id, '', $readonly); ?></td>
                 <td><?php echo form::checkBox_field('referenced_cb', $$class_second->referenced_cb); ?></td>
                 <td><?php echo form::select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class_second->department_id, '', $readonly, '', '', 1); ?></td>
-                <td><?php form::text_field_wid2('description'); ?></td>
                 <td class="add_detail_values"><img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
                  <!--</td></tr>-->	
                  <?php
@@ -204,8 +207,6 @@
                      </div>
                     </div>
                    </div>
-
-
                   </fieldset>
 
                  </div>
@@ -222,6 +223,8 @@
            <table class="form_line_data_table">
             <thead> 
              <tr>
+              <th>Seq #</th>
+              <th>Description</th>
               <th>Count Point</th>
               <th>Auto Charge</th>
               <th>Back flush</th>
@@ -235,6 +238,8 @@
               foreach ($bom_routing_line_object as $bom_routing_line) {
                ?>         
                <tr class="bom_routing_line<?php echo $count ?>">
+                <td><?php $f->seq_field_d($count) ?></td>
+                <td><?php form::text_field_wid2('description'); ?></td>
                 <td><?php echo form::checkBox_field('count_point_cb', $$class_second->count_point_cb); ?></td>
                 <td><?php echo form::checkBox_field('auto_charge_cb', $$class_second->auto_charge_cb); ?></td>
                 <td><?php echo form::checkBox_field('backflush_cb', $$class_second->backflush_cb); ?></td>
@@ -253,6 +258,7 @@
            <table class="form_line_data_table">
             <thead> 
              <tr>
+              <th>Seq #</th>
               <th>Start Date</th>
               <th>End Date</th>
               <th>ECO Implemented</th>
@@ -269,6 +275,7 @@
               foreach ($bom_routing_line_object as $bom_routing_line) {
                ?>         
                <tr class="bom_routing_line<?php echo $count ?>">
+                <td><?php $f->seq_field_d($count) ?></td>
                 <td><?php echo form::date_fieldAnyDay('effective_start_date', $$class_second->effective_start_date); ?></td>
                 <td><?php echo form::date_fieldAnyDay('effective_end_date', $$class_second->effective_end_date); ?></td>
                 <td><?php echo form::checkBox_field('eco_implemented_cb', $$class_second->eco_implemented_cb, 'eco_implemented_cb', $readonly); ?></td>
@@ -285,6 +292,18 @@
             </tbody>
             <!--                  Showing a blank form for new entry-->
            </table>
+          </div>
+
+          <div id="tabsLine-4" class="tabContent">
+           <?php
+            $extra_element_label = 'Data Collection Element';
+            $class_name_object = $bom_routing_line_object;
+            $ef_refer_key = 'bom_routing_line';
+            $ef_refer_value = 'bom_routing_line_id';
+            $tr_class= 'bom_routing_line';
+            include_once 'modules/sys/extra_field/form/add_field_template.php';
+           ?>
+
           </div>
          </div>
         </div>

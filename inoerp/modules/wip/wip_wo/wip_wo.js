@@ -191,7 +191,7 @@ $(document).ready(function() {
 	addNewRow.add_new_row();
  });
 
- onClick_addDetailLine('tr.wip_wo_routing_detail0-0', 'tbody.form_data_detail_tbody', 2);
+ onClick_addDetailLine(2);
 
 
  //Get the wip_wo_id on refresh button click

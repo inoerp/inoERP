@@ -195,7 +195,7 @@ $(document).ready(function() {
  //add or show line details
  addOrShow_lineDetails('tr.inv_transaction_line0');
 
- onClick_addDetailLine(2, '.add_row_detail_img1');
+ onClick_addDetailLine(1, '.add_row_detail_img1');
  onClick_addDetailLine(1, '.add_row_detail_img');
 
 

@@ -46,6 +46,10 @@
    'routing_sequence',
    'department_id'
   ];
+  public $fields_inForm_notInDataBase = [
+   "extra_field_name",
+   'extra_field_name_existing'
+  ];
   public $bom_routing_line_id;
   public $bom_routing_header_id;
   public $routing_sequence;
@@ -72,6 +76,8 @@
   public $last_update_date;
   public $time;
   public $msg;
+  public $extra_field_name;
+  public $extra_field_name_existing;
 
   public function _before_save() {
    if (!empty($this->bom_routing_header_id)) {
@@ -81,6 +87,10 @@
      return -90;
     }
    }
+  }
+
+   public function _after_save() {
+   $this->_update_extra_field('bom_routing_line',$this->bom_routing_line_id);
   }
 
   public static function find_by_routing_headerId($routing_header_id) {

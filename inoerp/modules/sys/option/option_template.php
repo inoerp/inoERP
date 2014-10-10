@@ -18,13 +18,10 @@
 				<div class="tabContainer no_tab">
 				 <ul class="column five_column">
 					<li>
-					 <label><a href="find_option.php" class="popup">
-						 <img src="<?php echo HOME_URL; ?>themes/images/serach.png"/></a>
+					 <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="option_header_id select_popup clickable">
 						Option Id : </label>
-					 <?php form::number_field_drs('option_header_id'); ?>
-					 <a name="show" href="form.php?class_name=option_header&option_header_id=<?php echo $$class->option_header_id ;?>" 
-							class="show option_header_id">
-						<img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+					 <?php $f->text_field_dr('option_header_id'); ?>
+            <a name="show" href="form.php?class_name=option_header" class="show option_header_id">	<img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
 					</li>
 					<li><label>Option Type* : </label>
 					 <?php form::text_field_dm('option_type'); ?>

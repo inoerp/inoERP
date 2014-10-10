@@ -73,11 +73,16 @@ class wip_wo_routing_line extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
+ 
+ public function _after_save(){
+     //extra field update
+   $this->_update_extra_field('wip_wo_routing_line',$this->wip_wo_routing_line_id);
+ }
 
  public static function find_by_wip_wo_headerId($wi_wo_header_id) {
 	$sql = "SELECT * FROM " .
 					self::$table_name .
-					" where wip_wo_header_id= '{$wi_wo_header_id}' ";
+					" where wip_wo_header_id= '{$wi_wo_header_id}' ORDER BY routing_sequence ASC ";
 	$result = self::find_by_sql($sql);
 	return $result;
  }
