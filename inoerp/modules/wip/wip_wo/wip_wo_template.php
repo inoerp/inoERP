@@ -256,7 +256,7 @@
                            <td><?php $f->text_field_wid3sm('resource_sequence','seq_number'); ?></td>
                            <td><?php echo $f->select_field_from_object('resource_id', bom_resource::find_all(), 'bom_resource_id', 'resource', $$class_third->resource_id, '', '', 1, $readonly); ?></td>
                            <td><?php echo $f->select_field_from_object('charge_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_third->charge_basis, '', 'small', 1, $readonly); ?></td>
-                           <td><?php form::number_field_wid3s('resource_usage') ?></td>
+                           <td><?php form::number_field_wid3sm('resource_usage') ?></td>
                            <td><?php echo form::select_field_from_object('resource_schedule', bom_header::bom_schedule_option(), 'option_line_code', 'option_line_value', $$class_third->resource_schedule, '', $readonly, 'default_basis', '', 1); ?></td>
                            <td><?php form::number_field_wid3s('assigned_units') ?></td>
                            <td><?php echo form::checkBox_field('standard_rate_cb', $$class_third->standard_rate_cb); ?></td>

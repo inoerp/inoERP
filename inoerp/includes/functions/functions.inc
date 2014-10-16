@@ -252,7 +252,7 @@
     $current_path .= '?mode=' . $_GET['mode'];
    }
   } else if (!empty($_GET['mode'])) {
-      if (is_array($_GET['mode'])) {
+   if (is_array($_GET['mode'])) {
     $current_path .= '&mode=' . $_GET['mode'][0];
    } else {
     $current_path .= '&mode=' . $_GET['mode'];
@@ -301,18 +301,39 @@
   } elseif ($date == '0000-00-00') {
    return NUll;
   } else {
-   return date($format, strtotime($date));
+   $date = new DateTime($date);
+   return $date->format('Y-m-d');
+  }
+ }
+
+ function ino_dateTime($date, $format = 'Y-m-d H:m:s') {
+  if (empty($date)) {
+   return NUll;
+  } elseif ($date == '0000-00-00') {
+   return NUll;
+  } else {
+   $date = new DateTime($date);
+   return $date->format('Y-m-d H:i:s');
   }
  }
 
  function current_time($only_date = "") {
-  $time = time();
+  $date = new DateTime('NOW');
   if ($only_date) {
-   return strftime("%Y-%m-%d", $time);
+   return $date->format('Y-m-d');
   } else {
-   return strftime("%Y-%m-%d %H:%M:%S", $time);
+   return $date->format('Y-m-d H:i:s');
   }
  }
+
+// function current_time($only_date = "") {
+//  $time = time();
+//  if ($only_date) {
+//   return strftime("Y-m-d", $time);
+//  } else {
+//   return strftime("Y-m-d H:m:s", $time);
+//  }
+// }
 
  function ino_eval($string) {
   ob_start();
@@ -716,13 +737,40 @@
  }
 
  function search_minmax_planner() {
-  $f = new inoform();
+  global $f;
   return $f->select_field_from_object('fp_minmax_header_id', fp_minmax_header::find_all(), 'fp_minmax_header_id', 'plan_name', '', 'fp_minmax_header_id', '', 1);
  }
 
  function search_org_name() {
   global $f;
   $stmt = $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', '', 'org_id', '', '', '', '', 1);
+  return $stmt;
+ }
+ 
+  function search_forecast_group() {
+  global $f;
+  $stmt = $f->select_field_from_object('fp_forecast_group_id', fp_forecast_group::find_all(), 'fp_forecast_group_id', 'forecast_group', '','fp_forecast_group_id', '', 1);
+  return $stmt;
+ }
+
+ function search_consume_orders() {
+  global $f;
+  $stmt = $f->select_field_from_array('consume_orders', fp_forecast_consumption::$consume_orders_a, '', 'consume_orders');
+  return $stmt;
+ }
+ 
+  function search_offset_days() {
+  global $f; $f = new inoform();
+  $stmt = $f->number_field('offset_days','');
+  return $stmt;
+ }
+
+ function search_date() {
+  global $f;
+
+  $stmt = $f->date_fieldAnyDay('user_entered_date','');
+  $stmt .= '&nbsp;&nbsp; <label> Use System Date </label>';
+  $stmt .=  $f->checkBox_field('use_sys_date_cb', '');
   return $stmt;
  }
 
@@ -760,13 +808,13 @@
   return $stmt;
  }
 
-  function search_quantity() {
+ function search_quantity() {
   $stmt = '<input id="quantity" class="textfield number quantity" '
     . 'type="number" title="" placeholder="Number" size="20" maxlength="256" value="" '
     . 'name="quantity" >';
   return $stmt;
  }
- 
+
  function search_item_id_from() {
   $stmt = '<input id="item_id_from" class="textfield select_item_id item_id_from" '
     . 'type="text" title="" placeholder="From Item Id" size="20" maxlength="256" value="" '
@@ -804,19 +852,19 @@ name='adjustment_ac_id'>
  }
 
  function search_item_number_from() {
-  
+
   $stmt = '<input id="item_number_from" class="textfield select_item_number item_number item_number_from" '
     . 'type="text" title="" placeholder="From Item" size="20" maxlength="256" value="" '
     . 'name="from_item_number" >';
-  $stmt .= "<img src='". HOME_URL ."themes/images/serach.png' class='select_item_number select_popup clickable'>";
+  $stmt .= "<img src='" . HOME_URL . "themes/images/serach.png' class='select_item_number select_popup clickable'>";
   return $stmt;
  }
 
  function search_item_number_to() {
-   $stmt = '<input id="item_number_to" class="textfield select_item_number item_number item_number_to" '
+  $stmt = '<input id="item_number_to" class="textfield select_item_number item_number item_number_to" '
     . 'type="text" title="" placeholder="To Item" size="20" maxlength="256" value="" '
     . 'name="to_item_number" >';
-  $stmt .= "<img src='". HOME_URL ."themes/images/serach.png' class='select_item_number select_popup clickable'>";
+  $stmt .= "<img src='" . HOME_URL . "themes/images/serach.png' class='select_item_number select_popup clickable'>";
   return $stmt;
  }
 
@@ -830,11 +878,11 @@ name='adjustment_ac_id'>
   }
  }
 
- function ino_attachement($file) {
+ function ino_attachement($file, $file_name = 'attachments') {
   $stmt = '<div id="show_attachment" class="show_attachment">
 						 <div id="file_upload_form">
 							<ul class="inRow asperWidth">
-							 <li><input type="file" id="attachments" class="attachments" name="attachments[]" multiple/></li>
+							 <li><input type="file" id="attachments" class="attachments" name="' . $file_name . '[]" multiple/></li>
 							 <li> <input type="button" value="Attach" form="file_upload" name="attach_submit" id="attach_submit" class="submit button"></li>';
   $stmt.='<li class="show_loading_small"><img alt="Loading..." src="' . HOME_URL . 'themes/images/small_loading.gif"/></li>
 							</ul>
@@ -989,15 +1037,23 @@ name='adjustment_ac_id'>
   header("Content-Transfer-Encoding: binary");
  }
 
- 
- function translation ($string, $namespace = null, array $values = null)
-{
-    // Redefine arguments
-    $string = (string) $string;
+ function translation($string, $namespace = null, array $values = null) {
+  // Redefine arguments
+  $string = (string) $string;
 
-    // Find translation
-    
-    // Return string
-    return empty($values) ? $string : strtr($string, $values);
-}
+  // Find translation
+  // Return string
+  return empty($values) ? $string : strtr($string, $values);
+ }
+ 
+  function next_monday($date_p) {
+  $date = new DateTime($date_p);
+  if ($date->format('D') == 'Mon') {
+   return $date->format('Y-m-d');
+  } else {
+   $date = new DateTime("next monday $date_p");
+   return $date->format('Y-m-d');
+  }
+ }
+
 ?>

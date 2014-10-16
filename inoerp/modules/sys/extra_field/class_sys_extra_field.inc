@@ -134,10 +134,10 @@
    $sql = " CREATE TABLE IF NOT EXISTS " . $table_name;
    $sql .=" ( ";
    $sql .="  $primary_column int(12) NOT NULL AUTO_INCREMENT, ";
-   $sql .="  referece_type varchar(30) DEFAULT NULL , ";
-   $sql .="  referece_entity varchar(50) DEFAULT NULL , ";
-   $sql .="  referece_key_name varchar(50) DEFAULT NULL , ";
-   $sql .="  referece_key_value int(12) DEFAULT NULL , ";
+   $sql .="  reference_type varchar(30) DEFAULT NULL , ";
+   $sql .="  reference_entity varchar(50) DEFAULT NULL , ";
+   $sql .="  reference_key_name varchar(50) DEFAULT NULL , ";
+   $sql .="  reference_key_value int(12) DEFAULT NULL , ";
    $sql .="  created_by varchar(256) NOT NULL , ";
    $sql .="  creation_date date NOT NULL , ";
    $sql .="  last_update_by varchar(256) NOT NULL , ";
@@ -151,7 +151,7 @@
    $sql .=" DEFAULT NULL ";
    $sql .=" , ";
    $sql .= " PRIMARY KEY (`$primary_column`) , ";
-   $sql .= " UNIQUE KEY  `extra_field_value` (`$value_column`, `referece_key_name`,`referece_key_value`  ) ";
+   $sql .= " UNIQUE KEY  `extra_field_value` (`$value_column`, `reference_key_name`,`reference_key_value`  ) ";
    $sql .=" ) ";
    $sql .="ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 //	 echo '$sql is ' . $sql;

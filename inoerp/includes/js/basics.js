@@ -1,7 +1,3 @@
-//homePageUrl = 'http://www.inoideas.com/inoerp/';
-//move to animated block
-
-
 function animateCycle()
 {
  var interval = null;
@@ -213,7 +209,12 @@ function remove_row() {
    $("tr." + newTrclass).remove();
   } else if (($("tr." + newTrclass).closest('form').find('tbody.form_data_detail_tbody').first().children().filter('tr').length) > 1) {
    $("tr." + newTrclass).remove();
+  } else if (($("tr." + newTrclass).closest('form').find('tbody.form_data_detail_tbody_sn').first().children().filter('tr').length) > 1) {
+   $("tr." + newTrclass).remove();
+  } else if (($("tr." + newTrclass).closest('form').find('tbody.form_data_detail_tbody_ln').first().children().filter('tr').length) > 1) {
+   $("tr." + newTrclass).remove();
   }
+
  });
 }
 //function lineDetail_QuantityValidation
@@ -262,10 +263,13 @@ function new_searchCriteria_onClick(json_url) {
 //add a new line on clickint add a new detail line
 var detailObjectCount = 2001;
 var dateCount = 30000;
-function onClick_addDetailLine(noOfTabs) {
+function onClick_addDetailLine(noOfTabs, add_row_detail_img, tabsDetailName) {
+ add_row_detail_img = (typeof add_row_detail_img !== 'undefined') ? add_row_detail_img : '.add_row_detail_img';
+ tabsDetailName = (typeof tabsDetailName !== 'undefined') ? tabsDetailName : 'tabsDetail';
+
  var highest_seq_num = 1;
  var lastDetailNumber = 1;
- $("#content").on("click", ".add_row_detail_img", function() {
+ $("#content").on("click", add_row_detail_img, function() {
   var trClass = '.' + $(this).closest("tr").attr('class').replace(/\s+/g, '.');
   var trClass_wod = trClass.replace(/tr\./g, '');
   trClass_wod = trClass_wod.replace(/\./g, '');
@@ -290,9 +294,11 @@ function onClick_addDetailLine(noOfTabs) {
    var startingTab = $("tr[class*='" + trClass_wod + "']").first().closest('.tabContent').attr('id');
    var startingTabArray = startingTab.split('-');
    var startingTabLastNumber = startingTabArray[2];
+   var startingTabFirstNumber = startingTabArray[1];
    var tabCount = 1;
    do {
-    $("#tabsDetail-" + tabCount + "-" + startingTabLastNumber).find(trClass).clone().attr("class", "new_object" + detailObjectCount).appendTo($(closetLineRowClass + " #tabsDetail-" + tabCount + "-" + startingTabLastNumber + " " + tbodyClass));
+    $("#" + tabsDetailName + "-" + startingTabFirstNumber + "-" + startingTabLastNumber).find(trClass).clone().attr("class", "new_object" + detailObjectCount).appendTo($(closetLineRowClass + " #" + tabsDetailName + "-" + startingTabFirstNumber + "-" + startingTabLastNumber + " " + tbodyClass));
+    startingTabFirstNumber++;
     tabCount++;
    } while (tabCount <= noOfTabs);
   } else {
@@ -339,25 +345,24 @@ function onClick_add_new_row(trClass, tbodyClass, noOfTabs, divClassToBeCopied) 
 //toggle detail lines if exists else create a new detail line
 var objectDetailTabCount = 2;
 var detailObjectRowCount = 600;
-function addOrShow_lineDetails(trClassToCopy) {
+function addOrShow_lineDetails() {
  var highest_seq_num = 0;
  if ($('.form_data_detail_tbody').find('.detail_seq_number').last().val()) {
   highest_seq_num = $('.form_data_detail_tbody').find('.detail_seq_number').last().val();
  }
  var nextDetailSeqNumber_seq = (+highest_seq_num) + 1;
  $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function() {
+  var tabID = '#' + $(this).closest('.tabContent').attr('id');
+  var tdClass = '.' + $(this).closest('td').attr('class').replace(/tr\./g, '');
   var detailExists = $(this).closest("td").find(".form_detail_data_fs").length;
   if (detailExists > 0) {
    $(this).closest("td").find(".form_detail_data_fs").toggle();
   } else {
-//	 var lineNumber = $(this).closest('tr').find('.lines_number').val();
-//	 var detailNumber = lineNumber + '.1';
    var detailNumber = 1;
-   var elementToBeCloned = $(trClassToCopy + " .class_detail_form");
+   var elementToBeCloned = $('#content').find(tabID).find(tdClass).find('.class_detail_form').first();
    var clonedElement = elementToBeCloned.clone();
    var firstTrClass = '.' + $(clonedElement).find('tbody').find("tr").first().attr('class').replace(/tr\./g, '');
-   ;
-   clonedElement.find("tr").not(firstTrClass).remove();
+   clonedElement.find("tr").not(':first-child').not(firstTrClass).remove();
    $(clonedElement).find('tbody tr').attr("class", "new_object" + detailObjectRowCount);
    clonedElement.find("input").not('.hidden').each(function() {
     $(this).val("");
@@ -571,7 +576,7 @@ function getExchangeRate(options) {
   json_url: 'modules/gl/currency_conversion/json_currency_conversion.php',
   rate_type: $('#exchange_rate_type').val(),
   from_currency: $('#currency').val(),
-  to_currency: $('#document_currency').val() ? $('#document_currency').val() : $('#doc_currency').val(),
+  to_currency: $('#document_currency').val() ? $('#document_currency').val() : $('#doc_currency').val()
  };
  var settings = $.extend({}, defaults, options);
 
@@ -583,7 +588,7 @@ function getExchangeRate(options) {
    rate_type: settings.rate_type,
    from_currency: settings.from_currency,
    to_currency: settings.to_currency,
-   find_exchange_rate: 1,
+   find_exchange_rate: 1
   },
   success: function(result) {
    if (result) {
@@ -990,7 +995,7 @@ function getDocumentTypeDetails(sd_document_type_id, json_url) {
   dataType: 'json',
   data: {
    sd_document_type_id: sd_document_type_id,
-   find_document_detail: 1,
+   find_document_detail: 1
   },
   success: function(result) {
    $.each(result, function(key, value) {
@@ -1074,7 +1079,7 @@ function getBUDetails(bu_org_id, json_url) {
   dataType: 'json',
   data: {
    bu_org_id: bu_org_id,
-   find_bu_details: 1,
+   find_bu_details: 1
   },
   success: function(result) {
    $.each(result, function(key, value) {
@@ -1126,7 +1131,7 @@ function getLedgerDetails(gl_ledger_id, json_url) {
   dataType: 'json',
   data: {
    gl_ledger_id: gl_ledger_id,
-   find_ledger_details: 1,
+   find_ledger_details: 1
   },
   success: function(result) {
    $.each(result, function(key, value) {
@@ -1172,7 +1177,7 @@ function getARTransactionTypeDetails(ar_transaction_type_id, json_url) {
   dataType: 'json',
   data: {
    ar_transaction_type_id: ar_transaction_type_id,
-   find_ar_transaction_type_detail: 1,
+   find_ar_transaction_type_detail: 1
   },
   success: function(result) {
    $.each(result, function(key, value) {
@@ -1211,7 +1216,7 @@ function getARTransactionTypeDetails(ar_transaction_type_id, json_url) {
 
 function getOnhandDetails(options) {
  var defaults = {
-  json_url: 'modules/inv/onhand/json_onhand.php',
+  json_url: 'modules/inv/onhand/json_onhand.php'
  };
  var settings = $.extend({}, defaults, options);
 
@@ -1224,7 +1229,7 @@ function getOnhandDetails(options) {
    org_id: settings.org_id,
    subinventory_id: settings.subinventory_id,
    locator_id: settings.locator_id,
-   find_onhand_details: 1,
+   find_onhand_details: 1
   },
   success: function(result) {
    if (result) {
@@ -1264,7 +1269,7 @@ function get_ar_receipt_source_details(bu_org_id, json_url) {
   dataType: 'json',
   data: {
    bu_org_id: bu_org_id,
-   find_receipt_source_details: 1,
+   find_receipt_source_details: 1
   },
   success: function(result) {
    $.each(result, function(key, value) {
@@ -1294,7 +1299,7 @@ function getBPAList(options) {
   bu_org_id: $('#bu_org_id').val(),
   field_name: 'po_number',
   replacing_field: 'po_number',
-  trclass: false,
+  trclass: false
  };
  var settings = $.extend({}, defaults, options);
 
@@ -1360,7 +1365,7 @@ function getBPAList(options) {
 
 function getBPADetails(options) {
  var defaults = {
-  json_url: 'modules/po/json_po.php',
+  json_url: 'modules/po/json_po.php'
  };
  var settings = $.extend({}, defaults, options);
 
@@ -1405,7 +1410,7 @@ function getBPADetails(options) {
 
 function getBPALineDetails(options) {
  var defaults = {
-  json_url: 'modules/po/json_po.php',
+  json_url: 'modules/po/json_po.php'
  };
  var settings = $.extend({}, defaults, options);
 
@@ -1457,7 +1462,7 @@ function getSerialNumber(options) {
  var defaults = {
   json_url: 'modules/inv/serial/json_serial_number.php',
   org_id: $('#org_id').val(),
-  trclass: false,
+  trclass: false
  };
  var settings = $.extend({}, defaults, options);
 
@@ -1504,6 +1509,57 @@ function getSerialNumber(options) {
  });
 }
 
+
+function getlotNumber(options) {
+ var defaults = {
+  json_url: 'modules/inv/lot/json_lot_number.php',
+  org_id: $('#org_id').val(),
+  trclass: false
+ };
+ var settings = $.extend({}, defaults, options);
+
+ return $.ajax({
+  url: settings.json_url,
+  type: 'get',
+  dataType: 'json',
+  data: {
+   org_id: settings.org_id,
+   subinventory_id: settings.subinventory_id,
+   locator_id: settings.locator_id,
+   status: settings.status,
+   item_id_m: settings.item_id_m,
+   find_lot_list: 1
+  },
+  success: function(result) {
+   if (result) {
+    if (settings.trclass) {
+     var select_stmt = '<select class="select inv_lot_number_id" name="inv_lot_number_id[]" style="max-width:95%;">';
+    } else {
+     var select_stmt = '<select id="inv_lot_number_id" class="select inv_lot_number_id" name="inv_lot_number_id[]" style="max-width:95%;">';
+    }
+    $.each(result, function(f_key, f_name) {
+     select_stmt += '<option data-status="' + f_name.status + '" value="' + f_name.inv_lot_number_id + '">' + f_name.lot_number + '</option>';
+    });
+    select_stmt += '</select>';
+    if (settings.trclass) {
+     var trclass_d = '.' + settings.trclass;
+     $(trclass_d).find('.lot_number').replaceWith(select_stmt);
+    } else {
+     $('#lot_number').replaceWith(select_stmt);
+    }
+   }
+  },
+  complete: function() {
+   $('.show_loading_small').hide();
+  },
+  beforeSend: function() {
+   $('.show_loading_small').show();
+  },
+  error: function(request, errorType, errorMessage) {
+   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+  }
+ });
+}
 //end of get default values
 
 
@@ -1563,7 +1619,7 @@ function getSerialInStore(orgId) {
    'item_id_m': itemIdM,
    'trclass': trClass,
    'current_subinventory_id': $('#content').find(trClass_d).find('.from_subinventory_id').val(),
-   'current_locator_id': $('#content').find(trClass_d).find('.from_locator_id').val(),
+   'current_locator_id': $('#content').find(trClass_d).find('.from_locator_id').val()
   });
  });
 
@@ -1743,7 +1799,6 @@ $(document).ready(function() {
  $('#content').on('click', '.select_item_number.select_popup', function() {
 
   var elemenType = $(this).parent().prop('tagName');
-  alert(elemenType);
   if (elemenType === 'TD') {
    var rowClass = $(this).closest('tr').prop('class');
    var fieldClass = $(this).closest('td').find('.select_item_number').prop('class');
@@ -1845,13 +1900,25 @@ $(document).ready(function() {
 
 
  //date picker
- $('body').on('focus', ".date", function() {
+// $('body').on('focus', ".date", function() {
+//  var currentDate = new Date();
+//  $(this).datepicker({
+//   defaultDate: 0,
+//   changeMonth: true,
+//   changeYear: true,
+//   dateFormat: "yy-mm-dd",
+//   setDate: currentDate
+//  });
+// });
+
+ $('body').on('focus', ".dateTime", function() {
   var currentDate = new Date();
+  var timeStamp = currentDate.getHours() + ':' + currentDate.getMinutes() + ':' + currentDate.getSeconds();
   $(this).datepicker({
-   defaultDate: 0,
+   defaultDate: currentDate,
    changeMonth: true,
    changeYear: true,
-   dateFormat: "yy-mm-dd",
+   dateFormat: "yy-mm-dd " + timeStamp,
    setDate: currentDate
   });
  });
@@ -1873,6 +1940,8 @@ $(document).ready(function() {
   }
 
  });
+
+
  $('body').on('focus', ".dateFromToday", function() {
   if ($(this).hasClass('readonly')) {
    $(this).prop('disabled', true);
@@ -1889,6 +1958,28 @@ $(document).ready(function() {
    });
   }
  });
+
+ $('body').on('focus', ".MondayFromToday", function() {
+  if ($(this).hasClass('readonly')) {
+   $(this).prop('disabled', true);
+   alert('readonly field');
+  } else {
+   var currentDate = new Date();
+   $(this).datepicker({
+    defaultDate: 0,
+    minDate: 0,
+    changeMonth: true,
+    changeYear: true,
+    dateFormat: "yy-mm-dd",
+    setDate: currentDate,
+    beforeShowDay: function(date) {
+     var day = date.getDay();
+     return [day == 1, ""];
+    }
+   });
+  }
+ });
+
 
 
  var today_date = new Date();
@@ -1919,10 +2010,12 @@ $(document).ready(function() {
    }
   });
  });
-// $("#tabsHeader").tabs();
+ $("#tabsVertical").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
+ $("#tabsVertical li").removeClass("ui-corner-top").addClass("ui-corner-left");
 // $("#tabsLine").tabs();
- $("#tabsDetail").tabs();
- $(".tabsDetail").tabs();
+ $("#tabsDetail, #tabsDetailA ,#tabsDetailB, #tabsDetailC, #tabsDetailD").tabs();
+ $(".tabsDetail, .tabsDetailA , .tabsDetailB, .tabsDetailC, .tabsDetailD").tabs();
+
 //Refresh the page
  $("#refresh_button").on("click", function() {
   location.reload(true);
@@ -2197,6 +2290,12 @@ $(document).ready(function() {
   void window.open('select.php?class_name=supplier', '_blank',
    'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
+
+ onClick_addDetailLine(2, '.add_row_detail_img3', 'tabsDetailC');
+ $('#content').on('change', '.sys_extra_field_id', function() {
+  var field_type = $(this).find('option:selected').data('field_type');
+  $(this).closest('tr').find('.field_type').val(field_type);
+ })
 
 });
 function toUpperCase(str)

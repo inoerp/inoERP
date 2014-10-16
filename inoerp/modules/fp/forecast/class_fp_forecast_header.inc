@@ -4,7 +4,7 @@
 
   public static $table_name = "fp_forecast_header";
   public static $primary_column = "fp_forecast_header_id";
-  public static $dependent_classes = ['fp_forecast_line'];
+  public static $dependent_classes = ['fp_forecast_line', 'fp_forecast_line_date'];
   public static $key_column = 'forecast';
   public static $module = "fp";
   public $field_a = [

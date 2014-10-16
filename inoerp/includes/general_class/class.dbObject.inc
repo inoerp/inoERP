@@ -12,6 +12,14 @@
 //  public $column = [];
   public $requiredField = [];
   public static $position_array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
+    public static $control_type_a = [
+   'EQUAL' => '=',
+   'NE' => '!=',
+   'GT' => '>',
+   'GTE' => '>=',
+   'LT' => '<',
+   'LTE' => '<=',
+  ];
   public static $key_column = '';
   public static $parent_primary_column = null;
   public $time;
@@ -211,8 +219,8 @@
     $result_fetchAll = $prepare->fetchAll(PDO::FETCH_CLASS);
     return $result_fetchAll;
    } catch (Exception $e) {
-    echo "<br>Error @dbObject @@ Line " . __LINE__ . $sql;
-    return;
+//    echo "<br>Error @dbObject @@ Line " . __LINE__ . $sql;
+    return false;
    }
   }
 
@@ -515,8 +523,10 @@
     }
     $this->msg = 1;
    } catch (PDOException $e) {
+    pa($stmt);
     $this->msg = 0;
-    echo "Record couldnt be saved!!: Error Code : DBO01 " . $e->getMessage() . "<br/>";
+    $dbc->rollback = 1;
+    echo "<br>Record couldnt be saved!!: Error Code : DBO01 . Error @dbObject @@ Line " . __LINE__. '<br>'. $e->getMessage() . "<br>";
    }
    return $this->msg;
   }
@@ -568,8 +578,9 @@
     $this->msg = 1;
    } catch (PDOException $e) {
     $this->msg = 0;
+    $dbc->rollback = 1;
     echo "<div class='message'>failing for sql is $sql</div>";
-    echo "Record could not be updated !!: " . $e->getMessage();
+    echo "<br>Record couldnt be updated!!: Error Code : DBO01 . Error @dbObject @@ Line " . __LINE__. '<br>'. $e->getMessage() . "<br>";
    }
    return $this->msg;
   }
@@ -608,8 +619,9 @@
     $this->msg = 1;
    } catch (PDOException $e) {
     $this->msg = 0;
+    $dbc->rollback = 1;
     echo "<div class='message'>failing for sql is $sql</div>";
-    echo "Record could not be updated !!: " . $e->getMessage();
+    echo "<br>Record couldnt be updated!!: Error Code : DBO01 . Error @dbObject @@ Line " . __LINE__. '<br>'. $e->getMessage() . "<br>";
    }
    return $this->msg;
   }
@@ -632,8 +644,9 @@
     $dbc->confirm();
    } catch (PDOException $e) {
     $this->msg = 0;
+    $dbc->rollback = 1;
     echo "<div class='message'>failing for sql is $sql</div>";
-    echo "Record could not be updated !!: " . $e->getMessage();
+    echo "<br>Record couldnt be deleted!!: Error Code : DBO02 . Error @dbObject @@ Line " . __LINE__. '<br>'. $e->getMessage() . "<br>";
    }
    return $this->msg;
   }
@@ -656,8 +669,9 @@
     echo "<div class='message'>Records are sucessfully deleted.</div>";
    } catch (PDOException $e) {
     $this->msg = 0;
+    $dbc->rollback = 1;
     echo "<div class='message'>failing for sql is $sql</div>";
-    echo "Record could not be updated !!: " . $e->getMessage();
+    echo "<br>Record couldnt be deleted !!: Error Code : DBO02 . Error @dbObject @@ Line " . __LINE__. '<br>'. $e->getMessage() . "<br>";
    }
    return $this->msg;
   }
@@ -679,9 +693,10 @@
     $dbc->confirm();
     echo "<div class='message'>Records are sucessfully deleted.</div>";
    } catch (PDOException $e) {
+    $dbc->rollback = 1;
     $this->msg = 0;
     echo "<div class='message'>failing for sql is $sql</div>";
-    echo "Record could not be updated !!: " . $e->getMessage();
+    echo "<br>Record couldnt be deleted!!: Error Code : DBO02 . Error @dbObject @@ Line " . __LINE__. '<br>'. $e->getMessage() . "<br>";
    }
    return $this->msg;
   }
@@ -703,6 +718,40 @@
 //	 return false;
 //	}
 // }
+  
+   public function _update_extra_field($reference_key_name, $reference_key_value, $reference_type='table') {
+   global $dbc;
+   if (!empty($_POST['sys_extra_field_id'])) {
+    foreach ($_POST['sys_extra_field_id'] as $k => $v) {
+     if (empty($v)) {
+      continue;
+     }
+     $ef_i = new sys_extra_field_instance();
+     foreach ($ef_i->field_a as $key => $value) {
+      if (isset($_POST[$value][$k])) {
+       $ef_i->$value = $_POST[$value][$k];
+      }
+     }
+     if (!empty($ef_i->list_values)) {
+      $list_values = explode(',', $ef_i->list_values);
+      $ef_i->list_values = serialize($list_values);
+     }
+     $ef_i->sys_extra_field_id = $v;
+     $ef_i->reference_type = $reference_type;
+     $ef_i->reference_key_name = $reference_key_name;
+     $ef_i->reference_key_value = $reference_key_value;
+     $ef_i->audit_trial();
+     try {
+      $ef_i->save();
+     } catch (Exception $e) {
+      $dbc->rollback = true;
+      echo "<br>Failed to save extra field data. Error @ bom_routing_line @@ line " . __LINE__ . $e->getMessage();
+     }
+    }
+   }
+  }
+
+
  }
 
 //end of content_type class

@@ -31,8 +31,8 @@ $(document).ready(function() {
 	 $(this).html(data);
 	});
 	var headerData = $(form_header_id).serializeArray();
-	saveHeader('content.php', headerData, '#content_id', '', true, 'content');
- });
+	saveHeader('content.php', headerData, '#content_id', '', '',true, 'content');
+  });
 
  deleteHeader('form.php?class_name=content', $('#content_id').val());
 

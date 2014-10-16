@@ -101,8 +101,8 @@
                 <td><?php form::text_field_wid2r('item_description'); ?></td>
                 <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small', '', 1); ?></td>
                 <td><?php echo $f->select_field_from_object('bucket_type', fp_forecast_header::fp_bucket(), 'option_line_code', 'option_line_value', $$class_second->bucket_type, '', '', 1, $readonly); ?></td>
-                <td><?php echo $f->date_fieldAnyDay('start_date', $$class_second->start_date); ?></td>
-                <td><?php echo $f->date_fieldAnyDay('end_date', $$class_second->end_date); ?></td>
+                <td><?php echo $f->date_fieldFromToday_m('start_date', $$class_second->start_date); ?></td>
+                <td><?php echo $f->date_fieldFromToday('end_date', $$class_second->end_date); ?></td>
                 <td><?php $f->text_field_wid2s('no_of_bucket'); ?></td>
                </tr>
                <?php
@@ -131,11 +131,11 @@
                ?>         
                <tr class="forecast_line<?php echo $count ?>">
                 <td><?php $f->seq_field_d($count); ?></td>
-                <td><?php echo $f->number_field('current', $$class_second->current); ?></td>
+                <td><?php echo $f->number_field('current', $$class_second->current,'','','','',1); ?></td>
                 <td><?php echo $f->number_field('original', $$class_second->original); ?></td>
-                <td><?php echo $f->number_field('total_current', $$class_second->total_current); ?></td>
-                <td><?php echo $f->number_field('total_original', $$class_second->total_original); ?></td>
-                <td><?php $f->text_field_d2('fp_consumption_id'); ?></td>
+                <td><?php echo $f->number_field('total_current', $$class_second->total_current,'','','','',1); ?></td>
+                <td><?php echo $f->number_field('total_original', $$class_second->total_original,'','','','',1); ?></td>
+                <td><?php $f->text_field_d2r('fp_consumption_id'); ?></td>
                </tr>
                <?php
                $count = $count + 1;

@@ -1,13 +1,12 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-set_time_limit(0);
+ ini_set('display_errors', 1);
+ error_reporting(E_ALL);
+ set_time_limit(0);
 
-include_once("includes/basics/header_public.inc");
+ include_once("includes/basics/header_public.inc");
 //pa(hr_element_entry_header::find_by_employeeId(4));
 //pa(hr_element_entry_header::find_all_regular_lines(1));
 //pa(hr_element_entry_header::find_all_basic_regular_lines(1));
-
 ////$db = new dbObject();
 ////$prl = new sys_profile_line();
 ////$ar_ti = new ar_transaction_interface();
@@ -20,22 +19,65 @@ include_once("includes/basics/header_public.inc");
  $db = new dbObject();
  $dbc = new dbc();
 
-// pa(view::find_all_tables_gen());
+// $offset = 10;
+ $date = new DateTime('2014-7-01');
+ 
+
+// function next_monday($date_p) {
+//  $date = new DateTime($date_p);
+//  if ($date->format('D') == 'Mon') {
+//   return $date->format('Y-m-d');
+//  } else {
+//   $date = new DateTime("next monday $date_p");
+//   return $date->format('Y-m-d');
+//  }
+// }
+ echo "<br>Next Monday 2014-7-01 "; echo next_monday('2014-7-01');
+ echo "<br>Next Monday 2014-7-02 ";echo next_monday('2014-7-02');
+  echo "<br>Next Monday 2014-7-03 "; echo next_monday('2014-7-03');
+ echo "<br>Next Monday 2014-7-04 ";echo next_monday('2014-7-04');
+  echo "<br>Next Monday 2014-7-05 ";echo next_monday('2014-7-05');
+  echo "<br>Next Monday 2014-7-06 "; echo next_monday('2014-7-06');
+ echo "<br>Next Monday 2014-7-07 ";echo next_monday('2014-7-07');
+ echo "<br>Next Monday 2014-7-08 "; echo next_monday('2014-7-08');
+ echo "<br>Next Monday 2014-7-09 ";echo next_monday('2014-7-09');
+
+ 
+
+ 
+
+// echo "<h1>Next monday is '2014-7-01' </h1>".  next_monday('2014-7-01');
+// echo "<h1>Next monday is '2014-7-02' </h1>".  next_monday('2014-7-02');
+// echo "<h1>Next monday is '2014-7-03' </h1>".  next_monday('2014-7-03');
+// echo "<h1>Next monday is '2014-7-04' </h1>".  next_monday('2014-7-04');
+// echo "<h1>Next monday is '2014-7-05' </h1>".  next_monday('2014-7-05');
+// echo "<h1>Next monday is '2014-7-06' </h1>".  next_monday('2014-7-06');
+// echo "<h1>Next monday is '2014-7-07' </h1>".  next_monday('2014-7-07');
+// echo "<h1>Next monday is '2014-7-08' </h1>".  next_monday('2014-7-08');
+// echo "<h1>Next monday is '2014-7-09' </h1>".  next_monday('2014-7-09');
+ 
+ 
+// pa($date);
+// echo $date->format('Y-m-d');
+// $date->add(new DateInterval('P'.$offset.'D'));
+// pa($date);
+// echo $date->format('Y-m-d');
+
+// echo "<br>Next monday" . date('Y-m-d', strtotime("next monday", strtotime('2014-7-07')));
+
+// pa(sd_so_line::find_by_orgId_ssd(6, '2014-7-01'));
 // pa(view::find_all_tables());
 //$sys_notification = new sys_notification();
 //  pa($sys_notification->find_openNotification_toUserId('34'));
-pa(get_dbColumns('bom_routing_line_v'));
+//pa(get_dbColumns('fp_forecast_line_date'));
 //pa(get_dbColumns('po_quote_line'));
 //pa(get_dbColumns('po_quote_detail'));
 //  pa(get_dbColumns('po_rfq_line'));
 //  pa(get_dbColumns('po_rfq_requirement'));
-  
 //  pa(get_dbColumns('hr_leave_entitlement_line'));
 //  pa(get_dbColumns('hr_approval_limit_assignment'));
-  
 //  pa(get_dbColumns('hr_employee_termination'));
 //  pa(get_dbColumns('hr_element_entry_line'));
-
 //$inster_items_sql = " SELECT DISTINCT(item_id_m) FROM inv_abc_valuation_result ";
 //$inster_items_sql .= " WHERE inv_abc_valuation_id = '1' ";
 //$inster_items_result = $db->findBySql($inster_items_sql);
@@ -52,11 +94,9 @@ pa(get_dbColumns('bom_routing_line_v'));
 //pa($item_id_m);
 //
 //echo ("'".implode("','", $item_id_m)."'");
-
 //pa(ar_customer_site::find_all_sitesOfCustomer(2));
 //$item = new item();
 //pa($item->findBy_item_id_m('10047'));
-
 //$user_names = [];
 //for($i=0 ; $i <=100000 ; $i++){
 // array_push($user_names, 'user_no_'.$i);
@@ -65,7 +105,6 @@ pa(get_dbColumns('bom_routing_line_v'));
 //$f= new inoform();
 //echo $f->select_field_from_array('user_name', $user_names, '');
 //
-
 //pa($_SESSION);
 //$prl = new sys_profile_line();
 //echo "---------------------------------------------------------------------------------------------------------------------------";
@@ -78,7 +117,6 @@ pa(get_dbColumns('bom_routing_line_v'));
 //    pa( $prl->find_default_profile('org_bu_name_defalut'));
 //   }
 //  
-
 //foreach(sys_profile_header::find_all() as $obj){
 //pa($prl->find_default_profile($obj->profile_name));
 //}
@@ -88,7 +126,6 @@ pa(get_dbColumns('bom_routing_line_v'));
 //pa(get_dbColumns('coa'));
 //pa(get_dbColumns('coa_combination'));
 //pa(get_dbColumns('inv_interorg_transfer_line'));
-
 //$var = 18;
 //$arr = [6 , 12, 13];
 //if (in_array($var, $arr) ) {
@@ -98,7 +135,6 @@ pa(get_dbColumns('bom_routing_line_v'));
 //if ($var == 6 || $var ==  12 ||  $var ==  13) {
 // echo "<br>2.  in 6 , 12, 13";
 //}
-
 //$onhand = new onhand();
 //$onhand->item_id_m = 6;
 //pa($onhand->findBy_itemIdm_location());
@@ -111,7 +147,6 @@ pa(get_dbColumns('bom_routing_line_v'));
 //
 //$onhand->locator_id = 5;
 //pa($onhand->findBy_itemIdm_location());
-
 //pa(get_dbColumns('mdm_bank_line'));
 //pa(get_dbColumns('mdm_bank_account'));
 //pa(get_dbColumns('sys_process_flow_line'));
@@ -239,7 +274,7 @@ pa(get_dbColumns('bom_routing_line_v'));
 //echo "<h2>Final Code</h2>";
 //pa($lowLevel_code);
 
-execution_time();
+ execution_time();
 ////$dbc->ddlexecute($query1);
 //$query1 = " ALTER TABLE sd_so_line
 //add picked_quantity int(12) after line_quantity,
@@ -351,7 +386,7 @@ execution_time();
 ?>
 
 <?php
-global $dbc;
+ global $dbc;
 //$block_types = block::block_types();
 //  echo '<pre>';
 //  print_r($block_types);
@@ -382,15 +417,15 @@ global $dbc;
 
  <canvas id="small_can"></canvas>
  Graph Hereford<ul class="graph1">
-	<li></li>
-	<li></li>
-	<li></li>
-	<li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
  </ul>
 </div>
 
 <?php
 //execution_time();
-execution_time();
-include_template('footer.inc')
+ execution_time();
+ include_template('footer.inc')
 ?>

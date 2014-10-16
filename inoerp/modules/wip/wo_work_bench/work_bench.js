@@ -71,7 +71,7 @@ $(document).ready(function() {
 	var fromStep = '.' + $(this).val() + '_quantity';
 	var fromSeq = $('#from_routing_sequence').val();
 	var rowClass = '';
-	$('.routing_sequence').each(function() {
+	$('#tabsLine-1 .routing_sequence').each(function() {
 	 if ($(this).val() == fromSeq) {
 		rowClass = '.' + $(this).closest('tr').attr('class');
 	 }
@@ -114,18 +114,26 @@ $(document).ready(function() {
 //Save record
 // save('json.wip_move_transaction.php', '#wip_move_transaction', '', '', '#wip_move_transaction_id', '');
  var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=wip_move_transaction';
+ classSave.json_url = 'form.php?class_name=wip_wo_work_bench';
  classSave.form_header_id = 'wip_move_transaction';
  classSave.primary_column_id = 'wip_move_transaction_id';
  classSave.single_line = false;
  classSave.savingOnlyHeader = true;
  classSave.enable_select = true;
- classSave.headerClassName = 'wip_move_transaction';
+ classSave.headerClassName = 'wip_wo_work_bench';
+ classSave.lineClassName = 'wip_wo_work_bench_line';
+ classSave.saveVerticalTab = true;
  classSave.saveMain();
 
-//delete line
- deleteData('json.wip_move_transaction.php');
+
+$('#from_routing_sequence').on('change', function(){
+  if($(this).val()){
+    $(this).closest('ul').find(':input').attr('required',true).css('background-color','pink');
+  }else{
+  $(this).closest('ul').find(':input').attr('required',false).css('background-color','white');
+  }
 
 
+})
 });
 

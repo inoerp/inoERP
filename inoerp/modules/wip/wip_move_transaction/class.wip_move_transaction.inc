@@ -5,7 +5,7 @@
   public static $table_name = "wip_move_transaction";
   public static $primary_column = "wip_move_transaction_id";
   public static $dependent_classes = ['wip_wo_routing_line', 'wip_wo_routing_detail'];
-  public static $key_column = 'wip_wo_header_id';
+  public static $key_column = 'from_operation_step';
   public static $module = "wip";
   public static $allowed_inv_transactions = [
    '1' => 'Miscellaneous Issue',
@@ -526,6 +526,10 @@
   public function _before_save() {
 //   pa($_POST);
 //   pa($this);
+     if (empty($this->from_routing_sequence)) {
+    return -1;
+   }
+   
    $primary_column = static::$primary_column;
    if (empty($this->$primary_column)) {
     return 1;

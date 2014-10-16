@@ -67,9 +67,8 @@
         <div id="tabsLine">
          <ul class="tabMain">
           <li><a href="#tabsLine-1">Operation</a></li>
-          <li><a href="#tabsLine-2">Data Collection</a></li>
-          <li><a href="#tabsLine-3">Scrap</a></li>
-          <li><a href="#tabsLine-4">BOM (View Only)</a></li>
+          <li><a href="#tabsLine-2">Scrap</a></li>
+          <li><a href="#tabsLine-3">BOM (View Only)</a></li>
          </ul>
          <div class="tabContainer"> 
           <div id="tabsLine-1" class="tabContent">
@@ -160,78 +159,6 @@
           </div> 
           <!--end of tab1-->
           <div id="tabsLine-2" class="tabContent">
-
-           <div id="tabsVertical">
-            <ul class="tabVerticalMain">
-             <?php
-              $tab_count = 0;
-              foreach ($wip_wo_routing_line_object as $routing_line) {
-               $tab_count++;
-               echo "<li><a href='#tabsVertical-$tab_count'>$routing_line->routing_sequence";
-               if (!empty($routing_line->department_id)) {
-                echo " - " . bom_department::find_by_id($routing_line->department_id)->department;
-               }
-               echo "<br>$routing_line->description";
-               echo "</a></li>";
-              }
-             ?>
-            </ul>
-            <div class="tabContainer_v"> 
-             <?php
-              $tab_count = 0;
-              foreach ($wip_wo_routing_line_object as $routing_line) {
-               $tab_count++;
-               echo "<div id=\"tabsVertical-$tab_count\" class='tabContent'><div class='large_shadow_box'> ";
-               echo '<ul class="column five_column">';
-               if (!empty($routing_line->wip_wo_routing_line_id)) {
-                $extra_field_object = sys_extra_field_instance::find_by_referenceKeyValue('wip_wo_routing_line', $routing_line->wip_wo_routing_line_id);
-               }
-               if (empty($extra_field_object)) {
-                $extra_field_object = array(new sys_extra_field_instance());
-               }
-               foreach ($extra_field_object as $ef) {
-                if (empty($ef->field_name)) {
-                 continue;
-                }
-                $lable = !empty($ef->label) ? $ef->label : $ef->field_name;
-                echo "<li><label>$lable : </label>";
-                switch ($ef->field_type) {
-                 case 'LIST':
-                  if (!empty($ef->list_values)) {
-                   $arr = unserialize($ef->list_values);
-                   echo $f->select_field_from_array($ef->field_name, $arr, '');
-                  } else {
-                   echo $f->text_field($ef->field_name, '');
-                  }
-                  break;
-
-                 case 'FILE' :
-                  $file_routing = file::find_by_reference_table_and_id('wip_wo_routing_line', $routing_line->wip_wo_routing_line_id);
-                  echo ino_attachement($file_routing);
-                  break;
-
-                 case 'OPTION_LIST' :
-                  if (!empty($ef->list_value_option_type)) {
-                   echo $f->select_field_from_object($ef->field_name, option_line::find_by_parent_id($ef->list_value_option_type), 'option_line_code', 'option_line_value', '');
-                  } else {
-                   echo $f->text_field($ef->field_name, '');
-                  }
-                  break;
-                 default :
-                  echo $f->text_field($ef->field_name, '');
-                  break;
-                }
-
-                echo '</li>';
-               }
-               echo "</ul></div></div>";
-              }
-             ?>
-            </div>
-           </div>
-
-          </div>
-          <div id="tabsLine-3" class="tabContent">
            <div class="first_rowset"> 
             <ul class="column five_column"> 
              <li><label>Reason : </label> <?php form::text_field_d('reason'); ?>  </li>
@@ -245,7 +172,7 @@
            <!--                end of tab2 div three_column-->
           </div>
 
-          <div id="tabsLine-4" class="tabContent">
+          <div id="tabsLine-3" class="tabContent">
            <table class="form_line_data_table">
             <thead> 
              <tr>

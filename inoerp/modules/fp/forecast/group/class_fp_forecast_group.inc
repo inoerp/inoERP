@@ -53,14 +53,37 @@
   ];
   public $pageTitle = " Forecast Group ";
   public $message;
+  public $date_for_consumption_ul;
+  public $date_for_consumption_ll;
+  public $qty_for_consumption;
+  public $itemId_for_consumption;
 
-   public static function find_by_valuationName_OrgId($valuation_name, $org_id) {
-   $sql = " SELECT * FROM ";
-   $sql .= self::$table_name;
-   $sql .= " WHERE scope_org_id = '{$org_id}'  "
-     . " AND valuation_name = '{$valuation_name}' AND status='active'  LIMIT 1 ";
+  public static function find_all_items($fp_forecast_group_id) {
+   $sql = " 
+    SELECT DISTINCT(ffl.item_id_m), ffg.org_id
+    FROM fp_forecast_line ffl ,
+    fp_forecast_header ffh,
+    fp_forecast_group ffg
+    WHERE ffh.fp_forecast_header_id = ffl.fp_forecast_header_id
+    AND ffh.forecast_group_id = ffg.fp_forecast_group_id
+    AND ffg.fp_forecast_group_id = '{$fp_forecast_group_id}'
+";
    $result = self::find_by_sql($sql);
-   return !empty($result) ? array_pop($result) : false;
+   return !empty($result) ? ($result) : false;
+  }
+
+  public function find_forecastLine_forConsumption() {
+
+   $sql = " 
+    SELECT ffl.item_id_m, ffl.fp_forecast_line_id, ffl.fp_forecast_header_id, ffg.org_id
+    FROM fp_forecast_line ffl ,
+    fp_forecast_header ffh,
+    fp_forecast_group ffg
+    WHERE ffh.fp_forecast_header_id = ffl.fp_forecast_header_id
+    AND ffh.forecast_group_id = ffg.fp_forecast_group_id
+    AND ffg.fp_forecast_group_id = '{$this->fp_forecast_group_id}'
+    AND  ffl.item_id_m = '{$this->itemId_for_consumption}'
+";
   }
 
   public function findBy_valuationName_OrgId($valuation_name = '', $org_id = '') {

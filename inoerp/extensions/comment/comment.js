@@ -128,7 +128,7 @@ $(document).ready(function() {
 	var headerData = $(this).closest('form').serializeArray();
 	var homeUrl = $('#home_url').val();
 	var savePath = homeUrl + 'form.php?class_name=comment';
-	saveHeader(savePath, headerData, '#comment_id', '', true, 'comment');
+	saveHeader(savePath, headerData, '#comment_id', '','', true, 'comment');
 	$(".comment_error").replaceWith('<input type="button" value="Reload page" onclick="location.reload();">');
  });
 

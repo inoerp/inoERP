@@ -90,18 +90,27 @@
     sefi.referece_entity,  sefi.reference_key_name,  sefi.reference_key_value, sefi.label, 
     sefi.control_type, sefi.control_value,  sefi.control_uom,  sefi.active_cb, 
     sefi.display_weight,  sefi.list_values,  sefi.lower_limit,  sefi.upper_limit, 
-    sefi.list_value_option_type,  sefi.created_by,  sefi.creation_date,  sefi.last_update_by, sefi.last_update_date, sef.field_name, sef.sys_field_name, sef.field_type
+    sefi.list_value_option_type,  sefi.created_by,  sefi.creation_date,  sefi.last_update_by, sefi.last_update_date, sef.field_name, sef.sys_field_name, sef.field_type ";
 
-    FROM sys_extra_field_instance sefi,
-    sys_extra_field sef
-    
-    WHERE sef.sys_extra_field_id = sefi.sys_extra_field_id
-    AND sefi.reference_key_name = '{$ref_key}' 
+   $sql .= " FROM sys_extra_field_instance sefi
+    LEFT JOIN sys_extra_field sef ON sef.sys_extra_field_id = sefi.sys_extra_field_id ";
+
+   $sql .= " WHERE sefi.reference_key_name = '{$ref_key}' 
     AND sefi.reference_key_value = '{$ref_value}' 
 
 ";
    $result = self::find_by_sql($sql);
    return !empty($result) ? $result : false;
+  }
+
+  public static function find_by_fieldName_referenceDetails($extra_field_name, $ref_key, $ref_value) {
+   $ef_table = 'extra_field_' . $extra_field_name;
+
+   $sql = " SELECT * FROM ";
+   $sql .= $ef_table;
+   $sql .= " WHERE reference_key_name = '{$ref_key}' AND reference_key_value='{$ref_value}' LIMIT 1";
+   $result = self::find_by_sql($sql);
+   return !empty($result) ? array_pop($result) : false;
   }
 
   public static function find_by_extraFieldId($sys_extra_field_id) {

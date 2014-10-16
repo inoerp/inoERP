@@ -148,7 +148,7 @@ function saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassNa
 function saveMainClass(json_url, form_header_id, primary_column_id, single_line,
  line_key_field, form_line_id, primary_column_id2, primary_column_id3, enable_select, savingOnlyHeader,
  headerClassName, lineClassName, detailClassName, lineClassName2, onlyOneLineAtATime,
- allLineTogether) {
+ allLineTogether, saveVerticalTab) {
  this.json_url = json_url;
  this.form_header_id = form_header_id;
  this.primary_column_id = primary_column_id;
@@ -165,6 +165,7 @@ function saveMainClass(json_url, form_header_id, primary_column_id, single_line,
  this.lineClassName2 = lineClassName2;
  this.onlyOneLineAtATime = onlyOneLineAtATime;
  this.allLineTogether = allLineTogether;
+ this.saveVerticalTab = saveVerticalTab;
 }
 
 saveMainClass.prototype.saveMain = function(beforeSave)
@@ -193,6 +194,7 @@ saveMainClass.prototype.saveMain = function(beforeSave)
  var lineClassName2 = this.lineClassName2;
  var onlyOneLineAtATime = this.onlyOneLineAtATime;
  var allLineTogether = this.allLineTogether;
+ var saveVerticalTab = this.saveVerticalTab;
  var line_key_field_d = '.' + line_key_field;
  $("#save").on('click', function(e) {
 
@@ -325,6 +327,15 @@ saveMainClass.prototype.saveMain = function(beforeSave)
   /*-----------------------------------Completion of save header & start of single line form save--------------------------------
    for standard forms liks item, supplier - one header & one line savetype2
    */
+  if (saveVerticalTab) {
+   $('.tabContainer_v').find('.tabContent').each(function() {
+    var lineData = $(this).find(":input").serializeArray();
+    saveSingleLine(json_url, lineData, primary_column_id_h, lineClassName);
+   });
+   return;
+  }
+
+
   if (single_line) {
    var lineData = $(form_line_id_h).serializeArray();
 //   alert('315');
@@ -412,11 +423,10 @@ saveMainClass.prototype.saveMain = function(beforeSave)
     var noOfTabsInForm3 = $("tbody.form_data_line_tbody2").length;
     //if the third form has tab
     if (noOfTabsInForm3 > 1) {
-     var tabsId = '#' + $("tbody.form_data_line_tbody2:first").closest("div").attr('id');
-     $(tabsId + " tbody.form_data_line_tbody2 > tr").each(function() {
-      var trclass = $(this).attr('class');
+     $('#form_line2 input[name="line_id_cb"]:checked').each(function() {
+      var trclass = $(this).closest('tr').attr('class');
       var lineData = [];
-      $("#form_line").find('.' + trclass).each(function() {
+      $("#form_line2").find('.' + trclass).each(function() {
        var ThisLineData = $(this).find(":input").serializeArray();
        lineData = $.merge(lineData, ThisLineData);
       });
@@ -425,13 +435,13 @@ saveMainClass.prototype.saveMain = function(beforeSave)
       } else {
        detailData = "";
       }
-//      alert('413 lineClassName2 ' + lineClassName2);
+      count++;
       saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassName2);
      });
     } else {//if the third form doesnt have any tab-----------------savetype5b------------------------------------------
-     $("tbody.form_data_line_tbody2 > tr").each(function() {
-      var lineData = $(this).find(":input").serializeArray();
-      var trclass = $(this).attr('class');
+     $('#form_line2 input[name="line_id_cb"]:checked').each(function() {
+      var lineData = $(this).closest("tr").find(":input").serializeArray();
+      var trclass = $(this).closest("tr").attr('class');
       if ($(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray()) {
        var detailData = $(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray();
       } else {
@@ -900,7 +910,7 @@ autoCompleteMain.prototype.autoComplete = function()
        primary_column1: primary_column1_v,
        primary_column2: primary_column2,
        term: request.term,
-       options : options
+       options: options
       },
       success: function(data) {
        response(data);

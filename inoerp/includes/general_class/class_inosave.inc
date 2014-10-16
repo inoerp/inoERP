@@ -490,8 +490,9 @@
    if (!empty($_POST['headerData'])) {
     $this->save_header();
    }
+   
    if (!empty($_POST['detail_classname'])) {
-    $this->save_line_withDetails($_POST);
+      $this->save_line_withDetails($_POST);
    } else if (!empty($_POST['lineData'])) {
     $linedata = $_POST['lineData'];
     $this->save_line($linedata, $json_data);
@@ -499,7 +500,7 @@
 
    if (!empty($_POST['lineData2'])) {
     $linedata = $_POST['lineData2'];
-    $this->save_line($linedata);
+    $this->save_line($linedata,  $json_data);
    }
   }
 

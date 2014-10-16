@@ -1,6 +1,6 @@
 
 #content_header{
- height : 328px;
+ height : 300px;
  min-width: 100%;
  background-color: rgba(60, 60, 60, 0.1);
  margin-bottom: 5px;
@@ -55,7 +55,7 @@ display: inline-block;
 .release_message {
  float: right;
   padding: 5px;
- width: 350px;
+ width: 450px;
 }
 
 .release_message .heading{

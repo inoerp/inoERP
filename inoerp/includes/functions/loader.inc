@@ -92,7 +92,8 @@
   * First call the role path to verify if the role/user has access to the page.
   * If the page need login, redirect users to login page
   */
- if (!empty($_POST['className']) && $_POST['className'] == 'comment') {
+
+ if (!empty($_REQUEST['className']) && $_REQUEST['className'] == 'comment') {
   $dont_check_login = true;
  }
  if (!empty($dont_check_login)) {
@@ -362,7 +363,8 @@
    }
    //---------------------------------------END OF SEARCH------------------------------------------------
 
-   /* -------------------------------------START OF SAVE---------------------------------------------------- */ elseif ((empty($_POST['download'])) && !empty($_POST['className'])) {
+   /* -------------------------------------START OF SAVE---------------------------------------------------- */ 
+   elseif ((empty($_POST['download'])) && !empty($_POST['className'])) {
     $inosave = new inosave();
     $inosave->setProperty('_module', $module);
     $inosave->setProperty('_classname', $class);

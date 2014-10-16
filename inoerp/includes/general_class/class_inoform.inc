@@ -817,16 +817,29 @@ EOD;
    return $element_date_field;
   }
 
+  public function dateTime_field($name, $value) {
+   return $this->date_field($name, $value, '20', '', 'dateTime');
+  }
+
+  
   public function date_fieldFromToday($name, $value) {
    return $this->date_field($name, $value, '20', '', 'dateFromToday');
+  }
+  
+   public function date_field_MondayFromToday($name, $value) {
+   return $this->date_field($name, $value, '20', '', 'MondayFromToday');
   }
 
   public function date_fieldFromToday_r($name, $value, $readonly) {
    return $this->date_field($name, $value, '20', '', 'dateFromToday', '', $readonly);
   }
+  
+    public function date_fieldFromToday_m($name, $value) {
+   return $this->date_field($name, $value, '20', '', 'dateFromToday', 1);
+  }
 
-  public function date_fieldFromToday_mr($name, $value, $readonly) {
-   return $this->date_field($name, $value, '20', '', 'dateFromToday', 1, $readonly);
+  public function date_fieldFromToday_mr($name, $value) {
+   return $this->date_field($name, $value, '20', '', 'dateFromToday', 1, 1);
   }
 
   public function date_fieldFromToday_d($name, $value) {
@@ -945,6 +958,66 @@ EOD;
    return $element_select_field;
   }
 
+  
+  public function multi_select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $id = "", $divClass = "", $required = "", $readonly = "", $convertToText = "", $nonArrayName = "", $disabled = "") {
+	if ($nonArrayName == 1) {
+	 $bracketName = $name;
+	} else {
+	 $bracketName = $name . '[]';
+	}
+	$idvalue = $this->_convert_id($id);
+	if ($readonly == 1) {
+	 $readonly = 'disabled';
+	} else {
+	 $readonly = '';
+	}
+
+	if ($required == 1) {
+	 $required = 'required';
+	} else {
+	 $required = '';
+	}
+
+	if ($disabled == 1) {
+	 $disabled = 'disbaled';
+	} else {
+	 $disabled = '';
+	}
+	$element_select_field = "<Select multiple name=\"$bracketName\" class=\"multi_select $divClass $name\" $idvalue $readonly $required $disabled>";
+	$element_select_field .= "<option value=\"\" ></option>";
+	if ((is_array($object)) && (count($object) > 0 )) {
+	 foreach ($object as $record) {
+		if ((!empty($value)) && ($record->$objectValueKey == $value)) {
+		 $selected = 'selected';
+		} else {
+		 $selected = '';
+		}
+		$element_select_field .= '<option value="' . $record->$objectValueKey . '" ';
+		$element_select_field .= $selected;
+		$element_select_field .= '>';
+		if (is_array($objectDescriptionKey)) {
+		 $newValue1 = '';
+		 foreach ($objectDescriptionKey as $keya => $valuea) {
+			$newValue1 .= $record->$valuea . ' - ';
+		 }
+		 $newValue = rtrim($newValue1, ' - ');
+		} else {
+		 $newValue = $record->$objectDescriptionKey;
+		}
+		$element_select_field .= $newValue;
+		$element_select_field .= '</option>';
+	 }
+	}
+
+	if ($convertToText == 1) {
+	 $element_select_field .= "<option value=\"newentry\"  class=\"bold blue\">New Entry</option>";
+	}
+	$element_select_field .= '</select>';
+
+	return $element_select_field;
+ }
+
+ 
   public function select_field_from_object_ap($array) {
    $name = array_key_exists('name', $array) ? $array['name'] : null;
    $ob = array_key_exists('ob', $array) ? $array['ob'] : null;

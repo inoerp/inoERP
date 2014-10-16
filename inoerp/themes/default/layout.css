@@ -511,29 +511,29 @@ ul.column li label,
  font-size : 10px;
 }
 
-ul.two_column li, 
-ul.two_column li label{
- width: 200px;
+ul.column.two_column li, 
+ul.column.two_column li label{
+ width: 400px;
 }
 
-ul.three_column li, 
-ul.three_column li label{
+ul.column.three_column li, 
+ul.column.three_column li label{
  width: 285px;
 }
 
 
-ul.four_column li, 
-ul.four_column li label{
- width: 215px;
+ul.column.four_column li, 
+ul.column.four_column li label{
+ width: 220px;
 }
 
-ul.five_column li, 
-ul.five_column li label{
+ul.column.five_column li, 
+ul.column.five_column li label{
  width: 170px;
 }
 
-ul.six_column li, 
-ul.six_column li label{
+ul.column.six_column li, 
+ul.column.six_column li label{
  width: 135px;
 }
 
@@ -752,13 +752,12 @@ span.ui-button-text{
 
 #existing_attachment_list{
  width : 500px;
+ background-color: rgba(194, 187, 150, 0.3);
 }
 
 #existing_attachment_list ul.header{
  margin-top: 5px;
  padding : 2px 5px;
- background: lightgrey;
- width: 500px;
 }
 
 #existing_attachment_list ul li{
@@ -997,4 +996,17 @@ span.acField_withSearchImage {
 
 #js_data{
  display: none;
+}
+
+.simple_box{
+    display : block;
+    border: 2px solid rgba(120,120,230,0.5);
+    background : rgba(120,120,230,0.1);
+    border-radius : 10px;
+    text-align : center;
+    margin: 10px;
+}
+
+add_detail_values img, .add_detail_values0 img, .add_detail_values1 img{
+    float: left;
 }
