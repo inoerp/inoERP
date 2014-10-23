@@ -74,12 +74,11 @@ display: block;
  background : none repeat scroll 0% 0% rgba(2, 113, 183, 1)
 }
 
- li#condition_li{
-display: block;
-    margin : 20px 0;
-     background: none repeat scroll 0% 0% rgba(187, 14, 198, 1);
+li#condition_li {
+    display: block;
+    margin: 20px 0px;
+    background: none repeat scroll 0% 0% #A5CBA6;
 }
-
 
 #show_field_buttons input, #condition_buttons_div input{
     width: 290px;

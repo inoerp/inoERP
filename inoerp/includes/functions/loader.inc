@@ -119,21 +119,21 @@
  $query_string = $_SERVER['QUERY_STRING'];
 
 //page number details-------------------------
- if (!empty($query_string)) {
-  if (strpos($query_string, 'pageno') !== false) {
-   $pageno_value = $_GET['pageno'];
-   $pageno_string = 'pageno=' . $pageno_value;
-   $new_query_string1 = str_replace($pageno_string, "", $query_string);
-   $query_string = $new_query_string1;
-  }
- }
-//---------------------------------------------
-//remove double & from query string
- if (!empty($query_string)) {
-  if (strpos($query_string, '&&') !== false) {
-   $query_string = str_replace('&&', '&', $query_string);
-  }
- }
+// if (!empty($query_string)) {
+//  if (strpos($query_string, 'pageno') !== false) {
+//   $pageno_value = $_GET['pageno'];
+//   $pageno_string = 'pageno=' . $pageno_value;
+//   $new_query_string1 = str_replace($pageno_string, "", $query_string);
+//   $query_string = $new_query_string1;
+//  }
+// }
+//////---------------------------------------------
+//////remove double & from query string
+// if (!empty($query_string)) {
+//  if (strpos($query_string, '&&') !== false) {
+//   $query_string = str_replace('&&', '&', $query_string);
+//  }
+// }
  /*
    ---------------------------------------------------------------------------------------------------------------
   *  Determine the class names in case of POST data
@@ -177,7 +177,11 @@
    $key_field = property_exists($class, 'key_column') ? $class::$key_column : $class . '_id';
    $table_name = property_exists($class, 'table_name') ? $class::$table_name : $class;
 //	$table_name = $class;
-   $$class = new $class;
+   if(class_exists($class)){
+    $$class = new $class;
+   }else{
+    redirect_to(HOME_URL);
+   }
 
 ////////////////////////////////////////////////////////////////////
    if (isset($mode) && ($mode > 9)) {
@@ -221,7 +225,7 @@
       }
      }
      $file = file::find_by_reference_table_and_id($table_name, $class_id_value);
-     $comments = comment::comment_list($table_name, $class_id_value, $per_page, $pageno, $query_string, $class_id_value);
+     $comments = comment::comment_list($table_name, $class_id_value, $class_id_value);
      if ($class != 'category') {
       $category = category::find_by_reference_table_and_id($table_name, $class_id_value);
      }
@@ -363,8 +367,7 @@
    }
    //---------------------------------------END OF SEARCH------------------------------------------------
 
-   /* -------------------------------------START OF SAVE---------------------------------------------------- */ 
-   elseif ((empty($_POST['download'])) && !empty($_POST['className'])) {
+   /* -------------------------------------START OF SAVE---------------------------------------------------- */ elseif ((empty($_POST['download'])) && !empty($_POST['className'])) {
     $inosave = new inosave();
     $inosave->setProperty('_module', $module);
     $inosave->setProperty('_classname', $class);
@@ -486,8 +489,7 @@
     $css_file_path = str_replace('\\', '/', substr($css_file_name, strpos($css_file_name, 'modules')));
    } else if (strpos($css_file_name, 'extensions')) {
     $css_file_path = str_replace('\\', '/', substr($css_file_name, strpos($css_file_name, 'extensions')));
-   }
-   else if (strpos($css_file_name, 'engine')) {
+   } else if (strpos($css_file_name, 'engine')) {
     $css_file_path = str_replace('\\', '/', substr($css_file_name, strpos($css_file_name, 'engine')));
    }
    array_push($css_file_paths, $css_file_path);

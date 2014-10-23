@@ -1,6 +1,6 @@
 <?php
 
- class inosave extends dbc {
+ class inosave extends dbObject {
 
   private $_module;
   private $_classname;
@@ -236,16 +236,7 @@
      }
     }
 
-    $time = time();
-    $$class->creation_date = strftime("%Y-%m-%d %H:%M:%S", $time);
-    if ((isset($_SESSION)) && (!empty($_SESSION['username']))) {
-     $$class->created_by = $_SESSION['username'];
-    } else {
-     $$class->created_by = 'selfWeb';
-    }
-    $$class->last_update_date = $$class->creation_date;
-    $$class->last_update_by = $$class->created_by;
-//  echo "<br> in Save";	 pa($$class);
+
     $required_field_flag = true;
     foreach ($$class->requiredField as $key => $value) {
      $required_field_flag = $required_field_flag && (isset($$class->$value));

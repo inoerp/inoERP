@@ -259,7 +259,6 @@ class category extends dbObject {
 					 $content_type_name . '&category_id=' . $category_id . '">' . $cat->category . '</a></td>';
 	 $statement .= '<td>' . $cat->description . '</td>';
 	 $statement .= '<td>' . self::contentCount_by_categoryId_contentType($category_id) . '</td>';
-	 $statement .= '<td></td>';
 	 $statement .= '</tr>';
 	 if (is_array($category_a)) {
 		$level_n = $level + 1;
@@ -271,13 +270,13 @@ class category extends dbObject {
 
  public function show_exploded_category($category_id, $content_type_name) {
 	$all_categories = $this->category_explosion_withPCRelation($category_id);
-	$statement = "<table id='forum_type_category_list' class='normal'>
+  $statement = '<div class="table_container hideDiv">';
+	$statement .= "<table id='forum_type_category_list' class='normal'>
 	        <thead>
-          <tr class='headerBgColor'>
+          <tr class='headerBgColor2'>
            <th>Category</th>
            <th>Description</th>
            <th>Posts</th>
-					 <th>Last Post</th>
           </tr>
          </thead>
 				 ";
@@ -290,7 +289,6 @@ class category extends dbObject {
 					$content_type_name . '&category_id=' . $category_id . '">' . $cat->category . '</a></td>';
 	$statement .= '<td>' . $cat->description . '</td>';
 	$statement .= '<td>' . self::contentCount_by_categoryId_contentType($category_id) . '</td>';
-	$statement .= '<td></td>';
 	$statement .= '</tr>';
 
 	foreach ($all_categories as $category_id => $category_a) {
@@ -301,7 +299,7 @@ class category extends dbObject {
 	 }
 	}
 	$statement .= '</table>';
-
+$statement .= '</div>';
 	return $statement;
  }
  

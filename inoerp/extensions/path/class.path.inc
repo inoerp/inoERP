@@ -314,10 +314,10 @@ class path extends dbObject {
   * 2. 
   */
 
- public function indented_pathMenu($allowed_parent_path_ids, &$allowed_path_ids) {
+ public function indented_pathMenu($allowed_parent_path_ids, &$allowed_path_ids, $divClass='') {
   $path = new path();
   $level = 0;
-  $allPaths = '<div class="menu"><ul class="block_menu">';
+  $allPaths = '<div class="menu"><ul class="block_menu '. $divClass.'">';
   foreach ($allowed_parent_path_ids as $path_id) {
    $path->findBy_id($path_id);
    $url = $path->fullPath($path->path_link);
@@ -376,7 +376,7 @@ class path extends dbObject {
   $allPaths .= '</ul>';
  }
 
- public function path_allpaths_block($parent_id_a = '', $path_i_a = '') {
+ public function path_allpaths_block($parent_id_a = '', $path_i_a = '', $divClass='') {
   $path_i = empty($path_i_a) ? $this->findAll_pathId() : $path_i_a;
   $path_parent_ids = empty($parent_id_a) ? $this->findAll_parentPathId() : $parent_id_a;
   $allowed_path_ids_all = array_intersect($path_i, $_SESSION['allowed_path_ids']);
@@ -386,7 +386,7 @@ class path extends dbObject {
    return null;
   }
 
-  $allPaths = $this->indented_pathMenu($allowed_parent_path_ids, $allowed_path_ids);
+  $allPaths = $this->indented_pathMenu($allowed_parent_path_ids, $allowed_path_ids, $divClass);
   return $allPaths;
  }
 

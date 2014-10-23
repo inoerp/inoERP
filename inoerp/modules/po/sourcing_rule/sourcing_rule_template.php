@@ -23,7 +23,7 @@
 						<ul class="column four_column">
 						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sourcing_rule_header_id select_popup clickable">
 							 Sourcing Rule Id : </label>
-							<?php echo form::text_field('po_sourcing_rule_header_id', $$class->po_sourcing_rule_header_id, '15', '25', '', 'System Number', 'po_sourcing_rule_header_id', $readonly) ?>
+							<?php echo $f->text_field_dr('po_sourcing_rule_header_id') ?>
 							<a name="show" href="form.php?class_name=po_sourcing_rule_header" class="show po_sourcing_rule_header_id">	
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
 						 </li>

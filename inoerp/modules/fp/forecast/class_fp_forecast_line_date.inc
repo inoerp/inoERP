@@ -20,11 +20,10 @@
    'last_update_date',
   ];
   //variables used for showing data
-  
-    public $initial_search = [
+
+  public $initial_search = [
    'fp_forecast_line_id',
   ];
-
   public $requiredField = [
    'fp_forecast_line_id',
    'forecast_date',
@@ -59,6 +58,51 @@
    $value_a = ['fp_forecast_line_id' => $this->fp_forecast_line_id, 'forecast_date' => $this->forecast_date];
    $result = $this->findBy_sql($sql, $param_a, $value_a);
    return !empty($result) ? array_pop($result) : false;
+  }
+
+  public static function find_by_ItemId_groupId_date($item_id_m, $group_id, $date) {
+   $sql = " SELECT 
+        fld.fp_forecast_line_id,fld.fp_forecast_line_date_id,
+        fld.forecast_date, fld.original_quantity, fld.current_quantity, fl.item_id_m,fh.forecast_group_id
+
+        FROM 
+        fp_forecast_line_date fld,
+        fp_forecast_line fl,
+        fp_forecast_header fh 
+        LEFT JOIN fp_forecast_group fg ON fg.fp_forecast_group_id = fh.forecast_group_id
+
+        WHERE fl.fp_forecast_line_id = fld.fp_forecast_line_id
+        AND fh.fp_forecast_header_id = fl.fp_forecast_header_id
+        AND fl.item_id_m = '{$item_id_m}'
+         AND fld.forecast_date = '{$date}'
+          AND fh.forecast_group_id = '{$group_id}'
+ ";
+
+   $result = self::find_by_sql($sql);
+   return !empty($result) ? ($result) : false;
+  }
+
+  public static function find_by_ItemId_groupId_dateRange($item_id_m, $group_id, $date_l, $date_u) {
+   $sql = " SELECT 
+        fld.fp_forecast_line_id,fld.fp_forecast_line_date_id,
+        fld.forecast_date, fld.original_quantity , fld.current_quantity, fl.item_id_m,fh.forecast_group_id
+
+        FROM 
+        fp_forecast_line_date fld,
+        fp_forecast_line fl,
+        fp_forecast_header fh 
+        LEFT JOIN fp_forecast_group fg ON fg.fp_forecast_group_id = fh.forecast_group_id
+
+        WHERE fl.fp_forecast_line_id = fld.fp_forecast_line_id
+        AND fh.fp_forecast_header_id = fl.fp_forecast_header_id
+        AND fl.item_id_m = '{$item_id_m}'
+         AND fld.forecast_date >= '{$date_l}' AND fld.forecast_date <= '{$date_u}' 
+          AND fh.forecast_group_id = '{$group_id}'
+ ";
+
+
+   $result = self::find_by_sql($sql);
+   return !empty($result) ? ($result) : false;
   }
 
   public function findAll_distinctItems_ofHeader() {

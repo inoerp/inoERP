@@ -174,14 +174,6 @@ class gl_journal_line extends dbObject {
 	 $new_gjl->total_ac_dr = $old_lines->total_ac_cr;
 	 $new_gjl->description = 'Reversal of line num ' . $old_lines->line_num;
 	 $new_gjl->reference_key_value = $old_journal_header_id . '_' . $old_lines->gl_journal_line_id;
-	 $new_gjl->creation_date = current_time();
-	 if ((isset($_SESSION)) && (!empty($_SESSION['username']))) {
-		$new_gjl->created_by = $_SESSION['username'];
-	 } else {
-		$new_gjl->created_by = 'selfWeb';
-	 }
-	 $new_gjl->last_update_date = $new_gjl->creation_date;
-	 $new_gjl->last_update_by = $new_gjl->created_by;
 	 try {
 		$new_gjl->save();
 	 } catch (Exception $e) {

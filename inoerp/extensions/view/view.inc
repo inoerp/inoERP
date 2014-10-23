@@ -1,15 +1,4 @@
 <?php
-//get all table names
-$table_name_array = view::find_all_tables();
-if (($table_name_array) & (count($table_name_array) > 0)) {
- $table_option_statement = "";
- $table_option_statement .="<option></option>";
- foreach ($table_name_array as $table) {
-	$table_option_statement .= '<option class="select table option" value="' . $table .
-					'">' . $table . '</option>';
- }
-}
-//end of all table names
 //get view display types
 $view_display_types = view::view_display_types();
 $view_display_type_statement = "<Select class=\"view_display_type_select\" name=\"display_type\">";

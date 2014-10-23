@@ -1,7 +1,6 @@
 <div id="all_contents">
  <div id="content_header"></div>
- <div id="content_left"></div>
- <div id="content_right">
+  <div id="content_right">
   <div id="content_right_left">
    <div id="content_top"></div>
    <div id="contentDivId">
@@ -88,7 +87,9 @@
    </div>
    
   </div>
-  <div id="content_right_right"></div>
+   <div id="content_right_right">
+    <div id="content_left"></div>
+   </div>
  </div>
 <div id="content_bottom"></div>
 </div>

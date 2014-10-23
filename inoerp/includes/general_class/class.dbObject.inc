@@ -12,13 +12,25 @@
 //  public $column = [];
   public $requiredField = [];
   public static $position_array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
-    public static $control_type_a = [
+  public static $control_type_a = [
    'EQUAL' => '=',
    'NE' => '!=',
    'GT' => '>',
    'GTE' => '>=',
    'LT' => '<',
    'LTE' => '<=',
+  ];
+  public static $db_control_type_a = [
+   ' = ' => '=',
+   ' != ' => '!=',
+   ' > ' => '>',
+   ' >= ' => '>=',
+   ' < ' => '<',
+   ' <= ' => '<=',
+   ' LIKE ' => ' LIKE ',
+   ' IS_NULL ' => 'IS NULL',
+   ' IS_NOT_NULL ' => 'IS NOT NULL ',
+   ' LEFT_JOIN ' => 'LEFT JOIN',
   ];
   public static $key_column = '';
   public static $parent_primary_column = null;
@@ -27,6 +39,7 @@
   public $conn;
   public $field_a = [];
   public $file_id_values;
+  public static $audit_trial = [ 'created_by', 'creation_date', 'last_update_by', 'last_update_date',];
 
   //public $dateFields = [];
   //public $number_fields = [];
@@ -74,7 +87,7 @@
 
   public function runSQL($sql, $value_a = '') {
    global $dbc;
-   if(empty($dbc->connection)){
+   if (empty($dbc->connection)) {
     return false;
    }
    $stmt = $dbc->connection->prepare(" $sql ");
@@ -101,7 +114,7 @@
 
   public function findBy_sql($sql, $param_a = '', $value_a = '') {
    global $dbc;
-      if(empty($dbc->connection)){
+   if (empty($dbc->connection)) {
     return false;
    }
    $stmt = $dbc->connection->prepare(" $sql ");
@@ -126,7 +139,7 @@
 
   public function findBySql($sql, $value_a = '') {
    global $dbc;
-      if(empty($dbc->connection)){
+   if (empty($dbc->connection)) {
     return false;
    }
    $stmt = $dbc->connection->prepare(" $sql ");
@@ -410,8 +423,8 @@
   public function set_module_default() {
    if (property_exists($this, 'module_defaults')) {
     foreach ($this->module_defaults as $key => $value) {
-     if(empty($this->$key)){
-     $this->$key = $value;
+     if (empty($this->$key)) {
+      $this->$key = $value;
      }
     }
    }
@@ -439,17 +452,17 @@
     $this->creation_date = current_time();
    }
    if (empty($this->created_by)) {
-    if ((isset($_SESSION)) && (!empty($_SESSION['username']))) {
-     $this->created_by = $_SESSION['username'];
+    if ((isset($_SESSION)) && (!empty($_SESSION['user_id']))) {
+     $this->created_by = $_SESSION['user_id'];
     } else {
-     $this->created_by = 'selfWeb';
+     $this->created_by = '-99';
     }
    }
    $this->last_update_date = current_time();
-   if ((isset($_SESSION)) && (!empty($_SESSION['username']))) {
-    $this->last_update_by = $_SESSION['username'];
+   if ((isset($_SESSION)) && (!empty($_SESSION['user_id']))) {
+    $this->last_update_by = $_SESSION['user_id'];
    } else {
-    $this->last_update_by = 'selfWeb';
+    $this->last_update_by = '-99';
    }
   }
 
@@ -510,12 +523,29 @@
 
    //Bind parameters
    foreach ($field_array as $key => $value) {
+    if (in_array($value, self::$audit_trial)) {
+     continue;
+    }
     if (!empty($this->$value)) {
      $stmt->bindParam(":$value", $this->$value);
     } else {
      $stmt->bindvalue(":$value", null, PDO::PARAM_INT);
     }
    }
+
+   if (in_array('created_by', $field_array)) {
+    $last_update_date = current_time();
+    if (!empty($_SESSION['user_id'])) {
+     $last_update_by = $_SESSION['user_id'];
+    } else {
+     $last_update_by = '-99';
+    }
+    $stmt->bindParam(':created_by', $last_update_by);
+    $stmt->bindParam(':creation_date', $last_update_date);
+    $stmt->bindParam(':last_update_by', $last_update_by);
+    $stmt->bindParam(':last_update_date', $last_update_date);
+   }
+
    try {
     $stmt->execute();
     if (isset($primary_column)) {
@@ -526,7 +556,7 @@
     pa($stmt);
     $this->msg = 0;
     $dbc->rollback = 1;
-    echo "<br>Record couldnt be saved!!: Error Code : DBO01 . Error @dbObject @@ Line " . __LINE__. '<br>'. $e->getMessage() . "<br>";
+    echo "<br>Record couldnt be saved!!: Error Code : DBO01 . Error @dbObject @@ Line " . __LINE__ . '<br>' . $e->getMessage() . "<br>";
    }
    return $this->msg;
   }
@@ -541,6 +571,9 @@
    }
    $field_stmt = '';
    foreach ($field_array as $key => $value) {
+    if (in_array($value, array('created_by', 'creation_date'))) {
+     continue;
+    }
     $field_stmt .= $value . ' = :' . $value . ', ';
    }
    $field_stmt_f = rtrim($field_stmt, ', ');
@@ -553,25 +586,27 @@
 
    $stmt = $dbc->connection->prepare(" $sql ");
    //Bind parameters
-//   foreach ($field_array as $key => $value) {
-//    $stmt->bindParam(":$value", $this->$value);
-//   }
    foreach ($field_array as $key => $value) {
+    if (in_array($value, self::$audit_trial)) {
+     continue;
+    }
     if (!empty($this->$value)) {
      $stmt->bindParam(":$value", $this->$value);
     } else {
      $stmt->bindvalue(":$value", null, PDO::PARAM_INT);
     }
    }
-   $time = time();
-   $last_update_date = strftime("%d-%m-%y %H:%M:%S", $time);
-   if (!empty($_SESSION['user_name'])) {
-    $last_update_by = $_SESSION['user_name'];
-   } else {
-    $last_update_by = 'admin';
+
+   if (in_array('last_update_by', $field_array)) {
+    $last_update_date = current_time();
+    if (!empty($_SESSION['user_id'])) {
+     $last_update_by = $_SESSION['user_id'];
+    } else {
+     $last_update_by = '-99';
+    }
+    $stmt->bindParam(':last_update_by', $last_update_by);
+    $stmt->bindParam(':last_update_date', $last_update_date);
    }
-   $stmt->bindParam(':last_update_by', $last_update_by);
-   $stmt->bindParam(':last_update_date', $last_update_date);
    $stmt->bindParam(':primary_id', $id);
    try {
     $stmt->execute();
@@ -580,7 +615,7 @@
     $this->msg = 0;
     $dbc->rollback = 1;
     echo "<div class='message'>failing for sql is $sql</div>";
-    echo "<br>Record couldnt be updated!!: Error Code : DBO01 . Error @dbObject @@ Line " . __LINE__. '<br>'. $e->getMessage() . "<br>";
+    echo "<br>Record couldnt be updated!!: Error Code : DBO01 . Error @dbObject @@ Line " . __LINE__ . '<br>' . $e->getMessage() . "<br>";
    }
    return $this->msg;
   }
@@ -589,11 +624,12 @@
    global $dbc;
    if (property_exists($this, 'field_a')) {
     $field_array = $this->field_a;
-   } else {
-    $field_array = static::$field_array;
    }
    $field_stmt = '';
    foreach ($field_array as $key => $value) {
+    if (in_array($value, array('created_by', 'creation_date'))) {
+     continue;
+    }
     if (isset($this->$value)) {
      $field_stmt .= $value . ' = :' . $value . ', ';
     }
@@ -609,10 +645,25 @@
 
 //Bind parameters
    foreach ($field_array as $key => $value) {
+    if (in_array($value, self::$audit_trial)) {
+     continue;
+    }
     if (isset($this->$value)) {
      $stmt->bindParam(":$value", $this->$value);
     }
    }
+
+   if (in_array('last_update_by', $field_array)) {
+    $last_update_date = current_time();
+    if (!empty($_SESSION['user_id'])) {
+     $last_update_by = $_SESSION['user_id'];
+    } else {
+     $last_update_by = '-99';
+    }
+    $stmt->bindParam(':last_update_by', $last_update_by);
+    $stmt->bindParam(':last_update_date', $last_update_date);
+   }
+
    $stmt->bindParam(':primary_id', $id);
    try {
     $stmt->execute();
@@ -621,7 +672,57 @@
     $this->msg = 0;
     $dbc->rollback = 1;
     echo "<div class='message'>failing for sql is $sql</div>";
-    echo "<br>Record couldnt be updated!!: Error Code : DBO01 . Error @dbObject @@ Line " . __LINE__. '<br>'. $e->getMessage() . "<br>";
+    echo "<br>Record couldnt be updated!!: Error Code : DBO01 . Error @dbObject @@ Line " . __LINE__ . '<br>' . $e->getMessage() . "<br>";
+   }
+   return $this->msg;
+  }
+
+  public function save_singeRecord_db() {
+   global $dbc;
+
+   if (property_exists($this, 'field_a')) {
+    $field_array = $this->field_a;
+   }
+   $field_stmt = '';
+   foreach ($field_array as $key => $value) {
+    if (in_array($value, array('created_by', 'creation_date'))) {
+     continue;
+    }
+    $field_stmt .= $value . ' = :' . $value . ', ';
+   }
+   $field_stmt_f = rtrim($field_stmt, ', ');
+//write SQL
+   $sql = " UPDATE ";
+   $sql.= static::$table_name;
+   $sql .= " SET ";
+   $sql.= $field_stmt_f;
+   $stmt = $dbc->connection->prepare(" $sql ");
+//Bind parameters
+   foreach ($field_array as $key => $value) {
+    if (in_array($value, self::$audit_trial)) {
+     continue;
+    }
+    $stmt->bindParam(":$value", $this->$value);
+   }
+
+   if (in_array('last_update_by', $field_array)) {
+    $last_update_date = current_time();
+    if (!empty($_SESSION['user_id'])) {
+     $last_update_by = $_SESSION['user_id'];
+    } else {
+     $last_update_by = '-99';
+    }
+    $stmt->bindParam(':last_update_by', $last_update_by);
+    $stmt->bindParam(':last_update_date', $last_update_date);
+   }
+
+   try {
+    $stmt->execute();
+    $this->msg = 1;
+   } catch (PDOException $e) {
+    $this->msg = 0;
+    echo "<div class='message'>failing for sql is $sql</div>";
+    echo "Record could not be updated !!: " . $e->getMessage();
    }
    return $this->msg;
   }
@@ -646,7 +747,7 @@
     $this->msg = 0;
     $dbc->rollback = 1;
     echo "<div class='message'>failing for sql is $sql</div>";
-    echo "<br>Record couldnt be deleted!!: Error Code : DBO02 . Error @dbObject @@ Line " . __LINE__. '<br>'. $e->getMessage() . "<br>";
+    echo "<br>Record couldnt be deleted!!: Error Code : DBO02 . Error @dbObject @@ Line " . __LINE__ . '<br>' . $e->getMessage() . "<br>";
    }
    return $this->msg;
   }
@@ -671,7 +772,7 @@
     $this->msg = 0;
     $dbc->rollback = 1;
     echo "<div class='message'>failing for sql is $sql</div>";
-    echo "<br>Record couldnt be deleted !!: Error Code : DBO02 . Error @dbObject @@ Line " . __LINE__. '<br>'. $e->getMessage() . "<br>";
+    echo "<br>Record couldnt be deleted !!: Error Code : DBO02 . Error @dbObject @@ Line " . __LINE__ . '<br>' . $e->getMessage() . "<br>";
    }
    return $this->msg;
   }
@@ -696,30 +797,12 @@
     $dbc->rollback = 1;
     $this->msg = 0;
     echo "<div class='message'>failing for sql is $sql</div>";
-    echo "<br>Record couldnt be deleted!!: Error Code : DBO02 . Error @dbObject @@ Line " . __LINE__. '<br>'. $e->getMessage() . "<br>";
+    echo "<br>Record couldnt be deleted!!: Error Code : DBO02 . Error @dbObject @@ Line " . __LINE__ . '<br>' . $e->getMessage() . "<br>";
    }
    return $this->msg;
   }
 
-// public static function delete($id) {
-//	global $dbc;
-//
-//	$sql = " DELETE FROM ";
-//	$sql .= static::$table_name;
-//	$sql .= " WHERE  ";
-//	$sql .= static::$primary_column . "= '{$id}' ";
-//
-////	echo '<div class="message"><br/>$sql is : '. $sql. '</div>';
-//	$prepare = $dbc->connection->prepare($sql);
-//
-//	if ($prepare->execute()) {
-//	 return true;
-//	} else {
-//	 return false;
-//	}
-// }
-  
-   public function _update_extra_field($reference_key_name, $reference_key_value, $reference_type='table') {
+  public function _update_extra_field($reference_key_name, $reference_key_value, $reference_type = 'table') {
    global $dbc;
    if (!empty($_POST['sys_extra_field_id'])) {
     foreach ($_POST['sys_extra_field_id'] as $k => $v) {
@@ -750,7 +833,6 @@
     }
    }
   }
-
 
  }
 

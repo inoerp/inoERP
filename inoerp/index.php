@@ -43,16 +43,28 @@
      <span class="heading">inoERP 1.0 Beta1</span>
      The first beta version of inoERP (inoERP 1.0 Beta1) - has been released. This version is fully functional
      but not yet ready for production usage. 
-     <br><br>Read the release details <a href="content.php?mode=2&content_id=197&content_type_id=47"> here </a>
+     <br>Read the release details <a href="content.php?mode=2&content_id=197&content_type_id=47"> here </a>
      <br><br>Download the beta version from  <a href="https://github.com/inoerp/inoerp_v1"> GitHub  </a>, or 
      <a href="https://sourceforge.net/projects/inoerp/"> Source Forge  </a>
+     <br><br>
+<form action="http://www.google.com" id="cse-search-box" target="_blank">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-3081028146173931:7997050045" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="60" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+
     </li>
     <ul>
      </div>
      </div>
 
      <div id="summary_content">
-        <?php
+      <?php
        $content = new content();
        echo $content->showfrontPage_contents(20, 500);
 //		 echo page::front_page_summary(6); 

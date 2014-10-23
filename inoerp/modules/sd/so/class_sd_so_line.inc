@@ -10,6 +10,13 @@
   public $checkbox = [
    "rev_enabled_cb"
   ];
+  public $line_status_a = [
+   'ENTERED' => 'Entered',
+   'AWAITING_PICKING' => 'Awaiting Picking',
+   'SHIPPED' => 'Shipped',
+   'CLOSED' => 'Closed',
+  ];
+  
   public $field_a = [
    'sd_so_line_id',
    'sd_so_header_id',
@@ -124,7 +131,7 @@
 
   private function _validate_before_save() {
    $ret = 1;
-   $item = item::find_by_orgId_item_id_m($this->item_id_m, $this->org_id);
+   $item = item::find_by_orgId_item_id_m($this->item_id_m, $this->shipping_org_id);
    if ($item) {
     if (empty($item->customer_ordered_cb)) {
      $ret = -90;
@@ -195,8 +202,9 @@
    $sql = " SELECT * FROM ";
    $sql .= self::$table_name;
    $sql .= " WHERE shipping_org_id = '{$org_id}'";
+   $sql .= " AND schedule_ship_date IS NOT NULL ";
    if (!empty($item_id_m)) {
-    $sql .= " AND item_id_m >= '{$item_id_m}'";
+    $sql .= " AND item_id_m = '{$item_id_m}'";
    }
    if (!empty($ssd)) {
     $sql .= " AND schedule_ship_date >= '{$ssd}'";

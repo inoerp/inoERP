@@ -76,7 +76,7 @@
     $this->end_date = next_monday($this->end_date);
     $end_date_obj = new DateTime($this->end_date);
     $no_of_days = $end_date_obj->diff(new DateTime($this->start_date));
-    $this->no_of_bucket = ceil($no_of_days->days / 7);
+    $this->no_of_bucket = ceil($no_of_days->days / 7) + 1;
    }
 
    if (!empty($this->original)) {
@@ -114,8 +114,8 @@
    } else if ($this->bucket_type == 'WEEKLY') {
     $date_s = new DateTime($this->start_date);
     for ($i1 = 0; $i1 < $this->no_of_bucket; $i1++) {
-     $date_s->add(new DateInterval('P7D'));
-     $this->_create_forecast_line_date($date_s->format('Y-m-d'));
+          $this->_create_forecast_line_date($date_s->format('Y-m-d'));
+          $date_s->add(new DateInterval('P7D'));
     }
    }
   }

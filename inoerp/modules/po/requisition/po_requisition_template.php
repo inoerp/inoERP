@@ -31,7 +31,7 @@
             <ul class="column five_column">
              <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="po_requisition_header_id select_popup clickable">
                Requisition  Id : </label>
-              <?php echo form::text_field('po_requisition_header_id', $po_requisition_header->po_requisition_header_id, '15', '25', '', 'System Number', 'po_requisition_header_id', $readonly) ?>
+              <?php echo $f->text_field_dr('po_requisition_header_id') ?>
               <a name="show" href="po_requisition.php?po_requisition_header_id=" class="show po_requisition_header_id">
                <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
              </li>

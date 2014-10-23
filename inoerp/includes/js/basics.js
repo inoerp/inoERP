@@ -46,6 +46,23 @@ function treeView() {
     e.stopPropagation();
    }
   });
+
+ $('.expand_collapse_all').on('click', function() {
+  $(this).parent().find('.tree_view').find('.contentContainer, .contentViewing').each(
+   function(e) {
+    if ($(this).hasClass('contentContainer')) {
+     $(this).find('ul').show();
+     $(this).find('ul').find('li').show();
+     $(this).find('ul').find('li').has('ul').addClass('contentContainer');
+     $(this).removeClass('contentContainer').addClass('contentViewing');
+    } else {
+     $(this).find('ul').hide();
+     $(this).find('ul').find('li').hide().removeClass('contentContainer');
+     $(this).removeClass('contentViewing').addClass('contentContainer');
+    }
+   });
+ });
+
 }
 
 //get blocks
@@ -1653,9 +1670,16 @@ $(document).ready(function() {
  }
 
  $('#content_per_page').on('click', function(e) {
-  var newUrl = window.location + '&per_page=' + $(this).closest('div').find('select').val();
-  $(this).attr('href', newUrl);
- })
+  var currentUrl = window.location.toString();
+  var newURL = currentUrl.replace(/per_page=/g, '');
+  newURL = newURL.replace(/&&/g, '&');
+  if (newURL.indexOf('?') > -1) {
+   newURL = newURL + '&per_page=' + $(this).closest('div').find('select').val();
+  } else {
+   newURL = newURL + '?per_page=' + $(this).closest('div').find('select').val();
+  }
+  $(this).attr('href', newURL);
+ });
 
 //enable lines with change data for save
  $('#content').data('last', '').on("blur", ':input', function() {
@@ -2297,6 +2321,16 @@ $(document).ready(function() {
   $(this).closest('tr').find('.field_type').val(field_type);
  })
 
+ $('#content').on('click', '.hideDiv', function() {
+  $('.hideDiv').children().toggle();
+  $(this).removeClass('hideDiv').addClass('showDiv');
+ })
+
+ $('#content').on('click', '.showDiv', function() {
+  $(this).children().toggle();
+  $(this).removeClass('showDiv').addClass('hideDiv');
+ })
+$('#user_info .block_menu').menu();
 });
 function toUpperCase(str)
 {

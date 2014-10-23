@@ -69,7 +69,7 @@
   public $requiredField = [
    "view_name",
    "description",
-   "query_"
+   "query_v"
   ];
   public $search = [
    '_show_update_path' => 1,
@@ -110,15 +110,21 @@
   public $last_update_date;
   public $time;
   public $msg;
-private $_table_schema;
-  
-  function __construct() {
-   global $dbc;
-   $sql_fields = " SHOW COLUMNS FROM  " . self::$table_name;
-   $prepare = $dbc->connection->prepare($sql_fields);
-   $prepare->execute();
-   self::$field_array = $prepare->fetchAll(PDO::FETCH_COLUMN, 0);
-   $this->_table_schema = DB_NAME;
+  private $_table_schema;
+  public $column_name;
+
+
+//  function __construct() {
+//   global $dbc;
+//   $sql_fields = " SHOW COLUMNS FROM  " . self::$table_name;
+//   $prepare = $dbc->connection->prepare($sql_fields);
+//   $prepare->execute();
+//   self::$field_array = $prepare->fetchAll(PDO::FETCH_COLUMN, 0);
+//   $this->_table_schema = DB_NAME;
+//  }
+
+  public function _before_save() {
+   pa($_POST);
   }
 
   public function _after_save() {
@@ -128,10 +134,10 @@ private $_table_schema;
     $path_array = $_POST['view_path'];
     foreach ($path_array as $key => $value) {
      $view_path = new view_path;
-     $view_path->view_id = $view->view_id;
+     $view_path->view_id = $this->view_id;
      $view_path->column_name = $value;
      $path_array = path::find_by_idColumn_name($value);
-     $view_path->path = $path_array->value;
+     $view_path->path = $path_array['value'];
 //		echo '<pre>';
 //	print_r($view_path);
 //	echo '<pre>';
@@ -144,10 +150,6 @@ private $_table_schema;
    }
   }
 
-  public function __set($name, $value) {
-   $this->$name = $value;
-  }
-
   Public static function view_display_types() {
    $org_header = option_header::find_by_name('VIEW_DISPLAY_TYPE');
    $type = option_line::find_by_option_id($org_header->option_header_id);
@@ -157,7 +159,7 @@ private $_table_schema;
   public static function find_all_tables() {
    global $db;
    $query = " SELECT TABLE_NAME from information_schema.tables where TABLE_TYPE ='BASE TABLE' "
-     . " AND TABLE_SCHEMA= '".DB_NAME."' ";
+     . " AND TABLE_SCHEMA= '" . DB_NAME . "' ";
    $result = $db->find_by_sql($query);
 
    $table_name_array = array();
@@ -166,19 +168,27 @@ private $_table_schema;
    }
    return $table_name_array;
   }
-  
-    public static function count_all_tables() {
+
+  public static function find_all_tables_and_views() {
+   global $db;
+   $query = " SELECT TABLE_NAME from information_schema.tables  "
+     . " where TABLE_SCHEMA= '" . DB_NAME . "' ";
+   $result = $db->find_by_sql($query);
+   return $result;
+  }
+
+  public static function count_all_tables() {
    global $db;
    $query = " SELECT count(TABLE_NAME) as table_count from information_schema.tables  "
-     . " WHERE TABLE_SCHEMA= '".DB_NAME."' ";
+     . " WHERE TABLE_SCHEMA= '" . DB_NAME . "' ";
    $result = $db->find_by_sql($query);
-   return !empty($result) ? array_pop($result) : null ;
+   return !empty($result) ? array_pop($result) : null;
   }
 
   public static function find_all_tables_gen() {
    global $db;
    $query = " SELECT TABLE_NAME from information_schema.tables where TABLE_TYPE ='BASE TABLE' "
-     . " AND TABLE_SCHEMA= '".DB_NAME."' ";
+     . " AND TABLE_SCHEMA= '" . DB_NAME . "' ";
    $result = $db->find_by_sql($query);
 
    foreach ($result as $object) {
@@ -188,7 +198,7 @@ private $_table_schema;
 
   public function findAll_tables() {
    $query = " SELECT TABLE_NAME from information_schema.tables where TABLE_TYPE ='BASE TABLE' "
-     . " AND TABLE_SCHEMA= '".DB_NAME."' ";
+     . " AND TABLE_SCHEMA= '" . DB_NAME . "' ";
    $result = $this->findBySql($query);
    $table_name_array = array();
    foreach ($result as $object) {
@@ -208,6 +218,16 @@ private $_table_schema;
      $column_name_array [] = $object->Field;
     }
     return $column_name_array;
+   }
+  }
+  
+  
+  public static function find_columns_of_table_obj($table_name) {
+   global $db;
+   if (!empty($table_name)) {
+    $query = "SHOW COLUMNS FROM $table_name ";
+    $result = $db->find_by_sql($query);
+    return $result;
    }
   }
 

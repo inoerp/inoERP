@@ -15,11 +15,11 @@ table#category_list{
 margin-bottom: 20px;
 }
 table#category_lis {
-width: 740px;
+width: 730px;
 }
 
 table#forum_list, table#forum_type_category_list{
-width: 740px;
+width: 730px;
 }
 
 table#forum_list td, table#forum_type_category_list td{
@@ -64,8 +64,18 @@ table#forum_list tr.odd{
 }
 
 
-table#forum_list td.subject_summary{
-width: 70%;
+
+
+table#forum_list td.no_of_replies{
+width: 40px;
+}
+
+table#forum_list td.created_by{
+width: 80px;
+}
+
+table#forum_list td.post_date{
+width: 140px;
 }
 
 
@@ -74,7 +84,7 @@ font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif;
 }
 .heading{
 font-size: 1.6em;
-margin: 10px 20px 20px 0;
+margin: 10px 20px 10px 0;
 font-weight: bold;
 }
 
@@ -165,7 +175,7 @@ font-size: 1.4em;
 
 ul.summary_list li {
 display: inline-block;
-width: 320px;
+width: 310px;
 vertical-align : top;
 padding : 0px 10px;
 height : 170px;

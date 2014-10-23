@@ -19,7 +19,7 @@
             <li>
              <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_overhead_id select_popup clickable">
               Overhead Id : </label>
-             <?php echo $f->text_field_ds('bom_overhead_id'); ?>
+             <?php echo $f->text_field_dr('bom_overhead_id'); ?>
              <a name="show" class="show bom_overhead_id_show">
               <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
             </li>

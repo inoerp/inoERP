@@ -29,8 +29,7 @@
 						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sd_so_header_id select_popup">
 							 SO Header Id : </label>
 							<?php
-							$f = new inoform();
-							echo form::text_field('sd_so_header_id', $sd_so_header->sd_so_header_id, '15', '25', '', 'System Number', 'sd_so_header_id', $readonly1)
+								echo $f->text_field_dr('sd_so_header_id')
 							?>
 							<a name="show" href="form.php?class_name=sd_so_header" class="show sd_so_header_id">
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 

@@ -40,7 +40,7 @@
               <li><label>Bucket Type: </label>
                <?php echo $f->select_field_from_object('bucket_type', fp_forecast_header::fp_bucket(), 'option_line_code', 'option_line_value', $$class->bucket_type, '', '', 1, $readonly); ?></li>
               <li><label>Auto Consume :</label><?php echo $f->checkBox_field('consume_cb', $$class->consume_cb); ?>  </li>
-              <li><label>Backward Days :</label><?php echo $f->number_field('forward_days', $$class->forward_days); ?> </li>
+              <li><label>Backward Days :</label><?php echo $f->number_field('backward_days', $$class->backward_days); ?> </li>
               <li><label>Forward Days :</label><?php echo $f->number_field('forward_days', $$class->forward_days); ?> </li>
              </ul> 
             </div> 

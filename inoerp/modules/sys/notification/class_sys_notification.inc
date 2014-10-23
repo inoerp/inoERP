@@ -147,6 +147,7 @@
   }
 
   public function _before_showing() {
+   
    //view reference statement
    if ((!empty($this->reference_key_name)) && (!empty($this->reference_key_value))) {
     $this->ref_doc_stmt = show_reference_doc($this->reference_key_name, $this->reference_key_value);

@@ -1,3 +1,129 @@
+.menu a:hover {
+    padding: 2px;
+    border: 1px solid rgba(80,80,180,1);
+    background: rgba(80,80,180,0.6);
+    text-decoration: none;
+    color: white;
+}
+/*-----------------------------Ino Drop Down Menu------------------------*/
+ .ino_drop_down_menu { 
+position: relative; 
+text-align: right; 
+font-weight: bold;
+}
+
+/* all lists */
+ .ino_drop_down_menu,  .ino_drop_down_menu ul { padding: 0; margin: 0; list-style: none; 
+line-height: 1em; 
+z-index: 9; 
+}
+ .ino_drop_down_menu ul { position: static; }
+ .ino_drop_down_menu ul a { 
+display: block; 
+border-bottom: none; 
+padding: 4px 8px; 
+font-weight: bold; 
+color: #eee; 
+text-decoration: none; 
+text-align: right; 
+}
+ .ino_drop_down_menu ul li .ino_drop_down_menu-tab a { border-right: 1px solid #52565e; }
+ .ino_drop_down_menu ul li, .ino_drop_down_menu ul li li a  { background: none repeat scroll 0% 0% rgba(180, 122, 122, 0.3); }
+ .ino_drop_down_menu li li a { border-right: none; border-top: 1px solid #eee; }
+
+/* all list items */
+/* width needed or else Opera goes nuts */
+ .ino_drop_down_menu li { float: right; height: 100%; margin: 0 !important; padding: 0; list-style-image: none; list-style-type: none; background-image: none; }
+ .ino_drop_down_menu li .ino_drop_down_menu-tab { padding-bottom: 1px; background: url(images/bkg_tab.png) repeat-x right bottom; }
+ .ino_drop_down_menu li li { 
+width: 120px; 
+background: none repeat scroll 0% 0% rgba(180, 122, 122, 0.3);
+filter:Alpha(opacity=88);
+opacity: 0.88; }
+
+/* second-level lists */
+/* Note: Use left instead of display to hide publicly visible ino_drop_down_menus because display: none isn't read by screen readers */
+ .ino_drop_down_menu li ul { 
+position: absolute; 
+background: none; 
+margin: 0; 
+width: 120px; 
+right: -999em; 
+display: none; 
+line-height: 1.2em; 
+background: #000;
+}
+
+/* third-and-above-level lists */
+ .ino_drop_down_menu li li.expandable ul { margin: -20px 60px 0 0; }
+
+ .ino_drop_down_menu li:hover ul ul,
+ .ino_drop_down_menu li:hover ul ul ul,
+ .ino_drop_down_menu li:hover ul ul ul ul,
+ .ino_drop_down_menu li:hover ul ul ul ul ul,
+ .ino_drop_down_menu li.iehover ul ul,
+ .ino_drop_down_menu li.iehover ul ul ul,
+ .ino_drop_down_menu li.iehover ul ul ul ul,
+ .ino_drop_down_menu li.iehover ul ul ul ul ul {
+  right: -999em;
+  display: none;
+}
+
+/* lists nested under hovered list items */
+ .ino_drop_down_menu li:hover ul,
+ .ino_drop_down_menu li li:hover ul,
+ .ino_drop_down_menu li li li:hover ul,
+ .ino_drop_down_menu li li li li:hover ul,
+ .ino_drop_down_menu li li li li li:hover ul,
+ .ino_drop_down_menu li.iehover ul,
+ .ino_drop_down_menu li li.iehover ul,
+ .ino_drop_down_menu li li li.iehover ul,
+ .ino_drop_down_menu li li li li.iehover ul,
+ .ino_drop_down_menu li li li li li.iehover ul {
+  right: 60px;
+  display: block;
+}
+
+
+/* second-and-more-level hovering */
+ .ino_drop_down_menu li li.expandable { background: #45454a url(images/arrow.png) no-repeat 145px 7px; }
+ .ino_drop_down_menu li li:hover,
+ .ino_drop_down_menu li li.iehover {
+  background-color: #111;
+}
+ .ino_drop_down_menu li li:hover a,
+ .ino_drop_down_menu li li:hover li:hover a,
+ .ino_drop_down_menu li li:hover li:hover li:hover a {
+  color: #111;
+}
+ .ino_drop_down_menu li li.expandable:hover a,
+ .ino_drop_down_menu li li.expandable:hover li.expandable:hover a {
+  border-color: #111; color: #eee;
+}
+ .ino_drop_down_menu li li.expandable:hover li a,
+ .ino_drop_down_menu li li.expandable:hover li.expandable:hover li a {
+  border-color: #111;
+}
+ .ino_drop_down_menu li li:hover li a,
+ .ino_drop_down_menu li li.iehover li a,
+ .ino_drop_down_menu li li.iehover li.iehover li a {
+  color: #111;
+}
+ .ino_drop_down_menu li li.iehover a,
+ .ino_drop_down_menu li li.iehover li.iehover a,
+ .ino_drop_down_menu li li.iehover li.iehover li.iehover a {
+  color: #111; width: 90%; /* IE */
+}
+
+/* #210615: Mozilla on Mac fix */
+html.js fieldset.collapsible div.fieldset-wrapper { overflow: visible; }
+
+@media print {
+   .ino_drop_down_menu { display: none; }
+  body .ino_drop_down_menu { margin-top: 0 !important; }
+}
+
+
 /*Navigation menu*/
 #navigation_menu li{
 margin-top: 5px;
@@ -82,6 +208,7 @@ li.end_li_type{
 border-bottom: 1px solid #ccc;
 }
 /*end of right click menu*/
+
 
 #header_top .menu { 
 position: absolute; top: 0px;
@@ -222,6 +349,7 @@ html.js fieldset.collapsible div.fieldset-wrapper { overflow: visible; }
   #header_top .menu { display: none; }
   body#header_top .menu { margin-top: 0 !important; }
 }
+
 
 /*-------------------------Not Used------------------------------------*/
 #menu {

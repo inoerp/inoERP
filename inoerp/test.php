@@ -13,16 +13,80 @@
 ////$param =  ['bu_org_id' => array('5') ];
 ////
 ////$ar_ti->prg_import_ar_transaction(serialize($param));
-//  pa(get_dbColumns('sys_notification'));
+//  pa(get_dbColumns('user_favourite'));
 //  pa($session);
 //  pa($user);
  $db = new dbObject();
  $dbc = new dbc();
 
 // $offset = 10;
- $date = new DateTime('2014-7-01');
- 
-
+// $date = new DateTime('2014-7-01');
+// 
+// echo $fav->show_currentUser_fav();
+//
+ pa( view::find_all_tables_and_views());
+ pa(view::find_columns_of_table_obj('subinventory'));
+// 
+// $ud = new user_activity_v();
+//  
+//  $subject_noof_char = 50;
+// $pageno = !empty($_GET['pageno']) ? $_GET['pageno'] : 1;
+// $per_page = !empty($_GET['per_page']) ? $_GET['per_page'] : 10;
+// $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
+// $comment_result = $ud->user_comments();
+// $total_count_c = count($comment_result);
+// $pagination_c = new pagination($pageno, $per_page, $total_count_c);
+// $pagination_c->setProperty('_path', 'form');
+// $pagination_c->setProperty('_query_string', $query_string);
+// $comment_string = '<div class="table_container">';
+//  if ($comment_result) {
+//  $con_count = 0;
+//  if (count($comment_result) > 0) {
+//   $comment_string .='<table id="comment_list" class="top_margin10 form_line_data_table"><thead> 
+//						 <tr class="headerBgColor">
+//							<th class="topics">Subject</th>
+//							<th class="created_by">Created By</th>
+//							<th class="post_date">Post Date</th>
+//						 </tr>
+//						</thead>';
+//   foreach ($comment_result as $recod_c_k => $recod_c) {
+//   $continue = false;
+////    if (($recod_c_k > ($pageno - 1) * $per_page) && ($recod_c_k <= (($pageno - 1) * $per_page) + $per_page)) {
+////     $continue = false;
+////    }
+//    if ($continue) {
+//     continue;
+//    }
+//    $even_odd = ($con_count % 2 == 0) ? 'even' : 'odd';
+//    $comment_string .= "<tr id=\"row_no$con_count\" class='new_row $even_odd'> "
+//      . " <td class='subject_summary'>";
+//    $comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&'
+//      . 'content_id=' . $recod_c->reference_id . '&content_type_id=' . $recod_c->content_type_id . '">';
+//    $comment_string .= substr($recod_c->comment, 0, $subject_noof_char);
+//    $comment_string .= ' </a>';
+//    $comment_string .= '</td>';
+//    $comment_string .= '<td class="created_by">';
+//    $comment_string .= $recod_c->username;
+//    $comment_string .= '</td><td class="post_date">';
+//    $comment_string .= $recod_c->creation_date;
+//    $comment_string .= '</td>';
+//    $comment_string .= '</tr>';
+//    $con_count++;
+//   }
+//
+//  }
+//
+//  $comment_string .='</table>';
+// }
+// $comment_string .='</div>';
+// $comment_string .= '<div id="pagination">';
+//
+//
+// $comment_string .= $pagination_c->show_pagination();
+// $comment_string .= '</div>';
+//
+//
+// echo $comment_string;
 // function next_monday($date_p) {
 //  $date = new DateTime($date_p);
 //  if ($date->format('D') == 'Mon') {
@@ -32,45 +96,74 @@
 //   return $date->format('Y-m-d');
 //  }
 // }
- echo "<br>Next Monday 2014-7-01 "; echo next_monday('2014-7-01');
- echo "<br>Next Monday 2014-7-02 ";echo next_monday('2014-7-02');
-  echo "<br>Next Monday 2014-7-03 "; echo next_monday('2014-7-03');
- echo "<br>Next Monday 2014-7-04 ";echo next_monday('2014-7-04');
-  echo "<br>Next Monday 2014-7-05 ";echo next_monday('2014-7-05');
-  echo "<br>Next Monday 2014-7-06 "; echo next_monday('2014-7-06');
- echo "<br>Next Monday 2014-7-07 ";echo next_monday('2014-7-07');
- echo "<br>Next Monday 2014-7-08 "; echo next_monday('2014-7-08');
- echo "<br>Next Monday 2014-7-09 ";echo next_monday('2014-7-09');
+// echo "<br>Next Monday 2014-7-01 "; echo next_monday('2014-7-01');
+// echo "<br>Next Monday 2014-7-02 ";echo next_monday('2014-7-02');
+//  echo "<br>Next Monday 2014-7-03 "; echo next_monday('2014-7-03');
+// echo "<br>Next Monday 2014-7-04 ";echo next_monday('2014-7-04');
+//  echo "<br>Next Monday 2014-7-05 ";echo next_monday('2014-7-05');
+//  echo "<br>Next Monday 2014-7-06 "; echo next_monday('2014-7-06');
+// echo "<br>Next Monday 2014-7-07 ";echo next_monday('2014-7-07');
+// echo "<br>Next Monday 2014-7-08 "; echo next_monday('2014-7-08');
+// echo "<br>Next Monday 2014-7-09 ";echo next_monday('2014-7-09');
+// echo "<h1> All tables </h1>";
 
- 
 
+// $table_sql = "   select table_name
+//from information_schema.tables
+//WHERE TABLE_SCHEMA= '".DB_NAME."'
+//AND table_type = 'BASE TABLE'
+// ";
+//
+// $prepare = $dbc->connection->prepare($table_sql);
+// try {
+//  $prepare->execute();
+//  $result_fetchAll = $prepare->fetchAll(PDO::FETCH_COLUMN);
+// } catch (Exception $e) {
+////    echo "<br>Error @dbObject @@ Line " . __LINE__ . $sql;
+//  return false;
+// }
+//
+// echo '<h2>Total no base tables in selected DB '.DB_NAME.' : </h2>' . count($result_fetchAll);
+// $include_tables = array_diff($result_fetchAll, convertToProd::$exclude_tables);
+// $include_tables = array_values($include_tables);
+// echo '<h2>Total no tables updated : </h2>' . count($include_tables);
+////pa($include_tables);
+//
+////
+// foreach ($include_tables as $key => $table_name) {
+//  $sql2 = " DELETE FROM  {$table_name}  ";
+//  $dbc->ddlexecute($sql2);
+//  $sql3 = "   ALTER TABLE {$table_name} auto_increment = 1 ";
+//  $dbc->ddlexecute($sql3);
+//  echo "<br> $table_name is updated";
+// }
+// $dbc->confirm();
  
-
-// echo "<h1>Next monday is '2014-7-01' </h1>".  next_monday('2014-7-01');
-// echo "<h1>Next monday is '2014-7-02' </h1>".  next_monday('2014-7-02');
-// echo "<h1>Next monday is '2014-7-03' </h1>".  next_monday('2014-7-03');
-// echo "<h1>Next monday is '2014-7-04' </h1>".  next_monday('2014-7-04');
-// echo "<h1>Next monday is '2014-7-05' </h1>".  next_monday('2014-7-05');
-// echo "<h1>Next monday is '2014-7-06' </h1>".  next_monday('2014-7-06');
-// echo "<h1>Next monday is '2014-7-07' </h1>".  next_monday('2014-7-07');
-// echo "<h1>Next monday is '2014-7-08' </h1>".  next_monday('2014-7-08');
-// echo "<h1>Next monday is '2014-7-09' </h1>".  next_monday('2014-7-09');
- 
- 
+//  $table_sql = "   select table_name
+//   from information_schema.columns 
+//   WHERE TABLE_SCHEMA = 'inoerp' AND column_name = 'last_update_by' 
+// ";
+////
+// $result1 = dbObject::find_by_sql($table_sql);
+//
+////
+// foreach ($result1 as $obj) {
+//  $sql3 = "   ALTER TABLE {$obj->table_name} CHANGE last_update_by last_update_by INT(12) NOT NULL;";
+//  $dbc->ddlexecute($sql3);
+// }
+// $dbc->confirm();
 // pa($date);
 // echo $date->format('Y-m-d');
 // $date->add(new DateInterval('P'.$offset.'D'));
 // pa($date);
 // echo $date->format('Y-m-d');
-
 // echo "<br>Next monday" . date('Y-m-d', strtotime("next monday", strtotime('2014-7-07')));
-
 // pa(sd_so_line::find_by_orgId_ssd(6, '2014-7-01'));
 // pa(view::find_all_tables());
 //$sys_notification = new sys_notification();
 //  pa($sys_notification->find_openNotification_toUserId('34'));
-//pa(get_dbColumns('fp_forecast_line_date'));
-//pa(get_dbColumns('po_quote_line'));
+// pa(get_dbColumns('fp_forecast_over_consumption_v'));
+//pa(get_dbColumns('site_info'));
 //pa(get_dbColumns('po_quote_detail'));
 //  pa(get_dbColumns('po_rfq_line'));
 //  pa(get_dbColumns('po_rfq_requirement'));

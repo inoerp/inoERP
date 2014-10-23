@@ -392,6 +392,11 @@ EOD;
    global $readonly, $class, $$class;
    echo $this->text_field($field_name, $$class->$field_name, '40', '', $div_class, '', $this->readonly);
   }
+  
+    public function text_field_widlr($field_name, $div_class = "") {
+   global  $class, $$class;
+   echo $this->text_field($field_name, $$class->$field_name, '40', '', $div_class, '', 1);
+  }
 
   public function text_field_wids($field_name, $div_class = "") {
    global $readonly, $class, $$class;

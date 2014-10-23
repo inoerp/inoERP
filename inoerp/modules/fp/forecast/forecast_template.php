@@ -101,7 +101,7 @@
                 <td><?php form::text_field_wid2r('item_description'); ?></td>
                 <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small', '', 1); ?></td>
                 <td><?php echo $f->select_field_from_object('bucket_type', fp_forecast_header::fp_bucket(), 'option_line_code', 'option_line_value', $$class_second->bucket_type, '', '', 1, $readonly); ?></td>
-                <td><?php echo $f->date_fieldFromToday_m('start_date', $$class_second->start_date); ?></td>
+                <td><?php echo $f->date_fieldFromToday('start_date', $$class_second->start_date); ?></td>
                 <td><?php echo $f->date_fieldFromToday('end_date', $$class_second->end_date); ?></td>
                 <td><?php $f->text_field_wid2s('no_of_bucket'); ?></td>
                </tr>
@@ -121,6 +121,7 @@
               <th>Original</th>
               <th>Total Current</th>
               <th>Total Original</th>
+              <th>Forecast Details</th>
               <th>Consumption Id</th>
              </tr>
             </thead>
@@ -135,6 +136,9 @@
                 <td><?php echo $f->number_field('original', $$class_second->original); ?></td>
                 <td><?php echo $f->number_field('total_current', $$class_second->total_current,'','','','',1); ?></td>
                 <td><?php echo $f->number_field('total_original', $$class_second->total_original,'','','','',1); ?></td>
+                <td><?php $link_fd = HOME_URL."search.php?fp_forecast_line_id[]=%3D{$$class_second->fp_forecast_line_id}&search_order_by[]=fp_forecast_line_date_id&search_asc_desc[]=desc&per_page[]=10&search_class_name=fp_forecast_line_date_v&submit_search=Search" ; 
+                echo '<a class=\'button\' href="'.$link_fd.'">Date Specific</a>';
+                ?></td>
                 <td><?php $f->text_field_d2r('fp_consumption_id'); ?></td>
                </tr>
                <?php

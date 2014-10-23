@@ -20,8 +20,8 @@
 		<div id="comment_subject" >
 		 <ul class='inRow asperWidth'><li>
 			 <label>Subject : </label>
-			 <input type="text"  name="subject" value="<?php echo htmlentities($comment->subject); ?>" 
-							size="25"  maxlength="150" class="subject" placeholder="Write a brief subject on the comment."> 
+			 <input type="text"  name="subject" value="<?php echo ($comment->subject); ?>" 
+							size="40"  maxlength="120" class="subject" placeholder="Write a brief subject on the comment."> 
 			</li>
 			<li>
 			 <label>Name on comment : </label>

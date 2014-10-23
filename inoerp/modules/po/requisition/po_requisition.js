@@ -163,14 +163,6 @@ $(document).ready(function() {
  });
 
 
-//selecting supplier
- $(".supplier_id").on("click", function() {
-  localStorage.idValue = "";
-  void window.open('select.php?class_name=supplier', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
-
-
  //Popup for selecting address 
  $(".address_popup").click(function() {
   var addressPopupDivClass = $(this).closest('div').prop('class');

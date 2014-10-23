@@ -40,15 +40,6 @@
   }
  }
 
- function show_reference_doc($class_name, $primar_column_value) {
-  $primary_column = $class_name::$primary_column;
-  if ((!empty($class_name)) && (!empty($primar_column_value)) && (!empty($primary_column))) {
-   return '<a  href=\'form.php?class_name=' . $class_name . '&' . $primary_column . '=' . $primar_column_value . '&mode=2\' target="_blank">View Reference Doc</a>';
-  } else {
-   return false;
-  }
- }
-
  function autoLoadExtensions($className) {
   $paths = explode('_', $className);
 // foreach($paths as $key=>$value){
@@ -69,14 +60,44 @@
   }
  }
 
+ function autoLoadTparty($className) {
+  $paths = explode('_', $className);
+  // echo "paths $paths";
+  $path = $paths[0] . '/';
+  if (!empty($paths[1])) {
+   $path .= $paths[1] . '/';
+  }
+// $path .= $paths[2] . '/';
+  $filename = getcwd() . "/tparty/extensions/" . $path . 'class_' . $className . ".inc";
+  if (is_readable($filename)) {
+   require $filename;
+  } elseif (is_readable(HOME_DIR . '/tparty/extensions/' . $path . 'class_' . $className . ".inc")) {
+   require HOME_DIR . '/tparty/extensions/' . $path . 'class_' . $className . ".inc";
+  } elseif (is_readable(getcwd() . '/tparty/modules/' . $path . 'class_' . $className . ".inc")) {
+   require getcwd() . '/tparty/modules/' . $path . 'class_' . $className . ".inc";
+  } elseif (is_readable(HOME_DIR . '/tparty/modules/' . $path . 'class_' . $className . ".inc")) {
+   require HOME_DIR . '/tparty/modules/' . $path . 'class_' . $className . ".inc";
+  }
+ }
+
  spl_autoload_register("autoLoadFromCwd");
  spl_autoload_register("autoLoadModules");
  spl_autoload_register("autoLoadExtensions");
+ spl_autoload_register("autoLoadTparty");
 
  function pa($array = "") {
   echo '<div class="message">Printing array/object <pre>';
   print_r($array);
   echo '</pre></div>';
+ }
+
+ function show_reference_doc($class_name, $primar_column_value) {
+  $primary_column = $class_name::$primary_column;
+  if ((!empty($class_name)) && (!empty($primar_column_value)) && (!empty($primary_column))) {
+   return '<a  href=\'form.php?class_name=' . $class_name . '&' . $primary_column . '=' . $primar_column_value . '&mode=2\' target="_blank">View Reference Doc</a>';
+  } else {
+   return false;
+  }
  }
 
  function get_class_name_from_path($path) {
@@ -262,6 +283,7 @@
  }
 
  function select_per_page() {
+  $link = $_SERVER['PHP_SELF'] . '?';
   $content_string = '<div id="noOfcontents">';
   $content_string .= 'Show<select name="per_page">';
   $content_string .= '<option value="3"> 3 </option>';
@@ -271,7 +293,7 @@
   $content_string .= '<option value="50"> 50 </option>';
   $content_string .= '</select>';
   $content_string .= '<a name="content_per_page" id="content_per_page" '
-    . 'href="" class="content_per_page button">Per Page</a>';
+    . 'href="' . $link . '" class="content_per_page button">Per Page</a>';
   $content_string .= '</div>';
   return $content_string;
  }
@@ -746,10 +768,28 @@
   $stmt = $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', '', 'org_id', '', '', '', '', 1);
   return $stmt;
  }
- 
-  function search_forecast_group() {
+
+ function search_convert_to_prod_mode() {
   global $f;
-  $stmt = $f->select_field_from_object('fp_forecast_group_id', fp_forecast_group::find_all(), 'fp_forecast_group_id', 'forecast_group', '','fp_forecast_group_id', '', 1);
+  $stmt = $f->select_field_from_array('convert_to_prod_mode', array('TEST' => 'Test', 'FINAL' => 'Final'), '', 'convert_to_prod_mode');
+  return $stmt;
+ }
+
+ function search_db_name() {
+  global $f;
+  $stmt = $f->text_field_ap(array('name' => 'db_name', 'value' => DB_NAME, 'readonly' => true));
+  return $stmt;
+ }
+
+ function search_forecast_group() {
+  global $f;
+  $stmt = $f->select_field_from_object('fp_forecast_group_id', fp_forecast_group::find_all(), 'fp_forecast_group_id', 'forecast_group', '', 'fp_forecast_group_id');
+  return $stmt;
+ }
+
+ function search_forecast_name() {
+  global $f;
+  $stmt = $f->select_field_from_object('fp_forecast_header_id', fp_forecast_header::find_all(), 'fp_forecast_header_id', 'forecast', '', 'fp_forecast_group_id');
   return $stmt;
  }
 
@@ -758,19 +798,20 @@
   $stmt = $f->select_field_from_array('consume_orders', fp_forecast_consumption::$consume_orders_a, '', 'consume_orders');
   return $stmt;
  }
- 
-  function search_offset_days() {
-  global $f; $f = new inoform();
-  $stmt = $f->number_field('offset_days','');
+
+ function search_offset_days() {
+  global $f;
+  $f = new inoform();
+  $stmt = $f->number_field('offset_days', '');
   return $stmt;
  }
 
  function search_date() {
   global $f;
 
-  $stmt = $f->date_fieldAnyDay('user_entered_date','');
+  $stmt = $f->date_fieldAnyDay('user_entered_date', '');
   $stmt .= '&nbsp;&nbsp; <label> Use System Date </label>';
-  $stmt .=  $f->checkBox_field('use_sys_date_cb', '');
+  $stmt .= $f->checkBox_field('use_sys_date_cb', '');
   return $stmt;
  }
 
@@ -1045,8 +1086,8 @@ name='adjustment_ac_id'>
   // Return string
   return empty($values) ? $string : strtr($string, $values);
  }
- 
-  function next_monday($date_p) {
+
+ function next_monday($date_p) {
   $date = new DateTime($date_p);
   if ($date->format('D') == 'Mon') {
    return $date->format('Y-m-d');
@@ -1054,6 +1095,10 @@ name='adjustment_ac_id'>
    $date = new DateTime("next monday $date_p");
    return $date->format('Y-m-d');
   }
+ }
+
+ function convert_to_url($str) {
+  return str_replace(' ', '-', trim($str));
  }
 
 ?>

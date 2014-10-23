@@ -443,7 +443,7 @@ ul.commentRecord  li .subject{
     margin-top: -5px;
     display: block;
     background: none repeat scroll 0% 0% rgba(205, 213, 213, 0.7);
-    width: 574px;
+    width: 400px;
     padding: 5px;
 }
 
@@ -788,4 +788,32 @@ a.link_class_green:hover{
 
 .dateTime{
     min-width: 120px;
+}
+
+.hideDiv {
+    background: url('images/minus_2.png') no-repeat 2px 2px;
+    height: 28px;
+    display: block;
+    z-index: 100;
+}
+
+.showDiv {
+    background: url('images/plus_2.png') no-repeat 2px 2px;
+    height: 28px;
+    display: block;
+    z-index: 100;
+}
+
+
+.showDiv::after{
+    content : 'Show Details';
+    margin-left: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 26px;
+    color : rgba(11, 87, 11, 1);
+}
+a.login_button:hover{
+    color : rgba(11, 87, 11, 1);
+    text-decoration: none;
 }

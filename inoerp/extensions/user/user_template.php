@@ -8,7 +8,7 @@
      <div id="userDiv">
       <!--    START OF FORM HEADER-->
       <div class="error"></div><div id="loading"></div>
-      <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
+      <?php echo (!empty($show_message)) ? $show_message : ""; $f = new inoform(); ?> 
       <!--    End of place for showing error messages-->
       <div id ="form_header">
        <div id="tabsHeader">
@@ -29,7 +29,7 @@
                <li><label><img src="<?php echo HOME_URL; ?>themes/default/images/serach.png" class="user_id select_popup clickable">
                  User ID :</label> 	<?php echo $f->text_field_dsr('user_id'); ?><a name="show" class="show user_id"> <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
                </li>
-               <li><label>User Name :</label>	<?php echo $f->text_field_dm('username'); ?></li>
+               <li><label>User Name :</label>	<?php echo $f->text_field('username', $$class->username,'','','',1,$readonly1); ?></li>
                <li><label>Password  : </label> 
                 <input type="password" name="enteredPassword[]" value='' maxlength="50" id="enteredPassword" size="30" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >
                </li>
