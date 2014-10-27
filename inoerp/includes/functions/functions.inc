@@ -284,15 +284,15 @@
 
  function select_per_page() {
   $link = $_SERVER['PHP_SELF'] . '?';
-  $content_string = '<div id="noOfcontents">';
-  $content_string .= 'Show<select name="per_page">';
+  $content_string = '<div class="noOfcontents">';
+  $content_string .= 'Show<select name="per_page" class="per_page">';
   $content_string .= '<option value="3"> 3 </option>';
   $content_string .= '<option value="5"> 5 </option>';
   $content_string .= '<option value="10"> 10 </option>';
   $content_string .= '<option value="20"> 20 </option>';
   $content_string .= '<option value="50"> 50 </option>';
   $content_string .= '</select>';
-  $content_string .= '<a name="content_per_page" id="content_per_page" '
+  $content_string .= '<a name="content_per_page" class="content_per_page" '
     . 'href="' . $link . '" class="content_per_page button">Per Page</a>';
   $content_string .= '</div>';
   return $content_string;
@@ -944,6 +944,28 @@ name='adjustment_ac_id'>
   }
  }
 
+ function show_download_button($result_data) {
+  $return_stmt = '<div id="searchResultMessages">';
+  $return_stmt .='<ul class="inline_list"><li>';
+  $return_stmt .='<h3>Total records : ' . count($result_data) . '</h3></li>';
+  $return_stmt .= '<li>Download All Data in </li><li>';
+  $result_data_all = json_decode(json_encode($result_data), true);
+  $return_stmt .= '<form action="' . HOME_URL . 'download.php"  method="POST" name="download_all" id="download_all" target="_blank">';
+  $return_stmt .= '<input type="hidden"  name="data" value="' . base64_encode(serialize($result_data_all)) . '" >';
+  $return_stmt .= '<input type="radio" name="download_format" checked="checked" value="excel_format">Excel 
+     <input type="radio" name="download_format" value="text_format">Text
+     <input type="radio" name="download_format" value="pdf_format">Pdf
+     <input type="radio" name="download_format" value="xml_format">XML
+     <input type="radio" name="download_format" value="worddoc_format">Word Doc
+     <input type="submit"  name="export_allResult" value="Download" id="export_excel_allResult" class="clickable button"  >
+    </form></li>';
+  $return_stmt .= '<li id="export_excel_searchResult" class="clickable"> <img src="' . HOME_URL . 'files/images/excel.png" alt="Export to Excel" /></li>
+  <li id="print_searchResult" class="print clickable"> <img src="' . HOME_URL . 'files/images/print.png" alt="Print" /></li>
+</ul>
+</div>';
+  return $return_stmt;
+ }
+
  function array2csv(array &$array) {
   if (count($array) == 0) {
    return null;
@@ -1079,11 +1101,11 @@ name='adjustment_ac_id'>
  }
 
  function translation($string, $namespace = null, array $values = null) {
-  // Redefine arguments
+// Redefine arguments
   $string = (string) $string;
 
-  // Find translation
-  // Return string
+// Find translation
+// Return string
   return empty($values) ? $string : strtr($string, $values);
  }
 
@@ -1100,5 +1122,4 @@ name='adjustment_ac_id'>
  function convert_to_url($str) {
   return str_replace(' ', '-', trim($str));
  }
-
 ?>

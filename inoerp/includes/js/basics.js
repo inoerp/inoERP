@@ -161,10 +161,11 @@ function show_dialog_box() {
 }
 
 //get parameter value from window.location - equivalent og $_GET
-function getUrlValues(name) {
+function getUrlValues(name, user_link) {
+ var link = typeof user_link === 'undefined' ? location.search : user_link;
  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-  results = regex.exec(location.search);
+  results = regex.exec(link);
  return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
@@ -1639,11 +1640,123 @@ function getSerialInStore(orgId) {
    'current_locator_id': $('#content').find(trClass_d).find('.from_locator_id').val()
   });
  });
-
-
-
 }
 
+
+function getViewResult(options) {
+ var defaults = {
+  json_url: 'extensions/view/json_view.php',
+  display_field_id: 'live_display_data',
+  query_v: $('#query_v').val(),
+  show_from_query: true,
+  display_type : $('#display_type').val(),
+  no_of_grid_columns : $('#no_of_grid_columns').val(),
+ };
+ var settings = $.extend({}, defaults, options);
+
+ $.ajax({
+  url: settings.json_url,
+  type: 'get',
+  data: {
+   query_v: settings.query_v,
+   find_result: 1,
+   class_name: settings.class_name,
+   view_id: settings.view_id,
+   pageno: settings.pageno,
+   per_page: settings.per_page,
+   show_from_query: settings.show_from_query,
+   display_type: settings.display_type,
+   no_of_grid_columns : settings.no_of_grid_columns
+  },
+  success: function(result) {
+   if (result) {
+    var divHtml = $(result).filter('div#return_divId').html();
+    $('#live_display_data').empty().append(divHtml);
+    $.getScript("includes/js/reload.js");
+   }
+  },
+  complete: function() {
+   $('.show_loading_small').hide();
+  },
+  beforeSend: function() {
+   $('.show_loading_small').show();
+  },
+  error: function(request, errorType, errorMessage) {
+   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+  }
+ });
+}
+
+function viewResultWith_pagination() {
+ $('body').on('click', '.ajax_view.pagination .page_nos a', function(e) {
+  e.preventDefault();
+  var link = $(this).attr('href');
+  var class_name = getUrlValues('class_name', link);
+  var view_id = getUrlValues('view_id', link);
+  var pageno = getUrlValues('pageno', link);
+  var per_page = getUrlValues('per_page', link);
+  //calling the ajax function
+  getViewResult({
+   class_name: class_name,
+   view_id: view_id,
+   pageno: pageno,
+   per_page: per_page,
+   show_from_query: false,
+  });
+ });
+
+ $('body').on('click', '.ajax_view.pagination .content_per_page', function(e) {
+  e.preventDefault();
+  var link = $(this).closest('.pagination').find('a').first().attr('href');
+  var class_name = getUrlValues('class_name', link);
+  var view_id = getUrlValues('view_id', link);
+  var pageno = getUrlValues('pageno', link);
+  var per_page = $(this).closest('.noOfcontents').find('.per_page').val();
+  //calling the ajax function
+  getViewResult({
+   class_name: class_name,
+   view_id: view_id,
+   pageno: pageno,
+   per_page: per_page,
+   show_from_query: false,
+  });
+ });
+}
+
+function getSearchResult(options) {
+ var defaults = {
+  json_url: 'includes/json/json_search.php',
+  className : $('.search.class_name').val(),
+  searchParameters : $('#generic_search_form').find(":input").serializeArray(),
+  pageno : 1,
+  per_page : 0
+ };
+ var settings = $.extend({}, defaults, options);
+ 
+ $.ajax({
+  url: settings.json_url,
+  type: 'get',
+  data: {
+   class_name: settings.className,
+   search_parameters: settings.searchParameters,
+   pageno: settings.pageno,
+   per_page: settings.per_page
+  },
+  beforeSend: function() {
+   $('.show_loading_small').show();
+  },
+  complete: function() {
+   $('.show_loading_small').hide();
+  }
+ }).done(function(result) {
+  var newContent = $(result).find('div#searchResult').html();
+    $('#searchResult').empty().append(newContent);
+   $.getScript("includes/js/reload.js");
+  
+ }).fail(function() {
+  alert("Search Failed");
+ });
+}
 
 //end of global functions
 $(document).ready(function() {
@@ -1653,7 +1766,7 @@ $(document).ready(function() {
  })
  $('#loading').hide();
  $('.show_loading_small').hide();
-
+ viewResultWith_pagination();
  //show & remove select search icon
  $('.select_popup').hide();
  $('#content').on('focusin', 'input', function() {
@@ -1669,7 +1782,7 @@ $(document).ready(function() {
   $('#commentForm_witoutjs').html('');
  }
 
- $('#content_per_page').on('click', function(e) {
+ $('body').on('click', '.content_per_page', function(e) {
   var currentUrl = window.location.toString();
   var newURL = currentUrl.replace(/per_page=/g, '');
   newURL = newURL.replace(/&&/g, '&');
@@ -2324,13 +2437,53 @@ $(document).ready(function() {
  $('#content').on('click', '.hideDiv', function() {
   $('.hideDiv').children().toggle();
   $(this).removeClass('hideDiv').addClass('showDiv');
- })
+ });
 
  $('#content').on('click', '.showDiv', function() {
   $(this).children().toggle();
   $(this).removeClass('showDiv').addClass('hideDiv');
- })
-$('#user_info .block_menu').menu();
+ });
+ 
+  $('#content').on('click', '.hideDiv_input', function() {
+  $(this).parent().find('.hideDiv_input_element').toggle();
+  $(this).removeClass('hideDiv_input').addClass('showDiv_input');
+ });
+
+ $('#content').on('click', '.showDiv_input', function() {
+  $(this).parent().find('.hideDiv_input_element').toggle();
+  $(this).removeClass('showDiv_input').addClass('hideDiv_input');
+ });
+ 
+ $('#user_info .block_menu').menu();
+ 
+  $('#search_page').on('click', '#search_submit_btn', function(e){
+ e.preventDefault();
+   $('.hideDiv_input').trigger('click');
+   getSearchResult();
+ });
+
+$('#search_page').on('click', '.page_nos a', function(e){
+e.preventDefault();
+  $('.hideDiv_input').trigger('click');
+  var page_no = getUrlValues('pageno', $(this).prop('href'));
+  var per_page = getUrlValues('per_page', $(this).prop('href'));
+  getSearchResult({
+    pageno : page_no,
+    per_page:  per_page
+  });
+});
+
+$('#search_page').on('click', 'a.content_per_page', function(e){
+e.preventDefault();
+ $('.hideDiv_input').trigger('click');
+   var per_page = $(this).closest('.noOfcontents').find('.per_page').val();
+  getSearchResult({
+    per_page : per_page
+  });
+});
+
+
+
 });
 function toUpperCase(str)
 {

@@ -21,16 +21,25 @@
    'LTE' => '<=',
   ];
   public static $db_control_type_a = [
-   ' = ' => '=',
-   ' != ' => '!=',
-   ' > ' => '>',
-   ' >= ' => '>=',
-   ' < ' => '<',
-   ' <= ' => '<=',
-   ' LIKE ' => ' LIKE ',
-   ' IS_NULL ' => 'IS NULL',
-   ' IS_NOT_NULL ' => 'IS NOT NULL ',
-   ' LEFT_JOIN ' => 'LEFT JOIN',
+   '=' => '=',
+   '!=' => '!=',
+   '>' => '>',
+   '>=' => '>=',
+   '<' => '<',
+   '<=' => '<=',
+   'LIKE' => ' LIKE ',
+   'IS_NULL' => 'IS NULL',
+   'IS_NOT_NULL' => 'IS NOT NULL ',
+   'LEFT_JOIN' => 'LEFT JOIN',
+  ];
+  public static $sort_fields_values_a = [
+   'ASC' => 'Ascending',
+   'DESC' => 'Descending',
+   'REMOVE' => 'Remove'
+  ];
+  public static $list_type_a = [
+   'ORDERED' => 'Ordered List',
+   'UNORDERED' => 'Unordered List',
   ];
   public static $key_column = '';
   public static $parent_primary_column = null;

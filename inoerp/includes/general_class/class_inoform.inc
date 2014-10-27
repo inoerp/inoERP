@@ -83,9 +83,9 @@
         <li><input type="button" class="button_image"  name="refresh"/>
 				 <img src="$homeUrl/themes/images/form/refresh.png" id="refresh_button" alt="Refresh" Title="Refresh" class="showPointer"></li>
 				<li><a id="new_object_button" href="$current_page_path">
-				 <img src="$homeUrl/themes/images/form/new_object.png" alt="New Object" Title="New Object" class="showPointer"></a> </li> 
+				 <img src="$homeUrl/themes/images/form/new_object.png" alt="Quick Entry" Title="Quick Entry" class="showPointer"></a> </li> 
 				<li><a id="new_page_button" href="$current_page_path">
-				 <img src="$homeUrl/themes/images/form/new_line.png" alt="New Page" Title="New Page" class="showPointer"></a> </li> 
+				 <img src="$homeUrl/themes/images/form/new_line.png" alt="New Entry" Title="New Entry" class="showPointer"></a> </li> 
 				<li><input type="button" class="button_image save" name="save" id="save_button">
 				 <img src="$homeUrl/themes/images/form/save.png" id="save" alt="Save" Title="Save" class="showPointer"></li>
 				<li><input type="button" class="button_image delete"  name="delete_row" id="delete_row">
@@ -94,7 +94,8 @@
 				 <img src="$homeUrl/themes/images/form/remove.png" id="remove_row_button" alt="Remove" Title="Remove" class="showPointer"></li>
         <li><input type="reset" class="button_image reset"  name="reset" Value="Rese*t">
 				 <img src="$homeUrl/themes/images/form/reset.png" id="reset_button" alt="Reset" Title="Reset" class="showPointer"></li>
-					<li><script>document.write('<a class="button_image go_back"  href="' + document.referrer + '"><img src="$homeUrl/themes/images/form/go_back.png"/ id="go_back_button" alt="Go Back" Title="Go Back" class="showPointer"></a>');</script></li>
+             <li><input type="button" class="button_image print clickable showPointer"  name="print"/>
+				 <img src="$homeUrl/files/images/print.png" id="refresh_button" alt="print" Title="Print" class="print showPointer" id='print_searchResult'></li>
 </ul>
 EOD;
   }
@@ -121,15 +122,15 @@ EOD;
    $element_hidden_field = "<input type=\"hidden\" id=\"$name\" name=\"$bracketName\" value=\"$value\" class=\"hidden $name\" >";
    return $element_hidden_field;
   }
-  
-    public function hidden_field_withCLass($name, $value, $class) {
+
+  public function hidden_field_withCLass($name, $value, $class) {
    $bracketName = $name . '[]';
    $value = htmlentities($value);
    $element_hidden_field = "<input type=\"hidden\" name=\"$bracketName\" value=\"$value\" class=\"hidden $class $name\" >";
    return $element_hidden_field;
   }
-  
-    public function hidden_field_withIdClass($name, $value, $class) {
+
+  public function hidden_field_withIdClass($name, $value, $class) {
    $bracketName = $name . '[]';
    $value = htmlentities($value);
    $element_hidden_field = "<input type=\"hidden\" id=\"$name\" name=\"$bracketName\" value=\"$value\" class=\"hidden $name $class\" >";
@@ -167,8 +168,8 @@ EOD;
   public function seq_field_d($value) {
    echo $this->text_field('seq_number', $value, '6', '', 'seq_number', '', 1);
   }
-  
-    public function seq_field_detail_d($value) {
+
+  public function seq_field_detail_d($value) {
    echo $this->text_field('detail_seq_number', $value, '6', '', '', '', 1);
   }
 
@@ -277,12 +278,11 @@ EOD;
    global $readonly, $class, $$class;
    echo $this->text_field($field_name, $$class->$field_name, '35', $field_name, $div_class, 1, $this->readonly);
   }
-  
-    public function text_field_dlr($field_name, $div_class = "") {
+
+  public function text_field_dlr($field_name, $div_class = "") {
    global $readonly, $class, $$class;
    echo $this->text_field($field_name, $$class->$field_name, '35', $field_name, $div_class, '', 1);
   }
-
 
   public function text_field_dsr($field_name, $div_class = "") {
    global $class, $$class;
@@ -309,10 +309,11 @@ EOD;
    echo $this->text_field($field_name, $$class_second->$field_name, '8', $field_name, $div_class, '', $this->readonly2);
   }
 
-    public function text_field_d2sm($field_name, $div_class = "") {
+  public function text_field_d2sm($field_name, $div_class = "") {
    global $readonly, $class_second, $$class_second;
    echo $this->text_field($field_name, $$class_second->$field_name, '8', $field_name, $div_class, 1, $this->readonly2);
   }
+
   public function text_field_d2r($field_name, $div_class = "") {
    global $class_second, $$class_second;
    echo $this->text_field($field_name, $$class_second->$field_name, '20', $field_name, $div_class, '', 1);
@@ -392,9 +393,9 @@ EOD;
    global $readonly, $class, $$class;
    echo $this->text_field($field_name, $$class->$field_name, '40', '', $div_class, '', $this->readonly);
   }
-  
-    public function text_field_widlr($field_name, $div_class = "") {
-   global  $class, $$class;
+
+  public function text_field_widlr($field_name, $div_class = "") {
+   global $class, $$class;
    echo $this->text_field($field_name, $$class->$field_name, '40', '', $div_class, '', 1);
   }
 
@@ -826,20 +827,19 @@ EOD;
    return $this->date_field($name, $value, '20', '', 'dateTime');
   }
 
-  
   public function date_fieldFromToday($name, $value) {
    return $this->date_field($name, $value, '20', '', 'dateFromToday');
   }
-  
-   public function date_field_MondayFromToday($name, $value) {
+
+  public function date_field_MondayFromToday($name, $value) {
    return $this->date_field($name, $value, '20', '', 'MondayFromToday');
   }
 
   public function date_fieldFromToday_r($name, $value, $readonly) {
    return $this->date_field($name, $value, '20', '', 'dateFromToday', '', $readonly);
   }
-  
-    public function date_fieldFromToday_m($name, $value) {
+
+  public function date_fieldFromToday_m($name, $value) {
    return $this->date_field($name, $value, '20', '', 'dateFromToday', 1);
   }
 
@@ -963,66 +963,64 @@ EOD;
    return $element_select_field;
   }
 
-  
   public function multi_select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $id = "", $divClass = "", $required = "", $readonly = "", $convertToText = "", $nonArrayName = "", $disabled = "") {
-	if ($nonArrayName == 1) {
-	 $bracketName = $name;
-	} else {
-	 $bracketName = $name . '[]';
-	}
-	$idvalue = $this->_convert_id($id);
-	if ($readonly == 1) {
-	 $readonly = 'disabled';
-	} else {
-	 $readonly = '';
-	}
+   if ($nonArrayName == 1) {
+    $bracketName = $name;
+   } else {
+    $bracketName = $name . '[]';
+   }
+   $idvalue = $this->_convert_id($id);
+   if ($readonly == 1) {
+    $readonly = 'disabled';
+   } else {
+    $readonly = '';
+   }
 
-	if ($required == 1) {
-	 $required = 'required';
-	} else {
-	 $required = '';
-	}
+   if ($required == 1) {
+    $required = 'required';
+   } else {
+    $required = '';
+   }
 
-	if ($disabled == 1) {
-	 $disabled = 'disbaled';
-	} else {
-	 $disabled = '';
-	}
-	$element_select_field = "<Select multiple name=\"$bracketName\" class=\"multi_select $divClass $name\" $idvalue $readonly $required $disabled>";
-	$element_select_field .= "<option value=\"\" ></option>";
-	if ((is_array($object)) && (count($object) > 0 )) {
-	 foreach ($object as $record) {
-		if ((!empty($value)) && ($record->$objectValueKey == $value)) {
-		 $selected = 'selected';
-		} else {
-		 $selected = '';
-		}
-		$element_select_field .= '<option value="' . $record->$objectValueKey . '" ';
-		$element_select_field .= $selected;
-		$element_select_field .= '>';
-		if (is_array($objectDescriptionKey)) {
-		 $newValue1 = '';
-		 foreach ($objectDescriptionKey as $keya => $valuea) {
-			$newValue1 .= $record->$valuea . ' - ';
-		 }
-		 $newValue = rtrim($newValue1, ' - ');
-		} else {
-		 $newValue = $record->$objectDescriptionKey;
-		}
-		$element_select_field .= $newValue;
-		$element_select_field .= '</option>';
-	 }
-	}
+   if ($disabled == 1) {
+    $disabled = 'disbaled';
+   } else {
+    $disabled = '';
+   }
+   $element_select_field = "<Select multiple name=\"$bracketName\" class=\"multi_select $divClass $name\" $idvalue $readonly $required $disabled>";
+   $element_select_field .= "<option value=\"\" ></option>";
+   if ((is_array($object)) && (count($object) > 0 )) {
+    foreach ($object as $record) {
+     if ((!empty($value)) && ($record->$objectValueKey == $value)) {
+      $selected = 'selected';
+     } else {
+      $selected = '';
+     }
+     $element_select_field .= '<option value="' . $record->$objectValueKey . '" ';
+     $element_select_field .= $selected;
+     $element_select_field .= '>';
+     if (is_array($objectDescriptionKey)) {
+      $newValue1 = '';
+      foreach ($objectDescriptionKey as $keya => $valuea) {
+       $newValue1 .= $record->$valuea . ' - ';
+      }
+      $newValue = rtrim($newValue1, ' - ');
+     } else {
+      $newValue = $record->$objectDescriptionKey;
+     }
+     $element_select_field .= $newValue;
+     $element_select_field .= '</option>';
+    }
+   }
 
-	if ($convertToText == 1) {
-	 $element_select_field .= "<option value=\"newentry\"  class=\"bold blue\">New Entry</option>";
-	}
-	$element_select_field .= '</select>';
+   if ($convertToText == 1) {
+    $element_select_field .= "<option value=\"newentry\"  class=\"bold blue\">New Entry</option>";
+   }
+   $element_select_field .= '</select>';
 
-	return $element_select_field;
- }
+   return $element_select_field;
+  }
 
- 
   public function select_field_from_object_ap($array) {
    $name = array_key_exists('name', $array) ? $array['name'] : null;
    $ob = array_key_exists('ob', $array) ? $array['ob'] : null;

@@ -184,7 +184,7 @@ function getSearchResult() {
 	 $.getScript("http://www.inoideas.com/inoerp/includes/js/reload.js");
 	}
  }).fail(function() {
-	alert("Template update failed");
+	alert("Search Failed");
  });
 }
 

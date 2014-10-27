@@ -1,5 +1,4 @@
 <?php
-
  $hideContextMenu = true;
  global $s;
  if (!empty($_GET['search_class_name'])) {

@@ -305,15 +305,6 @@ width:0;
  margin : 0px 20px;
 }
 
-#pagination{
- padding: 10px 0px;
-}
-
-#noOfcontents{
-    display: inline;
-    margin-left: 100px;
-}
-
 .single_line{
  white-space: nowrap;
 }

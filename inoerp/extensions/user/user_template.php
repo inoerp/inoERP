@@ -8,94 +8,93 @@
      <div id="userDiv">
       <!--    START OF FORM HEADER-->
       <div class="error"></div><div id="loading"></div>
-      <?php echo (!empty($show_message)) ? $show_message : ""; $f = new inoform(); ?> 
+      <?php
+       echo (!empty($show_message)) ? $show_message : "";
+       $f = new inoform();
+      ?> 
       <!--    End of place for showing error messages-->
       <div id ="form_header">
-       <div id="tabsHeader">
-        <form action="" method="post" id="user_header" name="user_header"><span class="heading">User Details </span>
-         <div id ="form_header">
-          <div id="tabsHeader">
-           <ul class="tabMain">
-            <li><a href="#tabsHeader-1">Basic Info</a></li>
-            <li><a href="#tabsHeader-2">Employee</a></li>
-            <li><a href="#tabsHeader-3">Supplier</a></li>
-            <li><a href="#tabsHeader-4">Attachments</a></li>
-            <li><a href="#tabsHeader-5">Notes</a></li>
-           </ul>
-           <div class="tabContainer"> 
-            <div id="tabsHeader-1" class="tabContent">
-             <div class="large_shadow_box"> 
-              <ul class="column four_column">
-               <li><label><img src="<?php echo HOME_URL; ?>themes/default/images/serach.png" class="user_id select_popup clickable">
-                 User ID :</label> 	<?php echo $f->text_field_dsr('user_id'); ?><a name="show" class="show user_id"> <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-               </li>
-               <li><label>User Name :</label>	<?php echo $f->text_field('username', $$class->username,'','','',1,$readonly1); ?></li>
-               <li><label>Password  : </label> 
-                <input type="password" name="enteredPassword[]" value='' maxlength="50" id="enteredPassword" size="30" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >
-               </li>
-               <li><label>Retype Password  : </label> 
-                <input type="password" name="enteredRePassword[]" value=''  maxlength="50" id="enteredRePassword" size="30" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >
-               </li>
-               <li><label>First Name : </label>	<?php echo $f->text_field_dm('first_name'); ?> </li>
-               <li><label>Last Name : </label><?php echo $f->text_field_dm('last_name'); ?>	 </li>
-               <li><label>e-Mail ID :</label> <?php echo$f->text_field_dm('email'); ?> </li>
-               <li><label>Phone :</label> <?php echo $f->text_field_d('phone'); ?> </li>
-              </ul>
+       <form action="" method="post" id="user_header" name="user_header"><span class="heading">User Details </span>
+        <div id="tabsHeader">
+         <ul class="tabMain">
+          <li><a href="#tabsHeader-1">Basic Info</a></li>
+          <li><a href="#tabsHeader-2">Employee</a></li>
+          <li><a href="#tabsHeader-3">Supplier</a></li>
+          <li><a href="#tabsHeader-4">Attachments</a></li>
+          <li><a href="#tabsHeader-5">Notes</a></li>
+         </ul>
+         <div class="tabContainer"> 
+          <div id="tabsHeader-1" class="tabContent">
+           <div class="large_shadow_box"> 
+            <ul class="column four_column">
+             <li><label><img src="<?php echo HOME_URL; ?>themes/default/images/serach.png" class="user_id select_popup clickable">
+               User ID :</label> 	<?php echo $f->text_field_dsr('user_id'); ?><a name="show" class="show user_id"> <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+             </li>
+             <li><label>User Name :</label>	<?php echo $f->text_field('username', $$class->username, '', '', '', 1, $readonly1); ?></li>
+             <li><label>Password  : </label> 
+              <input type="password" name="enteredPassword[]" value='' maxlength="50" id="enteredPassword" size="30" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >
+             </li>
+             <li><label>Retype Password  : </label> 
+              <input type="password" name="enteredRePassword[]" value=''  maxlength="50" id="enteredRePassword" size="30" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >
+             </li>
+             <li><label>First Name : </label>	<?php echo $f->text_field_dm('first_name'); ?> </li>
+             <li><label>Last Name : </label><?php echo $f->text_field_dm('last_name'); ?>	 </li>
+             <li><label>e-Mail ID :</label> <?php echo$f->text_field_dm('email'); ?> </li>
+             <li><label>Phone :</label> <?php echo $f->text_field_d('phone'); ?> </li>
+            </ul>
+           </div>
+          </div>
+          <div id="tabsHeader-2" class="tabContent">
+           <div class="large_shadow_box"> 
+            <ul class="column four_column">
+             <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
+               Employee Name : </label><?php $f->text_field_d('employee_name'); ?>
+              <?php echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id); ?>
+             </li>
+             <li><label>  Identification # : </label><?php $f->text_field_dr('identification_id'); ?>  </li>
+             <li><label>  #of Notification : </label>
+              <?php echo $f->select_field_from_array('block_notif_count', dbObject::$position_array, $$class->block_notif_count); ?>  </li>
+            </ul>
+           </div>
+          </div>
+          <div id="tabsHeader-3" class="tabContent">
+           <div class="large_shadow_box"> 
+            <ul class="column four_column">
+             <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
+               Employee Name : </label><?php $f->text_field_d('employee_name'); ?>
+              <?php echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id); ?>
+             </li>
+             <li><label>  Identification # : </label><?php $f->text_field_dr('identification_id'); ?>  </li>
+             <li><label>  #of Notification : </label>
+              <?php echo $f->select_field_from_array('block_notif_count', dbObject::$position_array, $$class->block_notif_count); ?>  </li>
+            </ul>
+           </div>
+          </div>
+          <div id="tabsHeader-4" class="tabContent">
+           <div> <?php echo ino_attachement($file) ?> </div>
+          </div>
+          <div id="tabsHeader-5" class="tabContent">
+           <div> 
+            <div id="comments">
+             <div id="comment_list">
+              <?php echo !(empty($comments)) ? $comments : ""; ?>
              </div>
-            </div>
-            <div id="tabsHeader-2" class="tabContent">
-             <div class="large_shadow_box"> 
-              <ul class="column four_column">
-               <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
-                 Employee Name : </label><?php $f->text_field_d('employee_name'); ?>
-                <?php echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id); ?>
-               </li>
-               <li><label>  Identification # : </label><?php $f->text_field_dr('identification_id'); ?>  </li>
-               <li><label>  #of Notification : </label>
-                <?php echo $f->select_field_from_array('block_notif_count', dbObject::$position_array, $$class->block_notif_count); ?>  </li>
-              </ul>
+             <div id ="display_comment_form">
+              <?php
+               $reference_table = 'user';
+               $reference_id = $$class->user_id;
+              ?>
              </div>
-            </div>
-            <div id="tabsHeader-3" class="tabContent">
-             <div class="large_shadow_box"> 
-              <ul class="column four_column">
-               <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
-                 Employee Name : </label><?php $f->text_field_d('employee_name'); ?>
-                <?php echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id); ?>
-               </li>
-               <li><label>  Identification # : </label><?php $f->text_field_dr('identification_id'); ?>  </li>
-               <li><label>  #of Notification : </label>
-                <?php echo $f->select_field_from_array('block_notif_count', dbObject::$position_array, $$class->block_notif_count); ?>  </li>
-              </ul>
-             </div>
-            </div>
-            <div id="tabsHeader-4" class="tabContent">
-             <div> <?php echo ino_attachement($file) ?> </div>
-            </div>
-            <div id="tabsHeader-5" class="tabContent">
-             <div> 
-              <div id="comments">
-               <div id="comment_list">
-                <?php echo!(empty($comments)) ? $comments : ""; ?>
-               </div>
-               <div id ="display_comment_form">
-                <?php
-                 $reference_table = 'user';
-                 $reference_id = $$class->user_id;
-                ?>
-               </div>
-               <div id="new_comment">
-               </div>
-              </div>
+             <div id="new_comment">
              </div>
             </div>
            </div>
-
           </div>
          </div>
-        </form>
-       </div>
-      </div>    
+        </div>
+       </form>
+      </div>
+
 
       <div id ="form_line" class="form_line"><span class="heading">Role & Access </span>
        <form action=""  method="post" id="user_role"  name="user_role">

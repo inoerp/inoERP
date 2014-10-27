@@ -21,12 +21,29 @@
  }
  if ($continue) {
   include_once (dirname(__FILE__) . '/../basics/basics.inc');
+  $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
   global $f;
   global $ie;
   global $s;
   global $dbc;
   global $si;
   $file = null;
+  if (count($_SESSION['recent_visit']) >= 10) {
+   array_shift($_SESSION['recent_visit']);
+  }
+  if (!empty($_SERVER['REDIRECT_QUERY_STRING'])) {
+   $_SESSION['recent_visit'][$_SERVER['REDIRECT_QUERY_STRING']] = $current_url;
+  } else if (!empty($_REQUEST['class_name'])) {
+   $id = $_REQUEST['class_name'] . '_id';
+   if (!empty($_REQUEST[$id])) {
+    $_SESSION['recent_visit'][$_REQUEST['class_name'] . ' Id ' . $_REQUEST[$id]] = $current_url;
+   } else {
+    $_SESSION['recent_visit'][$_REQUEST['class_name']] = $current_url;
+   }
+  }else{
+   $_SESSION['recent_visit'][$_SERVER['QUERY_STRING']] = $current_url;
+  }
+
   /*
    * Check if class is content. If yes, check if any url alias exists
    */
@@ -106,7 +123,7 @@
   * Get all the varibles fro $_GET 
   * 
   */
- $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
  $pageno = !(empty($_GET['pageno'])) ? (int) $_GET['pageno'] : 1;
  if (!empty($_GET['per_page']) && ($_GET['per_page'] == "all" || $_GET['per_page'][0] == "all")) {
   $per_page = 50000;
@@ -177,9 +194,9 @@
    $key_field = property_exists($class, 'key_column') ? $class::$key_column : $class . '_id';
    $table_name = property_exists($class, 'table_name') ? $class::$table_name : $class;
 //	$table_name = $class;
-   if(class_exists($class)){
+   if (class_exists($class)) {
     $$class = new $class;
-   }else{
+   } else {
     redirect_to(HOME_URL);
    }
 

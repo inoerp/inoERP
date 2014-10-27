@@ -8,13 +8,14 @@
    <div id="content">
     <div id="main">
      <div id="structure">
-      <div id="contents">
+      <div id="search_page">
        <div id ="form_header">
         <div class="error"></div><div class="show_loading_small"></div><div id="loading"></div>
         <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
        </div>
        <div id="list_contents">
-        <div id="searchForm"><?php echo!(empty($search_form)) ? $search_form : ""; ?></div>
+        <div id="searchForm" ><div class='hideDiv_input'></div>
+         <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
         <div id="searchResult">
          <?php
          if (!empty($total_count)) {
@@ -32,7 +33,7 @@
               ?>
               <!--download page form-->
               <form action="<?php echo HOME_URL; ?>download.php" method="POST" name="download_all" id="download_all" target="_blank">
-               <input type="hidden"  name="data" value="<?php print base64_encode(serialize($search_class_array_all)) ?>" >
+               <input type="hidden"  name="data" value="<?php print  base64_encode(serialize($search_class_array_all)) ?>" >
                <input type="radio" name="download_format" checked="checked" value="excel_format">Excel 
                <input type="radio" name="download_format" value="text_format">Text
                <input type="radio" name="download_format" value="pdf_format">Pdf
@@ -44,10 +45,8 @@
              ?>
              <!--download page completion-->	 
             </li>
-            <li id="export_excel_searchResult" class="clickable"> <img src="<?php echo THEME_URL; ?>/images/excel.png" alt="Export to Excel" /></li>
-            <li id="print_searchResult" class="print clickable"> <img src="<?php echo THEME_URL; ?>/images/print.png" alt="Print" /></li>
-
-
+            <li id="export_excel_searchResult" class="clickable"> <img src="<?php echo HOME_URL; ?>files/images/excel.png" alt="Export to Excel" /></li>
+            <li id="print_searchResult" class="print clickable"> <img src="<?php echo HOME_URL; ?>files/images/print.png" alt="Print" /></li>
            </ul>
           </div>
          <?php } ?>
@@ -56,7 +55,7 @@
            <div id="search_result"> <?php echo!(empty($search_result_statement)) ? $search_result_statement : ""; ?></div>
           </div>
          </div>
-         <div id="pagination" style="clear: both;">
+         <div class="pagination" style="clear: both;">
           <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
           ?>
          </div>

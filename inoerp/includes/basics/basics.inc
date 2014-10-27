@@ -294,7 +294,7 @@ require_once(INC_EXTENSIONS.DS."block".DS."class_block_cache.inc");
 require_once(INC_EXTENSIONS.DS."category".DS."class_category.inc");
 require_once(INC_EXTENSIONS.DS."category".DS."class_category_reference.inc");
 require_once(INC_EXTENSIONS.DS."view".DS."class.view.inc");
-require_once(INC_EXTENSIONS.DS."view".DS."class.view_path.inc");
+require_once(INC_EXTENSIONS.DS."view".DS."result".DS."class_view_result.inc");
 require_once(INC_EXTENSIONS.DS."site_control".DS."class.site_control_header.inc");
 require_once(INC_EXTENSIONS.DS."site_control".DS."class.site_control_line.inc");
 require_once(INC_EXTENSIONS.DS."web_tracking".DS."class_web_tracking.inc");

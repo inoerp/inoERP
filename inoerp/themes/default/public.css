@@ -1,10 +1,8 @@
 @media print{
     body{ background-color:#FFFFFF; background-image:none; color:#000000 }
-    #header{ display:none;}
-    #left-block{ display:none;}
-    #footer{ display:none;}
-    #structure {visibility: hidden;}
-    #print{ 
+    #header, #header_top, #footer, #content_left, #comment_form, #content_right_right, 
+    #content_top, #content_bottom , #header_top_container, #form_top_image{ display:none;}
+    #content{ 
         visibility: visible;
         display: block;
         position:fixed;
@@ -16,7 +14,7 @@
         float: none !important;
         text-align: left;
     }
-    #print{ width:100%;}
+    #content{ width:100%;}
 }
 
 p {margin: 0; padding: 0;}
@@ -469,7 +467,21 @@ ul.commentRecord li ul.line{
     border-bottom: 6px groove #98bf21;
 }
 
-#pagination .selected{
+.pagination{
+ padding: 10px 0px;
+ clear: left;
+}
+
+.noOfcontents{
+    display: inline;
+    margin-left: 100px;
+}
+
+.page_nos{
+    display: inline;
+}
+
+#pagination .selected, .pagination .selected{
     color: red;
     padding: 2px 10px;
     margin-left: 10px;
@@ -484,7 +496,7 @@ ul.commentRecord li ul.line{
 
 }
 
-#pagination a:link {
+#pagination a:link, .pagination a:link{
     display: inline-block;
     padding: 2px 10px;
     margin-left: 10px;
@@ -618,11 +630,6 @@ table#category_list td.four{
     display: inline-block;
 }
 
-table#sort_fields_table tr td{
-    border: 1px solid #ccc;
-    width: 100%;
-}
-
 .view_table a{
     color: blue;
 }
@@ -661,11 +668,13 @@ th.add_detail_values_header{
 }
 
 ul.inline_list{
-    display: block;
-    clear: both;
-    margin-left: 20px;
-    width: 93.5%;
+    display: inline-block;
+    position: relative;
+    float: left;
+    clear: right;
+    width: 820px;
     padding-left: 20px;
+    margin: 0 0 20px 20px;
     background-color : rgba(60,60,100, 0.2);
     border: 1px solid;
     border-color: hsla(210,54%,20%,.15) hsla(210,54%,20%,.17) hsla(210,54%,20%,.2);
@@ -790,14 +799,14 @@ a.link_class_green:hover{
     min-width: 120px;
 }
 
-.hideDiv {
+.hideDiv , .hideDiv_input{
     background: url('images/minus_2.png') no-repeat 2px 2px;
     height: 28px;
     display: block;
     z-index: 100;
 }
 
-.showDiv {
+.showDiv, .showDiv_input {
     background: url('images/plus_2.png') no-repeat 2px 2px;
     height: 28px;
     display: block;
@@ -805,7 +814,7 @@ a.link_class_green:hover{
 }
 
 
-.showDiv::after{
+.showDiv::after, .showDiv_input::after{
     content : 'Show Details';
     margin-left: 40px;
     font-size: 16px;
@@ -816,4 +825,35 @@ a.link_class_green:hover{
 a.login_button:hover{
     color : rgba(11, 87, 11, 1);
     text-decoration: none;
+}
+
+.hint{
+    display: inline;
+    font-size: 0.85em;
+}
+
+li.view_list_record{
+    display: block;
+    margin: 0 0 20px 0;
+}
+
+li.view_list_record.odd{
+background-color  : rgba(10, 10, 140, 0.1);
+}
+
+#searchResultMessages{
+    clear: both;
+}
+
+span.view_grid{
+    display: block;
+    clear: both;
+}
+
+table.view_grid_container {
+    width: 100%;
+}
+
+table.view_grid_container tr td{
+    padding: 15px 10px 0 2px;
 }

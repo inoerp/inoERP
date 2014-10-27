@@ -3,13 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/smartview/www/inoerp/modules/sys/hold/reference/hold_reference_template.php</file>
-            <file>file:/C:/smartview/www/inoerp/modules/po/class_po_line.inc</file>
-            <file>file:/C:/smartview/www/inoerp/modules/sys/hold/reference/class_sys_hold_reference.inc</file>
-            <file>file:/C:/smartview/www/inoerp/modules/sys/hold/reference/hold_reference.inc</file>
-            <file>file:/C:/smartview/www/inoerp/modules/sys/hold/reference/hold_reference.js</file>
+            <file>file:/C:/smartview/www/inoerp/themes/default/public.css</file>
+            <file>file:/C:/smartview/www/inoerp/includes/js/basics.js</file>
+            <file>file:/C:/smartview/www/inoerp/extensions/view/view_template.php</file>
+            <file>file:/C:/smartview/www/inoerp/includes/general_class/class.pagination.inc</file>
+            <file>file:/C:/smartview/www/inoerp/extensions/view/class.view.inc</file>
+            <file>file:/C:/smartview/www/inoerp/includes/basics/search_page.inc</file>
+            <file>file:/C:/smartview/www/inoerp/extensions/view/json_view.php</file>
+            <file>file:/C:/smartview/www/inoerp/extensions/view/result/view_result_template.php</file>
+            <file>file:/C:/smartview/www/inoerp/includes/functions/loader.inc</file>
+            <file>file:/C:/smartview/www/inoerp/includes/general_class/class.dbObject.inc</file>
             <file>file:/C:/smartview/www/inoerp/test.php</file>
-            <file>file:/C:/smartview/www/inoerp/modules/sys/hold/class_sys_hold.inc</file>
+            <file>file:/C:/smartview/www/inoerp/extensions/view/view.css</file>
         </group>
     </open-files>
 </project-private>

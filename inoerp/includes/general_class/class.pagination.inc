@@ -3,6 +3,7 @@
  class pagination {
 
   public $current_page;
+  public $enable_ajax_pagination = false;
   public $per_page;
   public $total_count;
   private $_path = 'search';
@@ -21,8 +22,19 @@
       </form>
      </div> 
 VAR;
+  public $data_result;
+  public $headers;
+  public $max_char = 50;
 
   public function __construct($pageno = 1, $per_page = 20, $total_count = 0) {
+   if (!empty($_GET['pageno'])) {
+    $pageno = is_array($_GET['pageno']) ? $_GET['pageno'][0] : $_GET['pageno'];
+    $pageno = empty($pageno) ? 1 : $pageno;
+   }
+   if (!empty($_GET['per_page'])) {
+    $per_page = is_array($_GET['per_page']) ? $_GET['per_page'][0] : $_GET['per_page'];
+    $per_page = empty($per_page) ? 20 : $per_page;
+   }
    $this->current_page = (int) $pageno;
    $this->per_page = (int) $per_page;
    $this->total_count = (int) $total_count;
@@ -71,7 +83,9 @@ VAR;
 
   public function show_pagination() {
    $pagination_statement = "";
-
+   if (empty($this->_query_string)) {
+    $this->_query_string = $_SERVER['QUERY_STRING'];
+   }
    if (!empty($this->_query_string)) {
     if (strpos($this->_query_string, 'pageno') !== false) {
      $pageno_value = $_GET['pageno'];
@@ -87,13 +101,22 @@ VAR;
    }
 
    if ($this->total_pages() > 1) {
+    $pagination_statement .= "<div class='page_nos'>";
     if ($this->current_page > 6) {
-     $pagination_statement .= " <a href=\"$this->_path.php?pageno=1&" . $this->_query_string;
+     if (strpos($this->_path, '.php') !== false) {
+      $pagination_statement .= " <a href=\"$this->_path&pageno=1&" . $this->_query_string;
+     } else {
+      $pagination_statement .= " <a href=\"$this->_path.php?pageno=1&" . $this->_query_string;
+     }
      $pagination_statement .= '">First</a>';
     }
 
     if ($this->has_previous_page()) {
-     $pagination_statement .= "<a href=\"$this->_path.php?pageno=";
+     if (strpos($this->_path, '.php') !== false) {
+      $pagination_statement .= "<a href=\"$this->_path&pageno=";
+     } else {
+      $pagination_statement .= "<a href=\"$this->_path.php?pageno=";
+     }
      $pagination_statement .= $this->previous_page() . '&' . $this->_query_string;
      $pagination_statement .= "\"> &laquo; Previous </a> ";
     }
@@ -110,7 +133,11 @@ VAR;
       if ($starting_page_no == $this->current_page) {
        $pagination_statement .= " <span class=\"selected\">{$starting_page_no}</span> ";
       } else {
-       $pagination_statement .= " <a href=\"$this->_path.php?pageno={$starting_page_no}&" . $this->_query_string;
+       if (strpos($this->_path, '.php') !== false) {
+        $pagination_statement .= " <a href=\"$this->_path&pageno={$starting_page_no}&" . $this->_query_string;
+       } else {
+        $pagination_statement .= " <a href=\"$this->_path.php?pageno={$starting_page_no}&" . $this->_query_string;
+       }
        $pagination_statement .= '">' . $starting_page_no . '</a>';
       }
       $starting_page_no++;
@@ -121,40 +148,76 @@ VAR;
     } while ($pagination_count < 10);
 
     if ($this->has_next_page()) {
-     $pagination_statement .= " <a href=\"$this->_path.php?pageno=";
+     if (strpos($this->_path, '.php') !== false) {
+      $pagination_statement .= " <a href=\"$this->_path&pageno=";
+     } else {
+      $pagination_statement .= " <a href=\"$this->_path.php?pageno=";
+     }
+
      $pagination_statement .= $this->next_page() . '&' . $this->_query_string;
      $pagination_statement .= "\">Next &raquo;</a> ";
     }
+    $pagination_statement .= '</div>';
     $pagination_statement .= select_per_page();
+   }
+   
+   if($this->enable_ajax_pagination){
+    $pagination_statement = '<div class="do_ajax_pagination">'.$pagination_statement.'</div>';
    }
    return $pagination_statement;
   }
 
-  public function x_show_pagination($pagination, $path, $query_string, $pageno = 1) {
-   $pagination_statement = "";
-   if ($pagination->total_pages() > 1) {
-    if ($pagination->has_previous_page()) {
-     $pagination_statement .= "<a href=\"$path.php?pageno=";
-     $pagination_statement .= $pagination->previous_page() . '&' . $query_string;
-     $pagination_statement .= "\"> &laquo; Previous </a> ";
-    }
+  public function show_result_withPagination_table() {
 
-    for ($i = 1; $i <= $pagination->total_pages(); $i++) {
-     if ($i == $pageno) {
-      $pagination_statement .= " <span class=\"selected\">{$i}</span> ";
+   if (empty($this->_query_string)) {
+    $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
+   }
+   $total_count = count($this->data_result);
+   $pagination = new pagination($this->current_page, $this->per_page, $total_count);
+   $pagination->setProperty('_path', $this->_path);
+   $pagination->setProperty('_query_string', $this->_query_string);
+
+   $content_string = '<div class="table_container">';
+   if ($this->data_result) {
+    $con_count = 0;
+    if (count($this->data_result) > 0) {
+     $content_string .='<table class="top_margin10 form_line_data_table page_wise_list"><thead><tr>';
+     if (!empty($this->headers)) {
+      foreach ($this->headers as $h_k => $h_v) {
+       $content_string .="<th class=\"$h_k \">$h_v</th> ";
+      }
      } else {
-      $pagination_statement .= " <a href=\"$path.php?pageno={$i}&" . $query_string;
-      $pagination_statement .= '">' . $i . '</a>';
+      foreach ($this->data_result[0] as $h_k => $h_v) {
+       $content_string .="<th class=\"$h_k \">$h_v</th> ";
+      }
+     }
+     $content_string .="</tr>	</thead> ";
+     foreach ($this->data_result as $recod_k => $records) {
+      $continue = true;
+      if (($recod_k > ($this->current_page - 1) * $this->per_page) && ($recod_k <= (($this->current_page - 1) * $this->per_page) + $this->per_page)) {
+       $continue = false;
+      }
+      if ($continue) {
+       continue;
+      }
+      $even_odd = ($con_count % 2 == 0) ? 'even' : 'odd';
+      $content_string .= "<tr id=\"row_no$con_count\" class='new_row $even_odd'> ";
+      foreach ($records as $r_k => $r_v) {
+       $content_string .="<td class=\"$r_v \">$r_v</td> ";
+      }
+      $content_string .= '</tr>';
+      $con_count++;
      }
     }
 
-    if ($pagination->has_next_page()) {
-     $pagination_statement .= " <a href=\"$path.php?pageno=";
-     $pagination_statement .= $pagination->next_page() . '&' . $query_string;
-     $pagination_statement .= "\">Next &raquo;</a> ";
-    }
+    $content_string .='</table>';
    }
-   return $pagination_statement;
+   $content_string .='</div>';
+   $content_string .= '<div class="pagination show_result_withPagination ajax_pagination">';
+   $content_string .= $pagination->show_pagination();
+   $content_string .= '</div>';
+
+   return $content_string;
   }
 
  }

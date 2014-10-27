@@ -73,7 +73,7 @@ if (!empty($msg)) {
 				</div>
 			 </div>
 
-			 <div id="pagination" style="clear: both;">
+			 <div class="pagination" style="clear: both;">
 				<?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
 				?>
 			 </div>

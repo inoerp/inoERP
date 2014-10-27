@@ -1,57 +1,47 @@
 <?php include_once("../../includes/basics/basics.inc"); ?>
-
 <?php
- if ((!empty($_GET['query_v'])) && (!empty($_GET['find_result']))) {
-  global $dbc;
-  $query_v = !empty($_GET['query_v']) ? ($_GET['query_v']) : null;
-  $query_v = trim($query_v,'"');
-  $display_type = !empty($_GET['display_type']) ? ($_GET['display_type']) : 'table';
-  $result = dbObject::find_by_sql($query_v);
-
-  if(!$result){
+ if (!empty($_GET['find_result'])) {
+  if (!empty($_GET['query_v'])) {
+   $view = new view();
+   $view->pageno = !empty($_GET['pageno']) ? ($_GET['pageno']) : 1;
+   $view->per_page = !empty($_GET['per_page']) ? ($_GET['per_page']) : 20;
+   $view->query_v = ($_GET['query_v']);
+   $view->display_type = ($_GET['display_type']);
+   $view->no_of_grid_columns = !empty($_GET['no_of_grid_columns']) ? ($_GET['no_of_grid_columns']) : 0;
+   echo '<div id="return_divId">' . $view->show_viewResult() . '</div>';
+  } else if (!empty($_GET['view_id'])) {
+   $view = new view();
+   $view->pageno = !empty($_GET['pageno']) ? ($_GET['pageno']) : 1;
+   $view->per_page = !empty($_GET['per_page']) ? ($_GET['per_page']) : 20;
+   $view->view_id = ($_GET['view_id']);
+   echo '<div id="return_divId">' . $view->show_viewResult() . '</div>';
+  } else {
    return false;
   }
-  $return_stmt = '<div id="return_divId">';
-  $return_stmt .= '<table class="normal view_result"><thead><tr>';
-  foreach($result[0] as $key => $val){
-   $return_stmt.='<th>'.$key.'</th>';
-  }
-  $return_stmt .= '</tr></thead>';
-  $return_stmt .= '<tbody>';
-  foreach($result as $data){
-   $return_stmt.='<tr>';
-     foreach($data as $k => $v){
-   $return_stmt.='<td>'.$v.'</td>';
-  }
-  $return_stmt.='</tr>';
-  }
-  $return_stmt .= '</tbody></table></div>';
-  echo $return_stmt;
-//  echo header('Content-Type: application/json');
-//  echo json_encode(($return_stmt));
  }
 ?>
 
 
- <?php
-  if (!empty($_GET['delete']) && $_GET['delete'] == 1) {
-   echo '<div id="json_delete_fileds">';
-   $content_name = $_GET['content_name'];
-   $field_name = $_GET['field_name'];
+<?php
 
-   $result = content::drop_column($content_name, $field_name);
+ if (!empty($_GET['delete']) && $_GET['delete'] == 1) {
+  echo '<div id="json_delete_fileds">';
+  $content_name = $_GET['content_name'];
+  $field_name = $_GET['field_name'];
 
-   if ($result == 1) {
-    echo 'Comment is deleted!';
-   } else {
-    return false;
-   }
-   echo '</div>';
+  $result = content::drop_column($content_name, $field_name);
 
+  if ($result == 1) {
+   echo 'Comment is deleted!';
+  } else {
+   return false;
   }
- ?>
+  echo '</div>';
+ }
+?>
 
 <?php
+
  if (!empty($_GET['tableName']) && $_GET['get_fieldName'] == 1) {
   echo '<div id="json_filed_names">';
   $tableName = $_GET['tableName'];

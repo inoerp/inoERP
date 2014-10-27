@@ -123,7 +123,7 @@
           <div id="tabsHeader-4" class="tabContent">
               <div id="comments">
              <div id="comment_list">
-              <?php echo!(empty($comments)) ? $comments : ""; ?>
+              <?php echo !(empty($comments)) ? $comments : ""; ?>
              </div>
              <div id ="display_comment_form">
               <?php

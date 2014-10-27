@@ -24,8 +24,39 @@
 // 
 // echo $fav->show_currentUser_fav();
 //
- pa( view::find_all_tables_and_views());
- pa(view::find_columns_of_table_obj('subinventory'));
+// pa( view::find_all_tables_and_views());
+// pa(view::find_columns_of_table_obj('subinventory'));
+// 
+if(!empty($_SESSION['recent_visit'])){
+$recent_visit = '<ul id="recent_visit">';
+$rev_a = array_reverse($_SESSION['recent_visit']);
+$count = 0;
+foreach($rev_a as $k => $v){
+ $count++;
+ if($count >= 5){
+  break;
+ }
+ if(!is_numeric($k)){
+$recent_visit .= '<li><a href="'.$v.'">'.substr($k, 0, 30).'</a>';
+ } else{
+ $recent_visit .= '<li><a href="'.$v.'"> Vsiti '.$k.'</a>';
+}
+}
+$recent_visit .= '<li class="view_all"><a href="'.HOME_URL.'form.php?class_name=user_activity_v&mode=2"> View More ...</a>';
+$recent_visit .= '</ul>';
+}
+echo $recent_visit;
+// 
+//$sql = "SELECT subinventory.subinventory AS subinventory__subinventory,subinventory.subinventory AS subinventory__subinventory,subinventory.subinventory_id AS subinventory__subinventory_id,subinventory.description AS subinventory__description,subinventory.locator_control AS subinventory__locator_control,subinventory.subinventory_id AS subinventory__subinventory_id,locator.locator_id AS locator__locator_id,locator.subinventory_id AS locator__subinventory_id,locator.locator AS locator__locator,locator.locator_structure AS locator__locator_structure,locator.locator_id AS locator__locator_id
+//FROM 
+//subinventory,locator";
+//$result = dbObject::find_by_sql($sql);
+//
+//$pagination = new pagination();
+//$pagination->data_result = $result;
+//$pagination->setProperty('_path', 'test');
+// echo $pagination->show_result_withPagination();
+// 
 // 
 // $ud = new user_activity_v();
 //  
