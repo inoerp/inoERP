@@ -170,3 +170,8 @@ rect.line_class_7 {
  stroke-opacity : 0.4;
  stroke-width: 0.01em;
 }
+
+ul.multi_charts li{
+    display: inline-block;
+    margin: 5px 20px;
+}

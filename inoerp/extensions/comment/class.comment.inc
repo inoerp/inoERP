@@ -277,8 +277,11 @@
      $comment_string .= "<ul id=\"comment_id_$records->comment_id\" class=\"commentRecord\">";
      $comment_string .= '<li class="header_li">';
      $comment_string .= '<ul class="header">';
-     $comment_string .= '<li class="comment_by">' . $records->username . '</li>';
-     $comment_string .= '<li class="created_by">' . $records->created_by . '</li>';
+     if(!empty($records->username)){
+     $comment_string .= '<li class="comment_by">' . !empty($records->username) . '</li>';
+     }else{
+      $comment_string .= '<li class="comment_by">selfWeb</li>';
+     }
      $comment_string .= '<li class="creation_date">' . $records->creation_date . '</li>';
      if ($allow_content_update) {
       $comment_string .= '<li class="delete_update"><button name="delete_button" class="delete_button" value="' .

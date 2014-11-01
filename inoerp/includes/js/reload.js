@@ -672,6 +672,6 @@ $(document).ready(function() {
   var field_type = $(this).find('option:selected').data('field_type');
   $(this).closest('tr').find('.field_type').val(field_type);
  });
-
+$('table.view th').find('img').hide();
 
 });

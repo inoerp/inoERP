@@ -23,195 +23,197 @@ function setValFromSelectPage(view_id) {
  this.view_id = view_id;
 }
 
- function condition_operator_type_selection() {
-  $(".condition_operator_type").blur(function() {
-   var conditionValue = $(this).val();
-   if (conditionValue == 'database') {
-    $(this).closest("td").next(".condition_row_value").find('inpur').remove();
-   } else if (conditionValue == 'remove') {
-    $(this).closest("tr").remove();
-   } else {
-    var InputText = '<input type="text" class="condition_row_value input">';
-    $(this).closest("td").next(".condition_row_value").html(InputText);
-   }
-  });
- }
+function condition_operator_type_selection() {
+ $(".condition_operator_type").blur(function() {
+  var conditionValue = $(this).val();
+  if (conditionValue == 'database') {
+   $(this).closest("td").next(".condition_row_value").find('inpur').remove();
+  } else if (conditionValue == 'remove') {
+   $(this).closest("tr").remove();
+  } else {
+   var InputText = '<input type="text" class="condition_row_value input">';
+   $(this).closest("td").next(".condition_row_value").html(InputText);
+  }
+ });
+}
 
- function drag_drop_condition_value() {
-  $(".draggable_element").draggable(
-   {helper: 'clone'},
-  {cursor: "crosshair"});
-  $(".condition_row_value, .sort_fields_field_value, .group_by_fields, .condition_row_parameter, .ui-droppable").droppable({
-   accept: ".draggable_element",
-   drop: function(event, ui) {
-    $(this).append($(ui.draggable).clone());
+function drag_drop_condition_value() {
+ $(".draggable_element").draggable(
+  {helper: 'clone'},
+ {cursor: "crosshair"});
+ $(".condition_row_value, .sort_fields_field_value, .group_by_fields, .condition_row_parameter, .ui-droppable").droppable({
+  accept: ".draggable_element",
+  drop: function(event, ui) {
+   $(this).append($(ui.draggable).clone());
 //		remove_from_dragged_element();
-   }
-  });
- }
+  }
+ });
+}
 
- var objectCount2 = 500;
- function click_add_new_condition() {
-  $(".add_new_conditions").on("click", function() {
-   $("tr.condition_row").first().clone().appendTo($("table#condition_buttons_table tbody"));
-   objectCount2++;
-   drag_drop_condition_value();
-   condition_operator_type_selection();
-  });
- }
+var objectCount2 = 500;
+function click_add_new_condition() {
+ $(".add_new_conditions").on("click", function() {
+  $("tr.condition_row").first().clone().appendTo($("table#condition_buttons_table tbody"));
+  objectCount2++;
+  drag_drop_condition_value();
+  condition_operator_type_selection();
+ });
+}
 
- var objectCount3 = 1500;
-
-
- function create_sql_query() {
-  var tableArray = [];
-  $(".all_table_names option:selected").each(function() {
-   var tableName = $(this).val();
-   tableArray.push(tableName);
-  });
-
-  var show_fieldArray = [];
-  $("#show_field_buttons .showField_buttons").each(function() {
-   var fieldName = $(this).val();
-   var fieldNameSeparated = fieldName.replace(/\./g, '__');
-   var fieldNameAs = fieldName + ' AS ' + fieldNameSeparated;
-   show_fieldArray.push(fieldNameAs);
-  });
-
-  var fieldArray = [];
-  $(".table_fields option:selected").each(function() {
-   var tableName = $(this).closest("ul").children("#table_records").children(".all_table_names").val();
-   var fieldTableName = tableName + '.' + $(this).val();
-   fieldArray.push(fieldTableName);
-  });
+var objectCount3 = 1500;
 
 
-  var whereClauseArray = [];
-  var leftJoinStmt = '';
-  var tablesInLeftJoin = [];
-  $(".condition_row").each(function() {
-   var parameter = $(this).find(".showField_buttons").val();
-   var operator = $(this).find(".condition_operator").val();
-   var operator_type = $(this).find(".condition_operator_type").val();
-   if (operator.trim() === 'LEFT_JOIN') {
-    var value = $(this).find(".condition_row_value").find('input').val();
-    var parameter_s = parameter.split('.');
-    var value_s = value.split('.');
-    if (parameter) {
-     if (leftJoinStmt.length > 10) {
-      leftJoinStmt += '\n ' + " LEFT JOIN " + value_s[0] + " ON " + parameter + ' = ' + value;
-     } else {
-      leftJoinStmt += ' ' + parameter_s[0] + " LEFT JOIN " + value_s[0] + " ON " + parameter + ' = ' + value;
-     }
-     tablesInLeftJoin.push(parameter_s[0]);
-     tablesInLeftJoin.push(value_s[0]);
-    }
-   } else {
-    var whereClause = '';
-    if (operator_type == 'database')
-    {
-     var value = $(this).find(".condition_row_value").find('input').val();
-     whereClause += parameter + " " + operator + " " + value;
+function create_sql_query() {
+ var tableArray = [];
+ $(".all_table_names option:selected").each(function() {
+  var tableName = $(this).val();
+  tableArray.push(tableName);
+ });
+
+ var show_fieldArray = [];
+ $("#show_field_buttons .showField_buttons").each(function() {
+  var fieldName = $(this).val();
+  var fieldNameSeparated = fieldName.replace(/\./g, '__');
+  fieldNameSeparated = fieldNameSeparated.replace(/\(/g, '_');
+  fieldNameSeparated = fieldNameSeparated.replace(/\)/g, '');
+  var fieldNameAs = fieldName + ' AS ' + fieldNameSeparated;
+  show_fieldArray.push(fieldNameAs);
+ });
+
+ var fieldArray = [];
+ $(".table_fields option:selected").each(function() {
+  var tableName = $(this).closest("ul").children("#table_records").children(".all_table_names").val();
+  var fieldTableName = tableName + '.' + $(this).val();
+  fieldArray.push(fieldTableName);
+ });
+
+
+ var whereClauseArray = [];
+ var leftJoinStmt = '';
+ var tablesInLeftJoin = [];
+ $(".condition_row").each(function() {
+  var parameter = $(this).find(".showField_buttons").val();
+  var operator = $(this).find(".condition_operator").val();
+  var operator_type = $(this).find(".condition_operator_type").val();
+  if (operator.trim() === 'LEFT_JOIN') {
+   var value = $(this).find(".condition_row_value").find('input').val();
+   var parameter_s = parameter.split('.');
+   var value_s = value.split('.');
+   if (parameter) {
+    if (leftJoinStmt.length > 10) {
+     leftJoinStmt += '\n ' + " LEFT JOIN " + value_s[0] + " ON " + parameter + ' = ' + value;
     } else {
-     var value = $(this).find('.condition_row_value').find('input').val();
-     whereClause += parameter + " " + operator + " " + '\'' + value + '\'';
+     leftJoinStmt += ' ' + parameter_s[0] + " LEFT JOIN " + value_s[0] + " ON " + parameter + ' = ' + value;
     }
-
-    if (parameter) {
-     whereClauseArray.push(whereClause);
-    }
-   }
-
-  });
-
-  var sortArray = [];
-  $(".sort_fields_row").each(function() {
-   var sortFieldName = $(this).find(".showField_buttons").val();
-   var sortFieldValue = $(this).find(".sort_fields_values").val();
-   if ((sortFieldName) && (sortFieldName.length > 0)) {
-    var sortField = sortFieldName + " " + sortFieldValue;
-    sortArray.push(sortField);
-   }
-  });
-  
-    var groupByArray = [];
-  $("td.group_by_fields").each(function() {
-   if ($(this).find(".showField_buttons").val()) {
-    groupByArray.push($(this).find(".showField_buttons").val());
-   }
-  });
-
-  if (whereClauseArray) {
-   var whereClauseArray2 = whereClauseArray.join("\nAND ");
-  }
-
-  var sql = "";
-  if ((show_fieldArray) && (show_fieldArray.length > 0) && (tableArray) && (tableArray.length > 0)) {
-   sql = "SELECT " + show_fieldArray;
-  }
-
-  if (tablesInLeftJoin.length > 1) {
-   var fromClause = leftJoinStmt;
-   tableArray = tableArray.filter(function(el) {
-    return tablesInLeftJoin.indexOf(el) < 0;
-   });
-   if (tableArray.length > 0) {
-    fromClause += ',\n' + tableArray.join(",\n");
+    tablesInLeftJoin.push(parameter_s[0]);
+    tablesInLeftJoin.push(value_s[0]);
    }
   } else {
-   var fromClause = tableArray.join(",\n");
+   var whereClause = '';
+   if (operator_type == 'database')
+   {
+    var value = $(this).find(".condition_row_value").find('input').val();
+    whereClause += parameter + " " + operator + " " + value;
+   } else {
+    var value = $(this).find('.condition_row_value').find('input').val();
+    whereClause += parameter + " " + operator + " " + '\'' + value + '\'';
+   }
+
+   if (parameter) {
+    whereClauseArray.push(whereClause);
+   }
   }
 
-  sql += "\nFROM \n" + fromClause;
+ });
 
-  if ((whereClauseArray2) && (whereClauseArray2.length > 0)) {
-   sql += "\nWHERE " + whereClauseArray2;
+ var sortArray = [];
+ $(".sort_fields_row").each(function() {
+  var sortFieldName = $(this).find(".showField_buttons").val();
+  var sortFieldValue = $(this).find(".sort_fields_values").val();
+  if ((sortFieldName) && (sortFieldName.length > 0)) {
+   var sortField = sortFieldName + " " + sortFieldValue;
+   sortArray.push(sortField);
   }
+ });
+
+ var groupByArray = [];
+ $("td.group_by_fields").each(function() {
+  if ($(this).find(".showField_buttons").val()) {
+   groupByArray.push($(this).find(".showField_buttons").val());
+  }
+ });
+
+ if (whereClauseArray) {
+  var whereClauseArray2 = whereClauseArray.join("\nAND ");
+ }
+
+ var sql = "";
+ if ((show_fieldArray) && (show_fieldArray.length > 0) && (tableArray) && (tableArray.length > 0)) {
+  sql = "SELECT " + show_fieldArray;
+ }
+
+ if (tablesInLeftJoin.length > 1) {
+  var fromClause = leftJoinStmt;
+  tableArray = tableArray.filter(function(el) {
+   return tablesInLeftJoin.indexOf(el) < 0;
+  });
+  if (tableArray.length > 0) {
+   fromClause += ',\n' + tableArray.join(",\n");
+  }
+ } else {
+  var fromClause = tableArray.join(",\n");
+ }
+
+ sql += "\nFROM \n" + fromClause;
+
+ if ((whereClauseArray2) && (whereClauseArray2.length > 0)) {
+  sql += "\nWHERE " + whereClauseArray2;
+ }
 
  if ((groupByArray) && (groupByArray.length > 0)) {
-   sql += "\nGROUP BY " + groupByArray;
-  }
-  
-  if ((sortArray) && (sortArray.length > 0)) {
-   sql += "\nORDER BY " + sortArray;
-  }
-
-  if (sql) {
-   $("#query_v").val(sql);
-   $("#select_v").val(show_fieldArray);
-   $("#from_v").val(fromClause);
-   $("#where_v").val(whereClauseArray2);
-   $("#group_by_v").val(groupByArray);
-   $("#order_by").val(sortArray);
-  }
+  sql += "\nGROUP BY " + groupByArray;
  }
 
- function update_conditions() {
-  var condition_buttons = "";
-  var showField_buttons = "";
-  var fieldArray = [];
-  $(".table_fields option:selected").each(function() {
-   var tableName = $(this).closest("ul").children("#table_records").children(".all_table_names").val();
-   var fieldTableName = tableName + '.' + $(this).val();
-   fieldArray.push(fieldTableName);
-  });
-  $(fieldArray).each(function(index) {
-   condition_buttons += '<li class="draggable_element ui-state-default">';
-   condition_buttons += '<input type="text" value="' + fieldArray[index] + '" class="condition_buttons ' + fieldArray[index] + '">';
-   condition_buttons += '</li>';
-  });
-  $(fieldArray).each(function(index) {
-   showField_buttons += '<li class="draggable_element ui-state-default">';
-   showField_buttons += '<input type="text" value="' + fieldArray[index] + '" class="showField_buttons ' + fieldArray[index] + '">';
-   showField_buttons += '</li>';
-  });
-  $("#show_field_buttons").html(showField_buttons);
+ if ((sortArray) && (sortArray.length > 0)) {
+  sql += "\nORDER BY " + sortArray;
  }
 
- function change_attr_of_selected_elements() {
-  $(".table_fields").find(':selected').attr("selected", "selected");
-  $(".all_table_names").find(':selected').attr("selected", "selected");
+ if (sql) {
+  $("#query_v").val(sql);
+  $("#select_v").val(show_fieldArray);
+  $("#from_v").val(fromClause);
+  $("#where_v").val(whereClauseArray2);
+  $("#group_by_v").val(groupByArray);
+  $("#order_by").val(sortArray);
  }
+}
+
+function update_conditions() {
+ var condition_buttons = "";
+ var showField_buttons = "";
+ var fieldArray = [];
+ $(".table_fields option:selected").each(function() {
+  var tableName = $(this).closest("ul").children("#table_records").children(".all_table_names").val();
+  var fieldTableName = tableName + '.' + $(this).val();
+  fieldArray.push(fieldTableName);
+ });
+ $(fieldArray).each(function(index) {
+  condition_buttons += '<li class="draggable_element ui-state-default">';
+  condition_buttons += '<input type="text" value="' + fieldArray[index] + '" class="condition_buttons ' + fieldArray[index] + '">';
+  condition_buttons += '</li>';
+ });
+ $(fieldArray).each(function(index) {
+  showField_buttons += '<li class="draggable_element ui-state-default">';
+  showField_buttons += '<input type="text" value="' + fieldArray[index] + '" class="showField_buttons ' + fieldArray[index] + '">';
+  showField_buttons += '</li>';
+ });
+ $("#show_field_buttons").html(showField_buttons);
+}
+
+function change_attr_of_selected_elements() {
+ $(".table_fields").find(':selected').attr("selected", "selected");
+ $(".all_table_names").find(':selected').attr("selected", "selected");
+}
 
 setValFromSelectPage.prototype.setVal = function() {
  var view_id = this.view_id;
@@ -274,11 +276,13 @@ $(document).ready(function() {
   }
  });
 
- $("#content").on('click', '.remove_table', function() {
-  if ($(this).closest('div#display_div').find('ul').length > 1) {
-   $(this).closest('ul').remove();
-  } else {
-   alert('You cant remove first table name ');
+ $("#content").on('blur', '.all_table_names', function() {
+  if (!$(this).val()) {
+   if ($(this).closest('div#display_div').find('ul').length > 1) {
+    $(this).closest('ul').remove();
+   } else {
+    alert('You cant remove first table name ');
+   }
   }
  });
 
@@ -304,15 +308,15 @@ $(document).ready(function() {
  drag_drop_condition_value();
  click_add_new_condition();
  $("#content").on("click", '.add_new_sort_criteria', function() {
-   $("tr.sort_fields_row").clone().appendTo($("table#sort_fields_table tbody"));
-   drag_drop_condition_value();
-   condition_operator_type_selection();
-  });
- 
-$("#content").on("click", '.add_new_groupBy_criteria', function() {
- $('#group_by_table tbody tr').first().clone().appendTo($("table#group_by_table tbody"));
- drag_drop_condition_value();
-});
+  $("tr.sort_fields_row").clone().appendTo($("table#sort_fields_table tbody"));
+  drag_drop_condition_value();
+  condition_operator_type_selection();
+ });
+
+ $("#content").on("click", '.add_new_groupBy_criteria', function() {
+  $('#group_by_table tbody tr').first().clone().appendTo($("table#group_by_table tbody"));
+  drag_drop_condition_value();
+ });
 
  $("#save_tables").click(function() {
   update_conditions();
@@ -320,8 +324,8 @@ $("#content").on("click", '.add_new_groupBy_criteria', function() {
   condition_operator_type_selection();
   change_attr_of_selected_elements();
  });
- 
- $("#save_tables").trigger('click');
+
+// $("#save_tables").trigger('click');
 
  $("#save_query").click(function() {
   create_sql_query();
@@ -391,19 +395,23 @@ $("#content").on("click", '.add_new_groupBy_criteria', function() {
   });
 
  });
- 
- $('#content').on('change','.sort_fields_values', function(){
-  if($(this).val() == 'REMOVE'){
-  $(this).closest('tr').find('li').remove();
-  }
-});
 
-$('.update_parent_id_cb').on('click', function(){
-  if($(this).is(':checked')){
-  $('#parent_id').attr('disabled', false);
-  }else{
-  $('#parent_id').attr('disabled', true);
+ $('#content').on('change', '.sort_fields_values', function() {
+  if ($(this).val() == 'REMOVE') {
+   $(this).closest('tr').find('li').remove();
   }
-});
+ });
+
+ $('.update_parent_id_cb').on('click', function() {
+  if ($(this).is(':checked')) {
+   $('#parent_id').attr('disabled', false);
+  } else {
+   $('#parent_id').attr('disabled', true);
+  }
+ });
+
+ $('#draw_svg_image').on('click', function() {
+  getSvgImage();
+ });
 
 });

@@ -41,14 +41,17 @@
    'list_type',
    "path",
    'path_id',
-   "block",
+   "block_id",
    "block_title",
-   "block_header",
-   "block_footer",
-   "block_type",
-   "block_more",
+   'show_graph_only_cb',
    "rev_enabled_cb",
    "rev_number",
+   'chart_type',
+   'chart_width',
+   'chart_height',
+   'chart_label',
+   'chart_value',
+   'chart_legend',
    "created_by",
    "creation_date",
    "last_update_by",
@@ -68,7 +71,8 @@
   public $checkbox = [
    "rev_enabled_cb",
    'update_parent_id_cb',
-   'use_pager_cb'
+   'use_pager_cb',
+   'create_block_cb'
   ];
   public $column = [
    "rev_enabled_cb",
@@ -84,6 +88,8 @@
    "view_name",
    "description",
    "query_v"
+  ];
+  public $fields_inForm_notInDataBase = [
   ];
   public $search = [
    '_show_update_path' => 1,
@@ -118,12 +124,9 @@
   Public $list_type;
   public $path;
   public $path_id;
-  public $block;
+  public $block_id;
   public $block_title;
-  public $block_header;
-  public $block_footer;
-  public $block_type;
-  public $block_more;
+  public $show_graph_only_cb;
   public $rev_number;
   public $rev_enabled_cb;
   public $created_by;
@@ -142,6 +145,15 @@
   public $condition_operator_type;
   public $add_to_menu;
   private $_class_name;
+  public $chart_type;
+  public $chart_width;
+  public $chart_height;
+  public $chart_label;
+  public $chart_value;
+  public $chart_legend;
+  public $user_filter;
+  public $user_sort;
+  public $create_block_cb;
 
 //  function __construct() {
 //   global $dbc;
@@ -159,13 +171,57 @@
   }
 
   public function _before_save() {
+   
+  }
 
+  private function _create_block() {
+   
+  }
+
+  private function _delete_block() {
+   
+  }
+
+  public function inoview_block_config() {
+   
+  }
+
+  public function inoview_block() {
+   $view_i = new view();
+   $view_i->view_id = 12;
+   ob_start();
+   $view_i->viewResultById();
+   $content = ob_get_contents();
+   ob_end_clean();
+   return $content;
   }
 
   public function _after_save() {
+   global $db;
    if (empty($this->path) && !empty($this->view_id)) {
     $this->path = "form.php?class_name=view_result&mode=2&view_id=$this->view_id";
     $this->save_onWebForm();
+   }
+
+   if (!empty($this->create_block_cb) && !empty($this->view_id) && empty($this->block_id)) {
+    $block = new block();
+    $block->name = 'inoview';
+    $block->title = 'View of ' . $this->view_name;
+    $block->show_title_cb = 1;
+    $block->position = 0;
+    $block->weight = 0;
+    $block->reference_table = 'view';
+    $block->reference_key_value = $this->view_id;
+    $block->enabled_cb = false;
+    $block->visibility_option = 'hide';
+    try {
+     $block->save();
+     $this->block_id = $block->block_id;
+     $this->save_onWebForm();
+    } catch (Exception $e) {
+     echo "<br>Failed to save the block. Error @ class view @@ line " . __LINE__;
+     $db->rollback = true;
+    }
    }
 
    if (!empty($this->update_parent_id_cb) && (!empty($_POST['parent_id'][0]))) {
@@ -355,7 +411,8 @@
    foreach ($result[0] as $h_k => $h_v) {
     array_push($column_array_s, $h_k);
    }
-   $total_columns = count($column_array_s) + 1; //1 for count
+
+   $total_columns = count($column_array_s) + (int) (count($column_array_s) / $no_of_columns_per_tab); //1 for count
    $no_of_tabs = ceil($total_columns / $no_of_columns_per_tab);
    $total_count = count($result);
    $pagination = new pagination($this->pageno, $this->per_page, $total_count);
@@ -367,13 +424,11 @@
     $content_string = '';
     $content_string .= '<div id="tabsDetail">
 				 <ul class="tabMain">';
-    for ($i = 0; $i < $no_of_tabs; $i++) {
-     $content_string .= "<li><a href=\"#tabsDetail-$i\">Tab No $i </a></li>";
+    for ($l = 0; $l < $no_of_tabs; $l++) {
+     $content_string .= "<li><a href=\"#tabsDetail-$l\">Tab No $l </a></li>";
     }
     $content_string .= ' </ul>
 				 <div class="tabContainer"> ';
-
-
     for ($i = 0; $i < $no_of_tabs; $i++) {
      $content_string .= "<div id=\"tabsDetail-$i\" class='tabContent'>";
      $content_string .= '<table class="view top_margin10 form_line_data_table page_wise_list"><thead><tr>';
@@ -384,7 +439,12 @@
       if ($j > $total_columns - 2) {
        break;
       }
-      $content_string .= '<th>' . ucwords(str_replace('__', ' ', $column_array_s[$j])) . '</th>';
+      $content_string .= "<th data-fieldName='{$column_array_s[$j]}'><ul>";
+      $content_string .= '<li><img src=" ' . HOME_URL . 'themes/default/images/filter_add.png" class="filter_add clickable"></li>';
+      $content_string .= '<li class="field_value">' . ucwords(str_replace('__', ' ', $column_array_s[$j])) . '</li>';
+      $content_string .= '<li class="sort_elements"><img src=" ' . HOME_URL . 'themes/default/images/sort_up_16.png" class="sort_up clickable">';
+      $content_string .= '<img src=" ' . HOME_URL . 'themes/default/images/sort_down_16.png" class="sort_down clickable"></li>';
+      $content_string .= '</ul></th>';
      }
      $content_string .='</tr></thead>';
      If (!empty($result)) {
@@ -392,7 +452,9 @@
       $count = 0;
       foreach ($result as $recod_k => $record) {
        $continue = true;
-       if (($recod_k > ($this->pageno - 1) * $this->per_page) && ($recod_k <= (($this->pageno - 1) * $this->per_page) + $this->per_page)) {
+       if (empty($recod_k)) {
+        $continue = false;
+       } else if (!empty($recod_k) && ($recod_k > ($this->pageno - 1) * $this->per_page) && ($recod_k <= (($this->pageno - 1) * $this->per_page) + $this->per_page)) {
         $continue = false;
        }
        if ($continue) {
@@ -401,9 +463,9 @@
        $count++;
        $content_string .='<tr>';
        $content_string .= "<td>$count</td>";
-       $new_start = ($i * ($no_of_columns_per_tab - 1)) + $i;
-       $new_end = $new_start + ($no_of_columns_per_tab - 1);
-       for ($k = $new_start; $k <= $new_end; $k++) {
+       $new_start1 = ($i * ($no_of_columns_per_tab - 1)) + $i;
+       $new_end1 = $new_start1 + ($no_of_columns_per_tab - 1);
+       for ($k = $new_start; $k <= $new_end1; $k++) {
         if ($k > $total_columns - 2) {
          break;
         }
@@ -422,13 +484,50 @@
      }
      $content_string .= '</table> </div>';
     }
-    $content_string .= '</div> </div>';
+    $content_string .= '</div>';
    }
    $content_string .='</div>';
    $content_string .= '<div id="view_pagination_table" class="ajax_view pagination">';
    $content_string .= $pagination->show_pagination();
    $content_string .= '</div>';
    return $content_string;
+  }
+
+  private function _update_queryByFilter() {
+   $whereFields = [];
+   $existing_search = [];
+//to check number of criterias
+   $noof_criteria = 0;
+   foreach ($this->user_filter as $key => $value) {
+    $key = str_replace('__', '.', $key);
+    $entered_search_criteria = str_replace(' ', '%', trim($value));
+    array_push($existing_search, $value);
+    if (substr($entered_search_criteria, 0, 1) == '=') {
+     $whereFields[] = sprintf("%s = '%s' ", $key, trim(substr($entered_search_criteria, 1)));
+    } else if (substr($entered_search_criteria, 0, 2) == '!=') {
+     $whereFields[] = sprintf("%s != '%s' ", $key, trim(substr($entered_search_criteria, 2)));
+    } else if (substr($entered_search_criteria, 0, 1) == '>') {
+     $whereFields[] = sprintf("%s > '%s' ", $key, trim(substr($entered_search_criteria, 1)));
+    } else if (substr($entered_search_criteria, 0, 1) == '<') {
+     $whereFields[] = sprintf("%s < '%s' ", $key, trim(substr($entered_search_criteria, 1)));
+    } else {
+     $whereFields[] = sprintf("%s LIKE '%%%s%%'", $key, trim(mysql_prep($entered_search_criteria)));
+    }
+    $noof_criteria++;
+   }
+   $whereClause = implode(" AND ", $whereFields);
+   return $whereClause;
+  }
+
+  private function _update_orderBY() {
+   $orderBy = '';
+   foreach ($this->user_sort as $key => $value) {
+    $value = ($value == 'sort_down') ? ' DESC ' : 'ASC';
+    $key = str_replace('__', '.', $key);
+    $orderBy .= $key . ' ' . $value . ',';
+   }
+   $orderBy = rtrim($orderBy, ',');
+   return $orderBy;
   }
 
   private function _list_display($result) {
@@ -488,7 +587,7 @@
    if ($result) {
     $con_count = 0;
     if (count($result) > 0) {
-      $column_count = 1;
+     $column_count = 1;
      foreach ($result as $recod_k => $records) {
       $even_odd = ($con_count % 2 == 0) ? 'even' : 'odd';
       if ($column_count == 1) {
@@ -513,7 +612,7 @@
       }
       $con_count++;
      }
-     }
+    }
    }
    $content_string .='</tbody></table>';
    $content_string .='</div>';
@@ -523,19 +622,49 @@
    return $content_string;
   }
 
+  public function update_view_query_by_userInputs() {
+   $view_i = view::find_by_id($this->view_id);
+   $this->query_v = base64_decode($view_i->query_v);
+   if (!empty($this->user_filter) || !empty($this->user_sort)) {
+    $this->query_v = ' SELECT ' . $view_i->select_v;
+    $this->query_v .= ' FROM ' . $view_i->from_v;
+    $this->query_v .= ' WHERE ' . $view_i->where_v;
+    if (!empty($this->user_filter)) {
+     $user_filter = $this->_update_queryByFilter();
+     if (empty($view_i->where_v)) {
+      $this->query_v .= $user_filter;
+     } else {
+      $this->query_v .= ' AND ' . $user_filter;
+     }
+    }
+
+    $this->query_v .=!empty($view_i->group_by_v) ? ' GROUP BY ' . $view_i->group_by_v : '';
+    $this->query_v .=!empty($view_i->order_by) ? ' ORDER BY ' . $view_i->order_by : '';
+    if (!empty($this->user_sort)) {
+     $user_sort = $this->_update_orderBY();
+     if (empty($view_i->order_by)) {
+      $this->query_v .= ' ORDER BY ' . $user_sort;
+     } else {
+      $this->query_v .= ' , ' . $user_sort;
+     }
+    }
+   }
+   $this->_class_name = $view_i->custom_div_class . ' ' . $view_i->view_name;
+   $this->header_text = $view_i->header_text;
+   $this->footer_text = $view_i->footer_text;
+   $this->display_type = $view_i->display_type;
+   $this->no_of_grid_columns = $view_i->no_of_grid_columns;
+  }
+
   public function show_viewResult($view_id = '') {
    $return_stmt = '';
    $this->view_id = !empty($view_id) ? $view_id : $this->view_id;
    if (!empty($this->view_id)) {
-    $view_i = view::find_by_id($this->view_id);
-    $result = $this->findBySql(base64_decode($view_i->query_v));
-    $this->_class_name = $view_i->custom_div_class . ' ' . $view_i->view_name;
-    $this->header_text = $view_i->header_text;
-    $this->footer_text = $view_i->footer_text;
-    $this->display_type = $view_i->display_type;
-    $this->no_of_grid_columns = $view_i->no_of_grid_columns;
-    $return_stmt .= "<span class='view_name'>Custom Report : " . ucwords(str_replace('_', ' ', $view_i->view_name)) . " </span>";
+    $this->update_view_query_by_userInputs();
+//    echo $this->query_v;
+    $result = $this->findBySql($this->query_v);
    } else if (!empty($this->query_v)) {
+
     $result = $this->findBySql(($this->query_v));
    } else {
     return false;
@@ -574,6 +703,50 @@
     $return_stmt = '<div id="view_display_data">' . $return_stmt . '</div>';
    }
    return $return_stmt;
+  }
+
+  public function viewResultById($view_id = '') {
+   $this->view_id = !empty($view_id) ? $view_id : $this->view_id;
+   $this->findBy_id($this->view_id);
+//   echo '<link href="' . HOME_URL . 'includes/ecss/getsvgimage.css" media="all" rel="stylesheet" type="text/css" />';
+//   echo '<link href="' . HOME_URL . 'extensions/view/result/view.css" media="all" rel="stylesheet" type="text/css" />';
+//   echo '<script src="' . HOME_URL . 'extensions/view/result/view.js"></script>';
+
+   if (!empty($this->view_id) && !empty($this->chart_type)) {
+    $svgimg = new getsvgimage();
+    $result = $result1 = dbObject::find_by_sql(base64_decode($this->query_v));
+    $svgimg->setProperty('_chart_name', $this->view_name);
+    $svgimg->setProperty('_chart_width', $this->chart_width);
+    $svgimg->setProperty('_chart_height', $this->chart_height);
+    $svgimg->setProperty('_chart_type', $this->chart_type);
+    $svgimg->result = $result;
+    $svgimg->legend_name = str_replace('.', '__', $this->chart_legend);
+    $svgimg->chart_label = str_replace('.', '__', $this->chart_label);
+    $svgimg->chart_value = str_replace('.', '__', $this->chart_value);
+    $svg_chart = $svgimg->getSvgChart_forView();
+   }
+
+   if (!empty($this->view_id)) {
+    $view_i = view::find_by_id($this->view_id);
+    $column_list = [];
+    if (!empty($view_i->select_v)) {
+     $select_v = explode(',', $this->select_v);
+     if (!empty($select_v)) {
+      foreach ($select_v as $k2 => $v2) {
+       if (strpos($v2, 'AS') !== false) {
+        $v_a = explode('AS', $v2);
+        $colmn_v = trim($v_a[1]);
+        $column_list[$colmn_v] = $colmn_v;
+       }
+      }
+     }
+    }
+   }
+   $class = 'view_result';
+   $$class = $this;
+   global $f;
+   include 'result/display/display_template.php';
+   return;
   }
 
  }

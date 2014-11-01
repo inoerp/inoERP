@@ -10,8 +10,7 @@
       <div class="error"></div><div id="loading"></div>
       <div class="show_loading_small"></div>
       <?php
-       echo (!empty($show_message)) ? $show_message : "";
-       $f = new inoform();
+       echo (!empty($show_message)) ? $show_message : ""; $f= new inoform();
       ?> 
       <span class="heading"> View - Dynamic Query Builder  </span>
       <!--    End of place for showing error messages-->
@@ -74,6 +73,9 @@
              <li><label>Default Per Page : </label> <?php echo $f->number_field('default_per_page', $$class->default_per_page, '', 'default_per_page', 'large'); ?></li>
              <li><label>List Type : </label> 
               <?php echo $f->select_field_from_array('list_type', dbObject::$list_type_a, $$class->list_type); ?></li>
+             <li><label>Create Block : </label><?php echo $f->checkBox_field('create_block_cb', ''); ?></li>
+             <li><label>View Block : </label><a href="form.php?class_name=block&mode=9&block_id=<?php echo $$class->block_id; ?>">Configure Block</a></li>
+             <li><label>Show graph only in block : </label><?php echo $f->checkBox_field('show_graph_only_cb', $$class->show_graph_only_cb); ?></li>
             </ul>
            </div>
           </div>
@@ -85,28 +87,12 @@
            <li><a href="#tabsLine-1">Settings</a></li>
            <li><a href="#tabsLine-2">SQL Query</a></li>
            <li><a href="#tabsLine-3">Live Display</a></li>
+           <li><a href="#tabsLine-4">Graph</a></li>
           </ul>
           <div class="tabContainer">
            <div id="tabsLine-1" class="tabContent">
             <div>
              <?php
-              $table_column_name = [];
-              if (!empty($view->select_v)) {
-               $table_names = [];
-               $table_name_a = explode(',', $view->select_v);
-               foreach ($table_name_a as $record_a) {
-                $record_a = trim(substr($record_a, 0, strpos($record_a, 'AS') - 1));
-                $record_a_exp = explode('.', $record_a);
-                array_push($table_column_name, $record_a);
-                if (!array_key_exists($record_a_exp[0], $table_names)) {
-                 $table_names[$record_a_exp[0]] = array();
-                 $table_names[$record_a_exp[0]][] = $record_a_exp[1];
-                } else {
-                 $table_names[$record_a_exp[0]][] = $record_a_exp[1];
-                }
-               }
-//           pa($table_names);
-              }
               if (!empty($view->logical_settings)) {
                echo '<ul id="logical_settings">';
                echo base64_decode($view->logical_settings);
@@ -125,7 +111,7 @@
                    ?>
                    <ul class="display_records table_object<?php echo $tbl_count; ?>">
                     <li id="table_records"><label>Table Names </label>
-                     <?php echo $f->select_field_from_object('all_table_names', view::find_all_tables_and_views(), 'TABLE_NAME', 'TABLE_NAME', $tbl_k) ?>
+                     <?php echo $f->select_field_from_object('all_table_names', view::find_all_tables_and_views(), 'TABLE_NAME', 'TABLE_NAME', $tbl_k); ?>
                     </li>
                     <?php
                     foreach ($tbl_v as $column_k => $column_v) {
@@ -142,7 +128,7 @@
                   ?>
                   <ul class="display_records table_object0">
                    <li id="table_records"><label>Table Names </label>
-                    <?php echo $f->select_field_from_object('all_table_names', view::find_all_tables_and_views(), 'TABLE_NAME', 'TABLE_NAME', '', 'all_table_names') ?>
+                    <?php echo $f->select_field_from_object('all_table_names', view::find_all_tables_and_views(), 'TABLE_NAME', 'TABLE_NAME', '', '', 'all_table_names') ?>
                    </li>
                    <li class="field_records record_no0"><Label>Field</label>
                     <select class="table_fields">
@@ -156,6 +142,7 @@
                 <li id="show_field_li"><label>Show Fields</label>
                  <ul id="show_field_buttons">
                   <span class="add_new_fields clickable">Available Fields</span>
+                  <?php echo $show_field_stmt; ?>
                  </ul>
                 </li>
                 <li id="condition_li"><label>Conditions</label>
@@ -199,7 +186,7 @@
                      </tr>
                     </thead>
                     <tbody>
-                     <?php  echo !empty($groupBy_stmt) ? $groupBy_stmt : ''; ?>
+                     <?php echo!empty($groupBy_stmt) ? $groupBy_stmt : ''; ?>
                      <tr class=group_by_row">
                       <td class="group_by_fields">
                       </td>
@@ -217,7 +204,7 @@
                      </tr>
                     </thead>
                     <tbody>
-                     <?php  echo !empty($orderby_stmt) ? $orderby_stmt : ''; ?>
+                     <?php echo!empty($orderby_stmt) ? $orderby_stmt : ''; ?>
                      <tr class="sort_fields_row">
                       <td class="sort_fields_field_value">
 
@@ -285,6 +272,53 @@
              <div id="live_display"><label>Live Display</label>
               <div id="live_display_data" class="scrollElement">
                <?php echo!empty($view_result) ? $view_result : ""; ?>
+              </div>
+             </div>
+
+            </div>
+           </div>
+           <div id="tabsLine-4" class="tabContent">
+            <div id="basic_settings">
+
+             <div> 
+              <ul class="column four_column">
+               <li><label>Chart Type : </label> 
+                <?php echo $f->select_field_from_array('chart_type', getsvgimage::$chart_type_a, $$class->chart_type, 'chart_type'); ?></li>
+               <li><label>Chart Width : </label><?php echo $f->number_field('chart_width', $$class->chart_width, '', 'chart_width'); ?></li>
+               <li><label>Chart Height : </label><?php echo $f->number_field('chart_height', $$class->chart_height, '', 'chart_height'); ?></li>
+               <li><label>Label Field : </label>
+                <?php
+                 if (!empty($column_list)) {
+                  echo $f->select_field_from_array('chart_label', $column_list, $$class->chart_label, 'chart_label');
+                 } else {
+                  echo $f->text_field_dl('chart_label', $$class->chart_label);
+                 }
+                ?>
+               </li>
+               <li><label>Value Field : </label>
+                <?php
+                 if (!empty($column_list)) {
+                  echo $f->select_field_from_array('chart_value', $column_list, $$class->chart_value, 'chart_value');
+                 } else {
+                  echo $f->text_field_dl('chart_value', $$class->chart_value);
+                 }
+                ?>
+               </li>
+               <li><label>Legend : </label>
+                <?php
+                 if (!empty($column_list)) {
+                  echo $f->select_field_from_array('chart_legend', $column_list, $$class->chart_legend, 'chart_legend');
+                 } else {
+                  echo $f->text_field_dl('chart_legend', $$class->chart_legend);
+                 }
+                ?></li>
+              </ul>
+             </div>
+             <div id="draw_chart"><label>Live Chart</label>
+              <div id="draw_chart_data" class="scrollElement">
+               <span class="heading"><input type="button" value="Draw Chart" class="button display_result" id="draw_svg_image"></span>
+               <div class="svg_image">
+               </div>
               </div>
              </div>
 

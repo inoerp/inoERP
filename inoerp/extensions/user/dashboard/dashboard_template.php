@@ -19,8 +19,8 @@
           <div id="tabsHeader">
            <ul class="tabMain">
             <li><a href="#tabsHeader-1">Access</a></li>
-            <li><a href="#tabsHeader-2">Purchasing</a></li>
-            <li><a href="#tabsHeader-3">On hand</a></li>
+            <li><a href="#tabsHeader-2">On hand</a></li>
+            <li><a href="#tabsHeader-3">Purchasing</a></li>
             <li><a href="#tabsHeader-4">WIP Value</a></li>
            </ul>
            <div class="tabContainer"> 
@@ -43,104 +43,79 @@
              </ul>
             </div>
             <div id="tabsHeader-2" class="tabContent">
-               <?php
-                $poa = new po_all_v();
-                $legend_p = [];
-                $chart_a_p = [];
-                $reports_p = $poa->ra_report_set_purchasing_analysis();
-                $chart_settings_p = $poa->ra_report_set_purchasing_analysis_settings;
-                foreach ($reports_p as $key => $report_data_p) {
-                 $key_name_setting = $key . '_settings';
-                 $svgimage = new getsvgimage();
-                 $svgimage->setProperty('_settings', $chart_settings_p);
-                 if (property_exists($poa, $key_name_setting)) {
-                  $this_chart_settings = $poa->$key_name_setting;
-                  $svgimage->setProperty('_settings', $this_chart_settings);
-                 }
-
-                 $svgimage->setProperty('_data', $report_data_p);
-                 $chart = $svgimage->draw_chart();
-                 array_push($chart_a_p, $chart);
-                }
-
-                if (is_array($chart_a_p)) {
-                 echo "<ul id='charts_in_report'>";
-                 foreach ($chart_a_p as $key => $chart_image) {
-                  echo "<li class=\"chart_no_$key\">$chart_image</li>";
-                 }
-                 echo '</ul>';
-                } else {
-                 echo $chart_a_p;
-                }
-               ?>
+             <?php
+              $view_i = new view();
+              $view_i->view_id = 11;
+              $view_i->viewResultById();
+             ?>
             </div>
             <div id="tabsHeader-3" class="tabContent">
              <?php
-              $ov = new onhand_v;
-              $legend = [];
-              $chart_a = [];
-              $reports = $ov->ra_report_set_onhand_by_subinventoryType();
-              $report_name = 'ra_report_set_onhand_by_subinventoryType';
-              $chart_settings = $ov->ra_report_set_onhand_by_subinventoryType_settings;
-              $count = 0;
-              foreach ($reports as $key => $report_data) {
-               $key_name_setting = $key . '_settings';
-               $svgimage = new getsvgimage();
-               $svgimage->setProperty('_settings', $chart_settings);
-               if (property_exists($ov, $key_name_setting)) {
-                $this_chart_settings = $ov->$key_name_setting;
-                $svgimage->setProperty('_settings', $this_chart_settings);
-               }
-
-               $svgimage->setProperty('_data', $report_data);
-               $chart = $svgimage->draw_chart();
-               array_push($chart_a, $chart);
-               $count++;
-              }
-
-              if (is_array($chart_a)) {
-               echo "<ul id='charts_in_report'>";
-               foreach ($chart_a as $key => $chart_image) {
-                echo "<li class=\"chart_no_$key\">$chart_image</li>";
-               }
-               echo '</ul>';
-              } else {
-               echo $chart_a;
-              }
+              $view_i->view_id = 12;
+              $view_i->viewResultById();
+              
+//              $poa = new po_all_v();
+//              $legend_p = [];
+//              $chart_a_p = [];
+//              $reports_p = $poa->ra_report_set_purchasing_analysis();
+//              $chart_settings_p = $poa->ra_report_set_purchasing_analysis_settings;
+//              foreach ($reports_p as $key => $report_data_p) {
+//               $key_name_setting = $key . '_settings';
+//               $svgimage = new getsvgimage();
+//               $svgimage->setProperty('_settings', $chart_settings_p);
+//               if (property_exists($poa, $key_name_setting)) {
+//                $this_chart_settings = $poa->$key_name_setting;
+//                $svgimage->setProperty('_settings', $this_chart_settings);
+//               }
+//               $svgimage->setProperty('_data', $report_data_p);
+//               $chart = $svgimage->draw_chart();
+//               array_push($chart_a_p, $chart);
+//              }
+//
+//              if (is_array($chart_a_p)) {
+//               echo "<ul id='charts_in_report'>";
+//               foreach ($chart_a_p as $key => $chart_image) {
+//                echo "<li class=\"chart_no_$key\">$chart_image</li>";
+//               }
+//               echo '</ul>';
+//              } else {
+//               echo $chart_a_p;
+//              }
              ?>
             </div>
+
             <div id="tabsHeader-4" class="tabContent">
              <div>                
               <?php
-                $raw = new ra_wip();
-                $legend_w = [];
-                $chart_a_w = [];
-                $reports_w = $raw->ra_report_set_wip();
-                $chart_settings_w = $raw->ra_report_wip_value_byItem_settings;
-                foreach ($reports_w as $key => $report_data_w) {
-                 $key_name_setting = $key . '_settings';
-                 $svgimage = new getsvgimage();
-                 $svgimage->setProperty('_settings', $chart_settings_w);
-                 if (property_exists($raw, $key_name_setting)) {
-                  $this_chart_settings = $raw->$key_name_setting;
-                  $svgimage->setProperty('_settings', $this_chart_settings);
-                 }
-
-                 $svgimage->setProperty('_data', $report_data_w);
-                 $chart = $svgimage->draw_chart();
-                 array_push($chart_a_w, $chart);
+               $raw = new ra_wip();
+               $legend_w = [];
+               $chart_a_w = [];
+               $reports_w = $raw->ra_report_set_wip();
+               $chart_settings_w = $raw->ra_report_wip_value_byItem_settings;
+               foreach ($reports_w as $key => $report_data_w) {
+                $key_name_setting = $key . '_settings';
+                $svgimage = new getsvgimage();
+                $svgimage->setProperty('_settings', $chart_settings_w);
+                if (property_exists($raw, $key_name_setting)) {
+                 $this_chart_settings = $raw->$key_name_setting;
+                 $svgimage->setProperty('_settings', $this_chart_settings);
                 }
 
-                if (is_array($chart_a_w)) {
-                 echo "<ul id='charts_in_report'>";
-                 foreach ($chart_a_w as $key => $chart_image) {
-                  echo "<li class=\"chart_no_$key\">$chart_image</li>";
-                 }
-                 echo '</ul>';
-                } else {
-                 echo $chart_a_w;
+                $svgimage->setProperty('_data', $report_data_w);
+                $chart = $svgimage->draw_chart();
+                array_push($chart_a_w, $chart);
+               }
+
+               if (is_array($chart_a_w)) {
+                echo "<ul id='charts_in_report'>";
+                foreach ($chart_a_w as $key => $chart_image) {
+                 echo "<li class=\"chart_no_$key\">$chart_image</li>";
                 }
-               ?>
+                echo '</ul>';
+               } else {
+                echo $chart_a_w;
+               }
+              ?>
              </div>
             </div>
            </div>

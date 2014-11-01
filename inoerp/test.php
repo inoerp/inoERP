@@ -4,6 +4,9 @@
  set_time_limit(0);
 
  include_once("includes/basics/header_public.inc");
+?>
+<link href="<?php echo HOME_URL; ?>includes/ecss/getsvgimage.css" media="all" rel="stylesheet" type="text/css" />
+<?php
 //pa(hr_element_entry_header::find_by_employeeId(4));
 //pa(hr_element_entry_header::find_all_regular_lines(1));
 //pa(hr_element_entry_header::find_all_basic_regular_lines(1));
@@ -21,32 +24,104 @@
 
 // $offset = 10;
 // $date = new DateTime('2014-7-01');
-// 
+
+ $view_i = new view();
+ $view_i->view_id = 11;
+ $view_i->viewResultById();
+ 
 // echo $fav->show_currentUser_fav();
 //
 // pa( view::find_all_tables_and_views());
 // pa(view::find_columns_of_table_obj('subinventory'));
 // 
-if(!empty($_SESSION['recent_visit'])){
-$recent_visit = '<ul id="recent_visit">';
-$rev_a = array_reverse($_SESSION['recent_visit']);
-$count = 0;
-foreach($rev_a as $k => $v){
- $count++;
- if($count >= 5){
-  break;
- }
- if(!is_numeric($k)){
-$recent_visit .= '<li><a href="'.$v.'">'.substr($k, 0, 30).'</a>';
- } else{
- $recent_visit .= '<li><a href="'.$v.'"> Vsiti '.$k.'</a>';
-}
-}
-$recent_visit .= '<li class="view_all"><a href="'.HOME_URL.'form.php?class_name=user_activity_v&mode=2"> View More ...</a>';
-$recent_visit .= '</ul>';
-}
-echo $recent_visit;
-// 
+// $poa = new po_all_v();
+// $data = $poa->ra_open_po_by_supplier();
+// $legend_p = [];
+// $chart_settings_p = [
+//  '_chart_name' => 'Purchasing Analysis',
+//  '_chart_width' => '550',
+//  '_chart_height' => '350',
+//  '_x_axis_text' => 'Supplier',
+//  '_chart_type' => 'clustered_bar',
+//  '_legend' => array('Quantity Onhand', 'Open Quantity'),
+// ];
+//// pa($data);
+// $key_name_setting = $key . '_settings';
+// $svgimage = new getsvgimage();
+// $svgimage->setProperty('_settings', $chart_settings_p);
+// $svgimage->setProperty('_data', $data);
+// $chart = $svgimage->draw_chart();
+// echo $chart;
+//
+//
+// $svgimg = new getsvgimage();
+// $result = $result1 = dbObject::find_by_sql('	SELECT onhand_v.item_number AS onhand_v__item_number,onhand_v.item_description AS onhand_v__item_description,onhand_v.product_line AS onhand_v__product_line,onhand_v.org_name AS onhand_v__org_name,onhand_v.standard_cost AS onhand_v__standard_cost,onhand_v.item_id_m AS onhand_v__item_id_m,onhand_v.org_id AS onhand_v__org_id,onhand_v.onhand AS onhand_v__onhand,onhand_v.onhand_value AS onhand_v__onhand_value,item.item_id AS item__item_id,item.org_id AS item__org_id,item.item_type AS item__item_type,item.item_id_m AS item__item_id_m FROM onhand_v, item WHERE onhand_v.item_id_m = item.item_id_m AND item.org_id = onhand_v.org_id GROUP BY onhand_v.item_id_m,item.org_id ORDER BY onhand_v.onhand_value DESC');
+//
+// $chart_label = str_replace('.', '__', 'onhand_v__item_number');
+// $chart_value = str_replace('.', '__', 'onhand_v__onhand');
+// $chart_name = 'Custom View Chart';
+// $chart_width = '450';
+// $chart_height = '500';
+// $chart_type = 'clustered_bar';
+// $legend_name = 'onhand_v__org_name';
+// $legend_name = str_replace('.', '__', $legend_name);
+//
+// $data = [];
+// $labels = [];
+// $legend = [];
+//
+//// echo "<br>legend $legend_name";
+//// echo "<br>chart_label $chart_label";
+//// echo "<br>chart_value $chart_value";
+// pa($result);
+//
+// foreach ($result as $obj) {
+//  if (!empty($legend_name)) {
+//   if (!in_array($obj->$legend_name, $legend)) {
+//    array_push($legend, $obj->$legend_name);
+//   }
+//  }
+// }
+//
+// foreach ($result as $obj) {
+//  if (!in_array($obj->$chart_label, $labels)) {
+//   array_push($labels, $obj->$chart_label);
+//   $row = [];
+//   $label = $row['label'] = $obj->$chart_label;
+//   $row['value'] = [];
+//
+//   foreach ($legend as $l_k => $l_v) {
+//    $isnull = true;
+//    foreach ($result1 as $data_obj) {
+//     if (($data_obj->$chart_label) == $label && ($data_obj->$legend_name == $l_v)) {
+//      $row['value'][] = $obj->$chart_value;
+//      $isnull = false;
+//      break;
+//     }
+//    }
+//    if ($isnull) {
+//     $row['value'][] = null;
+//    }
+//   }
+//
+//
+//   array_push($data, $row);
+//  }
+// }
+////
+// pa($legend);
+// pa($data);
+//
+// $svgimg->setProperty('_chart_name', $chart_name);
+// $svgimg->setProperty('_chart_width', $chart_width);
+// $svgimg->setProperty('_chart_height', $chart_height);
+// $svgimg->setProperty('_chart_type', $chart_type);
+// $svgimg->setProperty('_legend', $legend);
+// $svgimg->setProperty('_data', $data);
+//
+// $svg_chart = $svgimg->draw_chart();
+// echo '<div id="return_divId">' . $svg_chart . '</div>';
+//// 
 //$sql = "SELECT subinventory.subinventory AS subinventory__subinventory,subinventory.subinventory AS subinventory__subinventory,subinventory.subinventory_id AS subinventory__subinventory_id,subinventory.description AS subinventory__description,subinventory.locator_control AS subinventory__locator_control,subinventory.subinventory_id AS subinventory__subinventory_id,locator.locator_id AS locator__locator_id,locator.subinventory_id AS locator__subinventory_id,locator.locator AS locator__locator,locator.locator_structure AS locator__locator_structure,locator.locator_id AS locator__locator_id
 //FROM 
 //subinventory,locator";
@@ -137,8 +212,6 @@ echo $recent_visit;
 // echo "<br>Next Monday 2014-7-08 "; echo next_monday('2014-7-08');
 // echo "<br>Next Monday 2014-7-09 ";echo next_monday('2014-7-09');
 // echo "<h1> All tables </h1>";
-
-
 // $table_sql = "   select table_name
 //from information_schema.tables
 //WHERE TABLE_SCHEMA= '".DB_NAME."'
@@ -169,7 +242,6 @@ echo $recent_visit;
 //  echo "<br> $table_name is updated";
 // }
 // $dbc->confirm();
- 
 //  $table_sql = "   select table_name
 //   from information_schema.columns 
 //   WHERE TABLE_SCHEMA = 'inoerp' AND column_name = 'last_update_by' 

@@ -8,7 +8,7 @@
 
 span.view_name{
     display: inline-block;
-    width: 250px;
+    max-width: 250px;
     font-size: 15px;
     vertical-align:baseline;
     float: left;

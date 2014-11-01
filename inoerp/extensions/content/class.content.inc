@@ -324,7 +324,7 @@ AND content.content_id = category_reference.reference_id  ";
    }
    $sql .= " ORDER BY content.content_id DESC ";
 
-   $count_sql = " SELECT COUNT(content.content_id) ";
+    $count_sql = " SELECT COUNT(content.content_id) ";
    $count_sql .= ' FROM content
 LEFT JOIN user ON user.user_id = content.created_by 
 LEFT JOIN content_type ct ON ct.content_type_id = content.content_type_id   ';
@@ -428,7 +428,7 @@ AND content.content_id = category_reference.reference_id  ";
       $content_string .= '<td class="no_of_replies">';
       $content_string .= $no_of_replies . '</td>';
       $content_string .= '<td class="created_by">';
-      $content_string .= $records->username;
+      $content_string .= empty($records->username) ? 'selfWeb' : $records->username;
       $content_string .= '</td><td class="post_date">';
       $content_string .= $records->creation_date;
       $content_string .= '</td>';

@@ -1,5 +1,6 @@
 <?php include_once("../../includes/basics/basics.inc"); ?>
 <?php
+
  if (!empty($_GET['find_result'])) {
   if (!empty($_GET['query_v'])) {
    $view = new view();
@@ -14,6 +15,16 @@
    $view->pageno = !empty($_GET['pageno']) ? ($_GET['pageno']) : 1;
    $view->per_page = !empty($_GET['per_page']) ? ($_GET['per_page']) : 20;
    $view->view_id = ($_GET['view_id']);
+   if (!empty($_GET['filter_data'])) {
+    foreach ($_GET['filter_data'] as $filter_data) {
+     $view->user_filter[$filter_data['name']] = $filter_data['value'];
+    }
+   }
+   if (!empty($_GET['sort_data'])) {
+    foreach ($_GET['sort_data'] as $sort_data) {
+     $view->user_sort[$sort_data['name']] = $sort_data['value'];
+    }
+   }
    echo '<div id="return_divId">' . $view->show_viewResult() . '</div>';
   } else {
    return false;

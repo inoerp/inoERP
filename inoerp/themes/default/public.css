@@ -468,8 +468,8 @@ ul.commentRecord li ul.line{
 }
 
 .pagination{
- padding: 10px 0px;
- clear: left;
+    padding: 10px 0px;
+    clear: left;
 }
 
 .noOfcontents{
@@ -838,11 +838,11 @@ li.view_list_record{
 }
 
 li.view_list_record.odd{
-background-color  : rgba(10, 10, 140, 0.1);
+    background-color  : rgba(10, 10, 140, 0.1);
 }
 
 #searchResultMessages{
-    clear: both;
+    /*clear: both;*/
 }
 
 span.view_grid{
@@ -856,4 +856,72 @@ table.view_grid_container {
 
 table.view_grid_container tr td{
     padding: 15px 10px 0 2px;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(120,130,12,0.3);
+}
+.chart{
+    background : rgba(256,256,256,0.4);
+    border: 2px solid #ccc;
+    padding: 10px 2px;
+    margin: 10px 0px;
+    box-shadow: 1px 5px 10px 5px #888;
+}
+
+.show_remove_filter{
+    background: url('images/filter_remove.png') no-repeat left top;
+    cursor: pointer; 
+}
+
+.show_add_filter{
+    display: block;
+    background: url('images/filter_add.png') no-repeat left top;
+    cursor: pointer; 
+}
+
+.show_sort_up{
+    background: url('images/sort_up_16.png') no-repeat scroll left bottom rgba(7, 0, 9, 0.37);
+    cursor: pointer; 
+}
+
+.show_sort_down{
+    background: url('images/sort_down_16.png') no-repeat left bottom rgba(7, 0, 9, 0.37);
+    cursor: pointer; 
+}
+
+.filtered_field:empty{
+    display: none;
+}
+
+.filtered_field, .show_sort_remove{
+    display: inline-block;
+    
+    font-weight: bold;
+    padding: 4px 4px 4px 20px;
+    font-weight: bold;
+    color: #CF5EAA;
+    margin-bottom: 2px;
+    line-height: 18px;
+    border: 1px solid green;
+    margin-right: 10px;
+    cursor: pointer; 
+    z-index: 99;
+}
+
+.show_sort_remove{
+    background: url('images/sort_remove_16.png') no-repeat 2px 5px rgba(19, 190,10, 0.3);
+}
+
+.filtered_field{
+    background: url('images/filter_remove.png') no-repeat 2px 5px rgba(19, 190,10, 0.3);
+}
+
+ul.icon_header {
+    width: 200px;
+}
+
+ul.icon_header li{
+    display: inline;
+    margin-right : 10px;
 }
