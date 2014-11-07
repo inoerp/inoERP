@@ -11,24 +11,24 @@ Introduction
 inoERP is an open source php based enterprise management system. 
 The ERP systems contain all the required modules for running any small to midsize businesses.
 The features are very similar to Oracle R12/ Fusion Application and SAP. 
-It also contains a light weight CMS which seamlessly integrates with the ERP
+It also contains a lightweight CMS which seamlessly integrates with the ERP
 
 Why inoERP 
 ------------
 
-The idea behind inoERP is to provide a dynamic pull based system where the demand /supply changes frequently and traditional planning systems 
+The idea behind inoERP is to provide a dynamic pull-based system where the demand /supply changes frequently and traditional planning systems 
 (such as MRP or Kanban) are incompetent to provide a good inventory turn.
 
 What is Dynamic pull System
 ------------
 
 Dynamic pull system is an advanced version of pull system which encompasses the best feature of traditional pull system & MRP. 
-The major disadvantage of traditional kanban system is the fixed kanban size and requirement of at least 2 bins for full operation.
-In the event of sudden demand decrease, kanban system can result in extra inventory and the value of unused inventory can go up to 2 bin size. 
+The major disadvantage of traditional Kanban system is the fixed Kanban size and requirement of at least 2 bins for full operation.
+In the event of sudden demand decrease, Kanban system can result in extra inventory and the value of unused inventory can go up to 2 bin size. 
 Similarly, In case of unexpected demand increasing, it can result in line down and the issue will be severe if the lead times are not short.
 
 
-Dynamic pull system overcomes this issue by recalculating the bucket size (kanban size/lot size) before creating any supply 
+Dynamic pull system overcomes this issue by recalculating the bucket size (Kanban size/lot size) before creating any supply 
 (requisitions/purchase order/work order). Each time a new supply is created, system automatically decides the best supply size as per the 
 existing actual demand.
 
