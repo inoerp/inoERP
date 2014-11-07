@@ -90,7 +90,7 @@ $(document).ready(function() {
  $("#content").on("click", '.select_supplier_name.select_popup', function() {
 	var rowClass = $(this).closest('tr').prop('class');
 	localStorage.setItem("row_class", rowClass);
-	void window.open('select.php?search_class_name=supplier_all_v', '_blank',
+	void window.open('select.php?class_name=supplier_all_v', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 

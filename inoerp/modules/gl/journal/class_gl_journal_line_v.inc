@@ -41,6 +41,9 @@ class gl_journal_line_v extends dbObject {
 	}
  }
 
+ public function __set($name, $value) {
+	$this->$name = $value;
+ }
 
  public  function create_gl_journal_line_v() {
 	$SQL = "SELECT  cc.combination, gjl.code_combination_id,

@@ -27,12 +27,6 @@ $(document).ready(function() {
 	});
 
  });
- 
-  //selecting Header Id
- $(".coa_id.select_popup").on("click", function() {
-	void window.open('select.php?class_name=coa', '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
 
 //COA combination
  $('#coa_combination_line').on('focusout', '.field_values', function() {
@@ -63,7 +57,8 @@ $(this).closest('#coa_combination_line').find(trClass).find('.description').val(
 
  $('a.show.coa_structure_show').click(function() {
 	var headerId = $('#coa_structure_id option:selected').val();
-	$(this).attr('href', modepath() + 'pageno=1&per_page=10&submit_search=Search&search_class_name=coa_combination&coa_structure_id=' + headerId);
+//	$(this).attr('href', '?coa_structure_id=' + headerId);
+	$(this).attr('href', modepath() + 'pageno=1&per_page=10&submit_search=Search&search_class=coa_combination&coa_structure_id=' + headerId);
  });
 
  //context menu

@@ -4,7 +4,6 @@ class supplier_site extends dbObject {
 
  public static $table_name = "supplier_site";
  public static $primary_column = "supplier_site_id";
- public static $parent_primary_column = "supplier_id";
  public static $key_column = 'supplier_site_name';
  public static $module = "ap";
  public $field_a = [

@@ -1,6 +1,6 @@
 <?php
-//if (!empty($_GET['submit_search']) && ($_GET['search_class_name'] === $class)) {
-if (!empty($_GET['submit_search'])) {
+
+if (!empty($_GET['submit_search']) && ($_GET['search_class'] === $class)) {
  if (count($whereFields) > 0) {
 	$whereClause = " WHERE " . implode(" AND ", $whereFields);
 	// And then create the SQL query itself.

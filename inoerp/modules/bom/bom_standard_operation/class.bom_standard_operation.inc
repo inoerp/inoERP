@@ -67,11 +67,6 @@ class bom_standard_operation extends dbObject {
 		 '_update_action_meassge' => 'Update',
 		 '_show_view_path' => 1,
  ];
- 
-   public $profile_default = [
-   'org_id' => 'org_inv_name_default',
-  ];
-   
  public $pageTitle = " Standard Operations - Find All Departments "; //page Title
  public $option_list = [
 //		 'bom_department_type' => 'BOM_DEPARTMENT_TYPE',

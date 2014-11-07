@@ -1,5 +1,5 @@
 function setValFromSelectPage(ap_transaction_header_id, combination, supplier_id, supplier_number, supplier_name,
- item_id_m, item_number, item_description, uom_id, bu_org_id, supplier_site_id) {
+				item_id_m, item_number, item_description, uom_id) {
  this.ap_transaction_header_id = ap_transaction_header_id;
  this.combination = combination;
  this.supplier_id = supplier_id;
@@ -9,15 +9,12 @@ function setValFromSelectPage(ap_transaction_header_id, combination, supplier_id
  this.item_number = item_number;
  this.item_description = item_description;
  this.uom_id = uom_id;
- this.bu_org_id = bu_org_id;
- this.supplier_site_id = supplier_site_id;
 
 }
 
 setValFromSelectPage.prototype.setVal = function() {
  var ap_transaction_header_id = this.ap_transaction_header_id;
  var supplier_id = this.supplier_id;
- var supplier_site_id = this.supplier_site_id;
  var supplier_number = this.supplier_number;
  var supplier_name = this.supplier_name;
  var combination = this.combination;
@@ -27,43 +24,34 @@ setValFromSelectPage.prototype.setVal = function() {
  var uom_id = this.uom_id;
  var rowClass = '.' + localStorage.getItem("row_class");
  var fieldClass = '.' + localStorage.getItem("field_class");
- if (this.bu_org_id) {
-  $("#bu_org_id").val(this.bu_org_id);
- }
  if (ap_transaction_header_id) {
-  $("#ap_transaction_header_id").val(ap_transaction_header_id);
+	$("#ap_transaction_header_id").val(ap_transaction_header_id);
  }
  if (supplier_id) {
-  $("#supplier_id").val(supplier_id);
-  var bu_org_id = $("#bu_org_id").val();
-  if (this.supplier_site_id) {
-   $.when(getSupplierDetails('modules/ap/supplier/json_supplier.php', bu_org_id)).done(function(data, textStatus, jqXHR) {
-    $('#supplier_site_id').val(supplier_site_id);
-   });
-  }
+	$("#supplier_id").val(supplier_id);
  }
  if (supplier_number) {
-  $("#supplier_number").val(supplier_number);
+	$("#supplier_number").val(supplier_number);
  }
  if (supplier_name) {
-  $("#supplier_name").val(supplier_name);
+	$("#supplier_name").val(supplier_name);
  }
  rowClass = rowClass.replace(/\s+/g, '.');
  fieldClass = fieldClass.replace(/\s+/g, '.');
  if (combination) {
-  $('#content').find(rowClass).find(fieldClass).val(combination);
+	$('#content').find(rowClass).find(fieldClass).val(combination);
  }
  if (item_id_m) {
-  $('#content').find(rowClass).find('.item_id_m').val(item_id_m);
+	$('#content').find(rowClass).find('.item_id_m').val(item_id_m);
  }
  if (item_number) {
-  $('#content').find(rowClass).find('.item_number').val(item_number);
+	$('#content').find(rowClass).find('.item_number').val(item_number);
  }
  if (item_description) {
-  $('#content').find(rowClass).find('.item_description').val(item_description);
+	$('#content').find(rowClass).find('.item_description').val(item_description);
  }
  if (uom_id) {
-  $('#content').find(rowClass).find('.uom_id').val(uom_id);
+	$('#content').find(rowClass).find('.uom_id').val(uom_id);
  }
 
  localStorage.removeItem("row_class");
@@ -83,310 +71,308 @@ $(document).ready(function() {
 
 //setting the first line & shipment number
  if (!($('.lines_number:first').val())) {
-  $('.lines_number:first').val('1');
+	$('.lines_number:first').val('1');
  }
 
  if (!($('.detail_number:first').val())) {
-  $('.detail_number:first').val('1');
+	$('.detail_number:first').val('1');
  }
 
- $('#form_line').find('.line_type').each(function() {
-  if (!$(this).val()) {
-   $(this).val('GOODS');
-  }
+// $('.need_by_date:first').datepicker("setDate", new Date());
+// $('.promise_date:first').datepicker("setDate", new Date());
+
+
+ //default quantity
+ $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function() {
+	var lineQuantity = $(this).closest('tr').find('.inv_line_quantity:first').val();
+	if (!$(this).closest("td").find(".quantity:first").val())
+	{
+	 $(this).closest("td").find(".quantity:first").val(lineQuantity);
+	}
  });
 
- $('#bu_org_id').on('change', function() {
-  getBUDetails($(this).val());
- });
-
- if ($('#bu_org_id').val() && ($('#bu_org_id').attr('disabled') != 'disabled')) {
-  getBUDetails($('#bu_org_id').val());
- }
-
- $('#transaction_type').on('change', function() {
-  if ($(this).val() == 'PO_DEFAULT') {
-   var link = 'select.php?class_name=po_all_v&po_status=%3DAPPROVED&mode=9&action_class_name=ap_transaction_header';
-   void window.open(link, '_blank',
-    'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-   $(this).val('INVOICE');
-   return false;
-  }
- })
+//set the line price
+// $('#content').on('blur', '.inv_unit_price,.inv_line_quantity', function() {
+//	var unitPrice = +$(this).val();
+//	var trClass = '.' + $(this).closest('tr').attr('class');
+//	var lineQuantity = +($(this).closest('.tabContainer').find(trClass).find('.inv_line_quantity').val());
+//	var linePrice = +(unitPrice * lineQuantity);
+//	$(this).closest('tr').find('.inv_line_price').val(linePrice);
+// });
 
 //get supplier details
  $("#supplier_id, #supplier_name, #supplier_number").on("focusout", function() {
-  if (($("#bu_org_id").val()) && ($('#supplier_id').val())) {
-   var bu_org_id = $("#bu_org_id").val();
-   getSupplierDetails('modules/ap/supplier/json_supplier.php', bu_org_id);
-  }
+	if (($("#bu_org_id").val()) && ($('#supplier_id').val())) {
+	 var bu_org_id = $("#bu_org_id").val();
+	 getSupplierDetails('modules/ap/supplier/json_supplier.php', bu_org_id);
+	}
  });
 
  $("#content").on("change", "#supplier_site_id", function() {
-  var supplier_site_id = $("#supplier_site_id").val();
-  if (supplier_site_id) {
-   getSupplierSiteDetails('modules/ap/supplier/json_supplier.php', supplier_site_id);
-  }
+	var supplier_site_id = $("#supplier_site_id").val();
+	if (supplier_site_id) {
+	 getSupplierSiteDetails('modules/ap/supplier/json_supplier.php', supplier_site_id);
+	}
  });
 
  $("#content").on("focusout", '.ship_to_inventory', function() {
-  var ship_to_inventory = $(this).val();
-  var rowTrClass = $(this).closest("tr").attr("class");
-  var classValue = "tr." + rowTrClass;
-  var classValue1 = classValue.replace(/ /g, '.');
-  getAllInventoryAccounts('modules/org/inventory/json_inventory.php', ship_to_inventory, classValue1);
+	var ship_to_inventory = $(this).val();
+	var rowTrClass = $(this).closest("tr").attr("class");
+	var classValue = "tr." + rowTrClass;
+	var classValue1 = classValue.replace(/ /g, '.');
+	getAllInventoryAccounts('modules/org/inventory/json_inventory.php', ship_to_inventory, classValue1);
  });
+
+
+//item number auto complete and populate the other details
+// itemNumber_autoComplete('modules/inv/item/item_search.php');
+
+ //Coa auto complete
+ var coaCombination = new autoCompleteMain();
+ var coa_id = $('#coa_id').val();
+ coaCombination.json_url = 'modules/gl/coa_combination/coa_search.php';
+ coaCombination.primary_column1 = coa_id;
+ coaCombination.select_class = 'select_account';
+ coaCombination.min_length = 4;
+ coaCombination.autoComplete();
 
 
  //selecting PO Header Id
  $(".ap_transaction_header_id.select_popup").on("click", function() {
-  void window.open('select.php?class_name=ap_transaction_header', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+	void window.open('select.php?class_name=ap_transaction_header', '_blank',
+					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
+//popu for selecting accounts
+ $('#content').on('click', '.account_popup', function() {
+	var rowClass = $(this).closest('tr').prop('class');
+	var fieldClass = $(this).closest('td').find('.select_account').prop('class');
+	localStorage.setItem("row_class", rowClass);
+	localStorage.setItem("field_class", fieldClass);
+	void window.open('select.php?class_name=coa_combination', '_blank',
+					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
 
 //selecting supplier
  $(".find_popup.supplierId").on("click", function() {
-  localStorage.idValue = "";
-  void window.open('select.php?class_name=supplier', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+	localStorage.idValue = "";
+	void window.open('select.php?class_name=supplier', '_blank',
+					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
+//popu for selecting items
+ $('#content').on('click', '.select_item_number.select_popup', function() {
+	var rowClass = $(this).closest('tr').prop('class');
+	var fieldClass = $(this).closest('td').find('.select_item_number').prop('class');
+	localStorage.setItem("row_class", rowClass);
+	localStorage.setItem("field_class", fieldClass);
+	var openUrl = 'select.php?class_name=item';
+	if ($(this).siblings('.code_combination_id').val()) {
+	 openUrl += '&item_number=' + $(this).siblings('.item_number').val();
+	}
+	void window.open(openUrl, '_blank',
+					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
 
  //Get the ap_transaction_header_id on refresh button click
  $('a.show.ap_transaction_header_id').click(function() {
-  var ap_transaction_header_id = $('#ap_transaction_header_id').val();
-  $(this).attr('href', modepath() + 'ap_transaction_header_id=' + ap_transaction_header_id);
+	var ap_transaction_header_id = $('#ap_transaction_header_id').val();
+	$(this).attr('href', modepath() + 'ap_transaction_header_id=' + ap_transaction_header_id);
 
  });
 
+
+ $('a.show.bu_org_id').click(function() {
+	var bu_org_id = $('#bu_org_id').val();
+	if (bu_org_id) {
+	 $(this).attr('href', modepath() + 'bu_org_id=' + bu_org_id);
+	}
+ });
+
+ $('a.show.supplier_site_id').click(function() {
+	var supplier_id = $('#headerId').val();
+	var supplier_site_id = $('#supplier_site_id').val();
+	$(this).attr('href', '?supplier_id=' + supplier_id + '&supplier_site_id=' + supplier_site_id);
+ });
+
+ $("#supplier_site_name").on("change", function() {
+	if ($(this).val() == 'newentry') {
+	 if (confirm("Do you want to create a new supplier site?")) {
+		$(this).replaceWith('<input id="supplier_site_name" class="textfield supplier_site_name" type="text" size="25" maxlength="50" name="supplier_site_name[]">');
+		$(".show.supplier_site_id").hide();
+		$("#supplier_site_id").val("");
+		$("#supplier_site_number").val("");
+	 }
+
+	}
+ });
+
+
 //add or show linw details
  addOrShow_lineDetails('tr.ap_transaction_line0');
-onClick_addDetailLine(2);
 
  //function to coply line to details
  function copy_line_to_details() {
-  $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function() {
-   var detailExists = $(this).closest("td").find(".form_detail_data_fs").length;
-   if (detailExists === 0) {
-    var lineQuantity = $(this).closest('tr').find('.inv_line_quantity').val();
-    $(this).closest("td").find(".quantity:first").val(lineQuantity);
-   }
-  });
+	$("#content").on("click", "table.form_line_data_table .add_detail_values_img", function() {
+	 var detailExists = $(this).closest("td").find(".form_detail_data_fs").length;
+	 if (detailExists === 0) {
+		var lineQuantity = $(this).closest('tr').find('.inv_line_quantity').val();
+		$(this).closest("td").find(".quantity:first").val(lineQuantity);
+	 }
+	});
  }
 
  copy_line_to_details();
 
- $("#content").on("click", ".add_row_img", function() {
-//	add_new_row('tr.ap_transaction_line0', 'tbody.form_data_line_tbody', 3);
-  var addNewRow = new add_new_rowMain();
-  addNewRow.trClass = 'ap_transaction_line';
-  addNewRow.tbodyClass = 'form_data_line_tbody';
-  addNewRow.noOfTabs = 3;
-  addNewRow.removeDefault = true;
-  addNewRow.add_new_row();
-  $(".tabsDetail").tabs();
+
+
+ //Get the po_id on find button click
+ $('#form_box a.show').click(function() {
+	var poId = $('#ap_transaction_header_id').val();
+//$(this).prop('href','po.php?ap_transaction_header_id=' + poId);
+	$(this).attr('href', 'po.php?ap_transaction_header_id=' + poId);
  });
 
- 
+
+
+ $("#content").on("click", ".add_row_img", function() {
+//	add_new_row('tr.ap_transaction_line0', 'tbody.form_data_line_tbody', 3);
+	var addNewRow = new add_new_rowMain();
+	addNewRow.trClass = 'ap_transaction_line';
+	addNewRow.tbodyClass = 'form_data_line_tbody';
+	addNewRow.noOfTabs = 3;
+	addNewRow.removeDefault = true;
+	addNewRow.add_new_row();
+	$(".tabsDetail").tabs();
+ });
+
+ onClick_addDetailLine('tr.ap_transaction_detail0-0', 'tbody.form_data_detail_tbody', 2);
 
 //remove po lines
  $("#remove_row").click(function() {
-  $('input[name="ap_transaction_line_id_cb"]:checked').each(function() {
-   $(this).closest('tr').remove();
-  });
+	$('input[name="ap_transaction_line_id_cb"]:checked').each(function() {
+	 $(this).closest('tr').remove();
+	});
  });
 
- deleteData('form.php?class_name=ap_transaction_header&line_class_name=ap_transaction_line&detail_class_name=ap_transaction_detail');
-//exhhnge rate
-// if ($('#currency').val() != $('#doc_currency').val()) {
-//  getExchangeRate();
-// }
+ //context menu
+ var classContextMenu = new contextMenuMain();
+ classContextMenu.docHedaderId = 'ap_transaction_header_id';
+ classContextMenu.docLineId = 'ap_transaction_line_id';
+ classContextMenu.btn1DivId = 'ap_transaction_header';
+ classContextMenu.btn2DivId = 'form_line';
+ classContextMenu.trClass = 'ap_transaction_line';
+ classContextMenu.tbodyClass = 'form_data_line_tbody';
+ classContextMenu.noOfTabbs = 3;
+// classContextMenu.contextMenu();
 
- $('#content').on('blur', '#currency, #doc_currency, #exchange_rate_type, #exchange_rate', function() {
-  getExchangeRate();
- });
+//get the attachement form
+// get_attachment_form('../../extensions/file/json.file.php');
+// deleteData('json.po.php');
+ var classSave = new saveMainClass();
+ classSave.json_url = 'form.php?class_name=ap_transaction_header';
+ classSave.form_header_id = 'ap_transaction_header';
+ classSave.primary_column_id = 'ap_transaction_header_id';
+ classSave.line_key_field = 'item_description';
+ classSave.single_line = false;
+ classSave.savingOnlyHeader = false;
+ classSave.headerClassName = 'ap_transaction_header';
+ classSave.lineClassName = 'ap_transaction_line';
+ classSave.detailClassName = 'ap_transaction_detail';
+ classSave.enable_select = true;
+ classSave.saveMain();
 
-//set the line quantity & price
- lineDetail_QuantityValidation();
 
- //default quantity
- $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function() {
-  var inv_line_price = $(this).closest('tr').find('.inv_line_price:first').val();
-  if (!$(this).closest("td").find(".inv_line_price:first").val())
-  {
-   $(this).closest("td").find(".inv_line_price:first").val(inv_line_price);
-  }
- });
-
- $('#content').on('blur', '.inv_unit_price, .inv_line_quantity , .inv_line_price', function() {
-  var trClass = '.' + $(this).closest('tr').attr('class');
-  var unitPrice = +($(this).closest('#form_line').find(trClass).find('.inv_unit_price').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-  var lineQuantity = +($(this).closest('#form_line').find(trClass).find('.inv_line_quantity').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-  var linePrice = unitPrice * lineQuantity;
-  $(this).closest('#form_line').find(trClass).find('.inv_line_price').val(linePrice);
- });
-
- //calculate the tax amount
- //get tax code
- $('#content').on('change', 'bu_org_id', function() {
-  var org_id = $(this).val();
-  getTaxCodes('modules/mdm/tax_code/json_tax_code.php', org_id, 'IN');
- });
- if ($('#bu_org_id').val()) {
-  getTaxCodes('modules/mdm/tax_code/json_tax_code.php', $('#bu_org_id').val(), 'IN');
- }
-
- $('#content').on('blur', '.inv_line_quantity, .inv_unit_price, .inv_line_price, .tax_amount, .tax_code_id', function() {
-  var trClass = '.' + $(this).closest('tr').prop('class');
-  var linePrice = 0;
-  if ($('#content').find(trClass).find('.inv_line_price').val()) {
-   linePrice = +($('#content').find(trClass).find('.inv_line_price').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-  }
-  var taxCodeVal = 0;
-  if ($('#content').find(trClass).find('.tax_code_value').val()) {
-   taxCodeVal = $('#content').find(trClass).find('.tax_code_value').val();
-  } else if ($('#content').find(trClass).find('.input_tax').find('option:selected').prop('class')) {
-   taxCodeVal = $('#content').find(trClass).find('.input_tax').find('option:selected').prop('class');
-  }
-
-  if (taxCodeVal.length >= 3) {
-   var taxCodeVal_a = taxCodeVal.split('_');
-  } else {
-   return;
-  }
-
-  var taxAmount = 0;
-  var taxPercentage = 0;
-  if (taxCodeVal_a[0] === 'p') {
-   taxPercentage = +taxCodeVal_a[1];
-  } else if (taxCodeVal_a[0] === 'a') {
-   taxAmount = +taxCodeVal_a[1];
-  }
-  var taxValue = 0;
-  if (taxPercentage) {
-   taxValue = ((taxPercentage * linePrice) / 100).toFixed(5);
-  } else if (taxAmount) {
-   taxValue = taxAmount.toFixed(5);
-  }
-
-  $('#content').find(trClass).find('.tax_amount').val(taxValue);
- });
-
-//total header & tax amount
-// $('#content').on('change', '.line_quantity, .unit_price, .line_price, .tax_amount', function() {
-//  var total_tax = 0;
-//  $('#form_line').find('.tax_amount').each(function() {
-//   total_tax += (+$(this).val());
-//   $('#tax_amount').val(total_tax);
-//  });
+//module specific validations
+//add default values on line
+// $('#form_line').on('click', '.line_id_cb', function() {
+//	if ($(this).prop('checked')) {
+//	 var trclass = '.' + $(this).closest('tr').prop('class');
+//	 var quantity = (+$(this).closest('tr').find('.inv_line_quantity').val()) - (+$(this).closest('.tabContainer').find(trclass).find('.invoiced_quantity').val());
+//	 $(this).closest('tr').find('.inv_inv_line_quantity').val(quantity);
+//	 var inv_unit_prices = $(this).closest('.tabContainer').find(trclass).find('.inv_unit_price').val();
+//	 $(this).closest('tr').find('.inv_inv_unit_price').val(inv_unit_prices);
+//	 var inv_line_type = "<select id='account_type' class=' select account_type ' name='account_type[]'>";
+//	 inv_line_type += "<option value=''></option>";
+//	 inv_line_type += "<option selected value='ITEM'>Item</option>";
+//	 inv_line_type += "<option value='TAX'>Tax</option>";
+//	 inv_line_type += "<option value='MISC'>Miscellaneous</option>";
+//	 inv_line_type += "<option value='FREIGHT'>Freight</option>";
+//	 inv_line_type += "</selction>";
+//	 $(this).closest('tr').find('.inv_line_type').replaceWith(inv_line_type);
+//	} else {
+//	 $(this).closest('tr').find('.inv_inv_line_quantity').val('');
+//	 $(this).closest('tr').find('.inv_inv_unit_price').val('');
+//	 $(this).closest('tr').find('.inv_line_type').val('');
+//	 $(this).closest('tr').find('.inv_inv_line_price').val('');
+//	}
+// });
 //
-//  var header_amount = 0;
-//  $('#form_line').find('.line_price').each(function() {
-//   header_amount += (+$(this).val());
-//   $('#header_amount').val(header_amount);
-//  });
+// $('#form_line').on('blur', '.inv_inv_line_quantity, .inv_inv_unit_price, .inv_inv_line_price ', function() {
+//	var quantity = +$(this).closest('tr').find('.inv_inv_line_quantity').val();
+//	var inv_unit_prices = +$(this).closest('tr').find('.inv_inv_unit_price').val();
+//	$(this).closest('tr').find('.inv_inv_line_price').val(quantity * inv_unit_prices);
 // });
 
-//total header & tax amount
- $('#content').on('blur', '.inv_line_quantity, .inv_unit_price, .inv_line_price, .tax_amount', function() {
-  var total_tax = 0;
-  $('#form_line').find('.tax_amount').each(function() {
-   total_tax += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-  });
-  $('#tax_amount').val(total_tax);
-
-  var header_amount = 0;
-  $('#form_line').find('.inv_line_price').each(function() {
-   header_amount += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-  });
-  $('#header_amount').val(header_amount);
- });
 
 //all actions
 //Popup for selecting match 
- function match_purchase_order() {
-  var ap_transaction_header_id = $("#ap_transaction_header_id").val();
-  var supplier_site_id = $("#supplier_site_id").val();
-  if (ap_transaction_header_id && supplier_site_id) {
-   var link = 'multi_select.php?class_name=ap_po_matching_v&action=match_purchase_order&mode=9&action_class_name=ap_transaction_line&po_status=%3DAPPROVED'
-   link += '&ap_transaction_header_id=' + ap_transaction_header_id + '&supplier_site_id=%3D' + supplier_site_id;
-   var po_header_id = $("#po_header_id").val();
-   var po_number = $("#po_number").val();
-   if (po_header_id) {
-    link += '&po_header_id=' + po_header_id;
-   } else if (po_number) {
-    link += '&po_number=' + po_number;
-   } else {
-    var supplier_id = $("#supplier_id").val();
-    link += '&supplier_id=' + supplier_id;
-   }
-   void window.open(link, '_blank',
-    'width=1000,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-   return false;
-  } else {
-   alert('No Transaction Header ID/nEnter or Save The Header Details ');
-  }
- }
-
- function apply_transaction() {
-  var ap_transaction_header_id = $("#ap_transaction_header_id").val();
-  var supplier_site_id = $("#supplier_site_id").val();
-  if (ap_transaction_header_id && supplier_site_id) {
-   var link = 'multi_select.php?class_name=ap_transaction_all_v&action=apply_transaction&mode=9&action_class_name=ap_transaction_cm&transaction_type=%3DINVOICE&account_type=ITEM&po_status=%3DAPPROVED'
-   link += '&cm_transaction_header_id=' + ap_transaction_header_id + '&supplier_site_id=%3D' + supplier_site_id;
-   var po_header_id = $("#po_header_id").val();
-   var po_number = $("#po_number").val();
-   if (po_header_id) {
-    link += '&po_header_id=' + po_header_id;
-   } else if (po_number) {
-    link += '&po_number=' + po_number;
-   } else {
-    var supplier_id = $("#supplier_id").val();
-    link += '&supplier_id=' + supplier_id;
-   }
-   void window.open(link, '_blank',
-    'width=1000,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-   return false;
-  } else {
-   alert('No Transaction Header ID/nEnter or Save The Header Details ');
-  }
+ function match_transaction() {
+	var ap_transaction_header_id = $("#ap_transaction_header_id").val();
+	if (ap_transaction_header_id) {
+	 var link = 'multi_select.php?class_name=po_all_v&action=match_transaction&mode=9&action_class_name=ap_transaction_line&po_status=APPROVED&ap_transaction_header_id=' + ap_transaction_header_id;
+	 var po_header_id = $("#po_header_id").val();
+	 var po_number = $("#po_number").val();
+	 if (po_header_id) {
+		link += '&po_header_id=' + po_header_id;
+	 } else if (po_number) {
+		link += '&po_number=' + po_number;
+	 } else {
+		var supplier_id = $("#supplier_id").val();
+		link += '&supplier_id=' + supplier_id;
+	 }
+	 localStorage.removeItem("reset_link");
+	 localStorage.setItem("reset_link", link);
+	 localStorage.removeItem("jsfile");
+	 localStorage.setItem("jsfile", "modules/ap/ap_transaction/extra_ap_transaction.js");
+	 void window.open(link, '_blank',
+					 'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+	 return false;
+	} else {
+	 alert('No Transaction Header ID/nEnter or Save The Header Details ');
+	}
  }
 
  function create_accounting() {
-  var ap_transaction_header_id = $("#ap_transaction_header_id").val();
-  if (ap_transaction_header_id) {
-   var link = 'multi_select.php?class_name=ap_transaction_header&action=create_accounting&mode=9&action_class_name=ap_transaction_header&ap_transaction_header_id=' + ap_transaction_header_id;
-   localStorage.removeItem("reset_link");
-   localStorage.setItem("reset_link", link);
-   localStorage.removeItem("jsfile");
-   localStorage.setItem("jsfile", "modules/ap/ap_transaction/extra_ap_transaction.js");
-   void window.open(link, '_blank',
-    'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-   return false;
-  } else {
-   alert('No Transaction Header ID/nEnter or Save The Header Details ');
-  }
+	var ap_transaction_header_id = $("#ap_transaction_header_id").val();
+	if (ap_transaction_header_id) {
+	 var link = 'multi_select.php?class_name=ap_transaction_header&action=create_accounting&mode=9&action_class_name=ap_transaction_header&ap_transaction_header_id=' + ap_transaction_header_id;
+	 localStorage.removeItem("reset_link");
+	 localStorage.setItem("reset_link", link);
+	 localStorage.removeItem("jsfile");
+	 localStorage.setItem("jsfile", "modules/ap/ap_transaction/extra_ap_transaction.js");
+	 void window.open(link, '_blank',
+					 'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+	 return false;
+	} else {
+	 alert('No Transaction Header ID/nEnter or Save The Header Details ');
+	}
  }
 
  $('#transaction_action').on('change', function() {
-  var selected_value = $(this).val();
-  switch (selected_value) {
-   case 'CREATE_ACCOUNT' :
-    create_accounting();
-    break;
+	var selected_value = $(this).val();
+	switch (selected_value) {
+	 case 'CREATE_ACCOUNT' :
+		create_accounting();
+		break;
 
-   case 'MATCH_PO' :
-    match_purchase_order();
-    break;
+	 case 'MATCH' :
+		match_transaction();
+		break;
 
-   case 'APPLY_TRANSACTION' :
-    apply_transaction();
-    break;
-
-   default :
-    break;
-  }
+	 default :
+		break;
+	}
  });
 
 

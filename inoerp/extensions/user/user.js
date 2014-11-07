@@ -1,10 +1,6 @@
-function setValFromSelectPage(user_id, address_id, hr_employee_id, first_name, last_name, identification_id) {
+function setValFromSelectPage(user_id, address_id) {
  this.user_id = user_id;
  this.address_id = address_id;
-  this.hr_empoyee_id = hr_employee_id;
- this.first_name = first_name;
- this.last_name = last_name;
- this.identification_id = identification_id;
 }
 
 setValFromSelectPage.prototype.setVal = function() {
@@ -15,20 +11,6 @@ setValFromSelectPage.prototype.setVal = function() {
  }
   if (address_id) {
 	$("#address_id").val(address_id);
- }
-
- var name = this.first_name + ' ' + this.last_name;
- var identification_id = this.identification_id;
- var hr_employee_id = this.hr_employee_id;
-
- if (hr_employee_id) {
-  $("#hr_employee_id").val(hr_employee_id);
- }
-  if (name) {
-  $("#employee_name").val(name);
- }
-  if (identification_id) {
-  $("#identification_id").val(identification_id);
  }
 };
 
@@ -48,12 +30,6 @@ $(document).ready(function() {
 	$(this).attr('href', modepath() + 'user_id=' + user_id);
  });
 
- //selecting Id
- $(".hr_employee_id.select_popup").on("click", function() {
-  void window.open('select.php?class_name=hr_employee', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
- 
  //Popup for selecting user
  $(".user_id.select_popup").click(function() {
 		var link = 'select.php?class_name=user';

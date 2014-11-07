@@ -23,7 +23,7 @@
 					<div class="large_shadow_box"> 
 					 <ul class="column four_column">
 						<li><label>Org Name(1) : </label>
-						 <?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id'); ?>
+						 <?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly, '', ''); ?>
 						</li>
 						<li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_header_id select_popup clickable">
 							BOM Id : </label>
@@ -260,7 +260,7 @@
  $(document).ready(function() {
 	//Popup for selecting bom
 	$(".bom_header_id.select_popup").click(function() {
-	 void window.open('select.php?class_name=bom_all_v', '_blank',
+	 void window.open('select.php?class_name=bom_header', '_blank',
 					 'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
 	 return false;
 	});

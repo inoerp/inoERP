@@ -104,12 +104,12 @@ if (!empty($_POST['submit_comment'])) {
 	$primary_column = $extension::$primary_column;
  }
 
-
- $$extension->creation_date = current_time();
- if (!empty($_SESSION['user_id'])) {
-	$$extension->created_by = $_SESSION['user_id'];
+ $time = time();
+ $$extension->creation_date = strftime("%d-%m-%Y %H:%M:%S", $time);
+ if (!empty($_SESSION['username'])) {
+	$$extension->created_by = $_SESSION['username'];
  } else {
-	$$extension->created_by = '-99';
+	$$extension->created_by = 'selfWeb';
  }
  $$extension->last_update_date = $$extension->creation_date;
  $$extension->last_update_by = $$extension->created_by;

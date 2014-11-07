@@ -5,7 +5,7 @@ class payment_term_schedule extends payment_term {
  public static $table_name = "payment_term_schedule";
   public static $primary_column = "payment_term_schedule_id";
 	public static $parent_primary_column = "payment_term_id";
- public static $key_column = 'amount_percentage';
+ public static $key_column = 'payment_term_id';
  public static $module = "gl";
  
  public $field_a = [

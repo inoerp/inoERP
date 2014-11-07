@@ -68,7 +68,7 @@ class ra_wip extends dbObject {
  ];
  public $ra_report_set_wip_settings = [
 		 '_chart_name' => 'Item Analysis ',
-		 '_chart_width' => '450',
+		 '_chart_width' => '350',
 		 '_chart_height' => '350',
 		 '_chart_type' => 'horizonatl_bar',
 		 '_legend' => ''

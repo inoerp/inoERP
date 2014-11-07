@@ -1,6 +1,6 @@
 <?php
 
-class massupload extends dbObject{
+class massupload {
 
  private $_class_name;
 
@@ -49,13 +49,20 @@ class massupload extends dbObject{
 		foreach ($columns as $key => $field_name) {
 		 $$class->$field_name = $records[$key];
 		}
-		
-    $$class->audit_trial();
+		$time = time();
+		$$class->creation_date = strftime("%Y-%m-%d %H:%M:%S", $time);
+		if ((isset($_SESSION)) && (!empty($_SESSION['username']))) {
+		 $$class->created_by = $_SESSION['username'];
+		} else {
+		 $$class->created_by = 'selfWeb';
+		}
+		$$class->last_update_date = $$class->creation_date;
+		$$class->last_update_by = $$class->created_by;
 		$$class->save();
 		echo $$class->{$class::$primary_column};
 		$count++;
 	 }
-   	 echo "<div class='message'> $count Record(s) is/are sucessfully imported </div>";
+	 echo "<div class='message'> $count Record(s) is/are sucessfully imported </div>";
 	 return true;
 	} catch (Exception $e) {
 	 echo 'Error Message: ' . $e->getMessage();

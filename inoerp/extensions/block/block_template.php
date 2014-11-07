@@ -10,7 +10,7 @@
       <div id="block_divId">
        <!--    START OF FORM HEADER-->
 			 <div class="error"></div><div id="loading"></div>
-			 <?php echo (!empty($show_message)) ? $show_message : "";  $f= new inoform(); ?> 
+			 <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 			 <!--    End of place for showing error messages-->
 			 <div id="form_all">
 				<div id ="form_header">
@@ -40,10 +40,9 @@
 						 <?php echo $f->select_field_from_object('restrict_to_role', role_access::roles(), 'option_line_code', 'option_line_value', $block->restrict_to_role, 'role_code'); ?></td>
 					 </tr>
 					 <tr>
-						<td><label>Reference Table : </label><?php echo $f->text_field_ap(array('name' => 'reference_table', 'value' => $$class->reference_table,
-             'readonly' => $readonly_id )); ?></td>
+						<td><label>Reference Table : </label><?php form::text_field_drm('reference_table'); ?></td>
 						<td><label>Block Name: </label>
-						 <?php $readonly_b = ($block->reference_table =='block_content' || empty($$class->block_id)) ? false : true;
+						 <?php $readonly_b = ($block->reference_table =='block_content') ? false : true;
 								echo $f->text_field('name', $block->name, '','','','',$readonly_b );?></td>
 					 </tr>
 					 <!--Start of  block content-->

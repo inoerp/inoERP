@@ -39,13 +39,13 @@ $(document).ready(function() {
 
  var classSave = new saveMainClass();
  classSave.json_url = 'form.php?class_name=payment_term';
- classSave.form_header_id = 'payment_term';
+ classSave.form_header_id = 'payment_term_header';
  classSave.primary_column_id = 'payment_term_id';
- classSave.line_key_field = 'amount_percentage';
+ classSave.line_key_field = 'item_description';
  classSave.single_line = false;
  classSave.savingOnlyHeader = false;
  classSave.enable_select = true;
- classSave.headerClassName = 'payment_term';
+ classSave.headerClassName = 'payment_term_header';
  classSave.lineClassName = 'payment_term_schedule';
  classSave.lineClassName2 = 'payment_term_discount';
  classSave.saveMain();

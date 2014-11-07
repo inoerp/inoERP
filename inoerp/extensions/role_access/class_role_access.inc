@@ -85,7 +85,7 @@ class role_access extends dbObject {
 	if (empty($_SESSION['allowed_path_ids']) &&
 					!empty($_SESSION['user_id']) &&
 					(in_array('ADMIN', $_SESSION['user_roles']))) {
-	 $paths = path::find_all('display_weight');
+	 $paths = path::find_all();
 	 $allowed_path_ids = [];
 	 foreach ($paths as $path) {
 		$allowed_path_ids[] = $path->path_id;

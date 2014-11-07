@@ -1,4 +1,3 @@
-<script src="<?php echo HOME_URL; ?>includes/js/program.js"></script>
 <link href="<?php echo HOME_URL; ?>includes/ecss/program.css" media="all" rel="stylesheet" type="text/css" />
 <?php
 if (!empty($msg)) {

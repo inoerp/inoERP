@@ -5,11 +5,12 @@ class wip_wo_completion extends inv_transaction {
  public static $table_name = "inv_transaction";
  public static $primary_column = "inv_transaction_id";
  public static $dependent_classes = ['wip_wo_header'];
- public static $key_column = 'item_id_m';
+ public static $key_column = 'transaction_type_id';
  public static $module = "wo";
- public static $transaction_type_id_a = [
-		 '11' => 'WIP Assembly Completion',
-		 '13' => 'WIP Assembly Return',
+ public static $allowed_inv_transactions = [
+		 '1' => 'Miscellaneous Issue',
+		 '2' => 'Miscellaneous Receipt',
+		 '3' => 'Subinventory Transfer'
  ];
  public $field_a = [
 		 'inv_transaction_id',
@@ -20,6 +21,8 @@ class wip_wo_completion extends inv_transaction {
 		 'item_number',
 		 'item_id_m',
 		 'uom_id',
+		 'lot_number',
+		 'serial_number',
 		 'logical_transaction_cb',
 		 'document_type',
 		 'document_number',

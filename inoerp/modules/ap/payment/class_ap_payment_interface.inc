@@ -99,10 +99,6 @@ class ap_payment_interface extends dbObject {
 		 'transaction_action',
 		 'ap_transaction_header_id'
  ];
-   public $numberField = [
-   'amount',
-  
-  ];
  public $search = [
 		 '_show_update_path' => 1,
 		 '_update_action_meassge' => 'Update',

@@ -44,15 +44,14 @@
 						<div> 
 						 <ul class="column five_column"> 
 							<li><label>Payment Term : </label>
-							 <?php echo $f->select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'medium', 1, $readonly); ?>
+							 <?php echo $f->select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', '', 1, $readonly); ?>
 							</li>
-							<li><label>Ship to Address : </label><?php $f->address_field_d('ship_to_location') ?> 							</li>
-							<li><label>Bill to Address : </label><?php $f->address_field_d('bill_to_location') ?> 						</li>
-              <li><label>PO Approval : </label>
-               <?php echo $f->select_field_from_array('po_approval_hierarchy', po_purchasing_control::$approval_hierarchy_a, $$class->po_approval_hierarchy) ?> 						</li>
-              <li><label>Req Approval : </label>
-               <?php echo $f->select_field_from_array('req_approval_hierarchy', po_purchasing_control::$approval_hierarchy_a, $$class->req_approval_hierarchy) ?> 						</li>
-              <li><label>Tax Ac : </label><?php $f->ac_field_d('tax_ac_id'); ?></li> 
+							<li><label>Ship to Address : </label>
+							 <?php $f->address_field_d('ship_to_location') ?>
+							</li>
+							<li><label>Bill to Address : </label>
+							 <?php $f->address_field_d('bill_to_location') ?>
+							</li>
 						 </ul> 
 						</div> 
 						<!--end of tab1 div three_column-->

@@ -1,6 +1,3 @@
-<?php
- echo $f->hidden_field_withId('home_url', HOME_URL);
-?>
 </body>
 </html>
 <?php

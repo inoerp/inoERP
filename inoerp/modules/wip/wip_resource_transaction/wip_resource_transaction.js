@@ -97,7 +97,7 @@ $(document).ready(function() {
 
 
  //selecting wo header id data
- $(".wip_wo_header_id.select_popup").on("click", function() {
+ $(".wip_wo_headerid_popup").on("click", function() {
 	localStorage.idValue = "";
 	var link = 'select.php?class_name=wip_wo_header&wo_status=RELEASED';
 	void window.open(link, '_blank',

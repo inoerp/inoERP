@@ -14,7 +14,7 @@ $(document).ready(function() {
  $('a.show.ledger_id').click(function() {
 	var headerId = $('#ledger_id').val();
 	$(this).prop('href', modepath() + 'pageno=1&per_page=10&submit_search=Search\n\
- &search_order_by[]=year&search_asc_desc[]=desc&search_order_by[]=number&search_class_name=gl_calendar&ledger_id=' + headerId);
+ &search_order_by[]=year&search_asc_desc[]=desc&search_order_by[]=number&search_class=gl_calendar&ledger_id=' + headerId);
  });
 
  onClick_add_new_row('tr.calendar_line0', 'tbody.calendar_values', 2);

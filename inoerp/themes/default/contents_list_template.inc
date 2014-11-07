@@ -1,6 +1,7 @@
 <div id="all_contents">
  <div id="content_top"></div>
-  <div id="content_right">
+ <div id="content_left"></div>
+ <div id="content_right">
 	<div id="content_right_left">
 	 <div id="content">
 		<div id="main">
@@ -31,7 +32,7 @@
 			 }
 
 			 $content->content_type_id = $content_type->content_type_id;
-			 $content->category_id = $category_id;
+//			 $content->category_id = $category_id;
 			 if ($content->content_type_id == 47 || $content->content_type_id == 45) {
 				$content_lists = $content->showSummaryList_byConteTypeCategory($pageno, $per_page, $query_string);
 			 } else {
@@ -48,10 +49,7 @@
 		</div>
 	 </div>
 	</div>
-   <div id="content_right_right">
-    <div id="content_left"></div>
-   </div>
-  
+	<div id="content_right_right"></div>
  </div>
  <div id="content_bottom"></div> 
 </div>

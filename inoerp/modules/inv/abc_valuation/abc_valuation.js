@@ -1,17 +1,39 @@
-function setValFromSelectPage(inv_abc_valuation_id, valuation_name ) {
+function setValFromSelectPage(inv_abc_valuation_id, combination, mdm_bank_account_id, mdm_bank_header_id, mdm_bank_site_id,
+				bank_name, branch_name, account_number) {
  this.inv_abc_valuation_id = inv_abc_valuation_id;
- this.valuation_name = valuation_name;
+ this.combination = combination;
+ this.mdm_bank_account_id = mdm_bank_account_id;
+ this.mdm_bank_header_id = mdm_bank_header_id;
+ this.mdm_bank_site_id = mdm_bank_site_id;
+ this.bank_name = bank_name;
+ this.branch_name = branch_name;
+ this.account_number = account_number;
 }
 
 
 setValFromSelectPage.prototype.setVal = function() {
  var inv_abc_valuation_id = this.inv_abc_valuation_id;
- var valuation_name = this.valuation_name;
+ var mdm_bank_account_id = this.mdm_bank_account_id;
+ var account_number = this.account_number;
+
+ var fieldClass = '.' + localStorage.getItem("field_class");
+ fieldClass = fieldClass.replace(/\s+/g, '.');
  if (inv_abc_valuation_id) {
 	$("#inv_abc_valuation_id").val(inv_abc_valuation_id);
  }
- if (valuation_name) {
-	$("#valuation_name").val(valuation_name);
+ if (mdm_bank_account_id) {
+	$("#bank_account_id").val(mdm_bank_account_id);
+ }
+ if (account_number) {
+	$("#account_number").val(account_number);
+ }
+
+ var combination = this.combination;
+ var fieldClass = '.' + localStorage.getItem("field_class");
+ fieldClass = fieldClass.replace(/\s+/g, '.');
+ if (combination) {
+	$('#content').find(fieldClass).val(combination);
+	localStorage.removeItem("field_class");
  }
 };
 

@@ -104,15 +104,10 @@ color: #E0F8F7;
 text-decoration: none;
 }
 
-#user_info{
+#header .user_info{
 float: right;
-margin : 12px 12px 0 0;
 }
 
-#registration_info{
-float: right;
-margin : 0 12px 0 0;
-}
 .login_button {
     display: block;
     color: #E0F8F7;
@@ -156,12 +151,12 @@ width: 100%;
 
 #content_right_left{
  float: left;
- width: 700px;
+ width: 720px;
 }
 
 #content_right_right{
  float: right;
- }
+}
 
 #content_main { 
  height: 100%;
@@ -282,11 +277,6 @@ width: 100%;
 
 #pagination{
  padding: 10px 0px;
-}
-
-#noOfcontents{
-    display: inline;
-    margin-left: 100px;
 }
 
 .single_line{
@@ -799,7 +789,7 @@ ul.second_level li{
 
 }
 
-.block.content_bottom , .block.content_right_right, .block.content_left{
+.block.content_bottom , .block.content_right_right{
     width: 230px;
 }
 

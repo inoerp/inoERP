@@ -110,7 +110,7 @@ wwrd.wip_wo_routing_detail_id, wwrd.wip_wo_routing_line_id, wwrd.wip_wo_header_i
 FROM wip_wo_routing_detail wwrd
 LEFT JOIN wip_wo_routing_line wwrl ON wwrl.wip_wo_routing_line_id = wwrd.wip_wo_routing_line_id
 LEFT JOIN wip_wo_header wwh ON wwh.wip_wo_header_id = wwrd.wip_wo_header_id
-LEFT JOIN item ON item.item_id_m = wwh.item_id_m and item.org_id = wwh.org_id 
+LEFT JOIN item ON item.item_id_m = wwh.item_id_m
 
 ";
  }

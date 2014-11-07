@@ -24,19 +24,31 @@ display: inline-block;
 margin: 5px 2px;
 }
 
-#logical_settings li label{
-padding : 0 5px 5px 10px;
-background: none repeat scroll 0% 0% rgba(147, 45, 174, 0.25);
+#logical_settings label,
+#view_query label,
+#live_display label{
+display: block;
+background: #bbb;
+padding :5px;
+
 }
 
-#logical_settings li.field_records label{
+#logical_settings li label{
+background: lightgrey;
 padding : 0 5px 5px 10px;
-background: none repeat scroll 0% 0% rgba(147, 195, 174, 0.3);
 }
 
 #logical_settings {
+width: 95%;
 margin : 10px 0;
-border: 1px solid #ccc;
+border: 4px solid #ccc;
+}
+
+#view_query,
+#live_display{
+border: 4px solid #ccc;
+width: 95%;
+margin : 10px 0;
 }
 
 #condition_li table{
@@ -59,18 +71,20 @@ padding: 2px 10px;
 li#show_field_li{
 display: block;
     margin : 20px 0;
-
+ background : none repeat scroll 0% 0% rgba(2, 113, 183, 1)
 }
 
-li#condition_li {
-    display: block;
-    margin: 20px 0px;
+ li#condition_li{
+display: block;
+    margin : 20px 0;
+     background: none repeat scroll 0% 0% rgba(187, 14, 198, 1);
 }
 
-#show_field_buttons input, #condition_buttons_table input,
-#sort_sqlQuery input{
-    width: 270px;
+
+#show_field_buttons input, #condition_buttons_div input{
+    width: 290px;
 }
+
 li#sort_sqlQuery ul li{
 display: inline-block;
 vertical-align: top;
@@ -84,33 +98,15 @@ border:1px solid #ccc;
 li#sort_sqlQuery ul li{
 display: inline-block;
 border-right:2px solid #ccc;
+width: 22%;
 }
 
 li#sort_sqlQuery ul li#sorting_li{
-width: 49.5%;
+min-width: 321px;
 }
 
-.select.all_table_names{
-       background: rgba(111,20,193,0.15);
-   border: none;
-    padding: 2px; /* If you add too much padding here, the options won't show in IE */
+
+#view_query{
+margin:20px 0px;
 }
 
-span.view_name{
-    display: inline-block;
-    width: 250px;
-    font-size: 15px;
-    vertical-align:baseline;
-    float: left;
-}
-
-table#sort_fields_table tr td, table#group_by_table tr td, table#group_by_table tr th{
-    border: 1px solid #ccc;
-    width: 100%;
-}
-
-table#group_by_table td {
-    display: block;
-    min-height: 18px;
-   min-width: 540px;
-}

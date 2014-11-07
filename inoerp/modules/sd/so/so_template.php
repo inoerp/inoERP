@@ -29,7 +29,8 @@
 						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sd_so_header_id select_popup">
 							 SO Header Id : </label>
 							<?php
-								echo $f->text_field_dr('sd_so_header_id')
+							$f = new inoform();
+							echo form::text_field('sd_so_header_id', $sd_so_header->sd_so_header_id, '15', '25', '', 'System Number', 'sd_so_header_id', $readonly1)
 							?>
 							<a name="show" href="form.php?class_name=sd_so_header" class="show sd_so_header_id">
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
@@ -71,7 +72,7 @@
 					 <div> 
 						<ul class="column four_column">
 						 <li><label>Doc Currency : </label>
-							<?php echo $f->select_field_from_object('document_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->document_currency, 'document_currency', 'currency', 1, $readonly); ?>
+							<?php echo $f->select_field_from_object('document_currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->document_currency, 'document_currency', 'currency', 1, $readonly); ?>
 						 </li>
 						 <li><label>Payment Term : </label>
 							<?php echo $f->select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly1); ?>
@@ -138,12 +139,11 @@
 						 <div id="comment_list">
 							<?php echo!(empty($comments)) ? $comments : ""; ?>
 						 </div>
-             <div id ="display_comment_form">
 						 <?php
 						 $reference_table = 'sd_so_header';
 						 $reference_id = $$class->sd_so_header_id;
+						 include_once HOME_DIR . '/comment.php';
 						 ?>
-              </div>
 						 <div id="new_comment">
 						 </div>
 						</div>
@@ -220,7 +220,7 @@
  								<li><?php echo form::hidden_field('tax_code_value', $$class_second->tax_code_value); ?></li>
  							 </ul>
  							</td>
- 							<td><?php $f->seq_field_d($count) ?></td>
+ 							<td class="seq_number"><?php echo $count; ?></td>
  							<td><?php form::text_field_wid2sr('sd_so_line_id'); ?></td>
  							<td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
  							<td><?php echo $f->select_field_from_object('line_type', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class_second->line_type, '', 'medium', 1, $readonly); ?></td>
@@ -264,8 +264,8 @@
 							}
 							?>         
  						 <tr class="sd_so_line<?php echo $count ?>">
- 							<td><?php $f->seq_field_d($count) ?></td>
-              <td><?php echo $f->select_field_from_object('price_list_header_id', mdm_price_list_header::find_all_sales_pl(), 'mdm_price_list_header_id', 'price_list', $$class_second->price_list_header_id, '', 'medium copyValue'); ?>
+ 							<td class="seq_number"><?php echo $count; ?></td>
+ 							<td><?php echo $f->select_field_from_object('price_list_header_id', mdm_price_list_header::find_all(), 'mdm_price_list_header_id', 'price_list', $$class_second->price_list_header_id, '', 'medium copyValue'); ?>
  							</td>
  							<td><?php echo $f->date_fieldAnyDay('price_date', $$class_second->price_date) ?></td>
  							<td><?php form::number_field_wid2('unit_price'); ?></td>
@@ -298,7 +298,7 @@
 						 foreach ($sd_so_line_object as $sd_so_line) {
 							?>         
  						 <tr class="sd_so_line<?php echo $count ?>">
- 							<td><?php $f->seq_field_d($count) ?></td>
+ 							<td class="seq_number"><?php echo $count; ?></td>
  							<td><?php echo $f->date_fieldFromToday_d('requested_date', $$class_second->requested_date) ?></td>
  							<td><?php echo $f->date_fieldFromToday('promise_date', $$class_second->promise_date) ?></td>
  							<td><?php echo $f->date_fieldFromToday('schedule_ship_date', $$class_second->schedule_ship_date) ?></td>
@@ -337,7 +337,7 @@
 							}
 							?>         
  						 <tr class="sd_so_line<?php echo $count ?>">
- 							<td><?php $f->seq_field_d($count) ?></td>
+ 							<td class="seq_number"><?php echo $count; ?></td>
  							<td><?php form::text_field_wid2('line_description'); ?></td>
  							<td><?php echo $f->select_field_from_array('supply_source', sd_document_type::$supply_source_a, $$class_second->supply_source, '', 'copyValue'); ?>	</td>
  							<td> <?php echo $f->select_field_from_array('destination_type', sd_document_type::$destination_type_a, $$class_second->destination_type, '', 'copyValue'); ?></td>
@@ -371,7 +371,7 @@
 							$sd_so_line->ar_transaction_number = null;
 							?>         
  						 <tr class="sd_so_line<?php echo $count ?>">
- 							<td><?php $f->seq_field_d($count) ?></td>
+ 							<td class="seq_number"><?php echo $count; ?></td>
  							<td><?php form::number_field_wid2sr('invoiced_quantity'); ?></td>
  							<td><?php form::text_field_wid2r('ar_transaction_header_id'); ?></td>
  							<td><?php form::text_field_wid2r('ar_transaction_line_id'); ?></td>

@@ -100,7 +100,7 @@ item.costing_enabled_cb, item.make_buy,
 org.org, org.type, org.status, org.description, org.code
 
 FROM bom_header bh
-LEFT JOIN item ON item.item_id_m = bh.item_id_m AND item.org_id = bh.org_id
+LEFT JOIN item ON item.item_id_m = bh.item_id_m
 LEFT JOIN org ON org.org_id = bh.org_id
 
 ";

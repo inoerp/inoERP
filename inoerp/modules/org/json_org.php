@@ -41,7 +41,7 @@ if ((!empty($_GET['org_type']))&& ($_GET['org_type']=='inventory_org')) {
 <?php
 if ((!empty($_GET['org_type']))&& ($_GET['org_type']=='legal_org')) {
   $org = new org;
- $legal_orgs = $org->findAll_legal();
+ $legal_orgs = $org->findAll_lelgal();
  if (count($legal_orgs) == 0) {
 	return false;
  } else {

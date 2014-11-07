@@ -19,7 +19,7 @@
 				 <ul class="column five_column"> 
 					<li><label><img class="fp_minmax_header select_popup clickable" src="<?php echo HOME_URL; ?>themes/images/serach.png">
 						MinMax Plan Id :</label> 
-					 <?php echo $f->text_field_dr('fp_minmax_header_id'); ?>
+					 <?php echo form::text_field('fp_minmax_header_id', $$class->fp_minmax_header_id, '10', '', '', 'System number', 'fp_minmax_header_id', $readonly); ?>
 					 <a name="show" href="form.php?class_name=fp_minmax_header" class="show fp_minmax_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 					</li>
 					<li><label>Inventory Org (1)</label>

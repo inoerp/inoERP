@@ -10,29 +10,26 @@ setValFromSelectPage.prototype.setVal = function() {
  var bom_routing_header_id = this.bom_routing_header_id;
 
  var item_obj = [{id: 'item_id_m', data: this.item_id_m},
-  {id: 'item_number', data: this.item_number},
-  {id: 'item_description', data: this.item_description},
-  {id: 'uom_id', data: this.uom_id}
+	{id: 'item_number', data: this.item_number},
+	{id: 'item_description', data: this.item_description},
+	{id: 'uom_id', data: this.uom_id}
  ];
 
  $(item_obj).each(function(i, value) {
-  if (value.data) {
-   var fieldId = '#' + value.id;
-   $('#content').find(fieldId).val(value.data);
-  }
+	if (value.data) {
+	 var fieldId = '#' + value.id;
+	 $('#content').find(fieldId).val(value.data);
+	}
  });
 
  if (bom_routing_header_id) {
-  $('#bom_routing_header_id').val(bom_routing_header_id);
+	$('#bom_routing_header_id').val(bom_routing_header_id);
  }
 
  localStorage.removeItem("row_class");
  localStorage.removeItem("field_class");
 };
 
-function disableField_forCommonRouting() {
- $('#form_line').find(':input').attr('required', false).attr('disabled', true).css("background-color", "#ccc");
-}
 
 $(document).ready(function() {
 //mandatory and field sequence
@@ -46,68 +43,58 @@ $(document).ready(function() {
 
 //setting the first line & shipment number
  if (!($('.lines_number:first').val())) {
-  $('.lines_number:first').val('10');
+	$('.lines_number:first').val('10');
  }
 
  if (!($('.detail_number:first').val())) {
-  $('.detail_number:first').val('10');
+	$('.detail_number:first').val('10');
  }
-
-
- if ($('#commonRouting_item_number').val()) {
-  disableField_forCommonRouting();
- }
-
- $('#commonRouting_item_number').on('blur', function() {
-  if ($(this).val()) {
-   disableField_forCommonRouting();
-  }
- });
 
  //selecting Header Id
  $(".bom_routing_header_id.select_popup").on("click", function() {
-  void window.open('select.php?class_name=bom_routing_v', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+	void window.open('select.php?class_name=bom_routing_header', '_blank',
+					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
  $(".item_id_m.select_popup").on("click", function() {
-  void window.open('select.php?class_name=item', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+	void window.open('select.php?class_name=item', '_blank',
+					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
  //Get the bom_routing_id on find button click
  $('#form_header a.show').click(function() {
-  var bom_routing_header_id = $('#bom_routing_header_id').val();
-  $(this).attr('href', modepath() + 'bom_routing_header_id=' + bom_routing_header_id);
+	var bom_routing_header_id = $('#bom_routing_header_id').val();
+	$(this).attr('href', modepath() + 'bom_routing_header_id=' + bom_routing_header_id);
  });
 
-
+//add or show linw details
+ addOrShow_lineDetails('tr.bom_routing_line0');
 
  //function to coply line to details
  function copy_line_to_details() {
-  $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function() {
-   var detailExists = $(this).closest("td").find(".form_detail_data_fs").length;
-   if (detailExists === 0) {
-    var lineQuantity = $(this).closest('tr').find('.inv_line_quantity').val();
-    $(this).closest("td").find(".quantity:first").val(lineQuantity);
-   }
-  });
+	$("#content").on("click", "table.form_line_data_table .add_detail_values_img", function() {
+	 var detailExists = $(this).closest("td").find(".form_detail_data_fs").length;
+	 if (detailExists === 0) {
+		var lineQuantity = $(this).closest('tr').find('.inv_line_quantity').val();
+		$(this).closest("td").find(".quantity:first").val(lineQuantity);
+	 }
+	});
  }
 
  copy_line_to_details();
 
  $("#content").on("click", ".add_row_img", function() {
-  var addNewRow = new add_new_rowMain();
-  addNewRow.trClass = 'bom_routing_line';
-  addNewRow.tbodyClass = 'form_data_line_tbody';
-  addNewRow.noOfTabs = 4;
-  addNewRow.lineNumberIncrementValue = 10;
-  addNewRow.removeDefault = true;
-  addNewRow.add_new_row();
-  $(".tabsDetail").tabs();
+	var addNewRow = new add_new_rowMain();
+	addNewRow.trClass = 'bom_routing_line';
+	addNewRow.tbodyClass = 'form_data_line_tbody';
+	addNewRow.noOfTabs = 3;
+	addNewRow.lineNumberIncrementValue = 10;
+	addNewRow.removeDefault = true;
+	addNewRow.add_new_row();
+	$(".tabsDetail").tabs();
  });
 
-
+ onClick_addDetailLine('tr.bom_routing_detail0-0', 'tbody.form_data_detail_tbody', 2);
 
  //context menu
  var classContextMenu = new contextMenuMain();
@@ -117,14 +104,14 @@ $(document).ready(function() {
  classContextMenu.btn2DivId = 'form_line';
  classContextMenu.trClass = 'bom_routing_line';
  classContextMenu.tbodyClass = 'form_data_line_tbody';
- classContextMenu.noOfTabbs = 4;
+ classContextMenu.noOfTabbs = 3;
  classContextMenu.contextMenu();
 
  var classSave = new saveMainClass();
  classSave.json_url = 'form.php?class_name=bom_routing_header';
  classSave.form_header_id = 'bom_routing_header';
  classSave.primary_column_id = 'bom_routing_header_id';
- classSave.line_key_field = 'department_id';
+ classSave.line_key_field = 'routing_sequence';
  classSave.single_line = false;
  classSave.savingOnlyHeader = false;
  classSave.headerClassName = 'bom_routing_header';
@@ -134,32 +121,6 @@ $(document).ready(function() {
  classSave.saveMain();
 
  deleteData('json.bom_routing.php');
-
- //add or show linw details
- addOrShow_lineDetails('tr.bom_routing_line0');
-
 // save('json.bom_routing.php', '#bom_routing_header', 'line_id_cb', 'item_description', '#bom_routing_header_id', '', '#bom_routing_number');
- onClick_addDetailLine(2, '.add_row_detail_img');
- onClick_addDetailLine(2, '.add_row_detail_img1','tabsDetailC')
-
- $('#content').on('change', '.extra_field_name', function() {
-  var count = 0;
-  $(this).closest('td').find('.extra_field_name').each(function() {
-   if (!$(this).val()) {
-    count++;
-   }
-  });
-  if ($(this).val()) {
-   if (count <= 0) {
-    $(this).clone().appendTo($(this).closest('td'));
-   } else if (count > 1) {
-    $(this).remove();
-   }
-  } else if (count > 1) {
-   $(this).remove();
-  }
-
- });
-
 
 });

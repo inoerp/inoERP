@@ -12,7 +12,7 @@
 			<!--    End of place for showing error messages-->
 
 			<div id ="form_header">
-			 <form action=""  method="post" id="gl_period"  name="gl_period"><span class="heading">GL Periods </span>
+			 <form action=""  method="post" id="gl_period"  name="gl_period">
 				<div id="tabsHeader">
          <ul class="tabMain">
           <li><a href="#tabsHeader-1">Accounting Period</a></li>

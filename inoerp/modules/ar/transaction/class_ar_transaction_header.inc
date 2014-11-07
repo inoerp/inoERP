@@ -72,10 +72,6 @@ class ar_transaction_header extends dbObject {
 		 'last_update_by',
 		 'last_update_date'
  ];
- public $profile_default = [
-   'exchange_rate_type' => 'gl_currency_conversion_type',
-   'bu_org_id' => 'org_bu_name_default'
-  ];
  public $notUpdatedFromWebForm = [
 		 'gl_journal_header_id',
  ];

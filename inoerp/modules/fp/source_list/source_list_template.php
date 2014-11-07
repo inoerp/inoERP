@@ -23,7 +23,7 @@
 						<ul class="column four_column">
 						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="source_list_header_id select_popup clickable">
 							 Source List Id : </label>
-							<?php echo $f->text_field_dr('fp_source_list_header_id') ?>
+							<?php echo form::text_field('fp_source_list_header_id', $$class->fp_source_list_header_id, '15', '25', '', 'System Number', 'fp_source_list_header_id', $readonly) ?>
 							<a name="show" href="form.php?class_name=fp_source_list_header" class="show fp_source_list_header_id">	
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
 						 </li>

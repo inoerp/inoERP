@@ -21,7 +21,7 @@ class po_requisition_detail extends dbObject {
 		 'po_requisition_line_id',
 		 'po_requisition_header_id',
 		 'shipment_number',
-		 'subinventory_id',
+		 'sub_inventory_id',
 		 'locator_id',
 		 'requestor',
 		 'ship_to_location_id',
@@ -88,7 +88,7 @@ class po_requisition_detail extends dbObject {
  public $po_requisition_line_id;
  public $po_requisition_header_id;
  public $shipment_number;
- public $subinventory_id;
+ public $sub_inventory_id;
  public $locator_id;
  public $requestor;
  public $ship_to_location_id;

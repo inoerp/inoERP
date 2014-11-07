@@ -148,7 +148,7 @@ $(document).ready(function() {
  mandatoryCheck.form_area = 'form_header';
  mandatoryCheck.mandatory_fields = ["bu_org_id", "transaction_type"];
  mandatoryCheck.mandatory_messages = ["First Select BU Org", "No Transaction Type"];
-// mandatoryCheck.mandatoryField();
+ mandatoryCheck.mandatoryField();
 
 //setting the first line & shipment number
  if (!($('.lines_number:first').val())) {
@@ -248,7 +248,6 @@ if (customer_site_id) {
 
 //add or show linw details
  addOrShow_lineDetails('tr.ar_transaction_line0');
-onClick_addDetailLine(2);
 
  //function to coply line to details
  function copy_line_to_details() {
@@ -275,7 +274,7 @@ onClick_addDetailLine(2);
 	$(".tabsDetail").tabs();
  });
 
- 
+ onClick_addDetailLine('tr.ar_transaction_detail0-0', 'tbody.form_data_detail_tbody', 2);
 
 //remove po lines
  $("#remove_row").click(function() {
@@ -333,10 +332,6 @@ deleteData('form.php?class_name=ar_transaction_header&line_class_name=ar_transac
 $('#bu_org_id').on('change', function(){
  getBUDetails($(this).val());
 });
-
-if($('#bu_org_id').val()){
- getBUDetails($('#bu_org_id').val());
-}
 
 $('#transaction_type').on('change', function(){
  $('#content').find('.transaction_type').val($(this).val());

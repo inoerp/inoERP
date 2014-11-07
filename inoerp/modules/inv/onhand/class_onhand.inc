@@ -9,47 +9,47 @@ class onhand extends dbObject {
  public static $module = "inv";
 //  data base variables as stored database column name
  public $field_a = [
-   'onhand_id',
-   'item_id_m',
-   'org_id',
-   'subinventory_id',
-   'locator_id',
-   'lot_id',
-   'serial_id',
-   'onhand',
-   'reservable_onhand',
-   'transactable_onhand',
-   'lot_status',
-   'serial_status',
-   'uom_id',
-   'secondary_uom_id',
-   'onhand_status',
-   'ef_id',
-   'created_by',
-   'creation_date',
-   'last_update_by',
-   'last_update_date',
+		 'onhand_id',
+		 'item_id_m',
+		 'org_id',
+		 'subinventory_id',
+		 'locator_id',
+		 'lot_id',
+		 'serial_id',
+		 'onhand',
+		 'reservable_onhand',
+		 'transactable_onhand',
+		 'lot_status',
+		 'serial_status',
+		 'uom_id',
+		 'secondary_uom_id',
+		 'onhand_status',
+		 'ef_id',
+		 'created_by',
+		 'creation_date',
+		 'last_update_by',
+		 'last_update_date',
  ];
  public $initial_search = [
-   "org_id",
-   "subinventory_id",
-   "locator_id",
-   "uom_id",
-   "onhand_id",
-   "item_id_m",
+		 "org_id",
+		 "subinventory_id",
+		 "locator_id",
+		 "uom_id",
+		 "onhand_id",
+		 "item_id_m",
  ];
 //variables used for showing data
  public $column = [
-   "item_number",
-   "item_description",
-   "org_name",
-   "subinventory",
-   "locator",
-   "uom",
-   "onhand",
-   "sum_onhand",
-   "onhand_id",
-   "item_id_m",
+		 "item_number",
+		 "item_description",
+		 "org_name",
+		 "subinventory",
+		 "locator",
+		 "uom",
+		 "onhand",
+		 "sum_onhand",
+		 "onhand_id",
+		 "item_id_m",
  ];
 // public static $checkbox_array =["rev_enabled"                                 
 //                                 ];
@@ -84,8 +84,6 @@ class onhand extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
- public $onhand_id_from;
- public $onhand_id_to;
  private $_from_org_id;
  private $_from_subinventory_id;
  private $_from_locator_id;
@@ -95,20 +93,20 @@ class onhand extends dbObject {
  private $_transaction_quantity;
 
  public function setProperty($property, $value) {
-  if (property_exists($this, $property)) {
-   switch ($property) {
-    case '_show_update_path':
-     $this->$property = !empty($value) ? true : false;
+	if (property_exists($this, $property)) {
+	 switch ($property) {
+		case '_show_update_path':
+		 $this->$property = !empty($value) ? true : false;
 
-    case '_result':
-     $this->$property = is_array($value) ? $value : false;
+		case '_result':
+		 $this->$property = is_array($value) ? $value : false;
 
 
-    default:
-     $this->$property = $value;
-     break;
-   }
-  }
+		default:
+		 $this->$property = $value;
+		 break;
+	 }
+	}
  }
 
  public static $view_table_line_tr = <<<'VAR'
@@ -136,30 +134,13 @@ VAR;
 //  }
 
  public static function find_all_v() {
-  $sql = " SELECT * FROM " . self::$view_name;
-  $result = self::find_by_sql($sql);
-  return $result;
- }
-
- public function findBy_itemIdm_location() {
-  $sql = "SELECT * FROM " . self::$table_name;
-  $sql .= " WHERE item_id_m = '{$this->item_id_m}' ";
-  if (!empty($this->org_id)) {
-   $sql .= " AND org_id = '{$this->org_id}' ";
-  }
-  if (!empty($this->subinventory_id)) {
-   $sql .= " AND subinventory_id = '{$this->subinventory_id}' ";
-  }
-  if (!empty($this->locator_id)) {
-   $sql .= " AND locator_id = '{$this->locator_id}' ";
-  }
-  
-  $result = $this->findBySql($sql);
-  return !empty($result) ? $result : false;
+	$sql = " SELECT * FROM " . self::$view_name;
+	$result = self::find_by_sql($sql);
+	return $result;
  }
 
  private function create_onhand_v() {
-  $sql = "CREATE OR REPLACE VIEW onhand_v
+	$sql = "CREATE OR REPLACE VIEW onhand_v
 (onhand_id, item_number, item_description, org_name, subinventory, locator,
 uom_id,onhand, item_id_m, org_id, subinventory_id, 
 locator_id, lot_id, serial_id, reservable_onhand, 
@@ -185,167 +166,163 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
  }
 
  private function _validate_mandatory_fields() {
-  if (empty($this->item_id_m)) {
-   echo "<br>Onhand Update Failed!Error @onhand - Item Id Missing" . __LINE__;
-   $this->rollback = true;
-   return -99;
-  } else if (empty($this->_transaction_quantity)) {
-   echo "<br>Onhand Update Failed!Error @onhand - Transaction Quantity Missing" . __LINE__;
-   $this->rollback = true;
-   return -99;
-  }
+	if (empty($this->item_id_m)) {
+	 echo "<br>Onhand Update Failed!Error @onhand - Item Id Missing" . __LINE__;
+	 return -99;
+	} else if (empty($this->_transaction_quantity)) {
+	 echo "<br>Onhand Update Failed!Error @onhand - Transaction Quantity Missing" . __LINE__;
+	 return -99;
+	}
  }
 
  private function _update_from_onhand() {
-  $from_onhand_sql = " SELECT * FROM onhand";
-  $from_onhand_sql .= " WHERE item_id_m = '{$this->item_id_m}' ";
-  $from_onhand_sql .= " AND  	org_id = '{$this->_from_org_id}' ";
+	$from_onhand_sql = " SELECT * FROM onhand";
+	$from_onhand_sql .= " WHERE item_id_m = '{$this->item_id_m}' ";
+	$from_onhand_sql .= " AND  	org_id = '{$this->_from_org_id}' ";
 
-  if (!empty($this->_from_subinventory_id)) {
-   $from_onhand_sql .= " AND  subinventory_id = '{$this->_from_subinventory_id}' ";
-  }
-  if (!empty($this->_from_locator_id)) {
-   $from_onhand_sql .= " AND locator_id = '{$this->_from_locator_id}' ";
-  }
-  $from_onhand_sql .= " LIMIT 1 ";
+	if (!empty($this->_from_subinventory_id)) {
+	 $from_onhand_sql .= " AND  subinventory_id = '{$this->_from_subinventory_id}' ";
+	}
+	if (!empty($this->_from_locator_id)) {
+	 $from_onhand_sql .= " AND locator_id = '{$this->_from_locator_id}' ";
+	}
+	$from_onhand_sql .= " LIMIT 1 ";
 
-  $from_onhand_result_a = $this->findBy_sql($from_onhand_sql);
-  $from_onhand_result = !empty($from_onhand_result_a) ? array_pop($from_onhand_result_a) : false;
-  if ($from_onhand_result) {
-   $this->onhand = $from_onhand_result->onhand - $this->_transaction_quantity;
-   $this->reservable_onhand = $from_onhand_result->reservable_onhand - $this->_transaction_quantity;
-   $this->transactable_onhand = $from_onhand_result->transactable_onhand - $this->_transaction_quantity;
-   $this->onhand_id = $from_onhand_result->onhand_id;
-  } else {
-   $this->onhand = -($this->_transaction_quantity);
-   $this->reservable_onhand = -($this->_transaction_quantity);
-   $this->transactable_onhand = -($this->_transaction_quantity);
-   $this->onhand_id = null;
-  }
-  $this->org_id = $this->_from_org_id;
-  $this->subinventory_id = $this->_from_subinventory_id;
-  $this->locator_id = $this->_from_locator_id;
+	$from_onhand_result_a = $this->findBy_sql($from_onhand_sql);
+	$from_onhand_result = !empty($from_onhand_result_a) ? array_pop($from_onhand_result_a) : false;
+	if ($from_onhand_result) {
+	 $this->onhand = $from_onhand_result->onhand - $this->_transaction_quantity;
+	 $this->reservable_onhand = $from_onhand_result->reservable_onhand - $this->_transaction_quantity;
+	 $this->transactable_onhand = $from_onhand_result->transactable_onhand - $this->_transaction_quantity;
+	 $this->onhand_id = $from_onhand_result->onhand_id;
+	} else {
+	 $this->onhand = -($this->_transaction_quantity);
+	 $this->reservable_onhand = -($this->_transaction_quantity);
+	 $this->transactable_onhand = -($this->_transaction_quantity);
+	 $this->onhand_id = null;
+	}
+	$this->org_id = $this->_from_org_id;
+	$this->subinventory_id = $this->_from_subinventory_id;
+	$this->locator_id = $this->_from_locator_id;
 
-  try {
-   $this->audit_trial();
-   $this->save();
-   $this->onhand_id_from = $this->onhand_id;
-   echo "<br>Onhand is Sucessfully Updated. The onhand Id is " . $this->onhand_id . ' & Onhand Value is ' . $this->onhand;
-   return 1;
-  } catch (Exception $e) {
-   echo "<br>Onhand Update Failed <br> Line # " . __LINE__ . '<br>' . $e->getMessage();
-   return -99;
-  }
+	try {
+	 $this->audit_trial();
+	 $this->save();
+	 echo "<br>Onhand is Sucessfully Updated. The onhand Id is " . $this->onhand_id . ' & Onhand Value is ' . $this->onhand;
+	 return 1;
+	} catch (Exception $e) {
+	 echo "<br>Onhand Update Failed <br> Line # " . __LINE__ . '<br>' . $e->getMessage();
+	 return -99;
+	}
  }
 
  private function _update_to_onhand() {
-  $to_onhand_sql = " SELECT *  FROM onhand";
-  $to_onhand_sql .= " WHERE item_id_m = '{$this->item_id_m}' ";
-  $to_onhand_sql .= " AND  	org_id = '{$this->_to_org_id}' ";
+	$to_onhand_sql = " SELECT *  FROM onhand";
+	$to_onhand_sql .= " WHERE item_id_m = '{$this->item_id_m}' ";
+	$to_onhand_sql .= " AND  	org_id = '{$this->_to_org_id}' ";
 
-  if (!empty($this->_to_subinventory_id)) {
-   $to_onhand_sql .= " AND  	subinventory_id = '{$this->_to_subinventory_id}' ";
-  }
-  if (!empty($this->_to_locator_id)) {
-   $to_onhand_sql .= " AND  	locator_id = '{$this->_to_locator_id}' ";
-  }
-  $to_onhand_sql .= " LIMIT 1 ";
+	if (!empty($this->_to_subinventory_id)) {
+	 $to_onhand_sql .= " AND  	subinventory_id = '{$this->_to_subinventory_id}' ";
+	}
+	if (!empty($this->_to_locator_id)) {
+	 $to_onhand_sql .= " AND  	locator_id = '{$this->_to_locator_id}' ";
+	}
+	$to_onhand_sql .= " LIMIT 1 ";
 
-  $to_onhand_result_a = $this->findBy_sql($to_onhand_sql);
-  $to_onhand_result = !empty($to_onhand_result_a) ? array_pop($to_onhand_result_a) : false;
-  if ($to_onhand_result) {
-   $this->onhand = $to_onhand_result->onhand + $this->_transaction_quantity;
-   $this->reservable_onhand = $to_onhand_result->reservable_onhand + $this->_transaction_quantity;
-   $this->transactable_onhand = $to_onhand_result->transactable_onhand + $this->_transaction_quantity;
-   $this->onhand_id = $to_onhand_result->onhand_id;
-  } else {
-   $this->onhand = $this->_transaction_quantity;
-   $this->reservable_onhand = $this->_transaction_quantity;
-   $this->transactable_onhand = $this->_transaction_quantity;
-   $this->onhand_id = null;
-  }
-  $this->org_id = $this->_to_org_id;
-  $this->subinventory_id = $this->_to_subinventory_id;
-  $this->locator_id = $this->_to_locator_id;
+	$to_onhand_result_a = $this->findBy_sql($to_onhand_sql);
+	$to_onhand_result = !empty($to_onhand_result_a) ? array_pop($to_onhand_result_a) : false;
+	if ($to_onhand_result) {
+	 $this->onhand = $to_onhand_result->onhand + $this->_transaction_quantity;
+	 $this->reservable_onhand = $to_onhand_result->reservable_onhand + $this->_transaction_quantity;
+	 $this->transactable_onhand = $to_onhand_result->transactable_onhand + $this->_transaction_quantity;
+	 $this->onhand_id = $to_onhand_result->onhand_id;
+	} else {
+	 $this->onhand = $this->_transaction_quantity;
+	 $this->reservable_onhand = $this->_transaction_quantity;
+	 $this->transactable_onhand = $this->_transaction_quantity;
+	 $this->onhand_id = null;
+	}
+	$this->org_id = $this->_to_org_id;
+	$this->subinventory_id = $this->_to_subinventory_id;
+	$this->locator_id = $this->_to_locator_id;
 
-  try {
-   $this->audit_trial();
-   $this->save();
-   $this->onhand_id_to = $this->onhand_id;
-   echo "<br>Onhand is Sucessfully Updated. The onhand Id is " . $this->onhand_id . ' & Onhand Value is ' . $this->onhand;
-   return 1;
-  } catch (Exception $e) {
-   echo "<br>Onhand Update Failed <br> Line # " . __LINE__ . '<br>' . $e->getMessage();
-   return -99;
-  }
+	try {
+	 $this->audit_trial();
+	 $this->save();
+	 echo "<br>Onhand is Sucessfully Updated. The onhand Id is " . $this->onhand_id . ' & Onhand Value is ' . $this->onhand;
+	 return 1;
+	} catch (Exception $e) {
+	 echo "<br>Onhand Update Failed <br> Line # " . __LINE__ . '<br>' . $e->getMessage();
+	 return -99;
+	}
  }
 
  public function updateOnhand() {
 //verify all the mandatory fields exists
-  $mandatory_fields = $this->_validate_mandatory_fields();
-  if ($mandatory_fields < 0) {
-   echo "<br>Mandatort fields are missing <br> Line # : " . __LINE__;
-   return -99;
-  }
+	$mandatory_fields = $this->_validate_mandatory_fields();
+	if ($mandatory_fields < 0) {
+	 echo "<br>Mandatort fields are missing <br> Line # : " . __LINE__;
+	 return -99;
+	}
 
-  //from org transaction update
-  if (!empty($this->_from_org_id)) {
-   try {
-    $this->_update_from_onhand();
+	//from org transaction update
+	if (!empty($this->_from_org_id)) {
+	 try {
+		$this->_update_from_onhand();
 //		return 1;
-   } catch (Exception $e) {
-    echo "<br>From Onhand Update Failed <br> Line # " . __LINE__ . '<br>' . $e->getMessage();
-    return -99;
-   }
-  }
+	 } catch (Exception $e) {
+		echo "<br>From Onhand Update Failed <br> Line # " . __LINE__ . '<br>' . $e->getMessage();
+		return -99;
+	 }
+	}
 
-  //to org transaction update
-  if (!empty($this->_to_org_id)) {
-   try {
-    $this->_update_to_onhand();
+	//to org transaction update
+	if (!empty($this->_to_org_id)) {
+	 try {
+		$this->_update_to_onhand();
 //		return 1;
-   } catch (Exception $e) {
-    echo "<br>From Onhand Update Failed <br> Line # " . __LINE__ . '<br>' . $e->getMessage();
-    return -99;
-   }
-  }
+	 } catch (Exception $e) {
+		echo "<br>From Onhand Update Failed <br> Line # " . __LINE__ . '<br>' . $e->getMessage();
+		return -99;
+	 }
+	}
 
-  //with in org transaction update
-  if ((!empty($this->org_id)) && (empty($this->_from_org_id)) && (empty($this->_to_org_id))) {
-   if (!empty($this->_from_subinventory_id)) {
-    $this->_from_org_id = $this->org_id;
-    try {
-     $this->_update_from_onhand();
-    } catch (Exception $e) {
-     echo "<br>From Onhand Update Failed <br> Line # " . __LINE__ . '<br>' . $e->getMessage();
-     return -99;
-    }
-   }
-   if (!empty($this->_to_subinventory_id)) {
-    $this->_to_org_id = $this->org_id;
-    try {
-     $this->_update_to_onhand();
-    } catch (Exception $e) {
-     echo "<br>From Onhand Update Failed <br> Line # " . __LINE__ . '<br>' . $e->getMessage();
-     return -99;
-    }
-   }
-  }
-  return 1;
+	//with in org transaction update
+	if ((!empty($this->org_id)) && (empty($this->_from_org_id)) && (empty($this->_to_org_id))) {
+	 if (!empty($this->_from_subinventory_id)) {
+		$this->_from_org_id = $this->org_id;
+		try {
+		 $this->_update_from_onhand();
+		} catch (Exception $e) {
+		 echo "<br>From Onhand Update Failed <br> Line # " . __LINE__ . '<br>' . $e->getMessage();
+		 return -99;
+		}
+	 }
+	 if (!empty($this->_to_subinventory_id)) {
+		$this->_to_org_id = $this->org_id;
+		try {
+		 $this->_update_to_onhand();
+		} catch (Exception $e) {
+		 echo "<br>From Onhand Update Failed <br> Line # " . __LINE__ . '<br>' . $e->getMessage();
+		 return -99;
+		}
+	 }
+	}
+	return 1;
  }
 
  public function findOnhand_byItemId($item_id_m = '') {
-  if (!empty($item_id_m)) {
-   $this->item_id_m = $item_id_m;
-  }
-  $sql = " SELECT * FROM  ";
-  $sql .= self::$table_name;
-  $sql .= " WHERE item_id_m =:item_id_m ";
+	if (!empty($item_id_m)) {
+	 $this->item_id_m = $item_id_m;
+	}
+	$sql = " SELECT * FROM  ";
+	$sql .= self::$table_name;
+	$sql .= " WHERE item_id_m =:item_id_m ";
 
-  $param_a = ['item_id_m'];
-  $value_a = ['item_id_m' => $this->item_id_m];
-  $result = $this->findBy_sql($sql, $param_a, $value_a);
-  return !empty($result) ? $result : false;
+	$param_a = ['item_id_m'];
+	$value_a = ['item_id_m' => $this->item_id_m];
+	$result = $this->findBy_sql($sql, $param_a, $value_a);
+	return !empty($result) ? $result : false;
  }
 
 }

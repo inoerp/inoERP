@@ -2,17 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/smartview/www/inoerp/extensions/view/class.view.inc</file>
-            <file>file:/C:/smartview/www/inoerp/includes/json/json_svgimage.php</file>
-            <file>file:/C:/smartview/www/inoerp/extensions/view/result/display/display_template.php</file>
-            <file>file:/C:/smartview/www/inoerp/extensions/view/result/view_result.inc</file>
-            <file>file:/C:/smartview/www/inoerp/extensions/view/result/view_result_template.php</file>
-            <file>file:/C:/smartview/www/inoerp/extensions/user/dashboard/dashboard_template.php</file>
-            <file>file:/C:/smartview/www/inoerp/themes/default/header.inc</file>
-            <file>file:/C:/smartview/www/inoerp/extensions/view/result/view.js</file>
-            <file>file:/C:/smartview/www/inoerp/test.php</file>
-            <file>file:/C:/smartview/www/inoerp/includes/general_class/class_getsvgimage.inc</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

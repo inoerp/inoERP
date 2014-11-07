@@ -1,5 +1,5 @@
 function setValFromSelectPage(supplier_id, supplier_number, supplier_name,
- supplier_site_id, supplier_site_name) {
+				supplier_site_id, supplier_site_name) {
  this.supplier_id = supplier_id;
  this.supplier_number = supplier_number;
  this.supplier_name = supplier_name;
@@ -17,69 +17,69 @@ setValFromSelectPage.prototype.setVal = function() {
  rowClass = rowClass.replace(/\s+/g, '.');
 
  if (supplier_id) {
-  $('#content').find(rowClass).find(".supplier_id").val(supplier_id);
-  $('#content').find('.line_id_cb').each(function() {
-   if ($(this).prop('checked')) {
-    $(this).closest('tr').find('.supplier_id').val(supplier_id);
-   }
-  });
+	$('#content').find(rowClass).find(".supplier_id").val(supplier_id);
+	$('#content').find('.line_id_cb').each(function() {
+	 if ($(this).prop('checked')) {
+		$(this).closest('tr').find('.supplier_id').val(supplier_id);
+	 }
+	});
  }
 
  if (supplier_site_id) {
-  $('#content').find(rowClass).find(".supplier_site_id").val(supplier_site_id);
-  $('#content').find('.line_id_cb').each(function() {
-   if ($(this).prop('checked')) {
-    $(this).closest('tr').find('.supplier_site_id').val(supplier_site_id);
-   }
-  });
+	$('#content').find(rowClass).find(".supplier_site_id").val(supplier_site_id);
+	$('#content').find('.line_id_cb').each(function() {
+	 if ($(this).prop('checked')) {
+		$(this).closest('tr').find('.supplier_site_id').val(supplier_site_id);
+	 }
+	});
  }
  if (supplier_number) {
-  $('#content').find(rowClass).find(".supplier_number").val(supplier_number);
-  $('#content').find('.line_id_cb').each(function() {
-   if ($(this).prop('checked')) {
-    $(this).closest('tr').find('.supplier_number').val(supplier_number);
-   }
-  });
-  $('#content').find('.line_id_cb').each(function() {
-   if ($(this).prop('checked')) {
-    var trClass = '.' + $(this).closest('tr').prop('class');
-    trClass = trClass.replace(/\s+/g, '.');
-    $('#content').find(trClass).find('.supplier_number').val(supplier_number);
-   }
-  });
+	$('#content').find(rowClass).find(".supplier_number").val(supplier_number);
+	$('#content').find('.line_id_cb').each(function() {
+	 if ($(this).prop('checked')) {
+		$(this).closest('tr').find('.supplier_number').val(supplier_number);
+	 }
+	});
+		$('#content').find('.line_id_cb').each(function() {
+	 if ($(this).prop('checked')) {
+		var trClass = '.'+$(this).closest('tr').prop('class');
+		 trClass = trClass.replace(/\s+/g, '.');
+		$('#content').find(trClass).find('.supplier_number').val(supplier_number);
+	 }
+	});
  }
 
  if (supplier_site_name) {
-  $('#content').find(rowClass).find(".supplier_site_name").val(supplier_site_name);
-  $('#content').find('.line_id_cb').each(function() {
-   if ($(this).prop('checked')) {
-    $(this).closest('tr').find('.supplier_site_name').val(supplier_site_name);
-   }
-  });
-  $('#content').find('.line_id_cb').each(function() {
-   if ($(this).prop('checked')) {
-    var trClass = '.' + $(this).closest('tr').prop('class');
-    trClass = trClass.replace(/\s+/g, '.');
-    $('#content').find(trClass).find('.supplier_site_name').val(supplier_site_name);
-   }
-  });
+	$('#content').find(rowClass).find(".supplier_site_name").val(supplier_site_name);
+	$('#content').find('.line_id_cb').each(function() {
+	 if ($(this).prop('checked')) {
+		$(this).closest('tr').find('.supplier_site_name').val(supplier_site_name);
+	 }
+	});
+	$('#content').find('.line_id_cb').each(function() {
+	 if ($(this).prop('checked')) {
+		var trClass = '.'+$(this).closest('tr').prop('class');
+		 trClass = trClass.replace(/\s+/g, '.');
+		$('#content').find(trClass).find('.supplier_site_name').val(supplier_site_name);
+	 }
+	});
  }
 
  if (supplier_name) {
-  $('#content').find(rowClass).find(".supplier_name").val(supplier_name);
-  $('#content').find(rowClass).find(".select_supplier_name").val(supplier_name);
-  $('#content').find('.line_id_cb').each(function() {
-   if ($(this).prop('checked')) {
-    $(this).closest('tr').find('.select_supplier_name').val(supplier_name);
-   }
-  });
-  $('#content').find('.line_id_cb').each(function() {
-   if ($(this).prop('checked')) {
-    var trClass = '.' + $(this).closest('tr').prop('class');
-    trClass = trClass.replace(/\s+/g, '.');
-    $('#content').find(trClass).find('.supplier_name').val(supplier_name);
-   }
-  });
+	$('#content').find(rowClass).find(".supplier_name").val(supplier_name);
+	$('#content').find(rowClass).find(".select_supplier_name").val(supplier_name);
+		$('#content').find('.line_id_cb').each(function() {
+	 if ($(this).prop('checked')) {
+		$(this).closest('tr').find('.select_supplier_name').val(supplier_name);
+	 }
+	});
+	$('#content').find('.line_id_cb').each(function() {
+	 if ($(this).prop('checked')) {
+		var trClass = '.'+$(this).closest('tr').prop('class');
+		trClass = trClass.replace(/\s+/g, '.');
+		$('#content').find(trClass).find('.supplier_name').val(supplier_name);
+	 }
+	});
 
  }
 
@@ -89,82 +89,77 @@ setValFromSelectPage.prototype.setVal = function() {
 
 $(document).ready(function() {
 
- $('.line_id_cb').each(function() {
-  var trClass = '.' + $(this).closest('tr').attr('class');
-  var requisition_status = $('#content').find(trClass).find('.requisition_status').val();
-  if (requisition_status == 'APPROVED') {
-   $('#content').find(trClass).find('input').each(function() {
-    $(this).css('background', 'rgba(204,255,153,0.8)');
-
-   });
-  } else {
-   $('#content').find(trClass).find('input').each(function() {
-    $(this).css('background', 'rgba(255,40,0,0.5)');
-   });
-  }
- });
-
  $(".select_supplier_name").on("change", function() {
-  var trClass = '.' + $(this).closest('tr').prop('class');
-  function afterFunction(result) {
-   var new_name = 'select_supplier_site_id[]';
-   var supplier_sites = $(result).find('div#json_supplierSites_find_all').html();
-   $(trClass).find('.supplier_site_name').first().replaceWith(supplier_sites).removeAttr('id');
-   $(trClass).find('.supplier_site_id').removeAttr('id');
-   $(trClass).find('.supplier_site_id').first().prop('name', new_name);
-   $(trClass).find('.supplier_site_id').first().addClass('supplier_site_name');
-  }
-  if (($(this).closest('tr').find('.supplier_id').val()) && ($(this).closest('tr').find('.bu_org_id').val())) {
-   var bu_org_id = $(this).closest('tr').find('.bu_org_id').val();
-   var supplier_id = $(this).closest('tr').find('.supplier_id').val();
-   getSupplierDetails('modules/ap/supplier/json_supplier.php', bu_org_id, supplier_id, afterFunction);
+	var trClass = '.' + $(this).closest('tr').prop('class');
+	function afterFunction(result) {
+	 var new_name = 'select_supplier_site_id[]';
+	 var supplier_sites = $(result).find('div#json_supplierSites_find_all').html();
+	 $(trClass).find('.supplier_site_name').first().replaceWith(supplier_sites).removeAttr('id');
+	 $(trClass).find('.supplier_site_id').removeAttr('id');
+	 $(trClass).find('.supplier_site_id').first().prop('name', new_name);
+	 $(trClass).find('.supplier_site_id').first().addClass('supplier_site_name');
+	}
+	if (($(this).closest('tr').find('.supplier_id').val()) && ($(this).closest('tr').find('.bu_org_id').val())) {
+	 var bu_org_id = $(this).closest('tr').find('.bu_org_id').val();
+	 var supplier_id = $(this).closest('tr').find('.supplier_id').val();
+	 getSupplierDetails('modules/ap/supplier/json_supplier.php', bu_org_id, supplier_id, afterFunction);
 
-  }
+	}
  });
 
  $('#content').on('mouseenter', '.select_supplier_name', function() {
-  $(this).addClass('search_data');
+	$(this).addClass('search_data');
  }).on('mouseleave', '.select_supplier_name', function() {
-  $(this).removeClass('search_data');
+	$(this).removeClass('search_data');
  });
 
  $('#content').on('change', '.supplier_site_id', function() {
-  $(this).closest('tr').find('.supplier_site_id').val($(this).val());
+	$(this).closest('tr').find('.supplier_site_id').val($(this).val());
  });
 
 //get supplier details
  $(".select_supplier_name, #supplier_name, #supplier_number").on("change", function() {
-  if (($(this).closest('tr').find('.supplier_id').val()) && ($(this).closest('tr').find('.bu_org_id').val())) {
-   var bu_org_id = $(this).closest('tr').find('.bu_org_id').val();
-   getSupplierDetails('modules/ap/supplier/json_supplier.php', bu_org_id);
-  }
+	if (($(this).closest('tr').find('.supplier_id').val()) && ($(this).closest('tr').find('.bu_org_id').val())) {
+	 var bu_org_id = $(this).closest('tr').find('.bu_org_id').val();
+	 getSupplierDetails('modules/ap/supplier/json_supplier.php', bu_org_id);
+	}
  });
 
  $("#content").on("change", "#supplier_site_id", function() {
-  var supplier_site_id = $("#supplier_site_id").val();
-  if (supplier_site_id) {
-   getSupplierSiteDetails('modules/ap/supplier/json_supplier.php', supplier_site_id);
-  }
+	var supplier_site_id = $("#supplier_site_id").val();
+	if (supplier_site_id) {
+	 getSupplierSiteDetails('modules/ap/supplier/json_supplier.php', supplier_site_id);
+	}
  });
 
  $("#content").on("focusout", '.ship_to_inventory', function() {
-  var ship_to_inventory = $(this).val();
-  var rowTrClass = $(this).closest("tr").attr("class");
-  var classValue = "tr." + rowTrClass;
-  var classValue1 = classValue.replace(/ /g, '.');
-  getAllInventoryAccounts('modules/org/inventory/json_inventory.php', ship_to_inventory, classValue1);
+	var ship_to_inventory = $(this).val();
+	var rowTrClass = $(this).closest("tr").attr("class");
+	var classValue = "tr." + rowTrClass;
+	var classValue1 = classValue.replace(/ /g, '.');
+	getAllInventoryAccounts('modules/org/inventory/json_inventory.php', ship_to_inventory, classValue1);
  });
 
 
 //item number auto complete and populate the other details
 // itemNumber_autoComplete('modules/inv/item/item_search.php');
 
+ //Coa auto complete
+ var coaCombination = new autoCompleteMain();
+ var coa_id = $('#coa_id').val();
+ coaCombination.json_url = 'modules/gl/coa_combination/coa_search.php';
+ coaCombination.primary_column1 = coa_id;
+ coaCombination.select_class = 'select_account';
+ coaCombination.min_length = 4;
+ coaCombination.autoComplete();
+
+
 //selecting supplier
  $(".select_supplier_name").on("click", function() {
-  var rowClass = $(this).closest('tr').prop('class');
-  localStorage.setItem("row_class", rowClass);
-  void window.open('select.php?class_name=supplier_all_v', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+	var rowClass = $(this).closest('tr').prop('class');
+	localStorage.setItem("row_class", rowClass);
+	void window.open('select.php?class_name=supplier_all_v', '_blank',
+					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
 
@@ -178,25 +173,7 @@ $(document).ready(function() {
  classContextMenu.tbodyClass = 'form_data_line_tbody';
  classContextMenu.noOfTabbs = 6;
  //classContextMenu.contextMenu();
-
+ 
  deleteData('form.php?class_name=po_requisition_interface&line_class_name=po_requisition_interface');
-
-// $('#content').on('click', '.line_id_cb', function() {
-//  if ($(this).is(':checked')) {
-//   var supplier_id = $('#content').find('.line_id_cb:checked').closest('tr').find('.supplier_id').first().val();
-//   var supplier_site_id = $('#content').find('.line_id_cb:checked').closest('tr').find('.supplier_site_id').first().val();
-//   $('#content').find('.line_id_cb:checked').each(function() {
-//    
-//    if (supplier_id && $(this).closest('tr').find('.supplier_id').val() != supplier_id) {
-//     alert('You can convert requisitions from one supplier at a time ');
-//     $(this).attr('checked', false);
-//    } else if (supplier_site_id && $(this).closest('tr').find('.supplier_site_id').val() != supplier_site_id) {
-//     alert('You can convert requisitions from one supplier site at a time ');
-//     $(this).attr('checked', false);
-//    }
-//   });
-//  }
-// });
-
 
 });

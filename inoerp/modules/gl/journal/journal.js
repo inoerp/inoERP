@@ -47,15 +47,6 @@ mandatoryCheck.mandatory_messages = ["First Select Ledger", "No Currency", "No G
 	$('.line_num:first').val('1');
  }
 
-
- $('#ledger_id').on('change', function() {
-  getLedgerDetails($(this).val());
- });
-
- if ($('#ledger_id').val() && (!$('#gl_journal_header_id').val())) {
-  getLedgerDetails($('#ledger_id').val());
- }
- 
  //exchange rate calcualtions
  $('#content').on('blur', '.total_dr', function() {
 	if ($(this).val()) {
@@ -117,24 +108,24 @@ mandatoryCheck.mandatory_messages = ["First Select Ledger", "No Currency", "No G
 // coaCombination.min_length = 4;
 // coaCombination.autoComplete();
 
-////popu for selecting accounts
-// $('#content').on('click', '.account_popup', function() {
-//	var rowClass = $(this).closest('tr').prop('class');
-//	var fieldClass = $(this).closest('td').find('.select_account').prop('class');
-//	var coa_id = $('#coa_id').val();
-//	localStorage.setItem("row_class", rowClass);
-//	localStorage.setItem("field_class", fieldClass);
-//	var link = 'select.php?class_name=coa_combination&coa_id=' + coa_id;
-//		if ($(this).siblings('.code_combination_id').val()) {
-//	 link += '&combination=' + $(this).siblings('.code_combination_id').val();
-//	}
-//	localStorage.setItem("reset_link_ofSelect", link);
-//	void window.open(link, '_blank',
-//					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-// });
+//popu for selecting accounts
+ $('#content').on('click', '.account_popup', function() {
+	var rowClass = $(this).closest('tr').prop('class');
+	var fieldClass = $(this).closest('td').find('.select_account').prop('class');
+	var coa_id = $('#coa_id').val();
+	localStorage.setItem("row_class", rowClass);
+	localStorage.setItem("field_class", fieldClass);
+	var link = 'select.php?class_name=coa_combination&coa_id=' + coa_id;
+		if ($(this).siblings('.code_combination_id').val()) {
+	 link += '&combination=' + $(this).siblings('.code_combination_id').val();
+	}
+	localStorage.setItem("reset_link_ofSelect", link);
+	void window.open(link, '_blank',
+					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
 
  //Select the header id
- $(".gl_journal_header_id.select_popup").click(function() {
+ $("a.select.header_id_popup").click(function() {
 	void window.open('select.php?class_name=gl_journal_header', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
 	return false;
@@ -147,6 +138,10 @@ mandatoryCheck.mandatory_messages = ["First Select Ledger", "No Currency", "No G
 	$(this).attr('href', modepath() + 'gl_journal_header_id=' + gl_journal_header_id);
  });
 
+ $('a.show.ledger_id').click(function() {
+	var ledger_id = $('#ledger_id').val();
+	$(this).attr('href', modepath() + 'ledger_id=' + ledger_id);
+ });
 
  onClick_add_new_row('gl_journal_line', 'gl_journal_line_values', 2, 'status');
 
@@ -167,11 +162,13 @@ mandatoryCheck.mandatory_messages = ["First Select Ledger", "No Currency", "No G
  function beforeSave() {
 	var sum_total_dr = 0;
 	$('.total_dr').each(function() {
-	  sum_total_dr += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+	 var sum_total_dr_s = $(this).val();
+	 sum_total_dr += +sum_total_dr_s.replace(/,/g, "");
 	});
 	var sum_total_cr = 0;
 	$('.total_cr').each(function() {
-   sum_total_cr += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+	 var sum_total_cr_s = $(this).val();
+	 sum_total_cr += +sum_total_cr_s.replace(/,/g, "");
 	});
 	if (sum_total_dr === sum_total_cr) {
 	 return 1;
@@ -208,7 +205,7 @@ mandatoryCheck.mandatory_messages = ["First Select Ledger", "No Currency", "No G
 // });
 
 
- $('#action').on('change', function() {
+ $('#change_satus').on('change', function() {
 	var headerId = $('#gl_journal_header_id').val();
 	if ($(this).val() === 'REVERSED') {
 	 var disabledId = [];
@@ -220,7 +217,7 @@ mandatoryCheck.mandatory_messages = ["First Select Ledger", "No Currency", "No G
 		$(".error").append('Reversing Journal..');
 		var form_header_id = '#gl_journal_header';
 		var headerData = $(form_header_id).serializeArray();
-		saveHeader('form.php?class_name=gl_journal_header', headerData, '#gl_journal_header_id', '','', true, 'gl_journal_header');
+		saveHeader('form.php?class_name=gl_journal_header', headerData, '#gl_journal_header_id', '', true, 'gl_journal_header');
 	 }
 	}
 	$(disabledId).each(function(i, v) {

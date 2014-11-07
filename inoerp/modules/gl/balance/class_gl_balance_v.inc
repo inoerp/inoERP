@@ -78,7 +78,7 @@ AS
 SELECT  cc.combination, gjl.code_combination_id, gp.period_name,
 cc.coa_id, sum(gjl.total_cr), sum(gjl.total_dr),
 sum(gjl.total_ac_dr), sum(gjl.total_ac_cr) ,gjh.ledger_id,
-cc.description, gjl.gl_journal_line_id,
+cc.description, gjl.gl_journal_line_id, gjl.gjl,
 gjl.gl_journal_header_id, gjl.line_num, gjl.line_type, gjl.description,
 gjl.reference_type, gjl.reference_key_name, gjl.reference_key_value , 
 cc.coa_structure_id, cc.field1, cc.field2, cc.field3,
@@ -89,9 +89,7 @@ FROM gl_journal_line gjl
 LEFT JOIN gl_journal_header gjh ON gjl.gl_journal_header_id = gjh.gl_journal_header_id
 LEFT JOIN gl_period gp ON gp.gl_period_id = gjh.period_id
 LEFT JOIN coa_combination cc ON gjl.code_combination_id=cc.coa_combination_id
-WHERE gjl.status = 'U'
 GROUP BY  gjl.code_combination_id
-
 ";
 	
 	
