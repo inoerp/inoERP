@@ -20,7 +20,7 @@ The idea behind inoERP is to provide a dynamic pull-based system where the deman
 (such as MRP or Kanban) are incompetent to provide a good inventory turn.
 
 What is Dynamic pull System
-------------
+-------------------------------
 
 Dynamic pull system is an advanced version of pull system which encompasses the best feature of traditional pull system & MRP. 
 The major disadvantage of traditional Kanban system is the fixed Kanban size and requirement of at least 2 bins for full operation.
