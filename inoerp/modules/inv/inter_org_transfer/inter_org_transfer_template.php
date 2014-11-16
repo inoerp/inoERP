@@ -100,6 +100,7 @@
               <th>Action</th>
               <th>Line Id</th>
               <th>Item Number</th>
+              <th>Revision</th>
               <th>Item Description</th>
               <th>UOM</th>
               <th>Quantity</th>
@@ -130,6 +131,7 @@
                  echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
                  $f->text_field_wid2('item_number', 'select_item_number');
                  ?><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
+                <td><?php $f->text_field_wid2sr('revision_name'); ?></td>
                 <td><?php $f->text_field_wid2l('item_description'); ?></td>
                 <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, 'uom_id', $readonly); ?>  </td>
                 <td><?php echo $f->number_field('transaction_quantity', $$class_second->transaction_quantity, '', '', '', '', $f->readonly2); ?></td>
@@ -280,8 +282,8 @@
 
                 <td class="add_detail_values1">
                  <?php
-                  echo !empty($$class_second->serial_number_id) ? $f->hidden_field('serial_number_id', $$class_second->serial_number_id) : null;
-                  echo !empty($$class_second->serial_generation) ? $f->hidden_field('serial_generation', $$class_second->serial_generation) : null;
+                  echo !empty($$class_second->serial_number_id) ? $f->hidden_field('serial_number_id', $$class_second->serial_number_id) :  $f->hidden_field('serial_number_id', '');;
+                  echo !empty($$class_second->serial_generation) ? $f->hidden_field('serial_generation', $$class_second->serial_generation) : $f->hidden_field('serial_generation', '');
                  ?>
                  <img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
                  <div class="class_detail_form">

@@ -1,6 +1,6 @@
 <div id="all_contents">
  <div id="content_top"></div>
- <div id="content_left"></div>
+
  <div id="content_right">
 	<div id="content_right_left">
 	 <div id="content">
@@ -15,7 +15,8 @@
 			 <div id="content_element">
 				<ul>
 				 <li><span class='content_heading'> <?php  echo htmlentities($content->subject); ?></span></li>
-				 <li class="created_by"><?php echo htmlentities($content->created_by); ?></li>
+				 <li class="created_by"><?php $content_user = user::find_by_id($content->created_by);
+          echo !empty($content_user) ?  ($content_user->username) : '' ; ?></li>
 				 <li class="creation_date"><?php echo htmlentities($content->creation_date); ?></li>
 				 <?php
 				 if ($allow_content_update) {
@@ -69,7 +70,9 @@
 		</div>
 	 </div>
 	</div>
-	<div id="content_right_right"></div>
+  <div id="content_right_right">
+    <div id="content_left"></div>
+  </div>
  </div>
 
  <div id="content_bottom"></div>

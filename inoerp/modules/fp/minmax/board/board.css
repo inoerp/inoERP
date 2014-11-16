@@ -1,0 +1,64 @@
+#min_max_boardId{
+   width: 98%; 
+}
+
+span.info{
+padding: 30px 5px 0 30px;
+}
+
+/*.urgent_card{
+    position: relative;
+    display: block;
+    min-height: 200px;
+}*/
+
+#min_max_boardId li.parent {
+    display: inline-block;
+    width: 140px;
+    height: 200px;
+    margin: 20px;
+    overflow: hidden;
+}
+
+#min_max_boardId ul.child{
+    list-style:none;
+    padding-left:0;
+}
+
+#min_max_boardId li.parent li{
+    display: block;
+    padding: 1.2px 0 0 10px;
+}
+.bgRed {
+    background: none repeat scroll 0% 0% rgba(225, 14, 14, 0.27);
+    border: 2px solid rgba(40,10,120,.4);
+}
+
+.bgGreen {
+    background: rgba(25, 214, 14, 0.27);
+    border: 2px solid rgba(40,210,120,.6);
+}
+
+.bgPurple {
+    background: rgba(25, 214, 114, 0.1);
+    border: 2px solid rgba(40,10,10,.2);
+}
+#urgent_card_block, #mmb_transaction_block{
+    display: block;
+    min-height: 200px;
+}
+
+#content_left1 .draggable_element{
+    width: 130px;
+}
+
+#content_left1 .draggable_element li{
+    padding-left: 20px;
+    display: block;
+}
+
+#content_left li.draggable_element{
+width: 180px;
+list-style: none;
+    display: inline-block;
+}

@@ -210,7 +210,7 @@ $(document).ready(function() {
  $('#apply_item_template').on('click', function() {
 	applyTemplate();
  });
-
+onClick_add_new_row('tr.inv_item_revision0', 'tbody.form_data_line_tbody', 1)
 
 });
 

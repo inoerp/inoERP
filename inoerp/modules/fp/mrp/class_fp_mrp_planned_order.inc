@@ -171,13 +171,13 @@ class fp_mrp_planned_order extends dbObject {
 	if (empty($mrp_d)) {
 	 return;
 	}
-//	echo "<h2>Demand </h2>";
-//	pa($mrp_d);
+	echo "<h2>Demand </h2>";
+	pa($mrp_d);
 	$mrpexsup = new fp_mrp_existing_supply_v();
 
 	$mrp_supp = $mrpexsup->findBy_ItemId($item_id_m);
-//		echo "<h2>Supply </h2>";
-//	pa($mrp_supp);
+		echo "<h2>Supply </h2>";
+	pa($mrp_supp);
 	$onhand = 0;
 	$open_wo_q = 0;
 	$open_po_q = 0;
@@ -291,6 +291,7 @@ class fp_mrp_planned_order extends dbObject {
 					 . " $tonhand excess material in the planning horizon ";
 	 $this->_create_exception('EXCESS', $msg, $detail_msg, $mrp_d[0]->org_id);
 	}
+  pa($planned_order_a);
 	return !empty($planned_order_a) ? $planned_order_a : false;
  }
 

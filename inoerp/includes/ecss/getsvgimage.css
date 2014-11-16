@@ -1,3 +1,10 @@
+a.more_page{
+   position: relative;
+    left: 400px;
+    top: -40px;
+    z-index: 99;
+}
+
 ul#charts_in_report li {
     display: inline-block;
 margin-right: 100px;  
@@ -169,4 +176,9 @@ rect.line_class_7 {
  stroke : #000; 
  stroke-opacity : 0.4;
  stroke-width: 0.01em;
+}
+
+ul.multi_charts li{
+    display: inline-block;
+    margin: 5px 20px;
 }

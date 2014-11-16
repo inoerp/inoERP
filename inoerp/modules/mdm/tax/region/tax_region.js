@@ -14,7 +14,7 @@ $(document).ready(function() {
 //Get the tax_region_id on find button click
  $('a.show.mdm_tax_region').click(function() {
 	var headerId = $('#country_code').val();
-	$(this).prop('href', modepath() + 'pageno=1&per_page=10&submit_search=Search&search_class=mdm_tax_region&country_code=' + headerId);
+	$(this).prop('href', modepath() + 'pageno=1&per_page=10&submit_search=Search&search_class_name=mdm_tax_region&country_code=' + headerId);
  });
 
  onClick_add_new_row('tr.tax_region_line0', 'tbody.tax_region_values', '2', 'country_code');

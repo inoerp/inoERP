@@ -30,7 +30,7 @@
     </div>
    </div>
    <div id="tabsDetailA-2" class="tabContent">
-    <div id="draw_chart">
+    <div class="draw_chart">
      <ul class="column four_column">
       <li><label>Chart Type : </label> 
        <?php echo $f->select_field_from_array('chart_type', getsvgimage::$chart_type_a, $$class->chart_type, 'chart_type'); ?></li>

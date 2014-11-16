@@ -59,6 +59,31 @@
    $result = $this->findBy_sql($sql, $param_a, $value_a);
    return !empty($result) ? array_pop($result) : false;
   }
+  
+    public static function find_by_lineId($line_id) {
+   $sql = " SELECT * FROM  ";
+   $sql .= self::$table_name;
+   $sql .= " WHERE fp_forecast_line_id ='{$line_id}'  ";
+
+   $result = self::find_by_sql($sql);
+   return !empty($result) ? ($result) : false;
+  }
+  
+      public static function find_by_forecastHeaderId($header_id) {
+   $sql = " SELECT fld.fp_forecast_line_id, fld.fp_forecast_line_date_id,
+        fld.forecast_date, fld.original_quantity, fld.current_quantity, fld.source, 
+        fl.item_id_m, fl.fp_forecast_header_id
+        FROM 
+        fp_forecast_line_date fld,
+        fp_forecast_line fl,
+        fp_forecast_header fh
+        WHERE fl.fp_forecast_line_id = fld.fp_forecast_line_id
+        AND fh.fp_forecast_header_id = fl.fp_forecast_header_id
+        AND fh.fp_forecast_header_id = '{$header_id}' ";
+
+   $result = self::find_by_sql($sql);
+   return !empty($result) ? ($result) : false;
+  }
 
   public static function find_by_ItemId_groupId_date($item_id_m, $group_id, $date) {
    $sql = " SELECT 

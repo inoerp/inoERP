@@ -128,8 +128,8 @@ class fp_mds_header extends dbObject {
 	 $msdl->fp_mds_line_id = null;
 	 $msdl->fp_mds_header_id = $mds_header_obj->fp_mds_header_id;
 	 $msdl->item_id_m = $forecast_line->item_id_m;
-	 $msdl->quantity = $forecast_line->current;
-	 $msdl->demand_date = $forecast_line->start_date;
+	 $msdl->quantity = $forecast_line->current_quantity;
+	 $msdl->demand_date = $forecast_line->forecast_date;
 	 $msdl->source_type = 'Forecast';
 	 $msdl->source_header_id = $forecast_line->fp_forecast_header_id;
 	 $msdl->source_line_id = $forecast_line->fp_forecast_line_id;

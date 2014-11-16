@@ -26,6 +26,7 @@ class downloads {
 	$stmt = '<div class="submit_form">';
 	$stmt .= "<form action='" . HOME_URL . $this->_submit_action_url . "' method=\"POST\" name=\"$this->_submit_form_name\" id=\"$this->_submit_form_name\">";
 	$stmt .= "<input type='hidden'  name='data' value=\"$value\">";
+  $stmt .= "<input type='hidden'  name='download_format' value=\"excel_format\">";
 	$stmt .= "<input type='submit'  name=\"$this->_submit_form_name\" form=\"$this->_submit_form_name\" value=\"$this->_submit_button_value\">";
 	$stmt .= '</form></div>';
 	return $stmt;

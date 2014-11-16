@@ -18,7 +18,7 @@ $(document).ready(function() {
 
  $('a.show.role_code').click(function(e) {
 	var role_code = $('#role_code').val();
-		$(this).prop('href', modepath() + 'pageno=1&per_page=10&submit_search=Search&search_class=role_access&role_code=' + role_code);
+		$(this).prop('href', modepath() + 'pageno=1&per_page=10&submit_search=Search&search_class_name=role_access&role_code=' + role_code);
  });
 
 onClick_add_new_row('tr.role_access_line0', 'tbody.role_access_values', '1', 'role_code');

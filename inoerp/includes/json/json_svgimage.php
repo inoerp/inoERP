@@ -52,7 +52,6 @@
     $chart_legend = !empty($_GET['chart_legend']) ? ($_GET['chart_legend']) : $view->chart_legend;
     $chart_label = !empty($_GET['chart_label']) ? ($_GET['chart_label']) : $view->chart_label;
     $chart_value = !empty($_GET['chart_type']) ? ($_GET['chart_value']) : $view->chart_value;
-
 //getSvgData($result, $legend_name, $chart_label, $chart_value, $legend, $labels, $data);
     $svgimg->setProperty('_chart_name', $view->view_name);
     $svgimg->setProperty('_chart_width', $chart_width);

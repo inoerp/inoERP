@@ -42,7 +42,7 @@ if (!empty($msg)) {
 						if (property_exists($class, 'column')) {
 						 $column_array = $$class->column;
 						} else {
-						 $column_array = $class::$column_array;
+						 $column_array = $$class->field_a;
 						}
 						foreach ($column_array as $key => $value) {
 						 echo '<th>' . $value . '</th>';
@@ -73,7 +73,7 @@ if (!empty($msg)) {
 				</div>
 			 </div>
 
-			 <div id="pagination" style="clear: both;">
+			 <div class="pagination" style="clear: both;">
 				<?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
 				?>
 			 </div>

@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/smartview/www/inoerp/modules/sys/process_flow/process_flow.js</file>
+            <file>file:/C:/smartview/www/inoerp/modules/sys/process_flow/process_flow_template.php</file>
+            <file>file:/C:/smartview/www/inoerp/modules/cc/co/process_flow/class_cc_coprocess_flow_action.inc</file>
+            <file>file:/C:/smartview/www/inoerp/modules/cc/co/process_flow/class_cc_co_process_flow_action_value.inc</file>
+            <file>file:/C:/smartview/www/inoerp/test.php</file>
+        </group>
     </open-files>
 </project-private>

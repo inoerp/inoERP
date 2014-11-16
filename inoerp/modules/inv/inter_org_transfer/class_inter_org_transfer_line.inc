@@ -16,6 +16,7 @@
    'from_subinventory_id',
    'from_locator_id',
    'item_id_m',
+   'revision_name',
    'item_description',
    'status',
    'uom_id',
@@ -74,6 +75,7 @@
   public $from_subinventory_id;
   public $from_locator_id;
   public $item_id_m;
+  public $revision_name;
   public $item_description;
   public $item_number;
   public $status;

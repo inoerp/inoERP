@@ -37,7 +37,7 @@
 						 <?php echo form::text_field('description', $option_header->description, '20'); ?>
             </li>
             <li><label>Module* : </label>
-						 <?php echo form::select_field_from_object('module', module::find_all(), 'module_id', 'name', $option_header->module, 'module'); ?>
+						 <?php echo $f->select_field_from_object('module_code', option_header::modules(), 'option_line_code', 'option_line_value', $$class->module_code, 'module_code', '', 1) ?>
             </li>
             <li><label>Assignment : </label>
 						 <?php echo form::select_field_from_object('option_assignments', option_header::option_assignments(), 'option_line_code', 'option_line_value', $option_header->option_assignments, 'option_assignments'); ?>

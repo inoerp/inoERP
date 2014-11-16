@@ -68,10 +68,7 @@
 						 <li><label>Costed : </label>
 							<?php echo form::checkBox_field('costed_cb', $$class->costed_cb, 'costed_cb', $readonly); ?>
 						 </li>
-						 <li><label>Absorption Ac: </label><?php
-							$f = new inoform();
-							$f->ac_field_d('absorption_ac_id');
-							?></li>
+						 <li><label>Absorption Ac: </label><?php 							$f->ac_field_d('absorption_ac_id'); 	?></li>
 						 <li><label>Variance Ac: </label><?php $f->ac_field_d('variance_ac_id'); ?></li>
 						 <li><label>Standard Rate : </label>
 							<?php echo form::checkBox_field('standard_rate_cb', $$class->standard_rate_cb, 'standard_rate_cb', $readonly); ?>
@@ -120,6 +117,7 @@
 						<thead> 
 						 <tr>
 							<th>Action</th>
+              <th>Seq#</th>
 							<th>Resource Cost Id</th>
 							<th>Cost Type</th>
 							<th>Description</th>
@@ -147,6 +145,7 @@
  								<li><?php echo form::hidden_field('bom_resource_id', $$class->bom_resource_id); ?></li>
  							 </ul>
  							</td>
+              <td><?php $f->seq_field_d($count) ?></td>
  							<td><?php form::text_field_wid2sr('bom_resource_cost_id'); ?></td>
 							<td><?php echo $f->select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'cost_type_code', 'cost_type', $$class_second->bom_cost_type, '', '', 1, $readonly); ?></td>
 							<td><?php $f->text_field_wid2r('bom_cost_type_description'); ?></td>
@@ -172,6 +171,24 @@
 	<div id="content_right_right"></div>
  </div>
 
+</div>
+
+<div id="js_data">
+ <ul id="js_saving_data">
+  <li class="headerClassName" data-headerClassName="bom_header" ></li>
+  <li class="lineClassName" data-lineClassName="bom_line" ></li>
+  <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
+  <li class="primary_column_id" data-primary_column_id="bom_header_id" ></li>
+  <li class="form_header_id" data-form_header_id="bom_header" ></li>
+  <li class="line_key_field" data-line_key_field="component_item_id_m" ></li>
+  <li class="single_line" data-single_line="true" ></li>
+  <li class="form_line_id" data-form_line_id="bom_line" ></li>
+ </ul>
+ <ul id="js_contextMenu_data">
+  <li class="docHedaderId" data-docHedaderId="bom_header_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="bom_header" ></li>
+  <li class="btn2DivId" data-btn2DivId="form_line" ></li>
+ </ul>
 </div>
 
 <?php include_template('footer.inc') ?>

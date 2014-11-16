@@ -66,7 +66,8 @@ $(this).closest('tr').find('.parent_line_id').removeAttr('disabled');
  //Get the option_id on find button click
  $('a.show.sys_value_group_header_id').click(function() {
 	var headerId = $('#sys_value_group_header_id').val();
-		$(this).prop('href', modepath() + 'pageno=1&per_page=10&submit_search=Search&search_class=sys_value_group_line&search_asc_desc=desc&class_name=sys_value_group_line&sys_value_group_header_id=' + headerId);
+  $(this).prop('href', modepath() + 'pageno=1&per_page=10&submit_search=Search&search_class_name=sys_value_group_line&search_asc_desc=desc&class_name=sys_value_group_line&sys_value_group_header_id=' + headerId);
+//  $(this).attr('href', modepath() + 'sys_value_group_header_id=' + headerId);
  });
 
 onClick_add_new_row('tr.sys_value_group_line0', 'tbody.sys_value_group_line_values', 4);

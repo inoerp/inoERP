@@ -1,4 +1,4 @@
-<?php
+<?php $f= new inoform();
  if ($$class->po_type != 'STANDARD') {
   return;
  }
@@ -62,8 +62,8 @@
            <td><?php form::text_field_wid3sr('po_detail_id'); ?></td>
            <td><?php echo $f->number_field('shipment_number', $$class_third->shipment_number, '', '', 'detail_number', 1); ?></td>
            <td><?php $f->text_field_wid3('ship_to_location_id'); ?></td>
-           <td><?php echo $f->number_field('quantity', $$class_third->quantity); ?></td>
-           <td><?php echo $f->date_fieldFromToday_mr('need_by_date', ($$class_third->need_by_date), false); ?></td>
+           <td><?php echo $f->number_field('quantity', $$class_third->quantity,'','','allow_change'); ?></td>
+           <td><?php echo $f->date_fieldFromToday_m('need_by_date', ($$class_third->need_by_date), false); ?></td>
            <td><?php echo $f->date_fieldFromToday('promise_date', ($$class_third->promise_date)); ?></td>
 
           </tr>

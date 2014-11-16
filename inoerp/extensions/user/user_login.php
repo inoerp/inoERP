@@ -34,7 +34,7 @@ if (!empty($_POST['submitLogin'])) { //form is submitted for login
 	 unset($_SESSION['orginal_page']);
 	 unset($session->orginal_page);
 	} else {
-	 redirect_to(HOME_URL . "index.php");
+	 redirect_to(HOME_URL . "form.php?class_name=user_dashboard_v");
 	}
  } else {
 	$msg .= "<div class='message error'> Username or password is incorrect <br/> </div>";

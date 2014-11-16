@@ -1,0 +1,1 @@
+<?php$org_id = !empty($_GET['org_id']) ? $_GET['org_id'] : '';$subinventory_id = !empty($_GET['subinventory_id']) ? $_GET['subinventory_id'] : '';$mm_details = fp_minmax_board_v::find_by_orgId_subInventoryId($org_id, $subinventory_id);?>

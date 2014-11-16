@@ -39,8 +39,8 @@
 							<?php
 							$f = new inoform();
 							$count = 1;
-							foreach ($all_data as $modules) {
-							 $mod_name = strtoupper($modules['module_name']);
+							foreach ($all_data as $mod_name => $modules) {
+							 $mod_name = strtoupper($mod_name);
 							 echo "<tr><td colspan='10' class='major_row'>$mod_name </td></tr>";
 							 foreach ($modules as $submodules) {
 								if (!is_array($submodules)) {
@@ -95,8 +95,8 @@
 						 <tbody class="form_data_line_tbody engine_values" >
 							<?php
 							$count = 1;
-							foreach ($all_data as $modules) {
-							 $mod_name = strtoupper($modules['module_name']);
+							foreach ($all_data as $mod_name => $modules) {
+							 $mod_name = strtoupper($mod_name);
 							 echo "<tr><td colspan='9' class='major_row'>$mod_name </td></tr>";
 							 foreach ($modules as $submodules) {
 								if (!is_array($submodules)) {

@@ -34,7 +34,7 @@ if (($content_privilage >= 6) && ($mode == 9)) {
 } else if (($content_privilage >= 4) && !empty($_SESSION['username']) && ($$class->created_by == $_SESSION['username']) && ($mode == 9)) {
  include_once(THEME_DIR . '/content_template.inc');
 } else if (($mode == 9)) {
- $session->redirect_login();
+ access_denied();
 } else {
  require_once(INC_EXTENSIONS . DS . 'content' . DS . 'view' . DS . "content_view.php");
  echo!empty($breadCrum) ? $breadCrum : false;

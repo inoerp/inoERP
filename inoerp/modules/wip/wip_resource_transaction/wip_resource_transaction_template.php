@@ -10,11 +10,10 @@
 			</div>
 			<!--    START OF FORM HEADER-->
 			<div class="error"></div><div id="loading"></div>
-			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
+			<?php echo (!empty($show_message)) ? $show_message : "";  $f=  new inoform(); ?> 
 			<!--    End of place for showing error messages-->
 
-			<!--<form action=""  method="post" id="wip_resource_transaction_header"  name="wip_resource_transaction_header">-->
-			<!--<div id ="form_header">-->
+			<div id ="form_header"><span class="heading"> Resource Transaction </span>
 			<div id="tabsHeader">
 			 <ul class="tabMain">
 				<li><a href="#tabsHeader-1">Basic Info</a></li>
@@ -24,12 +23,9 @@
 				<div id="tabsHeader-1" class="tabContent">
 				 <div class="large_shadow_box"> 
 					<ul class="column four_column">
-					 <li>
-						<label><img id="wip_wo_popup" class="showPointer wip_wo_headerid_popup" src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
-						 WO Header Id(1) : </label>
-						<?php echo form::text_field_d('wip_wo_header_id'); ?>
-						<a name="show" class="show wip_wo_headerid_show">
-						 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+					 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="wip_wo_header_id select_popup clickable">
+             WO Header Id(1) : </label> <?php $f->text_field_dsr('wip_wo_header_id'); ?>
+						<a name="show" class="show wip_wo_headerid_show"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 					 </li>
 					 <li><label>WO Number : </label> <?php echo form::text_field_d('wo_number'); ?></li>
 					 <li><label> Inventory Org : </label>
@@ -62,8 +58,7 @@
 				</div>
 			 </div>
 			</div>
-			<!--</div>-->
-			<!--</form>-->
+			</div>
 			<div id ="form_line" class="form_line"><span class="heading"> Operation Details </span>
 			 <div id="tabsLine">
 				<ul class="tabMain">
@@ -117,8 +112,8 @@
  							<td><?php form::number_field_wids('transaction_quantity'); ?></td>
  							<td><?php form::number_field_wid3sr('required_quantity'); ?></td>
  							<td><?php form::number_field_wid3sr('applied_quantity'); ?></td>
- 							<td><?php form::number_field_wid('reason'); ?></td>
- 							<td><?php form::number_field_wid('reference'); ?></td>
+ 							<td><?php $f->text_field_wid('reason'); ?></td>
+              <td><?php $f->text_field_wids('reference'); ?></td>
  							<td><?php echo form::text_field_dsr('wip_resource_transaction_id'); ?></td>
  						 </tr>
 							<?php

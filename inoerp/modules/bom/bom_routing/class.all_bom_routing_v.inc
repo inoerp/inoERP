@@ -39,29 +39,7 @@ class all_bom_routing_v extends bom_routing_line {
 		 "need_by_date",
 		 "buyer"
  ];
- public static $column_array = [
-		 "bom_routing_number",
-		 "line_number",
-		 "shipment_number",
-		 "bom_routing_status",
-		 "ship_to_org",
-		 "supplier_name",
-		 "supplier_site_name",
-		 "item_number",
-		 "need_by_date"
- ];
- public static $requiredField_array = [
- ];
- public static $addressField_array = [
- ];
- public static $dateField_array = [
-		 'need_by_date',
-		 'promise_date'
- ];
- public static $fields_inForm_notInDataBase = [
- ];
- public static $fields_inHeader_needsToBeInserted_inPOST = [
- ];
+
  public static $otherField_array = [
  ];
  public static $primary_column = "bom_routing_header_id";

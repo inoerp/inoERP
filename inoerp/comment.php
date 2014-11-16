@@ -7,7 +7,7 @@ $class_names = [
 <?php require_once("includes/functions/loader.inc"); ?>
 <?php
 //delete comment
-if (!empty($_GET['delete']) && $_GET['delete'] == 1) {
+if (!empty($_GET['delete']) && $_GET['delete'] == 1 && !empty($_GET['comment_id'])) {
  $comment_id = $_GET['comment_id'];
  $result = comment::delete($comment_id);
  echo '<div id="delete_comment">';

@@ -9,11 +9,13 @@ function setValFromSelectPage(wip_wo_header_id, item_id_m, item_number, item_des
 }
 
 setValFromSelectPage.prototype.setVal = function() {
- var wip_wo_header_id = this.wip_wo_header_id;
- $("#wip_wo_header_id").val(wip_wo_header_id);
+ if(this.wip_wo_header_id){
+ $("#wip_wo_header_id").val(this.wip_wo_header_id);
+ }
  var rowClass = '.' + localStorage.getItem("row_class");
  var itemType = localStorage.getItem("itemType");
  rowClass = rowClass.replace(/\s+/g, '.');
+ 
 
  var item_obj = [{id: 'item_id_m', data: this.item_id_m},
 	{id: 'item_number', data: this.item_number},
@@ -27,8 +29,9 @@ setValFromSelectPage.prototype.setVal = function() {
 	{id: 'component_description', data: this.item_description},
 	{id: 'component_uom', data: this.uom_id}
  ];
-
- if (itemType === 'header') {
+ 
+ if (localStorage.getItem("li_divId")) {
+  var li_divId = '#' + localStorage.getItem("li_divId");
 	$(item_obj).each(function(i, value) {
 	 if (value.data) {
 		var fieldId = '#' + value.id;
@@ -37,14 +40,15 @@ setValFromSelectPage.prototype.setVal = function() {
 	});
  } else {
 	$(component_obj).each(function(i, value) {
-	 if (value.data) {
-		var fieldClass = '.' + value.id;
+   	 if (value.data) {
+   		var fieldClass = '.' + value.id;
 		$('#content').find(rowClass).find(fieldClass).val(value.data);
 	 }
 	});
  }
  localStorage.removeItem("row_class");
  localStorage.removeItem("field_class");
+ localStorage.removeItem("li_divId");
  localStorage.removeItem("itemType");
 };
 
@@ -66,6 +70,12 @@ $(document).ready(function() {
  if (!($('.detail_number:first').val())) {
 	$('.detail_number:first').val('10');
  }
+ 
+ $('#quantity').on('blur', function(){
+    if($(this).val()){
+   $('#nettable_quantity').val($(this).val());
+  }
+ })
 
  //selecting Header Id
  $(".wip_wo_header_id.select_popup").on("click", function() {
@@ -73,22 +83,27 @@ $(document).ready(function() {
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //popu for selecting header item
- $('#content').on('click', '.select_item_number.select_popup_header', function() {
-	localStorage.setItem("itemType", 'header');
-	var openUrl = 'select.php?class_name=item';
-	if ($(this).siblings('.item_number').val()) {
-	 openUrl += '&item_number=' + $(this).siblings('.item_number').val();
-	}
-	void window.open(openUrl, '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
+// //popu for selecting header item
+// $('#content').on('click', '.select_item_number.select_popup_header', function() {
+//	localStorage.setItem("itemType", 'header');
+//	var openUrl = 'select.php?class_name=item';
+//	if ($(this).siblings('.item_number').val()) {
+//	 openUrl += '&item_number=' + $(this).siblings('.item_number').val();
+//	}
+//	void window.open(openUrl, '_blank',
+//					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+// });
 
 //start date & completion date calculation
  $('#content').on('change', '.start_date', function() {
 	var startDate = $('.start_date').first().val();
 	var str = startDate.split(/-/);
-	var newDate = (parseInt(str[2]) + (+($('#hidden_processing_lt').val())));
+  if($('#processing_lt').val()){
+   var processing_lt = +$('#processing_lt').val();
+  }else{
+    var processing_lt = 0;
+  }
+	var newDate = (parseInt(str[2]) + (processing_lt));
 	var cd = new Date(str[0], str[1], newDate);
 	var foramtedDate = cd.getFullYear() + '-' + cd.getMonth() + '-' + cd.getDate();
 	$('.completion_date').first().val(foramtedDate);
@@ -97,7 +112,12 @@ $(document).ready(function() {
  $('#content').on('change', '.completion_date', function() {
 	var completionDate = $('.completion_date').first().val();
 	var str = completionDate.split(/-/);
-	var newDate = (parseInt(str[2]) - (+($('#hidden_processing_lt').val())));
+	  if($('#processing_lt').val()){
+   var processing_lt = +$('#processing_lt').val();
+  }else{
+    var processing_lt = 0;
+  }
+	var newDate = (parseInt(str[2]) + (processing_lt));
 	var cd = new Date(str[0], str[1], newDate);
 	var foramtedDate = cd.getFullYear() + '-' + cd.getMonth() + '-' + cd.getDate();
 	$('.start_date').first().val(foramtedDate);
@@ -171,7 +191,7 @@ $(document).ready(function() {
 	addNewRow.add_new_row();
  });
 
- onClick_addDetailLine('tr.wip_wo_routing_detail0-0', 'tbody.form_data_detail_tbody', 2);
+ onClick_addDetailLine(2);
 
 
  //Get the wip_wo_id on refresh button click

@@ -5,7 +5,7 @@ class payment_term_discount extends dbObject {
  public static $table_name = "payment_term_discount";
  public static $parent_primary_column = "payment_term_id";
  public static $primary_column = "payment_term_discount_id";
- public static $key_column = 'payment_term_id';
+ public static $key_column = 'discount_percentage';
  public static $module = "gl";
 
  public $field_a = [

@@ -5,8 +5,14 @@ if (!empty($_GET['org_id']) && !empty($_GET['in_out_tax']) && ($_GET['find_all_t
  echo '<div id="json_tax_code_find_all">';
  if ($_GET['in_out_tax'] == 'IN') {
 	$all_tax_codes = mdm_tax_code::find_all_inTax_by_inv_org_id($_GET['org_id']);
+  if(!$all_tax_codes){
+   $all_tax_codes = mdm_tax_code::find_all_inTax_by_bu_org_id($_GET['org_id']);
+  }
  } elseif ($_GET['in_out_tax'] == 'OUT') {
 	$all_tax_codes = mdm_tax_code::find_all_outTax_by_inv_org_id($_GET['org_id']);
+    if(!$all_tax_codes){
+   $all_tax_codes = mdm_tax_code::find_all_outTax_by_bu_org_id($_GET['org_id']);
+  }
  }
  if (empty($all_tax_codes)) {
 	return false;

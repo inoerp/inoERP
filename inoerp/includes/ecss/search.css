@@ -8,3 +8,13 @@
     border-radius: 5px;
     box-shadow: 1px 5px 10px 5px #888;
 }
+
+#searchResultMessages [class^="flaticon-"]:before, 
+#searchResultMessages [class*=" flaticon-"]:before, 
+#searchResultMessages [class^="flaticon-"]:after, 
+#searchResultMessages [class*=" flaticon-"]:after {
+    font-family: Flaticon;
+    font-size: 25px;
+    font-style: normal;
+    color: rgba(57, 129, 35, 0.95);
+}

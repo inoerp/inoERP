@@ -13,7 +13,7 @@ $(document).ready(function() {
 //Get the calendar_id on find button click
  $('a.show.gl_calendar').click(function() {
 	var headerId = $('#option_line_code').val();
-	$(this).prop('href', modepath() + 'pageno=1&per_page=10&submit_search=Search&search_class=gl_calendar&option_line_code=' + headerId);
+	$(this).prop('href', modepath() + 'pageno=1&per_page=10&submit_search=Search&search_class_name=gl_calendar&option_line_code=' + headerId);
  });
 
  onClick_add_new_row('tr.calendar_line0', 'tbody.calendar_values', 2);

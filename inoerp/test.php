@@ -1,25 +1,341 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-set_time_limit(0);
+ ini_set('display_errors', 1);
+ error_reporting(E_ALL);
+ set_time_limit(0);
 
+ include_once("includes/basics/header_public.inc");
+?>
+<link href="<?php echo HOME_URL; ?>includes/ecss/getsvgimage.css" media="all" rel="stylesheet" type="text/css" />
+<?php
+//pa(hr_element_entry_header::find_by_employeeId(4));
+//pa(hr_element_entry_header::find_all_regular_lines(1));
+//pa(hr_element_entry_header::find_all_basic_regular_lines(1));
+////$db = new dbObject();
+////$prl = new sys_profile_line();
+////$ar_ti = new ar_transaction_interface();
+////$param =  ['bu_org_id' => array('5') ];
+////
+////$ar_ti->prg_import_ar_transaction(serialize($param));
+//  pa($session);
+//  pa($user);
+ $db = new dbObject();
+ $dbc = new dbc();
+ 
+// pa(sys_process_flow_action::find_by_parent_id('11'));
+ 
+ echo fp_urgent_card::find_current_cardList();
 
-//$conn = oci_connect('appsread', 'fr33be', 'COHREP');
-//if (!$conn) {
-//    $e = oci_error();
-//    trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
-//}else{
-// echo "<br>COnnected";
-//}
-
-include_once("includes/basics/header_public.inc");
-$db = new dbObject();
-
-//$ar_ti = new ar_transaction_interface();
-//$param =  ['bu_org_id' => array('5') ];
+// pa(get_dbColumns('fp_urgent_card'));
+// pa(get_dbColumns('sys_process_flow_action'));
+// pa(get_dbColumns('sys_process_flow_action_value'));
+// $row_data_component = new SplFixedArray(2001);
+// $row_data_component = [];
+// for($i=0; $i<=2000; $i++){
+//  $row_data_component[$i] = $i.'sdjsdjsdj_sdjidsj23';
+// }
+// pa($row_data_component);
+// 
+// echo '<br>Memory usage is '. memory_get_peak_usage();
+// $art = new ArrayObject($arr);
+// $it = $art->getIterator();
 //
-//$ar_ti->prg_import_ar_transaction(serialize($param));
-
+// while($it->valid()){
+//  
+// }
+// $bom_lines = new ArrayIterator($arr);
+// echo "<br> counts " . $bom_lines->count();
+// $position = 10;
+// while($bom_lines->valid()){
+//  echo '<br>'.$bom_lines->key() . ' is : ' .$bom_lines->current();
+//  $bom_lines->next();
+//  
+// }
+// 
+// $bom_lines->seek($position);
+// echo '<br>'.$bom_lines->key() . ' is : ' .$bom_lines->current();
+// $position++;
+// 
+//  $bom_lines->rewind();
+// echo '<br>'.$bom_lines->key() . ' is : ' .$bom_lines->current();
+// 
+//  $bom_lines->seek($position);
+// echo '<br>'.$bom_lines->key() . ' is : ' .$bom_lines->current();
+// 
+// $dirs = new DirectoryIterator('../files');
+//while($dirs->valid()){
+// echo "<br> key ". $dirs->key(). ' and file name is '. $dirs->getFilename(). '<br> File Info '. $dirs->getFileInfo() ;
+// $dirs->isDir();
+// echo "<br> is it directory : ";
+// if($dirs->isDir()){
+//  echo " yes";
+// }else{
+//  echo 'no';
+// }
+// $dirs->next();
+// echo "<br><br><br>";
+//}
+// execution_time();
+// echo "<br> counts old methd " . count($arr);
+// pa(inv_item_revision::find_currentRev_by_itemIdM_orgId('10092', '6'));
+// $offset = 10;
+// $date = new DateTime('2014-7-01');
+// $view_i = new view();
+// $view_i->view_id = 11;
+// $view_i->viewResultById();
+// pa($_SESSION);
+// $block = new block();
+// $block->findBy_id('57');
+// $class_containg_block = new $block->reference_table;
+// $method_name = $block->name . '_block';
+// $parameters['block_id'] = $block->block_id;
+// $block_content = call_user_func(array($class_containg_block, $method_name), $parameters);
+// echo $block_content;
+// echo block::show_block_content_by_BlockId('57');
+// echo $fav->show_currentUser_fav();
+//
+// pa( view::find_all_tables_and_views());
+// pa(view::find_columns_of_table_obj('subinventory'));
+// 
+// $poa = new po_all_v();
+// $data = $poa->ra_open_po_by_supplier();
+// $legend_p = [];
+// $chart_settings_p = [
+//  '_chart_name' => 'Purchasing Analysis',
+//  '_chart_width' => '550',
+//  '_chart_height' => '350',
+//  '_x_axis_text' => 'Supplier',
+//  '_chart_type' => 'clustered_bar',
+//  '_legend' => array('Quantity Onhand', 'Open Quantity'),
+// ];
+//// pa($data);
+// $key_name_setting = $key . '_settings';
+// $svgimage = new getsvgimage();
+// $svgimage->setProperty('_settings', $chart_settings_p);
+// $svgimage->setProperty('_data', $data);
+// $chart = $svgimage->draw_chart();
+// echo $chart;
+//
+//
+// $svgimg = new getsvgimage();
+// $result = $result1 = dbObject::find_by_sql('	SELECT onhand_v.item_number AS onhand_v__item_number,onhand_v.item_description AS onhand_v__item_description,onhand_v.product_line AS onhand_v__product_line,onhand_v.org_name AS onhand_v__org_name,onhand_v.standard_cost AS onhand_v__standard_cost,onhand_v.item_id_m AS onhand_v__item_id_m,onhand_v.org_id AS onhand_v__org_id,onhand_v.onhand AS onhand_v__onhand,onhand_v.onhand_value AS onhand_v__onhand_value,item.item_id AS item__item_id,item.org_id AS item__org_id,item.item_type AS item__item_type,item.item_id_m AS item__item_id_m FROM onhand_v, item WHERE onhand_v.item_id_m = item.item_id_m AND item.org_id = onhand_v.org_id GROUP BY onhand_v.item_id_m,item.org_id ORDER BY onhand_v.onhand_value DESC');
+//
+// $chart_label = str_replace('.', '__', 'onhand_v__item_number');
+// $chart_value = str_replace('.', '__', 'onhand_v__onhand');
+// $chart_name = 'Custom View Chart';
+// $chart_width = '450';
+// $chart_height = '500';
+// $chart_type = 'clustered_bar';
+// $legend_name = 'onhand_v__org_name';
+// $legend_name = str_replace('.', '__', $legend_name);
+//
+// $data = [];
+// $labels = [];
+// $legend = [];
+//
+//// echo "<br>legend $legend_name";
+//// echo "<br>chart_label $chart_label";
+//// echo "<br>chart_value $chart_value";
+// pa($result);
+//
+// foreach ($result as $obj) {
+//  if (!empty($legend_name)) {
+//   if (!in_array($obj->$legend_name, $legend)) {
+//    array_push($legend, $obj->$legend_name);
+//   }
+//  }
+// }
+//
+// foreach ($result as $obj) {
+//  if (!in_array($obj->$chart_label, $labels)) {
+//   array_push($labels, $obj->$chart_label);
+//   $row = [];
+//   $label = $row['label'] = $obj->$chart_label;
+//   $row['value'] = [];
+//
+//   foreach ($legend as $l_k => $l_v) {
+//    $isnull = true;
+//    foreach ($result1 as $data_obj) {
+//     if (($data_obj->$chart_label) == $label && ($data_obj->$legend_name == $l_v)) {
+//      $row['value'][] = $obj->$chart_value;
+//      $isnull = false;
+//      break;
+//     }
+//    }
+//    if ($isnull) {
+//     $row['value'][] = null;
+//    }
+//   }
+//
+//
+//   array_push($data, $row);
+//  }
+// }
+////
+// pa($legend);
+// pa($data);
+//
+// $svgimg->setProperty('_chart_name', $chart_name);
+// $svgimg->setProperty('_chart_width', $chart_width);
+// $svgimg->setProperty('_chart_height', $chart_height);
+// $svgimg->setProperty('_chart_type', $chart_type);
+// $svgimg->setProperty('_legend', $legend);
+// $svgimg->setProperty('_data', $data);
+//
+// $svg_chart = $svgimg->draw_chart();
+// echo '<div id="return_divId">' . $svg_chart . '</div>';
+//// 
+//$sql = "SELECT subinventory.subinventory AS subinventory__subinventory,subinventory.subinventory AS subinventory__subinventory,subinventory.subinventory_id AS subinventory__subinventory_id,subinventory.description AS subinventory__description,subinventory.locator_control AS subinventory__locator_control,subinventory.subinventory_id AS subinventory__subinventory_id,locator.locator_id AS locator__locator_id,locator.subinventory_id AS locator__subinventory_id,locator.locator AS locator__locator,locator.locator_structure AS locator__locator_structure,locator.locator_id AS locator__locator_id
+//FROM 
+//subinventory,locator";
+//$result = dbObject::find_by_sql($sql);
+//
+//$pagination = new pagination();
+//$pagination->data_result = $result;
+//$pagination->setProperty('_path', 'test');
+// echo $pagination->show_result_withPagination();
+// 
+// 
+// $ud = new user_activity_v();
+//  
+//  $subject_noof_char = 50;
+// $pageno = !empty($_GET['pageno']) ? $_GET['pageno'] : 1;
+// $per_page = !empty($_GET['per_page']) ? $_GET['per_page'] : 10;
+// $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
+// $comment_result = $ud->user_comments();
+// $total_count_c = count($comment_result);
+// $pagination_c = new pagination($pageno, $per_page, $total_count_c);
+// $pagination_c->setProperty('_path', 'form');
+// $pagination_c->setProperty('_query_string', $query_string);
+// $comment_string = '<div class="table_container">';
+//  if ($comment_result) {
+//  $con_count = 0;
+//  if (count($comment_result) > 0) {
+//   $comment_string .='<table id="comment_list" class="top_margin10 form_line_data_table"><thead> 
+//						 <tr class="headerBgColor">
+//							<th class="topics">Subject</th>
+//							<th class="created_by">Created By</th>
+//							<th class="post_date">Post Date</th>
+//						 </tr>
+//						</thead>';
+//   foreach ($comment_result as $recod_c_k => $recod_c) {
+//   $continue = false;
+////    if (($recod_c_k > ($pageno - 1) * $per_page) && ($recod_c_k <= (($pageno - 1) * $per_page) + $per_page)) {
+////     $continue = false;
+////    }
+//    if ($continue) {
+//     continue;
+//    }
+//    $even_odd = ($con_count % 2 == 0) ? 'even' : 'odd';
+//    $comment_string .= "<tr id=\"row_no$con_count\" class='new_row $even_odd'> "
+//      . " <td class='subject_summary'>";
+//    $comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&'
+//      . 'content_id=' . $recod_c->reference_id . '&content_type_id=' . $recod_c->content_type_id . '">';
+//    $comment_string .= substr($recod_c->comment, 0, $subject_noof_char);
+//    $comment_string .= ' </a>';
+//    $comment_string .= '</td>';
+//    $comment_string .= '<td class="created_by">';
+//    $comment_string .= $recod_c->username;
+//    $comment_string .= '</td><td class="post_date">';
+//    $comment_string .= $recod_c->creation_date;
+//    $comment_string .= '</td>';
+//    $comment_string .= '</tr>';
+//    $con_count++;
+//   }
+//
+//  }
+//
+//  $comment_string .='</table>';
+// }
+// $comment_string .='</div>';
+// $comment_string .= '<div id="pagination">';
+//
+//
+// $comment_string .= $pagination_c->show_pagination();
+// $comment_string .= '</div>';
+//
+//
+// echo $comment_string;
+// function next_monday($date_p) {
+//  $date = new DateTime($date_p);
+//  if ($date->format('D') == 'Mon') {
+//   return $date->format('Y-m-d');
+//  } else {
+//   $date = new DateTime("next monday $date_p");
+//   return $date->format('Y-m-d');
+//  }
+// }
+// echo "<br>Next Monday 2014-7-01 "; echo next_monday('2014-7-01');
+// echo "<br>Next Monday 2014-7-02 ";echo next_monday('2014-7-02');
+//  echo "<br>Next Monday 2014-7-03 "; echo next_monday('2014-7-03');
+// echo "<br>Next Monday 2014-7-04 ";echo next_monday('2014-7-04');
+//  echo "<br>Next Monday 2014-7-05 ";echo next_monday('2014-7-05');
+//  echo "<br>Next Monday 2014-7-06 "; echo next_monday('2014-7-06');
+// echo "<br>Next Monday 2014-7-07 ";echo next_monday('2014-7-07');
+// echo "<br>Next Monday 2014-7-08 "; echo next_monday('2014-7-08');
+// echo "<br>Next Monday 2014-7-09 ";echo next_monday('2014-7-09');
+// echo "<h1> All tables </h1>";
+// $table_sql = "   select table_name
+//from information_schema.tables
+//WHERE TABLE_SCHEMA= '".DB_NAME."'
+//AND table_type = 'BASE TABLE'
+// ";
+//
+// $prepare = $dbc->connection->prepare($table_sql);
+// try {
+//  $prepare->execute();
+//  $result_fetchAll = $prepare->fetchAll(PDO::FETCH_COLUMN);
+// } catch (Exception $e) {
+////    echo "<br>Error @dbObject @@ Line " . __LINE__ . $sql;
+//  return false;
+// }
+//
+// echo '<h2>Total no base tables in selected DB '.DB_NAME.' : </h2>' . count($result_fetchAll);
+// $include_tables = array_diff($result_fetchAll, convertToProd::$exclude_tables);
+// $include_tables = array_values($include_tables);
+// echo '<h2>Total no tables updated : </h2>' . count($include_tables);
+////pa($include_tables);
+//
+////
+// foreach ($include_tables as $key => $table_name) {
+//  $sql2 = " DELETE FROM  {$table_name}  ";
+//  $dbc->ddlexecute($sql2);
+//  $sql3 = "   ALTER TABLE {$table_name} auto_increment = 1 ";
+//  $dbc->ddlexecute($sql3);
+//  echo "<br> $table_name is updated";
+// }
+// $dbc->confirm();
+//  $table_sql = "   select table_name
+//   from information_schema.columns 
+//   WHERE TABLE_SCHEMA = 'inoerp' AND column_name = 'last_update_by' 
+// ";
+////
+// $result1 = dbObject::find_by_sql($table_sql);
+//
+////
+// foreach ($result1 as $obj) {
+//  $sql3 = "   ALTER TABLE {$obj->table_name} CHANGE last_update_by last_update_by INT(12) NOT NULL;";
+//  $dbc->ddlexecute($sql3);
+// }
+// $dbc->confirm();
+// pa($date);
+// echo $date->format('Y-m-d');
+// $date->add(new DateInterval('P'.$offset.'D'));
+// pa($date);
+// echo $date->format('Y-m-d');
+// echo "<br>Next monday" . date('Y-m-d', strtotime("next monday", strtotime('2014-7-07')));
+// pa(sd_so_line::find_by_orgId_ssd(6, '2014-7-01'));
+// pa(view::find_all_tables());
+//$sys_notification = new sys_notification();
+//  pa($sys_notification->find_openNotification_toUserId('34'));
+// pa(get_dbColumns('fp_forecast_over_consumption_v'));
+//pa(get_dbColumns('site_info'));
+//pa(get_dbColumns('po_quote_detail'));
+//  pa(get_dbColumns('po_rfq_line'));
+//  pa(get_dbColumns('po_rfq_requirement'));
+//  pa(get_dbColumns('hr_leave_entitlement_line'));
+//  pa(get_dbColumns('hr_approval_limit_assignment'));
+//  pa(get_dbColumns('hr_employee_termination'));
+//  pa(get_dbColumns('hr_element_entry_line'));
 //$inster_items_sql = " SELECT DISTINCT(item_id_m) FROM inv_abc_valuation_result ";
 //$inster_items_sql .= " WHERE inv_abc_valuation_id = '1' ";
 //$inster_items_result = $db->findBySql($inster_items_sql);
@@ -36,12 +352,59 @@ $db = new dbObject();
 //pa($item_id_m);
 //
 //echo ("'".implode("','", $item_id_m)."'");
-
 //pa(ar_customer_site::find_all_sitesOfCustomer(2));
 //$item = new item();
 //pa($item->findBy_item_id_m('10047'));
+//$user_names = [];
+//for($i=0 ; $i <=100000 ; $i++){
+// array_push($user_names, 'user_no_'.$i);
+//}
 //
-pa(get_dbColumns('inv_abc_assignment_header'));
+//$f= new inoform();
+//echo $f->select_field_from_array('user_name', $user_names, '');
+//
+//pa($_SESSION);
+//$prl = new sys_profile_line();
+//echo "---------------------------------------------------------------------------------------------------------------------------";
+//pa( $prl->find_default_profile('org_inv_name_default'));
+//pa( $prl->find_default_profile('org_bu_name_default'));
+//   if (empty($_SESSION['org_inv_name_defalut'])) {
+//    pa( $prl->find_default_profile('org_inv_name_defalut'));
+//   }
+//   if (empty($_SESSION['org_bu_name_defalut'])) {
+//    pa( $prl->find_default_profile('org_bu_name_defalut'));
+//   }
+//  
+//foreach(sys_profile_header::find_all() as $obj){
+//pa($prl->find_default_profile($obj->profile_name));
+//}
+//pa($prl->findAll_profile('org_inv_name_defalut'));
+//pa($prl->findBy_name_context('gl_currency_conversion_type'));
+//
+//pa(get_dbColumns('coa'));
+//pa(get_dbColumns('coa_combination'));
+//pa(get_dbColumns('inv_interorg_transfer_line'));
+//$var = 18;
+//$arr = [6 , 12, 13];
+//if (in_array($var, $arr) ) {
+// echo "<br>1.  in 6 , 12, 13";
+//}
+//
+//if ($var == 6 || $var ==  12 ||  $var ==  13) {
+// echo "<br>2.  in 6 , 12, 13";
+//}
+//$onhand = new onhand();
+//$onhand->item_id_m = 6;
+//pa($onhand->findBy_itemIdm_location());
+//
+//$onhand->org_id = 6;
+//pa($onhand->findBy_itemIdm_location());
+//
+//$onhand->subinventory_id = 2;
+//pa($onhand->findBy_itemIdm_location());
+//
+//$onhand->locator_id = 5;
+//pa($onhand->findBy_itemIdm_location());
 //pa(get_dbColumns('mdm_bank_line'));
 //pa(get_dbColumns('mdm_bank_account'));
 //pa(get_dbColumns('sys_process_flow_line'));
@@ -169,7 +532,7 @@ pa(get_dbColumns('inv_abc_assignment_header'));
 //echo "<h2>Final Code</h2>";
 //pa($lowLevel_code);
 
-execution_time();
+ execution_time();
 ////$dbc->ddlexecute($query1);
 //$query1 = " ALTER TABLE sd_so_line
 //add picked_quantity int(12) after line_quantity,
@@ -281,7 +644,7 @@ execution_time();
 ?>
 
 <?php
-global $dbc;
+ global $dbc;
 //$block_types = block::block_types();
 //  echo '<pre>';
 //  print_r($block_types);
@@ -312,15 +675,15 @@ global $dbc;
 
  <canvas id="small_can"></canvas>
  Graph Hereford<ul class="graph1">
-	<li></li>
-	<li></li>
-	<li></li>
-	<li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
  </ul>
 </div>
 
 <?php
 //execution_time();
-execution_time();
-include_template('footer.inc')
+ execution_time();
+ include_template('footer.inc')
 ?>

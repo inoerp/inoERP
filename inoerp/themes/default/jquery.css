@@ -31,7 +31,7 @@ ul.tabMain li.ui-state-active{
  border-bottom:1px solid #c3dde0;
 }
 
-ul.tabMain li a {
+ul.tabMain li a{
  text-decoration:none;
  color:#000;
  display:block;
@@ -93,6 +93,47 @@ background-color: rgba(120, 180,180, 0.2);
 
 .ui-autocomplete a:link {
  font: white;
+}
+
+
+.ui-tabs-vertical { width: 1050px; }
+  .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 220px; }
+  .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+  .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+  .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; border-right-width: 1px; }
+  .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 800px; }
+
+ul.tabVerticalMain li{
+ background:rgba(200,200,200, 0.8);
+}
+
+ul.tabVerticalMain li.ui-state-active{
+ background:rgba(210,248,12,0.2);
+}
+ .tabContainer_v .large_shadow_box{
+    background:rgba(210,248,12,0.2);
+}
+
+
+ul.tabVerticalMain {
+ float:left;
+ list-style:none;
+ width:100%;
+ border-radius:8px 0 -50px 0;
+ margin:0;
+ padding:0;
+}
+
+ul.tabVerticalMain li a {
+ text-decoration:none;
+ color:#000;
+ display:block;
+ font-size: 1.1em;
+ border:1px solid #fff;
+ outline:none;
+ padding:40px 20px;
+    margin: 10px 0;
+
 }
 
 

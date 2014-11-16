@@ -241,7 +241,7 @@ get_customer_detail_for_bu();
 	$(".tabsDetail").tabs();
  });
 
- onClick_addDetailLine('tr.so_detail0-0', 'tbody.form_data_detail_tbody', 4);
+ onClick_addDetailLine(4);
 
 //remove po lines
  $("#remove_row").click(function() {
@@ -299,8 +299,12 @@ get_customer_detail_for_bu();
 	var rowClass = '.' + $(this).closest('tr').prop('class');
 	var item_id_m = $(this).closest('.tabContainer').find(rowClass).find('.item_id_m').val();
 	var price_date = $(this).closest('.tabContainer').find(rowClass).find('.price_date').val();
-	var price_list_headerId = $(this).closest('#form_line').find(rowClass).find('.price_list_headerId').val();
-	getPriceDetails(rowClass, item_id_m, price_date, price_list_headerId);
+	var price_list_header_id = $(this).closest('#form_line').find(rowClass).find('.price_list_headerId').val();
+	getPriceDetails({
+ rowClass : rowClass, 
+ item_id_m : item_id_m, 
+ price_date : price_date, 
+ price_list_header_id : price_list_header_id});
  });
 
 //set the line price
@@ -346,18 +350,18 @@ get_customer_detail_for_bu();
  });
 
 //total header & tax amount
- $('#content').on('change', '.line_quantity, .unit_price, .line_price, .tax_amount', function() {
-	var total_tax = 0;
+ $('#content').on('blur', '.inv_line_quantity, .inv_unit_price, .inv_line_price', function() {
+  	var total_tax = 0;
 	$('#form_line').find('.tax_amount').each(function() {
-	 total_tax += (+$(this).val());
-	 $('#tax_amount').val(total_tax);
+	 total_tax += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
 	});
-
-	var header_amount = 0;
-	$('#form_line').find('.line_price').each(function() {
-	 header_amount += (+$(this).val());
-	 $('#header_amount').val(header_amount);
-	});
+  $('#tax_amount').val(total_tax);
+  
+  var header_amount = 0;
+  $('#form_line').find('.inv_line_price').each(function() {
+   header_amount += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+  });
+  $('#header_amount').val(header_amount);
  });
 
 });

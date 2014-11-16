@@ -9,7 +9,6 @@
    'item_id_m',
    'org_id',
    'alternate_bom',
-   'bom_revision',
    'effective_date',
    'common_bom_item_id_m',
    'common_bom_org_id',
@@ -52,7 +51,6 @@
   public $item_id_m;
   public $org_id;
   public $alternate_bom;
-  public $bom_revision;
   public $effective_date;
   public $common_bom_item_id_m;
   public $common_bom_org_id;
@@ -87,7 +85,7 @@
    $sql = "
 CREATE OR REPLACE VIEW bom_line_v
 (
-bom_header_id_h, item_id_m, org_id, alternate_bom, bom_revision, effective_date,common_bom_item_id_m,
+bom_header_id_h, item_id_m, org_id, alternate_bom, effective_date,common_bom_item_id_m,
 common_bom_org_id, h_created_by, h_creation_date,  h_last_update_by, h_last_update_date,
 bom_header_id, bom_line_id, bom_sequence, routing_sequence, component_item_id_m, usage_basis,
 usage_quantity, auto_request_material_cb, effective_start_date, effective_end_date, eco_number,
@@ -96,7 +94,7 @@ supply_locator, created_by, creation_date, last_update_by, last_update_date
 )
 AS
 SELECT 
-bh.bom_header_id, bh.item_id_m, bh.org_id, bh.alternate_bom, bh.bom_revision, bh.effective_date,bh.common_bom_item_id_m,
+bh.bom_header_id, bh.item_id_m, bh.org_id, bh.alternate_bom, bh.effective_date,bh.common_bom_item_id_m,
 bh.common_bom_org_id, bh.created_by, bh.creation_date,  bh.last_update_by, bh.last_update_date,
 bl.bom_header_id, bl.bom_line_id, bl.bom_sequence, bl.routing_sequence, bl.component_item_id_m, bl.usage_basis,
 bl.usage_quantity, bl.auto_request_material_cb, bl.effective_start_date, bl.effective_end_date, bl.eco_number,
@@ -146,7 +144,7 @@ AND (bh.common_bom_item_id_m IS NULL OR  bh.common_bom_item_id_m = 0)
 UNION
 
 SELECT
-bhc.bom_header_id, bhc.item_id_m, bhc.org_id, bhc.alternate_bom, bhc.bom_revision, bhc.effective_date,bhc.common_bom_item_id_m,
+bhc.bom_header_id, bhc.item_id_m, bhc.org_id, bhc.alternate_bom, bhc.effective_date,bhc.common_bom_item_id_m,
 bhc.common_bom_org_id, bhc.created_by, bhc.creation_date,  bhc.last_update_by, bhc.last_update_date,
 bl.bom_header_id, bl.bom_line_id, bl.bom_sequence, bl.routing_sequence, bl.component_item_id_m, bl.usage_basis,
 bl.usage_quantity, bl.auto_request_material_cb, bl.effective_start_date, bl.effective_end_date, bl.eco_number,
@@ -207,11 +205,69 @@ AND bhc.common_bom_item_id_m = bh.item_id_m
    return !empty($all_bom_lines) ? $all_bom_lines : false;
   }
 
+  public static function find_by_bomHeaderId_revNumber($bom_headerId, $rev_num = '') {
+   if (empty($rev_num)) {
+    $sql = " Select * from ";
+    $sql .= self::$table_name;
+    $sql .= " WHERE bom_header_id_h = '{$bom_headerId}'";
+   } else {
+    $sql = " SELECT bl.bom_line_id, 	bl.bom_header_id, 	bl.bom_sequence, 	bl.routing_sequence, 	
+     bl.component_item_id_m, 	bl.usage_basis, 	bl.usage_quantity, 	bl.auto_request_material_cb, 	
+     bl.effective_start_date, 	bl.effective_end_date, 	bl.eco_number, 	bl.eco_implemented_cb, 	
+     bl.planning_percentage, 	bl.yield, 	bl.include_in_cost_rollup_cb, 	bl.wip_supply_type, 	
+     bl.supply_sub_inventory, 	bl.supply_locator, 	bl.ef_id, 	bl.created_by, 	bl.creation_date, 	
+     bl.last_update_by, 	bl.last_update_date
+
+     FROM      bom_line_v bl, 
+       inv_item_revision iir
+     WHERE  (bl.effective_end_date IS NULL OR bl.effective_end_date > iir.effective_start_date ) 
+     AND bl.bom_header_id = '{$bom_headerId}' 
+     AND iir.revision_name = '{$rev_num}'
+     AND bl.item_id_m = iir.item_id_m
+     AND bl.org_id = iir.org_id
+     AND  bl.effective_start_date <= iir.effective_end_date
+      ORDER BY bl.bom_sequence ASC";
+   }
+   $all_bom_lines = self::find_by_sql($sql);
+   return !empty($all_bom_lines) ? $all_bom_lines : false;
+  }
+
   public static function find_by_itemIdM_OrgId($item_id_m, $org_id) {
    $sql = "SELECT * FROM " . self::$table_name . " "
      . " where item_id_m = '{$item_id_m}' "
      . " AND org_id = '{$org_id}' ";
    $result = self::find_by_sql($sql);
+   return !empty($result) ? $result : false;
+  }
+
+  public static function find_by_itemIdM_OrgId_revNumber($item_id_m, $org_id, $rev_number = '') {
+   if (empty($rev_number)) {
+    $sql = "SELECT * FROM " . self::$table_name . " "
+      . " where item_id_m = '{$item_id_m}' "
+      . " AND org_id = '{$org_id}' AND bl.effective_end_date IS NULL ";
+   } else {
+    $sql = " SELECT bl.bom_line_id, 	bl.bom_header_id, 	bl.bom_sequence, 	bl.routing_sequence, 	
+     bl.component_item_id_m, 	bl.usage_basis, 	bl.usage_quantity, 	bl.auto_request_material_cb, 	
+     bl.effective_start_date, 	bl.effective_end_date, 	bl.eco_number, 	bl.eco_implemented_cb, 	
+     bl.planning_percentage, 	bl.yield, 	bl.include_in_cost_rollup_cb, 	bl.wip_supply_type, 	
+     bl.supply_sub_inventory, 	bl.supply_locator, 		bl.created_by, 	bl.creation_date, 	
+     bl.last_update_by, 	bl.last_update_date
+
+     FROM      bom_line_v bl, 
+       inv_item_revision iir
+     WHERE  (bl.effective_end_date IS NULL OR bl.effective_end_date > iir.effective_start_date ) 
+     AND bl.item_id_m = '{$item_id_m}' 
+     AND iir.revision_name = '{$rev_number}'
+     AND bl.item_id_m = iir.item_id_m
+     AND bl.org_id = iir.org_id
+     AND bl.org_id = '{$org_id}'
+     AND  bl.effective_start_date <= iir.effective_end_date
+    ORDER BY bl.bom_sequence ASC";
+   }
+
+   $result = self::find_by_sql($sql);
+
+
    return !empty($result) ? $result : false;
   }
 

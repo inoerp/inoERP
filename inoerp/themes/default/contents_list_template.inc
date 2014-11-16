@@ -1,9 +1,9 @@
 <div id="all_contents">
  <div id="content_top"></div>
- <div id="content_left"></div>
- <div id="content_right">
+  <div id="content_right">
 	<div id="content_right_left">
 	 <div id="content">
+    <div id="content_left_top"></div><div id="content_right_top"></div>
 		<div id="main">
 		 <div id="structure">
 			<div id="contents">
@@ -32,7 +32,7 @@
 			 }
 
 			 $content->content_type_id = $content_type->content_type_id;
-//			 $content->category_id = $category_id;
+			 $content->category_id = !empty($category_id) ? $category_id : null;
 			 if ($content->content_type_id == 47 || $content->content_type_id == 45) {
 				$content_lists = $content->showSummaryList_byConteTypeCategory($pageno, $per_page, $query_string);
 			 } else {
@@ -47,9 +47,15 @@
 			</div>
 		 </div>
 		</div>
-	 </div>
+    <div id="content_content_bottom">
+	 <div id="content_left_bottom"></div><div id="content_right_bottom"></div>
+   </div> 
+   </div>
 	</div>
-	<div id="content_right_right"></div>
+   <div id="content_right_right">
+    <div id="content_left"></div>
+   </div>
+  
  </div>
  <div id="content_bottom"></div> 
 </div>

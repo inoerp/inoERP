@@ -2,7 +2,7 @@
 
 class fp_minmax_header extends dbObject {
 
- protected static $table_name = "fp_minmax_header";
+ public static $table_name = "fp_minmax_header";
  public static $primary_column = "fp_minmax_header_id";
  public static $dependent_classes = ['fp_minmax_line'];
  public static $key_column = 'plan_name';

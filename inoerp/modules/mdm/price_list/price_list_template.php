@@ -54,7 +54,9 @@
 							 echo $f->checkBox_field('allow_mutli_currency_cb', $$class->allow_mutli_currency_cb);
 							 ?>
 							</li>
-							<li><label>Conversion Type : </label><?php $f->text_field_d('currency_conversion_type'); ?>	</li>
+							<li><label>Conversion Type : </label>
+               <?php echo $f->select_field_from_object('currency_conversion_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->currency_conversion_type, 'currency_conversion_type', '', 1, $readonly); ?>
+            	</li>
 						 </ul>
 						</div>
 					 </div>
@@ -100,8 +102,9 @@
  								</ul>
  							 </td>
  							 <td><?php form::number_field_wid2sr('mdm_price_list_line_id'); ?></td>
- 							 <td><?php form::text_field_wid2sm('line_type') ?></td>
- 							 <td><?php form::text_field_wid2('item_number', 'select_item_number'); ?>
+               <td><?php echo $f->select_field_from_array('line_type', mdm_price_list_line::$line_type_a, $$class_second->line_type); ?></td>
+               <td><?php echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
+                form::text_field_wid2('item_number', 'select_item_number'); ?>
  								<img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number_only select_popup"></td>
  							 <td><?php form::text_field_wid2('item_description'); ?></td>
  							 <td><?php

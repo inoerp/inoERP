@@ -182,7 +182,7 @@ ob_end_clean();
 
 // send the captured HTML from the output buffer to the mPDF class for processing
 $mpdf->WriteHTML($html);
-download_send_headers("po_print" . date("Y-m-d") . ".pdf");
+download_send_headers("po_print" . date("Y-m-d") . ".pdf", 'pdf_format');
 $mpdf->Output();
 exit;
 ?>

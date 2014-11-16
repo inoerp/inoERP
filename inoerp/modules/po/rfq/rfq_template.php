@@ -324,7 +324,7 @@
               <th>Unit Price</th>
               <th>Target Price</th>
               <th>Line Description</th>
-              <th>Requirements</th>
+              <!--<th>Requirements</th>-->
              </tr>
             </thead>
             <tbody class="form_data_line_tbody">
@@ -340,13 +340,13 @@
                 <td><?php echo $f->number_field('unit_price', $$class_second->unit_price); ?></td>
                 <td><?php echo $f->number_field('target_price', $$class_second->target_price); ?></td>
                 <td><?php $f->text_field_wid2l('line_description'); ?></td>
-                <td><?php
-                 $stmt = '<a href="';
-                 $stmt .= HOME_URL . "form.php?class_name=sys_hold_reference&mode=9&reference_table=po_rfq_line&reference_id=" . $$class_second->po_rfq_line_id;
-                 $stmt .= '">Requirements</a>';
-                 echo $stmt;
+<!--                <td><?php
+//                 $stmt = '<a href="';
+//                 $stmt .= HOME_URL . "form.php?class_name=sys_hold_reference&mode=9&reference_table=po_rfq_line&reference_id=" . $$class_second->po_rfq_line_id;
+//                 $stmt .= '">Requirements</a>';
+//                 echo $stmt;
                  ?>
-                </td>
+                </td>-->
                </tr>
                <?php
                $count = $count + 1;

@@ -32,12 +32,8 @@
 							<a name="show" href="?ar_customer_id=" class="show ar_customer_id">
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
-						 <li><label>Customer Number : </label>
-							<?php form::number_field_dm('customer_number'); ?>
-							<a name="show" href="customer.php?customer_number=" class="show customer_number">
-							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-						 </li>               
-						 <li><label>Customer Name : </label>
+						 <li><label>Customer Number : </label> <?php form::number_field_dm('customer_number'); ?>						 </li>               
+						 <li><label>Customer Name : <img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete supplier_name clickable"></label>
 							<?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', 1, $readonly1 ) ; ?>
 						 </li>
 						 <li><label>Customer Type : </label>

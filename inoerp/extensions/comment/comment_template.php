@@ -1,5 +1,6 @@
 <div id="commentForm">
  <script src="<?php echo HOME_URL . 'extensions/comment/' ?>comment.js"></script> 
+ <div id="commentForm_witoutjs">
  <div id="output">
  </div>
  <!--    START OF FORM HEADER-->
@@ -19,8 +20,8 @@
 		<div id="comment_subject" >
 		 <ul class='inRow asperWidth'><li>
 			 <label>Subject : </label>
-			 <input type="text"  name="subject" value="<?php echo htmlentities($comment->subject); ?>" 
-							size="25"  maxlength="150" class="subject" placeholder="Write a brief subject on the comment."> 
+			 <input type="text"  name="subject" value="<?php echo ($comment->subject); ?>" 
+							size="40"  maxlength="120" class="subject" placeholder="Write a brief subject on the comment."> 
 			</li>
 			<li>
 			 <label>Name on comment : </label>
@@ -49,7 +50,7 @@
 		<div id="uploaded_file_details">		</div>
 		 <?php echo file::attachment_statement($file); ?>
 	 </form>
-
+</div>
  <!--END OF FORM HEADER-->  
 </div>
 <!--   end of structure-->

@@ -31,12 +31,9 @@
 							<li><label>Access Level : </label>
 							 <?php echo $f->select_field_from_array('access_level', sys_profile_header::$access_level_a, $$class->access_level); ?>
 							</li>
-							<li><label>Profile Name : </label>
-							 <?php $f->text_field_d('profile_name'); ?>
-							</li>
-							<li><label>Description : </label>
-							 <?php $f->text_field_dm('description'); ?>
-							</li>
+							<li><label>Profile Name : </label> <?php $f->text_field_dlm('profile_name'); ?> </li>
+              <li><label>Class Name : </label> <?php $f->text_field_dlm('class_name'); ?> </li>
+							<li><label>Description : </label> <?php $f->text_field_d('description'); ?></li>
 							<li><label>Profile Level : </label>
 							 <?php echo $f->select_field_from_array('profile_level', sys_profile_header::$profile_level_a, $$class->profile_level, 'profile_level'); ?>
 							 <a name="show" class="show sys_profile_header_id"> <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
@@ -130,13 +127,13 @@
 
 								 case 'USER' :
 									echo '<td>';
-									echo $f->text_field_wid2m('level_name') . '</td>';
+                  echo $f->select_field_from_object('level_name', user::find_all(), 'user_id', 'username', $$class_second->level_name, '', '', 1) . "</td><td>";
 									break;
 								}
 								if (empty($line_values)) {
-								 echo $f->text_field_wid2m('level_value') . '</td>';
+								 echo $f->text_field_wid2('level_value') . '</td>';
 								} else {
-								 echo $f->select_field_from_object('level_value', $line_values, $line_key, $line_desc, $$class_second->level_value, '', '', 1) . "</td>";
+								 echo $f->select_field_from_object('level_value', $line_values, $line_key, $line_desc, $$class_second->level_value, '', '', '') . "</td>";
 								}
 								?>
  							</tr>

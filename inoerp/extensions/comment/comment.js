@@ -56,9 +56,10 @@ function deleteComment() {
  });
 }
 
-function updateComment(comment_id, ulclass) {
+function updateComment(comment_id, ulId) {
  var homeUrl = $('#home_url').val();
   var savePath = homeUrl + 'comment.php';
+  
  $('#loading').show();
  $.ajax({
 	url: savePath,
@@ -67,10 +68,11 @@ function updateComment(comment_id, ulclass) {
 	type: 'get'
  }).done(function(result) {
 	var div = $(result).filter('div#commentForm').html();
-	$(ulclass).append(div);
+  var ulId_h = '#'+ulId;
+  	$('#content').find(ulId_h).find('li.line_li').append(div);
 	$('#loading').hide();
- }).fail(function() {
-	alert("Comment update failed");
+ }).fail(function(e) {
+ 	alert("Comment update failed ");
 	$('#loading').hide();
  });
 }
@@ -99,10 +101,11 @@ $(document).ready(function() {
 
 //Update the comment form
  $("#content").on('click', '.update_button', function(e) {
+  e.preventDefault();
 	var comment_id = $(this).val();
-	var ulclass = $(this).closest(".commentRecord").find(".line_li");
-	if (confirm("Are you sure?")) {
-	 updateComment(comment_id, ulclass);
+	var ulId = $(this).closest(".commentRecord").prop('id');
+  	if (confirm("Are you sure?")) {
+	 updateComment(comment_id, ulId);
 	}
 	e.stopPropagation();
  });
@@ -125,7 +128,7 @@ $(document).ready(function() {
 	var headerData = $(this).closest('form').serializeArray();
 	var homeUrl = $('#home_url').val();
 	var savePath = homeUrl + 'form.php?class_name=comment';
-	saveHeader(savePath, headerData, '#comment_id', '', true, 'comment');
+	saveHeader(savePath, headerData, '#comment_id', '','', true, 'comment');
 	$(".comment_error").replaceWith('<input type="button" value="Reload page" onclick="location.reload();">');
  });
 

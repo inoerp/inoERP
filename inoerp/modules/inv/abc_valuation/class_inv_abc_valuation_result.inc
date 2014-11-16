@@ -8,48 +8,47 @@ class inv_abc_valuation_result extends dbObject {
  public static $key_column = 'item_id_m';
  public static $module = "inv";
  public $field_a = [
-		 'seq_number',
-		 'inv_abc_valuation_result_id',
-		 'inv_abc_valuation_id',
-		 'item_id_m',
-		 'quantity',
-		 'value',
-		 'cum_quantity',
-		 'cum_value',
-		 'created_by',
-		 'creation_date',
-		 'last_update_by',
-		 'last_update_date',
+   'seq_number',
+   'inv_abc_valuation_result_id',
+   'inv_abc_valuation_id',
+   'item_id_m',
+   'quantity',
+   'value',
+   'cum_quantity',
+   'cum_value',
+   'created_by',
+   'creation_date',
+   'last_update_by',
+   'last_update_date',
  ];
  public $initial_search = [
-		 'inv_abc_valuation_result_id',
-		 'inv_abc_valuation_id',
-		 'seq_number',
-		 'item_id_m',
+   'inv_abc_valuation_result_id',
+   'inv_abc_valuation_id',
+   'seq_number',
+   'item_id_m',
  ];
  public $column = [
-		 'inv_abc_valuation_result_id',
-		 'inv_abc_valuation_id',
-		 'seq_number',
-		 'item_id_m',
-		 'item_number',
-		 'item_description',
-		 		 'cum_quantity',
-		 'cum_value',
-		 'quantity',
-		 'value',
+   'inv_abc_valuation_result_id',
+   'inv_abc_valuation_id',
+   'seq_number',
+   'item_id_m',
+   'item_number',
+   'item_description',
+   'cum_quantity',
+   'cum_value',
+   'quantity',
+   'value',
  ];
  public $requiredField = [
-		 'inv_abc_valuation_id',
-		 'seq_number',
-		 'item_id_m',
+   'inv_abc_valuation_id',
+   'seq_number',
+   'item_id_m',
  ];
  public $fields_inForm_notInDataBase = [
-		 'item_number',
-		 'item_description'
+   'item_number',
+   'item_description'
  ];
  public $search = [
-
  ];
  public $pageTitle = " ABC Valuation Result "; //page Title
  public $inv_abc_valuation_result_id;
@@ -68,51 +67,47 @@ class inv_abc_valuation_result extends dbObject {
  public $item_description;
 
  public function _before_showing() {
-	if (!empty($this->legal_org_id)) {
+  if (!empty($this->legal_org_id)) {
 //	 echo "<br> legal org ". $this->legal_org_id;
-	 $legal_org = legal::find_by_orgId($this->legal_org_id);
+   $legal_org = legal::find_by_orgId($this->legal_org_id);
 //	 pa($legal_org);
-	 $ledger_id = $legal_org->ledger_id;
-	 $ledger = new gl_ledger();
-	 $ledger_i = $ledger->findBy_id($ledger_id);
-	 $this->ledger = $ledger_i->ledger;
-	}
+   $ledger_id = $legal_org->ledger_id;
+   $ledger = new gl_ledger();
+   $ledger_i = $ledger->findBy_id($ledger_id);
+   $this->ledger = $ledger_i->ledger;
+  }
  }
 
  public static function find_by_orgId($org_id) {
-	global $db;
-	$sql = "SELECT * FROM " . self::$table_name . " 
+  $sql = "SELECT * FROM " . self::$table_name . " 
       where org_id={$org_id} LIMIT 1";
-	$result_array = self::find_by_sql($sql);
-	return !empty($result_array) ? array_shift($result_array) : false;
+  $result_array = self::find_by_sql($sql);
+  return !empty($result_array) ? array_shift($result_array) : false;
  }
 
- public function findBy_orgId() {
-	global $db;
-	$sql = " SELECT * FROM " . self::$table_name;
-	$sql .= " WHERE org_id= :org_id ";
-	$sql .= " LIMIT 1 ";
-	$param_a = ['org_id'];
-	$value_a = ['org_id' => $this->org_id];
-	$result = $db->findBy_sql($sql, $param_a, $value_a);
-	return !empty($result) ? array_pop($result) : false;
+ public static function find_by_parentId_seqNumber($parent_id, $seq_number) {
+  $sql = "SELECT * FROM " . self::$table_name . " 
+      where inv_abc_valuation_id= '{$parent_id}' AND seq_number = '{$seq_number}' LIMIT 1";
+  $result_array = self::find_by_sql($sql);
+  return !empty($result_array) ? array_pop($result_array) : false;
  }
 
- public static function search_add_extra_fields(&$arr) {
-	$item = new item();
-	if (!(is_array($arr))) {
-	 return false;
-	}
-	foreach ($arr as &$obj) {
-	 $primary_column = self::$primary_column;
-	 if (!empty($obj->$primary_column)) {
-		$item_i = $item->findBy_item_id_m($obj->item_id_m);
-		if(!empty($item_i)){
-		$obj->item_number = $item_i->item_number;
-		$obj->item_description = $item_i->item_description;
-		}
-	 }
-	}
+ public static function find_by_parentId_cumValue($parent_id, $cum_value) {
+  $sql = "SELECT * FROM " . self::$table_name . " 
+      where inv_abc_valuation_id= '{$parent_id}' AND cum_value >= '{$cum_value}' "
+      . " ORDER BY  cum_value ASC LIMIT 1";
+  $result_array = self::find_by_sql($sql);
+  return !empty($result_array) ? array_pop($result_array) : false;
+ }
+
+ public function findBy_parentId_SeqNumberLimit($seq_number_l = '', $seq_number_u, $parent_id = '') {
+  $parent_id = empty($parent_id) ? $this->inv_abc_valuation_id : $parent_id;
+  $sql = " SELECT * FROM " . self::$table_name;
+  $sql .= " WHERE  inv_abc_valuation_id = '{$parent_id}' ";
+  $sql .= " AND  seq_number > '{$seq_number_l}' ";
+  $sql .= " AND  seq_number <= '{$seq_number_u}' ";
+  $result = $this->findBySql($sql);
+  return !empty($result) ? $result : false;
  }
 
 }

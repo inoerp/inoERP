@@ -22,7 +22,7 @@ if (!empty($_GET['class_name'])) {
 	 $search_result_statement .='<tr>';
 	 $search_result_statement .='<td>' . $record->name . '</td>';
 	 $search_result_statement .='<td>' . $record->description . '</td>';
-	 $search_result_statement .='<td>' . $record->module_id . '</td>';
+	 $search_result_statement .='<td>' . $record->module_code . '</td>';
 	 $search_result_statement .='<td><a href="' . HOME_URL . $record->path_link . '">' . HOME_URL . $record->path_link . '</a></td>';
 	 $search_result_statement .='</tr>';
 	}

@@ -27,7 +27,7 @@ $(document).ready(function() {
 //Get the tax_code_id on find button click
  $('a.show.mdm_tax_code').click(function() {
 	var headerId = $('#org_id').val();
-	$(this).prop('href', modepath() + 'pageno=1&per_page=10&submit_search=Search&search_class=mdm_tax_code&org_id=' + headerId);
+	$(this).prop('href', modepath() + 'pageno=1&per_page=10&submit_search=Search&search_class_name=mdm_tax_code&org_id=' + headerId);
  });
 
  onClick_add_new_row('tr.tax_code_line0', 'tbody.tax_code_values', 3);

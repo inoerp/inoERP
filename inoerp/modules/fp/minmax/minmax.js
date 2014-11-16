@@ -41,5 +41,6 @@ $(document).ready(function() {
  classSave.headerClassName = 'fp_minmax_header';
  classSave.saveMain();
 
+
 });
 

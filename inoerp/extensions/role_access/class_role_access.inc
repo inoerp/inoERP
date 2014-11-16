@@ -76,6 +76,11 @@ class role_access extends dbObject {
 		 $ra_a[$role_access->obj_class_name] = $role_access->access_level;
 		}
 	 }
+   $ra_a['user_dashboard_v'] = 2;
+   $ra_a['user_dashboard_config'] = 9;
+   $ra_a['user_favourite'] = 2;
+   $ra_a['sys_notification_user'] = 2;
+   $ra_a['user_activity_v'] = 2;
 	 $_SESSION['role_access'] = $ra_a;
 	 $this->assign_role_accesss_paths();
 	}
@@ -85,7 +90,7 @@ class role_access extends dbObject {
 	if (empty($_SESSION['allowed_path_ids']) &&
 					!empty($_SESSION['user_id']) &&
 					(in_array('ADMIN', $_SESSION['user_roles']))) {
-	 $paths = path::find_all();
+	 $paths = path::find_all('display_weight');
 	 $allowed_path_ids = [];
 	 foreach ($paths as $path) {
 		$allowed_path_ids[] = $path->path_id;

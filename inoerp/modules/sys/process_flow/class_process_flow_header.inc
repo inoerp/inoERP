@@ -1,70 +1,110 @@
 <?php
 
-class sys_process_flow_header extends dbObject {
+ class sys_process_flow_header extends dbObject {
 
- public static $table_name = "sys_process_flow_header";
- public static $primary_column = "sys_process_flow_header_id";
- public static $dependent_classes = ['sys_process_flow_line'];
- public static $key_column = "process_flow";
- public static $module = "sys";
- public static $type_a = [
-		 'APPROVAL' => 'Approval',
-		 'DOCUMENT' => 'Document'
- ];
- public $field_a = [
-		 'sys_process_flow_header_id',
-		 'process_flow',
-		 'module_name',
-		 'status',
-		 'type',
-		 'description',
-		 'created_by',
-		 'creation_date',
-		 'last_update_by',
-		 'last_update_date',
- ];
- public $initial_search = [
-		 'sys_process_flow_header_id',
-		 'process_flow',
-		 'module_name'
- ];
- public $column = [
-		 'sys_process_flow_header_id',
-		 'process_flow',
-		 'module_name',
-		 'level',
-		 'description'
- ];
- public $requiredField = [
-		 'process_flow',
-		 'module_name'
- ];
- public $search = [
-		 '_show_update_path' => 1,
-		 '_show_view_path' => 1,
- ];
- 
- public $pageTitle = " Process Flow Header "; 
- public $sys_process_flow_header_id;
- public $process_flow;
- public $type;
- public $module_name;
- public $status;
- public $description;
- public $created_by;
- public $creation_date;
- public $last_update_by;
- public $last_update_date;
+  public static $table_name = "sys_process_flow_header";
+  public static $primary_column = "sys_process_flow_header_id";
+  public static $dependent_classes = ['sys_process_flow_line' ,'sys_process_flow_action'];
+  public static $key_column = "process_flow";
+  public static $module = "sys";
+  public static $type_a = [
+   'APPROVAL' => 'Approval',
+   'DOCUMENT' => 'Document'
+  ];
+  public $field_a = [
+   'sys_process_flow_header_id',
+   'process_flow',
+   'module_name',
+   'status',
+   'type',
+   'description',
+   'created_by',
+   'creation_date',
+   'last_update_by',
+   'last_update_date',
+  ];
+  public $initial_search = [
+   'sys_process_flow_header_id',
+   'process_flow',
+   'module_name'
+  ];
 
+  public $requiredField = [
+   'process_flow',
+   'module_name'
+  ];
+  public $search = [
+   '_show_update_path' => 1,
+   '_show_view_path' => 1,
+  ];
+  public $pageTitle = " Process Flow Header ";
+  public $sys_process_flow_header_id;
+  public $process_flow;
+  public $type;
+  public $module_name;
+  public $status;
+  public $description;
+  public $created_by;
+  public $creation_date;
+  public $last_update_by;
+  public $last_update_date;
 
- Public static function validation_types() {
-	$header = option_header::find_by_keyColumn('SYS_VALIDATION_TYPE');
-	$option_line = new option_line();
-	$lines = $option_line->findBy_parentId($header->option_header_id);
-	return $lines;
+  Public static function validation_types() {
+   $header = option_header::find_by_keyColumn('SYS_VALIDATION_TYPE');
+   $option_line = new option_line();
+   $lines = $option_line->findBy_parentId($header->option_header_id);
+   return $lines;
+  }
+
+//  Public static function processFlowActions_by_headerId($header_id) {
+//  return self::find_by_parent_id($header_id, 'seq_number');
+//  }
+
+  Public static function processFlowActions_by_headerId($header_id) {
+   $sql = " SELECT line_name, sys_process_flow_line_id 
+     FROM sys_process_flow_header fh,
+     sys_process_flow_line fl
+     
+    WHERE fh.sys_process_flow_header_id = fl.sys_process_flow_header_id
+    AND fh.sys_process_flow_header_id = '{$header_id}'
+     
+ORDER BY seq_number ASC
+";
+   $result = self::find_by_sql($sql);
+   return !empty($result) ? $result : false;
+  }
+
+  Public static function processFlowDiagram($process_flow_line_obj = '', $header_id = '') {
+   if (empty($process_flow_line_obj) && !empty($header_id)) {
+    $process_flow_line_obj = sys_process_flow_line::find_by_parent_id($header_id, 'seq_number', 'ASC');
+   }
+
+   if (empty($process_flow_line_obj)) {
+    return false;
+   }
+   $diagram_stmt = '<div class="process_flow_diagram">';
+   $diagram_stmt .= '<ul class="process_flow_diagram_list">';
+   $process_flow_line_obj_ai = new ArrayIterator($process_flow_line_obj);
+   while ($process_flow_line_obj_ai->valid()) {
+    $process_count = $process_flow_line_obj_ai->key() + 1;
+    $diagram_stmt .= '<li class="process' . $process_flow_line_obj_ai->current()->line_name . ' '
+      . $process_flow_line_obj_ai->current()->line_type . ' "><bdi><label>'
+      .$process_count. '. ' . $process_flow_line_obj_ai->current()->line_name . '</label>';
+    $diagram_stmt .= $process_flow_line_obj_ai->current()->description;
+    $diagram_stmt .= '</bdi></li>';
+    $process_flow_line_obj_ai->next();
+    if ($process_flow_line_obj_ai->valid()) {
+     $diagram_stmt .= '<li class="flow_coneector"></li>';
+    }
+   }
+
+   $diagram_stmt .= '</ul>';
+   $diagram_stmt .= '</div>';
+
+   return !empty($diagram_stmt) ? $diagram_stmt : false;
+  }
+
  }
-
-}
 
 //end of path class
 ?>

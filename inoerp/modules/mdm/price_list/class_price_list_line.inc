@@ -7,6 +7,10 @@ class mdm_price_list_line extends dbObject {
  public static $parent_primary_column = "mdm_price_list_header_id";
  public static $key_column = "line_type";
  public static $module = "mdm";
+ public static $line_type_a = [
+  'ITEM' => 'Item',
+  'DEFAULT' => 'Default',
+  'CATEGORY' => 'Catefory'];
  public $field_a = [
 		 'mdm_price_list_line_id',
 		 'mdm_price_list_header_id',
@@ -90,7 +94,7 @@ class mdm_price_list_line extends dbObject {
  }
 
  public function _before_save() {
-	if (!(empty($this->item_number))) {
+	if (!(empty($this->item_number)) && empty($this->item_id_m)) {
 	 $item_s = item::find_by_itemNumber_fromMasterOrg($this->item_number);
 	 $this->item_id_m = $item_s->item_id_m;
 	}

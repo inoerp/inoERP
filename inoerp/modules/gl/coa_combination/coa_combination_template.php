@@ -17,12 +17,9 @@
 			 <table class="form_table">
 				<tr>
 				 <td>
-					<label><a href="select.php?class_name=<?php echo $class; ?>" class="select popup">
-								<img src="<?php echo HOME_URL; ?>themes/images/serach.png"/></a>
-					 COA Id : </label>
-					<?php echo form::number_field_ds('coa_id'); ?>
-					<a name="show" class="show coa_id_show">
-					 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+					<label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="coa_id select_popup clickable">
+					 COA Id : </label> <?php echo form::number_field_ds('coa_id'); ?>
+					<a name="show" class="show coa_id_show"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 				 </td>
 				 <td>	<label>Structure : </label>
 					<?php echo form::select_field_from_object('coa_structure_id', coa::coa_structures(), 'option_header_id', 'option_type', $$class_second->coa_structure_id, 'coa_structure_id', $readonly); ?>

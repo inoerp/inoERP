@@ -18,7 +18,7 @@
 				<div class="large_shadow_box">
 				 <ul class="column five_column"> 
 					<li><label><img class="wip_accounting_group select_popup" src="<?php echo HOME_URL; ?>themes/images/serach.png">Account Group Id :</label> 
-					 <?php echo form::text_field('wip_accounting_group_id', $wip_accounting_group->wip_accounting_group_id, '10', '', '', 'System number', 'wip_accounting_group_id', $readonly); ?>
+					 <?php $f->text_field_dsr('wip_accounting_group_id'); ?>
 					 <a name="show" href="wip_accounting_group.php?wip_accounting_group_id=" class="show"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 					</li>
 					<li><label>Organization :</label>

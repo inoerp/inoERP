@@ -54,7 +54,7 @@
 				<div id="tabsLine">
          <ul class="tabMain">
           <li><a href="#tabsLine-1">Basic</a></li>
-          <li><a href="#tabsLine-2">Future</a></li>
+          <li><a href="#tabsLine-2">Messages</a></li>
          </ul>
 				 <div class="tabContainer"> 
 					<div id="tabsLine-1" class="tabContent">
@@ -76,7 +76,13 @@
 					</div> 
 					<!--end of tab1-->
 					<div id="tabsLine-2" class="tabContent">
-
+					 <div class="first_rowset"> 
+						<ul class="inRow asperWidth"> 
+						 <li><label>Access Denied Message: </label> 
+							<textarea required name="footer_message" class="plaintext" rows="8" cols="80"><?php echo htmlentities($$class->access_denied); ?> </textarea>
+						 </li> 
+						 </ul>
+					 </div>
 					 <!--                end of tab2 div three_column-->
 					</div>
 				 </div>

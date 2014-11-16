@@ -237,19 +237,38 @@ class file extends dbObject {
 	$result = self::find_by_sql($sql);
 	return $result;
  }
+ 
+  public static function find_by_fieldName_referenceTable_and_id($field_name, $reference_table, $reference_id) {
+	global $db;
+    $table_name = 'extra_field_'.$field_name;
+    $value_colum = $table_name.'_value';
+    $id_colum = $table_name.'_id';
+	$sql = "SELECT file.file_id as file_id, 
+               file.file_path as file_path, 
+               file.file_name as file_name, 
+               file.description as description,
+               fr.$id_colum as file_reference_id 
+       FROM 
+       file , $table_name fr
+       WHERE fr.reference_key_name = '{$reference_table}'
+       AND fr.reference_key_value = '{$reference_id}'
+       AND file.file_id = fr.$value_colum";
+   $result = self::find_by_sql($sql);
+	return $result;
+ }
 
  public static function attachment_statement(&$file) {
 
 	$attachment_statement = "<div id=\"existing_attachment_list\"><ul class='first_level'>";
 
-	if (isset($file) && count($file) > 0) {
+	if (!empty($file) && count($file) > 0) {
 	 $attachment_statement .= '<li><ul  class="second_level header"><li>Hide</li><li>Delete</li><li>File</li><li></li></ul></li>';
 	 foreach ($file as $records) {
 		$attachment_statement .= '<li><ul class="second_level">';
 		$attachment_statement .= '<li><input type="checkbox" class="hide_file" name="hide_file[]" value="' . $records->file_reference_id . '"></li>';
 		$attachment_statement .= '<li><input type="checkbox" class="delete_file" name="delete_file[]" value="' . $records->file_reference_id . '"></li>';
 		$attachment_statement .= '<li><a href=' . HOME_URL . $records->file_path . $records->file_name . '>' . $records->file_name . '</a></li>';
-		$attachment_statement .= '<li class="remove_row_img"><img src="' . HOME_URL . 'themes/images/remove.png" alt="remove this file" /> </li>';
+//		$attachment_statement .= '<li class="remove_row_img"><img src="' . HOME_URL . 'themes/images/remove.png" alt="remove this file" /> </li>';
 		$attachment_statement .= '</ul></li>';
 	 }
 	}

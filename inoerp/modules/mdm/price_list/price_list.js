@@ -100,7 +100,7 @@ $(document).ready(function() {
  //Get the option_id on find button click
  $('a.show.mdm_price_list_header_id').click(function() {
 	var headerId = $('#mdm_price_list_header_id').val();
-	$(this).prop('href', modepath() + 'pageno=1&per_page=10&submit_search=Search&search_class=mdm_price_list_line&search_asc_desc=desc&class_name=mdm_price_list_line&mdm_price_list_header_id=' + headerId);
+	$(this).prop('href', modepath() + 'pageno=1&per_page=10&submit_search=Search&search_class_name=mdm_price_list_line&search_asc_desc=desc&class_name=mdm_price_list_line&mdm_price_list_header_id=' + headerId);
  });
 
  onClick_add_new_row('tr.mdm_price_list_line0', 'tbody.mdm_price_list_line_values', 4);

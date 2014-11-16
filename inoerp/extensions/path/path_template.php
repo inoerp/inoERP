@@ -22,14 +22,14 @@
 					<li><label>Parent Name :</label> 
 					 <?php echo $f->select_field_from_object('parent_id', path::find_all('name'), 'path_id', array('name','module_code'), $$class->parent_id, 'parent_id')?>
 					</li>
-					<li><label>Path Name :</label> 
-					 <input type="text" required name="name[]" id="name" maxlength="60" size="60"
-									placeholder="Enter a valid path" value="<?php echo htmlentities($path->name); ?>">
-					</li>
-					<li><label>Path Value :</label>  
+          					<li><label>Path Value :</label>  
 					 <input type="text" required name="path_link[]" maxlength="500" id="path_link" size="60" 
 									placeholder="Enter path relative to site home" value="<?php echo htmlentities($path->path_link); ?>">
 					 <!--validation message place for username-->
+					</li>
+					<li><label>Path Name :</label> 
+					 <input type="text" required name="name[]" id="name" maxlength="60" size="60"
+									placeholder="Enter a valid path name" value="<?php echo htmlentities($path->name); ?>">
 					</li>
 					<li><label>Description  : </label> 
 					 <input type="text" required name="description[]" maxlength="100" id="description" size="60" 
@@ -44,7 +44,7 @@
 					 <Select name="id_column_name[]" id="id_column_name"> 
 						<option value="" ></option>   
 						<?php
-						$coumn_name = view::find_all_idColumns();
+						$coumn_name = view::find_all_idColumns_gen();
 						foreach ($coumn_name as $key => $value) {
 						 echo '<option value="' . $value . '" ';
 						 echo $value == $path->id_column_name ? 'selected' : 'none ';
@@ -56,8 +56,8 @@
 					</li>
            <li> <label>Path Type: </label>
 					 <?php echo $f->select_field_from_object('path_type', path::path_types(), 'option_line_code', 'option_line_value', $$class->path_type, 'path_type') ?></li>
-					 <li> <label>Search Path ? : </label><?php $f->checkBox_field_d('search_path_cb') ; ?> 
-					</li>
+					 <li> <label>Search Path ? : </label><?php $f->checkBox_field_d('search_path_cb') ; ?> </li>
+           <li> <label>Display Weight: </label><?php echo $f->number_field('display_weight', $$class->display_weight) ; ?> </li>
 				 </ul>
 				</div>
 			 </form> 

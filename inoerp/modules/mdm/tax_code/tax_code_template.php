@@ -34,7 +34,9 @@
 						 <table class="form_table">
 							<thead> 
 							 <tr>
+                
 								<th>Action</th>
+                <th>Seq#</th>
 								<th>Id</th>
 								<th>Code</th>
 								<th>Type</th>
@@ -60,6 +62,7 @@
  									<li><?php echo form::hidden_field('org_id', $org_id_h); ?></li>
  								 </ul>
  								</td>
+                <td><?php $f->seq_field_d($count) ?></td>
  								<td><?php form::number_field_drs('mdm_tax_code_id') ?></td>
  								<td><?php form::text_field_widm('tax_code'); ?></td>
  								<td><?php echo form::select_field_from_object('tax_type', mdm_tax_code::tax_type(), 'option_line_code', 'option_line_value', $$class->tax_type, '', $readonly); ?></td>
@@ -81,6 +84,7 @@
 						 <table class="form_table">
 							<thead> 
 							 <tr>
+                <th>Seq#</th>
 								<th>Start Date</th>
 								<th>End Date</th>
 								<th>Account</th>
@@ -95,8 +99,8 @@
 							 foreach ($tax_code_object as $tax_code) {
 								?>         
  							 <tr class="tax_code_line<?php echo $count ?>">
+                <td><?php $f->seq_field_d($count) ?></td>
  								<td><?php
-									$f = new inoform();
 									echo $f->date_fieldAnyDay_m('effective_start_date', $$class->effective_start_date,'');
 									?></td>
  								<td><?php echo $f->date_fieldAnyDay('effective_end_date', $$class->effective_end_date); ?></td>
@@ -116,6 +120,7 @@
 						 <table class="form_table">
 							<thead> 
 							 <tr>
+                <th>Seq#</th>
 								<th>Regime</th>
 								<th>Jurisdiction</th>
 								<th>Printed Name</th>
@@ -128,6 +133,7 @@
 							 foreach ($tax_code_object as $tax_code) {
 								?>         
  							 <tr class="tax_code_line<?php echo $count ?>">
+                <td><?php $f->seq_field_d($count) ?></td>
  								<td><?php form::text_field_wid('tax_regime'); ?></td>
 								<td><?php form::text_field_wid('tax_jurisdiction'); ?></td>
 								<td><?php form::text_field_wid('printed_tax_name'); ?></td>

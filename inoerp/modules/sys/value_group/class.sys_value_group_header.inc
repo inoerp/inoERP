@@ -17,7 +17,7 @@ class sys_value_group_header extends dbObject {
 		 'access_level',
 		 'value_group',
 		 'description',
-		 'module_id',
+		 'module_code',
 		 'validation_type',
 		 'field_type',
 		 'min_size',
@@ -42,23 +42,22 @@ class sys_value_group_header extends dbObject {
 		 'value_group',
 		 'description',
 		 'validation_type',
-		 'module_id'
+		 'module_code'
  ];
  public $column = [
 		 'sys_value_group_header_id',
 		 'access_level',
 		 'value_group',
 		 'description',
-		 'module_id',
+		 'module_code',
  ];
  public $requiredField = [
 		 'access_level',
 		 'value_group',
 		 'description',
-		 'module_id'
+		 'module_code'
  ];
  public $search = [
-		 '_update_path' => 'modules/sys/value_group/value_group',
 		 '_show_update_path' => 1,
 		 '_update_action_meassge' => 'Update',
 		 '_show_view_path' => 1,
@@ -73,7 +72,7 @@ class sys_value_group_header extends dbObject {
  public $access_level;
  public $value_group;
  public $description;
- public $module_id;
+ public $module_code;
  public $validation_type;
  public $option_assignments;
  public $status;

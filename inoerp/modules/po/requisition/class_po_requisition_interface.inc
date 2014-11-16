@@ -17,6 +17,7 @@ class po_requisition_interface extends dbObject {
 		 'description',
 		 'line_type',
 		 'item_id_m',
+  'bpa_po_line_id',
 		 'item_description',
 		 'currency',
 		 'uom_id',
@@ -41,28 +42,28 @@ class po_requisition_interface extends dbObject {
 		 'reference_key_value',
 		 'requisition_status',
  ];
- public $column = [
-		 'po_requisition_interface_id',
-		 'bu_org_id',
-		 'po_requisition_type',
-		 'receving_org_id',
-		 'supplier_id',
-		 'supplier_site_id',
-		 'buyer',
-		 'description',
-		 'line_type',
-		 'item_id_m',
-		 'item_description',
-		 'currency',
-		 'uom_id',
-		 'quantity',
-		 'unit_price',
-		 'need_by_date',
-		 'reference_type',
-		 'reference_key_name',
-		 'reference_key_value',
-		 'requisition_status',
- ];
+// public $column = [
+//		 'po_requisition_interface_id',
+//		 'bu_org_id',
+//		 'po_requisition_type',
+//		 'receving_org_id',
+//		 'supplier_id',
+//		 'supplier_site_id',
+//		 'buyer',
+//		 'description',
+//		 'line_type',
+//		 'item_id_m',
+//		 'item_description',
+//		 'currency',
+//		 'uom_id',
+//		 'quantity',
+//		 'unit_price',
+//		 'need_by_date',
+//		 'reference_type',
+//		 'reference_key_name',
+//		 'reference_key_value',
+//		 'requisition_status',
+// ];
  public $requiredField = [
 		 'bu_org_id',
 		 'receving_org_id',
@@ -108,6 +109,7 @@ class po_requisition_interface extends dbObject {
  public $description;
  public $line_type;
  public $item_id_m;
+ public $bpa_po_line_id;
  public $item_description;
  public $currency;
  public $uom_id;

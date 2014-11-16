@@ -40,7 +40,7 @@
 							 <?php echo form::text_field_dm('description'); ?>
 							</li>
 							<li><label>Module* : </label>
-							 <?php echo form::select_field_from_object('module_id', module::find_all(), 'module_id', 'name', $$class->module_id, 'module_id', $readonly); ?>
+              <?php echo $f->select_field_from_object('module_code', option_header::modules(), 'option_line_code', 'option_line_value', $$class->module_code, 'module_code', '', 1) ?>
 							</li>
 							<li><label>Assignment : </label>
 							 <?php echo form::select_field_from_object('option_assignments', option_header::option_assignments(), 'option_line_code', 'option_line_value', $$class->option_assignments, 'option_assignments', $readonly); ?>
@@ -117,6 +117,7 @@
 						 </thead>
 						 <tbody class="form_data_line_tbody sys_value_group_line_values" >
 							<?php
+//               echo $re_page;
 							$count = 0;
 							foreach ($sys_value_group_line_object as $sys_value_group_line) {
 							 ?>         

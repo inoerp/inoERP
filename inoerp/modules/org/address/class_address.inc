@@ -114,6 +114,22 @@ class address extends dbObject {
 	return $type;
  }
 
+   public static function profile_ship_to_address_default() {
+   $line_data_array = [];
+   $line_data_array['line_key'] = 'address_id';
+   $line_data_array['line_desc'] = 'address_name';
+   $line_data_array['line_values'] = address::find_all();
+   return $line_data_array;
+  }
+  
+     public static function profile_bill_to_address_default() {
+   $line_data_array = [];
+   $line_data_array['line_key'] = 'address_id';
+   $line_data_array['line_desc'] = 'address_name';
+   $line_data_array['line_values'] = address::find_all();
+   return $line_data_array;
+  }
+  
  public static function find_by_address_name($address_name) {
 	$sql = "SELECT * FROM " . self::$table_name . " where address_name REGEXP '{$address_name}$' LIMIT 1";
 	$result_array = self::find_by_sql($sql);

@@ -223,7 +223,7 @@
                  ?>
                  <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
                 <td><?php form::text_field_wid2('item_description'); ?></td>
-                <td><?php echo $f->number_field('line_quantity', $$class_second->line_quantity); ?></td>
+                <td><?php echo $f->number_field('line_quantity', $$class_second->line_quantity,'','','allow_change'); ?></td>
                 <td><?php
                  echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id');
                  ?></td>

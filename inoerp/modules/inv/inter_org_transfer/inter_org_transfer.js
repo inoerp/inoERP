@@ -97,53 +97,7 @@ setValFromSelectPage.prototype.setVal = function() {
 };
 
 function beforeSave() {
- var retValue = 1;
- $('.add_detail_values1').each(function() {
-  if ($(this).children('.serial_generation').val()) {
-   var trClass = '.' + $(this).closest("tr").attr('class').replace(/\s+/g, '.');
-   var qty = +$('#content').find(trClass).find('.quantity').val();
-   var noOfSerialIds = 0;
-   $(this).closest('td').find('.inv_serial_number_id').each(function() {
-    if ($(this).val()) {
-     noOfSerialIds++;
-    }
-   })
-
-   if (noOfSerialIds != qty) {
-    var noOfSerials = 0;
-    $(this).closest('td').find('.serial_number').each(function() {
-     if ($(this).val()) {
-      noOfSerials++;
-     }
-    })
-    if (noOfSerials != qty) {
-     alert('Can\'t save data as no of serial numbers doesnt match quantity');
-     retValue = -10;
-     return false;
-    }
-   }
-  }
-
-});
-
-$('.add_detail_values0').each(function() {
-  if ($(this).children('.lot_generation').val()) {
-   var trClass = '.' + $(this).closest("tr").attr('class').replace(/\s+/g, '.');
-   var qty = +$('#content').find(trClass).find('.quantity').val();
-   var lot_quantity = 0;
-   $(this).closest('tr').find('.lot_quantity').each(function() {
-    lot_quantity += $(this).val();
-   });
-    if (lot_quantity != qty) {
-    alert('Can\'t save data as no of lot quantities doesnt match line quantity');
-    retValue = -10;
-    return false;
-   }
-
-  }
- });
-
- return retValue;
+return lotSerial_quantityValidation();
 }
 
 $(document).ready(function() {
