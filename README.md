@@ -7,7 +7,7 @@ Homepage: <http://inoideas.org/>
 
 Video Documentation
 
-     <iframe width="480" height="270" src="//www.youtube.com/embed/AS8idx2Cg_U?list=PLI9s_lIFpC099xADLymQcDCmrDhnkxcjM" frameborder="0" allowfullscreen></iframe>
+<www.youtube.com/embed/AS8idx2Cg_U?list=PLI9s_lIFpC099xADLymQcDCmrDhnkxcjM>
 
 Introduction
 ------------
