@@ -184,7 +184,10 @@ $('#release_number').on('change', function(){
   var classValue = "tr." + rowTrClass;
   var classValue1 = classValue.replace(/ /g, '.');
   getAllInventoryAccounts('modules/org/inventory/json_inventory.php', receving_org_id, classValue1);
-  getSubInventory('modules/inv/subinventory/json_subinventory.php', receving_org_id);
+        getSubInventory({
+   json_url: 'modules/inv/subinventory/json_subinventory.php',
+   org_id: receving_org_id
+  });
  });
  
   $("#form_line").on("click", '.add_detail_values_img', function() {
@@ -193,7 +196,10 @@ $('#release_number').on('change', function(){
   var classValue = "tr." + rowTrClass;
   var classValue1 = classValue.replace(/ /g, '.');
   getAllInventoryAccounts('modules/org/inventory/json_inventory.php', receving_org_id, classValue1);
-  getSubInventory('modules/inv/subinventory/json_subinventory.php', receving_org_id);
+          getSubInventory({
+   json_url: 'modules/inv/subinventory/json_subinventory.php',
+   org_id: receving_org_id
+  });
  });
 
 //get locators on changing sub inventory

@@ -39,17 +39,23 @@ $(document).ready(function() {
 //
 $('#org_id').on('change', function(){
 $('#current_org_id').val($(this).val());
-})
+});
 
  //get Subinventory Name
  $("#scope_org_id").on("change", function() {
-	getSubInventory('modules/inv/subinventory/json_subinventory.php', $("#scope_org_id").val());
+      getSubInventory({
+   json_url: 'modules/inv/subinventory/json_subinventory.php',
+   org_id: val($("#scope_org_id").val())
+  });
  });
 
  $('#fp_mrp_header_id, #fp_forecast_header_id').on('change', function() {
 	var orgID = $(this).find('option:selected').data('org_id');
 	$('#scope_org_id').val(orgID).prop('disabled', true);
-	getSubInventory('modules/inv/subinventory/json_subinventory.php', $("#scope_org_id").val());
+	      getSubInventory({
+   json_url: 'modules/inv/subinventory/json_subinventory.php',
+   org_id: val($("#scope_org_id").val())
+  });
  });
 
 });

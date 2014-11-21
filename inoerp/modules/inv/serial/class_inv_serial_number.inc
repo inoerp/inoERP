@@ -153,7 +153,9 @@
   public $to_subinventory_id;
   public $from_locator_id;
   public $to_locator_id;
-
+  public $serial_generation;
+  public $serial_number_id;
+  
   Public static function serail_status() {
    $option_header = option_header::find_by_name('INV_SEARIAL_STATUS');
    $ol = option_line::find_by_option_id($option_header->option_header_id);

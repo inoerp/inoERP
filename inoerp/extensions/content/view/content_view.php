@@ -12,7 +12,7 @@ $childs_of_parent_id_array = content::find_childs_of_parent_id($$class->content_
 if ($childs_of_parent_id_array && (count($childs_of_parent_id_array) > 0)) {
  $childs_of_parent_id = "<ul>";
  foreach ($childs_of_parent_id_array as $child_content) {
-	$childs_of_parent_id .= '<li><a href="content.php?content_type=' . $content_type_name . '&content_id=' . $child_content->content_id . '"   
+	$childs_of_parent_id .= '<li><a href="content.php?content_type=' . $content_type_name . '&nbsp;content_id=' . $child_content->content_id . '"   
                class="content_subject"> ' . $child_content->subject . ' </a></li>';
  }
  $childs_of_parent_id .="</ul>";
@@ -20,7 +20,7 @@ if ($childs_of_parent_id_array && (count($childs_of_parent_id_array) > 0)) {
 
 if (!empty($content->parent_id)) {
  $parent_content = content::find_by_id($content->parent_id);
- $parent_of_content = '<a href="content.php?content_type=' . $content_type_name . '&content_id=' . $parent_content->content_id . '"   
+ $parent_of_content = '<a href="content.php?content_type=' . $content_type_name . '&nbsp;content_id=' . $parent_content->content_id . '"   
                class="content_subject"> ' . $parent_content->subject . ' </a>';
 }
 //end of parent & child details
@@ -31,7 +31,7 @@ if (!empty($category)) {
  $category_statement = "";
  foreach ($category as $object) {
 	$category_statement .= '<a href=' .
-					"\"content.php?content_type=$content_type_name&category_id=$object->category_id\">" .
+					"\"content.php?content_type=$content_type_name&nbsp;category_id=$object->category_id\">" .
 					$object->category . '</a> &nbsp; &nbsp; ';
  }
 }

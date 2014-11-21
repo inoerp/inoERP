@@ -3,11 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/smartview/www/inoerp/modules/sys/process_flow/process_flow.js</file>
-            <file>file:/C:/smartview/www/inoerp/modules/sys/process_flow/process_flow_template.php</file>
-            <file>file:/C:/smartview/www/inoerp/modules/cc/co/process_flow/class_cc_coprocess_flow_action.inc</file>
-            <file>file:/C:/smartview/www/inoerp/modules/cc/co/process_flow/class_cc_co_process_flow_action_value.inc</file>
+            <file>file:/C:/smartview/www/inoerp/includes/basics/multi_select_page.inc</file>
+            <file>file:/C:/smartview/www/inoerp/modules/inv/inv_transaction/inv_transaction.js</file>
+            <file>file:/C:/smartview/www/inoerp/modules/inv/lot/class_inv_lot_number.inc</file>
+            <file>file:/C:/smartview/www/inoerp/modules/inv/receipt/class_inv_receipt_header.inc</file>
+            <file>file:/C:/smartview/www/inoerp/multi_select.php</file>
+            <file>file:/C:/smartview/www/inoerp/modules/inv/inv_transaction/inv_transaction_template.php</file>
             <file>file:/C:/smartview/www/inoerp/test.php</file>
+            <file>file:/C:/smartview/www/inoerp/modules/inv/serial/class_inv_serial_number.inc</file>
         </group>
     </open-files>
 </project-private>

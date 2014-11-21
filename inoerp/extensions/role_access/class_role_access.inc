@@ -79,7 +79,7 @@ class role_access extends dbObject {
    $ra_a['user_dashboard_v'] = 2;
    $ra_a['user_dashboard_config'] = 9;
    $ra_a['user_favourite'] = 2;
-   $ra_a['sys_notification_user'] = 2;
+//   $ra_a['sys_notification_user'] = 2;
    $ra_a['user_activity_v'] = 2;
 	 $_SESSION['role_access'] = $ra_a;
 	 $this->assign_role_accesss_paths();

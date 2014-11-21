@@ -313,7 +313,7 @@ function select_per_page() {
  $content_string .= '<option value="20"> 20 </option>';
  $content_string .= '<option value="50"> 50 </option>';
  $content_string .= '</select>';
- $content_string .= '<a name="content_per_page" class="content_per_page" '
+ $content_string .= '<a name="content_per_page" '
   . 'href="' . $link . '" class="content_per_page button">Per Page</a>';
  $content_string .= '</div>';
  return $content_string;
@@ -797,7 +797,7 @@ function search_co_number() {
 
 function search_implement_all_cb() {
  $f = new inoform();
- return $f->checkBox_field('search_implement_all_cb', '');
+ return $f->checkBox_field('implement_all_cb', '');
 }
 
 function search_convert_to_prod_mode() {

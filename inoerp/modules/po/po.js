@@ -200,7 +200,10 @@ $(document).ready(function() {
 
 //get Subinventory Name
  $("#form_line").on("change", '.receving_org_id', function() {
-  getSubInventory('modules/inv/subinventory/json_subinventory.php', $(this).val());
+    getSubInventory({
+   json_url: 'modules/inv/subinventory/json_subinventory.php',
+   org_id: $(this).val()
+  });
  });
 
  //selecting PO Header Id

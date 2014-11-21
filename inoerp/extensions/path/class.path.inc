@@ -91,7 +91,7 @@ class path extends dbObject {
 
  public function fullPath($value) {
   if ($value) {
-   return HOME_URL . $value;
+   return htmlspecialchars (HOME_URL . $value);
   } else {
    return "";
   }

@@ -922,7 +922,6 @@ span.more_page {
 }
 
 span.more_page a {
-    color: #fff;
     text-decoration: none;
 }
 
@@ -955,5 +954,5 @@ ul#form_top_image{
 #content_content_bottom{
     display: block;
     vertical-align: bottom;
-    margin-top: 150px;
+    /*margin-top: 150px;*/
 }

@@ -30,17 +30,17 @@
 				 $category_relation_statement = null;
 				}
 			 }
-
+//pa($content_type);
 			 $content->content_type_id = $content_type->content_type_id;
 			 $content->category_id = !empty($category_id) ? $category_id : null;
-			 if ($content->content_type_id == 47 || $content->content_type_id == 45) {
+			 if ($content_type->show_category_onsummary_cb) {
 				$content_lists = $content->showSummaryList_byConteTypeCategory($pageno, $per_page, $query_string);
 			 } else {
 				$content_lists = $content->showForumList_byConteTypeCategory($pageno, $per_page, $query_string);
 			 }
 
 			 if (!empty($category_relation_statement)) {
-				echo "<div id='category_relationDiv'>$category_relation_statement</div><br>";
+				echo "<div id='category_relationDiv'>$category_relation_statement</div>";
 			 }
 			 echo "<div id='contents_listDiv'>$content_lists</div>";
 			 ?>

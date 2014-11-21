@@ -402,21 +402,21 @@
    return !empty($result_array) ? array_shift($result_array) : false;
   }
 
-  public static function find_by_keyColumn($columnName) {
-   $sql = "SELECT * FROM " . static::$table_name . " where `" . static::$key_column . "` ='{$columnName}'  LIMIT 1";
+  public static function find_by_keyColumn($columnName_val) {
+   $sql = "SELECT * FROM " . static::$table_name . " where `" . static::$key_column . "` ='{$columnName_val}'  LIMIT 1";
    $result_array = static::find_by_sql($sql);
    return !empty($result_array) ? array_shift($result_array) : false;
   }
 
-  public static function find_by_keyColumn_all($columnName) {
-   $sql = "SELECT * FROM " . static::$table_name . " where `" . static::$key_column . "` ='{$columnName}' ";
+  public static function find_by_keyColumn_all($columnName_val) {
+   $sql = "SELECT * FROM " . static::$table_name . " where `" . static::$key_column . "` ='{$columnName_val}' ";
    $result_array = static::find_by_sql($sql);
    return !empty($result_array) ? ($result_array) : false;
   }
 
-  public static function find_by_keyColumn_array($columnName) {
+  public static function find_by_keyColumn_array($columnName_val) {
    global $dbc;
-   $sql = "SELECT * FROM " . static::$table_name . " where `" . static::$columnName . "` ='{$columnName}'  LIMIT 1";
+   $sql = "SELECT * FROM " . static::$table_name . " where `" . static::$columnName . "` ='{$columnName_val}'  LIMIT 1";
    $result_array = static::find_by_sql_array($sql);
    return !empty($result_array) ? array_shift($result_array) : false;
   }

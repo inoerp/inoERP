@@ -387,7 +387,6 @@ class inv_abc_valuation extends dbObject {
 //	foreach ($parameters as $key => $val) {
 //	 $this->message .='<br>' . $key . ' - ' . implode(' ; <br>', $val);
 //	}
-
 	if (!empty($parameters['inv_abc_valuation_id'][0])) {
 	 $inv_abc_valuation_id = $this->inv_abc_valuation_id = $parameters['inv_abc_valuation_id'][0];
 	 $this->message .= '<br> Entered inv_abc_valuation_id is : ' . $inv_abc_valuation_id;

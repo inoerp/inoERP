@@ -5,21 +5,21 @@ function animateCycle()
 
  function animateContent() {
   $('#animated_content > div:first')
-   .slideUp(1000)
-   .next()
-   .delay(1000)
-   .slideDown(1000)
-   .end()
-   .appendTo('#animated_content');
+          .slideUp(1000)
+          .next()
+          .delay(1000)
+          .slideDown(1000)
+          .end()
+          .appendTo('#animated_content');
  }
 
  interval = setInterval(animateContent, 5000);
-
- $('#all_contents').on('click', '#animated_block', function() {
+ addOrShow_lineDetails
+ $('#all_contents').on('click', '#animated_block', function () {
   clearInterval(interval);
  });
 
- $('#all_contents').on('click', '.stop_play', function() {
+ $('#all_contents').on('click', '.stop_play', function () {
   clearInterval(interval);
  });
 
@@ -46,35 +46,35 @@ function treeView() {
  $('ul.tree_view > li').show();
  $('ul.tree_view > li').has('ul').addClass('contentContainer');
  $('.tree_view').on('click', '.contentContainer, .contentViewing',
-  function(e) {
-   if ($(this).hasClass('contentContainer')) {
-    $(this).find('>ul').show();
-    $(this).find('>ul').find('>li').show();
-    $(this).find('>ul').find('>li').has('ul').addClass('contentContainer');
-    $(this).removeClass('contentContainer').addClass('contentViewing');
-    e.stopPropagation();
-   } else {
-    $(this).find('>ul').hide();
-    $(this).find('>ul').find('>li').hide().removeClass('contentContainer');
-    $(this).removeClass('contentViewing').addClass('contentContainer');
-    e.stopPropagation();
-   }
-  });
+         function (e) {
+          if ($(this).hasClass('contentContainer')) {
+           $(this).find('>ul').show();
+           $(this).find('>ul').find('>li').show();
+           $(this).find('>ul').find('>li').has('ul').addClass('contentContainer');
+           $(this).removeClass('contentContainer').addClass('contentViewing');
+           e.stopPropagation();
+          } else {
+           $(this).find('>ul').hide();
+           $(this).find('>ul').find('>li').hide().removeClass('contentContainer');
+           $(this).removeClass('contentViewing').addClass('contentContainer');
+           e.stopPropagation();
+          }
+         });
 
- $('.expand_collapse_all').on('click', function() {
+ $('.expand_collapse_all').on('click', function () {
   $(this).parent().find('.tree_view').find('.contentContainer, .contentViewing').each(
-   function(e) {
-    if ($(this).hasClass('contentContainer')) {
-     $(this).find('ul').show();
-     $(this).find('ul').find('li').show();
-     $(this).find('ul').find('li').has('ul').addClass('contentContainer');
-     $(this).removeClass('contentContainer').addClass('contentViewing');
-    } else {
-     $(this).find('ul').hide();
-     $(this).find('ul').find('li').hide().removeClass('contentContainer');
-     $(this).removeClass('contentViewing').addClass('contentContainer');
-    }
-   });
+          function (e) {
+           if ($(this).hasClass('contentContainer')) {
+            $(this).find('ul').show();
+            $(this).find('ul').find('li').show();
+            $(this).find('ul').find('li').has('ul').addClass('contentContainer');
+            $(this).removeClass('contentContainer').addClass('contentViewing');
+           } else {
+            $(this).find('ul').hide();
+            $(this).find('ul').find('li').hide().removeClass('contentContainer');
+            $(this).removeClass('contentViewing').addClass('contentContainer');
+           }
+          });
  });
 
 }
@@ -83,7 +83,7 @@ function treeView() {
 function setConetntRightLeft() {
  var content_right_right = $("#content_right_right").html();
  if ((content_right_right === undefined) ||
-  (content_right_right === "")) {
+         (content_right_right === "")) {
   $("#content_right_left").width("100%");
   $("#content_right_right").width("0%");
  } else {
@@ -106,10 +106,10 @@ function getBlocks() {
   },
   type: 'POST',
   timeout: 50000,
-  beforeSend: function() {
+  beforeSend: function () {
    $('#content_left').html('<img src="' + smallLoadingImg + '"\> loading...');
   }
- }).done(function(data) {
+ }).done(function (data) {
   var header_top = $('#header_top', $(data)).html();
   var header_bottom = $('#header_bottom', $(data)).html();
   var navinagtion_top = $('#navinagtion_top', $(data)).html();
@@ -144,14 +144,14 @@ function getBlocks() {
   }
   treeView();
 
- }).fail(function() {
+ }).fail(function () {
   $('#content_left').html('');
  });
 // $(".form_table #subinventory_id").attr("disabled",false);
 }
 //remoe & replace content from summary
 function update_summary_list(maxListCount, shownListCount) {
- $('ul.summary_list').find('li').each(function() {
+ $('ul.summary_list').find('li').each(function () {
   var className = $(this).prop('class');
   var startPoint = className.lastIndexOf('_') + 1;
   var listCount = +className.substring(startPoint);
@@ -163,32 +163,12 @@ function update_summary_list(maxListCount, shownListCount) {
  });
 }
 
-//show Default Dialog Box 
-function show_dialog_box() {
- $("#dialog_box").dialog({
-  dialogClass: "no-close",
-  modal: true,
-  minWidth: 600,
-  title: "Action Message",
-  buttons: [
-   {
-    text: "OK",
-    click: function() {
-     $(this).dialog("close");
-    }
-   }
-  ],
-  closeOnEscape: true,
-  position: {my: "left top", at: "left top", of: "#structure "}
- });
-}
-
 //get parameter value from window.location - equivalent og $_GET
 function getUrlValues(name, user_link) {
  var link = typeof user_link === 'undefined' ? location.search : user_link;
  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-  results = regex.exec(link);
+         results = regex.exec(link);
  return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
@@ -209,13 +189,13 @@ function select_mandatory_fields_all(form_area, Mandatory_Fields) {
  if (Mandatory_Fields.length / 2 >= 1) {
   var fieldId = Mandatory_Fields[i];
   var msg = Mandatory_Fields[i + 1];
-  $(form_area + " :input").not(fieldId).on("focusin", function() {
+  $(form_area + " :input").not(fieldId).on("focusin", function () {
    if ($(fieldId).val().length === 0) {
     alert(msg);
     $(fieldId).focus();
    }
   });
-  $(fieldId).on("change", function() {
+  $(fieldId).on("change", function () {
    if ($(fieldId).val().length === 0) {
     alert(msg);
     $(fieldId).focus();
@@ -241,9 +221,9 @@ function select_mandatory_fields_line(Mandatory_Fields) {
 }
 
 function remove_row() {
- $("body").on("click", ".remove_row_img", function() {
-  trclass = $(this).closest('tr').attr("class");
-  newTrclass = trclass.replace(/ /g, '.');
+ $("body").on("click", ".remove_row_img", function () {
+  var trclass = $(this).closest('tr').attr("class");
+  var newTrclass = trclass.replace(/\s+/g, '.');
   if (($("tr." + newTrclass).closest('form').find('tbody').first().children().filter('tr').length) > 1) {
    $("tr." + newTrclass).remove();
   } else if (($("tr." + newTrclass).closest('form').find('tbody.form_data_line_tbody').first().children().filter('tr').length) > 1) {
@@ -260,10 +240,10 @@ function remove_row() {
 }
 //function lineDetail_QuantityValidation
 function lineDetail_QuantityValidation() {
- $('#content').on('change, blur', '.line_quantity', function() {
+ $('#content').on('change, blur', '.line_quantity', function () {
   var lineQuantity = $(this).val();
   var detailQuantity = 0;
-  $(this).closest('tr').find('.add_detail_values').find('.quantity').each(function() {
+  $(this).closest('tr').find('.add_detail_values').find('.quantity').each(function () {
    detailQuantity += +$(this).val();
   });
 
@@ -273,9 +253,9 @@ function lineDetail_QuantityValidation() {
   }
  });
 
- $('#content').on('change, blur', '.quantity', function() {
+ $('#content').on('change, blur', '.quantity', function () {
   var detailQuantity = 0;
-  $(this).closest('tbody').find('.quantity').each(function() {
+  $(this).closest('tbody').find('.quantity').each(function () {
    detailQuantity += +$(this).val();
   });
   $(this).closest('.add_detail_values').closest('tr').find('.line_quantity').val(detailQuantity);
@@ -285,18 +265,18 @@ function lineDetail_QuantityValidation() {
 
 //add new search criteria
 function new_searchCriteria_onClick(json_url) {
- $("#new_search_criteria_add").on("click", function() {
+ $("#new_search_criteria_add").on("click", function () {
   $('#loading').show();
   var new_search_criteria = $(".new_search_criteria").val();
   $.ajax({
    url: json_url,
    data: {new_search_criteria: new_search_criteria},
    type: 'get'
-  }).done(function(result) {
+  }).done(function (result) {
    var div = $(result).filter('div#new_search_criteria').html();
    $("ul.search_form").append(div);
    $('#loading').hide();
-  }).fail(function() {
+  }).fail(function () {
    $('#loading').hide();
   });
  });
@@ -311,7 +291,7 @@ function onClick_addDetailLine(noOfTabs, add_row_detail_img, tabsDetailName) {
 
  var highest_seq_num = 1;
  var lastDetailNumber = 1;
- $("#content").on("click", add_row_detail_img, function() {
+ $("#content").on("click", add_row_detail_img, function () {
   var trClass = '.' + $(this).closest("tr").attr('class').replace(/\s+/g, '.');
   var trClass_wod = trClass.replace(/tr\./g, '');
   trClass_wod = trClass_wod.replace(/\./g, '');
@@ -347,19 +327,19 @@ function onClick_addDetailLine(noOfTabs, add_row_detail_img, tabsDetailName) {
    $(trClass + ':first').clone().attr("class", "new_object" + detailObjectCount).appendTo($(closetLineRowClass + ' ' + tbodyClass));
   }
 
-  $("tr.new_object" + detailObjectCount).find("td input[type=text]").each(function() {
+  $("tr.new_object" + detailObjectCount).find("td input[type=text]").each(function () {
    $(this).val("");
   });
-  $("tr.new_object" + detailObjectCount).find("td input[type=number]").each(function() {
+  $("tr.new_object" + detailObjectCount).find("td input[type=number]").each(function () {
    $(this).val("");
   });
-  $("tr.new_object" + detailObjectCount).find("td select").each(function() {
+  $("tr.new_object" + detailObjectCount).find("td select").each(function () {
    $(this).val("");
   });
 
   $(".new_object" + detailObjectCount).find(".detail_seq_number").val(nextDetailSeqNumber_seq);
   $(".new_object" + detailObjectCount).find(".detail_number").val(nextDetailNumber);
-  $(".new_object" + detailObjectCount).find(".date").each(function() {
+  $(".new_object" + detailObjectCount).find(".date").each(function () {
    $(this).attr("id", "date" + dateCount);
    $(this).attr("class", "date");
    dateCount++;
@@ -370,7 +350,7 @@ function onClick_addDetailLine(noOfTabs, add_row_detail_img, tabsDetailName) {
 
 
 function onClick_add_new_row(trClass, tbodyClass, noOfTabs, divClassToBeCopied) {
- $("body table").on("click", ".add_row_img", function() {
+ $("body table").on("click", ".add_row_img", function () {
 //	add_new_row(trClass, tbodyClass, noOfTabs);
 
   var addNewRow = new add_new_rowMain();
@@ -393,7 +373,7 @@ function addOrShow_lineDetails(afterAddNewDetail) {
   highest_seq_num = $('.form_data_detail_tbody').find('.detail_seq_number').last().val();
  }
  var nextDetailSeqNumber_seq = (+highest_seq_num) + 1;
- $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function() {
+ $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function () {
   var tabID = '#' + $(this).closest('.tabContent').attr('id');
   var tdClass = '.' + $(this).closest('td').attr('class').replace(/tr\./g, '');
   var detailExists = $(this).closest("td").find(".form_detail_data_fs").length;
@@ -403,22 +383,22 @@ function addOrShow_lineDetails(afterAddNewDetail) {
    var detailNumber = 1;
    var elementToBeCloned = $('#content').find(tabID).find(tdClass).find('.class_detail_form').first();
    var clonedElement = elementToBeCloned.clone();
-   
+
    var firstTrClass = '.' + $(clonedElement).find('tbody').find("tr").first().attr('class').replace(/tr\./g, '');
    clonedElement.find("tr").not(':first-child').not(firstTrClass).remove();
    $(clonedElement).find('tbody tr').attr("class", "new_object" + detailObjectRowCount);
-   clonedElement.find("input").not('.hidden').each(function() {
+   clonedElement.find("input").not('.hidden').each(function () {
     $(this).val("");
    });
    clonedElement.appendTo($(this).closest("td"));
-   $(this).closest("td").find("li.tabLink").each(function() {
+   $(this).closest("td").find("li.tabLink").each(function () {
     var tabLink = $(this).find("a[href]").attr('href');
     var n = tabLink.lastIndexOf("-");
     var newStr = tabLink.substring(0, n);
     var newTabLink = newStr + '-' + objectDetailTabCount;
     $(this).find("a[href]").attr('href', newTabLink);
    });
-   $(this).closest("td").find(".tabContent").each(function() {
+   $(this).closest("td").find(".tabContent").each(function () {
     var tabLink = $(this).attr('id');
     var n = tabLink.lastIndexOf("-");
     var newStr = tabLink.substring(0, n);
@@ -469,13 +449,13 @@ function deleteLine(json_url, delete_id, delete_type) {
    delete_id: delete_id,
    deleteType: deleteType},
   type: 'get',
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   }
- }).done(function(result) {
+ }).done(function (result) {
 //	if (isDetail == 1) {
 //	 var div = $(result).filter('div#json_delete_detail').html();
 //	} else {
@@ -484,7 +464,7 @@ function deleteLine(json_url, delete_id, delete_type) {
   $(".error").append(result);
   $("#delete_button").removeClass("show_loading_small");
   $("#delete_button").prop('disabled', false);
- }).fail(function(error, textStatus, xhr) {
+ }).fail(function (error, textStatus, xhr) {
   alert("delete failed \n" + error + textStatus + xhr);
   $("#delete_button").removeClass("show_loading_small");
   $("#delete_button").prop('disabled', false);
@@ -492,7 +472,7 @@ function deleteLine(json_url, delete_id, delete_type) {
 }
 //used for deleting header forms like content/page/comment
 function deleteHeader(json_url, headerId) {
- $("#delete_button").click(function(e) {
+ $("#delete_button").click(function (e) {
   $("#delete_button").addClass("show_loading_small");
   $("#delete_button").prop('disabled', true);
   e.preventDefault();
@@ -505,18 +485,18 @@ function deleteHeader(json_url, headerId) {
      delete: '1'
     },
     type: 'get',
-    beforeSend: function() {
+    beforeSend: function () {
      $('.show_loading_small').show();
     },
-    complete: function() {
+    complete: function () {
      $('.show_loading_small').hide();
     }
-   }).done(function(result) {
+   }).done(function (result) {
 //		var div = $(result).filter('div#json_delete_header').html();
     $(".error").append(result);
     $("#delete_button").removeClass("show_loading_small");
     $("#delete_button").prop('disabled', false);
-   }).fail(function(error, textStatus, xhr) {
+   }).fail(function (error, textStatus, xhr) {
     alert("delete failed \n" + error + textStatus + xhr);
     $("#delete_button").removeClass("show_loading_small");
     $("#delete_button").prop('disabled', false);
@@ -526,18 +506,18 @@ function deleteHeader(json_url, headerId) {
 }
 
 function deleteData(json_url, header_id) {
- $("#delete_button").click(function(e) {
+ $("#delete_button").click(function (e) {
   $("#delete_button").addClass("show_loading_small");
   $("#delete_button").prop('disabled', true);
   e.preventDefault();
-  $('input[name="detail_id_cb"]:checked').each(function() {
+  $('input[name="detail_id_cb"]:checked').each(function () {
    var detail_id = $(this).val();
    if (confirm("Are you sure?\nDetail Id #" + detail_id)) {
     deleteLine(json_url, detail_id, 'detail');
    }
   });
 
-  $('input[name="line_id_cb"]:checked').each(function() {
+  $('input[name="line_id_cb"]:checked').each(function () {
    var line_id = $(this).val();
    if (confirm("Are you sure?\nLine Id #" + line_id)) {
     if ($(this).closest('tbody').hasClass('form_data_line_tbody2')) {
@@ -568,17 +548,17 @@ function deleteFile(json_url, file_reference_id) {
    file_reference_id: file_reference_id
   },
   type: 'get',
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   }
- }).done(function(result) {
+ }).done(function (result) {
   var div = $(result).filter('div#json_delete_file').html();
   $(".error").append(div);
   $('.show_loading_small').hide();
- }).fail(function() {
+ }).fail(function () {
   alert("File delete failed");
   $('#loading').hide();
  });
@@ -591,18 +571,18 @@ function getAttachmentForm(divId, jsonFileLink) {
  $.ajax({
   url: jsonFileLink,
   type: 'get',
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   }
- }).done(function(data) {
+ }).done(function (data) {
   var div = $('#add_attachments', $(data)).html();
   $(divId).append(div);
   $('#loading').hide();
   $('li#loading').hide();
- }).fail(function() {
+ }).fail(function () {
   alert("Attachment loading failed");
   $('#loading').hide();
  });
@@ -610,7 +590,7 @@ function getAttachmentForm(divId, jsonFileLink) {
 
 //get the attachement form
 function get_attachment_form(jsonFileLink) {
- $("body").on("click", ".attachment_button", function() {
+ $("body").on("click", ".attachment_button", function () {
   var closestDiv = $(this).closest("div").attr("id");
   divId = "#" + closestDiv;
   getAttachmentForm(divId, jsonFileLink);
@@ -638,9 +618,9 @@ function getExchangeRate(options) {
    to_currency: settings.to_currency,
    find_exchange_rate: 1
   },
-  success: function(result) {
+  success: function (result) {
    if (result) {
-    $.each(result, function(key, value) {
+    $.each(result, function (key, value) {
      switch (key) {
       case 'rate':
        $('#exchange_rate').val(+value);
@@ -649,13 +629,13 @@ function getExchangeRate(options) {
     });
    }
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  error: function(request, errorType, errorMessage) {
+  error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
@@ -671,14 +651,14 @@ function getSupplierDetails(jsonurl, org_id, supplier_id, trClass) {
    org_id: org_id,
    find_supplier_details: 1},
   type: 'get',
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   }
- }).done(function(result) {
-  $.each(result, function(key, value) {
+ }).done(function (result) {
+  $.each(result, function (key, value) {
    switch (key) {
     case 'supplier_site_id':
      if (typeof (trClass) !== 'undefined') {
@@ -697,10 +677,10 @@ function getSupplierDetails(jsonurl, org_id, supplier_id, trClass) {
 
   });
   $('.show_loading_small').hide();
- }).fail(function() {
+ }).fail(function () {
   alert("Supplier Site Loading failed");
   $('.show_loading_small').hide();
- }).always(function() {
+ }).always(function () {
   $('.show_loading_small').hide();
  });
  $(".form_table .from_subinventory_id").attr("disabled", false);
@@ -713,7 +693,7 @@ function get_supplier_detail_for_bu(search_all_bu) {
  } else {
   var bu_org_id = null;
  }
- $("#supplier_id, #supplier_name, #supplier_number").data('last', '').on("blur", function() {
+ $("#supplier_id, #supplier_name, #supplier_number").data('last', '').on("blur", function () {
   if ((!all_bu) && !$('#bu_org_id').val()) {
    alert('Select BU First!');
    return;
@@ -723,7 +703,7 @@ function get_supplier_detail_for_bu(search_all_bu) {
   if (current !== '' && current !== last) {
    getSupplierDetails('modules/ap/supplier/json_supplier.php', bu_org_id);
   }
-  $("#supplier_id, #supplier_name, #supplier_number").each(function() {
+  $("#supplier_id, #supplier_name, #supplier_number").each(function () {
    var current = $(this).val();
    $(this).data('last', current);
   });
@@ -738,14 +718,14 @@ function getSupplierSiteDetails(jsonUrl, supplier_site_id) {
   data: {supplier_site_id: supplier_site_id,
    find_site_details: 1},
   type: 'get',
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   }
- }).done(function(result) {
-  $.each(result, function(key, value) {
+ }).done(function (result) {
+  $.each(result, function (key, value) {
    switch (key) {
     case 'currency':
      $("#doc_currency").val(value);
@@ -758,7 +738,7 @@ function getSupplierSiteDetails(jsonUrl, supplier_site_id) {
    }
   });
   $('.show_loading_small').hide();
- }).fail(function() {
+ }).fail(function () {
   alert("Supplier Site Loading failed");
   $('.show_loading_small').hide();
  });
@@ -775,13 +755,13 @@ function getCustomerDetails(jsonurl, org_id) {
    org_id: org_id,
    find_all_sites: 1},
   type: 'get',
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   }
- }).done(function(result) {
+ }).done(function (result) {
   var customer_sites = $(result).find('div#json_customerSites_find_all').html();
   var receivable_ac_id = $(result).find('div#receivable_ac_id').html();
   var customer_attachment = $(result).find('#customer_header_level_attachement').html();
@@ -807,10 +787,10 @@ function getCustomerDetails(jsonurl, org_id) {
    $(".error").append(errorMsg);
   }
   $('.show_loading_small').hide();
- }).fail(function() {
+ }).fail(function () {
   alert("Customer Loading failed");
   $('.show_loading_small').hide();
- }).always(function() {
+ }).always(function () {
   $('.show_loading_small').hide();
  });
  $(".form_table .from_subinventory_id").attr("disabled", false);
@@ -823,7 +803,7 @@ function get_customer_detail_for_bu(search_all_bu) {
  } else {
   var bu_org_id = null;
  }
- $("#ar_customer_id, #customer_name, #customer_number").data('last', '').on("blur", function() {
+ $("#ar_customer_id, #customer_name, #customer_number").data('last', '').on("blur", function () {
   if ((!all_bu) && !$('#bu_org_id').val()) {
    alert('Select BU First!');
    return;
@@ -833,7 +813,7 @@ function get_customer_detail_for_bu(search_all_bu) {
   if (current !== '' && current !== last) {
    getCustomerDetails('modules/ar/customer/json_customer.php', bu_org_id);
   }
-  $("#ar_customer_id, #customer_name, #customer_number").each(function() {
+  $("#ar_customer_id, #customer_name, #customer_number").each(function () {
    var current = $(this).val();
    $(this).data('last', current);
   });
@@ -848,8 +828,8 @@ function getCustomerSiteDetails(jsonUrl, customer_site_id) {
   data: {ar_customer_site_id: customer_site_id,
    find_site_details: 1},
   type: 'get'
- }).done(function(result) {
-  $.each(result, function(key, value) {
+ }).done(function (result) {
+  $.each(result, function (key, value) {
    switch (key) {
     case 'currency':
     case 'payment_term_id':
@@ -861,7 +841,7 @@ function getCustomerSiteDetails(jsonUrl, customer_site_id) {
 
   });
   $('.show_loading_small').hide();
- }).fail(function() {
+ }).fail(function () {
   alert("Supplier Site Loading failed");
   $('.show_loading_small').hide();
  });
@@ -869,29 +849,36 @@ function getCustomerSiteDetails(jsonUrl, customer_site_id) {
 }
 
 //get Subinventories
-function getSubInventory(json_url, org_id, subinventory_class) {
- json_url = (typeof json_url !== 'undefined') ? json_url : 'modules/inv/subinventory/json_subinventory.php';
- org_id = (typeof org_id !== 'undefined') ? org_id : $('#org_id').val();
- subinventory_class = (typeof subinventory_class !== 'undefined') ? subinventory_class : ('.subinventory_id');
+function getSubInventory(options) {
+ var defaults = {
+  json_url: 'modules/inv/subinventory/json_subinventory.php',
+  org_id: $('#org_id').val(),
+  subinventory_class: ('.subinventory_id')
+ };
+ var settings = $.extend({}, defaults, options);
  $('#loading').show();
- $.ajax({
-  url: json_url,
-  data: {org_id: org_id,
+ return $.ajax({
+  url: settings.json_url,
+  data: {
+   org_id: settings.org_id,
    find_all_subinventory: 1},
   type: 'get',
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   }
- }).done(function(result) {
+ }).done(function (result) {
   var div = $(result).filter('div#json_subinventory_find_all').html();
-  $('#content').find(subinventory_class).empty().append(div);
-  return div;
- }).fail(function() {
+  if (settings.rowClass) {
+   $('#content').find(settings.rowClass_d).find(settings.subinventory_class).empty().append(div);
+  } else {
+   $('#content').find(settings.subinventory_class).empty().append(div);
+  }
+ }).fail(function () {
 //  alert("org name loading failed");
- }).always(function() {
+ }).always(function () {
   $('#loading').hide();
  });
  $(".form_table .from_subinventory_id").attr("disabled", false);
@@ -905,13 +892,13 @@ function getLocator(json_url, subinventory_id, subinventory_type, trClass) {
   data: {subinventory_id: subinventory_id,
    find_all_locator: 1},
   type: 'get',
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   }
- }).done(function(result) {
+ }).done(function (result) {
 //   var div = $('#json_locator', $(data)).html();
   var div = $(result).filter('div#json_locator_find_all').html();
   if (subinventory_type == "from_subinventory_id") {
@@ -933,7 +920,7 @@ function getLocator(json_url, subinventory_id, subinventory_type, trClass) {
   }
 
   $('#loading').hide();
- }).fail(function() {
+ }).fail(function () {
   alert("Locator name loading failed");
   $('#loading').hide();
  });
@@ -948,13 +935,13 @@ function getAllInventoryAccounts(jsonUrl, ship_to_inventory, classValue) {
   data: {ship_to_inventory: ship_to_inventory,
    find_account_details: 1},
   type: 'get',
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   }
- }).done(function(result) {
+ }).done(function (result) {
   var div = $(result).filter('div#json_inventory_ac_all').html();
   var inv_ap_accrual_ac_id = $(result).find('div#json_ap_accrual_ac_id').html();
   var material_ac_id = $(result).find('div#json_material_ac_id').html();
@@ -962,7 +949,7 @@ function getAllInventoryAccounts(jsonUrl, ship_to_inventory, classValue) {
   $(classValue).closest('.tabContainer').find(classValue).find('.charge_ac_id').val(material_ac_id);
   $(classValue).closest('.tabContainer').find(classValue).find('.accrual_ac_id').val(inv_ap_accrual_ac_id);
   $(classValue).closest('.tabContainer').find(classValue).find('.ppv_ac_id').val(inv_ppv_ac_id);
- }).fail(function() {
+ }).fail(function () {
   alert("Supplier Site Loading failed");
  });
  $(".form_table .from_subinventory_id").attr("disabled", false);
@@ -976,19 +963,19 @@ function getWipAccountingGroup(json_url, org_id) {
   data: {org_id: org_id,
    find_all_accounting_group: 1},
   type: 'get',
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   }
- }).done(function(result) {
+ }).done(function (result) {
   var div = $(result).filter('div#json_accounting_group_find_all').html();
   $(".wip_accounting_group_id").empty().append(div);
   return div;
- }).fail(function() {
+ }).fail(function () {
   alert("Accounting Group Loading Failed!!!");
- }).always(function() {
+ }).always(function () {
   $('#loading').hide();
  });
  $(".form_table .from_subinventory_id").attr("disabled", false);
@@ -1004,13 +991,13 @@ function getTaxCodes(json_url, org_id, in_out_tax, trClass) {
    in_out_tax: in_out_tax,
    find_all_tax: 1},
   type: 'get',
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   }
- }).done(function(result) {
+ }).done(function (result) {
   var div = $(result).filter('div#json_tax_code_find_all').html();
   if (in_out_tax === 'IN') {
    if (trClass) {
@@ -1026,9 +1013,9 @@ function getTaxCodes(json_url, org_id, in_out_tax, trClass) {
    }
   }
   return div;
- }).fail(function() {
+ }).fail(function () {
 //  alert("org name loading failed");
- }).always(function() {
+ }).always(function () {
   $('#loading').hide();
  });
 }
@@ -1045,8 +1032,8 @@ function getDocumentTypeDetails(sd_document_type_id, json_url) {
    sd_document_type_id: sd_document_type_id,
    find_document_detail: 1
   },
-  success: function(result) {
-   $.each(result, function(key, value) {
+  success: function (result) {
+   $.each(result, function (key, value) {
     switch (key) {
      case 'price_list_header_id':
      case 'destination_type':
@@ -1058,13 +1045,13 @@ function getDocumentTypeDetails(sd_document_type_id, json_url) {
 
    });
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  error: function(request, errorType, errorMessage) {
+  error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
@@ -1092,9 +1079,9 @@ function getPriceDetails(options) {
    price_date: settings.price_date,
    item_id_m: settings.item_id_m
   },
-  success: function(result) {
+  success: function (result) {
    if (result) {
-    $.each(result, function(key, value) {
+    $.each(result, function (key, value) {
      switch (key) {
       case 'unit_price':
        var className = '.' + key;
@@ -1107,13 +1094,13 @@ function getPriceDetails(options) {
    }
 
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  error: function(request, errorType, errorMessage) {
+  error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
@@ -1129,8 +1116,8 @@ function getBUDetails(bu_org_id, json_url) {
    bu_org_id: bu_org_id,
    find_bu_details: 1
   },
-  success: function(result) {
-   $.each(result, function(key, value) {
+  success: function (result) {
+   $.each(result, function (key, value) {
     switch (key) {
      case 'ledger_id':
       var className = '.' + key;
@@ -1159,13 +1146,13 @@ function getBUDetails(bu_org_id, json_url) {
 
    });
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  error: function(request, errorType, errorMessage) {
+  error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
@@ -1181,8 +1168,8 @@ function getLedgerDetails(gl_ledger_id, json_url) {
    gl_ledger_id: gl_ledger_id,
    find_ledger_details: 1
   },
-  success: function(result) {
-   $.each(result, function(key, value) {
+  success: function (result) {
+   $.each(result, function (key, value) {
     switch (key) {
      case 'currency':
       var className = '.' + key;
@@ -1205,13 +1192,13 @@ function getLedgerDetails(gl_ledger_id, json_url) {
 
    });
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  error: function(request, errorType, errorMessage) {
+  error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
@@ -1227,8 +1214,8 @@ function getARTransactionTypeDetails(ar_transaction_type_id, json_url) {
    ar_transaction_type_id: ar_transaction_type_id,
    find_ar_transaction_type_detail: 1
   },
-  success: function(result) {
-   $.each(result, function(key, value) {
+  success: function (result) {
+   $.each(result, function (key, value) {
     switch (key) {
      case 'payment_term_id':
      case 'transaction_class':
@@ -1250,13 +1237,13 @@ function getARTransactionTypeDetails(ar_transaction_type_id, json_url) {
 
    });
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  error: function(request, errorType, errorMessage) {
+  error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
@@ -1279,9 +1266,9 @@ function getOnhandDetails(options) {
    locator_id: settings.locator_id,
    find_onhand_details: 1
   },
-  success: function(result) {
+  success: function (result) {
    if (result) {
-    $.each(result, function(key, value) {
+    $.each(result, function (key, value) {
      switch (key) {
       case 'onhand':
        var className = '.' + key;
@@ -1297,13 +1284,13 @@ function getOnhandDetails(options) {
 
    }
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  error: function(request, errorType, errorMessage) {
+  error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
@@ -1319,8 +1306,8 @@ function get_ar_receipt_source_details(bu_org_id, json_url) {
    bu_org_id: bu_org_id,
    find_receipt_source_details: 1
   },
-  success: function(result) {
-   $.each(result, function(key, value) {
+  success: function (result) {
+   $.each(result, function (key, value) {
     switch (key) {
      case 'receipt_source_stmt':
       $('#ar_receipt_source_id').replaceWith(value);
@@ -1329,13 +1316,13 @@ function get_ar_receipt_source_details(bu_org_id, json_url) {
 
    });
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  error: function(request, errorType, errorMessage) {
+  error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
@@ -1361,14 +1348,14 @@ function getBPAList(options) {
    item_id_m: settings.item_id_m,
    find_bpa_list: 1
   },
-  success: function(result) {
+  success: function (result) {
    if (result) {
     if (settings.trclass) {
      var select_stmt = '<select class="select ' + settings.field_name + '" name="' + settings.field_name + '[]" style="max-width:95%;">';
     } else {
      var select_stmt = '<select id="' + settings.field_name + '" class="select ' + settings.field_name + '" name="' + settings.field_name + '[]" style="max-width:95%;">';
     }
-    $.each(result, function(f_key, f_name) {
+    $.each(result, function (f_key, f_name) {
      select_stmt += '<option data-ref_po_line_id="' + f_name.po_line_id + '" value="' + f_name.po_header_id + '">' + f_name.po_number + ' Line ' + f_name.po_line_number + '</option>';
     });
     select_stmt += '</select>';
@@ -1398,14 +1385,14 @@ function getBPAList(options) {
     }
    }
   },
-  complete: function() {
+  complete: function () {
    $('.document_header_id').trigger('changeHeader');
    $('.show_loading_small').hide();
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  error: function(request, errorType, errorMessage) {
+  error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
@@ -1425,9 +1412,9 @@ function getBPADetails(options) {
    po_header_id: settings.po_header_id,
    find_bpa_details: 1
   },
-  success: function(result) {
+  success: function (result) {
    if (result) {
-    $.each(result, function(key, value) {
+    $.each(result, function (key, value) {
      switch (key) {
       case 'po_header_id':
       case 'po_type':
@@ -1444,13 +1431,13 @@ function getBPADetails(options) {
 
    }
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  error: function(request, errorType, errorMessage) {
+  error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
@@ -1470,10 +1457,10 @@ function getBPALineDetails(options) {
    po_line_id: settings.po_line_id,
    find_bpa_line_details: 1
   },
-  success: function(result) {
+  success: function (result) {
    if (result) {
     var trClass_d = '.' + settings.trClass;
-    $.each(result, function(key, value) {
+    $.each(result, function (key, value) {
      switch (key) {
       case 'po_header_id':
       case 'po_line_id':
@@ -1494,13 +1481,13 @@ function getBPALineDetails(options) {
 
    }
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  error: function(request, errorType, errorMessage) {
+  error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
@@ -1526,14 +1513,14 @@ function getSerialNumber(options) {
    item_id_m: settings.item_id_m,
    find_serial_list: 1
   },
-  success: function(result) {
+  success: function (result) {
    if (result) {
     if (settings.trclass) {
      var select_stmt = '<select class="select inv_serial_number_id" name="inv_serial_number_id[]" style="max-width:95%;">';
     } else {
      var select_stmt = '<select id="inv_serial_number_id" class="select inv_serial_number_id" name="inv_serial_number_id[]" style="max-width:95%;">';
     }
-    $.each(result, function(f_key, f_name) {
+    $.each(result, function (f_key, f_name) {
      select_stmt += '<option data-status="' + f_name.status + '" value="' + f_name.inv_serial_number_id + '">' + f_name.serial_number + '</option>';
     });
     select_stmt += '</select>';
@@ -1545,13 +1532,13 @@ function getSerialNumber(options) {
     }
    }
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  error: function(request, errorType, errorMessage) {
+  error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
@@ -1578,14 +1565,14 @@ function getlotNumber(options) {
    item_id_m: settings.item_id_m,
    find_lot_list: 1
   },
-  success: function(result) {
+  success: function (result) {
    if (result) {
     if (settings.trclass) {
      var select_stmt = '<select class="select inv_lot_number_id" name="inv_lot_number_id[]" style="max-width:95%;">';
     } else {
      var select_stmt = '<select id="inv_lot_number_id" class="select inv_lot_number_id" name="inv_lot_number_id[]" style="max-width:95%;">';
     }
-    $.each(result, function(f_key, f_name) {
+    $.each(result, function (f_key, f_name) {
      select_stmt += '<option data-status="' + f_name.status + '" value="' + f_name.inv_lot_number_id + '">' + f_name.lot_number + '</option>';
     });
     select_stmt += '</select>';
@@ -1597,13 +1584,13 @@ function getlotNumber(options) {
     }
    }
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  error: function(request, errorType, errorMessage) {
+  error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
@@ -1613,12 +1600,12 @@ function getlotNumber(options) {
 
 function beforeSave_serial() {
  var retValue = 1;
- $('.add_detail_values').each(function() {
+ $('.add_detail_values').each(function () {
   if ($(this).children('.serial_generation').val()) {
    var trClass = '.' + $(this).closest("tr").attr('class').replace(/\s+/g, '.');
    var qty = +$('#content').find(trClass).find('.quantity').val();
    var noOfSerialIds = 0;
-   $(this).closest('td').find('.inv_serial_number_id').each(function() {
+   $(this).closest('td').find('.inv_serial_number_id').each(function () {
     if ($(this).val()) {
      noOfSerialIds++;
     }
@@ -1626,7 +1613,7 @@ function beforeSave_serial() {
 
    if (noOfSerialIds != qty) {
     var noOfSerials = 0;
-    $(this).closest('td').find('.serial_number').each(function() {
+    $(this).closest('td').find('.serial_number').each(function () {
      if ($(this).val()) {
       noOfSerials++;
      }
@@ -1644,7 +1631,7 @@ function beforeSave_serial() {
 
 function getSerialInStore(orgId) {
  orgId = (typeof orgId !== 'undefined') ? orgId : $('#org_id').val();
- $('#content').on('blur', '.item_number', function() {
+ $('#content').on('blur', '.item_number', function () {
   var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
   var trClass_d = '.' + trClass;
   var generation_type = $('#content').find(trClass_d).find('.serial_generation').val();
@@ -1701,7 +1688,7 @@ function getViewResult(options) {
    filter_data: settings.filterData,
    sort_data: settings.sortData
   },
-  success: function(result) {
+  success: function (result) {
    if (result) {
     if (settings.update_result) {
      var divHtml = $(result).filter('div#return_divId').html();
@@ -1710,20 +1697,20 @@ function getViewResult(options) {
     }
    }
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  error: function(request, errorType, errorMessage) {
+  error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
 }
 
 function viewResultWith_pagination() {
- $('body').on('click', '.ajax_view.pagination .page_nos a', function(e) {
+ $('body').on('click', '.ajax_view.pagination .page_nos a', function (e) {
   e.preventDefault();
   var link = $(this).attr('href');
   var class_name = getUrlValues('class_name', link);
@@ -1744,7 +1731,7 @@ function viewResultWith_pagination() {
   });
  });
 
- $('body').on('click', '.ajax_view.pagination .content_per_page', function(e) {
+ $('body').on('click', '.ajax_view.pagination .content_per_page', function (e) {
   e.preventDefault();
   var link = $(this).closest('.pagination').find('a').first().attr('href');
   var class_name = getUrlValues('class_name', link);
@@ -1785,18 +1772,18 @@ function getSearchResult(options) {
    pageno: settings.pageno,
    per_page: settings.per_page
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   }
- }).done(function(result) {
+ }).done(function (result) {
   var newContent = $(result).find('div#searchResult').html();
   $('#searchResult').empty().append(newContent);
   $.getScript("includes/js/reload.js");
 
- }).fail(function() {
+ }).fail(function () {
   alert("Search Failed");
  });
 }
@@ -1836,20 +1823,20 @@ function getSvgImage(options) {
    filter_data: settings.filterData,
    sort_data: settings.sortData
   },
-  success: function(result) {
+  success: function (result) {
    if (result) {
     if (settings.update_image) {
      $('.svg_image').empty().append(result);
     }
    }
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  error: function(request, errorType, errorMessage) {
+  error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
@@ -1873,14 +1860,14 @@ function getItemRevision(options) {
    item_id_m: settings.item_id_m,
    find_revision: 1
   },
-  success: function(result) {
+  success: function (result) {
    if (result) {
     if (settings.trclass) {
      var select_stmt = '<select name="revision_name[]" class="from_array select revision_name">';
     } else {
      var select_stmt = '<select id="revision_name" class="select revision_name medium" name="revision_name[]" style="max-width:95%;">';
     }
-    $.each(result, function(f_key, f_name) {
+    $.each(result, function (f_key, f_name) {
      if (settings.show_date) {
       select_stmt += '<option data-effective_start_date="' + f_name.effective_start_date + '" value="' + f_name.revision_name + '">' + f_name.revision_name + ' - ' + f_name.effective_start_date + '</option>';
      } else {
@@ -1903,13 +1890,13 @@ function getItemRevision(options) {
     }
    }
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  error: function(request, errorType, errorMessage) {
+  error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
@@ -1930,7 +1917,7 @@ function getDBReportList(options) {
    report_type: settings.report_type,
    find_report_list: 1
   },
-  success: function(result) {
+  success: function (result) {
    if (result) {
     var trClass = settings.trClass;
     var trClass_d = '.' + trClass.replace(/\s+/g, '.');
@@ -1941,13 +1928,13 @@ function getDBReportList(options) {
     }
    }
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  error: function(request, errorType, errorMessage) {
+  error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
@@ -1963,13 +1950,13 @@ function inoAutoComplete(options) {
  }
  var primary_column1_h = '#' + settings.primary_column1;
  var select_class_d = '.' + settings.select_class;
- return $('#content').on("focus.nsAutoComplete", select_class_d, function(e) {
+ return $('#content').on("focus.nsAutoComplete", select_class_d, function (e) {
   var primary_column1_v = $(primary_column1_h).val();
   e.preventDefault();
   if (!$(this).data("autocomplete")) {
    var auto_element = this;
    $(this).autocomplete({
-    source: function(request, response) {
+    source: function (request, response) {
      $.ajax({
       url: settings.json_url,
       dataType: "json",
@@ -1982,30 +1969,30 @@ function inoAutoComplete(options) {
        other_options: settings.other_options,
        ino_auto_complete: true
       },
-      success: function(data) {
+      success: function (data) {
        response(data);
       },
-      error: function(request, errorType, errorMessage) {
+      error: function (request, errorType, errorMessage) {
        alert("Error : " + errorType + ' with message ' + errorMessage);
        $(this).autocomplete("close");
       }
      });
     },
     autoFocus: true,
-    response: function(event, ui) {
+    response: function (event, ui) {
      if (ui.content.length === 1)
      {
       $(this).val(ui.content[0].label);
       var elemenType = $(this).parent().prop('tagName');
-      $.each(ui.content[0], function(key, value) {
-         var v_d = '.' + key;
-        if (elemenType === 'LI') {
-         $(auto_element).closest("ul").find(v_d).val(value);
-        } else if (elemenType === 'TD') {
-         var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
-         $('#form_line').find(trClass).find(v_d).val(value);
-        }
-       });
+      $.each(ui.content[0], function (key, value) {
+       var v_d = '.' + key;
+       if (elemenType === 'LI') {
+        $(auto_element).closest("ul").find(v_d).val(value);
+       } else if (elemenType === 'TD') {
+        var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
+        $('#form_line').find(trClass).find(v_d).val(value);
+       }
+      });
       //close the auto complete
       $(this).autocomplete("close");
      } else if (ui.content.length === 0) {
@@ -2017,11 +2004,11 @@ function inoAutoComplete(options) {
 
     },
     //select
-    select: function(event, ui) {
+    select: function (event, ui) {
      $(this).val(ui.item.label);
      var elemenType = $(this).parent().prop('tagName');
-     $.each(ui, function(key2, value) {
-      $.each(value, function(value_k, value_v) {
+     $.each(ui, function (key2, value) {
+      $.each(value, function (value_k, value_v) {
        var v_d = '.' + value_k;
        if (elemenType === 'LI') {
         $(auto_element).closest("ul").find(v_d).val(value_v);
@@ -2042,30 +2029,51 @@ function inoAutoComplete(options) {
 }
 
 //end of global functions
-$(document).ready(function() {
+$(document).ready(function () {
  var homeUrl = $('#home_url').val();
- $('.non_clickable').on('click', function(e) {
+ $('.non_clickable').on('click', function (e) {
   e.preventDefault();
- })
+ });
+ //show Default Dialog Box 
+ function show_dialog_box() {
+  $("#dialog_box").dialog({
+   dialogClass: "no-close",
+   modal: true,
+   minWidth: 600,
+   title: "Action Message",
+   buttons: [
+    {
+     text: "OK",
+     click: function () {
+      $(this).dialog("close");
+     }
+    }
+   ],
+   closeOnEscape: true,
+   position: {my: "left top", at: "left top", of: "#structure "}
+  });
+ }
+
  $('#loading').hide();
  $('.show_loading_small').hide();
+
  viewResultWith_pagination();
  //show & remove select search icon
  $('.select_popup').hide();
- $('#content').on('focusin', 'input', function() {
+ $('#content').on('focusin', 'input', function () {
   $('#content').find('.select_popup').hide();
   $(this).parent().find('.select_popup').show();
 //  if(!$(this).prop('readonly')){
 //  $(this).parent().find('.select_popup').show();
 // }
- })
+ });
 
  if ($('#display_comment_form').length > 0) {
   $('#display_comment_form').html($('#commentForm_witoutjs').html());
   $('#commentForm_witoutjs').html('');
  }
 
- $('body').on('click', '.content_per_page', function(e) {
+ $('body').on('click', '.content_per_page', function (e) {
   var currentUrl = window.location.toString();
   var newURL = currentUrl.replace(/per_page=/g, '');
   newURL = newURL.replace(/&&/g, '&');
@@ -2078,41 +2086,48 @@ $(document).ready(function() {
  });
 
 //enable lines with change data for save
- $('#content').data('last', '').on("blur", ':input', function() {
+ $('#content').data('last', '').on("blur", ':input', function () {
   var last = $(this).data('last');
   var current = $(this).val();
-  if (current !== '' && current !== last) {
+  if (current && current !== '' && current !== last) {
    var trClass = '.' + $(this).closest('tr').prop('class');
-   $('#content').find(trClass).find('input[name="line_id_cb"],input[name="detail_id_cb"]').prop('checked', true);
-   $('#content').find('input[name="detail_id_cb"]:checked').each(function() {
-    $(this).closest('td.add_detail_values').closest('tr').find('input[name="line_id_cb"]').prop('checked', true);
-   })
+   var detail_line_cb = $('#content').find(trClass).find('input[name="line_id_cb"],input[name="detail_id_cb"]');
+   if (detail_line_cb) {
+    $('#content').find(trClass).find('input[name="line_id_cb"],input[name="detail_id_cb"]').prop('checked', true);
+    $('#content').find('input[name="detail_id_cb"]:checked').each(function () {
+     $(this).closest('td.add_detail_values').closest('tr').find('input[name="line_id_cb"]').prop('checked', true);
+    });
+   }
   }
  });
 
+
 //hiding the loader
  var $loader = $('#loading'), timer;
- $loader.hide().ajaxStart(function()
+ $loader.hide().ajaxStart(function ()
  {
   timer && clearTimeout(timer);
-  timer = setTimeout(function()
+  timer = setTimeout(function ()
   {
    $loader.show();
   },
-   10000);
- }).ajaxStop(function()
+          10000);
+ }).ajaxStop(function ()
  {
   clearTimeout(timer);
   $loader.hide();
  });
 
 //select page data selction in parent window
- $(".quick_select").click(function() {
+ $(".quick_select").click(function () {
   var setData = new opener.setValFromSelectPage;
-  $(this).closest('tr').find('td').each(function() {
+  $(this).closest('tr').find('td').each(function () {
    setData[$(this).prop('class')] = $(this).text();
   });
   setData.setVal();
+  if (opener.setPopUpValue) {
+   opener.setPopUpValue(setData);
+  }
   localStorage.removeItem("field_class");
   localStorage.removeItem("reset_link");
   window.close();
@@ -2121,24 +2136,24 @@ $(document).ready(function() {
  //search reset button
  var link = localStorage.getItem("reset_link");
  if (link) {
-  $('#multi_select a#search_reset_btn').on('click', function() {
+  $('#multi_select a#search_reset_btn').on('click', function () {
    $(this).attr('href', link);
   });
  }
 
  var reset_link_ofSelect = localStorage.getItem("reset_link_ofSelect");
  if (reset_link_ofSelect) {
-  $('#select_page a#search_reset_btn').on('click', function() {
+  $('#select_page a#search_reset_btn').on('click', function () {
    $(this).attr('href', reset_link_ofSelect);
   });
  }
 
  //new object
- $('#new_object_button').on('click', function(e) {
+ $('#new_object_button').on('click', function (e) {
   e.preventDefault();
   $('#content').find(':input').val('');
   $('#content').find(':checkbox').prop('checked', false);
- })
+ });
 
  remove_row();
 
@@ -2175,11 +2190,11 @@ $(document).ready(function() {
  itemNumber.extra_elements = ['item_id', 'item_id_m', 'item_description', 'uom_id', 'processing_lt', 'lot_generation', 'serial_generation'];
  itemNumber.min_length = 2;
  itemNumber.autoComplete();
- 
+
  $('.select_item_number_all').inoAutoCompleteElement({
-  json_url : 'modules/inv/item/json_item.php',
-  primary_column1 :'org_id'
-});
+  json_url: 'modules/inv/item/json_item.php',
+  primary_column1: 'org_id'
+ });
 
  //auto complete for allowed BOM
  var itemNumber = new autoCompleteMain();
@@ -2191,7 +2206,7 @@ $(document).ready(function() {
  itemNumber.options = {bom_enabled_cb: "1"};
  itemNumber.autoComplete();
 
- $('#form_line').on('blur', '.textfield.select_item_number', function() {
+ $('#form_line').on('blur', '.textfield.select_item_number', function () {
   var elemenType = $(this).parent().prop('tagName');
   if (elemenType === 'TD') {
    var trClass = '.' + $(this).closest("tr").attr('class').replace(/\s+/g, '.');
@@ -2207,7 +2222,7 @@ $(document).ready(function() {
 
 
  //popu for selecting accounts
- $('#content').on('click', '.account_popup', function() {
+ $('#content').on('click', '.account_popup', function () {
   if ($(this).closest('td').find('input').hasClass('select_account')) {
    var rowClass = $(this).closest('tr').prop('class');
    var fieldClass = $(this).closest('td').find('.select_account').prop('class');
@@ -2217,11 +2232,11 @@ $(document).ready(function() {
   }
   localStorage.setItem("field_class", fieldClass);
   void window.open('select.php?class_name=coa_combination', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
  //popu for selecting items
- $('#content').on('click', '.select_item_number.select_popup', function() {
+ $('#content').on('click', '.select_item_number.select_popup', function () {
 
   var elemenType = $(this).parent().prop('tagName');
   if (elemenType === 'TD') {
@@ -2244,10 +2259,10 @@ $(document).ready(function() {
    openUrl += '&item_number=' + $(this).siblings('.item_number').val();
   }
   void window.open(openUrl, '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- $('#content').on('click', '.select_item_number_only.select_popup', function() {
+ $('#content').on('click', '.select_item_number_only.select_popup', function () {
   var rowClass = $(this).closest('tr').prop('class');
   var fieldClass = $(this).closest('td').find('.select_item_number').prop('class');
   localStorage.setItem("row_class", rowClass);
@@ -2257,7 +2272,7 @@ $(document).ready(function() {
    openUrl += '&item_number=' + $(this).siblings('.item_number').val();
   }
   void window.open(openUrl, '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
 
@@ -2266,13 +2281,13 @@ $(document).ready(function() {
 //	$(this).find('.search_form').toggle();
 // });
  //add new columns
- $('#content').on('change', '.new_column:first', function() {
+ $('#content').on('change', '.new_column:first', function () {
   if ($(this).val()) {
    $(this).clone().insertBefore($(this));
   }
  });
  //add new order by
- $('#content').on('change', '.search_order_by', function() {
+ $('#content').on('change', '.search_order_by', function () {
   if ($(this).val() !== 'remove') {
    $(this).closest('li').clone().insertAfter($(this).closest('li'));
   } else {
@@ -2280,7 +2295,7 @@ $(document).ready(function() {
   }
  });
 
- $('#searchForm').on('change', '.new_search_criteria', function() {
+ $('#searchForm').on('change', '.new_search_criteria', function () {
   if ($(this).val()) {
    var newSearchCriteria = $(this).val();
    var newSearchCriteriaName = newSearchCriteria + '[]';
@@ -2295,7 +2310,7 @@ $(document).ready(function() {
    clonedElement.children().removeClass(elementClass);
    clonedElement.children().addClass(newSearchCriteria);
    clonedElement.children().prop('name', newSearchCriteriaName);
-   clonedElement.find("input").each(function() {
+   clonedElement.find("input").each(function () {
     $(this).val("");
    });
 //	 clonedElement.appendTo($(this).closest("ul"));
@@ -2307,11 +2322,11 @@ $(document).ready(function() {
 
  //toggle detail lines
  $(".form_detail_data_fs").hide();
- $(".error").dblclick(function() {
+ $(".error").dblclick(function () {
   $(this).html("");
  });
  //export to excel from search result
- $("#content").on('click', '#export_excel_searchResult', function(e) {
+ $("#content").on('click', '#export_excel_searchResult', function (e) {
   window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#search_result').html()));
   e.preventDefault();
  });
@@ -2319,24 +2334,12 @@ $(document).ready(function() {
  remove_row();
 
  //remove attached files
- $('#content').on('click', '.remove_file', function() {
+ $('#content').on('click', '.remove_file', function () {
   $(this).closest('ul').remove();
  });
 
 
- //date picker
-// $('body').on('focus', ".date", function() {
-//  var currentDate = new Date();
-//  $(this).datepicker({
-//   defaultDate: 0,
-//   changeMonth: true,
-//   changeYear: true,
-//   dateFormat: "yy-mm-dd",
-//   setDate: currentDate
-//  });
-// });
-
- $('body').on('focus', ".dateTime", function() {
+ $('body').on('focus', ".dateTime", function () {
   var currentDate = new Date();
   var timeStamp = currentDate.getHours() + ':' + currentDate.getMinutes() + ':' + currentDate.getSeconds();
   $(this).datepicker({
@@ -2349,7 +2352,7 @@ $(document).ready(function() {
  });
 
 
- $('body').on('focus', ".anyDate", function() {
+ $('body').on('focus', ".anyDate", function () {
   if ($(this).hasClass('readonly')) {
    $(this).prop('disabled', true);
    alert('readonly field');
@@ -2367,7 +2370,7 @@ $(document).ready(function() {
  });
 
 
- $('body').on('focus', ".dateFromToday", function() {
+ $('body').on('focus', ".dateFromToday", function () {
   if ($(this).hasClass('readonly')) {
    $(this).prop('disabled', true);
    alert('readonly field');
@@ -2384,7 +2387,7 @@ $(document).ready(function() {
   }
  });
 
- $('body').on('focus', ".MondayFromToday", function() {
+ $('body').on('focus', ".MondayFromToday", function () {
   if ($(this).hasClass('readonly')) {
    $(this).prop('disabled', true);
    alert('readonly field');
@@ -2397,7 +2400,7 @@ $(document).ready(function() {
     changeYear: true,
     dateFormat: "yy-mm-dd",
     setDate: currentDate,
-    beforeShowDay: function(date) {
+    beforeShowDay: function (date) {
      var day = date.getDay();
      return [day == 1, ""];
     }
@@ -2405,14 +2408,12 @@ $(document).ready(function() {
   }
  });
 
-
-
  var today_date = new Date();
  var formatted_date = today_date.getFullYear() + '-' + (today_date.getMonth() + 1) + '-' + today_date.getDate();
  $(".default_date").val(formatted_date);
 
  //dont allow past dates if manually entered
- $('body').on('change', '.dateFromToday', function() {
+ $('body').on('change', '.dateFromToday', function () {
   var toDay = new Date();
   var enteredDate = $(this).datepicker("getDate");
   var diff = enteredDate - toDay;
@@ -2425,12 +2426,12 @@ $(document).ready(function() {
  //creating tabs
 // $("#tabs").tabs();
  //creating tabs
- $(function() {
+ $(function () {
   var tabs = $("#tabsHeader").tabs();
   var tabs = $("#tabsLine").tabs();
   tabs.find(".ui-tabs-nav").sortable({
    axis: "x",
-   stop: function() {
+   stop: function () {
     tabs.tabs("refresh");
    }
   });
@@ -2438,11 +2439,11 @@ $(document).ready(function() {
  $("#tabsVertical").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
  $("#tabsVertical li").removeClass("ui-corner-top").addClass("ui-corner-left");
 // $("#tabsLine").tabs();
- $("#tabsDetail, #tabsDetailA ,#tabsDetailB, #tabsDetailC, #tabsDetailD").tabs();
- $(".tabsDetail, .tabsDetailA , .tabsDetailB, .tabsDetailC, .tabsDetailD").tabs();
+ $("#tabsDetail, #tabsDetailA ,#tabsDetailB, #tabsDetailC, #tabsDetailD, #tabsDetailSN, #tabsDetailLN").tabs();
+ $(".tabsDetail, .tabsDetailA , .tabsDetailB, .tabsDetailC, .tabsDetailD, .tabsDetailSL, .tabsDetailLN").tabs();
 
 //Refresh the page
- $("#refresh_button").on("click", function() {
+ $("#refresh_button").on("click", function () {
   location.reload(true);
   localStorage.removeItem("disableContextMenu");
  });
@@ -2458,7 +2459,7 @@ $(document).ready(function() {
   toolbar: "styleselect code | emoticons forecolor backcolor bold italic pagebreak | alignleft aligncenter alignright | bullist numlist outdent indent | link image inserttable ",
   menubar: false,
   statusbar: false,
-  file_browser_callback: function() {
+  file_browser_callback: function () {
    $('#attachment_button').click();
   }
  });
@@ -2473,7 +2474,7 @@ $(document).ready(function() {
   toolbar: "styleselect code | emoticons forecolor backcolor bold italic pagebreak | alignleft aligncenter alignright | bullist numlist outdent indent | link image inserttable ",
   menubar: false,
   statusbar: false,
-  file_browser_callback: function() {
+  file_browser_callback: function () {
    $('#attachment_button').click();
   }
  });
@@ -2490,25 +2491,25 @@ $(document).ready(function() {
  });
 
  //Popup for selecting address
- $(".address_id.select_popup").click(function(e) {
+ $(".address_id.select_popup").click(function (e) {
   e.preventDefault();
   var rowClass = $(this).parent().find('input').first().prop('class');
   localStorage.setItem("field_class", rowClass);
   void window.open('select.php?class_name=address', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
   return false;
  });
 
 //diable/enable auto complete
- $('#content').on('click', '.disable_autocomplete', function() {
-  $(this).parent().siblings().each(function() {
+ $('#content').on('click', '.disable_autocomplete', function () {
+  $(this).parent().siblings().each(function () {
    $(this).autocomplete({
     disabled: true
    });
   });
  });
 
- $('#content').on('dblclick', ':input', function() {
+ $('#content').on('dblclick', ':input', function () {
   if ($(this).hasClass('ui-autocomplete-input')) {
    $(this).autocomplete({
     disabled: false
@@ -2516,78 +2517,38 @@ $(document).ready(function() {
   }
  });
 
-
-
  //basic finction --making background colors for form fields
- $("input").focus(function() {
+ $("input").focus(function () {
   $(this).css("background-color", "#cccccc");
  });
- $("input").blur(function() {
+ $("input").blur(function () {
   $(this).css("background-color", "#ffffff");
  });
  $(" :required").css("background-color", "pink");
  $("[readonly]").css("background-color", "#ddd");
-// $("select:required").css("background-color", "pink");
-// $("input:required").focus(function() {
-//	$(this).css("background-color", "pink");
-// });
- $("input:required").blur(function() {
+ $("input:required").blur(function () {
   $(this).css("background-color", "pink");
  });
  //Popup for print
- $(".print").click(function() {
+ $(".print").click(function () {
   window.print();
  });
  //all download
- $('#export_excel_allResult').on('click', function() {
+ $('#export_excel_allResult').on('click', function () {
   $('#download_all').submit();
  });
 
  show_dialog_box();
- //shortcut keys
-// $(document).bind('keydown', 'alt+r', function(e) {
-//  e.preventDefault();
-//  $("#refresh_button").first().trigger('click');
-// });
-// $(document).bind('keydown', 'alt+o', function(e) {
-//  e.preventDefault();
-//  $("#new_object_button").first().trigger('click');
-// });
-// $(document).bind('keydown', 'alt+n', function(e) {
-//  e.preventDefault();
-//  $(".add_row_img").trigger("click").one();
-// });
-// $(document).bind('keydown', 'alt+s', function(e) {
-//  e.preventDefault();
-//  $("#save").first().trigger('click');
-// });
-// $(document).bind('keydown', 'alt+d', function(e) {
-//  e.preventDefault();
-//  $("#delete_button").first().trigger('click');
-// });
-// $(document).bind('keydown', 'alt+m', function(e) {
-//  e.preventDefault();
-//  $("#remove_row_button").first().trigger('click');
-// });
-// $(document).bind('keydown', 'alt+t', function(e) {
-//  e.preventDefault();
-//  $("#reset_button").first().trigger('click');
-// });
-// $(document).bind('keydown', 'alt+b', function(e) {
-//  e.preventDefault();
-//  $("#go_back_button").first().trigger('click');
-// });
-
  animateCycle();
- $('#all_contents').on('click', '.start_play', function() {
+ $('#all_contents').on('click', '.start_play', function () {
   animateCycle();
  });
 
- $('#all_contents').on('focusIn', '#animated_block', function() {
+ $('#all_contents').on('focusIn', '#animated_block', function () {
   clearInterval(interval);
  });
 
- $('#all_contents').on('focusOut', '#animated_block', function() {
+ $('#all_contents').on('focusOut', '#animated_block', function () {
   animateCycle();
  });
 
@@ -2611,7 +2572,7 @@ $(document).ready(function() {
   buttons: [
    {
     text: "OK",
-    click: function() {
+    click: function () {
      $(this).dialog("close");
     }
    }
@@ -2620,7 +2581,7 @@ $(document).ready(function() {
   position: {my: "left top", at: "left top", of: "#structure "}
  });
 
- $("#search_tip").click(function() {
+ $("#search_tip").click(function () {
   $("#search_message").dialog("open");
  });
 
@@ -2642,7 +2603,7 @@ $(document).ready(function() {
   var single_line = $('ul#js_saving_data').find('.single_line').data('single_line');
   var before_save_function = $('ul#js_saving_data').find('.before_save_function').data('before_save_function');
   if (!before_save_function) {
-   window.beforeSave = function() {
+   window.beforeSave = function () {
     return false;
    }
   }
@@ -2703,63 +2664,63 @@ $(document).ready(function() {
  fu.fileUpload();
 
 //selecting customer
- $(".ar_customer_id.select_popup").on("click", function() {
+ $(".ar_customer_id.select_popup").on("click", function () {
   localStorage.idValue = "";
   void window.open('select.php?class_name=ar_customer', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
 //selecting supplier
- $(".supplier_id.select_popup").on("click", function() {
+ $(".supplier_id.select_popup").on("click", function () {
   localStorage.idValue = "";
   void window.open('select.php?class_name=supplier', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
  onClick_addDetailLine(2, '.add_row_detail_img3', 'tabsDetailC');
- $('#content').on('change', '.sys_extra_field_id', function() {
+ $('#content').on('change', '.sys_extra_field_id', function () {
   var field_type = $(this).find('option:selected').data('field_type');
   $(this).closest('tr').find('.field_type').val(field_type);
  });
 
- $('#content').on('change', '.sys_secondary_field_id', function() {
+ $('#content').on('change', '.sys_secondary_field_id', function () {
   var field_type = $(this).find('option:selected').data('field_type');
   $(this).closest('tr').find('.field_type').val(field_type);
  });
 
- $('#all_contents').on('click', '.hideDiv', function() {
+ $('#all_contents').on('click', '.hideDiv', function () {
   $('.hideDiv').children().toggle();
-   $(this).parent().find('.hideDiv_element').toggle();
-   $(this).parent().parent().find('.hideDiv_element').toggle();
+  $(this).parent().find('.hideDiv_element').toggle();
+  $(this).parent().parent().find('.hideDiv_element').toggle();
   $(this).removeClass('hideDiv').addClass('showDiv');
  });
 
- $('#all_contents').on('click', '.showDiv', function() {
+ $('#all_contents').on('click', '.showDiv', function () {
   $(this).children().toggle();
-   $(this).parent().find('.hideDiv_element').toggle();
-   $(this).parent().parent().find('.hideDiv_element').toggle();
+  $(this).parent().find('.hideDiv_element').toggle();
+  $(this).parent().parent().find('.hideDiv_element').toggle();
   $(this).removeClass('showDiv').addClass('hideDiv');
  });
 
- $('#all_contents').on('click', '.hideDiv_input', function() {
+ $('#all_contents').on('click', '.hideDiv_input', function () {
   $(this).parent().find('.hideDiv_input_element').toggle();
   $(this).removeClass('hideDiv_input').addClass('showDiv_input');
  });
 
- $('#all_contents').on('click', '.showDiv_input', function() {
+ $('#all_contents').on('click', '.showDiv_input', function () {
   $(this).parent().find('.hideDiv_input_element').toggle();
   $(this).removeClass('showDiv_input').addClass('hideDiv_input');
  });
 
 // $('#user_info .block_menu').menu();
 
- $('#search_page').on('click', '#search_submit_btn', function(e) {
+ $('#search_page').on('click', '#search_submit_btn', function (e) {
   e.preventDefault();
   $('.hideDiv_input').trigger('click');
   getSearchResult();
  });
 
- $('#search_page').on('click', '.page_nos a', function(e) {
+ $('#search_page').on('click', '.page_nos a', function (e) {
   e.preventDefault();
   $('.hideDiv_input').trigger('click');
   var page_no = getUrlValues('pageno', $(this).prop('href'));
@@ -2770,7 +2731,7 @@ $(document).ready(function() {
   });
  });
 
- $('#search_page').on('click', 'a.content_per_page', function(e) {
+ $('#search_page').on('click', 'a.content_per_page', function (e) {
   e.preventDefault();
   $('.hideDiv_input').trigger('click');
   var per_page = $(this).closest('.noOfcontents').find('.per_page').val();
@@ -2782,7 +2743,7 @@ $(document).ready(function() {
 });
 function toUpperCase(str)
 {
- return str.toLowerCase().replace(/([^a-z])([a-z])(?=[a-z]{2})|^([a-z])/g, function(_, g1, g2, g3) {
+ return str.toLowerCase().replace(/([^a-z])([a-z])(?=[a-z]{2})|^([a-z])/g, function (_, g1, g2, g3) {
   return (typeof g1 === 'undefined') ? g3.toUpperCase() : g1 + g2.toUpperCase();
  });
 }

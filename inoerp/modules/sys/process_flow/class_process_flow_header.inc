@@ -74,7 +74,7 @@ ORDER BY seq_number ASC
    return !empty($result) ? $result : false;
   }
 
-  Public static function processFlowDiagram($process_flow_line_obj = '', $header_id = '') {
+  Public static function processFlowDiagram($process_flow_line_obj = '', $header_id = '', $current_line = '') {
    if (empty($process_flow_line_obj) && !empty($header_id)) {
     $process_flow_line_obj = sys_process_flow_line::find_by_parent_id($header_id, 'seq_number', 'ASC');
    }
@@ -87,7 +87,8 @@ ORDER BY seq_number ASC
    $process_flow_line_obj_ai = new ArrayIterator($process_flow_line_obj);
    while ($process_flow_line_obj_ai->valid()) {
     $process_count = $process_flow_line_obj_ai->key() + 1;
-    $diagram_stmt .= '<li class="process' . $process_flow_line_obj_ai->current()->line_name . ' '
+    $current_process = (!empty($current_line) && $current_line == $process_flow_line_obj_ai->current()->line_name ) ? 'current_processs' : '';
+    $diagram_stmt .= '<li class="process  '.$current_process. ' ' . $process_flow_line_obj_ai->current()->line_name . ' '
       . $process_flow_line_obj_ai->current()->line_type . ' "><bdi><label>'
       .$process_count. '. ' . $process_flow_line_obj_ai->current()->line_name . '</label>';
     $diagram_stmt .= $process_flow_line_obj_ai->current()->description;

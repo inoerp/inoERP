@@ -21,9 +21,17 @@
  $db = new dbObject();
  $dbc = new dbc();
  
-// pa(sys_process_flow_action::find_by_parent_id('11'));
+// pa(sys_process_flow_action::find_by_parent_id('11'));'
+
+// pa(cc_co_header::find_by_status('REVIew'))
  
- echo fp_urgent_card::find_current_cardList();
+//echo inv_lot_number::show_serialLot_entryForm();
+ 
+ 
+ $irh = new inv_receipt_header();
+ echo $irh->multi_select_tabs();
+ 
+// echo fp_urgent_card::find_current_cardList();
 
 // pa(get_dbColumns('fp_urgent_card'));
 // pa(get_dbColumns('sys_process_flow_action'));

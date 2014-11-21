@@ -50,7 +50,7 @@
                 <li><label>Type : </label>
                  <?php echo $f->select_field_from_array('change_type', cc_co_header::$change_type_a, $$class->change_type, 'change_type'); ?></li>
                 <li><label>Status : </label>
-                 <?php echo $f->select_field_from_object('status', $process_flow_line_obj, 'sys_process_flow_line_id', 'line_name', $$class->status, 'status', '', '', 1); ?>
+                 <?php echo $f->text_field_dr('status'); ?>
                 </li>
                 <li><label>Description: </label><?php $f->text_field_dl('description'); ?></li>
                </ul>
@@ -78,7 +78,7 @@
               </div>
              </div>
              <div id="tabsHeader-4" class="tabContent">
-              <?php echo sys_process_flow_header::processFlowDiagram($process_flow_line_obj); ?>
+              <?php echo sys_process_flow_header::processFlowDiagram($process_flow_line_obj,'',$$class->status); ?>
              </div>
              <div id="tabsHeader-5" class="tabContent">
               <div id="comments">
@@ -103,7 +103,7 @@
               <div class="large_shadow_box"> 
                <ul class="column three_column">
                 <li><label>Action : </label>
-                 <?php echo $f->select_field_from_object('action', $process_flow_line_obj, 'sys_process_flow_line_id', 'line_name', '', 'action'); ?>
+                 <?php echo $f->select_field_from_object('action', $process_flow_line_obj, 'line_name', 'line_name', '', 'action'); ?>
                 </li>
                </ul>
 

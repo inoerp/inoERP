@@ -24,7 +24,7 @@
            <div class="large_shadow_box"> 
             <ul class="column four_column">
              <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_element_entry_header_id select_popup clickable">
-               Hierarchy Id : </label><?php $f->text_field_dsr('hr_element_entry_header_id') ?>
+               Header Id : </label><?php $f->text_field_dsr('hr_element_entry_header_id') ?>
               <a name="show" href="form.php?class_name=hr_element_entry_header_id" class="show hr_element_entry_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
              </li>
              <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">

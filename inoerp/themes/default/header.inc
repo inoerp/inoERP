@@ -44,7 +44,7 @@
  </head>
  <body>
   <!--     Check if its a find page
-       Exclude the header & left block section-->
+       Exclude the header &amp; left block section-->
   <div id="header_top_container"><?php
     $show_header_links = true;
     if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
@@ -81,9 +81,9 @@
         <ul class="inRow asperWidth"> 
          <li><a href="http://demo.inoideas.org/extensions/user/user_login.php">Demo</a></li>
          <li><a href="https://github.com/inoerp/inoerp_v1">Download</a></li>
-         <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&category_id=30">Documentation</a></li>
-         <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&category_id=1">Forum</a></li>
-         <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&content_id=197&content_type_id=47">About</a></li>
+         <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation</a></li>
+         <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum</a></li>
+         <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47">About</a></li>
         </ul>
        </div>
 
@@ -95,17 +95,17 @@
         <div class="ino_drop_down_menu">
          <ul class="block_menu">
           <li class="parent_menu expandable " data-path_description="Administrator">
-           <a  href="<?php echo HOME_URL; ?>form.php?class_name=user&mode=9&user_id=<?php echo $_SESSION['user_id']; ?>">
+           <a  href="<?php echo HOME_URL; ?>form.php?class_name=user&amp;mode=9&amp;user_id=<?php echo $_SESSION['user_id']; ?>">
             <?php echo 'Hello ' . ucfirst($_SESSION['username']) . '!'; ?></a>
            <ul class="child_menu">
             <li class="expandable" data-path_description="Home Page">
              <a  href="<?php echo HOME_URL; ?>">Home</a> 
             </li>
             <li class="expandable" data-path_description="User Details">
-             <a href="<?php echo HOME_URL; ?>form.php?class_name=user&mode=9&user_id=<?php echo $_SESSION['user_id']; ?>">User Details</a>
+             <a href="<?php echo HOME_URL; ?>form.php?class_name=user&amp;mode=9&amp;user_id=<?php echo $_SESSION['user_id']; ?>">User Details</a>
              <ul>
               <li class="expandable" data-path_description="User Activities">
-               <a href="<?php echo HOME_URL; ?>form.php?class_name=user_activity_v&mode=2&user_id=<?php echo $_SESSION['user_id']; ?>">Activities</a>
+               <a href="<?php echo HOME_URL; ?>form.php?class_name=user_activity_v&amp;mode=2&amp;user_id=<?php echo $_SESSION['user_id']; ?>">Activities</a>
               </li>
               <li class="expandable" data-use_notification="User Notifications">
                <a href="<?php echo HOME_URL; ?>search.php?class_name=sys_notification_user">All Notifications</a>
@@ -113,10 +113,10 @@
              </ul>
             </li>
             <li class="expandable" data-path_description="Dashborad">
-             <a href="<?php echo HOME_URL; ?>form.php?class_name=user_dashboard_v&mode=2&user_id=<?php echo $_SESSION['user_id']; ?>">Dashboard</a>
+             <a href="<?php echo HOME_URL; ?>form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=<?php echo $_SESSION['user_id']; ?>">Dashboard</a>
              <ul>
               <li class="expandable" data-path_description="Dashborad Configuration">
-               <a href="<?php echo HOME_URL; ?>form.php?class_name=user_dashboard_config&mode=9&user_id=<?php echo $_SESSION['user_id']; ?>">Configure</a>
+               <a href="<?php echo HOME_URL; ?>form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=<?php echo $_SESSION['user_id']; ?>">Configure</a>
               </li>
              </ul>
             </li>

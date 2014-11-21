@@ -8,7 +8,7 @@
      <div id="content_typeDivId">
 			<!--    START OF FORM HEADER-->
 			<div class="error"></div><div id="loading"></div>
-			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
+			<?php echo (!empty($show_message)) ? $show_message : ""; $f = new inoform(); ?> 
       <div id ="form_header">
 			 <span class="heading">Content Type </span>
 			 <form action=""  method="post" id="content_type_header"  name="content_type_header" class="content_type_header">
@@ -71,16 +71,19 @@
 					<div id="tabsHeader-3" class="tabContent">
 					 <div> 
 						<ul class="column five_column">
+             						 <li class="show_category_onsummary_cb"> <label>Show Category on Summary List Page? : </label>    
+							<?php echo form::checkBox_field('show_category_onsummary_cb', $$class->show_category_onsummary_cb); ?></li>
+             
 						 <?php
 						 if ((isset($category)) && (count($category) > 0)) {
 							foreach ($category as $obj) {
-							 echo $removeImage;
-							 echo form::select_field_from_object('category_id', category::major_categories(), 'category_id', 'category', $obj->category_id, '', $readonly, 'category_id', '', '');
+							 echo '<li><label><span class="flaticon-delete82 clickable delete_category" title="Delete Category"></span></label>';
+							 echo $f->select_field_from_object('category_id', category::major_categories(), 'category_id', 'category', $obj->category_id, '','category_id', '', 1);
 							 echo '</li>';
 							}
 						 }
-						 echo $addImage;
-						 echo form::select_field_from_object('category_id', category::major_categories(), 'category_id', 'category', 'category_id', '', $readonly, 'category_id', '', '');
+             echo '<li>';
+						 echo $f->select_field_from_object('category_id', category::major_categories(), 'category_id', 'category', 'category_id', '', '', 'category_id');
 						 echo '</li>';
 						 ?> 
 						</ul>

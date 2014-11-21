@@ -77,7 +77,10 @@ function saveUrgentCards(options) {
 $(document).ready(function () {
 //get Subinventory Name
  $("#org_id").on("change", function () {
-  getSubInventory('modules/inv/subinventory/json_subinventory.php', $(this).val());
+      getSubInventory({
+   json_url: 'modules/inv/subinventory/json_subinventory.php',
+   org_id: $(this).val()
+  });
  });
  saveUrgentCards();
  drag_drop_urgent_card();

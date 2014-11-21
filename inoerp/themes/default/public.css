@@ -700,9 +700,10 @@ ul.inline_list li{
 }
 
 .heading1 {
- border: 1px solid #8AC98B;
- background-color: rgba(26, 120, 38, 0.52);
- background-image: linear-gradient(to bottom, #98BFB6, rgba(188, 192, 190, 0.91));
+ border: 1px solid rgba(74, 93, 98, 0.52);
+ background-image: url("images/heading_bg6.png");
+/* background-color: rgba(26, 120, 38, 0.52);
+ background-image: linear-gradient(to bottom, #98BFB6, rgba(188, 192, 190, 0.91));*/
  margin-left: -10px;
  margin-right: -10px;
 
@@ -789,14 +790,14 @@ a.link_class_green:hover{
 
 .hideDiv , .hideDiv_input{
  background: url('images/minus_2.png') no-repeat 2px 2px;
- height: 28px;
+ /*height: 28px;*/
  display: block;
  z-index: 100;
 }
 
 .hideDiv , .hideDiv_input{
  background: url('images/minus_2.png') no-repeat 2px 2px;
- height: 26px; 
+ /*height: 26px;*/ 
  z-index: 100;
  display: block;
  float:left;
@@ -806,7 +807,7 @@ a.link_class_green:hover{
 
 .showDiv, .showDiv_input {
  background: url('images/plus_2.png') no-repeat 2px 2px;
- height: 28px;
+ /*height: 28px;*/
  display: block;
  z-index: 100;
     cursor: pointer; 
@@ -1015,6 +1016,9 @@ ul.process_flow_diagram_list li.flow_coneector{
  cursor: hand; 
 }
 
+ul.process_flow_diagram_list li.current_processs{
+background: rgba(35, 141, 231, 0.45);
+}
 /*Icon CSS*/
 
 @font-face {

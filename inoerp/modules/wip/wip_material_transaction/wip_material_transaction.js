@@ -4,13 +4,13 @@ function setValFromSelectPage(wip_wo_header_id, wo_number, org_id) {
  this.org_id = org_id;
 }
 
-setValFromSelectPage.prototype.setVal = function() {
+setValFromSelectPage.prototype.setVal = function () {
  var wo_obj = [{id: 'wip_wo_header_id', data: this.wip_wo_header_id},
   {id: 'wo_number', data: this.wo_number},
   {id: 'org_id', data: this.org_id}
  ];
 
- $(wo_obj).each(function(i, value) {
+ $(wo_obj).each(function (i, value) {
   if (value.data) {
    var fieldId = '#' + value.id;
    $('#content').find(fieldId).val(value.data);
@@ -24,7 +24,7 @@ function serial_details(generation_type, trClass) {
   var field_stmt = '<input class="textfield serial_number" type="text" size="25" readonly name="serial_number[]" >';
   $('#content').find(trClass_d).find('.inv_serial_number_id').replaceWith(field_stmt);
   $('#content').find(trClass_d).find('.serial_number').replaceWith(field_stmt);
-    return;
+  return;
  }
  var itemIdM = $('#content').find(trClass_d).find('.item_id_m').val();
  if (!itemIdM) {
@@ -39,7 +39,7 @@ function serial_details(generation_type, trClass) {
     'status': 'IN_WIP',
     'item_id_m': itemIdM,
     'trclass': trClass
-   })).then(function(data, textStatus, jqXHR) {
+   })).then(function (data, textStatus, jqXHR) {
     if ($.trim(data) == 'false' || $.trim(data) == 'undefined') {
      alert('No Serial Number Found!\nCheck the subinventory, locator and item number');
     }
@@ -55,7 +55,7 @@ function serial_details(generation_type, trClass) {
     'trclass': trClass,
     'subinventory_id': $('#content').find(trClass_d).find('.from_subinventory_id').val(),
     'locator_id': $('#content').find(trClass_d).find('.from_locator_id').val(),
-   })).then(function(data, textStatus, jqXHR) {
+   })).then(function (data, textStatus, jqXHR) {
     if ($.trim(data) == 'false' || $.trim(data) == 'undefined') {
      alert('No Serial Number Found!\nCheck the subinventory, locator and item number');
     }
@@ -81,7 +81,7 @@ function callGetLocatorForTo(subinventory_id, rowIdValue) {
  getLocator('modules/inv/locator/json_locator.php', subinventory_id, subinventory_type, rowIdValue);
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
 //mandatory and field sequence
  var mandatoryCheck = new mandatoryFieldMain();
  mandatoryCheck.header_id = 'wip_wo_header_id';
@@ -91,13 +91,13 @@ $(document).ready(function() {
  mandatoryCheck.mandatory_messages = ["First Select Org", "No Transaction Type"];
 // mandatoryCheck.mandatoryField();
 
- $(".form_line_data_table").on("change", ".from_subinventory_id", function() {
+ $(".form_line_data_table").on("change", ".from_subinventory_id", function () {
   var rowIdValue = $(this).closest("tr").attr("id");
   var idValue = "tr#" + rowIdValue;
   var subinventory_id = $(this).val();
   callGetLocatorForFrom(subinventory_id, idValue);
  });
- $(".form_line_data_table").on("change", ".to_subinventory_id", function() {
+ $(".form_line_data_table").on("change", ".to_subinventory_id", function () {
   var rowIdValue = $(this).closest("tr").attr("id");
   var idValue = "tr#" + rowIdValue;
   var subinventory_id = $(this).val();
@@ -114,7 +114,7 @@ $(document).ready(function() {
  onClick_addDetailLine(2, '.add_row_detail_img1');
  onClick_addDetailLine(1, '.add_row_detail_img');
 
- $('#content').on('blur', '.bom_sequence', function() {
+ $('#content').on('blur', '.bom_sequence', function () {
   if (!$('#allData tr').length) {
    alert('No BOM found for the work order#' + $('#wo_number').val());
    $(this).val('');
@@ -174,8 +174,8 @@ $(document).ready(function() {
   serial_details(serial_generation, $(this).closest('tr').attr('class'));
  });
 
- $("#transaction_type_id").on("blur", function() {
-  $("tr.transfer_info").find("td select").each(function() {
+ $("#transaction_type_id").on("blur", function () {
+  $("tr.transfer_info").find("td select").each(function () {
    $(this).val("");
   });
   var transaction_type_id = $(this).val();
@@ -203,7 +203,7 @@ $(document).ready(function() {
 
  });
 
- $('#content').on('blur', '.from_subinventory_id, .from_locator_id', function() {
+ $('#content').on('blur', '.from_subinventory_id, .from_locator_id', function () {
   var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
   var trClass_d = '.' + trClass;
   var generation_type = $('#content').find(trClass_d).find('.serial_generation').val();
@@ -212,7 +212,7 @@ $(document).ready(function() {
    var field_stmt = '<input class="textfield serial_number" type="text" size="25" readonly name="serial_number[]" >';
    $('#content').find(trClass_d).find('.inv_serial_number_id').replaceWith(field_stmt);
    $('#content').find(trClass_d).find('.serial_number').replaceWith(field_stmt);
-    return;
+   return;
   }
   var itemIdM = $('#content').find(trClass_d).find('.item_id_m').val();
   if (!itemIdM) {
@@ -229,7 +229,7 @@ $(document).ready(function() {
   });
  });
 
- $('#content').on('blur', '.subinventory_id, .locator_id', function() {
+ $('#content').on('blur', '.subinventory_id, .locator_id', function () {
   var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
   var trClass_d = '.' + trClass;
   var generation_type = $('#content').find(trClass_d).find('.lot_generation').val();
@@ -269,7 +269,7 @@ $(document).ready(function() {
       'status': 'ACTIVE',
       'item_id_m': itemIdM,
       'trclass': trClass
-     })).then(function(data, textStatus, jqXHR) {
+     })).then(function (data, textStatus, jqXHR) {
       if ($.trim(data) == 'false' || $.trim(data) == 'undefined') {
        alert('No lot Number Found!\nCheck the subinventory, locator and item number');
       }
@@ -287,14 +287,14 @@ $(document).ready(function() {
 
 
  //selecting wo header id data
- $(".wip_wo_header_id.select_popup").on("click", function() {
+ $(".wip_wo_header_id.select_popup").on("click", function () {
   var openUrl = 'select.php?class_name=wip_wo_header&wo_status=%3DRELEASED';
   void window.open(openUrl, '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
  //Get the primary_id on refresh button click
- $('a.show.wip_wo_headerid_show').click(function() {
+ $('a.show.wip_wo_headerid_show').click(function () {
   var wip_wo_header_id = $('#wip_wo_header_id').val();
   var transaction_type_id = $('#transaction_type_id').val();
   var wo_number = $('#wo_number').val();
@@ -308,15 +308,18 @@ $(document).ready(function() {
  });
 
  //get Subinventory on Inventory change
- $('#content').on('blur', '#org_id', function() {
+ $('#content').on('blur', '#org_id', function () {
   var orgId = $(this).val();
-  if (orgId > 0) {
-   getSubInventory('modules/inv/subinventory/json_subinventory.php', orgId);
+  if (orgId) {
+   getSubInventory({
+    json_url: 'modules/inv/subinventory/json_subinventory.php',
+    org_id: orgId
+   });
   }
  });
 
  //get locatot on Subinventory change
- $('#content').on('change', '.sub_inventory', function() {
+ $('#content').on('change', '.sub_inventory', function () {
   var subInventoryId = $(this).val();
   if (subInventoryId > 0) {
    var trClass = '.' + $(this).closest('tr').attr('class');
@@ -326,12 +329,12 @@ $(document).ready(function() {
 
 
  function popup() {
-  $("#content").on("click", ".popup.itemId", function() {
+  $("#content").on("click", ".popup.itemId", function () {
    var idValue = $(this).closest("tr").attr("id");
    localStorage.idValue = idValue;
    var link = '../../inv/item/find_item.php?org_id=' + $("#org_id").val() + '&RowDivId=' + idValue;
    void window.open(link, '_blank',
-    'width=900,height=900,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');
+           'width=900,height=900,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');
    return false;
   }).one();
  }
@@ -339,7 +342,7 @@ $(document).ready(function() {
 
 //add new line
 // onClick_add_new_row('tr.inv_transaction_row0', 'tbody.inv_transaction_values', 4);
- $("#content").on("click", ".add_row_img", function() {
+ $("#content").on("click", ".add_row_img", function () {
   var addNewRow = new add_new_rowMain();
   addNewRow.trClass = 'inv_transaction_row';
   addNewRow.tbodyClass = 'form_data_line_tbody';

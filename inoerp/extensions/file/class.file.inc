@@ -25,6 +25,8 @@ class file extends dbObject {
 		 "doc",
 		 "docx",
 		 "jpg",
+  'JPG',
+  'PNG',
 		 "png",
 		 "gif",
 		 "ppt",
@@ -105,8 +107,8 @@ class file extends dbObject {
  }
 
  private function check_extension($extension) {
-	if (!( in_array($extension, $this->_allowedExts) )) {
-	 $error = "<div class='message'>File extension ccc $extension is not allowed.</div>";
+	if (!( in_array(strtolower($extension), $this->_allowedExts) )) {
+	 $error = '<div class="message">File extension ' .strtolower($extension).' is not allowed.</div>';
 	 throw new Exception($error);
 	}
 	return true;

@@ -2,33 +2,36 @@ function setValFromSelectPage(address_name) {
  this.address_name = address_name;
 }
 
-setValFromSelectPage.prototype.setVal = function() {
+setValFromSelectPage.prototype.setVal = function () {
  var address_name = this.address_name;
  var fieldClass = '.' + localStorage.getItem("field_class");
  fieldClass = fieldClass.replace(/\s+/g, '.');
  if (address_name) {
-	$("#content").find(fieldClass).val(address_name);
+  $("#content").find(fieldClass).val(address_name);
  }
 };
 
 
-$(document).ready(function() {
+$(document).ready(function () {
 
  //Get the sd_shipping_control_id on find button click
- $('a.show.org_id').click(function() {
-	var org_id = $('#org_id').val();
-	$(this).attr('href', modepath() + 'org_id=' + org_id);
+ $('a.show.org_id').click(function () {
+  var org_id = $('#org_id').val();
+  $(this).attr('href', modepath() + 'org_id=' + org_id);
  });
 
  //get subinventories on selecting org
-$('#content').on('blur', '#org_id', function() {
-var org_id = $(this).val();
-getSubInventory('modules/inv/subinventory/json_subinventory.php', org_id);
-});
+ $('#content').on('blur', '#org_id', function () {
+  var org_id = $(this).val();
+  getSubInventory({
+   json_url: 'modules/inv/subinventory/json_subinventory.php',
+   org_id: org_id
+  });
+ });
 
- $('#content').on('blur', '.subinventory_id', function() {
-var subinventory_id = $(this).val();
-	getLocator('modules/inv/locator/json_locator.php', subinventory_id, 'subinventory', '.form_line');
+ $('#content').on('blur', '.subinventory_id', function () {
+  var subinventory_id = $(this).val();
+  getLocator('modules/inv/locator/json_locator.php', subinventory_id, 'subinventory', '.form_line');
  });
 
 

@@ -371,18 +371,18 @@ AND content.content_id = category_reference.reference_id  ";
     foreach ($result as $records) {
      $con_count++;
      $content_string .= "<li class=\"front_page_summary count_$con_count\">";
-     $content_string .= '<span class="heading1 subject_summary">';
-     $content_string .= '<img src="' . HOME_URL . 'themes/default/images/remove.png" class="remove" width="12px" height="12px">&nbsp;';
+     $content_string .= '<div class="heading1 subject_summary">';
+     $content_string .= '<img src="' . HOME_URL . 'themes/default/images/remove.png" class="remove" alt="remove" width="12" height="12">&nbsp;';
      $content_string .= substr($records->subject, 0, $this->_subject_noof_char);
      $content_string .= '<span class="more_page">';
-     $content_string .= '<a href="' . HOME_URL . 'content.php?mode=2&'
-       . 'content_id=' . $records->content_id . '&content_type_id=' . $records->content_type_id . '">';
+     $link_read =   HOME_URL . 'content.php?mode=2&content_id=' . $records->content_id . '&content_type_id=' . $records->content_type_id;
+     $content_string .= '<a href="' . htmlspecialchars($link_read) . '">';
      $content_string .= 'Read More.. </a>';
      $content_string .= '</span>';
-     $content_string .= '</span>';
-     $content_string .= '<span class="content_summary">';
+     $content_string .= '</div>';
+     $content_string .= '<div class="content_summary">';
      $content_string .= substr($records->content_summary, 0, $this->_summary_noof_char);
-     $content_string .= '</span>';
+     $content_string .= '</div>';
      $content_string .= '</li>';
     }
     $content_string .= '</ul>';

@@ -264,7 +264,9 @@
  require_once(INC_MODULE . DS . "hr" . DS . "position_hierarchy" . DS . "class_hr_position_hierarchy_header.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "position_hierarchy" . DS . "class_hr_position_hierarchy_line.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "compensation_element" . DS . "class_hr_compensation_element.inc");
- require_once(INC_MODULE . DS . "hr" . DS . "element_entry" . DS . "class_element_entry_header.inc");
+ require_once(INC_MODULE . DS . "hr" . DS . "element_entry" . DS ."tpl" . DS . "class_element_entry_tpl_header.inc");
+ require_once(INC_MODULE . DS . "hr" . DS . "element_entry" . DS ."tpl" . DS . DS . "class_element_entry_tpl_line.inc");
+  require_once(INC_MODULE . DS . "hr" . DS . "element_entry" . DS . "class_element_entry_header.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "element_entry" . DS . "class_element_entry_line.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "employee" . DS . "salary" . DS . "class_hr_employee_salary.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "payroll" . DS . "payment_method" . DS . "class_hr_payroll_payment_method.inc");

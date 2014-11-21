@@ -32,6 +32,7 @@ class content_type extends dbObject {
 		 'comment_order_by',
 		 'comments_perpage',
 		 'auto_url_alias_cb',
+  'show_category_onsummary_cb',
 		 "rev_enabled_cb",
 		 "rev_number",
 		 "created_by",
@@ -70,7 +71,8 @@ class content_type extends dbObject {
 		 'allow_comment_cb',
 		 "has_subject_cb",
 		 "has_content_cb",
-		 "rev_enabled_cb"
+		 "rev_enabled_cb",
+  'show_category_onsummary_cb'
  ];
  public $fields_inForm_notInDataBase = [
 		 'field_num',
@@ -117,6 +119,7 @@ class content_type extends dbObject {
  public $content_label;
  public $summary_display_type;
  public $auto_url_alias_cb;
+ public $show_category_onsummary_cb;
  public $rev_enabled_cb;
  public $rev_number;
  public $content_type_id_l;
@@ -137,9 +140,6 @@ class content_type extends dbObject {
  public $multi_action_class_pc_value;
  public $action;
 
- public function __set($name, $value) {
-	$this->$name = $value;
- }
 
  Public static function summary_display_type() {
 	$option_header = option_header::find_by_name('EXT_SUMMARY_DISPLAY_TYPE');

@@ -112,7 +112,10 @@ $(document).ready(function() {
 //get subinventory
  $('#content').on('blur', '#org_id', function() {
 	var org_id = $(this).val();
-	getSubInventory('modules/inv/subinventory/json_subinventory.php', org_id);
+    getSubInventory({
+   json_url: 'modules/inv/subinventory/json_subinventory.php',
+   org_id: org_id
+  });
 	getTaxCodes('modules/mdm/tax_code/json_tax_code.php', org_id, 'IN');
 	getTaxCodes('modules/mdm/tax_code/json_tax_code.php', org_id, 'OUT');
  });

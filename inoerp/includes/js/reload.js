@@ -66,16 +66,16 @@ $(document).ready(function() {
  });
 
 //select page data selction in parent window
- $(".quick_select").click(function() {
-  var setData = new opener.setValFromSelectPage;
-  $(this).closest('tr').find('td').each(function() {
-   setData[$(this).prop('class')] = $(this).text();
-  });
-  setData.setVal();
-  localStorage.removeItem("field_class");
-  localStorage.removeItem("reset_link");
-  window.close();
- });
+// $(".quick_select").click(function() {
+//  var setData = new opener.setValFromSelectPage;
+//  $(this).closest('tr').find('td').each(function() {
+//   setData[$(this).prop('class')] = $(this).text();
+//  });
+//  setData.setVal();
+//  localStorage.removeItem("field_class");
+//  localStorage.removeItem("reset_link");
+//  window.close();
+// });
 
  //search reset button
  var link = localStorage.getItem("reset_link");
@@ -494,9 +494,6 @@ $(document).ready(function() {
  $('#export_excel_allResult').on('click', function() {
   $('#download_all').submit();
  });
-
- show_dialog_box();
- //shortcut keys
 
  animateCycle();
  $('#all_contents').on('click', '.start_play', function() {

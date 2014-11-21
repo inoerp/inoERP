@@ -116,8 +116,12 @@ $(document).ready(function() {
  //get subinventories on selecting org
  $('#content').on('blur', '#org_id', function() {
   var org_id = $(this).val();
-  getSubInventory('modules/inv/subinventory/json_subinventory.php', org_id);
+    getSubInventory({
+   json_url: 'modules/inv/subinventory/json_subinventory.php',
+   org_id: org_id
+  });
  });
+
 
  //get locators on changing sub inventory
  $('#content').on('blur', '.subinventory_id', function() {

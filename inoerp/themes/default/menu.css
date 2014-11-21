@@ -240,7 +240,7 @@ body#header_top .menu { margin-top: 30px !important; }
 /* all lists */
 #header_top .menu, #header_top .menu ul { padding: 0; margin: 0; list-style: none; 
 line-height: 1.8em; 
-z-index: 9; 
+z-index: 999; 
 }
 #header_top .menu ul { position: static; }
 #header_top .menu ul a { 

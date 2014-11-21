@@ -1,5 +1,5 @@
 function setValFromSelectPage(inv_transaction_header_id, combination, item_id_m, item_number, item_description, uom_id,
- serial_generation, lot_generation) {
+        serial_generation, lot_generation) {
  this.inv_transaction_header_id = inv_transaction_header_id;
  this.combination = combination;
  this.item_id_m = item_id_m;
@@ -10,7 +10,7 @@ function setValFromSelectPage(inv_transaction_header_id, combination, item_id_m,
  this.lot_generation = lot_generation;
 }
 
-setValFromSelectPage.prototype.setVal = function() {
+setValFromSelectPage.prototype.setVal = function () {
  var inv_transaction_header_id = this.inv_transaction_header_id;
  var combination = this.combination;
  var item_id_m = this.item_id_m;
@@ -54,9 +54,9 @@ setValFromSelectPage.prototype.setVal = function() {
 };
 
 function beforeSave() {
-return lotSerial_quantityValidation({
- quantity_divClass : '.quantity'
-});
+ return lotSerial_quantityValidation({
+  quantity_divClass: '.quantity'
+ });
 }
 
 function setSubinventory(transaction_type_id) {
@@ -100,8 +100,8 @@ function setSubinventory(transaction_type_id) {
  }
 }
 
-$(document).ready(function() {
- $("#transaction_type_id").on("change", function() {
+$(document).ready(function () {
+ $("#transaction_type_id").on("change", function () {
   var transaction_type_id = $(this).val();
   setSubinventory(transaction_type_id);
  });
@@ -111,9 +111,12 @@ $(document).ready(function() {
  }
 
 // //get Subinventory Name
- $("#org_id").on("change", function() {
+ $("#org_id").on("change", function () {
   $('.org_id').val($(this).val());
-  getSubInventory('modules/inv/subinventory/json_subinventory.php', $("#org_id").val());
+  getSubInventory({
+   json_url: 'modules/inv/subinventory/json_subinventory.php',
+   org_id: $("#org_id").val()
+  });
   $('.org_id').val($(this).val());
  });
 
@@ -127,14 +130,14 @@ $(document).ready(function() {
   getLocator('modules/inv/locator/json_locator.php', subinventory_id, subinventory_type, rowIdValue);
  }
 
- $(".form_line_data_table").on("change", ".from_subinventory_id", function() {
+ $(".form_line_data_table").on("change", ".from_subinventory_id", function () {
   var rowIdValue = $(this).closest("tr").attr("id");
   var idValue = "tr#" + rowIdValue;
   var subinventory_id = $(this).val();
   callGetLocatorForFrom(subinventory_id, idValue);
  });
 
- $(".form_line_data_table").on("change", ".to_subinventory_id", function() {
+ $(".form_line_data_table").on("change", ".to_subinventory_id", function () {
   var rowIdValue = $(this).closest("tr").attr("id");
   var idValue = "tr#" + rowIdValue;
   var subinventory_id = $(this).val();
@@ -142,7 +145,7 @@ $(document).ready(function() {
  });
 
  //add new row in multi action template
- $("#content").on("click", ".add_row_img", function() {
+ $("#content").on("click", ".add_row_img", function () {
   var addNewRow = new add_new_rowMain();
   addNewRow.trClass = 'inv_transaction_line';
   addNewRow.tbodyClass = 'form_data_line_tbody';
@@ -158,7 +161,7 @@ $(document).ready(function() {
  onClick_addDetailLine(1, '.add_row_detail_img');
 
 
- $('#content').on('blur', '.item_number', function() {
+ $('#content').on('blur', '.item_number', function () {
   var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
   var trClass_d = '.' + trClass;
   var generation_type = $('#content').find(trClass_d).find('.serial_generation').val();
@@ -188,7 +191,7 @@ $(document).ready(function() {
       'status': 'DEFINED',
       'item_id_m': itemIdM,
       'trclass': trClass
-     })).then(function(data, textStatus, jqXHR) {
+     })).then(function (data, textStatus, jqXHR) {
       if ($.trim(data) == 'false' || $.trim(data) == 'undefined') {
        alert('No Serial Number Found!\nCheck the subinventory, locator and item number');
       }
@@ -205,7 +208,7 @@ $(document).ready(function() {
      'trclass': trClass,
      'current_subinventory_id': $('#content').find(trClass_d).find('.from_subinventory_id').val(),
      'current_locator_id': $('#content').find(trClass_d).find('.from_locator_id').val(),
-    })).then(function(data, textStatus, jqXHR) {
+    })).then(function (data, textStatus, jqXHR) {
      if ($.trim(data) == 'false' || $.trim(data) == 'undefined') {
       alert('No Serial Number Found!\nCheck the subinventory, locator and item number');
      }
@@ -221,7 +224,7 @@ $(document).ready(function() {
 
  });
 
- $('#content').on('blur', '.item_number', function() {
+ $('#content').on('blur', '.item_number', function () {
   var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
   var trClass_d = '.' + trClass;
   var generation_type = $('#content').find(trClass_d).find('.lot_generation').val();
@@ -251,7 +254,7 @@ $(document).ready(function() {
       'status': 'ACTIVE',
       'item_id_m': itemIdM,
       'trclass': trClass
-     })).then(function(data, textStatus, jqXHR) {
+     })).then(function (data, textStatus, jqXHR) {
       if ($.trim(data) == 'false' || $.trim(data) == 'undefined') {
        alert('No lot Number Found!\nCheck the subinventory, locator and item number');
       }
@@ -273,7 +276,7 @@ $(document).ready(function() {
      'trclass': trClass,
      'subinventory_id': subinventory_id,
      'locator_id': $('#content').find(trClass_d).find('.from_locator_id').val(),
-    })).then(function(data, textStatus, jqXHR) {
+    })).then(function (data, textStatus, jqXHR) {
      if ($.trim(data) == 'false' || $.trim(data) == 'undefined') {
       alert('No lot Number Found!\nCheck the subinventory, locator and item number');
      }
@@ -290,7 +293,7 @@ $(document).ready(function() {
  });
 
 
- $('#content').on('blur', '.item_id_m, .item_number', function() {
+ $('#content').on('blur', '.item_id_m, .item_number', function () {
   var item_id_m = $(this).closest('tr').find('.item_id_m').val();
   var org_id = $('#org_id').val();
   if (org_id && item_id_m) {

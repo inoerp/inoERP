@@ -6,6 +6,7 @@
  $write_access = false;
  $update_access = false;
  $access_level = null;
+ 
  if (empty($mode)) {
   if (!empty($_GET['mode'])) {
    $mode = $_GET['mode'];
@@ -35,7 +36,7 @@
    $_SESSION['recent_visit'][$_SERVER['REDIRECT_QUERY_STRING']] = $current_url;
   } else if (!empty($_REQUEST['class_name'])) {
    $id = $_REQUEST['class_name'] . '_id';
-   if (!empty($_REQUEST[$id])) {
+   if (!empty($_REQUEST[$id]) && !is_array($_REQUEST[$id])) {
     $_SESSION['recent_visit'][$_REQUEST['class_name'] . ' Id ' . $_REQUEST[$id]] = $current_url;
    } else {
     $_SESSION['recent_visit'][$_REQUEST['class_name']] = $current_url;
@@ -160,7 +161,7 @@
   }
  }
 
-
+    
 //add comment class for all if not POST
  if (empty($_POST)) {
   array_push($class_names, 'comment');
@@ -247,7 +248,6 @@
     }
 
     /* --------------------------------End of Secondary Fields------------------------------------------------------ */
-
     unset($class_id_value);
     /*
      * ---------------------------------------------------SEARCH-----------------------------------------------
@@ -430,6 +430,8 @@
   $class_fourth = $class_names[3];
   $$class_fourth = $$class_names[3];
  }
+ 
+ 
 ///////////////////////////set the mode & readonly - readonly1
  if (property_exists($class, 'primary_column')) {
   $primary_column = $class::$primary_column;

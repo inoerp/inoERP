@@ -104,9 +104,9 @@ VAR;
     $pagination_statement .= "<div class='page_nos'>";
     if ($this->current_page > 6) {
      if (strpos($this->_path, '.php') !== false) {
-      $pagination_statement .= " <a href=\"$this->_path&pageno=1&" . $this->_query_string;
+      $pagination_statement .= " <a href=\"$this->_path&amp;pageno=1&amp;" . $this->_query_string;
      } else {
-      $pagination_statement .= " <a href=\"$this->_path.php?pageno=1&" . $this->_query_string;
+      $pagination_statement .= " <a href=\"$this->_path.php?pageno=1&amp;" . $this->_query_string;
      }
      $pagination_statement .= '">First</a>';
     }
@@ -117,7 +117,7 @@ VAR;
      } else {
       $pagination_statement .= "<a href=\"$this->_path.php?pageno=";
      }
-     $pagination_statement .= $this->previous_page() . '&' . $this->_query_string;
+     $pagination_statement .= $this->previous_page() . '&amp;' . $this->_query_string;
      $pagination_statement .= "\"> &laquo; Previous </a> ";
     }
 
@@ -134,9 +134,9 @@ VAR;
        $pagination_statement .= " <span class=\"selected\">{$starting_page_no}</span> ";
       } else {
        if (strpos($this->_path, '.php') !== false) {
-        $pagination_statement .= " <a href=\"$this->_path&pageno={$starting_page_no}&" . $this->_query_string;
+        $pagination_statement .= " <a href=\"$this->_pathvpageno={$starting_page_no}&amp;" . $this->_query_string;
        } else {
-        $pagination_statement .= " <a href=\"$this->_path.php?pageno={$starting_page_no}&" . $this->_query_string;
+        $pagination_statement .= " <a href=\"$this->_path.php?pageno={$starting_page_no}&amp;" . $this->_query_string;
        }
        $pagination_statement .= '">' . $starting_page_no . '</a>';
       }
@@ -149,12 +149,12 @@ VAR;
 
     if ($this->has_next_page()) {
      if (strpos($this->_path, '.php') !== false) {
-      $pagination_statement .= " <a href=\"$this->_path&pageno=";
+      $pagination_statement .= " <a href=\"$this->_path&amp;pageno=";
      } else {
       $pagination_statement .= " <a href=\"$this->_path.php?pageno=";
      }
 
-     $pagination_statement .= $this->next_page() . '&' . $this->_query_string;
+     $pagination_statement .= $this->next_page() . '&amp;' . $this->_query_string;
      $pagination_statement .= "\">Next &raquo;</a> ";
     }
     $pagination_statement .= '</div>';

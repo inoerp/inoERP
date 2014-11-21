@@ -57,8 +57,7 @@ if (!empty($msg)) {
 					 foreach ($search_result as $record) {
 						$primary_column = $class::$primary_column;
 						echo '<tr>';
-						echo '<td><input type="button" class="quick_select button" name[]="' . $primary_column . '"
-          value="' . $record->$primary_column . '"></td>';
+						echo '<td><span  class="quick_select button '. $primary_column . '">'. $record->$primary_column . '</td>';
 						foreach ($column_array as $key => $value) {
 						 echo "<td class=\"$value\">" . $record->$value . '</td>';
 						}
@@ -92,7 +91,7 @@ if (!empty($msg)) {
  <li>4. Use != for searching all values not equal to entered value. </li>
  <li>5. Use one < field & one > field for searching all values in between two values. </li>
 </ul>
-
+<?php echo $f->hidden_field_withId('home_url', HOME_URL); ?>
 </body>
 </html>
 <?php

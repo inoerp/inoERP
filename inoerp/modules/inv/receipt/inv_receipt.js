@@ -141,7 +141,10 @@ $(document).ready(function() {
 
  //get Subinventory Name
  $("#org_id").on("change", function() {
-  getSubInventory('modules/inv/subinventory/json_subinventory.php', $("#org_id").val());
+    getSubInventory({
+   json_url: 'modules/inv/subinventory/json_subinventory.php',
+   org_id: val($("#org_id").val())
+  });
   $('.org_id').val($(this).val());
  });
 
