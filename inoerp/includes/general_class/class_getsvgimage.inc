@@ -212,8 +212,11 @@
   }
 
   private function _reset_margins() {
-   if ($this->_chart_type == 'pie' || $this->_chart_type == 'donut') {
+     if ($this->_chart_type == 'pie' || $this->_chart_type == 'donut') {
     $this->_left_margin = $this->_right_margin = $this->_top_margin = $this->_bottom_margin = 0;
+   }else{
+    $this->_right_margin = $this->_top_margin = $this->_bottom_margin = 0;
+    $this->_left_margin = 30;
    }
    $this->_chart_height = $this->_chart_height_orginal;
    $this->_chart_width = $this->_chart_width_orginal;
@@ -641,6 +644,7 @@
     * Increase the left & right margin as per the text value in value and legend.
     * The bottom display the label. Reduce the height by the height of the text
     */
+   
    $this->_bottom_margin = $this->_bottom_margin < 30 ? 30 : $this->_bottom_margin;
    if ((empty($this->_data)) || (!is_array($this->_data))) {
     return;
@@ -650,17 +654,18 @@
     $value = $data['value'];
     if (is_array($value)) {
      foreach ($value as $value_k => $value_v) {
-      $width_for_xaxis_chart_label_n = strlen(strval($value_v)) * 2;
+        $width_for_xaxis_chart_label_n = strlen(strval($value_v)) * 2;
       $this->_width_for_xaxis_chart_label = ($width_for_xaxis_chart_label_n > $this->_width_for_xaxis_chart_label ) ? $width_for_xaxis_chart_label_n : $this->_width_for_xaxis_chart_label;
      }
     } else {
-     $width_for_xaxis_chart_label_n = strlen(strval($value)) * 2;
+      $width_for_xaxis_chart_label_n = strlen(strval($value)) * 2;
      $this->_width_for_xaxis_chart_label = ($width_for_xaxis_chart_label_n > $this->_width_for_xaxis_chart_label ) ? $width_for_xaxis_chart_label_n : $this->_width_for_xaxis_chart_label;
     }
    }
    $this->_left_margin += $this->_width_for_xaxis_chart_label;
 
    $legne_l = 0;
+   
    if (!empty($this->_legend)) {
     foreach ($this->_legend as $l_k => $l_v) {
      $legne_l_n = strlen($l_v);
@@ -669,7 +674,6 @@
    }
    $legne_l_value = 4 * $legne_l;
    $this->_right_margin += $legne_l_value;
-
    $this->_chart_width = $this->_chart_width - $this->_left_margin - $this->_right_margin;
    $this->_chart_width = $this->_chart_width - $legne_l_value;
 
@@ -679,9 +683,9 @@
     $height_for_xaxis_chart_label_n = strlen(strval($value)) * 4.5;
     $this->_height_for_xaxis_chart_label = ($height_for_xaxis_chart_label_n > $this->_height_for_xaxis_chart_label ) ? $height_for_xaxis_chart_label_n : $this->_height_for_xaxis_chart_label;
    }
-
    $this->_chart_height = $this->_chart_height - $this->_height_of_text - $this->_height_for_xaxis_chart_label;
    $this->_bottom_margin - $this->_height_of_legend;
+  
   }
 
   private function _prepare_bar() {
@@ -749,6 +753,7 @@
    if ($this->_draw_major_grid_x) {
     $bar .=$this->_draw_major_grids($this->_max_val, 'yaxis', $this->_chart_width, $unit_height, $this->_left_margin, $this->_chart_height);
    }
+   
    if ($this->_draw_major_grid_y) {
     $bar .=$this->_draw_major_grids_data($no_of_elements, 'yaxis', $bar_width, $this->_chart_width, $this->_left_margin, $this->_chart_height);
    }

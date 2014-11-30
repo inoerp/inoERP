@@ -157,10 +157,12 @@ input[type=number], input[type=search], checkbox, radio button
 {
  font-size:11px;
  height: 13px;
+        padding: 2px;
 }
 
 select{
  height: 20px;
+
 }
 
 .select.medium{
@@ -197,6 +199,7 @@ ul.address li{
 
 img { 
  border: none; 
+ vertical-align: top;
 }
 
 
@@ -1200,4 +1203,26 @@ input.medium {
 
 input.small {
    width: 40px;
+}
+
+table.document_table td{
+  padding: 5px 10px;
+}
+.document_table label{
+    display: inline-block;
+    width: 200px;
+}
+
+table.document_table input{
+  width: 200px;
+}
+
+.required{
+background: none repeat scroll 0% 0% rgba(242, 176, 162, 0.91);
+ border : 0px none;
+}
+
+.readonly{
+  background: none repeat scroll 0% 0% rgba(180, 180, 155, 0.37);
+ border : 0px none;
 }

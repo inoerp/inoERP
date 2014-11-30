@@ -30,15 +30,17 @@
                 Header Id : </label><?php $f->text_field_dsr('hr_leave_transaction_id') ?>
                <a name="show" href="form.php?class_name=hr_leave_transaction" class="show hr_leave_transaction_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
               </li>
-              <li><label>
-                <!--<img src="<?php // echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">-->
+              <li data-employee_type="employee"><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
                 Employee Name : </label><?php $f->text_field_d('employee_name'); ?>
                <?php echo $f->hidden_field_withId('employee_id', $$class->employee_id); ?>
               </li>
               <li><label>  Identification # : </label><?php $f->text_field_dr('identification_id'); ?>  </li>
               <li><label>  Requested Date : </label><?php echo $f->date_fieldFromToday('requsted_date', $$class->requsted_date); ?>  </li>
               <li><label>  Approved Date : </label><?php echo $f->text_field_dr('approved_date'); ?>  </li>
-              <li><label>  Approver : </label><?php $f->text_field_dr('approved_by'); ?>  </li>
+              <li data-employee_type="approver"><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable"> 
+                Approver : </label><?php $f->text_field_dr('approved_by'); 
+                echo $f->hidden_field_withId('approved_by_employee_id', $$class->approved_by_employee_id);
+                ?>  </li>
               <li><label>  Leave Status : </label><?php echo $f->select_field_from_array('leave_status',  hr_leave_transaction::$leave_status_a ,$$class->leave_status,'','','','',1); ?>  </li>
               <li><label>  Action : </label><?php echo $f->select_field_from_array('leave_action',  $$class->leave_action_a ,$$class->leave_action); ?>  </li>
               <?php echo $f->hidden_field_withId('sys_notification_group_id', $$class->sys_notification_group_id) ?>

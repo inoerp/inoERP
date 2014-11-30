@@ -8,6 +8,7 @@
   public static $module = "hr";
   public $field_a = [
    'hr_payroll_payment_method_id',
+   'ledger_id',
    'payment_method',
    'payment_type',
    'start_date',
@@ -18,6 +19,7 @@
    'cash_ac_id',
    'clearing_ac_id',
    'bank_charge_ac_id',
+   'salary_payable_ac_id',
    'costed_cb',
    'created_by',
    'creation_date',
@@ -51,6 +53,7 @@
    'payment_type',
   ];
   public $hr_payroll_payment_method_id;
+  public $ledger_id;
   public $payment_method;
   public $payment_type;
   public $start_date;
@@ -61,6 +64,7 @@
   public $cash_ac_id;
   public $clearing_ac_id;
   public $bank_charge_ac_id;
+  public $salary_payable_ac_id;
   public $costed_cb;
   public $created_by;
   public $creation_date;

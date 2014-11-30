@@ -60,9 +60,9 @@ $(document).ready(function() {
  });
  
   //Get the bom_id on find button click
- $('#form_header a.show.hr_employee_id').click(function() {
-  var headerId = $('#employee_id').val();
-  $(this).attr('href', modepath() + 'employee_id=' + headerId);
+ $('a.show.hr_employee_id').click(function() {
+  var headerId = $('#hr_employee_id').val();
+  $(this).attr('href', modepath() + 'hr_employee_id=' + headerId);
  });
 
  //add a new row

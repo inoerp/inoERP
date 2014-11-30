@@ -269,9 +269,14 @@
   require_once(INC_MODULE . DS . "hr" . DS . "element_entry" . DS . "class_element_entry_header.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "element_entry" . DS . "class_element_entry_line.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "employee" . DS . "salary" . DS . "class_hr_employee_salary.inc");
+ require_once(INC_MODULE . DS . "hr" . DS . "payslip" . DS . "class_hr_payslip_header.inc");
+ require_once(INC_MODULE . DS . "hr" . DS . "payslip" . DS . "class_hr_payslip_line.inc");
+ require_once(INC_MODULE . DS . "hr" . DS . "payslip" . DS ."user" . DS . "class_hr_payslip_user.inc");
+ require_once(INC_MODULE . DS . "hr" . DS . "payroll" . DS . "payment_method" . DS . "class_hr_payroll_payment_method.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "payroll" . DS . "payment_method" . DS . "class_hr_payroll_payment_method.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "payroll" . DS . "class_payroll.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "payroll" . DS . "class_payroll_schedule.inc");
+ require_once(INC_MODULE . DS . "hr" . DS . "payroll" . DS . "process" . DS . "class_payroll_process.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "leave" . DS . "type" . DS . "class_hr_leave_type.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "leave" . DS . "balance" . DS . "class_hr_leave_balance.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "leave" . DS . "balance" . DS . "user" . DS . "class_hr_leave_balance_user.inc");

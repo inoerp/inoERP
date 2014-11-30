@@ -14,15 +14,14 @@
 			 <?php form::hidden_field('content_id', $content->content_id) ?>
 			 <div id="content_element">
 				<ul>
-				 <li><span class='content_heading'> <?php  echo htmlentities($content->subject); ?></span></li>
+				 <li><span class='content_heading'> <?php  echo ($content->subject); ?></span></li>
 				 <li class="created_by"><?php $content_user = user::find_by_id($content->created_by);
           echo !empty($content_user) ?  ($content_user->username) : '' ; ?></li>
-				 <li class="creation_date"><?php echo htmlentities($content->creation_date); ?></li>
+				 <li class="creation_date"><?php echo ($content->creation_date); ?></li>
 				 <?php
 				 if ($allow_content_update) {
 					?>
- 				 <li><a href="<?php echo HOME_URL ;?>content.php?mode=9&content_id=<?php echo htmlentities($content->content_id); ?>
-								&content_type=<?php echo htmlentities($content_type_name); ?>"><img src="<?php echo HOME_URL; ?>themes/images/edit.png" alt="update" /> </a></li>
+ 				 <li><a href="<?php echo HOME_URL ;?>content.php?mode=9&amp;content_id=<?php echo ($content->content_id); ?>&amp;content_type=<?php echo ($content_type_name); ?>"><img src="<?php echo HOME_URL; ?>themes/images/edit.png" alt="update" /> </a></li>
 					<?php } ?>
 				</ul>
 			 </div>
@@ -30,8 +29,8 @@
 			 <div id='content_info'>
 				<ul>
 				 <li class="attachment_content"><label>Attachments : </label><?php echo (!empty($file)) ? file::show_file_list($file) : ""; ?></li>
-				 <li class="terms"><label>Tags : </label><?php echo htmlentities($content->terms); ?></li>
-				 <li class="categories"><label>Category : </label><?php echo!(empty($category_statement)) ? $category_statement : ""; ?></li>
+				 <li class="terms"><label>Tags : </label><?php echo ($content->terms); ?></li>
+				 <li class="categories"><label>Category : </label><?php echo !(empty($category_statement)) ? $category_statement : ""; ?></li>
 				</ul>
 			 </div>
 			 <div id="content_navigation">
@@ -41,7 +40,7 @@
 				 </li>
 				 <li class="child_contents"><label>Child Content : </label>
 
-					<?php echo '<a href="content.php?mode=9&content_type=' . $content_type_name . '&parent_id=' . $content->content_id . '"   
+					<?php echo '<a href="content.php?mode=9&amp;content_type=' . $content_type_name . '&amp;parent_id=' . $content->content_id . '"   
                class="button add_child_content">Add Child Content </a>'; ?>
 				 </li>
 				</ul>

@@ -2028,31 +2028,81 @@ function inoAutoComplete(options) {
  });
 }
 
+//show Default Dialog Box 
+function show_dialog_box() {
+ $("#dialog_box").dialog({
+  dialogClass: "no-close",
+  modal: true,
+  minWidth: 600,
+  title: "Action Message",
+  buttons: [
+   {
+    text: "OK",
+    click: function () {
+     $(this).dialog("close");
+    }
+   }
+  ],
+  closeOnEscape: true,
+  position: {my: "left top", at: "left top", of: "#structure "}
+ });
+}
+
+function getPayrollSchedules(options) {
+ var defaults = {
+  min_length: 3,
+  hr_payroll_schedule_id: 'hr_payroll_schedule_id',
+  json_url: 'modules/hr/payroll/json_payroll.php',
+  hr_payrollId: $('#hr_payroll_id').val()
+ };
+ var settings = $.extend({}, defaults, options);
+
+ return $.ajax({
+  url: settings.json_url,
+  type: 'get',
+  dataType: 'json',
+  data: {
+   find_payroll_schedules: 1,
+   hr_payroll_id: settings.hr_payrollId
+  },
+  success: function (result) {
+   if (result) {
+    if (settings.trDivId) {
+     var select_stmt = '<select class="select hr_payroll_schedule_id" name="hr_payroll_schedule_id[]" style="max-width:95%;">';
+    } else {
+     var select_stmt = '<select id="hr_payroll_schedule_id" class="select hr_payroll_schedule_id" name="hr_payroll_schedule_id[]" style="max-width:95%;">';
+    }
+    $.each(result, function (f_key, f_name) {
+     select_stmt += '<option value="' + f_name.hr_payroll_schedule_id + '">' + f_name.scheduled_date +  ' : ' + f_name.period_name  +'</option>';
+    });
+    select_stmt += '</select>';
+    if (settings.trDivId) {
+     var select_class_d = '.' + settings.trDivId;
+     $(select_class_d).replaceWith(select_stmt);
+    } else {
+     $('#hr_payroll_schedule_id').replaceWith(select_stmt);
+    }
+   }
+  },
+  complete: function () {
+   $('.show_loading_small').hide();
+  },
+  beforeSend: function () {
+   $('.show_loading_small').show();
+  },
+  error: function (request, errorType, errorMessage) {
+   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+  }
+ });
+}
+
 //end of global functions
 $(document).ready(function () {
  var homeUrl = $('#home_url').val();
  $('.non_clickable').on('click', function (e) {
   e.preventDefault();
  });
- //show Default Dialog Box 
- function show_dialog_box() {
-  $("#dialog_box").dialog({
-   dialogClass: "no-close",
-   modal: true,
-   minWidth: 600,
-   title: "Action Message",
-   buttons: [
-    {
-     text: "OK",
-     click: function () {
-      $(this).dialog("close");
-     }
-    }
-   ],
-   closeOnEscape: true,
-   position: {my: "left top", at: "left top", of: "#structure "}
-  });
- }
+
 
  $('#loading').hide();
  $('.show_loading_small').hide();
@@ -2518,17 +2568,19 @@ $(document).ready(function () {
  });
 
  //basic finction --making background colors for form fields
- $("input").focus(function () {
-  $(this).css("background-color", "#cccccc");
- });
- $("input").blur(function () {
-  $(this).css("background-color", "#ffffff");
- });
- $(" :required").css("background-color", "pink");
- $("[readonly]").css("background-color", "#ddd");
- $("input:required").blur(function () {
-  $(this).css("background-color", "pink");
- });
+// $("input").not('[required]',"[readonly]").focus(function () {
+//  $(this).css("background-color", "#cccccc");
+// });
+// $("input").not('[required]',"[readonly]").blur(function () {
+//  $(this).css("background-color", "#ffffff");
+// });
+// $(" :required").css("background", "pink").css('border','0px none');
+$("[required]").addClass('required');
+$("[readonly]").addClass('readonly');
+// $("[readonly]").css("background-color", "#ddd");
+// $("input:required").blur(function () {
+//  $(this).css("background-color", "pink");
+// });
  //Popup for print
  $(".print").click(function () {
   window.print();

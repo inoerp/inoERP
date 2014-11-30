@@ -383,9 +383,10 @@
 
                 <td><?php
                  $stmt = '<a class="button" href="';
-                 $stmt .= HOME_URL . "form.php?class_name=sys_hold_reference&mode=9&reference_table=po_quote_line&reference_id=" . $$class_second->po_quote_line_id;
+                 $stmt .= HOME_URL . "form.php?class_name=po_quote_breaks&mode=9&reference_table=po_quote_line&reference_id=" . $$class_second->po_quote_line_id;
                  $stmt .= '">Price Break</a>';
-                 echo $stmt;
+//                 echo $stmt;
+                  echo '<a class="button" href="">Price Break</a>';
                  ?>
                 </td>
                </tr>

@@ -4,7 +4,7 @@
  <div id="output">
  </div>
  <!--    START OF FORM HEADER-->
-	<div class="comment_error"></div><div id="loading"></div>
+	<div class="comment_error"></div><div id="comment_loading"></div>
 	<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 	 <form action="<?php echo HOME_URL . 'extensions/comment/post_comment.php'; ?>"  method="post" class="comment"  name="comment" >
 		<!--create empty form or a single id when search is not clicked and the id is referred from other comment -->
@@ -42,7 +42,7 @@
 		<div id="file_upload_form">
 		 <ul class="inRow asperWidth">
 			<li><input type="file" id="comment_attachments" class="attachments" name="attachments[]" multiple/></li>
-			<li> <input type="button" value="Attach" form="file_upload" name="attach_submit" id="comment_attach_submit" class="submit button comment_attach_submit"></li>
+			<li> <input type="button" value="Attach"  name="attach_submit" id="comment_attach_submit" class="submit button comment_attach_submit"></li>
 			<li class="show_loading_small"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/small_loading.gif"/></li>
 		 </ul>
 		 <div class="uploaded_file_details"></div>

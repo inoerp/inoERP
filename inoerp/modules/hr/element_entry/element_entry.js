@@ -14,7 +14,7 @@ setValFromSelectPage.prototype.setVal = function() {
  var hr_employee_id = this.hr_employee_id;
  
  if (hr_employee_id) {
-  $("#employee_id").val(hr_employee_id);
+  $("#hr_employee_id").val(hr_employee_id);
  }
   if (name) {
   $("#employee_name").val(name);

@@ -7,6 +7,7 @@ class hr_element_entry_tpl_header extends dbObject {
  public static $dependent_classes = ['hr_element_entry_tpl_line'];
  public static $key_column = 'template_name';
  public static $module = "hr";
+ 
  public $field_a = [
   'hr_element_entry_tpl_header_id',
   'template_name',
@@ -84,7 +85,7 @@ class hr_element_entry_tpl_header extends dbObject {
  public static function find_by_employeeId($employee_id) {
   $sql = " SELECT * 
        FROM hr_element_entry_tpl_header eeh 
-       WHERE eeh.employee_id = '{$employee_id}'   
+       WHERE eeh.hr_employee_id = '{$employee_id}'   
         LIMIT 1
 ";
   $result = self::find_by_sql($sql);

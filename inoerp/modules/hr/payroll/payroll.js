@@ -100,7 +100,7 @@ $(document).ready(function() {
  //Get the option_id on find button click
  $('a.show.hr_payroll_id').click(function() {
 	var headerId = $('#hr_payroll_id').val();
-	$(this).prop('href', modepath() + 'pageno=1&per_page=10&submit_search=Search&search_class_name=hr_payroll_schedule&search_asc_desc=desc&class_name=hr_payroll_schedule&hr_payroll_id=' + headerId);
+	$(this).prop('href', modepath() + '&hr_payroll_id=' + headerId);
  });
 
  onClick_add_new_row('tr.hr_payroll_schedule0', 'tbody.hr_payroll_schedule_values', 4);

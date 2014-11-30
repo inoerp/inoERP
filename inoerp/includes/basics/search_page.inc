@@ -15,6 +15,7 @@
        </div>
        <div id="list_contents">
         <div id="searchForm" ><div class='hideDiv_input'></div>
+         <div class="show_loading_small"><img src="<?php echo HOME_URL ?>/themes/images/form/small_loading_bar.gif"></div>
          <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
         <div id="searchResult">
          <?php
@@ -72,13 +73,5 @@
   <div id="content_right_right"></div>
  </div>
 </div>
-<ul id="search_message">
- <li>1. Use = for exact such. 
-  <br>Ex : Supplier name inoerp in supplier field 'll show all results such as ainoerp, aainoerp, inoerpa, etc.
-  <br>=inoerp in supplier field 'll show only inoerp </li>
- <li>2. Use > for searching values greater than entered value. </li>
- <li>3. Use < for searching values less than entered value. </li>
- <li>4. Use != for searching all values not equal to entered value. </li>
- <li>5. Use one < field & one > field for searching all values in between two values. </li>
-</ul>
+<?php echo searching_tips(); ?>
 <?php include_template('footer.inc') ?>

@@ -812,6 +812,19 @@ function search_db_name() {
  return $stmt;
 }
 
+function search_payroll_schedule() {
+ global $f;
+ $stmt = $f->text_field('hr_payroll_schedule_id', '', '25', 'hr_payroll_schedule_id');
+ return $stmt;
+}
+
+function search_payroll_process() {
+ global $f;
+ $stmt = $f->select_field_from_object('hr_payroll_process_id', hr_payroll_process::find_payroll_available_for_cancelAndConfirmation(), 'hr_payroll_process_id', array('proces_name','hr_payroll_process_id'), '', 'hr_payroll_process_id');
+ return $stmt;
+}
+
+
 function search_forecast_group() {
  global $f;
  $stmt = $f->select_field_from_object('fp_forecast_group_id', fp_forecast_group::find_all(), 'fp_forecast_group_id', 'forecast_group', '', 'fp_forecast_group_id');
@@ -937,6 +950,12 @@ function search_item_number_to() {
   . 'type="text" title="" placeholder="To Item" size="20" maxlength="256" value="" '
   . 'name="to_item_number" >';
  $stmt .= "<img src='" . HOME_URL . "themes/images/serach.png' class='select_item_number select_popup clickable'>";
+ return $stmt;
+}
+
+function search_payroll() {
+ global $f;
+ $stmt = $f->select_field_from_object('hr_payroll_id', hr_payroll::find_all(), 'hr_payroll_id', 'payroll', '', 'hr_payroll_id', '', 1);
  return $stmt;
 }
 
@@ -1152,6 +1171,21 @@ function next_monday($date_p) {
 
 function convert_to_url($str) {
  return str_replace(' ', '-', trim($str));
+}
+
+function searching_tips() {
+ $stmt = '';
+ $stmt .= '<ul id="search_message">';
+ $stmt .= '<li>1. Use = for exact such.';
+ $stmt .= '<br>Ex : Supplier name inoerp in supplier field \'ll show all results such as ainoerp, aainoerp, inoerpa, etc';
+ $stmt .= '<br>=inoerp in supplier field \'ll show only inoerp </li>';
+ $stmt .= '<li>2. Use > for searching values greater than entered value. </li>';
+ $stmt .='<li>3. Use < for searching values less than entered value. </li>';
+ $stmt .= '<li>4. Use != for searching all values not equal to entered value. </li>';
+ $stmt .= '<li>5. Use comma(, ) for searching multiple values. </li>';
+ $stmt .= '<li>5. Use one < field & one > field for searching all values in between two values. </li>';
+ $stmt .= '</ul>';
+ return $stmt;
 }
 
 ?>

@@ -29,7 +29,7 @@
              </li>
              <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
                Employee Name : </label><?php $f->text_field_d('employee_name'); ?>
-              <?php echo $f->hidden_field_withId('employee_id', $$class->employee_id); ?>
+              <?php echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id); ?>
              </li>
              <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
                Identification # : </label><?php $f->text_field_d('identification_id'); ?>
@@ -77,7 +77,7 @@
                  </ul>
                 </td>
                 <td><?php $f->text_field_wid2sr('hr_element_entry_line_id'); ?></td>
-                <td><?php echo $f->select_field_from_object('element_id', hr_compensation_element::find_all(), 'hr_compensation_element_id', 'element_name', $$class_second->element_id, '', '', 1, $readonly); ?></td>
+                <td><?php echo $f->select_field_from_object('element_id', hr_compensation_element::find_all(), 'hr_compensation_element_id', array('element_name', 'calculation_rule'), $$class_second->element_id, '', '', 1, $readonly); ?></td>
                 <td><?php $f->text_field_wid2m('element_value'); ?></td>
                 <td><?php $mon_val = hr_element_entry_line::find_monetary_value_by_id($$class_second->hr_element_entry_line_id); 
                          echo $f->text_field('monetary_value', $mon_val,'','','','',1); ?></td>

@@ -55,5 +55,5 @@ classSave.savingOnlyHeader = true;
 classSave.enable_select = true;
 classSave.saveMain();
 
- });</script>>
+ });</script>
 <?php include_template('footer.inc') ?>

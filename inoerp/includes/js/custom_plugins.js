@@ -1,6 +1,6 @@
-(function($) {
+(function ($) {
 //form get sub inventory
- $.fn.getSubInventoryFromOrg = function(options) {
+ $.fn.getSubInventoryFromOrg = function (options) {
 
   var defaults = {
    json_url: 'modules/inv/subinventory/json_subinventory.php',
@@ -8,46 +8,46 @@
   };
   var settings = $.extend({}, defaults, options);
   var methods = {
-   jsonSubinventory: function() {
+   jsonSubinventory: function () {
     var org_id = $(this).val();
     $.ajax({
      url: settings.json_url,
      data: {org_id: org_id,
       find_all_subinventory: 1},
      type: 'get',
-     beforeSend: function() {
+     beforeSend: function () {
       $('.show_loading_small').show();
      },
-     complete: function() {
+     complete: function () {
       $('.show_loading_small').hide();
      }
-    }).done(function(result) {
+    }).done(function (result) {
      var div = $(result).filter('div#json_subinventory_find_all').html();
      $('#content').find(settings.subinventory_class).empty().append(div);
      return div;
-    }).fail(function() {
+    }).fail(function () {
      alert("org name loading failed");
-    }).always(function() {
+    }).always(function () {
      $('#loading').hide();
     });
     $(".form_table .from_subinventory_id").attr("disabled", false);
    },
   };
 
-  return this.each(function() {
+  return this.each(function () {
    $(this).on('change', methods.jsonSubinventory);
   });
  };
 
  //form get locator from sub inventory -- Not working
- $.fn.getLocatorFromSubInventory = function(options) {
+ $.fn.getLocatorFromSubInventory = function (options) {
   var defaults = {
    json_url: 'modules/inv/locator/json_locator.php',
    subinventory_type: 'subinventory',
   };
   var settings = $.extend({}, defaults, options);
   var methods = {
-   jsonLocator: function() {
+   jsonLocator: function () {
     var subinventory_id = $(this).val();
     var trClass = '.' + $(this).closest('tr').attr('class');
     $.ajax({
@@ -56,13 +56,13 @@
       subinventory_id: subinventory_id,
       find_all_locator: 1},
      type: 'get',
-     beforeSend: function() {
+     beforeSend: function () {
       $('.show_loading_small').show();
      },
-     complete: function() {
+     complete: function () {
       $('.show_loading_small').hide();
      }
-    }).done(function(result) {
+    }).done(function (result) {
      var div = $(result).filter('div#json_locator_find_all').html();
      switch (settings.subinventory_type) {
       case 'from_subinventory':
@@ -88,7 +88,7 @@
        break;
      }
      $('#loading').hide();
-    }).fail(function() {
+    }).fail(function () {
      alert("Locator name loading failed");
      $('#loading').hide();
     });
@@ -105,11 +105,11 @@
 //  };
 
 // $(this).on('change', methods.jsonLocator);
-  return this.each(function($this) {
+  return this.each(function ($this) {
 
    $(this).on('change', methods.jsonLocator);
    $this = $(this);
-   $('#content').on('change', '.subinventory_id', function() {
+   $('#content').on('change', '.subinventory_id', function () {
     $(this).methods.jsonLocator();
    });
    return $this;
@@ -118,7 +118,7 @@
  };
 
  //form amount validations
- $.fn.validateAmount = function(options) {
+ $.fn.validateAmount = function (options) {
   var defaults = {
    header_amount_id: '#header_amount',
    line_amount_class: '.amount',
@@ -126,10 +126,10 @@
   };
   var settings = $.extend({}, $.fn.validateAmount.defaults, options);
   var methods = {
-   checkHeaderAmount: function() {
+   checkHeaderAmount: function () {
     var totalAmount = 0;
     var header_amount = +$(settings.header_amount_id).val();
-    $(settings.line_amount_class).each(function() {
+    $(settings.line_amount_class).each(function () {
      totalAmount += (+$(this).val());
     });
     if (totalAmount > header_amount) {
@@ -137,7 +137,7 @@
      alert('Sum of line amounts ' + totalAmount + ' is more than header amount ' + header_amount + '\n Re-enter Header Amount!');
     }
    },
-   checkRemainingAmount: function() {
+   checkRemainingAmount: function () {
     var remainong_amount = +$(settings.remaining_amount_class).val();
     var trClass = '.' + $(this).closest('tr').prop('class');
     if (remainong_amount < 0) {
@@ -147,28 +147,28 @@
     }
 
    },
-   hide: function( ) {
+   hide: function ( ) {
    },
   };
 
-  return this.each(function() {
+  return this.each(function () {
    $(this).on('blur', settings.header_amount_id, methods.checkHeaderAmount);
    $(this).on('change', settings.line_amount_class, methods.checkHeaderAmount);
    $(this).on('blur', settings.remaining_amount_class, methods.checkRemainingAmount);
   });
  };
 
- $.fn.inoAutoCompleteElement = function(options) {
+ $.fn.inoAutoCompleteElement = function (options) {
   var defaults = {
    min_length: 3,
-   form_id : 'form_line'
+   form_id: 'form_line'
   };
   var settings = $.extend({}, defaults, options);
-  var form_id_h  = '#' + settings.form_id;
+  var form_id_h = '#' + settings.form_id;
 //  settings.select_class = $(this).attr('class').replace(/\s+/g, '.');
 
   var methods = {
-   jsonAutoComplete: function() {
+   jsonAutoComplete: function () {
     if (settings.select_class === 'undefined') {
      settings.select_class = 'select' + settings.field_name;
     }
@@ -178,7 +178,7 @@
     if (!$(this).data("autocomplete")) {
      var auto_element = this;
      $(this).autocomplete({
-      source: function(request, response) {
+      source: function (request, response) {
        $.ajax({
         url: settings.json_url,
         dataType: "json",
@@ -191,22 +191,22 @@
          other_options: settings.other_options,
          ino_auto_complete: true
         },
-        success: function(data) {
+        success: function (data) {
          response(data);
         },
-        error: function(request, errorType, errorMessage) {
+        error: function (request, errorType, errorMessage) {
          alert("Error : " + errorType + ' with message ' + errorMessage);
          $(this).autocomplete("close");
         }
        });
       },
       autoFocus: true,
-      response: function(event, ui) {
+      response: function (event, ui) {
        if (ui.content.length === 1)
        {
         $(this).val(ui.content[0].label);
         var elemenType = $(this).parent().prop('tagName');
-        $.each(ui.content[0], function(key, value) {
+        $.each(ui.content[0], function (key, value) {
          var v_d = '.' + key;
          if (elemenType === 'LI') {
           if (key.substr(-3) === '_cb') {
@@ -234,11 +234,11 @@
 
       },
       //select
-      select: function(event, ui) {
+      select: function (event, ui) {
        $(this).val(ui.item.label);
        var elemenType = $(this).parent().prop('tagName');
-       $.each(ui, function(key2, value) {
-        $.each(value, function(value_k, value_v) {
+       $.each(ui, function (key2, value) {
+        $.each(value, function (value_k, value_v) {
          var v_d = '.' + value_k;
          if (elemenType === 'LI') {
           if (value_k.substr(-3) === '_cb') {
@@ -267,9 +267,70 @@
    }
   };
 
-  return this.each(function() {
+  return this.each(function () {
    var select_class_d = '.' + $(this).attr('class').replace(/\s+/g, '.');
    $('body').on("focus.nsAutoComplete", select_class_d, methods.jsonAutoComplete);
   });
  };
-}(jQuery));
+
+ $.fn.getCompensationElementTemplate = function (options) {
+  var defaults = {
+   min_length: 3,
+   form_id: 'form_line',
+   json_url: 'modules/hr/element_entry/tpl/json_element_entry_tpl.php'
+  };
+  var settings = $.extend({}, defaults, options);
+  var thisElement = $(this);
+//  var trClass =  $(this).closest('tr').attr('class');
+  var methods = {
+   jsonValue: function () {
+    $.ajax({
+     url: settings.json_url,
+     type: 'get',
+     dataType: 'json',
+     data: {
+      find_element_entry_tpl: 1
+     },
+     success: function (result) {
+      if (result) {
+       var select_class_d = '.' + $(thisElement).attr('class').replace(/\s+/g, '.');
+       if (settings.trDivId) {
+        var select_stmt = '<select id="hr_element_entry_tpl_header_id" class="select hr_element_entry_tpl_header_id" name="hr_element_entry_tpl_header_id[]" style="max-width:95%;">';
+       } else {
+        var select_stmt = '<select class="select hr_element_entry_tpl_header_id" name="hr_element_entry_tpl_header_id[]" style="max-width:95%;">';
+       }
+       $.each(result, function (f_key, f_name) {
+        select_stmt += '<option value="' + f_name.hr_element_entry_tpl_header_id + '">' + f_name.template_name + '</option>';
+       });
+       select_stmt += '</select>';
+       if (settings.trDivId) {
+        $('#hr_element_entry_tpl_header_id').replaceWith(select_stmt);
+//        var trclass_d = '.' + trClass;
+       } else {
+        $(select_class_d).replaceWith(select_stmt);
+       }
+      }
+     },
+     complete: function () {
+      $('.show_loading_small').hide();
+     },
+     beforeSend: function () {
+      $('.show_loading_small').show();
+     },
+     error: function (request, errorType, errorMessage) {
+      alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+     }
+    });
+   }
+  };
+
+  if ($(thisElement).length > 2) {
+   var select_class_d = '.' + $(this).attr('class').replace(/\s+/g, '.');
+   $('body').on("blur", select_class_d, methods.jsonValue).one();
+  }
+//  return this;
+  return $(this);
+
+ };
+
+ }(jQuery));

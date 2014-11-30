@@ -23,14 +23,9 @@
           <div id="tabsHeader-1" class="tabContent">
            <div class="large_shadow_box"> 
             <ul class="column four_column">
-             <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_element_entry_header_id select_popup clickable">
-               Header Id : </label><?php $f->text_field_dsr('hr_element_entry_header_id') ?>
-              <a name="show" href="form.php?class_name=hr_element_entry_header_id" class="show hr_element_entry_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-             </li>
-             <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
-               Employee Name : </label><?php $f->text_field_d('employee_name'); ?>
-              <?php echo $f->hidden_field_withId('employee_id', $$class->employee_id); ?>
-              <a name="show" href="form.php?class_name=hr_element_entry_header_id" class="show hr_employee_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+             <li><label> Employee Name : </label><?php $f->text_field_d('employee_name'); ?>
+              <?php echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id); ?>
+              <a name="show" href="form.php?class_name=hr_employee_salary" class="show hr_employee_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
              </li>
              <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
                Identification # : </label><?php $f->text_field_d('identification_id'); ?>

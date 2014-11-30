@@ -88,8 +88,8 @@ referenced_cb, yield, cumm_yield
 )
 AS
 SELECT 
-brh.bom_routing_header_id, brh.item_id_m, brh.alternate_routing, brh.org_id, brh.routing_revision, 
-brh.effective_date, brh.common_routing_item_id_m, brh.description, brh.completion_subinventory, 
+brh.bom_routing_header_id as bom_routing_header_id_h, brh.item_id_m, brh.alternate_routing, brh.org_id, brh.routing_revision, 
+brh.effective_date, brh.common_routing_item_id_m, brh.description as description_h, brh.completion_subinventory, 
 brh.completion_locator,
 brl.bom_routing_line_id, brl.bom_routing_header_id, brl.routing_sequence, brl.standard_operation_id,
 brl.department_id, brl.description, brl.count_point_cb, brl.auto_charge_cb, brl.backflush_cb,
@@ -106,8 +106,8 @@ AND (brh.common_routing_item_id_m IS NULL OR  brh.common_routing_item_id_m = 0)
 UNION
 
 SELECT 
-brhc.bom_routing_header_id, brhc.item_id_m, brhc.alternate_routing, brhc.org_id, brhc.routing_revision, 
-brhc.effective_date, brhc.common_routing_item_id_m, brhc.description, brhc.completion_subinventory, 
+brhc.bom_routing_header_id as bom_routing_header_id_h, brhc.item_id_m, brhc.alternate_routing, brhc.org_id, brhc.routing_revision, 
+brhc.effective_date, brhc.common_routing_item_id_m, brhc.description as description_h, brhc.completion_subinventory, 
 brhc.completion_locator,
 brl.bom_routing_line_id, brl.bom_routing_header_id, brl.routing_sequence, brl.standard_operation_id,
 brl.department_id, brl.description, brl.count_point_cb, brl.auto_charge_cb, brl.backflush_cb,

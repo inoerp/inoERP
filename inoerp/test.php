@@ -1,9 +1,9 @@
 <?php
- ini_set('display_errors', 1);
- error_reporting(E_ALL);
- set_time_limit(0);
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+set_time_limit(0);
 
- include_once("includes/basics/header_public.inc");
+include_once("includes/basics/header_public.inc");
 ?>
 <link href="<?php echo HOME_URL; ?>includes/ecss/getsvgimage.css" media="all" rel="stylesheet" type="text/css" />
 <?php
@@ -18,22 +18,52 @@
 ////$ar_ti->prg_import_ar_transaction(serialize($param));
 //  pa($session);
 //  pa($user);
- $db = new dbObject();
- $dbc = new dbc();
- 
+$db = new dbObject();
+$dbc = new dbc();
+
+
 // pa(sys_process_flow_action::find_by_parent_id('11'));'
-
 // pa(cc_co_header::find_by_status('REVIew'))
- 
 //echo inv_lot_number::show_serialLot_entryForm();
- 
- 
- $irh = new inv_receipt_header();
- echo $irh->multi_select_tabs();
- 
-// echo fp_urgent_card::find_current_cardList();
 
-// pa(get_dbColumns('fp_urgent_card'));
+//pa(hr_payroll_schedule::find_latest_open_schedule_by_headerId(3));
+
+pa(hr_payroll_process::find_payroll_available_for_cancelAndConfirmation());
+//$schdule_date = new DateTime('2014-01-01');
+//echo '<br>First Date '. $schdule_date->format('Y-m-01');
+//echo '<br>Last Date' . $schdule_date->format('Y-m-t');
+//echo '<br>Month Year' . $schdule_date->format('M-y');
+//$schdule_date->add(new DateInterval('P1M'));
+//echo '<br>First Date '. $schdule_date->format('Y-m-01');
+//echo '<br>Last Date' . $schdule_date->format('Y-m-t');
+//echo '<br>Month Year' . $schdule_date->format('M-y');
+//
+//pa($schdule_date);
+//$date_end = new DateTime('28-DEC-2016');
+//$no_days_in_period = 30;
+//
+//pa($date_start);
+//pa($date_end);
+//$total_no_days = $date_end->diff($date_start, 1)->days;
+//$no_of_periods = $total_no_days / $no_days_in_period;
+////pa($date_end->diff($date_start, 1));
+//
+//
+//
+//
+//while ($no_of_periods > 0) {
+// $date_intvl = 'P'.$no_days_in_period.'D';
+// echo "<br> date_intvl is $date_intvl  & satrt date " . $date_start->format('Y-m-d');
+// 
+// $date_start->add(new DateInterval($date_intvl));
+// $no_of_periods--;
+//}
+
+//$irh = new inv_receipt_header();
+//echo $irh->multi_select_tabs();
+//// echo fp_urgent_card::find_current_cardList();
+ pa(get_dbColumns('hr_payroll_process'));
+// pa(get_dbColumns('hr_payslip_line'));
 // pa(get_dbColumns('sys_process_flow_action'));
 // pa(get_dbColumns('sys_process_flow_action_value'));
 // $row_data_component = new SplFixedArray(2001);
@@ -540,7 +570,7 @@
 //echo "<h2>Final Code</h2>";
 //pa($lowLevel_code);
 
- execution_time();
+execution_time();
 ////$dbc->ddlexecute($query1);
 //$query1 = " ALTER TABLE sd_so_line
 //add picked_quantity int(12) after line_quantity,
@@ -652,7 +682,7 @@
 ?>
 
 <?php
- global $dbc;
+global $dbc;
 //$block_types = block::block_types();
 //  echo '<pre>';
 //  print_r($block_types);
@@ -692,6 +722,6 @@
 
 <?php
 //execution_time();
- execution_time();
- include_template('footer.inc')
+execution_time();
+include_template('footer.inc')
 ?>

@@ -29,17 +29,7 @@ $(document).ready(function() {
  pathSave.single_line = false;
  pathSave.saveMain();
 
-//$('#path_link').on('blur', function(){
-//  if(!$(this).val()){
-//  return;
-//  }
-//  var className_a = $(this).val().split('=');
-//  var className = className_a[1];
-//$('#obj_class_name').val(className);
-//  var pathName = toUpperCase(className.replace(/_/g, " "));
-//  pathName = pathName.substr(pathName.indexOf(' ')+1);
-//  $('#name, #description').val(pathName);
-//})
+deleteHeader('form.php?class_name=path', $('#path_id').val());
 
  $('#path_link').on('blur', function() {
   if (!$(this).val()) {

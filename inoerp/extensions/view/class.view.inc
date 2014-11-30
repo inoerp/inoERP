@@ -89,6 +89,12 @@
    "description",
    "query_v"
   ];
+  
+      public $numberField = [
+     'chart_width',
+   'chart_height',
+  ];
+    
   public $fields_inForm_notInDataBase = [
   ];
   public $search = [
@@ -444,7 +450,7 @@
     array_push($column_array_s, $h_k);
    }
 
-   $total_columns = count($column_array_s) + (int) (count($column_array_s) / $no_of_columns_per_tab); //1 for count
+   $total_columns = count($column_array_s) + (int) (count($column_array_s) / $no_of_columns_per_tab) + 1; //1 for count
    $no_of_tabs = ceil($total_columns / $no_of_columns_per_tab);
    $total_count = count($result);
    $pagination = new pagination($this->pageno, $this->per_page, $total_count);
@@ -525,15 +531,19 @@
    return $content_string;
   }
 
-  private function _update_queryByFilter() {
-   $whereFields = [];
-   $existing_search = [];
+   private function _update_queryByFilter() {
+  $whereFields = [];
+  $existing_search = [];
 //to check number of criterias
-   $noof_criteria = 0;
-   foreach ($this->user_filter as $key => $value) {
-    $key = str_replace('__', '.', $key);
+  $noof_criteria = 0;
+  foreach ($this->user_filter as $key => $value) {
+   $key = str_replace('__', '.', $key);
+   if (strpos(trim($value), ',') != false) {
+    $comma_sep_search_parameters = explode(',', trim($value));
+    $comma_sep_search_parameters_in_str = '(\'' . implode('\', \'', $comma_sep_search_parameters) . '\')';
+    $whereFields[] = sprintf("%s IN %s ", $key, $comma_sep_search_parameters_in_str);
+   } else {
     $entered_search_criteria = str_replace(' ', '%', trim($value));
-    array_push($existing_search, $value);
     if (substr($entered_search_criteria, 0, 1) == '=') {
      $whereFields[] = sprintf("%s = '%s' ", $key, trim(substr($entered_search_criteria, 1)));
     } else if (substr($entered_search_criteria, 0, 2) == '!=') {
@@ -545,11 +555,13 @@
     } else {
      $whereFields[] = sprintf("%s LIKE '%%%s%%'", $key, trim(mysql_prep($entered_search_criteria)));
     }
-    $noof_criteria++;
    }
-   $whereClause = implode(" AND ", $whereFields);
-   return $whereClause;
+   array_push($existing_search, $value);
+   $noof_criteria++;
   }
+  $whereClause = implode(" AND ", $whereFields);
+  return $whereClause;
+ }
 
   private function _update_orderBY() {
    $orderBy = '';

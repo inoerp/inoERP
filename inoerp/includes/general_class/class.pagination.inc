@@ -134,7 +134,7 @@ VAR;
        $pagination_statement .= " <span class=\"selected\">{$starting_page_no}</span> ";
       } else {
        if (strpos($this->_path, '.php') !== false) {
-        $pagination_statement .= " <a href=\"$this->_pathvpageno={$starting_page_no}&amp;" . $this->_query_string;
+        $pagination_statement .= " <a href=\"$this->_path&amp;pageno={$starting_page_no}&amp;" . $this->_query_string;
        } else {
         $pagination_statement .= " <a href=\"$this->_path.php?pageno={$starting_page_no}&amp;" . $this->_query_string;
        }

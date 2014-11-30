@@ -33,12 +33,12 @@ if (!empty($msg)) {
   classSave.single_line = false;
   classSave.line_key_field = line_key_field;
   classSave.lineClassName = action_class;
+  classSave.savingOnlyHeader = true;
+  classSave.headerClassName = action_class;
   var actionValue = $('.action').first().val();
   if ((actionValue === 'convert_requisition') || 'sales_order_picking' || 'multi_receipt' || 'po_receipt'
           || 'import_ar_transaction') {
    classSave.allLineTogether = true;
-   classSave.savingOnlyHeader = true;
-   classSave.headerClassName = action_class;
   }
   classSave.saveMain(beforeSave);
 
@@ -224,13 +224,5 @@ if (!empty($msg)) {
   </div>
  </div>
 </div>
-<ul id="search_message">
- <li>1. Use = for exact such. 
-  <br>Ex : Supplier name inoerp in supplier field 'll show all results such as ainoerp, aainoerp, inoerpa, etc.
-  <br>=inoerp in supplier field 'll show only inoerp </li>
- <li>2. Use > for searching values greater than entered value. </li>
- <li>3. Use < for searching values less than entered value. </li>
- <li>4. Use != for searching all values not equal to entered value. </li>
- <li>5. Use one < field & one > field for searching all values in between two values. </li>
-</ul>
+<?php echo searching_tips(); ?>
 <?php show_footer($showBlock); ?>

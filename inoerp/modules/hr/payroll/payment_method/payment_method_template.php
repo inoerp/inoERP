@@ -12,8 +12,8 @@
       <div class="error"></div><div id="loading"></div>
       <div class="show_loading_small"></div>
       <?php
-       echo (!empty($show_message)) ? $show_message : "";
-       $f = new inoform();
+      echo (!empty($show_message)) ? $show_message : "";
+      $f = new inoform();
       ?> 
       <!--    End of place for showing error messages-->
       <div id ="form_header">
@@ -35,12 +35,15 @@
                <a name="show" href="form.php?class_name=hr_payroll_payment_method" class="show hr_payroll_payment_method_id">	<img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
               </li>
               <li><label>Payment Method :</label><?php $f->text_field_d('payment_method'); ?> 					</li>
+              <li><label>Ledger Id : </label> 
+							 <?php echo $f->select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', '', 1, $readonly) ?>
+							</li> 
               <li><label>Currency : </label>
-               <?php echo $f->select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'currency','', 1,  $readonly1); ?>
+               <?php echo $f->select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'currency', '', 1, $readonly1); ?>
               </li>
               <li><label>Payment Type :</label>
-                <?php echo $f->select_field_from_object('payment_type', hr_payroll_payment_method::payment_method_type(), 'option_line_code', 'option_line_value', $$class->payment_type, 'payment_type','', 1,  $readonly1); ?>
-</li>
+               <?php echo $f->select_field_from_object('payment_type', hr_payroll_payment_method::payment_method_type(), 'option_line_code', 'option_line_value', $$class->payment_type, 'payment_type', '', 1, $readonly1); ?>
+              </li>
               <li><label>Start Date :</label><?php echo $f->date_fieldAnyDay('start_date', $$class->start_date); ?> 	</li>
               <li><label>End Date :</label><?php echo $f->date_fieldAnyDay('start_date', $$class->start_date); ?> 	</li>
               <li><label>Description :</label><?php $f->text_field_dl('description'); ?> 					</li>
@@ -58,8 +61,8 @@
               </div>
               <div id ="display_comment_form">
                <?php
-                $reference_table = 'hr_payroll_payment_method';
-                $reference_id = $$class->hr_payroll_payment_method_id;
+               $reference_table = 'hr_payroll_payment_method';
+               $reference_id = $$class->hr_payroll_payment_method_id;
                ?>
               </div>
               <div id="new_comment">
@@ -88,6 +91,7 @@
               <li><label>Cash Ac: </label><?php $f->ac_field_d('cash_ac_id'); ?></li>
               <li><label>Clearing Ac: </label><?php $f->ac_field_d('clearing_ac_id'); ?></li>
               <li><label>Bank Charge Ac: </label><?php $f->ac_field_d('bank_charge_ac_id'); ?></li>
+              <li><label>Salary Payable Ac: </label><?php $f->ac_field_d('salary_payable_ac_id'); ?></li>
              </ul> 
             </div> 
            </div> 

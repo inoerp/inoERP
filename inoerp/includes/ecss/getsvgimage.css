@@ -1,13 +1,13 @@
 a.more_page{
-   position: relative;
-    left: 400px;
-    top: -40px;
-    z-index: 99;
+ position: relative;
+ left: 400px;
+ top: -40px;
+ z-index: 99;
 }
 
 ul#charts_in_report li {
-    display: inline-block;
-margin-right: 100px;  
+ display: inline-block;
+ margin-right: 100px;  
 }
 
 .chart rect {
@@ -78,6 +78,7 @@ rect.line_class_6 {
  fill:  rgba(237, 167, 5, 0.9);
 }
 
+
 .line_class_7.line{
  stroke: rgba(5, 237, 5, 0.9);
  stroke-width : 0.2em;
@@ -92,8 +93,62 @@ rect.line_class_7 {
  stroke-width : 0.2em;
 }
 
-rect.line_class_7 {
+.rect.line_class_8 {
  fill: rgba(5, 206, 237, 0.9);
+}
+
+.line_class_9.line{
+ fill: rgba(105, 206, 237, 0.9);
+ stroke-width : 0.2em;
+}
+
+.rect.line_class_9 {
+ fill: rgba(105, 206, 237, 0.9);
+}
+
+.line_class_10.line{
+ fill: rgba(105, 6, 237, 0.9);
+ stroke-width : 0.2em;
+}
+
+.rect.line_class_10 {
+ fill: rgba(105, 6, 237, 0.9);
+}
+
+.line_class_11.line{
+ fill: rgba(205, 106, 27, 0.7);
+ stroke-width : 0.2em;
+}
+
+.rect.line_class_11 {
+ fill: rgba(205, 106, 27, 0.7);
+}
+
+.line_class_12.line{
+ fill: rgba(105, 106, 27, 0.9);
+ stroke-width : 0.2em;
+}
+
+.rect.line_class_12 {
+ fill: rgba(105, 106, 27, 0.9);
+}
+
+.line_class_13.line{
+ fill: rgba(105, 6, 237, 0.3);
+ stroke-width : 0.2em;
+}
+
+.rect.line_class_13 {
+ fill: rgba(105, 6, 237, 0.3);
+}
+
+.line_class_14.line{
+ fill: rgba(105, 106, 237, 0.3);
+ stroke-width : 0.2em;
+}
+
+.rect.line_class_14 {
+ fill: rgba(105, 106, 237, 0.3);
 }
 
 
@@ -149,6 +204,38 @@ rect.line_class_7 {
  fill: rgba(5, 206, 237, 0.9);
 }
 
+.chart .cluster_class_9, rect.data_class_9 {
+ fill: rgba(105, 206, 237, 0.9);
+}
+
+.chart .cluster_class_10, rect.data_class_10 {
+ fill: rgba(105, 6, 237, 0.9);
+}
+
+.chart .cluster_class_11, rect.data_class_11 {
+ fill: rgba(205, 106, 27, 0.7);
+}
+
+.chart .cluster_class_12, rect.data_class_12 {
+ fill: rgba(105, 106, 27, 0.9);
+}
+
+.chart .cluster_class_13, rect.data_class_13 {
+ fill: rgba(105, 6, 237, 0.3);
+}
+
+.chart .cluster_class_14, rect.data_class_14 {
+ fill: rgba(105, 106, 237, 0.3);
+}
+
+.chart .cluster_class_15, rect.data_class_15 {
+ fill: rgba(15, 6, 27, 0.3);
+}
+
+.chart .cluster_class_16, rect.data_class_16 {
+ fill: rgba(105, 12, 27, 0.4);
+}
+
 .chart_label_text {
  display: block;
  text-anchor : end;
@@ -179,6 +266,11 @@ rect.line_class_7 {
 }
 
 ul.multi_charts li{
-    display: inline-block;
-    margin: 5px 20px;
+ display: inline-block;
+ margin: 5px 20px;
+}
+
+#return_divId >div, .svg_image>div{
+ display: inline-block;
+ margin-right: 20px;
 }

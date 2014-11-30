@@ -47,7 +47,7 @@
   public $fields_inForm_notInDataBase = [
    "employee_name",
    'identification_id',
-   'leave_action'
+   'leave_action',
   ];
   public $requiredField = [
    'employee_id',

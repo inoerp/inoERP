@@ -195,7 +195,7 @@
 
     case 'ALWAYS':
      $this->_tolerance_updates($inv_count_header, 'ALWAYS');
-     $inv_cs->status = 'PENDING_APPROVAL';
+     $this->status = 'PENDING_APPROVAL';
      break;
 
     case 'OUT_OF_TOLERANCE_ALL':

@@ -131,7 +131,8 @@
               <li><label>Position :</label>
                <?php echo $f->select_field_from_object('position_id', hr_position::find_all(), 'hr_position_id', 'position_name', $$class->position_id, 'position_id'); ?>  </li>
 
-              <li><label>Payroll :</label><?php $f->text_field_d('payroll_id'); ?> 					</li>
+              <li><label>Payroll :</label>
+               <?php echo $f->select_field_from_object('payroll_id', hr_payroll::find_all(), 'hr_payroll_id', 'payroll', $$class->payroll_id, 'payroll_id'); ?>  </li>
               <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supervisor_employee_id select_popup clickable">
                 Supervisor :</label><?php $f->text_field_d('supervisor_employee_name'); echo $f->hidden_field_withId('supervisor_employee_id',$$class->supervisor_employee_id);   ?> 					</li>
              </ul> 
@@ -141,8 +142,12 @@
             <div> 
              <ul class="column four_column"> 
               <li><label>Tax Reg# :</label><?php $f->text_field_d('tax_reg_number'); ?> 					</li>
-              <li><label>Bank Account :</label><?php $f->text_field_d('bank_account_id'); ?> 					</li>
+              <li><label>Social AC # :</label><?php $f->text_field_d('tax_reg_number'); ?> 					</li>
+              <li><label>Social AC#2 :</label><?php $f->text_field_d('social_ac_no'); ?> 					</li>
+              <li><label>Bank Account :</label><?php $f->text_field_d('social_ac_no2'); ?> 					</li>
               <li><label>Expense Ac :</label><?php echo $f->ac_field_d('expense_ac_id'); ?> 					</li>
+              <li><label>Salary Ac :</label><?php echo $f->ac_field_d('salary_ac_id'); ?> 					</li>
+              
              </ul> 
             </div> 
            </div>

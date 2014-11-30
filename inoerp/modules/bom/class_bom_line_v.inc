@@ -94,8 +94,9 @@ supply_locator, created_by, creation_date, last_update_by, last_update_date
 )
 AS
 SELECT 
-bh.bom_header_id, bh.item_id_m, bh.org_id, bh.alternate_bom, bh.effective_date,bh.common_bom_item_id_m,
-bh.common_bom_org_id, bh.created_by, bh.creation_date,  bh.last_update_by, bh.last_update_date,
+bh.bom_header_id as bom_header_id_h, bh.item_id_m, bh.org_id, bh.alternate_bom, bh.effective_date,bh.common_bom_item_id_m,
+bh.common_bom_org_id, bh.created_by as h_created_by, bh.creation_date as h_creation_date,  bh.last_update_by as h_last_update_by,
+bh.last_update_date as h_last_update_date,
 bl.bom_header_id, bl.bom_line_id, bl.bom_sequence, bl.routing_sequence, bl.component_item_id_m, bl.usage_basis,
 bl.usage_quantity, bl.auto_request_material_cb, bl.effective_start_date, bl.effective_end_date, bl.eco_number,
 bl.eco_implemented_cb, bl.planning_percentage, bl.yield, bl.include_in_cost_rollup_cb, 
@@ -144,8 +145,9 @@ AND (bh.common_bom_item_id_m IS NULL OR  bh.common_bom_item_id_m = 0)
 UNION
 
 SELECT
-bhc.bom_header_id, bhc.item_id_m, bhc.org_id, bhc.alternate_bom, bhc.effective_date,bhc.common_bom_item_id_m,
-bhc.common_bom_org_id, bhc.created_by, bhc.creation_date,  bhc.last_update_by, bhc.last_update_date,
+bh.bom_header_id as bom_header_id_h, bhc.item_id_m, bhc.org_id, bhc.alternate_bom, bhc.effective_date,bhc.common_bom_item_id_m,
+bhc.common_bom_org_id, bh.created_by as h_created_by, bh.creation_date as h_creation_date,  bh.last_update_by as h_last_update_by,
+bh.last_update_date as h_last_update_date,
 bl.bom_header_id, bl.bom_line_id, bl.bom_sequence, bl.routing_sequence, bl.component_item_id_m, bl.usage_basis,
 bl.usage_quantity, bl.auto_request_material_cb, bl.effective_start_date, bl.effective_end_date, bl.eco_number,
 bl.eco_implemented_cb, bl.planning_percentage, bl.yield, bl.include_in_cost_rollup_cb, 
