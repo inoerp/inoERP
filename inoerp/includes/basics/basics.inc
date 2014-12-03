@@ -84,6 +84,7 @@
  require_once(INC_MODULE . DS . "sys" . DS . "secondary_field" . DS . "instance" . DS . "class_sys_secondary_field_instance.inc");
  require_once(INC_MODULE . DS . "sys" . DS . "extra_field" . DS . "class_sys_extra_field.inc");
  require_once(INC_MODULE . DS . "sys" . DS . "extra_field" . DS . "instance" . DS . "class_sys_extra_field_instance.inc");
+ require_once(INC_MODULE . DS . "sys" . DS . "printer" . DS . "class_sys_printer.inc");
  require_once(INC_ORGS . DS . "class_org.inc");
  require_once(INC_ORGS . DS . "class_org_v.inc");
  require_once(INC_ORGS . DS . "enterprise" . DS . "class_enterprise.inc");
@@ -295,7 +296,12 @@
  require_once(INC_MODULE . DS . "cc" . DS . "co_template" . DS . "class_cc_co_template_line.inc");
  require_once(INC_MODULE . DS . "cc" . DS . "co" . DS . "class_cc_co_header.inc");
  require_once(INC_MODULE . DS . "cc" . DS . "co" . DS . "class_cc_co_line.inc");
+ require_once(INC_MODULE . DS . "bc" . DS . "auto_trigger" . DS . "class_bc_auto_trigger.inc");
  require_once(INC_MODULE . DS . "cc" . DS . "co" . DS ."process_flow" . DS . "class_cc_co_process_flow_action.inc");
+ require_once(INC_MODULE . DS . "bc" . DS . "label_format" . DS . "class_bc_label_format_header.inc");
+ require_once(INC_MODULE . DS . "bc" . DS . "label_format" . DS . "class_bc_label_format_line.inc");
+ require_once(INC_MODULE . DS . "bc" . DS . "label_request" . DS . "class_bc_label_request.inc");
+ require_once(INC_MODULE . DS . "bc" . DS . "static_label" . DS . "class_bc_static_label.inc");
  
 
 //include extensions

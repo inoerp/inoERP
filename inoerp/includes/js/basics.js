@@ -40,6 +40,54 @@ function include_once(src) {
  ($(document).find('HEAD')[0] || document.body).appendChild(script);
 }
 
+function getFieldNames(options) {
+ var defaults = {
+  fieldClass: 'table_fields',
+  josnurl: 'extensions/view/json_view.php'
+ };
+ var settings = $.extend({}, defaults, options);
+ $('#loading').show();
+ $.ajax({
+  url: settings.josnurl,
+  data: {
+   tableName: settings.tableName,
+   get_fieldName: 1},
+  type: 'get'
+ }).done(function (result) {
+  var parentClass = '.' + settings.parentClass.replace(/\s+/g, '.');
+  var fieldClass = '.' + settings.fieldClass.replace(/\s+/g, '.');
+  var div = $(result).filter('div#json_filed_names').html();
+  if (div.length > 5) {
+   $('#content').find(parentClass).find(fieldClass).empty().append(div);
+  }
+  $('#loading').hide();
+ }).fail(function () {
+  alert("table field loading failed");
+  $('#loading').hide();
+ });
+ $(".table_fields").attr("disabled", false);
+}
+
+function xX_getFieldNames(tableName, parentClass) {
+ $('#loading').show();
+ $.ajax({
+  url: 'extensions/view/json_view.php',
+  data: {tableName: tableName,
+   get_fieldName: 1},
+  type: 'get'
+ }).done(function (result) {
+  var tableClass = '.' + parentClass.replace(/\s+/g, '.');
+  var div = $(result).filter('div#json_filed_names').html();
+  if (div.length > 5) {
+   $('#content').find(tableClass).find('.table_fields').empty().append(div);
+  }
+  $('#loading').hide();
+ }).fail(function () {
+  alert("table field loading failed");
+  $('#loading').hide();
+ });
+ $(".table_fields").attr("disabled", false);
+}
 //function treeview
 function treeView() {
  $('ul.tree_view  ul').hide();
@@ -2028,6 +2076,46 @@ function inoAutoComplete(options) {
  });
 }
 
+function printLabel(options) {
+ var defaults = {
+  json_url: 'modules/bc/static_label/json_static_label.php',
+  org_id: $('#org_id').val(),
+  subinventory_id: $('#subinventory_id').val(),
+  item_id: $('#item_id').val(),
+  bc_static_label_id: $('#bc_static_label_id').val()
+ };
+ var settings = $.extend({}, defaults, options);
+
+ return $.ajax({
+  url: settings.json_url,
+  type: 'get',
+  data: {
+   org_id: settings.org_id,
+   subinventory_id: settings.subinventory_id,
+   locator_id: settings.locator_id,
+   status: settings.status,
+   item_id_m: settings.item_id_m,
+   print_label: 1,
+   bc_static_label_id: settings.bc_static_label_id
+  },
+  success: function (result) {
+   if (result) {
+    var divContent = $(result).filter('div#ret_message').html();
+    $('.error').append(divContent);
+   }
+  },
+  complete: function () {
+   $('.show_loading_small').hide();
+  },
+  beforeSend: function () {
+   $('.show_loading_small').show();
+  },
+  error: function (request, errorType, errorMessage) {
+   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+  }
+ });
+}
+
 //show Default Dialog Box 
 function show_dialog_box() {
  $("#dialog_box").dialog({
@@ -2073,7 +2161,7 @@ function getPayrollSchedules(options) {
      var select_stmt = '<select id="hr_payroll_schedule_id" class="select hr_payroll_schedule_id" name="hr_payroll_schedule_id[]" style="max-width:95%;">';
     }
     $.each(result, function (f_key, f_name) {
-     select_stmt += '<option value="' + f_name.hr_payroll_schedule_id + '">' + f_name.scheduled_date +  ' : ' + f_name.period_name  +'</option>';
+     select_stmt += '<option value="' + f_name.hr_payroll_schedule_id + '">' + f_name.scheduled_date + ' : ' + f_name.period_name + '</option>';
     });
     select_stmt += '</select>';
     if (settings.trDivId) {
@@ -2575,8 +2663,8 @@ $(document).ready(function () {
 //  $(this).css("background-color", "#ffffff");
 // });
 // $(" :required").css("background", "pink").css('border','0px none');
-$("[required]").addClass('required');
-$("[readonly]").addClass('readonly');
+ $("[required]").addClass('required');
+ $("[readonly]").addClass('readonly');
 // $("[readonly]").css("background-color", "#ddd");
 // $("input:required").blur(function () {
 //  $(this).css("background-color", "pink");

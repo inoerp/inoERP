@@ -157,7 +157,7 @@ input[type=number], input[type=search], checkbox, radio button
 {
  font-size:11px;
  height: 13px;
-        padding: 2px;
+ padding: 3px 2px;
 }
 
 select{
@@ -1218,7 +1218,7 @@ table.document_table input{
 }
 
 .required{
-background: none repeat scroll 0% 0% rgba(242, 176, 162, 0.91);
+background: none repeat scroll 0% 0% rgba(206, 167, 207, 0.61);
  border : 0px none;
 }
 

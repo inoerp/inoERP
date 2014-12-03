@@ -21,6 +21,27 @@ include_once("includes/basics/header_public.inc");
 $db = new dbObject();
 $dbc = new dbc();
 
+$xml_content = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE labels SYSTEM "label.dtd">
+<labels _FORMAT="E:M_STK_M.ZPL" _QUANTITY="2" >
+<label>
+<variable name= "COHR_DATE">19-NOV-2014</variable>
+<variable name= "COHR_ITEM">1214874</variable>
+<variable name= "COHR_ITEM_DESC">Power Supply, OBIS, 12 VDC, with 8ft USA-type Power Cord</variable>
+<variable name= "COHR_LOCATOR">RAW-01.04.01.03.</variable>
+<variable name= "COHR_LOT"></variable>
+<variable name= "COHR_QTY">50</variable>
+<variable name= "COHR_RCPT"></variable>
+<variable name= "COHR_SUB">RAW-01</variable>
+<variable name= "COHR_UOM">EA</variable>
+</label>
+</labels>
+';
+
+$bc_lr = new bc_label_request();
+$bc_lr->sys_printer_id = 1;
+$bc_lr->print_XMLlabel($xml_content);
+
 
 // pa(sys_process_flow_action::find_by_parent_id('11'));'
 // pa(cc_co_header::find_by_status('REVIew'))
@@ -28,7 +49,7 @@ $dbc = new dbc();
 
 //pa(hr_payroll_schedule::find_latest_open_schedule_by_headerId(3));
 
-pa(hr_payroll_process::find_payroll_available_for_cancelAndConfirmation());
+//pa(hr_payroll_process::find_payroll_available_for_cancelAndConfirmation());
 //$schdule_date = new DateTime('2014-01-01');
 //echo '<br>First Date '. $schdule_date->format('Y-m-01');
 //echo '<br>Last Date' . $schdule_date->format('Y-m-t');
@@ -62,7 +83,8 @@ pa(hr_payroll_process::find_payroll_available_for_cancelAndConfirmation());
 //$irh = new inv_receipt_header();
 //echo $irh->multi_select_tabs();
 //// echo fp_urgent_card::find_current_cardList();
- pa(get_dbColumns('hr_payroll_process'));
+// pa(get_dbColumns('bc_static_label'));
+// pa(get_dbColumns('bc_label_format_line'));
 // pa(get_dbColumns('hr_payslip_line'));
 // pa(get_dbColumns('sys_process_flow_action'));
 // pa(get_dbColumns('sys_process_flow_action_value'));

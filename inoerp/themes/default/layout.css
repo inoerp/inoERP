@@ -499,6 +499,19 @@ ul.column li label,
  font-size : 10px;
 }
 
+ul.column.one_column li{
+ width: 600px;
+  padding: 5px 10px;
+}
+
+ul.column.one_column li input{
+ width: 300px;
+}
+
+ul.column.one_column li label{
+ width: 200px;
+}
+
 ul.column.two_column li, 
 ul.column.two_column li label{
  width: 400px;

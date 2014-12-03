@@ -406,8 +406,7 @@
     $postArray = get_postArray_From_jqSearializedArray($linedata);
     $_POST = $postArray;
    }
-//	echo 'key $class '.$class . '<pre>'; print_r($_POST);
-   if ((!empty($_POST[$keyField])) && (!empty($_POST[$keyField][0]))) {
+	   if ((!empty($_POST[$keyField])) && (!empty($_POST[$keyField][0]))) {
     $$class = $this->save_class($class);
 
     if (empty($$class)) {

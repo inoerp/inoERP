@@ -1,24 +1,3 @@
-function getFieldNames(tableName, parentClass) {
- $('#loading').show();
- $.ajax({
-  url: 'extensions/view/json_view.php',
-  data: {tableName: tableName,
-   get_fieldName: 1},
-  type: 'get'
- }).done(function(result) {
-  var tableClass = '.' + parentClass.replace(/\s+/g, '.');
-  var div = $(result).filter('div#json_filed_names').html();
-  if (div.length > 5) {
-   $('#content').find(tableClass).find('.table_fields').empty().append(div);
-  }
-  $('#loading').hide();
- }).fail(function() {
-  alert("table field loading failed");
-  $('#loading').hide();
- });
- $(".table_fields").attr("disabled", false);
-}
-
 function setValFromSelectPage(view_id) {
  this.view_id = view_id;
 }
@@ -264,7 +243,10 @@ $(document).ready(function() {
   var tableName = $(this).val();
   var parentClass = $(this).closest('ul').attr("class");
   if (tableName !== 'remove_table') {
-   getFieldNames(tableName, parentClass);
+   getFieldNames({
+    tableName : tableName,
+    parentClass :parentClass
+   } );
   }
  });
 
