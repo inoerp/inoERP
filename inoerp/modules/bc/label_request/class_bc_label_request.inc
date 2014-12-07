@@ -98,9 +98,12 @@ class bc_label_request extends dbObject {
 <!DOCTYPE labels SYSTEM "label.dtd">';
   $xml_content .= '<labels _FORMAT="' . $bc_lf->format_name . '" _QUANTITY="' . $this->quanity . '" _PRINTERNAME="SNG_ZM400_1" _JOBNAME="LBL512027">
 <label>';
+  
+//  pa($data_obj);
 
   foreach ($bc_lfl_i as $line) {
    $sys_field_name = $line->sys_field_name;
+//   echo " <br> $sys_field_name ";
    $xml_content .= '<variable name = "' . $line->field_name . '">';
    $xml_content .= !empty($data_obj->$sys_field_name) ? $data_obj->$sys_field_name : '';
    $xml_content .= '</variable>';

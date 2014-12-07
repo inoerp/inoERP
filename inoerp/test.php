@@ -38,9 +38,9 @@ $xml_content = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 </labels>
 ';
 
-$bc_lr = new bc_label_request();
-$bc_lr->sys_printer_id = 1;
-$bc_lr->print_XMLlabel($xml_content);
+//$bc_lr = new bc_label_request();
+//$bc_lr->sys_printer_id = 1;
+//$bc_lr->print_XMLlabel($xml_content);
 
 
 // pa(sys_process_flow_action::find_by_parent_id('11'));'
@@ -84,7 +84,8 @@ $bc_lr->print_XMLlabel($xml_content);
 //echo $irh->multi_select_tabs();
 //// echo fp_urgent_card::find_current_cardList();
 // pa(get_dbColumns('bc_static_label'));
-// pa(get_dbColumns('bc_label_format_line'));
+ pa(get_dbColumns('sd_lead'));
+// pa(get_dbColumns('extn_contact_reference'));
 // pa(get_dbColumns('hr_payslip_line'));
 // pa(get_dbColumns('sys_process_flow_action'));
 // pa(get_dbColumns('sys_process_flow_action_value'));

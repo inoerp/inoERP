@@ -3,7 +3,7 @@
 class mdm_bank_header extends dbObject {
 
  public static $table_name = "mdm_bank_header";
- public static $dependent_classes = ['mdm_bank_site'];
+ public static $dependent_classes = ['mdm_bank_site','extn_contact'];
  public static $primary_column = "mdm_bank_header_id";
  public static $key_column = 'bank_name';
  public static $module = "mdm";

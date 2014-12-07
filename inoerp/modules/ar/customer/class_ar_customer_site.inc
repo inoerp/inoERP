@@ -102,6 +102,7 @@ class ar_customer_site extends dbObject {
  public $site_address;
  public $site_country;
  public $site_postal_code;
+ 
 
  Public static function customer_site_types() {
 	$option_header = option_header::find_by_name('CUSTOMER_SITE_TYPE');

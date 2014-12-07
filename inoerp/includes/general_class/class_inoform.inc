@@ -276,6 +276,7 @@ EOD;
 
   public function text_field_ds($field_name, $div_class = "") {
    global $readonly, $class, $$class;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class->$field_name, '8', $field_name, $div_class, '', $this->readonly);
   }
 
@@ -306,6 +307,7 @@ EOD;
 
   public function text_field_dsr($field_name, $div_class = "") {
    global $class, $$class;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class->$field_name, '8', $field_name, $div_class, '', 1);
   }
 
@@ -316,6 +318,7 @@ EOD;
 
   public function text_field_dsrm($field_name, $div_class = "") {
    global $class, $$class;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class->$field_name, '8', $field_name, $div_class, 1, 1);
   }
 
@@ -326,11 +329,13 @@ EOD;
 
   public function text_field_d2s($field_name, $div_class = "") {
    global $readonly, $class_second, $$class_second;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class_second->$field_name, '8', $field_name, $div_class, '', $this->readonly2);
   }
 
   public function text_field_d2sm($field_name, $div_class = "") {
    global $readonly, $class_second, $$class_second;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class_second->$field_name, '8', $field_name, $div_class, 1, $this->readonly2);
   }
 
@@ -351,6 +356,7 @@ EOD;
 
   public function text_field_d2sr($field_name, $div_class = "") {
    global $class_second, $$class_second;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class_second->$field_name, '8', $field_name, $div_class, '', 1);
   }
 
@@ -361,6 +367,7 @@ EOD;
 
   public function text_field_d2srm($field_name, $div_class = "") {
    global $class_second, $$class_second;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class_second->$field_name, '8', $field_name, $div_class, 1, 1);
   }
 
@@ -371,6 +378,7 @@ EOD;
 
   public function text_field_d3s($field_name, $div_class = "") {
    global $readonly, $class_third, $$class_third;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class_third->$field_name, '8', $field_name, $div_class, '', $this->readonly3);
   }
 
@@ -391,6 +399,7 @@ EOD;
 
   public function text_field_d3sr($field_name, $div_class = "") {
    global $class_third, $$class_third;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class_third->$field_name, '8', $field_name, $div_class, '', 1);
   }
 
@@ -401,6 +410,7 @@ EOD;
 
   public function text_field_d3srm($field_name, $div_class = "") {
    global $class_third, $$class_third;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class_third->$field_name, '8', $field_name, $div_class, 1, 1);
   }
 
@@ -421,6 +431,7 @@ EOD;
 
   public function text_field_wids($field_name, $div_class = "") {
    global $readonly, $class, $$class;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class->$field_name, '8', '', $div_class, '', $this->readonly);
   }
 
@@ -441,16 +452,19 @@ EOD;
 
   public function text_field_widsm($field_name, $div_class = "") {
    global $readonly, $class, $$class;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class->$field_name, '8', '', $div_class, 1, $this->readonly);
   }
 
   public function text_field_widsr($field_name, $div_class = "") {
    global $class, $$class;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class->$field_name, '8', '', $div_class, '', 1);
   }
 
   public function text_field_widsrm($field_name, $div_class = "") {
    global $class, $$class;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class->$field_name, '8', '', $div_class, 1, 1);
   }
 
@@ -461,6 +475,7 @@ EOD;
 
   public function text_field_wid2s($field_name, $div_class = "") {
    global $class_second, $$class_second;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class_second->$field_name, '8', '', $div_class, '', $this->readonly2);
   }
 
@@ -486,16 +501,19 @@ EOD;
 
   public function text_field_wid2sm($field_name, $div_class = "") {
    global $class_second, $$class_second;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class_second->$field_name, '8', '', $div_class, 1, $this->readonly2);
   }
 
   public function text_field_wid2sr($field_name, $div_class = "") {
    global $class_second, $$class_second;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class_second->$field_name, '8', '', $div_class, '', 1);
   }
 
   public function text_field_wid2srm($field_name, $div_class = "") {
    global $class_second, $$class_second;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class_second->$field_name, '8', '', $div_class, 1, 1);
   }
 
@@ -506,6 +524,7 @@ EOD;
 
   public function text_field_wid3s($field_name, $div_class = "") {
    global $class_third, $$class_third;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class_third->$field_name, '8', '', $div_class, '', $this->readonly3);
   }
 
@@ -526,16 +545,19 @@ EOD;
 
   public function text_field_wid3sm($field_name, $div_class = "") {
    global $class_third, $$class_third;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class_third->$field_name, '8', '', $div_class, 1, $this->readonly3);
   }
 
   public function text_field_wid3sr($field_name, $div_class = "") {
    global $class_third, $$class_third;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class_third->$field_name, '8', '', $div_class, '', 1);
   }
 
   public function text_field_wid3srm($field_name, $div_class = "") {
    global $class_third, $$class_third;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class_third->$field_name, '8', '', $div_class, 1, 1);
   }
 
@@ -546,6 +568,7 @@ EOD;
 
   public function text_field_wid4s($field_name, $div_class = "") {
    global $class_fourth, $$class_fourth;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class_fourth->$field_name, '8', '', $div_class, '', $this->readonly4);
   }
 
@@ -566,16 +589,19 @@ EOD;
 
   public function text_field_wid4sm($field_name, $div_class = "") {
    global $class_fourth, $$class_fourth;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class_fourth->$field_name, '8', '', $div_class, 1, $this->readonly4);
   }
 
   public function text_field_wid4sr($field_name, $div_class = "") {
    global $class_fourth, $$class_fourth;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class_fourth->$field_name, '8', '', $div_class, '', 1);
   }
 
   public function text_field_wid4srm($field_name, $div_class = "") {
    global $class_fourth, $$class_fourth;
+   $div_class = $div_class . ' small';
    echo $this->text_field($field_name, $$class_fourth->$field_name, '8', '', $div_class, 1, 1);
   }
 

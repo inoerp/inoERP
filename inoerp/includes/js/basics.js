@@ -553,6 +553,45 @@ function deleteHeader(json_url, headerId) {
  });
 }
 
+function deleteReferences(options) {
+ var defaults = {
+  deleteType: 'header',
+  json_url : 'form.php?class_name=extn_contact_reference'
+ };
+ var settings = $.extend({}, defaults, options);
+ 
+ $('#content').on('click', '.delete_ref', function () {
+  var headerId = $(this).data('delete_id');
+  if (confirm("Do you really want to delete ?\n" + headerId)) {
+   $.ajax({
+    url: settings.json_url,
+    data: {
+     delete_id: headerId,
+     deleteType: settings.deleteType,
+     delete: '1'
+    },
+    type: 'get',
+    beforeSend: function () {
+     $('.show_loading_small').show();
+    },
+    complete: function () {
+     $('.show_loading_small').hide();
+    }
+   }).done(function (result) {
+//		var div = $(result).filter('div#json_delete_header').html();
+    $(".error").append(result);
+    $("#delete_button").removeClass("show_loading_small");
+    $("#delete_button").prop('disabled', false);
+   }).fail(function (error, textStatus, xhr) {
+    alert("delete failed \n" + error + textStatus + xhr);
+    $("#delete_button").removeClass("show_loading_small");
+    $("#delete_button").prop('disabled', false);
+   });
+  }
+
+ });
+}
+
 function deleteData(json_url, header_id) {
  $("#delete_button").click(function (e) {
   $("#delete_button").addClass("show_loading_small");
@@ -2096,7 +2135,8 @@ function printLabel(options) {
    status: settings.status,
    item_id_m: settings.item_id_m,
    print_label: 1,
-   bc_static_label_id: settings.bc_static_label_id
+   bc_static_label_id: settings.bc_static_label_id,
+   print_parameters: settings.print_parameters
   },
   success: function (result) {
    if (result) {
@@ -2375,7 +2415,6 @@ $(document).ready(function () {
 
  //popu for selecting items
  $('#content').on('click', '.select_item_number.select_popup', function () {
-
   var elemenType = $(this).parent().prop('tagName');
   if (elemenType === 'TD') {
    var rowClass = $(this).closest('tr').prop('class');
@@ -2880,6 +2919,19 @@ $(document).ready(function () {
   });
  });
 
+ var contactObjectCount = 2;
+ $('li#add_new_contact').on('click', function () {
+  $(this).closest('ul').find('li').first().clone().attr("class", "new_object" + contactObjectCount).prependTo($(this).closest('ul'));
+  contactObjectCount++;
+ });
+
+ //popu for contact
+ $('#content').on('click', '.extn_contact_id.select_popup', function () {
+  var fieldClass = $(this).closest('li').prop('class');
+  localStorage.setItem("contact_field_class", fieldClass);
+  void window.open('select.php?class_name=extn_contact', '_blank',
+          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
 });
 function toUpperCase(str)
 {

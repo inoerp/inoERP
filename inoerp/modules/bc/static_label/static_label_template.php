@@ -23,6 +23,7 @@
           <ul class="tabMain">
            <li><a href="#tabsHeader-1">Basic Info</a></li>
            <li><a href="#tabsHeader-2">Notes</a></li>
+           <li><a href="#tabsHeader-3">Generate Label</a></li>
           </ul>
           <div class="tabContainer"> 
            <div id="tabsHeader-1" class="tabContent">
@@ -34,11 +35,10 @@
                <a name="show" href="form.php?class_name=bc_static_label" class="show bc_static_label_id">	<img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
               </li>
               <li><label>Printer Name </label><?php echo $f->select_field_from_object('sys_printer_id', sys_printer::find_all(), 'sys_printer_id', 'printer_name', $$class->sys_printer_id, 'sys_printer_id'); ?> 					</li>
-              <li><label>Label Type </label><?php echo $f->select_field_from_array('label_type', bc_static_label::$label_type_a,  $$class->label_type); ?>              </li>
+              <li><label>Label Type </label><?php echo $f->select_field_from_array('label_type', bc_static_label::$label_type_a, $$class->label_type); ?>              </li>
               <li><label>Label Format </label><?php echo $f->select_field_from_object('bc_label_format_header_id', bc_label_format_header::find_all(), 'bc_label_format_header_id', 'format_name', $$class->bc_label_format_header_id, 'bc_label_format_header_id'); ?>              </li>
               <li><label>Status </label><?php $f->text_field_d('status'); ?> 					</li>
-              <li><label>No Of Copies </label><?php echo $f->text_field_ap(array('name' => 'no_of_copies', 'value'=>'', 'id'=>'no_of_copies')); ?> 					</li>
-              <li><button class="button" id="print_label">Print</button></li>
+              <li><label>No Of Copies </label><?php echo $f->text_field_ap(array('name' => 'no_of_copies', 'value' => '', 'id' => 'no_of_copies')); ?> 					</li>
              </ul>
             </div>
            </div>
@@ -57,6 +57,18 @@
               <div id="new_comment">
               </div>
              </div>
+            </div>
+           </div>
+           <div id="tabsHeader-3" class="tabContent">
+            <div id="print_tab"> 
+               <?php 
+               if(empty($$class->bc_static_label_id)){
+                echo "<br>No Label found. Save/Requery the form!";
+               }else{
+                echo $$class->print_label_inputParameters();
+                echo '<span class="button" id="print_static_label">Print</span>';
+               }
+               ?>
             </div>
            </div>
           </div>

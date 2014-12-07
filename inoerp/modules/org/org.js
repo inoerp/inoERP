@@ -1,18 +1,30 @@
-function setValFromSelectPage(org_id, address_id) {
+function setValFromSelectPage(org_id, address_id, extn_contact_id, contact_name) {
  this.org_id = org_id;
  this.address_id = address_id;
+  this.extn_contact_id = extn_contact_id;
+ this.contact_name = contact_name;
 }
 
 setValFromSelectPage.prototype.setVal = function() {
  var org_id = this.org_id;
  var address_id = this.address_id;
+ var contact_field_class = '.' + localStorage.getItem("contact_field_class");
  if (org_id) {
   $("#org_id").val(org_id);
  }
  if (address_id) {
   $("#address_id").val(address_id);
  }
-};
+ 
+ if (this.extn_contact_id) {
+  $('#content').find(contact_field_class).find('.extn_contact_id_new').val(this.extn_contact_id);
+ }
+ if (this.contact_name) {
+  $('#content').find(contact_field_class).find('.contact_name_new').val(this.contact_name);
+ }
+
+ localStorage.removeItem("contact_field_class");
+ };
 
 $(document).ready(function() {
  //controlling org type values - what can be entered
@@ -107,26 +119,26 @@ $(document).ready(function() {
  });
 
 
- //context menu
- var classContextMenu = new contextMenuMain();
- classContextMenu.docHedaderId = 'org_id';
- classContextMenu.btn1DivId = 'org_id';
- classContextMenu.contextMenu();
+// //context menu
+// var classContextMenu = new contextMenuMain();
+// classContextMenu.docHedaderId = 'org_id';
+// classContextMenu.btn1DivId = 'org_id';
+// classContextMenu.contextMenu();
+//
+//
+//
+// //save class
+// var classSave = new saveMainClass();
+// classSave.json_url = 'form.php?class_name=org';
+// classSave.form_header_id = 'org';
+// classSave.primary_column_id = 'org_id';
+// classSave.single_line = false;
+// classSave.savingOnlyHeader = true;
+// classSave.enable_select = true;
+// classSave.headerClassName = 'org';
+// classSave.saveMain();
 
-
-
- //save class
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=org';
- classSave.form_header_id = 'org';
- classSave.primary_column_id = 'org_id';
- classSave.single_line = false;
- classSave.savingOnlyHeader = true;
- classSave.enable_select = true;
- classSave.headerClassName = 'org';
- classSave.saveMain();
-
-
+deleteReferences();
 
 });
 

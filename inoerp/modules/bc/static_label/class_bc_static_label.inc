@@ -60,31 +60,38 @@ class bc_static_label extends dbObject {
   return !empty($result) ? $result : false;
  }
 
- public function generate_label($data_obj) {
-  if (empty($this->bc_label_format_header_id)) {
-   echo "<br>bc_label_format_header_id missing!. No label generated. Error @bc_static_label @@ " . __LINE__;
-   return;
+ public function print_label_inputParameters($data_a = '') {
+  $f = new inoform();
+  $org_id = !empty($data_a['org_id']) ? $data_a['org_id'] : '';
+  $subinventory_id = !empty($data_a['subinventory_id']) ? $data_a['subinventory_id'] : '';
+  $stmt = '<ul class="column one_column">';
+  switch ($this->label_type) {
+   case 'LOCATOR':
+    $stmt .='<li><label>Organization : </label>' . $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', '', 'org_id', '', 1) . '</li>';
+    $stmt .='<li><label>Sub Inventory : </label>' . $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($org_id), 'subinventory_id', 'subinventory', '', 'subinventory_id') . '</li>';
+    $stmt .='<li><label>Locator : </label>' . $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($subinventory_id), 'locator_id', 'locator', '', 'locator_id') . '</li>';
+    break;
+
+   case 'SUBINV':
+    $stmt .='<li><label>Organization : </label>' . $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', '', 'org_id', '', 1) . '</li>';
+    $stmt .='<li><label>Sub Inventory : </label>' . $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($org_id), 'subinventory_id', 'subinventory', '', 'subinventory_id') . '</li>';
+    break;
+
+   case 'ORG':
+   case 'INV':
+    $stmt .='<li><label>Organization : </label>' . $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', '', 'org_id', '', 1) . '</li>';
+    break;
+
+   case 'ITEM':
+    $stmt .='<li><img src="' . HOME_URL .'themes/images/serach.png" class="select_item_number select_popup clickable">'
+    . '<label>Item : </label>' . $f->text_field('item_number', '', '15', 'item_number', 'select_item_number', 1) . '</li>';
+    break;
+
+   default :
+    break;
   }
-  $bc_lf = new bc_label_format_header();
-  $bc_lf->findBy_id($this->bc_label_format_header_id);
-  $bc_lfl_i = bc_label_format_line::find_by_parent_id($this->bc_label_format_header_id);
-
-  $xml_content = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE labels SYSTEM "label.dtd">';
-  $xml_content .= '<labels _FORMAT="' . $bc_lf->format_name . '" _QUANTITY="' . $this->quanity . '" _PRINTERNAME="SNG_ZM400_1" _JOBNAME="LBL512027">
-<label>';
-
-  foreach ($bc_lfl_i as $line) {
-   $field_name = $line->sys_field_name;
-   $xml_content .= '<variable name = "' . $field_name . '">';
-   $xml_content .=!empty($data_obj->$field_name) ? $data_obj->$field_name : '';
-   $xml_content .= '</variable>';
-  }
-  $xml_content .= '</label>
-</labels>
-';
-
-  return $xml_content;
+  $stmt .= '</ul>';
+  return $stmt;
  }
 
 }

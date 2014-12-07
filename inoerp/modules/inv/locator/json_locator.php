@@ -9,6 +9,7 @@ if (!empty($_GET['subinventory_id']) && ($_GET['find_all_locator'] = 1)) {
  if (empty($locators)) {
 	return false;
  } else {
+   echo '<option value=" "> </option>';
 	foreach ($locators as $key => $value) {
 	 echo '<option value="' . $value->locator_id . '"';
 	 echo '>' . $value->locator . '</option>';

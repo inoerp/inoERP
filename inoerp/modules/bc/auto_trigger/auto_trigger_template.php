@@ -25,7 +25,7 @@
                <?php echo $f->select_field_from_object('transaction_type_id', transaction_type::find_all(), 'transaction_type_id', 'transaction_type', $transaction_type_id, 'transaction_type_id', ''); ?>
               </li>
               <li><label>Association Level : </label>
-               <?php echo $f->select_field_from_array('association_level', sys_profile_header::$profile_level_a, $$class->association_level, 'association_level'); ?>
+               <?php echo $f->select_field_from_array('association_level', bc_auto_trigger::$association_level_a, $$class->association_level, 'association_level'); ?>
                <a name="show" class="show sys_association_level clickable"> <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
               </li>
              </ul>
@@ -88,7 +88,7 @@
                   <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
                   <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($bc_auto_trigger->bc_label_auto_trigger_id); ?>"></li>           
                   <li><?php echo form::hidden_field('transaction_type_id', $transaction_type_id); ?></li>
-                  <li><?php echo form::hidden_field('association_level', $bc_auto_trigger->association_level); ?></li>
+                  <li><?php echo form::hidden_field('association_level', $association_level); ?></li>
                  </ul>
                 </td>
                 <td><?php form::number_field_widsr('bc_label_auto_trigger_id'); ?></td>

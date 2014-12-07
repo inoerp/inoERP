@@ -24,7 +24,7 @@
 				 <form action=""  method="post" id="sd_delivery_header"  name="sd_delivery_header">
 					<div id="tabsHeader-1" class="tabContent">
 					 <div class="large_shadow_box"> 
-						<ul class="column five_column">
+						<ul class="column four_column">
 						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sd_delivery_header_id select_popup clickable">
 							 Delivery Id 
 							</label><?php echo form::text_field_dsr('sd_delivery_header_id'); ?><a name="show" href="form.php?class_name=sd_delivery_header" class="show sd_delivery_header clickable">

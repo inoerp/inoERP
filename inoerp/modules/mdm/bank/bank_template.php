@@ -88,7 +88,8 @@
           <li><a href="#tabsLine-1">Main</a></li>
 					<li><a href="#tabsLine-2">Transaction</a></li>
           <li><a href="#tabsLine-3">Site Address</a></li>
-          <li><a href="#tabsLine-4">Notes</a></li>
+          <li><a href="#tabsLine-4">Contact</a></li>
+          <li><a href="#tabsLine-5">Notes</a></li>
 				 </ul>
 				 <div class="tabContainer">
 					<div id="tabsLine-1" class="tabContent">
@@ -131,7 +132,25 @@
 						</div>
 					 </div>
 					</div> 
-					<div id="tabsLine-4" class="tabContent">
+                    <div id="tabsLine-4" class="tabContent">
+           <?php
+           if (!empty($all_contacts)) {
+            include_once  HOME_DIR .'/extensions/contact/view/contact_view_template.php';
+           }
+           ?>
+           <div>
+            <ul id="new_contact_reference">
+             <li class='new_object1'><label><img class="extn_contact_id select_popup clickable"  src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
+               Associate Contact : </label>  
+              <?php
+              echo $f->hidden_field('extn_contact_id_new', '');
+              echo $f->text_field('contact_name_new', '', '20', '', 'select_contact');
+              ?>  </li>
+             <li class='flaticon-add182 clickable' id='add_new_contact' title='New contact reference field'></li>
+            </ul>
+           </div>
+          </div>
+					<div id="tabsLine-5" class="tabContent">
 					 <div id="comments">
 						<div id="comment_list">
 						 <?php echo!(empty($comments)) ? $comments : ""; ?>

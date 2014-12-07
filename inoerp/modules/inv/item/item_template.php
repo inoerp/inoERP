@@ -103,8 +103,8 @@
                      </ul>
                     </td>
                     <td><?php $f->seq_field_d($count) ?></td>
-                    <td><?php form::text_field_wid2sr('inv_item_revision_id'); ?></td>
-                    <td><?php echo $f->text_field_ap(array('name' => 'revision_name', 'value' => $$class_second->revision_name, 'readonly' => $reaonly_ir)); ?></td>
+                    <td><?php $f->text_field_wid2sr('inv_item_revision_id'); ?></td>
+                    <td><?php echo $f->text_field_ap(array('name' => 'revision_name', 'value' => $$class_second->revision_name, 'readonly' => $reaonly_ir, 'class_name'=>'small')); ?></td>
                     <td><?php $f->text_field_wid2('description'); ?></td>
                     <td><?php $f->text_field_wid2('reason'); ?></td>
                     <td><?php

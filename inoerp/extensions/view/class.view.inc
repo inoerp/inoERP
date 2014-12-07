@@ -450,7 +450,7 @@
     array_push($column_array_s, $h_k);
    }
 
-   $total_columns = count($column_array_s) + (int) (count($column_array_s) / $no_of_columns_per_tab) + 1; //1 for count
+   $total_columns = count($column_array_s) + floor((count($column_array_s) / $no_of_columns_per_tab)) ; //1 for count
    $no_of_tabs = ceil($total_columns / $no_of_columns_per_tab);
    $total_count = count($result);
    $pagination = new pagination($this->pageno, $this->per_page, $total_count);

@@ -222,6 +222,9 @@ if (($continue) && (!empty($class_names))) {
     }
     $file = file::find_by_reference_table_and_id($table_name, $class_id_value);
     $comments = comment::comment_list($table_name, $class_id_value, $class_id_value);
+    if (($class != 'extn_contact') && class_exists('extn_contact')) {
+     $all_contacts = extn_contact::find_by_reference($table_name, $class_id_value);
+    }
     if ($class != 'category') {
      $category = category::find_by_reference_table_and_id($table_name, $class_id_value);
     }

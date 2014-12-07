@@ -428,7 +428,7 @@ table.form_table td {
 }
 
 #form_all{
- /*max-width: 1000px;*/
+ max-width: 1000px;
 }
 
 /*Span details*/
@@ -526,13 +526,11 @@ ul.column.three_column li label{
 ul.column.four_column li, 
 ul.column.four_column li label{
  width: 220px;
- margin-right: 30px;
 }
 
 ul.column.five_column li, 
 ul.column.five_column li label{
- width: 220px;
- margin-right: 30px;
+ width: 170px;
 }
 
 ul.column.six_column li, 

@@ -287,7 +287,7 @@ class category extends dbObject {
   $level = 1;
   $statement .= "<tr class=\"level_$level\"><td class='link'>";
   $link_cat = HOME_URL . 'content.php?content_type=' . $content_type_name . '&category_id=' . $category_id;
-  $statement .= '<a href="' . htmlspecialchars($link_cat). '">' . $cat->category . '</a></td>';
+  $statement .= '<a href="' . htmlspecialchars($link_cat) . '">' . $cat->category . '</a></td>';
   $statement .= '<td>' . $cat->description . '</td>';
   $statement .= '<td>' . self::contentCount_by_categoryId_contentType($category_id) . '</td>';
   $statement .= '</tr>';
@@ -758,11 +758,25 @@ class category extends dbObject {
  }
 
  public static function contentCount_by_categoryId_contentType($category_id, $content_type = 'content') {
-  $sql = " SELECT COUNT(category_reference_id) FROM category_reference ";
+  $sql = " SELECT COUNT(category_reference_id) as count_t FROM category_reference ";
   $sql .= " WHERE category_id = '{$category_id}'  ";
   $sql .= " AND reference_table = '{$content_type}'  ";
-  $result = self::count_all_by_sql($sql);
-  return !empty($result) ? $result : 0;
+  $sql .= " UNION SELECT COUNT(cr.category_reference_id) as count_t FROM category_reference cr, category cat ";
+  $sql .= " WHERE cat.parent_id = '{$category_id}'  ";
+  $sql .= " AND cr.reference_table = '{$content_type}'  ";
+  $sql .= " AND cr.category_id = cat.category_id  ";
+  $sql .= " UNION SELECT COUNT(cr.category_reference_id) as count_t FROM category_reference cr ";
+  $sql .= " WHERE cr.major_category_id = '{$category_id}'  ";
+  $sql .= " AND cr.reference_table = '{$content_type}'  ";
+  
+  $result = self::find_by_sql($sql);
+  $count_v = 0;
+  if(!empty($result)){
+      foreach($result as $r ){
+   $count_v += $r->count_t;
+   }
+  }
+  return $count_v;
  }
 
  public static function breadCrum_by_category_contentType($category_id, $content_type) {

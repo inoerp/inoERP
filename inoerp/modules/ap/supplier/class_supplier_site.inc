@@ -85,6 +85,9 @@ class supplier_site extends dbObject {
 		 'site_country',
 		 'site_postal_code',
  ];
+ public $number_fields = [
+  'supplier_site_number'
+ ];
  public $search = [
 		 '_update_path' => 'form.php?class_name=supplier',
 		 '_update_action_meassge' => 'Update',

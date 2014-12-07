@@ -1,5 +1,5 @@
 function setValFromSelectPage(supplier_id, supplier_number, supplier_name,
-address_id, address_name, address, country, postal_code) {
+address_id, address_name, address, country, postal_code,extn_contact_id, contact_name) {
  this.supplier_id = supplier_id;
  this.supplier_number = supplier_number;
  this.supplier_name = supplier_name;
@@ -8,6 +8,8 @@ address_id, address_name, address, country, postal_code) {
  this.address = address;
  this.country = country;
  this.postal_code = postal_code;
+  this.extn_contact_id = extn_contact_id;
+ this.contact_name = contact_name;
 }
 
 setValFromSelectPage.prototype.setVal = function() {
@@ -20,6 +22,7 @@ setValFromSelectPage.prototype.setVal = function() {
  var country = this.country;
  var postal_code = this.postal_code;
  var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass");
+ var contact_field_class = '.' + localStorage.getItem("contact_field_class");
  addressPopupDivClass = addressPopupDivClass.replace(/\s+/g, '.');
  if (address_id) {
 	$('#content').find(addressPopupDivClass).find('.address_id').val(address_id);
@@ -47,6 +50,16 @@ setValFromSelectPage.prototype.setVal = function() {
  if (supplier_name) {
 	$("#supplier_name").val(supplier_name);
  }
+ 
+   if (this.extn_contact_id) {
+  $('#content').find(contact_field_class).find('.extn_contact_id_new').val(this.extn_contact_id);
+ }
+   if (this.contact_name) {
+  $('#content').find(contact_field_class).find('.contact_name_new').val(this.contact_name);
+ }
+ 
+ localStorage.removeItem("contact_field_class");
+ localStorage.removeItem("addressPopupDivClass");
 
 };
 
@@ -147,5 +160,5 @@ $(document).ready(function() {
 
 //delete line
  deleteData('json.supplier.php');
-
+deleteReferences();
 });

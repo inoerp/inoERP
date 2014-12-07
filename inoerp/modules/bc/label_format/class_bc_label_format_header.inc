@@ -14,6 +14,8 @@ class bc_label_format_header extends dbObject {
   'disable_date',
   'default_cb',
   'description',
+  'data_obj_class_name',
+  'data_obj_function_name',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -34,6 +36,8 @@ class bc_label_format_header extends dbObject {
   '_show_view_path' => 1,
  ];
  public $bc_label_format_header_id;
+ public $data_obj_function_name;
+ public $data_obj_class_name;
  public $label_type;
  public $format_name;
  public $disable_date;
@@ -48,12 +52,12 @@ class bc_label_format_header extends dbObject {
   
  }
 
-  Public static function label_type() {
-   $option_header = option_header::find_by_name('BC_LABEL_TYPE');
-   $ol = option_line::find_by_option_id($option_header->option_header_id);
-   return $ol;
-  }
-  
+ Public static function label_type() {
+  $option_header = option_header::find_by_name('BC_LABEL_TYPE');
+  $ol = option_line::find_by_option_id($option_header->option_header_id);
+  return $ol;
+ }
+
  public static function find_by_employeeId($employee_id) {
   $sql = " SELECT * 
        FROM bc_label_format_header eeh 

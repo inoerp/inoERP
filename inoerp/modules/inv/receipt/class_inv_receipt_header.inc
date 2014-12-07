@@ -148,6 +148,10 @@ class inv_receipt_header extends dbObject {
 
   return $this->msg;
  }
+ 
+ public static function bc_label_data(){
+  
+ }
 
  public function multi_select_input_fields() {
   $multi_select_input = [

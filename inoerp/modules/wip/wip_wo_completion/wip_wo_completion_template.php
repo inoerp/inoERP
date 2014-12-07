@@ -15,10 +15,10 @@
       <div class="show_loading_small"></div>
       <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
       <!--    End of place for showing error messages-->
-      <div id ="form_header">
+      
        <form action=""  method="post" id="wip_wo_completion"  name="wip_wo_completion">
         <!--create empty form or a single id when search is not clicked and the id is referred from other page -->
-        <span class="heading">WIP Work Order Transaction </span> 
+       <div id ="form_header"> <span class="heading">WIP Work Order Transaction </span> 
         <table class="form_table">
          <tr>
           <td><label>Inventory Org </label>
@@ -34,6 +34,7 @@
           </td>
          </tr>
         </table>
+        </div>
         <div id ="form_line" class="form_line"><span class="heading">Work Order Details </span>
          <div id="tabsLine">
           <ul class="tabMain">
@@ -338,7 +339,7 @@
         <!--                 complete Showing a blank form for new entry-->
        </form>
 
-      </div>
+      
       <!--END OF FORM HEADER-->
       <div id="pagination" style="clear: both;">
        <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";

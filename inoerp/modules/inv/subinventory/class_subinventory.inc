@@ -9,71 +9,70 @@ class subinventory extends dbObject {
  public static $multi_select_template_path = 'modules/inv/subinventory/multi_action/subinventory_template_ma.php';
 //  data base variables as stored database column name
  public $field_a = [
-		 "subinventory_id",
-		 "org_id",
-		 "type",
-		 "subinventory",
-		 "description",
-		 "locator_control",
-		 "allow_negative_balance_cb",
-		 "default_cost_group",
-		 'shipment_pick_priority',
-		 "material_ac_id",
-		 "material_oh_ac_id",
-		 "overhead_ac_id",
-		 "resource_ac_id",
-		 "osp_ac_id",
-		 "expense_ac_id",
-		 "ef_id",
-		 "status",
-		 "rev_enabled_cb",
-		 "rev_number",
-		 "created_by",
-		 "creation_date",
-		 "last_update_by",
-		 "last_update_date"
+  "subinventory_id",
+  "org_id",
+  "type",
+  "subinventory",
+  "description",
+  "locator_control",
+  "allow_negative_balance_cb",
+  "default_cost_group",
+  'shipment_pick_priority',
+  "material_ac_id",
+  "material_oh_ac_id",
+  "overhead_ac_id",
+  "resource_ac_id",
+  "osp_ac_id",
+  "expense_ac_id",
+  "ef_id",
+  "status",
+  "rev_enabled_cb",
+  "rev_number",
+  "created_by",
+  "creation_date",
+  "last_update_by",
+  "last_update_date"
  ];
 //variables used for showing data
  public $initial_search = [
-		 "subinventory",
-		 "subinventory_id",
-		 "description",
+  "subinventory",
+  "subinventory_id",
+  "description",
  ];
  public $column = ["subinventory_id",
-		 "org_id",
-		 "type",
-		 "subinventory",
-		 "description",
-		 "created_by",
+  "org_id",
+  "type",
+  "subinventory",
+  "description",
+  "created_by",
  ];
  public $account = ["material_ac_id",
-		 "material_oh_ac_id",
-		 "overhead_ac_id",
-		 "resource_ac_id",
-		 "osp_ac_id",
-		 "expense_ac_id",
+  "material_oh_ac_id",
+  "overhead_ac_id",
+  "resource_ac_id",
+  "osp_ac_id",
+  "expense_ac_id",
  ];
  public $checkbox = ["rev_enabled_cb",
-		 "allow_negative_balance_cb"
+  "allow_negative_balance_cb"
  ];
  public $requiredField = [
-		 "org_id",
-		 "type",
-		 "subinventory"
+  "org_id",
+  "type",
+  "subinventory"
  ];
- 
  public $search = [
-		 '_show_update_path' => 1,
-		 '_update_action_meassge' => 'Update',
-		 '_show_view_path' => 1,
+  '_show_update_path' => 1,
+  '_update_action_meassge' => 'Update',
+  '_show_view_path' => 1,
  ];
-  public $search_functions = [
-		 'Organization' => 'search_org_name'
+ public $search_functions = [
+  'Organization' => 'search_org_name'
  ];
  public $pageTitle = " Subinventory - Create & Update Subinventories"; //page Title
  public $option_lists = [
-		 'subinventory_type' => 'SUBINVENTORY_TYPE',
-		 'locator_control' => 'LOCATOR_CONTROL',
+  'subinventory_type' => 'SUBINVENTORY_TYPE',
+  'locator_control' => 'LOCATOR_CONTROL',
  ];
  public $subinventory_id;
  public $org;
@@ -148,60 +147,79 @@ VAR;
 VAR;
 
  Public static function subinventory_type() {
-	$option_header = option_header::find_by_exact_name('SUBINVENTORY_TYPE');
-	$subinventory_class = option_line::find_by_option_id($option_header->option_header_id);
-	return $subinventory_class;
+  $option_header = option_header::find_by_exact_name('SUBINVENTORY_TYPE');
+  $subinventory_class = option_line::find_by_option_id($option_header->option_header_id);
+  return $subinventory_class;
  }
 
  Public static function locator_control() {
-	$option_header = option_header::find_by_exact_name('LOCATOR_CONTROL');
-	$locator_control = option_line::find_by_option_id($option_header->option_header_id);
-	return $locator_control;
+  $option_header = option_header::find_by_exact_name('LOCATOR_CONTROL');
+  $locator_control = option_line::find_by_option_id($option_header->option_header_id);
+  return $locator_control;
  }
- 
-public function _before_showing(){
- if(!empty($this->org_id)){
-	$this->org = org::find_by_id($this->org_id)->org;
- }
-	
+
+ public function _before_showing() {
+  if (!empty($this->org_id)) {
+   $this->org = org::find_by_id($this->org_id)->org;
+  }
  }
 
  public function findAll_ofOrgid() {
-	if (!empty($this->org_id)) {
-	 $sql = " SELECT * FROM ";
-	 $sql .= self::$table_name;
-	 $sql .= " WHERE org_id = :org_id ";
+  if (!empty($this->org_id)) {
+   $sql = " SELECT * FROM ";
+   $sql .= self::$table_name;
+   $sql .= " WHERE org_id = :org_id ";
 
-	 $param_a = ['org_id'];
-	 $value_a = ['org_id' => $this->org_id];
-	 $result = $this->findBy_sql($sql, $param_a, $value_a);
-	} else {
-	 $result = $this;
-	}
-	return $result;
+   $param_a = ['org_id'];
+   $value_a = ['org_id' => $this->org_id];
+   $result = $this->findBy_sql($sql, $param_a, $value_a);
+  } else {
+   $result = $this;
+  }
+  return $result;
  }
 
+  public function findBy_parameter_withOrgDetails() {
+  $value_a = [];
+  $sql = " SELECT si.subinventory_id,si.type,si.subinventory,si.description, org.org,org.org_id  ";
+  $sql .= 'From 
+            subinventory si,
+            org ';
+  $sql .= " WHERE si.org_id = org.org_id ";
+  if (!empty($this->org_id)) {
+   $sql .= " AND org.org_id = :org_id ";
+   $value_a['org_id'] = $this->org_id;
+  }
+
+  if (!empty($this->subinventory_id)) {
+   $sql .= " AND si.subinventory_id = :subinventory_id ";
+   $value_a['subinventory_id'] = $this->subinventory_id;
+  }
+  $result = $this->findBySql($sql, $value_a);
+  pa($result);
+  echo $sql;
+  return !empty($result) ? $result : false;
+ }
  public static function find_all_of_org_id($org_id) {
-	global $db;
-	if (!empty($org_id)) {
-	 $sql = " SELECT * FROM ";
-	 $sql .= self::$table_name;
-	 $sql .= " WHERE org_id = '{$org_id}' ";
-	 $result = $db::find_by_sql($sql);
-	} else {
-	 $result = null_instantitae('subinventory');
-	}
-	return $result;
+  global $db;
+  if (!empty($org_id)) {
+   $sql = " SELECT * FROM ";
+   $sql .= self::$table_name;
+   $sql .= " WHERE org_id = '{$org_id}' ";
+   $result = $db::find_by_sql($sql);
+  } else {
+   $result = null_instantitae('subinventory');
+  }
+  return $result;
  }
-
 
  public function multi_select_hidden_fields() {
-	$multi_select_hidden = [
-			'mode',
-			'show_block'
-	];
+  $multi_select_hidden = [
+   'mode',
+   'show_block'
+  ];
 
-	return $multi_select_hidden;
+  return $multi_select_hidden;
  }
 
 }

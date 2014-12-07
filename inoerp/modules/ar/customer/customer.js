@@ -1,5 +1,5 @@
 function setValFromSelectPage(ar_customer_id, customer_number, customer_name,
-				address_id, address_name, address, country, postal_code) {
+        address_id, address_name, address, country, postal_code, extn_contact_id, contact_name) {
  this.ar_customer_id = ar_customer_id;
  this.customer_number = customer_number;
  this.customer_name = customer_name;
@@ -8,9 +8,11 @@ function setValFromSelectPage(ar_customer_id, customer_number, customer_name,
  this.address = address;
  this.country = country;
  this.postal_code = postal_code;
+ this.extn_contact_id = extn_contact_id;
+ this.contact_name = contact_name;
 }
 
-setValFromSelectPage.prototype.setVal = function() {
+setValFromSelectPage.prototype.setVal = function () {
  var ar_customer_id = this.ar_customer_id;
  var customer_number = this.customer_number;
  var customer_name = this.customer_name;
@@ -20,74 +22,84 @@ setValFromSelectPage.prototype.setVal = function() {
  var country = this.country;
  var postal_code = this.postal_code;
  var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass");
+ var contact_field_class = '.' + localStorage.getItem("contact_field_class");
  addressPopupDivClass = addressPopupDivClass.replace(/\s+/g, '.');
  if (address_id) {
-	$('#content').find(addressPopupDivClass).find('.address_id').val(address_id);
+  $('#content').find(addressPopupDivClass).find('.address_id').val(address_id);
  }
  if (address_name) {
-	$('#content').find(addressPopupDivClass).find('.address_name').val(address_name);
+  $('#content').find(addressPopupDivClass).find('.address_name').val(address_name);
  }
  if (address) {
-	$('#content').find(addressPopupDivClass).find('.address').val(address);
+  $('#content').find(addressPopupDivClass).find('.address').val(address);
  }
  if (country) {
-	$('#content').find(addressPopupDivClass).find('.country').val(country);
+  $('#content').find(addressPopupDivClass).find('.country').val(country);
  }
  if (postal_code) {
-	$('#content').find(addressPopupDivClass).find('.postal_code').val(postal_code);
+  $('#content').find(addressPopupDivClass).find('.postal_code').val(postal_code);
  }
 
  if (ar_customer_id) {
-	$("#ar_customer_id").val(ar_customer_id);
+  $("#ar_customer_id").val(ar_customer_id);
  }
  if (customer_number) {
-	$("#customer_number").val(customer_number);
+  $("#customer_number").val(customer_number);
  }
  if (customer_name) {
-	$("#customer_name").val(customer_name);
+  $("#customer_name").val(customer_name);
  }
-
+ 
+  if (this.extn_contact_id) {
+  $('#content').find(contact_field_class).find('.extn_contact_id_new').val(this.extn_contact_id);
+ }
+   if (this.contact_name) {
+  $('#content').find(contact_field_class).find('.contact_name_new').val(this.contact_name);
+ }
+ 
+ localStorage.removeItem("contact_field_class");
+ localStorage.removeItem("addressPopupDivClass");
 };
 
 
-$(document).ready(function() {
+$(document).ready(function () {
 
  //Popup for selecting address 
- $(".address_popup").click(function() {
-	var addressPopupDivClass = $(this).closest('div').prop('class');
-	localStorage.setItem("addressPopupDivClass", addressPopupDivClass);
-	void window.open('select.php?class_name=address', '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-	return false;
+ $(".address_popup").click(function () {
+  var addressPopupDivClass = $(this).closest('div').prop('class');
+  localStorage.setItem("addressPopupDivClass", addressPopupDivClass);
+  void window.open('select.php?class_name=address', '_blank',
+          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+  return false;
  });
 
  //Get the ar_customer_id on refresh button click
- $('a.show.ar_customer_id').click(function() {
-	var ar_customer_id = $('#ar_customer_id').val();
-	$(this).attr('href', modepath() + 'ar_customer_id=' + ar_customer_id);
+ $('a.show.ar_customer_id').click(function () {
+  var ar_customer_id = $('#ar_customer_id').val();
+  $(this).attr('href', modepath() + 'ar_customer_id=' + ar_customer_id);
  });
 
- $('a.show.customer_number').click(function() {
-	var customer_number = $('#customer_number').val();
-	$(this).attr('href', modepath() + 'customer_number=' + customer_number);
+ $('a.show.customer_number').click(function () {
+  var customer_number = $('#customer_number').val();
+  $(this).attr('href', modepath() + 'customer_number=' + customer_number);
  });
 
- $('a.show.ar_customer_site_id').click(function() {
-	var ar_customer_id = $('#ar_customer_id').val();
-	var ar_customer_site_id = $('#ar_customer_site_id').val();
-	$(this).attr('href', modepath() + 'ar_customer_id=' + ar_customer_id + '&ar_customer_site_id=' + ar_customer_site_id);
+ $('a.show.ar_customer_site_id').click(function () {
+  var ar_customer_id = $('#ar_customer_id').val();
+  var ar_customer_site_id = $('#ar_customer_site_id').val();
+  $(this).attr('href', modepath() + 'ar_customer_id=' + ar_customer_id + '&ar_customer_site_id=' + ar_customer_site_id);
  });
 
- $("#customer_site_name").on("change", function() {
-	if ($(this).val() === 'newentry') {
-	 if (confirm("Do you want to create a new customer site?")) {
-		$(this).replaceWith('<input id="customer_site_name" class="textfield customer_site_name" type="text" size="25" maxlength="50" name="customer_site_name[]">');
-		$(".show.ar_customer_site_id").hide();
-		$("#ar_customer_site_id").val("");
-		$("#customer_site_number").val("");
-	 }
+ $("#customer_site_name").on("change", function () {
+  if ($(this).val() === 'newentry') {
+   if (confirm("Do you want to create a new customer site?")) {
+    $(this).replaceWith('<input id="customer_site_name" class="textfield customer_site_name" type="text" size="25" maxlength="50" name="customer_site_name[]">');
+    $(".show.ar_customer_site_id").hide();
+    $("#ar_customer_site_id").val("");
+    $("#customer_site_number").val("");
+   }
 
-	}
+  }
  });
 
 
@@ -122,9 +134,9 @@ $(document).ready(function() {
  classSave.form_line_id = 'customer_site';
  classSave.enable_select = true;
  if (!$('#ar_customer_id').val()) {
-	classSave.savingOnlyHeader = true;
+  classSave.savingOnlyHeader = true;
  } else {
-	classSave.savingOnlyHeader = false;
+  classSave.savingOnlyHeader = false;
  }
  classSave.headerClassName = 'ar_customer';
  classSave.lineClassName = 'ar_customer_site';
@@ -132,5 +144,5 @@ $(document).ready(function() {
 
 //delete line
  deleteData('json.customer.php');
-
+deleteReferences();
 });

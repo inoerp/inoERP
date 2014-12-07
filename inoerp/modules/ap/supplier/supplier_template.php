@@ -288,9 +288,24 @@
 					 </div>
 					</div>
 					<!--end of tab4(purchasing)!!! start of MFG tab-->
-					<div id="tabsLine-6" class="tabContent">
-
-					</div>
+          <div id="tabsLine-6" class="tabContent">
+           <?php
+           if (!empty($all_contacts)) {
+            include_once  HOME_DIR .'/extensions/contact/view/contact_view_template.php';
+           }
+           ?>
+           <div>
+            <ul id="new_contact_reference">
+             <li class='new_object1'><label><img class="extn_contact_id select_popup clickable"  src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
+               Associate Contact : </label>  
+              <?php
+              echo $f->hidden_field('extn_contact_id_new', '');
+              echo $f->text_field('contact_name_new', '', '20', '', 'select_contact');
+              ?>  </li>
+             <li class='flaticon-add182 clickable' id='add_new_contact' title='New contact reference field'></li>
+            </ul>
+           </div>
+          </div>
 					<!--end of tab5 (Manufacturing)!! start of planning -->
 				 </div>
 

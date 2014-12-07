@@ -6,6 +6,11 @@ class bc_auto_trigger extends dbObject {
  public static $primary_column = "bc_label_auto_trigger_id";
  public static $key_column = "association_level_value";
  public static $module = "sys";
+ public static $association_level_a  = [
+  'SITE' => 'Site',
+  'BUSINESS' => 'Business Org',
+  'INVENTORY' => 'Inventory Org',
+ ];
  public $field_a = [
   'bc_label_auto_trigger_id',
   'bc_label_format_header_id',
@@ -161,6 +166,14 @@ class bc_auto_trigger extends dbObject {
    $sql .= "  AND association_level = '{$assoc_level}' ";
   }
 
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
+ 
+  public static function find_by_transactionTypId($transaction_type_id) {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE transaction_type_id = '{$transaction_type_id}' ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
  }

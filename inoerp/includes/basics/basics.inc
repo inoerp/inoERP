@@ -114,6 +114,7 @@
  require_once(INC_INV . DS . "onhand" . DS . "class_onhand_v.inc");
  require_once(INC_INV . DS . "subinventory" . DS . "class_subinventory.inc");
  require_once(INC_INV . DS . "locator" . DS . "class_locator.inc");
+ require_once(INC_INV . DS . "locator" . DS . "class_locator_v.inc");
  require_once(INC_INV . DS . "uom" . DS . "class_uom.inc");
  require_once(INC_INV . DS . "transaction_type" . DS . "class.transaction_type.inc");
  require_once(INC_AP . DS . "supplier" . DS . "class_supplier.inc");
@@ -238,6 +239,7 @@
  require_once(INC_MODULE . DS . "fp" . DS . "mrp" . DS . "class_fp_mrp_planned_order.inc");
  require_once(INC_MODULE . DS . "fp" . DS . "mrp" . DS . "class_fp_mrp_lowlevel_code.inc");
  require_once(INC_MODULE . DS . "fp" . DS . "mrp" . DS . "class_fp_mrp_existing_supply_v.inc");
+ require_once(INC_MODULE . DS . "sd" . DS . "lead" . DS . "class_sd_lead.inc");
  require_once(INC_MODULE . DS . "sd" . DS . "so" . DS . "class_sd_so_header.inc");
  require_once(INC_MODULE . DS . "sd" . DS . "so" . DS . "class_sd_so_line.inc");
  require_once(INC_MODULE . DS . "sd" . DS . "so" . DS . "class_sd_so_all_v.inc");
@@ -308,6 +310,8 @@
  require_once(INC_EXTENSIONS . DS . "ino_generic" . DS . "class_ino_generic.inc");
  require_once(INC_EXTENSIONS . DS . "page" . DS . "class_page.inc");
  require_once(INC_EXTENSIONS . DS . "comment" . DS . "class.comment.inc");
+ require_once(INC_EXTENSIONS . DS . "contact" . DS . "class_extn_contact.inc");
+ require_once(INC_EXTENSIONS . DS . "contact" . DS . "class_extn_contact_reference.inc");
  require_once(INC_EXTENSIONS . DS . "file" . DS . "class.file.inc");
  require_once(INC_EXTENSIONS . DS . "file" . DS . "class.file_reference.inc");
  require_once(INC_EXTENSIONS . DS . "file" . DS . "class_massupload.inc");

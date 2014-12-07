@@ -3,7 +3,7 @@
 class ar_customer extends dbObject {
 
  public static $table_name = 'ar_customer';
- public static $dependent_classes = ['ar_customer_site'];
+ public static $dependent_classes = ['ar_customer_site','extn_contact'];
  public static $primary_column = 'ar_customer_id';
  public static $key_column = 'customer_number';
  public static $module = "ar";

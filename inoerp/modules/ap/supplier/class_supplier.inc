@@ -3,7 +3,7 @@
 class supplier extends dbObject {
 
  public static $table_name = "supplier";
- public static $dependent_classes = ['supplier_site'];
+ public static $dependent_classes = ['supplier_site' , 'extn_contact'];
  public static $primary_column = "supplier_id";
  public static $key_column = 'supplier_name';
  public static $module = "ap";

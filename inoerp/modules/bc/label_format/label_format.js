@@ -39,6 +39,16 @@ $(document).ready(function() {
   $('.lines_number:first').val('10');
  }
 
+$("#content").on('change', '.object_name', function() {
+  var tableName = $(this).val();
+  var parentClass = $(this).closest('tr').attr("class");
+   getFieldNames({
+    tableName : tableName,
+    parentClass :parentClass,
+     fieldClass : 'sys_field_name'
+   } );
+ });
+
 
  //selecting Id
  $(".hr_employee_id.select_popup").on("click", function() {
@@ -86,4 +96,6 @@ $(document).ready(function() {
    }
   }
  });
+ 
+ 
 });
