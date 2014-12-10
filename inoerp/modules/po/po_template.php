@@ -8,7 +8,7 @@
      <div id="po_divId">
       <!--    START OF FORM HEADER-->
       <div class="error"></div><div id="loading"></div>
-      <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
+      <?php echo (!empty($show_message)) ? $show_message : ""; $f = new inoform();?> 
       <!--    End of place for showing error messages-->
 
       <div id ="form_header"><span class="heading">Purchase Order </span>
@@ -25,70 +25,54 @@
          <div class="tabContainer">
           <div id="tabsHeader-1" class="tabContent">
            <div class="large_shadow_box"> 
-            <ul class="column four_column">
+            <ul class="column header_field">
              <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="po_header_id select_popup clickable">
-               PO Header Id : </label><?php $f->text_field_dsr('po_header_id') ?>
+               PO Header Id</label><?php $f->text_field_dsr('po_header_id') ?>
               <a name="show" href="form.php?class_name=po_header" class="show po_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
              </li>
-             <li><label>BU Name(1) : </label><?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>
+             <li><label>BU Name(1)</label><?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>
              </li>
-             <li><label>PO Type(2) : </label><?php echo $f->select_field_from_array('po_type', po_header::$po_type_a, $$class->po_type, 'po_type', '', 1, $readonly1, $readonly1); ?>
+             <li><label>PO Type(2)</label><?php echo $f->select_field_from_array('po_type', po_header::$po_type_a, $$class->po_type, 'po_type', '', 1, $readonly1, $readonly1); ?>
              </li>
-             <li><label>PO Number : </label> <?php $f->text_field_d('po_number', 'primary_column2'); ?> </li>
-             <li><label>Rel# : </label><?php $f->text_field_dsr('release_number'); ?>
-             <li><label>Status : </label><?php echo $f->select_field_from_object('status', po_header::po_status(), 'option_line_code', 'option_line_value', $$class->po_status, 'po_status', 'dont_copy', '', 1); ?></li>
+             <li><label>PO Number</label><?php $f->text_field_d('po_number', 'primary_column2'); ?> </li>
+             <li><label>Rel#</label><?php $f->text_field_dsr('release_number'); ?></li>
+             <li><label>Status</label><?php echo $f->select_field_from_object('status', po_header::po_status(), 'option_line_code', 'option_line_value', $$class->po_status, 'po_status', 'dont_copy', '', 1); ?></li>
              <li><?php echo $f->hidden_field_withId('ref_po_header_id', $$class->ref_po_header_id); ?>
               <?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
               <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supplier_id select_popup clickable">
-               Supplier Name : </label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> </li>
-             <li><label class="auto_complete">Supplier Number : </label><?php $f->text_field_d('supplier_number'); ?></li>
-             <li><label>Supplier Site : </label><?php
+               Supplier Name</label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> </li>
+             <li><label class="auto_complete">Supplier Number</label><?php $f->text_field_d('supplier_number'); ?></li>
+             <li><label>Supplier Site</label><?php
                $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
                echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
               ?> </li>
-             <li><label>Rev Number : </label><?php $f->text_field_d('rev_number'); ?></li> 
-             <li><label>Multi BU : </label><?php echo $f->checkBox_field('multi_bu_cb', $$class->multi_bu_cb, 'multi_bu_cb', '', $readonly1); ?>
+             <li><label>Rev Number</label><?php $f->text_field_d('rev_number'); ?></li> 
+             <li><label>Multi BU</label><?php echo $f->checkBox_field('multi_bu_cb', $$class->multi_bu_cb, 'multi_bu_cb', '', $readonly1); ?>
              </li> 
-             <li><label>Buyer : </label><?php form::text_field_wid('buyer'); ?></li> 
-             <li><label>Description : </label><?php $f->text_field_dl('description'); ?></li> 
+             <li><label>Buyer</label><?php form::text_field_wid('buyer'); ?></li> 
+             <li><label>Description</label><?php $f->text_field_dl('description'); ?></li> 
             </ul>
            </div>
           </div>
           <div id="tabsHeader-2" class="tabContent">
            <div> 
-            <ul class="column five_column">
-             <li><label>Agreement Start Date : </label>
-              <?php echo $f->date_fieldFromToday('agreement_start_date', $$class->agreement_start_date) ?>
-             </li>
-             <li><label>Agreement End Date : </label>
-              <?php echo $f->date_fieldFromToday('agreement_end_date', $$class->agreement_start_date) ?>
-             </li>
-             <li><label>Doc Currency : </label>
-              <?php echo $f->select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', '', 1, $readonly); ?>
-             </li>
-             <li><label>Ledger Currency : </label>
-              <?php echo $f->select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, 1); ?>
-             </li>
-             <li><label>Exchange Rate Type : </label>
-              <?php echo $f->select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?>
-             </li>
-             <li><label>Exchange Rate : </label>
-              <?php form::number_field_d('exchange_rate'); ?>
-             </li>
-             <li><label>Price List : </label>
-              <?php echo$f->select_field_from_object('price_list_header_id', mdm_price_list_header::find_all_purchasing_pl(), 'mdm_price_list_header_id', 'price_list', $$class->price_list_header_id); ?>
-             </li>
-             <li><label>Header Amount : </label><?php echo $f->number_field('header_amount', $$class->header_amount, '15', 'header_amount', '', 1); ?></li>
-             <li><label>Tax Amount : </label><?php echo $f->number_field('tax_amount', $$class->tax_amount, '15', 'tax_amount'); ?></li>
-             <li><label>Payment Term : </label>
-              <?php echo $f->select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, 'payment_term_id', '', 1, $readonly1); ?>
-             </li>
+            <ul class="column header_field">
+             <li><label>Agreement Start Date</label><?php echo $f->date_fieldFromToday('agreement_start_date', $$class->agreement_start_date) ?></li>
+             <li><label>Agreement End Date</label><?php echo $f->date_fieldFromToday('agreement_end_date', $$class->agreement_start_date) ?></li>
+             <li><label>Doc Currency</label><?php echo $f->select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', '', 1, $readonly); ?></li>
+             <li><label>Ledger Currency</label><?php echo $f->select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, 1); ?></li>
+             <li><label>Exchange Rate Type</label><?php echo $f->select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
+             <li><label>Exchange Rate</label><?php echo $f->number_field('exchange_rate', $$class->exchange_rate); ?> </li>
+             <li><label>Price List</label><?php echo$f->select_field_from_object('price_list_header_id', mdm_price_list_header::find_all_purchasing_pl(), 'mdm_price_list_header_id', 'price_list', $$class->price_list_header_id); ?></li>
+             <li><label>Header Amount</label><?php echo $f->number_field('header_amount', $$class->header_amount, '15', 'header_amount', '', 1); ?></li>
+             <li><label>Tax Amount</label><?php echo $f->number_field('tax_amount', $$class->tax_amount, '15', 'tax_amount'); ?></li>
+             <li><label>Payment Term</label><?php echo $f->select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, 'payment_term_id', '', 1, $readonly1); ?></li>
             </ul>
            </div>
           </div>
           <div id="tabsHeader-3" class="tabContent">
            <div class="left_half shipto address_details">
-            <ul class="column two_column">
+            <ul class="column four_column">
              <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
                Ship To Site Id : </label>
               <?php $f->text_field_d('ship_to_id', 'address_id site_address_id'); ?>
@@ -100,7 +84,7 @@
             </ul>
            </div> 
            <div class="right_half billto address_details">
-            <ul class="column two_column">
+            <ul class="column four_column">
              <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
                Bill To Site Id :</label>
               <?php $f->text_field_d('bill_to_id', 'address_id site_address_id'); ?>

@@ -152,7 +152,7 @@ class inosave extends dbObject {
    if (!empty($$class->number_fields)) {
     foreach ($$class->number_fields as $key => $value) {
      if (!empty($_POST[$value][$i])) {
-      $$class->$value = str_replace(array(','), '', $_POST[$value][$i]);
+      $$class->$value = str_replace(array(',','.'), '', $_POST[$value][$i]);
      } else {
       $$class->$value = NUll;
      }

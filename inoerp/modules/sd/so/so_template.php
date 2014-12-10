@@ -25,112 +25,69 @@
 				 <div class="tabContainer">
 					<div id="tabsHeader-1" class="tabContent">
 					 <div class="large_shadow_box"> 
-						<ul class="column four_column">
+						<ul class="column header_field">
 						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sd_so_header_id select_popup">
-							 SO Header Id : </label>
-							<?php
-								echo $f->text_field_dr('sd_so_header_id')
-							?>
+							 SO Header Id</label><?php		echo $f->text_field_dr('sd_so_header_id')		?>
 							<a name="show" href="form.php?class_name=sd_so_header" class="show sd_so_header_id">
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
-						 <li><label>SO Number : </label>
-							<?php echo $f->text_field_d('so_number', 'primary_column2'); ?>
-						 </li>
-						 <li><label>BU Name(1) : </label>
-							<?php echo form::select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $sd_so_header->bu_org_id, 'bu_org_id', $readonly1, '', ''); ?>
-						 </li>
-						 <li><label>Document Type(2) : </label>
-							<?php echo $f->select_field_from_object('document_type', sd_document_type::find_all_header_levels(), 'sd_document_type_id', 'document_type_name', $sd_so_header->document_type, 'document_type', 'medium', 1, $readonly1); ?>
-						 </li>
-						 <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
-							<label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup clickable">
-							 Customer Name : </label> <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
-						 <li><label class="auto_complete">Customer Number : </label><?php $f->text_field_d('customer_number'); ?></li>
-						 <li><label>Customer Site : </label>
-							<?php echo $f->select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
-						 <li><label>Status : </label>                      
-							<span class="button"><?php echo!empty($$class->so_status) ? $$class->so_status : ""; ?></span>
-						 </li>
-						 <li><label>Revision : </label>
-							<?php echo form::checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?>
-						 </li> 
-						 <li><label>Rev Number : </label>
-							<?php form::text_field_wid('rev_number'); ?>
-						 </li> 
-						 <li><label>Sales Person : </label>
-							<?php form::text_field_wid('sales_person'); ?>
-						 </li> 
-						 <li><label>Description : </label>
-							<?php form::text_field_wid('description'); ?>
-						 </li> 
+						 <li><label>SO Number</label><?php echo $f->text_field_d('so_number', 'primary_column2'); ?></li>
+						 <li><label>BU Name(1)</label><?php echo form::select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $sd_so_header->bu_org_id, 'bu_org_id', $readonly1, '', ''); ?>						 </li>
+						 <li><label>Document Type(2)</label><?php echo $f->select_field_from_object('document_type', sd_document_type::find_all_header_levels(), 'sd_document_type_id', 'document_type_name', $sd_so_header->document_type, 'document_type', 'medium', 1, $readonly1); ?>						 </li>
+						 <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?><label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup clickable">
+							 Customer Name</label><?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
+						 <li><label class="auto_complete">Customer Number</label><?php $f->text_field_d('customer_number'); ?></li>
+						 <li><label>Customer Site</label><?php echo $f->select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
+						 <li><label>Status</label><span class="button"><?php echo!empty($$class->so_status) ? $$class->so_status : ""; ?></span></li>
+						 <li><label>Revision</label><?php echo form::checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?></li> 
+						 <li><label>Rev Number</label><?php form::text_field_wid('rev_number'); ?> </li> 
+						 <li><label>Sales Person</label><?php form::text_field_wid('sales_person'); ?></li> 
+						 <li><label>Description</label><?php form::text_field_wid('description'); ?></li> 
 						</ul>
 					 </div>
 					</div>
 					<div id="tabsHeader-2" class="tabContent">
-					 <div> 
-						<ul class="column four_column">
-						 <li><label>Doc Currency : </label>
-							<?php echo $f->select_field_from_object('document_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->document_currency, 'document_currency', 'currency', 1, $readonly); ?>
-						 </li>
-						 <li><label>Payment Term : </label>
-							<?php echo $f->select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly1); ?>
-						 </li>
-						 <li><label>Payment Term Date : </label>
-							<?php echo form::date_fieldAnyDay('payment_term_date', $$class->payment_term_date) ?>
-						 </li>
-						 <li><label>Sales Person : </label>
-							<?php $f->text_field_d('sales_person') ?>
-						 </li>
-						 <li><label>Agreement Start Date : </label>
-							<?php echo form::date_field('agreement_start_date', $$class->agreement_start_date) ?>
-						 </li>
-						 <li><label>Agreement End Date : </label>
-							<?php echo form::date_field('agreement_end_date', $$class->agreement_start_date) ?>
-						 </li>
-						 <li><label>Price List : </label>
-							<?php echo$f->select_field_from_object('price_list_header_id', mdm_price_list_header::find_all(), 'mdm_price_list_header_id', 'price_list', $$class->price_list_header_id); ?>
-						 </li>
-						 <li><label>Exchange Rate Type : </label>
-							<?php echo form::text_field_d('exchange_rate_type'); ?>
-						 </li>
-						 <li><label>Exchange Rate : </label>
-							<?php form::number_field_d('exchange_rate'); ?>
-						 </li>
-						 <li><label>Header Amount : </label>
-							<?php form::number_field_d('header_amount'); ?>
-						 </li>
-						 <li><label>Tax Amount : </label>
-							<?php form::number_field_d('tax_amount'); ?>
-						 </li>
+					 <div class="large_shadow_box"> 
+						<ul class="column header_field">
+						 <li><label>Doc Currency</label><?php echo $f->select_field_from_object('document_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->document_currency, 'document_currency', 'currency', 1, $readonly); ?>						 </li>
+						 <li><label>Payment Term</label><?php echo $f->select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly1); ?>						 </li>
+						 <li><label>Payment Term Date</label><?php echo form::date_fieldAnyDay('payment_term_date', $$class->payment_term_date) ?> </li>
+						 <li><label>Sales Person</label><?php $f->text_field_d('sales_person') ?></li>
+						 <li><label>Agreement Start Date</label><?php echo form::date_field('agreement_start_date', $$class->agreement_start_date) ?></li>
+						 <li><label>Agreement End Date</label><?php echo form::date_field('agreement_end_date', $$class->agreement_start_date) ?></li>
+						 <li><label>Price List</label><?php echo$f->select_field_from_object('price_list_header_id', mdm_price_list_header::find_all(), 'mdm_price_list_header_id', 'price_list', $$class->price_list_header_id); ?>		 </li>
+						 <li><label>Exchange Rate Type</label><?php echo form::text_field_d('exchange_rate_type'); ?></li>
+						 <li><label>Exchange Rate</label><?php form::number_field_d('exchange_rate'); ?></li>
+						 <li><label>Header Amount</label><?php form::number_field_d('header_amount'); ?></li>
+						 <li><label>Tax Amount</label><?php form::number_field_d('tax_amount'); ?></li>
 						</ul>
 					 </div>
 					</div>
 					<div id="tabsHeader-3" class="tabContent">
-					 <div class="left_half shipto address_details">
-						<ul class="column two_column">
-						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
-							 Ship To Site Id : </label>
-							<?php $f->text_field_d('ship_to_id', 'address_id site_address_id'); ?>
-						 </li>
-						 <li><label>Address Name : </label><?php $f->text_field_dr('ship_to_address_name', 'address_name'); ?></li>
-						 <li><label>Address :</label> <?php $f->text_field_dr('ship_to_address', 'address'); ?></li>
-						 <li><label>Country  : </label> <?php $f->text_field_dr('ship_to_country', 'country'); ?></li>
-						 <li><label>Postal Code  : </label><?php echo $f->text_field_dr('ship_to_postal_code', 'postal_code'); ?></li>
-						</ul>
-					 </div> 
-					 <div class="right_half billto address_details">
-						<ul class="column two_column">
-						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
-							 Bill To Site Id :</label>
-							<?php $f->text_field_d('bill_to_id', 'address_id site_address_id'); ?>
-						 </li>
-						 <li><label>Address Name :</label><?php $f->text_field_dr('bill_to_address_name', 'address_name'); ?> </li>
-						 <li><label>Address :</label> <?php $f->text_field_dr('bill_to_address', 'address'); ?></li>
-						 <li><label>Country  : </label> <?php $f->text_field_dr('bill_to_country', 'country'); ?></li>
-						 <li><label>Postal Code  : </label><?php echo $f->text_field_dr('bill_to_postal_code', 'postal_code'); ?></li>
-						</ul>
-					 </div> 
+           <div class="left_half shipto address_details">
+            <ul class="column four_column">
+             <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
+               Ship To Site Id : </label>
+              <?php $f->text_field_d('ship_to_id', 'address_id site_address_id'); ?>
+             </li>
+             <li><label>Address Name : </label><?php $f->text_field_dr('ship_to_address_name', 'address_name'); ?></li>
+             <li><label>Address :</label> <?php $f->text_field_dr('ship_to_address', 'address'); ?></li>
+             <li><label>Country  : </label> <?php $f->text_field_dr('ship_to_country', 'country'); ?></li>
+             <li><label>Postal Code  : </label><?php echo $f->text_field_dr('ship_to_postal_code', 'postal_code'); ?></li>
+            </ul>
+           </div> 
+           <div class="right_half billto address_details">
+            <ul class="column four_column">
+             <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
+               Bill To Site Id :</label>
+              <?php $f->text_field_d('bill_to_id', 'address_id site_address_id'); ?>
+             </li>
+             <li><label>Address Name :</label><?php $f->text_field_dr('bill_to_address_name', 'address_name'); ?> </li>
+             <li><label>Address :</label> <?php $f->text_field_dr('bill_to_address', 'address'); ?></li>
+             <li><label>Country  : </label> <?php $f->text_field_dr('bill_to_country', 'country'); ?></li>
+             <li><label>Postal Code  : </label><?php echo $f->text_field_dr('bill_to_postal_code', 'postal_code'); ?></li>
+            </ul>
+           </div> 
 					</div>
 					<div id="tabsHeader-4" class="tabContent">
 					 <div> 

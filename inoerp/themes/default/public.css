@@ -1212,7 +1212,7 @@ input, select{
 }
 
 
-#form_header input.seq_number, #form_header input.small{
+#form_header input.seq_number, #form_header input.small,  #form_header input.detail_seq_number{
  width: 40px;
 }
 
@@ -1240,4 +1240,15 @@ select{
 }
 .select.large{
  width: 20em;
+}
+
+ul.header_field li{
+    width: 300px;
+    display: inline-block;
+}
+
+ul.header_field li label{
+    width: 100px;
+    text-align: right;
+    padding-right: 5px;        
 }

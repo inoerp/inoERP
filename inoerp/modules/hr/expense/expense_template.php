@@ -8,7 +8,7 @@
 		 <div id="so_divId">
 			<!--    START OF FORM HEADER-->
 			<div class="error"></div><div id="loading"></div>
-			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
+			<?php echo (!empty($show_message)) ? $show_message : ""; $f = new inoform(); ?> 
 			<!--    End of place for showing error messages-->
 
 			<div id ="form_header"><span class="heading">Sales Order Header</span>
@@ -25,46 +25,33 @@
 				 <div class="tabContainer">
 					<div id="tabsHeader-1" class="tabContent">
 					 <div class="large_shadow_box"> 
-						<ul class="column four_column">
+						<ul class="column header_field">
 						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sd_so_header_id select_popup">
-							 SO Header Id : </label>
-							<?php
-							$f = new inoform();
+							 SO Header Id</label><?php
 							echo form::text_field('sd_so_header_id', $sd_so_header->sd_so_header_id, '15', '25', '', 'System Number', 'sd_so_header_id', $readonly1)
-							?>
-							<a name="show" href="form.php?class_name=sd_so_header" class="show sd_so_header_id">
+							?><a name="show" href="form.php?class_name=sd_so_header" class="show sd_so_header_id">
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
-						 <li><label>SO Number : </label>
-							<?php echo $f->text_field_d('so_number', 'primary_column2'); ?>
-						 </li>
-						 <li><label>BU Name(1) : </label>
-							<?php echo form::select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $sd_so_header->bu_org_id, 'bu_org_id', $readonly1, '', ''); ?>
-						 </li>
-						 <li><label>Document Type(2) : </label>
+						 <li><label>SO Number</label><?php echo $f->text_field_d('so_number', 'primary_column2'); ?></li>
+						 <li><label>BU Name(1)</label><?php echo form::select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $sd_so_header->bu_org_id, 'bu_org_id', $readonly1, '', ''); ?>						 </li>
+						 <li><label>Document Type(2) </label>
 							<?php echo $f->select_field_from_object('document_type', sd_document_type::find_all_header_levels(), 'sd_document_type_id', 'document_type_name', $sd_so_header->document_type, 'document_type', 'medium', 1, $readonly1); ?>
 						 </li>
 						 <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
 							<label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup clickable">
-							 Customer Name : </label> <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
+							 Customer Name</label> <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
 						 <li><label class="auto_complete">Customer Number : </label><?php $f->text_field_d('customer_number'); ?></li>
-						 <li><label>Customer Site : </label>
+						 <li><label>Customer Site</label>
 							<?php echo $f->select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
-						 <li><label>Status : </label>                      
+						 <li><label>Status</label>                      
 							<span class="button"><?php echo!empty($$class->so_status) ? $$class->so_status : ""; ?></span>
 						 </li>
-						 <li><label>Revision : </label>
+						 <li><label>Revision</label>
 							<?php echo form::checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?>
 						 </li> 
-						 <li><label>Rev Number : </label>
-							<?php form::text_field_wid('rev_number'); ?>
-						 </li> 
-						 <li><label>Sales Person : </label>
-							<?php form::text_field_wid('sales_person'); ?>
-						 </li> 
-						 <li><label>Description : </label>
-							<?php form::text_field_wid('description'); ?>
-						 </li> 
+						 <li><label>Rev Number</label><?php form::text_field_wid('rev_number'); ?></li> 
+						 <li><label>Sales Person</label><?php form::text_field_wid('sales_person'); ?></li> 
+						 <li><label>Description</label><?php form::text_field_wid('description'); ?></li> 
 						</ul>
 					 </div>
 					</div>

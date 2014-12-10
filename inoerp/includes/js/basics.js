@@ -2397,6 +2397,33 @@ $(document).ready(function () {
   }
  });
 
+ //popu for selecting employee
+ $('#content').on('click', '.select_employee_name.select_popup', function () {
+  var elemenType = $(this).parent().prop('tagName');
+  if (elemenType === 'TD') {
+   var rowClass = $(this).closest('tr').prop('class');
+   var fieldClass = $(this).closest('td').find('.select_employee_name').prop('class');
+   localStorage.setItem("row_class", rowClass);
+   localStorage.removeItem("li_divId", liId);
+  } else {
+   var liId = $(this).closest('li').find('.employee_name').prop('id');
+   localStorage.setItem("li_divId", liId);
+   localStorage.removeItem("row_class");
+  }
+  var openUrl = 'select.php?class_name=hr_employee';
+  if ($(this).siblings('.org_id').val()) {
+   openUrl += '&org_id=' + $(this).siblings('.org_id').val();
+  } else if ($('#org_id').val()) {
+   openUrl += '&org_id=%3D' + $('#org_id').val();
+  }
+
+  if ($(this).siblings('.employee_name').val()) {
+   openUrl += '&employee_name=' + $(this).siblings('.employee_name').val();
+  }
+  void window.open(openUrl, '_blank',
+          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
 
 
  //popu for selecting accounts
@@ -2680,6 +2707,11 @@ $(document).ready(function () {
 //diable/enable auto complete
  $('#content').on('click', '.disable_autocomplete', function () {
   $(this).parent().siblings().each(function () {
+   $(this).autocomplete({
+    disabled: true
+   });
+  });
+    $(this).parent().children().each(function () {
    $(this).autocomplete({
     disabled: true
    });

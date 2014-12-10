@@ -18,3 +18,20 @@
     font-style: normal;
     color: rgba(57, 129, 35, 0.95);
 }
+
+td.search_result.action{
+    display: inline-block;
+}
+
+#search_result th:first-child{
+    width: 30px;
+}
+
+#search_result th:nth-child(2){
+    min-width: 120px;
+}
+
+td.search_result.action a{
+    margin : 3px;
+}
+

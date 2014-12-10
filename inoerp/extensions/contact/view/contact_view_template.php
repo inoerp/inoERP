@@ -1,4 +1,4 @@
-<?php
+<?php $f = new inoform();
 if (empty($all_contacts)) {
  return;
 }
@@ -43,13 +43,13 @@ if (empty($all_contacts)) {
         echo $f->hidden_field('extn_contact_id', $cont->extn_contact_id);
         echo $f->text_field('contact_name', $cont->contact_name);
         ?> 					</td>
-       <td><?php echo $f->text_field('last_name', $cont->last_name); ?> 					</td>
-       <td><?php echo $f->text_field('first_name', $cont->last_name); ?> 					</td>
-       <td><?php echo $f->text_field('middle_name', $cont->middle_name); ?> 					</td>
-       <td><?php echo $f->text_field('email_id', $cont->email_id); ?> 					</td>
-       <td><?php echo $f->text_field('job_titile', $cont->job_titile); ?> 					</td>
+       <td><?php echo $f->text_field('last_name', $cont->last_name,'','','medium'); ?> 					</td>
+       <td><?php echo $f->text_field('first_name', $cont->last_name,'','','medium'); ?> 					</td>
+       <td><?php echo $f->text_field('middle_name', $cont->middle_name,'','','medium'); ?> 					</td>
+       <td><?php echo $f->text_field('email_id', $cont->email_id,'','','medium'); ?> 					</td>
+       <td><?php echo $f->text_field('job_titile', $cont->job_titile,'','','medium'); ?> 					</td>
        <td><?php echo $f->text_field('type', $cont->type); ?> 					</td>
-       <td><?php echo $f->text_field('mobile_number', $cont->mobile_number); ?> 					</td>
+       <td><?php echo $f->text_field('mobile_number', $cont->mobile_number,'','','medium'); ?> 					</td>
       </tr>
       <?php
       $detailCount++;

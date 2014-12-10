@@ -172,6 +172,14 @@ if (empty($_POST)) {
  */
 if (($continue) && (!empty($class_names))) {
  foreach ($class_names as $class) {
+   //check if site is in disbaled mode and the module is disabled
+ if(!empty($si->disabled_action)){
+  $eng_info = engine::find_by_className($class);
+  if($eng_info && $eng_info->enabled_cb != 1){
+   access_denied('Module is disabled and Disable action is activated.<br>Either enable the module to de-activate disable action to proceed further');
+  }
+ }
+  
   $module = property_exists($class, 'module') ? $class::$module : 'module';
   $primary_column = property_exists($class, 'primary_column') ? $class::$primary_column : false;
   $primary_column2 = property_exists($class, 'primary_column2') ? $class::$primary_column2 : false;

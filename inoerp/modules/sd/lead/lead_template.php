@@ -30,37 +30,36 @@
           <div class="tabContainer"> 
            <div id="tabsHeader-1" class="tabContent">
             <div class="large_shadow_box"> 
-             <ul class="column four_column"> 
+             <ul class="column header_field"> 
               <li> 
                <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sd_lead_id select_popup clickable">
-                Lead Id : </label><?php $f->text_field_dsr('sd_lead_id') ?>
+                Lead Id</label><?php $f->text_field_dsr('sd_lead_id') ?>
                <a name="show" href="form.php?class_name=sd_lead" class="show sd_lead_id">	<img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
               </li>
-              <li><label>Lead Number :</label><?php $f->text_field_dm('lead_number'); ?> 					</li>
-              <li><label>Lead Subject :</label><?php $f->text_field_dm('lead_subject'); ?> 					</li>
-              <li><label>Lead Type :</label><?php $f->text_field_d('lead_type'); ?> 					</li>
-              <li><label>Status :</label><?php $f->text_field_d('status'); ?> 					</li>
-              <li><label>Priority :</label><?php $f->text_field_d('priority'); ?> 					</li>
-              <li><label>Referral Source:</label><?php $f->text_field_d('referral_source'); ?> 					</li>
-              <li><label>Sales Channel:</label><?php 
-              echo $f->select_field_from_object('sales_channel', sd_lead::sales_channel(),'option_line_code','option_line_value', $$class->sales_channel,'sales_channel'); ?> 					</li>
-              <li><label>Description :</label><?php $f->text_field_dl('lead_description'); ?> 					</li>
+              <li><label>Lead Number</label><?php $f->text_field_dm('lead_number'); ?> 					</li>
+              <li><label>Lead Subject</label><?php $f->text_field_dm('subject'); ?> 					</li>
+              <li><label>Lead Type</label><?php echo $f->select_field_from_object('lead_type',sd_lead::lead_type(),'option_line_code','option_line_value', $$class->lead_type,'lead_type'); ?> 					</li>
+              <li><label>Status</label><?php echo $f->select_field_from_array('status', sd_lead::$status_a, $$class->status,'status','','',1,1); ?> 					</li>
+              <li><label>Priority</label><?php echo $f->select_field_from_array('priority', dbObject::$position_array,$$class->priority); ?> 					</li>
+              <li><label>Referral Source</label><?php $f->text_field_d('referral_source'); ?> 					</li>
+              <li><label>Sales Channel</label><?php echo $f->select_field_from_object('sales_channel', sd_lead::sales_channel(), 'option_line_code', 'option_line_value', $$class->sales_channel, 'sales_channel'); ?> 					</li>
+              <li><label>Description</label><?php $f->text_field_dl('description'); ?> 					</li>
              </ul>
             </div>
            </div>
            <div id="tabsHeader-2" class="tabContent">
             <div class="large_shadow_box"> 
-             <ul class="column four_column"> 
-              <li><label>Last Name :</label><?php $f->text_field_d('last_name'); ?> 					</li>
-              <li><label>First Name :</label><?php $f->text_field_d('first_name'); ?> 					</li>
-              <li><label>Mobile :</label><?php $f->text_field_d('mobile_number'); ?> 					</li>
-              <li><label>Office :</label><?php $f->text_field_d('office_number'); ?> 					</li>
-              <li><label>Fax :</label><?php $f->text_field_d('fax_no'); ?> 					</li>
-              <li><label>e-Mail :</label><?php $f->text_field_d('email_id'); ?> 					</li>
-              <li><label>Time Zone :</label><?php $f->text_field_d('timezone'); ?> 					</li>
-              <li><label>Preferred Time :</label><?php $f->text_field_d('time_to_contact'); ?> 					</li>
-              <li><label>Web site :</label><?php $f->text_field_d('contact_website'); ?> 					</li>
-              <li><label>Address :</label><?php $f->text_field_dl('contact_address'); ?> 					</li>
+             <ul class="column header_field"> 
+              <li><label>Last Name</label><?php $f->text_field_d('last_name'); ?> 					</li>
+              <li><label>First Name</label><?php $f->text_field_d('first_name'); ?> 					</li>
+              <li><label>Mobile</label><?php $f->text_field_d('mobile_number'); ?> 					</li>
+              <li><label>Office</label><?php $f->text_field_d('office_number'); ?> 					</li>
+              <li><label>Fax</label><?php $f->text_field_d('fax_no'); ?> 					</li>
+              <li><label>e-Mail</label><?php $f->text_field_d('email_id'); ?> 					</li>
+              <li><label>Time Zone</label><?php $f->text_field_d('timezone'); ?> 					</li>
+              <li><label>Preferred Time</label><?php $f->text_field_d('time_to_contact'); ?> 					</li>
+              <li><label>Web site</label><?php $f->text_field_d('contact_website'); ?> 					</li>
+              <li><label>Address</label><?php $f->text_field_dl('contact_address'); ?> 					</li>
              </ul>
             </div>
            </div>
@@ -89,7 +88,7 @@
              <ul class="column four_column">
               <li><label>Action</label>
                <?php
-               echo $f->select_field_from_array('action', $$class->action_a, '', 'action');
+               echo $f->select_field_from_array('action', sd_lead::$action_a, '', 'action');
                ?>
               </li>
               <li><label>Close Reason :</label><?php $f->text_field_d('close_reason'); ?> 					</li>
@@ -110,6 +109,7 @@
            <li><a href="#tabsLine-1">Existing Info</a></li>
            <li><a href="#tabsLine-2">Address Details</a></li>
            <li><a href="#tabsLine-3">Contact</a></li>
+           <li><a href="#tabsLine-4">Lead Details</a></li>
 
           </ul>
           <div class="tabContainer"> 
@@ -124,10 +124,14 @@
                <?php echo $f->select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
               <li><label>System Campaign:</label><?php $f->text_field_d('campaign_id'); ?> 					</li>
               <li><label>Other Campaign:</label><?php $f->text_field_d('campaign_os'); ?> 					</li>
-              <li><label>Sales Team:</label><?php $f->text_field_d('sales_team'); ?> 					</li>
-              <li><label>Primary Sales Person:</label><?php $f->text_field_d('sales_person_user_id'); ?> 					</li>
+              <li><label>Sales Team:</label><?php echo $f->select_field_from_object('sales_team', hr_team_header::find_all_sales_team(), 'hr_team_header_id', 'team_name', $$class->sales_team, 'sales_team'); ?> 					</li>
+               <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_employee_name select_popup clickable">
+                Primary Sales Person</label><?php $f->text_field_d('sales_person_employee_name'); ?>
+               <?php echo $f->hidden_field_withId('sales_person_employee_id', $$class->sales_person_employee_id); ?>
+              </li>
               <li><label> <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-                Address Id:</label> <input type="text"  name="address_id[]" value="<?php echo ($$class->address_id); ?>" maxlength="50" id="address_id"></li> 
+                Address :</label><?php $f->text_field_d('address_name'); ?>
+               <?php echo $f->hidden_field_withId('address_id', $$class->address_id); ?></li> 
              </ul>
             </div>
            </div>
@@ -152,7 +156,7 @@
             <div>
              <ul id="new_contact_reference">
               <li class='new_object1'><label><img class="extn_contact_id select_popup clickable"  src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
-                Associate Contact : </label>  
+                Lead Contact : </label>  
                <?php
                echo $f->hidden_field('extn_contact_id_new', '');
                echo $f->text_field('contact_name_new', '', '20', '', 'select_contact');
@@ -160,6 +164,13 @@
               <li class='flaticon-add182 clickable' id='add_new_contact' title='New contact reference field'></li>
              </ul>
             </div>
+           </div>
+                      <div id="tabsLine-4"  class="tabContent">
+            <div><label class="text_area_label">Product, Service & Other Opportunity Details  :</label><?php
+              echo $f->text_area_ap(array('name' => 'details', 'value' => $$class->details,
+               'row_size' => '10', 'column_size' => '90'));
+             ?> 	
+            </div> 
            </div>
           </div>
 

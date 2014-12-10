@@ -451,7 +451,7 @@ ul#form_box li, #form_line li.control{
  display: inline-block;
 }
 
-.two_column ul,
+/*.two_column ul,
 .three_column ul,
 .four_column ul {
  display: block;
@@ -474,7 +474,7 @@ ul#form_box li, #form_line li.control{
 .two_column ul li label{
  font-weight : bold;
  line-height: 5px;
-}
+}*/
 
 ul.search_form li {
  margin-bottom: 5px;
@@ -970,10 +970,10 @@ span.more_page a {
  max-width: 250px;
 }
 
-span.acField_withSearchImage {
+/*span.acField_withSearchImage {
  display: block;
  width: 180px;
-}
+}*/
 
 .search_data{
     background: url('images/serach.png') no-repeat right top;

@@ -24,27 +24,17 @@
 				 <div class="tabContainer">
 					<div id="tabsHeader-1" class="tabContent">
 					 <div class="large_shadow_box"> 
-						<ul class="column five_column">
+						<ul class="column header_field">
 						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_receipt_header_id select_popup clickable">
-							 Receipt Id : </label>
-							<?php $f->text_field_d('ar_receipt_header_id'); ?>
-							<a name="show" href="po.php?ar_receipt_header_id=" class="show ar_receipt_header_id">
+							 Receipt Id</label><?php $f->text_field_d('ar_receipt_header_id'); ?>
+							<a name="show" href="form.php?class_name=ar_receipt_header&ar_receipt_header_id=" class="show ar_receipt_header_id">
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
-						 <li><label>Receipt No : </label>
-							<?php $f->text_field_d('receipt_number'); ?>
-						 </li>
-						 <li><label>BU Name(1) : </label>
-							<?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>
-						 </li>
-						 <li><label>Ledger Name(2) : </label>
-							<?php echo form::select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', $readonly1, '', '', 1); ?>
-						 </li>
-						 <li><label>Currency(3): </label>
-							<?php echo form::select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'currency', $readonly1, '', '', 1); ?>
-						 </li>
-						 <li><label>Period Name(4) : </label>
-							<?php
+						 <li><label>Receipt No</label><?php $f->text_field_d('receipt_number'); ?></li>
+						 <li><label>BU Name(1)</label><?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?></li>
+						 <li><label>Ledger Name(2)</label><?php echo form::select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', $readonly1, '', '', 1); ?></li>
+						 <li><label>Currency(3)</label><?php echo form::select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'currency', $readonly1, '', '', 1); ?></li>
+						 <li><label>Period Name(4)</label><?php
 							if (!empty($period_name_stmt)) {
 							 echo $period_name_stmt;
 							} else {
@@ -52,51 +42,26 @@
 							}
 							?>
 						 </li>
-						 <li><label>Receipt Source(5) : </label>
-							<?php echo $f->select_field_from_object('ar_receipt_source_id', ar_receipt_source::find_all(), 'ar_receipt_source_id', 'receipt_source', $$class->ar_receipt_source_id, 'ar_receipt_source_id', '', 1, $readonly); ?>
-						 </li>
-						 <li><label>Document Date : </label>
-							<?php echo $f->date_fieldFromToday_d('document_date', $$class->document_date, 1) ?>
-						 </li>
-						 <li><label>Document Number : </label>
-							<?php echo $f->text_field_d('document_number') ?>
-						 </li>
-						 <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
-							<label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup clickable">
-							 Customer Name : </label> <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
-						 <li><label class="auto_complete">Customer Number : </label><?php $f->text_field_d('customer_number'); ?></li>
-						 <li><label>Customer Site : </label>
-							<?php echo $f->select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
-						 <li><label>Ef Id : </label>
-							<?php $f->text_field_d('ef_id'); ?>
-						 </li>
-						 <li><label>Doc Status : </label>
-							<?php echo $f->select_field_from_array('receipt_status', ar_receipt_header::$receipt_status_a, $$class->receipt_status, '', '', '', '', $readonly); ?>
-						 </li> 
-						 <li><label>Description : </label>
-							<?php $f->text_field_d('description'); ?>
-						 </li> 
+						 <li><label>Receipt Source(5)</label><?php echo $f->select_field_from_object('ar_receipt_source_id', ar_receipt_source::find_all(), 'ar_receipt_source_id', 'receipt_source', $$class->ar_receipt_source_id, 'ar_receipt_source_id', '', 1, $readonly); ?>			 </li>
+						 <li><label>Document Date</label><?php echo $f->date_fieldFromToday_d('document_date', $$class->document_date, 1) ?></li>
+						 <li><label>Document Number</label><?php echo $f->text_field_d('document_number') ?></li>
+						 <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?><label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup clickable">
+						 Customer Name</label><?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
+						 <li><label class="auto_complete">Customer Number</label><?php $f->text_field_d('customer_number'); ?></li>
+						 <li><label>Customer Site</label><?php echo $f->select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
+						 <li><label>Doc Status</label><?php echo $f->select_field_from_array('receipt_status', ar_receipt_header::$receipt_status_a, $$class->receipt_status, '', '', '', '', $readonly); ?>			 </li> 
+						 <li><label>Description</label><?php $f->text_field_d('description'); ?></li> 
 						</ul>
 					 </div>
 					</div>
 					<div id="tabsHeader-2" class="tabContent">
 					 <div> 
-						<ul class="column five_column">
-						 <li><label>Currency : </label>
-							<?php echo form::select_field_from_object('document_currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->document_currency, 'document_currency', $readonly1, '', '', 1); ?>
-						 </li>
-						 <li><label>Exchange Rate Type : </label>
-							<?php $f->text_field_d('exchange_rate_type'); ?>
-						 </li>
-						 <li><label>Exchange Rate : </label>
-							<?php $f->text_field_d('exchange_rate'); ?>
-						 </li>
-						 <li><label>Header Amount : </label>
-							<?php form::number_field_dm('header_amount'); ?>
-						 </li>
-						 <li><label>Journal Header Id : </label>
-							<?php $f->text_field_d('gl_journal_header_id'); ?>
-						 </li>
+						<ul class="column header_field">
+						 <li><label>Currency</label><?php echo form::select_field_from_object('document_currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->document_currency, 'document_currency', $readonly1, '', '', 1); ?>						 </li>
+						 <li><label>Exchange Rate Type</label><?php $f->text_field_d('exchange_rate_type'); ?></li>
+						 <li><label>Exchange Rate</label><?php $f->text_field_d('exchange_rate'); ?></li>
+						 <li><label>Header Amount</label><?php form::number_field_dm('header_amount'); ?></li>
+						 <li><label>Journal Header Id</label><?php $f->text_field_d('gl_journal_header_id'); ?></li>
 						</ul>
 					 </div>
 					</div>

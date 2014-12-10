@@ -30,46 +30,40 @@
           <div class="tabContainer"> 
            <div id="tabsHeader-1" class="tabContent">
             <div class="large_shadow_box"> 
-             <ul class="column five_column"> 
+             <ul class="column header_field"> 
               <li> 
                <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
-                Employee Id : </label><?php $f->text_field_ds('hr_employee_id') ?>
+                Employee Id</label><?php $f->text_field_ds('hr_employee_id') ?>
                <a name="show" href="form.php?class_name=hr_employee" class="show hr_employee_id">	<img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
               </li>
-              <li><label>First Name :</label><?php $f->text_field_d('first_name'); ?> 					</li>
-              <li><label>Last Name :</label><?php $f->text_field_d('last_name'); ?> 					</li>
-              <li><label>Title :</label><?php $f->text_field_d('title'); ?> 					</li>
-              <li><label>Gender :</label>
-               <?php echo $f->select_field_from_object('gender', hr_employee::gender(), 'option_line_code', 'option_line_value', $$class->gender, '', 'gender', '', $readonly); ?>              </li>
-              <li><label>Person Type :</label>
-               <?php echo $f->select_field_from_object('person_type', hr_employee::person_type(), 'option_line_code', 'option_line_value', $$class->person_type, '', 'person_type', '', $readonly); ?>              </li>
-              <li><label>Identification Type :</label>
-               <?php echo $f->select_field_from_object('identification_type', hr_employee::identification_type(), 'option_line_code', 'option_line_value', $$class->identification_type, '', 'identification_type', '', $readonly); ?>              </li>
-              <li><label>Identification No :</label><?php $f->text_field_d('identification_id'); ?> 					</li>
-              <li><label>Citizen No :</label><?php $f->text_field_d('citizen_number'); ?> 					</li>
-              <li><label>ORG Name : </label>
-               <?php echo $f->select_field_from_object('org_id', org::find_all_enterprise(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>
+              <li><label>First Name</label><?php $f->text_field_d('first_name'); ?> 					</li>
+              <li><label>Last Name</label><?php $f->text_field_d('last_name'); ?> 					</li>
+              <li><label>Title</label><?php $f->text_field_d('title'); ?> 					</li>
+              <li><label>Gender</label><?php echo $f->select_field_from_object('gender', hr_employee::gender(), 'option_line_code', 'option_line_value', $$class->gender, '', 'gender', '', $readonly); ?>              </li>
+              <li><label>Person Type</label><?php echo $f->select_field_from_object('person_type', hr_employee::person_type(), 'option_line_code', 'option_line_value', $$class->person_type, '', 'person_type', '', $readonly); ?>              </li>
+              <li><label>Identification Type</label><?php echo $f->select_field_from_object('identification_type', hr_employee::identification_type(), 'option_line_code', 'option_line_value', $$class->identification_type, '', 'identification_type', '', $readonly); ?>              </li>
+              <li><label>Identification No</label><?php $f->text_field_d('identification_id'); ?> 					</li>
+              <li><label>Citizen No</label><?php $f->text_field_d('citizen_number'); ?> 					</li>
+              <li><label>ORG Name</label><?php echo $f->select_field_from_object('org_id', org::find_all_enterprise(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>             </li>
+              <li><label>Ledger Name</label><?php echo form::select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', $readonly, '', '', 1); ?>
               </li>
-              <li><label>Ledger Name : </label>
-               <?php echo form::select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', $readonly, '', '', 1); ?>
-              </li>
-              <li><label>Status : </label><?php echo form::status_field($$class->status, $readonly); ?></li>
+              <li><label>Status</label><?php echo form::status_field($$class->status, $readonly); ?></li>
              </ul>
             </div>
            </div>
            <div id="tabsHeader-2" class="tabContent">
             <div class="large_shadow_box"> 
-             <ul class="column five_column"> 
-              <li><label>DOB :</label><?php echo $f->date_fieldAnyDay('date_of_birth', $$class->date_of_birth); ?> </li>
-              <li><label>Country Of Birth :</label>
+             <ul class="column header_field"> 
+              <li><label>DOB</label><?php echo $f->date_fieldAnyDay('date_of_birth', $$class->date_of_birth); ?> </li>
+              <li><label>Country Of Birth</label>
                <?php echo $f->select_field_from_object('country_of_birth', mdm_tax_region::country(), 'option_line_code', 'option_line_value', $$class->country_of_birth, '', 'country_code', '', $readonly); ?>              </li>
-              <li><label>City Of Birth :</label><?php $f->text_field_d('city_of_birth'); ?> 					</li>
-              <li><label>Nationality :</label><?php $f->text_field_d('nationality'); ?> 					</li>
-              <li><label>Disability Code :</label><?php $f->text_field_d('disability_code'); ?> 					</li>
-              <li><label>Marital Status :</label>
+              <li><label>City Of Birth</label><?php $f->text_field_d('city_of_birth'); ?> 					</li>
+              <li><label>Nationality</label><?php $f->text_field_d('nationality'); ?> 					</li>
+              <li><label>Disability Code</label><?php $f->text_field_d('disability_code'); ?> 					</li>
+              <li><label>Marital Status</label>
                <?php echo $f->select_field_from_object('marital_status', hr_employee::marital_status(), 'option_line_code', 'option_line_value', $$class->marital_status, '', 'marital_status', '', $readonly); ?>              </li>
-              <li><label>No Of Children :</label><?php $f->text_field_d('no_of_children'); ?> 					</li>
-              <li><label>Passport No :</label><?php $f->text_field_d('passport_number'); ?> 					</li>
+              <li><label>No Of Children</label><?php $f->text_field_d('no_of_children'); ?> 					</li>
+              <li><label>Passport No</label><?php $f->text_field_d('passport_number'); ?> 					</li>
              </ul>
             </div>
            </div>

@@ -786,7 +786,7 @@ EOD;
    * textarea
    */
 
-  public function text_area($name, $value, $rowsize = "5", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $columnsize = "20") {
+  public function text_area($name, $value, $rowsize = "1", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $columnsize = "16") {
    $bracketName = $name . '[]';
    $value = htmlentities($value);
    if ($readonly == 1) {

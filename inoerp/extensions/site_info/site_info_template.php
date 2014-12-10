@@ -29,6 +29,7 @@
 						 <li><label>Site Name : </label> <?php echo $f->text_field('site_name', $$class->site_name, '20'); ?> </li> 
 						 <li><label>Default e-mail : </label> <?php echo $f->text_field('email', $$class->email, '40'); ?> </li> 
 						 <li><label>Home Page : </label> <?php echo HOME_URL . $f->text_field('default_home_page', $$class->default_home_page, '20'); ?> </li> 
+             <li><label>Disable Action : </label> <?php echo $f->select_field_from_array('disabled_action', site_info::$disabled_action_a ,$$class->disabled_action, 'disabled_action'); ?> </li> 
 						</ul> 
 					 </div>
 					</div>

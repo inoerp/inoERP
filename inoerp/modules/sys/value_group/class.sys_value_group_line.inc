@@ -51,6 +51,12 @@ class sys_value_group_line extends dbObject {
  public $fields_inHeader_needsToBeInserted_inPOST = [
 		 "sys_value_group_header_id"
  ];
+ 
+   public $number_fields = [
+  "sys_value_group_header_id",
+    'sys_value_group_line_id'
+ ];
+   
  public $pageTitle = " Value Group - Find All Calue Group Lines "; //page Title
  public $sys_value_group_line_id;
  public $sys_value_group_header_id;

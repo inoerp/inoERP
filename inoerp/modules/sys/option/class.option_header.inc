@@ -41,6 +41,11 @@
    "description",
    "module_code"
   ];
+  
+   public $number_fields = [
+  "option_header_id"
+ ];
+   
   public $requiredField = [
    "option_type",
    "access_level",

@@ -7,18 +7,27 @@ class sd_lead extends dbObject {
  public static $key_column = 'lead_number';
  public static $dependent_classes = ['extn_contact'];
  public static $module = "sd";
- public $action_a = [
+ public static $action_a = [
   'CONVERT_OPPR' => 'Convert to Opportunity',
-  'CREATE_PROPSAL' => 'Create Proposal',
-  'CLOSE_LEAD' => 'Close Lead'
+  'CREATE_QUOTE' => 'Create Quote',
+  'CLOSE_LEAD' => 'Close Lead',
+  'CANCEL' => 'Cancel'
+ ];
+ public static $status_a = [
+  'ENTERED' => 'Entered',
+  'APPROVED' => 'Approved',
+  'CANCELLED' => 'Cancelled',
+  'CLOSED' => 'Closed',
+  'CONVERTED_QUOTE' => 'Converted to Quote',
+  'CONVERTED_OPPORTUNITY' => 'Converted to Opportunity',
  ];
  public $field_a = [
   'sd_lead_id',
   'lead_number',
   'primary_contact_id',
-  'lead_subject',
+  'subject',
   'lead_type',
-  'lead_description',
+  'description',
   'last_name',
   'first_name',
   'mobile_number',
@@ -32,7 +41,7 @@ class sd_lead extends dbObject {
   'time_to_contact',
   'ar_customer_id',
   'ar_customer_site_id',
-  'sales_person_user_id',
+  'sales_person_employee_id',
   'sales_team',
   'priority',
   'campaign_id',
@@ -52,7 +61,11 @@ class sd_lead extends dbObject {
  ];
  public $requiredField = [
   'lead_number',
-  'lead_subject',
+  'subject',
+ ];
+ public $numberField = [
+  'sd_lead_id',
+  'primary_contact_id',
  ];
  public $fields_inForm_notInDataBase = [
   "customer_name",
@@ -64,13 +77,16 @@ class sd_lead extends dbObject {
   "address",
   "country",
   "postal_code",
+  'sales_person_employee_name',
+  'address_name',
+  'action'
  ];
  public $sd_lead_id;
  public $lead_number;
  public $primary_contact_id;
- public $lead_subject;
+ public $subject;
  public $lead_type;
- public $lead_description;
+ public $description;
  public $last_name;
  public $first_name;
  public $mobile_number;
@@ -84,7 +100,7 @@ class sd_lead extends dbObject {
  public $time_to_contact;
  public $ar_customer_id;
  public $ar_customer_site_id;
- public $sales_person_user_id;
+ public $sales_person_employee_id;
  public $sales_team;
  public $priority;
  public $campaign_id;
@@ -106,19 +122,61 @@ class sd_lead extends dbObject {
  public $address;
  public $country;
  public $postal_code;
+ public $sales_person_employee_name;
+ public $address_name;
+ public $action;
  public $search = [
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
  public $pageTitle = " Sales Lead  "; //page Title
 
- 
-  Public static function sales_channel() {
-	$option_header = option_header::find_by_name('SD_SALES_CHANNEL');
-	$lines = option_line::find_by_option_id($option_header->option_header_id);
-	return $lines;
+ Public static function sales_channel() {
+  $option_header = option_header::find_by_name('SD_SALES_CHANNEL');
+  $lines = option_line::find_by_option_id($option_header->option_header_id);
+  return $lines;
  }
- 
+
+ Public static function lead_type() {
+  $option_header = option_header::find_by_name('SD_LEAD_TYPE');
+  $lines = option_line::find_by_option_id($option_header->option_header_id);
+  return $lines;
+ }
+
+ private function _convert_leadToOpportunity() {
+  $oppr = new sd_opportunity();
+  foreach ($this->field_a as $k => $v) {
+   if (property_exists($oppr, $v)) {
+    if($v == 'subject' || $v == 'description'){
+     $oppr->$v = $this->$v.' - As in Lead ';
+    }else{
+    $oppr->$v = $this->$v;
+    }
+    $oppr->referral_source = 'Lead id '. $this->sd_lead_id;
+    $oppr->status = 'ENTERED';
+   }
+  }
+
+  try {
+   $oppr->save();
+   echo "Opportunity is sucessfully created. New Opportunity id is " . $oppr->sd_opportunity_id;
+  } catch (Exception $e) {
+   echo "Failed to convert the lead to opportunity. Error @ sd_lead @@ line " . __LINE__ . $e->getMessage();
+  }
+ }
+
+ public function _after_save() {
+  if ($this->action == 'CONVERT_OPPR') {
+   try{
+   $this->_convert_leadToOpportunity();
+   $this->status = 'CONVERTED_OPPORTUNITY';
+   $this->save();
+   }catch(Exception $e){
+    echo "Failed to convert the lead to opportunity. Error @ sd_lead @@ line " . __LINE__ . $e->getMessage();
+   }
+  }
+ }
+
  public static function find_by_reference($ref_obj, $ref_id) {
   $sql = " SELECT cont.extn_contact_id,cont.contact_name, cont.last_name, cont.first_name, cont.middle_name, 
    cont.mobile_number, cont.office_number, cont.contact_number2, cont.email_id, cont.website, cont.email_id2,

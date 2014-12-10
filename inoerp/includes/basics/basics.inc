@@ -240,6 +240,9 @@
  require_once(INC_MODULE . DS . "fp" . DS . "mrp" . DS . "class_fp_mrp_lowlevel_code.inc");
  require_once(INC_MODULE . DS . "fp" . DS . "mrp" . DS . "class_fp_mrp_existing_supply_v.inc");
  require_once(INC_MODULE . DS . "sd" . DS . "lead" . DS . "class_sd_lead.inc");
+ require_once(INC_MODULE . DS . "sd" . DS . "opportunity" . DS . "class_sd_opportunity.inc");
+ require_once(INC_MODULE . DS . "sd" . DS . "quote" . DS . "class_sd_quote_header.inc");
+ require_once(INC_MODULE . DS . "sd" . DS . "quote" . DS . "class_sd_quote_line.inc");
  require_once(INC_MODULE . DS . "sd" . DS . "so" . DS . "class_sd_so_header.inc");
  require_once(INC_MODULE . DS . "sd" . DS . "so" . DS . "class_sd_so_line.inc");
  require_once(INC_MODULE . DS . "sd" . DS . "so" . DS . "class_sd_so_all_v.inc");
@@ -294,6 +297,8 @@
  require_once(INC_MODULE . DS . "hr" . DS . "approval" . DS . "object" . DS . "class_hr_approval_object.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "approval" . DS . "validation" . DS . "class_hr_approval_validation.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "approval" . DS . "limit_assignment" . DS . "class_hr_approval_limit_assignment.inc");
+ require_once(INC_MODULE . DS . "hr" . DS . "team" . DS . "class_hr_team_header.inc");
+ require_once(INC_MODULE . DS . "hr" . DS . "team" . DS . "class_hr_team_line.inc");
  require_once(INC_MODULE . DS . "cc" . DS . "co_template" . DS . "class_cc_co_template_header.inc");
  require_once(INC_MODULE . DS . "cc" . DS . "co_template" . DS . "class_cc_co_template_line.inc");
  require_once(INC_MODULE . DS . "cc" . DS . "co" . DS . "class_cc_co_header.inc");
@@ -305,6 +310,8 @@
  require_once(INC_MODULE . DS . "bc" . DS . "label_request" . DS . "class_bc_label_request.inc");
  require_once(INC_MODULE . DS . "bc" . DS . "static_label" . DS . "class_bc_static_label.inc");
  
+ //
+ require_once(INC_TPARTY . DS . "barcode" . DS . "class_ino_barcode.inc");
 
 //include extensions
  require_once(INC_EXTENSIONS . DS . "ino_generic" . DS . "class_ino_generic.inc");

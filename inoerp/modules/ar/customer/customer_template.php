@@ -27,50 +27,30 @@
          <div class="tabContainer">
           <div id="tabsHeader-1" class="tabContent">
            <div class="large_shadow_box"> 
-            <ul class="column five_column">
+            <ul class="column header_field">
              <li>
               <label><img class="ar_customer_id select_popup clickable"  src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
-               Customer Id : </label>
-              <?php $f->text_field_dr('ar_customer_id'); ?>
+               Customer Id</label><?php $f->text_field_dr('ar_customer_id'); ?>
               <a name="show" href="?ar_customer_id=" class="show ar_customer_id">
                <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
              </li>
-             <li><label>Customer Number : </label> <?php form::number_field_dm('customer_number'); ?>						 </li>               
-             <li><label>Customer Name : <img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete supplier_name clickable"></label>
+             <li><label>Customer Number</label><?php form::number_field_dm('customer_number'); ?>						 </li>               
+             <li><label>Customer Name<img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete supplier_name clickable"></label>
               <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', 1, $readonly1); ?>
              </li>
-             <li><label>Customer Type : </label>
-              <?php echo form::select_field_from_object('customer_type', ar_customer::customer_types(), 'option_line_code', 'option_line_value', $$class->customer_type, 'customer_type', $readonly, '', ''); ?>
+             <li><label>Customer Type</label><?php echo form::select_field_from_object('customer_type', ar_customer::customer_types(), 'option_line_code', 'option_line_value', $$class->customer_type, 'customer_type', $readonly, '', ''); ?>
              </li>
-             <li><label>Supplier Id : </label>
-              <?php form::number_field_ds('supplier_id'); ?>
-             </li>
-             <li><label>Tax Country : </label>
+             <li><label>Supplier Id</label><?php form::number_field_ds('supplier_id'); ?></li>
+             <li><label>Tax Country</label>
               <?php echo form::select_field_from_object('tax_country', option_header::COUNTRIES(), 'option_line_code', 'option_line_value', $$class->tax_country, 'tax_country', $readonly, '', ''); ?>
              </li>
-             <li><label>Tax Reg No : </label>
-              <?php echo form::text_field_d('tax_reg_no'); ?>
-             </li>
-             <li><label>Tax Payer Id : </label>
-              <?php echo form::text_field_d('tax_payer_id'); ?>
-             </li>
-             <li><label>Contact Id : </label>
-              <?php echo form::text_field_d('customer_contact_id'); ?>
-             </li>
-             <li><label>Ef Id : </label>
-              <?php echo form::extra_field($$class->ef_id, '10', $readonly); ?>
-             </li>
-             <li><label>Status : </label>                      
-              <?php echo form::status_field($$class->status, $readonly); ?>
-             </li>
-             <li><label>Revision : </label>
-              <?php echo form::checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?>
-             </li> 
-             <li><label>Rev Number : </label>
-              <?php form::text_field_wid('rev_number'); ?>
-
-             </li> 
-
+             <li><label>Tax Reg No</label><?php echo form::text_field_d('tax_reg_no'); ?></li>
+             <li><label>Tax Payer Id</label><?php echo form::text_field_d('tax_payer_id'); ?></li>
+             <li><label>Contact Id</label><?php echo form::text_field_d('customer_contact_id'); ?></li>
+             <li><label>Ef Id</label><?php echo form::extra_field($$class->ef_id, '10', $readonly); ?></li>
+             <li><label>Status</label><?php echo form::status_field($$class->status, $readonly); ?></li>
+             <li><label>Revision</label><?php echo form::checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?>             </li> 
+             <li><label>Rev Number</label><?php form::text_field_wid('rev_number'); ?></li> 
             </ul>
            </div>
           </div>

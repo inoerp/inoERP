@@ -10,7 +10,7 @@
 			<div class="error"></div><div id="loading"></div>
 			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 			<!--    End of place for showing error messages-->
-			<div id ="form_header">
+			<div id ="form_single">
 			 <form action="path.php" method="post" size="30" id="path" name="path"  >
 				<div > 
 				 <ul class="two_column"> 

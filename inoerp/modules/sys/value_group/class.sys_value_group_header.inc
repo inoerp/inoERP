@@ -57,6 +57,11 @@ class sys_value_group_header extends dbObject {
 		 'description',
 		 'module_code'
  ];
+ 
+  public $number_fields = [
+  "sys_value_group_header_id"
+ ];
+  
  public $search = [
 		 '_show_update_path' => 1,
 		 '_update_action_meassge' => 'Update',

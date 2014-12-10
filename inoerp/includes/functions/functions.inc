@@ -157,7 +157,8 @@ function check_browser() {
 }
 
 function access_denied($msg = '') {
- redirect_to(HOME_URL . 'access_denied.php');
+ header("Location: access_denied.php?message=$msg");
+// redirect_to(HOME_URL . 'access_denied.php');
 }
 
 function site_maintenance($msg) {

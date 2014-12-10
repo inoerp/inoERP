@@ -13,10 +13,10 @@ class supplier extends dbObject {
  public static $system_info = [
 		 'name' => 'Supplier',
 		 'number' => '1201',
-		 'description' => 'Define and mainten external/internal suppliers',
-		 'version' => '1.1.1.3',
+		 'description' => 'Define and Mainten external/internal suppliers',
+		 'version' => '0.1.1',
 		 'db_version' => '1001',
-		 'mod_version' => '1.1.x-1.1',
+		 'mod_version' => '1.1.1',
 		 'dependent_class' => array('supplier_site', 'supplier_all_v', 'supplier_bu'),
 		 'primary_entity_cb' => '',
 		 'module_name' => 'ap',

@@ -14,6 +14,9 @@ $class_names[] = 'content';
   <?php
   $content = new content();
   echo '<h1> Access denied! - You dont have enough privillage to access the requested page </h1>';
+  if(!empty($_GET['message'])){
+   echo $_GET['message'];
+  }
 //		 echo page::front_page_summary(6); 
   ?>
  </div>
