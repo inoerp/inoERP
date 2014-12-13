@@ -6,6 +6,17 @@ class bc_auto_trigger extends dbObject {
  public static $primary_column = "bc_label_auto_trigger_id";
  public static $key_column = "association_level_value";
  public static $module = "sys";
+  public static $system_info = [
+  'name' => 'BC Auto-trigger',
+  'number' => '9201',
+  'description' => 'Barcode label auto trigger',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'bc',
+  'weight' => 1
+ ];
  public static $association_level_a  = [
   'SITE' => 'Site',
   'BUSINESS' => 'Business Org',

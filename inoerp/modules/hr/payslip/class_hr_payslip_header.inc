@@ -1,5 +1,18 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * hr_payroll_payment_method
+ *  Payslip is generated for each employee after payroll process r
+ * Contains all the conversion information, such as - hr_payslip_header_id, hr_payroll_process_id , period_name_id, pay_date, etc
+ */
 class hr_payslip_header extends dbObject {
 
  public static $table_name = "hr_payslip_header";
@@ -7,6 +20,18 @@ class hr_payslip_header extends dbObject {
  public static $dependent_classes = ['hr_payslip_line'];
  public static $key_column = 'employee_id';
  public static $module = "hr";
+ public static $system_info = [
+  'name' => 'HR Payslip',
+  'number' => '3304',
+  'description' => 'Payslip',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'dependent_class' => array('hr_payslip_line'),
+  'primary_entity_cb' => '',
+  'module_name' => 'hr',
+  'weight' => 16
+ ];
  public $field_a = [
   'hr_payslip_header_id',
   'hr_payroll_process_id',
@@ -87,7 +112,7 @@ class hr_payslip_header extends dbObject {
   $result = self::find_by_sql($sql);
   return !empty($result) ? ($result) : false;
  }
- 
+
  public static function find_by_employeeId($employee_id) {
   $sql = " SELECT * 
        FROM hr_payslip_header eeh 
@@ -96,8 +121,8 @@ class hr_payslip_header extends dbObject {
   $result = self::find_by_sql($sql);
   return !empty($result) ? ($result) : false;
  }
- 
-  public static function find_by_employeeId_periodNameId($employee_id,$period_name_id) {
+
+ public static function find_by_employeeId_periodNameId($employee_id, $period_name_id) {
   $sql = " SELECT * 
        FROM hr_payslip_header eeh 
        WHERE eeh.employee_id = '{$employee_id}'    AND  period_name_id= '{$period_name_id}'
@@ -107,8 +132,7 @@ class hr_payslip_header extends dbObject {
   return !empty($result) ? array_pop($result) : false;
  }
 
- 
-   public static function find_headerAmount_by_headerId($hr_payslip_header_id) {
+ public static function find_headerAmount_by_headerId($hr_payslip_header_id) {
   $sql = " SELECT SUM(hpl.element_value) as header_amount
        FROM hr_payslip_header eeh ,
        hr_payslip_line hpl
@@ -118,6 +142,7 @@ class hr_payslip_header extends dbObject {
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result[0]->header_amount : false;
  }
+
 }
 
 //end of bom class

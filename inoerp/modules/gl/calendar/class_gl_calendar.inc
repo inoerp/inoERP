@@ -1,11 +1,36 @@
 <?php
+/**
+ * inoERP - Version 0.1.1
+ *
+ * @copyright 2014 Nishit R. Das
+ * @license   https://www.mozilla.org/MPL/2.0/
+ * @link       http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * gl_calendar
+ * gl_calendar is used for financial accounting
+ * Contains all the gl_calendar information, such as - name, description , calendar_type, year,
+ * 
+ */
 class gl_calendar extends dbObject {
 
  public static $table_name = "gl_calendar";
  public static $module = "gl";
  public static $primary_column = "gl_calendar_id";
  public static $key_column = "name";
+    public static $system_info = [
+  'name' => 'Calendar',
+  'number' => '1102',
+  'description' => 'General Ledger Calendar',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'gl',
+  'weight' => 2
+ ];
  public $fields_inForm_notInDataBase = [
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [

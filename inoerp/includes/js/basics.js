@@ -25,6 +25,20 @@ function animateCycle()
 
 }
 
+function arrow_menu(){
+  //menu arrow
+ $("#header_top .menu li > ul").each(function(){
+    var parent = $(this).parent("li");
+    parent.addClass("parent").find("> a").append("<span class='arrow-down'></span>");
+  });
+  
+  //Add the parent class and arrow to third tier sub-menu
+  $("#header_top .menu li > ul li > ul").each(function(){
+    var parent = $(this).parent("li");
+    parent.addClass("parent").find("> a span").removeClass("arrow-down").addClass("arrow-right");
+  });
+}
+
 function include_once(src) {
  var all_scripts = $(document).find('script');
  if (all_scripts) {
@@ -191,7 +205,7 @@ function getBlocks() {
    $('#header_top_container').css('display', 'block');
   }
   treeView();
-
+arrow_menu();
  }).fail(function () {
   $('#content_left').html('');
  });
@@ -2964,6 +2978,8 @@ $(document).ready(function () {
   void window.open('select.php?class_name=extn_contact', '_blank',
           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
+ 
+
 });
 function toUpperCase(str)
 {

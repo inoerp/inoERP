@@ -1,11 +1,37 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+
+/**
+ * hr_leave_balance
+ * Employee leave balance information
+ * Contains all the hr_job information, such as - leave_type, employee_id , total_available, etc
+ * 
+ */
  class hr_leave_balance extends dbObject {
 
   public static $table_name = "hr_leave_balance";
   public static $module = "hr";
   public static $primary_column = "hr_leave_balance_id";
   public static $key_column = "employee_id";
+   public static $system_info = [
+  'name' => 'Leave Balance',
+  'number' => '3202',
+  'description' => 'HR Leave Balance',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'hr',
+  'weight' => 11
+ ];
   public $field_a = [
    'hr_leave_balance_id',
    'employee_id',

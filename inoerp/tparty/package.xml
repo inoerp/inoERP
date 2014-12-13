@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>Image_Barcode2</name>
+ <channel>pear.php.net</channel>
+ <summary>Barcode generation</summary>
+ <description>With Image_Barcode2 class you can create a barcode
+  representation of a given string.
+
+  This class uses GD function because of this the generated graphic can be any of
+  GD supported supported image types.</description>
+ <lead>
+  <name>Marcelo Subtil Marcal</name>
+  <user>msmarcal</user>
+  <email>msmarcal@php.net</email>
+  <active>no</active>
+ </lead>
+ <lead>
+  <name>Daniel O&apos;Connor</name>
+  <user>doconnor</user>
+  <email>clockwerx@php.net</email>
+  <active>yes</active>
+ </lead>
+ <lead>
+  <name>Pavel Dyakonov</name>
+  <user>gemorroj</user>
+  <email>gemorroj@php.net</email>
+  <active>yes</active>
+ </lead>
+ <date>2013-02-25</date>
+ <time>12:32:32</time>
+ <version>
+  <release>0.2.3</release>
+  <api>0.2.3</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>beta</api>
+ </stability>
+ <license uri="http://www.php.net/license">PHP License</license>
+ <notes>
+Bug #19835 Fixed package
+ </notes>
+ <contents>
+  <dir baseinstalldir="/" name="/">
+   <file baseinstalldir="/" md5sum="62714a47cbc3d35f483be34324197936" name="/docs/ChangeLog" role="doc" />
+   <file baseinstalldir="/" md5sum="c27a1c8b14ee9d792819abafbfa20c85" name="/docs/Readme.txt" role="doc" />
+   <file baseinstalldir="/" md5sum="d274880933d54b873c9589087766c124" name="/docs/examples/barcode_img.php" role="doc" />
+   <file baseinstalldir="/" md5sum="47488962a6713fae1a56959dcd27d858" name="/docs/examples/test-image-barcode.php" role="doc" />
+   <file baseinstalldir="/" md5sum="430d3cbb521f20c18db7fd55739539b5" name="/Image/Barcode2.php" role="php" />
+   <file baseinstalldir="/" md5sum="1192b8a53c3e07de9768cb3fdf84cd1f" name="/Image/Barcode2/Common.php" role="php" />
+   <file baseinstalldir="/" md5sum="7edeac1655f949e31222e5dbe035e8a6" name="/Image/Barcode2/Driver.php" role="php" />
+   <file baseinstalldir="/" md5sum="fe4788592cfbc7fb0280d6beb1d2b2b9" name="/Image/Barcode2/DualHeight.php" role="php" />
+   <file baseinstalldir="/" md5sum="cd06591f1e8ade75a8999c44ad57db90" name="/Image/Barcode2/DualWidth.php" role="php" />
+   <file baseinstalldir="/" md5sum="a245e697341d4d3c0cce3593e075bb13" name="/Image/Barcode2/Exception.php" role="php" />
+   <file baseinstalldir="/" md5sum="169de39ec13dc21f7e485c9ece549851" name="/Image/Barcode2/Writer.php" role="php" />
+   <file baseinstalldir="/" md5sum="72063e89e31b2ad1b964e71ba26c496e" name="/Image/Barcode2/Driver/Code39.php" role="php" />
+   <file baseinstalldir="/" md5sum="112fbd79e07dc22297f76c26fb31fccc" name="/Image/Barcode2/Driver/Code128.php" role="php" />
+   <file baseinstalldir="/" md5sum="ab7ce83803ebbb0591dbed7d87e61fe6" name="/Image/Barcode2/Driver/Ean8.php" role="php" />
+   <file baseinstalldir="/" md5sum="6bd8cf618ef67f23f7631c6a985939ee" name="/Image/Barcode2/Driver/Ean13.php" role="php" />
+   <file baseinstalldir="/" md5sum="3733d8f9899474946149536cd80e6a3c" name="/Image/Barcode2/Driver/Int25.php" role="php" />
+   <file baseinstalldir="/" md5sum="15b225cdf94e4b620b8dceec8770e6a8" name="/Image/Barcode2/Driver/Postnet.php" role="php" />
+   <file baseinstalldir="/" md5sum="0202a6066ea3c5785f0b84a15e69d855" name="/Image/Barcode2/Driver/Upca.php" role="php" />
+   <file baseinstalldir="/" md5sum="63f4db95ec6f7589b98f0c1cc1dd6cfa" name="/Image/Barcode2/Driver/Upce.php" role="php" />
+   <file baseinstalldir="/" md5sum="1abec4811830a7cbfcd357eaf2089964" name="/tests/Image_Barcode2Test.php" role="test" />
+   <file baseinstalldir="/" md5sum="4599d66d9092baec4286443e1a6d678e" name="build.xml" role="data" />
+   <file baseinstalldir="/" md5sum="e9d89152910001df5be865aa37ab9733" name="phpunit.xml" role="data" />
+   <file baseinstalldir="/" md5sum="fb2d18e736a93085849de2fa293203c6" name="README" role="data" />
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.0.1</min>
+   </php>
+   <pearinstaller>
+    <min>1.5.6</min>
+   </pearinstaller>
+   <extension>
+    <name>gd</name>
+   </extension>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
+  <release>
+   <version>
+    <release>1.0.2</release>
+    <api>1.0.2</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2005-05-24</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>
+- Added UPC-A barcode rendering (thanks to Jeffrey K. Brown)
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.3</release>
+    <api>1.0.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2005-05-30</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>
+- Added Code128 barcode rendering (thanks to Jeffrey K. Brown)
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.4</release>
+    <api>1.0.4</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2005-06-03</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>
+- Added PostNet barcode rendering (thanks to Josef &quot;Jeff&quot; Sipek)
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.1.0</release>
+    <api>1.1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-12-13</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>
+QA bugfix release:
+- Fixing #4597: PEAR_INSTALL_DIR constant might be empty
+- Fixing #4755: $barcodepath not found in Image/Barcode.php
+- Fixing #6637: error don&apos;t declare
+- Fixing #7693: Wrong include path
+- Fixing #7851: Needs flag to supress headers or an option to redirect output to a variable.
+- Fixing #8301: Not compatible with Safe Mode
+- Fixing #8813: image can&apos;t be saved to filesystem
+
+Image_Barcode::draw has an optional fourth parameter determining if
+the GD image resource should be returned or output to the browser.
+This breaks backwards compatibility for people using drivers directly
+which is always a big NO-NO. If your application breaks, it&apos;s your chance
+to use the class properly.
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.1.1</release>
+    <api>1.1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2010-10-25</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>
+QA release
+Bug #13794     Some numbers produce malformed &quot;UPC A&quot; barcodes
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.1.0</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2011-12-10</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>
+QA release
+Bug #13794     Some numbers produce malformed &quot;UPC A&quot; barcodes
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.2.0</release>
+    <api>0.2.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2012-03-06</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>
+Add an adapater
+PHPCS
+Introduce accessors
+Increased use of Image_Barcode2_Exception
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.2.1</release>
+    <api>0.2.1</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2012-04-15</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>
+Fixes on rendering PostNet, EAN 8 and EAN 13 barcodes.
+Renamed package files. This fixes Code39 on *nix platforms.
+Updated barcode validators.
+Updated examples.
+PHPCS
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.2.3</release>
+    <api>0.2.3</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2013-02-25</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>
+Bug #19835 Fixed package
+   </notes>
+  </release>
+ </changelog>
+</package>

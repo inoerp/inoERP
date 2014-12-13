@@ -1,4 +1,20 @@
 <?php
+/**
+ * inoERP 
+ *
+ *Version 0.1.1
+ *
+ * @copyright 2014 Nishit R. Das
+ * @license   https://www.mozilla.org/MPL/2.0/
+ * @link       http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+
+/**
+ * PO_HEADER_CLASS
+ * Contains all the po header level information, such as - Supplier, Document Type, Currency, Addresses
+ * Same for standard, blanket & planned POs
+ */
 
 class po_header extends dbObject {
 
@@ -14,9 +30,9 @@ class po_header extends dbObject {
   'name' => 'Purchasing',
   'number' => '2212',
   'description' => 'Create & Mainten Purchase Order & Related documents/transactions',
-  'version' => '1.1.1.3',
+  'version' => '0.1.1',
   'db_version' => '1001',
-  'mod_version' => '1.1.x-1.1',
+  'mod_version' => '1.1.1',
   'dependent_class' => array('po_line', 'po_detail'),
   'primary_entity_cb' => '',
   'module_name' => 'po',

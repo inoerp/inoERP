@@ -1,11 +1,35 @@
 <?php
+/**
+ * inoERP - Version 0.1.1
+ *
+ * @copyright 2014 Nishit R. Das
+ * @license   https://www.mozilla.org/MPL/2.0/
+ * @link       http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * fp_planning_control
+ * Setups for the forecast & planning activities
+ * 
+ */
  class fp_planning_control extends dbObject {
 
   public static $table_name = "fp_planning_control";
   public static $primary_column = "fp_planning_control_id";
   public static $key_column = 'org_id';
   public static $module = "fp";
+   public static $system_info = [
+  'name' => 'Planning Control',
+  'number' => '2507',
+  'description' => 'Planning Control',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+   'primary_entity_cb' => '',
+  'module_name' => 'fp',
+  'weight' => 7
+ ];
   public $field_a = [
    'fp_planning_control_id',
    'org_id',

@@ -1,5 +1,20 @@
 <?php
+/**
+ * inoERP - Version 0.1.1
+ *
+ * @copyright 2014 Nishit R. Das
+ * @license   https://www.mozilla.org/MPL/2.0/
+ * @link       http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * bom_standard_operation
+ * Used for creating standard operations for make items to help the process of routing creation
+ * Routing specifies the flow of matrial in the production line
+ * Contains all the bom_overhead information, such as - effective_date, description , item_id_m, org_id
+ * 
+ */
  class bom_header extends dbObject {
 
   public static $table_name = "bom_header";
@@ -9,15 +24,15 @@
   public static $module = "bom";
   public static $system_info = [
    'name' => 'BOM',
-   'number' => '2410',
+   'number' => '2401',
    'description' => 'Define and mainten bill of materials',
-   'version' => '1.1.1.3',
-   'db_version' => '1001',
-   'mod_version' => '1.1.x-1.1',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
    'dependent_class' => array('bom_line', 'bom_all_v'),
    'primary_entity_cb' => '',
    'module_name' => 'bom',
-   'weight' => '10'
+   'weight' => '1'
   ];
   public $field_a = [
    'bom_header_id',

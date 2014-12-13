@@ -1,5 +1,19 @@
 <?php
+/**
+ * inoERP - Version 0.1.1
+ *
+ * @copyright 2014 Nishit R. Das
+ * @license   https://www.mozilla.org/MPL/2.0/
+ * @link       http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * hr_element_entry_header
+ * Compensation Element defines all the compensation elements used in payslip and payroll.
+ * Contains all the hr_approval_limit_assignment information, such as - element_type, element_name , description, etc
+ * 
+ */
 class hr_element_entry_header extends dbObject {
 
  public static $table_name = "hr_element_entry_header";
@@ -8,6 +22,18 @@ class hr_element_entry_header extends dbObject {
  public static $key_column = 'hr_employee_id';
  public static $module = "hr";
  public static $js_fileName = 'modules/hr/element_entry/js/multi_select.js';
+ public static $system_info = [
+  'name' => 'Element Entry',
+  'number' => '3106',
+  'description' => 'Compensation Element Entry',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'dependent_class' => array('hr_element_entry_line'),
+  'primary_entity_cb' => '',
+  'module_name' => 'hr',
+  'weight' => 6
+ ];
  public $field_a = [
   'hr_element_entry_header_id',
   'hr_employee_id',

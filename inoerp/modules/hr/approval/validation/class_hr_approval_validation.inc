@@ -1,9 +1,35 @@
 <?php
+/**
+ * inoERP - Version 0.1.1
+ *
+ * @copyright 2014 Nishit R. Das
+ * @license   https://www.mozilla.org/MPL/2.0/
+ * @link       http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+
+/**
+ * hr_approval_validation
+ * 
+ */
 
  class hr_approval_validation extends dbObject {
 
   public static $table_name = "hr_approval_validation";
   public static $module = "hr";
+  
+   public static $system_info = [
+  'name' => 'Approval Validation',
+  'number' => '3104',
+  'description' => 'HR Approval Validation',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'hr',
+  'weight' => 4
+ ];
+   
   public $reference_key_name;
   public $reference_key_value;
   public $approving_user_id;

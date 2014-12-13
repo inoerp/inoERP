@@ -11,15 +11,15 @@
   public static $gl_journal_category = "AP_TRANSACTIONS";
   public static $system_info = [
    'name' => ' AP Transaction ',
-   'number' => '1202',
+   'number' => '1203',
    'description' => 'Create & Mainten Supplier Invoice, Debit Memo, Credit Memo, PrePayments, etc',
-   'version' => '1.1.1.3',
+   'version' => '0.1.1',
    'db_version' => '1001',
-   'mod_version' => '1.1.x-1.1',
+   'mod_version' => '1.1.1',
    'dependent_class' => array('ap_transaction_line', 'ap_transaction_detail', 'ap_transaction_v'),
    'primary_entity_cb' => '',
    'module_name' => 'ap',
-   'weight' => 2
+   'weight' => 3
   ];
   public $checkbox = [
 //		 "rev_enabled_cb"

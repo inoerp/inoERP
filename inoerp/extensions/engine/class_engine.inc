@@ -45,10 +45,12 @@ class engine extends dbObject {
  ];
  public $checkbox = [
   'primary_entity_cb',
-  'uninstall_cb'
+  'uninstall_cb',
+  'update_db_cb'
  ];
  public $fields_inForm_notInDataBase = [
   "uninstall_cb",
+  'update_db_cb'
  ];
  public $search = [
   '_update_path' => 'form.php?class_name=engine&mode=9',
@@ -73,6 +75,7 @@ class engine extends dbObject {
  public $last_update_by;
  public $last_update_date;
  public $uninstall_cb;
+ public $update_db_cb;
 
  public function _before_save() {
 //	pa($this);

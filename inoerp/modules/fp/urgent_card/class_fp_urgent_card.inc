@@ -1,4 +1,19 @@
 <?php
+/**
+ * inoERP - Version 0.1.1
+ *
+ * @copyright 2014 Nishit R. Das
+ * @license   https://www.mozilla.org/MPL/2.0/
+ * @link       http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+
+/**
+ * fp_urgent_card
+ * Used for kanban /minmax board
+ * Contains all the fp_mds_header information, such as - fp_urgent_card_id, card_details , created_by etc
+ * 
+ */
 
 class fp_urgent_card extends dbObject {
 
@@ -6,6 +21,18 @@ class fp_urgent_card extends dbObject {
  public static $primary_column = "fp_urgent_card_id";
  public static $key_column = 'card_details';
  public static $module = "fp";
+  public static $system_info = [
+  'name' => 'Urgent Card',
+  'number' => '2509',
+  'description' => 'FP Urgent Card',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'dependent_class' => array('fp_mds_line'),
+  'primary_entity_cb' => '',
+  'module_name' => 'fp',
+  'weight' => 9
+ ];
  public $field_a = [
   'fp_urgent_card_id',
   'card_details',

@@ -1,12 +1,37 @@
 <?php
+/**
+ * inoERP - Version 0.1.1
+ *
+ * @copyright 2014 Nishit R. Das
+ * @license   https://www.mozilla.org/MPL/2.0/
+ * @link       http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * hr_employee
+ * All employee information
+ * Contains all the hr_approval_limit_assignment information, such as - hr_employee_id, identification_id , last_name, etc
+ * 
+ */
 class hr_employee extends dbObject {
-
  public static $table_name = "hr_employee";
  public static $primary_column = "hr_employee_id";
  public static $key_column = 'last_name';
  public static $dependent_classes = ['hr_employee_education', 'hr_employee_experience', 'hr_employee_termination'];
  public static $module = "hr";
+  public static $system_info = [
+  'name' => 'Employee',
+  'number' => '3107',
+  'description' => 'HR Employee',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'dependent_class' => array('hr_approval_limit_line'),
+  'primary_entity_cb' => '',
+  'module_name' => 'hr',
+  'weight' => 7
+ ];
  public static $source_type_a = [
   'MANUAL' => 'Manual',
   'IMPORT' => 'Import'

@@ -6,6 +6,17 @@ class bc_label_request extends dbObject {
  public static $primary_column = "bc_label_request_id";
  public static $key_column = "association_level_value";
  public static $module = "sys";
+ public static $system_info = [
+  'name' => 'Label Requst',
+  'number' => '9203',
+  'description' => 'Barcode label request',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'bc',
+  'weight' => 3
+ ];
  public $field_a = [
   'bc_label_request_id',
   'transaction_type_id',
@@ -98,14 +109,14 @@ class bc_label_request extends dbObject {
 <!DOCTYPE labels SYSTEM "label.dtd">';
   $xml_content .= '<labels _FORMAT="' . $bc_lf->format_name . '" _QUANTITY="' . $this->quanity . '" _PRINTERNAME="SNG_ZM400_1" _JOBNAME="LBL512027">
 <label>';
-  
+
 //  pa($data_obj);
 
   foreach ($bc_lfl_i as $line) {
    $sys_field_name = $line->sys_field_name;
 //   echo " <br> $sys_field_name ";
    $xml_content .= '<variable name = "' . $line->field_name . '">';
-   $xml_content .= !empty($data_obj->$sys_field_name) ? $data_obj->$sys_field_name : '';
+   $xml_content .=!empty($data_obj->$sys_field_name) ? $data_obj->$sys_field_name : '';
    $xml_content .= '</variable>';
   }
   $xml_content .= '</label>

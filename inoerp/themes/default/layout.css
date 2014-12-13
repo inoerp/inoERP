@@ -39,7 +39,7 @@ font-size: 12px;
 /* Header Values
 */
 #header_top_container{
- height: 30px;
+ height: 32px;
  background: rgb(125,126,125); /* Old browsers */
  background: -moz-linear-gradient(top,  rgba(125,126,125,1) 0%, rgba(14,14,14,1) 100%); /* FF3.6+ */
  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,126,125,1)), color-stop(100%,rgba(14,14,14,1))); /* Chrome,Safari4+ */
@@ -65,6 +65,7 @@ font-size: 12px;
  border: 0px 1px 5px 1px solid;
  border-radius : 0px 0px 10px 10px;
  border-color: hsla(210,54%,20%,.15) hsla(210,54%,20%,.17) hsla(210,54%,20%,.2);
+ 
 }
 
 #header .logo{

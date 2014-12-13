@@ -38,7 +38,7 @@ font-size: 12px;
 #header_top_container{
   width: 100%;
   float: right;
- height: 30px;
+  height: 32px;
  background: rgb(125,126,125); /* Old browsers */
  background: -moz-linear-gradient(top,  rgba(125,126,125,1) 0%, rgba(14,14,14,1) 100%); /* FF3.6+ */
  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,126,125,1)), color-stop(100%,rgba(14,14,14,1))); /* Chrome,Safari4+ */
@@ -946,9 +946,9 @@ span.acField_withSearchImage {
 }
 
 ul#form_top_image{
- position: absolute; top: -6px; right: 5px; 
+ position: absolute; top: -6px; 
  z-index : 999;
- margin-left: 650px;
+ margin-left: 725px;
 }
 
 #content_content_bottom{

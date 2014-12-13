@@ -7,6 +7,17 @@ class inv_abc_assignment_header extends dbObject {
  public static $dependent_classes = ['inv_abc_assignment_line'];
  public static $key_column = "abc_assignment_name";
  public static $module = "inv";
+  public static $system_info = [
+  'name' => 'Item',
+  'number' => '2101',
+  'description' => 'Item',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'fp',
+  'weight' => 1
+ ];
  public static $assignment_action_a = [
    'ASSIGN_ITEMS' => 'Assign Items',
    'REMOVE_ITEMS' => 'Remove Items',

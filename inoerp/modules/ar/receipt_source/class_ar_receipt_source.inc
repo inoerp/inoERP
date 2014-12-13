@@ -6,6 +6,17 @@ class ar_receipt_source extends dbObject {
  public static $primary_column = "ar_receipt_source_id";
  public static $key_column = 'receipt_source';
  public static $module = "ar";
+  public static $system_info = [
+  'name' => 'AR Receipt Source',
+  'number' => '1305',
+  'description' => 'Receipt Source',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'ar',
+  'weight' => 5
+ ];
  public static $template_type = [
 		 'header_tab' => 1,
 		 'line_tab' => 2,

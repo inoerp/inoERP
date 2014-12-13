@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<phpunit verbose="true">
+	<logging>
+		<log type="coverage-html" target="build/coverage" title="Image_Barcode2" charset="UTF-8" yui="true" highlight="true" lowUpperBound="35" highLowerBound="70"/>
+		<log type="coverage-clover" target="build/logs/clover.xml"/>
+		<log type="junit" target="build/logs/junit.xml" logIncompleteSkipped="false" title="Image_Barcode2"/>
+	</logging>
+	<filter>
+		<blacklist>
+			<directory suffix=".php">/usr/share/php</directory>
+			<directory suffix=".php">tests/unit/</directory>
+		</blacklist>
+	</filter>
+	<testsuites>
+		<testsuite>
+			<directory>tests</directory>
+			<file>*Test.php</file>
+		</testsuite>
+	</testsuites>
+	<php>
+		<includePath>lib/</includePath>
+	</php>
+</phpunit>

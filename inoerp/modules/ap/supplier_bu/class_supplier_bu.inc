@@ -7,6 +7,18 @@ class supplier_bu extends dbObject {
  public static $dependent_classes = ['supplier', 'supplier_site'];
  public static $key_column = 'supplier_id';
  public static $module = "ap";
+   public static $system_info = [
+   'name' => 'Supplier BU ',
+   'number' => '1202',
+   'description' => 'Supplier Business Unit Association',
+   'version' => '0.1.1',
+   'db_version' => '1001',
+   'mod_version' => '1.1.1',
+//   'dependent_class' => array('ap_transaction_line', 'ap_transaction_detail', 'ap_transaction_v'),
+   'primary_entity_cb' => '',
+   'module_name' => 'ap',
+   'weight' => 2
+  ];
  public $field_a = [
 		 "supplier_id",
 		 "org_id",

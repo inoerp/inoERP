@@ -103,9 +103,9 @@
  require_once(INC_GL . DS . "balance" . DS . "class_gl_balance_v.inc");
  require_once(INC_GL . DS . "balance" . DS . "class_gl_balance.inc");
  require_once(INC_MODULE . DS . "gl" . DS . "balance" . DS . "class_gl_unposted_balance_v.inc");
- require_once(INC_GL . DS . "payment_term" . DS . "class.payment_term.inc");
- require_once(INC_GL . DS . "payment_term" . DS . "class.payment_term_schedule.inc");
- require_once(INC_GL . DS . "payment_term" . DS . "class.payment_term_discount.inc");
+ require_once(INC_GL . DS . "payment_term" . DS . "class_payment_term.inc");
+ require_once(INC_GL . DS . "payment_term" . DS . "class_payment_term_schedule.inc");
+ require_once(INC_GL . DS . "payment_term" . DS . "class_payment_term_discount.inc");
  require_once(INC_MODULE . DS . "gl" . DS . "currency_conversion" . DS . "class_gl_currency_conversion.inc");
  require_once(INC_INV . DS . "item" . DS . "class.item.inc");
  require_once(INC_MODULE . DS . "inv" . DS . "item" . DS . "class_ra_item.inc");
@@ -280,9 +280,9 @@
  require_once(INC_MODULE . DS . "hr" . DS . "payslip" . DS ."user" . DS . "class_hr_payslip_user.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "payroll" . DS . "payment_method" . DS . "class_hr_payroll_payment_method.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "payroll" . DS . "payment_method" . DS . "class_hr_payroll_payment_method.inc");
- require_once(INC_MODULE . DS . "hr" . DS . "payroll" . DS . "class_payroll.inc");
- require_once(INC_MODULE . DS . "hr" . DS . "payroll" . DS . "class_payroll_schedule.inc");
- require_once(INC_MODULE . DS . "hr" . DS . "payroll" . DS . "process" . DS . "class_payroll_process.inc");
+ require_once(INC_MODULE . DS . "hr" . DS . "payroll" . DS . "class_hr_payroll.inc");
+ require_once(INC_MODULE . DS . "hr" . DS . "payroll" . DS . "class_hr_payroll_schedule.inc");
+ require_once(INC_MODULE . DS . "hr" . DS . "payroll" . DS . "process" . DS . "class_hr_payroll_process.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "leave" . DS . "type" . DS . "class_hr_leave_type.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "leave" . DS . "balance" . DS . "class_hr_leave_balance.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "leave" . DS . "balance" . DS . "user" . DS . "class_hr_leave_balance_user.inc");

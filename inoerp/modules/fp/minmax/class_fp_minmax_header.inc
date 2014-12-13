@@ -1,5 +1,19 @@
 <?php
+/**
+ * inoERP - Version 0.1.1
+ *
+ * @copyright 2014 Nishit R. Das
+ * @license   https://www.mozilla.org/MPL/2.0/
+ * @link       http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * fp_minmax_header
+ * Used for min max planning
+ * Contains all the fp_mds_header information, such as - mds_name, description , fp_source_list_header_id, org_id, status
+ * 
+ */
 class fp_minmax_header extends dbObject {
 
  public static $table_name = "fp_minmax_header";
@@ -7,6 +21,18 @@ class fp_minmax_header extends dbObject {
  public static $dependent_classes = ['fp_minmax_line'];
  public static $key_column = 'plan_name';
  public static $module = "fp";
+  public static $system_info = [
+  'name' => 'Min Max',
+  'number' => '2505',
+  'description' => 'Min Max Planning & Size calculation',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'dependent_class' => array('fp_minmax_line','fp_minmax_demand','fp_minmax_demand_v','fp_minmax_order_v','fp_minmax_suggestion_v'),
+  'primary_entity_cb' => '',
+  'module_name' => 'fp',
+  'weight' => 5
+ ];
  public $field_a = [
 		 'fp_minmax_header_id',
 		 'org_id',

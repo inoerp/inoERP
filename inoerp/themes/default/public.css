@@ -376,7 +376,6 @@ ul.commentRecord{
  display: block;
  border: 1px solid;
  margin : 30px 10px;
- width: 100%;
  padding: 5px;
  background: #f6f6f6; /* Old browsers */
  background: -moz-linear-gradient(left,  #f6f6f6 0%, #e1e1e1 2%, #e1e1e1 20%, #f1f1f1 20%, #ffffff 100%); /* FF3.6+ */
@@ -396,7 +395,7 @@ ul.commentRecord li{
 ul.commentRecord li ul.header{
  display: block;
  padding: 5px 5px;
- width: 180px;
+ width: 140px;
  float: left;
 }
 
@@ -928,7 +927,7 @@ ul.inline, ul.inline li{
 
 ul.form_top li, ul#form_top_image li{
  display:inline;
- margin-right : 20px;
+ margin-right : 15px;
 }
 
 #form_top_image a.clickable {
@@ -1251,4 +1250,25 @@ ul.header_field li label{
     width: 100px;
     text-align: right;
     padding-right: 5px;        
+}
+
+/*CSS Arrows*/
+.arrow-down {
+    width: 0; 
+    height: 0; 
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-top: 6px solid rgba(110, 237, 79, 0.96);;
+        font-size:1px;
+    margin-left: 5px;
+}
+
+.arrow-right {
+    width: 0; 
+    height: 0; 
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-left: 6px solid rgba(110, 237, 79, 0.96);;
+    font-size:1px;
+    margin-left: 5px;
 }

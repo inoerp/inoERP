@@ -6,7 +6,7 @@
 	 <div id="content">
 		<div id="main">
 		 <div id="structure">
-			<div id="contents">
+			<div id="view_content">
 			 <!--    START OF FORM HEADER-->
 			 <div class="error"></div><div id="loading"></div>
 			 <?php echo (!empty($show_message)) ? $show_message : ""; ?> 

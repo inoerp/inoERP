@@ -1,5 +1,20 @@
 <?php
 
+/**
+ * inoERP - Version 0.1.1
+ *
+ * @copyright 2014 Nishit R. Das
+ * @license   https://www.mozilla.org/MPL/2.0/
+ * @link       http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+
+/**
+ * cc_co_process_flow_action : Change Control Process Flow Actions
+ * Change Control Process Flow Actions is used to track all the actions taken.
+ * Contains all the cc_co_header information, such as - change_number, description , template_id, org_id, change_type
+ * 
+ */
 class cc_co_process_flow_action extends dbObject {
 
  public static $table_name = "cc_co_process_flow_action";
@@ -7,6 +22,18 @@ class cc_co_process_flow_action extends dbObject {
  public static $parent_primary_column = "cc_co_header_id";
  public static $key_column = "pf_action_type";
  public static $module = "sys";
+  public static $system_info = [
+  'name' => 'CC Action',
+  'number' => '9302',
+  'description' => 'Change Control Process Flow Actions',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'cc',
+  'weight' => '2'
+ ];
+  
  public static $pf_action_type_a = [
   'APPROVAL' => 'Approval',
   'INFORMATION' => 'Information',

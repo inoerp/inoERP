@@ -7,6 +7,18 @@ class bc_label_format_header extends dbObject {
  public static $dependent_classes = ['bc_label_format_line'];
  public static $key_column = 'format_name';
  public static $module = "bc";
+ public static $system_info = [
+  'name' => 'BC Auto-trigger',
+  'number' => '9202',
+  'description' => 'Barcode label format',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'dependent_class' => array('bc_label_format_line'),
+  'primary_entity_cb' => '',
+  'module_name' => 'bc',
+  'weight' => 2
+ ];
  public $field_a = [
   'bc_label_format_header_id',
   'label_type',

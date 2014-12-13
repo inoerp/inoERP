@@ -1,5 +1,19 @@
 <?php
-//namespace modules\hr\position;
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+
+/**
+ * hr_position
+ * Employee positions.
+ * Contains all the conversion information, such as - position_name, job_id , org_id, etc
+ * 
+ */
  
  class hr_position extends dbObject {
 
@@ -7,7 +21,18 @@
   public static $primary_column = "hr_position_id";
   public static $key_column = 'position_name';
   public static $module = "hr";
-  public $field_a = [
+   public static $system_info = [
+  'name' => 'Approval Limit',
+  'number' => '3111',
+  'description' => 'HR Approval Limit',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'hr',
+  'weight' => 20
+ ];
+ public $field_a = [
    'hr_position_id',
    'position_name',
    'job_id',

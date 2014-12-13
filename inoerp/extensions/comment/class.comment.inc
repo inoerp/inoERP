@@ -284,9 +284,9 @@
      }
      $comment_string .= '<li class="creation_date">' . $records->creation_date . '</li>';
      if ($allow_content_update) {
-      $comment_string .= '<li class="delete_update"><button name="delete_button" class="delete_button" value="' .
+      $comment_string .= '<li class="delete_update"><button name="delete_button" class="delete_button button " value="' .
         $records->comment_id . '" >Delete</button>';
-      $comment_string .= '<button name="update_button" class="update_button" value="' .
+      $comment_string .= '<button name="update_button" class="update_button button" value="' .
         $records->comment_id . '" >Update</button> </li>';
      }
      $comment_string .= '</ul>';

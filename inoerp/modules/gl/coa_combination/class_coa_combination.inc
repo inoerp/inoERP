@@ -1,5 +1,19 @@
 <?php
+/**
+ * inoERP - Version 0.1.1
+ *
+ * @copyright 2014 Nishit R. Das
+ * @license   https://www.mozilla.org/MPL/2.0/
+ * @link       http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * coa_combination
+ * chart of account combinations defines valid accounting combinations available for transactions
+ * Contains all the coa_combination information, such as - coa_id, coa_structure_id , all fields
+ * 
+ */
  class coa_combination extends dbObject {
 
   public static $table_name = "coa_combination";
@@ -7,6 +21,17 @@
   public static $primary_column = "coa_combination_id";
   public static $key_column = "combination";
   public static $module = "gl";
+   public static $system_info = [
+  'name' => 'Combination',
+  'number' => '1104',
+  'description' => 'Chart Of Account Combinations',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'gl',
+  'weight' => 4
+ ];
   public $field_a = ['coa_combination_id',
    'coa_id',
    'coa_structure_id',

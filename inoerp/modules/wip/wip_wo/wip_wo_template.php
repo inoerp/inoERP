@@ -24,21 +24,21 @@
           <div class="tabContainer">
            <div id="tabsHeader-1" class="tabContent">
             <div class="large_shadow_box"> 
-             <ul class="column five_column">
+             <ul class="column header_field">
               <li>
                <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="wip_wo_header_id select_popup clickable">
-                WO Header Id : </label>
+                WO Header Id</label>
                <?php echo $f->text_field_dsr('wip_wo_header_id'); ?>
                <a name="show" class="show wip_wo_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
               </li>
-              <li><label>Inventory (1): </label>
+              <li><label>Inventory (1)</label>
                <?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly); ?>
               </li>
-              <li><label>WO Number : </label> <?php $f->text_field_d('wo_number', 'primary_column2'); ?> </li>
-              <li><label>WO Type (2) : </label>
+              <li><label>WO Number</label> <?php $f->text_field_d('wo_number', 'primary_column2'); ?> </li>
+              <li><label>WO Type (2)</label>
                <?php echo form::select_field_from_object('wo_type', wip_wo_header::wip_wo_type(), 'option_line_code', 'option_line_value', $$class->wo_type, 'wo_type', $readonly, 'wo_type'); ?>
               </li>
-              <li><label>Accounting Group (3) : </label>
+              <li><label>Accounting Group</label>
                <?php echo $f->select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_orgId($$class->org_id), 'wip_accounting_group_id', 'wip_accounting_group', $$class->wip_accounting_group_id, 'wip_accounting_group_id', '', 1, 'readonly1'); ?>
 
               </li>
@@ -48,16 +48,16 @@
                <?php echo $f->hidden_field_withId('processing_lt', $$class->processing_lt); ?>
                <?php $f->text_field_dm('item_number', 'select_item_number'); ?>
               </li>
-              <li><label>Revision : </label>
+              <li><label>Revision</label>
                <?php echo $f->select_field_from_object('revision_name', $revision_name_a, 'revision_name', 'revision_name', $$class->revision_name, 'revision_name', 'small'); ?>
               </li>
-              <li><label>Description: </label>
+              <li><label>Description</label>
                <?php $f->text_field_d('item_description'); ?>
               </li>
-              <li><label>UOM : </label>
+              <li><label>UOM</label>
                <?php echo $f->select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom_id', 'uom_id', '', $readonly1); ?>
               </li>
-              <li><label>Status : </label>                      
+              <li><label>Status</label>                      
                <span class="button"><?php echo!empty($$class->wo_status) ? $$class->wo_status : ""; ?></span>
               </li>
              </ul>

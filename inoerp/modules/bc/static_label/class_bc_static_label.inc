@@ -6,6 +6,17 @@ class bc_static_label extends dbObject {
  public static $primary_column = "bc_static_label_id";
  public static $key_column = "label_type";
  public static $module = "bc";
+  public static $system_info = [
+  'name' => 'Static Label',
+  'number' => '9204',
+  'description' => 'Static label request',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'bc',
+  'weight' => 4
+ ];
  public static $label_type_a = [
   'GENERIC' => 'Generic',
   'ORG' => 'Organization',

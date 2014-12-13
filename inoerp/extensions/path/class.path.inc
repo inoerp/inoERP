@@ -8,47 +8,46 @@ class path extends dbObject {
  public static $key_column = "name";
 //  data base variables as stored database column name
  public $field_a = [
-   "path_id",
-   "parent_id",
-   "name",
-   "path_link",
-   "description",
-   "module_code",
-   'obj_class_name',
-   'mode',
-   "id_column_name",
-   'path_type',
-   "search_path_cb",
-   'display_weight',
-   "created_by",
-   "creation_date",
-   "last_update_by",
-   "last_update_date"
+  "path_id",
+  "parent_id",
+  "name",
+  "path_link",
+  "description",
+  "module_code",
+  'obj_class_name',
+  'mode',
+  "id_column_name",
+  'path_type',
+  "search_path_cb",
+  'display_weight',
+  "created_by",
+  "creation_date",
+  "last_update_by",
+  "last_update_date"
  ];
  public $requiredField = [
-   "name",
-   "path_link",
-   "module_code"
+  "name",
+  "path_link",
+  "module_code"
  ];
 //variables used for showing data
  public $checkbox = [
-   "search_path_cb",
+  "search_path_cb",
  ];
-
  public $initial_search = [
-   "path_id",
-   "parent_id",
-   "name",
-   "path_link",
-   "description",
-   "module_code"
+  "path_id",
+  "parent_id",
+  "name",
+  "path_link",
+  "description",
+  "module_code"
  ];
  public $number_fields = ['display_weight'];
  public $pageTitle = " Path - Find All Paths "; //page Title
  public $search = [
-   '_show_update_path' => 1,
-   '_update_action_meassge' => 'Update',
-   '_show_view_path' => 1,
+  '_show_update_path' => 1,
+  '_update_action_meassge' => 'Update',
+  '_show_view_path' => 1,
 //		 '_view_action_meassge' => 'View',
 //		 '_extra_path' => '',
  ];
@@ -70,9 +69,6 @@ class path extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
- 
-
- 
 
  Public static function path_types() {
   $option_header = option_header::find_by_name('EXT_PATH_TYPE');
@@ -91,7 +87,7 @@ class path extends dbObject {
 
  public function fullPath($value) {
   if ($value) {
-   return htmlspecialchars (HOME_URL . $value);
+   return htmlspecialchars(HOME_URL . $value);
   } else {
    return "";
   }
@@ -280,7 +276,7 @@ class path extends dbObject {
 
  public function findBy_moduleCode($module_code, $type = '') {
   $sql = " SELECT path_id from path where  module_code = '{$module_code}'"
-      . " AND (parent_id IS NULL OR parent_id = 0) ";
+   . " AND (parent_id IS NULL OR parent_id = 0) ";
   $parent_ids = $this->findFirstColumn_BySql_array($sql);
 
   $path_sql = " SELECT path_id from path WHERE module_code = '{$module_code}' ";
@@ -297,10 +293,10 @@ class path extends dbObject {
   * 2. 
   */
 
- public function indented_pathMenu($allowed_parent_path_ids, &$allowed_path_ids, $divClass='') {
+ public function indented_pathMenu($allowed_parent_path_ids, &$allowed_path_ids, $divClass = '') {
   $path = new path();
   $level = 0;
-  $allPaths = '<div class="menu"><ul class="block_menu '. $divClass.'">';
+  $allPaths = '<div class="menu"><ul class="block_menu ' . $divClass . '">';
   foreach ($allowed_parent_path_ids as $path_id) {
    $path->findBy_id($path_id);
    $url = $path->fullPath($path->path_link);
@@ -320,7 +316,7 @@ class path extends dbObject {
    $allPaths .= '</ul>';
    $allPaths .= '</li>';
   }
-    if (!empty($allowed_path_ids) && $allowed_path_ids[0] != '11') {
+  if (!empty($allowed_path_ids) && $allowed_path_ids[0] != '11') {
    $allPaths .= '<li class="parent_menu expandable">' . '<a href="' . HOME_URL . '">MISC</a>';
    $allPaths .= '<ul class="child_menu">';
    foreach ($allowed_path_ids as $path_key => $path_id) {
@@ -363,7 +359,7 @@ class path extends dbObject {
   $path_i = empty($param_a['path_i_a']) ? $this->findAll_pathId() : $param_a['path_i_a'];
   $path_parent_ids = empty($param_a['parent_id_a']) ? $this->findAll_parentPathId() : $param_a['parent_id_a'];
   $divClass = empty($param_a['divClass']) ? '' : $param_a['divClass'];
-  
+
   $allowed_path_ids_all = array_intersect($path_i, $_SESSION['allowed_path_ids']);
   $allowed_parent_path_ids = array_intersect($path_parent_ids, $_SESSION['allowed_path_ids']);
   $allowed_path_ids = array_diff($allowed_path_ids_all, $allowed_parent_path_ids);

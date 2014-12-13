@@ -1,5 +1,20 @@
 <?php
 
+/**
+ * inoERP - Version 0.1.1
+ *
+ * @copyright 2014 Nishit R. Das
+ * @license   https://www.mozilla.org/MPL/2.0/
+ * @link       http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+
+/**
+ * cc_co_header : Change Control Change Order
+ * Change control is used for any kind of document changes such as ECO, MCO, etc
+ * Contains all the cc_co_header information, such as - change_number, description , template_id, org_id, change_type
+ * 
+ */
 class cc_co_header extends dbObject {
 
  public static $table_name = "cc_co_header";
@@ -7,6 +22,18 @@ class cc_co_header extends dbObject {
  public static $dependent_classes = ['cc_co_line', 'cc_co_line_value'];
  public static $key_column = 'change_number';
  public static $module = "cc";
+ public static $system_info = [
+  'name' => 'Change Control',
+  'number' => '9301',
+  'description' => 'Change Control',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'dependent_class' => array('cc_co_line', 'cc_co_line_value'),
+  'primary_entity_cb' => '',
+  'module_name' => 'cc',
+  'weight' => '1'
+ ];
  public $field_a = [
   'cc_co_header_id',
   'org_id',
@@ -158,7 +185,7 @@ WHERE module_name = 'cc'";
    }
    $item->update_changesOnly($item->item_id);
   }
-  
+
   $co_header = new self;
   $co_header->findBy_id($coh->cc_co_header_id);
   $co_header->status = 'IMPLEMENTED';

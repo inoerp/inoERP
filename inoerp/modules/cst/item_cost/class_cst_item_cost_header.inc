@@ -1,5 +1,20 @@
 <?php
+/**
+ * inoERP 
+ *
+ * Version 0.1.1
+ *
+ * @copyright 2014 Nishit R. Das
+ * @license   https://www.mozilla.org/MPL/2.0/
+ * @link       http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * cst_item_cost_header
+ * Contains all the cst_item_cost_header information, such as - bom_cost_type, description , item_id_m, org_id
+ * 
+ */
 class cst_item_cost_header extends dbObject {
 
  public static $table_name = "cst_item_cost_header";
@@ -9,6 +24,19 @@ class cst_item_cost_header extends dbObject {
  public static $module = "cst"; //same as gl_journal_source
 // public static $js_fileName = 'modules/cst/item_cost/item_cost.js';
  public static $gl_journal_category = "CST_ADJUSTMENT";
+  public static $system_info = [
+  'name' => 'Cost',
+  'number' => '2501',
+  'description' => 'Product Cost',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'dependent_class' => array('cst_item_cost_line', 'cst_item_cost_interface'),
+  'primary_entity_cb' => '',
+  'module_name' => 'cst',
+  'weight' => 17
+ ];
+  
  public $field_a = [
 		 'cst_item_cost_header_id',
 		 'org_id',

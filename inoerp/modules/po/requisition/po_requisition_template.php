@@ -28,45 +28,39 @@
          <div class="tabContainer">
           <div id="tabsHeader-1" class="tabContent">
            <div class="large_shadow_box"> 
-            <ul class="column five_column">
+            <ul class="column header_field">
              <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="po_requisition_header_id select_popup clickable">
-               Requisition  Id : </label>
+               Requisition  Id</label>
               <?php echo $f->text_field_dr('po_requisition_header_id') ?>
               <a name="show" href="po_requisition.php?po_requisition_header_id=" class="show po_requisition_header_id">
                <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
              </li>
-             <li><label>Requisition Number : </label> <?php echo $f->text_field_d('po_requisition_number', 'primary_column2'); ?>             </li>
-             <li><label>BU Name(1) : </label>
+             <li><label>Requisition Number</label> <?php echo $f->text_field_d('po_requisition_number', 'primary_column2'); ?>             </li>
+             <li><label>BU Name(1)</label>
               <?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>
              </li>
-             <li><label>Requisition Type(2) : </label>
+             <li><label>Requisition Type(2)</label>
               <?php echo form::select_field_from_array('po_requisition_type', po_requisition_header::$po_requisition_type_a, $$class->po_requisition_type, 'po_requisition_type', '', 1, $readonly1); ?>
              </li>
              <li><?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
               <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supplier_id select_popup clickable">
-               Supplier Name : </label> 
+               Supplier Name</label> 
               <?php echo $f->text_field_D('supplier_name', 'select_supplier_name'); ?> </li>
              <li><label class="auto_complete">Supplier Number : </label> <?php $f->text_field_d('supplier_number'); ?></li>
-             <li><label>Supplier Site : </label>
+             <li><label>Supplier Site</label>
               <?php
                $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
                echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
               ?> </li>
-             <li><label>Status : </label>                      
+             <li><label>Status</label>                      
               <?php echo $f->select_field_from_object('requisition_status', po_header::po_status(), 'option_line_code', 'option_line_value', $$class->requisition_status, 'requisition_status', 'dont_copy', '', 1); ?>
              </li>
-             <li><label>Revision : </label>
+             <li><label>Revision</label>
               <?php echo form::checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?>
              </li> 
-             <li><label>Rev Number : </label>
-              <?php form::text_field_wid('rev_number'); ?>
-             </li> 
-             <li><label>Buyer : </label>
-              <?php form::text_field_wid('buyer'); ?>
-             </li> 
-             <li><label>Description : </label>
-              <?php form::text_field_wid('description'); ?>
-             </li> 
+             <li><label>Rev Number</label>  <?php form::text_field_wid('rev_number'); ?>  </li> 
+             <li><label>Buyer : </label> <?php form::text_field_wid('buyer'); ?>   </li> 
+             <li><label>Description : </label>  <?php form::text_field_wid('description'); ?> </li> 
             </ul>
            </div>
           </div>

@@ -11,10 +11,10 @@
   public static $system_info = [
    'name' => 'AP Payment',
    'number' => '1204',
-   'description' => 'Allows making payment to supplier and reimubrse employee expenses',
-   'version' => '1.1.1.3',
+   'description' => 'Allows payment to supplier and reimubrse employee expenses',
+   'version' => '0.1.1',
    'db_version' => '1001',
-   'mod_version' => '1.1.x-1.1',
+   'mod_version' => '1.1.1',
    'dependent_class' => array('ap_payment_line', 'ap_payment_interface', 'ap_payment_v'),
    'primary_entity_cb' => '',
    'module_name' => 'ap',

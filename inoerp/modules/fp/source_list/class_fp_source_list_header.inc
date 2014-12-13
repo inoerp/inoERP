@@ -7,6 +7,18 @@
   public static $dependent_classes = ['fp_source_list_line'];
   public static $key_column = 'source_list';
   public static $module = "fp";
+   public static $system_info = [
+  'name' => 'Source List',
+  'number' => '2508',
+  'description' => 'Source List',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'dependent_class' => array('fp_source_list_line'),
+  'primary_entity_cb' => '',
+  'module_name' => 'fp',
+  'weight' => 8
+ ];
   public $field_a = [
    'fp_source_list_header_id',
    'org_id',

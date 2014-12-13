@@ -1,11 +1,35 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * hr_payroll_payment_method
+ * 
+ */
  class hr_payroll_payment_method extends dbObject {
 
   public static $table_name = "hr_payroll_payment_method";
   public static $primary_column = "hr_payroll_payment_method_id";
   public static $key_column = 'payment_method';
   public static $module = "hr";
+   public static $system_info = [
+  'name' => 'HR Payment Method',
+  'number' => '3302',
+  'description' => 'HR Payroll Payment Method',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'dependent_class' => array('hr_payroll_schedule'),
+  'primary_entity_cb' => '',
+  'module_name' => 'hr',
+  'weight' => 15
+ ];
   public $field_a = [
    'hr_payroll_payment_method_id',
    'ledger_id',

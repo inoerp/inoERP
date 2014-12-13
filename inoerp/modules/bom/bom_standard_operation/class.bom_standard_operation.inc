@@ -1,5 +1,22 @@
 <?php
+/**
+ * inoERP 
+ *
+ * Version 0.1.1
+ *
+ * @copyright 2014 Nishit R. Das
+ * @license   https://www.mozilla.org/MPL/2.0/
+ * @link       http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * bom_standard_operation
+ * Used for creating standard operations for make items to help the process of routing creation
+ * Routing specifies the flow of matrial in the production line
+ * Contains all the bom_overhead information, such as - effective_date, description , item_id_m, org_id
+ * 
+ */
 class bom_standard_operation extends dbObject {
 
  public static $table_name = "bom_standard_operation";
@@ -11,13 +28,13 @@ class bom_standard_operation extends dbObject {
 		 'name' => 'Standard Operation',
 		 'number' => '2408',
 		 'description' => 'Standard Operations',
-		 'version' => '1.1.1.3',
-		 'db_version' => '1001',
-		 'mod_version' => '1.1.x-1.1',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
 		 'dependent_class' => array('bom_standard_operation_resource_assignment'),
-		 'primary_entity_cb' => '',
-		 'module_name' => 'bom',
-		 'weight' => 7
+  'primary_entity_cb' => '',
+  'module_name' => 'bom',
+  'weight' => 7
  ];
 //  data base variables as stored database column name
  public $field_a = [

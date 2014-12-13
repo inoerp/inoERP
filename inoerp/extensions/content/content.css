@@ -3,8 +3,10 @@ margin-top: 2em;
   margin-left: -57em;
 }
 
-#contents{
+#view_content{
 max-width: 1010px;
+    background-color: #fff;
+    padding: 10px;
 }
 
 #category_relationDiv, #contents_listDiv{
@@ -137,12 +139,17 @@ width: 32%;
 #content_element{
     display: block;
     background-color: rgba(105, 149, 144, 0.23);
-    padding: 0 2px 2px 5px;
+    background-image: url("images/heading_bg7.png");
     float: left;
     border: 1px solid #ccc;
     margin-bottom: 10px;
-        width: 100%;
-       float: left;
+     width: 100%;
+     float: left;
+}
+
+#content_element ul{
+    padding: 10px;
+    
 }
 
 #content_element ul li {

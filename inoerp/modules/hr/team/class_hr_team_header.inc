@@ -1,5 +1,16 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * hr_team_header
+ */
 class hr_team_header extends dbObject {
 
  public static $table_name = "hr_team_header";
@@ -8,6 +19,17 @@ class hr_team_header extends dbObject {
  public static $key_column = 'team_name';
  public static $module = "hr";
 // public static $js_fileName = 'modules/hr/element_entry/js/multi_select.js';
+ public static $system_info = [
+  'name' => 'HR Team',
+  'number' => '3113',
+  'description' => 'HR Team',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'hr',
+  'weight' => 22
+ ];
  public static $type_a = [
   'SALES' => 'Sales',
   'PROJECT' => 'Project',
@@ -42,12 +64,10 @@ class hr_team_header extends dbObject {
  public $fields_inForm_notInDataBase = [
   "lead_employee_name",
  ];
- 
-   public $numberField = [
- 'hr_team_header_id',
+ public $numberField = [
+  'hr_team_header_id',
   'team_lead_employee_id',
  ];
-   
  public $pageTitle = " HR Team "; //page Title
  public $search = [
   '_show_update_path' => 1,
