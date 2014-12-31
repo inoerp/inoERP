@@ -133,14 +133,14 @@ $(document).ready(function() {
 ////start it
 //// observer.observe(target, config);
 
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=block';
- classSave.form_header_id = 'block_header';
- classSave.primary_column_id = 'block_id';
- classSave.savingOnlyHeader = true;
- classSave.headerClassName = 'block';
- classSave.enable_select = true;
- classSave.saveMain();
+// var classSave = new saveMainClass();
+// classSave.json_url = 'form.php?class_name=block';
+// classSave.form_header_id = 'block_header';
+// classSave.primary_column_id = 'block_id';
+// classSave.savingOnlyHeader = true;
+// classSave.headerClassName = 'block';
+// classSave.enable_select = true;
+// classSave.saveMain();
 
  deleteHeader('form.php?class_name=block', $('#hidden_block_id').val());
 });

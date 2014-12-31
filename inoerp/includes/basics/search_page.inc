@@ -1,16 +1,17 @@
 <link href="includes/ecss/search.css" media="all" rel="stylesheet" type="text/css" />
 
 <div id="all_contents">
+ <ul id="css_files" class="none"><li>includes/ecss/search.css</li></ul>
  <div id="content_left"></div>
  <div id="content_right">
   <div id="content_right_left">
    <div id="content_top"></div>
    <div id="content">
+    <div class="error"></div><div class="show_loading_small"></div><div id="loading"></div>
     <div id="main">
-     <div id="structure">
+     <div id="structure"><span class="heading"><?php  echo 'Search ' . ucwords(str_replace('_',' ',$class)) ;?></span>
       <div id="search_page">
        <div id ="form_header">
-        <div class="error"></div><div class="show_loading_small"></div><div id="loading"></div>
         <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
        </div>
        <div id="list_contents">
@@ -34,7 +35,7 @@
               ?>
               <!--download page form-->
               <form action="<?php echo HOME_URL; ?>download.php" method="POST" name="download_all" id="download_all" target="_blank">
-               <input type="hidden"  name="data" value="<?php print  base64_encode(serialize($search_class_array_all)) ?>" >
+               <input type="hidden"  name="data" value="<?php print base64_encode(serialize($search_class_array_all)) ?>" >
                <input type="radio" name="download_format" checked="checked" value="excel_format">Excel 
                <input type="radio" name="download_format" value="text_format">Text
                <input type="radio" name="download_format" value="pdf_format">Pdf

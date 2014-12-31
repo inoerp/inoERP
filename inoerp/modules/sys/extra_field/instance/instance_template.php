@@ -1,21 +1,3 @@
-<div id="all_contents">
- <div id="content_left"></div>
- <div id="content_right">
-  <div id="content_right_left">
-   <div id="content_top"></div>
-   <div id="content">
-    <div id="structure">
-     <div id="sys_extra_field_instance_divId">
-      <div id="form_top">
-      </div>
-      <!--    START OF FORM HEADER-->
-      <div class="error"></div><div id="loading"></div>
-      <div class="show_loading_small"></div>
-      <?php 
-       echo (!empty($show_message)) ? $show_message : "";
-       $f = new inoform();
-      ?> 
-      <!--    End of place for showing error messages-->
       <div id ="form_header">
        <form action=""  method="post" id="sys_extra_field_instance_form"  name="sys_extra_field_instance_form"><span class="heading">Extra Fields</span>
         <div id ="form_header">
@@ -33,7 +15,7 @@
                <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sys_extra_field_instance_id select_popup clickable">
                 Field Id : </label> 
                <?php $f->text_field_dr('sys_extra_field_instance_id') ?>
-               <a name="show" href="form.php?class_name=sys_extra_field_instance" class="show sys_extra_field_instance_id">	<img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
+               <a name="show" href="form.php?class_name=sys_extra_field_instance&<?php echo "mode=$mode"; ?>" class="show document_id sys_extra_field_instance_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
               </li> 
               <li><label>Field Name :</label> <?php $f->text_field_dm('field_name'); ?>          </li>
               <li><label>Description :</label>                <?php form::text_field_wid('description'); ?>          </li>
@@ -96,18 +78,6 @@
         </div> 
        </form>
       </div>
-      <!--END OF FORM HEADER-->
-
-     </div>
-    </div>
-    <!--   end of structure-->
-   </div>
-   <div id="content_bottom"></div>
-  </div>
-  <div id="content_right_right"></div>
- </div>
-
-</div>
 
 <div id="js_data">
  <ul id="js_saving_data">
@@ -121,5 +91,3 @@
   <li class="btn1DivId" data-btn1DivId="sys_extra_field_instance_id" ></li>
  </ul>
 </div>
-
-<?php include_template('footer.inc') ?>

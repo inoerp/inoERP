@@ -30,30 +30,6 @@ $(this).nextUntil("tr.first").toggle();
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //Get the header id on find button click
- $('a.show.category_id').click(function() {
-	var category_id = $('#category_id').val();
-	$(this).attr('href', modepath() + 'category_id=' + category_id);
- });
-
- //context menu
- var classContextMenu = new contextMenuMain();
- classContextMenu.docHedaderId = 'category_id';
- classContextMenu.btn1DivId = 'category_id';
- classContextMenu.contextMenu();
-
-
-
- //save class
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=category';
- classSave.form_header_id = 'category';
- classSave.primary_column_id = 'category_id';
- classSave.single_line = false;
- classSave.savingOnlyHeader = true;
- classSave.headerClassName = 'category';
- classSave.saveMain();
-
 deleteData('form.php?class_name=category', 'category_id')
 
 });  

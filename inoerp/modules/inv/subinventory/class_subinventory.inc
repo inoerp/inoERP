@@ -1,5 +1,18 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * subinventory
+ * Contains all the subinventory information, such as - subinventory, subinventory_id, org_id,  type, etc.
+ * 
+ */
 class subinventory extends dbObject {
 
  public static $table_name = "subinventory";
@@ -8,6 +21,17 @@ class subinventory extends dbObject {
  public static $module = "inv";
  public static $multi_select_template_path = 'modules/inv/subinventory/multi_action/subinventory_template_ma.php';
 //  data base variables as stored database column name
+ public static $system_info = [
+  'name' => 'Subinventory',
+  'number' => '2117',
+  'description' => 'Subinventory',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'inv',
+  'weight' => 17
+ ];
  public $field_a = [
   "subinventory_id",
   "org_id",
@@ -179,7 +203,7 @@ VAR;
   return $result;
  }
 
-  public function findBy_parameter_withOrgDetails() {
+ public function findBy_parameter_withOrgDetails() {
   $value_a = [];
   $sql = " SELECT si.subinventory_id,si.type,si.subinventory,si.description, org.org,org.org_id  ";
   $sql .= 'From 
@@ -200,6 +224,7 @@ VAR;
   echo $sql;
   return !empty($result) ? $result : false;
  }
+
  public static function find_all_of_org_id($org_id) {
   global $db;
   if (!empty($org_id)) {

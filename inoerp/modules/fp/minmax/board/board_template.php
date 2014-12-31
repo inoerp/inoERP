@@ -1,12 +1,10 @@
-<div id="all_contents">
- <div id="content_left1">
+<!-- <div id="content_left1">
   <div id="block_for_system_transaction" class="block content_left urgent_cards block_100">
    <div class="headerBgColor title system_trnx"> <span  class="hideDiv"> </span>System Transaction </div>
    <div class="content system_trnx_cotent">
     <div class="system_trnx_block hideDiv_element">
      <span class="info"><label>Transaction Type</label>
       <?php
-      $f = new inoform();
       $trnx_a = ['SUB_INV' => 'Subinventory Transfer', 'PUR_REQ' => 'Purchase Requisition'];
       echo $f->select_field_from_array('transaction_type', $trnx_a, '', 'transaction_type', 'medium');
       ?>
@@ -23,38 +21,22 @@
      <span class="info">Drag the urgent cards to here<br>Double click to remove it</span>
      <span class="button" id="save_urgent_card">Save</span>
      <?php
-     $existing_data = fp_urgent_card::find_current_cardList();
-     if ($existing_data) {
-      echo '<ul id="urgent_card_block">';
-      echo $existing_data;
-      echo '</ul>';
-     } else {
-      echo '<ul id="urgent_card_block">';
-      echo '</ul>';
-     }
+//     $existing_data = fp_urgent_card::find_current_cardList();
+//     if ($existing_data) {
+//      echo '<ul id="urgent_card_block">';
+//      echo $existing_data;
+//      echo '</ul>';
+//     } else {
+//      echo '<ul id="urgent_card_block">';
+//      echo '</ul>';
+//     }
      ?>
     </div> 
    </div>
   </div>
- </div>
- <div id="content_right">
-  <div id="content_right_left">
-   <div id="content_top">
+ </div>-->
 
-   </div>
-   <div id="content">
-    <div id="structure">
-     <div id="minmax_header_divId">
-      <div id="form_top">
-      </div>
-      <!--    START OF FORM HEADER-->
-      <div class="error"></div><div id="loading"></div>
-      <div class="show_loading_small"></div>
-      <?php echo (!empty($show_message)) ? $show_message : ""; ?>  
-      
-
-      <!--    End of place for showing error messages-->
-      <div id ="form_header"><span class="heading">Min Max Board </span>
+ <div id ="form_header"><span class="heading">Min Max Board </span>
 
        <ul id="form_top_ul" class="inRow asperWidth headerBgColor">
         <li><label>Inventory Org </label>
@@ -94,17 +76,3 @@
         </ul>
        </div>
       </div>
-      <!--END OF FORM HEADER-->
-
-     </div>
-    </div>
-    <!--   end of structure-->
-   </div>
-   <div id="content_bottom"></div>
-  </div>
-  <div id="content_right_right"></div>
- </div>
-
-</div>
-
-<?php include_template('footer.inc') ?>

@@ -1,5 +1,5 @@
 <div id="commentForm">
- <script src="<?php echo HOME_URL . 'extensions/comment/' ?>comment.js"></script> 
+ <script src="<?php $f = new inoform();  echo HOME_URL . 'extensions/comment/' ?>comment.js"></script> 
  <div id="commentForm_witoutjs">
  <div id="output">
  </div>
@@ -18,17 +18,9 @@
 															 value="<?php echo empty($comment->reference_id) ? htmlentities($reference_id) : htmlentities($comment->reference_id); ?>">
 		</div>
 		<div id="comment_subject" >
-		 <ul class='inRow asperWidth'><li>
-			 <label>Subject : </label>
-			 <input type="text"  name="subject" value="<?php echo ($comment->subject); ?>" 
-							size="40"  maxlength="120" class="subject" placeholder="Write a brief subject on the comment."> 
-			</li>
-			<li>
-			 <label>Name on comment : </label>
-			 <input type="text"  name="weightage" value="<?php echo htmlentities($comment->comment_by); ?>" 
-							size="25"  maxlength="150" class="comment_by" placeholder="Comment By"> 
-			</li>
-
+		 <ul class='inRow asperWidth'>
+      <li><label>Subject : </label><?php echo $f->text_field('subject', str_replace(array('<p>', '</p>'), ' ',$comment->subject),'','','medium') ?></li>
+			<li><label>Name on comment : </label><?php echo $f->text_field('comment_by',$comment->comment_by) ?></li>
 			<li><input type="button" name="submit_comment" class="submit_comment" Value="Save"></li>
 			<li> <input type="button" name="delete_comment" class="delete_comment" value="Delete"></li>
 		 </ul>

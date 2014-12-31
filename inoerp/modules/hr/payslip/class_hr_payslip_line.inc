@@ -43,4 +43,4 @@ class hr_payslip_line extends dbObject {
 }
 
 //end of inv_transaction class
-?> 
+?>

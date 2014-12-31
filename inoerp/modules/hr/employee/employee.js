@@ -48,11 +48,11 @@ $(document).ready(function() {
    'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //Get the hr_employee_id on find button click
- $('a.show.hr_employee_id').click(function() {
-  var hr_employee_id = $('#hr_employee_id').val();
-  $(this).attr('href', modepath() + 'hr_employee_id=' + hr_employee_id);
- });
+// //Get the hr_employee_id on find button click
+// $('a.show.hr_employee_id').click(function() {
+//  var hr_employee_id = $('#hr_employee_id').val();
+//  $(this).attr('href', modepath() + 'hr_employee_id=' + hr_employee_id);
+// });
 
  $('.employee_education_values').on('change', 'input', function() {
   var trClass = '.' + $(this).closest('tr').attr('class');
@@ -66,7 +66,7 @@ $(document).ready(function() {
 
 //onClick_add_new_row('tr.employee_education_line0', 'tbody.employee_education_values', 2);
 
- $("#content tbody.form_data_line_tbody2").on("click", ".add_row_img", function() {
+ $("#content tbody.form_data_line_tbody2").on("click", ".add_row_img1", function() {
 //   onClick_add_new_row('tr.employee_experience_line0', 'tbody.employee_experience_values', 2);
   var addNewRow = new add_new_rowMain();
   addNewRow.trClass = 'employee_experience_line';
@@ -76,7 +76,7 @@ $(document).ready(function() {
   addNewRow.add_new_row();
  });
 
- $("#content tbody.form_data_line_tbody").on("click", ".add_row_img", function() {
+ $("#content tbody.form_data_line_tbody").on("click", ".add_row_img1", function() {
 //  onClick_add_new_row('tr.employee_education_line0', 'tbody.employee_education_values', 2);
   var addNewRow2 = new add_new_rowMain();
   addNewRow2.trClass = 'employee_education_line';

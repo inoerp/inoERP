@@ -1,11 +1,11 @@
 <?php
 
 /**
- * inoERP - Version 0.1.1
+ * inoERP
  *
- * @copyright 2014 Nishit R. Das
- * @license   https://www.mozilla.org/MPL/2.0/
- * @link       http://inoideas.org
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
 
@@ -35,16 +35,12 @@ class coa extends dbObject {
  ];
  public $field_a = ['coa_id',
   'coa_structure_id',
-  'name',
+  'coa_name',
   'description',
   'balancing',
   'cost_center',
   'natural_account',
   'inter_company',
-  'segment1',
-  'segment2',
-  'segment3',
-  'segment4',
   'field1',
   'field2',
   'field3',
@@ -53,8 +49,6 @@ class coa extends dbObject {
   'field6',
   'field7',
   'field8',
-  'coa_sequence',
-  'ef_id',
   'status',
   'rev_enabled_cb',
   'rev_number',
@@ -75,13 +69,7 @@ class coa extends dbObject {
  public $checkbox = [
   'rev_enabled_cb',
  ];
- public $column = [
-  'coa_id',
-  'coa_structure_id',
-  'description',
-  'coa_sequence'
- ];
-// public $base_encoded = [];
+
  public $requiredField = [
   'coa_structure_id',
   'description',
@@ -96,19 +84,15 @@ class coa extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
- public $pageTitle = " COA - Find All COAs "; //page Title
+ public $pageTitle = " Chart Of Account "; //page Title
  public $coa_id;
  public $coa_structure_id;
- public $name;
+ public $coa_name;
  public $description;
  public $balancing;
  public $cost_center;
  public $natural_account;
  public $inter_company;
- public $segment1;
- public $segment2;
- public $segment3;
- public $segment4;
  public $field1;
  public $field2;
  public $field3;
@@ -117,7 +101,8 @@ class coa extends dbObject {
  public $field6;
  public $field7;
  public $field8;
- public $coa_sequence;
+ public $coa_sequence_value;
+ public $coa_sequence_field;
  public $ef_id;
  public $status;
  public $rev_enabled_cb;
@@ -127,14 +112,11 @@ class coa extends dbObject {
  public $last_update_by;
  public $last_update_date;
 
-// function __construct() {
-//	if (!empty(static::$table_name)) {
-//	 $this->field_a = get_dbColumns(static::$table_name);
-//	 foreach ($this->field_a as $key => $value) {
-//		$this->$value = '';
-//	 }
-//	}
-// }
+public function _before_save(){
+ if(empty($this->coa_sequence)){
+  
+ }
+}
 
  Public static function coa_account_types() {
   $option_header = option_header::find_by_name('COA_ACCOUNT_TYPE');
@@ -177,7 +159,7 @@ class coa extends dbObject {
  }
 
  Public static function coa_segments($option_type) {
-  $coa_structure_id = option_header::find_by_name('{$option_type}');
+  $coa_structure_id = option_header::find_by_name($option_type);
   if (!empty($coa_structure_id)) {
    $segments = option_line::find_by_option_id($coa_structure_id->option_header_id);
   }
@@ -185,11 +167,8 @@ class coa extends dbObject {
  }
 
  Public static function coa_segments_by_optionHeaderId($option_headerId) {
-  $coa_structure_id = option_header::find_by_id($option_headerId);
-  if (!empty($coa_structure_id)) {
-   $segments = option_line::find_by_option_id($coa_structure_id->option_header_id);
-  }
-  return !empty($segments) ? $segments : false;
+   $segments = option_line::find_by_parent_id($option_headerId);
+    return !empty($segments) ? $segments : false;
  }
 
  public static function find_coa_fields_option($coa_id) {
@@ -216,57 +195,6 @@ class coa extends dbObject {
   $result_set = $db->query($sql);
   $row = mysql_fetch_row($result_set);
   return $row;
- }
-
- public static function coa_page() {
-  echo '<table class="normal">
-                <thead> 
-                    <tr>
-                    <th>COA Id/th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Structure</th>
-					<th>Balancing</th>
-					<th>Cost Center</th>
-					<th>Account</th>
-					<th>I/C</th>
-                    <th>Segemnt1</th>
-                    <th>Segemnt2</th>
-                    <th>Segemnt3</th>
-                    <th>Segemnt4</th>
-                    <th>Sequence</th>
-                    <th>Created By</th>
-                    <th>Creation Date</th>
-                    <th>Last Update By</th>
-                    <th>Last Update Date</th>
-                    <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>';
-
-  $coa = coa::find_all();
-  foreach ($coa as $record) {
-   echo '<tr><td>' . $record->coa_id . '</td>';
-   echo '<td>' . $record->name . '</td> ';
-   echo '<td>' . $record->description . '</td>';
-   echo '<td>' . $record->coa_structure_id . '</td>';
-   echo '<td>' . $record->balancing . '</td>';
-   echo '<td>' . $record->cost_center . '</td>';
-   echo '<td>' . $record->natural_account . '</td>';
-   echo '<td>' . $record->inter_company . '</td>';
-   echo '<td>' . $record->segment1 . '</td>';
-   echo '<td>' . $record->segment2 . '</td>';
-   echo '<td>' . $record->segment3 . '</td>';
-   echo '<td>' . $record->segment4 . '</td>';
-   echo '<td>' . $record->coa_sequence . '</td>';
-   echo '<td>' . $record->created_by . '</td>';
-   echo '<td>' . $record->creation_date . '</td> ';
-   echo '<td>' . $record->last_update_by . '</td>';
-   echo '<td>' . $record->last_update_date . '</td>';
-   echo '<td><a href="coa.php?coa_id=' . $record->coa_id . '">Update</a></td></tr>';
-  }
-
-  echo ' </tbody> </table>';
  }
 
 }

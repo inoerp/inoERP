@@ -1,4 +1,16 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+/**
+ * wip_accounting_group 
+ *
+ */
 
 class wip_accounting_group extends org {
 
@@ -6,6 +18,17 @@ class wip_accounting_group extends org {
  public static $primary_column = "wip_accounting_group_id";
  public static $key_column = 'wip_accounting_group';
  public static $module = "wip";
+  public static $system_info = [
+  'name' => 'Accounting Group',
+  'number' => '2601',
+  'description' => 'Create & Mainten Approved Accounting Group',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'wip',
+  'weight' => 1
+ ];
  public $field_a = [
 		 'wip_accounting_group_id',
 		 'org_id',

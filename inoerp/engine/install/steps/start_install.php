@@ -50,6 +50,7 @@
 
 <form action="" name="import_db" id="import_db" method="get">
  <ul class="list-unstyled">
+  <h2> You can convert a demo instance to a production instance after the installation</h2>
   <li><label>DB Instance Type</label>
 <?php $f = new inoform();
  echo $f->select_field_from_array('db_type', $db_type_a, ''); ?></li>

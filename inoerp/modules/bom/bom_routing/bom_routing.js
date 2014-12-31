@@ -58,91 +58,56 @@ $(document).ready(function() {
   disableField_forCommonRouting();
  }
 
- $('#commonRouting_item_number').on('blur', function() {
+ $('body').off('blur', '#commonRouting_item_number')
+         .on('blur', '#commonRouting_item_number' ,function() {
   if ($(this).val()) {
    disableField_forCommonRouting();
   }
  });
 
  //selecting Header Id
- $(".bom_routing_header_id.select_popup").on("click", function() {
+ $('body').off("click", '.bom_routing_header_id.select_popup') 
+         .on("click", '.bom_routing_header_id.select_popup' , function() {
   void window.open('select.php?class_name=bom_routing_v', '_blank',
    'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- $(".item_id_m.select_popup").on("click", function() {
+ $('body').off("click", '.item_id_m.select_popup')
+         .on("click", '.item_id_m.select_popup', function() {
   void window.open('select.php?class_name=item', '_blank',
    'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //Get the bom_routing_id on find button click
- $('#form_header a.show').click(function() {
-  var bom_routing_header_id = $('#bom_routing_header_id').val();
-  $(this).attr('href', modepath() + 'bom_routing_header_id=' + bom_routing_header_id);
- });
-
-
-
  //function to coply line to details
- function copy_line_to_details() {
-  $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function() {
+  $("#content").off("click", "table.form_line_data_table .add_detail_values_img")
+          .on("click", "table.form_line_data_table .add_detail_values_img", function() {
    var detailExists = $(this).closest("td").find(".form_detail_data_fs").length;
    if (detailExists === 0) {
     var lineQuantity = $(this).closest('tr').find('.inv_line_quantity').val();
     $(this).closest("td").find(".quantity:first").val(lineQuantity);
    }
   });
- }
+ 
+//
+// $("#content").on("click", ".add_row_img", function() {
+//  var addNewRow = new add_new_rowMain();
+//  addNewRow.trClass = 'bom_routing_line';
+//  addNewRow.tbodyClass = 'form_data_line_tbody';
+//  addNewRow.noOfTabs = 4;
+//  addNewRow.lineNumberIncrementValue = 10;
+//  addNewRow.removeDefault = true;
+//  addNewRow.add_new_row();
+//  $(".tabsDetail").tabs();
+// });
+//
+//
 
- copy_line_to_details();
-
- $("#content").on("click", ".add_row_img", function() {
-  var addNewRow = new add_new_rowMain();
-  addNewRow.trClass = 'bom_routing_line';
-  addNewRow.tbodyClass = 'form_data_line_tbody';
-  addNewRow.noOfTabs = 4;
-  addNewRow.lineNumberIncrementValue = 10;
-  addNewRow.removeDefault = true;
-  addNewRow.add_new_row();
-  $(".tabsDetail").tabs();
- });
-
-
-
- //context menu
- var classContextMenu = new contextMenuMain();
- classContextMenu.docHedaderId = 'bom_routing_header_id';
- classContextMenu.docLineId = 'bom_routing_line_id';
- classContextMenu.btn1DivId = 'bom_routing_header';
- classContextMenu.btn2DivId = 'form_line';
- classContextMenu.trClass = 'bom_routing_line';
- classContextMenu.tbodyClass = 'form_data_line_tbody';
- classContextMenu.noOfTabbs = 4;
- classContextMenu.contextMenu();
-
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=bom_routing_header';
- classSave.form_header_id = 'bom_routing_header';
- classSave.primary_column_id = 'bom_routing_header_id';
- classSave.line_key_field = 'department_id';
- classSave.single_line = false;
- classSave.savingOnlyHeader = false;
- classSave.headerClassName = 'bom_routing_header';
- classSave.lineClassName = 'bom_routing_line';
- classSave.detailClassName = 'bom_routing_detail';
- classSave.enable_select = true;
- classSave.saveMain();
-
+ 
  deleteData('json.bom_routing.php');
 
- //add or show linw details
- addOrShow_lineDetails('tr.bom_routing_line0');
-
-// save('json.bom_routing.php', '#bom_routing_header', 'line_id_cb', 'item_description', '#bom_routing_header_id', '', '#bom_routing_number');
- onClick_addDetailLine(2, '.add_row_detail_img');
  onClick_addDetailLine(2, '.add_row_detail_img1','tabsDetailC')
 
- $('#content').on('change', '.extra_field_name', function() {
+ $('#content').off('change', '.extra_field_name').on('change', '.extra_field_name', function() {
   var count = 0;
   $(this).closest('td').find('.extra_field_name').each(function() {
    if (!$(this).val()) {
@@ -161,5 +126,6 @@ $(document).ready(function() {
 
  });
 
+ deleteData('form.php?class_name=bom_routing_header&line_class_name=bom_routing_line&detail_class_name=bom_routing_detail');
 
 });

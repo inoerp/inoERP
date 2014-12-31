@@ -100,6 +100,17 @@ function setSubinventory(transaction_type_id) {
  }
 }
 
+
+function callGetLocatorForFrom(subinventory_id, rowIdValue) {
+ var subinventory_type = "from_subinventory_id";
+ getLocator('modules/inv/locator/json_locator.php', subinventory_id, subinventory_type, rowIdValue);
+}
+
+function callGetLocatorForTo(subinventory_id, rowIdValue) {
+ var subinventory_type = "to_subinventory_id";
+ getLocator('modules/inv/locator/json_locator.php', subinventory_id, subinventory_type, rowIdValue);
+}
+
 $(document).ready(function () {
  $("#transaction_type_id").on("change", function () {
   var transaction_type_id = $(this).val();
@@ -111,7 +122,7 @@ $(document).ready(function () {
  }
 
 // //get Subinventory Name
- $("#org_id").on("change", function () {
+ $('body').off('blur', '#org_id').on("blur", "#org_id", function () {
   $('.org_id').val($(this).val());
   getSubInventory({
    json_url: 'modules/inv/subinventory/json_subinventory.php',
@@ -120,48 +131,26 @@ $(document).ready(function () {
   $('.org_id').val($(this).val());
  });
 
- function callGetLocatorForFrom(subinventory_id, rowIdValue) {
-  var subinventory_type = "from_subinventory_id";
-  getLocator('modules/inv/locator/json_locator.php', subinventory_id, subinventory_type, rowIdValue);
- }
 
- function callGetLocatorForTo(subinventory_id, rowIdValue) {
-  var subinventory_type = "to_subinventory_id";
-  getLocator('modules/inv/locator/json_locator.php', subinventory_id, subinventory_type, rowIdValue);
- }
 
- $(".form_line_data_table").on("change", ".from_subinventory_id", function () {
+ $('body').off('blur', '.from_subinventory_id').on("change", ".from_subinventory_id", function () {
   var rowIdValue = $(this).closest("tr").attr("id");
   var idValue = "tr#" + rowIdValue;
   var subinventory_id = $(this).val();
   callGetLocatorForFrom(subinventory_id, idValue);
  });
 
- $(".form_line_data_table").on("change", ".to_subinventory_id", function () {
+ $('body').off('blur', '.to_subinventory_id').on("change", ".to_subinventory_id", function () {
   var rowIdValue = $(this).closest("tr").attr("id");
   var idValue = "tr#" + rowIdValue;
   var subinventory_id = $(this).val();
   callGetLocatorForTo(subinventory_id, idValue);
  });
 
- //add new row in multi action template
- $("#content").on("click", ".add_row_img", function () {
-  var addNewRow = new add_new_rowMain();
-  addNewRow.trClass = 'inv_transaction_line';
-  addNewRow.tbodyClass = 'form_data_line_tbody';
-  addNewRow.noOfTabs = 5;
-  addNewRow.removeDefault = true;
-  addNewRow.add_new_row();
- });
-
- //add or show line details
- addOrShow_lineDetails('tr.inv_transaction_line0');
 
  onClick_addDetailLine(1, '.add_row_detail_img1');
- onClick_addDetailLine(1, '.add_row_detail_img');
 
-
- $('#content').on('blur', '.item_number', function () {
+ $('body').off('blur', '.item_number').on('blur', '.item_number', function () {
   var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
   var trClass_d = '.' + trClass;
   var generation_type = $('#content').find(trClass_d).find('.serial_generation').val();
@@ -224,7 +213,7 @@ $(document).ready(function () {
 
  });
 
- $('#content').on('blur', '.item_number', function () {
+ $('body').off('blur', '.item_number').on('blur', '.item_number', function () {
   var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
   var trClass_d = '.' + trClass;
   var generation_type = $('#content').find(trClass_d).find('.lot_generation').val();
@@ -292,8 +281,7 @@ $(document).ready(function () {
 
  });
 
-
- $('#content').on('blur', '.item_id_m, .item_number', function () {
+ $('body').off('blur', '.item_id_m, .item_number').on('blur', '.item_id_m, .item_number', function () {
   var item_id_m = $(this).closest('tr').find('.item_id_m').val();
   var org_id = $('#org_id').val();
   if (org_id && item_id_m) {

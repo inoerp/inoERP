@@ -1,5 +1,17 @@
 <?php
-
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+/**
+ * sd_lead
+ * Contains all the sd_quote_header information, such as - lead_number, sd_lead_id, customer info, etc
+ *
+ */
 class sd_lead extends dbObject {
 
  public static $table_name = "sd_lead";
@@ -7,6 +19,17 @@ class sd_lead extends dbObject {
  public static $key_column = 'lead_number';
  public static $dependent_classes = ['extn_contact'];
  public static $module = "sd";
+      public static $system_info = [
+  'name' => 'Sales Lead',
+  'number' => '2305',
+  'description' => 'Create & Mainten Sales Lead',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'sd',
+  'weight' => 5
+ ];
  public static $action_a = [
   'CONVERT_OPPR' => 'Convert to Opportunity',
   'CREATE_QUOTE' => 'Create Quote',
@@ -28,6 +51,7 @@ class sd_lead extends dbObject {
   'subject',
   'lead_type',
   'description',
+  'details',
   'last_name',
   'first_name',
   'mobile_number',
@@ -87,6 +111,7 @@ class sd_lead extends dbObject {
  public $subject;
  public $lead_type;
  public $description;
+ public $details;
  public $last_name;
  public $first_name;
  public $mobile_number;

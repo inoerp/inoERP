@@ -1,26 +1,11 @@
-<div id="all_contents">
- <div id="content_left"></div>
- <div id="content_right">
-	<div id="content_right_left">
-	 <div id="content_top"></div>
-	 <div id="content">
-		<div id="structure">
-		 <div id="ar_transaction_type_divId">
-			<div id="form_top">
-			</div>
-			<!--    START OF FORM HEADER-->
-			<div class="error"></div><div id="loading"></div>
-			<div class="show_loading_small"></div>
-			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
-			<!--    End of place for showing error messages-->
-			<div id ="form_header">
+	<div id ="form_header">
 			 <form action=""  method="post" id="ar_transaction_type_form"  name="ar_transaction_type_form"><span class="heading">Transaction Type </span>
 				<div class="large_shadow_box tabContainer">
 				 <ul class="column four_column"> 
 					<li> 
 					 <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_transaction_type_id select_popup clickable">
 						Transaction Type Id : </label><?php $f->text_field_ds('ar_transaction_type_id') ?>
-					 <a name="show" href="form.php?class_name=ar_transaction_type" class="show ar_transaction_type_id">	<img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
+					 <a name="show" href="form.php?class_name=ar_receipt_header&<?php echo "mode=$mode"; ?>" class="show document_id ar_transaction_type_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 					</li>
 					<li><label>BU Name : </label>
 					 <?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>
@@ -77,17 +62,15 @@
 				</div> 
 			 </form>
 			</div>
-			<!--END OF FORM HEADER-->
-
-		 </div>
-		</div>
-		<!--   end of structure-->
-	 </div>
-	 <div id="content_bottom"></div>
-	</div>
-	<div id="content_right_right"></div>
- </div>
-
+<div id="js_data">
+ <ul id="js_saving_data">
+	<li class="headerClassName" data-headerClassName="ar_transaction_type" ></li>
+	<li class="savingOnlyHeader" data-savingOnlyHeader="true" ></li>
+	<li class="primary_column_id" data-primary_column_id="ar_transaction_type_id" ></li>
+	<li class="form_header_id" data-form_header_id="ar_transaction_type" ></li>
+ </ul>
+ <ul id="js_contextMenu_data">
+	<li class="docHedaderId" data-docHedaderId="ar_transaction_type_id" ></li>
+	<li class="btn1DivId" data-btn1DivId="ar_transaction_type_id" ></li>
+ </ul>
 </div>
-
-<?php include_template('footer.inc') ?>

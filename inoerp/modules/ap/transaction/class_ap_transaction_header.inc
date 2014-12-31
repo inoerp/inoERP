@@ -1,5 +1,20 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * ap_transaction_header
+ * A sigle transaction document(invoice, etc) can be created against multiple purchase orders
+ * Transaction header contains all the header level informations such as supplier site, document_type, currency, header amount,  paying entity
+ * Transaction line contains invoices details
+ *
+ */
  class ap_transaction_header extends dbObject {
 
   public static $table_name = "ap_transaction_header";

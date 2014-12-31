@@ -171,29 +171,7 @@ if (!empty($_POST['submit_comment'])) {
 	echo '</div>';
  }
 }//end of post submit header
-////getting the search extension from POST or GET
-//$a= $extension;
-//$b = $a.'_search' ;
-//$$b= " ";
-//
-//if (!((empty($_POST[$extension])) AND (empty($_GET[$extension])))) {
-// if (is_array($_GET[$extension])) {
-//  $$b = "";
-// } else {
-//  if (!empty($_GET[$extension])) {
-//   $$b = $_GET[$extension];
-//  } else {
-//   if (!empty($_POST[$extension]) && is_array($_POST[$extension])) {
-//    $$b = "";
-//   } else {
-//    if (!empty($_POST[$extension])) {
-//     $$b = $_POST[$extension];
-//    }
-//   }
-//  }
-// }
-//}
-//End of geetting search extension
+
 ?>
 
 <!--end of control file-->

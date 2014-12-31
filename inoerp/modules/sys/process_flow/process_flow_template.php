@@ -1,15 +1,3 @@
-<div id="all_contents">
- <div id="content_left"></div>
- <div id="content_right">
-  <div id="content_right_left">
-   <div id="content_top"></div>
-   <div id="content">
-    <div id="structure">
-     <div id="process_flow_divId">
-      <!--    START OF FORM HEADER-->
-      <div class="error"></div><div id="loading"></div>
-      <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
-      <!--    End of place for showing error messages-->
 
       <div id ="form_header"><span class="heading">Process Flow Header </span>
        <form action=""  method="post" id="process_flow_header"  name="process_flow_header">
@@ -24,8 +12,7 @@
              <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="process_flow_header_id select_popup clickable">
                Prolow Id : </label>
               <?php $f->text_field_dsr('sys_process_flow_header_id') ?>
-              <a name="show" href="form.php?class_name=sys_process_flow_header" class="show sys_process_flow_header_id">	
-               <img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
+              <a name="show" href="form.php?class_name=sys_process_flow_header&<?php echo "mode=$mode"; ?>" class="show document_id sys_process_flow_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
              </li>
              <li><label>Process Flow : </label><?php
               $f = new inoform();
@@ -60,6 +47,7 @@
             <thead> 
              <tr>
               <th>Action</th>
+              <th>Seq#</th>
               <th>Line Id</th>
               <th>Line Number</th>
               <th>Sub Process Name</th>
@@ -75,7 +63,7 @@
              $count = 0;
              foreach ($sys_process_flow_line_object as $sys_process_flow_line) {
               ?>         
-              <tr class="process_flow_line<?php echo $count ?>">
+              <tr class="sys_process_flow_line<?php echo $count ?>">
                <td>    
                 <ul class="inline_action">
                  <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
@@ -84,6 +72,7 @@
                  <li><?php echo form::hidden_field('sys_process_flow_header_id', $$class->sys_process_flow_header_id); ?></li>
                 </ul>
                </td>
+               <td><?php $f->seq_field_d($count); ?></td>
                <td><?php $f->text_field_wid2sr('sys_process_flow_line_id'); ?></td>
                <td><?php echo $f->text_field_ap(array('name' => 'line_number', 'value'=>$$class_second->line_number,'class_name' =>'lines_number')); ?></td>
                <td><?php $f->text_field_wid2('line_name'); ?></td>
@@ -180,6 +169,7 @@
            <table class="form_line_data_table">
             <thead> 
              <tr>
+              <th>Seq#</th>
               <th>Next Seq On Pass</th>
               <th>Next Seq If Fail</th>
               <th>Next Seq On Return</th>
@@ -190,7 +180,8 @@
              $count = 0;
              foreach ($sys_process_flow_line_object as $sys_process_flow_line) {
               ?>         
-              <tr class="process_flow_line<?php echo $count ?>">
+              <tr class="sys_process_flow_line<?php echo $count ?>">
+               <td><?php $f->seq_field_d($count); ?></td>
                <td><?php $f->text_field_wid2('next_line_seq_pass'); ?></td>
                <td><?php $f->text_field_wid2('next_line_seq_fail'); ?></td>
                <td><?php $f->text_field_wid2('next_line_seq_onhold'); ?></td>
@@ -210,17 +201,6 @@
        </form>
       </div>
 
-      <!--END OF FORM HEADER-->
-     </div>
-    </div>
-    <!--   end of structure-->
-   </div>
-   <div id="content_bottom"></div>
-  </div>
-  <div id="content_right_right"></div>
- </div>
-
-</div>
 
 <div id="js_data">
  <ul id="js_saving_data">
@@ -246,5 +226,3 @@
   <li class="noOfTabbs" data-noOfTabbs="3" ></li>
  </ul>
 </div>
-
-<?php include_template('footer.inc') ?>

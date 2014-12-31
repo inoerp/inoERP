@@ -28,11 +28,6 @@ $(document).ready(function() {
 //mandatory and field sequence
  var mandatoryCheck = new mandatoryFieldMain();
  mandatoryCheck.header_id = 'hr_approval_limit_header_id';
-// mandatoryCheck.mandatoryHeader();
- mandatoryCheck.form_area = 'form_header';
- mandatoryCheck.mandatory_fields = ["org_id", "item_number"];
- mandatoryCheck.mandatory_messages = ["First Select Org", "No Item Number"];
-// mandatoryCheck.mandatoryField();
 
  //setting the first line number
  if (!($('.lines_number:first').val())) {
@@ -53,30 +48,7 @@ $(document).ready(function() {
   return false;
  });
 
- //Get the bom_id on find button click
- $('#form_header a.show.hr_approval_limit_header_id').click(function() {
-  var headerId = $('#hr_approval_limit_header_id').val();
-  $(this).attr('href', modepath() + 'hr_approval_limit_header_id=' + headerId);
- });
- 
-  //Get the bom_id on find button click
- $('#form_header a.show.hr_employee_id').click(function() {
-  var headerId = $('#hr_employee_id').val();
-  $(this).attr('href', modepath() + 'hr_employee_id=' + headerId);
- });
-
  //add a new row
-// onClick_add_new_row('tr.hr_approval_limit_line0', 'tbody.form_data_line_tbody', 3);
- $("#content").on("click", ".add_row_img", function() {
-  var addNewRow = new add_new_rowMain();
-  addNewRow.trClass = 'hr_approval_limit_line';
-  addNewRow.tbodyClass = 'form_data_line_tbody';
-  addNewRow.noOfTabs = 3;
-  addNewRow.lineNumberIncrementValue = 10;
-  addNewRow.removeDefault = true;
-  addNewRow.add_new_row();
- });
-
 //get the attachement form
  deleteData('form.php?class_name=hr_approval_limit_header&line_class_name=hr_approval_limit_line');
 

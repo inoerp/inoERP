@@ -1,6 +1,4 @@
-<?php //ob_start();  ?>
 <?php
-
  require_once (dirname(__FILE__) . '/../../define_const.inc');
  defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 
@@ -62,7 +60,6 @@
 
 //require_once(INC_BASICS.DS."class.dbObject.inc"); 
 //load other objects
- require_once(INC_SYSTEMS . DS . "module" . DS . "class.module.inc");
  require_once(INC_SYS . DS . "program" . DS . "class_sys_program.inc");
  require_once(INC_SYS . DS . "option" . DS . "class.option_header.inc");
  require_once(INC_SYS . DS . "option" . DS . "class.option_line.inc");
@@ -253,8 +250,8 @@
 //require_once(INC_MODULE.DS."sd".DS."document_type".DS."class_sd_document_relation.inc");
  require_once(INC_MODULE . DS . "mdm" . DS . "tax_code" . DS . "class_mdm_tax_code.inc");
  require_once(INC_MODULE . DS . "mdm" . DS . "tax" . DS . "region" . DS . "class_mdm_tax_region.inc");
- require_once(INC_MODULE . DS . "mdm" . DS . "price_list" . DS . "class_price_list_header.inc");
- require_once(INC_MODULE . DS . "mdm" . DS . "price_list" . DS . "class_price_list_line.inc");
+ require_once(INC_MODULE . DS . "mdm" . DS . "price_list" . DS . "class_mdm_price_list_header.inc");
+ require_once(INC_MODULE . DS . "mdm" . DS . "price_list" . DS . "class_mdm_price_list_line.inc");
  require_once(INC_MODULE . DS . "mdm" . DS . "bank" . DS . "class_mdm_bank_header.inc");
  require_once(INC_MODULE . DS . "mdm" . DS . "bank" . DS . "class_mdm_bank_v.inc");
  require_once(INC_MODULE . DS . "mdm" . DS . "bank" . DS . "class_mdm_bank_site.inc");
@@ -265,6 +262,8 @@
  require_once(INC_MODULE . DS . "hr" . DS . "employee" . DS . "education" . DS . "class_hr_employee_education.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "employee" . DS . "experience" . DS . "class_hr_employee_experience.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "employee" . DS . "termination" . DS . "class_hr_employee_termination.inc");
+ require_once(INC_MODULE . DS . "hr" . DS . "self_service" . DS . "education" . DS . "class_hr_employee_education_ss.inc");
+ require_once(INC_MODULE . DS . "hr" . DS . "self_service" . DS . "experience" . DS . "class_hr_employee_experience_ss.inc");
 
  require_once(INC_MODULE . DS . "hr" . DS . "position" . DS . "class_hr_position.inc");
  require_once(INC_MODULE . DS . "hr" . DS . "position_hierarchy" . DS . "class_hr_position_hierarchy_header.inc");
@@ -333,8 +332,6 @@
  require_once(INC_EXTENSIONS . DS . "category" . DS . "class_category_reference.inc");
  require_once(INC_EXTENSIONS . DS . "view" . DS . "class.view.inc");
  require_once(INC_EXTENSIONS . DS . "view" . DS . "result" . DS . "class_view_result.inc");
- require_once(INC_EXTENSIONS . DS . "site_control" . DS . "class.site_control_header.inc");
- require_once(INC_EXTENSIONS . DS . "site_control" . DS . "class.site_control_line.inc");
  require_once(INC_EXTENSIONS . DS . "web_tracking" . DS . "class_web_tracking.inc");
  require_once(INC_EXTENSIONS . DS . "url_alias" . DS . "class_ext_url_alias.inc");
  require_once(INC_EXTENSIONS . DS . "test_case" . DS . "class_ext_test_case_header.inc");

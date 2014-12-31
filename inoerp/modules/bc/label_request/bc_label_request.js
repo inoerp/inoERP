@@ -15,11 +15,4 @@ $(document).ready(function() {
 	void window.open('select.php?class_name=bc_label_request', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
-
- //Get the bc_label_request_id on find button click
- $('a.show.bc_label_request_id').click(function() {
-	var bc_label_request_id = $('#bc_label_request_id').val();
-	$(this).attr('href', modepath() + 'bc_label_request_id=' + bc_label_request_id);
- });
-
 });

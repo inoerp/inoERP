@@ -395,7 +395,7 @@ ul.commentRecord li{
 ul.commentRecord li ul.header{
  display: block;
  padding: 5px 5px;
- width: 140px;
+ width: 22%;
  float: left;
 }
 
@@ -406,7 +406,7 @@ ul.commentRecord li ul.header li{
 
 ul.commentRecord li.line_li{
  display: block;
- margin-left: 141px;
+ margin-left: 22%;
 
 }
 
@@ -415,13 +415,13 @@ ul.commentRecord li.subject:empty{
  display: none;
 }
 
-ul.commentRecord  li .subject{
+/*ul.commentRecord  li .subject{
  margin-top: -5px;
  display: block;
  background: none repeat scroll 0% 0% rgba(205, 213, 213, 0.7);
  width: 400px;
  padding: 5px;
-}
+}*/
 
 
 
@@ -640,9 +640,6 @@ ul.inline_list{
  clear: right;
  padding-left: 20px;
  margin: 0 0 20px 20px;
- background-color : rgba(60,60,100, 0.2);
- border: 1px solid;
- border-color: hsla(210,54%,20%,.15) hsla(210,54%,20%,.17) hsla(210,54%,20%,.2);
  border-radius: 5px;
 }
 
@@ -693,7 +690,6 @@ ul.inline_list li{
 }
 
 a.link_class_green {
- float: left;
  font-size: 11px;
  padding: 0px 5px;
  background-color: rgba(30, 40, 20, 0.6);
@@ -1168,11 +1164,7 @@ background: rgba(35, 141, 231, 0.45);
 }
 
 input.medium {
-   width: 220px;
-}
-
-input.medium {
-   width: 320px;
+   width: 100px;
 }
 
 input.small {
@@ -1272,3 +1264,56 @@ ul.header_field li label{
     font-size:1px;
     margin-left: 5px;
 }
+
+#form_serach_header  {
+padding: 0.5em;
+}
+
+#form_serach_header > label {
+    display: inline-block;
+}
+
+ul.program_form{
+border: solid #bbb;   
+border-width: 1px 1px 2px 1px;    
+ margin: 5px;
+}
+
+ul.program_form li {
+    border: solid #bbb;
+    border-width: 1px 1px 0 1px;
+    width: 600px;
+    padding: 5px;
+}
+
+ul.program_form li label {
+    display: inline-block;
+}
+
+ul.program_form li label{
+    width: 130px;
+    border-right: 1px solid #bbb;
+    margin-right: 20px;
+}
+
+
+#block_list_id {
+    background: none repeat scroll 0% 0% rgba(215, 255, 14, 0.24);
+}
+
+#header_top .erp_dashborad {
+    position: absolute;
+    top: 3px;
+    font-size: 11px;
+    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+    text-align: left;
+    font-weight: bold;
+    color: white;
+}
+
+#header_top .block_5 a{
+    color: #fff;
+    padding-left: 10px;
+    text-decoration: none;
+}
+

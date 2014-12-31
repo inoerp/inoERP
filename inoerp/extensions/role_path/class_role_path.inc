@@ -1,5 +1,16 @@
 <?php
-
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+/**
+ * 
+ *
+ */
 class role_path extends dbObject {
 
  public static $table_name = "role_path";
@@ -7,17 +18,17 @@ class role_path extends dbObject {
  public static $key_column = 'path_id';
  public static $module = "extensions";
  public static $system_info = [
-		 'name' => 'Role Path',
-		 'number' => '9110',
-		 'description' => 'Define and mainten role paths',
-		 'version' => '1.1.1.3',
-		 'db_version' => '1001',
-		 'mod_version' => '1.1.x-1.1',
-		 'dependent_class' => '',
-		 'primary_entity_cb' => '',
-		 'module_name' => 'extensions',
-		 'weight' => '10'
+  'name' => 'Role Path',
+  'number' => '10020',
+  'description' => 'Define and mainten role paths',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'extn',
+  'weight' => 20
  ];
+ 
 //  data base variables as stored database column name
  public $field_a = [
 		 "role_path_id",

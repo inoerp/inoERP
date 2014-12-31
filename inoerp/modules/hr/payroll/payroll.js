@@ -46,17 +46,17 @@ $(document).ready(function() {
 //  var Mandatory_Fields = ["#org_id", "First Select Org Name", "#item_number", "First Select Item Number"];
 // select_mandatory_fields(Mandatory_Fields);
 //
- $('#form_line').on("click", function() {
-	if (!$('#hr_payroll_id').val()) {
-	 alert('No header Id : First enter/save header details');
-	} else {
-	 var headerId = $('#hr_payroll_id').val();
-	 if (!$(this).find('.hr_payroll_id').val()) {
-		$(this).find('.hr_payroll_id').val(headerId);
-	 }
-	}
-
- });
+// $('#form_line').on("click", function() {
+//	if (!$('#hr_payroll_id').val()) {
+//	 alert('No header Id : First enter/save header details');
+//	} else {
+//	 var headerId = $('#hr_payroll_id').val();
+//	 if (!$(this).find('.hr_payroll_id').val()) {
+//		$(this).find('.hr_payroll_id').val(headerId);
+//	 }
+//	}
+//
+// });
 
 
  //Popup for selecting option type
@@ -96,12 +96,6 @@ $(document).ready(function() {
 
 
  copy_hr_payroll_id();
-
- //Get the option_id on find button click
- $('a.show.hr_payroll_id').click(function() {
-	var headerId = $('#hr_payroll_id').val();
-	$(this).prop('href', modepath() + '&hr_payroll_id=' + headerId);
- });
 
  onClick_add_new_row('tr.hr_payroll_schedule0', 'tbody.hr_payroll_schedule_values', 4);
 

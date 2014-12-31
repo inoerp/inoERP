@@ -6,11 +6,20 @@
   public static $primary_column = "hr_employee_termination_id";
   public static $key_column = 'employee_id';
   public static $module = "hr";
+  public static $status_a = [
+   'APPLIED' => 'Applied',
+   'PENDING_APPROVAL' => 'Pending Approval',
+   'PENDING_CLEARANCE' => 'Pending Clearance',
+   'ACCEPTED' => 'Accepted',
+   'REJECTED' => 'Rejected',
+   'COMPLETED' => 'Completed'
+  ];
   public $field_a = [
    'hr_employee_termination_id',
    'employee_id',
    'new_employer',
    'reason',
+   'status',
    'date_of_notification',
    'projected_last_date',
    'actual_last_date',
@@ -30,7 +39,7 @@
   ];
   public $fields_inForm_notInDataBase = [
    "employee_name",
-   "employee_number"
+   "identification_id"
   ];
     
   public $hr_employee_termination_id;
@@ -47,7 +56,7 @@
   public $last_update_by;
   public $last_update_date;
   public $employee_name;
-  public $employee_number;
+  public $identification_id;
   
   public $search = [
    '_show_update_path' => 1,
@@ -59,6 +68,20 @@
    $sql = " SELECT * FROM " . self::$table_name . " WHERE employee_id = '{$employee_id}' ";
    $result = self::find_by_sql($sql);
    return !empty($result) ? $result : null;
+  }
+  
+  public function _after_save(){
+   if($this->status == 'COMPLETED' && !empty($this->employee_id)){
+    $hr_em = new hr_employee();
+    $hr_em->hr_employee_id = $this->employee_id;
+    $hr_em->status = 'INACTIVE';
+    $hr_em->person_type = 'EMPLOYEE_EX';
+    try{
+    $hr_em->save();
+    }catch (Exception $e){
+     
+    }
+   }
   }
 
  }

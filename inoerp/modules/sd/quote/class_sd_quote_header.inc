@@ -1,5 +1,17 @@
 <?php
-
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+/**
+ * sd_quote_header
+ * Contains all the sd_quote_header information, such as - quote_number, sd_lead_id, customer info, etc
+ *
+ */
 class sd_quote_header extends dbObject {
 
  public static $table_name = "sd_quote_header";
@@ -8,7 +20,18 @@ class sd_quote_header extends dbObject {
  public static $primary_column2 = "quote_number";
  public static $key_column = 'ar_customer_id';
  public static $module = "sd";
- 
+    public static $system_info = [
+  'name' => 'Sales Quote',
+  'number' => '2303',
+  'description' => 'Create & Mainten Sales Quote',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'dependent_class' => array('sd_quote_line'),
+  'primary_entity_cb' => '',
+  'module_name' => 'sd',
+  'weight' => 3
+ ];
  public static $action_a = [
   'CONVERT_SO' => 'Convert to SO',
   'CANCEL' => 'Cancel',

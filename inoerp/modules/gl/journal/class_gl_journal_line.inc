@@ -90,20 +90,12 @@ class gl_journal_line extends dbObject {
  public $last_update_date;
  public $ledger_id;
 
- public function __set($name, $value) {
-	switch ($value) {
-	 case $value:
 
-
-		break;
-
-	 default:
-		$this->$name = $value;
-		break;
-	}
- }
 
  public function _before_save() {
+  if(empty($this->status)){
+   $this->status = 'U';
+  }
   if ((isset($this->status)) && ($this->status == 'P')) {
 	 echo " You can't modify this Journal Line as its already posted. <br>"
 	 . " You can only reverse the Journal Header. ";

@@ -1,11 +1,36 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * legal
+ * Contains all the enterprise information, such as - org_id, type, description,  code, etc.
+ * 
+ */
 class legal extends dbObject {
 
  public static $table_name = "legal";
  public static $primary_column = "legal_id";
  public static $key_column = 'org_id';
  public static $module = "org";
+    public static $system_info = [
+  'name' => 'Legal Org',
+  'number' => '2003',
+  'description' => 'Define and mainten Legal Orgs',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'primary_entity_cb' => '',
+  'module_name' => 'org',
+  'weight' => 3
+ ];
  public $field_a = [
 		 "legal_id",
 		 "org_id",
@@ -17,7 +42,6 @@ class legal extends dbObject {
 		 "ein_tin_tan",
 		 "ledger_id",
 		 "balancing_segments",
-		 "ef_id",
 		 "status",
 		 "rev_enabled",
 		 "rev_number",
@@ -140,8 +164,14 @@ class legal extends dbObject {
 	 $primary_column = self::$primary_column;
 	 if (!empty($obj->$primary_column)) {
 		$org_i = $org->findBy_id($obj->$primary_column);
-		$obj->org = $org_i->org;
+    if($org_i){
+     		$obj->org = $org_i->org;
 		$obj->description = $org_i->description;
+    }else{
+     		$obj->org = null;
+		$obj->description = null;
+    }
+
 	 }
 	}
  }

@@ -29,29 +29,5 @@ $(document).ready(function() {
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //Get the header id on find button click
- $('a.show.address_id').click(function() {
-	var address_id = $('#address_id').val();
-	$(this).attr('href', modepath() + 'address_id=' + address_id);
- });
-
- //context menu
- var classContextMenu = new contextMenuMain();
- classContextMenu.docHedaderId = 'address_id';
- classContextMenu.btn1DivId = 'address_id';
- classContextMenu.contextMenu();
-
-
-
- //save class
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=address';
- classSave.form_header_id = 'address';
- classSave.primary_column_id = 'address_id';
- classSave.single_line = false;
- classSave.savingOnlyHeader = true;
- classSave.headerClassName = 'address';
- classSave.saveMain();
-
 });
 

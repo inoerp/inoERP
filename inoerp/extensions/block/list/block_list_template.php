@@ -1,3 +1,4 @@
+<div id='block_list_id'>
 <div id="all_contents">
  <div id="content_header"><span class='highlight'>Content header</span></div>
  <div id="content_left"><span class='highlight'>Content Left</span></div>
@@ -64,10 +65,7 @@
  								 </ul>
  								</td>
  								<td><?php echo $count ?></td>
- 								<td><?php
-									$f = new inoform();
-									echo $f->text_field('block_id', $block->block_id, '8', '', '', 1, 1);
-									?></td>
+ 								<td><?php	echo $f->text_field('block_id', $block->block_id, '8', '', '', 1, 1);	?></td>
 								<td><?php $readonly_b = ($block->reference_table =='block_content') ? false : true;
 								echo $f->text_field('name', $block->name, '','','','',$readonly_b ); ?></td>
  								<td><?php echo $f->text_field('title', $block->title); ?></td>
@@ -138,3 +136,4 @@
 <span class='highlight'>Footer Top</span>
 <?php include_template('footer.inc') ?>
 <span class='highlight'>Footer Bottom</span>
+</div>

@@ -1,6 +1,6 @@
 function setValFromSelectPage(po_rfq_header_id, combination, supplier_id, supplier_number, supplier_name,
- item_id_m, item_number, item_description, uom_id, address_id, address_name, address,
- country, postal_code) {
+        item_id_m, item_number, item_description, uom_id, address_id, address_name, address,
+        country, postal_code) {
  this.po_rfq_header_id = po_rfq_header_id;
  this.combination = combination;
  this.supplier_id = supplier_id;
@@ -17,7 +17,7 @@ function setValFromSelectPage(po_rfq_header_id, combination, supplier_id, suppli
  this.postal_code = postal_code;
 }
 
-setValFromSelectPage.prototype.setVal = function() {
+setValFromSelectPage.prototype.setVal = function () {
  var po_rfq_header_id = this.po_rfq_header_id;
  var supplier_id = this.supplier_id;
  var supplier_number = this.supplier_number;
@@ -89,16 +89,16 @@ setValFromSelectPage.prototype.setVal = function() {
 };
 
 
-$(document).ready(function() {
+$(document).ready(function () {
 
- $('#form_line').find('.line_type').each(function() {
+ $('#form_line').find('.line_type').each(function () {
   if (!$(this).val()) {
    $(this).val('GOODS');
   }
  });
 
- $('#release_number').on('change', function() {
-    $('#po_rfq_header_id').val('');
+ $('#release_number').on('change', function () {
+  $('#po_rfq_header_id').val('');
   $('#po_rfq_status').val('');
   $('#action').val('');
  })
@@ -127,69 +127,21 @@ $(document).ready(function() {
   $('.detail_number:first').val('1');
  }
 
- $("#content").on("change", "#supplier_site_id", function() {
+ $("#content").off("change", "#supplier_site_id").on("change", "#supplier_site_id", function () {
   var supplier_site_id = $("#supplier_site_id").val();
   if (supplier_site_id) {
    getSupplierSiteDetails('modules/ap/supplier/json_supplier.php', supplier_site_id);
   }
  });
 
- 
+
  //selecting PO Header Id
- $(".po_rfq_header_id.select_popup").on("click", function() {
+ $(".po_rfq_header_id.select_popup").on("click", function () {
   void window.open('select.php?class_name=po_rfq_header', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //Popup for selecting address 
- $(".address_popup").click(function() {
-  var addressPopupDivClass = $(this).closest('div').prop('class');
-  localStorage.setItem("addressPopupDivClass", addressPopupDivClass);
-  void window.open('select.php?class_name=address', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-  return false;
- });
-
- //Get the po header id on refresh button click
- $('a.show.po_rfq_header_id').click(function() {
-  var po_rfq_header_id = $('#po_rfq_header_id').val();
-  $(this).attr('href', modepath() + 'po_rfq_header_id=' + po_rfq_header_id);
-
- });
-
-
- //Get the po_rfq_id on find button click
- $('#form_box a.show').click(function() {
-  var poId = $('#po_rfq_header_id').val();
-//$(this).prop('href','po.php?po_rfq_header_id=' + poId);
-  $(this).attr('href', 'po.php?po_rfq_header_id=' + poId);
- });
-
-
- $("#content").on("click", ".add_row_img", function() {
-//	add_new_row('tr.po_rfq_line0', 'tbody.form_data_line_tbody', 3);
-  var addNewRow = new add_new_rowMain();
-  addNewRow.trClass = 'po_rfq_line';
-  addNewRow.tbodyClass = 'form_data_line_tbody';
-  addNewRow.noOfTabs = 3;
-  addNewRow.removeDefault = true;
-  addNewRow.divClassToBeCopied = 'copyValue';
-  addNewRow.add_new_row();
-  $(".tabsDetail").tabs();
- });
-
-//add or show linw details
- addOrShow_lineDetails('tr.po_rfq_line0');
- onClick_addDetailLine(4);
-
-//remove po lines
- $("#remove_row").click(function() {
-  $('input[name="po_rfq_line_id_cb"]:checked').each(function() {
-   $(this).closest('tr').remove();
-  });
- });
-
- $('#bu_org_id').on('change', function() {
+ $('body').off('change', '#bu_org_id').on('change', '#bu_org_id' ,function () {
   getBUDetails($(this).val());
  });
 
@@ -197,9 +149,7 @@ $(document).ready(function() {
   getBUDetails($('#bu_org_id').val());
  }
 
-
  deleteData('form.php?class_name=po_rfq_header&line_class_name=po_rfq_line&detail_class_name=po_rfq_detail');
-
 
 });
 

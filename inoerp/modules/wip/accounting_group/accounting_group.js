@@ -22,31 +22,5 @@ $(document).ready(function() {
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //Get the wip_accounting_group_id on find button click
- $('#form_header a.show').click(function() {
-	var wip_accounting_group_id = $('#wip_accounting_group_id').val();
-	$(this).attr('href', modepath() + 'wip_accounting_group_id=' + wip_accounting_group_id);
- });
-
-//context menu
- var classContextMenu = new contextMenuMain();
- classContextMenu.docHedaderId = 'wip_accounting_group_id';
- classContextMenu.btn1DivId = 'wip_accounting_group_id';
- classContextMenu.contextMenu();
-
-
-
- //save class
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=wip_accounting_group';
- classSave.form_header_id = 'wip_accounting_group';
- classSave.primary_column_id = 'wip_accounting_group_id';
- classSave.single_line = false;
- classSave.savingOnlyHeader = true;
- classSave.enable_select = true;
- classSave.headerClassName = 'wip_accounting_group';
- classSave.saveMain();
-
-
 });
 

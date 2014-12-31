@@ -29,16 +29,33 @@ setValFromSelectPage.prototype.setVal = function() {
  localStorage.removeItem("row_class");
 
 };
+function beforeSave() {
+	var sum_total_dr = 0;
+	$('.total_dr').each(function() {
+	  sum_total_dr += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+	});
+	var sum_total_cr = 0;
+	$('.total_cr').each(function() {
+   sum_total_cr += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+	});
+	if (sum_total_dr === sum_total_cr) {
+	 return 1;
+	} else {
+	 alert('Cant save data as journal is not in balance \nSum of total debit is : ' + sum_total_dr + ' & total credit is : ' + sum_total_cr);
+	 return -99;
+	}
+ }
+
 
 $(document).ready(function() {
 //mandatory and field sequence
-var mandatoryCheck = new mandatoryFieldMain();
-mandatoryCheck.header_id = 'gl_journal_header_id';
-mandatoryCheck.mandatoryHeader();
-mandatoryCheck.form_area = 'form_header';
-mandatoryCheck.mandatory_fields = ["ledger_id", "currency", "gl_period_id"];
-mandatoryCheck.mandatory_messages = ["First Select Ledger", "No Currency", "No GL Period"];
-//mandatoryCheck.mandatoryField();
+//var mandatoryCheck = new mandatoryFieldMain();
+//mandatoryCheck.header_id = 'gl_journal_header_id';
+//mandatoryCheck.mandatoryHeader();
+//mandatoryCheck.form_area = 'form_header';
+//mandatoryCheck.mandatory_fields = ["ledger_id", "currency", "gl_period_id"];
+//mandatoryCheck.mandatory_messages = ["First Select Ledger", "No Currency", "No GL Period"];
+////mandatoryCheck.mandatoryField();
 
 
 
@@ -141,57 +158,40 @@ mandatoryCheck.mandatory_messages = ["First Select Ledger", "No Currency", "No G
  });
 
  //Get the header id on find button click
- $('a.show.gl_journal_header_id').click(function() {
-	var gl_journal_header_id = $('#gl_journal_header_id').val();
-//$(this).prop('href','po.php?po_header_id=' + poId);
-	$(this).attr('href', modepath() + 'gl_journal_header_id=' + gl_journal_header_id);
- });
-
-
- onClick_add_new_row('gl_journal_line', 'gl_journal_line_values', 2, 'status');
-
-//context menu
- var classContextMenu = new contextMenuMain();
- classContextMenu.docHedaderId = 'gl_journal_header_id';
- classContextMenu.docLineId = 'gl_journal_line_id';
- classContextMenu.btn1DivId = 'gl_journal_header';
- classContextMenu.btn2DivId = 'form_line';
- classContextMenu.trClass = 'gl_journal_line';
- classContextMenu.tbodyClass = 'form_data_line_tbody';
- classContextMenu.noOfTabbs = 3;
- classContextMenu.contextMenu();
+// $('a.show.gl_journal_header_id').click(function() {
+//	var gl_journal_header_id = $('#gl_journal_header_id').val();
+////$(this).prop('href','po.php?po_header_id=' + poId);
+//	$(this).attr('href', modepath() + 'gl_journal_header_id=' + gl_journal_header_id);
+// });
+//
+//
+// onClick_add_new_row('gl_journal_line', 'gl_journal_line_values', 2, 'status');
+//
+////context menu
+// var classContextMenu = new contextMenuMain();
+// classContextMenu.docHedaderId = 'gl_journal_header_id';
+// classContextMenu.docLineId = 'gl_journal_line_id';
+// classContextMenu.btn1DivId = 'gl_journal_header';
+// classContextMenu.btn2DivId = 'form_line';
+// classContextMenu.trClass = 'gl_journal_line';
+// classContextMenu.tbodyClass = 'form_data_line_tbody';
+// classContextMenu.noOfTabbs = 3;
+// classContextMenu.contextMenu();
 
 // deleteData('json.po.php');
 
-//before save & save function
- function beforeSave() {
-	var sum_total_dr = 0;
-	$('.total_dr').each(function() {
-	  sum_total_dr += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-	});
-	var sum_total_cr = 0;
-	$('.total_cr').each(function() {
-   sum_total_cr += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-	});
-	if (sum_total_dr === sum_total_cr) {
-	 return 1;
-	} else {
-	 alert('Cant save data as journal is not in balance \nSum of total debit is : ' + sum_total_dr + ' & total credit is : ' + sum_total_cr);
-	 return -99;
-	}
- }
-
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=gl_journal_header';
- classSave.form_header_id = 'gl_journal_header';
- classSave.primary_column_id = 'gl_journal_header_id';
- classSave.line_key_field = 'code_combination_id';
- classSave.single_line = false;
- classSave.enable_select = true;
- classSave.savingOnlyHeader = false;
- classSave.headerClassName = 'gl_journal_header';
- classSave.lineClassName = 'gl_journal_line';
- classSave.saveMain(beforeSave);
+////before save & save function
+//  var classSave = new saveMainClass();
+// classSave.json_url = 'form.php?class_name=gl_journal_header';
+// classSave.form_header_id = 'gl_journal_header';
+// classSave.primary_column_id = 'gl_journal_header_id';
+// classSave.line_key_field = 'code_combination_id';
+// classSave.single_line = false;
+// classSave.enable_select = true;
+// classSave.savingOnlyHeader = false;
+// classSave.headerClassName = 'gl_journal_header';
+// classSave.lineClassName = 'gl_journal_line';
+// classSave.saveMain(beforeSave);
 
  //Reverse Journal
 // $('#change_satus').on('change', function() {

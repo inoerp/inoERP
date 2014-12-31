@@ -33,7 +33,7 @@ $(document).ready(function() {
  mandatoryCheck.mandatory_fields = ["org_id", "transaction_type_id"];
  mandatoryCheck.mandatory_messages = ["First Select Org", "No Transaction Type"];
 
- $("#transaction_type_id").on("change", function() {
+ $('body').off("change", '#transaction_type_id').on("change", '#transaction_type_id', function() {
 	$("tr.transfer_info").find("td select").each(function() {
 	 $(this).val("");
 	})
@@ -67,7 +67,7 @@ $(document).ready(function() {
  });
 
 //validation of entered quantity
- $('#content').on('focusout', '#from_operation_step', function() {
+ $('#content').off('focusout', '#from_operation_step').on('focusout', '#from_operation_step', function() {
 	var fromStep = '.' + $(this).val() + '_quantity';
 	var fromSeq = $('#from_routing_sequence').val();
 	var rowClass = '';
@@ -86,7 +86,7 @@ $(document).ready(function() {
 	}
  });
 
- $("#content").on('focusout', '#move_quantity', function() {
+ $("#content").off('focusout', '#move_quantity').on('focusout', '#move_quantity', function() {
 	if (+($(this).val()) > +($('#available_quantity')).val()) {
 	 $(this).val('');
 	 alert('Error!! : Entered move quantity is more than available quantity');
@@ -97,35 +97,12 @@ $(document).ready(function() {
 
 
 //selecting wo header id data
- $(".wip_wo_header_id.select_popup").on("click", function() {
+ $('body').off("click", '.wip_wo_header_id.select_popup').on("click", '.wip_wo_header_id.select_popup', function() {
 	localStorage.idValue = "";
 	var link = 'select.php?class_name=wip_wo_header&wo_status=%3DRELEASED';
 	void window.open(link, '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
-
- //Get the primary_id on refresh button click
- $('a.show.wip_wo_headerid_show').click(function() {
-	var wip_wo_header_id = $('#wip_wo_header_id').val();
-	$(this).attr('href', modepath() + 'wip_wo_header_id=' + wip_wo_header_id);
-
- });
-
-//Save record
-// save('json.wip_move_transaction.php', '#wip_move_transaction', '', '', '#wip_move_transaction_id', '');
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=wip_move_transaction';
- classSave.form_header_id = 'wip_move_transaction';
- classSave.primary_column_id = 'wip_move_transaction_id';
- classSave.single_line = false;
- classSave.savingOnlyHeader = true;
- classSave.enable_select = true;
- classSave.headerClassName = 'wip_move_transaction';
- classSave.saveMain();
-
-//delete line
- deleteData('json.wip_move_transaction.php');
-
 
 });
 

@@ -1,10 +1,11 @@
 <?php
+
 /**
- * inoERP - Version 0.1.1
+ * inoERP 
  *
- * @copyright 2014 Nishit R. Das
- * @license   https://www.mozilla.org/MPL/2.0/
- * @link       http://inoideas.org
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
 
@@ -137,12 +138,11 @@ class gl_period extends dbObject {
  }
 
  public function find_all_periods_ofLedger($ledger_id) {
-  global $db;
   $nl = new gl_ledger();
   $ledger_ob = $nl->findBy_id($ledger_id);
   $nc = new gl_calendar();
   $periods = $nc->find_periodNames_from_calendar($ledger_ob->calendar_option_line_code);
-  return $periods;
+  return !empty($periods) ? $periods : array($nc);
  }
 
  public function current_open_period($ledger_id, $status = 'OPEN') {
@@ -176,20 +176,28 @@ class gl_period extends dbObject {
   return !empty($result) ? array_pop($result) : false;
  }
 
- public function find_all_periods($ledger_id, $status = '') {
-  global $db;
+ public function find_allPeriods($ledger_id, $status = '') {
   $sql = " SELECT * FROM " . self::$table_name;
   $sql .= " WHERE ledger_id= :ledger_id  ";
-  $param_a = ['ledger_id'];
   $value_a = [ 'ledger_id' => $ledger_id];
   if (!empty($status)) {
    $sql .= " AND status = :status";
-   array_push($param_a, 'status');
    $value_a['status'] = $status;
   }
   $sql .= " ORDER BY gl_period_id DESC ";
-  $result = $db->findBy_sql($sql, $param_a, $value_a);
+  $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? $result : false;
+ }
+ 
+  public static function find_all_periods($ledger_id, $status = '') {
+  $sql = " SELECT * FROM " . self::$table_name;
+  $sql .= " WHERE ledger_id= '{$ledger_id}'  ";
+  if (!empty($status)) {
+   $sql .= " AND status = '{$status}'";
+  }
+  $sql .= " ORDER BY gl_period_id DESC ";
+  $result = self::find_by_sql($sql);
+    return !empty($result) ? $result : false;
  }
 
  public static function current_open_period_st($ledger_id) {

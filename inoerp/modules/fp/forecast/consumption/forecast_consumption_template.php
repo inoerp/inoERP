@@ -9,7 +9,7 @@
       <!--    START OF FORM HEADER-->
       <div class="error"></div><div id="loading"></div>
       <div class="show_loading_small"></div>
-      <?php        echo (!empty($show_message)) ? $show_message : "";        $f = new inoform();       ?> 
+      <?php        echo (!empty($show_message)) ? $show_message : "";  ?> 
       <!--    End of place for showing error messages-->
       <div id ="form_header">
        <form action=""  method="post" id="fp_forecast_group"  name="fp_forecast_group"><span class="heading">Forecast Group </span>

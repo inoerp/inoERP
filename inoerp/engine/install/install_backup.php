@@ -12,7 +12,7 @@
  $class_names = 'ino_install';
 
  include_once('engine/install/class_ino_install.inc');
- include_once('includes/functions/loader.inc');
+ include_once('includes/basics/basics.inc');
 
  // Get array with the names of all modules compiled and loaded
  $php_modules = get_loaded_extensions();
@@ -27,7 +27,7 @@
  $module_array = array('gl','ap','ar','inv','org','sys','hr', 'wip','bom');
  
  // Extension Directories to check
- $extensions_array = array('user','block','comment','content','content_type','file','path', 'site_info','site_control');
+ $extensions_array = array('user','block','comment','content','content_type','file','path', 'site_info');
 
  // Write Directories to check
  $dir_array = array('files');

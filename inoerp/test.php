@@ -7,12 +7,15 @@ echo 'item ';
 
 echo '<br>item &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 $bc= new ino_barcode();
-$str = '1122244' ;
-$str .= 'FNC 1';
-$str .= 'WIP-02 ' ;
-
+$str = '1111111xhlsWIP-03' ;
 echo $str;
+$bc= new ino_barcode();
+$bc->setProperty('_text', $str);
+$bc->draw_barcode();
 
+$bc= new ino_barcode();
+$str = 'WIP-03' ;
+echo $str;
 $bc->setProperty('_text', $str);
 $bc->draw_barcode();
 
@@ -22,7 +25,7 @@ $bc->setProperty('_text', '1122244$IWIP-02$IWIP-02.01.01.01.');
 $bc->draw_barcode();
 
 
-              foreach ($all_data as $mod_name => $modules) {
-             
-              }
+//              foreach ($all_data as $mod_name => $modules) {
+//             
+//              }
 ?>

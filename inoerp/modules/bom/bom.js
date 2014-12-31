@@ -7,7 +7,7 @@ function setValFromSelectPage(bom_header_id, item_id_m, item_number, item_descri
  this.org_id = org_id;
 }
 
-setValFromSelectPage.prototype.setVal = function() {
+setValFromSelectPage.prototype.setVal = function () {
  var bom_header_id = this.bom_header_id;
  if (bom_header_id) {
   $("#bom_header_id").val(bom_header_id);
@@ -39,7 +39,7 @@ setValFromSelectPage.prototype.setVal = function() {
   {id: 'uom', data: this.uom_id}
  ];
 
- $(item_obj).each(function(i, value) {
+ $(item_obj).each(function (i, value) {
   if (value.data) {
    var fieldClass = '.' + value.id;
    $('#content').find(rowClass).find(fieldClass).val(value.data);
@@ -52,15 +52,15 @@ setValFromSelectPage.prototype.setVal = function() {
 
 function disableField_forCommonBom() {
  $('#form_line').find(':input').not('input[name="line_id_cb"]')
-  .not('.bom_line_id, .bom_header_id, .routing_sequence,.item_id_m , .wip_supply_type, .supply_sub_inventory, .yield, .planning_percentage, .supply_locator')
-  .attr('disabled', true).css("background-color", "#ccc");
+         .not('.bom_line_id, .bom_header_id, .routing_sequence,.item_id_m , .wip_supply_type, .supply_sub_inventory, .yield, .planning_percentage, .supply_locator')
+         .attr('disabled', true).css("background-color", "#ccc");
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
 //mandatory and field sequence
  var mandatoryCheck = new mandatoryFieldMain();
  mandatoryCheck.header_id = 'bom_header_id';
- mandatoryCheck.mandatoryHeader();
+// mandatoryCheck.mandatoryHeader();
 // mandatoryCheck.form_area = 'form_header';
 // mandatoryCheck.mandatory_fields = ["org_id", "item_number"];
 // mandatoryCheck.mandatory_messages = ["First Select Org", "No Item Number"];
@@ -75,48 +75,49 @@ $(document).ready(function() {
   disableField_forCommonBom();
  }
 
- $('#commonBom_item_number').on('blur', function() {
+ $('body').off('blur', '#commonBom_item_number').on('blur', '#commonBom_item_number', function () {
   disableField_forCommonBom();
- })
-
- //Popup for selecting bom
- $(".bom_header_id.select_popup").click(function() {
-  void window.open('select.php?class_name=bom_all_v', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-  return false;
  });
+//
+// //Popup for selecting bom
+// $(".bom_header_id.select_popup").click(function() {
+//  void window.open('select.php?class_name=bom_all_v', '_blank',
+//   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+//  return false;
+// });
+//
+// //Get the bom_id on find button click
+// $('#form_header a.show.bom_header_id').click(function() {
+//  var headerId = $('#bom_header_id').val();
+//  $(this).attr('href', modepath() + 'bom_header_id=' + headerId);
+// });
 
  //Get the bom_id on find button click
- $('#form_header a.show.bom_header_id').click(function() {
-  var headerId = $('#bom_header_id').val();
-  $(this).attr('href', modepath() + 'bom_header_id=' + headerId);
- });
+// $('#form_header a.show.item_id_m').click(function() {
+//   var link = modepath() + 'item_id_m=' + $('#item_id_m').val() + '&org_id=' + $('#org_id').val();
+//   if($('#revision_name').val()){
+//    link += '&revision_name=' + $('#revision_name').val();
+//   }
+//  $(this).attr('href',link);
+// });
 
- //Get the bom_id on find button click
- $('#form_header a.show.item_id_m').click(function() {
-   var link = modepath() + 'item_id_m=' + $('#item_id_m').val() + '&org_id=' + $('#org_id').val();
-   if($('#revision_name').val()){
-    link += '&revision_name=' + $('#revision_name').val();
-   }
-  $(this).attr('href',link);
- });
+ $('body').off('click', 'a.bom_header_withRev_id').on('click', 'a.bom_header_withRev_id', function (e) {
+  e.preventDefault();
+  var item_id_m = $('#item_id_m').val();
+  var org_id = $('#org_id').val();
+  var revision_name = $('#revision_name').val();
+  var urlLink = $(this).attr('href');
+  var urlLink_a = urlLink.split('?');
+  var formUrl = 'includes/json/json_form.php?' + urlLink_a[1] + '&item_id_m=' + item_id_m + '&org_id=' + org_id + '&revision_name=' + revision_name;
+  getFormDetails(formUrl);
+ }).one();
 
- //add a new row
-// onClick_add_new_row('tr.bom_line0', 'tbody.form_data_line_tbody', 3);
- $("#content").on("click", ".add_row_img", function() {
-  var addNewRow = new add_new_rowMain();
-  addNewRow.trClass = 'bom_line';
-  addNewRow.tbodyClass = 'form_data_line_tbody';
-  addNewRow.noOfTabs = 3;
-  addNewRow.lineNumberIncrementValue = 10;
-  addNewRow.removeDefault = true;
-  addNewRow.add_new_row();
- });
+
 
  //get subinventories on selecting org
- $('#content').on('blur', '#org_id', function() {
+ $('#content').off('blur', '#org_id').on('blur', '#org_id', function () {
   var org_id = $(this).val();
-    getSubInventory({
+  getSubInventory({
    json_url: 'modules/inv/subinventory/json_subinventory.php',
    org_id: org_id
   });
@@ -124,7 +125,7 @@ $(document).ready(function() {
 
 
  //get locators on changing sub inventory
- $('#content').on('blur', '.subinventory_id', function() {
+ $('#content').off('blur', '.subinventory_id').on('blur', '.subinventory_id', function () {
   var trClass = '.' + $(this).closest('tr').attr('class');
   var subinventory_id = $(this).val();
   getLocator('modules/inv/locator/json_locator.php', subinventory_id, 'subinventory', trClass);
@@ -135,21 +136,22 @@ $(document).ready(function() {
 
 
  //popu for selecting items
- $('#content').on('click', '.select_item_number1.select_popup', function() {
-  var openUrl = 'select.php?class_name=item';
-  if ($(this).siblings('.item_number').val()) {
-   openUrl += '&item_number=' + $(this).siblings('.item_number').val();
-  }
-  void window.open(openUrl, '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ $('#content').off('click', '.select_item_number1.select_popup')
+         .on('click', '.select_item_number1.select_popup', function () {
+          var openUrl = 'select.php?class_name=item';
+          if ($(this).siblings('.item_number').val()) {
+           openUrl += '&item_number=' + $(this).siblings('.item_number').val();
+          }
+          void window.open(openUrl, '_blank',
+                  'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+         });
+
+ $('#content').off('blur', '#org_id, #item_number').on('blur', '#org_id, #item_number', function () {
+  getItemRevision({
+   'org_id': $('#org_id').val(),
+   'item_id_m': $('#item_id_m').val(),
+   'show_date': false
+  });
  });
- 
-$('#content').on('blur', '#org_id, #item_number', function() {
- getItemRevision({
-  'org_id': $('#org_id').val(),
-  'item_id_m': $('#item_id_m').val(),
-   'show_date' : false
- });
-});
 
 });

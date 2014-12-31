@@ -27,10 +27,4 @@ $(document).ready(function() {
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //Get the sys_notification_id on find button click
- $('a.show.sys_notification_id').click(function() {
-	var sys_notification_id = $('#sys_notification_id').val();
-	$(this).attr('href', modepath() + 'sys_notification_id=' + sys_notification_id);
- });
-
 });

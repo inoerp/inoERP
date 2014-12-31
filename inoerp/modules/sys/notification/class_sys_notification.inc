@@ -1,11 +1,35 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+/**
+ * sys_notification
+ *
+ */
+
 
  class sys_notification extends dbObject {
 
   public static $table_name = "sys_notification";
   public static $primary_column = "sys_notification_id";
   public static $key_column = 'notification_type';
-  public static $module = "hr";
+  public static $module = "sys";
+  public static $system_info = [
+  'name' => 'Notification',
+  'number' => '9104',
+  'description' => 'System Notifications',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'sys',
+  'weight' => 4
+ ];
   public static $status_a = [
    'OPEN' => 'Open',
    'CLOSED' => 'Closed'

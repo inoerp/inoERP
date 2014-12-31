@@ -71,9 +71,6 @@ class option_line extends dbObject {
  public $last_update_date;
  public $msg;
 
- public function _before_save() {
-  pa($this);
- }
 
  public function find_all_lines() {
   $sql = " SELECT * FROM " . self::$table_name;

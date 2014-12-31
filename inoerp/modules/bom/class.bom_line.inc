@@ -82,8 +82,6 @@
 
   public function _before_save() {
    if (!empty($this->bom_header_id)) {
-    pa($this);
-    pa($_POST);
     $bom_header = bom_header::find_by_id($this->bom_header_id);
     if (!empty($bom_header->common_bom_item_id_m)) {
      echo "<br>Common BOM, Only Unique attributes are saved";

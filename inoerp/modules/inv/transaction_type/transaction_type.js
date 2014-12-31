@@ -24,12 +24,5 @@ $(document).ready(function() {
 	void window.open('select.php?class_name=transaction_type', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
-
- //Get the transaction_type_id on find button click
- $('a.show.transaction_type_id').click(function() {
-	var transaction_type_id = $('#transaction_type_id').val();
-	$(this).attr('href', modepath() + 'transaction_type_id=' + transaction_type_id);
- });
-
 });
 

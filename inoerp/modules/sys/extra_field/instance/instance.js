@@ -17,11 +17,5 @@ $(document).ready(function() {
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //Get the sys_extra_field_instance_id on find button click
- $('a.show.sys_extra_field_instance_id').click(function() {
-	var sys_extra_field_instance_id = $('#sys_extra_field_instance_id').val();
-	$(this).attr('href', modepath() + 'sys_extra_field_instance_id=' + sys_extra_field_instance_id);
- });
-
 });
 

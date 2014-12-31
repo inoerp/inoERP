@@ -1,6 +1,20 @@
 <?php
 
-/* Count Logic
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+/**
+ * inv_count_header
+ * Contains all the inv_count_header information, such as - count_name, count_type ,  org_id, etc.
+ * 
+ */
+
+/** Count Logic
  * 1. Find all the items as per class , inventory_count_header - corresponding inv_abc_assigment_id
  * 2. If no count_start_date then count_srat_date = current_date + 1
  * count_end_date = count_start_date + 365
@@ -24,7 +38,6 @@
  * $count = ($count == no_of_counts_per_year-1 ) ? 0 : $count++;
  *  }
  */
-
 class inv_count_header extends dbObject {
 
  public static $table_name = "inv_count_header";
@@ -32,6 +45,18 @@ class inv_count_header extends dbObject {
  public static $dependent_classes = ['inv_count_schedule'];
  public static $key_column = "count_name";
  public static $module = "inv";
+ public static $system_info = [
+  'name' => 'Inventory Count',
+  'number' => '2104',
+  'description' => 'Inventory Count',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'dependent_class' => array('inv_count_schedule'),
+  'primary_entity_cb' => '',
+  'module_name' => 'inv',
+  'weight' => 4
+ ];
  public static $count_type_a = [
   'CYCLE_COUNT' => 'Cycle Count',
   'PHYSICAL_INV' => 'Physical Inventory',
@@ -47,7 +72,6 @@ class inv_count_header extends dbObject {
   'UPDATE_COUNT' => 'Update Count',
   'DELETE_COUNT' => 'Delete All Count',
  ];
- 
  public $field_a = [
   'inv_count_header_id',
   'count_name',
@@ -216,7 +240,7 @@ class inv_count_header extends dbObject {
    $offset = ($count) * $no_of_items_to_be_counted_per_day;
    $items_already_scheduled += $no_of_items_to_be_counted_per_day;
    $sql = " SELECT * FROM inv_abc_assignment_line WHERE inv_abc_assignment_header_id = '{$this->inv_abc_assignment_header_id}' "
-     . " AND abc_class = '{$class_code}' ";
+    . " AND abc_class = '{$class_code}' ";
    $sql .=" LIMIT {$no_of_items_to_be_counted_per_day} ";
    $sql .=" OFFSET {$offset} ";
    $result = $this->findBySql($sql);

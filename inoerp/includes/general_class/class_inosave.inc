@@ -68,7 +68,11 @@ class inosave extends dbObject {
 
    foreach ($$class->field_a as $key => $value) {
     if (isset($_POST[$value][$i])) {
-     $$class->$value = $_POST[$value][$i];
+     if (substr($_POST[$value][$i], -3) == '_id') {
+      $$class->$value = str_replace(array(',', '.'), '', $_POST[$value][$i]);
+     } else {
+      $$class->$value = $_POST[$value][$i];
+     }
     }
    }
 
@@ -152,7 +156,7 @@ class inosave extends dbObject {
    if (!empty($$class->number_fields)) {
     foreach ($$class->number_fields as $key => $value) {
      if (!empty($_POST[$value][$i])) {
-      $$class->$value = str_replace(array(',','.'), '', $_POST[$value][$i]);
+      $$class->$value = str_replace(array(',', '.'), '', $_POST[$value][$i]);
      } else {
       $$class->$value = NUll;
      }
@@ -285,7 +289,7 @@ class inosave extends dbObject {
      //save contacts
      if (!empty($_POST['extn_contact_id_new'])) {
       foreach ($_POST['extn_contact_id_new'] as $extn_contact_id_new_k => $extn_contact_id_new_v) {
-       if(empty($extn_contact_id_new_v)){
+       if (empty($extn_contact_id_new_v)) {
         continue;
        }
        $ext_cr = new extn_contact_reference();
@@ -509,6 +513,7 @@ class inosave extends dbObject {
  }
 
  public function json_save($json_data = true) {
+  pa($_POST);
   if (!empty($_POST['headerData'])) {
    $this->save_header();
   }

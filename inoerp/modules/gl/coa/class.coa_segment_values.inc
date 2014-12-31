@@ -1,6 +1,18 @@
 
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * coa_segment_values
+ * 
+ */
 class coa_segment_values {
 public static $table_name = "coa_segment_values";
 public $coa_segment_values_id;

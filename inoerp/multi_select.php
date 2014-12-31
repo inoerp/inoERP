@@ -40,7 +40,6 @@ if (!empty($class_names)) {
   $action_class = $_GET['search_class_name'];
  }
 
-
  if (!empty($action_class)) {
   if (is_array($action_class)) {
    $action_class = $action_class[0];
@@ -122,7 +121,6 @@ if (!empty($class_names)) {
  $search_form = $search->search_form($$class);
 
  $hidden_field_stmt = $search->hidden_fields();
-
  if (!empty($pagination)) {
   $pagination->setProperty('_path', 'multi_select');
   $pagination_statement = $pagination->show_pagination();
@@ -130,14 +128,31 @@ if (!empty($class_names)) {
 }
 ?>
 
-<?php If (!empty($action_class_i) && property_exists($action_class_i, 'js_fileName')) { ?>
+<?php
+if ($continue) {
+ if (!empty($$class) && property_exists($$class, 'multi_select_template_path')) {
+  $template_file_names = $class::$multi_select_template_path;
+ } else if (!empty($$class)) {
+  $template_file_names = ['includes/basics/multi_select_page.inc'];
+ }
+ 
+ include_once(THEME_DIR . '/main_template.inc');
+} else {
+ $continue = false;
+ echo "<h2>Could n't call the header</h2>";
+ return;
+}
+If (!empty($action_class_i) && property_exists($action_class_i, 'js_fileName')) {
+ ?>
  <script src="<?php echo HOME_URL . $action_class_i::$js_fileName; ?>"></script>	 
 <?php } ?>
 
-<?php
-if (!empty($$class) && property_exists($$class, 'multi_select_template_path')) {
- require_once($class::$multi_select_template_path);
-} else if (!empty($$class)) {
- require_once(INC_BASICS . DS . "multi_select_page.inc");
-}
-?>
+
+<script type="text/javascript">
+ $(document).ready(function () {
+//  $.getScript("includes/js/erp.js");
+    if (!$("link[href='includes/ecss/search.css']").length) {
+   $('<link href="includes/ecss/search.css" rel="stylesheet">').appendTo("head");
+  }
+ });
+</script>

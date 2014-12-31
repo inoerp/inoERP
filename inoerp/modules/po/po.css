@@ -1,6 +1,6 @@
-.class_detail_form{
+#po_divId .class_detail_form{
 margin-top: 22px;
- margin-left: -960px;
+ margin-left: -860px;
 }
 
 #multi_select .class_detail_form{
@@ -8,7 +8,7 @@ margin-top: 15px;
  margin-left: -10px;
 }
 
-.form_detail_data_fs{
+#po_divId .form_detail_data_fs{
   width: 900px;
 }
 

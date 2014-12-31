@@ -1,5 +1,16 @@
 <?php
-
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+/**
+ * 
+ *
+ */
 class category extends dbObject {
  /* 1. Major category is a category which doesnt have any parent
   * 2. Primary Category is a category which is place holder and contains only other categories.
@@ -13,6 +24,17 @@ class category extends dbObject {
  public static $key_column = "category";
  public static $module = "extension";
 //  data base variables as stored database column name
+    public static $system_info = [
+  'name' => 'Category',
+  'number' => '10011',
+  'description' => 'Create & Mainten Categories',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'extn',
+  'weight' => 11
+ ];
  public $field_a = [
   "category_id",
   "major_category_id",

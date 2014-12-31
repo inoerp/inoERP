@@ -47,8 +47,7 @@
 				 <ul>
 					<li><label>Tags : </label><?php $f->text_field_d('terms'); ?> </li>
 					<li class="published_cb"> <label>Published : </label>
-					 <?php $f = new inoform();
-					 echo $f->checkBox_field('published_cb', $$class->published_cb); ?></li>
+					 <?php echo $f->checkBox_field('published_cb', $$class->published_cb); ?></li>
 					<li><label>Front Page : </label> <?php echo $f->checkBox_field('show_in_frontpage_cb', $$class->show_in_frontpage_cb); ?></li>
 					<li><label>PHP Code : </label> <?php echo $f->checkBox_field('content_php_cb', $$class->content_php_cb); ?></li>
 					<li><label>Weightage : </label><?php $f->text_field_d('weightage'); ?> </li>

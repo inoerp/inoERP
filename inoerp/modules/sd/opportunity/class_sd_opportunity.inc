@@ -1,11 +1,34 @@
 <?php
-
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+/**
+ * sd_opportunity
+ * Contains all the sd_quote_header information, such as - sd_opportunity_id, sd_lead_id, customer info, etc
+ *
+ */
 class sd_opportunity extends dbObject {
 
  public static $table_name = "sd_opportunity";
  public static $primary_column = "sd_opportunity_id";
- public static $key_column = 'subject';
+ public static $key_column = 'opportunity_subject';
  public static $module = "sd";
+     public static $system_info = [
+  'name' => 'Sales Opportunity',
+  'number' => '2304',
+  'description' => 'Create & Mainten Sales Opportunity',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'sd',
+  'weight' => 4
+ ];
  public $action_a = [
   'CREATE_QUOTE' => 'Create Quote',
   'CLOSE_OPPORTUNITY' => 'Close Opportunity',
@@ -23,7 +46,7 @@ class sd_opportunity extends dbObject {
   'sd_lead_id',
   'opportunity_number',
   'primary_contact_id',
-  'subject',
+  'opportunity_subject',
   'type',
   'description',
   'status',
@@ -61,7 +84,7 @@ class sd_opportunity extends dbObject {
   'sales_team',
  ];
  public $requiredField = [
-  'subject',
+  'opportunity_subject',
   'sd_lead_id',
  ];
  public $numberField = [
@@ -87,7 +110,7 @@ class sd_opportunity extends dbObject {
  public $sd_lead_id;
  public $opportunity_number;
  public $primary_contact_id;
- public $subject;
+ public $opportunity_subject;
  public $type;
  public $description;
  public $status;
@@ -135,7 +158,7 @@ class sd_opportunity extends dbObject {
   '_show_view_path' => 1,
  ];
  public $pageTitle = " Sales Opportunity  "; //page Title
-
+ 
  Public static function opportunity_type() {
   $option_header = option_header::find_by_name('SD_LEAD_TYPE');
   $lines = option_line::find_by_option_id($option_header->option_header_id);

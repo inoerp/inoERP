@@ -52,13 +52,7 @@ $(document).ready(function () {
           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //Get the sd_lead_id on find button click
- $('a.show.sd_lead_id').click(function () {
-  var sd_lead_id = $('#sd_lead_id').val();
-  $(this).attr('href', modepath() + 'sd_lead_id=' + sd_lead_id);
- });
-
- $("#content").on("change", '#ar_customer_site_id', function () {
+ $("#content").off("change", '#ar_customer_site_id').on("change", '#ar_customer_site_id', function () {
   var customer_site_id = $("#ar_customer_site_id").val();
   if (customer_site_id) {
    getCustomerSiteDetails('modules/ar/customer/json_customer.php', customer_site_id);

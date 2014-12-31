@@ -83,33 +83,7 @@ $(document).ready(function() {
 
  copy_sys_profile_header_id();
 
-  //Get the org_id on find button click
- $('a.show.sys_association_level').click(function(e) {
-	var headerId = $('#transaction_type_id').val();
-	var association_level = $('#association_level').val();
-	$(this).attr('href', modepath() + 'transaction_type_id=' + headerId + '&association_level=' +  association_level);
- });
+deleteData('form.php?line_class_name=bc_auto_trigger');
 
- onClick_add_new_row('tr.bc_auto_trigger0', 'tbody.bc_auto_trigger_values', 4);
-
-//context menu
-
-deleteData('form.php?class_name=sys_profile_header&line_class_name=bc_auto_trigger');
-//deleteData('json.option.php');
- //context menu
- var classContextMenu = new contextMenuMain();
-  classContextMenu.docLineId = 'bc_label_auto_trigger_id';
- classContextMenu.btn2DivId = 'form_line';
- classContextMenu.trClass = 'bc_auto_trigger';
- classContextMenu.tbodyClass = 'form_data_line_tbody';
- classContextMenu.noOfTabbs = 3;
-// classContextMenu.contextMenu();
- 
- var tax_codeSave = new saveMainClass();
- tax_codeSave.json_url = 'form.php?class_name=bc_auto_trigger';
- tax_codeSave.single_line = false;
- tax_codeSave.line_key_field = 'association_level';
- tax_codeSave.form_line_id = 'bc_auto_trigger';
- tax_codeSave.saveMain();
 });
 

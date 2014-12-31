@@ -1,5 +1,8 @@
 <!--Start of this page-->
 <?php
+
+$readonly = 1; $mode = 2;
+
 if (!empty($$class->item_id_m)) {
  $item = item::find_by_id($$class->item_id_m);
  $$class->item_number = $item->item_number;

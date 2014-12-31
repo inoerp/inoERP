@@ -57,4 +57,12 @@
   }
  }
 ?>
-<?php require_once(INC_BASICS . DS . "select_page.inc") ?>
+<?php 
+ if ($continue) {
+  include_once(THEME_DIR . '/header.inc');
+ } else {
+  $continue = false;
+  echo "<h2>Could n't call the header</h2>";
+  return;
+ }
+require_once(INC_BASICS . DS . "select_page.inc") ?>

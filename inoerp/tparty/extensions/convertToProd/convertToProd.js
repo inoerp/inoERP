@@ -46,17 +46,17 @@ $(document).ready(function() {
 //  var Mandatory_Fields = ["#org_id", "First Select Org Name", "#item_number", "First Select Item Number"];
 // select_mandatory_fields(Mandatory_Fields);
 //
- $('#form_line').on("click", function() {
-	if (!$('#sys_profile_header_id').val()) {
-	 alert('No header Id : First enter/save header details');
-	} else {
-	 var headerId = $('#sys_profile_header_id').val();
-	 if (!$(this).find('.sys_profile_header_id').val()) {
-		$(this).find('.sys_profile_header_id').val(headerId);
-	 }
-	}
-
- });
+// $('#form_line').on("click", function() {
+//	if (!$('#sys_profile_header_id').val()) {
+//	 alert('No header Id : First enter/save header details');
+//	} else {
+//	 var headerId = $('#sys_profile_header_id').val();
+//	 if (!$(this).find('.sys_profile_header_id').val()) {
+//		$(this).find('.sys_profile_header_id').val(headerId);
+//	 }
+//	}
+//
+// });
 
 
  //Popup for selecting option type

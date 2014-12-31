@@ -32,7 +32,7 @@ class item extends dbObject {
   'db_version' => '1001',
   'mod_version' => '1.1.1',
   'primary_entity_cb' => '',
-  'module_name' => 'fp',
+  'module_name' => 'inv',
   'weight' => 1
  ];
  public static $ls_uniqueness_a = [

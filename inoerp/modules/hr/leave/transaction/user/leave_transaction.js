@@ -39,10 +39,4 @@ $(document).ready(function() {
    'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
  
- //Get the hr_leave_transaction_id on find button click
- $('a.show.hr_leave_transaction_id').click(function() {
-	var hr_leave_transaction_id = $('#hr_leave_transaction_id').val();
-	$(this).attr('href', modepath() + 'hr_leave_transaction_id=' + hr_leave_transaction_id);
- });
-
 });

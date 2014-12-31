@@ -14,14 +14,3 @@ setValFromSelectPage.prototype.setVal = function() {
  }
 };
 
-$(document).ready(function() {
- //save class
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=site_info';
- classSave.form_header_id = 'site_info';
- classSave.single_line = false;
- classSave.savingOnlyHeader = true;
- classSave.enable_select = true;
- classSave.headerClassName = 'site_info';
- classSave.saveMain();
-});

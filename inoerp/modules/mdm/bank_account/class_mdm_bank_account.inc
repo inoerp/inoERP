@@ -1,5 +1,18 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * mdm_bank_account
+ * Contains all the onhand information, such as - bank_name, bank_number, description,  bank_name_alt, etc.
+ * 
+ */
  class mdm_bank_account extends dbObject {
 
   public static $table_name = "mdm_bank_account";

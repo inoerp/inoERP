@@ -39,31 +39,8 @@ $(document).ready(function() {
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
-
-//Get the leave_balance_id on find button click
- $('a.show.hr_leave_balance').click(function() {
-	var headerId = $('#employee_id').val();
-	$(this).prop('href', modepath() + 'pageno=1&per_page=10&submit_search=Search&search_class_name=hr_leave_balance&employee_id=' + headerId);
- });
-
- onClick_add_new_row('tr.leave_balance_line0', 'tbody.leave_balance_values', 1);
-// deleteData('json_leave_balance.php');
 deleteData('form.php?class_name=hr_leave_balance&line_class_name=hr_leave_balance');
 
- //context menu
- var classContextMenu = new contextMenuMain();
-  classContextMenu.docLineId = 'hr_leave_balance_id';
- classContextMenu.btn2DivId = 'form_line';
- classContextMenu.trClass = 'leave_balance_line';
- classContextMenu.tbodyClass = 'form_data_line_tbody';
- classContextMenu.noOfTabbs = 3;
-// classContextMenu.contextMenu();
- 
- var leave_balanceSave = new saveMainClass();
- leave_balanceSave.json_url = 'form.php?class_name=hr_leave_balance';
- leave_balanceSave.single_line = false;
- leave_balanceSave.line_key_field = 'leave_balance';
- leave_balanceSave.form_line_id = 'hr_leave_balance';
- leave_balanceSave.saveMain();
+//
 
 });  

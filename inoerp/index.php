@@ -26,9 +26,17 @@
  $content_class = true;
  $class_names[] = 'content';
 ?>
-<?php include_once("includes/functions/loader.inc"); ?>
+<?php include_once("includes/functions/loader.inc"); 
+ if ($continue) {
+  include_once(THEME_DIR . '/header.inc');
+ } else {
+  $continue = false;
+  echo "<h2>Could n't call the header</h2>";
+  return;
+ }
+?>
 <link href="<?php echo HOME_URL; ?>themes/default/index.css" media="all" rel="stylesheet" type="text/css" />
-<script src="<?php echo HOME_URL; ?>includes/js/jssor.slider.mini.js"></script>
+<!--<script src="<?php echo HOME_URL; ?>includes/js/jssor.slider.mini.js"></script>-->
 <div id="all_contents">
  <div id="content_header">
   <div id="process_folw">

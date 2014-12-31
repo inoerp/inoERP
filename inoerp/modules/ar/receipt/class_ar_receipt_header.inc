@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * inoERP 
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+
+/**
+ * ar_receipt_header
+ * Used for generating AR receipt and appling to AR Transactions
+  * 
+ */
 class ar_receipt_header extends dbObject {
 
  public static $table_name = "ar_receipt_header";

@@ -21,7 +21,7 @@
   $child_lot = inv_lot_number::find_allChild_bylotId($$class->inv_lot_number_id);
  }
  if (empty($inv_lot_transaction_object)) {
-  $inv_lot_transaction_object = array(new inv_lot_transaction());
+  $inv_lot_transaction_object = array(new inv_lot_transaction_v());
  }
 
  if (!empty($$class->parent_lot_number_id)) {

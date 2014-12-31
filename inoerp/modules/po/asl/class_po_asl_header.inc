@@ -1,12 +1,12 @@
 <?php
 /**
- * inoERP -  Version 0.1.1
- * @copyright 2014 Nishit R. Das
- * @link       http://inoideas.org
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
- * @license   https://www.mozilla.org/MPL/2.0/
  */
-
 /**
  * PO_ASL_HEADER CLass
  * Contains all the approved supplier header information, such as - ASL Type, Org Id, Item id 

@@ -1,5 +1,20 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * ap_payment_header
+ * A sigle payment can be created against multiple invoices
+ * Payment header contains all the header level informations such as payment_number, payment_stype, paying entity
+ * Payment line contains invoices details
+ *
+ */
  class ap_payment_header extends dbObject {
 
   public static $table_name = "ap_payment_header";

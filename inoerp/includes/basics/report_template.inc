@@ -1,5 +1,5 @@
 <script src="<?php echo HOME_URL; ?>includes/js/report.js"></script>
-<link href="<?php echo HOME_URL; ?>includes/ecss/getsvgimage.css" media="all" rel="stylesheet" type="text/css" />
+<link href="<?php echo HOME_URL; ?>includes/ecss/report.css" media="all" rel="stylesheet" type="text/css" />
 <?php
 if (!empty($msg)) {
  $show_message = '<div id="dialog_box">';
@@ -10,7 +10,9 @@ if (!empty($msg)) {
  $show_message .= '</div>';
 }
 ?>
+
 <div id="all_contents">
+ <ul id="css_files" class="none"><li>includes/ecss/getsvgimage.css</li></ul>
  <div id="content_left"></div>
  <div id="content_right">
 	<div id="content_right_left">
@@ -86,4 +88,3 @@ if (!empty($msg)) {
 	<div id="content_right_right"></div>
  </div>
 </div>
-<?php include_template('footer.inc') ?>

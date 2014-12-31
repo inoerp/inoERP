@@ -73,28 +73,28 @@ $(document).ready(function () {
   return false;
  });
 
- //Get the mdm_bank_header_id on refresh button click
- $('a.show.mdm_bank_header_id').click(function () {
-  var mdm_bank_header_id = $('#mdm_bank_header_id').val();
-  $(this).attr('href', modepath() + 'mdm_bank_header_id=' + mdm_bank_header_id);
-
- });
-
- //Popup for selecting address 
- $(".address_popup").click(function () {
-  var addressPopupDivClass = $(this).closest('div').prop('class');
-  localStorage.setItem("addressPopupDivClass", addressPopupDivClass);
-  void window.open('select.php?class_name=address', '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-  return false;
- });
-
-
- $('a.show.mdm_bank_site_id').click(function () {
-  var mdm_bank_header_id = $('#mdm_bank_header_id').val();
-  var mdm_bank_site_id = $('#mdm_bank_site_id').val();
-  $(this).attr('href', modepath() + 'mdm_bank_header_id=' + mdm_bank_header_id + '&mdm_bank_site_id=' + mdm_bank_site_id);
- });
+// //Get the mdm_bank_header_id on refresh button click
+// $('a.show.mdm_bank_header_id').click(function () {
+//  var mdm_bank_header_id = $('#mdm_bank_header_id').val();
+//  $(this).attr('href', modepath() + 'mdm_bank_header_id=' + mdm_bank_header_id);
+//
+// });
+//
+// //Popup for selecting address 
+// $(".address_popup").click(function () {
+//  var addressPopupDivClass = $(this).closest('div').prop('class');
+//  localStorage.setItem("addressPopupDivClass", addressPopupDivClass);
+//  void window.open('select.php?class_name=address', '_blank',
+//          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+//  return false;
+// });
+//
+//
+// $('a.show.mdm_bank_site_id').click(function () {
+//  var mdm_bank_header_id = $('#mdm_bank_header_id').val();
+//  var mdm_bank_site_id = $('#mdm_bank_site_id').val();
+//  $(this).attr('href', modepath() + 'mdm_bank_header_id=' + mdm_bank_header_id + '&mdm_bank_site_id=' + mdm_bank_site_id);
+// });
 
 deleteReferences();
 });

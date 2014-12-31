@@ -62,28 +62,4 @@ $(document).ready(function() {
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //Get the ar_transaction_type_id on find button click
- $('a.show.ar_transaction_type_id').click(function() {
-	var ar_transaction_type_id = $('#ar_transaction_type_id').val();
-	$(this).attr('href', modepath() + 'ar_transaction_type_id=' + ar_transaction_type_id);
- });
-
-//context menu
- var classContextMenu = new contextMenuMain();
- classContextMenu.docHedaderId = 'ar_transaction_type_id';
- classContextMenu.btn1DivId = 'ar_transaction_type_id';
- classContextMenu.contextMenu();
-
-//save class
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=ar_transaction_type';
- classSave.form_header_id = 'ar_transaction_type_form';
- classSave.primary_column_id = 'ar_transaction_type_id';
- classSave.single_line = false;
- classSave.savingOnlyHeader = true;
- classSave.enable_select = true;
- classSave.headerClassName = 'ar_transaction_type';
- classSave.saveMain();
-
-
 });

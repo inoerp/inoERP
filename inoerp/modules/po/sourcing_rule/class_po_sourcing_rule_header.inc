@@ -1,5 +1,17 @@
 <?php
-
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+/**
+ * po_sourcing_rule_header
+ * Contains all the po_sourcing_rule_header information 
+ *
+ */
 class po_sourcing_rule_header extends dbObject {
 
  public static $table_name = "po_sourcing_rule_header";
@@ -11,9 +23,9 @@ class po_sourcing_rule_header extends dbObject {
 		 'name' => 'Sourcing Rule',
 		 'number' => '2202',
 		 'description' => 'Create & Mainten Sourcing Rule',
-		 'version' => '1.1.1.3',
-		 'db_version' => '1001',
-		 'mod_version' => '1.1.x-1.1',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
 		 'dependent_class' => array('po_sourcing_rule_line'),
 		 'primary_entity_cb' => '',
 		 'module_name' => 'po',

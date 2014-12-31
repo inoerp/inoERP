@@ -1,5 +1,17 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * inv_lot_onhand
+ * 
+ */
  class inv_lot_onhand extends inv_lot_number {
 
   public static $table_name = "inv_lot_onhand";
@@ -7,6 +19,17 @@
   public static $parent_primary_column = "inv_lot_number_id";
   public static $key_column = "item_id_m";
   public static $module = "inv";
+   public static $system_info = [
+  'name' => 'Lot Onhand',
+  'number' => '2110',
+  'description' => 'Item Lot Onhand',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'inv',
+  'weight' => 10
+ ];
   public $field_a = [
    'inv_lot_onhand_id',
    'onhand_id',

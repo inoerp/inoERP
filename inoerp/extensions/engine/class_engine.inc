@@ -1,11 +1,33 @@
 <?php
-
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+/**
+ * 
+ *
+ */
 class engine extends dbObject {
 
  public static $table_name = "engine";
  public static $module = "sys";
  public static $primary_column = "engine_id";
  public static $key_column = "obj_class_name";
+  public static $system_info = [
+  'name' => 'Engine',
+  'number' => '10001',
+  'description' => 'System Engine',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'extn',
+  'weight' => 1
+ ];
  public $field_a = [
   'engine_id',
   'obj_class_name',
@@ -78,8 +100,7 @@ class engine extends dbObject {
  public $update_db_cb;
 
  public function _before_save() {
-//	pa($this);
-//	return 10;
+
  }
 
  public function _after_save() {

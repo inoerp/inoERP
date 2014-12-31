@@ -109,7 +109,7 @@
  								<li><?php echo form::hidden_field('ext_test_case_header_id', $$class->ext_test_case_header_id); ?></li>
  							 </ul>
  							</td>
- 							<td><?php $f = new inoform(); form::text_field_wid2sr('ext_test_case_line_id'); ?></td>
+ 							<td><?php form::text_field_wid2sr('ext_test_case_line_id'); ?></td>
  							<td><?php echo $f->text_field_wid2s('line_number'); ?></td>
 							<td><?php echo $f->text_area('step_action', $$class_second->step_action, '3'); ?></td>
 							<td><?php echo $f->text_area('input', $$class_second->input, '3'); ?></td>

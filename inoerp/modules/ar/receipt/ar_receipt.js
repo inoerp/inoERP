@@ -97,96 +97,17 @@ get_customer_detail_for_bu();
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
-//selecting ar_customer
- $(".ar_customer_id.select_popup").on("click", function() {
-	localStorage.idValue = "";
-	void window.open('select.php?class_name=ar_customer', '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
-
-//popu for selecting items
- $('#content').on('click', '.select_transaction_number.select_popup', function() {
-	if ($(this).closest('tr').find('.ar_receipt_line_id').first().val()) {
-	 alert('You are not allowed to select a new transaction\nCancell or Viod the payment if required');
-	 return;
-	}
-	var rowClass = $(this).closest('tr').prop('class');
-	var fieldClass = $(this).closest('td').find('.select_transaction_number').prop('class');
-	localStorage.setItem("row_class", rowClass);
-	localStorage.setItem("field_class", fieldClass);
-	var openUrl = 'select.php?class_name=ar_unpaid_transaction_v';
-	openUrl += '&ar_customer_id=' + $('#ar_customer_id').val();
-	localStorage.setItem("reset_link_ofSelect", openUrl);
-	void window.open(openUrl, '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
-
- //Get the ar_receipt_header_id on refresh button click
- $('a.show.ar_receipt_header_id').click(function() {
-	var ar_receipt_header_id = $('#ar_receipt_header_id').val();
-	$(this).attr('href', modepath() + 'ar_receipt_header_id=' + ar_receipt_header_id);
-
- });
+////selecting ar_customer
+// $(".ar_customer_id.select_popup").on("click", function() {
+//	localStorage.idValue = "";
+//	void window.open('select.php?class_name=ar_customer', '_blank',
+//					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+// });
 
 
- $('a.show.bu_org_id').click(function() {
-	var bu_org_id = $('#bu_org_id').val();
-	if (bu_org_id) {
-	 $(this).attr('href', modepath() + 'bu_org_id=' + bu_org_id);
-	}
- });
-
- $('a.show.ar_customer_site_id').click(function() {
-	var ar_customer_id = $('#headerId').val();
-	var ar_customer_site_id = $('#ar_customer_site_id').val();
-	$(this).attr('href', '?ar_customer_id=' + ar_customer_id + '&ar_customer_site_id=' + ar_customer_site_id);
- });
-
-
- $("#content").on("click", ".add_row_img", function() {
-	var addNewRow = new add_new_rowMain();
-	addNewRow.trClass = 'ar_receipt_line';
-	addNewRow.tbodyClass = 'form_data_line_tbody';
-	addNewRow.noOfTabs = 3;
-	addNewRow.removeDefault = true;
-	addNewRow.add_new_row();
-	$(".tabsDetail").tabs();
- });
 
 
  deleteData('form.php?class_name=ar_receipt_header&line_class_name=ar_receipt_line&detail_class_name=ar_receipt_detail');
-
-//remove po lines
- $("#remove_row").click(function() {
-	$('input[name="ar_receipt_line_id_cb"]:checked').each(function() {
-	 $(this).closest('tr').remove();
-	});
- });
-
- //context menu
- var classContextMenu = new contextMenuMain();
- classContextMenu.docHedaderId = 'ar_receipt_header_id';
- classContextMenu.docLineId = 'ar_receipt_line_id';
- classContextMenu.btn1DivId = 'ar_receipt_header';
- classContextMenu.btn2DivId = 'form_line';
- classContextMenu.trClass = 'ar_receipt_line';
- classContextMenu.tbodyClass = 'form_data_line_tbody';
- classContextMenu.noOfTabbs = 3;
- classContextMenu.contextMenu();
-
-// deleteData('json.po.php');
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=ar_receipt_header';
- classSave.form_header_id = 'ar_receipt_header';
- classSave.primary_column_id = 'ar_receipt_header_id';
- classSave.line_key_field = 'amount';
- classSave.single_line = false;
- classSave.savingOnlyHeader = false;
- classSave.headerClassName = 'ar_receipt_header';
- classSave.lineClassName = 'ar_receipt_line';
- classSave.enable_select = true;
- classSave.saveMain();
-
 
 //all actions
 //Popup for selecting match 

@@ -1,6 +1,6 @@
 function setValFromSelectPage(po_header_id, combination, supplier_id, supplier_number, supplier_name,
- item_id_m, item_number, item_description, uom_id, address_id, address_name, address,
- country, postal_code) {
+        item_id_m, item_number, item_description, uom_id, address_id, address_name, address,
+        country, postal_code) {
  this.po_header_id = po_header_id;
  this.combination = combination;
  this.supplier_id = supplier_id;
@@ -17,7 +17,7 @@ function setValFromSelectPage(po_header_id, combination, supplier_id, supplier_n
  this.postal_code = postal_code;
 }
 
-setValFromSelectPage.prototype.setVal = function() {
+setValFromSelectPage.prototype.setVal = function () {
  var po_header_id = this.po_header_id;
  var supplier_id = this.supplier_id;
  var supplier_number = this.supplier_number;
@@ -89,29 +89,41 @@ setValFromSelectPage.prototype.setVal = function() {
 
 };
 
-function afterAddNewRow(){
+function afterAddNewRow() {
  $("[class^=new_object]").find(':input').not('.agreed_quantity,.agreed_amount,.released_quantity,.released_amount,.line_id,\n\
 .po_detail_id,.received_quantity,.accepted_quantity,.delivered_quantity,.invoiced_quantity,.paid_quantity').attr('disabled', false);
 }
 
-function afterAddNewDetail(){
-  $("[class^=new_object]").find(':input').not('.agreed_quantity,.agreed_amount,.released_quantity,.released_amount,.line_id,\n\
+function afterAddNewDetail() {
+ $("[class^=new_object]").find(':input').not('.agreed_quantity,.agreed_amount,.released_quantity,.released_amount,.line_id,\n\
 .po_detail_id,.received_quantity,.accepted_quantity,.delivered_quantity,.invoiced_quantity,.paid_quantity').attr('disabled', false);
 }
 
-$(document).ready(function() {
+
+//function to coply line to details
+function copy_line_to_details() {
+ $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function () {
+  var detailExists = $(this).closest("td").find(".form_detail_data_fs").length;
+  if (detailExists === 0) {
+   var lineQuantity = $(this).closest('tr').find('.line_quantity').val();
+   $(this).closest("td").find(".quantity:first").val(lineQuantity);
+  }
+ });
+}
+
+$(document).ready(function () {
  //defalut values
  if (!$('#po_type').val()) {
   $('#po_type').val('STANDARD');
  }
 
- $('#form_line').find('.line_type').each(function() {
+ $('#form_line').find('.line_type').each(function () {
   if (!$(this).val()) {
    $(this).val('GOODS');
   }
  });
 
- $('#release_number').on('change', function() {
+ $('body').off('blur', '#release_number').on('blur', '#release_number', function () {
   $('#po_header_id').val('');
   $('#po_status').val('');
   $('#action').val('');
@@ -122,7 +134,7 @@ $(document).ready(function() {
   $(this).attr('disabled', true);
  }
 
- $('#po_type').on('change', function() {
+ $('body').off('change', '.po_type').on('change', '.po_type', function () {
   if ($(this).val() === 'BLANKET') {
    $('.class_detail_form').html('');
    $(this).attr('disabled', true);
@@ -138,7 +150,7 @@ $(document).ready(function() {
   }
  })
 
- $('#content').on('change', '#po_number', function() {
+ $('#content').off('change', '#po_number').on('change', '#po_number', function () {
   if ($('#po_type').val() == 'BLANKET_RELEASE') {
    getBPADetails({
     'po_header_id': $(this).find('option:selected').data('ref_po_hedader_id')
@@ -147,13 +159,13 @@ $(document).ready(function() {
  })
 
 //mandatory and field sequence
- var mandatoryCheck = new mandatoryFieldMain();
- mandatoryCheck.header_id = 'po_header_id';
- mandatoryCheck.mandatoryHeader();
- mandatoryCheck.form_area = 'form_header';
- mandatoryCheck.mandatory_fields = ["bu_org_id", "po_type"];
- mandatoryCheck.mandatory_messages = ["First Select BU Org", "No PO Type"];
- mandatoryCheck.mandatoryField();
+// var mandatoryCheck = new mandatoryFieldMain();
+// mandatoryCheck.header_id = 'po_header_id';
+// mandatoryCheck.mandatoryHeader();
+// mandatoryCheck.form_area = 'form_header';
+// mandatoryCheck.mandatory_fields = ["bu_org_id", "po_type"];
+// mandatoryCheck.mandatory_messages = ["First Select BU Org", "No PO Type"];
+// mandatoryCheck.mandatoryField();
 
 //setting the first line & shipment number
  if (!($('.lines_number:first').val())) {
@@ -166,71 +178,58 @@ $(document).ready(function() {
  lineDetail_QuantityValidation();
 
  //default quantity
- $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function() {
-  var lineQuantity = $(this).closest('tr').find('.line_quantity:first').val();
-  if (!$(this).closest("td").find(".quantity:first").val())
-  {
-   $(this).closest("td").find(".quantity:first").val(lineQuantity);
-  }
- });
+ $("#content").off("click", "table.form_line_data_table .add_detail_values_img")
+         .on("click", "table.form_line_data_table .add_detail_values_img", function () {
+          var lineQuantity = $(this).closest('tr').find('.line_quantity:first').val();
+          if (!$(this).closest("td").find(".quantity:first").val())
+          {
+           $(this).closest("td").find(".quantity:first").val(lineQuantity);
+          }
+         });
 
 //get supplier details
  get_supplier_detail_for_bu();
 
- $("#content").on("change", "#supplier_site_id", function() {
+ $("#content").off("change", "#supplier_site_id").on("change", "#supplier_site_id", function () {
   var supplier_site_id = $("#supplier_site_id").val();
   if (supplier_site_id) {
    getSupplierSiteDetails('modules/ap/supplier/json_supplier.php', supplier_site_id);
   }
  });
 
- $("#content").on("change", '.receving_org_id', function() {
-  var receving_org_id = $(this).val();
-  var rowTrClass = $(this).closest("tr").attr("class");
-  var classValue = "tr." + rowTrClass;
-  var classValue1 = classValue.replace(/ /g, '.');
-  getAllInventoryAccounts('modules/org/inventory/json_inventory.php', receving_org_id, classValue1);
- });
+ $("#content").off("change", '.receving_org_id')
+         .on("change", '.receving_org_id', function () {
+          var receving_org_id = $(this).val();
+          var rowTrClass = $(this).closest("tr").attr("class");
+          var classValue = "tr." + rowTrClass;
+          var classValue1 = classValue.replace(/ /g, '.');
+          getAllInventoryAccounts('modules/org/inventory/json_inventory.php', receving_org_id, classValue1);
+         });
 
 //get locators on changing sub inventory
- $('#content').on('change', '.subinventory_id', function() {
-  var trClass = '.' + $(this).closest('tr').attr('class');
-  var subinventory_value = $(this).val();
-  getLocator('modules/inv/locator/json_locator.php', subinventory_value, 'subinventory', trClass);
- });
+ $('#content').off('change', '.subinventory_id')
+         .on('change', '.subinventory_id', function () {
+          var trClass = '.' + $(this).closest('tr').attr('class');
+          var subinventory_value = $(this).val();
+          getLocator('modules/inv/locator/json_locator.php', subinventory_value, 'subinventory', trClass);
+         });
 
 //get Subinventory Name
- $("#form_line").on("change", '.receving_org_id', function() {
-    getSubInventory({
+ $("#form_line").off("change", '.receving_org_id').on("change", '.receving_org_id', function () {
+  getSubInventory({
    json_url: 'modules/inv/subinventory/json_subinventory.php',
    org_id: $(this).val()
   });
  });
 
  //selecting PO Header Id
- $(".po_header_id.select_popup").on("click", function() {
+ $(".po_header_id.select_popup").on("click", function () {
   void window.open('select.php?class_name=po_document_v', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //Popup for selecting address 
- $(".address_popup").click(function() {
-  var addressPopupDivClass = $(this).closest('div').prop('class');
-  localStorage.setItem("addressPopupDivClass", addressPopupDivClass);
-  void window.open('select.php?class_name=address', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-  return false;
- });
-
- //Get the po header id on refresh button click
- $('a.show.po_header_id').click(function() {
-  var po_header_id = $('#po_header_id').val();
-  $(this).attr('href', modepath() + 'po_header_id=' + po_header_id);
-
- });
-
- //Get the release number on refresh button click
- $('a.show.ref_po_header_id').click(function() {
+//Get the release number on refresh button click
+ $('a.show.ref_po_header_id').click(function () {
   var ref_po_header_id = $('#ref_po_header_id').val();
   var release_number = $('#release_number').val();
   $(this).attr('href', modepath() + 'ref_po_header_id=' + ref_po_header_id + '&release_number=' + release_number);
@@ -238,98 +237,57 @@ $(document).ready(function() {
  });
 
 
-//add or show linw details
- addOrShow_lineDetails(afterAddNewDetail);
- onClick_addDetailLine(4);
-
- //function to coply line to details
- function copy_line_to_details() {
-  $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function() {
-   var detailExists = $(this).closest("td").find(".form_detail_data_fs").length;
-   if (detailExists === 0) {
-    var lineQuantity = $(this).closest('tr').find('.line_quantity').val();
-    $(this).closest("td").find(".quantity:first").val(lineQuantity);
-   }
-  });
- }
-
  copy_line_to_details();
 
 
- //Get the po_id on find button click
- $('#form_box a.show').click(function() {
-  var poId = $('#po_header_id').val();
-//$(this).prop('href','po.php?po_header_id=' + poId);
-  $(this).attr('href', 'po.php?po_header_id=' + poId);
- });
-
-
- $("#content").on("click", ".add_row_img", function() {
-//	add_new_row('tr.po_line0', 'tbody.form_data_line_tbody', 3);
-  var addNewRow = new add_new_rowMain();
-  addNewRow.trClass = 'po_line';
-  addNewRow.tbodyClass = 'form_data_line_tbody';
-  addNewRow.noOfTabs = 3;
-  addNewRow.removeDefault = true;
-  addNewRow.divClassToBeCopied = 'copyValue';
-  addNewRow.add_new_row(afterAddNewRow);
-  $(".tabsDetail").tabs();
- });
-
-
-
-//remove po lines
- $("#remove_row").click(function() {
-  $('input[name="po_line_id_cb"]:checked').each(function() {
-   $(this).closest('tr').remove();
-  });
- });
-
- $('#bu_org_id').on('change', function() {
+ $('body').off('change', '#bu_org_id').on('change', '#bu_org_id', function () {
   getBUDetails($(this).val());
  });
 
- if ($('#bu_org_id').val() && ($('#bu_org_id').attr('disabled') != 'disabled')) {
+ if ($('#bu_org_id').val() && ($('#bu_org_id').attr('disabled') !== 'disabled')) {
   getBUDetails($('#bu_org_id').val());
  }
 
 
  deleteData('form.php?class_name=po_header&line_class_name=po_line&detail_class_name=po_detail');
-
+//
  //exhhnge rate
  if ($('#currency').val() != $('#doc_currency').val()) {
   getExchangeRate();
  }
 
- $('#content').on('blur', '#currency, #doc_currency, #exchange_rate_type, #exchange_rate', function() {
-  getExchangeRate();
- });
+ $('#content').off('blur', '#currency, #doc_currency, #exchange_rate_type, #exchange_rate')
+         .on('blur', '#currency, #doc_currency, #exchange_rate_type, #exchange_rate', function () {
+          getExchangeRate();
+         });
 
 //set the line price
- $('#form_line').on('change', '.item_id_m, .item_number, .price_list_header_id, .price_date', function() {
-  var rowClass = '.' + $(this).closest('tr').prop('class');
-  var item_id_m = $(this).closest('.tabContainer').find(rowClass).find('.item_id_m').val();
-  var price_date = $(this).closest('.tabContainer').find(rowClass).find('.price_date').val();
-  var price_list_header_id = $(this).closest('#form_line').find(rowClass).find('.price_list_header_id').val();
-  getPriceDetails({
-   rowClass: rowClass,
-   item_id_m: item_id_m,
-   price_list_header_id: price_list_header_id,
-   price_date: price_date
-  });
- });
+ $('#form_line').off('change', '.item_id_m, .item_number, .price_list_header_id, .price_date')
+         .on('change', '.item_id_m, .item_number, .price_list_header_id, .price_date', function () {
+          var rowClass = '.' + $(this).closest('tr').prop('class');
+          var item_id_m = $(this).closest('.tabContainer').find(rowClass).find('.item_id_m').val();
+          var price_date = $(this).closest('.tabContainer').find(rowClass).find('.price_date').val();
+          var price_list_header_id = $(this).closest('#form_line').find(rowClass).find('.price_list_header_id').val();
+          getPriceDetails({
+           rowClass: rowClass,
+           item_id_m: item_id_m,
+           price_list_header_id: price_list_header_id,
+           price_date: price_date
+          });
+         });
 
- $('#content').on('blur, change, lineChange_t', '.unit_price, .line_quantity , .line_price ', function() {
-  var trClass = '.' + $(this).closest('tr').attr('class');
-  var unitPrice = +($(this).closest('#form_line').find(trClass).find('.unit_price').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-  var lineQuantity = +($(this).closest('#form_line').find(trClass).find('.line_quantity').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-  var linePrice = unitPrice * lineQuantity;
-   $(this).closest('#form_line').find(trClass).find('.line_price').val(linePrice);
- });
+ $('#content').off('blur', '.unit_price, .line_quantity , .line_price')
+         .on('blur', '.unit_price, .line_quantity , .line_price ', function () {
+          var trClass = '.' + $(this).closest('tr').attr('class');
+          var unitPrice = +($(this).closest('#form_line').find(trClass).find('.unit_price').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+          var lineQuantity = +($(this).closest('#form_line').find(trClass).find('.line_quantity').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+          var linePrice = unitPrice * lineQuantity;
+          $(this).closest('#form_line').find(trClass).find('.line_price').val(linePrice);
+         });
 
  //calculate the tax amount
  //get tax code
- $('#content').on('change', 'bu_org_id', function() {
+ $('#content').off('change', 'bu_org_id').on('change', 'bu_org_id', function () {
   var org_id = $(this).val();
   getTaxCodes('modules/mdm/tax_code/json_tax_code.php', org_id, 'IN');
  });
@@ -337,81 +295,91 @@ $(document).ready(function() {
   getTaxCodes('modules/mdm/tax_code/json_tax_code.php', $('#bu_org_id').val(), 'IN');
  }
 
- $('#content').on('blur, change', '.line_quantity, .unit_price, .line_price, .tax_amount, .tax_code_id', function() {
-  var trClass = '.' + $(this).closest('tr').prop('class');
-  var linePrice = 0;
-  if ($('#content').find(trClass).find('.line_price').val()) {
-   linePrice = +($('#content').find(trClass).find('.line_price').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-  }
-  var taxCodeVal = 0;
-  if ($('#content').find(trClass).find('.tax_code_value').val()) {
-   taxCodeVal = $('#content').find(trClass).find('.tax_code_value').val();
-  } else if ($('#content').find(trClass).find('.input_tax').find('option:selected').prop('class')) {
-   taxCodeVal = $('#content').find(trClass).find('.input_tax').find('option:selected').prop('class');
-  }
+ $('#content').on('blur', '.line_quantity, .unit_price, .line_price, .tax_amount, .tax_code_id')
+         .on('blur, change', '.line_quantity, .unit_price, .line_price, .tax_amount, .tax_code_id', function () {
+          var trClass = '.' + $(this).closest('tr').prop('class');
+          var linePrice = 0;
+          if ($('#content').find(trClass).find('.line_price').val()) {
+           linePrice = +($('#content').find(trClass).find('.line_price').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+          }
+          var taxCodeVal = 0;
+          if ($('#content').find(trClass).find('.tax_code_value').val()) {
+           taxCodeVal = $('#content').find(trClass).find('.tax_code_value').val();
+          } else if ($('#content').find(trClass).find('.input_tax').find('option:selected').prop('class')) {
+           taxCodeVal = $('#content').find(trClass).find('.input_tax').find('option:selected').prop('class');
+          }
 
-  if (taxCodeVal.length >= 3) {
-   var taxCodeVal_a = taxCodeVal.split('_');
-  } else {
-   return;
-  }
+          if (taxCodeVal.length >= 3) {
+           var taxCodeVal_a = taxCodeVal.split('_');
+          } else {
+           return;
+          }
 
-  var taxAmount = 0;
-  var taxPercentage = 0;
-  if (taxCodeVal_a[0] === 'p') {
-   taxPercentage = +taxCodeVal_a[1];
-  } else if (taxCodeVal_a[0] === 'a') {
-   taxAmount = +taxCodeVal_a[1];
-  }
-  var taxValue = 0;
-  if (taxPercentage) {
-   taxValue = ((taxPercentage * linePrice) / 100).toFixed(5);
-  } else if (taxAmount) {
-   taxValue = taxAmount.toFixed(5);
-  }
+          var taxAmount = 0;
+          var taxPercentage = 0;
+          if (taxCodeVal_a[0] === 'p') {
+           taxPercentage = +taxCodeVal_a[1];
+          } else if (taxCodeVal_a[0] === 'a') {
+           taxAmount = +taxCodeVal_a[1];
+          }
+          var taxValue = 0;
+          if (taxPercentage) {
+           taxValue = ((taxPercentage * linePrice) / 100).toFixed(5);
+          } else if (taxAmount) {
+           taxValue = taxAmount.toFixed(5);
+          }
 
-  $('#content').find(trClass).find('.tax_amount').val(taxValue);
- });
+          $('#content').find(trClass).find('.tax_amount').val(taxValue);
+         });
 
 //total header & tax amount
- $('#content').on('blur', '.line_quantity, .unit_price, .line_price', function() {
+ $('#content').off('blur', '.line_quantity, .unit_price, .line_price')
+         .on('blur', '.line_quantity, .unit_price, .line_price', function () {
+          var total_tax = 0;
+          $('#form_line').find('.tax_amount').each(function () {
+           total_tax += (+$(this).val());
+           $('#tax_amount').val(total_tax);
+          });
+          var header_amount = 0;
+          $('#form_line').find('.line_price').each(function () {
+           header_amount += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+          });
+          $('#header_amount').val(header_amount);
+         });
 
-  var total_tax = 0;
-  $('#form_line').find('.tax_amount').each(function() {
-   total_tax += (+$(this).val());
-   $('#tax_amount').val(total_tax);
-  });
+ $('#content').off('blur', '.receving_org_id, .item_id_m, .item_number')
+         .on('blur', '.receving_org_id, .item_id_m, .item_number', function () {
+          var item_id_m = $(this).closest('tr').find('.item_id_m').val();
+          var receving_org_id = $(this).closest('tr').find('.receving_org_id').val();
+          if (receving_org_id && item_id_m) {
+           getItemRevision({
+            'org_id': $(this).closest('tr').find('.receving_org_id').val(),
+            'item_id_m': $(this).closest('tr').find('.item_id_m').val(),
+            'trclass': $(this).closest('tr').attr('class')
+           });
+          }
+         });
 
 
-  var header_amount = 0;
-  $('#form_line').find('.line_price').each(function() {
-   header_amount += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-  });
-  $('#header_amount').val(header_amount);
- });
-
- $('#content').on('blur', '.receving_org_id, .item_id_m, .item_number', function() {
-  var item_id_m = $(this).closest('tr').find('.item_id_m').val();
-  var receving_org_id = $(this).closest('tr').find('.receving_org_id').val();
-  if(receving_org_id && item_id_m){
-  getItemRevision({
-   'org_id': $(this).closest('tr').find('.receving_org_id').val(),
-   'item_id_m': $(this).closest('tr').find('.item_id_m').val(),
-   'trclass': $(this).closest('tr').attr('class')
-  });
- }
-});
-
- $('#form_line').on('click', ':input', function(){
-  
-  
- });
- $('#form_line .received_quantity').each(function(){
-  if($(this).val()){
-     var trClass = '.' + $(this).closest('td.add_detail_values').closest('tr').attr('class').replace(/\+s/g,'.');
-    $('#form_line').find(trClass).find(':input').not('.date,.allow_change').attr('disabled',true);
+ $('#form_line .received_quantity').each(function () {
+  if ($(this).val()) {
+   var trClass = '.' + $(this).closest('td.add_detail_values').closest('tr').attr('class').replace(/\+s/g, '.');
+   $('#form_line').find(trClass).find(':input').not('.date,.allow_change').attr('disabled', true);
   }
-});
- 
+ });
+
+ $("body").off("click", ".add_row_img").on("click", ".add_row_img", function () {
+  $("[class^=new_object]").find(':input').not('.agreed_quantity,.agreed_amount,.released_quantity,.released_amount,.line_id,\n\
+.po_detail_id,.received_quantity,.accepted_quantity,.delivered_quantity,.invoiced_quantity,.paid_quantity').attr('disabled', false).removeAttr('readonly').removeAttr('disabled');
+
+ });
+
+ $("body").off("click", ".add_row_detail_img").on("click", ".add_row_detail_img", function () {
+  $("[class^=new_object]").find(':input').not('.agreed_quantity,.agreed_amount,.released_quantity,.released_amount,.line_id,\n\
+.po_detail_id,.received_quantity,.accepted_quantity,.delivered_quantity,.invoiced_quantity,.paid_quantity').attr('disabled', false).removeAttr('readonly').removeAttr('disabled');
+
+ });
+
+
 });
 

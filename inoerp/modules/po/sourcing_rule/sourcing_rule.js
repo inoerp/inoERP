@@ -66,77 +66,25 @@ $(document).ready(function() {
 	return false;
  });
 
- //Get the sourcing_rule_id on find button click
- $('a.show.po_sourcing_rule_header_id').click(function() {
-	var headerId = $('#po_sourcing_rule_header_id').val();
-	$(this).attr('href', modepath() + 'po_sourcing_rule_header_id=' + headerId);
- });
 
- $("#content").on("change", '.supplier_name, .supplier_id', function() {
+ $("#content").off("blur", '.supplier_name, .supplier_id').on("blur", '.supplier_name, .supplier_id', function() {
 	var trClass = '.' + $(this).closest('tr').prop('class');
-	function afterFunction(result) {
-	 var supplier_sites = $(result).find('div#json_supplierSites_find_all').html();
-	  $('#content').find(trClass).find('.supplier_site_id').replaceWith(supplier_sites);
-		$('#content').find(trClass).find('.supplier_site_id').removeAttr('id');
-	 trClass = null;
-	}
 	if (($(this).closest('tr').find('.supplier_id').val())) {
 	 var supplier_id = $(this).closest('tr').find('.supplier_id').val();
-	 getSupplierDetails('modules/ap/supplier/json_supplier.php', '', supplier_id, afterFunction);
+	 getSupplierDetails('modules/ap/supplier/json_supplier.php', '', supplier_id, trClass);
 	}
  });
 
  //selecting supplier
- $("#content").on("click", '.select_supplier_name.select_popup', function() {
+ $("#content").off("click", '.select_supplier_name.select_popup').on("click", '.select_supplier_name.select_popup', function() {
 	var rowClass = $(this).closest('tr').prop('class');
 	localStorage.setItem("row_class", rowClass);
 	void window.open('select.php?search_class_name=supplier_all_v', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //add a new row
-// onClick_add_new_row('sourcing_rule_line', 'form_data_line_tbody', 1)
- $("#content").on("click", ".add_row_img", function() {
-	var addNewRow = new add_new_rowMain();
-	addNewRow.trClass = 'sourcing_rule_line0';
-	addNewRow.tbodyClass = 'form_data_line_tbody';
-	addNewRow.noOfTabs = 1;
-	addNewRow.removeDefault = true;
-	addNewRow.add_new_row();
- });
-
- deleteData('form.php?class_name=po_sourcing_rule_header&line_class_name=po_sourcing_rule_line');
-
- //context menu
- var classContextMenu = new contextMenuMain();
- classContextMenu.docHedaderId = 'po_ourcing_rule_header_id';
- classContextMenu.docLineId = 'po_sourcing_rule_line_id';
- classContextMenu.btn1DivId = 'sourcing_rule_header';
- classContextMenu.btn2DivId = 'form_line';
- classContextMenu.trClass = 'po_sourcing_rule_line';
- classContextMenu.tbodyClass = 'form_data_line_tbody';
- classContextMenu.noOfTabbs = 1;
- classContextMenu.contextMenu();
-
-//remove sourcing_rule lines
- $("#remove_row").click(function() {
-	$('input[name="sourcing_rule_line_id_cb"]:checked').each(function() {
-	 $(this).closest('tr').remove();
-	});
- });
-
 //get the attachement form
  deleteData('form.php?class_name=po_sourcing_rule_header&line_class_name=po_sourcing_rule_line');
 
-// save('json.sourcing_rule.php', '#sourcing_rule_header', 'line_id_cb', 'component_item_id', '#sourcing_rule_header_id');
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=po_sourcing_rule_header';
- classSave.form_header_id = 'sourcing_rule_header';
- classSave.primary_column_id = 'po_sourcing_rule_header_id';
- classSave.line_key_field = 'rank';
- classSave.single_line = false;
- classSave.savingOnlyHeader = false;
- classSave.headerClassName = 'po_sourcing_rule_header';
- classSave.lineClassName = 'po_sourcing_rule_line';
- classSave.saveMain();
+
 });

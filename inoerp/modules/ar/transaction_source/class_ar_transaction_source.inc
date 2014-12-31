@@ -1,5 +1,18 @@
 <?php
+/**
+ * inoERP 
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * ar_receipt_source
+ * 
+ * 
+ */
 class ar_transaction_source extends dbObject {
 
  public static $table_name = "ar_transaction_source";

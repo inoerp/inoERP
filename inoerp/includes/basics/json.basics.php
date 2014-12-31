@@ -26,7 +26,6 @@ include_once("basics.inc");
     break;
    }
   }
-
   return $show_block_flag;
  }
 
@@ -34,9 +33,9 @@ include_once("basics.inc");
   if ($visibility_option != 3) {
    if (strpos($block_visibility, ',') !== false) {
     $block_visibility_a = explode(',', $block_visibility);
-   } else {
+    } else {
     $block_visibility_a = explode(chr(10), $block_visibility);
-   }
+    }
    $ulr_vars = explode("/", $url);
    $show_block_flag = 0;
    $ulr_vars_s = array_pop($ulr_vars);
@@ -50,9 +49,9 @@ include_once("basics.inc");
    if ($visibility_option == 1) {
     if (empty($block_visibility)) {
      $show_block_flag = 1;
-    } else if (count($block_visibility_a) == 1 && $block_visibility_a[0] = chr(10)) {
+    } else if (count($block_visibility_a) == 1 && $block_visibility_a[0] == chr(10)) {
      $show_block_flag = 1;
-    } else if (block_check($block_visibility_a, $ulr_vars_s)) {
+     } else if (block_check($block_visibility_a, $ulr_vars_s)) {
      $show_block_flag = 1;
     } elseif (!empty($url) && !empty($block_visibility) && (block_check($block_visibility_a, $ulr_vars_s))) {
      $show_block_flag = 1;
@@ -103,9 +102,12 @@ include_once("basics.inc");
    $visibility_option = $records->visibility_option;
    $block_visibility = base64_decode($records->visibility);
    $reference_table = $records->reference_table;
-   echo "<br> block id " . $records->block_id;
+   
    $show_block_flag = get_showFlag_from_visibilityOption($block_visibility, $visibility_option, $url);
-
+   if(!$show_block_flag){
+    continue;
+   }
+//   echo "<br> block id " . $records->block_id . ' : show bock flag is '. $show_block_flag;
    //get content from block cahche or block content or from the block function
    if ((!empty($session_id)) && ($records->cached_cb == 1)) {
     $bc->block_id = $records->block_id;

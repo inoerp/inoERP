@@ -1,4 +1,5 @@
 <?php
+$form_page = true;
 $dont_check_login = true;
 $content_class = true;
 $class_names = [
@@ -27,6 +28,14 @@ $cwp = getrwuPrivilage($content_type->comment_write_role, $_SESSION['user_roles'
 $cup = getrwuPrivilage($content_type->comment_update_role, $_SESSION['user_roles'][0]);
 $comment_privilage = $crp + $cwp + $cup;
 
+ if ($continue) {
+  include_once(THEME_DIR . '/header.inc');
+ } else {
+  $continue = false;
+  echo "<h2>Could n't call the header</h2>";
+  return;
+ }
+ 
 if (($content_privilage >= 6) && ($mode == 9)) {
  include_once(THEME_DIR . '/content_template.inc');
 } else if (($content_privilage >= 4) && empty($$class->$class_id_first) && ($mode == 9)) {
@@ -50,3 +59,11 @@ if (($content_privilage >= 6) && ($mode == 9)) {
  }
 }
 ?>
+<script type="text/javascript">
+ $(document).ready(function () {
+//  $('body').on('click', '#header_top .menu a',function(e){
+//  e.preventDefault();
+//  window.location.replace($(this).prop('href'));
+//});
+ });
+</script>

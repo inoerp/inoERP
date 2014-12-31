@@ -1,5 +1,4 @@
 <?php
-
 $hideContextMenu = true;
 global $s;
 if ((!empty($_GET['class_name'])) && (!empty($_GET['report_name']))) {
@@ -18,19 +17,19 @@ if ((!empty($_GET['class_name'])) && (!empty($_GET['report_name']))) {
  $search_result_statement .= '<th> Search Details </th>';
  $search_result_statement .='</tr></thead>';
  If (!empty($all_search_paths)) {
-	$search_result_statement .= '<tbody>';
-	foreach ($all_search_paths as $key => $module_group) {
-	 $search_result_statement .= ' <tr class="major_row"><td>' . $key . '</td><td><table class="second">';
-	 foreach ($module_group as $paths) {
-		$search_result_statement .='<tr class="minor_row">';
-		$search_result_statement .='<td>' . $paths->name . '</td>';
-		$search_result_statement .='<td>' . $paths->description . '</td>';
-		$search_result_statement .='<td><a href="' . HOME_URL . $paths->path_link . '">' . HOME_URL . $paths->path_link . '</a></td>';
-		$search_result_statement .='</tr>';
-	 }
-	 $search_result_statement .='</table></td></tr>';
-	}
-	$search_result_statement .='</tbody>';
+  $search_result_statement .= '<tbody>';
+  foreach ($all_search_paths as $key => $module_group) {
+   $search_result_statement .= ' <tr class="major_row"><td>' . $key . '</td><td><table class="second">';
+   foreach ($module_group as $paths) {
+    $search_result_statement .='<tr class="minor_row">';
+    $search_result_statement .='<td>' . $paths->name . '</td>';
+    $search_result_statement .='<td>' . $paths->description . '</td>';
+    $search_result_statement .='<td><a href="' . HOME_URL . $paths->path_link . '">' . HOME_URL . $paths->path_link . '</a></td>';
+    $search_result_statement .='</tr>';
+   }
+   $search_result_statement .='</table></td></tr>';
+  }
+  $search_result_statement .='</tbody>';
  }
  $search_result_statement .='</table>';
  require_once(INC_BASICS . DS . "search_page.inc");
@@ -47,7 +46,7 @@ if ((!empty($class_names)) && (!empty($report_name))) {
  $s->setProperty('_initial_search_array', $$class->initial_search);
 
  if (property_exists($$class, $report_parameters)) {
-	$s->setProperty('_search_functions', $$class->$report_parameters);
+  $s->setProperty('_search_functions', $$class->$report_parameters);
  }
 // $search_form = $s->search_form($$class);
 
@@ -59,20 +58,33 @@ if ((!empty($class_names)) && (!empty($report_name))) {
  $chart_settings = $$class->$detail_name;
  $count = 0;
  foreach ($reports as $key => $report_data) {
-	$key_name_setting = $key . '_settings';
-	$svgimage = new getsvgimage();
-	$svgimage->setProperty('_settings', $chart_settings);
-	if (property_exists($class, $key_name_setting)) {
-	 $this_chart_settings = $$class->$key_name_setting;
-	 $svgimage->setProperty('_settings', $this_chart_settings);
-	}
-	
-	$svgimage->setProperty('_data', $report_data);
-	$chart = $svgimage->draw_chart();
-	array_push($chart_a, $chart);
-	$count++;
+  $key_name_setting = $key . '_settings';
+  $svgimage = new getsvgimage();
+  $svgimage->setProperty('_settings', $chart_settings);
+  if (property_exists($class, $key_name_setting)) {
+   $this_chart_settings = $$class->$key_name_setting;
+   $svgimage->setProperty('_settings', $this_chart_settings);
+  }
+
+  $svgimage->setProperty('_data', $report_data);
+  $chart = $svgimage->draw_chart();
+  array_push($chart_a, $chart);
+  $count++;
+ }
+   if ($continue) {
+  include_once(THEME_DIR . '/header.inc');
+ } else {
+  $continue = false;
+  echo "<h2>Could n't call the header</h2>";
+  return;
  }
  require_once(INC_BASICS . DS . "report_template.inc");
 }
 ?>
-
+<script type="text/javascript">
+ $(document).ready(function () {
+   $.getScript("includes/js/erp.js");
+  $.getScript("includes/js/report.js");
+  $("head").append("<link id='getsvgimage' href='http://localhost/inoerp/includes/ecss/getsvgimage.css' type='text/css' rel='stylesheet' />");
+ });
+</script>

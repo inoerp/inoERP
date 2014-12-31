@@ -14,7 +14,6 @@ function animateCycle()
  }
 
  interval = setInterval(animateContent, 5000);
- addOrShow_lineDetails
  $('#all_contents').on('click', '#animated_block', function () {
   clearInterval(interval);
  });
@@ -25,18 +24,131 @@ function animateCycle()
 
 }
 
-function arrow_menu(){
-  //menu arrow
- $("#header_top .menu li > ul").each(function(){
-    var parent = $(this).parent("li");
-    parent.addClass("parent").find("> a").append("<span class='arrow-down'></span>");
-  });
-  
-  //Add the parent class and arrow to third tier sub-menu
-  $("#header_top .menu li > ul li > ul").each(function(){
-    var parent = $(this).parent("li");
-    parent.addClass("parent").find("> a span").removeClass("arrow-down").addClass("arrow-right");
-  });
+function getFormDetails(url) {
+ $.ajax({
+  url: url,
+  type: 'get',
+  data: {
+  },
+  beforeSend: function () {
+   $('.show_loading_small').show();
+  },
+  complete: function () {
+   $('.show_loading_small').hide();
+  }
+ }).done(function (result) {
+  var newContent = $(result).find('div#structure').html();
+  var allButton = $(result).find('div#header_top_container').html();
+  var commentForm = $(result).find('div#comment_form').html();
+  if (newContent) {
+   $('#structure').replaceWith('<div id="structure">' + newContent + '</div>');
+   $('#header_top_container').replaceWith('<div id="header_top_container" style="display: block;">' + allButton + '</div>');
+   $('#display_comment_form').append(commentForm);
+   $.getScript("includes/js/reload.js");
+   $(result).find('#js_files').find('li').each(function () {
+    $.getScript($(this).html());
+   });
+   $(result).find('ul#css_files').find('li').each(function () {
+    var filePath = $(this).html();
+    if (!$("link[href='" + filePath + "']").length) {
+     $('<link href="' + filePath + '" rel="stylesheet">').appendTo("head");
+    }
+   });
+  }
+ }).fail(function () {
+  alert("Form loading failed!");
+ });
+}
+
+function arrow_menu() {
+ //menu arrow
+ $("#header_top .menu li > ul").each(function () {
+  var parent = $(this).parent("li");
+  parent.addClass("parent").find("> a").append("<span class='arrow-down'></span>");
+ });
+
+ //Add the parent class and arrow to third tier sub-menu
+ $("#header_top .menu li > ul li > ul").each(function () {
+  var parent = $(this).parent("li");
+  parent.addClass("parent").find("> a span").removeClass("arrow-down").addClass("arrow-right");
+ });
+}
+
+function getCommentForm() {
+ $('#loading').show();
+ var content_id = $("#content_id").val();
+ $.ajax({
+  url: 'comment.php',
+  data: {reference_table: 'content',
+   reference_id: content_id},
+  type: 'get'
+ }).done(function (data) {
+  var div = $('#comment', $(data)).html();
+  $("#new_comment").append(div);
+  $('#loading').hide();
+ }).fail(function () {
+  alert("Comment content loading failed");
+  $('#loading').hide();
+ });
+// $(".form_table #subinventory_id").attr("disabled",false);
+}
+$('body').on('click', '#comment_button', function () {
+ getCommentForm();
+});
+
+function deleteComment() {
+ var homeUrl = $('#home_url').val();
+ var daletePath = homeUrl + 'form.php?class_name=comment';
+ $("body").on('click', '.delete_button', function (e) {
+  var headerId = $(this).val();
+  $(".delete_button").addClass("show_loading_small");
+  $(".delete_button").prop('disabled', true);
+  e.preventDefault();
+  if (confirm("Do you really want to delete ?\n" + headerId)) {
+   $.ajax({
+    url: daletePath,
+    data: {
+     delete_id: headerId,
+     deleteType: 'header',
+     delete: '1'},
+    type: 'get',
+    beforeSend: function () {
+     $('.show_loading_small').show();
+    },
+    complete: function () {
+     $('.show_loading_small').hide();
+    }
+   }).done(function (result) {
+    $(".error").append(result);
+    $(".delete_button").removeClass("show_loading_small");
+    $(".delete_button").prop('disabled', false);
+   }).fail(function (error, textStatus, xhr) {
+    alert("delete failed \n" + error + textStatus + xhr);
+    $(".delete_button").removeClass("show_loading_small");
+    $(".delete_button").prop('disabled', false);
+   });
+  }
+ });
+}
+
+function updateComment(comment_id, ulId) {
+ var homeUrl = $('#home_url').val();
+ var savePath = homeUrl + 'comment.php';
+ $('#loading').show();
+ return $.ajax({
+  url: savePath,
+  data: {update: '1',
+   comment_id: comment_id},
+  type: 'get'
+ }).done(function (result) {
+  var div = $(result).filter('div#commentForm').html();
+  var ulId_h = '#' + ulId;
+  $('#content').find(ulId_h).find('li.line_li').append(div);
+  $('#loading').hide();
+ }).fail(function (e) {
+  alert("Comment update failed ");
+  $('#loading').hide();
+ });
 }
 
 function include_once(src) {
@@ -205,7 +317,7 @@ function getBlocks() {
    $('#header_top_container').css('display', 'block');
   }
   treeView();
-arrow_menu();
+  arrow_menu();
  }).fail(function () {
   $('#content_left').html('');
  });
@@ -238,6 +350,16 @@ function modepath() {
  var url = '';
  url += getUrlValues('class_name') == null ? '' : 'class_name=' + getUrlValues('class_name') + '&';
  url += getUrlValues('mode') == null ? '' : 'mode=' + getUrlValues('mode') + '&';
+ if (url != null) {
+  url = '?' + url;
+ }
+ return url;
+}
+
+function formModePath(user_link) {
+ var url = '';
+ url += getUrlValues('class_name', user_link) == null ? '' : 'class_name=' + getUrlValues('class_name', user_link) + '&';
+ url += getUrlValues('mode', user_link) == null ? '' : 'mode=' + getUrlValues('mode', user_link) + '&';
  if (url != null) {
   url = '?' + url;
  }
@@ -350,10 +472,10 @@ var dateCount = 30000;
 function onClick_addDetailLine(noOfTabs, add_row_detail_img, tabsDetailName) {
  add_row_detail_img = (typeof add_row_detail_img !== 'undefined') ? add_row_detail_img : '.add_row_detail_img';
  tabsDetailName = (typeof tabsDetailName !== 'undefined') ? tabsDetailName : 'tabsDetail';
-
  var highest_seq_num = 1;
  var lastDetailNumber = 1;
- $("#content").on("click", add_row_detail_img, function () {
+ $("#content").off('click', add_row_detail_img).on("click", add_row_detail_img, function () {
+  noOfTabs = $(this).closest('.tabContainer').find('.tabContent').length;
   var trClass = '.' + $(this).closest("tr").attr('class').replace(/\s+/g, '.');
   var trClass_wod = trClass.replace(/tr\./g, '');
   trClass_wod = trClass_wod.replace(/\./g, '');
@@ -422,7 +544,7 @@ function onClick_add_new_row(trClass, tbodyClass, noOfTabs, divClassToBeCopied) 
   addNewRow.removeDefault = true;
   addNewRow.divClassToBeCopied = divClassToBeCopied;
   addNewRow.add_new_row();
- });
+ }).one();
  return 1;
 }
 //onClick_add_new_row();
@@ -435,7 +557,7 @@ function addOrShow_lineDetails(afterAddNewDetail) {
   highest_seq_num = $('.form_data_detail_tbody').find('.detail_seq_number').last().val();
  }
  var nextDetailSeqNumber_seq = (+highest_seq_num) + 1;
- $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function () {
+ $('body').on("click", "table.form_line_data_table .add_detail_values_img", function () {
   var tabID = '#' + $(this).closest('.tabContent').attr('id');
   var tdClass = '.' + $(this).closest('td').attr('class').replace(/tr\./g, '');
   var detailExists = $(this).closest("td").find(".form_detail_data_fs").length;
@@ -570,10 +692,10 @@ function deleteHeader(json_url, headerId) {
 function deleteReferences(options) {
  var defaults = {
   deleteType: 'header',
-  json_url : 'form.php?class_name=extn_contact_reference'
+  json_url: 'form.php?class_name=extn_contact_reference'
  };
  var settings = $.extend({}, defaults, options);
- 
+
  $('#content').on('click', '.delete_ref', function () {
   var headerId = $(this).data('delete_id');
   if (confirm("Do you really want to delete ?\n" + headerId)) {
@@ -957,6 +1079,7 @@ function getSubInventory(options) {
   subinventory_class: ('.subinventory_id')
  };
  var settings = $.extend({}, defaults, options);
+
  $('#loading').show();
  return $.ajax({
   url: settings.json_url,
@@ -978,6 +1101,7 @@ function getSubInventory(options) {
    $('#content').find(settings.subinventory_class).empty().append(div);
   }
  }).fail(function () {
+  alert(settings.json_url);
 //  alert("org name loading failed");
  }).always(function () {
   $('#loading').hide();
@@ -1646,6 +1770,59 @@ function getSerialNumber(options) {
 }
 
 
+function getCoaStructure(options) {
+ var defaults = {
+  json_url: 'modules/gl/coa/json_coa.php',
+  coa_structure_id: $('#coa_structure_id').val(),
+  trclass: false
+ };
+ var settings = $.extend({}, defaults, options);
+
+ return $.ajax({
+  url: settings.json_url,
+  type: 'get',
+  dataType: 'json',
+  data: {
+   coa_structure_id: settings.coa_structure_id,
+   find_coa_structure: 1
+  },
+  success: function (result) {
+   if (result) {
+    var count = 1;
+    var option_stmt;
+    $.each(result, function (f_key, f_name) {
+     option_stmt += '<option data-description="' + f_name.description + '" value="' + f_name.option_line_code + '">' + f_name.option_line_value + '</option>';
+    });
+
+    $('body').find('.coa_qualifier').each(function () {
+     $(this).empty().append(option_stmt);
+    });
+    $('#no_coa_structure_id').html('');
+    $('ul#segment_structure').empty();
+    $.each(result, function (f_key, f_name) {
+     var field_name = 'field' + count + '[]';
+     var field_stmt = '<li><label>Field #: ' + count + '</label>';
+     field_stmt += '<select class="select coa_segment fields" name="' + field_name + '" style="max-width:95%;">';
+     field_stmt += option_stmt;
+     field_stmt += '</select>';
+     field_stmt += '</li>';
+     $('ul#segment_structure').append(field_stmt);
+     count++;
+    });
+   }
+  },
+  complete: function () {
+   $('.show_loading_small').hide();
+  },
+  beforeSend: function () {
+   $('.show_loading_small').show();
+  },
+  error: function (request, errorType, errorMessage) {
+   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+  }
+ });
+}
+
 function getlotNumber(options) {
  var defaults = {
   json_url: 'modules/inv/lot/json_lot_number.php',
@@ -1884,6 +2061,49 @@ function getSearchResult(options) {
   $('#searchResult').empty().append(newContent);
   $.getScript("includes/js/reload.js");
 
+ }).fail(function () {
+  alert("Search Failed");
+ });
+}
+
+function getMultiSelectResult(options) {
+ var defaults = {
+  json_url: 'includes/json/json_multi_select.php',
+  className: $('.search.class_name').val(),
+  actionclassName: $('.action_class_name').val(),
+  action: $('.action').val(),
+  searchParameters: $('#generic_search_form').find(":input").serializeArray(),
+  pageno: 1,
+  per_page: 0
+ };
+ var settings = $.extend({}, defaults, options);
+
+ return $.ajax({
+  url: settings.json_url,
+  type: 'get',
+  data: {
+   search_class_name: settings.className,
+   action_class_name: settings.actionclassName,
+   action: settings.action,
+   search_parameters: settings.searchParameters,
+   pageno: settings.pageno,
+   per_page: settings.per_page
+  },
+  beforeSend: function () {
+   $('.show_loading_small').show();
+  },
+  complete: function () {
+   $('.show_loading_small').hide();
+  }
+ }).done(function (result) {
+  var allButton = $(result).filter('div#header_top_container').html();
+  var newContent = $(result).find('div#structure').html();
+  if (newContent) {
+   $('#header_top_container').replaceWith('<div id="header_top_container" style="display: block;">' + allButton + '</div>');
+  }
+  $('#structure').empty().append(newContent);
+  $.getScript("includes/js/reload.js");
+  $.getScript("includes/js/multi_select.js");
  }).fail(function () {
   alert("Search Failed");
  });
@@ -2238,6 +2458,60 @@ function getPayrollSchedules(options) {
  });
 }
 
+function enableLineForSaveAfterFieldChange() {
+ //enable lines with change data for save
+ $('#content').data('last', '').on("blur", ':input', function () {
+  var last = $(this).data('last');
+  var current = $(this).val();
+  if ($(this).parent().prop('tagName') === 'TD') {
+   if (current && current !== '' && current !== last) {
+    var trClass = '.' + $(this).closest('tr').prop('class').replace(/\s+/g, '.');
+    var detail_line_cb = $('#content').find(trClass).find('input[name="line_id_cb"],input[name="detail_id_cb"]');
+    if (detail_line_cb) {
+     $('#content').find(trClass).find('input[name="line_id_cb"],input[name="detail_id_cb"]').prop('checked', true);
+     $('#content').find('input[name="detail_id_cb"]:checked').each(function () {
+      $(this).closest('td.add_detail_values').closest('tr').find('input[name="line_id_cb"]').prop('checked', true);
+     });
+    }
+   }
+
+  }
+ });
+}
+
+function openNextGLPeriod(options) {
+ var defaults = {
+  json_url: 'modules/gl/period/json_period.php',
+  new_gl_calendar_id: $('#new_gl_calendar_id').val(),
+  new_gl_calendar_name: $('#new_gl_calendar_id :selected').text(),
+  ledger_id: $('#ledger_id').val(),
+ };
+ var settings = $.extend({}, defaults, options);
+
+ return $.ajax({
+  url: settings.json_url,
+  type: 'get',
+  data: {
+   new_gl_calendar_id: settings.new_gl_calendar_id,
+   ledger_id: settings.ledger_id,
+   open_next_gl_period: 1
+  },
+  success: function (result) {
+   if (result) {
+    $('.error').append('<br>Period ' + settings.new_gl_calendar_name + ' is opened<br>' + result);
+   }
+  },
+  complete: function () {
+   $('.show_loading_small').hide();
+  },
+  beforeSend: function () {
+   $('.show_loading_small').show();
+  },
+  error: function (request, errorType, errorMessage) {
+   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+  }
+ });
+}
 //end of global functions
 $(document).ready(function () {
  var homeUrl = $('#home_url').val();
@@ -2278,20 +2552,7 @@ $(document).ready(function () {
  });
 
 //enable lines with change data for save
- $('#content').data('last', '').on("blur", ':input', function () {
-  var last = $(this).data('last');
-  var current = $(this).val();
-  if (current && current !== '' && current !== last) {
-   var trClass = '.' + $(this).closest('tr').prop('class');
-   var detail_line_cb = $('#content').find(trClass).find('input[name="line_id_cb"],input[name="detail_id_cb"]');
-   if (detail_line_cb) {
-    $('#content').find(trClass).find('input[name="line_id_cb"],input[name="detail_id_cb"]').prop('checked', true);
-    $('#content').find('input[name="detail_id_cb"]:checked').each(function () {
-     $(this).closest('td.add_detail_values').closest('tr').find('input[name="line_id_cb"]').prop('checked', true);
-    });
-   }
-  }
- });
+ enableLineForSaveAfterFieldChange();
 
 
 //hiding the loader
@@ -2341,9 +2602,10 @@ $(document).ready(function () {
  }
 
  //new object
- $('#new_object_button').on('click', function (e) {
+ $('body').on('click', '#new_object_button', function (e) {
   e.preventDefault();
-  $('#content').find(':input').val('');
+  $('#content').find(':input').not('#attach_submit').val('');
+  $('#content').find(':input').not('#attach_submit').prop('disabled', false);
   $('#content').find(':checkbox').prop('checked', false);
  });
 
@@ -2540,7 +2802,7 @@ $(document).ready(function () {
 
  //toggle detail lines
  $(".form_detail_data_fs").hide();
- $(".error").dblclick(function () {
+ $("#content").on('click', '.error', function () {
   $(this).html("");
  });
  //export to excel from search result
@@ -2666,7 +2928,6 @@ $(document).ready(function () {
   localStorage.removeItem("disableContextMenu");
  });
 //setConetntRightLeft();
- getBlocks();
  tinymce.init({
   selector: '.mediumtext',
   mode: "exact",
@@ -2725,7 +2986,7 @@ $(document).ready(function () {
     disabled: true
    });
   });
-    $(this).parent().children().each(function () {
+  $(this).parent().children().each(function () {
    $(this).autocomplete({
     disabled: true
    });
@@ -2741,19 +3002,9 @@ $(document).ready(function () {
  });
 
  //basic finction --making background colors for form fields
-// $("input").not('[required]',"[readonly]").focus(function () {
-//  $(this).css("background-color", "#cccccc");
-// });
-// $("input").not('[required]',"[readonly]").blur(function () {
-//  $(this).css("background-color", "#ffffff");
-// });
-// $(" :required").css("background", "pink").css('border','0px none');
  $("[required]").addClass('required');
  $("[readonly]").addClass('readonly');
-// $("[readonly]").css("background-color", "#ddd");
-// $("input:required").blur(function () {
-//  $(this).css("background-color", "pink");
-// });
+
  //Popup for print
  $(".print").click(function () {
   window.print();
@@ -2823,6 +3074,7 @@ $(document).ready(function () {
   var primary_column_id2 = $('ul#js_saving_data').find('.primary_column_id2').data('primary_column_id2');
   var line_key_field = $('ul#js_saving_data').find('.line_key_field').data('line_key_field');
   var savingOnlyHeader = $('ul#js_saving_data').find('.savingOnlyHeader').data('savingonlyheader');
+  var save_vertical_tab = $('ul#js_saving_data').find('.save_vertical_tab').data('save_vertical_tab');
   var onlyOneLineAtATime = $('ul#js_saving_data').find('.onlyOneLineAtATime').data('onlyonelineatatime');
   var allLineTogether = $('ul#js_saving_data').find('.allLineTogether').data('alllinetogether');
   var single_line = $('ul#js_saving_data').find('.single_line').data('single_line');
@@ -2841,6 +3093,7 @@ $(document).ready(function () {
   classSave.primary_column_id = primary_column_id;
   classSave.primary_column_id2 = primary_column_id2;
   classSave.savingOnlyHeader = (savingOnlyHeader == true) ? true : false;
+  classSave.saveVerticalTab = (save_vertical_tab == true) ? true : false;
   classSave.allLineTogether = (allLineTogether == true) ? true : false;
   classSave.onlyOneLineAtATime = (onlyOneLineAtATime == true) ? true : false;
   classSave.single_line = (single_line == true) ? true : false;
@@ -2880,13 +3133,23 @@ $(document).ready(function () {
   classContextMenu.tbodyClass = (typeof tbodyClass !== 'undefined') ? tbodyClass : null;
   classContextMenu.noOfTabbs = (typeof noOfTabbs !== 'undefined') ? noOfTabbs : null;
   classContextMenu.contextMenu();
+
  }
 
- //FILE attachment
+ $('body').on("click", "#form_line .add_row_img", function () {
+  var addNewRow = new add_new_rowMain();
+  var noOfTabbs = $('ul#js_contextMenu_data').find('.noOfTabbs').data('nooftabbs');
+  var lineClassName = $('ul#js_saving_data').find('.lineClassName').data('lineclassname');
+  addNewRow.trClass = lineClassName;
+  addNewRow.tbodyClass = 'form_data_line_tbody';
+  addNewRow.noOfTabs = noOfTabbs;
+  addNewRow.removeDefault = true;
+  addNewRow.add_new_row();
+  $(".tabsDetail").tabs();
+ });
 
- var fu = new fileUploadMain();
- fu.json_url = homeUrl + 'extensions/file/upload.php';
- fu.fileUpload();
+ addOrShow_lineDetails();
+ onClick_addDetailLine();
 
 //selecting customer
  $(".ar_customer_id.select_popup").on("click", function () {
@@ -2939,13 +3202,13 @@ $(document).ready(function () {
 
 // $('#user_info .block_menu').menu();
 
- $('#search_page').on('click', '#search_submit_btn', function (e) {
+ $('body').on('click', '#search_page #search_submit_btn', function (e) {
   e.preventDefault();
   $('.hideDiv_input').trigger('click');
   getSearchResult();
  });
 
- $('#search_page').on('click', '.page_nos a', function (e) {
+ $('body').on('click', '#search_page .page_nos a', function (e) {
   e.preventDefault();
   $('.hideDiv_input').trigger('click');
   var page_no = getUrlValues('pageno', $(this).prop('href'));
@@ -2956,7 +3219,7 @@ $(document).ready(function () {
   });
  });
 
- $('#search_page').on('click', 'a.content_per_page', function (e) {
+ $('body').on('click', '#search_page a.content_per_page', function (e) {
   e.preventDefault();
   $('.hideDiv_input').trigger('click');
   var per_page = $(this).closest('.noOfcontents').find('.per_page').val();
@@ -2965,20 +3228,226 @@ $(document).ready(function () {
   });
  });
 
+ $('body').on('click', '#multi_select #search_submit_btn', function (e) {
+  e.preventDefault();
+  $('.hideDiv_input').trigger('click');
+  getMultiSelectResult();
+ });
+
+ $('body').on('click', '#multi_select .page_nos a', function (e) {
+  e.preventDefault();
+  $('.hideDiv_input').trigger('click');
+  var page_no = getUrlValues('pageno', $(this).prop('href'));
+  var per_page = getUrlValues('per_page', $(this).prop('href'));
+  getMultiSelectResult({
+   pageno: page_no,
+   per_page: per_page
+  });
+ });
+
+ $('body').on('click', '#multi_select a.content_per_page', function (e) {
+  e.preventDefault();
+  $('.hideDiv_input').trigger('click');
+  var per_page = $(this).closest('.noOfcontents').find('.per_page').val();
+  getMultiSelectResult({
+   per_page: per_page
+  });
+ });
+
  var contactObjectCount = 2;
- $('li#add_new_contact').on('click', function () {
+ $('#content').on('click', 'li#add_new_contact', function () {
   $(this).closest('ul').find('li').first().clone().attr("class", "new_object" + contactObjectCount).prependTo($(this).closest('ul'));
   contactObjectCount++;
  });
 
- //popu for contact
+ //popup for contact
  $('#content').on('click', '.extn_contact_id.select_popup', function () {
   var fieldClass = $(this).closest('li').prop('class');
   localStorage.setItem("contact_field_class", fieldClass);
   void window.open('select.php?class_name=extn_contact', '_blank',
           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
- 
+
+
+ getBlocks();
+
+
+ $('body').on('click', '#header_top .menu a,#search_result .action a, #pagination .page_nos a, #new_page_button', function (e) {
+  e.preventDefault();
+  var urlLink = $(this).attr('href');
+  var urlLink_a = urlLink.split('?');
+  var urlLink_firstPart_a = urlLink_a[0].split('/');
+  var pageType = urlLink_firstPart_a.pop();
+  if (pageType == 'form.php') {
+   var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
+  } else if (pageType == 'program.php') {
+   var formUrl = 'includes/json/json_program.php?' + urlLink_a[1];
+  } else {
+   var formUrl = urlLink;
+  }
+  getFormDetails(formUrl);
+ }).one();
+
+ $('body').on('click', '#pagination a.content_per_page', function (e) {
+  e.preventDefault();
+  var urlLink = $(this).closest('#pagination').find('a').first().attr('href');
+  var urlLink_a = urlLink.split('?');
+  var urlLink_firstPart_a = urlLink_a[0].split('/');
+  var pageType = urlLink_firstPart_a.pop();
+  if (pageType == 'form.php') {
+   urlLink_a[1] += '&per_page=' + $(this).parent().find('.per_page').val();
+   var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
+  } else {
+   var formUrl = urlLink;
+  }
+  getFormDetails(formUrl);
+ }).one();
+
+ $('body').on('click', '#content a.show', function (e) {
+  var headerId_v = $(this).parent().find(':input').val();
+  var headerId = $(this).parent().find(':input').attr('id');
+  e.preventDefault();
+  var urlLink = $(this).attr('href');
+  var urlLink_a = urlLink.split('?');
+  var formUrl = 'includes/json/json_form.php?' + urlLink_a[1] + '&' + headerId + '=' + headerId_v;
+  getFormDetails(formUrl);
+ }).one();
+
+ //Delete the comment form
+ deleteComment();
+
+
+//Update the comment form
+ $("body").on('click', '.update_button', function (e) {
+  e.preventDefault();
+  var comment_id = $(this).val();
+  var ulId = $(this).closest(".commentRecord").prop('id');
+  if (confirm("Are you sure?")) {
+   updateComment(comment_id, ulId);
+  }
+  e.stopPropagation();
+ });
+
+ $('body').on('click', '.submit_comment', function () {
+  $('.show_loading_small').show();
+  $(this).closest('form').find('textarea').each(function () {
+   var divId = $(this).prop('id');
+   var data = tinyMCE.get(divId).getContent();
+   $(this).html(data);
+  });
+  var headerData = $(this).closest('form').serializeArray();
+  var homeUrl = $('#home_url').val();
+  var savePath = homeUrl + 'form.php?class_name=comment';
+  saveHeader(savePath, headerData, '#comment_id', '', '', true, 'comment');
+  $(".comment_error").replaceWith('<input type="button" value="Reload page" onclick="location.reload();">');
+ });
+
+ $('body').off('click', '#save_program').on('click', '#save_program', function () {
+  $('.show_loading_small').show();
+  var headerData = $(this).closest('form').serializeArray();
+  var class_name = $('.class_name').val();
+  var homeUrl = $('#home_url').val();
+  var savePath = homeUrl + 'program.php?class_name=' + class_name;
+  saveHeader(savePath, headerData, '#sys_program', '', '', true, 'program_header');
+ });
+
+ //FILE attachment
+ var fu = new fileUploadMain();
+ fu.json_url = homeUrl + 'extensions/file/upload.php';
+ fu.fileUpload();
+
+ //popu for selecting AR Transaction
+ $('body').on('click', '.select_transaction_number.select_popup', function () {
+  if ($(this).closest('tr').find('.ar_receipt_line_id').first().val()) {
+   alert('You are not allowed to select a new transaction\nCancell or Viod the payment if required');
+   return;
+  }
+  var rowClass = $(this).closest('tr').prop('class');
+  var fieldClass = $(this).closest('td').find('.select_transaction_number').prop('class');
+  localStorage.setItem("row_class", rowClass);
+  localStorage.setItem("field_class", fieldClass);
+  var openUrl = 'select.php?class_name=ar_unpaid_transaction_v';
+  openUrl += '&ar_customer_id=' + $('#ar_customer_id').val();
+  localStorage.setItem("reset_link_ofSelect", openUrl);
+  void window.open(openUrl, '_blank',
+          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
+ //bank account popup
+ $("body").on("click", '.mdm_bank_account_id.select_popup', function () {
+  void window.open('select.php?class_name=mdm_bank_account_v', '_blank',
+          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
+ //coa structure
+ $('body').on('change', '#coa_structure_id', function () {
+  if (!$('#coa_id').val()) {
+   getCoaStructure();
+  }
+ });
+
+//open new period
+ $('body').on('click', '#open_next_period', function () {
+  if ($('#new_gl_calendar_id').val()) {
+   var period_name = $('#new_gl_calendar_id option:selected').text();
+   if (confirm("Open " + period_name + " Period ?\n")) {
+    openNextGLPeriod();
+   }
+  } else {
+   alert('No period avaibale to open');
+  }
+ });
+
+ $('body').on('click', 'a.payslipBy_periodName', function (e) {
+  var headerId_v = $(this).closest('td').find('select').val();
+  var headerId = $(this).closest('td').find('select').attr('id');
+  e.preventDefault();
+  var urlLink = $(this).attr('href');
+  var urlLink_a = urlLink.split('?');
+  var formUrl = 'includes/json/json_form.php?' + urlLink_a[1] + '&' + headerId + '=' + headerId_v + '&employee_id=' + $('#employee_id').val();
+  getFormDetails(formUrl);
+ }).one();
+
+ $('body').on('click', 'a.hr_approval_limit_assignment_id', function (e) {
+  var position_id_v = $('#position_id').val();
+  var job_id_v = $('#job_id').val();
+  var bu_org_id_v = $('#bu_org_id').val();
+  e.preventDefault();
+  var urlLink = $(this).attr('href');
+  var urlLink_a = urlLink.split('?');
+  var formUrl = 'includes/json/json_form.php?' + urlLink_a[1] + '&position_id=' + position_id_v + '&job_id=' + job_id_v + '&bu_org_id=' + bu_org_id_v;
+  getFormDetails(formUrl);
+ }).one();
+
+ $('body').on('click', 'a.sys_profile_header_id', function (e) {
+  e.preventDefault();
+  var sys_profile_header_id = $('#sys_profile_header_id').val();
+  var profile_level = $('#profile_level').val();
+  var urlLink = $(this).attr('href');
+  var urlLink_a = urlLink.split('?');
+  var formUrl = 'includes/json/json_form.php?' + urlLink_a[1] + '&sys_profile_header_id=' + sys_profile_header_id + '&profile_level=' + profile_level;
+  getFormDetails(formUrl);
+ }).one();
+
+ $('body').on('click', 'a.sys_hold_reference_doc_id', function (e) {
+  e.preventDefault();
+  var reference_table = $('#reference_table').val();
+  var reference_id = $('#reference_id').val();
+  var urlLink = $(this).attr('href');
+  var urlLink_a = urlLink.split('?');
+  var formUrl = 'includes/json/json_form.php?' + urlLink_a[1] + '&reference_table=' + reference_table + '&reference_id=' + reference_id;
+  getFormDetails(formUrl);
+ }).one();
+
+ $('body').on('click', 'a.bc_auto_trigger_id', function (e) {
+  e.preventDefault();
+  var transaction_type_id = $('#transaction_type_id').val();
+  var association_level = $('#association_level').val();
+  var urlLink = $(this).attr('href');
+  var urlLink_a = urlLink.split('?');
+  var formUrl = 'includes/json/json_form.php?' + urlLink_a[1] + '&transaction_type_id=' + transaction_type_id + '&association_level=' + association_level;
+  getFormDetails(formUrl);
+ }).one();
 
 });
 function toUpperCase(str)

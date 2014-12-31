@@ -47,6 +47,13 @@ class bc_static_label extends dbObject {
   'label_type',
   'bc_label_format_header_id',
  ];
+ 
+  public $search = [
+  '_update_path' => 'form.php?class_name=bc_static_label',
+  '_show_update_path' => 1,
+  '_update_action_meassge' => 'Update',
+ ];
+  
  public $pageTitle = " Barcode Static Label"; //page Title
  public $bc_static_label_id;
  public $label_type;

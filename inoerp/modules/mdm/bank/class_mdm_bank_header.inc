@@ -1,79 +1,93 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * mdm_bank_header
+ * Contains all the onhand information, such as - bank_name, bank_number, description,  bank_name_alt, etc.
+ * 
+ */
 class mdm_bank_header extends dbObject {
 
  public static $table_name = "mdm_bank_header";
- public static $dependent_classes = ['mdm_bank_site','extn_contact'];
+ public static $dependent_classes = ['mdm_bank_site', 'extn_contact'];
  public static $primary_column = "mdm_bank_header_id";
  public static $key_column = 'bank_name';
  public static $module = "mdm";
  public static $system_info = [
-		 'name' => 'Bank',
-		 'number' => '1201',
-		 'description' => 'Define and mainten banks',
-		 'version' => '1.1.1.3',
-		 'db_version' => '1001',
-		 'mod_version' => '1.1.x-1.1',
-		 'dependent_class' => array('mdm_bank_site', 'mdm_bank_account'),
-		 'primary_entity_cb' => '',
-		 'module_name' => 'ap',
-		 'weight' => 1
+  'name' => 'Bank',
+  'number' => '9401',
+  'description' => 'Define and mainten banks',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'dependent_class' => array('mdm_bank_site', 'mdm_bank_account'),
+  'primary_entity_cb' => '',
+  'module_name' => 'mdm',
+  'weight' => 1
  ];
  public $field_a = [
-		 'mdm_bank_header_id',
-		 'country',
-		 'bank_name',
-		 'bank_number',
-		 'description',
-		 'bank_name_short',
-		 'bank_name_alt',
-		 'tax_reg_no',
-		 'tax_payer_id',
-		 'address_id',
-		 'contact_id',
-		 'status',
-		 'created_by',
-		 'creation_date',
-		 'last_update_by',
-		 'last_update_date',
+  'mdm_bank_header_id',
+  'country',
+  'bank_name',
+  'bank_number',
+  'description',
+  'bank_name_short',
+  'bank_name_alt',
+  'tax_reg_no',
+  'tax_payer_id',
+  'address_id',
+  'contact_id',
+  'status',
+  'created_by',
+  'creation_date',
+  'last_update_by',
+  'last_update_date',
  ];
  public $initial_search = [
-		 'country',
-		 'bank_name',
-		 'bank_number',
-		 'description',
+  'country',
+  'bank_name',
+  'bank_number',
+  'description',
  ];
  public $column = [
-		 'mdm_bank_header_id',
-		 'country',
-		 'bank_name',
-		 'bank_number',
-		 'description',
-		 'bank_name_short',
-		 'bank_name_alt',
-		 'tax_reg_no',
-		 'tax_payer_id',
+  'mdm_bank_header_id',
+  'country',
+  'bank_name',
+  'bank_number',
+  'description',
+  'bank_name_short',
+  'bank_name_alt',
+  'tax_reg_no',
+  'tax_payer_id',
  ];
  public $numberField = [
-		 'bank_number',
+  'bank_number',
  ];
  public $requiredField = [
-		 'country',
-		 'bank_name',
+  'country',
+  'bank_name',
  ];
  public $addressField = [
-		 "address_id"
+  "address_id"
  ];
  public $fields_inForm_notInDataBase = [
-		 'header_address_name',
-		 'header_address',
-		 'header_country',
-		 'header_postal_code',
+  'header_address_name',
+  'header_address',
+  'header_country',
+  'header_postal_code',
  ];
  public $search = [
-		 '_update_path' => 'form.php?class_name=mdm_bank_header',
-		 '_show_update_path' => 1,
-		 '_show_view_path' => 1,
+  '_update_path' => 'form.php?class_name=mdm_bank_header',
+  '_show_update_path' => 1,
+  '_show_view_path' => 1,
  ];
  public $pageTitle = " Banks "; //page Title
  public $mdm_bank_header_id;
@@ -98,129 +112,129 @@ class mdm_bank_header extends dbObject {
  public $header_postal_code;
 
  public function _before_showing() {
-	$address = new address();
-	if (!empty($this->address_id)) {
-	 $address->findBy_id($this->address_id);
-	 $this->header_address_name = $address->address_name;
-	 $this->header_address = $address->address;
-	 $this->header_country = $address->country;
-	 $this->header_postal_code = $address->postal_code;
-	}
+  $address = new address();
+  if (!empty($this->address_id)) {
+   $address->findBy_id($this->address_id);
+   $this->header_address_name = $address->address_name;
+   $this->header_address = $address->address;
+   $this->header_country = $address->country;
+   $this->header_postal_code = $address->postal_code;
+  }
  }
 
  public static function find_by_mdm_bank_header_number($mdm_bank_header_number) {
-	global $db;
-	$sql = "SELECT * FROM "
-					. self::$table_name
-					. " where mdm_bank_header_number LIKE '%{$mdm_bank_header_number}%' LIMIT 0, 30";
-	$result = $db->query($sql);
-	$data = array();
-	if ($result && mysql_num_rows($result)) {
-	 while ($row = $db->fetch_array($result)) {
-		$data[] = array(
-				'label' => $row['mdm_bank_header_number'],
-				'mdm_bank_header_number' => $row['mdm_bank_header_number'],
-				'mdm_bank_header_id' => $row['mdm_bank_header_id'],
-				'description' => $row['mdm_bank_header_description']
-		);
-	 }
-	}
+  global $db;
+  $sql = "SELECT * FROM "
+   . self::$table_name
+   . " where mdm_bank_header_number LIKE '%{$mdm_bank_header_number}%' LIMIT 0, 30";
+  $result = $db->query($sql);
+  $data = array();
+  if ($result && mysql_num_rows($result)) {
+   while ($row = $db->fetch_array($result)) {
+    $data[] = array(
+     'label' => $row['mdm_bank_header_number'],
+     'mdm_bank_header_number' => $row['mdm_bank_header_number'],
+     'mdm_bank_header_id' => $row['mdm_bank_header_id'],
+     'description' => $row['mdm_bank_header_description']
+    );
+   }
+  }
 
-	return $data;
+  return $data;
  }
 
  public static function find_all_assigned_orgs($mdm_bank_header_id) {
-	global $db;
-	$sql = "SELECT * FROM " .
-					'mdm_bank_header_bu' .
-					" where mdm_bank_header_id= '{$mdm_bank_header_id}' ";
-	$result = $db->result_array_assoc($sql);
-	return $result;
+  global $db;
+  $sql = "SELECT * FROM " .
+   'mdm_bank_header_bu' .
+   " where mdm_bank_header_id= '{$mdm_bank_header_id}' ";
+  $result = $db->result_array_assoc($sql);
+  return $result;
  }
 
  public function findBy_mdm_bank_header_name($limit = 30) {
-	global $db;
-	$sql = " SELECT * FROM "
-					. self::$table_name
-					. " where mdm_bank_header_name LIKE :mdm_bank_header_name LIMIT $limit";
-	$param_a = ['mdm_bank_header_name'];
-	$mdm_bank_header_name = '%' . $this->mdm_bank_header_name . '%';
-	$value_a = [ 'mdm_bank_header_name' => $mdm_bank_header_name];
-	$result = $db->findBy_sql($sql, $param_a, $value_a);
-	return !(empty($result)) ? $result : false;
+  global $db;
+  $sql = " SELECT * FROM "
+   . self::$table_name
+   . " where mdm_bank_header_name LIKE :mdm_bank_header_name LIMIT $limit";
+  $param_a = ['mdm_bank_header_name'];
+  $mdm_bank_header_name = '%' . $this->mdm_bank_header_name . '%';
+  $value_a = [ 'mdm_bank_header_name' => $mdm_bank_header_name];
+  $result = $db->findBy_sql($sql, $param_a, $value_a);
+  return !(empty($result)) ? $result : false;
  }
 
  public function findBy_mdm_bank_headerName_OrgId($limit = 30) {
-	global $db;
+  global $db;
 //	$sql = " SELECT * FROM mdm_bank_header_all_v "
 //					. " where mdm_bank_header_name LIKE :mdm_bank_header_name AND org_id = :org_id "
 //					. " LIMIT $limit";
-	$sql = " SELECT su.mdm_bank_header_name, su.mdm_bank_header_id, su.mdm_bank_header_number ";
-	$sql .= " FROM mdm_bank_header su ";
-	$sql .= " RIGHT JOIN mdm_bank_header_bu sb ON  sb.mdm_bank_header_id = su.mdm_bank_header_id ";
-	$sql .= " WHERE  sb.org_id = :org_id ";
-	$sql .= " AND  su.mdm_bank_header_name LIKE :mdm_bank_header_name ";
+  $sql = " SELECT su.mdm_bank_header_name, su.mdm_bank_header_id, su.mdm_bank_header_number ";
+  $sql .= " FROM mdm_bank_header su ";
+  $sql .= " RIGHT JOIN mdm_bank_header_bu sb ON  sb.mdm_bank_header_id = su.mdm_bank_header_id ";
+  $sql .= " WHERE  sb.org_id = :org_id ";
+  $sql .= " AND  su.mdm_bank_header_name LIKE :mdm_bank_header_name ";
 
-	$param_a = ['mdm_bank_header_name', 'org_id'];
-	$mdm_bank_header_name = '%' . $this->mdm_bank_header_name . '%';
-	$value_a = [ 'mdm_bank_header_name' => $mdm_bank_header_name, 'org_id' => $this->org_id];
-	$result = $db->findBy_sql($sql, $param_a, $value_a);
-	return !(empty($result)) ? $result : false;
+  $param_a = ['mdm_bank_header_name', 'org_id'];
+  $mdm_bank_header_name = '%' . $this->mdm_bank_header_name . '%';
+  $value_a = [ 'mdm_bank_header_name' => $mdm_bank_header_name, 'org_id' => $this->org_id];
+  $result = $db->findBy_sql($sql, $param_a, $value_a);
+  return !(empty($result)) ? $result : false;
  }
 
  public function searchBy_mdm_bank_header_name() {
-	$result = $this->findBy_mdm_bank_header_name();
-	$data = array();
-	if (!empty($result)) {
-	 foreach ($result as $obj) {
-		$data[] = array(
-				'label' => $obj->mdm_bank_header_name,
-				'mdm_bank_header_id' => $obj->mdm_bank_header_id,
-				'mdm_bank_header_number' => $obj->mdm_bank_header_number
-		);
-	 }
-	}
-	return $data;
+  $result = $this->findBy_mdm_bank_header_name();
+  $data = array();
+  if (!empty($result)) {
+   foreach ($result as $obj) {
+    $data[] = array(
+     'label' => $obj->mdm_bank_header_name,
+     'mdm_bank_header_id' => $obj->mdm_bank_header_id,
+     'mdm_bank_header_number' => $obj->mdm_bank_header_number
+    );
+   }
+  }
+  return $data;
  }
 
  public function searchBy_mdm_bank_headerName_orgId() {
-	$result = $this->findBy_mdm_bank_headerName_OrgId();
-	$data = array();
-	if (!empty($result)) {
-	 foreach ($result as $obj) {
-		$data[] = array(
-				'label' => $obj->mdm_bank_header_name,
-				'mdm_bank_header_id' => $obj->mdm_bank_header_id,
-				'mdm_bank_header_number' => $obj->mdm_bank_header_number
-		);
-	 }
-	}
-	return $data;
+  $result = $this->findBy_mdm_bank_headerName_OrgId();
+  $data = array();
+  if (!empty($result)) {
+   foreach ($result as $obj) {
+    $data[] = array(
+     'label' => $obj->mdm_bank_header_name,
+     'mdm_bank_header_id' => $obj->mdm_bank_header_id,
+     'mdm_bank_header_number' => $obj->mdm_bank_header_number
+    );
+   }
+  }
+  return $data;
  }
 
  public function copy($mdm_bank_header_id) {
-	global $db;
-	$sql1 = " CREATE TEMPORARY TABLE tmptable SELECT * FROM mdm_bank_header WHERE `mdm_bank_header_id` = '{$mdm_bank_header_id}' ";
-	if ($db->query($sql1)) {
-	 $sql2 = "  UPDATE tmptable SET `mdm_bank_header_id` = '' ,
+  global $db;
+  $sql1 = " CREATE TEMPORARY TABLE tmptable SELECT * FROM mdm_bank_header WHERE `mdm_bank_header_id` = '{$mdm_bank_header_id}' ";
+  if ($db->query($sql1)) {
+   $sql2 = "  UPDATE tmptable SET `mdm_bank_header_id` = '' ,
            `org_id` = '{$this->org_id}' 
           WHERE `mdm_bank_header_id` = '{$mdm_bank_header_id}' ";
-	 if ($db->query($sql2)) {
-		$sql3 = " INSERT INTO `mdm_bank_header` SELECT * FROM tmptable WHERE `mdm_bank_header_id` = '' ";
-		if ($db->query($sql3)) {
-		 $this->mdm_bank_header_id = $db->insert_id();
-		 $this->msg = 1;
-		} else {
-		 $this->msg = 0;
-		}
-	 }
-	}
-	return $this->msg;
+   if ($db->query($sql2)) {
+    $sql3 = " INSERT INTO `mdm_bank_header` SELECT * FROM tmptable WHERE `mdm_bank_header_id` = '' ";
+    if ($db->query($sql3)) {
+     $this->mdm_bank_header_id = $db->insert_id();
+     $this->msg = 1;
+    } else {
+     $this->msg = 0;
+    }
+   }
+  }
+  return $this->msg;
  }
 
  private function create_mdm_bank_header_all_v() {
 
-	$sql = "
+  $sql = "
 CREATE OR REPLACE VIEW mdm_bank_header_all_v
 (
 mdm_bank_header_id,mdm_bank_header_number, mdm_bank_header_name ,
@@ -250,7 +264,7 @@ LEFT JOIN mdm_bank_header_bu sb ON su.mdm_bank_header_id = sb.mdm_bank_header_id
 ";
 
 
-	$sql = "
+  $sql = "
 CREATE OR REPLACE VIEW po_all_v
 (
 po_header_id, bu_org_id, po_type, po_number, mdm_bank_header_id, mdm_bank_header_site_id, buyer, currency, header_amount, po_status,
