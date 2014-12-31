@@ -470,12 +470,12 @@ function new_searchCriteria_onClick(json_url) {
 var detailObjectCount = 2001;
 var dateCount = 30000;
 function onClick_addDetailLine(noOfTabs, add_row_detail_img, tabsDetailName) {
-   add_row_detail_img = (typeof add_row_detail_img !== 'undefined') ? add_row_detail_img : '.add_row_detail_img';
-  tabsDetailName = (typeof tabsDetailName !== 'undefined') ? tabsDetailName : 'tabsDetail';
+ add_row_detail_img = (typeof add_row_detail_img !== 'undefined') ? add_row_detail_img : '.add_row_detail_img';
+ tabsDetailName = (typeof tabsDetailName !== 'undefined') ? tabsDetailName : 'tabsDetail';
  var highest_seq_num = 1;
  var lastDetailNumber = 1;
  $("#content").off('click', add_row_detail_img).on("click", add_row_detail_img, function () {
-  noOfTabs =  $(this).closest('.tabContainer').find('.tabContent').length;
+  noOfTabs = $(this).closest('.tabContainer').find('.tabContent').length;
   var trClass = '.' + $(this).closest("tr").attr('class').replace(/\s+/g, '.');
   var trClass_wod = trClass.replace(/tr\./g, '');
   trClass_wod = trClass_wod.replace(/\./g, '');
@@ -3280,6 +3280,8 @@ $(document).ready(function () {
   var pageType = urlLink_firstPart_a.pop();
   if (pageType == 'form.php') {
    var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
+  } else if (pageType == 'program.php') {
+   var formUrl = 'includes/json/json_program.php?' + urlLink_a[1];
   } else {
    var formUrl = urlLink;
   }
@@ -3339,15 +3341,15 @@ $(document).ready(function () {
   saveHeader(savePath, headerData, '#comment_id', '', '', true, 'comment');
   $(".comment_error").replaceWith('<input type="button" value="Reload page" onclick="location.reload();">');
  });
- 
-  $('body').off('click', '#save_program').on('click', '#save_program', function () {
+
+ $('body').off('click', '#save_program').on('click', '#save_program', function () {
   $('.show_loading_small').show();
   var headerData = $(this).closest('form').serializeArray();
   var class_name = $('.class_name').val();
   var homeUrl = $('#home_url').val();
-  var savePath = homeUrl + 'program.php?class_name='+class_name;
+  var savePath = homeUrl + 'program.php?class_name=' + class_name;
   saveHeader(savePath, headerData, '#sys_program', '', '', true, 'program_header');
-  });
+ });
 
  //FILE attachment
  var fu = new fileUploadMain();

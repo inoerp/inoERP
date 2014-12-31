@@ -14,27 +14,19 @@ setValFromSelectPage.prototype.setVal = function () {
  var sourcing_rule = this.sourcing_rule;
  var fieldClass = '.' + localStorage.getItem("field_class");
  fieldClass = fieldClass.replace(/\s+/g, '.');
+ var li_field_id = '#' + localStorage.getItem("li_divId");
 
- var item_obj = [{id: 'item_id', data: this.item_id},
-  {id: 'item_number', data: this.item_number},
-  {id: 'item_description', data: this.item_description},
-  {id: 'uom_id', data: this.uom_id}
- ];
-
- if (localStorage.getItem("item_type") === 'template') {
-  if (item_number) {
-   $("#item_template").val(item_number);
-  }
- } else {
-  $(item_obj).each(function (i, value) {
-   if (value.data) {
-    var fieldId = '#' + value.id;
-    $('#content').find(fieldId).val(value.data);
-   }
-  });
+ if (this.item_number) {
+  $(li_field_id).val(this.item_number);
+  localStorage.removeItem("li_divId");
  }
- localStorage.removeItem("item_type");
-
+ 
+  if (this.item_id_m) {
+  $('#content').find(li_field_id).val(this.item_id_m);
+  localStorage.removeItem("li_divId");
+ }
+ 
+ 
  if (combination) {
   $('#content').find(fieldClass).val(combination);
   localStorage.removeItem("field_class");
