@@ -1,41 +1,46 @@
-function setValFromSelectPage(inv_serial_number_id, item_id, item_number, item_description ) {
- this.inv_serial_number_id = inv_serial_number_id;
+function setValFromSelectPage(item_id, item_number, item_description, uom_id,
+        combination, sourcing_rule) {
  this.item_id = item_id;
  this.item_number = item_number;
  this.item_description = item_description;
+ this.uom_id = uom_id;
+ this.combination = combination;
+ this.sourcing_rule = sourcing_rule;
 }
 
+setValFromSelectPage.prototype.setVal = function () {
+ var item_number = this.item_number;
+ var combination = this.combination;
+ var sourcing_rule = this.sourcing_rule;
+ var fieldClass = '.' + localStorage.getItem("field_class");
+ fieldClass = fieldClass.replace(/\s+/g, '.');
 
-setValFromSelectPage.prototype.setVal = function() {
- var li_divId = '#' + localStorage.getItem("li_divId");
- var inv_serial_number_id = this.inv_serial_number_id;
- if (inv_serial_number_id) {
-	$("#inv_serial_number_id").val(inv_serial_number_id);
+ var item_obj = [{id: 'item_id', data: this.item_id},
+  {id: 'item_number', data: this.item_number},
+  {id: 'item_description', data: this.item_description},
+  {id: 'uom_id', data: this.uom_id}
+ ];
+
+ if (localStorage.getItem("item_type") === 'template') {
+  if (item_number) {
+   $("#item_template").val(item_number);
+  }
+ } else {
+  $(item_obj).each(function (i, value) {
+   if (value.data) {
+    var fieldId = '#' + value.id;
+    $('#content').find(fieldId).val(value.data);
+   }
+  });
  }
- if ( this.item_id ) {
-	$("#item_id").val( this.item_id );
+ localStorage.removeItem("item_type");
+
+ if (combination) {
+  $('#content').find(fieldClass).val(combination);
+  localStorage.removeItem("field_class");
  }
-  if ( this.item_number ) {
-	$("#item_number").val( this.item_number );
-  $(li_divId).val( this.item_number );
+
+ if (sourcing_rule) {
+  $('#content').find('.sourcing_rule').val(sourcing_rule);
  }
-  if ( this.item_description ) {
-	$("#item_description").val( this.item_description );
-  $("#item_description").val( this.item_description );
- }
- localStorage.removeItem("li_divId");
 };
-
-
-//end of global functions
-$(document).ready(function() {
-
-});
-
-
-
-
-
-
-
-

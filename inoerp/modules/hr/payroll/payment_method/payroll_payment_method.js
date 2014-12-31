@@ -62,12 +62,6 @@ $(document).ready(function() {
    'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //Get the hr_payroll_payment_method_id on find button click
- $('a.show.hr_payroll_payment_method_id').click(function() {
-  var hr_payroll_payment_method_id = $('#hr_payroll_payment_method_id').val();
-  $(this).attr('href', modepath() + 'hr_payroll_payment_method_id=' + hr_payroll_payment_method_id);
- });
-
  $(".mdm_bank_account_id.select_popup").on("click", function() {
   void window.open('select.php?class_name=mdm_bank_account', '_blank',
    'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');

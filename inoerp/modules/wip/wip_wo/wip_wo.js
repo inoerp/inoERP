@@ -54,13 +54,13 @@ setValFromSelectPage.prototype.setVal = function () {
 
 $(document).ready(function () {
 //mandatory and field sequence
- var mandatoryCheck = new mandatoryFieldMain();
- mandatoryCheck.header_id = 'wip_wo_header_id';
- mandatoryCheck.mandatoryHeader();
- mandatoryCheck.form_area = 'form_header';
- mandatoryCheck.mandatory_fields = ["org_id", 'wo_type', "wip_accounting_group_id"];
- mandatoryCheck.mandatory_messages = ["First Select Org", 'No Work Order Type', "No WIP Accounting Group"];
- mandatoryCheck.mandatoryField();
+// var mandatoryCheck = new mandatoryFieldMain();
+// mandatoryCheck.header_id = 'wip_wo_header_id';
+// mandatoryCheck.mandatoryHeader();
+// mandatoryCheck.form_area = 'form_header';
+// mandatoryCheck.mandatory_fields = ["org_id", 'wo_type', "wip_accounting_group_id"];
+// mandatoryCheck.mandatory_messages = ["First Select Org", 'No Work Order Type', "No WIP Accounting Group"];
+// mandatoryCheck.mandatoryField();
 
 //setting the first line & shipment number
  if (!($('.lines_number:first').val())) {
@@ -71,14 +71,14 @@ $(document).ready(function () {
   $('.detail_number:first').val('10');
  }
 
- $('#quantity').on('blur', function () {
+ $('body').off('blur', '#quantity').on('blur', '#quantity', function () {
   if ($(this).val()) {
    $('#nettable_quantity').val($(this).val());
   }
  })
 
  //selecting Header Id
- $(".wip_wo_header_id.select_popup").on("click", function () {
+ $('body').off("click", '.wip_wo_header_id.select_popup').on("click", '.wip_wo_header_id.select_popup' , function () {
   void window.open('select.php?class_name=wip_wo_header', '_blank',
           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
@@ -95,7 +95,7 @@ $(document).ready(function () {
 // });
 
 //start date & completion date calculation
- $('#content').on('change', '.start_date', function () {
+ $('#content').off('change', '.start_date').on('change', '.start_date', function () {
   var startDate = $('.start_date').first().val();
   var str = startDate.split(/-/);
   if ($('#processing_lt').val()) {
@@ -106,10 +106,11 @@ $(document).ready(function () {
   var newDate = (parseInt(str[2]) + (processing_lt));
   var cd = new Date(str[0], str[1], newDate);
   var foramtedDate = cd.getFullYear() + '-' + cd.getMonth() + '-' + cd.getDate();
+//  alert(processing_lt + '' + foramtedDate);
   $('.completion_date').first().val(foramtedDate);
  });
 
- $('#content').on('change', '.completion_date', function () {
+ $('#content').off('change', '.completion_date').on('change', '.completion_date', function () {
   var completionDate = $('.completion_date').first().val();
   var str = completionDate.split(/-/);
   if ($('#processing_lt').val()) {
@@ -124,7 +125,7 @@ $(document).ready(function () {
  });
 
 //Required Resource Quantity
- $('body').on('focusout', '.usage', function () {
+ $('body').off('focusout', '.usage').on('focusout', '.usage', function () {
   var usageValue = $(this).val();
   var quantity = $("#quantity").val();
   var trClass = '.' + $(this).closest('tr').attr('class');
@@ -134,7 +135,7 @@ $(document).ready(function () {
  });
 
 //Required BOM Quantity
- $('body').on('focusout', '.usage_quantity', function () {
+ $('body').off('focusout', '.usage_quantity').on('focusout', '.usage_quantity', function () {
   var usageValue = $(this).val();
   var quantity = $("#quantity").val();
   var trClass = '.' + $(this).closest('tr').attr('class');
@@ -144,7 +145,7 @@ $(document).ready(function () {
  });
 
  //get Subinventory Name
- $("#org_id").on("change", function () {
+ $('body').off("change",'#org_id').on("change",'#org_id' ,function () {
   getSubInventory({
    json_url: 'modules/inv/subinventory/json_subinventory.php',
    org_id: $("#org_id").val()
@@ -155,7 +156,7 @@ $(document).ready(function () {
 
 
  //get locatot on Subinventory change in form header
- $('#form_header').on('change', '.subinventory_id', function () {
+ $('#form_header').off('change', '.subinventory_id').on('change', '.subinventory_id', function () {
   var subInventoryId = $(this).val();
   if (subInventoryId > 0) {
    getLocator('modules/inv/locator/json_locator.php', subInventoryId, 'oneSubinventory', '');
@@ -163,7 +164,7 @@ $(document).ready(function () {
  });
 
  //get locatot on Subinventory change in form line
- $('#form_line').on('change', '.subinventory_id', function () {
+ $('#form_line2').off('change', '.subinventory_id').on('change', '.subinventory_id', function () {
   var subInventoryId = $(this).val();
   if (subInventoryId > 0) {
    var trClass = '.' + $(this).closest('tr').attr('class');
@@ -172,7 +173,7 @@ $(document).ready(function () {
  });
 
 //add or show linw details
- addOrShow_lineDetails('tr.wip_wo_routing0');
+// addOrShow_lineDetails('tr.wip_wo_routing0');
 
  //add new lines
  //add new lines
@@ -185,61 +186,17 @@ $(document).ready(function () {
   addNewRow.add_new_row();
  });
 
- $("#content tbody.form_data_line_tbody").on("click", ".add_row_img", function () {
-  var addNewRow = new add_new_rowMain();
-  addNewRow.trClass = 'wip_wo_routing';
-  addNewRow.tbodyClass = 'form_data_line_tbody';
-  addNewRow.noOfTabs = 2;
-  addNewRow.removeDefault = true;
-  addNewRow.add_new_row();
- });
-
- onClick_addDetailLine(2);
-
-
- //Get the wip_wo_id on refresh button click
- $('a.show.wip_wo_header_id').click(function () {
-  var wip_wo_header_id = $('#wip_wo_header_id').val();
-  $(this).attr('href', modepath() + 'wip_wo_header_id=' + wip_wo_header_id);
- });
-
- function afterCopy() {
-  $('#bom_exploded_cb').prop('checked', false);
-  $('#routing_exploded_cb').prop('checked', false);
-  $('#wo_number, #completed_quantity, #remaining_quantity, .anyDate').val('');
-  return true;
- }
-
-//context menu
- var classContextMenu = new contextMenuMain();
- classContextMenu.docHedaderId = 'wip_wo_header_id';
- classContextMenu.docLineId = 'wip_wo_routing_line_id';
- classContextMenu.btn1DivId = 'wip_wo_header';
- classContextMenu.btn2DivId = 'tabsLine';
- classContextMenu.trClass = 'wip_wo_routing';
- classContextMenu.tbodyClass = 'form_data_line_tbody';
- classContextMenu.noOfTabbs = 2;
- classContextMenu.afterCopy = afterCopy;
- classContextMenu.contextMenu();
-
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=wip_wo_header';
- classSave.form_header_id = 'wip_wo_header';
- classSave.primary_column_id = 'wip_wo_header_id';
- classSave.line_key_field = 'routing_sequence';
- classSave.single_line = false;
- classSave.savingOnlyHeader = false;
- classSave.headerClassName = 'wip_wo_header';
- classSave.lineClassName = 'wip_wo_routing_line';
- classSave.detailClassName = 'wip_wo_routing_detail';
- classSave.lineClassName2 = 'wip_wo_bom';
- classSave.enable_select = true;
- classSave.saveMain();
-
-
 //delete line
  deleteData('form.php?class_name=wip_wo_header&line2_class_name=wip_wo_bom&line_class_name=wip_wo_routing_line&detail_class_name=wip_wo_routing_detail');
 
+ $('#content').off('blur', '#org_id, #item_number').on('blur', '#org_id, #item_number', function () {
+  getItemRevision({
+   'org_id': $('#org_id').val(),
+   'item_id_m': $('#item_id_m').val(),
+   'show_date': false
+  });
+ });
+ 
 });
 
 

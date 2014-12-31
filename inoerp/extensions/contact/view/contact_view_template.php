@@ -1,4 +1,4 @@
-<?php $f = new inoform();
+<?php 
 if (empty($all_contacts)) {
  return;
 }

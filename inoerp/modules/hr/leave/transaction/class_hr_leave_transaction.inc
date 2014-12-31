@@ -69,6 +69,10 @@
    'from_date',
    'to_date',
   ];
+  public $number_fields = [
+   'leave_quantity'
+  ];
+  
   public $hr_leave_transaction_id;
   public $employee_id;
   public $requsted_date;

@@ -1,11 +1,34 @@
 <?php
-
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+/**
+ * sd_document_type
+ * Contains all the sd_document_type information, such as - document_type_name, bu_org_id_r,level, etc
+ *
+ */
 class sd_document_type extends dbObject {
 
  public static $table_name = "sd_document_type";
  public static $primary_column = "sd_document_type_id";
  public static $key_column = 'document_type_name';
  public static $module = "inv"; //same as gl_journal_source
+       public static $system_info = [
+  'name' => 'Sales Document Type',
+  'number' => '2306',
+  'description' => 'Create & Mainten Sales Document Type',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'sd',
+  'weight' => 6
+ ];
  public $field_a = [
 		 'sd_document_type_id',
 		 'document_type_name',

@@ -1,5 +1,18 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * Item
+ * Contains all the inv_count_entries information, such as - item_id_m, org_id, subinventory_id, etc.
+ * 
+ */
  class inv_count_entries extends dbObject {
 
   public static $table_name = "inv_count_entries";
@@ -9,6 +22,17 @@
   public static $js_fileName = 'modules/inv/count_entries/js/multi_select_count.js';
   public static $key_column = "item_id_m";
   public static $module = "inv";
+   public static $system_info = [
+  'name' => 'Count Entries',
+  'number' => '2105',
+  'description' => 'Inventory Count Entries',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'inv',
+  'weight' => 5
+ ];
   public static $count_entries_action_a = [
    'APPROVE' => 'Approve Count',
    'REJECT' => 'Reject Count',

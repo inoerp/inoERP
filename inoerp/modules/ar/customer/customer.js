@@ -63,31 +63,11 @@ setValFromSelectPage.prototype.setVal = function () {
 
 
 $(document).ready(function () {
-
- //Popup for selecting address 
- $(".address_popup").click(function () {
-  var addressPopupDivClass = $(this).closest('div').prop('class');
-  localStorage.setItem("addressPopupDivClass", addressPopupDivClass);
-  void window.open('select.php?class_name=address', '_blank',
+ 
+  $(".ar_customer_id.select_popup").click(function () {
+  void window.open('select.php?class_name=ar_customer', '_blank',
           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
   return false;
- });
-
- //Get the ar_customer_id on refresh button click
- $('a.show.ar_customer_id').click(function () {
-  var ar_customer_id = $('#ar_customer_id').val();
-  $(this).attr('href', modepath() + 'ar_customer_id=' + ar_customer_id);
- });
-
- $('a.show.customer_number').click(function () {
-  var customer_number = $('#customer_number').val();
-  $(this).attr('href', modepath() + 'customer_number=' + customer_number);
- });
-
- $('a.show.ar_customer_site_id').click(function () {
-  var ar_customer_id = $('#ar_customer_id').val();
-  var ar_customer_site_id = $('#ar_customer_site_id').val();
-  $(this).attr('href', modepath() + 'ar_customer_id=' + ar_customer_id + '&ar_customer_site_id=' + ar_customer_site_id);
  });
 
  $("#customer_site_name").on("change", function () {
@@ -101,48 +81,4 @@ $(document).ready(function () {
 
   }
  });
-
-
-//context menu
- var classContextMenu = new contextMenuMain();
- classContextMenu.docHedaderId = 'ar_customer_id';
- classContextMenu.docLineId = 'ar_customer_line_id';
- classContextMenu.btn1DivId = 'ar_customer';
- classContextMenu.btn2DivId = 'form_line';
- classContextMenu.trClass = 'ar_customer_line';
- classContextMenu.tbodyClass = 'form_data_line_tbody';
- classContextMenu.noOfTabbs = 1;
-// classContextMenu.contextMenu();
-
-//FILE attachment
- var fu = new fileUploadMain();
- fu.json_url = 'extensions/file/upload.php';
- fu.module_name = 'ar';
- fu.class_name = 'customer';
- fu.document_type = 'customer';
-// fu.directory = 'ar/customer';
- fu.fileUpload();
-
-
-//Save record
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=ar_customer';
- classSave.form_header_id = 'customer_header';
- classSave.primary_column_id = 'ar_customer_id';
- classSave.line_key_field = 'customer_site_name';
- classSave.single_line = true;
- classSave.form_line_id = 'customer_site';
- classSave.enable_select = true;
- if (!$('#ar_customer_id').val()) {
-  classSave.savingOnlyHeader = true;
- } else {
-  classSave.savingOnlyHeader = false;
- }
- classSave.headerClassName = 'ar_customer';
- classSave.lineClassName = 'ar_customer_site';
- classSave.saveMain();
-
-//delete line
- deleteData('json.customer.php');
-deleteReferences();
 });

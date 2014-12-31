@@ -97,11 +97,6 @@ $(document).ready(function() {
   }
  });
 
- $('#release_number').on('change', function() {
-    $('#po_quote_header_id').val('');
-  $('#po_quote_status').val('');
-  $('#action').val('');
- })
 
  if ($('#po_quote_type').val() == 'BLANKET') {
   $('.class_detail_form').html('');
@@ -137,43 +132,8 @@ $(document).ready(function() {
    'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //Popup for selecting address 
- $(".address_popup").click(function() {
-  var addressPopupDivClass = $(this).closest('div').prop('class');
-  localStorage.setItem("addressPopupDivClass", addressPopupDivClass);
-  void window.open('select.php?class_name=address', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-  return false;
- });
 
- //Get the po header id on refresh button click
- $('a.show.po_quote_header_id').click(function() {
-  var po_quote_header_id = $('#po_quote_header_id').val();
-  $(this).attr('href', modepath() + 'po_quote_header_id=' + po_quote_header_id);
-
- });
-
-
- //Get the po_quote_id on find button click
- $('#form_box a.show').click(function() {
-  var poId = $('#po_quote_header_id').val();
-//$(this).prop('href','po.php?po_quote_header_id=' + poId);
-  $(this).attr('href', 'po.php?po_quote_header_id=' + poId);
- });
-
-
-//add or show linw details
- addOrShow_lineDetails('tr.po_quote_line0');
- onClick_addDetailLine(4);
-
-//remove po lines
- $("#remove_row").click(function() {
-  $('input[name="po_quote_line_id_cb"]:checked').each(function() {
-   $(this).closest('tr').remove();
-  });
- });
-
- $('#bu_org_id').on('change', function() {
+ $('body').off('change', '#bu_org_id').on('change', '#bu_org_id', function() {
   getBUDetails($(this).val());
  });
 

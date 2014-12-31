@@ -1,5 +1,18 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * uom
+ * Contains all the transaction_type information, such as - uom_id, class, uom_name,  description, etc.
+ * 
+ */
 class uom extends dbObject {
 
  public static $table_name = "uom";
@@ -7,6 +20,17 @@ class uom extends dbObject {
  public static $key_column = 'uom_name';
  public static $module = "inv";
  public static $multi_select_template_path = 'modules/inv/uom/multi_action/uom_template_ma.php';
+  public static $system_info = [
+  'name' => 'UOM',
+  'number' => '2116',
+  'description' => 'Unit Of Measure',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'inv',
+  'weight' => 16
+ ];
  public $field_a = [
 		 "uom_id",
 		 "class",

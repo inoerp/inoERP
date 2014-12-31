@@ -1,59 +1,82 @@
 <?php
-
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+/**
+ * sd_shipping_control
+ * Contains all the sd_shipping_control information, such as - org_id, staging_subinventory_id, staging_locator_id
+ *
+ */
 class sd_shipping_control extends dbObject {
 
  public static $table_name = "sd_shipping_control";
  public static $primary_column = "sd_shipping_control_id";
  public static $key_column = 'org_id';
  public static $module = "sd";
+ public static $system_info = [
+  'name' => 'Shipping Control',
+  'number' => '2302',
+  'description' => 'Inventory Shipping Control',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'sd',
+  'weight' => 2
+ ];
  public $field_a = [
-		 'sd_shipping_control_id',
-		 'org_id',
-		 'staging_subinventory_id',
-		 'staging_locator_id',
-		 'default_picking_rule_id',
-		 'delivery_onpicking_cb',
-		 'autosplit_onpicking_cb',
-		 'deffer_invoicing_cb',
-		 'ef_id',
-		 'rev_enabled',
-		 'rev_number',
-		 'created_by',
-		 'creation_date',
-		 'last_update_by',
-		 'last_update_date',
+  'sd_shipping_control_id',
+  'org_id',
+  'staging_subinventory_id',
+  'staging_locator_id',
+  'default_picking_rule_id',
+  'delivery_onpicking_cb',
+  'autosplit_onpicking_cb',
+  'deffer_invoicing_cb',
+  'ef_id',
+  'rev_enabled',
+  'rev_number',
+  'created_by',
+  'creation_date',
+  'last_update_by',
+  'last_update_date',
  ];
  public $initial_search = [
-		 'sd_shipping_control_id',
-		 'org_id',
+  'sd_shipping_control_id',
+  'org_id',
  ];
  public $column = [
-		 'sd_shipping_control_id',
-		 'org_id',
-		 'staging_subinventory_id',
-		 'staging_locator_id',
+  'sd_shipping_control_id',
+  'org_id',
+  'staging_subinventory_id',
+  'staging_locator_id',
  ];
  public $requiredField = [
-		 'org_id'
+  'org_id'
  ];
  public $checkbox = [
-		 'delivery_onpicking_cb',
-		 'autosplit_onpicking_cb',
-		 'deffer_invoicing_cb'
+  'delivery_onpicking_cb',
+  'autosplit_onpicking_cb',
+  'deffer_invoicing_cb'
  ];
  public $fields_inForm_notInDataBase = [
-		 "staging_subinventory",
-		 "staging_locator",
-		 'default_picking_rule'
+  "staging_subinventory",
+  "staging_locator",
+  'default_picking_rule'
  ];
  public $search = [
-		 '_show_update_path' => 1,
-		 '_update_action_meassge' => 'Update',
-		 '_show_view_path' => 1,
+  '_show_update_path' => 1,
+  '_update_action_meassge' => 'Update',
+  '_show_view_path' => 1,
  ];
  public $pageTitle = " Shipping Control "; //page Title
  public $search_functions = [
-		 'Inventory Org' => 'search_inventory_org',
+  'Inventory Org' => 'search_inventory_org',
  ];
  public $sd_shipping_control_id;
  public $org_id;
@@ -75,7 +98,7 @@ class sd_shipping_control extends dbObject {
  public $staging_locator;
  public $default_picking_rule;
 
-public function _before_showing() {
+ public function _before_showing() {
 //	if (!empty($this->staging_subinventory_id)) {
 //	 $this->staging_subinventory = subinventory::find_by_id($this->staging_subinventory)->subinventory;
 //	} else {
@@ -100,25 +123,25 @@ public function _before_showing() {
  }
 
  public function findBy_orgId($org_id) {
-	global $db;
-	$sql = "SELECT * FROM sd_shipping_control where org_id=:org_id LIMIT 1";
-	$param_a = ['org_id'];
-	$value_a = ['org_id' => $org_id];
-	$result = $db->findBy_sql($sql, $param_a, $value_a);
-	return !empty($result) ? array_pop($result) : false;
+  global $db;
+  $sql = "SELECT * FROM sd_shipping_control where org_id=:org_id LIMIT 1";
+  $param_a = ['org_id'];
+  $value_a = ['org_id' => $org_id];
+  $result = $db->findBy_sql($sql, $param_a, $value_a);
+  return !empty($result) ? array_pop($result) : false;
  }
 
  public static function find_by_org_id($org_id) {
-	global $dbc;
-	$sql = "SELECT * FROM sd_shipping_control where org_id=:org_id LIMIT 1";
-	$stmt = $dbc->connection->prepare(" $sql ");
-	try {
-	 $stmt->execute();
-	 $result = $stmt->fetchObject();
-	} catch (PDOException $e) {
-	 echo "No Records Found!. Error @ PO Purchasing Control " . __LINE__ . $e->getMessage();
-	}
-	return !empty($result) ? array_pop($result) : false;
+  global $dbc;
+  $sql = "SELECT * FROM sd_shipping_control where org_id=:org_id LIMIT 1";
+  $stmt = $dbc->connection->prepare(" $sql ");
+  try {
+   $stmt->execute();
+   $result = $stmt->fetchObject();
+  } catch (PDOException $e) {
+   echo "No Records Found!. Error @ PO Purchasing Control " . __LINE__ . $e->getMessage();
+  }
+  return !empty($result) ? array_pop($result) : false;
  }
 
 }

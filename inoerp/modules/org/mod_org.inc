@@ -1,0 +1,1 @@
+<?php$address = new address();if (!empty($org->address_id)) { $address = $address->findBy_id($org->address_id);} $class_second = 'address';$$class_second = &$address; ?>

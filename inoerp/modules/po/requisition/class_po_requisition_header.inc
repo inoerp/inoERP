@@ -1,5 +1,17 @@
 <?php
-
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+/**
+ * po_requisition_header
+ * Contains all the po_requisition_header information 
+ *
+ */
  class po_requisition_header extends dbObject {
 
   public static $table_name = "po_requisition_header";
@@ -20,9 +32,9 @@
    'name' => 'Purchaing Requisition',
    'number' => '2211',
    'description' => 'Create & Mainten Purchaing Requisition',
-   'version' => '1.1.1.3',
-   'db_version' => '1001',
-   'mod_version' => '1.1.x-1.1',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
    'dependent_class' => array('po_requisition_line', 'po_requisition_detail'),
    'primary_entity_cb' => '',
    'module_name' => 'po',

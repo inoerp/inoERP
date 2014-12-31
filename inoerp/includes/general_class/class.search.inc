@@ -394,7 +394,7 @@ class search extends dbObject {
   $program_form_statement .= '<ul class="program_form">';
   if (!empty($this->_search_functions)) {
    foreach ($this->_search_functions as $key => $value) {
-    $program_form_statement .= "<li><label class=\"label_$key\"> $key : </label>";
+    $program_form_statement .= "<li><label class=\"label_$key\"> $key</label>";
     if (method_exists($class_obj, $value)) {
      $program_form_statement .= call_user_func(array($class_obj, $value));
     } else if (function_exists($value)) {
@@ -415,7 +415,7 @@ class search extends dbObject {
    } else {
     $get_value = "";
    }
-   $program_form_statement .= "<li><label class=\"label_$value\">" . ucwords(str_replace('_', ' ', $value)) . " : </label>";
+   $program_form_statement .= "<li><label class=\"label_$value\">" . ucwords(str_replace('_', ' ', $value)) . "</label>";
    $program_form_statement .= "<input type=\"text\" name=\"$value\" class=\"$value text_search \"   size=\"15\" value=\"$get_value\" >";
    $program_form_statement .= '</li>';
   }
@@ -438,9 +438,9 @@ class search extends dbObject {
    . " class=\"reset button\" id=\"search_reset_btn\" name=\"class_name\" value=\"$class\" > Reset All</a></li>";
   $program_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"class_name\" value=\"$class\" class=\"search class_name\" ></li>";
   if ($this->_searching_class != 'convertToProd') {
-   $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program button\" value=\"Submit\" id=\"save\"></li>";
+   $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program button\" value=\"Submit\" id=\"save_program\"></li>";
   } else if (convertToProd::$allow_conversion) {
-   $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program button\" value=\"Submit\" id=\"save\"></li>";
+   $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program button\" value=\"Submit\" id=\"save_program\"></li>";
   } else {
    $program_form_statement .="<li class='error'>The submit button is disabled for security reason.<br>Set allow_conversion variable to true in convertToProd class to use this program</li>";
   }

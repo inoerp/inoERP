@@ -1,5 +1,18 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * inv_transaction
+ * Contains all the inv_transaction information, such as - item_id_m, order_number,  from_org_id, to_org_id, etc.
+ * 
+ */
 class inv_transaction extends dbObject {
 
  public static $table_name = "inv_transaction";
@@ -7,6 +20,17 @@ class inv_transaction extends dbObject {
  public static $key_column = 'item_id_m';
  public static $module = "inv";
  public static $gl_journal_category = "INV_INVENTORY";
+  public static $system_info = [
+  'name' => 'INV Transaction',
+  'number' => '2107',
+  'description' => 'Inventory Transaction',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'inv',
+  'weight' => 7
+ ];
  public static $allowed_inv_transactions = [
   '1' => 'Miscellaneous Issue',
   '2' => 'Miscellaneous Receipt',

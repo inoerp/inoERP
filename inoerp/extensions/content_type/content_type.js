@@ -132,23 +132,6 @@ $(document).ready(function () {
           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
-//on click refresh
- $('a.show.content_type').click(function () {
-  var content_type_id = $('#content_type_id').val();
-  $(this).attr('href', modepath() + 'content_type_id=' + content_type_id);
- });
-
-//field enable disable
- $("#content").on("click", ".add_row_img", function () {
-  var addNewRow = new add_new_rowMain();
-  addNewRow.trClass = 'content_type0';
-  addNewRow.tbodyClass = 'field_values_list';
-  addNewRow.noOfTabs = 2;
-  addNewRow.removeDefault = true;
-  addNewRow.add_new_row();
- });
-
-
 
  $('#content').on('blur', '.field_type', function () {
   if (($(this).val() == 'int') || ($(this).val() == 'varchar')) {
@@ -216,14 +199,14 @@ $(document).ready(function () {
 //delete from multi action
  deleteData('form.php?class_name=content_type&line_class_name=content_type');
 
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=content_type';
- classSave.form_header_id = 'content_type_header';
- classSave.primary_column_id = 'content_type_id';
- classSave.single_line = false;
- classSave.savingOnlyHeader = true;
- classSave.headerClassName = 'content_type';
- classSave.enable_select = true;
- classSave.saveMain();
+// var classSave = new saveMainClass();
+// classSave.json_url = 'form.php?class_name=content_type';
+// classSave.form_header_id = 'content_type_header';
+// classSave.primary_column_id = 'content_type_id';
+// classSave.single_line = false;
+// classSave.savingOnlyHeader = true;
+// classSave.headerClassName = 'content_type';
+// classSave.enable_select = true;
+// classSave.saveMain();
 
 });

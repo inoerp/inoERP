@@ -1,5 +1,16 @@
 <?php
-
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+/**
+ * 
+ *
+ */
  class block extends dbObject {
 
   public static $table_name = "block";
@@ -8,6 +19,18 @@
   public static $dependent_classes = ['block_content'];
   public static $module = "extension";
 //  data base variables as stored database column name
+   public static $system_info = [
+  'name' => 'Block',
+  'number' => '10010',
+  'description' => 'Create & Show Contents in Block',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'dependent_class' => array('block_content'),
+  'primary_entity_cb' => '',
+  'module_name' => 'extn',
+  'weight' => 10
+ ];
   public $field_a = [
    "block_id",
    "title",

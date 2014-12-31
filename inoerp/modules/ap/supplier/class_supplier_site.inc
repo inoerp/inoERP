@@ -193,7 +193,7 @@ class supplier_site extends dbObject {
 	 $this->site_postal_code = $address->postal_code;
 	}
  }
-
+ 
  public function copy($supplier_site_id) {
 	global $db;
 	$sql1 = " CREATE TEMPORARY TABLE tmptable SELECT * FROM supplier_site WHERE `supplier_site_id` = '{$supplier_site_id}' ";

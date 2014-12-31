@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+
+/**
+ * inv_count_schedule
+ * Contains all the inv_count_entries information, such as - item_id_m, inv_count_header_id,  org_id, subinventory_id, etc.
+ * 
+ */
 class inv_count_schedule extends dbObject {
 
  public static $table_name = "inv_count_schedule";
@@ -7,6 +21,17 @@ class inv_count_schedule extends dbObject {
  public static $parent_primary_column = "inv_count_header_id";
  public static $key_column = "item_id_m";
  public static $module = "inv";
+ public static $system_info = [
+  'name' => 'Count Schedul ',
+  'number' => '2106',
+  'description' => 'Inventory Count Schedules',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'inv',
+  'weight' => 6
+ ];
  public static $status_a = [
   'UNCOUNTED' => 'Un Counted',
   'PENDING_APPROVAL' => 'Pending Approval',
@@ -86,6 +111,19 @@ class inv_count_schedule extends dbObject {
  public static function find_by_header_id($id) {
   $vgl = new inv_count_schedule();
   return $vgl->findBy_parentId($id);
+ }
+
+ public static function find_by_headerId_date_status($header_id, $date, $status = 'UNCOUNTED') {
+  $sql = " SELECT * from inv_count_schedule ";
+  $sql .= " WHERE inv_count_header_id = '{$header_id}' ";
+  $sql .= " AND status = '{$status}' ";
+  if(!empty($date)){
+  $sql .= " AND schedule_date <= '{$date}' ";
+  }
+  
+  $result = self::find_by_sql($sql);
+  echo $sql; pa($result);
+  return !empty($result) ? $result : false;
  }
 
  public function _before_save() {

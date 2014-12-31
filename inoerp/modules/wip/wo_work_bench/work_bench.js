@@ -33,7 +33,7 @@ $(document).ready(function() {
  mandatoryCheck.mandatory_fields = ["org_id", "transaction_type_id"];
  mandatoryCheck.mandatory_messages = ["First Select Org", "No Transaction Type"];
 
- $("#transaction_type_id").on("change", function() {
+ $('#wip_wo_work_bench').off("change", '#transaction_type_id').on("change", '#transaction_type_id', function() {
 	$("tr.transfer_info").find("td select").each(function() {
 	 $(this).val("");
 	})
@@ -67,18 +67,19 @@ $(document).ready(function() {
  });
 
 //validation of entered quantity
- $('#content').on('focusout', '#from_operation_step', function() {
+ $('#wip_wo_work_bench').off('focusout', '#from_operation_step').on('focusout', '#from_operation_step', function() {
 	var fromStep = '.' + $(this).val() + '_quantity';
 	var fromSeq = $('#from_routing_sequence').val();
 	var rowClass = '';
-	$('#tabsLine-1 .routing_sequence').each(function() {
-	 if ($(this).val() == fromSeq) {
+	$('.routing_sequence').each(function() {
+    if ($(this).val() == fromSeq) {
 		rowClass = '.' + $(this).closest('tr').attr('class');
+    return false;
 	 }
 	});
   
 	var availableQuantity = $(rowClass).find(fromStep).val();
-	if (availableQuantity) {
+  if (availableQuantity) {
 	 $('#available_quantity').val(availableQuantity);
 	} else {
 	 $('#available_quantity').val('0')
@@ -86,7 +87,7 @@ $(document).ready(function() {
 	}
  });
 
- $("#content").on('focusout', '#move_quantity', function() {
+ $("#wip_wo_work_bench").off('focusout', '#move_quantity').on('focusout', '#move_quantity', function() {
 	if (+($(this).val()) > +($('#available_quantity')).val()) {
 	 $(this).val('');
 	 alert('Error!! : Entered move quantity is more than available quantity');
@@ -97,36 +98,15 @@ $(document).ready(function() {
 
 
 //selecting wo header id data
- $(".wip_wo_header_id.select_popup").on("click", function() {
+ $('#wip_wo_work_bench').off("click", '.wip_wo_header_id.select_popup').on("click", '.wip_wo_header_id.select_popup', function() {
 	localStorage.idValue = "";
 	var link = 'select.php?class_name=wip_wo_header&wo_status=%3DRELEASED';
 	void window.open(link, '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
-
- //Get the primary_id on refresh button click
- $('a.show.wip_wo_headerid_show').click(function() {
-	var wip_wo_header_id = $('#wip_wo_header_id').val();
-	$(this).attr('href', modepath() + 'wip_wo_header_id=' + wip_wo_header_id);
-
- });
-
-//Save record
-// save('json.wip_move_transaction.php', '#wip_move_transaction', '', '', '#wip_move_transaction_id', '');
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=wip_wo_work_bench';
- classSave.form_header_id = 'wip_move_transaction';
- classSave.primary_column_id = 'wip_move_transaction_id';
- classSave.single_line = false;
- classSave.savingOnlyHeader = true;
- classSave.enable_select = true;
- classSave.headerClassName = 'wip_wo_work_bench';
- classSave.lineClassName = 'wip_wo_work_bench_line';
- classSave.saveVerticalTab = true;
- classSave.saveMain();
-
-
-$('#from_routing_sequence').on('change', function(){
+ 
+ 
+$('#wip_wo_work_bench').off('change', '#from_routing_sequence').on('change', '#from_routing_sequence' ,function(){
   if($(this).val()){
     $(this).closest('ul').find(':input').attr('required',true).css('background-color','pink');
   }else{

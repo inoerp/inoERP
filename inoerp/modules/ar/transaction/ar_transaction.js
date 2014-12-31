@@ -183,72 +183,21 @@ if (customer_site_id) {
 }
 });
 
-
- $("#content").on("focusout", '.ship_to_inventory', function() {
-	var ship_to_inventory = $(this).val();
-	var rowTrClass = $(this).closest("tr").attr("class");
-	var classValue = "tr." + rowTrClass;
-	var classValue1 = classValue.replace(/ /g, '.');
-	getAllInventoryAccounts('modules/org/inventory/json_inventory.php', ship_to_inventory, classValue1);
- });
-
-
-//item number auto complete and populate the other details
-// itemNumber_autoComplete('modules/inv/item/item_search.php');
-
- //Coa auto complete
- var coaCombination = new autoCompleteMain();
- var coa_id = $('#coa_id').val();
- coaCombination.json_url = 'modules/gl/coa_combination/coa_search.php';
- coaCombination.primary_column1 = coa_id;
- coaCombination.select_class = 'select_account';
- coaCombination.min_length = 4;
- coaCombination.autoComplete();
+//
+// $("#content").on("focusout", '.ship_to_inventory', function() {
+//	var ship_to_inventory = $(this).val();
+//	var rowTrClass = $(this).closest("tr").attr("class");
+//	var classValue = "tr." + rowTrClass;
+//	var classValue1 = classValue.replace(/ /g, '.');
+//	getAllInventoryAccounts('modules/org/inventory/json_inventory.php', ship_to_inventory, classValue1);
+// });
 
 
- //selecting PO Header Id
+// //selecting PO Header Id
  $(".ar_transaction_header_id.select_popup").on("click", function() {
 	void window.open('select.php?class_name=ar_transaction_header', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
-
-
- //Get the ar_transaction_header_id on refresh button click
- $('a.show.ar_transaction_header_id').click(function() {
-	var ar_transaction_header_id = $('#ar_transaction_header_id').val();
-	$(this).attr('href', modepath() + 'ar_transaction_header_id=' + ar_transaction_header_id);
- });
-
-
- $('a.show.bu_org_id').click(function() {
-	var bu_org_id = $('#bu_org_id').val();
-	if (bu_org_id) {
-	 $(this).attr('href', modepath() + 'bu_org_id=' + bu_org_id);
-	}
- });
-
- $('a.show.customer_site_id').click(function() {
-	var ar_customer_id = $('#headerId').val();
-	var customer_site_id = $('#customer_site_id').val();
-	$(this).attr('href', '?ar_customer_id=' + ar_customer_id + '&customer_site_id=' + customer_site_id);
- });
-
- $("#customer_site_name").on("change", function() {
-	if ($(this).val() == 'newentry') {
-	 if (confirm("Do you want to create a new customer site?")) {
-		$(this).replaceWith('<input id="customer_site_name" class="textfield customer_site_name" type="text" size="25" maxlength="50" name="customer_site_name[]">');
-		$(".show.customer_site_id").hide();
-		$("#customer_site_id").val("");
-		$("#customer_site_number").val("");
-	 }
-
-	}
- });
-
-
-//add or show linw details
- addOrShow_lineDetails('tr.ar_transaction_line0');
-onClick_addDetailLine(2);
 
  //function to coply line to details
  function copy_line_to_details() {
@@ -264,19 +213,6 @@ onClick_addDetailLine(2);
  copy_line_to_details();
 
 
- $("#content").on("click", ".add_row_img", function() {
-//	add_new_row('tr.ar_transaction_line0', 'tbody.form_data_line_tbody', 3);
-	var addNewRow = new add_new_rowMain();
-	addNewRow.trClass = 'ar_transaction_line';
-	addNewRow.tbodyClass = 'form_data_line_tbody';
-	addNewRow.noOfTabs = 3;
-	addNewRow.removeDefault = true;
-	addNewRow.add_new_row();
-	$(".tabsDetail").tabs();
- });
-
- 
-
 //remove po lines
  $("#remove_row").click(function() {
 	$('input[name="ar_transaction_line_id_cb"]:checked').each(function() {
@@ -284,34 +220,8 @@ onClick_addDetailLine(2);
 	});
  });
 
- //context menu
- var classContextMenu = new contextMenuMain();
- classContextMenu.docHedaderId = 'ar_transaction_header_id';
- classContextMenu.docLineId = 'ar_transaction_line_id';
- classContextMenu.btn1DivId = 'ar_transaction_header';
- classContextMenu.btn2DivId = 'form_line';
- classContextMenu.trClass = 'ar_transaction_line';
- classContextMenu.tbodyClass = 'form_data_line_tbody';
- classContextMenu.noOfTabbs = 4;
- classContextMenu.contextMenu();
-
 deleteData('form.php?class_name=ar_transaction_header&line_class_name=ar_transaction_line&detail_class_name=ar_transaction_detail');
  
- //save
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=ar_transaction_header';
- classSave.form_header_id = 'ar_transaction_header';
- classSave.primary_column_id = 'ar_transaction_header_id';
-// classSave.primary_column_id2 = 'transaction_number';
- classSave.line_key_field = 'item_description';
- classSave.single_line = false;
- classSave.savingOnlyHeader = false;
- classSave.headerClassName = 'ar_transaction_header';
- classSave.lineClassName = 'ar_transaction_line';
- classSave.detailClassName = 'ar_transaction_detail';
- classSave.enable_select = true;
- classSave.saveMain(beforeSave);
-
 //all actions
 //Popup for selecting match 
  $('#transaction_action').on('change', function() {

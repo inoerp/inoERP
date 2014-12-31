@@ -61,23 +61,6 @@ setValFromSelectPage.prototype.setVal = function() {
  }
 
 $(document).ready(function() {
-
-//  var Mandatory_Fields = ["#org_id", "First Select Org Name", "#item_number", "First Select Item Number"];
-// select_mandatory_fields(Mandatory_Fields);
-//
-// $('#form_line').on("click", function() {
-//  if (!$('#inv_count_header_id').val()) {
-//   alert('No header Id : First enter/save header details');
-//  } else {
-//   var headerId = $('#inv_count_header_id').val();
-//   if (!$(this).find('.inv_count_header_id').val()) {
-//    $(this).find('.inv_count_header_id').val(headerId);
-//   }
-//  }
-//
-// });
-
-
  //Popup for selecting 
  $(".inv_count_header_id.select_popup").on("click", function() {
   void window.open('select.php?class_name=inv_count_header', '_blank',
@@ -89,29 +72,20 @@ $(document).ready(function() {
    'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //Get the option_id on find button click
- $('a.show.inv_count_header_id').click(function() {
-  var headerId = $('#inv_count_header_id').val();
-  var count_date = $('.count_date').first().val();
-  var link = 'class_name=inv_count_entries&search_order_by[]=inv_count_schedule_id&search_asc_desc[]=desc&per_page=10&search_class_name=inv_count_schedule&submit_search=Search&inv_count_header_id[]=' + headerId;
-  link += '&schedule_date[]=%3C' + count_date + '&status[]=%3DUNCOUNTED';
-  $(this).prop('href', modepath() + link);
- });
 
- $('#form_line').on('change', '.subinventory_id', function() {
+
+ $('body').off('change', '.subinventory_id').on('change', '.subinventory_id', function() {
   var trClass = '.' + $(this).closest('tr').attr('class');
   var subinventory_id = $(this).val();
   getLocator('modules/inv/locator/json_locator.php', subinventory_id, 'subinventory', trClass);
 
  });
 
- onClick_add_new_row('tr.inv_count_entries0', 'tbody.inv_count_entries_values', 3);
-
- // deleteData('json_tax_code.php');
+  // deleteData('json_tax_code.php');
  deleteData('form.php?class_name=inv_count_entries&line_class_name=inv_count_entries');
 
  //defalut values to line
- $('#adjustment_ac_id').on('blur', function() {
+ $('body').off('blur', '#adjustment_ac_id').on('blur', '#adjustment_ac_id' , function() {
   var acvalue = $(this).val();
   $('#form_line').find('.adjustment_ac_id').each(function() {
    if ($(this).val().length < 5) {
@@ -120,27 +94,24 @@ $(document).ready(function() {
 
   });
  });
+ 
  var counted_by = $('#counted_by').val();
  default_counted_by(counted_by);
- $('#counted_by').on('blur', function() {
+ 
+ $('body').off('blur', '#counted_by').on('blur', '#counted_by', function() {
   var counted_by = $(this).val();
   default_counted_by(counted_by);
  });
+ 
+  $('body').off('click', 'a.inv_count_entries_id').on('click', 'a.inv_count_entries_id', function (e) {
+  e.preventDefault();
+  var inv_count_header_id = $('#inv_count_header_id').val();
+  var count_date = $('.count_date').first().val();
+  var urlLink = $(this).attr('href');
+  var urlLink_a = urlLink.split('?');
+  var formUrl = 'includes/json/json_form.php?' + urlLink_a[1] + '&inv_count_header_id=' + inv_count_header_id + '&count_date=' + count_date;
+  getFormDetails(formUrl);
+ }).one();
 
- //context menu
- var classContextMenu = new contextMenuMain();
- classContextMenu.docLineId = 'inv_count_entries_id';
- classContextMenu.btn2DivId = 'form_line';
- classContextMenu.trClass = 'inv_count_entries';
- classContextMenu.tbodyClass = 'form_data_line_tbody';
- classContextMenu.noOfTabbs = 3;
- classContextMenu.contextMenu();
 
- var formSave = new saveMainClass();
- formSave.json_url = 'form.php?class_name=inv_count_entries';
- formSave.single_line = false;
- formSave.line_key_field = 'item_id_m';
- formSave.form_line_id = 'inv_count_entries';
- formSave.enable_select = true;
- formSave.saveMain();
 });

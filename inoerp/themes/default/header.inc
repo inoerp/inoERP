@@ -45,7 +45,8 @@
  <body>
   <!--     Check if its a find page
        Exclude the header &amp; left block section-->
-  <div id="header_top_container"><?php
+ <div id="header_top_container">
+  <?php
     $show_header_links = true;
     if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
      if (empty($current_page_path)) {
@@ -54,7 +55,8 @@
      $f->form_button_withImage($current_page_path);
      $show_header_links = false;
     }
-   ?></div>
+   ?>
+  </div>
 
   <?php
    if ($showBlock) {

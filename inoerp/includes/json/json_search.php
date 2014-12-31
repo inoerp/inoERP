@@ -24,7 +24,7 @@ if (!empty($_GET['class_name'])) {
  }
  $search_order_by = !(empty($_GET['search_order_by'])) ? $_GET['search_order_by'][0] : '';
  $search_asc_desc = !(empty($_GET['search_asc_desc'])) ? $_GET['search_asc_desc'][0] : '';
- echo '<div id="json_serch_result">';
+ echo '<div id="json_search_result">';
 
  //start search
  $search_array = $$class->field_a;

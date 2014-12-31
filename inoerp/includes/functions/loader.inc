@@ -236,16 +236,16 @@ if (($continue) && (!empty($class_names))) {
     if ($class != 'category') {
      $category = category::find_by_reference_table_and_id($table_name, $class_id_value);
     }
-    if ((!empty($$class->$primary_column)) && (!empty($class::$addressField_array))) {
-     foreach ($class::$addressField_array as $key => $value) {
-      if (!empty($$class->$value)) {
-       $address = address::find_by_id($$class->$value);
-      } else {
-       $address = new address();
-      }
-      $$value = address::show_adrees_details($address);
-     }
-    }
+//    if ((!empty($$class->$primary_column)) && (!empty($class::$addressField))) {
+//     foreach ($class::$addressField as $key => $value_ad) {
+//      if (!empty($$class->$value_ad)) {
+//       $address = address::find_by_id($$class->$value_ad);
+//      } else {
+//       $address = new address();
+//      }
+//      $$value_ad = address::show_adrees_details($address);
+//     }
+//    }
     if (method_exists($$class, '_before_showing')) {
      $$class->_before_showing();
     }
@@ -474,10 +474,36 @@ if (!empty($_GET['delete'])) {
  $continue = false;
  return;
 }
+//change mode for contents
 
+if (!empty($_SESSION['user_roles'])) {
+ if (in_array('ADMIN', $_SESSION['user_roles'])) {
+  $access_level = 9;
+  $read_access = $write_access = $update_access = true;
+ } else {
+  if (!empty($_SESSION['role_access'])) {
+//    pa($_SESSION['role_access']);
+   foreach ($_SESSION['role_access'] as $obj_name => $acc_level) {
+    if ($obj_name == $class) {
+     $access_level = $acc_level;
+     break;
+    }
+   }
+//    echo "<br> class is $class access_level is $access_level ";
+  }
+ }
+
+ if ((!empty($access_level)) && ($access_level != 9)) {
+  require_once 'loader_access.inc';
+ } else if (!empty($access_level) && $access_level == 9) {
+  $read_access = $write_access = $update_access = true;
+ }
+} else {
+ $mode = 2;
+}
 
 /* -----------------------------------------include all include files -------------------------------------- */
-if ($continue) {
+if ($continue && !empty($form_page)) {
  $reflector = new ReflectionClass($class);
  $fnname = $reflector->getFileName();
  $fdir = dirname($fnname);
@@ -515,59 +541,7 @@ if ($continue) {
   include_once "$pathname";
  }
 } else {
- $continue = false;
- echo "<h2>Could n't call the header</h2>";
- return;
-}
-//change mode for contents
-
-if (!empty($_SESSION['user_roles'])) {
- if (in_array('ADMIN', $_SESSION['user_roles'])) {
-  $access_level = 9;
-  $read_access = $write_access = $update_access = true;
- } else {
-  if (!empty($_SESSION['role_access'])) {
-//    pa($_SESSION['role_access']);
-   foreach ($_SESSION['role_access'] as $obj_name => $acc_level) {
-    if ($obj_name == $class) {
-     $access_level = $acc_level;
-     break;
-    }
-   }
-//    echo "<br> class is $class access_level is $access_level ";
-  }
- }
-
- if ((!empty($access_level)) && ($access_level != 9)) {
-  require_once 'loader_access.inc';
- } else if (!empty($access_level) && $access_level == 9) {
-  $read_access = $write_access = $update_access = true;
- }
-} else {
- $mode = 2;
-}
-
-/* --------------------------------------------------------------------------------------------------------------
- * Include Cache
- * call the header file
- * 
- */
-if ($continue) {
- include_once(THEME_DIR . '/header.inc');
-} else {
- $continue = false;
- echo "<h2>Could n't call the header</h2>";
  return;
 }
 
-/* --------------------------------------------------------------------------------------------------------------
- * Only for test
- * Exit loader */
-//$continue = false;
-//if ($continue) {
-// echo "<h2>This wont be printed</h2>";
-//} else {
-// echo "<h2>Exiting loader</h2>";
-// return;
-//}
 ?>

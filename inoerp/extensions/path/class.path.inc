@@ -1,11 +1,34 @@
 <?php
-
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+/**
+ * 
+ *
+ */
 class path extends dbObject {
 
  public static $table_name = "path";
  public static $module = "extensions";
  public static $primary_column = "path_id";
  public static $key_column = "name";
+   public static $system_info = [
+  'name' => 'Path',
+  'number' => '10018',
+  'description' => 'System Paths',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'extn',
+  'weight' => 18
+ ];
+   
 //  data base variables as stored database column name
  public $field_a = [
   "path_id",
@@ -278,13 +301,12 @@ class path extends dbObject {
   $sql = " SELECT path_id from path where  module_code = '{$module_code}'"
    . " AND (parent_id IS NULL OR parent_id = 0) ";
   $parent_ids = $this->findFirstColumn_BySql_array($sql);
-
   $path_sql = " SELECT path_id from path WHERE module_code = '{$module_code}' ";
   if (!empty($type)) {
    $path_sql .= " AND path_type = '{$type}' ";
   }
   $all_path_ids = $this->findFirstColumn_BySql_array($path_sql);
-  $paths = '<div id="path_by_module">' . $this->path_allpaths_block(array('parent_ids' => $parent_ids, 'all_path_ids' => $all_path_ids)) . '</div>';
+  $paths = '<div id="path_by_module">' . $this->path_allpaths_block(array('parent_id_a' => $parent_ids, 'path_i_a' => $all_path_ids)) . '</div>';
   return $paths;
  }
 

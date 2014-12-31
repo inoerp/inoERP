@@ -1,11 +1,11 @@
 <?php
 
 /**
- * inoERP - Version 0.1.1
+ * inoERP
  *
  * @copyright 2014 Nishit R. Das
- * @license   https://www.mozilla.org/MPL/2.0/
- * @link       http://inoideas.org
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
 
@@ -86,6 +86,22 @@ class hr_approval_limit_assignment extends dbObject {
   $sql .= self::$table_name;
   $sql .= " WHERE level = 'LINE' ";
   $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
+
+ public function findBy_params() {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  if (!empty($this->position_id)) {
+   $sql .= " WHERE position_id = '{$this->position_id}' ";
+  } else if (!empty($this->job_id)) {
+   $sql .= " WHERE job_id = '{$this->job_id}' ";
+  } else if (!empty($this->bu_org_id)) {
+   $sql .= " WHERE bu_org_id = '{$this->bu_org_id}' ";
+  } else {
+   return false;
+  }
+  $result = $this->findBySql($sql);
   return !empty($result) ? $result : false;
  }
 

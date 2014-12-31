@@ -1,18 +1,4 @@
-<div id="all_contents">
- <div id="content_left"></div>
- <div id="content_right">
-  <div id="content_right_left">
-   <div id="content_top"></div>
-   <div id="content">
-    <div id="structure">
-     <div id="bom_divId">
-      <!--    START OF FORM HEADER-->
-      <div class="error"></div><div id="loading"></div>
-      <?php
-       echo (!empty($show_message)) ? $show_message : "";
-       $f = new inoform();
-      ?> 
-      <!--    End of place for showing error messages-->
+     <!--    End of place for showing error messages-->
       <div id ="form_header">
        <form action=""  method="post" id="hr_element_entry_header"  name="hr_element_entry_header"><span class="heading">Compensation Element Entry </span>
         <div id="tabsHeader">
@@ -25,7 +11,7 @@
             <ul class="column four_column">
              <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_element_entry_header_id select_popup clickable">
                Header Id : </label><?php $f->text_field_dsr('hr_element_entry_header_id') ?>
-              <a name="show" href="form.php?class_name=hr_element_entry_header_id" class="show hr_element_entry_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+              <a name="show" href="form.php?class_name=hr_element_entry_header&<?php echo "mode=$mode"; ?>" class="show document_id hr_element_entry_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
              </li>
              <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
                Employee Name : </label><?php $f->text_field_d('employee_name'); ?>
@@ -97,18 +83,6 @@
        </form>
       </div>
 
-      <!--END OF FORM HEADER-->
-     </div>
-    </div>
-    <!--   end of structure-->
-   </div>
-   <div id="content_bottom"></div>
-  </div>
-  <div id="content_right_right"></div>
- </div>
-
-</div>
-
 <div id="js_data">
  <ul id="js_saving_data">
   <li class="headerClassName" data-headerClassName="hr_element_entry_header" ></li>
@@ -126,5 +100,3 @@
   <li class="btn2DivId" data-btn2DivId="form_line" ></li>
  </ul>
 </div>
-
-<?php include_template('footer.inc') ?>

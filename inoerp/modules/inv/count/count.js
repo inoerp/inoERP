@@ -107,22 +107,6 @@ function invValuationDetails(rowClass, element_type, element_value, inv_abc_valu
 
 $(document).ready(function() {
 
-//  var Mandatory_Fields = ["#org_id", "First Select Org Name", "#item_number", "First Select Item Number"];
-// select_mandatory_fields(Mandatory_Fields);
-//
-// $('#form_line').on("click", function() {
-//  if (!$('#inv_count_header_id').val()) {
-//   alert('No header Id : First enter/save header details');
-//  } else {
-//   var headerId = $('#inv_count_header_id').val();
-//   if (!$(this).find('.inv_count_header_id').val()) {
-//    $(this).find('.inv_count_header_id').val(headerId);
-//   }
-//  }
-//
-// });
-
-
  //Popup for selecting 
  $(".inv_count_header_id.select_popup").on("click", function() {
   void window.open('select.php?class_name=inv_count_header', '_blank',
@@ -134,46 +118,14 @@ $(document).ready(function() {
    'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //Get the option_id on find button click
- $('a.show.inv_count_header_id').click(function() {
-  var headerId = $('#inv_count_header_id').val();
-  $(this).prop('href', modepath() + 'pageno=1&per_page=10&submit_search=Search&search_asc_desc=desc&search_class_name=inv_count_schedule&inv_count_header_id=' + headerId);
- });
-
- onClick_add_new_row('tr.inv_count_schedule0', 'tbody.inv_count_schedule_values', 1);
-
-$('#form_line').on('change','.subinventory_id', function(){
+$('body').off('change','.subinventory_id').on('change','.subinventory_id', function(){
   	var trClass = '.' + $(this).closest('tr').attr('class');
 	var subinventory_id = $(this).val();
   getLocator('modules/inv/locator/json_locator.php', subinventory_id, 'subinventory', trClass);
 
 });
 
-//context menu
- var classContextMenu = new contextMenuMain();
- classContextMenu.docHedaderId = 'inv_count_header_id';
- classContextMenu.docLineId = 'inv_count_schedule_id';
- classContextMenu.btn1DivId = 'inv_count_header';
- classContextMenu.btn2DivId = 'form_line';
- classContextMenu.trClass = 'inv_count_schedule';
- classContextMenu.tbodyClass = 'inv_count_schedule_values';
- classContextMenu.noOfTabbs = 1;
- classContextMenu.contextMenu();
 
-
-//deleteData('json.option.php');
-// save('json.value_group.php', '#inv_count_header', 'line_id_cb', 'code', '#inv_count_header_id');
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=inv_count_header';
- classSave.form_header_id = 'inv_count_header';
- classSave.primary_column_id = 'inv_count_header_id';
- classSave.line_key_field = 'code';
- classSave.single_line = false;
- classSave.savingOnlyHeader = false;
- classSave.enable_select = true;
- classSave.headerClassName = 'inv_count_header';
- classSave.lineClassName = 'inv_count_schedule';
- classSave.saveMain();
 });
 
 

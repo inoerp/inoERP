@@ -1,90 +1,61 @@
-<div id="all_contents">
- <div id="content_left"></div>
- <div id="content_right">
-  <div id="content_right_left">
-   <div id="content_top"></div>
-   <div id="content">
-    <div id="structure">
-     <div id="sys_hold_divId">
-      <div id="form_top">
+<div id ="form_header">
+ <form action=""  method="post" id="sys_hold"  name="sys_hold"><span class="heading">System Hold </span>
+  <div id ="form_header">
+   <div id="tabsHeader">
+    <ul class="tabMain">
+     <li><a href="#tabsHeader-1">Basic Info</a></li>
+     <li><a href="#tabsHeader-2">Attachments</a></li>
+     <li><a href="#tabsHeader-3">Notes</a></li>
+    </ul>
+    <div class="tabContainer"> 
+     <div id="tabsHeader-1" class="tabContent">
+      <div class="large_shadow_box"> 
+       <ul class="column four_column"> 
+        <li> 
+         <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sys_hold_id select_popup clickable">
+          Hold Id : </label><?php $f->text_field_dsr('sys_hold_id') ?>
+        <a name="show" href="form.php?class_name=sys_hold&<?php echo "mode=$mode"; ?>" class="show document_id sys_hold_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        </li>
+        <li><label>Hold Name :</label><?php $f->text_field_dm('hold_name'); ?> 					</li>
+        <li><label>Hold Code :</label><?php $f->text_field_dm('hold_code'); ?> 					</li>
+        <li><label>Type :</label>
+         <?php echo $f->select_field_from_object('hold_type', sys_hold::hold_type(), 'option_line_code', 'option_line_value', $$class->hold_type, 'hold_type', '', 1, $readonly1); ?>              </li>
+        <li><label>Status : </label><?php echo form::status_field($$class->status, $readonly); ?></li>
+        <li><label>Description :</label><?php $f->text_field_dl('description'); ?> 					</li>
+        <li><label>Allow Manual Release :</label>  <?php echo $f->checkBox_field_d('manual_released_cb'); ?>   </li>
+        <li><label>Access Level* : </label>
+         <?php echo $f->select_field_from_array('access_level', option_header::$access_level_a, $$class->access_level, 'access_level', $readonly); ?>
+        </li>
+       </ul>
       </div>
-      <!--    START OF FORM HEADER-->
-      <div class="error"></div><div id="loading"></div>
-      <div class="show_loading_small"></div>
-      <?php
-       echo (!empty($show_message)) ? $show_message : "";
-       $f = new inoform();
-      ?> 
-      <!--    End of place for showing error messages-->
-      <div id ="form_header">
-       <form action=""  method="post" id="sys_hold"  name="sys_hold"><span class="heading">System Hold </span>
-        <div id ="form_header">
-         <div id="tabsHeader">
-          <ul class="tabMain">
-           <li><a href="#tabsHeader-1">Basic Info</a></li>
-           <li><a href="#tabsHeader-2">Attachments</a></li>
-           <li><a href="#tabsHeader-3">Notes</a></li>
-          </ul>
-          <div class="tabContainer"> 
-           <div id="tabsHeader-1" class="tabContent">
-            <div class="large_shadow_box"> 
-             <ul class="column four_column"> 
-              <li> 
-               <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sys_hold_id select_popup clickable">
-                Hold Id : </label><?php $f->text_field_dsr('sys_hold_id') ?>
-               <a name="show" href="form.php?class_name=sys_hold" class="show sys_hold_id">	<img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
-              </li>
-              <li><label>Hold Name :</label><?php $f->text_field_dm('hold_name'); ?> 					</li>
-              <li><label>Hold Code :</label><?php $f->text_field_dm('hold_code'); ?> 					</li>
-              <li><label>Type :</label>
-               <?php echo $f->select_field_from_object('hold_type', sys_hold::hold_type(), 'option_line_code', 'option_line_value', $$class->hold_type, 'hold_type', '', 1, $readonly1); ?>              </li>
-              <li><label>Status : </label><?php echo form::status_field($$class->status, $readonly); ?></li>
-              <li><label>Description :</label><?php $f->text_field_dl('description'); ?> 					</li>
-              <li><label>Allow Manual Release :</label>  <?php echo $f->checkBox_field_d('manual_released_cb'); ?>   </li>
-              <li><label>Access Level* : </label>
-               <?php echo $f->select_field_from_array('access_level', option_header::$access_level_a, $$class->access_level, 'access_level', $readonly); ?>
-              </li>
-             </ul>
-            </div>
-           </div>
-           <div id="tabsHeader-2" class="tabContent">
-            <div> <?php echo ino_attachement($file) ?> </div>
-           </div>
-           <div id="tabsHeader-3" class="tabContent">
-            <div> 
-             <div id="comments">
-              <div id="comment_list">
-               <?php echo!(empty($comments)) ? $comments : ""; ?>
-              </div>
-              <div id ="display_comment_form">
-               <?php
-                $reference_table = 'sys_hold';
-                $reference_id = $$class->sys_hold_id;
-               ?>
-              </div>
-              <div id="new_comment">
-              </div>
-             </div>
-            </div>
-           </div>
-          </div>
-
-         </div>
+     </div>
+     <div id="tabsHeader-2" class="tabContent">
+      <div> <?php echo ino_attachement($file) ?> </div>
+     </div>
+     <div id="tabsHeader-3" class="tabContent">
+      <div> 
+       <div id="comments">
+        <div id="comment_list">
+         <?php echo!(empty($comments)) ? $comments : ""; ?>
         </div>
-       </form>
+        <div id ="display_comment_form">
+         <?php
+         $reference_table = 'sys_hold';
+         $reference_id = $$class->sys_hold_id;
+         ?>
+        </div>
+        <div id="new_comment">
+        </div>
+       </div>
       </div>
-      <!--END OF FORM HEADER-->
-
      </div>
     </div>
-    <!--   end of structure-->
-   </div>
-   <div id="content_bottom"></div>
-  </div>
-  <div id="content_right_right"></div>
- </div>
 
+   </div>
+  </div>
+ </form>
 </div>
+
 <div id="js_data">
  <ul id="js_saving_data">
   <li class="headerClassName" data-headerClassName="sys_hold" ></li>
@@ -97,5 +68,3 @@
   <li class="btn1DivId" data-btn1DivId="sys_hold_id" ></li>
  </ul>
 </div>
-
-<?php include_template('footer.inc') ?>

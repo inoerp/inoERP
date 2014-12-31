@@ -29,32 +29,4 @@ $(document).ready(function() {
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
-
- //Get the bom_material_element_id on refresh button click
- $('a.show.bom_material_element_id_show').click(function() {
-	var bom_material_element_id = $('#bom_material_element_id').val();
-	$(this).attr('href', modepath() + 'bom_material_element_id=' + bom_material_element_id);
-	 });
-
- //context menu
- var classContextMenu = new contextMenuMain();
- classContextMenu.docHedaderId = 'bom_material_element_id';
- classContextMenu.btn1DivId = 'bom_material_element_id';
- classContextMenu.contextMenu();
-
-
-
- //save class
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=bom_material_element';
- classSave.form_header_id = 'bom_material_element';
- classSave.primary_column_id = 'bom_material_element_id';
- classSave.single_line = false;
- classSave.savingOnlyHeader = true;
- classSave.enable_select = true;
- classSave.headerClassName = 'bom_material_element';
- classSave.saveMain();
-
 });
-
-

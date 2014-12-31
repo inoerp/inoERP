@@ -1,27 +1,12 @@
-<div id="all_contents">
- <div id="content_left"></div>
- <div id="content_right">
-	<div id="content_right_left">
-	 <div id="content_top"></div>
-	 <div id="content">
-		<div id="structure">
-		 <div id="ar_transaction_source_divId">
-			<div id="form_top">
-			</div>
-			<!--    START OF FORM HEADER-->
-			<div class="error"></div><div id="loading"></div>
-			<div class="show_loading_small"></div>
-			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
-			<!--    End of place for showing error messages-->
-			<div id ="form_header">
-			 <form action=""  method="post" id="ar_transaction_source"  name="ar_transaction_source"><span class="heading">Transaction Source </span>
+		<div id ="form_header">
+			 <form action=""  method="post" id="ar_transaction_source"  name="ar_transaction_source"><span class="heading">Receivable Transaction Source </span>
 				<div class="large_shadow_box tabContainer">
 				 <ul class="column four_column"> 
 					<li> 
 					 <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_transaction_source_id select_popup clickable">
 						Transaction Source Id : </label><?php $f->text_field_ds('ar_transaction_source_id') ?>
-					 <a name="show" href="form.php?class_name=ar_transaction_source" class="show ar_transaction_source_id">	<img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
-					</li>
+					 <a name="show" href="form.php?class_name=ar_transaction_source&<?php echo "mode=$mode"; ?>" class="show document_id ar_transaction_source_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+           </li>
 					<li><label>Source Name :</label><?php $f->text_field_d('transaction_source'); ?> 					</li>
 					<li><label>BU Name : </label>
 					 <?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>
@@ -70,16 +55,6 @@
 				</div> 
 			 </form>
 			</div>
-			<!--END OF FORM HEADER-->
-
-		 </div>
-		</div>
-		<!--   end of structure-->
-	 </div>
-	 <div id="content_bottom"></div>
-	</div>
-	<div id="content_right_right"></div>
- </div>
 
 </div>
 <div id="js_data">
@@ -94,5 +69,3 @@
 	<li class="btn1DivId" data-btn1DivId="ar_transaction_source_id" ></li>
  </ul>
 </div>
-
-<?php include_template('footer.inc') ?>

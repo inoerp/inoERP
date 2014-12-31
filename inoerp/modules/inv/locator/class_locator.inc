@@ -1,5 +1,18 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * Locator
+ * Contains all the locator information, such as - alias, org_id,  subinventory_id, locator, etc.
+ * 
+ */
 class locator extends subinventory {
 
  public static $table_name = "locator";
@@ -8,6 +21,17 @@ class locator extends subinventory {
  public static $module = "inv";
  public static $multi_select_template_path = 'modules/inv/locator/multi_action/locator_template_ma.php';
 //  data base variables as stored database column name
+   public static $system_info = [
+  'name' => 'Locator',
+  'number' => '2108',
+  'description' => 'Inventory Transaction',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'inv',
+  'weight' => 8
+ ];
  public $field_a = [
   "locator_id",
   "org_id",

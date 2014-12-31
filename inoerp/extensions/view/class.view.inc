@@ -1,5 +1,16 @@
 <?php
-
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+/**
+ * 
+ *
+ */
  class view extends dbObject {
 
   public static $table_name = "view";
@@ -8,6 +19,19 @@
   public static $module = "extension";
   public static $js_fileName = 'modules/po/js/multi_select.js';
   //  data base variables as stored database column name
+   public static $system_info = [
+  'name' => 'View',
+  'number' => '10023',
+  'description' => 'Create & Update View',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'dependent_class' => array('view_path'),
+  'primary_entity_cb' => '',
+  'module_name' => 'extn',
+  'weight' => 23
+ ];
+   
   public static $condition_operator_type_a = [
    'database' => 'Database',
    'manual' => 'Manual',

@@ -1,11 +1,35 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * inv_serial_number
+ * Contains all the inv_serial_number information, such as - serial_number, item_id_m, org_id,  inv_serial_number_id, etc.
+ * 
+ */
  class inv_serial_number extends dbObject {
 
   public static $table_name = "inv_serial_number";
   public static $primary_column = "inv_serial_number_id";
   public static $key_column = 'item_id_m';
   public static $module = "inv";
+    public static $system_info = [
+  'name' => 'Serial Number',
+  'number' => '2113',
+  'description' => 'Inventory Serial Number',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'inv',
+  'weight' => 13
+ ];
   public static $origination_type_a = [
    'INVENTORY' => 'Inventory',
    'WIP_COMPLETION' => 'WIP Completion',

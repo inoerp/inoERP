@@ -3,7 +3,6 @@
 /**
  * inoERP 
  *
- * Version 0.1.1
  *
  * @copyright 2014 Nishit R. Das
  * @license   https://www.mozilla.org/MPL/2.0/
@@ -70,8 +69,7 @@ class fp_forecast_header extends dbObject {
  ];
  public $requiredField = [
   'org_id',
-  'forecast',
-  'status',
+  'forecast'
  ];
  public $fields_inForm_notInDataBase = [
   "customer_name",

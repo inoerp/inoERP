@@ -27,10 +27,4 @@ $(document).ready(function() {
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //Get the ar_transaction_source_id on find button click
- $('a.show.ar_transaction_source_id').click(function() {
-	var ar_transaction_source_id = $('#ar_transaction_source_id').val();
-	$(this).attr('href', modepath() + 'ar_transaction_source_id=' + ar_transaction_source_id);
- });
-
 });

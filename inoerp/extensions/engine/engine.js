@@ -37,19 +37,19 @@ $(this).prop('checked', false);
 deleteData('form.php?class_name=engine&line_class_name=engine');
 
  //context menu
- var classContextMenu = new contextMenuMain();
-  classContextMenu.docLineId = 'engine_id';
- classContextMenu.btn2DivId = 'form_line';
- classContextMenu.trClass = 'engine_line';
- classContextMenu.tbodyClass = 'form_data_line_tbody';
- classContextMenu.noOfTabbs = 2;
-// classContextMenu.contextMenu();
- 
- var engineSave = new saveMainClass();
- engineSave.json_url = 'form.php?class_name=engine';
- engineSave.single_line = false;
- engineSave.line_key_field = 'engine';
- engineSave.form_line_id = 'engine';
- engineSave.saveMain();
+// var classContextMenu = new contextMenuMain();
+//  classContextMenu.docLineId = 'engine_id';
+// classContextMenu.btn2DivId = 'form_line';
+// classContextMenu.trClass = 'engine_line';
+// classContextMenu.tbodyClass = 'form_data_line_tbody';
+// classContextMenu.noOfTabbs = 2;
+//// classContextMenu.contextMenu();
+// 
+// var engineSave = new saveMainClass();
+// engineSave.json_url = 'form.php?class_name=engine';
+// engineSave.single_line = false;
+// engineSave.line_key_field = 'obj_class_name';
+// engineSave.form_line_id = 'engine_line';
+// engineSave.saveMain();
 
 });  

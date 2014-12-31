@@ -975,7 +975,7 @@ function ino_attachement($file, $file_name = 'attachments') {
 						 <div id="file_upload_form">
 							<ul class="inRow asperWidth">
 							 <li><input type="file" id="attachments" class="attachments" name="' . $file_name . '[]" multiple/></li>
-							 <li> <input type="button" value="Attach" form="file_upload" name="attach_submit" id="attach_submit" class="submit button"></li>';
+							 <li> <button  form="file_upload" name="attach_submit" id="attach_submit" class="submit button">Attach</button></li>';
  $stmt.='<li class="show_loading_small"><img alt="Loading..." src="' . HOME_URL . 'themes/images/small_loading.gif"/></li>
 							</ul>
 							<div class="uploaded_file_details"></div>

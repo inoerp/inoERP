@@ -35,7 +35,6 @@
             </thead>
             <tbody class="form_data_line_tbody user_dashboard_config_values" >
              <?php
-              $f = new inoform();
               $count = 0;
               foreach ($user_dashboard_config_object as $user_dashboard_config) {
                $report_a = [];

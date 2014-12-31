@@ -1,4 +1,18 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+
+/**
+ * address
+ * Contains all the address information, such as - address_id, type, description,  address_name, etc.
+ * 
+ */
 
 class address extends dbObject {
 
@@ -6,6 +20,18 @@ class address extends dbObject {
   public static $primary_column = "address_id";
  public static $key_column = 'address_name';
  public static $module = "org";
+  public static $system_info = [
+  'name' => 'Address',
+  'number' => '2006',
+  'description' => 'Define and mainten addresses',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'primary_entity_cb' => '',
+  'module_name' => 'org',
+  'weight' => 6
+ ];
  public $field_a = [
 		 "address_id",
 		 "type",

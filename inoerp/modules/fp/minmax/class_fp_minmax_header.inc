@@ -70,7 +70,6 @@ class fp_minmax_header extends dbObject {
 		 'demand_source',
  ];
  public $search = [
-		 '_update_path' => 'form.php?class_name=minmax_header',
 		 '_show_update_path' => 1,
 		 '_update_action_meassge' => 'Update',
 		 '_show_view_path' => 1,

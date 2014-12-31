@@ -59,7 +59,19 @@ if (!empty($class_names)) {
 
  $dl = new downloads();
  $dl->setProperty('_downloaded_data', $dataArray);
+  if ($continue) {
+  include_once(THEME_DIR . '/header.inc');
+ } else {
+  $continue = false;
+  echo "<h2>Could n't call the header</h2>";
+  return;
+ }
  require_once('extensions/file/massupload_template.php' );
 }
 ?>
-<script src="extensions/file/file.js"></script>
+<script type="text/javascript">
+ $(document).ready(function () {
+  $.getScript("includes/js/erp.js");
+  $.getScript("file/file.js");
+ });
+</script>

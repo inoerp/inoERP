@@ -8,10 +8,7 @@
      <div id="bom_divId">
       <!--    START OF FORM HEADER-->
       <div class="error"></div><div id="loading"></div>
-      <?php
-       echo (!empty($show_message)) ? $show_message : "";
-       $f = new inoform();
-      ?> 
+      <?php  echo (!empty($show_message)) ? $show_message : "";      ?> 
       <!--    End of place for showing error messages-->
       <div id ="form_header">
        <form action=""  method="post" id="hr_leave_transaction_header"  name="hr_leave_transaction_header"><span class="heading">Leave Application </span>

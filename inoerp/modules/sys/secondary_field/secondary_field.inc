@@ -2,8 +2,8 @@
 
  if (!empty($$class->sys_secondary_field_id)) {
   $instances = sys_secondary_field_instance::find_by_secondaryFieldId($$class->sys_secondary_field_id);
-  $readonly = 1;
-  $mode = 2;
+//  $readonly = 1;
+//  $mode = 2;
  }
 
  $extra_element_label = 'Secondary Field';

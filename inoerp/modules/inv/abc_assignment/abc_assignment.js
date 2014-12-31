@@ -1,5 +1,5 @@
 function setValFromSelectPage(inv_abc_assignment_header_id, item_id_m, item_number, item_description, uom_id,
- inv_abc_valuation_id, valuation_name, scope_org_id) {
+        inv_abc_valuation_id, valuation_name, scope_org_id) {
  this.inv_abc_assignment_header_id = inv_abc_assignment_header_id;
  this.item_id_m = item_id_m;
  this.item_number = item_number;
@@ -10,7 +10,7 @@ function setValFromSelectPage(inv_abc_assignment_header_id, item_id_m, item_numb
  this.scope_org_id = scope_org_id;
 }
 
-setValFromSelectPage.prototype.setVal = function() {
+setValFromSelectPage.prototype.setVal = function () {
  var inv_abc_assignment_header_id = this.inv_abc_assignment_header_id;
  var item_id_m = this.item_id_m;
  var item_number = this.item_number;
@@ -72,9 +72,9 @@ function invValuationDetails(rowClass, element_type, element_value, inv_abc_valu
    element_type: element_type,
    element_value: element_value
   },
-  success: function(result) {
+  success: function (result) {
    if (result) {
-    $.each(result, function(key, value) {
+    $.each(result, function (key, value) {
      switch (key) {
       case 'seq_number':
        var className = '.assign_' + key;
@@ -92,187 +92,156 @@ function invValuationDetails(rowClass, element_type, element_value, inv_abc_valu
     });
    }
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  error: function(request, errorType, errorMessage) {
+  error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
 
 //  var Mandatory_Fields = ["#org_id", "First Select Org Name", "#item_number", "First Select Item Number"];
 // select_mandatory_fields(Mandatory_Fields);
 //
- $('#form_line').on("click", function() {
-  if (!$('#inv_abc_assignment_header_id').val()) {
-   alert('No header Id : First enter/save header details');
-  } else {
-   var headerId = $('#inv_abc_assignment_header_id').val();
-   if (!$(this).find('.inv_abc_assignment_header_id').val()) {
-    $(this).find('.inv_abc_assignment_header_id').val(headerId);
-   }
-  }
-
- });
-
+// $('body').off("click", '#form_line').on("click", '#form_line', function () {
+//  if (!$('#inv_abc_assignment_header_id').val()) {
+//   alert('No header Id : First enter/save header details');
+//  } else {
+//   var headerId = $('#inv_abc_assignment_header_id').val();
+//   if (!$(this).find('.inv_abc_assignment_header_id').val()) {
+//    $(this).find('.inv_abc_assignment_header_id').val(headerId);
+//   }
+//  }
+//
+// });
 
  //Popup for selecting 
- $(".inv_abc_assignment_header_id.select_popup").on("click", function() {
+ $(".inv_abc_assignment_header_id.select_popup").on("click", function () {
   void window.open('select.php?class_name=inv_abc_assignment_header', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
  //Popup for selecting
- $(".inv_abc_valuation_id.select_popup, #valuation_name").on("click", function() {
+ $(".inv_abc_valuation_id.select_popup, #valuation_name").on("click", function () {
   void window.open('select.php?class_name=inv_abc_valuation', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //Get the option_id on find button click
- $('a.show.inv_abc_assignment_header_id').click(function() {
-  var headerId = $('#inv_abc_assignment_header_id').val();
-  $(this).prop('href', modepath() + 'pageno=1&per_page=10&submit_search=Search&search_asc_desc=desc&search_class_name=inv_abc_assignment_line&inv_abc_assignment_header_id=' + headerId);
- });
+ $('#form_header').off('blur', '.assign_seq_number')
+         .on('blur', '.assign_seq_number', function () {
+          if ($(this).val() > +$('#total_no_of_items').val()) {
+           alert('Wrong sequence number');
+           $('#form_header').find('.assign_seq_number').not(':last').closest('tr').find((":input:not([readonly])")).val('');
+           return false;
+          }
+          $(this).closest('tr').nextAll().not(':last').closest('tr').find((":input:not([readonly])")).val('');
+          var thisValue = $(this).val();
+          var doAjax = true;
+          var trClass = $(this).closest('tr').prop('class');
+          var trClass_d = '.' + trClass;
 
- onClick_add_new_row('tr.inv_abc_assignment_line0', 'tbody.inv_abc_assignment_line_values', 1);
+          $(trClass_d).closest('tbody').find('tr').each(function () {
+           if ($(this).attr('class') === trClass) {
+            return false;
+           } else {
+            if (+$(this).find('.assign_seq_number').val() > thisValue) {
+             alert('Wrong sequence number');
+             $('#form_header').find('.assign_seq_number').not(':last').closest('tr').find((":input:not([readonly])")).val('');
+             doAjax = false;
+             return;
+            }
+           }
+          });
 
- $('#form_header').on('change', '.assign_seq_number', function() {
-  if ($(this).val() > +$('#total_no_of_items').val()) {
-   alert('Wrong sequence number');
-   $('#form_header').find('.assign_seq_number').not(':last').closest('tr').find((":input:not([readonly])")).val('');
-   return false;
-  }
-  $(this).closest('tr').nextAll().not(':last').closest('tr').find((":input:not([readonly])")).val('');
-  var thisValue = $(this).val();
-  var doAjax = true;
-  var trClass = $(this).closest('tr').prop('class');
-  var trClass_d = '.' + trClass;
+          if (doAjax) {
+           invValuationDetails(trClass_d, 'seq_number', +$(this).val());
+          }
+         });
 
-  $(trClass_d).closest('tbody').find('tr').each(function() {
-   if ($(this).attr('class') === trClass) {
-    return false;
-   } else {
-    if (+$(this).find('.assign_seq_number').val() > thisValue) {
-     alert('Wrong sequence number');
-     $('#form_header').find('.assign_seq_number').not(':last').closest('tr').find((":input:not([readonly])")).val('');
-     doAjax = false;
-     return;
-    }
-   }
-  });
+ $('#form_header').off('blur', '.assign_item_percentage')
+         .on('blur', '.assign_item_percentage', function () {
+          if ($(this).val() > 100) {
+           alert('Invalid Percentage -  Value should be <= 100');
+           $('#form_header').find('.assign_item_percentage').not(':last').closest('tr').find((":input:not([readonly])")).val('');
+           return false;
+          }
+          $(this).closest('tr').nextAll().not(':last').closest('tr').find((":input:not([readonly])")).val('');
+          var thisValue = $(this).val();
+          var doAjax = true;
+          var trClass = $(this).closest('tr').prop('class');
+          var trClass_d = '.' + trClass;
 
-  if (doAjax) {
-   invValuationDetails(trClass_d, 'seq_number', +$(this).val());
-  }
- });
+          $(trClass_d).closest('tbody').find('tr').each(function () {
+           if ($(this).attr('class') === trClass) {
+            return false;
+           } else {
+            if (+$(this).find('.assign_item_percentage').val() > thisValue) {
+             alert('Wrong percentage');
+             $('#form_header').find('.assign_item_percentage').not(':last').closest('tr').find((":input:not([readonly])")).val('');
+             doAjax = false;
+             return;
+            }
+           }
+          });
 
- $('#form_header').on('change', '.assign_item_percentage', function() {
-  if ($(this).val() > 100) {
-   alert('Invalid Percentage -  Value should be <= 100');
-   $('#form_header').find('.assign_item_percentage').not(':last').closest('tr').find((":input:not([readonly])")).val('');
-   return false;
-  }
-  $(this).closest('tr').nextAll().not(':last').closest('tr').find((":input:not([readonly])")).val('');
-  var thisValue = $(this).val();
-  var doAjax = true;
-  var trClass = $(this).closest('tr').prop('class');
-  var trClass_d = '.' + trClass;
+          if (doAjax) {
+           var seq_value = parseInt((+$(this).val()) * (+$('#total_no_of_items').val()) / 100);
+           seq_value = (seq_value == 0) ? 1 : seq_value;
+           invValuationDetails(trClass_d, 'seq_number', seq_value);
+          }
+         });
 
-  $(trClass_d).closest('tbody').find('tr').each(function() {
-   if ($(this).attr('class') === trClass) {
-    return false;
-   } else {
-    if (+$(this).find('.assign_item_percentage').val() > thisValue) {
-     alert('Wrong percentage');
-     $('#form_header').find('.assign_item_percentage').not(':last').closest('tr').find((":input:not([readonly])")).val('');
-     doAjax = false;
-     return;
-    }
-   }
-  });
+ $('#form_header').off('blur', '.assign_value, .assign_value_percentage')
+         .on('blur', '.assign_value, .assign_value_percentage', function () {
+          if ($(this).hasClass('assign_value_percentage')) {
+           var thisClass = 'assign_value_percentage';
+           var element_value = parseInt((+$(this).val()) * (+$('#total_value').val()) / 100);
+          } else {
+           var thisClass = 'assign_value';
+           var element_value = parseInt((+$(this).val()));
+          }
+          var thisClass_d = '.' + 'assign_value';
+          //validate value is less than max mavue
+          if (($(this).val() > 100) && ($(this).hasClass('assign_value_percentage') > 100)) {
+           alert('Invalid Percentage -  Value should be <= 100');
+           $('#form_header').find('.assign_item_percentage').not(':last').closest('tr').find((":input:not([readonly])")).val('');
+           return false;
+          } else if (($(this).val() > $('#total_value').val()) && ($(this).hasClass('assign_value') > 100)) {
+           alert('Invalid Value');
+           $('#form_header').find('.assign_item_percentage').not(':last').closest('tr').find((":input:not([readonly])")).val('');
+           return false;
+          }
+          //
+          $(this).closest('tr').nextAll().not(':last').closest('tr').find((":input:not([readonly])")).val('');
+          var doAjax = true;
+          var trClass = $(this).closest('tr').prop('class');
+          var trClass_d = '.' + trClass;
 
-  if (doAjax) {
-   var seq_value = parseInt((+$(this).val()) * (+$('#total_no_of_items').val()) / 100);
-   seq_value = (seq_value == 0) ? 1 : seq_value;
-   invValuationDetails(trClass_d, 'seq_number', seq_value);
-  }
- });
+          $(trClass_d).closest('tbody').find('tr').each(function () {
+           if ($(this).attr('class') === trClass) {
+            return false;
+           } else {
+            if (+$(this).find(thisClass_d).val() > element_value) {
+             alert('Invalid Data ' + $(this).find(thisClass_d).val() + ' : ' + element_value);
+             $('#form_header').find(thisClass_d).not(':last').closest('tr').find((":input:not([readonly])")).val('');
+             doAjax = false;
+             return;
+            }
+           }
+          });
 
- $('#form_header').on('change', '.assign_value, .assign_value_percentage', function() {
-  if ($(this).hasClass('assign_value_percentage')) {
-   var thisClass = 'assign_value_percentage';
-   var element_value = parseInt((+$(this).val()) * (+$('#total_value').val()) / 100);
-  } else {
-   var thisClass = 'assign_value';
-   var element_value = parseInt((+$(this).val()));
-  }
-  var thisClass_d = '.' + 'assign_value';
-  //validate value is less than max mavue
-  if (($(this).val() > 100) && ($(this).hasClass('assign_value_percentage') > 100)) {
-   alert('Invalid Percentage -  Value should be <= 100');
-   $('#form_header').find('.assign_item_percentage').not(':last').closest('tr').find((":input:not([readonly])")).val('');
-   return false;
-  } else if (($(this).val() > $('#total_value').val()) && ($(this).hasClass('assign_value') > 100)) {
-   alert('Invalid Value');
-   $('#form_header').find('.assign_item_percentage').not(':last').closest('tr').find((":input:not([readonly])")).val('');
-   return false;
-  }
-  //
-  $(this).closest('tr').nextAll().not(':last').closest('tr').find((":input:not([readonly])")).val('');
-  var doAjax = true;
-  var trClass = $(this).closest('tr').prop('class');
-  var trClass_d = '.' + trClass;
+          if (doAjax) {
+           element_value = (element_value == 0) ? 1 : element_value;
+           invValuationDetails(trClass_d, 'cum_value', element_value);
+          }
+         });
 
-  $(trClass_d).closest('tbody').find('tr').each(function() {
-   if ($(this).attr('class') === trClass) {
-    return false;
-   } else {
-    if (+$(this).find(thisClass_d).val() > element_value) {
-     alert('Invalid Data ' + $(this).find(thisClass_d).val() + ' : ' + element_value);
-     $('#form_header').find(thisClass_d).not(':last').closest('tr').find((":input:not([readonly])")).val('');
-     doAjax = false;
-     return;
-    }
-   }
-  });
-
-  if (doAjax) {
-   element_value = (element_value == 0) ? 1 : element_value;
-   invValuationDetails(trClass_d, 'cum_value', element_value);
-  }
- });
-
-//context menu
- var classContextMenu = new contextMenuMain();
- classContextMenu.docHedaderId = 'inv_abc_assignment_header_id';
- classContextMenu.docLineId = 'inv_abc_assignment_line_id';
- classContextMenu.btn1DivId = 'inv_abc_assignment_header';
- classContextMenu.btn2DivId = 'form_line';
- classContextMenu.trClass = 'inv_abc_assignment_line';
- classContextMenu.tbodyClass = 'inv_abc_assignment_line_values';
- classContextMenu.noOfTabbs = 1;
- classContextMenu.contextMenu();
-
-
-//deleteData('json.option.php');
-// save('json.value_group.php', '#inv_abc_assignment_header', 'line_id_cb', 'code', '#inv_abc_assignment_header_id');
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=inv_abc_assignment_header';
- classSave.form_header_id = 'inv_abc_assignment_header';
- classSave.primary_column_id = 'inv_abc_assignment_header_id';
- classSave.line_key_field = 'code';
- classSave.single_line = false;
- classSave.savingOnlyHeader = false;
- classSave.enable_select = true;
- classSave.headerClassName = 'inv_abc_assignment_header';
- classSave.lineClassName = 'inv_abc_assignment_line';
- classSave.saveMain();
 });
 
 

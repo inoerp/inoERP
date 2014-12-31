@@ -1,20 +1,20 @@
-$.fn.recordData = function(options) {
+$.fn.recordData = function (options) {
  var inputValue;
  $('input').on('keydown',
-  function(e) {
-   inputValue += String.fromCharCode(e.keyCode);
-   console.log(inputValue);
-  }
+         function (e) {
+          inputValue += String.fromCharCode(e.keyCode);
+          console.log(inputValue);
+         }
 
  );
 
- this.recordInput = function() {
+ this.recordInput = function () {
   this.inputValue = null;
   $('input').on('keydown',
-   function(e) {
-    this.inputValue += String.fromCharCode(e.keyCode);
-    console.log(this.inputValue);
-   }
+          function (e) {
+           this.inputValue += String.fromCharCode(e.keyCode);
+           console.log(this.inputValue);
+          }
   );
   return this.inputValue;
  };
@@ -27,26 +27,26 @@ $('#content').recordData();
 
 var keys = [];
 
-$(document).on('keydown', function(e) {
+$(document).on('keydown', function (e) {
  keys[e.which] = true;
- keys.eachArray(function(i, v) {
+ keys.eachArray(function (i, v) {
   alert('pressed key is ' + i + v);
  });
 });
 
-$(document).on('keyup', function(e) {
+$(document).on('keyup', function (e) {
  delete keys[e.which];
 });
 
 var keys = {};
 
-$(document).keydown(function(e) {
+$(document).keydown(function (e) {
  keys[e.which] = true;
 
  printKeys();
 });
 
-$(document).keyup(function(e) {
+$(document).keyup(function (e) {
  delete keys[e.which];
 
  printKeys();
@@ -75,16 +75,16 @@ function applyTemplate() {
    item_number: itemNumber,
    org_id: orgId
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   }
- }).done(function(result) {
+ }).done(function (result) {
   var newContent = $(result).find('div#content').html();
   if (newContent) {
-   $(newContent).find('#form_line').find(':input').each(function() {
+   $(newContent).find('#form_line').find(':input').each(function () {
     if ($(this).val()) {
      var asisClass = '.' + $(this).prop('class');
      if (asisClass.length > 1) {
@@ -96,12 +96,12 @@ function applyTemplate() {
     }
    });
   }
- }).fail(function() {
+ }).fail(function () {
   alert("Template update failed");
  });
 }
 
-$('#apply_item_template').on('click', function() {
+$('#apply_item_template').on('click', function () {
  applyTemplate();
 });
 
@@ -138,23 +138,23 @@ function getCostElement(json_url, cost_element_type, row_class) {
    element_type: cost_element_type,
    find_cost_elements: '1'
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   }
- }).done(function(result) {
+ }).done(function (result) {
   var div = $(result).filter('div#cost_elements_find_all').html();
   var asisClass = '.' + row_class;
   var asisClass_d = asisClass.replace(/\s+/g, '.');
   $("#content").find(asisClass_d).find('.cost_element_id').empty().append(div);
- }).fail(function() {
+ }).fail(function () {
   alert(" Cost Element Not Found!");
  });
 }
 
-$('#content').on('change', '.cost_element_type', function() {
+$('#content').on('change', '.cost_element_type', function () {
  var json_url = 'modules/cst/item_cost/json_item_cost.php';
  var cost_element_type = $(this).val();
  var row_class = $(this).closest('tbody').prop('class');
@@ -172,22 +172,65 @@ function getSearchResult() {
    class_name: className,
    search_parameters: searchParameters
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   }
- }).done(function(result) {
+ }).done(function (result) {
   var newContent = $(result).find('div#searchResult').html();
   if (newContent) {
    $('#list_contents').append(newContent);
    $.getScript("http://www.inoideas.com/inoerp/includes/js/reload.js");
   }
- }).fail(function() {
+ }).fail(function () {
   alert("Search Failed");
  });
 }
+
+function getFormDetails(url) {
+ $.ajax({
+  url: url,
+  type: 'get',
+  data: {
+  },
+  beforeSend: function () {
+   $('.show_loading_small').show();
+  },
+  complete: function () {
+   $('.show_loading_small').hide();
+  }
+ }).done(function (result) {
+  var newContent = $(result).find('div#content').html();
+  var allButton = $(result).find('#form_top_image').html();
+  if (newContent) {
+   $('#content').replaceWith('<div id="content">' + newContent + '</div>');
+   if (allButton) {
+    if ($('#form_top_image')) {
+//		$('#form_top_image').replaceWith('<div id="form_top_image">' + allButton + '</div>');
+    } else {
+     $('#header_top_container').prepend('<div id="form_top_image">' + allButton + '</div>');
+    }
+   }
+   $.getScript("includes/js/reload.js");
+  }
+ }).fail(function () {
+  alert("Form loading failed!");
+ });
+}
+
+
+$('#header_top').on('click', '.menu a', function (e) {
+ e.preventDefault();
+ var urlLink = $(this).attr('href');
+ var urlLink_a = urlLink.split('?');
+ var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
+ alert(formUrl);
+ getFormDetails(formUrl);
+});
+
+
 
 function getFormDetails(url) {
  $.ajax({
@@ -202,10 +245,10 @@ function getFormDetails(url) {
    $('.show_loading_small').hide();
   }
  }).done(function(result) {
-  var newContent = $(result).find('div#content').html();
+  var newContent = $(result).find('div#structure').html();
   var allButton = $(result).find('#form_top_image').html();
   if (newContent) {
-   $('#content').replaceWith('<div id="content">' + newContent + '</div>');
+   $('#structure').replaceWith('<div id="structure">' + newContent + '</div>');
    if (allButton) {
     if ($('#form_top_image')) {
 //		$('#form_top_image').replaceWith('<div id="form_top_image">' + allButton + '</div>');
@@ -213,21 +256,27 @@ function getFormDetails(url) {
      $('#header_top_container').prepend('<div id="form_top_image">' + allButton + '</div>');
     }
    }
-   $.getScript("http://www.inoideas.com/inoerp/includes/js/reload.js");
+   $.getScript("includes/js/reload.js");
+    $(result).find('#js_files').find('li').each(function(){
+      $.getScript($(this).html());
+    });
   }
  }).fail(function() {
   alert("Form loading failed!");
  });
 }
 
-$('#header_top .menu').on('click', 'a', function(e) {
- e.preventDefault();
- getFormDetails($(this).attr('href'));
+
+$('#header_top').on('click', '.menu a, a.show', function(e){
+e.preventDefault();
+var urlLink =  $(this).attr('href');
+  var urlLink_a = urlLink.split('?');
+  var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
+  getFormDetails(formUrl);
 });
 
 
-
-$('#process_folw').on('mousemove', function(e) {
+$('#process_folw').on('mousemove', function (e) {
  var pageCoords = "( " + e.pageX + ", " + e.pageY + " )";
  var clientCoords = "( " + e.clientX + ", " + e.clientY + " )";
  if (e.clientX > 100 && e.clientX < 250 && e.clientY > 205 && e.clientY < 275) {
@@ -260,7 +309,7 @@ function getViewResult_i() {
 // $(this).removeClass('show_add_filter');
 //});
 
-$('#content').on('click', '.show_add_filter', function() {
+$('#content').on('click', '.show_add_filter', function () {
  $(this).removeClass('show_add_filter');
  var fieldName = $(this).text();
  var filter_value = prompt("Enter value for\n" + fieldName);
@@ -276,18 +325,18 @@ $('#content').on('click', '.show_add_filter', function() {
    show_from_query: false
   });
  }
-}).on('click', '.show_remove_filter', function() {
+}).on('click', '.show_remove_filter', function () {
  $(this).removeClass('show_remove_filter');
  var fieldName_c = '.filtered_field.' + $(this).text().replace(/\s+/g, '.');
  $('#view_filters').find(fieldName_c).remove();
 });
 
-$('#view_filters').on('click', '.filtered_field', function() {
+$('#view_filters').on('click', '.filtered_field', function () {
  $(this).remove();
  getViewResult_i();
 });
 
-$('#content').on('mouseenter', 'table.view th', function() {
+$('#content').on('mouseenter', 'table.view th', function () {
  if ($(this).hasClass('show_remove_filter')) {
 
  } else {
@@ -295,7 +344,7 @@ $('#content').on('mouseenter', 'table.view th', function() {
   $(this).find('.sort_up').addClass('show_sort_up');
   $(this).find('.sort_up').addClass('show_sort_down');
  }
-}).on('mouseleave', 'table.view th', function() {
+}).on('mouseleave', 'table.view th', function () {
  $(this).find('.filter_add').removeClass('show_add_filter');
  $(this).find('.sort_up').removeClass('show_sort_up');
  $(this).find('.sort_up').removeClass('show_sort_down');
@@ -320,46 +369,46 @@ $('#content').on('mouseenter', 'table.view th', function() {
 
 
 $('th').find('img').hide();
-$('#content').on('mouseenter', 'table.view th', function() {
-$(this).find('ul').addClass('icon_header');
+$('#content').on('mouseenter', 'table.view th', function () {
+ $(this).find('ul').addClass('icon_header');
  $(this).find('img').show();
-}).on('mouseleave', 'table.view th', function() {
-  $(this).find('img').hide();
-  $(this).find('ul').removeClass('icon_header');
+}).on('mouseleave', 'table.view th', function () {
+ $(this).find('img').hide();
+ $(this).find('ul').removeClass('icon_header');
 });
 
-$('#content').on('click', '.filter_add', function() {
-  $(this).removeClass('show_add_filter');
-  var fieldName = $(this).closest('ul').find('.field_value').text();
-  var filter_value = prompt("Enter value for\n" + fieldName);
-  var newDataField = '<span class="filtered_field show_remove_filter ' + fieldName + '">' + fieldName + ' : ' + filter_value;
-  newDataField += '<input class="hidden filtered_field" type="hidden" value="' + filter_value + '" name="' + $(this).closest('th').data('fieldname') + '"></span>';
-  if (filter_value) {
-   $('#view_filters').append(newDataField);
-   var filterData = $('#view_filters').find('.filtered_field').find(':input').serializeArray();
-   getViewResult({
-    filterData: filterData,
-    view_id: $('#view_id').val(),
-    show_from_query: false
-   });
-  }
- }).on('click', '.show_remove_filter', function() {
-  $(this).removeClass('show_remove_filter');
-  var fieldName_c = '.filtered_field.' + $(this).text().replace(/\s+/g, '.');
-  $('#view_filters').find(fieldName_c).remove();
- });
+$('#content').on('click', '.filter_add', function () {
+ $(this).removeClass('show_add_filter');
+ var fieldName = $(this).closest('ul').find('.field_value').text();
+ var filter_value = prompt("Enter value for\n" + fieldName);
+ var newDataField = '<span class="filtered_field show_remove_filter ' + fieldName + '">' + fieldName + ' : ' + filter_value;
+ newDataField += '<input class="hidden filtered_field" type="hidden" value="' + filter_value + '" name="' + $(this).closest('th').data('fieldname') + '"></span>';
+ if (filter_value) {
+  $('#view_filters').append(newDataField);
+  var filterData = $('#view_filters').find('.filtered_field').find(':input').serializeArray();
+  getViewResult({
+   filterData: filterData,
+   view_id: $('#view_id').val(),
+   show_from_query: false
+  });
+ }
+}).on('click', '.show_remove_filter', function () {
+ $(this).removeClass('show_remove_filter');
+ var fieldName_c = '.filtered_field.' + $(this).text().replace(/\s+/g, '.');
+ $('#view_filters').find(fieldName_c).remove();
+});
 
- $('#view_filters').on('click', '.filtered_field', function() {
-  $(this).remove();
-  getViewResult_i();
- });
- 
- 
+$('#view_filters').on('click', '.filtered_field', function () {
+ $(this).remove();
+ getViewResult_i();
+});
+
+
 
 
 $('#view_action_menu_div .view_action_menu').menu();
 
-$('#content').on('mouseenter', 'table.view th', function() {
+$('#content').on('mouseenter', 'table.view th', function () {
  if ($(this).hasClass('show_remove_filter')) {
 
  } else {
@@ -367,23 +416,79 @@ $('#content').on('mouseenter', 'table.view th', function() {
   var menuHtml = $('#result_action_menu').html();
   $(this).append(menuHtml);
  }
-}).on('mouseleave', 'table.view th', function() {
+}).on('mouseleave', 'table.view th', function () {
  $('#content').find('#view_action_menu_div').remove();
 });
 
 
-$('.view_filters').on('click', '.filtered_field, .show_sort_remove', function() {
+$('.view_filters').on('click', '.filtered_field, .show_sort_remove', function () {
  $(this).remove();
  var filterData = $(this).closest('div.view_content').find('.view_filters').find('.filtered_field:input').serializeArray();
  var sortData = $(this).closest('div.view_content').find('.view_filters').find('.sorted_field:input').serializeArray();
  var viewId = $('.filtered_field').closest('div.view_content').find('.view_id').val();
  alert(viewId);
  sadas();
- alert(filterData); sdfsdf();
-  getViewResult({
+ alert(filterData);
+ sdfsdf();
+ getViewResult({
   filterData: filterData,
   sortData: sortData,
   view_id: viewId,
   show_from_query: false
  });
 }); 	
+
+
+function getFormDetails(url) {
+ $.ajax({
+  url: url,
+  type: 'get',
+  data: {
+  },
+  beforeSend: function() {
+   $('.show_loading_small').show();
+  },
+  complete: function() {
+   $('.show_loading_small').hide();
+  }
+ }).done(function(result) {
+  var newContent = $(result).find('div#structure').html();
+    var allButton = $(result).find('div#header_top_container').html();
+  if (newContent) {
+   $('#structure').replaceWith('<div id="structure">' + newContent + '</div>');
+    $('#header_top_container').replaceWith('<div id="header_top_container" style="display: block;">' + allButton + '</div>');
+   $.getScript("includes/js/reload.js");
+    $(result).find('#js_files').find('li').each(function(){
+      $.getScript($(this).html());
+    });
+  }
+ }).fail(function() {
+  alert("Form loading failed!");
+ });
+}
+
+
+$('body').on('click', '#header_top .menu a,#search_result .action a', function(e){
+e.preventDefault();
+var urlLink =  $(this).attr('href');
+var urlLink_a = urlLink.split('?');
+var urlLink_firstPart_a =   urlLink_a[0].split('/');
+var pageType =   urlLink_firstPart_a.pop();
+  if(pageType == 'form.php'){
+var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
+  }else{
+  var formUrl = urlLink;
+  }
+  getFormDetails(formUrl);
+});
+
+//Get the ap_payment_header_id on refresh button click
+$('a.show.document_id').click(function (e) {
+ var headerId_v = $(this).parent().find(':input').val();
+ var headerId = $(this).parent().find(':input').attr('id');
+ e.preventDefault();
+ var urlLink = $(this).attr('href');
+ var urlLink_a = urlLink.split('?');
+ var formUrl = 'includes/json/json_form.php?' + urlLink_a[1] + '&' + headerId + '=' + headerId_v;
+ getFormDetails(formUrl);
+});

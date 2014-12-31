@@ -77,10 +77,28 @@ if ((!empty($class_names)) && (!empty($program_name))) {
 }
 ?>
 
-<?php If (property_exists($class, 'js_fileName_prg')) { ?>
+<?php 
+ if ($continue) {
+  include_once(THEME_DIR . '/header.inc');
+ } else {
+  $continue = false;
+  echo "<h2>Could n't call the header</h2>";
+  return;
+ }
+ 
+If (property_exists($class, 'js_fileName_prg')) { ?>
  <script src="<?php echo HOME_URL . $class::$js_fileName_prg; ?>"></script>	 
 <?php } ?>
 
 <?php
 require_once(INC_BASICS . DS . "program_page.inc");
 ?>
+
+ <script type="text/javascript">
+ $(document).ready(function () {
+  $.getScript("includes/js/program.js");
+      if (!$("link[href='includes/ecss/program.css']").length) {
+     $('<link href="includes/ecss/program.css" rel="stylesheet">').appendTo("head");
+    }
+ });
+</script>

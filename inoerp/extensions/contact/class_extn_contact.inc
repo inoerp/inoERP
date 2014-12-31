@@ -1,5 +1,16 @@
 <?php
-
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+/**
+ * 
+ *
+ */
 class extn_contact extends dbObject {
 
  public static $table_name = "extn_contact";
@@ -7,6 +18,17 @@ class extn_contact extends dbObject {
  public static $key_column = 'contact_name';
 // public static $dependent_classes = ['extn_contact_reference'];
  public static $module = "extn";
+  public static $system_info = [
+  'name' => 'Contacts',
+  'number' => '10013',
+  'description' => 'Contacts for Persons & Entities',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'extn',
+  'weight' => 13
+ ];
  public $field_a = [
   'extn_contact_id',
   'contact_name',

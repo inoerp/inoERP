@@ -1,6 +1,9 @@
-#tabsLine-1 .class_detail_form{
+#bom_routing_divId #tabsLine-1 .class_detail_form{
 margin-top: 30px;
-  margin-left: -550px;
-  width: 1000px;
+  margin-left: -450px;
   margin-bottom: 5px;
+}
+
+#bom_routing_divId .form_detail_data_fs{
+    width: 1000px;
 }

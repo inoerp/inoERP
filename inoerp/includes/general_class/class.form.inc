@@ -1277,9 +1277,9 @@ EOD;
  public static function status_field($value, $readonly = "") {
 	$active = "";
 	$inactive = "";
-	if ($value == 'active') {
+	if ($value == 'ACTIVE') {
 	 $active = 'selected';
-	} elseif ($value == 'inactive') {
+	} elseif ($value == 'INACTIVE') {
 	 $inactive = 'selected';
 	}
 	if ($readonly == 1) {
@@ -1291,8 +1291,8 @@ EOD;
 	$value = htmlentities($value);
 	$element_text_field = "<Select name=\"status[]\" class=\"status select\" $readonly >";
 	$element_text_field .= "<option value=\"\" ></option>";
-	$element_text_field .= "<option value=\"active\" $active > Active </option>";
-	$element_text_field .= "<option value=\"inactive\" $inactive > Inactive </option>";
+	$element_text_field .= "<option value=\"ACTIVE\" $active > Active </option>";
+	$element_text_field .= "<option value=\"INACTIVE\" $inactive > Inactive </option>";
 	$element_text_field .= "</select>";
 	return $element_text_field;
  }

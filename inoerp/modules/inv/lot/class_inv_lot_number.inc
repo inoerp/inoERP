@@ -1,4 +1,18 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+
+/**
+ * Lot Number
+ * Contains all the locator information, such as - lot_number, org_id,  generation, quantity, etc.
+ * 
+ */
 
 class inv_lot_number extends dbObject {
 
@@ -6,6 +20,17 @@ class inv_lot_number extends dbObject {
  public static $primary_column = "inv_lot_number_id";
  public static $key_column = 'item_id_m';
  public static $module = "inv";
+ public static $system_info = [
+  'name' => 'Lot Number',
+  'number' => '2109',
+  'description' => 'Item Lot Number',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'inv',
+  'weight' => 9
+ ];
  public static $origination_type_a = [
   'INVENTORY' => 'Inventory',
   'WIP_COMPLETION' => 'WIP Completion',
@@ -482,7 +507,7 @@ class inv_lot_number extends dbObject {
    $lot_object = $lot_detail_obj;
   }
   $ret_stmt_h = '<th>Lot Numbers</th>           <th>Serial Numbers</th>';
-$return_a['tab_header'] = $ret_stmt_h;
+  $return_a['tab_header'] = $ret_stmt_h;
 //  $ret_stmt_l = '<tr class="inv_transaction_line0" id="tab4_1">';
   $ret_stmt_l = '<td class="add_detail_values0">';
   $ret_stmt_l .= $f->hidden_field('lot_number_id', $lot_object[0]->inv_lot_number_id);

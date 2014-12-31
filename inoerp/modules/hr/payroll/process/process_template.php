@@ -1,19 +1,4 @@
-<div id="all_contents">
- <div id="content_left"></div>
- <div id="content_right">
-  <div id="content_right_left">
-   <div id="content_top"></div>
-   <div id="content">
-    <div id="structure">
-     <div id="mdm_price_list_divId">
-      <!--    START OF FORM HEADER-->
-      <div class="error"></div><div id="loading"></div>
-      <?php
-      echo (!empty($show_message)) ? $show_message : "";
-      $f = new inoform();
-      ?> 
-      <!--    End of place for showing error messages-->
-      <div id="form_all">
+   <div id="form_all">
        <form action=""  method="post" id="hr_payroll_process"  name="hr_payroll_process"><span class="heading">Payroll Process </span>
         <div id ="form_header">
          <div id="tabsHeader">
@@ -25,18 +10,18 @@
           <div class="tabContainer">
            <div id="tabsHeader-1" class="tabContent">
             <div class="large_shadow_box"> 
-             <ul class="column four_column">
+             <ul class="column header_field">
               <li>
                <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_payroll_process_id select_popup clickable">
-                Process Id : </label><?php echo form::number_field_drs('hr_payroll_process_id'); ?>
-               <a name="show" class="show hr_payroll_process_id">	<img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+                Process Id</label><?php echo form::number_field_drs('hr_payroll_process_id'); ?>
+               <a name="show" href="form.php?class_name=hr_payroll_process&<?php echo "mode=$mode"; ?>" class="show document_id hr_payroll_process_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
               </li>
-              <li><label>Process Name : </label> <?php echo $f->text_field_d('proces_name'); ?> </li>
-              <li><label>Payroll Id : </label> <?php echo $f->text_field_dr('hr_payroll_id'); ?> </li>
-              <li><label>Schedule Id : </label> <?php echo $f->text_field_dr('hr_payroll_schedule_id'); ?> </li>
-              <li><label>Description : </label><?php echo $f->text_field_dl('description'); ?></li>
-              <li><label>Status : </label><?php echo $f->text_field_dr('status'); ?></li>
-              <li><label>Journal Header Id : </label><?php echo $f->text_field_dr('gl_journal_header_id'); ?></li>
+              <li><label>Process Name</label><?php echo $f->text_field_d('proces_name'); ?> </li>
+              <li><label>Payroll Id</label><?php echo $f->text_field_dr('hr_payroll_id'); ?> </li>
+              <li><label>Schedule Id</label><?php echo $f->text_field_dr('hr_payroll_schedule_id'); ?> </li>
+              <li><label>Description</label><?php echo $f->text_field_dl('description'); ?></li>
+              <li><label>Status </label><?php echo $f->text_field_dr('status'); ?></li>
+              <li><label>Journal Header Id</label><?php echo $f->text_field_dr('gl_journal_header_id'); ?></li>
              </ul>
             </div>
            </div>
@@ -131,16 +116,3 @@
         <?php echo $pagination->show_pagination(); ?>
        </div>
       </div>
-      <!--END OF FORM -->
-     </div>
-    </div>
-    <!--   end of structure-->
-   </div>
-   <div id="content_bottom"></div>
-  </div>
-  <div id="content_right_right"></div>
- </div>
-
-</div>
-
-<?php include_template('footer.inc') ?>

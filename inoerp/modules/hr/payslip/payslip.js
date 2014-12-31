@@ -25,15 +25,6 @@ setValFromSelectPage.prototype.setVal = function() {
 };
 
 $(document).ready(function() {
-//mandatory and field sequence
- var mandatoryCheck = new mandatoryFieldMain();
- mandatoryCheck.header_id = 'hr_payslip_header_id';
-// mandatoryCheck.mandatoryHeader();
- mandatoryCheck.form_area = 'form_header';
- mandatoryCheck.mandatory_fields = ["org_id", "item_number"];
- mandatoryCheck.mandatory_messages = ["First Select Org", "No Item Number"];
-// mandatoryCheck.mandatoryField();
-
  //setting the first line number
  if (!($('.lines_number:first').val())) {
   $('.lines_number:first').val('10');
@@ -53,17 +44,18 @@ $(document).ready(function() {
  });
  
 
-  //Get the bom_id on find button click
- $('a.show.period_name_id').click(function() {
-  var headerId = $('#employee_id').val();
-  $(this).attr('href', modepath() + 'employee_id=' + headerId + '&period_name_id=' + $('#period_name_id').val());
- });
+
+//  //Get the bom_id on find button click
+// $('a.show2.period_name_id').click(function() {
+//  var headerId = $('#employee_id').val();
+//  $(this).attr('href', modepath() + 'employee_id=' + headerId + '&period_name_id=' + $('#period_name_id').val());
+// });
  
-   //Get the bom_id on find button click
- $('a.show.hr_payslip_header_id').click(function() {
-  var headerId = $('#hr_payslip_header_id').val();
-  $(this).attr('href', modepath() + 'hr_payslip_header_id=' + headerId);
- });
+//   //Get the bom_id on find button click
+// $('a.show.hr_payslip_header_id').click(function() {
+//  var headerId = $('#hr_payslip_header_id').val();
+//  $(this).attr('href', modepath() + 'hr_payslip_header_id=' + headerId);
+// });
 
 
 });

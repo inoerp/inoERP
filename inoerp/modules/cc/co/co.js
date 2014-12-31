@@ -29,10 +29,6 @@ $(document).ready(function () {
  var mandatoryCheck = new mandatoryFieldMain();
  mandatoryCheck.header_id = 'cc_co_header_id';
 // mandatoryCheck.mandatoryHeader();
- mandatoryCheck.form_area = 'form_header';
- mandatoryCheck.mandatory_fields = ["org_id", "item_number"];
- mandatoryCheck.mandatory_messages = ["First Select Org", "No Item Number"];
-// mandatoryCheck.mandatoryField();
 
  //setting the first line number
  if (!($('.lines_number:first').val())) {
@@ -59,52 +55,6 @@ $(document).ready(function () {
   return false;
  });
 
- //Get the bom_id on find button click
- $('#form_header a.show.cc_co_header_id').click(function () {
-  var headerId = $('#cc_co_header_id').val();
-  $(this).attr('href', modepath() + 'cc_co_header_id=' + headerId);
- });
-
- //Get the bom_id on find button click
- $('#form_header a.show.hr_employee_id').click(function () {
-  var headerId = $('#hr_employee_id').val();
-  $(this).attr('href', modepath() + 'hr_employee_id=' + headerId);
- });
-
- //add a new row
-// onClick_add_new_row('tr.cc_co_line0', 'tbody.form_data_line_tbody2', 2);
-  //add new lines
- $("#content tbody.form_data_line_tbody2").on("click", ".add_row_img", function() {
-	var addNewRow = new add_new_rowMain();
-	addNewRow.trClass = 'cc_co_line';
-	addNewRow.tbodyClass = 'form_data_line_tbody2';
-	addNewRow.noOfTabs = 2;
-	addNewRow.removeDefault = true;
-	addNewRow.add_new_row();
- });
-
- $("#content tbody.form_data_line_tbody").on("click", ".add_row_img", function() {
-	var addNewRow = new add_new_rowMain();
-	addNewRow.trClass = 'process_flow_line';
-	addNewRow.tbodyClass = 'form_data_line_tbody';
-	addNewRow.noOfTabs = 1;
-	addNewRow.removeDefault = true;
-	addNewRow.add_new_row();
- });
-
-// addOrShow_lineDetails();
- addOrShow_lineDetails();
- onClick_addDetailLine(1);
-// $("#content").on("click", ".add_row_img", function() {
-//  var addNewRow = new add_new_rowMain();
-//  addNewRow.trClass = 'cc_co_line';
-//  addNewRow.tbodyClass = 'form_data_line_tbody';
-//  addNewRow.noOfTabs = 2;
-//  addNewRow.removeDefault = true;
-//  addNewRow.add_new_row();
-// });
-
-//get the attachement form
  deleteData('form.php?class_name=cc_co_header&line_class_name=cc_co_line');
 
  $('#template_id').on('change', function () {

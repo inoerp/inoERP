@@ -1,19 +1,5 @@
 <script src="<?php echo HOME_URL; ?>includes/js/report.js"></script>
 <link href="<?php echo HOME_URL; ?>includes/ecss/getsvgimage.css" media="all" rel="stylesheet" type="text/css" />
-<div id="all_contents">
- <div id="content_left"></div>
- <div id="content_right">
-  <div id="content_right_left">
-   <div id="content_top"></div>
-   <div id="content">
-    <div id="content_left_top"></div>
-    <div id="content_right_top"></div>
-    <div id="structure">
-     <div id="userDashBoard">
-      <!--    START OF FORM HEADER-->
-      <div class="error"></div><div id="loading"></div>
-      <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
-      <!--    End of place for showing error messages-->
       <div id ="form_header">
        <div id="tabsHeader">
         <form action="" method="post" id="user_header" name="user_header"><span class="heading">User Dashboard 
@@ -105,22 +91,3 @@
         </form>
        </div>
       </div>    
-     </div>
-    </div>
-    <!--   end of structure-->
-    <div id="content_left_bottom"></div>
-    <div id="content_right_bottom"></div>
-   </div>
-   <div id="content_bottom"></div>
-  </div>
-  <div id="content_right_right"></div>
- </div>
-
-</div>
-
-<?php include_template('footer.inc') ?>
-
-<!--<script type="text/javascript">
- $(document).ready(function() {
-  treeView();
- });</script>-->

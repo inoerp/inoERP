@@ -108,6 +108,15 @@ class gl_currency_conversion extends dbObject {
   return $ol->findBy_parentId($option_header->option_header_id, 'option_line_value');
  }
 
+ public static function find_by_conversion_type($conversion_type) {
+  $sql = "SELECT * FROM "
+   . self::$table_name
+   . " where currency_conversion_type= '{$conversion_type}'";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ 
+ }
+
  public static function profile_gl_currency_conversion_type() {
   $line_data_array = [];
   $line_data_array['line_key'] = 'option_line_code';

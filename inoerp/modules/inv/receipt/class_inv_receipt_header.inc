@@ -1,5 +1,18 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * inv_receipt_header
+ * Contains all the inv_receipt_header information, such as - receipt_number, transaction_type_id, org_id,  receipt_date, etc.
+ * 
+ */
 class inv_receipt_header extends dbObject {
 
  public static $table_name = "inv_receipt_header";
@@ -10,6 +23,18 @@ class inv_receipt_header extends dbObject {
  public static $module = "inv"; //same as gl_journal_source
  public static $gl_journal_category = "INV_RECEIVING";
  public static $js_fileName = 'modules/inv/receipt/extra/extra_inv_receipt.js';
+  public static $system_info = [
+  'name' => 'INV Receipt',
+  'number' => '2112',
+  'description' => 'Inventory Receipt',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'dependent_class' => array('inv_receipt_line'),
+  'primary_entity_cb' => '',
+  'module_name' => 'inv',
+  'weight' => 12
+ ];
  public $field_a = [
   "inv_receipt_header_id",
   "receipt_number",

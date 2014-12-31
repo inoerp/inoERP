@@ -25,43 +25,76 @@ setValFromSelectPage.prototype.setVal = function() {
 
  localStorage.removeItem("contact_field_class");
  };
+ 
+//  function orgValues(orgType) {
+//  var org_type = orgType;
+//  $('#loading').show();
+//  $.ajax({
+//   url: 'modules/org/json_org.php',
+//   type: 'get',
+//   dataType: 'json',
+//   data: {
+//    org_type: org_type
+//   },
+//   success: function(result) {
+//    var items = [];
+//    var option_stmt = '<option value=""></option>';
+//    $.each(result, function(key, val) {
+//     option_stmt += '<option value="' + val.org_id + '">' + val.org + '</option>';
+//     items.push("<li id='" + key + "'>" + val + "</li>");
+//    });
+//    var org_type_id = '#' + org_type + '_id';
+//    $(org_type_id).removeAttr('disabled');
+//    $(org_type_id).empty().append(option_stmt);
+//   },
+//   complete: function() {
+//    $('.show_loading_small').hide();
+//   },
+//   beforeSend: function() {
+//    $('.show_loading_small').show();
+//   },
+//   error: function(request, errorType, errorMessage) {
+//    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+//   }
+//  });
+// }
+// 
+// 
+ function orgValues(orgType) {
+ var org_type = orgType;
+ $('#loading').show();
+ $.ajax({
+  url: 'modules/org/json_org.php',
+  type: 'get',
+  dataType: 'json',
+  context: this,
+  data: {
+   org_type: org_type
+  },
+  success: function(result) {
+   var items = [];
+   $.each(result, function(key, val) {
+    alert(key);
+   });
+  },
+  complete: function() {
+   $('.show_loading_small').hide();
+  },
+  beforeSend: function() {
+   $('.show_loading_small').show();
+  },
+  error: function(request, errorType, errorMessage) {
+   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+  }
+ });
+}
+
+
 
 $(document).ready(function() {
  //controlling org type values - what can be entered
  $("#enterprise_org_id, #legal_org_id,#business_org_id").prop('readonly', true);
 
- function orgValues(orgType) {
-  var org_type = orgType;
-  $('#loading').show();
-  $.ajax({
-   url: 'modules/org/json_org.php',
-   type: 'get',
-   dataType: 'json',
-   data: {
-    org_type: org_type
-   },
-   success: function(result) {
-    var items = [];
-    var option_stmt = '<option value=""></option>';
-    $.each(result, function(key, val) {
-     option_stmt += '<option value="' + val.org_id + '">' + val.org + '</option>';
-     items.push("<li id='" + key + "'>" + val + "</li>");
-    });
-    var org_type_id = '#' + org_type + '_id';
-    $(org_type_id).removeAttr('disabled');
-    $(org_type_id).empty().append(option_stmt);
-   },
-   complete: function() {
-    $('.show_loading_small').hide();
-   },
-   beforeSend: function() {
-    $('.show_loading_small').show();
-   },
-   error: function(request, errorType, errorMessage) {
-    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
-   }
-  });
- }
 
  $("#content").on('change', '#type', function() {
   var selectedVal = $(this).val();
@@ -112,66 +145,9 @@ $(document).ready(function() {
    'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- //Get the org_id on find button click
- $('a.show.org_id').click(function(e) {
-  var org_id = $('#org_id').val();
-  $(this).attr('href', modepath() + 'org_id=' + org_id);
- });
-
-
-// //context menu
-// var classContextMenu = new contextMenuMain();
-// classContextMenu.docHedaderId = 'org_id';
-// classContextMenu.btn1DivId = 'org_id';
-// classContextMenu.contextMenu();
-//
-//
-//
-// //save class
-// var classSave = new saveMainClass();
-// classSave.json_url = 'form.php?class_name=org';
-// classSave.form_header_id = 'org';
-// classSave.primary_column_id = 'org_id';
-// classSave.single_line = false;
-// classSave.savingOnlyHeader = true;
-// classSave.enable_select = true;
-// classSave.headerClassName = 'org';
-// classSave.saveMain();
 
 deleteReferences();
 
-});
-
-
-function orgValues(orgType) {
- var org_type = orgType;
- $('#loading').show();
- $.ajax({
-  url: 'modules/org/json_org.php',
-  type: 'get',
-  dataType: 'json',
-  context: this,
-  data: {
-   org_type: org_type
-  },
-  success: function(result) {
-   alert('in result');
-   var items = [];
-   $.each(result, function(key, val) {
-    alert(key);
-   });
-  },
-  complete: function() {
-   $('.show_loading_small').hide();
-  },
-  beforeSend: function() {
-   $('.show_loading_small').show();
-  },
-  error: function(request, errorType, errorMessage) {
-   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
-  }
- });
-}
 
 $("#content").on('change', '#type', function() {
  var selectedVal = $(this).val();
@@ -181,3 +157,7 @@ $("#content").on('change', '#type', function() {
   orgValues('enterprise');
  }
 });
+
+});
+
+

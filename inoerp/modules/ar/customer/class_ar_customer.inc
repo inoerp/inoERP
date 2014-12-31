@@ -1,5 +1,22 @@
 <?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
+/**
+ * Customer
+ * Customer is an entity that buys goods or services
+ * Customer is a site level(Global) entitties with varous locations represented by Customer sites
+ * A Customer BU association represents a spefic relationship between a Customer and a business unit
+ * A BU can only intract (create SO, invoice) with a Customer only after a Customer-BU relationship is cretaed between the
+ * two entitites.
+ *
+ */
 class ar_customer extends dbObject {
 
  public static $table_name = 'ar_customer';

@@ -6,6 +6,18 @@ class mdm_tax_code extends dbObject {
  public static $module = "mdm";
  public static $primary_column = "mdm_tax_code_id";
  public static $key_column = "tax_code";
+   public static $system_info = [
+  'name' => 'Tax Code',
+  'number' => '9404',
+  'description' => 'Define and mainten tax codes',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'primary_entity_cb' => '',
+  'module_name' => 'mdm',
+  'weight' => 4
+ ];
  public static $dr_cr_a = [
 		 'DR' => 'Dr',
 		 'CR' => 'Cr'
@@ -99,6 +111,7 @@ class mdm_tax_code extends dbObject {
  public $printed_tax_name;
  public $tax_regime;
  public $tax_jurisdiction;
+ public $in_out;
  public $offset_tax_code;
  public $allow_adhoc_rate_cb;
  public $allow_tax_exemptions_cb;
@@ -128,6 +141,16 @@ class mdm_tax_code extends dbObject {
 	$param_a = ['year'];
 	$value_a = ['year' => $year];
 	$result = $db->findBy_sql($sql, $param_a, $value_a);
+	return $result;
+ }
+ 
+   public static function find_all_by_buOrgId($org_id) {
+	$sql = " 
+	 SELECT *
+	 FROM mdm_tax_code
+	 WHERE org_id = '{$org_id}'
+	";
+	$result = self::find_by_sql($sql);
 	return $result;
  }
 

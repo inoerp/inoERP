@@ -1,8 +1,32 @@
 <?php
-
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+/**
+ * 
+ *
+ */
  class new_content_type extends content_type {
 
   public static $table_name = "";
+   public static $system_info = [
+  'name' => 'New Content Type',
+  'number' => '10031',
+  'description' => 'New Content Type',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'dependent_class' => array('block_content'),
+  'primary_entity_cb' => '',
+  'module_name' => 'extn',
+  'weight' => 31
+ ];
+   
   public static $Field_array = [
    'field_label',
    'field_position',

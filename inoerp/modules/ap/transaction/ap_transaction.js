@@ -153,17 +153,7 @@ $(document).ready(function() {
  });
 
 
- //Get the ap_transaction_header_id on refresh button click
- $('a.show.ap_transaction_header_id').click(function() {
-  var ap_transaction_header_id = $('#ap_transaction_header_id').val();
-  $(this).attr('href', modepath() + 'ap_transaction_header_id=' + ap_transaction_header_id);
-
- });
-
-//add or show linw details
- addOrShow_lineDetails('tr.ap_transaction_line0');
-onClick_addDetailLine(2);
-
+ 
  //function to coply line to details
  function copy_line_to_details() {
   $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function() {
@@ -177,16 +167,6 @@ onClick_addDetailLine(2);
 
  copy_line_to_details();
 
- $("#content").on("click", ".add_row_img", function() {
-//	add_new_row('tr.ap_transaction_line0', 'tbody.form_data_line_tbody', 3);
-  var addNewRow = new add_new_rowMain();
-  addNewRow.trClass = 'ap_transaction_line';
-  addNewRow.tbodyClass = 'form_data_line_tbody';
-  addNewRow.noOfTabs = 3;
-  addNewRow.removeDefault = true;
-  addNewRow.add_new_row();
-  $(".tabsDetail").tabs();
- });
 
  
 

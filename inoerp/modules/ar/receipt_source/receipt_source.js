@@ -44,15 +44,12 @@ $(document).ready(function() {
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- $(".mdm_bank_account_id.select_popup").on("click", function() {
-	void window.open('select.php?class_name=mdm_bank_account_v', '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
 
- //Get the ar_receipt_source_id on find button click
- $('a.show.ar_receipt_source_id').click(function() {
-	var ar_receipt_source_id = $('#ar_receipt_source_id').val();
-	$(this).attr('href', modepath() + 'ar_receipt_source_id=' + ar_receipt_source_id);
- });
+//
+// //Get the ar_receipt_source_id on find button click
+// $('a.show.ar_receipt_source_id').click(function() {
+//	var ar_receipt_source_id = $('#ar_receipt_source_id').val();
+//	$(this).attr('href', modepath() + 'ar_receipt_source_id=' + ar_receipt_source_id);
+// });
 
 });

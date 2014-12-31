@@ -2,7 +2,6 @@
 /**
  * inoERP 
  *
- * Version 0.1.1
  *
  * @copyright 2014 Nishit R. Das
  * @license   https://www.mozilla.org/MPL/2.0/
@@ -26,7 +25,7 @@ class cst_item_cost_header extends dbObject {
  public static $gl_journal_category = "CST_ADJUSTMENT";
   public static $system_info = [
   'name' => 'Cost',
-  'number' => '2501',
+  'number' => '2701',
   'description' => 'Product Cost',
   'version' => '0.1.1',
   'db_version' => '1001',

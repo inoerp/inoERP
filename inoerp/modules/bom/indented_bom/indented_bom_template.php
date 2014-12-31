@@ -1,17 +1,4 @@
-<div id="all_contents">
- <div id="content_left"></div>
- <div id="content_right">
-	<div id="content_right_left">
-	 <div id="content_top"></div>
-	 <div id="content">
-		<div id="structure">
-		 <div id="indentedBom_divId">
-			<!--    START OF FORM HEADER-->
-			<div class="error"></div><div id="loading"></div>
-			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
-			<!--    End of place for showing error messages-->
-
-			<div id ="form_header">
+			<div id ="form_header"><span class="heading">Indented BOM </span>
 			 <div id="tabsHeader">
 				<ul class="tabMain">
 				 <li><a href="#tabsHeader-1">Basic Info</a></li>
@@ -23,12 +10,11 @@
 					<div class="large_shadow_box"> 
 					 <ul class="column four_column">
 						<li><label>Org Name(1) : </label>
-						 <?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id'); ?>
+						 <?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id','','',1); ?>
 						</li>
 						<li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_header_id select_popup clickable">
-							BOM Id : </label>
-						 <?php echo form::text_field_d('bom_header_id') ?><a name="show" href="bom.php?bom_header_id=" class="show bom_header_id">
-							<img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+							BOM Id : </label><?php echo form::text_field_d('bom_header_id') ?>
+             <a name="show" href="form.php?class_name=indented_bom&<?php echo "mode=$mode"; ?>" class="show document_id bom_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						</li>
 						<li><label>Item Id : </label>
 						 <?php form::text_field_drm('item_id_m'); ?>
@@ -214,61 +200,13 @@
 			 </div>
 			</div>
 
-			<!--END OF FORM HEADER-->
-		 </div>
-		</div>
-		<!--   end of structure-->
- 	 </div>
- 	 <div id="content_bottom"></div>
- 	</div>
- 	<div id="content_right_right"></div>
- </div>
-
+<div id="js_data">
+ <ul id="js_contextMenu_data">
+  <li class="docHedaderId" data-docHedaderId="bom_header_id" ></li>
+  <li class="docLineId" data-docLineId="bom_line_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="bom_header" ></li>
+  <li class="btn2DivId" data-btn2DivId="form_line" ></li>
+  <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>
+  <li class="noOfTabbs" data-noOfTabbs="3" ></li>
+ </ul>
 </div>
-
-<script type="text/javascript">
- function setValFromSelectPage(bom_header_id, item_id_m, item_number, item_description, uom_id) {
-	this.bom_header_id = bom_header_id;
-	this.item_id_m = item_id_m;
-	this.item_number = item_number;
-	this.item_description = item_description;
-	this.uom_id = uom_id;
- }
-
- setValFromSelectPage.prototype.setVal = function() {
-	var bom_header_id = this.bom_header_id;
-	$("#bom_header_id").val(bom_header_id);
-	var rowClass = '.' + localStorage.getItem("row_class");
-	rowClass = rowClass.replace(/\s+/g, '.');
-
-	var item_obj = [{id: 'item_id_m', data: this.item_id_m},
-	 {id: 'item_number', data: this.item_number},
-	 {id: 'item_description', data: this.item_description},
-	 {id: 'uom', data: this.uom_id}
-	];
-
-	$(item_obj).each(function(i, value) {
-	 if (value.data) {
-		var fieldClass = '.' + value.id;
-		$('#content').find(rowClass).find(fieldClass).val(value.data);
-	 }
-	});
-
-	localStorage.removeItem("row_class");
-	localStorage.removeItem("field_class");
- };
- $(document).ready(function() {
-	//Popup for selecting bom
-	$(".bom_header_id.select_popup").click(function() {
-	 void window.open('select.php?class_name=bom_all_v', '_blank',
-					 'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-	 return false;
-	});
-
-	//Get the bom_id on find button click
-	$('#form_header a.show.bom_header_id').click(function() {
-	 var headerId = $('#bom_header_id').val();
-	 $(this).attr('href', modepath() + 'bom_header_id=' + headerId);
-	});
- });</script>
-<?php include_template('footer.inc') ?>
