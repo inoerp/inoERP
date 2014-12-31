@@ -1,6 +1,4 @@
-<?php //ob_start();  ?>
 <?php
-
  require_once (dirname(__FILE__) . '/../../define_const.inc');
  defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 

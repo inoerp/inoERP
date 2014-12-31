@@ -1,44 +1,25 @@
+html { 
+ height: 100%; 
+ min-width: 100%; 
+}
+
+body {  
+ height: 100%; 
+ margin-top : 0px;
+ padding: 0px; 
+ border: 0px;
+ font-family: 'Trebuchet MS', 'Liberation Sans', 'DejaVu Sans', sans-serif;
+font-size: 14px;
+    line-height: 26px;
+ background: #ccc;
+ color : #59474E;
+ overflow :auto;
+}
+
 #structure{
-    border: 5px solid #ccc;
-    width: 900px;
-}
-
-.button{
-    display: inline-block;
-     margin: 10px;
-    font-size: 15px;
-    line-height : 20px;
-}
-#installation_header{
-    display: block;
-background-color: rgba(105, 149, 144, 0.23);
-padding: 0px 2px 2px 5px;
-border: 1px solid #CCC;
-margin-bottom: 10px;
-width: 892px;
-}
-
- #installation_header h1, #installation_header h2{
-    display: inline-block;
-}
-
-ul.list-unstyled{
-    display: block;
-    width: 100%;
-}
-
-ul.list-unstyled li{
-    display: block;
-    line-height : 30px;
-    font-size :14px;
-    margin : 10px 0;
-    padding-left : 10px;
-}
-
-ul.list-unstyled li.proceed{
-background: none repeat scroll 0% 0% rgba(144, 238, 144, 0.35);
-}
-
-ul.list-unstyled li.error{
-background: pink;
+  display: block;
+  margin: 10px 200px;
+  background: rgba(250,250,250,0.7);
+  padding: 10px;
+  
 }
