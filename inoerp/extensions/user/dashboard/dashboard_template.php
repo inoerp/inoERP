@@ -3,7 +3,7 @@
       <div id ="form_header">
        <div id="tabsHeader">
         <form action="" method="post" id="user_header" name="user_header"><span class="heading">User Dashboard 
-         <a href="<?php echo HOME_URL ?>form.php?class_name=user_dashboard_config&mode=9&user_id=<?php echo $_GET['user_id'] ?>">
+         <a href="<?php echo HOME_URL ?>form.php?class_name=user_dashboard_config&mode=9&user_id=<?php echo $user_id ?>">
           <img src="<?php echo THEME_URL ; ?>/images/config_16.png" alt=" update favourite" title='Confiure Dashboard'/>
                 </a>
          </span>
