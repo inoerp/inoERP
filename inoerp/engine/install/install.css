@@ -23,3 +23,22 @@ font-size: 14px;
   padding: 10px;
   
 }
+
+ul{
+  list-style-type: none;
+}
+
+li{
+  margin: 5px;
+  padding: 2px;
+}
+
+li.alert-success{
+  background: none repeat scroll 0% 0% rgba(158, 210, 158, 0.77);
+}
+
+li.alert-danger{
+  background: none repeat scroll 0% 0% rgba(173, 80, 80, 0.44);
+}
+
+
