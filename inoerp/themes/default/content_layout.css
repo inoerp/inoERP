@@ -417,7 +417,7 @@ span.heading{
  font-weight : bold;
  padding : 3px 10px;
  display: inline-block;
-
+font-size: 1.2em;
 }
 
 /*ul & li*/

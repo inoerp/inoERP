@@ -12,6 +12,11 @@
   ?>
  </div>
  <ul id="css_files" class="none"><li>includes/ecss/search.css</li></ul>
+ <ul id="js_files" class="none"><?php
+   If (!empty($action_class_i) && property_exists($action_class_i, 'js_fileName')) {
+    echo '<li>' . $action_class_i::$js_fileName . '</li>';
+   }
+   ?></ul>
  <div id="structure">
   <div id="multi_select">
    <div id ="form_line" class="multi_select_line">
@@ -162,7 +167,7 @@
          </tbody>
         </table>
        </div>
-      <?php } ?>
+<?php } ?>
 
      </div>
 

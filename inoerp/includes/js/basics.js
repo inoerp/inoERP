@@ -2104,6 +2104,15 @@ function getMultiSelectResult(options) {
   $('#structure').empty().append(newContent);
   $.getScript("includes/js/reload.js");
   $.getScript("includes/js/multi_select.js");
+  $(result).find('#js_files').find('li').each(function () {
+   $.getScript($(this).html());
+  });
+  $(result).find('ul#css_files').find('li').each(function () {
+   var filePath = $(this).html();
+   if (!$("link[href='" + filePath + "']").length) {
+    $('<link href="' + filePath + '" rel="stylesheet">').appendTo("head");
+   }
+  });
  }).fail(function () {
   alert("Search Failed");
  });

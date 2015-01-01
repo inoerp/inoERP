@@ -104,7 +104,7 @@ $(document).ready(function() {
   }
  });
 
- $(".select_supplier_name").on("change", function() {
+ $('body').off("blur", '.select_supplier_name').on("blur", '.select_supplier_name', function() {
   var trClass = '.' + $(this).closest('tr').prop('class');
   function afterFunction(result) {
    var new_name = 'select_supplier_site_id[]';
@@ -114,12 +114,12 @@ $(document).ready(function() {
    $(trClass).find('.supplier_site_id').first().prop('name', new_name);
    $(trClass).find('.supplier_site_id').first().addClass('supplier_site_name');
   }
-  if (($(this).closest('tr').find('.supplier_id').val()) && ($(this).closest('tr').find('.bu_org_id').val())) {
-   var bu_org_id = $(this).closest('tr').find('.bu_org_id').val();
-   var supplier_id = $(this).closest('tr').find('.supplier_id').val();
-   getSupplierDetails('modules/ap/supplier/json_supplier.php', bu_org_id, supplier_id, afterFunction);
-
-  }
+//  if (($(this).closest('tr').find('.supplier_id').val()) && ($(this).closest('tr').find('.bu_org_id').val())) {
+//   var bu_org_id = $(this).closest('tr').find('.bu_org_id').val();
+//   var supplier_id = $(this).closest('tr').find('.supplier_id').val();
+//   getSupplierDetails('modules/ap/supplier/json_supplier.php', bu_org_id, supplier_id, afterFunction);
+//
+//  }
  });
 
  $('#content').on('mouseenter', '.select_supplier_name', function() {
@@ -128,39 +128,42 @@ $(document).ready(function() {
   $(this).removeClass('search_data');
  });
 
- $('#content').on('change', '.supplier_site_id', function() {
+ $('#content').off('change', '.supplier_site_id').on('change', '.supplier_site_id', function() {
   $(this).closest('tr').find('.supplier_site_id').val($(this).val());
  });
 
 //get supplier details
- $(".select_supplier_name, #supplier_name, #supplier_number").on("change", function() {
-  if (($(this).closest('tr').find('.supplier_id').val()) && ($(this).closest('tr').find('.bu_org_id').val())) {
-   var bu_org_id = $(this).closest('tr').find('.bu_org_id').val();
-   getSupplierDetails('modules/ap/supplier/json_supplier.php', bu_org_id);
-  }
- });
+// $('body').off("blur", '.select_supplier_name, #supplier_name, #supplier_number')
+//         .on("blur", '.select_supplier_name, #supplier_name, #supplier_number' ,function() {
+//  if (($(this).closest('tr').find('.supplier_id').val()) && ($(this).closest('tr').find('.bu_org_id').val())) {
+//   var bu_org_id = $(this).closest('tr').find('.bu_org_id').val();
+//   getSupplierDetails('modules/ap/supplier/json_supplier.php', bu_org_id);
+//  }
+// });
 
- $("#content").on("change", "#supplier_site_id", function() {
-  var supplier_site_id = $("#supplier_site_id").val();
-  if (supplier_site_id) {
-   getSupplierSiteDetails('modules/ap/supplier/json_supplier.php', supplier_site_id);
-  }
- });
-
- $("#content").on("focusout", '.ship_to_inventory', function() {
-  var ship_to_inventory = $(this).val();
-  var rowTrClass = $(this).closest("tr").attr("class");
-  var classValue = "tr." + rowTrClass;
-  var classValue1 = classValue.replace(/ /g, '.');
-  getAllInventoryAccounts('modules/org/inventory/json_inventory.php', ship_to_inventory, classValue1);
- });
+// $("#content").off("change", "#supplier_site_id")
+//         .on("change", "#supplier_site_id", function() {
+//  var supplier_site_id = $("#supplier_site_id").val();
+//  if (supplier_site_id) {
+//   getSupplierSiteDetails('modules/ap/supplier/json_supplier.php', supplier_site_id);
+//  }
+// });
+//
+// $("#content").off("focusout", '.ship_to_inventory')
+//         .on("focusout", '.ship_to_inventory', function() {
+//  var ship_to_inventory = $(this).val();
+//  var rowTrClass = $(this).closest("tr").attr("class");
+//  var classValue = "tr." + rowTrClass;
+//  var classValue1 = classValue.replace(/ /g, '.');
+//  getAllInventoryAccounts('modules/org/inventory/json_inventory.php', ship_to_inventory, classValue1);
+// });
 
 
 //item number auto complete and populate the other details
 // itemNumber_autoComplete('modules/inv/item/item_search.php');
 
 //selecting supplier
- $(".select_supplier_name").on("click", function() {
+ $('body').off("click", '.select_supplier_name').on("click", '.select_supplier_name',function() {
   var rowClass = $(this).closest('tr').prop('class');
   localStorage.setItem("row_class", rowClass);
   void window.open('select.php?class_name=supplier_all_v', '_blank',
@@ -181,22 +184,6 @@ $(document).ready(function() {
 
  deleteData('form.php?class_name=po_requisition_interface&line_class_name=po_requisition_interface');
 
-// $('#content').on('click', '.line_id_cb', function() {
-//  if ($(this).is(':checked')) {
-//   var supplier_id = $('#content').find('.line_id_cb:checked').closest('tr').find('.supplier_id').first().val();
-//   var supplier_site_id = $('#content').find('.line_id_cb:checked').closest('tr').find('.supplier_site_id').first().val();
-//   $('#content').find('.line_id_cb:checked').each(function() {
-//    
-//    if (supplier_id && $(this).closest('tr').find('.supplier_id').val() != supplier_id) {
-//     alert('You can convert requisitions from one supplier at a time ');
-//     $(this).attr('checked', false);
-//    } else if (supplier_site_id && $(this).closest('tr').find('.supplier_site_id').val() != supplier_site_id) {
-//     alert('You can convert requisitions from one supplier site at a time ');
-//     $(this).attr('checked', false);
-//    }
-//   });
-//  }
-// });
 
 
 });
