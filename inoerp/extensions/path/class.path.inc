@@ -338,7 +338,9 @@ class path extends dbObject {
    $allPaths .= '</ul>';
    $allPaths .= '</li>';
   }
-  if (!empty($allowed_path_ids) && $allowed_path_ids[0] != '11') {
+  
+//  if (!empty($allowed_path_ids) && is_array($allowed_path_ids) && $allowed_path_ids[0] != '11') {
+  if (!empty($allowed_path_ids) && is_array($allowed_path_ids)) {
    $allPaths .= '<li class="parent_menu expandable">' . '<a href="' . HOME_URL . '">MISC</a>';
    $allPaths .= '<ul class="child_menu">';
    foreach ($allowed_path_ids as $path_key => $path_id) {

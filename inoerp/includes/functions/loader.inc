@@ -407,6 +407,7 @@ if (($continue) && (!empty($class_names))) {
  }
  /* -------------------------------------START OF SAVE---------------------------------------------------- */
 } else {
+
  $continue = false;
  return;
 }
@@ -543,5 +544,6 @@ if ($continue && !empty($form_page)) {
 } else {
  return;
 }
+
 
 ?>

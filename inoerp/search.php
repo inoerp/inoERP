@@ -83,14 +83,15 @@ if (!empty($class_names)) {
  }
  $search_form = $s->search_form($$class);
 
- if ($continue) {
-  include_once(THEME_DIR . '/header.inc');
- } else {
-  $continue = false;
-  echo "<h2>Could n't call the header</h2>";
-  return;
- }
- require_once(INC_BASICS . DS . "search_page.inc");
+// if ($continue) {
+//  include_once(THEME_DIR . '/header.inc');
+// } else {
+//  $continue = false;
+//  echo "<h2>Could n't call the header</h2>";
+//  return;
+// }
+// require_once(INC_BASICS . DS . "search_page.inc");
+ include_once(THEME_DIR . '/search_page.inc');
 }
 ?>
 

@@ -155,7 +155,7 @@ class comment extends dbObject {
  }
 
  public function comment_recent_comments_block($param) {
-  $numbers = empty($param->numbers) ? 10 : $param->numbers;
+  $numbers = empty($param->numbers) ? 5 : $param->numbers;
   $start_from = empty($param->start_from) ? 1 : $param->start_from;
   $sql = " SELECT comment.comment_id, comment.subject,
 	         content.content_id, content.content_type_id
@@ -175,7 +175,7 @@ class comment extends dbObject {
     $comment_string .= '<li class="comment_subject">';
     $comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&' . 'content_id=' . $records->content_id .
      '&content_type_id=' . $records->content_type_id . '#comment_id_' . $records->comment_id . '">';
-    $comment_string .= $records->subject . '</a>';
+    $comment_string .= substr($records->subject, 1, 40) . '</a>';
     $comment_string .= '</li>';
    }
    $comment_string .= '</ul>';

@@ -7,7 +7,7 @@ set_time_limit(300);
  */
 $hideContextMenu = true;
 $hideBlock = true;
-$show_block = 0;
+$show_block = 1;
 if ((!empty($_GET['show_block'])) && (($_GET['show_block'][0] == 1) || ($_GET['show_block'] == 1))) {
  $hideBlock = false;
  $show_block = 1;
@@ -135,8 +135,7 @@ if ($continue) {
  } else if (!empty($$class)) {
   $template_file_names = ['includes/basics/multi_select_page.inc'];
  }
- 
- include_once(THEME_DIR . '/main_template.inc');
+  include_once(THEME_DIR . '/main_template.inc');
 } else {
  $continue = false;
  echo "<h2>Could n't call the header</h2>";

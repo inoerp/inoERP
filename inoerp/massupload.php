@@ -59,14 +59,22 @@ if (!empty($class_names)) {
 
  $dl = new downloads();
  $dl->setProperty('_downloaded_data', $dataArray);
-  if ($continue) {
-  include_once(THEME_DIR . '/header.inc');
- } else {
-  $continue = false;
-  echo "<h2>Could n't call the header</h2>";
-  return;
+ 
+ 
+ if ($continue) {
+ if (!empty($$class) && property_exists($$class, 'mass_upload_template_path')) {
+  $template_file_names = $class::$mass_upload_template_path;
+ } else if (!empty($$class)) {
+  $template_file_names = ['extensions/file/massupload_template.php'];
  }
- require_once('extensions/file/massupload_template.php' );
+  include_once(THEME_DIR . '/main_template.inc');
+} else {
+ $continue = false;
+ echo "<h2>Could n't call the header</h2>";
+ return;
+}
+ 
+ 
 }
 ?>
 <script type="text/javascript">

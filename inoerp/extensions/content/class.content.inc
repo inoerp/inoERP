@@ -391,7 +391,7 @@ AND content.content_id = category_reference.reference_id  ";
     $content_string .= '</span>';
     $content_string .= '</div>';
     $content_string .= '<div class="content_summary">';
-    $content_string .= substr($records->content_summary, 0, $this->_summary_noof_char);
+    $content_string .= ino_strip_html($records->content_summary,  $this->_summary_noof_char);
     $content_string .= '</div>';
     $content_string .= '</li>';
    }

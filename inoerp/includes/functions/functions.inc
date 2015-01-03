@@ -304,15 +304,20 @@ function thisPage_url() {
  return $current_path;
 }
 
-function select_per_page() {
+function select_per_page($per_page = '10') {
  $link = $_SERVER['PHP_SELF'] . '?';
  $content_string = '<div class="noOfcontents">';
  $content_string .= 'Show<select name="per_page" class="per_page">';
- $content_string .= '<option value="3"> 3 </option>';
- $content_string .= '<option value="5"> 5 </option>';
- $content_string .= '<option value="10"> 10 </option>';
- $content_string .= '<option value="20"> 20 </option>';
- $content_string .= '<option value="50"> 50 </option>';
+ $content_string .= '<option value="3" ';
+ $content_string .= ( $per_page == 3) ? ' selected > 3 </option>' : ' > 3 </option>';
+ $content_string .= '<option value="5" ';
+ $content_string .= ( $per_page == 5) ? ' selected > 5 </option>' : '> 5 </option>';
+ $content_string .= '<option value="10" ';
+ $content_string .= ( $per_page == 10) ? ' selected > 10 </option>' :  '> 10 </option>';
+ $content_string .= '<option value="20" ';
+ $content_string .= ( $per_page == 20) ? ' selected > 20 </option>' :  '> 20 </option>';
+ $content_string .= '<option value="50" ';
+ $content_string .= ( $per_page == 50) ? ' selected > 50 </option>' :  '> 50 </option>';
  $content_string .= '</select>';
  $content_string .= '<a name="content_per_page" '
   . 'href="' . $link . '" class="content_per_page button">Per Page</a>';
@@ -821,10 +826,9 @@ function search_payroll_schedule() {
 
 function search_payroll_process() {
  global $f;
- $stmt = $f->select_field_from_object('hr_payroll_process_id', hr_payroll_process::find_payroll_available_for_cancelAndConfirmation(), 'hr_payroll_process_id', array('proces_name','hr_payroll_process_id'), '', 'hr_payroll_process_id');
+ $stmt = $f->select_field_from_object('hr_payroll_process_id', hr_payroll_process::find_payroll_available_for_cancelAndConfirmation(), 'hr_payroll_process_id', array('proces_name', 'hr_payroll_process_id'), '', 'hr_payroll_process_id');
  return $stmt;
 }
-
 
 function search_forecast_group() {
  global $f;
@@ -1187,6 +1191,96 @@ function searching_tips() {
  $stmt .= '<li>5. Use one < field & one > field for searching all values in between two values. </li>';
  $stmt .= '</ul>';
  return $stmt;
+}
+
+function ino_strip_html($text, $max_length) {
+ $tags = array();
+ $result = "";
+
+ $is_open = false;
+ $grab_open = false;
+ $is_close = false;
+ $in_double_quotes = false;
+ $in_single_quotes = false;
+ $tag = "";
+
+ $i = 0;
+ $stripped = 0;
+
+ $stripped_text = strip_tags($text);
+
+ while ($i < strlen($text) && $stripped < strlen($stripped_text) && $stripped < $max_length) {
+  $symbol = $text{$i};
+  $result .= $symbol;
+
+  switch ($symbol) {
+   case '<':
+    $is_open = true;
+    $grab_open = true;
+    break;
+
+   case '"':
+    if ($in_double_quotes)
+     $in_double_quotes = false;
+    else
+     $in_double_quotes = true;
+
+    break;
+
+   case "'":
+    if ($in_single_quotes)
+     $in_single_quotes = false;
+    else
+     $in_single_quotes = true;
+
+    break;
+
+   case '/':
+    if ($is_open && !$in_double_quotes && !$in_single_quotes) {
+     $is_close = true;
+     $is_open = false;
+     $grab_open = false;
+    }
+
+    break;
+
+   case ' ':
+    if ($is_open)
+     $grab_open = false;
+    else
+     $stripped++;
+
+    break;
+
+   case '>':
+    if ($is_open) {
+     $is_open = false;
+     $grab_open = false;
+     array_push($tags, $tag);
+     $tag = "";
+    } else if ($is_close) {
+     $is_close = false;
+     array_pop($tags);
+     $tag = "";
+    }
+
+    break;
+
+   default:
+    if ($grab_open || $is_close)
+     $tag .= $symbol;
+
+    if (!$is_open && !$is_close)
+     $stripped++;
+  }
+
+  $i++;
+ }
+
+ while ($tags)
+  $result .= "</" . array_pop($tags) . ">";
+
+ return $result;
 }
 
 ?>

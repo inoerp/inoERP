@@ -131,43 +131,43 @@ enableLineForSaveAfterFieldChange();
  });
 
  //add new columns
- $('#content').on('change', '.new_column:first', function() {
-  if ($(this).val()) {
-   $(this).clone().insertBefore($(this));
-  }
- });
- //add new order by
- $('#content').on('change', '.search_order_by', function() {
-  if ($(this).val() !== 'remove') {
-   $(this).closest('li').clone().insertAfter($(this).closest('li'));
-  } else {
-   $(this).closest('li').remove();
-  }
- });
-
- $('#searchForm').on('change', '.new_search_criteria', function() {
-  if ($(this).val()) {
-   var newSearchCriteria = $(this).val();
-   var newSearchCriteriaName = newSearchCriteria + '[]';
-   var elementToBeCloned = $('.text_search').first().closest('li');
-   var elementClass = $('.text_search').first().prop('class');
-   var elementName = $('.text_search').first().prop('name');
-   var elementLabelClass = '.label_' + elementName;
-   elementLabelClass = elementLabelClass.replace('[', '');
-   elementLabelClass = elementLabelClass.replace(']', '');
-   clonedElement = elementToBeCloned.clone();
-   $('label[for="' + elementName + '"]').text(newSearchCriteria);
-   clonedElement.children().removeClass(elementClass);
-   clonedElement.children().addClass(newSearchCriteria);
-   clonedElement.children().prop('name', newSearchCriteriaName);
-   clonedElement.find("input").each(function() {
-    $(this).val("");
-   });
-//	 clonedElement.appendTo($(this).closest("ul"));
-   clonedElement.insertBefore($(this).closest("li"));
-   $(elementLabelClass + ':last').text(newSearchCriteria);
-  }
- });
+// $('#content').on('change', '.new_column:first', function() {
+//  if ($(this).val()) {
+//   $(this).clone().insertBefore($(this));
+//  }
+// });
+// //add new order by
+// $('#content').on('change', '.search_order_by', function() {
+//  if ($(this).val() !== 'remove') {
+//   $(this).closest('li').clone().insertAfter($(this).closest('li'));
+//  } else {
+//   $(this).closest('li').remove();
+//  }
+// });
+//
+// $('#searchForm').on('change', '.new_search_criteria', function() {
+//  if ($(this).val()) {
+//   var newSearchCriteria = $(this).val();
+//   var newSearchCriteriaName = newSearchCriteria + '[]';
+//   var elementToBeCloned = $('.text_search').first().closest('li');
+//   var elementClass = $('.text_search').first().prop('class');
+//   var elementName = $('.text_search').first().prop('name');
+//   var elementLabelClass = '.label_' + elementName;
+//   elementLabelClass = elementLabelClass.replace('[', '');
+//   elementLabelClass = elementLabelClass.replace(']', '');
+//   clonedElement = elementToBeCloned.clone();
+//   $('label[for="' + elementName + '"]').text(newSearchCriteria);
+//   clonedElement.children().removeClass(elementClass);
+//   clonedElement.children().addClass(newSearchCriteria);
+//   clonedElement.children().prop('name', newSearchCriteriaName);
+//   clonedElement.find("input").each(function() {
+//    $(this).val("");
+//   });
+////	 clonedElement.appendTo($(this).closest("ul"));
+//   clonedElement.insertBefore($(this).closest("li"));
+//   $(elementLabelClass + ':last').text(newSearchCriteria);
+//  }
+// });
 
 
  //toggle detail lines

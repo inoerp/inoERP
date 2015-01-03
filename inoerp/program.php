@@ -78,21 +78,23 @@ if ((!empty($class_names)) && (!empty($program_name))) {
 ?>
 
 <?php 
- if ($continue) {
-  include_once(THEME_DIR . '/header.inc');
- } else {
-  $continue = false;
-  echo "<h2>Could n't call the header</h2>";
-  return;
+if ($continue) {
+ if (!empty($$class) && property_exists($$class, 'program_page_template_path')) {
+  $template_file_names = $class::$program_page_template_path;
+ } else if (!empty($$class)) {
+  $template_file_names = ['includes/basics/program_page.inc'];
  }
- 
+  include_once(THEME_DIR . '/main_template.inc');
+} else {
+ $continue = false;
+ echo "<h2>Could n't call the header</h2>";
+ return;
+}
+
+
 If (property_exists($class, 'js_fileName_prg')) { ?>
  <script src="<?php echo HOME_URL . $class::$js_fileName_prg; ?>"></script>	 
 <?php } ?>
-
-<?php
-require_once(INC_BASICS . DS . "program_page.inc");
-?>
 
  <script type="text/javascript">
  $(document).ready(function () {

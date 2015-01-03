@@ -3,7 +3,7 @@
 //set $allow_conversion to true when before conversion
  class convertToProd extends dbObject {
 
-  public static $allow_conversion = false;
+  public static $allow_conversion = true;
   
   public static $table_name = "convertToProd";
   public static $primary_column = "username";
@@ -79,6 +79,8 @@
    'hr_control',
    'hr_element_entry_header',
    'hr_element_entry_line',
+   'hr_element_entry_tpl_header',
+   'hr_element_entry_tpl_line',
    'hr_job',
    'hr_leave_type',
    'hr_payroll',
@@ -133,6 +135,17 @@
    'view',
    'view_path',
    'wip_control',
+   'bc_label_format_header',
+   'bc_static_label',
+   'bc_label_format_line',
+   'bc_label_auto_trigger',
+   'sys_process_flow_line',
+   'sys_process_flow_header',
+   'cc_co_template_header',
+   'cc_co_template_line',
+   'fp_planning_control',
+   'sd_document_type'
+   
   ];
   public $pageTitle = " Profiles "; //page Title
   public $convertToProd_id;

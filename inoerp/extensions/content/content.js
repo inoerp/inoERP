@@ -24,14 +24,14 @@ $(document).ready(function() {
 
  $('#save').on('click', function() {
 	$(".error").append('Saving Data');
-	var form_header_id = '#content';
+	var form_header_id = '#content_data';
 	$(form_header_id).find('textarea').each(function() {
 	 var name = $(this).attr('name');
 	 var data = tinyMCE.get(name).getContent();
 	 $(this).html(data);
 	});
 	var headerData = $(form_header_id).serializeArray();
-	saveHeader('content.php', headerData, '#content_id', '', '',true, 'content');
+  saveHeader('content.php', headerData, '#content_id', '', '',true, 'content');
   });
 
  deleteHeader('form.php?class_name=content', $('#content_id').val());

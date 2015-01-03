@@ -182,8 +182,8 @@ img {
 
 a:link {
  text-decoration: none;
- font-weight: bold;
  color: #615B5D;
+ padding-left: 5px;
 }
 a:visited {
  text-decoration: none;
@@ -233,9 +233,9 @@ ul.form_buttons , ul.add_new_search{
 }*/
 
 
-ul li ul li {
+/*ul li ul li {
  display: inline;
-}
+}*/
 
 
 ul li label,ul li .grouplabel, label {
@@ -378,12 +378,12 @@ ul.commentRecord{
  margin : 30px 10px;
  padding: 5px;
  background: #f6f6f6; /* Old browsers */
- background: -moz-linear-gradient(left,  #f6f6f6 0%, #e1e1e1 2%, #e1e1e1 20%, #f1f1f1 20%, #ffffff 100%); /* FF3.6+ */
+ background: -moz-linear-gradient(left,  #f6f6f6 0%, #e1e1e1 2%, #e1e1e1 25%, #f1f1f1 25%, #ffffff 100%); /* FF3.6+ */
  background: -webkit-gradient(linear, left top, right top, color-stop(0%,#f6f6f6), color-stop(2%,#e1e1e1), color-stop(20%,#e1e1e1), color-stop(20%,#f1f1f1), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
- background: -webkit-linear-gradient(left,  #f6f6f6 0%,#e1e1e1 2%,#e1e1e1 20%,#f1f1f1 20%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
- background: -o-linear-gradient(left,  #f6f6f6 0%,#e1e1e1 2%,#e1e1e1 20%,#f1f1f1 20%,#ffffff 100%); /* Opera 11.10+ */
- background: -ms-linear-gradient(left,  #f6f6f6 0%,#e1e1e1 2%,#e1e1e1 20%,#f1f1f1 20%,#ffffff 100%); /* IE10+ */
- background: linear-gradient(to right,  #f6f6f6 0%,#e1e1e1 2%,#e1e1e1 20%,#f1f1f1 20%,#ffffff 100%); /* W3C */
+ background: -webkit-linear-gradient(left,  #f6f6f6 0%,#e1e1e1 2%,#e1e1e1 25%,#f1f1f1 25%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+ background: -o-linear-gradient(left,  #f6f6f6 0%,#e1e1e1 2%,#e1e1e1 25%,#f1f1f1 25%,#ffffff 100%); /* Opera 11.10+ */
+ background: -ms-linear-gradient(left,  #f6f6f6 0%,#e1e1e1 2%,#e1e1e1 25%,#f1f1f1 25%,#ffffff 100%); /* IE10+ */
+ background: linear-gradient(to right,  #f6f6f6 0%,#e1e1e1 2%,#e1e1e1 25%,#f1f1f1 25%,#ffffff 100%); /* W3C */
  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f6f6', endColorstr='#ffffff',GradientType=1 );  IE6-9 */
 
 }
@@ -395,7 +395,7 @@ ul.commentRecord li{
 ul.commentRecord li ul.header{
  display: block;
  padding: 5px 5px;
- width: 22%;
+ width: 25%;
  float: left;
 }
 
@@ -761,12 +761,12 @@ a.link_class_green:hover{
  min-width: 120px;
 }
 
-.hideDiv , .hideDiv_input{
+/*.hideDiv , .hideDiv_input{
  background: url('images/minus_2.png') no-repeat 2px 2px;
- /*height: 28px;*/
+ height: 28px;
  display: block;
  z-index: 100;
-}
+}*/
 
 .hideDiv , .hideDiv_input{
  background: url('images/minus_2.png') no-repeat 2px 2px;
@@ -776,6 +776,7 @@ a.link_class_green:hover{
  float:left;
  position: relative;
   width: 30px; 
+  padding-left: 35px;
 }
 
 .showDiv, .showDiv_input {
@@ -1011,7 +1012,16 @@ background: rgba(35, 141, 231, 0.45);
  font-size: 20px;
  font-style: normal;
  /*margin-left: 20px;*/
- color: rgba(110, 237, 79, 0.96);
+ color: rgba(54, 242, 8, 0.92);
+}
+
+#topbar [class^="flaticon-"]:before, #topbar [class*=" flaticon-"]:before,
+#topbar [class^="flaticon-"]:after, #topbar [class*=" flaticon-"]:after {   
+ font-family: Flaticon;
+ font-size: 20px;
+ font-style: normal;
+ /*margin-left: 20px;*/
+ color: rgba(15, 62, 3, 0.92);
 }
 
 .flaticon-add139:before {
@@ -1163,75 +1173,7 @@ background: rgba(35, 141, 231, 0.45);
  color:  rgba(243, 158, 158, 0.93);
 }
 
-input.medium {
-   width: 100px;
-}
 
-input.small {
-   width: 40px;
-}
-
-table.document_table td{
-  padding: 5px 10px;
-}
-.document_table label{
-    display: inline-block;
-    width: 200px;
-}
-
-table.document_table input{
-  width: 200px;
-}
-
-.required{
-background: none repeat scroll 0% 0% rgba(206, 167, 207, 0.61);
- border : 1px solid rgba(206, 167, 207, 0.61);
-}
-
-.readonly{
-  background: none repeat scroll 0% 0% rgba(243, 243, 210, 1);
- border : 1px solid rgba(180, 180, 155, 0.37);
-}
-
-input, select{
- vertical-align: middle;
- font: 10px "Lucida Grande",Lucida,Verdana,sans-serif;
-}
-
-#form_header input[type="text"], #form_header select{
- width: 150px;
-}
-
-
-#form_header input.seq_number, #form_header input.small,  #form_header input.detail_seq_number{
- width: 40px;
-}
-
-#form_header input.date,#form_header input.medium{
- width: 90px;
-}
-
-input[type=text],input[type=password], input[type=date], input[type=textarea],
-input[type=number], input[type=search], checkbox, radio button
-{
- height: 12px;
- padding: 3px 2px;
-}
-
-select{
- height: 20px;
-}
-
-.select.medium{
- width: 10em;
-}
-
-.select.small{
- width: 5em;
-}
-.select.large{
- width: 20em;
-}
 
 ul.header_field li{
     width: 300px;
@@ -1303,7 +1245,7 @@ ul.program_form li label{
 
 #header_top .erp_dashborad {
     position: absolute;
-    top: 3px;
+    top: 9px;
     font-size: 11px;
     font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
     text-align: left;
@@ -1317,3 +1259,16 @@ ul.program_form li label{
     text-decoration: none;
 }
 
+.theme-dropdown .dropdown-menu {
+  position: static;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.theme-showcase > p > .btn {
+  margin: 5px 0;
+}
+
+.theme-showcase .navbar .container {
+  width: auto;
+}

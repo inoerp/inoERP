@@ -17,7 +17,9 @@ if (!empty($_GET['class_name'])) {
 }
 ?>
 <?php
+
 include_once('includes/functions/loader.inc');
+
 //exit script in case of delete statement
 if ((!empty($_GET['delete'])) && ($_GET['delete'] == 1)) {
  return;

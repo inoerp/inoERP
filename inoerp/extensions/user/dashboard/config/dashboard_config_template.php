@@ -1,8 +1,3 @@
-<div id="all_contents">
- <div id="content_left"></div>
- <div id="content_right">
-  <div id="content_right_left">
-   <div id="content_top"></div>
    <div id="content">
     <div id="structure">
      <div id="user_dashboard_configId">
@@ -119,11 +114,3 @@
     </div>
     <!--   end of structure-->
    </div>
-   <div id="content_bottom"></div>
-  </div>
-  <div id="content_right_right"></div>
- </div>
-
-</div>
-
-<?php include_template('footer.inc') ?>

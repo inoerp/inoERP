@@ -33,9 +33,9 @@ include_once("basics.inc");
   if ($visibility_option != 3) {
    if (strpos($block_visibility, ',') !== false) {
     $block_visibility_a = explode(',', $block_visibility);
-    } else {
+   } else {
     $block_visibility_a = explode(chr(10), $block_visibility);
-    }
+   }
    $ulr_vars = explode("/", $url);
    $show_block_flag = 0;
    $ulr_vars_s = array_pop($ulr_vars);
@@ -51,7 +51,7 @@ include_once("basics.inc");
      $show_block_flag = 1;
     } else if (count($block_visibility_a) == 1 && $block_visibility_a[0] == chr(10)) {
      $show_block_flag = 1;
-     } else if (block_check($block_visibility_a, $ulr_vars_s)) {
+    } else if (block_check($block_visibility_a, $ulr_vars_s)) {
      $show_block_flag = 1;
     } elseif (!empty($url) && !empty($block_visibility) && (block_check($block_visibility_a, $ulr_vars_s))) {
      $show_block_flag = 1;
@@ -102,9 +102,9 @@ include_once("basics.inc");
    $visibility_option = $records->visibility_option;
    $block_visibility = base64_decode($records->visibility);
    $reference_table = $records->reference_table;
-   
+
    $show_block_flag = get_showFlag_from_visibilityOption($block_visibility, $visibility_option, $url);
-   if(!$show_block_flag){
+   if (!$show_block_flag) {
     continue;
    }
 //   echo "<br> block id " . $records->block_id . ' : show bock flag is '. $show_block_flag;
@@ -144,18 +144,33 @@ include_once("basics.inc");
     $bc->block_data = serialize($block_content);
     $bc->create();
    }
-   if ((!empty($block_content)) && ($show_block_flag == 1)) {
-    $block_value = "<div class=\"block $position $reference_table block_$block_count\">";
-    if (!empty($records->show_title_cb) && $records->show_title_cb == true) {
-     $block_value .= "<div class=\"headerBgColor title $reference_table \" > $title </div>";
-    }
-    $block_value .= "<div class=\"content $reference_table \" > $block_content </div>";
-    $block_value .="</div>";
-   }
 
-   if (!empty($block_value)) {
+   if ((!empty($block_content)) && ($show_block_flag == 1)) {
     foreach (block::$position_array as $key => $value) {
      if ($position == $value) {
+      if ($value == 'footer_top') {
+       $block_value = '<div class="col-sm-3 blog-sidebar">';
+       $block_value .= "<div class=\"block $position $reference_table block_$block_count \">";
+       if (!empty($records->show_title_cb) && $records->show_title_cb == true) {
+        $block_value .= "<div class=\"headerBgColor title $reference_table\" > $title </div>";
+       }
+       $block_value .= "<div class=\"content $reference_table \" > $block_content </div>";
+       $block_value .="</div></div>";
+      } else if ($value == 'header_top') {
+       $block_value = "<div class=\"block $position $reference_table block_$block_count \">";
+       if (!empty($records->show_title_cb) && $records->show_title_cb == true) {
+        $block_value .= "<div class=\"title $reference_table\" > $title </div>";
+       }
+       $block_value .= "<div class=\"content $reference_table \" > $block_content </div>";
+       $block_value .="</div>";
+      } else {
+       $block_value = "<div class=\"block $position $reference_table block_$block_count panel panel-success \">";
+       if (!empty($records->show_title_cb) && $records->show_title_cb == true) {
+        $block_value .= "<div class=\"headerBgColor title $reference_table panel-heading\" >$title</div>";
+       }
+       $block_value .= "<div class=\"content $reference_table panel-body \" > $block_content </div>";
+       $block_value .="</div>";
+      }
       $blocks_by_position[] = [
        'position' => $position,
        'value' => $block_value

@@ -181,12 +181,12 @@ font-size: 1.4em;
 
 
 ul.summary_list li {
-display: inline-block;
-width: 310px;
-vertical-align : top;
-padding : 0px 10px;
-height : 170px;
-overflow: hidden;
+    display: inline-block;
+    width: 350px;
+    vertical-align: top;
+    padding: 0px 10px;
+    height: 220px;
+    overflow: hidden;
 }
 
 ul.summary_list li .subject_summary{
@@ -197,4 +197,8 @@ margin-bottom: 10px;
 padding: 6px 12px;
 /*border-bottom: 1px solid;*/
 overflow: hidden;
+}
+
+#form_top_image{
+        margin-top: 5px;
 }

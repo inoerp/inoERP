@@ -46,7 +46,7 @@ if (($content_privilage >= 6) && ($mode == 9)) {
  access_denied();
 } else {
  require_once(INC_EXTENSIONS . DS . 'content' . DS . 'view' . DS . "content_view.php");
- echo!empty($breadCrum) ? $breadCrum : false;
+ echo !empty($breadCrum) ? '<div class="container">'.$breadCrum .'</div>': false;
  if ((!empty($content->content_id)) && ($content_type_name)) {
 	include_once(THEME_DIR . '/view_content_template.inc');
  } elseif ((!empty($category_id)) && ($content_type_name)) {

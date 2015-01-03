@@ -134,6 +134,6 @@
 
 </div>
 <span class='highlight'>Footer Top</span>
-<?php include_template('footer.inc') ?>
+
 <span class='highlight'>Footer Bottom</span>
 </div>

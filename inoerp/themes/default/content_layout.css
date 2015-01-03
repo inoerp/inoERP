@@ -699,29 +699,7 @@ span.ui-button-text{
  margin-top:30px;
 }
 
-#comment #show_attachment{
- margin-top:10px;
-}
 
-#comment #subject ul li{
- display: inline-block;
- margin-right : 15px;
-}
-
-#existing_attachment_list{
- width : 500px;
-}
-
-#existing_attachment_list ul.header{
- margin-top: 5px;
- padding : 2px 5px;
- background: lightgrey;
- width: 500px;
-}
-
-#existing_attachment_list ul li{
- display: inline-block;
-}
 
 ul.second_level li{
  margin-right: 25px;

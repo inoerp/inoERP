@@ -3,6 +3,9 @@
 ## Eclipse
 #################
 
+inoerp_index.php
+test.*
+
 *.pydevproject
 .project
 .metadata

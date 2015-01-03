@@ -28,8 +28,9 @@ $user = new user();
   $user_dashboard_config = new user_dashboard_config();
   array_push($user_dashboard_config_object, $user_dashboard_config);
  }
-
+if(is_array($user_dashboard_config_object_admin)){
  $user_dashboard_config_object = array_merge($user_dashboard_config_object, $user_dashboard_config_object_admin);
+}
 
 $report_a = [];
  if (!empty($$class->repot_type)) {
