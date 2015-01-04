@@ -50,18 +50,18 @@
    }
   }
   ?>
-    
+
  </head>
  <body>
 
   <div id="topbar" class="clearfix">
    <div class="container">
-      <?php
-  if ($showBlock) {
-   echo '<div id = "header_top" class = "clear"></div>';
-   }
-  ?>
-    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+    <?php
+    if ($showBlock) {
+     echo '<div id = "header_top" class = "clear"></div>';
+    }
+    ?>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
      <?php
      $show_header_links = true;
      if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
@@ -74,19 +74,12 @@
      ?>
      <?php if ($show_header_links) { ?>
       <div class="social-icons">
- <!--      <span><a data-toggle="tooltip" data-placement="bottom" title="Facebook" href="#"><i class="fa fa-facebook"></i></a></span>
-      <span><a data-toggle="tooltip" data-placement="bottom" title="Google Plus" href="#"><i class="fa fa-google-plus"></i></a></span>-->
-      <!--<span><a data-toggle="tooltip" data-placement="bottom" title="Twitter" href="#"><i class="fa fa-twitter"></i></a></span>-->
-       <span><a data-toggle="tooltip" data-placement="bottom" title="Youtube" href="https://www.youtube.com/playlist?list=PLI9s_lIFpC099xADLymQcDCmrDhnkxcjM"><i class="fa fa-youtube"></i></a></span>
-       <span><a data-toggle="tooltip" data-placement="bottom" title="Linkedin" href="#"><i class="fa fa-linkedin"></i></a></span>
-       <!--<span><a data-toggle="tooltip" data-placement="bottom" title="Dribbble" href="#"><i class="fa fa-dribbble"></i></a></span>-->
-       <span class="last"><a data-toggle="tooltip" data-placement="bottom" title="Skype" href="#"><i class="fa fa-skype"></i></a></span>
-
+       <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>     
       </div><!-- end social icons -->
      <?php } ?>
 
     </div><!-- end columns -->
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
      <div class="topmenu">
       <span class="topbar-login"><i class="fa fa-user"></i>
        <?php
@@ -121,8 +114,8 @@
 
      </div><!-- end top menu -->
      <div class="callus">
-      <span class="topbar-email"><i class="fa fa-envelope"></i> <a href="#">contact@inoideas.org</a></span>
-      <span class="topbar-phone"><i class="fa fa-phone"></i> 1-205-419-5131</span>
+      <span class="topbar-email"><i class="fa fa-envelope"></i> <a href="#"><?php echo!empty($si->email) ? $si->email : 'contact@site.org' ?></a></span>
+      <span class="topbar-phone"><i class="fa fa-phone"></i> <a href="#"><?php echo!empty($si->phone_no) ? $si->phone_no : '1-111-1111' ?></a></span>
      </div><!-- end callus -->
     </div><!-- end columns -->
    </div><!-- end container -->
@@ -132,8 +125,9 @@
    <div class="container">
     <nav class="navbar yamm navbar-default">
      <div class="navbar-header">
-      <img src="<?php echo HOME_URL; echo !empty($si->logo_path) ? $si->logo_path : 'files/logo.png'   ?>" class="logo_image" alt="logo"/>
-      <a href="<?php echo HOME_URL; ?>" class="navbar-brand"><?php echo !empty($si->site_name) ? $si->site_name : 'inoERP'; ?></a>
+      <img src="<?php echo HOME_URL;
+       echo!empty($si->logo_path) ? $si->logo_path : 'files/logo.png' ?>" class="logo_image" alt="logo"/>
+      <a href="<?php echo HOME_URL; ?>" class="navbar-brand"><?php echo!empty($si->site_name) ? $si->site_name : 'inoERP'; ?></a>
      </div><!-- end navbar-header -->
      <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right">
       <ul class="nav navbar-nav">
@@ -150,7 +144,7 @@
 
   <?php
   if ($showBlock) {
-    echo '<div id="header_bottom"></div>';
+   echo '<div id="header_bottom"></div>';
   }
   ?>
 

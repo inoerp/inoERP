@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
 //get the attachement form
 // get_attachment_form('../file/json.file.php');
@@ -14,25 +14,27 @@ $(document).ready(function() {
 //	$(this).attr('href', 'content.php?content_id=' + content_id + '&content_type=' + content_type);
 // });
 
- $('#form_line').on('change', '.checkBox', function() {
-	if (this.checked) {
-	 $(this).val(($(this).closest('tr').find('.field_name').val()));
-	} else {
-	 $(this).val(1);
-	}
+ $('#form_line').on('change', '.checkBox', function () {
+  if (this.checked) {
+   $(this).val(($(this).closest('tr').find('.field_name').val()));
+  } else {
+   $(this).val(1);
+  }
  });
 
- $('#save').on('click', function() {
-	$(".error").append('Saving Data');
-	var form_header_id = '#content_data';
-	$(form_header_id).find('textarea').each(function() {
-	 var name = $(this).attr('name');
-	 var data = tinyMCE.get(name).getContent();
-	 $(this).html(data);
-	});
-	var headerData = $(form_header_id).serializeArray();
-  saveHeader('content.php', headerData, '#content_id', '', '',true, 'content');
-  });
+ $('#save').on('click', function () {
+  $(".error").append('Saving Data');
+  var form_header_id = '#content_data';
+  if ($('.mce-tinymce').length >= 1) {
+   $(form_header_id).find('textarea').each(function () {
+    var name = $(this).attr('name');
+    var data = tinyMCE.get(name).getContent();
+    $(this).html(data);
+   });
+  }
+  var headerData = $(form_header_id).serializeArray();
+  saveHeader('content.php', headerData, '#content_id', '', '', true, 'content');
+ });
 
  deleteHeader('form.php?class_name=content', $('#content_id').val());
 
@@ -43,11 +45,11 @@ $(document).ready(function() {
 // classSave.single_line = false;
 //classSave.saveMain();
 
-$('a.show.content_id').on('click', function(){
-var path = 'content.php?mode=2&content_id=' + $('#content_id').val() 
-				+ '&content_type=' + $('#content_type').val();
-$(this).attr('href',path);
-});
+ $('a.show.content_id').on('click', function () {
+  var path = 'content.php?mode=2&content_id=' + $('#content_id').val()
+          + '&content_type=' + $('#content_type').val();
+  $(this).attr('href', path);
+ });
 
 });
 

@@ -11,11 +11,11 @@ setValFromSelectPage.prototype.setVal = function() {
 
 $(document).ready(function() {
 
- //Get the path_id on find button click
- $('a.show.path_id').click(function() {
-  var pathId = $('#path_id').val();
-  $(this).attr('href', modepath() + 'path_id=' + pathId);
- });
+// //Get the path_id on find button click
+// $('a.show.path_id').click(function() {
+//  var pathId = $('#path_id').val();
+//  $(this).attr('href', modepath() + 'path_id=' + pathId);
+// });
 
  $(".path_id.select_popup").on("click", function() {
   void window.open('select.php?class_name=path', '_blank',

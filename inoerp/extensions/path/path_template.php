@@ -8,7 +8,7 @@
     <ul class="two_column"> 
      <li><label><img src="<?php echo HOME_URL; ?>themes/default/images/serach.png" class="path_id select_popup clickable">
        Path Id :</label><?php $f->text_field_ds('path_id') ?>
-      <a name="show" href="form.php?class_name=path" class="show path_id">	<img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
+      <a name="show" href="form.php?class_name=path&<?php echo "mode=$mode"; ?>" class="show document_id path_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
      </li>
      <li><label>Parent Name :</label> 
       <?php echo $f->select_field_from_object('parent_id', path::find_all('name'), 'path_id', array('name', 'module_code'), $$class->parent_id, 'parent_id') ?>

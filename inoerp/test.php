@@ -1,665 +1,732 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
-  <title>Ino ERP</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  <meta name="author" content="">
+<?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+set_time_limit(0);
 
-  <!-- Bootstrap Styles -->
-  <link href="tparty/bootstrap/css/bootstrap.css" rel="stylesheet">
-  <!-- Styles -->
-  <link href="tparty/bootstrap/css/style.css" rel="stylesheet">
-  <!-- Carousel Slider -->
-  <link href="tparty/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <!-- CSS Animations -->
-  <link href="css/animate.min.css" rel="stylesheet">
-  
-  <!-- Google Fonts -->
-  <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Lato:400,300,400italic,300italic,700,700italic,900' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Exo:400,300,600,500,400italic,700italic,800,900' rel='stylesheet' type='text/css'>
+include_once("includes/basics/header_public.inc");
+?>
+<link href="<?php echo HOME_URL; ?>includes/ecss/getsvgimage.css" media="all" rel="stylesheet" type="text/css" />
+<?php
+//pa(hr_element_entry_header::find_by_employeeId(4));
+//pa(hr_element_entry_header::find_all_regular_lines(1));
+//pa(hr_element_entry_header::find_all_basic_regular_lines(1));
+////$db = new dbObject();
+////$prl = new sys_profile_line();
+////$ar_ti = new ar_transaction_interface();
+////$param =  ['bu_org_id' => array('5') ];
+////
+////$ar_ti->prg_import_ar_transaction(serialize($param));
+//  pa($session);
+//  pa($user);
 
-  <!-- SLIDER ROYAL CSS SETTINGS -->
-<!--  <link href="css/royalslider.css" rel="stylesheet">
-  <link href="css/rs-default-inverted.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="css/settings.css" media="screen" />
-  <link rel="alternate stylesheet" type="text/css" href="css/yellow.css" title="yellow" media="all" />-->
 
-    
-</head>
-<body>   
+//$bc_lr = new bc_label_request();
+//$bc_lr->sys_printer_id = 1;
+//$bc_lr->print_XMLlabel($xml_content);
 
-    
-	<div id="topbar" class="clearfix">
-    	<div class="container">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                <div class="social-icons">
-                    <span><a data-toggle="tooltip" data-placement="bottom" title="Facebook" href="#"><i class="fa fa-facebook"></i></a></span>
-                    <span><a data-toggle="tooltip" data-placement="bottom" title="Google Plus" href="#"><i class="fa fa-google-plus"></i></a></span>
-                    <span><a data-toggle="tooltip" data-placement="bottom" title="Twitter" href="#"><i class="fa fa-twitter"></i></a></span>
-                    <span><a data-toggle="tooltip" data-placement="bottom" title="Youtube" href="#"><i class="fa fa-youtube"></i></a></span>
-                    <span><a data-toggle="tooltip" data-placement="bottom" title="Linkedin" href="#"><i class="fa fa-linkedin"></i></a></span>
-                    <span><a data-toggle="tooltip" data-placement="bottom" title="Dribbble" href="#"><i class="fa fa-dribbble"></i></a></span>
-                    <span class="last"><a data-toggle="tooltip" data-placement="bottom" title="Skype" href="#"><i class="fa fa-skype"></i></a></span>
 
-                </div><!-- end social icons -->
-            </div><!-- end columns -->
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                <div class="topmenu">
-                	<span class="topbar-login"><i class="fa fa-user"></i> <a href="#">Login / Register</a></span>
-                   
-                </div><!-- end top menu -->
-            	<div class="callus">
-                	<span class="topbar-email"><i class="fa fa-envelope"></i> <a href="#">name@yoursite.com</a></span>
-                    <span class="topbar-phone"><i class="fa fa-phone"></i> 1-900-324-5467</span>
-                </div><!-- end callus -->
-            </div><!-- end columns -->
-        </div><!-- end container -->
-    </div><!-- end topbar -->
-    
-    <header id="header-style-1">
-		<div class="container">
-			<nav class="navbar yamm navbar-default">
-				<div class="navbar-header">
-                    <button type="button" data-toggle="collapse" data-target="#navbar-collapse-1" class="navbar-toggle">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a href="#" class="navbar-brand">ino ERP</a>
-        		</div><!-- end navbar-header -->
-                
-				<div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right">
-					<ul class="nav navbar-nav">
-						<li class="dropdown yamm-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">DEMO <div class="arrow-up"></div></a>
-							<!-- end drop down menu -->
-						</li><!-- end drop down -->
-                        <li><a href="#">About</a></li>
-						<li class="dropdown yamm-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Download <div class="arrow-up"></div></a>
-						
-						</li><!-- end drop down -->
-                        <!-- standard drop down -->
-                        <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Documentation <div class="arrow-up"></div></a>
-                            <!-- end dropdown-menu -->
-                        </li><!-- end standard drop down -->
-                        <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Forum <div class="arrow-up"></div></a>
-                            <!-- end dropdown-menu -->
-                        </li><!-- end standard drop down -->
-                        <!-- standard drop down -->
-						<li class="dropdown yamm-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">About <div class="arrow-up"></div></a>
-							<!-- end drop down menu -->
-						</li><!-- end drop down -->
-                       
-					</ul><!-- end navbar-nav -->
-				</div><!-- #navbar-collapse-1 -->			</nav><!-- end navbar yamm navbar-default -->
-		</div><!-- end container -->
-	</header><!-- end header-style-1 -->
-	
-    <div class="grey-wrapper jt-shadow">
-    	<div class="container">
-        	<div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-             <iframe width="600px" height="350px" src="//www.youtube.com/embed/AS8idx2Cg_U?list=PLI9s_lIFpC099xADLymQcDCmrDhnkxcjM" frameborder="0" allowfullscreen></iframe>
+// pa(sys_process_flow_action::find_by_parent_id('11'));'
+// pa(cc_co_header::find_by_status('REVIew'))
+//echo inv_lot_number::show_serialLot_entryForm();
 
-            <!--	<div class="widget">
-                	<h3>WHY <span>ino ERP</span> IS SIMPLE & VERY POWERFUL?</h3>
-                    <p>Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros.</p>
-                    <div id="accordion-first" class="clearfix">
-                        <div class="accordion" id="accordion2">
-                          <div class="accordion-group">
-                            <div class="accordion-heading">
-                              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                                <em class="fa fa-plus icon-fixed-width"></em>ino ERP is fully responsive and perfectly fits on any Mobile device.
-                              </a>
-                            </div>
-                            <div id="collapseOne" class="accordion-body collapse">
-                              <div class="accordion-inner">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor...
-                              </div>
-                            </div>
-                          </div>
-                          <div class="accordion-group">
-                            <div class="accordion-heading">
-                              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                                <em class="fa fa-plus icon-fixed-width"></em>ino ERP is automatically creates retina ready images.
-                              </a>
-                            </div>
-                            <div id="collapseTwo" class="accordion-body collapse">
-                              <div class="accordion-inner">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor...
-                              </div>
-                            </div>
-                          </div>
-                          <div class="accordion-group">
-                            <div class="accordion-heading">
-                              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-                                <em class="fa fa-plus icon-fixed-width"></em>ino ERP contains 365 Retina Ready Font Awesome icons.
-                              </a>
-                            </div>
-                            <div id="collapseThree" class="accordion-body collapse">
-                              <div class="accordion-inner">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor...
-                              </div>
-                            </div>
-                          </div>
-                          <div class="accordion-group">
-                            <div class="accordion-heading">
-                              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
-                                <em class="fa fa-plus icon-fixed-width"></em>ino ERP is Powerful Admin Panel
-                              </a>
-                            </div>
-                            <div id="collapseFour" class="accordion-body collapse">
-                              <div class="accordion-inner">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor...
-                              </div>
-                            </div>
-                          </div> 
-                        </div><!-- end accordion -->
-                   <!--  </div><!-- end accordion first -->
-               <!--  </div> --><!-- end widget -->
-            </div><!-- end col-lg-6 -->
-            
-        	<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-            inoERP is an open source web based enterprise management system. It’s built using open source technologies and has a wide range of features suitable for running various kind of businesses.inoERP is an open source web based enterprise management system. It’s built using open source technologies and has a wide range of features suitable for running various kind of businesses.
-            inoERP is an open source web based enterprise management system. It’s built using open source technologies and has a wide range of features suitable for running various kind of businesses.inoERP is an open source web based enterprise management system. It’s built using open source technologies and has a wide range of features suitable for running various kind of businesses.
-            
-            
-            	<!--<div class="widget">
-                	<h3>OUR <span>POWERFUL</span> SKILLS!</h3>
-                    <div id="skills" class="skills_bar">
-                        <small>Adobe Photoshop</small>
-                        <div class="progress wow slideInLeft">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
-                            <span class="skill_count">90%</span>
-                            </div>
-                        </div><!-- end progress -->
-                       <!-- <small>HTML5 & CSS3</small>
-                        <div class="progress wow slideInLeft">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-                            <span class="skill_count">80%</span>
-                            </div>
-                        </div><!-- end progress -->
-                       <!-- <small>WordPress</small>
-                        <div class="progress wow slideInLeft">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
-                            <span class="skill_count">90%</span>
-                            </div>
-                        </div><!-- end progress -->
-                       <!-- <small>Customer Support</small>
-                        <div class="progress wow slideInLeft">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">
-                            <span class="skill_count">90%</span>
-                            </div>
-                        </div><!-- end progress -->
-                      <!--  <small>Shopify Design</small>
-                        <div class="progress wow slideInLeft">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" style="width: 78%;">
-                            <span class="skill_count">80%</span>
-                            </div>
-                        </div><!-- end progress -->
-                  <!--  </div><!-- end skills_bar -->
-               <!-- </div>--><!-- end widget -->
-            </div><!-- end col-lg-6 -->
-		</div><!-- end container -->
-    </div>
-	<div class="white-wrapper">
-    	<div class="container">
-        	<div class="messagebox">
-            	<h2>ino ERP is Simple, <mark class="rotate">Powerful Theme, Amazing Theme, Superb Theme</mark> With Endless Possibilties</h2>
-                <p class="lead">Hey Everyone! We are ino ERP and we make really beautiful and amazing stuff. This can be used to describe what you do,<br>
-				how you do it, & who you do it for. Don’t Miss the Awesome Theme</p>
-               
-            </div><!-- end messagebox -->
-		</div><!-- end container -->
-    </div><!-- end white-wrapper -->
-    <div class="slider-wrapper">
-    
-        <div class="tp-banner-container">
-            <div class="tp-banner" >
-                <ul>
-                   <li data-transition="fade" data-slotamount="7" data-masterspeed="1500" >
-					<img src="images/sliderbg_04.jpg"  alt="slidebg1"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-                        <div class="tp-caption high_title customin customout start"
-							data-x="left" data-hoffset="100"
-                            data-y="60"
-                            data-customin="x:0;y:0;z:0;rotationX:90;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
-                            data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-                            data-speed="1000"
-                            data-start="500"
-                            data-easing="Back.easeInOut"
-                            data-endspeed="300">OUR
-                        </div>
-                        <div class="tp-caption mini_title customin customout start"
-							data-x="left" data-hoffset="330"
-                            data-y="290"
-                            data-customin="x:0;y:0;z:0;rotationX:90;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
-                            data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-                            data-speed="1000"
-                            data-start="900"
-                            data-easing="Back.easeInOut"
-                            data-endspeed="300">PASSION BRINGS <span>ino ERP....</span>
-                        </div>
-                        <div class="tp-caption customin customout"
-                            data-x="left" data-hoffset="100"
-                            data-y="150"
-                            data-customin="x:50;y:150;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.5;scaleY:0.5;skewX:0;skewY:0;opacity:0;transformPerspective:0;transformOrigin:50% 50%;"
-                            data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-                            data-speed="800"
-                            data-start="700"
-                            data-easing="Power4.easeOut"
-                            data-endspeed="500"
-                            data-endeasing="Power4.easeIn"
-                            style="z-index: 3"><img src="images/sliderlogo_01.png" alt="">
-                        </div>
-                        <div class="tp-caption small_title  customin customout start"
-							data-x="center" data-hoffset="0"
-                            data-y="330"
-                            data-customin="x:0;y:0;z:0;rotationX:90;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
-                            data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-                            data-speed="1600"
-                            data-start="1100"
-                            data-easing="Back.easeInOut"
-                            data-endspeed="300"><a href="#" class="btn btn-primary btn-lg">Buy now</a>
-                        </div>
-                    </li>
-                 
-					
-					
-					
-                    <li data-transition="fade" data-slotamount="7" data-masterspeed="1500" >
-                        <img src="images/sliderbg_02.jpg"  alt="slidebg1"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-                        <div class="tp-caption big_title  customin customout start"
-                            data-x="left"
-                            data-hoffset="30"
-                            data-y="170"
-                            data-customin="x:0;y:0;z:0;rotationX:90;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
-                            data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-                            data-speed="1000"
-                            data-start="500"
-                            data-easing="Back.easeInOut"
-                            data-endspeed="300">Coded with <span>Bootstrap, HTML5 & CSS3</span>
-                        </div>
-                        <div class="tp-caption small_title2 customin customout start"
-                            data-x="left"
-                            data-hoffset="30"
-                            data-y="236"
-                            data-customin="x:0;y:0;z:0;rotationX:90;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
-                            data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-                            data-speed="1300"
-                            data-start="800"
-                            data-easing="Back.easeInOut"
-                            data-endspeed="300">ino ERP is a  creative awesome design for super easy to<br>
-							 build with our Shortcodes & Page Builder.
-                        </div>
-                        <div class="tp-caption small_title  customin customout start"
-                            data-x="left"
-                            data-hoffset="30"
-                            data-y="320"
-                            data-customin="x:0;y:0;z:0;rotationX:90;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
-                            data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-                            data-speed="1600"
-                            data-start="1100"
-                            data-easing="Back.easeInOut"
-                            data-endspeed="300"><a href="#" class="btn btn-primary btn-lg">Build now</a>
-                        </div>
-                        <div class="tp-caption customin customout"
-                            data-x="right" data-hoffset="120"
-                            data-y="bottom" data-voffset="0"
-                            data-customin="x:50;y:150;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.5;scaleY:0.5;skewX:0;skewY:0;opacity:0;transformPerspective:0;transformOrigin:50% 50%;"
-                            data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-                            data-speed="800"
-                            data-start="700"
-                            data-easing="Power4.easeOut"
-                            data-endspeed="500"
-                            data-endeasing="Power4.easeIn"
-                            style="z-index: 3"><img src="images/sliderman_02.png" alt="">
-                        </div>
-                    </li>
-                </ul>
-                <div class="tp-bannertimer"></div>
-            </div>
-        </div>
-    </div>
+//pa(hr_payroll_schedule::find_latest_open_schedule_by_headerId(3));
 
-	<!-- end white-wrapper -->
-    
-  	<div class="white-wrapper">
-		<div class="container">
-        <div style="text-align:center; text-transform:uppercase;"> <h1>Special Features</h1></div>
-        	<div class="services_vertical">
-                <div class="col-lg-4 first">
-                    <div class="service_vertical_box">
-                        <div class="service-icon">
-                            <i class="fa fa-lightbulb-o fa-4x"></i>
-                        </div>
-                        <h3>Aweosme Design Layout</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur euismod enim a metus adipiscing aliquam. </p>
-                        <a href="#" class="readmore">Read More...</a>
-                    </div><!-- end service_vertical_box -->
-                </div><!-- end col-lg-4 -->
-                <div class="col-lg-4">
-                    <div class="service_vertical_box">
-                        <div class="service-icon">
-                            <i class="fa fa-gear fa-4x"></i>
-                        </div>
-                        <h3>Drag and Drop Builder</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur euismod enim a metus adipiscing aliquam. </p>
-                        <a href="#" class="readmore">Read More...</a>
-                    </div><!-- end service_vertical_box -->
-                </div><!-- end col-lg-4 -->
-                <div class="col-lg-4 last">
-                    <div class="service_vertical_box">
-                        <div class="service-icon">
-                            <i class="fa fa-tablet fa-4x"></i>
-                        </div>
-                        <h3>Retina Ready Display</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur euismod enim a metus adipiscing aliquam. </p>
-                        <a href="#" class="readmore">Read More...</a>
-                    </div><!-- end service_vertical_box -->
-                </div><!-- end col-lg-4 -->
-                <div class="col-lg-4 first">
-                    <div class="service_vertical_box">
-                        <div class="service-icon">
-                            <i class="fa fa-folder-o fa-4x"></i>
-                        </div>
-                        <h3>Next-level features</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur euismod enim a metus adipiscing aliquam. </p>
-                        <a href="#" class="readmore">Read More...</a>
-                    </div><!-- end service_vertical_box -->
-                </div><!-- end col-lg-4 -->
-                <div class="col-lg-4">
-                    <div class="service_vertical_box">
-                        <div class="service-icon">
-                            <i class="fa fa-google-plus fa-4x"></i>
-                        </div>
-                        <h3>Social Media Friendly</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur euismod enim a metus adipiscing aliquam. </p>
-                        <a href="#" class="readmore">Read More...</a>
-                    </div><!-- end service_vertical_box -->
-                </div><!-- end col-lg-4 -->
-                <div class="col-lg-4 last">
-                    <div class="service_vertical_box">
-                        <div class="service-icon">
-                            <i class="fa fa-bars fa-4x"></i>
-                        </div>
-                        <h3>Responsive Web Design</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur euismod enim a metus adipiscing aliquam. </p>
-                        <a href="#" class="readmore">Read More...</a>
-                    </div><!-- end service_vertical_box -->
-                </div><!-- end col-lg-4 -->
-                <div class="clearfix"></div>
-            </div><!-- end services_vertical -->
-			<div class="clearfix"></div>
-          
-		</div><!-- end container -->
-    </div><!-- end transparent-bg -->
+//pa(hr_payroll_process::find_payroll_available_for_cancelAndConfirmation());
+//$schdule_date = new DateTime('2014-01-01');
+//echo '<br>First Date '. $schdule_date->format('Y-m-01');
+//echo '<br>Last Date' . $schdule_date->format('Y-m-t');
+//echo '<br>Month Year' . $schdule_date->format('M-y');
+//$schdule_date->add(new DateInterval('P1M'));
+//echo '<br>First Date '. $schdule_date->format('Y-m-01');
+//echo '<br>Last Date' . $schdule_date->format('Y-m-t');
+//echo '<br>Month Year' . $schdule_date->format('M-y');
+//
+//pa($schdule_date);
+//$date_end = new DateTime('28-DEC-2016');
+//$no_days_in_period = 30;
+//
+//pa($date_start);
+//pa($date_end);
+//$total_no_days = $date_end->diff($date_start, 1)->days;
+//$no_of_periods = $total_no_days / $no_days_in_period;
+////pa($date_end->diff($date_start, 1));
+//
+//
+//
+//
+//while ($no_of_periods > 0) {
+// $date_intvl = 'P'.$no_days_in_period.'D';
+// echo "<br> date_intvl is $date_intvl  & satrt date " . $date_start->format('Y-m-d');
+// 
+// $date_start->add(new DateInterval($date_intvl));
+// $no_of_periods--;
+//}
 
-	<!-- end grey-wrapper -->
-<div class="grey-wrapper jt-shadow padding-top">
-    	<div class="make-center wow fadeInUp animated" style="visibility: visible;">
-			<div class="container">
-            <div class="col-lg-4 first">
-            <div class="panel panel-success">
-      <div class="panel-heading">
-        <h3 class="panel-title">Inventory - Item, Onhand & Transactions</h3>
-      </div>
-      <div class="panel-body">
-    Inventory modules has below features
-1. Item Master
-The product allows defining items in a master organization and then controlling the item attributes in various other organizations.
-System has many inbuilt attributes that help business in having better control over purchasing, sales & planning activities. Secondary attribute fields can also be used with Item master.
-      </div>
-    </div>
-    </div>
-     <div class="col-lg-4">
-            <div class="panel panel-success">
-      <div class="panel-heading">
-        <h3 class="panel-title">Inventory - Item, Onhand & Transactions</h3>
-      </div>
-      <div class="panel-body">
-    Inventory modules has below features
-1. Item Master
-The product allows defining items in a master organization and then controlling the item attributes in various other organizations.
-System has many inbuilt attributes that help business in having better control over purchasing, sales & planning activities. Secondary attribute fields can also be used with Item master.
-      </div>
-    </div>
-    </div>
-     <div class="col-lg-4 last">
-            <div class="panel panel-success">
-      <div class="panel-heading">
-        <h3 class="panel-title">Inventory - Item, Onhand & Transactions</h3>
-      </div>
-      <div class="panel-body">
-    Inventory modules has below features
-1. Item Master
-The product allows defining items in a master organization and then controlling the item attributes in various other organizations.
-System has many inbuilt attributes that help business in having better control over purchasing, sales & planning activities. Secondary attribute fields can also be used with Item master.
-      </div>
-    </div>
-    </div>
-    <div class="col-lg-4 first">
-            <div class="panel panel-success">
-      <div class="panel-heading">
-        <h3 class="panel-title">Inventory - Item, Onhand & Transactions</h3>
-      </div>
-      <div class="panel-body">
-    Inventory modules has below features
-1. Item Master
-The product allows defining items in a master organization and then controlling the item attributes in various other organizations.
-System has many inbuilt attributes that help business in having better control over purchasing, sales & planning activities. Secondary attribute fields can also be used with Item master.
-      </div>
-    </div>
-    </div>
-     <div class="col-lg-4">
-            <div class="panel panel-success">
-      <div class="panel-heading">
-        <h3 class="panel-title">Inventory - Item, Onhand & Transactions</h3>
-      </div>
-      <div class="panel-body">
-    Inventory modules has below features
-1. Item Master
-The product allows defining items in a master organization and then controlling the item attributes in various other organizations.
-System has many inbuilt attributes that help business in having better control over purchasing, sales & planning activities. Secondary attribute fields can also be used with Item master.
-      </div>
-    </div>
-    </div>
-     <div class="col-lg-4 last">
-            <div class="panel panel-success">
-      <div class="panel-heading">
-        <h3 class="panel-title">Inventory - Item, Onhand & Transactions</h3>
-      </div>
-      <div class="panel-body">
-    Inventory modules has below features
-1. Item Master
-The product allows defining items in a master organization and then controlling the item attributes in various other organizations.
-System has many inbuilt attributes that help business in having better control over purchasing, sales & planning activities. Secondary attribute fields can also be used with Item master.
-      </div>
-    </div>
-    </div>
-			</div>
-        </div>
-    </div>
+//$irh = new inv_receipt_header();
+//echo $irh->multi_select_tabs();
+//// echo fp_urgent_card::find_current_cardList();
+// pa(get_dbColumns('bc_static_label'));
+ pa(get_dbColumns('wip_wol_transaction'));
+// pa(get_dbColumns('extn_contact_reference'));
+// pa(get_dbColumns('hr_payslip_line'));
+// pa(get_dbColumns('sys_process_flow_action'));
+// pa(get_dbColumns('sys_process_flow_action_value'));
+// $row_data_component = new SplFixedArray(2001);
+// $row_data_component = [];
+// for($i=0; $i<=2000; $i++){
+//  $row_data_component[$i] = $i.'sdjsdjsdj_sdjidsj23';
+// }
+// pa($row_data_component);
+// 
+// echo '<br>Memory usage is '. memory_get_peak_usage();
+// $art = new ArrayObject($arr);
+// $it = $art->getIterator();
+//
+// while($it->valid()){
+//  
+// }
+// $bom_lines = new ArrayIterator($arr);
+// echo "<br> counts " . $bom_lines->count();
+// $position = 10;
+// while($bom_lines->valid()){
+//  echo '<br>'.$bom_lines->key() . ' is : ' .$bom_lines->current();
+//  $bom_lines->next();
+//  
+// }
+// 
+// $bom_lines->seek($position);
+// echo '<br>'.$bom_lines->key() . ' is : ' .$bom_lines->current();
+// $position++;
+// 
+//  $bom_lines->rewind();
+// echo '<br>'.$bom_lines->key() . ' is : ' .$bom_lines->current();
+// 
+//  $bom_lines->seek($position);
+// echo '<br>'.$bom_lines->key() . ' is : ' .$bom_lines->current();
+// 
+// $dirs = new DirectoryIterator('../files');
+//while($dirs->valid()){
+// echo "<br> key ". $dirs->key(). ' and file name is '. $dirs->getFilename(). '<br> File Info '. $dirs->getFileInfo() ;
+// $dirs->isDir();
+// echo "<br> is it directory : ";
+// if($dirs->isDir()){
+//  echo " yes";
+// }else{
+//  echo 'no';
+// }
+// $dirs->next();
+// echo "<br><br><br>";
+//}
+// execution_time();
+// echo "<br> counts old methd " . count($arr);
+// pa(inv_item_revision::find_currentRev_by_itemIdM_orgId('10092', '6'));
+// $offset = 10;
+// $date = new DateTime('2014-7-01');
+// $view_i = new view();
+// $view_i->view_id = 11;
+// $view_i->viewResultById();
+// pa($_SESSION);
+// $block = new block();
+// $block->findBy_id('57');
+// $class_containg_block = new $block->reference_table;
+// $method_name = $block->name . '_block';
+// $parameters['block_id'] = $block->block_id;
+// $block_content = call_user_func(array($class_containg_block, $method_name), $parameters);
+// echo $block_content;
+// echo block::show_block_content_by_BlockId('57');
+// echo $fav->show_currentUser_fav();
+//
+// pa( view::find_all_tables_and_views());
+// pa(view::find_columns_of_table_obj('subinventory'));
+// 
+// $poa = new po_all_v();
+// $data = $poa->ra_open_po_by_supplier();
+// $legend_p = [];
+// $chart_settings_p = [
+//  '_chart_name' => 'Purchasing Analysis',
+//  '_chart_width' => '550',
+//  '_chart_height' => '350',
+//  '_x_axis_text' => 'Supplier',
+//  '_chart_type' => 'clustered_bar',
+//  '_legend' => array('Quantity Onhand', 'Open Quantity'),
+// ];
+//// pa($data);
+// $key_name_setting = $key . '_settings';
+// $svgimage = new getsvgimage();
+// $svgimage->setProperty('_settings', $chart_settings_p);
+// $svgimage->setProperty('_data', $data);
+// $chart = $svgimage->draw_chart();
+// echo $chart;
+//
+//
+// $svgimg = new getsvgimage();
+// $result = $result1 = dbObject::find_by_sql('	SELECT onhand_v.item_number AS onhand_v__item_number,onhand_v.item_description AS onhand_v__item_description,onhand_v.product_line AS onhand_v__product_line,onhand_v.org_name AS onhand_v__org_name,onhand_v.standard_cost AS onhand_v__standard_cost,onhand_v.item_id_m AS onhand_v__item_id_m,onhand_v.org_id AS onhand_v__org_id,onhand_v.onhand AS onhand_v__onhand,onhand_v.onhand_value AS onhand_v__onhand_value,item.item_id AS item__item_id,item.org_id AS item__org_id,item.item_type AS item__item_type,item.item_id_m AS item__item_id_m FROM onhand_v, item WHERE onhand_v.item_id_m = item.item_id_m AND item.org_id = onhand_v.org_id GROUP BY onhand_v.item_id_m,item.org_id ORDER BY onhand_v.onhand_value DESC');
+//
+// $chart_label = str_replace('.', '__', 'onhand_v__item_number');
+// $chart_value = str_replace('.', '__', 'onhand_v__onhand');
+// $chart_name = 'Custom View Chart';
+// $chart_width = '450';
+// $chart_height = '500';
+// $chart_type = 'clustered_bar';
+// $legend_name = 'onhand_v__org_name';
+// $legend_name = str_replace('.', '__', $legend_name);
+//
+// $data = [];
+// $labels = [];
+// $legend = [];
+//
+//// echo "<br>legend $legend_name";
+//// echo "<br>chart_label $chart_label";
+//// echo "<br>chart_value $chart_value";
+// pa($result);
+//
+// foreach ($result as $obj) {
+//  if (!empty($legend_name)) {
+//   if (!in_array($obj->$legend_name, $legend)) {
+//    array_push($legend, $obj->$legend_name);
+//   }
+//  }
+// }
+//
+// foreach ($result as $obj) {
+//  if (!in_array($obj->$chart_label, $labels)) {
+//   array_push($labels, $obj->$chart_label);
+//   $row = [];
+//   $label = $row['label'] = $obj->$chart_label;
+//   $row['value'] = [];
+//
+//   foreach ($legend as $l_k => $l_v) {
+//    $isnull = true;
+//    foreach ($result1 as $data_obj) {
+//     if (($data_obj->$chart_label) == $label && ($data_obj->$legend_name == $l_v)) {
+//      $row['value'][] = $obj->$chart_value;
+//      $isnull = false;
+//      break;
+//     }
+//    }
+//    if ($isnull) {
+//     $row['value'][] = null;
+//    }
+//   }
+//
+//
+//   array_push($data, $row);
+//  }
+// }
+////
+// pa($legend);
+// pa($data);
+//
+// $svgimg->setProperty('_chart_name', $chart_name);
+// $svgimg->setProperty('_chart_width', $chart_width);
+// $svgimg->setProperty('_chart_height', $chart_height);
+// $svgimg->setProperty('_chart_type', $chart_type);
+// $svgimg->setProperty('_legend', $legend);
+// $svgimg->setProperty('_data', $data);
+//
+// $svg_chart = $svgimg->draw_chart();
+// echo '<div id="return_divId">' . $svg_chart . '</div>';
+//// 
+//$sql = "SELECT subinventory.subinventory AS subinventory__subinventory,subinventory.subinventory AS subinventory__subinventory,subinventory.subinventory_id AS subinventory__subinventory_id,subinventory.description AS subinventory__description,subinventory.locator_control AS subinventory__locator_control,subinventory.subinventory_id AS subinventory__subinventory_id,locator.locator_id AS locator__locator_id,locator.subinventory_id AS locator__subinventory_id,locator.locator AS locator__locator,locator.locator_structure AS locator__locator_structure,locator.locator_id AS locator__locator_id
+//FROM 
+//subinventory,locator";
+//$result = dbObject::find_by_sql($sql);
+//
+//$pagination = new pagination();
+//$pagination->data_result = $result;
+//$pagination->setProperty('_path', 'test');
+// echo $pagination->show_result_withPagination();
+// 
+// 
+// $ud = new user_activity_v();
+//  
+//  $subject_noof_char = 50;
+// $pageno = !empty($_GET['pageno']) ? $_GET['pageno'] : 1;
+// $per_page = !empty($_GET['per_page']) ? $_GET['per_page'] : 10;
+// $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
+// $comment_result = $ud->user_comments();
+// $total_count_c = count($comment_result);
+// $pagination_c = new pagination($pageno, $per_page, $total_count_c);
+// $pagination_c->setProperty('_path', 'form');
+// $pagination_c->setProperty('_query_string', $query_string);
+// $comment_string = '<div class="table_container">';
+//  if ($comment_result) {
+//  $con_count = 0;
+//  if (count($comment_result) > 0) {
+//   $comment_string .='<table id="comment_list" class="top_margin10 form_line_data_table"><thead> 
+//						 <tr class="headerBgColor">
+//							<th class="topics">Subject</th>
+//							<th class="created_by">Created By</th>
+//							<th class="post_date">Post Date</th>
+//						 </tr>
+//						</thead>';
+//   foreach ($comment_result as $recod_c_k => $recod_c) {
+//   $continue = false;
+////    if (($recod_c_k > ($pageno - 1) * $per_page) && ($recod_c_k <= (($pageno - 1) * $per_page) + $per_page)) {
+////     $continue = false;
+////    }
+//    if ($continue) {
+//     continue;
+//    }
+//    $even_odd = ($con_count % 2 == 0) ? 'even' : 'odd';
+//    $comment_string .= "<tr id=\"row_no$con_count\" class='new_row $even_odd'> "
+//      . " <td class='subject_summary'>";
+//    $comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&'
+//      . 'content_id=' . $recod_c->reference_id . '&content_type_id=' . $recod_c->content_type_id . '">';
+//    $comment_string .= substr($recod_c->comment, 0, $subject_noof_char);
+//    $comment_string .= ' </a>';
+//    $comment_string .= '</td>';
+//    $comment_string .= '<td class="created_by">';
+//    $comment_string .= $recod_c->username;
+//    $comment_string .= '</td><td class="post_date">';
+//    $comment_string .= $recod_c->creation_date;
+//    $comment_string .= '</td>';
+//    $comment_string .= '</tr>';
+//    $con_count++;
+//   }
+//
+//  }
+//
+//  $comment_string .='</table>';
+// }
+// $comment_string .='</div>';
+// $comment_string .= '<div id="pagination">';
+//
+//
+// $comment_string .= $pagination_c->show_pagination();
+// $comment_string .= '</div>';
+//
+//
+// echo $comment_string;
+// function next_monday($date_p) {
+//  $date = new DateTime($date_p);
+//  if ($date->format('D') == 'Mon') {
+//   return $date->format('Y-m-d');
+//  } else {
+//   $date = new DateTime("next monday $date_p");
+//   return $date->format('Y-m-d');
+//  }
+// }
+// echo "<br>Next Monday 2014-7-01 "; echo next_monday('2014-7-01');
+// echo "<br>Next Monday 2014-7-02 ";echo next_monday('2014-7-02');
+//  echo "<br>Next Monday 2014-7-03 "; echo next_monday('2014-7-03');
+// echo "<br>Next Monday 2014-7-04 ";echo next_monday('2014-7-04');
+//  echo "<br>Next Monday 2014-7-05 ";echo next_monday('2014-7-05');
+//  echo "<br>Next Monday 2014-7-06 "; echo next_monday('2014-7-06');
+// echo "<br>Next Monday 2014-7-07 ";echo next_monday('2014-7-07');
+// echo "<br>Next Monday 2014-7-08 "; echo next_monday('2014-7-08');
+// echo "<br>Next Monday 2014-7-09 ";echo next_monday('2014-7-09');
+// echo "<h1> All tables </h1>";
+// $table_sql = "   select table_name
+//from information_schema.tables
+//WHERE TABLE_SCHEMA= '".DB_NAME."'
+//AND table_type = 'BASE TABLE'
+// ";
+//
+// $prepare = $dbc->connection->prepare($table_sql);
+// try {
+//  $prepare->execute();
+//  $result_fetchAll = $prepare->fetchAll(PDO::FETCH_COLUMN);
+// } catch (Exception $e) {
+////    echo "<br>Error @dbObject @@ Line " . __LINE__ . $sql;
+//  return false;
+// }
+//
+// echo '<h2>Total no base tables in selected DB '.DB_NAME.' : </h2>' . count($result_fetchAll);
+// $include_tables = array_diff($result_fetchAll, convertToProd::$exclude_tables);
+// $include_tables = array_values($include_tables);
+// echo '<h2>Total no tables updated : </h2>' . count($include_tables);
+////pa($include_tables);
+//
+////
+// foreach ($include_tables as $key => $table_name) {
+//  $sql2 = " DELETE FROM  {$table_name}  ";
+//  $dbc->ddlexecute($sql2);
+//  $sql3 = "   ALTER TABLE {$table_name} auto_increment = 1 ";
+//  $dbc->ddlexecute($sql3);
+//  echo "<br> $table_name is updated";
+// }
+// $dbc->confirm();
+//  $table_sql = "   select table_name
+//   from information_schema.columns 
+//   WHERE TABLE_SCHEMA = 'inoerp' AND column_name = 'last_update_by' 
+// ";
+////
+// $result1 = dbObject::find_by_sql($table_sql);
+//
+////
+// foreach ($result1 as $obj) {
+//  $sql3 = "   ALTER TABLE {$obj->table_name} CHANGE last_update_by last_update_by INT(12) NOT NULL;";
+//  $dbc->ddlexecute($sql3);
+// }
+// $dbc->confirm();
+// pa($date);
+// echo $date->format('Y-m-d');
+// $date->add(new DateInterval('P'.$offset.'D'));
+// pa($date);
+// echo $date->format('Y-m-d');
+// echo "<br>Next monday" . date('Y-m-d', strtotime("next monday", strtotime('2014-7-07')));
+// pa(sd_so_line::find_by_orgId_ssd(6, '2014-7-01'));
+// pa(view::find_all_tables());
+//$sys_notification = new sys_notification();
+//  pa($sys_notification->find_openNotification_toUserId('34'));
+// pa(get_dbColumns('fp_forecast_over_consumption_v'));
+//pa(get_dbColumns('site_info'));
+//pa(get_dbColumns('po_quote_detail'));
+//  pa(get_dbColumns('po_rfq_line'));
+//  pa(get_dbColumns('po_rfq_requirement'));
+//  pa(get_dbColumns('hr_leave_entitlement_line'));
+//  pa(get_dbColumns('hr_approval_limit_assignment'));
+//  pa(get_dbColumns('hr_employee_termination'));
+//  pa(get_dbColumns('hr_element_entry_line'));
+//$inster_items_sql = " SELECT DISTINCT(item_id_m) FROM inv_abc_valuation_result ";
+//$inster_items_sql .= " WHERE inv_abc_valuation_id = '1' ";
+//$inster_items_result = $db->findBySql($inster_items_sql);
+////function get_item_id_m($obj){
+//// return $obj->item_id_m;
+////}
+//////
+//$item_id_m = array_map( function($obj){
+// return $obj->item_id_m;
+//}, $inster_items_result);
+//
+////$item_id_m = array_map( 'get_item_id_m', $inster_items_result);
+//
+//pa($item_id_m);
+//
+//echo ("'".implode("','", $item_id_m)."'");
+//pa(ar_customer_site::find_all_sitesOfCustomer(2));
+//$item = new item();
+//pa($item->findBy_item_id_m('10047'));
+//$user_names = [];
+//for($i=0 ; $i <=100000 ; $i++){
+// array_push($user_names, 'user_no_'.$i);
+//}
+//
+//$f= new inoform();
+//echo $f->select_field_from_array('user_name', $user_names, '');
+//
+//pa($_SESSION);
+//$prl = new sys_profile_line();
+//echo "---------------------------------------------------------------------------------------------------------------------------";
+//pa( $prl->find_default_profile('org_inv_name_default'));
+//pa( $prl->find_default_profile('org_bu_name_default'));
+//   if (empty($_SESSION['org_inv_name_defalut'])) {
+//    pa( $prl->find_default_profile('org_inv_name_defalut'));
+//   }
+//   if (empty($_SESSION['org_bu_name_defalut'])) {
+//    pa( $prl->find_default_profile('org_bu_name_defalut'));
+//   }
+//  
+//foreach(sys_profile_header::find_all() as $obj){
+//pa($prl->find_default_profile($obj->profile_name));
+//}
+//pa($prl->findAll_profile('org_inv_name_defalut'));
+//pa($prl->findBy_name_context('gl_currency_conversion_type'));
+//
+//pa(get_dbColumns('coa'));
+//pa(get_dbColumns('coa_combination'));
+//pa(get_dbColumns('inv_interorg_transfer_line'));
+//$var = 18;
+//$arr = [6 , 12, 13];
+//if (in_array($var, $arr) ) {
+// echo "<br>1.  in 6 , 12, 13";
+//}
+//
+//if ($var == 6 || $var ==  12 ||  $var ==  13) {
+// echo "<br>2.  in 6 , 12, 13";
+//}
+//$onhand = new onhand();
+//$onhand->item_id_m = 6;
+//pa($onhand->findBy_itemIdm_location());
+//
+//$onhand->org_id = 6;
+//pa($onhand->findBy_itemIdm_location());
+//
+//$onhand->subinventory_id = 2;
+//pa($onhand->findBy_itemIdm_location());
+//
+//$onhand->locator_id = 5;
+//pa($onhand->findBy_itemIdm_location());
+//pa(get_dbColumns('mdm_bank_line'));
+//pa(get_dbColumns('mdm_bank_account'));
+//pa(get_dbColumns('sys_process_flow_line'));
+//$path = new path();
+//echo $path->findBy_moduleCode('ar');
+//pa(coa_combination::find_coa_combination_by_coa_id('905') );
+//pa(ar_transaction_line::find_by_parent_id('21'));
+//
+//pa($_SERVER);
+//echo "directory is 1 ". dirname(__FILE__);
+//echo "directory is 1 ". __DIR__;
+//
+//$count = 0;
+//$dbc = new dbc();
+//$db = new dbObject();
+//
+////pa(comment::find_all());
+////pa($_SERVER);
+//
+//
+?>
+<link href="//<?php echo HOME_URL; ?>includes/ecss/getsvgimage.css" media="all" rel="stylesheet" type="text/css" />
 
-    <div class="make-bg-full">
-        <div class="calloutbox-full-mini nocontainer">
-        	<div class="long-twitter">
-				<p class="lead"><i class="fa fa-twitter"></i> Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros. <a href="#">25 min ago</a></p>
-            </div>
-        </div><!-- end calloutbox -->
-    </div><!-- make bg -->
-    
-	<footer id="footer-style-1">
-    	<div class="container">
-        	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            	<div class="widget">
-                	
-                	<p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Invst igationes demonstraverunt lectores legemer lius quod ii legunt saepius. Claritas est etiam processus dynamicusm lectorum.</p>
-                    <div class="social-icons">
-                        <span><a data-toggle="tooltip" data-placement="bottom" title="Facebook" href="#"><i class="fa fa-facebook"></i></a></span>
-                        <span><a data-toggle="tooltip" data-placement="bottom" title="Google Plus" href="#"><i class="fa fa-google-plus"></i></a></span>
-                        <span><a data-toggle="tooltip" data-placement="bottom" title="Twitter" href="#"><i class="fa fa-twitter"></i></a></span>
-                        <span><a data-toggle="tooltip" data-placement="bottom" title="Youtube" href="#"><i class="fa fa-youtube"></i></a></span>
-                        <span><a data-toggle="tooltip" data-placement="bottom" title="Linkedin" href="#"><i class="fa fa-linkedin"></i></a></span>
-                        <span><a data-toggle="tooltip" data-placement="bottom" title="Dribbble" href="#"><i class="fa fa-dribbble"></i></a></span>
-                    </div><!-- end social icons -->
-                </div><!-- end widget -->
-            </div><!-- end columns -->
-        	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            	<div class="widget">
-                	<div class="title">
-                        <h3>Twitter Feeds</h3>
-                    </div><!-- end title -->
-                    <ul class="twitter_feed">
-                        <li><span></span><p>Jolly Themes wishes you and your family a merry Christmas and a happy new! <a href="#">about 2 days ago</a></p></li>
-                        <li><span></span><p>Jolly Themes wishes you and your family a merry Christmas and a happy new! <a href="#">about 9 days ago</a></p></li>
-					</ul><!-- end twiteer_feed --> 
-                </div><!-- end widget -->
-            </div><!-- end columns -->
-        	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            	<div class="widget">
-                	<div class="title">
-                        <h3>Recent Posts</h3>
-                    </div><!-- end title -->
-                    <ul class="footer_post">
-                        <li><a href="#"><img class="img-rounded" src="images/footer_post_01.jpg" alt=""></a></li>
-                        <li><a href="#"><img class="img-rounded" src="images/footer_post_01.jpg" alt=""></a></li>
-                        <li><a href="#"><img class="img-rounded" src="images/footer_post_01.jpg" alt=""></a></li>
-                        <li><a href="#"><img class="img-rounded" src="images/footer_post_01.jpg" alt=""></a></li>
-                        <li><a href="#"><img class="img-rounded" src="images/footer_post_01.jpg" alt=""></a></li>
-                        <li><a href="#"><img class="img-rounded" src="images/footer_post_01.jpg" alt=""></a></li>
-                    </ul><!-- recent posts -->  
-                </div><!-- end widget -->
-            </div><!-- end columns -->
-        	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            	<div class="widget">
-                	<div class="title">
-                        <h3>NewsLetter</h3>
-                    </div><!-- end title -->
-					<div class="newsletter_widget">
-                    	<p>Subscribe to our newsletter to receive news, updates, free stuff and new releases by email. We don't do spam..</p>
-                        <form action="#" class="newsletter_form">
-                            <input type="text" class="form-control" placeholder="Enter your email address"> 
-                            <a href="#" class="btn btn-primary pull-right">Subscribe</a>    
-                        </form><!-- end newsletter form -->
-					</div>
-                </div><!-- end widget -->
-            </div><!-- end columns --> 
-    	</div><!-- end container -->
-    </footer><!-- end #footer-style-1 -->    
+<?php
+//echo $chart_image1;
+//
+//$svgimage2 = new getsvgimage();
+//$svgimage2->setProperty('_chart_type', 'clustered_column');
+//$svgimage2->setProperty('_right_margin', 0);
+//$svgimage2->setProperty('_chart_width', 600);
+//$svgimage2->setProperty('_legend', $legend);
+//$svgimage2->setProperty('_data', $data);
+//$chart_image2 = $svgimage2->draw_chart();
+//echo $chart_image2;
+//
+//pa($data);
+//pa($result);
+//
+//$data2 = [
+//		array('label' => 'standrad po', 'value' => array('300', '250', '1228', '340', '150', '128', '1300', '20', '1228')),
+//		array('label' => 'blanket po', 'value' => array('23', '111', '345', '250', '1228', '340', '250', '1228', '340',)),
+//		array('label' => 'planned po', 'value' => array('343', '78', '900', '23', '111', '345', '23', '111', '345')),
+//];
+//if($datetime1 > $datetime2 ){
+// echo "<br> 1 is after 2 ";
+//}else{
+// echo "<br> 1 is before 2 ";
+//}
+//
+//if($datetime3 > $datetime2 ){
+// echo "<br> 3 is after 2 ";
+//}else{
+// echo "<br> 3 is before 2 ";
+//}
+//
+//pa($datetime1);pa($datetime2);pa($datetime3);
+//$list = array(
+//		array('aaa', 'bbb', 'ccc', 'dddd'),
+//		array('123', '456', '789'),
+//		array('"aaa"', '"bbb"')
+//);
+//$llc = new fp_mrp_lowlevel_code();
+////$llc->create_lowlevel_code(6);
+//$all_items = $llc->findAll_orderByLevel(6);
+//pa($all_items);
+////
+//$data = ['org_id' => array('6'), 'fp_mrp_header_id' => array('1'),];
+//
+//$mrpd = new fp_mrp_demand();
+//$mrpd->prg_mrp_demand_calculator(serialize($data));
+//$sql = "  ALTER TABLE fp_mrp_demand 
+//ADD org_id int(12) NOT NULL after fp_mrp_demand_id ";
+//////
+////////////date
+//pa(get_dbColumns('fp_mrp_demand'));
+//$boh = new bom_header();
+//$all_boms = $boh->findBy_orgId(6);
+//$lowLevel_code = [];
+//
+//function search_item_inLowLevelCode($item_id, &$existing_level, $lowLevelCode_a) {
+// foreach ($lowLevelCode_a as $level_key => $level_value_a) {
+//	if (array_search($item_id, $level_value_a) !== false) {
+//	 $existing_level = $level_key;
+//	 return array_search($item_id, $level_value_a);
+//	}
+// }
+// return false;
+//}
+//
+//foreach ($all_boms as $bom) {
+// $exploded_bom = $boh->BOM_Explosion($bom->item_id);
+// pa($exploded_bom);
+// if (empty($lowLevel_code)) {
+//	$lowLevel_code = $exploded_bom;
+// } else {
+//	foreach ($exploded_bom as $new_level => $item_a) {
+//	 foreach ($item_a as $key => $item_id) {
+//		$existing_level = 0;
+//		$verify_item_key = search_item_inLowLevelCode($item_id, $existing_level, $lowLevel_code);
+//		if ($verify_item_key !== false) {
+//		 if ($new_level > $existing_level) {
+//			echo "<br>Item is $item_id - existing level $existing_level & new level $new_level & key : $verify_item_key";
+//			unset($lowLevel_code[$existing_level][$verify_item_key]);
+//			if (array_key_exists($new_level, $lowLevel_code)) {
+//			 array_push($lowLevel_code[$new_level], $item_id);
+//			} else {
+//			 $lowLevel_code[$new_level] = array($item_id);
+//			}
+//		 }
+//		} else {
+//		 echo "<br>Item is $item_id - existing level $existing_level not found in existing array  : $verify_item_key ";
+//		 if (array_key_exists($new_level, $lowLevel_code)) {
+//			array_push($lowLevel_code[$new_level], $item_id);
+//		 } else {
+//			$lowLevel_code[$new_level] = array($item_id);
+//		 }
+//		}
+//	 }
+//	}
+// }
+// echo "<br>New low level Code";
+// pa($lowLevel_code);
+//}
+//
+//echo "<h2>Final Code</h2>";
+//pa($lowLevel_code);
 
-<div id="copyrights">
-    	<div class="container">
-			<div class="col-lg-5 col-md-6 col-sm-12">
-            	<div class="copyright-text">
-                    <p>Copyright © 2014 - Designed by Divinotech</p>
-                </div><!-- end copyright-text -->
-			</div><!-- end widget -->
-			<div class="col-lg-7 col-md-6 col-sm-12 clearfix">
-				<div class="footer-menu">
-                    <ul class="menu">
-                        <li class="active"><a href="#">Demo</a></li>
-                        <li><a href="#">Download</a></li>
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">Forum</a></li>
-                        <li><a href="#">Blog</a></li>
-                        
-                    </ul>
-                </div>
-			</div><!-- end large-7 --> 
-        </div><!-- end container -->
-    </div><!-- end copyrights -->
-    
-	<div class="dmtop">Scroll to Top</div>
-        
-  <!-- Main Scripts-->
-  <script src="includes/js/jquery-2.0.3.min.js"></script>
-  <script src="tparty/bootstrap/js/bootstrap.min.js"></script>
-  <script src="tparty/bootstrap/js/menu.js"></script>
-  <script src="js/jquery.parallax-1.1.3.js"></script>
-  <script src="js/jquery.simple-text-rotator.js"></script>
-  <script src="js/wow.min.js"></script>
-  <script src="js/custom.js"></script>
-  
-  <script src="js/jquery.isotope.min.js"></script>
-  <script src="js/custom-portfolio-masonry.js"></script>
+execution_time();
+////$dbc->ddlexecute($query1);
+//$query1 = " ALTER TABLE sd_so_line
+//add picked_quantity int(12) after line_quantity,
+//add shipped_quantity int(12) after picked_quantity ";
+//$dbc->ddlexecute($query1);
+//
+//pa(get_dbColumns('sd_so_line'));
+//$query1 = " ALTER TABLE sd_so_line
+// add shipping_org_id int(12) NOT NULL after line_number ,
+// add line_status varchar(25) NOT NULL after line_price,
+//add requested_date date after line_status,
+//add promise_date date after requested_date,
+//add schedule_ship_date date after promise_date,
+//add actual_ship_date date after schedule_ship_date ";
+//$dbc->ddlexecute($query1);
+//
+//pa(get_dbColumns('sd_so_line'));
+//pa(get_dbColumns('fp_mds_line'));
+//pa(get_dbColumns('item'))
+//$query2 = " ALTER TABLE item CHANGE rev_number rounding_option varchar(25)   ";
+//$dbc->ddlexecute($query2);
+//pa(get_dbColumns('item'));
+//
+//
+//$dbc->ddlexecute($query1);
+//$bov = new bom_overhead_v();
+//pa($bov->findAll());
+////
+////
+?>
 
-  <!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
-  <script type="text/javascript" src="js/jquery.themepunch.plugins.min.js"></script>
-  <script type="text/javascript" src="js/jquery.themepunch.revolution.min.js"></script>
-  <script type="text/javascript">
-	var revapi;
-	jQuery(document).ready(function() {
-		revapi = jQuery('.tp-banner').revolution(
-		{
-			delay:9000,
-			startwidth:1170,
-			startheight:500,
-			hideThumbs:10,
-			fullWidth:"on",
-			forceFullWidth:"on"
-		});
-	});	//ready
-  </script>
-      
-  <!-- Royal Slider script files -->
-  <script src="js/jquery.easing-1.3.js"></script>
-  <script src="js/jquery.royalslider.min.js"></script>
-  <script>
-	jQuery(document).ready(function($) {
-	  var rsi = $('#slider-in-laptop').royalSlider({
-		autoHeight: false,
-		arrowsNav: false,
-		fadeinLoadedSlide: false,
-		controlNavigationSpacing: 0,
-		controlNavigation: 'bullets',
-		imageScaleMode: 'fill',
-		imageAlignCenter: true,
-		loop: false,
-		loopRewind: false,
-		numImagesToPreload: 6,
-		keyboardNavEnabled: true,
-		autoScaleSlider: true,  
-		autoScaleSliderWidth: 486,     
-		autoScaleSliderHeight: 315,
-	
-		/* size of all images http://help.dimsemenov.com/kb/royalslider-jquery-plugin-faq/adding-width-and-height-properties-to-images */
-		imgWidth: 792,
-		imgHeight: 479
-	
-	  }).data('royalSlider');
-	  $('#slider-next').click(function() {
-		rsi.next();
-	  });
-	  $('#slider-prev').click(function() {
-		rsi.prev();
-	  });
-	});
-  </script>
+<?php
+//$sql = "  CREATE TABLE `fp_minmax_demand`  (
+// fp_minmax_demand_id int(12) NOT NULL  AUTO_INCREMENT,
+//  plan_id int(12) NOT NULL ,
+//item_id int(12) NOT NULL ,
+//quantity DECIMAL(20,5),
+//demand_item_id int(12),
+//demand_type varchar(50),
+//source varchar(50),
+//created_by varchar(256),
+//creation_date datetime,
+//last_update_by varchar(256),
+//last_update_date datetime,
+//primary key (fp_minmax_demand_id)) ";
+//$dbc->ddlexecute($sql);
+////$prepare->execute();
+//
+//$sql = "
+//CREATE OR REPLACE VIEW sd_so_all_v
+//(
+//sd_so_header_id,bu_org_id,so_type,so_number,ar_customer_id,ar_customer_site_id,
+//sales_person,document_currency,header_amount,so_status, payment_term_id,
+//customer_name,customer_number,customer_site_name,customer_site_number,
+//payment_term,description,sd_so_line_id,line_type,line_number,item_id,
+//item_description,line_description,
+//line_quantity,picked_quantity, shipped_quantity,
+//unit_price,line_price,line_status,requested_date,
+//promise_date ,schedule_ship_date ,actual_ship_date,item_number,
+//uom_id,item_status,org,created_by,creation_date,last_update_by,last_update_date
+//)
+//AS
+// SELECT 
+//sd_so_header.sd_so_header_id, sd_so_header.bu_org_id, sd_so_header.so_type, sd_so_header.so_number, sd_so_header.ar_customer_id, 
+//sd_so_header.ar_customer_site_id, sd_so_header.sales_person, sd_so_header.document_currency, 
+//sd_so_header.header_amount, sd_so_header.so_status,
+//sd_so_header.payment_term_id,
+//ar_customer.customer_name, ar_customer.customer_number,
+//ar_customer_site.customer_site_name, ar_customer_site.customer_site_number,
+//payment_term.payment_term, payment_term.description,
+//sd_so_line.sd_so_line_id, sd_so_line.line_type, sd_so_line.line_number,	sd_so_line.item_id, 
+//sd_so_line.item_description, sd_so_line.line_description, 
+//sd_so_line.line_quantity, sd_so_line.picked_quantity, sd_so_line.shipped_quantity,
+//sd_so_line.unit_price, sd_so_line.line_price, sd_so_line.line_status,
+//sd_so_line.requested_date, sd_so_line.promise_date , sd_so_line.schedule_ship_date ,sd_so_line.actual_ship_date,
+//item.item_number, item.uom_id, item.item_status,
+//org.org,
+//sd_so_line.created_by, sd_so_line.creation_date, sd_so_line.last_update_by, sd_so_line.last_update_date
+//
+//FROM sd_so_header 
+//LEFT JOIN ar_customer ON sd_so_header.ar_customer_id = ar_customer.ar_customer_id
+//LEFT JOIN ar_customer_site ON sd_so_header.ar_customer_site_id = ar_customer_site.ar_customer_site_id
+//LEFT JOIN payment_term ON sd_so_header.payment_term_id = payment_term.payment_term_id
+//LEFT JOIN sd_so_line ON sd_so_header.sd_so_header_id = sd_so_line.sd_so_header_id
+//LEFT JOIN item ON sd_so_line.item_id = item.item_id
+//LEFT JOIN org ON sd_so_line.shipping_org_id = org.org_id
+//
+//";
+////pa($db->findBy_sql($sql));
+//
+////
+//$dbc->ddlexecute($sql);
+//pa(get_dbColumns('org_v'));
+//pa(fp_minmax_suggestion_v::find_all());
+//$result = $db->findBy_sql($sql);
+//
+//pa($result);
+//$structure = option_header::find_by_name('COA01');
+//echo '<br><br><br><br>strucrte is <pre>';
+//
+//$segments = option_line::find_by_option_id($structure->option_header_id);
+//print_r($segments);
+//
+//if(!empty($_POST))    {
+//echo '<pre>';
+//    print_r($_POST);
+//    echo '<pre>';
+//}
+?>
 
-  <!-- Affix menu -->
-<script>
-	(function($) {
-	  "use strict";
-			$("#header-style-1").affix({
-			offset: {
-			  top: 100
-			, bottom: function () {
-				return (this.bottom = $('#copyrights').outerHeight(true))
-			  }
-			}
-		})
-	})(jQuery);
-</script>
+<?php
+global $dbc;
+//$block_types = block::block_types();
+//  echo '<pre>';
+//  print_r($block_types);
+//  echo '<pre>';
+//$query = "SHOW COLUMNS FROM block ";
+////
+////$query="Select * from information_schema.tables where table_name='block'";
+//
+//}
+?>
 
-  
-  <script>
-   //Page Preloader
-$(window).load(function() {
-	$(".loader").delay(300).fadeOut();
-	$(".animationload").delay(600).fadeOut("slow");
-});
-</script>
-</body>
-</html>
+<option value="" ></option> 
+</select> -->
+<!--   end of structure-->
+<label>Background Color</label>
+<input type="color" name="bgcolor" id="bgcolor">
+<label>Header Color</label>
+<input type="color" name="header_color" id="header_color">
+<input type="button" class="button" id="set_color" Value="Set Color">
+
+<div id="graph">
+ <canvas id="barchart_1" width="400" height="400"></canvas>
+ <canvas id="barchart_2" width="400" height="400"></canvas>
+ <canvas id="piechart_1" width="400" height="400"></canvas>
+ <canvas id="piechart_2" width="400" height="400"></canvas>
+ <canvas id="polarchart_1" width="400" height="400"></canvas>
+ <canvas id="ploarchart_2" width="400" height="400"></canvas>
+
+ <canvas id="small_can"></canvas>
+ Graph Hereford<ul class="graph1">
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+ </ul>
+</div>
+
+<?php
+//execution_time();
+execution_time();
+include_template('footer.inc')
+?>

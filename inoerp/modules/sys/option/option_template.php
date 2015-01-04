@@ -1,6 +1,6 @@
 <div id="option">
  <!--    START OF FORM HEADER-->
- <form action=""  method="post" id="mdm_price_list_header"  name="mdm_price_list_header"><span class="heading">Option Header</span>
+ <form action=""  method="post" id="option_header"  name="option_header"><span class="heading">Option Header</span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">

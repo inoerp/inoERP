@@ -293,8 +293,8 @@ class category extends dbObject {
 
  public function show_exploded_category($category_id, $content_type_name) {
   $all_categories = $this->category_explosion_withPCRelation($category_id);
-  $statement = '<div class="table_container hideDiv">';
-  $statement .= "<table id='forum_type_category_list' class='normal'>
+  $statement = '<div >';
+  $statement .= "<table  class='table table-striped table-hover'>
 	        <thead>
           <tr class='headerBgColor2'>
            <th>Category</th>

@@ -51,13 +51,13 @@ if(!empty($non_db_content_type)){
               <?php
               if (!empty($category_select_statement_array)) {
                foreach ($category_select_statement_array as $category_select_statement) {
-                echo '<label>Category</label>';
+                echo '<label>Category : </label>';
                 echo $category_select_statement;
                }
               } else {
                if (!empty($categories_of_content_type_select_option_array)) {
                 foreach ($categories_of_content_type_select_option_array as $records) {
-                 echo '<label>Category</label>';
+                 echo '<label>Category : </label>';
                  echo $records;
                 }
                }
@@ -71,10 +71,10 @@ if(!empty($non_db_content_type)){
              <li><label>Weight : </label><?php form::text_field_ds('weightage'); ?> </li>
              <li><label>Rev Number : </label><?php form::text_field_ds('rev_number'); ?></li>
              <li><label>Parent : </label><?php form::text_field_ds('parent_id'); ?></li>
-             <li><label>URL Alias : </label> <?php echo $f->text_field('url_alias', $$class->url_alias, '70', ''); ?> 
+             <li><label>URL Alias : </label> <?php echo $f->text_field('url_alias', $$class->url_alias, '40', ''); ?> 
               <?php echo $f->hidden_field('ext_url_alias_id', $$class->ext_url_alias_id); ?>
              </li> 
-             <li><label>Tags : </label> <?php echo $f->text_field('terms', $$class->terms, '50', ''); ?> </li>
+             <li><label>Tags : </label> <?php echo $f->text_field('terms', $$class->terms, '40', ''); ?> </li>
             </ul>
            </div>
            <?php

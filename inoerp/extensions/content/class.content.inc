@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -7,6 +8,7 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
+
 /**
  * 
  *
@@ -78,7 +80,8 @@ class content extends dbObject {
  ];
  public $fields_inForm_notInDataBase = [
   'url_alias',
-  'ext_url_alias_id'
+  'ext_url_alias_id',
+  'non_db_content_type'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
  ];
@@ -121,6 +124,7 @@ class content extends dbObject {
  private $_summary_noof_char = '500';
  private $_subject_noof_char = '60';
  private $_pagination;
+ public $non_db_content_type;
 
  public function setProperty($property, $value) {
   if (property_exists($this, $property)) {
@@ -138,6 +142,15 @@ class content extends dbObject {
     default:
      $this->$property = $value;
      break;
+   }
+  }
+ }
+
+ public function _before_save() {
+  if (!empty($this->non_db_content_type)) {
+   $ndbc = new $this->non_db_content_type;
+   if (method_exists($ndbc, '_before_save')) {
+    return call_user_func(array($ndbc, '_before_save'), $_POST);
    }
   }
  }
@@ -391,7 +404,7 @@ AND content.content_id = category_reference.reference_id  ";
     $content_string .= '</span>';
     $content_string .= '</div>';
     $content_string .= '<div class="content_summary">';
-    $content_string .= ino_strip_html($records->content_summary,  $this->_summary_noof_char);
+    $content_string .= ino_strip_html($records->content_summary, $this->_summary_noof_char);
     $content_string .= '</div>';
     $content_string .= '</li>';
    }
@@ -413,11 +426,11 @@ AND content.content_id = category_reference.reference_id  ";
   $content_string = " ";
   $result = $this->_getContent_byConteTypeCategory($pageno, $per_page, $query_string);
   $con_count = 0;
-  $content_string .='<div class="table_container">';
+  $content_string .='<div>';
   if ($result) {
    if (count($result) > 0) {
     $content_string .=!empty($result[0]->category) ? '<span class="heading">' . $result[0]->category . '</span>' : '';
-    $content_string .='<table id="forum_list" class="top_margin10 form_line_data_table"><thead> 
+    $content_string .='<table class="table table-striped table-hover"><thead> 
 						 <tr class="headerBgColor">
 							<th class="topics">Topics</th>
 							<th class="replies">Replies</th>

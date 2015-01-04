@@ -106,14 +106,7 @@ include_once("includes/functions/loader.inc");
      ?>
      <?php if ($show_header_links) { ?>
       <div class="social-icons">
- <!--      <span><a data-toggle="tooltip" data-placement="bottom" title="Facebook" href="#"><i class="fa fa-facebook"></i></a></span>
-      <span><a data-toggle="tooltip" data-placement="bottom" title="Google Plus" href="#"><i class="fa fa-google-plus"></i></a></span>-->
-      <!--<span><a data-toggle="tooltip" data-placement="bottom" title="Twitter" href="#"><i class="fa fa-twitter"></i></a></span>-->
-       <span><a data-toggle="tooltip" data-placement="bottom" title="Youtube" href="https://www.youtube.com/playlist?list=PLI9s_lIFpC099xADLymQcDCmrDhnkxcjM"><i class="fa fa-youtube"></i></a></span>
-       <span><a data-toggle="tooltip" data-placement="bottom" title="Linkedin" href="#"><i class="fa fa-linkedin"></i></a></span>
-       <!--<span><a data-toggle="tooltip" data-placement="bottom" title="Dribbble" href="#"><i class="fa fa-dribbble"></i></a></span>-->
-       <span class="last"><a data-toggle="tooltip" data-placement="bottom" title="Skype" href="#"><i class="fa fa-skype"></i></a></span>
-
+       <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
       </div><!-- end social icons -->
      <?php } ?>
 
@@ -153,8 +146,8 @@ include_once("includes/functions/loader.inc");
 
      </div><!-- end top menu -->
      <div class="callus">
-      <span class="topbar-email"><i class="fa fa-envelope"></i> <a href="#">contact@inoideas.org</a></span>
-      <span class="topbar-phone"><i class="fa fa-phone"></i> 1-205-419-5131</span>
+      <span class="topbar-email"><i class="fa fa-envelope"></i> <a href="<?php echo HOME_URL.'content.php?mode=9&content_type=web_contact' ?>"><?php echo!empty($si->email) ? $si->email : 'contact@site.org' ?></a></span>
+      <span class="topbar-phone"><i class="fa fa-phone"></i> <a href="#"><?php echo!empty($si->phone_no) ? $si->phone_no : '1-111-1111' ?></a></span>
      </div><!-- end callus -->
     </div><!-- end columns -->
    </div><!-- end container -->
@@ -237,7 +230,7 @@ include_once("includes/functions/loader.inc");
        . 'content_id=' . $contnent->content_id . '&content_type_id=' . $contnent->content_type_id . '">';
        echo substr($contnent->subject, 0, $subject_no_of_char) . "</a></h3>";
        echo '</div>';
-       echo "<div class='panel-body'>" . ino_strip_html($contnent->content_summary, $summary_no_of_char)  . "</div>";
+       echo "<div class='panel-body'>" . ino_strip_html($contnent->content_summary, $summary_no_of_char) . "</div>";
        echo '</div></div>';
        $cont_count++;
        $fp_contnts_ai->next();
@@ -260,7 +253,7 @@ include_once("includes/functions/loader.inc");
     <div id="footer_top"></div>
    </div>
   </div>
-  <div id="copyrights">
+<div id="copyrights">
    <div class="container">
     <div class="col-lg-5 col-md-6 col-sm-12">
      <div class="copyright-text">
@@ -272,6 +265,19 @@ include_once("includes/functions/loader.inc");
       </p>
      </div><!-- end copyright-text -->
     </div><!-- end widget -->
+    <div class="col-lg-7 col-md-6 col-sm-12 clearfix">
+     <div class="footer-menu">
+      <ul class="menu">
+       
+       <li><a href="http://inoideas.org/content.php?mode=9&content_type=web_contact">Contact</a></li>
+       <li><a href="https://github.com/inoerp/inoERP/releases">Releases</a></li>
+       <li><a href="https://www.mozilla.org/MPL/2.0/">MPL 2</a></li>
+       <li><a href="#">Cookie Preferences</a></li>
+       <li class="active"><a href="#">Terms of Use</a></li>
+
+      </ul>
+     </div>
+    </div><!-- end large-7 --> 
    </div><!-- end container -->
   </div>
   <div class="dmtop">Scroll to Top</div>

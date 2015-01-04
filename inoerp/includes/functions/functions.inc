@@ -157,8 +157,13 @@ function check_browser() {
 }
 
 function access_denied($msg = '') {
- header("Location: access_denied.php?message=$msg");
+// header("Location: access_denied.php?message=$msg");
 // redirect_to(HOME_URL . 'access_denied.php');
+  echo '<h1> Access denied! - You dont have enough privillage to access the requested page </h1>';
+  if(!empty ($msg)){
+   echo $msg;
+  }
+  echo '<br><a href="javascript:history.go(-1)"><span class="button">Click Here </a> to go back to the previous page';
 }
 
 function site_maintenance($msg) {
@@ -976,8 +981,8 @@ function add_new_search_criteria() {
 
 function ino_attachement($file, $file_name = 'attachments') {
  $stmt = '<div id="show_attachment" class="show_attachment">
-						 <div id="file_upload_form">
-							<ul class="inRow asperWidth">
+						 <div id="file_upload_form" class="form-group">
+							<ul class="inRow asperWidth"><label for="exampleInputFile">Attach File</label>
 							 <li><input type="file" id="attachments" class="attachments" name="' . $file_name . '[]" multiple/></li>
 							 <li> <button  form="file_upload" name="attach_submit" id="attach_submit" class="submit button">Attach</button></li>';
  $stmt.='<li class="show_loading_small"><img alt="Loading..." src="' . HOME_URL . 'themes/images/small_loading.gif"/></li>

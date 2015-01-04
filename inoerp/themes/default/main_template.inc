@@ -16,6 +16,7 @@
   <link href="<?php echo THEME_URL; ?>/public.css" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo THEME_URL; ?>/menu.css" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo THEME_URL; ?>/jquery.css" media="all" rel="stylesheet" type="text/css" />
+  <!--<link href="<?php // echo HOME_URL; ?>tparty/bootstrap/css/bootstrap.css" rel="stylesheet">-->
   <?php
   if (!empty($css_file_paths)) {
    foreach ($css_file_paths as $key => $css_file) {
@@ -27,6 +28,7 @@
   ?>
   <script src="includes/js/jquery-2.0.3.min.js"></script>
   <script src="includes/js/jquery-ui.min.js"></script>
+  <!--<script src="<?php // echo HOME_URL; ?>tparty/bootstrap/js/bootstrap.min.js"></script>-->
   <script src="includes/js/custom/tinymce/tinymce.min.js"></script>
   <script src="includes/js/save.js"></script>
   <script src="includes/js/custom_plugins.js"></script>

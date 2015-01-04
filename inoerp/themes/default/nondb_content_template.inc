@@ -1,9 +1,3 @@
-<?php 
-if(!empty($non_db_content_type)){
- include_once 'nondb_content_template.inc'; 
- return;
-}
-?>
 <div class="container">
  <div class="row">
   <div class="col-sm-8 blog-main">
@@ -15,71 +9,25 @@ if(!empty($non_db_content_type)){
        <div id="content_divId">
         <!--    START OF FORM HEADER-->
         <div class="error"></div><div id="loading"></div>
-        <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
+        <?php echo (!empty($show_message)) ? $show_message : "";  $f = new inoform();?> 
         <!--    End of place for showing error messages-->
         <div id="form_all">
          <div id ="form_header">
           <div class='heading'> <?php echo $content_type->description; ?></div>
           <form action=""  method="post" id="content_data"  name="content_data">
            <!--create empty form or a single id when search is not clicked and the id is referred from other content -->
-           <?php echo $f->hidden_field_withId('content_id', $$class->content_id); ?>
-           <?php echo $f->hidden_field_withId('content_type_id', $content_type->content_type_id); ?>
-           <?php echo $f->hidden_field_withId('content_type', $content_type_name); ?>
-           <div id="subject"><label>Subject : </label>
-            <?php echo form::text_field('subject', $$class->subject, 100) ?>
-            <span class="button"><a class="show2 content_id" href="content.php?content_id=<?php echo $$class->content_id; ?>&content_type=<?php echo $content_type_name ?>">View</a></span>
-           </div>
-
-           <div id="extra_form_element">
-            <?php echo!empty($form_element) ? $form_element : "" ?>
-           </div>
+           <?php
+           // echo pa($content_type); 
+           if (method_exists($content_type, 'entry_form')) {
+            echo call_user_func(array($content_type, 'entry_form'), $_GET);
+           }
+           ?>
            <!--End of Content-->
-           <div id="show_attachment" class="show_attachment">
-            <div id="file_upload_form">
-             <ul class="inRow asperWidth">
-              <li><input type="file" id="attachments" class="attachments" name="attachments[]" multiple/></li>
-              <li> <input type="button" value="Attach" form="file_upload" name="attach_submit" id="attach_submit" class="submit button"></li>
-              <li class="show_loading_small"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/small_loading.gif"/></li>
-             </ul>
-             <div class="uploaded_file_details"></div>
-            </div>
-            <?php echo file::attachment_statement($file); ?>
-           </div>
-           <div id="content_element">
-            <ul>
-             <li> 
-              <?php
-              if (!empty($category_select_statement_array)) {
-               foreach ($category_select_statement_array as $category_select_statement) {
-                echo '<label>Category</label>';
-                echo $category_select_statement;
-               }
-              } else {
-               if (!empty($categories_of_content_type_select_option_array)) {
-                foreach ($categories_of_content_type_select_option_array as $records) {
-                 echo '<label>Category</label>';
-                 echo $records;
-                }
-               }
-              }
-              ?>
-             </li>
-             <li> <label>Show in Front Page : </label>
-              <?php echo form::checkBox_field_d('show_in_fp_cb'); ?></li>
-             <li> <label>Published : </label> 
-              <?php echo form::checkBox_field('published_cb', $$class->published_cb); ?></li>
-             <li><label>Weight : </label><?php form::text_field_ds('weightage'); ?> </li>
-             <li><label>Rev Number : </label><?php form::text_field_ds('rev_number'); ?></li>
-             <li><label>Parent : </label><?php form::text_field_ds('parent_id'); ?></li>
-             <li><label>URL Alias : </label> <?php echo $f->text_field('url_alias', $$class->url_alias, '70', ''); ?> 
-              <?php echo $f->hidden_field('ext_url_alias_id', $$class->ext_url_alias_id); ?>
-             </li> 
-             <li><label>Tags : </label> <?php echo $f->text_field('terms', $$class->terms, '50', ''); ?> </li>
-            </ul>
-           </div>
+           <div> <?php echo ino_attachement($file) ?> </div>
+           <?php echo $f->hidden_field_withId('non_db_content_type', $non_db_content_type); ?>
            <?php
            if ($access_level <= 3 & $mode == 9) {
-            echo '<div id="save" class="submit"><input type="button" value="Save Post" name="submit_content" class="button"></div>';
+            echo '<div id="save" class="submit"><input type="button" value="Submit" name="submit_content" class="button"></div>';
            }
            ?>
           </form>

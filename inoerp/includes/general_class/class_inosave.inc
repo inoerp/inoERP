@@ -247,7 +247,7 @@ class inosave extends dbObject {
      }
      return;
     } else if ($before_save_result == 10) {
-     echo "<br> All data are sucessfully saved @ before save "; //before save completed all activities
+//     echo "<br> All data are sucessfully saved @ before save "; //before save completed all activities
      return;
     }
    }
@@ -406,7 +406,7 @@ class inosave extends dbObject {
   } else {
    global $ie_array_page;
    global $ie;
-   echo '<div class="message"> Action Completed - Inosave02! </div> ';
+   echo '<div class="message"> Action Completed</div> ';
    if (!empty($ie_array_page)) {
     echo $ie->show_pageErrors($ie_array_page);
    }
