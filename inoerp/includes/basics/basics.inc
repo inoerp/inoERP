@@ -24,8 +24,7 @@
  defined('INC_AR') ? null : define('INC_AR', HOME_DIR . DS . 'modules' . DS . 'ar');
  defined('INC_PO') ? null : define('INC_PO', HOME_DIR . DS . 'modules' . DS . 'po');
  defined('INC_BOM') ? null : define('INC_BOM', HOME_DIR . DS . 'modules' . DS . 'bom');
- defined('INC_WIP') ? null : define('INC_WIP', HOME_DIR . DS . 'modules' . DS . 'wip');
-
+ 
 //load core objects
  require_once(INC_BASICS . DS . "dbsettings.inc");
  defined('DB_SERVER') ? null : define("DB_SERVER", "");
@@ -194,16 +193,17 @@
  require_once(INC_MODULE . DS . "bom" . DS . "bom_routing" . DS . "class_bom_routing_v.inc");
  require_once(INC_MODULE . DS . "bom" . DS . "bom_routing" . DS . "class_bom_routing_line_v.inc");
 
- require_once(INC_WIP . DS . "wip_wo" . DS . "class.wip_wo_header.inc");
- require_once(INC_WIP . DS . "wip_wo" . DS . "class.wip_wo_bom.inc");
- require_once(INC_WIP . DS . "wip_wo" . DS . "class.wip_wo_routing_line.inc");
- require_once(INC_WIP . DS . "wip_wo" . DS . "class.wip_wo_routing_detail.inc");
- require_once(INC_WIP . DS . "wip_wo" . DS . "class_wip_wo_routing_v.inc");
+ require_once(INC_MODULE . DS . "wip" . DS . "wip_wo" . DS . "class.wip_wo_header.inc");
+ require_once(INC_MODULE . DS . "wip" . DS . "wip_wo" . DS . "class.wip_wo_bom.inc");
+ require_once(INC_MODULE . DS . "wip" . DS . "wip_wo" . DS . "class.wip_wo_routing_line.inc");
+ require_once(INC_MODULE . DS . "wip" . DS . "wip_wo" . DS . "class.wip_wo_routing_detail.inc");
+ require_once(INC_MODULE . DS . "wip" . DS . "wip_wo" . DS . "class_wip_wo_routing_v.inc");
  require_once(INC_MODULE . DS . "wip" . DS . "wip_wo" . DS . "class_ra_wip.inc");
- require_once(INC_WIP . DS . "wip_move_transaction" . DS . "class.wip_move_transaction.inc");
- require_once(INC_WIP . DS . "wip_wo_completion" . DS . "class_wip_wo_completion.inc");
- require_once(INC_WIP . DS . "wip_material_transaction" . DS . "class_wip_material_transaction.inc");
- require_once(INC_WIP . DS . "wip_resource_transaction" . DS . "class.wip_resource_transaction.inc");
+ require_once(INC_MODULE . DS . "wip" . DS . "wip_move_transaction" . DS . "class.wip_move_transaction.inc");
+ require_once(INC_MODULE . DS . "wip" . DS . "wip_wo_completion" . DS . "class_wip_wo_completion.inc");
+ require_once(INC_MODULE . DS . "wip" . DS . "wip_wol_transaction" . DS . "class_wip_wol_transaction.inc");
+ require_once(INC_MODULE . DS . "wip" . DS . "wip_material_transaction" . DS . "class_wip_material_transaction.inc");
+ require_once(INC_MODULE . DS . "wip" . DS . "wip_resource_transaction" . DS . "class.wip_resource_transaction.inc");
  require_once(INC_MODULE . DS . "wip" . DS . "accounting_group" . DS . "class_wip_accounting_group.inc");
  require_once(INC_MODULE . DS . "wip" . DS . "wo_work_bench" . DS . "class_wip_wo_work_bench.inc");
  require_once(INC_MODULE . DS . "wip" . DS . "wo_work_bench" . DS . "class_wip_wo_work_bench_line.inc");

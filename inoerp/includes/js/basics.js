@@ -2936,6 +2936,7 @@ $(document).ready(function () {
   location.reload(true);
   localStorage.removeItem("disableContextMenu");
  });
+ 
 //setConetntRightLeft();
  tinymce.init({
   selector: '.mediumtext',

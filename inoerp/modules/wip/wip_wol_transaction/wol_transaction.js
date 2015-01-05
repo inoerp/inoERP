@@ -33,7 +33,7 @@ function serial_details(generation_type, trClass) {
 
 
  switch ($('#transaction_type_id').val()) {
-  case '7' :
+  case '12' :
    $.when(getSerialNumber({
     'org_id': $('#org_id').val(),
     'status': 'IN_WIP',
@@ -47,7 +47,7 @@ function serial_details(generation_type, trClass) {
 
    break;
 
-  case '6' :
+  case '10' :
    $.when(getSerialNumber({
     'org_id': $('#org_id').val(),
     'status': 'IN_STORE',
@@ -339,43 +339,6 @@ $(document).ready(function () {
  });
 
 
-
- //Get the primary_id on refresh button click
-// $('a.show.wip_wo_headerid_show').click(function () {
-//  var wip_wo_header_id = $('#wip_wo_header_id').val();
-//  var transaction_type_id = $('#transaction_type_id').val();
-//  var wo_number = $('#wo_number').val();
-//  var link = 'transaction_type_id=' + transaction_type_id;
-//  if (wip_wo_header_id) {
-//   link += '&wip_wo_header_id=' + wip_wo_header_id;
-//  } else if (wo_number) {
-//   link += '&wo_number=' + wo_number;
-//  }
-//  $(this).attr('href', modepath() + link);
-// });
-
-// function popup() {
-//  $("#content").on("click", ".popup.itemId", function () {
-//   var idValue = $(this).closest("tr").attr("id");
-//   localStorage.idValue = idValue;
-//   var link = '../../inv/item/find_item.php?org_id=' + $("#org_id").val() + '&RowDivId=' + idValue;
-//   void window.open(link, '_blank',
-//           'width=900,height=900,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');
-//   return false;
-//  }).one();
-// }
-// popup();
-
-//add new line
-// onClick_add_new_row('tr.inv_transaction_row0', 'tbody.inv_transaction_values', 4);
-// $("#content").on("click", ".add_row_img", function () {
-//  var addNewRow = new add_new_rowMain();
-//  addNewRow.trClass = 'inv_transaction_row';
-//  addNewRow.tbodyClass = 'form_data_line_tbody';
-//  addNewRow.noOfTabs = 5;
-//  addNewRow.removeDefault = false;
-//  addNewRow.add_new_row();
-// });
 
 });
 

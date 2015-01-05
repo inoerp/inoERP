@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -7,68 +8,53 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
+
 /**
- * wip_wol_transaction 
+ * wip_wo_completion 
  *
  */
 class wip_wol_transaction extends inv_transaction {
 
  public static $table_name = "inv_transaction";
  public static $primary_column = "inv_transaction_id";
+ public static $dependent_classes = ['wip_wo_header'];
  public static $key_column = 'item_id_m';
- public static $module = "inv";
+ public static $module = "wip";
  public static $system_info = [
-  'name' => 'Material Transaction',
-  'number' => '2603',
-  'description' => 'Work Order Material Transaction',
+  'name' => 'WOL Completion',
+  'number' => '2608',
+  'description' => 'Work Order Less Transaction',
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',
   'primary_entity_cb' => '',
   'module_name' => 'wip',
-  'weight' => 3
+  'weight' => 7
  ];
  public static $transaction_type_id_a = [
-  '6' => 'WIP Issue',
-  '7' => 'WIP Return',
+  '10' => 'Work Order Less Completion',
+  '12' => 'Work Order Less Return',
  ];
  public $field_a = [
-  'inv_transaction_id',
-  'transaction_type_id',
-  'org_id',
-  'status',
-  'receipt_line_id',
-  'item_number',
+  'wip_wol_transaction_id',
   'item_id_m',
-  'uom_id',
-  'logical_transaction_cb',
-  'document_type',
-  'document_number',
-  'document_id',
-  'wip_wo_bom_id',
-  'po_header_id',
-  'po_line_id',
-  'po_detail_id',
-  'reason',
-  'reference_type',
-  'reference_key_name',
-  'reference_key_value',
   'description',
-  'from_org_id',
-  'from_subinventory_id',
-  'from_locator_id',
+  'revision_name',
+  'org_id',
+  'wip_accounting_group_id',
+  'transaction_type_id',
+  'transaction_status',
+  'start_date',
+  'completion_date',
   'quantity',
-  'from_account_id',
-  'to_org_id',
-  'to_subinventory_id',
-  'to_locator_id',
-  'to_account_id',
-  'unit_cost',
-  'costed_amount',
-  'gl_journal_header_id',
-  'ef_id',
-  'transaction_rev_enabled_cb',
-  'rev_start_number',
+  'nettable_quantity',
+  'reference_bom_item_id_m',
+  'reference_routing_item_id_m',
+  'completion_sub_inventory',
+  'completion_locator',
+  'completed_quantity',
+  'scrapped_quantity',
+  'line',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -77,34 +63,12 @@ class wip_wol_transaction extends inv_transaction {
  //variables used for showing data
 
  public $initial_search = [
-  "inv_transaction_id",
-  "transaction_type_id",
-  'status',
-  "item_id_m",
-  "org_id",
-  "item_number",
-  "creation_date",
-  "document_type",
-  "document_number"
+  'wip_wol_transaction_id',
+  'item_id_m',
+  'start_date',
  ];
- public $column = [
-  "inv_transaction_id",
-  "transaction_type_id",
-  'status',
-  "item_number",
-  "document_type",
-  "document_number",
-  "reason",
-  "reference",
-  "created_by",
-  "creation_date"];
- public $account = [
-  "from_account_id",
-  "to_account_id",
-  "account_id"];
  public $checkbox = [
   "logical_transaction_cb",
-  "transfer_to_gl_cb",
   "transaction_rev_enabled_cb"];
  public $fields_inHeader_needsToBeInserted_inPOST = [
   "org_id",
@@ -121,7 +85,7 @@ class wip_wol_transaction extends inv_transaction {
  public $search = [
   '_show_view_path' => 1,
  ];
- public $pageTitle = " WIP Material Transaction"; //page Title
+ public $pageTitle = " WIP - Create & View WO Completion"; //page Title
  public $option_lists = [
   'inv_transaction_class' => 'TRANSACTION_TYPE_CLASS'
  ];
@@ -132,9 +96,33 @@ class wip_wol_transaction extends inv_transaction {
   'wip_wo_header_id',
   'bom_sequence'
  ];
- public $wip_wo_bom_id;
- public $bom_sequence;
- public $wip_wo_header_id;
+ public $numberField = [
+  'quantity',
+  'nettable_quantity',
+ ];
+ public $wip_wol_transaction_id;
+ public $item_id_m;
+ public $description;
+ public $revision_name;
+ public $org_id;
+ public $wip_accounting_group_id;
+ public $transaction_type_id;
+ public $transaction_status;
+ public $start_date;
+ public $completion_date;
+ public $quantity;
+ public $nettable_quantity;
+ public $reference_bom_item_id_m;
+ public $reference_routing_item_id_m;
+ public $completion_sub_inventory;
+ public $completion_locator;
+ public $completed_quantity;
+ public $scrapped_quantity;
+ public $line;
+ public $created_by;
+ public $creation_date;
+ public $last_update_by;
+ public $last_update_date;
 
 }
 

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * inoERP
  *
@@ -8,7 +7,6 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
-
 /**
  * wip_wo_completion 
  *
@@ -21,9 +19,9 @@ class wip_wo_completion extends inv_transaction {
  public static $key_column = 'item_id_m';
  public static $module = "wip";
  public static $system_info = [
-  'name' => 'WOL Completion',
-  'number' => '2608',
-  'description' => 'Work Order Less Transaction',
+  'name' => 'WO Completion',
+  'number' => '2607',
+  'description' => 'Work Order Completion',
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',
@@ -32,29 +30,46 @@ class wip_wo_completion extends inv_transaction {
   'weight' => 7
  ];
  public static $transaction_type_id_a = [
-  '11' => 'Work Order Less Completion',
-  '13' => 'Work Order Less Return',
+  '11' => 'WIP Assembly Completion',
+  '13' => 'WIP Assembly Return',
  ];
  public $field_a = [
-  'wip_wol_transaction_id',
-  'item_id_m',
-  'description',
-  'revision_name',
-  'org_id',
-  'wip_accounting_group_id',
+  'inv_transaction_id',
   'transaction_type_id',
-  'transaction_status',
-  'start_date',
-  'completion_date',
+  'org_id',
+  'status',
+  'receipt_line_id',
+  'item_number',
+  'item_id_m',
+  'uom_id',
+  'logical_transaction_cb',
+  'document_type',
+  'document_number',
+  'document_id',
+  'wip_wo_bom_id',
+  'po_header_id',
+  'po_line_id',
+  'po_detail_id',
+  'reason',
+  'reference_type',
+  'reference_key_name',
+  'reference_key_value',
+  'description',
+  'from_org_id',
+  'from_subinventory_id',
+  'from_locator_id',
   'quantity',
-  'nettable_quantity',
-  'reference_bom_item_id_m',
-  'reference_routing_item_id_m',
-  'completion_sub_inventory',
-  'completion_locator',
-  'completed_quantity',
-  'scrapped_quantity',
-  'line',
+  'from_account_id',
+  'to_org_id',
+  'to_subinventory_id',
+  'to_locator_id',
+  'to_account_id',
+  'unit_cost',
+  'costed_amount',
+  'gl_journal_header_id',
+  'ef_id',
+  'transaction_rev_enabled_cb',
+  'rev_start_number',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -117,29 +132,9 @@ class wip_wo_completion extends inv_transaction {
   'wip_wo_header_id',
   'bom_sequence'
  ];
- public $wip_wol_transaction_id;
- public $item_id_m;
- public $description;
- public $revision_name;
- public $org_id;
- public $wip_accounting_group_id;
- public $transaction_type_id;
- public $transaction_status;
- public $start_date;
- public $completion_date;
- public $quantity;
- public $nettable_quantity;
- public $reference_bom_item_id_m;
- public $reference_routing_item_id_m;
- public $completion_sub_inventory;
- public $completion_locator;
- public $completed_quantity;
- public $scrapped_quantity;
- public $line;
- public $created_by;
- public $creation_date;
- public $last_update_by;
- public $last_update_date;
+ public $wip_wo_bom_id;
+ public $bom_sequence;
+ public $wip_wo_header_id;
 
 }
 

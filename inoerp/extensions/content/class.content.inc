@@ -740,7 +740,7 @@ AND content.content_id = category_reference.reference_id  ";
   if ($extra_content) {
    foreach ($content_field_array as $key => $value) {
     if ($value != 'content_id') {
-     $content_statemnt .= nl2br($extra_content->$value);
+     $content_statemnt .= ($extra_content->$value);
     }
    }
   }

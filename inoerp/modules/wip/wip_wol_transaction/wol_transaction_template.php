@@ -1,21 +1,25 @@
-<div id="wip_material_transaction_divId">
+<div id="wip_wol_transaction_divId">
  <?php echo (!empty($hidden_stmt)) ? $hidden_stmt : ""; ?> 
  <!--    End of place for showing error messages-->
 
 
  <!--create empty form or a single id when search is not clicked and the id is referred from other page -->
- <div id ="form_header"> <span class="heading">WIP Material Transaction </span> 
+ <div id ="form_header"> <span class="heading">Work Order Less Transaction </span> 
   <div id="form_serach_header"><ul class="inline_list">
     <li><label>Inventory Org : </label>
      <?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>
     </li>
-    <li> <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="wip_wo_header_id select_popup clickable">
-      WO Header Id(1) : </label> <?php $f->text_field_drm('wip_wo_header_id'); ?>
+    <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup clickable">
+      Item Number(2) : </label> 
+     <?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
+     <?php $f->text_field_dm('item_number', 'select_item_number'); ?>
     </li>
-    <li><label>WO Number : </label>  <?php $f->text_field_dr('wo_number'); ?> </li>
+    <li><label>Revision</label>
+     <?php echo $f->select_field_from_object('revision_name', $revision_name_a, 'revision_name', 'revision_name', $$class->revision_name, 'revision_name', 'small'); ?>
+    </li>
     <li><label>Transaction Type : </label>
-     <?php echo $f->select_field_from_array('transaction_type_id', wip_material_transaction::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1); ?>
-     <a name="show" href="form.php?class_name=wip_material_transaction&<?php echo "mode=$mode"; ?>" class="show2 document_id wip_material_transaction_id">          <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+     <?php echo $f->select_field_from_array('transaction_type_id', wip_wol_transaction::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1); ?>
+     <a name="show" href="form.php?class_name=wip_wol_transaction&<?php echo "mode=$mode"; ?>" class="show2 document_id wip_wol_transaction_id">          <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
     </li>
    </ul>
   </div>
@@ -30,7 +34,7 @@
     <li><a href="#tabsLine-5">Lot & Serial </a></li>
    </ul>
    <div class="tabContainer"> 
-    <form action=""  method="post" id="wip_material_transaction"  name="wip_material_transaction">
+    <form action=""  method="post" id="wip_wol_transaction"  name="wip_wol_transaction">
      <div id="tabsLine-1" class="tabContent">
       <table class="form_line_data_table">
        <thead> 
@@ -47,7 +51,7 @@
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">
-        <tr class="wip_material_transaction0" id="tab1_1">
+        <tr class="wip_wol_transaction0" id="tab1_1">
          <td>    
           <ul class="inline_action">
            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
@@ -82,7 +86,7 @@
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">
-        <tr class="wip_material_transaction0" id="tab2_1">
+        <tr class="wip_wol_transaction0" id="tab2_1">
          <td>
           <?php echo form::select_field_from_object('from_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->from_subinventory_id, '', $readonly, 'subinventory_id'); ?>
          </td>
@@ -117,7 +121,7 @@
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">
-        <tr class="wip_material_transaction0" id="tab3_1">
+        <tr class="wip_wol_transaction0" id="tab3_1">
          <td><?php $f->text_field_widr('document_type'); ?>							</td>
          <td><?php echo $f->text_field('document_number', $$class->wo_number, '8', '', '', 1, 1); ?>							</td>
          <td><?php echo $f->text_field('document_id', $$class->wip_wo_header_id, '8', '', '', 1, 1); ?>							</td>
@@ -141,7 +145,7 @@
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">
-        <tr class="wip_material_transaction0" id="tab4_1">
+        <tr class="wip_wol_transaction0" id="tab4_1">
          <td><?php $f->ac_field_wid('account_id'); ?></td>
          <td><?php form::text_field_wid('unit_cost'); ?></td>
          <td><?php form::text_field_wid('costed_amount'); ?></td>
@@ -160,7 +164,7 @@
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
-        <tr class="wip_material_transaction0" id="tab4_1">
+        <tr class="wip_wol_transaction0" id="tab4_1">
          <td class="add_detail_values0">	<?php
           echo!empty($$class->lot_number_id) ? $f->hidden_field('lot_number_id', $$class->lot_number_id) : $f->hidden_field('lot_number_id', '');
           echo!empty($$class->lot_generation) ? $f->hidden_field('lot_generation', $$class->lot_generation) : $f->hidden_field('lot_generation', '');
@@ -322,11 +326,11 @@
 
 <div id="js_data">
  <ul id="js_saving_data">
-  <li class="lineClassName" data-lineClassName="wip_material_transaction" ></li>
+  <li class="lineClassName" data-lineClassName="wip_wol_transaction" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
   <li class="line_key_field" data-line_key_field="item_id_m" ></li>
   <li class="single_line" data-single_line="false" ></li>
-  <li class="form_line_id" data-form_line_id="wip_material_transaction" ></li>
+  <li class="form_line_id" data-form_line_id="wip_wol_transaction" ></li>
   <li class="before_save_function" data-before_save_function="beforeSave" ></li>
  </ul>
  <ul id="js_contextMenu_data">
