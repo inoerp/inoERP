@@ -709,7 +709,7 @@ function rightClickMenu(menuContent) {
   if ($("#right_click_menu")) {
    $("div#right_click_menu").remove();
   }
-  $(menu).appendTo("#content").css({top: event.pageY + "px", left: event.pageX + "px"});
+  $(menu).appendTo('body').css({top: event.pageY + "px", left: event.pageX + "px"});
  });
  $('body').bind("click", function(event) {
   $("div#right_click_menu").remove();

@@ -135,6 +135,7 @@
     ORDER BY bl.bom_sequence ASC";
     $all_bom_lines = self::find_by_sql($sql);
    }
+//   echo $sql; pa($all_bom_lines);
 
    return !empty($all_bom_lines) ? $all_bom_lines : false;
   }

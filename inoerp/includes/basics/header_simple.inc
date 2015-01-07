@@ -17,5 +17,4 @@
 	 die("You dont have access to this page! :  ");
 	}
 	?>
-
 	<? ob_flush(); ?>

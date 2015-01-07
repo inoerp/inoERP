@@ -318,7 +318,7 @@ class path extends dbObject {
  public function indented_pathMenu($allowed_parent_path_ids, &$allowed_path_ids, $divClass = '') {
   $path = new path();
   $level = 0;
-  $allPaths = '<div class="menu"><ul class="block_menu ' . $divClass . '">';
+  $allPaths = '<div class="menu"><ul class="block_menu  ' . $divClass . '">';
   foreach ($allowed_parent_path_ids as $path_id) {
    $path->findBy_id($path_id);
    $url = $path->fullPath($path->path_link);

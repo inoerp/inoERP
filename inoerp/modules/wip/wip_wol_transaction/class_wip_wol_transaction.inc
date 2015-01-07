@@ -15,8 +15,8 @@
  */
 class wip_wol_transaction extends inv_transaction {
 
- public static $table_name = "inv_transaction";
- public static $primary_column = "inv_transaction_id";
+ public static $table_name = "wip_wol_transaction";
+ public static $primary_column = "wip_wol_transaction_id";
  public static $dependent_classes = ['wip_wo_header'];
  public static $key_column = 'item_id_m';
  public static $module = "wip";
@@ -94,7 +94,8 @@ class wip_wol_transaction extends inv_transaction {
   'item_description',
   'wip_wo_bom_id',
   'wip_wo_header_id',
-  'bom_sequence'
+  'bom_sequence',
+  
  ];
  public $numberField = [
   'quantity',
@@ -123,6 +124,7 @@ class wip_wol_transaction extends inv_transaction {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
+ public $bom_sequence;
 
 }
 

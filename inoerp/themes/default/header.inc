@@ -61,7 +61,7 @@
      echo '<div id = "header_top" class = "clear"></div>';
     }
     ?>
-    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
      <?php
      $show_header_links = true;
      if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
@@ -79,12 +79,12 @@
      <?php } ?>
 
     </div><!-- end columns -->
-    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
      <div class="topmenu">
-      <span class="topbar-login"><i class="fa fa-user"></i>
+      <span class="topbar-login">
        <?php
        if (!empty($_SESSION['login_status'])) {
-        echo '
+        echo '<i class="fa fa-user"></i>
         <ul class="nav navbar-nav">';
         echo '<li class="dropdown"><a aria-expanded="true" role="button" data-toggle="dropdown" class="dropdown-toggle" '
         . 'href="' . HOME_URL . 'form.php?class_name=user&amp;mode=9&amp;user_id=' . $_SESSION['user_id'] . '">';
@@ -103,7 +103,7 @@
         echo '<li class = "divider" role = "presentation"></li>';
         echo '<li><a href = "' . HOME_URL . 'extensions/user/user_logout.php"> Logout</a></li>';
        } else {
-        echo '<a href = "' . HOME_URL . 'extensions/user/user_login.php">Login / Register</a>';
+        include_once 'extensions/user/popup_login/user_popup_login_template.php';
        }
        echo '</ul>
        </li>
@@ -131,6 +131,7 @@
      </div><!-- end navbar-header -->
      <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right">
       <ul class="nav navbar-nav">
+       <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
        <li class="active"><a href="http://demo.inoideas.org/extensions/user/user_login.php" >DEMO <div class="arrow-up"></div></a></li>
        <li><a href="https://github.com/inoerp/inoERP" >Download <div class="arrow-up"></div></a></li>
        <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->

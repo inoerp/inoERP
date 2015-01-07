@@ -1,22 +1,57 @@
-function setValFromSelectPage(wip_wo_header_id, wo_number, org_id) {
+function setValFromSelectPage(wip_wo_header_id, item_id_m, item_number, item_description,
+        uom_id, processing_lt) {
  this.wip_wo_header_id = wip_wo_header_id;
- this.wo_number = wo_number;
- this.org_id = org_id;
+ this.item_id_m = item_id_m;
+ this.item_number = item_number;
+ this.item_description = item_description;
+ this.uom_id = uom_id;
+ this.processing_lt = processing_lt;
 }
 
 setValFromSelectPage.prototype.setVal = function () {
- var wo_obj = [{id: 'wip_wo_header_id', data: this.wip_wo_header_id},
-  {id: 'wo_number', data: this.wo_number},
-  {id: 'org_id', data: this.org_id}
+ if (this.wip_wo_header_id) {
+  $("#wip_wo_header_id").val(this.wip_wo_header_id);
+ }
+ var rowClass = '.' + localStorage.getItem("row_class");
+ var itemType = localStorage.getItem("itemType");
+ rowClass = rowClass.replace(/\s+/g, '.');
+
+
+ var item_obj = [{id: 'item_id_m', data: this.item_id_m},
+  {id: 'item_number', data: this.item_number},
+  {id: 'item_description', data: this.item_description},
+  {id: 'uom', data: this.uom_id},
+  {id: 'processing_lt', data: this.processing_lt}
  ];
 
- $(wo_obj).each(function (i, value) {
-  if (value.data) {
-   var fieldId = '#' + value.id;
-   $('#content').find(fieldId).val(value.data);
-  }
- });
+ var component_obj = [{id: 'component_item_id_m', data: this.item_id_m},
+  {id: 'component_item_number', data: this.item_number},
+  {id: 'component_description', data: this.item_description},
+  {id: 'component_uom', data: this.uom_id}
+ ];
+
+ if (localStorage.getItem("li_divId")) {
+  var li_divId = '#' + localStorage.getItem("li_divId");
+  $(item_obj).each(function (i, value) {
+   if (value.data) {
+    var fieldId = '#' + value.id;
+    $('#content').find(fieldId).val(value.data);
+   }
+  });
+ } else {
+  $(component_obj).each(function (i, value) {
+   if (value.data) {
+    var fieldClass = '.' + value.id;
+    $('#content').find(rowClass).find(fieldClass).val(value.data);
+   }
+  });
+ }
+ localStorage.removeItem("row_class");
+ localStorage.removeItem("field_class");
+ localStorage.removeItem("li_divId");
+ localStorage.removeItem("itemType");
 };
+
 
 function serial_details(generation_type, trClass) {
  var trClass_d = '.' + trClass;
@@ -291,25 +326,21 @@ $(document).ready(function () {
          });
 
 
-
- //selecting wo header id data
- $('body').off("click", '.wip_wo_header_id.select_popup')
-         .on("click", '.wip_wo_header_id.select_popup', function () {
-          var openUrl = 'select.php?class_name=wip_wo_header&wo_status=%3DRELEASED';
-          void window.open(openUrl, '_blank',
-                  'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-         });
-
- $('body').off('click', 'a.wip_material_transaction_id').on('click', 'a.wip_material_transaction_id', function (e) {
+ $('body').off('click', 'a.wip_wol_transaction_id').on('click', 'a.wip_wol_transaction_id', function (e) {
   e.preventDefault();
   var transaction_type_id = $('#transaction_type_id').val();
-  var wip_wo_header_id = $('#wip_wo_header_id').val();
-  var wo_number = $('#wo_number').val();
+  var org_id = $('#org_id').val();
+  var item_id_m = $('#item_id_m').val();
+  var revision_name = $('#revision_name').val();
   var link = '&transaction_type_id=' + transaction_type_id;
-  if (wip_wo_header_id) {
-   link += '&wip_wo_header_id=' + wip_wo_header_id;
-  } else if (wo_number) {
-   link += '&wo_number=' + wo_number;
+  if (item_id_m) {
+   link += '&item_id_m=' + item_id_m;
+  } 
+  if (org_id) {
+   link += '&org_id=' + org_id;
+  }
+    if (revision_name) {
+   link += '&revision_name=' + revision_name;
   }
   var urlLink = $(this).attr('href');
   var urlLink_a = urlLink.split('?');
@@ -338,7 +369,16 @@ $(document).ready(function () {
   }
  });
 
+ $('#content').off('blur', '#org_id, #item_number').on('blur', '#org_id, #item_number', function () {
+  if ($('#org_id').val() && $('#item_id_m').val()) {
+   getItemRevision({
+    'org_id': $('#org_id').val(),
+    'item_id_m': $('#item_id_m').val(),
+    'show_date': false
+   });
+  }
 
+ });
 
 });
 

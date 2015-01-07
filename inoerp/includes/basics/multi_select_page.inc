@@ -43,19 +43,20 @@ if (!empty($msg)) {
   classSave.saveMain(beforeSave);
 
  });</script>
-<div id="multi_select">
+<div id="erp_form_area">
+<div id="multi_select"><span class="heading">
+ <span class="heading"><?php  echo  ucwords(str_replace('_',' ',$action_message))  . ' - ' . ucwords(str_replace('_',' ',$class));?></span>
  <div class="error"></div><div id="loading"></div>
  <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
  <div id="list_contents">
   <!--			Beginning of line form-->
-  <div id ="form_line" class="multi_select_line">
+  <div id ="form_line" class="multi_select_line"><div class='hideDiv_input'></div>
    <div id="searchForm" class="<?php echo $class ?>"><?php
-    echo!(empty($error_msg)) ? $error_msg : "";
-    echo!(empty($search_form)) ? $search_form : "";
+    echo !(empty($error_msg)) ? $error_msg : "";
+    echo !(empty($search_form)) ? '<div class="hideDiv_input_element">'. $search_form . '</div>': "";
     ?>
    </div>
    <?php
-   echo '<h2 class="heading">' . ucwords(str_replace('_', ' ', $action_message)) . '</h2>';
    if (empty($search_result)) {
     echo "	</div> 		 </div> 		</div>	 </div> 	</div>  </div> </div></div>";
     return;
@@ -207,4 +208,5 @@ if (!empty($msg)) {
    ?>
   </div>
  </div>
+</div>
 </div>

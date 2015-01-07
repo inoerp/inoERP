@@ -74,7 +74,7 @@
    </div>
   </div>
   <div class="col-sm-4 blog-sidebar">
-   <div class="sidebar-module sidebar-module-inset">
+   <div class="sidebar-module ">
     <div id="content_left"></div>
    </div>
    <div class="sidebar-module">

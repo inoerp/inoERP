@@ -39,6 +39,10 @@ function getFormDetails(url) {
  }).done(function (result) {
   var newContent = $(result).find('div#structure').html();
   var allButton = $(result).find('div#header_top_container').html();
+    if(typeof allButton === 'undefined'){
+   allButton = '';
+ };
+
   var commentForm = $(result).find('div#comment_form').html();
   if (newContent) {
    $('#structure').replaceWith('<div id="structure">' + newContent + '</div>');
@@ -194,28 +198,47 @@ function getFieldNames(options) {
  $(".table_fields").attr("disabled", false);
 }
 
-function xX_getFieldNames(tableName, parentClass) {
- $('#loading').show();
- $.ajax({
-  url: 'extensions/view/json_view.php',
-  data: {tableName: tableName,
-   get_fieldName: 1},
-  type: 'get'
- }).done(function (result) {
-  var tableClass = '.' + parentClass.replace(/\s+/g, '.');
-  var div = $(result).filter('div#json_filed_names').html();
-  if (div.length > 5) {
-   $('#content').find(tableClass).find('.table_fields').empty().append(div);
-  }
-  $('#loading').hide();
- }).fail(function () {
-  alert("table field loading failed");
-  $('#loading').hide();
- });
- $(".table_fields").attr("disabled", false);
-}
 //function treeview
 function treeView() {
+ $('ul.tree_view  ul').hide();
+ $('ul.tree_view > li').show();
+ $('ul.tree_view > li').has('ul').addClass('contentContainer fa fa-plus-square');
+ $('.tree_view').on('click', '.contentContainer, .contentViewing',
+         function (e) {
+          if ($(this).hasClass('contentContainer')) {
+           $(this).find('>ul').show();
+           $(this).find('>ul').find('>li').show();
+           $(this).find('>ul').find('>li').has('ul').addClass('contentContainer fa-plus-square');
+           $(this).removeClass('contentContainer fa-plus-square').addClass('contentViewing fa fa-minus-square');
+           e.stopPropagation();
+          } else {
+           $(this).find('>ul').hide();
+           $(this).find('>ul').find('>li').hide().removeClass('contentContainer fa-plus-square');
+           $(this).removeClass('contentViewing fa-minus-square').addClass('contentContainer fa-plus-square');
+           e.stopPropagation();
+          }
+         });
+
+ $('.expand_collapse_all').on('click', function () {
+  $(this).parent().find('.tree_view').find('.contentContainer, .contentViewing').each(
+          function (e) {
+           if ($(this).hasClass('contentContainer')) {
+            $(this).find('ul').show();
+            $(this).find('ul').find('li').show();
+            $(this).find('ul').find('li').has('ul').addClass('contentContainer fa-plus-square');
+            $(this).removeClass('contentContainer fa-plus-square').addClass('contentViewing fa-minus-square');
+           } else {
+            $(this).find('ul').hide();
+            $(this).find('ul').find('li').hide().removeClass('contentContainer fa-minus-square');
+            $(this).removeClass('contentViewing fa-minus-square').addClass('contentContainer fa-plus-square');
+           }
+          });
+ });
+
+}
+
+
+function treeView_simple() {
  $('ul.tree_view  ul').hide();
  $('ul.tree_view > li').show();
  $('ul.tree_view > li').has('ul').addClass('contentContainer');
@@ -252,6 +275,8 @@ function treeView() {
  });
 
 }
+
+
 
 //get blocks
 function setConetntRightLeft() {
@@ -316,8 +341,8 @@ function getBlocks() {
   if ((typeof (header_top) !== 'undefined') && (header_top.length > 1)) {
    $('#header_top_container').css('display', 'block');
   }
-  treeView();
-  arrow_menu();
+//  treeView_simple();
+//  arrow_menu();
  }).fail(function () {
   $('#content_left').html('');
  });
@@ -3059,7 +3084,8 @@ $(document).ready(function () {
    {
     text: "OK",
     click: function () {
-     $(this).dialog("close");
+      $(this).dialog("close");
+     
     }
    }
   ],
@@ -3067,9 +3093,9 @@ $(document).ready(function () {
   position: {my: "left top", at: "left top", of: "#structure "}
  });
 
- $("#search_tip").click(function () {
-  $("#search_message").dialog("open");
- });
+ $('body').off('click','#search_tip').on('click','#search_tip',function () {
+    $("#search_message").dialog("open");
+  });
 
 //save data
  if ($('ul#js_saving_data').length > 0) {
@@ -3186,26 +3212,26 @@ $(document).ready(function () {
   $(this).closest('tr').find('.field_type').val(field_type);
  });
 
- $('#all_contents').on('click', '.hideDiv', function () {
+ $('body').off('click', '.hideDiv').on('click', '.hideDiv', function () {
   $('.hideDiv').children().toggle();
   $(this).parent().find('.hideDiv_element').toggle();
   $(this).parent().parent().find('.hideDiv_element').toggle();
   $(this).removeClass('hideDiv').addClass('showDiv');
  });
 
- $('#all_contents').on('click', '.showDiv', function () {
+ $('body').off('click', '.showDiv').on('click', '.showDiv', function () {
   $(this).children().toggle();
   $(this).parent().find('.hideDiv_element').toggle();
   $(this).parent().parent().find('.hideDiv_element').toggle();
   $(this).removeClass('showDiv').addClass('hideDiv');
  });
 
- $('#all_contents').on('click', '.hideDiv_input', function () {
+ $('body').off('click', '.hideDiv_input').on('click', '.hideDiv_input', function () {
   $(this).parent().find('.hideDiv_input_element').toggle();
   $(this).removeClass('hideDiv_input').addClass('showDiv_input');
  });
 
- $('#all_contents').on('click', '.showDiv_input', function () {
+ $('body').off('click', '.showDiv_input').on('click', '.showDiv_input', function () {
   $(this).parent().find('.hideDiv_input_element').toggle();
   $(this).removeClass('showDiv_input').addClass('hideDiv_input');
  });
@@ -3282,7 +3308,23 @@ $(document).ready(function () {
  getBlocks();
 
 
- $('body').on('click', '#header_top .menu a,#search_result .action a, #pagination .page_nos a, #new_page_button', function (e) {
+ $('body').on('click', '#header_top .menu a, #sys_menu_left_vertical .menu a,#search_result .action a, #pagination .page_nos a, #new_page_button', function (e) {
+  e.preventDefault();
+  var urlLink = $(this).attr('href');
+  var urlLink_a = urlLink.split('?');
+  var urlLink_firstPart_a = urlLink_a[0].split('/');
+  var pageType = urlLink_firstPart_a.pop();
+  if (pageType == 'form.php') {
+   var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
+  } else if (pageType == 'program.php') {
+   var formUrl = 'includes/json/json_program.php?' + urlLink_a[1];
+  } else {
+   var formUrl = urlLink;
+  }
+  getFormDetails(formUrl);
+ }).one();
+ 
+  $('#sys_menu_left_vertical .menu a').on('click', function (e) {
   e.preventDefault();
   var urlLink = $(this).attr('href');
   var urlLink_a = urlLink.split('?');

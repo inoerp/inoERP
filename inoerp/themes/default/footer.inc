@@ -19,7 +19,7 @@
  </div><!-- end calloutbox -->
 </div><!-- make bg -->
 
-<div id="footer-style-1" class="topBottomBG">
+<div id="footer-style-1">
  <div class="container">
   <div id="footer_top"></div>
  </div>

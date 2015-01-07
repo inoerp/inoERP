@@ -111,42 +111,37 @@ include_once("includes/functions/loader.inc");
      <?php } ?>
 
     </div><!-- end columns -->
+
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
      <div class="topmenu">
-      <span class="topbar-login"><i class="fa fa-user"></i>
-       <?php
-       if (!empty($_SESSION['login_status'])) {
-        echo '
-        <ul class="nav navbar-nav">';
-        echo '<li class="dropdown"><a aria-expanded="true" role="button" data-toggle="dropdown" class="dropdown-toggle" '
-        . 'href="' . HOME_URL . 'form.php?class_name=user&amp;mode=9&amp;user_id=' . $_SESSION['user_id'] . '">';
-        echo ucfirst($_SESSION['username']) . '! <span class="caret"></span></a>';
-        echo '<ul role="menu" class="dropdown-menu">';
-        echo '<li><a  href="' . HOME_URL . '">Home</a> </li>';
-        echo '<li><a href="' . HOME_URL . 'form.php?class_name=user&mode=9&user_id=' . $_SESSION['user_id'] . '">User Details</a></li>';
-        echo '<li class="child_link"><a href="' . HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id'] . '">Activities</a></li>';
-        echo '<li class="child_link"><a href = "' . HOME_URL . 'search.php?class_name=sys_notification_user">All Notifications</a></li>';
-        echo '<li data-path_description = "Dashborad">
-       <a href = "' . HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id'] . '">Dashboard</a>
-       </li>
-       <li data-path_description = "Dashborad Configuration" class="child_link">
-       <a href = "' . HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id'] . '">Configure</a>
-       </li>';
-        echo '<li class = "divider" role = "presentation"></li>';
-        echo '<li><a href = "' . HOME_URL . 'extensions/user/user_logout.php"> Logout</a></li>';
+      <span class="topbar-login">
+       <?php if (!empty($_SESSION['login_status'])) { ?>
+        <div class="dropdown">
+         <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="fa fa-user"> </i><?php echo ' '. ucfirst($_SESSION['username']); ?>
+          <span class="caret"></span></button>
+         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+          <!--<li role="presentation" class="dropdown-header">Dropdown header 1</li>-->
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL; ?>"><i class="fa fa-home"></i> Home</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user&mode=9&user_id=' . $_SESSION['user_id']; ?>"> My Details</a></li>
+          <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-tasks"></i> Activities</a></li>
+          <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'search.php?class_name=sys_notification_user'; ?>"><i class="fa fa-bell-slash-o"></i> Notification</a></li>
+          <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+          <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-cog"></i> Configure</a></li>
+           <li role="presentation" class="divider"></li>
+          <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'extensions/user/user_logout.php'; ?>"><i class="fa fa-sign-out"></i> LogOut</a></li>
+         </ul>
+        </div>
+       
+        <?php
        } else {
-        echo '<a href = "' . HOME_URL . 'extensions/user/user_login.php">Login / Register</a>';
+                include_once 'extensions/user/popup_login/user_popup_login_template.php';
        }
-       echo '</ul>
-       </li>
-       </ul>
-       ';
        ?>
       </span>
 
      </div><!-- end top menu -->
      <div class="callus">
-      <span class="topbar-email"><i class="fa fa-envelope"></i> <a href="<?php echo HOME_URL.'content.php?mode=9&content_type=web_contact' ?>"><?php echo!empty($si->email) ? $si->email : 'contact@site.org' ?></a></span>
+      <span class="topbar-email"><i class="fa fa-envelope"></i> <a href="<?php echo HOME_URL . 'content.php?mode=9&content_type=web_contact' ?>"><?php echo!empty($si->email) ? $si->email : 'contact@site.org' ?></a></span>
       <span class="topbar-phone"><i class="fa fa-phone"></i> <a href="#"><?php echo!empty($si->phone_no) ? $si->phone_no : '1-111-1111' ?></a></span>
      </div><!-- end callus -->
     </div><!-- end columns -->
@@ -165,6 +160,7 @@ include_once("includes/functions/loader.inc");
      </div>
      <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right">
       <ul class="nav navbar-nav">
+       <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
        <li class="active"><a href="http://demo.inoideas.org/extensions/user/user_login.php" >DEMO <div class="arrow-up"></div></a></li>
        <li><a href="https://github.com/inoerp/inoERP" >Download <div class="arrow-up"></div></a></li>
        <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
@@ -248,12 +244,12 @@ include_once("includes/functions/loader.inc");
    <?php echo $pagination->show_pagination(); ?>
   </div>
 
-  <div id="footer-style-1" class="topBottomBG">
+  <div id="footer-style-1">
    <div class="container">
     <div id="footer_top"></div>
    </div>
   </div>
-<div id="copyrights">
+  <div id="copyrights">
    <div class="container">
     <div class="col-lg-5 col-md-6 col-sm-12">
      <div class="copyright-text">
@@ -268,7 +264,7 @@ include_once("includes/functions/loader.inc");
     <div class="col-lg-7 col-md-6 col-sm-12 clearfix">
      <div class="footer-menu">
       <ul class="menu">
-       
+
        <li><a href="http://inoideas.org/content.php?mode=9&content_type=web_contact">Contact</a></li>
        <li><a href="https://github.com/inoerp/inoERP/releases">Releases</a></li>
        <li><a href="https://www.mozilla.org/MPL/2.0/">MPL 2</a></li>

@@ -10,13 +10,18 @@
   <meta name="keywords" content="ERP,PHP ERP,Open Source ERP ">
   <title><?php echo isset($pageTitle) ? $pageTitle . ' - inoERP!' : ' inoERP! ' ?></title>
   <link href="<?php
-  echo defined('THEME_URL') ? THEME_URL : 'themees/default';
-  echo (!empty($content_class)) ? '/content_layout.css' : '/layout.css'
+//  echo THEME_URL;
+//  echo (!empty($content_class)) ? '/content_layout.css' : '/layout.css'
   ?>" media="all" rel="stylesheet" type="text/css" />
-  <link href="<?php echo defined('THEME_URL') ? THEME_URL : 'themes/default'; ?>/public.css" media="all" rel="stylesheet" type="text/css" />
-  <link href="<?php echo defined('THEME_URL') ? THEME_URL : 'themes/default'; ?>/menu.css" media="all" rel="stylesheet" type="text/css" />
-  <link href="<?php echo defined('THEME_URL') ? THEME_URL : 'themes/default'; ?>/jquery.css" media="all" rel="stylesheet" type="text/css" />
-  <link href="includes/ecss/search.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="<?php echo THEME_URL; ?>/public.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="<?php echo THEME_URL; ?>/menu.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="<?php echo THEME_URL; ?>/jquery.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="<?php echo HOME_URL; ?>tparty/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="<?php echo HOME_URL; ?>tparty/bootstrap/css/style.css" rel="stylesheet">
+  <link href="<?php echo HOME_URL; ?>tparty/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,300,400italic,300italic,700,700italic,900' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Exo:400,300,600,500,400italic,700italic,800,900' rel='stylesheet' type='text/css'>
   <?php
   if (!empty($css_file_paths)) {
    foreach ($css_file_paths as $key => $css_file) {
@@ -28,10 +33,13 @@
   ?>
   <script src="includes/js/jquery-2.0.3.min.js"></script>
   <script src="includes/js/jquery-ui.min.js"></script>
+  <script src="<?php echo HOME_URL; ?>tparty/bootstrap/js/bootstrap.min.js"></script>
+  <script src="<?php echo HOME_URL; ?>tparty/bootstrap/js/menu.js"></script>
   <script src="includes/js/custom/tinymce/tinymce.min.js"></script>
   <script src="includes/js/save.js"></script>
   <script src="includes/js/custom_plugins.js"></script>
   <script src="includes/js/basics.js"></script>
+
   <?php
   if (!empty($js_file_paths)) {
    foreach ($js_file_paths as $key => $js_file) {
@@ -43,106 +51,92 @@
   ?>
  </head>
  <body>
+
+  <?php
+  if ($showBlock) {
+   echo '<div id="header_bottom"></div>';
+  }
+  ?>
+
   <?php
   if ($si->maintenance_cb == 1) {
    echo "<div class='error'>Site is under maintenance mode </div>";
   }
+
   if (!empty($access_deined)) {
-   exit("Access denied ! <br> $msg <input action='action' class='button' type='button' value='Go Back' onclick='history.go(-1);' />");
+   exit("Access denied ! <br> $msg <input action='action' class='button' type='button' value='Go Back' onclick='history.go(-1);
+       ' />");
   }
   ?>
-  <div id="all_contents">
-   <div id="content">
-    <div id="main">
+
+  <div class="row">
+   <div class="container">
+    <div id="erp_form_area">
      <div id="structure">
-      <div id="select_page">
-       <div id ="form_header">
-        <div class="error"></div><div id="loading"></div>
-        <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
-        <ul id="form_box"> 
-       </div>
-       <div id="list_contents">
-        <div id="searchForm"><?php echo!(empty($search_form)) ? $search_form : ""; ?></div>
-        <div id="form_line" class="form_line">
-         <div id="print">
-          <table class="find_page normal">
-           <thead> 
-            <tr>
-             <th>Click Select</th>
-             <?php
-             if (property_exists($class, 'column')) {
-              $column_array = $$class->column;
-             } else {
-              $column_array = $$class->field_a;
-             }
-             foreach ($column_array as $key => $value) {
-              echo '<th>' . $value . '</th>';
-             }
-             ?>
-            </tr>
-           </thead>
-
-           <?php
-           If (!empty($search_result)) {
-            echo '<tbody>';
-            foreach ($search_result as $record) {
-             $primary_column = $class::$primary_column;
-             echo '<tr>';
-             echo '<td><span  class="quick_select button ' . $primary_column . '">' . $record->$primary_column . '</td>';
-             foreach ($column_array as $key => $value) {
-              echo "<td class=\"$value\">" . $record->$value . '</td>';
-             }
-             echo '</tr>';
+     <div id="select_page">
+      <div id ="form_header">
+       <div class="error"></div><div id="loading"></div>
+       <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
+       <ul id="form_box"> 
+      </div>
+      <div id="list_contents">
+       <div id="searchForm"><?php echo!(empty($search_form)) ? $search_form : ""; ?></div>
+       <div id="form_line" class="form_line">
+        <div id="print">
+         <table class="find_page normal">
+          <thead> 
+           <tr>
+            <th>Click Select</th>
+            <?php
+            if (property_exists($class, 'column')) {
+             $column_array = $$class->column;
+            } else {
+             $column_array = $$class->field_a;
             }
-            echo '</tbody>';
+            foreach ($column_array as $key => $value) {
+             echo '<th>' . $value . '</th>';
+            }
+            ?>
+           </tr>
+          </thead>
+
+          <?php
+          If (!empty($search_result)) {
+           echo '<tbody>';
+           foreach ($search_result as $record) {
+            $primary_column = $class::$primary_column;
+            echo '<tr>';
+            echo '<td><button  class="quick_select button ' . $primary_column . '">' . $record->$primary_column . '</button></td>';
+            foreach ($column_array as $key => $value) {
+             echo "<td class=\"$value\">" . $record->$value . '</td>';
+            }
+            echo '</tr>';
            }
-           ?>
+           echo '</tbody>';
+          }
+          ?>
 
-          </table>
+         </table>
 
-         </div>
         </div>
+       </div>
 
-        <div class="pagination" style="clear: both;">
-         <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
-         ?>
-        </div>
+       <div class="pagination" style="clear: both;">
+        <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
+        ?>
        </div>
       </div>
      </div>
     </div>
-   </div>
+    </div>
+    
+    <div class="clearfix"></div>
+
+   </div><!-- end container -->
+  </div><!-- end transparent-bg -->
+  <div clas="row">
+   <?php echo searching_tips(); ?>
   </div>
-  <!--footer content-->
-
-  <?php echo (!empty($footer_top)) ? "<div id=\"footer_top\"> $footer_top </div>" : ""; ?>
-  <div id="footer" class="topBottomBG">
-   <div id="footer_top"></div>
-   <div id="footer_message">
-    <?php
-    global $si;
-    echo nl2br($si->footer_message);
-    ?>
-   </div>
-  </div>
-
-  <?php
-  global $f;
-  echo (!empty($footer_bottom)) ? "<div id=\"footer_bottom\"> $footer_bottom </div>" : "";
-  echo $f->hidden_field_withId('home_url', HOME_URL);
-  ?>
-  <?php echo searching_tips(); ?>
-  <script type="text/javascript">
-   $(document).ready(function () {
-    $('#select_page').on('click', '#search_reset_btn', function (e) {
-     e.preventDefault();
-     $(this).closest('#searchForm').find('.search_form').find('input:text, select').each(function () {
-      $(this).val('');
-     });
-    })
-
-   });
-  </script>
  </body>
 </html>
 <?php

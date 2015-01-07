@@ -10,13 +10,18 @@
   <meta name="keywords" content="ERP,PHP ERP,Open Source ERP ">
   <title><?php echo isset($pageTitle) ? $pageTitle . ' - inoERP!' : ' inoERP! ' ?></title>
   <link href="<?php
-  echo THEME_URL;
-  echo (!empty($content_class)) ? '/content_layout.css' : '/layout.css'
+//  echo THEME_URL;
+//  echo (!empty($content_class)) ? '/content_layout.css' : '/layout.css'
   ?>" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo THEME_URL; ?>/public.css" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo THEME_URL; ?>/menu.css" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo THEME_URL; ?>/jquery.css" media="all" rel="stylesheet" type="text/css" />
-  <link href="includes/ecss/search.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="<?php echo HOME_URL; ?>tparty/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="<?php echo HOME_URL; ?>tparty/bootstrap/css/style.css" rel="stylesheet">
+  <link href="<?php echo HOME_URL; ?>tparty/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,300,400italic,300italic,700,700italic,900' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Exo:400,300,600,500,400italic,700italic,800,900' rel='stylesheet' type='text/css'>
   <?php
   if (!empty($css_file_paths)) {
    foreach ($css_file_paths as $key => $css_file) {
@@ -28,10 +33,13 @@
   ?>
   <script src="includes/js/jquery-2.0.3.min.js"></script>
   <script src="includes/js/jquery-ui.min.js"></script>
+  <script src="<?php echo HOME_URL; ?>tparty/bootstrap/js/bootstrap.min.js"></script>
+  <script src="<?php echo HOME_URL; ?>tparty/bootstrap/js/menu.js"></script>
   <script src="includes/js/custom/tinymce/tinymce.min.js"></script>
   <script src="includes/js/save.js"></script>
   <script src="includes/js/custom_plugins.js"></script>
   <script src="includes/js/basics.js"></script>
+
   <?php
   if (!empty($js_file_paths)) {
    foreach ($js_file_paths as $key => $js_file) {
@@ -43,125 +51,217 @@
   ?>
  </head>
  <body>
-  <!--     Check if its a find page  Exclude the header &amp; left block section-->
-  <div id="header_top_container">
-   <?php
-   $show_header_links = true;
-   if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
-    if (empty($current_page_path)) {
-     $current_page_path = thisPage_url();
-    }
-    $f->form_button_withImage($current_page_path);
-    $show_header_links = false;
-   }
-   ?>
-  </div>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+   <div class="container-fluid">
+    <div class="navbar-header">
+     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+     </button>
+     <img src="<?php
+     echo HOME_URL;
+     echo!empty($si->logo_path) ? $si->logo_path : 'files/logo.png'
+     ?>" class="logo_image" alt="logo"/>
+     <a class="navbar-brand" href="<?php echo HOME_URL; ?>"><?php echo!empty($si->site_name) ? $si->site_name : 'inoERP'; ?></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+     <ul class="nav navbar-nav navbar-right">
+      <li class="active"><a href="http://demo.inoideas.org/extensions/user/user_login.php" >DEMO <div class="arrow-up"></div></a></li>
+      <li><a href="https://github.com/inoerp/inoERP" >Download <div class="arrow-up"></div></a></li>
+      <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
+      <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
+      <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47">About <div class="arrow-up"></div></a> </li><!-- end drop down -->
+      <li>
+       <span class="topbar-login ino_right_top">
+        <?php if (!empty($_SESSION['login_status'])) { ?>
+         <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="fa fa-user"> </i><?php echo ' ' . ucfirst($_SESSION['username']); ?>
+           <span class="caret"></span></button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+           <!--<li role="presentation" class="dropdown-header">Dropdown header 1</li>-->
+           <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL; ?>"><i class="fa fa-home"></i> Home</a></li>
+           <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user&mode=9&user_id=' . $_SESSION['user_id']; ?>"> My Details</a></li>
+           <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-tasks"></i> Activities</a></li>
+           <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'search.php?class_name=sys_notification_user'; ?>"><i class="fa fa-bell-slash-o"></i> Notification</a></li>
+           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-cog"></i> Configure</a></li>
+           <li role="presentation" class="divider"></li>
+           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'extensions/user/user_logout.php'; ?>"><i class="fa fa-sign-out"></i> LogOut</a></li>
+          </ul>
+         </div>
+
+         <?php
+        } else {
+         echo '<a href = "' . HOME_URL . 'extensions/user/user_login.php"><i class="fa fa-user"> </i> Login / Register</a>';
+        }
+        ?>
+       </span>
+      </li>
+     </ul>
+     <!--     <form class="navbar-form navbar-right">
+           <input type="text" class="form-control" placeholder="Search...">
+          </form>-->
+
+    </div>
+   </div>
+  </nav>
+
   <?php
   if ($showBlock) {
-   include_once 'header_template.inc';
+   echo '<div id="header_bottom"></div>';
   }
   ?>
+
   <?php
   if ($si->maintenance_cb == 1) {
    echo "<div class='error'>Site is under maintenance mode </div>";
   }
+
   if (!empty($access_deined)) {
-   exit("Access denied ! <br> $msg <input action='action' class='button' type='button' value='Go Back' onclick='history.go(-1);' />");
+   exit("Access denied ! <br> $msg <input action='action' class='button' type='button' value='Go Back' onclick='history.go(-1);
+       ' />");
   }
   ?>
 
-  <div id="all_contents">
- <div id="content_left"></div>
- <div id="content_right">
-  <div id="content_right_left">
-   <div id="content_top"></div>
-   <div id="content">
-    <div class="error"></div><div class="show_loading_small"></div><div id="loading"></div>
-    <div id="main">
-     <div id="structure"><span class="heading"><?php  echo 'Search ' . ucwords(str_replace('_',' ',$class)) ;?></span>
-      <div id="search_page">
-       <div id ="form_header">
-        <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
-       </div>
-       <div id="list_contents">
-        <div id="searchForm" ><div class='hideDiv_input'></div>
-         <div class="show_loading_small"><img src="<?php echo HOME_URL ?>/themes/images/form/small_loading_bar.gif"></div>
-         <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
-        <div id="searchResult">
-         <?php
-         if (!empty($total_count)) {
-          ?>
-          <div id="searchResultMessages">
-           <ul class="inline_list">
-            <li><?php echo '<h3>Total records : ' . $total_count . '</h3>  '; ?></li>
-            <li>Download All Data in </li>
-            <li>
-             <!--download page creation for all records-->
-             <?php
-             if (!empty($all_download_sql)) {
-              $search_class_obj_all = $$class->findBySql($all_download_sql);
-              $search_class_array_all = json_decode(json_encode($search_class_obj_all), true);
-              ?>
-              <!--download page form-->
-              <form action="<?php echo HOME_URL; ?>download.php" method="POST" name="download_all" id="download_all" target="_blank">
-               <input type="hidden"  name="data" value="<?php print base64_encode(serialize($search_class_array_all)) ?>" >
-               <input type="radio" name="download_format" checked="checked" value="excel_format">Excel 
-               <input type="radio" name="download_format" value="text_format">Text
-               <input type="radio" name="download_format" value="pdf_format">Pdf
-               <input type="radio" name="download_format" value="xml_format">XML
-               <input type="radio" name="download_format" value="worddoc_format">Word Doc
-               <input type="submit"  name="export_allResult" value="Download" id="export_excel_allResult" class="clickable button"  >
-              </form>
-             <?php }
-             ?>
-             <!--download page completion-->	 
-            </li>
-            <li id="export_excel_searchResult" class="flaticon-spreadsheet6 clickable" title="Export to Excel"></li>
-            <li id="print_searchResult" class="flaticon-print42 print clickable" title="Print"></li>
-           </ul>
-          </div>
-         <?php } ?>
-         <div id="scrollElement">
-          <div id="print">
-           <div id="search_result"> <?php echo!(empty($search_result_statement)) ? $search_result_statement : ""; ?></div>
-          </div>
-         </div>
-         <div class="pagination" style="clear: both;">
-          <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
-          ?>
-         </div>
-
-        </div>
-
-       </div>
-      </div>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+     <div id="sys_menu_left_vertical">
+      <?php
+      $pat = new path();
+      echo ($pat->path_allpaths_block(array('divClass' => 'tree_view')));
+      echo $fav->show_currentUser_fav();
+      ?>
      </div>
     </div>
+
+    <div id="navigation_bar">
+     <div id="header_top_container">
+      <?php
+      $show_header_links = true;
+      if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
+       if (empty($current_page_path)) {
+        $current_page_path = thisPage_url();
+       }
+       $f->form_button_withImage($current_page_path);
+       $show_header_links = false;
+      }
+      ?>
+      <?php if ($show_header_links) { ?>
+       <div class="social-icons">
+        <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
+       </div><!-- end social icons -->
+      <?php } ?>
+     </div>
+    </div>
+
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+     <div id="erp_form_area">
+      <div id="content">
+       <div class="error clickable"></div><div id="loading"></div>
+       <div id="structure"><span class="heading"><?php echo 'Search ' . ucwords(str_replace('_', ' ', $class)); ?></span>
+        <div id="search_page">
+         <div id ="form_header">
+          <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
+         </div>
+         <div id="list_contents">
+          <div id="searchForm" ><div class='hideDiv_input'></div>
+           <div class="show_loading_small"><img src="<?php echo HOME_URL ?>/themes/images/form/small_loading_bar.gif"></div>
+           <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
+          <div id="searchResult">
+           <?php
+           if (!empty($total_count)) {
+            ?>
+            <div id="searchResultMessages">
+             <ul class="inline_list">
+              <li><?php echo '<h3>Total records : ' . $total_count . '</h3>  '; ?></li>
+              <li>Download All Data in </li>
+              <li>
+               <!--download page creation for all records-->
+               <?php
+               if (!empty($all_download_sql)) {
+                $search_class_obj_all = $$class->findBySql($all_download_sql);
+                $search_class_array_all = json_decode(json_encode($search_class_obj_all), true);
+                ?>
+                <!--download page form-->
+                <form action="<?php echo HOME_URL; ?>download.php" method="POST" name="download_all" id="download_all" target="_blank">
+                 <input type="hidden"  name="data" value="<?php print base64_encode(serialize($search_class_array_all)) ?>" >
+                 <input type="radio" name="download_format" checked="checked" value="excel_format">Excel 
+                 <input type="radio" name="download_format" value="text_format">Text
+                 <input type="radio" name="download_format" value="pdf_format">Pdf
+                 <input type="radio" name="download_format" value="xml_format">XML
+                 <input type="radio" name="download_format" value="worddoc_format">Word Doc
+                 <input type="submit"  name="export_allResult" value="Download" id="export_excel_allResult" class="clickable button"  >
+                </form>
+               <?php }
+               ?>
+               <!--download page completion-->	 
+              </li>
+              <li id="export_excel_searchResult" class="flaticon-spreadsheet6 clickable" title="Export to Excel"></li>
+              <li id="print_searchResult" class="flaticon-print42 print clickable" title="Print"></li>
+             </ul>
+            </div>
+           <?php } ?>
+           <div id="scrollElement">
+            <div id="print">
+             <div id="search_result"> <?php echo!(empty($search_result_statement)) ? $search_result_statement : ""; ?></div>
+            </div>
+           </div>
+           <div class="pagination" style="clear: both;">
+            <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
+            ?>
+           </div>
+
+          </div>
+
+         </div>
+        </div>
+       </div>
+       <!--   end of structure-->
+      </div>
+     </div>
+
+
+    </div>
+
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+     <div id="non-visible" class="non-visible">
+
+     </div><!-- end large-7 --> 
+    </div>
+
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+     <div class="footer-menu">
+      <div id="half_copyrights">
+       <?php
+       global $si;
+       echo nl2br($si->footer_message);
+       ?>
+       <ul>
+        <li><a href="http://inoideas.org/content.php?mode=9&content_type=web_contact">Contact</a></li>
+        <li><a href="https://github.com/inoerp/inoERP/releases">Releases</a></li>
+        <li><a href="https://www.mozilla.org/MPL/2.0/">MPL 2</a></li>
+        <li><a href="#">Cookie Preferences</a></li>
+        <li class="active"><a href="#">Terms of Use</a></li>
+       </ul>
+      </div>
+     </div><!-- end large-7 --> 
+    </div>
+
    </div>
-   <div id="content_bottom"></div>
+
   </div>
-  <div id="content_right_right"></div>
- </div>
-</div>
+  <div clas="row">
+  <?php echo searching_tips(); ?>
+  </div>
   <!--footer content-->
-
-  <?php echo (!empty($footer_top)) ? "<div id=\"footer_top\"> $footer_top </div>" : ""; ?>
-  <div id="footer" class="topBottomBG">
-   <div id="footer_top"></div>
-   <div id="footer_message">
-    <?php
-    global $si;
-    echo nl2br($si->footer_message);
-    ?>
-   </div>
-  </div>
-
   <?php
   global $f;
   echo (!empty($footer_bottom)) ? "<div id=\"footer_bottom\"> $footer_bottom </div>" : "";
   echo $f->hidden_field_withId('home_url', HOME_URL);
   ?>
-  <?php echo searching_tips(); ?>
  </body>
 </html>
 <?php
@@ -170,10 +270,3 @@ if (isset($dbc)) {
  $dbc->close_connection();
 }
 ?>
-
-
-
-
-
-
-

@@ -1,6 +1,5 @@
-<?php include_once('../../includes/basics/basics.inc'); ?>
+<?php include_once __DIR__.'/../../includes/basics/basics.inc'; ?>
 <?php
-
 if ($session->login_status()) {
  redirect_to(HOME_URL);
 }

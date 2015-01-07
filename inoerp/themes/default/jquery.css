@@ -10,7 +10,7 @@ ul.tabMain {
 
 ul.tabMain li {
  float:left;
- height:23px;
+ height:25px;
  line-height:24px;
  border:1px solid #999;
  overflow:hidden;
@@ -27,8 +27,8 @@ ul.tabMain li {
 }
 
 ul.tabMain li.ui-state-active{
- background-color:#c3dde0;
- border-bottom:1px solid #c3dde0;
+background-color: rgba(181, 215, 183, 0.77);
+border-bottom: 1px solid rgba(195, 221, 224, 0.46);
 }
 
 ul.tabMain li a{
@@ -57,14 +57,14 @@ html ul.tabMain li.active,html ul.tabMain li.active a:hover {
 }
 
 .tabContainer {
- border:1px solid #999;
- overflow:hidden;
- padding: 5px;
- clear:both;
- float:left;
- min-width:97%;
- max-width:98%;
-background-color: rgba(120, 180,180, 0.2);
+border: 1px solid rgba(209, 192, 192, 0.7);
+overflow: hidden;
+padding: 8px;
+clear: both;
+float: left;
+min-width: 97%;
+max-width: 98%;
+background-color: rgba(242, 242, 242, 0.94);
 }
 
 .tabContainer.no_tab{
@@ -97,11 +97,11 @@ background-color: rgba(120, 180,180, 0.2);
 
 
 .ui-tabs-vertical { width: 1050px; }
-  .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 220px; }
-  .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
-  .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
-  .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; border-right-width: 1px; }
-  .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 800px; }
+.ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 220px; }
+.ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+.ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; border-right-width: 1px; }
+.ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 800px; }
 
 ul.tabVerticalMain li{
  background:rgba(200,200,200, 0.8);
@@ -110,8 +110,8 @@ ul.tabVerticalMain li{
 ul.tabVerticalMain li.ui-state-active{
  background:rgba(210,248,12,0.2);
 }
- .tabContainer_v .large_shadow_box{
-    background:rgba(210,248,12,0.2);
+.tabContainer_v .large_shadow_box{
+ background:rgba(210,248,12,0.2);
 }
 
 
@@ -132,7 +132,7 @@ ul.tabVerticalMain li a {
  border:1px solid #fff;
  outline:none;
  padding:40px 20px;
-    margin: 10px 0;
+ margin: 10px 0;
 
 }
 
@@ -263,7 +263,7 @@ ul.tabVerticalMain li a {
 .ui-autocomplete-loading { background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat; }
 
 .ui-datepicker {
- width: 14em;
+
  display: none;
  background: #eee;
  padding: 1em;

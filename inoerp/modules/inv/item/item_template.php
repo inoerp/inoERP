@@ -12,10 +12,9 @@
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
      <div class="large_shadow_box"> 
-      <ul class="column five_column">
+      <ul class="column header_field">
        <li>
-        <label> Inventory Org : </label>
-        <?php
+        <label>Inventory Org</label><?php
         if (!empty($item->org_id)) {
          echo form::select_field_from_object('org_id', $org->findAll_inventory(), 'org_id', 'org', $item->org_id, 'org_id', $readonly, '', '', 1);
         } else {
@@ -25,18 +24,15 @@
        </li>
        <li>
         <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="item_id select_popup clickable">
-         Item Id : </label>
-        <?php $f->text_field_dsr('item_id') ?>
+         Item Id</label><?php $f->text_field_dsr('item_id') ?>
         <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show document_id item_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
        </li>
        <li><label>Item Number<img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete item_number clickable"> : 
         </label><?php echo $f->text_field('item_number', $$class->item_number, '15', 'item_number', 'select_item_number', 1, $readonly_mas); ?>
         <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show2 document_id findBy_item_number"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
        </li>
-       <li><label> Description : </label>
-        <?php echo $f->text_field('item_description', $$class->item_description, '20', 'item_description', '', 1, $readonly_mas); ?></li>
-       <li><label> Product Line : </label>
-        <?php echo $f->select_field_from_object('product_line', item::product_line(), 'option_line_code', 'option_line_value', $$class->product_line, 'product_line', '', '', $readonly_mas); ?></li>
+       <li><label> Description</label><?php echo $f->text_field('item_description', $$class->item_description, '20', 'item_description', '', 1, $readonly_mas); ?></li>
+       <li><label> Product Line</label><?php echo $f->select_field_from_object('product_line', item::product_line(), 'option_line_code', 'option_line_value', $$class->product_line, 'product_line', '', '', $readonly_mas); ?></li>
       </ul>
      </div>
     </div>

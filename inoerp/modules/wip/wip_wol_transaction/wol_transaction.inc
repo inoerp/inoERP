@@ -16,19 +16,20 @@ if (!empty($_GET["transaction_type_id"])) {
 if (!empty($_GET['item_id_m'])) {
  $item_id_m = ($_GET["item_id_m"]);
  $org_id = ($_GET["org_id"]);
+ $$class->item_number = item::find_by_id($item_id_m)->item_number;
 }
+
+$$class->revision_name = !empty($_GET['revision_name']) ? $_GET['revision_name'] : null;
 
 if (!empty($item_id_m) && !empty($org_id)) {
  $$class->org_id = $org_id;
  $$class->item_id_m = $item_id_m;
- $revision_name = !empty($_GET['revision_name']) ? $_GET['revision_name'] : null;
- $bom_header_byItem = bom_header::find_by_itemId_orgId($this->item_id_m, $this->org_id);
+ 
+ $bom_header_byItem = bom_header::find_by_itemId_orgId($item_id_m,$org_id);
+ 
  $bom_header_id = $bom_header_byItem->bom_header_id;
- $wip_wo_bom_object = bom_line::find_by_bomHeaderId_revNumber($bom_header_id, $revision_name);
+ $wip_wo_bom_object = bom_line::find_by_bomHeaderId_revNumber($bom_header_id, $$class->revision_name);
 
-  if (empty($wip_wo_bom_object)) {
-  $wip_wo_bom_object = array(new bom_line());
- }
 
  $hidden_stmt = "<div id='allData' class='hidden'><table>";
  $count = 0;
@@ -59,7 +60,10 @@ if (!empty($item_id_m) && !empty($org_id)) {
 ?>
 
 <?php
-
+  if (empty($wip_wo_bom_object)) {
+  $wip_wo_bom_object = array(new bom_line());
+ }
+ 
 if ((!empty($wip_wo_header_id)) && !empty($wip_wo_bom_object)) {
  $bom_sequence_stament = '<select class=" select bom_sequence " name="bom_sequence[]">';
  foreach ($wip_wo_bom_object as $array) {

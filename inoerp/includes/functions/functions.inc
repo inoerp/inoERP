@@ -1185,7 +1185,7 @@ function convert_to_url($str) {
 
 function searching_tips() {
  $stmt = '';
- $stmt .= '<ul id="search_message">';
+ $stmt .= '<div class=" class="hidden""><ul id="search_message">';
  $stmt .= '<li>1. Use = for exact such.';
  $stmt .= '<br>Ex : Supplier name inoerp in supplier field \'ll show all results such as ainoerp, aainoerp, inoerpa, etc';
  $stmt .= '<br>=inoerp in supplier field \'ll show only inoerp </li>';
@@ -1194,7 +1194,7 @@ function searching_tips() {
  $stmt .= '<li>4. Use != for searching all values not equal to entered value. </li>';
  $stmt .= '<li>5. Use comma(, ) for searching multiple values. </li>';
  $stmt .= '<li>5. Use one < field & one > field for searching all values in between two values. </li>';
- $stmt .= '</ul>';
+ $stmt .= '</ul></div>';
  return $stmt;
 }
 

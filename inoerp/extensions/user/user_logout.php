@@ -1,7 +1,6 @@
 <? ob_start(); ?>
-<?php include_once('../../includes/basics/header_public.inc'); ?>
+<?php include_once('../../includes/basics/header_simple.inc'); ?>
 <?php
-
 session_start();
 $bc = new block_cache();
 $bc->session_id = session_id();
@@ -19,7 +18,6 @@ if (ini_get("session.use_cookies")) {
  );
 }
 session_destroy();
-
 redirect_to(HOME_URL);
 ?>
 <? ob_flush(); ?>

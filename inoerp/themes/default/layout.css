@@ -350,13 +350,7 @@ table.normal td {
  padding: 2px 4px 2px 5px;
 }
 
-.class_detail_form{
- display: block; 
- float: left; 
- background: lightgrey;
- border: 1px solid #ccc;
- min-width: 400px;
-}
+
 
 table.form {
  border-width: 1px;
@@ -1006,9 +1000,7 @@ span.more_page a {
     margin: 10px;
 }
 
-add_detail_values img, .add_detail_values0 img, .add_detail_values1 img{
-    float: left;
-}
+
 
 ul#form_top_image{
  position: absolute; top: -6px; right: 5px; 
@@ -1056,9 +1048,7 @@ input, select{
 }
 
 
-#form_header input.seq_number, #form_header input.small,  #form_header input.detail_seq_number{
- width: 40px;
-}
+
 
 #form_header input.date,#form_header input.medium{
  width: 90px;

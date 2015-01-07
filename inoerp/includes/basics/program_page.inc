@@ -8,6 +8,7 @@ if (!empty($msg)) {
  $show_message .= '</div>';
 }
 ?>
+<div id="erp_form_area">
 	 <div id="content">
 		<div id="main">
 		 <div id="structure">
@@ -29,3 +30,4 @@ if (!empty($msg)) {
 		 </div>
 		</div>
 	 </div>
+</div>

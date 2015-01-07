@@ -1,25 +1,29 @@
-<link href="user.css" media="all" rel="stylesheet" type="text/css" />
+<?php include_once __DIR__.'/../../../includes/basics/basics.inc' ;
+$user = new user();
+$user_role = new user_role();
+$user_password_reset = new user_password_reset();
+?>
 
-<div class="white-wrapper">
- <div class="container">
-  <div id="structure">
-   <div id="userDiv">
-    <!--    START OF FORM HEADER-->
-    <div class="error"></div><div id="loading"></div>
-    <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
-    <!--    End of place for showing error messages-->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal"> <i class="fa fa-user"></i> Login / Register</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-body">
     <div id ="form_header">
-     <div id="tabsHeader">
+     <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsHeader-1">User Login</a></li>
-       <li><a href="#tabsHeader-2">New Account</a></li>
-       <li><a href="#tabsHeader-3">Password Reset</a></li>
-       <li><a href="#tabsHeader-4">Role Request</a></li>
+       <li><a href="#tabsLine-1">User Login</a></li>
+       <li><a href="#tabsLine-2">New Account</a></li>
+       <li><a href="#tabsLine-3">Password Reset</a></li>
+       <li><a href="#tabsLine-4">Role Request</a></li>
       </ul>
       <div class="tabContainer"> 
 
-       <div id="tabsHeader-1" class="tabContent">
-        <form name="user_login_onPage" action="<?php HOME_URL ?>extensions/user/user_login.php" method="post" id="user_login_onPage">
+       <div id="tabsLine-1" class="tabContent">
+        <form name="user_login" action="<?php HOME_URL?>extensions/user/user_login.php" method="post" id="user_login">
          <ul class="inRow asperWidth">
           <span id="username_tip" maxlength="50" size="30"  ></span>
           <li><label>User Name</label>
@@ -41,9 +45,9 @@
        </div>
 
 
-       <div id="tabsHeader-2" class="tabContent">
+       <div id="tabsLine-2" class="tabContent">
         <div id="create_new_user">
-         <form action="<?php HOME_URL?>extensions/user/user_login.php" method="post" id="user_header_onPage" name="user_header_onPage">
+         <form action="<?php HOME_URL?>extensions/user/user_login.php" method="post" id="user_header" name="user_header">
           <ul class="two_column"><li><label>First Name</label><?php echo form::text_field('first_name', $user->first_name); ?></li>
            <li><label>Last Name</label><?php echo form::text_field('last_name', $user->last_name); ?></li>
            <li><label>Username</label><?php echo form::text_field('username', $user->username); ?></li>
@@ -62,8 +66,8 @@
         </div>
        </div>
 
-       <div id="tabsHeader-3" class="tabContent">
-        <form action="<?php HOME_URL?>extensions/user/user_login.php" method="post" id="user_reset_password_onPage" name="user_reset_password_onPage">
+       <div id="tabsLine-3" class="tabContent">
+        <form action="<?php HOME_URL?>extensions/user/user_login.php" method="post" id="user_reset_password" name="user_reset_password">
           <ul class="column four_column">
            <li><label>Username</label><?php echo form::text_field('username', $user_password_reset->username, 35, 200, '', 'Login User Name', 'reset_password_user_name', '', 'reset_password_user_name'); ?>         </li>
            <li> Or </li>
@@ -73,18 +77,19 @@
           <!--<input type="hidden" class="hidden" name='submit_user' value='1'>-->
         </form>
        </div>
-       <div id="tabsHeader-4" class="tabContent">
+       <div id="tabsLine-4" class="tabContent">
 
        </div>
       </div>
      </div>
     </div>    
-
+   </div>
+   <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+<!--    <button type="button" class="btn btn-primary">Save changes</button>-->
    </div>
   </div>
-
  </div>
-
 </div>
 
-<?php include_template('footer.inc') ?>
+
