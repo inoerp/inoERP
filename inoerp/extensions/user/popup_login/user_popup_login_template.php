@@ -37,7 +37,7 @@ $user_password_reset = new user_password_reset();
           <li><label>Remember Me</label>
            <input type="checkbox" name="remember_me" value="1" > &nbsp; &nbsp; &nbsp;
           </li>
-          <li><input type="submit" name="submitLogin" class="button btn btn-primary" value="Log in"></li>
+          <li><input type="submit" name="submitLogin" class="button btn btn-success" value="Log in"></li>
           <li><input type="button" name="cancelLogin" id="cancelLogin" class="button btn btn-warning" value="Cancel & Go Back"></li>
          </ul>
 
@@ -61,7 +61,7 @@ $user_password_reset = new user_password_reset();
            <li><label>Phone</label><?php echo form::number_field('phone', $user->phone); ?></li>
           </ul>
           <!--<input type="hidden" class="hidden" name='submit_user' value='1'>-->
-          <input type="submit" name="newUser" class="button btn btn-primary" value="Create Account">
+          <input type="submit" name="newUser" class="button btn btn-success" value="Create Account">
          </form>
         </div>
        </div>
@@ -72,7 +72,7 @@ $user_password_reset = new user_password_reset();
            <li><label>Username</label><?php echo form::text_field('username', $user_password_reset->username, 35, 200, '', 'Login User Name', 'reset_password_user_name', '', 'reset_password_user_name'); ?>         </li>
            <li> Or </li>
            <li><label>e-Mail</label><?php echo form::text_field('email', $user_password_reset->email, 35, 200, '', 'Registered email id', 'reset_password_email', '', 'reset_password_email'); ?>           </li>
-           <li><input type="submit" name="resetPassword" class="button btn btn-primary" value="Send New Password"></li>
+           <li><input type="submit" name="resetPassword" class="button btn btn-success" value="Send New Password"></li>
           </ul>
           <!--<input type="hidden" class="hidden" name='submit_user' value='1'>-->
         </form>

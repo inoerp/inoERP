@@ -15,7 +15,7 @@
   <ul class="tabMain">
    <li><a href="#tabsDetailA-1">Result Data</a></li>
    <li><a href="#tabsDetailA-2">Result Graph</a></li>
-   <li><img class="showPointer" title="Refresh" alt="Refresh" class="view_refresh_button" src="<?php echo HOME_URL; ?>themes/default/images/refresh_24.png"></li>
+   <li><img  title="Refresh" alt="Refresh" class="view_refresh_button showPointer" src="<?php echo HOME_URL; ?>themes/default/images/refresh_24.png"></li>
   </ul>
   <div class="tabContainer">
    <div id="tabsDetailA-1" class="tabContent">
@@ -66,7 +66,7 @@
      </ul>
      <div class="draw_chart_data" class="scrollElement">
       <div class="svg_image">
-       <?php echo!empty($svg_chart) ? $svg_chart : ""; ?>
+       <?php echo !empty($svg_chart) ? $svg_chart : ""; ?>
       </div>
      </div>
     </div>

@@ -1,5 +1,5 @@
 <?php
-if (preg_match('/(?i)msie [5-9]/', $_SERVER['HTTP_USER_AGENT'])) {
+if (preg_match('/(?i)msie [5-8]/', $_SERVER['HTTP_USER_AGENT'])) {
  echo ($_SERVER['HTTP_USER_AGENT']);
  echo "<h2>Sorry! Your browser is outdated and not compatible with this site!!!</h2> "
  . "Please use any modern browsers such as Firefox, Opera, Chrome, IE 10+ ";
@@ -117,7 +117,7 @@ include_once("includes/functions/loader.inc");
       <span class="topbar-login">
        <?php if (!empty($_SESSION['login_status'])) { ?>
         <div class="dropdown">
-         <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="fa fa-user"> </i><?php echo ' '. ucfirst($_SESSION['username']); ?>
+         <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="fa fa-user"> </i><?php echo ' ' . ucfirst($_SESSION['username']); ?>
           <span class="caret"></span></button>
          <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
           <!--<li role="presentation" class="dropdown-header">Dropdown header 1</li>-->
@@ -127,14 +127,14 @@ include_once("includes/functions/loader.inc");
           <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'search.php?class_name=sys_notification_user'; ?>"><i class="fa fa-bell-slash-o"></i> Notification</a></li>
           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-cog"></i> Configure</a></li>
-           <li role="presentation" class="divider"></li>
+          <li role="presentation" class="divider"></li>
           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'extensions/user/user_logout.php'; ?>"><i class="fa fa-sign-out"></i> LogOut</a></li>
          </ul>
         </div>
-       
+
         <?php
        } else {
-                include_once 'extensions/user/popup_login/user_popup_login_template.php';
+        include_once 'extensions/user/popup_login/user_popup_login_template.php';
        }
        ?>
       </span>
@@ -193,6 +193,38 @@ include_once("includes/functions/loader.inc");
    <div class="make-center wow fadeInUp animated" style="visibility: visible;">
     <div class="container">
      <div id="structure">
+
+  <div class="filter_area">
+       <div class="well">
+        <div class="list_filter row">  
+         <div class="field_name col-sm-3 form-group">
+          <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+          <input type='text' class="form-control ui-autocomplete-input" name="field_name">
+         </div>  
+         <div class="col-sm-2 form-group">   
+          <select class="condition_name form-control" name="condition_name">    <option value="=">=</option>    
+           <option value="like">Like</option>    <option value="&gt;=">&gt;=</option>    
+           <option value="&lt;=">&lt;=</option>    <option value="&gt;">&gt;</option>    <option value="&lt;">&lt;</option>    
+           <option value="in">In</option>    <option value="!=">!=</option>   </select>  
+         </div>  
+         <div class="condition_value col-sm-3 col-xs-9">
+          <div class="form-group control">
+           <input type="text" class="input-with-feedback form-control" name="condition_value"  data-fieldtype="Link" data-fieldname="name">
+          </div>
+         </div>  
+         <div class="col-sm-3 col-xs-4 condition_action">
+          <button class="button btn btn-success" type="submit"  name="applyFilter">Apply</button>  
+          <button class="button btn btn-warning" type="submit"  name="cancelFilter">Cancel</button>  
+         </div>  
+        </div>
+       </div>
+   </div>
+      
+      <div class="btn-group">
+       <button title="Edit Filter" class="btn btn-default btn-sm filter-value"><i class="fa fa-filter"></i></button>
+       <button title="Remove Filter" class="btn btn-info btn-sm remove-filter"><i class="fa fa-remove text-muted"></i></button>
+      </div>
+
       <?php
       $content = new content();
       $subject_no_of_char = 50;

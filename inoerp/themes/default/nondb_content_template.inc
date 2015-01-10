@@ -9,25 +9,37 @@
        <div id="content_divId">
         <!--    START OF FORM HEADER-->
         <div class="error"></div><div id="loading"></div>
-        <?php echo (!empty($show_message)) ? $show_message : "";  $f = new inoform();?> 
+        <?php
+        echo (!empty($show_message)) ? $show_message : "";
+        $f = new inoform();
+        ?> 
         <!--    End of place for showing error messages-->
         <div id="form_all">
          <div id ="form_header">
           <div class='heading'> <?php echo $content_type->description; ?></div>
-          <form action=""  method="post" id="content_data"  name="content_data">
-           <!--create empty form or a single id when search is not clicked and the id is referred from other content -->
-           <?php
-           // echo pa($content_type); 
-           if (method_exists($content_type, 'entry_form')) {
-            echo call_user_func(array($content_type, 'entry_form'), $_GET);
-           }
+          <?php
+          // echo pa($content_type); 
+          if (method_exists($content_type, 'entry_form')) {
+           $non_db_page = call_user_func(array($content_type, 'entry_form'), $_GET);
+          } else {
+           $non_db_page = ' <h1> No data found for the content type </h1>';
+          }
+          if (!empty($ownSubmitForm)) {
+           echo $non_db_page;
+          } else {
            ?>
-           <!--End of Content-->
-           <div> <?php echo ino_attachement($file) ?> </div>
-           <?php echo $f->hidden_field_withId('non_db_content_type', $non_db_content_type); ?>
-           <?php
-           if ($access_level <= 3 & $mode == 9) {
-            echo '<div id="save" class="submit"><input type="button" value="Submit" name="submit_content" class="button"></div>';
+
+           <form action=""  method="post" id="content_data"  name="content_data">
+            <!--create empty form or a single id when search is not clicked and the id is referred from other content -->
+
+            <!--End of Content-->
+            <div> <?php // echo ino_attachement($file) ?> </div>
+            <?php echo $non_db_page;
+            echo $f->hidden_field_withId('non_db_content_type', $non_db_content_type); ?>
+            <?php
+            if ($access_level <= 3 && $mode == 9) {
+             echo '<div id="save" class="submit"><input type="button" value="Submit" name="submit_content" class="button"></div>';
+            }
            }
            ?>
           </form>

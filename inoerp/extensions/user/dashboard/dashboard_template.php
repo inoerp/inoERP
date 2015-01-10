@@ -3,14 +3,13 @@
       <div id ="form_header">
        <div id="tabsHeader">
         <form action="" method="post" id="user_header" name="user_header"><span class="heading">User Dashboard 
-         <a href="<?php echo HOME_URL ?>form.php?class_name=user_dashboard_config&mode=9&user_id=<?php echo $user_id ?>">
-          <img src="<?php echo THEME_URL ; ?>/images/config_16.png" alt=" update favourite" title='Confiure Dashboard'/>
-                </a>
+         <a href="<?php echo HOME_URL ?>form.php?class_name=user_dashboard_config&mode=9&user_id=<?php echo $user_id ?>" 
+            class='fa fa-cog'></a>
          </span>
          <div id ="form_header">
           <div id="tabsHeader">
            <ul class="tabMain">
-            <li><a href="#tabsHeader-1">Access</a></li>
+            <li><a href="#tabsHeader-1">Overview</a></li>
             <li><a href="#tabsHeader-2">On hand</a></li>
             <li><a href="#tabsHeader-3">Purchasing</a></li>
             <li><a href="#tabsHeader-4">WIP Value</a></li>
@@ -19,10 +18,16 @@
             <div id="tabsHeader-1" class="tabContent">
              <ul class="column three_column">
               <li>
-               <span class="expand_collapse_all button clickable">Expand / Collapse All</span>
+               <h2>Notifications</h2>
                <?php
-                $pat = new path();
-                echo ($pat->path_allpaths_block(array('divClass' => 'tree_view')));
+                echo block::show_block_content_by_BlockId('55');
+               ?>
+              </li>
+                            <li>
+               <h2>Recent Comments</h2>
+               <?php
+                echo block::show_block_content_by_BlockId('52');
+//                include_once HOME_URL.'report.php?class_name=ra_item&report_name=ra_report_set_item_leadtime';
                ?>
               </li>
               <li>

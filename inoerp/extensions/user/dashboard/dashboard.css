@@ -1,4 +1,4 @@
-#userDashBoard .menu a:link, #favourite a:link{
+#favourite a:link{
     text-decoration: none;
     font-weight: bold;
     color: #615B5D;
@@ -9,27 +9,12 @@
 line-height: 26px;
 }
 
-.tree_view li.contentContainer, .tree_view li.contentClosed{
-    padding-bottom:14px;
-}
 
 #userDashBoard ul.column.three_column li{
     width: 500px;
 }
 
-.child_menu li{
-    display: block;
-    clear: both;
-    width: 100%;
-   }
 
-.menu a:hover ,  #favourite a:hover {
-    padding: 2px;
-    border: 1px solid rgba(80,80,180,1);
-    background: rgba(80,80,180,0.6);
-    text-decoration: none;
-    color: white;
-}
 
 
 

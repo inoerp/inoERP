@@ -335,6 +335,7 @@
  require_once(INC_EXTENSIONS . DS . "web_tracking" . DS . "class_web_tracking.inc");
  require_once(INC_EXTENSIONS . DS . "url_alias" . DS . "class_ext_url_alias.inc");
  require_once(INC_EXTENSIONS . DS . "web_contact" . DS . "class_web_contact.inc");
+ require_once(INC_EXTENSIONS . DS . "site_search" . DS . "class_extn_site_search.inc");
  require_once(INC_EXTENSIONS . DS . "test_case" . DS . "class_ext_test_case_header.inc");
  require_once(INC_EXTENSIONS . DS . "test_case" . DS . "class_ext_test_case_line.inc");
 ?>

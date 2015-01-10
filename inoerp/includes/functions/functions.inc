@@ -148,7 +148,7 @@ function get_dbColumns_valIndex($table_name) {
 }
 
 function check_browser() {
- if (preg_match('/(?i)msie [5-9]/', $_SERVER['HTTP_USER_AGENT'])) {
+ if (preg_match('/(?i)msie [5-8]/', $_SERVER['HTTP_USER_AGENT'])) {
   echo ($_SERVER['HTTP_USER_AGENT']);
   echo "<h2>Sorry! Your browser is outdated and not compatible with this site!!!</h2> "
   . "Please use any modern browsers such as Firefox, Opera, Chrome, IE 10+ ";
@@ -159,11 +159,11 @@ function check_browser() {
 function access_denied($msg = '') {
 // header("Location: access_denied.php?message=$msg");
 // redirect_to(HOME_URL . 'access_denied.php');
-  echo '<h1> Access denied! - You dont have enough privillage to access the requested page </h1>';
-  if(!empty ($msg)){
-   echo $msg;
-  }
-  echo '<br><a href="javascript:history.go(-1)"><span class="button">Click Here </a> to go back to the previous page';
+ echo '<h1> Access denied! - You dont have enough privillage to access the requested page </h1>';
+ if (!empty($msg)) {
+  echo $msg;
+ }
+ echo '<br><a href="javascript:history.go(-1)"><span class="button">Click Here </a> to go back to the previous page';
 }
 
 function site_maintenance($msg) {
@@ -318,11 +318,11 @@ function select_per_page($per_page = '10') {
  $content_string .= '<option value="5" ';
  $content_string .= ( $per_page == 5) ? ' selected > 5 </option>' : '> 5 </option>';
  $content_string .= '<option value="10" ';
- $content_string .= ( $per_page == 10) ? ' selected > 10 </option>' :  '> 10 </option>';
+ $content_string .= ( $per_page == 10) ? ' selected > 10 </option>' : '> 10 </option>';
  $content_string .= '<option value="20" ';
- $content_string .= ( $per_page == 20) ? ' selected > 20 </option>' :  '> 20 </option>';
+ $content_string .= ( $per_page == 20) ? ' selected > 20 </option>' : '> 20 </option>';
  $content_string .= '<option value="50" ';
- $content_string .= ( $per_page == 50) ? ' selected > 50 </option>' :  '> 50 </option>';
+ $content_string .= ( $per_page == 50) ? ' selected > 50 </option>' : '> 50 </option>';
  $content_string .= '</select>';
  $content_string .= '<a name="content_per_page" '
   . 'href="' . $link . '" class="content_per_page button">Per Page</a>';
@@ -1019,8 +1019,8 @@ function show_download_button($result_data) {
      <input type="radio" name="download_format" value="worddoc_format">Word Doc
      <input type="submit"  name="export_allResult" value="Download" id="export_excel_allResult" class="clickable button"  >
     </form></li>';
- $return_stmt .= '<li id="export_excel_searchResult" class="clickable"> <img src="' . HOME_URL . 'files/images/excel.png" alt="Export to Excel" /></li>
-  <li id="print_searchResult" class="print clickable"> <img src="' . HOME_URL . 'files/images/print.png" alt="Print" /></li>
+ $return_stmt .= '<li id="export_excel_searchResult" class="flaticon-spreadsheet6 clickable"></li>
+  <li id="print_searchResult" class="flaticon-print42 print clickable" title="Print"></li>
 </ul>
 </div>';
  return $return_stmt;
@@ -1185,7 +1185,7 @@ function convert_to_url($str) {
 
 function searching_tips() {
  $stmt = '';
- $stmt .= '<div class=" class="hidden""><ul id="search_message">';
+ $stmt .= '<div><ul id="search_message">';
  $stmt .= '<li>1. Use = for exact such.';
  $stmt .= '<br>Ex : Supplier name inoerp in supplier field \'ll show all results such as ainoerp, aainoerp, inoerpa, etc';
  $stmt .= '<br>=inoerp in supplier field \'ll show only inoerp </li>';
@@ -1286,6 +1286,59 @@ function ino_strip_html($text, $max_length) {
   $result .= "</" . array_pop($tags) . ">";
 
  return $result;
+}
+
+function ino_search_dropDownSettings() {
+ $drop_down_icon = '     <div class="dropdown ino_serch_setting">
+  <button class="btn btn-default dropdown-toggle btn-group-xs" type="button"  data-toggle="dropdown" aria-expanded="true">
+    <i class="glyphicon glyphicon-cog"></i>
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation" class="ino_filter"><a role="menuitem" tabindex="-1" href="#">Filter</a></li>
+    <li role="presentation" class="ino_sort_a_z"><a role="menuitem" tabindex="-1" href="#">Sort (a to z)</a></li>
+    <li role="presentation" class="ino_sort_z_a"><a role="menuitem" tabindex="-1" href="#">Sort (z to a)</a></li>
+  </ul>
+</div>';
+ return $drop_down_icon;
+}
+
+function ino_filter_form() {
+ $ino_filter_form = '<div class="filter_area" id="filter_area">
+       <div class="well">
+        <div class="list_filter row">  
+         <div class="col-md-3 col-sm-3  form-group">
+          <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+          <input type="text" class="form-control field_name" name="field_name">
+         </div>  
+         <div class="col-md-2 col-sm-2  form-group">   
+          <select class="condition_name form-control" name="condition_name">    <option value="=">=</option>    
+           <option value="">Like</option>    <option value="&gt;=">&gt;=</option>    
+           <option value="&lt;=">&lt;=</option>    <option value="&gt;">&gt;</option>    <option value="&lt;">&lt;</option>    
+           <option value="IN">In</option>    <option value="!=">!=</option>   </select>  
+         </div>  
+         <div class="col-md-3 col-sm-3">
+          <div class="form-group control">
+           <input type="text" class="input-with-feedback form-control condition_value" name="condition_value"  data-fieldtype="Link" data-fieldname="name">
+          </div>
+         </div>  
+         <div class="col-md-4 col-sm-4  condition_action">
+          <button class="button btn btn-success apply-filter" type="submit"  name="applyFilter">Apply</button>  
+          <button class="button btn btn-info add-element" name="addElement"> + </button> 
+          <button class="button btn btn-info remove-element" name="removeElement"> - </button> 
+         </div>  
+        </div>
+       </div>
+   </div>
+<div class="applied_filters">
+      <div class="btn-group">
+       <button title="Edit Filter" class="btn btn-default btn-sm toggle-filter"><i class="fa fa-filter"></i></button>
+       <button title="Remove Filter" class="btn btn-default btn-sm remove-filter"><i class="fa fa-remove text-muted"></i></button>
+      </div>
+</div>
+';
+// <button class="button btn btn-warning remove-filter" type="submit"  name="removeFilter">Remove</button>  
+ return $ino_filter_form;
 }
 
 ?>

@@ -32,21 +32,21 @@ $.fn.getViewResult_e = function(options) {
 };
 
 $(document).ready(function() {
- $('table.view th').find('img').hide();
- $('.view_content').on('mouseenter', 'table.view th', function() {
-  $(this).find('ul').addClass('icon_header');
-  $(this).find('img').show();
- }).on('mouseleave', 'table.view th', function() {
-  $(this).find('img').hide();
-  $(this).find('ul').removeClass('icon_header');
- });
+// $('table.view th').find('img').hide();
+// $('.view_content').on('mouseenter', 'table.view th', function() {
+//  $(this).find('ul').addClass('icon_header');
+//  $(this).find('img').show();
+// }).on('mouseleave', 'table.view th', function() {
+//  $(this).find('img').hide();
+//  $(this).find('ul').removeClass('icon_header');
+// });
 
- $('.view_content').on('click', '.filter_add', function() {
-  $(this).removeClass('show_add_filter');
-  var fieldName = $(this).closest('ul').find('.field_value').text();
+ $('.view_content').on('click', '.ino_filter', function() {
+//  $(this).removeClass('show_add_filter');
+  var fieldName = $(this).closest('th').data('field_name');
   var filter_value = prompt("Enter value for\n" + fieldName);
   var newDataField = '<span class="filtered_field show_remove_filter ' + fieldName + '">' + fieldName + ' : ' + filter_value;
-  newDataField += '<input class="hidden filtered_field" type="hidden" value="' + filter_value + '" name="' + $(this).closest('th').data('fieldname') + '"></span>';
+  newDataField += '<input class="hidden filtered_field" type="hidden" value="' + filter_value + '" name="' + $(this).closest('th').data('field_name') + '"></span>';
   if (filter_value) {
    $(this).closest('div.view_content').find('.view_filters').append(newDataField);
    $(this).getViewResult_e();
@@ -72,17 +72,13 @@ $(document).ready(function() {
 
  });
 
- $('.view_content').on('click', '.sort_up', function() {
-  $(this).closest('th').addClass('show_sort_up');
-  $(this).closest('th').removeClass('show_sort_down');
-  var fieldName = $(this).closest('th').data('fieldname');
+ $('body').on('click', '.view_content .ino_sort_a_z', function() {
+  var fieldName = $(this).closest('th').data('field_name');
   var newSortField = '<span class="show_sort_remove show_remove_filter ' + fieldName + '">' + fieldName + ' : ' + 'Sort Up';
   newSortField += '<input class="hidden sorted_field" type="hidden" value="' + 'sort_up' + '" name="' + fieldName + '"></span>';
   $(this).closest('div.view_content').find('.view_filters').append(newSortField);
   $(this).getViewResult_e();
- }).on('click', '.sort_down', function() {
-  $(this).closest('th').addClass('show_sort_down');
-  $(this).closest('th').removeClass('show_sort_up');
+ }).on('click', '.view_content .ino_sort_Z_A', function() {
   var fieldName = $(this).closest('th').data('fieldname');
   var newSortField = '<span class="show_sort_remove show_remove_filter ' + fieldName + '">' + fieldName + ' : ' + 'Sort Down';
   newSortField += '<input class="hidden sorted_field" type="hidden" value="' + 'sort_down' + '" name="' + fieldName + '"></span>';
@@ -91,7 +87,7 @@ $(document).ready(function() {
  });
 
 
- $('.view_content').on('click', '.draw_svg_image', function() {
+ $('body').on('click', '.draw_svg_image', function() {
   var thisElement = $(this);
   var filterData = $(this).closest('div.view_content').find('.view_filters').find('.filtered_field:input').serializeArray();
   var sortData = $(this).closest('div.view_content').find('.view_filters').find('.sorted_field:input').serializeArray();

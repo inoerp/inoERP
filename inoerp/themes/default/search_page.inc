@@ -254,7 +254,13 @@
 
   </div>
   <div clas="row">
-  <?php echo searching_tips(); ?>
+   <div class="hidden">
+    <?php
+    echo searching_tips();
+    echo ino_filter_form();
+    ?>
+   </div>
+   
   </div>
   <!--footer content-->
   <?php

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -7,6 +8,7 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
+
 /**
  * 
  *
@@ -17,7 +19,7 @@ class path extends dbObject {
  public static $module = "extensions";
  public static $primary_column = "path_id";
  public static $key_column = "name";
-   public static $system_info = [
+ public static $system_info = [
   'name' => 'Path',
   'number' => '10018',
   'description' => 'System Paths',
@@ -28,7 +30,6 @@ class path extends dbObject {
   'module_name' => 'extn',
   'weight' => 18
  ];
-   
 //  data base variables as stored database column name
  public $field_a = [
   "path_id",
@@ -92,6 +93,7 @@ class path extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
+ public $show_description = false;
 
  Public static function path_types() {
   $option_header = option_header::find_by_name('EXT_PATH_TYPE');
@@ -322,14 +324,22 @@ class path extends dbObject {
   foreach ($allowed_parent_path_ids as $path_id) {
    $path->findBy_id($path_id);
    $url = $path->fullPath($path->path_link);
-   $allPaths .= "<li title=\"$path->description\" class='parent_menu expandable'>" . '<a href="' . $url . '">' . $path->name . '</a>';
+   if ($this->show_description) {
+    $allPaths .= "<li title=\"$path->name\" class='parent_menu expandable'>" . '<a href="' . $url . '">' . $path->description . '</a>';
+   } else {
+    $allPaths .= "<li title=\"$path->description\" class='parent_menu expandable'>" . '<a href="' . $url . '">' . $path->name . '</a>';
+   }
    $allPaths .= '<ul class="child_menu">';
    $childs = $path->findAll_childOfPartent($path_id);
    foreach ($childs as $child_paths) {
     $key = array_search($child_paths->path_id, $allowed_path_ids);
     if ($key) {
      $url_1 = $path->fullPath($child_paths->path_link);
-     $allPaths .= "<li title=\"$child_paths->description\" class='expandable'>" . '<a href="' . $url_1 . '">' . $child_paths->name . '</a>';
+     if ($this->show_description) {
+      $allPaths .= "<li title=\"$child_paths->name\" class='expandable'>" . '<a href="' . $url_1 . '">' . $child_paths->description . '</a>';
+     } else {
+      $allPaths .= "<li title=\"$child_paths->description\" class='expandable'>" . '<a href="' . $url_1 . '">' . $child_paths->name . '</a>';
+     }
      $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths);
      unset($allowed_path_ids[$key]);
     }
@@ -338,7 +348,7 @@ class path extends dbObject {
    $allPaths .= '</ul>';
    $allPaths .= '</li>';
   }
-  
+
 //  if (!empty($allowed_path_ids) && is_array($allowed_path_ids) && $allowed_path_ids[0] != '11') {
   if (!empty($allowed_path_ids) && is_array($allowed_path_ids)) {
    $allPaths .= '<li class="parent_menu expandable">' . '<a href="' . HOME_URL . '">MISC</a>';
@@ -346,7 +356,12 @@ class path extends dbObject {
    foreach ($allowed_path_ids as $path_key => $path_id) {
     $child_paths = $path->findBy_id($path_id);
     $url_1 = $path->fullPath($child_paths->path_link);
-    $allPaths .= "<li title=\"$child_paths->description\" class='expandable'>" . '<a href="' . $url_1 . '">' . $child_paths->name . '</a>';
+    if ($this->show_description) {
+     $allPaths .= "<li title=\"$child_paths->name\" class='expandable'>" . '<a href="' . $url_1 . '">' . $child_paths->description . '</a>';
+    } else {
+     $allPaths .= "<li title=\"$child_paths->description\" class='expandable'>" . '<a href="' . $url_1 . '">' . $child_paths->name . '</a>';
+    }
+
     $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths);
     $allPaths .= '</li>';
    }

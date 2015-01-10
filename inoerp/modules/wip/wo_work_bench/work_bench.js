@@ -114,6 +114,6 @@ $('#wip_wo_work_bench').off('change', '#from_routing_sequence').on('change', '#f
   }
 
 
-})
+});
 });
 

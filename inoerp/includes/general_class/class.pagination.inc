@@ -102,7 +102,7 @@ VAR;
   }
   $this->_total_pages = $this->total_pages();
   if ($this->_total_pages > 1) {
-   $pagination_statement .= "<div class='page_nos'>";
+   $pagination_statement .= "<div class='page_nos pagination'>";
    if ($this->current_page > 6) {
     if (strpos($this->_path, '.php') !== false) {
      $pagination_statement .= " <a href=\"$this->_path&amp;pageno=1&amp;" . $this->_query_string;

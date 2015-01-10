@@ -39,9 +39,10 @@ function getFormDetails(url) {
  }).done(function (result) {
   var newContent = $(result).find('div#structure').html();
   var allButton = $(result).find('div#header_top_container').html();
-    if(typeof allButton === 'undefined'){
+  if (typeof allButton === 'undefined') {
    allButton = '';
- };
+  }
+  ;
 
   var commentForm = $(result).find('div#comment_form').html();
   if (newContent) {
@@ -62,6 +63,10 @@ function getFormDetails(url) {
  }).fail(function () {
   alert("Form loading failed!");
  });
+}
+
+function applyFilter() {
+
 }
 
 function arrow_menu() {
@@ -2060,7 +2065,9 @@ function getSearchResult(options) {
  var defaults = {
   json_url: 'includes/json/json_search.php',
   className: $('.search.class_name').val(),
-  searchParameters: $('#generic_search_form').find(":input").serializeArray(),
+  searchParameters: $('#generic_search_form').find(":input").filter(function () {
+   return !!this.value;
+  }).serializeArray(),
   pageno: 1,
   per_page: 0
  };
@@ -2090,6 +2097,41 @@ function getSearchResult(options) {
   alert("Search Failed");
  });
 }
+
+function getSiteSearchResult(options) {
+ var defaults = {
+  json_url: 'includes/json/json_site_search.php',
+//  className: $('.search.class_name').val(),
+  searchParameters: $('#site_search').find(":input").serializeArray(),
+  pageno: 1,
+  per_page: 0
+ };
+ var settings = $.extend({}, defaults, options);
+
+ $.ajax({
+  url: settings.json_url,
+  type: 'get',
+  data: {
+//   class_name: settings.className,
+   search_parameters: settings.searchParameters,
+   pageno: settings.pageno,
+   per_page: settings.per_page
+  },
+  beforeSend: function () {
+   $('.show_loading_small').show();
+  },
+  complete: function () {
+   $('.show_loading_small').hide();
+  }
+ }).done(function (result) {
+  var newContent = $(result).filter('#json_search_result').html();
+  $('#structure').replaceWith('<div id="structure">' + newContent + '</div>');
+//  $.getScript("includes/js/reload.js");
+ }).fail(function () {
+  alert("Search Failed");
+ });
+}
+
 
 function getMultiSelectResult(options) {
  var defaults = {
@@ -2961,7 +3003,7 @@ $(document).ready(function () {
   location.reload(true);
   localStorage.removeItem("disableContextMenu");
  });
- 
+
 //setConetntRightLeft();
  tinymce.init({
   selector: '.mediumtext',
@@ -3084,8 +3126,8 @@ $(document).ready(function () {
    {
     text: "OK",
     click: function () {
-      $(this).dialog("close");
-     
+     $(this).dialog("close");
+
     }
    }
   ],
@@ -3093,9 +3135,10 @@ $(document).ready(function () {
   position: {my: "left top", at: "left top", of: "#structure "}
  });
 
- $('body').off('click','#search_tip').on('click','#search_tip',function () {
-    $("#search_message").dialog("open");
-  });
+ $('body').off('click', '#search_tip').on('click', '#search_tip', function () {
+  $("#search_message").dialog("open");
+ });
+
 
 //save data
  if ($('ul#js_saving_data').length > 0) {
@@ -3264,6 +3307,36 @@ $(document).ready(function () {
   });
  });
 
+ $('body').on('click', '#site_search_submit', function (e) {
+  e.preventDefault();
+  getSiteSearchResult();
+ });
+ $('body').on('submit', '#site_search', function (e) {
+  e.preventDefault();
+  getSiteSearchResult();
+ });
+
+
+ $('body').on('click', '#site_search_content .page_nos a', function (e) {
+  e.preventDefault();
+  $('.hideDiv_input').trigger('click');
+  var page_no = getUrlValues('pageno', $(this).prop('href'));
+  var per_page = getUrlValues('per_page', $(this).prop('href'));
+  getSiteSearchResult({
+   pageno: page_no,
+   per_page: per_page
+  });
+ });
+
+ $('body').on('click', '#site_search_content a.content_per_page', function (e) {
+  e.preventDefault();
+  $('.hideDiv_input').trigger('click');
+  var per_page = $(this).closest('.noOfcontents').find('.per_page').val();
+  getSiteSearchResult({
+   per_page: per_page
+  });
+ });
+
  $('body').on('click', '#multi_select #search_submit_btn', function (e) {
   e.preventDefault();
   $('.hideDiv_input').trigger('click');
@@ -3308,7 +3381,7 @@ $(document).ready(function () {
  getBlocks();
 
 
- $('body').on('click', '#header_top .menu a, #sys_menu_left_vertical .menu a,#search_result .action a, #pagination .page_nos a, #new_page_button', function (e) {
+ $('body').on('click', '.search_result a, #header_top .menu a, #sys_menu_left_vertical .menu a,#search_result .action a, #pagination .page_nos a, #new_page_button', function (e) {
   e.preventDefault();
   var urlLink = $(this).attr('href');
   var urlLink_a = urlLink.split('?');
@@ -3323,8 +3396,8 @@ $(document).ready(function () {
   }
   getFormDetails(formUrl);
  }).one();
- 
-  $('#sys_menu_left_vertical .menu a').on('click', function (e) {
+
+ $('#sys_menu_left_vertical .menu a').on('click', function (e) {
   e.preventDefault();
   var urlLink = $(this).attr('href');
   var urlLink_a = urlLink.split('?');
@@ -3500,6 +3573,107 @@ $(document).ready(function () {
   var formUrl = 'includes/json/json_form.php?' + urlLink_a[1] + '&transaction_type_id=' + transaction_type_id + '&association_level=' + association_level;
   getFormDetails(formUrl);
  }).one();
+
+
+
+ $("#filter_area").dialog({
+  autoOpen: false,
+  dialogClass: "no-close",
+  modal: true,
+  minWidth: 800,
+  title: "Filters",
+  show: {
+   effect: "blind",
+   duration: 1000
+  },
+  hide: {
+   effect: "explode",
+   duration: 1000
+  },
+  buttons: [
+   {
+    text: "Done",
+    click: function () {
+       $("#filter_area").find('input.field_name').val('');
+          $(this).dialog("close");
+    }
+   }
+  ],
+  closeOnEscape: true,
+  position: {my: "center center", at: "center center"}
+ });
+
+
+ $('body').off('click', '.apply-filter').on('click', '.apply-filter', function () {
+  var inputFieldName = $(this).closest('.list_filter').find('select.field_name').val();
+  var inputFieldCondition = $(this).closest('.list_filter').find('select.condition_name').val();
+  var inputFieldValue = $(this).closest('.list_filter').find('input.condition_value').val();
+
+  var filterHtml = ' ' + inputFieldName;
+  filterHtml += ' ' + inputFieldCondition;
+  filterHtml += ' ' + inputFieldValue;
+  var elementClass = 'applied-filter ' + inputFieldName ;
+  var elementToBeCloned = $('.applied_filters').last().clone().attr('data-field_name', inputFieldName).attr('class',elementClass);
+  $(elementToBeCloned).find('button.toggle-filter').append(filterHtml);
+   $('#searchForm').append(elementToBeCloned);
+  
+  var hiddenFieldValue = inputFieldCondition + inputFieldValue;
+  var hiddenInput = '<input class="filter_field ' + inputFieldName + ' " type="hidden" value="' + hiddenFieldValue + '" name="' + inputFieldName + '[]" form="generic_search_form">';
+  $('#generic_search_form').find('ul.search_form').append(hiddenInput);
+  getSearchResult();
+
+ });
+
+ $('body').on('click', '#search_result .ino_filter', function () {
+  $("#filter_area").dialog("open");
+  var select_field = '<select class="field_name form-control" name="field_name">';
+  $(this).closest('#search_result').find('th').each(function(){
+   if($(this).data('field_name')){
+    var fname = $(this).data('field_name');
+      select_field += '<option value="'+fname+'"> '+fname+' </option> ';
+     }
+  });
+  select_field += '</select>';
+  $("#filter_area").find('input.field_name').replaceWith(select_field);
+  $("#filter_area").find('select.field_name').val($(this).closest('th').data('field_name'));
+ });
+
+// $('body').off('click', '#search_result .ino_filter').on('click', '#search_result .ino_filter', function () {
+//  $("#filter_area").dialog("open");
+//  $("#filter_area").find('input.field_name').val($(this).closest('th').data('field_name'));
+// });
+
+ $('body').on('click', '#search_result .ino_sort_a_z' , function(){
+$('#searchForm').find('.search_order_by').val($(this).closest('th').data('field_name'));
+$('#searchForm').find('.search_asc_desc').val('asc');
+getSearchResult();
+});
+
+$('body').on('click', '.add-element', function(){
+  $(this).closest('.list_filter').clone().appendTo($(this).closest('.well'));
+});
+
+$('body').on('click', '.remove-element', function(){
+ if($('.list_filter').length > 1 ){
+  $(this).closest('.list_filter').remove();
+ }else{
+  alert('You cannot remove the last filter element\nClick on Done to close the filter form');
+ }
+});
+
+
+ $('body').on('click', '#search_result .ino_sort_z_a' , function(){
+$('#searchForm').find('.search_order_by').val($(this).closest('th').data('field_name'));
+$('#searchForm').find('.search_asc_desc').val('desc');
+getSearchResult();
+});
+
+ $('body').on('click', '.remove-filter', function () {
+   var field_name =   '.'+ $(this).closest('.applied-filter').data('field_name');
+  $('#generic_search_form').find('ul.search_form').find(field_name).remove();
+   $(this).closest('.applied-filter').remove();
+   getSearchResult();
+ });
 
 });
 function toUpperCase(str)

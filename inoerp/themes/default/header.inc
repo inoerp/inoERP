@@ -61,7 +61,7 @@
      echo '<div id = "header_top" class = "clear"></div>';
     }
     ?>
-    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+    <div class="col-xs-6 col-sm-4 col-md-4">
      <?php
      $show_header_links = true;
      if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
@@ -74,11 +74,11 @@
      ?>
      <?php if ($show_header_links) { ?>
       <div class="social-icons">
-       <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>     
+       <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
       </div><!-- end social icons -->
      <?php } ?>
 
-    </div><!-- end columns -->
+    </div><!-- end columns --><!-- end columns -->
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
      <div class="topmenu">
       <span class="topbar-login">
@@ -125,8 +125,10 @@
    <div class="container">
     <nav class="navbar yamm navbar-default">
      <div class="navbar-header">
-      <img src="<?php echo HOME_URL;
-       echo!empty($si->logo_path) ? $si->logo_path : 'files/logo.png' ?>" class="logo_image" alt="logo"/>
+      <img src="<?php
+      echo HOME_URL;
+      echo!empty($si->logo_path) ? $si->logo_path : 'files/logo.png'
+      ?>" class="logo_image" alt="logo"/>
       <a href="<?php echo HOME_URL; ?>" class="navbar-brand"><?php echo!empty($si->site_name) ? $si->site_name : 'inoERP'; ?></a>
      </div><!-- end navbar-header -->
      <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right">

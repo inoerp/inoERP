@@ -189,19 +189,16 @@ $(document).ready(function () {
           var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
           var trClass_d = '.' + trClass;
           var generation_type = $('#content').find(trClass_d).find('.serial_generation').val();
-          alert('1');
-          if (!generation_type) {
+           if (!generation_type) {
            var field_stmt = '<input class="textfield serial_number" type="text" size="25" readonly name="serial_number[]" >';
            $('#content').find(trClass_d).find('.inv_serial_number_id').replaceWith(field_stmt);
            $('#content').find(trClass_d).find('.serial_number').replaceWith(field_stmt);
-           alert('2');
-           return;
+            return;
           } else if (generation_type != 'PRE_DEFINED') {
            var field_stmt = '<input class="textfield serial_number" type="text" size="25" name="serial_number[]" >';
            $('#content').find(trClass_d).find('.inv_serial_number_id').replaceWith(field_stmt);
            $('#content').find(trClass_d).find('.serial_number').replaceWith(field_stmt);
-           alert('3');
-          }
+           }
           var itemIdM = $('#content').find(trClass_d).find('.item_id_m').val();
           if (!itemIdM) {
            return;

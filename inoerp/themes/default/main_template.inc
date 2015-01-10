@@ -69,7 +69,7 @@
     <div id="navbar" class="navbar-collapse collapse">
      <ul class="nav navbar-nav navbar-right">
       <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
-      <li><a href="http://demo.inoideas.org/extensions/user/user_login.php" >DEMO <div class="arrow-up"></div></a></li>
+      <li><a href="http://demo.inoideas.org/extensions/user/user_login.php" >Demo <div class="arrow-up"></div></a></li>
       <li><a href="https://github.com/inoerp/inoERP" >Download <div class="arrow-up"></div></a></li>
       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
@@ -101,9 +101,10 @@
        </span>
       </li>
      </ul>
-          <form class="navbar-form navbar-right">
-           <input type="text" class="form-control" placeholder="Search...">
-          </form>
+     <?php echo $ss->entry_form($_GET); ?>
+     <!--          <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+               </form>-->
 
     </div>
    </div>
@@ -132,7 +133,7 @@
      <div id="sys_menu_left_vertical">
       <?php
       $pat = new path();
-      echo ($pat->path_allpaths_block(array('divClass' => 'tree_view')));
+       echo ($pat->path_allpaths_block(array('divClass' => 'tree_view')));
       echo $fav->show_currentUser_fav();
       ?>
      </div>
@@ -222,7 +223,12 @@
   echo (!empty($footer_bottom)) ? "<div id=\"footer_bottom\"> $footer_bottom </div>" : "";
   echo $f->hidden_field_withId('home_url', HOME_URL);
   ?>
-   <?php echo searching_tips(); ?>
+  <div class="hidden">
+   <?php 
+   echo searching_tips(); 
+   echo ino_filter_form();
+   ?>
+  </div>
  </body>
 </html>
 <?php

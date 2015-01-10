@@ -25,7 +25,7 @@
      $view->user_sort[$sort_data['name']] = $sort_data['value'];
     }
    }
-   echo '<div id="return_divId">' . $view->show_viewResult() . '</div>';
+      echo '<div id="return_divId">' . $view->show_viewResult() . '</div>';
   } else {
    return false;
   }

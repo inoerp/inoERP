@@ -97,6 +97,7 @@ class search extends dbObject {
  }
 
  public function search_result_op() {
+$drop_down_icon = ino_search_dropDownSettings();
   if (empty($this->_view_path)) {
    $this->_view_path = 'form.php?class_name=' . $this->_searching_class;
   }
@@ -128,7 +129,7 @@ class search extends dbObject {
     if ($j > $total_columns - 2) {
      break;
     }
-    $search_result .= '<th>' . ucwords(str_replace('_', ' ', $this->column_array_s[$j])) . '</th>';
+    $search_result .= '<th data-field_name="'.$this->column_array_s[$j].'">'.$drop_down_icon . ucwords(str_replace('_', ' ', $this->column_array_s[$j])) . '</th>';
    }
    $search_result .='</tr></thead>';
    If (!empty($this->result)) {
@@ -415,8 +416,9 @@ class search extends dbObject {
    } else {
     $get_value = "";
    }
+   $name_bracketed = $value .'[]';
    $program_form_statement .= "<li id='".$value."' ><label class=\"label_$value\">" . ucwords(str_replace('_', ' ', $value)) . "</label>";
-   $program_form_statement .= "<input type=\"text\" name=\"$value\" class=\"$value text_search \"   size=\"15\" value=\"$get_value\" >";
+   $program_form_statement .= "<input type=\"text\" name=\"$name_bracketed\" class=\"$value text_search \"   size=\"15\" value=\"$get_value\" >";
    $program_form_statement .= '</li>';
   }
 

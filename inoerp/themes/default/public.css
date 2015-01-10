@@ -463,18 +463,11 @@ ul.commentRecord li ul.line{
 }
 
 #pagination .selected, .pagination .selected{
- color: red;
- padding: 2px 10px;
- margin-left: 10px;
- background: #e4f5fc; /* Old browsers */
- background: -moz-linear-gradient(-45deg,  #e4f5fc 0%, #2ab0ed 0%, #9fd8ef 22%, #bfe8f9 77%, #2ab0ed 100%); /* FF3.6+ */
- background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#e4f5fc), color-stop(0%,#2ab0ed), color-stop(22%,#9fd8ef), color-stop(77%,#bfe8f9), color-stop(100%,#2ab0ed)); /* Chrome,Safari4+ */
- background: -webkit-linear-gradient(-45deg,  #e4f5fc 0%,#2ab0ed 0%,#9fd8ef 22%,#bfe8f9 77%,#2ab0ed 100%); /* Chrome10+,Safari5.1+ */
- background: -o-linear-gradient(-45deg,  #e4f5fc 0%,#2ab0ed 0%,#9fd8ef 22%,#bfe8f9 77%,#2ab0ed 100%); /* Opera 11.10+ */
- background: -ms-linear-gradient(-45deg,  #e4f5fc 0%,#2ab0ed 0%,#9fd8ef 22%,#bfe8f9 77%,#2ab0ed 100%); /* IE10+ */
- background: linear-gradient(135deg,  #e4f5fc 0%,#2ab0ed 0%,#9fd8ef 22%,#bfe8f9 77%,#2ab0ed 100%); /* W3C */
- filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4f5fc', endColorstr='#2ab0ed',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-
+color: #FFF;
+padding: 6px 14px;
+margin-left: 10px;
+background: rgba(69, 156, 104, 0.95);
+margin-left: 8px;
 }
 
 #pagination a:link, .pagination a:link{
@@ -716,6 +709,10 @@ a.link_class_green:hover{
  margin: 5px 10px;
 }
 
+.navbar-inverse .logo_image{
+ display: none;
+}
+
 #path_by_module ul   {
  list-style:none;
  padding-left:0;
@@ -839,7 +836,7 @@ table.view_grid_container tr td{
 }
 
 tr:nth-child(even) {
- background-color: rgba(120,130,12,0.3);
+ background-color: rgba(184, 215, 102, 0.38);
 }
 .chart{
  background : rgba(256,256,256,0.4);
@@ -897,14 +894,14 @@ tr:nth-child(even) {
  background: url('images/filter_remove.png') no-repeat 2px 5px rgba(19, 190,10, 0.3);
 }
 
-ul.icon_header {
+/*ul.icon_header {
  width: 200px;
 }
 
 ul.icon_header li{
  display: inline;
  margin-right : 10px;
-}
+}*/
 
 ul.inline, ul.inline li{
  display: inline-block;
@@ -1333,4 +1330,10 @@ td.search_result.action a{
  background:url('images/minus.gif ') no-repeat 0px 6px;
  color: #FFFFFF;
  cursor: pointer;
+}
+
+.applied-filter{
+ display: inline-block;
+float: left;
+margin-right: 20px;
 }

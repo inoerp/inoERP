@@ -13,9 +13,9 @@
 //  echo THEME_URL;
 //  echo (!empty($content_class)) ? '/content_layout.css' : '/layout.css'
   ?>" media="all" rel="stylesheet" type="text/css" />
-  <link href="<?php echo THEME_URL; ?>/public.css" media="all" rel="stylesheet" type="text/css" />
-  <link href="<?php echo THEME_URL; ?>/menu.css" media="all" rel="stylesheet" type="text/css" />
-  <link href="<?php echo THEME_URL; ?>/jquery.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="<?php echo HOME_URL; ?>/themes/default/public.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="<?php echo HOME_URL; ?>/themes/default/menu.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="<?php echo HOME_URL; ?>/themes/default/jquery.css" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo HOME_URL; ?>tparty/bootstrap/css/bootstrap.css" rel="stylesheet">
   <link href="<?php echo HOME_URL; ?>tparty/bootstrap/css/style.css" rel="stylesheet">
   <link href="<?php echo HOME_URL; ?>tparty/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -110,7 +110,7 @@
   </nav>
 
   <?php
-  if ($showBlock) {
+  if (!empty($showBlock)) {
    echo '<div id="header_bottom"></div>';
   }
   ?>

@@ -1,16 +1,3 @@
-<div id="all_contents">
- <div id="content_left"></div>
- <div id="content_right">
-  <div id="content_right_left">
-   <div id="content_top"></div>
-   <div id="content">
-    <div id="structure">
-     <div id="inv_serial_number_divId">
-      <!--    START OF FORM HEADER-->
-      <div class="error"></div><div id="loading"></div>
-      <div class="show_loading_small"></div>
-      <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
-      <!--    End of place for showing error messages-->
       <div id ="form_line" class="form_line">
        <div id="tabsDetail">
         <ul class="tabMain">
@@ -103,17 +90,6 @@
        <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
        ?>
       </div>
-      <!--END OF FORM HEADER-->
-     </div>
-    </div>
-    <!--   end of structure-->
-   </div>
-   <div id="content_bottom"></div>
-  </div>
-  <div id="content_right_right"></div>
- </div>
-
-</div>
 <div id="js_data">
  <ul id="js_saving_data">
   <li class="headerClassName" data-headerClassName="inv_serial_number" ></li>
