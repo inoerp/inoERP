@@ -132,6 +132,9 @@
  require_once(INC_AR . DS . "transaction_interface" . DS . "class_ar_transaction_interface.inc");
  require_once(INC_MODULE . DS . "ar" . DS . "receipt_source" . DS . "class_ar_receipt_source.inc");
  require_once(INC_MODULE . DS . "ar" . DS . "transaction" . DS . "class_ar_unpaid_transaction_v.inc");
+ require_once(INC_MODULE . DS . "fa" . DS . "asset_class" . DS . "class_fa_asset_class.inc");
+ require_once(INC_MODULE . DS . "fa" . DS . "asset_category" . DS . "class_fa_asset_category.inc");
+ require_once(INC_MODULE . DS . "fa" . DS . "asset_category" . DS . "class_fa_class_category_association.inc");
  require_once(INC_PO . DS . "class_po_header.inc");
  require_once(INC_PO . DS . "class_po_line.inc");
  require_once(INC_PO . DS . "class_po_detail.inc");
@@ -202,6 +205,7 @@
  require_once(INC_MODULE . DS . "wip" . DS . "wip_move_transaction" . DS . "class.wip_move_transaction.inc");
  require_once(INC_MODULE . DS . "wip" . DS . "wip_wo_completion" . DS . "class_wip_wo_completion.inc");
  require_once(INC_MODULE . DS . "wip" . DS . "wip_wol_transaction" . DS . "class_wip_wol_transaction.inc");
+ require_once(INC_MODULE . DS . "wip" . DS . "wip_wol_transaction" . DS . "class_wip_wol_transaction_line.inc");
  require_once(INC_MODULE . DS . "wip" . DS . "wip_material_transaction" . DS . "class_wip_material_transaction.inc");
  require_once(INC_MODULE . DS . "wip" . DS . "wip_resource_transaction" . DS . "class.wip_resource_transaction.inc");
  require_once(INC_MODULE . DS . "wip" . DS . "accounting_group" . DS . "class_wip_accounting_group.inc");
@@ -311,7 +315,8 @@
  
  //
  require_once(INC_TPARTY . DS . "barcode" . DS . "class_ino_barcode.inc");
-
+ require_once(INC_TPARTY . DS . "extensions". DS . "social_login" . DS . "class_social_login.inc");
+//
 //include extensions
  require_once(INC_EXTENSIONS . DS . "ino_generic" . DS . "class_ino_generic.inc");
  require_once(INC_EXTENSIONS . DS . "page" . DS . "class_page.inc");
@@ -336,6 +341,7 @@
  require_once(INC_EXTENSIONS . DS . "url_alias" . DS . "class_ext_url_alias.inc");
  require_once(INC_EXTENSIONS . DS . "web_contact" . DS . "class_web_contact.inc");
  require_once(INC_EXTENSIONS . DS . "site_search" . DS . "class_extn_site_search.inc");
+ 
  require_once(INC_EXTENSIONS . DS . "test_case" . DS . "class_ext_test_case_header.inc");
  require_once(INC_EXTENSIONS . DS . "test_case" . DS . "class_ext_test_case_line.inc");
 ?>

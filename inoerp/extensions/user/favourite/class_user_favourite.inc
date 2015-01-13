@@ -83,12 +83,13 @@ class user_favourite extends dbObject {
   }
  }
 
- public function show_currentUser_fav() {
+ public function show_currentUser_fav($show_as_menu = false ) {
   $favs = $this->findBy_currentUser();
   if (!$favs) {
    return false;
   }
-  $fav_stmt = '<ul id="favourite">';
+  $ul_divClass = ($show_as_menu == true ) ? ' class="dropdown-menu" role="menu" ' : '';
+  $fav_stmt = '<ul id="favourite" '.$ul_divClass.' >';
   $count = 0;
   foreach ($favs as $links) {
    $divClass = ($count % 2 ) == 0 ? 'even' : 'odd';

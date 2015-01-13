@@ -119,7 +119,6 @@ function callGetLocatorForTo(subinventory_id, rowIdValue) {
 $(document).ready(function () {
 //mandatory and field sequence
  var mandatoryCheck = new mandatoryFieldMain();
- mandatoryCheck.header_id = 'wip_wo_header_id';
 // mandatoryCheck.mandatoryHeader();
  mandatoryCheck.form_area = 'form_header';
  mandatoryCheck.mandatory_fields = ["org_id", "transaction_type_id"];
@@ -147,102 +146,38 @@ $(document).ready(function () {
 
 // addOrShow_lineDetails('tr.inv_transaction_row0');
 // onClick_addDetailLine(1, '.add_row_detail_img');
- onClick_addDetailLine(2, '.add_row_detail_img1');
+ 
 
+// $('body').off("blur", '#transaction_type_id').on("blur", '#transaction_type_id', function () {
+//  $("tr.transfer_info").find("td select").each(function () {
+//   $(this).val("");
+//  });
+//  var transaction_type_id = $(this).val();
+//  switch (transaction_type_id) {
+//   case "6":
+//    $(".from_subinventory_id").attr("disabled", false);
+//    $(".from_locator_id").attr("disabled", false);
+//    $(".to_subinventory_id").attr("disabled", true);
+//    $(".to_locator_id").attr("disabled", true);
+//    break;
+//
+//   case "7":
+//    $(".to_subinventory_id").attr("disabled", false);
+//    $(".to_locator_id").attr("disabled", false);
+//    $(".from_subinventory_id").attr("disabled", true);
+//    $(".from_locator_id").attr("disabled", true);
+//    break;
+//
+//   default:
+//    $(".to_subinventory_id").attr("disabled", false);
+//    $(".to_locator_id").attr("disabled", false);
+//    $(".from_subinventory_id").attr("disabled", false);
+//    $(".from_locator_id").attr("disabled", false);
+//  }
+//
+// });
 
- $('#content').off('blur', '.bom_sequence').on('blur', '.bom_sequence', function () {
-  if (!$('#allData tr').length) {
-   alert('No BOM found for the work order#' + $('#wo_number').val());
-   $(this).val('');
-   return false;
-  }
-
-  var bomSeq = $(this).val();
-  var trClass = '.' + $(this).closest('tr').attr('class');
-  var bomId = $('#allData tr.' + bomSeq).find('.wip_wo_bom_id').val();
-  var transaction_type_id = $('#transaction_type_id').val();
-  $(this).closest('tr').find('.wip_wo_bom_id').val(bomId);
-  $(this).closest('.tabContainer').find(trClass).find('.wip_wo_bom_id').val(bomId);
-
-  var itemId = $('#allData tr.' + bomSeq).find('.component_item_id_m').val();
-  $(this).closest('tr').find('.item_id_m').val(itemId);
-
-  var item_number = $('#allData tr.' + bomSeq).find('.component_item_number').val();
-  $(this).closest('tr').find('.item_number').val(item_number);
-
-  var item_description = $('#allData tr.' + bomSeq).find('.component_description').val();
-  $(this).closest('tr').find('.item_description').val(item_description);
-
-  var uom_id = $('#allData tr.' + bomSeq).find('.component_uom').val();
-  $(this).closest('tr').find('.uom_id').val(uom_id);
-  var subinventory_id = $('#allData tr.' + bomSeq).find('.supply_sub_inventory').val();
-  var locator_html = $('#allData tr.' + bomSeq).find('.supply_locator').html();
-  if (transaction_type_id == 6) {
-   $(this).closest('.tabContainer').find(trClass).find('.from_subinventory_id').val(subinventory_id);
-   $(this).closest('.tabContainer').find(trClass).find('.from_locator_id').empty().append(locator_html);
-   $(this).closest('.tabContainer').find(trClass).find('.to_subinventory_id').val('');
-   $(".to_subinventory_id").attr("disabled", true);
-   $(".to_locator_id").attr("disabled", true);
-  }
-  else if (transaction_type_id == 7) {
-   $(this).closest('.tabContainer').find(trClass).find('.to_subinventory_id').val(subinventory_id);
-   $(this).closest('.tabContainer').find(trClass).find('.to_locator_id').empty().append(locator_html);
-   $(this).closest('.tabContainer').find(trClass).find('.from_subinventory_id').val('');
-   $(".from_subinventory_id").attr("disabled", true);
-   $(".from_locator_id").attr("disabled", true);
-  } else {
-   $(this).closest('.tabContainer').find(trClass).find('.to_subinventory_id').val('');
-   $(this).closest('.tabContainer').find(trClass).find('.from_subinventory_id').val('');
-   $(".from_subinventory_id").attr("disabled", true);
-   $(".from_locator_id").attr("disabled", true);
-   $(".to_subinventory_id").attr("disabled", true);
-   $(".to_locator_id").attr("disabled", true);
-  }
-
-  $(this).closest('.tabContainer').find(trClass).find('.document_type').val(document_type);
-  $(this).closest('.tabContainer').find(trClass).find('.document_number').val(documentNumber);
-  $(this).closest('.tabContainer').find(trClass).find('.document_id').val(documentId);
-  $(this).closest('.tabContainer').find(trClass).find('.reference_type').val('table');
-  $(this).closest('.tabContainer').find(trClass).find('.reference_key_name').val('wip_wo_header');
-  $(this).closest('.tabContainer').find(trClass).find('.reference_key_value').val(documentId);
-  $(this).closest('.tabContainer').find(trClass).find('.reference').val(reference);
-  var lot_generation = $('#allData tr.' + bomSeq).find('.lot_generation').val();
-  $(this).closest('.tabContainer').find(trClass).find('.lot_generation').val(lot_generation);
-  var serial_generation = $('#allData tr.' + bomSeq).find('.serial_generation').val();
-  $(this).closest('.tabContainer').find(trClass).find('.serial_generation').val(serial_generation);
-  serial_details(serial_generation, $(this).closest('tr').attr('class'));
- });
-
- $('body').off("blur", '#transaction_type_id').on("blur", '#transaction_type_id', function () {
-  $("tr.transfer_info").find("td select").each(function () {
-   $(this).val("");
-  });
-  var transaction_type_id = $(this).val();
-  switch (transaction_type_id) {
-   case "6":
-    $(".from_subinventory_id").attr("disabled", false);
-    $(".from_locator_id").attr("disabled", false);
-    $(".to_subinventory_id").attr("disabled", true);
-    $(".to_locator_id").attr("disabled", true);
-    break;
-
-   case "7":
-    $(".to_subinventory_id").attr("disabled", false);
-    $(".to_locator_id").attr("disabled", false);
-    $(".from_subinventory_id").attr("disabled", true);
-    $(".from_locator_id").attr("disabled", true);
-    break;
-
-   default:
-    $(".to_subinventory_id").attr("disabled", false);
-    $(".to_locator_id").attr("disabled", false);
-    $(".from_subinventory_id").attr("disabled", false);
-    $(".from_locator_id").attr("disabled", false);
-  }
-
- });
-
- $('#content').off('blur', '.from_subinventory_id, .from_locator_id')
+ $('#form_line').off('blur', '.from_subinventory_id, .from_locator_id')
          .on('blur', '.from_subinventory_id, .from_locator_id', function () {
           var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
           var trClass_d = '.' + trClass;
@@ -269,7 +204,7 @@ $(document).ready(function () {
           });
          });
 
- $('#content').off('blur', '.subinventory_id, .locator_id')
+ $('#form_line').off('blur', '.subinventory_id, .locator_id')
          .on('blur', '.subinventory_id, .locator_id', function () {
           var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
           var trClass_d = '.' + trClass;
@@ -349,25 +284,6 @@ $(document).ready(function () {
  }).one();
 
 
- //get Subinventory on Inventory change
- $('#content').off('blur', '#org_id').on('blur', '#org_id', function () {
-  var orgId = $(this).val();
-  if (orgId) {
-   getSubInventory({
-    json_url: 'modules/inv/subinventory/json_subinventory.php',
-    org_id: orgId
-   });
-  }
- });
-
- //get locatot on Subinventory change
- $('#content').off('blur', '.sub_inventory').on('blur', '.sub_inventory', function () {
-  var subInventoryId = $(this).val();
-  if (subInventoryId > 0) {
-   var trClass = '.' + $(this).closest('tr').attr('class');
-   getLocator('modules/inv/locator/json_locator.php', subInventoryId, 'subinventory', trClass);
-  }
- });
 
  $('#content').off('blur', '#org_id, #item_number').on('blur', '#org_id, #item_number', function () {
   if ($('#org_id').val() && $('#item_id_m').val()) {
@@ -379,6 +295,44 @@ $(document).ready(function () {
   }
 
  });
+
+ //get Subinventory Name
+ $('body').off("change",'#org_id').on("change",'#org_id' ,function () {
+  getSubInventory({
+   json_url: 'modules/inv/subinventory/json_subinventory.php',
+   org_id: $("#org_id").val()
+  });
+  getWipAccountingGroup('modules/wip/accounting_group/json_accounting_group.php', $("#org_id").val());
+  $('.org_id').val($(this).val());
+ });
+
+
+ //get locatot on Subinventory change in form header
+ $('#form_header').off('change', '.subinventory_id').on('change', '.subinventory_id', function () {
+  var subInventoryId = $(this).val();
+  if (subInventoryId > 0) {
+   getLocator('modules/inv/locator/json_locator.php', subInventoryId, 'oneSubinventory', '');
+  }
+ });
+
+ //get locatot on Subinventory change
+ $('#form_line').off('blur', '.sub_inventory').on('blur', '.sub_inventory', function () {
+  var subInventoryId = $(this).val();
+  if (subInventoryId > 0) {
+   var trClass = '.' + $(this).closest('tr').attr('class');
+   getLocator('modules/inv/locator/json_locator.php', subInventoryId, 'subinventory', trClass);
+  }
+ });
+
+$('body').off('blur','#quantity').on('blur','#quantity', function(){
+var complQty =  $(this).val();
+  $('#form_line').find('.usage_quantity').each(function(){
+    if($(this).val()){
+    $(this).closest('td').find('.final_quantity').val($(this).val()*complQty);
+    }
+  });
+  
+})
 
 });
 

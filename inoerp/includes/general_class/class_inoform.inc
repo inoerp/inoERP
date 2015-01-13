@@ -951,6 +951,47 @@ EOD;
    return $element_select_field;
   }
 
+   public function multi_select_field_from_array($name, $array, $value, $id = "", $class_name = "", $required = "", $readonly = "", $disabled = '', $convertToText = false) {
+   if ($readonly == 1) {
+    $readonly = 'readonly';
+   } else {
+    $readonly = '';
+   }
+
+   if ($disabled == 1) {
+    $disabled = 'disabled';
+   } else {
+    $disabled = '';
+   }
+
+   if ($required == 1) {
+    $required = 'required';
+   } else {
+    $required = '';
+   }
+
+   $bracketName = $name . '[]';
+   $idvalue = $this->_convert_id($id);
+   $element_select_field = "<Select multiple name=\"$bracketName\" class=\"from_array multi_select $class_name $name\" $idvalue $required $readonly $disabled >";
+   $element_select_field .= "<option value=\"\" ></option>";
+   foreach ($array as $key => $arraValue) {
+    if ($key == $value) {
+     $selected = 'selected';
+    } else {
+     $selected = '';
+    }
+    $element_select_field .= '<option value="' . $key . '" ';
+    $element_select_field .= $selected;
+    $element_select_field .= '>' . $arraValue . '</option>';
+   }
+   if ($convertToText == 1) {
+    $element_select_field .= "<option value=\"newentry\"  class=\"bold blue\">New Entry</option>";
+   }
+   $element_select_field .= '</select>';
+
+   return $element_select_field;
+  }
+  
   public function select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $id = "", $divClass = "", $required = "", $readonly = "", $convertToText = "", $nonArrayName = "", $disabled = "", $dataname = '') {
    if ($nonArrayName == 1) {
     $bracketName = $name;

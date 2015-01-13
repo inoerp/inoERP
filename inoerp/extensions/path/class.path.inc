@@ -94,6 +94,7 @@ class path extends dbObject {
  public $time;
  public $msg;
  public $show_description = false;
+ private $_path_display_type = 'menu';
 
  Public static function path_types() {
   $option_header = option_header::find_by_name('EXT_PATH_TYPE');
@@ -308,6 +309,7 @@ class path extends dbObject {
    $path_sql .= " AND path_type = '{$type}' ";
   }
   $all_path_ids = $this->findFirstColumn_BySql_array($path_sql);
+  $this->_path_display_type = 'panel';
   $paths = '<div id="path_by_module">' . $this->path_allpaths_block(array('parent_id_a' => $parent_ids, 'path_i_a' => $all_path_ids)) . '</div>';
   return $paths;
  }
@@ -373,6 +375,62 @@ class path extends dbObject {
   return $allPaths;
  }
 
+ public function panel_pathMenu($allowed_parent_path_ids, &$allowed_path_ids, $divClass = '') {
+  $path = new path();
+  $level = 0;
+  $allPaths = '<div class="panel panel-info">';
+  foreach ($allowed_parent_path_ids as $path_id) {
+   $path->findBy_id($path_id);
+   $url = $path->fullPath($path->path_link);
+   if ($this->show_description) {
+    $allPaths .= "<div title=\"$path->name\" class='panel-heading'>" . '<a href="' . $url . '">' . $path->description . '</a></div>';
+   } else {
+    $allPaths .= "<div title=\"$path->description\" class='panel-heading'>" . '<a href="' . $url . '">' . $path->name . '</a></div>';
+   }
+   $allPaths .= '<div class="panel-body"><ul class="child_menu">';
+   $childs = $path->findAll_childOfPartent($path_id);
+   foreach ($childs as $child_paths) {
+    $key = array_search($child_paths->path_id, $allowed_path_ids);
+    if ($key) {
+     $url_1 = $path->fullPath($child_paths->path_link);
+     if ($this->show_description) {
+      $allPaths .= "<li title=\"$child_paths->name\" class='expandable {$child_paths->name}'>" . '<a href="' . $url_1 . '">' . $child_paths->description . '</a>';
+     } else {
+      $allPaths .= "<li title=\"$child_paths->description\" class='expandable {$child_paths->name}'>" . '<a href="' . $url_1 . '">' . $child_paths->name . '</a>';
+     }
+     $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths);
+     unset($allowed_path_ids[$key]);
+    }
+    $allPaths .= '</li>';
+   }
+   $allPaths .= '</ul>';
+  }
+
+  if (!empty($allowed_path_ids) && is_array($allowed_path_ids) && $allowed_path_ids[0] != '11') {
+   if (!empty($allowed_path_ids) && is_array($allowed_path_ids)) {
+    $allPaths .= '<ul>';
+    $allPaths .= '<li class="parent_menu expandable misc">' . '<a href="' . HOME_URL . '">MISC</a>';
+    $allPaths .= '<ul class="child_menu">';
+    foreach ($allowed_path_ids as $path_key => $path_id) {
+     $child_paths = $path->findBy_id($path_id);
+     $url_1 = $path->fullPath($child_paths->path_link);
+     if ($this->show_description) {
+      $allPaths .= "<li title=\"$child_paths->name\" class='expandable  {$child_paths->name}'>" . '<a href="' . $url_1 . '">' . $child_paths->description . '</a>';
+     } else {
+      $allPaths .= "<li title=\"$child_paths->description\" class='expandable  {$child_paths->name}'>" . '<a href="' . $url_1 . '">' . $child_paths->name . '</a>';
+     }
+
+     $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths);
+     $allPaths .= '</li>';
+    }
+    $allPaths .= '</ul>';
+   }
+  }
+
+  $allPaths .= '</div></div>';
+  return $allPaths;
+ }
+
  private function _indented_pathMenu_Child($path_id, &$allowed_path_ids, &$allPaths) {
   $path = new path();
   $all_child = $path->findAll_childOfPartent($path_id);
@@ -405,8 +463,11 @@ class path extends dbObject {
   if (empty($allowed_path_ids)) {
    return null;
   }
-
-  $allPaths = $this->indented_pathMenu($allowed_parent_path_ids, $allowed_path_ids, $divClass);
+  if ($this->_path_display_type == 'panel') {
+   $allPaths = $this->panel_pathMenu($allowed_parent_path_ids, $allowed_path_ids, $divClass);
+  } else {
+   $allPaths = $this->indented_pathMenu($allowed_parent_path_ids, $allowed_path_ids, $divClass);
+  }
   return $allPaths;
  }
 

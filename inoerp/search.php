@@ -11,7 +11,7 @@ if (!empty($_GET['search_class_name'])) {
  $path = new path();
  $all_search_paths = $path->findAll_searchPaths();
  $search_result_statement = "";
- $search_result_statement .= "<table class=\"first_table normal\"><thead><tr>";
+ $search_result_statement .= "<table class=\"table normal\"><thead><tr>";
  $search_result_statement .= '<th> Module </th>';
  $search_result_statement .= '<th> Search Details </th>';
  $search_result_statement .='</tr></thead>';
@@ -32,6 +32,7 @@ if (!empty($_GET['search_class_name'])) {
  }
  $search_result_statement .='</table>';
  require_once(INC_BASICS . DS . "search_page.inc");
+ return;
 }
 if (!empty($class_names)) {
  include_once("includes/functions/loader.inc");

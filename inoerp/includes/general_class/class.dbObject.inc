@@ -189,7 +189,10 @@
   }
 
   public function findBySql_array($sql = "") {
-   global $dbc;
+   $dbc;
+      if(empty($dbc->connection)){
+    $dbc = new dbc();
+   }
    $prepare = $dbc->connection->prepare($sql);
    $prepare->execute();
    $result = $prepare->fetchAll(PDO::FETCH_NUM);
@@ -198,6 +201,9 @@
 
   public function findFirstColumn_BySql_array($sql = "") {
    global $dbc;
+   if(empty($dbc->connection)){
+    $dbc = new dbc();
+   }
    $prepare = $dbc->connection->prepare($sql);
    $prepare->execute();
    $result = $prepare->fetchAll(PDO::FETCH_COLUMN);

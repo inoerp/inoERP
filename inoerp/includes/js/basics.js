@@ -38,7 +38,7 @@ function getFormDetails(url) {
   }
  }).done(function (result) {
   var newContent = $(result).find('div#structure').html();
-  var allButton = $(result).find('div#header_top_container').html();
+  var allButton = $(result).find('div#header_top_container #form_top_image').html();
   if (typeof allButton === 'undefined') {
    allButton = '';
   }
@@ -47,7 +47,7 @@ function getFormDetails(url) {
   var commentForm = $(result).find('div#comment_form').html();
   if (newContent) {
    $('#structure').replaceWith('<div id="structure">' + newContent + '</div>');
-   $('#header_top_container').replaceWith('<div id="header_top_container" style="display: block;">' + allButton + '</div>');
+   $('#header_top_container').replaceWith('<div id="header_top_container" style="display: block;"> <ul id="form_top_image" class="draggable">' + allButton + '</ul></div>');
    $('#display_comment_form').append(commentForm);
    $.getScript("includes/js/reload.js");
    $(result).find('#js_files').find('li').each(function () {
@@ -224,21 +224,22 @@ function treeView() {
           }
          });
 
- $('.expand_collapse_all').on('click', function () {
-  $(this).parent().find('.tree_view').find('.contentContainer, .contentViewing').each(
-          function (e) {
-           if ($(this).hasClass('contentContainer')) {
-            $(this).find('ul').show();
-            $(this).find('ul').find('li').show();
-            $(this).find('ul').find('li').has('ul').addClass('contentContainer fa-plus-square');
-            $(this).removeClass('contentContainer fa-plus-square').addClass('contentViewing fa-minus-square');
-           } else {
-            $(this).find('ul').hide();
-            $(this).find('ul').find('li').hide().removeClass('contentContainer fa-minus-square');
-            $(this).removeClass('contentViewing fa-minus-square').addClass('contentContainer fa-plus-square');
-           }
-          });
- });
+$('body').on('click', '#expand_all_nav' , function () {
+ $('#sys_menu_left_vertical').find('.tree_view').find('.contentContainer, .contentViewing').each( function (e) {
+           $(this).find('ul').show();
+           $(this).find('ul').find('li').show();
+           $(this).find('ul').find('li').has('ul').addClass('contentContainer fa-plus-square');
+           $(this).removeClass('contentContainer fa-plus-square').addClass('contentViewing fa-minus-square');
+         });
+});
+
+$('body').on('click', '#collapse_all_nav' , function () {
+ $('#sys_menu_left_vertical').find('.tree_view').find('.contentContainer, .contentViewing').each( function (e) {
+ $(this).find('ul').hide();
+           $(this).find('ul').find('li').hide().removeClass('contentContainer fa-minus-square');
+           $(this).removeClass('contentViewing fa-minus-square').addClass('contentContainer fa-plus-square');
+         });
+});
 
 }
 
@@ -2482,7 +2483,7 @@ function show_dialog_box() {
    }
   ],
   closeOnEscape: true,
-  position: {my: "left top", at: "left top", of: "#structure "}
+  position: {my: "center center", at: "center bottom", of: "#structure "}
  });
 }
 
@@ -3381,7 +3382,7 @@ $(document).ready(function () {
  getBlocks();
 
 
- $('body').on('click', '.search_result a, #header_top .menu a, #sys_menu_left_vertical .menu a,#search_result .action a, #pagination .page_nos a, #new_page_button', function (e) {
+ $('body').on('click', '#path_by_module a,.search_result a, #header_top .menu a, #sys_menu_left_vertical .menu a,#search_result .action a, #pagination .page_nos a, #new_page_button', function (e) {
   e.preventDefault();
   var urlLink = $(this).attr('href');
   var urlLink_a = urlLink.split('?');
@@ -3674,6 +3675,31 @@ getSearchResult();
    $(this).closest('.applied-filter').remove();
    getSearchResult();
  });
+ 
+ 
+ $('select.search_document_list').find('option[value="gl_calendar"]').prepend('<i class="fa fa-calendar"></i> ');
+$('select.search_document_list').find('option[value="mdm_bank_header"]').prepend('<i class="fa fa-bank"></i> ');
+$('select.search_document_list').find('option[value="bc_label_format_header"]').prepend('<i class="fa fa-barcode"></i> ');
+$('select.search_document_list').find('option[value="gl_journal_header"]').prepend('<i class="fa fa-book"></i> ');
+$('select.search_document_list').find('option[value="all"]').prepend('<i class="fa fa-database"></i> ');
+$('select.search_document_list').find('option[value="org"]').prepend('<i class="fa fa-university  "></i> ');
+$('select.search_document_list').find('option[value="supplier"]').prepend('<i class="fa fa-university"></i> ');
+$('select.search_document_list').find('option[value="ar_customer"]').prepend('<i class="fa fa-university"></i> ');
+$('select.search_document_list').find('option[value="user"]').prepend('<i class="fa fa-user"></i> ');
+$('select.search_document_list').find('option[value="all_bom_routing_v"]').prepend('<i class="fa fa-cog"></i> ');
+$('select.search_document_list').find('option[value="bom_header"]').prepend('<i class="fa fa-sitemap"></i> ');
+$('select.search_document_list').find('option[value="sd_so_header"]').prepend('<i class="fa fa-shopping-cart"></i> ');
+$('select.search_document_list').find('option[value="po_header"]').prepend('<i class="fa fa-file-text-o"></i> ');
+$('select.search_document_list').find('option[value="item"]').prepend('<i class="fa fa-tags"></i> ');
+$('select.search_document_list').find('option[value="address"]').prepend('<i class="fa fa-bars"></i> ');
+$('select.search_document_list').find('option[value="cc_co_header"]').prepend('<i class="fa fa-square-o"></i> ');
+$('select.search_document_list').find('option[value="inv_receipt_header"]').prepend('<i class="fa fa-square-o"></i> ');
+$('select.search_document_list').find('option[value="sd_delivery_header"]').prepend('<i class="fa fa-truck"></i> ');
+$('select.search_document_list').find('option[value="inv_transaction"]').prepend('<i class="fa fa-tasks"></i> ');
+$('select.search_document_list').find('option[value="ar_receipt_header"]').prepend('<i class="fa fa-money"></i> ');
+$('select.search_document_list').find('option[value="ap_payment_header"]').prepend('<i class="fa fa-money"></i> ');
+$('select.search_document_list').find('option[value="ap_transaction_header"]').prepend('<i class="fa fa-info-circle"></i> ');
+$('select.search_document_list').find('option[value="ar_transaction_header"]').prepend('<i class="fa fa-info-circle"></i> ');
 
 });
 function toUpperCase(str)

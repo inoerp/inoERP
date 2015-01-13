@@ -239,7 +239,6 @@ class inosave extends dbObject {
     */
 
    if (method_exists($$class, '_before_save')) {
-//     pa($$class);
     $before_save_result = $$class->_before_save();
     if ($before_save_result < 0) {
      if ($before_save_result == -99) {
@@ -248,7 +247,7 @@ class inosave extends dbObject {
      return;
     } else if ($before_save_result == 10) {
 //     echo "<br> All data are sucessfully saved @ before save "; //before save completed all activities
-     return;
+          return;
     }
    }
 

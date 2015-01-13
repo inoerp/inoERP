@@ -61,7 +61,7 @@
 <span class="heading"> Supplier Site Details </span>
 <div id ="form_line" class="form_line">
  <form action=""  method="post" id="supplier_site"  name="supplier_site">
-  <div class="line_before_tab"> 
+  <div id='line_before_tab' class="line_before_tab"> 
    <ul class="column five_column inline_list"> 
     <li><label>Site Id : </label> 
      <?php // echo form::text_field('supplier_site_id', $supplier_site->supplier_site_id, '15', '25', '', 'System Number', 'supplier_site_id', $readonly) ?>

@@ -8,6 +8,8 @@
       <li><a href="#tabsHeader-2">Planning</a></li>
       <li><a href="#tabsHeader-3">History</a></li>
       <li><a href="#tabsHeader-4">BOM & Routing</a></li>
+      <li><a href="#tabsHeader-5">Notes</a></li>
+      <li><a href="#tabsHeader-6">Attachment</a></li>
      </ul>
      <div class="tabContainer">
       <div id="tabsHeader-1" class="tabContent">
@@ -132,6 +134,25 @@
         </ul>
        </div>
       </div>
+      <div id="tabsHeader-5" class="tabContent">
+       <div id="comments">
+        <div id="comment_list">
+         <?php echo!(empty($comments)) ? $comments : ""; ?>
+        </div>
+        <div id ="display_comment_form">
+         <?php
+         $reference_table = 'wip_wo_header';
+         $reference_id = $$class->wip_wo_header_id;
+         ?>
+        </div>
+        <div id="new_comment">
+        </div>
+       </div>
+      </div>
+      <div id="tabsHeader-6" class="tabContent">
+       <div> <?php echo ino_attachement($file) ?> </div>
+      </div>
+
      </div>
 
     </div>

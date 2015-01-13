@@ -13,11 +13,11 @@
  * wip_wo_completion 
  *
  */
-class wip_wol_transaction extends inv_transaction {
+class wip_wol_transaction extends dbObject {
 
  public static $table_name = "wip_wol_transaction";
  public static $primary_column = "wip_wol_transaction_id";
- public static $dependent_classes = ['wip_wo_header'];
+ public static $dependent_classes = ['wip_wo_bom','wip_wol_transaction_line'];
  public static $key_column = 'item_id_m';
  public static $module = "wip";
  public static $system_info = [
@@ -44,17 +44,12 @@ class wip_wol_transaction extends inv_transaction {
   'wip_accounting_group_id',
   'transaction_type_id',
   'transaction_status',
-  'start_date',
   'completion_date',
   'quantity',
-  'nettable_quantity',
   'reference_bom_item_id_m',
   'reference_routing_item_id_m',
   'completion_sub_inventory',
   'completion_locator',
-  'completed_quantity',
-  'scrapped_quantity',
-  'line',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -75,26 +70,23 @@ class wip_wol_transaction extends inv_transaction {
   "transaction_type_id"
  ];
  public $requiredField = [
-  "item_number",
-  "uom_id",
-  "quantity",
-  "org_id",
   "item_id_m",
-  "transaction_type_id"
+  'org_id',
+  'quantity',
+  'wip_accounting_group_id'
  ];
  public $search = [
   '_show_view_path' => 1,
  ];
  public $pageTitle = " WIP - Create & View WO Completion"; //page Title
- public $option_lists = [
-  'inv_transaction_class' => 'TRANSACTION_TYPE_CLASS'
- ];
+
  public $fields_inForm_notInDataBase = [
   "account_id",
   'item_description',
   'wip_wo_bom_id',
   'wip_wo_header_id',
   'bom_sequence',
+  'item_number'
   
  ];
  public $numberField = [
@@ -112,19 +104,17 @@ class wip_wol_transaction extends inv_transaction {
  public $start_date;
  public $completion_date;
  public $quantity;
- public $nettable_quantity;
  public $reference_bom_item_id_m;
  public $reference_routing_item_id_m;
  public $completion_sub_inventory;
  public $completion_locator;
- public $completed_quantity;
- public $scrapped_quantity;
- public $line;
  public $created_by;
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
  public $bom_sequence;
+ public $item_number ;
+
 
 }
 

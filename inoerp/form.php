@@ -10,7 +10,6 @@ if (!empty($_GET['class_name'])) {
  $ino_generic_html = $path->findBy_moduleCode($_GET['module_code'], $type);
  include_once('includes/functions/loader.inc');
  include_once(THEME_DIR . '/main_template.inc');
-
  return;
 } else {
  die('No class found!');

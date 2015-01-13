@@ -26,23 +26,23 @@
  */
 
 function saveHeader(json_url, headerData, primary_column_id, primary_column_id2, primary_column_id3, savingOnlyHeader,
- form_header) {
+        form_header) {
  return $.ajax({
   url: json_url,
   data: {headerData: headerData,
    className: form_header},
   type: 'post',
-  beforeSend: function() {
+  beforeSend: function () {
    $("#save").prop('disabled', true);
   },
-  complete: function() {
+  complete: function () {
    $("#save").prop('disabled', false);
    if (savingOnlyHeader) {
     $('.show_loading_small').hide();
     $("#save").removeClass("opacity_2");
    }
   }
- }).done(function(result) {
+ }).done(function (result) {
   var div = $(result).filter('div#json_save_header').html();
   $(".error").append(div);
   var rollbackMsg = $(result).filter('.rollback_msg').html();
@@ -65,7 +65,7 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
    }
   }
 
- }).fail(function(error, textStatus, xhr) {
+ }).fail(function (error, textStatus, xhr) {
   alert("save failed \n" + error + textStatus + xhr);
  });
 }
@@ -79,7 +79,7 @@ function saveSingleLine(json_url, lineData, primary_column_id, lineClassName) {
    header_id: header_id,
    className: lineClassName},
   type: 'post'
- }).done(function(result) {
+ }).done(function (result) {
   var div = $(result).filter('div#json_save_line').html();
   $(".error").append(div);
   var rollbackMsg = $(result).filter('.rollback_msg').html();
@@ -88,7 +88,7 @@ function saveSingleLine(json_url, lineData, primary_column_id, lineClassName) {
 //	$('#form_data_table tbody tr' + '.' + trclass).find(".line_id").val(line_id);
   $("#save").removeClass("opacity_2");
   $('.show_loading_small').hide();
- }).fail(function(error, textStatus, xhr) {
+ }).fail(function (error, textStatus, xhr) {
   alert("save failed \n" + error + textStatus + xhr);
   $('.show_loading_small').hide();
   $("#save").removeClass("opacity_2");
@@ -105,7 +105,7 @@ function saveLine(json_url, lineData, trclass, detailData, primary_column_id, li
    className: lineClassName,
    detail_classname: detailClassName},
   type: 'post'
- }).done(function(result) {
+ }).done(function (result) {
   var div = $(result).filter('div#json_save_line').html();
   $(".error").append(div);
   var rollbackMsg = $(result).filter('.rollback_msg').html();
@@ -114,7 +114,7 @@ function saveLine(json_url, lineData, trclass, detailData, primary_column_id, li
   $('#form_data_table tbody tr' + '.' + trclass).find(".line_id").val(line_id);
   $('.show_loading_small').hide();
   $("#save").removeClass("opacity_2");
- }).fail(function(error, textStatus, xhr) {
+ }).fail(function (error, textStatus, xhr) {
   alert("save failed \n" + error + textStatus + xhr);
   $('.show_loading_small').hide();
   $("#save").removeClass("opacity_2");
@@ -130,14 +130,14 @@ function saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassNa
    header_id: header_id,
    className: lineClassName},
   type: 'post'
- }).done(function(result) {
+ }).done(function (result) {
   var div = $(result).filter('div#json_save_line2').html();
   var line_id = $(div).filter('.lineId').html();
   $('tbody.form_data_line_tbody2 tr' + '.' + trclass).find(".line_id").val(line_id);
   $(".error").append(div);
   $('.show_loading_small').hide();
   $("#save").removeClass("opacity_2");
- }).fail(function(error, textStatus, xhr) {
+ }).fail(function (error, textStatus, xhr) {
   alert("save failed \n" + error + textStatus + xhr);
   $('.show_loading_small').hide();
   $("#save").removeClass("opacity_2");
@@ -145,9 +145,9 @@ function saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassNa
 }
 
 function saveMainClass(json_url, form_header_id, primary_column_id, single_line,
- line_key_field, form_line_id, primary_column_id2, primary_column_id3, enable_select, savingOnlyHeader,
- headerClassName, lineClassName, detailClassName, lineClassName2, onlyOneLineAtATime,
- allLineTogether, saveVerticalTab) {
+        line_key_field, form_line_id, primary_column_id2, primary_column_id3, enable_select, savingOnlyHeader,
+        headerClassName, lineClassName, detailClassName, lineClassName2, onlyOneLineAtATime,
+        allLineTogether, saveVerticalTab) {
  this.json_url = json_url;
  this.form_header_id = form_header_id;
  this.primary_column_id = primary_column_id;
@@ -167,7 +167,7 @@ function saveMainClass(json_url, form_header_id, primary_column_id, single_line,
  this.saveVerticalTab = saveVerticalTab;
 }
 
-saveMainClass.prototype.saveMain = function(beforeSave)
+saveMainClass.prototype.saveMain = function (beforeSave)
 {
 
  var form_header_id_h = '#' + this.form_header_id;
@@ -196,7 +196,7 @@ saveMainClass.prototype.saveMain = function(beforeSave)
  var allLineTogether = this.allLineTogether;
  var saveVerticalTab = this.saveVerticalTab;
  var line_key_field_d = '.' + line_key_field;
- $('#save').on('click', function(e) {
+ $('#save').on('click', function (e) {
   if ($.isFunction(window.beforeSave)) {
    var beforeSaveResult = window.beforeSave();
    if (beforeSaveResult < 0) {
@@ -217,7 +217,7 @@ saveMainClass.prototype.saveMain = function(beforeSave)
   var missingMandatoryValues = [];
   if ((primary_column_id_h) && !$(primary_column_id_h).val()) {
 //check header level missing required values - text & select
-   $(form_header_id_h + " :required").each(function() {
+   $(form_header_id_h + " :required").each(function () {
     if (!$(this).val())
     {
      missingMandatoryValues.push($(this).attr('class'));
@@ -225,7 +225,7 @@ saveMainClass.prototype.saveMain = function(beforeSave)
     }
    });
   } else {
-   $(":required").each(function() {
+   $(":required").each(function () {
     if (!$(this).val())
     {
      missingMandatoryValues.push($(this).attr('class'));
@@ -235,7 +235,7 @@ saveMainClass.prototype.saveMain = function(beforeSave)
   }
   if (noOfRequiredFileValuesMissing > 0) {
    var showMessage = ' <div id="dialog_box" class="dialog mandatory_message"> ' + noOfRequiredFileValuesMissing + ' mandatory field(s) is/are missing....... <br>';
-   $.map(missingMandatoryValues, function(val, i) {
+   $.map(missingMandatoryValues, function (val, i) {
     showMessage += i + ' : ' + val + ' <br>';
    });
    showMessage += '</div>';
@@ -246,7 +246,7 @@ saveMainClass.prototype.saveMain = function(beforeSave)
 
   if (onlyOneLineAtATime) {
    var numberOfCheckedBoxes = 0;
-   $('input[name="line_id_cb"]').each(function() {
+   $('input[name="line_id_cb"]').each(function () {
     if ($(this).prop("checked")) {
      numberOfCheckedBoxes++;
     }
@@ -270,28 +270,12 @@ saveMainClass.prototype.saveMain = function(beforeSave)
    */
   var disabledId = [];
   if (enable_select) {
-   $('select:disabled').each(function() {
+   $('select:disabled').each(function () {
     disabledId.push($(this).attr('id'));
    });
    $('select:disabled').attr('disabled', false);
   }
-  /*---Special for multi select*/
-  if (allLineTogether) {
-   var allData = [];
-   $('input[name="line_id_cb"]:checked').each(function() {
-    var trclass = $(this).closest('tr').attr('class');
-    var lineData = [];
-    $("#form_line").find('.' + trclass).each(function() {
-     var ThisLineData = $(this).find(":input").serializeArray();
-     lineData = $.merge(lineData, ThisLineData);
-    });
-    allData = $.merge(allData, lineData);
-   });
-   if (allData !== null) {
-    saveHeader(json_url, allData, primary_column_id_h, primary_column_id2_h, primary_column_id3_h, savingOnlyHeader, headerClassName);
-   }
-   return;
-  }
+
 
   var headerData = $(form_header_id_h).serializeArray();
   if (savingOnlyHeader) {
@@ -316,8 +300,34 @@ saveMainClass.prototype.saveMain = function(beforeSave)
    saveHeader(json_url, headerData, primary_column_id_h, primary_column_id2_h, primary_column_id3_h, savingOnlyHeader, headerClassName);
   }
 
+  /*---Special for multi select*/
+  if (allLineTogether) {
+   var allData = [];
+   $('input[name="line_id_cb"]:checked').each(function () {
+    var trclass = $(this).closest('tr').attr('class');
+    var lineData = [];
+    $("#form_line").find('.' + trclass).each(function () {
+     var ThisLineData = $(this).find(":input").serializeArray();
+     lineData = $.merge(lineData, ThisLineData);
+    });
+    allData = $.merge(allData, lineData);
+   });
+
+   if (allData !== null) {
+    if (lineClassName && (lineClassName !== undefined) && $(primary_column_id_h).val()) {
+//     alert($(primary_column_id_h).val() + ' : ' + lineClassName)
+     saveHeader(json_url, allData, primary_column_id_h, primary_column_id2_h, primary_column_id3_h, savingOnlyHeader, lineClassName);
+    } else if($(primary_column_id_h).length < 1) {
+//     alert(2 + ' : ' + $(primary_column_id_h).val() + ' : ' + lineClassName +  ' : ' + $(primary_column_id_h).length)
+     saveHeader(json_url, allData, primary_column_id_h, primary_column_id2_h, primary_column_id3_h, savingOnlyHeader, headerClassName);
+    }
+
+   }
+   return;
+  }
+
   if (enable_select) {
-   $(disabledId).each(function(i, v) {
+   $(disabledId).each(function (i, v) {
     $('body').find('#' + v).attr('disabled', true);
    });
   }
@@ -325,14 +335,13 @@ saveMainClass.prototype.saveMain = function(beforeSave)
   /*-----------------------------------Completion of save header & start of single line form save--------------------------------
    for standard forms liks item, supplier - one header & one line savetype2
    */
-    if (saveVerticalTab) {
-   $('.tabContainer_v').find('.tabContent').each(function() {
+  if (saveVerticalTab) {
+   $('.tabContainer_v').find('.tabContent').each(function () {
     var lineData = $(this).find(":input").serializeArray();
     saveSingleLine(json_url, lineData, primary_column_id_h, lineClassName);
    });
    return;
   }
-
 
   if (single_line) {
    var lineData = $(form_line_id_h).serializeArray();
@@ -348,11 +357,11 @@ saveMainClass.prototype.saveMain = function(beforeSave)
 //for forms with tab @line level - PO-----------------------------savetype3a
     if ($("#tabsLine-1").html()) {
      var count = 0;
-     $('input[name="line_id_cb"]:checked').each(function() {
+     $('input[name="line_id_cb"]:checked').each(function () {
       var trclass = $(this).closest('tr').attr('class');
-      var trclass_d = '.'+$(this).closest('tr').attr('class').replace(/\s+/g,'.');
+      var trclass_d = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
       var lineData = [];
-      $("#form_line").find(trclass_d).each(function() {
+      $("#form_line").find(trclass_d).each(function () {
        var ThisLineData = $(this).find(":input").serializeArray();
        lineData = $.merge(lineData, ThisLineData);
       });
@@ -368,7 +377,7 @@ saveMainClass.prototype.saveMain = function(beforeSave)
      alert('Saving ' + count + ' record(s)');
     } else {
 //		 for option type form - line w/o any tab------------------savetype3b
-     $('input[name="line_id_cb"]:checked').each(function() {
+     $('input[name="line_id_cb"]:checked').each(function () {
       var lineData = $(this).closest("tr").find(":input").serializeArray();
       var trclass = $(this).closest("tr").attr('class');
       if ($(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray()) {
@@ -383,13 +392,13 @@ saveMainClass.prototype.saveMain = function(beforeSave)
    }
 //i--------------completion of checked line -- start of all lines---------------------------------
 
-   else if (($(line_key_field_d).val())) {
+   else if (($(line_key_field_d).val()) && $(primary_column_id_h).val()) {
 //for forms with tab @line level - PO - savetype4a
     if ($("#tabsLine-1").html()) {
-     $("#tabsLine-1 tbody.form_data_line_tbody > tr").each(function() {
+     $("#tabsLine-1 tbody.form_data_line_tbody > tr").each(function () {
       var trclass = $(this).attr('class');
       var lineData = [];
-      $("#form_line").find('.' + trclass).each(function() {
+      $("#form_line").find('.' + trclass).each(function () {
        var ThisLineData = $(this).find(":input").serializeArray();
        lineData = $.merge(lineData, ThisLineData);
       });
@@ -398,12 +407,12 @@ saveMainClass.prototype.saveMain = function(beforeSave)
       } else {
        detailData = "";
       }
-//      alert('375');
+//      alert('400');
       saveLine(json_url, lineData, trclass, detailData, primary_column_id_h, lineClassName, detailClassName);
      });
     } else {
 //for forms without tabs @ line level - Options - savetype4b
-     $("tbody.form_data_line_tbody > tr").each(function() {
+     $("tbody.form_data_line_tbody > tr").each(function () {
       var lineData = $(this).find(":input").serializeArray();
       var trclass = $(this).attr('class');
       if ($(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray()) {
@@ -422,10 +431,10 @@ saveMainClass.prototype.saveMain = function(beforeSave)
     var noOfTabsInForm3 = $("tbody.form_data_line_tbody2").length;
     //if the third form has tab
     if (noOfTabsInForm3 > 1) {
-     $('#form_line2 input[name="line_id_cb"]:checked').each(function() {
+     $('#form_line2 input[name="line_id_cb"]:checked').each(function () {
       var trclass = $(this).closest('tr').attr('class');
       var lineData = [];
-      $("#form_line2").find('.' + trclass).each(function() {
+      $("#form_line2").find('.' + trclass).each(function () {
        var ThisLineData = $(this).find(":input").serializeArray();
        lineData = $.merge(lineData, ThisLineData);
       });
@@ -438,7 +447,7 @@ saveMainClass.prototype.saveMain = function(beforeSave)
       saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassName2);
      });
     } else {//if the third form doesnt have any tab-----------------savetype5b------------------------------------------
-     $('#form_line2 input[name="line_id_cb"]:checked').each(function() {
+     $('#form_line2 input[name="line_id_cb"]:checked').each(function () {
       var lineData = $(this).closest("tr").find(":input").serializeArray();
       var trclass = $(this).closest("tr").attr('class');
       if ($(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray()) {
@@ -474,7 +483,7 @@ function exportToExcelMain(containerType, divId, numberOfTabs) {
  this.numberOfTabs = numberOfTabs;
 }
 
-exportToExcelMain.prototype.exportToExcel = function()
+exportToExcelMain.prototype.exportToExcel = function ()
 {
  var containerType = this.containerType;
  var divId_h = '#' + this.divId;
@@ -486,9 +495,9 @@ exportToExcelMain.prototype.exportToExcel = function()
   if (numberOfTabs == 0) {
    data += $(divId_h).find('thead').html();
 //start of row data	
-   $(divId_h).find('tr').each(function(e) {
+   $(divId_h).find('tr').each(function (e) {
     rowData += "<tr>";
-    $(this).find('td').each(function(f) {
+    $(this).find('td').each(function (f) {
      rowData += "<td>";
 //	if (f > 0) {
      if ($(this).children().val()) {
@@ -508,21 +517,21 @@ exportToExcelMain.prototype.exportToExcel = function()
    });
   } else {
    data += '<tr>';
-   $(divId_h).find('thead').each(function(a) {
+   $(divId_h).find('thead').each(function (a) {
     data += $(this).children().html();
    });
    data += '</tr>';
    //start of row data
    var arr = [];
    var i = 0;
-   $(divId_h).find('tbody:first').find('tr').each(function(e) {
+   $(divId_h).find('tbody:first').find('tr').each(function (e) {
     arr[i++] = $(this).prop('class');
    });
-   $(arr).each(function(index, value) {
+   $(arr).each(function (index, value) {
     rowData += "<tr>";
     var trclass = '.' + value;
-    $(divId_h).find(trclass).each(function(e) {
-     $(this).find('td').each(function(f) {
+    $(divId_h).find(trclass).each(function (e) {
+     $(this).find('td').each(function (f) {
       rowData += "<td>";
 //	if (f > 0) {
       if ($(this).children().val()) {
@@ -546,7 +555,7 @@ exportToExcelMain.prototype.exportToExcel = function()
   data += '</table>';
  } else if (containerType == 'div') {
   var data = '<table>';
-  $(divId_h).find('li').each(function() {
+  $(divId_h).find('li').each(function () {
    if ($(this).find('label').text() !== '') {
     data += '<tr><td>';
     data += $(this).find('label').text();
@@ -570,7 +579,7 @@ exportToExcelMain.prototype.exportToExcel = function()
 /*------------------------------------End of Export to Excel & Sratt of Copy--------------------------------*/
 //add new line
 function add_new_rowMain(trClass, tbodyClass, noOfTabs, copyFirstLine,
- removeDefault, divClassNotToBeCopied, divClassToBeCopied, lineNumberIncrementValue) {
+        removeDefault, divClassNotToBeCopied, divClassToBeCopied, lineNumberIncrementValue) {
  this.trClass = trClass;
  this.tbodyClass = tbodyClass;
  this.copyFirstLine = copyFirstLine;
@@ -582,7 +591,7 @@ function add_new_rowMain(trClass, tbodyClass, noOfTabs, copyFirstLine,
 }
 
 var objectCount = 491;
-add_new_rowMain.prototype.add_new_row = function(afterAddNewRow) {
+add_new_rowMain.prototype.add_new_row = function (afterAddNewRow) {
  var tbodyClass = this.tbodyClass;
  var trClass = this.trClass;
  var divClassToBeCopied = this.divClassToBeCopied;
@@ -595,7 +604,7 @@ add_new_rowMain.prototype.add_new_row = function(afterAddNewRow) {
  tbodyClass = '.' + tbodyClass;
  var highest_line_num = 1;
  var highest_seq_num = 1;
- $('.lines_number').each(function() {
+ $('.lines_number').each(function () {
   if ($(this).val() > highest_line_num) {
    highest_line_num = $(this).val();
   }
@@ -616,7 +625,7 @@ add_new_rowMain.prototype.add_new_row = function(afterAddNewRow) {
  }
 
  if (this.noOfTabs > 1) {
-   var startingTab = $("tr[class*='" + trClass + "']").first().closest('.tabContent').attr('id');
+  var startingTab = $("tr[class*='" + trClass + "']").first().closest('.tabContent').attr('id');
   var startingTabArray = startingTab.split('-');
   var startingTabNumber = startingTabArray[1];
   tabCount = 1;
@@ -630,21 +639,21 @@ add_new_rowMain.prototype.add_new_row = function(afterAddNewRow) {
   $(newtrClass).clone().attr("class", "new_object" + objectCount).appendTo($(tbodyClass));
  }
 
- $("tr.new_object" + objectCount).find(this.divClassNotToBeCopied).each(function() {
-  $(this).attr('value','')
+ $("tr.new_object" + objectCount).find(this.divClassNotToBeCopied).each(function () {
+  $(this).attr('value', '')
  });
  if (this.removeDefault === true) {
-  $("tr.new_object" + objectCount).find("td input[type=text], .dontCopy").not(divClassToBeCopied_c).each(function() {
-   $(this).attr('value','');
+  $("tr.new_object" + objectCount).find("td input[type=text], .dontCopy").not(divClassToBeCopied_c).each(function () {
+   $(this).attr('value', '');
   });
-  $("tr.new_object" + objectCount).find("td input[type=number]").not(divClassToBeCopied_c).each(function() {
-   $(this).attr('value','');
+  $("tr.new_object" + objectCount).find("td input[type=number]").not(divClassToBeCopied_c).each(function () {
+   $(this).attr('value', '');
   });
-  $("tr.new_object" + objectCount).find("td select").not(divClassToBeCopied_c).each(function() {
-   $(this).attr('value','');
+  $("tr.new_object" + objectCount).find("td select").not(divClassToBeCopied_c).each(function () {
+   $(this).attr('value', '');
   });
-  $("tr.new_object" + objectCount).find("td.text_not_tobe_copied").each(function() {
-   $(this).attr('value','');
+  $("tr.new_object" + objectCount).find("td.text_not_tobe_copied").each(function () {
+   $(this).attr('value', '');
   });
  }
  $("tr.new_object" + objectCount).find(":input").removeAttr('id');
@@ -654,7 +663,7 @@ add_new_rowMain.prototype.add_new_row = function(afterAddNewRow) {
  $("tr.new_object" + objectCount).find(".class_detail_form").replaceWith("");
  $("tr.new_object" + objectCount).find(".seq_number").val(nextSeqNumber);
  $('.lines_number:last').val(nextLineSeqNumber);
- $(".new_object" + objectCount).find(".date").each(function() {
+ $(".new_object" + objectCount).find(".date").each(function () {
   $(this).attr("id", "date" + dateCount);
 //	$(this).attr("class", "date");
   dateCount++;
@@ -676,7 +685,7 @@ function copy_document(doc_header_id, doc_line_id, doc_detail_id) {
  $(doc_header_id_c).val('');
  $(doc_line_id_c).val('');
  $(doc_detail_id_d).val('');
- $('#content').find(':input').each(function() {
+ $('#content').find(':input').each(function () {
   $(this).prop('readonly', false);
   $(this).prop('disabled', false);
  });
@@ -689,10 +698,10 @@ function copy_header(doc_header_id) {
  $('.primary_column2').val('');
  var trClass = '.' + $("#form_line tbody tr:first").prop('class');
  $("#form_line tbody tr:not(" + trClass + ")").remove();
- $("#form_line tbody tr").find(':input').each(function() {
-  $(this).attr('value','');
+ $("#form_line tbody tr").find(':input').each(function () {
+  $(this).attr('value', '');
  });
- $('#content').find(':input').each(function() {
+ $('#content').find(':input').each(function () {
   $(this).prop('readonly', false);
   $(this).prop('disabled', false);
  });
@@ -704,22 +713,22 @@ function rightClickMenu(menuContent) {
   return;
  }
  var menu = "<div id='right_click_menu'>" + menuContent + "</div>";
- $("#content").bind("contextmenu", function(event) {
+ $("#content").bind("contextmenu", function (event) {
   event.preventDefault();
   if ($("#right_click_menu")) {
    $("div#right_click_menu").remove();
   }
   $(menu).appendTo('body').css({top: event.pageY + "px", left: event.pageX + "px"});
  });
- $('body').bind("click", function(event) {
+ $('body').bind("click", function (event) {
   $("div#right_click_menu").remove();
  });
 }
 
 function contextMenuMain(docHedaderId, docLineId, docDetailId, trClass, tbodyClass, noOfTabbs, btn1DivId, btn2DivId,
- btn2_1DivId, btn6DivId, btn7DivId, btn8DivId,
- btn9DivId, btn9_1DivId, btn9_2DivId, btn9_3DivId, btn10DivId, btn10_1DivId, btn11DivId,
- beforeCopy, afterCopy) {
+        btn2_1DivId, btn6DivId, btn7DivId, btn8DivId,
+        btn9DivId, btn9_1DivId, btn9_2DivId, btn9_3DivId, btn10DivId, btn10_1DivId, btn11DivId,
+        beforeCopy, afterCopy) {
  this.docHedaderId = docHedaderId;
  this.docLineId = docLineId;
  this.docDetailId = docDetailId;
@@ -743,7 +752,7 @@ function contextMenuMain(docHedaderId, docLineId, docDetailId, trClass, tbodyCla
  this.afterCopy = afterCopy;
 }
 
-contextMenuMain.prototype.contextMenu = function()
+contextMenuMain.prototype.contextMenu = function ()
 {
  var docHedaderId = this.docHedaderId;
  var docLineId = this.docLineId;
@@ -771,7 +780,7 @@ contextMenuMain.prototype.contextMenu = function()
  var beforeCopy = this.beforeCopy;
  var afterCopy = this.afterCopy;
  var methods = {
-  beforeCopyActions: function() {
+  beforeCopyActions: function () {
    if (typeof beforeCopy === 'function') {
     var beforeResult = beforeCopy();
     if (!beforeResult) {
@@ -779,7 +788,7 @@ contextMenuMain.prototype.contextMenu = function()
     }
    }
   },
-  afterCopyActions: function() {
+  afterCopyActions: function () {
    if (typeof afterCopy === 'function') {
     var afterResult = afterCopy();
     if (!afterResult) {
@@ -790,43 +799,43 @@ contextMenuMain.prototype.contextMenu = function()
  };
  var menuContent = '<ul id="level1"> <li id="menu_button1" class="export_excel">Export Header</li> <li id="menu_button2" class="end_li_type export_excel">Export Line  <ul>   <li id="menu_button2_1" class="end_li_type export_excel">Second Line Form</li>  </ul></li> <li id="menu_button3" class="end_li_type print">Print Document</li> <li class="copy_doc"><span id="menu_button4"> Copy Header</span>  <ul>   <li class="copy_doc"><span id="menu_button4_1">Copy & Save Header</span></li>   <li class="copy_doc"><span id="menu_button4_2">Copy Document</span>    <ul>     <li><span id="menu_button4_2_1">Copy & Save Document</span></li>    </ul>   </li>   <li class="copy_doc"><span id="menu_button4_3">Copy Line</span>    <ul>     <li><span id="menu_button4_3_1">Copy First Line</span></li>    </ul>   </li>  </ul> </li> <li class="end_li_type copy_line"><span id="menu_button5">Select All Line</span>  <ul>   <li><span id="menu_button5_1">Un Select All</span></li>  </ul> </li> <li id="menu_button6" class="preference">Preferences</li> <li id="menu_button7" class="help help">Help</li> <li id="menu_button8" class="doc_history">Document History</li> <li id="menu_button9" class="end_li_type custom_code">Custom Code  <ul>   <li id="menu_button9_1" class="end_li_type">Disable</li>   <li id="menu_button9_2" class="end_li_type">Enable</li>   <li id="menu_button9_3" class="end_li_type">View & Update</li>  </ul></li> <li class="end_li_type disable_menu"><span id="menu_button10">Disable Context Menu</span>  <ul>   <li><span id="menu_button10_1">Disable All</span></li>  </ul></li> <li id="menu_button11" class="about">About inoERP</li> </ul>';
  rightClickMenu(menuContent);
- $('body').on('click', '#menu_button1', function() {
+ $('body').on('click', '#menu_button1', function () {
   var classDnldExcel = new exportToExcelMain();
   classDnldExcel.containerType = 'div';
   classDnldExcel.divId = btn1DivId;
   classDnldExcel.exportToExcel();
  });
- $("body").on('click', '#menu_button2', function() {
+ $("body").on('click', '#menu_button2', function () {
   var classDnldExcel = new exportToExcelMain();
   classDnldExcel.containerType = 'table';
   classDnldExcel.divId = btn2DivId;
   classDnldExcel.numberOfTabs = 1;
   classDnldExcel.exportToExcel();
  });
- $("body").on('click', '#menu_button3', function() {
+ $("body").on('click', '#menu_button3', function () {
   window.print();
  });
- $("body").on('click', '#menu_button4', function() {
+ $("body").on('click', '#menu_button4', function () {
   methods.beforeCopyActions();
   copy_header(docHedaderId);
   methods.afterCopyActions();
  });
- $("body").on('click', '#menu_button4_1', function() {
+ $("body").on('click', '#menu_button4_1', function () {
   methods.beforeCopyActions();
   copy_header(docHedaderId);
   methods.afterCopyActions();
   $('#save').trigger('click');
  });
- $("body").on('click', '#menu_button4_2', function() {
+ $("body").on('click', '#menu_button4_2', function () {
   methods.beforeCopyActions();
   copy_document(docHedaderId, docLineId, docDetailId);
   methods.afterCopyActions();
  });
- $("body").on('click', '#menu_button4_2_1', function() {
+ $("body").on('click', '#menu_button4_2_1', function () {
   copy_document(docHedaderId, docLineId, docDetailId);
   $('#save').trigger('click');
  });
- $("body").on('click', '#menu_button4_3', function() {
+ $("body").on('click', '#menu_button4_3', function () {
   var addNewRow = new add_new_rowMain();
   addNewRow.trClass = trClass;
   addNewRow.tbodyClass = tbodyClass_c;
@@ -836,7 +845,7 @@ contextMenuMain.prototype.contextMenu = function()
   addNewRow.add_new_row();
 //	add_new_row_withDefault(trClass, tbodyClass_c, noOfTabbs, docLineId_c);
  });
- $('body').on('click', '#menu_button4_3_1', function() {
+ $('body').on('click', '#menu_button4_3_1', function () {
   var addNewRow1 = new add_new_rowMain();
   addNewRow1.trClass = trClass;
   addNewRow1.tbodyClass = tbodyClass_c;
@@ -848,16 +857,16 @@ contextMenuMain.prototype.contextMenu = function()
 //	add_new_row_withDefault(trClass, tbodyClass_c, noOfTabbs, docLineId_c);
  });
 
- $('body').on('click', '#menu_button5', function() {
+ $('body').on('click', '#menu_button5', function () {
   $('#form_line').find('input[name="line_id_cb"]').prop('checked', true);
  });
- $('body').on('click', '#menu_button5_1', function() {
+ $('body').on('click', '#menu_button5_1', function () {
   $('#form_line').find('input[name="line_id_cb"]').prop('checked', false);
  });
- $('body').on('click', '#menu_button10', function() {
+ $('body').on('click', '#menu_button10', function () {
   $("#content").unbind("contextmenu");
  });
- $('body').on('click', '#menu_button10_1', function() {
+ $('body').on('click', '#menu_button10_1', function () {
   localStorage.setItem("disableContextMenu", true);
   $("#content").unbind("contextmenu");
  });
@@ -867,7 +876,7 @@ contextMenuMain.prototype.contextMenu = function()
  *     */
 
 function autoCompleteMain(json_url, field_name, primary_column1, primary_column2, select_class, min_length,
- extra_elements, options) {
+        extra_elements, options) {
  this.json_url = json_url;
  this.field_name = field_name;
  this.primary_column1 = primary_column1;
@@ -878,7 +887,7 @@ function autoCompleteMain(json_url, field_name, primary_column1, primary_column2
  this.options = options;
 }
 
-autoCompleteMain.prototype.autoComplete = function()
+autoCompleteMain.prototype.autoComplete = function ()
 {
  var json_url = this.json_url;
  var field_name = this.field_name;
@@ -894,13 +903,13 @@ autoCompleteMain.prototype.autoComplete = function()
  }
  var select_class_d = '.' + select_class;
  var min_length = this.min_length;
- $('#content').on("focus.nsAutoComplete", select_class_d, function(e) {
+ $('#content').on("focus.nsAutoComplete", select_class_d, function (e) {
   var primary_column1_v = $(primary_column1_h).val();
   e.preventDefault();
   if (!$(this).data("autocomplete")) {
    var auto_element = this;
    $(this).autocomplete({
-    source: function(request, response) {
+    source: function (request, response) {
      $.ajax({
       url: json_url,
       dataType: "json",
@@ -912,24 +921,24 @@ autoCompleteMain.prototype.autoComplete = function()
        term: request.term,
        options: options
       },
-      success: function(data) {
+      success: function (data) {
        response(data);
       },
-      error: function(request, errorType, errorMessage) {
+      error: function (request, errorType, errorMessage) {
        alert("Error : " + errorType + ' with message ' + errorMessage);
        $(this).autocomplete("close");
       }
      });
     },
     autoFocus: true,
-    response: function(event, ui) {
+    response: function (event, ui) {
      if (ui.content.length === 1)
      {
       $(this).val(ui.content[0].label);
       //if extra element
       if ((typeof extra_elements !== 'undefined') && (extra_elements.length > 0)) {
        var elemenType = $(this).parent().prop('tagName');
-       $(extra_elements).each(function(i, v) {
+       $(extra_elements).each(function (i, v) {
         var selected_value = '';
         var v_d = '.' + v;
         for (key in ui.content[0]) {
@@ -950,11 +959,11 @@ autoCompleteMain.prototype.autoComplete = function()
       $(this).autocomplete("close");
      } else if (ui.content.length === 0) {
       alert('No Data Found');
-      $(this).attr('value','');
+      $(this).attr('value', '');
       //if extra element
       if ((typeof extra_elements !== 'undefined') && (extra_elements.length > 0)) {
        var elemenType = $(this).parent().prop('tagName');
-       $(extra_elements).each(function(i, v) {
+       $(extra_elements).each(function (i, v) {
         var v_d = '.' + v;
         if (elemenType === 'LI') {
          $(auto_element).closest("ul").find(v_d).val('');
@@ -971,15 +980,15 @@ autoCompleteMain.prototype.autoComplete = function()
 
     },
     //select
-    select: function(event, ui) {
+    select: function (event, ui) {
      $(this).val(ui.item.label);
      //if extra element
      if ((typeof extra_elements !== 'undefined') && (extra_elements.length > 0)) {
       var elemenType = $(this).parent().prop('tagName');
-      $(extra_elements).each(function(i, v) {
+      $(extra_elements).each(function (i, v) {
        var selected_value = '';
        var v_d = '.' + v;
-       $.each(ui, function(key2, value) {
+       $.each(ui, function (key2, value) {
         for (key2 in value) {
          if (key2 == v) {
           selected_value = value[ key2 ];
@@ -1012,23 +1021,23 @@ function fileUploadMain(json_url, module_name, document_type, class_name, upload
  this.upload_type = upload_type;
  this.directory = directory;
 }
-fileUploadMain.prototype.fileUpload = function() {
+fileUploadMain.prototype.fileUpload = function () {
  var json_url = this.json_url;
  var module_name = this.module_name;
  var class_name = this.class_name;
  var document_type = this.document_type;
  var upload_type = this.upload_type;
  var directory = this.directory;
- $('body').on('click','#attach_submit, #comment_attach_submit',function() {
+ $('body').on('click', '#attach_submit, #comment_attach_submit', function () {
   var divId = '#' + $(this).prop('id');
   $('.show_loading_small').show();
   formData = new FormData();
   if ($(this).hasClass('comment_attach_submit')) {
-   jQuery.each($('#comment_attachments')[0].files, function(i, file) {
+   jQuery.each($('#comment_attachments')[0].files, function (i, file) {
     formData.append('attachments-' + i, file);
    });
   } else {
-   jQuery.each($('#attachments')[0].files, function(i, file) {
+   jQuery.each($('#attachments')[0].files, function (i, file) {
     formData.append('attachments-' + i, file);
    });
   }
@@ -1053,11 +1062,11 @@ fileUploadMain.prototype.fileUpload = function() {
    processData: false,
    contentType: false,
    type: 'post'
-  }).done(function(result) {
+  }).done(function (result) {
    var div = $(result).filter('div#uploaded_files').html();
    $(divId).closest('#file_upload_form').find(".uploaded_file_details").append(result);
    $('.show_loading_small').hide();
-  }).fail(function(error, textStatus, xhr) {
+  }).fail(function (error, textStatus, xhr) {
    alert("save failed \n" + error + textStatus + xhr);
    $('.show_loading_small').hide();
   });
@@ -1071,13 +1080,13 @@ function mandatoryFieldMain(form_area, mandatory_fields, mandatory_messages, hea
  this.header_id = header_id;
 }
 
-mandatoryFieldMain.prototype.mandatoryHeader = function()
+mandatoryFieldMain.prototype.mandatoryHeader = function ()
 {
- var header_id = this.header_id;
+ var header_id = $('ul#js_saving_data').find('.form_header_id').data('form_header_id');
  var header_id_h = '#' + header_id;
  var header_id_c = '.' + header_id;
- alert(header_id);
- $('body').off("click", '#form_line').on("click", '#form_line',function() {
+// alert(header_id);
+ $('body').off("click", '#form_line').on("click", '#form_line', function () {
   if (!$(header_id_h).val()) {
    alert('No header Id Found! : First enter/save header details');
   } else {
@@ -1088,7 +1097,7 @@ mandatoryFieldMain.prototype.mandatoryHeader = function()
   }
  });
 };
-mandatoryFieldMain.prototype.mandatoryField = function()
+mandatoryFieldMain.prototype.mandatoryField = function ()
 {
  var form_area = this.form_area;
  var form_area_h = '#' + form_area;
@@ -1097,7 +1106,7 @@ mandatoryFieldMain.prototype.mandatoryField = function()
  var numberOfEnteredFields = 0;
  var fieldId = '#' + mandatory_fields[0];
  var msg = mandatory_messages[0];
- $('body').off("focusout",fieldId).on("focusout",fieldId, function() {
+ $('body').off("focusout", fieldId).on("focusout", fieldId, function () {
   if (!$(fieldId).val()) {
    alert(msg);
    $(fieldId).focus();
@@ -1115,15 +1124,15 @@ mandatoryFieldMain.prototype.mandatoryField = function()
    }
   }
  });
- $(form_area_h + " :input").not(fieldId).off('focusin').on("focusin", function() {
+ $(form_area_h + " :input").not(fieldId).off('focusin').on("focusin", function () {
   if (!$(fieldId).val()) {
-   $(this).attr('value','');
+   $(this).attr('value', '');
    alert(msg);
-   $(this).focusout(function() {
+   $(this).focusout(function () {
     return;
    });
   } else {
-   $(mandatory_fields).each(function(i, v) {
+   $(mandatory_fields).each(function (i, v) {
     var entered_fields = '#' + v;
     if ($(entered_fields).val()) {
      numberOfEnteredFields++;
@@ -1138,7 +1147,7 @@ mandatoryFieldMain.prototype.mandatoryField = function()
     mandatoryCheck.mandatory_fields = $(mandatory_fields).slice(numberOfEnteredFields);
     mandatoryCheck.mandatory_messages = $(mandatory_messages).slice(numberOfEnteredFields);
     if (($(this).prop('id') !== mandatoryCheck.mandatory_fields[0]) && (
-     fieldId !== mandatoryCheck.mandatory_fields[0])) {
+            fieldId !== mandatoryCheck.mandatory_fields[0])) {
 //		alert('3' + $(this).prop('id')+ ' : '+ fieldId + ' : '+ mandatoryCheck.mandatory_fields[0] +mandatoryCheck.mandatory_messages[0]); 
     }
     mandatoryCheck.mandatoryField();
@@ -1147,19 +1156,19 @@ mandatoryFieldMain.prototype.mandatoryField = function()
  });
 };
 
-function lotSerial_quantityValidation(options){
+function lotSerial_quantityValidation(options) {
  var defaults = {
-  quantity_divClass : '.transaction_quantity'
+  quantity_divClass: '.transaction_quantity'
  };
- 
- var settings = $.extend({},defaults,options);
-  var retValue = 1;
- $('.add_detail_values1').each(function() {
+
+ var settings = $.extend({}, defaults, options);
+ var retValue = 1;
+ $('.add_detail_values1').each(function () {
   if ($(this).children('.serial_generation').val()) {
    var trClass = '.' + $(this).closest("tr").attr('class').replace(/\s+/g, '.');
    var qty = +$('#content').find(trClass).find(settings.quantity_divClass).val();
    var noOfSerialIds = 0;
-   $(this).closest('td').find('.inv_serial_number_id').each(function() {
+   $(this).closest('td').find('.inv_serial_number_id').each(function () {
     if ($(this).val()) {
      noOfSerialIds++;
     }
@@ -1167,7 +1176,7 @@ function lotSerial_quantityValidation(options){
 
    if (noOfSerialIds != qty) {
     var noOfSerials = 0;
-    $(this).closest('td').find('.serial_number').each(function() {
+    $(this).closest('td').find('.serial_number').each(function () {
      if ($(this).val()) {
       noOfSerials++;
      }
@@ -1180,17 +1189,17 @@ function lotSerial_quantityValidation(options){
    }
   }
 
-});
+ });
 
-$('.add_detail_values0').each(function() {
+ $('.add_detail_values0').each(function () {
   if ($(this).children('.lot_generation').val()) {
    var trClass = '.' + $(this).closest("tr").attr('class').replace(/\s+/g, '.');
    var qty = +$('#content').find(trClass).find(settings.quantity_divClass).val();
    var lot_quantity = 0;
-   $(this).closest('tr').find('.lot_quantity').each(function() {
+   $(this).closest('tr').find('.lot_quantity').each(function () {
     lot_quantity += $(this).val();
    });
-    if (lot_quantity != qty) {
+   if (lot_quantity != qty) {
     alert('Can\'t save data as no of lot quantities doesnt match line quantity');
     retValue = -10;
     return false;

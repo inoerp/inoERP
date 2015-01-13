@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -20,7 +21,7 @@ class inv_transaction extends dbObject {
  public static $key_column = 'item_id_m';
  public static $module = "inv";
  public static $gl_journal_category = "INV_INVENTORY";
-  public static $system_info = [
+ public static $system_info = [
   'name' => 'INV Transaction',
   'number' => '2107',
   'description' => 'Inventory Transaction',
@@ -209,6 +210,7 @@ class inv_transaction extends dbObject {
  private $_serial_number_id;
  private $_onhand_id_from;
  private $_onhand_id_to;
+ private $_wip_accounting_group_id;
 
  public function setProperty($property, $value) {
   if (property_exists($this, $property)) {
@@ -755,8 +757,8 @@ class inv_transaction extends dbObject {
   }
 
   //barcode
-  if($this->transaction_type_id){
-  $this->_generate_bc_labels();
+  if ($this->transaction_type_id) {
+   $this->_generate_bc_labels();
   }
  }
 
@@ -1004,10 +1006,12 @@ class inv_transaction extends dbObject {
      }
      $line_number++;
      //get journal lines from wip
-     $woh = new wip_wo_header();
-     $woh->findBy_id($this->wip_wo_header_id);
-     $wip_accounting_group_id = $woh->wip_accounting_group_id;
-     $wip_journal_line_a = $this->_cretae_wipJournal_line_array($element_value_a, $wip_accounting_group_id, 'dr', $line_number);
+     if (empty($this->_wip_accounting_group_id)) {
+      $woh = new wip_wo_header();
+      $woh->findBy_id($this->wip_wo_header_id);
+      $this->_wip_accounting_group_id = $woh->wip_accounting_group_id;
+     }
+     $wip_journal_line_a = $this->_cretae_wipJournal_line_array($element_value_a, $this->_wip_accounting_group_id, 'dr', $line_number);
      $journal_line_a = array_merge($journal_line_a, $wip_journal_line_a);
     }
 
@@ -1119,10 +1123,12 @@ class inv_transaction extends dbObject {
      }
      $line_number++;
      //get journal lines from wip
-     $woh = new wip_wo_header();
-     $woh->findBy_id($this->wip_wo_header_id);
-     $wip_accounting_group_id = $woh->wip_accounting_group_id;
-     $wip_journal_line_a = $this->_cretae_wipJournal_line_array($element_value_a, $wip_accounting_group_id, 'cr', $line_number);
+     if (empty($this->_wip_accounting_group_id)) {
+      $woh = new wip_wo_header();
+      $woh->findBy_id($this->wip_wo_header_id);
+      $this->_wip_accounting_group_id = $woh->wip_accounting_group_id;
+     }
+     $wip_journal_line_a = $this->_cretae_wipJournal_line_array($element_value_a, $this->_wip_accounting_group_id, 'cr', $line_number);
      $journal_line_a = array_merge($journal_line_a, $wip_journal_line_a);
     }
 
@@ -1419,12 +1425,11 @@ class inv_transaction extends dbObject {
  }
 
  public static function find_by_refName_refValue($refname, $refvalue) {
-
   $sql = "SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE   reference_key_name = '{$refname}' AND  reference_key_value ='{$refvalue}' LIMIT 1";
   $result = self::find_by_sql($sql);
-  return !empty($result) ? array_pop($result) : false;
+  return !empty($result) ? ($result) : false;
  }
 
 }

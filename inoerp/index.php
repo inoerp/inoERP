@@ -193,39 +193,12 @@ include_once("includes/functions/loader.inc");
    <div class="make-center wow fadeInUp animated" style="visibility: visible;">
     <div class="container">
      <div id="structure">
-
-  <div class="filter_area">
-       <div class="well">
-        <div class="list_filter row">  
-         <div class="field_name col-sm-3 form-group">
-          <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
-          <input type='text' class="form-control ui-autocomplete-input" name="field_name">
-         </div>  
-         <div class="col-sm-2 form-group">   
-          <select class="condition_name form-control" name="condition_name">    <option value="=">=</option>    
-           <option value="like">Like</option>    <option value="&gt;=">&gt;=</option>    
-           <option value="&lt;=">&lt;=</option>    <option value="&gt;">&gt;</option>    <option value="&lt;">&lt;</option>    
-           <option value="in">In</option>    <option value="!=">!=</option>   </select>  
-         </div>  
-         <div class="condition_value col-sm-3 col-xs-9">
-          <div class="form-group control">
-           <input type="text" class="input-with-feedback form-control" name="condition_value"  data-fieldtype="Link" data-fieldname="name">
-          </div>
-         </div>  
-         <div class="col-sm-3 col-xs-4 condition_action">
-          <button class="button btn btn-success" type="submit"  name="applyFilter">Apply</button>  
-          <button class="button btn btn-warning" type="submit"  name="cancelFilter">Cancel</button>  
-         </div>  
-        </div>
-       </div>
-   </div>
-      
-      <div class="btn-group">
-       <button title="Edit Filter" class="btn btn-default btn-sm filter-value"><i class="fa fa-filter"></i></button>
-       <button title="Remove Filter" class="btn btn-info btn-sm remove-filter"><i class="fa fa-remove text-muted"></i></button>
-      </div>
-
+<div class="btn-group" role="group" aria-label="...">
+  <button type="button" id='expand_all_nav' class="btn btn-default">Expand All</button>
+  <button type="button" id='collapse_all_nav' class="btn btn-default">Collapse All</button>
+</div>
       <?php
+//      pa(get_declared_classes());
       $content = new content();
       $subject_no_of_char = 50;
       $summary_no_of_char = 300;

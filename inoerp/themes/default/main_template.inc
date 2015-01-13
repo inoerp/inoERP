@@ -57,8 +57,7 @@
      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
       <span class="sr-only">Toggle navigation</span>
       <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
+
      </button>
      <img src="<?php
      echo HOME_URL;
@@ -131,15 +130,37 @@
    <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
      <div id="sys_menu_left_vertical">
+      <div class="btn-group-sm" role="group" aria-label="...">
+       <button type="button" id='expand_all_nav' class="btn btn-default">Expand All</button>
+       <button type="button" id='collapse_all_nav' class="btn btn-default">Collapse All</button>
+      </div>
       <?php
       $pat = new path();
-       echo ($pat->path_allpaths_block(array('divClass' => 'tree_view')));
+      echo ($pat->path_allpaths_block(array('divClass' => 'tree_view')));
       echo $fav->show_currentUser_fav();
       ?>
      </div>
     </div>
 
-    <div id="navigation_bar">
+
+    <div id="navigation_bar"   class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+     <div id="header_top_quick_nav" >
+      <ul class="list-group inline_list">
+       <li role="presentation"><a  href="<?php echo HOME_URL; ?>"><i class="fa fa-home" title="Home"></i></a></li>
+       <li role="presentation"><a  href="#"><i class="fa fa-info" title="Messages"></i></a></li>
+       <li role="presentation"><a  href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard" title="Dashborad"></i></a></li>
+       <li>
+        <div class="btn-group">
+         <button type="button" class="btn btn-xs btn-info"  title="Favourites"><i class="fa fa-star-o" title="Favourites"></i></button>
+         <button type="button" title="Favourites" class="btn btn-xs btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <span class="caret"></span>
+          <span class="sr-only">Toggle Dropdown</span>
+         </button>
+         <?php echo $fav->show_currentUser_fav(true); ?>
+        </div>
+       </li>
+      </ul>
+     </div>
      <div id="header_top_container">
       <?php
       $show_header_links = true;
@@ -152,33 +173,29 @@
       }
       ?>
       <?php if ($show_header_links) { ?>
-       <div class="social-icons">
-        <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
-       </div><!-- end social icons -->
+       <!--       <div class="social-icons">
+               <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
+              </div> end social icons -->
       <?php } ?>
      </div>
     </div>
-
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
-     <div id="erp_form_area">
-      <div id="content">
-       <div class="error clickable"></div><div id="loading"></div>
-       <div id="structure">
-        <?php
-        echo (!empty($show_message)) ? $show_message : "";
-        if (!empty($template_file_names)) {
-         foreach ($template_file_names as $key => $tmpl_file) {
-          include_once $tmpl_file;
-         }
+    <div id="erp_form_area" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+     <div id="content">
+      <div class="error clickable"></div><div id="loading"></div>
+      <div id="structure">
+       <?php
+       echo (!empty($show_message)) ? $show_message : "";
+       if (!empty($template_file_names)) {
+        foreach ($template_file_names as $key => $tmpl_file) {
+         include_once $tmpl_file;
         }
-        ?>
-       </div>
-       <!--   end of structure-->
+       }
+       ?>
       </div>
+      <!--   end of structure-->
      </div>
-
-
     </div>
+
 
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
      <div id="non-visible" class="non-visible">
@@ -211,7 +228,7 @@
    <div id="comment_form" class="none">
     <?php
     if (!empty($reference_table) && !empty($reference_id)) {
-     include_once __DIR__ . '../../comment.php';
+     include_once __DIR__ . '/../../comment.php';
     }
     ?>
    </div>
@@ -224,8 +241,8 @@
   echo $f->hidden_field_withId('home_url', HOME_URL);
   ?>
   <div class="hidden">
-   <?php 
-   echo searching_tips(); 
+   <?php
+   echo searching_tips();
    echo ino_filter_form();
    ?>
   </div>

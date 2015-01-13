@@ -100,6 +100,7 @@
        </span>
       </li>
      </ul>
+     <?php echo $ss->entry_form($_GET); ?>
      <!--     <form class="navbar-form navbar-right">
            <input type="text" class="form-control" placeholder="Search...">
           </form>-->
@@ -137,7 +138,24 @@
      </div>
     </div>
 
-    <div id="navigation_bar">
+    <div id="navigation_bar"   class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+     <div id="header_top_quick_nav" >
+      <ul class="list-group inline_list">
+       <li role="presentation"><a  href="<?php echo HOME_URL; ?>"><i class="fa fa-home" title="Home"></i></a></li>
+       <li role="presentation"><a  href="#"><i class="fa fa-info" title="Messages"></i></a></li>
+       <li role="presentation"><a  href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard" title="Dashborad"></i></a></li>
+       <li>
+        <div class="btn-group">
+         <button type="button" class="btn btn-xs btn-info"  title="Favourites"><i class="fa fa-star-o" title="Favourites"></i></button>
+         <button type="button" title="Favourites" class="btn btn-xs btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <span class="caret"></span>
+          <span class="sr-only">Toggle Dropdown</span>
+         </button>
+         <?php echo $fav->show_currentUser_fav(true); ?>
+        </div>
+       </li>
+      </ul>
+     </div>
      <div id="header_top_container">
       <?php
       $show_header_links = true;
@@ -150,9 +168,9 @@
       }
       ?>
       <?php if ($show_header_links) { ?>
-       <div class="social-icons">
-        <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
-       </div><!-- end social icons -->
+       <!--       <div class="social-icons">
+               <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
+              </div> end social icons -->
       <?php } ?>
      </div>
     </div>
@@ -206,12 +224,15 @@
            <?php } ?>
            <div id="scrollElement">
             <div id="print">
-             <div id="search_result"> <?php echo!(empty($search_result_statement)) ? $search_result_statement : ""; ?></div>
+             <div id="search_result"> 
+              <?php echo!(empty($search_result_statement)) ? $search_result_statement : ""; ?>
+             </div>
             </div>
-           </div>
-           <div class="pagination" style="clear: both;">
-            <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
-            ?>
+            <div class="pagination" style="clear: both;">
+             <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
+             ?>
+            </div>
+
            </div>
 
           </div>
@@ -260,7 +281,7 @@
     echo ino_filter_form();
     ?>
    </div>
-   
+
   </div>
   <!--footer content-->
   <?php

@@ -4,7 +4,8 @@ if (!empty($_GET)) {
  $param = [];
  if(!empty($_GET['search_parameters']) && is_array($_GET['search_parameters'])){
   foreach($_GET['search_parameters'] as $rec){
-   $param[$rec['name']] = $rec['value'];
+   $rec_name = str_replace(['[',']'], '', $rec['name']);
+   $param[$rec_name] = $rec['value'];
   }
  }
  $ss = new extn_site_search();

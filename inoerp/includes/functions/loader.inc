@@ -190,7 +190,8 @@ if (($continue) && (!empty($class_names))) {
   if (class_exists($class)) {
    $$class = new $class;
   } else {
-   redirect_to(HOME_URL);
+//   pa(get_declared_classes());
+//   redirect_to(HOME_URL);
   }
 
   if (property_exists($class, 'field_a')) {
