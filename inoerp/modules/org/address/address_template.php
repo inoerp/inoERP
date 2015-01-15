@@ -93,7 +93,7 @@
   <li class="form_header_id" data-form_header_id="address" ></li>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedadeId" data-docHedadeId="address_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="address_id" ></li>
+  <li class="docHedaderId" data-docHedaderId="address_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="address" ></li>
  </ul>
 </div>

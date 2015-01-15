@@ -106,7 +106,7 @@
   <li class="form_header_id" data-form_header_id="subinventory" ></li>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedadeId" data-docHedadeId="subinventory_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="subinventory_id" ></li>
+  <li class="docHedaderId" data-docHedaderId="subinventory_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="subinventory ></li>
  </ul>
 </div>

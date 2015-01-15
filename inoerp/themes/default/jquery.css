@@ -58,7 +58,7 @@ html ul.tabMain li.active,html ul.tabMain li.active a:hover {
 
 .tabContainer {
 border: 1px solid rgba(209, 192, 192, 0.7);
-overflow: hidden;
+/*overflow: hidden;*/
 padding: 8px;
 clear: both;
 float: left;

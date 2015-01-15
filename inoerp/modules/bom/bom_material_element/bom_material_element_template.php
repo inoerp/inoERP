@@ -97,7 +97,7 @@
   <li class="form_header_id" data-form_header_id="bom_material_element" ></li>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedadeId" data-docHedadeId="bom_material_element_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="bom_material_element_id" ></li>
+  <li class="docHedaderId" data-docHedaderId="bom_material_element_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="bom_material_element" ></li>
  </ul>
 </div>

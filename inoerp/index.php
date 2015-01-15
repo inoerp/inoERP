@@ -193,6 +193,13 @@ include_once("includes/functions/loader.inc");
    <div class="make-center wow fadeInUp animated" style="visibility: visible;">
     <div class="container">
      <div id="structure">
+      
+      <div class="toggle on">
+    <div class="toggle-slide">ON
+        <div class="toggle-inner" ></div>
+    </div>
+</div>
+      
 <div class="btn-group" role="group" aria-label="...">
   <button type="button" id='expand_all_nav' class="btn btn-default">Expand All</button>
   <button type="button" id='collapse_all_nav' class="btn btn-default">Collapse All</button>

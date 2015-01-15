@@ -51,18 +51,18 @@
   </div>
  </form>
 </div>
-<span class="heading"> Asset Class Category Association </span>
+<span class="heading"> Asset Book Category Association </span>
 <div id ="form_line" class="form_line">
- <form action=""  method="post" id="fa_class_category_association"  name="fa_class_category_association">
+ <form action=""  method="post" id="fa_book_category_association"  name="fa_book_category_association">
   <div class="line_before_tab"> 
    <ul class="column five_column inline_list"> 
-    <li><label>Asset Class Name: </label> 
-     <?php echo $f->select_field_from_object('fa_asset_class_id', fa_asset_class::find_all(), 'fa_asset_class_id', 'asset_class_name', $$class_second->fa_asset_class_id, 'fa_asset_class_id'); ?>
-     <a name="show2" href="form.php?class_name=fa_asset_category&<?php echo "mode=$mode"; ?>" class="show2 document_id fa_class_category_association_id">
+    <li><label>Asset Book Name: </label> 
+     <?php echo $f->select_field_from_object('fa_asset_book_id', fa_asset_book::find_all(), 'fa_asset_book_id', 'asset_book_name', $$class_second->fa_asset_book_id, 'fa_asset_book_id'); ?>
+     <a name="show2" href="form.php?class_name=fa_asset_category&<?php echo "mode=$mode"; ?>" class="show2 document_id fa_book_category_association_id">
       <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
     </li> 
     <li class="hidden"><?php echo form::hidden_field('fa_asset_category_id', $$class->fa_asset_category_id); ?>
-     <?php echo form::hidden_field('fa_class_category_association_id', $$class_second->fa_class_category_association_id); ?>
+     <?php echo form::hidden_field('fa_book_category_association_id', $$class_second->fa_book_category_association_id); ?>
     </li>
    </ul>
   </div>
@@ -99,21 +99,21 @@
 <div id="js_data">
  <ul id="js_saving_data">
   <li class="headerClassName" data-headerClassName="fa_asset_category" ></li>
-  <li class="lineClassName" data-lineClassName="fa_class_category_association" ></li>
+  <li class="lineClassName" data-lineClassName="fa_book_category_association" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
   <li class="primary_column_id" data-primary_column_id="fa_asset_category_id" ></li>
   <li class="form_header_id" data-form_header_id="fa_asset_category" ></li>
-  <li class="line_key_field" data-line_key_field="fa_class_category_association_name" ></li>
+  <li class="line_key_field" data-line_key_field="fa_book_category_association_name" ></li>
   <li class="single_line" data-single_line="true" ></li>
-  <li class="form_line_id" data-form_line_id="fa_class_category_association" ></li>
+  <li class="form_line_id" data-form_line_id="fa_book_category_association" ></li>
  </ul>
 
  <ul id="js_contextMenu_data">
   <li class="docHedaderId" data-docHedaderId="fa_asset_category_id" ></li>
-  <li class="docLineId" data-docLineId="fa_class_category_association_id" ></li>
+  <li class="docLineId" data-docLineId="fa_book_category_association_id" ></li>
   <li class="btn1DivId" data-btn1DivId="fa_asset_category" ></li>
   <li class="btn2DivId" data-btn2DivId="form_line" ></li>
-  <li class="trClass" data-docHedaderId="fa_class_category_association" ></li>
+  <li class="trClass" data-docHedaderId="fa_book_category_association" ></li>
   <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>
  </ul>
 </div>

@@ -198,7 +198,7 @@
   <li class="form_header_id" data-form_header_id="wip_move_transaction" ></li>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedadeId" data-docHedadeId="wip_move_transaction_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="wip_move_transaction_id" ></li>
+  <li class="docHedaderId" data-docHedaderId="wip_move_transaction_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="wip_move_transaction" ></li>
  </ul>
 </div>

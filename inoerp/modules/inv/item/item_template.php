@@ -552,7 +552,7 @@
   <li class="form_header_id" data-form_header_id="item" ></li>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedadeId" data-docHedadeId="item_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="item_id" ></li>
+  <li class="docHedaderId" data-docHedaderId="item_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="item" ></li>
  </ul>
 </div>

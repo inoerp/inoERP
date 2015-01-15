@@ -62,7 +62,7 @@
   <li class="form_header_id" data-form_header_id="po_purchasing_control" ></li>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedadeId" data-docHedadeId="po_purchasing_control_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="po_purchasing_control_id" ></li>
+  <li class="docHedaderId" data-docHedaderId="po_purchasing_control_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="po_purchasing_control" ></li>
  </ul>
 </div>

@@ -161,7 +161,7 @@
   <li class="form_header_id" data-form_header_id="sd_opportunity" ></li>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedadeId" data-docHedadeId="sd_opportunity_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="sd_opportunity_id" ></li>
+  <li class="docHedaderId" data-docHedaderId="sd_opportunity_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="sd_opportunity" ></li>
  </ul>
 </div>

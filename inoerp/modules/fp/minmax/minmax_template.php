@@ -58,7 +58,7 @@
   <li class="form_header_id" data-form_header_id="fp_minmax_header" ></li>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedadeId" data-docHedadeId="fp_minmax_header_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="fp_minmax_header_id" ></li>
+  <li class="docHedaderId" data-docHedaderId="fp_minmax_header_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="fp_minmax_header" ></li>
  </ul>
 </div>

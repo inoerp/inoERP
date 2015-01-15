@@ -98,7 +98,7 @@
   <li class="form_header_id" data-form_header_id="uom" ></li>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedadeId" data-docHedadeId="uom_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="uom_id" ></li>
+  <li class="docHedaderId" data-docHedaderId="uom_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="uom" ></li>
  </ul>
 </div>

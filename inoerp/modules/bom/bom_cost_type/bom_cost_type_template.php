@@ -99,7 +99,7 @@
   <li class="form_header_id" data-form_header_id="bom_cost_type" ></li>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedadeId" data-docHedadeId="bom_cost_type_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="bom_cost_type_id" ></li>
+  <li class="docHedaderId" data-docHedaderId="bom_cost_type_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="bom_cost_type" ></li>
  </ul>
 </div>

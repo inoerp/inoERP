@@ -1,41 +1,34 @@
 <div id="form_all">
- <form action=""  method="post" id="fa_depreciation_method"  name="fa_depreciation_method"><span class="heading">Price List</span>
+ <form action=""  method="post" id="fa_depreciation_method"  name="fa_depreciation_method"><span class="heading">Depreciation Method</span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
      <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Other</a></li>
-     <li><a href="#tabsHeader-3">Attachments</a></li>
-     <li><a href="#tabsHeader-4">Notes</a></li>
+     <li><a href="#tabsHeader-2">Attachments</a></li>
+     <li><a href="#tabsHeader-3">Notes</a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
       <div class="large_shadow_box"> 
        <ul class="column header_field">
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="fa_depreciation_method_id select_popup clickable">
-          Price List Id</label><?php echo form::number_field_drs('fa_depreciation_method_id'); ?>
+          Method Id</label><?php echo form::number_field_drs('fa_depreciation_method_id'); ?>
          <a name="show" href="form.php?class_name=fa_depreciation_method&<?php echo "mode=$mode"; ?>" class="show document_id fa_depreciation_method_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
         </li>
-        <li><label>Prices List</label><?php echo form::text_field_dm('price_list'); ?> </li>
-        <li><label>Module*</label><?php echo form::select_field_from_array('module_name', fa_depreciation_method::$module_a, $$class->module_name, 'module_name', $readonly); ?></li>
+        <li><label>Method Name</label><?php echo$f->text_field_dm('depreciation_method'); ?> </li>
+        <li><label>Type</label><?php echo $f->select_field_from_array('method_type', fa_depreciation_method::$method_type_a, $$class->method_type, 'method_type', '', 1, $readonly1); ?></li>
+        <li><label>Calculation Basis</label><?php echo $f->select_field_from_array('calculation_basis', fa_depreciation_method::$calculation_basis_a, $$class->calculation_basis, 'calculation_basis', '', 1, $readonly1); ?></li>
         <li><label>Description</label><?php echo form::text_field_dm('description'); ?></li>
-        <li><label>Currency</label><?php echo form::select_field_from_object('currency_code', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency_code, 'currency_code', $readonly, '', '', 1); ?> </li>
+        <li><label>Life in Months</label><?php echo $f->text_field_dm('life_month'); ?> </li>
+        <li><label>Status</label><?php echo $f->select_field_from_array('status', fa_depreciation_method::$status_a,$$class->status,'status','',1,1,1); ?> </li>
+        <li><label>Validate</label><?php echo $f->checkBox_field('validate_cb', $$class->validate_cb); ?> </li>
        </ul>
       </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">
-      <div> 
-       <ul class="column header_field">
-        <li><label>Status</label><?php echo form::status_field_d('status'); ?></li>
-        <li><label>Multi Currency</label><?php echo $f->checkBox_field('allow_mutli_currency_cb', $$class->allow_mutli_currency_cb); ?></li>
-        <li><label>Conversion Type</label><?php echo $f->select_field_from_object('currency_conversion_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->currency_conversion_type, 'currency_conversion_type', '', 1, $readonly); ?></li>
-       </ul>
-      </div>
-     </div>
-     <div id="tabsHeader-3" class="tabContent">
       <div> <?php echo ino_attachement($file) ?> </div>
      </div>
-     <div id="tabsHeader-4" class="tabContent">
+     <div id="tabsHeader-3" class="tabContent">
       <div> 
        <div id="comments">
         <div id="comment_list">
@@ -56,12 +49,11 @@
    </div>
   </div>
  </form>
- <div id ="form_line" class="form_line"><span class="heading">Price List Lines </span>
+ <div id ="form_line" class="form_line"><span class="heading">Depreciation Details </span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Values</a></li>
-    <li><a href="#tabsLine-2">Prices</a></li>
-    <li><a href="#tabsLine-3">Restrictions</a></li>
+    <li><a href="#tabsLine-1">Rates</a></li>
+    <li><a href="#tabsLine-2">Calculation</a></li>
    </ul>
    <div class="tabContainer"> 
     <form action=""  method="post" id="fa_depreciation_method_rate_line"  name="fa_depreciation_method_rate_line">
@@ -71,12 +63,10 @@
         <tr>
          <th>Action</th>
          <th>Line Id</th>
-         <th>Type</th>
-         <th>Item</th>
+         <th>Year</th>
+         <th>Period</th>
+         <th>Rate Percentage</th>
          <th>Description</th>
-         <th>UOM</th>
-         <th>Start Date</th>
-         <th>End Date</th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody fa_depreciation_method_rate_values" >
@@ -97,18 +87,10 @@
            </ul>
           </td>
           <td><?php form::number_field_wid2sr('fa_depreciation_method_rate_id'); ?></td>
-          <td><?php echo $f->select_field_from_array('line_type', fa_depreciation_method_rate::$line_type_a, $$class_second->line_type); ?></td>
-          <td><?php
-           echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
-           form::text_field_wid2('item_number', 'select_item_number');
-           ?>
-           <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number_only select_popup"></td>
-          <td><?php form::text_field_wid2('item_description'); ?></td>
-          <td><?php
-           echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id');
-           ?></td>
-          <td><?php echo $f->date_fieldAnyDay('effective_start_date', $$class_second->effective_start_date); ?></td>
-          <td><?php echo $f->date_fieldAnyDay('effective_end_date', $$class_second->effective_end_date); ?></td>
+          <td><?php form::number_field_wid2('year'); ?></td>
+          <td><?php form::number_field_wid2('period'); ?></td>
+          <td><?php form::number_field_wid2('rate'); ?></td>
+          <td><?php form::number_field_wid2('description'); ?></td>
          </tr>
          <?php
          $fa_depreciation_method_rate_object_ai->next();
@@ -122,64 +104,7 @@
       </table>
      </div>
      <div id="tabsLine-2" class="tabContent">
-      <table class="form_table">
-       <thead> 
-        <tr>
-         <th>Unit Price</th>
-         <th>Formula</th>
-        </tr>
-       </thead>
-       <tbody class="form_data_line_tbody fa_depreciation_method_rate_values" >
-        <?php
-        $count = 0;
-        $fa_depreciation_method_rate_object_ai = new ArrayIterator($fa_depreciation_method_rate_object);
-        $fa_depreciation_method_rate_object_ai->seek($position);
-        while ($fa_depreciation_method_rate_object_ai->valid()) {
-         $fa_depreciation_method_rate = $fa_depreciation_method_rate_object_ai->current();
-         ?>         
-         <tr class="fa_depreciation_method_rate<?php echo $count ?>">
-          <td><?php $f->text_field_wid2('unit_price'); ?></td>
-          <td><?php $f->text_field_wid2('formula'); ?></td>
-         </tr>
-         <?php
-         $fa_depreciation_method_rate_object_ai->next();
-         if ($fa_depreciation_method_rate_object_ai->key() == $position + $per_page) {
-          break;
-         }
-         $count = $count + 1;
-        }
-        ?>
-       </tbody>
-      </table>
-     </div>
-     <div id="tabsLine-3" class="tabContent">
-      <table class="form_table">
-       <thead> 
-        <tr>
-         <th>Inventory Org</th>
-        </tr>
-       </thead>
-       <tbody class="form_data_line_tbody fa_depreciation_method_rate_values" >
-        <?php
-        $count = 0;
-        $fa_depreciation_method_rate_object_ai = new ArrayIterator($fa_depreciation_method_rate_object);
-        $fa_depreciation_method_rate_object_ai->seek($position);
-        while ($fa_depreciation_method_rate_object_ai->valid()) {
-         $fa_depreciation_method_rate = $fa_depreciation_method_rate_object_ai->current();
-         ?>         
-         <tr class="fa_depreciation_method_rate<?php echo $count ?>">
-          <td><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->org_id, '', '', '', $readonly); ?></td>
-         </tr>
-         <?php
-         $fa_depreciation_method_rate_object_ai->next();
-         if ($fa_depreciation_method_rate_object_ai->key() == $position + $per_page) {
-          break;
-         }
-         $count = $count + 1;
-        }
-        ?>
-       </tbody>
-      </table>
+
      </div>
     </form>
    </div>

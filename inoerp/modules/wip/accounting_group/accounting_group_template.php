@@ -95,7 +95,7 @@
   <li class="form_header_id" data-form_header_id="wip_accounting_group" ></li>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedadeId" data-docHedadeId="wip_accounting_group_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="wip_accounting_group_id" ></li>
+  <li class="docHedaderId" data-docHedaderId="wip_accounting_group_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="wip_accounting_group" ></li>
  </ul>
 </div>

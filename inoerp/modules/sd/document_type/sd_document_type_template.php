@@ -75,7 +75,7 @@
   <li class="form_header_id" data-form_header_id="sd_document_type" ></li>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedadeId" data-docHedadeId="sd_document_type_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="sd_document_type_id" ></li>
+  <li class="docHedaderId" data-docHedaderId="sd_document_type_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="sd_document_type" ></li>
  </ul>
 </div>

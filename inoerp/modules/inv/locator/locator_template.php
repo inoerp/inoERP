@@ -60,7 +60,7 @@
   <li class="form_header_id" data-form_header_id="locator" ></li>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedadeId" data-docHedadeId="locator_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="locator_id" ></li>
+  <li class="docHedaderId" data-docHedaderId="locator_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="locator" ></li>
  </ul>
 </div>

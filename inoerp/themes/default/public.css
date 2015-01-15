@@ -1381,3 +1381,23 @@ ul.header_field li{
 .line_before_tab{
  margin-bottom: 60px; 
 }
+
+.toggle-slide{
+        padding: 0.1em 0.7em;
+        background-color : lightgreen;
+        width: 6em;
+        border-radius : 2em;
+        text-align: left;
+        display: block;
+        height: 2em;
+}
+
+.toggle-inner{
+        display: block;
+        background : #eee;
+        float: right;
+        width: 2em;
+        border-radius : 3em;
+        height: 1.7em;
+        cursor: pointer;
+}
