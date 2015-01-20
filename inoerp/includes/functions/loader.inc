@@ -22,7 +22,8 @@ if ($mode > 8) {
 }
 if ($continue) {
  include_once (dirname(__FILE__) . '/../basics/basics.inc');
- $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+ $current_url = $protocol_g.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; //$protocol_g defined in define_const files
+ 
  global $f;
  global $ie;
  global $s;
@@ -172,14 +173,14 @@ if (empty($_POST)) {
  */
 if (($continue) && (!empty($class_names))) {
  foreach ($class_names as $class) {
-   //check if site is in disbaled mode and the module is disabled
- if(!empty($si->disabled_action)){
-  $eng_info = engine::find_by_className($class);
-  if($eng_info && $eng_info->enabled_cb != 1){
-   access_denied('Module is disabled and Disable action is activated.<br>Either enable the module to de-activate disable action to proceed further');
+  //check if site is in disbaled mode and the module is disabled
+  if (!empty($si->disabled_action)) {
+   $eng_info = engine::find_by_className($class);
+   if ($eng_info && $eng_info->enabled_cb != 1) {
+    access_denied('Module is disabled and Disable action is activated.<br>Either enable the module to de-activate disable action to proceed further');
+   }
   }
- }
-  
+
   $module = property_exists($class, 'module') ? $class::$module : 'module';
   $primary_column = property_exists($class, 'primary_column') ? $class::$primary_column : false;
   $primary_column2 = property_exists($class, 'primary_column2') ? $class::$primary_column2 : false;
@@ -229,24 +230,25 @@ if (($continue) && (!empty($class_names))) {
       $$class->$key = $value;
      }
     }
-    $file = file::find_by_reference_table_and_id($table_name, $class_id_value);
-    $comments = comment::comment_list($table_name, $class_id_value, $class_id_value);
+
+    try {
+     $file = file::find_by_reference_table_and_id($table_name, $class_id_value);
+    } catch (Exception $e) {
+     
+    }
+
+    try {
+     $comments = comment::comment_list($table_name, $class_id_value, $class_id_value);
+    } catch (Exception $e) {
+     
+    }
+
     if (($class != 'extn_contact') && class_exists('extn_contact')) {
      $all_contacts = extn_contact::find_by_reference($table_name, $class_id_value);
     }
     if ($class != 'category') {
      $category = category::find_by_reference_table_and_id($table_name, $class_id_value);
     }
-//    if ((!empty($$class->$primary_column)) && (!empty($class::$addressField))) {
-//     foreach ($class::$addressField as $key => $value_ad) {
-//      if (!empty($$class->$value_ad)) {
-//       $address = address::find_by_id($$class->$value_ad);
-//      } else {
-//       $address = new address();
-//      }
-//      $$value_ad = address::show_adrees_details($address);
-//     }
-//    }
     if (method_exists($$class, '_before_showing')) {
      $$class->_before_showing();
     }
@@ -545,6 +547,4 @@ if ($continue && !empty($form_page)) {
 } else {
  return;
 }
-
-
 ?>

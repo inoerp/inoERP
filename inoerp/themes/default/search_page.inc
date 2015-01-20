@@ -9,19 +9,15 @@
   ?>
   <meta name="keywords" content="ERP,PHP ERP,Open Source ERP ">
   <title><?php echo isset($pageTitle) ? $pageTitle . ' - inoERP!' : ' inoERP! ' ?></title>
-  <link href="<?php
-//  echo THEME_URL;
-//  echo (!empty($content_class)) ? '/content_layout.css' : '/layout.css'
-  ?>" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo THEME_URL; ?>/public.css" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo THEME_URL; ?>/menu.css" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo THEME_URL; ?>/jquery.css" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo HOME_URL; ?>tparty/bootstrap/css/bootstrap.css" rel="stylesheet">
   <link href="<?php echo HOME_URL; ?>tparty/bootstrap/css/style.css" rel="stylesheet">
   <link href="<?php echo HOME_URL; ?>tparty/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Lato:400,300,400italic,300italic,700,700italic,900' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Exo:400,300,600,500,400italic,700italic,800,900' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,300,400italic,300italic,700,700italic,900' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Exo:400,300,600,500,400italic,700italic,800,900' rel='stylesheet' type='text/css'>
   <?php
   if (!empty($css_file_paths)) {
    foreach ($css_file_paths as $key => $css_file) {
@@ -57,8 +53,6 @@
      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
       <span class="sr-only">Toggle navigation</span>
       <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
      </button>
      <img src="<?php
      echo HOME_URL;
@@ -68,8 +62,9 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
      <ul class="nav navbar-nav navbar-right">
-      <li class="active"><a href="http://demo.inoideas.org/extensions/user/user_login.php" >DEMO <div class="arrow-up"></div></a></li>
-      <li><a href="https://github.com/inoerp/inoERP" >Download <div class="arrow-up"></div></a></li>
+      <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
+      <li><a href="http://demo.inoideas.org/extensions/user/user_login.php" >Demo <div class="arrow-up"></div></a></li>
+      <li><a href="https://github.com/inoerp/inoERP/fork" >Download <div class="arrow-up"></div></a></li>
       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
       <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47">About <div class="arrow-up"></div></a> </li><!-- end drop down -->
@@ -91,56 +86,24 @@
            <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'extensions/user/user_logout.php'; ?>"><i class="fa fa-sign-out"></i> LogOut</a></li>
           </ul>
          </div>
-
          <?php
         } else {
-         echo '<a href = "' . HOME_URL . 'extensions/user/user_login.php"><i class="fa fa-user"> </i> Login / Register</a>';
+         include_once 'extensions/user/popup_login/user_popup_login_template.php';
         }
         ?>
        </span>
       </li>
      </ul>
      <?php echo $ss->entry_form($_GET); ?>
-     <!--     <form class="navbar-form navbar-right">
-           <input type="text" class="form-control" placeholder="Search...">
-          </form>-->
-
     </div>
-   </div>
+  </div>
+   
   </nav>
-
-  <?php
-  if ($showBlock) {
-   echo '<div id="header_bottom"></div>';
-  }
-  ?>
-
-  <?php
-  if ($si->maintenance_cb == 1) {
-   echo "<div class='error'>Site is under maintenance mode </div>";
-  }
-
-  if (!empty($access_deined)) {
-   exit("Access denied ! <br> $msg <input action='action' class='button' type='button' value='Go Back' onclick='history.go(-1);
-       ' />");
-  }
-  ?>
-
-  <div class="container-fluid">
-   <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
-     <div id="sys_menu_left_vertical">
-      <?php
-      $pat = new path();
-      echo ($pat->path_allpaths_block(array('divClass' => 'tree_view')));
-      echo $fav->show_currentUser_fav();
-      ?>
-     </div>
-    </div>
-
-    <div id="navigation_bar"   class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+   <div class="ino navbar-form">
+    <div id="navigation_bar"   class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
      <div id="header_top_quick_nav" >
       <ul class="list-group inline_list">
+       <li role="presentation"><i class="fa fa-navicon clickable right_bar_navigation_menu" title="Toggle Navigation Menu"></i></li>
        <li role="presentation"><a  href="<?php echo HOME_URL; ?>"><i class="fa fa-home" title="Home"></i></a></li>
        <li role="presentation"><a  href="#"><i class="fa fa-info" title="Messages"></i></a></li>
        <li role="presentation"><a  href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard" title="Dashborad"></i></a></li>
@@ -174,9 +137,43 @@
       <?php } ?>
      </div>
     </div>
+    </div>
 
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
-     <div id="erp_form_area">
+  <?php
+  if ($showBlock) {
+   echo '<div id="header_bottom"></div>';
+  }
+  ?>
+
+  <?php
+  if ($si->maintenance_cb == 1) {
+   echo "<div class='error'>Site is under maintenance mode </div>";
+  }
+
+  if (!empty($access_deined)) {
+   exit("Access denied ! <br> $msg <input action='action' class='button' type='button' value='Go Back' onclick='history.go(-1);
+       ' />");
+  }
+  ?>
+
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+     <div id="sys_menu_left_vertical">
+      <div class="btn-group-sm" role="group" aria-label="...">
+       <button type="button" id='expand_all_nav' class="btn btn-default">Expand All</button>
+       <button type="button" id='collapse_all_nav' class="btn btn-default">Collapse All</button>
+      </div>
+      <?php
+      $pat = new path();
+      echo ($pat->path_allpaths_block(array('divClass' => 'tree_view')));
+      echo $fav->show_currentUser_fav();
+      ?>
+     </div>
+    </div>
+
+
+   <div id="erp_form_area" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
       <div id="content">
        <div class="error clickable"></div><div id="loading"></div>
        <div id="structure"><span class="heading"><?php echo 'Search ' . ucwords(str_replace('_', ' ', $class)); ?></span>
@@ -245,15 +242,16 @@
      </div>
 
 
-    </div>
-
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
      <div id="non-visible" class="non-visible">
 
      </div><!-- end large-7 --> 
     </div>
 
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+   </div>
+
+   <div class="row">
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
      <div class="footer-menu">
       <div id="half_copyrights">
        <?php
@@ -270,15 +268,14 @@
       </div>
      </div><!-- end large-7 --> 
     </div>
-
    </div>
-
   </div>
   <div clas="row">
-   <div class="hidden">
+   <div id="comment_form" class="none">
     <?php
-    echo searching_tips();
-    echo ino_filter_form();
+    if (!empty($reference_table) && !empty($reference_id)) {
+     include_once __DIR__ . '/../../comment.php';
+    }
     ?>
    </div>
 
@@ -289,6 +286,12 @@
   echo (!empty($footer_bottom)) ? "<div id=\"footer_bottom\"> $footer_bottom </div>" : "";
   echo $f->hidden_field_withId('home_url', HOME_URL);
   ?>
+  <div class="hidden">
+   <?php
+   echo searching_tips();
+   echo ino_filter_form();
+   ?>
+  </div>
  </body>
 </html>
 <?php

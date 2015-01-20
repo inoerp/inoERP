@@ -57,6 +57,7 @@ if ((!empty($_GET['class_name'])) && (!empty($_GET['program_name']))) {
  }
  $search_result_statement .='</table>';
  require_once(INC_BASICS . DS . "search_page.inc");
+ return;
 }
 if ((!empty($class_names)) && (!empty($program_name))) {
  include_once("includes/functions/loader.inc");

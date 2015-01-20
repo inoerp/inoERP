@@ -493,7 +493,6 @@ section::after {
  display: block;
  padding: 2px 10px;
  position: absolute;
- bottom: 0px;
  width: 98%;
 }
 
@@ -504,13 +503,13 @@ section::after {
 #footer-style-2,
 #footer-style-3,
 #footer-style-1 {
-font-weight: bold;
-border-top: 10px solid rgb(91, 102, 91);
-padding: 40px 0px;
-display: block;
-position: relative;
-color: rgba(195, 195, 195, 0.59);
-background-color: rgb(51, 51, 51);
+ font-weight: bold;
+ border-top: 10px solid rgb(91, 102, 91);
+ padding: 40px 0px;
+ display: block;
+ position: relative;
+ color: rgba(195, 195, 195, 0.59);
+ background-color: rgb(51, 51, 51);
 }
 #footer-style-2 .widget h3,
 #footer-style-3 .widget h3,
@@ -4429,6 +4428,14 @@ table.document_table input{
  width: 90px;
 }
 
+#erp_form_area input.large{
+ width: 140px;
+}
+
+#erp_form_area input.xlarge{
+ width: 220px;
+}
+
 #erp_form_area input[type=text],#erp_form_area input[type=password], #erp_form_area input[type=date], #erp_form_area input[type=textarea],
 #erp_form_area input[type=number], #erp_form_area input[type=search], #erp_form_area checkbox, #erp_form_area radio button, #erp_form_area select
 {
@@ -4482,10 +4489,20 @@ a.show {
  display: none;
 }
 
-@media (min-width: 320px) {
-  #navigation_bar {
-    margin-top: 80px;
+#navigation_bar {
+ /*margin-left: 16.2%;*/
+ z-index: 999;
+ background: none repeat scroll 0% 0% #F2F2F2;
+ border-bottom: 1px solid #E4E4E4;
+ height: 50px;
+ position: relative;
 }
+
+@media (min-width: 320px) {
+ #navigation_bar {
+  top: 30px;
+  margin-bottom: 40px;
+ }
 }
 
 @media (min-width: 768px) {
@@ -4502,26 +4519,30 @@ a.show {
   background-color: #f5f5f5;
   border-right: 1px solid #eee;
  }
- 
+
  #navigation_bar {
-    margin-top: 80px;
-}
+  top: 70px;
+  margin-bottom: 80px;
+ }
 }
 
 @media (min-width: 1212px) {
-  #navigation_bar {
-    margin-top: 40px;
-}
+ #navigation_bar {
+  top: 30px;
+  margin-bottom: 40px;
+
+ }
 }
 
-  #navigation_bar {
-    margin-left: 16.2%;
-    z-index: 999;
-    background: none repeat scroll 0% 0% #F2F2F2;
-border-bottom: 1px solid #E4E4E4;
-height: 50px;
-width: 83.8%;
+@media (min-width: 1212px) {
+ #navigation_bar {
+  top: 30px;
+  margin-bottom: 40px;
+
+ }
 }
+
+
 
 /* Sidebar navigation */
 .nav-sidebar {
@@ -4735,8 +4756,7 @@ span.heading{
  position: relative;
  padding: 2px;
  display: block;
- margin-bottom: 5px;
- height: 36px;
+float: right;
 }
 
 #form_top_image{
@@ -4815,4 +4835,19 @@ fieldset.form_detail_data_fs {
  cursor: pointer;
  -moz-user-select: none;
  background-image: none;
+}
+
+.ino.navbar-form{
+ padding: 0 !important;
+}
+
+ .mainbar{
+ float: left;
+ min-height: 1px;
+ padding-right: 15px;
+ padding-left: 15px;
+}
+
+.width-100{
+ width: 100%;
 }

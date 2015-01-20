@@ -9,19 +9,15 @@
   ?>
   <meta name="keywords" content="ERP,PHP ERP,Open Source ERP ">
   <title><?php echo isset($pageTitle) ? $pageTitle . ' - inoERP!' : ' inoERP! ' ?></title>
-  <link href="<?php
-//  echo THEME_URL;
-//  echo (!empty($content_class)) ? '/content_layout.css' : '/layout.css'
-  ?>" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo THEME_URL; ?>/public.css" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo THEME_URL; ?>/menu.css" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo THEME_URL; ?>/jquery.css" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo HOME_URL; ?>tparty/bootstrap/css/bootstrap.css" rel="stylesheet">
   <link href="<?php echo HOME_URL; ?>tparty/bootstrap/css/style.css" rel="stylesheet">
   <link href="<?php echo HOME_URL; ?>tparty/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Lato:400,300,400italic,300italic,700,700italic,900' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Exo:400,300,600,500,400italic,700italic,800,900' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,300,400italic,300italic,700,700italic,900' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Exo:400,300,600,500,400italic,700italic,800,900' rel='stylesheet' type='text/css'>
   <?php
   if (!empty($css_file_paths)) {
    foreach ($css_file_paths as $key => $css_file) {
@@ -57,7 +53,6 @@
      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
       <span class="sr-only">Toggle navigation</span>
       <span class="icon-bar"></span>
-
      </button>
      <img src="<?php
      echo HOME_URL;
@@ -69,7 +64,7 @@
      <ul class="nav navbar-nav navbar-right">
       <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
       <li><a href="http://demo.inoideas.org/extensions/user/user_login.php" >Demo <div class="arrow-up"></div></a></li>
-      <li><a href="https://github.com/inoerp/inoERP" >Download <div class="arrow-up"></div></a></li>
+      <li><a href="https://github.com/inoerp/inoERP/fork" >Download <div class="arrow-up"></div></a></li>
       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
       <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47">About <div class="arrow-up"></div></a> </li><!-- end drop down -->
@@ -91,7 +86,6 @@
            <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'extensions/user/user_logout.php'; ?>"><i class="fa fa-sign-out"></i> LogOut</a></li>
           </ul>
          </div>
-
          <?php
         } else {
          include_once 'extensions/user/popup_login/user_popup_login_template.php';
@@ -101,13 +95,49 @@
       </li>
      </ul>
      <?php echo $ss->entry_form($_GET); ?>
-     <!--          <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-               </form>-->
-
     </div>
-   </div>
+  </div>
+   
   </nav>
+   <div class="ino navbar-form">
+    <div id="navigation_bar"   class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
+     <div id="header_top_quick_nav" >
+      <ul class="list-group inline_list">
+       <li role="presentation"><i class="fa fa-navicon clickable right_bar_navigation_menu" title="Toggle Navigation Menu"></i></li>
+       <li role="presentation"><a  href="<?php echo HOME_URL; ?>"><i class="fa fa-home" title="Home"></i></a></li>
+       <li role="presentation"><a  href="#"><i class="fa fa-info" title="Messages"></i></a></li>
+       <li role="presentation"><a  href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard" title="Dashborad"></i></a></li>
+       <li>
+        <div class="btn-group">
+         <button type="button" class="btn btn-xs btn-info"  title="Favourites"><i class="fa fa-star-o" title="Favourites"></i></button>
+         <button type="button" title="Favourites" class="btn btn-xs btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <span class="caret"></span>
+          <span class="sr-only">Toggle Dropdown</span>
+         </button>
+         <?php echo $fav->show_currentUser_fav(true); ?>
+        </div>
+       </li>
+      </ul>
+     </div>
+     <div id="header_top_container">
+      <?php
+      $show_header_links = true;
+      if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
+       if (empty($current_page_path)) {
+        $current_page_path = thisPage_url();
+       }
+       $f->form_button_withImage($current_page_path);
+       $show_header_links = false;
+      }
+      ?>
+      <?php if ($show_header_links) { ?>
+       <!--       <div class="social-icons">
+               <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
+              </div> end social icons -->
+      <?php } ?>
+     </div>
+    </div>
+    </div>
 
   <?php
   if ($showBlock) {
@@ -143,43 +173,7 @@
     </div>
 
 
-    <div id="navigation_bar"   class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
-     <div id="header_top_quick_nav" >
-      <ul class="list-group inline_list">
-       <li role="presentation"><a  href="<?php echo HOME_URL; ?>"><i class="fa fa-home" title="Home"></i></a></li>
-       <li role="presentation"><a  href="#"><i class="fa fa-info" title="Messages"></i></a></li>
-       <li role="presentation"><a  href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard" title="Dashborad"></i></a></li>
-       <li>
-        <div class="btn-group">
-         <button type="button" class="btn btn-xs btn-info"  title="Favourites"><i class="fa fa-star-o" title="Favourites"></i></button>
-         <button type="button" title="Favourites" class="btn btn-xs btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          <span class="caret"></span>
-          <span class="sr-only">Toggle Dropdown</span>
-         </button>
-         <?php echo $fav->show_currentUser_fav(true); ?>
-        </div>
-       </li>
-      </ul>
-     </div>
-     <div id="header_top_container">
-      <?php
-      $show_header_links = true;
-      if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
-       if (empty($current_page_path)) {
-        $current_page_path = thisPage_url();
-       }
-       $f->form_button_withImage($current_page_path);
-       $show_header_links = false;
-      }
-      ?>
-      <?php if ($show_header_links) { ?>
-       <!--       <div class="social-icons">
-               <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
-              </div> end social icons -->
-      <?php } ?>
-     </div>
-    </div>
-    <div id="erp_form_area" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+    <div id="erp_form_area" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
      <div id="content">
       <div class="error clickable"></div><div id="loading"></div>
       <div id="structure">
@@ -197,13 +191,16 @@
     </div>
 
 
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
      <div id="non-visible" class="non-visible">
 
      </div><!-- end large-7 --> 
     </div>
 
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+   </div>
+
+   <div class="row">
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
      <div class="footer-menu">
       <div id="half_copyrights">
        <?php
@@ -220,9 +217,7 @@
       </div>
      </div><!-- end large-7 --> 
     </div>
-
    </div>
-
   </div>
   <div clas="row">
    <div id="comment_form" class="none">

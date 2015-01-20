@@ -19,6 +19,8 @@
        <li><label>Category</label><?php echo $f->select_field_from_object('fa_asset_category_id', fa_asset_category::find_all(), 'fa_asset_category_id', 'asset_category', $$class->fa_asset_category_id, 'fa_asset_category_id', '', 1); ?></li>
        <li><label>Status</label><?php echo $f->select_field_from_array('status', fa_asset::$status_a, $$class->status, 'status'); ?></li>
        <li><label>Units</label><?php $f->text_field_d('units'); ?></li>
+       <li><label>Type</label><?php 
+       echo $f->select_field_from_array('type',  fa_asset::$type_a,$$class->type,'','',1); ?></li>
        <li><label>Parent Asset</label><?php $f->text_field_d('parent_asset_id'); ?></li>
        <li><label>Description</label><?php $f->text_field_d('description'); ?></li>
       </ul>
@@ -142,7 +144,8 @@
           <?php
           $ab = fa_asset_book::find_all();
           foreach ($ab as $ab_i) {
-           echo '<li><a href="form.php?class=asset_book_info&asset_book_info_id=' . $ab_i->fa_asset_book_id . '">' . $ab_i->asset_book_name . '</a></li>';
+           echo '<li><a href="form.php?mode=9&class_name=fa_asset_book_info&fa_asset_book_id=' . 
+            $ab_i->fa_asset_book_id . '&fa_asset_id='.$$class->fa_asset_id.'">' . $ab_i->asset_book_name . '</a></li>';
           }
           ?>
          </ul>

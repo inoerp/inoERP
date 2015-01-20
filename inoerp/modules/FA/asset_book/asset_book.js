@@ -1,4 +1,4 @@
-function setValFromSelectPage(fa_asset_book_id) {
+function setValFromSelectPage(fa_asset_book_id, asset_book_name) {
  this.fa_asset_book_id = fa_asset_book_id;
 }
 

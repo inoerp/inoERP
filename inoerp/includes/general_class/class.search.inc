@@ -436,8 +436,9 @@ $drop_down_icon = ino_search_dropDownSettings();
 //start of form button ul
   $program_form_statement .="<ul class=\"form_buttons\">";
   //add the hidden fields if any
-  $program_form_statement .= "<li><a href=\"$this->_form_post_link.php?class_name=$class&mode=$this->_search_mode&show_block=$this->_show_block\" "
-   . " class=\"reset button\" id=\"search_reset_btn\" name=\"class_name\" value=\"$class\" > Reset All</a></li>";
+  $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"reset_program\" class=\"reset program button\" value=\"Reset All\" id=\"reset_program\"></li>";
+//  $program_form_statement .= "<li><a href=\"$this->_form_post_link.php?class_name=$class&mode=$this->_search_mode&show_block=$this->_show_block\" "
+//   . " class=\"reset button\" id=\"search_reset_btn\" name=\"class_name\" value=\"$class\" > Reset All</a></li>";
   $program_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"class_name\" value=\"$class\" class=\"search class_name\" ></li>";
   if ($this->_searching_class != 'convertToProd') {
    $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program button\" value=\"Submit\" id=\"save_program\"></li>";

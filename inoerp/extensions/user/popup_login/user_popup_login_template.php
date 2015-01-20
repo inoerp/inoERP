@@ -23,7 +23,7 @@ $user_password_reset = new user_password_reset();
       <div class="tabContainer"> 
 
        <div id="tabsLine-1" class="tabContent">
-        <form name="user_login" action="<?php HOME_URL?>extensions/user/user_login.php" method="post" id="user_login">
+        <form name="user_login" action="<?php echo HOME_URL?>extensions/user/user_login.php" method="post" id="user_login">
          <ul class="inRow asperWidth">
           <span id="username_tip" maxlength="50" size="30"  ></span>
           <li><label>User Name</label>

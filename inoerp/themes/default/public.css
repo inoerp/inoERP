@@ -1283,9 +1283,9 @@ ul.program_form li label{
     color: rgba(57, 129, 35, 0.95);
 }
 
-td.search_result.action{
+/*td.search_result.action{
     display: inline-block;
-}
+}*/
 
 #search_result th:first-child{
     width: 30px;
@@ -1400,4 +1400,29 @@ ul.header_field li{
         border-radius : 3em;
         height: 1.7em;
         cursor: pointer;
+}
+
+#view_content.content #content_element, #view_content.content #after_content_extra{
+        display: none;
+}
+
+#content_255 .block{
+        display: none;
+}
+
+#demo_cloud i{
+        color: green;
+}
+
+li.action_btn label{
+        margin-right: 13px !important;
+}
+
+#form_header, #form_line{
+        display: block;
+        clear:both;
+}
+
+#form_line{
+        padding-top: 10px;
 }

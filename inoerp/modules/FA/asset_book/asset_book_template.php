@@ -3,9 +3,8 @@
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1">Basic Info</a></li>
-    <li><a href="#tabsHeader-2">Calendar</a></li>
-    <li><a href="#tabsHeader-3">Attachments</a></li>
-    <li><a href="#tabsHeader-4">Note</a></li>
+    <li><a href="#tabsHeader-2">Attachments</a></li>
+    <li><a href="#tabsHeader-3">Note</a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -22,19 +21,14 @@
        <li><label>Description</label><?php echo $f->text_field('description', $$class->description, '20', 'description'); ?></li>
        <li><label>Type</label><?php echo $f->select_field_from_object('type', fa_asset_book::asset_book_type(), 'option_line_code', 'option_line_value', $$class->type, 'type', '', 1); ?></li>
        <li><label>Ledger Id</label><?php echo form::select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, '', $readonly) ?>        </li> 
+       <li><label>Allow Posting</label><?php echo $f->checkBox_field_d('allow_gl_posting_cb'); ?></li>
       </ul>
      </div>
     </div>
     <div id="tabsHeader-2" class="tabContent">
-     <ul class="column header_field">
-      <li><label>Allow Posting</label><?php echo $f->checkBox_field_d('allow_gl_posting_cb'); ?></li>
-      <li><label>FA Calendar</label> <?php echo $f->select_field_from_object('fa_calendar_code', gl_calendar::gl_calendar_names(), 'option_line_code', 'option_line_value', $$class->fa_calendar_code, 'fa_calendar_code','',1); ?></li>
-     </ul>
-    </div>
-    <div id="tabsHeader-3" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
     </div>
-    <div id="tabsHeader-4" class="tabContent">
+    <div id="tabsHeader-3" class="tabContent">
      <div id="comments">
       <div id="comment_list">
        <?php echo!(empty($comments)) ? $comments : ""; ?>

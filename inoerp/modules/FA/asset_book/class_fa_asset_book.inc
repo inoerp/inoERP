@@ -87,7 +87,7 @@ class fa_asset_book extends dbObject {
   'bu_org_id',
   'asset_book_name',
   'type',
-'fa_calendar_code'
+  'ledger_id'
  ];
  public $fields_inForm_notInDataBase = [
  ];

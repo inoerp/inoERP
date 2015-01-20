@@ -1,5 +1,5 @@
 <?php
-
+require_once __DIR__. "/../functions/functions.inc";
 require_once (dirname(__FILE__) . '/../../define_const.inc');
 defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 
@@ -10,7 +10,6 @@ defined('INO_DATE_FORMAT') ? null : define('INO_DATE_FORMAT', 'Y-m-d');
 defined('INO_DATE_TIME_FORMAT') ? null : define('INO_DATE_TIME_FORMAT', 'Y-m-d H:i:s');
 defined('INC_BASICS') ? null : define('INC_BASICS', INC_PATH . DS . 'basics');
 defined('INC_CLASS') ? null : define('INC_CLASS', INC_PATH . DS . 'general_class');
-defined('INC_FUNCTION') ? null : define('INC_FUNCTION', INC_PATH . DS . 'functions');
 defined('INC_MODULE') ? null : define('INC_MODULE', HOME_DIR . DS . 'modules');
 defined('INC_EXTENSIONS') ? null : define('INC_EXTENSIONS', HOME_DIR . DS . 'extensions');
 defined('INC_TPARTY') ? null : define('INC_TPARTY', HOME_DIR . DS . 'tparty');
@@ -33,7 +32,7 @@ defined('DB_USER') ? null : define("DB_USER", "");
 defined('DB_PASS') ? null : define("DB_PASS", "");
 defined('DB_NAME') ? null : define("DB_NAME", "");
 
-require_once(INC_FUNCTION . DS . "functions.inc");
+
 require_once(INC_CLASS . DS . "class.session.inc");
 require_once(INC_CLASS . DS . "class.dbc.inc");
 require_once(INC_CLASS . DS . "class.dbObject.inc");
@@ -137,9 +136,12 @@ require_once(INC_MODULE . DS . "fa" . DS . "asset_book" . DS . "class_fa_asset_b
 require_once(INC_MODULE . DS . "fa" . DS . "asset" . DS . "class_fa_asset.inc");
 require_once(INC_MODULE . DS . "fa" . DS . "asset" . DS . "class_fa_asset_assignment.inc");
 require_once(INC_MODULE . DS . "fa" . DS . "asset_category" . DS . "class_fa_asset_category.inc");
+require_once(INC_MODULE . DS . "fa" . DS . "asset_book_info" . DS . "class_fa_asset_book_info.inc");
 require_once(INC_MODULE . DS . "fa" . DS . "asset_category" . DS . "class_fa_book_category_association.inc");
 require_once(INC_MODULE . DS . "fa" . DS . "depreciation_method" . DS . "class_fa_depreciation_method.inc");
 require_once(INC_MODULE . DS . "fa" . DS . "depreciation_method" . DS . "class_fa_depreciation_method_rate.inc");
+require_once(INC_MODULE . DS . "fa" . DS . "depreciation" . DS . "class_fa_depreciation_header.inc");
+require_once(INC_MODULE . DS . "fa" . DS . "depreciation" . DS . "class_fa_depreciation_line.inc");
 require_once(INC_PO . DS . "class_po_header.inc");
 require_once(INC_PO . DS . "class_po_line.inc");
 require_once(INC_PO . DS . "class_po_detail.inc");

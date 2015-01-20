@@ -20,6 +20,7 @@
         <li><label>Calculation Basis</label><?php echo $f->select_field_from_array('calculation_basis', fa_depreciation_method::$calculation_basis_a, $$class->calculation_basis, 'calculation_basis', '', 1, $readonly1); ?></li>
         <li><label>Description</label><?php echo form::text_field_dm('description'); ?></li>
         <li><label>Life in Months</label><?php echo $f->text_field_dm('life_month'); ?> </li>
+        <li><label>Reducing Balance Rate</label><?php echo $f->number_field('reducing_balance_rate', $$class->reducing_balance_rate); ?> </li>
         <li><label>Status</label><?php echo $f->select_field_from_array('status', fa_depreciation_method::$status_a,$$class->status,'status','',1,1,1); ?> </li>
         <li><label>Validate</label><?php echo $f->checkBox_field('validate_cb', $$class->validate_cb); ?> </li>
        </ul>

@@ -1,6 +1,7 @@
-function setValFromSelectPage(fa_asset_id, hr_employee_id, first_name, last_name,
+function setValFromSelectPage(fa_asset_id,asset_number, hr_employee_id, first_name, last_name,
         identification_id, combination) {
  this.fa_asset_id = fa_asset_id;
+ this.asset_number = asset_number;
  this.hr_empoyee_id = hr_employee_id;
  this.first_name = first_name;
  this.last_name = last_name;
@@ -14,7 +15,9 @@ setValFromSelectPage.prototype.setVal = function () {
  if (fa_asset_id) {
   $("#fa_asset_id").val(fa_asset_id);
  }
-
+ if (this.asset_number) {
+  $("#asset_number").val(this.asset_number);
+ }
  var fieldClass = '.' + localStorage.getItem("field_class");
  fieldClass = fieldClass.replace(/\s+/g, '.');
 
@@ -49,6 +52,12 @@ setValFromSelectPage.prototype.setVal = function () {
 
 
 function beforeSave() {
+ var headerClassName = $('ul#js_saving_data').find('.headerClassName').data('headerclassname');
+ if(!headerClassName || headerClassName == 'undefined'){
+  return 1;
+ } else if(headerClassName != 'fa_asset'){
+  return 1;
+ }
 	var sum_total_line_units = 0;
 	$('.line_units').each(function() {
 	  sum_total_line_units += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));

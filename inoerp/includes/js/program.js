@@ -6,7 +6,7 @@ function setValFromSelectPage(item_id, item_number, item_description, uom_id,
  this.uom_id = uom_id;
  this.combination = combination;
  this.sourcing_rule = sourcing_rule;
-}
+ }
 
 setValFromSelectPage.prototype.setVal = function () {
  var item_number = this.item_number;
@@ -35,4 +35,6 @@ setValFromSelectPage.prototype.setVal = function () {
  if (sourcing_rule) {
   $('#content').find('.sourcing_rule').val(sourcing_rule);
  }
+ 
+
 };

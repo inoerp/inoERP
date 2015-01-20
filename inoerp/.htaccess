@@ -10,6 +10,18 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule    ^content/([A-Za-z0-9-]+)/?$    content.php?$1    [NC,L]    
 
+## BAN SPAMMY WEBSITE REFERRER RewriteEngine on 
+# Options +FollowSymlinks 
+RewriteCond %{HTTP_REFERER} blackhatworth\.com [NC,OR] 
+RewriteCond %{HTTP_REFERER} priceg\.com [NC] 
+RewriteCond %{HTTP_REFERER} darodar\.com [NC] 
+RewriteCond %{HTTP_REFERER} hulfingtonpost\.com [NC] 
+RewriteCond %{HTTP_REFERER} simpli\.com [NC] 
+RewriteRule .* - [F]
+
+
+
+
 # PHP error handling for development servers
 php_flag display_startup_errors on
 php_flag display_errors on

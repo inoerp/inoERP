@@ -91,6 +91,11 @@ function pa($array = "") {
  echo '</pre></div>';
 }
 
+function ino_protocol() {
+ $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+ return $protocol;
+}
+
 function show_reference_doc($class_name, $primar_column_value) {
  $primary_column = $class_name::$primary_column;
  if ((!empty($class_name)) && (!empty($primar_column_value)) && (!empty($primary_column))) {
@@ -775,13 +780,38 @@ function search_inv_count_entry_status() {
  return $f->select_field_from_array('status', inv_count_schedule::$status_a, '');
 }
 
+function search_depreciation_id() {
+ $stmt = '<input id="fa_depreciation_header_id" class="number fa_depreciation_header_id"  required type="text" value=" " name="fa_depreciation_header_id[]">
+<img class="fa_depreciation_header_id select_popup clickable" src="http://localhost/inoerp/themes/images/serach.png" style="display: inline-block;">';
+
+ return $stmt;
+}
+
+function search_asset_book() {
+ global $f;
+ $stmt = $f->select_field_from_object('fa_asset_book_id', fa_asset_book::find_all(), 'fa_asset_book_id', 'asset_book_name',  '', 'fa_asset_book_id', '', 1);
+ return $stmt;
+}
+
+//function search_depreciation_period() {
+// global $f;
+// $stmt = $f->text_field_dm('period_id');
+// return $stmt;
+//}
+
+function search_depreciation_period() {
+ $stmt = '<input id="gl_period_id" class="number gl_period_id"  required type="text" value=" " name="gl_period_id[]">';
+ return $stmt;
+}
+
+
 function search_mds_name() {
- $f = new inoform();
+ global $f;
  return $f->select_field_from_object('fp_mds_header_id', fp_mds_header::find_all(), 'fp_mds_header_id', 'mds_name', '', 'fp_mds_header_id', '', 1);
 }
 
 function search_mrp_name() {
- $f = new inoform();
+ global $f;
  return $f->select_field_from_object('fp_mrp_header_id', fp_mrp_header::find_all(), 'fp_mrp_header_id', 'mrp_name', '', 'fp_mrp_header_id', '', 1);
 }
 

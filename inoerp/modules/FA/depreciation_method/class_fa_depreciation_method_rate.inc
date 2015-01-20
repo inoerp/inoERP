@@ -58,18 +58,14 @@ class fa_depreciation_method_rate extends dbObject {
   return !empty($result[0]) ? $result[0]->RATE_SUM : false;
  }
 
- public function priceBy_headerId_orgId_ItemId($price_date) {
-  $sql = " SELECT * FROM ";
-  $sql .= self::$table_name;
-  $sql .= " WHERE fa_depreciation_method_id = '{$this->fa_depreciation_method_id}' ";
-  $sql .= " AND item_id_m = '{$this->item_id_m}' ";
-  $sql .= " AND org_id = '{$this->org_id}' ";
-  $sql .= " AND $this->effective_start_date < '{$price_date}' ";
-  $sql .= " AND $this->effective_end_date > '{$price_date}' ";
-  $sql .= " OR $this->effective_end_date IS NULL ";
-
-  $result = $this->findBySql($sql);
-  return !empty($result) ? array_pop($result) : false;
+ public static function find_by_headerId_year_period($fa_depreciation_method_id, $year, $period) {
+  $sql = " 
+	 SELECT rate
+		FROM fa_depreciation_method_rate 
+		WHERE  fa_depreciation_method_id = '{$fa_depreciation_method_id} AND year = '{$year}' AND period = '{$period}'
+";
+  $result = self::find_by_sql($sql);
+  return !empty($result[0]) ? $result[0]->rate : false;
  }
 
  public function getPrice($price_date) {

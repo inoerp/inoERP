@@ -61,9 +61,9 @@ include_once("includes/functions/loader.inc");
   <link href="<?php echo HOME_URL; ?>tparty/bootstrap/css/style.css" rel="stylesheet">
   <!-- Carousel Slider -->
   <link href="<?php echo HOME_URL; ?>tparty/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Lato:400,300,400italic,300italic,700,700italic,900' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Exo:400,300,600,500,400italic,700italic,800,900' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,300,400italic,300italic,700,700italic,900' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Exo:400,300,600,500,400italic,700italic,800,900' rel='stylesheet' type='text/css'>
   <link href="<?php echo HOME_URL; ?>themes/default/index.css" media="all" rel="stylesheet" type="text/css" />
   <script src="<?php echo HOME_URL; ?>includes/js/jquery-2.0.3.min.js"></script>
   <script src="<?php echo HOME_URL; ?>includes/js/jquery-ui.min.js"></script>
@@ -161,8 +161,8 @@ include_once("includes/functions/loader.inc");
      <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right">
       <ul class="nav navbar-nav">
        <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
-       <li class="active"><a href="http://demo.inoideas.org/extensions/user/user_login.php" >DEMO <div class="arrow-up"></div></a></li>
-       <li><a href="https://github.com/inoerp/inoERP" >Download <div class="arrow-up"></div></a></li>
+       <li class="active"><a href="http://inoideas.org/content/demo" >DEMO <div class="arrow-up"></div></a></li>
+       <li><a href="https://github.com/inoerp/inoERP/fork" >Download <div class="arrow-up"></div></a></li>
        <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
        <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
        <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47">About <div class="arrow-up"></div></a> </li><!-- end drop down -->
@@ -193,17 +193,6 @@ include_once("includes/functions/loader.inc");
    <div class="make-center wow fadeInUp animated" style="visibility: visible;">
     <div class="container">
      <div id="structure">
-      
-      <div class="toggle on">
-    <div class="toggle-slide">ON
-        <div class="toggle-inner" ></div>
-    </div>
-</div>
-      
-<div class="btn-group" role="group" aria-label="...">
-  <button type="button" id='expand_all_nav' class="btn btn-default">Expand All</button>
-  <button type="button" id='collapse_all_nav' class="btn btn-default">Collapse All</button>
-</div>
       <?php
 //      pa(get_declared_classes());
       $content = new content();

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id="content_<?php echo $content->content_id; ?>">
  <div class="row">
   <div class="col-sm-8 blog-main">
    <div id="all_contents">
@@ -6,7 +6,7 @@
     <div id="content">
      <div id="main">
       <div id="structure">
-       <div id="view_content">
+       <div id="view_content" class="<?php echo $content_type_name; ?>">
         <!--    START OF FORM HEADER-->
         <div class="error"></div><div id="loading"></div>
         <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
@@ -15,7 +15,7 @@
         <div id="content_element">
          <ul>
           <li><span class='content_heading'> <?php echo ($content->subject); ?></span></li>
-          <li class="created_by"><?php
+          <li class="created_by"><?php 
            $content_user = user::find_by_id($content->created_by);
            echo!empty($content_user) ? ($content_user->username) : '';
            ?></li>
@@ -28,6 +28,7 @@
          </ul>
         </div>
         <div id="content_extra"><?php echo content::content_by_id($content_type_name, $$class->content_id); ?></div>
+        <div id="after_content_extra">
         <div id='content_info'>
          <ul>
           <li class="attachment_content"><label>Attachments : </label><?php echo (!empty($file)) ? file::show_file_list($file) : ""; ?></li>
@@ -65,6 +66,7 @@
          ?>
          <div id="new_comment">
          </div>
+        </div>
         </div>
        </div>
       </div>

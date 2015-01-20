@@ -39,12 +39,20 @@ class fa_asset extends dbObject {
   'RETIRED' => 'Retired',
   'HOLD_DEPRECIATION' => 'Hold Depreciation',
  ];
+ 
+ public static $type_a = [
+  'CIP' => 'In Progress',
+  'CAPITALIZED' => 'Capitalized',
+  'EXPENSED' => 'Expensed',
+ ];
+ 
  public $checkbox = [
   "physical_inventory_cb"
  ];
  public $field_a = [
   'fa_asset_id',
   'asset_number',
+  'type',
   'tag_number',
   'serial_number',
   'key_number',
@@ -85,6 +93,7 @@ class fa_asset extends dbObject {
  public $pageTitle = " Fixed Asset"; //page Title
  public $fa_asset_id;
  public $asset_number;
+ public $type;
  public $tag_number;
  public $serial_number;
  public $key_number;

@@ -19,7 +19,7 @@
       <div class="tabContainer"> 
 
        <div id="tabsHeader-1" class="tabContent">
-        <form name="user_login_onPage" action=" " method="post" id="user_login_onPage">
+        <form name="user_login_onPage" action="<?php echo HOME_URL ?>extensions/user/user_login.php" method="post" id="user_login_onPage">
          <ul class="inRow asperWidth">
           <span id="username_tip" maxlength="50" size="30"  ></span>
           <li><label>User Name</label>

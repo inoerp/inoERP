@@ -56,6 +56,7 @@ class fa_depreciation_method extends dbObject {
   'method_type',
   'calculation_basis',
   'life_month',
+  'reducing_balance_rate',
   'status',
   'description',
   'created_by',
@@ -87,6 +88,7 @@ class fa_depreciation_method extends dbObject {
  public $depreciation_method;
  public $method_type;
  public $calculation_basis;
+ public $reducing_balance_rate;
  public $validate_cb;
  public $life_month;
  public $description;
