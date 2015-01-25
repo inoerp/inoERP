@@ -22,7 +22,7 @@
         <th>CC Id</th>
         <th>Code Combination</th>
         <th>Description</th>
-
+        <th>Account Type</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody coa_combination_values" >
@@ -45,6 +45,7 @@
          <td><?php form::number_field_widsr('coa_combination_id'); ?></td>
          <td><?php echo form::text_field('combination', $$class->combination, 30, '', 1, '', 'Non editable - Enter segment/field values', 1); ?></td>
          <td><?php echo form::text_field('description', $$class->description, 60, '', 1, '', 'Non editable - Enter segment/field values', 1) ?></td>
+         <td><?php echo $f->select_field_from_object('ac_type', coa::coa_account_types(), 'option_line_code', 'option_line_value', $$class->ac_type, '', '', 1, $readonly1); ?></td>
         </tr>
         <?php
         $coa_combination_object_ai->next();
@@ -72,10 +73,12 @@
       <tbody class="form_data_line_tbody coa_combination_values" >
        <?php
        $count = 0;
+       $f = new inoform();
 //       $coa_combination_object_ai = new ArrayIterator($coa_combination_object);S
        $coa_combination_object_ai->seek($position);
        while ($coa_combination_object_ai->valid()) {
         $coa_combination = $coa_combination_object_ai->current();
+        $$class_second->findBy_id($coa_combination->coa_id);
         echo '<tr class="coa_combination' . $count . '">';
         if (!empty($$class_second->coa_id)) {
          $datacount = 1;
@@ -85,7 +88,7 @@
            $field_name = 'field' . $datacount;
            $descArray = ['code', 'description'];
            echo '<td>' .
-           form::select_field_from_object($field_name, sys_value_group_line::find_by_header_id($option_line->value_group_id), 'code', $descArray, $$class->$field_name, '', $readonly, 'field_values', '', 1)
+           $f->select_field_from_object($field_name, sys_value_group_line::find_by_header_id($option_line->value_group_id), 'code', $descArray, $$class->$field_name, '',  'ac field_values', 1,$readonly ,'','','','account_qualifier')
            . '</td>';
            $datacount++;
           }

@@ -134,7 +134,7 @@
 
    </div><!-- end container -->
   </div><!-- end transparent-bg -->
-  <div clas="row">
+  <div class="row">
    <?php echo searching_tips(); ?>
   </div>
  </body>

@@ -28,7 +28,7 @@ if (!isset($readonly1)) {
        <li><label>Journal Name</label><?php echo form::text_field_dm('journal_name'); ?></li>
        <li><label>Description</label><?php echo form::text_field_d('description'); ?></li>
        <li><label>Balance Type</label><?php echo form::select_field_from_object('balance_type', $$class->gl_balance_type(), 'option_line_code', 'option_line_value', $$class->balance_type, 'balance_type', $readonly1, '', '', 1); ?></li>
-       <li><label>Status</label><?php echo form::text_field('status', $$class->status, '', '', '', '', '', 1); ?></li>
+       <li><label>Status</label><?php echo $f->text_field_dr('status'); ?></li>
        <li><label>Posted Date</label><?php echo form::date_fieldFromToday('post_date', $$class->post_date) ?></li>
        <li><label>Revision</label><?php echo form::checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?></li> 
        <li><label>Rev Number</label><?php form::text_field_wid('rev_number'); ?></li> 

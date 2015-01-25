@@ -63,13 +63,7 @@ class subinventory extends dbObject {
   "subinventory_id",
   "description",
  ];
- public $column = ["subinventory_id",
-  "org_id",
-  "type",
-  "subinventory",
-  "description",
-  "created_by",
- ];
+
  public $account = ["material_ac_id",
   "material_oh_ac_id",
   "overhead_ac_id",

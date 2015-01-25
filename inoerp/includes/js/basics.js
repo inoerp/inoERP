@@ -2346,93 +2346,94 @@ function getDBReportList(options) {
  });
 }
 
-function inoAutoComplete(options) {
- var defaults = {
-  min_length: 3
- };
- var settings = $.extend({}, defaults, options);
- if (settings.select_class === 'undefined') {
-  settings.select_class = 'select' + settings.field_name;
- }
- var primary_column1_h = '#' + settings.primary_column1;
- var select_class_d = '.' + settings.select_class;
- return $('#content').on("focus.nsAutoComplete", select_class_d, function (e) {
-  var primary_column1_v = $(primary_column1_h).val();
-  e.preventDefault();
-  if (!$(this).data("autocomplete")) {
-   var auto_element = this;
-   $(this).autocomplete({
-    source: function (request, response) {
-     $.ajax({
-      url: settings.json_url,
-      dataType: "json",
-      data: {
-       action: 'search',
-       field_name: settings.field_name,
-       primary_column1: primary_column1_v,
-       primary_column2: settings.primary_column2,
-       term: request.term,
-       other_options: settings.other_options,
-       ino_auto_complete: true
-      },
-      success: function (data) {
-       response(data);
-      },
-      error: function (request, errorType, errorMessage) {
-       alert("Error : " + errorType + ' with message ' + errorMessage);
-       $(this).autocomplete("close");
-      }
-     });
-    },
-    autoFocus: true,
-    response: function (event, ui) {
-     if (ui.content.length === 1)
-     {
-      $(this).val(ui.content[0].label);
-      var elemenType = $(this).parent().prop('tagName');
-      $.each(ui.content[0], function (key, value) {
-       var v_d = '.' + key;
-       if (elemenType === 'LI') {
-        $(auto_element).closest("ul").find(v_d).val(value);
-       } else if (elemenType === 'TD') {
-        var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
-        $('#form_line').find(trClass).find(v_d).val(value);
-       }
-      });
-      //close the auto complete
-      $(this).autocomplete("close");
-     } else if (ui.content.length === 0) {
-      alert('No Data Found');
-      $(this).attr('value', '');
-      //close the auto complete
-      $(this).autocomplete("close");
-     }
-
-    },
-    //select
-    select: function (event, ui) {
-     $(this).val(ui.item.label);
-     var elemenType = $(this).parent().prop('tagName');
-     $.each(ui, function (key2, value) {
-      $.each(value, function (value_k, value_v) {
-       var v_d = '.' + value_k;
-       if (elemenType === 'LI') {
-        $(auto_element).closest("ul").find(v_d).val(value_v);
-       } else if (elemenType === 'TD') {
-        var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
-        $('#form_line').find(trClass).find(v_d).val(value_v);
-       }
-      });
-     });
-
-     //close the auto complete
-     $(this).autocomplete("close");
-    },
-    minLength: settings.min_length
-   });
-  }
- });
-}
+//function inoAutoComplete(options) {
+// var defaults = {
+//  min_length: 3
+// };
+// var settings = $.extend({}, defaults, options);
+// if (settings.select_class === 'undefined') {
+//  settings.select_class = 'select' + settings.field_name;
+// }
+// alert(settings.other_options);
+// var primary_column1_h = '#' + settings.primary_column1;
+// var select_class_d = '.' + settings.select_class;
+// return $('#content').on("focus.nsAutoComplete", select_class_d, function (e) {
+//  var primary_column1_v = $(primary_column1_h).val();
+//  e.preventDefault();
+//  if (!$(this).data("autocomplete")) {
+//   var auto_element = this;
+//   $(this).autocomplete({
+//    source: function (request, response) {
+//     $.ajax({
+//      url: settings.json_url,
+//      dataType: "json",
+//      data: {
+//       action: 'search',
+//       field_name: settings.field_name,
+//       primary_column1: primary_column1_v,
+//       primary_column2: settings.primary_column2,
+//       term: request.term,
+//       other_options: 'A',
+//       ino_auto_complete: 'X'
+//      },
+//      success: function (data) {
+//       response(data);
+//      },
+//      error: function (request, errorType, errorMessage) {
+//       alert("Error : " + errorType + ' with message ' + errorMessage);
+//       $(this).autocomplete("close");
+//      }
+//     });
+//    },
+//    autoFocus: true,
+//    response: function (event, ui) {
+//     if (ui.content.length === 1)
+//     {
+//      $(this).val(ui.content[0].label);
+//      var elemenType = $(this).parent().prop('tagName');
+//      $.each(ui.content[0], function (key, value) {
+//       var v_d = '.' + key;
+//       if (elemenType === 'LI') {
+//        $(auto_element).closest("ul").find(v_d).val(value);
+//       } else if (elemenType === 'TD') {
+//        var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
+//        $('#form_line').find(trClass).find(v_d).val(value);
+//       }
+//      });
+//      //close the auto complete
+//      $(this).autocomplete("close");
+//     } else if (ui.content.length === 0) {
+//      alert('No Data Found');
+//      $(this).attr('value', '');
+//      //close the auto complete
+//      $(this).autocomplete("close");
+//     }
+//
+//    },
+//    //select
+//    select: function (event, ui) {
+//     $(this).val(ui.item.label);
+//     var elemenType = $(this).parent().prop('tagName');
+//     $.each(ui, function (key2, value) {
+//      $.each(value, function (value_k, value_v) {
+//       var v_d = '.' + value_k;
+//       if (elemenType === 'LI') {
+//        $(auto_element).closest("ul").find(v_d).val(value_v);
+//       } else if (elemenType === 'TD') {
+//        var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
+//        $('#form_line').find(trClass).find(v_d).val(value_v);
+//       }
+//      });
+//     });
+//
+//     //close the auto complete
+//     $(this).autocomplete("close");
+//    },
+//    minLength: settings.min_length
+//   });
+//  }
+// });
+//}
 
 function printLabel(options) {
  var defaults = {
@@ -2740,13 +2741,18 @@ $(document).ready(function () {
  remove_row();
 
  //Coa auto complete
- var coaCombination = new autoCompleteMain();
-// var coa_id = $('#coa_id').val();
- coaCombination.json_url = 'modules/gl/coa_combination/coa_search.php';
- coaCombination.primary_column1 = 'coa_id';
- coaCombination.select_class = 'select_account';
- coaCombination.min_length = 4;
- coaCombination.autoComplete();
+// var coaCombination = new autoCompleteMain();
+//// var coa_id = $('#coa_id').val();
+// coaCombination.json_url = 'modules/gl/coa_combination/coa_search.php';
+// coaCombination.primary_column1 = 'coa_id';
+// coaCombination.select_class = 'select_account';
+// coaCombination.min_length = 4;
+// coaCombination.autoComplete();
+
+ $('.select_account').inoAutoCompleteElement({
+  json_url: 'modules/gl/coa_combination/coa_search.php',
+  primary_column1: 'coa_id',
+ });
 
  var supplierName = new autoCompleteMain();
  supplierName.json_url = 'modules/ap/supplier/json_supplier.php';
@@ -2832,15 +2838,24 @@ $(document).ready(function () {
 
  //popu for selecting accounts
  $('#content').on('click', '.account_popup', function () {
+  var ulink = 'select.php?class_name=coa_combination';
   if ($(this).closest('td').find('input').hasClass('select_account')) {
    var rowClass = $(this).closest('tr').prop('class');
    var fieldClass = $(this).closest('td').find('.select_account').prop('class');
    localStorage.setItem("row_class", rowClass);
+   if ($(this).closest('td').find('input').data('ac_type')) {
+    ulink += 'ac_type=' + $(this).closest('td').find('input').data('ac_type');
+   }
   } else {
    var fieldClass = $(this).closest('li').find('.select_account').prop('class');
+   if ($(this).closest('li').find('select_account').data('ac_type')) {
+    ulink += 'ac_type=' + $(this).closest('td').find('input').data('ac_type');
+   }
   }
+
+
   localStorage.setItem("field_class", fieldClass);
-  void window.open('select.php?class_name=coa_combination', '_blank',
+  void window.open(ulink, '_blank',
           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
@@ -2903,7 +2918,7 @@ $(document).ready(function () {
   }
  });
 
- $('#searchForm').on('change', '.new_search_criteria', function () {
+ $('body').on('change', '#searchForm .new_search_criteria', function () {
   if ($(this).val()) {
    var newSearchCriteria = $(this).val();
    var newSearchCriteriaName = newSearchCriteria + '[]';
@@ -3758,12 +3773,12 @@ $(document).ready(function () {
  $('body').on('click', '#reset_program', function () {
   $(this).closest('form').find(':input').not('.button').val('');
  });
- 
- $('body').on('click', '.right_bar_navigation_menu', function(){
-$('.sidebar').slideToggle()
-$('.mainbar').toggleClass('col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2');
- $('#navigation_bar').toggleClass('width-100');
-});
+
+ $('body').on('click', '.right_bar_navigation_menu', function () {
+  $('.sidebar').slideToggle()
+  $('.mainbar').toggleClass('col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2');
+  $('#navigation_bar').toggleClass('width-100');
+ });
 
 });
 function toUpperCase(str)

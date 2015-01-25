@@ -74,13 +74,13 @@ enableLineForSaveAfterFieldChange();
  remove_row();
 
  //Coa auto complete
- var coaCombination = new autoCompleteMain();
-// var coa_id = $('#coa_id').val();
- coaCombination.json_url = 'modules/gl/coa_combination/coa_search.php';
- coaCombination.primary_column1 = 'coa_id';
- coaCombination.select_class = 'select_account';
- coaCombination.min_length = 4;
- coaCombination.autoComplete();
+// var coaCombination = new autoCompleteMain();
+//// var coa_id = $('#coa_id').val();
+// coaCombination.json_url = 'modules/gl/coa_combination/coa_search.php';
+// coaCombination.primary_column1 = 'coa_id';
+// coaCombination.select_class = 'select_account';
+// coaCombination.min_length = 4;
+// coaCombination.autoComplete();
 
  var supplierName = new autoCompleteMain();
  supplierName.json_url = 'modules/ap/supplier/json_supplier.php';
@@ -174,11 +174,6 @@ enableLineForSaveAfterFieldChange();
  $(".form_detail_data_fs").hide();
  $(".error").dblclick(function() {
   $(this).html("");
- });
- //export to excel from search result
- $("#content").on('click', '#export_excel_searchResult', function(e) {
-  window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#search_result').html()));
-  e.preventDefault();
  });
 //remove row
  remove_row();

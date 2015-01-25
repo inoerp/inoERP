@@ -86,7 +86,7 @@ include_once("includes/functions/loader.inc");
  </head>
  <body>
 
-  <div id="topbar" class="clearfix">
+  <div id="topbar" class="clearfix ">
    <div class="container">
     <?php
     if ($showBlock) {
@@ -114,7 +114,7 @@ include_once("includes/functions/loader.inc");
 
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
      <div class="topmenu">
-      <span class="topbar-login">
+      <div class="topbar-login">
        <?php if (!empty($_SESSION['login_status'])) { ?>
         <div class="dropdown">
          <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="fa fa-user"> </i><?php echo ' ' . ucfirst($_SESSION['username']); ?>
@@ -137,7 +137,7 @@ include_once("includes/functions/loader.inc");
         include_once 'extensions/user/popup_login/user_popup_login_template.php';
        }
        ?>
-      </span>
+      </div>
 
      </div><!-- end top menu -->
      <div class="callus">
@@ -150,7 +150,7 @@ include_once("includes/functions/loader.inc");
 
   <header id="header-style-1">
    <div class="container">
-    <nav class="navbar yamm navbar-default">
+    <nav class="navbar yamm navbar-default ">
      <div class="navbar-header">
       <img src="<?php
       echo HOME_URL;
@@ -159,16 +159,24 @@ include_once("includes/functions/loader.inc");
       <a href="<?php echo HOME_URL; ?>" class="navbar-brand"><?php echo!empty($si->site_name) ? $si->site_name : 'inoERP'; ?></a>
      </div>
      <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right">
-      <ul class="nav navbar-nav">
-       <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
-       <li class="active"><a href="http://inoideas.org/content/demo" >DEMO <div class="arrow-up"></div></a></li>
+      <ul class="nav nav-pills">
+       <li><a href="http://inoideas.org/content/demo" >Demo <div class="arrow-up"></div></a></li>
        <li><a href="https://github.com/inoerp/inoERP/fork" >Download <div class="arrow-up"></div></a></li>
+       <li class="active"><a href="<?php echo HOME_URL; ?>content.php?mode=9&content_type=forum&category_id=7" ><i class="fa fa-comments-o"></i> Ask a Question <div class="arrow-up"></div></a></li>
        <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
        <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
-       <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47">About <div class="arrow-up"></div></a> </li><!-- end drop down -->
+       <li role="presentation" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+         More <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+         <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
+         <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47">About <div class="arrow-up"></div></a> </li><!-- end drop down -->
+        </ul>
+       </li>
       </ul><!-- end navbar-nav -->
      </div><!-- #navbar-collapse-1 -->			
-    </nav><!-- end navbar yamm navbar-default -->
+    </nav>
    </div><!-- end container -->
   </header><!-- end header-style-1 -->
 

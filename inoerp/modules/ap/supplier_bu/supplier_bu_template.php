@@ -106,10 +106,10 @@
        <li><label>Freight Terms</label><?php echo form::text_field_d('freight_terms'); ?></li> 
        <li><label>Transportation</label><?php echo form::text_field_d('transportation'); ?></li> 
        <li><label>Country Of Origin</label><?php echo $f->select_field_from_object('country_of_origin',  option_header::countries(),'option_line_code','option_line_value',$$class->country_of_origin,'country_of_origin'); ?></li> 
-       <li><label>Liability</label><?php $f->ac_field_d('liability_account_id', 'copyValue'); ?></li>
-       <li><label>Payable</label><?php $f->ac_field_d('payable_account_id', 'copyValue'); ?></li>
-       <li><label>Payment Discount</label> <?php $f->ac_field_d('payment_discount_account_id', 'copyValue'); ?></li>
-       <li><label>Pre Payment</label> <?php $f->ac_field_d('pre_payment_account_id', 'copyValue'); ?></li>
+       <li><label>Liability</label><?php $f->ac_field_d('liability_account_id', 'copyValue', 'L'); ?></li>
+       <li><label>Payable</label><?php $f->ac_field_d('payable_account_id', 'copyValue' , 'L'); ?></li>
+       <li><label>Payment Discount</label> <?php $f->ac_field_d('payment_discount_account_id', 'copyValue', 'X'); ?></li>
+       <li><label>Pre Payment</label> <?php $f->ac_field_d('pre_payment_account_id', 'copyValue' , 'A'); ?></li>
       </ul>
      </div>
     </div>

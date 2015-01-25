@@ -79,15 +79,7 @@ class wip_wo_header extends dbObject {
   'start_date',
   'wo_status'
  ];
- public $column = [
-  'wip_wo_header_id',
-  'item_id_m',
-  'wo_number',
-  'org_id',
-  'wo_type',
-  'start_date',
-  'wo_status'
- ];
+
  public $checkbox = [
   'bom_exploded_cb',
   'routing_exploded_cb'

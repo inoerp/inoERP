@@ -56,9 +56,9 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
 
    if (header_id && header_id !== 'undefined') {
     $(primary_column_id).val(header_id);
-     $(primary_column_class).val(header_id);
+    $(primary_column_class).val(header_id);
    }
-  
+
    if ($(primary_column_id2)) {
     $('.primary_column2').val(header_id2);
    }
@@ -642,19 +642,24 @@ add_new_rowMain.prototype.add_new_row = function (afterAddNewRow) {
  }
 
  $("tr.new_object" + objectCount).find(this.divClassNotToBeCopied).each(function () {
-  $(this).attr('value', '')
+  $(this).attr('value', '');
+  $(this).val('');
  });
  if (this.removeDefault === true) {
   $("tr.new_object" + objectCount).find("td input[type=text], .dontCopy").not(divClassToBeCopied_c).each(function () {
+   $(this).val('');
    $(this).attr('value', '');
   });
   $("tr.new_object" + objectCount).find("td input[type=number]").not(divClassToBeCopied_c).each(function () {
+   $(this).val('');
    $(this).attr('value', '');
   });
   $("tr.new_object" + objectCount).find("td select").not(divClassToBeCopied_c).each(function () {
+   $(this).val('');
    $(this).attr('value', '');
   });
   $("tr.new_object" + objectCount).find("td.text_not_tobe_copied").each(function () {
+   $(this).val('');
    $(this).attr('value', '');
   });
  }
@@ -1066,8 +1071,19 @@ fileUploadMain.prototype.fileUpload = function () {
    type: 'post'
   }).done(function (result) {
    var div = $(result).filter('div#uploaded_files').html();
+   var message = '';
+   $(result).find('.rollback_msg').each(function () {
+    message += $(this).html();
+   });
+   $(result).find('.message').each(function () {
+    message += $(this).html();
+   });
    $(divId).closest('#file_upload_form').find(".uploaded_file_details").append(result);
+   if (message) {
+    $('#uploaded_file_details').append(message);
+   }
    $('.show_loading_small').hide();
+   alert('Upload Completed\nCheck output/errors section for details');
   }).fail(function (error, textStatus, xhr) {
    alert("save failed \n" + error + textStatus + xhr);
    $('.show_loading_small').hide();

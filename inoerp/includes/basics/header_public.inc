@@ -83,7 +83,7 @@ check_browser(); ?>
     </div><!-- end columns -->
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
      <div class="topmenu">
-      <span class="topbar-login">
+      <div class="topbar-login">
        <?php
        if (!empty($_SESSION['login_status'])) {
         echo ' <i class="fa fa-user"></i>
@@ -112,7 +112,7 @@ check_browser(); ?>
         include_once __DIR__ . '/../../extensions/user/popup_login/user_popup_login_template.php';
        }
        ?>
-      </span>
+      </div>
 
      </div><!-- end top menu -->
      <div class="callus">

@@ -47,35 +47,6 @@ $(document).ready(function() {
 	}
  });
 
-// function uploadFile() {
-//	var json_url = $('form[name="file_upload"]').prop('action');
-//	var class_name = 'gl_ledger';
-//	$.ajax({
-//	 url: json_url,
-//	 data: {
-//		className: class_name},
-//	 type: 'post'
-//	}).done(function(result) {
-////	var div = $(result).filter('div#json_save_header').html();
-//	 $(".error").append(result);
-//	 $('.show_loading_small').hide();
-//	}).fail(function(error, textStatus, xhr) {
-//	 alert("save failed \n" + error + textStatus + xhr);
-//	 $('.show_loading_small').hide();
-//	});
-// }
-//
-// $('#attach_submit').on('click', function() {
-//	$('.show_loading_small').show();
-//	uploadFile();
-// });
-// 
-// 
-// var postUrl = $('form[name="file_upload"]').prop('action');
-// var classSave = new saveMainClass();
-// classSave.json_url = postUrl;
-// classSave.form_header_id = 'file_upload';
-// classSave.single_line = false;
-// classSave.saveMain();
+
 
 });

@@ -99,8 +99,7 @@ class gl_journal_header extends dbObject {
   'journal_source',
   'journal_category',
   'journal_name',
-  'description'
- ];
+   ];
  public $numberField = [
   'header_amount',
   'exchange_rate',

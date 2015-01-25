@@ -102,18 +102,27 @@ if (!empty($_GET['class_name'])) {
    $noof_criteria++;
   }
  }
- if ((!empty($_GET['function_name'])) && (method_exists($$class, $_GET['function_name']))) {
-  $function_name = $_GET['function_name'];
-  $search_counts = $function_name . '_search_counts';
-  $search_records = $function_name . '_search_records';
-  $whereClause = implode(" AND ", $whereFields);
-  $_GET['whereClause'] = $whereClause;
-  $total_count = call_user_func(array($$class, $search_counts), $_GET);
-  $search_result = call_user_func(array($$class, $search_records), $_GET);
-  if (!empty($per_page) && !empty($total_count)) {
-   $pagination = new pagination($pageno, $per_page, $total_count);
-   $pagination->setProperty('_query_string', $query_string);
-   $pagination_statement = $pagination->show_pagination();
+ if ((!empty($_GET['report_name'])) && method_exists($$class, $_GET['report_name'][0])) {
+  $report_name = $_GET['report_name'][0];
+  $search_result_statement = call_user_func(array($$class, $report_name), $_GET);
+  echo '<div id="searchResult">';
+  echo $search_result_statement;
+  echo '</div></div>';
+  return;
+ } else if ((!empty($_GET['function_name']))) {
+  $function_name = is_array($_GET['function_name']) ? $_GET['function_name'][0] : $_GET['function_name'];
+  if (method_exists($$class, $function_name)) {
+   $search_counts = $function_name . '_search_counts';
+   $search_records = $function_name . '_search_records';
+   $whereClause = implode(" AND ", $whereFields);
+   $_GET['whereClause'] = $whereClause;
+   $total_count = call_user_func(array($$class, $search_counts), $_GET);
+   $search_result = call_user_func(array($$class, $search_records), $_GET);
+   if (!empty($per_page) && !empty($total_count)) {
+    $pagination = new pagination($pageno, $per_page, $total_count);
+    $pagination->setProperty('_query_string', $query_string);
+    $pagination_statement = $pagination->show_pagination();
+   }
   }
  } else if (method_exists($$class, 'search_records')) {
   $whereClause = implode(" AND ", $whereFields);
@@ -179,6 +188,7 @@ if (!empty($_GET['class_name'])) {
   }
 // echo "<br><br><br> sql is $sql";
   $search_result = $class::find_by_sql($sql);
+//  pa($search_result);
  }
 
  if (method_exists($class, 'search_add_extra_fields')) {

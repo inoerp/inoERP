@@ -22,8 +22,8 @@ if ($mode > 8) {
 }
 if ($continue) {
  include_once (dirname(__FILE__) . '/../basics/basics.inc');
- $current_url = $protocol_g.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; //$protocol_g defined in define_const files
- 
+ $current_url = $protocol_g . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; //$protocol_g defined in define_const files
+
  global $f;
  global $ie;
  global $s;
@@ -342,18 +342,25 @@ if (($continue) && (!empty($class_names))) {
       $noof_criteria++;
      }
     }
-    if ((!empty($_GET['function_name'])) && (method_exists($$class, $_GET['function_name']))) {
-     $function_name = $_GET['function_name'];
-     $search_counts = $function_name . '_search_counts';
-     $search_records = $function_name . '_search_records';
-     $whereClause = implode(" AND ", $whereFields);
-     $_GET['whereClause'] = $whereClause;
-     $total_count = call_user_func(array($$class, $search_counts), $_GET);
-     $search_result = call_user_func(array($$class, $search_records), $_GET);
-     if (!empty($per_page) && !empty($total_count)) {
-      $pagination = new pagination($pageno, $per_page, $total_count);
-      $pagination->setProperty('_query_string', $query_string);
-      $pagination_statement = $pagination->show_pagination();
+    if (!empty($_GET['report_name'])) {
+     $report_name = is_array($_GET['report_name']) ? $_GET['report_name'][0] : $_GET['report_name'];
+     if (method_exists($$class, $report_name)) {
+      $search_result_statement = call_user_func(array($$class, $report_name), $_GET);
+     }
+    } else if ((!empty($_GET['function_name']))) {
+     $function_name = is_array($_GET['function_name']) ? $_GET['function_name'][0] : $_GET['function_name'];
+     if (method_exists($$class, $function_name)) {
+      $search_counts = $function_name . '_search_counts';
+      $search_records = $function_name . '_search_records';
+      $whereClause = implode(" AND ", $whereFields);
+      $_GET['whereClause'] = $whereClause;
+      $total_count = call_user_func(array($$class, $search_counts), $_GET);
+      $search_result = call_user_func(array($$class, $search_records), $_GET);
+      if (!empty($per_page) && !empty($total_count)) {
+       $pagination = new pagination($pageno, $per_page, $total_count);
+       $pagination->setProperty('_query_string', $query_string);
+       $pagination_statement = $pagination->show_pagination();
+      }
      }
     } else if (method_exists($$class, 'search_records')) {
      $whereClause = implode(" AND ", $whereFields);
@@ -369,7 +376,8 @@ if (($continue) && (!empty($class_names))) {
      require_once 'loader_search.inc';
     }
 
-    if (method_exists($class, 'search_add_extra_fields')) {
+    if(empty($search_result_statement)){
+         if (method_exists($class, 'search_add_extra_fields')) {
      $class::search_add_extra_fields($search_result);
     }
 
@@ -385,6 +393,8 @@ if (($continue) && (!empty($class_names))) {
     $s->setProperty('primary_column_s', $primary_column);
     $s->setProperty('column_array_s', $column_array);
     $search_result_statement = $search->search_result_op();
+    }
+
    }
   }
   //---------------------------------------END OF SEARCH------------------------------------------------
@@ -427,7 +437,7 @@ if (isset($class_names[1])) {
  if (property_exists($class, 'primary_column')) {
   $primar_column_class1 = $class::$primary_column;
   $order_by_field = !empty($class_second::$query_order_by_field) ? $class_second::$query_order_by_field : '';
-  $order_by_value = !empty($class_second::$query_order_by_value) ? $class_second::$query_order_by_value : '';
+  $order_by_value = !empty($class_second::$query_order_by_value) ? $class_second::$query_order_by_value : ' ASC ';
   $$line_obj = [];
   array_push($$line_obj, $$class_second);
   if (!empty($$class->$primar_column_class1) && (!empty($class_second::$parent_primary_column))) {

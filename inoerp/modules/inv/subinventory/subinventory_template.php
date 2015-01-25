@@ -79,12 +79,12 @@
      <div id="tabsLine-2"  class="tabContent">
       <div> 
        <ul class="column four_column">
-        <li><label>Material Ac: </label><?php $f->ac_field_d('material_ac_id'); ?></li>  
-        <li><label>Over Head Ac: </label><?php $f->ac_field_d('overhead_ac_id'); ?></li> 
-        <li><label>Material OH Ac: </label><?php $f->ac_field_d('material_oh_ac_id'); ?></li> 
-        <li><label>Resource Ac : </label><?php $f->ac_field_d('resource_ac_id'); ?></li>  
-        <li><label>OSP Ac : </label><?php $f->ac_field_d('osp_ac_id'); ?></li>  
-        <li><label>Expense Ac : </label><?php $f->ac_field_d('expense_ac_id'); ?></li>  
+        <li><label>Material Ac: </label><?php $f->ac_field_d('material_ac_id', '','A'); ?></li>  
+        <li><label>Over Head Ac: </label><?php $f->ac_field_d('overhead_ac_id', '','A'); ?></li> 
+        <li><label>Material OH Ac: </label><?php $f->ac_field_d('material_oh_ac_id', '','A'); ?></li> 
+        <li><label>Resource Ac : </label><?php $f->ac_field_d('resource_ac_id', '','A'); ?></li>  
+        <li><label>OSP Ac : </label><?php $f->ac_field_d('osp_ac_id', '','A'); ?></li>  
+        <li><label>Expense Ac : </label><?php $f->ac_field_d('expense_ac_id', '','X'); ?></li>  
        </ul>
       </div> 
       <!--                end of tab2 div three_column-->

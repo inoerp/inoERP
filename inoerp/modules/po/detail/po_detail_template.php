@@ -130,10 +130,10 @@
           ?>
           <tr class="po_detail<?php echo $count . '-' . $detailCount; ?>">
            <td><?php $f->seq_field_detail_d($detailCount) ?></td>
-           <td><?php $f->ac_field_wid3m('charge_ac_id', 'copyValue'); ?></td>
-           <td><?php $f->ac_field_wid3m('accrual_ac_id', 'copyValue'); ?></td>
+           <td><?php $f->ac_field_wid3m('charge_ac_id', 'copyValue' , 'X,A'); ?></td>
+           <td><?php $f->ac_field_wid3m('accrual_ac_id', 'copyValue' , 'L'); ?></td>
            <td><?php $f->ac_field_wid3('budget_ac_id', 'copyValue'); ?></td>
-           <td><?php $f->ac_field_wid3m('ppv_ac_id', 'copyValue'); ?></td>
+           <td><?php $f->ac_field_wid3m('ppv_ac_id', 'copyValue', 'X'); ?></td>
           </tr>
           <?php
           $detailCount++;

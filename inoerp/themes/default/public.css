@@ -1371,7 +1371,7 @@ font-size: 2em;
 
 #form_line form{
         display: block;
-min-width: 1050px
+/*min-width: 850px;*/
 }
 
 ul.header_field li{
@@ -1425,4 +1425,39 @@ li.action_btn label{
 
 #form_line{
         padding-top: 10px;
+}
+
+#searchForm{
+        display: block;
+        float: left;
+        position: realtive;
+}
+
+#searchResult{
+        display: block;
+        float: left;
+        position: realtive;
+        width: 100%;
+}
+
+table.simple_table tr.label_one {
+        font-weight: bold;
+        background-color: #ccc;
+}
+
+table.simple_table tr.label_two {
+        font-weight: bold;
+        background-color: #eee;
+}
+
+table.simple_table tr.label_three {
+        font-weight: bold;
+}
+
+table.simple_table tr{
+        background-color: #fff;
+}
+
+#erp_form_area{
+        margin-bottom: 200px;
 }

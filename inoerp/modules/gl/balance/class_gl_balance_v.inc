@@ -7,20 +7,9 @@ class gl_balance_v extends dbObject {
  public $field_a = [
  ];
  public $initial_search = [
-		 'period_name',
-		 "coa_combination_id",
-		 "combination",
-		 "description",
-		 "balance_type"
- ];
- public $column = [
-		 'period_name',
-		 "coa_combination_id",
-		 "combination",
-		 "period_net_dr",
-		 "period_net_cr",
-		 "begin_balance_dr",
-		 "begin_balance_cr",
+  'period_name',
+  "period_id",
+  "field1",
  ];
  public $dateField = [
  ];
@@ -33,20 +22,16 @@ class gl_balance_v extends dbObject {
  ];
 
  function __construct() {
-	if (!empty(static::$table_name)) {
-	 $this->field_a = get_dbColumns(static::$table_name);
-	 foreach ($this->field_a as $key => $value) {
-		$this->$value = '';
-	 }
-	}
+  if (!empty(static::$table_name)) {
+   $this->field_a = get_dbColumns(static::$table_name);
+   foreach ($this->field_a as $key => $value) {
+    $this->$value = '';
+   }
+  }
  }
 
- public function __set($name, $value) {
-	$this->$name = $value;
- }
-
- public  function create_gl_balance_v() {
-	$SQL = "SELECT  cc.combination, gjl.code_combination_id,
+ public function create_gl_balance_v() {
+  $SQL = "SELECT  cc.combination, gjl.code_combination_id,
 cc.coa_id, sum(gjl.total_cr), sum(gjl.total_dr),
 sum(gjl.total_ac_dr), sum(gjl.total_ac_cr) ,
 cc.description, gjl.gl_journal_line_id,
@@ -61,7 +46,7 @@ LEFT JOIN gl_journal_header gjh ON gjl.gl_journal_header_id = gjh.gl_journal_hea
 LEFT JOIN coa_combination cc ON gjl.code_combination_id=cc.coa_combination_id
 group by gjl.code_combination_id";
 
-	$sql = "
+  $sql = "
 CREATE OR REPLACE VIEW gl_unposted_journal_lines_v
 (
 combination, code_combination_id, period_name,
@@ -93,9 +78,9 @@ WHERE gjl.status = 'U'
 GROUP BY  gjl.code_combination_id
 
 ";
-	
-	
-		$sql = "
+
+
+  $sql = "
 CREATE OR REPLACE VIEW gl_balance_v
 (
 period_name, gl_period_id, combination,description, 
@@ -120,7 +105,90 @@ LEFT JOIN coa_combination cc ON cc.coa_combination_id = gb.coa_combination_id
 ORDER BY gp.gl_period_id DESC
 ";
  }
+ 
+  public static function find_balance_between_accounts($account_l, $account_u){
+  
+  $sql = " SELECT field1, field4, ledger_id, period_id, ( IFNULL(period_net_dr,0) - IFNULL(period_net_cr,0) "
+   . " + IFNULL(begin_balance_dr,0) - IFNULL(begin_balance_cr,0) ) AS balance "
+   . " FROM gl_balance_v " ;
+  $sql .= " WHERE field4 > '{$account_l}' AND  field4 <= '{$account_u}' " ;
+   $result = self::find_by_sql($sql);
+//  
+//  echo $sql .'<br><br>';
+  return !empty($result) ? $result : false;
+ }
+ 
+  public static function find_balance_sum_between_accounts($account_l, $account_u){
+  
+  $sql = " SELECT field1, ledger_id, period_id, ( IFNULL(SUM(period_net_dr),0) - IFNULL(SUM(period_net_cr),0) "
+   . " + IFNULL(SUM(begin_balance_dr),0) - IFNULL(SUM(begin_balance_cr),0) ) AS balance "
+   . " FROM gl_balance_v " ;
+  $sql .= " WHERE field4 > '{$account_l}' AND  field4 <= '{$account_u}' " ;
+  $sql .= " GROUP BY  ledger_id, field1, period_id " ;
+  $result = self::find_by_sql($sql);
+//  
+//  echo $sql .'<br><br>';
+  return !empty($result) ? array_pop($result) : false;
+ }
 
+ public function calculate_balanceSheet() {
+  /* 1. Find all asset parent segments of the coa. If no coa_id provided use coa_id = 1 */
+
+
+  $total_cash = '104000';
+  $total_cash_heading = 'Total Cash & Receivables';
+
+  $deferred_incomeTax_account = '104500';
+  $deferred_incomeTax_heading = 'Deferred Income Taxes';
+
+  $gross_inventory_account = '105300';
+  $gross_inventory_heading = 'Gross Inventory';
+
+  $inventory_reserve_account = '105500';
+  $inventory_reserve_heading = 'Inventory Reserve';
+
+  $net_inventory_heading = 'Net Inventory';
+
+  $prepaid_expense_account = '106000';
+  $prepaid_expense_heading = 'Prepaids Expenses';
+
+  $total_current_asset_heading = 'Total Current Assets';
+  $total_nonCurrent_asset_heading = 'Total Non-Current Assets';
+  $total_asset_heading = 'TOTAL ASSETS';
+  
+  $total_current_liability_account = '250000';
+  $total_current_liability_heading = 'Total Current Liabilities';
+  
+  $total_longterm_liability_heading = 'Total Long-Term Liabilities';
+  
+  $total_liability_equity_heading = 'TOTAL LIABILITIES & EQUITY';
+  
+  
+ }
+
+ public function balance_sheet($params) {
+  $org_name = 'inoERP';
+  $last_period = '2015';
+  $current_period = '2014';
+  ob_start();
+  include_once __DIR__ . '/templates/balance_sheet_template.php';
+  $report_date = ob_get_contents();
+  ob_end_clean();
+  return $report_date;
+ }
+
+ 
+  public function balance_sheet_detailed($params) {
+  $org_name = 'inoERP';
+  $last_period = '2015';
+  $current_period = '2014';
+  ob_start();
+  include_once __DIR__ . '/templates/balance_sheet_detail_template.php';
+  $report_date = ob_get_contents();
+  ob_end_clean();
+  return $report_date;
+ }
+ 
 }
 
 //end of po_detail class

@@ -75,7 +75,7 @@
       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
       <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47">About <div class="arrow-up"></div></a> </li><!-- end drop down -->
       <li>
-       <span class="topbar-login ino_right_top">
+       <div class="topbar-login ino_right_top">
         <?php if (!empty($_SESSION['login_status'])) { ?>
          <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="fa fa-user"> </i><?php echo ' ' . ucfirst($_SESSION['username']); ?>
@@ -98,7 +98,7 @@
          echo '<a href = "' . HOME_URL . 'extensions/user/user_login.php"><i class="fa fa-user"> </i> Login / Register</a>';
         }
         ?>
-       </span>
+       </div>
       </li>
      </ul>
      <?php echo $ss->entry_form($_GET); ?>
@@ -134,7 +134,6 @@
       <?php
       $pat = new path();
       echo ($pat->path_allpaths_block(array('divClass' => 'tree_view')));
-      echo $fav->show_currentUser_fav();
       ?>
      </div>
     </div>
@@ -272,7 +271,7 @@
    </div>
 
   </div>
-  <div clas="row">
+  <div class="row">
    <?php echo searching_tips(); ?>
   </div>
   <!--footer content-->

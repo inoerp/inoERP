@@ -81,7 +81,7 @@
     </div><!-- end columns --><!-- end columns -->
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
      <div class="topmenu">
-      <span class="topbar-login">
+      <div class="topbar-login">
        <?php
        if (!empty($_SESSION['login_status'])) {
         echo '<i class="fa fa-user"></i>
@@ -110,7 +110,7 @@
        </ul>
        ';
        ?>
-      </span>
+      </div>
 
      </div><!-- end top menu -->
      <div class="callus">
@@ -132,10 +132,11 @@
       <a href="<?php echo HOME_URL; ?>" class="navbar-brand"><?php echo!empty($si->site_name) ? $si->site_name : 'inoERP'; ?></a>
      </div><!-- end navbar-header -->
      <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right">
-      <ul class="nav navbar-nav">
+      <ul class="nav nav-pills">
        <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
-       <li class="active"><a href="http://inoideas.org/content/demo" >DEMO <div class="arrow-up"></div></a></li>
+       <li><a href="http://inoideas.org/content/demo" >DEMO <div class="arrow-up"></div></a></li>
        <li><a href="https://github.com/inoerp/inoERP/fork" >Download <div class="arrow-up"></div></a></li>
+       <li class="active"><a href="<?php echo HOME_URL; ?>content.php?mode=9&content_type=forum&category_id=7" ><i class="fa fa-comments-o"></i> Ask a Question <div class="arrow-up"></div></a></li>
        <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
        <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
        <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47">About <div class="arrow-up"></div></a> </li><!-- end drop down -->

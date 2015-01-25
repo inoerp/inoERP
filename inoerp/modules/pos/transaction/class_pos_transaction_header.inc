@@ -19,34 +19,32 @@ class pos_transaction_header extends dbObject {
  public static $table_name = "pos_transaction_header";
  public static $primary_column = "pos_transaction_header_id";
  public static $dependent_classes = ['pos_transaction_line'];
- public static $key_column = "price_list";
+ public static $key_column = "terminal_number";
  public static $module = "mdm";
  public static $system_info = [
-  'name' => 'Price List',
+  'name' => 'POS Transaction',
   'number' => '9402',
-  'description' => 'Define and mainten price list',
+  'description' => 'Point Of Sale Transaction',
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',
   'primary_entity_cb' => '',
   'dependent_class' => array('pos_transaction_line'),
   'primary_entity_cb' => '',
-  'module_name' => 'mdm',
+  'module_name' => 'pos',
   'weight' => 2
- ];
- public static $module_a = [
-  'PO' => 'Purchasing',
-  'SD' => 'Sales & Distribution'
  ];
  public $field_a = [
   'pos_transaction_header_id',
-  'price_list',
-  'module_name',
+  'terminal_number',
   'currency_code',
+  'header_amount',
+  'tax_amount',
+  'discount_amount',
+  'total_amount',
   'description',
-  'status',
-  'allow_mutli_currency_cb',
-  'currency_conversion_type',
+  'ar_customer_id',
+  'ar_customer_site_id',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -57,37 +55,25 @@ class pos_transaction_header extends dbObject {
  ];
  public $initial_search = [
   'pos_transaction_header_id',
-  'price_list',
-  'module_name',
-  'currency_code',
- ];
- public $column = [
-  'pos_transaction_header_id',
-  'price_list',
-  'module_name',
-  'currency_code',
-  'description',
-  'status',
  ];
  public $requiredField = [
-  'price_list',
-  'module_name',
-  'currency_code',
-  'status',
+  'terminal_number'
  ];
  public $search = [
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Price List "; //page Title
+ public $pageTitle = " Point Of Sales "; //page Title
  public $pos_transaction_header_id;
- public $price_list;
- public $module_name;
+ public $terminal_number;
  public $currency_code;
+ public $header_amount;
+ public $tax_amount;
+ public $discount_amount;
+ public $total_amount;
  public $description;
- public $status;
- public $allow_mutli_currency_cb;
- public $currency_conversion_type;
+ public $ar_customer_id;
+ public $ar_customer_site_id;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -101,37 +87,12 @@ class pos_transaction_header extends dbObject {
 //	$this->field_a = $prepare->fetchAll(PDO::FETCH_COLUMN, 0);
 // }
 
- public function __set($name, $value) {
-  $this->$name = $value;
- }
-
- Public static function validation_types() {
-  $header = option_header::find_by_keyColumn('SYS_VALIDATION_TYPE');
-  $option_line = new option_line();
-  $lines = $option_line->findBy_parentId($header->option_header_id);
-  return $lines;
- }
-
  public static function profile_pos_transaction_org() {
   $line_data_array = [];
   $line_data_array['line_key'] = 'org_id';
   $line_data_array['line_desc'] = 'org';
   $line_data_array['line_values'] = org::find_all_inventory();
   return $line_data_array;
- }
-
- public static function find_by_module($module_name) {
-  $sql = " SELECT * FROM " . self::$table_name . " WHERE module_name = '{$module_name}' ";
-  $result = self::find_by_sql($sql);
-  return !empty($result) ? $result : false;
- }
-
- public static function find_all_purchasing_pl() {
-  return self::find_by_module('PO');
- }
-
- public static function find_all_sales_pl() {
-  return self::find_by_module('SD');
  }
 
 }

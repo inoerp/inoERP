@@ -81,6 +81,7 @@
        <thead> 
         <tr>
          <th>Action</th>
+         <th>Seq#</th>
          <th>Line Id</th>
          <th>Code</th>
          <th>Value</th>
@@ -92,9 +93,12 @@
        </thead>
        <tbody class="form_data_line_tbody sys_value_group_line_values" >
         <?php
-//               echo $re_page;
+        $f = new inoform();
         $count = 0;
-        foreach ($sys_value_group_line_object as $sys_value_group_line) {
+        $sys_value_group_line_object_ai = new ArrayIterator($sys_value_group_line_object);
+        $sys_value_group_line_object_ai->seek($position);
+        while ($sys_value_group_line_object_ai->valid()) {
+         $sys_value_group_line = $sys_value_group_line_object_ai->current();
          ?>         
          <tr class="sys_value_group_line<?php echo $count ?>">
           <td>    
@@ -105,6 +109,7 @@
             <li><?php echo form::hidden_field('sys_value_group_header_id', $$class->sys_value_group_header_id); ?></li>
            </ul>
           </td>
+          <td><?php $f->seq_field_d($count) ?></td>
           <td><?php form::number_field_wid2sr('sys_value_group_line_id'); ?></td>
           <td><?php form::text_field_wid2sm('code') ?></td>
           <td><?php form::text_field_wid2('code_value') ?></td>
@@ -114,6 +119,10 @@
           <td><?php echo form::date_field('effective_end_date', $$class_second->effective_end_date, '10', '', '', ''); ?></td>
          </tr>
          <?php
+         $sys_value_group_line_object_ai->next();
+         if ($sys_value_group_line_object_ai->key() == $position + $per_page) {
+          break;
+         }
          $count = $count + 1;
         }
         ?>
@@ -124,6 +133,7 @@
       <table class="form_table">
        <thead> 
         <tr>
+         <th>Seq#</th>
          <th>Is Parent</th>
          <th>Parent Name</th>
         </tr>
@@ -131,9 +141,13 @@
        <tbody class="form_data_line_tbody sys_value_group_line_values" >
         <?php
         $count = 0;
-        foreach ($sys_value_group_line_object as $sys_value_group_line) {
+        $sys_value_group_line_object_ai = new ArrayIterator($sys_value_group_line_object);
+        $sys_value_group_line_object_ai->seek($position);
+        while ($sys_value_group_line_object_ai->valid()) {
+         $sys_value_group_line = $sys_value_group_line_object_ai->current();
          ?>         
          <tr class="sys_value_group_line<?php echo $count ?>">
+          <td><?php $f->seq_field_d($count) ?></td>
           <td><?php echo form::checkBox_field_d2('parent_cb'); ?></td>
           <td><?php
            $obj = new sys_value_group_line();
@@ -141,6 +155,10 @@
            ?></td>
          </tr>
          <?php
+                  $sys_value_group_line_object_ai->next();
+         if ($sys_value_group_line_object_ai->key() == $position + $per_page) {
+          break;
+         }
          $count = $count + 1;
         }
         ?>
@@ -151,6 +169,7 @@
       <table class="form_table">
        <thead> 
         <tr>
+         <th>Seq#</th>
          <th>Account Qualifier</th>
          <th>Allow Budgeting</th>
          <th>Allow Posting</th>
@@ -159,14 +178,22 @@
        <tbody class="form_data_line_tbody sys_value_group_line_values" >
         <?php
         $count = 0;
-        foreach ($sys_value_group_line_object as $sys_value_group_line) {
+        $sys_value_group_line_object_ai = new ArrayIterator($sys_value_group_line_object);
+        $sys_value_group_line_object_ai->seek($position);
+        while ($sys_value_group_line_object_ai->valid()) {
+         $sys_value_group_line = $sys_value_group_line_object_ai->current();
          ?>         
          <tr class="sys_value_group_line<?php echo $count ?>">
+          <td><?php $f->seq_field_d($count) ?></td>
           <td><?php echo form::select_field_from_object('account_qualifier', coa::coa_account_types(), 'option_line_code', 'option_line_value', $$class_second->account_qualifier, 'account_qualifier', $readonly); ?></td>
           <td><?php echo form::checkBox_field_d2('allow_budgeting_cb'); ?></td>
           <td><?php echo form::checkBox_field_d2('allow_posting_cb'); ?></td>
          </tr>
          <?php
+                  $sys_value_group_line_object_ai->next();
+         if ($sys_value_group_line_object_ai->key() == $position + $per_page) {
+          break;
+         }
          $count = $count + 1;
         }
         ?>

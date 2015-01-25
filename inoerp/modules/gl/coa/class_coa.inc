@@ -69,7 +69,6 @@ class coa extends dbObject {
  public $checkbox = [
   'rev_enabled_cb',
  ];
-
  public $requiredField = [
   'coa_structure_id',
   'description',
@@ -111,12 +110,85 @@ class coa extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
+ public $only_parent;
+ public $account_qualifier;
 
-public function _before_save(){
- if(empty($this->coa_sequence)){
+// public function _before_save() {
+//  if (empty($this->coa_sequence)) {
+//   
+//  }
+// }
+
+  public static function find_all_accounts_from_coaId($coa_id = '1', $only_parent = false, $account_qualifier = '') {
+  $sql = "
+  SELECT coa.coa_id, coa.coa_structure_id, coa.natural_account, ol.value_group_id, vgl.code, vgl.description, 
+  vgl.account_qualifier, vgl.parent_cb
+from 
+coa,
+option_header oh,
+option_line ol,
+sys_value_group_header vgh,
+sys_value_group_line vgl
+WHERE oh.option_header_id = coa.coa_structure_id
+AND oh.option_header_id = ol.option_header_id
+AND coa.natural_account = ol.option_line_code 
+AND vgh.sys_value_group_header_id = ol.value_group_id
+AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
+AND coa.coa_id = '{$coa_id}'
+";
+
+  if ($only_parent) {
+   $sql .= " AND vgl.parent_cb = 1";
+  }
+
+  if (!empty($account_qualifier)) {
+   $sql .= " AND vgl.account_qualifier = '{$account_qualifier}'";
+  }
   
+  $sql .= " ORDER BY vgl.code asc";
+
+
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
  }
-}
+
+ public function findAll_accounts_from_coaId() {
+  $this->coa_id = empty($this->coa_id) ? '1' : $this->coa_id;
+  $sql = "
+  SELECT coa.coa_id, coa.coa_structure_id, coa.natural_account, ol.value_group_id, vgl.code, vgl.description, 
+  vgl.account_qualifier, vgl.parent_cb
+from 
+coa,
+option_header oh,
+option_line ol,
+sys_value_group_header vgh,
+sys_value_group_line vgl
+WHERE oh.option_header_id = coa.coa_structure_id
+AND oh.option_header_id = ol.option_header_id
+AND coa.natural_account = ol.option_line_code 
+AND vgh.sys_value_group_header_id = ol.value_group_id
+AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
+AND coa.coa_id = :coa_id
+";
+
+  $param_a['coa_id'] = $this->coa_id;
+
+  if (!empty($this->only_parent)) {
+   $sql .= " AND vgl.parent_cb = 1 ";
+  }
+
+  if (!empty($this->account_qualifier)) {
+   $sql .= " AND vgl.account_qualifier = :account_qualifier ";
+   $param_a['account_qualifier'] = $this->account_qualifier;
+  }
+  
+  $sql .= " ORDER BY vgl.code asc";
+
+
+  $result = $this->findBySql($sql, $param_a);
+
+  return !empty($result) ? $result : false;
+ }
 
  Public static function coa_account_types() {
   $option_header = option_header::find_by_name('COA_ACCOUNT_TYPE');
@@ -167,8 +239,8 @@ public function _before_save(){
  }
 
  Public static function coa_segments_by_optionHeaderId($option_headerId) {
-   $segments = option_line::find_by_parent_id($option_headerId);
-    return !empty($segments) ? $segments : false;
+  $segments = option_line::find_by_parent_id($option_headerId);
+  return !empty($segments) ? $segments : false;
  }
 
  public static function find_coa_fields_option($coa_id) {

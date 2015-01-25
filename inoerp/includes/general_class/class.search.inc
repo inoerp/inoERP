@@ -211,6 +211,8 @@ $drop_down_icon = ino_search_dropDownSettings();
 
  public function search_form($class_obj) {
   global $f;
+  $function_name = !empty($_GET['function_name']) ? $_GET['function_name'] : '';
+  $report_name = !empty($_GET['report_name']) ? $_GET['report_name'] : '';
   $class = is_array($this->_searching_class) ? $this->_searching_class[0] : $this->_searching_class;
   if (property_exists($class, 'field_a')) {
    $search_array = $class_obj->field_a;
@@ -375,6 +377,8 @@ $drop_down_icon = ino_search_dropDownSettings();
   $reset_link = "$this->_form_post_link.php?class_name=$class&mode=$this->_search_mode&show_block=$this->_show_block";
 
   $search_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"reset_class_name\" value=\"Reset All\" class=\"reset button\" ></li>";
+  $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"function_name\" value=\"$function_name\" class=\"search function_name\" ></li>";
+  $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"report_name\" value=\"$report_name\" class=\"search report_name\" ></li>";
   $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"search_class_name\" value=\"$class\" class=\"search class_name\" ></li>";
   $search_form_statement .="<li><input type=\"submit\" form=\"$this->_form_name\" name=\"submit_search\" class=\"search button\" value=\"Search\" id=\"search_submit_btn\"></li>";
   $search_form_statement .="</ul>";

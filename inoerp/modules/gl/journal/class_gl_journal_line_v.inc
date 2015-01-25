@@ -13,15 +13,7 @@ class gl_journal_line_v extends dbObject {
 		 'reference_key_value ',
 		 'status'
  ];
- public $column = [
-		 'combination',
-		 "period_name",
-		 "total_cr",
-		 "total_dr",
-		 "total_ac_dr",
-		 'total_ac_cr ',
-		 'status'
- ];
+
  public $dateField = [
  ];
  public $search = [

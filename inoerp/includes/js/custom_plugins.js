@@ -159,6 +159,7 @@
  };
 
  $.fn.inoAutoCompleteElement = function (options) {
+  var this_e = $(this);
   var defaults = {
    min_length: 3,
    form_id: 'form_line'
@@ -173,10 +174,14 @@
      settings.select_class = 'select' + settings.field_name;
     }
     var primary_column1_h = '#' + settings.primary_column1;
-
     var primary_column1_v = $(primary_column1_h).val();
     if (!$(this).data("autocomplete")) {
      var auto_element = this;
+     if ($(this).attr('data-ac_type')) {
+      var ac_type = $(this).data('ac_type');
+     } else {
+      var ac_type = null;
+     }
      $(this).autocomplete({
       source: function (request, response) {
        $.ajax({
@@ -189,7 +194,8 @@
          primary_column2: settings.primary_column2,
          term: request.term,
          other_options: settings.other_options,
-         ino_auto_complete: true
+         ino_auto_complete: true,
+         ac_type: ac_type
         },
         success: function (data) {
          response(data);
@@ -204,7 +210,7 @@
       response: function (event, ui) {
        if (ui.content.length === 1)
        {
-        $(this).val(ui.content[0].label);
+        $(this).val(ui.content[0].value);
         var elemenType = $(this).parent().prop('tagName');
         $.each(ui.content[0], function (key, value) {
          var v_d = '.' + key;
@@ -235,7 +241,7 @@
       },
       //select
       select: function (event, ui) {
-       $(this).val(ui.item.label);
+       $(this).val(ui.item.value);
        var elemenType = $(this).parent().prop('tagName');
        $.each(ui, function (key2, value) {
         $.each(value, function (value_k, value_v) {
@@ -333,4 +339,4 @@
 
  };
 
- }(jQuery));
+}(jQuery));

@@ -211,6 +211,15 @@ function number_thousand_converted($number) {
  return $number;
 }
 
+function ino_number_thousand_converted($number) {
+ if ($number > 1000000) {
+  $number = round($number / 1000000, 1) . 'M';
+ } elseif ($number > 1000) {
+  $number = round($number / 1000, 1) . 'K';
+ }
+ return $number;
+}
+
 //search function with $_GET criterias
 function ino_getSearch() {
  $whereFields = array();

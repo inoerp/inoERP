@@ -62,14 +62,14 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
      <ul class="nav navbar-nav navbar-right">
-      <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
       <li><a href="http://demo.inoideas.org/extensions/user/user_login.php" >Demo <div class="arrow-up"></div></a></li>
       <li><a href="https://github.com/inoerp/inoERP/fork" >Download <div class="arrow-up"></div></a></li>
+      <li class="active"><a href="http://inoideas.org/content.php?mode=9&content_type=forum&category_id=7" ><i class="fa fa-comments-o"></i> Ask a Question <div class="arrow-up"></div></a></li>
       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
-      <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47">About <div class="arrow-up"></div></a> </li><!-- end drop down -->
+     
       <li>
-       <span class="topbar-login ino_right_top">
+       <div class="topbar-login ino_right_top">
         <?php if (!empty($_SESSION['login_status'])) { ?>
          <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="fa fa-user"> </i><?php echo ' ' . ucfirst($_SESSION['username']); ?>
@@ -91,7 +91,7 @@
          include_once 'extensions/user/popup_login/user_popup_login_template.php';
         }
         ?>
-       </span>
+       </div>
       </li>
      </ul>
      <?php echo $ss->entry_form($_GET); ?>
@@ -167,7 +167,6 @@
       <?php
       $pat = new path();
       echo ($pat->path_allpaths_block(array('divClass' => 'tree_view')));
-      echo $fav->show_currentUser_fav();
       ?>
      </div>
     </div>
@@ -188,13 +187,6 @@
       </div>
       <!--   end of structure-->
      </div>
-    </div>
-
-
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
-     <div id="non-visible" class="non-visible">
-
-     </div><!-- end large-7 --> 
     </div>
 
    </div>
@@ -219,7 +211,7 @@
     </div>
    </div>
   </div>
-  <div clas="row">
+  <div class="row">
    <div id="comment_form" class="none">
     <?php
     if (!empty($reference_table) && !empty($reference_id)) {

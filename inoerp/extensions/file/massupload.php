@@ -58,4 +58,3 @@ if (!empty($class_names)) {
  require_once('massupload_template.php' );
 }
 ?>
-<script src="file.js"></script>

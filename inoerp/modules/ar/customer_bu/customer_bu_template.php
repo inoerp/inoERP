@@ -71,13 +71,13 @@
 				 <div class="tabContainer">
 					<div id="tabsLine-1" class="tabContent">
 					 <ul class="column four_column"> 
-						<li><label>Receivable Ac: </label><?php form::ac_field_d('receivable_ac_id'); ?></li>
-						<li><label>Revenue Ac: </label><?php form::ac_field_d('revenue_ac_id'); ?></li>
-						<li><label>Tax Ac: </label> <?php form::ac_field_d('tax_ac_id'); ?></li>
-						<li><label>Freight Ac: </label> <?php form::ac_field_d('freight_ac_id'); ?></li>
-						<li><label>Clearing Ac: </label> <?php form::ac_field_d('clearing_ac_id'); ?></li>
-						<li><label>Unbilled Receivable Ac: </label> <?php form::ac_field_d('unbilled_receivable_ac_id'); ?></li>
-						<li><label>Unearned Revenue Ac: </label> <?php form::ac_field_d('unearned_revenue_ac_id'); ?></li>
+            <li><label>Receivable Ac: </label><?php $f= new inoform(); $f->ac_field_d('receivable_ac_id' , '', 'A'); ?></li>
+						<li><label>Revenue Ac: </label><?php  $f->ac_field_d('revenue_ac_id' , '' , 'I'); ?></li>
+						<li><label>Tax Ac: </label> <?php  $f->ac_field_d('tax_ac_id', '', 'L'); ?></li>
+						<li><label>Freight Ac: </label> <?php  $f->ac_field_d('freight_ac_id', '', 'I'); ?></li>
+						<li><label>Clearing Ac: </label> <?php  $f->ac_field_d('clearing_ac_id', '', 'X'); ?></li>
+						<li><label>Unbilled Receivable Ac: </label> <?php  $f->ac_field_d('unbilled_receivable_ac_id','','A'); ?></li>
+						<li><label>Unearned Revenue Ac: </label> <?php  $f->ac_field_d('unearned_revenue_ac_id', '', 'L'); ?></li>
 						<!--end of tab1 div three_column-->
 					</div> 
 					<div id="tabsLine-2" class="tabContent">

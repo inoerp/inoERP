@@ -31,7 +31,8 @@ if (!empty($_GET['class_name'])) {
  $search_result_statement .='</table>';
 //	 echo '<pre>';
 //	 print_r($all_search_paths);
- require_once(INC_BASICS . DS . "search_page.inc");
+ require_once(THEME_DIR . DS . "search_page.inc");
+ return;
 }
 ?>
 <?php 
@@ -42,7 +43,7 @@ if (!empty($class_names)) {
 	access_denied();
 	return;
  }
- $$class = new $class();
+ $$class = new $class;
  $data_headers = $$class->field_a;
  $ignored_fields = ['created_by', 'creation_date', 'last_update_by', 'last_update_date'];
  $few_records = $class::find_few(5);
@@ -80,6 +81,6 @@ if (!empty($class_names)) {
 <script type="text/javascript">
  $(document).ready(function () {
   $.getScript("includes/js/erp.js");
-  $.getScript("file/file.js");
+  $.getScript("extensions/file/file.js");
  });
 </script>

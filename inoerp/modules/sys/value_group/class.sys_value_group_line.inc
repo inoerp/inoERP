@@ -7,6 +7,7 @@ class sys_value_group_line extends dbObject {
  public static $parent_primary_column = "sys_value_group_header_id";
  public static $key_column = "code";
  public static $module = "sys";
+ public static $query_order_by_field = 'code_value';
  public $field_a = [
 		 'sys_value_group_line_id',
 		 'sys_value_group_header_id',
@@ -97,7 +98,7 @@ class sys_value_group_line extends dbObject {
 
  public static function find_by_header_id($id) {
 	$vgl = new sys_value_group_line();
-	return $vgl->findBy_parentId($id);
+	return $vgl->findBy_parentId($id,'code','ASC');
  }
 
  public static function find_by_optionId_lineCode($header_id, $code) {

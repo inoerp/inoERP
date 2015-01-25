@@ -1,103 +1,108 @@
-function setValFromSelectPage(pos_transaction_header_id, item_id_m, item_number, item_description, uom_id) {
+function setValFromSelectPage(pos_transaction_header_id) {
  this.pos_transaction_header_id = pos_transaction_header_id;
- this.item_id_m = item_id_m;
- this.item_number = item_number;
- this.item_description = item_description;
- this.uom_id = uom_id;
 }
 
-setValFromSelectPage.prototype.setVal = function() {
- var pos_transaction_header_id = this.pos_transaction_header_id;
- var item_id_m = this.item_id_m;
- var item_number = this.item_number;
- var item_description = this.item_description;
- var uom_id = this.uom_id;
- 
- var rowClass = '.' + localStorage.getItem("row_class");
- var fieldClass = '.' + localStorage.getItem("field_class");
- 
- 
-  if (pos_transaction_header_id) {
-	$("#pos_transaction_header_id").val(pos_transaction_header_id);
- }
- 
-  rowClass = rowClass.replace(/\s+/g, '.');
- fieldClass = fieldClass.replace(/\s+/g, '.');
- if (item_id_m) {
-	$('#content').find(rowClass).find('.item_id_m').val(item_id_m);
- }
- if (item_number) {
-	$('#content').find(rowClass).find('.item_number').val(item_number);
- }
- if (item_description) {
-	$('#content').find(rowClass).find('.item_description').val(item_description);
- }
- if (uom_id) {
-	$('#content').find(rowClass).find('.uom_id').val(uom_id);
+setValFromSelectPage.prototype.setVal = function () {
+
+ if (this.pos_transaction_header_id) {
+  $("#pos_transaction_header_id").val(this.pos_transaction_header_id);
  }
 
- localStorage.removeItem("row_class");
- localStorage.removeItem("field_class");
- 
 };
 
- //Check the option_id while entering the option line code
- function copy_pos_transaction_header_id() {
-	$(".pos_transaction_line_code").blur(function()
-	{
-	 if ($("#pos_transaction_header_id").val() == "") {
-		alert("First save header or select an Option Type");
-		$(".pos_transaction_line_code").val("");
-	 } else {
-		$(".pos_transaction_header_id").val($("#pos_transaction_header_id").val());
-	 }
-	});
- }
- 
-
-$(document).ready(function() {
-
-//  var Mandatory_Fields = ["#org_id", "First Select Org Name", "#item_number", "First Select Item Number"];
-// select_mandatory_fields(Mandatory_Fields);
-//
-// $('#form_line').on("click", function() {
-//	if (!$('#pos_transaction_header_id').val()) {
-//	 alert('No header Id : First enter/save header details');
-//	} else {
-//	 var headerId = $('#pos_transaction_header_id').val();
-//	 if (!$(this).find('.pos_transaction_header_id').val()) {
-//		$(this).find('.pos_transaction_header_id').val(headerId);
-//	 }
-//	}
-//
-// });
 
 
+$(document).ready(function () {
  //Popup for selecting option type
- $(".pos_transaction_header_id.select_popup").on("click", function() {
-	void window.open('select.php?class_name=pos_transaction_header', '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ $(".pos_transaction_header_id.select_popup").on("click", function () {
+  void window.open('select.php?class_name=pos_transaction_header', '_blank',
+          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
+ $('#content').off('blur', '.item_number').on('blur', '.item_number', function () {
+  if (!$(this).val()) {
+   return true;
+  }
+  $(this).closest('tr').find('.quantity').val('1');
  });
 
 
-
-
- //enable disbale parent & group
- $('.parent_cb').each(function() {
-	if ($(this).is(":checked")) {
-	 $(this).closest('tr').find('.parent_line_id').attr('disabled', 'true');
-	}
+//Calculate Line Amounts
+ $('body').on('calPOSLineAmount', '.line_amount', function () {
+  var line_amount_e = $(this);
+  if ((!line_amount_e.closest('tr').find('.unit_price').val()) || (!line_amount_e.closest('tr').find('.unit_price').val())) {
+   return true;
+  }
+  var unit_price = +line_amount_e.closest('tr').find('.unit_price').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1");
+  var quantity = +line_amount_e.closest('tr').find('.quantity').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1");
+  if (line_amount_e.closest('tr').find('.discount_amount').val()) {
+   var discount_amount = +line_amount_e.closest('tr').find('.discount_amount').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1");
+  } else {
+   var discount_amount = 0;
+  }
+  var line_amount = (unit_price * quantity);
+  var amount_after_discount = line_amount - discount_amount;
+  line_amount_e.val(line_amount);
+  $(this).closest('tr').find('.amount_after_discount').val(amount_after_discount);
  });
 
- $('body').on('change', '.parent_cb', function() {
-	if ($(this).is(":checked")) {
-	 $(this).closest('tr').find('.parent_line_id').attr('disabled', 'true');
-	} else {
-	 $(this).closest('tr').find('.parent_line_id').removeAttr('disabled');
-	}
+ $('#content').off('blur', '.unit_price, .quantity, .discount_amount').on('blur', '.unit_price, .quantity, .discount_amount', function () {
+  $(this).closest('tr').find('.line_amount').trigger('calPOSLineAmount');
+ });
+
+ $('#content').off('blur', '.discount_code').on('blur', '.discount_code', function () {
+  if (!$(this).val() || (isNaN($(this).val()))) {
+   return true;
+  }
+  var discount_amount_per = +$(this).closest('tr').find('.discount_code').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1");
+  var line_amount = +$(this).closest('tr').find('.line_amount').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1");
+  var dicount_amount = (discount_amount_per * line_amount) / 100;
+  $(this).closest('tr').find('.discount_amount').val(dicount_amount);
+  $(this).closest('tr').find('.line_amount').trigger('calPOSLineAmount');
  });
 
 
- copy_pos_transaction_header_id();
+ //Calculate Header Amounts
+ $('body').on('calPOSHeaderAmount', '#total_amount', function () {
+  var total_amount_e = $(this);
+  var line_amount_sum = 0;
+  var discount_amount_sum = 0;
+  $('#form_line').find('.line_amount').each(function () {
+   line_amount_sum += +$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1");
+  });
+
+  $('#form_line').find('.discount_amount').each(function () {
+   discount_amount_sum += +$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1");
+  });
+
+  var total_amount = line_amount_sum - discount_amount_sum;
+  total_amount_e.val(total_amount);
+  $('#header_amount').val(line_amount_sum);
+  $('#discount_amount').val(discount_amount_sum);
+ });
+
+ $('#content').off('blur', '.unit_price, .quantity, .discount_amount, .line_amount').on('blur', '.unit_price, .quantity, .discount_amount, .line_amount', function () {
+  $('#total_amount').trigger('calPOSHeaderAmount');
+ });
+
+
+//Re calculate header amount on removing lines
+$('#content').off('click', '.remove_row_img').on('click', '.remove_row_img', function () {
+ if (($(this).closest('form').find('tbody').first().children().filter('tr').length) > 1) {
+  $(this).closest("tr").remove();
+ }else{
+  return;
+ }
+ var headerClassName = $('ul#js_saving_data').find('.headerClassName').data('headerclassname');
+ if (headerClassName && headerClassName !== 'undefined' && headerClassName === 'pos_transaction_header') {
+  $('#total_amount').trigger('calPOSHeaderAmount');
+ }
 });
+
+
+});
+
+
+
+
 
