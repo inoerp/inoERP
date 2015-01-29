@@ -798,7 +798,7 @@ function search_depreciation_id() {
 
 function search_asset_book() {
  global $f;
- $stmt = $f->select_field_from_object('fa_asset_book_id', fa_asset_book::find_all(), 'fa_asset_book_id', 'asset_book_name',  '', 'fa_asset_book_id', '', 1);
+ $stmt = $f->select_field_from_object('fa_asset_book_id', fa_asset_book::find_all(), 'fa_asset_book_id', 'asset_book_name', '', 'fa_asset_book_id', '', 1);
  return $stmt;
 }
 
@@ -813,6 +813,15 @@ function search_depreciation_period() {
  return $stmt;
 }
 
+function search_gl_period_name() {
+ global $f;
+ return $f->select_field_from_object('gl_period_id', gl_period::find_all(), 'gl_period_id', array('period_name', 'ledger_id'), '', 'gl_period_id', '', 1);
+}
+
+function search_show_details_cb() {
+ global $f;
+ return $f->checkBox_field('show_details', '' ,  'show_details');
+}
 
 function search_mds_name() {
  global $f;
@@ -839,6 +848,19 @@ function search_org_name() {
  $stmt = $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', '', 'org_id', '', '', '', '', 1);
  return $stmt;
 }
+
+function search_legal_org_name() {
+ global $f;
+ $stmt = $f->select_field_from_object('org_id', org::find_all_legal(), 'org_id', 'org', '', 'org_id');
+ return $stmt;
+}
+
+function search_legal_org_name_m() {
+ global $f;
+ $stmt = $f->select_field_from_object('org_id', org::find_all_legal(), 'org_id', 'org', '', 'org_id', '',  1);
+ return $stmt;
+}
+
 
 function search_co_number() {
  global $f;

@@ -143,6 +143,7 @@ if (!isset($readonly1)) {
       <tbody class="form_data_line_tbody gl_journal_line_values" >
        <?php
        $count = 0;
+//       $f = new inoform();
        foreach ($gl_journal_line_object as $gl_journal_line) {
         ?>         
         <tr class="gl_journal_line<?php echo $count ?>">
@@ -157,7 +158,7 @@ if (!isset($readonly1)) {
          </td>
          <td><?php form::text_field_wid2sr('gl_journal_line_id'); ?></td>
          <td><?php echo form::text_field('line_num', $$class_second->line_num, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
-         <td><?php $f->ac_field_d2('code_combination_id'); ?> </td>
+         <td><?php $f->ac_field_wid2('code_combination_id','dontCopy'); ?> </td>
          <td><?php form::number_field_wid2('total_dr'); ?></td>
          <td><?php form::number_field_wid2('total_cr'); ?></td>
          <td><?php form::number_field_wid2('total_ac_dr'); ?></td>

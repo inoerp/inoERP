@@ -150,7 +150,8 @@ $(document).ready(function () {
 
  onClick_addDetailLine(1, '.add_row_detail_img1');
 
- $('body').off('blur', '.item_number').on('blur', '.item_number', function () {
+ $('body').off('blur', '.item_number, .from_subinventory_id, .from_locator_id ')
+         .on('blur', '.item_number, .from_subinventory_id, .from_locator_id', function () {
   var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
   var trClass_d = '.' + trClass;
   var generation_type = $('#content').find(trClass_d).find('.serial_generation').val();
@@ -172,7 +173,7 @@ $(document).ready(function () {
   }
 
 
-  switch ($('#transaction_type_id').val()) {
+  switch ($('#transaction_type_id').val()) { 
    case '2' :
     if (generation_type === 'PRE_DEFINED') {
      $.when(getSerialNumber({
@@ -213,7 +214,8 @@ $(document).ready(function () {
 
  });
 
- $('body').off('blur', '.item_number').on('blur', '.item_number', function () {
+ $('body').off('blur', '.item_number, .from_subinventory_id, .from_locator_id ')
+         .on('blur', '.item_number, .from_subinventory_id, .from_locator_id',  function () {
   var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
   var trClass_d = '.' + trClass;
   var generation_type = $('#content').find(trClass_d).find('.lot_generation').val();

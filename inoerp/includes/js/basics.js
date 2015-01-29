@@ -3159,6 +3159,10 @@ $(document).ready(function () {
  $('#export_excel_allResult').on('click', function () {
   $('#download_all').submit();
  });
+ 
+ $('body').on('click', '#generate_report' , function () {
+ $('#program_header').submit();
+});
 
  show_dialog_box();
  animateCycle();

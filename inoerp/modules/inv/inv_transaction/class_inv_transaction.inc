@@ -1101,13 +1101,14 @@ class inv_transaction extends dbObject {
      //PPV if the Accrual & Standard Cost Amounts are differnt
      if ($accural_amount - $total_amount != 0) {
       $line_number++;
-      $ppv_amount = $accural_amount - $total_amount;
+      $ppv_amount = abs($accural_amount - $total_amount);
       $journal_line['line_number'] = $line_number;
       $journal_line['amount'] = $ppv_amount;
       $journal_line['account_id'] = $po_v_i->ppv_ac_id;
-      if ($ppv_amount > 0) {
+      if ($accural_amount - $total_amount > 0) {
        $journal_line['dr_cr'] = 'dr';
       } else {
+       $ppv_amount = abs($ppv_amount);
        $journal_line['dr_cr'] = 'cr';
       }
       array_push($journal_line_a, $journal_line);

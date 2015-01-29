@@ -28,6 +28,7 @@ if (!empty($_GET['class_name'])) {
 
  //start search
  $search_array = $$class->field_a;
+ pa($search_array);
  global $search_result_statement;
 
  //pre populate
@@ -105,9 +106,12 @@ if (!empty($_GET['class_name'])) {
  if ((!empty($_GET['report_name'])) && method_exists($$class, $_GET['report_name'][0])) {
   $report_name = $_GET['report_name'][0];
   $search_result_statement = call_user_func(array($$class, $report_name), $_GET);
-  echo '<div id="searchResult">';
+  echo '<div id="searchResult"><div id="search_result" class="search_report">';
+  echo '<ul class="inline-block"> <li id="export_excel_searchResult" class="flaticon-spreadsheet6 clickable" title="Export to Excel"></li>
+              <li id="print_searchResult" class="flaticon-print42 print clickable" title="Print"></li>
+             </ul>';
   echo $search_result_statement;
-  echo '</div></div>';
+  echo '</div></div></div>';
   return;
  } else if ((!empty($_GET['function_name']))) {
   $function_name = is_array($_GET['function_name']) ? $_GET['function_name'][0] : $_GET['function_name'];
@@ -186,7 +190,7 @@ if (!empty($_GET['class_name'])) {
    $sql .=" LIMIT {$per_page} ";
    $sql .=" OFFSET {$pagination->offset()}";
   }
-// echo "<br><br><br> sql is $sql";
+ echo "<br><br><br> sql is $sql";
   $search_result = $class::find_by_sql($sql);
 //  pa($search_result);
  }

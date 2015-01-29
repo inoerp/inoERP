@@ -174,7 +174,7 @@ $(document).ready(function () {
  });
 
 //popu for selecting PO number
- $('#content').on('click', '.select_po_number.select_popup', function () {
+ $('#content').off('click', '.select_po_number.select_popup').on('click', '.select_po_number.select_popup', function () {
   var rowClass = $(this).closest('tr').prop('class');
   var fieldClass = $(this).closest('td').find('.select_po_number').prop('class');
   localStorage.setItem("row_class", rowClass);

@@ -98,6 +98,7 @@ require_once(INC_GL . DS . "journal" . DS . "class_gl_journal_line.inc");
 require_once(INC_GL . DS . "journal" . DS . "class_gl_journal_line_v.inc");
 require_once(INC_GL . DS . "balance" . DS . "class_gl_balance_v.inc");
 require_once(INC_GL . DS . "balance" . DS . "class_gl_balance.inc");
+require_once(INC_GL . DS . "balance" . DS . "class_gl_trial_balance.inc");
 require_once(INC_MODULE . DS . "gl" . DS . "balance" . DS . "class_gl_unposted_balance_v.inc");
 require_once(INC_GL . DS . "payment_term" . DS . "class_payment_term.inc");
 require_once(INC_GL . DS . "payment_term" . DS . "class_payment_term_schedule.inc");

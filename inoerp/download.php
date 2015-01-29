@@ -1,8 +1,30 @@
 <?php
 
-require_once 'includes/functions/functions.inc';
-$str_var = $_POST["data"];
-$download_format = !empty($_POST['download_format']) ? $_POST['download_format'] : 'text_format';
+set_time_limit(0);
+include_once ('includes/basics/basics.inc');
+if (!empty($_POST) && !empty($_POST['program_name'])) {
+ if ((!empty($_POST['class_name'])) && (!empty($_POST['program_name']))) {
+  $class = $_POST['class_name'];
+  $program_name = $_POST['program_name'][0];
+  if (!empty($_POST['download_as_text'])) {
+   $download_as_text = 1;
+  } else {
+   $download_as_text = 0;
+  }
+
+  $$class = new $class;
+  $result = call_user_func(array($$class, $program_name), $_POST);
+  $array_var = json_decode(json_encode($result), true);
+  $download_format = !empty($_POST['download_format'][0]) ? $_POST['download_format'][0] : 'text_format';
+ }
+} else {
+ $str_var = $_POST["data"];
+ $array_var = unserialize(base64_decode($str_var));
+ $download_format = !empty($_POST['download_format']) ? $_POST['download_format'] : 'text_format';
+}
+
+
+
 
 switch ($download_format) {
  case 'excel_format':
@@ -22,35 +44,46 @@ switch ($download_format) {
   break;
 
  case 'text_format':
- case 'default' :
-  $format_extn = 'txt';
+ default :
+  $format_extn = '.txt';
   break;
 }
-$array_var = unserialize(base64_decode($str_var));
+
+//pa($array_var);
 
 download_send_headers("data_export_" . date("Y-m-d") . "$format_extn", $download_format);
 //download_send_headers("data_export_" . date("Y-m-d") . ".html");
 
 switch ($download_format) {
  case 'excel_format':
-  echo array2csv($array_var);
+  if (is_array($array_var)) {
+   echo array2csv($array_var);
+  }
   break;
 
  case 'xml_format':
-  echo array2xml($array_var);
+  if (is_array($array_var)) {
+   echo array2xml($array_var);
+  }
   break;
 
  case 'worddoc_format':
-  echo array2worddoc($array_var);
+  if (is_array($array_var)) {
+   echo array2worddoc($array_var);
+  }
   break;
 
  case 'pdf_format':
-  echo array2pdf($array_var);
+  if (is_array($array_var)) {
+   echo array2pdf($array_var);
+  }
   break;
 
  case 'text_format':
  case 'default' :
-  echo array2text($array_var);
+  if (is_array($array_var)) {
+   echo array2text($array_var);
+  }
   break;
 }
 

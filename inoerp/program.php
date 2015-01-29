@@ -3,22 +3,22 @@ if (!empty($_POST)) {
  include_once ('includes/basics/basics.inc');
  $postArray = get_postArray_From_jqSearializedArray($_POST['headerData']);
  if ((!empty($postArray['class_name'])) && (!empty($postArray['program_name']))) {
-	$class = $postArray['class_name'][0];
-	$program_name = $postArray['program_name'][0];
-	$p = new sys_program();
-	$p->program_name = $program_name;
-	$p->class = $class;
-	$p->parameters = serialize($postArray);
-	$p->status = 'Initiated';
-	$p->audit_trial();
-	try {
-	 $p->save();
+  $class = $postArray['class_name'][0];
+  $program_name = $postArray['program_name'][0];
+  $p = new sys_program();
+  $p->program_name = $program_name;
+  $p->class = $class;
+  $p->parameters = serialize($postArray);
+  $p->status = 'Initiated';
+  $p->audit_trial();
+  try {
+   $p->save();
    $dbc->confirm();
-	 echo "<div id='json_save_header'><div class='message'>The program is sucessfully saved; Program Id is " . $p->sys_program_id . '</div></div>';
-	} catch (Exception $e) {
-	 echo " Saving the program failed! " . $e->getMessage();
-	 return -99;
-	}
+   echo "<div id='json_save_header'><div class='message'>The program is sucessfully saved; Program Id is " . $p->sys_program_id . '</div></div>';
+  } catch (Exception $e) {
+   echo " Saving the program failed! " . $e->getMessage();
+   return -99;
+  }
  }
  return;
 }
@@ -29,6 +29,7 @@ global $s;
 if ((!empty($_GET['class_name'])) && (!empty($_GET['program_name']))) {
  $class_names = $_GET['class_name'];
  $program_name = $_GET['program_name'];
+ $program_type = !empty($_GET['program_type']) ? $_GET['program_type'] : '';
  $_GET['mode'] = 2;
 } else {
  $class_names[] = 'path';
@@ -41,19 +42,19 @@ if ((!empty($_GET['class_name'])) && (!empty($_GET['program_name']))) {
  $search_result_statement .= '<th> Search Details </th>';
  $search_result_statement .='</tr></thead>';
  If (!empty($all_search_paths)) {
-	$search_result_statement .= '<tbody>';
-	foreach ($all_search_paths as $key => $module_group) {
-	 $search_result_statement .= ' <tr class="major_row"><td>' . $key . '</td><td><table class="second">';
-	 foreach ($module_group as $paths) {
-		$search_result_statement .='<tr class="minor_row">';
-		$search_result_statement .='<td>' . $paths->name . '</td>';
-		$search_result_statement .='<td>' . $paths->description . '</td>';
-		$search_result_statement .='<td><a href="' . HOME_URL . $paths->path_link . '">' . HOME_URL . $paths->path_link . '</a></td>';
-		$search_result_statement .='</tr>';
-	 }
-	 $search_result_statement .='</table></td></tr>';
-	}
-	$search_result_statement .='</tbody>';
+  $search_result_statement .= '<tbody>';
+  foreach ($all_search_paths as $key => $module_group) {
+   $search_result_statement .= ' <tr class="major_row"><td>' . $key . '</td><td><table class="second">';
+   foreach ($module_group as $paths) {
+    $search_result_statement .='<tr class="minor_row">';
+    $search_result_statement .='<td>' . $paths->name . '</td>';
+    $search_result_statement .='<td>' . $paths->description . '</td>';
+    $search_result_statement .='<td><a href="' . HOME_URL . $paths->path_link . '">' . HOME_URL . $paths->path_link . '</a></td>';
+    $search_result_statement .='</tr>';
+   }
+   $search_result_statement .='</table></td></tr>';
+  }
+  $search_result_statement .='</tbody>';
  }
  $search_result_statement .='</table>';
  require_once(INC_BASICS . DS . "search_page.inc");
@@ -72,20 +73,22 @@ if ((!empty($class_names)) && (!empty($program_name))) {
  $s->setProperty('_initial_search_array', $$class->initial_search);
 
  if (property_exists($$class, $program_parameters)) {
-	$s->setProperty('_search_functions', $$class->$program_parameters);
+  $s->setProperty('_search_functions', $$class->$program_parameters);
  }
  $search_form = $s->program_form($$class);
 }
 ?>
 
-<?php 
+<?php
 if ($continue) {
- if (!empty($$class) && property_exists($$class, 'program_page_template_path')) {
+ if (!empty($$class) && !empty($program_type) && $program_type == 'download_report') {
+  $template_file_names = ['includes/basics/download_report.inc'];
+ } else if (!empty($$class) && property_exists($$class, 'program_page_template_path')) {
   $template_file_names = $class::$program_page_template_path;
  } else if (!empty($$class)) {
   $template_file_names = ['includes/basics/program_page.inc'];
  }
-  include_once(THEME_DIR . '/main_template.inc');
+ include_once(THEME_DIR . '/main_template.inc');
 } else {
  $continue = false;
  echo "<h2>Could n't call the header</h2>";
@@ -93,15 +96,16 @@ if ($continue) {
 }
 
 
-If (property_exists($class, 'js_fileName_prg')) { ?>
+If (property_exists($class, 'js_fileName_prg')) {
+ ?>
  <script src="<?php echo HOME_URL . $class::$js_fileName_prg; ?>"></script>	 
 <?php } ?>
 
- <script type="text/javascript">
+<script type="text/javascript">
  $(document).ready(function () {
   $.getScript("includes/js/program.js");
-      if (!$("link[href='includes/ecss/program.css']").length) {
-     $('<link href="includes/ecss/program.css" rel="stylesheet">').appendTo("head");
-    }
+  if (!$("link[href='includes/ecss/program.css']").length) {
+   $('<link href="includes/ecss/program.css" rel="stylesheet">').appendTo("head");
+  }
  });
 </script>

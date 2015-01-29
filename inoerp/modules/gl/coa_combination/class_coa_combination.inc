@@ -82,6 +82,7 @@ class coa_combination extends dbObject {
  public $pageTitle = " GL COA Combinatioins "; //page Title
  public $search = [
   '_show_update_path' => 1,
+  '_show_view_path' => 1,
  ];
  public $coa_combination_id;
  public $coa_id;
@@ -115,6 +116,10 @@ class coa_combination extends dbObject {
  public $prg_update_description_details = [
   'name' => 'Update Account Combination Description',
   'description' => 'Run update Description program',
+ ];
+ public $prg_all_combinations_details = [
+  'name' => 'All Account Combinations',
+  'description' => 'All Account Combinations',
  ];
 
  public static function find_all_from_coa($coa_id) {
@@ -200,7 +205,7 @@ class coa_combination extends dbObject {
 
   $sql .= "  LIMIT 0, $limit  ";
 
-  echo $sql;
+//  echo $sql;
   $result = self::find_by_sql($sql);
 
   return !(empty($result)) ? $result : false;
@@ -323,6 +328,10 @@ class coa_combination extends dbObject {
    }
   }
   return $this->message;
+ }
+
+ public function prg_all_combinations($seralized_parameters) {
+  return coa_combination::find_all();
  }
 
  public static function coa_combination_description() {
@@ -474,7 +483,7 @@ AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND vgl.code = cc.field2 AND coa.field2 = ol.option_line_code 
 AND cc.coa_combination_id = '{$cc_id}'
-) segment2 ,
+) segment2  LEFT JOIN
 
 (
 SELECT cc.coa_combination_id, cc.field3,  vgl.code, vgl.description as description3
@@ -491,7 +500,8 @@ AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND vgl.code = cc.field3 AND coa.field3 = ol.option_line_code 
 AND cc.coa_combination_id = '{$cc_id}'
-) segment3 ,
+) segment3 ON  segment3.coa_combination_id = segment2.coa_combination_id 
+LEFT JOIN 
 
 (
 SELECT cc.coa_combination_id, cc.field4,  vgl.code, vgl.description as description4, vgl.account_qualifier as account_qualifier4
@@ -508,7 +518,7 @@ AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND vgl.code = cc.field4 AND coa.field4 = ol.option_line_code 
 AND cc.coa_combination_id = '{$cc_id}'
-) segment4 
+) segment4 ON  segment4.coa_combination_id = segment3.coa_combination_id 
 
 LEFT JOIN 
 (
@@ -526,7 +536,7 @@ AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND vgl.code = cc.field5 AND coa.field5 = ol.option_line_code 
 AND cc.coa_combination_id = '{$cc_id}'
-) segment5  ON  segment4.coa_combination_id = segment5.coa_combination_id 
+) segment5  ON  segment5.coa_combination_id = segment4.coa_combination_id 
   LEFT JOIN 
 (
 SELECT cc.coa_combination_id, cc.field6,  vgl.code, vgl.description as description6
@@ -584,6 +594,12 @@ AND cc.coa_combination_id = '{$cc_id}'
 
   $result = self::find_by_sql($sql);
   $ret_a = [];
+
+  if (empty($result[0]->account_qualifier4)) {
+   echo $sql;
+   return;
+  }
+
   $ret_a['ac_type'] = $result[0]->account_qualifier4;
 
   $desc = '';

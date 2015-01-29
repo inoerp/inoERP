@@ -97,7 +97,7 @@ class search extends dbObject {
  }
 
  public function search_result_op() {
-$drop_down_icon = ino_search_dropDownSettings();
+  $drop_down_icon = ino_search_dropDownSettings();
   if (empty($this->_view_path)) {
    $this->_view_path = 'form.php?class_name=' . $this->_searching_class;
   }
@@ -129,7 +129,7 @@ $drop_down_icon = ino_search_dropDownSettings();
     if ($j > $total_columns - 2) {
      break;
     }
-    $search_result .= '<th data-field_name="'.$this->column_array_s[$j].'">'.$drop_down_icon . ucwords(str_replace('_', ' ', $this->column_array_s[$j])) . '</th>';
+    $search_result .= '<th data-field_name="' . $this->column_array_s[$j] . '">' . $drop_down_icon . ucwords(str_replace('_', ' ', $this->column_array_s[$j])) . '</th>';
    }
    $search_result .='</tr></thead>';
    If (!empty($this->result)) {
@@ -387,19 +387,29 @@ $drop_down_icon = ino_search_dropDownSettings();
  }
 
  public function program_form($class_obj) {
+  global $f;
+  if (!empty($_GET['program_type'])) {
+   $program_type = $_GET['program_type'];
+   $action = 'download.php ';
+   $target = '_blank';
+  } else {
+   $target = $action = $program_type = '';
+  }
+
   $class = $this->_searching_class;
   if (property_exists($class, 'field_a')) {
    $search_array = $class_obj->field_a;
   }
 //start of the srach statement
   $program_form_statement = "";
-  $program_form_statement .= "<form action=\"\" name=\"$this->_form_name\" method='POST' class=\"search_box $this->_form_name\" id=\"$this->_form_name\">";
+  $program_form_statement .= "<form action=\"$action\" name=\"$this->_form_name\" "
+   . " method='POST' class=\"search_box $this->_form_name\" target=\"$target\"  id=\"$this->_form_name\">";
 
   //start of first ul
   $program_form_statement .= '<ul class="program_form">';
   if (!empty($this->_search_functions)) {
    foreach ($this->_search_functions as $key => $value) {
-    $program_form_statement .= "<li id='".$value."' ><label class=\"label_$key\"> $key</label>";
+    $program_form_statement .= "<li id='" . $value . "' ><label class=\"label_$key\"> $key</label>";
     if (method_exists($class_obj, $value)) {
      $program_form_statement .= call_user_func(array($class_obj, $value));
     } else if (function_exists($value)) {
@@ -420,10 +430,14 @@ $drop_down_icon = ino_search_dropDownSettings();
    } else {
     $get_value = "";
    }
-   $name_bracketed = $value .'[]';
-   $program_form_statement .= "<li id='".$value."' ><label class=\"label_$value\">" . ucwords(str_replace('_', ' ', $value)) . "</label>";
+   $name_bracketed = $value . '[]';
+   $program_form_statement .= "<li id='" . $value . "' ><label class=\"label_$value\">" . ucwords(str_replace('_', ' ', $value)) . "</label>";
    $program_form_statement .= "<input type=\"text\" name=\"$name_bracketed\" class=\"$value text_search \"   size=\"15\" value=\"$get_value\" >";
    $program_form_statement .= '</li>';
+  }
+
+  if (!empty($program_type) && ($program_type == 'download_report')) {
+   $program_form_statement .='<li><label>Download Format</label>'.$f->select_field_from_array('download_format', dbObject::$download_format, '').'</li>';
   }
 
   $program_form_statement .= "<li><label>Dynamic Criteria </label>";
@@ -445,7 +459,11 @@ $drop_down_icon = ino_search_dropDownSettings();
 //   . " class=\"reset button\" id=\"search_reset_btn\" name=\"class_name\" value=\"$class\" > Reset All</a></li>";
   $program_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"class_name\" value=\"$class\" class=\"search class_name\" ></li>";
   if ($this->_searching_class != 'convertToProd') {
-   $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program button\" value=\"Submit\" id=\"save_program\"></li>";
+   if (!empty($program_type) && ($program_type == 'download_report')) {
+    $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program button\" value=\"Generate Report\" id=\"generate_report\"></li>";
+   } else {
+    $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program button\" value=\"Submit\" id=\"save_program\"></li>";
+   }
   } else if (convertToProd::$allow_conversion) {
    $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program button\" value=\"Submit\" id=\"save_program\"></li>";
   } else {
