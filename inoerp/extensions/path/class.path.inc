@@ -327,9 +327,9 @@ class path extends dbObject {
    $path->findBy_id($path_id);
    $url = $path->fullPath($path->path_link);
    if ($this->show_description) {
-    $allPaths .= "<li title=\"$path->name\" class='parent_menu expandable'>" . '<a href="' . $url . '">' . $path->description . '</a>';
+    $allPaths .= "<li title=\"$path->name\" class='parent_menu expandable {$path->name} '>" . '<a href="' . $url . '">' . $path->description . '</a>';
    } else {
-    $allPaths .= "<li title=\"$path->description\" class='parent_menu expandable'>" . '<a href="' . $url . '">' . $path->name . '</a>';
+    $allPaths .= "<li title=\"$path->description\" class='parent_menu expandable {$path->name} '>" . '<a href="' . $url . '">' . $path->name . '</a>';
    }
    $allPaths .= '<ul class="child_menu">';
    $childs = $path->findAll_childOfPartent($path_id);
@@ -338,9 +338,9 @@ class path extends dbObject {
     if ($key) {
      $url_1 = $path->fullPath($child_paths->path_link);
      if ($this->show_description) {
-      $allPaths .= "<li title=\"$child_paths->name\" class='expandable'>" . '<a href="' . $url_1 . '">' . $child_paths->description . '</a>';
+      $allPaths .= "<li title=\"$child_paths->name\" class='expandable {$path->name} '>" . '<a href="' . $url_1 . '">' . $child_paths->description . '</a>';
      } else {
-      $allPaths .= "<li title=\"$child_paths->description\" class='expandable'>" . '<a href="' . $url_1 . '">' . $child_paths->name . '</a>';
+      $allPaths .= "<li title=\"$child_paths->description\" class='expandable {$path->name} '>" . '<a href="' . $url_1 . '">' . $child_paths->name . '</a>';
      }
      $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths);
      unset($allowed_path_ids[$key]);
@@ -359,9 +359,9 @@ class path extends dbObject {
     $child_paths = $path->findBy_id($path_id);
     $url_1 = $path->fullPath($child_paths->path_link);
     if ($this->show_description) {
-     $allPaths .= "<li title=\"$child_paths->name\" class='expandable'>" . '<a href="' . $url_1 . '">' . $child_paths->description . '</a>';
+     $allPaths .= "<li title=\"$child_paths->name\" class='expandable {$path->name} '>" . '<a href="' . $url_1 . '">' . $child_paths->description . '</a>';
     } else {
-     $allPaths .= "<li title=\"$child_paths->description\" class='expandable'>" . '<a href="' . $url_1 . '">' . $child_paths->name . '</a>';
+     $allPaths .= "<li title=\"$child_paths->description\" class='expandable {$path->name} '>" . '<a href="' . $url_1 . '">' . $child_paths->name . '</a>';
     }
 
     $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths);
@@ -383,9 +383,9 @@ class path extends dbObject {
    $path->findBy_id($path_id);
    $url = $path->fullPath($path->path_link);
    if ($this->show_description) {
-    $allPaths .= "<div title=\"$path->name\" class='panel-heading'>" . '<a href="' . $url . '">' . $path->description . '</a></div>';
+    $allPaths .= "<div title=\"$path->name\" class='panel-heading {$path->name} '>" . '<a href="' . $url . '">' . $path->description . '</a></div>';
    } else {
-    $allPaths .= "<div title=\"$path->description\" class='panel-heading'>" . '<a href="' . $url . '">' . $path->name . '</a></div>';
+    $allPaths .= "<div title=\"$path->description\" class='panel-heading {$path->name} '>" . '<a href="' . $url . '">' . $path->name . '</a></div>';
    }
    $allPaths .= '<div class="panel-body"><ul class="child_menu">';
    $childs = $path->findAll_childOfPartent($path_id);
@@ -443,7 +443,7 @@ class path extends dbObject {
    $key = array_search($child_paths->path_id, $allowed_path_ids);
    if ($key) {
     $url = $path->fullPath($child_paths->path_link);
-    $allPaths .= "<li title=\"$child_paths->description\" class='expandable'>" . '<a href="' . $url . '">' . $child_paths->name . '</a>';
+    $allPaths .= "<li title=\"$child_paths->description\" class='expandable {$path->name} '>" . '<a href="' . $url . '">' . $child_paths->name . '</a>';
     $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths);
     $allPaths .= '</li>';
     unset($allowed_path_ids[$key]);

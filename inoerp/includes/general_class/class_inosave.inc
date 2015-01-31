@@ -247,7 +247,7 @@ class inosave extends dbObject {
      return;
     } else if ($before_save_result == 10) {
 //     echo "<br> All data are sucessfully saved @ before save "; //before save completed all activities
-          return;
+     return;
     }
    }
 
@@ -376,6 +376,11 @@ class inosave extends dbObject {
   $primaryColumn = $this->_primary_column;
   $primaryColumn2 = $this->_primary_column2;
   $primaryColumn3 = $this->_primary_column3;
+  if (property_exists($class, 'dont_show_save_msg')) {
+   $dont_show_save_msg = true;
+  } else {
+   $dont_show_save_msg = false;
+  }
   $postArray = get_postArray_From_jqSearializedArray($_POST['headerData']);
   $_POST = $postArray;
 //	if ($class == 'user') {
@@ -385,29 +390,40 @@ class inosave extends dbObject {
    $$class = $this->save_class($class);
   }
 
-
-  if ((!empty($$class)) && (count($$class) > 1)) {
-   echo '<div class="message">Data is sucessfully saved! </div>';
-   echo '<ul id="linids">';
-   foreach ($$class as $array) {
-    echo '<li class="' . $array->$keyField . '">' . $array->$primaryColumn . '</li>';
-   }
-   echo '</ul>';
-  } elseif (!empty($$class->$primaryColumn)) {
-   echo '<div class="message">Data is sucessfully saved!  ' . $primaryColumn . ' is </div> ';
-   echo '<div id="headerId">' . $$class->$primaryColumn . '</div>';
-   if (!empty($primaryColumn2)) {
-    echo '<div id="primary_column2">' . $$class->$primaryColumn2 . '</div>';
-   }
-   if (!empty($primaryColumn3)) {
-    echo '<div id="primary_column3">' . $$class->$primaryColumn3 . '</div>';
+  if (!$dont_show_save_msg) {
+   if ((!empty($$class)) && (count($$class) > 1)) {
+    echo '<div class="message">Data is sucessfully saved! </div>';
+    echo '<ul id="linids">';
+    foreach ($$class as $array) {
+     echo '<li class="' . $array->$keyField . '">' . $array->$primaryColumn . '</li>';
+    }
+    echo '</ul>';
+   } else if (!empty($$class->$primaryColumn)) {
+    echo '<div class="message">Data is sucessfully saved!  ' . $primaryColumn . ' is </div> ';
+    echo '<div id="headerId">' . $$class->$primaryColumn . '</div>';
+    if (!empty($primaryColumn2)) {
+     echo '<div id="primary_column2">' . $$class->$primaryColumn2 . '</div>';
+    }
+    if (!empty($primaryColumn3)) {
+     echo '<div id="primary_column3">' . $$class->$primaryColumn3 . '</div>';
+    }
+   } else {
+    global $ie_array_page;
+    global $ie;
+    echo '<div class="message"> Action Completed</div> ';
+    if (!empty($ie_array_page)) {
+     echo $ie->show_pageErrors($ie_array_page);
+    }
    }
   } else {
-   global $ie_array_page;
-   global $ie;
-   echo '<div class="message"> Action Completed</div> ';
-   if (!empty($ie_array_page)) {
-    echo $ie->show_pageErrors($ie_array_page);
+   if (!empty($$class->$primaryColumn)) {
+    echo '<div id="headerId" class="hidden">' . $$class->$primaryColumn . '</div>';
+    if (!empty($primaryColumn2)) {
+     echo '<div id="primary_column2" class="hidden">' . $$class->$primaryColumn2 . '</div>';
+    }
+    if (!empty($primaryColumn3)) {
+     echo '<div id="primary_column3" class="hidden">' . $$class->$primaryColumn3 . '</div>';
+    }
    }
   }
 
@@ -512,8 +528,7 @@ class inosave extends dbObject {
  }
 
  public function json_save($json_data = true) {
-  pa($_POST);
-  if (!empty($_POST['headerData'])) {
+    if (!empty($_POST['headerData'])) {
    $this->save_header();
   }
 

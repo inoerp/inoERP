@@ -2346,95 +2346,6 @@ function getDBReportList(options) {
  });
 }
 
-//function inoAutoComplete(options) {
-// var defaults = {
-//  min_length: 3
-// };
-// var settings = $.extend({}, defaults, options);
-// if (settings.select_class === 'undefined') {
-//  settings.select_class = 'select' + settings.field_name;
-// }
-// alert(settings.other_options);
-// var primary_column1_h = '#' + settings.primary_column1;
-// var select_class_d = '.' + settings.select_class;
-// return $('#content').on("focus.nsAutoComplete", select_class_d, function (e) {
-//  var primary_column1_v = $(primary_column1_h).val();
-//  e.preventDefault();
-//  if (!$(this).data("autocomplete")) {
-//   var auto_element = this;
-//   $(this).autocomplete({
-//    source: function (request, response) {
-//     $.ajax({
-//      url: settings.json_url,
-//      dataType: "json",
-//      data: {
-//       action: 'search',
-//       field_name: settings.field_name,
-//       primary_column1: primary_column1_v,
-//       primary_column2: settings.primary_column2,
-//       term: request.term,
-//       other_options: 'A',
-//       ino_auto_complete: 'X'
-//      },
-//      success: function (data) {
-//       response(data);
-//      },
-//      error: function (request, errorType, errorMessage) {
-//       alert("Error : " + errorType + ' with message ' + errorMessage);
-//       $(this).autocomplete("close");
-//      }
-//     });
-//    },
-//    autoFocus: true,
-//    response: function (event, ui) {
-//     if (ui.content.length === 1)
-//     {
-//      $(this).val(ui.content[0].label);
-//      var elemenType = $(this).parent().prop('tagName');
-//      $.each(ui.content[0], function (key, value) {
-//       var v_d = '.' + key;
-//       if (elemenType === 'LI') {
-//        $(auto_element).closest("ul").find(v_d).val(value);
-//       } else if (elemenType === 'TD') {
-//        var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
-//        $('#form_line').find(trClass).find(v_d).val(value);
-//       }
-//      });
-//      //close the auto complete
-//      $(this).autocomplete("close");
-//     } else if (ui.content.length === 0) {
-//      alert('No Data Found');
-//      $(this).attr('value', '');
-//      //close the auto complete
-//      $(this).autocomplete("close");
-//     }
-//
-//    },
-//    //select
-//    select: function (event, ui) {
-//     $(this).val(ui.item.label);
-//     var elemenType = $(this).parent().prop('tagName');
-//     $.each(ui, function (key2, value) {
-//      $.each(value, function (value_k, value_v) {
-//       var v_d = '.' + value_k;
-//       if (elemenType === 'LI') {
-//        $(auto_element).closest("ul").find(v_d).val(value_v);
-//       } else if (elemenType === 'TD') {
-//        var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
-//        $('#form_line').find(trClass).find(v_d).val(value_v);
-//       }
-//      });
-//     });
-//
-//     //close the auto complete
-//     $(this).autocomplete("close");
-//    },
-//    minLength: settings.min_length
-//   });
-//  }
-// });
-//}
-
 function printLabel(options) {
  var defaults = {
   json_url: 'modules/bc/static_label/json_static_label.php',
@@ -2610,6 +2521,7 @@ function getOpenPeriodsFromLedgerId(options) {
  return $.ajax({
   url: settings.json_url,
   type: 'get',
+  dataType: 'json',
   data: {
    gl_ledger_id: settings.gl_ledger_id,
    find_open_periods: 1
@@ -2620,6 +2532,48 @@ function getOpenPeriodsFromLedgerId(options) {
      switch (key) {
       case 'period_name_stmt':
        $('#gl_period_id').replaceWith(value);
+       break;
+
+      default :
+       break;
+     }
+
+    });
+   }
+  },
+  complete: function () {
+   $('.show_loading_small').hide();
+  },
+  beforeSend: function () {
+   $('.show_loading_small').show();
+  },
+  error: function (request, errorType, errorMessage) {
+   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+  }
+ });
+}
+
+//POS Terminal Number
+function save_posTerminalName(options) {
+ var defaults = {
+  json_url: 'modules/pos/transaction/json_pos_transaction.php',
+  terminal_name: $('#terminal_name').val()
+ };
+ var settings = $.extend({}, defaults, options);
+
+ return $.ajax({
+  url: settings.json_url,
+  type: 'get',
+  data: {
+   terminal_name: settings.terminal_name,
+   save_terminal_name: 1
+  },
+  success: function (result) {
+   if (result) {
+    $.each(result, function (key, value) {
+     switch (key) {
+      case 'result':
+       alert(value);
        break;
 
       default :
@@ -3159,10 +3113,10 @@ $(document).ready(function () {
  $('#export_excel_allResult').on('click', function () {
   $('#download_all').submit();
  });
- 
- $('body').on('click', '#generate_report' , function () {
- $('#program_header').submit();
-});
+
+ $('body').on('click', '#generate_report', function () {
+  $('#program_header').submit();
+ });
 
  show_dialog_box();
  animateCycle();

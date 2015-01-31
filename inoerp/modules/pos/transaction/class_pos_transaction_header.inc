@@ -19,8 +19,9 @@ class pos_transaction_header extends dbObject {
  public static $table_name = "pos_transaction_header";
  public static $primary_column = "pos_transaction_header_id";
  public static $dependent_classes = ['pos_transaction_line'];
- public static $key_column = "terminal_number";
- public static $module = "mdm";
+ public static $key_column = "terminal_name";
+ public static $module = "pos";
+ public static $dont_show_save_msg = true;
  public static $system_info = [
   'name' => 'POS Transaction',
   'number' => '9402',
@@ -36,7 +37,7 @@ class pos_transaction_header extends dbObject {
  ];
  public $field_a = [
   'pos_transaction_header_id',
-  'terminal_number',
+  'terminal_name',
   'currency_code',
   'header_amount',
   'tax_amount',
@@ -57,7 +58,7 @@ class pos_transaction_header extends dbObject {
   'pos_transaction_header_id',
  ];
  public $requiredField = [
-  'terminal_number'
+  'terminal_name'
  ];
  public $search = [
   '_show_update_path' => 1,
@@ -65,7 +66,7 @@ class pos_transaction_header extends dbObject {
  ];
  public $pageTitle = " Point Of Sales "; //page Title
  public $pos_transaction_header_id;
- public $terminal_number;
+ public $terminal_name;
  public $currency_code;
  public $header_amount;
  public $tax_amount;

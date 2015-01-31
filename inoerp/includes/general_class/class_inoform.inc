@@ -80,13 +80,13 @@
    echo <<<EOD
 			 <ul id="form_top_image" class="draggable">
         <li class="show_loading_small"><img src="$homeUrl/themes/images/form/small_loading_bar.gif"></li>	
-        <li class='flaticon-refresh57 clickable' id='refresh_button' title='Refresh'></li>
-        <li><a class='flaticon-new104 clickable' Title="Quick Entry" id="new_object_button" href="$current_page_path"></a></li>
-        <li><a class='flaticon-document162 clickable' Title="New Document" id="new_page_button" href="$current_page_path"></a></li>
-    		<li class='flaticon-done clickable' id='save' title='Save'></li>
-        <li class='flaticon-delete82 clickable' id='delete_button' title='Delete'></li>
-        <li class='flaticon-round60 clickable' id='remove_row_button' title='Remove'></li>
-        <li class='flaticon-print42 clickable print' id='print_searchResult' title='Print'></li>
+        <li class='fa fa-refresh clickable' id='refresh_button' title='Refresh'></li>
+        <li><a class='fa fa-file-text-o clickable' Title="New Document" id="new_page_button" href="$current_page_path"></a></li>
+    		<li class='fa fa-save clickable' id='save' title='Save'></li>
+        <li><a class='fa fa-eraser clickable' Title="Clear All, Quick Entry" id="new_object_button" href="$current_page_path"></a></li>
+        <li class='fa fa-trash-o clickable' id='delete_button' title='Delete'></li>
+        <li class='fa fa-remove clickable' id='remove_row_button' title='Remove'></li>
+        <li class='fa fa-print clickable print' id='print_searchResult' title='Print'></li>
 </ul>
 EOD;
   }

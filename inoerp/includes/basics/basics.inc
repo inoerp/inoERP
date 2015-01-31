@@ -203,6 +203,7 @@ require_once(INC_BOM . DS . "bom_routing" . DS . "class.bom_routing_line.inc");
 require_once(INC_BOM . DS . "bom_routing" . DS . "class.bom_routing_detail.inc");
 require_once(INC_MODULE . DS . "bom" . DS . "bom_routing" . DS . "class_bom_routing_v.inc");
 require_once(INC_MODULE . DS . "bom" . DS . "bom_routing" . DS . "class_bom_routing_line_v.inc");
+require_once(INC_MODULE . DS . "pos" . DS . "terminal" . DS . "class_pos_terminal.inc");
 require_once(INC_MODULE . DS . "pos" . DS . "transaction" . DS . "class_pos_transaction_header.inc");
 require_once(INC_MODULE . DS . "pos" . DS . "transaction" . DS . "class_pos_transaction_line.inc");
 require_once(INC_MODULE . DS . "pos" . DS . "tt" . DS . "class_pos_tt_header.inc");
