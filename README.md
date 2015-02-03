@@ -5,13 +5,9 @@ Demo: <http://demo.inoideas.org/extensions/user/user_login.php>
 
 Homepage: <http://inoideas.org/>
 
-Video Documentation
+Video Documentation: <http://youtube.com/embed/AS8idx2Cg_U?list=PLI9s_lIFpC099xADLymQcDCmrDhnkxcjM>
 
-<http://youtube.com/embed/AS8idx2Cg_U?list=PLI9s_lIFpC099xADLymQcDCmrDhnkxcjM>
-
-Facebook
-
-<https://www.facebook.com/inoerp>
+Facebook: <https://www.facebook.com/inoerp>
 
 Introduction
 ------------
