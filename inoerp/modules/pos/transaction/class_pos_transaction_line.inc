@@ -7,6 +7,11 @@ class pos_transaction_line extends dbObject {
  public static $parent_primary_column = "pos_transaction_header_id";
  public static $key_column = "item_number";
  public static $module = "pos";
+ public static $status_a = [
+  'E' => 'Entered',
+  'F' => 'Sync Failed',
+  'S' => 'Sync Completed'
+ ];
  public $field_a = [
   'pos_transaction_line_id',
   'pos_transaction_header_id',
@@ -18,6 +23,7 @@ class pos_transaction_line extends dbObject {
   'discount_percentage',
   'discount_amount',
   'discount_code',
+  'status',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -42,6 +48,7 @@ class pos_transaction_line extends dbObject {
  public $discount_percentage;
  public $discount_amount;
  public $discount_code;
+ public $status;
  public $created_by;
  public $creation_date;
  public $last_update_by;

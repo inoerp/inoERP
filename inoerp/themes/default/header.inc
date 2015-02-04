@@ -74,7 +74,7 @@
      ?>
      <?php if ($show_header_links) { ?>
       <div class="social-icons">
-       <span><a class="flaticon-list90 clickable erp_dashborad" href="<?php echo HOME_URL ?>form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
+       <span><a class="fa fa-dashboard clickable erp_dashborad" href="<?php echo HOME_URL ?>form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
       </div><!-- end social icons -->
      <?php } ?>
 

@@ -61,11 +61,3 @@ if (($content_privilage >= 6) && ($mode == 9)) {
  }
 }
 ?>
-<script type="text/javascript">
- $(document).ready(function () {
-//  $('body').on('click', '#header_top .menu a',function(e){
-//  e.preventDefault();
-//  window.location.replace($(this).prop('href'));
-//});
- });
-</script>

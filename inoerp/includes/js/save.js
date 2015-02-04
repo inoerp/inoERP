@@ -47,8 +47,9 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
   if ($(div).length > 1) {
    $(".error").append(div);
   }
-  var rollbackMsg = $(result).filter('.rollback_msg').html();
-  $(".error").append(rollbackMsg);
+  
+  var message = $(result).find('.rollback_msg, .message').html();
+  $(".error").append('<br>'+message);
   if (primary_column_id) {
    var primary_column_class = primary_column_id.replace('#', '.');
    var header_id = $(result).find('div#headerId').html();

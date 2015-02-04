@@ -11,7 +11,7 @@
   display:none;
  }
  #content{ 
-  
+
   display: block;
   height: auto;
   overflow: visible;
@@ -1297,4 +1297,20 @@ ul.inline-block {
  position: absolute;
  top: 30px;
  right: 100px;
+}
+
+#divider-bar{
+ position: absolute;
+ margin: 0px;
+ font-size: 1px;
+ text-align: left;
+ overflow: hidden;
+ z-index: 1000;
+ cursor: w-resize;
+ width: 4px;
+ min-height: 100%;
+ background-color: #eee;
+ left: 16.6%;
+ overflow: hidden;
+ margin-top:-20px;
 }

@@ -4756,12 +4756,30 @@ span.heading{
  position: relative;
  padding: 2px;
  display: block;
-float: right;
+ float: right;
 }
 
-#form_top_image{
+#form_top_image {
  display: block;
- float:right;
+ float: right;
+
+}
+
+ul#form_top_image li {
+ font-size: 20px;
+ font-style: normal;
+ color: #246204;
+ margin-left: 10px;
+}
+
+
+#form_top_image li a, #form_top_image .fa-refresh{
+ color: #246204;
+ font-size: 18px;
+}
+
+#form_top_image .fa-trash-o{
+ color: rgba(249, 20, 20, 0.75);
 }
 
 .class_detail_form{
@@ -4841,7 +4859,7 @@ fieldset.form_detail_data_fs {
  padding: 0 !important;
 }
 
- .mainbar{
+.mainbar{
  float: left;
  min-height: 1px;
  padding-right: 15px;
@@ -4853,7 +4871,7 @@ fieldset.form_detail_data_fs {
 }
 
 .nav > li > a {
-    padding: 5px 10px !important;
+ padding: 5px 10px !important;
 }
 
 #header-style-1 .nav-pills{

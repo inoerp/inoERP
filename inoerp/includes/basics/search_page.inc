@@ -217,8 +217,8 @@
                ?>
                <!--download page completion-->	 
               </li>
-              <li id="export_excel_searchResult" class="flaticon-spreadsheet6 clickable" title="Export to Excel"></li>
-              <li id="print_searchResult" class="flaticon-print42 print clickable" title="Print"></li>
+              <li id="export_excel_searchResult" class="clickable" title="Export to Excel"><i class="fa fa-file-excel-o"></i></li>
+              <li id="print_searchResult" class="print clickable" title="Print"><i class="fa fa-print"></i></li>
              </ul>
             </div>
            <?php } ?>

@@ -15,10 +15,7 @@
           Transaction Id</label><?php echo form::number_field_drs('pos_transaction_header_id'); ?>
          <a name="show" href="form.php?class_name=pos_transaction_header&<?php echo "mode=$mode"; ?>" class="show document_id pos_transaction_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
         </li>
-        <li><label>Terminal #</label><?php
-         $f = new inoform();
-         echo $f->text_field_dm('terminal_number');
-         ?> </li>
+        <li><label>Terminal #</label><?php     echo $f->text_field_dm('terminal_name');       ?> </li>
         <li><label>Line Sum Amount</label><?php echo $f->number_field('header_amount', $$class->header_amount,'','header_amount'); ?> </li>
         <li><label>Tax</label><?php echo $f->number_field('tax_amount', $$class->tax_amount,'','tax_amount'); ?> </li>
         <li><label>Discount</label><?php echo $f->number_field('discount_amount', $$class->discount_amount,'','discount_amount'); ?> </li>
@@ -71,6 +68,7 @@
          <th>Discount Amount</th>
          <th>Line Amount</th>
          <th>Final Amount</th>
+         <th>Status</th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody pos_transaction_line_values" >
@@ -99,6 +97,7 @@
           <td><?php echo $f->number_field('discount_amount', $$class_second->discount_amount,'','','medium'); ?></td>
           <td><?php echo $f->number_field('line_amount', $$class_second->line_amount,'','','medium'); ?></td>
           <td><?php echo $f->number_field('amount_after_discount', $$class_second->amount_after_discount,'','','medium'); ?></td>
+          <td><?php echo $f->select_field_from_array('status', pos_transaction_line::$status_a , $$class_second->status,'','','small'); ?></td>
          </tr>
          <?php
          $pos_transaction_line_object_ai->next();

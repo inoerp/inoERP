@@ -50,7 +50,7 @@
        <?php
        if ((isset($category)) && (count($category) > 0)) {
         foreach ($category as $obj) {
-         echo '<li><label><span class="flaticon-delete82 clickable delete_category" title="Delete Category"></span></label>';
+         echo '<li><label><span class="clickable delete_category" title="Delete Category"><i class="fa fa-trash-o"></i></span></label>';
          echo $f->select_field_from_object('category_id', category::major_categories(), 'category_id', 'category', $obj->category_id, '', 'category_id', '', 1);
          echo '</li>';
         }

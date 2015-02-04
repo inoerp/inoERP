@@ -13,7 +13,8 @@ function start_next_program() {
 		//update the status to inprogress
 	$p->status = 'inprogress';
 	$p->save();
-	
+	$dbc->confirm();
+  
 	$class = $p->class;
 	$$class = new $class;
 	try {

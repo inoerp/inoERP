@@ -75,8 +75,9 @@ class ar_transaction_type extends dbObject {
   'bu_org_id',
   'legal_org_id',
  ];
+ 
  public $ar_transaction_type_id;
- public $ar_transaction_type_i;
+ public $ar_transaction_type;
  public $transaction_class;
  public $bu_org_id;
  public $legal_org_id;

@@ -125,31 +125,6 @@ $(document).ready(function() {
  });
 
 
- //Coa auto complete
-// var coaCombination = new autoCompleteMain();
-// var coa_id = $('#coa_id').val();
-// coaCombination.json_url = 'modules/gl/coa_combination/coa_search.php';
-// coaCombination.primary_column1 = coa_id;
-// coaCombination.select_class = 'select_account';
-// coaCombination.min_length = 4;
-// coaCombination.autoComplete();
-
-////popu for selecting accounts
-// $('#content').on('click', '.account_popup', function() {
-//	var rowClass = $(this).closest('tr').prop('class');
-//	var fieldClass = $(this).closest('td').find('.select_account').prop('class');
-//	var coa_id = $('#coa_id').val();
-//	localStorage.setItem("row_class", rowClass);
-//	localStorage.setItem("field_class", fieldClass);
-//	var link = 'select.php?class_name=coa_combination&coa_id=' + coa_id;
-//		if ($(this).siblings('.code_combination_id').val()) {
-//	 link += '&combination=' + $(this).siblings('.code_combination_id').val();
-//	}
-//	localStorage.setItem("reset_link_ofSelect", link);
-//	void window.open(link, '_blank',
-//					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-// });
-
  //Select the header id
  $(".gl_journal_header_id.select_popup").click(function() {
 	void window.open('select.php?class_name=gl_journal_header', '_blank',
@@ -157,57 +132,7 @@ $(document).ready(function() {
 	return false;
  });
 
- //Get the header id on find button click
-// $('a.show.gl_journal_header_id').click(function() {
-//	var gl_journal_header_id = $('#gl_journal_header_id').val();
-////$(this).prop('href','po.php?po_header_id=' + poId);
-//	$(this).attr('href', modepath() + 'gl_journal_header_id=' + gl_journal_header_id);
-// });
-//
-//
-// onClick_add_new_row('gl_journal_line', 'gl_journal_line_values', 2, 'status');
-//
-////context menu
-// var classContextMenu = new contextMenuMain();
-// classContextMenu.docHedaderId = 'gl_journal_header_id';
-// classContextMenu.docLineId = 'gl_journal_line_id';
-// classContextMenu.btn1DivId = 'gl_journal_header';
-// classContextMenu.btn2DivId = 'form_line';
-// classContextMenu.trClass = 'gl_journal_line';
-// classContextMenu.tbodyClass = 'form_data_line_tbody';
-// classContextMenu.noOfTabbs = 3;
-// classContextMenu.contextMenu();
-
-// deleteData('json.po.php');
-
-////before save & save function
-//  var classSave = new saveMainClass();
-// classSave.json_url = 'form.php?class_name=gl_journal_header';
-// classSave.form_header_id = 'gl_journal_header';
-// classSave.primary_column_id = 'gl_journal_header_id';
-// classSave.line_key_field = 'code_combination_id';
-// classSave.single_line = false;
-// classSave.enable_select = true;
-// classSave.savingOnlyHeader = false;
-// classSave.headerClassName = 'gl_journal_header';
-// classSave.lineClassName = 'gl_journal_line';
-// classSave.saveMain(beforeSave);
-
- //Reverse Journal
-// $('#change_satus').on('change', function() {
-//	var classSave = new saveMainClass();
-//	classSave.json_url = 'form.php?class_name=gl_journal_header';
-//	classSave.form_header_id = 'gl_journal_header';
-//	classSave.primary_column_id = 'gl_journal_header_id';
-//	classSave.single_line = false;
-//	classSave.enable_select = true;
-//	classSave.savingOnlyHeader = false;
-//	classSave.headerClassName = 'gl_journal_header';
-//	classSave.saveMain();
-//	$("#save").trigger("click");
-// });
-
-
+ 
  $('#action').on('change', function() {
 	var headerId = $('#gl_journal_header_id').val();
 	if ($(this).val() === 'REVERSED') {
@@ -228,5 +153,7 @@ $(document).ready(function() {
 	 $('#content').find(divId).attr('disabled', false);
 	});
  });
+ 
+ deleteData('form.php?class_name=gl_journal_header&line_class_name=gl_journal_line');
 
 });

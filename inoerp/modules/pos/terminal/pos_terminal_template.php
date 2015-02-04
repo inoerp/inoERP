@@ -15,7 +15,7 @@
       Terminal Id</label><?php echo $f->text_field_dr('pos_terminal_id'); ?>
       <a name="show" href="form.php?class_name=pos_terminal&<?php echo "mode=$mode"; ?>" class="show document_id pos_terminal_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
     </li>
-    <li><label>Inventory</label><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>    </li>
+    <li><label>Store</label><?php echo $f->select_field_from_object('sd_store_id', sd_store::find_all(), 'sd_store_id', 'store_name', $$class->sd_store_id, 'sd_store_id', '', 1, $readonly); ?>    </li>
     <li><label>Terminal Name</label><?php $f->text_field_dm('terminal_name'); ?></li>
     <li><label>Location </label><?php echo $f->select_field_from_object('location_id', address::find_all() , 'address_id', 'address_name',$$class->location_id,'location_id'); ?>    </li>
     <li><label>Description</label><?php $f->text_field_d('description'); ?></li>
@@ -34,8 +34,8 @@
         </div>
         <div id ="display_comment_form">
          <?php
-         $reference_table = 'org';
-         $reference_id = $$class->org_id;
+         $reference_table = 'pos_terminal';
+         $reference_id = $$class->pos_terminal_id;
          ?>
         </div>
         <div id="new_comment">

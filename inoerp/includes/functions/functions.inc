@@ -849,6 +849,12 @@ function search_org_name() {
  return $stmt;
 }
 
+function search_sd_store() {
+ global $f;
+ $stmt = $f->select_field_from_object('sd_store_id', sd_store::find_all(), 'sd_store_id', 'store_name', '', 'sd_store_id');
+ return $stmt;
+}
+
 function search_legal_org_name() {
  global $f;
  $stmt = $f->select_field_from_object('org_id', org::find_all_legal(), 'org_id', 'org', '', 'org_id');
@@ -986,7 +992,7 @@ function search_item_id_m_from() {
 }
 
 function adjustment_ac_id() {
- $stmt = "<input id='adjustment_ac_id' class='textfield select_account adjustment_ac_id ' 
+ $stmt = "<input id='adjustment_ac_id' class='textfield select_account adjustment_ac_id' 
 type='text' title='' placeholder='Adjustment Ac' size='28' maxlength='256' 
 name='adjustment_ac_id'>
 <img class='account_popup' src=" . HOME_URL . "themes/images/serach.png>";
@@ -1080,8 +1086,8 @@ function show_download_button($result_data) {
      <input type="radio" name="download_format" value="worddoc_format">Word Doc
      <input type="submit"  name="export_allResult" value="Download" id="export_excel_allResult" class="clickable button"  >
     </form></li>';
- $return_stmt .= '<li id="export_excel_searchResult" class="flaticon-spreadsheet6 clickable"></li>
-  <li id="print_searchResult" class="flaticon-print42 print clickable" title="Print"></li>
+ $return_stmt .= '<li id="export_excel_searchResult" class="clickable"><i class="fa fa-file-excel-o"></i></li>
+  <li id="print_searchResult" class="print clickable" title="Print"><i class="fa fa-print"></i></li>
 </ul>
 </div>';
  return $return_stmt;

@@ -36,7 +36,7 @@ class pos_terminal extends dbObject {
  ];
  public $field_a = [
   'pos_terminal_id',
-  'org_id',
+  'sd_store_id',
   'location_id',
   'terminal_name',
   'description',
@@ -53,7 +53,7 @@ class pos_terminal extends dbObject {
   'terminal_name',
  ];
  public $requiredField = [
-  'org_id',
+  'sd_store_id',
   'location_id',
   'terminal_name',
  ];
@@ -64,7 +64,7 @@ class pos_terminal extends dbObject {
  ];
  public $pageTitle = " POS Terminal "; //page Title
  public $pos_terminal_id;
- public $org_id;
+ public $sd_store_id;
  public $location_id;
  public $terminal_name;
  public $description;
@@ -76,6 +76,15 @@ class pos_terminal extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
+ 
+  public static function find_by_storeId($store_id) {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE sd_store_id = '{$store_id}'";
+
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
 
 }
 

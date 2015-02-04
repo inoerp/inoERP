@@ -5,123 +5,122 @@ class onhand_v extends dbObject {
  public static $table_name = "onhand_v";
  public static $primary_column = "onhand_id";
  public $field_a = [
-   'onhand_id',
-   'item_number',
-   'item_description',
-   'org_name',
-   'subinventory',
-   'locator',
-   'uom_id',
-   'onhand',
-   'item_id_m',
+  'onhand_id',
+  'item_number',
+  'item_description',
+  'org_name',
+  'subinventory',
+  'locator',
+  'uom_id',
+  'onhand',
+  'item_id_m',
   'revision_name',
-   'org_id',
-   'subinventory_id',
-   'locator_id',
-   'lot_id',
-   'serial_id',
-   'reservable_onhand',
-   'transactable_onhand',
-   'lot_status',
-   'serial_status',
-   'secondary_uom_id',
-   'onhand_status',
-   'ef_id',
-   'created_by',
-   'creation_date',
-   'last_update_by',
-   'last_update_date',
+  'org_id',
+  'subinventory_id',
+  'locator_id',
+  'lot_id',
+  'serial_id',
+  'reservable_onhand',
+  'transactable_onhand',
+  'lot_status',
+  'serial_status',
+  'secondary_uom_id',
+  'onhand_status',
+  'ef_id',
+  'created_by',
+  'creation_date',
+  'last_update_by',
+  'last_update_date',
  ];
  public $initial_search = [
-   'onhand_id',
-   'item_number',
-   'item_description',
-   'org_name',
-   'subinventory',
-   'locator',
-   'uom_id',
-   'onhand',
-   'item_id_m',
-   'org_id',
-   'subinventory_id',
-   'locator_id',
+  'onhand_id',
+  'item_number',
+  'item_description',
+  'org_name',
+  'subinventory',
+  'locator',
+  'uom_id',
+  'onhand',
+  'item_id_m',
+  'org_id',
+  'subinventory_id',
+  'locator_id',
  ];
  public $column = [
-   'onhand_id',
-   'item_number',
+  'onhand_id',
+  'item_number',
   'revision_name',
-   'item_description',
-   'org_name',
-   'subinventory',
-   'locator',
-   'onhand',
-   'sum_onhand',
-   'uom_id',
-   'item_id_m',
-   'org_id',
-   'subinventory_id',
-   'locator_id',
+  'item_description',
+  'org_name',
+  'subinventory',
+  'locator',
+  'onhand',
+  'sum_onhand',
+  'uom_id',
+  'item_id_m',
+  'org_id',
+  'subinventory_id',
+  'locator_id',
  ];
  public $dateField = [
  ];
  public $pageTitle = " Onhand - Find Inventory Onhand "; //page Title
- 
-   public $search = [
-    '_view_path' => 'form.php?class_name=inv_onhand_serial',
-   '_show_view_path' => 1,
-	 '_view_action_meassge' => 'Serial Numbers',
-   '_extra_path' => array('form.php?class_name=inv_lot_onhand&mode=2' => 'Lot Numbers')
-  ];
+ public $search = [
+  '_view_path' => 'form.php?class_name=inv_onhand_serial',
+  '_show_view_path' => 1,
+  '_view_action_meassge' => 'Serial Numbers',
+  '_extra_path' => array('form.php?class_name=inv_lot_onhand&mode=2' => 'Lot Numbers')
+ ];
  public $search_groupBy = [
-   'item_number' => 'Item Number'
+  'item_number' => 'Item Number'
 //		 'locator' => 'Locator',
 //		 'subinventory' => 'Sub Inventory',
 //		 'org_id' => 'Inventory Org',
  ];
  public $search_groupBy_sum = 'onhand';
  public $ra_onhand_by_subinventoryType_parameters = [
-   'Result Limit' => 'ra_result_limit',
-   'Chart Type' => 'ra_chart_type',
+  'Result Limit' => 'ra_result_limit',
+  'Chart Type' => 'ra_chart_type',
  ];
  public $ra_onhand_by_subinventoryType_settings = [
-   '_chart_name' => 'Onhand Quantity By Subinventory Type',
-   '_x_axis_text' => 'Onhand Quantity',
+  '_chart_name' => 'Onhand Quantity By Subinventory Type',
+  '_x_axis_text' => 'Onhand Quantity',
  ];
  public $ra_onhand_value_by_subinventoryType_settings = [
-   '_chart_name' => 'Onhand Value By Subinventory Type',
-   '_x_axis_text' => 'Onhand Value',
+  '_chart_name' => 'Onhand Value By Subinventory Type',
+  '_x_axis_text' => 'Onhand Value',
  ];
  public $ra_onhand_by_productLine_settings = [
-   '_chart_name' => 'Onhand Quantity By Product Line',
-   '_x_axis_text' => 'Onhand Quantity',
+  '_chart_name' => 'Onhand Quantity By Product Line',
+  '_x_axis_text' => 'Onhand Quantity',
  ];
  public $ra_onhand_value_by_productLine_settings = [
-   '_chart_name' => 'Onhand Value By Product Line',
-   '_x_axis_text' => 'Onhand Value',
+  '_chart_name' => 'Onhand Value By Product Line',
+  '_x_axis_text' => 'Onhand Value',
  ];
  public $ra_onhand_by_productLine_subinventoryType_settings = [
-   '_chart_name' => 'Onhand By Product Line Subinventory Type',
-   '_chart_width' => '750',
-   '_chart_height' => '450',
-   '_x_axis_text' => 'Onhand Quantity',
-   '_chart_type' => 'clustered_column',
-   '_gap_between_xaxis_text' => '50',
-   '_legend' => ''
+  '_chart_name' => 'Onhand By Product Line Subinventory Type',
+  '_chart_width' => '750',
+  '_chart_height' => '450',
+  '_x_axis_text' => 'Onhand Quantity',
+  '_chart_type' => 'clustered_column',
+  '_gap_between_xaxis_text' => '50',
+  '_legend' => ''
  ];
  public $ra_report_set_onhand_by_subinventoryType_settings = [
-   '_chart_name' => 'Onhand By Subinventory Type',
-   '_chart_width' => '350',
-   '_chart_height' => '350',
-   '_x_axis_text' => 'Sub Invnetory Type',
-   '_chart_type' => array('horizonatl_bar', 'vertical_column', 'pie'),
-   '_legend' => ''
+  '_chart_name' => 'Onhand By Subinventory Type',
+  '_chart_width' => '350',
+  '_chart_height' => '350',
+  '_x_axis_text' => 'Sub Invnetory Type',
+  '_chart_type' => array('horizonatl_bar', 'vertical_column', 'pie'),
+  '_legend' => ''
  ];
  public $ra_report_set_onhand_by_subinventoryType = [
-   'ra_onhand_by_subinventoryType',
-   'ra_onhand_value_by_subinventoryType',
-   'ra_onhand_by_productLine',
-   'ra_onhand_value_by_productLine',
-   'ra_onhand_by_productLine_subinventoryType'
+  'ra_onhand_by_subinventoryType',
+  'ra_onhand_value_by_subinventoryType',
+  'ra_onhand_by_productLine',
+  'ra_onhand_value_by_productLine',
+  'ra_onhand_by_productLine_subinventoryType'
  ];
  public $onhand_id;
  public $item_number;
@@ -202,8 +201,17 @@ LEFT JOIN cst_item_cost_v cic ON cic.item_id_m = onhand.item_id_m AND cic.bom_co
 
  public static function find_by_itemId_orgId($item_id, $org_id) {
   $sql = " SELECT * from onhand_v WHERE item_id_m = '{$item_id}' "
-      . " AND org_id = '{$org_id}' ";
+   . " AND org_id = '{$org_id}' ";
   $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
+
+ public static function find_by_itemIdM_orgId_subInventoryId($item_id, $org_id, $subinventory_id) {
+  $sql = " SELECT * from onhand_v WHERE item_id_m = '{$item_id}' "
+   . " AND org_id = '{$org_id}' "
+   . " AND subinventory_id = '{$subinventory_id}' ";
+  $result = self::find_by_sql($sql);
+//  echo $sql;
   return !empty($result) ? $result : false;
  }
 

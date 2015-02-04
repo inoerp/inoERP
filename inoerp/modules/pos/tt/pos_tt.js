@@ -1,4 +1,4 @@
-function setValFromSelectPage(pos_transaction_header_id,terminal_name) {
+function setValFromSelectPage(pos_transaction_header_id, terminal_name) {
  this.pos_transaction_header_id = pos_transaction_header_id;
  this.terminal_name = terminal_name;
 }
@@ -14,21 +14,24 @@ setValFromSelectPage.prototype.setVal = function () {
  }
 };
 
-
+function recalculateAmount() {
+ var amount_r = +$('#screen_number').val() - +$('#total_amount').val();
+ $('.return_amount').val(amount_r);
+}
 
 $(document).ready(function () {
  //Popup for selecting option type
  $("#pos_terminal").off("click", '.pos_transaction_header_id.select_popup')
-         .on("click", '.pos_transaction_header_id.select_popup',function () {
-  void window.open('select.php?class_name=pos_tt_header', '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
- 
-  $("#pos_terminal").off("click", '.pos_terminal_header_id.select_popup')
-         .on("click", '.pos_terminal_header_id.select_popup' , function() {
-	void window.open('select.php?class_name=pos_terminal', '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
+         .on("click", '.pos_transaction_header_id.select_popup', function () {
+          void window.open('select.php?class_name=pos_tt_header', '_blank',
+                  'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+         });
+
+ $("#pos_terminal").off("click", '.pos_terminal_header_id.select_popup')
+         .on("click", '.pos_terminal_header_id.select_popup', function () {
+          void window.open('select.php?class_name=pos_terminal', '_blank',
+                  'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+         });
 
  $('#content').off('blur', '.item_number').on('blur', '.item_number', function () {
   if (!$(this).val()) {
@@ -53,10 +56,10 @@ $(document).ready(function () {
   }
   var line_amount = (unit_price * quantity);
   var amount_after_discount = line_amount - discount_amount;
-  line_amount_e.val(line_amount);
-  $(this).closest('tr').find('.amount_after_discount').val(amount_after_discount);
+//  line_amount_e.val(line_amount);
+  $(line_amount_e).closest('tr').find('.line_amount').val(line_amount);
+  $(line_amount_e).closest('tr').find('.amount_after_discount').val(amount_after_discount);
   var trClass = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
-
   $('#pos_transaction_line_cust_view').find(trClass).find('.amount_after_discount').val(amount_after_discount);
  });
 
@@ -64,13 +67,14 @@ $(document).ready(function () {
   $(this).closest('tr').find('.line_amount').trigger('calPOSLineAmount');
  });
 
- $('#content').off('blur', '.discount_code').on('blur', '.discount_code', function () {
+ $('body').off('blur', '.discount_code').on('blur', '.discount_code', function () {
   if (!$(this).val() || (isNaN($(this).val()))) {
    return true;
   }
   var discount_amount_per = +$(this).closest('tr').find('.discount_code').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1");
   var line_amount = +$(this).closest('tr').find('.line_amount').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1");
   var dicount_amount = (discount_amount_per * line_amount) / 100;
+//  alert(line_amount +  ' : ' + dicount_amount)
   $(this).closest('tr').find('.discount_amount').val(dicount_amount);
   $(this).closest('tr').find('.line_amount').trigger('calPOSLineAmount');
  });
@@ -93,7 +97,7 @@ $(document).ready(function () {
   total_amount_e.val(total_amount);
   $('.header_amount').val(line_amount_sum);
   $('.total_amount').val(total_amount);
-  $('.discount_amount').val(discount_amount_sum);
+  $('#form_header .discount_amount, #form_header_total_cust .discount_amount').val(discount_amount_sum);
  });
 
  $('#content').off('blur', '.unit_price, .quantity, .discount_amount, .line_amount').on('blur', '.unit_price, .quantity, .discount_amount, .line_amount', function () {
@@ -239,11 +243,16 @@ $(document).ready(function () {
      break;
 
     case 'done':
+     recalculateAmount();
      $('#save').trigger('click');
      break;
 
     case 'reprint':
+     recalculateAmount();
+     break;
 
+    case 'recalculate':
+     recalculateAmount();
      break;
 
     default:
@@ -257,17 +266,17 @@ $(document).ready(function () {
   };
  }
 
-if(!$('#pos_transaction_header_id').val()){
- if($('#terminal_name').val() == '00000'){
-  alert('Please update your terminal number!');
- }else{
-  $('#save').trigger('click');
+ if (!$('#pos_transaction_header_id').val()) {
+  if ($('#terminal_name').val() == '00000') {
+   alert('Please update your terminal number!');
+  } else {
+   $('#save').trigger('click');
+  }
  }
-}
 
-$('body').on('click','.save_terminal_name', function(){
-save_posTerminalName();
-})
+ $('body').on('click', '.save_terminal_name', function () {
+  save_posTerminalName();
+ })
 
 });
 

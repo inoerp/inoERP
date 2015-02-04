@@ -180,6 +180,7 @@ require_once(INC_MODULE . DS . "inv" . DS . "lot" . DS . "transaction" . DS . "c
 require_once(INC_MODULE . DS . "inv" . DS . "lot" . DS . "transaction" . DS . "class_inv_lot_transaction_v.inc");
 require_once(INC_MODULE . DS . "inv" . DS . "lot" . DS . "onhand" . DS . "class_inv_lot_onhand.inc");
 require_once(INC_MODULE . DS . "inv" . DS . "serial" . DS . "transaction" . DS . "class_inv_serial_transaction.inc");
+require_once(INC_MODULE . DS . "inv" . DS . "location_default" . DS . "class_inv_location_default.inc");
 require_once(INC_BOM . DS . "class.bom_header.inc");
 require_once(INC_BOM . DS . "class.bom_line.inc");
 require_once(INC_MODULE . DS . "bom" . DS . "class_bom_commonbom_line.inc");
@@ -206,8 +207,10 @@ require_once(INC_MODULE . DS . "bom" . DS . "bom_routing" . DS . "class_bom_rout
 require_once(INC_MODULE . DS . "pos" . DS . "terminal" . DS . "class_pos_terminal.inc");
 require_once(INC_MODULE . DS . "pos" . DS . "transaction" . DS . "class_pos_transaction_header.inc");
 require_once(INC_MODULE . DS . "pos" . DS . "transaction" . DS . "class_pos_transaction_line.inc");
+require_once(INC_MODULE . DS . "pos" . DS . "pos_inv_control" . DS . "class_pos_inv_control.inc");
 require_once(INC_MODULE . DS . "pos" . DS . "tt" . DS . "class_pos_tt_header.inc");
 require_once(INC_MODULE . DS . "pos" . DS . "tt" . DS . "class_pos_tt_line.inc");
+require_once(INC_MODULE . DS . "pos" . DS . "tt_with_search" . DS . "class_pos_tt_with_search_header.inc");
 
 require_once(INC_MODULE . DS . "wip" . DS . "wip_wo" . DS . "class.wip_wo_header.inc");
 require_once(INC_MODULE . DS . "wip" . DS . "wip_wo" . DS . "class.wip_wo_bom.inc");
@@ -264,6 +267,8 @@ require_once(INC_MODULE . DS . "sd" . DS . "shipping_control" . DS . "class_sd_s
 require_once(INC_MODULE . DS . "sd" . DS . "delivery" . DS . "class_sd_delivery_header.inc");
 require_once(INC_MODULE . DS . "sd" . DS . "delivery" . DS . "class_sd_delivery_line.inc");
 require_once(INC_MODULE . DS . "sd" . DS . "document_type" . DS . "class_sd_document_type.inc");
+require_once(INC_MODULE . DS . "sd" . DS . "store" . DS . "class_sd_store.inc");
+require_once(INC_MODULE . DS . "sd" . DS . "store" . DS . "class_sd_store_subinventory.inc");
 //require_once(INC_MODULE.DS."sd".DS."document_type".DS."class_sd_document_relation.inc");
 require_once(INC_MODULE . DS . "mdm" . DS . "tax_code" . DS . "class_mdm_tax_code.inc");
 require_once(INC_MODULE . DS . "mdm" . DS . "tax" . DS . "region" . DS . "class_mdm_tax_region.inc");

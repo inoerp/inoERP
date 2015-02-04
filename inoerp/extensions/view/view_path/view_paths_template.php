@@ -47,8 +47,8 @@
          <li> <input type="submit" class="download button excel" value="<?php echo $per_page ?> Records" form="download"></li>
          <li> <input type="submit" class="download button excel" value="All Records" form="download_all"></li>
          <li> <input type="button" class="download button print" value="Print"></li>
-         <li id="export_excel_searchResult" class="flaticon-spreadsheet6 clickable" title="Export to Excel"></li>
-         <li id="print_searchResult" class="flaticon-print42 print clickable" title="Print"></li>
+         <li id="export_excel_searchResult" class="clickable" title="Export to Excel"><i class="fa fa-file-excel-o"></i></li>
+         <li id="print_searchResult" class=" print clickable" title="Print"><i class="fa fa-print"></i></li>
         </ul>
 
         <?php

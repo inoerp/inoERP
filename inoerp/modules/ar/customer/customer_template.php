@@ -241,7 +241,7 @@
         echo $f->hidden_field('extn_contact_id_new', '');
         echo $f->text_field('contact_name_new', '', '20', '', 'select_contact');
         ?>  </li>
-       <li class='flaticon-add182 clickable' id='add_new_contact' title='New contact reference field'></li>
+       <li class='clickable' id='add_new_contact' title='New contact reference field'><i class="fa fa-plus-circle"></i></li>
       </ul>
      </div>
     </div>

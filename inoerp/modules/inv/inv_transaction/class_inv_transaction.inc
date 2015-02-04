@@ -211,6 +211,8 @@ class inv_transaction extends dbObject {
  private $_onhand_id_from;
  private $_onhand_id_to;
  private $_wip_accounting_group_id;
+ private $_dr_ac_id;
+ private $_cr_ac_id;
 
  public function setProperty($property, $value) {
   if (property_exists($this, $property)) {
@@ -525,7 +527,7 @@ class inv_transaction extends dbObject {
    return $return_val;
   }
 
-  if (in_array($this->transaction_type_id, array(1, 3, 6, 7, 9, 12, 13, 14, 15, 18, 19, 20, 21))) {
+  if (in_array($this->transaction_type_id, array(1, 3, 6, 7, 9, 12, 13, 14, 15, 18, 19, 20, 21, 22))) {
    $this->_serial_type = 'ID';
   }
 
@@ -576,7 +578,7 @@ class inv_transaction extends dbObject {
    return $return_val;
   }
 
-  if (in_array($this->transaction_type_id, array(1, 3, 6, 9, 12, 13, 14, 15, 18, 19, 20, 21))) {
+  if (in_array($this->transaction_type_id, array(1, 3, 6, 9, 12, 13, 14, 15, 18, 19, 20, 21, 22))) {
    $this->_lot_type = 'ID';
   }
 
@@ -983,6 +985,7 @@ class inv_transaction extends dbObject {
    case 16 :
    case 18 :
    case 21 :
+   case 22 :
     $onhand->setProperty('_from_org_id', $this->org_id);
     $onhand->setProperty('_from_subinventory_id', $this->from_subinventory_id);
     $onhand->setProperty('_from_locator_id', $this->from_locator_id);
@@ -1035,9 +1038,12 @@ class inv_transaction extends dbObject {
      }
     }
 //for SO Shipment Debit the COGS account
-    if ($this->transaction_type_id == 15) {
-     $inv = new inventory();
-     $inv_i = $inv->findBy_org_id($this->org_id);
+    if ($this->transaction_type_id == 15 || $this->transaction_type_id == 22) {
+     if (empty($this->_dr_ac_id)) {
+      $inv = new inventory();
+      $inv_i = $inv->findBy_org_id($this->org_id);
+      $this->_dr_ac_id = $inv_i->cogs_ac_id;
+     }
      $total_amount = 0;
      $line_number = 1;
      foreach ($journal_line_a as $journal_line) {
@@ -1050,7 +1056,7 @@ class inv_transaction extends dbObject {
      if (!empty($total_amount)) {
       $journal_line['line_number'] = $line_number;
       $journal_line['amount'] = $total_amount;
-      $journal_line['account_id'] = $inv_i->cogs_ac_id;
+      $journal_line['account_id'] = $this->_dr_ac_id;
       $journal_line['dr_cr'] = 'dr';
       array_push($journal_line_a, $journal_line);
      }

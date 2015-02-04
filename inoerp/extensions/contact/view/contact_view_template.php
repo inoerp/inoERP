@@ -35,7 +35,7 @@ if (empty($all_contacts)) {
         <ul class="inline_action">
          <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
          <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-         <li class="flaticon-delete82 clickable delete_ref" data-delete_id = "<?php echo htmlentities($cont->extn_contact_reference_id); ?>"> </li>
+         <li class="clickable delete_ref" data-delete_id = "<?php echo htmlentities($cont->extn_contact_reference_id); ?>"><i class="fa fa-trash-o"></i></li>
         </ul>
        </td>
        <td><?php $f->seq_field_detail_d($detailCount) ?></td>
