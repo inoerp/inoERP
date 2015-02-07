@@ -21,7 +21,6 @@ class sd_so_all_v extends dbObject {
 		 'customer_site_name',
 		 'customer_site_number',
 		 'payment_term',
-		 'description',
 		 'sd_so_line_id',
 		 'line_status',
 		 'line_type',
@@ -55,17 +54,9 @@ class sd_so_all_v extends dbObject {
 		 'item_number',
 		 'line_status',
 		 'schedule_ship_date',
+  'shipping_org_id',
  ];
- public $column = [
-		 'so_number',
-		 'so_status',
-		 'customer_name',
-		 'customer_site_name',
-		 'item_number',
-		 'line_quantity',
-		 'picked_quantity',
-		 'schedule_ship_date',
- ];
+
  public $multi_select_column = [
 		 'so_number',
 		 'line_number',
@@ -95,7 +86,6 @@ class sd_so_all_v extends dbObject {
 		 'customer_site_name',
 		 'customer_site_number',
 		 'payment_term',
-		 'description',
 		 'sd_so_line_id',
 		 'line_status',
 		 'line_type',
@@ -150,7 +140,6 @@ class sd_so_all_v extends dbObject {
  public $customer_site_name;
  public $customer_site_number;
  public $payment_term;
- public $description;
  public $sd_so_line_id;
  public $line_status;
  public $line_type;
@@ -178,10 +167,6 @@ class sd_so_all_v extends dbObject {
  public $last_update_by;
  public $last_update_date;
  public $action;
-
- public function __set($name, $value) {
-	$this->$name = $value;
- }
 
  private function create_sd_so_all_v() {
 	$sql = "

@@ -48,7 +48,7 @@
         echo "<br>No Label found. Save/Requery the form!";
        } else {
         echo $$class->print_label_inputParameters();
-        echo '<span class="button" id="print_static_label">Print</span>';
+        echo '<span class=" btn btn-info active" id="print_static_label">Print</span>';
        }
        ?>
       </div>

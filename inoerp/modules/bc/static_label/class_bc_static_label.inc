@@ -23,7 +23,8 @@ class bc_static_label extends dbObject {
   'INV' => 'Inventory',
   'SUBINV' => 'Sub Inventory',
   'LOCATOR' => 'Locator',
-  'ITEM' => 'Item'
+  'ITEM' => 'Item',
+  'POS_LIST' => 'POS List'
  ];
  public $field_a = [
   'bc_static_label_id',
@@ -67,7 +68,8 @@ class bc_static_label extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
-
+public $no_of_copies;
+ 
  public function findBy_transactionId_associationLevel($header_id, $assoc_level) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
@@ -103,6 +105,11 @@ class bc_static_label extends dbObject {
    case 'ITEM':
     $stmt .='<li><img src="' . HOME_URL .'themes/images/serach.png" class="select_item_number select_popup clickable">'
     . '<label>Item : </label>' . $f->text_field('item_number', '', '15', 'item_number', 'select_item_number', 1) . '</li>';
+    break;
+   
+   case 'POS_LIST':
+    $stmt .='<li><label>POS List Name : </label>' .
+    $f->select_field_from_object('pos_barcode_list_header_id', pos_barcode_list_header::find_all(), 'pos_barcode_list_header_id', 'list_name', '', 'pos_barcode_list_header_id', '', 1) . '</li>';
     break;
 
    default :

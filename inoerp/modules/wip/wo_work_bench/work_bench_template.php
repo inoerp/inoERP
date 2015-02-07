@@ -17,7 +17,7 @@
        <li><label>WO Number</label><?php echo form::text_field_d('wo_number'); ?></li>
        <li><label>Inventory Org</label><?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly, '', '', 1); ?>       </li>
        <li><label>Date(2)</label><?php echo $f->text_field('transaction_date', ($$class->transaction_date), '', '', 'dateTime'); ?>       </li>
-       <li><label>Transaction Type</label><?php echo form::select_field_from_object('transaction_type', wip_move_transaction::wip_transactions(), 'option_line_code', 'option_line_value', $$class->transaction_type, 'transaction_type', $readonly, '', '', 1); ?>       </li> 
+       <li><label>Transaction Type</label><?php echo $f->select_field_from_object('transaction_type', wip_move_transaction::wip_transactions(), 'option_line_code', 'option_line_value', $$class->transaction_type, 'transaction_type', '', 1, 1); ?>       </li> 
        <li><label>Move Transaction Id</label><?php echo form::text_field_dsr('wip_move_transaction_id'); ?></li>
       </ul>
      </div>

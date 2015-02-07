@@ -116,16 +116,18 @@ if (!empty($_GET['class_name'])) {
  } else if ((!empty($_GET['function_name']))) {
   $function_name = is_array($_GET['function_name']) ? $_GET['function_name'][0] : $_GET['function_name'];
   if (method_exists($$class, $function_name)) {
-   $search_counts = $function_name . '_search_counts';
+   $search_details = call_user_func(array($$class, $function_name), $_GET);
+    $search_counts = $function_name . '_search_counts';
    $search_records = $function_name . '_search_records';
+   $search_downloads = $function_name . '_search_downloads';
    $whereClause = implode(" AND ", $whereFields);
    $_GET['whereClause'] = $whereClause;
    $total_count = call_user_func(array($$class, $search_counts), $_GET);
    $search_result = call_user_func(array($$class, $search_records), $_GET);
+   $all_download_sql = call_user_func(array($$class, $search_downloads), $_GET);
    if (!empty($per_page) && !empty($total_count)) {
-    $pagination = new pagination($pageno, $per_page, $total_count);
-    $pagination->setProperty('_query_string', $query_string);
-    $pagination_statement = $pagination->show_pagination();
+   $pagination = new pagination($pageno, $per_page, $total_count);
+   $pagination_statement = $pagination->show_pagination();
    }
   }
  } else if (method_exists($$class, 'search_records')) {
@@ -133,9 +135,9 @@ if (!empty($_GET['class_name'])) {
   $_GET['whereClause'] = $whereClause;
   $total_count = call_user_func(array($$class, 'search_counts'), $_GET);
   $search_result = call_user_func(array($$class, 'search_records'), $_GET);
+  $all_download_sql = call_user_func(array($$class, 'search_downloads'), $_GET);
   if (!empty($per_page) && !empty($total_count)) {
    $pagination = new pagination($pageno, $per_page, $total_count);
-   $pagination->setProperty('_query_string', $query_string);
    $pagination_statement = $pagination->show_pagination();
   }
  } else {
@@ -186,7 +188,6 @@ if (!empty($_GET['class_name'])) {
   if (!empty($per_page)) {
    $pagination = new pagination($pageno, $per_page, $total_count);
    $pagination_statement = $pagination->show_pagination();
-
    $sql .=" LIMIT {$per_page} ";
    $sql .=" OFFSET {$pagination->offset()}";
   }
@@ -194,6 +195,7 @@ if (!empty($_GET['class_name'])) {
   $search_result = $class::find_by_sql($sql);
 //  pa($search_result);
  }
+
 
  if (method_exists($class, 'search_add_extra_fields')) {
   $class::search_add_extra_fields($search_result);
@@ -212,7 +214,7 @@ if (!empty($_GET['class_name'])) {
  $s->setProperty('column_array_s', $column_array);
  $search_result_statement = $search->search_result_op();
 
- require_once(INC_BASICS . DS . "search_page.inc");
+ include_once(__DIR__.'/../template/json_search_template.inc');
  echo '</div>';
 }
 ?>

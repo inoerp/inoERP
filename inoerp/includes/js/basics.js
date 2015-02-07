@@ -45,10 +45,13 @@ function getFormDetails(url) {
   ;
 
   var commentForm = $(result).find('div#comment_form').html();
-  if (newContent) {
+   if (newContent) {
    $('#structure').replaceWith('<div id="structure">' + newContent + '</div>');
    $('#header_top_container').replaceWith('<div id="header_top_container"> <ul id="form_top_image" class="draggable">' + allButton + '</ul></div>');
    $('#display_comment_form').append(commentForm);
+   if($(result).find('div#document_history').html()){
+   $('#document_history').replaceWith('<div id="document_history">' + $(result).find('div#document_history').html() + '</div>');
+   }
    $.getScript("includes/js/reload.js");
    $(result).find('#js_files').find('li').each(function () {
     $.getScript($(this).html());
@@ -2903,6 +2906,11 @@ $(document).ready(function () {
  $("#content").on('click', '.error', function () {
   $(this).html("");
  });
+ 
+ $('body').on('click','#sys_msg_box button.close', function(){
+$('.alert-dismissible').alert('close');
+});
+
  //export to excel from search result
  $("#content").on('click', '#export_excel_searchResult', function (e) {
   window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#search_result').html()));
@@ -3163,10 +3171,14 @@ $(document).ready(function () {
   position: {my: "left top", at: "left top", of: "#structure "}
  });
 
+
  $('body').off('click', '#search_tip').on('click', '#search_tip', function () {
   $("#search_message").dialog("open");
  });
-
+ 
+ $('body').off('click', '#menu_button8').on('click', '#menu_button8', function () {
+  $("#document_history_ul").dialog("open");
+ });
 
 //save data
  if ($('ul#js_saving_data').length > 0) {
@@ -3592,7 +3604,7 @@ $(document).ready(function () {
   getFormDetails(formUrl);
  }).one();
 
- $('body').on('click', 'a.bc_auto_trigger_id', function (e) {
+ $('body').on('click', 'a.bc_label_auto_trigger_id', function (e) {
   e.preventDefault();
   var transaction_type_id = $('#transaction_type_id').val();
   var association_level = $('#association_level').val();
@@ -3737,7 +3749,7 @@ $(document).ready(function () {
   if ($('.sidebar').is(':visible')) {
    var containerWidth = $('body').width();
    $('#divider-bar').css({
-    'margin-left':  '-1000px'});
+    'margin-left': '-1000px'});
    $('.mainbar,  #navigation_bar').css({
     'margin-left': '6px',
     'width': containerWidth + 'px'});
@@ -3747,7 +3759,7 @@ $(document).ready(function () {
    var leftPos = (containerWidth * 16.66 / 100);
    var mainBarWidth = containerWidth - leftPos;
    $('#divider-bar').css({
-    'margin-left':  '0px'});
+    'margin-left': '0px'});
    $('.mainbar,  #navigation_bar').css({
     'margin-left': leftPos + 6 + 'px',
     'width': mainBarWidth + 'px'});
@@ -3778,6 +3790,13 @@ $(document).ready(function () {
 
   }
  });
+
+$( "#accordion" ).accordion({
+  heightStyle: "content",
+   active: 1,
+   collapsible: true
+});
+
 
 });
 function toUpperCase(str)

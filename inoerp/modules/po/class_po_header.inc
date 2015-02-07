@@ -106,14 +106,7 @@ class po_header extends dbObject {
   "supplier_site_name",
   "buyer"
  ];
- public $column = [
-  "po_header_id",
-  "po_number",
-  "po_status",
-  "supplier_id",
-  "creation_date",
-  "buyer"
- ];
+
  public $requiredField = [
   'header_amount',
   'supplier_id',

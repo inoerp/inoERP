@@ -159,36 +159,77 @@
   <div class="container-fluid">
    <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
-     <div id="sys_menu_left_vertical">
-      <div class="btn-group-sm" role="group" aria-label="...">
-       <button type="button" id='expand_all_nav' class="btn btn-default">Expand All</button>
-       <button type="button" id='collapse_all_nav' class="btn btn-default">Collapse All</button>
+     <div id="accordion">
+      <h3 class="clickable nav-panel"><i class="fa fa-warning"></i> Transaction Alerts</h3>
+      <div>
+       <div id="sys_msg_box">
+        <div class="error"></div><div id="loading"></div>
+       </div>
       </div>
+      <h3 class="clickable nav-panel"><i class="fa fa-navicon"></i> Navigation Menu</h3>
+      <div>
+       <div id="sys_menu_left_vertical">
+        <div class="btn-group-sm" role="group" aria-label="...">
+         <button type="button" id='expand_all_nav' class="btn btn-default">Expand All</button>
+         <button type="button" id='collapse_all_nav' class="btn btn-default">Collapse All</button>
+        </div>
+        <?php
+        $pat = new path();
+        echo ($pat->path_allpaths_block(array('divClass' => 'tree_view')));
+        ?>
+       </div>
+      </div>
+      <h3 class="clickable nav-panel"><i class="fa fa-history"></i> Recent Visits</h3>
+      <div>
+       <div id="recent-visits">
+        <?php
+        if (isset($_SESSION['recent_visit'])) {
+         $recent_visit = '<ul id="recent_visit">';
+         $rev_a = array_reverse($_SESSION['recent_visit']);
+         $count = 0;
+         foreach ($rev_a as $k => $v) {
+          $count++;
+          if ($count >= 5) {
+           break;
+          }
+          if (!is_numeric($k)) {
+           $recent_visit .= '<li><a href="' . $v . '">' . substr($k, 0, 30) . '</a>';
+          } else {
+           $recent_visit .= '<li><a href="' . $v . '"> Vsiti ' . $k . '</a>';
+          }
+         }
+         $recent_visit .= '<li class="view_all"><a href="' . HOME_URL . 'form.php?class_name=user_activity_v&mode=2"> View More ...</a>';
+         $recent_visit .= '</ul>';
+        }
+        echo $recent_visit;
+        ?>
+       </div>
+      </div>
+
+     </div>
+    </div>
+
+
+   </div>
+   <div id="divider-bar" class="col-m-1"><i class="fa fa-toggle-left clickable"></i></div>
+
+   <div id="erp_form_area" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
+    <div id="content">
+     <div id="structure">
       <?php
-      $pat = new path();
-      echo ($pat->path_allpaths_block(array('divClass' => 'tree_view')));
+      echo (!empty($show_message)) ? $show_message : "";
+      if (!empty($template_file_names)) {
+       foreach ($template_file_names as $key => $tmpl_file) {
+        include_once $tmpl_file;
+       }
+      }
       ?>
      </div>
+     <!--   end of structure-->
     </div>
-    <div id="divider-bar" class="col-m-1"><i class="fa fa-toggle-left clickable"></i></div>
-
-    <div id="erp_form_area" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
-     <div id="content">
-      <div class="error clickable"></div><div id="loading"></div>
-      <div id="structure">
-       <?php
-       echo (!empty($show_message)) ? $show_message : "";
-       if (!empty($template_file_names)) {
-        foreach ($template_file_names as $key => $tmpl_file) {
-         include_once $tmpl_file;
-        }
-       }
-       ?>
-      </div>
-      <!--   end of structure-->
-     </div>
-    </div>
+   </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
+     <div class="hidden" id="document_history"></div>
      <div class="footer-menu">
       <div id="half_copyrights">
        <?php
@@ -205,34 +246,34 @@
       </div>
      </div><!-- end large-7 --> 
     </div>
-   </div>
-
-
-
   </div>
-  <div class="row">
-   <div id="comment_form" class="none">
-    <?php
-    if (!empty($reference_table) && !empty($reference_id)) {
-     include_once __DIR__ . '/../../comment.php';
-    }
-    ?>
-   </div>
 
-  </div>
-  <!--footer content-->
-  <?php
-  global $f;
-  echo (!empty($footer_bottom)) ? "<div id=\"footer_bottom\"> $footer_bottom </div>" : "";
-  echo $f->hidden_field_withId('home_url', HOME_URL);
-  ?>
-  <div class="hidden">
+
+
+ </div>
+ <div class="row">
+  <div id="comment_form" class="none">
    <?php
-   echo searching_tips();
-   echo ino_filter_form();
+   if (!empty($reference_table) && !empty($reference_id)) {
+    include_once __DIR__ . '/../../comment.php';
+   }
    ?>
   </div>
- </body>
+
+ </div>
+ <!--footer content-->
+ <?php
+ global $f;
+ echo (!empty($footer_bottom)) ? "<div id=\"footer_bottom\"> $footer_bottom </div>" : "";
+ echo $f->hidden_field_withId('home_url', HOME_URL);
+ ?>
+ <div class="hidden">
+  <?php
+  echo searching_tips();
+  echo ino_filter_form();
+  ?>
+ </div>
+</body>
 </html>
 <?php
 // 5. Close connection

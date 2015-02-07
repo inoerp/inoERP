@@ -62,12 +62,12 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
      <ul class="nav navbar-nav navbar-right">
-      <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
       <li><a href="http://demo.inoideas.org/extensions/user/user_login.php" >Demo <div class="arrow-up"></div></a></li>
       <li><a href="https://github.com/inoerp/inoERP/fork" >Download <div class="arrow-up"></div></a></li>
+      <li class="active"><a href="http://inoideas.org/content.php?mode=9&content_type=forum&category_id=7" ><i class="fa fa-comments-o"></i> Ask a Question <div class="arrow-up"></div></a></li>
       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
-      <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47">About <div class="arrow-up"></div></a> </li><!-- end drop down -->
+
       <li>
        <div class="topbar-login ino_right_top">
         <?php if (!empty($_SESSION['login_status'])) { ?>
@@ -96,48 +96,48 @@
      </ul>
      <?php echo $ss->entry_form($_GET); ?>
     </div>
-  </div>
-   
+   </div>
+
   </nav>
-   <div class="ino navbar-form">
-    <div id="navigation_bar"   class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
-     <div id="header_top_quick_nav" >
-      <ul class="list-group inline_list">
-       <li role="presentation"><i class="fa fa-navicon clickable right_bar_navigation_menu" title="Toggle Navigation Menu"></i></li>
-       <li role="presentation"><a  href="<?php echo HOME_URL; ?>"><i class="fa fa-home" title="Home"></i></a></li>
-       <li role="presentation"><a  href="#"><i class="fa fa-info" title="Messages"></i></a></li>
-       <li role="presentation"><a  href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard" title="Dashborad"></i></a></li>
-       <li>
-        <div class="btn-group">
-         <button type="button" class="btn btn-xs btn-info"  title="Favourites"><i class="fa fa-star-o" title="Favourites"></i></button>
-         <button type="button" title="Favourites" class="btn btn-xs btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          <span class="caret"></span>
-          <span class="sr-only">Toggle Dropdown</span>
-         </button>
-         <?php echo $fav->show_currentUser_fav(true); ?>
-        </div>
-       </li>
-      </ul>
-     </div>
-     <div id="header_top_container">
-      <?php
-      $show_header_links = true;
-      if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
-       if (empty($current_page_path)) {
-        $current_page_path = thisPage_url();
-       }
-       $f->form_button_withImage($current_page_path);
-       $show_header_links = false;
+  <div class="ino navbar-form">
+   <div id="navigation_bar"   class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
+    <div id="header_top_quick_nav" >
+     <ul class="list-group inline_list">
+      <li role="presentation"><i class="fa fa-toggle-left clickable right_bar_navigation_menu" title="Toggle Navigation Menu"></i></li>
+      <li role="presentation"><a  href="<?php echo HOME_URL; ?>"><i class="fa fa-home" title="Home"></i></a></li>
+      <li role="presentation"><a  href="#"><i class="fa fa-info" title="Messages"></i></a></li>
+      <li role="presentation"><a  href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard" title="Dashborad"></i></a></li>
+      <li>
+       <div class="btn-group">
+        <button type="button" class="btn btn-xs btn-info"  title="Favourites"><i class="fa fa-star-o" title="Favourites"></i></button>
+        <button type="button" title="Favourites" class="btn btn-xs btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+         <span class="caret"></span>
+         <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <?php echo $fav->show_currentUser_fav(true); ?>
+       </div>
+      </li>
+     </ul>
+    </div>
+    <div id="header_top_container">
+     <?php
+     $show_header_links = true;
+     if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
+      if (empty($current_page_path)) {
+       $current_page_path = thisPage_url();
       }
-      ?>
-      <?php if ($show_header_links) { ?>
-       <!--       <div class="social-icons">
-               <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
-              </div> end social icons -->
-      <?php } ?>
-     </div>
+      $f->form_button_withImage($current_page_path);
+      $show_header_links = false;
+     }
+     ?>
+     <?php if ($show_header_links) { ?>
+      <!--       <div class="social-icons">
+              <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
+             </div> end social icons -->
+     <?php } ?>
     </div>
-    </div>
+   </div>
+  </div>
 
   <?php
   if ($showBlock) {
@@ -158,24 +158,69 @@
 
   <div class="container-fluid">
    <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
-     <div id="sys_menu_left_vertical">
-      <div class="btn-group-sm" role="group" aria-label="...">
-       <button type="button" id='expand_all_nav' class="btn btn-default">Expand All</button>
-       <button type="button" id='collapse_all_nav' class="btn btn-default">Collapse All</button>
+        <div class="col-sm-3 col-md-2 sidebar">
+     <div id="accordion">
+      <h3 class="clickable nav-panel"><i class="fa fa-warning"></i> Transaction Alerts</h3>
+      <div>
+       <div id="sys_msg_box">
+        <div class="error"></div><div id="loading"></div>
+       </div>
       </div>
-      <?php
-      $pat = new path();
-      echo ($pat->path_allpaths_block(array('divClass' => 'tree_view')));
-      ?>
+      <h3 class="clickable nav-panel"><i class="fa fa-navicon"></i> Navigation Menu</h3>
+      <div>
+       <div id="sys_menu_left_vertical">
+        <div class="btn-group-sm" role="group" aria-label="...">
+         <button type="button" id='expand_all_nav' class="btn btn-default">Expand All</button>
+         <button type="button" id='collapse_all_nav' class="btn btn-default">Collapse All</button>
+        </div>
+        <?php
+        $pat = new path();
+        echo ($pat->path_allpaths_block(array('divClass' => 'tree_view')));
+        ?>
+       </div>
+      </div>
+      <h3 class="clickable nav-panel"><i class="fa fa-history"></i> Recent Visits</h3>
+      <div>
+       <div id="recent-visits">
+        <?php
+        if (isset($_SESSION['recent_visit'])) {
+         $recent_visit = '<ul id="recent_visit">';
+         $rev_a = array_reverse($_SESSION['recent_visit']);
+         $count = 0;
+         foreach ($rev_a as $k => $v) {
+          $count++;
+          if ($count >= 5) {
+           break;
+          }
+          if (!is_numeric($k)) {
+           $recent_visit .= '<li><a href="' . $v . '">' . substr($k, 0, 30) . '</a>';
+          } else {
+           $recent_visit .= '<li><a href="' . $v . '"> Vsiti ' . $k . '</a>';
+          }
+         }
+         $recent_visit .= '<li class="view_all"><a href="' . HOME_URL . 'form.php?class_name=user_activity_v&mode=2"> View More ...</a>';
+         $recent_visit .= '</ul>';
+        }
+        echo $recent_visit;
+        ?>
+       </div>
+      </div>
+
      </div>
     </div>
+    <div id="divider-bar" class="col-m-1"><i class="fa fa-toggle-left clickable"></i></div>
 
-
-   <div id="erp_form_area" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
+    <div id="erp_form_area" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
       <div id="content">
-       <div class="error clickable"></div><div id="loading"></div>
-       <div id="structure"><span class="heading"><?php echo 'Search ' . ucwords(str_replace('_', ' ', $class)); ?></span>
+       <div id="structure"><span class="heading">
+         <?php
+         if (!empty($_GET['function_name'])) {
+          echo '<div class="alert alert-info" role="alert" >' . ucwords(str_replace('_', ' ', $_GET['function_name'])) . ' Report</div>';
+         }else{
+           echo '<div class="alert alert-info" role="alert" >Search' .  ucwords(str_replace('_', ' ', $class)) . '</div>';
+         }
+         ?>
+        </span>
         <div id="search_page">
          <div id ="form_header">
           <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
@@ -189,8 +234,7 @@
            if (!empty($total_count)) {
             ?>
             <div id="searchResultMessages">
-             <ul class="inline_list">
-              <li><?php echo '<h3>Total records : ' . $total_count . '</h3>  '; ?></li>
+              <ul class="inline_list">
               <li>Download All Data in </li>
               <li>
                <!--download page creation for all records-->
@@ -214,21 +258,19 @@
                <!--download page completion-->	 
               </li>
               <li id="export_excel_searchResult" class="clickable" title="Export to Excel"><i class="fa fa-file-excel-o"></i></li>
-              <li id="print_searchResult" class="clickable" title="Print"><i class="fa fa-print"></i></li>
+              <li id="print_searchResult" class="print clickable" title="Print"><i class="fa fa-print"></i></li>
+              <li><button class="btn btn-primary" type="button">Total records <span class="badge"><?php echo $total_count; ?></span></button></li>
              </ul>
             </div>
            <?php } ?>
            <div id="scrollElement">
             <div id="print">
-             <div id="search_result"> 
-              <?php echo!(empty($search_result_statement)) ? $search_result_statement : ""; ?>
-             </div>
+             <div id="search_result"> <?php echo!(empty($search_result_statement)) ? $search_result_statement : ""; ?></div>
             </div>
-            <div class="pagination" style="clear: both;">
-             <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
-             ?>
-            </div>
-
+           </div>
+           <div class="pagination" style="clear: both;">
+            <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
+            ?>
            </div>
 
           </div>
@@ -238,19 +280,9 @@
        </div>
        <!--   end of structure-->
       </div>
-     </div>
-
-
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
-     <div id="non-visible" class="non-visible">
-
-     </div><!-- end large-7 --> 
     </div>
-
-   </div>
-
-   <div class="row">
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
+     <div class="hidden" id="document_history"></div>
      <div class="footer-menu">
       <div id="half_copyrights">
        <?php
@@ -268,6 +300,9 @@
      </div><!-- end large-7 --> 
     </div>
    </div>
+
+
+
   </div>
   <div class="row">
    <div id="comment_form" class="none">

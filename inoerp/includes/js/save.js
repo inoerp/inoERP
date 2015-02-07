@@ -44,12 +44,16 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
   }
  }).done(function (result) {
   var div = $(result).filter('div#json_save_header').html();
-  if ($(div).length > 1) {
-   $(".error").append(div);
-  }
+//  if ($(div).length > 1) {
+//   $(".error").append(div);
+//  }
   
-  var message = $(result).find('.rollback_msg, .message').html();
-  $(".error").append('<br>'+message);
+  var message = $(result).find('.message, .rollback_msg').html();
+   if (message && message.length > 1) {
+   $(".error").append(div);
+   $("#accordion").accordion({ active: 0 });
+  }
+
   if (primary_column_id) {
    var primary_column_class = primary_column_id.replace('#', '.');
    var header_id = $(result).find('div#headerId').html();
@@ -89,6 +93,7 @@ function saveSingleLine(json_url, lineData, primary_column_id, lineClassName) {
   var rollbackMsg = $(result).filter('.rollback_msg').html();
   $(".error").append(rollbackMsg);
   var line_id = $(div).filter('#lineId').html();
+  $("#accordion").accordion({ active: 0 });
 //	$('#form_data_table tbody tr' + '.' + trclass).find(".line_id").val(line_id);
   $("#save").removeClass("opacity_2");
   $('.show_loading_small').hide();
@@ -114,6 +119,7 @@ function saveLine(json_url, lineData, trclass, detailData, primary_column_id, li
   $(".error").append(div);
   var rollbackMsg = $(result).filter('.rollback_msg').html();
   $(".error").append(rollbackMsg);
+  $("#accordion").accordion({ active: 0 });
   var line_id = $(div).filter('.lineId').html();
   $('#form_data_table tbody tr' + '.' + trclass).find(".line_id").val(line_id);
   $('.show_loading_small').hide();
@@ -139,6 +145,7 @@ function saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassNa
   var line_id = $(div).filter('.lineId').html();
   $('tbody.form_data_line_tbody2 tr' + '.' + trclass).find(".line_id").val(line_id);
   $(".error").append(div);
+  $("#accordion").accordion({ active: 0 });
   $('.show_loading_small').hide();
   $("#save").removeClass("opacity_2");
  }).fail(function (error, textStatus, xhr) {
@@ -806,7 +813,7 @@ contextMenuMain.prototype.contextMenu = function ()
    }
   }
  };
- var menuContent = '<ul id="level1"> <li id="menu_button1" class="export_excel">Export Header</li> <li id="menu_button2" class="end_li_type export_excel">Export Line  <ul>   <li id="menu_button2_1" class="end_li_type export_excel">Second Line Form</li>  </ul></li> <li id="menu_button3" class="end_li_type print">Print Document</li> <li class="copy_doc"><span id="menu_button4"> Copy Header</span>  <ul>   <li class="copy_doc"><span id="menu_button4_1">Copy & Save Header</span></li>   <li class="copy_doc"><span id="menu_button4_2">Copy Document</span>    <ul>     <li><span id="menu_button4_2_1">Copy & Save Document</span></li>    </ul>   </li>   <li class="copy_doc"><span id="menu_button4_3">Copy Line</span>    <ul>     <li><span id="menu_button4_3_1">Copy First Line</span></li>    </ul>   </li>  </ul> </li> <li class="end_li_type copy_line"><span id="menu_button5">Select All Line</span>  <ul>   <li><span id="menu_button5_1">Un Select All</span></li>  </ul> </li> <li id="menu_button6" class="preference">Preferences</li> <li id="menu_button7" class="help help">Help</li> <li id="menu_button8" class="doc_history">Document History</li> <li id="menu_button9" class="end_li_type custom_code">Custom Code  <ul>   <li id="menu_button9_1" class="end_li_type">Disable</li>   <li id="menu_button9_2" class="end_li_type">Enable</li>   <li id="menu_button9_3" class="end_li_type">View & Update</li>  </ul></li> <li class="end_li_type disable_menu"><span id="menu_button10">Disable Context Menu</span>  <ul>   <li><span id="menu_button10_1">Disable All</span></li>  </ul></li> <li id="menu_button11" class="about">About inoERP</li> </ul>';
+ var menuContent = '<ul id="level1"> <li id="menu_button1" class="export_excel">Export Header</li> <li id="menu_button2" class="end_li_type export_excel">Export Line  <ul>   <li id="menu_button2_1" class="end_li_type export_excel">Second Line Form</li>  </ul></li> <li id="menu_button3" class="end_li_type print">Print Document</li> <li class="copy_doc"><span id="menu_button4"> Copy Header</span>  <ul>   <li class="copy_doc"><span id="menu_button4_1">Copy & Save Header</span></li>   <li class="copy_doc"><span id="menu_button4_2">Copy Document</span>    <ul>     <li><span id="menu_button4_2_1">Copy & Save Document</span></li>    </ul>   </li>   <li class="copy_doc"><span id="menu_button4_3">Copy Line</span>    <ul>     <li><span id="menu_button4_3_1">Copy First Line</span></li>    </ul>   </li>  </ul> </li> <li class="end_li_type copy_line"><span id="menu_button5">Select All Line</span>  <ul>   <li><span id="menu_button5_1">Un Select All</span></li>  </ul> </li> <li id="menu_button6" class="preference">Preferences</li> <li id="menu_button7" class="help help">Help</li> <li id="menu_button8"  data-target="#document_history" data-toggle="modal"  class="doc_history">Document History</li> <li id="menu_button9" class="end_li_type custom_code">Custom Code  <ul>   <li id="menu_button9_1" class="end_li_type">Disable</li>   <li id="menu_button9_2" class="end_li_type">Enable</li>   <li id="menu_button9_3" class="end_li_type">View & Update</li>  </ul></li> <li class="end_li_type disable_menu"><span id="menu_button10">Disable Context Menu</span>  <ul>   <li><span id="menu_button10_1">Disable All</span></li>  </ul></li> <li id="menu_button11" class="about">About inoERP</li> </ul>';
  rightClickMenu(menuContent);
  $('body').on('click', '#menu_button1', function () {
   var classDnldExcel = new exportToExcelMain();
@@ -875,6 +882,11 @@ contextMenuMain.prototype.contextMenu = function ()
  $('body').on('click', '#menu_button10', function () {
   $("#content").unbind("contextmenu");
  });
+ 
+//  $('body').on('click', '#menu_button8', function () {
+//  $('#document_history').modal('toggle');
+// });
+ 
  $('body').on('click', '#menu_button10_1', function () {
   localStorage.setItem("disableContextMenu", true);
   $("#content").unbind("contextmenu");

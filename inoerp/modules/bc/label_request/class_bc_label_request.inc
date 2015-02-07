@@ -75,27 +75,6 @@ class bc_label_request extends dbObject {
   return !empty($result) ? $result : false;
  }
 
- public function xxgenerate_label() {
-  $xml_content = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE labels SYSTEM "label.dtd">';
-  $xml_content .= '<labels _FORMAT="E:M_STK_M.ZPL" _QUANTITY="1" _PRINTERNAME="SNG_ZM400_1" _JOBNAME="LBL512027">
-<label>
-<variable name= "COHR_DATE">19-NOV-2014</variable>
-<variable name= "COHR_ITEM">1214874</variable>
-<variable name= "COHR_ITEM_DESC">Power Supply, OBIS, 12 VDC, with 8ft USA-type Power Cord</variable>
-<variable name= "COHR_LOCATOR">RAW-01.04.01.03.</variable>
-<variable name= "COHR_LOT"></variable>
-<variable name= "COHR_QTY">50</variable>
-<variable name= "COHR_RCPT"></variable>
-<variable name= "COHR_SUB">RAW-01</variable>
-<variable name= "COHR_UOM">EA</variable>
-</label>
-</labels>
-';
-
-  return $xml_content;
- }
-
  public function generate_label($data_obj) {
   if (empty($this->bc_label_format_header_id)) {
    echo "<br>bc_label_format_header_id missing!. No label generated. Error @bc_label_request @@ " . __LINE__;

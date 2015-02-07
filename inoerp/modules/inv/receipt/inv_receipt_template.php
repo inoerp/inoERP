@@ -17,19 +17,10 @@
          Receipt Header Id </label><?php echo form::text_field_dsr('inv_receipt_header_id'); ?>
         <a name="show" href="form.php?class_name=inv_receipt_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_receipt_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
        </li>
-       <li><label>Inventory </label>
-        <?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1); ?>
-       </li>
-       <li><label>Transaction Type </label>
-        <?php echo form::select_field_from_object('transaction_type_id', transaction_type::find_by_transactionClass('PO'), 'transaction_type_id', 'transaction_type', $$class->transaction_type_id, 'transaction_type_id', $readonly1); ?>
-       </li>
-       <li><label>Number </label>
-        <?php
-        echo $f->text_field('receipt_number', $$class->receipt_number, '8', '', 'primary_column2', '', $readonly1);
-        ?>
-       </li>
-       <li><label>Date </label>
-        <?php echo $f->date_fieldFromToday('receipt_date', ino_date($$class->receipt_date), $readonly1); ?></li>
+       <li><label>Inventory</label><?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1); ?>       </li>
+       <li><label>Transaction Type</label><?php echo  $f->select_field_from_array('transaction_type_id', inv_receipt_header::$transaction_type_id_a,  $$class->transaction_type_id, 'transaction_type_id', '' , 1, $readonly1); ?>       </li>
+       <li><label>Number</label><?php  echo $f->text_field('receipt_number', $$class->receipt_number, '8', '', 'primary_column2', '', $readonly1);    ?>
+       </li><li><label>Date </label><?php echo $f->date_fieldFromToday('receipt_date', ino_date($$class->receipt_date), $readonly1); ?></li>      
       </ul>
      </div>
     </div>

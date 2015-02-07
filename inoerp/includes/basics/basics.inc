@@ -162,6 +162,7 @@ require_once(INC_INV . DS . "inv_transaction" . DS . "class_inv_transaction.inc"
 require_once(INC_INV . DS . "receipt" . DS . "class_inv_receipt_header.inc");
 require_once(INC_INV . DS . "receipt" . DS . "class_inv_receipt_line.inc");
 require_once(INC_INV . DS . "receipt" . DS . "class_inv_receipt_v.inc");
+require_once(INC_INV . DS . "rma_receipt" . DS . "class_inv_rma_receipt_header.inc");
 require_once(INC_MODULE . DS . "inv" . DS . "abc_valuation" . DS . "class_inv_abc_valuation.inc");
 require_once(INC_MODULE . DS . "inv" . DS . "abc_valuation" . DS . "class_inv_abc_valuation_result.inc");
 require_once(INC_MODULE . DS . "inv" . DS . "abc_assignment" . DS . "class_inv_abc_assignment_header.inc");
@@ -211,6 +212,8 @@ require_once(INC_MODULE . DS . "pos" . DS . "pos_inv_control" . DS . "class_pos_
 require_once(INC_MODULE . DS . "pos" . DS . "tt" . DS . "class_pos_tt_header.inc");
 require_once(INC_MODULE . DS . "pos" . DS . "tt" . DS . "class_pos_tt_line.inc");
 require_once(INC_MODULE . DS . "pos" . DS . "tt_with_search" . DS . "class_pos_tt_with_search_header.inc");
+require_once(INC_MODULE . DS . "pos" . DS . "barcode_list" . DS . "class_pos_barcode_list_header.inc");
+require_once(INC_MODULE . DS . "pos" . DS . "barcode_list" . DS . "class_pos_barcode_list_line.inc");
 
 require_once(INC_MODULE . DS . "wip" . DS . "wip_wo" . DS . "class.wip_wo_header.inc");
 require_once(INC_MODULE . DS . "wip" . DS . "wip_wo" . DS . "class.wip_wo_bom.inc");
@@ -256,6 +259,7 @@ require_once(INC_MODULE . DS . "fp" . DS . "mrp" . DS . "class_fp_mrp_demand_v.i
 require_once(INC_MODULE . DS . "fp" . DS . "mrp" . DS . "class_fp_mrp_planned_order.inc");
 require_once(INC_MODULE . DS . "fp" . DS . "mrp" . DS . "class_fp_mrp_lowlevel_code.inc");
 require_once(INC_MODULE . DS . "fp" . DS . "mrp" . DS . "class_fp_mrp_existing_supply_v.inc");
+require_once(INC_MODULE . DS . "fp" . DS . "reports" . DS . "class_fp_reports.inc");
 require_once(INC_MODULE . DS . "sd" . DS . "lead" . DS . "class_sd_lead.inc");
 require_once(INC_MODULE . DS . "sd" . DS . "opportunity" . DS . "class_sd_opportunity.inc");
 require_once(INC_MODULE . DS . "sd" . DS . "quote" . DS . "class_sd_quote_header.inc");
@@ -324,7 +328,7 @@ require_once(INC_MODULE . DS . "cc" . DS . "co_template" . DS . "class_cc_co_tem
 require_once(INC_MODULE . DS . "cc" . DS . "co_template" . DS . "class_cc_co_template_line.inc");
 require_once(INC_MODULE . DS . "cc" . DS . "co" . DS . "class_cc_co_header.inc");
 require_once(INC_MODULE . DS . "cc" . DS . "co" . DS . "class_cc_co_line.inc");
-require_once(INC_MODULE . DS . "bc" . DS . "auto_trigger" . DS . "class_bc_auto_trigger.inc");
+require_once(INC_MODULE . DS . "bc" . DS . "label_auto_trigger" . DS . "class_bc_label_auto_trigger.inc");
 require_once(INC_MODULE . DS . "cc" . DS . "co" . DS . "process_flow" . DS . "class_cc_co_process_flow_action.inc");
 require_once(INC_MODULE . DS . "bc" . DS . "label_format" . DS . "class_bc_label_format_header.inc");
 require_once(INC_MODULE . DS . "bc" . DS . "label_format" . DS . "class_bc_label_format_line.inc");

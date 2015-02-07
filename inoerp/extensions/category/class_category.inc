@@ -40,6 +40,7 @@ class category extends dbObject {
   "major_category_id",
   "parent_id",
   "category",
+  'category_type',
   "description",
   "primary_cb",
   "created_by",
@@ -83,6 +84,7 @@ class category extends dbObject {
  public $major_category_id;
  public $parent_id;
  public $category;
+ public $category_type;
  public $description;
  public $primary_cb;
  public $created_by;
@@ -91,15 +93,18 @@ class category extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
+ 
+  Public static function category_types() {
+  $option_header = option_header::find_by_exact_name('EXTN_CATEGORY_TYPE');
+  $countries = option_line::find_by_option_id($option_header->option_header_id);
+  return $countries;
+ }
+
 
  public function _before_showing() {
   if (!empty($_GET['parent_id'])) {
    $this->parent_id = $_GET['parent_id'];
   }
- }
-
- public function _after_save() {
-  
  }
 
  public function findAll_majorCategories() {

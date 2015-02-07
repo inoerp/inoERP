@@ -21,6 +21,7 @@
         ?> 
        </li>
        <li><label>Category </label><?php echo $f->text_field('category', $$class->category, '30	 '); ?></li>
+       <li><label>Type </label><?php echo $f->select_field_from_object('category_type', category::category_types(),'option_line_code', 'option_line_value' ,$$class->category_type, 'category_type'); ?></li>
        <li><label>Description </label><?php echo $f->text_field('description', $$class->description, '80'); ?></li>
       </ul>
      </div>

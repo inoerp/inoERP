@@ -480,58 +480,32 @@ enableLineForSaveAfterFieldChange();
  });
 $('table.view th').find('img').hide();
 
-// $('#search_page').on('click', '#search_submit_btn', function (e) {
-//  e.preventDefault();
-//  $('.hideDiv_input').trigger('click');
-//  getSearchResult();
-// });
-//
-// $('#search_page').on('click', '.page_nos a', function (e) {
-//  e.preventDefault();
-//  $('.hideDiv_input').trigger('click');
-//  var page_no = getUrlValues('pageno', $(this).prop('href'));
-//  var per_page = getUrlValues('per_page', $(this).prop('href'));
-//  getSearchResult({
-//   pageno: page_no,
-//   per_page: per_page
-//  });
-// });
-//
-// $('#search_page').on('click', 'a.content_per_page', function (e) {
-//  e.preventDefault();
-//  $('.hideDiv_input').trigger('click');
-//  var per_page = $(this).closest('.noOfcontents').find('.per_page').val();
-//  getSearchResult({
-//   per_page: per_page
-//  });
-// });
-// 
-//   $('#multi_select').on('click', '#search_submit_btn', function (e) {
-//  e.preventDefault();
-//  $('.hideDiv_input').trigger('click');
-//  getMultiSelectResult();
-// });
-//
-// $('#multi_select').on('click', '.page_nos a', function (e) {
-//  e.preventDefault();
-//  $('.hideDiv_input').trigger('click');
-//  var page_no = getUrlValues('pageno', $(this).prop('href'));
-//  var per_page = getUrlValues('per_page', $(this).prop('href'));
-//  getMultiSelectResult({
-//   pageno: page_no,
-//   per_page: per_page
-//  });
-// });
-//
-// $('#multi_select').on('click', 'a.content_per_page', function (e) {
-//  e.preventDefault();
-//  $('.hideDiv_input').trigger('click');
-//  var per_page = $(this).closest('.noOfcontents').find('.per_page').val();
-//  getMultiSelectResult({
-//   per_page: per_page
-//  });
-// });
+  $("#document_history_ul").dialog({
+  autoOpen: false,
+  dialogClass: "no-close",
+  modal: true,
+  minWidth: 600,
+  title: "Document History",
+  show: {
+   effect: "blind",
+   duration: 1000
+  },
+  hide: {
+   effect: "explode",
+   duration: 1000
+  },
+  buttons: [
+   {
+    text: "OK",
+    click: function () {
+     $(this).dialog("close");
 
+    }
+   }
+  ],
+  closeOnEscape: true,
+  position: {my: "left top", at: "left top", of: "#structure "}
+ });
 
   $('body').off('click', '#save_program').on('click', '#save_program', function () {
   $('.show_loading_small').show();

@@ -35,6 +35,11 @@ class inv_receipt_header extends dbObject {
   'module_name' => 'inv',
   'weight' => 12
  ];
+public static $transaction_type_id_a = [
+ '5' => 'PO Delivery',
+ '21' => 'PO Return'
+];
+  
  public $field_a = [
   "inv_receipt_header_id",
   "receipt_number",

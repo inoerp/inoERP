@@ -241,6 +241,9 @@
        <li><label>Locator Control : </label> 
         <?php echo form::text_field_d('locator_control'); ?>
        </li>
+              <li><label>Kit Item? : </label> 
+        <?php echo form::checkBox_field('kit_cb', $$class->kit_cb, '', $readonly); ?>
+       </li>
       </ul>
      </div>
      <div class="second_rowset">
@@ -386,9 +389,8 @@
        <li><label>BOM Enabled : </label>
         <?php echo form::checkBox_field('bom_enabled_cb', $$class->bom_enabled_cb, '', $readonly); ?>
        </li>
-       <li><label>BOM Type: </label>
-        <?php echo form::text_field_d('bom_type'); ?>
-       </li>
+       <li><label>BOM Type: </label> 
+        <?php echo $f->select_field_from_object('bom_type', item::bom_types(),'option_line_code','option_line_value', $$class->bom_type,'bom_type'); ?>       </li>
        <li><label>Build in WIP : </label>
         <?php echo form::checkBox_field('build_in_wip_cb', $$class->build_in_wip_cb, '', $readonly); ?>
        </li>

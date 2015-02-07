@@ -160,9 +160,9 @@
    }
 
    if ((empty($this->line_status)) && (!empty($this->schedule_ship_date))) {
-    $this->line_status = 'AWAITING_PICKING';
+    $this->line_status = $this->line_quantity < 0 ? 'AWAITING_RETURN': 'AWAITING_PICKING';
    } else if (($this->line_status = 'ENTERED') && (!empty($this->schedule_ship_date))) {
-    $this->line_status = 'AWAITING_PICKING';
+        $this->line_status = $this->line_quantity < 0 ? 'AWAITING_RETURN': 'AWAITING_PICKING';
    } else if ((empty($this->line_status)) && (empty($this->schedule_ship_date))) {
     $this->line_status = 'ENTERED';
    }

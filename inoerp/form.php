@@ -12,7 +12,7 @@ if (!empty($_GET['class_name'])) {
  include_once(THEME_DIR . '/main_template.inc');
  return;
 } else {
- die('No class found!');
+ die('No class found!. Error @ form.php @@ line 15');
 }
 ?>
 <?php

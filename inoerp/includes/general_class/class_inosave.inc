@@ -371,6 +371,8 @@ class inosave extends dbObject {
 
  private function save_header() {
   echo '<div id="json_save_header">';
+  echo '<div class="alert alert-danger alert-dismissible" role="alert">
+       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
   $class = $this->_classname;
   $keyField = $this->_key_field;
   $primaryColumn = $this->_primary_column;
@@ -427,11 +429,13 @@ class inosave extends dbObject {
    }
   }
 
-  echo '</div>';
+  echo '</div></div>';
  }
 
  private function save_line($linedata, $json_data) {
   echo '<div id="json_save_line">';
+    echo '<div class="alert alert-danger alert-dismissible" role="alert">
+<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
   $class = $this->_classname;
   $keyField = $this->_key_field;
   $primaryColumn = $this->_primary_column;
@@ -466,12 +470,14 @@ class inosave extends dbObject {
     }
    }
   }
-  echo '</div>';
+  echo '</div></div>';
  }
 
  //function to save both line & detail data
  private function save_line_withDetails($lineDetail_data) {
   echo '<div id="json_save_line">';
+    echo '<div class="alert alert-danger alert-dismissible" role="alert">
+<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
   $class = $this->_classname;
   $keyField = $this->_key_field;
   $primaryColumn = $this->_primary_column;
@@ -524,11 +530,11 @@ class inosave extends dbObject {
     }
    }
   }
-  echo '</div>';
+  echo '</div></div>';
  }
 
  public function json_save($json_data = true) {
-    if (!empty($_POST['headerData'])) {
+  if (!empty($_POST['headerData'])) {
    $this->save_header();
   }
 

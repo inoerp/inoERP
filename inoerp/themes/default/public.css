@@ -201,22 +201,6 @@ a:hover, a:active {
  text-decoration: underline;
 }
 
-.error {
- display: block;
- clear : both;
- width: 600px;
- margin : 5px 0 0 0;
- font-weight: bold;
- color: #cf1925;
- margin-bottom : 2px;
- font-family: sans-serif, Times;
- font-size: 12px;
- line-height: 15px;
- padding: 2px 20px;;
- background : yellow;
- border : 1px solid;
-}
-
 .error:empty {
  display: none;
  border: none;

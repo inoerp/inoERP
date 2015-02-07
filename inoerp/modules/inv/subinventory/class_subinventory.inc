@@ -214,8 +214,6 @@ VAR;
    $value_a['subinventory_id'] = $this->subinventory_id;
   }
   $result = $this->findBySql($sql, $value_a);
-  pa($result);
-  echo $sql;
   return !empty($result) ? $result : false;
  }
 

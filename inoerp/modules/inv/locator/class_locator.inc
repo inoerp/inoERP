@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -21,7 +22,7 @@ class locator extends subinventory {
  public static $module = "inv";
  public static $multi_select_template_path = 'modules/inv/locator/multi_action/locator_template_ma.php';
 //  data base variables as stored database column name
-   public static $system_info = [
+ public static $system_info = [
   'name' => 'Locator',
   'number' => '2108',
   'description' => 'Inventory Transaction',
@@ -39,7 +40,18 @@ class locator extends subinventory {
   "locator_structure",
   "locator",
   "alias",
-  "ef_id",
+  'dimension_uom_id',
+  'length',
+  'height',
+  'width',
+  'x_coordinate',
+  'y_coordinate',
+  'z_coordinate',
+  'max_units',
+  'max_volume_uom_id',
+  'max_volume',
+  'max_weight_uom_id',
+  'max_weight',
   "status",
   "rev_enabled_cb",
   "rev_number",
@@ -69,6 +81,12 @@ class locator extends subinventory {
  public $checkbox = [
   "rev_enabled_cb"
  ];
+ 
+ public $numberField = [
+  'max_units',
+  'max_volume',
+  'max_weight',
+ ];
  public $requiredField = [
   "org_id",
   "subinventory_id"
@@ -93,6 +111,18 @@ class locator extends subinventory {
  public $locator;
  public $alias;
  public $ef_id;
+ public $dimension_uom_id;
+ public $length;
+ public $height;
+ public $width;
+ public $x_coordinate;
+ public $y_coordinate;
+ public $z_coordinate;
+ public $max_units;
+ public $max_volume_uom_id;
+ public $max_volume;
+ public $max_weight_uom_id;
+ public $max_weight;
  public $status;
  public $rev_enabled_cb;
  public $rev_enabled;
@@ -173,7 +203,7 @@ VAR;
    $value_a['locator_id'] = $this->locator_id;
   }
   $result = $this->findBySql($sql, $value_a);
-  
+
   return !empty($result) ? $result : false;
  }
 

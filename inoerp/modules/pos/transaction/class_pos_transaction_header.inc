@@ -105,6 +105,25 @@ class pos_transaction_header extends dbObject {
   return $line_data_array;
  }
 
+ public static function find_POSPrice_by_ItemIdM_orgId($Item_id_m, $org_id) {
+  $sql = "SELECT plh.mdm_price_list_header_id, pll.mdm_price_list_line_id, pll.org_id, pll.item_id_m, pll.unit_price
+FROM mdm_price_list_header plh,
+mdm_price_list_line pll,
+inventory inv
+
+WHERE pll.mdm_price_list_header_id = plh.mdm_price_list_header_id
+AND inv.pos_price_list_header_id = plh.mdm_price_list_header_id
+AND inv.org_id = '{$org_id}'
+AND pll.item_id_m = '{$Item_id_m}'
+AND pll.effective_start_date <= NOW()
+AND ( pll.effective_end_date >= NOW() OR  pll.effective_end_date IS NULL)
+LIMIT 1
+
+";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? array_pop($result) : '';
+ }
+
  private function _sync_pos_by_terminalId($terminal_id) {
   global $dbc;
   //find all transaction lines need to be synchronized
@@ -198,6 +217,7 @@ AND pt.pos_terminal_id = '{$terminal_id}'
 
    //create journal for cash, revenue & tax amount
    if (empty($pos_transaction_header_id) || $pos_transaction_header_id !== $tl_record->pos_transaction_header_id) {
+    pa($tl_record);
     $pos_transaction_header_id = $tl_record->pos_transaction_header_id;
     $this->_sync_tax_amount = $tl_record->tax_amount;
     $this->_total_amount = $tl_record->total_amount;
@@ -304,24 +324,29 @@ AND pt.pos_terminal_id = '{$terminal_id}'
   $new_gjl->reference_type = '';
   $new_gjl->save();
 
-  $new_gjl->gl_journal_line_id = null;
-  $new_gjl->line_num = $j_line_num;
-  $j_line_num++;
-  $new_gjl->code_combination_id = $this->_sync_tax_ac_id;
-  $new_gjl->total_cr = $this->_sync_tax_amount;
-  $new_gjl->total_ac_cr = $this->_sync_tax_amount;
-  $new_gjl->description = 'POS Sync';
-  $new_gjl->save();
+  $new_gjl->total_cr = $new_gjl->total_ac_cr = 0;
+  if (!empty($this->_sync_tax_amount)) {
+   $new_gjl->gl_journal_line_id = null;
+   $new_gjl->line_num = $j_line_num;
+   $j_line_num++;
+   $new_gjl->code_combination_id = $this->_sync_tax_ac_id;
+   $new_gjl->total_cr = $this->_sync_tax_amount;
+   $new_gjl->total_ac_cr = $this->_sync_tax_amount;
+   $new_gjl->description = 'POS Sync';
+   $new_gjl->save();
+  }
+
 
 //	save the Cash Account
   $new_gjl->gl_journal_line_id = null;
   $new_gjl->line_num = $j_line_num;
   $j_line_num++;
-  $new_gjl->code_combination_id = $this->_sync_cash_amount;
-  $new_gjl->total_dr = $this->_total_amount - $this->_sync_tax_amount ;
-  $new_gjl->total_ac_dr =  $this->_total_amount -  $this->_sync_tax_amount;
+  $new_gjl->code_combination_id = $this->_sync_cash_ac_id;
+  $new_gjl->total_dr = $this->_total_amount - $this->_sync_tax_amount;
+  $new_gjl->total_ac_dr = $this->_total_amount - $this->_sync_tax_amount;
   $new_gjl->description = 'POS Sync';
   $new_gjl->save();
+  pa($new_gjl);
  }
 
 }

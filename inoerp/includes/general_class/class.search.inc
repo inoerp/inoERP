@@ -302,7 +302,7 @@ class search extends dbObject {
   $search_form_statement .= "<select name=\"new_search_criteria\" id=\"new_search_criteria\" class=\"new_search_criteria\">";
   foreach ($search_array as $key => $search_value) {
    $search_form_statement .= '<option value="' . htmlentities($search_value) . '"';
-   $search_form_statement .= '>' . $search_value . '</option>';
+   $search_form_statement .= '>' . ucwords(str_replace('_', ' ', $search_value)) . '</option>';
   }
   $search_form_statement .= '</select>';
 //	$search_form_statement .= '<li><input type="button" class="add button" id="new_search_criteria_add" value="Add"></li>';

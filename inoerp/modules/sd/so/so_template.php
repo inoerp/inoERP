@@ -1,4 +1,4 @@
-<div id ="form_header"><span class="heading">Sales Order Header</span>
+<div id ="form_header"><span class="heading">Sales Order / RMA Header</span>
  <form action=""  method="post" id="sd_so_header"  name="sd_so_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -120,7 +120,7 @@
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading">SO Lines & Shipments </span>
+<div id="form_line" class="form_line"><span class="heading">SO / RMA Lines & Shipments </span>
  <form action=""  method="post" id="so_site"  name="sd_so_line">
   <div id="tabsLine">
    <ul class="tabMain">
@@ -232,12 +232,13 @@
         <th>Seq#</th>
         <th>Requested Date</th>
         <th>Promise Date </th>
-        <th>Schedule Ship Date</th>
-        <th>Actual Ship Date</th>
+        <th>Schedule Ship / Receipt Date</th>
+        <th>Actual Ship / Receipt Date</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
+       $f = new inoform();
        $count = 0;
        foreach ($sd_so_line_object as $sd_so_line) {
         ?>         
@@ -264,7 +265,7 @@
         <th>Supply Source </th>
         <th>Destination Type </th>
         <th>Picked Quantity </th>
-        <th>Shipped Quantity</th>
+        <th>Shipped /Received Quantity</th>
         <th>Ref Doc Type</th>
         <th>Ref Number</th>
        </tr>

@@ -26,8 +26,8 @@ class bc_label_format_header extends dbObject {
   'disable_date',
   'default_cb',
   'description',
-  'data_obj_class_name',
-  'data_obj_function_name',
+  'generator_class_name',
+  'generator_function_name',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -48,8 +48,8 @@ class bc_label_format_header extends dbObject {
   '_show_view_path' => 1,
  ];
  public $bc_label_format_header_id;
- public $data_obj_function_name;
- public $data_obj_class_name;
+ public $generator_function_name;
+ public $generator_class_name;
  public $label_type;
  public $format_name;
  public $disable_date;

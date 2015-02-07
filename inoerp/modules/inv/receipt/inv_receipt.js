@@ -190,52 +190,6 @@ $(document).ready(function () {
   void window.open('select.php?class_name=inv_receipt_header', '_blank',
           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
- //Get the receipt_id on find button click
-// $('a.show.inv_receipt_header').click(function () {
-//  var receiptId = $('#inv_receipt_header_id').val();
-//  $(this).attr('href', modepath() + 'inv_receipt_header_id=' + receiptId);
-// });
-//
-// $("#content").on("click", ".add_row_img", function () {
-//  var addNewRow = new add_new_rowMain();
-//  addNewRow.trClass = 'inv_receipt_line';
-//  addNewRow.tbodyClass = 'form_data_line_tbody';
-//  addNewRow.noOfTabs = 5;
-//  addNewRow.removeDefault = true;
-//  addNewRow.add_new_row();
-// });
-//
-// //context menu
-// var classContextMenu = new contextMenuMain();
-// classContextMenu.docHedaderId = 'inv_receipt_header_id';
-// classContextMenu.docLineId = 'inv_receipt_line_id';
-// classContextMenu.btn1DivId = 'receipt_header';
-// classContextMenu.btn2DivId = 'form_line';
-// classContextMenu.trClass = 'receipt_line';
-// classContextMenu.tbodyClass = 'form_data_line_tbody';
-// classContextMenu.noOfTabbs = 5;
-// classContextMenu.contextMenu();
-//
-//
-// var classSave = new saveMainClass();
-// classSave.json_url = 'form.php?class_name=receipt_header';
-// classSave.form_header_id = 'inv_receipt_header';
-// classSave.primary_column_id = 'inv_receipt_header_id';
-// classSave.line_key_field = 'item_description';
-// classSave.single_line = false;
-// classSave.savingOnlyHeader = false;
-// classSave.headerClassName = 'inv_receipt_header';
-// classSave.lineClassName = 'inv_receipt_line';
-// classSave.enable_select = true;
-// classSave.saveMain();
-//
-//
-// //add or show linw details
-// addOrShow_lineDetails('tr.inv_receipt_line0');
-//
-// onClick_addDetailLine(2, '.add_row_detail_img1');
-// onClick_addDetailLine(1, '.add_row_detail_img');
-
 
  onClick_addDetailLine(1, '.add_row_detail_img1');
 
@@ -331,67 +285,6 @@ $(document).ready(function () {
           $('#content').find(trClass_d).find('.lot_number, .inv_lot_number_id').attr('required', true).css('background-color', 'pink');
 
          });
-
-// $('#content').on('blur', '.subinventory_id, .locator_id', function () {
-//  var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
-//  var trClass_d = '.' + trClass;
-//  var generation_type = $('#content').find(trClass_d).find('.lot_generation').val();
-//
-//  if (!generation_type) {
-//   var field_stmt = '<input class="textfield lot_number" type="text" size="25" readonly name="lot_number[]" >';
-//   $('#content').find(trClass_d).find('.inv_lot_number_id').replaceWith(field_stmt);
-//   $('#content').find(trClass_d).find('.lot_number').replaceWith(field_stmt);
-////   alert('Item is not lot controlled.\nNo lot information \'ll be saved in database');
-//   return;
-//  }
-//  var itemIdM = $('#content').find(trClass_d).find('.item_id_m').val();
-//  if (!itemIdM) {
-//   return;
-//  }
-//
-//  switch ($('#transaction_type_id').val()) {
-//   case '5' :
-//    if (generation_type === 'PRE_DEFINED') {
-//     $.when(getlotNumber({
-//      'org_id': $('#org_id').val(),
-//      'status': 'ACTIVE',
-//      'item_id_m': itemIdM,
-//      'trclass': trClass
-//     })).then(function (data, textStatus, jqXHR) {
-//      if ($.trim(data) == 'false' || $.trim(data) == 'undefined') {
-//       alert('No lot Number Found!\nCheck the subinventory, locator and item number');
-//      }
-//     });
-//    }
-//    break;
-//
-//   case '21' :
-//    var subinventory_id = $('#content').find(trClass_d).find('.subinventory_id').val();
-//    if (!subinventory_id) {
-//     alert('No from subinventory');
-//     return;
-//    }
-//    $.when(getlotNumber({
-//     'org_id': $('#org_id').val(),
-//     'status': 'ACTIVE',
-//     'item_id_m': itemIdM,
-//     'trclass': trClass,
-//     'subinventory_id': subinventory_id,
-//     'locator_id': $('#content').find(trClass_d).find('.locator_id').val(),
-//    })).then(function (data, textStatus, jqXHR) {
-//     if ($.trim(data) == 'false' || $.trim(data) == 'undefined') {
-//      alert('No lot Number Found!\nCheck the subinventory, locator and item number');
-//     }
-//    });
-//    break;
-//
-//   case 'undefined' :
-//   case '' :
-//    alert('Enter the transaction type');
-//    break;
-//  }
-//  $('#content').find(trClass_d).find('.lot_number, .inv_lot_number_id').attr('required', true).css('background-color', 'pink');
-// });
 
  $('body').off('change', '#transaction_action').
          on('change', '#transaction_action', function () {

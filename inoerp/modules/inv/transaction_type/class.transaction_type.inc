@@ -57,16 +57,7 @@ class transaction_type extends dbObject {
   "transaction_action",
   "description"
  ];
- public $column = [
-  "transaction_type_id",
-  'transaction_type_number',
-  "transaction_type",
-  "type_class",
-  "transaction_action",
-  "description",
-  "allow_negative_balance_cb",
-  "account_id"
- ];
+
  public $account = [
   "account_id"
  ];

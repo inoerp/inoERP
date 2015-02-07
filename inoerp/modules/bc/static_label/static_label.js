@@ -21,25 +21,25 @@ $(document).ready(function() {
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- $('#content').on('change', '#org_id', function() {
+ $('body').off('change', '#org_id').on('change', '#org_id', function() {
 getSubInventory();
 });
 
-$('#content').on('change', '#subinventory_id', function() {
+$('body').off('change', '#subinventory_id').on('change', '#subinventory_id', function() {
   var subInventoryId = $(this).val();
 if (subInventoryId) {
  getLocator('modules/inv/locator/json_locator.php', subInventoryId, 'oneSubinventory', '');
 }
 });
 
-$('#print_label').on('click', function(){
+$('body').off('click', '#print_label').on('click', '#print_label' , function(){
 var printData = $('#print_tab').find(":input").serializeArray();
   printLabel({
     print_parameters : printData
   });
 });
 
-$('#print_static_label').on('click', function(){
+$('body').off('click', '#print_static_label').on('click', '#print_static_label',function(){
 var printData = $('#print_tab').find(":input").serializeArray();
   printLabel({
     print_parameters : printData

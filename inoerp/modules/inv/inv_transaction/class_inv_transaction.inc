@@ -95,17 +95,6 @@ class inv_transaction extends dbObject {
   "document_type",
   "document_number"
  ];
- public $column = [
-  "inv_transaction_id",
-  "transaction_type_id",
-  'status',
-  "item_number",
-  "document_type",
-  "document_number",
-  "reason",
-  "reference_type",
-  "created_by",
-  "creation_date"];
  public $account = [
   "from_account_id",
   "to_account_id",
@@ -550,7 +539,7 @@ class inv_transaction extends dbObject {
   }
 
 
-  if (in_array($this->transaction_type_id, array(20, 5, 7, 11))) {
+  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 23))) {
    $return_val = $this->_transact_serial_receipt();
   }
 
@@ -600,7 +589,7 @@ class inv_transaction extends dbObject {
    $return_val = $this->_transact_lot_issue();
   }
 
-  if (in_array($this->transaction_type_id, array(20, 5, 7, 11))) {
+  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 23))) {
    $return_val = $this->_transact_lot_receipt();
   }
 
@@ -771,6 +760,7 @@ class inv_transaction extends dbObject {
    case 5:
    case 10:
    case 11:
+   case 23:
     $data_obj = $this;
     $data_obj->locator = locator::find_by_id($this->to_locator_id)->locator;
     $data_obj->subinventory = subinventory::find_by_id($this->to_subinventory_id)->subinventory;
@@ -781,7 +771,7 @@ class inv_transaction extends dbObject {
  }
 
  private function _generate_bc_labels() {
-  $bc_auto = bc_auto_trigger::find_by_transactionTypId($this->transaction_type_id);
+  $bc_auto = bc_label_auto_trigger::find_by_transactionTypId($this->transaction_type_id);
   if ($bc_auto) {
    //get the correct association level
    $bc_auto_i = $bc_auto[0];
@@ -791,14 +781,31 @@ class inv_transaction extends dbObject {
      $bc_lr = new bc_label_request();
      $bc_lr->sys_printer_id = $bc_auto_i->sys_printer_id;
      $bc_lr->bc_label_format_header_id = $bc_auto_i->bc_label_format_header_id;
-     try {
-      $data_obj = $this->_get_barcode_dataObj();
-     } catch (Exception $e) {
-      $data_obj = $this;
+     $lbl_frmt_hdr = bc_label_format_header::find_by_id($bc_auto_i->bc_label_format_header_id);
+     if (!empty($lbl_frmt_hdr->generator_class_name) && !empty($lbl_frmt_hdr->generator_function_name)) {
+      $class_gl = $lbl_frmt_hdr->generator_class_name;
+      $$class_gl = new $class_gl;
+
+      if (method_exists($$class_gl, $lbl_frmt_hdr->generator_function_name)) {
+       $xml_content_rtn = call_user_func(array($$class_gl, $lbl_frmt_hdr->generator_function_name), $this);
+       if (is_array($xml_content_rtn)) {
+        foreach ($xml_content_rtn as $xml_content) {
+         $bc_lr->print_XMLlabel($xml_content);
+        }
+       } else {
+//        echo $xml_content_rtn;
+        $bc_lr->print_XMLlabel($xml_content_rtn);
+       }
+      }
+     } else {
+      try {
+       $data_obj = $this->_get_barcode_dataObj();
+       $xml_content = $bc_lr->generate_label($data_obj);
+       $bc_lr->print_XMLlabel($xml_content);
+      } catch (Exception $e) {
+       $data_obj = $this;
+      }
      }
-     $xml_content = $bc_lr->generate_label($data_obj);
-     echo $xml_content;
-     $bc_lr->print_XMLlabel($xml_content);
     }
    } catch (Exception $e) {
     echo "<br>Failed to genearte label . Error @ inv_transaction @@ line " . __LINE__ . $e->getMessage();
@@ -1070,6 +1077,7 @@ class inv_transaction extends dbObject {
    case 11 :
    case 17 :
    case 20 :
+   case 23 :
     $onhand->setProperty('_to_org_id', $this->org_id);
     $onhand->setProperty('_to_subinventory_id', $this->to_subinventory_id);
     $onhand->setProperty('_to_locator_id', $this->to_locator_id);
@@ -1078,10 +1086,11 @@ class inv_transaction extends dbObject {
     $onhand->revision_name = $this->revision_name;
     $update_result = $onhand->updateOnhand();
     $this->_onhand_id_to = $onhand->onhand_id;
-    //create journals for  Misc Receipt/ WIP Assembly Completion
+    //create Dr journals lines
     $journal_line_a = $this->_cretae_journal_line_array($element_value_a, $this->to_subinventory_id, 'dr', 1);
 
 
+    //cretae Cr journal line
     if ($this->transaction_type_id == 5) {
      $po_v = new po_all_v();
      $po_v->po_detail_id = $this->po_detail_id;
@@ -1145,7 +1154,7 @@ class inv_transaction extends dbObject {
     } else if ($this->transaction_type_id == 20) {
      array_push($inv_receving_trnx_a, 20);
     }
-    if (in_array($this->transaction_type_id, array(2, 17))) {
+    if (in_array($this->transaction_type_id, array(2, 17, 23))) {
      $total_amount = 0;
      $line_number = 1;
      foreach ($journal_line_a as $journal_line) {
@@ -1158,7 +1167,14 @@ class inv_transaction extends dbObject {
      if (!empty($total_amount)) {
       $journal_line['line_number'] = $line_number;
       $journal_line['amount'] = $total_amount;
-      $journal_line['account_id'] = $this->account_id;
+      if ($this->transaction_type_id == 23) {
+       $inv_d1 = inventory::find_by_org_id($this->org_id);
+       if (!empty($inv_d1->cogs_ac_id)) {
+        $journal_line['account_id'] = $inv_d1->cogs_ac_id;
+       }
+      } else {
+       $journal_line['account_id'] = $this->account_id;
+      }
       $journal_line['dr_cr'] = 'cr';
       array_push($journal_line_a, $journal_line);
      }
@@ -1168,6 +1184,10 @@ class inv_transaction extends dbObject {
     if ($this->transaction_type_id == 21) {
      $this->_after_save_po_return($journal_line_a);
     }
+
+//    if ($this->transaction_type_id == 23) {
+//     $this->_after_save_rmaReceipt();
+//    }
     break;
 
    case 3 :
@@ -1438,6 +1458,8 @@ class inv_transaction extends dbObject {
   $result = self::find_by_sql($sql);
   return !empty($result) ? ($result) : false;
  }
+
+
 
 }
 

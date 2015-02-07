@@ -4138,7 +4138,7 @@ ul.form_buttons li{
  min-width: 600px;
  margin-top: 200px;
  border-radius: 50px 50px 50px 50px;
- z-index: 10;
+ z-index: 1000;
  background-color: rgba(233, 233, 233, 0.95);
 }
 
@@ -4508,16 +4508,16 @@ a.show {
 @media (min-width: 768px) {
  .sidebar {
   position: fixed;
-  top: 51px;
+  top: 60px;
   bottom: 0;
   left: 0;
   z-index: 1000;
   display: block;
-  padding: 20px;
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
   background-color: #f5f5f5;
   border-right: 1px solid #eee;
+  padding-top: 10px;
  }
 
  #navigation_bar {
@@ -4876,4 +4876,34 @@ fieldset.form_detail_data_fs {
 
 #header-style-1 .nav-pills{
  margin-top:10px;
+}
+
+#sys_menu_left_vertical .fa a{
+ font-family: "Lato",sans-serif;
+ font-size: 14px;
+ line-height: 24.5px;
+ font-weight: bold;
+}
+
+#sys_menu_left_vertical .fa li a{
+ font-weight: normal;
+}
+
+#sys_menu_left_vertical ul.child_menu li a:hover {
+        color: #2574A9;font-weight: bold;
+}
+
+#sys_menu_left_vertical ul.child_menu li:hover {
+        background-color: rgba(181, 215, 183, 0.77);
+        border: 2px solid #fff;
+        border-radius: 5px;
+}
+
+h3.nav-panel{
+        background-color : #3FB6DA;
+        padding: 10px 10px;
+        margin : 10px -10px;
+        font-weight: bold;
+        font-family: "Lato",sans-serif;
+        color: #fff;
 }

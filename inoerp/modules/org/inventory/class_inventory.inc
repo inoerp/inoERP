@@ -43,6 +43,7 @@
    "allow_negative_balance_cb",
    "costing_org",
    "costing_method",
+   'pos_price_list_header_id',
    "transfer_to_gl_cb",
    "default_cost_group",
    "material_ac_id",
@@ -149,6 +150,7 @@
   public $allow_negative_balance_cb;
   public $costing_org;
   public $costing_method;
+  public $pos_price_list_header_id;
   public $transfer_to_gl_cb;
   public $default_cost_group;
   public $material_ac_id;

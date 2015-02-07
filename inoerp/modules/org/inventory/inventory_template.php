@@ -83,6 +83,9 @@
         <li><label>Allow Negative Balance : </label>
          <?php echo form::checkBox_field('allow_negative_balance_cb', $inventory->allow_negative_balance_cb, 'allow_negative_balance_cb', $readonly); ?>
         </li> 
+        <li><label>POS Price List : </label>
+         <?php echo $f->select_field_from_object('pos_price_list_header_id', mdm_price_list_header::find_all(), 'mdm_price_list_header_id' , 'price_list' ,$$class->pos_price_list_header_id, 'pos_price_list_header_id'); ?>
+        </li> 
        </ul> 
       </div> 
       <!--end of tab1 div three_column-->
@@ -176,11 +179,11 @@
          <input type="text" name="default_cost_group" value="<?php echo htmlentities($inventory->default_cost_group); ?>" 
                 size="10" maxlength="150"  id="default_cost_group"> 
         </li> 
-        <li><label>Material Ac : </label><?php $f->ac_field_d('material_ac_id','A'); ?></li> 
-        <li><label>Material Overhead Ac: </label><?php $f->ac_field_d('material_oh_ac_id','A'); ?></li>
-        <li><label>Overhead Ac: </label><?php $f->ac_field_d('overhead_ac_id','A'); ?></li>
-        <li><label>Resource Ac: </label><?php $f->ac_field_d('resource_ac_id','A'); ?></li>
-        <li><label>Expense Ac: </label><?php $f->ac_field_d('expense_ac_id','X'); ?></li> 
+        <li><label>Material Ac : </label><?php $f->ac_field_d('material_ac_id', 'A'); ?></li> 
+        <li><label>Material Overhead Ac: </label><?php $f->ac_field_d('material_oh_ac_id', 'A'); ?></li>
+        <li><label>Overhead Ac: </label><?php $f->ac_field_d('overhead_ac_id', 'A'); ?></li>
+        <li><label>Resource Ac: </label><?php $f->ac_field_d('resource_ac_id', 'A'); ?></li>
+        <li><label>Expense Ac: </label><?php $f->ac_field_d('expense_ac_id', 'X'); ?></li> 
        </ul>
       </div> 
       <!--                end of tab2 div three_column-->
@@ -190,17 +193,17 @@
      <div id="tabsLine-5"  class="tabContent">
       <div> 
        <ul class="column four_column">
-        <li><label>Inter Org Receivable Ac: </label><?php $f->ac_field_d('inter_org_receivable_ac_id','A'); ?></li>  
-        <li><label>Inter Org PPV Ac : </label><?php $f->ac_field_d('inter_org_ppv_ac_id','X'); ?></li> 
-        <li><label>Inter Org Payable Ac : </label><?php $f->ac_field_d('inter_org_payable_ac_id','L'); ?></li>  
-        <li><label>Inter Org InTransit Ac : </label><?php $f->ac_field_d('inter_org_intransit_ac_id','A'); ?></li>  
-        <li><label>Inv AP Accrual Ac : </label><?php $f->ac_field_d('inv_ap_accrual_ac_id','L'); ?></li>  
-        <li><label>Inv AP Expense Accrual Ac : </label> <?php $f->ac_field_d('inv_ap_exp_accrual_ac_id','L'); ?></li> 
-        <li><label>Inventory PPV Ac : </label><?php $f->ac_field_d('inv_ppv_ac_id','X'); ?></li>  
-        <li><label>Inventory IPV Ac : </label><?php $f->ac_field_d('inv_ipv_ac_id','X'); ?></li>  
-        <li><label>Sales Ac : </label><?php $f->ac_field_d('sales_ac_id','I'); ?></li>  
-        <li><label>COGS Ac : </label><?php $f->ac_field_d('cogs_ac_id','X'); ?></li>  
-        <li><label>Deferred COGS Ac : </label><?php $f->ac_field_d('deferred_cogs_ac_id','A'); ?></li>  
+        <li><label>Inter Org Receivable Ac: </label><?php $f->ac_field_d('inter_org_receivable_ac_id', 'A'); ?></li>  
+        <li><label>Inter Org PPV Ac : </label><?php $f->ac_field_d('inter_org_ppv_ac_id', 'X'); ?></li> 
+        <li><label>Inter Org Payable Ac : </label><?php $f->ac_field_d('inter_org_payable_ac_id', 'L'); ?></li>  
+        <li><label>Inter Org InTransit Ac : </label><?php $f->ac_field_d('inter_org_intransit_ac_id', 'A'); ?></li>  
+        <li><label>Inv AP Accrual Ac : </label><?php $f->ac_field_d('inv_ap_accrual_ac_id', 'L'); ?></li>  
+        <li><label>Inv AP Expense Accrual Ac : </label> <?php $f->ac_field_d('inv_ap_exp_accrual_ac_id', 'L'); ?></li> 
+        <li><label>Inventory PPV Ac : </label><?php $f->ac_field_d('inv_ppv_ac_id', 'X'); ?></li>  
+        <li><label>Inventory IPV Ac : </label><?php $f->ac_field_d('inv_ipv_ac_id', 'X'); ?></li>  
+        <li><label>Sales Ac : </label><?php $f->ac_field_d('sales_ac_id', 'I'); ?></li>  
+        <li><label>COGS Ac : </label><?php $f->ac_field_d('cogs_ac_id', 'X'); ?></li>  
+        <li><label>Deferred COGS Ac : </label><?php $f->ac_field_d('deferred_cogs_ac_id', 'A'); ?></li>  
        </ul>
       </div> 
       <!--                end of tab2 div three_column-->

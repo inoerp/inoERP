@@ -24,8 +24,8 @@
     <div id="tabsHeader-2" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column one_column">
-       <li><label>Data Object Class Name: </label><?php $f->text_field_dl('data_obj_class_name'); ?></li>
-       <li><label>Data Object Function Name: </label><?php $f->text_field_dl('data_obj_function_name'); ?></li>
+       <li><label>Generator Class Name: </label><?php $f->text_field_dl('generator_class_name'); ?></li>
+       <li><label>Generator Function Name: </label><?php $f->text_field_dl('generator_function_name'); ?></li>
       </ul>
      </div>
     </div>

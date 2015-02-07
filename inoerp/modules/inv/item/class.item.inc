@@ -58,6 +58,7 @@ class item extends dbObject {
  ];
  public $checkbox = [
   "item_rev_enabled_cb",
+  'kit_cb',
   "inventory_item_cb",
   "stockable_cb",
   "transactable_cb",
@@ -175,6 +176,7 @@ class item extends dbObject {
   "cogs_ac_id",
   "deffered_cogs_ac_id",
   "onhand_with_rev_cb",
+  'kit_cb',
   "inventory_item_cb",
   "stockable_cb",
   "transactable_cb",
@@ -312,6 +314,7 @@ class item extends dbObject {
  public $serial_starting_number;
  public $serial_uniqueness;
  public $purchased_cb;
+ public $kit_cb;
  public $use_asl_cb;
  public $invoice_matching;
  public $default_buyer;
@@ -436,7 +439,13 @@ class item extends dbObject {
   return $coa_account_types;
  }
 
- Public static function planning_method() {
+ Public static function bom_types() {
+  $option_header = option_header::find_by_name('INV_ITEM_BOM_TYPE');
+  $ol = option_line::find_by_option_id($option_header->option_header_id);
+  return $ol;
+ }
+ 
+  Public static function planning_method() {
   $option_header = option_header::find_by_name('MP_PLANNING_METHOD');
   $ol = option_line::find_by_option_id($option_header->option_header_id);
   return $ol;

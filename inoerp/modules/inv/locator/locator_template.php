@@ -1,4 +1,4 @@
-<form action=""  method="post" id="locator"  name="locator">
+<form action=""  method="post" id="locator"  name="locator"><span class="heading">Storage Locator</span>
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -48,7 +48,47 @@
   </div>
  </div>
 
+ <div id ="form_line" class="form_line"><span class="heading">Locator Details </span>
+  <div id="tabsLine">
+   <ul class="tabMain">
+    <li><a href="#tabsLine-1">Dimensions</a></li>
+    <li><a href="#tabsLine-2">Capacity</a></li>
+   </ul>
+   <div class="tabContainer">
+    <div id="tabsLine-1" class="tabContent">
+     <div> 
+      <ul class="column four_column"> 
+       <li><label>Dimension UOM : </label>
+        <?php
+        $f = new inoform();
+        echo $f->select_field_from_object('dimension_uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->dimension_uom_id, 'dimension_uom_id');
+        ?></li>
+       <li><label>Height : </label><?php echo form::text_field_d('height'); ?></li> 
+       <li><label>Length : </label><?php echo form::text_field_d('length'); ?></li>
+       <li><label>Width : </label><?php echo form::text_field_d('width'); ?></li>
+       <li><label>X Co-ordinate : </label><?php echo form::text_field_d('x_coordinate'); ?></li>
+       <li><label>Y Co-ordinate : </label><?php echo form::text_field_d('y_coordinate'); ?></li>
+       <li><label>Z Co-ordinate : </label><?php echo form::text_field_d('z_coordinate'); ?></li>
+      </ul> 
+     </div> 
+     <!--end of tab1 div three_column-->
+    </div> 
+    <!--              end of tab1-->
 
+    <div id="tabsLine-2" class="tabContent">
+     <div> 
+      <ul class="column four_column"> 
+       <li><label>Max Units : </label><?php echo $f->number_field('max_units', $$class->max_units, '', 'max_units','medium'); ?></li> 
+       <li><label>Volume UOM : </label><?php echo $f->select_field_from_object('max_volume_uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->max_volume_uom_id, 'max_volume_uom_id'); ?></li>
+       <li><label>Max Volume : </label><?php echo $f->number_field('max_volume', $$class->max_volume, '', 'max_volume','medium'); ?></li> 
+       <li><label>Weight UOM : </label><?php echo $f->select_field_from_object('max_weight_uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->max_weight_uom_id, 'max_weight_uom_id'); ?></li>
+       <li><label>Max Weight : </label><?php echo $f->number_field('max_weight', $$class->max_weight, '', 'max_weight','medium'); ?></li> 
+      </ul> 
+     </div> 
+    </div>
+   </div>
+  </div> 
+ </div> 
 </form>
 
 
