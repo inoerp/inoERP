@@ -74,7 +74,7 @@ class inv_transaction extends dbObject {
   'unit_cost',
   'costed_amount',
   'gl_journal_header_id',
-  'ef_id',
+  'bom_config_header_id',
   'transaction_rev_enabled_cb',
   'rev_start_number',
   'created_by',
@@ -110,7 +110,8 @@ class inv_transaction extends dbObject {
   'inv_serial_number_id',
   'lot_generation',
   'lot_number',
-  'lot_quantity'
+  'lot_quantity',
+  'kit_cb',
  ];
  public $profile_default = [
   'org_id' => 'org_inv_name_default',
@@ -169,7 +170,7 @@ class inv_transaction extends dbObject {
  public $unit_cost;
  public $costed_amount;
  public $gl_journal_header_id;
- public $ef_id;
+ public $bom_config_header_id;
  public $transaction_rev_enabled_cb;
  public $rev_start_number;
  public $created_by;
@@ -202,6 +203,8 @@ class inv_transaction extends dbObject {
  private $_wip_accounting_group_id;
  private $_dr_ac_id;
  private $_cr_ac_id;
+ private $_gl_transaction = true;
+ public $kit_cb;
 
  public function setProperty($property, $value) {
   if (property_exists($this, $property)) {
@@ -690,6 +693,12 @@ class inv_transaction extends dbObject {
   if ($this->_validate_before_save() < 0) {
    return -90;
   }
+
+  if ($this->kit_cb) {
+   $this->_create_kitTransaction();
+   return 10;
+  }
+
 //serail verification
   if (!empty($_POST['serial_generation'][0])) {
    if (!empty($_POST['inv_serial_number_id']) && count($_POST['inv_serial_number_id']) >= $this->quantity) {
@@ -750,6 +759,55 @@ class inv_transaction extends dbObject {
   //barcode
   if ($this->transaction_type_id) {
    $this->_generate_bc_labels();
+  }
+ }
+
+ private function _create_kitTransaction() {
+  global $dbc;
+  if (!empty($this->bom_config_header_id)) {
+   $bom_config_h = bom_config_header::find_by_id($this->bom_config_header_id);
+  } else if (!empty($this->item_id_m) && !empty($this->org_id)) {
+   $bom_h = bom_header::find_by_itemId_orgId($this->item_id_m, $this->org_id);
+   $bom_config_h = new bom_config_header();
+   foreach ($bom_config_h->field_a as $k_bch => $v_bch) {
+    if (property_exists($bom_h, $v_bch)) {
+     $bom_config_h->$v_bch = $bom_h->$v_bch;
+    }
+   }
+  } else {
+   return;
+  }
+
+  $bom_config_l = bom_config_line::find_by_parent_id($bom_config_h->bom_config_header_id);
+  if (empty($bom_config_l)) {
+   return;
+  }
+//  pa($this);
+  foreach ($bom_config_l as $bom_cl) {
+   $inv_tran = new inv_transaction();
+   foreach($this->field_a as $this_k => $this_v){
+    $inv_tran->$this_v = $this->$this_v;
+   }
+   $inv_tran->inv_transaction_id = null;
+   $inv_tran->item_number = null;
+   $inv_tran->item_id_m = $bom_cl->component_item_id_m;
+   $inv_tran->account_id = $this->account_id;
+   if (!empty($bom_cl->line_quantity)) {
+    $new_q = $bom_cl->line_quantity;
+   } else {
+    $new_q = $bom_cl->usage_quantity * $this->quantity;
+   }
+   $inv_tran->quantity = $new_q;
+   try {
+    $inv_tran->_before_save();
+    $inv_tran->save();
+    $inv_tran->_after_save();
+//    pa($inv_tran);
+   } catch (Exception $e) {
+    echo "<br>Failed to update the bom config line quantity. Error @ inv_transaction @@ line " . __LINE__ . $e->getMessage();
+    $dbc->rollback = true;
+    return;
+   }
   }
  }
 
@@ -1219,14 +1277,12 @@ class inv_transaction extends dbObject {
     break;
   }
 
-  if ($update_result > 0) {
+  if ($update_result > 0 && $this->_gl_transaction) {
    $this->_save_journal_header();
    foreach ($journal_line_a as $journal_lines) {
     $this->_save_journal_lines($journal_lines);
    }
    $this->status = 'Success';
-  } else {
-   $this->status = 'Error';
   }
   //update the transaction status
   $this->save();
@@ -1458,8 +1514,6 @@ class inv_transaction extends dbObject {
   $result = self::find_by_sql($sql);
   return !empty($result) ? ($result) : false;
  }
-
-
 
 }
 

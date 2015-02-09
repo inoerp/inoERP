@@ -247,7 +247,7 @@ class inosave extends dbObject {
      return;
     } else if ($before_save_result == 10) {
 //     echo "<br> All data are sucessfully saved @ before save "; //before save completed all activities
-     return;
+     return $$class;
     }
    }
 
@@ -371,7 +371,7 @@ class inosave extends dbObject {
 
  private function save_header() {
   echo '<div id="json_save_header">';
-  echo '<div class="alert alert-danger alert-dismissible" role="alert">
+  echo '<div class="alert alert-success alert-dismissible" role="alert">
        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
   $class = $this->_classname;
   $keyField = $this->_key_field;
@@ -434,7 +434,7 @@ class inosave extends dbObject {
 
  private function save_line($linedata, $json_data) {
   echo '<div id="json_save_line">';
-    echo '<div class="alert alert-danger alert-dismissible" role="alert">
+    echo '<div class="alert alert-success alert-dismissible" role="alert">
 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
   $class = $this->_classname;
   $keyField = $this->_key_field;
@@ -462,12 +462,7 @@ class inosave extends dbObject {
     echo '<div class="message">Transaction is complete! </div>';
     echo '<div class="lineId">' . $$class->$primaryColumn . '</div>';
    } else {
-    global $ie_array_page;
-    global $ie;
-    echo '<div class="message"> Error Code - Inosave03! </div> ';
-    if (!empty($ie_array_page)) {
-     echo $ie->show_pageErrors($ie_array_page);
-    }
+     echo '<div class="message"><br> Transaction Complete </div> ';
    }
   }
   echo '</div></div>';
@@ -476,7 +471,7 @@ class inosave extends dbObject {
  //function to save both line & detail data
  private function save_line_withDetails($lineDetail_data) {
   echo '<div id="json_save_line">';
-    echo '<div class="alert alert-danger alert-dismissible" role="alert">
+    echo '<div class="alert alert-success alert-dismissible" role="alert">
 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
   $class = $this->_classname;
   $keyField = $this->_key_field;

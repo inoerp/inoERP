@@ -3956,8 +3956,10 @@ li.child_link{
 
 
 
-
-
+/*Form Line*/
+#form_line td select, #form_line td input[type="text"] {
+        width: 100%;
+}
 
 
 
@@ -4424,7 +4426,7 @@ table.document_table input{
  width: 40px;
 }
 
-#erp_form_area input.date,#erp_form_area input.medium{
+#erp_form_area input.date,#erp_form_area input.medium, #form_line td input.medium{
  width: 90px;
 }
 
@@ -4661,14 +4663,6 @@ table.normal td {
  padding: 2px 4px 2px 5px;
 }
 
-.class_detail_form{
- display: block; 
- float: left; 
- background: lightgrey;
- border: 1px solid #ccc;
- min-width: 400px;
-}
-
 table.form {
  border-width: 1px;
  border-color: #999999;
@@ -4785,8 +4779,6 @@ ul#form_top_image li {
 .class_detail_form{
  display: block; 
  float: left; 
- background: lightgrey;
- border: 1px solid #ccc;
  min-width: 400px;
 }
 
@@ -4813,6 +4805,9 @@ fieldset.form_detail_data_fs legend{
 }
 fieldset.form_detail_data_fs {
  padding : 10px; 
+  background: lightgrey;
+ border: 1px solid #ccc;
+ margin-top: 30px;
 }
 
 /*Overlay Login Modal*/
@@ -4907,3 +4902,5 @@ h3.nav-panel{
         font-family: "Lato",sans-serif;
         color: #fff;
 }
+
+

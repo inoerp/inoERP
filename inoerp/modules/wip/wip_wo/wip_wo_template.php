@@ -389,6 +389,7 @@
           <th>Routing Seq</th>
           <th>Item Id</th>
           <th>Item Number</th>
+          <th>Revision</th>
           <th>Item Desc</th>
           <th>UOM</th>
           <th>Usage Basis</th>
@@ -421,6 +422,14 @@
            <td><?php echo $f->text_field('component_item_id_m', $$class_fourth->component_item_id_m, '8', '', 'item_id_m', 1, $readonly); ?></td>
            <td><?php echo $f->text_field('component_item_number', $$class_fourth->component_item_number, '20', '', 'select_item_number', '', $readonly); ?>
             <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
+           <td><?php
+            if (!empty($$class_fourth->component_item_id_m) && !empty($$class->org_id)) {
+             $revision_name_a = inv_item_revision::find_by_itemIdM_orgId($$class_fourth->component_item_id_m, $$class->org_id);
+            } else {
+             $revision_name_a = array();
+            }
+            echo $f->select_field_from_object('component_revision', $revision_name_a, 'revision_name', 'revision_name', $$class_fourth->component_revision, '', 'small');
+            ?></td>
            <td><?php echo $f->text_field('component_description', $$class_fourth->component_description, '20', '', 'item_description', '', $readonly); ?></td>
            <td><?php echo $f->select_field_from_object('component_uom', uom::find_all(), 'uom_id', 'uom_name', $$class_fourth->component_uom, '', 'uom_id', '', $readonly); ?></td>
            <td><?php echo form::select_field_from_object('usage_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_fourth->usage_basis, '', $readonly, 'usage_basis', '', 1); ?></td>

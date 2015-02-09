@@ -770,7 +770,8 @@ class dbObject extends dbc {
 
   $stmt = $dbc->connection->prepare($sql);
   $stmt->bindParam(':primary_column', $this->$primary_column);
-//	echo '<div class="message"><br/>$sql is : ' . $sql . ' and primary column is' . $this->$primary_column . '</div>';
+  echo '<div class="alert alert-danger alert-dismissible" role="alert">
+       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
   try {
    $stmt->execute();
    $this->msg = 1;
@@ -782,6 +783,7 @@ class dbObject extends dbc {
    echo "<div class='message'>failing for sql is $sql</div>";
    echo "<br>Record couldnt be deleted!!: Error Code : DBO02 . Error @dbObject @@ Line " . __LINE__ . '<br>' . $e->getMessage() . "<br>";
   }
+  echo '</div>';
   return $this->msg;
  }
 
@@ -795,6 +797,8 @@ class dbObject extends dbc {
   $sql.= " WHERE " . static::$parent_primary_column . "= :primary_id ";
   $stmt = $dbc->connection->prepare($sql);
   $stmt->bindParam(':primary_id', $id);
+    echo '<div class="alert alert-danger alert-dismissible" role="alert">
+       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
   try {
    $stmt->execute();
 //	 $dbc->connection->commit();
@@ -807,6 +811,7 @@ class dbObject extends dbc {
    echo "<div class='message'>failing for sql is $sql</div>";
    echo "<br>Record couldnt be deleted !!: Error Code : DBO02 . Error @dbObject @@ Line " . __LINE__ . '<br>' . $e->getMessage() . "<br>";
   }
+  echo '</div>';
   return $this->msg;
  }
 
@@ -820,6 +825,8 @@ class dbObject extends dbc {
   $sql.= " WHERE org_id = :org_id ";
   $stmt = $dbc->connection->prepare($sql);
   $stmt->bindParam(':org_id', $org_id);
+    echo '<div class="alert alert-danger alert-dismissible" role="alert">
+       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
   try {
    $stmt->execute();
 //	 $dbc->connection->commit();
@@ -832,6 +839,7 @@ class dbObject extends dbc {
    echo "<div class='message'>failing for sql is $sql</div>";
    echo "<br>Record couldnt be deleted!!: Error Code : DBO02 . Error @dbObject @@ Line " . __LINE__ . '<br>' . $e->getMessage() . "<br>";
   }
+  echo '</div>';
   return $this->msg;
  }
 

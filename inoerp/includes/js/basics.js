@@ -45,12 +45,12 @@ function getFormDetails(url) {
   ;
 
   var commentForm = $(result).find('div#comment_form').html();
-   if (newContent) {
+  if (newContent) {
    $('#structure').replaceWith('<div id="structure">' + newContent + '</div>');
    $('#header_top_container').replaceWith('<div id="header_top_container"> <ul id="form_top_image" class="draggable">' + allButton + '</ul></div>');
    $('#display_comment_form').append(commentForm);
-   if($(result).find('div#document_history').html()){
-   $('#document_history').replaceWith('<div id="document_history">' + $(result).find('div#document_history').html() + '</div>');
+   if ($(result).find('div#document_history').html()) {
+    $('#document_history').replaceWith('<div id="document_history">' + $(result).find('div#document_history').html() + '</div>');
    }
    $.getScript("includes/js/reload.js");
    $(result).find('#js_files').find('li').each(function () {
@@ -131,7 +131,8 @@ function deleteComment() {
      $('.show_loading_small').hide();
     }
    }).done(function (result) {
-    $(".error").append(result);
+    $(".error").prepend(result);
+    $("#accordion").accordion({active: 0});
     $(".delete_button").removeClass("show_loading_small");
     $(".delete_button").prop('disabled', false);
    }).fail(function (error, textStatus, xhr) {
@@ -2260,7 +2261,9 @@ function getItemRevision(options) {
   show_date: false
  };
  var settings = $.extend({}, defaults, options);
-
+// if (!settings.item_id_m) {
+//  return;
+// }
  return $.ajax({
   url: settings.json_url,
   type: 'get',
@@ -2599,6 +2602,50 @@ function save_posTerminalName(options) {
  });
 }
 
+function refreshData(options) {
+ var defaults = {
+  json_url: 'includes/json/json_refresh.php'
+ };
+ var settings = $.extend({}, defaults, options);
+
+ $.ajax({
+  url: settings.json_url,
+  type: 'get',
+  dataType: 'json',
+  data: {
+   data_type: settings.data_type,
+   refresh_data: 1
+  },
+  success: function (result) {
+   if (result) {
+    $.each(result, function (key, value) {
+     switch (key) {
+      case 'string_data':
+       var dataString = value;
+       if (settings.divId) {
+        var idName = '#' + settings.divId;
+        $('body').find(idName).empty().append(dataString);
+       }
+
+       break;
+     }
+    });
+   } else {
+
+   }
+  },
+  complete: function () {
+   $('.show_loading_small').hide();
+  },
+  beforeSend: function () {
+   $('.show_loading_small').show();
+  },
+  error: function (request, errorType, errorMessage) {
+   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+  }
+ });
+}
+
 //end of global functions
 $(document).ready(function () {
  var homeUrl = $('#home_url').val();
@@ -2661,9 +2708,19 @@ $(document).ready(function () {
 //select page data selction in parent window
  $(".quick_select").click(function () {
   var setData = new opener.setValFromSelectPage;
-  $(this).closest('tr').find('td').each(function () {
-   setData[$(this).prop('class')] = $(this).text();
-  });
+  var elemenType = $(this).parent().prop('tagName');
+  if (elemenType === 'LI') {
+   $(this).closest('ul').find('input').each(function () {
+    setData[$(this).prop('id')] = $(this).prop('value');
+//    console.log($(this).prop('id') + ' : ' + $(this).prop('value'))
+   });
+  } else {
+   $(this).closest('tr').find('td').each(function () {
+    setData[$(this).prop('class')] = $(this).text();
+   });
+  }
+
+//  console.log(setData);
   setData.setVal();
   if (opener.setPopUpValue) {
    opener.setPopUpValue(setData);
@@ -2733,7 +2790,7 @@ $(document).ready(function () {
  itemNumber.json_url = 'modules/inv/item/item_search.php';
  itemNumber.select_class = 'select_item_number';
  itemNumber.primary_column1 = 'org_id';
- itemNumber.extra_elements = ['item_id', 'item_id_m', 'item_description', 'uom_id', 'processing_lt', 'lot_generation', 'serial_generation'];
+ itemNumber.extra_elements = ['item_id', 'item_id_m', 'item_description', 'uom_id', 'processing_lt', 'lot_generation', 'serial_generation', 'kit_item_cb'];
  itemNumber.min_length = 2;
  itemNumber.autoComplete();
 
@@ -2862,7 +2919,7 @@ $(document).ready(function () {
 //	$(this).find('.search_form').toggle();
 // });
  //add new columns
- $('#content').on('change', '.new_column:first', function () {
+ $('body').on('change', '.new_column:first', function () {
   if ($(this).val()) {
    $(this).clone().insertBefore($(this));
   }
@@ -2906,10 +2963,10 @@ $(document).ready(function () {
  $("#content").on('click', '.error', function () {
   $(this).html("");
  });
- 
- $('body').on('click','#sys_msg_box button.close', function(){
-$('.alert-dismissible').alert('close');
-});
+
+ $('body').on('click', '#sys_msg_box button.close', function () {
+  $('.alert-dismissible').alert('close');
+ });
 
  //export to excel from search result
  $("#content").on('click', '#export_excel_searchResult', function (e) {
@@ -3175,7 +3232,7 @@ $('.alert-dismissible').alert('close');
  $('body').off('click', '#search_tip').on('click', '#search_tip', function () {
   $("#search_message").dialog("open");
  });
- 
+
  $('body').off('click', '#menu_button8').on('click', '#menu_button8', function () {
   $("#document_history_ul").dialog("open");
  });
@@ -3791,12 +3848,25 @@ $('.alert-dismissible').alert('close');
   }
  });
 
-$( "#accordion" ).accordion({
+ $("#accordion").accordion({
   heightStyle: "content",
-   active: 1,
-   collapsible: true
-});
+  active: 1,
+  collapsible: true
+ });
 
+ $('body').on('click', '#accordion h3.recent-visits', function () {
+  refreshData({
+   data_type: 'recent_visit',
+   divId: 'recent-visits'
+  });
+
+ });
+
+ recentVisitInAjax();
+
+ $('body').on('click', '#header_top_quick_nav .fa-close', function () {
+  window.close();
+ })
 
 });
 function toUpperCase(str)
@@ -3806,4 +3876,10 @@ function toUpperCase(str)
  });
 }
 
+function recentVisitInAjax() {
+ $('body #recent-visits').on('click', 'a', function (e) {
+  e.preventDefault();
+  getFormDetails($(this).attr('href'));
 
+ });
+}

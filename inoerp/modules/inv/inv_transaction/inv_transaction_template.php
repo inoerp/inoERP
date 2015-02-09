@@ -35,7 +35,9 @@
         <th>Item Description</th>
         <th>UOM</th>
         <th>Quantity</th>
-
+        <th>Kit Item</th>
+        <th>Kit Config</th>
+        <th>Config Id</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -62,6 +64,10 @@
          <?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, 'uom_id', $readonly); ?>
         </td>
         <td><?php form::text_field_widsm('quantity'); ?></td>
+        <td><?php echo $f->checkBox_field('kit_cb', $$class->kit_cb, '', 'dontCopy'); ?></td>
+        <td><button type="button" class="popup btn  btn-default view-stnd-bom-item-config medium">
+          <a href="form.php?class_name=bom_config_header&mode=9&window_type=popup"> View Configuration</a></button></td>
+        <td><?php $f->text_field_widsr('bom_config_header_id'); ?></td>
        </tr>
       </tbody>
      </table>
@@ -91,7 +97,6 @@
         <td>
          <?php echo $f->select_field_from_object('to_locator_id', locator::find_all_of_subinventory($$class->to_subinventory_id), 'locator_id', 'locator', $$class->to_locator_id, '', 'to_locator_id', '', $readonly); ?>
         </td>
-        <td><?php echo form::extra_field($$class->ef_id, '10', $readonly); ?></td>
         <td><?php form::text_field_wid('description'); ?>							</td>
         <td><?php form::text_field_wid('reason'); ?>							</td>
        </tr>

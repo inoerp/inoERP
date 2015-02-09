@@ -13,6 +13,7 @@
    'bom_sequence',
    'routing_sequence',
    'component_item_id_m',
+   'component_revision',
    'usage_basis',
    'usage_quantity',
    'auto_request_material_cb',
@@ -53,6 +54,7 @@
   public $bom_sequence;
   public $routing_sequence;
   public $component_item_id_m;
+  public $component_revision;
   public $usage_basis;
   public $usage_quantity;
   public $auto_request_material_cb;

@@ -18,8 +18,8 @@
         <a name="show" href="form.php?class_name=inv_receipt_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_receipt_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
        </li>
        <li><label>Inventory</label><?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1); ?>       </li>
-       <li><label>Transaction Type</label><?php echo  $f->select_field_from_array('transaction_type_id', inv_receipt_header::$transaction_type_id_a,  $$class->transaction_type_id, 'transaction_type_id', '' , 1, $readonly1); ?>       </li>
-       <li><label>Number</label><?php  echo $f->text_field('receipt_number', $$class->receipt_number, '8', '', 'primary_column2', '', $readonly1);    ?>
+       <li><label>Transaction Type</label><?php echo $f->select_field_from_array('transaction_type_id', inv_receipt_header::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1, $readonly1); ?>       </li>
+       <li><label>Number</label><?php echo $f->text_field('receipt_number', $$class->receipt_number, '8', '', 'primary_column2', '', $readonly1); ?>
        </li><li><label>Date </label><?php echo $f->date_fieldFromToday('receipt_date', ino_date($$class->receipt_date), $readonly1); ?></li>      
       </ul>
      </div>
@@ -61,7 +61,7 @@
 
 </div>
 <div id="form_line" class="form_line"><span class="heading">Receipt Lines</span>
- <form action=""  method="post" id="po_site"  name="inv_receipt_line">
+ <form action=""  method="post" id="inv_receipt_line"  name="inv_receipt_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1">PO Info</a></li>
@@ -109,14 +109,14 @@
          <td><?php form::text_field_wid2sr('inv_receipt_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
          <td><?php $f->text_field_wid2sr('po_header_id'); ?></td>
-         <td><?php $f->text_field_wid2s('po_number', 'select_po_number'); ?>
+         <td><?php $f->text_field_wid2s('po_number', 'select_po_number medium'); ?>
           <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_po_number select_popup clickable"></td>
-         <td><?php $f->text_field_wid2sr('po_line_number'); ?></td>
+         <td><?php $f->text_field_wid2sr('po_line_number', 'medium'); ?></td>
          <td><?php $f->text_field_wid2s('po_line_id'); ?></td>
-         <td><?php $f->text_field_wid2sr('shipment_number'); ?></td>
+         <td><?php $f->text_field_wid2sr('shipment_number', 'medium'); ?></td>
          <td><?php $f->text_field_wid2s('po_detail_id'); ?></td>
-         <td><?php echo $f->number_field('quantity', $inv_receipt_line->quantity, '8', '', '', '', 1); ?></td>
-         <td><?php echo $f->number_field('received_quantity', $inv_receipt_line->received_quantity, '8', '', '', '', 1); ?></td>
+         <td><?php echo $f->number_field('quantity', $inv_receipt_line->quantity, '8', '', 'medium', '', 1); ?></td>
+         <td><?php echo $f->number_field('received_quantity', $inv_receipt_line->received_quantity, '8', '', 'medium', '', 1); ?></td>
 
         </tr>
         <?php
@@ -135,9 +135,11 @@
         <th>Revision</th>
         <th>Item Description</th>
         <th>UOM</th>
+        <th>Kit Item</th>
         <th>New Received Qty</th>
         <th>Sub inventory</th>
         <th>Locator</th>
+        <th>Kit Configuration</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -151,9 +153,12 @@
          <td><?php $f->text_field_wid2sr('revision_name'); ?></td>
          <td><?php $f->text_field_d2('item_description'); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $inv_receipt_line->uom_id, '', '', '', $readonly1); ?></td>
+         <td><?php echo $f->checkBox_field('kit_cb', $$class_second->kit_cb, '', 'dontCopy'); ?></td>
          <td><?php echo $f->number_field('transaction_quantity', $$class_second->transaction_quantity, '8', '', '', 1, $readonly1); ?></td>
          <td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_second->subinventory_id, '', 'subinventory_id', '', $readonly1); ?></td>
          <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_second->subinventory_id), 'locator_id', 'locator', $$class_second->locator_id, '', 'locator_id', '', $readonly1); ?></td>
+         <td><button type="button" class="popup btn  btn-default view-item-config medium">
+           <a href="form.php?class_name=bom_config_header&mode=9&window_type=popup"> View Configuration</a></button></td>
         </tr>
         <?php
         $count = $count + 1;

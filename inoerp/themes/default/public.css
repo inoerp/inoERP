@@ -1298,3 +1298,16 @@ ul.inline-block {
  overflow: hidden;
  margin-top:-20px;
 }
+
+#form_line input[type="radio"],#form_line  input[type="checkbox"] {
+    margin-left: 5px !important;
+}
+
+.popup.btn{
+ padding: 0 !important;
+}
+
+
+.add_row_detail_img{
+ cursor: pinter;
+}

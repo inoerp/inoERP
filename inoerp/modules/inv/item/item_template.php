@@ -27,7 +27,7 @@
          Item Id</label><?php $f->text_field_dsr('item_id') ?>
         <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show document_id item_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
        </li>
-       <li><label>Item Number<img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete item_number clickable"> : 
+       <li><label>Item Number<img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete item_number clickable">
         </label><?php echo $f->text_field('item_number', $$class->item_number, '15', 'item_number', 'select_item_number', 1, $readonly_mas); ?>
         <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show2 document_id findBy_item_number"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
        </li>

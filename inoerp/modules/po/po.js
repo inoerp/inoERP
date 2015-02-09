@@ -1,6 +1,6 @@
 function setValFromSelectPage(po_header_id, combination, supplier_id, supplier_number, supplier_name,
         item_id_m, item_number, item_description, uom_id, address_id, address_name, address,
-        country, postal_code) {
+        country, postal_code, kit_cb) {
  this.po_header_id = po_header_id;
  this.combination = combination;
  this.supplier_id = supplier_id;
@@ -8,6 +8,7 @@ function setValFromSelectPage(po_header_id, combination, supplier_id, supplier_n
  this.supplier_name = supplier_name;
  this.item_id_m = item_id_m;
  this.item_number = item_number;
+ this.kit_cb = kit_cb;
  this.item_description = item_description;
  this.uom_id = uom_id;
  this.address_id = address_id;
@@ -64,6 +65,10 @@ setValFromSelectPage.prototype.setVal = function () {
  if (uom_id) {
   $('#content').find(rowClass).find('.uom_id').val(uom_id);
  }
+ 
+  if (this.kit_cb) {
+  $('#content').find(rowClass).find('.kit_cb').prop('checked',true);
+ }
 
  var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass");
  addressPopupDivClass = addressPopupDivClass.replace(/\s+/g, '.');
@@ -87,6 +92,9 @@ setValFromSelectPage.prototype.setVal = function () {
  localStorage.removeItem("field_class");
  localStorage.removeItem("addressPopupDivClass");
 
+if(this.po_header_id){
+ $('a.show.po_header_id').trigger('click');
+}
 };
 
 function afterAddNewRow() {
@@ -156,8 +164,18 @@ $(document).ready(function () {
     'po_header_id': $(this).find('option:selected').data('ref_po_hedader_id')
    });
   }
- })
+ });
 
+  $('body').off('click', '.popup.view-item-config').on('click', '.popup.view-item-config', function () {
+  var openUrl = $(this).find('a').prop('href') + '&reference_key_name=po_line';
+  var trClass = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
+  if ($('#form_line').find(trClass).find('input.po_line_id').val()) {
+   openUrl += '&reference_key_value=' + $('#form_line').find(trClass).find('.po_line_id').val();
+  }
+  void window.open(openUrl, '_blank',
+          'width=1200,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+ 
 //mandatory and field sequence
 // var mandatoryCheck = new mandatoryFieldMain();
 // mandatoryCheck.header_id = 'po_header_id';

@@ -19,7 +19,7 @@
       <div class="large_shadow_box"> 
        <ul class="column header_field">
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="po_header_id select_popup clickable">
-          PO Header Id</label><?php $f->text_field_dsr('po_header_id') ?>
+          PO Header Id</label><?php $f = new inoform(); $f->text_field_dsr('po_header_id') ?>
          <a name="show" href="form.php?class_name=po_header&<?php echo "mode=$mode"; ?>" class="show document_id po_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
         </li>
         <li><label>BU Name(1)</label><?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>
@@ -140,8 +140,9 @@
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1">Basic</a></li>
-     <li><a href="#tabsLine-2">Other Info</a></li>
+     <li><a href="#tabsLine-2">Finance</a></li>
      <li><a href="#tabsLine-3">Agreement Details</a></li>
+     <li><a href="#tabsLine-4">Other Info</a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsLine-1" class="tabContent">
@@ -172,14 +173,14 @@
            <ul class="inline_action">
             <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
             <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($po_line->item_description); ?>"></li>           
+            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($po_line->po_line_id); ?>"></li>           
             <li><?php echo form::hidden_field('po_header_id', $po_header->po_header_id); ?></li>
            </ul>
           </td>
           <td><?php $f->seq_field_d($count) ?></td>
           <td><?php form::text_field_wid2sr('po_line_id'); ?></td>
           <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
-          <td><?php echo $f->select_field_from_object('receving_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->receving_org_id, '', 'copyValue', 1, $readonly); ?></td>
+          <td><?php echo $f->select_field_from_object('receving_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->receving_org_id, '', 'org_id copyValue', 1, $readonly); ?></td>
           <td><?php echo $f->select_field_from_object('line_type', po_line::po_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, '', 'copyValue', 1, $readonly); ?></td>
           <td><?php
            echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
@@ -224,8 +225,7 @@
          <th>Line Description</th>
          <th>Ref Doc Type</th>
          <th>Ref Number</th>
-         <th>On Hold</th>
-         <th>Hold Details</th>
+
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -245,8 +245,6 @@
           <td><?php form::text_field_wid2('line_description'); ?></td>
           <td><?php form::text_field_wid2('reference_doc_type'); ?></td>
           <td><?php form::text_field_wid2('reference_doc_number'); ?></td>
-          <td><?php $f->checkBox_field_wid2('hold_cb'); ?></td>
-          <td><?php $f->text_field_wid2sr('po_line_id'); ?></td>
          </tr>
          <?php
          $count = $count + 1;
@@ -300,6 +298,41 @@
        <!--                  Showing a blank form for new entry-->
       </table>
      </div>
+
+     <div id="tabsLine-4" class="scrollElement tabContent">
+      <table class="form_line_data_table">
+       <thead> 
+        <tr>
+         <th> Seq# </th>
+         <th> On Hold </th>
+         <th> Hold Details </th>
+         <th> Kit Item </th>
+         <th> Configured ? </th>
+         <th> Item Configuration</th>
+        </tr>
+       </thead>
+       <tbody class="form_data_line_tbody">
+        <?php
+        $count = 0;
+        foreach ($po_line_object as $po_line) {
+         ?>         
+         <tr class="po_line<?php echo $count ?>">
+          <td><?php $f->seq_field_d($count) ?></td>
+          <td><?php $f->checkBox_field_wid2('hold_cb'); ?></td>
+          <td><?php $f->text_field_wid2r('po_line_id'); ?></td>
+          <td><?php echo $f->checkBox_field('kit_cb', $$class_second->kit_cb,'','dontCopy'); ?></td>
+          <td><?php echo $f->checkBox_field('kit_configured_cb', $$class_second->kit_configured_cb,'','dontCopy'); ?></td>
+          <td><button type="button" class="popup btn  btn-default view-item-config medium">
+           <a href="form.php?class_name=bom_config_header&mode=9&window_type=popup"> View Configuration</a></button></td>
+         </tr>
+         <?php
+         $count = $count + 1;
+        }
+        ?>
+       </tbody>
+       <!--                  Showing a blank form for new entry-->
+      </table>
+     </div>
     </div>
    </div>
   </form>
@@ -329,6 +362,6 @@
   <li class="btn2DivId" data-btn2DivId="form_line" ></li>
   <li class="trClass" data-docHedaderId="po_line" ></li>
   <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>
-  <li class="noOfTabbs" data-noOfTabbs="3" ></li>
+  <li class="noOfTabbs" data-noOfTabbs="4" ></li>
  </ul>
 </div>

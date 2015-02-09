@@ -205,7 +205,6 @@
    return !empty($result_array) ? array_pop($result_array) : false;
   }
   
-
   public function findBy_itemId() {
    $sql = "SELECT * FROM " .
      self::$table_name .

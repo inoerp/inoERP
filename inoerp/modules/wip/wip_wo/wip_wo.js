@@ -50,6 +50,10 @@ setValFromSelectPage.prototype.setVal = function () {
  localStorage.removeItem("field_class");
  localStorage.removeItem("li_divId");
  localStorage.removeItem("itemType");
+ 
+ if(this.wip_wo_header_id){
+  $('a.show.wip_wo_header_id').trigger('click');
+ }
 };
 
 $(document).ready(function () {
@@ -195,6 +199,10 @@ $(document).ready(function () {
    'item_id_m': $('#item_id_m').val(),
    'show_date': false
   });
+ });
+ 
+ $('body').on('click','#menu_button4', function(){
+  $('#bom_exploded_cb, #routing_exploded_cb').attr('checked', false);
  });
  
 });

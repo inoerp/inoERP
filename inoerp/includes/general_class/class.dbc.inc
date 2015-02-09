@@ -29,8 +29,10 @@ class dbc {
  public function confirm() {
 	if ($this->rollback) {
 	$this->connection->rollBack();
-	 echo "<div><div class='rollback_msg message'>All the transactions have been rolled back because of the above specified reasons."
-	 . "<br>Fix all the issues before trying the transaction again! </div></div>";
+  echo '<div><div class="alert alert-danger alert-dismissible" role="alert">
+<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+	 echo "<div class='rollback_msg message'>All the transactions have been rolled back because of the above specified reasons."
+	 . "<br>Fix all the issues before trying the transaction again! </div></div></div>";
 	} else {
 	 $this->connection->commit();
 	 	}

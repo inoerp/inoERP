@@ -97,6 +97,7 @@
         <th>Routing Sequence</th>
         <th>Item Id</th>
         <th>Item Number</th>
+        <th>Revision</th>
         <th>Item Description</th>
         <th>UOM</th>
         <th>Usage Basis</th>
@@ -106,6 +107,7 @@
       <tbody class="form_data_line_tbody">
        <?php
        $count = 0;
+       $f = new inoform();
        foreach ($bom_line_object as $bom_line) {
 //							echo $count . ' is         : <pre>';
 //							print_r($bom_line);
@@ -126,13 +128,20 @@
          <td><?php $f->text_field_wid2sr('component_item_id_m', 'item_id_m'); ?></td>
          <td><?php $f->text_field_wid2('component_item_number', 'select_item_number'); ?>
           <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
+         <td><?php
+          if (!empty($$class_second->component_item_id_m) && !empty($$class->org_id)) {
+           $revision_name_a = inv_item_revision::find_by_itemIdM_orgId($$class_second->component_item_id_m, $$class->org_id);
+          } else {
+           $revision_name_a = array();
+          }
+          echo $f->select_field_from_object('component_revision', $revision_name_a, 'revision_name', 'revision_name', $$class_second->component_revision, '', 'small');
+          ?></td>
          <td><?php $f->text_field_wid2('component_description', 'item_description'); ?></td>
          <td><?php
           echo $f->select_field_from_object('component_uom', uom::find_all(), 'uom_id', 'uom_name', $$class_second->component_uom, '', '', '', $readonly);
           ?></td>
          <td><?php echo form::select_field_from_object('usage_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_second->usage_basis, '', $readonly, 'usage_basis', '', 1); ?></td>
-         <td><?php form::number_field_wid2s('usage_quantity'); ?></td>
-
+         <td><?php echo $f->number_field('usage_quantity', $$class_second->usage_quantity,'','','small'); ?></td>
         </tr>
         <?php
         $count = $count + 1;

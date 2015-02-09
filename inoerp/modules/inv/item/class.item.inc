@@ -214,7 +214,8 @@ class item extends dbObject {
   "lot_generation",
   "uom_id",
   "item_status",
-  'processing_lt'
+  'processing_lt',
+  'kit_cb'
  ];
  public $requiredField = [
   "item_number",
@@ -931,10 +932,9 @@ class item extends dbObject {
  }
 
  public static function find_item_number_by_itemNumber_OrgId($item_number, $org_id = "", $options = '') {
-  global $db;
   $sql = "SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " where item_number LIKE '%{$item_number}%' ";
+  $sql .= " where  ( item_number LIKE '%{$item_number}%' || item_description LIKE '%{$item_number}%'  )";
   if (!empty($org_id)) {
    $sql .= " AND org_id  = '{$org_id}' ";
   }
@@ -945,7 +945,7 @@ class item extends dbObject {
    }
   }
 
-  $result = $db->find_by_sql($sql);
+  $result = self::find_by_sql($sql);
   $data = array();
   foreach ($result as $row) {
    $data[] = array(
@@ -957,7 +957,8 @@ class item extends dbObject {
     'uom_id' => $row->uom_id,
     'processing_lt' => $row->processing_lt,
     'lot_generation' => $row->lot_generation,
-    'serial_generation' => $row->serial_generation
+    'serial_generation' => $row->serial_generation,
+    'kit_cb' => $row->kit_cb
    );
   }
 //	$return_array['jsonvalue'] = $data;

@@ -2,7 +2,7 @@ function setValFromSelectPage(inv_receipt_header_id, combination, supplier_id, s
         supplier_name, supplier_site_id, supplier_site_name, supplier_site_number,
         item_id_m, item_number, revision_name, item_description, uom_id, po_header_id, po_line_id, po_detail_id,
         po_number, po_line_number, shipment_number, quantity, received_quantity,
-        serial_generation, lot_generation) {
+        serial_generation, lot_generation, kit_cb) {
  this.inv_receipt_header_id = inv_receipt_header_id;
  this.combination = combination;
  this.supplier_id = supplier_id;
@@ -16,6 +16,7 @@ function setValFromSelectPage(inv_receipt_header_id, combination, supplier_id, s
  this.revision_name = revision_name;
  this.item_description = item_description;
  this.uom_id = uom_id;
+ this.kit_cb = kit_cb;
  this.po_header_id = po_header_id;
  this.po_line_id = po_line_id;
  this.po_detail_id = po_detail_id;
@@ -94,6 +95,10 @@ setValFromSelectPage.prototype.setVal = function () {
   $('#content').find(rowClass).find('.lot_generation').val(this.lot_generation);
   $('#content').find(rowClass).find('.lot_number').attr('required', true).css('background-color', 'pink');
  }
+   if (this.kit_cb) {
+  $('#content').find(rowClass).find('.kit_cb').prop('checked',true);
+ }
+ 
 
  localStorage.removeItem("row_class");
  localStorage.removeItem("row_class");
@@ -134,6 +139,16 @@ $(document).ready(function () {
  if (!($('.lines_number:first').val())) {
   $('.lines_number:first').val('1');
  }
+ 
+$('body').off('click', '.popup.view-item-config').on('click', '.popup.view-item-config', function () {
+  var openUrl = $(this).find('a').prop('href') + '&reference_key_name=po_line';
+  var trClass = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
+  if ($('#form_line').find(trClass).find('input.po_line_id').val()) {
+   openUrl += '&reference_key_value=' + $('#form_line').find(trClass).find('.po_line_id').val();
+  }
+  void window.open(openUrl, '_blank',
+          'width=1200,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
 
 //verify entered qty is less than open quantity
  $('body').off('blur', '.received_quantity').on('blur', '.received_quantity', function () {

@@ -117,6 +117,7 @@
         <?php echo $fav->show_currentUser_fav(true); ?>
        </div>
       </li>
+      <li class="show_loading_small"><img src="<?php echo HOME_URL ?>/themes/images/form/small_loading_bar.gif"></li>
      </ul>
     </div>
     <div id="header_top_container">
@@ -179,30 +180,10 @@
         ?>
        </div>
       </div>
-      <h3 class="clickable nav-panel"><i class="fa fa-history"></i> Recent Visits</h3>
+      <h3 class="clickable nav-panel recent-visits"><i class="fa fa-history"></i> Recent Visits</h3>
       <div>
        <div id="recent-visits">
-        <?php
-        if (isset($_SESSION['recent_visit'])) {
-         $recent_visit = '<ul id="recent_visit">';
-         $rev_a = array_reverse($_SESSION['recent_visit']);
-         $count = 0;
-         foreach ($rev_a as $k => $v) {
-          $count++;
-          if ($count >= 5) {
-           break;
-          }
-          if (!is_numeric($k)) {
-           $recent_visit .= '<li><a href="' . $v . '">' . substr($k, 0, 30) . '</a>';
-          } else {
-           $recent_visit .= '<li><a href="' . $v . '"> Vsiti ' . $k . '</a>';
-          }
-         }
-         $recent_visit .= '<li class="view_all"><a href="' . HOME_URL . 'form.php?class_name=user_activity_v&mode=2"> View More ...</a>';
-         $recent_visit .= '</ul>';
-        }
-        echo $recent_visit;
-        ?>
+        <?php echo ino_recent_visits();  ?>
        </div>
       </div>
 
@@ -249,8 +230,6 @@
   </div>
 
 
-
- </div>
  <div class="row">
   <div id="comment_form" class="none">
    <?php

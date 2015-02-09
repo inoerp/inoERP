@@ -26,6 +26,7 @@ class po_all_v extends dbObject {
   'line_type',
   'po_line_number',
   'item_id_m',
+  'kit_cb',
   'item_description',
   'line_description',
   'line_quantity',
@@ -90,6 +91,7 @@ class po_all_v extends dbObject {
   'locator_id',
   'requestor',
   'item_id_m',
+  'kit_cb',
   'item_description',
   'serial_generation',
   'lot_generation',
@@ -223,6 +225,7 @@ class po_all_v extends dbObject {
  public $line_type;
  public $po_line_number;
  public $item_id_m;
+ public $kit_cb;
  public $revision_name;
  public $serial_generation;
  public $lot_generation;
@@ -267,8 +270,8 @@ payment_term_id,
 supplier_name, supplier_number,
 supplier_site_name, supplier_site_number,
 payment_term, payment_term_description,
-po_line_id, line_type, po_line_number,	item_id_m, revision_name, item_description, line_description, line_quantity, unit_price, line_price,
-item_number,  uom_id, item_status,serial_generation, lot_generation,
+po_line_id, line_type, po_line_number,	item_id_m,  kit_cb, revision_name, item_description, line_description, line_quantity, unit_price, line_price,
+item_number, uom_id, item_status,serial_generation, lot_generation,
 po_detail_id, shipment_number, receving_org_id, org_id, subinventory_id, locator_id, requestor, 
 quantity,received_quantity, open_quantity,
 need_by_date, promise_date,
@@ -284,7 +287,7 @@ po_header.payment_term_id,
 supplier.supplier_name, supplier.supplier_number,
 supplier_site.supplier_site_name, supplier_site.supplier_site_number,
 payment_term.payment_term, payment_term.description,
-po_line.po_line_id, po_line.line_type, po_line.line_number,	po_line.item_id_m, po_line.revision_name, 
+po_line.po_line_id, po_line.line_type, po_line.line_number,	po_line.item_id_m, po_line.kit_cb,  po_line.revision_name, 
 po_line.item_description, po_line.line_description, 
 po_line.line_quantity, po_line.unit_price, po_line.line_price,
 item.item_number, item.uom_id, item.item_status,item.serial_generation, item.lot_generation,

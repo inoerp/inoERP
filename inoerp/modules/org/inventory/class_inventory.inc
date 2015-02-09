@@ -255,7 +255,12 @@
 	 org.business_org_id , org.inventory_org_id , org.status, legal.ledger_id,
 	 legal.legal_id, legal.legal_org_type, legal.country_of_registration, 
 	 legal.balancing_segments, business.business_id, business.business_org_type, 
-	 business.cash_ac_id, business.manager, gl_ledger.coa_id, gl_ledger.currency_code,gl_ledger.calendar_option_line_code   
+	 business.cash_ac_id, business.manager, gl_ledger.coa_id, gl_ledger.currency_code,gl_ledger.calendar_option_line_code   ,
+   inventory.material_ac_id,    inventory.material_oh_ac_id,    inventory.overhead_ac_id,
+inventory.resource_ac_id,   inventory.expense_ac_id,   inventory.inter_org_ppv_ac_id,
+inventory.inter_org_receivable_ac_id,   inventory.inter_org_payable_ac_id,   inventory.inter_org_intransit_ac_id,
+inventory.inv_ap_accrual_ac_id,   inventory.inv_ap_exp_accrual_ac_id,   inventory.inv_ppv_ac_id,
+inventory.inv_ipv_ac_id,   inventory.sales_ac_id,   inventory.cogs_ac_id,   inventory.deferred_cogs_ac_id
    FROM  org
       LEFT JOIN inventory ON org.org_id = inventory.org_id
       LEFT JOIN legal ON legal.org_id = org.legal_org_id

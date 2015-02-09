@@ -47,11 +47,11 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
 //  if ($(div).length > 1) {
 //   $(".error").append(div);
 //  }
-  
+
   var message = $(result).find('.message, .rollback_msg').html();
-   if (message && message.length > 1) {
-   $(".error").append(div);
-   $("#accordion").accordion({ active: 0 });
+  if (message && message.length > 1) {
+   $(".error").prepend(result);
+   $("#accordion").accordion({active: 0});
   }
 
   if (primary_column_id) {
@@ -88,12 +88,14 @@ function saveSingleLine(json_url, lineData, primary_column_id, lineClassName) {
    className: lineClassName},
   type: 'post'
  }).done(function (result) {
-  var div = $(result).filter('div#json_save_line').html();
-  $(".error").append(div);
-  var rollbackMsg = $(result).filter('.rollback_msg').html();
-  $(".error").append(rollbackMsg);
-  var line_id = $(div).filter('#lineId').html();
-  $("#accordion").accordion({ active: 0 });
+//  var div = $(result).filter('div#json_save_line').html();
+  var message = $(result).find('.message, .rollback_msg').html();
+  if (message && message.length > 1) {json_save_line
+   $(".error").prepend(result);
+   $("#accordion").accordion({active: 0});
+  }
+ 
+ var line_id = $(result).filter('#lineId').html();
 //	$('#form_data_table tbody tr' + '.' + trclass).find(".line_id").val(line_id);
   $("#save").removeClass("opacity_2");
   $('.show_loading_small').hide();
@@ -116,11 +118,14 @@ function saveLine(json_url, lineData, trclass, detailData, primary_column_id, li
   type: 'post'
  }).done(function (result) {
   var div = $(result).filter('div#json_save_line').html();
-  $(".error").append(div);
-  var rollbackMsg = $(result).filter('.rollback_msg').html();
-  $(".error").append(rollbackMsg);
-  $("#accordion").accordion({ active: 0 });
-  var line_id = $(div).filter('.lineId').html();
+  
+  var message = $(result).find('.message, .rollback_msg').html();
+  if (message && message.length > 1) {
+   $(".error").prepend(result);
+   $("#accordion").accordion({active: 0});
+  }
+  
+ var line_id = $(div).filter('.lineId').html();
   $('#form_data_table tbody tr' + '.' + trclass).find(".line_id").val(line_id);
   $('.show_loading_small').hide();
   $("#save").removeClass("opacity_2");
@@ -144,9 +149,14 @@ function saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassNa
   var div = $(result).filter('div#json_save_line2').html();
   var line_id = $(div).filter('.lineId').html();
   $('tbody.form_data_line_tbody2 tr' + '.' + trclass).find(".line_id").val(line_id);
-  $(".error").append(div);
-  $("#accordion").accordion({ active: 0 });
-  $('.show_loading_small').hide();
+  
+  var message = $(result).find('.message, .rollback_msg').html();
+  if (message && message.length > 1) {
+   $(".error").prepend(div);
+   $("#accordion").accordion({active: 0});
+  }
+ 
+ $('.show_loading_small').hide();
   $("#save").removeClass("opacity_2");
  }).fail(function (error, textStatus, xhr) {
   alert("save failed \n" + error + textStatus + xhr);
@@ -655,9 +665,12 @@ add_new_rowMain.prototype.add_new_row = function (afterAddNewRow) {
   $(this).val('');
  });
  if (this.removeDefault === true) {
-  $("tr.new_object" + objectCount).find("td input[type=text], .dontCopy").not(divClassToBeCopied_c).each(function () {
+  $("tr.new_object" + objectCount).find("td input[type=text], input.dontCopy").not(divClassToBeCopied_c).each(function () {
    $(this).val('');
    $(this).attr('value', '');
+  });
+  $("tr.new_object" + objectCount).find(".checkBox.dontCopy").not(divClassToBeCopied_c).each(function () {
+   $(this).attr('checked', false);
   });
   $("tr.new_object" + objectCount).find("td input[type=number]").not(divClassToBeCopied_c).each(function () {
    $(this).val('');
@@ -882,11 +895,11 @@ contextMenuMain.prototype.contextMenu = function ()
  $('body').on('click', '#menu_button10', function () {
   $("#content").unbind("contextmenu");
  });
- 
+
 //  $('body').on('click', '#menu_button8', function () {
 //  $('#document_history').modal('toggle');
 // });
- 
+
  $('body').on('click', '#menu_button10_1', function () {
   localStorage.setItem("disableContextMenu", true);
   $("#content").unbind("contextmenu");
@@ -913,7 +926,6 @@ autoCompleteMain.prototype.autoComplete = function ()
  var json_url = this.json_url;
  var field_name = this.field_name;
  var primary_column1 = this.primary_column1;
- var primary_column1_h = '#' + primary_column1;
  var primary_column2 = this.primary_column2;
  var extra_elements = this.extra_elements;
  var options = this.options;
@@ -925,10 +937,17 @@ autoCompleteMain.prototype.autoComplete = function ()
  var select_class_d = '.' + select_class;
  var min_length = this.min_length;
  $('#content').on("focus.nsAutoComplete", select_class_d, function (e) {
-  var primary_column1_v = $(primary_column1_h).val();
   e.preventDefault();
   if (!$(this).data("autocomplete")) {
    var auto_element = this;
+   var primary_column1_h = '#' + primary_column1;
+   if ($(primary_column1_h).val()) {
+    var primary_column1_v = $(primary_column1_h).val();
+   } else if($(auto_element).closest("tr").attr('class')){
+    var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
+    var primary_column1_d = '.' + primary_column1;
+    var primary_column1_v = $('#form_line').find(trClass).find(primary_column1_d).val();
+   }
    $(this).autocomplete({
     source: function (request, response) {
      $.ajax({

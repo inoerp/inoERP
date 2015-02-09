@@ -79,7 +79,6 @@ class wip_wo_header extends dbObject {
   'start_date',
   'wo_status'
  ];
-
  public $checkbox = [
   'bom_exploded_cb',
   'routing_exploded_cb'
@@ -288,8 +287,9 @@ class wip_wo_header extends dbObject {
  }
 
  private function _copy_bom() {
+  global $dbc;
   $wip_wo_header_id1 = $this->wip_wo_header_id;
-  $bom_header_byItem = bom_header::find_by_itemId_orgId($this->item_id_m,$this->org_id);
+  $bom_header_byItem = bom_header::find_by_itemId_orgId($this->item_id_m, $this->org_id);
   $bom_header_id = $bom_header_byItem->bom_header_id;
   $bol_i = bom_line::find_by_bomHeaderId_revNumber($bom_header_id, $this->revision_name);
 //  $bol_i = bom_line_v::find_by_itemIdM_OrgId_revNumber($this->item_id_m, $this->org_id, $this->revision_name);
@@ -302,11 +302,18 @@ class wip_wo_header extends dbObject {
       $wip_wo_bom->$value = $bom_line->$value;
       if ($value == 'routing_sequence') {
        $routing_of_bom = bom_routing_line_v::find_by_itemIdM_OrgId($this->item_id_m, $this->org_id);
-       foreach ($routing_of_bom as $routing_lines) {
-        if ($routing_lines->bom_routing_line_id == $bom_line->$value) {
-         $routing_sequence_value = $routing_lines->routing_sequence;
+       if ($routing_of_bom) {
+        foreach ($routing_of_bom as $routing_lines) {
+         if ($routing_lines->bom_routing_line_id == $bom_line->$value) {
+          $routing_sequence_value = $routing_lines->routing_sequence;
+         }
         }
+       } else {
+        echo "<br>No Routing found!. Manually create the routing";
+//        $dbc->rollback = true;
+//        return;
        }
+
        if (!empty($routing_sequence_value)) {
         $wip_wo_bom->$value = $routing_sequence_value;
        }

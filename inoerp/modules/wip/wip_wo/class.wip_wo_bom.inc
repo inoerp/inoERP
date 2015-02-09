@@ -14,6 +14,7 @@
    'bom_sequence',
    'routing_sequence',
    'component_item_id_m',
+   'component_revision',
    'usage_basis',
    'usage_quantity',
    'yield',
@@ -55,6 +56,7 @@
   public $bom_sequence;
   public $routing_sequence;
   public $component_item_id_m;
+  public $component_revision;
   public $usage_basis;
   public $usage_quantity;
   public $yield;

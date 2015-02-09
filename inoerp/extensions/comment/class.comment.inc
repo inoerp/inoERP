@@ -163,7 +163,7 @@ class comment extends dbObject {
 					LEFT JOIN content ON content.content_id = comment.reference_id 
 					WHERE comment.reference_table = 'content'
 					AND comment.subject IS NOT NULL AND comment.subject !='' ";
-  $sql .=" ORDER BY comment.weightage DESC, comment.creation_date DESC ";
+  $sql .=" ORDER BY comment.comment_id DESC, comment.weightage DESC ";
   $sql .= " LIMIT :lmt_start_from , :lmt_no_of_records  ";
   $value_a = ['lmt_no_of_records' => $numbers, 'lmt_start_from' => $start_from];
 

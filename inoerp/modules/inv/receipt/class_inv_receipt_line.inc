@@ -9,6 +9,7 @@ class inv_receipt_line extends dbObject {
  public static $multi_search_primary_column = "inv_receipt_header_id"; //this value is used in multi search hidden value
  public static $key_column = 'item_description';
  public static $module = "inv";
+ public static $gl_journal_category = "INV_INVENTORY";
  public $field_a = [
   'inv_receipt_line_id',
   'line_number',
@@ -49,6 +50,7 @@ class inv_receipt_line extends dbObject {
   'shipment_number',
   'item_number',
   'uom_name',
+  'kit_cb',
   'supplier_id',
   'supplier_number',
   'supplier_name',
@@ -69,7 +71,7 @@ class inv_receipt_line extends dbObject {
   'ar_customer_id',
   'ar_customer_site_id',
   'so_number',
-  'so_line_number'
+  'so_line_number',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
   "inv_receipt_header_id",
@@ -83,6 +85,9 @@ class inv_receipt_line extends dbObject {
   'item_description',
   'uom_id',
   'transaction_quantity'
+ ];
+ public $checkbox = [
+  'kit_cb'
  ];
  public $inv_receipt_line_id;
  public $inv_receipt_header_id;
@@ -118,6 +123,7 @@ class inv_receipt_line extends dbObject {
  public $shipment_number;
  public $item_number;
  public $uom_name;
+ public $kit_cb;
  public $supplier_id;
  public $supplier_number;
  public $supplier_name;
@@ -142,6 +148,10 @@ class inv_receipt_line extends dbObject {
  public $customer_site_number;
  public $so_number;
  public $so_line_number;
+ private $_standard_cost_for_all_kit_items;
+ private $_po_line_id;
+ private $_gl_journal_header_id;
+ private $_ppv_ac_id;
 
  Public static function inv_transaction_class() {
   $option_header = option_header::find_by_name('TRANSACTION_TYPE_CLASS');
@@ -150,34 +160,44 @@ class inv_receipt_line extends dbObject {
  }
 
  public function _after_save() {
-
+  global $dbc;
   if (!empty($this->inv_receipt_line_id) && !empty($this->po_detail_id)) {
    $update_satus = 0;
    try {
     $po_d = new po_detail();
     $po_d_i = $po_d->findBy_id($this->po_detail_id);
+    $this->_po_line_id = $po_d_i->po_line_id;
+    $this->_ppv_ac_id = $po_d->ppv_ac_id;
 //     echo "<br>Existing received qty in PO : " . $po_d_i->received_quantity . '. Qty in new receipt line : ' . $this->transaction_quantity;
     if ($this->transaction_type_id == 5) {
-     $po_d->received_quantity = $this->transaction_quantity + $po_d_i->received_quantity;
+     $new_qty = $this->transaction_quantity + $po_d_i->received_quantity;
+     $po_d->received_quantity = $new_qty;
     } else if ($this->transaction_type_id == 21) {
-     $po_d->received_quantity = $po_d_i->received_quantity - $this->transaction_quantity;
+     $new_qty = $po_d_i->received_quantity - $this->transaction_quantity;
+     $po_d->received_quantity = $new_qty;
     }
     $po_d->po_detail_id = $po_d_i->po_detail_id;
-    $po_d->audit_trial();
     $po_d->save();
     echo "<br>PO Received Quantity is Sucessfully Updated ";
-    if (!empty($this->item_id_m)) {
+    if (!empty($this->item_id_m) && empty($this->kit_cb)) {
      try {
       $this->_create_inv_transactions();
       echo "<br>INV Transaction Lines are Sucessfully Created ";
      } catch (Exception $e) {
       $update_satus = -99;
+      $dbc->rollback = true;
       echo "<br>Creating the transaction lines failed @ inv_receipt_line after save" . $e->getMessage();
+      return;
      }
+    }
+    if (!empty($this->kit_cb)) {
+     $this->_create_receipt_forKit();
     }
    } catch (Exception $e) {
     $update_satus = -99;
+    $dbc->rollback = true;
     echo "<br>PO Detail Update Failed! Receipt Line Error @ " . __LINE__ . $e->getMessage();
+    return;
    }
    if ($update_satus > 0) {
     $this->status = 'Success';
@@ -196,11 +216,11 @@ class inv_receipt_line extends dbObject {
   if (!empty($this->sd_so_line_id)) {
    $so_line = new sd_so_line();
    $so_line->findBy_id($this->sd_so_line_id);
-   $newcurrent_shped_qty = !empty($so_line->shipped_quantity) ?  ($so_line->shipped_quantity + $this->quantity) : $this->quantity;
+   $newcurrent_shped_qty = !empty($so_line->shipped_quantity) ? ($so_line->shipped_quantity + $this->quantity) : $this->quantity;
    $so_line->shipped_quantity = $newcurrent_shped_qty;
    try {
     $so_line->save();
-    echo "<br> SO Line is sucessfully updated " ;
+    echo "<br> SO Line is sucessfully updated ";
    } catch (Exception $e) {
     echo "<br> Not able to find sd_so_line_id. Error @ inv_transaction " . __LINE__ . '<br>' . $e->getMessage();
     $dbc->rollback = true;
@@ -233,8 +253,163 @@ class inv_receipt_line extends dbObject {
   }
  }
 
- private function _create_inv_transactions() {
+ private function _create_receipt_forKit() {
+  global $dbc;
+  $total_cost = 0;
+  $bom_config_h = bom_config_header::find_by_referenceData('po_line', $this->po_line_id);
+  $bom_config_l = bom_config_line::find_by_parent_id($bom_config_h->bom_config_header_id);
+  if (empty($bom_config_l)) {
+   return;
+  }
+  foreach ($bom_config_l as $bom_cl) {
+   $bom_config_ln = new bom_config_line();
+   $bom_config_ln->findBy_id($bom_cl->bom_config_line_id);
+   $new_qty = $bom_config_ln->usage_quantity * $this->transaction_quantity;
+   $bom_config_ln->transacted_quantity += $new_qty;
+   try {
+    $this->_create_inv_transactions($bom_config_ln->component_item_id_m, $bom_config_ln->component_revision, $bom_config_ln->usage_quantity * $this->transaction_quantity);
+    $bom_config_ln->save();
+    $item_cost = cst_item_cost_v::find_cost_by_itemId_orgId($bom_config_ln->component_item_id_m, $this->org_id);
+    if (!empty($item_cost->standard_cost)) {
+     $total_cost += ( $item_cost->standard_cost * $new_qty);
+    }
+   } catch (Exception $e) {
+    echo "<br>Failed to update the bom config line quantity. Error @ inv_receipt_line @@ line " . __LINE__ . $e->getMessage();
+    $dbc->rollback = true;
+   }
+  }
+  $this->_standard_cost_for_all_kit_items = $total_cost;
+  $this->_create_gl_transaction();
+ }
+
+ private function _create_gl_transaction() {
+  global $dbc;
+
+  $po_line = po_line::find_by_id($this->_po_line_id);
+  
+  $inv = new inventory();
+  $inv_i = $inv->findRelatedDetail_ByOrgId($this->org_id);
+  $gled = new gl_ledger();
+  $gled->findBy_id($inv_i->ledger_id);
+  $gp = new gl_period();
+  $current_open_period = $gp->current_open_period($inv_i->ledger_id);
+  $gjh = new gl_journal_header;
+  $gjh->ledger_id = $inv_i->ledger_id;
+  $gjh->status = 'ENTERED';
+  $gjh->currency = $gled->currency_code;
+  $gjh->period_id = $current_open_period->gl_period_id;
+  $gjh->journal_source = self::$module;
+  $gjh->journal_category = self::$gl_journal_category;
+  $gjh->reference_type = 'table';
+  $gjh->reference_key_name = 'inv_receipt_header';
+  $gjh->reference_key_value = $this->inv_receipt_header_id;
+  $gjh->journal_name = $gjh->journal_category . '-' . $gjh->reference_key_value;
+  $gjh->description = $gjh->journal_name . '-' . current_time();
+  $gjh->balance_type = 'A';
+  $gjh->audit_trial();
+  $gjh->gl_journal_header_id = null;
+  if ($gjh->validate_requiredField()) {
+   try {
+    $gjh->save();
+    $this->_gl_journal_header_id = $gjh->gl_journal_header_id;
+    echo "<br> The New Journal Header Id is " . $this->_gl_journal_header_id;
+   } catch (Exception $e) {
+    echo "<br>Failed to jouranl header. Error @ inv_receipt_line @@ line " . __LINE__ . $e->getMessage();
+    $dbc->rollback = true;
+   }
+  } else {
+   return;
+  }
+
+//Create debit line
+  $line_num = 1;
+  $new_gjl = new gl_journal_line();
+  $new_gjl->gl_journal_header_id = $this->_gl_journal_header_id;
+  $new_gjl->line_num = $line_num;
+  $line_num++;
+  $new_gjl->status = 'U';
+  $new_gjl->code_combination_id = $inv_i->material_ac_id;
+  $new_gjl->total_dr = $this->_standard_cost_for_all_kit_items;
+  $new_gjl->total_ac_dr = $this->_standard_cost_for_all_kit_items;
+  $new_gjl->description = 'Inv Receipt Line Id ' . $this->inv_receipt_line_id . ' item id ' . $this->item_id_m;
+  $new_gjl->reference_type = 'table';
+  $new_gjl->reference_key_name = 'inv_receipt_line';
+  $new_gjl->reference_key_value = $this->inv_receipt_line_id;
+  $val_result = $new_gjl->validate_requiredField();
+
+  if ($val_result) {
+   try {
+    $new_gjl->save();
+   } catch (Exception $e) {
+    echo "<br>Failed to jouranl line. Error @ inv_receipt_line @@ line " . __LINE__ . $e->getMessage();
+    $dbc->rollback = true;
+   }
+  } else {
+   return;
+  }
+
+  //create credit line
+  $po_unit_price = !empty($po_line->unit_price) ? $po_line->unit_price : 0;
+
+  $new_gjl->gl_journal_line_id = null;
+  $new_gjl->line_num = $line_num;
+  $line_num++;
+  $new_gjl->status = 'U';
+  $new_gjl->code_combination_id = $inv_i->expense_ac_id;
+   $new_gjl->total_ac_cr = $new_gjl->total_cr = $po_unit_price * $this->transaction_quantity;
+  $new_gjl->total_ac_dr = $new_gjl->total_dr = 0;
+  $ppv_amnt = $po_unit_price * $this->transaction_quantity - $this->_standard_cost_for_all_kit_items;
+  
+  $val_result = $new_gjl->validate_requiredField();
+  if ($val_result) {
+   try {
+    $new_gjl->save();
+   } catch (Exception $e) {
+    echo "<br>Failed to jouranl line. Error @ inv_receipt_line @@ line " . __LINE__ . $e->getMessage();
+    $dbc->rollback = true;
+   }
+  } else {
+   return;
+  }
+
+  if (empty($ppv_amnt)) {
+   return;
+  }
+  //create PPV account
+  $new_gjl->gl_journal_line_id = null;
+  $new_gjl->line_num = $line_num;
+  $line_num++;
+  $new_gjl->status = 'U';
+  $new_gjl->code_combination_id = $this->_ppv_ac_id;
+  if ($ppv_amnt > 0) {
+   $new_gjl->total_dr = $new_gjl->total_ac_dr = $ppv_amnt;
+   $new_gjl->total_ac_cr = $new_gjl->total_cr = 0;
+  } else {
+   $new_gjl->total_cr = $new_gjl->total_ac_cr = abs($ppv_amnt);
+   $new_gjl->total_ac_dr = $new_gjl->total_dr = 0;
+  }
+  $new_gjl->description = 'PPV for Inv Receipt Line Id ' . $this->inv_receipt_line_id . ' item id ' . $this->item_id_m;
+  $val_result = $new_gjl->validate_requiredField();
+  if ($val_result) {
+   try {
+    $new_gjl->save();
+   } catch (Exception $e) {
+    echo "<br>Failed to jouranl line. Error @ inv_receipt_line @@ line " . __LINE__ . $e->getMessage();
+    $dbc->rollback = true;
+   }
+  } else {
+   return;
+  }
+ }
+
+ private function _create_inv_transactions($item_id_m = '', $revision_name = '', $transaction_qty = '') {
   $inv_transaction = new inv_transaction();
+  if ($this->kit_cb) {
+   $inv_transaction->setProperty('_gl_transaction', false);
+  }
+  $item_id_m_f = empty($item_id_m) ? $this->item_id_m : $item_id_m;
+  $revision_name_f = empty($revision_name) ? $this->revision_name : $revision_name;
+  $transaction_qty_f = empty($transaction_qty) ? $this->transaction_quantity : $transaction_qty;
   switch ($this->transaction_type_id) {
    case 5 :
     $inv_transaction->org_id = $this->org_id;
@@ -242,9 +417,9 @@ class inv_receipt_line extends dbObject {
     if (!empty($this->locator_id)) {
      $inv_transaction->to_locator_id = $this->locator_id;
     }
-    $inv_transaction->quantity = $this->transaction_quantity;
-    $inv_transaction->item_id_m = $this->item_id_m;
-    $inv_transaction->revision_name = $this->revision_name;
+    $inv_transaction->quantity = $transaction_qty_f;
+    $inv_transaction->item_id_m = $item_id_m_f;
+    $inv_transaction->revision_name = $revision_name_f;
     $inv_transaction->transaction_type_id = $this->transaction_type_id;
     $inv_transaction->po_detail_id = $this->po_detail_id;
     $inv_transaction->reference_type = 'table';
@@ -252,7 +427,7 @@ class inv_receipt_line extends dbObject {
     $inv_transaction->reference_key_value = $this->inv_receipt_line_id;
     $inv_transaction->document_type = 'PO';
     $inv_transaction->document_number = $this->po_number;
-    $inv_transaction->audit_trial();
+    $inv_transaction->_before_save();
     $inv_transaction->save();
     $update_result = $inv_transaction->_after_save();
     break;
@@ -263,9 +438,9 @@ class inv_receipt_line extends dbObject {
     if (!empty($this->locator_id)) {
      $inv_transaction->from_locator_id = $this->locator_id;
     }
-    $inv_transaction->quantity = $this->transaction_quantity;
-    $inv_transaction->item_id_m = $this->item_id_m;
-    $inv_transaction->revision_name = $this->revision_name;
+    $inv_transaction->quantity = $transaction_qty_f;
+    $inv_transaction->item_id_m = $item_id_m_f;
+    $inv_transaction->revision_name = $revision_name_f;
     $inv_transaction->transaction_type_id = $this->transaction_type_id;
     $inv_transaction->po_detail_id = $this->po_detail_id;
     $inv_transaction->reference_type = 'table';
@@ -273,7 +448,7 @@ class inv_receipt_line extends dbObject {
     $inv_transaction->reference_key_value = $this->inv_receipt_line_id;
     $inv_transaction->document_type = 'PO';
     $inv_transaction->document_number = $this->po_number;
-    $inv_transaction->audit_trial();
+    $inv_transaction->_before_save();
     $inv_transaction->save();
     $update_result = $inv_transaction->_after_save();
     break;
@@ -284,9 +459,9 @@ class inv_receipt_line extends dbObject {
     if (!empty($this->locator_id)) {
      $inv_transaction->to_locator_id = $this->locator_id;
     }
-    $inv_transaction->quantity = $this->transaction_quantity;
-    $inv_transaction->item_id_m = $this->item_id_m;
-    $inv_transaction->revision_name = $this->revision_name;
+    $inv_transaction->quantity = $transaction_qty_f;
+    $inv_transaction->item_id_m = $item_id_m_f;
+    $inv_transaction->revision_name = $revision_name_f;
     $inv_transaction->transaction_type_id = $this->transaction_type_id;
     $inv_transaction->sd_so_line_id = $this->sd_so_line_id;
     $inv_transaction->reference_type = 'table';
@@ -294,7 +469,7 @@ class inv_receipt_line extends dbObject {
     $inv_transaction->reference_key_value = $this->inv_receipt_line_id;
     $inv_transaction->document_type = 'RMA';
     $inv_transaction->document_number = $this->so_number;
-    $inv_transaction->audit_trial();
+    $inv_transaction->_before_save();
     $inv_transaction->save();
     $update_result = $inv_transaction->_after_save();
     break;

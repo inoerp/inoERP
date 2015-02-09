@@ -173,8 +173,7 @@
     if (settings.select_class === 'undefined') {
      settings.select_class = 'select' + settings.field_name;
     }
-    var primary_column1_h = '#' + settings.primary_column1;
-    var primary_column1_v = $(primary_column1_h).val();
+
     if (!$(this).data("autocomplete")) {
      var auto_element = this;
      if ($(this).attr('data-ac_type')) {
@@ -182,6 +181,16 @@
      } else {
       var ac_type = null;
      }
+
+     var primary_column1_h = '#' + settings.primary_column1;
+          if ($(primary_column1_h).val()) {
+      var primary_column1_v = $(primary_column1_h).val();
+     } else if($(auto_element).closest("tr").attr('class')){
+      var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
+      var primary_column1_d = '.' + settings.primary_column1;
+      var primary_column1_v = $(form_id_h).find(trClass).find(primary_column1_d).val();
+     }
+
      $(this).autocomplete({
       source: function (request, response) {
        $.ajax({

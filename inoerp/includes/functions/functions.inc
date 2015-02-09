@@ -491,6 +491,7 @@ function mysql_prep($value) {
 
 function ino_showDecimal($number, $decimal = '.') {
  if ((!empty($number))) {
+  $is_neg = ($number < 0 ) ? true : false;
   $exploded_number = explode($decimal, $number);
   if ((!empty($exploded_number[1])) && ((int) $exploded_number[1] > 0 )) {
    $final_number = rtrim(number_format($exploded_number[0]) . $decimal . $exploded_number[1], '0');
@@ -498,7 +499,8 @@ function ino_showDecimal($number, $decimal = '.') {
   } else {
 //	 echo ' in 2 ';
    $final_number = number_format($exploded_number[0]);
-  };
+  }
+  $final_number = ($is_neg == true ) ? (-$final_number) : $final_number;
  } else {
 //	echo ' in 3 ';
   $final_number = $number;
@@ -820,7 +822,7 @@ function search_gl_period_name() {
 
 function search_show_details_cb() {
  global $f;
- return $f->checkBox_field('show_details', '' ,  'show_details');
+ return $f->checkBox_field('show_details', '', 'show_details');
 }
 
 function search_mds_name() {
@@ -863,10 +865,9 @@ function search_legal_org_name() {
 
 function search_legal_org_name_m() {
  global $f;
- $stmt = $f->select_field_from_object('org_id', org::find_all_legal(), 'org_id', 'org', '', 'org_id', '',  1);
+ $stmt = $f->select_field_from_object('org_id', org::find_all_legal(), 'org_id', 'org', '', 'org_id', '', 1);
  return $stmt;
 }
-
 
 function search_co_number() {
  global $f;
@@ -1406,6 +1407,28 @@ function ino_filter_form() {
 ';
 // <button class="button btn btn-warning remove-filter" type="submit"  name="removeFilter">Remove</button>  
  return $ino_filter_form;
+}
+
+function ino_recent_visits() {
+ if (isset($_SESSION['recent_visit'])) {
+  $recent_visit = '<ul id="recent_visit">';
+  $rev_a = array_reverse($_SESSION['recent_visit']);
+  $count = 0;
+  foreach ($rev_a as $k => $v) {
+   $count++;
+   if ($count >= 15) {
+    break;
+   }
+   if (!is_numeric($k)) {
+    $recent_visit .= '<li><a href="' . $v . '">' . str_replace('_', ' ', substr($k, 0, 30)) . '</a>';
+   } else {
+    $recent_visit .= '<li><a href="' . $v . '"> Vsiti ' . $k . '</a>';
+   }
+  }
+  $recent_visit .= '<li class="view_all"><a href="' . HOME_URL . 'form.php?class_name=user_activity_v&mode=2"> View More ...</a>';
+  $recent_visit .= '</ul>';
+ }
+ return $recent_visit;
 }
 
 ?>

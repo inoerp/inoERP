@@ -79,7 +79,6 @@
    }
    echo <<<EOD
 			 <ul id="form_top_image" class="draggable">
-        <li class="show_loading_small"><img src="$homeUrl/themes/images/form/small_loading_bar.gif"></li>	
         <li class='fa fa-refresh clickable' id='refresh_button' title='Refresh'></li>
         <li><a class='fa fa-file-text-o clickable' Title="New Document" id="new_page_button" href="$current_page_path"></a></li>
     		<li class='fa fa-save clickable' id='save' title='Save'></li>
@@ -229,7 +228,7 @@ EOD;
 
   public function number_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $min = "", $max = "") {
    $bracketName = $name . '[]';
-   $valueAfterDecimal = ino_showDecimal(htmlentities($value));
+   $valueAfterDecimal = ino_showDecimal($value);
 //	echo "$value : $valueAfterDecimal";
 
    if ($readonly == 1) {

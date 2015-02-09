@@ -1,4 +1,5 @@
 <?php
+
 $form_page = true;
 if (!empty($_GET['class_name'])) {
  $class_names = $_GET['class_name'];
@@ -9,7 +10,11 @@ if (!empty($_GET['class_name'])) {
  $path = new path();
  $ino_generic_html = $path->findBy_moduleCode($_GET['module_code'], $type);
  include_once('includes/functions/loader.inc');
- include_once(THEME_DIR . '/main_template.inc');
+ if (!empty($_GET['window_type']) && $_GET['window_type'] == 'popup') {
+  include_once(THEME_DIR . '/popup_main_template.inc');
+ } else {
+  include_once(THEME_DIR . '/main_template.inc');
+ }
  return;
 } else {
  die('No class found!. Error @ form.php @@ line 15');
@@ -28,7 +33,11 @@ if (empty($_POST)) {
  try {
 //  $mode = !empty($mode) ? $mode : 2;
   if ($continue) {
-   include_once(THEME_DIR . '/main_template.inc');
+   if (!empty($_GET['window_type']) && $_GET['window_type'] == 'popup') {
+    include_once(THEME_DIR . '/popup_main_template.inc');
+   } else {
+    include_once(THEME_DIR . '/main_template.inc');
+   }
   } else {
    $continue = false;
    echo "<h2>Could n't call the header</h2>";
@@ -51,13 +60,3 @@ if (empty($_POST)) {
  }
 }
 ?>
-<script type="text/javascript">
- $(document).ready(function () {
-
-//    if (localStorage.getItem("form_erp_loaded") === 'undefined' || localStorage.getItem("form_erp_loaded") === null) {
-//   localStorage.setItem("form_erp_loaded", 1);
-//           $.getScript("includes/js/erp.js");
-//  }
-  
- });
-</script>
