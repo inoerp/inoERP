@@ -14,7 +14,7 @@
        <ul class="column header_field">
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_department_id select_popup clickable">
           Department Id</label><?php echo $f->text_field_dsr('bom_department_id'); ?>
-         <a name="show" href="form.php?class_name=bom_department&<?php echo "mode=$mode"; ?>" class="show document_id bom_department_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+         <a name="show" href="form.php?class_name=bom_department&<?php echo "mode=$mode"; ?>" class="show document_id bom_department_id"><i class="fa fa-refresh"></i></a> 
         </li>
         <li><label>Inventory(1)</label><?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly); ?>        </li>
         <li><label>Department(2)</label><?php echo form::text_field_d('department'); ?></li>
@@ -76,13 +76,10 @@
         foreach ($bom_department_resource_assignment_object as $bom_department_resource_assignment) {
          ?>         
          <tr class="bom_department_resource_assignment<?php echo $count ?>">
-          <td>    
-           <ul class="inline_action">
-            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($bom_department_resource_assignment->bom_department_resource_assignment_id); ?>"></li>           
-            <li><?php echo form::hidden_field('bom_department_id', $$class->bom_department_id); ?></li>
-           </ul>
+          <td>
+           <?php
+           echo ino_inline_action($$class_second->bom_department_resource_assignment_id, array('bom_department_id' => $$class->bom_department_id));
+           ?>
           </td>
           <td><?php $f->text_field_wid2sr('bom_department_resource_assignment_id'); ?></td>
           <td>

@@ -161,6 +161,21 @@ function check_browser() {
  }
 }
 
+function ino_inline_action($line_id_cb_val, $hidden_field_a, $add_image_class='add_row_img', $line_id_cb='line_id_cb') {
+ global $f;
+ $ret_stmt = ' <ul class="inline_action">
+           <li class="'.$add_image_class.' clickable"> <i class="fa fa-plus-circle"></i> </li>
+           <li class="remove_row_img clickable"> <i class="fa fa-minus-circle"></i> </li>';
+ $ret_stmt .= '<li><input type="checkbox" name="'.$line_id_cb.'" value="' . $line_id_cb_val . '"></li>';
+ $ret_stmt .= '<li class="hidden">';
+ foreach ($hidden_field_a as $k => $v) {
+  $ret_stmt .= $f->hidden_field($k, $v);
+ }
+ $ret_stmt .= '</li></ul>';
+
+ return $ret_stmt;
+}
+
 function access_denied($msg = '') {
 // header("Location: access_denied.php?message=$msg");
 // redirect_to(HOME_URL . 'access_denied.php');

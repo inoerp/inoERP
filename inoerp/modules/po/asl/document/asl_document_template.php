@@ -7,33 +7,31 @@
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
-       <ul class="column five_column">
-        <li>
-         <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="po_asl_line_id select_popup clickable">ASL Line Id  :</label>
-         <?php echo $f->text_field('po_asl_line_id', $po_asl_line_id_h, '', 'po_asl_line_id'); ?>
-         <a name="show" href="form.php?class_name=po_asl_document&<?php echo "mode=$mode"; ?>" class="show document_id po_asl_document_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-        </li>
-        <li><label>BU Name(1) : </label>
-         <?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $bu_org_id, 'bu_org_id', '', 1, 1); ?>
-        </li>
-        <li><label>Supplier Name : </label>  
-         <?php
-         echo $f->text_field('supplier_name', $supplier_name);
-         echo $f->hidden_field_withId('supplier_id', $supplier_id)
-         ?>   </li>
-        <li><label>Supplier Site Name : </label> 
-         <?php
-         echo $f->text_field('supplier_site_name', $supplier_site_name);
-         echo $f->hidden_field_withId('supplier_site_id', $supplier_site_id)
-         ?>   </li>  
-        <li><label>Item Number : </label> 
-         <?php
-         echo $f->text_field('item_number', $item_number);
-         echo $f->hidden_field_withId('item_id_m', $item_id_m)
-         ?>   </li>  
-       </ul>
-      </div>
+      <ul class="column five_column">
+       <li>
+        <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="po_asl_line_id select_popup clickable">ASL Line Id  :</label>
+        <?php echo $f->text_field('po_asl_line_id', $po_asl_line_id_h, '', 'po_asl_line_id'); ?>
+        <a name="show" href="form.php?class_name=po_asl_document&<?php echo "mode=$mode"; ?>" class="show document_id po_asl_document_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+       </li>
+       <li><label>BU Name(1) : </label>
+        <?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $bu_org_id, 'bu_org_id', '', 1, 1); ?>
+       </li>
+       <li><label>Supplier Name : </label>  
+        <?php
+        echo $f->text_field('supplier_name', $supplier_name);
+        echo $f->hidden_field_withId('supplier_id', $supplier_id)
+        ?>   </li>
+       <li><label>Supplier Site Name : </label> 
+        <?php
+        echo $f->text_field('supplier_site_name', $supplier_site_name);
+        echo $f->hidden_field_withId('supplier_site_id', $supplier_site_id)
+        ?>   </li>  
+       <li><label>Item Number : </label> 
+        <?php
+        echo $f->text_field('item_number', $item_number);
+        echo $f->hidden_field_withId('item_id_m', $item_id_m)
+        ?>   </li>  
+      </ul>
      </div>
     </div>
 
@@ -66,18 +64,14 @@
          foreach ($asl_document_object as $po_asl_document) {
           ?>         
           <tr class="po_asl_document<?php echo $count ?>">
-           <td>    
-            <ul class="inline_action">
-             <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-             <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-             <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class->po_asl_document_id); ?>"></li> 
-             <li><?php echo form::hidden_field('po_asl_line_id', $po_asl_line_id_h); ?></li>
-
-            </ul>
+           <td>
+            <?php
+            echo ino_inline_action($$class->po_asl_document_id, array('po_asl_line_id' => $po_asl_line_id_h));
+            ?>
            </td>
            <td><?php $f->seq_field_d($count) ?></td>
            <td><?php $f->text_field_widsr('po_asl_document_id') ?></td>
-           <td><?php echo $f->select_field_from_array('document_type', po_asl_document::$document_type_a, $$class->document_type, '', '', 1, '', $readonly1); ?></td>
+           <td><?php echo $f->select_field_from_array('document_type', po_asl_document::$document_type_a, $$class->document_type, '', 'medium', 1, '', $readonly1); ?></td>
            <td><?php echo $f->select_field_from_array('document_line_id', $document_number_a, $$class->document_line_id); ?></td>
            <td><?php echo $f->date_fieldAnyDay('start_date', $$class->start_date); ?></td>
            <td><?php echo $f->date_fieldAnyDay('end_date', $$class->end_date); ?></td>

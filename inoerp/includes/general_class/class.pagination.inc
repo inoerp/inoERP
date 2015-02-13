@@ -101,7 +101,7 @@ VAR;
    }
   }
   $this->_total_pages = $this->total_pages();
-  if ($this->_total_pages > 1) {
+  if ($this->_total_pages >= 1) {
    $pagination_statement .= "<div class='page_nos pagination'>";
    if ($this->current_page > 6) {
     if (strpos($this->_path, '.php') !== false) {
@@ -127,10 +127,10 @@ VAR;
    } else {
     $starting_page_no = 1;
    }
-   $pagination_count = 1;
+   $pagination_count = 0;
 
    do {
-    if ($starting_page_no < $this->_total_pages) {
+    if ($starting_page_no <= $this->_total_pages) {
      if ($starting_page_no == $this->current_page) {
       $pagination_statement .= " <span class=\"selected\">{$starting_page_no}</span> ";
      } else {
@@ -159,7 +159,7 @@ VAR;
     $pagination_statement .= "\">Next &raquo;</a> ";
    }
 
-   if ($this->_total_pages > $pagination_count) {
+   if ($this->_total_pages >= $pagination_count) {
     if (strpos($this->_path, '.php') !== false) {
      $pagination_statement .= " <a href=\"$this->_path&amp;pageno=";
     } else {

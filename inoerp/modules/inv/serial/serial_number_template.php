@@ -8,11 +8,10 @@
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
       <ul class="column four_column"> 
        <li> <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_serial_number_id select_popup clickable">
          Serial Id : </label><?php $f->text_field_dsr('inv_serial_number_id') ?>
-        <a name="show" href="form.php?class_name=inv_serial_number&<?php echo "mode=$mode"; ?>" class="show document_id inv_serial_number_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <a name="show" href="form.php?class_name=inv_serial_number&<?php echo "mode=$mode"; ?>" class="show document_id inv_serial_number_id"><i class="fa fa-refresh"></i></a> 
        </li>
        <li><label>Inventory Org </label>
         <?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>
@@ -43,7 +42,6 @@
        </li> 
        <li><label>Description :</label><?php $f->text_field_d('description'); ?> 					</li>
       </ul>
-     </div>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>

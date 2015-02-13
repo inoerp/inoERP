@@ -1,3 +1,4 @@
+<div id="view_divId">
 <div id ="form_header"> <span class="heading"> View - Dynamic Query Builder  </span>
  <form action=""  method="post" id="view_header"  name="view_header">
   <div id="tabsHeader">
@@ -321,7 +322,7 @@
 
  </form>   
 </div>
-
+</div>
 <div id="js_data">
  <ul id="js_saving_data">
   <li class="headerClassName" data-headerClassName="view" ></li>

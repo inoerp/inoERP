@@ -18,7 +18,7 @@
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="po_requisition_header_id select_popup clickable">
           Requisition  Id</label>
          <?php echo $f->text_field_dr('po_requisition_header_id') ?>
-         <a name="show" href="form.php?class_name=po_requisition_header&<?php echo "mode=$mode"; ?>" class="show document_id po_requisition_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+         <a name="show" href="form.php?class_name=po_requisition_header&<?php echo "mode=$mode"; ?>" class="show document_id po_requisition_header_id"><i class="fa fa-refresh"></i></a> 
         </li>
         <li><label>Requisition Number</label> <?php echo $f->text_field_d('po_requisition_number', 'primary_column2'); ?>             </li>
         <li><label>BU Name(1)</label>
@@ -165,13 +165,11 @@
         foreach ($po_requisition_line_object as $po_requisition_line) {
          ?>         
          <tr class="po_requisition_line<?php echo $count ?>">
-          <td>    
-           <ul class="inline_action">
-            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($po_requisition_line->item_description); ?>"></li>           
-            <li><?php echo form::hidden_field('po_requisition_header_id', $po_requisition_header->po_requisition_header_id); ?></li>
-           </ul>
+          <td>
+           <?php
+           echo ino_inline_action($$class_second->po_requisition_line_id, array('po_requisition_header_id' => $$class->po_requisition_header_id));
+           ?>
+          </td>
           </td>
           <td><?php form::text_field_wid2sr('po_requisition_line_id'); ?></td>
           <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
@@ -188,7 +186,7 @@
            ?></td>
           <td><?php form::number_field_wid2s('line_quantity'); ?></td>
 
-          <td class="add_detail_values"><img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+          <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i>
            <!--</td></tr>-->	
            <?php
            $po_requisition_line_id = $po_requisition_line->po_requisition_line_id;
@@ -234,15 +232,11 @@
                    $$class_third = &$po_requisition_detail;
                    ?>
                    <tr class="po_requisition_detail<?php echo $count . '-' . $detailCount; ?>">
-                    <td>   
-                     <ul class="inline_action">
-                      <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-                      <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-                      <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($po_requisition_detail->po_requisition_detail_id); ?>"></li>           
-                      <li><?php echo form::hidden_field('po_requisition_line_id', $po_requisition_line->po_requisition_line_id); ?></li>
-                      <li><?php echo form::hidden_field('po_requisition_header_id', $po_requisition_header->po_requisition_header_id); ?></li>
-
-                     </ul>
+                    <td>
+                     <?php
+                     echo ino_inline_action($$class_third->po_requisition_detail_id, array('po_requisition_header_id' => $$class->po_requisition_header_id,
+                      'po_requisition_line_id' => $$class_second->po_requisition_line_id),'add_row_detail_img','detail_id_cb');
+                     ?>
                     </td>
                     <td><?php form::text_field_wid3sr('po_requisition_detail_id'); ?></td>
                     <td><?php echo $f->number_field('shipment_number', $$class_third->shipment_number, '', '', 'detail_number', 1); ?></td>

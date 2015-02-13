@@ -205,6 +205,8 @@ class inv_transaction extends dbObject {
  private $_cr_ac_id;
  private $_gl_transaction = true;
  public $kit_cb;
+ public $ledger_id;
+ private $_ledger_id;
 
  public function setProperty($property, $value) {
   if (property_exists($this, $property)) {
@@ -694,32 +696,10 @@ class inv_transaction extends dbObject {
    return -90;
   }
 
-  if ($this->kit_cb) {
-   $this->_create_kitTransaction();
-   return 10;
-  }
-
-//serail verification
-  if (!empty($_POST['serial_generation'][0])) {
-   if (!empty($_POST['inv_serial_number_id']) && count($_POST['inv_serial_number_id']) >= $this->quantity) {
-    $this->_serial_type = 'ID';
-    //good to procedd . $this->_lock_serial_number();
-   } else if (!empty($_POST['serial_number']) && count($_POST['serial_number']) >= $this->quantity) {
-    $this->_serial_type = 'NUMBER';
-    //good to procedd . $this->_lock_serial_number();
-   } else {
-    echo "<br>Incomplete serial numbers for serial controlled items";
-    return -99;
-   }
-  }
-
-  //lot verification  
-  if (!empty($_POST['lot_generation'][0])) {
-   $entered_lot_quantity_total = $this->_entered_lot_quantity_total();
-   if (empty($entered_lot_quantity_total)) {
-    echo "<br>Incomplete lot numbers for lot controlled items";
-    return -99;
-   }
+  if (!empty($this->org_id)) {
+   $inv = new inventory();
+   $inv_i = $inv->findRelatedDetail_ByOrgId($this->org_id);
+   $this->ledger_id = $this->_ledger_id = $inv_i->ledger_id;
   }
 
   if (!(empty($this->transaction_type_id))) {
@@ -756,6 +736,36 @@ class inv_transaction extends dbObject {
    }
   }
 
+  if ($this->kit_cb) {
+   $this->_create_kitTransaction();
+   return 10;
+  }
+
+//serail verification
+  if (!empty($_POST['serial_generation'][0])) {
+   if (!empty($_POST['inv_serial_number_id']) && count($_POST['inv_serial_number_id']) >= $this->quantity) {
+    $this->_serial_type = 'ID';
+    //good to procedd . $this->_lock_serial_number();
+   } else if (!empty($_POST['serial_number']) && count($_POST['serial_number']) >= $this->quantity) {
+    $this->_serial_type = 'NUMBER';
+    //good to procedd . $this->_lock_serial_number();
+   } else {
+    echo "<br>Incomplete serial numbers for serial controlled items";
+    return -99;
+   }
+  }
+
+  //lot verification  
+  if (!empty($_POST['lot_generation'][0])) {
+   $entered_lot_quantity_total = $this->_entered_lot_quantity_total();
+   if (empty($entered_lot_quantity_total)) {
+    echo "<br>Incomplete lot numbers for lot controlled items";
+    return -99;
+   }
+  }
+
+
+
   //barcode
   if ($this->transaction_type_id) {
    $this->_generate_bc_labels();
@@ -785,13 +795,14 @@ class inv_transaction extends dbObject {
 //  pa($this);
   foreach ($bom_config_l as $bom_cl) {
    $inv_tran = new inv_transaction();
-   foreach($this->field_a as $this_k => $this_v){
+   foreach ($this->field_a as $this_k => $this_v) {
     $inv_tran->$this_v = $this->$this_v;
    }
    $inv_tran->inv_transaction_id = null;
    $inv_tran->item_number = null;
    $inv_tran->item_id_m = $bom_cl->component_item_id_m;
    $inv_tran->account_id = $this->account_id;
+//   pa($this);
    if (!empty($bom_cl->line_quantity)) {
     $new_q = $bom_cl->line_quantity;
    } else {
@@ -872,14 +883,13 @@ class inv_transaction extends dbObject {
  }
 
  private function _save_journal_header() {
-  $inv = new inventory();
-  $inv_i = $inv->findRelatedDetail_ByOrgId($this->org_id);
+
   $gled = new gl_ledger();
-  $gled->findBy_id($inv_i->ledger_id);
+  $gled->findBy_id($this->_ledger_id);
   $gp = new gl_period();
-  $current_open_period = $gp->current_open_period($inv_i->ledger_id);
+  $current_open_period = $gp->current_open_period($this->_ledger_id);
   $gjh = new gl_journal_header;
-  $gjh->ledger_id = $inv_i->ledger_id;
+  $gjh->ledger_id = $this->_ledger_id;
   $gjh->status = 'ENTERED';
   $gjh->currency = $gled->currency_code;
   $gjh->period_id = $current_open_period->gl_period_id;

@@ -7,24 +7,22 @@
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
-      <ul class="column header_field">
-       <li><label>Count Date</label><?php echo $f->date_fieldFromToday_d('count_date', $$class->count_date, 1) ?></li>
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_count_header_id select_popup clickable">
-         Inventory Count Name</label> <?php echo $f->hidden_field_withId('inv_count_header_id', $inv_count_header_id_h); ?>
-        <?php $f->text_field_dm('count_name'); ?>
-        <a name="show" href="form.php?class_name=inv_count_entries&<?php echo "mode=$mode"; ?>" class="show2 document_id inv_count_entries_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-       <li><label>Inventory</label><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>       </li>
-       <li><label>Description</label> <?php echo $f->text_field_dl('description'); ?></li>
-      </ul>
-     </div>
+     <ul class="column header_field">
+      <li><label>Count Date</label><?php echo $f->date_fieldFromToday_d('count_date', $$class->count_date, 1) ?></li>
+      <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_count_header_id select_popup clickable">
+        Inventory Count Name</label> <?php echo $f->hidden_field_withId('inv_count_header_id', $inv_count_header_id_h); ?>
+       <?php $f->text_field_dm('count_name'); ?>
+       <a name="show" href="form.php?class_name=inv_count_entries&<?php echo "mode=$mode"; ?>" class="show2 document_id inv_count_entries_id"><i class="fa fa-refresh"></i></a> 
+      <li><label>Inventory</label><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>       </li>
+      <li><label>Description</label> <?php echo $f->text_field_dl('description'); ?></li>
+     </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column three_column">
        <li><label>Adjustment A/C : </label> <?php echo $f->ac_field_dm('adjustment_ac_id'); ?></li>
        <li><label>Counted By : </label> <?php $f->text_field_d('counted_by'); ?></li>
-       </u>
+      </ul>
      </div>
     </div>
    </div>
@@ -62,15 +60,10 @@
        foreach ($inv_count_schedule_object as $inv_count_schedule) {
         ?>         
         <tr class="inv_count_entries<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($inv_count_schedule->inv_count_schedule_id); ?>"></li>           
-           <li><?php echo form::hidden_field('inv_count_header_id', $inv_count_header_id_h); ?>
-            <?php echo form::hidden_field('org_id', $$class->org_id); ?>
-           </li>
-          </ul>
+         <td>
+          <?php
+          echo ino_inline_action($$class_second->inv_count_schedule_id, array('inv_count_header_id' => $inv_count_header_id_h));
+          ?>
          </td>
          <td><?php $f->text_field_d2srm('inv_count_schedule_id'); ?></td>
          <td><?php $f->text_field_d2sr('item_id_m'); ?></td>

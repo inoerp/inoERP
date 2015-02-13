@@ -2194,6 +2194,7 @@ function getMultiSelectResult(options) {
     $('<link href="' + filePath + '" rel="stylesheet">').appendTo("head");
    }
   });
+  $('.hideDiv_input').trigger('click');
  }).fail(function () {
   alert("Search Failed");
  });
@@ -2602,6 +2603,37 @@ function save_posTerminalName(options) {
  });
 }
 
+function save_dataInSession(options) {
+ var defaults = {
+  json_url: 'includes/json/json_session.php',
+ };
+ var settings = $.extend({}, defaults, options);
+
+ return $.ajax({
+  url: settings.json_url,
+  type: 'post',
+  data: {
+   data_name: settings.data_name,
+   data_value: settings.data_value,
+   save_dataInSession: 1
+  },
+  success: function () {
+   var openUrl = 'form.php?class_name=sd_pick_list&mode=2&window_type=popup';
+   void window.open(openUrl, '_blank',
+           'width=1200,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+  },
+  complete: function () {
+   $('.show_loading_small').hide();
+  },
+  beforeSend: function () {
+   $('.show_loading_small').show();
+  },
+  error: function (request, errorType, errorMessage) {
+   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+  }
+ });
+}
+
 function refreshData(options) {
  var defaults = {
   json_url: 'includes/json/json_refresh.php'
@@ -2706,13 +2738,12 @@ $(document).ready(function () {
  });
 
 //select page data selction in parent window
- $(".quick_select").click(function () {
+ $('body').on('click', '.quick_select', function () {
   var setData = new opener.setValFromSelectPage;
   var elemenType = $(this).parent().prop('tagName');
   if (elemenType === 'LI') {
    $(this).closest('ul').find('input').each(function () {
     setData[$(this).prop('id')] = $(this).prop('value');
-//    console.log($(this).prop('id') + ' : ' + $(this).prop('value'))
    });
   } else {
    $(this).closest('tr').find('td').each(function () {
@@ -2720,7 +2751,6 @@ $(document).ready(function () {
    });
   }
 
-//  console.log(setData);
   setData.setVal();
   if (opener.setPopUpValue) {
    opener.setPopUpValue(setData);
@@ -2790,7 +2820,7 @@ $(document).ready(function () {
  itemNumber.json_url = 'modules/inv/item/item_search.php';
  itemNumber.select_class = 'select_item_number';
  itemNumber.primary_column1 = 'org_id';
- itemNumber.extra_elements = ['item_id', 'item_id_m', 'item_description', 'uom_id', 'processing_lt', 'lot_generation', 'serial_generation', 'kit_item_cb'];
+ itemNumber.extra_elements = ['item_id', 'item_id_m', 'item_description', 'uom_id', 'processing_lt', 'lot_generation', 'serial_generation', 'kit_cb'];
  itemNumber.min_length = 2;
  itemNumber.autoComplete();
 
@@ -3866,7 +3896,15 @@ $(document).ready(function () {
 
  $('body').on('click', '#header_top_quick_nav .fa-close', function () {
   window.close();
- })
+ });
+
+ $('body').on('click', '.fa-arrow-circle-down', function () {
+  $(this).removeClass('fa-arrow-circle-down').addClass('fa-arrow-circle-up');
+ });
+
+ $('body').on('click', '.fa-arrow-circle-up', function () {
+  $(this).removeClass('fa-arrow-circle-up').addClass('fa-arrow-circle-down');
+ });
 
 });
 function toUpperCase(str)

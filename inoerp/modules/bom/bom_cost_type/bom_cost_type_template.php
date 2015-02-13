@@ -12,7 +12,7 @@
       <ul class="column header_field"> 
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_cost_type_id select_popup clickable">
          Cost Type Id</label><?php echo $f->text_field_dsr('bom_cost_type_id'); ?>
-        <a name="show" href="form.php?class_name=bom_cost_type&<?php echo "mode=$mode"; ?>" class="show document_id bom_cost_type_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <a name="show" href="form.php?class_name=bom_cost_type&<?php echo "mode=$mode"; ?>" class="show document_id bom_cost_type_id"><i class="fa fa-refresh"></i></a> 
        </li>
        <li><label>Inventory</label><?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly); ?></li>
        <li><label>Cost Type Code</label><?php echo $f->text_field('cost_type_code', $$class->cost_type_code, '12', '', '', 1, $readonly1); ?></li>     

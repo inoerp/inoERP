@@ -13,7 +13,7 @@
        <ul class="column header_field">
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_material_element_id select_popup clickable">
           Material Element Id</label><?php echo $f->text_field_dsr('bom_material_element_id'); ?>
-         <a name="show" href="form.php?class_name=bom_material_element&<?php echo "mode=$mode"; ?>" class="show document_id bom_material_element_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+         <a name="show" href="form.php?class_name=bom_material_element&<?php echo "mode=$mode"; ?>" class="show document_id bom_material_element_id"><i class="fa fa-refresh"></i></a> 
         </li>
         <li><label>Inventory</label><?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly); ?>      </li>
         <li><label>Material Element</label><?php echo form::text_field_d('material_element'); ?> </li>

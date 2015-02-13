@@ -42,15 +42,11 @@
       </thead>
       <tbody class="form_data_line_tbody">
        <tr class="inv_transaction_line0" id="tab1_1">
-        <td>    
-         <ul class="inline_action">
-          <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-          <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-          <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class->inv_transaction_id); ?>">
-           <?php echo form::hidden_field('org_id', $$class->org_id); ?>
-           <?php echo form::hidden_field('transaction_type_id', $$class->transaction_type_id); ?>
-          </li>           
-         </ul>
+        <td>
+         <?php
+         echo ino_inline_action($$class->inv_transaction_id, array('org_id' => $$class->org_id,
+          'transaction_type_id' => $$class->transaction_type_id));
+         ?>
         </td>
         <td>
          <?php echo $f->text_field_dsr('inv_transaction_id', 'lineId'); ?>
@@ -65,8 +61,7 @@
         </td>
         <td><?php form::text_field_widsm('quantity'); ?></td>
         <td><?php echo $f->checkBox_field('kit_cb', $$class->kit_cb, '', 'dontCopy'); ?></td>
-        <td><button type="button" class="popup btn  btn-default view-stnd-bom-item-config medium">
-          <a href="form.php?class_name=bom_config_header&mode=9&window_type=popup"> View Configuration</a></button></td>
+        <td> <a class="popup popup-form view-item-config medium" href="form.php?class_name=bom_config_header&mode=9&window_type=popup"> <i class="fa fa-edit"></i></a></td>
         <td><?php $f->text_field_widsr('bom_config_header_id'); ?></td>
        </tr>
       </tbody>

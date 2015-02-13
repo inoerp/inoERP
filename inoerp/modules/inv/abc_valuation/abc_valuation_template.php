@@ -4,7 +4,7 @@
    <ul class="column header_field"> 
     <li> <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_abc_valuation_id select_popup clickable">
       ABC Valuation Id</label><?php $f->text_field_ds('inv_abc_valuation_id') ?>
-     <a name="show" href="form.php?class_name=inv_abc_valuation&<?php echo "mode=$mode"; ?>" class="show document_id inv_abc_valuation_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+     <a name="show" href="form.php?class_name=inv_abc_valuation&<?php echo "mode=$mode"; ?>" class="show document_id inv_abc_valuation_id"><i class="fa fa-refresh"></i></a> 
     </li>
     <li><label>Valuation Name</label><?php $f->text_field_d('valuation_name'); ?></li>
     <li><label>Description</label><?php $f->text_field_d('description'); ?></li>

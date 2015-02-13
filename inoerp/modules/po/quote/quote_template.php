@@ -15,7 +15,7 @@
       <ul class="column header_field">
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="po_quote_header_id select_popup clickable">
          Header Id</label><?php $f->text_field_dsr('po_quote_header_id') ?>
-        <a name="show" href="form.php?class_name=po_quote_header&<?php echo "mode=$mode"; ?>" class="show document_id po_quote_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <a name="show" href="form.php?class_name=po_quote_header&<?php echo "mode=$mode"; ?>" class="show document_id po_quote_header_id"><i class="fa fa-refresh"></i></a> 
        </li>
        <li><label>RFQ Number</label><?php echo $f->hidden_field('po_rfq_header_id', $$class->po_rfq_header_id) ?>
         <?php echo $f->text_field_dsrm('rfq_number') ?>
@@ -150,13 +150,11 @@
        foreach ($po_quote_line_object as $po_quote_line) {
         ?>         
         <tr class="po_quote_line<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($po_quote_line->item_description); ?>"></li>           
-           <li><?php echo form::hidden_field('po_quote_header_id', $$class->po_quote_header_id); ?></li>
-           <li><?php echo form::hidden_field('po_rfq_line_id', $$class_second->po_rfq_line_id); ?></li>
-          </ul>
+         <td> 
+          <?php
+          echo ino_inline_action($$class_second->po_quote_line_id, array('po_quote_header_id' => $$class->po_quote_header_id,
+           'po_rfq_line_id' => $$class_second->po_rfq_line_id));
+          ?>
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('po_quote_line_id'); ?></td>
@@ -232,14 +230,12 @@
                   $$class_third = &$po_quote_detail;
                   ?>
                   <tr class="po_quote_detail<?php echo $count . '-' . $detailCount; ?>">
-                   <td>   
-                    <ul class="inline_action">
-                     <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-                     <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($po_quote_detail->po_quote_detail_id); ?>"></li>           
-                     <li><?php echo form::hidden_field('po_quote_line_id', $$class_second->po_quote_line_id); ?></li>
-                     <li><?php echo form::hidden_field('po_quote_header_id', $$class->po_quote_header_id); ?></li>
-                     <li><?php echo form::hidden_field('po_rfq_detail_id', $$class_third->po_rfq_detail_id); ?></li>
-                    </ul>
+                   <td>
+                    <?php
+                    echo ino_inline_action($$class_third->po_quote_detail_id, array('po_quote_header_id' => $$class->po_quote_header_id,
+                     'po_quote_line_id' => $$class_second->po_quote_line_id, 'po_rfq_detail_id' => $$class_third->po_rfq_detail_id),
+                     'add_row_detail_img', 'detail_id_cb');
+                    ?>
                    </td>
                    <td><?php $f->seq_field_detail_d($detailCount) ?></td>
                    <td><?php form::text_field_wid3sr('po_quote_detail_id'); ?></td>
@@ -278,14 +274,14 @@
                    <td><?php $f->text_field_wid3('target_value'); ?></td>
 
                    <td><?php
-                echo $f->text_area_ap(array('name' => 'description', 'value' => $$class_third->description,
-                 'row_size' => '2', 'column_size' => '35'));
-                  ?> 	
+                    echo $f->text_area_ap(array('name' => 'description', 'value' => $$class_third->description,
+                     'row_size' => '2', 'column_size' => '35'));
+                    ?> 	
                    </td> 
                    <td><?php
-                  echo $f->text_area_ap(array('name' => 'requirement_value', 'value' => $$class_third->requirement_value,
-                   'row_size' => '2', 'column_size' => '35'));
-                  ?> 	
+                    echo $f->text_area_ap(array('name' => 'requirement_value', 'value' => $$class_third->requirement_value,
+                     'row_size' => '2', 'column_size' => '35'));
+                    ?> 	
                    </td> 
                   </tr>
                   <?php
@@ -337,24 +333,24 @@
         <tr class="po_quote_line<?php echo $count ?>">
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php
-       echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id');
-        ?></td>
+          echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id');
+          ?></td>
          <td><?php echo ino_showDecimal($$class_second->unit_price); ?></td>
          <td><?php echo ino_showDecimal($$class_second->target_price); ?></td>
          <td><?php echo $f->number_field('minimum_agreement_quantity', $$class_second->minimum_agreement_quantity); ?></td>
          <td><?php echo $f->number_field('minimum_order_quantity', $$class_second->minimum_order_quantity); ?></td>
          <td><?php echo $f->number_field('fix_lot_multiplier', $$class_second->fix_lot_multiplier); ?></td>
-         <td><?php $f->text_field_wid2('processing_lead_time'); ?></td>
-         <td><?php $f->text_field_wid2('replenishment_lead_time'); ?></td>
-         <td><?php $f->text_field_wid2('daily_capacity'); ?></td>
+         <td><?php $f->text_field_wid2s('processing_lead_time'); ?></td>
+         <td><?php $f->text_field_wid2s('replenishment_lead_time'); ?></td>
+         <td><?php $f->text_field_wid2s('daily_capacity'); ?></td>
 
          <td><?php
-         $stmt = '<a class="button" href="';
-         $stmt .= HOME_URL . "form.php?class_name=po_quote_breaks&mode=9&reference_table=po_quote_line&reference_id=" . $$class_second->po_quote_line_id;
-         $stmt .= '">Price Break</a>';
+          $stmt = '<a class="button" href="';
+          $stmt .= HOME_URL . "form.php?class_name=po_quote_breaks&mode=9&reference_table=po_quote_line&reference_id=" . $$class_second->po_quote_line_id;
+          $stmt .= '">Price Break</a>';
 //                 echo $stmt;
-         echo '<a class="button" href="">Price Break</a>';
-        ?>
+          echo '<a class="button" href="">Price Break</a>';
+          ?>
          </td>
         </tr>
         <?php

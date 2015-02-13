@@ -17,7 +17,7 @@
        <li>
         <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_resource_id select_popup clickable">
          Resource Id</label><?php $f->text_field_dsr('bom_resource_id'); ?>
-        <a name="show" href="form.php?class_name=bom_resource&<?php echo "mode=$mode"; ?>" class="show document_id bom_resource_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <a name="show" href="form.php?class_name=bom_resource&<?php echo "mode=$mode"; ?>" class="show document_id bom_resource_id"><i class="fa fa-refresh"></i></a> 
        </li>
        <li><label>Inventory</label><?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1); ?>      </li>
        <li><label>Resource</label><?php echo form::text_field_d('resource'); ?> </li>
@@ -126,13 +126,10 @@
        }
        ?>         
        <tr class="bom_resource_cost<?php echo $count ?>">
-        <td>    
-         <ul class="inline_action">
-          <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-          <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-          <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class_second->bom_resource_cost_id); ?>"></li>           
-          <li><?php echo form::hidden_field('bom_resource_id', $$class->bom_resource_id); ?></li>
-         </ul>
+        <td>
+         <?php
+         echo ino_inline_action($$class_second->bom_resource_cost_id, array('bom_resource_id' => $$class->bom_resource_id));
+         ?>
         </td>
         <td><?php $f->seq_field_d($count) ?></td>
         <td><?php form::text_field_wid2sr('bom_resource_cost_id'); ?></td>

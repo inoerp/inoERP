@@ -7,12 +7,11 @@
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
       <ul class="column header_field">
        <li>
         <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_abc_assignment_header_id select_popup clickable">
          Assignment Id</label><?php echo form::number_field_drs('inv_abc_assignment_header_id'); ?>
-        <a name="show" href="form.php?class_name=inv_abc_assignment_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_abc_assignment_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <a name="show" href="form.php?class_name=inv_abc_assignment_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_abc_assignment_header_id"><i class="fa fa-refresh"></i></a> 
        </li>
        <li><label>Assignment Name</label><?php echo form::text_field_dm('abc_assignment_name'); ?></li>
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_abc_valuation_id select_popup clickable">
@@ -23,7 +22,6 @@
        <li><label>Inventory</label><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>       </li>
        <li><label>Description</label><?php echo $f->text_field_dl('description'); ?></li>
       </ul>
-     </div>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div class="large_shadow_box"> 

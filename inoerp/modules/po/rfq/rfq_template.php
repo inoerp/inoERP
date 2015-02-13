@@ -15,7 +15,7 @@
       <ul class="column header_field">
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="po_rfq_header_id select_popup clickable">
          Header Id</label><?php $f->text_field_dsr('po_rfq_header_id') ?>
-        <a name="show" href="form.php?class_name=po_rfq_header&<?php echo "mode=$mode"; ?>" class="show document_id po_rfq_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <a name="show" href="form.php?class_name=po_rfq_header&<?php echo "mode=$mode"; ?>" class="show document_id po_rfq_header_id"><i class="fa fa-refresh"></i></a> 
        </li>
        <li><label>BU Name(1)</label><?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>       </li>
        <li><label>RFQ Type(2)</label><?php echo $f->select_field_from_array('rfq_type', po_rfq_header::$po_rfq_type_a, $$class->rfq_type, 'rfq_type', '', 1); ?>       </li>
@@ -130,7 +130,7 @@
         <th>Manufacturer</th>
         <th>Min Quantity</th>
         <th>Max Quantity</th>
-        <th>Requirement Details</th>
+        <th>Requirements</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -139,13 +139,10 @@
        foreach ($po_rfq_line_object as $po_rfq_line) {
         ?>         
         <tr class="po_rfq_line<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($po_rfq_line->item_description); ?>"></li>           
-           <li><?php echo form::hidden_field('po_rfq_header_id', $$class->po_rfq_header_id); ?></li>
-          </ul>
+         <td>
+          <?php
+          echo ino_inline_action($$class_second->po_rfq_line_id, array('po_rfq_header_id' => $$class->po_rfq_header_id));
+          ?>
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('po_rfq_line_id'); ?></td>
@@ -160,7 +157,7 @@
          <td><?php $f->text_field_wid2('manufacturer'); ?></td>
          <td><?php echo $f->number_field('minimum_quantity', $$class_second->minimum_quantity); ?></td>
          <td><?php echo $f->number_field('maximum_quantity', $$class_second->maximum_quantity); ?></td>
-         <td class="add_detail_values"><img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+         <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i>
           <!--</td></tr>-->	
           <?php
           $po_rfq_line_id = $po_rfq_line->po_rfq_line_id;
@@ -205,15 +202,11 @@
                   $$class_third = &$po_rfq_detail;
                   ?>
                   <tr class="po_rfq_detail<?php echo $count . '-' . $detailCount; ?>">
-                   <td>   
-                    <ul class="inline_action">
-                     <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-                     <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-                     <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($po_rfq_detail->po_rfq_detail_id); ?>"></li>           
-                     <li><?php echo form::hidden_field('po_rfq_line_id', $$class_second->po_rfq_line_id); ?></li>
-                     <li><?php echo form::hidden_field('po_rfq_header_id', $$class->po_rfq_header_id); ?></li>
-
-                    </ul>
+                   <td>
+                    <?php
+                    echo ino_inline_action($$class_third->po_rfq_detail_id, array('po_rfq_header_id' => $$class->po_rfq_header_id,
+                     'po_rfq_line_id' => $$class_second->po_rfq_line_id), 'add_row_detail_img', 'detail_id_cb');
+                    ?>
                    </td>
                    <td><?php $f->seq_field_detail_d($detailCount) ?></td>
                    <td><?php form::text_field_wid3sr('po_rfq_detail_id'); ?></td>

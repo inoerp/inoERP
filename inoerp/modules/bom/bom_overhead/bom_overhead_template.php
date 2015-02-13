@@ -13,7 +13,7 @@
        <ul class="column header_field">
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_overhead_id select_popup clickable">
           Overhead Id</label><?php $f->text_field_dsr('bom_overhead_id'); ?>
-         <a name="show" href="form.php?class_name=bom_overhead&<?php echo "mode=$mode"; ?>" class="show document_id bom_overhead_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+         <a name="show" href="form.php?class_name=bom_overhead&<?php echo "mode=$mode"; ?>" class="show document_id bom_overhead_id"><i class="fa fa-refresh"></i></a> 
         </li>
         <li><label>Inventory</label><?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly); ?>      </li>
         <li><label>Overhead (2)</label><?php echo form::text_field_d('overhead'); ?></li>
@@ -83,13 +83,10 @@
          }
          ?>         
          <tr class="bom_overhead_resource_assignment<?php echo $count ?>">
-          <td>    
-           <ul class="inline_action">
-            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($bom_overhead_resource_assignment->bom_overhead_resource_assignment_id); ?>"></li>           
-            <li><?php echo form::hidden_field('bom_overhead_id', $$class->bom_overhead_id); ?></li>
-           </ul>
+          <td>
+           <?php
+           echo ino_inline_action($$class_second->bom_overhead_resource_assignment_id, array('bom_overhead_id' => $$class->bom_overhead_id));
+           ?>
           </td>
           <td><?php form::text_field_wid2('bom_overhead_resource_assignment_id'); ?></td>
           <td><?php echo $f->select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'cost_type_code', 'cost_type', $$class_second->bom_cost_type, '', '', 1, $readonly); ?></td>
@@ -129,13 +126,10 @@
          $$class_third = & $bom_overhead_rate_assignment;
          ?>         
          <tr class="bom_overhead_rate_assignment<?php echo $count ?>">
-          <td>    
-           <ul class="inline_action">
-            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($bom_overhead_rate_assignment->bom_overhead_rate_assignment_id); ?>"></li>           
-            <li><?php echo form::hidden_field('bom_overhead_id', $$class->bom_overhead_id); ?></li>
-           </ul>
+          <td>
+           <?php
+           echo ino_inline_action($$class_third->bom_overhead_rate_assignment_id, array('bom_overhead_id' => $$class->bom_overhead_id));
+           ?>
           </td>
           <td><?php form::text_field_wid3('bom_overhead_rate_assignment_id'); ?></td>
           <td><?php echo $f->select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'cost_type_code', 'cost_type', $$class_third->bom_cost_type, '', '', 1, $readonly); ?></td>

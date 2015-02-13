@@ -36,6 +36,11 @@
      return;
     }
     ?>
+       <?php 
+   if(!empty($multi_select_actions)){
+    echo '<div class="well well-sm">'.$multi_select_actions.'</div>';
+   }
+   ?>
     <div id="tabsLine">
      <ul class="tabMain">
       <?php

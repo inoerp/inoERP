@@ -3991,7 +3991,6 @@ ul.column li label,
 .four_column ul li, 
 .four_column ul li label{
  display : inline-block;
- font-weight : bold;
  font-size : 0.9em;
 }
 
@@ -4807,7 +4806,7 @@ fieldset.form_detail_data_fs {
  padding : 10px; 
   background: lightgrey;
  border: 1px solid #ccc;
- margin-top: 30px;
+/* margin-top: 30px;*/
 }
 
 /*Overlay Login Modal*/
@@ -4824,9 +4823,9 @@ fieldset.form_detail_data_fs {
  margin-right: 10px;
 }
 
-#erp_form_area label{
+/*#erp_form_area label{
  font-size: 12px !important;
-}
+}*/
 
 #form_line img{
  vertical-align : unset !important;

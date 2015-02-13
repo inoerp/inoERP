@@ -293,6 +293,11 @@ class sd_delivery_header extends dbObject {
   return $multi_select_hidden;
  }
 
+ public function multi_select_actions() {
+  $stmt = '<button class="pick_list button btn btn-success">Generate Pick List</button>';
+  return $stmt;
+ }
+
 }
 
 ?>

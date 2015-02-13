@@ -7,27 +7,25 @@
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
-      <ul class="column four_column">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="asl_header_id select_popup clickable">
-         ASL Id : </label>
-        <?php echo $f->text_field_dr('po_asl_header_id') ?>
-        <a name="show" href="form.php?class_name=po_asl_header&<?php echo "mode=$mode"; ?>" class="show document_id po_asl_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-       </li>
-       <li><label>BU Name(1) : </label>
-        <?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>
-       </li>
-       <li><label>ASL Type : </label>
-        <?php echo $f->select_field_from_array('asl_type', po_asl_header::$asl_type_a, $$class->asl_type, 'asl_type', '', 1, $readonly1, $readonly1); ?>
-       </li>
-       <li><label>Item : </label><?php
-        echo $f->hidden_field('item_id_m', $$class->item_id_m);
-        echo $f->text_field_d('item_number', 'select_item_number');
-        ?>
-        <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></li>
-       <li><label>Description: </label>    <?php $f->text_field_d('description', 'item_description'); ?>     </li>
-      </ul>
-     </div>
+     <ul class="column four_column">
+      <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="asl_header_id select_popup clickable">
+        ASL Id : </label>
+       <?php echo $f->text_field_dr('po_asl_header_id') ?>
+       <a name="show" href="form.php?class_name=po_asl_header&<?php echo "mode=$mode"; ?>" class="show document_id po_asl_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+      </li>
+      <li><label>BU Name(1) : </label>
+       <?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>
+      </li>
+      <li><label>ASL Type : </label>
+       <?php echo $f->select_field_from_array('asl_type', po_asl_header::$asl_type_a, $$class->asl_type, 'asl_type', '', 1, $readonly1, $readonly1); ?>
+      </li>
+      <li><label>Item : </label><?php
+       echo $f->hidden_field('item_id_m', $$class->item_id_m);
+       echo $f->text_field_d('item_number', 'select_item_number');
+       ?>
+       <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></li>
+      <li><label>Description: </label>    <?php $f->text_field_d('description', 'item_description'); ?>     </li>
+     </ul>
     </div>
    </div>
 
@@ -79,12 +77,9 @@
         ?>         
         <tr class="po_asl_line<?php echo $count ?>">
          <td>    
-          <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class_second->po_asl_line_id); ?>"></li>           
-           <li><?php echo form::hidden_field('po_asl_header_id', $$class->po_asl_header_id); ?></li>
-          </ul>
+          <?php
+          echo ino_inline_action($$class_second->po_asl_line_id, array('po_asl_header_id' => $$class->po_asl_header_id));
+          ?>
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('po_asl_line_id'); ?></td>
@@ -93,10 +88,10 @@
           <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_supplier_name select_popup clickable"></td>
          <td><?php echo $supplier_site_name_statement; ?></td>
          <td><?php $f->status_field_d2('status'); ?></td>
-         <td><?php $f->text_field_wid2('manufacturer'); ?></td>
+         <td><?php $f->text_field_wid2s('manufacturer'); ?></td>
          <td><?php $f->text_field_wid2('mfg_part_number'); ?></td>
-         <td><?php $f->text_field_d2l('description'); ?></td>
-         <td><a href="form.php?class_name=po_asl_document&mode=9&po_asl_line_id=<?php echo $$class_second->po_asl_line_id; ?>">View/Update</a></td>
+         <td><?php $f->text_field_wid2('description'); ?></td>
+         <td><a target="_blank" href="form.php?class_name=po_asl_document&mode=9&po_asl_line_id=<?php echo $$class_second->po_asl_line_id; ?>"><i class="fa fa-edit"></i></a></td>
         </tr>
         <?php
         $count = $count + 1;

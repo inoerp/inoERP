@@ -270,6 +270,7 @@ require_once(INC_MODULE . DS . "sd" . DS . "quote" . DS . "class_sd_quote_line.i
 require_once(INC_MODULE . DS . "sd" . DS . "so" . DS . "class_sd_so_header.inc");
 require_once(INC_MODULE . DS . "sd" . DS . "so" . DS . "class_sd_so_line.inc");
 require_once(INC_MODULE . DS . "sd" . DS . "so" . DS . "class_sd_so_all_v.inc");
+require_once(INC_MODULE . DS . "sd" . DS . "pick_list" . DS . "class_sd_pick_list.inc");
 require_once(INC_MODULE . DS . "sd" . DS . "shipping_control" . DS . "class_sd_shipping_control.inc");
 require_once(INC_MODULE . DS . "sd" . DS . "delivery" . DS . "class_sd_delivery_header.inc");
 require_once(INC_MODULE . DS . "sd" . DS . "delivery" . DS . "class_sd_delivery_line.inc");

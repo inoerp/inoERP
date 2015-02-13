@@ -77,7 +77,6 @@
       <div id ="form_header">
        <div class="error"></div><div id="loading"></div>
        <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
-       <ul id="form_box"> 
       </div>
       <div id="list_contents">
        <div id="searchForm"><?php echo!(empty($search_form)) ? $search_form : ""; ?></div>
@@ -134,6 +133,11 @@
 
    </div><!-- end container -->
   </div><!-- end transparent-bg -->
+   <?php
+ global $f;
+ echo (!empty($footer_bottom)) ? "<div id=\"footer_bottom\"> $footer_bottom </div>" : "";
+ echo $f->hidden_field_withId('home_url', HOME_URL);
+ ?>
   <div class="row">
    <?php echo searching_tips(); ?>
   </div>

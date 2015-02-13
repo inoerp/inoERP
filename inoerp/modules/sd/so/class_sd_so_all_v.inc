@@ -3,7 +3,7 @@
 class sd_so_all_v extends dbObject {
 
  public static $table_name = "sd_so_all_v";
- public static $primary_column = "sd_so_header_id";
+ public static $primary_column = "sd_so_line_id";
  public $field_a = [
 		 'sd_so_header_id',
 		 'bu_org_id',
@@ -90,6 +90,10 @@ class sd_so_all_v extends dbObject {
 		 'line_status',
 		 'line_type',
 		 'item_id_m',
+    "kit_cb",
+  'kit_configured_cb',
+  'bom_config_header_id',
+  'wip_wo_header_id',
 		 'item_description',
 		 'line_description',
 		 'unit_price',
@@ -145,6 +149,10 @@ class sd_so_all_v extends dbObject {
  public $line_type;
  public $line_number;
  public $item_id_m;
+  public $kit_configured_cb;
+ public $kit_cb;
+ public $bom_config_header_id;
+ public $wip_wo_header_id;
  public $onhand;
  public $item_description;
  public $line_description;
@@ -175,7 +183,9 @@ CREATE OR REPLACE VIEW sd_so_all_v
 sd_so_header_id, bu_org_id, document_type, so_number, ar_customer_id, ar_customer_site_id, sales_person,
 document_currency, header_amount, so_status,  payment_term_id, onhand, customer_name, customer_number, 
 customer_site_name, customer_site_number, payment_term, payment_term_description, sd_so_line_id, line_type,
-line_number, item_id_m, item_description, line_description, line_quantity,  picked_quantity,
+line_number, item_id_m,
+kit_cb,kit_configured_cb,bom_config_header_id,wip_wo_header_id, 
+item_description, line_description, line_quantity,  picked_quantity,
 shipped_quantity, unit_price, line_price, line_status, staging_subinventory_id, staging_locator_id,
 staging_subinventory, staging_locator, requested_date, promise_date , schedule_ship_date ,actual_ship_date,
 item_number, uom_id, item_status,  org, shipping_org_id, created_by,  creation_date, last_update_by,
@@ -190,6 +200,7 @@ ar_customer.customer_name, ar_customer.customer_number,
 ar_customer_site.customer_site_name, ar_customer_site.customer_site_number,
 payment_term.payment_term, payment_term.description,
 sdsl.sd_so_line_id, sdsl.line_type, sdsl.line_number,	sdsl.item_id_m, 
+sdsl.kit_cb, sdsl.kit_configured_cb, sdsl.bom_config_header_id,	sdsl.wip_wo_header_id, 
 sdsl.item_description, sdsl.line_description, sdsl.line_quantity,
 sdsl.picked_quantity, sdsl.shipped_quantity, sdsl.unit_price, sdsl.line_price, sdsl.line_status,
 ssc.staging_subinventory_id,ssc.staging_locator_id,subinventory.subinventory,locator.locator,

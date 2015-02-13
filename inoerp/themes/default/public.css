@@ -963,12 +963,12 @@ ul.process_flow_diagram_list li.current_processs{
 }
 
 ul.header_field li{
- width: 300px;
+ width: 310px;
  display: inline-block;
 }
 
 ul.header_field li label{
- width: 100px;
+ width: 120px;
  text-align: right;
  padding-right: 5px;        
 }
@@ -1300,14 +1300,25 @@ ul.inline-block {
 }
 
 #form_line input[type="radio"],#form_line  input[type="checkbox"] {
-    margin-left: 5px !important;
+ margin-left: 5px !important;
 }
 
-.popup.btn{
- padding: 0 !important;
+.popup.popup-form {
+ font-size: 1.2em;
+ margin-left: 1.5em;
+ color: green;
 }
 
 
 .add_row_detail_img{
  cursor: pinter;
+}
+
+ul.inline_action {
+ margin-top: 5px;
+}
+ul.inline_action .fa, #form_line .fa{
+ font-size: 16px;
+ color: #768D38;
+ margin: 2px;
 }

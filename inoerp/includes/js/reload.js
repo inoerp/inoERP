@@ -108,7 +108,7 @@ enableLineForSaveAfterFieldChange();
  itemNumber.json_url = 'modules/inv/item/item_search.php';
  itemNumber.select_class = 'select_item_number';
  itemNumber.primary_column1 = 'org_id';
- itemNumber.extra_elements = ['item_id', 'item_id_m', 'item_description', 'uom_id', 'processing_lt', 'lot_generation', 'serial_generation'];
+ itemNumber.extra_elements = ['item_id', 'item_id_m', 'item_description', 'uom_id', 'processing_lt', 'lot_generation', 'serial_generation','kit_cb'];
  itemNumber.min_length = 2;
  itemNumber.autoComplete();
 
@@ -117,7 +117,7 @@ enableLineForSaveAfterFieldChange();
  itemNumber.json_url = 'modules/inv/item/item_search.php';
  itemNumber.select_class = 'select_item_number_allowedBOM';
  itemNumber.primary_column1 = 'org_id';
- itemNumber.extra_elements = ['item_id', 'item_id_m', 'item_description', 'uom_id', 'processing_lt', 'lot_generation', 'serial_generation'];
+ itemNumber.extra_elements = ['item_id', 'item_id_m', 'item_description', 'uom_id', 'processing_lt', 'lot_generation', 'serial_generation','kit_cb'];
  itemNumber.min_length = 2;
  itemNumber.options = {bom_enabled_cb: "1"};
  itemNumber.autoComplete();
@@ -134,45 +134,6 @@ enableLineForSaveAfterFieldChange();
    }
   }
  });
-
- //add new columns
-// $('#content').on('change', '.new_column:first', function() {
-//  if ($(this).val()) {
-//   $(this).clone().insertBefore($(this));
-//  }
-// });
-// //add new order by
-// $('#content').on('change', '.search_order_by', function() {
-//  if ($(this).val() !== 'remove') {
-//   $(this).closest('li').clone().insertAfter($(this).closest('li'));
-//  } else {
-//   $(this).closest('li').remove();
-//  }
-// });
-//
-// $('#searchForm').on('change', '.new_search_criteria', function() {
-//  if ($(this).val()) {
-//   var newSearchCriteria = $(this).val();
-//   var newSearchCriteriaName = newSearchCriteria + '[]';
-//   var elementToBeCloned = $('.text_search').first().closest('li');
-//   var elementClass = $('.text_search').first().prop('class');
-//   var elementName = $('.text_search').first().prop('name');
-//   var elementLabelClass = '.label_' + elementName;
-//   elementLabelClass = elementLabelClass.replace('[', '');
-//   elementLabelClass = elementLabelClass.replace(']', '');
-//   clonedElement = elementToBeCloned.clone();
-//   $('label[for="' + elementName + '"]').text(newSearchCriteria);
-//   clonedElement.children().removeClass(elementClass);
-//   clonedElement.children().addClass(newSearchCriteria);
-//   clonedElement.children().prop('name', newSearchCriteriaName);
-//   clonedElement.find("input").each(function() {
-//    $(this).val("");
-//   });
-////	 clonedElement.appendTo($(this).closest("ul"));
-//   clonedElement.insertBefore($(this).closest("li"));
-//   $(elementLabelClass + ':last').text(newSearchCriteria);
-//  }
-// });
 
 
  //toggle detail lines

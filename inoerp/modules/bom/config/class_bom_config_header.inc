@@ -62,7 +62,7 @@ class bom_config_header extends dbObject {
   'bom_header_id',
   'org_id',
   'reference_key_name',
-  'reference_key_value',
+//  'reference_key_value',
  ];
  public $profile_default = [
   'org_id' => 'org_inv_name_default',

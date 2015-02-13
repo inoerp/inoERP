@@ -13,7 +13,7 @@
        <li>
         <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_count_header_id select_popup clickable">
          Count Header Id</label><?php echo form::number_field_drs('inv_count_header_id'); ?>
-        <a name="show" href="form.php?class_name=inv_count_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_count_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <a name="show" href="form.php?class_name=inv_count_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_count_header_id"><i class="fa fa-refresh"></i></a> 
        </li>
        <li><label>Count Name</label><?php echo form::text_field_dm('count_name'); ?></li>
        <li><label>Count Type</label><?php echo $f->select_field_from_array('count_type', inv_count_header::$count_type_a, $$class->count_type, 'count_type', '', 1, $readonly1); ?>       </li>
@@ -114,15 +114,10 @@
         $inv_count_schedule = $inv_count_schedule_object_ai->current();
         ?>         
         <tr class="inv_count_schedule<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($inv_count_schedule->inv_count_schedule_id); ?>"></li>           
-           <li><?php echo form::hidden_field('inv_count_header_id', $$class->inv_count_header_id); ?>
-            <?php echo form::hidden_field('org_id', $$class->org_id); ?>
-           </li>
-          </ul>
+         <td>
+          <?php
+          echo ino_inline_action($$class_second->inv_count_schedule_id, array('inv_count_header_id' => $$class->inv_count_header_id));
+          ?>
          </td>
          <td><?php form::number_field_wid2sr('inv_count_schedule_id'); ?></td>
          <td><?php $f->text_field_d2sr('item_id_m'); ?></td>

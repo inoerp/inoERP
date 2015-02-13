@@ -15,14 +15,14 @@
       <ul class="column header_field">
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="po_header_id select_popup clickable">
          PO Header Id</label><?php $f->text_field_dsr('po_header_id') ?>
-        <a name="show" href="form.php?class_name=po_release&<?php echo "mode=$mode"; ?>" class="show document_id po_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <a name="show" href="form.php?class_name=po_release&<?php echo "mode=$mode"; ?>" class="show document_id po_header_id"><i class="fa fa-refresh"></i></a> 
        </li>
        <li><label>BU Name(1)</label><?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>       </li>
        <li><label>PO Type(2)</label><?php echo $f->select_field_from_array('po_type', po_release::$po_type_a, $$class->po_type, 'po_type', '', 1); ?>       </li>
        <li><label>PO Number</label><?php $f->text_field_d('po_number', 'primary_column2'); ?> </li>
        <li><label>Rel#</label><?php echo $f->select_field_from_array('release_number', $bpa_release_number_a, $$class->release_number, 'release_number', 'primary_column3'); ?>
         <?php echo $f->hidden_field_withId('ref_po_header_id', $$class->ref_po_header_id); ?>
-        <a name="show" href="form.php?class_name=po_release&<?php echo "mode=$mode"; ?>" class="show2 document_id po_release_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <a name="show" href="form.php?class_name=po_release&<?php echo "mode=$mode"; ?>" class="show2 document_id po_release_id"><i class="fa fa-refresh"></i></a> 
        </li>
        <li><label>Status</label><?php echo $f->select_field_from_object('status', po_header::po_status(), 'option_line_code', 'option_line_value', $$class->po_status, 'po_status', 'dont_copy', '', 1); ?>       </li>
        <li><?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
@@ -177,12 +177,9 @@
         ?>         
         <tr class="po_line<?php echo $count ?>">
          <td>    
-          <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($po_line->item_description); ?>"></li>           
-           <li><?php echo form::hidden_field('po_header_id', $$class->po_header_id); ?></li>
-          </ul>
+          <?php
+          echo ino_inline_action($$class_second->po_line_id, array('po_header_id' => $$class->po_header_id));
+          ?>
          </td>
          <td><?php form::text_field_wid2sr('po_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
@@ -199,7 +196,7 @@
          <td><?php
           echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id');
           ?></td>
-         <td class="add_detail_values"><img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+         <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i>
           <!--</td></tr>-->	
           <?php
           $po_line_id = $po_line->po_line_id;
@@ -249,14 +246,10 @@
                   ?>
                   <tr class="po_detail<?php echo $count . '-' . $detailCount; ?>">
                    <td>   
-                    <ul class="inline_action">
-                     <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-                     <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-                     <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($po_detail->po_detail_id); ?>"></li>           
-                     <li><?php echo form::hidden_field('po_line_id', $$class_second->po_line_id); ?></li>
-                     <li><?php echo form::hidden_field('po_header_id', $$class->po_header_id); ?></li>
-
-                    </ul>
+                    <?php
+                    echo ino_inline_action($$class_second->po_line_id, array('po_header_id' => $$class->po_header_id,
+                     'po_line_id' => $$class_second->po_line_id), 'add_row_detail_img','detail_id_cb');
+                    ?>
                    </td>
                    <td><?php form::text_field_wid3sr('po_detail_id'); ?></td>
                    <td><?php echo $f->number_field('shipment_number', $$class_third->shipment_number, '', '', 'detail_number', 1); ?></td>

@@ -25,11 +25,11 @@
        <li>
         <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="item_id select_popup clickable">
          Item Id</label><?php $f->text_field_dsr('item_id') ?>
-        <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show document_id item_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show document_id item_id"><i class="fa fa-refresh"></i></a> 
        </li>
        <li><label>Item Number<img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete item_number clickable">
         </label><?php echo $f->text_field('item_number', $$class->item_number, '15', 'item_number', 'select_item_number', 1, $readonly_mas); ?>
-        <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show2 document_id findBy_item_number"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show2 document_id findBy_item_number"><i class="fa fa-refresh"></i></a> 
        </li>
        <li><label> Description</label><?php echo $f->text_field('item_description', $$class->item_description, '20', 'item_description', '', 1, $readonly_mas); ?></li>
        <li><label> Product Line</label><?php echo $f->select_field_from_object('product_line', item::product_line(), 'option_line_code', 'option_line_value', $$class->product_line, 'product_line', '', '', $readonly_mas); ?></li>

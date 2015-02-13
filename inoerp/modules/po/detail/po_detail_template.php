@@ -48,16 +48,12 @@
           $$class_third = &$po_detail;
           ?>
           <tr class="po_detail<?php echo $count . '-' . $detailCount; ?>">
-           <td>   
-            <ul class="inline_action">
-             <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-             <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-             <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($po_detail->po_detail_id); ?>"></li>           
-             <li><?php echo form::hidden_field('po_line_id', $po_line->po_line_id); ?></li>
-             <li><?php echo form::hidden_field('po_header_id', $po_header->po_header_id); ?></li>
-
-            </ul>
-           </td>
+                     <td>
+           <?php
+           echo ino_inline_action($$class_third->po_detail_id, array('po_header_id' => $$class->po_header_id,
+            'po_line_id' => $$class_second->po_line_id),'add_row_detail_img','detail_id_cb');
+           ?>
+          </td>
            <td><?php $f->seq_field_detail_d($detailCount) ?></td>
            <td><?php form::text_field_wid3sr('po_detail_id'); ?></td>
            <td><?php echo $f->number_field('shipment_number', $$class_third->shipment_number, '', '', 'detail_number', 1); ?></td>

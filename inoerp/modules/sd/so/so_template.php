@@ -13,9 +13,9 @@
     <div id="tabsHeader-1" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column header_field">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sd_so_header_id select_popup">
+       <li><label><img src="<?php echo HOME_URL; ?>themes/default/images/serach.png" class="sd_so_header_id select_popup">
          SO Header Id</label><?php echo $f->text_field_dr('sd_so_header_id') ?>
-        <a name="show" href="form.php?class_name=sd_so_header&<?php echo "mode=$mode"; ?>" class="show document_id sd_so_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <a name="show" href="form.php?class_name=sd_so_header&<?php echo "mode=$mode"; ?>" class="show document_id sd_so_header_id"><i class="fa fa-refresh"></i></a> 
        </li>
        <li><label>SO Number</label><?php echo $f->text_field_d('so_number', 'primary_column2'); ?></li>
        <li><label>BU Name(1)</label><?php echo form::select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $sd_so_header->bu_org_id, 'bu_org_id', $readonly1, '', ''); ?>						 </li>
@@ -127,8 +127,9 @@
     <li><a href="#tabsLine-1">Basic</a></li>
     <li><a href="#tabsLine-2">Price</a></li>
     <li><a href="#tabsLine-3">Dates</a></li>
-    <li><a href="#tabsLine-4">References</a></li>
-    <li><a href="#tabsLine-5">References-2</a></li>
+    <li><a href="#tabsLine-4">Configuration</a></li>
+    <li><a href="#tabsLine-5">References</a></li>
+    <li><a href="#tabsLine-6">References-2</a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
@@ -144,8 +145,8 @@
         <th>Item Number</th>
         <th>Item Description</th>
         <th>UOM</th>
-        <th>Line Status</th>
         <th>Quantity</th>
+        <th>Line Status</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -154,14 +155,11 @@
        foreach ($sd_so_line_object as $sd_so_line) {
         ?>         
         <tr class="sd_so_line<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($sd_so_line->item_description); ?>"></li>           
-           <li><?php echo form::hidden_field('sd_so_header_id', $sd_so_header->sd_so_header_id); ?></li>
-           <li><?php echo form::hidden_field('tax_code_value', $$class_second->tax_code_value); ?></li>
-          </ul>
+         <td>
+          <?php
+          echo ino_inline_action($sd_so_line->sd_so_line_id, array('sd_so_header_id' => $sd_so_header->sd_so_header_id,
+           'tax_code_value' => $$class_second->tax_code_value));
+          ?>
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('sd_so_line_id'); ?></td>
@@ -173,10 +171,11 @@
           form::text_field_wid2('item_number', 'select_item_number');
           ?>
           <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
-         <td><?php form::text_field_wid2('item_description'); ?></td>
+         <td><?php form::text_field_wid2s('item_description'); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small'); ?></td>
-         <td><?php $f->text_field_wid2r('line_status'); ?></td>
+
          <td><?php form::number_field_wid2s('line_quantity'); ?></td>
+         <td><?php $f->text_field_wid2r('line_status'); ?></td>
         </tr>
         <?php
         $count = $count + 1;
@@ -261,6 +260,39 @@
      <table class="form_line_data_table">
       <thead> 
        <tr><th>Seq#</th>
+        <th>Kit Item</th>
+        <th>Configured</th>
+        <th>Config Id</th>
+        <th>WO Header Id</th>
+        <th>Config Details</th>
+       </tr>
+      </thead>
+      <tbody class="form_data_line_tbody">
+       <?php
+       $count = 0;
+       foreach ($sd_so_line_object as $sd_so_line) {
+        $sd_so_line->ar_transaction_number = null;
+        ?>         
+        <tr class="sd_so_line<?php echo $count ?>">
+         <td><?php $f->seq_field_d($count) ?></td>
+         <td><?php echo $f->checkBox_field('kit_cb', $$class_second->kit_cb, '', 'dontCopy'); ?></td>
+         <td><?php echo $f->checkBox_field('kit_configured_cb', $$class_second->kit_configured_cb, '', 'dontCopy'); ?></td>
+         <td><?php $f->text_field_wid2r('bom_config_header_id'); ?></td>
+         <td><?php $f->text_field_wid2r('wip_wo_header_id'); ?></td>
+         <td> <a class="popup popup-form view-item-config medium" href="form.php?class_name=bom_config_header&mode=9&window_type=popup"> <i class="fa fa-edit"></i></a></td>
+        </tr>
+        <?php
+        $count = $count + 1;
+       }
+       ?>
+      </tbody>
+      <!--                  Showing a blank form for new entry-->
+     </table>
+    </div>
+    <div id="tabsLine-5" class="scrollElement tabContent">
+     <table class="form_line_data_table">
+      <thead> 
+       <tr><th>Seq#</th>
         <th>Line Description</th>
         <th>Supply Source </th>
         <th>Destination Type </th>
@@ -290,6 +322,7 @@
          <td><?php form::number_field_wid2sr('shipped_quantity'); ?></td>
          <td><?php form::text_field_wid2('reference_doc_type'); ?></td>
          <td><?php form::text_field_wid2('reference_doc_number'); ?></td>
+
         </tr>
         <?php
         $count = $count + 1;
@@ -299,7 +332,7 @@
       <!--                  Showing a blank form for new entry-->
      </table>
     </div>
-    <div id="tabsLine-5" class="scrollElement tabContent">
+    <div id="tabsLine-6" class="scrollElement tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr><th>Seq#</th>
@@ -353,6 +386,6 @@
   <li class="btn1DivId" data-btn1DivId="sd_so_header" ></li>
   <li class="btn2DivId" data-btn2DivId="form_line" ></li>
   <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>
-  <li class="noOfTabbs" data-noOfTabbs="5" ></li>
+  <li class="noOfTabbs" data-noOfTabbs="6" ></li>
  </ul>
 </div>

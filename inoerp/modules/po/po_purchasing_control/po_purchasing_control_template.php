@@ -1,14 +1,11 @@
 <div id ="form_header"><span class="heading">Purchasing Control </span>
  <form action=""  method="post" id="po_purchasing_control"  name="po_purchasing_control">
-  <div class="large_shadow_box">
+  <div class="tabContainer">
    <ul class="column five_column"> 
     <?php echo form::hidden_field('po_purchasing_control_id', $$class->po_purchasing_control_id); ?>
     <li><label>Business Org :</label>
      <?php echo form::select_field_from_object('org_id', org::find_all_business(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1); ?>
-     <a name="show" href="form.php?class_name=po_purchasing_control" class="show org_id">	<img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
-    </li>
-    <li><label>Extra Field : </label>
-     <?php echo form::extra_field($$class->ef_id, '10', $readonly); ?>
+     <a name="show" href="form.php?class_name=po_purchasing_control" class="show org_id"><i class="fa fa-refresh"></i></a> 
     </li>
     <li><label>Revision : </label>
      <?php echo form::revision_enabled_field($$class->rev_enabled, $readonly); ?>

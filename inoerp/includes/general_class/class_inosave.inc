@@ -117,7 +117,7 @@ class inosave extends dbObject {
      $ledg->coa_structure_id = $ledg_i->coa_structure_id;
      $coa = $ledg->find_coa_byLedgerId();
     }
-    $cc->coa_id = !empty($coa) ? $coa->coa_id : 1;
+    $cc->coa_id = !empty($coa) ? $coa->coa_id : $coa_id;
     foreach ($$class->account as $key => $value) {
      if (!empty($_POST[$value][$i])) {
       $cc->combination = $_POST[$value][$i];
@@ -237,7 +237,7 @@ class inosave extends dbObject {
     * 10 means all the data are update and leave save.
     * Normall return (1,2 or w/o value), completes the after save and then proceed to save
     */
-
+//pa($$class);
    if (method_exists($$class, '_before_save')) {
     $before_save_result = $$class->_before_save();
     if ($before_save_result < 0) {

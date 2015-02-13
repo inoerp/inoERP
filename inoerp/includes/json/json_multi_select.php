@@ -44,6 +44,11 @@ if (!empty($_GET['search_class_name'])) {
    $multi_select_tabs = $action_class_i->multi_select_tabs();
   }
 
+     if (method_exists($action_class, 'multi_select_actions')) {
+   $multi_select_actions = $action_class_i->multi_select_actions();
+  }
+  
+  
   if (method_exists($action_class, 'multi_select_input_fields')) {
    $multi_selct_input_fields = $action_class_i->multi_select_input_fields();
   }

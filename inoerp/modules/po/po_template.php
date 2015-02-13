@@ -19,8 +19,9 @@
       <div class="large_shadow_box"> 
        <ul class="column header_field">
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="po_header_id select_popup clickable">
-          PO Header Id</label><?php $f = new inoform(); $f->text_field_dsr('po_header_id') ?>
-         <a name="show" href="form.php?class_name=po_header&<?php echo "mode=$mode"; ?>" class="show document_id po_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+          PO Header Id</label><?php $f = new inoform();
+$f->text_field_dsr('po_header_id') ?>
+         <a name="show" href="form.php?class_name=po_header&<?php echo "mode=$mode"; ?>" class="show document_id po_header_id"><i class="fa fa-refresh"></i></a> 
         </li>
         <li><label>BU Name(1)</label><?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>
         </li>
@@ -30,7 +31,7 @@
         <li><label>Rel#</label><?php $f->text_field_dsr('release_number'); ?></li>
         <li><label>Status</label><?php echo $f->select_field_from_object('status', po_header::po_status(), 'option_line_code', 'option_line_value', $$class->po_status, 'po_status', 'dont_copy', '', 1); ?></li>
         <li><?php echo $f->hidden_field_withId('ref_po_header_id', $$class->ref_po_header_id); ?>
-         <?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
+<?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
          <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supplier_id select_popup clickable">
           Supplier Name</label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> </li>
         <li><label class="auto_complete">Supplier Number</label><?php $f->text_field_d('supplier_number'); ?></li>
@@ -78,7 +79,7 @@
        <ul class="column four_column">
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
           Bill To Site Id :</label>
-         <?php $f->text_field_d('bill_to_id', 'address_id site_address_id'); ?>
+<?php $f->text_field_d('bill_to_id', 'address_id site_address_id'); ?>
         </li>
         <li><label>Address Name :</label><?php $f->text_field_dr('bill_to_address_name', 'address_name'); ?> </li>
         <li><label>Address :</label> <?php $f->text_field_dr('bill_to_address', 'address'); ?></li>
@@ -90,7 +91,7 @@
      <div id="tabsHeader-4" class="tabContent">
       <div id="comments">
        <div id="comment_list">
-        <?php echo!(empty($comments)) ? $comments : ""; ?>
+<?php echo!(empty($comments)) ? $comments : ""; ?>
        </div>
        <div id ="display_comment_form">
         <?php
@@ -156,11 +157,11 @@
          <th>Receiving Org</th>
          <th>Type</th>
          <th>Item Number</th>
-         <th>Revision Number</th>
+         <th>Revision</th>
          <th>Item Description</th>
          <th>Quantity</th>
          <th>UOM</th>
-         <th>Shipment Details</th>
+         <th>Shipments</th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -169,13 +170,10 @@
         foreach ($po_line_object as $po_line) {
          ?>         
          <tr class="po_line<?php echo $count ?>">
-          <td>    
-           <ul class="inline_action">
-            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($po_line->po_line_id); ?>"></li>           
-            <li><?php echo form::hidden_field('po_header_id', $po_header->po_header_id); ?></li>
-           </ul>
+          <td>
+           <?php
+           echo ino_inline_action($$class_second->po_line_id, array('po_header_id' => $$class->po_header_id));
+           ?>
           </td>
           <td><?php $f->seq_field_d($count) ?></td>
           <td><?php form::text_field_wid2sr('po_line_id'); ?></td>
@@ -200,9 +198,7 @@
           <td><?php
            echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id');
            ?></td>
-          <td class="add_detail_values"><img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
-           <?php include 'detail/po_detail_template.php'; ?>
-          </td>
+          <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i><?php include 'detail/po_detail_template.php'; ?>          </td>
          </tr>
          <?php
          $count = $count + 1;
@@ -320,10 +316,9 @@
           <td><?php $f->seq_field_d($count) ?></td>
           <td><?php $f->checkBox_field_wid2('hold_cb'); ?></td>
           <td><?php $f->text_field_wid2r('po_line_id'); ?></td>
-          <td><?php echo $f->checkBox_field('kit_cb', $$class_second->kit_cb,'','dontCopy'); ?></td>
-          <td><?php echo $f->checkBox_field('kit_configured_cb', $$class_second->kit_configured_cb,'','dontCopy'); ?></td>
-          <td><button type="button" class="popup btn  btn-default view-item-config medium">
-           <a href="form.php?class_name=bom_config_header&mode=9&window_type=popup"> View Configuration</a></button></td>
+          <td><?php echo $f->checkBox_field('kit_cb', $$class_second->kit_cb, '', 'dontCopy'); ?></td>
+          <td><?php echo $f->checkBox_field('kit_configured_cb', $$class_second->kit_configured_cb, '', 'dontCopy'); ?></td>
+          <td> <a class="popup popup-form view-item-config medium" href="form.php?class_name=bom_config_header&mode=9&window_type=popup"> <i class="fa fa-edit"></i></a></td>
          </tr>
          <?php
          $count = $count + 1;

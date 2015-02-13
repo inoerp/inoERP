@@ -124,3 +124,7 @@ table#group_by_table td {
 .draggable_element{
  display: inline-block;
 }
+
+#view_divId .draggable_element input[type="text"], #view_divId .draggable_element select {
+    width: 280px;
+}

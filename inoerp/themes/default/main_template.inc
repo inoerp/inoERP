@@ -180,10 +180,16 @@
         ?>
        </div>
       </div>
+<!--      <h3 class="clickable nav-panel document-panel"><i class="fa fa-list"></i> Document Panel</h3>
+      <div>
+       <div id="document-panel">
+
+       </div>
+      </div>-->
       <h3 class="clickable nav-panel recent-visits"><i class="fa fa-history"></i> Recent Visits</h3>
       <div>
        <div id="recent-visits">
-        <?php echo ino_recent_visits();  ?>
+        <?php echo ino_recent_visits(); ?>
        </div>
       </div>
 
@@ -209,50 +215,50 @@
      <!--   end of structure-->
     </div>
    </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
-     <div class="hidden" id="document_history"></div>
-     <div class="footer-menu">
-      <div id="half_copyrights">
-       <?php
-       global $si;
-       echo nl2br($si->footer_message);
-       ?>
-       <ul>
-        <li><a href="http://inoideas.org/content.php?mode=9&content_type=web_contact">Contact</a></li>
-        <li><a href="https://github.com/inoerp/inoERP/releases">Releases</a></li>
-        <li><a href="https://www.mozilla.org/MPL/2.0/">MPL 2</a></li>
-        <li><a href="#">Cookie Preferences</a></li>
-        <li class="active"><a href="#">Terms of Use</a></li>
-       </ul>
-      </div>
-     </div><!-- end large-7 --> 
-    </div>
+   <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
+    <div class="hidden" id="document_history"></div>
+    <div class="footer-menu">
+     <div id="half_copyrights">
+      <?php
+      global $si;
+      echo nl2br($si->footer_message);
+      ?>
+      <ul>
+       <li><a href="http://inoideas.org/content.php?mode=9&content_type=web_contact">Contact</a></li>
+       <li><a href="https://github.com/inoerp/inoERP/releases">Releases</a></li>
+       <li><a href="https://www.mozilla.org/MPL/2.0/">MPL 2</a></li>
+       <li><a href="#">Cookie Preferences</a></li>
+       <li class="active"><a href="#">Terms of Use</a></li>
+      </ul>
+     </div>
+    </div><!-- end large-7 --> 
+   </div>
   </div>
 
 
- <div class="row">
-  <div id="comment_form" class="none">
+  <div class="row">
+   <div id="comment_form" class="none">
+    <?php
+    if (!empty($reference_table) && !empty($reference_id)) {
+     include_once __DIR__ . '/../../comment.php';
+    }
+    ?>
+   </div>
+
+  </div>
+  <!--footer content-->
+  <?php
+  global $f;
+  echo (!empty($footer_bottom)) ? "<div id=\"footer_bottom\"> $footer_bottom </div>" : "";
+  echo $f->hidden_field_withId('home_url', HOME_URL);
+  ?>
+  <div class="hidden">
    <?php
-   if (!empty($reference_table) && !empty($reference_id)) {
-    include_once __DIR__ . '/../../comment.php';
-   }
+   echo searching_tips();
+   echo ino_filter_form();
    ?>
   </div>
-
- </div>
- <!--footer content-->
- <?php
- global $f;
- echo (!empty($footer_bottom)) ? "<div id=\"footer_bottom\"> $footer_bottom </div>" : "";
- echo $f->hidden_field_withId('home_url', HOME_URL);
- ?>
- <div class="hidden">
-  <?php
-  echo searching_tips();
-  echo ino_filter_form();
-  ?>
- </div>
-</body>
+ </body>
 </html>
 <?php
 // 5. Close connection

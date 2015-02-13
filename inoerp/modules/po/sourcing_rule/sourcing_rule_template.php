@@ -13,7 +13,7 @@
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sourcing_rule_header_id select_popup clickable">
          Sourcing Rule Id : </label>
         <?php echo $f->text_field_dr('po_sourcing_rule_header_id') ?>
-        <a name="show" href="form.php?class_name=po_sourcing_rule_header&<?php echo "mode=$mode"; ?>" class="show document_id po_sourcing_rule_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <a name="show" href="form.php?class_name=po_sourcing_rule_header&<?php echo "mode=$mode"; ?>" class="show document_id po_sourcing_rule_header_id"><i class="fa fa-refresh"></i></a> 
        </li>
        <li><label>Sourcing Rule : </label>
         <?php form::text_field_dm('sourcing_rule'); ?>
@@ -94,13 +94,10 @@
         }
         ?>         
         <tr class="po_sourcing_rule_line<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class_second->po_sourcing_rule_line_id); ?>"></li>           
-           <li><?php echo form::hidden_field('po_sourcing_rule_header_id', $$class->po_sourcing_rule_header_id); ?></li>
-          </ul>
+         <td>
+          <?php
+          echo ino_inline_action($$class_second->po_sourcing_rule_line_id, array('po_sourcing_rule_header_id' => $$class->po_sourcing_rule_header_id));
+          ?>
          </td>
          <td><?php form::text_field_wid2sr('po_sourcing_rule_line_id'); ?></td>
          <td><?php echo $f->select_field_from_object('sourcing_type', po_sourcing_rule_line::po_sourcing_type(), 'option_line_code', 'option_line_value', $$class_second->sourcing_type, 'sourcing_type', '', 1, $readonly); ?></td>

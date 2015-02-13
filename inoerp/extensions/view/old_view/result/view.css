@@ -1,0 +1,15 @@
+/* 
+    Document   : view
+    Created on : Sep 7, 2013, 3:53:58 PM
+    Author     : dasn
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+span.view_name{
+    display: inline-block;
+    max-width: 250px;
+    font-size: 15px;
+    vertical-align:baseline;
+    float: left;
+}

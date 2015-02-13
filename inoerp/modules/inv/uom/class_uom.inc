@@ -55,16 +55,7 @@ class uom extends dbObject {
 		 "description",
 		 "primary_uom_id"
  ];
- public $column = [
-		 "uom_id",
-		 "class",
-		 "uom_name",
-		 "description",
-		 "primary_cb",
-		 "primary_uom_id",
-		 "primary_relation",
-		 "status"
- ];
+
  public $checkbox = [
 		 "rev_enabled_cb",
 		 'primary_cb'

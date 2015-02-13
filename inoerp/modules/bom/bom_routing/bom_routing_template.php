@@ -15,7 +15,7 @@
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_routing_header_id select_popup clickable">
           Routing Id</label><?php $f->text_field_dsr('bom_routing_header_id') ?>
          <a name="show" href="form.php?class_name=bom_routing_header&<?php echo "mode=$mode"; ?>" class="show document_id bom_routing_header_id">
-          <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+          <i class="fa fa-refresh"></i></a> 
         </li>
         <li><label>Org Name(1)</label><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $bom_routing_header->org_id, 'org_id', '', 1, $readonly1, '', ''); ?>        </li>
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="item_id_m select_popup clickable">
@@ -93,13 +93,10 @@
         foreach ($bom_routing_line_object as $bom_routing_line) {
          ?>         
          <tr class="bom_routing_line<?php echo $count ?>">
-          <td>    
-           <ul class="inline_action">
-            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($bom_routing_line->bom_routing_line_id); ?>"></li>           
-            <li><?php echo form::hidden_field('bom_routing_header_id', $bom_routing_header->bom_routing_header_id); ?></li>
-           </ul>
+          <td>
+           <?php
+           echo ino_inline_action($$class_second->bom_routing_line_id, array('bom_routing_header_id' => $$class->bom_routing_header_id));
+           ?>
           </td>
           <td><?php $f->seq_field_d($count) ?></td>
           <td><?php form::text_field_wid2sr('bom_routing_line_id'); ?></td>
@@ -107,8 +104,7 @@
           <td><?php echo form::select_field_from_object('standard_operation_id', bom_standard_operation::find_all(), 'bom_standard_operation_id', 'standard_operation', $$class_second->standard_operation_id, '', $readonly); ?></td>
           <td><?php echo form::checkBox_field('referenced_cb', $$class_second->referenced_cb); ?></td>
           <td><?php echo form::select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class_second->department_id, '', $readonly, '', '', 1); ?></td>
-          <td class="add_detail_values"><img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
-           <!--</td></tr>-->	
+          <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i>
            <?php
            $bom_routing_line_id = $bom_routing_line->bom_routing_line_id;
            if (!empty($bom_routing_line_id)) {
@@ -122,7 +118,6 @@
             array_push($bom_routing_detail_object, $bom_routing_detail);
            }
            ?>
-   <!--						 <tr><td>-->
            <div class="class_detail_form">
             <fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
              <div class="tabsDetail">
@@ -283,7 +278,7 @@
       $ef_refer_key = 'bom_routing_line';
       $ef_refer_value = 'bom_routing_line_id';
       $tr_class = 'bom_routing_line';
-      include_once __DIR__.'/../../sys/extra_field/form/add_field_template.php';
+      include_once __DIR__ . '/../../sys/extra_field/form/add_field_template.php';
       ?>
 
      </div>

@@ -90,12 +90,13 @@ function saveSingleLine(json_url, lineData, primary_column_id, lineClassName) {
  }).done(function (result) {
 //  var div = $(result).filter('div#json_save_line').html();
   var message = $(result).find('.message, .rollback_msg').html();
-  if (message && message.length > 1) {json_save_line
+  if (message && message.length > 1) {
+   json_save_line
    $(".error").prepend(result);
    $("#accordion").accordion({active: 0});
   }
- 
- var line_id = $(result).filter('#lineId').html();
+
+  var line_id = $(result).filter('#lineId').html();
 //	$('#form_data_table tbody tr' + '.' + trclass).find(".line_id").val(line_id);
   $("#save").removeClass("opacity_2");
   $('.show_loading_small').hide();
@@ -118,14 +119,14 @@ function saveLine(json_url, lineData, trclass, detailData, primary_column_id, li
   type: 'post'
  }).done(function (result) {
   var div = $(result).filter('div#json_save_line').html();
-  
+
   var message = $(result).find('.message, .rollback_msg').html();
   if (message && message.length > 1) {
    $(".error").prepend(result);
    $("#accordion").accordion({active: 0});
   }
-  
- var line_id = $(div).filter('.lineId').html();
+
+  var line_id = $(div).filter('.lineId').html();
   $('#form_data_table tbody tr' + '.' + trclass).find(".line_id").val(line_id);
   $('.show_loading_small').hide();
   $("#save").removeClass("opacity_2");
@@ -149,14 +150,14 @@ function saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassNa
   var div = $(result).filter('div#json_save_line2').html();
   var line_id = $(div).filter('.lineId').html();
   $('tbody.form_data_line_tbody2 tr' + '.' + trclass).find(".line_id").val(line_id);
-  
+
   var message = $(result).find('.message, .rollback_msg').html();
   if (message && message.length > 1) {
    $(".error").prepend(div);
    $("#accordion").accordion({active: 0});
   }
- 
- $('.show_loading_small').hide();
+
+  $('.show_loading_small').hide();
   $("#save").removeClass("opacity_2");
  }).fail(function (error, textStatus, xhr) {
   alert("save failed \n" + error + textStatus + xhr);
@@ -892,8 +893,17 @@ contextMenuMain.prototype.contextMenu = function ()
  $('body').on('click', '#menu_button5_1', function () {
   $('#form_line').find('input[name="line_id_cb"]').prop('checked', false);
  });
- $('body').on('click', '#menu_button10', function () {
+ 
+  $('body').off('click', '#menu_button7').on('click', '#menu_button11', function () {
+  void window.open('http://www.inoideas.org/help', '_blank');
+ });
+ 
+ $('body').off('click', '#menu_button10').on('click', '#menu_button10', function () {
   $("#content").unbind("contextmenu");
+ });
+
+ $('body').off('click', '#menu_button11').on('click', '#menu_button11', function () {
+  void window.open('http://www.inoideas.org', '_blank');
  });
 
 //  $('body').on('click', '#menu_button8', function () {
@@ -943,7 +953,7 @@ autoCompleteMain.prototype.autoComplete = function ()
    var primary_column1_h = '#' + primary_column1;
    if ($(primary_column1_h).val()) {
     var primary_column1_v = $(primary_column1_h).val();
-   } else if($(auto_element).closest("tr").attr('class')){
+   } else if ($(auto_element).closest("tr").attr('class')) {
     var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
     var primary_column1_d = '.' + primary_column1;
     var primary_column1_v = $('#form_line').find(trClass).find(primary_column1_d).val();
@@ -988,10 +998,16 @@ autoCompleteMain.prototype.autoComplete = function ()
         }
         if (elemenType === 'LI') {
          $(auto_element).closest("ul").find(v_d).val(selected_value);
+         if (v_d.indexOf('_cb') > -1) {
+          $(auto_element).closest("ul").find(v_d).prop('checked', true);
+         }
         } else if (elemenType === 'TD') {
          $(auto_element).closest("tr").find(v_d).val(selected_value);
          var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
          $('#form_line, #form_line2').find(trClass).find(v_d).val(selected_value);
+         if (v_d.indexOf('_cb') > -1) {
+          $('#form_line, #form_line2').find(trClass).find(v_d).prop('checked', true);
+         }
         }
        });
       }
@@ -1011,6 +1027,9 @@ autoCompleteMain.prototype.autoComplete = function ()
          $(auto_element).closest("tr").find(v_d).val('');
          var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
          $('#form_line, #form_line2').find(trClass).find(v_d).val();
+         if (v_d.indexOf('_cb') > -1) {
+          $('#form_line, #form_line2').find(trClass).find(v_d).prop('checked', false);
+         }
         }
        });
       }
@@ -1037,9 +1056,15 @@ autoCompleteMain.prototype.autoComplete = function ()
        });
        if (elemenType === 'LI') {
         $(auto_element).closest("ul").find(v_d).val(selected_value);
+        if (v_d.indexOf('_cb') > -1) {
+         $(auto_element).closest("ul").find(v_d).prop('checked', true);
+        }
        } else if (elemenType === 'TD') {
         var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
         $('#form_line, #form_line2').find(trClass).find(v_d).val(selected_value);
+         if (v_d.indexOf('_cb') > -1) {
+         $('#form_line, #form_line2').find(trClass).find(v_d).prop('checked', true);
+        }
        }
       });
      }
@@ -1177,7 +1202,7 @@ mandatoryFieldMain.prototype.mandatoryField = function ()
  });
  $(form_area_h + " :input").not(fieldId).off('focusin').on("focusin", function () {
   if (!$(fieldId).val()) {
-   $(this).attr('value', '');
+   $(this).prop('value', '');
    alert(msg);
    $(this).focusout(function () {
     return;
@@ -1216,7 +1241,7 @@ function lotSerial_quantityValidation(options) {
  var retValue = 1;
  $('.add_detail_values1').each(function () {
   if ($(this).children('.serial_generation').val()) {
-   var trClass = '.' + $(this).closest("tr").attr('class').replace(/\s+/g, '.');
+   var trClass = '.' + $(this).closest("tr").prop('class').replace(/\s+/g, '.');
    var qty = +$('#content').find(trClass).find(settings.quantity_divClass).val();
    var noOfSerialIds = 0;
    $(this).closest('td').find('.inv_serial_number_id').each(function () {
@@ -1244,7 +1269,7 @@ function lotSerial_quantityValidation(options) {
 
  $('.add_detail_values0').each(function () {
   if ($(this).children('.lot_generation').val()) {
-   var trClass = '.' + $(this).closest("tr").attr('class').replace(/\s+/g, '.');
+   var trClass = '.' + $(this).closest("tr").prop('class').replace(/\s+/g, '.');
    var qty = +$('#content').find(trClass).find(settings.quantity_divClass).val();
    var lot_quantity = 0;
    $(this).closest('tr').find('.lot_quantity').each(function () {

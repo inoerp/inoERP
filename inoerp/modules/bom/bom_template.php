@@ -19,7 +19,7 @@
         <?php $f->text_field_dm('item_number', 'select_item_number_allowedBOM'); ?>
        </li>
        <li><label>Revision</label><?php echo $f->select_field_from_object('revision_name', $revision_name_a, 'revision_name', array('revision_name', 'effective_start_date'), $revision_name_val, 'revision_name', 'medium', '', '', '', '', '', 'effective_start_date'); ?>
-        <a name="show" href="form.php?class_name=bom_header&<?php echo "mode=$mode"; ?>" class="show2 document_id bom_header_withRev_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <a name="show" href="form.php?class_name=bom_header&<?php echo "mode=$mode"; ?>" class="show2 document_id bom_header_withRev_id"><i class="fa fa-refresh"></i></a> 
        </li>
        <li><label>UOM</label><?php echo $f->select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom_id', 'uom_id'); ?>       </li>
        <li><label>Description</label><?php $f->text_field_dr('item_description'); ?></li>
@@ -113,14 +113,11 @@
 //							print_r($bom_line);
         ?>         
         <tr class="bom_line<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class_second->bom_line_id); ?>"></li>           
-           <li><?php echo form::hidden_field('bom_header_id', $bom_header->bom_header_id); ?></li>
-           <li><?php echo $f->hidden_field('bom_commonbom_line_id', $$class_second->bom_commonbom_line_id); ?></li>
-          </ul>
+         <td>
+          <?php
+          echo ino_inline_action($$class_second->bom_line_id, array('bom_header_id' => $$class->bom_header_id,
+           'bom_commonbom_line_id' => $$class_second->bom_commonbom_line_id));
+          ?>
          </td>
          <td><?php form::text_field_wid2sr('bom_line_id'); ?></td>
          <td><?php $f->text_field_d2s('bom_sequence', 'lines_number'); ?></td>
@@ -141,7 +138,7 @@
           echo $f->select_field_from_object('component_uom', uom::find_all(), 'uom_id', 'uom_name', $$class_second->component_uom, '', '', '', $readonly);
           ?></td>
          <td><?php echo form::select_field_from_object('usage_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_second->usage_basis, '', $readonly, 'usage_basis', '', 1); ?></td>
-         <td><?php echo $f->number_field('usage_quantity', $$class_second->usage_quantity,'','','small'); ?></td>
+         <td><?php echo $f->number_field('usage_quantity', $$class_second->usage_quantity, '', '', 'small'); ?></td>
         </tr>
         <?php
         $count = $count + 1;

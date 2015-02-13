@@ -63,7 +63,11 @@ if (!empty($class_names)) {
   if (method_exists($action_class, 'multi_select_tabs')) {
    $multi_select_tabs = $action_class_i->multi_select_tabs();
   }
-
+ 
+    if (method_exists($action_class, 'multi_select_actions')) {
+   $multi_select_actions = $action_class_i->multi_select_actions();
+  }
+  
   if (method_exists($action_class, 'multi_select_input_fields')) {
    $multi_selct_input_fields = $action_class_i->multi_select_input_fields();
   }
@@ -147,11 +151,11 @@ If (!empty($action_class_i) && property_exists($action_class_i, 'js_fileName')) 
 <?php } ?>
 
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
  $(document).ready(function () {
 //  $.getScript("includes/js/erp.js");
     if (!$("link[href='includes/ecss/search.css']").length) {
    $('<link href="includes/ecss/search.css" rel="stylesheet">').appendTo("head");
   }
  });
-</script>
+</script>-->

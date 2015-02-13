@@ -14,9 +14,9 @@
       <div class="large_shadow_box"> 
        <ul class="column header_field"> 
         <li> 
-         <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sd_opportunity_id select_popup clickable">
+         <label><img src="<?php echo HOME_URL; ?>themes/default/images/serach.png" class="sd_opportunity_id select_popup clickable">
           Id</label><?php $f->text_field_dsr('sd_opportunity_id') ?>
-         <a name="show" href="form.php?class_name=sd_opportunity&<?php echo "mode=$mode"; ?>" class="show document_id sd_opportunity_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+         <a name="show" href="form.php?class_name=sd_opportunity&<?php echo "mode=$mode"; ?>" class="show document_id sd_opportunity_id"><i class="fa fa-refresh"></i></a> 
         </li>
         <li><label>Lead Id</label><?php $f->text_field_dr('sd_lead_id'); ?> 					</li>
         <li><label>Number</label><?php $f->text_field_dm('opportunity_number'); ?> 					</li>

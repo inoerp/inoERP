@@ -128,9 +128,10 @@ $(document).ready(function () {
   setSubinventory($("#transaction_type_id").val());
  }
 
- $('#form_line').off('click', '.popupview-stnd-bom-item-config').on('click', '.popup.view-stnd-bom-item-config', function () {
+ $('#form_line').off('click', '.popup.view-item-config').on('click', '.popup.view-item-config', function (e) {
+  e.preventDefault();
   localStorage.removeItem("row_class_b");
-  var openUrl = $(this).find('a').prop('href') + '&transaction_type_module=inv';
+   var openUrl = $(this).prop('href') + '&reference_key_name=sd_so_line';
   var trClass = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
   if ($('#form_line').find(trClass).find('.org_id').val()) {
    openUrl += '&org_id=' + $('#form_line').find(trClass).find('.org_id').val();
@@ -145,7 +146,6 @@ $(document).ready(function () {
   localStorage.setItem("row_class_b", rowClass);
   void window.open(openUrl, '_blank',
           'width=1200,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-
  });
 
 // //get Subinventory Name

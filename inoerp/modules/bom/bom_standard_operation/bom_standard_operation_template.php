@@ -13,7 +13,7 @@
        <ul class="column header_field">
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_standard_operation_id select_popup clickable">
           Operation Id</label><?php echo $f->text_field_dr('bom_standard_operation_id'); ?>
-         <a name="show" href="form.php?class_name=bom_standard_operation&<?php echo "mode=$mode"; ?>" class="show document_id bom_standard_operation_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+         <a name="show" href="form.php?class_name=bom_standard_operation&<?php echo "mode=$mode"; ?>" class="show document_id bom_standard_operation_id"><i class="fa fa-refresh"></i></a> 
         </li>
         <li><label>Inventory(1)</label><?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly); ?>        </li>
         <li><label>Department(2)</label><?php echo form::select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class->department_id, 'department_id', $readonly); ?>        </li>
@@ -80,13 +80,11 @@
         foreach ($bom_standard_operation_resource_assignment_object as $bom_standard_operation_resource_assignment) {
          ?>         
          <tr class="bom_standard_operation_resource_assignment<?php echo $count ?>">
-          <td>    
-           <ul class="inline_action">
-            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($bom_standard_operation_resource_assignment->bom_standard_operation_resource_assignment_id); ?>"></li>           
-            <li><?php echo form::hidden_field('bom_standard_operation_id', $$class->bom_standard_operation_id); ?></li>
-           </ul>
+          <td>
+           <?php
+           echo ino_inline_action($$class_second->bom_standard_operation_resource_assignment_id, 
+            array('bom_standard_operation_id' => $$class->bom_standard_operation_id));
+           ?>
           </td>
           <td><?php form::text_field_wid2sr('bom_standard_operation_resource_assignment_id'); ?></td>
           <td><?php form::number_field_wid2s('resource_sequence') ?></td>

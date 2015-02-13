@@ -11,18 +11,16 @@
   <div class="tabContainer">
    <form action=""  method="post" id="inv_receipt_header"  name="inv_receipt_header">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
       <ul class="column five_column">
        <li><label> <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_receipt_header_id select_popup clickable">
          Receipt Header Id </label><?php echo form::text_field_dsr('inv_receipt_header_id'); ?>
-        <a name="show" href="form.php?class_name=inv_receipt_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_receipt_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <a name="show" href="form.php?class_name=inv_receipt_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_receipt_header_id"><i class="fa fa-refresh"></i></a> 
        </li>
        <li><label>Inventory</label><?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1); ?>       </li>
        <li><label>Transaction Type</label><?php echo $f->select_field_from_array('transaction_type_id', inv_receipt_header::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1, $readonly1); ?>       </li>
        <li><label>Number</label><?php echo $f->text_field('receipt_number', $$class->receipt_number, '8', '', 'primary_column2', '', $readonly1); ?>
        </li><li><label>Date </label><?php echo $f->date_fieldFromToday('receipt_date', ino_date($$class->receipt_date), $readonly1); ?></li>      
       </ul>
-     </div>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
@@ -96,15 +94,11 @@
         $f->readonly2 = !empty($inv_receipt_line->inv_receipt_line_id) ? true : false;
         ?>         
         <tr class="inv_receipt_line<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($inv_receipt_line->line_number); ?>"></li>           
-           <?php echo form::hidden_field('inv_receipt_header_id', $$class->inv_receipt_header_id); ?>
-           <?php echo form::hidden_field('org_id', $$class->org_id); ?>
-           <?php echo form::hidden_field('transaction_type_id', $$class->transaction_type_id); ?>
-          </ul>
+         <td>
+          <?php
+          echo ino_inline_action($$class_second->inv_receipt_line_id, array('org_id' => $$class->org_id,
+           'inv_receipt_header_id' => $$class->inv_receipt_header_id, 'transaction_type_id' => $$class->transaction_type_id));
+          ?>
          </td>
          <td><?php form::text_field_wid2sr('inv_receipt_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
