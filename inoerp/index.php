@@ -40,6 +40,7 @@ include_once("includes/functions/loader.inc");
   ?>
   <meta name="keywords" content="ERP,PHP ERP,Open Source ERP ">
   <title><?php echo isset($pageTitle) ? $pageTitle . ' - inoERP!' : ' inoERP! ' ?></title>
+  <link rel="shortcut icon" type="image/x-icon" href="files/favicon.ico">
   <link href="<?php
 //  echo THEME_URL;
 //  echo (!empty($content_class)) ? '/content_layout.css' : '/layout.css'
@@ -88,12 +89,13 @@ include_once("includes/functions/loader.inc");
 
   <div id="topbar" class="clearfix ">
    <div class="container">
+    <div class="row">
     <?php
     if ($showBlock) {
      echo '<div id = "header_top" class = "clear"></div>';
     }
     ?>
-    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+    <div class="col-lg-4 col-md-4 col-sm-4">
      <?php
      $show_header_links = true;
      if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
@@ -112,7 +114,7 @@ include_once("includes/functions/loader.inc");
 
     </div><!-- end columns -->
 
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+    <div class="col-lg-8 col-md-8 col-sm-8 ">
      <div class="topmenu">
       <div class="topbar-login">
        <?php if (!empty($_SESSION['login_status'])) { ?>
@@ -145,6 +147,7 @@ include_once("includes/functions/loader.inc");
       <span class="topbar-phone"><i class="fa fa-phone"></i> <a href="#"><?php echo!empty($si->phone_no) ? $si->phone_no : '1-111-1111' ?></a></span>
      </div><!-- end callus -->
     </div><!-- end columns -->
+    </div>
    </div><!-- end container -->
   </div><!-- end topbar -->
 

@@ -2828,6 +2828,8 @@ $(document).ready(function () {
   json_url: 'modules/inv/item/json_item.php',
   primary_column1: 'org_id'
  });
+ 
+
 
  //auto complete for allowed BOM
  var itemNumber = new autoCompleteMain();
@@ -2926,8 +2928,12 @@ $(document).ready(function () {
   if ($(this).siblings('.item_number').val()) {
    openUrl += '&item_number=' + $(this).siblings('.item_number').val();
   }
+  $(this).parent().parent().find('.popup_value').each(function(){
+   var dataName = $(this).prop('name').replace(/\[]+/g,'');
+   openUrl += '&'+dataName+'=' +  $(this).val();
+  });
   void window.open(openUrl, '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
  $('#content').on('click', '.select_item_number_only.select_popup', function () {

@@ -203,6 +203,8 @@ LEFT JOIN cst_item_cost_v cic ON cic.item_id_m = onhand.item_id_m AND cic.bom_co
   $sql = " SELECT * from onhand_v WHERE item_id_m = '{$item_id}' "
    . " AND org_id = '{$org_id}' ";
   $result = self::find_by_sql($sql);
+//    echo $sql;
+//  pa($result);
   return !empty($result) ? $result : false;
  }
 

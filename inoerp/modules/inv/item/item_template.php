@@ -154,7 +154,7 @@
     <li><a href="#tabsLine-4">Purchasing</a></li>
     <li><a href="#tabsLine-5">Manufacturing</a></li>
     <li><a href="#tabsLine-6">Planning</a></li>
-    <li><a href="#tabsLine-7">Planning-2</a></li>
+    <li><a href="#tabsLine-7">Control</a></li>
     <li><a href="#tabsLine-8">Financial</a></li>
     <li><a href="#tabsLine-9">Secondary</a></li>
    </ul>
@@ -174,36 +174,29 @@
        </li>
       </ul>
      </div>
+
      <div class="second_rowset">
-      <ul>
-       <li class="medium_box itemMaster_Main">
-       <box_heading>Long Descriptions </box_heading> 
-       <?php echo form::text_area('long_description', $item->long_description, '3', '22', ''); ?>
-       </li>
-       <li class="large_box itemMaster_leadtimes">
-       <box_heading>Lead time Information </box_heading> 
-       <ul>
-        <li><label>Pre Processing : </label> 
-         <?php echo form::text_field_d('pre_processing_lt'); ?>
-        </li>
-        <li><label>Processing : </label> 
-         <?php echo form::text_field_d('processing_lt'); ?>
-        </li> 
-        <li><label>Post Processing : </label>
-         <?php echo form::text_field_d('post_processing_lt'); ?>
-        </li> 
-        <li><label>Cumulative Mfg : </label> 
-         <?php echo form::text_field_d('cumulative_mfg_lt'); ?>
-        </li>
-        <li><label>Cumulative Total : </label> 
-         <?php echo form::text_field_d('cumulative_total_lt'); ?>
-        </li>
-        <li><label>Lead time Lot Size : </label> 
-         <?php echo form::text_field_d('lt_lot_size'); ?>
-        </li>
-       </ul>
-       </li>
-      </ul>
+      <div class="panel panel-collapse panel-ino-classy medium_box">
+       <div class="panel-heading"><div class="panel-title">Long Descriptions</div></div>
+       <div class="panel-body">
+        <ul class="column line_field">
+         <li><?php echo form::text_area('long_description', $item->long_description, '5', '30', ''); ?></li>
+        </ul>
+       </div>
+      </div>
+      <div class="panel panel-collapse panel-ino-classy large_box">
+       <div class="panel-heading"><div class="panel-title">Lead time Information</div></div>
+       <div class="panel-body">
+        <ul class="column line_field">
+         <li><label>Pre Processing</label><?php echo form::text_field_d('pre_processing_lt'); ?></li>
+         <li><label>Processing</label><?php echo form::text_field_d('processing_lt'); ?></li> 
+         <li><label>Post Processing</label><?php echo form::text_field_d('post_processing_lt'); ?></li> 
+         <li><label>Cumulative Mfg</label><?php echo form::text_field_d('cumulative_mfg_lt'); ?></li>
+         <li><label>Cumulative Total</label><?php echo form::text_field_d('cumulative_total_lt'); ?></li>
+         <li><label>Lead time Lot Size</label><?php echo form::text_field_d('lt_lot_size'); ?></li>
+        </ul>
+       </div>
+      </div>
      </div>
      <!--end of tab1 div three_column-->
     </div> 
@@ -241,58 +234,49 @@
        <li><label>Locator Control : </label> 
         <?php echo form::text_field_d('locator_control'); ?>
        </li>
-              <li><label>Kit Item? : </label> 
+       <li><label>Kit Item? : </label> 
         <?php echo form::checkBox_field('kit_cb', $$class->kit_cb, '', $readonly); ?>
        </li>
       </ul>
      </div>
      <div class="second_rowset">
-      <ul class="small_box itemMaster_lot">
-       <box_heading>Lot Information </box_heading> 
-       <li><label>Lot Uniqueness : </label> 
-        <?php echo $f->select_field_from_array('lot_uniqueness', item::$ls_uniqueness_a, $$class->lot_uniqueness); ?>
-       </li>
-       <li><label>Lot Generation : </label> 
-        <?php echo $f->select_field_from_array('lot_generation', item::$ls_generation_a, $$class->lot_generation); ?>
-       </li> 
-       <li><label>Lot Prefix : </label> 
-        <?php echo form::text_field_d('lot_prefix'); ?>
-       </li> 
-       <li><label>Lot Starting Number : </label> 
-        <?php echo form::text_field_d('lot_starting_number'); ?>
-       </li>
-      </ul>
-
-      <ul class="small_box itemMaster_serial">
-       <box_heading>Serial Information </box_heading> 
-       <li><label>Serial Uniqueness : </label> 
-        <?php echo $f->select_field_from_array('serial_uniqueness', item::$ls_uniqueness_a, $$class->serial_uniqueness); ?>
-       </li>
-       <li><label>Serial Generation : </label> 
-        <?php echo $f->select_field_from_array('serial_generation', item::$ls_generation_a, $$class->serial_generation); ?>
-       </li> 
-       <li><label>Serial Prefix : </label> 
-        <?php echo form::text_field_d('serial_prefix'); ?>
-       </li> 
-       <li><label>Serial Starting Number : </label> 
-        <?php echo form::text_field_d('serial_starting_number'); ?>
-       </li>
-      </ul>
-      <ul>
-       <div class="large_box itemMaster_physical"><box_heading>Item Information </box_heading> 
-        <li><label>Weight UOM : </label>
-         <?php echo form::select_field_from_object('weight_uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->weight_uom_id, 'weight_uom_id', $readonly); ?></li>
-        <li><label>Weight : </label><?php echo form::text_field_d('weight'); ?></li> 
-        <li><label>Volume UOM : </label>
-         <?php echo form::select_field_from_object('volume_uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->volume_uom_id, 'volume_uom_id', $readonly); ?></li>
-        <li><label>Volume : </label><?php echo form::text_field_d('volume'); ?></li>
-        <li><label>Dimension UOM : </label>
-         <?php echo form::select_field_from_object('dimension_uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->dimension_uom_id, 'dimension_uom_id', $readonly); ?></li>
-        <li><label>Length : </label><?php echo form::text_field_d('length'); ?></li>
-        <li><label>Width : </label><?php echo form::text_field_d('width'); ?></li>
-        <li><label>Volume : </label><?php echo form::text_field_d('volume'); ?></li>
+      <div class="panel panel-collapse panel-ino-classy medium_box">
+       <div class="panel-heading"><div class="panel-title">Lot Information</div></div>
+       <div class="panel-body">
+        <ul class="column line_field">
+         <li><label>Uniqueness</label><?php echo $f->select_field_from_array('lot_uniqueness', item::$ls_uniqueness_a, $$class->lot_uniqueness); ?>   </li>
+         <li><label>Generation</label><?php echo $f->select_field_from_array('lot_generation', item::$ls_generation_a, $$class->lot_generation); ?></li> 
+         <li><label>Prefix</label><?php echo form::text_field_d('lot_prefix'); ?></li> 
+         <li><label>Starting Number</label><?php echo form::text_field_d('lot_starting_number'); ?></li>
+        </ul>
        </div>
-      </ul>
+      </div>
+      <div class="panel panel-collapse panel-ino-classy medium_box">
+       <div class="panel-heading"><div class="panel-title">Serial Information</div></div>
+       <div class="panel-body">
+        <ul class="column line_field">
+         <li><label>Uniqueness</label><?php echo $f->select_field_from_array('serial_uniqueness', item::$ls_uniqueness_a, $$class->serial_uniqueness); ?>         </li>
+         <li><label>Generation</label><?php echo $f->select_field_from_array('serial_generation', item::$ls_generation_a, $$class->serial_generation); ?>         </li> 
+         <li><label>Prefix</label><?php echo form::text_field_d('serial_prefix'); ?></li> 
+         <li><label>Starting Number</label><?php echo form::text_field_d('serial_starting_number'); ?></li>
+        </ul>
+       </div>
+      </div>
+      <div class="panel panel-collapse panel-ino-classy medium_box">
+       <div class="panel-heading"><div class="panel-title">Measurement Information</div></div>
+       <div class="panel-body">
+        <ul class="column line_field">
+         <li><label>Weight UOM</label><?php echo form::select_field_from_object('weight_uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->weight_uom_id, 'weight_uom_id', $readonly); ?></li>
+         <li><label>Weight</label><?php echo form::text_field_d('weight'); ?></li> 
+         <li><label>Volume UOM</label><?php echo form::select_field_from_object('volume_uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->volume_uom_id, 'volume_uom_id', $readonly); ?></li>
+         <li><label>Volume</label><?php echo form::text_field_d('volume'); ?></li>
+         <li><label>Dimension UOM</label><?php echo form::select_field_from_object('dimension_uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->dimension_uom_id, 'dimension_uom_id', $readonly); ?></li>
+         <li><label>Length</label><?php echo form::text_field_d('length'); ?></li>
+         <li><label>Width</label><?php echo form::text_field_d('width'); ?></li>
+         <li><label>Volume</label><?php echo form::text_field_d('volume'); ?></li>
+        </ul>
+       </div>
+      </div>
 
      </div> 
      <!--                end of tab2 div three_column-->
@@ -316,14 +300,15 @@
       </ul>
      </div>
      <div class="second_rowset">
-      <ul class="small_box rule"><box_heading>Rule Information </box_heading> 
-       <li><label>Available to promise : </label> 
-        <?php echo form::text_field_d('atp'); ?>
-       </li>
-       <li><label>Picking Rule : </label> 
-        <?php echo form::text_field_d('picking_rule'); ?>
-       </li>
-      </ul>
+      <div class="panel panel-collapse panel-ino-classy medium_box">
+       <div class="panel-heading"><div class="panel-title">Rule Information</div></div>
+       <div class="panel-body">
+        <ul class="column line_field">
+         <li><label>Available to promise</label><?php echo form::text_field_d('atp'); ?></li>
+         <li><label>Picking Rule</label><?php echo form::text_field_d('picking_rule'); ?></li>
+        </ul>
+       </div>
+      </div>
      </div>
     </div> 
     <!--                end of tab3 div three_column-->
@@ -354,29 +339,20 @@
       </ul>
      </div>
      <div class="second_rowset">
-      <ul class="large_box itemMaster_receipt"><box_heading>Receipt Information </box_heading> 
-       <li><label>Receipt Routing : </label>
-        <?php echo form::text_field_d('receipt_routing'); ?>
-       </li> 
-       <li><label>Receiving SubInventory : </label>
-        <?php echo form::text_field_d('receipt_sub_inventory'); ?>
-       </li> 
-       <li><label>Over Receipt % : </label>
-        <?php echo form::text_field_d('over_receipt_percentage'); ?>
-       </li>
-       <li><label>Over Receipt Action : </label>
-        <?php echo form::text_field_d('over_receipt_action'); ?>
-       </li>
-       <li><label>Allowed early receipt days : </label>
-        <?php echo form::text_field_d('receipt_days_early'); ?>
-       </li> 
-       <li><label>Allowed late receipt days : </label>
-        <?php echo form::text_field_d('receipt_days_late'); ?>
-       </li> 
-       <li><label>Receipt Day Action : </label>
-        <?php echo form::text_field_d('receipt_day_action'); ?>
-       </li>
-      </ul>
+      <div class="panel panel-collapse panel-ino-classy extra_large_box">
+       <div class="panel-heading"><div class="panel-title">Receipt Information</div></div>
+       <div class="panel-body">
+        <ul class="column line_field">
+         <li><label>Receipt Routing</label><?php echo form::text_field_d('receipt_routing'); ?></li> 
+         <li><label>Receiving SubInventory</label><?php echo form::text_field_d('receipt_sub_inventory'); ?></li> 
+         <li><label>Over Receipt %</label><?php echo form::text_field_d('over_receipt_percentage'); ?></li>
+         <li><label>Over Receipt Action</label><?php echo form::text_field_d('over_receipt_action'); ?></li>
+         <li><label>Allowed early receipt days</label><?php echo form::text_field_d('receipt_days_early'); ?></li> 
+         <li><label>Allowed late receipt days</label><?php echo form::text_field_d('receipt_days_late'); ?></li> 
+         <li><label>Receipt Day Action</label><?php echo form::text_field_d('receipt_day_action'); ?></li>
+        </ul>
+       </div>
+      </div>
      </div> 
     </div>
     <!--end of tab4(purchasing)!!! start of MFG tab-->
@@ -390,7 +366,7 @@
         <?php echo form::checkBox_field('bom_enabled_cb', $$class->bom_enabled_cb, '', $readonly); ?>
        </li>
        <li><label>BOM Type: </label> 
-        <?php echo $f->select_field_from_object('bom_type', item::bom_types(),'option_line_code','option_line_value', $$class->bom_type,'bom_type'); ?>       </li>
+        <?php echo $f->select_field_from_object('bom_type', item::bom_types(), 'option_line_code', 'option_line_value', $$class->bom_type, 'bom_type'); ?>       </li>
        <li><label>Build in WIP : </label>
         <?php echo form::checkBox_field('build_in_wip_cb', $$class->build_in_wip_cb, '', $readonly); ?>
        </li>
@@ -407,16 +383,17 @@
       </ul>
      </div>
      <div class="second_rowset">
-      <ul class="large_box"><box_heading>Cost Information </box_heading> 
-       <li><label>Costing Enabled : </label> 
-        <?php echo form::checkBox_field('costing_enabled_cb', $$class->costing_enabled_cb, '', $readonly); ?>
-       </li>
-       <li><label>Inventory Asset : </label>
-        <?php echo form::checkBox_field('inventory_asset_cb', $$class->inventory_asset_cb, '', $readonly); ?>
-       </li>
-       <li><label>COGS Ac : </label>   <?php echo $f->ac_field_d('cogs_ac_id'); ?> </li>
-       <li><label>Deferred COGS Ac : </label>  <?php echo $f->ac_field_d('deffered_cogs_ac_id'); ?> </li>
-      </ul>
+      <div class="panel panel-collapse panel-ino-classy large_box">
+       <div class="panel-heading"><div class="panel-title">Cost Information</div></div>
+       <div class="panel-body">
+        <ul class="column line_field">
+         <li><label>Costing Enabled</label><?php echo form::checkBox_field('costing_enabled_cb', $$class->costing_enabled_cb, '', $readonly); ?>    </li>
+         <li><label>Inventory Asset</label><?php echo form::checkBox_field('inventory_asset_cb', $$class->inventory_asset_cb, '', $readonly); ?>       </li>
+         <li><label>COGS Ac</label><?php echo $f->ac_field_d('cogs_ac_id'); ?> </li>
+         <li><label>Deferred COGS Ac</label><?php echo $f->ac_field_d('deffered_cogs_ac_id'); ?> </li>
+        </ul>
+       </div>
+      </div>
      </div> 
     </div>
     <!--end of tab5 (Manufacturing)!! start of planning -->
@@ -441,62 +418,77 @@
       </ul>
      </div>
      <div class="second_rowset">
-      <ul class="large_box order_modifiers"><box_heading>Order Modifiers </box_heading> 
-       <li><label>Fix Order Quantity : </label>
-        <?php echo form::number_field_d('fix_order_quantity'); ?>
-       </li>
-       <li><label>Fix Days Supply : </label>
-        <?php echo form::number_field_d('fix_days_supply'); ?>
-       </li>
-       <li><label>Fix Lot Multiplier : </label> 
-        <?php echo form::number_field_d('fix_lot_multiplier'); ?>
-       </li>
-       <li><label>Minimum Order Quantity : </label>
-        <?php echo form::number_field_d('minimum_order_quantity'); ?>
-       </li>
-       <li><label>Maximum Order Quantity : </label>
-        <?php echo form::number_field_d('maximum_order_quantity'); ?>
-       </li>
-      </ul> 
+      <div class="panel panel-collapse panel-ino-classy medium_box">
+       <div class="panel-heading"><div class="panel-title">Order Modifiers</div></div>
+       <div class="panel-body">
+        <ul class="column line_field">
+         <li><label>Fix Order Quantity</label><?php echo form::number_field_d('fix_order_quantity'); ?></li>
+         <li><label>Fix Days Supply</label><?php echo form::number_field_d('fix_days_supply'); ?> </li>
+         <li><label>Fix Lot Multiplier</label><?php echo form::number_field_d('fix_lot_multiplier'); ?></li>
+         <li><label>Minimum Order Quantity</label><?php echo form::number_field_d('minimum_order_quantity'); ?></li>
+         <li><label>Maximum Order Quantity</label> <?php echo form::number_field_d('maximum_order_quantity'); ?></li>
+        </ul>
+       </div>
+      </div>
 
-      <ul class="small_box timefence"><box_heading>Time Fences </box_heading> 
-       <li><label>Demand Time Fence : </label><?php echo form::text_field_d('demand_timefence'); ?></li>
-       <li><label>Planning Time Fence : </label><?php echo form::text_field_d('planning_timefence'); ?></li>
-       <li><label>Release Time Fence : </label><?php echo form::text_field_d('release_timefence'); ?></li>
-      </ul> 
-      <ul class="small_box saftey_stock"><box_heading>Safety Stock </box_heading> 
-       <li><label>Quantity : </label><?php echo form::text_field_d('saftey_stock_quantity'); ?></li>
-       <li><label>Days: </label><?php echo form::text_field_d('saftey_stock_days'); ?></li>
-       <li><label>Percentage : </label><?php echo form::text_field_d('saftey_stock_percentage'); ?></li>
-      </ul> 
+      <div class="panel panel-collapse panel-ino-classy medium_box">
+       <div class="panel-heading"><div class="panel-title">Time Fences</div></div>
+       <div class="panel-body">
+        <ul class="column line_field">
+         <li><label>Demand</label><?php echo form::text_field_d('demand_timefence'); ?></li>
+         <li><label>Planning</label><?php echo form::text_field_d('planning_timefence'); ?></li>
+         <li><label>Release</label><?php echo form::text_field_d('release_timefence'); ?></li>
+         <li><label>Rounding : </label>
+          <?php echo $f->select_field_from_object('rounding_option', item::rounding_option(), 'option_line_code', 'option_line_value', $$class->rounding_option, 'rounding_option', '', '', $readonly); ?>
+         </li>
+        </ul>
+       </div>
+      </div>
+
+      <div class="panel panel-collapse panel-ino-classy medium_box">
+       <div class="panel-heading"><div class="panel-title">Min Max Planning</div></div>
+       <div class="panel-body">
+        <ul class="column line_field">
+         <li><label>Min Quantity</label><?php echo $f->number_field('minmax_min_quantity', $$class->minmax_min_quantity) ?></li>
+         <li><label>Max Quantity</label><?php echo $f->number_field('minmax_max_quantity', $$class->minmax_max_quantity) ?></li>
+         <li><label>Number of Bins</label><?php echo $f->number_field('minmax_multibin_number', $$class->minmax_multibin_number) ?></li>
+         <li><label>Bin Size</label><?php echo $f->number_field('minmax_multibin_size', $$class->minmax_multibin_size) ?></li>
+        </ul>
+       </div>
+
+      </div>
+
      </div> 
     </div>
     <div id="tabsLine-7" class="tabContent">
      <div class="first_rowset"> 
       <ul class="column five_column"> 
-       <li><label>Rounding : </label>
-        <?php echo $f->select_field_from_object('rounding_option', item::rounding_option(), 'option_line_code', 'option_line_value', $$class->rounding_option, 'rounding_option', '', '', $readonly); ?>
-       </li>
+       <li><label>Maintenance Asset Type: </label>
+        <?php $f = new inoform();       
+        echo $f->select_field_from_array('am_asset_type', item::$am_asset_type_a, $$class->am_asset_type, 'am_asset_type'); ?>
+       </li> 
       </ul>
      </div>
-     <div class="second_rowset">
-      <ul class="small_box rule"><box_heading>Min Max Planning </box_heading> 
-       <li><label>Min Quantity : </label> 
-        <?php
-        $f = new inoform();
-        echo $f->number_field('minmax_min_quantity', $$class->minmax_min_quantity)
-        ?>
-       </li>
-       <li><label>Max Quantity : </label> 
-        <?php echo $f->number_field('minmax_max_quantity', $$class->minmax_max_quantity) ?>
-       </li>
-       <li><label>Number of Bins : </label> 
-        <?php echo $f->number_field('minmax_multibin_number', $$class->minmax_multibin_number) ?>
-       </li>
-       <li><label>Bin Size : </label> 
-        <?php echo $f->number_field('minmax_multibin_size', $$class->minmax_multibin_size) ?>
-       </li>
-      </ul>
+     <div class="panel panel-collapse panel-ino-classy medium_box">
+      <div class="panel-heading"><div class="panel-title">Safety Stock</div></div>
+      <div class="panel-body">
+       <ul class="column line_field">
+        <li><label>Quantity</label><?php echo form::text_field_d('saftey_stock_quantity'); ?></li>
+        <li><label>Days</label><?php echo form::text_field_d('saftey_stock_days'); ?></li>
+        <li><label>Percentage</label><?php echo form::text_field_d('saftey_stock_percentage'); ?></li>
+       </ul>
+      </div>
+     </div>
+     <div class="panel panel-collapse panel-ino-classy medium_box">
+      <div class="panel-heading"><div class="panel-title">Asset Maintenance</div></div>
+      <div class="panel-body">
+       <ul class="column line_field">
+        <li><label>Cause</label><?php echo $f->text_field_d('am_activity_cause') ?></li>
+        <li><label>Activity Type</label><?php echo $f->text_field_d('am_activity_type') ?></li>
+        <li><label>Source</label><?php echo $f->text_field_d('am_activity_source') ?></li>
+       </ul>
+      </div>
+
      </div>
     </div> 
     <!--end of tab6 (planning)...start of lead times-->
@@ -524,15 +516,20 @@
       </ul>
      </div> 
      <div class="second_rowset">
-      <ul class="three_column">
-       <li><label>Material Ac: </label><?php $f->ac_field_d('material_ac_id'); ?></li>
-       <li><label>Material OH Ac: </label><?php $f->ac_field_d('material_ac_id'); ?></li>
-       <li><label>OverHead Ac: </label> <?php $f->ac_field_d('material_ac_id'); ?></li>
-       <li><label>Resource Ac: </label> <?php $f->ac_field_d('resource_ac_id'); ?></li>
-       <li><label>Expense Ac: </label><?php $f->ac_field_d('expense_ac_id'); ?></li>
-       <li><label>OSP Ac: </label> <?php $f->ac_field_d('material_ac_id'); ?> </li>
-       <li><label>Sales Ac: </label><?php $f->ac_field_d('sales_ac_id'); ?> </li>
-      </ul>
+      <div class="panel panel-collapse panel-ino-classy extra_large_box">
+       <div class="panel-heading"><div class="panel-title">Account</div></div>
+       <div class="panel-body">
+        <ul class="column line_field">
+         <li><label>Material</label><?php $f->ac_field_d('material_ac_id'); ?></li>
+         <li><label>Material</label><?php $f->ac_field_d('material_ac_id'); ?></li>
+         <li><label>OverHead</label> <?php $f->ac_field_d('material_ac_id'); ?></li>
+         <li><label>Resource</label> <?php $f->ac_field_d('resource_ac_id'); ?></li>
+         <li><label>Expense</label><?php $f->ac_field_d('expense_ac_id'); ?></li>
+         <li><label>OSP Ac</label> <?php $f->ac_field_d('material_ac_id'); ?> </li>
+         <li><label>Sales Ac</label><?php $f->ac_field_d('sales_ac_id'); ?> </li>
+        </ul>
+       </div>
+      </div>
      </div> 
     </div>
     <!--                  end of tab7 (Fiance)--> 

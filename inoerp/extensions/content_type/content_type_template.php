@@ -15,7 +15,7 @@
        <li class="content_type_id">
         <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="content_type_id select_popup clickable">
          Type ID</label><?php form::number_field_drs('content_type_id'); ?>
-       <a name="show" href="form.php?class_name=content_type&<?php echo "mode=$mode"; ?>" class="show document_id content_type_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <a name="show" href="form.php?class_name=content_type&<?php echo "mode=$mode"; ?>" class="show document_id content_type_id"><i class="fa fa-refresh"></i></a> 
        </li>
        <li class="content_type_label"><label>Content Type</label><?php form::text_field_dm('content_type'); ?></li>
        <li class="description"><label>Description</label><?php form::text_field_dm('description'); ?></li>
@@ -109,13 +109,11 @@
         $$class_third = &$content_type_reference;
         ?>   
         <tr class="content_type<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-           <li><input type="checkbox" name="field_name_cb" class="checkbox" value="<?php echo $$class_second->Field; ?>"></li>           		   
-           <li><?php echo!empty($content_type_reference) ? form::hidden_field('content_type_reference_id', $$class_third->content_type_reference_id) : ''; ?></li>
-          </ul>
+         <td>
+          <?php
+          $content_type_reference_id = !empty($content_type_reference) ?  $$class_third->content_type_reference_id : '';
+          echo ino_inline_action($$class_second->Field, array('content_type_reference_id' => $content_type_reference_id));
+          ?>
          </td>
          <td><?php form::text_field_wid3('field_label') ?></td>
          <td><?php echo form::select_field_from_array('field_position', dbObject::$position_array, $$class_third->field_position); ?></td>
@@ -129,7 +127,7 @@
          </td>
          <td><?php form::number_field_wid2s('field_num'); ?></td>    
          <td><?php form::text_field_wid2('field_enum'); ?></td>  
-         <td><?php echo form::select_field_from_object('option_type', option_header::find_all(), 'option_header_id', 'option_type', $$class_third->option_type, '', $readonly, 'option_type', '', '') ?></td>  
+         <td><?php echo $f->select_field_from_object('option_type', option_header::find_all(), 'option_header_id', 'option_type', $$class_third->option_type, '', 'medium') ?></td>  
         </tr>
         <?php
         $count++;
@@ -158,6 +156,6 @@
   <li class="btn1DivId" data-btn1DivId="content_type_id" ></li>
   <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>
   <li class="noOfTabbs" data-noOfTabbs="2" ></li>
-  
+
  </ul>
 </div>

@@ -281,18 +281,23 @@ class search extends dbObject {
   }
 
   foreach ($this->_initial_search_array as $key => $value) {
-
+   $readonly_field = '  ';
    if (!empty($_GET[$value]) && !(is_array($_GET[$value]))) {
 //		$get_value = urldecode(filter_input(INPUT_GET, $value));
     $get_value = $_GET[$value];
+    $readonly_field = ' readonly ';
    } else if (!empty($_GET[$value]) && (is_array($_GET[$value]))) {
     $get_value = $_GET[$value][0];
+    if (!empty($_GET[$value][0])) {
+     $readonly_field = ' readonly ';
+    }
    } else {
     $get_value = "";
+    $readonly_field = '  ';
    }
    $bracketName = $value . '[]';
    $search_form_statement .= "<li><label class=\"label_$value\">" . ucwords(str_replace('_', ' ', $value)) . " : </label>";
-   $search_form_statement .= "<input type=\"text\" name=\"$bracketName\" class=\"$value text_search \"   size=\"15\" value=\"$get_value\" >";
+   $search_form_statement .= "<input type=\"text\" name=\"$bracketName\" $readonly_field class=\"$value text_search \"   size=\"15\" value=\"$get_value\" >";
    $search_form_statement .= '</li>';
   }
 
@@ -437,7 +442,7 @@ class search extends dbObject {
   }
 
   if (!empty($program_type) && ($program_type == 'download_report')) {
-   $program_form_statement .='<li><label>Download Format</label>'.$f->select_field_from_array('download_format', dbObject::$download_format, '').'</li>';
+   $program_form_statement .='<li><label>Download Format</label>' . $f->select_field_from_array('download_format', dbObject::$download_format, '') . '</li>';
   }
 
   $program_form_statement .= "<li><label>Dynamic Criteria </label>";

@@ -1,5 +1,7 @@
 $(document).ready(function () {
- $('#content').on('click', '.line_status', function () {
+ $('#generic_search_form').find('.line_status').val('AWAITING_PICKING');
+ 
+ $('#content').off('click', '.line_status').on('click', '.line_status', function () {
   alert('You can only search lines which are not picked');
   $(this).attr('readonly', true);
  });
@@ -59,17 +61,35 @@ $(document).ready(function () {
  classContextMenu.tbodyClass = 'form_data_line_tbody';
  classContextMenu.noOfTabbs = 5;
  classContextMenu.contextMenu();
- 
- 
 
-$('body').off('click','.pick_list.button').on('click','.pick_list.button', function(){
-var lineIds = $('#form_line').find('input.line_id_cb[type="checkbox"]:checked').serializeArray();
-save_dataInSession({
-  data_name : 'pick_list',
-  data_value : lineIds,
 
-});
 
-})
+// $('body').off('click', '.pick_list.button').on('click', '.pick_list.button', function () {
+//  var lineIds = $('#form_line').find('input.line_id_cb[type="checkbox"]:checked').serializeArray();
+//  save_dataInSession({
+//   data_name: 'pick_list',
+//   data_value: lineIds
+//
+//  });
+
+ $('body').off('click', '.pick_list.button').on('click', '.pick_list.button', function () {
+  var allData = [];
+  $('#form_line').find('input.line_id_cb[type="checkbox"]:checked').each(function () {
+   var trClass = '.'+$(this).closest('tr').prop('class').replace(/\+s/g,'.');
+   var lineData = [];
+     $("#form_line").find(trClass).each(function () {
+    var ThisLineData = $(this).find(":input").serializeArray();
+    lineData = $.merge(lineData, ThisLineData);
+   });
+   allData = $.merge(allData, lineData);
+  });
+    save_dataInSession({
+   data_name: 'pick_list',
+   data_value: allData
+
+  });
+
+
+ });
 
 });

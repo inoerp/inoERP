@@ -695,11 +695,6 @@ a.link_class_green:hover{
  margin: 5px 10px;
 }
 
-.navbar-inverse .logo_image{
- display: none;
-}
-
-
 #path_by_module {
  margin-top: 20px;
 }
@@ -962,15 +957,31 @@ ul.process_flow_diagram_list li.current_processs{
  background: rgba(35, 141, 231, 0.45);
 }
 
-ul.header_field li{
+ul.header_field li, ul.line_field li{
  width: 310px;
  display: inline-block;
 }
 
+ul.header_field li{
+ width: 310px;
+ }
+
 ul.header_field li label{
- width: 120px;
  text-align: right;
  padding-right: 5px;        
+}
+
+ul.line_field li label{
+text-align: right;
+padding-right: 5px;
+width: 100px;       
+}
+ul.line_field li{
+ margin-bottom:6px;
+}
+
+ul.header_field li label{
+ width: 120px;
 }
 
 /*CSS Arrows*/
@@ -1166,7 +1177,6 @@ select.search_document_list option:nth-child(even) {
 
 .inline  {
  display: inline-block !important;
-
  float:left;
 }
 
@@ -1321,4 +1331,51 @@ ul.inline_action .fa, #form_line .fa{
  font-size: 16px;
  color: #768D38;
  margin: 2px;
+}
+
+#popup-window #navigation_bar {
+ top: 0 !important;
+ margin-bottom: 0 !important;
+}
+
+#popup-window .sidebar {
+ top: 0 !important;
+}       	
+
+.ino-label{
+ font-size: 100%;
+ color: #037892;
+ font-weight: bold;
+}
+
+tr.level_2 td a{
+        padding-left: 25px;
+}
+
+tr.level_3 td a{
+        padding-left: 50px;
+}
+
+tr.level_4 td a{
+        padding-left: 75px;
+}
+
+tr.level_1 td{
+  background-color : #3FB6DA;
+        color: #fff;
+        font-weight: bold;
+}
+
+tr.level_1 td a{
+        color: #fff;
+}
+
+ul.header_li li{
+        display: inline-block;
+        margin-right: 60px;
+}
+
+.fb_iframe_widget {
+    vertical-align: middle !important;
+    margin-top: 5px !important;
 }

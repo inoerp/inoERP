@@ -3,7 +3,7 @@
 class sd_so_all_v extends dbObject {
 
  public static $table_name = "sd_so_all_v";
- public static $primary_column = "sd_so_line_id";
+ public static $primary_column = "sd_so_header_id";
  public $field_a = [
 		 'sd_so_header_id',
 		 'bu_org_id',

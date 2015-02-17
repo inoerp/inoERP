@@ -40,7 +40,7 @@ class sd_delivery_header extends dbObject {
   'AWAITING_SHIPPING' => 'Awaiting Shipping',
   'SHIPPED' => 'Shipped'
  ];
- public static $action_a = [
+ public $action_a = [
   'COMPLETE_SHIPMENT' => 'Complete Shipment',
   'REVERSE_PICKING' => 'Reverse Picking',
   'REMOVE_LINE' => 'Remove Line',
@@ -159,7 +159,6 @@ class sd_delivery_header extends dbObject {
   $dh->delivery_date = date("Y-m-d");
   $dh->status = 'AWAITING_SHIPPING';
   $dh->audit_trial();
-  $dh->save();
   echo "<br> Delivery header is succefully created. Header Id/Delivery Number - " . $dh->sd_delivery_header_id;
   $dh->delivery_number = $dh->sd_delivery_header_id;
   $dh->save();
@@ -175,13 +174,13 @@ class sd_delivery_header extends dbObject {
   $line_number = 0;
   $sd_delivery_header_id = null;
   for ($i = 0; $i < count($_POST['sd_so_line_id']); $i++) {
-   $line_number ++;
+
    if (empty($sd_delivery_header_id)) {
     $sd_delivery_header_id = $this->_create_delivery_header();
    }
    if (!empty($sd_delivery_header_id)) {
     //verify if requested quantity is more than onhand quantity
-    if ($_POST['line_quantity'][$i] > $_POST['onhand'][$i]) {
+    if (($_POST['line_quantity'][$i] > $_POST['onhand'][$i]) && empty($_POST['kit_cb'][$i])) {
      echo "<br> Line Quantity " . $_POST['line_quantity'][$i] . ' is more than total available quantity ' .
      $_POST['onhand'][$i];
      break;
@@ -192,74 +191,106 @@ class sd_delivery_header extends dbObject {
     $sol->findBy_id($_POST['sd_so_line_id'][$i]);
     if ($sol->line_status != 'AWAITING_PICKING') {
      echo "<br> Line is not available for picking";
+     $dbc->rollback = true;
      return -99;
     }
 
     $del_line = new sd_delivery_line();
     $del_line->sd_delivery_line_id = null;
-    $del_line->line_number = $line_number;
     $del_line->sd_delivery_header_id = $sd_delivery_header_id;
     $del_line->sd_so_header_id = $_POST['sd_so_header_id'][$i];
     $del_line->sd_so_line_id = $_POST['sd_so_line_id'][$i];
     $del_line->shipping_org_id = $_POST['shipping_org_id'][$i];
-    $del_line->item_id_m = $_POST['item_id_m'][$i];
-    $del_line->quantity = $_POST['line_quantity'][$i];
     $del_line->delivery_status = 'AWAITING_SHIPPING';
     $del_line->picking_date = date("Y-m-d");
     $del_line->line_uom_id = $_POST['uom_id'][$i];
     $del_line->staging_subinventory_id = $_POST['staging_subinventory_id'][$i];
     $del_line->staging_locator_id = $_POST['staging_locator_id'][$i];
-    $del_line->audit_trial();
+    $del_line->line_number = $line_number;
+    $line_number ++;
+    $del_line->item_id_m = $_POST['item_id_m'][$i];
+    $del_line->quantity = $_POST['line_quantity'][$i];
     $del_line->save();
 
 
-    //update the onhand
-    $del_quantity = $del_line->quantity;
-    $onhand = new onhand();
-    $onhand->item_id_m = $_POST['item_id_m'][$i];
-    $onhand_i = $onhand->findOnhand_byItemId();
-    foreach ($onhand_i as $oh_data) {
-     $transaction_quantity = 0;
-     if ($oh_data->onhand <= 0) {
-      continue;
+    //update the inv transaction & onhand
+    if ($sol->kit_cb) {
+     if (!empty($sol->bom_config_header_id)) {
+      $bom_lines_all = bom_config_line::find_by_parent_id($sol->bom_config_header_id);
+      foreach ($bom_lines_all as $bom_lines) {
+       $item_i = item::find_by_item_id_m($bom_lines->component_item_id_m);
+       $del_line->item_id_m = $item_i->item_id_m;
+       $qty = $_POST['line_quantity'][$i] * $bom_lines->usage_quantity;
+       try {
+        $this->_create_inv_transaction($qty, $i, $item_i->item_id_m);
+       } catch (Exception $e) {
+        echo "<br>Failed to complete the inventory transaction. Error @ sd_Delivery_header @@ line " . __LINE__;
+        $dbc->rollback = true;
+        return;
+       }
+      }
      }
-     if ($del_quantity <= 0) {
-      break;
+    } else {
+     try {
+      $this->_create_inv_transaction($del_line->quantity, $i, $del_line->item_id_m);
+     } catch (Exception $e) {
+      echo "<br>Failed to complete the inventory transaction. Error @ sd_Delivery_header @@ line " . __LINE__;
+      $dbc->rollback = true;
+      return;
      }
-     if ($oh_data->onhand >= $del_quantity) {
-      $transaction_quantity = $del_quantity;
-      $del_quantity = 0;
-     } else {
-      $transaction_quantity = $oh_data->onhand;
-      $del_quantity = $del_quantity - $oh_data->onhand;
-     }
-     $invt = new inv_transaction();
-     $invt->transaction_type_id = 14;
-     $invt->to_subinventory_id = $_POST['staging_subinventory_id'][$i];
-     $invt->to_locator_id = $_POST['staging_locator_id'][$i];
-     $invt->from_subinventory_id = $oh_data->subinventory_id;
-     $invt->from_locator_id = $oh_data->locator_id;
-     $invt->item_id_m = $_POST['item_id_m'][$i];
-     $invt->uom_id = $_POST['uom_id'][$i];
-     $invt->org_id = $_POST['shipping_org_id'][$i];
-     $invt->quantity = $transaction_quantity;
-     $invt->reference_type = 'table';
-     $invt->reference_key_name = 'sd_so_header';
-     $invt->reference_key_value = $_POST['sd_so_header_id'][$i];
-     $invt->reason = 'SO Picking';
-     $invt->sd_so_line_id = $_POST['sd_so_line_id'][$i];
-     $invt->audit_trial();
-     $invt->_before_save();
-     $invt->save();
-     $invt->_after_save();
     }
 
     $sol->picked_quantity += $_POST['line_quantity'][$i];
     $sol->line_status = 'PICKED';
-    $sol->audit_trial();
     $sol->save();
     echo "<br> Delivery Line is succefully created. Line Id - " . $del_line->sd_delivery_line_id;
    }
+  }
+ }
+
+ private function _create_inv_transaction($del_quantity, $i, $item_id_m) {
+  $dbc;
+  $onhand = new onhand();
+  $onhand->item_id_m = $item_id_m;
+  $onhand_i = $onhand->findOnhand_byItemId();
+  if (empty($onhand_i)) {
+   echo "<br>Failed to complete the inventory transaction as there is not enough onhand. Error @ sd_Delivery_header @@ line " . __LINE__;
+   $dbc->rollback = true;
+   return;
+  }
+  foreach ($onhand_i as $oh_data) {
+   $transaction_quantity = 0;
+   if ($oh_data->onhand <= 0) {
+    continue;
+   }
+   if ($del_quantity <= 0) {
+    break;
+   }
+   if ($oh_data->onhand >= $del_quantity) {
+    $transaction_quantity = $del_quantity;
+    $del_quantity = 0;
+   } else {
+    $transaction_quantity = $oh_data->onhand;
+    $del_quantity = $del_quantity - $oh_data->onhand;
+   }
+   $invt = new inv_transaction();
+   $invt->transaction_type_id = 14;
+   $invt->to_subinventory_id = $_POST['staging_subinventory_id'][$i];
+   $invt->to_locator_id = $_POST['staging_locator_id'][$i];
+   $invt->from_subinventory_id = $oh_data->subinventory_id;
+   $invt->from_locator_id = $oh_data->locator_id;
+   $invt->item_id_m = $item_id_m;
+   $invt->uom_id = $_POST['uom_id'][$i];
+   $invt->org_id = $_POST['shipping_org_id'][$i];
+   $invt->quantity = $transaction_quantity;
+   $invt->reference_type = 'table';
+   $invt->reference_key_name = 'sd_so_header';
+   $invt->reference_key_value = $_POST['sd_so_header_id'][$i];
+   $invt->reason = 'SO Picking';
+   $invt->sd_so_line_id = $_POST['sd_so_line_id'][$i];
+   $invt->_before_save();
+   $invt->save();
+   $invt->_after_save();
   }
  }
 

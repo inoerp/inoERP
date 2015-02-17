@@ -39,28 +39,27 @@
   }
   echo '</div>';
  }
- 
-  if (property_exists($$class, 'primary_column')) {
+
+ if (property_exists($$class, 'primary_column')) {
   $primary_column_h = $class::$primary_column;
+
+  if (!empty($$class->$primary_column_h)) {
+   $user_creationBy = user::find_by_id($$class->created_by);
+   $user_lastUpdateBy = user::find_by_id($$class->last_update_by);
+   echo '<div id="document_history" ><ul id="document_history_ul">';
+   echo '<li id="created_by">Created By : ' . $user_creationBy->username . '</li>';
+   echo '<li id="creation_date">Creation Date : ' . $$class->creation_date . '</li>';
+   echo '<li id="last_update_by">Last Update By : ' . $user_lastUpdateBy->username . '</li>';
+   echo '<li id="last_update_date">Last Update Date : ' . $$class->last_update_date . '</li>';
+   echo '</ul></div>';
+  }
  }
- if (!empty($$class->$primary_column_h)) {
-  $user_creationBy = user::find_by_id($$class->created_by);
-  $user_lastUpdateBy = user::find_by_id($$class->last_update_by);
-  echo '<div id="document_history" ><ul id="document_history_ul">';
-  echo '<li id="created_by">Created By : ' . $user_creationBy->username . '</li>';
-  echo '<li id="creation_date">Creation Date : ' . $$class->creation_date . '</li>';
-  echo '<li id="last_update_by">Last Update By : ' . $user_lastUpdateBy->username . '</li>';
-  echo '<li id="last_update_date">Last Update Date : ' . $$class->last_update_date . '</li>';
-  echo '</ul></div>';
- }
+
 
  if (!empty($reference_table) && !empty($reference_id)) {
   echo '<div id="comment_form" class="none">';
   include_once '../../comment.php';
   echo '</div>';
  }
-
-
- 
  ?>
 </div>

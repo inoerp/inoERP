@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -14,7 +15,6 @@
  * Contains all the fp_mds_header information, such as - item_number, description ,  org_id, etc.
  * 
  */
-
 // public $rev_enabled_cb;  needs to be dropped - use item rev only
 class item extends dbObject {
 
@@ -39,6 +39,11 @@ class item extends dbObject {
   'ITEM' => 'Item Level',
   'ORG' => 'Organization Level',
   'GLOBAL' => 'Global Level',
+ ];
+ public static $am_asset_type_a = [
+  'ASSET_ITEM' => 'Asset Item',
+  'ASSET_ACTIVITY' => 'Asset Activity',
+  'ASSET_COMPONENT' => 'Asset Component',
  ];
  public static $ls_generation_a = [
   'PRE_DEFINED' => 'Pre Defined',
@@ -195,13 +200,26 @@ class item extends dbObject {
   "costing_enabled_cb",
   "inventory_asset_cb",
   "build_in_wip_cb",
-  "allow_negative_balance_cb"
+  "allow_negative_balance_cb",
+  'am_asset_type',
+  'am_activity_cause',
+  'am_activity_type',
+  'am_activity_source',
  ];
  public $initial_search = [
   'item_id',
-//  "item_number",
-//  "item_status",
-//  'item_id_m',
+  "customer_ordered_cb",
+  "internal_ordered_cb",
+  "shippable_cb",
+  "returnable_cb",
+  "purchased_cb",
+  "use_asl_cb",
+  "bom_enabled_cb",
+  "costing_enabled_cb",
+  "inventory_asset_cb",
+  "build_in_wip_cb",
+  "item_number",
+   'am_asset_type',
  ];
  public $column = [
   'item_id',
@@ -410,6 +428,10 @@ class item extends dbObject {
  public $overwrite_minmax_multibin_size;
  public $sourcing_rule;
  public $update_revision_cb;
+ public $am_asset_type;
+ public $am_activity_cause;
+ public $am_activity_type;
+ public $am_activity_source;
  private $_existing_rev_number = false;
  private $_eco_number = false;
  private $_effective_start_date = false;
@@ -445,8 +467,8 @@ class item extends dbObject {
   $ol = option_line::find_by_option_id($option_header->option_header_id);
   return $ol;
  }
- 
-  Public static function planning_method() {
+
+ Public static function planning_method() {
   $option_header = option_header::find_by_name('MP_PLANNING_METHOD');
   $ol = option_line::find_by_option_id($option_header->option_header_id);
   return $ol;

@@ -257,7 +257,7 @@ class comment extends dbObject {
   echo '</div>';
  }
 
- public static function comment_list($reference_table, $reference_id, $extension_id) {
+ public static function xxcomment_list($reference_table, $reference_id, $extension_id) {
   $pageno = !empty($_GET['pageno']) ? $_GET['pageno'] : 1;
   $per_page = !empty($_GET['per_page']) ? $_GET['per_page'] : 10;
   $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
@@ -315,6 +315,76 @@ class comment extends dbObject {
 
 
     $comment_string .= '</ul>';
+   }
+  }
+
+
+  $pagination = new pagination($pageno, $per_page, $total_count);
+  if (strpos($_SERVER['SCRIPT_NAME'], 'content.php') !== false) {
+   $pagination->setProperty('_path', 'content');
+  } else if (strpos($_SERVER['SCRIPT_NAME'], 'form.php') !== false) {
+   $pagination->setProperty('_path', 'form');
+  }
+
+  $pagination->setProperty('_query_string', $query_string);
+  $comment_string .= $pagination->show_pagination();
+
+  return $comment_string;
+ }
+ 
+ public static function comment_list($reference_table, $reference_id, $extension_id) {
+  $pageno = !empty($_GET['pageno']) ? $_GET['pageno'] : 1;
+  $per_page = !empty($_GET['per_page']) ? $_GET['per_page'] : 10;
+  $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
+  $comment_string = " ";
+  $sql = "SELECT comment.comment_id, comment.comment, comment.created_by,  comment.creation_date, "
+   . "  comment.creation_date, user.username  "
+   . " FROM comment left JOIN user ON user.user_id = comment.created_by" .
+   " WHERE reference_table = '{$reference_table}'
+           AND reference_id = '{$reference_id}' ";
+  if (!empty($per_page)) {
+   $total_count = self::count_by_reference_table_and_id($reference_table, $reference_id);
+   $pagination = new pagination($pageno, $per_page, $total_count);
+   $sql .=" LIMIT {$per_page} ";
+   $sql .=" OFFSET {$pagination->offset()}";
+  }
+  $result = self::find_by_sql($sql);
+
+  if (count($result) > 0) {
+   foreach ($result as $records) {
+    $allow_content_update = false;
+    if ((!empty($_SESSION['user_id'])) && ($records->created_by == $_SESSION['user_id'])) {
+     $allow_content_update = true;
+    } elseif ((!empty($_SESSION['user_roles'])) && (in_array('ADMIN', $_SESSION['user_roles']))) {
+     $allow_content_update = true;
+    }
+    $comment_file = file::find_by_reference_table_and_id('comment', $records->comment_id);
+    $comment_string .= "<div id=\"comment_id_$records->comment_id\" class=\"panel panel-info\">";
+    $comment_string .= '<div class="panel-heading">';
+    $comment_string .= '<ul class="header_li">';
+    if (!empty($records->username)) {
+     $comment_string .= '<li class="comment_by"><a href="' . HOME_URL . 'form.php?class_name=user_activity_v&mode=2&user_id=' . ($records->created_by) . '">' . ($records->username) . '</a></li>';
+    } else {
+     $comment_string .= '<li class="comment_by">selfWeb</li>';
+    }
+    $comment_string .= '<li class="creation_date">' . $records->creation_date . '</li>';
+    if ($allow_content_update) {
+     $comment_string .= '<li class="delete_update"><button name="delete_button" class="delete_button btn btn-danger " value="' .
+      $records->comment_id . '" >Delete</button> ';
+     $comment_string .= ' <button name="update_button" class="update_button btn btn-warning " value="' .
+      $records->comment_id . '" >Update</button> </li>';
+    }
+    $comment_string .= '<li"><a href="#commentForm" class="comment-reply btn btn-default" role="button">Reply</a></li>';
+    $comment_string .= '</ul>';
+    $comment_string .= '</div>';
+    $comment_string .= '<div class="comment panel-body">' . nl2br($records->comment) ;
+    if (count($comment_file) > 0) {
+     foreach ($comment_file as $file_record) {
+      $comment_string .= '<p><a href=' . HOME_URL . $file_record->file_path . $file_record->file_name . '>' . $file_record->file_name . '</a></p>';
+     }
+    }
+    $comment_string .= '</div>';
+    $comment_string .= '</div>';
    }
   }
 

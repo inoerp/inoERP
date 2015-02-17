@@ -29,6 +29,8 @@ setValFromSelectPage.prototype.setVal = function () {
  var sd_delivery_line_id = this.sd_delivery_line_id;
  var rowClass = '.' + localStorage.getItem("row_class");
  var fieldClass = '.' + localStorage.getItem("field_class");
+ var adding_header = localStorage.getItem("adding_header");
+ 
  if (sd_delivery_header_id === -1) {
   alert('Selected delivery is assigned to a differnt delivery number');
   return;
@@ -40,7 +42,7 @@ setValFromSelectPage.prototype.setVal = function () {
   $('#content').find(rowClass).find('.sd_delivery_line_id').val(sd_delivery_line_id);
  }
 
- if (sd_delivery_header_id) {
+ if (sd_delivery_header_id && adding_header == 99) {
   $('#sd_delivery_header_id').val(sd_delivery_header_id);
  }
 
@@ -93,7 +95,8 @@ setValFromSelectPage.prototype.setVal = function () {
  });
 
  localStorage.removeItem("row_class");
- localStorage.removeItem("row_class");
+ localStorage.removeItem("fieldClass");
+ localStorage.removeItem("adding_header");
 
 };
 
@@ -133,7 +136,6 @@ $(document).ready(function () {
           var fieldClass = $(this).closest('td').find('.select_sd_number').prop('class');
           localStorage.setItem("row_class", rowClass);
           localStorage.setItem("field_class", fieldClass);
-//          var openUrl = 'select.php?class_name=sd_delivery_line&sd_delivery_header_id=-1';
           var openUrl = 'select.php?class_name=sd_delivery_line';
           void window.open(openUrl, '_blank',
                   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
@@ -141,8 +143,9 @@ $(document).ready(function () {
 
 
  //selecting Header Id
- $('content').off("click", '.sd_delivery_header_id.select_popup')
+ $('body').off("click", '.sd_delivery_header_id.select_popup')
          .on("click", '.sd_delivery_header_id.select_popup', function () {
+          localStorage.setItem("adding_header", '99');
           void window.open('select.php?class_name=sd_delivery_header&status=AWAITING_SHIPPING', '_blank',
                   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
          });

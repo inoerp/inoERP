@@ -10,94 +10,94 @@ class sd_delivery_line extends dbObject {
  public static $key_column = 'sd_so_line_id';
  public static $module = "inv";
  public $field_a = [
-		 'sd_delivery_line_id',
-		 'sd_delivery_header_id',
-		 'sd_so_header_id',
-		 'sd_so_line_id',
-		 'shipping_org_id',
-		 'item_id_m',
-		 'quantity',
-		 'staging_subinventory_id',
-		 'staging_locator_id',
-		 'delivery_status',
-		 'picking_date',
-		 'actual_ship_date',
-		 'reference_doc_type',
-		 'reference_doc_number',
-		 'line_uom_id',
-		 'volume_uom_id',
-		 'total_volume',
-		 'weight_uom_id',
-		 'total_weight',
-		 'created_by',
-		 'creation_date',
-		 'last_update_by',
-		 'last_update_date',
+  'sd_delivery_line_id',
+  'sd_delivery_header_id',
+  'sd_so_header_id',
+  'sd_so_line_id',
+  'shipping_org_id',
+  'item_id_m',
+  'quantity',
+  'staging_subinventory_id',
+  'staging_locator_id',
+  'delivery_status',
+  'picking_date',
+  'actual_ship_date',
+  'reference_doc_type',
+  'reference_doc_number',
+  'line_uom_id',
+  'volume_uom_id',
+  'total_volume',
+  'weight_uom_id',
+  'total_weight',
+  'created_by',
+  'creation_date',
+  'last_update_by',
+  'last_update_date',
  ];
  //variables used for showing data
 
  public $account = [
  ];
  public $fields_inForm_notInDataBase = [
-		 'so_line_shipped_quantity',
-		 'so_number',
-		 'so_line_number',
-		 'shipment_number',
-		 'item_number',
-		 'item_description',
-		 'line_uom_id',
-		 'ar_customer_id',
-		 'ar_customer_number',
-		 'ar_customer_name',
-		 'ar_customer_site_id',
-		 'ar_customer_site_number',
-		 'ar_customer_site',
-		 'action'
+  'so_line_shipped_quantity',
+  'so_number',
+  'so_line_number',
+  'shipment_number',
+  'item_number',
+  'item_description',
+  'line_uom_id',
+  'ar_customer_id',
+  'ar_customer_number',
+  'ar_customer_name',
+  'ar_customer_site_id',
+  'ar_customer_site_number',
+  'ar_customer_site',
+  'action'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-		 "sd_delivery_header_id",
-		 'shipping_org_id',
-		 'so_line_number',
-		 'shipped_quantity',
-		 'quantity'
+  "sd_delivery_header_id",
+  'shipping_org_id',
+  'so_line_number',
+  'shipped_quantity',
+  'quantity'
  ];
  public $requiredField = [
-		 'sd_so_header_id',
-		 'sd_so_line_id',
-		 'staging_subinventory_id',
-		 'item_description',
-		 'line_uom_id',
-		 'quantity'
+  'sd_so_header_id',
+  'sd_so_line_id',
+  'staging_subinventory_id',
+  'item_description',
+  'line_uom_id',
+  'quantity'
  ];
  public $initial_search = [
-		 'sd_delivery_line_id',
-		 'sd_delivery_header_id',
-		 'sd_so_header_id',
-		 'sd_so_line_id',
-		 'shipping_org_id',
-		 'item_id_m',
-		 'picking_date',
+  'sd_delivery_line_id',
+  'sd_delivery_header_id',
+  'sd_so_header_id',
+  'sd_so_line_id',
+  'shipping_org_id',
+  'item_id_m',
+  'picking_date',
  ];
  public $column = [
-		 'sd_delivery_line_id',
-		 'sd_delivery_header_id',
-		 'sd_so_header_id',
-		 'sd_so_line_id',
-		 'shipping_org_id',
-		 'item_id_m',
-		 'quantity',
-		 'staging_subinventory_id',
-		 'staging_locator_id',
-		 'delivery_status',
-		 'picking_date',
-		 'actual_ship_date',
-		 'reference_doc_type',
-		 'reference_doc_number',
-		 'line_uom_id',
-		 'volume_uom_id',
-		 'total_volume',
-		 'weight_uom_id',
-		 'total_weight',
+  'sd_delivery_line_id',
+  'sd_delivery_header_id',
+  'sd_so_header_id',
+  'sd_so_line_id',
+  'shipping_org_id',
+  'item_id_m',
+  'quantity',
+  'staging_subinventory_id',
+  'staging_locator_id',
+  'delivery_status',
+  'picking_date',
+  'actual_ship_date',
+  'reference_doc_type',
+  'reference_doc_number',
+  'line_uom_id',
+  'volume_uom_id',
+  'total_volume',
+  'weight_uom_id',
+  'total_weight',
  ];
  public $sd_delivery_line_id;
  public $sd_delivery_header_id;
@@ -139,144 +139,200 @@ class sd_delivery_line extends dbObject {
  public $action;
 
  public function _before_save() {
-	if (($this->action == 'REVERSE_PICKING')) {
-	 echo "<br> Starting Sales Line Reverse Picking.";
-	 $this->_reverse_picking();
-	 return 10;
-	} else if (($this->action == 'REMOVE_LINE')) {
-	 echo "<br> Starting to remove the line from delivery ";
-	 $this->sd_delivery_header_id = -1;
-	 $this->audit_trial();
-	 $this->save();
-	 return 10;
-	} else if (($this->action == 'ADD_LINE')) {
-	 echo "<br> Starting to add the line to delivery ";
-	 if (empty($this->sd_delivery_header_id) || $this->sd_delivery_header_id == -1) {
-		echo "<br> Error - No Header Id found! @ sd_delivery_line @@" . __LINE__;
-	 }
-	 $this->audit_trial();
-	 $this->save();
-	 return 10;
-	} else if (($this->action == 'COMPLETE_SHIPMENT')) {
-	 echo "<br> Starting to complete the shipment ";
-	 $this->_complete_shipment();
-	 return 10;
-	} else {
-	 echo "<br> No Action For Line";
-	 return 10;
-	}
+  if (($this->action == 'REVERSE_PICKING')) {
+   echo "<br> Starting Sales Line Reverse Picking.";
+   $this->_reverse_picking();
+   return 10;
+  } else if (($this->action == 'REMOVE_LINE')) {
+   echo "<br> Starting to remove the line from delivery ";
+   $this->sd_delivery_header_id = -1;
+   $this->audit_trial();
+   $this->save();
+   return 10;
+  } else if (($this->action == 'ADD_LINE')) {
+   echo "<br> Starting to add the line to delivery ";
+   if (empty($this->sd_delivery_header_id) || $this->sd_delivery_header_id == -1) {
+    echo "<br> Error - No Header Id found! @ sd_delivery_line @@" . __LINE__;
+   }
+   $this->audit_trial();
+   $this->save();
+   return 10;
+  } else if (($this->action == 'COMPLETE_SHIPMENT')) {
+   echo "<br> Starting to complete the shipment ";
+   $this->_complete_shipment();
+   return 10;
+  } else {
+   echo "<br> No Action For Line";
+   return 10;
+  }
  }
 
  private function _reverse_picking() {
-	/*
-	 * 1. Update SO Line to Make it available for next picking
-	 * 2. Delete the delivery line
-	 * 3. No material / finance transaction - Onhand 'll remain in staging location and 
-	 * needs to be manually moved back to stock through sub inventory transfer/move order
-	 */
-	$sol = new sd_so_line();
-	$sol->findBy_id($this->sd_so_line_id);
-	$sol->line_status = 'AWAITING_PICKING';
-	$sol->audit_trial();
-	$sol->save();
-	echo "<br>Sales Order Line Status is Sucessfully Updated";
-	$this->delete();
-	echo "<br>Delivery Line is Sucessfully Deleted";
+  /*
+   * 1. Update SO Line to Make it available for next picking
+   * 2. Delete the delivery line
+   * 3. No material / finance transaction - Onhand 'll remain in staging location and 
+   * needs to be manually moved back to stock through sub inventory transfer/move order
+   */
+  $sol = new sd_so_line();
+  $sol->findBy_id($this->sd_so_line_id);
+  $sol->line_status = 'AWAITING_PICKING';
+  $sol->audit_trial();
+  $sol->save();
+  echo "<br>Sales Order Line Status is Sucessfully Updated";
+  $this->delete();
+  echo "<br>Delivery Line is Sucessfully Deleted";
  }
 
  private function _update_ar_interface() {
-	$ar_ti = new ar_transaction_interface();
-	$soh = new sd_so_header();
-	$soh->findBy_id($this->sd_so_header_id);
-	$ar_ti->bu_org_id = $soh->bu_org_id;
-	$legal_org_id = org::find_by_id($ar_ti->bu_org_id)->legal_org_id;
-	$ar_ti->ledger_id = legal::find_by_orgId($legal_org_id)->ledger_id;
-	$sd_transaction_type = $soh->document_type;
-	$sd_doc = new sd_document_type();
-	$sd_doc->findBy_id($sd_transaction_type);
-	$ar_ti->transaction_type = $sd_doc->ar_transaction_type;
-	$ar_ti->ar_customer_id = $soh->ar_customer_id;
-	$ar_ti->ar_customer_site_id = $soh->ar_customer_site_id;
-	$ar_ti->currency = $soh->document_currency;
-	$ar_ti->payment_term_id = $soh->payment_term_id;
-	$ar_tp = new ar_transaction_type();
-	$ar_tp->findBy_id($ar_ti->transaction_type);
-	$ar_ti->receivable_ac_id = $ar_tp->receivable_ac_id;
-	$ar_ti->revenue_ac_id = $ar_tp->revenue_ac_id;
-	$ar_ti->tax_code_id = $ar_tp->tax_ac_id;
-	$ar_ti->item_id_m = $this->item_id_m;
-	$ar_ti->inv_line_quantity = $this->quantity;
-	$sol = new sd_so_line();
-	$sol->findBy_id($this->sd_so_line_id);
-	$ar_ti->inv_unit_price = $sol->unit_price;
-	$ar_ti->inv_line_price = $ar_ti->inv_line_quantity * $ar_ti->inv_unit_price;
-	$ar_ti->tax_code_id = $sol->tax_code_id;
-	$ar_ti->item_description = $sol->item_description;
-	$mm_tax = new mdm_tax_code();
-	$mm_tax->findBy_id($ar_ti->tax_code_id);
-	if (!empty($mm_tax->percentage)) {
-	 $ar_ti->tax_amount = ($ar_ti->inv_line_price * $mm_tax->percentage) / 100;
-	} else if (!empty($mm_tax->tax_amount)) {
-	 $ar_ti->tax_amount = $mm_tax->tax_amount;
-	}
-	$ar_ti->line_type = $sol->line_type;
-	$ar_ti->line_description = $sol->line_description;
-	$ar_ti->uom_id = $sol->uom_id;
-	$ar_ti->reference_type = 'table';
-	$ar_ti->reference_key_name = 'sd_so_line';
-	$ar_ti->reference_key_value = $ar_ti->sd_so_line_id = $this->sd_so_line_id;
-	$ar_ti->sd_so_header_id = $this->sd_so_header_id;
-	$ar_ti->audit_trial();
-	try{
-	$ar_ti->save();
-	}catch(Exception $e){
-	 echo "<br>Transfer to AR Interface Failed. Error @sd_delivery_line @@ ".__LINE__. $e->getMessage();
-	 $this->rollback = true;
-	}
+  $ar_ti = new ar_transaction_interface();
+  $soh = new sd_so_header();
+  $soh->findBy_id($this->sd_so_header_id);
+  $ar_ti->bu_org_id = $soh->bu_org_id;
+  $legal_org_id = org::find_by_id($ar_ti->bu_org_id)->legal_org_id;
+  $ar_ti->ledger_id = legal::find_by_orgId($legal_org_id)->ledger_id;
+  $sd_transaction_type = $soh->document_type;
+  $sd_doc = new sd_document_type();
+  $sd_doc->findBy_id($sd_transaction_type);
+  $ar_ti->transaction_type = $sd_doc->ar_transaction_type;
+  $ar_ti->ar_customer_id = $soh->ar_customer_id;
+  $ar_ti->ar_customer_site_id = $soh->ar_customer_site_id;
+  $ar_ti->currency = $soh->document_currency;
+  $ar_ti->payment_term_id = $soh->payment_term_id;
+  $ar_tp = new ar_transaction_type();
+  $ar_tp->findBy_id($ar_ti->transaction_type);
+  $ar_ti->receivable_ac_id = $ar_tp->receivable_ac_id;
+  $ar_ti->revenue_ac_id = $ar_tp->revenue_ac_id;
+  $ar_ti->tax_code_id = $ar_tp->tax_ac_id;
+  $ar_ti->item_id_m = $this->item_id_m;
+  $ar_ti->inv_line_quantity = $this->quantity;
+  $sol = new sd_so_line();
+  $sol->findBy_id($this->sd_so_line_id);
+  $ar_ti->inv_unit_price = $sol->unit_price;
+  $ar_ti->inv_line_price = $ar_ti->inv_line_quantity * $ar_ti->inv_unit_price;
+  $ar_ti->tax_code_id = $sol->tax_code_id;
+  $ar_ti->item_description = $sol->item_description;
+  $mm_tax = new mdm_tax_code();
+  $mm_tax->findBy_id($ar_ti->tax_code_id);
+  if (!empty($mm_tax->percentage)) {
+   $ar_ti->tax_amount = ($ar_ti->inv_line_price * $mm_tax->percentage) / 100;
+  } else if (!empty($mm_tax->tax_amount)) {
+   $ar_ti->tax_amount = $mm_tax->tax_amount;
+  }
+  $ar_ti->line_type = $sol->line_type;
+  $ar_ti->line_description = $sol->line_description;
+  $ar_ti->uom_id = $sol->uom_id;
+  $ar_ti->reference_type = 'table';
+  $ar_ti->reference_key_name = 'sd_so_line';
+  $ar_ti->reference_key_value = $ar_ti->sd_so_line_id = $this->sd_so_line_id;
+  $ar_ti->sd_so_header_id = $this->sd_so_header_id;
+  $ar_ti->audit_trial();
+  try {
+   $ar_ti->save();
+  } catch (Exception $e) {
+   echo "<br>Transfer to AR Interface Failed. Error @sd_delivery_line @@ " . __LINE__ . $e->getMessage();
+   $this->rollback = true;
+  }
  }
 
  private function _complete_shipment() {
-	/*
-	 * 1. Update SO Line with the shipment qty and status
-	 * 2. Inventory Trandsaction
-	 * 3. Update the delivery line to SHIPPED
-	 * needs to be manually moved back to stock through sub inventory transfer/move order
-	 * 4. Insert the data in ar_transaction_interface
-	 */
-	$sol = new sd_so_line();
-	$sol->findBy_id($this->sd_so_line_id);
-	$sol->line_status = 'SHIPPED';
-	$sol->actual_ship_date = current_time(1);
-	$sol->shipped_quantity = $this->quantity;
-	$sol->audit_trial();
-	$sol->save();
-	echo "<br>Sales Order Line Status is Sucessfully Updated";
+  /*
+   * 1. Update SO Line with the shipment qty and status
+   * 2. Inventory Trandsaction
+   * 3. Update the delivery line to SHIPPED
+   * needs to be manually moved back to stock through sub inventory transfer/move order
+   * 4. Insert the data in ar_transaction_interface
+   */
+  global $dbc;
+  $sol = new sd_so_line();
+  $sol->findBy_id($this->sd_so_line_id);
 
-	$invt = new inv_transaction();
-	$invt->transaction_type_id = 15;
-	$invt->org_id = $this->shipping_org_id;
-	$invt->from_subinventory_id = $this->staging_subinventory_id;
-	$invt->from_locator_id = $this->staging_locator_id;
-	$invt->item_id_m = $this->item_id_m;
-	$invt->uom_id = $this->line_uom_id;
-	$invt->quantity = $this->quantity;
-	$invt->reference_type = 'table';
-	$invt->reference_key_name = 'sd_so_header';
-	$invt->reference_key_value = $this->sd_delivery_header_id;
-	$invt->reason = 'SO Shipping';
-	$invt->sd_so_line_id = $this->sd_so_line_id;
-	$invt->audit_trial();
-	$invt->_before_save();
-	$invt->save();
-	$invt->_after_save();
-	echo "<br>Sales Order Line Status is Sucessfully Updated";
+  //update the inv transaction & onhand
+  if ($sol->kit_cb) {
+   if (!empty($sol->bom_config_header_id)) {
+    $bom_lines_all = bom_config_line::find_by_parent_id($sol->bom_config_header_id);
+    foreach ($bom_lines_all as $bom_lines) {
+     $item_i = item::find_by_item_id_m($bom_lines->component_item_id_m);
+     $qty = $this->quantity * $bom_lines->usage_quantity;
+     try {
+      $this->_create_inv_transaction($item_i->item_id_m, $qty);
+     } catch (Exception $e) {
+      echo "<br>Failed to complete the inventory transaction. Error @ sd_delivery_header @@ line " . __LINE__;
+      $dbc->rollback = true;
+      return;
+     }
+    }
+   }
+  } else {
+   try {
+    $this->_create_inv_transaction($this->item_id_m, $this->quantity);
+   } catch (Exception $e) {
+    echo "<br>Failed to complete the inventory transaction. Error @ sd_delivery_leader @@ line " . __LINE__;
+    $dbc->rollback = true;
+    return;
+   }
+  }
 
-	$this->_update_ar_interface();
+  //update AR Interface
+  try {
+   $this->_update_ar_interface();
+  } catch (Exception $e) {
+   echo "<br>Failed to update the AR Interface. Error @ sd_delivery_leader @@ line " . __LINE__;
+   $dbc->rollback = true;
+   return;
+  }
 
-	$this->delivery_status = 'SHIPPED';
-	$this->audit_trial();
-	$this->save();
-	echo "<br>Delivery Line Status is Sucessfully Updated";
+
+  //Update SO 
+  try {
+   $sol->line_status = 'SHIPPED';
+   $sol->actual_ship_date = current_time(1);
+   $sol->shipped_quantity = $this->quantity;
+   $sol->save();
+  } catch (Exception $e) {
+   echo "<br>Failed to SO Line Status. Error @ sd_delivery_leader @@ line " . __LINE__;
+   $dbc->rollback = true;
+   return;
+  }
+
+
+  //Update Delivery Line Status
+  $this->delivery_status = 'SHIPPED';
+  try {
+   $this->audit_trial();
+   $this->save();
+   echo "<br>Delivery Line Status is Sucessfully Updated";
+  } catch (Exception $e) {
+   echo "<br>Failed to update the delivery line Status. Error @ sd_delivery_leader @@ line " . __LINE__;
+   $dbc->rollback = true;
+   return;
+  }
+ }
+
+ private function _create_inv_transaction($item_id_m, $qty) {
+  global $dbc;
+  $invt = new inv_transaction();
+  $invt->transaction_type_id = 15;
+  $invt->org_id = $this->shipping_org_id;
+  $invt->from_subinventory_id = $this->staging_subinventory_id;
+  $invt->from_locator_id = $this->staging_locator_id;
+  $invt->item_id_m = $item_id_m;
+  $invt->uom_id = $this->line_uom_id;
+  $invt->quantity = $qty;
+  $invt->reference_type = 'table';
+  $invt->reference_key_name = 'sd_delivery_header';
+  $invt->reference_key_value = $this->sd_delivery_header_id;
+  $invt->reason = 'SO Shipping';
+  $invt->sd_so_line_id = $this->sd_so_line_id;
+  try {
+   $invt->_before_save();
+   $invt->save();
+   $invt->_after_save();
+  } catch (Exception $e) {
+   echo "<br>Failed to complete the inventory transaction. Error @ sd_delivery_line @@ line " . __LINE__;
+   $dbc->rollback = true;
+   return;
+  }
  }
 
 }

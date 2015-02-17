@@ -87,7 +87,6 @@
        <tbody class="form_data_line_tbody fa_asset_assignment_values" >
         <?php
         $count = 0;
-        $f = new inoform();
         $fa_asset_assignment_object_ai = new ArrayIterator($fa_asset_assignment_object);
         $fa_asset_assignment_object_ai->seek($position);
         while ($fa_asset_assignment_object_ai->valid()) {
@@ -184,12 +183,13 @@
 
  </div> 
  </form>
+ <div id="pagination" style="clear: both;">
+ <?php echo ($total_count > 9 ) ? $pagination->show_pagination() : ''; ?>
+</div>
 </div>
 
 
-<div id="pagination" style="clear: both;">
- <?php echo $pagination->show_pagination(); ?>
-</div>
+
 
 <div id="js_data">
  <ul id="js_saving_data">

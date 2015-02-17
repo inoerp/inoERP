@@ -143,6 +143,8 @@ require_once(INC_MODULE . DS . "fa" . DS . "depreciation_method" . DS . "class_f
 require_once(INC_MODULE . DS . "fa" . DS . "depreciation_method" . DS . "class_fa_depreciation_method_rate.inc");
 require_once(INC_MODULE . DS . "fa" . DS . "depreciation" . DS . "class_fa_depreciation_header.inc");
 require_once(INC_MODULE . DS . "fa" . DS . "depreciation" . DS . "class_fa_depreciation_line.inc");
+require_once(INC_MODULE . DS . "am" . DS . "asset" . DS . "class_am_asset.inc");
+require_once(INC_MODULE . DS . "am" . DS . "asset" . DS . "class_am_activity_reference.inc");
 require_once(INC_PO . DS . "class_po_header.inc");
 require_once(INC_PO . DS . "class_po_line.inc");
 require_once(INC_PO . DS . "class_po_detail.inc");

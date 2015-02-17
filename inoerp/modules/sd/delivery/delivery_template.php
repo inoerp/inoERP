@@ -11,9 +11,9 @@
     <div id="tabsHeader-1" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column header_field">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sd_delivery_header_id select_popup clickable">
+       <li><label class="ino-label"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sd_delivery_header_id select_popup clickable">
          Delivery Id</label><?php echo form::text_field_dsr('sd_delivery_header_id'); ?>
-        <a name="show" href="form.php?class_name=sd_delivery_header&<?php echo "mode=$mode"; ?>" class="show document_id sd_delivery_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <a name="show" href="form.php?class_name=sd_delivery_header&<?php echo "mode=$mode"; ?>" class="show document_id sd_delivery_header_id"><i class="fa fa-refresh"></i></a> 
        </li>
        <li><label>Inventory</label><?php echo $f->select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', $$class->shipping_org_id, '', '', 1, $readonly1); ?>       </li>
        <li><label>Number</label><?php echo $f->text_field('delivery_number', $$class->delivery_number, '8', '', '', '', $readonly1); ?></li>
@@ -42,8 +42,10 @@
       <ul class="column five_column">
        <li><label>Action</label>
         <?php
-        $action_readonly = ($$class->status == 'SHIPPED') ? 1 : '';
-        echo $f->select_field_from_array('action', sd_delivery_header::$action_a, '', 'action', '', '', $readonly, $action_readonly)
+        if($$class->status == 'SHIPPED'){
+          $$class->action_a = ['REMOVE_LINE' => 'Remove Line' ];
+        }
+        echo $f->select_field_from_array('action', $$class->action_a, '', 'action')
         ?>
        </li>
       </ul>
@@ -85,7 +87,7 @@
       <thead> 
        <tr>
         <th>Action</th>
-        <th>Delivery Line Id</th>
+        <th><label class="ino-label">Delivery Line Id</label></th>
         <th>SO Id</th>
         <th>Line Id</th>
         <th>SO #</th>
@@ -103,21 +105,16 @@
         $f->readonly2 = !empty($sd_delivery_line->sd_delivery_line_id) ? true : false;
         ?>         
         <tr class="sd_delivery_line<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove" /> </li>
-           <li><input type="checkbox" name="line_id_cb" class="line_id_cb" value="<?php echo htmlentities($sd_delivery_line->sd_delivery_line_id); ?>"></li>           
-           <?php echo form::hidden_field('sd_delivery_header_id', $$class->sd_delivery_header_id); ?>
-           <?php echo form::hidden_field('shipping_org_id', $$class->shipping_org_id); ?>
-           <?php echo form::hidden_field('transaction_type_id', $$class->transaction_type_id); ?>
-          </ul>
+         <td><?php
+          echo ino_inline_action($sd_delivery_line->sd_delivery_line_id, array('sd_delivery_header_id' => $$class->sd_delivery_header_id,
+           'shipping_org_id' => $$class->shipping_org_id,  'transaction_type_id' => $$class->transaction_type_id));
+          ?>
          </td>
          <td><?php form::text_field_wid2sr('sd_delivery_line_id'); ?>
           <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_delivery_line select_popup clickable"></td>
          <td><?php $f->text_field_wid2sr('sd_so_header_id'); ?></td>
-         <td><?php $f->text_field_wid2s('sd_so_line_id'); ?></td>
-         <td><?php $f->text_field_wid2s('so_number', 'select_so_number'); ?></td>
+         <td><?php $f->text_field_wid2sr('sd_so_line_id'); ?></td>
+         <td><?php $f->text_field_wid2r('so_number', 'select_so_number'); ?></td>
          <td><?php $f->text_field_wid2sr('so_line_number'); ?></td>
          <td><?php echo $f->number_field('quantity', $sd_delivery_line->quantity, '8', '', '', '', 1); ?></td>
          <td><?php echo $f->number_field('shipped_quantity', $sd_delivery_line->shipped_quantity, '8', '', '', '', 1); ?></td>

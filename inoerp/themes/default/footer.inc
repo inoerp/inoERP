@@ -1,7 +1,7 @@
 <!--footer content-->
 <div id="comment_form" class="none">
  <?php
- global $reference_table, $reference_id, $comment;
+ 
  if (!empty($reference_table) && !empty($reference_id)) {
   include_once HOME_DIR . '/comment.php';
  }

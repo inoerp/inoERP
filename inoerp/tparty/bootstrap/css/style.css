@@ -4062,16 +4062,6 @@ ul.form_top{
 }
 
 
-/*.small_box box_heading,
-.large_box box_heading,
-.medium_box box_heading{
- display: block;
- font-weight: bold;
- width: 100%;
- text-shadow: 0px 0px 10px #fff;
- margin: 5px;
-}*/
-
 .second_rowset ul li{
  display : inline-block;
  min-width: 200px;
@@ -4079,14 +4069,11 @@ ul.form_top{
  float: left;
 }
 
-.small_box, .medium_box, .large_box{
- border-radius: 10px;
- box-shadow: 2px 2px 2px 2px #A9C6C9;
- background: none repeat scroll 0% 0% #CED6D7;
- display: inline-block;
- margin-right: 20px;
- padding-bottom: 10px;
- text-align: center;
+.small_box, .medium_box, .large_box, .extra_large_box{
+background: none repeat scroll 0% 0% rgba(240, 241, 242, 0.34);
+display: inline-block;
+margin-right: 20px;
+padding-bottom: 10px;
 }
 
 ul.small_box li, ul.medium_box li, ul.large_box li{
@@ -4108,8 +4095,12 @@ ul.small_box li, ul.medium_box li, ul.large_box li{
 }
 
 .large_box{
- width: 450px;
+ width: 680px;
  text-align: center;
+}
+
+.extra_large_box{
+ width: 980px;
 }
 
 .second_rowset ul li.large_box li{
@@ -4903,3 +4894,12 @@ h3.nav-panel{
 }
 
 
+.panel-ino-classy > .panel-heading {
+    color: #111;
+    background-color: rgba(238, 246, 206, 0.91);
+    border-color: rgba(222, 222, 222, 0.91);
+}
+
+.panel-ino-classy {
+    border-color: rgba(222, 222, 222, 0.91);
+}

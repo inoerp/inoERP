@@ -10,7 +10,9 @@ max-width: 1010px;
 }
 
 #category_relationDiv, #contents_listDiv{
-clear: both;
+    clear: both;
+    margin: 5px 0;
+    border-top: 10px solid #ccc;
 }
 
 table#category_list{

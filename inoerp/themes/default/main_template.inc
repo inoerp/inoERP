@@ -9,6 +9,7 @@
   ?>
   <meta name="keywords" content="ERP,PHP ERP,Open Source ERP ">
   <title><?php echo isset($pageTitle) ? $pageTitle . ' - inoERP!' : ' inoERP! ' ?></title>
+  <link rel="shortcut icon" type="image/x-icon" href="files/favicon.ico">
   <link href="<?php echo THEME_URL; ?>/public.css" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo THEME_URL; ?>/menu.css" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo THEME_URL; ?>/jquery.css" media="all" rel="stylesheet" type="text/css" />
@@ -204,7 +205,11 @@
     <div id="content">
      <div id="structure">
       <?php
-      echo (!empty($show_message)) ? $show_message : "";
+             if (!empty($show_message)) { 
+        echo '<div class="alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'.
+        $show_message.
+        '</div>';
+       }
       if (!empty($template_file_names)) {
        foreach ($template_file_names as $key => $tmpl_file) {
         include_once $tmpl_file;

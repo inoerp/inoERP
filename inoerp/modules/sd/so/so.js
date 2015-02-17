@@ -85,8 +85,8 @@ setValFromSelectPage.prototype.setVal = function () {
  if (this.kit_cb) {
   $('#content').find(rowClass).find('.kit_cb').prop('checked', true);
  }
- 
-  if (this.bom_config_header_id) {
+
+ if (this.bom_config_header_id) {
   var rowClass_b = '.' + localStorage.getItem("row_class_b");
   rowClass_b = rowClass_b.replace(/\s+/g, '.');
   $('#content').find(rowClass_b).find('.bom_config_header_id').val(this.bom_config_header_id);
@@ -96,7 +96,7 @@ setValFromSelectPage.prototype.setVal = function () {
   $("#sd_so_header_id").val(sd_so_header_id);
   $('a.show.sd_so_header_id').trigger('click');
  }
- 
+
  localStorage.removeItem("row_class");
  localStorage.removeItem("field_class");
  localStorage.removeItem("addressPopupDivId");
@@ -280,4 +280,8 @@ $(document).ready(function () {
           'width=1200,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
+ $('body').off('click', '#menu_button4_2, #menu_button4_2_1').on('click', '#menu_button4_2, #menu_button4_2_1', function () {
+  $('.line_status').val('ENTERED');
+  $('.picked_quantity, .shipped_quantity, .schedule_ship_date, .invoiced_quantity, .ar_transaction_header_id, .ar_transaction_line_id, .ar_transaction_number').val('');
+ });
 });
