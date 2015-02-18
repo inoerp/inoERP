@@ -893,11 +893,11 @@ contextMenuMain.prototype.contextMenu = function ()
  $('body').on('click', '#menu_button5_1', function () {
   $('#form_line').find('input[name="line_id_cb"]').prop('checked', false);
  });
- 
-  $('body').off('click', '#menu_button7').on('click', '#menu_button11', function () {
+
+ $('body').off('click', '#menu_button7').on('click', '#menu_button11', function () {
   void window.open('http://www.inoideas.org/help', '_blank');
  });
- 
+
  $('body').off('click', '#menu_button10').on('click', '#menu_button10', function () {
   $("#content").unbind("contextmenu");
  });
@@ -1062,7 +1062,7 @@ autoCompleteMain.prototype.autoComplete = function ()
        } else if (elemenType === 'TD') {
         var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
         $('#form_line, #form_line2').find(trClass).find(v_d).val(selected_value);
-         if (v_d.indexOf('_cb') > -1) {
+        if (v_d.indexOf('_cb') > -1) {
          $('#form_line, #form_line2').find(trClass).find(v_d).prop('checked', true);
         }
        }
@@ -1106,6 +1106,12 @@ fileUploadMain.prototype.fileUpload = function () {
     formData.append('attachments-' + i, file);
    });
   }
+
+  if ($('#upload_type').val()) {
+   upload_type = $('#upload_type').val();
+   class_name = $('.class_name').val();
+  }
+
   if (module_name !== null) {
    formData.append('module_name', module_name);
   }

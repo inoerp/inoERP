@@ -2828,7 +2828,7 @@ $(document).ready(function () {
   json_url: 'modules/inv/item/json_item.php',
   primary_column1: 'org_id'
  });
- 
+
 
 
  //auto complete for allowed BOM
@@ -2928,9 +2928,9 @@ $(document).ready(function () {
   if ($(this).siblings('.item_number').val()) {
    openUrl += '&item_number=' + $(this).siblings('.item_number').val();
   }
-  $(this).parent().parent().find('.popup_value').each(function(){
-   var dataName = $(this).prop('name').replace(/\[]+/g,'');
-   openUrl += '&'+dataName+'=' +  $(this).val();
+  $(this).parent().parent().find('.popup_value').each(function () {
+   var dataName = $(this).prop('name').replace(/\[]+/g, '');
+   openUrl += '&' + dataName + '=' + $(this).val();
   });
   void window.open(openUrl, '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
@@ -3611,16 +3611,16 @@ $(document).ready(function () {
 
  //FILE attachment
  var fu = new fileUploadMain();
- if($('#upload_type').val()){
+ if ($('#upload_type').val()) {
   var upload_type = $('#upload_type').val();
   fu.upload_type = upload_type;
   fu.class_name = $('.class_name').val();
   fu.directory = 'temp';
- }else{
+ } else {
   var upload_type = '';
  }
  fu.json_url = homeUrl + 'extensions/file/upload.php';
-fu.fileUpload();
+ fu.fileUpload();
 
  //popu for selecting AR Transaction
  $('body').on('click', '.select_transaction_number.select_popup', function () {
