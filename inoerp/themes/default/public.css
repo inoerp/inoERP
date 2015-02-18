@@ -1379,3 +1379,8 @@ ul.header_li li{
     vertical-align: middle !important;
     margin-top: 5px !important;
 }
+
+input.extra_large{
+        width: 100% !important;
+        text-align: left;  
+}

@@ -205,6 +205,7 @@ include_once("includes/functions/loader.inc");
     <div class="container">
      <div id="structure">
       <?php
+//      pa($_SESSION['user_profile']);
 //      pa(get_declared_classes());
       $content = new content();
       $subject_no_of_char = 50;

@@ -6,7 +6,7 @@ if (isset($_FILES)) {
  if (!empty($_POST['upload_type']) && ($_POST['upload_type'] != 'undefined')) {
 	$file->setProperty('_upload_type', $_POST['upload_type']);
  } else {
-	$file->setProperty('_upload_type', 'data_base');
+	$file->setProperty('_upload_type', 'only_server');
  }
  if (!empty($_POST['file_dir'])) {
 	$file->setProperty('_file_dir', $_POST['file_dir']);

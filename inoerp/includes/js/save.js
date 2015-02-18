@@ -1121,7 +1121,7 @@ fileUploadMain.prototype.fileUpload = function () {
   if (document_type !== null) {
    formData.append('directory', directory);
   }
-  $.ajax({
+  return $.ajax({
    url: json_url,
    data: formData,
    processData: false,

@@ -3611,8 +3611,16 @@ $(document).ready(function () {
 
  //FILE attachment
  var fu = new fileUploadMain();
+ if($('#upload_type').val()){
+  var upload_type = $('#upload_type').val();
+  fu.upload_type = upload_type;
+  fu.class_name = $('.class_name').val();
+  fu.directory = 'temp';
+ }else{
+  var upload_type = '';
+ }
  fu.json_url = homeUrl + 'extensions/file/upload.php';
- fu.fileUpload();
+fu.fileUpload();
 
  //popu for selecting AR Transaction
  $('body').on('click', '.select_transaction_number.select_popup', function () {

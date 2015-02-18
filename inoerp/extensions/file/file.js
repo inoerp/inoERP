@@ -10,13 +10,17 @@ $(document).ready(function() {
 	});
  }
 
-//mass uplaod
- 	var fu = new fileUploadMain();
- 	fu.json_url = 'extensions/file/upload.php';
- 	fu.upload_type = 'only_server';
- 	fu.class_name = $('.class_name').val();
- 	fu.directory = 'temp';
- 	fu.fileUpload();
+////mass uplaod
+// var fu = new fileUploadMain();
+// if($('#upload_type').val()){
+//  var upload_type = $('#upload_type').val();
+//  fu.upload_type = upload_type;
+//  fu.class_name = $('.class_name').val();
+//  fu.directory = 'temp';
+// }else{
+//  var upload_type = '';
+// }
+// fu.json_url = homeUrl + 'extensions/file/upload.php';
 	
 	
  function deleteFile(file_reference_id) {

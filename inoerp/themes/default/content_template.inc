@@ -1,6 +1,6 @@
-<?php 
-if(!empty($non_db_content_type)){
- include_once 'nondb_content_template.inc'; 
+<?php
+if (!empty($non_db_content_type)) {
+ include_once 'nondb_content_template.inc';
  return;
 }
 ?>
@@ -15,7 +15,10 @@ if(!empty($non_db_content_type)){
        <div id="content_divId">
         <!--    START OF FORM HEADER-->
         <div class="error"></div><div id="loading"></div>
-        <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
+        <?php
+        $f = new inoform();
+        echo (!empty($show_message)) ? $show_message : "";
+        ?> 
         <!--    End of place for showing error messages-->
         <div id="form_all">
          <div id ="form_header">
@@ -25,9 +28,11 @@ if(!empty($non_db_content_type)){
            <?php echo $f->hidden_field_withId('content_id', $$class->content_id); ?>
            <?php echo $f->hidden_field_withId('content_type_id', $content_type->content_type_id); ?>
            <?php echo $f->hidden_field_withId('content_type', $content_type_name); ?>
-           <div id="subject"><label>Subject : </label>
-            <?php echo form::text_field('subject', $$class->subject, 100) ?>
-            <span class="button"><a class="show2 content_id" href="content.php?content_id=<?php echo $$class->content_id; ?>&content_type=<?php echo $content_type_name ?>">View</a></span>
+           <div class="row">
+            <div class="col-sm-7"><?php echo $f->text_field('subject', $$class->subject, 100, 'subject', 'extra_large', 1, '' , ' Subject - Required For This Post') ?></div>
+            <div class="col-sm-1">
+             <a class="show2 content_id btn btn-default" role="button" href="content.php?content_id=<?php echo $$class->content_id; ?>&content_type=<?php echo $content_type_name ?>">View</a>
+            </div>
            </div>
 
            <div id="extra_form_element">

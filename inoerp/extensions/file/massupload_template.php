@@ -24,8 +24,10 @@
 						 <div id="file_upload_form">
 							<ul class="inRow asperWidth">
 							 <li><input type="file" id="attachments" class="attachments" name="attachments[]" multiple/></li>
-							 <li> <input type="button" value="Import" form="file_upload" name="attach_submit" id="attach_submit" class="submit button"></li>
-							 <?php echo form::hidden_field('class_name', $class); ?>
+							 <li><input type="button" value="Import" form="file_upload" name="attach_submit" id="attach_submit" class="submit button"></li>
+							 <?php echo form::hidden_field('class_name', $class);
+                 echo $f->hidden_field_withId('upload_type', 'data_base');
+               ?>
 							 <li class="show_loading_small"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/small_loading.gif"/></li>
 							</ul>
 						 </div>

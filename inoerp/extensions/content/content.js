@@ -23,6 +23,10 @@ $(document).ready(function () {
  });
 
  $('#save').on('click', function () {
+  if (!$('#subject').val()) {
+    alert('No subject');
+    return;
+  }
   $(".error").append('Saving Data');
   var form_header_id = '#content_data';
   if ($('.mce-tinymce').length >= 1) {
@@ -38,14 +42,12 @@ $(document).ready(function () {
 
  deleteHeader('form.php?class_name=content', $('#content_id').val());
 
-// var classSave = new saveMainClass();
-// classSave.json_url = 'content.php';
-// classSave.form_header_id = 'content';
-// classSave.primary_column_id = 'content_id';
-// classSave.single_line = false;
-//classSave.saveMain();
 
- $('a.show.content_id').on('click', function () {
+ $('body').off('click', 'a.show2.content_id').on('click', 'a.show2.content_id'  , function (e) {
+  if(!($('#content_id').val())){
+   e.preventDefault();
+   return;
+  }
   var path = 'content.php?mode=2&content_id=' + $('#content_id').val()
           + '&content_type=' + $('#content_type').val();
   $(this).attr('href', path);

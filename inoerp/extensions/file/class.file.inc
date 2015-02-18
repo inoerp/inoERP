@@ -207,7 +207,7 @@ class file extends dbObject {
    }
 //save to data base if in db mode
 
-   if (($upload_status) && ($this->_upload_type == 'only_server')) {
+   if (($upload_status) && ($this->_upload_type == 'data_base')) {
     $fh = fopen("$this->_file_dir/$this->file_name", 'r');
     $data_array = [];
     while (($data = fgetcsv($fh, 1000, ",")) !== FALSE) {
@@ -217,8 +217,7 @@ class file extends dbObject {
     fclose($fh);
    }
 
-   if (($upload_status) && ($this->_upload_type == 'data_base')) {
-    $this->audit_trial();
+   if (($upload_status) && ($this->_upload_type == 'only_server')) {
     $new_entry = $this->save();
     if ($new_entry == 1) {
      $msg = "File is sucessfully uploaded!";
@@ -228,7 +227,7 @@ class file extends dbObject {
     }
    }
   }//complete of for loop
-  if ((empty($errors)) && (($this->_upload_type == 'data_base'))) {
+  if ((empty($errors)) && (($this->_upload_type == 'only_server'))) {
    if (!empty($uploaded_file_ids)) {
     echo '<div id="uploaded_files_list">';
     foreach ($uploaded_file_ids as $keys => $values) {
