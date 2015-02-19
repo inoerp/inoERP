@@ -1,0 +1,1 @@
+<?phpif (!empty($sd_so_line_object)) { foreach ($sd_so_line_object as &$sd_so_lines) {  if (empty($sd_so_lines->schedule_ship_date)) {   $sd_so_lines->schedule_ship_date = current_time(true);  }  if (empty($sd_so_lines->promise_date)) {   $sd_so_lines->promise_date = current_time(true);  } }}?>

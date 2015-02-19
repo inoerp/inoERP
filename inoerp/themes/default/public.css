@@ -227,16 +227,6 @@ ul.form_buttons , ul.add_new_search{
 }*/
 
 
-ul li label,ul li .grouplabel, label {
- font: 9px bold "Lucida Grande",Lucida,Verdana,sans-serif;
- padding: 2px;
- display: block;
- vertical-align: top;
-}
-
-
-
-
 ul li ul li label {
  padding: 0;
  /*display: inline;*/
@@ -1383,4 +1373,8 @@ ul.header_li li{
 input.extra_large{
         width: 100% !important;
         text-align: left;  
+}
+
+#myModal .modal-dialog{
+ width: 800px;
 }

@@ -1,6 +1,5 @@
 <?php include_once("../../includes/basics/basics.inc"); ?>
 <?php
-
 if (isset($_FILES)) {
   $file = new file();
  if (!empty($_POST['upload_type']) && ($_POST['upload_type'] != 'undefined')) {
@@ -18,7 +17,7 @@ if (isset($_FILES)) {
 	$file->setProperty('_class_name', $_POST['class_name']);
  }
  echo '<div id="uploaded_files">';
- $file->upload_file($_FILES);
+  $file->upload_file($_FILES);
  echo '</div>';
 }
 ?>

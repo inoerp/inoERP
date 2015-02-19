@@ -550,9 +550,13 @@ if ($continue && !empty($form_page)) {
   }
   array_push($css_file_paths, $css_file_path);
  }
-
+ 
  foreach ($include_file_names as $key => $pathname) {
   include_once "$pathname";
+ }
+ $custom_inc_file_name = HOME_DIR.'/custom/include/'.$class.'_include.inc';
+ if(file_exists($custom_inc_file_name)){
+  include_once "$custom_inc_file_name";
  }
 } else {
  return;

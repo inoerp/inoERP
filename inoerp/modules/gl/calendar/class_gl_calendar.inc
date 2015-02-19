@@ -60,6 +60,10 @@ class gl_calendar extends dbObject {
   'quarter',
   'name_prefix'
  ];
+ 
+ public $number_fields = [
+  'year'
+ ];
  public $column = [
   'name',
   'year',

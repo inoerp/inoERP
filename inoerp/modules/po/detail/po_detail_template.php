@@ -1,4 +1,4 @@
-<?php $f= new inoform();
+<?php 
  if ($$class->po_type != 'STANDARD') {
   return;
  }

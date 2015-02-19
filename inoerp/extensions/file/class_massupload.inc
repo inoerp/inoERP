@@ -40,15 +40,12 @@ class massupload extends dbObject {
   } catch (Exception $e) {
    echo 'Message: ' . $e->getMessage();
   }
-
   try {
    $columns = array_shift($data_array);
    $count = 0;
+   pa($data_array);pa($columns);
    foreach ($data_array as $records) {
-    if($count == 0){
-     $count++;
-     continue;
-    }
+  
     $$class = new $class;
     if (method_exists($$class, '_before_massupload')) {
      $records1 = call_user_func(array($$class, '_before_massupload'), $records, $columns);
@@ -70,7 +67,7 @@ class massupload extends dbObject {
 //		echo $$class->{$class::$primary_column};
     $count++;
    }
-   $count--;
+
    echo "<div class='message'> ".$count ."Record(s) is/are sucessfully imported </div>";
    return true;
   } catch (Exception $e) {
