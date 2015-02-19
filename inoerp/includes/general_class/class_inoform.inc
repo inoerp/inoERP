@@ -882,8 +882,9 @@ EOD;
   return $this->date_field($name, $value, '20', '', 'dateTime');
  }
 
- public function date_fieldFromToday($name, $value) {
-  return $this->date_field($name, $value, '20', '', 'dateFromToday');
+ public function date_fieldFromToday($name, $value, $divClass='') {
+  $divClass = "dateFromToday $divClass "; 
+  return $this->date_field($name, $value, '20', '', $divClass);
  }
 
  public function date_field_MondayFromToday($name, $value) {

@@ -998,14 +998,14 @@ autoCompleteMain.prototype.autoComplete = function ()
         }
         if (elemenType === 'LI') {
          $(auto_element).closest("ul").find(v_d).val(selected_value);
-         if (v_d.indexOf('_cb') > -1) {
+         if (v_d.indexOf('_cb') > -1 && (selected_value == 1)) {
           $(auto_element).closest("ul").find(v_d).prop('checked', true);
          }
         } else if (elemenType === 'TD') {
          $(auto_element).closest("tr").find(v_d).val(selected_value);
          var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
          $('#form_line, #form_line2').find(trClass).find(v_d).val(selected_value);
-         if (v_d.indexOf('_cb') > -1) {
+         if (v_d.indexOf('_cb') > -1 && (selected_value == 1)) {
           $('#form_line, #form_line2').find(trClass).find(v_d).prop('checked', true);
          }
         }
@@ -1027,7 +1027,7 @@ autoCompleteMain.prototype.autoComplete = function ()
          $(auto_element).closest("tr").find(v_d).val('');
          var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
          $('#form_line, #form_line2').find(trClass).find(v_d).val();
-         if (v_d.indexOf('_cb') > -1) {
+         if (v_d.indexOf('_cb') > -1 ) {
           $('#form_line, #form_line2').find(trClass).find(v_d).prop('checked', false);
          }
         }
@@ -1056,13 +1056,13 @@ autoCompleteMain.prototype.autoComplete = function ()
        });
        if (elemenType === 'LI') {
         $(auto_element).closest("ul").find(v_d).val(selected_value);
-        if (v_d.indexOf('_cb') > -1) {
+        if (v_d.indexOf('_cb') > -1 && (selected_value == 1)) {
          $(auto_element).closest("ul").find(v_d).prop('checked', true);
         }
        } else if (elemenType === 'TD') {
         var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
         $('#form_line, #form_line2').find(trClass).find(v_d).val(selected_value);
-        if (v_d.indexOf('_cb') > -1) {
+        if (v_d.indexOf('_cb') > -1 && (selected_value == 1)) {
          $('#form_line, #form_line2').find(trClass).find(v_d).prop('checked', true);
         }
        }

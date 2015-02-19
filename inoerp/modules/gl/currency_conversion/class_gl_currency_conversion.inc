@@ -132,13 +132,13 @@ class gl_currency_conversion extends dbObject {
 
   $sql = " SELECT * 	FROM " . self::$table_name;
   $sql .= " WHERE from_currency = '{$from_currency}' AND to_currency = '{$to_currency}' AND currency_conversion_type = '{$currency_conversion_type}' ";
-  $sql .= " AND from_date <=  STR_TO_DATE('{$date}',  '%Y-%m-%d') AND ( to_date >=  STR_TO_DATE('{$date}',  '%Y-%m-%d') || to_date IS NULL )";
+  $sql .= " AND from_date <=  STR_TO_DATE('{$date}',  '%Y-%m-%d') AND ( to_date >=  STR_TO_DATE('{$date}',  '%Y-%m-%d') || to_date IS NULL || to_date = '0000-00-00' )";
   $sql .= " LIMIT 1 ";
   $result = self::find_by_sql($sql);
   if (empty($result)) {
    $sql1 = " SELECT * 	FROM " . self::$table_name;
    $sql1 .= " WHERE to_currency = '{$from_currency}' AND from_currency = '{$to_currency}' AND currency_conversion_type = '{$currency_conversion_type}' ";
-   $sql1 .= " AND from_date <=  STR_TO_DATE('{$date}',  '%Y-%m-%d') AND ( to_date >=  STR_TO_DATE('{$date}',  '%Y-%m-%d') || to_date IS NULL )";
+   $sql1 .= " AND from_date <=  STR_TO_DATE('{$date}',  '%Y-%m-%d') AND ( to_date >=  STR_TO_DATE('{$date}',  '%Y-%m-%d') || to_date IS NULL || to_date = '0000-00-00' )";
    $sql1 .= " LIMIT 1 ";
    $result1 = self::find_by_sql($sql1);
    if ((!empty($result1)) && !empty($result1[0]->use_reverse_conversion)) {

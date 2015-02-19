@@ -449,6 +449,7 @@ class inv_transaction extends dbObject {
  }
 
  private function _transact_serial_receipt() {
+  global $dbc;
   for ($i = 0; $i < $this->quantity; $i++) {
    $ist = new inv_serial_transaction();
    if ($this->_serial_type == 'ID') {
@@ -1163,7 +1164,7 @@ class inv_transaction extends dbObject {
      $po_v = new po_all_v();
      $po_v->po_detail_id = $this->po_detail_id;
      $po_v_i = $po_v->findBy_poDetailId();
-     $accural_amount = $this->quantity * $po_v_i->unit_price;
+     $accural_amount = $this->quantity * ($po_v_i->gl_line_price/$po_v_i->line_quantity);
      $total_amount = 0;
      $line_number = 1;
      foreach ($journal_line_a as $journal_line) {
@@ -1449,7 +1450,7 @@ class inv_transaction extends dbObject {
   $po_v = new po_all_v();
   $po_v->po_detail_id = $this->po_detail_id;
   $po_v_i = $po_v->findBy_poDetailId();
-  $accural_amount = $this->quantity * $po_v_i->unit_price;
+  $accural_amount = $this->quantity * ($po_v_i->gl_line_price/$po_v_i->line_quantity);
   $total_amount = 0;
   $line_number = 1;
   foreach ($journal_line_a as $journal_line) {

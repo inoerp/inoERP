@@ -31,8 +31,10 @@ class po_line extends dbObject {
   'price_date',
   'unit_price',
   'line_price',
+  'gl_line_price',
   'tax_code_id',
   'tax_amount',
+  'gl_tax_amount',
   'reference_doc_type',
   'reference_doc_number',
   'hold_cb',
@@ -62,6 +64,8 @@ class po_line extends dbObject {
   'line_quantity',
   'unit_price',
   'line_price',
+  'gl_line_price',
+  'gl_tax_amount'
  ];
  public $requiredField = [
   'po_header_id',
@@ -75,7 +79,8 @@ class po_line extends dbObject {
   'released_amount',
   'agreed_quantity',
   'agreed_amount',
-  'tax_code_value'
+  'tax_code_value',
+  'processing_lt'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
   "po_header_id"
@@ -94,6 +99,8 @@ class po_line extends dbObject {
  public $line_quantity;
  public $unit_price;
  public $line_price;
+ public $gl_tax_amount; 
+ public $gl_line_price;
  public $tax_code_id;
  public $tax_amount;
  public $agreed_quantity;
@@ -120,6 +127,7 @@ class po_line extends dbObject {
  public $released_quantity;
  public $released_amount;
  public $tax_code_value;
+ public $processing_lt;
 
  private function _validate_before_save() {
   $ret = 1;

@@ -5,7 +5,6 @@
   $to_currency = $_GET['to_currency'];
   $rate_type = !empty($_GET['rate_type']) ? $_GET['rate_type'] : null;
   $result = gl_currency_conversion::find_rate($from_currency, $to_currency, $rate_type);
-
   if (count($result) == 0) {
    $data['rate'] = 0;
   }else{

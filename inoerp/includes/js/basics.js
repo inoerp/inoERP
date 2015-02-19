@@ -554,13 +554,13 @@ function onClick_addDetailLine(noOfTabs, add_row_detail_img, tabsDetailName) {
    $(trClass + ':first').clone().attr("class", "new_object" + detailObjectCount).appendTo($(closetLineRowClass + ' ' + tbodyClass));
   }
 
-  $("tr.new_object" + detailObjectCount).find("td input[type=text]").each(function () {
+  $("tr.new_object" + detailObjectCount).find("td input[type=text]").not('.copyValue').each(function () {
    $(this).val("");
   });
-  $("tr.new_object" + detailObjectCount).find("td input[type=number]").each(function () {
+  $("tr.new_object" + detailObjectCount).find("td input[type=number]").not('.copyValue').each(function () {
    $(this).val("");
   });
-  $("tr.new_object" + detailObjectCount).find("td select").each(function () {
+  $("tr.new_object" + detailObjectCount).find("td select").not('.copyValue').each(function () {
    $(this).val("");
   });
 
@@ -568,7 +568,6 @@ function onClick_addDetailLine(noOfTabs, add_row_detail_img, tabsDetailName) {
   $(".new_object" + detailObjectCount).find(".detail_number").val(nextDetailNumber);
   $(".new_object" + detailObjectCount).find(".date").each(function () {
    $(this).attr("id", "date" + dateCount);
-   $(this).attr("class", "date");
    dateCount++;
   });
   detailObjectCount++;
@@ -870,8 +869,8 @@ function getExchangeRate(options) {
  var defaults = {
   json_url: 'modules/gl/currency_conversion/json_currency_conversion.php',
   rate_type: $('#exchange_rate_type').val(),
-  from_currency: $('#currency').val(),
-  to_currency: $('#document_currency').val() ? $('#document_currency').val() : $('#doc_currency').val()
+  to_currency: $('#currency').val(),
+  from_currency: $('#document_currency').val() ? $('#document_currency').val() : $('#doc_currency').val()
  };
  var settings = $.extend({}, defaults, options);
 
@@ -890,7 +889,8 @@ function getExchangeRate(options) {
     $.each(result, function (key, value) {
      switch (key) {
       case 'rate':
-       $('#exchange_rate').val(+value);
+       var valFixed = +value.toFixed(7);
+       $('#exchange_rate').val(valFixed);
        break;
      }
     });
@@ -1338,7 +1338,7 @@ function getPriceDetails(options) {
   price_date: curernt_date
  };
  var settings = $.extend({}, defaults, options);
- $.ajax({
+return $.ajax({
   url: settings.json_url,
   type: 'get',
   dataType: 'json',

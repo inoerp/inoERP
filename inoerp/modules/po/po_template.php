@@ -19,8 +19,10 @@
       <div class="large_shadow_box"> 
        <ul class="column header_field">
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="po_header_id select_popup clickable">
-          PO Header Id</label><?php $f = new inoform();
-$f->text_field_dsr('po_header_id') ?>
+          PO Header Id</label><?php
+         $f = new inoform();
+         $f->text_field_dsr('po_header_id')
+         ?>
          <a name="show" href="form.php?class_name=po_header&<?php echo "mode=$mode"; ?>" class="show document_id po_header_id"><i class="fa fa-refresh"></i></a> 
         </li>
         <li><label>BU Name(1)</label><?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>
@@ -55,7 +57,7 @@ $f->text_field_dsr('po_header_id') ?>
         <li><label>Doc Currency</label><?php echo $f->select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', '', 1, $readonly); ?></li>
         <li><label>Ledger Currency</label><?php echo $f->select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, 1); ?></li>
         <li><label>Exchange Rate Type</label><?php echo $f->select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
-        <li><label>Exchange Rate</label><?php echo $f->number_field('exchange_rate', $$class->exchange_rate); ?> </li>
+        <li><label>Exchange Rate</label><?php echo $f->number_field('exchange_rate', $$class->exchange_rate, '', 'exchange_rate'); ?> </li>
         <li><label>Price List</label><?php echo$f->select_field_from_object('price_list_header_id', mdm_price_list_header::find_all_purchasing_pl(), 'mdm_price_list_header_id', 'price_list', $$class->price_list_header_id); ?></li>
         <li><label>Header Amount</label><?php echo $f->number_field('header_amount', $$class->header_amount, '15', 'header_amount', '', 1); ?></li>
         <li><label>Tax Amount</label><?php echo $f->number_field('tax_amount', $$class->tax_amount, '15', 'tax_amount'); ?></li>
@@ -183,6 +185,8 @@ $f->text_field_dsr('po_header_id') ?>
           <td><?php
            echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
            form::text_field_wid2('item_number', 'select_item_number');
+           echo $f->hidden_field('processing_lt', '');
+           
            ?>
            <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
           <td><?php
@@ -218,10 +222,9 @@ $f->text_field_dsr('po_header_id') ?>
          <th>Line Price</th>
          <th>Tax Code</th>
          <th>Tax Amount</th>
+         <th>GL Line Price</th>
+         <th>GL Tax Amount</th>
          <th>Line Description</th>
-         <th>Ref Doc Type</th>
-         <th>Ref Number</th>
-
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -238,9 +241,10 @@ $f->text_field_dsr('po_header_id') ?>
           <td><?php echo $f->number_field('line_price', $$class_second->line_price); ?></td>
           <td><?php echo $f->select_field_from_object('tax_code_id', mdm_tax_code::find_all_inTax_by_bu_org_id($$class->bu_org_id), 'mdm_tax_code_id', 'tax_code', $$class_second->tax_code_id, '', 'input_tax medium') ?></td>
           <td><?php form::number_field_wid2('tax_amount'); ?></td>
+          <td><?php form::number_field_wid2('gl_line_price'); ?></td>
+          <td><?php form::number_field_wid2('gl_tax_amount'); ?></td>
           <td><?php form::text_field_wid2('line_description'); ?></td>
-          <td><?php form::text_field_wid2('reference_doc_type'); ?></td>
-          <td><?php form::text_field_wid2('reference_doc_number'); ?></td>
+
          </tr>
          <?php
          $count = $count + 1;
@@ -305,6 +309,8 @@ $f->text_field_dsr('po_header_id') ?>
          <th> Kit Item </th>
          <th> Configured ? </th>
          <th> Item Configuration</th>
+         <th>Ref Doc Type</th>
+         <th>Ref Number</th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -319,6 +325,8 @@ $f->text_field_dsr('po_header_id') ?>
           <td><?php echo $f->checkBox_field('kit_cb', $$class_second->kit_cb, '', 'dontCopy'); ?></td>
           <td><?php echo $f->checkBox_field('kit_configured_cb', $$class_second->kit_configured_cb, '', 'dontCopy'); ?></td>
           <td> <a class="popup popup-form view-item-config medium" href="form.php?class_name=bom_config_header&mode=9&window_type=popup"> <i class="fa fa-edit"></i></a></td>
+          <td><?php form::text_field_wid2('reference_doc_type'); ?></td>
+          <td><?php form::text_field_wid2('reference_doc_number'); ?></td>
          </tr>
          <?php
          $count = $count + 1;
