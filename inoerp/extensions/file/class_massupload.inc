@@ -43,7 +43,7 @@ class massupload extends dbObject {
   try {
    $columns = array_shift($data_array);
    $count = 0;
-   pa($data_array);pa($columns);
+//   pa($data_array);pa($columns);
    foreach ($data_array as $records) {
   
     $$class = new $class;
