@@ -1163,12 +1163,10 @@ function mandatoryFieldMain(form_area, mandatory_fields, mandatory_messages, hea
 
 mandatoryFieldMain.prototype.mandatoryHeader = function ()
 {
-  $('body').on("check_HeaderId", function () { 
-
- });
  $('body').off("click", '#form_line').on("click", '#form_line', function () {
  var header_id = $('ul#js_saving_data').find('.primary_column_id').data('primary_column_id');
- var header_id_h = '#' + header_id;
+ if(header_id){
+   var header_id_h = '#' + header_id;
  var header_id_c = '.' + header_id;
   if (!$(header_id_h).val()) {
    alert('No header Id Found! : First enter/save header details');
@@ -1178,6 +1176,8 @@ mandatoryFieldMain.prototype.mandatoryHeader = function ()
     $(this).find(header_id_c).val(headerIdVal);
    }
   }
+ }
+
  });
 };
 mandatoryFieldMain.prototype.mandatoryField = function ()
