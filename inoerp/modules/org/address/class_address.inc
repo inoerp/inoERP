@@ -86,7 +86,8 @@ class address extends dbObject {
  ];
  
   public $fields_inForm_notInDataBase = [
-		 "tax_region_name"
+		 "tax_region_name",
+   'window_type'
  ];
 	
    public $search = [
@@ -121,6 +122,7 @@ class address extends dbObject {
  public $time;
  public $msg;
  public $tax_region_name;
+ public $window_type;
 
  public function _before_save(){
 	if(!empty($this->tax_region_name)){

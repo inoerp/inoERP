@@ -50,7 +50,7 @@ $(document).ready(function() {
 //mandatory and field sequence
  var mandatoryCheck = new mandatoryFieldMain();
  mandatoryCheck.header_id = 'ar_receipt_header_id';
-// mandatoryCheck.mandatoryHeader();
+ mandatoryCheck.mandatoryHeader();
  mandatoryCheck.form_area = 'form_header';
  mandatoryCheck.mandatory_fields = ["bu_org_id", "ledger_id"];
  mandatoryCheck.mandatory_messages = ["First Select BU Org", "No Ledger Id"];

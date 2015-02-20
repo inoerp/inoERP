@@ -44,6 +44,8 @@ class sd_so_line extends dbObject {
   'destination_type',
   'tax_code_id',
   'tax_amount',
+  'gl_line_price',
+  'gl_tax_amount',
   'reference_doc_number',
   'ar_transaction_header_id',
   'ar_transaction_line_id',
@@ -75,6 +77,16 @@ class sd_so_line extends dbObject {
   'line_number',
   'item_description'
  ];
+ 
+  public $numberField = [
+  'exchange_rate',
+  'line_quantity',
+  'unit_price',
+  'line_price',
+  'gl_line_price',
+  'gl_tax_amount'
+ ];
+  
  public $fields_inForm_notInDataBase = [
   "so_number",
   "item_number",
@@ -105,6 +117,8 @@ class sd_so_line extends dbObject {
  public $line_price;
  public $tax_code_id;
  public $tax_amount;
+  public $gl_tax_amount; 
+ public $gl_line_price;
  public $reference_doc_type;
  public $reference_doc_number;
  public $ar_transaction_header_id;

@@ -71,7 +71,9 @@ $(document).ready(function() {
 //	}
 //
 // });
-
+var mandatoryCheck = new mandatoryFieldMain();
+mandatoryCheck.header_id = 'mdm_price_list_header_id';
+mandatoryCheck.mandatoryHeader();
 
  //Popup for selecting option type
  $(".mdm_price_list_header_id.select_popup").on("click", function() {

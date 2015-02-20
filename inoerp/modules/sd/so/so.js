@@ -116,10 +116,10 @@ $(document).ready(function () {
 //mandatory and field sequence
  var mandatoryCheck = new mandatoryFieldMain();
  mandatoryCheck.header_id = 'so_header_id';
-// mandatoryCheck.mandatoryHeader();
- mandatoryCheck.form_area = 'form_header';
- mandatoryCheck.mandatory_fields = ["bu_org_id", "so_type"];
- mandatoryCheck.mandatory_messages = ["First Select BU Org", "No Order Type"];
+ mandatoryCheck.mandatoryHeader();
+// mandatoryCheck.form_area = 'form_header';
+// mandatoryCheck.mandatory_fields = ["bu_org_id", "so_type"];
+// mandatoryCheck.mandatory_messages = ["First Select BU Org", "No Order Type"];
 // mandatoryCheck.mandatoryField();
 
 //setting the first line & shipment number
@@ -188,72 +188,82 @@ $(document).ready(function () {
           var item_id_m = $(this).closest('.tabContainer').find(rowClass).find('.item_id_m').val();
           var price_date = $(this).closest('.tabContainer').find(rowClass).find('.price_date').val();
           var price_list_header_id = $(this).closest('#form_line').find(rowClass).find('.price_list_headerId').val();
-          getPriceDetails({
+          $.when(getPriceDetails({
            rowClass: rowClass,
            item_id_m: item_id_m,
            price_date: price_date,
-           price_list_header_id: price_list_header_id});
+           price_list_header_id: price_list_header_id})).then(function () {
+           $('body').trigger('setLinePrice', [rowClass]);
+           $('body').trigger('calculateTaxAmount', [rowClass]);
+           $('body').trigger('calculateHeaderAmount');
+          });
          });
 
 //set the line price
- $('#content').off('blur', '.unit_price,.line_quantity')
-         .on('blur', '.unit_price,.line_quantity', function () {
-          var trClass = '.' + $(this).closest('tr').attr('class');
-          var unitPrice = +($(this).closest('#form_line').find(trClass).find('.unit_price').val());
-          var lineQuantity = +($(this).closest('#form_line').find(trClass).find('.line_quantity').val());
-          var linePrice = unitPrice * lineQuantity;
-          $(this).closest('tr').find('.line_price').val(linePrice);
-         });
+ $('body').on('setLinePrice', function (e, trClass) {
+  var unitPrice = +($('#form_line').find(trClass).find('.unit_price').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+  var lineQuantity = +($('#form_line').find(trClass).find('.line_quantity').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+  var linePrice = unitPrice * lineQuantity;
+  $('#form_line').find(trClass).find('.line_price').val(linePrice);
+ });
 
 //calculate the tax amount
+ $('body').on('calculateTaxAmount', function (e, trClass) {
+  var linePrice = +$('#content').find(trClass).find('.line_price').val();
+  var taxCodeVal = 0;
+  if ($('#content').find(trClass).find('.tax_code_value').val()) {
+   taxCodeVal = $('#content').find(trClass).find('.tax_code_value').val();
+  } else if ($('#content').find(trClass).find('.output_tax').find('option:selected').prop('class')) {
+   taxCodeVal = $('#content').find(trClass).find('.output_tax').find('option:selected').prop('class');
+  }
+
+  if (taxCodeVal.length >= 3) {
+   var taxCodeVal_a = taxCodeVal.split('_');
+  } else {
+   return;
+  }
+  var taxAmount = 0;
+  var taxPercentage = 0;
+  if (taxCodeVal_a[0] === 'p') {
+   taxPercentage = +taxCodeVal_a[1];
+  } else if (taxCodeVal_a[0] === 'a') {
+   taxAmount = +taxCodeVal_a[1];
+  }
+  var taxValue = 0;
+  if (taxPercentage) {
+   taxValue = ((taxPercentage * linePrice) / 100).toFixed(5);
+  } else if (taxAmount) {
+   taxValue = taxAmount.toFixed(5);
+  }
+
+  $('#content').find(trClass).find('.tax_amount').val(taxValue);
+ });
+
+//total header & tax amount
+ $('body').on('calculateHeaderAmount', function () {
+  var total_tax = 0;
+  $('#form_line').find('.tax_amount').each(function () {
+   total_tax += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+  });
+  $('#tax_amount').val(total_tax);
+
+  var header_amount = 0;
+  $('#form_line').find('.inv_line_price').each(function () {
+   header_amount += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+  });
+  $('#header_amount').val(header_amount);
+ });
+ 
+ //calculate the tax amount, line prices & header amount
  $('#content').off('blur', '.line_quantity, .unit_price, .line_price')
          .on('blur', '.line_quantity, .unit_price, .line_price', function () {
           var trClass = '.' + $(this).closest('tr').prop('class');
-          var linePrice = +$('#content').find(trClass).find('.line_price').val();
-          var taxCodeVal = 0;
-          if ($('#content').find(trClass).find('.tax_code_value').val()) {
-           taxCodeVal = $('#content').find(trClass).find('.tax_code_value').val();
-          } else if ($('#content').find(trClass).find('.output_tax').find('option:selected').prop('class')) {
-           taxCodeVal = $('#content').find(trClass).find('.output_tax').find('option:selected').prop('class');
-          }
-
-          if (taxCodeVal.length >= 3) {
-           var taxCodeVal_a = taxCodeVal.split('_');
-          } else {
-           return;
-          }
-          var taxAmount = 0;
-          var taxPercentage = 0;
-          if (taxCodeVal_a[0] === 'p') {
-           taxPercentage = +taxCodeVal_a[1];
-          } else if (taxCodeVal_a[0] === 'a') {
-           taxAmount = +taxCodeVal_a[1];
-          }
-          var taxValue = 0;
-          if (taxPercentage) {
-           taxValue = ((taxPercentage * linePrice) / 100).toFixed(5);
-          } else if (taxAmount) {
-           taxValue = taxAmount.toFixed(5);
-          }
-
-          $('#content').find(trClass).find('.tax_amount').val(taxValue);
+          $('body').trigger('setLinePrice', [trClass]);
+          $('body').trigger('calculateTaxAmount', [trClass]);
+          $('body').trigger('calculateHeaderAmount');
          });
 
-//total header & tax amount
- $('#content').off('blur', '.inv_line_quantity, .inv_unit_price, .inv_line_price')
-         .on('blur', '.inv_line_quantity, .inv_unit_price, .inv_line_price', function () {
-          var total_tax = 0;
-          $('#form_line').find('.tax_amount').each(function () {
-           total_tax += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-          });
-          $('#tax_amount').val(total_tax);
 
-          var header_amount = 0;
-          $('#form_line').find('.inv_line_price').each(function () {
-           header_amount += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-          });
-          $('#header_amount').val(header_amount);
-         });
 
 
  $('body').off('click', '.popup.view-item-config').on('click', '.popup.view-item-config', function (e) {

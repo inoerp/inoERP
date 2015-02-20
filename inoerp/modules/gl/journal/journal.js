@@ -49,9 +49,9 @@ function beforeSave() {
 
 $(document).ready(function() {
 //mandatory and field sequence
-//var mandatoryCheck = new mandatoryFieldMain();
-//mandatoryCheck.header_id = 'gl_journal_header_id';
-//mandatoryCheck.mandatoryHeader();
+var mandatoryCheck = new mandatoryFieldMain();
+mandatoryCheck.header_id = 'gl_journal_header_id';
+mandatoryCheck.mandatoryHeader();
 //mandatoryCheck.form_area = 'form_header';
 //mandatoryCheck.mandatory_fields = ["ledger_id", "currency", "gl_period_id"];
 //mandatoryCheck.mandatory_messages = ["First Select Ledger", "No Currency", "No GL Period"];

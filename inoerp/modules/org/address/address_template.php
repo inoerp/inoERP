@@ -12,8 +12,10 @@
       <div class="large_shadow_box"> 
        <ul class="column header_field"> 
         <li><label><img class="address select_popup" src="<?php echo HOME_URL; ?>themes/images/serach.png">
-          Address Id</label><?php echo form::text_field('address_id', $address->address_id, '10', '', '', 'System number', 'address_id', $readonly); ?>
-         <a name="show" href="form.php?class_name=address&<?php echo "mode=$mode"; ?>" class="show document_id address_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+          Address Id</label><?php
+         echo $f->text_field_dr('address_id');
+         ?>
+         <a name="show2" href="form.php?class_name=address&<?php echo "mode=$mode"; ?>" class="show2 address_id document_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
         </li>
         <li><label>Type</label><?php echo form::select_field_from_object('type', address::address_types(), 'option_line_code', 'option_line_code', $address->type, 'type', $readonly); ?>    </li>
         <li><label>Address Name</label><?php echo form::text_field('address_name', $address->address_name, '20', '', '', 'Enter a valid address name', 'address_name', $readonly); ?>    </li>
@@ -23,6 +25,13 @@
         <li><label>Status</label><?php echo form::status_field($address->status, $readonly); ?></li>
         <li><label>Revision</label><?php echo form::revision_enabled_field($address->rev_enabled, $readonly); ?></li>
         <li><label>Revision No</label><?php echo form::text_field('rev_number', $address->rev_number, '10', '', '', '', '', $readonly); ?>    </li>
+        <?php
+        if ((!empty($_GET) && isset($_GET['window_type']) && $_GET['window_type'] = 'popup') || !empty($_POST['window_type'])) {
+         $f = new inoform();
+         echo $f->hidden_field_withId('window_type', 'popup');
+         echo '<li><label></label><button  class="quick_select button btn btn-success">Select Address</button></li>';
+        }
+        ?>
        </ul>
       </div>
      </div>
@@ -33,7 +42,7 @@
       <div> 
        <div id="comments">
         <div id="comment_list">
-         <?php echo!(empty($comments)) ? $comments : ""; ?>
+<?php echo!(empty($comments)) ? $comments : ""; ?>
         </div>
         <div id ="display_comment_form">
          <?php
@@ -60,22 +69,22 @@
      <div id="tabsLine-1" class="tabContent">
       <ul class="address inline_list">
        <li><label>Phone  : </label>
-        <?php echo form::text_field('phone', $address->phone, '30', '', '', 'Enter a valid number', 'phone', $readonly); ?>
+<?php echo form::text_field('phone', $address->phone, '30', '', '', 'Enter a valid number', 'phone', $readonly); ?>
        </li>
        <li><label>Email  : </label> 
-        <?php echo form::text_field('email', $address->email, '30', '', '', 'Enter a valid email', 'email', $readonly); ?>
+<?php echo form::text_field('email', $address->email, '30', '', '', 'Enter a valid email', 'email', $readonly); ?>
        </li>
        <li><label>Web-site  : </label> 
-        <?php echo form::text_field('website', $address->website, '30', '', '', 'Enter a valid website', 'website', $readonly); ?>
+<?php echo form::text_field('website', $address->website, '30', '', '', 'Enter a valid website', 'website', $readonly); ?>
        </li>
        <li><label>Country  : </label>
-        <?php echo form::text_field('country', $address->country, '30', '', '', 'Enter a valid country', 'country', $readonly); ?>
+<?php echo form::text_field('country', $address->country, '30', '', '', 'Enter a valid country', 'country', $readonly); ?>
        </li>
        <li><label>Postal Code  : </label>
-        <?php echo form::text_field('postal_code', $address->postal_code, '30', '', '', 'Enter a postal_code', 'postal_code', $readonly); ?>
+<?php echo form::text_field('postal_code', $address->postal_code, '30', '', '', 'Enter a postal_code', 'postal_code', $readonly); ?>
        </li>
        <li><label>Address :</label>  
-        <?php echo form::text_area('address', $address->address, '3', '22', '', 'Complete Address', 'address', $readonly); ?>
+<?php echo form::text_area('address', $address->address, '3', '22', '', 'Complete Address', 'address', $readonly); ?>
        </li>
       </ul>
      </div>

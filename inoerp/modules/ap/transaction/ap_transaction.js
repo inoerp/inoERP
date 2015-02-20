@@ -75,7 +75,7 @@ $(document).ready(function() {
 //mandatory and field sequence
  var mandatoryCheck = new mandatoryFieldMain();
  mandatoryCheck.header_id = 'ap_transaction_header_id';
-// mandatoryCheck.mandatoryHeader();
+ mandatoryCheck.mandatoryHeader();
  mandatoryCheck.form_area = 'form_header';
  mandatoryCheck.mandatory_fields = ["bu_org_id", "po_type"];
  mandatoryCheck.mandatory_messages = ["First Select BU Org", "No PO Type"];

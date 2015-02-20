@@ -2739,8 +2739,8 @@ $(document).ready(function () {
 
 //select page data selction in parent window
  $('body').on('click', '.quick_select', function () {
-  var setData = new opener.setValFromSelectPage;
-  var elemenType = $(this).parent().prop('tagName');
+    var setData = new opener.setValFromSelectPage;
+    var elemenType = $(this).parent().prop('tagName');
   if (elemenType === 'LI') {
    $(this).closest('ul').find('input').each(function () {
     setData[$(this).prop('id')] = $(this).prop('value');
@@ -2750,7 +2750,6 @@ $(document).ready(function () {
     setData[$(this).prop('class')] = $(this).text();
    });
   }
-
   setData.setVal();
   if (opener.setPopUpValue) {
    opener.setPopUpValue(setData);
@@ -3172,12 +3171,12 @@ $(document).ready(function () {
  });
 
  //Popup for selecting address
- $(".address_id.select_popup").click(function (e) {
+ $('body').on('click','.address_id.select_popup',function (e) {
   e.preventDefault();
   var rowClass = $(this).parent().find('input').first().prop('class');
   localStorage.setItem("field_class", rowClass);
-  void window.open('select.php?class_name=address', '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+  void window.open('form.php?class_name=address&mode=9&window_type=popup', '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
   return false;
  });
 
@@ -3568,6 +3567,7 @@ $(document).ready(function () {
   var urlLink = $(this).attr('href');
   var urlLink_a = urlLink.split('?');
   var formUrl = 'includes/json/json_form.php?' + urlLink_a[1] + '&' + headerId + '=' + headerId_v;
+  
   getFormDetails(formUrl);
  }).one();
 
