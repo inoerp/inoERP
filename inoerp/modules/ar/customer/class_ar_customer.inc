@@ -46,7 +46,6 @@ class ar_customer extends dbObject {
   "tax_reg_no",
   "tax_payer_id",
   "address_id",
-  "customer_contact_id",
   'customer_credit_class',
   'profile_name',
   "status",

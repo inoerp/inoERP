@@ -91,7 +91,6 @@ function saveSingleLine(json_url, lineData, primary_column_id, lineClassName) {
 //  var div = $(result).filter('div#json_save_line').html();
   var message = $(result).find('.message, .rollback_msg').html();
   if (message && message.length > 1) {
-   json_save_line
    $(".error").prepend(result);
    $("#accordion").accordion({active: 0});
   }
@@ -1164,11 +1163,13 @@ function mandatoryFieldMain(form_area, mandatory_fields, mandatory_messages, hea
 
 mandatoryFieldMain.prototype.mandatoryHeader = function ()
 {
- var header_id = $('ul#js_saving_data').find('.form_header_id').data('form_header_id');
+  $('body').on("check_HeaderId", function () { 
+
+ });
+ $('body').off("click", '#form_line').on("click", '#form_line', function () {
+ var header_id = $('ul#js_saving_data').find('.primary_column_id').data('primary_column_id');
  var header_id_h = '#' + header_id;
  var header_id_c = '.' + header_id;
-// alert(header_id);
- $('body').off("click", '#form_line').on("click", '#form_line', function () {
   if (!$(header_id_h).val()) {
    alert('No header Id Found! : First enter/save header details');
   } else {

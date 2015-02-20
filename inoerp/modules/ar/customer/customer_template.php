@@ -28,7 +28,6 @@
        </li>
        <li><label>Tax Reg No</label><?php echo form::text_field_d('tax_reg_no'); ?></li>
        <li><label>Tax Payer Id</label><?php echo form::text_field_d('tax_payer_id'); ?></li>
-       <li><label>Contact Id</label><?php echo form::text_field_d('customer_contact_id'); ?></li>
        <li><label>Status</label><?php echo form::status_field($$class->status, $readonly); ?></li>
        <li><label>Revision</label><?php echo form::checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?>             </li> 
        <li><label>Rev Number</label><?php form::text_field_wid('rev_number'); ?></li> 
