@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 18, 2015 at 01:22 PM
+-- Generation Time: Feb 20, 2015 at 04:48 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -1387,9 +1387,9 @@ CREATE TABLE IF NOT EXISTS `ar_customer` (
   `tax_reg_no` varchar(40) DEFAULT NULL,
   `tax_payer_id` varchar(40) DEFAULT NULL,
   `address_id` int(12) DEFAULT NULL,
-  `customer_contact_id` int(12) NOT NULL DEFAULT '1',
+  `customer_contact_id` int(12) DEFAULT NULL,
   `customer_credit_class` int(12) DEFAULT NULL,
-  `ef_id` int(12) DEFAULT NULL,
+  `profile_name` varchar(25) DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL,
   `rev_enabled_cb` tinyint(1) DEFAULT NULL,
   `rev_number` int(12) DEFAULT NULL,
@@ -1400,16 +1400,18 @@ CREATE TABLE IF NOT EXISTS `ar_customer` (
   PRIMARY KEY (`ar_customer_id`),
   UNIQUE KEY `customer_number` (`customer_number`),
   UNIQUE KEY `customer_name` (`customer_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `ar_customer`
 --
 
-INSERT INTO `ar_customer` (`ar_customer_id`, `customer_number`, `customer_name`, `supplier_id`, `customer_type`, `tax_country`, `tax_reg_no`, `tax_payer_id`, `address_id`, `customer_contact_id`, `customer_credit_class`, `ef_id`, `status`, `rev_enabled_cb`, `rev_number`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+INSERT INTO `ar_customer` (`ar_customer_id`, `customer_number`, `customer_name`, `supplier_id`, `customer_type`, `tax_country`, `tax_reg_no`, `tax_payer_id`, `address_id`, `customer_contact_id`, `customer_credit_class`, `profile_name`, `status`, `rev_enabled_cb`, `rev_number`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (1, 3, 'ABC Corp.', 11, 'EXTERNAL_FORGEIN', 'IN', 'REG001121', '3433', 88, 22, 1, NULL, 'active', 0, 0, 0, '2014-06-29 00:00:00', 0, '2029-06-14 00:00:00'),
 (2, 200, 'inoERP', NULL, 'EXTERNAL', 'IN', 'REG001', '0001', 84, 11, 1, NULL, 'active', NULL, NULL, 0, '2014-06-04 00:00:00', 34, '2014-12-16 10:37:08'),
-(3, 232, 'ABC2', 12, 'EXTERNAL', 'IN', 'REG003', 'REG003', NULL, 0, NULL, NULL, 'active', NULL, NULL, 0, '2014-08-18 00:00:00', 34, '2014-12-16 10:38:03');
+(3, 232, 'ABC2', 12, 'EXTERNAL', 'IN', 'REG003', 'REG003', NULL, 0, NULL, NULL, 'active', NULL, NULL, 0, '2014-08-18 00:00:00', 34, '2015-02-19 03:19:11'),
+(7, 1299, 'ABC Corp11', 11, 'EXTERNAL_FORGEIN', 'IN', 'REG001121', '3433', 88, 22, 1, NULL, 'active', NULL, NULL, 34, '2015-02-18 18:45:26', 34, '2015-02-18 18:45:26'),
+(8, 1312, 'asfasf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-20 04:47:24', 34, '2015-02-20 04:47:24');
 
 -- --------------------------------------------------------
 
@@ -2649,7 +2651,7 @@ CREATE TABLE IF NOT EXISTS `bom_config_header` (
   `last_update_date` datetime NOT NULL,
   PRIMARY KEY (`bom_config_header_id`),
   UNIQUE KEY `item_id_m` (`item_id_m`,`reference_key_name`,`reference_key_value`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `bom_config_header`
@@ -2661,7 +2663,8 @@ INSERT INTO `bom_config_header` (`bom_config_header_id`, `item_id_m`, `bom_heade
 (4, 10158, 37, 6, 'po_line', 239, 34, '2015-02-09 10:09:57', 34, '2015-02-09 10:09:57'),
 (5, 10158, 37, 6, 'po_line', 240, 34, '2015-02-09 10:18:30', 34, '2015-02-09 10:18:30'),
 (6, 10158, 37, 6, 'po_line', 241, 34, '2015-02-09 11:13:51', 34, '2015-02-09 11:13:51'),
-(7, 10158, 37, 6, 'sd_so_line', NULL, 34, '2015-02-11 05:26:59', 34, '2015-02-11 05:26:59');
+(7, 10158, 37, 6, 'sd_so_line', NULL, 34, '2015-02-11 05:26:59', 34, '2015-02-11 05:26:59'),
+(8, 10095, 28, 6, 'po_line', 242, 34, '2015-02-19 09:21:18', 34, '2015-02-19 09:21:18');
 
 -- --------------------------------------------------------
 
@@ -2693,7 +2696,7 @@ CREATE TABLE IF NOT EXISTS `bom_config_line` (
   PRIMARY KEY (`bom_config_line_id`),
   UNIQUE KEY `bom_header_id` (`bom_config_header_id`,`bom_sequence`),
   UNIQUE KEY `bom_header_id_2` (`bom_config_header_id`,`routing_sequence`,`component_item_id_m`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `bom_config_line`
@@ -2709,7 +2712,9 @@ INSERT INTO `bom_config_line` (`bom_config_line_id`, `bom_config_header_id`, `bo
 (7, 5, 11, 10, 10034, NULL, 'ITEM', '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 10:18:30', 34, '2015-02-09 10:23:05'),
 (8, 5, 10, 10, 10089, NULL, 'ITEM', '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 10:18:30', 34, '2015-02-09 10:23:05'),
 (9, 6, 11, 10, 10034, NULL, 'ITEM', '10.00000', '120.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 11:13:51', 34, '2015-02-09 12:04:58'),
-(10, 6, 10, 10, 10089, NULL, 'ITEM', '5.00000', '60.00000', '25.00000', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 11:13:51', 34, '2015-02-09 12:04:58');
+(10, 6, 10, 10, 10089, NULL, 'ITEM', '5.00000', '60.00000', '25.00000', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 11:13:51', 34, '2015-02-09 12:04:58'),
+(11, 8, 10, 14, 10092, NULL, 'ITEM', '1.00000', '10.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-19 09:21:18', 34, '2015-02-19 09:21:18'),
+(12, 8, 20, 15, 10098, NULL, 'ITEM', '2.00000', '20.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-19 09:21:18', 34, '2015-02-19 09:21:18');
 
 -- --------------------------------------------------------
 
@@ -4094,7 +4099,7 @@ CREATE TABLE IF NOT EXISTS `coa_combination` (
   KEY `segment2` (`field6`),
   KEY `segment3` (`field7`),
   KEY `segment4` (`field8`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6199 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6205 ;
 
 --
 -- Dumping data for table `coa_combination`
@@ -5328,7 +5333,8 @@ INSERT INTO `coa_combination` (`coa_combination_id`, `coa_id`, `coa_structure_id
 (6195, 1, NULL, '501', '502', '0000', '500010', '3000', '501', NULL, NULL, '501-502-0000-500010-3000-501', 'X', 'USA-California-0000-Cost External Sales-Computer-USA-X', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-26 16:53:00', 34, '2015-01-26 16:53:00'),
 (6196, 1, NULL, '501', '502', '0000', '522100', '3100', '501', NULL, NULL, '501-502-0000-522100-3100-501', 'X', 'USA-California-0000-Mfg Labor Variance-All-USA-X', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-29 11:23:14', 34, '2015-01-29 11:23:14'),
 (6197, 1, NULL, '101', '103', '0000', '522100', '3100', '101', NULL, NULL, '101-103-0000-522100-3100-101', 'X', 'India-Pune-0000-Mfg Labor Variance-All-India-X', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-29 11:23:14', 34, '2015-01-29 11:23:14'),
-(6198, 1, NULL, '501', '502', '4000', '516500', '3100', '501', NULL, NULL, '501-502-4000-516500-3100-501', 'X', 'USA|California|Production|Cycle Count Adjustment|All|USA', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-04 11:16:21', 34, '2015-02-04 11:16:21');
+(6198, 1, NULL, '501', '502', '4000', '516500', '3100', '501', NULL, NULL, '501-502-4000-516500-3100-501', 'X', 'USA|California|Production|Cycle Count Adjustment|All|USA', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-04 11:16:21', 34, '2015-02-04 11:16:21'),
+(6204, 1, NULL, '503', '503', NULL, '600022', '3100', '501', NULL, NULL, '503-503-0000-600022-3100-501', 'X', 'USA-California-0000-Labor - Direct - Food Alow-All-USA-X', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-18 18:55:49', 34, '2015-02-18 18:55:49');
 
 -- --------------------------------------------------------
 
@@ -5444,7 +5450,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`comment_id`),
   FULLTEXT KEY `content` (`comment`),
   FULLTEXT KEY `subject` (`subject`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=366 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=372 ;
 
 --
 -- Dumping data for table `comment`
@@ -5661,7 +5667,13 @@ INSERT INTO `comment` (`comment_id`, `reference_table`, `reference_id`, `subject
 (362, 'bc_label_label_request', 0, NULL, '<br>Couldn''t connect : [10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.\r\n \n', NULL, NULL, NULL, NULL, 34, '2015-02-09 15:57:33', 34, '2015-02-09 15:57:33'),
 (363, 'bc_label_label_request', 0, NULL, '<br>Couldn''t connect : [10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.\r\n \n', NULL, NULL, NULL, NULL, 34, '2015-02-09 15:57:54', 34, '2015-02-09 15:57:54'),
 (364, 'content', 159, 'qweqw', '<p>sadas</p>', NULL, NULL, NULL, NULL, 34, '2015-02-18 09:15:53', 34, '2015-02-18 09:15:53'),
-(365, 'content', 159, '<p>asdsad</p>', '<p>asdsad</p>', NULL, NULL, NULL, NULL, 34, '2015-02-18 09:23:25', 34, '2015-02-18 09:23:25');
+(365, 'content', 159, '<p>asdsad</p>', '<p>asdsad</p>', NULL, NULL, NULL, NULL, 34, '2015-02-18 09:23:25', 34, '2015-02-18 09:23:25'),
+(366, 'content', 165, '<p>asdasd</p>\r\n<p>asdasda</p>', '<p>asdasd</p>\r\n<p>asdasda</p>', NULL, NULL, NULL, NULL, 98, '2015-02-18 17:07:51', 98, '2015-02-18 17:07:51'),
+(367, 'content', 165, '<p>asfddsf</p>\r\n<p>sdfsdfs</p>', '<p>asfddsf</p>\r\n<p>sdfsdfs</p>', NULL, NULL, NULL, NULL, 99, '2015-02-18 17:14:02', 99, '2015-02-18 17:14:02'),
+(368, 'po_header', 229, NULL, ' PO Approved By 34 ', NULL, 1, NULL, '34', 34, '2015-02-19 09:21:29', 34, '2015-02-19 09:21:29'),
+(369, 'po_header', 230, NULL, ' PO Approved By 34 ', NULL, 1, NULL, '34', 34, '2015-02-19 09:51:09', 34, '2015-02-19 09:51:09'),
+(370, 'po_header', 231, NULL, ' PO Approved By 34 ', NULL, 1, NULL, '34', 34, '2015-02-19 09:54:47', 34, '2015-02-19 09:54:47'),
+(371, 'po_header', 232, NULL, ' PO Approved By 34 ', NULL, 1, NULL, '34', 34, '2015-02-19 10:02:23', 34, '2015-02-19 10:02:23');
 
 -- --------------------------------------------------------
 
@@ -9206,9 +9218,9 @@ INSERT INTO `gl_balance` (`gl_balance_id`, `ledger_id`, `coa_combination_id`, `p
 (158, 19, 990, 12, 'A', NULL, '32000.00000', NULL, NULL, 34, '2015-01-26 17:07:55', 34, '2015-01-26 17:07:55'),
 (159, 19, 976, 12, 'A', NULL, '32000.00000', NULL, NULL, 34, '2015-01-26 17:07:55', 34, '2015-01-26 17:07:55'),
 (160, 19, 975, 12, 'A', NULL, '33000.00000', NULL, NULL, 34, '2015-01-26 17:07:55', 34, '2015-01-26 17:07:55'),
-(161, 19, 216, 19, 'A', '363.00000', NULL, NULL, NULL, 34, '2015-01-28 17:36:23', 34, '2015-01-29 07:53:35'),
-(162, 19, 1208, 19, 'A', NULL, '333.00000', NULL, NULL, 34, '2015-01-28 17:36:23', 34, '2015-01-29 07:53:35'),
-(163, 19, 1154, 19, 'A', NULL, '30.00000', NULL, NULL, 34, '2015-01-28 17:36:23', 34, '2015-01-29 07:53:35');
+(161, 19, 216, 19, 'A', '2363.00000', NULL, NULL, NULL, 34, '2015-01-28 17:36:23', 34, '2015-02-19 10:03:37'),
+(162, 19, 1208, 19, 'A', NULL, '333.40000', NULL, NULL, 34, '2015-01-28 17:36:23', 34, '2015-02-19 10:03:37'),
+(163, 19, 1154, 19, 'A', NULL, '2029.60000', NULL, NULL, 34, '2015-01-28 17:36:23', 34, '2015-02-19 10:03:37');
 
 -- --------------------------------------------------------
 
@@ -9266,7 +9278,7 @@ CREATE TABLE IF NOT EXISTS `gl_calendar` (
   PRIMARY KEY (`gl_calendar_id`),
   UNIQUE KEY `option_line_code` (`option_line_code`,`name`),
   UNIQUE KEY `option_line_code_2` (`option_line_code`,`year`,`number`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
 --
 -- Dumping data for table `gl_calendar`
@@ -9298,7 +9310,8 @@ INSERT INTO `gl_calendar` (`gl_calendar_id`, `option_line_code`, `adjustment_per
 (30, 'CORP_CALENDAR', NULL, 'MAR-2015', 'MONTH', 2002, 1, 3, '2015-03-01', '2015-03-31', 'MAR', NULL, 0, '2014-03-04 09:44:19', 34, '2014-12-18 07:39:43'),
 (31, 'CORP_CALENDAR', NULL, 'APR-2015', 'MONTH', 2015, 2, 4, '2015-04-01', '2015-04-30', 'APR', NULL, 0, '2014-03-26 16:55:10', 0, '2014-03-26 16:55:10'),
 (32, 'CORP_CALENDAR', NULL, 'MAY-2015', 'MONTH', 2002, 2, 5, '2015-05-01', '2015-05-31', 'MAY', NULL, 0, '2014-06-02 12:31:45', 34, '2014-12-18 07:39:43'),
-(33, 'IND_CALEDNAR', NULL, 'MAR-2014', 'MONTH', 2014, 1, 1, '2014-01-01', '2014-01-31', 'MAR', NULL, 34, '2014-12-18 05:46:15', 34, '2014-12-18 05:46:15');
+(33, 'IND_CALEDNAR', NULL, 'MAR-2014', 'MONTH', 2014, 1, 1, '2014-01-01', '2014-01-31', 'MAR', NULL, 34, '2014-12-18 05:46:15', 34, '2014-12-18 05:46:15'),
+(36, 'CORP_CALENDAR', NULL, 'Apr-20', 'MONTH', 2020, 2, 4, '2020-01-01', '2020-01-30', 'APR', NULL, 34, '2015-02-20 04:10:01', 34, '2015-02-20 04:10:01');
 
 -- --------------------------------------------------------
 
@@ -9375,7 +9388,7 @@ CREATE TABLE IF NOT EXISTS `gl_journal_header` (
   `last_update_date` datetime NOT NULL,
   PRIMARY KEY (`gl_journal_header_id`),
   UNIQUE KEY `ledger_id` (`ledger_id`,`period_id`,`reference_type`,`reference_key_name`,`reference_key_value`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=141 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=146 ;
 
 --
 -- Dumping data for table `gl_journal_header`
@@ -9479,7 +9492,11 @@ INSERT INTO `gl_journal_header` (`gl_journal_header_id`, `ledger_id`, `currency`
 (137, 19, 'USD', NULL, 19, 'inv', 'INV_INVENTORY', 'INV_INVENTORY-1123', 'INV_INVENTORY-1123-2015-02-14 07:07:24', 'A', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'table', 'inv_transaction', '1123', NULL, 'ENTERED', NULL, NULL, 34, '2015-02-14 07:07:24', 34, '2015-02-14 07:07:24'),
 (138, 19, 'USD', NULL, 19, 'inv', 'INV_INVENTORY', 'INV_INVENTORY-1124', 'INV_INVENTORY-1124-2015-02-14 07:07:24', 'A', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'table', 'inv_transaction', '1124', NULL, 'ENTERED', NULL, NULL, 34, '2015-02-14 07:07:24', 34, '2015-02-14 07:07:24'),
 (139, 19, 'USD', NULL, 19, 'inv', 'INV_INVENTORY', 'INV_INVENTORY-1125', 'INV_INVENTORY-1125-2015-02-14 07:08:06', 'A', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'table', 'inv_transaction', '1125', NULL, 'ENTERED', NULL, NULL, 34, '2015-02-14 07:08:06', 34, '2015-02-14 07:08:06'),
-(140, 19, 'USD', NULL, 19, 'inv', 'INV_INVENTORY', 'INV_INVENTORY-1126', 'INV_INVENTORY-1126-2015-02-14 07:08:06', 'A', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'table', 'inv_transaction', '1126', NULL, 'ENTERED', NULL, NULL, 34, '2015-02-14 07:08:06', 34, '2015-02-14 07:08:06');
+(140, 19, 'USD', NULL, 19, 'inv', 'INV_INVENTORY', 'INV_INVENTORY-1126', 'INV_INVENTORY-1126-2015-02-14 07:08:06', 'A', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'table', 'inv_transaction', '1126', NULL, 'ENTERED', NULL, NULL, 34, '2015-02-14 07:08:06', 34, '2015-02-14 07:08:06'),
+(141, 19, 'USD', NULL, 19, 'inv', 'INV_INVENTORY', 'INV_INVENTORY-1127', 'INV_INVENTORY-1127-2015-02-19 09:48:29', 'A', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'table', 'inv_transaction', '1127', NULL, 'ENTERED', NULL, NULL, 34, '2015-02-19 09:48:29', 34, '2015-02-19 09:48:29'),
+(143, 19, 'USD', NULL, 19, 'inv', 'INV_INVENTORY', 'INV_INVENTORY-1129', 'INV_INVENTORY-1129-2015-02-19 09:55:32', 'A', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'table', 'inv_transaction', '1129', NULL, 'ENTERED', NULL, NULL, 34, '2015-02-19 09:55:32', 34, '2015-02-19 09:55:32'),
+(144, 19, 'USD', NULL, 19, 'inv', 'INV_INVENTORY', 'INV_INVENTORY-1130', 'INV_INVENTORY-1130-2015-02-19 09:59:39', 'A', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'table', 'inv_transaction', '1130', NULL, 'ENTERED', NULL, NULL, 34, '2015-02-19 09:59:39', 34, '2015-02-19 09:59:39'),
+(145, 19, 'USD', NULL, 19, 'inv', 'INV_INVENTORY', 'INV_INVENTORY-1131', 'INV_INVENTORY-1131-2015-02-19 10:03:02', 'A', '2015-02-19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'table', 'inv_transaction', '1131', NULL, 'POSTED', NULL, NULL, 34, '2015-02-19 10:03:02', 34, '2015-02-19 10:03:37');
 
 -- --------------------------------------------------------
 
@@ -9513,7 +9530,7 @@ CREATE TABLE IF NOT EXISTS `gl_journal_line` (
   KEY `total_dr` (`total_dr`),
   KEY `total_ac_dr` (`total_ac_dr`),
   KEY `total_ac_cr` (`total_ac_cr`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=365 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=380 ;
 
 --
 -- Dumping data for table `gl_journal_line`
@@ -9837,7 +9854,19 @@ INSERT INTO `gl_journal_line` (`gl_journal_line_id`, `gl_journal_header_id`, `li
 (361, 139, 1, 'U', NULL, 'Inv Transaction Id 1125 item id 10034', 4962, NULL, '30000.00000', NULL, '30000.00000', 'table', 'inv_transaction', '1125', NULL, 34, '2015-02-14 07:08:06', 34, '2015-02-14 07:08:06'),
 (362, 139, 2, 'U', NULL, 'Inv Transaction Id 1125 item id 10034', 6194, '30000.00000', NULL, '30000.00000', NULL, 'table', 'inv_transaction', '1125', NULL, 34, '2015-02-14 07:08:06', 34, '2015-02-14 07:08:06'),
 (363, 140, 1, 'U', NULL, 'Inv Transaction Id 1126 item id 10089', 4962, NULL, '330.00000', NULL, '330.00000', 'table', 'inv_transaction', '1126', NULL, 34, '2015-02-14 07:08:06', 34, '2015-02-14 07:08:06'),
-(364, 140, 2, 'U', NULL, 'Inv Transaction Id 1126 item id 10089', 6194, '330.00000', NULL, '330.00000', NULL, 'table', 'inv_transaction', '1126', NULL, 34, '2015-02-14 07:08:06', 34, '2015-02-14 07:08:06');
+(364, 140, 2, 'U', NULL, 'Inv Transaction Id 1126 item id 10089', 6194, '330.00000', NULL, '330.00000', NULL, 'table', 'inv_transaction', '1126', NULL, 34, '2015-02-14 07:08:06', 34, '2015-02-14 07:08:06'),
+(365, 141, 1, 'U', NULL, 'Inv Transaction Id 1127 item id 10095', 216, '5000.00000', NULL, '5000.00000', NULL, 'table', 'inv_transaction', '1127', NULL, 34, '2015-02-19 09:48:29', 34, '2015-02-19 09:48:29'),
+(366, 141, 2, 'U', NULL, 'Inv Transaction Id 1127 item id 10095', 1208, NULL, '1110.00000', NULL, '1110.00000', 'table', 'inv_transaction', '1127', NULL, 34, '2015-02-19 09:48:29', 34, '2015-02-19 09:48:29'),
+(367, 141, 3, 'U', NULL, 'Inv Transaction Id 1127 item id 10095', 1154, NULL, '3890.00000', NULL, '3890.00000', 'table', 'inv_transaction', '1127', NULL, 34, '2015-02-19 09:48:29', 34, '2015-02-19 09:48:29'),
+(371, 143, 1, 'U', NULL, 'Inv Transaction Id 1129 item id 10034', 216, '2000.00000', NULL, '2000.00000', NULL, 'table', 'inv_transaction', '1129', NULL, 34, '2015-02-19 09:55:32', 34, '2015-02-19 09:55:32'),
+(372, 143, 2, 'U', NULL, 'Inv Transaction Id 1129 item id 10034', 1208, NULL, '37.00008', NULL, '37.00008', 'table', 'inv_transaction', '1129', NULL, 34, '2015-02-19 09:55:32', 34, '2015-02-19 09:55:32'),
+(373, 143, 3, 'U', NULL, 'Inv Transaction Id 1129 item id 10034', 1154, NULL, '1962.99992', NULL, '1962.99992', 'table', 'inv_transaction', '1129', NULL, 34, '2015-02-19 09:55:32', 34, '2015-02-19 09:55:32'),
+(374, 144, 1, 'U', NULL, 'Inv Transaction Id 1130 item id 10034', 216, '1000.00000', NULL, '1000.00000', NULL, 'table', 'inv_transaction', '1130', NULL, 34, '2015-02-19 09:59:39', 34, '2015-02-19 09:59:39'),
+(375, 144, 2, 'U', NULL, 'Inv Transaction Id 1130 item id 10034', 1208, NULL, '1.85000', NULL, '1.85000', 'table', 'inv_transaction', '1130', NULL, 34, '2015-02-19 09:59:39', 34, '2015-02-19 09:59:39'),
+(376, 144, 3, 'U', NULL, 'Inv Transaction Id 1130 item id 10034', 1154, NULL, '998.15000', NULL, '998.15000', 'table', 'inv_transaction', '1130', NULL, 34, '2015-02-19 09:59:39', 34, '2015-02-19 09:59:39'),
+(377, 145, 1, 'P', NULL, 'Inv Transaction Id 1131 item id 10034', 216, '2000.00000', NULL, '2000.00000', NULL, 'table', 'inv_transaction', '1131', NULL, 34, '2015-02-19 10:03:02', 34, '2015-02-19 10:03:37'),
+(378, 145, 2, 'P', NULL, 'Inv Transaction Id 1131 item id 10034', 1208, NULL, '0.40000', NULL, '0.40000', 'table', 'inv_transaction', '1131', NULL, 34, '2015-02-19 10:03:02', 34, '2015-02-19 10:03:37'),
+(379, 145, 3, 'P', NULL, 'Inv Transaction Id 1131 item id 10034', 1154, NULL, '1999.60000', NULL, '1999.60000', 'table', 'inv_transaction', '1131', NULL, 34, '2015-02-19 10:03:02', 34, '2015-02-19 10:03:37');
 
 -- --------------------------------------------------------
 
@@ -10589,7 +10618,7 @@ INSERT INTO `hr_employee_experience` (`hr_employee_experience_id`, `employee_id`
 --
 CREATE TABLE IF NOT EXISTS `hr_employee_position_v` (
 `user_id` int(12) unsigned
-,`username` varchar(50)
+,`username` varchar(256)
 ,`first_name` varchar(100)
 ,`last_name` varchar(60)
 ,`email` varchar(100)
@@ -13013,7 +13042,7 @@ CREATE TABLE IF NOT EXISTS `inv_receipt_header` (
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime NOT NULL,
   PRIMARY KEY (`inv_receipt_header_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=138 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=143 ;
 
 --
 -- Dumping data for table `inv_receipt_header`
@@ -13156,7 +13185,12 @@ INSERT INTO `inv_receipt_header` (`inv_receipt_header_id`, `receipt_number`, `co
 (134, '6-134', ' ', 6, 5, '2015-02-09', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 11:14:34', 34, '2015-02-09 11:56:17'),
 (135, '6-135', NULL, 6, 5, '2015-02-09', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 11:57:14', 34, '2015-02-09 12:02:39'),
 (136, '6-136', NULL, 6, 5, '2015-02-09', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 12:02:49', 34, '2015-02-09 12:03:09'),
-(137, '6-137', NULL, 6, 5, '2015-02-09', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 12:04:54', 34, '2015-02-09 12:04:57');
+(137, '6-137', NULL, 6, 5, '2015-02-09', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 12:04:54', 34, '2015-02-09 12:04:57'),
+(138, '6-138', NULL, 6, 5, '2015-02-19', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-19 09:48:02', 34, '2015-02-19 09:48:29'),
+(139, '6-139', NULL, 6, 5, '2015-02-19', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-19 09:51:24', 34, '2015-02-19 09:52:14'),
+(140, '6-140', NULL, 6, 5, '2015-02-19', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-19 09:55:04', 34, '2015-02-19 09:55:32'),
+(141, '6-141', NULL, 6, 5, '2015-02-19', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-19 09:59:20', 34, '2015-02-19 09:59:39'),
+(142, '6-142', NULL, 6, 5, '2015-02-19', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-19 10:02:44', 34, '2015-02-19 10:03:02');
 
 -- --------------------------------------------------------
 
@@ -13195,7 +13229,7 @@ CREATE TABLE IF NOT EXISTS `inv_receipt_line` (
   `last_update_date` datetime NOT NULL,
   PRIMARY KEY (`inv_receipt_line_id`),
   UNIQUE KEY `inv_receipt_header_id` (`inv_receipt_header_id`,`line_number`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=147 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=152 ;
 
 --
 -- Dumping data for table `inv_receipt_line`
@@ -13272,7 +13306,11 @@ INSERT INTO `inv_receipt_line` (`inv_receipt_line_id`, `inv_receipt_header_id`, 
 (140, 134, 5, '2', 2, 5, 10158, '', 'MI_KIT01', 'Error', 27, NULL, NULL, 1, NULL, NULL, 228, 241, 212, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 11:49:15', 34, '2015-02-09 11:49:15'),
 (143, 135, 5, '1', 2, 5, 10158, '', 'MI_KIT01', 'Error', 27, NULL, NULL, 2, NULL, NULL, 228, 241, 212, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 11:57:17', 34, '2015-02-09 11:57:17'),
 (145, 136, 5, '1', 2, 5, 10158, '', 'MI_KIT01', 'Error', 27, NULL, NULL, 1, NULL, NULL, 228, 241, 212, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 12:03:09', 34, '2015-02-09 12:03:09'),
-(146, 137, 5, '1', 2, 5, 10158, '', 'MI_KIT01', 'Error', 27, NULL, NULL, 1, NULL, NULL, 228, 241, 212, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 12:04:58', 34, '2015-02-09 12:04:58');
+(146, 137, 5, '1', 2, 5, 10158, '', 'MI_KIT01', 'Error', 27, NULL, NULL, 1, NULL, NULL, 228, 241, 212, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 12:04:58', 34, '2015-02-09 12:04:58'),
+(147, 138, 5, '1', 2, 5, 10095, '', 'MI_SA002', 'Error', 27, NULL, NULL, 10, NULL, NULL, 229, 242, 213, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-19 09:48:29', 34, '2015-02-19 09:48:29'),
+(149, 140, 5, '1', 2, 5, 10034, '', 'Desktop 01 of Model A', 'Error', 27, NULL, NULL, 2, NULL, NULL, 231, 244, 215, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-19 09:55:32', 34, '2015-02-19 09:55:32'),
+(150, 141, 5, '1', 2, 5, 10034, '', 'Desktop 01 of Model A', 'Error', 27, NULL, NULL, 1, NULL, NULL, 231, 244, 215, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-19 09:59:39', 34, '2015-02-19 09:59:39'),
+(151, 142, 5, '1', 2, 5, 10034, '', 'Desktop 01 of Model A', 'Error', 27, NULL, NULL, 2, NULL, NULL, 232, 245, 216, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-19 10:03:02', 34, '2015-02-19 10:03:02');
 
 -- --------------------------------------------------------
 
@@ -13466,7 +13504,7 @@ INSERT INTO `inv_serial_number` (`inv_serial_number_id`, `serial_number`, `item_
 (196, 'MI_PUR001-004', 10098, 'AT_RECEIPT', 6, NULL, 695, NULL, NULL, 'INVENTORY', '2014-09-26', 'IN_WIP', '2014-09-26', 6, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, 701, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-26 09:07:16', 0, '2014-09-26 17:04:37'),
 (197, 'MI_PUR001-005', 10098, 'AT_RECEIPT', 6, NULL, 695, NULL, NULL, 'INVENTORY', '2014-09-26', 'OUT_STORE', '2014-09-26', 6, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 198, NULL, 0, 708, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-26 09:07:16', 0, '2014-09-26 22:07:08'),
 (198, 'MI_SA002-001', 10095, 'PRE_DEFINED', 6, NULL, NULL, NULL, NULL, 'MANUAL', '2014-09-26', 'IN_STORE', '2014-09-26', 6, NULL, NULL, NULL, NULL, NULL, 2, 5, NULL, NULL, NULL, NULL, 721, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-26 14:33:39', 0, '2014-09-26 22:07:07'),
-(199, 'MI_SA002-002', 10095, 'PRE_DEFINED', 6, NULL, NULL, NULL, NULL, 'MANUAL', '2014-09-26', 'DEFINED', NULL, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-26 14:34:39', 0, '2014-09-26 14:34:39'),
+(199, 'MI_SA002-002', 10095, 'PRE_DEFINED', 6, NULL, NULL, NULL, NULL, 'MANUAL', '2014-09-26', 'IN_STORE', '2015-02-19', 6, NULL, NULL, NULL, NULL, NULL, 2, 5, NULL, NULL, NULL, NULL, 1127, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-26 14:34:39', 34, '2015-02-19 09:48:29'),
 (202, 'MI_PUR001-006', 10098, 'AT_RECEIPT', 6, NULL, 704, NULL, NULL, 'INVENTORY', '2014-09-26', 'OUT_STORE', '2014-09-26', 6, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 198, NULL, 0, 716, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-26 19:19:51', 0, '2014-09-26 22:07:08'),
 (209, 'MI_PUR001-007', 10098, 'AT_RECEIPT', 6, NULL, 707, NULL, NULL, 'INVENTORY', '2014-09-26', 'IN_WIP', '2014-12-31', 6, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 141, 912, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-26 19:29:59', 34, '2014-12-31 04:22:35'),
 (210, 'MI_PUR001-008', 10098, 'AT_RECEIPT', 6, NULL, 707, NULL, NULL, 'INVENTORY', '2014-09-26', 'IN_STORE', '2014-09-26', 6, NULL, NULL, NULL, NULL, NULL, 2, 5, NULL, NULL, NULL, NULL, 707, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-26 19:29:59', 0, '2014-09-26 19:29:59'),
@@ -13532,7 +13570,7 @@ CREATE TABLE IF NOT EXISTS `inv_serial_transaction` (
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`inv_serial_transaction_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=158 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=159 ;
 
 --
 -- Dumping data for table `inv_serial_transaction`
@@ -13662,7 +13700,8 @@ INSERT INTO `inv_serial_transaction` (`inv_serial_transaction_id`, `inv_transact
 (154, 977, 235, 34, '2015-01-29 10:39:10', 34, '2015-01-29 10:39:10'),
 (155, 977, 231, 34, '2015-01-29 10:39:10', 34, '2015-01-29 10:39:10'),
 (156, 977, 235, 34, '2015-01-29 10:39:10', 34, '2015-01-29 10:39:10'),
-(157, 977, 231, 34, '2015-01-29 10:39:10', 34, '2015-01-29 10:39:10');
+(157, 977, 231, 34, '2015-01-29 10:39:10', 34, '2015-01-29 10:39:10'),
+(158, 1127, 199, 34, '2015-02-19 09:48:29', 34, '2015-02-19 09:48:29');
 
 -- --------------------------------------------------------
 
@@ -13756,7 +13795,7 @@ CREATE TABLE IF NOT EXISTS `inv_transaction` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`inv_transaction_id`),
   KEY `transaction_type_id` (`transaction_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1127 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1132 ;
 
 --
 -- Dumping data for table `inv_transaction`
@@ -14607,7 +14646,11 @@ INSERT INTO `inv_transaction` (`inv_transaction_id`, `transaction_type_id`, `org
 (1123, 14, 6, 'Success', NULL, NULL, NULL, 10089, 27, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 82, 'SO Picking', 'table', 'sd_so_header', '45', NULL, NULL, 12, NULL, 5, NULL, NULL, 13, 17, NULL, NULL, NULL, 137, NULL, NULL, NULL, 34, '2015-02-14 07:07:24', 34, '2015-02-14 07:07:24'),
 (1124, 14, 6, 'Success', NULL, NULL, NULL, 10089, 27, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 82, 'SO Picking', 'table', 'sd_so_header', '45', NULL, NULL, 2, 5, 10, NULL, NULL, 13, 17, NULL, NULL, NULL, 138, NULL, NULL, NULL, 34, '2015-02-14 07:07:24', 34, '2015-02-14 07:07:24'),
 (1125, 15, 6, 'Success', NULL, NULL, NULL, 10034, 27, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 82, 'SO Shipping', 'table', 'sd_so_header', '71', NULL, NULL, 13, 17, 30, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 139, NULL, NULL, NULL, 34, '2015-02-14 07:08:06', 34, '2015-02-14 07:08:06'),
-(1126, 15, 6, 'Success', NULL, NULL, NULL, 10089, 27, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 82, 'SO Shipping', 'table', 'sd_so_header', '71', NULL, NULL, 13, 17, 15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 140, NULL, NULL, NULL, 34, '2015-02-14 07:08:06', 34, '2015-02-14 07:08:06');
+(1126, 15, 6, 'Success', NULL, NULL, NULL, 10089, 27, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 82, 'SO Shipping', 'table', 'sd_so_header', '71', NULL, NULL, 13, 17, 15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 140, NULL, NULL, NULL, 34, '2015-02-14 07:08:06', 34, '2015-02-14 07:08:06'),
+(1127, 5, 6, 'Success', NULL, NULL, '', 10095, NULL, NULL, NULL, 'PO', '5-229', NULL, NULL, NULL, NULL, 213, NULL, NULL, 'table', 'inv_receipt_line', '147', NULL, NULL, NULL, NULL, 10, NULL, NULL, 2, 5, NULL, NULL, NULL, 141, NULL, NULL, NULL, 34, '2015-02-19 09:48:29', 34, '2015-02-19 09:48:29'),
+(1129, 5, 6, 'Success', NULL, NULL, '', 10034, NULL, NULL, NULL, 'PO', '5-231', NULL, NULL, NULL, NULL, 215, NULL, NULL, 'table', 'inv_receipt_line', '149', NULL, NULL, NULL, NULL, 2, NULL, NULL, 2, 5, NULL, NULL, NULL, 143, NULL, NULL, NULL, 34, '2015-02-19 09:55:32', 34, '2015-02-19 09:55:32'),
+(1130, 5, 6, 'Success', NULL, NULL, '', 10034, NULL, NULL, NULL, 'PO', '5-231', NULL, NULL, NULL, NULL, 215, NULL, NULL, 'table', 'inv_receipt_line', '150', NULL, NULL, NULL, NULL, 1, NULL, NULL, 2, 5, NULL, NULL, NULL, 144, NULL, NULL, NULL, 34, '2015-02-19 09:59:39', 34, '2015-02-19 09:59:39'),
+(1131, 5, 6, 'Success', NULL, NULL, '', 10034, NULL, NULL, NULL, 'PO', '5-232', NULL, NULL, NULL, NULL, 216, NULL, NULL, 'table', 'inv_receipt_line', '151', NULL, NULL, NULL, NULL, 2, NULL, NULL, 2, 5, NULL, NULL, NULL, 145, NULL, NULL, NULL, 34, '2015-02-19 10:03:02', 34, '2015-02-19 10:03:02');
 
 -- --------------------------------------------------------
 
@@ -14743,7 +14786,7 @@ CREATE TABLE IF NOT EXISTS `item` (
   PRIMARY KEY (`item_id`),
   UNIQUE KEY `item_number_2` (`item_number`,`org_id`),
   UNIQUE KEY `item_id_m` (`item_id_m`,`org_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10180 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10184 ;
 
 --
 -- Dumping data for table `item`
@@ -14906,7 +14949,9 @@ INSERT INTO `item` (`item_id`, `item_id_m`, `org_id`, `item_number`, `item_descr
 (10176, NULL, 7, 'MI_101', 'MI_101', NULL, NULL, '                                 ', NULL, NULL, 27, '', '0000-00-00', 'PRODUCT', '277', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '                         ', '                         ', NULL, NULL, '                         ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '                                 ', '                                 ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Buy', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-18 09:01:24', 34, '2015-02-18 09:01:24'),
 (10177, 10177, 7, 'MI_102', 'MI_102', '', '0.00000', '                                 ', NULL, '', 27, '', '0000-00-00', 'PRODUCT', '277', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '', '', '                         ', '                         ', '', '', '                         ', 0, NULL, NULL, '', '', '', '', '', NULL, 0, NULL, 0, 0, '                                 ', '                                 ', 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, '', '', 'Buy', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0.00000', '0.00000', 0, '0.00000', '', '', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, 0, NULL, NULL, NULL, NULL, 34, '2015-02-18 09:05:19', 34, '2015-02-18 09:05:19'),
 (10178, 10178, 7, 'MI_103', 'MI_103', '', '0.00000', '                                 ', NULL, '', 27, '', '0000-00-00', 'PRODUCT', '277', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '', '', '                         ', '                         ', '', '', '                         ', 0, NULL, NULL, '', '', '', '', '', NULL, 0, NULL, 0, 0, '                                 ', '                                 ', 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, '', '', 'Buy', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0.00000', '0.00000', 0, '0.00000', '', '', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, 0, NULL, NULL, NULL, NULL, 34, '2015-02-18 09:07:24', 34, '2015-02-18 09:07:24'),
-(10179, 10179, 7, 'MI_106', 'MI_106', NULL, NULL, '                                 ', NULL, NULL, 27, '', '0000-00-00', 'PRODUCT', '277', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '                         ', '                         ', NULL, NULL, '                         ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '                                 ', '                                 ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Buy', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-18 09:14:34', 34, '2015-02-18 09:25:47');
+(10179, 10179, 7, 'MI_106', 'MI_106', NULL, NULL, '                                 ', NULL, NULL, 27, '', '0000-00-00', 'PRODUCT', '277', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '                         ', '                         ', NULL, NULL, '                         ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '                                 ', '                                 ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Buy', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-18 09:14:34', 34, '2015-02-18 09:25:47'),
+(10180, 10180, 7, 'MI_IND101', 'MI_IND101', '', '0.00000', '                                 ', NULL, '', 27, '', '0000-00-00', 'PRODUCT', '277', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '', '', '                         ', '                         ', '', '', '                         ', 0, NULL, NULL, '', '', '', '', '', NULL, 0, NULL, 0, 0, '                                 ', '                                 ', 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, '', '', 'Buy', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0.00000', '0.00000', 0, '0.00000', '', '', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, 0, NULL, NULL, NULL, NULL, 34, '2015-02-18 13:44:00', 34, '2015-02-18 13:44:00'),
+(10181, 10181, 7, 'Mi_801', 'Mi_801', '', '0.00000', '                                 ', NULL, '', 27, '', '0000-00-00', 'PRODUCT', '277', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '', '', '                         ', '                         ', '', '', '                         ', 0, NULL, NULL, '', '', '', '', '', NULL, 0, NULL, 0, 0, '                                 ', '                                 ', 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, '', '', 'Buy', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0.00000', '0.00000', 0, '0.00000', '', '', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, 0, NULL, NULL, NULL, NULL, 34, '2015-02-18 18:23:07', 34, '2015-02-18 18:23:07');
 
 -- --------------------------------------------------------
 
@@ -15556,7 +15601,7 @@ INSERT INTO `onhand` (`onhand_id`, `item_id_m`, `revision_name`, `org_id`, `subi
 (30, 6, NULL, 6, 3, 9, NULL, NULL, 94, 4, 4, NULL, NULL, 2, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (31, 6, NULL, 6, 5, NULL, NULL, NULL, 45, 45, 45, NULL, NULL, 27, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (32, 6, NULL, 6, 6, NULL, NULL, NULL, 45, 45, 45, NULL, NULL, 27, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(49, 10034, '', 6, 2, 5, NULL, NULL, 2643, 2643, 2643, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-29 15:42:18', 34, '2015-02-14 07:07:24'),
+(49, 10034, '', 6, 2, 5, NULL, NULL, 2648, 2648, 2648, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-29 15:42:18', 34, '2015-02-19 10:03:02'),
 (50, 10050, NULL, 6, 2, 5, NULL, NULL, 12, 12, 12, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-04-28 11:21:42', 0, '2028-04-14 11:21:42'),
 (62, 10034, '', 6, 3, 9, NULL, NULL, 629, 629, 629, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-29 15:06:22', 34, '2015-02-07 13:22:28'),
 (63, 10048, NULL, 6, 3, 9, NULL, NULL, 333, 333, 333, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-29 15:01:31', 0, '2029-07-14 15:01:31'),
@@ -15565,7 +15610,7 @@ INSERT INTO `onhand` (`onhand_id`, `item_id_m`, `revision_name`, `org_id`, `subi
 (78, 10107, NULL, 6, 13, 17, NULL, NULL, 42, 42, 42, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-12 08:41:50', 34, '2015-01-01 04:37:15'),
 (79, 10092, NULL, 6, 3, 9, NULL, NULL, 375, 375, 375, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-02 19:47:32', 0, '2002-08-14 19:47:32'),
 (80, 10107, NULL, 6, 1, 14, NULL, NULL, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 14:52:11', 0, '2010-07-14 14:52:11'),
-(81, 10095, NULL, 6, 2, 5, NULL, NULL, 799, 799, 799, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-26 22:07:07', 0, '2014-09-26 22:07:07'),
+(81, 10095, '', 6, 2, 5, NULL, NULL, 809, 809, 809, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-26 22:07:07', 34, '2015-02-19 09:48:29'),
 (94, 10092, NULL, 9, 38, NULL, NULL, NULL, 21, 21, 21, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-02 09:56:50', 0, '2002-08-14 09:56:50'),
 (95, 10092, NULL, 11, 39, NULL, NULL, NULL, 4, 4, 4, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-02 19:47:32', 0, '2002-08-14 19:47:32'),
 (96, 10089, '', 6, 2, 5, NULL, NULL, 1992, 1992, 1992, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-18 13:22:08', 34, '2015-02-14 07:07:24'),
@@ -17885,6 +17930,8 @@ CREATE TABLE IF NOT EXISTS `po_all_v` (
 ,`line_quantity` decimal(20,5)
 ,`unit_price` decimal(20,5)
 ,`line_price` decimal(20,5)
+,`gl_line_price` decimal(15,5)
+,`gl_tax_amount` decimal(15,5)
 ,`item_number` varchar(50)
 ,`uom_id` int(12)
 ,`item_status` varchar(50)
@@ -18172,7 +18219,7 @@ CREATE TABLE IF NOT EXISTS `po_detail` (
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime NOT NULL,
   PRIMARY KEY (`po_detail_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=213 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=217 ;
 
 --
 -- Dumping data for table `po_detail`
@@ -18388,7 +18435,11 @@ INSERT INTO `po_detail` (`po_detail_id`, `po_line_id`, `po_header_id`, `shipment
 (209, 238, 227, 1, 2, 5, NULL, NULL, NULL, NULL, '10.00000', '2015-02-27', NULL, 3790, 1208, NULL, 1154, 5, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 05:42:42', 34, '2015-02-09 09:38:06'),
 (210, 239, 227, 1, 2, 5, NULL, NULL, NULL, NULL, '5.00000', '2015-02-25', NULL, 3790, 1208, NULL, 1154, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 10:09:57', 34, '2015-02-09 10:09:57'),
 (211, 240, 227, 1, 2, 5, NULL, NULL, NULL, NULL, '10.00000', '2015-02-25', NULL, 3790, 1208, NULL, 1154, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 10:20:08', 34, '2015-02-09 10:20:08'),
-(212, 241, 228, 1, 2, 5, NULL, NULL, NULL, NULL, '12.00000', '2015-02-26', NULL, 3790, 1208, NULL, 1154, 5, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 11:13:51', 34, '2015-02-09 12:04:58');
+(212, 241, 228, 1, 2, 5, NULL, NULL, NULL, NULL, '12.00000', '2015-02-26', NULL, 3790, 1208, NULL, 1154, 5, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 11:13:51', 34, '2015-02-09 12:04:58'),
+(213, 242, 229, 1, NULL, NULL, NULL, NULL, NULL, NULL, '10.00000', '2015-02-24', NULL, 3790, 1208, NULL, 1154, 10, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-19 09:21:18', 34, '2015-02-19 09:48:29'),
+(214, 243, 230, 1, NULL, NULL, NULL, NULL, NULL, NULL, '10.00000', '2015-02-24', NULL, 3790, 1208, NULL, 1154, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-19 09:51:10', 34, '2015-02-19 09:51:10'),
+(215, 244, 231, 1, NULL, NULL, NULL, NULL, NULL, NULL, '10.00000', '2015-02-24', NULL, 3790, 1208, NULL, 1154, 3, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-19 09:54:35', 34, '2015-02-19 09:59:39'),
+(216, 245, 232, 1, NULL, NULL, NULL, NULL, NULL, NULL, '10.00000', '2015-02-24', NULL, 3790, 1208, NULL, 1154, 2, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-19 10:02:05', 34, '2015-02-19 10:03:02');
 
 -- --------------------------------------------------------
 
@@ -18490,7 +18541,7 @@ CREATE TABLE IF NOT EXISTS `po_header` (
   PRIMARY KEY (`po_header_id`),
   UNIQUE KEY `release_number` (`release_number`,`po_number`),
   UNIQUE KEY `po_header_id` (`po_header_id`,`release_number`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=229 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=233 ;
 
 --
 -- Dumping data for table `po_header`
@@ -18723,7 +18774,11 @@ INSERT INTO `po_header` (`po_header_id`, `bu_org_id`, `ref_po_header_id`, `relea
 (225, 5, NULL, NULL, 'STANDARD', NULL, 30, 57, NULL, NULL, 83, NULL, '0.01000', NULL, NULL, 'USD', 'GBP', 2, NULL, NULL, 'CORP', NULL, NULL, 'ENTERED', 34, '2015-01-12 06:14:05', 34, '2015-01-12 06:14:05', NULL, NULL),
 (226, 5, NULL, NULL, 'STANDARD', '5-226', 2, 3, 'inoerp inoerp', NULL, 88, 86, '1937.00000', NULL, 2, 'USD', 'USD', 2, NULL, NULL, 'CORP', NULL, NULL, 'REAPPROVAL', 34, '2015-01-28 17:28:00', 34, '2015-02-07 12:10:24', NULL, NULL),
 (227, 5, NULL, NULL, 'STANDARD', '5-227', 30, 57, 'inoerp inoerp', NULL, 88, 86, '1075.00000', '97.41000', 2, 'USD', 'GBP', 4, NULL, NULL, 'CORP', NULL, NULL, 'APPROVED', 34, '2015-02-08 13:27:06', 34, '2015-02-09 10:20:07', NULL, NULL),
-(228, 5, NULL, NULL, 'STANDARD', '5-228', 30, 57, 'inoerp inoerp', NULL, 88, 86, '132.00000', NULL, 2, 'USD', 'GBP', 4, NULL, NULL, 'CORP', NULL, NULL, 'APPROVED', 34, '2015-02-09 11:09:34', 34, '2015-02-09 11:14:21', NULL, NULL);
+(228, 5, NULL, NULL, 'STANDARD', '5-228', 30, 57, 'inoerp inoerp', NULL, 88, 86, '132.00000', NULL, 2, 'USD', 'GBP', 4, NULL, NULL, 'CORP', NULL, NULL, 'APPROVED', 34, '2015-02-09 11:09:34', 34, '2015-02-09 11:14:21', NULL, NULL),
+(229, 5, NULL, NULL, 'STANDARD', '5-229', 2, 3, 'inoerp inoerp', NULL, 88, 86, '1110.00000', '113.22000', NULL, 'USD', 'INR', 2, NULL, NULL, 'CORP', '0.01667', NULL, 'APPROVED', 34, '2015-02-19 09:20:49', 34, '2015-02-19 09:47:24', NULL, NULL),
+(230, 5, NULL, NULL, 'STANDARD', '5-230', 2, 3, 'inoerp inoerp', NULL, 88, 86, '1110.00000', '113.22000', NULL, 'USD', 'INR', 2, NULL, NULL, 'CORP', '0.01667', NULL, 'APPROVED', 34, '2015-02-19 09:51:01', 34, '2015-02-19 09:51:09', NULL, NULL),
+(231, 5, NULL, NULL, 'STANDARD', '5-231', 2, 3, 'inoerp inoerp', NULL, 88, 86, '1110.00000', '113.22000', NULL, 'USD', 'INR', 2, NULL, NULL, 'CORP', '0.01667', NULL, 'APPROVED', 34, '2015-02-19 09:54:32', 34, '2015-02-19 09:54:47', NULL, NULL),
+(232, 5, NULL, NULL, 'STANDARD', '5-232', 2, 3, 'inoerp inoerp', NULL, 88, 86, '120.00000', '12.24000', NULL, 'USD', 'INR', 2, NULL, NULL, 'CORP', '0.01667', NULL, 'APPROVED', 34, '2015-02-19 10:02:00', 34, '2015-02-19 10:02:23', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -18747,6 +18802,8 @@ CREATE TABLE IF NOT EXISTS `po_line` (
   `line_price` decimal(20,5) DEFAULT NULL,
   `tax_code_id` int(12) DEFAULT NULL,
   `tax_amount` decimal(20,5) DEFAULT NULL,
+  `gl_line_price` decimal(15,5) DEFAULT NULL,
+  `gl_tax_amount` decimal(15,5) DEFAULT NULL,
   `exchange_rate` decimal(20,5) DEFAULT NULL,
   `reference_doc_type` varchar(50) DEFAULT NULL,
   `reference_doc_number` int(12) DEFAULT NULL,
@@ -18765,220 +18822,225 @@ CREATE TABLE IF NOT EXISTS `po_line` (
   `rev_number` int(12) DEFAULT NULL,
   PRIMARY KEY (`po_line_id`),
   UNIQUE KEY `po_header_id` (`po_header_id`,`line_number`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=242 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=246 ;
 
 --
 -- Dumping data for table `po_line`
 --
 
-INSERT INTO `po_line` (`po_line_id`, `po_header_id`, `line_number`, `bpa_line_id`, `receving_org_id`, `item_id_m`, `revision_name`, `item_description`, `line_quantity`, `price_list_header_id`, `price_date`, `unit_price`, `line_price`, `tax_code_id`, `tax_amount`, `exchange_rate`, `reference_doc_type`, `reference_doc_number`, `line_type`, `line_description`, `uom_id`, `kit_configured_cb`, `hold_cb`, `kit_cb`, `status`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`, `rev_enabled_cb`, `rev_number`) VALUES
-(1, 5, 1, NULL, 0, 1, NULL, 'TEST03', '10.00000', NULL, NULL, '8.00000', '80.00000', NULL, NULL, NULL, NULL, NULL, '329', 'TEST01', 27, NULL, NULL, NULL, NULL, 0, '2013-11-20 10:37:27', 0, '2013-11-20 10:37:27', NULL, NULL),
-(2, 4, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '100.00000', NULL, NULL, '10.00000', '1.00000', NULL, NULL, NULL, NULL, 1010, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-03-16 06:58:47', 0, '2016-03-14 06:58:47', NULL, NULL),
-(3, 6, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '75.00000', NULL, NULL, '4.00000', '300.00000', NULL, NULL, NULL, NULL, 1, '329', 'LINE01DESC', NULL, NULL, NULL, NULL, NULL, 0, '2014-02-22 10:55:18', 22, '0000-00-00 00:00:00', NULL, NULL),
-(4, 6, 2, NULL, 0, 1, NULL, 'TEST03', '2.00000', NULL, NULL, '100.00000', '200.00000', NULL, NULL, NULL, NULL, 2, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-22 10:55:18', 22, '0000-00-00 00:00:00', NULL, NULL),
-(5, 4, 2, NULL, 0, 1, NULL, 'TEST03', '200.00000', NULL, NULL, '7.00000', '1400.00000', NULL, NULL, NULL, NULL, 1020, '329', 'Line2DESC', 27, NULL, NULL, NULL, NULL, 0, '2014-03-16 06:58:47', 0, '2016-03-14 06:58:47', NULL, NULL),
-(6, 7, 1, NULL, 0, 6, NULL, 'Desc TEST004', '10.00000', NULL, NULL, '170.00000', '1.00000', NULL, NULL, NULL, NULL, NULL, '329', 'Line DESC01', NULL, NULL, NULL, NULL, NULL, 0, '2014-02-22 10:55:20', 22, '0000-00-00 00:00:00', NULL, NULL),
-(7, 18, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '322.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-06 03:30:47', 0, '2013-11-06 03:30:47', NULL, NULL),
-(8, 18, 2, NULL, 0, 1, NULL, 'TEST03', '5.00000', NULL, NULL, '10.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-06 03:30:47', 0, '2013-11-06 03:30:47', NULL, NULL),
-(9, 18, 3, NULL, 0, 2, NULL, 'TEST04', '50.00000', NULL, NULL, '50.00000', '444.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-06 03:30:47', 0, '2013-11-06 03:30:47', NULL, NULL),
-(10, 19, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '100.56400', NULL, NULL, '5.00000', '500.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-07 14:01:35', 0, '2013-11-07 14:01:35', NULL, NULL),
-(11, 19, 2, NULL, 0, 1, NULL, 'TEST03', '50.00000', NULL, NULL, '5.00000', '250.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-07 14:01:35', 0, '2013-11-07 14:01:35', NULL, NULL),
-(12, 20, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '100.00000', NULL, NULL, '5.00000', '500.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-06 06:49:41', 0, '2013-11-06 06:49:41', NULL, NULL),
-(13, 21, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '100.00000', NULL, NULL, '8.00000', '800.00000', NULL, NULL, NULL, NULL, NULL, '329', 'Line1 DESC', NULL, NULL, NULL, NULL, NULL, 0, '2013-11-06 06:51:47', 0, '2013-11-06 06:51:47', NULL, NULL),
-(14, 22, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-07 01:34:59', 0, '2013-11-07 01:34:59', NULL, NULL),
-(15, 27, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:32', 0, '2013-11-11 02:51:32', NULL, NULL),
-(16, 27, 2, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:32', 0, '2013-11-11 02:51:32', NULL, NULL),
-(17, 27, 3, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:31', 0, '2013-11-11 02:51:31', NULL, NULL),
-(18, 27, 4, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:33', 0, '2013-11-11 02:51:33', NULL, NULL),
-(19, 27, 5, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:32', 0, '2013-11-11 02:51:32', NULL, NULL),
-(20, 27, 6, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:33', 0, '2013-11-11 02:51:33', NULL, NULL),
-(21, 27, 7, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:33', 0, '2013-11-11 02:51:33', NULL, NULL),
-(22, 27, 8, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:33', 0, '2013-11-11 02:51:33', NULL, NULL),
-(23, 27, 9, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:33', 0, '2013-11-11 02:51:33', NULL, NULL),
-(24, 27, 10, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:33', 0, '2013-11-11 02:51:33', NULL, NULL),
-(25, 27, 11, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:34', 0, '2013-11-11 02:51:34', NULL, NULL),
-(26, 27, 12, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:34', 0, '2013-11-11 02:51:34', NULL, NULL),
-(32, 31, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-07 05:01:52', 0, '2013-11-07 05:01:52', NULL, NULL),
-(34, 34, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '100.00000', NULL, NULL, '8.00000', '800.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-07 05:04:28', 0, '2013-11-07 05:04:28', NULL, NULL),
-(35, 37, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '100.00000', NULL, NULL, '8.00000', '800.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-07 05:08:41', 0, '2013-11-07 05:08:41', NULL, NULL),
-(39, 38, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '100.00000', NULL, NULL, '8.00000', '800.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2013-11-23 11:59:41', 0, '2013-11-23 11:59:41', NULL, NULL),
-(41, 40, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '100.00000', NULL, NULL, '9.00000', '900.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-19 07:25:35', 0, '2013-11-19 07:25:35', NULL, NULL),
-(42, 40, 2, NULL, 0, 1, NULL, 'TEST03', '15.00000', NULL, NULL, '8.00000', '80.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-19 07:25:35', 0, '2013-11-19 07:25:35', NULL, NULL),
-(43, 40, 3, NULL, 0, 6, NULL, 'DEsc TEST004', '1.00000', NULL, NULL, '77.00000', '77.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-19 07:25:34', 0, '2013-11-19 07:25:34', NULL, NULL),
-(47, 45, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '77.00000', NULL, NULL, '56.00000', '4312.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-20 03:06:02', 0, '2013-11-20 03:06:02', NULL, NULL),
-(48, 45, 2, NULL, 0, 6, NULL, 'DEsc TEST004', '77.00000', NULL, NULL, '56.00000', '4312.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-20 03:06:03', 0, '2013-11-20 03:06:03', NULL, NULL),
-(49, 45, 3, NULL, 0, 6, NULL, 'DEsc TEST004', '66.00000', NULL, NULL, '8.00000', '528.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-20 03:06:02', 0, '2013-11-20 03:06:02', NULL, NULL),
-(50, 45, 4, NULL, 0, 6, NULL, 'DEsc TEST004', '66.00000', NULL, NULL, '8.00000', '528.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-20 03:06:03', 0, '2013-11-20 03:06:03', NULL, NULL),
-(51, 47, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '90.00000', NULL, NULL, '12.00000', '1080.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-20 03:39:09', 0, '2013-11-20 03:39:09', NULL, NULL),
-(55, 50, 1, NULL, 0, 1, NULL, 'TEST03', '10.00000', NULL, NULL, '98.00000', '980.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2013-11-21 01:57:00', 0, '2013-11-21 01:57:00', NULL, NULL),
-(56, 52, 1, NULL, 0, 1, NULL, 'TEST03', '66.00000', NULL, NULL, '7.00000', '462.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2013-12-30 15:54:04', 0, '2013-12-30 15:54:04', NULL, NULL),
-(57, 52, 2, NULL, 0, 6, NULL, 'DEsc TEST004', '125.00000', NULL, NULL, '8.00000', '1.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2013-12-30 15:54:04', 0, '2013-12-30 15:54:04', NULL, NULL),
-(58, 52, 3, NULL, 0, 1, NULL, 'TEST03', '88.00000', NULL, NULL, '65.00000', '5.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2013-12-30 15:54:04', 0, '2013-12-30 15:54:04', NULL, NULL),
-(59, 54, 1, NULL, 0, 1, NULL, 'TEST03', '50.00000', NULL, NULL, '15.66700', '783.35000', NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2013-11-23 05:13:51', 0, '2013-11-23 05:13:51', NULL, NULL),
-(60, 54, 2, NULL, 0, 1, NULL, 'TEST03', '20.00000', NULL, NULL, '12.69000', '253.80000', NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2013-11-27 16:49:31', 0, '2013-11-27 16:49:31', NULL, NULL),
-(61, 62, 1, NULL, 0, 1, NULL, 'TEST03', '6.00000', NULL, NULL, '58.40000', '584.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2013-11-29 14:21:44', 0, '2013-11-29 14:21:44', NULL, NULL),
-(62, 63, 1, NULL, 0, 10042, NULL, 'MI Cabinet A 01', '10.00000', NULL, NULL, '11.00000', '110.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-03-15 12:55:54', 0, '2015-03-14 12:55:54', NULL, NULL),
-(63, 64, 1, NULL, 6, 10046, NULL, 'MI Level 3 TEST 01', '400.00000', NULL, NULL, '12.00000', '2.00000', 1, NULL, NULL, NULL, NULL, 'GOODS', 'test01', 27, NULL, NULL, NULL, NULL, 0, '2014-09-08 11:57:18', 0, '2008-09-14 11:57:18', NULL, NULL),
-(64, 65, 1, NULL, 0, 10034, NULL, 'Desktop 01 of Model A', '100.00000', NULL, NULL, '98.00000', '9.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-02-22 07:49:39', 22, '0000-00-00 00:00:00', NULL, NULL),
-(65, 64, 2, NULL, 6, 10046, NULL, 'MI Level 3 TEST 01', '200.00000', NULL, NULL, '12.00000', '2.00000', 1, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-09-08 11:57:19', 0, '2008-09-14 11:57:19', NULL, NULL),
-(66, 66, 1, NULL, 0, 10064, NULL, 'MI Mobile 03', '33.00000', NULL, NULL, '9.27200', '305.97600', NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-03-08 15:28:54', 0, '2008-03-14 15:28:54', NULL, NULL),
-(67, 66, 2, NULL, 0, 10064, NULL, 'MI Mobile 03', '33.00000', NULL, NULL, '9.27200', '305.97600', NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-03-08 15:28:55', 0, '2008-03-14 15:28:55', NULL, NULL),
-(68, 67, 1, NULL, 0, 10038, NULL, 'MI Monitor A 01', '44.00000', NULL, NULL, '9.44600', '415.62400', NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-03-15 15:17:39', 0, '2015-03-14 15:17:39', NULL, NULL),
-(69, 68, 1, NULL, 0, 10034, NULL, 'Desktop 01 of Model A', '342.00000', NULL, NULL, '0.23220', '79.41240', NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-03-15 19:31:24', 0, '2015-03-14 19:31:24', NULL, NULL),
-(70, 67, 2, NULL, 0, 10046, NULL, 'MI Level 3 TEST 01', '23.00000', NULL, NULL, '22.00000', '506.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-03-15 15:17:39', 0, '2015-03-14 15:17:39', NULL, NULL),
-(71, 63, 2, NULL, 0, 10050, NULL, 'MI Level 5 TEST01', '65.00000', NULL, NULL, '55.00000', '3.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-03-15 13:00:10', 0, '2015-03-14 13:00:10', NULL, NULL),
-(72, 63, 3, NULL, 0, 10052, NULL, 'MI Level 6', '33.00000', NULL, NULL, '44.00000', '1.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-03-15 13:01:18', 0, '2015-03-14 13:01:18', NULL, NULL),
-(73, 69, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '34.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, '0', 0, 'SERVICES', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 11:06:56', 0, '2010-05-14 11:06:56', NULL, NULL),
-(74, 68, 2, NULL, 0, 10062, NULL, 'MI MOBILE 02', '55.00000', NULL, NULL, '4.00000', '220.00000', NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-03-15 19:33:07', 0, '2014-03-15 19:33:07', NULL, NULL),
-(75, 70, 1, NULL, 6, 10049, NULL, 'MI Level 4 A TEST01', '21.00000', NULL, NULL, '1.25444', '26.34333', NULL, NULL, NULL, '0', 0, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 10:22:50', 0, '2010-05-14 10:22:50', NULL, NULL),
-(76, 73, 1, NULL, 0, 10048, NULL, 'MI Level 4 A TEST01', '10.00000', NULL, NULL, '8.00000', '80.00000', NULL, NULL, NULL, '0', 2, 'GOODS', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-02 10:34:34', 0, '2014-05-02 10:34:34', NULL, NULL),
-(79, 74, 1, NULL, 0, 10048, NULL, 'MI Level 4 A TEST01', '10.00000', NULL, NULL, '8.00000', '80.00000', NULL, NULL, NULL, '0', NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-02 15:37:27', 0, '2014-05-02 15:37:27', NULL, NULL),
-(80, 70, 2, NULL, 6, 10041, NULL, 'MI Processsor 01A', '9.00000', NULL, NULL, '12.00000', '108.00000', NULL, NULL, NULL, '0', 0, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 10:22:50', 0, '2010-05-14 10:22:50', NULL, NULL),
-(81, 75, 1, NULL, 0, 10048, NULL, 'MI Level 4 A TEST01', '10.00000', NULL, NULL, '8.00000', '80.00000', NULL, NULL, NULL, '0', NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-08 02:09:02', 0, '2014-05-08 02:09:02', NULL, NULL),
-(82, 70, 3, NULL, 6, 10099, NULL, 'MI_PUR001', '12.00000', NULL, NULL, '9.00000', '108.00000', NULL, NULL, NULL, '0', 0, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 10:22:50', 0, '2010-05-14 10:22:50', NULL, NULL),
-(83, 70, 4, NULL, 6, 10099, NULL, 'MI_PUR001', '12.00000', NULL, NULL, '9.00000', '108.00000', NULL, NULL, NULL, '0', 0, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 10:22:51', 0, '2010-05-14 10:22:51', NULL, NULL),
-(84, 70, 5, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '30.00000', NULL, NULL, '12.00000', '360.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 10:22:51', 0, '2014-05-10 10:22:51', NULL, NULL),
-(85, 76, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '34.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 10:44:40', 0, '2014-05-10 10:44:40', NULL, NULL),
-(86, 77, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '34.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 11:09:38', 0, '2014-05-10 11:09:38', NULL, NULL),
-(87, 78, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '34.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, '0', 0, 'SERVICES', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 11:13:12', 0, '2010-05-14 11:13:12', NULL, NULL),
-(88, 79, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '34.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 11:17:15', 0, '2014-05-10 11:17:15', NULL, NULL),
-(89, 80, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '34.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 11:33:00', 0, '2014-05-10 11:33:00', NULL, NULL),
-(92, 81, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '34.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 11:41:24', 0, '2014-05-10 11:41:24', NULL, NULL),
-(93, 82, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 11:43:39', 0, '2014-05-10 11:43:39', NULL, NULL),
-(94, 83, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, '0', 0, 'SERVICES', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 11:52:02', 0, '2010-05-14 11:52:02', NULL, NULL),
-(95, 84, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, '0', 0, 'SERVICES', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 12:19:35', 0, '2010-05-14 12:19:35', NULL, NULL),
-(96, 85, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, '0', 0, 'SERVICES', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 11:59:33', 0, '2010-05-14 11:59:33', NULL, NULL),
-(97, 86, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 12:02:51', 0, '2014-05-10 12:02:51', NULL, NULL),
-(98, 88, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 12:34:35', 0, '2014-05-10 12:34:35', NULL, NULL),
-(99, 89, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 12:37:28', 0, '2014-05-10 12:37:28', NULL, NULL),
-(100, 91, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 12:56:08', 0, '2014-05-10 12:56:08', NULL, NULL),
-(101, 92, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 13:01:13', 0, '2014-05-10 13:01:13', NULL, NULL),
-(102, 93, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 13:03:54', 0, '2014-05-10 13:03:54', NULL, NULL),
-(103, 94, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 13:05:00', 0, '2014-05-10 13:05:00', NULL, NULL),
-(104, 95, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 13:06:55', 0, '2014-05-10 13:06:55', NULL, NULL),
-(105, 96, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 13:07:32', 0, '2014-05-10 13:07:32', NULL, NULL),
-(107, 101, 1, NULL, 6, 10041, NULL, 'MI Processsor 01', '65.00000', NULL, NULL, '0.01000', '0.65000', NULL, NULL, NULL, '0', 27, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-13 11:33:29', 0, '2014-05-13 11:33:29', NULL, NULL),
-(109, 102, 1, NULL, 6, 10102, NULL, 'MI_PUR03', '66.00000', NULL, NULL, '150.00000', '9900.00000', NULL, NULL, NULL, '0', 25, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-13 11:48:19', 0, '2014-05-13 11:48:19', NULL, NULL),
-(110, 105, 1, NULL, 6, 10099, NULL, 'MI_PUR001', '1000.00000', NULL, NULL, '222.00000', '22.00000', NULL, NULL, NULL, '0', 24, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-28 03:51:46', 0, '2028-05-14 03:51:46', NULL, NULL),
-(111, 106, 2, NULL, 6, 10104, NULL, 'MI_PUR04', '20.00000', NULL, NULL, '250.00000', '5.00000', NULL, NULL, NULL, '0', 22, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-13 12:39:13', 0, '2013-05-14 12:39:13', NULL, NULL),
-(112, 106, 3, NULL, 6, 10104, NULL, 'MI_PUR04', '20.00000', NULL, NULL, '250.00000', '5.00000', NULL, NULL, NULL, '0', 21, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-13 12:39:14', 0, '2013-05-14 12:39:14', NULL, NULL),
-(113, 106, 1, NULL, 6, 10104, NULL, 'MI_PUR04', '20.00000', NULL, NULL, '250.00000', '5.00000', NULL, NULL, NULL, '0', 20, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-13 12:39:12', 0, '2013-05-14 12:39:12', NULL, NULL),
-(114, 107, 1, NULL, 6, 10104, NULL, 'MI_PUR04', '20.00000', NULL, NULL, '250.00000', '5000.00000', NULL, NULL, NULL, '0', 19, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-13 13:19:01', 0, '2014-05-13 13:19:01', NULL, NULL),
-(115, 108, 1, NULL, 6, 10040, NULL, 'MI Processsor 01', '12.00000', NULL, NULL, '0.01000', '0.06500', NULL, NULL, NULL, '0', 62, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-07-01 10:13:41', 0, '2001-07-14 10:13:41', NULL, NULL),
-(116, 108, 2, NULL, 6, 10040, NULL, 'MI Processsor 01', '6.50000', NULL, NULL, '0.01000', '0.06500', NULL, NULL, NULL, '0', 61, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-07-01 10:12:10', 0, '2001-07-14 10:12:10', NULL, NULL),
-(117, 108, 3, NULL, 6, 10040, NULL, 'MI Processsor 01', '6.50000', NULL, NULL, '0.01000', '0.06500', NULL, NULL, NULL, '0', 60, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-07-01 10:12:10', 0, '2001-07-14 10:12:10', NULL, NULL),
-(118, 108, 4, NULL, 6, 10040, NULL, 'MI Processsor 01', '6.50000', NULL, NULL, '0.01000', '0.06500', NULL, NULL, NULL, '0', 59, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-07-01 10:12:11', 0, '2001-07-14 10:12:11', NULL, NULL),
-(119, 108, 5, NULL, 6, 10040, NULL, 'MI Processsor 01', '6.50000', NULL, NULL, '0.01000', '0.06500', NULL, NULL, NULL, '0', 58, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-07-01 10:12:11', 0, '2001-07-14 10:12:11', NULL, NULL),
-(120, 109, 1, NULL, 6, 10040, NULL, 'MI Processsor 01', '58.50000', NULL, NULL, '0.01000', '0.58500', NULL, NULL, NULL, '0', 57, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-07-03 09:08:17', 0, '2003-07-14 09:08:17', NULL, NULL),
-(121, 109, 3, NULL, 6, 10041, NULL, 'MI Processsor 01', '58.50000', NULL, NULL, '0.01000', '0.58500', NULL, NULL, NULL, '0', 56, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-14 09:09:07', 0, '2014-05-14 09:09:07', NULL, NULL),
-(122, 2, 1, NULL, 6, 10043, NULL, 'MI Cabinet A 01', '1200.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-28 03:58:06', 0, '2014-05-28 03:58:06', NULL, NULL),
-(123, 110, 2, NULL, 6, 10098, NULL, 'MI_PUR001', '12.00000', NULL, NULL, '500.00000', '6.00000', NULL, NULL, NULL, '0', 0, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-07-29 08:55:37', 0, '2029-07-14 08:55:37', NULL, NULL),
-(124, 110, 1, NULL, 6, 10098, NULL, 'MI_PUR001', '12.00000', NULL, NULL, '500.00000', '6000.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-07-22 16:39:37', 0, '2014-07-22 16:39:37', NULL, NULL),
-(125, 111, 1, NULL, 6, 10098, NULL, 'MI_PUR001', '12.00000', NULL, NULL, '500.00000', '6.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-03 17:00:54', 0, '2003-08-14 17:00:54', NULL, NULL),
-(126, 111, 2, NULL, 6, 10098, NULL, 'MI_PUR001', '13.00000', NULL, NULL, '500.00000', '6.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-03 17:00:55', 0, '2003-08-14 17:00:55', NULL, NULL),
-(127, 111, 3, NULL, 6, 10092, NULL, 'Sub Assembly 01', '22.00000', NULL, NULL, '12.00000', '264.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-03 17:00:54', 0, '2003-08-14 17:00:54', NULL, NULL),
-(128, 114, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '12.00000', 1, '2014-08-28', '20.00000', '240.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-04 16:55:33', 0, '2004-08-14 16:55:33', NULL, NULL),
-(129, 115, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '12.00000', 2, '2014-08-27', '34.80000', '417.60000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-06 07:38:38', 0, '2006-08-14 07:38:38', NULL, NULL),
-(130, 116, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '12.00000', 2, '2014-08-31', '121.00000', '1452.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-06 10:33:56', 0, '2014-08-06 10:33:56', NULL, NULL),
-(131, 117, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '12.00000', 2, '2014-08-27', '121.00000', '1.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-06 13:01:02', 0, '2006-08-14 13:01:02', NULL, NULL),
-(132, 118, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '67.00000', 2, '2014-08-28', '12.00000', '804.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 07:54:25', 0, '2024-08-14 07:54:25', NULL, NULL),
-(133, 119, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '13.00000', '5.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 07:58:37', 0, '2024-08-14 07:58:37', NULL, NULL),
-(134, 120, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '13.00000', '5.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 08:00:21', 0, '2024-08-14 08:00:21', NULL, NULL),
-(135, 121, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '14.00000', '5600.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 11:48:09', 0, '2024-08-14 11:48:09', NULL, NULL),
-(136, 122, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '13.00000', '5.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 11:53:15', 0, '2024-08-14 11:53:15', NULL, NULL),
-(137, 123, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '14.00000', '5600.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 12:06:56', 0, '2024-08-14 12:06:56', NULL, NULL),
-(138, 124, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '14.00000', '5600.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 12:46:48', 0, '2014-08-24 12:46:48', NULL, NULL),
-(140, 125, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '14.00000', '5600.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 12:52:27', 0, '2024-08-14 12:52:27', NULL, NULL),
-(141, 126, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '13.00000', '5.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 12:53:14', 0, '2014-08-24 12:53:14', NULL, NULL),
-(143, 129, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '14.00000', '5600.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 13:32:55', 0, '2014-08-24 13:32:55', NULL, NULL),
-(145, 130, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '14.00000', '5600.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 13:35:58', 0, '2024-08-14 13:35:58', NULL, NULL),
-(146, 131, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '14.00000', '5600.00000', 1, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-09-09 11:18:24', 0, '2009-09-14 11:18:24', NULL, NULL),
-(147, 132, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '14.00000', '5600.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 13:37:29', 0, '2014-08-24 13:37:29', NULL, NULL),
-(149, 133, 1, NULL, 6, 10107, NULL, 'MI_SA03', '500.00000', 2, '2014-08-28', '30.00000', '15000.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 16:41:02', 0, '2024-08-14 16:41:02', NULL, NULL),
-(150, 134, 1, NULL, 6, 10107, NULL, 'MI_SA03', '2000.00000', 2, '2014-08-29', '30.00000', '60000.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 16:46:35', 0, '2014-08-24 16:46:35', NULL, NULL),
-(151, 135, 1, NULL, 6, 10107, NULL, 'MI_SA03', '2000.00000', 2, '2014-08-30', '30.00000', '60000.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 06:40:11', 0, '2025-08-14 06:40:11', NULL, NULL),
-(152, 135, 2, NULL, 6, 10092, NULL, 'Sub Assembly 01', '10000.00000', 2, '2014-08-30', '12.00000', '120000.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 06:40:12', 0, '2025-08-14 06:40:12', NULL, NULL),
-(153, 135, 3, NULL, 6, 10107, NULL, 'MI_SA03', NULL, 2, '2014-08-30', '30.00000', NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 06:40:12', 0, '2025-08-14 06:40:12', NULL, NULL),
-(154, 136, 1, 154, 6, 10107, NULL, 'MI_SA03', '90.00000', NULL, NULL, '30.00000', '60000.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 11:58:01', 0, '2025-08-14 11:58:01', NULL, NULL),
-(155, 136, 2, NULL, 6, 10092, NULL, 'Sub Assembly 01', '900.00000', 2, '2014-08-30', '12.00000', '10800.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 06:41:23', 0, '2025-08-14 06:41:23', NULL, NULL),
-(156, 143, 1, 154, 6, 10107, NULL, 'MI_SA03', '90.00000', NULL, NULL, '30.00000', '60000.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 12:17:58', 0, '2025-08-14 12:17:58', NULL, NULL),
-(157, 148, 1, 154, 6, 10107, NULL, 'MI_SA03', '23.00000', NULL, NULL, '30.00000', '2700.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 12:47:10', 0, '2014-08-25 12:47:10', NULL, NULL),
-(158, 144, 1, 154, 6, 10107, NULL, 'MI_SA03', '20.00000', NULL, NULL, '30.00000', '2700.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 13:05:23', 0, '2014-08-25 13:05:23', NULL, NULL),
-(159, 152, 1, NULL, 6, 10098, NULL, 'MI_PUR001', '2312.00000', 2, '2014-08-29', '111.00000', '256632.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 13:16:06', 0, '2025-08-14 13:16:06', NULL, NULL),
-(160, 153, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '101.00000', 2, '2014-08-26', '121.00000', '121000.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 13:39:33', 0, '2025-08-14 13:39:33', NULL, NULL),
-(161, 153, 2, NULL, 6, 10098, NULL, 'MI_PUR001', '132.00000', 2, '2014-08-28', '22.00000', '2662.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 13:39:33', 0, '2025-08-14 13:39:33', NULL, NULL),
-(162, 157, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '101.00000', 2, '2014-08-26', '121.00000', '121000.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 13:42:10', 0, '2014-08-25 13:42:10', NULL, NULL),
-(163, 157, 2, NULL, 6, 10098, NULL, 'MI_PUR001', '132.00000', 2, '2014-08-28', '22.00000', '2662.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 13:42:10', 0, '2014-08-25 13:42:10', NULL, NULL),
-(164, 158, 1, 162, 6, 10089, NULL, 'MI_PUR02', '55.00000', NULL, NULL, '121.00000', '121000.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 13:57:21', 0, '2014-08-25 13:57:21', NULL, NULL),
-(165, 159, 1, 162, 6, 10089, NULL, 'MI_PUR02', '44.00000', NULL, NULL, '121.00000', '121000.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-27 06:48:16', 0, '2027-08-14 06:48:16', NULL, NULL),
-(166, 160, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '3.00000', 2, '2014-08-28', '121.00000', '10769.00000', 1, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-09-17 12:51:16', 0, '2017-09-14 12:51:16', NULL, NULL),
-(167, 160, 2, NULL, 6, 10098, NULL, 'MI_PUR001', '233.00000', 2, '2014-08-28', '11.00000', '2563.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 18:10:40', 0, '2025-08-14 18:10:40', NULL, NULL),
-(168, 165, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '1000.00000', 2, '2014-08-22', '121.00000', '121000.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-26 08:53:31', 0, '2026-08-14 08:53:31', NULL, NULL),
-(169, 172, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '45.00000', NULL, NULL, '22.00000', '506.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:02:35', 0, '2028-08-14 05:02:35', NULL, NULL),
-(170, 176, 1, NULL, 6, 10098, NULL, 'MI_PUR001', '4534.00000', NULL, NULL, '1212.00000', NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-26 13:11:45', 0, '2026-08-14 13:11:45', NULL, NULL),
-(171, 186, 1, 170, 6, 10098, NULL, 'MI_PUR001', '2.00000', NULL, NULL, '1212.00000', '2424.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-27 07:09:57', 0, '2027-08-14 07:09:57', NULL, NULL),
-(172, 179, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '2345.00000', NULL, NULL, '232.00000', '544040.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-27 05:23:05', 0, '2027-08-14 05:23:05', NULL, NULL),
-(173, 180, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '232.00000', NULL, NULL, '121.00000', '28072.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-27 05:53:43', 0, '2027-08-14 05:53:43', NULL, NULL),
-(174, 181, 1, 170, 6, 10098, NULL, 'MI_PUR001', '231.00000', NULL, NULL, '1212.00000', '279972.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-27 06:44:57', 0, '2027-08-14 06:44:57', NULL, NULL),
-(175, 183, 1, 162, 6, 10089, NULL, 'MI_PUR02', '11.00000', NULL, NULL, '121.00000', '1331.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-27 06:48:53', 0, '2027-08-14 06:48:53', NULL, NULL),
-(176, 184, 1, 170, 6, 10098, NULL, 'MI_PUR001', '11.00000', NULL, NULL, '1212.00000', '13332.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-27 07:00:23', 0, '2027-08-14 07:00:23', NULL, NULL),
-(178, 187, 1, 170, 6, 10098, NULL, 'MI_PUR001', '122.00000', NULL, NULL, '1212.00000', '147864.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-27 07:13:41', 0, '2027-08-14 07:13:41', NULL, NULL),
-(179, 188, 1, 170, 6, 10098, NULL, 'MI_PUR001', '4534.00000', NULL, NULL, '1212.00000', NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-27 07:18:25', 0, '2027-08-14 07:18:25', NULL, NULL),
-(180, 189, 1, 170, 6, 10098, NULL, 'MI_PUR001', '121.00000', NULL, NULL, '1212.00000', '146652.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, 1, NULL, NULL, 0, '2014-09-08 12:00:27', 0, '2008-09-14 12:00:27', NULL, NULL),
-(181, 190, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '2121.00000', NULL, NULL, '444.00000', '941724.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-27 16:02:22', 0, '2027-08-14 16:02:22', NULL, NULL),
-(182, 191, 1, 181, 6, 10089, NULL, 'MI_PUR02', '353.00000', NULL, NULL, '444.00000', '43956.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 04:41:06', 0, '2028-08-14 04:41:06', NULL, NULL),
-(183, 192, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '350.00000', NULL, NULL, '444.00000', '43956.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 04:44:21', 34, '2014-12-30 05:48:01', NULL, NULL),
-(185, 192, 2, 181, 6, 10089, NULL, 'MI_PUR02', '55.00000', NULL, NULL, '444.00000', '24420.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 04:55:23', 34, '2014-12-30 05:48:01', NULL, NULL),
-(186, 192, 3, 181, 6, 10089, NULL, 'MI_PUR02', '12.00000', NULL, NULL, '444.00000', '5328.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 04:55:23', 34, '2014-12-30 05:48:00', NULL, NULL),
-(187, 193, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '121.00000', '14641.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:03:56', 0, '2014-08-28 05:03:56', NULL, NULL),
-(188, 194, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '121.00000', '14641.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:04:52', 0, '2014-08-28 05:04:52', NULL, NULL),
-(189, 195, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '121.00000', '14641.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:05:29', 0, '2014-08-28 05:05:29', NULL, NULL),
-(190, 196, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '121.00000', '14641.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:07:13', 0, '2014-08-28 05:07:13', NULL, NULL),
-(191, 197, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '121.00000', '14641.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:08:29', 0, '2014-08-28 05:08:29', NULL, NULL),
-(192, 198, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '121.00000', '14641.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:09:58', 0, '2014-08-28 05:09:58', NULL, NULL),
-(193, 199, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '1212.00000', NULL, NULL, '121.00000', '14641.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:28:23', 0, '2028-08-14 05:28:23', NULL, NULL),
-(194, 199, 2, NULL, 6, 10089, NULL, 'MI_PUR02', '111.00000', NULL, NULL, '111.00000', '12321.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:28:23', 0, '2028-08-14 05:28:23', NULL, NULL),
-(195, 199, 3, NULL, 6, 10092, NULL, 'Sub Assembly 01121', '24.00000', NULL, NULL, '12.00000', '288.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:28:24', 0, '2028-08-14 05:28:24', NULL, NULL),
-(196, 200, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '1121.00000', NULL, NULL, '222.00000', '222.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 06:08:18', 0, '2028-08-14 06:08:18', NULL, NULL),
-(197, 200, 2, NULL, 6, 10089, NULL, 'MI_PUR02', '234.00000', NULL, NULL, '232.00000', '54288.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 06:08:19', 0, '2028-08-14 06:08:19', NULL, NULL),
-(198, 200, 3, NULL, 6, 10092, NULL, 'Sub Assembly 01121', '24.00000', NULL, NULL, '12.00000', '288.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:37:45', 0, '2028-08-14 05:37:45', NULL, NULL),
-(199, 201, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '121.00000', NULL, NULL, '12.00000', '1452.00000', NULL, NULL, NULL, '0', 74, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-30 06:56:23', 0, '2014-08-30 06:56:23', NULL, NULL),
-(200, 201, 3, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '12121.00000', '1466641.00000', NULL, NULL, NULL, '0', 66, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-30 06:56:23', 0, '2014-08-30 06:56:23', NULL, NULL),
-(201, 202, 1, NULL, 6, 10041, NULL, 'MI Processsor 01', '58.50000', NULL, NULL, '0.01000', '0.58500', NULL, NULL, NULL, '0', 53, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-30 07:14:23', 0, '2014-08-30 07:14:23', NULL, NULL),
-(202, 202, 3, NULL, 6, 10041, NULL, 'MI Processsor 01', '58.50000', NULL, NULL, '0.01000', '0.58500', NULL, NULL, NULL, '0', 55, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-30 07:14:23', 0, '2014-08-30 07:14:23', NULL, NULL),
-(203, 203, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '2121.00000', NULL, NULL, '2323.00000', '4927083.00000', 1, '502562.46600', NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-09-07 09:24:13', 0, '2007-09-14 09:24:13', NULL, NULL),
-(204, 203, 2, NULL, 6, 10098, NULL, 'MI_PUR001', '1211.00000', NULL, NULL, '212.00000', '256732.00000', 1, '26186.66400', NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-09-07 09:24:12', 0, '2007-09-14 09:24:12', NULL, NULL),
-(205, 204, 1, 181, 6, 10089, NULL, 'MI_PUR02', '5.00000', NULL, NULL, '444.00000', '2220.00000', NULL, NULL, NULL, NULL, 73, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-09-02 09:48:33', 34, '2014-12-30 05:46:57', NULL, NULL),
-(206, 205, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '100.00000', 2, '2014-09-25', '121.00000', '12100.00000', 1, '1.00000', NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-09-08 09:15:49', 0, '2008-09-14 09:15:49', NULL, NULL),
-(208, 206, 1, NULL, 6, 10098, NULL, 'MI_PUR001', '1000.00000', NULL, NULL, '12.00000', '12000.00000', 1, '1.00000', NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-09-08 11:36:06', 34, '2014-10-29 18:08:19', NULL, NULL),
-(209, 207, 1, NULL, 6, 10092, '006', 'Sub Assembly 01', '1000.00000', 2, NULL, '12.00000', '12000.00000', 1, '1.00000', NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-10-04 11:23:38', 34, '2014-11-03 12:09:12', NULL, NULL),
-(210, 209, 1, NULL, 6, 10120, '001', 'Laser Pur 001', '33.00000', NULL, NULL, '12.00000', '396.00000', 1, '40.39200', NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-11-05 04:27:55', 34, '2014-11-13 09:25:55', NULL, NULL),
-(211, 210, 1, NULL, 6, 10120, '001', 'Laser Pur 001', '33.00000', NULL, NULL, '12.00000', '396.00000', 1, '40.39200', NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-11-05 04:28:26', 34, '2014-11-05 04:32:50', NULL, NULL),
-(212, 210, 2, NULL, 6, 10137, '001', 'MI_PUR99', '121.00000', NULL, NULL, '11.00000', '1331.00000', 1, '113.32200', NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-11-05 11:37:17', 34, '2014-11-05 11:37:58', NULL, NULL),
-(213, 210, 3, NULL, 6, 10139, '001', 'MI_PUR100', '111.00000', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-11-05 16:24:56', 34, '2014-11-05 16:25:31', NULL, NULL),
-(214, 211, 1, NULL, 6, 10137, '001', 'MI_PUR99', '23.00000', 2, '2014-11-13', '25.00000', '123.00000', 1, '12.54600', NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-11-08 09:25:46', 34, '2014-11-08 09:26:24', NULL, NULL),
-(215, 213, 1, 181, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '444.00000', '53724.00000', NULL, NULL, NULL, 'po_requisition_details', 81, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-11-29 07:16:32', 34, '2014-11-29 07:16:32', NULL, NULL),
-(216, 214, 1, 181, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '444.00000', '53724.00000', NULL, NULL, NULL, 'po_requisition_details', 65, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-11-29 07:40:38', 34, '2014-11-29 07:40:38', NULL, NULL),
-(217, 215, 1, NULL, 6, 10098, NULL, 'MI_PUR001', '20.00000', NULL, NULL, '12.00000', '240.00000', 1, NULL, NULL, 'po_requisition_details', 87, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-11-29 07:44:11', 34, '2014-12-16 07:58:16', NULL, NULL),
-(218, 216, 1, NULL, 6, 10137, '001', 'MI_PUR99', '100.00000', 2, '2014-12-17', '23.00000', '2300.00000', 1, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 1, '2014-12-08 15:03:19', 34, '2014-12-16 08:13:21', NULL, NULL),
-(219, 217, 1, NULL, 6, 10098, NULL, 'MI_PUR001', '20.00000', NULL, NULL, '334.00000', '240.00000', 1, '24.48000', NULL, 'po_requisition_details', 87, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-12-14 09:32:34', 34, '2014-12-16 07:50:08', NULL, NULL),
-(220, 217, 2, NULL, 6, 10137, '001', 'MI_PUR99', '13.00000', NULL, NULL, '11.00000', '143.00000', 1, '0.10200', NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-12-29 20:06:32', 34, '2014-12-29 20:06:32', NULL, NULL),
-(221, 218, 1, NULL, 6, 10137, '001', 'MI_PUR99', '23.00000', 2, '2014-11-13', '25.00000', '123.00000', 1, '12.54600', NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-12-30 04:56:02', 34, '2014-12-30 04:56:17', NULL, NULL),
-(222, 222, 1, 203, 6, 10089, NULL, 'MI_PUR02', '2121.00000', NULL, NULL, '2323.00000', '4927083.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, 1, NULL, NULL, 34, '2014-12-30 07:20:41', 34, '2014-12-30 07:31:33', NULL, NULL),
-(223, 223, 1, 203, 6, 10089, NULL, 'MI_PUR02', '2121.00000', NULL, NULL, '2323.00000', '4927083.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, 1, NULL, NULL, 34, '2014-12-30 07:32:05', 34, '2014-12-30 07:32:19', NULL, NULL),
-(224, 224, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '12121.00000', '1466641.00000', 1, NULL, NULL, 'po_requisition_details', 85, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2015-01-01 05:38:27', 34, '2015-01-12 05:03:57', NULL, NULL),
-(225, 224, 3, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '12121.00000', '1466641.00000', 1, NULL, NULL, 'po_requisition_details', 84, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2015-01-01 05:38:27', 34, '2015-01-12 05:03:58', NULL, NULL),
-(226, 224, 5, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '12121.00000', '1466641.00000', 1, NULL, NULL, 'po_requisition_details', 83, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2015-01-01 05:38:27', 34, '2015-01-12 05:03:58', NULL, NULL),
-(227, 225, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '12121.00000', '1466641.00000', NULL, NULL, NULL, 'po_requisition_details', 86, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2015-01-12 06:14:05', 34, '2015-01-12 06:14:05', NULL, NULL),
-(228, 225, 3, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '12121.00000', '1466641.00000', NULL, NULL, NULL, 'po_requisition_details', 82, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2015-01-12 06:14:05', 34, '2015-01-12 06:14:05', NULL, NULL),
-(229, 225, 5, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '12121.00000', '1466641.00000', NULL, NULL, NULL, 'po_requisition_details', 80, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2015-01-12 06:14:05', 34, '2015-01-12 06:14:05', NULL, NULL),
-(230, 226, 1, NULL, 6, 10137, '001', 'MI_PUR99', '12.00000', 2, '2015-01-14', '111.00000', '1332.00000', 1, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2015-01-28 17:29:10', 34, '2015-01-28 17:29:29', NULL, NULL),
-(231, 226, 2, NULL, 6, 10034, NULL, 'Desktop 01 of Model A', '5.00000', 2, '2015-02-27', '121.00000', '605.00000', 1, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2015-02-06 17:03:30', 34, '2015-02-07 12:10:23', NULL, NULL),
-(233, 227, 1, NULL, 6, 10158, NULL, 'MI_KIT01', '20.00000', 2, '2015-02-25', '12.00000', '240.00000', 1, '24.48000', NULL, NULL, NULL, 'GOODS', NULL, 27, 1, NULL, 1, NULL, 34, '2015-02-09 03:33:02', 34, '2015-02-09 05:53:06', NULL, NULL),
-(238, 227, 2, NULL, 6, 10158, NULL, 'MI_KIT01', '10.00000', NULL, NULL, '11.00000', '110.00000', 1, '11.22000', NULL, NULL, NULL, 'GOODS', NULL, 27, 1, NULL, 1, NULL, 34, '2015-02-09 05:42:42', 34, '2015-02-09 05:53:06', NULL, NULL),
-(239, 227, 3, NULL, 6, 10158, NULL, 'MI_KIT01', '5.00000', 0, '0000-00-00', '121.00000', '605.00000', 1, '61.71000', NULL, '', 0, 'GOODS', '', 27, 1, 0, 1, NULL, 34, '2015-02-09 10:08:45', 34, '2015-02-09 10:09:57', NULL, NULL),
-(240, 227, 4, NULL, 6, 10158, NULL, 'MI_KIT01', '10.00000', NULL, NULL, '12.00000', '120.00000', 1, '12.24000', NULL, NULL, NULL, 'GOODS', NULL, 27, 1, NULL, 1, NULL, 34, '2015-02-09 10:18:30', 34, '2015-02-09 10:20:08', NULL, NULL),
-(241, 228, 1, NULL, 6, 10158, NULL, 'MI_KIT01', '12.00000', NULL, NULL, '11.00000', '132.00000', 1, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, 1, NULL, 1, NULL, 34, '2015-02-09 11:13:51', 34, '2015-02-09 11:14:21', NULL, NULL);
+INSERT INTO `po_line` (`po_line_id`, `po_header_id`, `line_number`, `bpa_line_id`, `receving_org_id`, `item_id_m`, `revision_name`, `item_description`, `line_quantity`, `price_list_header_id`, `price_date`, `unit_price`, `line_price`, `tax_code_id`, `tax_amount`, `gl_line_price`, `gl_tax_amount`, `exchange_rate`, `reference_doc_type`, `reference_doc_number`, `line_type`, `line_description`, `uom_id`, `kit_configured_cb`, `hold_cb`, `kit_cb`, `status`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`, `rev_enabled_cb`, `rev_number`) VALUES
+(1, 5, 1, NULL, 0, 1, NULL, 'TEST03', '10.00000', NULL, NULL, '8.00000', '80.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', 'TEST01', 27, NULL, NULL, NULL, NULL, 0, '2013-11-20 10:37:27', 0, '2013-11-20 10:37:27', NULL, NULL),
+(2, 4, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '100.00000', NULL, NULL, '10.00000', '1.00000', NULL, NULL, NULL, NULL, NULL, NULL, 1010, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-03-16 06:58:47', 0, '2016-03-14 06:58:47', NULL, NULL),
+(3, 6, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '75.00000', NULL, NULL, '4.00000', '300.00000', NULL, NULL, NULL, NULL, NULL, NULL, 1, '329', 'LINE01DESC', NULL, NULL, NULL, NULL, NULL, 0, '2014-02-22 10:55:18', 22, '0000-00-00 00:00:00', NULL, NULL),
+(4, 6, 2, NULL, 0, 1, NULL, 'TEST03', '2.00000', NULL, NULL, '100.00000', '200.00000', NULL, NULL, NULL, NULL, NULL, NULL, 2, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-22 10:55:18', 22, '0000-00-00 00:00:00', NULL, NULL),
+(5, 4, 2, NULL, 0, 1, NULL, 'TEST03', '200.00000', NULL, NULL, '7.00000', '1400.00000', NULL, NULL, NULL, NULL, NULL, NULL, 1020, '329', 'Line2DESC', 27, NULL, NULL, NULL, NULL, 0, '2014-03-16 06:58:47', 0, '2016-03-14 06:58:47', NULL, NULL),
+(6, 7, 1, NULL, 0, 6, NULL, 'Desc TEST004', '10.00000', NULL, NULL, '170.00000', '1.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', 'Line DESC01', NULL, NULL, NULL, NULL, NULL, 0, '2014-02-22 10:55:20', 22, '0000-00-00 00:00:00', NULL, NULL),
+(7, 18, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '322.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-06 03:30:47', 0, '2013-11-06 03:30:47', NULL, NULL),
+(8, 18, 2, NULL, 0, 1, NULL, 'TEST03', '5.00000', NULL, NULL, '10.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-06 03:30:47', 0, '2013-11-06 03:30:47', NULL, NULL),
+(9, 18, 3, NULL, 0, 2, NULL, 'TEST04', '50.00000', NULL, NULL, '50.00000', '444.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-06 03:30:47', 0, '2013-11-06 03:30:47', NULL, NULL),
+(10, 19, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '100.56400', NULL, NULL, '5.00000', '500.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-07 14:01:35', 0, '2013-11-07 14:01:35', NULL, NULL),
+(11, 19, 2, NULL, 0, 1, NULL, 'TEST03', '50.00000', NULL, NULL, '5.00000', '250.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-07 14:01:35', 0, '2013-11-07 14:01:35', NULL, NULL),
+(12, 20, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '100.00000', NULL, NULL, '5.00000', '500.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-06 06:49:41', 0, '2013-11-06 06:49:41', NULL, NULL),
+(13, 21, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '100.00000', NULL, NULL, '8.00000', '800.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', 'Line1 DESC', NULL, NULL, NULL, NULL, NULL, 0, '2013-11-06 06:51:47', 0, '2013-11-06 06:51:47', NULL, NULL),
+(14, 22, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-07 01:34:59', 0, '2013-11-07 01:34:59', NULL, NULL),
+(15, 27, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:32', 0, '2013-11-11 02:51:32', NULL, NULL),
+(16, 27, 2, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:32', 0, '2013-11-11 02:51:32', NULL, NULL),
+(17, 27, 3, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:31', 0, '2013-11-11 02:51:31', NULL, NULL),
+(18, 27, 4, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:33', 0, '2013-11-11 02:51:33', NULL, NULL),
+(19, 27, 5, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:32', 0, '2013-11-11 02:51:32', NULL, NULL),
+(20, 27, 6, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:33', 0, '2013-11-11 02:51:33', NULL, NULL),
+(21, 27, 7, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:33', 0, '2013-11-11 02:51:33', NULL, NULL),
+(22, 27, 8, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:33', 0, '2013-11-11 02:51:33', NULL, NULL),
+(23, 27, 9, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:33', 0, '2013-11-11 02:51:33', NULL, NULL),
+(24, 27, 10, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:33', 0, '2013-11-11 02:51:33', NULL, NULL),
+(25, 27, 11, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:34', 0, '2013-11-11 02:51:34', NULL, NULL),
+(26, 27, 12, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-11 02:51:34', 0, '2013-11-11 02:51:34', NULL, NULL),
+(32, 31, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '10.00000', NULL, NULL, '5.00000', '50.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-07 05:01:52', 0, '2013-11-07 05:01:52', NULL, NULL),
+(34, 34, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '100.00000', NULL, NULL, '8.00000', '800.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-07 05:04:28', 0, '2013-11-07 05:04:28', NULL, NULL),
+(35, 37, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '100.00000', NULL, NULL, '8.00000', '800.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-07 05:08:41', 0, '2013-11-07 05:08:41', NULL, NULL),
+(39, 38, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '100.00000', NULL, NULL, '8.00000', '800.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2013-11-23 11:59:41', 0, '2013-11-23 11:59:41', NULL, NULL),
+(41, 40, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '100.00000', NULL, NULL, '9.00000', '900.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-19 07:25:35', 0, '2013-11-19 07:25:35', NULL, NULL),
+(42, 40, 2, NULL, 0, 1, NULL, 'TEST03', '15.00000', NULL, NULL, '8.00000', '80.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-19 07:25:35', 0, '2013-11-19 07:25:35', NULL, NULL),
+(43, 40, 3, NULL, 0, 6, NULL, 'DEsc TEST004', '1.00000', NULL, NULL, '77.00000', '77.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-19 07:25:34', 0, '2013-11-19 07:25:34', NULL, NULL),
+(47, 45, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '77.00000', NULL, NULL, '56.00000', '4312.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-20 03:06:02', 0, '2013-11-20 03:06:02', NULL, NULL),
+(48, 45, 2, NULL, 0, 6, NULL, 'DEsc TEST004', '77.00000', NULL, NULL, '56.00000', '4312.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-20 03:06:03', 0, '2013-11-20 03:06:03', NULL, NULL),
+(49, 45, 3, NULL, 0, 6, NULL, 'DEsc TEST004', '66.00000', NULL, NULL, '8.00000', '528.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-20 03:06:02', 0, '2013-11-20 03:06:02', NULL, NULL),
+(50, 45, 4, NULL, 0, 6, NULL, 'DEsc TEST004', '66.00000', NULL, NULL, '8.00000', '528.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-20 03:06:03', 0, '2013-11-20 03:06:03', NULL, NULL),
+(51, 47, 1, NULL, 0, 6, NULL, 'DEsc TEST004', '90.00000', NULL, NULL, '12.00000', '1080.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-11-20 03:39:09', 0, '2013-11-20 03:39:09', NULL, NULL),
+(55, 50, 1, NULL, 0, 1, NULL, 'TEST03', '10.00000', NULL, NULL, '98.00000', '980.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2013-11-21 01:57:00', 0, '2013-11-21 01:57:00', NULL, NULL),
+(56, 52, 1, NULL, 0, 1, NULL, 'TEST03', '66.00000', NULL, NULL, '7.00000', '462.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2013-12-30 15:54:04', 0, '2013-12-30 15:54:04', NULL, NULL),
+(57, 52, 2, NULL, 0, 6, NULL, 'DEsc TEST004', '125.00000', NULL, NULL, '8.00000', '1.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2013-12-30 15:54:04', 0, '2013-12-30 15:54:04', NULL, NULL),
+(58, 52, 3, NULL, 0, 1, NULL, 'TEST03', '88.00000', NULL, NULL, '65.00000', '5.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2013-12-30 15:54:04', 0, '2013-12-30 15:54:04', NULL, NULL),
+(59, 54, 1, NULL, 0, 1, NULL, 'TEST03', '50.00000', NULL, NULL, '15.66700', '783.35000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2013-11-23 05:13:51', 0, '2013-11-23 05:13:51', NULL, NULL),
+(60, 54, 2, NULL, 0, 1, NULL, 'TEST03', '20.00000', NULL, NULL, '12.69000', '253.80000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2013-11-27 16:49:31', 0, '2013-11-27 16:49:31', NULL, NULL),
+(61, 62, 1, NULL, 0, 1, NULL, 'TEST03', '6.00000', NULL, NULL, '58.40000', '584.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2013-11-29 14:21:44', 0, '2013-11-29 14:21:44', NULL, NULL),
+(62, 63, 1, NULL, 0, 10042, NULL, 'MI Cabinet A 01', '10.00000', NULL, NULL, '11.00000', '110.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-03-15 12:55:54', 0, '2015-03-14 12:55:54', NULL, NULL),
+(63, 64, 1, NULL, 6, 10046, NULL, 'MI Level 3 TEST 01', '400.00000', NULL, NULL, '12.00000', '2.00000', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', 'test01', 27, NULL, NULL, NULL, NULL, 0, '2014-09-08 11:57:18', 0, '2008-09-14 11:57:18', NULL, NULL),
+(64, 65, 1, NULL, 0, 10034, NULL, 'Desktop 01 of Model A', '100.00000', NULL, NULL, '98.00000', '9.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-02-22 07:49:39', 22, '0000-00-00 00:00:00', NULL, NULL),
+(65, 64, 2, NULL, 6, 10046, NULL, 'MI Level 3 TEST 01', '200.00000', NULL, NULL, '12.00000', '2.00000', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-09-08 11:57:19', 0, '2008-09-14 11:57:19', NULL, NULL),
+(66, 66, 1, NULL, 0, 10064, NULL, 'MI Mobile 03', '33.00000', NULL, NULL, '9.27200', '305.97600', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-03-08 15:28:54', 0, '2008-03-14 15:28:54', NULL, NULL),
+(67, 66, 2, NULL, 0, 10064, NULL, 'MI Mobile 03', '33.00000', NULL, NULL, '9.27200', '305.97600', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-03-08 15:28:55', 0, '2008-03-14 15:28:55', NULL, NULL),
+(68, 67, 1, NULL, 0, 10038, NULL, 'MI Monitor A 01', '44.00000', NULL, NULL, '9.44600', '415.62400', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-03-15 15:17:39', 0, '2015-03-14 15:17:39', NULL, NULL),
+(69, 68, 1, NULL, 0, 10034, NULL, 'Desktop 01 of Model A', '342.00000', NULL, NULL, '0.23220', '79.41240', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-03-15 19:31:24', 0, '2015-03-14 19:31:24', NULL, NULL),
+(70, 67, 2, NULL, 0, 10046, NULL, 'MI Level 3 TEST 01', '23.00000', NULL, NULL, '22.00000', '506.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-03-15 15:17:39', 0, '2015-03-14 15:17:39', NULL, NULL),
+(71, 63, 2, NULL, 0, 10050, NULL, 'MI Level 5 TEST01', '65.00000', NULL, NULL, '55.00000', '3.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-03-15 13:00:10', 0, '2015-03-14 13:00:10', NULL, NULL),
+(72, 63, 3, NULL, 0, 10052, NULL, 'MI Level 6', '33.00000', NULL, NULL, '44.00000', '1.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-03-15 13:01:18', 0, '2015-03-14 13:01:18', NULL, NULL),
+(73, 69, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '34.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, '0', 0, 'SERVICES', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 11:06:56', 0, '2010-05-14 11:06:56', NULL, NULL),
+(74, 68, 2, NULL, 0, 10062, NULL, 'MI MOBILE 02', '55.00000', NULL, NULL, '4.00000', '220.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '329', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-03-15 19:33:07', 0, '2014-03-15 19:33:07', NULL, NULL),
+(75, 70, 1, NULL, 6, 10049, NULL, 'MI Level 4 A TEST01', '21.00000', NULL, NULL, '1.25444', '26.34333', NULL, NULL, NULL, NULL, NULL, '0', 0, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 10:22:50', 0, '2010-05-14 10:22:50', NULL, NULL),
+(76, 73, 1, NULL, 0, 10048, NULL, 'MI Level 4 A TEST01', '10.00000', NULL, NULL, '8.00000', '80.00000', NULL, NULL, NULL, NULL, NULL, '0', 2, 'GOODS', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-02 10:34:34', 0, '2014-05-02 10:34:34', NULL, NULL),
+(79, 74, 1, NULL, 0, 10048, NULL, 'MI Level 4 A TEST01', '10.00000', NULL, NULL, '8.00000', '80.00000', NULL, NULL, NULL, NULL, NULL, '0', NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-02 15:37:27', 0, '2014-05-02 15:37:27', NULL, NULL),
+(80, 70, 2, NULL, 6, 10041, NULL, 'MI Processsor 01A', '9.00000', NULL, NULL, '12.00000', '108.00000', NULL, NULL, NULL, NULL, NULL, '0', 0, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 10:22:50', 0, '2010-05-14 10:22:50', NULL, NULL),
+(81, 75, 1, NULL, 0, 10048, NULL, 'MI Level 4 A TEST01', '10.00000', NULL, NULL, '8.00000', '80.00000', NULL, NULL, NULL, NULL, NULL, '0', NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-08 02:09:02', 0, '2014-05-08 02:09:02', NULL, NULL),
+(82, 70, 3, NULL, 6, 10099, NULL, 'MI_PUR001', '12.00000', NULL, NULL, '9.00000', '108.00000', NULL, NULL, NULL, NULL, NULL, '0', 0, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 10:22:50', 0, '2010-05-14 10:22:50', NULL, NULL),
+(83, 70, 4, NULL, 6, 10099, NULL, 'MI_PUR001', '12.00000', NULL, NULL, '9.00000', '108.00000', NULL, NULL, NULL, NULL, NULL, '0', 0, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 10:22:51', 0, '2010-05-14 10:22:51', NULL, NULL),
+(84, 70, 5, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '30.00000', NULL, NULL, '12.00000', '360.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 10:22:51', 0, '2014-05-10 10:22:51', NULL, NULL),
+(85, 76, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '34.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 10:44:40', 0, '2014-05-10 10:44:40', NULL, NULL),
+(86, 77, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '34.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 11:09:38', 0, '2014-05-10 11:09:38', NULL, NULL),
+(87, 78, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '34.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, '0', 0, 'SERVICES', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 11:13:12', 0, '2010-05-14 11:13:12', NULL, NULL),
+(88, 79, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '34.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 11:17:15', 0, '2014-05-10 11:17:15', NULL, NULL),
+(89, 80, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '34.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 11:33:00', 0, '2014-05-10 11:33:00', NULL, NULL),
+(92, 81, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '34.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 11:41:24', 0, '2014-05-10 11:41:24', NULL, NULL),
+(93, 82, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 11:43:39', 0, '2014-05-10 11:43:39', NULL, NULL),
+(94, 83, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, '0', 0, 'SERVICES', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 11:52:02', 0, '2010-05-14 11:52:02', NULL, NULL),
+(95, 84, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, '0', 0, 'SERVICES', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 12:19:35', 0, '2010-05-14 12:19:35', NULL, NULL),
+(96, 85, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, '0', 0, 'SERVICES', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 11:59:33', 0, '2010-05-14 11:59:33', NULL, NULL),
+(97, 86, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 12:02:51', 0, '2014-05-10 12:02:51', NULL, NULL),
+(98, 88, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 12:34:35', 0, '2014-05-10 12:34:35', NULL, NULL),
+(99, 89, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 12:37:28', 0, '2014-05-10 12:37:28', NULL, NULL),
+(100, 91, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 12:56:08', 0, '2014-05-10 12:56:08', NULL, NULL),
+(101, 92, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 13:01:13', 0, '2014-05-10 13:01:13', NULL, NULL),
+(102, 93, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 13:03:54', 0, '2014-05-10 13:03:54', NULL, NULL),
+(103, 94, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 13:05:00', 0, '2014-05-10 13:05:00', NULL, NULL),
+(104, 95, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 13:06:55', 0, '2014-05-10 13:06:55', NULL, NULL),
+(105, 96, 1, NULL, 6, 10051, NULL, 'MI Level 5 TEST01', '60.00000', NULL, NULL, '22.00000', '748.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SERVICES', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-10 13:07:32', 0, '2014-05-10 13:07:32', NULL, NULL),
+(107, 101, 1, NULL, 6, 10041, NULL, 'MI Processsor 01', '65.00000', NULL, NULL, '0.01000', '0.65000', NULL, NULL, NULL, NULL, NULL, '0', 27, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-13 11:33:29', 0, '2014-05-13 11:33:29', NULL, NULL),
+(109, 102, 1, NULL, 6, 10102, NULL, 'MI_PUR03', '66.00000', NULL, NULL, '150.00000', '9900.00000', NULL, NULL, NULL, NULL, NULL, '0', 25, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-13 11:48:19', 0, '2014-05-13 11:48:19', NULL, NULL),
+(110, 105, 1, NULL, 6, 10099, NULL, 'MI_PUR001', '1000.00000', NULL, NULL, '222.00000', '22.00000', NULL, NULL, NULL, NULL, NULL, '0', 24, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-28 03:51:46', 0, '2028-05-14 03:51:46', NULL, NULL),
+(111, 106, 2, NULL, 6, 10104, NULL, 'MI_PUR04', '20.00000', NULL, NULL, '250.00000', '5.00000', NULL, NULL, NULL, NULL, NULL, '0', 22, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-13 12:39:13', 0, '2013-05-14 12:39:13', NULL, NULL),
+(112, 106, 3, NULL, 6, 10104, NULL, 'MI_PUR04', '20.00000', NULL, NULL, '250.00000', '5.00000', NULL, NULL, NULL, NULL, NULL, '0', 21, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-13 12:39:14', 0, '2013-05-14 12:39:14', NULL, NULL),
+(113, 106, 1, NULL, 6, 10104, NULL, 'MI_PUR04', '20.00000', NULL, NULL, '250.00000', '5.00000', NULL, NULL, NULL, NULL, NULL, '0', 20, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-05-13 12:39:12', 0, '2013-05-14 12:39:12', NULL, NULL),
+(114, 107, 1, NULL, 6, 10104, NULL, 'MI_PUR04', '20.00000', NULL, NULL, '250.00000', '5000.00000', NULL, NULL, NULL, NULL, NULL, '0', 19, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-13 13:19:01', 0, '2014-05-13 13:19:01', NULL, NULL),
+(115, 108, 1, NULL, 6, 10040, NULL, 'MI Processsor 01', '12.00000', NULL, NULL, '0.01000', '0.06500', NULL, NULL, NULL, NULL, NULL, '0', 62, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-07-01 10:13:41', 0, '2001-07-14 10:13:41', NULL, NULL),
+(116, 108, 2, NULL, 6, 10040, NULL, 'MI Processsor 01', '6.50000', NULL, NULL, '0.01000', '0.06500', NULL, NULL, NULL, NULL, NULL, '0', 61, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-07-01 10:12:10', 0, '2001-07-14 10:12:10', NULL, NULL),
+(117, 108, 3, NULL, 6, 10040, NULL, 'MI Processsor 01', '6.50000', NULL, NULL, '0.01000', '0.06500', NULL, NULL, NULL, NULL, NULL, '0', 60, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-07-01 10:12:10', 0, '2001-07-14 10:12:10', NULL, NULL),
+(118, 108, 4, NULL, 6, 10040, NULL, 'MI Processsor 01', '6.50000', NULL, NULL, '0.01000', '0.06500', NULL, NULL, NULL, NULL, NULL, '0', 59, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-07-01 10:12:11', 0, '2001-07-14 10:12:11', NULL, NULL),
+(119, 108, 5, NULL, 6, 10040, NULL, 'MI Processsor 01', '6.50000', NULL, NULL, '0.01000', '0.06500', NULL, NULL, NULL, NULL, NULL, '0', 58, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-07-01 10:12:11', 0, '2001-07-14 10:12:11', NULL, NULL),
+(120, 109, 1, NULL, 6, 10040, NULL, 'MI Processsor 01', '58.50000', NULL, NULL, '0.01000', '0.58500', NULL, NULL, NULL, NULL, NULL, '0', 57, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-07-03 09:08:17', 0, '2003-07-14 09:08:17', NULL, NULL),
+(121, 109, 3, NULL, 6, 10041, NULL, 'MI Processsor 01', '58.50000', NULL, NULL, '0.01000', '0.58500', NULL, NULL, NULL, NULL, NULL, '0', 56, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-05-14 09:09:07', 0, '2014-05-14 09:09:07', NULL, NULL),
+(122, 2, 1, NULL, 6, 10043, NULL, 'MI Cabinet A 01', '1200.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-28 03:58:06', 0, '2014-05-28 03:58:06', NULL, NULL),
+(123, 110, 2, NULL, 6, 10098, NULL, 'MI_PUR001', '12.00000', NULL, NULL, '500.00000', '6.00000', NULL, NULL, NULL, NULL, NULL, '0', 0, 'GOODS', '', 27, NULL, NULL, NULL, NULL, 0, '2014-07-29 08:55:37', 0, '2029-07-14 08:55:37', NULL, NULL),
+(124, 110, 1, NULL, 6, 10098, NULL, 'MI_PUR001', '12.00000', NULL, NULL, '500.00000', '6000.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-07-22 16:39:37', 0, '2014-07-22 16:39:37', NULL, NULL),
+(125, 111, 1, NULL, 6, 10098, NULL, 'MI_PUR001', '12.00000', NULL, NULL, '500.00000', '6.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-03 17:00:54', 0, '2003-08-14 17:00:54', NULL, NULL),
+(126, 111, 2, NULL, 6, 10098, NULL, 'MI_PUR001', '13.00000', NULL, NULL, '500.00000', '6.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-03 17:00:55', 0, '2003-08-14 17:00:55', NULL, NULL),
+(127, 111, 3, NULL, 6, 10092, NULL, 'Sub Assembly 01', '22.00000', NULL, NULL, '12.00000', '264.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-03 17:00:54', 0, '2003-08-14 17:00:54', NULL, NULL),
+(128, 114, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '12.00000', 1, '2014-08-28', '20.00000', '240.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-04 16:55:33', 0, '2004-08-14 16:55:33', NULL, NULL),
+(129, 115, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '12.00000', 2, '2014-08-27', '34.80000', '417.60000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-06 07:38:38', 0, '2006-08-14 07:38:38', NULL, NULL),
+(130, 116, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '12.00000', 2, '2014-08-31', '121.00000', '1452.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-06 10:33:56', 0, '2014-08-06 10:33:56', NULL, NULL),
+(131, 117, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '12.00000', 2, '2014-08-27', '121.00000', '1.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-06 13:01:02', 0, '2006-08-14 13:01:02', NULL, NULL),
+(132, 118, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '67.00000', 2, '2014-08-28', '12.00000', '804.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 07:54:25', 0, '2024-08-14 07:54:25', NULL, NULL),
+(133, 119, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '13.00000', '5.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 07:58:37', 0, '2024-08-14 07:58:37', NULL, NULL),
+(134, 120, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '13.00000', '5.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 08:00:21', 0, '2024-08-14 08:00:21', NULL, NULL),
+(135, 121, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '14.00000', '5600.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 11:48:09', 0, '2024-08-14 11:48:09', NULL, NULL),
+(136, 122, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '13.00000', '5.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 11:53:15', 0, '2024-08-14 11:53:15', NULL, NULL),
+(137, 123, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '14.00000', '5600.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 12:06:56', 0, '2024-08-14 12:06:56', NULL, NULL),
+(138, 124, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '14.00000', '5600.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 12:46:48', 0, '2014-08-24 12:46:48', NULL, NULL),
+(140, 125, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '14.00000', '5600.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 12:52:27', 0, '2024-08-14 12:52:27', NULL, NULL),
+(141, 126, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '13.00000', '5.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 12:53:14', 0, '2014-08-24 12:53:14', NULL, NULL),
+(143, 129, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '14.00000', '5600.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 13:32:55', 0, '2014-08-24 13:32:55', NULL, NULL),
+(145, 130, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '14.00000', '5600.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 13:35:58', 0, '2024-08-14 13:35:58', NULL, NULL),
+(146, 131, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '14.00000', '5600.00000', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-09-09 11:18:24', 0, '2009-09-14 11:18:24', NULL, NULL),
+(147, 132, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '400.00000', 2, '2014-08-28', '14.00000', '5600.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 13:37:29', 0, '2014-08-24 13:37:29', NULL, NULL),
+(149, 133, 1, NULL, 6, 10107, NULL, 'MI_SA03', '500.00000', 2, '2014-08-28', '30.00000', '15000.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 16:41:02', 0, '2024-08-14 16:41:02', NULL, NULL),
+(150, 134, 1, NULL, 6, 10107, NULL, 'MI_SA03', '2000.00000', 2, '2014-08-29', '30.00000', '60000.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-24 16:46:35', 0, '2014-08-24 16:46:35', NULL, NULL),
+(151, 135, 1, NULL, 6, 10107, NULL, 'MI_SA03', '2000.00000', 2, '2014-08-30', '30.00000', '60000.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 06:40:11', 0, '2025-08-14 06:40:11', NULL, NULL),
+(152, 135, 2, NULL, 6, 10092, NULL, 'Sub Assembly 01', '10000.00000', 2, '2014-08-30', '12.00000', '120000.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 06:40:12', 0, '2025-08-14 06:40:12', NULL, NULL),
+(153, 135, 3, NULL, 6, 10107, NULL, 'MI_SA03', NULL, 2, '2014-08-30', '30.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 06:40:12', 0, '2025-08-14 06:40:12', NULL, NULL),
+(154, 136, 1, 154, 6, 10107, NULL, 'MI_SA03', '90.00000', NULL, NULL, '30.00000', '60000.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 11:58:01', 0, '2025-08-14 11:58:01', NULL, NULL),
+(155, 136, 2, NULL, 6, 10092, NULL, 'Sub Assembly 01', '900.00000', 2, '2014-08-30', '12.00000', '10800.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 06:41:23', 0, '2025-08-14 06:41:23', NULL, NULL),
+(156, 143, 1, 154, 6, 10107, NULL, 'MI_SA03', '90.00000', NULL, NULL, '30.00000', '60000.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 12:17:58', 0, '2025-08-14 12:17:58', NULL, NULL),
+(157, 148, 1, 154, 6, 10107, NULL, 'MI_SA03', '23.00000', NULL, NULL, '30.00000', '2700.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 12:47:10', 0, '2014-08-25 12:47:10', NULL, NULL),
+(158, 144, 1, 154, 6, 10107, NULL, 'MI_SA03', '20.00000', NULL, NULL, '30.00000', '2700.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 13:05:23', 0, '2014-08-25 13:05:23', NULL, NULL),
+(159, 152, 1, NULL, 6, 10098, NULL, 'MI_PUR001', '2312.00000', 2, '2014-08-29', '111.00000', '256632.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 13:16:06', 0, '2025-08-14 13:16:06', NULL, NULL),
+(160, 153, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '101.00000', 2, '2014-08-26', '121.00000', '121000.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 13:39:33', 0, '2025-08-14 13:39:33', NULL, NULL),
+(161, 153, 2, NULL, 6, 10098, NULL, 'MI_PUR001', '132.00000', 2, '2014-08-28', '22.00000', '2662.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 13:39:33', 0, '2025-08-14 13:39:33', NULL, NULL),
+(162, 157, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '101.00000', 2, '2014-08-26', '121.00000', '121000.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 13:42:10', 0, '2014-08-25 13:42:10', NULL, NULL),
+(163, 157, 2, NULL, 6, 10098, NULL, 'MI_PUR001', '132.00000', 2, '2014-08-28', '22.00000', '2662.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 13:42:10', 0, '2014-08-25 13:42:10', NULL, NULL),
+(164, 158, 1, 162, 6, 10089, NULL, 'MI_PUR02', '55.00000', NULL, NULL, '121.00000', '121000.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 13:57:21', 0, '2014-08-25 13:57:21', NULL, NULL),
+(165, 159, 1, 162, 6, 10089, NULL, 'MI_PUR02', '44.00000', NULL, NULL, '121.00000', '121000.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-27 06:48:16', 0, '2027-08-14 06:48:16', NULL, NULL),
+(166, 160, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '3.00000', 2, '2014-08-28', '121.00000', '10769.00000', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-09-17 12:51:16', 0, '2017-09-14 12:51:16', NULL, NULL),
+(167, 160, 2, NULL, 6, 10098, NULL, 'MI_PUR001', '233.00000', 2, '2014-08-28', '11.00000', '2563.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-25 18:10:40', 0, '2025-08-14 18:10:40', NULL, NULL),
+(168, 165, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '1000.00000', 2, '2014-08-22', '121.00000', '121000.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-26 08:53:31', 0, '2026-08-14 08:53:31', NULL, NULL),
+(169, 172, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '45.00000', NULL, NULL, '22.00000', '506.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:02:35', 0, '2028-08-14 05:02:35', NULL, NULL),
+(170, 176, 1, NULL, 6, 10098, NULL, 'MI_PUR001', '4534.00000', NULL, NULL, '1212.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-26 13:11:45', 0, '2026-08-14 13:11:45', NULL, NULL),
+(171, 186, 1, 170, 6, 10098, NULL, 'MI_PUR001', '2.00000', NULL, NULL, '1212.00000', '2424.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-27 07:09:57', 0, '2027-08-14 07:09:57', NULL, NULL),
+(172, 179, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '2345.00000', NULL, NULL, '232.00000', '544040.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-27 05:23:05', 0, '2027-08-14 05:23:05', NULL, NULL),
+(173, 180, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '232.00000', NULL, NULL, '121.00000', '28072.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-27 05:53:43', 0, '2027-08-14 05:53:43', NULL, NULL),
+(174, 181, 1, 170, 6, 10098, NULL, 'MI_PUR001', '231.00000', NULL, NULL, '1212.00000', '279972.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-27 06:44:57', 0, '2027-08-14 06:44:57', NULL, NULL),
+(175, 183, 1, 162, 6, 10089, NULL, 'MI_PUR02', '11.00000', NULL, NULL, '121.00000', '1331.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-27 06:48:53', 0, '2027-08-14 06:48:53', NULL, NULL),
+(176, 184, 1, 170, 6, 10098, NULL, 'MI_PUR001', '11.00000', NULL, NULL, '1212.00000', '13332.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-27 07:00:23', 0, '2027-08-14 07:00:23', NULL, NULL),
+(178, 187, 1, 170, 6, 10098, NULL, 'MI_PUR001', '122.00000', NULL, NULL, '1212.00000', '147864.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-27 07:13:41', 0, '2027-08-14 07:13:41', NULL, NULL),
+(179, 188, 1, 170, 6, 10098, NULL, 'MI_PUR001', '4534.00000', NULL, NULL, '1212.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-27 07:18:25', 0, '2027-08-14 07:18:25', NULL, NULL),
+(180, 189, 1, 170, 6, 10098, NULL, 'MI_PUR001', '121.00000', NULL, NULL, '1212.00000', '146652.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, 1, NULL, NULL, 0, '2014-09-08 12:00:27', 0, '2008-09-14 12:00:27', NULL, NULL),
+(181, 190, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '2121.00000', NULL, NULL, '444.00000', '941724.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-27 16:02:22', 0, '2027-08-14 16:02:22', NULL, NULL),
+(182, 191, 1, 181, 6, 10089, NULL, 'MI_PUR02', '353.00000', NULL, NULL, '444.00000', '43956.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 04:41:06', 0, '2028-08-14 04:41:06', NULL, NULL),
+(183, 192, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '350.00000', NULL, NULL, '444.00000', '43956.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 04:44:21', 34, '2014-12-30 05:48:01', NULL, NULL),
+(185, 192, 2, 181, 6, 10089, NULL, 'MI_PUR02', '55.00000', NULL, NULL, '444.00000', '24420.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 04:55:23', 34, '2014-12-30 05:48:01', NULL, NULL),
+(186, 192, 3, 181, 6, 10089, NULL, 'MI_PUR02', '12.00000', NULL, NULL, '444.00000', '5328.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 04:55:23', 34, '2014-12-30 05:48:00', NULL, NULL),
+(187, 193, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '121.00000', '14641.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:03:56', 0, '2014-08-28 05:03:56', NULL, NULL),
+(188, 194, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '121.00000', '14641.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:04:52', 0, '2014-08-28 05:04:52', NULL, NULL),
+(189, 195, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '121.00000', '14641.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:05:29', 0, '2014-08-28 05:05:29', NULL, NULL),
+(190, 196, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '121.00000', '14641.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:07:13', 0, '2014-08-28 05:07:13', NULL, NULL),
+(191, 197, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '121.00000', '14641.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:08:29', 0, '2014-08-28 05:08:29', NULL, NULL),
+(192, 198, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '121.00000', '14641.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:09:58', 0, '2014-08-28 05:09:58', NULL, NULL),
+(193, 199, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '1212.00000', NULL, NULL, '121.00000', '14641.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:28:23', 0, '2028-08-14 05:28:23', NULL, NULL),
+(194, 199, 2, NULL, 6, 10089, NULL, 'MI_PUR02', '111.00000', NULL, NULL, '111.00000', '12321.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:28:23', 0, '2028-08-14 05:28:23', NULL, NULL),
+(195, 199, 3, NULL, 6, 10092, NULL, 'Sub Assembly 01121', '24.00000', NULL, NULL, '12.00000', '288.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:28:24', 0, '2028-08-14 05:28:24', NULL, NULL),
+(196, 200, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '1121.00000', NULL, NULL, '222.00000', '222.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 06:08:18', 0, '2028-08-14 06:08:18', NULL, NULL),
+(197, 200, 2, NULL, 6, 10089, NULL, 'MI_PUR02', '234.00000', NULL, NULL, '232.00000', '54288.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 06:08:19', 0, '2028-08-14 06:08:19', NULL, NULL),
+(198, 200, 3, NULL, 6, 10092, NULL, 'Sub Assembly 01121', '24.00000', NULL, NULL, '12.00000', '288.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-28 05:37:45', 0, '2028-08-14 05:37:45', NULL, NULL),
+(199, 201, 1, NULL, 6, 10092, NULL, 'Sub Assembly 01', '121.00000', NULL, NULL, '12.00000', '1452.00000', NULL, NULL, NULL, NULL, NULL, '0', 74, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-30 06:56:23', 0, '2014-08-30 06:56:23', NULL, NULL),
+(200, 201, 3, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '12121.00000', '1466641.00000', NULL, NULL, NULL, NULL, NULL, '0', 66, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-30 06:56:23', 0, '2014-08-30 06:56:23', NULL, NULL),
+(201, 202, 1, NULL, 6, 10041, NULL, 'MI Processsor 01', '58.50000', NULL, NULL, '0.01000', '0.58500', NULL, NULL, NULL, NULL, NULL, '0', 53, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-30 07:14:23', 0, '2014-08-30 07:14:23', NULL, NULL),
+(202, 202, 3, NULL, 6, 10041, NULL, 'MI Processsor 01', '58.50000', NULL, NULL, '0.01000', '0.58500', NULL, NULL, NULL, NULL, NULL, '0', 55, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-08-30 07:14:23', 0, '2014-08-30 07:14:23', NULL, NULL),
+(203, 203, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '2121.00000', NULL, NULL, '2323.00000', '4927083.00000', 1, '502562.46600', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-09-07 09:24:13', 0, '2007-09-14 09:24:13', NULL, NULL),
+(204, 203, 2, NULL, 6, 10098, NULL, 'MI_PUR001', '1211.00000', NULL, NULL, '212.00000', '256732.00000', 1, '26186.66400', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-09-07 09:24:12', 0, '2007-09-14 09:24:12', NULL, NULL),
+(205, 204, 1, 181, 6, 10089, NULL, 'MI_PUR02', '5.00000', NULL, NULL, '444.00000', '2220.00000', NULL, NULL, NULL, NULL, NULL, NULL, 73, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-09-02 09:48:33', 34, '2014-12-30 05:46:57', NULL, NULL),
+(206, 205, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '100.00000', 2, '2014-09-25', '121.00000', '12100.00000', 1, '1.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-09-08 09:15:49', 0, '2008-09-14 09:15:49', NULL, NULL),
+(208, 206, 1, NULL, 6, 10098, NULL, 'MI_PUR001', '1000.00000', NULL, NULL, '12.00000', '12000.00000', 1, '1.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-09-08 11:36:06', 34, '2014-10-29 18:08:19', NULL, NULL),
+(209, 207, 1, NULL, 6, 10092, '006', 'Sub Assembly 01', '1000.00000', 2, NULL, '12.00000', '12000.00000', 1, '1.00000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 0, '2014-10-04 11:23:38', 34, '2014-11-03 12:09:12', NULL, NULL),
+(210, 209, 1, NULL, 6, 10120, '001', 'Laser Pur 001', '33.00000', NULL, NULL, '12.00000', '396.00000', 1, '40.39200', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-11-05 04:27:55', 34, '2014-11-13 09:25:55', NULL, NULL),
+(211, 210, 1, NULL, 6, 10120, '001', 'Laser Pur 001', '33.00000', NULL, NULL, '12.00000', '396.00000', 1, '40.39200', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-11-05 04:28:26', 34, '2014-11-05 04:32:50', NULL, NULL),
+(212, 210, 2, NULL, 6, 10137, '001', 'MI_PUR99', '121.00000', NULL, NULL, '11.00000', '1331.00000', 1, '113.32200', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-11-05 11:37:17', 34, '2014-11-05 11:37:58', NULL, NULL),
+(213, 210, 3, NULL, 6, 10139, '001', 'MI_PUR100', '111.00000', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-11-05 16:24:56', 34, '2014-11-05 16:25:31', NULL, NULL),
+(214, 211, 1, NULL, 6, 10137, '001', 'MI_PUR99', '23.00000', 2, '2014-11-13', '25.00000', '123.00000', 1, '12.54600', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-11-08 09:25:46', 34, '2014-11-08 09:26:24', NULL, NULL),
+(215, 213, 1, 181, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '444.00000', '53724.00000', NULL, NULL, NULL, NULL, NULL, 'po_requisition_details', 81, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-11-29 07:16:32', 34, '2014-11-29 07:16:32', NULL, NULL),
+(216, 214, 1, 181, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '444.00000', '53724.00000', NULL, NULL, NULL, NULL, NULL, 'po_requisition_details', 65, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-11-29 07:40:38', 34, '2014-11-29 07:40:38', NULL, NULL),
+(217, 215, 1, NULL, 6, 10098, NULL, 'MI_PUR001', '20.00000', NULL, NULL, '12.00000', '240.00000', 1, NULL, NULL, NULL, NULL, 'po_requisition_details', 87, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-11-29 07:44:11', 34, '2014-12-16 07:58:16', NULL, NULL),
+(218, 216, 1, NULL, 6, 10137, '001', 'MI_PUR99', '100.00000', 2, '2014-12-17', '23.00000', '2300.00000', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 1, '2014-12-08 15:03:19', 34, '2014-12-16 08:13:21', NULL, NULL),
+(219, 217, 1, NULL, 6, 10098, NULL, 'MI_PUR001', '20.00000', NULL, NULL, '334.00000', '240.00000', 1, '24.48000', NULL, NULL, NULL, 'po_requisition_details', 87, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-12-14 09:32:34', 34, '2014-12-16 07:50:08', NULL, NULL),
+(220, 217, 2, NULL, 6, 10137, '001', 'MI_PUR99', '13.00000', NULL, NULL, '11.00000', '143.00000', 1, '0.10200', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-12-29 20:06:32', 34, '2014-12-29 20:06:32', NULL, NULL),
+(221, 218, 1, NULL, 6, 10137, '001', 'MI_PUR99', '23.00000', 2, '2014-11-13', '25.00000', '123.00000', 1, '12.54600', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2014-12-30 04:56:02', 34, '2014-12-30 04:56:17', NULL, NULL),
+(222, 222, 1, 203, 6, 10089, NULL, 'MI_PUR02', '2121.00000', NULL, NULL, '2323.00000', '4927083.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, 1, NULL, NULL, 34, '2014-12-30 07:20:41', 34, '2014-12-30 07:31:33', NULL, NULL),
+(223, 223, 1, 203, 6, 10089, NULL, 'MI_PUR02', '2121.00000', NULL, NULL, '2323.00000', '4927083.00000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, 1, NULL, NULL, 34, '2014-12-30 07:32:05', 34, '2014-12-30 07:32:19', NULL, NULL),
+(224, 224, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '12121.00000', '1466641.00000', 1, NULL, NULL, NULL, NULL, 'po_requisition_details', 85, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2015-01-01 05:38:27', 34, '2015-01-12 05:03:57', NULL, NULL),
+(225, 224, 3, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '12121.00000', '1466641.00000', 1, NULL, NULL, NULL, NULL, 'po_requisition_details', 84, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2015-01-01 05:38:27', 34, '2015-01-12 05:03:58', NULL, NULL),
+(226, 224, 5, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '12121.00000', '1466641.00000', 1, NULL, NULL, NULL, NULL, 'po_requisition_details', 83, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2015-01-01 05:38:27', 34, '2015-01-12 05:03:58', NULL, NULL),
+(227, 225, 1, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '12121.00000', '1466641.00000', NULL, NULL, NULL, NULL, NULL, 'po_requisition_details', 86, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2015-01-12 06:14:05', 34, '2015-01-12 06:14:05', NULL, NULL);
+INSERT INTO `po_line` (`po_line_id`, `po_header_id`, `line_number`, `bpa_line_id`, `receving_org_id`, `item_id_m`, `revision_name`, `item_description`, `line_quantity`, `price_list_header_id`, `price_date`, `unit_price`, `line_price`, `tax_code_id`, `tax_amount`, `gl_line_price`, `gl_tax_amount`, `exchange_rate`, `reference_doc_type`, `reference_doc_number`, `line_type`, `line_description`, `uom_id`, `kit_configured_cb`, `hold_cb`, `kit_cb`, `status`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`, `rev_enabled_cb`, `rev_number`) VALUES
+(228, 225, 3, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '12121.00000', '1466641.00000', NULL, NULL, NULL, NULL, NULL, 'po_requisition_details', 82, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2015-01-12 06:14:05', 34, '2015-01-12 06:14:05', NULL, NULL),
+(229, 225, 5, NULL, 6, 10089, NULL, 'MI_PUR02', '121.00000', NULL, NULL, '12121.00000', '1466641.00000', NULL, NULL, NULL, NULL, NULL, 'po_requisition_details', 80, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2015-01-12 06:14:05', 34, '2015-01-12 06:14:05', NULL, NULL),
+(230, 226, 1, NULL, 6, 10137, '001', 'MI_PUR99', '12.00000', 2, '2015-01-14', '111.00000', '1332.00000', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2015-01-28 17:29:10', 34, '2015-01-28 17:29:29', NULL, NULL),
+(231, 226, 2, NULL, 6, 10034, NULL, 'Desktop 01 of Model A', '5.00000', 2, '2015-02-27', '121.00000', '605.00000', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, NULL, NULL, NULL, NULL, 34, '2015-02-06 17:03:30', 34, '2015-02-07 12:10:23', NULL, NULL),
+(233, 227, 1, NULL, 6, 10158, NULL, 'MI_KIT01', '20.00000', 2, '2015-02-25', '12.00000', '240.00000', 1, '24.48000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, 1, NULL, 1, NULL, 34, '2015-02-09 03:33:02', 34, '2015-02-09 05:53:06', NULL, NULL),
+(238, 227, 2, NULL, 6, 10158, NULL, 'MI_KIT01', '10.00000', NULL, NULL, '11.00000', '110.00000', 1, '11.22000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, 1, NULL, 1, NULL, 34, '2015-02-09 05:42:42', 34, '2015-02-09 05:53:06', NULL, NULL),
+(239, 227, 3, NULL, 6, 10158, NULL, 'MI_KIT01', '5.00000', 0, '0000-00-00', '121.00000', '605.00000', 1, '61.71000', NULL, NULL, NULL, '', 0, 'GOODS', '', 27, 1, 0, 1, NULL, 34, '2015-02-09 10:08:45', 34, '2015-02-09 10:09:57', NULL, NULL),
+(240, 227, 4, NULL, 6, 10158, NULL, 'MI_KIT01', '10.00000', NULL, NULL, '12.00000', '120.00000', 1, '12.24000', NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, 1, NULL, 1, NULL, 34, '2015-02-09 10:18:30', 34, '2015-02-09 10:20:08', NULL, NULL),
+(241, 228, 1, NULL, 6, 10158, NULL, 'MI_KIT01', '12.00000', NULL, NULL, '11.00000', '132.00000', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'GOODS', NULL, 27, 1, NULL, 1, NULL, 34, '2015-02-09 11:13:51', 34, '2015-02-09 11:14:21', NULL, NULL),
+(242, 229, 1, NULL, 6, 10095, NULL, 'MI_SA002', '10.00000', NULL, NULL, '111.00000', '1110.00000', 1, '113.22000', '18.50004', '1.88700', NULL, NULL, NULL, 'GOODS', NULL, 27, 1, NULL, 1, NULL, 34, '2015-02-19 09:21:18', 34, '2015-02-19 09:47:24', NULL, NULL),
+(243, 230, 1, NULL, 6, 10095, NULL, 'MI_SA002', '10.00000', NULL, NULL, '111.00000', '1110.00000', 1, '113.22000', '18.50004', '1.88700', NULL, NULL, NULL, 'GOODS', NULL, 27, 1, NULL, 1, NULL, 34, '2015-02-19 09:51:10', 34, '2015-02-19 09:51:10', NULL, NULL),
+(244, 231, 1, NULL, 6, 10034, NULL, 'Desktop 01 of Model A', '10.00000', NULL, NULL, NULL, '1110.00000', 1, '113.22000', '18.50004', '1.88700', NULL, NULL, NULL, 'GOODS', NULL, 27, 1, NULL, 1, NULL, 34, '2015-02-19 09:54:35', 34, '2015-02-19 09:54:48', NULL, NULL),
+(245, 232, 1, NULL, 6, 10034, NULL, 'Desktop 01 of Model A', '10.00000', NULL, NULL, '12.00000', '120.00000', 1, '12.24000', '2.00000', '0.20400', NULL, NULL, NULL, 'GOODS', NULL, 27, 1, NULL, 1, NULL, 34, '2015-02-19 10:02:05', 34, '2015-02-19 10:02:24', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -20529,6 +20591,8 @@ CREATE TABLE IF NOT EXISTS `sd_so_line` (
   `unit_price` decimal(20,5) DEFAULT NULL,
   `line_price` decimal(20,5) DEFAULT NULL,
   `tax_amount` decimal(20,5) DEFAULT NULL,
+  `gl_line_price` decimal(15,5) DEFAULT NULL,
+  `gl_tax_amount` decimal(15,5) DEFAULT NULL,
   `tax_code_id` int(12) DEFAULT NULL,
   `line_status` varchar(25) NOT NULL,
   `requested_date` date DEFAULT NULL,
@@ -20555,96 +20619,58 @@ CREATE TABLE IF NOT EXISTS `sd_so_line` (
   `last_update_date` datetime NOT NULL,
   `rev_enabled_cb` tinyint(1) DEFAULT NULL,
   `rev_number` int(12) DEFAULT NULL,
-  PRIMARY KEY (`sd_so_line_id`)
+  PRIMARY KEY (`sd_so_line_id`),
+  UNIQUE KEY `sd_so_header_id` (`sd_so_header_id`,`item_id_m`,`requested_date`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=83 ;
 
 --
 -- Dumping data for table `sd_so_line`
 --
 
-INSERT INTO `sd_so_line` (`sd_so_line_id`, `sd_so_header_id`, `line_number`, `shipping_org_id`, `item_id_m`, `item_description`, `line_quantity`, `picked_quantity`, `shipped_quantity`, `invoiced_quantity`, `price_list_header_id`, `price_date`, `unit_price`, `line_price`, `tax_amount`, `tax_code_id`, `line_status`, `requested_date`, `promise_date`, `schedule_ship_date`, `actual_ship_date`, `reference_doc_type`, `reference_doc_number`, `ar_transaction_header_id`, `ar_transaction_line_id`, `line_type`, `supply_source`, `destination_type`, `line_description`, `uom_id`, `kit_cb`, `kit_configured_cb`, `bom_config_header_id`, `wip_wo_header_id`, `so_status`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`, `rev_enabled_cb`, `rev_number`) VALUES
-(1, 6, 1, 6, 10043, 'MI Cabinet A 01', '20.00000', NULL, NULL, NULL, NULL, NULL, '12.00000', '240.00000', NULL, NULL, 'AWAITING_PICKING', '2014-05-23', '0000-00-00', '2014-07-23', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-05-15 11:16:56', 0, '2015-05-14 11:16:56', NULL, NULL),
-(2, 6, 2, 6, 10051, 'MI Level 5 TEST01', '33.00000', NULL, NULL, NULL, NULL, NULL, '34.00000', '1122.00000', NULL, NULL, 'AWAITING_PICKING', '2014-05-23', '0000-00-00', '2014-08-26', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-05-15 11:16:58', 0, '2015-05-14 11:16:58', NULL, NULL),
-(3, 2, 1, 6, 10094, 'Sub Assembly 01', '50.00000', '50.00000', NULL, NULL, NULL, NULL, '23.00000', '1.00000', NULL, NULL, 'Entered', '2014-05-29', '0000-00-00', '0000-00-00', '0000-00-00', 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-05-15 10:57:45', 0, '2002-06-14 02:23:24', NULL, NULL),
-(4, 2, 2, 6, 10047, 'MI Level 3 TEST 01', '12.00000', NULL, NULL, NULL, NULL, NULL, '9.00000', '108.00000', NULL, NULL, 'Entered', '2014-05-29', '0000-00-00', '0000-00-00', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-05-15 10:57:42', 0, '2015-05-14 10:57:42', NULL, NULL),
-(5, 5, 1, 6, 10075, 'Finished Good 001', '12.00000', '12.00000', '0.00000', NULL, NULL, NULL, '9.00000', '108.00000', NULL, NULL, 'AWAITING_PICKING', '2014-05-23', '0000-00-00', '2014-05-30', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 03:15:58', 0, '2002-06-14 03:15:58', NULL, NULL),
-(6, 4, 1, 6, 10061, 'MI Mobile 01', '12.00000', NULL, NULL, NULL, NULL, NULL, '88.00000', '1056.00000', NULL, NULL, 'AWAITING_PICKING', '2014-09-18', NULL, '2014-09-25', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-05-15 13:13:32', 0, '2014-05-15 13:13:32', NULL, NULL),
-(7, 4, 2, 6, 10063, 'MI MOBILE 02', '9.00000', NULL, NULL, NULL, NULL, NULL, '9.00000', '81.00000', NULL, NULL, 'AWAITING_PICKING', '2014-09-18', NULL, '2014-09-25', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-05-15 13:13:32', 0, '2014-05-15 13:13:32', NULL, NULL),
-(8, 3, 3, 6, 10051, 'MI Level 5 TEST01', '99.00000', NULL, NULL, NULL, NULL, NULL, '122.00000', '12.00000', NULL, NULL, 'AWAITING_PICKING', '2014-05-28', '0000-00-00', '2014-05-28', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-05-15 13:18:12', 0, '2015-05-14 13:18:12', NULL, NULL),
-(9, 3, 2, 6, 10047, 'MI Level 3 TEST 01', '12.00000', NULL, NULL, NULL, NULL, NULL, '324.00000', '3.00000', NULL, NULL, 'AWAITING_PICKING', '2014-09-23', '0000-00-00', '2014-05-30', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-05-15 13:18:12', 0, '2015-05-14 13:18:12', NULL, NULL),
-(10, 3, 1, 6, 10039, 'MI Monitor A 01', '34.00000', NULL, NULL, NULL, NULL, NULL, '8.00000', '272.00000', NULL, NULL, 'AWAITING_PICKING', '2014-07-09', '0000-00-00', '2014-05-26', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-05-15 13:18:11', 0, '2015-05-14 13:18:11', NULL, NULL),
-(11, 5, 2, 6, 10075, 'Finished Good 001', '5.00000', '5.00000', '0.00000', NULL, NULL, NULL, '12.00000', '60.00000', NULL, NULL, 'AWAITING_PICKING', '2014-06-24', '0000-00-00', '2014-06-24', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 03:16:49', 0, '2002-06-14 09:10:55', NULL, NULL),
-(12, 5, 3, 6, 10075, 'Finished Good 001', '2.00000', '2.00000', NULL, NULL, NULL, NULL, '12.00000', '24.00000', NULL, NULL, 'PICKED', '2014-06-27', NULL, '2014-06-28', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 03:26:02', 0, '2002-06-14 03:26:36', NULL, NULL),
-(13, 5, 4, 6, 10075, 'Finished Good 001', '1.00000', '1.00000', NULL, NULL, NULL, NULL, '12.00000', '12.00000', NULL, NULL, 'AWAITING_PICKING', '2014-06-24', NULL, '2014-06-24', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 03:28:35', 0, '2002-06-14 09:27:03', NULL, NULL),
-(14, 7, 2, 6, 10075, 'Finished Good 001', '5.00000', '5.00000', '0.00000', NULL, NULL, NULL, '12.00000', '60.00000', NULL, NULL, 'PICKED', '2014-06-24', '0000-00-00', '2014-06-24', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 06:24:51', 0, '2002-06-14 06:27:49', NULL, NULL),
-(15, 7, 3, 6, 10094, 'Sub Assembly 01', '2.00000', '2.00000', '0.00000', NULL, NULL, NULL, '12.00000', '24.00000', NULL, NULL, 'AWAITING_PICKING', '2014-06-27', '0000-00-00', '2014-06-26', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 06:24:51', 0, '2002-06-14 09:29:21', NULL, NULL),
-(16, 7, 1, 6, 10075, 'Finished Good 001', '12.00000', '12.00000', '0.00000', NULL, NULL, NULL, '9.00000', '108.00000', NULL, NULL, 'PICKED', '2014-05-23', '0000-00-00', '2014-06-27', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 06:24:51', 0, '2002-06-14 06:49:39', NULL, NULL),
-(17, 7, 4, 6, 10094, 'Sub Assembly 01', '1.00000', '1.00000', '0.00000', NULL, NULL, NULL, '12.00000', '12.00000', NULL, NULL, 'PICKED', '2014-06-24', '0000-00-00', '2014-06-25', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 06:24:51', 0, '2002-06-14 06:27:50', NULL, NULL),
-(18, 8, 2, 6, 10075, 'Finished Good 001', '5.00000', '5.00000', '5.00000', NULL, NULL, NULL, '12.00000', '60.00000', NULL, NULL, 'SHIPPED', '2014-06-24', NULL, '2014-06-26', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 09:56:24', 0, '2002-06-14 10:44:35', NULL, NULL),
-(19, 8, 1, 6, 10075, 'Finished Good 001', '12.00000', '12.00000', NULL, NULL, NULL, NULL, '9.00000', '108.00000', NULL, NULL, 'PICKED', '2014-05-23', NULL, '2014-06-26', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 09:56:24', 0, '2002-06-14 09:56:56', NULL, NULL),
-(20, 8, 4, 6, 10094, 'Sub Assembly 01', '1.00000', '1.00000', NULL, NULL, NULL, NULL, '12.00000', '12.00000', NULL, NULL, 'PICKED', '2014-06-24', NULL, '2014-06-26', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 09:56:25', 0, '2002-06-14 09:56:56', NULL, NULL),
-(21, 8, 3, 6, 10094, 'Sub Assembly 01', '2.00000', '2.00000', NULL, NULL, NULL, NULL, '12.00000', '24.00000', NULL, NULL, 'PICKED', '2014-06-27', NULL, '2014-06-26', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 09:56:26', 0, '2002-06-14 09:56:55', NULL, NULL),
-(22, 9, 1, 6, 10075, 'Finished Good 001', '12.00000', '12.00000', NULL, NULL, NULL, NULL, '9.00000', '108.00000', NULL, NULL, 'PICKED', '2014-05-23', NULL, '2014-06-24', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 10:51:23', 0, '2002-06-14 10:53:54', NULL, NULL),
-(23, 9, 2, 6, 10075, 'Finished Good 001', '5.00000', '5.00000', NULL, NULL, NULL, NULL, '12.00000', '60.00000', NULL, NULL, 'PICKED', '2014-06-24', NULL, '2014-06-24', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 10:51:23', 0, '2002-06-14 10:56:09', NULL, NULL),
-(24, 9, 3, 6, 10094, 'Sub Assembly 01', '2.00000', '2.00000', '2.00000', NULL, NULL, NULL, '12.00000', '24.00000', NULL, NULL, 'SHIPPED', '2014-06-27', NULL, '2014-06-24', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 10:51:23', 0, '2002-06-14 11:07:56', NULL, NULL),
-(25, 9, 4, 6, 10094, 'Sub Assembly 01', '1.00000', '1.00000', NULL, NULL, NULL, NULL, '12.00000', '12.00000', NULL, NULL, 'PICKED', '2014-06-24', NULL, '2014-06-24', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 10:51:24', 0, '2002-06-14 11:03:02', NULL, NULL),
-(26, 10, 1, 6, 10075, 'Finished Good 001', '12.00000', '12.00000', NULL, NULL, NULL, NULL, '9.00000', '108.00000', NULL, NULL, 'PICKED', '2014-05-23', NULL, '2014-06-11', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 11:16:29', 0, '2002-06-14 11:25:04', NULL, NULL),
-(27, 10, 3, 6, 10094, 'Sub Assembly 01', '2.00000', '2.00000', NULL, NULL, NULL, NULL, '12.00000', '24.00000', NULL, NULL, 'PICKED', '2014-06-27', NULL, '2014-06-11', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 11:16:29', 0, '2002-06-14 11:20:32', NULL, NULL),
-(28, 10, 2, 6, 10075, 'Finished Good 001', '5.00000', NULL, NULL, NULL, NULL, NULL, '12.00000', '60.00000', NULL, NULL, 'AWAITING_PICKING', '2014-06-24', NULL, '2014-06-11', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 11:16:30', 0, '2014-06-02 11:16:30', NULL, NULL),
-(29, 10, 4, 6, 10094, 'Sub Assembly 01', '1.00000', '1.00000', NULL, NULL, NULL, NULL, '12.00000', '12.00000', NULL, NULL, 'PICKED', '2014-06-24', NULL, '2014-06-11', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 11:16:30', 0, '2002-06-14 11:16:43', NULL, NULL),
-(30, 11, 1, 6, 10075, 'Finished Good 001', '12.00000', '0.00000', '0.00000', NULL, NULL, NULL, '9.00000', '108.00000', '0.00000', 3, 'AWAITING_PICKING', '2014-05-23', '0000-00-00', '2014-06-17', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-04 05:28:11', 0, '2004-06-14 05:28:11', NULL, NULL),
-(31, 11, 2, 6, 10094, 'Sub Assembly 01', '1.00000', '1.00000', '1.00000', NULL, NULL, NULL, '12.00000', '12.00000', '0.00000', 0, 'AWAITING_PICKING', '2014-06-24', '0000-00-00', '2014-06-18', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-04 05:28:14', 0, '2004-06-14 05:28:14', NULL, NULL),
-(32, 11, 3, 6, 10094, 'Sub Assembly 01', '2.00000', '2.00000', '2.00000', NULL, NULL, NULL, '12.00000', '24.00000', '0.00000', 0, 'SHIPPED', '2014-06-27', '0000-00-00', '2014-06-18', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-04 05:28:19', 0, '2004-06-14 08:41:52', NULL, NULL),
-(33, 11, 4, 6, 10078, 'MI_FG002', '5.00000', '0.00000', '0.00000', NULL, NULL, NULL, '14.00000', '70.00000', '7.14000', 3, 'AWAITING_PICKING', '2014-06-24', '0000-00-00', '2014-06-18', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-04 05:28:17', 0, '2004-06-14 05:28:17', NULL, NULL),
-(34, 11, 5, 6, 10094, 'Sub Assembly 01', '2.00000', '2.00000', '0.00000', NULL, NULL, NULL, '65.00000', '130.00000', '13.26000', 3, 'AWAITING_PICKING', '2014-06-27', '0000-00-00', '2014-06-18', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-04 05:28:21', 0, '2004-06-14 05:28:21', NULL, NULL),
-(35, 11, 6, 6, 10075, 'Finished Good 001', '5.00000', '0.00000', '0.00000', NULL, NULL, NULL, '12.00000', '60.00000', '55.00000', 5, 'AWAITING_PICKING', '2014-06-24', '0000-00-00', '2014-06-18', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-04 05:28:27', 0, '2004-06-14 05:28:27', NULL, NULL),
-(36, 11, 7, 6, 10075, 'Finished Good 001', '12.00000', '0.00000', '0.00000', NULL, NULL, NULL, '12.00000', '144.00000', '14.68800', 3, 'AWAITING_PICKING', '2014-05-23', '0000-00-00', '2014-06-17', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-04 05:28:25', 0, '2004-06-14 05:28:25', NULL, NULL),
-(37, 11, 8, 6, 10094, 'Sub Assembly 01', '1.00000', '0.00000', '0.00000', NULL, NULL, NULL, '12.00000', '12.00000', '0.00000', 0, 'AWAITING_PICKING', '2014-06-24', '0000-00-00', '2014-06-18', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-04 05:28:22', 0, '2004-06-14 05:28:22', NULL, NULL),
-(38, 12, 1, 6, 10094, 'Sub Assembly 01', '12.00000', NULL, NULL, NULL, 1, '2014-06-24', '28.00000', '336.00000', '34.27200', 3, 'AWAITING_PICKING', '2014-06-30', NULL, '2014-06-30', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-28 17:21:05', 0, '2014-06-28 17:21:05', NULL, NULL),
-(39, 14, 2, 6, 10092, 'Sub Assembly 01', '20.00000', '20.00000', '0.00000', NULL, 1, '2014-06-26', '9.00000', '180.00000', '10.80000', 5, 'PICKED', '2014-07-07', '0000-00-00', '2014-07-07', NULL, 0, 0, NULL, NULL, '2', 'INV', 'EXTERNAL', '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-30 12:25:59', 0, '2030-06-14 16:27:54', NULL, NULL),
-(40, 14, 1, 6, 10107, 'MI_SA03', '11.00000', '11.00000', '11.00000', NULL, 1, '2014-06-29', '22.00000', '242.00000', '24.68400', 3, 'SHIPPED', '2014-07-07', '0000-00-00', '2014-07-07', NULL, 0, 0, NULL, NULL, '2', 'INV', 'EXTERNAL', '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-30 12:25:59', 0, '2030-06-14 16:25:17', NULL, NULL),
-(41, 14, 3, 6, 10107, 'MI_SA03', '12.00000', '12.00000', NULL, NULL, 1, '2014-07-16', '30.00000', '360.00000', '36.72000', 3, 'PICKED', '2014-07-07', NULL, '2014-07-07', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-30 16:13:59', 0, '2007-07-14 15:41:42', NULL, NULL),
-(42, 14, 4, 6, 10092, 'Sub Assembly 01', '10.00000', '10.00000', '0.00000', NULL, 1, '2014-06-30', '9.00000', '90.00000', '9.18000', 3, 'PICKED', '2014-07-23', '0000-00-00', '2014-07-23', NULL, 0, 0, NULL, NULL, '2', 'INV', 'EXTERNAL', '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-30 16:39:43', 0, '2030-06-14 16:40:02', NULL, NULL),
-(43, 14, 5, 6, 10092, 'Sub Assembly 01', '6.00000', '0.00000', '0.00000', NULL, 1, '2014-07-15', '0.00000', '72.00000', '7.34400', 3, 'AWAITING_PICKING', '2014-07-23', '0000-00-00', '2014-07-23', NULL, 0, 0, NULL, NULL, '2', 'INV', 'EXTERNAL', '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-30 16:49:38', 0, '2030-06-14 16:49:38', NULL, NULL),
-(44, 14, 6, 6, 10107, 'MI_SA03', '12.00000', '12.00000', '12.00000', NULL, 1, '2014-07-16', '30.00000', '360.00000', '36.72000', 3, 'SHIPPED', '2014-07-16', NULL, '2014-07-16', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-30 16:51:24', 0, '2001-07-14 04:56:22', NULL, NULL),
-(45, 15, 1, 6, 10107, 'MI_SA03', '12.00000', NULL, NULL, NULL, 1, '2014-07-30', '33.00000', '396.00000', '40.39200', 3, 'ENTERED', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-05 17:36:26', 0, '2014-07-05 17:36:26', NULL, NULL),
-(46, 16, 1, 6, 10092, 'Sub Assembly 01', '20.00000', NULL, NULL, NULL, 1, '2014-07-16', '34.00000', '680.00000', '69.36000', 3, 'AWAITING_PICKING', '2014-07-10', '2014-07-10', '2014-07-10', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 05:35:49', 0, '2014-07-10 05:35:49', NULL, NULL),
-(47, 17, 1, 6, 10107, 'MI_SA03', '12.00000', '12.00000', '12.00000', NULL, 1, '2014-07-10', '30.00000', '360.00000', '36.72000', 3, 'AWAITING_PICKING', '2014-07-10', '2014-07-10', '2014-07-10', NULL, 0, 0, NULL, NULL, '2', 'INV', 'EXTERNAL', '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 06:29:44', 0, '2010-07-14 06:29:44', NULL, NULL),
-(48, 28, 1, 6, 10107, 'MI_SA03', '12.00000', '12.00000', '12.00000', NULL, 1, '2014-07-30', '30.00000', '360.00000', '36.72000', 3, 'SHIPPED', '2014-07-10', '2014-07-30', '2014-07-17', NULL, 0, 0, NULL, NULL, '2', 'INV', 'EXTERNAL', '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 08:24:58', 0, '2010-07-14 11:08:02', NULL, NULL),
-(49, 29, 1, 6, 10107, 'MI_SA03', '22.00000', '0.00000', '0.00000', NULL, 1, '2014-07-31', '30.00000', '660.00000', '67.32000', 3, 'ENTERED', '2014-07-30', '0000-00-00', '0000-00-00', NULL, 0, 0, NULL, NULL, '2', 'INV', 'EXTERNAL', '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 08:28:25', 0, '2010-07-14 08:28:25', NULL, NULL),
-(50, 30, 1, 6, 10107, 'MI_SA03', '12.00000', '12.00000', '12.00000', NULL, 1, '2014-07-10', '30.00000', '360.00000', '36.72000', 3, 'SHIPPED', '2014-07-10', '2014-07-17', '2014-07-24', NULL, 0, 0, NULL, NULL, '2', 'INV', 'EXTERNAL', 'TEST01', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 10:04:52', 0, '2010-07-14 11:02:37', NULL, NULL),
-(51, 31, 1, 6, 10107, 'MI_SA03', '12.00000', '12.00000', '12.00000', NULL, 1, '2014-07-30', '30.00000', '360.00000', '36.72000', 3, 'SHIPPED', '2014-07-10', '2014-07-15', '2014-07-24', NULL, 0, 0, NULL, NULL, '2', 'INV', 'EXTERNAL', '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 11:10:26', 0, '2010-07-14 11:10:47', NULL, NULL),
-(52, 32, 1, 6, 10107, 'MI_SA03', '12.00000', '12.00000', '12.00000', '12.00000', 1, '2014-07-31', '30.00000', '360.00000', '36.72000', 3, 'SHIPPED', NULL, '2014-07-30', '2014-07-30', NULL, NULL, NULL, 56, 60, '2', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 11:12:33', 0, '2011-07-14 13:01:56', NULL, NULL),
-(53, 33, 1, 6, 10107, 'MI_SA03', '40.00000', '40.00000', '40.00000', '40.00000', 1, '2014-07-10', '30.00000', '1200.00000', '122.40000', 3, 'CLOSED', '2014-07-10', '2014-07-31', '2014-07-23', NULL, NULL, NULL, 57, 61, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 14:45:56', 0, '2012-07-14 07:08:51', NULL, NULL),
-(54, 34, 1, 6, 10107, 'MI_SA03', '12.00000', '12.00000', '12.00000', '12.00000', 1, '2014-07-31', '30.00000', '360.00000', '36.72000', 3, 'CLOSED', '2014-07-10', '0000-00-00', '2014-07-30', NULL, 0, 0, 58, 63, '2', 'INV', 'EXTERNAL', '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 14:51:55', 0, '2012-07-14 07:21:16', NULL, NULL),
-(55, 34, 2, 6, 10107, 'MI_SA03', '20.00000', '20.00000', '20.00000', '20.00000', 1, '2014-07-31', '30.00000', '600.00000', '61.20000', 3, 'CLOSED', '2014-07-10', '0000-00-00', '2014-07-30', NULL, 0, 0, 58, 62, '2', 'INV', 'EXTERNAL', '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 14:51:55', 0, '2012-07-14 07:21:16', NULL, NULL),
-(56, 35, 1, 6, 10107, 'MI_SA03', '22.00000', '22.00000', '22.00000', NULL, 1, '2014-07-17', '30.00000', '660.00000', '67.32000', 3, 'SHIPPED', '2014-07-24', '2014-07-26', '2014-07-28', NULL, NULL, NULL, NULL, NULL, '2', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-12 07:43:52', 0, '2012-07-14 07:47:12', NULL, NULL),
-(57, 36, 1, 6, 10107, 'MI_SA03', '1.00000', '1.00000', '1.00000', '0.00000', 1, '2014-07-25', '30.00000', '30.00000', '3.06000', 3, 'AWAITING_PICKING', '2014-07-12', '2014-07-25', '2014-07-23', '2014-07-12', 0, 0, 0, 0, '2', 'INV', 'EXTERNAL', '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-12 08:02:48', 0, '2012-07-14 08:02:48', NULL, NULL),
-(58, 36, 2, 6, 10107, 'MI_SA03', '1.00000', '0.00000', '0.00000', '0.00000', 1, '2014-07-25', '30.00000', '30.00000', '3.06000', 3, 'AWAITING_PICKING', '2014-07-12', '2014-07-24', '2014-07-30', NULL, 0, 0, 0, 0, '2', 'INV', 'EXTERNAL', '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-12 08:02:49', 0, '2012-07-14 08:02:49', NULL, NULL),
-(59, 36, 3, 6, 10107, 'MI_SA03', '1.00000', '1.00000', '1.00000', NULL, 1, '2014-07-25', '30.00000', '30.00000', '3.06000', 3, 'SHIPPED', '2014-07-24', '2014-07-24', '2014-07-24', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-12 07:51:03', 0, '2012-07-14 07:51:59', NULL, NULL),
-(60, 37, 1, 6, 10107, 'MI_SA03', '10.00000', '11.00000', '1.00000', '1.00000', 1, '2014-07-25', '30.00000', '30.00000', '3.06000', 3, 'PICKED', '2014-12-29', '2014-07-25', '2014-10-29', '2014-07-12', NULL, NULL, 60, 64, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-10-17 10:37:52', 34, '2015-01-01 04:37:15', NULL, NULL),
-(61, 37, 2, 6, 10107, 'MI_SA03', '10.00000', '1.00000', '1.00000', '1.00000', 1, '2014-07-25', '30.00000', '30.00000', '3.06000', 3, 'AWAITING_PICKING', '2014-12-29', '2014-07-24', '2014-11-10', '2014-07-12', NULL, NULL, 61, 65, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-10-17 10:37:52', 34, '2014-12-29 14:23:23', NULL, NULL),
-(62, 37, 3, 6, 10107, 'MI_SA03', '10.00000', '21.00000', '1.00000', '1.00000', 1, '2014-07-25', '30.00000', '30.00000', '3.06000', 3, 'PICKED', '2014-12-29', '2014-07-24', '2014-11-17', '2014-07-12', NULL, NULL, 61, 66, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-10-17 10:37:52', 34, '2015-01-01 04:37:15', NULL, NULL),
-(63, 26, 1, 6, 10092, 'Sub Assembly 01', '12.00000', '12.00000', NULL, NULL, 1, '2014-10-17', '12.00000', '144.00000', '14.68800', 3, 'PICKED', '2014-10-17', NULL, '2014-10-28', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-10-17 15:07:37', 34, '2015-02-13 12:03:30', NULL, NULL),
-(64, 25, 1, 6, 10092, 'Sub Assembly 01', '22.00000', NULL, NULL, NULL, 1, '2014-10-17', '12.00000', '264.00000', '26.92800', 3, 'ENTERED', '2014-10-18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-10-17 15:11:56', 0, '2014-10-18 05:14:15', NULL, NULL),
-(65, 25, 1, 6, 10092, 'Sub Assembly 01', '22.00000', NULL, NULL, NULL, 1, '2014-10-17', '12.00000', '264.00000', '26.92800', 3, 'ENTERED', '2014-10-18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-10-17 15:14:22', 0, '2014-10-18 05:14:15', NULL, NULL),
-(66, 25, 1, 6, 10092, 'Sub Assembly 01', '22.00000', NULL, NULL, NULL, 1, '2014-10-17', '12.00000', '264.00000', '26.92800', 3, 'ENTERED', '2014-10-18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-10-17 15:18:05', 0, '2014-10-18 05:14:15', NULL, NULL),
-(67, 25, 1, 6, 10092, 'Sub Assembly 01', '22.00000', '22.00000', NULL, NULL, 1, '2014-10-17', '12.00000', '264.00000', '26.92800', 3, 'PICKED', '2014-10-18', NULL, '2014-10-29', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-10-17 15:32:52', 34, '2015-02-13 12:03:30', NULL, NULL),
-(68, 37, 4, 6, 10034, 'Desktop 01 of Model A', '22.00000', '22.00000', NULL, NULL, 1, NULL, '11.00000', '242.00000', '24.68400', 3, 'PICKED', '2014-12-29', '2014-12-31', '2014-12-31', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 34, '2014-12-29 14:09:10', 34, '2015-01-01 04:37:15', NULL, NULL),
-(69, 37, 5, 6, 10044, 'MI Mother Board  A 01', '11.00000', NULL, NULL, NULL, 1, NULL, '11.00000', '121.00000', '12.34200', 3, 'AWAITING_PICKING', '2014-12-29', '2014-12-31', '2014-12-31', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 34, '2014-12-29 14:24:50', 34, '2014-12-29 14:26:25', NULL, NULL),
-(70, 39, 1, 6, 10137, 'MI_PUR99', '-2.00000', NULL, '0.00000', NULL, 1, '2015-02-27', '11.00000', '-22.00000', '-2.24400', 3, 'AWAITING_RETURN', '2015-02-07', NULL, '2015-02-26', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 34, '2015-02-07 05:58:38', 34, '2015-02-07 10:08:54', NULL, NULL),
-(71, 39, 2, 6, 10034, 'Desktop 01 of Model A', '-5.00000', NULL, '-4.00000', NULL, 1, '2015-02-17', '121.00000', '-605.00000', '-61.71000', 3, 'AWAITING_RETURN', '2015-02-26', NULL, '2015-02-27', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 34, '2015-02-07 12:33:36', 34, '2015-02-07 13:54:15', NULL, NULL),
-(72, 40, 1, 6, 10158, 'MI_KIT01', '20.00000', '20.00000', NULL, NULL, 1, '2015-02-26', '12.00000', '240.00000', '24.48000', 3, 'PICKED', '2015-02-13', NULL, '2015-02-25', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', 1, NULL, 6, NULL, NULL, 34, '2015-02-11 03:43:42', 34, '2015-02-13 12:39:32', NULL, NULL),
-(73, 40, 2, 6, 10158, 'MI_KIT01', '3.00000', '3.00000', NULL, NULL, 1, '2015-02-11', '11.00000', '33.00000', '3.36600', 3, 'PICKED', '2015-02-13', NULL, '2015-02-27', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', 1, NULL, 6, NULL, NULL, 34, '2015-02-11 05:27:09', 34, '2015-02-13 12:03:30', NULL, NULL),
-(74, 42, 1, 6, 10137, 'MI_PUR99', '2.00000', NULL, NULL, NULL, 1, '2015-02-27', '11.00000', '22.00000', '2.24400', 3, 'AWAITING_PICKING', '2015-02-13', NULL, '2015-02-26', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 34, '2015-02-13 12:49:54', 34, '2015-02-13 12:49:54', NULL, NULL),
-(75, 42, 2, 6, 10034, 'Desktop 01 of Model A', '5.00000', NULL, NULL, NULL, 1, '2015-02-17', '121.00000', '605.00000', '61.71000', 3, 'AWAITING_PICKING', '2015-02-13', NULL, '2015-02-26', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 34, '2015-02-13 12:49:54', 34, '2015-02-13 12:49:54', NULL, NULL),
-(76, 43, 1, 6, 10158, 'MI_KIT01', '20.00000', '20.00000', NULL, NULL, 1, '2015-02-26', '12.00000', '240.00000', '24.48000', 3, 'PICKED', '2015-02-13', NULL, '2015-02-27', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', 1, 1, 6, NULL, NULL, 34, '2015-02-13 12:50:50', 34, '2015-02-13 12:52:38', NULL, NULL),
-(77, 43, 2, 6, 10158, 'MI_KIT01', '3.00000', '3.00000', NULL, NULL, 1, '2015-02-11', '11.00000', '33.00000', '3.36600', 3, 'AWAITING_PICKING', '2015-02-13', NULL, '2015-02-27', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', 1, 1, 6, NULL, NULL, 34, '2015-02-13 12:50:51', 34, '2015-02-13 12:52:20', NULL, NULL),
-(78, 44, 2, 6, 10158, 'MI_KIT01', '3.00000', '3.00000', NULL, NULL, 1, '2015-02-11', '11.00000', '33.00000', '3.36600', 3, 'PICKED', '2015-02-13', NULL, '2015-02-26', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', 1, 1, 6, NULL, NULL, 34, '2015-02-13 13:21:11', 34, '2015-02-13 13:21:28', NULL, NULL),
-(79, 45, 2, 6, 10158, 'MI_KIT01', '3.00000', NULL, NULL, NULL, 1, '2015-02-11', '11.00000', '33.00000', '3.36600', 3, 'AWAITING_PICKING', '2015-02-14', NULL, '2015-02-26', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', 1, 1, 6, NULL, NULL, 34, '2015-02-14 06:52:19', 34, '2015-02-14 06:52:19', NULL, NULL),
-(80, 45, 3, 6, 10158, 'MI_KIT01', '5.00000', NULL, NULL, NULL, 1, '2015-02-26', '100.00000', '500.00000', '51.00000', 3, 'AWAITING_PICKING', '2015-02-14', NULL, '2015-02-26', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', 1, 1, 6, NULL, NULL, 34, '2015-02-14 06:52:20', 34, '2015-02-14 06:53:30', NULL, NULL),
-(81, 45, 3, 6, 10158, 'MI_KIT01', '5.00000', '5.00000', '25.00000', NULL, 1, '2015-02-26', '100.00000', '500.00000', '51.00000', 3, 'SHIPPED', '2015-02-14', NULL, '2015-02-26', '2015-02-14', NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', 1, 1, 6, NULL, NULL, 34, '2015-02-14 06:53:05', 34, '2015-02-14 06:54:52', NULL, NULL),
-(82, 45, 2, 6, 10158, 'MI_KIT01', '3.00000', '3.00000', '3.00000', NULL, 1, '2015-02-11', '11.00000', '33.00000', '3.36600', 3, 'SHIPPED', '2015-02-14', NULL, '2015-02-26', '2015-02-14', NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', 1, 1, 6, NULL, NULL, 34, '2015-02-14 06:53:05', 34, '2015-02-14 07:08:06', NULL, NULL);
+INSERT INTO `sd_so_line` (`sd_so_line_id`, `sd_so_header_id`, `line_number`, `shipping_org_id`, `item_id_m`, `item_description`, `line_quantity`, `picked_quantity`, `shipped_quantity`, `invoiced_quantity`, `price_list_header_id`, `price_date`, `unit_price`, `line_price`, `tax_amount`, `gl_line_price`, `gl_tax_amount`, `tax_code_id`, `line_status`, `requested_date`, `promise_date`, `schedule_ship_date`, `actual_ship_date`, `reference_doc_type`, `reference_doc_number`, `ar_transaction_header_id`, `ar_transaction_line_id`, `line_type`, `supply_source`, `destination_type`, `line_description`, `uom_id`, `kit_cb`, `kit_configured_cb`, `bom_config_header_id`, `wip_wo_header_id`, `so_status`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`, `rev_enabled_cb`, `rev_number`) VALUES
+(1, 6, 1, 6, 10043, 'MI Cabinet A 01', '20.00000', NULL, NULL, NULL, NULL, NULL, '12.00000', '240.00000', NULL, NULL, NULL, NULL, 'AWAITING_PICKING', '2014-05-23', '0000-00-00', '2014-07-23', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-05-15 11:16:56', 0, '2015-05-14 11:16:56', NULL, NULL),
+(2, 6, 2, 6, 10051, 'MI Level 5 TEST01', '33.00000', NULL, NULL, NULL, NULL, NULL, '34.00000', '1122.00000', NULL, NULL, NULL, NULL, 'AWAITING_PICKING', '2014-05-23', '0000-00-00', '2014-08-26', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-05-15 11:16:58', 0, '2015-05-14 11:16:58', NULL, NULL),
+(3, 2, 1, 6, 10094, 'Sub Assembly 01', '50.00000', '50.00000', NULL, NULL, NULL, NULL, '23.00000', '1.00000', NULL, NULL, NULL, NULL, 'Entered', '2014-05-29', '0000-00-00', '0000-00-00', '0000-00-00', 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-05-15 10:57:45', 0, '2002-06-14 02:23:24', NULL, NULL),
+(6, 4, 1, 6, 10061, 'MI Mobile 01', '12.00000', NULL, NULL, NULL, NULL, NULL, '88.00000', '1056.00000', NULL, NULL, NULL, NULL, 'AWAITING_PICKING', '2014-09-18', NULL, '2014-09-25', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-05-15 13:13:32', 0, '2014-05-15 13:13:32', NULL, NULL),
+(7, 4, 2, 6, 10063, 'MI MOBILE 02', '9.00000', NULL, NULL, NULL, NULL, NULL, '9.00000', '81.00000', NULL, NULL, NULL, NULL, 'AWAITING_PICKING', '2014-09-18', NULL, '2014-09-25', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-05-15 13:13:32', 0, '2014-05-15 13:13:32', NULL, NULL),
+(8, 3, 3, 6, 10051, 'MI Level 5 TEST01', '99.00000', NULL, NULL, NULL, NULL, NULL, '122.00000', '12.00000', NULL, NULL, NULL, NULL, 'AWAITING_PICKING', '2014-05-28', '0000-00-00', '2014-05-28', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-05-15 13:18:12', 0, '2015-05-14 13:18:12', NULL, NULL),
+(9, 3, 2, 6, 10047, 'MI Level 3 TEST 01', '12.00000', NULL, NULL, NULL, NULL, NULL, '324.00000', '3.00000', NULL, NULL, NULL, NULL, 'AWAITING_PICKING', '2014-09-23', '0000-00-00', '2014-05-30', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-05-15 13:18:12', 0, '2015-05-14 13:18:12', NULL, NULL),
+(10, 3, 1, 6, 10039, 'MI Monitor A 01', '34.00000', NULL, NULL, NULL, NULL, NULL, '8.00000', '272.00000', NULL, NULL, NULL, NULL, 'AWAITING_PICKING', '2014-07-09', '0000-00-00', '2014-05-26', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-05-15 13:18:11', 0, '2015-05-14 13:18:11', NULL, NULL),
+(12, 5, 3, 6, 10075, 'Finished Good 001', '2.00000', '2.00000', NULL, NULL, NULL, NULL, '12.00000', '24.00000', NULL, NULL, NULL, NULL, 'PICKED', '2014-06-27', NULL, '2014-06-28', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 03:26:02', 0, '2002-06-14 03:26:36', NULL, NULL),
+(15, 7, 3, 6, 10094, 'Sub Assembly 01', '2.00000', '2.00000', '0.00000', NULL, NULL, NULL, '12.00000', '24.00000', NULL, NULL, NULL, NULL, 'AWAITING_PICKING', '2014-06-27', '0000-00-00', '2014-06-26', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 06:24:51', 0, '2002-06-14 09:29:21', NULL, NULL),
+(16, 7, 1, 6, 10075, 'Finished Good 001', '12.00000', '12.00000', '0.00000', NULL, NULL, NULL, '9.00000', '108.00000', NULL, NULL, NULL, NULL, 'PICKED', '2014-05-23', '0000-00-00', '2014-06-27', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 06:24:51', 0, '2002-06-14 06:49:39', NULL, NULL),
+(20, 8, 4, 6, 10094, 'Sub Assembly 01', '1.00000', '1.00000', NULL, NULL, NULL, NULL, '12.00000', '12.00000', NULL, NULL, NULL, NULL, 'PICKED', '2014-06-24', NULL, '2014-06-26', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 09:56:25', 0, '2002-06-14 09:56:56', NULL, NULL),
+(22, 9, 1, 6, 10075, 'Finished Good 001', '12.00000', '12.00000', NULL, NULL, NULL, NULL, '9.00000', '108.00000', NULL, NULL, NULL, NULL, 'PICKED', '2014-05-23', NULL, '2014-06-24', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 10:51:23', 0, '2002-06-14 10:53:54', NULL, NULL),
+(25, 9, 4, 6, 10094, 'Sub Assembly 01', '1.00000', '1.00000', NULL, NULL, NULL, NULL, '12.00000', '12.00000', NULL, NULL, NULL, NULL, 'PICKED', '2014-06-24', NULL, '2014-06-24', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 10:51:24', 0, '2002-06-14 11:03:02', NULL, NULL),
+(26, 10, 1, 6, 10075, 'Finished Good 001', '12.00000', '12.00000', NULL, NULL, NULL, NULL, '9.00000', '108.00000', NULL, NULL, NULL, NULL, 'PICKED', '2014-05-23', NULL, '2014-06-11', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 11:16:29', 0, '2002-06-14 11:25:04', NULL, NULL),
+(27, 10, 3, 6, 10094, 'Sub Assembly 01', '2.00000', '2.00000', NULL, NULL, NULL, NULL, '12.00000', '24.00000', NULL, NULL, NULL, NULL, 'PICKED', '2014-06-27', NULL, '2014-06-11', NULL, NULL, NULL, NULL, NULL, '329', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 11:16:29', 0, '2002-06-14 11:20:32', NULL, NULL),
+(31, 11, 2, 6, 10094, 'Sub Assembly 01', '1.00000', '1.00000', '1.00000', NULL, NULL, NULL, '12.00000', '12.00000', '0.00000', NULL, NULL, 0, 'AWAITING_PICKING', '2014-06-24', '0000-00-00', '2014-06-18', NULL, 0, 0, NULL, NULL, '329', NULL, NULL, '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-04 05:28:14', 0, '2004-06-14 05:28:14', NULL, NULL),
+(38, 12, 1, 6, 10094, 'Sub Assembly 01', '12.00000', NULL, NULL, NULL, 1, '2014-06-24', '28.00000', '336.00000', '34.27200', NULL, NULL, 3, 'AWAITING_PICKING', '2014-06-30', NULL, '2014-06-30', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-28 17:21:05', 0, '2014-06-28 17:21:05', NULL, NULL),
+(39, 14, 2, 6, 10092, 'Sub Assembly 01', '20.00000', '20.00000', '0.00000', NULL, 1, '2014-06-26', '9.00000', '180.00000', '10.80000', NULL, NULL, 5, 'PICKED', '2014-07-07', '0000-00-00', '2014-07-07', NULL, 0, 0, NULL, NULL, '2', 'INV', 'EXTERNAL', '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-30 12:25:59', 0, '2030-06-14 16:27:54', NULL, NULL),
+(40, 14, 1, 6, 10107, 'MI_SA03', '11.00000', '11.00000', '11.00000', NULL, 1, '2014-06-29', '22.00000', '242.00000', '24.68400', NULL, NULL, 3, 'SHIPPED', '2014-07-07', '0000-00-00', '2014-07-07', NULL, 0, 0, NULL, NULL, '2', 'INV', 'EXTERNAL', '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-30 12:25:59', 0, '2030-06-14 16:25:17', NULL, NULL),
+(42, 14, 4, 6, 10092, 'Sub Assembly 01', '10.00000', '10.00000', '0.00000', NULL, 1, '2014-06-30', '9.00000', '90.00000', '9.18000', NULL, NULL, 3, 'PICKED', '2014-07-23', '0000-00-00', '2014-07-23', NULL, 0, 0, NULL, NULL, '2', 'INV', 'EXTERNAL', '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-30 16:39:43', 0, '2030-06-14 16:40:02', NULL, NULL),
+(44, 14, 6, 6, 10107, 'MI_SA03', '12.00000', '12.00000', '12.00000', NULL, 1, '2014-07-16', '30.00000', '360.00000', '36.72000', NULL, NULL, 3, 'SHIPPED', '2014-07-16', NULL, '2014-07-16', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-06-30 16:51:24', 0, '2001-07-14 04:56:22', NULL, NULL),
+(45, 15, 1, 6, 10107, 'MI_SA03', '12.00000', NULL, NULL, NULL, 1, '2014-07-30', '33.00000', '396.00000', '40.39200', NULL, NULL, 3, 'ENTERED', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-05 17:36:26', 0, '2014-07-05 17:36:26', NULL, NULL),
+(46, 16, 1, 6, 10092, 'Sub Assembly 01', '20.00000', NULL, NULL, NULL, 1, '2014-07-16', '34.00000', '680.00000', '69.36000', NULL, NULL, 3, 'AWAITING_PICKING', '2014-07-10', '2014-07-10', '2014-07-10', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 05:35:49', 0, '2014-07-10 05:35:49', NULL, NULL),
+(47, 17, 1, 6, 10107, 'MI_SA03', '12.00000', '12.00000', '12.00000', NULL, 1, '2014-07-10', '30.00000', '360.00000', '36.72000', NULL, NULL, 3, 'AWAITING_PICKING', '2014-07-10', '2014-07-10', '2014-07-10', NULL, 0, 0, NULL, NULL, '2', 'INV', 'EXTERNAL', '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 06:29:44', 0, '2010-07-14 06:29:44', NULL, NULL),
+(48, 28, 1, 6, 10107, 'MI_SA03', '12.00000', '12.00000', '12.00000', NULL, 1, '2014-07-30', '30.00000', '360.00000', '36.72000', NULL, NULL, 3, 'SHIPPED', '2014-07-10', '2014-07-30', '2014-07-17', NULL, 0, 0, NULL, NULL, '2', 'INV', 'EXTERNAL', '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 08:24:58', 0, '2010-07-14 11:08:02', NULL, NULL),
+(49, 29, 1, 6, 10107, 'MI_SA03', '22.00000', '0.00000', '0.00000', NULL, 1, '2014-07-31', '30.00000', '660.00000', '67.32000', NULL, NULL, 3, 'ENTERED', '2014-07-30', '0000-00-00', '0000-00-00', NULL, 0, 0, NULL, NULL, '2', 'INV', 'EXTERNAL', '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 08:28:25', 0, '2010-07-14 08:28:25', NULL, NULL),
+(50, 30, 1, 6, 10107, 'MI_SA03', '12.00000', '12.00000', '12.00000', NULL, 1, '2014-07-10', '30.00000', '360.00000', '36.72000', NULL, NULL, 3, 'SHIPPED', '2014-07-10', '2014-07-17', '2014-07-24', NULL, 0, 0, NULL, NULL, '2', 'INV', 'EXTERNAL', 'TEST01', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 10:04:52', 0, '2010-07-14 11:02:37', NULL, NULL),
+(51, 31, 1, 6, 10107, 'MI_SA03', '12.00000', '12.00000', '12.00000', NULL, 1, '2014-07-30', '30.00000', '360.00000', '36.72000', NULL, NULL, 3, 'SHIPPED', '2014-07-10', '2014-07-15', '2014-07-24', NULL, 0, 0, NULL, NULL, '2', 'INV', 'EXTERNAL', '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 11:10:26', 0, '2010-07-14 11:10:47', NULL, NULL),
+(52, 32, 1, 6, 10107, 'MI_SA03', '12.00000', '12.00000', '12.00000', '12.00000', 1, '2014-07-31', '30.00000', '360.00000', '36.72000', NULL, NULL, 3, 'SHIPPED', NULL, '2014-07-30', '2014-07-30', NULL, NULL, NULL, 56, 60, '2', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 11:12:33', 0, '2011-07-14 13:01:56', NULL, NULL),
+(53, 33, 1, 6, 10107, 'MI_SA03', '40.00000', '40.00000', '40.00000', '40.00000', 1, '2014-07-10', '30.00000', '1200.00000', '122.40000', NULL, NULL, 3, 'CLOSED', '2014-07-10', '2014-07-31', '2014-07-23', NULL, NULL, NULL, 57, 61, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 14:45:56', 0, '2012-07-14 07:08:51', NULL, NULL),
+(55, 34, 2, 6, 10107, 'MI_SA03', '20.00000', '20.00000', '20.00000', '20.00000', 1, '2014-07-31', '30.00000', '600.00000', '61.20000', NULL, NULL, 3, 'CLOSED', '2014-07-10', '0000-00-00', '2014-07-30', NULL, 0, 0, 58, 62, '2', 'INV', 'EXTERNAL', '', '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 14:51:55', 0, '2012-07-14 07:21:16', NULL, NULL),
+(56, 35, 1, 6, 10107, 'MI_SA03', '22.00000', '22.00000', '22.00000', NULL, 1, '2014-07-17', '30.00000', '660.00000', '67.32000', NULL, NULL, 3, 'SHIPPED', '2014-07-24', '2014-07-26', '2014-07-28', NULL, NULL, NULL, NULL, NULL, '2', NULL, NULL, NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-12 07:43:52', 0, '2012-07-14 07:47:12', NULL, NULL),
+(59, 36, 3, 6, 10107, 'MI_SA03', '1.00000', '1.00000', '1.00000', NULL, 1, '2014-07-25', '30.00000', '30.00000', '3.06000', NULL, NULL, 3, 'SHIPPED', '2014-07-24', '2014-07-24', '2014-07-24', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-12 07:51:03', 0, '2012-07-14 07:51:59', NULL, NULL),
+(60, 37, 1, 6, 10107, 'MI_SA03', '10.00000', '11.00000', '1.00000', '1.00000', 1, '2014-07-25', '30.00000', '30.00000', '3.06000', NULL, NULL, 3, 'PICKED', '2014-12-29', '2014-07-25', '2014-10-29', '2014-07-12', NULL, NULL, 60, 64, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-10-17 10:37:52', 34, '2015-01-01 04:37:15', NULL, NULL),
+(66, 25, 1, 6, 10092, 'Sub Assembly 01', '22.00000', NULL, NULL, NULL, 1, '2014-10-17', '12.00000', '264.00000', '26.92800', NULL, NULL, 3, 'ENTERED', '2014-10-18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 0, '2014-10-17 15:18:05', 0, '2014-10-18 05:14:15', NULL, NULL),
+(70, 39, 1, 6, 10137, 'MI_PUR99', '-2.00000', NULL, '0.00000', NULL, 1, '2015-02-27', '11.00000', '-22.00000', '-2.24400', NULL, NULL, 3, 'AWAITING_RETURN', '2015-02-07', NULL, '2015-02-26', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 34, '2015-02-07 05:58:38', 34, '2015-02-07 10:08:54', NULL, NULL),
+(71, 39, 2, 6, 10034, 'Desktop 01 of Model A', '-5.00000', NULL, '-4.00000', NULL, 1, '2015-02-17', '121.00000', '-605.00000', '-61.71000', NULL, NULL, 3, 'AWAITING_RETURN', '2015-02-26', NULL, '2015-02-27', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 34, '2015-02-07 12:33:36', 34, '2015-02-07 13:54:15', NULL, NULL),
+(72, 40, 1, 6, 10158, 'MI_KIT01', '20.00000', '20.00000', NULL, NULL, 1, '2015-02-26', '12.00000', '240.00000', '24.48000', NULL, NULL, 3, 'PICKED', '2015-02-13', NULL, '2015-02-25', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', 1, NULL, 6, NULL, NULL, 34, '2015-02-11 03:43:42', 34, '2015-02-13 12:39:32', NULL, NULL),
+(74, 42, 1, 6, 10137, 'MI_PUR99', '2.00000', NULL, NULL, NULL, 1, '2015-02-27', '11.00000', '22.00000', '2.24400', NULL, NULL, 3, 'AWAITING_PICKING', '2015-02-13', NULL, '2015-02-26', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', NULL, NULL, NULL, NULL, NULL, 34, '2015-02-13 12:49:54', 34, '2015-02-13 12:49:54', NULL, NULL),
+(77, 43, 2, 6, 10158, 'MI_KIT01', '3.00000', '3.00000', NULL, NULL, 1, '2015-02-11', '11.00000', '33.00000', '3.36600', NULL, NULL, 3, 'AWAITING_PICKING', '2015-02-13', NULL, '2015-02-27', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', 1, 1, 6, NULL, NULL, 34, '2015-02-13 12:50:51', 34, '2015-02-13 12:52:20', NULL, NULL),
+(78, 44, 2, 6, 10158, 'MI_KIT01', '3.00000', '3.00000', NULL, NULL, 1, '2015-02-11', '11.00000', '33.00000', '3.36600', NULL, NULL, 3, 'PICKED', '2015-02-13', NULL, '2015-02-26', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', 1, 1, 6, NULL, NULL, 34, '2015-02-13 13:21:11', 34, '2015-02-13 13:21:28', NULL, NULL),
+(79, 45, 2, 6, 10158, 'MI_KIT01', '3.00000', NULL, NULL, NULL, 1, '2015-02-11', '11.00000', '33.00000', '3.36600', NULL, NULL, 3, 'AWAITING_PICKING', '2015-02-14', NULL, '2015-02-26', NULL, NULL, NULL, NULL, NULL, '2', 'INV', 'EXTERNAL', NULL, '27', 1, 1, 6, NULL, NULL, 34, '2015-02-14 06:52:19', 34, '2015-02-14 06:52:19', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -20958,7 +20984,7 @@ CREATE TABLE IF NOT EXISTS `supplier` (
   PRIMARY KEY (`supplier_id`),
   UNIQUE KEY `supplier_number` (`supplier_number`),
   UNIQUE KEY `supplier_name` (`supplier_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 --
 -- Dumping data for table `supplier`
@@ -20992,7 +21018,8 @@ INSERT INTO `supplier` (`supplier_id`, `supplier_number`, `supplier_name`, `cust
 (28, 1111, 'BT Telecom', NULL, 'External', 'IN', '23232', 'REG00134543543', 88, 22, NULL, 'active', 0, '2014-03-07 00:00:00', 34, '2014-12-14 12:41:11', NULL, NULL),
 (29, 200, 'Rexstology', NULL, 'External', 'IN', 'REG001', '23424', 88, 22, NULL, 'active', 0, '2014-01-17 00:00:00', 0, '2014-01-17 00:00:00', NULL, NULL),
 (30, 202, 'IBM INC', NULL, 'External', 'IN', 'REG001', '373737', 88, 1, NULL, NULL, 0, '2014-09-06 00:00:00', 34, '2014-12-16 14:43:29', NULL, NULL),
-(31, 1012, 'ABC Corp.', NULL, 'External', 'IN', 'REG001', NULL, 88, NULL, NULL, NULL, 34, '2014-12-15 02:18:59', 34, '2014-12-15 02:18:59', NULL, NULL);
+(31, 1012, 'ABC Corp.', NULL, 'External', 'IN', 'REG001', NULL, 88, NULL, NULL, NULL, 34, '2014-12-15 02:18:59', 34, '2014-12-15 02:18:59', NULL, NULL),
+(32, 10011, 'ABCD copr111', NULL, NULL, 'IN', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-18 18:42:35', 34, '2015-02-18 18:42:35', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -24481,7 +24508,7 @@ INSERT INTO `uom` (`uom_id`, `class`, `uom_name`, `description`, `primary_cb`, `
 CREATE TABLE IF NOT EXISTS `user` (
   `user_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `person_id` int(12) DEFAULT NULL,
-  `username` varchar(50) DEFAULT NULL,
+  `username` varchar(256) DEFAULT NULL,
   `password` varchar(256) NOT NULL DEFAULT '',
   `first_name` varchar(100) DEFAULT NULL,
   `last_name` varchar(60) DEFAULT NULL,
@@ -24508,8 +24535,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `pos` smallint(6) DEFAULT '1',
   `print_profile` varchar(30) NOT NULL DEFAULT '1',
   `rep_popup` tinyint(1) DEFAULT '1',
-  `sticky_doc_date` tinyint(1) DEFAULT '0',
-  `startup_tab` varchar(20) DEFAULT NULL,
+  `auth_provider_name` varchar(255) DEFAULT NULL,
+  `auth_provider_id` varchar(255) DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `created_by` int(12) NOT NULL,
   `creation_date` datetime DEFAULT NULL,
@@ -24520,22 +24547,23 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `user_name` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=98 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100 ;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `person_id`, `username`, `password`, `first_name`, `last_name`, `assigned_ip`, `phone`, `email`, `language`, `date_format`, `hr_employee_id`, `block_notif_count`, `dec_sep`, `theme`, `page_size`, `prices_dec`, `qty_dec`, `rates_dec`, `percent_dec`, `show_gl`, `show_codes`, `show_hints`, `last_visit_date`, `query_size`, `graphic_links`, `pos`, `print_profile`, `rep_popup`, `sticky_doc_date`, `startup_tab`, `status`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`, `revision_enabled`, `revision_number`) VALUES
-(1, NULL, 'admin', '2c848e7e18ea0e55b413a6ac73ee276bafa479994213c32e3a4ce920efc37508', 'Admin', 'Admin', NULL, NULL, 'admin@thissite.com', NULL, 0, NULL, NULL, 0, 'default', 'A4', 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, 0, NULL, 1, 0, '2014-09-13 19:16:52', 34, '2014-12-07 14:58:26', 'N', NULL),
-(34, NULL, 'inoerp', 'f5b9ac93ee7df536f02b4e58ef702020470aa74fed06eb46475d8264f9fdc7f6', 'inoerp', 'inoerp', NULL, NULL, 'ndas.oracle@gmail.com', NULL, 0, 1, 5, 0, 'default', 'A4', 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, 0, '', 0, 0, '2014-08-26 12:51:31', 34, '2014-12-07 14:58:43', 'N', NULL),
-(88, NULL, 'nishit50', 'fd2063e7246ed74534e2cec236276fe594c98a9f83ea4e4fa9caf46e26b7ccdb', 'Nishit', 'das11', NULL, NULL, 'nishitdas@outlook.com', NULL, 0, 4, 0, 0, 'default', 'A4', 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, 0, NULL, 1, 0, '2014-08-20 09:48:07', 0, '2020-08-14 09:48:07', 'N', NULL),
-(91, NULL, 'nishit', '4c2c32b3f9b6b9906305b5789b4cc42c15694ed6cd141f7fd3dbf35b223f58b3', 'Nishit', 'das', NULL, NULL, 'nishitdas@yahoo.co.in', NULL, 0, NULL, NULL, 0, 'default', 'A4', 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, 0, NULL, 1, 0, '2014-08-24 12:12:37', 34, '2014-10-21 06:31:52', 'N', NULL),
-(93, NULL, 'ino_supp', 'fd2063e7246ed74534e2cec236276fe594c98a9f83ea4e4fa9caf46e26b7ccdb', 'ino', 'supp', NULL, NULL, 'ino_supp@inoerp.com', NULL, 0, NULL, NULL, 0, 'default', 'A4', 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, 0, NULL, 1, 0, '2014-09-04 15:26:43', 0, '2004-09-14 15:26:43', 'N', NULL),
-(94, NULL, 'buyer', '917881e736258036a783bf47d6942b5e5c64635f64b7b0800d1512345e0bb473', 'buyer', 'test', NULL, NULL, 'buyer@inoerp.org', NULL, 0, NULL, NULL, 0, 'default', 'A4', 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, 0, NULL, 1, 0, '2014-09-11 07:43:16', 34, '2015-02-18 04:54:00', 'N', NULL),
-(95, NULL, 'testuser', 'daff5fd5c5b471e35c14e379c39a02f8737928659a70d174948756acda63abf5', 'test', 'user', NULL, NULL, 'testuser@rediff.com', NULL, 0, NULL, NULL, 0, 'default', 'A4', 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, 0, NULL, 1, -99, '2014-11-09 05:05:47', -99, '2014-11-09 05:05:47', 'N', NULL),
-(96, NULL, 'demouser', '3316ded82ef3e6931516b56b2d0ba3da5b04cd30901a9edb4db0a609e73aa5fe', 'demo', 'user', NULL, NULL, 'demouser@inoideas.org', NULL, 0, NULL, NULL, 0, 'default', 'A4', 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, 0, NULL, 1, 34, '2014-11-19 18:51:02', 34, '2014-11-19 18:51:07', 'N', NULL),
-(97, NULL, 'anande23', '4ff9b53ce51baaf9d925877d359599b5e60f0dcfa75016c3c8922fe24659b284', 'anand23', 'das', NULL, NULL, 'anand23@gmail.com', NULL, 0, NULL, NULL, 0, 'default', 'A4', 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, 0, NULL, 1, -99, '2015-01-07 16:17:02', -99, '2015-01-07 16:17:02', 'N', NULL);
+INSERT INTO `user` (`user_id`, `person_id`, `username`, `password`, `first_name`, `last_name`, `assigned_ip`, `phone`, `email`, `language`, `date_format`, `hr_employee_id`, `block_notif_count`, `dec_sep`, `theme`, `page_size`, `prices_dec`, `qty_dec`, `rates_dec`, `percent_dec`, `show_gl`, `show_codes`, `show_hints`, `last_visit_date`, `query_size`, `graphic_links`, `pos`, `print_profile`, `rep_popup`, `auth_provider_name`, `auth_provider_id`, `status`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`, `revision_enabled`, `revision_number`) VALUES
+(1, NULL, 'admin', '2c848e7e18ea0e55b413a6ac73ee276bafa479994213c32e3a4ce920efc37508', 'Admin', 'Admin', NULL, NULL, 'admin@thissite.com', NULL, 0, NULL, NULL, 0, 'default', 'A4', 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 0, '2014-09-13 19:16:52', 34, '2014-12-07 14:58:26', 'N', NULL),
+(34, NULL, 'inoerp', 'f5b9ac93ee7df536f02b4e58ef702020470aa74fed06eb46475d8264f9fdc7f6', 'inoerp', 'inoerp', NULL, NULL, 'ndas.oracle11@gmail.com', NULL, 0, 1, 5, 0, 'default', 'A4', 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', '', 0, 0, '2014-08-26 12:51:31', 34, '2014-12-07 14:58:43', 'N', NULL),
+(88, NULL, 'nishit50', 'fd2063e7246ed74534e2cec236276fe594c98a9f83ea4e4fa9caf46e26b7ccdb', 'Nishit', 'das11', NULL, NULL, 'nishitdas@outlook.com', NULL, 0, 4, 0, 0, 'default', 'A4', 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 0, '2014-08-20 09:48:07', 0, '2020-08-14 09:48:07', 'N', NULL),
+(91, NULL, 'nishit', '4c2c32b3f9b6b9906305b5789b4cc42c15694ed6cd141f7fd3dbf35b223f58b3', 'Nishit', 'das', NULL, NULL, 'nishitdas@yahoo.co.in', NULL, 0, NULL, NULL, 0, 'default', 'A4', 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 0, '2014-08-24 12:12:37', 34, '2014-10-21 06:31:52', 'N', NULL),
+(93, NULL, 'ino_supp', 'fd2063e7246ed74534e2cec236276fe594c98a9f83ea4e4fa9caf46e26b7ccdb', 'ino', 'supp', NULL, NULL, 'ino_supp@inoerp.com', NULL, 0, NULL, NULL, 0, 'default', 'A4', 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 0, '2014-09-04 15:26:43', 0, '2004-09-14 15:26:43', 'N', NULL),
+(94, NULL, 'buyer', '917881e736258036a783bf47d6942b5e5c64635f64b7b0800d1512345e0bb473', 'buyer', 'test', NULL, NULL, 'buyer@inoerp.org', NULL, 0, NULL, NULL, 0, 'default', 'A4', 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 0, '2014-09-11 07:43:16', 34, '2015-02-18 04:54:00', 'N', NULL),
+(95, NULL, 'testuser', 'daff5fd5c5b471e35c14e379c39a02f8737928659a70d174948756acda63abf5', 'test', 'user', NULL, NULL, 'testuser@rediff.com', NULL, 0, NULL, NULL, 0, 'default', 'A4', 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, -99, '2014-11-09 05:05:47', -99, '2014-11-09 05:05:47', 'N', NULL),
+(96, NULL, 'demouser', '3316ded82ef3e6931516b56b2d0ba3da5b04cd30901a9edb4db0a609e73aa5fe', 'demo', 'user', NULL, NULL, 'demouser@inoideas.org', NULL, 0, NULL, NULL, 0, 'default', 'A4', 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 34, '2014-11-19 18:51:02', 34, '2014-11-19 18:51:07', 'N', NULL),
+(97, NULL, 'anande23', '4ff9b53ce51baaf9d925877d359599b5e60f0dcfa75016c3c8922fe24659b284', 'anand23', 'das', NULL, NULL, 'anand23@gmail.com', NULL, 0, NULL, NULL, 0, 'default', 'A4', 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, -99, '2015-01-07 16:17:02', -99, '2015-01-07 16:17:02', 'N', NULL),
+(99, NULL, 'Nishit Das', '72322e06a94e599c0a8c63c0ff4d95e4c1555889582d1ff86aeed12559bb0245', 'Nishit', 'Das', NULL, NULL, 'ndas.oracle@gmail.com', NULL, 0, NULL, NULL, 0, 'default', 'A4', 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, 'google', '107555006955106696169', 1, -99, '2015-02-18 17:13:44', -99, '2015-02-18 17:13:44', 'N', NULL);
 
 -- --------------------------------------------------------
 
@@ -24645,7 +24673,7 @@ CREATE TABLE IF NOT EXISTS `user_role` (
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`user_role_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
 
 --
 -- Dumping data for table `user_role`
@@ -24684,7 +24712,9 @@ INSERT INTO `user_role` (`user_role_id`, `role_code`, `user_id`, `created_by`, `
 (33, 'ADMIN', 1, 34, '2014-10-23 18:37:04', 34, '2014-12-07 14:58:24'),
 (34, 'BASIC', 95, -99, '2014-11-09 05:05:48', -99, '2014-11-09 05:05:48'),
 (35, 'ADMIN', 96, 34, '2014-11-19 18:51:08', 34, '2014-11-19 18:51:08'),
-(36, 'BASIC', 97, -99, '2015-01-07 16:17:03', -99, '2015-01-07 16:17:03');
+(36, 'BASIC', 97, -99, '2015-01-07 16:17:03', -99, '2015-01-07 16:17:03'),
+(37, 'BASIC', 98, -99, '2015-02-18 17:06:28', -99, '2015-02-18 17:06:28'),
+(38, 'BASIC', 99, -99, '2015-02-18 17:13:45', -99, '2015-02-18 17:13:45');
 
 -- --------------------------------------------------------
 
@@ -26846,7 +26876,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `po_all_v`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `po_all_v` AS select `po_header`.`po_header_id` AS `po_header_id`,`po_header`.`bu_org_id` AS `bu_org_id`,`po_header`.`po_type` AS `po_type`,`po_header`.`po_number` AS `po_number`,`po_header`.`supplier_id` AS `supplier_id`,`po_header`.`supplier_site_id` AS `supplier_site_id`,`po_header`.`buyer` AS `buyer`,`po_header`.`currency` AS `currency`,`po_header`.`header_amount` AS `header_amount`,`po_header`.`po_status` AS `po_status`,`po_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_line`.`po_line_id` AS `po_line_id`,`po_line`.`line_type` AS `line_type`,`po_line`.`line_number` AS `po_line_number`,`po_line`.`item_id_m` AS `item_id_m`,`po_line`.`kit_cb` AS `kit_cb`,`po_line`.`revision_name` AS `revision_name`,`po_line`.`item_description` AS `item_description`,`po_line`.`line_description` AS `line_description`,`po_line`.`line_quantity` AS `line_quantity`,`po_line`.`unit_price` AS `unit_price`,`po_line`.`line_price` AS `line_price`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`item`.`serial_generation` AS `serial_generation`,`item`.`lot_generation` AS `lot_generation`,`po_detail`.`po_detail_id` AS `po_detail_id`,`po_detail`.`shipment_number` AS `shipment_number`,`po_line`.`receving_org_id` AS `receving_org_id`,`po_line`.`receving_org_id` AS `org_id`,`po_detail`.`subinventory_id` AS `subinventory_id`,`po_detail`.`locator_id` AS `locator_id`,`po_detail`.`requestor` AS `requestor`,`po_detail`.`quantity` AS `quantity`,ifnull(`po_detail`.`received_quantity`,0) AS `received_quantity`,(`po_detail`.`quantity` - ifnull(`po_detail`.`received_quantity`,0)) AS `open_quantity`,`po_detail`.`need_by_date` AS `need_by_date`,`po_detail`.`promise_date` AS `promise_date`,`po_detail`.`accepted_quantity` AS `accepted_quantity`,`po_detail`.`delivered_quantity` AS `delivered_quantity`,`po_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_detail`.`paid_quantity` AS `paid_quantity`,`po_detail`.`charge_ac_id` AS `charge_ac_id`,`po_detail`.`accrual_ac_id` AS `accrual_ac_id`,`po_detail`.`budget_ac_id` AS `budget_ac_id`,`po_detail`.`ppv_ac_id` AS `ppv_ac_id`,`org`.`org` AS `receving_org`,`po_header`.`created_by` AS `created_by`,`po_header`.`creation_date` AS `creation_date`,`po_header`.`last_update_by` AS `last_update_by`,`po_header`.`last_update_date` AS `last_update_date` from (((((((`po_header` left join `supplier` on((`po_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_line` on((`po_header`.`po_header_id` = `po_line`.`po_header_id`))) left join `item` on(((`po_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_line`.`receving_org_id`)))) left join `po_detail` on((`po_line`.`po_line_id` = `po_detail`.`po_line_id`))) left join `org` on((`po_line`.`receving_org_id` = `org`.`org_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `po_all_v` AS select `po_header`.`po_header_id` AS `po_header_id`,`po_header`.`bu_org_id` AS `bu_org_id`,`po_header`.`po_type` AS `po_type`,`po_header`.`po_number` AS `po_number`,`po_header`.`supplier_id` AS `supplier_id`,`po_header`.`supplier_site_id` AS `supplier_site_id`,`po_header`.`buyer` AS `buyer`,`po_header`.`currency` AS `currency`,`po_header`.`header_amount` AS `header_amount`,`po_header`.`po_status` AS `po_status`,`po_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_line`.`po_line_id` AS `po_line_id`,`po_line`.`line_type` AS `line_type`,`po_line`.`line_number` AS `po_line_number`,`po_line`.`item_id_m` AS `item_id_m`,`po_line`.`kit_cb` AS `kit_cb`,`po_line`.`revision_name` AS `revision_name`,`po_line`.`item_description` AS `item_description`,`po_line`.`line_description` AS `line_description`,`po_line`.`line_quantity` AS `line_quantity`,`po_line`.`unit_price` AS `unit_price`,`po_line`.`line_price` AS `line_price`,`po_line`.`gl_line_price` AS `gl_line_price`,`po_line`.`gl_tax_amount` AS `gl_tax_amount`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`item`.`serial_generation` AS `serial_generation`,`item`.`lot_generation` AS `lot_generation`,`po_detail`.`po_detail_id` AS `po_detail_id`,`po_detail`.`shipment_number` AS `shipment_number`,`po_line`.`receving_org_id` AS `receving_org_id`,`po_line`.`receving_org_id` AS `org_id`,`po_detail`.`subinventory_id` AS `subinventory_id`,`po_detail`.`locator_id` AS `locator_id`,`po_detail`.`requestor` AS `requestor`,`po_detail`.`quantity` AS `quantity`,ifnull(`po_detail`.`received_quantity`,0) AS `received_quantity`,(`po_detail`.`quantity` - ifnull(`po_detail`.`received_quantity`,0)) AS `open_quantity`,`po_detail`.`need_by_date` AS `need_by_date`,`po_detail`.`promise_date` AS `promise_date`,`po_detail`.`accepted_quantity` AS `accepted_quantity`,`po_detail`.`delivered_quantity` AS `delivered_quantity`,`po_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_detail`.`paid_quantity` AS `paid_quantity`,`po_detail`.`charge_ac_id` AS `charge_ac_id`,`po_detail`.`accrual_ac_id` AS `accrual_ac_id`,`po_detail`.`budget_ac_id` AS `budget_ac_id`,`po_detail`.`ppv_ac_id` AS `ppv_ac_id`,`org`.`org` AS `receving_org`,`po_header`.`created_by` AS `created_by`,`po_header`.`creation_date` AS `creation_date`,`po_header`.`last_update_by` AS `last_update_by`,`po_header`.`last_update_date` AS `last_update_date` from (((((((`po_header` left join `supplier` on((`po_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_line` on((`po_header`.`po_header_id` = `po_line`.`po_header_id`))) left join `item` on(((`po_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_line`.`receving_org_id`)))) left join `po_detail` on((`po_line`.`po_line_id` = `po_detail`.`po_line_id`))) left join `org` on((`po_line`.`receving_org_id` = `org`.`org_id`)));
 
 -- --------------------------------------------------------
 

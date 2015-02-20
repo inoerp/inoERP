@@ -29,7 +29,6 @@
        <li><label>Tax Reg No</label><?php echo form::text_field_d('tax_reg_no'); ?></li>
        <li><label>Tax Payer Id</label><?php echo form::text_field_d('tax_payer_id'); ?></li>
        <li><label>Contact Id</label><?php echo form::text_field_d('customer_contact_id'); ?></li>
-       <li><label>Ef Id</label><?php echo form::extra_field($$class->ef_id, '10', $readonly); ?></li>
        <li><label>Status</label><?php echo form::status_field($$class->status, $readonly); ?></li>
        <li><label>Revision</label><?php echo form::checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?>             </li> 
        <li><label>Rev Number</label><?php form::text_field_wid('rev_number'); ?></li> 
@@ -45,7 +44,7 @@
      <div> 
       <ul class="column five_column">
        <li><label>Customer Profile : </label>
-        <?php echo form::text_field_dm('customer_name'); ?>
+        <?php echo form::text_field_d('profile_name'); ?>
        </li>
        <li><label>Credit Class : </label>
         <?php echo form::select_field_from_object('customer_credit_class', ar_customer::customer_credit_class(), 'option_line_code', 'option_line_value', $$class->customer_credit_class, 'customer_credit_class', $readonly, '', ''); ?>

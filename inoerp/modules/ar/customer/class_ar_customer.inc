@@ -48,7 +48,7 @@ class ar_customer extends dbObject {
   "address_id",
   "customer_contact_id",
   'customer_credit_class',
-  "ef_id",
+  'profile_name',
   "status",
   "rev_enabled_cb",
   "rev_number",
@@ -110,7 +110,7 @@ class ar_customer extends dbObject {
  public $tax_payer_id;
  public $address_id;
  public $customer_contact_id;
- public $ef_id;
+ public $profile_name;
  public $status;
  public $rev_enabled_cb;
  public $rev_number;

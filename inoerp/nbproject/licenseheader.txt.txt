@@ -1,0 +1,10 @@
+/**
+ * inoERP 
+ *
+ *Version 0.1.1
+ *
+ * @copyright 2014 Nishit R. Das
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ * @link      http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
