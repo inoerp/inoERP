@@ -62,7 +62,7 @@
    'to_bank_header_id',
    'header_amount',
    'currency',
-   'document_currency',
+   'doc_currency',
    'to_bank_line_id',
    'exchange_rate_type',
    'exchange_rate',
@@ -106,7 +106,6 @@
    'payment_type',
    'supplier_id',
    'supplier_site_id',
-   'header_amount',
    'currency',
    'ledger_id',
    'period_id'
@@ -155,7 +154,7 @@
   public $to_bank_header_id;
   public $header_amount;
   public $currency;
-  public $document_currency;
+  public $doc_currency;
   public $to_bank_line_id;
   public $exchange_rate_type;
   public $exchange_rate;
@@ -313,7 +312,7 @@
    $gjh = new gl_journal_header;
    $gjh->ledger_id = $this->ledger_id;
    $gjh->status = 'ENTERED';
-   $gjh->currency = $this->document_currency;
+   $gjh->currency = $this->doc_currency;
    $gjh->period_id = $this->period_id;
    $gjh->journal_source = self::$module;
    $gjh->journal_category = 'AP_PAYMENTS';
@@ -599,7 +598,7 @@
    $this->po_number = $po_i->po_number;
    $this->supplier_id = $po_i->supplier_id;
    $this->supplier_site_id = $po_i->supplier_site_id;
-   $this->document_currency = $po_i->currency;
+   $this->doc_currency = $po_i->currency;
    $this->payment_term_id = $po_i->payment_term_id;
   }
 

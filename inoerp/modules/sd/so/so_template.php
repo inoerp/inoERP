@@ -35,14 +35,15 @@
     <div id="tabsHeader-2" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column header_field">
-       <li><label>Doc Currency</label><?php echo $f->select_field_from_object('document_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->document_currency, 'document_currency', 'currency', 1, $readonly); ?>						 </li>
+       <li><label>Doc Currency</label><?php echo $f->select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', 'currency', 1, $readonly); ?>						 </li>
+       <li><label>Ledger Currency</label><?php echo $f->select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, 1); ?></li>
        <li><label>Payment Term</label><?php echo $f->select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly1); ?>						 </li>
        <li><label>Payment Term Date</label><?php echo form::date_fieldAnyDay('payment_term_date', $$class->payment_term_date) ?> </li>
        <li><label>Sales Person</label><?php $f->text_field_d('sales_person') ?></li>
        <li><label>Agreement Start Date</label><?php echo form::date_field('agreement_start_date', $$class->agreement_start_date) ?></li>
        <li><label>Agreement End Date</label><?php echo form::date_field('agreement_end_date', $$class->agreement_start_date) ?></li>
        <li><label>Price List</label><?php echo$f->select_field_from_object('price_list_header_id', mdm_price_list_header::find_all(), 'mdm_price_list_header_id', 'price_list', $$class->price_list_header_id); ?>		 </li>
-       <li><label>Exchange Rate Type</label><?php echo form::text_field_d('exchange_rate_type'); ?></li>
+       <li><label>Exchange Rate Type</label><?php echo $f->select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
        <li><label>Exchange Rate</label><?php form::number_field_d('exchange_rate'); ?></li>
        <li><label>Header Amount</label><?php form::number_field_d('header_amount'); ?></li>
        <li><label>Tax Amount</label><?php form::number_field_d('tax_amount'); ?></li>
@@ -247,9 +248,9 @@
         ?>         
         <tr class="sd_so_line<?php echo $count ?>">
          <td><?php $f->seq_field_d($count) ?></td>
-         <td><?php echo $f->date_fieldFromToday_d('requested_date', $$class_second->requested_date) ?></td>
+         <td><?php echo $f->date_field('requested_date', ($$class_second->requested_date), '','','dateFromToday copyValue'); ?></td>
          <td><?php echo $f->date_fieldFromToday('promise_date', $$class_second->promise_date) ?></td>
-         <td><?php echo $f->date_fieldFromToday('schedule_ship_date', $$class_second->schedule_ship_date) ?></td>
+         <td><?php echo $f->date_field('schedule_ship_date', ($$class_second->schedule_ship_date), '','','dateFromToday copyValue'); ?></td>
          <td><?php echo $f->date_fieldFromToday_r('actual_ship_date', $$class_second->actual_ship_date, 1) ?></td>
         </tr>
         <?php

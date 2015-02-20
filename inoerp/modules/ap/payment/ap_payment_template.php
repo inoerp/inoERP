@@ -15,8 +15,8 @@
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ap_payment_header_id select_popup">
          Payment Id</label>
         <?php $f->text_field_dsr('ap_payment_header_id'); ?>
-                <a name="show" href="form.php?class_name=ap_payment_header&<?php echo "mode=$mode"; ?>" class="show document_id ap_payment_header_id">
-         <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <a name="show" href="form.php?class_name=ap_payment_header&<?php echo "mode=$mode"; ?>" class="show document_id ap_payment_header_id">
+         <i class="fa fa-refresh"></i></a> 
        </li>
        <li><label>Payment No</label>
         <?php $f->text_field_d('payment_number', 'primary_column2'); ?>
@@ -28,9 +28,6 @@
        </li>
        <li><label>Ledger Name(2)</label>
         <?php echo form::select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', $readonly1, '', '', 1); ?>
-       </li>
-       <li><label>Currency(3)</label>
-        <?php echo form::select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'currency', $readonly1, '', '', 1); ?>
        </li>
        <li><label>Period Name(4)</label>
         <?php
@@ -69,10 +66,13 @@
      <div> 
       <ul class="column header_field">
        <li><label>Currency</label>
-        <?php echo form::select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'currency', $readonly1, '', '', 1); ?>
+        <?php echo $f->select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'currency', '', 1, 1); ?>
+       </li>
+       <li><label>Doc Currency</label>
+        <?php echo form::select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->doc_currency, 'doc_currency', $readonly1, '', '', 1); ?>
        </li>
        <li><label>Pay Group</label><?php $f->text_field_d('pay_group') ?></li>
-       <li><label>Exchange Rate Type</label><?php $f->text_field_d('exchange_rate_type'); ?></li>
+       <li><label>Exchange Rate Type</label><?php echo $f->select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
        <li><label>Exchange Rate</label><?php $f->text_field_d('exchange_rate'); ?></li>
        <li><label>Header Amount</label><?php echo $f->number_field('header_amount', $$class->header_amount, '', 'header_amount'); ?>
        </li>
@@ -144,8 +144,8 @@
         <th>Transaction Number</th>
         <th>Payment Amount</th>
         <th>Total Amount</th>
-        <th>Paid Amount</th>
-        <th>Remaining Amount</th>
+        <th>Paid</th>
+        <th>Remaining</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -155,24 +155,22 @@
         $f->readonly2 = !empty($ap_payment_line->ap_payment_line_id) ? true : false;
         ?>         
         <tr class="ap_payment_line<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($ap_payment_line->line_number); ?>"></li>           
-           <li><?php echo form::hidden_field('ap_payment_header_id', $ap_payment_header->ap_payment_header_id); ?></li>
-          </ul>
+
+         <td>  
+                   <?php
+         echo ino_inline_action($$class_second->ap_payment_line_id, array('ap_payment_header_id' => $$class->ap_payment_header_id));
+         ?>
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('ap_payment_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
          <td><?php $f->text_field_wid2sr('ap_transaction_header_id'); ?></td>
          <td><?php $f->text_field_wid2('transaction_number', 'select_transaction_number'); ?>
-          <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_transaction_number select_popup"></td>
+          <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_ap_transaction_number select_popup"></td>
          <td><?php !empty($$class_second->ap_payment_line_id) ? form::number_field_d2sr('amount') : $f->text_field_d2s('amount'); ?></td>
-         <td><?php $f->text_field_wid2('invoice_amount'); ?></td>
-         <td><?php $f->text_field_wid2('paid_amount'); ?></td>
-         <td><?php $f->text_field_wid2('remaining_amount'); ?></td>
+         <td><?php $f->text_field_wid2r('invoice_amount'); ?></td>
+         <td><?php $f->text_field_wid2sr('paid_amount'); ?></td>
+         <td><?php $f->text_field_wid2sr('remaining_amount'); ?></td>
         </tr>
         <?php
         $count = $count + 1;

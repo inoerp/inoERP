@@ -51,7 +51,8 @@ class sd_so_header extends dbObject {
   'price_list_header_id',
   'header_amount',
   'tax_amount',
-  'document_currency',
+  'currency',
+  'doc_currency',
   'payment_term_id',
   'payment_term_date',
   'agreement_start_date',
@@ -86,7 +87,8 @@ class sd_so_header extends dbObject {
   'ar_customer_site_id',
   'ship_to_id',
   'bill_to_id',
-  'document_currency',
+  'currency',
+  'doc_currency',
   'payment_term_id'
  ];
  public $addressField = [
@@ -112,6 +114,14 @@ class sd_so_header extends dbObject {
   'bill_to_country',
   'bill_to_postal_code',
  ];
+ 
+  public $profile_default = [
+  'exchange_rate_type' => 'gl_currency_conversion_type',
+  'bu_org_id' => 'org_bu_name_default',
+  'ship_to_id' => 'ship_to_address_default',
+  'bill_to_id' => 'bill_to_address_default'
+ ];
+  
  public $search = [
   '_show_update_path' => 1,
   '_show_view_path' => 1,
@@ -136,7 +146,8 @@ class sd_so_header extends dbObject {
  public $price_list_header_id;
  public $header_amount;
  public $tax_amount;
- public $document_currency;
+ public $currency;
+ public $doc_currency;
  public $payment_term_id;
  public $payment_term_date;
  public $agreement_start_date;

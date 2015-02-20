@@ -108,7 +108,6 @@ class po_header extends dbObject {
  ];
 
  public $requiredField = [
-  'header_amount',
   'supplier_id',
   'supplier_site_id',
   'ship_to_id',

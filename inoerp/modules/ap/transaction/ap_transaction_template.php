@@ -17,7 +17,7 @@
          Transaction Id</label>
         <?php $f->text_field_ds('ap_transaction_header_id'); ?>
         <a name="show" href="form.php?class_name=ap_transaction_header&<?php echo "mode=$mode"; ?>" class="show document_id ap_transaction_header_id">
-         <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+         <i class="fa fa-refresh"></i></a> 
        </li>
        <li><label>Transaction No</label>  <?php $f->text_field_d('transaction_number', 'primary_column2'); ?> </li>
        <li><label>BU Name(1)</label>
@@ -25,9 +25,6 @@
        </li>
        <li><label>Ledger Name(2)</label>
         <?php echo form::select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', $readonly1, '', '', 1); ?>
-       </li>
-       <li><label>Currency(3)</label>
-        <?php echo form::select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'currency', $readonly1, '', '', 1); ?>
        </li>
        <li><label>Period Name(4)</label>
         <?php
@@ -65,12 +62,15 @@
      <div> 
       <ul class="column header_field">
        <li><label>Currency</label>
-        <?php echo form::select_field_from_object('document_currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->document_currency, 'doc_currency', $readonly1, '', '', 1); ?>
+       <?php echo $f->select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'currency', '', 1, 1); ?>
+       </li>
+       <li><label>Doc Currency</label>
+        <?php echo form::select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->doc_currency, 'doc_currency', $readonly1, '', '', 1); ?>
        </li>
        <li><label>Pay Group</label>               <?php $f->text_field_d('pay_group') ?>              </li>
-       <li><label>Exchange Rate Type</label>               <?php $f->text_field_d('exchange_rate_type'); ?>              </li>
+       <li><label>Exchange Rate Type</label><?php echo $f->select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
        <li><label>Exchange Rate</label>               <?php $f->text_field_d('exchange_rate'); ?>              </li>
-       <li><label>Header Amount</label> <?php echo $f->number_field('header_amount', $$class->header_amount, '15', 'header_amount', '', 1); ?> </li>
+       <li><label>Header Amount</label> <?php echo $f->number_field('header_amount', $$class->header_amount, '15', 'header_amount'); ?> </li>
        <li><label>Tax Amount</label><?php echo $f->number_field('tax_amount', $$class->tax_amount, '15', 'tax_amount'); ?></li>
        <li><label>Paid Amount</label>               <?php echo $f->number_field('paid_amount', $$class->paid_amount, '', 'paid_amount', 'dont_copy', '', 1); ?>              </li>
        <li><label>Payment Status</label>
@@ -173,14 +173,11 @@
         $f->readonly2 = !empty($ap_transaction_line->ap_transaction_line_id) ? true : false;
         ?>         
         <tr class="ap_transaction_line<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($ap_transaction_line->item_description); ?>"></li>           
-           <li><?php echo form::hidden_field('ap_transaction_header_id', $ap_transaction_header->ap_transaction_header_id); ?></li>
-           <li><?php echo form::hidden_field('tax_code_value', $$class_second->tax_code_value); ?></li>
-          </ul>
+         <td>
+          <?php
+          echo ino_inline_action($$class_second->ap_transaction_line_id, array('ap_transaction_header_id' => $$class->ap_transaction_header_id,
+           'tax_code_value' => $$class_second->tax_code_value));
+          ?>
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('ap_transaction_line_id'); ?></td>
@@ -241,15 +238,11 @@
 //												pa($ap_transaction_detail);
                   ?>
                   <tr class="ap_transaction_detail<?php echo $count . '-' . $detailCount; ?>">
-                   <td>   
-                    <ul class="inline_action">
-                     <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-                     <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-                     <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($ap_transaction_detail->ap_transaction_detail_id); ?>"></li>           
-                     <li><?php echo form::hidden_field('ap_transaction_line_id', $ap_transaction_line->ap_transaction_line_id); ?></li>
-                     <li><?php echo form::hidden_field('ap_transaction_header_id', $ap_transaction_header->ap_transaction_header_id); ?></li>
-
-                    </ul>
+                   <td>
+                    <?php
+                    echo ino_inline_action($$class_third->ap_transaction_detail_id, array('ap_transaction_header_id' => $$class->ap_transaction_header_id,
+                     'ap_transaction_line_id' => $$class_second->ap_transaction_line_id), 'add_row_detail_img', 'detail_id_cb');
+                    ?>
                    </td>
                    <td><?php $f->seq_field_detail_d($detailCount) ?></td>
                    <td><?php $f->text_field_wid3sr('ap_transaction_detail_id'); ?></td>

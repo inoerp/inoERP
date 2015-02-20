@@ -131,12 +131,22 @@ $(document).ready(function () {
   $('.shipment_number:first').val('1');
  }
 
+ $('body').off('change', '#bu_org_id').on('change', '#bu_org_id', function () {
+  getBUDetails($(this).val());
+ });
+
+ if ($('#bu_org_id').val() && (!$('#sd_so_header_id').val()) && ($('#bu_org_id').attr('disabled') !== 'disabled')) {
+  getBUDetails($('#bu_org_id').val());
+ }
+
  get_customer_detail_for_bu();
 
  $("#content").off("change", '#ar_customer_site_id').on("change", '#ar_customer_site_id', function () {
   var customer_site_id = $("#ar_customer_site_id").val();
   if (customer_site_id) {
-   getCustomerSiteDetails('modules/ar/customer/json_customer.php', customer_site_id);
+   $.when(getCustomerSiteDetails('modules/ar/customer/json_customer.php', customer_site_id)).then(function(){
+    getExchangeRate();
+   });
   }
  });
 
@@ -148,6 +158,21 @@ $(document).ready(function () {
   getAllInventoryAccounts('modules/org/inventory/json_inventory.php', ship_to_inventory, classValue1);
  });
 
+ //exhhnge rate
+ $('body').on('change', '#doc_currency', function () {
+  if ($(this).val() !== $('#currency').val()) {
+   $('#exchange_rate').prop('required', true).css('background', 'rgba(233, 209, 234, 0.61)');
+  }
+ });
+
+ if ($('#currency').val() != $('#doc_currency').val()) {
+  getExchangeRate();
+ }
+
+ $('body').off('change', '#currency, #doc_currency, #exchange_rate_type')
+         .on('change', '#currency, #doc_currency, #exchange_rate_type', function () {
+          getExchangeRate();
+         });
 
 //get tax code
  $('#content').off('change', '.shipping_org_id').on('change', '.shipping_org_id', function () {
@@ -195,6 +220,7 @@ $(document).ready(function () {
            price_list_header_id: price_list_header_id})).then(function () {
            $('body').trigger('setLinePrice', [rowClass]);
            $('body').trigger('calculateTaxAmount', [rowClass]);
+           $('body').trigger('getGlPrice', [rowClass]);
            $('body').trigger('calculateHeaderAmount');
           });
          });
@@ -253,18 +279,42 @@ $(document).ready(function () {
   });
   $('#header_amount').val(header_amount);
  });
- 
+
  //calculate the tax amount, line prices & header amount
  $('#content').off('blur', '.line_quantity, .unit_price, .line_price')
          .on('blur', '.line_quantity, .unit_price, .line_price', function () {
           var trClass = '.' + $(this).closest('tr').prop('class');
           $('body').trigger('setLinePrice', [trClass]);
           $('body').trigger('calculateTaxAmount', [trClass]);
+          $('body').trigger('getGlPrice', [trClass]);
           $('body').trigger('calculateHeaderAmount');
          });
 
 
+//get GL Price form line price & exchage rate
+ $('body').on('getGlPrice', function (e, trClass) {
+  if ($('#exchange_rate').val()) {
+   var exch_rate = +$('#exchange_rate').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1");
+  } else {
+   exch_rate = 1;
+  }
+  if ($('#form_line').find(trClass).find('.line_price').val()) {
+   var gl_line_price_val = (+$('#form_line').find(trClass).find('.line_price').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1")) * exch_rate;
+  } else {
+   var gl_line_price_val = 0;
+  }
+  gl_line_price_val = gl_line_price_val.toFixed(5);
+  $('#form_line').find(trClass).find('.gl_line_price').val(gl_line_price_val);
 
+  if ($('#form_line').find(trClass).find('.tax_amount').val()) {
+   var gl_tax_amount_val = (+$('#form_line').find(trClass).find('.tax_amount').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1")) * exch_rate;
+  } else {
+   var gl_tax_amount_val = 0;
+  }
+  gl_tax_amount_val = gl_tax_amount_val.toFixed(5);
+  $('#form_line').find(trClass).find('.gl_tax_amount').val(gl_tax_amount_val);
+
+ });
 
  $('body').off('click', '.popup.view-item-config').on('click', '.popup.view-item-config', function (e) {
   e.preventDefault();

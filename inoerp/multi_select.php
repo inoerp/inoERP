@@ -63,11 +63,11 @@ if (!empty($class_names)) {
   if (method_exists($action_class, 'multi_select_tabs')) {
    $multi_select_tabs = $action_class_i->multi_select_tabs();
   }
- 
-    if (method_exists($action_class, 'multi_select_actions')) {
+
+  if (method_exists($action_class, 'multi_select_actions')) {
    $multi_select_actions = $action_class_i->multi_select_actions();
   }
-  
+
   if (method_exists($action_class, 'multi_select_input_fields')) {
    $multi_selct_input_fields = $action_class_i->multi_select_input_fields();
   }
@@ -139,7 +139,11 @@ if ($continue) {
  } else if (!empty($$class)) {
   $template_file_names = ['includes/basics/multi_select_page.inc'];
  }
+ if (!empty($_GET['window_type']) && $_GET['window_type'] == 'popup') {
+  include_once(THEME_DIR . '/popup_main_template.inc');
+ } else {
   include_once(THEME_DIR . '/main_template.inc');
+ }
 } else {
  $continue = false;
  echo "<h2>Could n't call the header</h2>";

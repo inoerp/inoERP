@@ -48,6 +48,9 @@ setValFromSelectPage.prototype.setVal = function () {
  }
  localStorage.removeItem("row_class");
  localStorage.removeItem("row_class");
+  if (this.ap_payment_header_id) {
+  $('a.show.ap_payment_header_id').trigger('click');
+ }
 };
 
 $(document).ready(function () {
@@ -101,7 +104,10 @@ $(document).ready(function () {
   }
  });
 
-
+$('body').on('click','.invoice_amount,.paid_amount,.remaining_amount', function(){
+$(this).prop('readonly', true).css('background','none repeat scroll 0 0 rgba(243, 243, 210, 1)');
+alert('Readonly Field!');  
+})
  //selecting Header Id
  $(".ap_payment_header_id.select_popup").on("click", function () {
   var link = 'select.php?class_name=ap_payment_header';
@@ -117,7 +123,7 @@ $(document).ready(function () {
  });
 
 //popu for selecting select_transaction_number
- $('#content').on('click', '.select_transaction_number.select_popup', function () {
+ $('#content').off('click', '.select_ap_transaction_number.select_popup').on('click', '.select_ap_transaction_number.select_popup', function () {
   if ($(this).closest('tr').find('.ap_payment_line_id').first().val()) {
    alert('You are not allowed to select a new transaction\nCancell or Viod the payment if required');
    return;
@@ -130,7 +136,7 @@ $(document).ready(function () {
   openUrl += '&supplier_id=' + $('#supplier_id').val();
   openUrl += '&supplier_site_id=' + $('#supplier_site_id').val();
   void window.open(openUrl, '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1200,height=1100,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
 
@@ -152,7 +158,40 @@ $(document).ready(function () {
  });
 
 
+ $('#bu_org_id').on('change', function() {
+  getBUDetails($(this).val());
+ });
+
+ if ($('#bu_org_id').val() && ($('#bu_org_id').attr('disabled') != 'disabled')) {
+  getBUDetails($('#bu_org_id').val());
+ }
+
+ $('#content').on('blur', '#currency, #doc_currency, #exchange_rate_type, #exchange_rate', function () {
+  getExchangeRate();
+ });
+
+
 //all actions
+
+ $('#payment_action').on('change', function () {
+  var selected_value = $(this).val();
+  switch (selected_value) {
+   case 'CREATE_ACCOUNT' :
+    create_accounting();
+    break;
+
+   case 'MATCH' :
+    match_transaction();
+    break;
+
+   default :
+    break;
+  }
+ });
+
+
+});
+
 //Popup for selecting match 
  function match_transaction() {
   var ap_payment_header_id = $("#ap_payment_header_id").val();
@@ -195,22 +234,3 @@ $(document).ready(function () {
    alert('No Transaction Header ID/nEnter or Save The Header Details ');
   }
  }
-
- $('#payment_action').on('change', function () {
-  var selected_value = $(this).val();
-  switch (selected_value) {
-   case 'CREATE_ACCOUNT' :
-    create_accounting();
-    break;
-
-   case 'MATCH' :
-    match_transaction();
-    break;
-
-   default :
-    break;
-  }
- });
-
-
-});

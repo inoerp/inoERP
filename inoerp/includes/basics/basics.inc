@@ -274,6 +274,7 @@ require_once(INC_MODULE . DS . "sd" . DS . "so" . DS . "class_sd_so_line.inc");
 require_once(INC_MODULE . DS . "sd" . DS . "so" . DS . "class_sd_so_all_v.inc");
 require_once(INC_MODULE . DS . "sd" . DS . "pick_list" . DS . "class_sd_pick_list.inc");
 require_once(INC_MODULE . DS . "sd" . DS . "shipping_control" . DS . "class_sd_shipping_control.inc");
+require_once(INC_MODULE . DS . "sd" . DS . "sales_control" . DS . "class_sd_sales_control.inc");
 require_once(INC_MODULE . DS . "sd" . DS . "delivery" . DS . "class_sd_delivery_header.inc");
 require_once(INC_MODULE . DS . "sd" . DS . "delivery" . DS . "class_sd_delivery_line.inc");
 require_once(INC_MODULE . DS . "sd" . DS . "document_type" . DS . "class_sd_document_type.inc");

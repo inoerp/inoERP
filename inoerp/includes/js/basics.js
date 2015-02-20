@@ -874,7 +874,7 @@ function getExchangeRate(options) {
  };
  var settings = $.extend({}, defaults, options);
 
- $.ajax({
+ return $.ajax({
   url: settings.json_url,
   type: 'get',
   dataType: 'json',
@@ -889,8 +889,12 @@ function getExchangeRate(options) {
     $.each(result, function (key, value) {
      switch (key) {
       case 'rate':
-       var valFixed = +value.toFixed(7);
-       $('#exchange_rate').val(valFixed);
+       if (value && value != 'false') {
+        var valFixed = (+value).toFixed(7);
+        $('#exchange_rate').val(valFixed);
+       }else{
+        $('#exchange_rate').val('');
+       }
        break;
      }
     });
@@ -1029,6 +1033,10 @@ function getCustomerDetails(jsonurl, org_id) {
    $('.show_loading_small').hide();
   }
  }).done(function (result) {
+  if ($(result).find('div#json_customerSites_find_all').length < 1) {
+   $('.show_loading_small').hide();
+   return false;
+  }
   var customer_sites = $(result).find('div#json_customerSites_find_all').html();
   var receivable_ac_id = $(result).find('div#receivable_ac_id').html();
   var customer_attachment = $(result).find('#customer_header_level_attachement').html();
@@ -1090,7 +1098,7 @@ function get_customer_detail_for_bu(search_all_bu) {
 //get Customer site details - currency, payment terms, attachements
 function getCustomerSiteDetails(jsonUrl, customer_site_id) {
  $('.show_loading_small').show();
- $.ajax({
+ return $.ajax({
   url: jsonUrl,
   data: {ar_customer_site_id: customer_site_id,
    find_site_details: 1},
@@ -1098,11 +1106,14 @@ function getCustomerSiteDetails(jsonUrl, customer_site_id) {
  }).done(function (result) {
   $.each(result, function (key, value) {
    switch (key) {
-    case 'currency':
     case 'payment_term_id':
     case 'site_address_id':
      var className = '.' + key;
      $('#content').find(className).val(value);
+     break;
+
+    case 'currency':
+      $('#content').find('.doc_currency').val(value);
      break;
    }
 
@@ -1338,7 +1349,7 @@ function getPriceDetails(options) {
   price_date: curernt_date
  };
  var settings = $.extend({}, defaults, options);
-return $.ajax({
+ return $.ajax({
   url: settings.json_url,
   type: 'get',
   dataType: 'json',
@@ -2178,11 +2189,12 @@ function getMultiSelectResult(options) {
   }
  }).done(function (result) {
   var allButton = $(result).filter('div#header_top_container').html();
-  var newContent = $(result).find('div#structure').html();
+  var newContent = $(result).find('div#searchResult').html();
+  
   if (newContent) {
    $('#header_top_container').replaceWith('<div id="header_top_container">' + allButton + '</div>');
   }
-  $('#structure').empty().append(newContent);
+  $('#searchResult').empty().append(newContent);
   $.getScript("includes/js/reload.js");
   $.getScript("includes/js/multi_select.js");
   $(result).find('#js_files').find('li').each(function () {
@@ -2739,8 +2751,8 @@ $(document).ready(function () {
 
 //select page data selction in parent window
  $('body').on('click', '.quick_select', function () {
-    var setData = new opener.setValFromSelectPage;
-    var elemenType = $(this).parent().prop('tagName');
+  var setData = new opener.setValFromSelectPage;
+  var elemenType = $(this).parent().prop('tagName');
   if (elemenType === 'LI') {
    $(this).closest('ul').find('input').each(function () {
     setData[$(this).prop('id')] = $(this).prop('value');
@@ -3171,7 +3183,7 @@ $(document).ready(function () {
  });
 
  //Popup for selecting address
- $('body').on('click','.address_id.select_popup',function (e) {
+ $('body').on('click', '.address_id.select_popup', function (e) {
   e.preventDefault();
   var rowClass = $(this).parent().find('input').first().prop('class');
   localStorage.setItem("field_class", rowClass);
@@ -3567,7 +3579,7 @@ $(document).ready(function () {
   var urlLink = $(this).attr('href');
   var urlLink_a = urlLink.split('?');
   var formUrl = 'includes/json/json_form.php?' + urlLink_a[1] + '&' + headerId + '=' + headerId_v;
-  
+
   getFormDetails(formUrl);
  }).one();
 

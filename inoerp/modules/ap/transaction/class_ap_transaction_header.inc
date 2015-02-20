@@ -74,7 +74,7 @@
    'tax_amount',
    'paid_amount',
    'currency',
-   'document_currency',
+   'doc_currency',
    'payment_term_id',
    'exchange_rate_type',
    'exchange_rate',
@@ -126,7 +126,7 @@
    'ledger_id',
    'period_id',
    'document_owner',
-   'document_currency',
+   'doc_currency',
    'currency',
    'gl_journal_header_id'
   ];
@@ -135,7 +135,6 @@
    'transaction_type',
    'supplier_id',
    'supplier_site_id',
-   'header_amount',
    'currency',
    'payment_term_id',
    'document_date',
@@ -152,16 +151,21 @@
    'show_block',
    'transaction_action'
   ];
-  public $profile_default = [
-   'exchange_rate_type' => 'gl_currency_conversion_type',
-   'bu_org_id' => 'org_bu_name_default',
-   'ship_to_id' => 'ship_to_address_default',
-   'bill_to_id' => 'bill_to_address_default'
-  ];
+//  public $profile_default = [
+//   'exchange_rate_type' => 'gl_currency_conversion_type',
+//   'bu_org_id' => 'org_bu_name_default',
+//   'ship_to_id' => 'ship_to_address_default',
+//   'bill_to_id' => 'bill_to_address_default'
+//  ];
   public $numberField = [
    'header_amount',
    'tax_amount'
   ];
+  
+   public $profile_default = [
+  'exchange_rate_type' => 'gl_currency_conversion_type',
+  'bu_org_id' => 'org_bu_name_default',
+ ];
   public $search = [
    '_show_update_path' => 1,
    '_update_action_meassge' => 'Update',
@@ -190,7 +194,7 @@
   public $header_amount;
   public $paid_amount;
   public $currency;
-  public $document_currency;
+  public $doc_currency;
   public $payment_term_id;
   public $exchange_rate_type;
   public $exchange_rate;
@@ -284,7 +288,7 @@
    $gjh = new gl_journal_header;
    $gjh->ledger_id = $this->ledger_id;
    $gjh->status = 'ENTERED';
-   $gjh->currency = $this->document_currency;
+   $gjh->currency = $this->doc_currency;
    $gjh->period_id = $this->period_id;
    $gjh->journal_source = self::$module;
    $gjh->journal_category = 'AP_TRANSACTIONS';
@@ -579,7 +583,7 @@
    $this->po_number = $po_i->po_number;
    $this->supplier_id = $po_i->supplier_id;
    $this->supplier_site_id = $po_i->supplier_site_id;
-   $this->document_currency = $po_i->currency;
+   $this->doc_currency = $po_i->doc_currency;
    $this->payment_term_id = $po_i->payment_term_id;
   }
 

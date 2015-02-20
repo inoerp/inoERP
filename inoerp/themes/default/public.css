@@ -1378,3 +1378,13 @@ input.extra_large{
 #myModal .modal-dialog{
  width: 800px;
 }
+
+ul.column.two_column_form input, ul.column.two_column_form select{
+        width: 70% !important;
+        max-width: 250px;
+}
+
+ul.column.two_column_form li {
+        margin-bottom: 20px;
+        width: 45% !important;
+}

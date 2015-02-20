@@ -188,7 +188,7 @@ class sd_so_line extends dbObject {
 
   if ((empty($this->line_status)) && (!empty($this->schedule_ship_date))) {
    $this->line_status = $this->line_quantity < 0 ? 'AWAITING_RETURN' : 'AWAITING_PICKING';
-   echo "<div class='alert alert-danger'>Sales line is not saved as selected <strong>configured item has no configuration.</strong></div> ";
+   echo "<div class='alert alert-danger'>Line status is updated to <strong> ".$this->line_status.".</strong></div> ";
   } else if (($this->line_status = 'ENTERED') && (!empty($this->schedule_ship_date))) {
    $this->line_status = $this->line_quantity < 0 ? 'AWAITING_RETURN' : 'AWAITING_PICKING';
   } else if ((empty($this->line_status)) && (empty($this->schedule_ship_date))) {

@@ -59,7 +59,7 @@
         <li><label>Exchange Rate Type</label><?php echo $f->select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
         <li><label>Exchange Rate</label><?php echo $f->number_field('exchange_rate', $$class->exchange_rate, '', 'exchange_rate'); ?> </li>
         <li><label>Price List</label><?php echo$f->select_field_from_object('price_list_header_id', mdm_price_list_header::find_all_purchasing_pl(), 'mdm_price_list_header_id', 'price_list', $$class->price_list_header_id); ?></li>
-        <li><label>Header Amount</label><?php echo $f->number_field('header_amount', $$class->header_amount, '15', 'header_amount', '', 1); ?></li>
+        <li><label>Header Amount</label><?php echo $f->number_field('header_amount', $$class->header_amount, '15', 'header_amount'); ?></li>
         <li><label>Tax Amount</label><?php echo $f->number_field('tax_amount', $$class->tax_amount, '15', 'tax_amount'); ?></li>
         <li><label>Payment Term</label><?php echo $f->select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, 'payment_term_id', '', 1, $readonly1); ?></li>
        </ul>

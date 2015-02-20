@@ -57,12 +57,14 @@ if (!empty($_GET['search_class_name'])) {
    $multi_select_select_fields = $action_class_i->multi_select_select_fields();
   }
 
+  $search_param_values = get_postArray_From_jqSearializedArray($_GET['search_parameters']);
+  
   if (method_exists($action_class, 'multi_select_hidden_fields')) {
    $hidden_field_names = $action_class_i->multi_select_hidden_fields();
-   if (!empty($_GET)) {
+   if (!empty($search_param_values)) {
     foreach ($hidden_field_names as $hiden_field_name) {
-     if (!empty($_GET[$hiden_field_name])) {
-      $hidden_field_a[$hiden_field_name] = is_array($_GET[$hiden_field_name]) ? $_GET[$hiden_field_name][0] : $_GET[$hiden_field_name];
+     if (!empty($search_param_values[$hiden_field_name])) {
+      $hidden_field_a[$hiden_field_name] = is_array($search_param_values[$hiden_field_name]) ? $search_param_values[$hiden_field_name][0] : $search_param_values[$hiden_field_name];
      } else {
       $hidden_field_a[$hiden_field_name] = null;
      }
@@ -108,7 +110,7 @@ if (!empty($_GET['search_class_name'])) {
  $pageno = !(empty($_GET['pageno'])) ? (int) $_GET['pageno'] : 1;
  $per_page = !(empty($_GET['per_page'])) ? (int) $_GET['per_page'] : 0;
 
- $_GET = get_postArray_From_jqSearializedArray($_GET['search_parameters']);
+ $_GET = $search_param_values;
  $_GET['pageno'] = $pageno;
  $_GET['class_name'] = $class;
  $_GET['per_page'] = $per_page;
@@ -201,30 +203,7 @@ if (!empty($_GET['search_class_name'])) {
    $noof_criteria++;
   }
  }
- if ((!empty($_GET['function_name'])) && (method_exists($$class, $_GET['function_name']))) {
-  $function_name = $_GET['function_name'];
-  $search_counts = $function_name . '_search_counts';
-  $search_records = $function_name . '_search_records';
-  $whereClause = implode(" AND ", $whereFields);
-  $_GET['whereClause'] = $whereClause;
-  $total_count = call_user_func(array($$class, $search_counts), $_GET);
-  $search_result = call_user_func(array($$class, $search_records), $_GET);
-  if (!empty($per_page) && !empty($total_count)) {
-   $pagination = new pagination($pageno, $per_page, $total_count);
-   $pagination->setProperty('_query_string', $query_string);
-   $pagination_statement = $pagination->show_pagination();
-  }
- } else if (method_exists($$class, 'search_records')) {
-  $whereClause = implode(" AND ", $whereFields);
-  $_GET['whereClause'] = $whereClause;
-  $total_count = call_user_func(array($$class, 'search_counts'), $_GET);
-  $search_result = call_user_func(array($$class, 'search_records'), $_GET);
-  if (!empty($per_page) && !empty($total_count)) {
-   $pagination = new pagination($pageno, $per_page, $total_count);
-   $pagination->setProperty('_query_string', $query_string);
-   $pagination_statement = $pagination->show_pagination();
-  }
- } else {
+
   if (count($whereFields) > 0) {
    $whereClause = " WHERE " . implode(" AND ", $whereFields);
    // And then create the SQL query itself.
@@ -277,7 +256,6 @@ if (!empty($_GET['search_class_name'])) {
    $sql .=" OFFSET {$pagination->offset()}";
   }
   $search_result = $class::find_by_sql($sql);
- }
 
  if (method_exists($class, 'search_add_extra_fields')) {
   $class::search_add_extra_fields($search_result);
@@ -309,4 +287,3 @@ if (!empty($_GET['search_class_name'])) {
  echo '</div>';
 }
 ?>
-

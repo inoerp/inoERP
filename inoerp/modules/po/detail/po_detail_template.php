@@ -49,7 +49,7 @@
           ?>
           <tr class="po_detail<?php echo $count . '-' . $detailCount; ?>">
                      <td>
-           <?php $f = new inoform();
+           <?php 
            echo ino_inline_action($$class_third->po_detail_id, array('po_header_id' => $$class->po_header_id,
             'po_line_id' => $$class_second->po_line_id),'add_row_detail_img','detail_id_cb');
            ?>
