@@ -67,20 +67,20 @@ setValFromSelectPage.prototype.setVal = function () {
 
  var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass");
  addressPopupDivClass = addressPopupDivClass.replace(/\s+/g, '.');
- if (address_id) {
-  $('#form_header').find(addressPopupDivClass).find('.address_id').val(address_id);
+  if (address_id) {
+  $('body').find(addressPopupDivClass).find('.address_id').val(address_id);
  }
  if (address_name) {
-  $('#form_header').find(addressPopupDivClass).find('.address_name').val(address_name);
+  $('body').find(addressPopupDivClass).find('.address_name').val(address_name);
  }
  if (address) {
-  $('#form_header').find(addressPopupDivClass).find('.address').val(address);
+  $('body').find(addressPopupDivClass).find('.address').val(address);
  }
  if (country) {
-  $('#form_header').find(addressPopupDivClass).find('.country').val(country);
+  $('body').find(addressPopupDivClass).find('.country').val(country);
  }
  if (postal_code) {
-  $('#form_header').find(addressPopupDivClass).find('.postal_code').val(postal_code);
+  $('body').find(addressPopupDivClass).find('.postal_code').val(postal_code);
  }
 
  localStorage.removeItem("row_class");

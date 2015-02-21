@@ -77,8 +77,7 @@ setValFromSelectPage.prototype.setVal = function () {
   $('#content').find(rowClass_b).find('.bom_config_header_id').val(this.bom_config_header_id);
  }
 
- var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass");
- addressPopupDivClass = addressPopupDivClass.replace(/\s+/g, '.');
+ var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass").replace(/\s+/g, '.');
  if (address_id) {
   $('#form_header').find(addressPopupDivClass).find('.address_id').val(address_id);
  }
@@ -97,7 +96,7 @@ setValFromSelectPage.prototype.setVal = function () {
 
  localStorage.removeItem("row_class");
  localStorage.removeItem("field_class");
- localStorage.removeItem("addressPopupDivClass");
+
 
  if (this.po_header_id) {
   $('a.show.po_header_id').trigger('click');
@@ -199,7 +198,7 @@ $(document).ready(function () {
 
 
 //mandatory and field sequence
-var mandatoryCheck = new mandatoryFieldMain();
+ var mandatoryCheck = new mandatoryFieldMain();
  mandatoryCheck.header_id = 'po_header_id';
  mandatoryCheck.mandatoryHeader();
 // mandatoryCheck.form_area = 'form_header';
@@ -226,7 +225,7 @@ var mandatoryCheck = new mandatoryFieldMain();
            $(this).closest("td").find(".quantity:first").val(lineQuantity);
           }
           var trClass = '.' + $(this).closest('tr').attr('class');
-          $('body').trigger('getNeedByDate',[trClass]);
+          $('body').trigger('getNeedByDate', [trClass]);
          });
 
 //get supplier details
@@ -284,7 +283,7 @@ var mandatoryCheck = new mandatoryFieldMain();
   getBUDetails($(this).val());
  });
 
- if ($('#bu_org_id').val() && ($('#bu_org_id').attr('disabled') !== 'disabled')) {
+ if ($('#bu_org_id').val() && (!$('#po_header_id').val()) && ($('#bu_org_id').attr('disabled') !== 'disabled')) {
   getBUDetails($('#bu_org_id').val());
  }
 
@@ -327,7 +326,7 @@ var mandatoryCheck = new mandatoryFieldMain();
   var org_id = $(this).val();
   getTaxCodes('modules/mdm/tax_code/json_tax_code.php', org_id, 'IN');
  });
- if ($('#bu_org_id').val()) {
+ if ($('#bu_org_id').val() && (!$('#po_header_id').val())) {
   getTaxCodes('modules/mdm/tax_code/json_tax_code.php', $('#bu_org_id').val(), 'IN');
  }
 
@@ -355,11 +354,6 @@ var mandatoryCheck = new mandatoryFieldMain();
          });
 
 //total header & tax amount
- $('body').off('blur', '.line_quantity, .unit_price, .line_price')
-         .on('blur', '.line_quantity, .unit_price, .line_price', function () {
-          $('body').trigger('calculateHeaderAmount');
-         });
-
  $('#content').off('blur', '.receving_org_id, .item_id_m, .item_number')
          .on('blur', '.receving_org_id, .item_id_m, .item_number', function () {
           var item_id_m = $(this).closest('tr').find('.item_id_m').val();
@@ -420,31 +414,15 @@ var mandatoryCheck = new mandatoryFieldMain();
 
 
  $('body').on('calculateTax', function (e, trClass) {
-  var linePrice = 0;
-  if ($('#content').find(trClass).find('.line_price').val()) {
-   linePrice = +($('#content').find(trClass).find('.line_price').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-  }
-  var taxCodeVal = 0;
-  if ($('#content').find(trClass).find('.tax_code_value').val()) {
-   taxCodeVal = $('#content').find(trClass).find('.tax_code_value').val();
-  } else if ($('#content').find(trClass).find('.input_tax').find('option:selected').prop('class')) {
-   taxCodeVal = $('#content').find(trClass).find('.input_tax').find('option:selected').prop('class');
-  }
-
-  if (taxCodeVal.length >= 3) {
-   var taxCodeVal_a = taxCodeVal.split('_');
-  } else {
-   return;
-  }
-
+  var linePrice = +$('#content').find(trClass).find('.line_price').val();
   var taxAmount = 0;
   var taxPercentage = 0;
-  if (taxCodeVal_a[0] === 'p') {
-   taxPercentage = +taxCodeVal_a[1];
-  } else if (taxCodeVal_a[0] === 'a') {
-   taxAmount = +taxCodeVal_a[1];
-  }
   var taxValue = 0;
+
+  if ($('#content').find(trClass).find('.tax_code_id').val()) {
+   taxPercentage = $('#content').find(trClass).find('.tax_code_id').find('option:selected').data('percentage');
+   taxAmount = $('#content').find(trClass).find('.tax_code_id').find('option:selected').data('amount');
+  }
   if (taxPercentage) {
    taxValue = ((taxPercentage * linePrice) / 100).toFixed(5);
   } else if (taxAmount) {
@@ -484,8 +462,8 @@ var mandatoryCheck = new mandatoryFieldMain();
   var newDate = (dd + (processing_lt));
   var cd = new Date(yyyy, mm, newDate);
   var foramtedDate = cd.getFullYear() + '-' + cd.getMonth() + '-' + cd.getDate();
-$(trClass).find('.need_by_date').val(foramtedDate);
-$(trClass).find('.promise_date').val(foramtedDate);
+  $(trClass).find('.need_by_date').val(foramtedDate);
+  $(trClass).find('.promise_date').val(foramtedDate);
  });
 
 });

@@ -11,6 +11,7 @@
    'transaction_number',
    'supplier_id',
    'supplier_site_id',
+   'exchange_rate',
    'document_owner',
    'currency',
    'header_amount',
@@ -38,6 +39,7 @@
    'inv_line_quantity',
    'inv_unit_price',
    'inv_line_price',
+   'gl_inv_line_price',
    'po_header_id',
    'po_line_id',
    'po_detail_id',
@@ -59,6 +61,7 @@
    'transaction_number',
    'supplier_id',
    'supplier_site_id',
+   'exchange_rate',
    'document_owner',
    'currency',
    'header_amount',
@@ -86,6 +89,7 @@
    'inv_line_quantity',
    'inv_unit_price',
    'inv_line_price',
+   'gl_inv_line_price',
    'po_header_id',
    'po_line_id',
    'po_detail_id',
@@ -112,6 +116,7 @@
    'payment_term_id',
    'paid_amount',
    'payment_status',
+   'exchange_rate',
    'po_number',
    'po_type',
    'buyer',
@@ -126,6 +131,7 @@
    'inv_line_quantity',
    'inv_unit_price',
    'inv_line_price',
+   'gl_inv_line_price',
    'po_header_id',
    'po_line_id',
    'po_detail_id',
@@ -164,6 +170,7 @@
   public $transaction_number;
   public $supplier_id;
   public $supplier_site_id;
+  public $exchange_rate;
   public $document_owner;
   public $currency;
   public $header_amount;
@@ -189,6 +196,7 @@
   public $inv_line_quantity;
   public $inv_unit_price;
   public $inv_line_price;
+  public $gl_inv_line_price;
   public $po_header_id;
   public $po_line_id;
   public $po_detail_id;
@@ -208,7 +216,7 @@ CREATE OR REPLACE VIEW ap_payment_trnx_v
 (
 ap_transaction_header_id, bu_org_id, transaction_type, transaction_number,
 supplier_id, 
-supplier_site_id, document_owner, currency, header_amount, transaction_status,
+supplier_site_id, exchange_rate, document_owner, currency, header_amount, transaction_status,
 payment_term_id, paid_amount, payment_status,
 ledger_id,period_id,
 supplier_name, supplier_number,
@@ -216,7 +224,7 @@ supplier_site_name, supplier_site_number,
 po_number,po_type, buyer,
 payment_term, description,
 ap_transaction_line_id, line_type, line_number,	item_id_m, item_description, line_description, 
-inv_line_quantity, inv_unit_price, inv_line_price,
+inv_line_quantity, inv_unit_price, inv_line_price, gl_inv_line_price,
 po_header_id,    po_line_id,    po_detail_id,
 ref_transaction_header_id,    ref_transaction_line_id,
 item_number, uom_id, item_status,
@@ -226,7 +234,7 @@ AS
 SELECT 
 ap_transaction_header.ap_transaction_header_id, ap_transaction_header.bu_org_id, ap_transaction_header.transaction_type, ap_transaction_header.transaction_number,
 ap_transaction_header.supplier_id, 
-ap_transaction_header.supplier_site_id, ap_transaction_header.document_owner, ap_transaction_header.currency, ap_transaction_header.header_amount, ap_transaction_header.transaction_status,
+ap_transaction_header.supplier_site_id, ap_transaction_header.exchange_rate, ap_transaction_header.document_owner, ap_transaction_header.currency, ap_transaction_header.header_amount, ap_transaction_header.transaction_status,
 ap_transaction_header.payment_term_id, ap_transaction_header.paid_amount, ap_transaction_header.payment_status,
 ap_transaction_header.ledger_id,ap_transaction_header.period_id,
 supplier.supplier_name, supplier.supplier_number,
@@ -234,7 +242,7 @@ supplier_site.supplier_site_name, supplier_site.supplier_site_number,
 ph.po_number,ph.po_type, ph.buyer,
 payment_term.payment_term, payment_term.description,
 ap_transaction_line.ap_transaction_line_id, ap_transaction_line.line_type, ap_transaction_line.line_number,	ap_transaction_line.item_id_m, ap_transaction_line.item_description, ap_transaction_line.line_description, 
-ap_transaction_line.inv_line_quantity, ap_transaction_line.inv_unit_price, ap_transaction_line.inv_line_price,
+ap_transaction_line.inv_line_quantity, ap_transaction_line.inv_unit_price, ap_transaction_line.inv_line_price, ap_transaction_line.gl_inv_line_price,
 ap_transaction_line.po_header_id,    ap_transaction_line.po_line_id,    ap_transaction_line.po_detail_id,
 ap_transaction_line.ref_transaction_header_id,    ap_transaction_line.ref_transaction_line_id,
 item.item_number, item.uom_id, item.item_status,
@@ -254,6 +262,15 @@ AND (ap_transaction_header.payment_status  IS NULL OR  ap_transaction_header.pay
 ";
   }
 
+  
+   public static function find_by_transactionId($ap_transaction_header_id) {
+  $sql = "SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE   ap_transaction_header_id = '{$ap_transaction_header_id}' ";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? ($result) : false;
+ }
+ 
  }
 
 //end of ap_transaction_detail class

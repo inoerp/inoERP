@@ -105,14 +105,14 @@ $(document).ready(function () {
   if ($(this).val()) {
    $(this).closest('li').clone().attr('class', 'new_object' + new_object).appendTo($(this).closest('ul'));
    new_object++;
-  }else{
+  } else {
    var numberOfBlanckEelements = 0;
-   $(this).closest('ul').find('.category_id').each(function(){
-    if(!$(this).val()){
+   $(this).closest('ul').find('.category_id').each(function () {
+    if (!$(this).val()) {
      numberOfBlanckEelements++;
     }
    });
-   if(numberOfBlanckEelements > 1){
+   if (numberOfBlanckEelements > 1) {
     $(this).remove();
    }
   }

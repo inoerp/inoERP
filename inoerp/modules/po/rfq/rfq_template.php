@@ -41,8 +41,8 @@
     </div>
     <div id="tabsHeader-3" class="tabContent">
      <div class="left_half shipto address_details">
-      <ul class="column two_column">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
+      <ul class="column four_column">
+       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
          Ship To Site Id : </label>
         <?php $f->text_field_d('ship_to_id', 'address_id site_address_id'); ?>
        </li>
@@ -53,8 +53,8 @@
       </ul>
      </div> 
      <div class="right_half billto address_details">
-      <ul class="column two_column">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
+      <ul class="column four_column">
+       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
          Bill To Site Id :</label>
         <?php $f->text_field_d('bill_to_id', 'address_id site_address_id'); ?>
        </li>

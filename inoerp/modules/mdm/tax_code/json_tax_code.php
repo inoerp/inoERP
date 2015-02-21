@@ -19,7 +19,8 @@ if (!empty($_GET['org_id']) && !empty($_GET['in_out_tax']) && ($_GET['find_all_t
  } else {
 	foreach ($all_tax_codes as $tax_code) {
 	 $tax_class = (!empty($tax_code->percentage)) ? 'p_' . $tax_code->percentage : 'a_' . $tax_code->tax_amount;
-	 echo '<option class="' . $tax_class . '"  value="' . $tax_code->mdm_tax_code_id . '"';
+	 echo '<option data-percentage="'.$tax_code->percentage.'"  data-amount="'.$tax_code->tax_amount.'" '
+    . ' class="' . $tax_class . '"  value="' . $tax_code->mdm_tax_code_id . '"';
 	 echo '>' . $tax_code->tax_code . '</option>';
 	}
  }

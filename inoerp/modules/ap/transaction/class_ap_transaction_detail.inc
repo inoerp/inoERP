@@ -18,6 +18,7 @@
    'account_type',
    'description',
    'amount',
+   'gl_amount',
    'detail_ac_id',
    'status',
    'reference_type',
@@ -38,6 +39,7 @@
    'ap_transaction_header_id',
    'account_type',
    'amount',
+   'gl_amount',
    'detail_ac_id'
   ];
   public $dateField = [
@@ -46,6 +48,7 @@
   ];
   public $numberField = [
    'amount',
+   'gl_amount'
   ];
   public $fields_inForm_notInDataBase = [
    "po_number"
@@ -63,6 +66,7 @@
   public $account_type;
   public $description;
   public $amount;
+  public $gl_amount;
   public $detail_ac_id;
   public $journal_created_cb;
   public $status;

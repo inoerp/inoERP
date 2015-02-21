@@ -13,13 +13,13 @@
      <div class="large_shadow_box"> 
       <ul class="column header_field">
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_receipt_header_id select_popup clickable">
-         Receipt Id</label><?php $f->text_field_d('ar_receipt_header_id'); ?>
-        <a name="show" href="form.php?class_name=ar_receipt_header&<?php echo "mode=$mode"; ?>" class="show document_id ar_receipt_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+         Receipt Id</label><?php $f->text_field_dsr('ar_receipt_header_id'); ?>
+        <a name="show" href="form.php?class_name=ar_receipt_header&<?php echo "mode=$mode"; ?>" class="show document_id ar_receipt_header_id"><i class="fa fa-refresh"></i></a> 
        </li>
        <li><label>Receipt No</label><?php $f->text_field_d('receipt_number'); ?></li>
+       <li><label>Type</label><?php echo $f->select_field_from_array('receipt_type', ar_receipt_header::$receipt_type_a, $$class->receipt_type,'receipt_type'); ?></li>
        <li><label>BU Name(1)</label><?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?></li>
        <li><label>Ledger Name(2)</label><?php echo form::select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', $readonly1, '', '', 1); ?></li>
-       <li><label>Currency(3)</label><?php echo form::select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'currency', $readonly1, '', '', 1); ?></li>
        <li><label>Period Name(4)</label><?php
         if (!empty($period_name_stmt)) {
          echo $period_name_stmt;
@@ -43,11 +43,12 @@
     <div id="tabsHeader-2" class="tabContent">
      <div> 
       <ul class="column header_field">
-       <li><label>Currency</label><?php echo form::select_field_from_object('document_currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->document_currency, 'document_currency', $readonly1, '', '', 1); ?>						 </li>
-       <li><label>Exchange Rate Type</label><?php $f->text_field_d('exchange_rate_type'); ?></li>
-       <li><label>Exchange Rate</label><?php $f->text_field_d('exchange_rate'); ?></li>
-       <li><label>Header Amount</label><?php form::number_field_dm('header_amount'); ?></li>
-       <li><label>Journal Header Id</label><?php $f->text_field_d('gl_journal_header_id'); ?></li>
+       <li><label>Currency</label><?php echo form::select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'doc_currency', $readonly1, '', '', 1); ?></li>
+       <li><label>Doc Currency</label><?php echo form::select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->doc_currency, 'doc_currency', '', '', '', 1); ?>						 </li>
+       <li><label>Exchange Rate Type</label><?php echo $f->select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
+       <li><label>Exchange Rate</label><?php $f->text_field_d('exchange_rate'); ?>              </li>
+       <li><label>Header Amount</label><?php form::number_field_d('header_amount'); ?></li>
+       <li><label>Journal Header Id</label><?php $f->text_field_dr('gl_journal_header_id'); ?></li>
       </ul>
      </div>
     </div>
@@ -100,7 +101,7 @@
 </div>
 
 <div id="form_line" class="form_line"><span class="heading">Receipt Lines</span>
- <form action=""  method="post" id="po_site"  name="ar_receipt_line">
+ <form action=""  method="post" id="ar_receipt_line"  name="ar_receipt_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1">Basic</a></li>
@@ -115,12 +116,14 @@
         <th>Action</th>
         <th>Line Id</th>
         <th>Line#</th>
-        <th>Transaction Id</th>
-        <th>Transaction Number</th>
+        <th>Trnx Id</th>
+        <th>Trnx Number</th>
         <th>Receipt Amount</th>
+        <th>Exchange Rate</th>
+        <th>GL Amount</th>
         <th>Total Amount</th>
-        <th>Cum Receipt Amount</th>
-        <th>Remaining Amount</th>
+        <th>Cumulative Receipt</th>
+        <th>Remaining</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -130,13 +133,10 @@
         $f->readonly2 = !empty($ar_receipt_line->ar_receipt_line_id) ? true : false;
         ?>         
         <tr class="ar_receipt_line<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($ar_receipt_line->line_number); ?>"></li>           
-           <li><?php echo form::hidden_field('ar_receipt_header_id', $ar_receipt_header->ar_receipt_header_id); ?></li>
-          </ul>
+         <td>
+          <?php
+          echo ino_inline_action($$class_second->ar_receipt_line_id, array('ar_receipt_header_id' => $$class->ar_receipt_header_id));
+          ?>
          </td>
          <td><?php form::text_field_wid2sr('ar_receipt_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
@@ -144,8 +144,10 @@
          <td><?php $f->text_field_wid2('transaction_number', 'select_transaction_number'); ?>
           <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_transaction_number select_popup clickable"></td>
          <td><?php !empty($$class_second->ar_receipt_line_id) ? form::number_field_wid2sr('amount') : $f->text_field_wid2s('amount'); ?></td>
-         <td><?php $f->text_field_wid2r('invoice_amount'); ?></td>
-         <td><?php $f->text_field_wid2r('receipt_amount'); ?></td>
+         <td><?php !empty($$class_second->ar_receipt_line_id) ? form::number_field_wid2sr('exchange_rate') : $f->text_field_wid2s('exchange_rate'); ?></td>
+          <td><?php !empty($$class_second->ar_receipt_line_id) ? form::number_field_wid2sr('gl_amount') : $f->text_field_wid2s('gl_amount'); ?></td>
+         <td><?php $f->text_field_wid2sr('invoice_amount'); ?></td>
+         <td><?php $f->text_field_wid2sr('receipt_amount'); ?></td>
          <td><?php $f->text_field_wid2r('remaining_amount'); ?></td>
         </tr>
         <?php

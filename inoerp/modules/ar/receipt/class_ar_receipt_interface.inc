@@ -19,7 +19,7 @@ class ar_receipt_interface extends dbObject {
 		 'to_bank_header_id',
 		 'amount',
 		 'currency',
-		 'document_currency',
+		 'doc_currency',
 		 'to_bank_line_id',
 		 'exchange_rate_type',
 		 'exchange_rate',
@@ -74,7 +74,7 @@ class ar_receipt_interface extends dbObject {
 		 'approval_status',
 		 'receipt_status',
 		 'currency',
-		 'document_currency',
+		 'doc_currency',
  ];
  public $requiredField = [
 		 'bu_org_id',
@@ -119,7 +119,7 @@ class ar_receipt_interface extends dbObject {
  public $to_bank_header_id;
  public $amount;
  public $currency;
- public $document_currency;
+ public $doc_currency;
  public $to_bank_line_id;
  public $exchange_rate_type;
  public $exchange_rate;

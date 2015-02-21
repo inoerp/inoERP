@@ -212,7 +212,7 @@
      $path = new path;
      $path->parent_id = 62;
      $path->name = $this->content_type;
-     $path->value = "extensions/content/content.php?content_type=" . $this->content_type;
+     $path->path_link = "extensions/content/content.php?content_type=" . $this->content_type;
      $path->description = "Create & Update" . $this->content_type;
      $path->module = 14;
      $path->primary = 0;

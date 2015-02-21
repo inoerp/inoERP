@@ -3,6 +3,10 @@ if (!empty($non_db_content_type)) {
  include_once 'nondb_content_template.inc';
  return;
 }
+if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form') ) {
+ include_once 'form_content_template.inc';
+ return;
+}
 ?>
 <div class="container">
  <div class="row">
@@ -111,6 +115,5 @@ if (!empty($non_db_content_type)) {
   </div>
  </div>
 </div>
-
 <?php include_template('footer.inc') ?>
 

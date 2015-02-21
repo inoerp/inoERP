@@ -68,7 +68,7 @@
      <div id="tabsHeader-3" class="tabContent">
       <div class="left_half shipto address_details">
        <ul class="column four_column">
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
+        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
           Ship To Site Id : </label><?php $f->text_field_d('ship_to_id', 'address_id site_address_id'); ?>
         </li>
         <li><label>Address Name : </label><?php $f->text_field_dr('ship_to_address_name', 'address_name'); ?></li>
@@ -79,9 +79,9 @@
       </div> 
       <div class="right_half billto address_details">
        <ul class="column four_column">
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
+        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
           Bill To Site Id :</label>
-<?php $f->text_field_d('bill_to_id', 'address_id site_address_id'); ?>
+<?php $f->text_field_d('bill_to_id', 'address_id  site_address_id'); ?>
         </li>
         <li><label>Address Name :</label><?php $f->text_field_dr('bill_to_address_name', 'address_name'); ?> </li>
         <li><label>Address :</label> <?php $f->text_field_dr('bill_to_address', 'address'); ?></li>
@@ -239,7 +239,7 @@
           <td><?php echo $f->date_fieldAnyDay('price_date', $$class_second->price_date, 'copyValue') ?></td>
           <td><?php echo $f->number_field('unit_price', $$class_second->unit_price); ?></td>
           <td><?php echo $f->number_field('line_price', $$class_second->line_price); ?></td>
-          <td><?php echo $f->select_field_from_object('tax_code_id', mdm_tax_code::find_all_inTax_by_bu_org_id($$class->bu_org_id), 'mdm_tax_code_id', 'tax_code', $$class_second->tax_code_id, '', 'input_tax medium') ?></td>
+          <td><?php echo $f->select_field_from_object('tax_code_id', mdm_tax_code::find_all_inTax_by_bu_org_id($$class->bu_org_id), 'mdm_tax_code_id', 'tax_code', $$class_second->tax_code_id, '', 'input_tax medium', '', $readonly1, '', '', '', 'percentage') ?></td>
           <td><?php form::number_field_wid2('tax_amount'); ?></td>
           <td><?php form::number_field_wid2('gl_line_price'); ?></td>
           <td><?php form::number_field_wid2('gl_tax_amount'); ?></td>

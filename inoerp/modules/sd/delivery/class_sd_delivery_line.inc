@@ -197,7 +197,7 @@ class sd_delivery_line extends dbObject {
   $ar_ti->transaction_type = $sd_doc->ar_transaction_type;
   $ar_ti->ar_customer_id = $soh->ar_customer_id;
   $ar_ti->ar_customer_site_id = $soh->ar_customer_site_id;
-  $ar_ti->currency = $soh->document_currency;
+  $ar_ti->currency = $soh->doc_currency;
   $ar_ti->payment_term_id = $soh->payment_term_id;
   $ar_tp = new ar_transaction_type();
   $ar_tp->findBy_id($ar_ti->transaction_type);
@@ -210,6 +210,7 @@ class sd_delivery_line extends dbObject {
   $sol->findBy_id($this->sd_so_line_id);
   $ar_ti->inv_unit_price = $sol->unit_price;
   $ar_ti->inv_line_price = $ar_ti->inv_line_quantity * $ar_ti->inv_unit_price;
+  $ar_ti->gl_inv_line_price = $ar_ti->inv_line_price * $soh->exchange_rate;
   $ar_ti->tax_code_id = $sol->tax_code_id;
   $ar_ti->item_description = $sol->item_description;
   $mm_tax = new mdm_tax_code();
@@ -219,6 +220,7 @@ class sd_delivery_line extends dbObject {
   } else if (!empty($mm_tax->tax_amount)) {
    $ar_ti->tax_amount = $mm_tax->tax_amount;
   }
+  $ar_ti->gl_tax_amount = $ar_ti->tax_amount * $ar_ti->inv_unit_price ;
   $ar_ti->line_type = $sol->line_type;
   $ar_ti->line_description = $sol->line_description;
   $ar_ti->uom_id = $sol->uom_id;

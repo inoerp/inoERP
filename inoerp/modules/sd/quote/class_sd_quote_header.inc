@@ -58,7 +58,7 @@ class sd_quote_header extends dbObject {
   'price_list_header_id',
   'header_amount',
   'tax_amount',
-  'document_currency',
+  'doc_currency',
   'payment_term_id',
   'payment_term_date',
   'agreement_start_date',
@@ -82,7 +82,7 @@ class sd_quote_header extends dbObject {
   'ar_customer_id',
   'ship_to_id',
   'bill_to_id',
-  'document_currency',
+  'doc_currency',
   'payment_term_id'
  ];
  public $addressField = [
@@ -151,7 +151,7 @@ class sd_quote_header extends dbObject {
  public $price_list_header_id;
  public $header_amount;
  public $tax_amount;
- public $document_currency;
+ public $doc_currency;
  public $payment_term_id;
  public $payment_term_date;
  public $agreement_start_date;

@@ -98,6 +98,12 @@ class search extends dbObject {
 
  public function search_result_op() {
   $drop_down_icon = ino_search_dropDownSettings();
+  if (!empty($_GET['window_type'])) {
+   $window_type = '&window_type=' . $_GET['window_type'][0];
+  } else {
+   $window_type = '';
+  }
+  echo $window_type;
   if (empty($this->_view_path)) {
    $this->_view_path = 'form.php?class_name=' . $this->_searching_class;
   }
@@ -145,7 +151,7 @@ class search extends dbObject {
        if ($this->_searching_class == 'comment') {
         $search_result .= $this->_readPath_forComments($record->{$this->primary_column_s});
        } else if ($this->_searching_class == 'content') {
-        $search_result .= "&nbsp;&nbsp;<a class=\"view link_class_green\" href=\"content.php?mode=2&content_type_id=" . $record->content_type_id . "&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_view_action_meassge . '</a> ';
+        $search_result .= "&nbsp;&nbsp;<a class=\"view link_class_green\" href=\"content.php?" . $window_type . "mode=2&content_type_id=" . $record->content_type_id . "&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_view_action_meassge . '</a> ';
        } else {
         $search_result .= "&nbsp;&nbsp;<a class=\"view link_class_green\" href=\"$this->_view_path&mode=2&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_view_action_meassge . '</a>';
        }
@@ -159,7 +165,7 @@ class search extends dbObject {
       if ($this->_show_update_path) {
        if ($this->_searching_class == 'content') {
         $search_result .= "&nbsp;&nbsp;<a class=\"update link_class_green\" "
-         . "href=\"content.php?mode=9&content_type_id=" . $record->content_type_id . "&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_update_action_meassge . '</a> ';
+         . "href=\"content.php?mode=9" . $window_type . "&content_type_id=" . $record->content_type_id . "&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_update_action_meassge . '</a> ';
        } else {
         $search_result .= "&nbsp;&nbsp;<a class=\"update link_class_green\" "
          . "href=\"$this->_update_path&mode=9&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_update_action_meassge . '</a> ';
@@ -213,6 +219,11 @@ class search extends dbObject {
   global $f;
   $function_name = !empty($_GET['function_name']) ? $_GET['function_name'] : '';
   $report_name = !empty($_GET['report_name']) ? $_GET['report_name'] : '';
+    if (!empty($_GET['window_type'])) {
+   $window_type = $_GET['window_type'];
+  } else {
+   $window_type = '';
+  }
   $class = is_array($this->_searching_class) ? $this->_searching_class[0] : $this->_searching_class;
   if (property_exists($class, 'field_a')) {
    $search_array = $class_obj->field_a;
@@ -380,7 +391,7 @@ class search extends dbObject {
 
 
   $reset_link = "$this->_form_post_link.php?class_name=$class&mode=$this->_search_mode&show_block=$this->_show_block";
-
+  $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"window_type\" value=\"$window_type\" class=\"search window_type\" ></li>";
   $search_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"reset_class_name\" value=\"Reset All\" class=\"reset button\" ></li>";
   $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"function_name\" value=\"$function_name\" class=\"search function_name\" ></li>";
   $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"report_name\" value=\"$report_name\" class=\"search report_name\" ></li>";

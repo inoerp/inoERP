@@ -892,7 +892,7 @@ function getExchangeRate(options) {
        if (value && value != 'false') {
         var valFixed = (+value).toFixed(7);
         $('#exchange_rate').val(valFixed);
-       }else{
+       } else {
         $('#exchange_rate').val('');
        }
        break;
@@ -1113,7 +1113,7 @@ function getCustomerSiteDetails(jsonUrl, customer_site_id) {
      break;
 
     case 'currency':
-      $('#content').find('.doc_currency').val(value);
+     $('#content').find('.doc_currency').val(value);
      break;
    }
 
@@ -2190,7 +2190,7 @@ function getMultiSelectResult(options) {
  }).done(function (result) {
   var allButton = $(result).filter('div#header_top_container').html();
   var newContent = $(result).find('div#searchResult').html();
-  
+
   if (newContent) {
    $('#header_top_container').replaceWith('<div id="header_top_container">' + allButton + '</div>');
   }
@@ -3182,17 +3182,20 @@ $(document).ready(function () {
   statusbar: false
  });
 
- //Popup for selecting address
+ //Popup for selecting address address_id for normal popup & address_popup for popup where address can be created
  $('body').on('click', '.address_id.select_popup', function (e) {
   e.preventDefault();
   var rowClass = $(this).parent().find('input').first().prop('class');
   localStorage.setItem("field_class", rowClass);
-  void window.open('form.php?class_name=address&mode=9&window_type=popup', '_blank',
+  var DivClass = $(this).closest('div').prop('class');
+  localStorage.removeItem("addressPopupDivClass");
+  localStorage.setItem("addressPopupDivClass", DivClass);
+  void window.open('select.php?class_name=address&mode=2', '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
   return false;
  });
 
-//diable/enable auto complete
+ //diable/enable auto complete
  $('#content').on('click', '.disable_autocomplete', function () {
   $(this).parent().siblings().each(function () {
    $(this).autocomplete({
@@ -3633,23 +3636,6 @@ $(document).ready(function () {
  }
  fu.json_url = homeUrl + 'extensions/file/upload.php';
  fu.fileUpload();
-
- //popu for selecting AR Transaction
- $('body').on('click', '.select_transaction_number.select_popup', function () {
-  if ($(this).closest('tr').find('.ar_receipt_line_id').first().val()) {
-   alert('You are not allowed to select a new transaction\nCancell or Viod the payment if required');
-   return;
-  }
-  var rowClass = $(this).closest('tr').prop('class');
-  var fieldClass = $(this).closest('td').find('.select_transaction_number').prop('class');
-  localStorage.setItem("row_class", rowClass);
-  localStorage.setItem("field_class", fieldClass);
-  var openUrl = 'select.php?class_name=ar_unpaid_transaction_v';
-  openUrl += '&ar_customer_id=' + $('#ar_customer_id').val();
-  localStorage.setItem("reset_link_ofSelect", openUrl);
-  void window.open(openUrl, '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
 
  //bank account popup
  $("body").on("click", '.mdm_bank_account_id.select_popup', function () {

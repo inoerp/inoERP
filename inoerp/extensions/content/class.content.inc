@@ -92,7 +92,7 @@ class content extends dbObject {
  ];
  public $pageTitle = " Simple & Effective Enterprise Management System ";
  public $search = [
-  '_update_path' => 'content.php?class_name=content',
+  '_update_path' => 'content.php?window_type=form&class_name=content',
   '_show_update_path' => 1,
   '_update_action_meassge' => 'Update',
   '_view_path' => 'content.php?class_name=content',

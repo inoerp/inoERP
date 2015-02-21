@@ -18,6 +18,7 @@ class ar_transaction_detail extends dbObject {
 		 'account_type',
 		 'description',
 		 'amount',
+  'gl_amount',
 		 'detail_ac_id',
 		 'status',
 		 'reference_type',
@@ -51,8 +52,10 @@ class ar_transaction_detail extends dbObject {
 		 'ar_transaction_line_id',
 		 'ar_transaction_header_id'
  ];
- public static $otherField_array = [
- ];
+  public $numberField = [
+   'amount',
+   'gl_amount'
+  ];
  public $ar_transaction_detail_id;
  public $ar_transaction_line_id;
  public $ar_transaction_header_id;
@@ -60,6 +63,7 @@ class ar_transaction_detail extends dbObject {
  public $account_type;
  public $description;
  public $amount;
+ public $gl_amount;
  public $detail_ac_id;
  public $status;
  public $reference_type;

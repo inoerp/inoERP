@@ -55,7 +55,7 @@
    'CREATE_ACCOUNT' => 'Create Accounting',
    'MATCH_PO' => 'Match Purchase Order',
    'APPLY_TRANSACTION' => 'Apply Transaction',
-   'PAID' => 'Make Payment',
+   'MAKE_PAYMENT' => 'Make Payment',
    'VIEW_JOURNAL' => 'View Journal',
    'CANCEL' => 'Cancel Transaction',
   ];

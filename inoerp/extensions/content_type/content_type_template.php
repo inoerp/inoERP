@@ -111,7 +111,7 @@
         <tr class="content_type<?php echo $count ?>">
          <td>
           <?php
-          $content_type_reference_id = !empty($content_type_reference) ?  $$class_third->content_type_reference_id : '';
+          $content_type_reference_id = !empty($content_type_reference) ? $$class_third->content_type_reference_id : '';
           echo ino_inline_action($$class_second->Field, array('content_type_reference_id' => $content_type_reference_id));
           ?>
          </td>
@@ -150,6 +150,7 @@
   <li class="primary_column_id" data-primary_column_id="content_type_id" ></li>
   <li class="form_header_id" data-form_header_id="content_type_header" ></li>
   <li class="lineClassName" data-lineClassName="content_type" ></li>
+  <li class="no_headerid_check" data-no_headerid_check="9" ></li>
  </ul>
  <ul id="js_contextMenu_data">
   <li class="docHedaderId" data-docHedaderId="content_type_id" ></li>

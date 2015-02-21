@@ -1388,3 +1388,13 @@ ul.column.two_column_form li {
         margin-bottom: 20px;
         width: 45% !important;
 }
+
+#content_data div{
+        margin-bottom: 20px;
+        width: 600px;
+}
+
+#content_data div label{ 
+          width: 100px;
+        text-align: right;
+}

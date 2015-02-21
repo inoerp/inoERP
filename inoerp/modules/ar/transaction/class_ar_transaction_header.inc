@@ -44,6 +44,15 @@ class ar_transaction_header extends dbObject {
   'COMPLETE' => 'Complete',
   'CLOSED' => 'Closed'
  ];
+ 
+ public $action_a = [
+  'CREATE_RECEIPT' => 'Create Receipt',
+  'CREATE_ACCOUNT' => 'Create Accounting',
+  'VIEW_JOURNAL' => 'View Journal',
+  'CREDIT' => 'Credit Transaction',
+  'CANCEL' => 'Cancel Transaction',
+  
+ ];
  public $account = [
   'receivable_ac_id'
  ];
@@ -63,7 +72,7 @@ class ar_transaction_header extends dbObject {
   'receipt_amount',
   'tax_amount',
   'currency',
-  'document_currency',
+  'doc_currency',
   'receivable_ac_id',
   'payment_term_id',
   'exchange_rate_type',
@@ -123,7 +132,7 @@ class ar_transaction_header extends dbObject {
   'ledger_id',
   'period_id',
   'document_owner',
-  'document_currency',
+  'doc_currency',
   'currency',
   'gl_journal_header_id'
  ];
@@ -183,7 +192,7 @@ class ar_transaction_header extends dbObject {
  public $tax_amount;
  public $receipt_amount;
  public $currency;
- public $document_currency;
+ public $doc_currency;
  public $payment_term_id;
  public $receivable_ac_id;
  public $exchange_rate_type;
@@ -325,7 +334,7 @@ class ar_transaction_header extends dbObject {
   $gjh = new gl_journal_header;
   $gjh->ledger_id = $this->ledger_id;
   $gjh->status = 'ENTERED';
-  $gjh->currency = $this->document_currency;
+  $gjh->currency = $this->doc_currency;
   $gjh->period_id = $this->period_id;
   $gjh->journal_source = self::$module;
   $gjh->journal_category = 'AR_' . $this->transaction_class;
@@ -618,7 +627,7 @@ class ar_transaction_header extends dbObject {
   $this->om_so_number = $om_so_i->om_so_number;
   $this->ar_customer_id = $om_so_i->ar_customer_id;
   $this->ar_customer_site_id = $om_so_i->ar_customer_site_id;
-  $this->document_currency = $om_so_i->currency;
+  $this->doc_currency = $om_so_i->currency;
   $this->payment_term_id = $om_so_i->payment_term_id;
  }
 

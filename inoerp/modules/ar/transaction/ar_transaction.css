@@ -1,9 +1,8 @@
-.class_detail_form{
-margin-top: 25px;
-  margin-left: -700px;
-
+#ar_transaction_line .class_detail_form{
+margin-left: -810px;
 }
 
-.form_detail_data_fs{
+
+#ar_transaction_line .form_detail_data_fs{
   width: 900px;
 }

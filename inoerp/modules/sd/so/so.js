@@ -37,7 +37,7 @@ setValFromSelectPage.prototype.setVal = function () {
 
  var rowClass = '.' + localStorage.getItem("row_class");
  var fieldClass = '.' + localStorage.getItem("field_class");
- var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass");
+ var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass").replace(/\s+/g,'.');
  addressPopupDivClass = addressPopupDivClass.replace(/\s+/g, '.');
  if (address_id) {
   $('#form_header').find(addressPopupDivClass).find('.address_id').val(address_id);
@@ -219,7 +219,7 @@ $(document).ready(function () {
            price_date: price_date,
            price_list_header_id: price_list_header_id})).then(function () {
            $('body').trigger('setLinePrice', [rowClass]);
-           $('body').trigger('calculateTaxAmount', [rowClass]);
+           $('body').trigger('calculateTax', [rowClass]);
            $('body').trigger('getGlPrice', [rowClass]);
            $('body').trigger('calculateHeaderAmount');
           });
@@ -234,34 +234,21 @@ $(document).ready(function () {
  });
 
 //calculate the tax amount
- $('body').on('calculateTaxAmount', function (e, trClass) {
+ $('body').on('calculateTax', function (e, trClass) {
   var linePrice = +$('#content').find(trClass).find('.line_price').val();
-  var taxCodeVal = 0;
-  if ($('#content').find(trClass).find('.tax_code_value').val()) {
-   taxCodeVal = $('#content').find(trClass).find('.tax_code_value').val();
-  } else if ($('#content').find(trClass).find('.output_tax').find('option:selected').prop('class')) {
-   taxCodeVal = $('#content').find(trClass).find('.output_tax').find('option:selected').prop('class');
-  }
-
-  if (taxCodeVal.length >= 3) {
-   var taxCodeVal_a = taxCodeVal.split('_');
-  } else {
-   return;
-  }
   var taxAmount = 0;
   var taxPercentage = 0;
-  if (taxCodeVal_a[0] === 'p') {
-   taxPercentage = +taxCodeVal_a[1];
-  } else if (taxCodeVal_a[0] === 'a') {
-   taxAmount = +taxCodeVal_a[1];
-  }
   var taxValue = 0;
+
+  if ($('#content').find(trClass).find('.tax_code_id').val()) {
+   taxPercentage = $('#content').find(trClass).find('.tax_code_id').find('option:selected').data('percentage');
+   taxAmount = $('#content').find(trClass).find('.tax_code_id').find('option:selected').data('amount');
+  }
   if (taxPercentage) {
    taxValue = ((taxPercentage * linePrice) / 100).toFixed(5);
   } else if (taxAmount) {
    taxValue = taxAmount.toFixed(5);
   }
-
   $('#content').find(trClass).find('.tax_amount').val(taxValue);
  });
 
@@ -281,11 +268,11 @@ $(document).ready(function () {
  });
 
  //calculate the tax amount, line prices & header amount
- $('#content').off('blur', '.line_quantity, .unit_price, .line_price')
-         .on('blur', '.line_quantity, .unit_price, .line_price', function () {
+ $('body').off('blur', '.line_quantity, .unit_price, .line_price, .tax_code_id')
+         .on('blur', '.line_quantity, .unit_price, .line_price, .tax_code_id', function () {
           var trClass = '.' + $(this).closest('tr').prop('class');
           $('body').trigger('setLinePrice', [trClass]);
-          $('body').trigger('calculateTaxAmount', [trClass]);
+          $('body').trigger('calculateTax', [trClass]);
           $('body').trigger('getGlPrice', [trClass]);
           $('body').trigger('calculateHeaderAmount');
          });

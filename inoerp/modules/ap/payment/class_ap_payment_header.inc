@@ -188,6 +188,7 @@
   public $multi_action_class_pc_value;
   public $payment_action;
   private $_max_line_num;
+  public $lines_from_transaction_header = false;
 
   private function _update_journalHeaderId() {
    $apth = new ap_payment_header();
@@ -587,19 +588,23 @@
    }
   }
 
-  public function get_details_from_po_header() {
-   if (empty($this->po_header_id)) {
+  public function get_details_from_ap_transaction_header() {
+   if (empty($this->ap_transaction_header_id)) {
     return false;
    }
-   $po = new po_header();
-   $po_i = $po->findBy_id($this->po_header_id);
-   $this->bu_org_id = $po_i->bu_org_id;
-   $this->transaction_type = 'INVOICE';
-   $this->po_number = $po_i->po_number;
-   $this->supplier_id = $po_i->supplier_id;
-   $this->supplier_site_id = $po_i->supplier_site_id;
-   $this->doc_currency = $po_i->currency;
-   $this->payment_term_id = $po_i->payment_term_id;
+   $tranx_header_c = new ap_transaction_header();
+   $tranx_header = $tranx_header_c->findBy_id($this->ap_transaction_header_id);
+   $this->bu_org_id = $tranx_header->bu_org_id;
+   $this->payment_type = 'MANUAL';
+   $this->supplier_id = $tranx_header->supplier_id;
+   $this->supplier_site_id = $tranx_header->supplier_site_id;
+   $this->doc_currency = $tranx_header->doc_currency;
+   $this->currency = $tranx_header->currency;
+   $this->exchange_rate_type = $tranx_header->exchange_rate_type;
+   $this->exchange_rate = $tranx_header->exchange_rate;
+   $this->payment_term_id = $tranx_header->payment_term_id;
+   $this->header_amount = $tranx_header->header_amount;
+   $this->lines_from_transaction_header = 9;
   }
 
   public function multi_select_input_fields() {

@@ -38,7 +38,7 @@
         }
         ?>
        </li>
-       <li><label>Transaction Type(5)</label>
+       <li><label>Payment Type(5)</label>
         <?php echo $f->select_field_from_object('payment_type', ap_payment_header::payment_types(), 'option_line_code', 'option_line_value', $ap_payment_header->payment_type, 'payment_type', '', 1, $readonly1); ?>
        </li>
        <li><label>Document Date</label>  <?php echo $f->date_fieldFromToday_d('document_date', $$class->document_date, 1) ?>              </li>
@@ -140,9 +140,11 @@
         <th>Seq#</th>
         <th>Line Id</th>
         <th>Line#</th>
-        <th>Transaction Id</th>
-        <th>Transaction Number</th>
+        <th>Trnx Id</th>
+        <th>Trnx Number</th>
         <th>Payment Amount</th>
+        <th>Rate</th>
+        <th>GL Amount</th>
         <th>Total Amount</th>
         <th>Paid</th>
         <th>Remaining</th>
@@ -167,7 +169,9 @@
          <td><?php $f->text_field_wid2sr('ap_transaction_header_id'); ?></td>
          <td><?php $f->text_field_wid2('transaction_number', 'select_transaction_number'); ?>
           <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_ap_transaction_number select_popup"></td>
-         <td><?php !empty($$class_second->ap_payment_line_id) ? form::number_field_d2sr('amount') : $f->text_field_d2s('amount'); ?></td>
+         <td><?php !empty($$class_second->ap_payment_line_id) ? form::number_field_wid2sr('amount') : form::number_field_wid2s('amount'); ?></td>
+         <td><?php !empty($$class_second->ap_payment_line_id) ? form::number_field_wid2sr('exchange_rate') : form::number_field_wid2s('exchange_rate'); ?></td>
+         <td><?php !empty($$class_second->ap_payment_line_id) ? form::number_field_wid2sr('gl_amount') : form::number_field_wid2s('gl_amount'); ?></td>
          <td><?php $f->text_field_wid2r('invoice_amount'); ?></td>
          <td><?php $f->text_field_wid2sr('paid_amount'); ?></td>
          <td><?php $f->text_field_wid2sr('remaining_amount'); ?></td>

@@ -1165,23 +1165,32 @@ mandatoryFieldMain.prototype.mandatoryHeader = function ()
 {
  $('body').off("click", '#form_line').on("click", '#form_line', function () {
  var header_id = $('ul#js_saving_data').find('.primary_column_id').data('primary_column_id');
- if(header_id){
-   var header_id_h = '#' + header_id;
- var header_id_c = '.' + header_id;
-  if (!$(header_id_h).val()) {
-   alert('No header Id Found! : First enter/save header details');
-  } else {
-   var headerIdVal = $(header_id_h).val();
-   if (!$(this).find(header_id_c).val()) {
-    $(this).find(header_id_c).val(headerIdVal);
-   }
-  }
+ var no_headerid_check = $('ul#js_saving_data').find('.no_headerid_check').data('no_headerid_check');
+ var lineClassName = $('ul#js_saving_data').find('.lineClassName').data('lineclassname');
+ if(no_headerid_check == 9 ){
+  return;
  }
+ if(!lineClassName || lineClassName =='undefined'){
+  return;
+ }
+// if(header_id){
+//   var header_id_h = '#' + header_id;
+// var header_id_c = '.' + header_id;
+//  if (!$(header_id_h).val()) {
+//   alert('No header Id Found! : First enter/save header details');
+//  } else {
+//   var headerIdVal = $(header_id_h).val();
+//   if (!$(this).find(header_id_c).val()) {
+//    $(this).find(header_id_c).val(headerIdVal);
+//   }
+//  }
+// }
 
  });
 };
 mandatoryFieldMain.prototype.mandatoryField = function ()
 {
+ return true;
  var form_area = this.form_area;
  var form_area_h = '#' + form_area;
  var mandatory_fields = this.mandatory_fields;

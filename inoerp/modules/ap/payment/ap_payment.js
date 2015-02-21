@@ -1,5 +1,5 @@
 function setValFromSelectPage(ap_payment_header_id, ap_transaction_header_id, transaction_number,
-        header_amount, supplier_id, supplier_number, supplier_name, paid_amount, supplier_site_id) {
+        header_amount, supplier_id, supplier_number, supplier_name, paid_amount, supplier_site_id, exchange_rate) {
  this.ap_payment_header_id = ap_payment_header_id;
  this.ap_transaction_header_id = ap_transaction_header_id;
  this.header_amount = header_amount;
@@ -9,6 +9,7 @@ function setValFromSelectPage(ap_payment_header_id, ap_transaction_header_id, tr
  this.supplier_number = supplier_number;
  this.supplier_name = supplier_name;
  this.supplier_site_id = supplier_site_id;
+ this.exchange_rate = exchange_rate;
 }
 
 setValFromSelectPage.prototype.setVal = function () {
@@ -45,6 +46,7 @@ setValFromSelectPage.prototype.setVal = function () {
   $('#content').find(rowClass).find('.ap_transaction_header_id').first().val(ap_transaction_header_id);
   $('#content').find(rowClass).find('.invoice_amount').first().val(header_amount);
   $('#content').find(rowClass).find('.paid_amount').first().val(paid_amount);
+  $('#content').find(rowClass).find('.exchange_rate').first().val(this.exchange_rate);
  }
  localStorage.removeItem("row_class");
  localStorage.removeItem("row_class");
@@ -166,10 +168,35 @@ alert('Readonly Field!');
   getBUDetails($('#bu_org_id').val());
  }
 
- $('#content').on('blur', '#currency, #doc_currency, #exchange_rate_type, #exchange_rate', function () {
+ $('#content').off('blur', '#currency, #doc_currency, #exchange_rate_type, #exchange_rate')
+         .on('blur', '#currency, #doc_currency, #exchange_rate_type, #exchange_rate', function () {
   getExchangeRate();
  });
 
+
+$('body').on('blur','.amount', function(){
+var rate = +$(this).closest('tr').find('.exchange_rate').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1");
+var gl_amount =  ( +$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1")) *   rate;
+  $(this).closest('tr').find('.gl_amount').val(gl_amount);
+});
+
+//total header & tax amount
+ $('body').on('cash_calculateHeaderAmount', function () {
+  var header_amount = 0;
+  $('#form_line').find('.amount ').each(function () {
+   header_amount += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+  });
+  $('#header_amount').val(header_amount);
+ });
+ 
+//total header & tax amount
+ $('body').off('cash_calculateHeaderAmount').on('cash_calculateHeaderAmount', function () {
+  var header_amount = 0;
+  $('#form_line').find('.amount ').each(function () {
+   header_amount += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+  });
+  $('#header_amount').val(header_amount);
+ });
 
 //all actions
 

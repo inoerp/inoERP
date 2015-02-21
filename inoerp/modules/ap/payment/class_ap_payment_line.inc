@@ -15,7 +15,8 @@
    'line_number',
    'amount',
    'line_description',
-   'ef_id',
+   'gl_amount',
+   'exchange_rate',
    'status',
    'line_source',
    'reference_type',
@@ -33,7 +34,9 @@
    'line_number'
   ];
   public $numberField = [
-   'amount'
+   'amount',
+   'exchange_rate',
+   'gl_amount'
   ];
   public $fields_inForm_notInDataBase = [
    "transaction_number",
@@ -50,7 +53,8 @@
   public $line_number;
   public $amount;
   public $line_description;
-  public $ef_id;
+  public $gl_amount;
+  public $exchange_rate;
   public $status;
   public $line_source;
   public $reference_type;

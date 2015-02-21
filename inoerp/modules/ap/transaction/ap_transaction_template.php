@@ -11,65 +11,51 @@
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
       <ul class="column header_field">
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ap_transaction_header_id select_popup">
-         Transaction Id</label>
-        <?php $f->text_field_ds('ap_transaction_header_id'); ?>
+         Transaction Id</label><?php $f->text_field_dsr('ap_transaction_header_id'); ?>
         <a name="show" href="form.php?class_name=ap_transaction_header&<?php echo "mode=$mode"; ?>" class="show document_id ap_transaction_header_id">
          <i class="fa fa-refresh"></i></a> 
        </li>
-       <li><label>Transaction No</label>  <?php $f->text_field_d('transaction_number', 'primary_column2'); ?> </li>
-       <li><label>BU Name(1)</label>
-        <?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>
-       </li>
-       <li><label>Ledger Name(2)</label>
-        <?php echo form::select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', $readonly1, '', '', 1); ?>
-       </li>
-       <li><label>Period Name(4)</label>
-        <?php
+       <li><label>Transaction No</label><?php $f->text_field_d('transaction_number', 'primary_column2'); ?> </li>
+       <li><label>BU Name(1)</label><?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>       </li>
+       <li><label>Ledger Name(2)</label><?php echo form::select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', $readonly1, '', '', 1); ?>       </li>
+       <li><label>Period Name(4)</label><?php
         if (!empty($period_name_stmt)) {
          echo $period_name_stmt;
         } else {
          $f->text_field_d('period_id');
         }
-        ?>
-       </li>
-       <li><label>Transaction Type(5)</label>
-        <?php echo $f->select_field_from_object('transaction_type', ap_transaction_header::transaction_types(), 'option_line_code', 'option_line_value', $ap_transaction_header->transaction_type, 'transaction_type', '', 1, $readonly1); ?>
-       </li>
-       <li><label>Document Date</label>  <?php echo $f->date_fieldFromToday_d('document_date', $$class->document_date, 1) ?>              </li>
-       <li><label>Document Number</label>   <?php echo $f->text_field_d('document_number') ?>      </li>
+        ?></li>
+       <li><label>Transaction Type(5)</label><?php echo $f->select_field_from_object('transaction_type', ap_transaction_header::transaction_types(), 'option_line_code', 'option_line_value', $ap_transaction_header->transaction_type, 'transaction_type', '', 1, $readonly1); ?>       </li>
+       <li><label>Document Date</label><?php echo $f->date_fieldFromToday_d('document_date', $$class->document_date, 1) ?>              </li>
+       <li><label>Document Number</label><?php echo $f->text_field_d('document_number') ?>      </li>
        <li><?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
         <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supplier_id select_popup clickable">
-         Supplier Name</label> 
-        <?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> </li>
-       <li><label class="auto_complete">Supplier Number : </label> <?php $f->text_field_d('supplier_number'); ?></li>
-       <li><label>Supplier Site</label>
-        <?php
+         Supplier Name</label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> </li>
+       <li><label class="auto_complete">Supplier Number</label><?php $f->text_field_d('supplier_number'); ?></li>
+       <li><label>Supplier Site</label><?php
         $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
         echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
         ?> </li>
-       <li><label>Doc Owner</label>   <?php $f->text_field_d('document_owner'); ?>    </li> 
-       <li><label>Doc Status</label>
-        <?php echo $f->select_field_from_array('transaction_status', ap_transaction_header::$transaction_status_a, $$class->transaction_status, 'transaction_status', 'dont_copy', '', '', $readonly); ?>
+       <li><label>Doc Owner</label><?php $f->text_field_d('document_owner'); ?>    </li> 
+       <li><label>Doc Status</label><?php echo $f->select_field_from_array('transaction_status', ap_transaction_header::$transaction_status_a, $$class->transaction_status, 'transaction_status', 'dont_copy', '', '', $readonly); ?>
        </li> 
-       <li><label>Description</label>      <?php $f->text_field_d('description'); ?>       </li> 
+       <li><label>Description</label><?php $f->text_field_d('description'); ?>       </li> 
       </ul>
-     </div>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div> 
       <ul class="column header_field">
        <li><label>Currency</label>
-       <?php echo $f->select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'currency', '', 1, 1); ?>
+        <?php echo $f->select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'currency', '', 1, 1); ?>
        </li>
        <li><label>Doc Currency</label>
         <?php echo form::select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->doc_currency, 'doc_currency', $readonly1, '', '', 1); ?>
        </li>
-       <li><label>Pay Group</label>               <?php $f->text_field_d('pay_group') ?>              </li>
+       <li><label>Pay Group</label><?php $f->text_field_d('pay_group') ?>              </li>
        <li><label>Exchange Rate Type</label><?php echo $f->select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
-       <li><label>Exchange Rate</label>               <?php $f->text_field_d('exchange_rate'); ?>              </li>
+       <li><label>Exchange Rate</label><?php $f->text_field_d('exchange_rate'); ?>              </li>
        <li><label>Header Amount</label> <?php echo $f->number_field('header_amount', $$class->header_amount, '15', 'header_amount'); ?> </li>
        <li><label>Tax Amount</label><?php echo $f->number_field('tax_amount', $$class->tax_amount, '15', 'tax_amount'); ?></li>
        <li><label>Paid Amount</label>               <?php echo $f->number_field('paid_amount', $$class->paid_amount, '', 'paid_amount', 'dont_copy', '', 1); ?>              </li>
@@ -141,13 +127,13 @@
  </form>
 </div>
 <div id="form_line" class="form_line"><span class="heading">Transaction Lines & Details </span>
- <form action=""  method="post" id="po_site"  name="ap_transaction_line">
+ <form action=""  method="post" id="ap_transaction_line"  name="ap_transaction_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1">Basic</a></li>
     <li><a href="#tabsLine-2">Other Info</a></li>
     <li><a href="#tabsLine-3">References</a></li>
-    <li><a href="#tabsLine-4">Notes</a></li>
+    <li><a href="#tabsLine-4">Actions</a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
@@ -163,11 +149,12 @@
         <th>Item Description</th>
         <th>UOM</th>
         <th>Quantity</th>
-        <th>Shipment Details</th>
+        <th>Accounting Details</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
+       $f = new inoform();
        $count = 0;
        foreach ($ap_transaction_line_object as $ap_transaction_line) {
         $f->readonly2 = !empty($ap_transaction_line->ap_transaction_line_id) ? true : false;
@@ -190,8 +177,8 @@
           <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
          <td><?php $f->text_field_wid2('item_description'); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', '', $readonly); ?></td>
-         <td><?php echo $f->number_field('inv_line_quantity', $$class_second->inv_line_quantity); ?></td>
-         <td class="add_detail_values"><img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+         <td><?php echo $f->number_field('inv_line_quantity', $$class_second->inv_line_quantity ,'','', '', '' , $readonly1); ?></td>
+         <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i>
           <!--</td></tr>-->	
           <?php
           $ap_transaction_line_id = $ap_transaction_line->ap_transaction_line_id;
@@ -226,6 +213,7 @@
                   <th>Account</th>
                   <th>Period</th>
                   <th>Amount</th>
+                  <th>GL Amount</th>
                   <th>Description</th>
                  </tr>
                 </thead>
@@ -250,6 +238,7 @@
                    <td><?php $f->ac_field_wid3m('detail_ac_id'); ?></td>
                    <td><?php $f->text_field_wid3s('period_id') ?></td>
                    <td><?php echo $f->number_field('amount', $$class_third->amount); ?></td>
+                   <td><?php echo $f->number_field('gl_amount', $$class_third->gl_amount); ?></td>
                    <td><?php $f->text_field_wid3('description'); ?></td>
                   </tr>
                   <?php
@@ -316,11 +305,10 @@
         <th>Line Amount</th>
         <th>Tax Code</th>
         <th>Tax Amount</th>
+        <th>GL Line Price</th>
+        <th>GL Tax Amount</th>
         <th>Line Description</th>
-        <th>Ref Key Name</th>
-        <th>Ref Key Value</th>
-        <th>View Ref Doc</th>
-        <th>Status</th>
+
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -332,13 +320,12 @@
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php echo $f->number_field('inv_unit_price', $$class_second->inv_unit_price); ?></td>
          <td><?php echo $f->number_field('inv_line_price', $$class_second->inv_line_price); ?></td>
-         <td><?php echo $f->select_field_from_object('tax_code_id', mdm_tax_code::find_all_inTax_by_bu_org_id($$class->bu_org_id), 'mdm_tax_code_id', 'tax_code', $$class_second->tax_code_id, '', 'input_tax medium') ?></td>
+         <td><?php echo $f->select_field_from_object('tax_code_id', mdm_tax_code::find_all_inTax_by_bu_org_id($$class->bu_org_id), 'mdm_tax_code_id', 'tax_code', $$class_second->tax_code_id, '', 'input_tax medium', '', $readonly1, '', '', '', 'percentage') ?></td>
          <td><?php echo $f->number_field('tax_amount', $$class_second->tax_amount); ?></td>
+         <td><?php form::number_field_wid2('gl_inv_line_price'); ?></td>
+         <td><?php form::number_field_wid2('gl_tax_amount'); ?></td>
          <td><?php $f->text_field_wid2('line_description'); ?></td>
-         <td><?php $f->text_field_d2('reference_key_name'); ?></td>
-         <td><?php $f->text_field_d2('reference_key_value'); ?></td>
-         <td><?php echo!empty($ref_doc_stmt) ? $ref_doc_stmt : '' ?></td>
-         <td><?php $f->text_field_wid2sr('status'); ?></td>
+
         </tr>
         <?php
         $count = $count + 1;
@@ -362,6 +349,10 @@
         <th>Project Line Id</th>
         <th>Trnx Header Id</th>
         <th>Trnx Line Id</th>
+        <th>Ref Key Name</th>
+        <th>Ref Key Value</th>
+        <th>View Ref Doc</th>
+        <th>Status</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -380,6 +371,10 @@
          <td><?php $f->text_field_wid2sr('prj_project_line_id'); ?></td>
          <td><?php $f->text_field_wid2sr('ref_transaction_header_id'); ?></td>
          <td><?php $f->text_field_wid2sr('ref_transaction_line_id'); ?></td>
+         <td><?php $f->text_field_d2('reference_key_name'); ?></td>
+         <td><?php $f->text_field_d2('reference_key_value'); ?></td>
+         <td><?php echo!empty($ref_doc_stmt) ? $ref_doc_stmt : '' ?></td>
+         <td><?php $f->text_field_wid2sr('status'); ?></td>
         </tr>
         <?php
         $count = $count + 1;
@@ -389,12 +384,15 @@
       <!--                  Showing a blank form for new entry-->
      </table>
     </div>
-    <div id="tabsLine-4" class="tabContent">
+<div id="tabsLine-4" class="scrollElement tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Comments</th>
-
+        <th>Seq#</th>
+        <th>Cancel Line</th>
+        <th>Un match Only</th>
+        <th>Change Quantity</th>
+        
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -403,7 +401,10 @@
        foreach ($ap_transaction_line_object as $ap_transaction_line) {
         ?>         
         <tr class="ap_transaction_line<?php echo $count ?>">
-         <td></td>
+         <td><?php $f->seq_field_d($count) ?></td>
+         <td><?php echo $f->checkBox_field('cancel_line_cb' ,'' ,'', '' , 1); ?></td>
+         <td><?php echo $f->checkBox_field('unmatch_only_cb' ,'' ,'', '' , 1); ?></td>
+         <td><?php echo $f->number_field('change_quantity', '' ,'','','','',1); ?></td>
         </tr>
         <?php
         $count = $count + 1;
@@ -411,7 +412,6 @@
        ?>
       </tbody>
       <!--                  Showing a blank form for new entry-->
-
      </table>
     </div>
    </div>

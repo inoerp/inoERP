@@ -38,6 +38,8 @@ class ar_transaction_interface extends dbObject {
   'inv_line_quantity',
   'inv_unit_price',
   'inv_line_price',
+  'gl_inv_line_price',
+  'gl_tax_amount',
   'tax_code_id',
   'tax_amount',
   'line_type',
@@ -68,49 +70,7 @@ class ar_transaction_interface extends dbObject {
   'ar_customer_id',
   'item_description',
  ];
- public $column = [
-  'ar_transaction_interface_id',
-  'ar_transaction_header_id',
-  'bu_org_id',
-  'transaction_type',
-  'ar_customer_id',
-  'ar_customer_site_id',
-  'currency',
-  'payment_term_id',
-  'document_date',
-  'ledger_id',
-  'receivable_ac_id',
-  'revenue_ac_id',
-  'line_number',
-  'item_id_m',
-  'item_description',
-  'inv_line_quantity',
-  'inv_unit_price',
-  'inv_line_price',
-  'tax_code_id',
-  'tax_amount',
-  'line_type',
-  'line_description',
-  'asset_cb',
-  'fa_asset_category_id',
-  'prj_project_header_id',
-  'prj_project_line_id',
-  'uom_id',
-  'ef_id',
-  'status',
-  'line_source',
-  'reference_type',
-  'reference_key_name',
-  'reference_key_value',
-  'sd_so_header_id',
-  'sd_so_line_id',
-  'sd_so_detail_id',
-  'period_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
- ];
+
  public $dateField = [
   'document_date'
  ];
@@ -165,8 +125,10 @@ class ar_transaction_interface extends dbObject {
  public $inv_line_quantity;
  public $inv_unit_price;
  public $inv_line_price;
+ public $gl_inv_line_price;
  public $tax_code_id;
  public $tax_amount;
+ public $gl_tax_amount;
  public $line_type;
  public $line_description;
  public $asset_cb;
@@ -246,7 +208,7 @@ class ar_transaction_interface extends dbObject {
   $ar_th->ar_customer_site_id = $this->ar_customer_site_id;
   $ar_th->ship_to_id = $sd_so->ship_to_id;
   $ar_th->bill_to_id = $sd_so->bill_to_id;
-  $ar_th->document_currency = $sd_so->document_currency;
+  $ar_th->doc_currency = $sd_so->doc_currency;
   $ar_th->currency = $ledger->currency_code;
   $ar_th->bill_to_id = $sd_so->bill_to_id;
   $gp = new gl_period();
@@ -304,9 +266,11 @@ class ar_transaction_interface extends dbObject {
    $ar_tl->item_description = $_POST['item_description'][$i];
    $ar_tl->inv_line_quantity = $_POST['inv_line_quantity'][$i];
    $ar_tl->inv_unit_price = $_POST['inv_unit_price'][$i];
+   $ar_tl->gl_inv_line_price = $_POST['gl_inv_line_price'][$i];
    $ar_tl->inv_line_price = $_POST['inv_line_price'][$i];
    $ar_tl->tax_code_id = $_POST['tax_code_id'][$i];
    $ar_tl->tax_amount = $_POST['tax_amount'][$i];
+   $ar_tl->gl_tax_amount = $_POST['gl_tax_amount'][$i];
    $ar_tl->line_type = $_POST['line_type'][$i];
    $ar_tl->uom_id = $_POST['uom_id'][$i];
    $ar_tl->sd_so_header_id = $_POST['sd_so_header_id'][$i];
@@ -359,8 +323,10 @@ class ar_transaction_interface extends dbObject {
    $ar_tl->inv_line_quantity = $obj->inv_line_quantity;
    $ar_tl->inv_unit_price = $obj->inv_unit_price;
    $ar_tl->inv_line_price = $obj->inv_line_price;
+   $ar_tl->gl_inv_line_price = $obj->gl_inv_line_price;
    $ar_tl->tax_code_id = $obj->tax_code_id;
    $ar_tl->tax_amount = $obj->tax_amount;
+   $ar_tl->gl_tax_amount = $obj->gl_tax_amount;
    $ar_tl->line_type = $obj->line_type;
    $ar_tl->uom_id = $obj->uom_id;
    $ar_tl->sd_so_header_id = $obj->sd_so_header_id;

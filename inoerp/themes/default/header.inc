@@ -79,7 +79,9 @@
       if (empty($current_page_path)) {
        $current_page_path = thisPage_url();
       }
+      echo '<div id="header_top_container">';
       $f->form_button_withImage($current_page_path);
+      echo '</div>';
       $show_header_links = false;
      }
      ?>

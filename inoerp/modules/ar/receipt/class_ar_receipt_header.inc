@@ -48,6 +48,12 @@ class ar_receipt_header extends dbObject {
  public $checkbox = [
 //		 "rev_enabled_cb"
  ];
+ 
+ public static $receipt_type_a = [
+  'MANUAL' => 'Manual',
+  'ELECTROINC' => 'Electronic',
+  'SYSTEM' => 'System',
+ ];
  public $field_a = [
   'ar_receipt_header_id',
   'bu_org_id',
@@ -61,11 +67,11 @@ class ar_receipt_header extends dbObject {
   'to_bank_header_id',
   'header_amount',
   'currency',
-  'document_currency',
+  'doc_currency',
   'to_bank_line_id',
   'exchange_rate_type',
   'exchange_rate',
-  'ef_id',
+  'receipt_type',
   'document_date',
   'document_number',
   'ledger_id',
@@ -117,15 +123,12 @@ class ar_receipt_header extends dbObject {
   'receipt_status',
   'header_amount',
   'currency',
-  'document_currency',
+  'doc_currency',
  ];
  public $requiredField = [
   'bu_org_id',
   'ar_receipt_source_id',
-  'ar_customer_id',
-  'ar_customer_site_id',
-  'header_amount',
-  'currency',
+   'currency',
   'ledger_id',
   'period_id'
  ];
@@ -142,6 +145,12 @@ class ar_receipt_header extends dbObject {
  public $notUpdatedFromWebForm = [
   'gl_journal_header_id',
  ];
+ 
+  public $profile_default = [
+  'exchange_rate_type' => 'gl_currency_conversion_type',
+  'bu_org_id' => 'org_bu_name_default'
+ ];
+  
  public $search = [
   '_show_update_path' => 1,
   '_update_action_meassge' => 'Update',
@@ -163,11 +172,11 @@ class ar_receipt_header extends dbObject {
  public $to_bank_header_id;
  public $header_amount;
  public $currency;
- public $document_currency;
+ public $doc_currency;
  public $to_bank_line_id;
  public $exchange_rate_type;
  public $exchange_rate;
- public $ef_id;
+ public $receipt_type;
  public $document_date;
  public $document_number;
  public $ledger_id;
@@ -196,6 +205,7 @@ class ar_receipt_header extends dbObject {
  public $multi_action_class_pc;
  public $multi_action_class_pc_value;
  private $_max_line_num;
+ public $lines_from_transaction_header = false;
 
  public function __set($name, $value) {
   switch ($value) {
@@ -338,7 +348,7 @@ class ar_receipt_header extends dbObject {
   $gjh = new gl_journal_header;
   $gjh->ledger_id = $this->ledger_id;
   $gjh->status = 'ENTERED';
-  $gjh->currency = $this->document_currency;
+  $gjh->currency = $this->doc_currency;
   $gjh->period_id = $this->period_id;
   $gjh->journal_source = self::$module;
   $gjh->journal_category = self::$gl_journal_category;
@@ -618,19 +628,19 @@ class ar_receipt_header extends dbObject {
   }
  }
 
- public function get_details_from_sd_so_header() {
-  if (empty($this->sd_so_header_id)) {
+ public function get_details_from_ar_transaction_header() {
+  if (empty($this->ar_transaction_header_id)) {
    return false;
   }
-  $po = new sd_so_header();
-  $po_i = $po->findBy_id($this->sd_so_header_id);
-  $this->bu_org_id = $po_i->bu_org_id;
-  $this->transaction_type = 'INVOICE';
-  $this->so_number = $po_i->so_number;
-  $this->ar_customer_id = $po_i->ar_customer_id;
-  $this->ar_customer_site_id = $po_i->ar_customer_site_id;
-  $this->document_currency = $po_i->currency;
-  $this->receipt_term_id = $po_i->receipt_term_id;
+  $ar_th = new ar_transaction_header();
+  $ar_th->findBy_id($this->ar_transaction_header_id);
+  $this->bu_org_id = $ar_th->bu_org_id;
+  $this->receipt_type = 'MANUAL';
+  $this->currency = $ar_th->currency;
+  $this->ar_customer_id = $ar_th->ar_customer_id;
+  $this->ar_customer_site_id = $ar_th->ar_customer_site_id;
+  $this->doc_currency = $ar_th->doc_currency;
+  $this->lines_from_transaction_header = 9;
  }
 
  public function multi_select_input_fields() {

@@ -33,7 +33,7 @@
     <div id="tabsHeader-2" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column header_field">
-       <li><label>Doc Currency</label><?php echo $f->select_field_from_object('document_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->document_currency, 'document_currency', 'currency', 1, $readonly); ?>						 </li>
+       <li><label>Doc Currency</label><?php echo $f->select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', 'currency', 1, $readonly); ?>						 </li>
        <li><label>Payment Term</label><?php echo $f->select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly1); ?>						 </li>
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_employee_name select_popup clickable">
          Sales Person</label><?php $f->text_field_d('sales_person_employee_name'); ?>

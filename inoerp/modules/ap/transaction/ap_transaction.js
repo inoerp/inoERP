@@ -104,7 +104,7 @@ $(document).ready(function () {
   getBUDetails($(this).val());
  });
 
- if ($('#bu_org_id').val() && ($('#bu_org_id').attr('disabled') != 'disabled')) {
+ if ($('#bu_org_id').val() && (!$('#ap_transaction_header_id').val()) && ($('#bu_org_id').attr('disabled') != 'disabled')) {
   getBUDetails($('#bu_org_id').val());
  }
 
@@ -112,11 +112,11 @@ $(document).ready(function () {
   if ($(this).val() == 'PO_DEFAULT') {
    var link = 'select.php?class_name=po_all_v&po_status=%3DAPPROVED&mode=9&action_class_name=ap_transaction_header';
    void window.open(link, '_blank',
-           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
    $(this).val('INVOICE');
    return false;
   }
- })
+ });
 
 //get supplier details
  $("#supplier_id, #supplier_name, #supplier_number").on("focusout", function () {
@@ -149,7 +149,7 @@ $(document).ready(function () {
  //selecting PO Header Id
  $(".ap_transaction_header_id.select_popup").on("click", function () {
   void window.open('select.php?class_name=ap_transaction_header', '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
 
@@ -188,7 +188,9 @@ $(document).ready(function () {
 
 
  $('#content').on('blur', '#currency, #doc_currency, #exchange_rate_type, #exchange_rate', function () {
-  getExchangeRate();
+  if ($('#exchange_rate_type').val() != 'USER') {
+   getExchangeRate();
+  }
  });
 
 //set the line quantity & price
@@ -203,51 +205,47 @@ $(document).ready(function () {
   }
  });
 
- $('#content').on('blur', '.inv_unit_price, .inv_line_quantity , .inv_line_price', function () {
-  var trClass = '.' + $(this).closest('tr').attr('class');
-  var unitPrice = +($(this).closest('#form_line').find(trClass).find('.inv_unit_price').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-  var lineQuantity = +($(this).closest('#form_line').find(trClass).find('.inv_line_quantity').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+
+ //get tax code
+ $('#content').off('change', '#bu_org_id').on('change', '#bu_org_id', function () {
+  var org_id = $(this).val();
+  getTaxCodes('modules/mdm/tax_code/json_tax_code.php', org_id, 'IN');
+ });
+ if ($('#bu_org_id').val() && (!$('#ap_transaction_header_id').val())) {
+  getTaxCodes('modules/mdm/tax_code/json_tax_code.php', $('#bu_org_id').val(), 'IN');
+ }
+
+ $('body').off('blur', '.inv_line_quantity, .inv_unit_price, .inv_line_price, .tax_amount,.tax_code_id')
+         .on('blur', '.inv_line_quantity, .inv_unit_price, .inv_line_price, .tax_amount, .tax_code_id', function () {
+          var trClass = '.' + $(this).closest('tr').prop('class').replace(/\s+/g, '.');
+          $('body').trigger('inv_calculateLineAmount', [trClass]);
+          $('body').trigger('inv_calculateTax', [trClass]);
+          $('body').trigger('inv_getGlPrice', [trClass]);
+          $('body').trigger('inv_calculateHeaderAmount');
+         });
+
+//calculate line amount
+ $('body').off('inv_calculateLineAmount').on('inv_calculateLineAmount', function (e, trClass) {
+  if($('#form_line').find(trClass).find('.inv_unit_price').length  < 1){
+   return;
+  }
+  var unitPrice = +($('#form_line').find(trClass).find('.inv_unit_price').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+  var lineQuantity = +($('#form_line').find(trClass).find('.inv_line_quantity').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
   var linePrice = unitPrice * lineQuantity;
   $(this).closest('#form_line').find(trClass).find('.inv_line_price').val(linePrice);
  });
 
  //calculate the tax amount
- //get tax code
- $('#content').on('change', 'bu_org_id', function () {
-  var org_id = $(this).val();
-  getTaxCodes('modules/mdm/tax_code/json_tax_code.php', org_id, 'IN');
- });
- if ($('#bu_org_id').val()) {
-  getTaxCodes('modules/mdm/tax_code/json_tax_code.php', $('#bu_org_id').val(), 'IN');
- }
-
- $('#content').on('blur', '.inv_line_quantity, .inv_unit_price, .inv_line_price, .tax_amount, .tax_code_id', function () {
-  var trClass = '.' + $(this).closest('tr').prop('class');
-  var linePrice = 0;
-  if ($('#content').find(trClass).find('.inv_line_price').val()) {
-   linePrice = +($('#content').find(trClass).find('.inv_line_price').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-  }
-  var taxCodeVal = 0;
-  if ($('#content').find(trClass).find('.tax_code_value').val()) {
-   taxCodeVal = $('#content').find(trClass).find('.tax_code_value').val();
-  } else if ($('#content').find(trClass).find('.input_tax').find('option:selected').prop('class')) {
-   taxCodeVal = $('#content').find(trClass).find('.input_tax').find('option:selected').prop('class');
-  }
-
-  if (taxCodeVal.length >= 3) {
-   var taxCodeVal_a = taxCodeVal.split('_');
-  } else {
-   return;
-  }
-
+ $('body').off('inv_calculateTax').on('inv_calculateTax', function (e, trClass) {
+  var linePrice = +$('#content').find(trClass).find('.inv_line_price').val();
   var taxAmount = 0;
   var taxPercentage = 0;
-  if (taxCodeVal_a[0] === 'p') {
-   taxPercentage = +taxCodeVal_a[1];
-  } else if (taxCodeVal_a[0] === 'a') {
-   taxAmount = +taxCodeVal_a[1];
-  }
   var taxValue = 0;
+
+  if ($('#content').find(trClass).find('.tax_code_id').val()) {
+   taxPercentage = $('#content').find(trClass).find('.tax_code_id').find('option:selected').data('percentage');
+   taxAmount = $('#content').find(trClass).find('.tax_code_id').find('option:selected').data('amount');
+  }
   if (taxPercentage) {
    taxValue = ((taxPercentage * linePrice) / 100).toFixed(5);
   } else if (taxAmount) {
@@ -258,7 +256,7 @@ $(document).ready(function () {
  });
 
 //total header & tax amount
- $('#content').on('blur', '.inv_line_quantity, .inv_unit_price, .inv_line_price, .tax_amount', function () {
+ $('body').off('inv_calculateHeaderAmount').on('inv_calculateHeaderAmount', function () {
   var total_tax = 0;
   $('#form_line').find('.tax_amount').each(function () {
    total_tax += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
@@ -271,6 +269,33 @@ $(document).ready(function () {
   });
   $('#header_amount').val(header_amount);
  });
+
+
+ //get GL Price form line price & exchage rate
+ $('body').off('inv_getGlPrice').on('inv_getGlPrice', function (e, trClass) {
+  if ($('#exchange_rate').val()) {
+   var exch_rate = +$('#exchange_rate').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1");
+  } else {
+   exch_rate = 1;
+  }
+  if ($('#form_line').find(trClass).find('.inv_line_price').val()) {
+   var gl_line_price_val = (+$('#form_line').find(trClass).find('.inv_line_price').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1")) * exch_rate;
+  } else {
+   var gl_line_price_val = 0;
+  }
+  gl_line_price_val = gl_line_price_val.toFixed(5);
+  $('#form_line').find(trClass).find('.gl_inv_line_price').val(gl_line_price_val);
+
+  if ($('#form_line').find(trClass).find('.tax_amount').val()) {
+   var gl_tax_amount_val = (+$('#form_line').find(trClass).find('.tax_amount').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1")) * exch_rate;
+  } else {
+   var gl_tax_amount_val = 0;
+  }
+  gl_tax_amount_val = gl_tax_amount_val.toFixed(5);
+  $('#form_line').find(trClass).find('.gl_tax_amount').val(gl_tax_amount_val);
+
+ });
+
 
 //all actions
 
@@ -287,6 +312,10 @@ $(document).ready(function () {
 
    case 'APPLY_TRANSACTION' :
     apply_transaction();
+    break;
+
+   case 'MAKE_PAYMENT' :
+    make_payment();
     break;
 
    default :
@@ -316,6 +345,19 @@ function match_purchase_order() {
   }
   void window.open(link, '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+  return false;
+ } else {
+  alert('No Transaction Header ID/nEnter or Save The Header Details ');
+ }
+}
+
+function make_payment() {
+ var ap_transaction_header_id = $("#ap_transaction_header_id").val();
+ if (ap_transaction_header_id) {
+  var link = 'form.php?window_type=popup&class_name=ap_payment_header&action=make_payment&mode=9'
+  link += '&ap_transaction_header_id=' + ap_transaction_header_id;
+  void window.open(link, '_blank',
+          'width=1300,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
   return false;
  } else {
   alert('No Transaction Header ID/nEnter or Save The Header Details ');
