@@ -1398,3 +1398,7 @@ ul.column.two_column_form li {
           width: 100px;
         text-align: right;
 }
+
+input.multi_select_input{
+        background:  none repeat scroll 0% 0% #FFF !important;
+}

@@ -170,8 +170,10 @@ if (!empty($msg)) {
                 }
                 if ((!empty($multi_selct_input_fields) && is_array($multi_selct_input_fields)) && (in_array($all_columns[$k], $multi_selct_input_fields))) {
                  $readonly = null;
+                 $div_class_name = ' multi_select_input ';
                 } else {
                  $readonly = 'readonly';
+                 $div_class_name = ' existing_fields  ';
                 }
                 $bracketName = $all_columns[$k] . '[]';
                 if ((property_exists($records, $all_columns[$k]))) {
@@ -180,9 +182,9 @@ if (!empty($msg)) {
                  } else {
                   $value = $records->$all_columns[$k];
                  }
-                 echo "<td><input type=\"text\" name=\"$bracketName\" class=\"text $all_columns[$k]\" value=\"$value\" $readonly size=\"12\"> </td>";
+                 echo "<td><input type=\"text\" name=\"$bracketName\" class=\"$div_class_name text $all_columns[$k]\" value=\"$value\" $readonly size=\"12\"> </td>";
                 } else {
-                 echo "<td><input type=\"text\" name=\"$bracketName\" class=\"text $all_columns[$k]\" value=\" \" $readonly size=\"12\"> </td>";
+                 echo "<td><input type=\"text\" name=\"$bracketName\" class=\"$div_class_name text $all_columns[$k]\" value=\" \" $readonly size=\"12\"> </td>";
                 }
                }
                ?>

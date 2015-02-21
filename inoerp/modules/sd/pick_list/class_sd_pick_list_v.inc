@@ -1,8 +1,22 @@
 <?php
 
-class sd_so_all_v extends dbObject {
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
 
- public static $table_name = "sd_so_all_v";
+/**
+ * sd_lead
+ * Contains all the sd_quote_header information, such as - lead_number, sd_lead_id, customer info, etc
+ *
+ */
+class sd_pick_list_v extends dbObject {
+
+ public static $table_name = "sd_pick_list_v";
  public static $primary_column = "sd_so_header_id";
  public $field_a = [
 		 'sd_so_header_id',
@@ -51,10 +65,8 @@ class sd_so_all_v extends dbObject {
 		 'so_number',
 		 'customer_name',
 		 'customer_site_name',
-  'so_status',
 		 'item_number',
-		 'line_status',
-		 'schedule_ship_date',
+		  'schedule_ship_date',
   'shipping_org_id',
  ];
 
@@ -177,9 +189,9 @@ class sd_so_all_v extends dbObject {
  public $last_update_date;
  public $action;
 
- private function create_sd_so_all_v() {
+ private function create_sd_pick_list_v() {
 	$sql = "
-CREATE OR REPLACE VIEW sd_so_all_v
+CREATE OR REPLACE VIEW sd_pick_list_v
 (
 sd_so_header_id, bu_org_id, document_type, so_number, ar_customer_id, ar_customer_site_id, sales_person,
 doc_currency, header_amount, so_status,  payment_term_id, onhand, customer_name, customer_number, 
@@ -228,6 +240,8 @@ AND sdsh.ar_customer_site_id = ar_customer_site.ar_customer_site_id
 AND sdsl.item_id_m = item.item_id_m AND item.org_id = sdsl.shipping_org_id
 AND sdsl.shipping_org_id = org.org_id
 AND ssc.org_id = sdsl.shipping_org_id
+AND sdsh.so_status = 'BOOKED'
+AND sdsl.line_status IN ('AWAITING_PICKING', 'PARTIAL_PICKED','PARTIAL_SHIPPED')
 
 ";
  }
@@ -246,7 +260,5 @@ AND ssc.org_id = sdsl.shipping_org_id
 
 }
 
-
-
-//end of so_detail class
+//end of extn_contact class
 ?>

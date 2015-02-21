@@ -9,18 +9,16 @@
   <div class="tabContainer">
    <form action=""  method="post" id="sd_delivery_header"  name="sd_delivery_header">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
-      <ul class="column header_field">
-       <li><label class="ino-label"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sd_delivery_header_id select_popup clickable">
-         Delivery Id</label><?php echo form::text_field_dsr('sd_delivery_header_id'); ?>
-        <a name="show" href="form.php?class_name=sd_delivery_header&<?php echo "mode=$mode"; ?>" class="show document_id sd_delivery_header_id"><i class="fa fa-refresh"></i></a> 
-       </li>
-       <li><label>Inventory</label><?php echo $f->select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', $$class->shipping_org_id, '', '', 1, $readonly1); ?>       </li>
-       <li><label>Number</label><?php echo $f->text_field('delivery_number', $$class->delivery_number, '8', '', '', '', $readonly1); ?></li>
-       <li><label>Status</label><?php echo $f->select_field_from_array('status', sd_delivery_header::$status_a, $$class->status, '', '', 1, 1, 1) ?>       </li>
-       <li><label>Date</label><?php echo $f->date_fieldFromToday_mr('delivery_date', ino_date($$class->delivery_date), $readonly); ?></li>
-      </ul>
-     </div>
+     <ul class="column header_field">
+      <li><label class="ino-label"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sd_delivery_header_id select_popup clickable">
+        Delivery Id</label><?php echo form::text_field_dsr('sd_delivery_header_id'); ?>
+       <a name="show" href="form.php?class_name=sd_delivery_header&<?php echo "mode=$mode"; ?>" class="show document_id sd_delivery_header_id"><i class="fa fa-refresh"></i></a> 
+      </li>
+      <li><label>Inventory</label><?php echo $f->select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', $$class->shipping_org_id, '', '', 1, $readonly1); ?>       </li>
+      <li><label>Number</label><?php echo $f->text_field('delivery_number', $$class->delivery_number, '8', '', '', '', $readonly1); ?></li>
+      <li><label>Status</label><?php echo $f->select_field_from_array('status', sd_delivery_header::$status_a, $$class->status, '', '', 1, 1, 1) ?>       </li>
+      <li><label>Date</label><?php echo $f->date_fieldFromToday_mr('delivery_date', ino_date($$class->delivery_date), $readonly); ?></li>
+     </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div> 
@@ -42,8 +40,8 @@
       <ul class="column five_column">
        <li><label>Action</label>
         <?php
-        if($$class->status == 'SHIPPED'){
-          $$class->action_a = ['REMOVE_LINE' => 'Remove Line' ];
+        if ($$class->status == 'SHIPPED') {
+         $$class->action_a = ['REMOVE_LINE' => 'Remove Line'];
         }
         echo $f->select_field_from_array('action', $$class->action_a, '', 'action')
         ?>
@@ -94,6 +92,7 @@
         <th>SO Line #</th>
         <th>Shipment Qty</th>
         <th>Shipped Qty</th>
+        <th>SO Qty Change</th>
         <th>Delivery Status</th>
         <th>Line Action</th>
        </tr>
@@ -107,17 +106,18 @@
         <tr class="sd_delivery_line<?php echo $count ?>">
          <td><?php
           echo ino_inline_action($sd_delivery_line->sd_delivery_line_id, array('sd_delivery_header_id' => $$class->sd_delivery_header_id,
-           'shipping_org_id' => $$class->shipping_org_id,  'transaction_type_id' => $$class->transaction_type_id));
+           'shipping_org_id' => $$class->shipping_org_id, 'transaction_type_id' => $$class->transaction_type_id));
           ?>
          </td>
          <td><?php form::text_field_wid2sr('sd_delivery_line_id'); ?>
           <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_delivery_line select_popup clickable"></td>
          <td><?php $f->text_field_wid2sr('sd_so_header_id'); ?></td>
          <td><?php $f->text_field_wid2sr('sd_so_line_id'); ?></td>
-         <td><?php $f->text_field_wid2r('so_number', 'select_so_number'); ?></td>
+         <td><?php $f->text_field_wid2sr('so_number', 'select_so_number'); ?></td>
          <td><?php $f->text_field_wid2sr('so_line_number'); ?></td>
          <td><?php echo $f->number_field('quantity', $sd_delivery_line->quantity, '8', '', '', '', 1); ?></td>
          <td><?php echo $f->number_field('shipped_quantity', $sd_delivery_line->shipped_quantity, '8', '', '', '', 1); ?></td>
+         <td><?php echo $f->number_field('so_qty_change', '', '', '', 'small', '', 1); ?></td>
          <td><?php $f->text_field_wid2r('delivery_status'); ?></td>
          <td><?php $f->text_field_wid2r('action'); ?></td>
         </tr>
@@ -136,7 +136,6 @@
         <th>Item Number</th>
         <th>Item Description</th>
         <th>UOM</th>
-        <th>Shipment Qty</th>
         <th>Sub inventory</th>
         <th>Locator</th>
        </tr>
@@ -151,7 +150,6 @@
          <td><?php $f->text_field_d2s('item_number'); ?></td>
          <td><?php $f->text_field_d2('item_description'); ?></td>
          <td><?php echo $f->select_field_from_object('line_uom_id', uom::find_all(), 'uom_id', 'uom_name', $sd_delivery_line->line_uom_id, '', '', '', $readonly1); ?></td>
-         <td><?php echo $f->number_field('quantity', $$class_second->quantity, '8', '', '', 1, $readonly1); ?></td>
          <td><?php echo $f->select_field_from_object('staging_subinventory_id', subinventory::find_all_of_org_id($$class->shipping_org_id), 'subinventory_id', 'subinventory', $$class_second->staging_subinventory_id, '', 'subinventory_id', '', $readonly1); ?></td>
          <td><?php echo $f->select_field_from_object('staging_locator_id', locator::find_all_of_subinventory($$class_second->staging_subinventory_id), 'locator_id', 'locator', $$class_second->staging_locator_id, '', 'locator_id', '', $readonly1); ?></td>
         </tr>
@@ -199,7 +197,32 @@
     </div>
 
     <div id="tabsLine-4" class="form_data_line_tbody">
-
+     <table class="form_line_data_table">
+      <thead> 
+       <tr>
+        <th>Weight UOM</th>
+        <th>Total Weight #</th>
+        <th>Volume UOM</th>
+        <th>Total Volume</th>
+       </tr>
+      </thead>
+      <tbody class="form_data_line_tbody">
+       <?php
+       $count = 0;
+       foreach ($sd_delivery_line_object as $sd_delivery_line) {
+        ?>         
+        <tr class="sd_delivery_line<?php echo $count ?>">
+         <td><?php echo form::select_field_from_object('weight_uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->weight_uom_id, 'weight_uom_id', $readonly); ?></td>
+         <td><?php echo form::number_field_wid2('total_weight'); ?></td>
+         <td><?php echo form::select_field_from_object('volume_uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->volume_uom_id, 'volume_uom_id', $readonly); ?></td>
+         <td><?php echo form::number_field_wid2('total_volume'); ?></td>
+        </tr>
+        <?php
+        $count = $count + 1;
+       }
+       ?>
+      </tbody>
+     </table>
     </div>
    </div>
   </div>

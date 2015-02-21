@@ -1,5 +1,5 @@
 $(document).ready(function () {
- $('#generic_search_form').find('.line_status').val('AWAITING_PICKING');
+// $('#generic_search_form').find('.line_status').val('AWAITING_PICKING');
  
  $('#content').off('click', '.line_status').on('click', '.line_status', function () {
   alert('You can only search lines which are not picked');

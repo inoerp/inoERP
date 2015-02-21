@@ -13,7 +13,10 @@ class sd_so_line extends dbObject {
  public $line_status_a = [
   'ENTERED' => 'Entered',
   'AWAITING_PICKING' => 'Awaiting Picking',
+  'PICKED' => 'Picked',
+  'PARTIAL_PICKED' => 'Partially Picked',
   'SHIPPED' => 'Shipped',
+  'PARTIAL_SHIPPED' => 'Partial Shipped',
   'CLOSED' => 'Closed',
  ];
  public $field_a = [

@@ -17,6 +17,7 @@ class sd_delivery_line extends dbObject {
   'shipping_org_id',
   'item_id_m',
   'quantity',
+  'shipped_quantity',
   'staging_subinventory_id',
   'staging_locator_id',
   'delivery_status',
@@ -52,13 +53,13 @@ class sd_delivery_line extends dbObject {
   'ar_customer_site_id',
   'ar_customer_site_number',
   'ar_customer_site',
-  'action'
+  'action',
+  'so_qty_change'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
   "sd_delivery_header_id",
   'shipping_org_id',
   'so_line_number',
-  'shipped_quantity',
   'quantity'
  ];
  public $requiredField = [
@@ -77,6 +78,7 @@ class sd_delivery_line extends dbObject {
   'shipping_org_id',
   'item_id_m',
   'picking_date',
+  'delivery_status'
  ];
  public $column = [
   'sd_delivery_line_id',
@@ -137,6 +139,7 @@ class sd_delivery_line extends dbObject {
  public $shipped_quantity;
  public $item_description;
  public $action;
+ public $so_qty_change;
 
  public function _before_save() {
   if (($this->action == 'REVERSE_PICKING')) {
@@ -146,7 +149,6 @@ class sd_delivery_line extends dbObject {
   } else if (($this->action == 'REMOVE_LINE')) {
    echo "<br> Starting to remove the line from delivery ";
    $this->sd_delivery_header_id = -1;
-   $this->audit_trial();
    $this->save();
    return 10;
   } else if (($this->action == 'ADD_LINE')) {
@@ -154,7 +156,6 @@ class sd_delivery_line extends dbObject {
    if (empty($this->sd_delivery_header_id) || $this->sd_delivery_header_id == -1) {
     echo "<br> Error - No Header Id found! @ sd_delivery_line @@" . __LINE__;
    }
-   $this->audit_trial();
    $this->save();
    return 10;
   } else if (($this->action == 'COMPLETE_SHIPMENT')) {
@@ -169,7 +170,7 @@ class sd_delivery_line extends dbObject {
 
  private function _reverse_picking() {
   /*
-   * 1. Update SO Line to Make it available for next picking
+   * 1. Update SO Line status & picked quantity to Make it available for next picking
    * 2. Delete the delivery line
    * 3. No material / finance transaction - Onhand 'll remain in staging location and 
    * needs to be manually moved back to stock through sub inventory transfer/move order
@@ -177,11 +178,15 @@ class sd_delivery_line extends dbObject {
   $sol = new sd_so_line();
   $sol->findBy_id($this->sd_so_line_id);
   $sol->line_status = 'AWAITING_PICKING';
-  $sol->audit_trial();
-  $sol->save();
-  echo "<br>Sales Order Line Status is Sucessfully Updated";
-  $this->delete();
-  echo "<br>Delivery Line is Sucessfully Deleted";
+  $sol->picked_quantity -= $this->quantity;
+  try {
+   $sol->save();
+   echo "<br>Sales Order Line Status is Sucessfully Updated";
+   $this->delete();
+   echo "<br>Delivery Line is Sucessfully Deleted";
+  } catch (Exception $e) {
+   echo "<br>Upate Failed. Error @sd_delivery_line @@ " . __LINE__ . $e->getMessage();
+  }
  }
 
  private function _update_ar_interface() {
@@ -220,7 +225,7 @@ class sd_delivery_line extends dbObject {
   } else if (!empty($mm_tax->tax_amount)) {
    $ar_ti->tax_amount = $mm_tax->tax_amount;
   }
-  $ar_ti->gl_tax_amount = $ar_ti->tax_amount * $ar_ti->inv_unit_price ;
+  $ar_ti->gl_tax_amount = $ar_ti->tax_amount * $ar_ti->inv_unit_price;
   $ar_ti->line_type = $sol->line_type;
   $ar_ti->line_description = $sol->line_description;
   $ar_ti->uom_id = $sol->uom_id;
@@ -248,6 +253,9 @@ class sd_delivery_line extends dbObject {
   global $dbc;
   $sol = new sd_so_line();
   $sol->findBy_id($this->sd_so_line_id);
+  if (empty($this->shipped_quantity)) {
+   $this->shipped_quantity = $this->quantity;
+  }
 
   //update the inv transaction & onhand
   if ($sol->kit_cb) {
@@ -255,7 +263,7 @@ class sd_delivery_line extends dbObject {
     $bom_lines_all = bom_config_line::find_by_parent_id($sol->bom_config_header_id);
     foreach ($bom_lines_all as $bom_lines) {
      $item_i = item::find_by_item_id_m($bom_lines->component_item_id_m);
-     $qty = $this->quantity * $bom_lines->usage_quantity;
+     $qty = $this->shipped_quantity * $bom_lines->usage_quantity;
      try {
       $this->_create_inv_transaction($item_i->item_id_m, $qty);
      } catch (Exception $e) {
@@ -267,7 +275,7 @@ class sd_delivery_line extends dbObject {
    }
   } else {
    try {
-    $this->_create_inv_transaction($this->item_id_m, $this->quantity);
+    $this->_create_inv_transaction($this->item_id_m, $this->shipped_quantity);
    } catch (Exception $e) {
     echo "<br>Failed to complete the inventory transaction. Error @ sd_delivery_leader @@ line " . __LINE__;
     $dbc->rollback = true;
@@ -287,9 +295,24 @@ class sd_delivery_line extends dbObject {
 
   //Update SO 
   try {
-   $sol->line_status = 'SHIPPED';
+   $sol->shipped_quantity += $this->shipped_quantity;
+   if ($sol->shipped_quantity == $sol->line_quantity) {
+    $sol->line_status = 'SHIPPED';
+   } else {
+    $sol->line_status = 'PARTIAL_SHIPPED';
+   }
+
    $sol->actual_ship_date = current_time(1);
-   $sol->shipped_quantity = $this->quantity;
+
+   if ($this->shipped_quantity != $this->quantity) {
+    $qty_reduced = $this->quantity - $this->shipped_quantity;
+    $sol->picked_quantity -= $qty_reduced;
+   }
+   if ($sol->picked_quantity < 0) {
+    echo "<br>SO Line picked quantity can not be negative. Error @ sd_delivery_leader @@ line " . __LINE__;
+    $dbc->rollback = true;
+    return -90;
+   }
    $sol->save();
   } catch (Exception $e) {
    echo "<br>Failed to SO Line Status. Error @ sd_delivery_leader @@ line " . __LINE__;

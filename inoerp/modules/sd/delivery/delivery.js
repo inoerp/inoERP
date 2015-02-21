@@ -44,6 +44,9 @@ setValFromSelectPage.prototype.setVal = function () {
 
  if (sd_delivery_header_id && adding_header == 99) {
   $('#sd_delivery_header_id').val(sd_delivery_header_id);
+  if(this.sd_delivery_header_id){
+ $('a.show.sd_delivery_header_id').trigger('click');
+}
  }
 
 
@@ -98,6 +101,7 @@ setValFromSelectPage.prototype.setVal = function () {
  localStorage.removeItem("fieldClass");
  localStorage.removeItem("adding_header");
 
+
 };
 
 $(document).ready(function () {
@@ -119,6 +123,21 @@ $(document).ready(function () {
   }
  });
 
+//shipped qty is less than picked qty
+$('body').off('blur',  '.shipped_quantity').on('blur',  '.shipped_quantity' , function(){
+var dev_qty = +$(this).closest('tr').find('.quantity').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1");
+var ship_qty = +$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"); 
+var qty_change =   dev_qty - ship_qty;
+  
+  if(qty_change < 0 ){
+  alert('You cant ship more than picked quantity');
+    $(this).val('');
+    $(this).closest('tr').find('.so_qty_change').val('');
+  }else{
+  $(this).closest('tr').find('.so_qty_change').val(qty_change);
+  }
+})
+
 //Default header values to line
  $('#content').off('blur', '.transaction_quantity').on('blur', '.transaction_quantity', function () {
   var trClass = '.' + $(this).closest('tr').prop('class');
@@ -136,9 +155,9 @@ $(document).ready(function () {
           var fieldClass = $(this).closest('td').find('.select_sd_number').prop('class');
           localStorage.setItem("row_class", rowClass);
           localStorage.setItem("field_class", fieldClass);
-          var openUrl = 'select.php?class_name=sd_delivery_line';
+          var openUrl = 'select.php?class_name=sd_delivery_line&sd_delivery_header_id=-1&delivery_status=AWAITING_SHIPPING';
           void window.open(openUrl, '_blank',
-                  'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+                  'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
          });
 
 
@@ -147,7 +166,7 @@ $(document).ready(function () {
          .on("click", '.sd_delivery_header_id.select_popup', function () {
           localStorage.setItem("adding_header", '99');
           void window.open('select.php?class_name=sd_delivery_header&status=AWAITING_SHIPPING', '_blank',
-                  'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+                  'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
          });
 
  $('body').off('change', '#action').on('change', '#action', function () {
@@ -162,6 +181,7 @@ $(document).ready(function () {
      $('input[name="line_id_cb"]').each(function () {
       $(this).prop('checked', true);
      });
+     $('.shipped_quantity').prop('readonly', false).css('background-color', '#fff');
     } else {
      alert('No Line Selected For Shipment\nRemove/Reverse the required lines and the select the shipment action again');
      $('.action').val('');

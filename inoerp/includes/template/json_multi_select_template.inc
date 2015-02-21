@@ -18,6 +18,7 @@
    }
    ?></ul>
  <div id="searchResult">
+
       <?php
       if (!empty($multi_select_actions)) {
        echo '<div class="well well-sm">' . $multi_select_actions . '</div>';
@@ -94,68 +95,69 @@
            <tbody class="form_data_line_tbody multi_select_values" >
             <?php
             $count = 0;
-            if(!empty($search_result)){
+            if (!empty($search_result)) {
              foreach ($search_result as $records) {
-             $multi_select_select_fields_not_shown = true;
-             ?>         
-             <tr class="multi_select_value_line<?php echo $count ?>">
-              <?php
-              if ($i == 0) {
-               if (isset($records->$primary_column_v)) {
-                $primary_column_val = $records->$primary_column_v;
-               }
-               echo "<td><input type=\"checkbox\" name=\"line_id_cb\" class=\"line_id_cb\"  value=\"$primary_column_val\">";
-               echo "<input type=\"hidden\" name=\"multi_action_class\" class=\"hidden multi_action_class\"  value=\"$action_class\">";
-               if (!empty($header_id_value)) {
-                echo "<input type=\"hidden\" name=\"$header_id_name\" class=\"hidden $header_id_name\"  value=\"$header_id_value\">";
-               }
-               echo "<input type=\"hidden\" name=\"action\" class=\"hidden action\"  value=\"$action_message\"></td>";
-               echo!empty($hidden_field_stmt) ? $hidden_field_stmt : '';
-              }
-              echo "<td>$count</td>";
-              if (!empty($multi_select_tabs) && ($i == $no_of_tabs - 1)) {
-//                 echo $multi_select_tabs;
-               echo $multi_select_tabs['tab_row_content'];
-              }
-              if (($i == 0) && (!empty($multi_selct_input_fields) && !is_array($multi_selct_input_fields))) {
-               echo '<td>' . $multi_selct_input_fields . '</td>';
-              }
-              if (($i == 0) && ($multi_select_select_fields_not_shown) && !empty($multi_select_select_fields) && is_array($multi_select_select_fields)) {
-               foreach ($multi_select_select_fields as $mssf_key => $mssf_val) {
-                echo '<td>' . $mssf_val . '</td>';
-               }
-               $multi_select_select_fields_not_shown = false;
-              }
-              $new_start = ($i * ($no_of_columns_per_tab - 1)) + $i;
-              $new_end = $new_start + ($no_of_columns_per_tab - 1);
-              for ($k = $new_start; $k <= $new_end; $k++) {
-               if ($k > $total_columns - 1) {
-                break;
-               }
-               if ((!empty($multi_selct_input_fields) && is_array($multi_selct_input_fields)) && (in_array($all_columns[$k], $multi_selct_input_fields))) {
-                $readonly = null;
-               } else {
-                $readonly = 'readonly';
-               }
-               $bracketName = $all_columns[$k] . '[]';
-               if ((property_exists($records, $all_columns[$k]))) {
-                if ((!empty($multi_selct_input_fields) && is_array($multi_selct_input_fields)) && (in_array($all_columns[$k], $multi_selct_input_fields))) {
-                 $value = null;
-                } else {
-                 $value = $records->$all_columns[$k];
+              $multi_select_select_fields_not_shown = true;
+              ?>         
+              <tr class="multi_select_value_line<?php echo $count ?>">
+               <?php
+               if ($i == 0) {
+                if (isset($records->$primary_column_v)) {
+                 $primary_column_val = $records->$primary_column_v;
                 }
-                echo "<td><input type=\"text\" name=\"$bracketName\" class=\"text $all_columns[$k]\" value=\"$value\" $readonly size=\"12\"> </td>";
-               } else {
-                echo "<td><input type=\"text\" name=\"$bracketName\" class=\"text $all_columns[$k]\" value=\" \" $readonly size=\"12\"> </td>";
+                echo "<td><input type=\"checkbox\" name=\"line_id_cb\" class=\"line_id_cb\"  value=\"$primary_column_val\">";
+                echo "<input type=\"hidden\" name=\"multi_action_class\" class=\"hidden multi_action_class\"  value=\"$action_class\">";
+                if (!empty($header_id_value)) {
+                 echo "<input type=\"hidden\" name=\"$header_id_name\" class=\"hidden $header_id_name\"  value=\"$header_id_value\">";
+                }
+                echo "<input type=\"hidden\" name=\"action\" class=\"hidden action\"  value=\"$action_message\"></td>";
+                echo!empty($hidden_field_stmt) ? $hidden_field_stmt : '';
                }
-              }
-              ?>
-             </tr>
-             <?php
-             $count = $count + 1;
+               echo "<td>$count</td>";
+               if (!empty($multi_select_tabs) && ($i == $no_of_tabs - 1)) {
+//                 echo $multi_select_tabs;
+                echo $multi_select_tabs['tab_row_content'];
+               }
+               if (($i == 0) && (!empty($multi_selct_input_fields) && !is_array($multi_selct_input_fields))) {
+                echo '<td>' . $multi_selct_input_fields . '</td>';
+               }
+               if (($i == 0) && ($multi_select_select_fields_not_shown) && !empty($multi_select_select_fields) && is_array($multi_select_select_fields)) {
+                foreach ($multi_select_select_fields as $mssf_key => $mssf_val) {
+                 echo '<td>' . $mssf_val . '</td>';
+                }
+                $multi_select_select_fields_not_shown = false;
+               }
+               $new_start = ($i * ($no_of_columns_per_tab - 1)) + $i;
+               $new_end = $new_start + ($no_of_columns_per_tab - 1);
+               for ($k = $new_start; $k <= $new_end; $k++) {
+                if ($k > $total_columns - 1) {
+                 break;
+                }
+                if ((!empty($multi_selct_input_fields) && is_array($multi_selct_input_fields)) && (in_array($all_columns[$k], $multi_selct_input_fields))) {
+                 $readonly = null;
+                 $div_class_name = ' multi_select_input ';
+                } else {
+                 $readonly = 'readonly';
+                 $div_class_name = ' existing_fields  ';
+                }
+                $bracketName = $all_columns[$k] . '[]';
+                if ((property_exists($records, $all_columns[$k]))) {
+                 if ((!empty($multi_selct_input_fields) && is_array($multi_selct_input_fields)) && (in_array($all_columns[$k], $multi_selct_input_fields))) {
+                  $value = null;
+                 } else {
+                  $value = $records->$all_columns[$k];
+                 }
+                 echo "<td><input type=\"text\" name=\"$bracketName\" class=\"$div_class_name text $all_columns[$k]\" value=\"$value\" $readonly size=\"12\"> </td>";
+                } else {
+                 echo "<td><input type=\"text\" name=\"$bracketName\" class=\"$div_class_name text $all_columns[$k]\" value=\" \" $readonly size=\"12\"> </td>";
+                }
+               }
+               ?>
+              </tr>
+              <?php
+              $count = $count + 1;
+             }
             }
-            }
-            
             ?>
            </tbody>
           </table>
@@ -165,5 +167,10 @@
        </div>
 
       </div>
+  
+      <div class="pagination" style="clear: both;">
+     <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
+     ?>
+    </div>
      </div> 
 </div>

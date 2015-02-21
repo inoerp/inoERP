@@ -94,7 +94,8 @@ class sd_delivery_header extends dbObject {
   'picking_date',
   'multi_action_class_pc',
   'multi_action_class_pc_value',
-  'action'
+  'action',
+  'pick_quantity'
  ];
  public $requiredField = [
   "shipping_org_id",
@@ -136,6 +137,7 @@ class sd_delivery_header extends dbObject {
  public $quantity;
  public $delivery_status;
  public $picking_date;
+ public $pick_quantity;
 
  public function _before_save() {
 //  pa($this);
@@ -158,10 +160,10 @@ class sd_delivery_header extends dbObject {
   $dh->shipping_org_id = $_POST['shipping_org_id'][0];
   $dh->delivery_date = date("Y-m-d");
   $dh->status = 'AWAITING_SHIPPING';
-  $dh->audit_trial();
+  $dh->save();
   echo "<br> Delivery header is succefully created. Header Id/Delivery Number - " . $dh->sd_delivery_header_id;
   $dh->delivery_number = $dh->sd_delivery_header_id;
-  $dh->save();
+  
   return $dh->sd_delivery_header_id;
  }
 
@@ -179,9 +181,11 @@ class sd_delivery_header extends dbObject {
     $sd_delivery_header_id = $this->_create_delivery_header();
    }
    if (!empty($sd_delivery_header_id)) {
+    //picked qty
+    $picked_qty = !empty($_POST['pick_quantity'][$i]) ? $_POST['pick_quantity'][$i] : $_POST['line_quantity'][$i];
     //verify if requested quantity is more than onhand quantity
-    if (($_POST['line_quantity'][$i] > $_POST['onhand'][$i]) && empty($_POST['kit_cb'][$i])) {
-     echo "<br> Line Quantity " . $_POST['line_quantity'][$i] . ' is more than total available quantity ' .
+    if (($picked_qty > $_POST['onhand'][$i]) && empty($_POST['kit_cb'][$i])) {
+     echo "<br> Picked Quantity " . $picked_qty . ' is more than total available quantity ' .
      $_POST['onhand'][$i];
      break;
     }
@@ -189,7 +193,7 @@ class sd_delivery_header extends dbObject {
     //update the sales order line
     $sol = new sd_so_line();
     $sol->findBy_id($_POST['sd_so_line_id'][$i]);
-    if ($sol->line_status != 'AWAITING_PICKING') {
+    if (!in_array($sol->line_status , array('AWAITING_PICKING','PARTIAL_PICKED','PARTIAL_SHIPPED'))) {
      echo "<br> Line is not available for picking";
      $dbc->rollback = true;
      return -99;
@@ -209,7 +213,7 @@ class sd_delivery_header extends dbObject {
     $del_line->line_number = $line_number;
     $line_number ++;
     $del_line->item_id_m = $_POST['item_id_m'][$i];
-    $del_line->quantity = $_POST['line_quantity'][$i];
+    $del_line->quantity = $picked_qty;
     $del_line->save();
 
 
@@ -220,7 +224,7 @@ class sd_delivery_header extends dbObject {
       foreach ($bom_lines_all as $bom_lines) {
        $item_i = item::find_by_item_id_m($bom_lines->component_item_id_m);
        $del_line->item_id_m = $item_i->item_id_m;
-       $qty = $_POST['line_quantity'][$i] * $bom_lines->usage_quantity;
+       $qty = $picked_qty * $bom_lines->usage_quantity;
        try {
         $this->_create_inv_transaction($qty, $i, $item_i->item_id_m);
        } catch (Exception $e) {
@@ -240,8 +244,13 @@ class sd_delivery_header extends dbObject {
      }
     }
 
-    $sol->picked_quantity += $_POST['line_quantity'][$i];
-    $sol->line_status = 'PICKED';
+    $sol->picked_quantity += $picked_qty;
+    if($sol->picked_quantity == $sol->line_quantity){
+     $sol->line_status = 'PICKED';
+    }else{
+     $sol->line_status = 'PARTIAL_PICKED';
+    }
+    
     $sol->save();
     echo "<br> Delivery Line is succefully created. Line Id - " . $del_line->sd_delivery_line_id;
    }
@@ -308,6 +317,7 @@ class sd_delivery_header extends dbObject {
 
  public function multi_select_input_fields() {
   $multi_select_input = [
+   'pick_quantity'
   ];
   return $multi_select_input;
  }

@@ -2630,7 +2630,7 @@ function save_dataInSession(options) {
    save_dataInSession: 1
   },
   success: function () {
-   var openUrl = 'form.php?class_name=sd_pick_list&mode=2&window_type=popup';
+   var openUrl = 'form.php?class_name=sd_pick_list_v&mode=2&window_type=popup';
    void window.open(openUrl, '_blank',
            'width=1200,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
   },
