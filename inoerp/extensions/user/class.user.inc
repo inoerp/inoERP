@@ -14,7 +14,7 @@
 class user extends dbObject {
 
  public static $table_name = "user";
- public static $dependent_classes = ['user_role', 'user_password_reset'];
+ public static $dependent_classes = ['user_role', 'user_password_reset' ,'user_group_access'];
  public static $primary_column = "user_id";
  public static $key_column = 'username';
  public static $module = "extension";

@@ -55,6 +55,7 @@ require_once(INC_EXTENSIONS . DS . "user" . DS . "dashboard" . DS . "class_user_
 require_once(INC_EXTENSIONS . DS . "user" . DS . "dashboard" . DS . "config" . DS . "class_user_dashboard_config.inc");
 require_once(INC_EXTENSIONS . DS . "user" . DS . "favourite" . DS . "class_user_favourite.inc");
 require_once(INC_EXTENSIONS . DS . "role_access" . DS . "class_role_access.inc");
+require_once(INC_EXTENSIONS . DS . "user_group_access" . DS . "class_user_group_access.inc");
 require_once(INC_EXTENSIONS . DS . "role_path" . DS . "class_role_path.inc");
 
 //require_once(INC_BASICS.DS."class.dbObject.inc"); 

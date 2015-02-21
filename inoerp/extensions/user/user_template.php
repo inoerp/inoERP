@@ -81,68 +81,121 @@
  </form>
 </div>
 
+<span class="heading"> User Access Details </span>
+<div id="tabsLine">
+ <ul class="tabMain">
+  <li><a href="#tabsLine-1">Role Control</a></li>
+  <li><a href="#tabsLine-2">User Group Assignment</a></li>
+ </ul>
+ <div class="tabContainer"> 
+  <div id="tabsLine-1" class="tabContent">
+   <div id ="form_line" class="form_line">
+    <form action=""  method="post" id="user_role"  name="user_role">
+     <table id="form_line_data_table" class="form">
+      <thead>
+       <tr>
+        <th>Action</th>
+        <th>User Role Access Id</th>
+        <th>Role Name </th>
+       </tr>
+      </thead>
+      <tbody class="form_data_line_tbody user_role_assignment_values">
+       <?php
+       $linecount = 0;
+       if ($access_level >= 9) {
+        foreach ($user_role_object as $form_line_array) {
+         ?>
+         <tr class="user_role<?php echo $linecount; ?>">
+          <td>   
+           <ul class="inline_action">
+            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
+            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+            <li><input type="checkbox" name="line_id_cb" value="<?php echo $form_line_array->user_role_id; ?>"></li>           
+            <li><?php echo form::hidden_field('user_id', $$class->user_id); ?></li>
+           </ul>
+          </td>
+          <td><?php echo form::text_field('user_role_id', $form_line_array->user_role_id, '8', '12', '', '', '', '1'); ?></td>
+          <td><?php echo $f->select_field_from_object('role_code', role_access::roles(), 'option_line_code', 'option_line_value', $form_line_array->role_code, '', '', '', $readonly); ?> 					 </td>
+         </tr>
+         <?php
+         $linecount++;
+        }
+       } else {
+        foreach ($user_role_object as $form_line_array) {
+         ?>
+         <tr class="user_role<?php echo $linecount; ?>">
+          <td>   
+           <ul class="inline_action">
+            <li class="remove_row_img">No Access </li>
+            <li><?php echo form::hidden_field('user_id', $$class->user_id); ?></li>
+           </ul>
+          </td>
+          <td><?php echo $form_line_array->user_role_id; ?></td>
+          <td><?php echo $form_line_array->role_code; ?>  </td>
+         </tr>
+         <?php
+         $linecount++;
+        }
+       }
+       ?>
+      </tbody>
+     </table>
 
-<div id ="form_line" class="form_line"><span class="heading">Role & Access </span>
- <form action=""  method="post" id="user_role"  name="user_role">
 
-  <table id="form_data_table" class="form">
-   <thead>
-    <tr>
-     <th>Action</th>
-     <th>User Role Access Id</th>
-     <th>Role Name </th>
-    </tr>
-   </thead>
-   <tbody class="form_data_line_tbody user_role_assignment_values">
-    <?php
-    $linecount = 0;
-    if ($access_level >= 9) {
-     foreach ($user_role_object as $form_line_array) {
-      ?>
-      <tr class="user_role<?php echo $linecount; ?>">
-       <td>   
-        <ul class="inline_action">
-         <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-         <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-         <li><input type="checkbox" name="line_id_cb" value="<?php echo $form_line_array->user_role_id; ?>"></li>           
-         <li><?php echo form::hidden_field('user_id', $$class->user_id); ?></li>
-        </ul>
-       </td>
-       <td><?php echo form::text_field('user_role_id', $form_line_array->user_role_id, '8', '12', '', '', '', '1'); ?></td>
-       <td><?php echo $f->select_field_from_object('role_code', role_access::roles(), 'option_line_code', 'option_line_value', $form_line_array->role_code, '', '', '', $readonly); ?> 					 </td>
-      </tr>
-      <?php
-      $linecount++;
-     }
-    } else {
-     foreach ($user_role_object as $form_line_array) {
-      ?>
-      <tr class="user_role<?php echo $linecount; ?>">
-       <td>   
-        <ul class="inline_action">
-         <li class="remove_row_img">No Access </li>
-         <li><?php echo form::hidden_field('user_id', $$class->user_id); ?></li>
-        </ul>
-       </td>
-       <td><?php echo $form_line_array->user_role_id; ?></td>
-       <td><?php echo $form_line_array->role_code; ?>  </td>
-      </tr>
-      <?php
-      $linecount++;
-     }
-    }
-    ?>
-   </tbody>
-  </table>
+    </form> 
+   </div>   
+  </div> 
+
+  <div id="tabsLine-2" class="tabContent">
+   <div id ="form_line2" class="form_line2">
+    <form action=""  method="post" id="user_group_access"  name="user_group_access">
+     <table class="form_line_data_table">
+      <thead> 
+       <tr>
+        <th>Action</th>
+        <th>Rate Assignment Id</th>
+        <th>Cost Type</th>
+        <th>Default Basis</th>
+        <th>Rate</th>
+       </tr>
+      </thead>
+      <tbody class="form_data_line_tbody2 user_group_access_values" >
+       <?php
+       $count = 0;
+       foreach ($user_group_access_object as $user_group_access) {
+        ?>         
+        <tr class="user_group_access<?php echo $count ?>">
+         <td>
+          <?php
+          echo ino_inline_action($$class_third->bom_overhead_rate_assignment_id, array('bom_overhead_id' => $$class->bom_overhead_id));
+          ?>
+         </td>
+         <td><?php form::text_field_wid3('bom_overhead_rate_assignment_id'); ?></td>
+         <td><?php echo $f->select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'cost_type_code', 'cost_type', $$class_third->bom_cost_type, '', '', 1, $readonly); ?></td>
+         <td><?php echo form::select_field_from_object('default_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_third->default_basis, '', $readonly, 'default_basis'); ?> </td>
+         <td><?php form::text_field_wid3('rate'); ?></td>
+        </tr>
+        <?php
+        $count = $count + 1;
+       }
+       ?>
+      </tbody>
+     </table>
+    </form>
+   </div>
+  </div>
+
+ </div>
+
+</div>
 
 
- </form> 
-</div>   
 
 <div id="js_data">
  <ul id="js_saving_data">
   <li class="headerClassName" data-headerClassName="user" ></li>
   <li class="lineClassName" data-lineClassName="user_role" ></li>
+  <li class="lineClassName2" data-lineClassName2="user_group_access" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
   <li class="primary_column_id" data-primary_column_id="user_id" ></li>
   <li class="form_header_id" data-form_header_id="user_header" ></li>

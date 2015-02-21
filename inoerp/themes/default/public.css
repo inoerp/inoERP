@@ -1402,3 +1402,7 @@ ul.column.two_column_form li {
 input.multi_select_input{
         background:  none repeat scroll 0% 0% #FFF !important;
 }
+
+#form_box {
+        margin-bottom: 10px !important;
+}
