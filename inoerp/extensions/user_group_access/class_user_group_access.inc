@@ -52,9 +52,8 @@ class user_group_access extends dbObject {
   "user_group_access_id",
   "user_group_code",
  ];
-
  public $requiredField = [
-    'user_group_code',
+  'user_group_code',
   'org_id',
   'access_level',
  ];
@@ -70,7 +69,6 @@ class user_group_access extends dbObject {
 // function __construct() {
 //	self::assign_user_group_accesss();
 // }
-
 // function __construct() {
 //  if ((!empty($_SESSION['user_roles']) && empty($_SESSION['allowed_path_ids']))) {
 //   $ra_a = [];
@@ -120,7 +118,6 @@ class user_group_access extends dbObject {
   }
  }
 
-
  public function findBy_groupCode($group_code) {
   $sql = "SELECT * FROM " . self::$table_name . " where user_group_code='{$group_code}' ";
   $result = $this->findBySql($sql);
@@ -129,6 +126,19 @@ class user_group_access extends dbObject {
 
  public static function find_by_groupCode($group_code) {
   $sql = "SELECT * FROM " . self::$table_name . " where user_group_code='{$group_code}' ";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
+
+ public static function find_by_user_id($user_id) {
+  $sql = " SELECT ug.user_id, ug.user_group_code, uga.org_id, uga.access_level
+FROM user_group ug,
+user,
+user_group_access uga
+WHERE user.user_id = ug.user_id
+AND uga.user_group_code = ug.user_group_code
+AND user.user_id = '{$user_id}'
+ ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
  }
@@ -152,6 +162,4 @@ class user_group_access extends dbObject {
 
 }
 
-$user_group_access = new user_group_access();
-$ug = &$user_group_access;
 ?>

@@ -10,25 +10,19 @@
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
-      <ul class="column four_column">
+      <ul class="column header_field">
        <li><label><img src="<?php echo HOME_URL; ?>themes/default/images/serach.png" class="user_id select_popup clickable">
-         User ID :</label> 	<?php echo $f->text_field_dsr('user_id'); ?>
-        <a name="show" href="form.php?class_name=user&<?php echo "mode=$mode"; ?>" class="show document_id user_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+         User ID</label><?php echo $f->text_field_dsr('user_id'); ?>
+        <a name="show" href="form.php?class_name=user&<?php echo "mode=$mode"; ?>" class="show document_id user_id"><i class="fa fa-refresh"></i></a> 
        </li>
-       <li><label>User Name :</label>	<?php echo $f->text_field('username', $$class->username, '', '', '', 1, $readonly1); ?></li>
-       <li><label>Password  : </label> 
-        <input type="password" name="enteredPassword[]" value='' maxlength="50" id="enteredPassword" size="30" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >
-       </li>
-       <li><label>Retype Password  : </label> 
-        <input type="password" name="enteredRePassword[]" value=''  maxlength="50" id="enteredRePassword" size="30" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >
-       </li>
-       <li><label>First Name : </label>	<?php echo $f->text_field_dm('first_name'); ?> </li>
-       <li><label>Last Name : </label><?php echo $f->text_field_dm('last_name'); ?>	 </li>
-       <li><label>e-Mail ID :</label> <?php echo$f->text_field_dm('email'); ?> </li>
-       <li><label>Phone :</label> <?php echo $f->text_field_d('phone'); ?> </li>
+       <li><label>User Name</label><?php pa($_SESSION); echo $f->text_field('username', $$class->username, '', '', '', 1, $readonly1); ?></li>
+       <li><label>Password</label><input type="password" name="enteredPassword[]" value='' maxlength="50" id="enteredPassword" size="20" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >       </li>
+       <li><label>Retype Password</label><input type="password" name="enteredRePassword[]" value=''  maxlength="50" id="enteredRePassword" size="20" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >       </li>
+       <li><label>First Name</label>	<?php echo $f->text_field_dm('first_name'); ?> </li>
+       <li><label>Last Name</label><?php echo $f->text_field_dm('last_name'); ?>	 </li>
+       <li><label>e-Mail ID</label> <?php echo$f->text_field_dm('email'); ?> </li>
+       <li><label>Phone</label> <?php echo $f->text_field_d('phone'); ?> </li>
       </ul>
-     </div>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div class="large_shadow_box"> 
@@ -106,13 +100,10 @@
         foreach ($user_role_object as $form_line_array) {
          ?>
          <tr class="user_role<?php echo $linecount; ?>">
-          <td>   
-           <ul class="inline_action">
-            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-            <li><input type="checkbox" name="line_id_cb" value="<?php echo $form_line_array->user_role_id; ?>"></li>           
-            <li><?php echo form::hidden_field('user_id', $$class->user_id); ?></li>
-           </ul>
+          <td>
+                    <?php
+          echo ino_inline_action($form_line_array->user_role_id, array('user_id' => $$class->user_id));
+          ?>
           </td>
           <td><?php echo form::text_field('user_role_id', $form_line_array->user_role_id, '8', '12', '', '', '', '1'); ?></td>
           <td><?php echo $f->select_field_from_object('role_code', role_access::roles(), 'option_line_code', 'option_line_value', $form_line_array->role_code, '', '', '', $readonly); ?> 					 </td>
@@ -148,32 +139,28 @@
 
   <div id="tabsLine-2" class="tabContent">
    <div id ="form_line2" class="form_line2">
-    <form action=""  method="post" id="user_group_access"  name="user_group_access">
+    <form action=""  method="post" id="user_group_line"  name="user_group_line">
      <table class="form_line_data_table">
       <thead> 
        <tr>
         <th>Action</th>
-        <th>Rate Assignment Id</th>
-        <th>Cost Type</th>
-        <th>Default Basis</th>
-        <th>Rate</th>
+        <th>Group Access Id</th>
+        <th>Group Name</th>
        </tr>
       </thead>
-      <tbody class="form_data_line_tbody2 user_group_access_values" >
+      <tbody class="form_data_line_tbody2 user_group_values" >
        <?php
-       $count = 0;
-       foreach ($user_group_access_object as $user_group_access) {
+              $count = 0;
+       foreach ($user_group_object as $user_group) {
         ?>         
-        <tr class="user_group_access<?php echo $count ?>">
+        <tr class="user_group<?php echo $count ?>">
          <td>
           <?php
-          echo ino_inline_action($$class_third->bom_overhead_rate_assignment_id, array('bom_overhead_id' => $$class->bom_overhead_id));
+          echo ino_inline_action($user_group->user_group_id, array('user_id' => $$class->user_id));
           ?>
          </td>
-         <td><?php form::text_field_wid3('bom_overhead_rate_assignment_id'); ?></td>
-         <td><?php echo $f->select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'cost_type_code', 'cost_type', $$class_third->bom_cost_type, '', '', 1, $readonly); ?></td>
-         <td><?php echo form::select_field_from_object('default_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_third->default_basis, '', $readonly, 'default_basis'); ?> </td>
-         <td><?php form::text_field_wid3('rate'); ?></td>
+         <td><?php echo $f->text_field_ap(array('name' => 'user_group_id' , 'value' => $user_group->user_group_id, 'readonly' => 1)); ?></td>
+         <td><?php echo $f->select_field_from_object('user_group_code', user_group_access::user_groups(), 'option_line_code', 'option_line_value', $user_group->user_group_code, '', '', 1, $readonly); ?></td>
         </tr>
         <?php
         $count = $count + 1;
@@ -195,7 +182,7 @@
  <ul id="js_saving_data">
   <li class="headerClassName" data-headerClassName="user" ></li>
   <li class="lineClassName" data-lineClassName="user_role" ></li>
-  <li class="lineClassName2" data-lineClassName2="user_group_access" ></li>
+  <li class="lineClassName2" data-lineClassName2="user_group" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
   <li class="primary_column_id" data-primary_column_id="user_id" ></li>
   <li class="form_header_id" data-form_header_id="user_header" ></li>

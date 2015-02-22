@@ -12,7 +12,7 @@
  function importSQL($sqlfile, $connection) {
   $queries = getQueriesFromSQLFile($sqlfile);
   $count = 0;
-  $total = 713;
+  $total = 750;
   foreach ($queries as $query) {
    $count++;
    try {

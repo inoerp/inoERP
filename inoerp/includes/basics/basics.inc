@@ -49,6 +49,7 @@ require_once(INC_CLASS . DS . "class_getsvgimage.inc");
 require_once(INC_EXTENSIONS . DS . "engine" . DS . "class_engine.inc");
 require_once(INC_EXTENSIONS . DS . "user" . DS . "class.user.inc");
 require_once(INC_EXTENSIONS . DS . "user" . DS . "class.user_role.inc");
+require_once(INC_EXTENSIONS . DS . "user" . DS . "class_user_group.inc");
 require_once(INC_EXTENSIONS . DS . "user" . DS . "class.user_password_reset.inc");
 require_once(INC_EXTENSIONS . DS . "user" . DS . "activity" . DS . "class_user_activity_v.inc");
 require_once(INC_EXTENSIONS . DS . "user" . DS . "dashboard" . DS . "class_user_dashboard_v.inc");
