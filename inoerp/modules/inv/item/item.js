@@ -170,32 +170,21 @@ $(document).ready(function () {
  });
 
 //
-// $('a.show.item_number').click(function (e) {
-//  var org_id = $('#org_id').val();
-//  var item_number = $('#item_number').val();
-//  var itemDefined = false;
-//  $('#inventory_assignment').find('li :checked').each(function () {
-//   if ($(this).closest('li').data('org_id') == org_id) {
-//    itemDefined = true;
-//    return;
-//   }
-//  });
-//  if (itemDefined) {
-//   if (org_id) {
-//    $(this).attr('href', modepath() + 'item_number=' + item_number + '&org_id=' + org_id);
-//   } else {
-//    e.preventDefault();
-//    alert("Select the Organization or Query by item_id ");
-//   }
-//  } else {
-//   e.preventDefault();
-//   alert('Item is not defined in the organization.Select a differnt organization');
-//  }
-//
-// });
-//
-//
-//
+$('#item').off('change', '.inventory_item_cb').on('change', '.inventory_item_cb' , function(){
+  if(!$(this).is(":checked")) {
+  $('.stockable_cb,.transactable_cb,.reservable_cb,.cycle_count_enabled_cb').prop('checked', false).prop('disabled',true);
+  }else{
+$('.stockable_cb,.transactable_cb,.reservable_cb').prop('checked', true).prop('disabled', false);
+  }
+});
+
+$('#item').off('change', '.customer_ordered_cb').on('change', '.customer_ordered_cb' , function(){
+  if(!$(this).is(":checked")) {
+  $('.internal_ordered_cb,.shippable_cb,.returnable_cb').prop('checked', false).prop('disabled',true);
+  }else{
+$('.internal_ordered_cb,.shippable_cb,.returnable_cb').prop('checked', true).prop('disabled', false);
+  }
+});
 
 
 

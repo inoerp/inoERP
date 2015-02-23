@@ -15,7 +15,7 @@
          User ID</label><?php echo $f->text_field_dsr('user_id'); ?>
         <a name="show" href="form.php?class_name=user&<?php echo "mode=$mode"; ?>" class="show document_id user_id"><i class="fa fa-refresh"></i></a> 
        </li>
-       <li><label>User Name</label><?php pa($_SESSION); echo $f->text_field('username', $$class->username, '', '', '', 1, $readonly1); ?></li>
+       <li><label>User Name</label><?php echo $f->text_field('username', $$class->username, '', '', '', 1, $readonly1); ?></li>
        <li><label>Password</label><input type="password" name="enteredPassword[]" value='' maxlength="50" id="enteredPassword" size="20" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >       </li>
        <li><label>Retype Password</label><input type="password" name="enteredRePassword[]" value=''  maxlength="50" id="enteredRePassword" size="20" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >       </li>
        <li><label>First Name</label>	<?php echo $f->text_field_dm('first_name'); ?> </li>

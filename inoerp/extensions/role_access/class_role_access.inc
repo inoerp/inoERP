@@ -116,7 +116,7 @@ class role_access extends dbObject {
     $paths = $path->findBy_oBjClassName_Mode($obj_class_name, $mode);
     if (!empty($paths)) {
      foreach ($paths as $path) {
-      $allowed_path_ids[] = $path->path_id;
+        array_push($allowed_path_ids, $path->path_id);
      }
     }
    }

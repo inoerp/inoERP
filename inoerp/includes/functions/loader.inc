@@ -6,6 +6,7 @@ $read_access = false;
 $write_access = false;
 $update_access = false;
 $access_level = null;
+$no_organization_access = false;
 
 if (empty($mode)) {
  if (!empty($_GET['mode'])) {
@@ -199,8 +200,10 @@ if (($continue) && (!empty($class_names))) {
    if ((empty($$class->field_a))) {
     $$class->field_a = get_dbColumns($class);
    }
-   foreach ($$class->field_a as $key => $value) {
-    $$class->$value = NULL;
+   if (!empty($$class->field_a)) {
+    foreach ($$class->field_a as $key => $value) {
+     $$class->$value = NULL;
+    }
    }
   }
 
@@ -228,6 +231,32 @@ if (($continue) && (!empty($class_names))) {
     foreach ($$class as $key => $value) {
      if ((!empty($value)) && (property_exists($$class, $key))) {
       $$class->$key = $value;
+     }
+    }
+//validate organization access where applicable
+    if (property_exists($$class, 'org_id')) {
+     if (empty($_SESSION['user_org_access'])) {
+      $no_organization_access = true;
+      return;
+     }
+     $doc_org_id_loader = $$class->org_id;
+     if (!in_array($doc_org_id_loader, array_keys($_SESSION['user_org_access']))) {
+      $no_organization_access = true;
+      return;
+     } else {
+      $mode = $_SESSION['user_org_access'][$doc_org_id_loader];
+     }
+    } else if (property_exists($$class, 'bu_org_id')) {
+     if (empty($_SESSION['user_org_access'])) {
+      $no_organization_access = true;
+      return;
+     }
+     $doc_org_id_loader = $$class->bu_org_id;
+     if (!in_array($doc_org_id_loader, array_keys($_SESSION['user_org_access']))) {
+      $no_organization_access = true;
+      return;
+     } else {
+      $mode = $_SESSION['user_org_access'][$doc_org_id_loader];
      }
     }
 
@@ -376,25 +405,24 @@ if (($continue) && (!empty($class_names))) {
      require_once 'loader_search.inc';
     }
 
-    if(empty($search_result_statement)){
-         if (method_exists($class, 'search_add_extra_fields')) {
-     $class::search_add_extra_fields($search_result);
-    }
-
-    if (property_exists($class, 'search')) {
-     foreach ($$class->search as $searchParaKey => $searchParaValue) {
-      $s->setProperty($searchParaKey, $searchParaValue);
+    if (empty($search_result_statement)) {
+     if (method_exists($class, 'search_add_extra_fields')) {
+      $class::search_add_extra_fields($search_result);
      }
-    }
 
-    $s->setProperty('result', $search_result);
-    $s->setProperty('_searching_class', $class);
-    $s->setProperty('_per_page', $per_page);
-    $s->setProperty('primary_column_s', $primary_column);
-    $s->setProperty('column_array_s', $column_array);
-    $search_result_statement = $search->search_result_op();
-    }
+     if (property_exists($class, 'search')) {
+      foreach ($$class->search as $searchParaKey => $searchParaValue) {
+       $s->setProperty($searchParaKey, $searchParaValue);
+      }
+     }
 
+     $s->setProperty('result', $search_result);
+     $s->setProperty('_searching_class', $class);
+     $s->setProperty('_per_page', $per_page);
+     $s->setProperty('primary_column_s', $primary_column);
+     $s->setProperty('column_array_s', $column_array);
+     $search_result_statement = $search->search_result_op();
+    }
    }
   }
   //---------------------------------------END OF SEARCH------------------------------------------------
@@ -550,12 +578,12 @@ if ($continue && !empty($form_page)) {
   }
   array_push($css_file_paths, $css_file_path);
  }
- 
+
  foreach ($include_file_names as $key => $pathname) {
   include_once "$pathname";
  }
- $custom_inc_file_name = HOME_DIR.'/custom/include/'.$class.'_include.inc';
- if(file_exists($custom_inc_file_name)){
+ $custom_inc_file_name = HOME_DIR . '/custom/include/' . $class . '_include.inc';
+ if (file_exists($custom_inc_file_name)) {
   include_once "$custom_inc_file_name";
  }
 } else {

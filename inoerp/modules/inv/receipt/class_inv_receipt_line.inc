@@ -206,8 +206,10 @@ class inv_receipt_line extends dbObject {
    }
    $this->save();
   } else if (!empty($this->inv_receipt_line_id) && !empty($this->sd_so_line_id)) {
-   $this->_create_inv_transactions();
-   $this->_after_save_rmaReceipt();
+   if(!empty($this->item_id_m)){
+    $this->_create_inv_transactions();
+   }
+      $this->_after_save_rmaReceipt();
   }
  }
 

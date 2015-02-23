@@ -207,6 +207,7 @@ class inv_transaction extends dbObject {
  public $kit_cb;
  public $ledger_id;
  private $_ledger_id;
+ private $_asset_create_journal = true;
 
  public function setProperty($property, $value) {
   if (property_exists($this, $property)) {
@@ -663,8 +664,10 @@ class inv_transaction extends dbObject {
   $item = item::find_by_orgId_item_id_m($this->item_id_m, $this->org_id);
   if ($item) {
    if (empty($item->inventory_item_cb) || empty($item->transactable_cb)) {
-    $ret = -90;
+    $ret = 2;
     echo "<br> The item is not enabled for Inventory Transaction";
+   } else if (empty($item->inventory_asset_cb)) {
+    $this->_asset_create_journal = false;
    }
   } else {
    $ret = -90;
@@ -692,9 +695,10 @@ class inv_transaction extends dbObject {
  }
 
  public function _before_save() {
-//   pa($this);
-  if ($this->_validate_before_save() < 0) {
-   return -90;
+
+  $validate_before_save_r = $this->_validate_before_save();
+  if ($validate_before_save_r < 0) {
+   return $validate_before_save_r;
   }
 
   if (!empty($this->org_id)) {
@@ -1070,6 +1074,9 @@ class inv_transaction extends dbObject {
     $onhand->revision_name = $this->revision_name;
     $update_result = $onhand->updateOnhand();
     $this->_onhand_id_from = $onhand->onhand_id;
+    if (!$this->_asset_create_journal) {
+     break;
+    }
     //create journals for Misc Issue/ WIP Return - from locations
     $journal_line_a = $this->_cretae_journal_line_array($element_value_a, $this->from_subinventory_id, 'cr', 1);
 
@@ -1155,6 +1162,9 @@ class inv_transaction extends dbObject {
     $onhand->revision_name = $this->revision_name;
     $update_result = $onhand->updateOnhand();
     $this->_onhand_id_to = $onhand->onhand_id;
+    if (!$this->_asset_create_journal) {
+     break;
+    }
     //create Dr journals lines
     $journal_line_a = $this->_cretae_journal_line_array($element_value_a, $this->to_subinventory_id, 'dr', 1);
 
@@ -1164,7 +1174,7 @@ class inv_transaction extends dbObject {
      $po_v = new po_all_v();
      $po_v->po_detail_id = $this->po_detail_id;
      $po_v_i = $po_v->findBy_poDetailId();
-     $accural_amount = $this->quantity * ($po_v_i->gl_line_price/$po_v_i->line_quantity);
+     $accural_amount = $this->quantity * ($po_v_i->gl_line_price / $po_v_i->line_quantity);
      $total_amount = 0;
      $line_number = 1;
      foreach ($journal_line_a as $journal_line) {
@@ -1270,6 +1280,9 @@ class inv_transaction extends dbObject {
     $onhand->revision_name = $this->revision_name;
     $onhand->org_id = $this->org_id;
     $update_result = $onhand->updateOnhand();
+    if (!$this->_asset_create_journal) {
+     break;
+    }
     $this->_onhand_id_from = $onhand->onhand_id_from;
     $this->_onhand_id_to = $onhand->onhand_id_to;
     $journal_line_from_a = $this->_cretae_journal_line_array($element_value_a, $this->from_subinventory_id, 'cr', 1);
@@ -1288,12 +1301,20 @@ class inv_transaction extends dbObject {
     break;
   }
 
-  if ($update_result > 0 && $this->_gl_transaction) {
-   $this->_save_journal_header();
-   foreach ($journal_line_a as $journal_lines) {
-    $this->_save_journal_lines($journal_lines);
-   }
+  if ($update_result > 0) {
    $this->status = 'Success';
+  }
+
+  if ($this->_asset_create_journal && $this->_gl_transaction) {
+   try {
+    $this->_save_journal_header();
+    foreach ($journal_line_a as $journal_lines) {
+     $this->_save_journal_lines($journal_lines);
+    }
+   } catch (Exception $e) {
+    $dbc->rollback = 1;
+    echo "<br> Failed to update Journal details. Issue @ inv_transaction @@ Line " . __LINE__;
+   }
   }
   //update the transaction status
   $this->save();
@@ -1450,7 +1471,7 @@ class inv_transaction extends dbObject {
   $po_v = new po_all_v();
   $po_v->po_detail_id = $this->po_detail_id;
   $po_v_i = $po_v->findBy_poDetailId();
-  $accural_amount = $this->quantity * ($po_v_i->gl_line_price/$po_v_i->line_quantity);
+  $accural_amount = $this->quantity * ($po_v_i->gl_line_price / $po_v_i->line_quantity);
   $total_amount = 0;
   $line_number = 1;
   foreach ($journal_line_a as $journal_line) {

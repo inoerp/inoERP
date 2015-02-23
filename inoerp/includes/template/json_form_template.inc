@@ -1,4 +1,12 @@
 <div id="json_form_data">
+ <?php
+ if ($no_organization_access) {
+  echo '<div id="structure">';
+  echo ino_access_denied_organizationAcess();
+  echo '</div></div>';
+  return;
+ }
+ ?>
  <div id="header_top_container" style="display: block;">
   <?php
   $show_header_links = true;
@@ -47,10 +55,14 @@
    $user_creationBy = user::find_by_id($$class->created_by);
    $user_lastUpdateBy = user::find_by_id($$class->last_update_by);
    echo '<div id="document_history" ><ul id="document_history_ul">';
-   echo '<li id="created_by">Created By : ' . $user_creationBy->username . '</li>';
-   echo '<li id="creation_date">Creation Date : ' . $$class->creation_date . '</li>';
-   echo '<li id="last_update_by">Last Update By : ' . $user_lastUpdateBy->username . '</li>';
-   echo '<li id="last_update_date">Last Update Date : ' . $$class->last_update_date . '</li>';
+   if (!empty($user_creationBy)) {
+    echo '<li id="created_by">Created By : ' . $user_creationBy->username . '</li>';
+    echo '<li id="creation_date">Creation Date : ' . $$class->creation_date . '</li>';
+   }
+   if (!empty($user_creationBy)) {
+    echo '<li id="last_update_by">Last Update By : ' . $user_lastUpdateBy->username . '</li>';
+    echo '<li id="last_update_date">Last Update Date : ' . $$class->last_update_date . '</li>';
+   }
    echo '</ul></div>';
   }
  }

@@ -219,7 +219,7 @@ class search extends dbObject {
   global $f;
   $function_name = !empty($_GET['function_name']) ? $_GET['function_name'] : '';
   $report_name = !empty($_GET['report_name']) ? $_GET['report_name'] : '';
-    if (!empty($_GET['window_type'])) {
+  if (!empty($_GET['window_type'])) {
    $window_type = $_GET['window_type'];
   } else {
    $window_type = '';
@@ -458,10 +458,13 @@ class search extends dbObject {
 
   $program_form_statement .= "<li><label>Dynamic Criteria </label>";
   $program_form_statement .= "<select name=\"new_search_criteria\" id=\"new_search_criteria\" class=\"new_search_criteria\">";
-  foreach ($search_array as $key => $search_value) {
-   $program_form_statement .= '<option value="' . htmlentities($search_value) . '"';
-   $program_form_statement .= '>' . $search_value . '</option>';
+  if (!empty($search_array)) {
+   foreach ($search_array as $key => $search_value) {
+    $program_form_statement .= '<option value="' . htmlentities($search_value) . '"';
+    $program_form_statement .= '>' . $search_value . '</option>';
+   }
   }
+
   $program_form_statement .= '</select>';
 //	$program_form_statement .= '<li><input type="button" class="add button" id="new_search_criteria_add" value="Add"></li>';
   $program_form_statement .=$this->_add_hidden_fields();

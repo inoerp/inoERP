@@ -34,8 +34,11 @@ defined('DB_NAME') ? null : define("DB_NAME", "");
 
 
 require_once(INC_CLASS . DS . "class.session.inc");
-require_once(INC_CLASS . DS . "class.dbc.inc");
-require_once(INC_CLASS . DS . "class.dbObject.inc");
+require_once(INC_CLASS . DS . "class_dbc.inc");
+require_once(INC_CLASS . DS . "trait_dbObject_t.inc");
+require_once(INC_CLASS . DS . "class_dbObject.inc");
+require_once(INC_CLASS . DS . "class_dbc2.inc");
+require_once(INC_CLASS . DS . "class_dbObject2.inc");
 require_once(INC_EXTENSIONS . DS . "site_info" . DS . "class_site_info.inc");
 require_once(INC_CLASS . DS . "class.form.inc");
 require_once(INC_CLASS . DS . "class_inoform.inc");
@@ -83,6 +86,7 @@ require_once(INC_MODULE . DS . "sys" . DS . "secondary_field" . DS . "instance" 
 require_once(INC_MODULE . DS . "sys" . DS . "extra_field" . DS . "class_sys_extra_field.inc");
 require_once(INC_MODULE . DS . "sys" . DS . "extra_field" . DS . "instance" . DS . "class_sys_extra_field_instance.inc");
 require_once(INC_MODULE . DS . "sys" . DS . "printer" . DS . "class_sys_printer.inc");
+require_once(INC_MODULE . DS . "sys" . DS . "db_update" . DS . "class_sys_db_update.inc");
 require_once(INC_ORGS . DS . "class_org.inc");
 require_once(INC_ORGS . DS . "class_org_v.inc");
 require_once(INC_ORGS . DS . "enterprise" . DS . "class_enterprise.inc");

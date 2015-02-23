@@ -37,14 +37,12 @@ function getFormDetails(url) {
    $('.show_loading_small').hide();
   }
  }).done(function (result) {
-  var newContent = $(result).find('div#structure').html();
+    var newContent = $(result).find('div#structure').html();
   var allButton = $(result).find('div#header_top_container #form_top_image').html();
   if (typeof allButton === 'undefined') {
    allButton = '';
   }
-  ;
-
-  var commentForm = $(result).find('div#comment_form').html();
+    var commentForm = $(result).find('div#comment_form').html();
   if (newContent) {
    $('#structure').replaceWith('<div id="structure">' + newContent + '</div>');
    $('#header_top_container').replaceWith('<div id="header_top_container"> <ul id="form_top_image" class="draggable">' + allButton + '</ul></div>');

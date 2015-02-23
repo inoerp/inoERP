@@ -4,6 +4,17 @@ class po_all_v extends dbObject {
 
  public static $table_name = "po_all_v";
  public static $primary_column = "po_header_id";
+ public static $system_info = [
+  'name' => 'PO All View',
+  'number' => '2220',
+  'description' => 'View for all PO Information',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'po',
+  'weight' => 1
+ ];
  public $field_a = [
   'po_header_id',
   'bu_org_id',
@@ -203,8 +214,8 @@ class po_all_v extends dbObject {
   'ra_open_po_by_supplier',
   'ra_po_purchase_type_usage',
  ];
-   public $search_functions = [
-		 'Organization' => 'search_org_name',
+ public $search_functions = [
+  'Organization' => 'search_org_name',
  ];
  public $po_header_id;
  public $bu_org_id;

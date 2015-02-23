@@ -302,87 +302,87 @@ class view extends dbObject {
   return $type;
  }
 
- public static function find_all_tables_array() {
-  global $db;
-  $query = " SELECT TABLE_NAME from information_schema.tables where TABLE_TYPE ='BASE TABLE' "
-   . " AND TABLE_SCHEMA= '" . DB_NAME . "' ";
-  $result = $db->find_by_sql($query);
-
-  $table_name_array = array();
-  foreach ($result as $object) {
-   $table_name_array [] = $object->TABLE_NAME;
-  }
-  return $table_name_array;
- }
-
- public static function find_all_tables() {
-  global $db;
-  $query = " SELECT TABLE_NAME from information_schema.tables  "
-   . " where TABLE_TYPE ='BASE TABLE' AND TABLE_SCHEMA= '" . DB_NAME . "' ";
-  $result = $db->find_by_sql($query);
-  return $result;
- }
-
- public static function find_all_tables_and_views() {
-  global $db;
-  $query = " SELECT TABLE_NAME from information_schema.tables  "
-   . " where TABLE_SCHEMA= '" . DB_NAME . "' ";
-  $result = $db->find_by_sql($query);
-  return $result;
- }
-
- public static function count_all_tables() {
-  global $db;
-  $query = " SELECT count(TABLE_NAME) as table_count from information_schema.tables  "
-   . " WHERE TABLE_SCHEMA= '" . DB_NAME . "' ";
-  $result = $db->find_by_sql($query);
-  return !empty($result) ? array_pop($result) : null;
- }
-
- public static function find_all_tables_gen() {
-  global $db;
-  $query = " SELECT TABLE_NAME from information_schema.tables where TABLE_TYPE ='BASE TABLE' "
-   . " AND TABLE_SCHEMA= '" . DB_NAME . "' ";
-  $result = $db->find_by_sql($query);
-
-  foreach ($result as $object) {
-   yield $object->TABLE_NAME;
-  }
- }
-
- public function findAll_tables() {
-  $query = " SELECT TABLE_NAME from information_schema.tables where TABLE_TYPE ='BASE TABLE' "
-   . " AND TABLE_SCHEMA= '" . DB_NAME . "' ";
-  $result = $this->findBySql($query);
-  $table_name_array = array();
-  foreach ($result as $object) {
-   $table_name_array [] = $object->TABLE_NAME;
-  }
-  return $table_name_array;
- }
-
- public static function find_columns_of_table($table_name) {
-  global $db;
-  if (!empty($table_name)) {
-   $query = "SHOW COLUMNS FROM $table_name ";
-   $result = $db->find_by_sql($query);
-
-   $column_name_array = array();
-   foreach ($result as $object) {
-    $column_name_array [] = $object->Field;
-   }
-   return $column_name_array;
-  }
- }
-
- public static function find_columns_of_table_obj($table_name) {
-  global $db;
-  if (!empty($table_name)) {
-   $query = "SHOW COLUMNS FROM $table_name ";
-   $result = $db->find_by_sql($query);
-   return $result;
-  }
- }
+// public static function find_all_tables_array() {
+//  global $db;
+//  $query = " SELECT TABLE_NAME from information_schema.tables where TABLE_TYPE ='BASE TABLE' "
+//   . " AND TABLE_SCHEMA= '" . DB_NAME . "' ";
+//  $result = $db->find_by_sql($query);
+//
+//  $table_name_array = array();
+//  foreach ($result as $object) {
+//   $table_name_array [] = $object->TABLE_NAME;
+//  }
+//  return $table_name_array;
+// }
+//
+// public static function find_all_tables() {
+//  global $db;
+//  $query = " SELECT TABLE_NAME from information_schema.tables  "
+//   . " where TABLE_TYPE ='BASE TABLE' AND TABLE_SCHEMA= '" . DB_NAME . "' ";
+//  $result = $db->find_by_sql($query);
+//  return $result;
+// }
+//
+// public static function find_all_tables_and_views() {
+//  global $db;
+//  $query = " SELECT TABLE_NAME from information_schema.tables  "
+//   . " where TABLE_SCHEMA= '" . DB_NAME . "' ";
+//  $result = $db->find_by_sql($query);
+//  return $result;
+// }
+//
+// public static function count_all_tables() {
+//  global $db;
+//  $query = " SELECT count(TABLE_NAME) as table_count from information_schema.tables  "
+//   . " WHERE TABLE_SCHEMA= '" . DB_NAME . "' ";
+//  $result = $db->find_by_sql($query);
+//  return !empty($result) ? array_pop($result) : null;
+// }
+//
+// public static function find_all_tables_gen() {
+//  global $db;
+//  $query = " SELECT TABLE_NAME from information_schema.tables where TABLE_TYPE ='BASE TABLE' "
+//   . " AND TABLE_SCHEMA= '" . DB_NAME . "' ";
+//  $result = $db->find_by_sql($query);
+//
+//  foreach ($result as $object) {
+//   yield $object->TABLE_NAME;
+//  }
+// }
+//
+// public function findAll_tables() {
+//  $query = " SELECT TABLE_NAME from information_schema.tables where TABLE_TYPE ='BASE TABLE' "
+//   . " AND TABLE_SCHEMA= '" . DB_NAME . "' ";
+//  $result = $this->findBySql($query);
+//  $table_name_array = array();
+//  foreach ($result as $object) {
+//   $table_name_array [] = $object->TABLE_NAME;
+//  }
+//  return $table_name_array;
+// }
+//
+// public static function find_columns_of_table($table_name) {
+//  global $db;
+//  if (!empty($table_name)) {
+//   $query = "SHOW COLUMNS FROM $table_name ";
+//   $result = $db->find_by_sql($query);
+//
+//   $column_name_array = array();
+//   foreach ($result as $object) {
+//    $column_name_array [] = $object->Field;
+//   }
+//   return $column_name_array;
+//  }
+// }
+//
+// public static function find_columns_of_table_obj($table_name) {
+//  global $db;
+//  if (!empty($table_name)) {
+//   $query = "SHOW COLUMNS FROM $table_name ";
+//   $result = $db->find_by_sql($query);
+//   return $result;
+//  }
+// }
 
  public static function find_all_idColumns() {
   global $db;

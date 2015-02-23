@@ -38,7 +38,7 @@ if (!empty($class_names)) {
  include_once("includes/functions/loader.inc");
 
  if (empty($access_level) || ($access_level < 2 )) {
-  access_denied();
+  echo '<div><div id="structure">'.  access_denied().  '</div></div>';
   return;
  }
 

@@ -119,6 +119,14 @@ function get_class_name_from_path($path) {
  return $data;
 }
 
+function ino_arrayObj_to_array($array_obj, $keyname){
+ $ret_a = [];
+ foreach($array_obj as $obj){
+  $ret_a[] = $obj->$keyname;
+ }
+ return $ret_a;
+}
+
 function get_dbColumns($table_name) {
  if (!empty($table_name)) {
   global $dbc;
@@ -127,7 +135,7 @@ function get_dbColumns($table_name) {
   try {
    $prepare->execute();
   } catch (Exception $e) {
-   echo " $table_name not found. Error on functions @L72 " . $e->getMessage();
+   return false;
   }
 
   $fields = $prepare->fetchAll(PDO::FETCH_COLUMN, 0);
@@ -179,11 +187,28 @@ function ino_inline_action($line_id_cb_val, $hidden_field_a, $add_image_class='a
 function access_denied($msg = '') {
 // header("Location: access_denied.php?message=$msg");
 // redirect_to(HOME_URL . 'access_denied.php');
- echo '<h1> Access denied! - You dont have enough privillage to access the requested page </h1>';
- if (!empty($msg)) {
-  echo $msg;
+ $stmt  = '<div class="alert alert-danger">
+        <div class="jumbotron">
+        <h1>Access Denied</h1>
+        <p class="lead">ou dont have enough privillage to access the requested page.</p>
+        <p><a class="btn btn-success" role="button" href="javascript:history.go(-1)"><span class="button">Click Here </a> to go back to the previous page </p>
+';
+  if (!empty($msg)) {
+  $stmt .= '<p>'. $msg .'</p>';
  }
- echo '<br><a href="javascript:history.go(-1)"><span class="button">Click Here </a> to go back to the previous page';
+   $stmt .= ' </div></div>';
+ return $stmt;
+}
+
+function ino_access_denied_organizationAcess($msg = '') {
+$stmt  = ' <div class="alert alert-danger">
+        <div class="jumbotron">
+        <h1>Access Denied</h1>
+        <p class="lead">You dont have organization access required for this document.</p>
+        <p><a class="btn btn-success" role="button" href="form.php?class_name=user&mode=2&user_id='.$_SESSION['user_id'].'">Click Here </a> to check your access privileges </p>
+      </div>
+ </div>';
+return $stmt;
 }
 
 function site_maintenance($msg) {
@@ -894,9 +919,29 @@ function search_implement_all_cb() {
  return $f->checkBox_field('implement_all_cb', '');
 }
 
+function search_program_mode() {
+ global $f;
+ $stmt = $f->select_field_from_array('program_mode', array('TEST' => 'Test', 'FINAL' => 'Final'), '', 'program_mode');
+ return $stmt;
+}
+
+function search_db_name_old() {
+ global $f;
+ $stmt = $f->text_field_ap(array('name' => 'db_name', 'value' => DB_NAME2, 'readonly' => true));
+ return $stmt;
+}
+
 function search_convert_to_prod_mode() {
  global $f;
  $stmt = $f->select_field_from_array('convert_to_prod_mode', array('TEST' => 'Test', 'FINAL' => 'Final'), '', 'convert_to_prod_mode');
+ return $stmt;
+}
+
+function search_exclusion_mode() {
+ global $f;
+ $stmt = $f->select_field_from_array('exclusion_mode', 
+  array( 'ALL_SETUP' => 'Keep All Setups - Remove Transaction Data','LIMITED_SETUP' => 'Keep Important Setups - Remove Transaction & Some Setups ', 
+  'ONLY_SETUP' => 'Remove All - I Know What I\'m Doing '), '', 'exclusion_mode');
  return $stmt;
 }
 

@@ -80,7 +80,7 @@ class session {
  }
 
  private function _assign_user_groups() {
-  $user_group_access_all = user_group_access::find_by_user_id('34');
+  $user_group_access_all = user_group_access::find_by_user_id($_SESSION['user_id']);
   if (empty($user_group_access_all)) {
    $_SESSION['user_org_access'] = null;
    return;
@@ -94,7 +94,8 @@ class session {
  }
 
  public function logout() {
-  unset($_SESSION['user_id']);
+//  unset($_SESSION['user_id']);
+  unset($_SESSION);
   unset($this->user_id);
   unset($this->username);
   $this->login_flag = false;
