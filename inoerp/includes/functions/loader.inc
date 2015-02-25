@@ -1,5 +1,4 @@
 <?php
-
 $continue = true;
 $readonly1 = false;
 $read_access = false;
@@ -23,6 +22,16 @@ if ($mode > 8) {
 }
 if ($continue) {
  include_once (dirname(__FILE__) . '/../basics/basics.inc');
+ require_once __DIR__.'/../../locale/gettext.inc';
+$locale = (isset($_SESSION['lang'])) ? $_SESSION['lang'] : DEFAULT_LOCALE;
+$encoding = 'UTF-8';
+T_setlocale(LC_MESSAGES, $locale);
+$domain = 'messages';
+T_bindtextdomain($domain, LOCALE_DIR);
+T_bind_textdomain_codeset($domain, $encoding);
+T_textdomain($domain);
+
+
  $current_url = $protocol_g . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; //$protocol_g defined in define_const files
 
  global $f;

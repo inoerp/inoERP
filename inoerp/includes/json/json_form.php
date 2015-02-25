@@ -20,6 +20,7 @@ include_once('../functions/loader.inc');
 if (empty($_POST)) {
  try {
   if ($continue) {
+   header("Content-type: text/html; charset=UTF-8");
    include_once(__DIR__.'/../template/json_form_template.inc');
   } else {
    $continue = false;
@@ -30,4 +31,5 @@ if (empty($_POST)) {
   echo $e->getMessage();
  }
 }
+
 ?>

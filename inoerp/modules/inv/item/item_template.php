@@ -2,67 +2,67 @@
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1">Basic Info</a></li>
-    <li><a href="#tabsHeader-2">Inv Assignment</a></li>
-    <li><a href="#tabsHeader-3">Revisions</a></li>
-    <li><a href="#tabsHeader-4">Attachments</a></li>
-    <li><a href="#tabsHeader-5">Note</a></li>
-    <li><a href="#tabsHeader-6">Actions</a></li>
+    <li><a href="#tabsHeader-1"><?php
+      $f = new inoform();
+      echo __('Basic Info')
+      ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Inv Assignment') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Revisions') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo __('Note') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo __('Actions') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
-      <ul class="column header_field">
-       <li>
-        <label>Inventory Org</label><?php
-        if (!empty($item->org_id)) {
-         echo form::select_field_from_object('org_id', $org->findAll_inventory(), 'org_id', 'org', $item->org_id, 'org_id', $readonly, '', '', 1);
-        } else {
-         echo form::select_field_from_object('org_id', $org->findAll_item_master(), 'org_id', 'org', $item->org_id, 'org_id', $readonly, '', '', 1);
-        }
-        ?> 
-       </li>
-       <li>
-        <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="item_id select_popup clickable">
-         Item Id</label><?php $f->text_field_dsr('item_id') ?>
-        <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show document_id item_id"><i class="fa fa-refresh"></i></a> 
-       </li>
-       <li><label>Item Number<img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete item_number clickable">
-        </label><?php echo $f->text_field('item_number', $$class->item_number, '15', 'item_number', 'select_item_number', 1, $readonly_mas); ?>
-        <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show2 document_id findBy_item_number"><i class="fa fa-refresh"></i></a> 
-       </li>
-       <li><label> Description</label><?php echo $f->text_field('item_description', $$class->item_description, '20', 'item_description', '', 1, $readonly_mas); ?></li>
-       <li><label> Product Line</label><?php echo $f->select_field_from_object('product_line', item::product_line(), 'option_line_code', 'option_line_value', $$class->product_line, 'product_line', '', '', $readonly_mas); ?></li>
-      </ul>
-     </div>
+     <ul class="column header_field">
+      <li><?php
+       if (!empty($item->org_id)) {
+        $f->l_select_field_from_object('org_id', $org->findAll_inventory(), 'org_id', 'org', $item->org_id, 'org_id', '', 1, $readonly);
+       } else {
+        $f->l_select_field_from_object('org_id', $org->findAll_item_master(), 'org_id', 'org', $item->org_id, 'org_id', '', 1, $readonly);
+       }
+       ?> 
+      </li>
+      <li>
+       <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="item_id select_popup clickable">
+        <?php echo __('Item Id') ?></label><?php $f->text_field_dsr('item_id') ?>
+       <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show document_id item_id"><i class="fa fa-refresh"></i></a> 
+      </li>
+      <li><label><?php echo __('Item Number') ?><img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete item_number clickable">
+       </label><?php echo $f->text_field('item_number', $$class->item_number, '15', 'item_number', 'select_item_number', 1, $readonly_mas); ?>
+       <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show2 document_id findBy_item_number"><i class="fa fa-refresh"></i></a> 
+      </li>
+      <li><?php $f->l_text_field('item_description', $$class->item_description, '20', 'item_description', '', 1, $readonly_mas); ?></li>
+      <li><?php $f->l_select_field_from_object('product_line', item::product_line(), 'option_line_code', 'option_line_value', $$class->product_line, 'product_line', '', '', $readonly_mas); ?></li>
+     </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column five_column">
-       <li> <label>Master Item Id: </label> <?php echo form::text_field_dr('item_id_m'); ?> </li>
+       <li><?php echo $f->l_text_field_dr('item_id_m'); ?> </li>
       </ul>
       <?php echo!(empty($assigned_inventory_statement)) ? $assigned_inventory_statement : ""; ?>
      </div>
     </div>
     <div id="tabsHeader-3" class="tabContent">
-     <div><ul class='inline'><li>  <label>Update Revision  </label></li><li>  <?php echo $f->checkBox_field('update_revision_cb', '') ?></li></ul>
+     <div><ul class='column header_field'><li><?php $f->l_checkBox_field('update_revision_cb', '') ?></li></ul>
       <div id="tabsDetail">
        <div>
         <div id="tabsDetail-1" class="tabContent">
          <table class="form_line_data_table">
           <thead> 
            <tr>
-            <th>Action</th>
-            <th>Seq#</th>
-            <th>Line Id</th>
-            <th>Revision</th>
-            <th>Description</th>
-            <th>Reason</th>
-            <th>ECO</th>
-            <th class='two_lines'>Eff. Start Date</th>
-            <th class='two_lines'>End Date</th>
-            <th class='two_lines'>Implementation Date</th>
-            <th class='two_lines'>Origination Date</th>
+            <th><?php echo __('Action') ?></th>
+            <th><?php echo __('Seq') ?>#</th>
+            <th><?php echo __('Line Id') ?></th>
+            <th><?php echo __('Revision') ?></th>
+            <th><?php echo __('Description') ?></th>
+            <th><?php echo __('Reason') ?></th>
+            <th><?php echo __('ECO') ?></th>
+            <th class='two_lines'><?php echo __('Eff. Start Date') ?></th>
+            <th class='two_lines'><?php echo __('End Date') ?></th>
+            <th class='two_lines'><?php echo __('Implementation Date') ?></th>
+            <th class='two_lines'><?php echo __('Origination Date') ?></th>
            </tr>
           </thead>
           <tbody class="form_data_line_tbody">
@@ -76,12 +76,10 @@
             $reaonly_ir = !empty($inv_item_revision->inv_item_revision_id) ? true : false;
             ?>         
             <tr class="inv_item_revision<?php echo $count ?>">
-             <td>    
-              <ul class="inline_action">
-               <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-               <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-               <li><input type="checkbox" name="line_id_cb" class='dontCopy' value="<?php echo htmlentities($inv_item_revision->inv_item_revision_id); ?>"></li>           
-              </ul>
+             <td>
+              <?php
+              echo ino_inline_action($inv_item_revision->inv_item_revision_id, '');
+              ?>
              </td>
              <td><?php $f->seq_field_d($count) ?></td>
              <td><?php $f->text_field_wid2sr('inv_item_revision_id'); ?></td>
@@ -135,7 +133,7 @@
      <div> 
       <ul class="column four_column">
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_template select_popup clickable">
-         Item/Template: </label><input type="text" class="text_field select_item_template item_template" id="item_template">
+         <?php echo __('Item/Template') ?>: </label><input type="text" class="text_field select_item_template item_template" id="item_template">
         <button class="button non_clickable apply_item_template " id="apply_item_template">Apply</button>
        </li>
       </ul>
@@ -162,22 +160,16 @@
     <div id="tabsLine-1" class="tabContent">
      <div class="first_rowset"> 
       <ul class="column five_column"> 
-       <li><label>Item Type : </label> 
-        <?php echo $f->select_field_from_object('item_type', item::item_types(), 'option_line_code', 'option_line_value', $item->item_type, 'item_type', '', 1, $readonly); ?>
-       </li> 
-       <li><label>UOM : </label>
-        <?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->uom_id, 'uom_id', '', 1, $readonly); ?>
-       </li>
-       <li><label> Product Line % : </label><?php echo $f->number_field('product_line_percentage', $$class->product_line_percentage, '8'); ?></li>
-       <li><label>Item Status : </label>
-        <?php echo form::select_field_from_object('item_status', item::item_status(), 'option_line_id', 'option_line_code', $item->item_status, 'item_status', $readonly); ?>
-       </li>
+       <li><?php $f->l_select_field_from_object('item_type', item::item_types(), 'option_line_code', 'option_line_value', $item->item_type, 'item_type', '', 1, $readonly); ?>       </li> 
+       <li><?php echo $f->l_select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->uom_id, 'uom_id', '', 1, $readonly); ?>       </li>
+       <li><?php echo $f->l_number_field('product_line_percentage', $$class->product_line_percentage, '8'); ?></li>
+       <li><?php echo $f->l_select_field_from_object('item_status', item::item_status(), 'option_line_id', 'option_line_code', $item->item_status, 'item_status', '', '', $readonly); ?>       </li>
       </ul>
      </div>
 
      <div class="second_rowset">
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title">Long Descriptions</div></div>
+       <div class="panel-heading"><div class="panel-title"><?php echo __('Long Descriptions') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
          <li><?php echo form::text_area('long_description', $item->long_description, '5', '30', ''); ?></li>
@@ -185,15 +177,15 @@
        </div>
       </div>
       <div class="panel panel-collapse panel-ino-classy large_box">
-       <div class="panel-heading"><div class="panel-title">Lead time Information</div></div>
+       <div class="panel-heading"><div class="panel-title"><?php echo __('Lead Time Information') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
-         <li><label>Pre Processing</label><?php echo form::text_field_d('pre_processing_lt'); ?></li>
-         <li><label>Processing</label><?php echo form::text_field_d('processing_lt'); ?></li> 
-         <li><label>Post Processing</label><?php echo form::text_field_d('post_processing_lt'); ?></li> 
-         <li><label>Cumulative Mfg</label><?php echo form::text_field_d('cumulative_mfg_lt'); ?></li>
-         <li><label>Cumulative Total</label><?php echo form::text_field_d('cumulative_total_lt'); ?></li>
-         <li><label>Lead time Lot Size</label><?php echo form::text_field_d('lt_lot_size'); ?></li>
+         <li><?php $f->l_text_field_d('pre_processing_lt'); ?></li>
+         <li><?php $f->l_text_field_d('processing_lt'); ?></li> 
+         <li><?php $f->l_text_field_d('post_processing_lt'); ?></li> 
+         <li><?php $f->l_text_field_d('cumulative_mfg_lt'); ?></li>
+         <li><?php $f->l_text_field_d('cumulative_total_lt'); ?></li>
+         <li><?php $f->l_text_field_d('lt_lot_size'); ?></li>
         </ul>
        </div>
       </div>
@@ -203,77 +195,55 @@
     <!--end of tab1-->
     <div id="tabsLine-2" class="tabContent">
      <div class="first_rowset"> 
-      <ul class="column five_column"> 
-       <li><label>Inventory Item : </label> 
-        <?php echo form::checkBox_field('inventory_item_cb', $$class->inventory_item_cb, '', $readonly); ?>
-       </li>
-       <li><label>Stockable : </label> 
-        <?php echo form::checkBox_field('stockable_cb', $$class->stockable_cb, '', $readonly); ?>
-       </li>
-       <li><label>Transactable : </label> 
-        <?php echo form::checkBox_field('transactable_cb', $$class->transactable_cb, '', $readonly); ?>
-       </li>
-       <li><label>Reservable : </label> 
-        <?php echo form::checkBox_field('reservable_cb', $$class->reservable_cb, '', $readonly); ?>
-       </li>
-       <li><label>Cycle count enabled : </label> 
-        <?php echo form::checkBox_field('cycle_count_enabled_cb', $$class->cycle_count_enabled_cb, '', $readonly); ?>
-       </li>
-       <li><label>Equipment : </label> 
-        <?php echo form::checkBox_field('equipment_cb', $$class->equipment_cb, '', $readonly); ?>
-       </li>
-       <li><label>Electronic Format : </label> 
-        <?php echo form::checkBox_field('electronic_format_cb', $$class->electronic_format_cb, '', $readonly); ?>
-       </li>
-       <li><label>Qty Onhand Revision : </label> 
-        <?php echo form::checkBox_field('onhand_with_rev_cb', $$class->onhand_with_rev_cb, '', $readonly); ?>
-       </li> 
-       <li><label>Rev Number : </label> 
-        <?php echo form::text_field_d('item_rev_number'); ?>
-       </li>
-       <li><label>Locator Control : </label> 
-        <?php echo form::text_field_d('locator_control'); ?>
-       </li>
-       <li><label>Kit Item? : </label> 
-        <?php echo form::checkBox_field('kit_cb', $$class->kit_cb, '', $readonly); ?>
-       </li>
+      <ul class="column header_field"> 
+       <li><?php $f->l_checkBox_field_d('inventory_item_cb'); ?></li>
+       <li><?php $f->l_checkBox_field_d('stockable_cb'); ?></li>
+       <li><?php $f->l_checkBox_field_d('transactable_cb'); ?></li>
+       <li><?php $f->l_checkBox_field_d('reservable_cb'); ?></li>
+       <li><?php $f->l_checkBox_field_d('cycle_count_enabled_cb'); ?></li>
+       <li><?php $f->l_checkBox_field_d('equipment_cb'); ?></li>
+       <li><?php $f->l_checkBox_field_d('electronic_format_cb'); ?></li>
+       <li><?php $f->l_checkBox_field_d('onhand_with_rev_cb'); ?></li>
+       <li><?php $f->l_checkBox_field_d('item_rev_number'); ?></li>
+       <li><?php $f->l_text_field_d('locator_control'); ?></li>
+       <li><?php $f->l_checkBox_field_d('kit_cb'); ?></li>
       </ul>
      </div>
      <div class="second_rowset">
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title">Lot Information</div></div>
+       <div class="panel-heading"><div class="panel-title"><?php echo __('Lot Information') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
-         <li><label>Uniqueness</label><?php echo $f->select_field_from_array('lot_uniqueness', item::$ls_uniqueness_a, $$class->lot_uniqueness); ?>   </li>
-         <li><label>Generation</label><?php echo $f->select_field_from_array('lot_generation', item::$ls_generation_a, $$class->lot_generation); ?></li> 
-         <li><label>Prefix</label><?php echo form::text_field_d('lot_prefix'); ?></li> 
-         <li><label>Starting Number</label><?php echo form::text_field_d('lot_starting_number'); ?></li>
+         <li><?php $f->l_select_field_from_array('lot_uniqueness', item::$ls_uniqueness_a, $$class->lot_uniqueness); ?>   </li>
+         <li><?php $f->l_select_field_from_array('lot_generation', item::$ls_generation_a, $$class->lot_generation); ?></li> 
+         <li><?php $f->l_text_field_d('lot_prefix'); ?></li> 
+         <li><?php $f->l_text_field_d('lot_starting_number'); ?></li>
         </ul>
        </div>
       </div>
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title">Serial Information</div></div>
+       <div class="panel-heading"><div class="panel-title"><?php echo __('Serial Information') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
-         <li><label>Uniqueness</label><?php echo $f->select_field_from_array('serial_uniqueness', item::$ls_uniqueness_a, $$class->serial_uniqueness); ?>         </li>
-         <li><label>Generation</label><?php echo $f->select_field_from_array('serial_generation', item::$ls_generation_a, $$class->serial_generation); ?>         </li> 
-         <li><label>Prefix</label><?php echo form::text_field_d('serial_prefix'); ?></li> 
-         <li><label>Starting Number</label><?php echo form::text_field_d('serial_starting_number'); ?></li>
+         <li><?php $f->l_select_field_from_array('serial_uniqueness', item::$ls_uniqueness_a, $$class->serial_uniqueness); ?>         </li>
+         <li><?php $f->l_select_field_from_array('serial_generation', item::$ls_generation_a, $$class->serial_generation); ?>         </li> 
+         <li><?php $f->l_text_field_d('serial_prefix'); ?></li> 
+         <li><?php $f->l_text_field_d('serial_starting_number'); ?></li>
         </ul>
        </div>
       </div>
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title">Measurement Information</div></div>
+       <div class="panel-heading"><div class="panel-title"><?php echo __('Measurement Information') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
-         <li><label>Weight UOM</label><?php echo form::select_field_from_object('weight_uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->weight_uom_id, 'weight_uom_id', $readonly); ?></li>
-         <li><label>Weight</label><?php echo form::text_field_d('weight'); ?></li> 
-         <li><label>Volume UOM</label><?php echo form::select_field_from_object('volume_uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->volume_uom_id, 'volume_uom_id', $readonly); ?></li>
-         <li><label>Volume</label><?php echo form::text_field_d('volume'); ?></li>
-         <li><label>Dimension UOM</label><?php echo form::select_field_from_object('dimension_uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->dimension_uom_id, 'dimension_uom_id', $readonly); ?></li>
-         <li><label>Length</label><?php echo form::text_field_d('length'); ?></li>
-         <li><label>Width</label><?php echo form::text_field_d('width'); ?></li>
-         <li><label>Volume</label><?php echo form::text_field_d('volume'); ?></li>
+         <li><?php $f->l_select_field_from_object('weight_uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->weight_uom_id, 'weight_uom_id', '', '', $readonly); ?></li>
+         <li><?php $f->l_text_field_d('weight'); ?></li> 
+         <li><?php $f->l_select_field_from_object('volume_uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->volume_uom_id, 'volume_uom_id', '', '', $readonly); ?></li>
+         <li><?php $f->l_text_field_d('volume'); ?></li>
+         <li><?php $f->l_select_field_from_object('dimension_uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->dimension_uom_id, 'dimension_uom_id', '', '', $readonly); ?></li>
+         <li><?php $f->l_text_field_d('length'); ?></li>
+         <li><?php $f->l_text_field_d('width'); ?></li>
+         <li><?php $f->l_text_field_d('height'); ?></li>
         </ul>
        </div>
       </div>
@@ -284,28 +254,20 @@
     <!--end of tab2 (purchasing)!!!! start of sales tab-->
     <div id="tabsLine-3" class="tabContent">
      <div class="first_rowset"> 
-      <ul class="column five_column"> 
-       <li><label>Customer Ordered : </label>
-        <?php echo form::checkBox_field('customer_ordered_cb', $$class->customer_ordered_cb, '', $readonly); ?>
-       </li>
-       <li><label>Internal Ordered : </label>
-        <?php echo form::checkBox_field('internal_ordered_cb', $$class->internal_ordered_cb, '', $readonly); ?>
-       </li>
-       <li><label>Shippable : </label> 
-        <?php echo form::checkBox_field('shippable_cb', $$class->shippable_cb, '', $readonly); ?>
-       </li>
-       <li><label>Returnable : </label> 
-        <?php echo form::checkBox_field('returnable_cb', $$class->returnable_cb, '', $readonly); ?>
-       </li>
+      <ul class="column header_field">
+       <li><?php $f->l_checkBox_field_d('customer_ordered_cb'); ?></li> 
+       <li><?php $f->l_checkBox_field_d('internal_ordered_cb'); ?></li>
+       <li><?php $f->l_checkBox_field_d('shippable_cb'); ?></li>
+       <li><?php $f->l_checkBox_field_d('returnable_cb'); ?></li>
       </ul>
      </div>
      <div class="second_rowset">
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title">Rule Information</div></div>
+       <div class="panel-heading"><div class="panel-title"><?php echo __('Rule Information') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
-         <li><label>Available to promise</label><?php echo form::text_field_d('atp'); ?></li>
-         <li><label>Picking Rule</label><?php echo form::text_field_d('picking_rule'); ?></li>
+         <li><?php $f->l_text_field_d('atp'); ?></li>
+         <li><?php $f->l_text_field_d('picking_rule'); ?></li>
         </ul>
        </div>
       </div>
@@ -464,8 +426,10 @@
      <div class="first_rowset"> 
       <ul class="column five_column"> 
        <li><label>Maintenance Asset Type: </label>
-        <?php $f = new inoform();       
-        echo $f->select_field_from_array('am_asset_type', item::$am_asset_type_a, $$class->am_asset_type, 'am_asset_type'); ?>
+        <?php
+        $f = new inoform();
+        echo $f->select_field_from_array('am_asset_type', item::$am_asset_type_a, $$class->am_asset_type, 'am_asset_type');
+        ?>
        </li> 
       </ul>
      </div>

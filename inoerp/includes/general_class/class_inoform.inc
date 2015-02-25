@@ -184,6 +184,11 @@ EOD;
   return $element_text_field;
  }
 
+ public function l_text_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $maxlength = "256") {
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo $this->text_field($name, $value, $size, $id, $div_class, $required, $readonly, $place_holder, $title, $maxlength);
+ }
+
  public function seq_field($value) {
   $this->text_field('seq_number', $value, '6', '', 'seq_number', '', 1);
  }
@@ -255,6 +260,12 @@ EOD;
    . "pattern=\"[0-9]+([\.][0-9]+)?\" step='any' $required $idvalue $readonly title=\"$title\" >";
   return $element_text_field;
  }
+ 
+  public function l_number_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $min = "", $max = "") {
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo $this->number_field($name, $value, $size, $id, $div_class, $required, $readonly, $place_holder, $title, $min, $max);
+ }
+
 
  public function address_field($field_name, $div_class = "") {
   global $class, $$class;
@@ -265,7 +276,16 @@ EOD;
 
  public function address_field_d($field_name, $div_class = "") {
   global $class, $$class;
-  $text_field = $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
+  $ttl = $field_val = null;
+  if (!empty($$class->$field_name)) {
+   $addr = address::find_by_id($$class->$field_name);
+   if ($addr) {
+    $field_val = $addr->address_name;
+    $ttl = $addr->address . ' ' . $addr->country . ' ' . $addr->postal_code;
+   }
+  }
+  $text_field = $this->hidden_field_withId($field_name, $$class->$field_name);
+  $text_field .= $this->text_field('address_name', $field_val, '', 'address_name', '', '', 1, '', $ttl);
   $text_field .= '<img src="' . HOME_URL . 'themes/images/serach.png" class="address_id select_popup">';
   echo $text_field;
  }
@@ -275,6 +295,38 @@ EOD;
  public function text_field_d($field_name, $div_class = "") {
   global $readonly, $class, $$class;
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
+ }
+
+ public function l_text_field_d($field_name, $div_class = "") {
+  global $readonly, $class, $$class;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
+ }
+
+ public function l_text_field_dr($field_name, $div_class = "") {
+  global $readonly, $class, $$class;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', 1);
+ }
+
+ public function l_text_field_dm($field_name, $div_class = "") {
+  global $readonly, $class, $$class;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, 1, $this->readonly);
+ }
+
+ public function l_text_field_d_withSearch($field_name, $div_class = "") {
+  global $readonly, $class, $$class;
+  echo '<label>' . '<img src="' . HOME_URL . '/themes/images/serach.png" class="' . $field_name . ' select_popup clickable">';
+  echo gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
+ }
+
+ public function l_text_field_dr_withSearch($field_name, $div_class = "") {
+  global $readonly, $class, $$class;
+  echo '<label>' . '<img src="' . HOME_URL . '/themes/images/serach.png" class="' . $field_name . ' select_popup clickable">';
+  echo gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', 1);
  }
 
  public function text_field_ds($field_name, $div_class = "") {
@@ -882,8 +934,8 @@ EOD;
   return $this->date_field($name, $value, '20', '', 'dateTime');
  }
 
- public function date_fieldFromToday($name, $value, $divClass='') {
-  $divClass = "dateFromToday $divClass "; 
+ public function date_fieldFromToday($name, $value, $divClass = '') {
+  $divClass = "dateFromToday $divClass ";
   return $this->date_field($name, $value, '20', '', $divClass);
  }
 
@@ -1063,6 +1115,16 @@ EOD;
   return $element_select_field;
  }
 
+ public function l_select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $id = "", $divClass = "", $required = "", $readonly = "", $convertToText = "", $nonArrayName = "", $disabled = "", $dataname = '') {
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo $this->select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value, $id, $divClass, $required, $readonly, $convertToText, $nonArrayName, $disabled, $dataname);
+ }
+
+ public function l_select_field_from_array($name, $array, $value, $id = "", $class_name = "", $required = "", $readonly = "", $disabled = '', $convertToText = false) {
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo $this->select_field_from_array($name, $array, $value, $id, $class_name, $required, $readonly, $disabled, $convertToText);
+ }
+
  public function multi_select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $id = "", $divClass = "", $required = "", $readonly = "", $convertToText = "", $nonArrayName = "", $disabled = "") {
   if ($nonArrayName == 1) {
    $bracketName = $name;
@@ -1226,6 +1288,18 @@ EOD;
 	 value=\"1\"  $checked $readonly>";
   return $element_extra_field;
  }
+ 
+  public function l_checkBox_field($name, $value, $id = "", $class_name = "", $readonly = "") {
+  global $class, $$class;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . ' </label>';
+  echo $this->checkBox_field($name, $value, $id, $class_name, $readonly);
+ }
+
+ public function l_checkBox_field_d($field_name) {
+  global $class, $$class;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->checkBox_field($field_name, $$class->$field_name, $field_name, '', $this->readonly);
+ }
 
  public function checkBox_field_d($field_name) {
   global $readonly, $class, $$class;
@@ -1282,10 +1356,10 @@ EOD;
 
  public function show_arrayData_in_tabularTable() {
   $drop_down_icon = ino_search_dropDownSettings();
-  if(empty($this->column_array_s)){
-     foreach ($this->data_arrOfObjs[0] as $k => $v) {
-   $this->column_array_s[] = $k;
-  }
+  if (empty($this->column_array_s)) {
+   foreach ($this->data_arrOfObjs[0] as $k => $v) {
+    $this->column_array_s[] = $k;
+   }
   }
 
 

@@ -3,36 +3,34 @@
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1">Basic Info</a></li>
-    <li><a href="#tabsHeader-2">Employee</a></li>
-    <li><a href="#tabsHeader-3">Supplier</a></li>
-    <li><a href="#tabsHeader-4">Attachments</a></li>
-    <li><a href="#tabsHeader-5">Notes</a></li>
+    <li><a href="#tabsHeader-2">Preference</a></li>
+    <li><a href="#tabsHeader-3">Employee</a></li>
+    <li><a href="#tabsHeader-4">Supplier</a></li>
+    <li><a href="#tabsHeader-5">Attachments</a></li>
+    <li><a href="#tabsHeader-6">Notes</a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
-      <ul class="column header_field">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/default/images/serach.png" class="user_id select_popup clickable">
-         User ID</label><?php echo $f->text_field_dsr('user_id'); ?>
-        <a name="show" href="form.php?class_name=user&<?php echo "mode=$mode"; ?>" class="show document_id user_id"><i class="fa fa-refresh"></i></a> 
-       </li>
-       <li><label>User Name</label><?php echo $f->text_field('username', $$class->username, '', '', '', 1, $readonly1); ?></li>
-       <li><label>Password</label><input type="password" name="enteredPassword[]" value='' maxlength="50" id="enteredPassword" size="20" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >       </li>
-       <li><label>Retype Password</label><input type="password" name="enteredRePassword[]" value=''  maxlength="50" id="enteredRePassword" size="20" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >       </li>
-       <li><label>First Name</label>	<?php echo $f->text_field_dm('first_name'); ?> </li>
-       <li><label>Last Name</label><?php echo $f->text_field_dm('last_name'); ?>	 </li>
-       <li><label>e-Mail ID</label> <?php echo$f->text_field_dm('email'); ?> </li>
-       <li><label>Phone</label> <?php echo $f->text_field_d('phone'); ?> </li>
-      </ul>
+     <ul class="column header_field">
+      <li><label><img src="<?php echo HOME_URL; ?>themes/default/images/serach.png" class="user_id select_popup clickable">
+        User ID</label><?php echo $f->text_field_dsr('user_id'); ?>
+       <a name="show" href="form.php?class_name=user&<?php echo "mode=$mode"; ?>" class="show document_id user_id"><i class="fa fa-refresh"></i></a> 
+      </li>
+      <li><label>User Name</label><?php echo $f->text_field('username', $$class->username, '', '', '', 1, $readonly1); ?></li>
+      <li><label>Password</label><input type="password" name="enteredPassword[]" value='' maxlength="50" id="enteredPassword" size="20" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >       </li>
+      <li><label>Retype Password</label><input type="password" name="enteredRePassword[]" value=''  maxlength="50" id="enteredRePassword" size="20" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >       </li>
+      <li><label>First Name</label>	<?php echo $f->text_field_dm('first_name'); ?> </li>
+      <li><label>Last Name</label><?php echo $f->text_field_dm('last_name'); ?>	 </li>
+      <li><label>e-Mail ID</label> <?php echo$f->text_field_dm('email'); ?> </li>
+      <li><label>Phone</label> <?php echo $f->text_field_d('phone'); ?> </li>
+     </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column four_column">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
-         Employee Name : </label><?php $f->text_field_d('employee_name'); ?>
-        <?php echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id); ?>
-       </li>
-       <li><label>  Identification # : </label><?php $f->text_field_dr('identification_id'); ?>  </li>
-       <li><label>  #of Notification : </label>
+       <li><label>Language : </label>
+        <?php echo $f->select_field_from_object('user_language',user::all_languages(), 'option_line_code', 'option_line_value', $$class->user_language,'user_language'); ?>  </li>
+       <li><label>#of Notification : </label>
         <?php echo $f->select_field_from_array('block_notif_count', dbObject::$position_array, $$class->block_notif_count); ?>  </li>
       </ul>
      </div>
@@ -45,15 +43,26 @@
         <?php echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id); ?>
        </li>
        <li><label>  Identification # : </label><?php $f->text_field_dr('identification_id'); ?>  </li>
+      </ul>
+     </div>
+    </div>
+    <div id="tabsHeader-4" class="tabContent">
+     <div class="large_shadow_box"> 
+      <ul class="column four_column">
+       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
+         Employee Name : </label><?php $f->text_field_d('employee_name'); ?>
+        <?php echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id); ?>
+       </li>
+       <li><label>  Identification # : </label><?php $f->text_field_dr('identification_id'); ?>  </li>
        <li><label>  #of Notification : </label>
         <?php echo $f->select_field_from_array('block_notif_count', dbObject::$position_array, $$class->block_notif_count); ?>  </li>
       </ul>
      </div>
     </div>
-    <div id="tabsHeader-4" class="tabContent">
+    <div id="tabsHeader-5" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
     </div>
-    <div id="tabsHeader-5" class="tabContent">
+    <div id="tabsHeader-6" class="tabContent">
      <div> 
       <div id="comments">
        <div id="comment_list">
@@ -101,9 +110,9 @@
          ?>
          <tr class="user_role<?php echo $linecount; ?>">
           <td>
-                    <?php
-          echo ino_inline_action($form_line_array->user_role_id, array('user_id' => $$class->user_id));
-          ?>
+           <?php
+           echo ino_inline_action($form_line_array->user_role_id, array('user_id' => $$class->user_id));
+           ?>
           </td>
           <td><?php echo form::text_field('user_role_id', $form_line_array->user_role_id, '8', '12', '', '', '', '1'); ?></td>
           <td><?php echo $f->select_field_from_object('role_code', role_access::roles(), 'option_line_code', 'option_line_value', $form_line_array->role_code, '', '', '', $readonly); ?> 					 </td>
@@ -150,7 +159,7 @@
       </thead>
       <tbody class="form_data_line_tbody2 user_group_values" >
        <?php
-              $count = 0;
+       $count = 0;
        foreach ($user_group_object as $user_group) {
         ?>         
         <tr class="user_group<?php echo $count ?>">
@@ -159,7 +168,7 @@
           echo ino_inline_action($user_group->user_group_id, array('user_id' => $$class->user_id));
           ?>
          </td>
-         <td><?php echo $f->text_field_ap(array('name' => 'user_group_id' , 'value' => $user_group->user_group_id, 'readonly' => 1)); ?></td>
+         <td><?php echo $f->text_field_ap(array('name' => 'user_group_id', 'value' => $user_group->user_group_id, 'readonly' => 1)); ?></td>
          <td><?php echo $f->select_field_from_object('user_group_code', user_group_access::user_groups(), 'option_line_code', 'option_line_value', $user_group->user_group_code, '', '', 1, $readonly); ?></td>
         </tr>
         <?php

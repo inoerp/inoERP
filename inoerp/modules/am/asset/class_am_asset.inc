@@ -90,6 +90,7 @@ class am_asset extends dbObject {
  public $fields_inForm_notInDataBase = [
   "item_number",
   "item_description",
+  'address_name'
  ];
  public $search = [
   '_show_update_path' => 1,
@@ -127,6 +128,7 @@ class am_asset extends dbObject {
  public $last_update_date;
   public $item_number;
  public $item_description;
+ public $address_name;
 
  public function findBy_am_asset_id_m($am_asset_id) {
   $sql = " SELECT * FROM ";

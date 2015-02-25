@@ -12,32 +12,32 @@
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
       <ul class="column header_field">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="am_asset_id select_popup clickable">
-         Asset Id</label><?php $f->text_field_dsr('am_asset_id') ?>
+       <li><?php $f->l_text_field_dr_withSearch('am_asset_id') ?>
         <a name="show" href="form.php?class_name=am_asset&<?php echo "mode=$mode"; ?>" class="show document_id am_asset_id"><i class="fa fa-refresh"></i></a> 
        </li>
-       <li><label>Organization</label><?php echo $f->select_field_from_object('org_id', $org->findAll_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1); ?></li>
-       <li><label>Asset Number</label><?php $f->text_field_d('asset_number'); ?></li>
+       <li><?php echo $f->l_select_field_from_object('org_id', $org->findAll_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?></li>
+       <li><?php $f->l_text_field_d('asset_number'); ?></li>
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup clickable">
-         Inv Item Number</label><?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
+        <?php  echo __('Inv Item Number').'</label>'; 
+        echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
         <?php $f->text_field_dm('item_number', 'select_item_number_am_asset_item'); ?>
         <?php echo $f->hidden_field_withCLass('am_asset_type', 'ASSET_ITEM' , 'popup_value'); ?>
        </li>
-       <li><label>Description</label><?php $f->text_field_d('item_description'); ?></li>
-       <li><label>Category</label><?php echo $f->select_field_from_object('am_asset_category_id', fa_asset_category::find_all(), 'fa_asset_category_id', 'asset_category', $$class->am_asset_category_id, 'am_asset_category_id', '', 1); ?></li>
-       <li><label>Status</label><?php echo $f->select_field_from_array('status', am_asset::$status_a, $$class->status, 'status'); ?></li>
-       <li><label>Serial</label><?php $f->text_field_dm('serial_number'); ?></li>
-       <li><label>Type</label><?php echo $f->select_field_from_array('type', am_asset::$type_a, $$class->type, '', '', 1, 1, 1); ?></li>
-       <li><label>Parent Asset</label><?php $f->text_field_d('parent_asset_id'); ?></li>
-       <li><label>Accounting Class</label><?php $f->text_field_d('accounting_class_id'); ?></li>
-       <li><label>Description</label><?php $f->text_field_d('description'); ?></li>
+       <li><?php $f->l_text_field_d('item_description'); ?></li>
+       <li><?php echo $f->l_select_field_from_object('am_asset_category_id', fa_asset_category::find_all(), 'fa_asset_category_id', 'asset_category', $$class->am_asset_category_id, 'am_asset_category_id', '', 1); ?></li>
+       <li><?php echo $f->l_select_field_from_array('status', am_asset::$status_a, $$class->status, 'status'); ?></li>
+       <li><?php $f->l_text_field_dm('serial_number'); ?></li>
+       <li><?php echo $f->l_select_field_from_array('type', am_asset::$type_a, $$class->type, '', '', 1, 1, 1); ?></li>
+       <li><?php $f->l_text_field_d('parent_asset_id'); ?></li>
+       <li><?php $f->l_text_field_d('accounting_class_id'); ?></li>
+       <li><?php $f->l_text_field_d('description'); ?></li>
       </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <ul class="column header_field">
        <li><label>Tag Number</label><?php $f->text_field_d('tag_number'); ?></li>
        <li><label>Owning Department</label><?php echo $f->select_field_from_object('owning_department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class->owning_department_id, '', $readonly, '', '', 1); ?></li>
-       <li><label>Location</label><?php $f->text_field_d('address_id'); ?></li>
+       <li><label>Location</label><?php $f->address_field_d('address_id'); ?></li>
        <li><label>Subinventory</label><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->subinventory_id, '', 'subinventory_id', '', $readonly); ?>       </li>
        <li><label>Locator</label><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class->subinventory_id), 'locator_id', 'locator', $$class->locator_id, '', 'locator_id', '', $readonly); ?>       </li>
        <li><label>Maintainable?</label><?php echo $f->checkBox_field('maintainable_cb', $$class->maintainable_cb); ?></li>

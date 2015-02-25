@@ -117,7 +117,7 @@ if (!empty($_GET['class_name'])) {
   $function_name = is_array($_GET['function_name']) ? $_GET['function_name'][0] : $_GET['function_name'];
   if (method_exists($$class, $function_name)) {
    $search_details = call_user_func(array($$class, $function_name), $_GET);
-    $search_counts = $function_name . '_search_counts';
+   $search_counts = $function_name . '_search_counts';
    $search_records = $function_name . '_search_records';
    $search_downloads = $function_name . '_search_downloads';
    $whereClause = implode(" AND ", $whereFields);
@@ -126,8 +126,8 @@ if (!empty($_GET['class_name'])) {
    $search_result = call_user_func(array($$class, $search_records), $_GET);
    $all_download_sql = call_user_func(array($$class, $search_downloads), $_GET);
    if (!empty($per_page) && !empty($total_count)) {
-   $pagination = new pagination($pageno, $per_page, $total_count);
-   $pagination_statement = $pagination->show_pagination();
+    $pagination = new pagination($pageno, $per_page, $total_count);
+    $pagination_statement = $pagination->show_pagination();
    }
   }
  } else if (method_exists($$class, 'search_records')) {
@@ -141,17 +141,41 @@ if (!empty($_GET['class_name'])) {
    $pagination_statement = $pagination->show_pagination();
   }
  } else {
+  //validate organization access where applicable
+  if (property_exists($$class, 'bu_org_id')) {
+   if (empty($_SESSION['user_org_access'])) {
+    $no_organization_access = true;
+    return;
+   }
+   $all_orgs_in_cls = "bu_org_id IN ('" . implode("','", array_keys($_SESSION['user_org_access'])) . "')";
+  } else if (property_exists($$class, 'org_id')) {
+   if (empty($_SESSION['user_org_access'])) {
+    $no_organization_access = true;
+    return;
+   }
+   $all_orgs_in_cls = "org_id IN ('" . implode("','", array_keys($_SESSION['user_org_access'])) . "')";
+  }
+
   if (count($whereFields) > 0) {
    $whereClause = " WHERE " . implode(" AND ", $whereFields);
+   $count_sql_all_records = "SELECT COUNT(*) FROM " . $table_name. $whereClause;
+   if (!empty($all_orgs_in_cls)) {
+    $whereClause = ' AND ' . $all_orgs_in_cls;
+   }
    // And then create the SQL query itself.
    $sql = "SELECT * FROM " . $table_name . $whereClause;
    $count_sql = "SELECT COUNT(*) FROM " . $table_name . $whereClause;
    $all_download_sql = "SELECT * FROM  " . $table_name . $whereClause;
   } else {
-   $sql = "SELECT * FROM " . $table_name;
-   $count_sql = "SELECT COUNT(*) FROM " . $table_name;
-   $all_download_sql = "SELECT * FROM  " . $table_name;
-   $whereClause = null;
+   $count_sql_all_records = "SELECT COUNT(*) FROM " . $table_name;
+   if (!empty($all_orgs_in_cls)) {
+    $whereClause = ' WHERE ' . $all_orgs_in_cls;
+   }else{
+    $whereClause = null;
+   }
+   $sql = "SELECT * FROM " . $table_name . $whereClause;
+   $count_sql = "SELECT COUNT(*) FROM " . $table_name . $whereClause;
+   $all_download_sql = "SELECT * FROM  " . $table_name . $whereClause;
   }
 
   if (!empty($_GET['group_by'][0])) {
@@ -184,6 +208,7 @@ if (!empty($_GET['class_name'])) {
   }
 
   $total_count = $class::count_all_by_sql($count_sql);
+  $total_count_all = $class::count_all_by_sql($count_sql_all_records);
 
   if (!empty($per_page)) {
    $pagination = new pagination($pageno, $per_page, $total_count);
@@ -191,7 +216,7 @@ if (!empty($_GET['class_name'])) {
    $sql .=" LIMIT {$per_page} ";
    $sql .=" OFFSET {$pagination->offset()}";
   }
-// echo "<br><br><br> sql is $sql";
+ echo "<br><br><br> sql is $sql";
   $search_result = $class::find_by_sql($sql);
 //  pa($search_result);
  }
@@ -206,7 +231,7 @@ if (!empty($_GET['class_name'])) {
    $s->setProperty($searchParaKey, $searchParaValue);
   }
  }
-
+$total_count_all = empty($total_count_all) ? $total_count : $total_count_all;
  $s->setProperty('result', $search_result);
  $s->setProperty('_searching_class', $class);
  $s->setProperty('_per_page', $per_page);
@@ -214,7 +239,7 @@ if (!empty($_GET['class_name'])) {
  $s->setProperty('column_array_s', $column_array);
  $search_result_statement = $search->search_result_op();
 
- include_once(__DIR__.'/../template/json_search_template.inc');
+ include_once(__DIR__ . '/../template/json_search_template.inc');
  echo '</div>';
 }
 ?>

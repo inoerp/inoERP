@@ -169,16 +169,19 @@ function check_browser() {
  }
 }
 
-function ino_inline_action($line_id_cb_val, $hidden_field_a, $add_image_class='add_row_img', $line_id_cb='line_id_cb') {
+function ino_inline_action($line_id_cb_val, $hidden_field_a='', $add_image_class='add_row_img', $line_id_cb='line_id_cb') {
  global $f;
  $ret_stmt = ' <ul class="inline_action">
            <li class="'.$add_image_class.' clickable"> <i class="fa fa-plus-circle"></i> </li>
            <li class="remove_row_img clickable"> <i class="fa fa-minus-circle"></i> </li>';
  $ret_stmt .= '<li><input type="checkbox" name="'.$line_id_cb.'" value="' . $line_id_cb_val . '"></li>';
  $ret_stmt .= '<li class="hidden">';
- foreach ($hidden_field_a as $k => $v) {
+ if(!empty($hidden_field_a)){
+   foreach ($hidden_field_a as $k => $v) {
   $ret_stmt .= $f->hidden_field($k, $v);
  }
+ }
+
  $ret_stmt .= '</li></ul>';
 
  return $ret_stmt;
@@ -1110,7 +1113,7 @@ function add_new_search_criteria() {
 function ino_attachement($file, $file_name = 'attachments') {
  $stmt = '<div id="show_attachment" class="show_attachment">
 						 <div id="file_upload_form" class="form-group">
-							<ul class="inRow asperWidth"><label for="exampleInputFile">Attach File</label>
+							<ul class="inRow asperWidth"><label for="exampleInputFile">'.__('Attach File').'</label>
 							 <li><input type="file" id="attachments" class="attachments" name="' . $file_name . '[]" multiple/></li>
 							 <li> <button  form="file_upload" name="attach_submit" id="attach_submit" class="submit button">Attach</button></li>';
  $stmt.='<li class="show_loading_small"><img alt="Loading..." src="' . HOME_URL . 'themes/images/small_loading.gif"/></li>

@@ -28,7 +28,8 @@
     </li>
     <li id="export_excel_searchResult" class="clickable" title="Export to Excel"><i class="fa fa-file-excel-o"></i></li>
     <li id="print_searchResult" class="print clickable" title="Print"><i class="fa fa-print"></i></li>
-    <li><button class="btn btn-primary" type="button">Total records <span class="badge"><?php echo $total_count; ?></span></button></li>
+    <li><button class="btn btn-primary" type="button">Accessible Records <span class="badge"><?php echo $total_count; ?></span></button></li>
+    <li><button class="btn btn-warning" type="button">Total Records <span class="badge"><?php echo $total_count_all; ?></span></button></li>
    </ul>
   </div>
  <?php } ?>

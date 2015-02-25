@@ -38,6 +38,7 @@ class user extends dbObject {
   "first_name",
   "last_name",
   "email",
+  'user_language',
   "phone",
   'hr_employee_id',
   'block_notif_count',
@@ -62,7 +63,6 @@ class user extends dbObject {
   "email"
  ];
  public $requiredField = [
-  "password",
   "username",
   "first_name",
   "last_name",
@@ -96,11 +96,11 @@ class user extends dbObject {
  public $password;
  Public $first_name;
  Public $last_name;
+ public $user_language;
  public $phone;
  public $block_notif_count;
  Public $email;
  Public $status;
- Public $laguage;
  Public $date_format;
  Public $theme;
  public $time;
@@ -118,6 +118,12 @@ class user extends dbObject {
   } else {
    return -99;
   }
+ }
+ 
+  Public static function all_languages() {
+	$option_header = option_header::find_by_name('SYS_LANGUAGE');
+	$type = option_line::find_by_option_id($option_header->option_header_id);
+	return $type;
  }
 
  Public function findBy_userName($username) {
@@ -182,10 +188,11 @@ class user extends dbObject {
 ////	$password_final = hash("sha256", $password);
   $password_final = $this->_codeThePassword($password);
 
-  $sql = "Select user_id, username from user 
+  $sql = "SELECT * from user 
             WHERE username='{$username}' and password= '{$password_final}' LIMIT 1";
   $result_array = self::find_by_sql($sql);
-  return !empty($result_array) ? array_shift($result_array) : false;
+  
+  return !empty($result_array) ? array_pop($result_array) : false;
  }
 
  public function full_name() {
@@ -201,7 +208,7 @@ class user extends dbObject {
   if (empty($dbc->connection)) {
    return false;
   }
-  $sql = " SELECT user_id, username, first_name, last_name, email,  phone, hr_employee_id,
+  $sql = " SELECT user_id, username, first_name, last_name, email,  phone, hr_employee_id, user_language,
             block_notif_count,    created_by,    creation_date,  last_update_by,    last_update_date FROM ";
   $sql.= static::$table_name;
   $sql.= " WHERE " . static::$primary_column . "= :primary_id ";

@@ -1,9 +1,12 @@
-function setValFromSelectPage(am_asset_id, asset_number, item_id_m, item_number, item_description) {
+function setValFromSelectPage(am_asset_id, asset_number, item_id_m, item_number, item_description, address_id,
+        address_name) {
  this.am_asset_id = am_asset_id;
  this.asset_number = asset_number;
  this.item_id_m = item_id_m;
  this.item_number = item_number;
  this.item_description = item_description;
+  this.address_id = address_id;
+ this.address_name = address_name;
 }
 
 setValFromSelectPage.prototype.setVal = function () {
@@ -15,6 +18,20 @@ setValFromSelectPage.prototype.setVal = function () {
  }
  if (this.asset_number) {
   $("#asset_number").val(this.asset_number);
+ }
+
+ if (this.am_asset_id) {
+  $("#am_asset_id").val(this.am_asset_id);
+ }
+ if (this.asset_number) {
+  $("#asset_number").val(this.asset_number);
+ }
+
+ if (this.address_id) {
+  $("#address_id").val(this.address_id);
+ }
+ if (this.address_name) {
+  $("#address_name").val(this.address_name);
  }
 
  var item_obj = [{id: 'item_id_m', data: this.item_id_m},

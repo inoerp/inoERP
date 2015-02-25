@@ -77,7 +77,9 @@ setValFromSelectPage.prototype.setVal = function () {
   $('#content').find(rowClass_b).find('.bom_config_header_id').val(this.bom_config_header_id);
  }
 
- var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass").replace(/\s+/g, '.');
+if(localStorage.getItem("addressPopupDivClass") === null){
+  var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass");
+ addressPopupDivClass =addressPopupDivClass.replace(/\s+/g, '.');
  if (address_id) {
   $('#form_header').find(addressPopupDivClass).find('.address_id').val(address_id);
  }
@@ -93,6 +95,8 @@ setValFromSelectPage.prototype.setVal = function () {
  if (postal_code) {
   $('#form_header').find(addressPopupDivClass).find('.postal_code').val(postal_code);
  }
+}
+
 
  localStorage.removeItem("row_class");
  localStorage.removeItem("field_class");
@@ -265,7 +269,7 @@ $(document).ready(function () {
 
  //selecting PO Header Id
  $(".po_header_id.select_popup").on("click", function () {
-  void window.open('select.php?class_name=po_document_v', '_blank',
+  void window.open('select.php?class_name=po_all_v', '_blank',
           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 

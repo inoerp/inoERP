@@ -35,7 +35,8 @@ setValFromSelectPage.prototype.setVal = function () {
 
  var rowClass = '.' + localStorage.getItem("row_class");
  var fieldClass = '.' + localStorage.getItem("field_class");
- var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass").replace(/\s+/g, '.');
+ var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass");
+ addressPopupDivClass =addressPopupDivClass.replace(/\s+/g, '.');
 
  if (address_id) {
   $('#form_header').find(addressPopupDivClass).find('.address_id').val(address_id);

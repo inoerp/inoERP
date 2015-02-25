@@ -52,7 +52,7 @@ $(document).ready(function() {
    'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
  
- $('input[type="password"]').val('');
+ $('#erp_form_area .header_field').find('input[type="password"]').val('');
  
  //Popup for selecting user
  $(".user_id.select_popup").click(function() {

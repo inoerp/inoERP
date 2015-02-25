@@ -2770,19 +2770,19 @@ $(document).ready(function () {
  });
 
  //search reset button
- var link = localStorage.getItem("reset_link");
- if (link) {
-  $('#multi_select a#search_reset_btn').on('click', function () {
-   $(this).attr('href', link);
-  });
- }
-
- var reset_link_ofSelect = localStorage.getItem("reset_link_ofSelect");
- if (reset_link_ofSelect) {
-  $('#select_page a#search_reset_btn').on('click', function () {
-   $(this).attr('href', reset_link_ofSelect);
-  });
- }
+// var link = localStorage.getItem("reset_link");
+// if (link) {
+//  $('#multi_select a#search_reset_btn').on('click', function () {
+//   $(this).attr('href', link);
+//  });
+// }
+//
+// var reset_link_ofSelect = localStorage.getItem("reset_link_ofSelect");
+// if (reset_link_ofSelect) {
+//  $('#select_page a#search_reset_btn').on('click', function () {
+//   $(this).attr('href', reset_link_ofSelect);
+//  });
+// }
 
  //new object
  $('body').on('click', '#new_object_button', function (e) {

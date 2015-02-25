@@ -23,6 +23,11 @@ if (function_exists('bind_textdomain_codeset'))
 bind_textdomain_codeset($domain, $encoding);
 textdomain($domain);
 
-echo gettext("HELLO_WORLD");
+
 
 ?>
+
+<!DOCTYPE html>
+<html>
+ <?php echo gettext("HELLO_WORLD"); ?>
+</html>
