@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -7,6 +8,7 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
+
 /**
  * 
  *
@@ -14,7 +16,7 @@
 class user extends dbObject {
 
  public static $table_name = "user";
- public static $dependent_classes = ['user_role', 'user_password_reset' ,'user_group_access'];
+ public static $dependent_classes = ['user_role', 'user_password_reset', 'user_group_access'];
  public static $primary_column = "user_id";
  public static $key_column = 'username';
  public static $module = "extension";
@@ -66,7 +68,8 @@ class user extends dbObject {
   "username",
   "first_name",
   "last_name",
-  "email"
+  "email",
+  'password'
  ];
  public $fields_inForm_notInDataBase = [
   "enteredPassword",
@@ -119,11 +122,11 @@ class user extends dbObject {
    return -99;
   }
  }
- 
-  Public static function all_languages() {
-	$option_header = option_header::find_by_name('SYS_LANGUAGE');
-	$type = option_line::find_by_option_id($option_header->option_header_id);
-	return $type;
+
+ Public static function all_languages() {
+  $option_header = option_header::find_by_name('SYS_LANGUAGE');
+  $type = option_line::find_by_option_id($option_header->option_header_id);
+  return $type;
  }
 
  Public function findBy_userName($username) {
@@ -191,7 +194,7 @@ class user extends dbObject {
   $sql = "SELECT * from user 
             WHERE username='{$username}' and password= '{$password_final}' LIMIT 1";
   $result_array = self::find_by_sql($sql);
-  
+
   return !empty($result_array) ? array_pop($result_array) : false;
  }
 
@@ -201,6 +204,16 @@ class user extends dbObject {
   } else {
    return "";
   }
+ }
+
+ private function _findPasswordBy_id() {
+  $sql = " SELECT * FROM ";
+  $sql.= static::$table_name;
+  $sql.= " WHERE user_id = :primary_id ";
+  $sql.= " LIMIT 1 ";
+  $value_a = ['primary_id' => $this->user_id];
+  $result = $this->findBySql($sql, $value_a);
+  return !empty($result) ? array_pop($result) : false;
  }
 
  public function findBy_id($id) {
@@ -275,8 +288,9 @@ class user extends dbObject {
    }
   } elseif ((!empty($this->user_id)) && (empty($this->enteredPassword))) {
    $existing_user = new user();
-   $existing_user->findBy_id($this->user_id);
-   $this->password = $existing_user->password;
+   $existing_user->user_id = $this->user_id;
+   $existing_user_i = $existing_user->_findPasswordBy_id();
+   $this->password = $existing_user_i->password;
    $returnedData = true;
   }
   return $returnedData;
