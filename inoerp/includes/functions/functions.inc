@@ -369,7 +369,7 @@ function thisPage_url() {
 function select_per_page($per_page = '10') {
  $link = $_SERVER['PHP_SELF'] . '?';
  $content_string = '<div class="noOfcontents">';
- $content_string .= 'Show<select name="per_page" class="per_page">';
+ $content_string .= 'Show<select name="per_page" class="per_page small">';
  $content_string .= '<option value="3" ';
  $content_string .= ( $per_page == 3) ? ' selected > 3 </option>' : ' > 3 </option>';
  $content_string .= '<option value="5" ';

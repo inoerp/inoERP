@@ -1,30 +1,32 @@
-<div id="form_all">
+<div class="row small-left-padding">
+ <div id="form_all">
  <div id="form_headerDiv">
-  <form action=""  method="post" id="inv_location_default_line"  name="location_default_line">
-   <div id="form_serach_header"><span class="heading">Item Transaction Location Default</span>
-    <label>Inventory Org :</label>
-    <?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $org_id_h, 'org_id'); ?>
-    <a name="show" href="form.php?class_name=inv_location_default&<?php echo "mode=$mode"; ?>" class="show document_id inv_location_default_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+  <form action=""  method="post" id="inv_location_default_line"  name="location_default_line"><span class="heading">
+   <?php echo gettext('Item Transaction Location Default') ?></span>
+   <div class="tabContainer">
+    <label><?php echo gettext('Inventory Org') ?> </label>
+    <?php echo $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $org_id_h, 'org_id'); ?>
+    <a name="show" href="form.php?class_name=inv_location_default&<?php echo "mode=$mode"; ?>" class="show document_id inv_location_default_id">
+     <i class='fa fa-refresh'></i></a> 
    </div>
-   <div id ="form_line" class="inv_location_default"><span class="heading">Location Defaults </span>
+   <div id ="form_line" class="inv_location_default"><span class="heading"><?php echo gettext('Location Defaults') ?></span>
     <div id="tabsLine">
      <ul class="tabMain">
-      <li><a href="#tabsLine-1">Item-Location </a></li>
-      <li><a href="#tabsLine-2">Others </a></li>
+      <li><a href="#tabsLine-1"><?php echo gettext('Item-Location') ?></a></li>
+      <li><a href="#tabsLine-2"><?php echo gettext('Others') ?></a></li>
      </ul>
      <div class="tabContainer"> 
-
       <div id="tabsLine-1" class="tabContent">
        <table class="form_table">
         <thead> 
          <tr>
-          <th>Action</th>
-          <th>Seq#</th>
-          <th>Id</th>
-          <th>Item</th>
-          <th>Default Type</th>
-          <th>Sub inventory</th>
-          <th>Locator</th>
+          <th><?php echo gettext('Action') ?></th>
+          <th><?php echo gettext('Seq') ?></th>
+          <th><?php echo gettext('Id') ?></th>
+          <th><?php echo gettext('Item') ?></th>
+          <th><?php echo gettext('Default Type') ?></th>
+          <th><?php echo gettext('Sub inventory') ?></th>
+          <th><?php echo gettext('Locator') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody location_default_values" >
@@ -35,21 +37,17 @@
          $location_default_object_ai->seek($position);
          while ($location_default_object_ai->valid()) {
           $inv_location_default = $location_default_object_ai->current();
-          if(!empty( $$class->item_id_m)){
+          if (!empty($$class->item_id_m)) {
            $item_i = item::find_by_item_id_m($$class->item_id_m);
            $$class->item_number = !empty($item_i->item_number) ? $item_i->item_number : false;
-          }else{
+          } else {
            $$class->item_number = '';
           }
           ?>         
           <tr class="inv_location_default<?php echo $count ?>">
-           <td>    
-            <ul class="inline_action">
-             <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-             <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-             <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class->inv_location_default_id); ?>"></li>           
-             <li><?php echo form::hidden_field('org_id', $org_id_h); ?></li>
-            </ul>
+           <td><?php
+            echo ino_inline_action($$class->inv_location_default_id, array('org_id' => $org_id_h));
+            ?>
            </td>
            <td><?php $f->seq_field_d($count) ?></td>
            <td><?php form::number_field_drs('inv_location_default_id') ?></td>
@@ -76,10 +74,10 @@
        <table class="form_table">
         <thead> 
          <tr>
-          <th>Seq#</th>
-          <th>Location</th>
-          <th>Priority</th>
-          <th>Description</th>
+          <th><?php echo gettext('Seq') ?></th>
+          <th><?php echo gettext('Location') ?></th>
+          <th><?php echo gettext('Priority') ?></th>
+          <th><?php echo gettext('Description') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody location_default_values" >
@@ -115,11 +113,14 @@
   </form>
  </div>
 </div>
-
-<div id="pagination" style="clear: both;">
- <?php echo $pagination->show_pagination(); ?>
 </div>
 
+
+<div class="row small-top-margin" >
+ <div id="pagination" style="clear: both;">
+  <?php echo $pagination->show_pagination(); ?>
+ </div>
+</div>
 <div id="js_data">
  <ul id="js_saving_data">
   <li class="lineClassName" data-lineClassName="inv_location_default" ></li>

@@ -1,32 +1,31 @@
 <div id="form_all">
  <div id="form_headerDiv">
-  <form action=""  method="post" id="po_asl_document"  name="po_asl_document"><span class="heading">ASL Basic Info </span>
+  <form action=""  method="post" id="po_asl_document"  name="po_asl_document">
+   <span class="heading"><?php echo gettext('ASL Basic Info') ?></span>
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
-      <ul class="column five_column">
+      <ul class="column header_field">
        <li>
-        <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="po_asl_line_id select_popup clickable">ASL Line Id  :</label>
+        <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="po_asl_line_id select_popup clickable">
+         <?php echo gettext('ASL Line Id') ?></label>
         <?php echo $f->text_field('po_asl_line_id', $po_asl_line_id_h, '', 'po_asl_line_id'); ?>
         <a name="show" href="form.php?class_name=po_asl_document&<?php echo "mode=$mode"; ?>" class="show document_id po_asl_document_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
        </li>
-       <li><label>BU Name(1) : </label>
-        <?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $bu_org_id, 'bu_org_id', '', 1, 1); ?>
-       </li>
-       <li><label>Supplier Name : </label>  
+       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $bu_org_id, 'bu_org_id', '', 1, 1); ?>       </li>
+       <li><label><?php echo gettext('Supplier Name') ?></label>  
         <?php
         echo $f->text_field('supplier_name', $supplier_name);
         echo $f->hidden_field_withId('supplier_id', $supplier_id)
         ?>   </li>
-       <li><label>Supplier Site Name : </label> 
-        <?php
+       <li><?php echo gettext('Supplier Site Name') ?><?php
         echo $f->text_field('supplier_site_name', $supplier_site_name);
         echo $f->hidden_field_withId('supplier_site_id', $supplier_site_id)
         ?>   </li>  
-       <li><label>Item Number : </label> 
+       <li><label><?php echo gettext('Item Number') ?></label> 
         <?php
         echo $f->text_field('item_number', $item_number);
         echo $f->hidden_field_withId('item_id_m', $item_id_m)
@@ -37,25 +36,24 @@
 
    </div>
    <div id="tabsLine">
-    <div id ="form_line" class="po_asl_document"><span class="heading">ASL Documents </span>
+    <div id ="form_line" class="po_asl_document"><span class="heading"><?php echo gettext('ASL Documents') ?></span>
      <ul class="tabMain">
-      <li><a href="#tabsLine-1">Basic </a></li>
-      <li><a href="#tabsLine-2">Future </a></li>
+      <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+      <li><a href="#tabsLine-2"><?php echo gettext('Finance') ?> </a></li>      
      </ul>
      <div class="tabContainer"> 
-
       <div id="tabsLine-1" class="tabContent">
        <table class="form_table">
         <thead> 
          <tr>
-          <th>Action</th>
-          <th>Seq#</th>
-          <th>Line Id</th>
-          <th>Document Type</th>
-          <th>Document Number</th>
-          <th>Start Date </th>
-          <th>End Date</th>
-          <th>Priority</th>
+          <th><?php echo gettext('Action') ?></th>
+          <th><?php echo gettext('Seq') ?>#</th>
+          <th><?php echo gettext('Line Id') ?></th>
+          <th><?php echo gettext('Document Type') ?>#</th>
+          <th><?php echo gettext('Document Number') ?></th>
+          <th><?php echo gettext('Start Date') ?></th>
+          <th><?php echo gettext('End Date') ?></th>
+          <th><?php echo gettext('Priority') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody asl_document_values" >

@@ -6,6 +6,16 @@
 </div>
 <?php
 if (!empty($_GET['search_class_name'])) {
+ 
+  require_once __DIR__ . '/../../locale/gettext.inc';
+ $locale = (isset($_SESSION['lang'])) ? $_SESSION['lang'] : DEFAULT_LOCALE;
+ $encoding = 'UTF-8';
+ T_setlocale(LC_MESSAGES, $locale);
+ $domain = 'messages';
+ T_bindtextdomain($domain, LOCALE_DIR);
+ T_bind_textdomain_codeset($domain, $encoding);
+ T_textdomain($domain);
+ 
  $class = $class_names = $_GET['search_class_name'];
  $$class = new $class;
  $mode = !empty($_GET['mode']) ? $_GET['mode'] : 9;

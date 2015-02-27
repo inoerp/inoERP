@@ -33,14 +33,9 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
    className: form_header},
   type: 'post',
   beforeSend: function () {
-   $("#save").prop('disabled', true);
+   
   },
   complete: function () {
-   $("#save").prop('disabled', false);
-   if (savingOnlyHeader) {
-    $('.show_loading_small').hide();
-    $("#save").removeClass("opacity_2");
-   }
   }
  }).done(function (result) {
   var div = $(result).filter('div#json_save_header').html();
@@ -72,8 +67,14 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
     $('.primary_column3').val(header_id3);
    }
   }
+  if (savingOnlyHeader) {
+   $('#overlay').css('display', 'none');
+    $('#form_top_image').css('display', 'block');
+  }
 
  }).fail(function (error, textStatus, xhr) {
+  $('#overlay').css('display', 'none');
+  $('#form_top_image').css('display', 'block');
   alert("save failed \n" + error + textStatus + xhr);
  });
 }
@@ -97,12 +98,12 @@ function saveSingleLine(json_url, lineData, primary_column_id, lineClassName) {
 
   var line_id = $(result).filter('#lineId').html();
 //	$('#form_data_table tbody tr' + '.' + trclass).find(".line_id").val(line_id);
-  $("#save").removeClass("opacity_2");
-  $('.show_loading_small').hide();
+  $('#overlay').css('display', 'none');
+  $('#form_top_image').css('display', 'block');
  }).fail(function (error, textStatus, xhr) {
+  $('#overlay').css('display', 'none');
+  $('#form_top_image').css('display', 'block');
   alert("save failed \n" + error + textStatus + xhr);
-  $('.show_loading_small').hide();
-  $("#save").removeClass("opacity_2");
  });
 }
 
@@ -127,12 +128,12 @@ function saveLine(json_url, lineData, trclass, detailData, primary_column_id, li
 
   var line_id = $(div).filter('.lineId').html();
   $('#form_data_table tbody tr' + '.' + trclass).find(".line_id").val(line_id);
-  $('.show_loading_small').hide();
-  $("#save").removeClass("opacity_2");
+  $('#overlay').css('display', 'none');
+  $('#form_top_image').css('display', 'block');
  }).fail(function (error, textStatus, xhr) {
+  $('#overlay').css('display', 'none');
+  $('#form_top_image').css('display', 'block');
   alert("save failed \n" + error + textStatus + xhr);
-  $('.show_loading_small').hide();
-  $("#save").removeClass("opacity_2");
  });
 }
 
@@ -155,13 +156,12 @@ function saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassNa
    $(".error").prepend(div);
    $("#accordion").accordion({active: 0});
   }
-
-  $('.show_loading_small').hide();
-  $("#save").removeClass("opacity_2");
+  $('#overlay').css('display', 'none');
+  $('#form_top_image').css('display', 'block');
  }).fail(function (error, textStatus, xhr) {
+  $('#overlay').css('display', 'none');
+  $('#form_top_image').css('display', 'block');
   alert("save failed \n" + error + textStatus + xhr);
-  $('.show_loading_small').hide();
-  $("#save").removeClass("opacity_2");
  });
 }
 
@@ -257,7 +257,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
   if (noOfRequiredFileValuesMissing > 0) {
    var showMessage = ' <div id="dialog_box" class="dialog mandatory_message"> ' + noOfRequiredFileValuesMissing + ' mandatory field(s) is/are missing....... <br>';
    $.map(missingMandatoryValues, function (val, i) {
-    showMessage += i + ' : ' + val + ' <br>';
+    showMessage += i + ' : ' + val.replace(/_+/, ' ') + ' <br>';
    });
    showMessage += '</div>';
    $("#content").append(showMessage);
@@ -277,13 +277,8 @@ saveMainClass.prototype.saveMain = function (beforeSave)
     return;
    }
   }
-  //opacity_2 class checks if the save is avaiable or not
-//	if ($("#save").hasClass('opacity_2')) {
-//	 alert('Save is disabled');
-//	 return;
-//	}
-  $("#save").addClass("opacity_2");
-  $('.show_loading_small').show();
+  $('#overlay').css('display', 'block');
+  $('#form_top_image').css('display', 'none');
   e.preventDefault();
 //for all form headers - savetype1
   /*-----------------------------------Completion of mandator fields check & start of header save--------------------------------
@@ -395,7 +390,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
 //      alert('340');
       saveLine(json_url, lineData, trclass, detailData, primary_column_id_h, lineClassName, detailClassName);
      });
-     alert('Saving ' + count + ' record(s)');
+//     alert('Saving ' + count + ' Record(s)');
     } else {
 //		 for option type form - line w/o any tab------------------savetype3b
      $('input[name="line_id_cb"]:checked').each(function () {
@@ -1026,7 +1021,7 @@ autoCompleteMain.prototype.autoComplete = function ()
          $(auto_element).closest("tr").find(v_d).val('');
          var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
          $('#form_line, #form_line2').find(trClass).find(v_d).val();
-         if (v_d.indexOf('_cb') > -1 ) {
+         if (v_d.indexOf('_cb') > -1) {
           $('#form_line, #form_line2').find(trClass).find(v_d).prop('checked', false);
          }
         }
@@ -1164,27 +1159,27 @@ function mandatoryFieldMain(form_area, mandatory_fields, mandatory_messages, hea
 mandatoryFieldMain.prototype.mandatoryHeader = function ()
 {
  $('body').off("click", '#form_line').on("click", '#form_line', function () {
- var header_id = $('ul#js_saving_data').find('.primary_column_id').data('primary_column_id');
- var no_headerid_check = $('ul#js_saving_data').find('.no_headerid_check').data('no_headerid_check');
- var lineClassName = $('ul#js_saving_data').find('.lineClassName').data('lineclassname');
- if(no_headerid_check == 9 ){
-  return;
- }
- if(!lineClassName || lineClassName =='undefined'){
-  return;
- }
- if(header_id){
+  var header_id = $('ul#js_saving_data').find('.primary_column_id').data('primary_column_id');
+  var no_headerid_check = $('ul#js_saving_data').find('.no_headerid_check').data('no_headerid_check');
+  var lineClassName = $('ul#js_saving_data').find('.lineClassName').data('lineclassname');
+  if (no_headerid_check == 9) {
+   return;
+  }
+  if (!lineClassName || lineClassName == 'undefined') {
+   return;
+  }
+  if (header_id) {
    var header_id_h = '#' + header_id;
- var header_id_c = '.' + header_id;
-  if (!$(header_id_h).val()) {
-   alert('No header Id Found! : First enter/save header details');
-  } else {
-   var headerIdVal = $(header_id_h).val();
-   if (!$(this).find(header_id_c).val()) {
-    $(this).find(header_id_c).val(headerIdVal);
+   var header_id_c = '.' + header_id;
+   if (!$(header_id_h).val()) {
+    alert('No header Id Found! : First enter/save header details');
+   } else {
+    var headerIdVal = $(header_id_h).val();
+    if (!$(this).find(header_id_c).val()) {
+     $(this).find(header_id_c).val(headerIdVal);
+    }
    }
   }
- }
 
  });
 };

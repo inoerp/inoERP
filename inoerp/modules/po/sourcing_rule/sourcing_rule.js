@@ -47,6 +47,10 @@ setValFromSelectPage.prototype.setVal = function() {
 
  localStorage.removeItem("row_class");
 
+if(this.po_sourcing_rule_header_id){
+ $('a.show.po_sourcing_rule_header_id').trigger('click');
+}
+
 };
 
 $(document).ready(function() {
@@ -60,7 +64,8 @@ $(document).ready(function() {
 // mandatoryCheck.mandatoryField();
 
  //Popup for selecting sourcing_rule
- $(".sourcing_rule_header_id.select_popup").click(function() {
+ $('body').off( 'click' , '.po_sourcing_rule_header_id.select_popup')
+         .on( 'click' , '.po_sourcing_rule_header_id.select_popup' ,function() {
 	void window.open('select.php?class_name=po_sourcing_rule_header', '_blank',
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
 	return false;

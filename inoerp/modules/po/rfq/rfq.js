@@ -85,7 +85,9 @@ setValFromSelectPage.prototype.setVal = function () {
 
  localStorage.removeItem("row_class");
  localStorage.removeItem("addressPopupDivClass");
-
+ if (this.po_rfq_header_id) {
+  $('a.show.po_rfq_header_id').trigger('click');
+ }
 };
 
 

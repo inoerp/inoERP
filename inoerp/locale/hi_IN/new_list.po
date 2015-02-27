@@ -1,0 +1,12 @@
+General Info
+Transfer
+Finance
+Lot & Serial
+Action
+Transaction Id
+UOM
+Kit Item
+Kit Config
+Config Id
+From SubInv
+To SubInv

@@ -1,3 +1,29 @@
+var multi_slect = $('.single_multi_select');
+var e_name = $(multi_slect).attr('name');
+var new_name = 'xx'+e_name;
+var new_element = '<span class="multi-select-container"><ul class="selection-hidden">';
+ new_element  += '<li class="input-element"><input type="text" value="" class="ino-multi-select" name=' + e_name + ' ></li>';
+ new_element  += '<li class="select-element"></li>';
+ new_element  += '</ul></span>';
+$('.single_multi_select').replaceWith(new_element);
+$(multi_slect).attr('name', new_name).removeAttr('multiple').removeClass('single_multi_select').addClass('');
+console.log($(multi_slect).attr('name'));
+$('body').on('focusin', '.input-element' , function(){
+ $(multi_slect).addClass('active-selection');
+$('li.select-element').append(multi_slect);
+});
+$('body').on('change, focusout',  '.active-selection' , function(){
+alert('value selected' + $(this).val());
+var existing_text = $(this).closest('ul').find('input.ino-multi-select').prop('value');
+  if(existing_text){
+  existing_text += ', ';
+  }
+$(this).closest('ul').find('input.ino-multi-select').prop( 'value', existing_text + $(this).val());
+ $('li.select-element').empty();
+ $(multi_slect).removeClass('active-selection');
+});
+
+
 $.fn.recordData = function (options) {
  var inputValue;
  $('input').on('keydown',

@@ -1,43 +1,45 @@
 <form action=""  method="post" id="inv_transaction"  name="inv_transaction">
  <?php echo (!empty($hidden_stmt)) ? $hidden_stmt : ""; ?> 
  <!--create empty form or a single id when search is not clicked and the id is referred from other page -->
- <span class="heading">Inventory Transaction </span> 
- <ul id="form_top_ul" class="inRow asperWidth headerBgColor">
-  <li><lable>Inventory Org </lable>
-  <?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly); ?>
-  </li>
-  <li><lable>Transaction Type </lable>
-  <?php
-  echo!(empty($id_array)) ? form::select_field_from_object('transaction_type_id', transaction_type::find_some_byIdArray($id_array), 'transaction_type_id', 'transaction_type', $$class->transaction_type_id, 'transaction_type_id', $readonly) :
-   form::select_field_from_object('transaction_type_id', transaction_type::find_all(), 'transaction_type_id', 'transaction_type', $$class->transaction_type_id, 'transaction_type_id', 1);
-  ?>
-  </li>
- </ul>
+ <span class="heading"><?php   echo gettext('Inventory Transaction ')   ?></span> 
+ <div class='tabContainer'>
+  <ul class='column header_field'>
+   <li>
+    <?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>  </li>
+   <li>
+    <?php
+    echo!(empty($id_array)) ? $f->l_select_field_from_object('transaction_type_id', transaction_type::find_some_byIdArray($id_array), 'transaction_type_id', 'transaction_type', $$class->transaction_type_id, 'transaction_type_id', '', 1, $readonly1) :
+     $f->l_select_field_from_object('transaction_type_id', transaction_type::find_all(), 'transaction_type_id', 'transaction_type', $$class->transaction_type_id, 'transaction_type_id', '', 1, $readonly1);
+    ?>
+   </li>
+  </ul>
+ </div>
+
  <div id ="form_line" class="form_line"><span class="heading">Transaction Details </span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">General Info</a></li>
-    <li><a href="#tabsLine-2">Transfer </a></li>
-    <li><a href="#tabsLine-3">Reference </a></li>
-    <li><a href="#tabsLine-4">Finance </a></li>
-    <li><a href="#tabsLine-5">Lot & Serial </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('General Info') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Transfer') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Reference') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('Finance') ?></a></li>
+    <li><a href="#tabsLine-5"><?php echo gettext('Lot & Serial') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th>Transaction Id</th>
-        <th>Item Id</th>
-        <th>Item Number</th>
-        <th>Revision</th>
-        <th>Item Description</th>
-        <th>UOM</th>
-        <th>Quantity</th>
-        <th>Kit Item</th>
-        <th>Kit Config</th>
-        <th>Config Id</th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Transaction Id') ?></th>
+        <th><?php echo gettext('Item Id') ?></th>
+        <th><?php echo gettext('Item Number') ?></th>
+        <th><?php echo gettext('Revision') ?></th>
+        <th><?php echo gettext('Item Description') ?></th>
+        <th><?php echo gettext('UOM') ?></th>
+        <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('Kit Item') ?></th>
+        <th><?php echo gettext('Kit Config') ?></th>
+        <th><?php echo gettext('Config Id') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -69,14 +71,13 @@
     </div>
     <div id="tabsLine-2" class="tabContent">
      <table class="form_line_data_table">
-      <thead> 
-      <th>From SubInv</th>
-      <th>From Locator </th>
-      <th>To SubInv</th>
-      <th>To Locator</th>
-      <th>Ef Id</th>
-      <th>Description</th>
-      <th>Reason</th>
+      <thead>
+      <th><?php echo gettext('From SubInv') ?></th>
+      <th><?php echo gettext('From Locator') ?></th>
+      <th><?php echo gettext('To SubInv') ?></th>
+      <th><?php echo gettext('To Locator') ?></th>
+      <th><?php echo gettext('Description') ?></th>
+      <th><?php echo gettext('Reason') ?></th>
       </thead>
       <tbody class="form_data_line_tbody">
        <tr class="inv_transaction_line0" id="tab2_1">
@@ -100,17 +101,17 @@
     </div>
     <div id="tabsLine-3" class="tabContent">
      <table class="form_line_data_table">
-      <thead> 
-      <th>Document Type</th>
-      <th>Doc. Number</th>
-      <th>Doc. Id</th>
-      <th>Ref Type</th>
-      <th>Ref Name</th>
-      <th>Ref Value</th>
-      <th>Ref Doc</th>
-      <th>WO BOM Line Id</th>
-      <th>PO Detail Id</th>
-      <th>SO Line Id</th>
+      <thead>
+      <th><?php echo gettext('Document Type') ?></th>
+      <th><?php echo gettext('Doc. Number') ?></th>
+      <th><?php echo gettext('Doc. Id') ?></th>
+      <th><?php echo gettext('Ref Type') ?></th>
+      <th><?php echo gettext('Ref Name') ?></th>
+      <th><?php echo gettext('Ref Value') ?></th>
+      <th><?php echo gettext('Ref Doc') ?></th>
+      <th><?php echo gettext('WO BOM Line Id') ?></th>
+      <th><?php echo gettext('PO Detail Id') ?></th>
+      <th><?php echo gettext('SO Line Id') ?></th>
       </thead>
       <tbody class="form_data_line_tbody">
        <tr class="inv_transaction_line0" id="tab3_1">
@@ -130,15 +131,15 @@
     </div>
     <div id="tabsLine-4" class="tabContent">
      <table class="form_line_data_table">
-      <thead> 
-      <th>Account</th>
-      <th>Unit Cost</th>
-      <th>Costed Amount</th>
-      <th>Journal Header Id<th>
-       </thead>
+      <thead>
+      <th><?php echo gettext('Account') ?></th>
+      <th><?php echo gettext('Unit Cost') ?></th>
+      <th><?php echo gettext('Costed Amount') ?></th>
+      <th><?php echo gettext('Journal Header Id') ?></th>
+      </thead>
       <tbody class="form_data_line_tbody">
        <tr class="inv_transaction_line0" id="tab4_1">
-        <td><?php $f->ac_field_wid('account_id'); ?></td>
+        <td><?php $f->ac_field_widm('account_id'); ?></td>
         <td><?php form::text_field_wid('unit_cost'); ?></td>
         <td><?php form::text_field_wid('costed_amount'); ?></td>
         <td><?php form::text_field_wid('gl_journal_header_id'); ?></td>
@@ -148,14 +149,13 @@
     </div>
     <div id="tabsLine-5" class="tabContent scrollElement">
      <table class="form_line_data_table">
-      <thead> 
-      <th>Lot</th>
-      <th>Add Serial Numbers</th>
+      <thead>
+      <th><?php echo gettext('Add Lot Numbers') ?></th>
+      <th><?php echo gettext('Add Serial Numbers') ?></th>
       </thead>
       <tbody class="form_data_line_tbody">
        <tr class="inv_transaction_line0" id="tab4_1">
         <td class="add_detail_values0">	<?php
-         $f = new inoform();
          echo $f->hidden_field('lot_number_id', $$class->lot_number_id);
          echo $f->hidden_field('lot_generation', $$class->lot_generation);
          ?> 
@@ -171,9 +171,9 @@
               <table class="form form_detail_data_table detail">
                <thead>
                 <tr>
-                 <th>Action</th>
-                 <th>Lot Number</th>
-                 <th>Quantity</th>
+                 <th><?php echo gettext('Action') ?></th>
+                 <th><?php echo gettext('Lot Number') ?></th>
+                 <th><?php echo gettext('Quantity') ?></th>
                 </tr>
                </thead>
                <tbody class="form_data_detail_tbody_ln">
@@ -245,8 +245,8 @@
               <table class="form form_detail_data_table detail">
                <thead>
                 <tr>
-                 <th>Action</th>
-                 <th>Serial Number</th>
+                 <th><?php echo gettext('Action') ?></th>
+                 <th><?php echo gettext('Serial Number') ?></th>
                 </tr>
                </thead>
                <tbody class="form_data_detail_tbody_sn">

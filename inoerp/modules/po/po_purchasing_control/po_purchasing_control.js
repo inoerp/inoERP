@@ -1,13 +1,14 @@
-function setValFromSelectPage(address_name) {
+function setValFromSelectPage(address_name, address_id) {
  this.address_name = address_name;
+ this.address_id = address_id;
 }
 
 setValFromSelectPage.prototype.setVal = function() {
- var address_name = this.address_name;
- var fieldClass = '.' + localStorage.getItem("field_class");
- fieldClass = fieldClass.replace(/\s+/g, '.');
- if (address_name) {
-	$("#content").find(fieldClass).val(address_name);
+  var fieldClass = '.' + localStorage.getItem("field_class").replace(/\s+/,'.');
+  fieldClass = fieldClass.replace(/\s+/g, '.');
+ if (this.address_name) {
+	$('body').find(fieldClass).parent().find('.address_name').val(this.address_name);
+  $('body').find(fieldClass).val(this.address_id);
  }
 };
 

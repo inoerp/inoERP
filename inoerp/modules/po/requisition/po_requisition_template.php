@@ -1,66 +1,51 @@
-<div id="po_requisition_divId">
+<div id="po_requisition_divId"><?php $f = new inoform(); ?>
 
- <div id ="form_header"><span class="heading">Requisition Header </span>
+ <div id ="form_header"><span class="heading"><?php echo gettext('Requisition Header') ?></span>
   <form action=""  method="post" id="po_requisition_header"  name="po_requisition_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Finance</a></li>
-     <li><a href="#tabsHeader-3">Address Details</a></li>
-     <li><a href="#tabsHeader-4">Attachments</a></li>
-     <li><a href="#tabsHeader-5">Notes</a></li>
-     <li><a href="#tabsHeader-6">Actions</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Finance') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Address Details') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-5"><?php echo gettext('Notes') ?></a></li>
+     <li><a href="#tabsHeader-6"><?php echo gettext('Actions') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
-       <ul class="column header_field">
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="po_requisition_header_id select_popup clickable">
-          Requisition  Id</label>
-         <?php echo $f->text_field_dr('po_requisition_header_id') ?>
-         <a name="show" href="form.php?class_name=po_requisition_header&<?php echo "mode=$mode"; ?>" class="show document_id po_requisition_header_id"><i class="fa fa-refresh"></i></a> 
-        </li>
-        <li><label>Requisition Number</label> <?php echo $f->text_field_d('po_requisition_number', 'primary_column2'); ?>             </li>
-        <li><label>BU Name(1)</label>
-         <?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>
-        </li>
-        <li><label>Requisition Type(2)</label>
-         <?php echo form::select_field_from_array('po_requisition_type', po_requisition_header::$po_requisition_type_a, $$class->po_requisition_type, 'po_requisition_type', '', 1, $readonly1); ?>
-        </li>
-        <li><?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
-         <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supplier_id select_popup clickable">
-          Supplier Name</label> 
-         <?php echo $f->text_field_D('supplier_name', 'select_supplier_name'); ?> </li>
-        <li><label class="auto_complete">Supplier Number : </label> <?php $f->text_field_d('supplier_number'); ?></li>
-        <li><label>Supplier Site</label>
-         <?php
-         $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
-         echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
-         ?> </li>
-        <li><label>Status</label>                      
-         <?php echo $f->select_field_from_object('requisition_status', po_header::po_status(), 'option_line_code', 'option_line_value', $$class->requisition_status, 'requisition_status', 'dont_copy', '', 1); ?>
-        </li>
-        <li><label>Revision</label>
-         <?php echo form::checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?>
-        </li> 
-        <li><label>Rev Number</label>  <?php form::text_field_wid('rev_number'); ?>  </li> 
-        <li><label>Buyer : </label> <?php form::text_field_wid('buyer'); ?>   </li> 
-        <li><label>Description : </label>  <?php form::text_field_wid('description'); ?> </li> 
-       </ul>
-      </div>
+      <ul class="column header_field">
+       <li><?php $f->l_text_field_dr_withSearch('po_requisition_header_id') ?>
+        <a name="show" href="form.php?class_name=po_requisition_header&<?php echo "mode=$mode"; ?>" class="show document_id po_requisition_header_id"><i class="fa fa-refresh"></i></a> 
+       </li>
+       <li><?php $f->l_text_field_d('po_requisition_number', 'primary_column2'); ?>             </li>
+       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>        </li>
+       <li><?php $f->l_select_field_from_array('po_requisition_type', po_requisition_header::$po_requisition_type_a, $$class->po_requisition_type, 'po_requisition_type', '', 1, $readonly1); ?>        </li>
+       <li><?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
+        <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supplier_id select_popup clickable">
+         <?php echo gettext('Supplier Name') ?></label> 
+        <?php echo $f->text_field_D('supplier_name', 'select_supplier_name'); ?> </li>
+       <li><label class="auto_complete"><?php echo gettext('Supplier Number') ?></label><?php $f->text_field_d('supplier_number'); ?></li>
+       <li><label><?php echo gettext('Supplier Site') ?></label><?php
+        $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
+        echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
+        ?> </li>
+       <li><label><?php echo gettext('Status') ?></label>                      
+        <?php echo $f->select_field_from_object('requisition_status', po_header::po_status(), 'option_line_code', 'option_line_value', $$class->requisition_status, 'requisition_status', 'dont_copy', '', 1); ?>
+       </li>
+       <li><?php $f->l_checkBox_field_d('rev_enabled_cb'); ?></li>
+       <li><?php $f->l_text_field_d('rev_number'); ?></li>
+       <li><?php $f->l_text_field_d('buyer'); ?></li>
+       <li><?php $f->l_text_field_d('description'); ?></li>
+      </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div> 
-       <ul class="column five_column">
-        <li><label>Currency : </label>
-         <?php echo $f->select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, $readonly); ?>
-        </li>
-        <li><label>Exchange Rate Type : </label><?php echo form::text_field_d('exchange_rate_type'); ?>              </li>
-        <li><label>Exchange Rate : </label>  <?php form::number_field_d('exchange_rate'); ?>              </li>
-        <li><label>Header Amount : </label>  <?php form::number_field_d('header_amount'); ?>              </li>
-        <li><label>Payment Term : </label>
-         <?php echo $f->select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, 'payment_term_id', '', 1, $readonly); ?>
-        </li>
+       <ul class="column header_field">
+        <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, $readonly); ?>        </li>
+        <li><?php $f->l_text_field_d('exchange_rate_type'); ?></li>
+        <li><?php $f->l_text_field_d('exchange_rate'); ?></li>
+        <li><?php $f->l_text_field_d('header_amount'); ?></li>
+        <li<?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, 'payment_term_id', '', 1, $readonly); ?>        </li>
        </ul>
       </div>
      </div>
@@ -69,25 +54,23 @@
        <div class="left_half shipto address_details">
         <ul class="column four_column">
          <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-           Ship To Site Id : </label>
+           <?php echo gettext('Ship To Site Id') ?></label>
           <?php $f->text_field_d('ship_to_id', 'address_id site_address_id'); ?>
          </li>
-         <li><label>Address Name : </label><?php $f->text_field_dr('ship_to_address_name', 'address_name'); ?></li>
-         <li><label>Address :</label> <?php $f->text_field_dr('ship_to_address', 'address'); ?></li>
-         <li><label>Country  : </label> <?php $f->text_field_dr('ship_to_country', 'country'); ?></li>
-         <li><label>Postal Code  : </label><?php echo $f->text_field_dr('ship_to_postal_code', 'postal_code'); ?></li>
+         <li><label><?php echo gettext('Address Name') ?></label><?php $f->text_field_dr('ship_to_address_name', 'address_name'); ?></li>
+         <li><?php $f->l_text_field_dr('ship_to_address', 'address'); ?></li>
+         <li><?php $f->l_text_field_dr('ship_to_country', 'country'); ?></li>
+         <li><?php $f->l_text_field_dr('ship_to_postal_code', 'postal_code'); ?></li>
         </ul>
        </div> 
        <div class="right_half billto address_details">
         <ul class="column four_column">
          <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-           Bill To Site Id :</label>
-          <?php $f->text_field_d('bill_to_id', 'address_id site_address_id'); ?>
-         </li>
-         <li><label>Address Name :</label><?php $f->text_field_dr('bill_to_address_name', 'address_name'); ?> </li>
-         <li><label>Address :</label> <?php $f->text_field_dr('bill_to_address', 'address'); ?></li>
-         <li><label>Country  : </label> <?php $f->text_field_dr('bill_to_country', 'country'); ?></li>
-         <li><label>Postal Code  : </label><?php echo $f->text_field_dr('bill_to_postal_code', 'postal_code'); ?></li>
+           <?php echo gettext('Bill To Site Id') ?></label><?php $f->text_field_d('bill_to_id', 'address_id site_address_id'); ?></li>
+         <li><?php $f->l_text_field_dr('bill_to_address_name', 'address_name'); ?> </li>
+         <li><?php $f->l_text_field_dr('bill_to_address', 'address'); ?></li>
+         <li><?php $f->l_text_field_dr('bill_to_country', 'country'); ?></li>
+         <li><?php $f->l_text_field_dr('bill_to_postal_code', 'postal_code'); ?></li>
         </ul>
        </div> 
       </div>
@@ -134,29 +117,29 @@
 
   </form>
  </div>
- <div id="form_line" class="form_line"><span class="heading">Requisition Lines & Shipments </span>
+ <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Requisition Lines & Shipments') ?></span>
   <form action=""  method="po_requisitionst" id="po_requisition_site"  name="po_requisition_line">
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1">Basic</a></li>
-     <li><a href="#tabsLine-2">Other Info</a></li>
-     <li><a href="#tabsLine-3">Notes</a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Other Info') ?> </a></li>
+     <li><a href="#tabsLine-3"><?php echo gettext('Notes') ?> </a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsLine-1" class="tabContent">
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Action</th>
-         <th>Line Id</th>
-         <th>Line#</th>
-         <th>Receiving Org</th>
-         <th>Type</th>
-         <th>Item Number</th>
-         <th>Item Description</th>
-         <th>UOM</th>
-         <th>Quantity</th>
-         <th>Shipment Details</th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Line Id') ?></th>
+         <th><?php echo gettext('Line') ?>#</th>
+         <th><?php echo gettext('Receiving Org') ?></th>
+         <th><?php echo gettext('Type') ?></th>
+         <th><?php echo gettext('Item Number') ?></th>
+         <th><?php echo gettext('Item Description') ?></th>
+         <th><?php echo gettext('UOM') ?></th>
+         <th><?php echo gettext('Quantity') ?></th>
+         <th><?php echo gettext('Shipments') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -206,22 +189,22 @@
             <fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
              <div class="tabsDetail">
               <ul class="tabMain">
-               <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>">Basic</a></li>
-               <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>">Delivery</a></li>
-               <li class="tabLink"><a href="#tabsDetail-3-<?php echo $count ?>">Finance</a></li>
-               <li class="tabLink"><a href="#tabsDetail-4-<?php echo $count ?>">Status</a></li>
+               <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo gettext('Basic') ?></a></li>
+               <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>"><?php echo gettext('Delivery') ?></a></li>
+               <li class="tabLink"><a href="#tabsDetail-3-<?php echo $count ?>"><?php echo gettext('Finance') ?></a></li>
+               <li class="tabLink"><a href="#tabsDetail-4-<?php echo $count ?>"><?php echo gettext('Status') ?></a></li>
               </ul>
               <div class="tabContainer">
                <div id="tabsDetail-1-<?php echo $count ?>" class="tabContent">
                 <table class="form form_detail_data_table detail">
                  <thead>
                   <tr>
-                   <th>Action</th>
-                   <th>Shipment Id</th>
-                   <th>Shipment Number</th>
-                   <th>Ship To Location</th>
-                   <th>Quantity</th>
-                   <th>Need By Date</th>
+                   <th><?php echo gettext('Action') ?></th>
+                   <th><?php echo gettext('Shipment Id') ?></th>
+                   <th><?php echo gettext('Shipment Number') ?></th>
+                   <th><?php echo gettext('Ship To Location') ?></th>
+                   <th><?php echo gettext('Quantity') ?></th>
+                   <th><?php echo gettext('Need By Date') ?></th>
                   </tr>
                  </thead>
                  <tbody class="form_data_detail_tbody">
@@ -235,7 +218,7 @@
                     <td>
                      <?php
                      echo ino_inline_action($$class_third->po_requisition_detail_id, array('po_requisition_header_id' => $$class->po_requisition_header_id,
-                      'po_requisition_line_id' => $$class_second->po_requisition_line_id),'add_row_detail_img','detail_id_cb');
+                      'po_requisition_line_id' => $$class_second->po_requisition_line_id), 'add_row_detail_img', 'detail_id_cb');
                      ?>
                     </td>
                     <td><?php form::text_field_wid3sr('po_requisition_detail_id'); ?></td>
@@ -255,10 +238,10 @@
                 <table class="form form_detail_data_table detail">
                  <thead>
                   <tr>
-                   <th>Order Number</th>
-                   <th>Sub inventory</th>
-                   <th>Locator</th>
-                   <th>Requestor</th>
+                   <th><?php echo gettext('Order Number') ?></th>
+                   <th><?php echo gettext('Sub inventory') ?></th>
+                   <th><?php echo gettext('Locator') ?></th>
+                   <th><?php echo gettext('Requestor') ?></th>
                   </tr>
                  </thead>
                  <tbody class="form_data_detail_tbody">
@@ -289,10 +272,10 @@
                 <table class="form form_detail_data_table detail">
                  <thead>
                   <tr>
-                   <th>Charge Ac</th>
-                   <th>Accrual Ac</th>
-                   <th>Budget Ac</th>
-                   <th>PPV Ac</th>
+                   <th><?php echo gettext('Charge Ac') ?></th>
+                   <th><?php echo gettext('Accrual Ac') ?></th>
+                   <th><?php echo gettext('Budget Ac') ?></th>
+                   <th><?php echo gettext('PPV Ac') ?></th>
                   </tr>
                  </thead>
                  <tbody class="form_data_detail_tbody">
@@ -319,11 +302,11 @@
                 <table class="form form_detail_data_table detail"><lable>Quantities</lable>
                  <thead>
                   <tr>
-                   <th>Received</th>
-                   <th>Accepted</th>
-                   <th>Delivered</th>
-                   <th>Invoiced</th>
-                   <th>Paid</th>
+                   <th><?php echo gettext('Received') ?></th>
+                   <th><?php echo gettext('Accepted') ?></th>
+                   <th><?php echo gettext('Delivered') ?></th>
+                   <th><?php echo gettext('Invoiced') ?></th>
+                   <th><?php echo gettext('Paid') ?></th>
                   </tr>
                  </thead>
                  <tbody class="form_data_detail_tbody">
@@ -368,15 +351,14 @@
       <table class="form_line_data_table">
        <thead> 
         <tr>
-
-         <th>Price List</th>
-         <th>Pricing Date</th>
-         <th>Unit Price</th>
-         <th>Line Price</th>
-         <th>Line Description</th>
-         <th>Ref Doc Type</th>
-         <th>Ref Number</th>
-         <th>BPA Number</th>
+         <th><?php echo gettext('Price List') ?></th>
+         <th><?php echo gettext('Price Date') ?></th>
+         <th><?php echo gettext('Unit Price') ?>#</th>
+         <th><?php echo gettext('Line Price') ?>#</th>
+         <th><?php echo gettext('Line Description') ?></th>
+         <th><?php echo gettext('Ref Doc Type') ?></th>
+         <th><?php echo gettext('Ref Number') ?></th>
+         <th><?php echo gettext('BPA Number') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -472,4 +454,3 @@
   <li class="noOfTabbs" data-noOfTabbs="3" ></li>
  </ul>
 </div>
-

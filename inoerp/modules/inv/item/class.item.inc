@@ -83,7 +83,8 @@ class item extends dbObject {
   "inventory_asset_cb",
   "build_in_wip_cb",
   "allow_negative_balance_cb",
-  'update_revision_cb'
+  'update_revision_cb',
+  'invoiceable_cb'
  ];
  public $field_a = [
   "item_id",
@@ -110,6 +111,7 @@ class item extends dbObject {
   "serial_starting_number",
   "serial_uniqueness",
   "invoice_matching",
+  'invoiceable_cb',
   "default_buyer",
   "list_price",
   "un_number",
@@ -392,7 +394,7 @@ class item extends dbObject {
  public $internal_ordered_cb;
  public $shippable_cb;
  public $returnable_cb;
- public $invoiceable;
+ public $invoiceable_cb;
  public $op_tax_class;
  public $ip_tax_class;
  public $ap_payment_term;

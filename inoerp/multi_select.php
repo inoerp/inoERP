@@ -135,7 +135,7 @@ if (!empty($class_names)) {
 <?php
 if ($continue) {
  if (!empty($$class) && property_exists($$class, 'multi_select_template_path')) {
-  $template_file_names = $class::$multi_select_template_path;
+  $template_file_names = [$class::$multi_select_template_path];
  } else if (!empty($$class)) {
   $template_file_names = ['includes/basics/multi_select_page.inc'];
  }

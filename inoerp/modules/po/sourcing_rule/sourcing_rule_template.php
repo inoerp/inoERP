@@ -1,29 +1,29 @@
-<div id ="form_header"><span class="heading">Sourcing Rule Header</span>
+<!-- * 
+inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ -->
+ <div id ="form_header"><span class="heading"><?php echo gettext('Sourcing Rule Header') ?></span>
  <form action=""  method="post" id="po_sourcing_rule_header"  name="po_sourcing_rule_header">
-  <div id="tabsHeader">
+  <div id="tabsHeader"><?php $f = new inoform(); ?>
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1">Basic Info</a></li>
-    <li><a href="#tabsHeader-2">Attachments</a></li>
-    <li><a href="#tabsHeader-3">Notes</a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <div class="large_shadow_box"> 
-      <ul class="column four_column">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sourcing_rule_header_id select_popup clickable">
-         Sourcing Rule Id : </label>
-        <?php echo $f->text_field_dr('po_sourcing_rule_header_id') ?>
+      <ul class="column header_field">
+       <li><?php $f->l_text_field_dr_withSearch('po_sourcing_rule_header_id') ?>
         <a name="show" href="form.php?class_name=po_sourcing_rule_header&<?php echo "mode=$mode"; ?>" class="show document_id po_sourcing_rule_header_id"><i class="fa fa-refresh"></i></a> 
        </li>
-       <li><label>Sourcing Rule : </label>
-        <?php form::text_field_dm('sourcing_rule'); ?>
-       </li>
-       <li><label>Description: </label>
-        <?php form::text_field_dm('description'); ?>
-       </li>
-       <li><label>Status : </label>                      
-        <?php echo form::status_field($$class->status, $readonly); ?>
-       </li>
+       <li><?php $f->l_text_field_dm('sourcing_rule'); ?> </li>
+       <li><?php $f->l_text_field_dm('description'); ?></li>
+       <li><?php $f->l_status_field_d('status'); ?>       </li>
       </ul>
      </div>
     </div>
@@ -53,27 +53,28 @@
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading">Sourcing Lines </span>
+<div id="form_line" class="form_line">
+ <span class="heading"><?php echo gettext('Sourcing Lines') ?></span>
  <form action=""  method="post" id="sourcing_rule_line"  name="sourcing_rule_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Main</a></li>
-    <li><a href="#tabsLine-2">Future</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>      
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th>Sourcing Line Id</th>
-        <th>Source Type</th>
-        <th>Rank</th>
-        <th>Allocation % </th>
-        <th>Org</th>
-        <th>Supplier Id</th>
-        <th>Supplier Name</th>
-        <th>Supplier Site</th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Source Type') ?>#</th>
+        <th><?php echo gettext('Rank') ?></th>
+        <th><?php echo gettext('Allocation % ') ?></th>
+        <th><?php echo gettext('Org') ?></th>
+        <th><?php echo gettext('Supplier Id') ?></th>
+        <th><?php echo gettext('Supplier Name') ?></th>
+        <th><?php echo gettext('Supplier Site') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

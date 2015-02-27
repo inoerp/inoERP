@@ -1,40 +1,26 @@
 <div id ="form_header">
- <form action=""  method="post" id="transaction_type_form"  name="transaction_type_form"><span class="heading">Transaction Type </span>
+ <form action=""  method="post" id="transaction_type_form"  name="transaction_type_form">
+  <span class="heading"><?php echo gettext('Transaction Type') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Note</a></li>
-     <li><a href="#tabsHeader-3">Attachments</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
-       <ul class="column four_column"> 
-        <li> 
-         <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="transaction_type_id select_popup clickable">
-          Type Id : </label> 
-         <?php $f->text_field_dr('transaction_type_id') ?>
-         <a name="show" href="form.php?class_name=transaction_type&<?php echo "mode=$mode"; ?>" class="show document_id transaction_type_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-        </li> 
-        <li><label>Trnx. Number :</label>
-         <?php form::text_field_wid('transaction_type_number'); ?>
-        </li>
-        <li><label>Transaction Type :</label>
-         <?php form::text_field_wid('transaction_type'); ?>
-        </li>
-        <li><label>Type Class :</label>
-         <?php echo $f->select_field_from_object('type_class', transaction_type::transaction_type_class(), 'option_line_code', 'description', $$class->type_class, '', '', 1, $readonly1); ?>
-        </li>
-        <li><label>Action :</label>
-         <?php echo $f->select_field_from_object('transaction_action', transaction_type::transaction_action(), 'option_line_code', 'description', $$class->transaction_action, '', '', 1, $readonly); ?>
-        </li>
-
-       </ul>
-      </div>
+      <ul class="column four_column"> 
+       <li><?php $f->l_text_field_dr_withSearch('transaction_type_id') ?>
+        <a name="show" href="form.php?class_name=transaction_type&<?php echo "mode=$mode"; ?>" class="show document_id transaction_type_id">
+         <i class='fa fa-refresh'></i></a> 
+       </li> 
+       <li><?php $f->text_field_d('transaction_type_number') ?></li>
+       <li><?php $f->text_field_d('transaction_type') ?></li>
+       <li><?php $f->l_select_field_from_object('type_class', transaction_type::transaction_type_class(), 'option_line_code', 'description', $$class->type_class, '', '', 1, $readonly1); ?>        </li>
+       <li><?php $f->l_select_field_from_object('transaction_action', transaction_type::transaction_action(), 'option_line_code', 'description', $$class->transaction_action, '', '', 1, $readonly); ?>        </li>
+      </ul>
      </div>
-
-
      <div id="tabsHeader-2" class="tabContent">
       <div id="comments">
        <div id="comment_list">
@@ -62,30 +48,17 @@
   <div id ="form_line" class="form_line"><span class="heading"> Transaction Type Details </span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1">Main</a></li>
-     <li><a href="#tabsLine-2">Future</a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Future') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <ul class="column four_column"> 
-       <li><label>Description :</label>
-        <?php $f->text_field_wid('description'); ?>
-       </li>
-       <li><label>Allow Negative Balance : </label>
-        <?php echo form::checkBox_field_d('allow_negative_balance_cb'); ?>
-       </li> 
-       <li><label>Extra Field : </label>
-        <?php echo form::extra_field($transaction_type->ef_id, '10', $readonly); ?>
-       </li>
-       <li><label>Status : </label>
-        <?php echo form::status_field($transaction_type->status, $readonly); ?>
-       </li>
-       <li><label>Revision : </label>
-        <?php echo form::revision_enabled_field($transaction_type->rev_enabled_cb, $readonly); ?>
-       </li>
-       <li><label>Revision No: </label>
-        <?php echo form::text_field('rev_number', $transaction_type->rev_number, '10', '', '', '', '', $readonly); ?>
-       </li>
+       <li><?php $f->text_field_d('transaction_type_number') ?></li>
+       <li><?php $f->l_checkBox_field_d('allow_negative_balance_cb'); ?></li>
+       <li><?php $f->l_status_field_d('status'); ?></li>
+       <li><?php $f->l_checkBox_field_d('rev_enabled_cb'); ?></li>
+       <li><?php $f->text_field_d('rev_number') ?></li>
       </ul> 
      </div> 
      <!--end of tab1-->

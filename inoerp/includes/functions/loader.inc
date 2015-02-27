@@ -249,7 +249,7 @@ if (($continue) && (!empty($class_names))) {
       return;
      }
      $doc_org_id_loader = $$class->org_id;
-     if (!in_array($doc_org_id_loader, array_keys($_SESSION['user_org_access']))) {
+     if (!empty($doc_org_id_loader) && !in_array($doc_org_id_loader, array_keys($_SESSION['user_org_access']))) {
       $no_organization_access = true;
       return;
      } else {
@@ -261,7 +261,7 @@ if (($continue) && (!empty($class_names))) {
       return;
      }
      $doc_org_id_loader = $$class->bu_org_id;
-     if (!in_array($doc_org_id_loader, array_keys($_SESSION['user_org_access']))) {
+     if (!empty($doc_org_id_loader) && !in_array($doc_org_id_loader, array_keys($_SESSION['user_org_access']))) {
       $no_organization_access = true;
       return;
      } else {

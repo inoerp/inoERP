@@ -12,6 +12,7 @@ if (!empty($_GET['class_name'])) {
  include_once(__DIR__.'/../template/json_form_template.inc');
  return;
 } else {
+ include_once('../functions/functions.inc');
  access_denied('No Class Found!');
 }
 ?>

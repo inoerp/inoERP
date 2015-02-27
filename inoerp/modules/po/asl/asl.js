@@ -59,6 +59,10 @@ setValFromSelectPage.prototype.setVal = function () {
  }
  localStorage.removeItem("row_class");
 
+ if (this.po_asl_header_id) {
+  $('a.show.po_asl_header_id').trigger('click');
+ }
+
 };
 
 function afterAddNewRow() {
@@ -76,7 +80,7 @@ $(document).ready(function () {
 // mandatoryCheck.mandatoryField();
 
  //Popup for selecting asl
- $(".asl_header_id.select_popup").click(function () {
+ $(".po_asl_header_id.select_popup").click(function () {
   void window.open('select.php?class_name=po_asl_header', '_blank',
           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
   return false;

@@ -135,7 +135,7 @@ class search extends dbObject {
     if ($j > $total_columns - 2) {
      break;
     }
-    $search_result .= '<th data-field_name="' . $this->column_array_s[$j] . '">' . $drop_down_icon . ucwords(str_replace('_', ' ', $this->column_array_s[$j])) . '</th>';
+    $search_result .= '<th data-field_name="' . $this->column_array_s[$j] . '">' . $drop_down_icon . gettext(ucwords(str_replace('_', ' ', $this->column_array_s[$j]))) . '</th>';
    }
    $search_result .='</tr></thead>';
    If (!empty($this->result)) {
@@ -269,7 +269,7 @@ class search extends dbObject {
     } else {
      $get_value = "";
     }
-    $search_form_statement .= "<li><label class=\"label_$key\">" . ucwords(str_replace('_', ' ', $key)) . " : </label>";
+    $search_form_statement .= "<li><label class=\"label_$key\">" . gettext(ucwords(str_replace('_', ' ', $key))) . " : </label>";
     $class_name = ' select_search ' . $key;
     $option_header = option_header::find_by_name($value);
     $ol = new option_line;
@@ -307,7 +307,7 @@ class search extends dbObject {
     $readonly_field = '  ';
    }
    $bracketName = $value . '[]';
-   $search_form_statement .= "<li><label class=\"label_$value\">" . ucwords(str_replace('_', ' ', $value)) . " : </label>";
+   $search_form_statement .= "<li><label class=\"label_$value\">" . gettext(ucwords(str_replace('_', ' ', $value))) . " : </label>";
    $search_form_statement .= "<input type=\"text\" name=\"$bracketName\" $readonly_field class=\"$value text_search \"   size=\"15\" value=\"$get_value\" >";
    $search_form_statement .= '</li>';
   }
@@ -318,7 +318,7 @@ class search extends dbObject {
   $search_form_statement .= "<select name=\"new_search_criteria\" id=\"new_search_criteria\" class=\"new_search_criteria\">";
   foreach ($search_array as $key => $search_value) {
    $search_form_statement .= '<option value="' . htmlentities($search_value) . '"';
-   $search_form_statement .= '>' . ucwords(str_replace('_', ' ', $search_value)) . '</option>';
+   $search_form_statement .= '>' . gettext(ucwords(str_replace('_', ' ', $search_value))) . '</option>';
   }
   $search_form_statement .= '</select>';
 //	$search_form_statement .= '<li><input type="button" class="add button" id="new_search_criteria_add" value="Add"></li>';
@@ -330,7 +330,7 @@ class search extends dbObject {
 //start of second ul
   $search_form_statement .= "<ul class=\"add_new_search form_buttons\" >";
   $search_form_statement .= "<li><label>New column</label>";
-  $search_form_statement .= "<select name=\"new_column[]\" class=\"new_column\" > ";
+  $search_form_statement .= "<select  name=\"new_column[]\" class=\"new_column single_multi_select\" > ";
   $search_form_statement .= "<option value=\"\"> </option>";
 
   foreach ($search_array as $key => $value) {
@@ -447,7 +447,7 @@ class search extends dbObject {
     $get_value = "";
    }
    $name_bracketed = $value . '[]';
-   $program_form_statement .= "<li id='" . $value . "' ><label class=\"label_$value\">" . ucwords(str_replace('_', ' ', $value)) . "</label>";
+   $program_form_statement .= "<li id='" . $value . "' ><label class=\"label_$value\">" . gettext(ucwords(str_replace('_', ' ', $value))) . "</label>";
    $program_form_statement .= "<input type=\"text\" name=\"$name_bracketed\" class=\"$value text_search \"   size=\"15\" value=\"$get_value\" >";
    $program_form_statement .= '</li>';
   }

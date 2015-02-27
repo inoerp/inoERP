@@ -66,4 +66,3 @@
 </div>
 
 <?php include_template('footer.inc') ?>
-

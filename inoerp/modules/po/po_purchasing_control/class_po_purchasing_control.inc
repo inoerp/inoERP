@@ -119,14 +119,7 @@
    }
   }
 
-  public function _before_save() {
-   if (!(empty($this->ship_to_location))) {
-    $this->ship_to_id = address::find_by_keyColumn($this->ship_to_location)->address_id;
-   }
-   if (!(empty($this->bill_to_location))) {
-    $this->bill_to_id = address::find_by_keyColumn($this->bill_to_location)->address_id;
-   }
-  }
+
 
   public function findBy_orgId($org_id) {
    global $db;

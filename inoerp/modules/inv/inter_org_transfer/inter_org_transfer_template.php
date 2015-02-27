@@ -1,27 +1,25 @@
-<div id ="form_header"><span class="heading">Inter-Org Transfer Header </span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Inter-Org Transfer Header') ?></span>
  <div id="tabsHeader">
   <ul class="tabMain">
-   <li><a href="#tabsHeader-1">Basic Info</a></li>
-   <li><a href="#tabsHeader-2">Attachments</a></li>
-   <li><a href="#tabsHeader-3">Notes</a></li>
-   <li><a href="#tabsHeader-4">Actions</a></li>
+   <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+   <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+   <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+   <li><a href="#tabsHeader-4"><?php echo gettext('Actions') ?></a></li>
   </ul>
   <div class="tabContainer">
    <form action=""  method="post" id="inv_interorg_transfer_header"  name="inv_interorg_transfer_header">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
-      <ul class="column header_field">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_interorg_transfer_header_id select_popup clickable">
-         Header Id </label><?php echo form::text_field_dsr('inv_interorg_transfer_header_id'); ?>
-        <a name="show" href="form.php?class_name=inv_interorg_transfer_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_interorg_transfer_header_id">    <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-       </li>
-       <li><label>From Inventory</label><?php echo $f->select_field_from_object('from_org_id', org::find_all_inventory(), 'org_id', 'org', $$class->from_org_id, 'from_org_id', '', 1, $readonly1); ?>       </li>
-       <li><label>To Inventory</label><?php echo $f->select_field_from_object('to_org_id', org::find_all_inventory(), 'org_id', 'org', $$class->to_org_id, 'to_org_id', '', 1, $readonly1); ?>       </li>
-       <li><label>Number</label><?php echo $f->text_field('order_number', $$class->order_number, '8', '', '', '', $readonly1); ?> </li>
-       <li><label>Date</label><?php echo $f->date_fieldFromToday_d('transaction_date', ino_date($$class->transaction_date), $readonly1); ?></li>
-       <li><label>Transaction Type</label><?php echo $f->select_field_from_array('transaction_type_id', inv_interorg_transfer_header::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1, $readonly1, $readonly1); ?>       </li>
-      </ul>
-     </div>
+     <ul class="column header_field">
+      <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_interorg_transfer_header_id select_popup clickable">
+        <?php echo gettext('Header Id') ?> </label><?php echo form::text_field_dsr('inv_interorg_transfer_header_id'); ?>
+       <a name="show" href="form.php?class_name=inv_interorg_transfer_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_interorg_transfer_header_id">    <i class='fa fa-refresh'></i></a> 
+      </li>
+      <li><?php $f->l_select_field_from_object('from_org_id', org::find_all_inventory(), 'org_id', 'org', $$class->from_org_id, 'from_org_id', '', 1, $readonly1); ?>       </li>
+      <li><?php $f->l_select_field_from_object('to_org_id', org::find_all_inventory(), 'org_id', 'org', $$class->to_org_id, 'to_org_id', '', 1, $readonly1); ?>       </li>
+      <li><?php $f->l_text_field('order_number', $$class->order_number, '8', '', '', '', $readonly1); ?> </li>
+      <li><label><?php echo gettext('Date') ?></label><?php echo $f->date_fieldFromToday_d('transaction_date', ino_date($$class->transaction_date), $readonly1); ?></li>
+      <li><?php echo $f->l_select_field_from_array('transaction_type_id', inv_interorg_transfer_header::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1, $readonly1, $readonly1); ?>       </li>
+     </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
@@ -42,7 +40,7 @@
     <div id="tabsHeader-4" class="tabContent">
      <div> 
       <ul class="column five_column">
-       <li><label>Action</label>
+       <li><label><?php echo gettext('Action') ?></label>
         <select name="transaction_action[]" class=" select  transaction_action" id="transaction_action" >
          <option value="" ></option>
          <option value="CREATE_ACCOUNT" >Create Accounting</option>
@@ -59,29 +57,28 @@
  </div>
 
 </div>
-<div id="form_line" class="form_line"><span class="heading">Inter-Org Transfer Lines</span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Inter-Org Transfer Lines') ?></span>
  <form action=""  method="inv_interorg_transfer_line_form" id="inv_interorg_transfer_line_form"  name="inv_interorg_transfer_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">General Info</a></li>
-    <li><a href="#tabsLine-2">Transfer </a></li>
-    <li><a href="#tabsLine-3">Lot Serial </a></li>
-    <li><a href="#tabsLine-4">On hand </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('General Info') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Transfer') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Lot Serial') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('On hand') ?> </a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th>Line Id</th>
-        <th>Item Number</th>
-        <th>Revision</th>
-        <th>Item Description</th>
-        <th>UOM</th>
-        <th>Quantity</th>
-        <th>Reason</th>
-
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Item Number') ?></th>
+        <th><?php echo gettext('Revision') ?></th>
+        <th><?php echo gettext('Item Description') ?></th>
+        <th><?php echo gettext('UOM') ?></th>
+        <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('Reason') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -90,17 +87,12 @@
        foreach ($inv_interorg_transfer_line_object as $inv_interorg_transfer_line) {
         ?>    
         <tr class="inv_interorg_transfer_line<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class->inv_interorg_transfer_header_id); ?>">
-            <?php echo form::hidden_field('from_org_id', $$class->from_org_id); ?>
-            <?php echo form::hidden_field('to_org_id', $$class->to_org_id); ?>
-            <?php echo form::hidden_field('inv_interorg_transfer_header_id', $$class->inv_interorg_transfer_header_id); ?>
-            <?php echo form::hidden_field('transaction_type_id', $$class->transaction_type_id); ?>
-           </li>           
-          </ul>
+         <td>
+          <?php
+          echo ino_inline_action($$class_second->inv_interorg_transfer_line_id, array('from_org_id' => $$class->from_org_id,
+           'to_org_id' => $$class->to_org_id, 'inv_interorg_transfer_header_id' => $$class->inv_interorg_transfer_header_id, 
+           'transaction_type_id' => $$class->transaction_type_id));
+          ?>
          </td>
          <td><?php $f->text_field_d2sr('inv_interorg_transfer_line_id', 'lineId'); ?></td>
          <td><?php
@@ -125,15 +117,14 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>From SubInv</th>
-        <th>From Locator </th>
-        <th>To SubInv</th>
-        <th>To Locator</th>
-        <th>Description</th>
-
-        <th>Ref Type</th>
-        <th>Ref Name</th>
-        <th>Ref Value</th>
+        <th><?php echo gettext('From SubInv') ?></th>
+        <th><?php echo gettext('From Locator') ?></th>
+        <th><?php echo gettext('To SubInv') ?></th>
+        <th><?php echo gettext('To Locator') ?></th>
+        <th><?php echo gettext('Description') ?></th>
+        <th><?php echo gettext('Ref Type') ?></th>
+        <th><?php echo gettext('Ref Name') ?></th>
+        <th><?php echo gettext('Ref Value') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -171,8 +162,8 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Lot Number</th>
-        <th>Serial Number</th>
+        <th><?php echo gettext('Add Lot Numbers') ?></th>
+        <th><?php echo gettext('Add Serial Numbers') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -198,9 +189,9 @@
                <table class="form form_detail_data_table detail">
                 <thead>
                  <tr>
-                  <th>Action</th>
-                  <th>Lot Number</th>
-                  <th>Quantity</th>
+                  <th><?php echo gettext('Action') ?></th>
+                  <th><?php echo gettext('Lot Number') ?></th>
+                  <th><?php echo gettext('Quantity') ?></th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody_ln">
@@ -274,8 +265,8 @@
                <table class="form form_detail_data_table detail">
                 <thead>
                  <tr>
-                  <th>Action</th>
-                  <th>Serial Number</th>
+                  <th><?php echo gettext('Action') ?></th>
+                  <th><?php echo gettext('Serial Number') ?></th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody">

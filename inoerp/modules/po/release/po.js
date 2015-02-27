@@ -223,8 +223,8 @@ mandatoryCheck.mandatoryHeader();
  });
 
  //selecting PO Header Id
- $(".po_header_id.select_popup").on("click", function () {
-  void window.open('select.php?class_name=po_document_v', '_blank',
+ $('body').off("click", '.po_header_id.select_popup').on("click", '.po_header_id.select_popup' , function () {
+  void window.open('select.php?class_name=po_document_v&po_type=BLANKET', '_blank',
           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 

@@ -2,6 +2,15 @@
 <?php
 
 if (!empty($_GET['class_name'])) {
+ require_once __DIR__ . '/../../locale/gettext.inc';
+ $locale = (isset($_SESSION['lang'])) ? $_SESSION['lang'] : DEFAULT_LOCALE;
+ $encoding = 'UTF-8';
+ T_setlocale(LC_MESSAGES, $locale);
+ $domain = 'messages';
+ T_bindtextdomain($domain, LOCALE_DIR);
+ T_bind_textdomain_codeset($domain, $encoding);
+ T_textdomain($domain);
+
  $class = $class_names = $_GET['class_name'];
  $$class = new $class;
  $table_name = empty($table_name) ? $class::$table_name : $table_name;
@@ -158,7 +167,7 @@ if (!empty($_GET['class_name'])) {
 
   if (count($whereFields) > 0) {
    $whereClause = " WHERE " . implode(" AND ", $whereFields);
-   $count_sql_all_records = "SELECT COUNT(*) FROM " . $table_name. $whereClause;
+   $count_sql_all_records = "SELECT COUNT(*) FROM " . $table_name . $whereClause;
    if (!empty($all_orgs_in_cls)) {
     $whereClause = ' AND ' . $all_orgs_in_cls;
    }
@@ -170,7 +179,7 @@ if (!empty($_GET['class_name'])) {
    $count_sql_all_records = "SELECT COUNT(*) FROM " . $table_name;
    if (!empty($all_orgs_in_cls)) {
     $whereClause = ' WHERE ' . $all_orgs_in_cls;
-   }else{
+   } else {
     $whereClause = null;
    }
    $sql = "SELECT * FROM " . $table_name . $whereClause;
@@ -216,7 +225,7 @@ if (!empty($_GET['class_name'])) {
    $sql .=" LIMIT {$per_page} ";
    $sql .=" OFFSET {$pagination->offset()}";
   }
- echo "<br><br><br> sql is $sql";
+  echo "<br><br><br> sql is $sql";
   $search_result = $class::find_by_sql($sql);
 //  pa($search_result);
  }
@@ -231,7 +240,7 @@ if (!empty($_GET['class_name'])) {
    $s->setProperty($searchParaKey, $searchParaValue);
   }
  }
-$total_count_all = empty($total_count_all) ? $total_count : $total_count_all;
+ $total_count_all = empty($total_count_all) ? $total_count : $total_count_all;
  $s->setProperty('result', $search_result);
  $s->setProperty('_searching_class', $class);
  $s->setProperty('_per_page', $per_page);

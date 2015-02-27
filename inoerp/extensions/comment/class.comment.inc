@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -7,6 +8,7 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
+
 /**
  * 
  *
@@ -109,6 +111,8 @@ class comment extends dbObject {
  public $multi_action_class_pc;
  public $multi_action_class_pc_value;
  public $action;
+ public $description = "User Comments";
+ public $subject_noof_char = 80;
 
  public function _before_save() {
   if (empty($this->subject)) {
@@ -154,28 +158,50 @@ class comment extends dbObject {
   $this->_disable_block('comment_recent_comments');
  }
 
+ public function content_comment_with_reference($numbers = '', $start_from = '') {
+  $sql = " SELECT comment.comment_id, comment.subject,
+	         content.content_id, content.content_type_id,
+           comment.reference_table, comment.reference_id, comment.comment ,comment.published_cb, comment.creation_date,
+           user.username
+					FROM comment ,
+            content,
+            user
+					WHERE comment.reference_table = 'content'
+          AND content.content_id = comment.reference_id 
+					AND comment.subject IS NOT NULL AND comment.subject !='' 
+          AND  comment.created_by = user.user_id
+          ";
+
+  $sql .=" ORDER BY comment.comment_id DESC, comment.weightage DESC ";
+  if (!empty($numbers) && !empty($start_from)) {
+   $sql .= " LIMIT {$start_from} , :lmt_no_of_records  ";
+   $value_a = ['lmt_no_of_records' => $numbers];
+   $result = $this->findBySql($sql, $value_a);
+  } else {
+   $result = $this->findBySql($sql);
+  }
+//pa($result);echo $sql;
+  return !empty($result) ? $result : false;
+ }
+
  public function comment_recent_comments_block($param) {
   $numbers = empty($param->numbers) ? 7 : $param->numbers;
-  $start_from = empty($param->start_from) ? 1 : $param->start_from;
-  $sql = " SELECT comment.comment_id, comment.subject,
-	         content.content_id, content.content_type_id
-					FROM comment
-					LEFT JOIN content ON content.content_id = comment.reference_id 
-					WHERE comment.reference_table = 'content'
-					AND comment.subject IS NOT NULL AND comment.subject !='' ";
-  $sql .=" ORDER BY comment.comment_id DESC, comment.weightage DESC ";
-  $sql .= " LIMIT {$start_from} , :lmt_no_of_records  ";
-  $value_a = ['lmt_no_of_records' => $numbers];
-
-  $result = $this->findBySql($sql, $value_a);
-  $comment_string = '';
+  $start_from = empty($param->start_from) ? 0 : $param->start_from;
+  $this->subject_noof_char = empty($this->subject_noof_char) ? 200 : $this->subject_noof_char;
+  $result = $this->content_comment_with_reference($numbers, $start_from);
+    $comment_string = '';
   if (count($result) > 0) {
    $comment_string .= '<ul class="documentation_list comment">';
    foreach ($result as $records) {
     $comment_string .= '<li class="comment_subject">';
     $comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&' . 'content_id=' . $records->content_id .
      '&content_type_id=' . $records->content_type_id . '#comment_id_' . $records->comment_id . '">';
-    $comment_string .= substr(strip_tags($records->subject), 1, 40) . '</a>';
+    if (!empty($records->subject)) {
+     $comment_string .= substr(strip_tags($records->subject), 0, $this->subject_noof_char);
+    } else {
+     $comment_string .= substr(strip_tags($records->comment), 0, $this->subject_noof_char);
+    }
+    $comment_string .= '</a>';
     $comment_string .= '</li>';
    }
    $comment_string .= '</ul>';
@@ -241,6 +267,68 @@ class comment extends dbObject {
   }
  }
 
+ public function view_page() {
+  $pageno = !empty($_GET['pageno']) ? $_GET['pageno'] : 1;
+  $per_page = !empty($_GET['per_page']) ? $_GET['per_page'] : 5;
+  $this->subject_noof_char = empty($this->subject_noof_char) ? 200 : $this->subject_noof_char;
+  $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
+  $comment_result = $this->content_comment_with_reference();
+  $total_count_c = count($comment_result);
+  $pagination_c = new pagination($pageno, $per_page, $total_count_c);
+  $pagination_c->setProperty('_path', 'content');
+  $pagination_c->setProperty('_query_string', $query_string);
+  $comment_string = '<div class="table_container">';
+  if ($comment_result) {
+   $con_count = 0;
+   if (count($comment_result) > 0) {
+    $comment_string .='<table id="comment_list" class="table table-striped table-hover"><thead> 
+						 <tr class="headerBgColor">
+							<th class="topics">Subject</th>
+							<th class="created_by">Created By</th>
+							<th class="post_date">Post Date</th>
+						 </tr>
+						</thead>';
+    foreach ($comment_result as $recod_c_k => $recod_c) {
+     $continue_act1 = true;
+     if (($recod_c_k > ($pageno - 1) * $per_page) && ($recod_c_k <= (($pageno - 1) * $per_page) + $per_page)) {
+      $continue_act1 = false;
+     }
+     if ($continue_act1) {
+      continue;
+     }
+     $even_odd = ($con_count % 2 == 0) ? 'even' : 'odd';
+     $comment_string .= "<tr id=\"row_no$con_count\" class='new_row $even_odd'> "
+      . " <td class='subject_summary'>";
+     $comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&'
+      . 'content_id=' . $recod_c->reference_id . '&content_type_id=' . $recod_c->content_type_id . '">';
+     if (!empty($recod_c->subject)) {
+      $comment_string .= substr(strip_tags($recod_c->subject), 0, $this->subject_noof_char);
+     } else {
+      $comment_string .= substr(strip_tags($recod_c->comment), 0, $this->subject_noof_char);
+     }
+     $comment_string .= ' </a>';
+     $comment_string .= '</td>';
+     $comment_string .= '<td class="created_by">';
+     $comment_string .= $recod_c->username;
+     $comment_string .= '</td><td class="post_date">';
+     $comment_string .= $recod_c->creation_date;
+     $comment_string .= '</td>';
+     $comment_string .= '</tr>';
+     $con_count++;
+    }
+   }
+
+   $comment_string .='</table>';
+  }
+  $comment_string .='</div>';
+  $comment_string .= '<div id="pagination">';
+
+
+  $comment_string .= $pagination_c->show_pagination();
+  $comment_string .= '</div>';
+  return $comment_string;
+ }
+
  public static function comment_summary_by_id($comment_id) {
   $comment_summary = self::find_summary_by_id($comment_id);
   echo '<div class="comment_summary">';
@@ -257,7 +345,6 @@ class comment extends dbObject {
   echo '</div>';
  }
 
- 
  public static function comment_list($reference_table, $reference_id, $extension_id) {
   $pageno = !empty($_GET['pageno']) ? $_GET['pageno'] : 1;
   $per_page = !empty($_GET['per_page']) ? $_GET['per_page'] : 10;
@@ -303,7 +390,7 @@ class comment extends dbObject {
     $comment_string .= '<li"><a href="#commentForm" class="comment-reply btn btn-default" role="button">Reply</a></li>';
     $comment_string .= '</ul>';
     $comment_string .= '</div>';
-    $comment_string .= '<div class="comment panel-body">' . $records->comment ;
+    $comment_string .= '<div class="comment panel-body">' . $records->comment;
     if (count($comment_file) > 0) {
      foreach ($comment_file as $file_record) {
       $comment_string .= '<p><a href=' . HOME_URL . $file_record->file_path . $file_record->file_name . '>' . $file_record->file_name . '</a></p>';

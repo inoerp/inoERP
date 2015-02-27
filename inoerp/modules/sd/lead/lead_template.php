@@ -1,31 +1,31 @@
 <div id ="form_header">
- <form action=""  method="post" id="sd_lead"  name="sd_lead"><span class="heading">Sales Lead </span>
-  <div id ="form_header">
+ <form action=""  method="post" id="sd_lead"  name="sd_lead">
+  <span class="heading"><?php echo gettext('Sales Lead') ?></span>
+  <div id ="form_header"><?php $f = new inoform(); ?>
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">New Contact</a></li>
-     <li><a href="#tabsHeader-3">Attachments</a></li>
-     <li><a href="#tabsHeader-4">Notes</a></li>
-     <li><a href="#tabsHeader-5">Action</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('New Contact') ?></a></li>
+     <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
+     <li><a href="#tabsHeader-6"><?php echo gettext('Actions') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
       <div class="large_shadow_box"> 
        <ul class="column header_field"> 
         <li> 
-         <label><img src="<?php echo HOME_URL; ?>themes/default/images/serach.png" class="sd_lead_id select_popup clickable">
-          Lead Id</label><?php $f->text_field_dsr('sd_lead_id') ?>
-        <a name="show" href="form.php?class_name=sd_lead&<?php echo "mode=$mode"; ?>" class="show document_id sd_lead_id"><i class="fa fa-refresh"></i></a> 
+         <label><?php $f->l_text_field_dr_withSearch('sd_lead_id') ?>
+         <a name="show" href="form.php?class_name=sd_lead&<?php echo "mode=$mode"; ?>" class="show document_id sd_lead_id"><i class="fa fa-refresh"></i></a> 
         </li>
-        <li><label>Lead Number</label><?php $f->text_field_dm('lead_number'); ?> 					</li>
-        <li><label>Lead Subject</label><?php $f->text_field_dm('subject'); ?> 					</li>
-        <li><label>Lead Type</label><?php echo $f->select_field_from_object('lead_type', sd_lead::lead_type(), 'option_line_code', 'option_line_value', $$class->lead_type, 'lead_type'); ?> 					</li>
-        <li><label>Status</label><?php echo $f->select_field_from_array('status', sd_lead::$status_a, $$class->status, 'status', '', '', 1, 1); ?> 					</li>
-        <li><label>Priority</label><?php echo $f->select_field_from_array('priority', dbObject::$position_array, $$class->priority); ?> 					</li>
-        <li><label>Referral Source</label><?php $f->text_field_d('referral_source'); ?> 					</li>
-        <li><label>Sales Channel</label><?php echo $f->select_field_from_object('sales_channel', sd_lead::sales_channel(), 'option_line_code', 'option_line_value', $$class->sales_channel, 'sales_channel'); ?> 					</li>
-        <li><label>Description</label><?php $f->text_field_dl('description'); ?> 					</li>
+        <li><?php $f->l_text_field_dm('lead_number'); ?> 					</li>
+        <li><?php $f->l_text_field_dm('subject'); ?> 					</li>
+        <li><?php $f->l_select_field_from_object('lead_type', sd_lead::lead_type(), 'option_line_code', 'option_line_value', $$class->lead_type, 'lead_type'); ?> 					</li>
+        <li><?php $f->l_select_field_from_array('status', sd_lead::$status_a, $$class->status, 'status', '', '', 1, 1); ?> 					</li>
+        <li><?php $f->l_select_field_from_array('priority', dbObject::$position_array, $$class->priority); ?> 					</li>
+        <li><?php $f->l_text_field_d('referral_source'); ?> 					</li>
+        <li><?php $f->l_select_field_from_object('sales_channel', sd_lead::sales_channel(), 'option_line_code', 'option_line_value', $$class->sales_channel, 'sales_channel'); ?> 					</li>
+        <li><?php $f->l_text_field_d('description'); ?> 					</li>
        </ul>
       </div>
      </div>

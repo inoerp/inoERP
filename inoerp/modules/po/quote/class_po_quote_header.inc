@@ -82,7 +82,6 @@
    'quote_type',
   ];
   public $requiredField = [
-   'bu_org_id',
    'supplier_site_id',
    'supplier_id',
   ];

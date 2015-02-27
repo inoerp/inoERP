@@ -1,29 +1,25 @@
-<div id ="form_header"><span class="heading">RMA Receipt Header </span>
+<div id ="form_header"><span class="heading"><?php echo gettext('RMA Receipt Header') ?></span>
 
  <div id="tabsHeader">
   <ul class="tabMain">
-   <li><a href="#tabsHeader-1">Basic Info</a></li>
-   <li><a href="#tabsHeader-2">Attachments</a></li>
-   <li><a href="#tabsHeader-3">Notes</a></li>
-   <li><a href="#tabsHeader-4">Actions</a></li>
-
+   <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+   <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+   <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+   <li><a href="#tabsHeader-4"><?php echo gettext('Actions') ?></a></li>
   </ul>
   <div class="tabContainer">
    <form action=""  method="post" id="inv_receipt_header"  name="inv_receipt_header">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
-      <ul class="column header_field">
-       <li><label> <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_receipt_header_id select_popup clickable">
-         Receipt Header Id </label><?php echo form::text_field_dsr('inv_receipt_header_id'); ?>
-        <a name="show" href="form.php?class_name=inv_rma_receipt_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_receipt_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-       </li>
-       <li><label>Inventory</label><?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1); ?>       </li>
-       <li><label>Transaction Type</label><?php echo $f->select_field_from_array('transaction_type_id', inv_rma_receipt_header::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1, $readonly1); ?>       </li>
-       <li><label>Number</label><?php echo $f->text_field('receipt_number', $$class->receipt_number, '8', '', 'primary_column2', '', $readonly1); ?>
-       </li><li><label>Date </label><?php echo $f->date_fieldFromToday('receipt_date', ino_date($$class->receipt_date), $readonly1); ?></li>      
-
-      </ul>
-     </div>
+     <ul class="column header_field">
+      <li><label> <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_receipt_header_id select_popup clickable">
+        <?php echo gettext('Receipt Header Id') ?></label><?php echo form::text_field_dsr('inv_receipt_header_id'); ?>
+       <a name="show" href="form.php?class_name=inv_rma_receipt_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_receipt_header_id"><i class='fa fa-refresh'></i></a> 
+      </li>
+      <li><label><?php echo gettext('Inventory') ?></label><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>       </li>
+      <li><?php echo $f->l_select_field_from_array('transaction_type_id', inv_rma_receipt_header::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1, $readonly1); ?>       </li>
+      <li><?php echo $f->l_number_field('receipt_number', $$class->receipt_number, '8', '', 'primary_column2', '', $readonly1); ?></li>
+      <li><?php echo $f->l_date_fieldFromToday('receipt_date', ino_date($$class->receipt_date), $readonly1); ?></li>      
+     </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
@@ -44,7 +40,7 @@
     <div id="tabsHeader-4" class="tabContent">
      <div> 
       <ul class="column five_column">
-       <li><label>Action</label>
+       <li><label><?php echo gettext('Action') ?></label>
         <select name="transaction_action[]" class=" select  transaction_action" id="transaction_action" >
          <option value="" ></option>
          <option value="CREATE_ACCOUNT" >Create Accounting</option>
@@ -65,44 +61,39 @@
  <form action=""  method="post" id="po_site"  name="inv_receipt_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">RMA Info</a></li>
-    <li><a href="#tabsLine-2">Receipt</a></li>
-    <li><a href="#tabsLine-3">Serial & Lot </a></li>
-    <li><a href="#tabsLine-4">Customer</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('RMA Info') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Receipt') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Lot & Serial') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('Customer') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th>Receipt Line Id</th>
-        <th>Line#</th>
-        <th>Header Id</th>
-        <th>Sales Order #</th>
-        <th>SO Line #</th>
-        <th>Line Id</th>
-        <th>Line Qty</th>
-        <th>Received Qty</th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Receipt Line Id') ?></th>
+        <th><?php echo gettext('Line Number') ?></th>
+        <th><?php echo gettext('Header Id') ?></th>
+        <th><?php echo gettext('Sales Order #') ?></th>
+        <th><?php echo gettext('SO Line #') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Line Qty') ?></th>
+        <th><?php echo gettext('Received Qty') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
        $count = 0;
-       $f = new inoform();
        foreach ($inv_receipt_line_object as $inv_receipt_line) {
         $f->readonly2 = !empty($inv_receipt_line->inv_receipt_line_id) ? true : false;
         ?>         
         <tr class="inv_receipt_line<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($inv_receipt_line->line_number); ?>"></li>           
-           <?php echo form::hidden_field('inv_receipt_header_id', $$class->inv_receipt_header_id); ?>
-           <?php echo form::hidden_field('org_id', $$class->org_id); ?>
-           <?php echo form::hidden_field('transaction_type_id', $$class->transaction_type_id); ?>
-          </ul>
+         <td>
+          <?php
+          echo ino_inline_action($$class_second->inv_receipt_line_id, array('org_id' => $$class->org_id,
+           'transaction_type_id' => $$class->transaction_type_id, 'inv_receipt_header_id' => $$class->inv_receipt_header_id));
+          ?>
          </td>
          <td><?php form::text_field_wid2sr('inv_receipt_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
@@ -113,7 +104,6 @@
          <td><?php $f->text_field_wid2('sd_so_line_id'); ?></td>
          <td><?php echo $f->number_field('quantity', $inv_receipt_line->quantity, '12', '', 'medium', '', 1); ?></td>
          <td><?php echo $f->number_field('received_quantity', $inv_receipt_line->received_quantity, '12', '', 'medium', '', 1); ?></td>
-
         </tr>
         <?php
         $count = $count + 1;
@@ -126,14 +116,14 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Item id</th>
-        <th>Item Number</th>
-        <th>Revision</th>
-        <th>Item Description</th>
-        <th>UOM</th>
-        <th>New Received Qty</th>
-        <th>Sub inventory</th>
-        <th>Locator</th>
+        <th><?php echo gettext('Item Id') ?></th>
+        <th><?php echo gettext('Item Number') ?></th>
+        <th><?php echo gettext('Revision') ?></th>
+        <th><?php echo gettext('Item Description') ?></th>
+        <th><?php echo gettext('UOM') ?></th>
+        <th><?php echo gettext('New Received Quantity') ?></th>
+        <th><?php echo gettext('Sub Inventory') ?></th>
+        <th><?php echo gettext('Locator') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -163,8 +153,8 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Lot Number</th>
-        <th>Serial Number</th>
+        <th><?php echo gettext('Add Lot Numbers') ?></th>
+        <th><?php echo gettext('Add Serial Numbers') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -189,9 +179,9 @@
                <table class="form form_detail_data_table detail">
                 <thead>
                  <tr>
-                  <th>Action</th>
-                  <th>Lot Number</th>
-                  <th>Quantity</th>
+                  <th><?php echo gettext('Action') ?></th>
+                  <th><?php echo gettext('Lot Number') ?></th>
+                  <th><?php echo gettext('Quantity') ?></th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody_ln">
@@ -263,8 +253,8 @@
                <table class="form form_detail_data_table detail">
                 <thead>
                  <tr>
-                  <th>Action</th>
-                  <th>Serial Number</th>
+                  <th><?php echo gettext('Action') ?></th>
+                  <th><?php echo gettext('Serial Number') ?></th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody">
@@ -337,12 +327,12 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Customer Id</th>
-        <th>Customer #</th>
-        <th>Customer</th>
-        <th>Site Id</th>
-        <th>Site #</th>
-        <th>Site </th>
+        <th><?php echo gettext('Customer Id') ?></th>
+        <th><?php echo gettext('Customer Number') ?></th>
+        <th><?php echo gettext('Customer') ?></th>
+        <th><?php echo gettext('Site Id') ?></th>
+        <th><?php echo gettext('Site #') ?></th>
+        <th><?php echo gettext('Site') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

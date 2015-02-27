@@ -539,103 +539,165 @@ AND content.content_id = category_reference.reference_id  ";
   return $object;
  }
 
- public static function all_content_summary($content_no, $per_content) {
-  $sql = " SELECT * FROM " . self::$table_name;
-  if (!empty($per_content)) {
-   $total_count = self::count_all();
-   $pagination = new pagination($content_no, $per_content, $total_count);
-   $sql .=" LIMIT {$per_content} ";
-   $sql .=" OFFSET {$pagination->offset()}";
-  }
-  $result = self::find_by_sql($sql);
-
-  foreach ($result as $records) {
-   $content_summary = self::find_summary_by_id($records->content_id);
-   echo '<div class="content_summary">';
-   echo '<div class="subject_summary">';
-   echo $content_summary->subject;
-   echo '</div>';
-   echo '<div class="content_summary">';
-   echo $content_summary->content_summary;
-   echo '</div>';
-   echo '<div class="more_content">';
-   echo '<a href="' . HOME_URL . 'content.php?content_id=' . $content_summary->content_id . '">';
-   echo 'Read more.. </a>';
-   echo '</div>';
-   echo '</div>';
-  }
- }
-
- public static function content_summary_list($content_no, $per_content, $query_string) {
-  $content_string = " ";
-  $sql = " SELECT * FROM " . self::$table_name;
-
-  if (!empty($per_content)) {
-   $content_string .= '<div id="noOfcontents">';
-   $content_string .= '<form action="" method="GET">';
-   $content_string .= 'Show<select name="per_content">';
-   $content_string .= '<option value="3"> 3 </option>';
-   $content_string .= '<option value="5"> 5 </option>';
-   $content_string .= '<option value="10"> 10 </option>';
-   $content_string .= '<option value="20"> 20 </option>';
-   $content_string .= '<option value="50"> 50 </option>';
-   $content_string .= '</select>';
-//   $content_string .= '<input type="hidden" value="' . $extension_id . '" name="content_id">';
-   $content_string .= '<input type="submit" class="button" value="Per Page" >';
-   $content_string .= '</form>';
-   $content_string .= '</div>';
-   $total_count = self::count_all();
-   $pagination = new pagination($content_no, $per_content, $total_count);
-   $sql .=" LIMIT {$per_content} ";
-   $sql .=" OFFSET {$pagination->offset()}";
-  }
-  $result = self::find_by_sql($sql);
-
-  if (count($result) > 0) {
-   foreach ($result as $records) {
-    $content_summary = self::find_summary_by_id($records->content_id);
-    $content_string .= '<div class="content_summary">';
-    $content_string .= '<div class="subject_summary">';
-    $content_string .= $content_summary->subject;
-    $content_string .= '</div>';
-    $content_string .= '<div class="content_summary">';
-    $content_string .= $content_summary->content_summary;
-    $content_string .= '</div>';
-    $content_string .= '<div class="more_content">';
-    $content_string .= '<a href="' . HOME_URL . 'content.php?content_id=' . $content_summary->content_id . '">';
-    $content_string .= 'Read more.. </a>';
-    $content_string .= '</div>';
-    $content_string .= '</div>';
-   }
-  }
-
-  $content_string .= '<div id="pagination" style="clear: both;">';
-  if (isset($pagination) && $pagination->total_contents() > 1) {
-   if ($pagination->has_previous_content()) {
-    $content_string .= "<a href=\"" . HOME_URL . "content.php?contentno=";
-    $content_string .= $pagination->previous_content() . '&' . $query_string;
-    $content_string .= "> &laquo; Previous </a> ";
-   }
-
-   for ($i = 1; $i <= $pagination->total_contents(); $i++) {
-    if ($i == $content_no) {
-     $content_string .= " <span class=\"selected\">{$i}</span> ";
-    } else {
-     $content_string .= " <a href=\"" . HOME_URL . "content.php?contentno={$i}&" . remove_querystring_var($query_string, 'contentno');
-     $content_string .= '">' . $i . '</a>';
+// public static function all_content_summary($content_no, $per_content) {
+//  $sql = " SELECT * FROM " . self::$table_name;
+//  if (!empty($per_content)) {
+//   $total_count = self::count_all();
+//   $pagination = new pagination($content_no, $per_content, $total_count);
+//   $sql .=" LIMIT {$per_content} ";
+//   $sql .=" OFFSET {$pagination->offset()}";
+//  }
+//  $result = self::find_by_sql($sql);
+//
+//  foreach ($result as $records) {
+//   $content_summary = self::find_summary_by_id($records->content_id);
+//   echo '<div class="content_summary">';
+//   echo '<div class="subject_summary">';
+//   echo $content_summary->subject;
+//   echo '</div>';
+//   echo '<div class="content_summary">';
+//   echo $content_summary->content_summary;
+//   echo '</div>';
+//   echo '<div class="more_content">';
+//   echo '<a href="' . HOME_URL . 'content.php?content_id=' . $content_summary->content_id . '">';
+//   echo 'Read more.. </a>';
+//   echo '</div>';
+//   echo '</div>';
+//  }
+// }
+ 
+ public function view_page() {
+  $pageno = !empty($_GET['pageno']) ? $_GET['pageno'] : 1;
+  $per_page = !empty($_GET['per_page']) ? $_GET['per_page'] : 5;
+  $this->subject_noof_char = empty($this->subject_noof_char) ? 200 : $this->subject_noof_char;
+  $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
+  $comment_result = $this->content_comment_with_reference();
+  $total_count_c = count($comment_result);
+  $pagination_c = new pagination($pageno, $per_page, $total_count_c);
+  $pagination_c->setProperty('_path', 'content');
+  $pagination_c->setProperty('_query_string', $query_string);
+  $comment_string = '<div class="table_container">';
+  if ($comment_result) {
+   $con_count = 0;
+   if (count($comment_result) > 0) {
+    $comment_string .='<table id="comment_list" class="table table-striped table-hover"><thead> 
+						 <tr class="headerBgColor">
+							<th class="topics">Subject</th>
+							<th class="created_by">Created By</th>
+							<th class="post_date">Post Date</th>
+						 </tr>
+						</thead>';
+    foreach ($comment_result as $recod_c_k => $recod_c) {
+     $continue_act1 = true;
+     if (($recod_c_k > ($pageno - 1) * $per_page) && ($recod_c_k <= (($pageno - 1) * $per_page) + $per_page)) {
+      $continue_act1 = false;
+     }
+     if ($continue_act1) {
+      continue;
+     }
+     $even_odd = ($con_count % 2 == 0) ? 'even' : 'odd';
+     $comment_string .= "<tr id=\"row_no$con_count\" class='new_row $even_odd'> "
+      . " <td class='subject_summary'>";
+     $comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&'
+      . 'content_id=' . $recod_c->reference_id . '&content_type_id=' . $recod_c->content_type_id . '">';
+     if (!empty($recod_c->subject)) {
+      $comment_string .= substr(strip_tags($recod_c->subject), 0, $this->subject_noof_char);
+     } else {
+      $comment_string .= substr(strip_tags($recod_c->comment), 0, $this->subject_noof_char);
+     }
+     $comment_string .= ' </a>';
+     $comment_string .= '</td>';
+     $comment_string .= '<td class="created_by">';
+     $comment_string .= $recod_c->username;
+     $comment_string .= '</td><td class="post_date">';
+     $comment_string .= $recod_c->creation_date;
+     $comment_string .= '</td>';
+     $comment_string .= '</tr>';
+     $con_count++;
     }
    }
 
-   if ($pagination->has_next_content()) {
-    $content_string .= " <a href=\"" . HOME_URL . "content.php?contentno=";
-    $content_string .= $pagination->next_content() . '&' . remove_querystring_var($query_string, 'contentno');
-    $content_string .= "\">Next &raquo;</a> ";
-   }
+   $comment_string .='</table>';
   }
-  $content_string .= '</div>';
+  $comment_string .='</div>';
+  $comment_string .= '<div id="pagination">';
 
-  return $content_string;
+
+  $comment_string .= $pagination_c->show_pagination();
+  $comment_string .= '</div>';
+  return $comment_string;
  }
+
+// public static function content_summary_list($content_no, $per_content, $query_string) {
+//  $content_string = " ";
+//  $sql = " SELECT * FROM " . self::$table_name;
+//
+//  if (!empty($per_content)) {
+//   $content_string .= '<div id="noOfcontents">';
+//   $content_string .= '<form action="" method="GET">';
+//   $content_string .= 'Show<select name="per_content">';
+//   $content_string .= '<option value="3"> 3 </option>';
+//   $content_string .= '<option value="5"> 5 </option>';
+//   $content_string .= '<option value="10"> 10 </option>';
+//   $content_string .= '<option value="20"> 20 </option>';
+//   $content_string .= '<option value="50"> 50 </option>';
+//   $content_string .= '</select>';
+////   $content_string .= '<input type="hidden" value="' . $extension_id . '" name="content_id">';
+//   $content_string .= '<input type="submit" class="button" value="Per Page" >';
+//   $content_string .= '</form>';
+//   $content_string .= '</div>';
+//   $total_count = self::count_all();
+//   $pagination = new pagination($content_no, $per_content, $total_count);
+//   $sql .=" LIMIT {$per_content} ";
+//   $sql .=" OFFSET {$pagination->offset()}";
+//  }
+//  $result = self::find_by_sql($sql);
+//
+//  if (count($result) > 0) {
+//   foreach ($result as $records) {
+//    $content_summary = self::find_summary_by_id($records->content_id);
+//    $content_string .= '<div class="content_summary">';
+//    $content_string .= '<div class="subject_summary">';
+//    $content_string .= $content_summary->subject;
+//    $content_string .= '</div>';
+//    $content_string .= '<div class="content_summary">';
+//    $content_string .= $content_summary->content_summary;
+//    $content_string .= '</div>';
+//    $content_string .= '<div class="more_content">';
+//    $content_string .= '<a href="' . HOME_URL . 'content.php?content_id=' . $content_summary->content_id . '">';
+//    $content_string .= 'Read more.. </a>';
+//    $content_string .= '</div>';
+//    $content_string .= '</div>';
+//   }
+//  }
+//
+//  $content_string .= '<div id="pagination" style="clear: both;">';
+//  if (isset($pagination) && $pagination->total_contents() > 1) {
+//   if ($pagination->has_previous_content()) {
+//    $content_string .= "<a href=\"" . HOME_URL . "content.php?contentno=";
+//    $content_string .= $pagination->previous_content() . '&' . $query_string;
+//    $content_string .= "> &laquo; Previous </a> ";
+//   }
+//
+//   for ($i = 1; $i <= $pagination->total_contents(); $i++) {
+//    if ($i == $content_no) {
+//     $content_string .= " <span class=\"selected\">{$i}</span> ";
+//    } else {
+//     $content_string .= " <a href=\"" . HOME_URL . "content.php?contentno={$i}&" . remove_querystring_var($query_string, 'contentno');
+//     $content_string .= '">' . $i . '</a>';
+//    }
+//   }
+//
+//   if ($pagination->has_next_content()) {
+//    $content_string .= " <a href=\"" . HOME_URL . "content.php?contentno=";
+//    $content_string .= $pagination->next_content() . '&' . remove_querystring_var($query_string, 'contentno');
+//    $content_string .= "\">Next &raquo;</a> ";
+//   }
+//  }
+//  $content_string .= '</div>';
+//
+//  return $content_string;
+// }
 
  public static function content_summaryList_byConteTypeCategory($content_type_id, $category_id, $pageno = 1, $per_page = 5, $query_string = "", $current_url = '') {
   $content_string = " ";

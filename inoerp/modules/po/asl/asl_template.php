@@ -1,30 +1,32 @@
-
-<div id ="form_header"><span class="heading">Approved Supplier List </span>
+<!-- * 
+inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+-->
+<div id ="form_header"><span class="heading"><?php echo gettext('Approved Supplier List') ?></span>
  <form action=""  method="post" id="asl_header"  name="asl_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1">Basic Info</a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
    </ul>
-   <div class="tabContainer">
+   <div class="tabContainer"> <?php $f = new inoform(); ?>
     <div id="tabsHeader-1" class="tabContent">
-     <ul class="column four_column">
-      <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="asl_header_id select_popup clickable">
-        ASL Id : </label>
-       <?php echo $f->text_field_dr('po_asl_header_id') ?>
-       <a name="show" href="form.php?class_name=po_asl_header&<?php echo "mode=$mode"; ?>" class="show document_id po_asl_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+     <ul class="column header_field">
+      <li><?php $f->l_text_field_dr_withSearch('po_asl_header_id') ?>
+       <a name="show" href="form.php?class_name=po_asl_header&<?php echo "mode=$mode"; ?>" class="show document_id po_asl_header_id">
+        <i class='fa fa-refresh'></i></a> 
       </li>
-      <li><label>BU Name(1) : </label>
-       <?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>
-      </li>
-      <li><label>ASL Type : </label>
-       <?php echo $f->select_field_from_array('asl_type', po_asl_header::$asl_type_a, $$class->asl_type, 'asl_type', '', 1, $readonly1, $readonly1); ?>
-      </li>
-      <li><label>Item : </label><?php
+      <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>        </li>
+      <li><?php $f->l_select_field_from_array('asl_type', po_asl_header::$asl_type_a, $$class->asl_type, 'asl_type', '', 1, $readonly1, $readonly1); ?>      </li>
+      <li><label><?php echo gettext('Item') ?></label><?php
        echo $f->hidden_field('item_id_m', $$class->item_id_m);
        echo $f->text_field_d('item_number', 'select_item_number');
        ?>
        <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></li>
-      <li><label>Description: </label>    <?php $f->text_field_d('description', 'item_description'); ?>     </li>
+      <li><?php $f->l_text_field_d('description', 'item_description'); ?>     </li>
      </ul>
     </div>
    </div>
@@ -37,25 +39,25 @@
  <form action=""  method="post" id="asl_line"  name="asl_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Main</a></li>
-    <li><a href="#tabsLine-2">Others</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Others') ?> </a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th>Seq#</th>
-        <th>Line Id</th>
-        <th>Supplier Id</th>
-        <th>Supplier Name</th>
-        <th>Supplier Site</th>
-        <th>Status</th>
-        <th>Manufacturer</th>
-        <th>MPN </th>
-        <th>Comment</th>
-        <th>Documents</th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Supplier Id') ?>#</th>
+        <th><?php echo gettext('Supplier Name') ?></th>
+        <th><?php echo gettext('Supplier Site') ?></th>
+        <th><?php echo gettext('Status') ?></th>
+        <th><?php echo gettext('Manufacturer') ?></th>
+        <th><?php echo gettext('MPN') ?></th>
+        <th><?php echo gettext('Comment') ?></th>
+        <th><?php echo gettext('Documents') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -104,11 +106,11 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Seq#</th>
-        <th>Release Method</th>
-        <th>Min Order Qty</th>
-        <th>Lot Multiplier</th>
-        <th>Country of Origin</th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Release Method') ?></th>
+        <th><?php echo gettext('Min Order Qty') ?>#</th>
+        <th><?php echo gettext('Lot Multiplier') ?></th>
+        <th><?php echo gettext('Country of Origin') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
