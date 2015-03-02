@@ -13,6 +13,9 @@ setValFromSelectPage.prototype.setVal = function () {
  if (valuation_name) {
   $("#valuation_name").val(valuation_name);
  }
+   if (fp_forecast_group_id) {
+  $('a.show.fp_forecast_group_id').trigger('click');
+ }
 };
 
 $(document).ready(function () {
@@ -20,7 +23,7 @@ $(document).ready(function () {
  $('#fp_forecast_group_divId').off("click", '.fp_forecast_group_id.select_popup')
          .on("click", '.fp_forecast_group_id.select_popup', function () {
           void window.open('select.php?class_name=fp_forecast_group', '_blank',
-                  'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+                  'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
          });
 
 });

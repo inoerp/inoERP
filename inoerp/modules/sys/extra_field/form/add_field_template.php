@@ -14,7 +14,7 @@
     <tr class="<?php echo $tr_class.$count ?>">
      <td><?php $f->seq_field_d($count) ?></td>
      <td class="add_detail_values1">
-      <img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+      <i class="fa fa-arrow-circle-down add_detail_values_img"></i>
       <div class="class_detail_form">
        <fieldset class="form_detail_data_fs"><legend>Extra Fields</legend>
         <div class="tabsDetailC">

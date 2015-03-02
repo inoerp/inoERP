@@ -40,10 +40,6 @@ setValFromSelectPage.prototype.setVal = function () {
   $('#content').find(addressPopupDivClass).find('.postal_code').val(postal_code);
  }
 
-
- if (supplier_id) {
-  $("#supplier_id").val(supplier_id);
- }
  if (supplier_number) {
   $("#supplier_number").val(supplier_number);
  }
@@ -60,19 +56,22 @@ setValFromSelectPage.prototype.setVal = function () {
 
  localStorage.removeItem("contact_field_class");
  localStorage.removeItem("addressPopupDivClass");
-
+ if (supplier_id) {
+  $("#supplier_id").val(supplier_id);
+  $('a.show.supplier_id').trigger('click');
+ }
 };
 
 
 $(document).ready(function () {
 //selecting supplier
- $(".supplier_id_popup").click(function () {
-  void window.open('select.php?class_name=supplier', '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-  return false;
- });
-
-  //Popup for selecting address
+// $('body').off('click','supplier_id.select_popup').on('click','supplier_id.select_popup' ,function () {
+//  void window.open('select.php?class_name=supplier', '_blank',
+//          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+//  return false;
+// });
+ 
+   //Popup for selecting address
  $('body').off('click','.address_popup').on('click','.address_popup',function (e) {
   e.preventDefault();
   var rowClass = $(this).closest('div').prop('class');

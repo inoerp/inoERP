@@ -1,52 +1,59 @@
-<div id ="form_header"><span class="heading">Sales Order / RMA Header</span>
+<!-- * 
+inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+-->
+<div id ="form_header"><span class="heading"><?php echo gettext('Sales Order / RMA Header') ?></span>
  <form action=""  method="post" id="sd_so_header"  name="sd_so_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1">Basic Info</a></li>
-    <li><a href="#tabsHeader-2">Finance</a></li>
-    <li><a href="#tabsHeader-3">Address Details</a></li>
-    <li><a href="#tabsHeader-4">Notes</a></li>
-    <li><a href="#tabsHeader-5">Attachments</a></li>
-    <li><a href="#tabsHeader-6">Actions</a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Finance') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Address Details') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column header_field">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/default/images/serach.png" class="sd_so_header_id select_popup">
-         SO Header Id</label><?php echo $f->text_field_dr('sd_so_header_id') ?>
+       <li><?php $f->l_text_field_dr_withSearch('sd_so_header_id') ?>
         <a name="show" href="form.php?class_name=sd_so_header&<?php echo "mode=$mode"; ?>" class="show document_id sd_so_header_id"><i class="fa fa-refresh"></i></a> 
        </li>
-       <li><label>SO Number</label><?php echo $f->text_field_d('so_number', 'primary_column2'); ?></li>
-       <li><label>BU Name(1)</label><?php echo form::select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $sd_so_header->bu_org_id, 'bu_org_id', $readonly1, '', ''); ?>						 </li>
-       <li><label>Document Type(2)</label><?php echo $f->select_field_from_object('document_type', sd_document_type::find_all_header_levels(), 'sd_document_type_id', 'document_type_name', $sd_so_header->document_type, 'document_type', 'medium', 1, $readonly1); ?>						 </li>
+       <li><?php $f->l_text_field_d('so_number', 'primary_column2'); ?></li>
+       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $sd_so_header->bu_org_id, 'bu_org_id', $readonly1, '', ''); ?>						 </li>
+       <li><?php $f->l_select_field_from_object('document_type', sd_document_type::find_all_header_levels(), 'sd_document_type_id', 'document_type_name', $sd_so_header->document_type, 'document_type', 'medium', 1, $readonly1); ?>						 </li>
        <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?><label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup clickable">
-         Customer Name</label><?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
-       <li><label class="auto_complete">Customer Number</label><?php $f->text_field_d('customer_number'); ?></li>
-       <li><label>Customer Site</label><?php echo $f->select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
-       <li><label>Status</label><?php $f->text_field_dr('so_status') ?></li>
-       <li><label>Revision</label><?php echo form::checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?></li> 
-       <li><label>Rev Number</label><?php form::text_field_wid('rev_number'); ?> </li> 
-       <li><label>Sales Person</label><?php form::text_field_wid('sales_person'); ?></li> 
-       <li><label>Description</label><?php form::text_field_wid('description'); ?></li> 
+         <?php echo gettext('Customer Name') ?></label><?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
+       <li><label class="auto_complete"><?php echo gettext('Customer Number') ?></label><?php $f->text_field_d('customer_number'); ?></li>
+       <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
+       <li><?php $f->l_status_field_d('so_status') ?></li>
+       <li><?php $f->l_checkBox_field_d('rev_enabled_cb'); ?></li> 
+       <li><?php $f->l_text_field_d('rev_number'); ?> </li> 
+       <li><?php $f->l_text_field_d('sales_person'); ?></li> 
+       <li><?php $f->l_text_field_d('description'); ?></li> 
       </ul>
      </div>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column header_field">
-       <li><label>Doc Currency</label><?php echo $f->select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', 'currency', 1, $readonly); ?>						 </li>
-       <li><label>Ledger Currency</label><?php echo $f->select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, 1); ?></li>
-       <li><label>Payment Term</label><?php echo $f->select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly1); ?>						 </li>
-       <li><label>Payment Term Date</label><?php echo form::date_fieldAnyDay('payment_term_date', $$class->payment_term_date) ?> </li>
-       <li><label>Sales Person</label><?php $f->text_field_d('sales_person') ?></li>
-       <li><label>Agreement Start Date</label><?php echo form::date_field('agreement_start_date', $$class->agreement_start_date) ?></li>
-       <li><label>Agreement End Date</label><?php echo form::date_field('agreement_end_date', $$class->agreement_start_date) ?></li>
-       <li><label>Price List</label><?php echo$f->select_field_from_object('price_list_header_id', mdm_price_list_header::find_all(), 'mdm_price_list_header_id', 'price_list', $$class->price_list_header_id); ?>		 </li>
-       <li><label>Exchange Rate Type</label><?php echo $f->select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
-       <li><label>Exchange Rate</label><?php form::number_field_d('exchange_rate'); ?></li>
-       <li><label>Header Amount</label><?php form::number_field_d('header_amount'); ?></li>
-       <li><label>Tax Amount</label><?php form::number_field_d('tax_amount'); ?></li>
+       <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly1); ?>						 </li></li>
+       <li><?php $f->l_date_fieldAnyDay('payment_term_date', $$class->payment_term_date) ?></li>
+       <li><?php $f->l_select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', '', 1, $readonly); ?></li>
+       <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, 1); ?></li>
+       <li><?php $f->l_date_fieldFromToday('agreement_start_date', $$class->agreement_start_date) ?></li>
+       <li><?php $f->l_date_fieldFromToday('agreement_end_date', $$class->agreement_start_date) ?></li>
+       <li><?php $f->l_select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
+       <li><?php $f->l_number_field('exchange_rate', $$class->exchange_rate, '', 'exchange_rate'); ?> </li>
+       <li><?php $f->l_select_field_from_object('price_list_header_id', mdm_price_list_header::find_all_purchasing_pl(), 'mdm_price_list_header_id', 'price_list', $$class->price_list_header_id); ?></li>
+       <li><?php $f->l_number_field('header_amount', $$class->header_amount, '15', 'header_amount'); ?></li>
+       <li><?php $f->l_number_field('tax_amount', $$class->tax_amount, '15', 'tax_amount'); ?></li>
+       <li><?php $f->l_text_field_d('sales_person') ?></li>
       </ul>
      </div>
     </div>
@@ -54,25 +61,24 @@
      <div class="left_half shipto address_details">
       <ul class="column four_column">
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-         Ship To Site Id : </label>
-        <?php $f->text_field_d('ship_to_id', 'address_id site_address_id'); ?>
+         <?php gettext('Ship To Site Id'); ?></label><?php $f->text_field_d('ship_to_id', 'address_id site_address_id'); ?>
        </li>
-       <li><label>Address Name : </label><?php $f->text_field_dr('ship_to_address_name', 'address_name'); ?></li>
-       <li><label>Address :</label> <?php $f->text_field_dr('ship_to_address', 'address'); ?></li>
-       <li><label>Country  : </label> <?php $f->text_field_dr('ship_to_country', 'country'); ?></li>
-       <li><label>Postal Code  : </label><?php echo $f->text_field_dr('ship_to_postal_code', 'postal_code'); ?></li>
+       <li><?php $f->l_text_field_dr('ship_to_address_name', 'address_name'); ?></li>
+       <li><?php $f->l_text_field_dr('ship_to_address', 'address'); ?></li>
+       <li><?php $f->l_text_field_dr('ship_to_country', 'country'); ?></li>
+       <li><?php echo $f->l_text_field_dr('ship_to_postal_code', 'postal_code'); ?></li>
       </ul>
      </div> 
      <div class="right_half billto address_details">
       <ul class="column four_column">
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-         Bill To Site Id :</label>
-        <?php $f->text_field_d('bill_to_id', 'address_id site_address_id'); ?>
+         <?php gettext('Bill To Site Id'); ?></label>
+        <?php $f->text_field_d('bill_to_id', 'address_id  site_address_id'); ?>
        </li>
-       <li><label>Address Name :</label><?php $f->text_field_dr('bill_to_address_name', 'address_name'); ?> </li>
-       <li><label>Address :</label> <?php $f->text_field_dr('bill_to_address', 'address'); ?></li>
-       <li><label>Country  : </label> <?php $f->text_field_dr('bill_to_country', 'country'); ?></li>
-       <li><label>Postal Code  : </label><?php echo $f->text_field_dr('bill_to_postal_code', 'postal_code'); ?></li>
+       <li><?php $f->l_text_field_dr('bill_to_address_name', 'address_name'); ?></li>
+       <li><?php $f->l_text_field_dr('bill_to_address', 'address'); ?></li>
+       <li><?php $f->l_text_field_dr('bill_to_country', 'country'); ?></li>
+       <li><?php echo $f->l_text_field_dr('bill_to_postal_code', 'postal_code'); ?></li>
       </ul>
      </div> 
     </div>
@@ -99,11 +105,11 @@
 
     <div id="tabsHeader-6" class="tabContent">
      <div> 
-      <ul class="column five_column">
-       <li id="document_status"><label>Action : </label>
+      <ul class="column header_field">
+       <li id="document_status"><label><?php echo gettext('Action') ?></label>
         <?php echo $f->select_field_from_object('action', sd_so_header::so_status(), 'option_line_code', 'option_line_value', '', 'action'); ?>
        </li>
-       <li id="copy_header"><label>Copy Document : </label>
+       <li id="copy_header"><label><?php echo gettext('Copy Document') ?></label>
         <input type="button" class="button" id="copy_docHeader" value="Header">
        </li>
        <li id="copy_line"><label></label>
@@ -121,33 +127,33 @@
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading">SO / RMA Lines & Shipments </span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('SO / RMA Lines & Shipments') ?></span>
  <form action=""  method="post" id="so_site"  name="sd_so_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Basic</a></li>
-    <li><a href="#tabsLine-2">Price</a></li>
-    <li><a href="#tabsLine-3">Dates</a></li>
-    <li><a href="#tabsLine-4">Configuration</a></li>
-    <li><a href="#tabsLine-5">References</a></li>
-    <li><a href="#tabsLine-6">References-2</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Price') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Dates') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('Configuration') ?> </a></li>
+    <li><a href="#tabsLine-5"><?php echo gettext('References') ?> </a></li>
+    <li><a href="#tabsLine-6"><?php echo gettext('References-2') ?> </a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th>Seq#</th>
-        <th>Line Id</th>
-        <th>Line#</th>
-        <th>Type</th>
-        <th>Shipping Org</th>
-        <th>Item Number</th>
-        <th>Item Description</th>
-        <th>UOM</th>
-        <th>Quantity</th>
-        <th>Line Status</th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Line') ?>#</th>
+        <th><?php echo gettext('Type') ?></th>
+        <th><?php echo gettext('Shipping Org') ?></th>
+        <th><?php echo gettext('Item Number') ?></th>
+        <th><?php echo gettext('Item Description') ?></th>
+        <th><?php echo gettext('UOM') ?></th>
+        <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('Line Status') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -189,15 +195,15 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Seq#</th>
-        <th>Price List</th>
-        <th>Pricing Date</th>
-        <th>Unit Price</th>
-        <th>Line Price</th>
-        <th>Tax Code</th>
-        <th>Tax Amount</th>
-        <th>GL Line Price</th>
-        <th>GL Tax Amount</th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Price List') ?></th>
+        <th><?php echo gettext('Price Date') ?></th>
+        <th><?php echo gettext('Unit Price') ?>#</th>
+        <th><?php echo gettext('Line Price') ?>#</th>
+        <th><?php echo gettext('Tax Code') ?></th>
+        <th><?php echo gettext('Tax Amount') ?></th>
+        <th><?php echo gettext('GL Line Price') ?></th>
+        <th><?php echo gettext('GL Tax Amount') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -233,24 +239,23 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Seq#</th>
-        <th>Requested Date</th>
-        <th>Promise Date </th>
-        <th>Schedule Ship / Receipt Date</th>
-        <th>Actual Ship / Receipt Date</th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Requested Date') ?></th>
+        <th><?php echo gettext('Promise Date') ?></th>
+        <th><?php echo gettext('Schedule Ship / Receipt Date') ?>#</th>
+        <th><?php echo gettext('Actual Ship / Receipt Date') ?>#</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
-       $f = new inoform();
        $count = 0;
        foreach ($sd_so_line_object as $sd_so_line) {
         ?>         
         <tr class="sd_so_line<?php echo $count ?>">
          <td><?php $f->seq_field_d($count) ?></td>
-         <td><?php echo $f->date_field('requested_date', ($$class_second->requested_date), '','','dateFromToday copyValue'); ?></td>
+         <td><?php echo $f->date_field('requested_date', ($$class_second->requested_date), '', '', 'dateFromToday copyValue'); ?></td>
          <td><?php echo $f->date_fieldFromToday('promise_date', $$class_second->promise_date) ?></td>
-         <td><?php echo $f->date_field('schedule_ship_date', ($$class_second->schedule_ship_date), '','','dateFromToday copyValue'); ?></td>
+         <td><?php echo $f->date_field('schedule_ship_date', ($$class_second->schedule_ship_date), '', '', 'dateFromToday copyValue'); ?></td>
          <td><?php echo $f->date_fieldFromToday_r('actual_ship_date', $$class_second->actual_ship_date, 1) ?></td>
         </tr>
         <?php
@@ -263,14 +268,14 @@
     </div>
     <div id="tabsLine-4" class="scrollElement tabContent">
      <table class="form_line_data_table">
-      <thead> 
-       <tr><th>Seq#</th>
-        <th>Kit Item</th>
-        <th>Configured</th>
-        <th>Config Id</th>
-        <th>WO Header Id</th>
-        <th>Config Details</th>
-       </tr>
+      <thead>
+      <th><?php echo gettext('Seq') ?>#</th>
+      <th><?php echo gettext('Kit Item') ?>#</th>
+      <th><?php echo gettext('Configured') ?>?</th>
+      <th><?php echo gettext('Config Id') ?>?</th>
+      <th><?php echo gettext('WO Header Id') ?></th>
+      <th><?php echo gettext('Config Details') ?></th>
+      </tr>
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
@@ -297,14 +302,16 @@
     <div id="tabsLine-5" class="scrollElement tabContent">
      <table class="form_line_data_table">
       <thead> 
-       <tr><th>Seq#</th>
-        <th>Line Description</th>
-        <th>Supply Source </th>
-        <th>Destination Type </th>
-        <th>Picked Quantity </th>
-        <th>Shipped /Received Quantity</th>
-        <th>Ref Doc Type</th>
-        <th>Ref Number</th>
+       <tr>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Line Description') ?></th>
+        <th><?php echo gettext('Supply Source') ?></th>
+        <th><?php echo gettext('Destination Typet') ?>#</th>
+        <th><?php echo gettext('Picked Quantity') ?>#</th>
+        <th><?php echo gettext('Shipped /Received Quantity') ?>#</th>
+        <th><?php echo gettext('Ref Doc Type') ?></th>
+        <th><?php echo gettext('Ref Number') ?></th>
+
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

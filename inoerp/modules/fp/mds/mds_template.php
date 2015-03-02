@@ -1,27 +1,28 @@
+<div class="row small-left-padding">
 <div id='fp_mds_header_divId'>
- <div id ="form_header"><span class="heading">MDS Header  </span>
+ <div id ="form_header"><span class="heading"><?php echo gettext('MDS Header') ?> </span>
   <form action=""  method="post" id="fp_mds_header"  name="fp_mds_header">
-   <div id="tabsHeader">
+   <div id="tabsHeader"><?php $f = new inoform(); ?>
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Attachments</a></li>
-     <li><a href="#tabsHeader-3">Notes</a></li>
-     <li><a href="#tabsHeader-4">Actions</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Actions') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
       <div class="large_shadow_box"> 
        <ul class="column header_field">
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="mds_header_id select_popup clickable">
-          MDS Id</label><?php echo $f->text_field_dsr('fp_mds_header_id') ?>
-         <a name="show" href="form.php?class_name=fp_mds_header&<?php echo "mode=$mode"; ?>" class="show document_id fp_mds_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <li><?php $f->l_text_field_dr_withSearch('fp_mds_header_id') ?>
+         <a name="show" href="form.php?class_name=fp_mds_header&<?php echo "mode=$mode"; ?>" class="show document_id fp_mds_header_id">
+          <i class="fa fa-refresh"></i></a> 
         </li>
-        <li><label>Inventory Org (1)</label><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>        </li>
-        <li><label>MDS (2)</label><?php form::text_field_dm('mds_name'); ?></li>
-        <li><label>Description</label><?php form::text_field_dm('description'); ?></li>
-        <li><label>Source List (3)</label><?php echo $f->select_field_from_object('fp_source_list_header_id', fp_source_list_header::find_all_demandPlan(), 'fp_source_list_header_id', 'source_list', $$class->fp_source_list_header_id, '', '', 1, $readonly); ?>        </li>
-        <li><label>Include SO</label><?php echo $f->checkBox_field_d('include_so_cb'); ?></li>
-        <li><label>Status</label><?php echo form::status_field($$class->status, $readonly); ?></li>
+        <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>        </li>
+        <li><?php $f->l_text_field_dm('mds_name'); ?></li>
+        <li><?php $f->l_text_field_d('description'); ?></li>
+        <li><?php $f->l_select_field_from_object('fp_source_list_header_id', fp_source_list_header::find_all_demandPlan(), 'fp_source_list_header_id', 'source_list', $$class->fp_source_list_header_id, '', '', 1, $readonly); ?>        </li>
+        <li><?php $f->l_checkBox_field_d('include_so_cb'); ?></li>
+        <li><?php $f->l_status_field_d('status'); ?></li>
        </ul>
       </div>
      </div>
@@ -48,10 +49,10 @@
      <div id="tabsHeader-4" class="tabContent">
       <div> 
        <ul class="column five_column">
-        <li><label>Action</label>
+        <li><label><?php echo gettext('Action') ?></label>
          <select name="mds_action[]" class=" select  mds_action" id="mds_action" >
           <option value="" ></option>
-          <option value="LOAD_MDS" >Load MDS</option>
+          <option value="LOAD_MDS" ><?php echo gettext('Load MDS') ?></option>
          </select>
         </li>
        </ul>
@@ -66,28 +67,28 @@
   </form>
  </div>
 
- <div id="form_line" class="form_line"><span class="heading">MDS Lines </span>
+ <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('MDS Lines') ?></span>
   <form action=""  method="post" id="mds_line"  name="mds_line">
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1">Main</a></li>
-     <li><a href="#tabsLine-2">Future</a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsLine-1" class="tabContent">
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Action</th>
-         <th>Seq#</th>
-         <th>Line Id</th>
-         <th>Item Id</th>
-         <th>Item Number</th>
-         <th>Date</th>
-         <th>Source Type</th>
-         <th>Source Header</th>
-         <th>Source Line</th>
-         <th>Quantity</th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Seq') ?>#</th>
+         <th><?php echo gettext('Line Id') ?></th>
+         <th><?php echo gettext('Item Id') ?>#</th>
+         <th><?php echo gettext('Item Number') ?></th>
+         <th><?php echo gettext('Date') ?></th>
+         <th><?php echo gettext('Source Type') ?></th>
+         <th><?php echo gettext('Source Header') ?></th>
+         <th><?php echo gettext('Source Line') ?></th>
+         <th><?php echo gettext('Quantity') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -105,13 +106,10 @@
          }
          ?>         
          <tr class="fp_mds_line<?php echo $count ?>">
-          <td>    
-           <ul class="inline_action">
-            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class_second->fp_mds_line_id); ?>"></li>           
-            <li><?php echo form::hidden_field('fp_mds_header_id', $$class->fp_mds_header_id); ?></li>
-           </ul>
+          <td>
+           <?php
+           echo ino_inline_action($$class_second->fp_mds_line_id, array('fp_mds_header_id' => $$class->fp_mds_header_id));
+           ?>
           </td>
           <td><?php $f->seq_field_d($count); ?></td>
           <td><?php form::text_field_wid2sr('fp_mds_line_id'); ?></td>
@@ -143,11 +141,13 @@
  </div>
 
 </div>
+</div>
 
-
+<div class="row small-top-margin">
 <div id="pagination" style="clear: both;">
  <?php echo $pagination->show_pagination(); ?>
 </div>
+ </div>
 
 
 <div id="js_data">

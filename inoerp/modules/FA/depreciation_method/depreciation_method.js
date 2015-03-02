@@ -6,6 +6,7 @@ setValFromSelectPage.prototype.setVal = function() {
  var fa_depreciation_method_id = this.fa_depreciation_method_id;
    if (fa_depreciation_method_id) {
 	$("#fa_depreciation_method_id").val(fa_depreciation_method_id);
+  $("a.show.fa_depreciation_method_id").trigger('click');
  }
 
 };
@@ -25,11 +26,12 @@ setValFromSelectPage.prototype.setVal = function() {
  
 
 $(document).ready(function() {
-
+ var mandatoryCheck = new mandatoryFieldMain();
+  mandatoryCheck.mandatoryHeader();
  //Popup for selecting option type
  $(".fa_depreciation_method_id.select_popup").on("click", function() {
 	void window.open('select.php?class_name=fa_depreciation_method', '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+					'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
 copy_fa_depreciation_method_id();

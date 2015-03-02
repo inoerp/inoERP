@@ -22,8 +22,8 @@ setValFromSelectPage.prototype.setVal = function () {
   $("#asset_number").val(this.asset_number);
  }
 
- if (this.fa_asset_book_id) {
-  $("#fa_asset_book_id").val(this.fa_asset_book_id);
+ if (this.fa_asset_book_info_id) {
+  $("a.show.fa_asset_book_info_id").trigger('click');
  }
 };
 
@@ -32,7 +32,7 @@ $(document).ready(function () {
  //selecting Id
  $(".fa_asset_book_info_id.select_popup").on("click", function () {
   void window.open('select.php?class_name=fa_asset_book_info', '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
  //selecting Id

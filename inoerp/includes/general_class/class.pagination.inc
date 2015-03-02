@@ -168,8 +168,8 @@ VAR;
     $pagination_statement .= $this->_total_pages . '&amp;' . $this->_query_string;
     $pagination_statement .= "\">Last</a> ";
    }
-
-   $pagination_statement .= '</div>';
+//   $pagination_statement .= '<span class="show_loading_small"><img src="'.HOME_URL .'/themes/images/form/small_loading_bar.gif"></li>';
+$pagination_statement .= '</div>';
    $pagination_statement .= select_per_page($this->per_page);
   }
 

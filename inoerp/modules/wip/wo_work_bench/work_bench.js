@@ -22,6 +22,10 @@ setValFromSelectPage.prototype.setVal = function() {
 	$('#scrap_account_id').val(this.combination);
 	localStorage.removeItem("field_class");
  }
+ 
+  if (this.wip_wo_header_id) {
+    $('a.show.wip_wo_header_id').trigger('click');
+ }
 };
 
 $(document).ready(function() {
@@ -102,7 +106,7 @@ $(document).ready(function() {
 	localStorage.idValue = "";
 	var link = 'select.php?class_name=wip_wo_header&wo_status=%3DRELEASED';
 	void window.open(link, '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+					'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
  
  

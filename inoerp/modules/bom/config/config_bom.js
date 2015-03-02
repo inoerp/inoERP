@@ -48,6 +48,9 @@ setValFromSelectPage.prototype.setVal = function () {
 
  localStorage.removeItem("row_class");
  localStorage.removeItem("field_class");
+  if (this.bom_config_header_id) {
+  $('a.show.bom_config_header_id').trigger('click');
+ }
 };
 
 function disableField_forCommonBom() {

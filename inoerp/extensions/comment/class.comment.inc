@@ -163,13 +163,12 @@ class comment extends dbObject {
 	         content.content_id, content.content_type_id,
            comment.reference_table, comment.reference_id, comment.comment ,comment.published_cb, comment.creation_date,
            user.username
-					FROM comment ,
-            content,
-            user
+					FROM comment LEFT JOIN user ON comment.created_by = user.user_id ,
+            content 
 					WHERE comment.reference_table = 'content'
           AND content.content_id = comment.reference_id 
 					AND comment.subject IS NOT NULL AND comment.subject !='' 
-          AND  comment.created_by = user.user_id
+            
           ";
 
   $sql .=" ORDER BY comment.comment_id DESC, comment.weightage DESC ";
@@ -192,6 +191,8 @@ class comment extends dbObject {
     $comment_string = '';
   if (count($result) > 0) {
    $comment_string .= '<ul class="documentation_list comment">';
+   $comment_string .= '<li class="all_comments"><span class="badge"><a href="'.HOME_URL.'content.php?content_type=comment">'
+    . 'All Comments <i class="fa fa-comments-o"></i></a></span></li>';
    foreach ($result as $records) {
     $comment_string .= '<li class="comment_subject">';
     $comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&' . 'content_id=' . $records->content_id .
@@ -269,8 +270,8 @@ class comment extends dbObject {
 
  public function view_page() {
   $pageno = !empty($_GET['pageno']) ? $_GET['pageno'] : 1;
-  $per_page = !empty($_GET['per_page']) ? $_GET['per_page'] : 5;
-  $this->subject_noof_char = empty($this->subject_noof_char) ? 200 : $this->subject_noof_char;
+  $per_page = !empty($_GET['per_page']) ? $_GET['per_page'] : 20;
+  $this->subject_noof_char = empty($this->subject_noof_char) ? 300 : $this->subject_noof_char;
   $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
   $comment_result = $this->content_comment_with_reference();
   $total_count_c = count($comment_result);
@@ -297,10 +298,11 @@ class comment extends dbObject {
       continue;
      }
      $even_odd = ($con_count % 2 == 0) ? 'even' : 'odd';
+     $user_name = empty($recod_c->username) ? 'Anonymous\SelfWeb' : $recod_c->username;
      $comment_string .= "<tr id=\"row_no$con_count\" class='new_row $even_odd'> "
       . " <td class='subject_summary'>";
      $comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&'
-      . 'content_id=' . $recod_c->reference_id . '&content_type_id=' . $recod_c->content_type_id . '">';
+      . 'content_id=' . $recod_c->reference_id . '&content_type_id=' . $recod_c->content_type_id .'#comment_id_' .$recod_c->comment_id .'">';
      if (!empty($recod_c->subject)) {
       $comment_string .= substr(strip_tags($recod_c->subject), 0, $this->subject_noof_char);
      } else {
@@ -309,7 +311,7 @@ class comment extends dbObject {
      $comment_string .= ' </a>';
      $comment_string .= '</td>';
      $comment_string .= '<td class="created_by">';
-     $comment_string .= $recod_c->username;
+     $comment_string .= $user_name;
      $comment_string .= '</td><td class="post_date">';
      $comment_string .= $recod_c->creation_date;
      $comment_string .= '</td>';

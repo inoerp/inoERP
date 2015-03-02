@@ -27,7 +27,9 @@ setValFromSelectPage.prototype.setVal = function() {
  if (overhead) {
 	$("#overhead").val(overhead);
  }
- 
+    if (this.bom_overhead_id) {
+  $('a.show.bom_overhead_id').trigger('click');
+ }
 
 };
 
@@ -35,7 +37,7 @@ $(document).ready(function() {
  //mandatory and field sequence
  var mandatoryCheck = new mandatoryFieldMain();
  mandatoryCheck.header_id = 'bom_overhead_id';
-// mandatoryCheck.mandatoryHeader();
+ mandatoryCheck.mandatoryHeader();
  mandatoryCheck.form_area = 'form_header';
  mandatoryCheck.mandatory_fields = ["org_id", "overhead"];
  mandatoryCheck.mandatory_messages = ["First Select Org", "No Overhead"];

@@ -477,4 +477,14 @@ $('table.view th').find('img').hide();
   saveHeader(savePath, headerData, '#sys_program', '', '', true, 'program_header');
   });
   
+   $('#big_popover').popover({
+  html: true,
+  title: function () {
+   return $("#popover-head").html();
+  },
+  content: function () {
+   return $("#popover-content").html();
+  }
+ });
+  
 });

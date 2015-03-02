@@ -28,6 +28,9 @@ setValFromSelectPage.prototype.setVal = function() {
 
  localStorage.removeItem("row_class");
  localStorage.removeItem("field_class");
+      if (this.bom_routing_header_id) {
+  $('a.show.bom_routing_header_id').trigger('click');
+ }
 };
 
 function disableField_forCommonRouting() {
@@ -38,7 +41,7 @@ $(document).ready(function() {
 //mandatory and field sequence
  var mandatoryCheck = new mandatoryFieldMain();
  mandatoryCheck.header_id = 'bom_routing_header_id';
-// mandatoryCheck.mandatoryHeader();
+ mandatoryCheck.mandatoryHeader();
  mandatoryCheck.form_area = 'form_header';
  mandatoryCheck.mandatory_fields = ["org_id", "item_number"];
  mandatoryCheck.mandatory_messages = ["First Select Org", "No Item Number"];
@@ -69,13 +72,13 @@ $(document).ready(function() {
  $('body').off("click", '.bom_routing_header_id.select_popup') 
          .on("click", '.bom_routing_header_id.select_popup' , function() {
   void window.open('select.php?class_name=bom_routing_v', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+   'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
  $('body').off("click", '.item_id_m.select_popup')
          .on("click", '.item_id_m.select_popup', function() {
   void window.open('select.php?class_name=item', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+   'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
  //function to coply line to details

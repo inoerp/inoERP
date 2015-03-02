@@ -69,7 +69,7 @@
    'supplier_type' => 'SUPPLIER_TYPE'
   ];
   public $supplier_id;
-  public $bu_org_id;
+//  public $bu_org_id;
   public $po_type;
   public $po_number;
   public $supplier_site_id;

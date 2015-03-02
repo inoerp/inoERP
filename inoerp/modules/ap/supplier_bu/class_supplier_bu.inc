@@ -76,7 +76,6 @@ class supplier_bu extends dbObject {
   'freight_terms',
   'transportation',
   'country_of_origin',
-  "ef_id",
   "status",
   "rev_enabled_cb",
   "rev_number",

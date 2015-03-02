@@ -122,7 +122,7 @@
      bl.effective_start_date, 	bl.effective_end_date, 	bl.eco_number, 	bl.eco_implemented_cb, 	
      bl.planning_percentage, 	bl.yield, 	bl.include_in_cost_rollup_cb, 	bl.wip_supply_type, 	
      bl.supply_sub_inventory, 	bl.supply_locator, 	bl.ef_id, 	bl.created_by, 	bl.creation_date, 	
-     bl.last_update_by, 	bl.last_update_date
+     bl.last_update_by, 	bl.last_update_date, bl.component_revision
 
      FROM      bom_line bl, 
      bom_header bh,

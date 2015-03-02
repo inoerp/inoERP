@@ -326,21 +326,25 @@ class path extends dbObject {
   foreach ($allowed_parent_path_ids as $path_id) {
    $path->findBy_id($path_id);
    $url = $path->fullPath($path->path_link);
+       $path_name = gettext($path->name);
+    $path_description = gettext($path->description);
    if ($this->show_description) {
-    $allPaths .= "<li title=\"$path->name\" class='parent_menu expandable {$path->name} '>" . '<a href="' . $url . '">' . $path->description . '</a>';
+    $allPaths .= "<li title=\"$path_name\" data-toggle=\"tooltip\" class='parent_menu expandable {$path->name} '>" . '<a href="' . $url . '">' . $path_description . '</a>';
    } else {
-    $allPaths .= "<li title=\"$path->description\" class='parent_menu expandable {$path->name} '>" . '<a href="' . $url . '">' . $path->name . '</a>';
+    $allPaths .= "<li title=\"$path_description\" data-toggle=\"tooltip\" class='parent_menu expandable {$path->name} '>" . '<a href="' . $url . '">' . $path_name . '</a>';
    }
    $allPaths .= '<ul class="child_menu">';
    $childs = $path->findAll_childOfPartent($path_id);
    foreach ($childs as $child_paths) {
     $key = array_search($child_paths->path_id, $allowed_path_ids);
+    $child_paths_name = gettext($child_paths->name);
+    $child_paths_description = gettext($child_paths->description);
     if ($key) {
      $url_1 = $path->fullPath($child_paths->path_link);
      if ($this->show_description) {
-      $allPaths .= "<li title=\"$child_paths->name\" class='expandable {$path->name} '>" . '<a href="' . $url_1 . '">' . $child_paths->description . '</a>';
+      $allPaths .= "<li title=\"$child_paths_name\" data-toggle=\"tooltip\" class='expandable {$path->name} '>" . '<a href="' . $url_1 . '">' . $child_paths_description . '</a>';
      } else {
-      $allPaths .= "<li title=\"$child_paths->description\" class='expandable {$path->name} '>" . '<a href="' . $url_1 . '">' . $child_paths->name . '</a>';
+      $allPaths .= "<li title=\"$child_paths_description\" data-toggle=\"tooltip\" class='expandable {$path->name} '>" . '<a href="' . $url_1 . '">' . $child_paths_name . '</a>';
      }
      $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths);
      unset($allowed_path_ids[$key]);

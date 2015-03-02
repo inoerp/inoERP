@@ -1,45 +1,55 @@
+<!-- * 
+inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+-->
 <div id='bom_routing_divId'>
- <div id ="form_header"><span class="heading">Routing </span>
+ <div id ="form_header"><span class="heading"><?php echo gettext('Routing') ?></span>
   <form action=""  method="bom_routingst" id="bom_routing_header"  name="bom_routing_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Common Routing</a></li>
-     <li><a href="#tabsHeader-3">Notes</a></li>
-     <li><a href="#tabsHeader-4">Files</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Common Routing') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
       <div class="large_shadow_box"> 
        <ul class="column header_field">
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_routing_header_id select_popup clickable">
-          Routing Id</label><?php $f->text_field_dsr('bom_routing_header_id') ?>
+        <li><?php $f->l_text_field_dr_withSearch('bom_routing_header_id') ?>
          <a name="show" href="form.php?class_name=bom_routing_header&<?php echo "mode=$mode"; ?>" class="show document_id bom_routing_header_id">
           <i class="fa fa-refresh"></i></a> 
         </li>
-        <li><label>Org Name(1)</label><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $bom_routing_header->org_id, 'org_id', '', 1, $readonly1, '', ''); ?>        </li>
+        <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $bom_routing_header->org_id, 'org_id', '', 1, $readonly1); ?>        </li>
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="item_id_m select_popup clickable">
-          Item Number(2)</label><?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
+          <?php echo gettext('Item Number') ?></label><?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
          <?php $f->text_field_dm('item_number', 'select_item_number_allowedBOM'); ?>
         </li>
-        <li><label>UOM</label><?php echo $f->select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, '', '', '', $readonly); ?>        </li>
-        <li><label>Description</label><?php form::text_field_widr('item_description'); ?>     </li>
-        <li><label>Revision</label><?php form::text_field_d('routing_revision'); ?>              </li>
-        <li><label>Effective Date</label><?php echo form::date_fieldAnyDay_m('effective_date', $$class->effective_date); ?>              </li>
+        <li><?php $f->l_select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, '', '', '', $readonly); ?>        </li>
+        <li><?php $f->l_text_field_d('item_description'); ?> </li>
+        <li><?php $f->l_text_field_d('routing_revision'); ?> </li>
+        <li><?php $f->l_date_fieldAnyDay('effective_date', $$class->effective_date); ?>              </li>
        </ul>
       </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div> 
        <ul class="column five_column">
-        <li><label>Item Number : </label>
+        <li><label><?php echo gettext('Item Number') ?></label>
          <?php echo $f->hidden_field_withIdClass('common_routing_item_id_m', $$class->common_routing_item_id_m, 'item_id_m'); ?>
-         <?php $f->text_field_d('commonRouting_item_number', 'select_item_number'); ?>  </li>
-        <li><label>Description: </label><?php $f->text_field_d('commonRouting_item_description', 'commonRouting_item_description'); ?>  </li>
+          <?php $f->text_field_d('commonRouting_item_number', 'select_item_number'); ?>  </li>
+        <li><label><?php echo gettext('Description') ?></label><?php $f->text_field_d('commonRouting_item_description', 'commonRouting_item_description'); ?>  </li>
        </ul>
       </div>
      </div>
      <div id="tabsHeader-3" class="tabContent">
+      <div> <?php echo ino_attachement($file) ?> </div>
+     </div>
+     <div id="tabsHeader-4" class="tabContent">
       <div id="comments">
        <div id="comment_list">
         <?php echo!(empty($comments)) ? $comments : ""; ?>
@@ -54,9 +64,7 @@
        </div>
       </div>
      </div>
-     <div id="tabsHeader-4" class="tabContent">
-      <div> <?php echo ino_attachement($file) ?> </div>
-     </div>
+
     </div>
    </div>
   </form>
@@ -66,25 +74,24 @@
   <form action=""  method="bom_routingst" id="bom_routing_site"  name="bom_routing_line">
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1">Basic</a></li>
-     <li><a href="#tabsLine-2">WIP</a></li>
-     <li><a href="#tabsLine-3">Effectivity</a></li>
-     <li><a href="#tabsLine-4">Data Collection</a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('WIP') ?> </a></li>
+     <li><a href="#tabsLine-3"><?php echo gettext('Effectivity') ?> </a></li>
+     <li><a href="#tabsLine-4"><?php echo gettext('Data Collection') ?> </a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsLine-1" class="tabContent">
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Action</th>
-         <th>Seq #</th>
-         <th>Line Id</th>
-         <th>Routing Seq</th>
-         <th>Standard Op</th>
-         <th>Referenced</th>
-         <th>Department</th>
-
-         <th>Operation Details</th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Seq') ?>#</th>
+         <th><?php echo gettext('Line Id') ?></th>
+         <th><?php echo gettext('Routing Seq') ?>#</th>
+         <th><?php echo gettext('Standard Op') ?>#</th>
+         <th><?php echo gettext('Referenced') ?>#</th>
+         <th><?php echo gettext('Department') ?></th>
+         <th><?php echo gettext('Operation Details') ?>#</th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -122,26 +129,25 @@
             <fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
              <div class="tabsDetail">
               <ul class="tabMain">
-               <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>">Resource</a></li>
-               <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>">Future</a></li>
-
+               <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo gettext('Resource') ?></a></li>
+               <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>"><?php echo gettext('Future') ?></a></li>
               </ul>
               <div class="tabContainer">
                <div id="tabsDetail-1-<?php echo $count ?>" class="tabContent">
                 <table class="form form_detail_data_table detail">
                  <thead>
                   <tr>
-                   <th>Action</th>
-                   <th>Detail Id</th>
-                   <th>Resource Seq</th>
-                   <th>Resource</th>
-                   <th>Basis</th>
-                   <th>Usage</th>
-                   <th>Schedule</th>
-                   <th>Units</th>
-                   <th>24 Hours</th>
-                   <th>Rate</th>
-                   <th>Charge Type</th>
+                   <th><?php echo gettext('Action') ?></th>
+                   <th><?php echo gettext('Detail Id') ?></th>
+                   <th><?php echo gettext('Resource Seq') ?></th>
+                   <th><?php echo gettext('Resource') ?></th>
+                   <th><?php echo gettext('Basis') ?></th>
+                   <th><?php echo gettext('Usage') ?></th>
+                   <th><?php echo gettext('Schedule') ?></th>
+                   <th><?php echo gettext('Units') ?></th>
+                   <th><?php echo gettext('24 Hours') ?></th>
+                   <th><?php echo gettext('Stnd. Rate') ?></th>
+                   <th><?php echo gettext('Charge Type') ?></th>
                   </tr>
                  </thead>
                  <tbody class="form_data_detail_tbody">
@@ -200,13 +206,13 @@
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Seq #</th>
-         <th>Description</th>
-         <th>Count Point</th>
-         <th>Auto Charge</th>
-         <th>Back flush</th>
-         <th>MTQ</th>
-         <th>Lead Time % </th>
+         <th><?php echo gettext('Seq') ?></th>
+         <th><?php echo gettext('Description') ?></th>
+         <th><?php echo gettext('Count Point') ?></th>
+         <th><?php echo gettext('Auto Charge') ?></th>
+         <th><?php echo gettext('Back flush') ?></th>
+         <th><?php echo gettext('MTQ') ?></th>
+         <th><?php echo gettext('Lead Time') ?>%</th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -235,15 +241,14 @@
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Seq #</th>
-         <th>Start Date</th>
-         <th>End Date</th>
-         <th>ECO Implemented</th>
-         <th>ECO Number</th>
-
-         <th>Roll up</th>
-         <th>Yield</th>
-         <th>Cumm. Yield</th>
+         <th><?php echo gettext('Seq') ?></th>
+         <th><?php echo gettext('Start Date') ?></th>
+         <th><?php echo gettext('End Date') ?></th>
+         <th><?php echo gettext('ECO Implemented') ?></th>
+         <th><?php echo gettext('ECO Number') ?></th>
+         <th><?php echo gettext('Roll up') ?></th>
+         <th><?php echo gettext('Yield') ?>%</th>
+         <th><?php echo gettext('Cumm. Yield') ?>%</th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">

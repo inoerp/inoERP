@@ -73,71 +73,73 @@
    <div class="container">
     <div id="erp_form_area">
      <div id="structure">
-     <div id="select_page">
-      <div id ="form_header">
-       <div class="error"></div><div id="loading"></div>
-       <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
-      </div>
-      <div id="list_contents">
-       <div id="searchForm"><?php echo!(empty($search_form)) ? $search_form : ""; ?></div>
-       <div id="form_line" class="form_line">
-        <div id="print">
-         <table class="find_page normal">
-          <thead> 
-           <tr>
-            <th>Click Select</th>
+      <div id="select_page">
+       <div id ="form_header">
+        <div class="error"></div><div id="loading"></div>
+        <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
+       </div>
+       <div id="list_contents">
+        <div id="searchForm" ><div class='hideDiv_input'></div>
+         <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
+        <div id="form_line" class="form_line">
+         <div id="selectResult">
+          <div id="selectResult_page">
+           <table class="find_page normal">
+            <thead> 
+             <tr>
+              <th>Click Select</th>
+              <?php
+              if (property_exists($class, 'column')) {
+               $column_array = $$class->column;
+              } else {
+               $column_array = $$class->field_a;
+              }
+              foreach ($column_array as $key => $value) {
+               echo '<th>' . $value . '</th>';
+              }
+              ?>
+             </tr>
+            </thead>
+
             <?php
-            if (property_exists($class, 'column')) {
-             $column_array = $$class->column;
-            } else {
-             $column_array = $$class->field_a;
-            }
-            foreach ($column_array as $key => $value) {
-             echo '<th>' . $value . '</th>';
+            If (!empty($search_result)) {
+             echo '<tbody>';
+             foreach ($search_result as $record) {
+              $primary_column = $class::$primary_column;
+              echo '<tr>';
+              echo '<td><button  class="quick_select button ' . $primary_column . '">' . $record->$primary_column . '</button></td>';
+              foreach ($column_array as $key => $value) {
+               echo "<td class=\"$value\">" . $record->$value . '</td>';
+              }
+              echo '</tr>';
+             }
+             echo '</tbody>';
             }
             ?>
-           </tr>
-          </thead>
 
-          <?php
-          If (!empty($search_result)) {
-           echo '<tbody>';
-           foreach ($search_result as $record) {
-            $primary_column = $class::$primary_column;
-            echo '<tr>';
-            echo '<td><button  class="quick_select button ' . $primary_column . '">' . $record->$primary_column . '</button></td>';
-            foreach ($column_array as $key => $value) {
-             echo "<td class=\"$value\">" . $record->$value . '</td>';
-            }
-            echo '</tr>';
-           }
-           echo '</tbody>';
-          }
-          ?>
-
-         </table>
-
+           </table>
+          </div>
+         </div>
         </div>
-       </div>
 
-       <div class="pagination" style="clear: both;">
-        <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
-        ?>
+        <div class="pagination" style="clear: both;">
+         <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
+         ?>
+        </div>
        </div>
       </div>
      </div>
     </div>
-    </div>
-    
+
     <div class="clearfix"></div>
 
    </div><!-- end container -->
   </div><!-- end transparent-bg -->
-   <?php
- global $f;
- echo (!empty($footer_bottom)) ? "<div id=\"footer_bottom\"> $footer_bottom </div>" : "";
- echo $f->hidden_field_withId('home_url', HOME_URL);
- ?>
+  <?php
+  global $f;
+  echo (!empty($footer_bottom)) ? "<div id=\"footer_bottom\"> $footer_bottom </div>" : "";
+  echo $f->hidden_field_withId('home_url', HOME_URL);
+  ?>
   <div class="row">
    <?php echo searching_tips(); ?>
   </div>

@@ -1,5 +1,4 @@
 <?php
-
  $hideContextMenu = true;
  $hideBlock = true;
  if (!empty($_GET['search_class_name'])) {
@@ -12,12 +11,29 @@
   $path_access = -1;
  }
  if (!empty($class_names)) {
+  $_GET['window_type'] = 'popover';
+//  $class = $class_names;
+//  $$class = new $class;
+//    if (property_exists($class, 'field_a')) {
+//   if ((empty($$class->field_a))) {
+//    $$class->field_a = get_dbColumns($class);
+//   }
+//   if (!empty($$class->field_a)) {
+//    foreach ($$class->field_a as $key => $value) {
+//     $$class->$value = NULL;
+//    }
+//   }
+//  }
+  
   include_once("includes/functions/loader.inc");
-  if (empty($access_level) || ($access_level < 2 )) {
-   access_denied();
-   return;
-  }
+  
+//  if (empty($access_level) || ($access_level < 2 )) {
+//   access_denied();
+//   return;
+//  }
+  
   $hidden_field_a = [];
+  $hidden_field_a['window_type'] = 'popover';
   //pre populate
   if (method_exists($$class, 'search_pre_populate')) {
    $ppl = call_user_func(array($$class, 'search_pre_populate'));
@@ -50,7 +66,6 @@
   $search->setProperty('_form_post_link', 'select');
   $search->setProperty('_initial_search_array', $$class->initial_search);
   $search_form = $search->search_form($$class);
-  $select_result_statement = $search->select_result_op();
 
   if (!empty($pagination)) {
    $pagination->setProperty('_path', 'select');
@@ -58,4 +73,4 @@
   }
  }
 ?>
-<?php include_once(THEME_DIR . '/select_page.inc'); ?>
+<?php include_once(THEME_DIR . '/popover_select_page.inc'); ?>

@@ -114,14 +114,14 @@ alert('Readonly Field!');
  $(".ap_payment_header_id.select_popup").on("click", function () {
   var link = 'select.php?class_name=ap_payment_header';
   void window.open(link, '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
 //selecting supplier
  $(".find_popup.supplierId").on("click", function () {
   localStorage.idValue = "";
   void window.open('select.php?class_name=supplier', '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
 //popu for selecting select_transaction_number
@@ -138,7 +138,7 @@ alert('Readonly Field!');
   openUrl += '&supplier_id=' + $('#supplier_id').val();
   openUrl += '&supplier_site_id=' + $('#supplier_site_id').val();
   void window.open(openUrl, '_blank',
-          'width=1200,height=1100,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
 
@@ -239,7 +239,7 @@ var gl_amount =  ( +$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1")) *   r
    localStorage.removeItem("jsfile");
    localStorage.setItem("jsfile", "modules/ap/ap_payment/extra_ap_payment.js");
    void window.open(link, '_blank',
-           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
    return false;
   } else {
    alert('No Transaction Header ID/nEnter or Save The Header Details ');
@@ -255,7 +255,7 @@ var gl_amount =  ( +$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1")) *   r
    localStorage.removeItem("jsfile");
    localStorage.setItem("jsfile", "modules/ap/ap_payment/extra_ap_payment.js");
    void window.open(link, '_blank',
-           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
    return false;
   } else {
    alert('No Transaction Header ID/nEnter or Save The Header Details ');

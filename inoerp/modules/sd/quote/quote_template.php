@@ -1,75 +1,68 @@
-<div id ="form_header"><span class="heading">Sales Quote Header</span>
+<!-- * 
+inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+-->
+<div id ="form_header">
+ <span class="heading"><?php echo gettext('Sales Quote Header') ?></span>
  <form action=""  method="post" id="sd_quote_header"  name="sd_quote_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1">Basic Info</a></li>
-    <li><a href="#tabsHeader-2">Finance</a></li>
-    <li><a href="#tabsHeader-3">Address Details</a></li>
-    <li><a href="#tabsHeader-4">Notes</a></li>
-    <li><a href="#tabsHeader-5">Attachments</a></li>
-    <li><a href="#tabsHeader-6">Actions</a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Finance') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Address Details') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column header_field">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sd_quote_header_id select_popup">
-         Header Id</label><?php echo $f->text_field_dr('sd_quote_header_id') ?>
-        <a name="show" href="form.php?class_name=sd_quote_header&<?php echo "mode=$mode"; ?>" class="show document_id sd_quote_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+       <li><?php $f->l_text_field_dr_withSearch('sd_quote_header_id') ?>
+        <a name="show" href="form.php?class_name=sd_quote_header&<?php echo "mode=$mode"; ?>" class="show document_id sd_quote_header_id">
+         <i class='fa fa-refresh'></i></a> 
        </li>
-       <li><label>Quote Number</label><?php echo $f->text_field_d('quote_number', 'primary_column2'); ?></li>
-       <li><label>Opportunity Id</label><?php echo $f->text_field_dr('sd_opportunity_id'); ?>						 </li>
+       <li><?php $f->l_text_field_d('quote_number', 'primary_column2'); ?></li>
+       <li><?php $f->l_text_field_dr('sd_opportunity_id'); ?>						 </li>
        <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?><label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup clickable">
-         Customer Name</label><?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
-       <li><label class="auto_complete">Customer Number</label><?php $f->text_field_d('customer_number'); ?></li>
-       <li><label>Customer Site</label><?php echo $f->select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
-       <li><label>Status</label><span class="button"><?php echo!empty($$class->quote_status) ? $$class->quote_status : ""; ?></span></li>
-       <li><label>Revision</label><?php echo form::checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?></li> 
-       <li><label>Rev Number</label><?php form::text_field_wid('rev_number'); ?> </li> 
-       <li><label>Description</label><?php form::text_field_wid('description'); ?></li> 
+         <?php echo gettext('Customer Name') ?></label><?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
+       <li><label class="auto_complete"><?php echo gettext('Customer Number') ?></label><?php $f->text_field_d('customer_number'); ?></li>
+       <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
+       <li><label><?php echo gettext('Status') ?></label><span class="button"><?php echo!empty($$class->quote_status) ? $$class->quote_status : ""; ?></span></li>
+       <li><?php $f->l_checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?></li> 
+       <li><?php $f->l_text_field_d('rev_number'); ?> </li> 
+       <li><?php $f->l_text_field_d('description'); ?></li> 
       </ul>
      </div>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column header_field">
-       <li><label>Doc Currency</label><?php echo $f->select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', 'currency', 1, $readonly); ?>						 </li>
-       <li><label>Payment Term</label><?php echo $f->select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly1); ?>						 </li>
+       <li><?php $f->l_select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', 'currency', 1, $readonly); ?>						 </li>
+       <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly1); ?>						 </li>
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_employee_name select_popup clickable">
-         Sales Person</label><?php $f->text_field_d('sales_person_employee_name'); ?>
+         <?php echo gettext('Sales Person') ?></label><?php $f->text_field_d('sales_person_employee_name'); ?>
         <?php echo $f->hidden_field_withId('sales_person_employee_id', $$class->sales_person_employee_id); ?>
        </li>
-       <li><label>Price List</label><?php echo$f->select_field_from_object('price_list_header_id', mdm_price_list_header::find_all(), 'mdm_price_list_header_id', 'price_list', $$class->price_list_header_id); ?>		 </li>
-       <li><label>Exchange Rate Type</label><?php echo form::text_field_d('exchange_rate_type'); ?></li>
-       <li><label>Exchange Rate</label><?php form::number_field_d('exchange_rate'); ?></li>
-       <li><label>Header Amount</label><?php form::number_field_d('header_amount'); ?></li>
-       <li><label>Tax Amount</label><?php form::number_field_d('tax_amount'); ?></li>
-       <li><label>New Customer</label><?php $f->text_field_d('new_customer_name'); ?></li> 
-       <li><label>New Customer Address</label><?php echo $f->text_area('new_customer_address', $$class->new_customer_address); ?></li> 
+       <li><?php $f->l_select_field_from_object('price_list_header_id', mdm_price_list_header::find_all(), 'mdm_price_list_header_id', 'price_list', $$class->price_list_header_id); ?>		 </li>
+       <li><?php $f->l_text_field_d('exchange_rate_type'); ?></li>
+       <li><?php $f->l_number_field_d('exchange_rate'); ?></li>
+       <li><?php $f->l_number_field_d('header_amount'); ?></li>
+       <li><?php $f->l_number_field_d('tax_amount'); ?></li>
+       <li><?php $f->l_text_field_d('new_customer_name'); ?></li> 
+       <li><label><?php echo gettext('New Customer Address') ?></label><?php echo $f->text_area('new_customer_address', $$class->new_customer_address); ?></li> 
       </ul>
      </div>
     </div>
     <div id="tabsHeader-3" class="tabContent">
      <div class="left_half shipto address_details">
       <ul class="column four_column">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
-         Ship To Site Id : </label><?php $f->text_field_d('ship_to_id', 'address_id site_address_id'); ?>
-       </li>
-       <li><label>Address Name : </label><?php $f->text_field_dr('ship_to_address_name', 'address_name'); ?></li>
-       <li><label>Address :</label> <?php $f->text_field_dr('ship_to_address', 'address'); ?></li>
-       <li><label>Country  : </label> <?php $f->text_field_dr('ship_to_country', 'country'); ?></li>
-       <li><label>Postal Code  : </label><?php echo $f->text_field_dr('ship_to_postal_code', 'postal_code'); ?></li>
-      </ul>
-     </div> 
-     <div class="right_half billto address_details">
-      <ul class="column four_column">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_popup select_popup clickable">
-         Bill To Site Id :</label><?php $f->text_field_d('bill_to_id', 'address_id site_address_id'); ?>
-       </li>
-       <li><label>Address Name :</label><?php $f->text_field_dr('bill_to_address_name', 'address_name'); ?> </li>
-       <li><label>Address :</label> <?php $f->text_field_dr('bill_to_address', 'address'); ?></li>
-       <li><label>Country  : </label> <?php $f->text_field_dr('bill_to_country', 'country'); ?></li>
-       <li><label>Postal Code  : </label><?php echo $f->text_field_dr('bill_to_postal_code', 'postal_code'); ?></li>
+       <li><?php $f->l_address_field_wid('ship_to_id'); ?> </li>
+       <li><?php $f->l_address_field_wid('bill_to_id'); ?> </li>
       </ul>
      </div> 
     </div>
@@ -117,26 +110,27 @@
  <form action=""  method="post" id="quote_site"  name="sd_quote_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Basic</a></li>
-    <li><a href="#tabsLine-2">Price</a></li>
-    <li><a href="#tabsLine-3">Dates</a></li>
-    <li><a href="#tabsLine-4">References</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Price') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Dates') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('References') ?> </a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th>Seq#</th>
-        <th>Line Id</th>
-        <th>Line#</th>
-        <th>Shipping Org</th>
-        <th>Item Number</th>
-        <th>Item Description</th>
-        <th>UOM</th>
-        <th>Line Status</th>
-        <th>Quantity</th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Line') ?>#</th>
+        <th><?php echo gettext('Shipping Org') ?></th>
+        <th><?php echo gettext('Item Number') ?></th>
+        <th><?php echo gettext('Item Description') ?></th>
+        <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('UOM') ?></th>
+        <th><?php echo gettext('Line Status') ?></th>
+        <th><?php echo gettext('Quantity') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -145,14 +139,10 @@
        foreach ($sd_quote_line_object as $sd_quote_line) {
         ?>         
         <tr class="sd_quote_line<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($sd_quote_line->item_description); ?>"></li>           
-           <li><?php echo form::hidden_field('sd_quote_header_id', $sd_quote_header->sd_quote_header_id); ?></li>
-           <li><?php echo form::hidden_field('tax_code_value', $$class_second->tax_code_value); ?></li>
-          </ul>
+         <td><?php
+          echo ino_inline_action($$class_second->sd_quote_line_id, array('sd_quote_header_id' => $$class->sd_quote_header_id,
+           'tax_code_value' => $$class_second->tax_code_value));
+          ?>    
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('sd_quote_line_id'); ?></td>
@@ -179,13 +169,13 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Seq#</th>
-        <th>Price List</th>
-        <th>Pricing Date</th>
-        <th>Unit Price</th>
-        <th>Line Price</th>
-        <th>Tax Code</th>
-        <th>Tax Amount</th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Price List') ?></th>
+        <th><?php echo gettext('Price Date') ?></th>
+        <th><?php echo gettext('Unit Price') ?>#</th>
+        <th><?php echo gettext('Line Price') ?>#</th>
+        <th><?php echo gettext('Tax Code') ?></th>
+        <th><?php echo gettext('Tax Amount') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -219,9 +209,9 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Seq#</th>
-        <th>Requested Date</th>
-        <th>Promise Date </th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Requested Date') ?></th>
+        <th><?php echo gettext('Promise Date') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -245,11 +235,13 @@
     <div id="tabsLine-4" class="scrollElement tabContent">
      <table class="form_line_data_table">
       <thead> 
-       <tr><th>Seq#</th>
-        <th>Ref Doc Type</th>
-        <th>Ref Number</th>
-        <th>Order Header Id </th>
-        <th>Order Line Id </th>
+       <tr>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Ref Doc Type') ?></th>
+        <th><?php echo gettext('Ref Number') ?></th>
+        <th><?php echo gettext('Order Header Id') ?>#</th>
+        <th><?php echo gettext('Order Line Id') ?></th>
+
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

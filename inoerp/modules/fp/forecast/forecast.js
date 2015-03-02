@@ -17,9 +17,7 @@ setValFromSelectPage.prototype.setVal = function() {
  var item_description = this.item_description;
  var uom_id = this.uom_id;
 
- if (fp_forecast_header_id) {
-	$('#content').find('#fp_forecast_header_id').val(fp_forecast_header_id);
- }
+
  if (forecast) {
 	$('#content').find('#forecast').val(forecast);
  }
@@ -43,6 +41,11 @@ setValFromSelectPage.prototype.setVal = function() {
 
  localStorage.removeItem("row_class");
  localStorage.removeItem("row_class");
+ 
+  if (fp_forecast_header_id) {
+	$('#fp_forecast_header_id').val(fp_forecast_header_id);
+  $('a.show.fp_forecast_header_id').trigger('click');
+ }
 
 };
 
@@ -101,10 +104,10 @@ $(document).ready(function() {
  });
 
  //Popup for selecting forecast
- $('#fp_forecast_header_divId').off('click','.forecast_header_id.select_popup')
-         .on('click','.forecast_header_id.select_popup',function() {
+ $('#fp_forecast_header_divId').off('click','.fp_forecast_header_id.select_popup')
+         .on('click','.fp_forecast_header_id.select_popup',function() {
 	void window.open('select.php?class_name=fp_forecast_header', '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+					'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
 	return false;
  });
 

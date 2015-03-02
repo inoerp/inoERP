@@ -43,6 +43,9 @@ setValFromSelectPage.prototype.setVal = function () {
 
  localStorage.removeItem("contact_field_class");
  localStorage.removeItem("row_class");
+ if(this.sd_lead_id){
+  $('a.show.sd_lead_id').trigger('click');
+ }
 };
 
 $(document).ready(function () {

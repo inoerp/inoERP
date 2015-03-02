@@ -1,3 +1,11 @@
+<!-- * 
+inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ -->
 <div id="form_all">
  <div id="form_headerDiv">
   <form action=""  method="post" id="po_asl_document"  name="po_asl_document">

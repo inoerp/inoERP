@@ -1,26 +1,34 @@
-<div id="form_all">
- <span class="heading">Department</span>
+<!-- * 
+inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+-->
+
+<div id="form_all"><?php $f = new inoform() ?>
+ <span class="heading"><?php echo gettext('Department') ?></span>
  <form action=""  method="post" id="bom_department"  name="bom_department" class="bom_department">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Attachments</a></li>
-     <li><a href="#tabsHeader-3">Notes</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
       <div class="large_shadow_box"> 
        <ul class="column header_field">
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_department_id select_popup clickable">
-          Department Id</label><?php echo $f->text_field_dsr('bom_department_id'); ?>
+        <li><?php $f->l_text_field_dr_withSearch('bom_department_id'); ?>
          <a name="show" href="form.php?class_name=bom_department&<?php echo "mode=$mode"; ?>" class="show document_id bom_department_id"><i class="fa fa-refresh"></i></a> 
         </li>
-        <li><label>Inventory(1)</label><?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly); ?>        </li>
-        <li><label>Department(2)</label><?php echo form::text_field_d('department'); ?></li>
-        <li><label>Description</label><?php echo form::text_field_d('description'); ?></li>
-        <li><label>Department Type</label><?php echo form::select_field_from_object('department_type', $class::bom_department_type(), 'option_line_id', 'option_line_code', $$class->department_type, 'department_type', $readonly, 'department_type'); ?>        </li>
-        <li><label>Status</label><?php echo form::status_field($$class->status, $readonly); ?></li>
+        <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', '', $readonly); ?>        </li>
+        <li><?php $f->l_text_field_d('department'); ?></li>
+        <li><?php $f->l_text_field_d('description'); ?></li>
+        <li><?php $f->l_select_field_from_object('department_type', $class::bom_department_type(), 'option_line_id', 'option_line_code', $$class->department_type, 'department_type', '', '', $readonly); ?>        </li>
+        <li><?php $f->l_status_field_d('status'); ?></li>
        </ul>
       </div>
      </div>
@@ -52,8 +60,8 @@
  <div id ="form_line" class="form_line"><span class="heading"> Department Details </span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Resource Assignment</a></li>
-    <li><a href="#tabsLine-2">Overhead Rates </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Resource Assignment') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Overhead Rate') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <form action=""  method="post" id="bom_department_resource_assignment_line"  name="bom_department_resource_assignment_line">
@@ -61,13 +69,13 @@
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Action</th>
-         <th>Resource Assignment Id</th>
-         <th>Cost Type</th>
-         <th>Resource</th>
-         <th>Efficiency %</th>
-         <th>Utilization %</th>
-         <th>No of Units</th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Resource Assignment Id') ?>#</th>
+         <th><?php echo gettext('Cost Type') ?></th>
+         <th><?php echo gettext('Resource') ?></th>
+         <th><?php echo gettext('Efficiency') ?>%</th>
+         <th><?php echo gettext('Utilization') ?>%</th>
+         <th><?php echo gettext('No of Units') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody bom_department_resource_assignment_values" >

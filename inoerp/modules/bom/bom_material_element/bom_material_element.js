@@ -18,10 +18,18 @@ setValFromSelectPage.prototype.setVal = function() {
   if (material_element) {
 	$("#material_element").val(material_element);
  }
+   if (this.bom_material_element_id) {
+  $('a.show.bom_material_element_id').trigger('click');
+ }
 };
 
 
 $(document).ready(function() {
+ 
+   var mandatoryCheck = new mandatoryFieldMain();
+ mandatoryCheck.header_id = 'bom_resource_id';
+ mandatoryCheck.mandatoryHeader();
+ 
  //selecting data
  $(".bom_material_element_id.select_popup").on("click", function() {
 	localStorage.idValue = "";

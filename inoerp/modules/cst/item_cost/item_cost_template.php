@@ -1,48 +1,48 @@
+<!-- * 
+inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+-->
 
-<div id ="form_header"><span class="heading">Item Cost Header </span>
- <form action=""  method="post" id="cst_item_cost_header"  name="cst_item_cost_header">
+<div id ="form_header"><span class="heading"><?php echo gettext('Item Cost Header') ?></span>
+ <form action=""  method="post" id="cst_item_cost_header"  name="cst_item_cost_header"><?php $f = new inoform(); ?>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1">Basic Info</a></li>
-    <li><a href="#tabsHeader-2">Finance</a></li>
-    <li><a href="#tabsHeader-3">Notes</a></li>
-    <li><a href="#tabsHeader-4">Attachments</a></li>
-    <li><a href="#tabsHeader-5">Actions</a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Finance') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column header_field">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="cst_item_cost_header_id select_popup clickable">
-         Header Id</label><?php $f->text_field_dsr('cst_item_cost_header_id'); ?>
-        <a name="show" href="form.php?class_name=cst_item_cost_header&<?php echo "mode=$mode"; ?>" class="show document_id cst_item_cost_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+       <li><?php $f->l_text_field_dr_withSearch('cst_item_cost_header_id'); ?>
+        <a name="show" href="form.php?class_name=cst_item_cost_header&<?php echo "mode=$mode"; ?>" class="show document_id cst_item_cost_header_id">
+         <i class="fa fa-refresh"></i></a> 
        </li>
-       <li><label>Cost Type(1)</label><?php echo $f->select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'cost_type_code', 'cost_type', $$class->bom_cost_type, 'bom_cost_type', '', 1, $readonly); ?>       </li>
-       <li><label>Inventory Org</label><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>       </li>
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup clickable">Item Number(2) : </label>
-        <?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
+       <li><?php $f->l_select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'cost_type_code', 'cost_type', $$class->bom_cost_type, 'bom_cost_type', '', 1, $readonly); ?>       </li>
+       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>       </li>
+       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup clickable">
+         <?php echo gettext('Item Number') ?></label><?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
         <?php $f->text_field_d('item_number', 'select_item_number'); ?>
        </li>
-       <li><label>Description</label><?php $f->text_field_d('item_description'); ?></li>
-       <li><label>UOM</label><?php echo $f->select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom_id', 'uom_id', '', $readonly); ?>       </li>
+       <li><?php $f->l_text_field_d('item_description'); ?></li>
+       <li><?php $f->l_select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom_id', 'uom_id', '', $readonly); ?>       </li>
       </ul>
      </div>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div> 
-      <ul class="column five_column">
-       <li><label>Base on RollUp : </label>
-        <?php echo form::checkBox_field('based_on_rollup_cb', $$class->based_on_rollup_cb, 'based_on_rollup_cb'); ?>
-       </li>
-       <li><label>Include in RollUp : </label>
-        <?php echo form::checkBox_field('include_in_rollup_cb', $$class->include_in_rollup_cb, 'include_in_rollup_cb'); ?>
-       </li>
-       <li><label>Purchase Prices : </label>
-        <?php $f->text_field_d('sales_price'); ?>
-       </li>
-       <li><label>Sales Price : </label>
-        <?php form::number_field_dm('purchase_price'); ?>
-       </li>
+      <ul class="column header_field">
+       <li><?php $f->l_checkBox_field_d('based_on_rollup_cb'); ?></li>
+       <li><?php $f->l_checkBox_field_d('include_in_rollup_cb'); ?></li>
+       <li><?php $f->l_number_field('sales_price', $$class->sales_price); ?></li>
+       <li><?php $f->l_number_field('purchase_price', $$class->purchase_price); ?> </li>
       </ul>
      </div>
     </div>
@@ -108,20 +108,21 @@
  <form action=""  method="post" id="cst_item_cost_line"  name="cst_item_cost_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Basic</a></li>
-    <li><a href="#tabsLine-2">Future</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>
+
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th>Line Id</th>
-        <th>Element Type</th>
-        <th>Element Id</th>
-        <th>Basis</th>
-        <th>Amount</th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Element Type') ?></th>
+        <th><?php echo gettext('Element Id') ?></th>
+        <th><?php echo gettext('Basis') ?></th>
+        <th><?php echo gettext('Amount') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -163,13 +164,10 @@
         $f->readonly2 = !empty($cst_item_cost_line->cst_item_cost_line_id) ? true : false;
         ?>         
         <tr class="cst_item_cost_line<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo $$class_second->cst_item_cost_line_id; ?>"></li>           
-           <li><?php echo form::hidden_field('cst_item_cost_header_id', $$class->cst_item_cost_header_id); ?></li>
-          </ul>
+         <td>
+          <?php
+          echo ino_inline_action($$class_second->cst_item_cost_line_id, array('cst_item_cost_header_id' => $$class->cst_item_cost_header_id));
+          ?>
          </td>
          <td><?php form::text_field_wid2sr('cst_item_cost_line_id'); ?></td>
          <td><?php echo $f->select_field_from_object('cost_element_type', cst_item_cost_line::cost_element_types(), 'option_line_code', 'option_line_value', $$class_second->cost_element_type, '', '', 1, $readonly); ?></td>

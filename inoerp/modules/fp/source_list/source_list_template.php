@@ -1,25 +1,25 @@
-<div id='fp_source_list_header_divId'>
- <div id ="form_header"><span class="heading">Source List Header  </span>
+<div id='fp_source_list_header_divId'><?php $f = new inoform(); ?>
+ <div id ="form_header"><span class="heading"><?php echo gettext('Source List Header') ?></span>
   <form action=""  method="post" id="fp_source_list_header"  name="fp_source_list_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Attachments</a></li>
-     <li><a href="#tabsHeader-3">Notes</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
       <div class="large_shadow_box"> 
        <ul class="column header_field">
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="source_list_header_id select_popup clickable">
-          Source List Id</label><?php echo $f->text_field_dr('fp_source_list_header_id') ?>
-          <a name="show" href="form.php?class_name=fp_source_list_header&<?php echo "mode=$mode"; ?>" class="show document_id fp_source_list_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <li><?php echo $f->l_text_field_dr_withSearch('fp_source_list_header_id') ?>
+         <a name="show" href="form.php?class_name=fp_source_list_header&<?php echo "mode=$mode"; ?>" class="show document_id fp_source_list_header_id">
+          <i class="fa fa-refresh"></i></a> 
         </li>
-        <li><label>Inventory Org (1)</label><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>        </li>
-        <li><label>Type (2)</label><?php echo $f->select_field_from_object('source_list_type', fp_source_list_header::source_list_type(), 'option_line_code', 'option_line_value', $$class->source_list_type, 'source_list_type', '', 1, $readonly); ?>        </li>
-        <li><label>Source List (3)</label><?php form::text_field_dm('source_list'); ?></li>
-        <li><label>Description</label><?php form::text_field_d('description'); ?></li>
-        <li><label>Status</label><?php echo form::status_field($$class->status, $readonly); ?></li>
+        <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>        </li>
+        <li><?php $f->l_select_field_from_object('source_list_type', fp_source_list_header::source_list_type(), 'option_line_code', 'option_line_value', $$class->source_list_type, 'source_list_type', '', 1, $readonly); ?>        </li>
+        <li><?php $f->l_text_field_dm('source_list'); ?></li>
+        <li><?php $f->l_text_field_d('description'); ?></li>
+        <li><?php $f->l_status_field_d('status'); ?></li>
        </ul>
       </div>
      </div>
@@ -49,22 +49,22 @@
   </form>
  </div>
 
- <div id="form_line" class="form_line"><span class="heading">Source List Lines </span>
+ <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Source List Lines') ?></span>
   <form action=""  method="post" id="source_list_line"  name="source_list_line">
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1">Main</a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsLine-1" class="tabContent">
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Action</th>
-         <th>Line Id</th>
-         <th>Type</th>
-         <th>Source List</th>
-         <th>Comments</th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Line Id') ?></th>
+         <th><?php echo gettext('Type') ?></th>
+         <th><?php echo gettext('Source List') ?>#</th>
+         <th><?php echo gettext('Comments') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -73,13 +73,10 @@
         foreach ($fp_source_list_line_object as $fp_source_list_line) {
          ?>         
          <tr class="fp_source_list_line<?php echo $count ?>">
-          <td>    
-           <ul class="inline_action">
-            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class_second->fp_source_list_line_id); ?>"></li>           
-            <li><?php echo form::hidden_field('fp_source_list_header_id', $$class->fp_source_list_header_id); ?></li>
-           </ul>
+          <td>
+           <?php
+           echo ino_inline_action($$class_second->fp_source_list_line_id, array('fp_source_list_header_id' => $$class->fp_source_list_header_id));
+           ?>
           </td>
           <td><?php form::text_field_wid2sr('fp_source_list_line_id'); ?></td>
           <td><?php echo $f->select_field_from_object('source_list_line_type', fp_source_list_line::source_list_line_type(), 'option_line_code', 'option_line_value', $$class_second->source_list_line_type, '', '', 1, $readonly); ?></td>

@@ -1,26 +1,27 @@
 <div id ="fp_mrp_header_divId">
- <form action=""  method="post" id="fp_mrp_header"  name="fp_mrp_header"><span class="heading">MRP Planner </span>
+ <form action=""  method="post" id="fp_mrp_header"  name="fp_mrp_header">
+  <span class="heading"><?php echo gettext('MRP Planner') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Attachments</a></li>
-     <li><a href="#tabsHeader-3">Notes</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
       <div class="large_shadow_box"> 
        <ul class="column header_field"> 
-        <li><label><img class="fp_mrp_header select_popup clickable" src="<?php echo HOME_URL; ?>themes/images/serach.png">
-          MRP Plan Id</label><?php echo form::text_field('fp_mrp_header_id', $$class->fp_mrp_header_id, '10', '', '', 'System number', 'fp_mrp_header_id', $readonly); ?>
-         <a name="show" href="form.php?class_name=fp_mrp_header&<?php echo "mode=$mode"; ?>" class="show document_id fp_mrp_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <li><?php $f->l_text_field_dr_withSearch('fp_mrp_header_id', $$class->fp_mrp_header_id, '10', '', '', 'System number', 'fp_mrp_header_id', $readonly); ?>
+         <a name="show" href="form.php?class_name=fp_mrp_header&<?php echo "mode=$mode"; ?>" class="show document_id fp_mrp_header_id">
+          <i class="fa fa-refresh"></i></a> 
         </li>
-        <li><label>Inventory Org (1)</label><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>    </li>
-        <li><label>Plan Name (2)</label><?php $f->text_field_dm('mrp_name'); ?></li>
-        <li><label>Planning Horizon(Days)</label><?php echo $f->number_field('planning_horizon_days', $$class->planning_horizon_days); ?>    </li>
-        <li><label>Description</label><?php $f->text_field_d('description'); ?></li>
-        <li><label>Demand Source</label><?php echo $f->select_field_from_object('demand_source', fp_mds_header::find_all(), 'fp_mds_header_id', 'mds_name', $$class->demand_source, '', '', 1, $readonly); ?></li>
-        <li><label>Status</label><?php echo form::status_field($$class->status, $readonly); ?> </li>
+        <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>    </li>
+        <li><?php $f->l_text_field_dm('mrp_name'); ?></li>
+        <li><?php $f->l_number_field_d('planning_horizon_days'); ?>    </li>
+        <li><?php $f->l_text_field_d('description'); ?></li>
+        <li><?php $f->l_select_field_from_object('demand_source', fp_mds_header::find_all(), 'fp_mds_header_id', 'mds_name', $$class->demand_source, '', '', 1, $readonly); ?></li>
+        <li><?php $f->l_status_field_d('status'); ?> </li>
        </ul>
       </div>
      </div>

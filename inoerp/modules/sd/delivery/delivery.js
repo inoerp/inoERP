@@ -101,7 +101,6 @@ setValFromSelectPage.prototype.setVal = function () {
  localStorage.removeItem("fieldClass");
  localStorage.removeItem("adding_header");
 
-
 };
 
 $(document).ready(function () {

@@ -382,4 +382,13 @@ require_once(INC_EXTENSIONS . DS . "site_search" . DS . "class_extn_site_search.
 
 require_once(INC_EXTENSIONS . DS . "test_case" . DS . "class_ext_test_case_header.inc");
 require_once(INC_EXTENSIONS . DS . "test_case" . DS . "class_ext_test_case_line.inc");
+
+ require_once __DIR__.'/../../locale/gettext.inc';
+$locale = (isset($_SESSION['lang'])) ? $_SESSION['lang'] : DEFAULT_LOCALE;
+$encoding = 'UTF-8';
+T_setlocale(LC_MESSAGES, $locale);
+$domain = 'messages';
+T_bindtextdomain($domain, LOCALE_DIR);
+T_bind_textdomain_codeset($domain, $encoding);
+T_textdomain($domain);
 ?>

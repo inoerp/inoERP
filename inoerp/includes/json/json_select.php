@@ -2,7 +2,6 @@
 <?php
 
 if (!empty($_GET['class_name'])) {
-
  $class = $class_names = $_GET['class_name'];
  $$class = new $class;
  $table_name = empty($table_name) ? $class::$table_name : $table_name;
@@ -10,7 +9,10 @@ if (!empty($_GET['class_name'])) {
  $pageno = !(empty($_GET['pageno'])) ? (int) $_GET['pageno'] : 1;
  $per_page = !(empty($_GET['per_page'])) ? (int) $_GET['per_page'] : 0;
 
- $_GET = get_postArray_From_jqSearializedArray($_GET['search_parameters']);
+ if(!empty($_GET['search_parameters'])){
+  $_GET = get_postArray_From_jqSearializedArray($_GET['search_parameters']);
+ }
+ 
  $_GET['pageno'] = $pageno;
  $_GET['class_name'] = $class;
  $_GET['per_page'] = $per_page;
@@ -128,6 +130,7 @@ if (!empty($_GET['class_name'])) {
    $all_download_sql = call_user_func(array($$class, $search_downloads), $_GET);
    if (!empty($per_page) && !empty($total_count)) {
     $pagination = new pagination($pageno, $per_page, $total_count);
+    $pagination->setProperty('_path', 'select');
     $pagination_statement = $pagination->show_pagination();
    }
   }
@@ -139,6 +142,7 @@ if (!empty($_GET['class_name'])) {
   $all_download_sql = call_user_func(array($$class, 'search_downloads'), $_GET);
   if (!empty($per_page) && !empty($total_count)) {
    $pagination = new pagination($pageno, $per_page, $total_count);
+   $pagination->setProperty('_path', 'select');
    $pagination_statement = $pagination->show_pagination();
   }
  } else {
@@ -207,17 +211,18 @@ if (!empty($_GET['class_name'])) {
     $all_download_sql .= ' ORDER BY ' . $search_order_by . ' ' . $search_asc_desc;
    }
   }
-echo $count_sql;
+
   $total_count = $class::count_all_by_sql($count_sql);
   $total_count_all = $class::count_all_by_sql($count_sql_all_records);
 
   if (!empty($per_page)) {
    $pagination = new pagination($pageno, $per_page, $total_count);
+   $pagination->setProperty('_path', 'select');
    $pagination_statement = $pagination->show_pagination();
    $sql .=" LIMIT {$per_page} ";
    $sql .=" OFFSET {$pagination->offset()}";
   }
-  echo "<br><br><br> sql is $sql";
+//  echo "<br><br><br> sql is $sql";
   $search_result = $class::find_by_sql($sql);
 //  pa($search_result);
  }
@@ -238,9 +243,9 @@ echo $count_sql;
  $s->setProperty('_per_page', $per_page);
  $s->setProperty('primary_column_s', $primary_column);
  $s->setProperty('column_array_s', $column_array);
- $search_result_statement = $search->search_result_op();
+ $select_result_statement = $search->select_result_op();
 
- include_once(__DIR__ . '/../template/json_search_template.inc');
+ include_once(__DIR__ . '/../template/json_select_template.inc');
  echo '</div>';
 }
 ?>

@@ -1172,7 +1172,9 @@ mandatoryFieldMain.prototype.mandatoryHeader = function ()
    var header_id_h = '#' + header_id;
    var header_id_c = '.' + header_id;
    if (!$(header_id_h).val()) {
-    alert('No header Id Found! : First enter/save header details');
+    if (confirm('Header data is not saved : Do you want to save the header')){
+     $('#save').trigger('click');
+    }
    } else {
     var headerIdVal = $(header_id_h).val();
     if (!$(this).find(header_id_c).val()) {

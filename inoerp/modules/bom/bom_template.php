@@ -1,56 +1,60 @@
+<!-- * 
+inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+-->
+
+
 <div id ="form_header">
- <form action=""  method="post" id="bom_header"  name="bom_header"><span class="heading">BOM Header </span>
+ <form action=""  method="post" id="bom_header"  name="bom_header">
+  <span class="heading"><?php echo gettext('BOM Header') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1">Basic Info</a></li>
-    <li><a href="#tabsHeader-2">Details</a></li>
-    <li><a href="#tabsHeader-3">Common BOM</a></li>
-    <li><a href="#tabsHeader-4">Notes</a></li>
-    <li><a href="#tabsHeader-5">Attachment</a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Details') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Common BOM') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
-      <ul class="column header_field">
-       <li><label>Org Name(1)</label><?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $bom_header->org_id, 'org_id', $readonly, '', ''); ?>       </li>
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_header_id select_popup clickable">
-         Item Number(2)</label><?php echo $f->hidden_field_withId('bom_header_id', $$class->bom_header_id); ?> 
-        <?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
-        <?php $f->text_field_dm('item_number', 'select_item_number_allowedBOM'); ?>
-       </li>
-       <li><label>Revision</label><?php echo $f->select_field_from_object('revision_name', $revision_name_a, 'revision_name', array('revision_name', 'effective_start_date'), $revision_name_val, 'revision_name', 'medium', '', '', '', '', '', 'effective_start_date'); ?>
-        <a name="show" href="form.php?class_name=bom_header&<?php echo "mode=$mode"; ?>" class="show2 document_id bom_header_withRev_id"><i class="fa fa-refresh"></i></a> 
-       </li>
-       <li><label>UOM</label><?php echo $f->select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom_id', 'uom_id'); ?>       </li>
-       <li><label>Description</label><?php $f->text_field_dr('item_description'); ?></li>
-      </ul>
-     </div>
+     <ul class="column header_field">
+      <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $bom_header->org_id, 'org_id', '', '', $readonly); ?>       </li>
+      <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_header_id select_popup clickable">
+        <?php echo gettext('Item Number') ?></label><?php echo $f->hidden_field_withId('bom_header_id', $$class->bom_header_id); ?> 
+       <?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
+       <?php $f->text_field_dm('item_number', 'select_item_number_allowedBOM'); ?>
+      </li>
+      <li><?php $f->l_select_field_from_object('revision_name', $revision_name_a, 'revision_name', array('revision_name', 'effective_start_date'), $revision_name_val, 'revision_name', 'medium', '', '', '', '', '', 'effective_start_date'); ?>
+       <a name="show" href="form.php?class_name=bom_header&<?php echo "mode=$mode"; ?>" class="show2 document_id bom_header_withRev_id"><i class="fa fa-refresh"></i></a> 
+      </li>
+      <li><?php $f->l_select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom_id', 'uom_id'); ?>       </li>
+      <li><?php $f->l_text_field_dr('item_description'); ?></li>
+     </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div> 
-      <ul class="column five_column">
-       <li><label>Alternate Bom : </label>  <?php echo $f->text_field_d('alternate_bom'); ?>   </li>
-       <li><label>Revision : </label>    <?php
+      <ul class="column header_field">
+       <li><?php $f->l_text_field_d('alternate_bom'); ?>   </li>
+       <li><label><?php echo gettext('Revision') ?></label><?php
         echo $f->text_field_ap(array('name' => 'bom_revision',
          'value' => $$class->bom_revision, 'readonly' => $readonly1));
         ?>     </li>
-       <li><label>Effective Date : </label>
-        <?php echo $f->date_fieldAnyDay_r('effective_date', $$class->effective_date, $readonly1); ?>
-       </li>
-       <li><label>BOM Header Id : </label>  <?php echo $f->text_field_dsr('bom_header_id'); ?>   </li>
+       <li><?php $f->l_date_fieldAnyDay_r('effective_date', $$class->effective_date); ?></li>
+       <li><?php $f->l_text_field_dr('bom_header_id'); ?>   </li>
       </ul>
      </div>
     </div>
     <div id="tabsHeader-3" class="tabContent">
      <div> 
-      <ul class="column five_column">
-       <li><label>Org Name : </label>
-        <?php echo $f->select_field_from_object('common_bom_org_id', org::find_all_inventory(), 'org_id', 'org', $$class->common_bom_org_id, 'common_bom_org_id', '', '', $readonly); ?>
-       </li>
-       <li><label>Item Number : </label>
-        <?php echo $f->hidden_field_withIdClass('common_bom_item_id_m', $$class->common_bom_item_id_m, 'item_id_m'); ?>
-        <?php $f->text_field_d('commonBom_item_number', 'select_item_number'); ?>  </li>
-       <li><label>Description: </label><?php $f->text_field_d('commonBom_item_description', 'item_description'); ?>  </li>
+      <ul class="column header_field">
+       <li><?php $f->l_select_field_from_object('common_bom_org_id', org::find_all_inventory(), 'org_id', 'org', $$class->common_bom_org_id, 'common_bom_org_id', '', '', $readonly); ?>       </li>
+       <li><?php $f->hidden_field_withIdClass('common_bom_item_id_m', $$class->common_bom_item_id_m, 'item_id_m'); ?>
+        <?php $f->l_text_field_dr('commonBom_item_number', 'select_item_number'); ?></li>
+       <li><?php $f->l_text_field_dr('commonBom_item_description', 'item_description'); ?></li>
       </ul>
      </div>
     </div>
@@ -78,40 +82,36 @@
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading">BOM Lines </span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('BOM Lines') ?></span>
  <form action=""  method="post" id="bom_line"  name="bom_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Main</a></li>
-    <li><a href="#tabsLine-2">Effectivity</a></li>
-    <li><a href="#tabsLine-3">Control</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Effectivity') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Control') ?> </a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th>BOM Line Id</th>
-        <th>BOM Sequence</th>
-        <th>Routing Sequence</th>
-        <th>Item Id</th>
-        <th>Item Number</th>
-        <th>Revision</th>
-        <th>Item Description</th>
-        <th>UOM</th>
-        <th>Usage Basis</th>
-        <th>Quantity</th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('BOM Line Id') ?></th>
+        <th><?php echo gettext('BOM Sequence') ?></th>
+        <th><?php echo gettext('Routing Seq') ?></th>
+        <th><?php echo gettext('Item Number') ?></th>
+        <th><?php echo gettext('Revision') ?></th>
+        <th><?php echo gettext('Item Description') ?></th>
+        <th><?php echo gettext('UOM') ?></th>
+        <th><?php echo gettext('Usage Basis') ?></th>
+        <th><?php echo gettext('Quantity') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
        $count = 0;
-       $f = new inoform();
-       foreach ($bom_line_object as $bom_line) {
-//							echo $count . ' is         : <pre>';
-//							print_r($bom_line);
-        ?>         
+      foreach ($bom_line_object as $bom_line) {
+                ?>         
         <tr class="bom_line<?php echo $count ?>">
          <td>
           <?php
@@ -122,9 +122,10 @@
          <td><?php form::text_field_wid2sr('bom_line_id'); ?></td>
          <td><?php $f->text_field_d2s('bom_sequence', 'lines_number'); ?></td>
          <td><?php echo!empty($routing_line_details) ? form::select_field_from_object('routing_sequence', $routing_line_details, 'bom_routing_line_id', 'routing_sequence', $$class_second->routing_sequence, '', $readonly, 'usage_basis', '', 1) : form::text_field_wid2sm('routing_sequence'); ?></td>
-         <td><?php $f->text_field_wid2sr('component_item_id_m', 'item_id_m'); ?></td>
-         <td><?php $f->text_field_wid2('component_item_number', 'select_item_number'); ?>
-          <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
+         <td><?php
+          $f->text_field_wid2('component_item_number', 'select_item_number');
+          $f->hidden_field_withCLass('component_item_id_m', $$class_second->component_item_id_m, 'item_id_m');
+          ?><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
          <td><?php
           if (!empty($$class_second->component_item_id_m) && !empty($$class->org_id)) {
            $revision_name_a = inv_item_revision::find_by_itemIdM_orgId($$class_second->component_item_id_m, $$class->org_id);
@@ -151,10 +152,10 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>ECO Number</th>
-        <th>ECO implemented</th>
+        <th><?php echo gettext('Start Date') ?></th>
+        <th><?php echo gettext('End Date') ?></th>
+        <th><?php echo gettext('ECO Number') ?></th>
+        <th><?php echo gettext('ECO implemented') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -182,12 +183,13 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Planning %</th>
-        <th>Yield</th>
-        <th>WIP Supply Type</th>
-        <th>Sub inventory</th>
-        <th>Locator</th>
-        <th>In cost rollup</th>
+        <th><?php echo gettext('Planning') ?>%</th>
+        <th><?php echo gettext('Yield') ?></th>
+        <th><?php echo gettext('WIP Supply Type') ?></th>
+        <th><?php echo gettext('Sub inventory') ?></th>
+        <th><?php echo gettext('Locator') ?></th>
+        <th><?php echo gettext('In cost Rollup') ?></th>
+
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

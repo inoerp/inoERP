@@ -44,6 +44,9 @@ setValFromSelectPage.prototype.setVal = function () {
 
  localStorage.removeItem("contact_field_class");
  localStorage.removeItem("row_class");
+  if(this.sd_opportunity_id){
+  $('a.show.sd_opportunity_id').trigger('click');
+ }
 };
 
 $(document).ready(function () {

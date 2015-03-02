@@ -324,14 +324,23 @@ ul.pages { padding-left: 2em; list-style: square; }
  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4f85bb', endColorstr='#cbea83',GradientType=0 ); /* IE6-9 */
 }
 
-#search_item, .search_box{
+
+#searchForm{
+ display: block;
+ float: left;
+ position: realtive;
+}
+
+
+#search_form_divID{
  clear : both;
  margin: 10px 20px 20px;
  border-radius: 5px 5px 5px 5px;
  float: left;
  text-align: left;
- padding: 5px 15px;
+ padding: 20px 15px;
  box-shadow: 1px 5px 10px 5px rgb(136, 136, 136);
+ background-color: rgba(40, 100, 40, 0.2);
 }
 
 #searchResultMessages ul.inline_list img{
@@ -1251,11 +1260,6 @@ li.action_btn label{
  padding-top: 10px;
 }
 
-#searchForm{
- display: block;
- float: left;
- position: realtive;
-}
 
 #searchResult{
  display: block;
@@ -1431,4 +1435,40 @@ input.multi_select_input{
 
 .small-left-padding{
  padding-left: 10px;
+}
+
+#pagination select.per_page{
+ width: 50px;
+}
+
+.show_loading_small_pagination{
+  display: none;      
+}
+
+.second_rowset{
+        display: block;
+        margin-top: 20px;
+}
+
+.big_popover .popover{
+ width: 900px !important;
+ max-width: 900px !important;
+}
+
+.big_popover .popover{
+box-shadow: 100px 200px 200px 100px rgba(33, 42, 39, 0.72);
+}
+
+
+.f-right{
+        float: right !important;
+}
+
+.large-text{
+        font-size: 2em;
+        font-weight: bold;
+}
+
+ul.add_new_search li, ul.tabMain li{
+        width: unset!important;
 }

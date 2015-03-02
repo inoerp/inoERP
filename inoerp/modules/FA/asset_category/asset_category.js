@@ -7,7 +7,9 @@ setValFromSelectPage.prototype.setVal = function () {
 
  if (fa_asset_category_id) {
   $("#fa_asset_category_id").val(fa_asset_category_id);
+  $("a.show.fa_asset_category_id").trigger('click');
  }
+ 
 };
 
 $(document).ready(function () {

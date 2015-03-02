@@ -24,7 +24,6 @@ inoERP
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field">
         <li><?php $f->l_text_field_dr_withSearch('po_header_id') ?>
          <a name="show" href="form.php?class_name=po_header&<?php echo "mode=$mode"; ?>" class="show document_id po_header_id"><i class="fa fa-refresh"></i></a> 
@@ -48,7 +47,6 @@ inoERP
         <li><?php $f->l_text_field_d('buyer'); ?></li> 
         <li><?php $f->l_text_field_d('description'); ?></li> 
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div> 

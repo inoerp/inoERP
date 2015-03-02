@@ -1,35 +1,44 @@
-<div id ="form_header"><span class="heading"> Resource Transaction </span>
+<!-- * 
+inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+-->
+
+<div id ="form_header"><span class="heading"><?php echo gettext('Resource Transaction') ?></span><?php $f = new inoform(); ?>
  <div id="tabsHeader">
   <ul class="tabMain">
-   <li><a href="#tabsHeader-1">Basic Info</a></li>
-   <li><a href="#tabsHeader-2">Other Details</a></li>
+   <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+   <li><a href="#tabsHeader-2"><?php echo gettext('Other Details') ?></a></li>
   </ul>
   <div class="tabContainer"> 
    <div id="tabsHeader-1" class="tabContent">
     <div class="large_shadow_box"> 
      <ul class="column header_field">
-      <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="wip_wo_header_id select_popup clickable">
-        WO Header Id(1)</label><?php $f->text_field_dsr('wip_wo_header_id'); ?>
-       <a name="show" href="form.php?class_name=wip_resource_transaction&<?php echo "mode=$mode"; ?>" class="show document_id wip_resource_transaction_id">          <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+      <li><?php $f->l_text_field_dr_withSearch('wip_wo_header_id'); ?>
+       <a name="show" href="form.php?class_name=wip_resource_transaction&<?php echo "mode=$mode"; ?>" class="show document_id wip_resource_transaction_id">
+        <i class="fa fa-refresh"></i></a> 
       </li>
-      <li><label>WO Number</label><?php echo form::text_field_d('wo_number'); ?></li>
-      <li><label> Inventory Org</label><?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly, '', '', 1); ?>					 </li>
-      <li><label>Date(2)</label><?php echo form::date_fieldFromToday('transaction_date', ino_date($$class->transaction_date), 1, '', '', 1); ?>					 </li>
-      <li><label>Transaction Type</label><?php echo form::select_field_from_object('transaction_type', wip_resource_transaction::wip_transactions(), 'option_line_code', 'option_line_value', $$class->transaction_type, 'transaction_type', 1, '', '', 1); ?>					 </li> 
+      <li><?php $f->l_text_field_d('wo_number'); ?></li>
+      <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>       </li>
+      <li><?php $f->l_date_fieldFromToday_m('transaction_date', ($$class->transaction_date)); ?>       </li>
+      <li><?php $f->l_select_field_from_object('transaction_type', wip_move_transaction::wip_transactions(), 'option_line_code', 'option_line_value', $$class->transaction_type, 'transaction_type', '', 1, $readonly1); ?>       </li> 
      </ul>
     </div>
    </div>
    <div id="tabsHeader-2" class="tabContent">
     <div class="large_shadow_box"> 
      <ul class="column header_field"> 
-      <li><label>Item Id</label><?php form::text_field_drm('item_id_m'); ?></li>
-      <li><label>Item Number</label><?php form::text_field_dr('item_number'); ?></li>
-      <li><label>Description</label><?php form::text_field_widr('item_description'); ?></li>
-      <li><label>UOM</label><?php echo form::select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom'); ?>					 </li>
-      <li><label>Total Quantity</label><?php form::number_field_dr('total_quantity'); ?></li>
-      <li><label>Completed Quantity</label><?php form::number_field_wid2sr('completed_quantity'); ?></li>
-      <li><label>SO Number</label><?php echo form::text_field_dr('sales_order_header_id'); ?></li>               
-      <li><label>Line Number</label><?php echo form::text_field_dr('sales_order_line_id'); ?></li>
+      <li><?php $f->l_text_field_dr('item_id_m'); ?></li>
+      <li><?php $f->l_text_field_dr('item_number'); ?></li>
+      <li><?php $f->l_text_field_dr('item_description'); ?></li>
+      <li><?php $f->l_select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom_id', '', '', 1); ?> </li>
+      <li><?php $f->l_number_field_dr('total_quantity'); ?></li>
+      <li><?php $f->l_number_field('completed_quantity', $$class_second->completed_quantity); ?></li>
+      <li><?php $f->l_text_field_dr('sales_order_header_id'); ?></li>
+      <li><?php $f->l_text_field_dr('sales_order_line_id'); ?></li>
      </ul>
     </div>
    </div>
@@ -48,17 +57,17 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th>Routing Seq</th>
-        <th>Department</th>
-        <th>Resource Seq</th>
-        <th>Resource</th>
-        <th>Quantity</th>
-        <th>Required</th>
-        <th>Applied</th>
-        <th>Reason</th>
-        <th>Reference</th>
-        <th>Trnx Id</th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Routing Seq') ?></th>
+        <th><?php echo gettext('Department') ?></th>
+        <th><?php echo gettext('Resource Seq') ?></th>
+        <th><?php echo gettext('Resource') ?></th>
+        <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('Required') ?></th>
+        <th><?php echo gettext('Applied') ?></th>
+        <th><?php echo gettext('Reason') ?></th>
+        <th><?php echo gettext('Reference') ?></th>
+        <th><?php echo gettext('Trnx Id') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody wip_wo_routing_line_values" >
@@ -71,8 +80,8 @@
         <tr class="wip_resource_transaction<?php echo $detailCount ?>">
          <td>    
           <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+           <li class="add_row_img"><i class="fa fa-plus-circle"></i></li>
+           <li class="remove_row_img"><i class="fa fa-minus-circle-circle"></i></li>
            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($wip_wo_routing_line->wip_wo_routing_line_id); ?>"></li>           
            <li><?php echo form::hidden_field('wip_wo_header_id', $$class->wip_wo_header_id); ?></li>
            <li><?php echo form::hidden_field('org_id', $$class->org_id); ?></li>

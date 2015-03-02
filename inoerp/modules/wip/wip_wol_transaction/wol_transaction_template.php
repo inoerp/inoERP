@@ -1,32 +1,43 @@
+<!-- * 
+inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+-->
+
 <div id="wip_wol_transaction_divId">
- <?php echo (!empty($hidden_stmt)) ? $hidden_stmt : ""; ?> 
+ <?php echo (!empty($hidden_stmt)) ? $hidden_stmt : ""; ?>  <?php $f = new inoform(); ?>
  <!--    End of place for showing error messages-->
 
 
  <!--create empty form or a single id when search is not clicked and the id is referred from other page -->
- <div id ="form_header"> <span class="heading">Work Order Less Transaction </span> 
+ <div id ="form_header"> <span class="heading"><?php echo gettext('Work Order Less Transaction') ?></span> 
   <form action=""  method="post" id="wip_wol_transaction"  name="wip_wol_transaction">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Others</a></li>
-     <li><a href="#tabsHeader-3">Notes</a></li>
-     <li><a href="#tabsHeader-4">Attachment</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Others') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
       <div>
        <ul class="column header_field">
-        <li><label>WOL Id</label><?php echo $f->text_field_dsr('wip_wol_transaction_id'); ?>
-        <!--<a name="show" href="form.php?class_name=wip_wol_transaction&<?php echo "mode=$mode"; ?>" class="show document_id wip_wol_transaction_id">          <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a>--> 
+        <li><?php $f->l_text_field_dr_withSearch('wip_wol_transaction_id'); ?>
+         <a name="show" href="form.php?class_name=wip_wol_transaction&<?php echo "mode=$mode"; ?>" class="show document_id wip_wol_transaction_id">
+          <i class="fa fa-refresh"></i></a> 
         </li>
-        <li><label>Inventory Org</label><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>        </li>
+        <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>        </li>
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup clickable">
-          Item Number(2)</label><?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?><?php $f->text_field_dm('item_number', 'select_item_number'); ?>        </li>
-        <li><label>Revision</label><?php echo $f->select_field_from_object('revision_name', $revision_name_a, 'revision_name', 'revision_name', $$class->revision_name, 'revision_name', 'small'); ?>        </li>
-        <li><label>Quantity</label><?php form::number_field_dm('quantity'); ?></li>
-        <li><label>Transaction Type</label><?php echo $f->select_field_from_array('transaction_type_id', wip_wol_transaction::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1); ?>
-         <a name="show" href="form.php?class_name=wip_wol_transaction&<?php echo "mode=$mode"; ?>" class="show2 document_id wip_wol_transaction_id">          <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+          <?php echo gettext('Item Number') ?></label><?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?><?php $f->text_field_dm('item_number', 'select_item_number'); ?>        </li>
+        <li><?php $f->l_select_field_from_object('revision_name', $revision_name_a, 'revision_name', 'revision_name', $$class->revision_name, 'revision_name', 'small'); ?>        </li>
+        <li><?php $f->l_number_field_d('quantity'); ?></li>
+        <li><?php $f->l_select_field_from_array('transaction_type_id', wip_wol_transaction::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1); ?>
+         <a name="show" href="form.php?class_name=wip_wol_transaction&<?php echo "mode=$mode"; ?>" class="show2 document_id wip_wol_transaction_id">
+          <i class="fa fa-refresh"></i></a> 
         </li>
        </ul>
       </div>
@@ -34,29 +45,28 @@
      <div id="tabsHeader-2" class="tabContent">
       <div> 
        <ul class="column header_field">
-        <li><label>Description : </label><?php $f->text_field_dl('description'); ?></li>
-        <li><label>Accounting Group</label><?php echo $f->select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_orgId($$class->org_id), 'wip_accounting_group_id', 'wip_accounting_group', $$class->wip_accounting_group_id, 'wip_accounting_group_id', '', 1, 'readonly1'); ?>
-        <li><label>Completion Subinventory</label><?php echo $f->select_field_from_object('completion_sub_inventory', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->completion_sub_inventory, '', 'subinventory_id', '', $readonly); ?>        </li>
-        <li><label>Completion Locator</label><?php echo $f->select_field_from_object('completion_locator', locator::find_all_of_subinventory($$class->completion_sub_inventory), 'locator_id', 'locator', $$class->completion_locator, '', 'locator_id', '', $readonly); ?>        </li>
-        <li><label>Completion Date</label><?php echo form::date_fieldFromToday('completion_date', $$class->completion_date, 1) ?></li>
-        </li>
+        <li><?php $f->l_text_field_d('description'); ?></li>
+        <li><?php $f->l_select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_orgId($$class->org_id), 'wip_accounting_group_id', 'wip_accounting_group', $$class->wip_accounting_group_id, 'wip_accounting_group_id', '', 1, 'readonly1'); ?>
+        <li><?php $f->l_select_field_from_object('completion_sub_inventory', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->completion_sub_inventory, '', 'subinventory_id', '', $readonly); ?>        </li>
+        <li><?php $f->l_select_field_from_object('completion_locator', locator::find_all_of_subinventory($$class->completion_sub_inventory), 'locator_id', 'locator', $$class->completion_locator, '', 'locator_id', '', $readonly); ?>        </li>
+        <li><?php $f->l_date_fieldFromToday('completion_date', $$class->completion_date) ?></li>
        </ul>
       </div>
      </div>
      <div id="tabsHeader-3" class="tabContent">
-     <div id="comments">
-      <div id="comment_list">
-       <?php echo!(empty($comments)) ? $comments : ""; ?>
+      <div id="comments">
+       <div id="comment_list">
+        <?php echo!(empty($comments)) ? $comments : ""; ?>
+       </div>
+       <div id ="display_comment_form">
+        <?php
+        $reference_table = 'wip_wol_transaction';
+        $reference_id = $$class->wip_wol_transaction_id;
+        ?>
+       </div>
+       <div id="new_comment">
+       </div>
       </div>
-      <div id ="display_comment_form">
-       <?php
-       $reference_table = 'wip_wol_transaction';
-       $reference_id = $$class->wip_wol_transaction_id;
-       ?>
-      </div>
-      <div id="new_comment">
-      </div>
-     </div>
      </div>
      <div id="tabsHeader-4" class="tabContent">
       <div> <?php echo ino_attachement($file) ?> </div>
@@ -65,14 +75,14 @@
    </div>
   </form>
  </div>
- 
-  <div id ="form_line" class="form_line"><span class="heading">WOL Transaction Details </span>
+
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('WOL Transaction Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">General Info</a></li>
-    <li><a href="#tabsLine-2">Transfer Info</a></li>
-    <li><a href="#tabsLine-3">Reference Info</a></li>
-    <li><a href="#tabsLine-4">Lot & Serial </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('General Info') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Transfer Info') ?></a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Reference Info') ?></a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('Lot & Serial') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <form action=""  method="post" id="wip_wol_transaction_line"  name="wip_wol_transaction_line">
@@ -80,20 +90,18 @@
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Action</th>
-         <th>BOM Seq</th>
-         <th>Item Id</th>
-         <th>Item Number</th>
-         <th>Item Description</th>
-         <th>UOM</th>
-         <th>Quantity</th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('BOM Seq') ?></th>
+         <th><?php echo gettext('Item Id') ?></th>
+         <th><?php echo gettext('Item Number') ?></th>
+         <th><?php echo gettext('Item Description') ?></th>
+         <th><?php echo gettext('UOM') ?></th>
+         <th><?php echo gettext('Quantity') ?></th>
         </tr>
        </thead>
        <tbody class="wip_wol_transaction_values form_data_line_tbody">
         <?php
         $count = 0;
-        $f = new inoform();
-//        pa($wip_wo_bom_object);
         foreach ($wip_wo_bom_object as $wip_wo_bom) {
          if ($wip_wo_bom->component_item_id_m) {
           $item_i = item::find_by_id($wip_wo_bom->component_item_id_m);
@@ -102,26 +110,20 @@
          }
          ?> 
          <tr class="wip_wol_transaction_line<?php echo $count ?>">
-          <td>    
-           <ul class="inline_action">
-            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-            <li><input type="checkbox" name="line_id_cb" value="<?php echo!empty($$class_second->bom_sequence) ? $$class_second->bom_sequence : '' ?>">
-             <?php echo form::hidden_field('org_id', $$class->org_id); ?>
-             <?php echo form::hidden_field('wip_wol_transaction_id', $$class->wip_wol_transaction_id); ?>
-             <?php echo form::hidden_field('transaction_type_id', $$class->transaction_type_id); ?>
-             </li>     
-           </ul>
-          </td>
+          <td><?php
+           echo ino_inline_action($$class->bom_sequence, array('transaction_type_id' => $$class->transaction_type_id,
+            'wip_wol_transaction_id' => $$class->wip_wol_transaction_id, 'org_id' => $$class->org_id));
+           ?></td>
           <td><?php echo!empty($bom_sequence_stament) ? $bom_sequence_stament : form::text_field_wids('bom_sequence'); ?></td>
           <td><?php echo $f->text_field('item_id_m', $wip_wo_bom->component_item_id_m, '', '', 'item_id_m', '', 1); ?></td>
           <td><?php echo $f->text_field('component_item_number', $item_i->item_number, '20', '', 'select_item_number', '', $readonly); ?>
            <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
           <td><?php echo $f->text_field('component_description', $item_i->item_description, '20', '', 'item_description', '', $readonly); ?></td>
           <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $item_i->uom_id, '', 'uom_id', '', $readonly); ?></td>
-          <td><?php echo $f->number_field('quantity', $wip_wo_bom->usage_quantity,'','', 'final_quantity' ,1);
-                     echo $f->hidden_field('usage_quantity', $wip_wo_bom->usage_quantity);
-          ?></td>
+          <td><?php
+           echo $f->number_field('quantity', $wip_wo_bom->usage_quantity, '', '', 'final_quantity', 1);
+           echo $f->hidden_field('usage_quantity', $wip_wo_bom->usage_quantity);
+           ?></td>
          </tr>
          <?php
          $count = $count + 1;
@@ -134,10 +136,10 @@
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Onhand</th>
-         <th>Supply Type</th>
-         <th>Sub inventory</th>
-         <th>Locator</th>
+         <th><?php echo gettext('Onhand') ?></th>
+         <th><?php echo gettext('Supply Type') ?></th>
+         <th><?php echo gettext('Sub inventory') ?></th>
+         <th><?php echo gettext('Locator') ?></th>
         </tr>
        </thead>
        <tbody class="wip_wol_transaction_values form_data_line_tbody" >
@@ -163,13 +165,12 @@
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Document Type</th>
-         <th>Doc. Id</th>
-         <th>Ref Type</th>
-         <th>Ref Name</th>
-         <th>Ref Value</th>
-         <th>Ref Doc</th>
-         
+         <th><?php echo gettext('Document Type') ?></th>
+         <th><?php echo gettext('Doc. Id') ?></th>
+         <th><?php echo gettext('Ref Type') ?></th>
+         <th><?php echo gettext('Ref Name') ?></th>
+         <th><?php echo gettext('Ref Value') ?></th>
+         <th><?php echo gettext('Ref Doc') ?></th>
         </tr>
        </thead>
        <tbody class="wip_wol_transaction_values form_data_line_tbody" >
@@ -197,8 +198,8 @@
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Lot Numbers</th>
-         <th>Serial Numbers</th>
+         <th><?php echo gettext('Add Lot Numbers') ?></th>
+         <th><?php echo gettext('Add Serial Numbers') ?></th>
         </tr>
        </thead>
        <tbody class="wip_wol_transaction_values form_data_line_tbody" >
@@ -224,9 +225,9 @@
                 <table class="form form_detail_data_table detail">
                  <thead>
                   <tr>
-                   <th>Action</th>
-                   <th>Lot Number</th>
-                   <th>Quantity</th>
+                   <th><?php echo gettext('Action') ?></th>
+                   <th><?php echo gettext('Lot Number') ?></th>
+                   <th><?php echo gettext('Quantity') ?></th>
                   </tr>
                  </thead>
                  <tbody class="form_data_detail_tbody_ln">
@@ -298,8 +299,8 @@
                 <table class="form form_detail_data_table detail">
                  <thead>
                   <tr>
-                   <th>Action</th>
-                   <th>Serial Number</th>
+                   <th><?php echo gettext('Action') ?></th>
+                   <th><?php echo gettext('Serial Number') ?></th>
                   </tr>
                  </thead>
                  <tbody class="form_data_detail_tbody">

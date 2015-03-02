@@ -1,41 +1,41 @@
 <div id="form_all">
- <form action=""  method="post" id="fa_asset"  name="fa_asset"><span class="heading">Fixed Asset Details</span>
+ <form action=""  method="post" id="fa_asset"  name="fa_asset">
+  <span class="heading"><?php echo gettext('Fixed Asset Details') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic</a></li>
-     <li><a href="#tabsHeader-2">Tracking Info</a></li>
-     <li><a href="#tabsHeader-3">Attachments</a></li>
-     <li><a href="#tabsHeader-4">Note</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Tracking Info') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
       <ul class="column header_field">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="fa_asset_id select_popup clickable">
-         Asset Id</label><?php $f->text_field_dsr('fa_asset_id') ?>
-        <a name="show" href="form.php?class_name=fa_asset&<?php echo "mode=$mode"; ?>" class="show document_id fa_asset_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+       <li><?php $f->l_text_field_dr_withSearch('fa_asset_id') ?>
+        <a name="show" href="form.php?class_name=fa_asset&<?php echo "mode=$mode"; ?>" class="show document_id fa_asset_id">
+         <i class="fa fa-refresh"></i></a> 
        </li>
-       <li><label>Asset Number</label><?php $f->text_field_d('asset_number'); ?></li>
-       <li><label>Category</label><?php echo $f->select_field_from_object('fa_asset_category_id', fa_asset_category::find_all(), 'fa_asset_category_id', 'asset_category', $$class->fa_asset_category_id, 'fa_asset_category_id', '', 1); ?></li>
-       <li><label>Status</label><?php echo $f->select_field_from_array('status', fa_asset::$status_a, $$class->status, 'status'); ?></li>
-       <li><label>Units</label><?php $f->text_field_d('units'); ?></li>
-       <li><label>Type</label><?php 
-       echo $f->select_field_from_array('type',  fa_asset::$type_a,$$class->type,'','',1); ?></li>
-       <li><label>Parent Asset</label><?php $f->text_field_d('parent_asset_id'); ?></li>
-       <li><label>Description</label><?php $f->text_field_d('description'); ?></li>
+       <li><?php $f->l_text_field_d('asset_number'); ?></li>
+       <li><?php $f->l_select_field_from_object('fa_asset_category_id', fa_asset_category::find_all(), 'fa_asset_category_id', 'asset_category', $$class->fa_asset_category_id, 'fa_asset_category_id', '', 1); ?></li>
+       <li><?php $f->l_select_field_from_array('status', fa_asset::$status_a, $$class->status, 'status'); ?></li>
+       <li><?php $f->l_text_field_d('units'); ?></li>
+       <li><?php $f->l_select_field_from_array('type', fa_asset::$type_a, $$class->type, '', '', 1); ?></li>
+       <li><?php $f->l_text_field_d('parent_asset_id'); ?></li>
+       <li><?php $f->l_text_field_d('description'); ?></li>
       </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <ul class="column header_field">
-       <li><label>Tag Number</label><?php $f->text_field_d('tag_number'); ?></li>
-       <li><label>Serial</label><?php $f->text_field_d('serial_number'); ?></li>
-       <li><label>Key</label><?php $f->text_field_d('key_number'); ?></li>
-       <li><label>Manufacturer</label><?php $f->text_field_d('manufacturer'); ?></li>
-       <li><label>Model#</label><?php $f->text_field_d('model_number'); ?></li>
-       <li><label>Warranty#</label><?php $f->text_field_d('warrranty_number'); ?></li>
-       <li><label>Lease#</label><?php $f->text_field_d('lease_number'); ?></li>
+       <li><?php $f->l_text_field_d('tag_number'); ?></li>
+       <li><?php $f->l_text_field_d('serial_number'); ?></li>
+       <li><?php $f->l_text_field_d('key_number'); ?></li>
+       <li><?php $f->l_text_field_d('manufacturer'); ?></li>
+       <li>><?php $f->l_text_field_d('model_number'); ?></li>
+       <li><?php $f->l_text_field_d('warrranty_number'); ?></li>
+       <li><?php $f->l_text_field_d('lease_number'); ?></li>
        <li><label>Physical Inv?</label><?php echo $f->checkBox_field('physical_inventory_cb', $$class->physical_inventory_cb); ?></li>
-       <li><label>Rev Number</label><?php $f->text_field_d('rev_number'); ?></li>
+       <li><label>Rev Number</label><?php $f->l_text_field_d('rev_number'); ?></li>
       </ul>
      </div>
      <div id="tabsHeader-3" class="tabContent">
@@ -62,26 +62,25 @@
    </div>
   </div>
 
- <div id ="form_line" class="form_line"><span class="heading">Asset Line Details </span>
-  
-    <div id="tabsLine">
-   <ul class="tabMain">
-    <li><a href="#tabsLine-1">Assignments</a></li>
-    <li><a href="#tabsLine-2">Other Details</a></li>
- 
-   </ul>
-   <div class="tabContainer"> 
-    <div id="tabsLine-1" class="tabContent">
-<table class="form_table">
+  <div id ="form_line" class="form_line"><span class="heading">Asset Line Details </span>
+
+   <div id="tabsLine">
+    <ul class="tabMain">
+     <li><a href="#tabsLine-1"><?php echo gettext('Assignments') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Other Details') ?> </a></li>
+    </ul>
+    <div class="tabContainer"> 
+     <div id="tabsLine-1" class="tabContent">
+      <table class="form_table">
        <thead> 
         <tr>
-         <th>Action</th>
-         <th>Line Id</th>
-         <th>Units</th>
-         <th>Employee</th>
-         <th>Expense</th>
-         <th>Address</th>
-         <th>Description</th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Line Id') ?></th>
+         <th><?php echo gettext('Units') ?>#</th>
+         <th><?php echo gettext('Employee') ?></th>
+         <th><?php echo gettext('Expense') ?></th>
+         <th><?php echo gettext('Address') ?></th>
+         <th><?php echo gettext('Description') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody fa_asset_assignment_values" >
@@ -99,13 +98,10 @@
          }
          ?>         
          <tr class="fa_asset_assignment<?php echo $count ?>">
-          <td>    
-           <ul class="inline_action">
-            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($fa_asset_assignment->fa_asset_assignment_id); ?>"></li>           
-            <li><?php echo form::hidden_field('fa_asset_id', $$class->fa_asset_id); ?></li>
-           </ul>
+          <td>
+           <?php
+           echo ino_inline_action($fa_asset_assignment->fa_asset_assignment_id, array('fa_asset_id' => $$class->fa_asset_id));
+           ?>
           </td>
           <td><?php form::number_field_wid2sr('fa_asset_assignment_id'); ?></td>
           <td><?php echo $f->number_field('units', $$class_second->units, '', '', 'line_units'); ?></td>
@@ -127,9 +123,9 @@
         ?>
        </tbody>
       </table>
-     <!--end of tab1 div three_column-->
-    </div> 
-        <div id="tabsLine-2" class="tabContent">
+      <!--end of tab1 div three_column-->
+     </div> 
+     <div id="tabsLine-2" class="tabContent">
       <ul class='column four_column'>
        <li>
         <div class="btn-group row">
@@ -143,8 +139,8 @@
           <?php
           $ab = fa_asset_book::find_all();
           foreach ($ab as $ab_i) {
-           echo '<li><a href="form.php?mode=9&class_name=fa_asset_book_info&fa_asset_book_id=' . 
-            $ab_i->fa_asset_book_id . '&fa_asset_id='.$$class->fa_asset_id.'">' . $ab_i->asset_book_name . '</a></li>';
+           echo '<li><a href="form.php?mode=9&class_name=fa_asset_book_info&fa_asset_book_id=' .
+           $ab_i->fa_asset_book_id . '&fa_asset_id=' . $$class->fa_asset_id . '">' . $ab_i->asset_book_name . '</a></li>';
           }
           ?>
          </ul>
@@ -172,20 +168,20 @@
 
       </ul>
 
+     </div>
+
     </div>
+
 
    </div>
 
 
-  </div>
-  
-  
 
- </div> 
+  </div> 
  </form>
  <div id="pagination" style="clear: both;">
- <?php echo ($total_count > 9 ) ? $pagination->show_pagination() : ''; ?>
-</div>
+  <?php echo ($total_count > 9 ) ? $pagination->show_pagination() : ''; ?>
+ </div>
 </div>
 
 

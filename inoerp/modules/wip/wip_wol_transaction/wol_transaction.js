@@ -1,11 +1,12 @@
 function setValFromSelectPage(wip_wo_header_id, item_id_m, item_number, item_description,
-        uom_id, processing_lt) {
+        uom_id, processing_lt, wip_wol_transaction_id) {
  this.wip_wo_header_id = wip_wo_header_id;
  this.item_id_m = item_id_m;
  this.item_number = item_number;
  this.item_description = item_description;
  this.uom_id = uom_id;
  this.processing_lt = processing_lt;
+ this.wip_wol_transaction_id = wip_wol_transaction_id;
 }
 
 setValFromSelectPage.prototype.setVal = function () {
@@ -50,6 +51,10 @@ setValFromSelectPage.prototype.setVal = function () {
  localStorage.removeItem("field_class");
  localStorage.removeItem("li_divId");
  localStorage.removeItem("itemType");
+ if(this.wip_wol_transaction_id){
+  $('#wip_wol_transaction_id').val(this.wip_wol_transaction_id);
+  $('#wip_wol_transaction_id').trigger('click');
+ }
 };
 
 
@@ -332,7 +337,14 @@ var complQty =  $(this).val();
     }
   });
   
-})
+});
+
+ $('body').off("click", '.wip_wol_transaction_id.select_popup').on("click", '.wip_wol_transaction_id.select_popup', function() {
+	localStorage.idValue = "";
+	var link = 'select.php?class_name=wip_wol_transaction';
+	void window.open(link, '_blank',
+					'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
 
 });
 

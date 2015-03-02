@@ -1,46 +1,50 @@
+<!-- * 
+inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+-->
+
 <div id ="form_header">
- <form action=""  method="post" id="bom_resource"  name="bom_resource"><span class="heading">Resources</span>
+ <form action=""  method="post" id="bom_resource"  name="bom_resource">
+  <span class="heading"><?php echo gettext('Resources') ?>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1">Basic Info</a></li>
-    <li><a href="#tabsHeader-2">Costing</a></li>
-    <li><a href="#tabsHeader-3">OSP</a></li>
-    <li><a href="#tabsHeader-4">Employee</a></li>
-    <li><a href="#tabsHeader-5">Equipment</a></li>
-    <li><a href="#tabsHeader-6">Attachments</a></li>
-    <li><a href="#tabsHeader-7">Notes</a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Costing') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('OSP') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Employee') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Equipment') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-7"><?php echo gettext('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <div class="large_shadow_box">
       <ul class="column header_field">
-       <li>
-        <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_resource_id select_popup clickable">
-         Resource Id</label><?php $f->text_field_dsr('bom_resource_id'); ?>
+       <li><?php $f->l_text_field_dr_withSearch('bom_resource_id'); ?>
         <a name="show" href="form.php?class_name=bom_resource&<?php echo "mode=$mode"; ?>" class="show document_id bom_resource_id"><i class="fa fa-refresh"></i></a> 
        </li>
-       <li><label>Inventory</label><?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1); ?>      </li>
-       <li><label>Resource</label><?php echo form::text_field_d('resource'); ?> </li>
-       <li><label>Description</label><?php echo form::text_field_d('description'); ?></li>
-       <li><label>Resource Type</label><?php echo $f->select_field_from_object('resource_type', bom_resource::resource_type(), 'option_line_code', 'option_line_code', $$class->resource_type, '', '', 1, $readonly1); ?>       </li>
-       <li><label>Charge Type</label><?php echo $f->select_field_from_object('charge_type', bom_resource::charge_type(), 'option_line_code', 'option_line_code', $$class->charge_type, '', '', 1, $readonly); ?>       </li> 
-       <li><label>UOM</label><?php echo $f->select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom', '', 1, $readonly1); ?>       </li>
-       <li><label>Status</label><?php echo form::status_field($$class->status, $readonly); ?></li>
+       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', '', $readonly1); ?>      </li>
+       <li><?php $f->l_text_field_d('resource'); ?> </li>
+       <li><?php $f->l_text_field_d('description'); ?></li>
+       <li><?php $f->l_select_field_from_object('resource_type', bom_resource::resource_type(), 'option_line_code', 'option_line_code', $$class->resource_type, '', '', 1, $readonly1); ?>       </li>
+       <li><?php $f->l_select_field_from_object('charge_type', bom_resource::charge_type(), 'option_line_code', 'option_line_code', $$class->charge_type, '', '', 1, $readonly); ?>       </li> 
+       <li><?php $f->l_select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom', '', 1, $readonly1); ?>       </li>
+       <li><?php $f->l_status_field_d('status'); ?></li>
       </ul>
      </div>
     </div>
 
     <div id="tabsHeader-2" class="tabContent">
      <div class="large_shadow_box">
-      <ul class="column four_column"> 
-       <li><label>Costed : </label>
-        <?php echo form::checkBox_field('costed_cb', $$class->costed_cb, 'costed_cb', $readonly); ?>
-       </li>
-       <li><label>Absorption Ac: </label><?php $f->ac_field_d('absorption_ac_id'); ?></li>
-       <li><label>Variance Ac: </label><?php $f->ac_field_d('variance_ac_id'); ?></li>
-       <li><label>Standard Rate : </label>
-        <?php echo form::checkBox_field('standard_rate_cb', $$class->standard_rate_cb, 'standard_rate_cb', $readonly); ?>
-       </li>
+      <ul class="column header_field"> 
+       <li><?php $f->l_checkBox_field_d('costed_cb'); ?>       </li>
+       <li><?php $f->l_ac_field_d('absorption_ac_id'); ?></li>
+       <li><?php $f->l_ac_field_d('variance_ac_id'); ?></li>
+       <li><?php $f->l_checkBox_field_d('standard_rate_cb'); ?>       </li>
       </ul>
      </div>
     </div>
@@ -48,15 +52,13 @@
     <div id="tabsHeader-3" class="tabContent">
      <div class="large_shadow_box">
       <ul class="column five_column"> 
-       <li><label>OSP Resource : </label> 
-        <?php echo form::checkBox_field('osp_cb', $$class->osp_cb, '', $readonly); ?>
-       </li>
-       <li><label>Item Id : </label><?php $f->text_field_wids('osp_item_id', 'item_id'); ?></li>
-       <li><label>Item Number : </label>
+       <li><?php $f->l_checkBox_field_d('osp_cb'); ?> </li>
+       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup">
+         <?php echo gettext('Item Number') ?></label>
         <?php $f->text_field_wid('osp_item_number', 'select_item_number'); ?>
-        <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup">
+        <?php $f->hidden_field_withId('osp_item_id', $$class->osp_item_id); ?>
        </li>
-       <li><label>Description: </label><?php $f->text_field_wid('osp_item_description', 'item_description'); ?></li>
+       <li><?php $f->l_text_field_d('osp_item_description', 'item_description'); ?></li>
       </ul>
      </div>
     </div>
@@ -105,12 +107,12 @@
     <table class="form_line_data_table">
      <thead> 
       <tr>
-       <th>Action</th>
-       <th>Seq#</th>
-       <th>Resource Cost Id</th>
-       <th>Cost Type</th>
-       <th>Description</th>
-       <th>Rate</th>
+       <th><?php echo gettext('Action') ?></th>
+       <th><?php echo gettext('Seq') ?>#</th>
+       <th><?php echo gettext('Resource Cost Id') ?>#</th>
+       <th><?php echo gettext('Cost Type') ?></th>
+       <th><?php echo gettext('Description') ?>#</th>
+       <th><?php echo gettext('Rate') ?>#</th>
       </tr>
      </thead>
      <tbody class="form_data_line_tbody">

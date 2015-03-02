@@ -1,32 +1,40 @@
-<form action=""  method="post" id="wip_move_transaction"  name="wip_move_transaction"><span class="heading"> WIP Move Transaction </span>
+<!-- * 
+inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+-->
+<form action=""  method="post" id="wip_move_transaction"  name="wip_move_transaction">
+ <span class="heading"><?php echo gettext('WIP Move Transaction') ?></span>
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1">Basic Info</a></li>
-    <li><a href="#tabsHeader-2">Tracking</a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Tracking') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
      <div class="large_shadow_box"> 
-      <ul class="column four_column">
-       <li>
-        <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="wip_wo_header_id select_popup clickable">
-         WO Header Id(1)</label><?php echo $f->text_field_dsr('wip_wo_header_id'); ?>
-        <a name="show" href="form.php?class_name=wip_move_transaction&<?php echo "mode=$mode"; ?>" class="show document_id wip_wo_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+      <ul class="column header_field">
+       <li><?php $f->l_text_field_dr_withSearch('wip_wo_header_id'); ?>
+        <a name="show" href="form.php?class_name=wip_move_transaction&<?php echo "mode=$mode"; ?>" class="show document_id wip_wo_header_id">
+         <i class="fa fa-refresh"></i></a> 
        </li>
-       <li><label>WO Number</label><?php echo form::text_field_d('wo_number'); ?></li>
-       <li><label>Inventory Org</label><?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly, '', '', 1); ?>       </li>
-       <li><label>Date(2)</label><?php echo $f->text_field('transaction_date', ($$class->transaction_date), '', '', 'dateTime'); ?>       </li>
-       <li><label>Transaction Type</label><?php echo form::select_field_from_object('transaction_type', wip_move_transaction::wip_transactions(), 'option_line_code', 'option_line_value', $$class->transaction_type, 'transaction_type', $readonly, '', '', 1); ?>       </li> 
-       <li><label>Move Transaction Id</label><?php echo form::text_field_dsr('wip_move_transaction_id'); ?></li>
+       <li><?php $f->l_text_field_d('wo_number'); ?></li>
+       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>       </li>
+       <li><?php $f->l_date_fieldFromToday_m('transaction_date', ($$class->transaction_date)); ?>       </li>
+       <li><?php $f->l_select_field_from_object('transaction_type', wip_move_transaction::wip_transactions(), 'option_line_code', 'option_line_value', $$class->transaction_type, 'transaction_type', '', 1, $readonly1); ?>       </li> 
+       <li><?php $f->l_text_field_dr('wip_move_transaction_id'); ?></li>
       </ul>
      </div>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div class="large_shadow_box"> 
-      <ul class="column five_column">
-       <li><label>SO Number : </label><?php echo form::text_field_d('sales_order_header_id'); ?></li>               
-       <li><label>Line Number : </label><?php echo form::text_field_d('sales_order_line_id'); ?></li>
+      <ul class="column header_field">
+       <li><?php $f->l_text_field_d('sales_order_header_id'); ?></li>               
+       <li><?php $f->l_text_field_d('sales_order_line_id'); ?></li>
       </ul>
      </div>
     </div>
@@ -36,49 +44,34 @@
  <div id ="form_line" class="form_line"><span class="heading"> Operation Details </span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Operation</a></li>
-    <li><a href="#tabsLine-2">Scrap</a></li>
-    <li><a href="#tabsLine-3">BOM (View Only)</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Operation') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Scrap') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('BOM (View Only)') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">
      <div class="first_rowset"> 
-      <ul class="column six_column"> 
-       <li><label>Item Id : </label>
-        <?php form::text_field_drm('item_id_m'); ?>
-       </li>
-       <li><label>Item Number : </label>
-        <?php form::text_field_dr('item_number'); ?>
-       </li>
-       <li><label>Description: </label>
-        <?php form::text_field_widr('item_description'); ?>
-       </li>
-       <li><label>UOM : </label>
-        <?php echo $f->select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom_id', 'uom_id'); ?>
-       </li>
-       <li><label>Total Quantity : </label>
-        <?php form::number_field_dr('total_quantity'); ?>
-       </li>
-       <li><label>Completed Quantity : </label>
-        <?php form::number_field_wid2s('completed_quantity'); ?>
-       </li>
-
+      <ul class="column header_field"> 
+       <li><?php $f->l_text_field_dr('item_id_m'); ?></li>
+       <li><?php $f->l_text_field_dr('item_number'); ?></li>
+       <li><?php $f->l_text_field_dr('item_description'); ?></li>
+       <li><?php $f->l_select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom_id', '', '', 1); ?> </li>
+       <li><?php $f->l_number_field_dr('total_quantity'); ?></li>
+       <li><?php $f->l_number_field('completed_quantity', $$class_second->completed_quantity); ?></li>
       </ul>
-     </div>
-     <div class="second_rowset"><span class="heading">Quantity Status</span>
+      <span class="heading"><?php echo gettext('Quantity Status') ?></span>
 
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Sequence</th>
-         <th>Department</th>
-         <th>Description</th>
-         <th>Queue</th>
-         <th>Running</th>
-         <th>Rejected</th>
-         <th>Scrapped</th>
-         <th>To Move</th>
-
+         <th><?php echo gettext('Sequence') ?></th>
+         <th><?php echo gettext('Department') ?></th>
+         <th><?php echo gettext('Description') ?></th>
+         <th><?php echo gettext('Queue') ?></th>
+         <th><?php echo gettext('Running') ?></th>
+         <th><?php echo gettext('Rejected') ?></th>
+         <th><?php echo gettext('Scrapped') ?></th>
+         <th><?php echo gettext('To Move') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody wip_wo_routing_line_values" >
@@ -95,7 +88,6 @@
           <td><?php form::number_field_wid2sr('rejected_quantity'); ?></td>
           <td><?php form::number_field_wid2sr('scrapped_quantity'); ?></td>
           <td><?php form::number_field_wid2sr('tomove_quantity'); ?></td>
-
          </tr>
          <?php
          $count = $count + 1;
@@ -103,37 +95,49 @@
         ?>
        </tbody>
       </table>
-
      </div>
-     <ul class="column six_column"> 
-      <li><label>From Seq : </label>
-       <?php echo!empty($routing_line_details) ? form::select_field_from_object('from_routing_sequence', $routing_line_details, 'routing_sequence', 'routing_sequence', $$class->from_routing_sequence, 'from_routing_sequence', $readonly, '', '', 1) : form::text_field_ds('from_routing_sequence'); ?>
-      </li>
-      <li><label>From Step : </label>
-       <?php echo form::select_field_from_object('from_operation_step', bom_routing_header::wip_move_step(), 'option_line_code', 'option_line_value', $$class->from_operation_step, 'from_operation_step', $readonly, '', '', 1); ?>
-      </li>
-      <li><label>Available Qty: </label>
-       <?php form::number_field_drs('available_quantity'); ?>
-      </li>
-      <li><label>Move Qty: </label>
-       <?php form::number_field_dm('move_quantity'); ?>
-      </li>
-      <li><label>To Seq : </label>
-       <?php echo!empty($routing_line_details) ? form::select_field_from_object('to_routing_sequence', $routing_line_details, 'routing_sequence', 'routing_sequence', $$class->to_routing_sequence, 'to_routing_sequence', $readonly, '', '', 1) : form::text_field_ds('from_routing_sequence'); ?>
-      </li>
-      <li><label>To Step : </label>
-       <?php echo form::select_field_from_object('to_operation_step', bom_routing_header::wip_move_step(), 'option_line_code', 'option_line_value', $$class->to_operation_step, 'to_operation_step', $readonly, '', '', 1); ?>
-      </li>
-     </ul>
+     <div class="second_rowset">
+
+      <div class="panel panel-success">
+       <div class="panel-heading">
+        <h3 class="panel-title">Move Material</h3>
+       </div>
+       <div class="panel-body">
+        <ul class="column header_field"> 
+         <li><label><?php echo gettext('From Seq') ?></label>
+          <?php echo!empty($routing_line_details) ? form::select_field_from_object('from_routing_sequence', $routing_line_details, 'routing_sequence', 'routing_sequence', $$class->from_routing_sequence, 'from_routing_sequence', $readonly, '', '', 1) : form::text_field_ds('from_routing_sequence'); ?>
+         </li>
+         <li><label><?php echo gettext('To Seq') ?></label>
+          <?php echo!empty($routing_line_details) ? form::select_field_from_object('to_routing_sequence', $routing_line_details, 'routing_sequence', 'routing_sequence', $$class->to_routing_sequence, 'to_routing_sequence', $readonly, '', '', 1) : form::text_field_ds('from_routing_sequence'); ?>
+         </li>
+         <li><label><?php echo gettext('Available Qty') ?></label>
+          <?php form::number_field_drs('available_quantity'); ?>
+         </li>
+         <li><label><?php echo gettext('From Step') ?> </label>
+          <?php echo form::select_field_from_object('from_operation_step', bom_routing_header::wip_move_step(), 'option_line_code', 'option_line_value', $$class->from_operation_step, 'from_operation_step', $readonly, '', '', 1); ?>
+         </li>
+         <li><label><?php echo gettext('To Step') ?></label>
+          <?php echo form::select_field_from_object('to_operation_step', bom_routing_header::wip_move_step(), 'option_line_code', 'option_line_value', $$class->to_operation_step, 'to_operation_step', $readonly, '', '', 1); ?>
+         </li>
+
+         <li><label><?php echo gettext('Move Qty') ?></label>
+          <?php form::number_field_dm('move_quantity'); ?>
+         </li>
+
+
+        </ul>
+       </div>
+      </div>
+     </div>
      <!--end of tab1 div three_column-->
     </div> 
     <!--end of tab1-->
     <div id="tabsLine-2" class="tabContent">
      <div class="first_rowset"> 
-      <ul class="column five_column"> 
-       <li><label>Reason : </label> <?php form::text_field_d('reason'); ?>  </li>
-       <li><label>Reference : </label> <?php form::text_field_d('reference'); ?> </li>
-       <li><label>Scrap Ac: </label><?php echo $f->ac_field_d('scrap_account_id'); ?></li>
+      <ul class="column header_field"> 
+       <li><?php $f->l_text_field_d('reason'); ?></li>
+       <li><?php $f->l_text_field_d('reference'); ?></li>
+       <li><?php $f->l_ac_field_d('scrap_account_id'); ?></li>
       </ul>
      </div>
      <div class="second_rowset">
@@ -146,16 +150,16 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>BOM Seq</th>
-        <th>Item Number</th>
-        <th>Item Desc</th>
-        <th>Serial Generation</th>
-        <th>Quantity</th>
-        <th>Required</th>
-        <th>Issued</th>
-        <th>Supply Type</th>
-        <th>Sub inventory</th>
-        <th>Locator</th>
+        <th><?php echo gettext('BOM Sequence') ?></th>
+        <th><?php echo gettext('Item Number') ?></th>
+        <th><?php echo gettext('Item Description') ?></th>
+        <th><?php echo gettext('Serial Generation') ?></th>
+        <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('Required') ?></th>
+        <th><?php echo gettext('Issued') ?></th>
+        <th><?php echo gettext('Supply Type') ?></th>
+        <th><?php echo gettext('Sub inventory') ?></th>
+        <th><?php echo gettext('Locator') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody2 wip_wo_bom_values" >
@@ -176,7 +180,6 @@
          <td><?php echo $f->select_field_from_object('wip_supply_type', bom_header::wip_supply_type(), 'option_line_code', 'option_line_value', $$class_third->wip_supply_type, '', 'wip_supply_type', '', 1); ?></td>
          <td><?php echo $f->select_field_from_object('supply_sub_inventory', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_third->supply_sub_inventory, '', 'subinventory_id', '', 1); ?></td>
          <td><?php echo $f->select_field_from_object('supply_locator', locator::find_all_of_subinventory($$class_third->supply_sub_inventory), 'locator_id', 'locator', $$class_third->supply_locator, '', 'locator_id', '', 1); ?></td>
-
         </tr>
         <?php
         $count = $count + 1;

@@ -13,13 +13,20 @@ setValFromSelectPage.prototype.setVal = function() {
   if(standard_operation){
 	$("#standard_operation").val(standard_operation);
  }
+     if (this.bom_standard_operation_id) {
+  $('a.show.bom_standard_operation_id').trigger('click');
+ }
 };
 
 $(document).ready(function() {
+  var mandatoryCheck = new mandatoryFieldMain();
+ mandatoryCheck.header_id = 'bom_standard_operation_id';
+ mandatoryCheck.mandatoryHeader();
+ 
  //selecting data
  $(".bom_standard_operation_id.select_popup").on("click", function() {
 		void window.open('select.php?class_name=bom_standard_operation', '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+					'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
 deleteData('form.php?class_name=bom_standard_operation&line_class_name=bom_standard_operation_resource_assignment');

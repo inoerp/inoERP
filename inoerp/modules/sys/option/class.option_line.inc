@@ -79,8 +79,8 @@ class option_line extends dbObject {
  }
 
  public static function find_by_option_id($id) {
-  $ol = new option_line();
-  return $ol->findBy_parentId($id);
+//  $ol = new option_line();
+ return option_line::find_by_parent_id($id);
  }
 
  public static function find_by_optionId_lineCode($option_id, $line_code) {

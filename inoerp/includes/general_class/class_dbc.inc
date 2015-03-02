@@ -80,6 +80,23 @@ class dbc {
 	}
  }
 
+ 
+ public static function dbs() {
+    static $conn;
+    if (!isset($conn)) {
+        try {
+//            $conn = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USERNAME, DB_PASSWORD, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+            $conn = new PDO('mysql:host=' . DB_SERVER . '; dbname=' . DB_NAME . ';charset=utf8', DB_USER, DB_PASS);
+        }
+        catch(PDOException $ex){
+            	 print "Data Base Connection Error!: <br> Modify the database settings @ includes/basics/dbsettings.inc file & reload the page"
+   . "<br>" . $e->getMessage() . "<br/>";
+	 die();
+        }
+    }
+    return $conn;
+}
+
  public function close_connection() {
 	$this->connection = null;
  }

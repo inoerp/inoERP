@@ -15,6 +15,9 @@ setValFromSelectPage.prototype.setVal = function() {
 	$('#content').find(fieldClass).val(combination);
 	localStorage.removeItem("field_class");
  }
+  if (this.sd_quote_header_id) {
+  $('a.show.sd_quote_header_id').trigger('click');
+ }
 };
 
 //get Document Type Details

@@ -23,6 +23,9 @@ setValFromSelectPage.prototype.setVal = function () {
    $('#content').find(fieldId).val(value.data);
   }
  });
+   if (this.cst_item_cost_header_id) {
+  $('a.show.cst_item_cost_header_id').trigger('click');
+ }
 };
 
 function getCostElement(json_url, cost_element_type, row_class) {
@@ -93,7 +96,7 @@ $(document).ready(function () {
  $(".cst_item_cost_header_id.select_popup").on("click", function () {
   var link = 'select.php?class_name=cst_item_cost_header';
   void window.open(link, '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
 

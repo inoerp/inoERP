@@ -1,6 +1,5 @@
 function setValFromSelectPage(sd_quote_header_id, combination, ar_customer_id, customer_number, customer_name,
-        item_id_m, item_number, item_description, uom_id, address_id, address_name, address,
-        country, postal_code, hr_employee_id, first_name, last_name) {
+        item_id_m, item_number, item_description, uom_id, address_id, address_name, hr_employee_id, first_name, last_name) {
  this.sd_quote_header_id = sd_quote_header_id;
  this.combination = combination;
  this.ar_customer_id = ar_customer_id;
@@ -12,9 +11,6 @@ function setValFromSelectPage(sd_quote_header_id, combination, ar_customer_id, c
  this.uom_id = uom_id;
  this.address_id = address_id;
  this.address_name = address_name;
- this.address = address;
- this.country = country;
- this.postal_code = postal_code;
  this.hr_empoyee_id = hr_employee_id;
  this.first_name = first_name;
  this.last_name = last_name;
@@ -32,33 +28,20 @@ setValFromSelectPage.prototype.setVal = function () {
  var uom_id = this.uom_id;
  var address_id = this.address_id;
  var address_name = this.address_name;
- var address = this.address;
- var country = this.country;
- var postal_code = this.postal_code;
- 
-  if(this.first_name){
- var name = this.first_name + ' ' + this.last_name;
-}
+
+ if (this.first_name) {
+  var name = this.first_name + ' ' + this.last_name;
+ }
 
  var rowClass = '.' + localStorage.getItem("row_class");
+ rowClass = rowClass.replace(/\s+/g, '.');
  var fieldClass = '.' + localStorage.getItem("field_class");
- var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass");
- addressPopupDivClass = addressPopupDivClass.replace(/\s+/g, '.');
- if (address_id) {
-  $('#form_header').find(addressPopupDivClass).find('.address_id').val(address_id);
+ fieldClass = fieldClass.replace(/\s+/g, '.');
+ if (this.address_name) {
+  $('body').find(fieldClass).parent().find('.address_name').val(this.address_name);
+  $('body').find(fieldClass).val(this.address_id);
  }
- if (address_name) {
-  $('#form_header').find(addressPopupDivClass).find('.address_name').val(address_name);
- }
- if (address) {
-  $('#form_header').find(addressPopupDivClass).find('.address').val(address);
- }
- if (country) {
-  $('#form_header').find(addressPopupDivClass).find('.country').val(country);
- }
- if (postal_code) {
-  $('#form_header').find(addressPopupDivClass).find('.postal_code').val(postal_code);
- }
+
  if (sd_quote_header_id) {
   $("#sd_quote_header_id").val(sd_quote_header_id);
  }
@@ -88,7 +71,7 @@ setValFromSelectPage.prototype.setVal = function () {
  if (uom_id) {
   $('#content').find(rowClass).find('.uom_id').val(uom_id);
  }
- 
+
  if (this.hr_employee_id) {
   $("#sales_person_employee_id").val(this.hr_employee_id);
  }
@@ -99,25 +82,27 @@ setValFromSelectPage.prototype.setVal = function () {
  localStorage.removeItem("row_class");
  localStorage.removeItem("field_class");
  localStorage.removeItem("addressPopupDivId");
-
+ if (this.sd_quote_header_id) {
+  $('a.show.sd_quote_header_id').trigger('click');
+ }
 };
 
- //context menu
- function beforeContextMenu() {
-  $('.line_status').val('');
-  $('.picked_quantity').val('');
-  $('.shipped_quantity').val('');
-  $('.schedule_ship_date').val('');
-  $('#quote_number').val('');
-  return true;
- }
+//context menu
+function beforeContextMenu() {
+ $('.line_status').val('');
+ $('.picked_quantity').val('');
+ $('.shipped_quantity').val('');
+ $('.schedule_ship_date').val('');
+ $('#quote_number').val('');
+ return true;
+}
 
 
 $(document).ready(function () {
 //mandatory and field sequence
  var mandatoryCheck = new mandatoryFieldMain();
  mandatoryCheck.header_id = 'quote_header_id';
-// mandatoryCheck.mandatoryHeader();
+ mandatoryCheck.mandatoryHeader();
  mandatoryCheck.form_area = 'form_header';
  mandatoryCheck.mandatory_fields = ["bu_org_id", "quote_type"];
  mandatoryCheck.mandatory_messages = ["First Select BU Org", "No PO Type"];
@@ -166,75 +151,75 @@ $(document).ready(function () {
 //price from price list
  $('#content').off('change', '.item_id_m, .item_number, .price_list_header_id, .price_date')
          .on('change', '.item_id_m, .item_number, .price_list_header_id, .price_date', function () {
-  var rowClass = '.' + $(this).closest('tr').prop('class');
-  var item_id_m = $(this).closest('.tabContainer').find(rowClass).find('.item_id_m').val();
-  var price_date = $(this).closest('.tabContainer').find(rowClass).find('.price_date').val();
-  var price_list_header_id = $(this).closest('#form_line').find(rowClass).find('.price_list_headerId').val();
-  getPriceDetails({
-   rowClass: rowClass,
-   item_id_m: item_id_m,
-   price_date: price_date,
-   price_list_header_id: price_list_header_id});
- });
+          var rowClass = '.' + $(this).closest('tr').prop('class');
+          var item_id_m = $(this).closest('.tabContainer').find(rowClass).find('.item_id_m').val();
+          var price_date = $(this).closest('.tabContainer').find(rowClass).find('.price_date').val();
+          var price_list_header_id = $(this).closest('#form_line').find(rowClass).find('.price_list_headerId').val();
+          getPriceDetails({
+           rowClass: rowClass,
+           item_id_m: item_id_m,
+           price_date: price_date,
+           price_list_header_id: price_list_header_id});
+         });
 
 //set the line price
  $('#content').off('blur', '.unit_price,.line_quantity')
          .on('blur', '.unit_price,.line_quantity', function () {
-  var trClass = '.' + $(this).closest('tr').attr('class');
-  var unitPrice = +($(this).closest('#form_line').find(trClass).find('.unit_price').val());
-  var lineQuantity = +($(this).closest('#form_line').find(trClass).find('.line_quantity').val());
-  var linePrice = unitPrice * lineQuantity;
-  $(this).closest('tr').find('.line_price').val(linePrice);
- });
+          var trClass = '.' + $(this).closest('tr').attr('class');
+          var unitPrice = +($(this).closest('#form_line').find(trClass).find('.unit_price').val());
+          var lineQuantity = +($(this).closest('#form_line').find(trClass).find('.line_quantity').val());
+          var linePrice = unitPrice * lineQuantity;
+          $(this).closest('tr').find('.line_price').val(linePrice);
+         });
 
 //calculate the tax amount
  $('#content').off('blur', '.line_quantity, .unit_price, .line_price')
          .on('blur', '.line_quantity, .unit_price, .line_price', function () {
-  var trClass = '.' + $(this).closest('tr').prop('class');
-  var linePrice = +$('#content').find(trClass).find('.line_price').val();
-  var taxCodeVal = 0;
-  if ($('#content').find(trClass).find('.tax_code_value').val()) {
-   taxCodeVal = $('#content').find(trClass).find('.tax_code_value').val();
-  } else if ($('#content').find(trClass).find('.output_tax').find('option:selected').prop('class')) {
-   taxCodeVal = $('#content').find(trClass).find('.output_tax').find('option:selected').prop('class');
-  }
+          var trClass = '.' + $(this).closest('tr').prop('class');
+          var linePrice = +$('#content').find(trClass).find('.line_price').val();
+          var taxCodeVal = 0;
+          if ($('#content').find(trClass).find('.tax_code_value').val()) {
+           taxCodeVal = $('#content').find(trClass).find('.tax_code_value').val();
+          } else if ($('#content').find(trClass).find('.output_tax').find('option:selected').prop('class')) {
+           taxCodeVal = $('#content').find(trClass).find('.output_tax').find('option:selected').prop('class');
+          }
 
-  if (taxCodeVal.length >= 3) {
-   var taxCodeVal_a = taxCodeVal.split('_');
-  } else {
-   return;
-  }
-  var taxAmount = 0;
-  var taxPercentage = 0;
-  if (taxCodeVal_a[0] === 'p') {
-   taxPercentage = +taxCodeVal_a[1];
-  } else if (taxCodeVal_a[0] === 'a') {
-   taxAmount = +taxCodeVal_a[1];
-  }
-  var taxValue = 0;
-  if (taxPercentage) {
-   taxValue = ((taxPercentage * linePrice) / 100).toFixed(5);
-  } else if (taxAmount) {
-   taxValue = taxAmount.toFixed(5);
-  }
+          if (taxCodeVal.length >= 3) {
+           var taxCodeVal_a = taxCodeVal.split('_');
+          } else {
+           return;
+          }
+          var taxAmount = 0;
+          var taxPercentage = 0;
+          if (taxCodeVal_a[0] === 'p') {
+           taxPercentage = +taxCodeVal_a[1];
+          } else if (taxCodeVal_a[0] === 'a') {
+           taxAmount = +taxCodeVal_a[1];
+          }
+          var taxValue = 0;
+          if (taxPercentage) {
+           taxValue = ((taxPercentage * linePrice) / 100).toFixed(5);
+          } else if (taxAmount) {
+           taxValue = taxAmount.toFixed(5);
+          }
 
-  $('#content').find(trClass).find('.tax_amount').val(taxValue);
- });
+          $('#content').find(trClass).find('.tax_amount').val(taxValue);
+         });
 
 //total header & tax amount
  $('#content').off('blur', '.inv_line_quantity, .inv_unit_price, .inv_line_price')
          .on('blur', '.inv_line_quantity, .inv_unit_price, .inv_line_price', function () {
-  var total_tax = 0;
-  $('#form_line').find('.tax_amount').each(function () {
-   total_tax += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-  });
-  $('#tax_amount').val(total_tax);
+          var total_tax = 0;
+          $('#form_line').find('.tax_amount').each(function () {
+           total_tax += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+          });
+          $('#tax_amount').val(total_tax);
 
-  var header_amount = 0;
-  $('#form_line').find('.inv_line_price').each(function () {
-   header_amount += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-  });
-  $('#header_amount').val(header_amount);
- });
+          var header_amount = 0;
+          $('#form_line').find('.inv_line_price').each(function () {
+           header_amount += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+          });
+          $('#header_amount').val(header_amount);
+         });
 
 });

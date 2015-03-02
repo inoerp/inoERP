@@ -198,6 +198,84 @@ class search extends dbObject {
   return $search_result;
  }
 
+ public function select_result_op() {
+  $drop_down_icon = ino_search_dropDownSettings();
+  if (property_exists($this->_searching_class, 'primary_column')) {
+   $class_name = $this->_searching_class;
+   $primary_column = $class_name::$primary_column;
+  } else {
+   return;
+  }
+  if (isset($_GET['window_type']) && $_GET['window_type'] = 'popover') {
+   $quick_select_class = 'popover_quick_select';
+  } else {
+   $quick_select_class = 'quick_select';
+  }
+
+  $no_of_columns_per_tab = 9;
+  $total_columns = count($this->column_array_s) + 1; //1 for action
+  $no_of_tabs = ceil($total_columns / $no_of_columns_per_tab);
+  $search_result = '';
+  $search_result .= '<div id="tabsLine">
+				 <ul class="tabMain">';
+  for ($i = 0; $i < $no_of_tabs; $i++) {
+   $search_result .= "<li><a href=\"#tabsLine-$i\">Tab No $i </a></li>";
+  }
+  $search_result .= ' </ul>
+				 <div class="tabContainer"> ';
+
+  for ($i = 0; $i < $no_of_tabs; $i++) {
+   $search_result .= "<div id=\"tabsLine-$i\" class='tabContent'>";
+   $search_result .= "<table class=\"normal\"><thead><tr>";
+   $search_result .= "<th>Seq#</th>";
+   if ($i == 0) {
+    $search_result .= "<th>Action</th>";
+   }
+   $new_start = ($i * ($no_of_columns_per_tab - 1)) + $i;
+   $new_end = $new_start + ($no_of_columns_per_tab - 1);
+   for ($j = $new_start; $j <= $new_end; $j++) {
+    if ($j > $total_columns - 2) {
+     break;
+    }
+    $search_result .= '<th data-field_name="' . $this->column_array_s[$j] . '">' . $drop_down_icon . gettext(ucwords(str_replace('_', ' ', $this->column_array_s[$j]))) . '</th>';
+   }
+   $search_result .='</tr></thead>';
+   If (!empty($this->result)) {
+    $search_result .= '<tbody class="form_data_line_tbody search_results" >';
+    $count = 0;
+    foreach ($this->result as $record) {
+     $count++;
+     $search_result .='<tr>';
+     $search_result .= "<td>$count</td>";
+     if ($i == 0) {
+      $search_result .= '<td><button data-select_field="' . $primary_column . '"  data-select_field_value="' . $record->$primary_column . '"'
+       . ' class=" button ' . $primary_column . ' ' . $quick_select_class . '">' . $record->$primary_column . '</button></td>';
+     }
+     $new_start = ($i * ($no_of_columns_per_tab - 1)) + $i;
+     $new_end = $new_start + ($no_of_columns_per_tab - 1);
+     for ($k = $new_start; $k <= $new_end; $k++) {
+      if ($k > $total_columns - 2) {
+       break;
+      }
+      $col_val = $this->column_array_s[$k];
+      if (isset($record->$col_val)) {
+       $search_result .= '<td>' . ucwords(str_replace('_', ' ', $record->$col_val)) . '</td>';
+      } else {
+       $search_result .= '<td> </td>';
+      }
+     }
+     $search_result .= '</tr>';
+    }
+    $search_result .= '</tbody>';
+   } else {
+    $search_result .= 'No Records Found!';
+   }
+   $search_result .= '</table> </div>';
+  }
+  $search_result .= '</div> </div>';
+  return $search_result;
+ }
+
  private function _add_hidden_fields() {
   $hidden_fld_stmt = "";
 
@@ -255,10 +333,15 @@ class search extends dbObject {
 
 //start of the srach statement
   $search_form_statement = "";
-  $search_form_statement .= "<form action=\"\" name=\"$this->_form_name\" method='GET' class=\"search_box $this->_form_name\" id=\"$this->_form_name\">";
+  if (isset($_GET['window_type']) && $_GET['window_type'] == 'popover') {
+   
+  } else {
+   $search_form_statement .= "<form action=\"\" name=\"$this->_form_name\" method='GET' class=\"search_box $this->_form_name\" id=\"$this->_form_name\">";
+  }
   $search_form_statement .= "<span id='search_tip' class='clickable'>Searching Tips</span>";
   //start of first ul
-  $search_form_statement .= '<ul class="search_form column four_column">';
+  $search_form_statement .= '<div id="search_form_divID">';
+  $search_form_statement .= '<ul class="search_form column header_field">';
   $search_form_statement .=$this->_add_hidden_fields();
   if (!empty($this->option_lists)) {
    foreach ($this->option_lists as $key => $value) {
@@ -269,7 +352,7 @@ class search extends dbObject {
     } else {
      $get_value = "";
     }
-    $search_form_statement .= "<li><label class=\"label_$key\">" . gettext(ucwords(str_replace('_', ' ', $key))) . " : </label>";
+    $search_form_statement .= "<li><label class=\"label_$key\">" . gettext(ucwords(str_replace('_', ' ', $key))) . "</label>";
     $class_name = ' select_search ' . $key;
     $option_header = option_header::find_by_name($value);
     $ol = new option_line;
@@ -281,7 +364,7 @@ class search extends dbObject {
 
   if (!empty($this->_search_functions)) {
    foreach ($this->_search_functions as $key => $value) {
-    $search_form_statement .= "<li><label class=\"label_$key\"> $key : </label>";
+    $search_form_statement .= "<li><label class=\"label_$key\"> $key </label>";
     if (method_exists($class_obj, $value)) {
      $search_form_statement .= call_user_func(array($class_obj, $value));
     } else if (function_exists($value)) {
@@ -307,7 +390,7 @@ class search extends dbObject {
     $readonly_field = '  ';
    }
    $bracketName = $value . '[]';
-   $search_form_statement .= "<li><label class=\"label_$value\">" . gettext(ucwords(str_replace('_', ' ', $value))) . " : </label>";
+   $search_form_statement .= "<li><label class=\"label_$value\">" . gettext(ucwords(str_replace('_', ' ', $value))) . " </label>";
    $search_form_statement .= "<input type=\"text\" name=\"$bracketName\" $readonly_field class=\"$value text_search \"   size=\"15\" value=\"$get_value\" >";
    $search_form_statement .= '</li>';
   }
@@ -398,7 +481,12 @@ class search extends dbObject {
   $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"search_class_name\" value=\"$class\" class=\"search class_name\" ></li>";
   $search_form_statement .="<li><input type=\"submit\" form=\"$this->_form_name\" name=\"submit_search\" class=\"search button\" value=\"Search\" id=\"search_submit_btn\"></li>";
   $search_form_statement .="</ul>";
-  $search_form_statement .="</form> ";
+  $search_form_statement .="</div>";
+  if (isset($_GET['window_type']) && $_GET['window_type'] == 'popover') {
+   
+  } else {
+   $search_form_statement .="</form> ";
+  }
   return $search_form_statement;
  }
 

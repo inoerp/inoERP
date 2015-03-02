@@ -1,30 +1,37 @@
-<div id="form_all"><span class="heading">Standard Operation</span>
+<!-- * 
+inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+-->
+
+<div id="form_all">
+ <span class="heading"><?php echo gettext('Standard Operation') ?></span>
  <form action=""  method="post" id="bom_standard_operation"  name="bom_standard_operation">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Notes</a></li>
-     <li><a href="#tabsHeader-3">Attachment</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
-       <ul class="column header_field">
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_standard_operation_id select_popup clickable">
-          Operation Id</label><?php echo $f->text_field_dr('bom_standard_operation_id'); ?>
-         <a name="show" href="form.php?class_name=bom_standard_operation&<?php echo "mode=$mode"; ?>" class="show document_id bom_standard_operation_id"><i class="fa fa-refresh"></i></a> 
-        </li>
-        <li><label>Inventory(1)</label><?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly); ?>        </li>
-        <li><label>Department(2)</label><?php echo form::select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class->department_id, 'department_id', $readonly); ?>        </li>
-        <li><label>Standard Operation</label><?php echo form::text_field_d('standard_operation'); ?></li>
-        <li><label>Description</label><?php echo form::text_field_d('description'); ?></li>
-        <li><label>Count Point</label><?php echo form::checkBox_field('count_point_cb', $$class->count_point_cb); ?></li>
-        <li><label>Auto Charge</label><?php echo form::checkBox_field('auto_charge_cb', $$class->auto_charge_cb); ?></li>
-        <li><label>Back Flush</label><?php echo form::checkBox_field('count_point_cb', $$class->backflush_cb); ?></li>
-        <li><label>Status</label><?php echo form::status_field($$class->status, $readonly); ?></li>
-       </ul>
-      </div>
+      <ul class="column header_field">
+       <li><?php echo $f->l_text_field_dr_withSearch('bom_standard_operation_id'); ?>
+        <a name="show" href="form.php?class_name=bom_standard_operation&<?php echo "mode=$mode"; ?>" class="show document_id bom_standard_operation_id"><i class="fa fa-refresh"></i></a> 
+       </li>
+       <li><?php $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', '', $readonly); ?>        </li>
+       <li><?php $f->select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class->department_id, 'department_id', '', '', $readonly); ?>        </li>
+       <li><?php $f->l_text_field_d('standard_operation'); ?></li>
+       <li><?php $f->l_text_field_d('description'); ?></li>
+       <li><?php $f->l_checkBox_field_d('count_point_cb'); ?></li>
+       <li><?php $f->l_checkBox_field_d('auto_charge_cb'); ?></li>
+       <li><?php $f->l_checkBox_field_d('count_point_cb'); ?></li>
+       <li><?php $f->l_status_field_d('status'); ?></li>
+      </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div id="comments">
@@ -49,11 +56,11 @@
    </div>
   </div>
  </form>
- <div id ="form_line" class="form_line"><span class="heading">Standard Operation Details </span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Standard Operation Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Resource Assignment</a></li>
-    <li><a href="#tabsLine-2">Future </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Resource Assignment') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <form action=""  method="post" id="bom_standard_operation_resource_assignment_line"  name="bom_standard_operation_resource_assignment_line">
@@ -61,17 +68,17 @@
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Action</th>
-         <th>Assign. Id</th>
-         <th>Resource Seq</th>
-         <th>Resource</th>
-         <th>Basis</th>
-         <th>Usage</th>
-         <th>Schedule</th>
-         <th>Units</th>
-         <th>24 Hours</th>
-         <th>Stnd. Rate</th>
-         <th>Charge Type</th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Assignment Id') ?>#</th>
+         <th><?php echo gettext('Resource Seq') ?></th>
+         <th><?php echo gettext('Resource') ?>#</th>
+         <th><?php echo gettext('Basis') ?>#</th>
+         <th><?php echo gettext('Usage') ?>#</th>
+         <th><?php echo gettext('Schedule') ?></th>
+         <th><?php echo gettext('Units') ?>#</th>
+         <th><?php echo gettext('24 Hours') ?>#</th>
+         <th><?php echo gettext('Stnd. Rate') ?>#</th>
+         <th><?php echo gettext('Charge Type') ?>#</th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody bom_standard_operation_resource_assignment_values" >
@@ -82,8 +89,7 @@
          <tr class="bom_standard_operation_resource_assignment<?php echo $count ?>">
           <td>
            <?php
-           echo ino_inline_action($$class_second->bom_standard_operation_resource_assignment_id, 
-            array('bom_standard_operation_id' => $$class->bom_standard_operation_id));
+           echo ino_inline_action($$class_second->bom_standard_operation_resource_assignment_id, array('bom_standard_operation_id' => $$class->bom_standard_operation_id));
            ?>
           </td>
           <td><?php form::text_field_wid2sr('bom_standard_operation_resource_assignment_id'); ?></td>

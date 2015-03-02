@@ -1,46 +1,53 @@
-
+<!-- * 
+inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+-->
 <!--create empty form or a single id when search is not clicked and the id is referred from other page -->
 <div id ="form_all"> 
- <form action=""  method="post" id="wip_wo_completion"  name="wip_wo_completion"><span class="heading">Work Order Completion/Return </span> 
+ <form action=""  method="post" id="wip_wo_completion"  name="wip_wo_completion"><?php $f = new inoform(); ?>
+  <span class="heading"><?php echo gettext('Work Order Completion/Return') ?></span> 
   <div id ="form_header"> 
-  <div id="form_serach_header"><ul class="inline_list">
-    <li><label>Inventory Org : </label>
-     <?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>
-    </li>
-    <li> <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="wip_wo_header_id select_popup clickable">
-      WO Header Id(1) : </label> <?php $f->text_field_drm('wip_wo_header_id'); ?>
-    </li>
-    <li><label>WO Number : </label>  <?php $f->text_field_dr('wo_number'); ?> </li>
-    <li><label>Transaction Type : </label>
-     <?php echo $f->select_field_from_array('transaction_type_id', wip_wo_completion::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1); ?>
-     <a name="show" href="form.php?class_name=wip_wo_completion&<?php echo "mode=$mode"; ?>" class="show2 document_id wip_wo_completion_id">          <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-    </li>
-   </ul>
+   <div id="form_serach_header" class="tabContainer">
+    <ul class="column header_field">
+     <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>    </li>
+     <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="wip_wo_header_id select_popup clickable">
+       <?php echo gettext('WO Header Id') ?></label> <?php $f->text_field_drm('wip_wo_header_id'); ?>
+     </li>
+     <li><?php $f->l_text_field_d('wo_number'); ?> </li>
+     <li><?php $f->l_select_field_from_array('transaction_type_id', wip_wo_completion::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1); ?>
+      <a name="show" href="form.php?class_name=wip_wo_completion&<?php echo "mode=$mode"; ?>" class="show2 document_id wip_wo_completion_id">          
+       <i class="fa fa-refresh"></i></a> 
+     </li>
+    </ul>
+   </div>
   </div>
-</div>
-  <div id ="form_line" class="form_line"><span class="heading">Work Order Details </span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Work Order Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1">General Info</a></li>
-     <li><a href="#tabsLine-2">Transfer Info</a></li>
-     <li><a href="#tabsLine-3">Reference Info</a></li>
-     <li><a href="#tabsLine-4">Finance Info</a></li>
-     <li><a href="#tabsLine-5">Lot & Serial </a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('General Info') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Transfer Info') ?></a></li>
+     <li><a href="#tabsLine-3"><?php echo gettext('Reference Info') ?></a></li>
+     <li><a href="#tabsLine-4"><?php echo gettext('Finance Info') ?></a></li>
+     <li><a href="#tabsLine-5"><?php echo gettext('Lot & Serial') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Action</th>
-         <th>Item Id</th>
-         <th>Item Number</th>
-         <th>Item Description</th>
-         <th>UOM</th>
-         <th>Document Qty</th>
-         <th>Available Qty</th>
-         <th>Transaction Qty</th>
-         <th>Transaction Id</th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Item Id') ?></th>
+         <th><?php echo gettext('Item Number') ?></th>
+         <th><?php echo gettext('Item Description') ?></th>
+         <th><?php echo gettext('UOM') ?></th>
+         <th><?php echo gettext('Document Qty') ?></th>
+         <th><?php echo gettext('Available Qty') ?></th>
+         <th><?php echo gettext('Transaction Qty') ?></th>
+         <th><?php echo gettext('Transaction Id') ?></th>
         </tr>
        </thead>
        <tbody class="inv_transaction_values">
@@ -78,11 +85,10 @@
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>From SubInv</th>
-         <th>From Locator </th>
-         <th>To SubInv</th>
-         <th>To Locator</th>
-         <th>Ef Id</th>
+         <th><?php echo gettext('From SubInv') ?></th>
+         <th><?php echo gettext('From Locator') ?></th>
+         <th><?php echo gettext('To SubInv') ?></th>
+         <th><?php echo gettext('To Locator') ?></th>
         </tr>
        </thead>
        <tbody class="inv_transaction_values">
@@ -99,9 +105,6 @@
          <td>
           <?php echo form::select_field_from_object('to_locator_id', locator::find_all_of_subinventory($$class->to_subinventory_id), 'locator_id', 'locator', $$class->to_locator_id, '', $readonly, 'locator_id'); ?>
          </td>
-         <td>
-          <?php echo form::extra_field($$class->ef_id, '10', $readonly); ?>
-         </td>
         </tr>
        </tbody>
       </table>
@@ -110,14 +113,14 @@
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Document Type</th>
-         <th>Doc. Number</th>
-         <th>Doc. Id</th>
-         <th>Ref Type</th>
-         <th>Ref Name</th>
-         <th>Ref Value</th>
-         <th>Ref Doc</th>
-         <th>WO BOM Line Id</th>
+         <th><?php echo gettext('Document Type') ?></th>
+         <th><?php echo gettext('Doc. Number') ?></th>
+         <th><?php echo gettext('Doc. Id') ?></th>
+         <th><?php echo gettext('Ref Type') ?></th>
+         <th><?php echo gettext('Ref Name') ?></th>
+         <th><?php echo gettext('Ref Value') ?></th>
+         <th><?php echo gettext('Ref Doc') ?></th>
+         <th><?php echo gettext('WO BOM Line Id') ?></th>
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">
@@ -138,10 +141,10 @@
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Account</th>
-         <th>Unit Cost</th>
-         <th>Costed Amount</th>
-         <th>Journal Id<th>
+         <th><?php echo gettext('Account') ?></th>
+         <th><?php echo gettext('Unit Cost') ?></th>
+         <th><?php echo gettext('Costed Amount') ?></th>
+         <th><?php echo gettext('Journal Id') ?></th>
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">
@@ -159,8 +162,8 @@
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Lot</th>
-         <th>Add Serial Numbers</th>
+         <th><?php echo gettext('Add Lot Numbers') ?></th>
+         <th><?php echo gettext('Add Serial Numbers') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -181,9 +184,9 @@
                <table class="form form_detail_data_table detail">
                 <thead>
                  <tr>
-                  <th>Action</th>
-                  <th>Lot Number</th>
-                  <th>Quantity</th>
+                  <th><?php echo gettext('Action') ?></th>
+                  <th><?php echo gettext('Lot Number') ?></th>
+                  <th><?php echo gettext('Quantity') ?></th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody_ln">
@@ -255,8 +258,8 @@
                <table class="form form_detail_data_table detail">
                 <thead>
                  <tr>
-                  <th>Action</th>
-                  <th>Serial Number</th>
+                  <th><?php echo gettext('Action') ?></th>
+                  <th><?php echo gettext('Serial Number') ?></th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody">

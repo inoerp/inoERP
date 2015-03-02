@@ -20,10 +20,20 @@ setValFromSelectPage.prototype.setVal = function() {
   $('#content').find(fieldClass).val(this.combination);
   localStorage.removeItem("field_class");
  }
+  if (this.bom_resource_id) {
+  $('a.show.bom_resource_id').trigger('click');
+ }
+ 
 };
 
 
 $(document).ready(function() {
+ 
+  var mandatoryCheck = new mandatoryFieldMain();
+ mandatoryCheck.header_id = 'bom_resource_id';
+ mandatoryCheck.mandatoryHeader();
+
+
  //selecting data
  $(".bom_resource_id.select_popup").on("click", function() {
   localStorage.idValue = "";

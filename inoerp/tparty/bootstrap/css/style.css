@@ -3962,22 +3962,11 @@ li.child_link{
 }
 
 
-
-
-
-
-
-
-
-
 ul.search_form li {
  margin-bottom: 5px;
 }
 ul.search_form input, ul.search_form select{
  width: 160px;
-}
-#generic_search_form {
- background-color: rgba(40, 100, 40, 0.2);
 }
 
 ul.column{
@@ -4130,7 +4119,7 @@ ul.form_buttons li{
  min-width: 600px;
  margin-top: 200px;
  border-radius: 50px 50px 50px 50px;
- z-index: 1000;
+ z-index: 1100;
  background-color: rgba(233, 233, 233, 0.95);
 }
 

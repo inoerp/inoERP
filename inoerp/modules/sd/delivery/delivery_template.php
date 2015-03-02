@@ -1,23 +1,31 @@
-<div id ="form_header"><span class="heading">Delivery Header </span>
+<!-- * 
+inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+-->
+<div id ="form_header">
+ <span class="heading"><?php echo gettext('Delivery Header') ?></span>
  <div id="tabsHeader">
   <ul class="tabMain">
-   <li><a href="#tabsHeader-1">Basic Info</a></li>
-   <li><a href="#tabsHeader-2">Attachments</a></li>
-   <li><a href="#tabsHeader-3">Actions</a></li>
-   <li><a href="#tabsHeader-4">Notes</a></li>
+   <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+   <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+   <li><a href="#tabsHeader-3"><?php echo gettext('Actions') ?></a></li>
+   <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
   </ul>
   <div class="tabContainer">
    <form action=""  method="post" id="sd_delivery_header"  name="sd_delivery_header">
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
-      <li><label class="ino-label"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sd_delivery_header_id select_popup clickable">
-        Delivery Id</label><?php echo form::text_field_dsr('sd_delivery_header_id'); ?>
+      <li><?php $f->l_text_field_dr_withSearch('sd_delivery_header_id'); ?>
        <a name="show" href="form.php?class_name=sd_delivery_header&<?php echo "mode=$mode"; ?>" class="show document_id sd_delivery_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
-      <li><label>Inventory</label><?php echo $f->select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', $$class->shipping_org_id, '', '', 1, $readonly1); ?>       </li>
-      <li><label>Number</label><?php echo $f->text_field('delivery_number', $$class->delivery_number, '8', '', '', '', $readonly1); ?></li>
-      <li><label>Status</label><?php echo $f->select_field_from_array('status', sd_delivery_header::$status_a, $$class->status, '', '', 1, 1, 1) ?>       </li>
-      <li><label>Date</label><?php echo $f->date_fieldFromToday_mr('delivery_date', ino_date($$class->delivery_date), $readonly); ?></li>
+      <li><?php $f->l_select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', $$class->shipping_org_id, '', '', 1, $readonly1); ?>       </li>
+      <li><?php $f->l_number_field('delivery_number', $$class->delivery_number); ?></li>
+      <li><?php $f->l_select_field_from_array('status', sd_delivery_header::$status_a, $$class->status, '', '', 1, 1, 1) ?>       </li>
+      <li><?php $f->l_date_fieldFromToday('delivery_date', ino_date($$class->delivery_date)); ?></li>
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
@@ -38,7 +46,7 @@
     <div id="tabsHeader-3" class="tabContent">
      <div> 
       <ul class="column five_column">
-       <li><label>Action</label>
+       <li><label><?php echo gettext('Action') ?></label>
         <?php
         if ($$class->status == 'SHIPPED') {
          $$class->action_a = ['REMOVE_LINE' => 'Remove Line'];
@@ -74,27 +82,27 @@
  <form action=""  method="post" id="po_site"  name="sd_delivery_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">SO Info</a></li>
-    <li><a href="#tabsLine-2">Delivery</a></li>
-    <li><a href="#tabsLine-3">Customer</a></li>
-    <li><a href="#tabsLine-4">Reference</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('SO Info') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Delivery') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Customer') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('References') ?> </a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th><label class="ino-label">Delivery Line Id</label></th>
-        <th>SO Id</th>
-        <th>Line Id</th>
-        <th>SO #</th>
-        <th>SO Line #</th>
-        <th>Shipment Qty</th>
-        <th>Shipped Qty</th>
-        <th>SO Qty Change</th>
-        <th>Delivery Status</th>
-        <th>Line Action</th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><label class="ino-label"><?php echo gettext('Delivery Line Id') ?></label></th>
+        <th><?php echo gettext('SO Id') ?>#</th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('SO') ?>#</th>
+        <th><?php echo gettext('Line') ?>#</th>
+        <th><?php echo gettext('Shipment Qty') ?></th>
+        <th><?php echo gettext('Shipped Qty') ?></th>
+        <th><?php echo gettext('SO Qty Change') ?></th>
+        <th><?php echo gettext('Delivery Status') ?></th>
+        <th><?php echo gettext('Line Action') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -132,12 +140,12 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Item id</th>
-        <th>Item Number</th>
-        <th>Item Description</th>
-        <th>UOM</th>
-        <th>Sub inventory</th>
-        <th>Locator</th>
+        <th><?php echo gettext('Item Id') ?></th>
+        <th><?php echo gettext('Item Number') ?></th>
+        <th><?php echo gettext('Item Description') ?></th>
+        <th><?php echo gettext('UOM') ?></th>
+        <th><?php echo gettext('Sub Inventory') ?></th>
+        <th><?php echo gettext('Locator') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -165,9 +173,15 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Customer Id</th>
-        <th>Customer #</th>
-        <th>Customer</th>
+        <th><?php echo gettext('Customer Id') ?></th>
+        <th><?php echo gettext('Customer Number') ?></th>
+        <th><?php echo gettext('Customer') ?></th>
+        <th><?php echo gettext('UOM') ?></th>
+        <th><?php echo gettext('Sub Inventory') ?></th>
+        <th><?php echo gettext('Locator') ?></th>
+        <th> Id</th>
+        <th> #</th>
+        <th></th>
         <th>Site Id</th>
         <th>Site #</th>
         <th>Site </th>
@@ -200,10 +214,10 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Weight UOM</th>
-        <th>Total Weight #</th>
-        <th>Volume UOM</th>
-        <th>Total Volume</th>
+        <th><?php echo gettext('Weight UOM') ?></th>
+        <th><?php echo gettext('Total Weight') ?></th>
+        <th><?php echo gettext('Volume UOM') ?></th>
+        <th><?php echo gettext('Total Volume') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

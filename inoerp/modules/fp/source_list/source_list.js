@@ -21,7 +21,7 @@ setValFromSelectPage.prototype.setVal = function() {
  rowClass = rowClass.replace(/\s+/g, '.');
 
  if (fp_source_list_header_id) {
-	$('#content').find('#fp_source_list_header_id').val(fp_source_list_header_id);
+	$('#fp_source_list_header_id').val(fp_source_list_header_id);
  }
  if (source_list) {
 	$('#content').find('#source_list').val(source_list);
@@ -46,7 +46,9 @@ setValFromSelectPage.prototype.setVal = function() {
  }
 
  localStorage.removeItem("row_class");
-
+   if (fp_source_list_header_id) {
+  $('a.show.fp_source_list_header_id').trigger('click');
+ }
 };
 
 function lineListTypeValues(source_list_line_type, trClass) {
@@ -87,12 +89,8 @@ function lineListTypeValues(source_list_line_type, trClass) {
 $(document).ready(function() {
 //mandatory and field sequence
  var mandatoryCheck = new mandatoryFieldMain();
- mandatoryCheck.header_id = 'source_list_header_id';
-// mandatoryCheck.mandatoryHeader();
- mandatoryCheck.form_area = 'form_header';
- mandatoryCheck.mandatory_fields = ["org_id", "item_number"];
- mandatoryCheck.mandatory_messages = ["First Select Org", "No Item Number"];
-// mandatoryCheck.mandatoryField();
+ mandatoryCheck.mandatoryHeader();
+
 
 //set the default bucket type if its empty
  if (!$('#fp_source_list_header_divId #form_line').find('.bucket_type').first().val()) {
@@ -110,10 +108,10 @@ $(document).ready(function() {
  }
  
   //Popup for selecting source list
- $('#fp_source_list_header_divId').off('click','.source_list_header_id.select_popup')
-         .on('click','.source_list_header_id.select_popup',function() {
-	void window.open('select.php?class_name=fp_forecast_header', '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ $('#fp_source_list_header_divId').off('click','.fp_source_list_header_id.select_popup')
+         .on('click','.fp_source_list_header_id.select_popup',function() {
+	void window.open('select.php?class_name=fp_source_list_header', '_blank',
+					'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
 	return false;
  });
 

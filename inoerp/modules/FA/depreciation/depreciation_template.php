@@ -1,36 +1,37 @@
 <div id="form_all">
- <form action=""  method="post" id="fa_depreciation_header"  name="fa_depreciation_header"><span class="heading">Depreciation Header</span>
+ <form action=""  method="post" id="fa_depreciation_header"  name="fa_depreciation_header">
+  <span class="heading"><?php echo gettext('Depreciation Header') ?></span><?php  $f = new inoform(); ?>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Attachments</a></li>
-     <li><a href="#tabsHeader-3">Notes</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
       <div class="large_shadow_box"> 
        <ul class="column header_field">
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="fa_depreciation_header_id select_popup clickable">
-          Header Id</label><?php echo form::number_field_drs('fa_depreciation_header_id'); ?>
+        <li><?php $f->l_text_field_dr_withSearch('fa_depreciation_header_id'); ?>
          <a name="show" href="form.php?class_name=fa_depreciation_header&<?php echo "mode=$mode"; ?>" class="show document_id fa_depreciation_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
         </li>
-        <li><label>Asset Book</label><?php echo $f->select_field_from_object('fa_asset_book_id', fa_asset_book::find_all(), 'fa_asset_book_id', 'asset_book_name', $$class->fa_asset_book_id, 'fa_asset_book_id', '', 1, $readonly1,'','','','ledger_id'); ?></li>
-        <li><label>Period</label><?php echo $period_stmt; ?> </li>
-        <li><label>Description</label><?php echo form::text_field_dm('description'); ?></li>
-        <li><label>Status</label><?php echo $f->select_field_from_array('status', fa_depreciation_header::$status_a, $$class->status, 'status', '', 1, 1, 1); ?> </li>
+        <li><?php $f->l_select_field_from_object('fa_asset_book_id', fa_asset_book::find_all(), 'fa_asset_book_id', 'asset_book_name', $$class->fa_asset_book_id, 'fa_asset_book_id', '', 1, $readonly1, '', '', '', 'ledger_id'); ?></li>
+        <li><label><?php echo gettext('Period') ?></label><?php echo $period_stmt; ?> </li>
+        <li><?php $f->l_text_field_dm('description'); ?></li>
+        <li><?php $f->l_select_field_from_array('status', fa_depreciation_header::$status_a, $$class->status, 'status', '', 1, 1, 1); ?> </li>
         <li class="action_btn"><label></label>
          <div class="btn-group row">
           <button type="button" class="btn btn-primary">
-           <span  aria-hidden="true"></span><i class='fa fa-tasks'></i> Actions </button>
+           <span  aria-hidden="true"></span><i class='fa fa-tasks'></i><?php echo gettext('Actions') ?></button>
           <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
            <span class="caret"></span>
            <span class="sr-only">Toggle Dropdown</span>
           </button>
           <ul class="dropdown-menu" role="menu">
-           <li><a href="<?php echo HOME_URL; ?>program.php?class_name=fa_depreciation_header&program_name=prg_run_depreciation">Run Depreciation</a></li>
-           <li><a href="#">Confirm Depreciation</a></li>
-           <li><a href="#">Post Depreciation</a></li>
+           <li><a href="<?php echo HOME_URL; ?>program.php?class_name=fa_depreciation_header&program_name=prg_run_depreciation">
+             <?php echo gettext('Run Depreciation') ?></a></li>
+           <li><a href="#"><?php echo gettext('Confirm Depreciation')?></a></li>
+           <li><a href="#"><?php echo gettext('Post Depreciation')?></a></li>
           </ul>
          </div>
         </li>
@@ -75,7 +76,7 @@
 
 
 <div id="pagination" style="clear: both;">
-<?php echo $pagination->show_pagination(); ?>
+ <?php echo $pagination->show_pagination(); ?>
 </div>
 
 <div id="js_data">

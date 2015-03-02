@@ -220,7 +220,8 @@ trait dbObject_t {
   return $result_fetchAll;
  }
 
- public static function find_by_sql($sql = "") {
+ 
+  public static function find_by_sql($sql = "") {
   global $dbc;
   $prepare = $dbc->connection->prepare($sql);
   try {
@@ -232,6 +233,20 @@ trait dbObject_t {
    return false;
   }
  }
+ 
+// public static function find_by_sql($sql = "") {
+//  global $dbc;
+//  $conn = $dbc->connection;
+//  try {
+//   $qry = $conn->query($sql);
+//   $result_fetchAll = $qry->fetchAll(PDO::FETCH_CLASS);
+//   return $result_fetchAll;
+//  } catch (Exception $e) {
+////    echo "<br>Error @dbObject @@ Line " . __LINE__ . $sql;
+//   return false;
+//  }
+// }
+ 
 
  public static function find_by_sql_array($sql = "") {
   global $dbc;

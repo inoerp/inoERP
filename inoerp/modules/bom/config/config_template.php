@@ -1,31 +1,39 @@
+<!-- * 
+inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+-->
 <div id ="form_header">
- <form action=""  method="post" id="bom_config_header"  name="bom_config_header"><span class="heading">Configured BOM Header </span>
+ <form action=""  method="post" id="bom_config_header"  name="bom_config_header"><?php $f = new inoform(); ?>
+  <span class="heading"><?php echo gettext('Configured BOM Header') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1">Basic Info</a></li>
-    <li><a href="#tabsHeader-2">Notes</a></li>
-    <li><a href="#tabsHeader-3">Attachment</a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-      <ul class="column header_field">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_config_header_id select_popup clickable">
-         Config BOM Id</label><?php $f->text_field_dsr('bom_config_header_id') ?>
-        <a name="show" href="form.php?class_name=bom_config_header&<?php echo "mode=$mode"; ?>" class="show document_id bom_config_header_id"><i class="fa fa-refresh"></i></a> 
-       </li>
-       <li><label>Org Name(1)</label><?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $bom_config_header->org_id, 'org_id', $readonly, '', ''); ?>       </li>
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_config_header_id select_popup clickable">
-         Item Number(2)</label>
-        <?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
-        <?php $f->text_field_dm('item_number', 'select_item_number_allowedBOM'); ?>
-       </li>
-       <li><label>UOM</label><?php echo $f->select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom_id', 'uom_id'); ?>       </li>
-       <li><label>Description</label><?php $f->text_field_dr('item_description'); ?></li>
-       <li><label>Ref Key Name</label><?php $f->text_field_dr('reference_key_name'); ?></li>
-       <li><label>Ref Key Value</label><?php $f->text_field_dr('reference_key_value'); ?></li>
-       <li><label>BOM Header Id</label><?php $f->text_field_dr('bom_header_id'); ?></li>
-       <li><label></label><button  class="quick_select button btn btn-success">Select Config</button></li>
-      </ul>
+     <ul class="column header_field">
+      <li><?php $f->l_text_field_dr_withSearch('bom_config_header_id') ?>
+       <a name="show" href="form.php?class_name=bom_config_header&<?php echo "mode=$mode"; ?>" class="show document_id bom_config_header_id"><i class="fa fa-refresh"></i></a> 
+      </li>
+      <li><?php $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $bom_config_header->org_id, 'org_id', '', '', $readonly); ?>       </li>
+      <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_config_header_id select_popup clickable">
+        <?php echo gettext('Item Number') ?></label>
+       <?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
+       <?php $f->text_field_dm('item_number', 'select_item_number_allowedBOM'); ?>
+      </li>
+      <li><?php $f->l_select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom_id', 'uom_id'); ?>       </li>
+      <li><?php $f->l_text_field_dr('item_description'); ?></li>
+      <li><?php $f->l_text_field_dr('reference_key_name'); ?></li>
+      <li><?php $f->l_text_field_dr('reference_key_value'); ?></li>
+      <li><?php $f->l_text_field_dr('bom_header_id'); ?></li>
+      <li><label></label><button  class="quick_select button btn btn-success">Select Config</button></li>
+     </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div id="comments">
@@ -55,27 +63,27 @@
  <form action=""  method="post" id="bom_config_line"  name="bom_config_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Main</a></li>
-    <li><a href="#tabsLine-2">Control</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Control') ?> </a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th>BOM Line Id</th>
-        <th>BOM Sequence</th>
-        <th>Routing Sequence</th>
-        <th>Item Id</th>
-        <th>Item Number</th>
-        <th>Revision</th>
-        <th>Item Description</th>
-        <th>UOM</th>
-        <th>Usage Basis</th>
-        <th>Usage Qty</th>
-        <th>Line Qty</th>
-        <th>Transacted Qty</th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('BOMLine Id') ?></th>
+        <th><?php echo gettext('BOM Sequence') ?>#</th>
+        <th><?php echo gettext('Routing Sequenceg') ?></th>
+        <th><?php echo gettext('Item Id') ?></th>
+        <th><?php echo gettext('Item Number') ?></th>
+        <th><?php echo gettext('Revision') ?></th>
+        <th><?php echo gettext('Item Description') ?></th>
+        <th><?php echo gettext('UOM') ?></th>
+        <th><?php echo gettext('Usage Basis') ?></th>
+        <th><?php echo gettext('Usage Qty') ?></th>
+        <th><?php echo gettext('Line Qty') ?></th>
+        <th><?php echo gettext('Transacted Qty') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -91,7 +99,7 @@
          <td>
           <?php
           echo ino_inline_action($$class_second->bom_config_line_id, array('bom_config_header_id' => $$class->bom_config_header_id,
-          'bom_config_commonbom_config_line_id' => $$class_second->bom_config_commonbom_config_line_id ));
+           'bom_config_commonbom_config_line_id' => $$class_second->bom_config_commonbom_config_line_id));
           ?>
          </td>
          <td><?php form::text_field_wid2sr('bom_config_line_id'); ?></td>
@@ -128,11 +136,11 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Planning %</th>
-        <th>Yield</th>
-        <th>WIP Supply Type</th>
-        <th>Sub inventory</th>
-        <th>Locator</th>
+        <th><?php echo gettext('Planning') ?>%</th>
+        <th><?php echo gettext('Yield') ?></th>
+        <th><?php echo gettext('WIP Supply Type') ?>#</th>
+        <th><?php echo gettext('Sub inventory') ?></th>
+        <th><?php echo gettext('Locator') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

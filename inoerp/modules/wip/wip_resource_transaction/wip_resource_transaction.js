@@ -16,6 +16,10 @@ setValFromSelectPage.prototype.setVal = function () {
    $('#content').find(fieldId).val(value.data);
   }
  });
+ 
+  if (this.wip_wo_header_id) {
+    $('a.show.wip_resource_transaction_id').trigger('click');
+ }
 };
 
 $(document).ready(function () {
@@ -27,9 +31,9 @@ $(document).ready(function () {
  //selecting wo header id data
  $('body').off("click", '.wip_wo_header_id.select_popup').on("click", '.wip_wo_header_id.select_popup', function () {
   localStorage.idValue = "";
-  var link = 'select.php?class_name=wip_wo_header&wo_status=RELEASED';
+  var link = 'select.php?class_name=wip_wo_header&wo_status=%3DRELEASED';
   void window.open(link, '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
 });

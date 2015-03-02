@@ -1,27 +1,35 @@
-<div id="form_all"><span class="heading">Over Head</span>
+<!-- * 
+inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+-->
+
+<div id="form_all"><span class="heading"><?php echo gettext('Over Head') ?></span>
  <form action=""  method="post" id="bom_overhead"  name="bom_overhead">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Attachments</a></li>
-     <li><a href="#tabsHeader-3">Notes</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
       <div class="large_shadow_box"> 
        <ul class="column header_field">
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_overhead_id select_popup clickable">
-          Overhead Id</label><?php $f->text_field_dsr('bom_overhead_id'); ?>
+        <li><?php $f->l_text_field_dr_withSearch('bom_overhead_id'); ?>
          <a name="show" href="form.php?class_name=bom_overhead&<?php echo "mode=$mode"; ?>" class="show document_id bom_overhead_id"><i class="fa fa-refresh"></i></a> 
         </li>
-        <li><label>Inventory</label><?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly); ?>      </li>
-        <li><label>Overhead (2)</label><?php echo form::text_field_d('overhead'); ?></li>
-        <li><label>Description</label><?php echo form::text_field_d('description'); ?></li>
-        <li><label>Overhead Type</label><?php echo form::select_field_from_object('overhead_type', bom_header::bom_overhead_type(), 'option_line_code', 'option_line_value', $$class->overhead_type, 'overhead_type', $readonly, 'overhead_type'); ?>      </li>
-        <li><label>Default Basis</label><?php echo form::select_field_from_object('default_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class->default_basis, 'default_basis', $readonly, 'default_basis'); ?>      </li>
-        <li><label>Status</label><?php echo form::status_field($$class->status, $readonly); ?></li>
-        <li><label>Absorption Ac</label><?php $f->ac_field_d('absorption_ac_id'); ?></li>
+        <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>      </li>
+        <li><?php $f->l_text_field_d('overhead'); ?></li>
+        <li><?php $f->l_text_field_d('description'); ?></li>
+        <li><?php $f->l_select_field_from_object('overhead_type', bom_header::bom_overhead_type(), 'option_line_code', 'option_line_value', $$class->overhead_type, 'overhead_type', '', 1, $readonly); ?>      </li>
+        <li><?php $f->l_select_field_from_object('default_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class->default_basis, 'default_basis', '', '', $readonly); ?>      </li>
+        <li><?php $f->l_status_field_d('status'); ?></li>
+        <li><?php $f->l_ac_field_d('absorption_ac_id'); ?></li>
        </ul>
       </div>
      </div>
@@ -50,11 +58,11 @@
    </div>
   </div>
  </form>
- <span class="heading"> Over Head Details </span>
+ <span class="heading"><?php echo gettext('Over Head Details') ?></span>
  <div id="tabsLine">
   <ul class="tabMain">
-   <li><a href="#tabsLine-1">Resource Assignment</a></li>
-   <li><a href="#tabsLine-2">Rate Assignment</a></li>
+   <li><a href="#tabsLine-1"><?php echo gettext('Resource Assignment') ?></a></li>
+   <li><a href="#tabsLine-2"><?php echo gettext('Rate Assignment') ?> </a></li>
   </ul>
   <div class="tabContainer"> 
    <div id="tabsLine-1" class="tabContent">
@@ -63,11 +71,11 @@
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Action</th>
-         <th>Resource Assignment Id</th>
-         <th>Cost Type</th>
-         <th>Description</th>
-         <th>Resource</th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Resource Assignment Id') ?>#</th>
+         <th><?php echo gettext('Cost Type') ?></th>
+         <th><?php echo gettext('Description') ?>#</th>
+         <th><?php echo gettext('Resource') ?>#</th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody bom_overhead_resource_assignment_values" >
@@ -111,11 +119,11 @@
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Action</th>
-         <th>Rate Assignment Id</th>
-         <th>Cost Type</th>
-         <th>Default Basis</th>
-         <th>Rate</th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Rate Assignment Id') ?>#</th>
+         <th><?php echo gettext('Cost Type') ?></th>
+         <th><?php echo gettext('Default Basis') ?>#</th>
+         <th><?php echo gettext('Rate') ?>#</th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody2 bom_overhead_rate_assignment_values" >
