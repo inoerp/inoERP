@@ -605,9 +605,9 @@ class item extends dbObject {
  public static function find_by_orgId_item_id_m($item_id, $org_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE item_id_m = '{$item_id}' AND org_id = '{$org_id}' ";
+  $sql .= " WHERE item_id_m = '{$item_id}' AND org_id = '{$org_id}'  LIMIT 1";
   $result = self::find_by_sql($sql);
-  return !empty($result) ? array_pop($result) : false;
+    return !empty($result) ? array_pop($result) : false;
  }
 
  public static function find_item_number_by_item_number($item_number) {

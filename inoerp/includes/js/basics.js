@@ -2797,11 +2797,11 @@ $(document).ready(function () {
   var elemenType = $(this).parent().prop('tagName');
   if (elemenType === 'LI') {
    $(this).closest('ul').find('input').each(function () {
-    setData[$(this).prop('id')] = $(this).prop('value');
+    setData[$(this).data('field_name')] = $(this).prop('value');
    });
   } else {
    $(this).closest('tr').find('td').each(function () {
-    setData[$(this).prop('class')] = $(this).text();
+    setData[$(this).data('field_name')] = $(this).text();
    });
   }
   setData.setVal();

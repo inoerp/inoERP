@@ -22,12 +22,12 @@ setValFromSelectPage.prototype.setVal = function () {
  ];
 
  if (combination) {
-  $('#content').find(fieldClass).val(combination);
+  $('body').find(fieldClass).val(combination);
   localStorage.removeItem("field_class");
  }
 
  if (sourcing_rule) {
-  $('#content').find('.sourcing_rule').val(sourcing_rule);
+  $('body').find('.sourcing_rule').val(sourcing_rule);
  }
  
  if (localStorage.getItem("item_type") === 'template') {
@@ -35,13 +35,14 @@ setValFromSelectPage.prototype.setVal = function () {
    $("#item_template").val(item_number);
   }
  } else {
-  $(item_obj).each(function (i, value) {
+    $(item_obj).each(function (i, value) {
    if (value.data) {
     var fieldId = '#' + value.id;
-    $('#content').find(fieldId).val(value.data);
+    $('body').find(fieldId).val(value.data);
    }
   });
    if(this.item_id){
+    $('#item_id').val(this.item_id);
   $('a.show.item_id').trigger('click');
  }
  }

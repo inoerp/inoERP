@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -227,6 +228,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
  }
 
  private function _update_from_onhand() {
+  global $dbc;
   $from_onhand_sql = " SELECT * FROM onhand";
   $from_onhand_sql .= " WHERE item_id_m = '{$this->item_id_m}' ";
   if (!empty($this->revision_name)) {
@@ -255,6 +257,23 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
    $this->transactable_onhand = -($this->_transaction_quantity);
    $this->onhand_id = null;
   }
+
+  if ($this->onhand < 0) {
+   $item_i = item::find_by_orgId_item_id_m($this->item_id_m, $this->_from_org_id);
+   if (empty($item_i->allow_negative_balance_cb)) {
+    pa($item_i);
+    echo "<br>Negative balance is not allowed for the item";
+    $dbc->rollback = true;
+    return -99;
+   } else {
+    $sub_i = subinventory::find_by_id($this->_from_subinventory_id);
+    if (empty($sub_i->allow_negative_balance_cb)) {
+     echo "<br>Negative balance is not allowed for the from subinventory";
+     $dbc->rollback = true;
+     return -99;
+    }
+   }
+  }
   $this->org_id = $this->_from_org_id;
   $this->subinventory_id = $this->_from_subinventory_id;
   $this->locator_id = $this->_from_locator_id;
@@ -266,12 +285,14 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
    echo "<br>Onhand is Sucessfully Updated. The onhand Id is " . $this->onhand_id . ' & Onhand Value is ' . $this->onhand;
    return 1;
   } catch (Exception $e) {
+   $dbc->rollback = true;
    echo "<br>Onhand Update Failed <br> Line # " . __LINE__ . '<br>' . $e->getMessage();
    return -99;
   }
  }
 
  private function _update_to_onhand() {
+  global $dbc;
   $to_onhand_sql = " SELECT *  FROM onhand";
   $to_onhand_sql .= " WHERE item_id_m = '{$this->item_id_m}' ";
   if (!empty($this->revision_name)) {
@@ -315,16 +336,19 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
    echo "<br>Onhand is Sucessfully Updated. The onhand Id is " . $this->onhand_id . ' & Onhand Value is ' . $this->onhand;
    return 1;
   } catch (Exception $e) {
+   $dbc->rollback = true;
    echo "<br>Onhand Update Failed <br> Line # " . __LINE__ . '<br>' . $e->getMessage();
    return -99;
   }
  }
 
  public function updateOnhand() {
+  global $dbc;
 //verify all the mandatory fields exists
   $mandatory_fields = $this->_validate_mandatory_fields();
   if ($mandatory_fields < 0) {
    echo "<br>Mandatort fields are missing <br> Line # : " . __LINE__;
+   $dbc->rollback = true;
    return -99;
   }
 
@@ -334,6 +358,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
     $this->_update_from_onhand();
 //		return 1;
    } catch (Exception $e) {
+    $dbc->rollback = true;
     echo "<br>From Onhand Update Failed <br> Line # " . __LINE__ . '<br>' . $e->getMessage();
     return -99;
    }
@@ -345,6 +370,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
     $this->_update_to_onhand();
 //		return 1;
    } catch (Exception $e) {
+    $dbc->rollback = true;
     echo "<br>From Onhand Update Failed <br> Line # " . __LINE__ . '<br>' . $e->getMessage();
     return -99;
    }
