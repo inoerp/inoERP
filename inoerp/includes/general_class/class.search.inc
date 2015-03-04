@@ -229,7 +229,7 @@ class search extends dbObject {
    $search_result .= "<table class=\"normal\"><thead><tr>";
    $search_result .= "<th>Seq#</th>";
    if ($i == 0) {
-    $search_result .= "<th>Action</th>";
+    $search_result .= "<th>Click Select</th>";
    }
    $new_start = ($i * ($no_of_columns_per_tab - 1)) + $i;
    $new_end = $new_start + ($no_of_columns_per_tab - 1);
@@ -248,8 +248,8 @@ class search extends dbObject {
      $search_result .='<tr>';
      $search_result .= "<td>$count</td>";
      if ($i == 0) {
-      $search_result .= '<td><button data-select_field="' . $primary_column . '"  data-select_field_value="' . $record->$primary_column . '"'
-       . ' class=" button ' . $primary_column . ' ' . $quick_select_class . '">' . $record->$primary_column . '</button></td>';
+      $search_result .= '<td><a href="#" role="button" data-select_field="' . $primary_column . '"  data-select_field_value="' . $record->$primary_column . '"'
+       . ' class=" btn btn-default ' . $primary_column . ' ' . $quick_select_class . '">' . $record->$primary_column . '</a></td>';
      }
      $new_start = ($i * ($no_of_columns_per_tab - 1)) + $i;
      $new_end = $new_start + ($no_of_columns_per_tab - 1);
@@ -295,6 +295,7 @@ class search extends dbObject {
 
  public function search_form($class_obj) {
   global $f;
+  $srch_div_cls = 'search ';
   $function_name = !empty($_GET['function_name']) ? $_GET['function_name'] : '';
   $report_name = !empty($_GET['report_name']) ? $_GET['report_name'] : '';
   if (!empty($_GET['window_type'])) {
@@ -353,7 +354,7 @@ class search extends dbObject {
      $get_value = "";
     }
     $search_form_statement .= "<li><label class=\"label_$key\">" . gettext(ucwords(str_replace('_', ' ', $key))) . "</label>";
-    $class_name = ' select_search ' . $key;
+    $class_name = " $srch_div_cls select_search " . $key;
     $option_header = option_header::find_by_name($value);
     $ol = new option_line;
     $option_lines = $ol->findBy_parentId($option_header->option_header_id);
@@ -398,7 +399,7 @@ class search extends dbObject {
 
 
   $search_form_statement .= "<li><label>Dynamic Criteria </label>";
-  $search_form_statement .= "<select name=\"new_search_criteria\" id=\"new_search_criteria\" class=\"new_search_criteria\">";
+  $search_form_statement .= "<select name=\"new_search_criteria\" id=\"new_search_criteria\" class=\"new_search_criteria $srch_div_cls\">";
   foreach ($search_array as $key => $search_value) {
    $search_form_statement .= '<option value="' . htmlentities($search_value) . '"';
    $search_form_statement .= '>' . gettext(ucwords(str_replace('_', ' ', $search_value))) . '</option>';
@@ -406,14 +407,14 @@ class search extends dbObject {
   $search_form_statement .= '</select>';
 //	$search_form_statement .= '<li><input type="button" class="add button" id="new_search_criteria_add" value="Add"></li>';
   $search_form_statement .= "<input type=\"hidden\" name=\"column_array\" id=\"column_array\" 
- value=\"$serialzed_column_array\" class=\"hidden\" >";
-  $search_form_statement .= "<input type=\"hidden\" name=\"search_class\" value=\"$class\" class=\"hidden\" ></li>";
+ value=\"$serialzed_column_array\" class=\"hidden search\" >";
+  $search_form_statement .= "<input type=\"hidden\" name=\"search_class\" value=\"$class\" class=\"$srch_div_cls hidden\" ></li>";
   $search_form_statement .= "</ul>";
 //end of first ul
 //start of second ul
   $search_form_statement .= "<ul class=\"add_new_search form_buttons\" >";
   $search_form_statement .= "<li><label>New column</label>";
-  $search_form_statement .= "<select  name=\"new_column[]\" class=\"new_column single_multi_select\" > ";
+  $search_form_statement .= "<select  name=\"new_column[]\" class=\"$srch_div_cls new_column single_multi_select\" > ";
   $search_form_statement .= "<option value=\"\"> </option>";
 
   foreach ($search_array as $key => $value) {
@@ -424,7 +425,7 @@ class search extends dbObject {
 
   //order by
   $search_form_statement .= "<li><label>Order By</label></li>";
-  $search_form_statement .= "<li><select name=\"search_order_by[]\" class=\"search_order_by\" > ";
+  $search_form_statement .= "<li><select name=\"search_order_by[]\" class=\"$srch_div_cls search_order_by\" > ";
 //	$search_form_statement .= "<option value=\"\"> </option>";
 
   foreach ($search_array as $key => $value) {
@@ -441,11 +442,11 @@ class search extends dbObject {
    $search_form_statement .= $selected_search_order_by;
    $search_form_statement .= '>' . $value . '</option>';
   }
-  $search_form_statement .= "<option value=\"remove\" class=\"remove remove_option\">Remove</option>";
+  $search_form_statement .= "<option value=\"remove\" class=\"$srch_div_cls remove remove_option\">Remove</option>";
   $search_form_statement .= '</select>';
 
   //ascending or descnding
-  $search_form_statement .= "<select name=\"search_asc_desc[]\" class=\"search_asc_desc\" > ";
+  $search_form_statement .= "<select name=\"search_asc_desc[]\" class=\"$srch_div_cls search_asc_desc\" > ";
   $selected_asc = "";
   $selected_desc = "";
   if ($this->_search_asc_desc == 'asc') {
@@ -460,7 +461,7 @@ class search extends dbObject {
   //Records group by
   if (!empty($this->_group_by)) {
    $search_form_statement .= '<li><label> Group By</label>';
-   $search_form_statement .= "<select name=\"group_by\" id=\"group_by\" class='select group_by'>";
+   $search_form_statement .= "<select name=\"group_by\" id=\"group_by\" class='$srch_div_cls group_by'>";
    $search_form_statement .= "<option value='' ></option>";
    foreach ($this->_group_by as $key => $value) {
     $search_form_statement .= "<option value=\"$key\" >$value</option>";
@@ -474,12 +475,12 @@ class search extends dbObject {
 
 
   $reset_link = "$this->_form_post_link.php?class_name=$class&mode=$this->_search_mode&show_block=$this->_show_block";
-  $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"window_type\" value=\"$window_type\" class=\"search window_type\" ></li>";
-  $search_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"reset_class_name\" value=\"Reset All\" class=\"reset button\" ></li>";
-  $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"function_name\" value=\"$function_name\" class=\"search function_name\" ></li>";
-  $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"report_name\" value=\"$report_name\" class=\"search report_name\" ></li>";
-  $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"search_class_name\" value=\"$class\" class=\"search class_name\" ></li>";
-  $search_form_statement .="<li><input type=\"submit\" form=\"$this->_form_name\" name=\"submit_search\" class=\"search button\" value=\"Search\" id=\"search_submit_btn\"></li>";
+  $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"window_type\" value=\"$window_type\" class=\"$srch_div_cls window_type\" ></li>";
+  $search_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"reset_class_name\" value=\"Reset All\" class=\"$srch_div_cls reset button\" ></li>";
+  $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"function_name\" value=\"$function_name\" class=\"$srch_div_cls function_name\" ></li>";
+  $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"report_name\" value=\"$report_name\" class=\"$srch_div_cls report_name\" ></li>";
+  $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"search_class_name\" value=\"$class\" class=\"$srch_div_cls class_name\" ></li>";
+  $search_form_statement .="<li><input type=\"submit\" form=\"$this->_form_name\" name=\"submit_search\" class=\"$srch_div_cls button\" value=\"Search\" id=\"search_submit_btn\"></li>";
   $search_form_statement .="</ul>";
   $search_form_statement .="</div>";
   if (isset($_GET['window_type']) && $_GET['window_type'] == 'popover') {

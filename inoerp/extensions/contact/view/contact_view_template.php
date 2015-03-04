@@ -33,8 +33,8 @@ if (empty($all_contacts)) {
       <tr class="extn_contact<?php echo $detailCount; ?>">
        <td>   
         <ul class="inline_action">
-         <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-         <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+         <li class="add_row_detail_img"><i class="fa fa-plus-circle"></i></li>
+         <li class="remove_row_img"><i class="fa fa-minus-circle"></i></li>
          <li class="clickable delete_ref" data-delete_id = "<?php echo htmlentities($cont->extn_contact_reference_id); ?>"><i class="fa fa-trash-o"></i></li>
         </ul>
        </td>

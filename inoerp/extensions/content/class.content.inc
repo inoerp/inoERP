@@ -295,6 +295,43 @@ class content extends dbObject {
   return $result;
  }
 
+ Public function findAll_contents($no_of_articles = '', $noOfCharacters = '100', $content_type_id = '1') {
+  $sql = " SELECT content.content_id, ct.content_type_id, content.subject, content.terms, 
+	         content.created_by, content.creation_date, ct.content_type, cm.no_of_comments
+					FROM content
+					LEFT JOIN content_type ct ON ct.content_type_id = content.content_type_id 
+          LEFT JOIN ( 
+          SELECT reference_table, reference_id, count(comment_id) as no_of_comments
+          FROM comment
+          GROUP BY reference_table, reference_id
+           )
+          cm ON cm.reference_table = 'content' AND content.content_id = cm.reference_id
+					WHERE 
+					content.published_cb = 1 
+          AND content.content_type_id = '{$content_type_id}'
+					 ";
+
+  $sql .= " ORDER BY content.weightage DESC, content.creation_date DESC";
+  if (!empty($no_of_articles)) {
+   $sql .= " LIMIT {$no_of_articles} ";
+  }
+//  echo $sql;
+    $result = $this->findBySql($sql);
+  if (empty($result)) {
+   return false;
+  }
+  $result_a = &$result;
+  foreach ($result_a as $cont) {
+   $cont_tableName = 'c_' . $cont->content_type;
+   $sql_c = "SELECT SUBSTRING(content,1,$noOfCharacters) AS content_summary " .
+    "FROM " . $cont_tableName . " where content_id='{$cont->content_id}' LIMIT 1";
+   $result_cont = $this->findBySql($sql_c);
+   $cont->content_summary = !empty($result_cont[0]) ? $result_cont[0]->content_summary : '';
+  }
+
+  return $result;
+ }
+
  public function showfrontPage_contents($no_of_articles = 6, $noOfCharacters = '500', $subject_no_of_char = '55') {
   $result = $this->frontPage_contents($no_of_articles, $noOfCharacters);
   $page_string = '';
@@ -416,6 +453,195 @@ AND content.content_id = category_reference.reference_id  ";
    $pagination_statement = $this->_pagination->show_pagination($this->_pagination, 'contents', $pageno, $query_string);
   }
   $content_string .= $pagination_statement;
+  $content_string .= '</div>';
+//   $content_string .= select_per_page();
+
+  return $content_string;
+ }
+
+ public function all_forum_topics() {
+  $pageno = !empty($_GET['pageno']) ? $_GET['pageno'] : 1;
+  $per_page = !empty($_GET['per_page']) ? $_GET['per_page'] : 10;
+  $this->subject_noof_char = empty($this->subject_noof_char) ? 300 : $this->subject_noof_char;
+  $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
+  $content_result = $this->findAll_contents();
+  $total_count_c = count($content_result);
+  $pagination_c = new pagination($pageno, $per_page, $total_count_c);
+  $pagination_c->setProperty('_path', 'content');
+  $pagination_c->setProperty('_query_string', $query_string);
+  $content_string = '<div class="table_container">';
+  if ($content_result) {
+   $con_count = 0;
+   if (count($content_result) > 0) {
+    $content_string .='<table id="content_list" class="table table-striped table-hover"><thead> 
+						 <tr class="headerBgColor">
+							<th class="topics">Subject</th>
+							<th class="created_by">Created By</th>
+							<th class="post_date">Post Date</th>
+              <th class="post_date">Comments</th>
+						 </tr>
+						</thead>';
+    foreach ($content_result as $recod_c_k => $recod_c) {
+     $continue_act1 = true;
+     if (($recod_c_k > ($pageno - 1) * $per_page) && ($recod_c_k <= (($pageno - 1) * $per_page) + $per_page)) {
+      $continue_act1 = false;
+     }
+     if ($continue_act1) {
+      continue;
+     }
+     $even_odd = ($con_count % 2 == 0) ? 'even' : 'odd';
+     $user_name = empty($recod_c->username) ? 'Anonymous\SelfWeb' : $recod_c->username;
+     $content_string .= "<tr id=\"row_no$con_count\" class='new_row $even_odd'> "
+      . " <td class='content_summary'>";
+     $content_string .= '<a href="' . HOME_URL . 'content.php?mode=2&'
+      . 'content_id=' . $recod_c->content_id . '&content_type_id=' . $recod_c->content_type_id . '">';
+     if (!empty($recod_c->subject)) {
+      $content_string .= substr(strip_tags($recod_c->subject), 0, $this->subject_noof_char);
+     } else {
+      $content_string .= substr(strip_tags($recod_c->content_summary), 0, $this->subject_noof_char);
+     }
+     $content_string .= ' </a>';
+     $content_string .= '</td>';
+     $content_string .= '<td class="created_by">';
+     $content_string .= $user_name;
+     $content_string .= '</td><td class="post_date">';
+     $content_string .= $recod_c->creation_date;
+     $content_string .= '</td><td class="no_of_comments">';
+     $content_string .= $recod_c->no_of_comments;
+     $content_string .= '</td>';
+     $content_string .= '</tr>';
+     $con_count++;
+    }
+   }
+
+   $content_string .='</table>';
+  }
+  $content_string .='</div>';
+  $content_string .= '<div id="pagination">';
+
+
+  $content_string .= $pagination_c->show_pagination();
+  $content_string .= '</div>';
+  return $content_string;
+ }
+
+ public function xxxshowForumList_byConteTypeCategory($pageno = 1, $per_page = 5, $query_string = "") {
+  $content_string = " ";
+  $result_category = $this->_getContent_byConteTypeCategory($pageno, $per_page, $query_string);
+  $con_count = 0;
+  $content_string .='<div>';
+  $content_string .='<div id="tabsHeader">';
+  $content_string .= '<ul class="tabMain">
+     <li><a href="#tabsHeader-1">All Topics</a></li>
+      <li><a href="content.php?content_type=comment">All Comments</a></li>
+     <li><a href="#tabsHeader-2">Category Listing</a></li>
+    </ul>';
+  $content_string .='<div class="tabContainer">';
+
+  //start of first tab
+  $content_string .= '<div id="tabsHeader-1" class="tabContent">';
+  $all_forum_contents = $this->all_forum_topics();
+  if ($all_forum_contents) {
+   $content_string .= $all_forum_contents;
+  }
+  $content_string .= '</div>';
+  //end of first tab
+  $category_listing = '<div>';
+  if ($result_category) {
+   if (count($result_category) > 0) {
+    $category_listing .=!empty($result[0]->category) ? '<span class="heading">' . $result_category[0]->category . '</span>' : '';
+    $category_listing .='<table class="table table-striped table-hover"><thead> 
+						 <tr class="headerBgColor">
+							<th class="topics">Topics</th>
+							<th class="replies">Replies</th>
+							<th class="created_by">Created By</th>
+							<th class="post_date">Post Date</th>
+						 </tr>
+						</thead>';
+    foreach ($result_category as $records) {
+     $no_of_replies = comment::count_by_reference_table_and_id('content', $records->content_id);
+     $even_odd = ($con_count % 2 == 0) ? 'even' : 'odd';
+     $category_listing .= "<tr id=\"row_no$con_count\" class='new_row $even_odd'> "
+      . " <td class='subject_summary'>";
+     $category_listing .= '<a href="' . HOME_URL . 'content.php?mode=2&'
+      . 'content_id=' . $records->content_id . '&content_type_id=' . $records->content_type_id . '">';
+     $category_listing .= substr($records->subject, 0, $this->_subject_noof_char);
+     $category_listing .= ' </a>';
+     $category_listing .= '</td>';
+     $category_listing .= '<td class="no_of_replies">';
+     $category_listing .= $no_of_replies . '</td>';
+     $category_listing .= '<td class="created_by">';
+     $category_listing .= empty($records->username) ? 'selfWeb' : $records->username;
+     $category_listing .= '</td><td class="post_date">';
+     $category_listing .= $records->creation_date;
+     $category_listing .= '</td>';
+     $category_listing .= '</tr>';
+     $con_count++;
+    }
+   }
+
+   $category_listing .='</table>';
+  }
+  $category_listing .='</div>';
+  $category_listing .= '<div id="pagination" style="clear: both;">';
+  if (!empty($this->_pagination)) {
+   $pagination_statement = $this->_pagination->show_pagination($this->_pagination, 'contents', $pageno, $query_string);
+  }
+  $category_listing .= $pagination_statement;
+  $category_listing .= '</div>';
+
+  //start of second tab
+  $content_string .= '<div id="tabsHeader-1" class="tabContent">';
+  $all_forum_contents .= $category_listing;
+  $content_string .= $all_forum_contents;
+  $content_string .= '</div>';
+  //snd of first tab
+
+  $content_string .= '</div>'; //end of tabs containers
+  $content_string .= '</div>'; //end of tabs header
+  $content_string .= '</div>';
+//   $content_string .= select_per_page();
+
+  return $content_string;
+ }
+
+ public function show_tabular_forum($category_relation_statement) {
+  $content_string = " ";
+  $content_string .='<div>';
+  $content_string .='<div id="tabsHeader">';
+  $content_string .= '<ul class="tabMain">
+     <li><a href="#tabsHeader-1" class="non_ajax">All Topics</a></li>
+     <li><a href="#tabsHeader-2" class="non_ajax">All Comments</a></li>
+     <li><a href="#tabsHeader-3" class="non_ajax">Category Listing</a></li>
+    </ul>';
+  $content_string .='<div class="tabContainer">';
+
+  //start of first tab
+  $content_string .= '<div id="tabsHeader-1" class="tabContent">';
+  $content_string .= '<div id="forum_topics_ajax">';
+  $all_forum_contents = $this->all_forum_topics();
+  if ($all_forum_contents) {
+   $content_string .= $all_forum_contents;
+  }
+  $content_string .= '</div>';
+  $content_string .= '</div>';
+  //end of first tab
+  
+    //start of second tab
+  $content_string .= '<div id="tabsHeader-2" class="tabContent">';
+  $comment = new comment();
+    $content_string .= $comment->view_page();
+  $content_string .= '</div>';
+  //snd of second tab
+ 
+  //start of third tab
+  $content_string .= '<div id="tabsHeader-3" class="tabContent">';
+  $content_string .= $category_relation_statement;
+  $content_string .= '</div>';
+  //snd of third tab
+
+  $content_string .= '</div>'; //end of tabs containers
+  $content_string .= '</div>'; //end of tabs header
   $content_string .= '</div>';
 //   $content_string .= select_per_page();
 
@@ -565,69 +791,67 @@ AND content.content_id = category_reference.reference_id  ";
 //   echo '</div>';
 //  }
 // }
- 
- public function view_page() {
-  $pageno = !empty($_GET['pageno']) ? $_GET['pageno'] : 1;
-  $per_page = !empty($_GET['per_page']) ? $_GET['per_page'] : 5;
-  $this->subject_noof_char = empty($this->subject_noof_char) ? 200 : $this->subject_noof_char;
-  $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
-  $comment_result = $this->content_comment_with_reference();
-  $total_count_c = count($comment_result);
-  $pagination_c = new pagination($pageno, $per_page, $total_count_c);
-  $pagination_c->setProperty('_path', 'content');
-  $pagination_c->setProperty('_query_string', $query_string);
-  $comment_string = '<div class="table_container">';
-  if ($comment_result) {
-   $con_count = 0;
-   if (count($comment_result) > 0) {
-    $comment_string .='<table id="comment_list" class="table table-striped table-hover"><thead> 
-						 <tr class="headerBgColor">
-							<th class="topics">Subject</th>
-							<th class="created_by">Created By</th>
-							<th class="post_date">Post Date</th>
-						 </tr>
-						</thead>';
-    foreach ($comment_result as $recod_c_k => $recod_c) {
-     $continue_act1 = true;
-     if (($recod_c_k > ($pageno - 1) * $per_page) && ($recod_c_k <= (($pageno - 1) * $per_page) + $per_page)) {
-      $continue_act1 = false;
-     }
-     if ($continue_act1) {
-      continue;
-     }
-     $even_odd = ($con_count % 2 == 0) ? 'even' : 'odd';
-     $comment_string .= "<tr id=\"row_no$con_count\" class='new_row $even_odd'> "
-      . " <td class='subject_summary'>";
-     $comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&'
-      . 'content_id=' . $recod_c->reference_id . '&content_type_id=' . $recod_c->content_type_id . '">';
-     if (!empty($recod_c->subject)) {
-      $comment_string .= substr(strip_tags($recod_c->subject), 0, $this->subject_noof_char);
-     } else {
-      $comment_string .= substr(strip_tags($recod_c->comment), 0, $this->subject_noof_char);
-     }
-     $comment_string .= ' </a>';
-     $comment_string .= '</td>';
-     $comment_string .= '<td class="created_by">';
-     $comment_string .= $recod_c->username;
-     $comment_string .= '</td><td class="post_date">';
-     $comment_string .= $recod_c->creation_date;
-     $comment_string .= '</td>';
-     $comment_string .= '</tr>';
-     $con_count++;
-    }
-   }
-
-   $comment_string .='</table>';
-  }
-  $comment_string .='</div>';
-  $comment_string .= '<div id="pagination">';
-
-
-  $comment_string .= $pagination_c->show_pagination();
-  $comment_string .= '</div>';
-  return $comment_string;
- }
-
+// public function view_page() {
+//  $pageno = !empty($_GET['pageno']) ? $_GET['pageno'] : 1;
+//  $per_page = !empty($_GET['per_page']) ? $_GET['per_page'] : 5;
+//  $this->subject_noof_char = empty($this->subject_noof_char) ? 200 : $this->subject_noof_char;
+//  $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
+//  $comment_result = $this->content_comment_with_reference();
+//  $total_count_c = count($comment_result);
+//  $pagination_c = new pagination($pageno, $per_page, $total_count_c);
+//  $pagination_c->setProperty('_path', 'content');
+//  $pagination_c->setProperty('_query_string', $query_string);
+//  $comment_string = '<div class="table_container">';
+//  if ($comment_result) {
+//   $con_count = 0;
+//   if (count($comment_result) > 0) {
+//    $comment_string .='<table id="comment_list" class="table table-striped table-hover"><thead> 
+//						 <tr class="headerBgColor">
+//							<th class="topics">Subject</th>
+//							<th class="created_by">Created By</th>
+//							<th class="post_date">Post Date</th>
+//						 </tr>
+//						</thead>';
+//    foreach ($comment_result as $recod_c_k => $recod_c) {
+//     $continue_act1 = true;
+//     if (($recod_c_k > ($pageno - 1) * $per_page) && ($recod_c_k <= (($pageno - 1) * $per_page) + $per_page)) {
+//      $continue_act1 = false;
+//     }
+//     if ($continue_act1) {
+//      continue;
+//     }
+//     $even_odd = ($con_count % 2 == 0) ? 'even' : 'odd';
+//     $comment_string .= "<tr id=\"row_no$con_count\" class='new_row $even_odd'> "
+//      . " <td class='subject_summary'>";
+//     $comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&'
+//      . 'content_id=' . $recod_c->reference_id . '&content_type_id=' . $recod_c->content_type_id . '">';
+//     if (!empty($recod_c->subject)) {
+//      $comment_string .= substr(strip_tags($recod_c->subject), 0, $this->subject_noof_char);
+//     } else {
+//      $comment_string .= substr(strip_tags($recod_c->comment), 0, $this->subject_noof_char);
+//     }
+//     $comment_string .= ' </a>';
+//     $comment_string .= '</td>';
+//     $comment_string .= '<td class="created_by">';
+//     $comment_string .= $recod_c->username;
+//     $comment_string .= '</td><td class="post_date">';
+//     $comment_string .= $recod_c->creation_date;
+//     $comment_string .= '</td>';
+//     $comment_string .= '</tr>';
+//     $con_count++;
+//    }
+//   }
+//
+//   $comment_string .='</table>';
+//  }
+//  $comment_string .='</div>';
+//  $comment_string .= '<div id="pagination">';
+//
+//
+//  $comment_string .= $pagination_c->show_pagination();
+//  $comment_string .= '</div>';
+//  return $comment_string;
+// }
 // public static function content_summary_list($content_no, $per_content, $query_string) {
 //  $content_string = " ";
 //  $sql = " SELECT * FROM " . self::$table_name;

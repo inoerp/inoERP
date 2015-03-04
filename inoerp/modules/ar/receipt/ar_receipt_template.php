@@ -1,54 +1,51 @@
-<div id ="form_header"><span class="heading">Receipt Header </span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Receipt Header') ?></span>
  <form action=""  method="post" id="ar_receipt_header"  name="ar_receipt_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1">Basic Info</a></li>
-    <li><a href="#tabsHeader-2">Finance</a></li>
-    <li><a href="#tabsHeader-3">Notes</a></li>
-    <li><a href="#tabsHeader-4">Attachments</a></li>
-    <li><a href="#tabsHeader-5">Actions</a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Finance') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
-      <ul class="column header_field">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_receipt_header_id select_popup clickable">
-         Receipt Id</label><?php $f->text_field_dsr('ar_receipt_header_id'); ?>
-        <a name="show" href="form.php?class_name=ar_receipt_header&<?php echo "mode=$mode"; ?>" class="show document_id ar_receipt_header_id"><i class="fa fa-refresh"></i></a> 
-       </li>
-       <li><label>Receipt No</label><?php $f->text_field_d('receipt_number'); ?></li>
-       <li><label>Type</label><?php echo $f->select_field_from_array('receipt_type', ar_receipt_header::$receipt_type_a, $$class->receipt_type,'receipt_type'); ?></li>
-       <li><label>BU Name(1)</label><?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?></li>
-       <li><label>Ledger Name(2)</label><?php echo form::select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', $readonly1, '', '', 1); ?></li>
-       <li><label>Period Name(4)</label><?php
-        if (!empty($period_name_stmt)) {
-         echo $period_name_stmt;
-        } else {
-         $f->text_field_d('period_id');
-        }
-        ?>
-       </li>
-       <li><label>Receipt Source(5)</label><?php echo $f->select_field_from_object('ar_receipt_source_id', ar_receipt_source::find_all(), 'ar_receipt_source_id', 'receipt_source', $$class->ar_receipt_source_id, 'ar_receipt_source_id', '', 1, $readonly); ?>			 </li>
-       <li><label>Document Date</label><?php echo $f->date_fieldFromToday_d('document_date', $$class->document_date, 1) ?></li>
-       <li><label>Document Number</label><?php echo $f->text_field_d('document_number') ?></li>
-       <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?><label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup clickable">
-         Customer Name</label><?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
-       <li><label class="auto_complete">Customer Number</label><?php $f->text_field_d('customer_number'); ?></li>
-       <li><label>Customer Site</label><?php echo $f->select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
-       <li><label>Doc Status</label><?php echo $f->select_field_from_array('receipt_status', ar_receipt_header::$receipt_status_a, $$class->receipt_status, '', '', '', '', $readonly); ?>			 </li> 
-       <li><label>Description</label><?php $f->text_field_d('description'); ?></li> 
-      </ul>
-     </div>
+     <ul class="column header_field">
+      <li><?php $f->l_text_field_dr_withSearch('ar_receipt_header_id'); ?>
+       <a name="show" href="form.php?class_name=ar_receipt_header&<?php echo "mode=$mode"; ?>" class="show document_id ar_receipt_header_id"><i class="fa fa-refresh"></i></a> 
+      </li>
+      <li><?php $f->l_text_field_d('receipt_number'); ?></li>
+      <li><?php $f->l_select_field_from_array('receipt_type', ar_receipt_header::$receipt_type_a, $$class->receipt_type, 'receipt_type'); ?></li>
+      <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?></li>
+      <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', '', '', $readonly1, 1); ?></li>
+      <li><label><?php echo gettext('Period Name') ?></label><?php
+       if (!empty($period_name_stmt)) {
+        echo $period_name_stmt;
+       } else {
+        $f->text_field_d('period_id');
+       }
+       ?>
+      </li>
+      <li><?php $f->l_select_field_from_object('ar_receipt_source_id', ar_receipt_source::find_all(), 'ar_receipt_source_id', 'receipt_source', $$class->ar_receipt_source_id, 'ar_receipt_source_id', '', 1, $readonly); ?>			 </li>
+      <li><?php $f->l_date_fieldFromToday_m('document_date', $$class->document_date, 1) ?></li>
+      <li><?php $f->l_text_field_d('document_number') ?></li>
+      <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?><label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup clickable">
+        <?php echo gettext('Customer Name') ?></label><?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
+      <li><?php $f->l_text_field_d('customer_number'); ?></li>
+      <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
+      <li><?php $f->l_select_field_from_array('receipt_status', ar_receipt_header::$receipt_status_a, $$class->receipt_status, '', '', '', '', $readonly); ?>			 </li> 
+      <li><?php $f->l_text_field_d('description'); ?></li> 
+     </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div> 
       <ul class="column header_field">
-       <li><label>Currency</label><?php echo form::select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'doc_currency', $readonly1, '', '', 1); ?></li>
-       <li><label>Doc Currency</label><?php echo form::select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->doc_currency, 'doc_currency', '', '', '', 1); ?>						 </li>
-       <li><label>Exchange Rate Type</label><?php echo $f->select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
-       <li><label>Exchange Rate</label><?php $f->text_field_d('exchange_rate'); ?>              </li>
-       <li><label>Header Amount</label><?php form::number_field_d('header_amount'); ?></li>
-       <li><label>Journal Header Id</label><?php $f->text_field_dr('gl_journal_header_id'); ?></li>
+       <li><?php $f->l_select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', '', 1, $readonly); ?></li>
+       <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, 1); ?></li>
+       <li><?php $f->l_select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
+       <li><?php $f->l_number_field('exchange_rate', $$class->exchange_rate, '', 'exchange_rate'); ?> </li>
+       <li><?php $f->l_number_field('header_amount', $$class->header_amount, '15', 'header_amount'); ?></li>
+       <li><?php $f->l_text_field_dr('gl_journal_header_id') ?></li>
       </ul>
      </div>
     </div>
@@ -73,19 +70,11 @@
 
     <div id="tabsHeader-5" class="tabContent">
      <div> 
-      <ul class="column five_column">
-       <li><label>Action</label>
-        <?php echo $f->select_field_from_array('receipt_action', $$class->receipt_action_a, '', 'receipt_action'); ?>
-       </li>
-       <li id="document_print"><label>Document Print : </label>
+      <ul class="column header_field">
+       <li><?php $f->l_select_field_from_array('receipt_action', $$class->receipt_action_a, '', 'receipt_action'); ?>       </li>
+       <li id="document_print"><label><?php echo gettext('Document Print') ?></label>
         <a class="button" target="_blank"
            href="po_print.php?ar_receipt_header_id=<?php echo!(empty($$class->ar_receipt_header_id)) ? $$class->ar_receipt_header_id : ""; ?>" >Receipt</a>
-       </li>
-       <li id="copy_header"><label>Copy Document : </label>
-        <input type="button" class="button" id="copy_docHeader" value="Header">
-       </li>
-       <li id="copy_line"><label></label>
-        <input type="button" class="button" id="copy_docLine" value="Lines">
        </li>
       </ul>
 
@@ -100,30 +89,31 @@
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading">Receipt Lines</span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Receipt Lines') ?></span>
  <form action=""  method="post" id="ar_receipt_line"  name="ar_receipt_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Basic</a></li>
-    <li><a href="#tabsLine-2">References</a></li>
-    <li><a href="#tabsLine-3">Notes</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('References') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Notes') ?> </a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th>Line Id</th>
-        <th>Line#</th>
-        <th>Trnx Id</th>
-        <th>Trnx Number</th>
-        <th>Receipt Amount</th>
-        <th>Exchange Rate</th>
-        <th>GL Amount</th>
-        <th>Total Amount</th>
-        <th>Cumulative Receipt</th>
-        <th>Remaining</th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Line') ?>#</th>
+        <th><?php echo gettext('Trnx Id') ?></th>
+        <th><?php echo gettext('Trnx Number') ?></th>
+        <th><?php echo gettext('Receipt Amount') ?></th>
+        <th><?php echo gettext('Exchange Rate') ?></th>
+        <th><?php echo gettext('GL Amount') ?></th>
+        <th><?php echo gettext('Total Amount') ?></th>
+        <th><?php echo gettext('Cumulative Receipt') ?></th>
+        <th><?php echo gettext('Remaining') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -138,6 +128,7 @@
           echo ino_inline_action($$class_second->ar_receipt_line_id, array('ar_receipt_header_id' => $$class->ar_receipt_header_id));
           ?>
          </td>
+         <td><?php $f->seq_field_d($count); ?></td>
          <td><?php form::text_field_wid2sr('ar_receipt_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
          <td><?php $f->text_field_wid2sr('ar_transaction_header_id'); ?></td>
@@ -145,7 +136,7 @@
           <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_transaction_number select_popup clickable"></td>
          <td><?php !empty($$class_second->ar_receipt_line_id) ? form::number_field_wid2sr('amount') : $f->text_field_wid2s('amount'); ?></td>
          <td><?php !empty($$class_second->ar_receipt_line_id) ? form::number_field_wid2sr('exchange_rate') : $f->text_field_wid2s('exchange_rate'); ?></td>
-          <td><?php !empty($$class_second->ar_receipt_line_id) ? form::number_field_wid2sr('gl_amount') : $f->text_field_wid2s('gl_amount'); ?></td>
+         <td><?php !empty($$class_second->ar_receipt_line_id) ? form::number_field_wid2sr('gl_amount') : $f->text_field_wid2s('gl_amount'); ?></td>
          <td><?php $f->text_field_wid2sr('invoice_amount'); ?></td>
          <td><?php $f->text_field_wid2sr('receipt_amount'); ?></td>
          <td><?php $f->text_field_wid2r('remaining_amount'); ?></td>
@@ -161,11 +152,12 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Line Description</th>
-        <th>Ref Key Name</th>
-        <th>Ref Key Value</th>
-        <th>View Ref Doc</th>
-        <th>Status</th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Line Description') ?></th>
+        <th><?php echo gettext('Ref Key Name') ?>#</th>
+        <th><?php echo gettext('Ref Key Value') ?></th>
+        <th><?php echo gettext('View Ref Doc') ?></th>
+        <th><?php echo gettext('Status') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -174,6 +166,7 @@
        foreach ($ar_receipt_line_object as $ar_receipt_line) {
         ?>         
         <tr class="ar_receipt_line<?php echo $count ?>">
+         <td><?php $f->seq_field_d($count); ?></td>
          <td><?php $f->text_field_wid2('line_description'); ?></td>
          <td><?php $f->text_field_d2('reference_key_name'); ?></td>
          <td><?php $f->text_field_d2('reference_key_value'); ?></td>

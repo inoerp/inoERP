@@ -293,7 +293,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
   }
 
 
-  var headerData = $(form_header_id_h).serializeArray();
+  var headerData = $(form_header_id_h +' :input').not('.search, .text_search').serializeArray();
   if (savingOnlyHeader) {
    savingOnlyHeader = true;
   } else if (($('#form_line').html()) && ($(primary_column_id_h).val()) && ($(line_key_field_d).val())) {

@@ -2813,19 +2813,26 @@ $(document).ready(function () {
   window.close();
  });
 
-// $('body').on('click', '#selectResult_page .popover_quick_select', function () {
-//  var select_field = $(this).data('select_field');
-//  var select_field_d = '.' + select_field;
-//  var select_field_val = $(this).data('select_field_value');
-//  alert(select_field);
-//  $('#erp_form_area').find(select_field_d).val(select_field_val);
-//  var primary_column_id = $('ul#js_saving_data').find('.primary_column_id').data('primary_column_id');
-//  if(primary_column_id === select_field ){
-//   $('a.show'.select_field_d).trigger('click');
-//  }else{
-//   $('body').popover('hide');
-//  }
-// });
+ $('body').on('click', '#selectResult_page .popover_quick_select', function (e) {
+  e.preventDefault();
+  var select_field = $(this).data('select_field');
+  var select_field_d = '.' + select_field;
+  var select_field_val = $(this).data('select_field_value');
+  $('#erp_form_area').find(select_field_d).val(select_field_val);
+  var primary_column_id = $('ul#js_saving_data').find('.primary_column_id').data('primary_column_id');
+  var primary_column_id_t = primary_column_id.trim();
+  var select_field_t = select_field.trim();
+  if (primary_column_id_t == select_field_t) {
+   $('#big_popover').trigger('click');
+   $('a.show' + select_field_d).trigger('click');
+  } else {
+   $('#big_popover').trigger('click');
+  }
+ });
+
+$('body').on('click', '.make-draggable' , function(){
+$(this).closest('div').draggable();
+});
 
  //search reset button
  var link = localStorage.getItem("reset_link");
@@ -2845,9 +2852,9 @@ $(document).ready(function () {
  //new object
  $('body').on('click', '#new_object_button', function (e) {
   e.preventDefault();
-  $('#content').find(':input').not('#attach_submit').val('');
-  $('#content').find(':input').not('#attach_submit').prop('disabled', false);
-  $('#content').find(':checkbox').prop('checked', false);
+  $('#content').find(' :input').not('#attach_submit, .button, .search').val('');
+  $('#content').find(' :input').not('#attach_submit').prop('disabled', false);
+  $('#content').find(' :checkbox').prop('checked', false);
  });
 
  remove_row();
@@ -3201,13 +3208,13 @@ $(document).ready(function () {
 //    theme: "modern",
   plugins: 'textcolor link image lists code table emoticons',
   width: 680,
-  height: 70,
+  height: 150,
   toolbar: "styleselect code | emoticons forecolor backcolor bold italic pagebreak | alignleft aligncenter alignright | bullist numlist outdent indent | link image inserttable ",
   menubar: false,
   statusbar: false,
   valid_elements: '*[*]',
   file_browser_callback: function () {
-   $('#attachment_button').click();
+   $('#comment_attachments').trigger('click');
   }
  });
 
@@ -3216,7 +3223,7 @@ $(document).ready(function () {
   mode: "exact",
 //    theme: "modern",
   plugins: 'textcolor link image lists code table emoticons',
-  width: 700,
+  width: 740,
   height: 250,
   toolbar: "styleselect code | emoticons forecolor backcolor bold italic pagebreak | alignleft aligncenter alignright | bullist numlist outdent indent | link image inserttable ",
   menubar: false,
@@ -3482,6 +3489,8 @@ $(document).ready(function () {
   $(this).removeClass('showDiv_input').addClass('hideDiv_input');
  });
 
+$('#content_divId .hideDiv_input').trigger('click');
+
 // $('#user_info .block_menu').menu();
  $('#big_popover').popover({
   html: true,
@@ -3493,21 +3502,21 @@ $(document).ready(function () {
   }
  });
 
- $('body').on('click', '#selectResult_page .popover_quick_select', function () {
-  var select_field = $(this).data('select_field');
-  var select_field_h = '#' + select_field;
-  var select_field_d = '.' + select_field;
-  var select_field_val = $(this).data('select_field_value');
-  $('#erp_form_area').find(select_field_h).val(select_field_val);
-  var primary_column_id = $('ul#js_saving_data').find('.primary_column_id').data('primary_column_id');
-  if (primary_column_id === select_field) {
-   var show_btn = 'a.show' + select_field_d;
-   $('#big_popover').trigger('click');
-   $(show_btn).trigger('click');
-  } else {
-   $('#big_popover').trigger('click');
-  }
- });
+// $('body').on('click', '#selectResult_page .popover_quick_select', function () {
+//  var select_field = $(this).data('select_field');
+//  var select_field_h = '#' + select_field;
+//  var select_field_d = '.' + select_field;
+//  var select_field_val = $(this).data('select_field_value');
+//  $('#erp_form_area').find(select_field_h).val(select_field_val);
+//  var primary_column_id = $('ul#js_saving_data').find('.primary_column_id').data('primary_column_id');
+//  if (primary_column_id === select_field) {
+//   var show_btn = 'a.show' + select_field_d;
+//   $('#big_popover').trigger('click');
+////   $(show_btn).trigger('click');
+//  } else {
+//   $('#big_popover').trigger('click');
+//  }
+// });
 
  $('body').on('click', '.close_big_popover', function () {
   $('#big_popover').trigger('click');
@@ -3655,6 +3664,25 @@ $(document).ready(function () {
   }
   getFormDetails(formUrl);
  }).one();
+ 
+$('body').on('click', '.ajax_content a', function (e) {
+ if($(this).hasClass('non_ajax')){
+  return false;
+ }
+e.preventDefault();
+var urlLink = $(this).attr('href');
+var urlLink_a = urlLink.split('?');
+var urlLink_firstPart_a = urlLink_a[0].split('/');
+var pageType = urlLink_firstPart_a.pop();
+if (pageType == 'form.php') {
+ var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
+} else if (pageType == 'program.php') {
+ var formUrl = 'includes/json/json_program.php?' + urlLink_a[1];
+} else {
+ var formUrl = urlLink;
+}
+getFormDetails(formUrl);
+ })
 
 // $('#sys_menu_left_vertical .menu a').on('click', function (e) {
 //  e.preventDefault();
@@ -3701,6 +3729,7 @@ $(document).ready(function () {
    var search_field_val = $(search_field_h).val();
    formUrl += '&' + search_field + '=' + search_field_val;
   }
+//  alert(formUrl);
   getFormDetails(formUrl);
  }).one();
 
@@ -3721,6 +3750,7 @@ $(document).ready(function () {
 
  $('body').on('click', '.submit_comment', function () {
   $('.show_loading_small').show();
+  $(this).prop('disabled', true)
   $(this).closest('form').find('textarea').each(function () {
    var divId = $(this).prop('id');
    var data = tinyMCE.get(divId).getContent();
@@ -3729,8 +3759,14 @@ $(document).ready(function () {
   var headerData = $(this).closest('form').serializeArray();
   var homeUrl = $('#home_url').val();
   var savePath = homeUrl + 'form.php?class_name=comment';
-  saveHeader(savePath, headerData, '#comment_id', '', '', true, 'comment');
-  $(".comment_error").replaceWith('<input type="button" value="Reload page" onclick="location.reload();">');
+  $.when(saveHeader(savePath, headerData, '#comment_id', '', '', true, 'comment')).then(function(){
+   var message = '<div class="alert alert-success alert-dismissible" role="alert">';
+   message += 'Comment is sucessfully posted. &nbsp; <input type="button" class="btn-sucess" value="Reload page" onclick="location.reload();">';
+   message += '</div>';
+   $(".comment_error").replaceWith(message);
+   $('.show_loading_small').hide();
+  });
+  
  });
 
  $('body').off('click', '#save_program').on('click', '#save_program', function () {
@@ -4069,6 +4105,33 @@ $(document).ready(function () {
   $(this).removeClass('fa-arrow-circle-up').addClass('fa-arrow-circle-down');
  });
  $('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
+ 
+ $('body').on('click',  '#save_content' , function () {
+    if (!$('#subject').val()) {
+   alert('No Subject Entered. Subject is required!');
+   return false;
+  }
+    $(".error").append('<div class="alert alert-warning alert-dismissible" role="alert">Saving Post ...</div>');
+  var form_header_id = '#content_data';
+  if ($('.mce-tinymce').length >= 1) {
+   $(form_header_id).find('textarea').each(function () {
+    var name = $(this).attr('name');
+    var data = tinyMCE.get(name).getContent();
+    $(this).html(data);
+   });
+  }
+  var headerData = $(form_header_id).serializeArray();
+  $(this).prop('disabled', true);
+  $.when(saveHeader('content.php', headerData, '#content_id', '', '', true, 'content')).then(function () {
+   var message = '<div class="alert alert-success alert-dismissible" role="alert">';
+   message += 'Document is sucessfully posted. <br> Click on view to view the post';
+   message += '</div>';
+   $(".error").replaceWith(message);
+   $('.show_loading_small').hide();
+  });
+
+ });
+
 });
 function toUpperCase(str)
 {

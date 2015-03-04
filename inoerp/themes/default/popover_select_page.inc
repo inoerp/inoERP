@@ -1,5 +1,4 @@
 <div id="popover_erp_form_area">
- <div id="structure">
   <div id="select_page">
    <div id ="form_header">
     <div class="error"></div><div id="loading"></div>
@@ -92,5 +91,4 @@
     </div>
    </div>
   </div>
- </div>
 </div>

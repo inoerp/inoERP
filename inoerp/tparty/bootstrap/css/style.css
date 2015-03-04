@@ -4892,3 +4892,10 @@ h3.nav-panel{
 .panel-ino-classy {
     border-color: rgba(222, 222, 222, 0.91);
 }
+
+.ino-btn{
+        background-color: #337AB7;
+color: #fff;
+font-weight: bold;
+padding: 5px 30px;
+}

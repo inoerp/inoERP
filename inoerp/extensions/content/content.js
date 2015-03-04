@@ -22,29 +22,11 @@ $(document).ready(function () {
   }
  });
 
- $('#save').on('click', function () {
-  if (!$('#subject').val()) {
-    alert('No subject');
-    return;
-  }
-  $(".error").append('Saving Data');
-  var form_header_id = '#content_data';
-  if ($('.mce-tinymce').length >= 1) {
-   $(form_header_id).find('textarea').each(function () {
-    var name = $(this).attr('name');
-    var data = tinyMCE.get(name).getContent();
-    $(this).html(data);
-   });
-  }
-  var headerData = $(form_header_id).serializeArray();
-  saveHeader('content.php', headerData, '#content_id', '', '', true, 'content');
- });
-
- deleteHeader('form.php?class_name=content', $('#content_id').val());
+  deleteHeader('form.php?class_name=content', $('#content_id').val());
 
 
- $('body').off('click', 'a.show2.content_id').on('click', 'a.show2.content_id'  , function (e) {
-  if(!($('#content_id').val())){
+ $('body').off('click', 'a.show2.content_id').on('click', 'a.show2.content_id', function (e) {
+  if (!($('#content_id').val())) {
    e.preventDefault();
    return;
   }

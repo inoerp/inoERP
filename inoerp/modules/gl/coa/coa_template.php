@@ -1,4 +1,5 @@
-<form action=""  method="post" id="coa"  name="coa"><span class="heading">Chart Of Account</span>
+<form action=""  method="post" id="coa"  name="coa"><?php $f = new inoform(); ?>
+ <span class="heading"><?php echo gettext('Chart Of Account') ?></span>
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -10,18 +11,17 @@
     <div id="tabsHeader-1" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column header_field">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="coa_id select_popup clickable">
-         COA Id</label><?php echo form::number_field_drs('coa_id'); ?>
-        <a name="show" href="form.php?class_name=coa&<?php echo "mode=$mode"; ?>" class="show document_id coa_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+       <li><?php $f->l_text_field_dr_withSearch('coa_id'); ?><a name="show" href="form.php?class_name=coa&<?php echo "mode=$mode"; ?>" class="show document_id coa_id">
+         <i class='fa fa-refresh'></i></a> 
        </li>
-       <li><label>Structure</label><?php echo form::select_field_from_object('coa_structure_id', coa::coa_structures(), 'option_header_id', 'option_type', $$class->coa_structure_id, 'coa_structure_id', $readonly1); ?>
-        <a name="show" class="show_diff coa_structure_show"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+       <li><?php $f->l_select_field_from_object('coa_structure_id', coa::coa_structures(), 'option_header_id', 'option_type', $$class->coa_structure_id, 'coa_structure_id', '', '', $readonly1); ?>
+        <i class='fa fa-refresh'></i></a> 
        </li>
-       <li><label>Name</label><?php $f->text_field_d('coa_name'); ?></li>
-       <li><label>Description</label><?php $f->text_field_d('description'); ?></li>
-       <li><label>Status</label><?php echo form::status_field($$class->status, $readonly); ?></li>
-       <li><label>Allow Rev</label><?php echo form::revision_enabled_field('rev_enabled_cb'); ?></li>
-       <li><label>Revision No</label><?php echo form::number_field_drs('rev_number'); ?></li>
+       <li><?php $f->l_text_field_d('coa_name'); ?></li>
+       <li><?php $f->l_text_field_d('description'); ?></li>
+       <li><?php $f->l_status_field_d('status'); ?></li>
+       <li><?php $f->l_checkBox_field_d('rev_enabled_cb'); ?></li>
+       <li><?php $f->l_text_field_d('rev_number'); ?></li>
       </ul>
      </div>
     </div>
@@ -47,28 +47,20 @@
   </div>
 
  </div>
- <div id ="form_line" class="form_line"><span class="heading"> Chart of Account Details </span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Chart of Account Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Qualifiers</a></li>
-    <li><a href="#tabsLine-2">Display</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Qualifiers') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Display') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">
      <div class="first_rowset"> 
-      <ul class="column five_column"> 
-       <li><label>Balancing Segment : </label>
-        <?php echo $f->select_field_from_object('balancing', coa::coa_segments_by_optionHeaderId($$class->coa_structure_id), 'option_line_code', 'option_line_value', $$class->balancing, 'balancing', 'coa_qualifier',1, $readonly1); ?>
-       </li>
-       <li><label>Cost Center : </label>
-        <?php echo $f->select_field_from_object('cost_center', coa::coa_segments_by_optionHeaderId($$class->coa_structure_id), 'option_line_code', 'option_line_value', $$class->cost_center, 'cost_center', 'coa_qualifier',1, $readonly1); ?>
-       </li>
-       <li><label>Account : </label>
-        <?php echo $f->select_field_from_object('natural_account', coa::coa_segments_by_optionHeaderId($$class->coa_structure_id), 'option_line_code', 'option_line_value', $$class->natural_account, 'natural_account', 'coa_qualifier',1, $readonly1); ?>
-       </li>
-       <li><label>Inter company : </label>
-        <?php echo $f->select_field_from_object('inter_company', coa::coa_segments_by_optionHeaderId($$class->coa_structure_id), 'option_line_code', 'option_line_value', $$class->inter_company, 'inter_company', 'coa_qualifier',1, $readonly1); ?>
-       </li>
+      <ul class="column header_field"> 
+       <li><?php $f->l_select_field_from_object('balancing', coa::coa_segments_by_optionHeaderId($$class->coa_structure_id), 'option_line_code', 'option_line_value', $$class->balancing, 'balancing', 'coa_qualifier', 1, $readonly1); ?>       </li>
+       <li><?php $f->l_select_field_from_object('cost_center', coa::coa_segments_by_optionHeaderId($$class->coa_structure_id), 'option_line_code', 'option_line_value', $$class->cost_center, 'cost_center', 'coa_qualifier', 1, $readonly1); ?>       </li>
+       <li><?php $f->l_select_field_from_object('natural_account', coa::coa_segments_by_optionHeaderId($$class->coa_structure_id), 'option_line_code', 'option_line_value', $$class->natural_account, 'natural_account', 'coa_qualifier', 1, $readonly1); ?>       </li>
+       <li><?php $f->l_select_field_from_object('inter_company', coa::coa_segments_by_optionHeaderId($$class->coa_structure_id), 'option_line_code', 'option_line_value', $$class->inter_company, 'inter_company', 'coa_qualifier', 1, $readonly1); ?>       </li>
       </ul>
      </div>
      <!--end of tab1 div three_column-->

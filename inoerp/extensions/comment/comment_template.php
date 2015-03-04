@@ -1,6 +1,8 @@
 <div id="commentForm">
- <script src="<?php $f = new inoform();
-echo HOME_URL . 'extensions/comment/' ?>comment.js"></script> 
+ <script src="<?php
+$f = new inoform();
+echo HOME_URL . 'extensions/comment/'
+?>comment.js"></script> 
  <div id="commentForm_witoutjs">
   <div id="output">
   </div>
@@ -18,29 +20,24 @@ echo HOME_URL . 'extensions/comment/' ?>comment.js"></script>
    <div class="hidden"><input type="hidden" name="reference_id" 
                               value="<?php echo empty($comment->reference_id) ? htmlentities($reference_id) : htmlentities($comment->reference_id); ?>">
    </div>
-   <div id="comment_subject" >
-    <ul class='inRow asperWidth'>
-     <li><label>Subject : </label><?php echo $f->text_field('subject', str_replace(array('<p>', '</p>'), ' ', $comment->subject), '', '', 'medium') ?></li>
-     <li><label>Name on comment : </label><?php echo $f->text_field('comment_by', $comment->comment_by) ?></li>
-     <li><input type="button" name="submit_comment" class="submit_comment" Value="Save"></li>
-     <li> <input type="button" name="delete_comment" class="delete_comment" value="Delete"></li>
-    </ul>
-   </div>
-   <div id="commentId"><label>Comment : </label>
-    <textarea name="comment" class="mediumtext" rows="18" cols="80"><?php
+   <span class="show_loading_small"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/small_loading.gif"/></span>
+   <div id="commentId" class="row"><label>Comment</label>
+    <textarea name="comment" class="mediumtext" rows="30" cols="80"><?php
      echo (!empty($comment->comment)) ? htmlentities($comment->comment) : "";
      ?> </textarea>
 
    </div>
-   <div id="file_upload_form">
+   <div id="file_upload_form" class="row small-top-margin">
     <ul class="inRow asperWidth">
-     <li><input type="file" id="comment_attachments" class="attachments" name="attachments[]" multiple/></li>
-     <li> <input type="button" value="Attach"  name="attach_submit" id="comment_attach_submit" class="submit button comment_attach_submit"></li>
+     <li class="btn btn-info active inline input_file clickable"  role="button"><input type="file" id="comment_attachments"  class="input_file_btn" name="attachments[]" multiple/>
+      <i class="fa fa-paperclip clickable"></i>&nbsp;&nbsp;Select File</li>
+     <li><input type="button"  role="button" value="Attach"  name="attach_submit" id="comment_attach_submit" class="btn btn-info active comment_attach_submit"></li>
+     <li><input type="button" role="button" name="submit_comment" class="btn btn-warning ino-btn submit_comment" Value="Post"></li>
      <?php
      echo form::hidden_field('class_name', $class);
      echo $f->hidden_field_withId('upload_type', 'only_server');
      ?>
-     <li class="show_loading_small"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/small_loading.gif"/></li>
+     
     </ul>
     <div class="uploaded_file_details"></div>
    </div>

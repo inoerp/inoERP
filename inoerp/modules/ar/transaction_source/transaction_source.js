@@ -18,6 +18,9 @@ setValFromSelectPage.prototype.setVal = function() {
 	$('#content').find(fieldClass).val(combination);
 	localStorage.removeItem("field_class");
  }
+//  if(this.ar_transaction_source_id){
+//  $('a.show.ar_transaction_source_id').trigger('click');
+// }
 };
 
 $(document).ready(function() {

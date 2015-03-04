@@ -374,7 +374,9 @@ EOD;
   $search_class_gt = gettext($search_class);
   echo '<label class="big_popover"><a href="#" id="big_popover" ><i class="fa fa-search  clickable" 
       title="Click here to open the serch form" data-toggle="tooltip" ></i></a>
-         <div id="popover-head" class="hide">'.$search_class_gt.'<span  class="close_big_popover f-right medium large-text clickable" aria-hidden="true">&times;</span></div>
+         <div id="popover-head" class="hide">'.$search_class_gt.
+   '<i title="Click Here To Make This Element Draggable"  class="fa fa-arrows medium small-left-padding make-draggable large-text clickable ">
+    </i> <span  class="close_big_popover f-right medium large-text clickable" aria-hidden="true" title="Close This Window">&times;</span></div>
          <div id="popover-content" class="hide"><div id="search-popover">';
   $class_o = $class;
   $$class_o = $$class;
@@ -393,7 +395,9 @@ EOD;
   $search_class_gt = gettext($search_class);
   echo '<label class="big_popover"><a href="#" id="big_popover" ><i class="fa fa-search  clickable" 
       title="Click here to open the serch form" data-toggle="tooltip" ></i></a>
-         <div id="popover-head" class="hide">'.$search_class_gt.' <span  class="close_big_popover f-right medium large-text clickable" aria-hidden="true">&times;</span></div>
+         <div id="popover-head" class="hide">'.$search_class_gt.
+   '<i title="Click Here To Make This Element Draggable" class="fa fa-arrows small-left-padding make-draggable medium large-text clickable ">
+    </i> <span  class="close_big_popover f-right medium large-text clickable" aria-hidden="true"  title="Close This Window">&times;</span></div>
          <div id="popover-content" class="hide"><div id="search-popover">';
   $class_o = $class;
   $$class_o = $$class;
@@ -882,25 +886,25 @@ EOD;
 
  public function ac_field_d3($field_name, $div_class = '', $ac_type = '') {
   global $class_third, $$class_third;
-  $ac_d = $this->_get_account($class_third->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", '', $this->readonly3, $ac_type, '', $ac_d->description);
+  $ac_d = $this->_get_account($$class_third->$field_name);
+   echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", '', $this->readonly3, $ac_type, '', $ac_d->description);
  }
 
  public function ac_field_d3m($field_name, $div_class = '', $ac_type = '') {
   global $class_third, $$class_third;
-  $ac_d = $this->_get_account($class_third->$field_name);
+  $ac_d = $this->_get_account($$class_third->$field_name);
   echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", 1, $this->readonly3, $ac_type, '', $ac_d->description);
  }
 
  public function ac_field_d3r($field_name, $div_class = '', $ac_type = '') {
   global $class_third, $$class_third;
-  $ac_d = $this->_get_account($class_third->$field_name);
+  $ac_d = $this->_get_account($$class_third->$field_name);
   echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", '', 1, $ac_type, '', $ac_d->description);
  }
 
  public function ac_field_d3rm($field_name, $div_class = '', $ac_type = '') {
   global $class_third, $$class_third;
-  $ac_d = $this->_get_account($class_third->$field_name);
+  $ac_d = $this->_get_account($$class_third->$field_name);
   echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, "$div_class select_account", 'select_account', 1, 1, $ac_type, '', $ac_d->description);
  }
 

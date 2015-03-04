@@ -1,29 +1,28 @@
-<div id ="form_header"><span class="heading">Payment Term</span>
- <form action=""  method="post" id="payment_term"  name="payment_term">
-  <div class="large_shadow_box">
+<div id ="form_header"><span class="heading"><?php echo gettext('Payment Term') ?></span>
+ <form action=""  method="post" id="payment_term"  name="payment_term"><?php $f = new inoform(); ?>
+  <div class="tabContainer">
    <ul class="column header_field">
-    <li>
-     <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="payment_term_id select_popup clickable">
-      Payment Term Id</label><?php     $f->text_field_dsr('payment_term_id');     ?>
-     <a name="show" href="form.php?class_name=payment_term&<?php echo "mode=$mode"; ?>" class="show document_id payment_term_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+    <li><?php $f->l_text_field_dr_withSearch('payment_term_id'); ?>
+     <a name="show" href="form.php?class_name=payment_term&<?php echo "mode=$mode"; ?>" class="show document_id payment_term_id">
+      <i class="fa fa-refresh"></i></a> 
     </li>
-    <li><label>Payment Term</label><?php $f->text_field_d('payment_term'); ?></li>
-    <li><label>Description</label><?php $f->text_field_d('description'); ?></li>
-    <li><label>Prepayment</label><?php echo form::checkBox_field('prepayment_cb', $$class->prepayment_cb, 'prepayment_cb', $readonly); ?></li> 
-    <li><label>Status</label><?php echo form::status_field($$class->status, $readonly); ?></li>
-    <li><label>Revision</label><?php echo form::checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?></li> 
-    <li><label>Rev Number</label><?php form::text_field_wid('rev_number'); ?></li> 
+    <li><?php $f->l_text_field_d('payment_term'); ?></li>         
+    <li><?php $f->l_text_field_d('description'); ?></li>         
+    <li><?php $f->l_checkBox_field_d('prepayment_cb'); ?></li> 
+    <li><?php $f->l_status_field_d('status'); ?></li>
+    <li><?php $f->checkBox_field_d('rev_enabled_cb'); ?></li> 
+    <li><?php $f->l_text_field_d('rev_number'); ?></li>         
    </ul>
   </div>
  </form>
 </div>
 
-<div id ="mix_form" class="mix_form"><span class="heading">Schedule & Discount Lines </span>
+<div id ="mix_form" class="mix_form"><span class="heading"><?php echo gettext('Schedule & Discount Lines') ?></span>
 
  <div id="tabsLine">
   <ul class="tabMain">
-   <li><a href="#tabsLine-1">Schedule</a></li>
-   <li><a href="#tabsLine-2">Discount</a></li>
+   <li><a href="#tabsLine-1"><?php echo gettext('Schedule') ?></a></li>
+   <li><a href="#tabsLine-2"><?php echo gettext('Discount') ?> </a></li>
   </ul>
   <div class="tabContainer">
    <div id ="form_line" class="form_line">
@@ -32,14 +31,13 @@
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Action</th>
-         <th>Schedule Id</th>
-         <th>Seq Number</th>
-         <th>Percentage</th>
-         <th>Due Days</th>
-         <th>Due Dates</th>
-         <th>Date of Month</th>
-         <th>Ef id</th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Schedule Id') ?></th>
+         <th><?php echo gettext('Seq Number') ?></th>
+         <th><?php echo gettext('Percentage') ?></th>
+         <th><?php echo gettext('Due Days') ?></th>
+         <th><?php echo gettext('Due Dates') ?></th>
+         <th><?php echo gettext('Date of Month') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody payment_term_schedule_values" >
@@ -48,13 +46,10 @@
         foreach ($payment_term_schedule_object as $payment_term_schedule) {
          ?>         
          <tr class="payment_term_schedule<?php echo $count ?>">
-          <td>    
-           <ul class="inline_action">
-            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($payment_term_schedule->payment_term_schedule_id); ?>"></li>           
-            <li><?php echo form::hidden_field('payment_term_id', $$class->payment_term_id); ?></li>
-           </ul>
+          <td>
+           <?php
+           echo ino_inline_action($payment_term_schedule->payment_term_schedule_id, array('payment_term_id' => $$class->payment_term_id));
+           ?>
           </td>
           <td><?php form::text_field_wid2('payment_term_schedule_id'); ?></td>
           <td><?php form::text_field_wid2('seq_number'); ?></td>
@@ -62,7 +57,6 @@
           <td><?php form::text_field_wid2('due_days'); ?></td>
           <td><?php echo $f->date_fieldFromToday('due_dates', $$class_second->due_dates); ?></td>
           <td><?php form::text_field_wid2('due_date_of_month'); ?></td>
-          <td><?php form::text_field_wid2('ef_id'); ?></td>
          </tr>
          <?php
          $count = $count + 1;
@@ -79,14 +73,13 @@
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th>Action</th>
-         <th>Discount Id</th>
-         <th>Seq Number</th>
-         <th>Percentage</th>
-         <th>Due Days</th>
-         <th>Due Dates</th>
-         <th>Date of Month</th>
-         <th>Ef id</th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Discount Id') ?></th>
+         <th><?php echo gettext('Seq Number') ?></th>
+         <th><?php echo gettext('Percentage') ?></th>
+         <th><?php echo gettext('Due Days') ?></th>
+         <th><?php echo gettext('Due Dates') ?></th>
+         <th><?php echo gettext('Date of Month') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody2 payment_term_discount_values">
@@ -95,13 +88,10 @@
         foreach ($payment_term_discount_object as $payment_term_discount) {
          ?>         
          <tr class="payment_term_discount<?php echo $count ?>">
-          <td>    
-           <ul class="inline_action">
-            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($payment_term_discount->payment_term_discount_id); ?>"></li>           
-            <li><?php echo form::hidden_field('payment_term_id', $$class->payment_term_id); ?></li>
-           </ul>
+          <td>
+           <?php
+           echo ino_inline_action($payment_term_schedule->payment_term_schedule_id, array('payment_term_id' => $$class->payment_term_id));
+           ?>
           </td>
           <td><?php form::text_field_wid3('payment_term_discount_id'); ?></td>
           <td><?php form::text_field_wid3('seq_number'); ?></td>
@@ -109,7 +99,6 @@
           <td><?php form::text_field_wid3('due_days'); ?></td>
           <td><?php echo $f->date_fieldFromToday('due_dates', $$class_third->due_dates); ?></td>
           <td><?php form::text_field_wid3('due_date_of_month'); ?></td>
-          <td><?php form::text_field_wid3('ef_id'); ?></td>
          </tr>
          <?php
          $count = $count + 1;
@@ -145,6 +134,6 @@
   <li class="btn2DivId" data-btn2DivId="form_line" ></li>
   <li class="trClass" data-docHedaderId="payment_term" ></li>
   <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>
-  <li class="noOfTabbs" data-noOfTabbs="3" ></li>
+  <li class="noOfTabbs" data-noOfTabbs="2" ></li>
  </ul>
 </div>

@@ -12,7 +12,6 @@ max-width: 1010px;
 #category_relationDiv, #contents_listDiv{
     clear: both;
     margin: 5px 0;
-    border-top: 10px solid #ccc;
 }
 
 table#category_list{
@@ -116,6 +115,8 @@ float: left;
 
 #content_element, #show_attachment, #content_info{
 clear: both;
+width: 740px;
+margin-left: 30px;
 }
 
 #content_info{
@@ -143,10 +144,11 @@ display: block;
 background-color: rgba(105, 149, 144, 0.23);
 background-image: url("images/heading_bg7.png");
 border: 1px solid #CCC;
-padding-bottom: 10px;
-width: 100%;
+width: 740px;
 float: left;
 margin-bottom: 20px;
+padding: 5px 10px;
+margin-left: 10px;
 }
 
 #content_element ul{
@@ -203,4 +205,8 @@ overflow: hidden;
 
 #form_top_image{
         margin-top: 5px;
+}
+
+#subject{
+        margin-left: 10px;
 }

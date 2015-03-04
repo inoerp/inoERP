@@ -24,7 +24,8 @@ setValFromSelectPage.prototype.setVal = function () {
  var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass");
  var contact_field_class = '.' + localStorage.getItem("contact_field_class");
  addressPopupDivClass = addressPopupDivClass.replace(/\s+/g, '.');
- if (address_id) {
+ 
+  if (address_id) {
   $('#content').find(addressPopupDivClass).find('.address_id').val(address_id);
  }
  if (address_name) {
@@ -60,7 +61,6 @@ setValFromSelectPage.prototype.setVal = function () {
  }
 
  localStorage.removeItem("contact_field_class");
- localStorage.removeItem("addressPopupDivClass");
 
 };
 

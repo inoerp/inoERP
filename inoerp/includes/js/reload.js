@@ -64,12 +64,7 @@ enableLineForSaveAfterFieldChange();
   });
  }
 
- //new object
- $('#new_object_button').on('click', function(e) {
-  e.preventDefault();
-  $('#content').find(':input').val('');
-  $('#content').find(':checkbox').prop('checked', false);
- })
+
 
  remove_row();
 
@@ -244,15 +239,6 @@ enableLineForSaveAfterFieldChange();
   statusbar: false
  });
 
- //Popup for selecting address
- $(".address_id.select_popup").click(function(e) {
-  e.preventDefault();
-  var rowClass = $(this).parent().find('input').first().prop('class');
-  localStorage.setItem("field_class", rowClass);
-  void window.open('select.php?class_name=address', '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-  return false;
- });
 
 //diable/enable auto complete
  $('#content').on('click', '.disable_autocomplete', function() {

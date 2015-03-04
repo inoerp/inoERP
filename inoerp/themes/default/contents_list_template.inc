@@ -2,11 +2,11 @@
  <div class="row">
   <div class="col-xs-12 col-sm-6 col-md-8">
    <div id="all_contents">
-    <div id="content_top"></div>
-    <div id="content">
+    <div id="content_top" class="row"></div>
+    <div id="content" class="row">
      <div id="main">
       <div id="structure">
-       <div id="content_list">
+       <div id="content_list" class="ajax_content">
         <!--    START OF FORM HEADER-->
         <div class="error"></div><div id="loading"></div>
         <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
@@ -30,11 +30,14 @@
           $category_relation_statement = null;
          }
         }
-//pa($content_type);
+
         $content->content_type_id = $content_type->content_type_id;
         $content->category_id = !empty($category_id) ? $category_id : null;
         if ($content_type->show_category_onsummary_cb) {
          $content_lists = $content->showSummaryList_byConteTypeCategory($pageno, $per_page, $query_string);
+        } else if ($content_type->content_type=='forum' &&  $content->category_id == 1) {
+         $content_lists = $content->show_tabular_forum($category_relation_statement);
+         $category_relation_statement = null;
         } else {
          $content_lists = $content->showForumList_byConteTypeCategory($pageno, $per_page, $query_string);
         }
@@ -48,7 +51,7 @@
       </div>
      </div>
     </div>
-    <div id="content_bottom"></div>
+    <div id="content_bottom" class="row"></div>
    </div>
   </div>
   <div class="col-xs-6 col-md-4">

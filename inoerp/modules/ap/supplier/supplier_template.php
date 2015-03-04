@@ -103,9 +103,9 @@
     <div id="tabsLine-2" class="tabContent">
      <div class="first_rowset"> 
       <ul class="column header_field"> 
-       <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $supplier_site->currency, 'currency', '', '', $readonly); ?>       </li>
+       <li><?php $f = new inoform(); $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $supplier_site->currency, 'currency', '', '', $readonly); ?>       </li>
        <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $supplier_site->payment_term_id, 'payment_term_id', $readonly, '', ''); ?>       </li>
-       <li><?php $f->l_checkBox_field_d('debit_memo_onreturn_cb'); ?>       </li> 
+       <li><?php $f->l_checkBox_field('debit_memo_onreturn_cb', $$class_second->debit_memo_onreturn_cb); ?>       </li> 
        <li><?php $f->l_text_field('site_tax_reg_no', $$class_second->pay_on); ?></li>
        <li><?php $f->l_text_field('site_tax_payer_id', $$class_second->fob); ?></li>
        <li><?php $f->l_text_field('site_tax_reg_no', $$class_second->freight_terms); ?></li>
@@ -123,8 +123,8 @@
     <div id="tabsLine-3" class="tabContent">
      <div class="first_rowset"> 
       <ul class="column header_field">
-       <li><?php $f->l_checkBox_field_d('allow_substitute_receipts_cb'); ?>       </li> 
-       <li><?php $f->l_checkBox_field_d('allow_unordered_receipts_cb'); ?>       </li> 
+       <li><?php $f->l_checkBox_field('allow_substitute_receipts_cb', $$class_second->allow_substitute_receipts_cb); ?>       </li> 
+       <li><?php $f->l_checkBox_field('allow_unordered_receipts_cb', $$class_second->allow_unordered_receipts_cb); ?>       </li> 
        <li><?php $f->l_select_field_from_object('ap_invoice_match_level', supplier::ap_invoice_match_level(), 'option_line_code', 'option_line_code', $supplier_site->ap_invoice_match_level, 'ap_invoice_match_level', '', '', $readonly); ?>       </li>
        <li><?php $f->l_select_field_from_object('receipt_routing', supplier::po_receipt_routing(), 'option_line_code', 'option_line_code', $supplier_site->receipt_routing, 'receipt_routing', '', '', $readonly); ?>       </li>
        <li><?php $f->l_select_field_from_object('ship_to_location_variance', option_header::exception_actions(), 'option_line_code', 'option_line_code', $supplier_site->ship_to_location_variance, 'ship_to_location_variance', $readonly, '', ''); ?>       </li>
@@ -155,18 +155,17 @@
     </div>
     <!--end of tab2 (purchasing)!!!! start of sales tab-->
     <div id="tabsLine-4" class="tabContent">
-     <div class="site_address"> 
-      <ul class="column four_column">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-         <?php gettext('Bill To Site Id'); ?></label>
-        <?php $f->text_field_d('site_address_id', 'address_id  site_address_id'); ?>
-       </li>
-       <li><?php $f->l_text_field_dr('site_address_name', 'address_name'); ?></li>
-       <li><?php $f->l_text_field_dr('site_address', 'address'); ?></li>
-       <li><?php $f->l_text_field_dr('site_country', 'country'); ?></li>
-       <li><?php echo $f->l_text_field_dr('site_postal_code', 'postal_code'); ?></li>
-      </ul>
-     </div>
+     <div class="site_address">
+             <ul class="column four_column">
+        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
+          <?php gettext('Site Address Id'); ?></label><?php $f->l_text_field('site_address_id', $$class_second->site_address_id, '', 'address_id', 'address_id'); ?></li>
+        <li><?php $f->l_text_field('site_address_name', $$class_second->site_address_name, '', 'site_address_name', 'address_name', '', 1); ?></li>
+        <li><?php $f->l_text_field('site_address', $$class_second->site_address, '', 'site_address', 'address', '', 1); ?></li>
+        <li><?php $f->l_text_field('site_country', $$class_second->site_country, '', 'site_country', 'country', '', 1); ?></li>
+        <li><?php $f->l_text_field('site_postal_code', $$class_second->site_postal_code, '', 'site_postal_code', 'postal_code', '', 1); ?></li>
+
+       </ul>
+      </div>
     </div> 
     <!--                end of tab3 div three_column-->
     <!--end of tab3 (sales)!!!!start of purchasing tab-->

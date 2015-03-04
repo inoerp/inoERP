@@ -1,5 +1,5 @@
 <div id ="form_header"><span class="heading"><?php echo gettext('Customer Information') ?></span>
- <form action=""  method="post" id="customer_header"  name="customer_header"><?php $f = new inoform(); ?>
+ <form action=""  method="post" id="customer_header"  name="customer_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -9,7 +9,6 @@
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
       <ul class="column header_field">
        <li><?php $f->l_text_field_dr_withSearch('ar_customer_id'); ?>
         <a name="show" href="form.php?class_name=ar_customer&<?php echo "mode=$mode"; ?>" class="show document_id ar_customer_id">
@@ -19,18 +18,16 @@
        <li><label><?php echo gettext('Customer Name') ?><img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete supplier_name clickable"></label>
         <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', 1, $readonly1); ?>
        </li>
-       <li><label><?php echo gettext('Customer Type ') ?></label><?php echo form::select_field_from_object('customer_type', ar_customer::customer_types(), 'option_line_code', 'option_line_value', $$class->customer_type, 'customer_type', $readonly, '', ''); ?>
-       </li>
+       <li><label><?php echo gettext('Customer Type ') ?></label><?php echo form::select_field_from_object('customer_type', ar_customer::customer_types(), 'option_line_code', 'option_line_value', $$class->customer_type, 'customer_type', $readonly, '', ''); ?>       </li>
        <li><?php $f->l_text_field_ds('supplier_id'); ?></li>
        <li><?php $f->l_select_field_from_object('tax_country', option_header::COUNTRIES(), 'option_line_code', 'option_line_value', $$class->tax_country, 'tax_country', '', '', $readonly); ?>       </li>
        <li><?php $f->l_text_field_ds('tax_reg_no'); ?></li>
-       <li>><?php $f->l_text_field_ds('tax_payer_id'); ?></li>
-       <li><?php $f->status_field_d('status'); ?></li>
-       <li><?php $f->checkBox_field_d('rev_enabled_cb'); ?>             </li> 
+       <li><?php $f->l_text_field_ds('tax_payer_id'); ?></li>
+       <li><?php $f->l_status_field_d('status'); ?></li>
+       <li><?php $f->l_checkBox_field_d('rev_enabled_cb'); ?></li> 
        <li><?php $f->l_text_field_ds('rev_number'); ?></li> 
       </ul>
      </div>
-    </div>
     <div id="tabsHeader-2" class="tabContent">
      <div class="three_column right_border"> 
       <?php echo!(empty($assigned_bu_statement)) ? $assigned_bu_statement : ""; ?>
@@ -149,16 +146,15 @@
     </div>
     <!--end of tab2 (purchasing)!!!! start of sales tab-->
     <div id="tabsLine-5" class="tabContent">
-     <div class="site_address"> 
-      <ul class="column four_column">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-         <?php gettext('Site Address Id'); ?></label><?php $f->text_field_d('site_address_id', 'address_id site_address_id'); ?>
-       </li>
-       <li><?php $f->l_text_field_dr('site_address_name', 'address_name'); ?></li>
-       <li><?php $f->l_text_field_dr('site_address', 'address'); ?></li>
-       <li><?php $f->l_text_field_dr('site_country', 'country'); ?></li>
-       <li><?php echo $f->l_text_field_dr('site_postal_code', 'postal_code'); ?></li>
-      </ul>
+     <div class="site_address">
+            <ul class="column four_column">
+        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
+          <?php gettext('Site Address Id'); ?></label><?php $f->l_text_field('site_address_id', $$class_second->site_address_id, '', 'address_id', 'address_id'); ?></li>
+        <li><?php $f->l_text_field('site_address_name', $$class_second->site_address_name, '', 'site_address_name', 'address_name', '', 1); ?></li>
+        <li><?php $f->l_text_field('site_address', $$class_second->site_address, '', 'site_address', 'address', '', 1); ?></li>
+        <li><?php $f->l_text_field('site_country', $$class_second->site_country, '', 'site_country', 'country', '', 1); ?></li>
+        <li><?php $f->l_text_field('site_postal_code', $$class_second->site_postal_code, '', 'site_postal_code', 'postal_code', '', 1); ?></li>
+       </ul>
      </div>
     </div> 
     <!--                end of tab3 div three_column-->

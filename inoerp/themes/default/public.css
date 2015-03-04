@@ -340,7 +340,7 @@ ul.pages { padding-left: 2em; list-style: square; }
  text-align: left;
  padding: 20px 15px;
  box-shadow: 1px 5px 10px 5px rgb(136, 136, 136);
- background-color: rgba(40, 100, 40, 0.2);
+ background-color: rgba(211, 215, 216, 0.68);
 }
 
 #searchResultMessages ul.inline_list img{
@@ -1471,4 +1471,39 @@ box-shadow: 100px 200px 200px 100px rgba(33, 42, 39, 0.72);
 
 ul.add_new_search li, ul.tabMain li{
         width: unset!important;
+}
+
+.comment img{
+        max-width: 650px;
+}
+
+.input_file{
+ position: relative;
+}
+.input_file_btn {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1;
+  opacity: 0;
+}
+
+.input_file{
+        width: 200px;
+        font-weight: bold !important;
+
+}
+
+.submit_comment{
+ margin-left: 250px;
+}
+
+
+
+legend.major{
+        font-size: 1em;
+}
+
+.table_container{
+        border-top: 5px solid#E3D6D6;
 }
