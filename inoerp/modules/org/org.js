@@ -63,7 +63,7 @@ setValFromSelectPage.prototype.setVal = function() {
  function orgValues(orgType) {
  var org_type = orgType;
  $('#loading').show();
- $.ajax({
+ return $.ajax({
   url: 'modules/org/json_org.php',
   type: 'get',
   dataType: 'json',
@@ -74,17 +74,27 @@ setValFromSelectPage.prototype.setVal = function() {
   success: function(result) {
    var items = [];
    $.each(result, function(key, val) {
-    alert(key);
+    var items = [];
+    var option_stmt = '<option value=""></option>';
+    $.each(result, function (key, val) {
+     option_stmt += '<option value="' + val.org_id + '">' + val.org + '</option>';
+     items.push("<li id='" + key + "'>" + val + "</li>");
+    });
+    var org_type_id = '#' + org_type + '_id';
+    $(org_type_id).removeAttr('disabled');
+    $(org_type_id).empty().append(option_stmt);
    });
+   $('.show_loading_small').hide();
   },
   complete: function() {
-   $('.show_loading_small').hide();
+   
   },
   beforeSend: function() {
    $('.show_loading_small').show();
   },
   error: function(request, errorType, errorMessage) {
-   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+//   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+$('.show_loading_small').hide();
   }
  });
 }
@@ -96,7 +106,7 @@ $(document).ready(function() {
  $("#enterprise_org_id, #legal_org_id,#business_org_id").prop('readonly', true);
 
 
- $("#content").on('change', '#type', function() {
+ $("#content").off('change', '#org #type').on('change', '#org #type', function() {
   var selectedVal = $(this).val();
   switch (selectedVal) {
    case 'ENTERPRISE' :
@@ -148,16 +158,4 @@ $(document).ready(function() {
 
 deleteReferences();
 
-
-$("#content").on('change', '#type', function() {
- var selectedVal = $(this).val();
- if (selectedVal === "ENTERPRISE") {
-  return false;
- } else {
-  orgValues('enterprise');
- }
 });
-
-});
-
-

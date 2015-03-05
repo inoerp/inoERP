@@ -1,4 +1,4 @@
-<div id ="form_all">
+<div id ="form_all"><?php $f = new inoform(); ?>
  <form action=""  method="post" id="org"  name="org"><span class="heading">Organization </span>
   <div id ="form_header">
    <div id="tabsHeader">
@@ -11,10 +11,9 @@
      <div id="tabsHeader-1" class="tabContent">
       <div class="large_shadow_box"> 
        <ul class="column header_field"> 
-        <li> 
-         <label><img src="<?php echo HOME_URL; ?>themes/default/images/serach.png" class="org_id select_popup clickable">
-          Org Id</label><?php $f->text_field_ds('org_id') ?>
-         <a name="show" href="form.php?class_name=org&<?php echo "mode=$mode"; ?>" class="show document_id org_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <li><?php $f->l_text_field_dr_withSearch('org_id') ?>
+         <a name="show" href="form.php?class_name=org&<?php echo "mode=$mode"; ?>" class="show document_id org_id">
+          <i class="fa fa-refresh"></i></a> 
         </li> 
         <li><label>Org Type</label><?php echo $f->select_field_from_object('type', org::org_types(), 'option_line_code', 'option_line_value', $$class->type, 'type', '', 1, $readonly1); ?>        </li> 
         <li><label>Org</label><?php $f->text_field_dm('org'); ?> </li> 
