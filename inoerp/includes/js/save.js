@@ -660,30 +660,21 @@ add_new_rowMain.prototype.add_new_row = function (afterAddNewRow) {
   $(this).val('');
  });
  if (this.removeDefault === true) {
-  $("tr.new_object" + objectCount).find("td input[type=text], input.dontCopy").not(divClassToBeCopied_c).each(function () {
+  $("tr.new_object" + objectCount).find("td input[type=text],td input[type=number], td input[type=select]").not(divClassToBeCopied_c).each(function () {
    $(this).val('');
    $(this).attr('value', '');
+   $(this).removeAttr('id, readonly', 'disabled');
+   $(this).removeClass('readonly');
   });
   $("tr.new_object" + objectCount).find(".checkBox.dontCopy").not(divClassToBeCopied_c).each(function () {
    $(this).attr('checked', false);
-  });
-  $("tr.new_object" + objectCount).find("td input[type=number]").not(divClassToBeCopied_c).each(function () {
-   $(this).val('');
-   $(this).attr('value', '');
-  });
-  $("tr.new_object" + objectCount).find("td select").not(divClassToBeCopied_c).each(function () {
-   $(this).val('');
-   $(this).attr('value', '');
   });
   $("tr.new_object" + objectCount).find("td.text_not_tobe_copied").each(function () {
    $(this).val('');
    $(this).attr('value', '');
   });
  }
- $("tr.new_object" + objectCount).find(":input").removeAttr('id');
- $("tr.new_object" + objectCount).find(":input").removeAttr('readonly');
- $("tr.new_object" + objectCount).find(":input").removeClass('readonly');
- $("tr.new_object" + objectCount).find("select").removeAttr('disabled');
+
  $("tr.new_object" + objectCount).find(".class_detail_form").replaceWith("");
  $("tr.new_object" + objectCount).find(".seq_number").val(nextSeqNumber);
  $('.lines_number:last').val(nextLineSeqNumber);

@@ -1523,6 +1523,12 @@ EOD;
   echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->status_field($$class->$field_name, $this->readonly);
  }
+ 
+  public function l_status_field_dr($field_name) {
+  global $readonly, $class, $$class;
+  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->status_field($$class->$field_name, 1);
+ }
 
  public function status_field_d2($field_name) {
   global $readonly, $class_second, $$class_second;

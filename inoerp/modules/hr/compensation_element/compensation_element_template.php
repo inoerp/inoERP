@@ -1,5 +1,6 @@
 <div id ="form_header">
- <form action=""  method="post" id="hr_compensation_element"  name="hr_compensation_element"><span class="heading">Compensation Element</span>
+ <form action=""  method="post" id="hr_compensation_element"  name="hr_compensation_element">
+  <span class="heading">Compensation Element</span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">

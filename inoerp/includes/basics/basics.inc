@@ -142,6 +142,7 @@ require_once(INC_AR . DS . "transaction_source" . DS . "class_ar_transaction_sou
 require_once(INC_AR . DS . "transaction_interface" . DS . "class_ar_transaction_interface.inc");
 require_once(INC_MODULE . DS . "ar" . DS . "receipt_source" . DS . "class_ar_receipt_source.inc");
 require_once(INC_MODULE . DS . "ar" . DS . "transaction" . DS . "class_ar_unpaid_transaction_v.inc");
+require_once(INC_MODULE . DS . "ar" . DS . "sales_region" . DS . "class_ar_sales_region.inc");
 require_once(INC_MODULE . DS . "fa" . DS . "asset_book" . DS . "class_fa_asset_book.inc");
 require_once(INC_MODULE . DS . "fa" . DS . "asset" . DS . "class_fa_asset.inc");
 require_once(INC_MODULE . DS . "fa" . DS . "asset" . DS . "class_fa_asset_assignment.inc");

@@ -1209,6 +1209,7 @@ select.search_document_list option:nth-child(even) {
 
 ul.header_field li{
  margin-bottom: 3px;
+ text-align: left;
 }
 
 .line_before_tab{
@@ -1506,4 +1507,8 @@ legend.major{
 
 .table_container{
         border-top: 5px solid#E3D6D6;
+}
+
+.vertical-align-top >div{
+        vertical-align: top;
 }

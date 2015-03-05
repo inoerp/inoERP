@@ -40,7 +40,7 @@
    'location_id',
    'description',
    'start_date',
-   'end_Date',
+   'end_date',
    'headcount',
    'grade_id',
    'payroll_id',
@@ -79,7 +79,7 @@
   public $location_id;
   public $description;
   public $start_date;
-  public $end_Date;
+  public $end_date;
   public $headcount;
   public $grade_id;
   public $payroll_id;

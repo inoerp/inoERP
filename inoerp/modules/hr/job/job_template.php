@@ -1,40 +1,38 @@
 <div id ="form_header">
- <form action=""  method="post" id="hr_job"  name="hr_job"><span class="heading">Job </span>
+ <form action=""  method="post" id="hr_job"  name="hr_job">
+  <span class="heading"><?php echo gettext('Job') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Requirements</a></li>
-     <li><a href="#tabsHeader-3">Attachments</a></li>
-     <li><a href="#tabsHeader-4">Notes</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Requirements') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
-       <ul class="column header_field"> 
-        <li> 
-         <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_job_id select_popup clickable">
-          job Id</label><?php $f->text_field_ds('hr_job_id') ?>
-         <a name="show" href="form.php?class_name=hr_job&<?php echo "mode=$mode"; ?>" class="show document_id hr_job_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-        </li>
-        <li><label>Job Name</label><?php $f->text_field_d('job_name'); ?></li>
-        <li><label>Job Code</label><?php $f->text_field_d('job_code'); ?></li>
-        <li><label>Start Date</label><?php echo $f->date_fieldAnyDay('start_date', $$class->start_date); ?></li>
-        <li><label>End Date</label><?php echo $f->date_fieldAnyDay('start_date', $$class->start_date); ?></li>
-        <li><label>Position Type</label><?php echo $f->select_field_from_object('position_type', hr_job::job_position_type(), 'option_line_code', 'option_line_value', $$class->position_type, '', 'position_type', '', $readonly); ?></li>
-        <li><label>Status</label><?php echo form::status_field($$class->status, $readonly); ?></li>
-        <li><label>Description</label><?php $f->text_field_dl('description'); ?></li>
-        <li><label>Functional Area</label><?php echo $f->select_field_from_object('functional_area', hr_job::job_functional_area(), 'option_line_code', 'option_line_value', $$class->functional_area, '', 'functional_area', '', $readonly); ?></li>
-       </ul>
-      </div>
+      <ul class="column header_field"> 
+       <li><?php $f->l_text_field_dr_withSearch('hr_job_id') ?>
+        <a name="show" href="form.php?class_name=hr_job&<?php echo "mode=$mode"; ?>" class="show document_id hr_job_id">
+         <i class="fa fa-refresh"></i></a> 
+       </li>
+       <li><?php $f->l_text_field_d('job_name'); ?></li>
+       <li><?php $f->l_text_field_d('job_code'); ?></li>
+       <li><?php $f->l_date_fieldAnyDay('start_date', $$class->start_date) ?></li>
+       <li><?php $f->l_date_fieldAnyDay('end_date', $$class->end_date) ?></li>
+       <li><?php $f->l_select_field_from_object('position_type', hr_job::job_position_type(), 'option_line_code', 'option_line_value', $$class->position_type, 'position_type', '', '', $readonly); ?></li>
+       <li><?php $f->l_status_field_d('status'); ?></li>
+       <li><?php $f->l_text_field_d('description'); ?></li>
+       <li><?php $f->l_select_field_from_object('functional_area', hr_job::job_functional_area(), 'option_line_code', 'option_line_value', $$class->functional_area, '', 'functional_area', '', $readonly); ?></li>
+      </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div class="large_shadow_box"> 
-       <ul class="column header_field"> 
-        <li><label>Education</label><?php $f->text_field_dl('min_education'); ?> 					</li>
-        <li><label>Experience</label><?php $f->text_field_dl('min_experience'); ?> 					</li>
-        <li><label>Technology</label><?php $f->text_field_dl('technology'); ?> 					</li>
-        <li><label>Skill Set</label><?php $f->text_field_dl('skillset'); ?> 					</li>
+       <ul class="column header_field">
+        <li><?php $f->l_text_field_d('min_education'); ?></li>
+        <li><?php $f->l_text_field_d('min_experience'); ?></li>
+        <li><?php $f->l_text_field_d('technology'); ?></li>
+        <li><?php $f->l_text_field_d('skillset'); ?></li>
        </ul>
       </div>
      </div>
@@ -62,22 +60,22 @@
 
    </div>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading">job Details & Responsibility </span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('job Details & Responsibility') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1">Job Details</a></li>
-     <li><a href="#tabsLine-2">Responsibility</a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Job Details') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Responsibility') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
-      <div><label class="text_area_label">Job Details  :</label><?php
+      <div><label class="text_area_label"><?php echo gettext('Job Details') ?></label><?php
        echo $f->text_area_ap(array('name' => 'job_details', 'value' => $$class->job_details,
         'row_size' => '10', 'column_size' => '90'));
        ?> 	
       </div> 
      </div> 
      <div id="tabsLine-2"  class="tabContent">
-      <div><label class="text_area_label">Primary Responsibility  :</label><?php
+      <div><label class="text_area_label"><?php echo gettext('Primary Responsibility') ?></label><?php
        echo $f->text_area_ap(array('name' => 'primary_responsibility', 'value' => $$class->primary_responsibility,
         'row_size' => '10', 'column_size' => '90'));
        ?> 	

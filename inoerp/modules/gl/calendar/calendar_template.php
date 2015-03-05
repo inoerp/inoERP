@@ -40,13 +40,10 @@
            $gl_calendar = $calendar_object_ai->current();
            ?>         
            <tr class="gl_calendar<?php echo $count ?>">
-            <td>    
-             <ul class="inline_action">
-              <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-              <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-              <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class->gl_calendar_id); ?>"></li>           
-              <li><?php echo form::hidden_field('option_line_code', $$class->option_line_code); ?></li>
-             </ul>
+            <td>
+             <?php
+             echo ino_inline_action($$class->gl_calendar_id, array('option_line_code' => $$class->option_line_code));
+             ?>
             </td>
             <td><?php form::number_field_drs('gl_calendar_id') ?></td>
             <td><?php echo form::select_field_from_object('calendar_type', gl_calendar::period_types(), 'option_line_code', 'option_line_value', $$class->calendar_type, '', $readonly); ?></td>

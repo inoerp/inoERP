@@ -3433,6 +3433,8 @@ $(this).closest('div').draggable();
   addNewRow.tbodyClass = 'form_data_line_tbody';
   addNewRow.noOfTabs = noOfTabbs;
   addNewRow.removeDefault = true;
+  addNewRow.divClassToBeCopied = 'copy';
+  addNewRow.divClassNotToBeCopied = 'dontCopy';
   addNewRow.add_new_row();
   $(".tabsDetail").tabs();
  });

@@ -4,92 +4,66 @@ if (!isset($readonly1)) {
 }
 ?>
 <div id ="form_header">
- <form action=""  method="post" id="gl_journal_header"  name="gl_journal_header"><span class="heading">Journal Header </span>
+ <form action=""  method="post" id="gl_journal_header"  name="gl_journal_header">
+  <span class="heading"><?php echo gettext('Journal Header') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1">Basic Info</a></li>
-    <li><a href="#tabsHeader-2">Reference Details</a></li>
-    <li><a href="#tabsHeader-3">Attachments</a></li>
-    <li><a href="#tabsHeader-4">Notes</a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Reference Details') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
-      <ul class="column header_field">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="gl_journal_header_id select_popup">
-         Journal Header Id</label><?php echo $f->text_field_dsr('gl_journal_header_id') ?>
-        <a name="show" href="form.php?class_name=gl_journal_header&<?php echo "mode=$mode"; ?>" class="show document_id gl_journal_header_id">
-         <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> </li>
-       <li><label>Ledger Name(1)</label><?php echo $f->select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', '', 1, $readonly1); ?></li>
-       <li><label>Currency(2)</label><?php echo form::select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'currency', '', 1, $readonly1); ?>  </li>
-       <li><label>Period Name(3)</label><?php echo $period_name_stmt; ?></li>
-       <li><label>COA</label><?php echo form::text_field_dsrm('coa_id'); ?></li>
-       <li><label>Document Date</label><?php echo form::date_fieldFromToday_m('document_date', $$class->document_date) ?></li>
-       <li><label>Journal Name</label><?php echo form::text_field_dm('journal_name'); ?></li>
-       <li><label>Description</label><?php echo form::text_field_d('description'); ?></li>
-       <li><label>Balance Type</label><?php echo form::select_field_from_object('balance_type', $$class->gl_balance_type(), 'option_line_code', 'option_line_value', $$class->balance_type, 'balance_type', $readonly1, '', '', 1); ?></li>
-       <li><label>Status</label><?php echo $f->text_field_dr('status'); ?></li>
-       <li><label>Posted Date</label><?php echo form::date_fieldFromToday('post_date', $$class->post_date) ?></li>
-       <li><label>Revision</label><?php echo form::checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?></li> 
-       <li><label>Rev Number</label><?php form::text_field_wid('rev_number'); ?></li> 
-       <li id="document_status"><label>Action</label><?php echo $f->select_field_from_array('action', $action_a, $$class->action, 'action'); ?></li>
-      </ul>
-     </div>
+     <ul class="column header_field">
+      <li><?php echo $f->l_text_field_dr_withSearch('gl_journal_header_id') ?>
+       <a name="show" href="form.php?class_name=gl_journal_header&<?php echo "mode=$mode"; ?>" class="show document_id gl_journal_header_id">
+        <i class="fa fa-refresh"></i></a> </li>
+      <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', '', 1, $readonly1); ?></li>
+      <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'currency', '', 1, $readonly1); ?>  </li>
+      <li><label>Period Name(3)</label><?php echo $period_name_stmt; ?></li>
+      <li><?php $f->l_text_field_dr('coa_id'); ?></li>
+      <li><?php $f->l_date_fieldFromToday_m('document_date', $$class->document_date) ?></li>
+      <li><?php $f->l_text_field_dm('journal_name'); ?></li>
+      <li><?php $f->l_text_field_d('description'); ?></li>
+      <li><?php $f->l_select_field_from_object('balance_type', $$class->gl_balance_type(), 'option_line_code', 'option_line_value', $$class->balance_type, 'balance_type', '', 1, $readonly1); ?></li>
+      <li><?php $f->l_status_field_dr('status'); ?></li>
+      <li><?php $f->l_date_fieldFromToday_d('post_date', $$class->post_date) ?></li>
+      <li><?php $f->l_checkBox_field_d('rev_enabled_cb'); ?></li> 
+      <li><?php $f->l_text_field_d('rev_number'); ?></li> 
+      <li id="document_status"><?php $f->l_select_field_from_array('action', $action_a, $$class->action, 'action'); ?></li>
+     </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
-     <div> 
-      <ul class="small_box gl_exchange_details">
-       <box_heading>Exchange Rate Details</box_heading> 
-       <li><label>Exchange Rate Type : </label>
-        <?php echo form::text_field_d('exchange_type'); ?>
-       </li>
-       <li><label>Exchange Date : </label>
-        <?php echo form::date_fieldAnyDay('document_date', $$class->document_date) ?>
-       </li>
-       <li><label>Exchange Rate : </label>
-        <?php form::number_field_d('exchange_rate'); ?>
-       </li>
-      </ul>
-      <ul class="small_box amount_details">
-       <box_heading>Header Amounts</box_heading> 
-       <li><label>Total Dr : </label>
-        <?php form::number_field_dr('running_total_dr'); ?>
-       </li>
-       <li><label>Total Cr: </label>
-        <?php form::number_field_dr('running_total_cr'); ?>
-       </li>
-       <li><label>Ledger Total Dr : </label>
-        <?php form::number_field_dr('running_toatl_ac_dr'); ?>
-       </li>
-       <li><label>Ledger Total Cr : </label>
-        <?php form::number_field_dr('running_toatl_ac_cr'); ?>
-       </li>
-       <li><label>Control Total : </label>
-        <?php form::text_field_d('control_total'); ?>
-       </li>
-      </ul>
-      <ul class="large_box reference_details">
-       <box_heading>Journal References</box_heading> 
-       <li><label>Journal Source : </label>
-        <?php echo form::text_field_dm('journal_source'); ?>
-       </li>
-       <li><label>Reference Category : </label>
-        <?php echo form::select_field_from_object('journal_category', $$class->gl_journal_category(), 'option_line_code', 'option_line_value', $$class->journal_category, 'journal_category', $readonly1, '', '', 1); ?>
-       </li>
-       <li><label>Reference Type : </label>
-        <?php echo form::text_field_d('reference_type'); ?>
-       </li>
-       <li><label>Ref Key Name : </label>
-        <?php echo form::text_field_d('reference_key_name'); ?>
-       </li>
-       <li><label>Ref Key Value : </label>
-        <?php echo form::text_field_d('reference_key_value'); ?>
-       </li>
-       <li><label>View Ref Doc : </label>
-        <?php echo $ref_doc_stmt; ?>
-       </li>
-      </ul>
-
+     <div class="vertical-align-top">
+      <div class="panel panel-collapse panel-ino-classy large_box">
+       <div class="panel-heading"><div class="panel-title"><?php echo gettext('Rate & Amounts') ?></div></div>
+       <div class="panel-body">
+        <ul class="column header_field">
+         <li><?php $f->l_select_field_from_object('exchange_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_type, 'exchange_type', '', 1, $readonly); ?></li>
+         <li><?php $f->l_number_field('exchange_rate', $$class->exchange_rate, '', 'exchange_rate'); ?> </li>
+         <li><?php $f->l_number_field('running_total_dr', $$class->running_total_dr, '15', 'running_total_dr'); ?></li>
+         <li><?php $f->l_number_field('running_total_cr', $$class->running_total_cr, '15', 'running_total_cr'); ?></li>
+         <li><?php $f->l_number_field('running_toatl_ac_dr', $$class->running_toatl_ac_dr, '15', 'running_toatl_ac_dr'); ?></li>
+         <li><?php $f->l_number_field('running_toatl_ac_cr', $$class->running_toatl_ac_cr, '15', 'running_toatl_ac_cr'); ?></li>
+         <li><?php $f->l_number_field('control_total', $$class->control_total, '15', 'control_total'); ?></li>
+         <li><?php $f->l_date_fieldFromToday('document_date', $$class->document_date) ?></li>
+        </ul>
+       </div>
+      </div>
+      <div class="panel panel-collapse panel-ino-classy medium_box">
+       <div class="panel-heading"><div class="panel-title"><?php echo gettext('References') ?></div></div>
+       <div class="panel-body">
+        <ul class="column header_field">
+         <li><?php $f->l_text_field_d('journal_source'); ?></li>
+         <li><?php $f->l_select_field_from_object('journal_category', $$class->gl_journal_category(), 'option_line_code', 'option_line_value', $$class->journal_category, 'journal_category', '', '', 1, $readonly1); ?></li>
+         <li><?php $f->l_text_field_d('reference_type'); ?></li>
+         <li><?php $f->l_text_field_d('reference_key_name'); ?></li>
+         <li><?php $f->l_text_field_d('reference_key_value'); ?></li>
+         <li><label><?php echo gettext('View Ref Doc') ?></label><?php echo $ref_doc_stmt; ?></li>
+        </ul>
+       </div>
+      </div>
      </div>
     </div>
     <div id="tabsHeader-3" class="tabContent">
@@ -116,7 +90,7 @@ if (!isset($readonly1)) {
  </form>
 </div>
 
-<div id ="form_line" class="gl_journal_line"><span class="heading">Journal Lines </span>
+<div id ="form_line" class="gl_journal_line"><span class="heading"><?php echo gettext('Journal Lines') ?></span>
  <div id="tabsLine">
   <ul class="tabMain">
    <li><a href="#tabsLine-1">Basic </a></li>
@@ -128,16 +102,16 @@ if (!isset($readonly1)) {
      <table class="form_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th>Line Id</th>
-        <th>Line Number</th>
-        <th>Account</th>
-        <th>Debit</th>
-        <th>Credit</th>
-        <th>Ledger Dr</th>
-        <th>Ledger Cr</th>
-        <th>Status</th>
-
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Line Number') ?></th>
+        <th><?php echo gettext('Account') ?></th>
+        <th><?php echo gettext('Debit') ?></th>
+        <th><?php echo gettext('Credit') ?></th>
+        <th><?php echo gettext('Ledger Dr') ?></th>
+        <th><?php echo gettext('Ledger Cr') ?></th>
+        <th><?php echo gettext('Status') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody gl_journal_line_values" >
@@ -147,25 +121,23 @@ if (!isset($readonly1)) {
        foreach ($gl_journal_line_object as $gl_journal_line) {
         ?>         
         <tr class="gl_journal_line<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class_second->gl_journal_line_id); ?>"></li>           
-           <li><?php echo form::hidden_field('gl_journal_header_id', $$class->gl_journal_header_id); ?></li>
-           <li><?php echo form::hidden_field('ledger_id', $$class->ledger_id); ?></li>
-          </ul>
+         <td>
+          <?php
+          echo ino_inline_action($$class_second->gl_journal_line_id, array('gl_journal_header_id' => $$class->gl_journal_header_id,
+           'ledger_id' => $$class->ledger_id));
+          ?>
          </td>
          <td><?php form::text_field_wid2sr('gl_journal_line_id'); ?></td>
+         <td><?php $f->seq_field_d($count); ?></td>
          <td><?php echo form::text_field('line_num', $$class_second->line_num, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
-         <td><?php $f->ac_field_wid2('code_combination_id','dontCopy'); ?> </td>
+         <td><?php $f->ac_field_wid2('code_combination_id', 'dontCopy'); ?> </td>
          <td><?php form::number_field_wid2('total_dr'); ?></td>
          <td><?php form::number_field_wid2('total_cr'); ?></td>
          <td><?php form::number_field_wid2('total_ac_dr'); ?></td>
          <td><?php form::number_field_wid2('total_ac_cr'); ?></td>
          <td><?php
           $status = empty($$class_second->status) ? 'U' : $$class_second->status;
-          echo $f->text_field('status', $status, 8, '', '', '', 1);
+          echo $f->text_field('status', $status, 8, '', 'copy', '', 1);
           ?></td>
 
         </tr>
@@ -180,10 +152,11 @@ if (!isset($readonly1)) {
      <table class="form_table">
       <thead> 
        <tr>
-        <th>Description</th>
-        <th>Ref Type </th>
-        <th>Ref Key Name</th>
-        <th>Ref Value</th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Description') ?></th>
+        <th><?php echo gettext('Ref Type') ?></th>
+        <th><?php echo gettext('Ref Key Name') ?></th>
+        <th><?php echo gettext('Ref Value') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody gl_journal_line_values" >
@@ -192,6 +165,7 @@ if (!isset($readonly1)) {
        foreach ($gl_journal_line_object as $gl_journal_line) {
         ?>         
         <tr class="gl_journal_line<?php echo $count ?>">
+         <td><?php $f->seq_field_d($count); ?></td>
          <td><?php form::text_field_wid2l('description'); ?></td>
          <td><?php form::text_field_wid2r('reference_type'); ?></td>
          <td><?php form::text_field_wid2r('reference_key_name'); ?></td>

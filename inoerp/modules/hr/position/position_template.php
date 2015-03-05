@@ -1,40 +1,39 @@
 <div id ="form_header">
- <form action=""  method="post" id="hr_position"  name="hr_position"><span class="heading">Position Header</span>
-  <div id ="form_header">
+ <form action=""  method="post" id="hr_position"  name="hr_position">
+  <span class="heading"><?php echo gettext('Position Header') ?></span>
+  <div id ="form_header"><?php $f = new inoform(); ?>
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Terms</a></li>
-     <li><a href="#tabsHeader-3">Attachments</a></li>
-     <li><a href="#tabsHeader-4">Notes</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Terms') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
-       <ul class="column header_field"> 
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_position_id select_popup clickable">
-          position Id</label><?php $f->text_field_ds('hr_position_id') ?>
-         <a name="show" href="form.php?class_name=hr_position" class="show hr_position_id">	<img src="<?php echo HOME_URL; ?>themes/images/refresh.png" class="clickable"></a> 
-        </li>
-        <li><label>Position Name</label><?php $f->text_field_d('position_name'); ?></li>
-        <li><label>Organization</label><?php echo $f->select_field_from_object('org_id', org::find_all(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?> 					</li>
-        <li><label>Start Date</label><?php echo $f->date_fieldAnyDay('start_date', $$class->start_date); ?></li>
-        <li><label>End Date</label><?php echo $f->date_fieldAnyDay('start_date', $$class->start_date); ?></li>
-        <li><label>Job Name</label><?php echo $f->select_field_from_object('job_id', hr_job::find_all(), 'hr_job_id', 'job_name', $$class->job_id, '', 'job_id', '', $readonly); ?>              </li>
-        <li><label>Status</label><?php echo form::status_field($$class->position_status, $readonly); ?></li>
-        <li><label>Description</label><?php $f->text_field_dl('description'); ?></li>
-       </ul>
-      </div>
+      <ul class="column header_field"> 
+       <li><?php $f->l_text_field_dr_withSearch('hr_position_id') ?>
+        <a name="show" href="form.php?class_name=hr_position" class="show hr_position_id clickable">	
+         <i class="fa fa-refresh"></i></a> 
+       </li>
+       <li><?php $f->l_text_field_d('position_name'); ?></li>
+       <li><?php $f->l_select_field_from_object('org_id', org::find_all(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?> 					</li>
+       <li><?php $f->l_select_field_from_object('job_id', hr_job::find_all(), 'hr_job_id', 'job_name', $$class->job_id, '', 'job_id', '', $readonly); ?>              </li>
+       <li><?php $f->l_date_fieldAnyDay('start_date', $$class->start_date) ?></li>
+       <li><?php $f->l_date_fieldAnyDay('end_date', $$class->end_date) ?></li>
+       <li><?php $f->l_status_field_d('position_status'); ?></li>
+       <li><?php $f->l_text_field_d('description'); ?></li>
+      </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div class="large_shadow_box"> 
        <ul class="column header_field"> 
-        <li><label>Head Count</label><?php $f->text_field_dl('headcount'); ?> 					</li>
-        <li><label>Grade</label><?php $f->text_field_dl('grade_id'); ?> 					</li>
-        <li><label>Payroll</label><?php $f->text_field_dl('payroll_id'); ?> 					</li>
-        <li><label>Salary Basis</label><?php $f->text_field_dl('salary_basis'); ?> 					</li>
-        <li><label>Working Hours</label><?php $f->text_field_dl('working_hours'); ?> 					</li>
-        <li><label>Frequency</label><?php $f->text_field_dl('wh_frequency'); ?> 					</li>
+        <li><?php $f->l_text_field_d('headcount'); ?> </li>
+        <li><?php $f->l_text_field_d('grade_id'); ?> </li>
+        <li><?php $f->l_text_field_d('payroll_id'); ?> </li>
+        <li><?php $f->l_text_field_d('salary_basis'); ?> </li>
+        <li><?php $f->l_text_field_d('working_hours'); ?> </li>
+        <li><?php $f->l_text_field_d('wh_frequency'); ?> </li>
        </ul>
       </div>
      </div>
@@ -61,15 +60,15 @@
     </div>
    </div>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading">Position Details </span>
+  <div id ="form_line" class="form_line"><span class="heading">Line Data </span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1">Position Details</a></li>
-     <li><a href="#tabsLine-2">Future</a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Details') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
-      <div><label class="text_area_label">Position Details  :</label><?php
+      <div><label class="text_area_label"><?php echo gettext('Position Details') ?></label><?php
        echo $f->text_area_ap(array('name' => 'position_details', 'value' => $$class->position_details,
         'row_size' => '10', 'column_size' => '90'));
        ?> 	

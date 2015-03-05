@@ -92,7 +92,8 @@
       <ul class="column header_field"> 
        <li><?php $f->l_select_field_from_object('customer_site_type', ar_customer_site::customer_site_types(), 'option_line_code', 'option_line_value', $$class_second->customer_site_type, 'customer_site_type', '', '', $readonly); ?>       </li>
        <li><?php $f->l_text_field('customer_site_ref', $$class_second->customer_site_ref); ?>  </li>
-       <li><?php $f->l_select_field_from_object('site_tax_country', option_header::COUNTRIES(), 'option_line_code', 'option_line_code', $$class_second->site_tax_country, 'tax_country', '', '', $readonly); ?>       </li>
+       <li><?php $f->l_select_field_from_object('site_tax_country', option_header::COUNTRIES(), 'option_line_code', 'option_line_code', $$class_second->site_tax_country, '', '', '', $readonly); ?>       </li>
+       <li><?php $f->l_select_field_from_object('ar_sales_region_id', ar_sales_region::find_all(), 'ar_sales_region_id', 'sales_region_name', $$class_second->ar_sales_region_id, '', 'medium', '', $readonly); ?>       </li>
        <li><?php $f->l_text_field('site_tax_reg_no', $$class_second->site_tax_reg_no); ?></li>
        <li><?php $f->l_text_field('site_tax_payer_id', $$class_second->site_tax_payer_id); ?></li>
        <li><?php $f->l_text_field('site_tax_code', $$class_second->site_tax_code); ?></li>
