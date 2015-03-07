@@ -1,7 +1,7 @@
 inoERP
 =========================
 
-Demo: <http://demo.inoideas.org/extensions/user/user_login.php>
+Demo: <http://inoerp.org/extensions/user/user_login.php>
 
 Homepage: <http://inoideas.org/>
 
