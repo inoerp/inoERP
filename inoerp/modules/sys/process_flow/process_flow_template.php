@@ -1,27 +1,25 @@
-
-<div id ="form_header"><span class="heading">Process Flow Header </span>
+<div id ="form_header">
+ <span class="heading"><?php echo gettext('Process Flow Header') ?></span>
  <form action=""  method="post" id="process_flow_header"  name="process_flow_header">
-  <div id="tabsHeader">
+  <div id="tabsHeader"><?php $f = new inoform(); ?>
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1">Basic Info</a></li>
-    <li><a href="#tabsHeader-2">Notes</a></li>
-    <li><a href="#tabsHeader-3">Attachments</a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
       <ul class="column header_field">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="process_flow_header_id select_popup clickable">
-         Prolow Id</label><?php $f->text_field_dsr('sys_process_flow_header_id') ?>
-        <a name="show" href="form.php?class_name=sys_process_flow_header&<?php echo "mode=$mode"; ?>" class="show document_id sys_process_flow_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+       <li><?php $f->l_text_field_dr_withSearch('sys_process_flow_header_id') ?>
+        <a name="show" href="form.php?class_name=sys_process_flow_header&<?php echo "mode=$mode"; ?>" class="show document_id sys_process_flow_header_id">
+         <i class="fa fa-refresh"></i></a> 
        </li>
-       <li><label>Process Flow</label><?php $f->text_field_dm('process_flow'); ?> </li>
-       <li><label>Description</label><?php $f->text_field_dl('description'); ?></li>
-       <li><label>Type</label><?php echo $f->select_field_from_array('type', sys_process_flow_header::$type_a, $$class->type); ?></li>
-       <li><label>Status</label><?php echo form::status_field($$class->status, $readonly); ?></li>
-       <li><label>Modules</label><?php echo $f->select_field_from_object('module_name', option_header::modules(), 'option_line_code', 'option_line_value', $$class->module_name, 'module_name', '', 1, $readonly) ?></li>
+       <li><?php $f->l_text_field_dm('process_flow'); ?> </li>
+       <li><?php $f->l_text_field_d('description'); ?></li>
+       <li><?php $f->l_select_field_from_array('type', sys_process_flow_header::$type_a, $$class->type); ?></li>
+       <li><?php $f->l_status_field_d('status'); ?></li>
+       <li><?php $f->l_select_field_from_object('module_name', option_header::modules(), 'option_line_code', 'option_line_value', $$class->module_name, 'module_name', '', 1, $readonly) ?></li>
       </ul>
-     </div>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div id="comments">
@@ -47,29 +45,29 @@
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading">Process Flow Lines </span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Process Flow Lines') ?></span>
  <form action=""  method="post" id="process_flow_line"  name="process_flow_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Main</a></li>
-    <li><a href="#tabsLine-2">Decision</a></li>
-    <li><a href="#tabsLine-3">Flow Diagram</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Decision') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Flow Diagram') ?> </a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th>Seq#</th>
-        <th>Line Id</th>
-        <th>Line Number</th>
-        <th>Sub Process Name</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Class Name</th>
-        <th>Method Name</th>
-        <th>Process Actions</th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Line Number') ?></th>
+        <th><?php echo gettext('Sub Process Name') ?></th>
+        <th><?php echo gettext('Type') ?></th>
+        <th><?php echo gettext('Description') ?></th>
+        <th><?php echo gettext('Class Name') ?></th>
+        <th><?php echo gettext('Method Name') ?></th>
+        <th><?php echo gettext('Process Actions') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -78,13 +76,9 @@
        foreach ($sys_process_flow_line_object as $sys_process_flow_line) {
         ?>         
         <tr class="sys_process_flow_line<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class_second->sys_process_flow_line_id); ?>"></li>           
-           <li><?php echo form::hidden_field('sys_process_flow_header_id', $$class->sys_process_flow_header_id); ?></li>
-          </ul>
+         <td><?php
+          echo ino_inline_action($$class_second->sys_process_flow_line_id, array('sys_process_flow_header_id' => $$class->sys_process_flow_header_id));
+          ?>    
          </td>
          <td><?php $f->seq_field_d($count); ?></td>
          <td><?php $f->text_field_wid2sr('sys_process_flow_line_id'); ?></td>
@@ -108,22 +102,22 @@
           }
           ?>
           <div class="class_detail_form">
-           <fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
+           <fieldset class="form_detail_data_fs"><legend><?php echo gettext('Detail Data') ?></legend>
             <div class="tabsDetail">
              <ul class="tabMain">
-              <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>">Basic</a></li>
+              <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo gettext('Basic') ?></a></li>
              </ul>
              <div class="tabContainer">
               <div id="tabsDetail-1-<?php echo $count ?>" class="tabContent">
                <table class="form form_detail_data_table detail">
                 <thead>
                  <tr>
-                  <th>Action</th>
-                  <th>Action Id</th>
-                  <th>Seq Number</th>
-                  <th>Action Type</th>
-                  <th>Role</th>
-                  <th>User</th>
+                  <th><?php echo gettext('Action') ?></th>
+                  <th><?php echo gettext('Action Id') ?>#</th>
+                  <th><?php echo gettext('Seq Number') ?></th>
+                  <th><?php echo gettext('Action Type') ?></th>
+                  <th><?php echo gettext('Role') ?></th>
+                  <th><?php echo gettext('User') ?></th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody">
@@ -136,8 +130,8 @@
                   <tr class="sys_process_flow_action<?php echo $count . '-' . $detailCount; ?>">
                    <td>   
                     <ul class="inline_action">
-                     <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-                     <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+                     <li class="add_row_detail_img"><i class="fa fa-plus-circle"></li>
+                     <li class="remove_row_img"><i class="fa fa-minus-circle"> </li>
                      <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($sys_process_flow_action->sys_process_flow_action_id); ?>"></li>           
                      <li><?php echo form::hidden_field('sys_process_flow_line_id', $$class_second->sys_process_flow_line_id); ?></li>
                      <li><?php echo form::hidden_field('sys_process_flow_header_id', $$class->sys_process_flow_header_id); ?></li>
@@ -183,10 +177,10 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Seq#</th>
-        <th>Next Seq On Pass</th>
-        <th>Next Seq If Fail</th>
-        <th>Next Seq On Return</th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Next Seq On Pass') ?></th>
+        <th><?php echo gettext('Next Seq If Fail') ?></th>
+        <th><?php echo gettext('Next Seq On Return') ?>#</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

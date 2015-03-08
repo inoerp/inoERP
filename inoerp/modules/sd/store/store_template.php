@@ -1,33 +1,35 @@
+
+<div class="row small-left-padding">
 <div id="form_all">
- <form action=""  method="post" id="sd_store"  name="sd_store"><span class="heading">Physical Store</span>
+ <form action=""  method="post" id="sd_store"  name="sd_store">
+  <span class="heading"><?php echo gettext('Physical Store') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Accounts</a></li>
-     <li><a href="#tabsHeader-3">Address</a></li>
-     <li><a href="#tabsHeader-4">Contact</a></li>
-     <li><a href="#tabsHeader-5">Attachments</a></li>
-     <li><a href="#tabsHeader-6">Notes</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Accounts') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Address') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Contact') ?></a></li>
+     <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-6"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
       <div class="large_shadow_box"> 
        <ul class="column header_field"> 
-        <li> 
-         <label><img src="<?php echo HOME_URL; ?>themes/default/images/serach.png" class="sd_store_id select_popup clickable">
-          Store Id</label><?php $f->text_field_ds('sd_store_id') ?>
-         <a name="show" href="form.php?class_name=sd_store&<?php echo "mode=$mode"; ?>" class="show document_id sd_store_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <li><?php $f->l_text_field_dr_withSearch('sd_store_id') ?>
+         <a name="show" href="form.php?class_name=sd_store&<?php echo "mode=$mode"; ?>" class="show document_id sd_store_id">
+          <i class="fa fa-refresh"></i></a> 
         </li> 
-        <li><label>Store Name</label><?php $f->text_field_dm('store_name'); ?> </li> 
-        <li><label>Code</label><?php $f->text_field_dm('code'); ?> </li> 
-        <li><label>Type</label><?php $f->text_field_d('type'); ?> </li> 
-        <li><label>Inventory Org</label><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', '', $readonly1); ?></li> 
-        <li><label>Description</label><?php $f->text_field_d('description'); ?> </li> 
-        <li><label>Status</label><?php echo form::status_field($$class->status, $readonly); ?></li>
+        <li><?php $f->l_text_field_dm('store_name'); ?> </li> 
+        <li><?php $f->l_text_field_dm('code'); ?> </li> 
+        <li><?php $f->l_text_field_d('type'); ?> </li> 
+        <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', '', $readonly1); ?></li> 
+        <li><?php $f->l_text_field_d('description'); ?> </li> 
+        <li><?php $f->l_status_field_d('status'); ?></li>
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-          Address Id</label><input type="text"  name="address_id[]" value="<?php echo htmlentities($sd_store->address_id);
-?>" maxlength="50" id="address_id"> 
+          <?php echo gettext('Address Id') ?></label><input type="text"  name="address_id[]" value="<?php echo htmlentities($sd_store->address_id);
+          ?>" maxlength="50" id="address_id"> 
         </li> 
        </ul> 
       </div>
@@ -35,21 +37,21 @@
      <div id="tabsHeader-2" class="tabContent">
       <div class="large_shadow_box"> 
        <ul class="column header_field"> 
-        <li><label>COGS A/c</label><?php $f->ac_field_d('cogs_ac_id'); ?></li>
-        <li><label>Revenue A/c</label><?php $f->ac_field_dm('revenue_ac_id'); ?></li>
-        <li><label>Cash A/c</label><?php $f->ac_field_dm('cash_ac_id'); ?></li>
-        <li><label>Tax A/c</label><?php $f->ac_field_dm('tax_ac_id'); ?></li>
+        <li><?php $f->l_ac_field_d('cogs_ac_id'); ?></li>
+        <li><?php $f->l_ac_field_dm('revenue_ac_id'); ?></li>
+        <li><?php $f->l_ac_field_dm('cash_ac_id'); ?></li>
+        <li><?php $f->l_ac_field_dm('tax_ac_id'); ?></li>
        </ul> 
       </div>
      </div>
      <div id="tabsHeader-3" class="tabContent">
       <ul class="address inline_list">
-       <li><label>Phone  : </label> <?php echo $f->text_field('phone', $address->phone, '', '', '', '', 1); ?></li>
-       <li><label>Email  : </label> <?php echo $f->text_field('email', $address->email, '', '', '', '', 1); ?></li>
-       <li><label>Web-site  : </label><?php echo $f->text_field('website', $address->website, '', '', '', '', 1); ?></li>
-       <li><label>Country  : </label><?php echo $f->text_field('country', $address->country, '', '', '', '', 1); ?></li>
-       <li><label>Postal Code  : </label> <?php echo $f->text_field('postal_code', $address->postal_code, '', '', '', '', 1); ?></li>
-       <li><label>Address :</label>  
+       <li><?php echo $f->l_text_field('phone', $address->phone, '', '', '', '', 1); ?></li>
+       <li><?php echo $f->l_text_field('email', $address->email, '', '', '', '', 1); ?></li>
+       <li><?php echo $f->l_text_field('website', $address->website, '', '', '', '', 1); ?></li>
+       <li><?php echo $f->l_text_field('country', $address->country, '', '', '', '', 1); ?></li>
+       <li><?php echo $f->l_text_field('postal_code', $address->postal_code, '', '', '', '', 1); ?></li>
+       <li><label><?php echo gettext('Address') ?></label>  
         <textarea readonly name="address" id="address" cols="22" rows="3" placeholder="Select address Id"><?php echo trim(htmlentities($address->address)); ?></textarea>
        </li>
       </ul>
@@ -63,7 +65,7 @@
       <div>
        <ul id="new_contact_reference">
         <li class='new_object1'><label><img class="extn_contact_id select_popup clickable"  src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
-          Associate Contact : </label>  
+          <?php echo gettext('Associate Contact') ?></label>  
          <?php
          echo $f->hidden_field('extn_contact_id_new', '');
          echo $f->text_field('contact_name_new', '', '20', '', 'select_contact');
@@ -96,10 +98,10 @@
    </div>
   </div>
  </form>
- <div id ="form_line" class="form_line"><span class="heading">Sub Inventories </span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Sub Inventories') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Values</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Values') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <form action=""  method="post" id="sd_store_subinventory_line"  name="sd_store_subinventory_line">
@@ -107,14 +109,14 @@
       <table class="form_table">
        <thead> 
         <tr>
-         <th>Action</th>
-         <th>Line Id</th>
-         <th>Sub Inventory</th>
-         <th>Building</th>
-         <th>Floor</th>
-         <th>Wing</th>
-         <th>Description</th>
-         <th>Status</th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Line Id') ?></th>
+         <th><?php echo gettext('Sub Inventory') ?>#</th>
+         <th><?php echo gettext('Building') ?></th>
+         <th><?php echo gettext('Floor') ?></th>
+         <th><?php echo gettext('Wing') ?></th>
+         <th><?php echo gettext('Description') ?></th>
+         <th><?php echo gettext('Status') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody sd_store_subinventory_values" >
@@ -126,13 +128,9 @@
          $sd_store_subinventory = $sd_store_subinventory_object_ai->current();
          ?>         
          <tr class="sd_store_subinventory<?php echo $count ?>">
-          <td>    
-           <ul class="inline_action">
-            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($sd_store_subinventory->sd_store_subinventory_id); ?>"></li>           
-            <li><?php echo form::hidden_field('sd_store_id', $$class->sd_store_id); ?></li>
-           </ul>
+          <td><?php
+           echo ino_inline_action($sd_store_subinventory->sd_store_subinventory_id, array('sd_store_id' => $$class->sd_store_id));
+           ?>
           </td>
           <td><?php form::number_field_wid2sr('sd_store_subinventory_id'); ?></td>
           <td>
@@ -161,10 +159,12 @@
   </div>
  </div> 
 </div>
+</div>
 
-
+<div class="row small-top-margin">
 <div id="pagination" style="clear: both;">
  <?php echo $pagination->show_pagination(); ?>
+</div>
 </div>
 
 <div id="js_data">

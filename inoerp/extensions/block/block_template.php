@@ -1,64 +1,69 @@
 <div id="form_all">
  <div id ="form_header">
+  <span class="heading"><?php echo gettext('Block Information') ?></span>
   <form action=""  method="post" id="block_header"  name="block_content_header">
    <!--create empty form or a single id when search is not clicked and the id is referred from other block_content -->
-   <?php
-   echo $f->hidden_field_withId('block_id', $$class->block_id);
-   ?>	
-   <?php echo $f->hidden_field_withId('block_content_id', $$class_second->block_content_id); ?>	
-   <table>
-    <tr>
-     <td><label>Block Title : </label>
-      <input type="text"  name="title" value="<?php echo htmlentities($$class->title); ?>" 
-             size="40"  maxlength="250" class="subject" placeholder="title of the block"> 
-     </td>
-     <td><label>Show Title : </label><?php echo form::checkBox_field('show_title_cb', $$class->show_title_cb); ?></td>
-    </tr>
-    <tr>
-     <td><label>Weight : </label>
-      <?php echo form::select_field_from_array('weight', dbObject::$position_array, $$class->weight); ?></td>
-     <td><label>Position : </label>
-      <?php echo form::select_field_from_array('position', block::$position_array, $$class->position); ?></td>
-    </tr>
-    <tr>
-     <td><label>Cache Content : </label><?php echo $f->checkBox_field('cached_cb', $block->cached_cb); ?></td>
-     <td><label>Restrict to Role : </label>
-      <?php echo $f->select_field_from_object('restrict_to_role', role_access::roles(), 'option_line_code', 'option_line_value', $block->restrict_to_role, 'role_code'); ?></td>
-    </tr>
-    <tr>
-     <td><label>Reference Table : </label><?php echo $f->text_field_ap(array('name' => 'reference_table', 'value' => $$class->reference_table,
-       'readonly' => $readonly_id));
-      ?></td>
-     <td><label>Block Name: </label>
-      <?php $readonly_b = ($block->reference_table == 'block_content' || empty($$class->block_id)) ? false : true;
-      echo $f->text_field('name', $block->name, '', '', '', '', $readonly_b);
-      ?></td>
-    </tr>
-    <!--Start of  block content-->
-<?php if ($$class->reference_table == 'block_content') { ?>
-     <tr><td colspan="2"><label>Block Content : </label>
-       <textarea required name="content[]" class="noformat" rows="8" cols="80" placeholder=' '><?php echo $$class_second->content; ?></textarea>
-      </td></tr>
-     <tr> <td>	<label>Block Info : </label><?php form::text_field_d2('info'); ?> </td>
-      <td><label>Block content contains PHP Code : </label> <?php echo $f->checkBox_field('content_php_cb', $$class_second->content_php_cb); ?></td>
-     </tr>
-     <?php
-    }
-    ?>
-    <!--End of  block content-->
-    <tr>
-     <td><label>Enabled : </label><?php echo form::checkBox_field('enabled_cb', $$class->enabled_cb); ?></td>
-     <td><label> Visibility Option : </label>
-<?php echo form::select_field_from_array('visibility_option', block::$visibility_option_array, $$class->visibility_option); ?></td>
-    </tr>
-    <tr>
-     <td colspan="2">
-      <div id="visibility"><label> Visibility : </label>
-       <textarea name="visibility" class="noformat" rows="4" cols="80"><?php echo base64_decode($block->visibility); ?></textarea>
+   <div id="tabsHeader">
+    <ul class="tabMain">
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Block Content') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Visibility') ?></a></li>
+    </ul>
+    <div class="tabContainer"> 
+     <div id="tabsHeader-1" class="tabContent">
+      <ul class="column header_field">
+       <li><?php $f->l_text_field_dr_withSearch('block_id') ?>
+        <a name="show" href="form.php?class_name=block&<?php echo "mode=$mode"; ?>" class="show document_id block_id">
+         <i class="fa fa-refresh"></i></a> 
+       </li>
+       <?php echo $f->hidden_field_withId('block_content_id', $$class_second->block_content_id); ?>	
+       <li><?php $f->l_text_field_dm('title'); ?> </li> 
+       <li><?php $f->l_checkBox_field_d('show_title_cb'); ?> </li> 
+       <li><?php $f->l_select_field_from_array('weight', dbObject::$position_array, $$class->weight); ?></li>
+       <li><?php $f->l_select_field_from_array('position', block::$position_array, $$class->position); ?></li>
+       <li><?php $f->l_checkBox_field_d('cached_cb'); ?> </li> 
+       <li><?php $f->l_select_field_from_object('restrict_to_role', role_access::roles(), 'option_line_code', 'option_line_value', $block->restrict_to_role, 'role_code'); ?></li>
+       <li><label><?php echo gettext('Reference Table') ?></label><?php
+        echo $f->text_field_ap(array('name' => 'reference_table', 'value' => $$class->reference_table,
+         'readonly' => $readonly_id));
+        ?></li>
+       <li><label><?php echo gettext('Block Name') ?></label>
+        <?php
+        $readonly_b = ($block->reference_table == 'block_content' || empty($$class->block_id)) ? false : true;
+        echo $f->text_field('name', $block->name, '', '', '', '', $readonly_b);
+        ?></li>
+       <li><?php $f->l_checkBox_field_d('enabled_cb'); ?></li>
+      </ul> 
+     </div>
+     <div id="tabsHeader-2" class="tabContent">
+      <div class="first_rowset"> 
+       <ul class="column two_column"> 
+        <!--Start of  block content-->
+        <?php if ($$class->reference_table == 'block_content') { ?>
+         <li><label><?php echo gettext('Block Info') ?></label><?php form::text_field_d2('info'); ?> </li>
+         <li><label>Block content contains PHP Code</label> <?php echo $f->checkBox_field('content_php_cb', $$class_second->content_php_cb); ?></li>
+         <li><label><?php echo gettext('Block Content') ?></label>
+          <textarea required name="content[]" class="noformat" rows="15" cols="160" placeholder=' '><?php echo $$class_second->content; ?></textarea>
+         </li>
+         </li>
+         <?php
+        }
+        ?>
+       </ul>
       </div>
-     </td>
-    </tr>
-   </table>
+     </div>
+     <div id="tabsHeader-3" class="tabContent">
+      <div class="first_rowset"> 
+       <ul class="column header_field"> 
+        <li><?php $f->l_select_field_from_array('visibility_option', block::$visibility_option_array, $$class->visibility_option); ?></li>
+        <li><div id="visibility"><label><?php echo gettext('Visibility') ?></label>
+          <textarea name="visibility" class="noformat" rows="4" cols="80"><?php echo base64_decode($block->visibility); ?></textarea>
+        </li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </div>
   </form>
  </div>
 </div>

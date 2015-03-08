@@ -1,26 +1,26 @@
-<div id ="form_header">
- <form action=""  method="post" id="hr_approval_object"  name="hr_approval_object"><span class="heading">Approval Object </span>
+<div id ="form_header"><?php $f = new inoform() ?>
+ <form action=""  method="post" id="hr_approval_object"  name="hr_approval_object">
+  <span class="heading"><?php echo gettext('Approval Object') ?> </span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Attachments</a></li>
-     <li><a href="#tabsHeader-3">Notes</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
       <div class="large_shadow_box"> 
        <ul class="column header_field"> 
-        <li> 
-         <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_approval_object_id select_popup clickable">
-          Header Id</label><?php $f->text_field_ds('hr_approval_object_id') ?>
-         <a name="show" href="form.php?class_name=hr_approval_object&<?php echo "mode=$mode"; ?>" class="show document_id hr_approval_object_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <li><?php $f->l_text_field_dr_withSearch('hr_approval_object_id') ?>
+         <a name="show" href="form.php?class_name=hr_approval_object&<?php echo "mode=$mode"; ?>" class="show document_id hr_approval_object_id">
+          <i class="fa fa-refresh"></i></a> 
         </li>
-        <li><label>Object Code</label><?php $f->text_field_d('object_code'); ?> 					</li>
-        <li><label>Object Name</label><?php $f->text_field_d('object_name'); ?> 					</li>
-        <li><label>Value Type</label><?php echo $f->select_field_from_array('value_type', hr_approval_object::$value_type_a, $$class->value_type); ?> 					</li>
-        <li><label>Return Type</label><?php echo $f->select_field_from_array('return_type', hr_approval_object::$return_type_a, $$class->return_type); ?> 					</li>
-        <li><label>Description</label><?php $f->text_field_dl('description'); ?> 					</li>
+        <li><?php $f->l_text_field_d('object_code'); ?> </li>
+        <li><?php $f->l_text_field_d('object_name'); ?> </li>
+        <li><?php $f->l_select_field_from_array('value_type', hr_approval_object::$value_type_a, $$class->value_type); ?> 					</li>
+        <li><?php $f->l_select_field_from_array('return_type', hr_approval_object::$return_type_a, $$class->return_type); ?> 					</li>
+        <li><?php $f->l_text_field_d('description'); ?> 					</li>
        </ul>
       </div>
      </div>
@@ -48,15 +48,15 @@
 
    </div>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading">Details  </span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1">Object Value</a></li>
-     <li><a href="#tabsLine-2">Future</a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Object Value') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Future') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
-      <div><label class="text_area_label">Object Value  :</label><?php
+      <div><label class="text_area_label"><?php echo gettext('Object Value') ?></label><?php
        echo $f->text_area_ap(array('name' => 'object_value', 'value' => $$class->object_value,
         'row_size' => '10', 'column_size' => '90'));
        ?> 	

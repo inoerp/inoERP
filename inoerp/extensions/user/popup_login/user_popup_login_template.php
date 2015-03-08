@@ -25,7 +25,6 @@ $user_password_reset = new user_password_reset();
        <div id="tabsLine-1" class="tabContent">
         <form name="user_login" action="<?php echo HOME_URL?>extensions/user/user_login.php" method="post" id="user_login">
          <ul class="inRow asperWidth">
-          <span id="username_tip" maxlength="50" size="30"  ></span>
           <li><label>User Name</label>
            <input type="text" name="username" maxlength="50" size="30" id="username" placeholder="example : sachin.god"
                   value="<?php echo ($user->username); ?>"> 
@@ -34,9 +33,7 @@ $user_password_reset = new user_password_reset();
            <input type="password" name="password" maxlength="50" size="30" id="password" placeholder="example : uVrt@%35"
                   value="<?php echo ($user->password); ?>" >
           </li>
-          <li><label>Remember Me</label>
-           <input type="checkbox" name="remember_me" value="1" > &nbsp; &nbsp; &nbsp;
-          </li>
+          <li><?php $f->l_select_field_from_object('user_language', user::all_languages(), 'option_line_code', 'description', $user->user_language, 'user_language'); ?>  </li>
           <li><input type="submit" name="submitLogin" class="button btn btn-success" value="Log in"></li>
           <li><input type="button" name="cancelLogin" id="cancelLogin" class="button btn btn-warning" value="Cancel & Go Back"></li>
          </ul>

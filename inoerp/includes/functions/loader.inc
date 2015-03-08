@@ -242,7 +242,7 @@ if (($continue) && (!empty($class_names))) {
      if (!empty($doc_org_id_loader) && !in_array($doc_org_id_loader, array_keys($_SESSION['user_org_access']))) {
       $no_organization_access = true;
       return;
-     } else {
+     } else if(isset($_SESSION['user_org_access'][$doc_org_id_loader])) {
       $mode = $_SESSION['user_org_access'][$doc_org_id_loader];
      }
     } else if (property_exists($$class, 'bu_org_id') && ($class != 'org')) {
@@ -254,7 +254,7 @@ if (($continue) && (!empty($class_names))) {
      if (!empty($doc_org_id_loader) && !in_array($doc_org_id_loader, array_keys($_SESSION['user_org_access']))) {
       $no_organization_access = true;
       return;
-     } else {
+     } else if(isset($_SESSION['user_org_access'][$doc_org_id_loader])){
       $mode = $_SESSION['user_org_access'][$doc_org_id_loader];
      }
     }

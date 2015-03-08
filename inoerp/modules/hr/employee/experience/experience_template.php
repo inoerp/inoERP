@@ -1,32 +1,33 @@
 <div id="form_all">
  <div id="form_headerDiv">
-  <form action=""  method="post" id="hr_employee_experience_line"  name="employee_experience_line"><span class="heading">Employee experience </span>
+  <form action=""  method="post" id="hr_employee_experience_line"  name="employee_experience_line">
+   <span class="heading"><?php echo gettext('Employee Experience') ?></span>
    <div id="tabsLine">
-    <div id="form_serach_header">
-     <label>Employee Name :</label>
-     <?php echo $f->select_field_from_object('employee_id', hr_employee::find_all(), 'hr_employee_id', array('first_name', 'last_name'), $employee_id_h, 'employee_id', $readonly1); ?>
-     <a name="show" href="form.php?class_name=hr_employee_experience&<?php echo "mode=$mode"; ?>" class="show document_id employee_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+    <div id="form_serach_header" class="tabContainer">
+     <?php $f->l_select_field_from_object('employee_id', hr_employee::find_all(), 'hr_employee_id', array('first_name', 'last_name'), $employee_id_h, 'employee_id', $readonly1); ?>
+     <a name="show" href="form.php?class_name=hr_employee_experience&<?php echo "mode=$mode"; ?>" class="show document_id employee_id">
+      <i class="fa fa-refresh"></i></a> 
     </div>
     <div id ="form_line" class="hr_employee_experience">
-     <ul class="tabMain">
-      <li><a href="#tabsLine-1">Basic </a></li>
-      <li><a href="#tabsLine-2">Details </a></li>
+     <ul class="tabMain"> <?php $f = new inoform() ?>
+      <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
+      <li><a href="#tabsLine-2"><?php echo gettext('Details Info') ?></a></li>
      </ul>
      <div class="tabContainer"> 
       <div id="tabsLine-1" class="tabContent">
        <table class="form_table">
         <thead> 
          <tr>
-          <th>Action</th>
-          <th>Seq#</th>
-          <th>Line Id</th>
-          <th>Organization Name</th>
-          <th>Designation</th>
-          <th>Start Date </th>
-          <th>End Date</th>
-          <th>Employee#</th>
-          <th>Department</th>
-          <th>Last Manager</th>
+          <th><?php echo gettext('Action') ?></th>
+          <th><?php echo gettext('Seq') ?>#</th>
+          <th><?php echo gettext('Line Id') ?></th>
+          <th><?php echo gettext('Organization Name') ?>#</th>
+          <th><?php echo gettext('Designation') ?></th>
+          <th><?php echo gettext('Start Date') ?></th>
+          <th><?php echo gettext('End Date') ?></th>
+          <th><?php echo gettext('Employee') ?>#</th>
+          <th><?php echo gettext('Department') ?></th>
+          <th><?php echo gettext('Last Manager') ?>#</th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody employee_experience_values" >
@@ -38,16 +39,12 @@
           $hr_employee_experience = $employee_experience_object_ai->current();
           ?>         
           <tr class="hr_employee_experience<?php echo $count ?>">
-           <td>    
-            <ul class="inline_action">
-             <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-             <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-             <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class->hr_employee_experience_id); ?>"></li> 
-             <li><?php echo form::hidden_field('employee_id', $employee_id_h); ?></li>
-            </ul>
+           <td><?php
+            echo ino_inline_action($$class->hr_employee_experience_id, array('employee_id' => $employee_id_h));
+            ?>
            </td>
            <td><?php $f->seq_field_d($count) ?></td>
-           <td><?php $f->text_field_widsr('hr_employee_experience_id') ?></td>
+           <td><?php $f->text_field_widsr('hr_employee_experience_id','always_readonly') ?></td>
            <td><?php $f->text_field_widm('organization_name'); ?></td>
            <td><?php $f->text_field_widm('designation'); ?></td>
            <td><?php echo $f->date_fieldAnyDay('work_start_date', $$class->work_start_date); ?></td>
@@ -71,10 +68,10 @@
        <table class="form_table">
         <thead> 
          <tr>
-          <th>Seq#</th>
-          <th>Last Salary</th>
-          <th>Communication Details</th>
-          <th>Projects</th>
+          <th><?php echo gettext('Seq') ?>#</th>
+          <th><?php echo gettext('Last Salary') ?></th>
+          <th><?php echo gettext('Communication Details') ?></th>
+          <th><?php echo gettext('Projects') ?>#</th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody employee_experience_values" >
@@ -114,6 +111,7 @@
 
 <div id="js_data">
  <ul id="js_saving_data">
+  <li class="primary_column_id" data-primary_column_id="employee_id" ></li>
   <li class="lineClassName" data-lineClassName="hr_employee_experience" ></li>
   <li class="line_key_field" data-line_key_field="organization_name" ></li>
   <li class="single_line" data-single_line="false" ></li>

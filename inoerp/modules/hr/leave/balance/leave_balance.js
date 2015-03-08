@@ -11,14 +11,17 @@ setValFromSelectPage.prototype.setVal = function() {
   var name = this.first_name + ' ' + this.last_name;
  var identification_id = this.identification_id;
 
- if (hr_employee_id) {
-	$("#employee_id").val(hr_employee_id);
- }
+
    if (name) {
   $("#employee_name").val(name);
  }
   if (identification_id) {
   $("#identification_id").val(identification_id);
+ }
+ 
+  if (hr_employee_id) {
+	$("#employee_id").val(hr_employee_id);
+  $('a.show.employee_id').trigger('click');
  }
 };
 
@@ -34,9 +37,9 @@ $(document).ready(function() {
 	$(this).closest('tr').find('.name').val(name);
  });
  
-  $(".hr_employee_id.select_popup").on("click", function() {
+  $(".employee_id.select_popup").on("click", function() {
 	void window.open('select.php?class_name=hr_employee', '_blank',
-					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+					'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
 deleteData('form.php?class_name=hr_leave_balance&line_class_name=hr_leave_balance');

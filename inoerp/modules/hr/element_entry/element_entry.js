@@ -20,6 +20,10 @@ setValFromSelectPage.prototype.setVal = function() {
 };
 
 $(document).ready(function() {
+  var mandatoryCheck = new mandatoryFieldMain();
+ mandatoryCheck.header_id = 'hr_element_entry_header_id';
+ mandatoryCheck.mandatoryHeader();
+ 
  //setting the first line number
  if (!($('.lines_number:first').val())) {
   $('.lines_number:first').val('10');

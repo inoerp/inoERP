@@ -1,32 +1,30 @@
-<div id="form_all"><span class="heading">Bar code Label Auto Trigger </span>
+<div id="form_all">
+ <span class="heading"><?php echo gettext('Bar code Label Auto Trigger') ?></span>
  <form action=""  method="post" id="sys_auto_trigger"  name="sys_auto_trigger">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
-       <ul class="column four_column">
-        <li><label>Transaction Type : </label>
-         <?php echo $f->select_field_from_object('transaction_type_id', transaction_type::find_all(), 'transaction_type_id', 'transaction_type', $transaction_type_id, 'transaction_type_id', ''); ?>
-        </li>
-        <li><label>Association Level : </label>
-         <?php echo $f->select_field_from_array('association_level', bc_label_auto_trigger::$association_level_a, $$class->association_level, 'association_level'); ?>
-         <a name="show" href="form.php?class_name=bc_label_auto_trigger&<?php echo "mode=$mode"; ?>" class="show2 document_id bc_label_auto_trigger_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-        </li>
-       </ul>
-      </div>
+      <ul class="column header_field">
+       <li><?php $f->l_select_field_from_object('transaction_type_id', transaction_type::find_all(), 'transaction_type_id', 'transaction_type', $transaction_type_id, 'transaction_type_id', ''); ?>        </li>
+       <li><?php $f->l_select_field_from_array('association_level', bc_label_auto_trigger::$association_level_a, $$class->association_level, 'association_level'); ?>
+        <a name="show" href="form.php?class_name=bc_label_auto_trigger&<?php echo "mode=$mode"; ?>" class="show2 document_id bc_label_auto_trigger_id">
+         <i class="fa fa-refresh"></i></a> 
+       </li>
+      </ul>
      </div>
     </div>
    </div>
   </div>
  </form>
- <div id ="form_line" class="form_line"><span class="heading">Label Association </span>
+ <div id ="form_line" class="form_line">
+  <span class="heading"><?php echo gettext('Label Association') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Values</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Values') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <form action=""  method="post" id="bc_label_auto_trigger_line"  name="bc_label_auto_trigger_line">
@@ -34,9 +32,9 @@
       <table class="form_table">
        <thead> 
         <tr>
-         <th>Action</th>
-         <th>Line Id</th> 
-         <th>Default Printer</th> 
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Line Id') ?></th>
+         <th><?php echo gettext('Default Printer') ?></th>
          <?php
          switch ($association_level) {
           case 'SITE' :
@@ -75,14 +73,11 @@
         foreach ($bc_label_auto_trigger_object as $bc_label_auto_trigger) {
          ?>         
          <tr class="bc_label_auto_trigger<?php echo $count ?>">
-          <td>    
-           <ul class="inline_action">
-            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($bc_label_auto_trigger->bc_label_auto_trigger_id); ?>"></li>           
-            <li><?php echo form::hidden_field('transaction_type_id', $transaction_type_id); ?></li>
-            <li><?php echo form::hidden_field('association_level', $association_level); ?></li>
-           </ul>
+          <td>
+           <?php
+           echo ino_inline_action($bc_label_auto_trigger->bc_label_auto_trigger_id, array('association_level' => $association_level,
+            'transaction_type_id' => $transaction_type_id));
+           ?>
           </td>
           <td><?php form::number_field_widsr('bc_label_auto_trigger_id'); ?></td>
           <td><?php echo $f->select_field_from_object('sys_printer_id', sys_printer::find_all(), 'sys_printer_id', 'printer_name', $$class->sys_printer_id) ?></td>
@@ -110,7 +105,7 @@
              }
              echo $f->select_field_from_object('', $org->findAll_inventory(), 'org_id', 'org', $org_id_sub, '', 'org_id', 1);
              echo '</td><td>';
-             echo $f->select_field_from_object('association_level_value', subinventory::find_all(), 'subinventory_id', array('subinventory','org_id'), $$class->association_level_value, '', 'subinventory_id', 1);
+             echo $f->select_field_from_object('association_level_value', subinventory::find_all(), 'subinventory_id', array('subinventory', 'org_id'), $$class->association_level_value, '', 'subinventory_id', 1);
              break;
 
             case 'USER' :
@@ -143,6 +138,7 @@
 
 <div id="js_data">
  <ul id="js_saving_data">
+  <li class="primary_column_id" data-primary_column_id="association_level" ></li>
   <li class="headerClassName" data-headerClassName="bc_label_auto_trigger" ></li>
   <li class="lineClassName" data-lineClassName="bc_label_auto_trigger" ></li>
   <li class="line_key_field" data-line_key_field="association_level" ></li>

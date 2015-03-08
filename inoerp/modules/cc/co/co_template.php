@@ -1,11 +1,11 @@
-<div id="bom_divId"><span class='heading'>Change Order</span>
+<div id="bom_divId"><span class='heading'><?php echo gettext('Change Order') ?></span>
  <?php
  $template_lines_ia = new ArrayIterator($template_lines);
  ?> 
- <div id="tabsDetailD">
+ <div id="tabsDetailD"><?php $f = new inoform(); ?>
   <ul class="tabMain">
-   <li><a href="#tabsDetailD-1">Change Order</a></li>
-   <li><a href="#tabsDetailD-2">Process Steps</a></li>
+   <li><a href="#tabsDetailD-1"><?php echo gettext('Change Order') ?></a></li>
+   <li><a href="#tabsDetailD-2"><?php echo gettext('Process Steps') ?></a></li>
   </ul>
   <div class="tabContainer">
    <div id="tabsDetailD-1" class="tabContent">
@@ -13,45 +13,43 @@
      <form action=""  method="post" id="cc_co_header"  name="cc_co_header">
       <div id="tabsHeader">
        <ul class="tabMain">
-        <li><a href="#tabsHeader-1">Basic</a></li>
-        <li><a href="#tabsHeader-2">Other Info</a></li>
-        <li><a href="#tabsHeader-3">Secondary Fields</a></li>
-        <li><a href="#tabsHeader-4">Flow Diagram</a></li>
-        <li><a href="#tabsHeader-5">Notes</a></li>
-        <li><a href="#tabsHeader-6">Attachments</a></li>
-        <li><a href="#tabsHeader-7">CO Action</a></li>
+        <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+        <li><a href="#tabsHeader-2"><?php echo gettext('Other Info') ?></a></li>
+        <li><a href="#tabsHeader-3"><?php echo gettext('Secondary Fields') ?></a></li>
+        <li><a href="#tabsHeader-4"><?php echo gettext('Flow Diagram') ?></a></li>
+        <li><a href="#tabsHeader-5"><?php echo gettext('Notes') ?></a></li>
+        <li><a href="#tabsHeader-6"><?php echo gettext('Attachments') ?></a></li>
+        <li><a href="#tabsHeader-7"><?php echo gettext('CO Action') ?></a></li>
        </ul>
        <div class="tabContainer">
         <div id="tabsHeader-1" class="tabContent">
          <div class="large_shadow_box"> 
           <ul class="column header_field">
-           <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="cc_co_header_id select_popup clickable">
-             Header Id</label><?php $f->text_field_dsr('cc_co_header_id') ?>
-            <a name="show" href="form.php?class_name=cc_co_header&<?php echo "mode=$mode"; ?>" class="show document_id cc_co_header_id_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+           <li><?php $f->l_text_field_dr_withSearch('cc_co_header_id') ?>
+            <a name="show" href="form.php?class_name=cc_co_header&<?php echo "mode=$mode"; ?>" class="show document_id cc_co_header_id_id">
+             <i class="fa fa-refresh"></i></a> 
            </li>
-           <li><label>Change Order</label><?php $f->text_field_d('change_number'); ?></li>
-           <li><label>Inventory Org</label><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id'); ?>           </li>
-           <li><label>Template</label><?php echo $f->select_field_from_object('template_id', cc_co_template_header::find_all(), 'cc_co_template_header_id', 'template_name', $$class->template_id, 'template_id'); ?>           </li>
-           <li><label>Type</label><?php echo $f->select_field_from_array('change_type', cc_co_header::$change_type_a, $$class->change_type, 'change_type'); ?></li>
-           <li><label>Status</label><?php echo $f->text_field_dr('status'); ?></li>
-           <li><label>Description</label><?php $f->text_field_dl('description'); ?></li>
+           <li><?php $f->l_text_field_d('change_number'); ?></li>
+           <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id'); ?>           </li>
+           <li><?php $f->l_select_field_from_object('template_id', cc_co_template_header::find_all(), 'cc_co_template_header_id', 'template_name', $$class->template_id, 'template_id'); ?>           </li>
+           <li><?php $f->l_select_field_from_array('change_type', cc_co_header::$change_type_a, $$class->change_type, 'change_type'); ?></li>
+           <li><?php $f->l_text_field_dr('status'); ?></li>
+           <li><?php $f->l_text_field_d('description'); ?></li>
           </ul>
          </div>
         </div>
         <div id="tabsHeader-2" class="tabContent">
-         <div class="large_shadow_box"> 
-          <ul class="column header_field">
-           <li><label>Change Order</label><?php $f->text_field_d('originator'); ?></li>
-           <li><label>Owner</label><?php $f->text_field_d('owner_user_id'); ?></li>
-           <li><label>Process flow</label><?php echo $f->select_field_from_object('process_flow_header_id', cc_co_header::find_all_cc_processFlow(), 'sys_process_flow_header_id', 'process_flow', $$class->process_flow_header_id, 'process_flow_header_id', '', 1, $readonly); ?></li>
-           <li><label>Project</label><?php $f->text_field_d('project_task_id'); ?></li>
-           <li><label>Creation Date</label><?php echo $f->date_fieldAnyDay('origination_date', $$class->origination_date); ?></li>
-           <li><label>Release Date</label><?php echo $f->date_fieldAnyDay('release_date', $$class->release_date); ?></li>
-           <li><label>Completion Date</label><?php echo $f->date_fieldAnyDay('completion_date', $$class->completion_date); ?></li>
-           <li><label>Access Org</label><?php $f->text_field_d('access_org'); ?></li>
-           <li><label>Related Changes</label><?php $f->text_field_d('related_changes'); ?></li>
-          </ul>
-         </div>
+         <ul class="column header_field">
+          <li><?php $f->l_text_field_d('originator'); ?></li>
+          <li><?php $f->l_text_field_d('owner_user_id'); ?></li>
+          <li><?php $f->l_select_field_from_object('process_flow_header_id', cc_co_header::find_all_cc_processFlow(), 'sys_process_flow_header_id', 'process_flow', $$class->process_flow_header_id, 'process_flow_header_id', '', 1, $readonly); ?></li>
+          <li><?php $f->l_text_field_d('project_task_id'); ?></li>
+          <li><?php $f->l_date_fieldAnyDay('origination_date', $$class->origination_date); ?></li>
+          <li><?php $f->l_date_fieldAnyDay('release_date', $$class->release_date); ?></li>
+          <li><?php $f->l_date_fieldAnyDay('completion_date', $$class->completion_date); ?></li>
+          <li><?php $f->l_text_field_d('access_org'); ?></li>
+          <li><?php $f->l_text_field_d('related_changes'); ?></li>
+         </ul>
         </div>
         <div id="tabsHeader-3" class="tabContent">
          <div class="large_shadow_box"> 
@@ -82,10 +80,8 @@
 
         <div id="tabsHeader-7" class="tabContent">
          <div class="large_shadow_box"> 
-          <ul class="column three_column">
-           <li><label>Action : </label>
-            <?php echo $f->select_field_from_object('action', $process_flow_line_obj, 'line_name', 'line_name', '', 'action'); ?>
-           </li>
+          <ul class="column header_field">
+           <li><?php $f->l_select_field_from_object('action', $process_flow_line_obj, 'line_name', 'line_name', '', 'action'); ?> </li>          </li>
           </ul>
 
          </div>
@@ -103,13 +99,13 @@
        <table class="form_line_data_table">
         <thead> 
          <tr>
-          <th>Action</th>
-          <th>Line Id</th>
-          <th>Line Number</th>
-          <th>Sub Process Name</th>
-          <th>Type</th>
-          <th>Description</th>
-          <th>Process Actions</th>
+          <th><?php echo gettext('Action') ?></th>
+          <th><?php echo gettext('Line Id') ?></th>
+          <th><?php echo gettext('Line Number') ?>#</th>
+          <th><?php echo gettext('Sub Process Name') ?></th>
+          <th><?php echo gettext('Type') ?></th>
+          <th><?php echo gettext('Description') ?></th>
+          <th><?php echo gettext('Process Actions') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody2">
@@ -118,21 +114,17 @@
          foreach ($process_flow_line_obj as $sys_process_flow_line) {
           ?>         
           <tr class="process_flow_line<?php echo $count ?>">
-           <td>    
-            <ul class="inline_action">
-             <li></li>
-             <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-             <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($sys_process_flow_line->sys_process_flow_line_id); ?>"></li>           
-             <li><?php echo form::hidden_field('cc_co_header_id', $$class->cc_co_header_id); ?></li>
-            </ul>
+           <td><?php
+            echo ino_inline_action($sys_process_flow_line->sys_process_flow_line_id, array('cc_co_header_id' => $$class->cc_co_header_id));
+            ?>        
            </td>
            <td><?php echo $f->text_field_ap(array('name' => 'sys_process_flow_line_id', 'value' => $sys_process_flow_line->sys_process_flow_line_id, 'readonly' => true)); ?></td>
            <td><?php echo $f->text_field_ap(array('name' => 'line_number', 'value' => $sys_process_flow_line->line_number, 'class_name' => 'lines_number')); ?></td>
            <td><?php echo $f->text_field_ap(array('name' => 'line_name', 'value' => $sys_process_flow_line->line_name, 'readonly' => true)); ?></td>
            <td><?php echo $f->select_field_from_array('line_type', sys_process_flow_line::$line_type_a, $sys_process_flow_line->line_type); ?></td>
            <td><?php echo $f->text_field_ap(array('name' => 'description', 'value' => $sys_process_flow_line->description, 'readonly' => true, 'class_name' => 'medium')); ?></td>
-           <td class="add_detail_values"><img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
-            <!--</td></tr>-->	
+           <td class="add_detail_values">
+            <i class="fa fa-arrow-circle-down add_detail_values_img"></i>
             <?php
             $sys_process_flow_line_id = $sys_process_flow_line->sys_process_flow_line_id;
             $data_in_co_table = false;
@@ -162,13 +154,13 @@
                  <table class="form form_detail_data_table detail">
                   <thead>
                    <tr>
-                    <th>Action</th>
-                    <th>Action Id</th>
-                    <th>PF Line Id</th>
-                    <th>Seq Number</th>
-                    <th>Action Type</th>
-                    <th>Role</th>
-                    <th>User</th>
+                    <th><?php echo gettext('Action') ?></th>
+                    <th><?php echo gettext('Action Id') ?></th>
+                    <th><?php echo gettext('PF Line Id') ?>#</th>
+                    <th><?php echo gettext('Seq Number') ?></th>
+                    <th><?php echo gettext('Action Type') ?></th>
+                    <th><?php echo gettext('Role') ?></th>
+                    <th><?php echo gettext('User') ?></th>
                    </tr>
                   </thead>
                   <tbody class="form_data_detail_tbody">
@@ -184,8 +176,8 @@
                     <tr class="sys_process_flow_action<?php echo $count . '-' . $detailCount; ?>">
                      <td>   
                       <ul class="inline_action">
-                       <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-                       <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+                       <li class="add_row_detail_img"><i class="fa fa-plus-circle"></i></li>
+                       <li class="remove_row_img"><i class="fa fa-minus-circle"></i></li>
                        <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($sys_process_flow_action->cc_co_process_flow_action_id); ?>"></li>           
                        <li><?php echo form::hidden_field('cc_co_header_id', $$class->cc_co_header_id); ?></li>
                       </ul>
@@ -355,15 +347,10 @@
            if ($tlc == 1) {
             $no_of_fields_in_tab = NO_OF_SEEDED_FIELDS;
             ?>
-            <td>    
-             <ul class="inline_action">
-              <li class="add_row_img clickable"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-              <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-              <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class_second->cc_co_line_id); ?>"></li>           
-              <li><?php echo form::hidden_field('cc_co_header_id', $cc_co_header->cc_co_header_id); ?>
-               <?php echo $f->hidden_field('template_id', $cc_co_header->template_id); ?>
-              </li>
-             </ul>
+            <td><?php
+             echo ino_inline_action($$class_second->cc_co_line_id, 
+              array('template_id' => $cc_co_header->template_id, 'cc_co_header_id' => $cc_co_header->cc_co_header_id));
+             ?>
             </td>
             <td><?php $f->seq_field_d($count) ?></td>
             <td><?php echo $f->text_field('cc_co_line_id', $$class_second->cc_co_line_id, '8', '', '', '', 1); ?></td>
@@ -431,14 +418,14 @@
  <ul id="js_saving_data">
   <li class="headerClassName" data-headerClassName="cc_co_header" ></li>
   <li class="lineClassName" data-lineClassName="cc_co_line" ></li>
-  
+
   <li class="detailClassName" data-detailClassName="cc_co_process_flow_action" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
   <li class="primary_column_id" data-primary_column_id="cc_co_header_id" ></li>
   <li class="form_header_id" data-form_header_id="cc_co_header" ></li>
   <li class="line_key_field" data-line_key_field="pf_action_type" ></li>
   <li class="single_line" data-single_line="false" ></li>
-  
+
  </ul>
  <ul id="js_contextMenu_data">
   <li class="docHedaderId" data-docHedaderId="cc_co_header_id" ></li>

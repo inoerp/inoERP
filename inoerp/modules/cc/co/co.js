@@ -28,7 +28,7 @@ $(document).ready(function () {
 //mandatory and field sequence
  var mandatoryCheck = new mandatoryFieldMain();
  mandatoryCheck.header_id = 'cc_co_header_id';
-// mandatoryCheck.mandatoryHeader();
+ mandatoryCheck.mandatoryHeader();
 
  //setting the first line number
  if (!($('.lines_number:first').val())) {

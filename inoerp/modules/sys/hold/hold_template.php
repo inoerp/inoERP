@@ -1,33 +1,27 @@
 <div id ="form_header">
- <form action=""  method="post" id="sys_hold"  name="sys_hold"><span class="heading">System Hold </span>
-  <div id ="form_header">
+ <form action=""  method="post" id="sys_hold"  name="sys_hold">
+  <span class="heading"><?php echo gettext('System Hold') ?></span>
+  <div id ="form_header"><?php $f = NEW INOFORM() ?>
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Attachments</a></li>
-     <li><a href="#tabsHeader-3">Notes</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
-       <ul class="column four_column"> 
-        <li> 
-         <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sys_hold_id select_popup clickable">
-          Hold Id : </label><?php $f->text_field_dsr('sys_hold_id') ?>
-        <a name="show" href="form.php?class_name=sys_hold&<?php echo "mode=$mode"; ?>" class="show document_id sys_hold_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+       <ul class="column header_field"> 
+        <li><?php $f->l_text_field_dr_withSearch('sys_hold_id') ?>
+         <a name="show" href="form.php?class_name=sys_hold&<?php echo "mode=$mode"; ?>" class="show document_id sys_hold_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
         </li>
-        <li><label>Hold Name :</label><?php $f->text_field_dm('hold_name'); ?> 					</li>
-        <li><label>Hold Code :</label><?php $f->text_field_dm('hold_code'); ?> 					</li>
-        <li><label>Type :</label>
-         <?php echo $f->select_field_from_object('hold_type', sys_hold::hold_type(), 'option_line_code', 'option_line_value', $$class->hold_type, 'hold_type', '', 1, $readonly1); ?>              </li>
-        <li><label>Status : </label><?php echo form::status_field($$class->status, $readonly); ?></li>
-        <li><label>Description :</label><?php $f->text_field_dl('description'); ?> 					</li>
-        <li><label>Allow Manual Release :</label>  <?php echo $f->checkBox_field_d('manual_released_cb'); ?>   </li>
-        <li><label>Access Level* : </label>
-         <?php echo $f->select_field_from_array('access_level', option_header::$access_level_a, $$class->access_level, 'access_level', $readonly); ?>
-        </li>
+        <li><?php $f->l_text_field_dm('hold_name'); ?> 					</li>
+        <li><?php $f->l_text_field_dm('hold_code'); ?> 					</li>
+        <li><?php $f->l_select_field_from_object('hold_type', sys_hold::hold_type(), 'option_line_code', 'option_line_value', $$class->hold_type, 'hold_type', '', 1, $readonly1); ?>              </li>
+        <li><?php $f->l_status_field_d('status'); ?></li>
+        <li><?php $f->l_text_field_d('description'); ?> 					</li>
+        <li><?php $f->l_checkBox_field_d('manual_released_cb'); ?>   </li>
+        <li><?php $f->l_select_field_from_array('access_level', option_header::$access_level_a, $$class->access_level, 'access_level', $readonly); ?>        </li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div> <?php echo ino_attachement($file) ?> </div>

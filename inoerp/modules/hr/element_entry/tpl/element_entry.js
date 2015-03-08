@@ -9,6 +9,11 @@ setValFromSelectPage.prototype.setVal = function () {
 };
 
 $(document).ready(function () {
+ 
+   var mandatoryCheck = new mandatoryFieldMain();
+ mandatoryCheck.header_id = 'hr_element_entry_tpl_header_id';
+ mandatoryCheck.mandatoryHeader();
+ 
  //setting the first tpl_line number
  if (!($('.tpl_lines_number:first').val())) {
   $('.tpl_lines_number:first').val('10');

@@ -1,64 +1,9853 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
+"POT-Creation-Date: 2015-03-08 23:59+0800\n"
+"PO-Revision-Date: 2015-03-08 23:59+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hi_IN\n"
 "X-Generator: Poedit 1.7.4\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en\n"
 
-# Test token 1
-msgid "HELLO_WORLD"
-msgstr "हैलो वर्ल्ड"
 
-msgid "Asset Number"
-msgstr ""
-
-msgid "Asset"
-msgstr ""
-
-msgid "Number"
-msgstr ""
-
-msgid "Asset Id"
-msgstr ""
-
-msgid "Organization"
-msgstr ""
-
-msgid "Inv Item Number"
-msgstr ""
-
-msgid "Item Description"
-msgstr ""
-
-msgid "Category"
-msgstr ""
-
-msgid "Status"
-msgstr ""
-
-msgid "Serial"
-msgstr ""
+msgid "Address Id"
+msgstr "Address Id"
 
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
-msgid "Parent Asset"
-msgstr ""
+msgid "Address Name"
+msgstr "Address Name"
 
-msgid "Parent Asset Id"
-msgstr ""
-
-msgid "Accounting Class"
-msgstr ""
-
-msgid "Accounting Class Id"
-msgstr ""
+msgid "Mdm Tax Region Id"
+msgstr "Mdm Tax Region Id"
 
 msgid "Description"
-msgstr ""
+msgstr "Description"
+
+msgid "Phone"
+msgstr "Phone"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Website"
+msgstr "Website"
+
+msgid "Address"
+msgstr "Address"
+
+msgid "Country"
+msgstr "Country"
+
+msgid "Postal Code"
+msgstr "Postal Code"
+
+msgid "Efid"
+msgstr "Efid"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Rev Enabled"
+msgstr "Rev Enabled"
+
+msgid "Rev Number"
+msgstr "Rev Number"
+
+msgid "Created By"
+msgstr "Created By"
+
+msgid "Creation Date"
+msgstr "Creation Date"
+
+msgid "Last Update By"
+msgstr "Last Update By"
+
+msgid "Last Update Date"
+msgstr "Last Update Date"
+
+msgid "Am Activity Reference Id"
+msgstr "Am Activity Reference Id"
+
+msgid "Am Asset Id"
+msgstr "Am Asset Id"
+
+msgid "Am Reference Id"
+msgstr "Am Reference Id"
+
+msgid "Priority"
+msgstr "Priority"
+
+msgid "Start Date"
+msgstr "Start Date"
+
+msgid "End Date"
+msgstr "End Date"
+
+msgid "Cause"
+msgstr "Cause"
+
+msgid "Activity Type"
+msgstr "Activity Type"
+
+msgid "Accounting Class Id"
+msgstr "Accounting Class Id"
+
+msgid "Owning Department Id"
+msgstr "Owning Department Id"
+
+msgid "Shutdown Type"
+msgstr "Shutdown Type"
+
+msgid "Activity Source"
+msgstr "Activity Source"
+
+msgid "Asset Number"
+msgstr "Asset Number"
+
+msgid "Tag Number"
+msgstr "Tag Number"
+
+msgid "Serial Number"
+msgstr "Serial Number"
+
+msgid "Am Asset Category Id"
+msgstr "Am Asset Category Id"
+
+msgid "Parent Asset Id"
+msgstr "Parent Asset Id"
+
+msgid "Manufacturer"
+msgstr "Manufacturer"
+
+msgid "Org Id"
+msgstr "Org Id"
+
+msgid "Item Id M"
+msgstr "Item Id M"
+
+msgid "Model Number"
+msgstr "Model Number"
+
+msgid "Warranty Number"
+msgstr "Warranty Number"
+
+msgid "Warranty Exp Date"
+msgstr "Warranty Exp Date"
+
+msgid "Maintainable Cb"
+msgstr "Maintainable Cb"
+
+msgid "Subinventory Id"
+msgstr "Subinventory Id"
+
+msgid "Locator Id"
+msgstr "Locator Id"
+
+msgid "Equipment Item Id M"
+msgstr "Equipment Item Id M"
+
+msgid "Fa Asset Id"
+msgstr "Fa Asset Id"
+
+msgid "Production Org Id"
+msgstr "Production Org Id"
+
+msgid "Ap Payment Header Id"
+msgstr "Ap Payment Header Id"
+
+msgid "Bu Org Id"
+msgstr "Bu Org Id"
+
+msgid "Payment Type"
+msgstr "Payment Type"
+
+msgid "Payment Number"
+msgstr "Payment Number"
+
+msgid "Supplier Id"
+msgstr "Supplier Id"
+
+msgid "Supplier Site Id"
+msgstr "Supplier Site Id"
+
+msgid "From Bank Header Id"
+msgstr "From Bank Header Id"
+
+msgid "Header Amount"
+msgstr "Header Amount"
+
+msgid "Currency"
+msgstr "Currency"
+
+msgid "Document Number"
+msgstr "Document Number"
+
+msgid "Payment Status"
+msgstr "Payment Status"
+
+msgid "Gl Journal Header Id"
+msgstr "Gl Journal Header Id"
+
+msgid "Ap Payment Line Id"
+msgstr "Ap Payment Line Id"
+
+msgid "Line Number"
+msgstr "Line Number"
+
+msgid "Amount"
+msgstr "Amount"
+
+msgid "Line Description"
+msgstr "Line Description"
+
+msgid "Ap Transaction Header Id"
+msgstr "Ap Transaction Header Id"
+
+msgid "Transaction Type"
+msgstr "Transaction Type"
+
+msgid "Transaction Number"
+msgstr "Transaction Number"
+
+msgid "Document Owner"
+msgstr "Document Owner"
+
+msgid "Apth Currency"
+msgstr "Apth Currency"
+
+msgid "Apth Header Amount"
+msgstr "Apth Header Amount"
+
+msgid "Transaction Status"
+msgstr "Transaction Status"
+
+msgid "Paid Amount"
+msgstr "Paid Amount"
+
+msgid "Apth Payment Status"
+msgstr "Apth Payment Status"
+
+msgid "Supplier Name"
+msgstr "Supplier Name"
+
+msgid "Supplier Number"
+msgstr "Supplier Number"
+
+msgid "Supplier Site Name"
+msgstr "Supplier Site Name"
+
+msgid "Supplier Site Number"
+msgstr "Supplier Site Number"
+
+msgid "From Bank Line Id"
+msgstr "From Bank Line Id"
+
+msgid "To Bank Header Id"
+msgstr "To Bank Header Id"
+
+msgid "Doc Currency"
+msgstr "Doc Currency"
+
+msgid "To Bank Line Id"
+msgstr "To Bank Line Id"
+
+msgid "Exchange Rate Type"
+msgstr "Exchange Rate Type"
+
+msgid "Exchange Rate"
+msgstr "Exchange Rate"
+
+msgid "Ef Id"
+msgstr "Ef Id"
+
+msgid "Document Date"
+msgstr "Document Date"
+
+msgid "Ledger Id"
+msgstr "Ledger Id"
+
+msgid "Period Id"
+msgstr "Period Id"
+
+msgid "Pay Group"
+msgstr "Pay Group"
+
+msgid "Payment Method"
+msgstr "Payment Method"
+
+msgid "Approval Status"
+msgstr "Approval Status"
+
+msgid "Reference Type"
+msgstr "Reference Type"
+
+msgid "Reference Key Name"
+msgstr "Reference Key Name"
+
+msgid "Reference Key Value"
+msgstr "Reference Key Value"
+
+msgid "Ap Payment Interface Id"
+msgstr "Ap Payment Interface Id"
+
+msgid "Document Currency"
+msgstr "Document Currency"
+
+msgid "Gl Amount"
+msgstr "Gl Amount"
+
+msgid "Line Source"
+msgstr "Line Source"
+
+msgid "Term Id"
+msgstr "Term Id"
+
+msgid "Term Name"
+msgstr "Term Name"
+
+msgid "Term Description"
+msgstr "Term Description"
+
+msgid "Payment Term Id"
+msgstr "Payment Term Id"
+
+msgid "Po Number"
+msgstr "Po Number"
+
+msgid "Po Type"
+msgstr "Po Type"
+
+msgid "Buyer"
+msgstr "Buyer"
+
+msgid "Payment Term"
+msgstr "Payment Term"
+
+msgid "Ap Transaction Line Id"
+msgstr "Ap Transaction Line Id"
+
+msgid "Line Type"
+msgstr "Line Type"
+
+msgid "Item Description"
+msgstr "Item Description"
+
+msgid "Inv Line Quantity"
+msgstr "Inv Line Quantity"
+
+msgid "Inv Unit Price"
+msgstr "Inv Unit Price"
+
+msgid "Inv Line Price"
+msgstr "Inv Line Price"
+
+msgid "Gl Inv Line Price"
+msgstr "Gl Inv Line Price"
+
+msgid "Po Header Id"
+msgstr "Po Header Id"
+
+msgid "Po Line Id"
+msgstr "Po Line Id"
+
+msgid "Po Detail Id"
+msgstr "Po Detail Id"
+
+msgid "Ref Transaction Header Id"
+msgstr "Ref Transaction Header Id"
+
+msgid "Ref Transaction Line Id"
+msgstr "Ref Transaction Line Id"
+
+msgid "Item Number"
+msgstr "Item Number"
+
+msgid "Uom Id"
+msgstr "Uom Id"
+
+msgid "Item Status"
+msgstr "Item Status"
+
+msgid "Po Status"
+msgstr "Po Status"
+
+msgid "Payment Term Description"
+msgstr "Payment Term Description"
+
+msgid "Po Line Number"
+msgstr "Po Line Number"
+
+msgid "Line Quantity"
+msgstr "Line Quantity"
+
+msgid "Unit Price"
+msgstr "Unit Price"
+
+msgid "Line Price"
+msgstr "Line Price"
+
+msgid "Gl Line Price"
+msgstr "Gl Line Price"
+
+msgid "Gl Tax Amount"
+msgstr "Gl Tax Amount"
+
+msgid "Tax Amount"
+msgstr "Tax Amount"
+
+msgid "Shipment Number"
+msgstr "Shipment Number"
+
+msgid "Receving Org Id"
+msgstr "Receving Org Id"
+
+msgid "Requestor"
+msgstr "Requestor"
+
+msgid "Quantity"
+msgstr "Quantity"
+
+msgid "Received Quantity"
+msgstr "Received Quantity"
+
+msgid "Receiving Open Quantity"
+msgstr "Receiving Open Quantity"
+
+msgid "Need By Date"
+msgstr "Need By Date"
+
+msgid "Promise Date"
+msgstr "Promise Date"
+
+msgid "Accepted Quantity"
+msgstr "Accepted Quantity"
+
+msgid "Delivered Quantity"
+msgstr "Delivered Quantity"
+
+msgid "Invoiced Quantity"
+msgstr "Invoiced Quantity"
+
+msgid "Paid Quantity"
+msgstr "Paid Quantity"
+
+msgid "Invoicing Open Quantity"
+msgstr "Invoicing Open Quantity"
+
+msgid "Charge Ac Id"
+msgstr "Charge Ac Id"
+
+msgid "Accrual Ac Id"
+msgstr "Accrual Ac Id"
+
+msgid "Budget Ac Id"
+msgstr "Budget Ac Id"
+
+msgid "Ppv Ac Id"
+msgstr "Ppv Ac Id"
+
+msgid "Receving Org"
+msgstr "Receving Org"
+
+msgid "Ap Transaction Detail Id"
+msgstr "Ap Transaction Detail Id"
+
+msgid "Account Type"
+msgstr "Account Type"
+
+msgid "Detail Description"
+msgstr "Detail Description"
+
+msgid "Detail Ac Id"
+msgstr "Detail Ac Id"
+
+msgid "Detail Number"
+msgstr "Detail Number"
+
+msgid "Journal Created Cb"
+msgstr "Journal Created Cb"
+
+msgid "Ship To Id"
+msgstr "Ship To Id"
+
+msgid "Bill To Id"
+msgstr "Bill To Id"
+
+msgid "Payment Term Date"
+msgstr "Payment Term Date"
+
+msgid "Tax Code Id"
+msgstr "Tax Code Id"
+
+msgid "Asset Cb"
+msgstr "Asset Cb"
+
+msgid "Fa Asset Category Id"
+msgstr "Fa Asset Category Id"
+
+msgid "Prj Project Header Id"
+msgstr "Prj Project Header Id"
+
+msgid "Prj Project Line Id"
+msgstr "Prj Project Line Id"
+
+msgid "Ar Customer Id"
+msgstr "Ar Customer Id"
+
+msgid "Customer Number"
+msgstr "Customer Number"
+
+msgid "Customer Name"
+msgstr "Customer Name"
+
+msgid "Customer Type"
+msgstr "Customer Type"
+
+msgid "Tax Country"
+msgstr "Tax Country"
+
+msgid "Tax Reg No"
+msgstr "Tax Reg No"
+
+msgid "Tax Payer Id"
+msgstr "Tax Payer Id"
+
+msgid "Customer Contact Id"
+msgstr "Customer Contact Id"
+
+msgid "Customer Credit Class"
+msgstr "Customer Credit Class"
+
+msgid "Profile Name"
+msgstr "Profile Name"
+
+msgid "Rev Enabled Cb"
+msgstr "Rev Enabled Cb"
+
+msgid "Ar Customer Bu Id"
+msgstr "Ar Customer Bu Id"
+
+msgid "Profile Id"
+msgstr "Profile Id"
+
+msgid "Finance Profile Id"
+msgstr "Finance Profile Id"
+
+msgid "Payment Method Id"
+msgstr "Payment Method Id"
+
+msgid "Order Type Id"
+msgstr "Order Type Id"
+
+msgid "Price List Id"
+msgstr "Price List Id"
+
+msgid "Internal Org Id"
+msgstr "Internal Org Id"
+
+msgid "Fob"
+msgstr "Fob"
+
+msgid "Freight Terms"
+msgstr "Freight Terms"
+
+msgid "Transportation"
+msgstr "Transportation"
+
+msgid "Country Of Origin"
+msgstr "Country Of Origin"
+
+msgid "Site Address Id"
+msgstr "Site Address Id"
+
+msgid "Site Contact Id"
+msgstr "Site Contact Id"
+
+msgid "Customer Site Attachement Id"
+msgstr "Customer Site Attachement Id"
+
+msgid "Bank Id"
+msgstr "Bank Id"
+
+msgid "Bank Account Id"
+msgstr "Bank Account Id"
+
+msgid "Receivable Ac Id"
+msgstr "Receivable Ac Id"
+
+msgid "Revenue Ac Id"
+msgstr "Revenue Ac Id"
+
+msgid "Tax Ac Id"
+msgstr "Tax Ac Id"
+
+msgid "Freight Ac Id"
+msgstr "Freight Ac Id"
+
+msgid "Clearing Ac Id"
+msgstr "Clearing Ac Id"
+
+msgid "Unbilled Receivable Ac Id"
+msgstr "Unbilled Receivable Ac Id"
+
+msgid "Unearned Revenue Ac Id"
+msgstr "Unearned Revenue Ac Id"
+
+msgid "Ar Customer Site Id"
+msgstr "Ar Customer Site Id"
+
+msgid "Customer Site Number"
+msgstr "Customer Site Number"
+
+msgid "Customer Site Name"
+msgstr "Customer Site Name"
+
+msgid "Site Tax Country"
+msgstr "Site Tax Country"
+
+msgid "Site Tax Reg No"
+msgstr "Site Tax Reg No"
+
+msgid "Site Tax Payer Id"
+msgstr "Site Tax Payer Id"
+
+msgid "Site Tax Code"
+msgstr "Site Tax Code"
+
+msgid "Customer Site Ref"
+msgstr "Customer Site Ref"
+
+msgid "Customer Site Type"
+msgstr "Customer Site Type"
+
+msgid "Site Status"
+msgstr "Site Status"
+
+msgid "Ar Receipt Header Id"
+msgstr "Ar Receipt Header Id"
+
+msgid "Ar Receipt Source Id"
+msgstr "Ar Receipt Source Id"
+
+msgid "Receipt Type"
+msgstr "Receipt Type"
+
+msgid "Receipt Number"
+msgstr "Receipt Number"
+
+msgid "Receipt Method"
+msgstr "Receipt Method"
+
+msgid "Receipt Status"
+msgstr "Receipt Status"
+
+msgid "Ar Receipt Interface Id"
+msgstr "Ar Receipt Interface Id"
+
+msgid "Ar Transaction Header Id"
+msgstr "Ar Transaction Header Id"
+
+msgid "Sales Person"
+msgstr "Sales Person"
+
+msgid "Ar Receipt Line Id"
+msgstr "Ar Receipt Line Id"
+
+msgid "Receipt Source"
+msgstr "Receipt Source"
+
+msgid "Creation Method"
+msgstr "Creation Method"
+
+msgid "Remittance"
+msgstr "Remittance"
+
+msgid "Clearance"
+msgstr "Clearance"
+
+msgid "Sync Receipt Number Cb"
+msgstr "Sync Receipt Number Cb"
+
+msgid "Ar Transaction Detail Id"
+msgstr "Ar Transaction Detail Id"
+
+msgid "Ar Transaction Line Id"
+msgstr "Ar Transaction Line Id"
+
+msgid "Sd So Header Id"
+msgstr "Sd So Header Id"
+
+msgid "Sd So Line Id"
+msgstr "Sd So Line Id"
+
+msgid "Sd So Detail Id"
+msgstr "Sd So Detail Id"
+
+msgid "Transaction Class"
+msgstr "Transaction Class"
+
+msgid "Receipt Amount"
+msgstr "Receipt Amount"
+
+msgid "Ar Transaction Interface Id"
+msgstr "Ar Transaction Interface Id"
+
+msgid "Ar Transaction Source Id"
+msgstr "Ar Transaction Source Id"
+
+msgid "Transaction Source"
+msgstr "Transaction Source"
+
+msgid "Source Type"
+msgstr "Source Type"
+
+msgid "Legal Org Id"
+msgstr "Legal Org Id"
+
+msgid "Invoice Type Id"
+msgstr "Invoice Type Id"
+
+msgid "Cm Type Id"
+msgstr "Cm Type Id"
+
+msgid "Create Clearing Cb"
+msgstr "Create Clearing Cb"
+
+msgid "Ar Transaction Type Id"
+msgstr "Ar Transaction Type Id"
+
+msgid "Ar Transaction Type"
+msgstr "Ar Transaction Type"
+
+msgid "Br Receivable Ac Id"
+msgstr "Br Receivable Ac Id"
+
+msgid "Br Offset Ac Id"
+msgstr "Br Offset Ac Id"
+
+msgid "Remaing Amount"
+msgstr "Remaing Amount"
+
+msgid "So Number"
+msgstr "So Number"
+
+msgid "Bc Label Auto Trigger Id"
+msgstr "Bc Label Auto Trigger Id"
+
+msgid "Transaction Type Id"
+msgstr "Transaction Type Id"
+
+msgid "Bc Label Format Header Id"
+msgstr "Bc Label Format Header Id"
+
+msgid "Association Level"
+msgstr "Association Level"
+
+msgid "Association Level Value"
+msgstr "Association Level Value"
+
+msgid "Sys Printer Id"
+msgstr "Sys Printer Id"
+
+msgid "Enabled Cb"
+msgstr "Enabled Cb"
+
+msgid "Label Type"
+msgstr "Label Type"
+
+msgid "Format Name"
+msgstr "Format Name"
+
+msgid "Disable Date"
+msgstr "Disable Date"
+
+msgid "Default Cb"
+msgstr "Default Cb"
+
+msgid "Generator Class Name"
+msgstr "Generator Class Name"
+
+msgid "Generator Function Name"
+msgstr "Generator Function Name"
+
+msgid "Bc Label Format Line Id"
+msgstr "Bc Label Format Line Id"
+
+msgid "Object Name"
+msgstr "Object Name"
+
+msgid "Sys Field Name"
+msgstr "Sys Field Name"
+
+msgid "Field Name"
+msgstr "Field Name"
+
+msgid "Bc Label Request Id"
+msgstr "Bc Label Request Id"
+
+msgid "Label Content"
+msgstr "Label Content"
+
+msgid "Output File Path"
+msgstr "Output File Path"
+
+msgid "File Name"
+msgstr "File Name"
+
+msgid "Bc Static Label Id"
+msgstr "Bc Static Label Id"
+
+msgid "Generate Label Class Name"
+msgstr "Generate Label Class Name"
+
+msgid "Generate Label Function Name"
+msgstr "Generate Label Function Name"
+
+msgid "Block Id"
+msgstr "Block Id"
+
+msgid "Reference Table"
+msgstr "Reference Table"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Cached Cb"
+msgstr "Cached Cb"
+
+msgid "Restrict To Role"
+msgstr "Restrict To Role"
+
+msgid "Visibility Option"
+msgstr "Visibility Option"
+
+msgid "Visibility"
+msgstr "Visibility"
+
+msgid "Visibility Php Cb"
+msgstr "Visibility Php Cb"
+
+msgid "Title"
+msgstr "Title"
+
+msgid "Show Title Cb"
+msgstr "Show Title Cb"
+
+msgid "Position"
+msgstr "Position"
+
+msgid "Weight"
+msgstr "Weight"
+
+msgid "Session Id"
+msgstr "Session Id"
+
+msgid "Block Data"
+msgstr "Block Data"
+
+msgid "Block Content Id"
+msgstr "Block Content Id"
+
+msgid "Info"
+msgstr "Info"
+
+msgid "Content"
+msgstr "Content"
+
+msgid "Content Php Cb"
+msgstr "Content Php Cb"
+
+msgid "Bom Header Id"
+msgstr "Bom Header Id"
+
+msgid "Alternate Bom"
+msgstr "Alternate Bom"
+
+msgid "Bom Revision"
+msgstr "Bom Revision"
+
+msgid "Effective Date"
+msgstr "Effective Date"
+
+msgid "Common Bom Item Id M"
+msgstr "Common Bom Item Id M"
+
+msgid "Item Type"
+msgstr "Item Type"
+
+msgid "Bom Type"
+msgstr "Bom Type"
+
+msgid "Costing Enabled Cb"
+msgstr "Costing Enabled Cb"
+
+msgid "Make Buy"
+msgstr "Make Buy"
+
+msgid "Org"
+msgstr "Org"
+
+msgid "Org Type"
+msgstr "Org Type"
+
+msgid "Org Status"
+msgstr "Org Status"
+
+msgid "Org Description"
+msgstr "Org Description"
+
+msgid "Org Code"
+msgstr "Org Code"
+
+msgid "Bom Commonbom Line Id"
+msgstr "Bom Commonbom Line Id"
+
+msgid "Bom Line Id"
+msgstr "Bom Line Id"
+
+msgid "Routing Sequence"
+msgstr "Routing Sequence"
+
+msgid "Planning Percentage"
+msgstr "Planning Percentage"
+
+msgid "Yield"
+msgstr "Yield"
+
+msgid "Include In Cost Rollup Cb"
+msgstr "Include In Cost Rollup Cb"
+
+msgid "Wip Supply Type"
+msgstr "Wip Supply Type"
+
+msgid "Supply Sub Inventory"
+msgstr "Supply Sub Inventory"
+
+msgid "Supply Locator"
+msgstr "Supply Locator"
+
+msgid "Bom Config Header Id"
+msgstr "Bom Config Header Id"
+
+msgid "Bom Config Line Id"
+msgstr "Bom Config Line Id"
+
+msgid "Bom Sequence"
+msgstr "Bom Sequence"
+
+msgid "Component Item Id M"
+msgstr "Component Item Id M"
+
+msgid "Component Revision"
+msgstr "Component Revision"
+
+msgid "Usage Basis"
+msgstr "Usage Basis"
+
+msgid "Usage Quantity"
+msgstr "Usage Quantity"
+
+msgid "Transacted Quantity"
+msgstr "Transacted Quantity"
+
+msgid "Auto Request Material Cb"
+msgstr "Auto Request Material Cb"
+
+msgid "Bom Cost Type Id"
+msgstr "Bom Cost Type Id"
+
+msgid "Cost Type Code"
+msgstr "Cost Type Code"
+
+msgid "Cost Type"
+msgstr "Cost Type"
+
+msgid "Multi Org Cb"
+msgstr "Multi Org Cb"
+
+msgid "Default Cost Type"
+msgstr "Default Cost Type"
+
+msgid "Bom Department Id"
+msgstr "Bom Department Id"
+
+msgid "Department"
+msgstr "Department"
+
+msgid "Location Id"
+msgstr "Location Id"
+
+msgid "Department Type"
+msgstr "Department Type"
+
+msgid "Default Basis"
+msgstr "Default Basis"
+
+msgid "Absorption Ac Id"
+msgstr "Absorption Ac Id"
+
+msgid "Resource Assignment Id"
+msgstr "Resource Assignment Id"
+
+msgid "Bom Department Resource Assignment Id"
+msgstr "Bom Department Resource Assignment Id"
+
+msgid "Cost Type Id"
+msgstr "Cost Type Id"
+
+msgid "Resource Id"
+msgstr "Resource Id"
+
+msgid "No Of Units"
+msgstr "No Of Units"
+
+msgid "Efficiency"
+msgstr "Efficiency"
+
+msgid "Utilization"
+msgstr "Utilization"
+
+msgid "Common Bom Org Id"
+msgstr "Common Bom Org Id"
+
+msgid "Effective Start Date"
+msgstr "Effective Start Date"
+
+msgid "Effective End Date"
+msgstr "Effective End Date"
+
+msgid "Eco Number"
+msgstr "Eco Number"
+
+msgid "Eco Implemented Cb"
+msgstr "Eco Implemented Cb"
+
+msgid "Bom Header Id H"
+msgstr "Bom Header Id H"
+
+msgid "H Created By"
+msgstr "H Created By"
+
+msgid "H Creation Date"
+msgstr "H Creation Date"
+
+msgid "H Last Update By"
+msgstr "H Last Update By"
+
+msgid "H Last Update Date"
+msgstr "H Last Update Date"
+
+msgid "Bom Material Element Id"
+msgstr "Bom Material Element Id"
+
+msgid "Material Element"
+msgstr "Material Element"
+
+msgid "Bom Overhead Id"
+msgstr "Bom Overhead Id"
+
+msgid "Overhead"
+msgstr "Overhead"
+
+msgid "Overhead Type"
+msgstr "Overhead Type"
+
+msgid "Rate Assignment Id"
+msgstr "Rate Assignment Id"
+
+msgid "Bom Overhead Rate Assignment Id"
+msgstr "Bom Overhead Rate Assignment Id"
+
+msgid "Bom Cost Type"
+msgstr "Bom Cost Type"
+
+msgid "Rate"
+msgstr "Rate"
+
+msgid "Bom Overhead Resource Assignment Id"
+msgstr "Bom Overhead Resource Assignment Id"
+
+msgid "Resource Bom Cost Type"
+msgstr "Resource Bom Cost Type"
+
+msgid "Rate Bom Cost Type"
+msgstr "Rate Bom Cost Type"
+
+msgid "Bom Resource Id"
+msgstr "Bom Resource Id"
+
+msgid "Resource"
+msgstr "Resource"
+
+msgid "Resource Type"
+msgstr "Resource Type"
+
+msgid "Charge Type"
+msgstr "Charge Type"
+
+msgid "Uom"
+msgstr "Uom"
+
+msgid "Basis"
+msgstr "Basis"
+
+msgid "Osp Cb"
+msgstr "Osp Cb"
+
+msgid "Osp Item Id"
+msgstr "Osp Item Id"
+
+msgid "Costed Cb"
+msgstr "Costed Cb"
+
+msgid "Standard Rate Cb"
+msgstr "Standard Rate Cb"
+
+msgid "Variance Ac Id"
+msgstr "Variance Ac Id"
+
+msgid "Overheads"
+msgstr "Overheads"
+
+msgid "Rate Reference Id"
+msgstr "Rate Reference Id"
+
+msgid "Bom Resource Cost Id"
+msgstr "Bom Resource Cost Id"
+
+msgid "Resource Rate"
+msgstr "Resource Rate"
+
+msgid "Bom Routing Detail Id"
+msgstr "Bom Routing Detail Id"
+
+msgid "Bom Routing Line Id"
+msgstr "Bom Routing Line Id"
+
+msgid "Bom Routing Header Id"
+msgstr "Bom Routing Header Id"
+
+msgid "Bom Standard Operation Id"
+msgstr "Bom Standard Operation Id"
+
+msgid "Resource Sequence"
+msgstr "Resource Sequence"
+
+msgid "Charge Basis"
+msgstr "Charge Basis"
+
+msgid "Resource Usage"
+msgstr "Resource Usage"
+
+msgid "Resource Schedule"
+msgstr "Resource Schedule"
+
+msgid "Assigned Units"
+msgstr "Assigned Units"
+
+msgid "Twenty Four Hr Cb"
+msgstr "Twenty Four Hr Cb"
+
+msgid "Alternate Routing"
+msgstr "Alternate Routing"
+
+msgid "Routing Revision"
+msgstr "Routing Revision"
+
+msgid "Common Routing Item Id M"
+msgstr "Common Routing Item Id M"
+
+msgid "Completion Subinventory"
+msgstr "Completion Subinventory"
+
+msgid "Completion Locator"
+msgstr "Completion Locator"
+
+msgid "Standard Operation Id"
+msgstr "Standard Operation Id"
+
+msgid "Department Id"
+msgstr "Department Id"
+
+msgid "Lead Time Percentage"
+msgstr "Lead Time Percentage"
+
+msgid "Count Point Cb"
+msgstr "Count Point Cb"
+
+msgid "Auto Charge Cb"
+msgstr "Auto Charge Cb"
+
+msgid "Backflush Cb"
+msgstr "Backflush Cb"
+
+msgid "Include In Rollup Cb"
+msgstr "Include In Rollup Cb"
+
+msgid "Minimum Transfer Quantity"
+msgstr "Minimum Transfer Quantity"
+
+msgid "Referenced Cb"
+msgstr "Referenced Cb"
+
+msgid "Cumm Yield"
+msgstr "Cumm Yield"
+
+msgid "Bom Routing Header Id H"
+msgstr "Bom Routing Header Id H"
+
+msgid "Description H"
+msgstr "Description H"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "Subinventory"
+msgstr "Subinventory"
+
+msgid "Locator"
+msgstr "Locator"
+
+msgid "Standard Operation"
+msgstr "Standard Operation"
+
+msgid "Bom Standard Operation Resource Assignment Id"
+msgstr "Bom Standard Operation Resource Assignment Id"
+
+msgid "Business Id"
+msgstr "Business Id"
+
+msgid "Business Org Type"
+msgstr "Business Org Type"
+
+msgid "Manager"
+msgstr "Manager"
+
+msgid "Enterprise Org Id"
+msgstr "Enterprise Org Id"
+
+msgid "Cash Ac Id"
+msgstr "Cash Ac Id"
+
+msgid "Content Id"
+msgstr "Content Id"
+
+msgid "Length"
+msgstr "Length"
+
+msgid "Height"
+msgstr "Height"
+
+msgid "Chapter"
+msgstr "Chapter"
+
+msgid "Category"
+msgstr "Category"
+
+msgid "Component"
+msgstr "Component"
+
+msgid "Testabab"
+msgstr "Testabab"
+
+msgid "Category Id"
+msgstr "Category Id"
+
+msgid "Major Category Id"
+msgstr "Major Category Id"
+
+msgid "Parent Id"
+msgstr "Parent Id"
+
+msgid "Category Type"
+msgstr "Category Type"
+
+msgid "Primary Cb"
+msgstr "Primary Cb"
+
+msgid "Category Reference Id"
+msgstr "Category Reference Id"
+
+msgid "Reference Id"
+msgstr "Reference Id"
+
+msgid "Cc Co Header Id"
+msgstr "Cc Co Header Id"
+
+msgid "Change Number"
+msgstr "Change Number"
+
+msgid "Security Level"
+msgstr "Security Level"
+
+msgid "Template Id"
+msgstr "Template Id"
+
+msgid "Change Type"
+msgstr "Change Type"
+
+msgid "Originator"
+msgstr "Originator"
+
+msgid "Reason Code"
+msgstr "Reason Code"
+
+msgid "Product Line"
+msgstr "Product Line"
+
+msgid "Process Flow Header Id"
+msgstr "Process Flow Header Id"
+
+msgid "Current Process Flow Line Id"
+msgstr "Current Process Flow Line Id"
+
+msgid "Origination Date"
+msgstr "Origination Date"
+
+msgid "Owner User Id"
+msgstr "Owner User Id"
+
+msgid "Release Date"
+msgstr "Release Date"
+
+msgid "Completion Date"
+msgstr "Completion Date"
+
+msgid "Project Task Id"
+msgstr "Project Task Id"
+
+msgid "Access Org"
+msgstr "Access Org"
+
+msgid "Related Changes"
+msgstr "Related Changes"
+
+msgid "Cc Co Line Id"
+msgstr "Cc Co Line Id"
+
+msgid "New Revision"
+msgstr "New Revision"
+
+msgid "Cc Co Line Value Id"
+msgstr "Cc Co Line Value Id"
+
+msgid "Cc Co Template Line Id"
+msgstr "Cc Co Template Line Id"
+
+msgid "Field Value"
+msgstr "Field Value"
+
+msgid "Cc Co Process Flow Action Id"
+msgstr "Cc Co Process Flow Action Id"
+
+msgid "Sys Process Flow Line Id"
+msgstr "Sys Process Flow Line Id"
+
+msgid "Action Number"
+msgstr "Action Number"
+
+msgid "Role Code"
+msgstr "Role Code"
+
+msgid "User Id"
+msgstr "User Id"
+
+msgid "Pf Action Type"
+msgstr "Pf Action Type"
+
+msgid "Required Cb"
+msgstr "Required Cb"
+
+msgid "Comment"
+msgstr "Comment"
+
+msgid "Action User Id"
+msgstr "Action User Id"
+
+msgid "Action Duration"
+msgstr "Action Duration"
+
+msgid "Sys Process Flow Action Value Id"
+msgstr "Sys Process Flow Action Value Id"
+
+msgid "Sys Process Flow Action Id"
+msgstr "Sys Process Flow Action Id"
+
+msgid "Value"
+msgstr "Value"
+
+msgid "Cc Co Template Header Id"
+msgstr "Cc Co Template Header Id"
+
+msgid "Template Name"
+msgstr "Template Name"
+
+msgid "Label"
+msgstr "Label"
+
+msgid "Value Type"
+msgstr "Value Type"
+
+msgid "Control Type"
+msgstr "Control Type"
+
+msgid "Control Value"
+msgstr "Control Value"
+
+msgid "Control Uom"
+msgstr "Control Uom"
+
+msgid "Active Cb"
+msgstr "Active Cb"
+
+msgid "Display Weight"
+msgstr "Display Weight"
+
+msgid "List Values"
+msgstr "List Values"
+
+msgid "Lower Limit"
+msgstr "Lower Limit"
+
+msgid "Upper Limit"
+msgstr "Upper Limit"
+
+msgid "List Value Option Type"
+msgstr "List Value Option Type"
+
+msgid "Coa Id"
+msgstr "Coa Id"
+
+msgid "Coa Structure Id"
+msgstr "Coa Structure Id"
+
+msgid "Coa Name"
+msgstr "Coa Name"
+
+msgid "Balancing"
+msgstr "Balancing"
+
+msgid "Cost Center"
+msgstr "Cost Center"
+
+msgid "Natural Account"
+msgstr "Natural Account"
+
+msgid "Inter Company"
+msgstr "Inter Company"
+
+msgid "Field1"
+msgstr "Field1"
+
+msgid "Field2"
+msgstr "Field2"
+
+msgid "Field3"
+msgstr "Field3"
+
+msgid "Field4"
+msgstr "Field4"
+
+msgid "Field5"
+msgstr "Field5"
+
+msgid "Field6"
+msgstr "Field6"
+
+msgid "Field7"
+msgstr "Field7"
+
+msgid "Field8"
+msgstr "Field8"
+
+msgid "Coa Combination Id"
+msgstr "Coa Combination Id"
+
+msgid "Combination"
+msgstr "Combination"
+
+msgid "Ac Type"
+msgstr "Ac Type"
+
+msgid "Coa Segment Values Id"
+msgstr "Coa Segment Values Id"
+
+msgid "Coa Segments"
+msgstr "Coa Segments"
+
+msgid "Segment Code"
+msgstr "Segment Code"
+
+msgid "Comment Id"
+msgstr "Comment Id"
+
+msgid "Subject"
+msgstr "Subject"
+
+msgid "Terms"
+msgstr "Terms"
+
+msgid "Published Cb"
+msgstr "Published Cb"
+
+msgid "Weightage"
+msgstr "Weightage"
+
+msgid "Comment By"
+msgstr "Comment By"
+
+msgid "Content Type Id"
+msgstr "Content Type Id"
+
+msgid "Show In Fp Cb"
+msgstr "Show In Fp Cb"
+
+msgid "Allow File Cb"
+msgstr "Allow File Cb"
+
+msgid "Allow Comment Cb"
+msgstr "Allow Comment Cb"
+
+msgid "Content Type"
+msgstr "Content Type"
+
+msgid "Read Role"
+msgstr "Read Role"
+
+msgid "Write Role"
+msgstr "Write Role"
+
+msgid "Update Role"
+msgstr "Update Role"
+
+msgid "Comment Read Role"
+msgstr "Comment Read Role"
+
+msgid "Comment Write Role"
+msgstr "Comment Write Role"
+
+msgid "Comment Update Role"
+msgstr "Comment Update Role"
+
+msgid "Comment Order By"
+msgstr "Comment Order By"
+
+msgid "Comments Perpage"
+msgstr "Comments Perpage"
+
+msgid "Has Subject Cb"
+msgstr "Has Subject Cb"
+
+msgid "Subject Label"
+msgstr "Subject Label"
+
+msgid "Has Content Cb"
+msgstr "Has Content Cb"
+
+msgid "Content Label"
+msgstr "Content Label"
+
+msgid "Summary Display Type"
+msgstr "Summary Display Type"
+
+msgid "Auto Url Alias Cb"
+msgstr "Auto Url Alias Cb"
+
+msgid "Show Category Onsummary Cb"
+msgstr "Show Category Onsummary Cb"
+
+msgid "Content Type Reference Id"
+msgstr "Content Type Reference Id"
+
+msgid "Field Label"
+msgstr "Field Label"
+
+msgid "Field Position"
+msgstr "Field Position"
+
+msgid "Option Type"
+msgstr "Option Type"
+
+msgid "Cst Item Cost Header Id"
+msgstr "Cst Item Cost Header Id"
+
+msgid "Based On Rollup Cb"
+msgstr "Based On Rollup Cb"
+
+msgid "Sales Price"
+msgstr "Sales Price"
+
+msgid "Purchase Price"
+msgstr "Purchase Price"
+
+msgid "Cst Item Cost Line Id"
+msgstr "Cst Item Cost Line Id"
+
+msgid "Cost Element Type"
+msgstr "Cost Element Type"
+
+msgid "Cost Element Id"
+msgstr "Cost Element Id"
+
+msgid "Cost Basis"
+msgstr "Cost Basis"
+
+msgid "Cst Item Cost Line Pre Id"
+msgstr "Cst Item Cost Line Pre Id"
+
+msgid "Standard Cost"
+msgstr "Standard Cost"
+
+msgid "Engine Id"
+msgstr "Engine Id"
+
+msgid "Obj Class Name"
+msgstr "Obj Class Name"
+
+msgid "Number"
+msgstr "Number"
+
+msgid "Db Version"
+msgstr "Db Version"
+
+msgid "Primary Entity Cb"
+msgstr "Primary Entity Cb"
+
+msgid "Module Name"
+msgstr "Module Name"
+
+msgid "Path"
+msgstr "Path"
+
+msgid "Dependent Class"
+msgstr "Dependent Class"
+
+msgid "Enterprise Id"
+msgstr "Enterprise Id"
+
+msgid "Designation Option Header Id"
+msgstr "Designation Option Header Id"
+
+msgid "Type Option Header Id"
+msgstr "Type Option Header Id"
+
+msgid "Ext Test Case Header Id"
+msgstr "Ext Test Case Header Id"
+
+msgid "Ext Test Case Line Id"
+msgstr "Ext Test Case Line Id"
+
+msgid "Step Action"
+msgstr "Step Action"
+
+msgid "Input"
+msgstr "Input"
+
+msgid "Expected Result"
+msgstr "Expected Result"
+
+msgid "Ext Url Alias Id"
+msgstr "Ext Url Alias Id"
+
+msgid "Original Url"
+msgstr "Original Url"
+
+msgid "Alias"
+msgstr "Alias"
+
+msgid "Extn Contact Id"
+msgstr "Extn Contact Id"
+
+msgid "Contact Name"
+msgstr "Contact Name"
+
+msgid "Last Name"
+msgstr "Last Name"
+
+msgid "First Name"
+msgstr "First Name"
+
+msgid "Middle Name"
+msgstr "Middle Name"
+
+msgid "Mobile Number"
+msgstr "Mobile Number"
+
+msgid "Office Number"
+msgstr "Office Number"
+
+msgid "Contact Number2"
+msgstr "Contact Number2"
+
+msgid "Email Id"
+msgstr "Email Id"
+
+msgid "Email Id2"
+msgstr "Email Id2"
+
+msgid "Fax No"
+msgstr "Fax No"
+
+msgid "Timezone"
+msgstr "Timezone"
+
+msgid "Time To Contact"
+msgstr "Time To Contact"
+
+msgid "Job Titile"
+msgstr "Job Titile"
+
+msgid "Extn Contact Reference Id"
+msgstr "Extn Contact Reference Id"
+
+msgid "Extn Web Tracking Id"
+msgstr "Extn Web Tracking Id"
+
+msgid "Page Visited"
+msgstr "Page Visited"
+
+msgid "Referrer"
+msgstr "Referrer"
+
+msgid "Query String"
+msgstr "Query String"
+
+msgid "Hostname"
+msgstr "Hostname"
+
+msgid "City"
+msgstr "City"
+
+msgid "Http User Agent"
+msgstr "Http User Agent"
+
+msgid "Extra Field Calculated Power Id"
+msgstr "Extra Field Calculated Power Id"
+
+msgid "Reference Entity"
+msgstr "Reference Entity"
+
+msgid "Extra Field Calculated Power Value"
+msgstr "Extra Field Calculated Power Value"
+
+msgid "Extra Field Grade Id"
+msgstr "Extra Field Grade Id"
+
+msgid "Extra Field Grade Value"
+msgstr "Extra Field Grade Value"
+
+msgid "Extra Field Length Id"
+msgstr "Extra Field Length Id"
+
+msgid "Extra Field Length Value"
+msgstr "Extra Field Length Value"
+
+msgid "Extra Field Per Master File Id"
+msgstr "Extra Field Per Master File Id"
+
+msgid "Extra Field Per Master File Value"
+msgstr "Extra Field Per Master File Value"
+
+msgid "Extra Field Power Cable Id"
+msgstr "Extra Field Power Cable Id"
+
+msgid "Extra Field Power Cable Value"
+msgstr "Extra Field Power Cable Value"
+
+msgid "Extra Field Serial Status Id"
+msgstr "Extra Field Serial Status Id"
+
+msgid "Extra Field Serial Status Value"
+msgstr "Extra Field Serial Status Value"
+
+msgid "Key Number"
+msgstr "Key Number"
+
+msgid "Units"
+msgstr "Units"
+
+msgid "Ap Supplier Id"
+msgstr "Ap Supplier Id"
+
+msgid "Ap Supplier Site Id"
+msgstr "Ap Supplier Site Id"
+
+msgid "Warrranty Number"
+msgstr "Warrranty Number"
+
+msgid "Lease Number"
+msgstr "Lease Number"
+
+msgid "Physical Inventory Cb"
+msgstr "Physical Inventory Cb"
+
+msgid "Fa Asset Assignment Id"
+msgstr "Fa Asset Assignment Id"
+
+msgid "Hr Employe Id"
+msgstr "Hr Employe Id"
+
+msgid "Expense Ac Id"
+msgstr "Expense Ac Id"
+
+msgid "Fa Asset Book Id"
+msgstr "Fa Asset Book Id"
+
+msgid "Asset Book Name"
+msgstr "Asset Book Name"
+
+msgid "Primary Fa Asset Book Id"
+msgstr "Primary Fa Asset Book Id"
+
+msgid "Inactive On"
+msgstr "Inactive On"
+
+msgid "Gl Calendar Id"
+msgstr "Gl Calendar Id"
+
+msgid "Allow Gl Posting Cb"
+msgstr "Allow Gl Posting Cb"
+
+msgid "Fa Calendar Code"
+msgstr "Fa Calendar Code"
+
+msgid "Revalue Accum Depriciation Cb"
+msgstr "Revalue Accum Depriciation Cb"
+
+msgid "Retire Revaluation Reserve Cb"
+msgstr "Retire Revaluation Reserve Cb"
+
+msgid "Revalue Ytd Depriciation Cb"
+msgstr "Revalue Ytd Depriciation Cb"
+
+msgid "Sale Proceeds Gain Id"
+msgstr "Sale Proceeds Gain Id"
+
+msgid "Sale Proceeds Loss Id"
+msgstr "Sale Proceeds Loss Id"
+
+msgid "Sale Proceeds Clearing Id"
+msgstr "Sale Proceeds Clearing Id"
+
+msgid "Removal Cost Gain Id"
+msgstr "Removal Cost Gain Id"
+
+msgid "Removal Cost Loss Id"
+msgstr "Removal Cost Loss Id"
+
+msgid "Removal Cost Clearing Id"
+msgstr "Removal Cost Clearing Id"
+
+msgid "Nbv Retired Gain Id"
+msgstr "Nbv Retired Gain Id"
+
+msgid "Nbv Retired Loss Id"
+msgstr "Nbv Retired Loss Id"
+
+msgid "Reval Reserve Retired Gain Id"
+msgstr "Reval Reserve Retired Gain Id"
+
+msgid "Reval Reserve Retired Loss Id"
+msgstr "Reval Reserve Retired Loss Id"
+
+msgid "Deff Depriciation Reserve Id"
+msgstr "Deff Depriciation Reserve Id"
+
+msgid "Deff Depriciation Expense Id"
+msgstr "Deff Depriciation Expense Id"
+
+msgid "Deff Depriciation Adjustment Id"
+msgstr "Deff Depriciation Adjustment Id"
+
+msgid "Default Ac Id"
+msgstr "Default Ac Id"
+
+msgid "Fa Asset Book Info Id"
+msgstr "Fa Asset Book Info Id"
+
+msgid "Referece"
+msgstr "Referece"
+
+msgid "Original Cost"
+msgstr "Original Cost"
+
+msgid "Current Cost"
+msgstr "Current Cost"
+
+msgid "Ytd Depreciation"
+msgstr "Ytd Depreciation"
+
+msgid "Accumulated Depreciation"
+msgstr "Accumulated Depreciation"
+
+msgid "Salvage Value Type"
+msgstr "Salvage Value Type"
+
+msgid "Salvage Value Amount"
+msgstr "Salvage Value Amount"
+
+msgid "Salvage Value Percentage"
+msgstr "Salvage Value Percentage"
+
+msgid "Fa Depreciation Method Id"
+msgstr "Fa Depreciation Method Id"
+
+msgid "Life Months"
+msgstr "Life Months"
+
+msgid "Depriciation Cb"
+msgstr "Depriciation Cb"
+
+msgid "Date In Service"
+msgstr "Date In Service"
+
+msgid "Depriciation Start Date"
+msgstr "Depriciation Start Date"
+
+msgid "Depriciation Limit Amount"
+msgstr "Depriciation Limit Amount"
+
+msgid "Depriciation Limit Percentage"
+msgstr "Depriciation Limit Percentage"
+
+msgid "Asset Category"
+msgstr "Asset Category"
+
+msgid "Segment1"
+msgstr "Segment1"
+
+msgid "Segment2"
+msgstr "Segment2"
+
+msgid "Segment3"
+msgstr "Segment3"
+
+msgid "Capitalize Cb"
+msgstr "Capitalize Cb"
+
+msgid "In Physical Inv Cb"
+msgstr "In Physical Inv Cb"
+
+msgid "Fa Asset Trasaction Id"
+msgstr "Fa Asset Trasaction Id"
+
+msgid "Reference"
+msgstr "Reference"
+
+msgid "Accounted Cb"
+msgstr "Accounted Cb"
+
+msgid "Fa Book Category Association Id"
+msgstr "Fa Book Category Association Id"
+
+msgid "Asset Cost Ac Id"
+msgstr "Asset Cost Ac Id"
+
+msgid "Asset Clearing Ac Id"
+msgstr "Asset Clearing Ac Id"
+
+msgid "Depreciation Expense Ac Id"
+msgstr "Depreciation Expense Ac Id"
+
+msgid "Accumulated Depreciation Ac Id"
+msgstr "Accumulated Depreciation Ac Id"
+
+msgid "Bonus Expense Ac Id"
+msgstr "Bonus Expense Ac Id"
+
+msgid "Bonus Reserve Ac Id"
+msgstr "Bonus Reserve Ac Id"
+
+msgid "Revalue Reserve Ac Id"
+msgstr "Revalue Reserve Ac Id"
+
+msgid "Cip Cost Ac Id"
+msgstr "Cip Cost Ac Id"
+
+msgid "Cip Clearing Ac Id"
+msgstr "Cip Clearing Ac Id"
+
+msgid "Unplanned Depreciation Expense Ac Id"
+msgstr "Unplanned Depreciation Expense Ac Id"
+
+msgid "Fa Depreciation Header Id"
+msgstr "Fa Depreciation Header Id"
+
+msgid "Gl Period Id"
+msgstr "Gl Period Id"
+
+msgid "Fa Depreciation Line Id"
+msgstr "Fa Depreciation Line Id"
+
+msgid "Asset Id"
+msgstr "Asset Id"
+
+msgid "Depreciation Amount"
+msgstr "Depreciation Amount"
+
+msgid "Unschedule Amount"
+msgstr "Unschedule Amount"
+
+msgid "Total Depreciation Amount"
+msgstr "Total Depreciation Amount"
+
+msgid "Depreciation Account Id"
+msgstr "Depreciation Account Id"
+
+msgid "Cost Before Depreciation"
+msgstr "Cost Before Depreciation"
+
+msgid "Nbv Before Depreciation"
+msgstr "Nbv Before Depreciation"
+
+msgid "Salvage Value Bd"
+msgstr "Salvage Value Bd"
+
+msgid "Depreciation Method"
+msgstr "Depreciation Method"
+
+msgid "Method Type"
+msgstr "Method Type"
+
+msgid "Calculation Basis"
+msgstr "Calculation Basis"
+
+msgid "Life Month"
+msgstr "Life Month"
+
+msgid "Reducing Balance Rate"
+msgstr "Reducing Balance Rate"
+
+msgid "Fa Depreciation Method Rate Id"
+msgstr "Fa Depreciation Method Rate Id"
+
+msgid "Year"
+msgstr "Year"
+
+msgid "Period"
+msgstr "Period"
+
+msgid "File Id"
+msgstr "File Id"
+
+msgid "File Path"
+msgstr "File Path"
+
+msgid "File Size"
+msgstr "File Size"
+
+msgid "File Type"
+msgstr "File Type"
+
+msgid "Document Type"
+msgstr "Document Type"
+
+msgid "File Reference Id"
+msgstr "File Reference Id"
+
+msgid "Form Id"
+msgstr "Form Id"
+
+msgid "Form"
+msgstr "Form"
+
+msgid "Submit Button"
+msgstr "Submit Button"
+
+msgid "Action Link"
+msgstr "Action Link"
+
+msgid "Fp Forecast Consumption Id"
+msgstr "Fp Forecast Consumption Id"
+
+msgid "Fp Forecast Line Date Id"
+msgstr "Fp Forecast Line Date Id"
+
+msgid "Fp Forecast Line Id"
+msgstr "Fp Forecast Line Id"
+
+msgid "Fp Forecast Group Id"
+msgstr "Fp Forecast Group Id"
+
+msgid "Reason"
+msgstr "Reason"
+
+msgid "Forecast Group"
+msgstr "Forecast Group"
+
+msgid "Bucket Type"
+msgstr "Bucket Type"
+
+msgid "Level"
+msgstr "Level"
+
+msgid "Consume Cb"
+msgstr "Consume Cb"
+
+msgid "Backward Days"
+msgstr "Backward Days"
+
+msgid "Forward Days"
+msgstr "Forward Days"
+
+msgid "Fp Forecast Header Id"
+msgstr "Fp Forecast Header Id"
+
+msgid "Forecast"
+msgstr "Forecast"
+
+msgid "Forecast Group Id"
+msgstr "Forecast Group Id"
+
+msgid "Demand Class"
+msgstr "Demand Class"
+
+msgid "No Of Bucket"
+msgstr "No Of Bucket"
+
+msgid "Original"
+msgstr "Original"
+
+msgid "Total Original"
+msgstr "Total Original"
+
+msgid "Fp Consumption Id"
+msgstr "Fp Consumption Id"
+
+msgid "Forecast Date"
+msgstr "Forecast Date"
+
+msgid "Original Quantity"
+msgstr "Original Quantity"
+
+msgid "Current Quantity"
+msgstr "Current Quantity"
+
+msgid "Source"
+msgstr "Source"
+
+msgid "Uom Name"
+msgstr "Uom Name"
+
+msgid "Schedule Ship Date"
+msgstr "Schedule Ship Date"
+
+msgid "Mds Name"
+msgstr "Mds Name"
+
+msgid "Fp Source List Header Id"
+msgstr "Fp Source List Header Id"
+
+msgid "Include So Cb"
+msgstr "Include So Cb"
+
+msgid "Fp Mds Header Id"
+msgstr "Fp Mds Header Id"
+
+msgid "Fp Mds Line Id"
+msgstr "Fp Mds Line Id"
+
+msgid "Demand Date"
+msgstr "Demand Date"
+
+msgid "Source Header Id"
+msgstr "Source Header Id"
+
+msgid "Source Line Id"
+msgstr "Source Line Id"
+
+msgid "Fp Minmax Demand Id"
+msgstr "Fp Minmax Demand Id"
+
+msgid "Plan Id"
+msgstr "Plan Id"
+
+msgid "Demand Item Id M"
+msgstr "Demand Item Id M"
+
+msgid "Toplevel Demand Item Id M"
+msgstr "Toplevel Demand Item Id M"
+
+msgid "Demand Type"
+msgstr "Demand Type"
+
+msgid "Plan Name"
+msgstr "Plan Name"
+
+msgid "Planning Horizon Days"
+msgstr "Planning Horizon Days"
+
+msgid "Forecast Description"
+msgstr "Forecast Description"
+
+msgid "Top Level Item Number"
+msgstr "Top Level Item Number"
+
+msgid "Top Level Item Description"
+msgstr "Top Level Item Description"
+
+msgid "Demand Item Number"
+msgstr "Demand Item Number"
+
+msgid "Demand Item Description"
+msgstr "Demand Item Description"
+
+msgid "Fp Minmax Header Id"
+msgstr "Fp Minmax Header Id"
+
+msgid "Demand Source"
+msgstr "Demand Source"
+
+msgid "Fp Minmax Line Id"
+msgstr "Fp Minmax Line Id"
+
+msgid "Min Quantity"
+msgstr "Min Quantity"
+
+msgid "Max Quantity"
+msgstr "Max Quantity"
+
+msgid "Mb Min Quantity"
+msgstr "Mb Min Quantity"
+
+msgid "Mb Max Quantity"
+msgstr "Mb Max Quantity"
+
+msgid "Mb Bin Size"
+msgstr "Mb Bin Size"
+
+msgid "Total Demand"
+msgstr "Total Demand"
+
+msgid "Avg Daily Demand"
+msgstr "Avg Daily Demand"
+
+msgid "Lead Time"
+msgstr "Lead Time"
+
+msgid "Saftey Stock Quantity"
+msgstr "Saftey Stock Quantity"
+
+msgid "Saftey Stock Days"
+msgstr "Saftey Stock Days"
+
+msgid "Minimum Quantity"
+msgstr "Minimum Quantity"
+
+msgid "Fix Days Supply"
+msgstr "Fix Days Supply"
+
+msgid "Maximum Quantity"
+msgstr "Maximum Quantity"
+
+msgid "Multibin Fix Days Supply"
+msgstr "Multibin Fix Days Supply"
+
+msgid "Minmax Multibin Number"
+msgstr "Minmax Multibin Number"
+
+msgid "Minmax Multibin Size"
+msgstr "Minmax Multibin Size"
+
+msgid "Multibin Minmax Quantity"
+msgstr "Multibin Minmax Quantity"
+
+msgid "Fp Mrp Demand Id"
+msgstr "Fp Mrp Demand Id"
+
+msgid "Fp Mrp Header Id"
+msgstr "Fp Mrp Header Id"
+
+msgid "Primary Source Type"
+msgstr "Primary Source Type"
+
+msgid "Mrp Name"
+msgstr "Mrp Name"
+
+msgid "Planner"
+msgstr "Planner"
+
+msgid "Fp Mrp Exception Id"
+msgstr "Fp Mrp Exception Id"
+
+msgid "Exception Message"
+msgstr "Exception Message"
+
+msgid "Detailed Message"
+msgstr "Detailed Message"
+
+msgid "Exception Type"
+msgstr "Exception Type"
+
+msgid "Supply Date"
+msgstr "Supply Date"
+
+msgid "Document Id"
+msgstr "Document Id"
+
+msgid "Fp Mrp Lowlevel Code Id"
+msgstr "Fp Mrp Lowlevel Code Id"
+
+msgid "Order Type"
+msgstr "Order Type"
+
+msgid "Order Action"
+msgstr "Order Action"
+
+msgid "Fp Mrp Planned Order Id"
+msgstr "Fp Mrp Planned Order Id"
+
+msgid "Fp Mrp Supply Id"
+msgstr "Fp Mrp Supply Id"
+
+msgid "Supply Item Id M"
+msgstr "Supply Item Id M"
+
+msgid "Toplevel Supply Item Id M"
+msgstr "Toplevel Supply Item Id M"
+
+msgid "Supply Type"
+msgstr "Supply Type"
+
+msgid "Primary Supply Type"
+msgstr "Primary Supply Type"
+
+msgid "Supply Header Id"
+msgstr "Supply Header Id"
+
+msgid "Supply Line Id"
+msgstr "Supply Line Id"
+
+msgid "Toplevel Demand Item Number"
+msgstr "Toplevel Demand Item Number"
+
+msgid "Toplevel Demand Item Description"
+msgstr "Toplevel Demand Item Description"
+
+msgid "Sourcing Rule Id"
+msgstr "Sourcing Rule Id"
+
+msgid "Sales Order Line"
+msgstr "Sales Order Line"
+
+msgid "Fp Planning Control Id"
+msgstr "Fp Planning Control Id"
+
+msgid "Auto Consumed Group Id"
+msgstr "Auto Consumed Group Id"
+
+msgid "Auto Consumed Frwd Days"
+msgstr "Auto Consumed Frwd Days"
+
+msgid "Auto Consumed Backwd Days"
+msgstr "Auto Consumed Backwd Days"
+
+msgid "Default Abc"
+msgstr "Default Abc"
+
+msgid "Net Wip Cb"
+msgstr "Net Wip Cb"
+
+msgid "Net Po Cb"
+msgstr "Net Po Cb"
+
+msgid "Source List"
+msgstr "Source List"
+
+msgid "Source List Type"
+msgstr "Source List Type"
+
+msgid "Fp Source List Line Id"
+msgstr "Fp Source List Line Id"
+
+msgid "Source List Line Type"
+msgstr "Source List Line Type"
+
+msgid "Source List Id"
+msgstr "Source List Id"
+
+msgid "Fp Urgent Card Id"
+msgstr "Fp Urgent Card Id"
+
+msgid "Card Details"
+msgstr "Card Details"
+
+msgid "Gl Balance Id"
+msgstr "Gl Balance Id"
+
+msgid "Balance Type"
+msgstr "Balance Type"
+
+msgid "Period Net Dr"
+msgstr "Period Net Dr"
+
+msgid "Period Net Cr"
+msgstr "Period Net Cr"
+
+msgid "Begin Balance Dr"
+msgstr "Begin Balance Dr"
+
+msgid "Begin Balance Cr"
+msgstr "Begin Balance Cr"
+
+msgid "Period Name"
+msgstr "Period Name"
+
+msgid "Option Line Code"
+msgstr "Option Line Code"
+
+msgid "Adjustment Period Cb"
+msgstr "Adjustment Period Cb"
+
+msgid "Calendar Type"
+msgstr "Calendar Type"
+
+msgid "Quarter"
+msgstr "Quarter"
+
+msgid "From Date"
+msgstr "From Date"
+
+msgid "To Date"
+msgstr "To Date"
+
+msgid "Name Prefix"
+msgstr "Name Prefix"
+
+msgid "Gl Currency Conversion Id"
+msgstr "Gl Currency Conversion Id"
+
+msgid "Currency Conversion Type"
+msgstr "Currency Conversion Type"
+
+msgid "From Currency"
+msgstr "From Currency"
+
+msgid "To Currency"
+msgstr "To Currency"
+
+msgid "Use Reverse Conversion"
+msgstr "Use Reverse Conversion"
+
+msgid "Journal Source"
+msgstr "Journal Source"
+
+msgid "Journal Category"
+msgstr "Journal Category"
+
+msgid "Journal Name"
+msgstr "Journal Name"
+
+msgid "Post Date"
+msgstr "Post Date"
+
+msgid "Exchange Type"
+msgstr "Exchange Type"
+
+msgid "Exchange Date"
+msgstr "Exchange Date"
+
+msgid "Control Total"
+msgstr "Control Total"
+
+msgid "Running Total Dr"
+msgstr "Running Total Dr"
+
+msgid "Running Total Cr"
+msgstr "Running Total Cr"
+
+msgid "Running Toatl Ac Dr"
+msgstr "Running Toatl Ac Dr"
+
+msgid "Running Toatl Ac Cr"
+msgstr "Running Toatl Ac Cr"
+
+msgid "Gl Journal Line Id"
+msgstr "Gl Journal Line Id"
+
+msgid "Line Num"
+msgstr "Line Num"
+
+msgid "Code Combination Id"
+msgstr "Code Combination Id"
+
+msgid "Total Dr"
+msgstr "Total Dr"
+
+msgid "Total Cr"
+msgstr "Total Cr"
+
+msgid "Total Ac Dr"
+msgstr "Total Ac Dr"
+
+msgid "Total Ac Cr"
+msgstr "Total Ac Cr"
+
+msgid "Combination Description"
+msgstr "Combination Description"
+
+msgid "Gl Ledger Id"
+msgstr "Gl Ledger Id"
+
+msgid "Ledger"
+msgstr "Ledger"
+
+msgid "Calendar Option Line Code"
+msgstr "Calendar Option Line Code"
+
+msgid "Currency Code"
+msgstr "Currency Code"
+
+msgid "Future Enabled Periods"
+msgstr "Future Enabled Periods"
+
+msgid "Currency Balancing Ac Id"
+msgstr "Currency Balancing Ac Id"
+
+msgid "Retained Earnings Ac Id"
+msgstr "Retained Earnings Ac Id"
+
+msgid "Suspense Ac Id"
+msgstr "Suspense Ac Id"
+
+msgid "Gl Ledger Balancing Values Id"
+msgstr "Gl Ledger Balancing Values Id"
+
+msgid "Balancing Values"
+msgstr "Balancing Values"
+
+msgid "Hr Job Id"
+msgstr "Hr Job Id"
+
+msgid "Job Code"
+msgstr "Job Code"
+
+msgid "Job Name"
+msgstr "Job Name"
+
+msgid "Min Education"
+msgstr "Min Education"
+
+msgid "Min Experience"
+msgstr "Min Experience"
+
+msgid "Technology"
+msgstr "Technology"
+
+msgid "Skillset"
+msgstr "Skillset"
+
+msgid "Position Type"
+msgstr "Position Type"
+
+msgid "Functional Area"
+msgstr "Functional Area"
+
+msgid "Location"
+msgstr "Location"
+
+msgid "Job Details"
+msgstr "Job Details"
+
+msgid "Primary Responsibility"
+msgstr "Primary Responsibility"
+
+msgid "Hr Approval Limit Assignment Id"
+msgstr "Hr Approval Limit Assignment Id"
+
+msgid "Hr Approval Limit Header Id"
+msgstr "Hr Approval Limit Header Id"
+
+msgid "Job Id"
+msgstr "Job Id"
+
+msgid "Position Id"
+msgstr "Position Id"
+
+msgid "Limit Name"
+msgstr "Limit Name"
+
+msgid "Hr Approval Limit Line Id"
+msgstr "Hr Approval Limit Line Id"
+
+msgid "Limit Object"
+msgstr "Limit Object"
+
+msgid "Limit Type"
+msgstr "Limit Type"
+
+msgid "Limit Range Low"
+msgstr "Limit Range Low"
+
+msgid "Limit Range High"
+msgstr "Limit Range High"
+
+msgid "Amount Limit"
+msgstr "Amount Limit"
+
+msgid "Inactive Date"
+msgstr "Inactive Date"
+
+msgid "Hr Approval Object Id"
+msgstr "Hr Approval Object Id"
+
+msgid "Object Code"
+msgstr "Object Code"
+
+msgid "Object Value"
+msgstr "Object Value"
+
+msgid "Return Type"
+msgstr "Return Type"
+
+msgid "Hr Compensation Element Id"
+msgstr "Hr Compensation Element Id"
+
+msgid "Element Type"
+msgstr "Element Type"
+
+msgid "Element Name"
+msgstr "Element Name"
+
+msgid "Classification"
+msgstr "Classification"
+
+msgid "Recurring Cb"
+msgstr "Recurring Cb"
+
+msgid "Deduction Rule"
+msgstr "Deduction Rule"
+
+msgid "Calculation Rule"
+msgstr "Calculation Rule"
+
+msgid "Separate Check Cb"
+msgstr "Separate Check Cb"
+
+msgid "Frequency Months"
+msgstr "Frequency Months"
+
+msgid "Standard Link Cb"
+msgstr "Standard Link Cb"
+
+msgid "Deduction Start Rule"
+msgstr "Deduction Start Rule"
+
+msgid "Po Purchasing Control Id"
+msgstr "Po Purchasing Control Id"
+
+msgid "Hr Element Entry Header Id"
+msgstr "Hr Element Entry Header Id"
+
+msgid "Hr Employee Id"
+msgstr "Hr Employee Id"
+
+msgid "Hr Element Entry Line Id"
+msgstr "Hr Element Entry Line Id"
+
+msgid "Element Id"
+msgstr "Element Id"
+
+msgid "Element Value"
+msgstr "Element Value"
+
+msgid "Hr Element Entry Tpl Header Id"
+msgstr "Hr Element Entry Tpl Header Id"
+
+msgid "Hr Element Entry Tpl Line Id"
+msgstr "Hr Element Entry Tpl Line Id"
+
+msgid "Identification Id"
+msgstr "Identification Id"
+
+msgid "Identification Type"
+msgstr "Identification Type"
+
+msgid "Citizen Number"
+msgstr "Citizen Number"
+
+msgid "Language"
+msgstr "Language"
+
+msgid "Gender"
+msgstr "Gender"
+
+msgid "Person Type"
+msgstr "Person Type"
+
+msgid "Date Of Birth"
+msgstr "Date Of Birth"
+
+msgid "City Of Birth"
+msgstr "City Of Birth"
+
+msgid "Country Of Birth"
+msgstr "Country Of Birth"
+
+msgid "Nationality"
+msgstr "Nationality"
+
+msgid "Disability Code"
+msgstr "Disability Code"
+
+msgid "Marital Status"
+msgstr "Marital Status"
+
+msgid "Degree"
+msgstr "Degree"
+
+msgid "Highest Education"
+msgstr "Highest Education"
+
+msgid "Education Details"
+msgstr "Education Details"
+
+msgid "No Of Children"
+msgstr "No Of Children"
+
+msgid "Home Address Id"
+msgstr "Home Address Id"
+
+msgid "Home Address"
+msgstr "Home Address"
+
+msgid "Permanent Address"
+msgstr "Permanent Address"
+
+msgid "Permanent Address Id"
+msgstr "Permanent Address Id"
+
+msgid "Home Phone Number"
+msgstr "Home Phone Number"
+
+msgid "Other Email"
+msgstr "Other Email"
+
+msgid "Date First Hired"
+msgstr "Date First Hired"
+
+msgid "Payroll Id"
+msgstr "Payroll Id"
+
+msgid "Grade Id"
+msgstr "Grade Id"
+
+msgid "Job Type"
+msgstr "Job Type"
+
+msgid "Supervisor Employee Id"
+msgstr "Supervisor Employee Id"
+
+msgid "Probation Period Uom"
+msgstr "Probation Period Uom"
+
+msgid "Probation Period"
+msgstr "Probation Period"
+
+msgid "Notice Period Uom"
+msgstr "Notice Period Uom"
+
+msgid "Notice Period"
+msgstr "Notice Period"
+
+msgid "Revision Enabled"
+msgstr "Revision Enabled"
+
+msgid "Revision Number"
+msgstr "Revision Number"
+
+msgid "Work Policy Id"
+msgstr "Work Policy Id"
+
+msgid "Salary Ac Id"
+msgstr "Salary Ac Id"
+
+msgid "Performance Id"
+msgstr "Performance Id"
+
+msgid "Vehicle Number"
+msgstr "Vehicle Number"
+
+msgid "Asset Numbers"
+msgstr "Asset Numbers"
+
+msgid "Contract Id"
+msgstr "Contract Id"
+
+msgid "Tax Reg Number"
+msgstr "Tax Reg Number"
+
+msgid "Social Ac No"
+msgstr "Social Ac No"
+
+msgid "Social Ac No2"
+msgstr "Social Ac No2"
+
+msgid "Passport Number"
+msgstr "Passport Number"
+
+msgid "Hr Employee Education Id"
+msgstr "Hr Employee Education Id"
+
+msgid "Employee Id"
+msgstr "Employee Id"
+
+msgid "Degree Name"
+msgstr "Degree Name"
+
+msgid "University"
+msgstr "University"
+
+msgid "University Address"
+msgstr "University Address"
+
+msgid "Specialization"
+msgstr "Specialization"
+
+msgid "Edu Start Date"
+msgstr "Edu Start Date"
+
+msgid "Edu End Date"
+msgstr "Edu End Date"
+
+msgid "Mode Of Education"
+msgstr "Mode Of Education"
+
+msgid "Grade"
+msgstr "Grade"
+
+msgid "Marks Percentage"
+msgstr "Marks Percentage"
+
+msgid "Comments"
+msgstr "Comments"
+
+msgid "Hr Employee Experience Id"
+msgstr "Hr Employee Experience Id"
+
+msgid "Organization Name"
+msgstr "Organization Name"
+
+msgid "Designation"
+msgstr "Designation"
+
+msgid "Employee Number"
+msgstr "Employee Number"
+
+msgid "Work Start Date"
+msgstr "Work Start Date"
+
+msgid "Work End Date"
+msgstr "Work End Date"
+
+msgid "Last Manager"
+msgstr "Last Manager"
+
+msgid "Last Drawn Salary"
+msgstr "Last Drawn Salary"
+
+msgid "Communication Details"
+msgstr "Communication Details"
+
+msgid "Project Details"
+msgstr "Project Details"
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Emp Start Date"
+msgstr "Emp Start Date"
+
+msgid "Emp First Name"
+msgstr "Emp First Name"
+
+msgid "Emp Last Name"
+msgstr "Emp Last Name"
+
+msgid "Emp Email"
+msgstr "Emp Email"
+
+msgid "Position Name"
+msgstr "Position Name"
+
+msgid "Emp Org Id"
+msgstr "Emp Org Id"
+
+msgid "Limit Start Date"
+msgstr "Limit Start Date"
+
+msgid "Hr Employee Termination Id"
+msgstr "Hr Employee Termination Id"
+
+msgid "New Employer"
+msgstr "New Employer"
+
+msgid "Date Of Notification"
+msgstr "Date Of Notification"
+
+msgid "Projected Last Date"
+msgstr "Projected Last Date"
+
+msgid "Actual Last Date"
+msgstr "Actual Last Date"
+
+msgid "Accpeted Date"
+msgstr "Accpeted Date"
+
+msgid "Accpeted By Employee Id"
+msgstr "Accpeted By Employee Id"
+
+msgid "Hr Leave Balance Id"
+msgstr "Hr Leave Balance Id"
+
+msgid "Leave Type"
+msgstr "Leave Type"
+
+msgid "Leave Per Year"
+msgstr "Leave Per Year"
+
+msgid "Total Available"
+msgstr "Total Available"
+
+msgid "Total Used"
+msgstr "Total Used"
+
+msgid "Hr Leave Entitlement Header Id"
+msgstr "Hr Leave Entitlement Header Id"
+
+msgid "Entitlement Name"
+msgstr "Entitlement Name"
+
+msgid "Hr Leave Entitlement Line Id"
+msgstr "Hr Leave Entitlement Line Id"
+
+msgid "Leave Per Period"
+msgstr "Leave Per Period"
+
+msgid "Default No Of Period"
+msgstr "Default No Of Period"
+
+msgid "Hr Leave Transaction Id"
+msgstr "Hr Leave Transaction Id"
+
+msgid "Requsted Date"
+msgstr "Requsted Date"
+
+msgid "Approved Date"
+msgstr "Approved Date"
+
+msgid "Approved By"
+msgstr "Approved By"
+
+msgid "Approved By Employee Id"
+msgstr "Approved By Employee Id"
+
+msgid "Leave Status"
+msgstr "Leave Status"
+
+msgid "Leave Quantity"
+msgstr "Leave Quantity"
+
+msgid "Contact Details"
+msgstr "Contact Details"
+
+msgid "Sys Notification Id"
+msgstr "Sys Notification Id"
+
+msgid "Sys Notification Group Id"
+msgstr "Sys Notification Group Id"
+
+msgid "Hr Leave Type Id"
+msgstr "Hr Leave Type Id"
+
+msgid "Leave Category"
+msgstr "Leave Category"
+
+msgid "Allow Carry Forward Cb"
+msgstr "Allow Carry Forward Cb"
+
+msgid "Carry Forward Per Year"
+msgstr "Carry Forward Per Year"
+
+msgid "Maximum Accumulation"
+msgstr "Maximum Accumulation"
+
+msgid "Auto Convert Salary Cb"
+msgstr "Auto Convert Salary Cb"
+
+msgid "Allow Advance Cb"
+msgstr "Allow Advance Cb"
+
+msgid "Lwp Cb"
+msgstr "Lwp Cb"
+
+msgid "Default Reason"
+msgstr "Default Reason"
+
+msgid "Hr Payroll Id"
+msgstr "Hr Payroll Id"
+
+msgid "Payroll"
+msgstr "Payroll"
+
+msgid "Period Type"
+msgstr "Period Type"
+
+msgid "Hr Payroll Payment Method Id"
+msgstr "Hr Payroll Payment Method Id"
+
+msgid "Bank Charge Ac Id"
+msgstr "Bank Charge Ac Id"
+
+msgid "Salary Payable Ac Id"
+msgstr "Salary Payable Ac Id"
+
+msgid "Hr Payroll Process Id"
+msgstr "Hr Payroll Process Id"
+
+msgid "Hr Payroll Schedule Id"
+msgstr "Hr Payroll Schedule Id"
+
+msgid "Proces Name"
+msgstr "Proces Name"
+
+msgid "Scheduled Date"
+msgstr "Scheduled Date"
+
+msgid "Hr Payslip Header Id"
+msgstr "Hr Payslip Header Id"
+
+msgid "Period Name Id"
+msgstr "Period Name Id"
+
+msgid "Pay Date"
+msgstr "Pay Date"
+
+msgid "No Of Days"
+msgstr "No Of Days"
+
+msgid "Payment Ref No"
+msgstr "Payment Ref No"
+
+msgid "Mode Of Payment"
+msgstr "Mode Of Payment"
+
+msgid "Pay Duration Type"
+msgstr "Pay Duration Type"
+
+msgid "Hr Payslip Line Id"
+msgstr "Hr Payslip Line Id"
+
+msgid "Hr Position Id"
+msgstr "Hr Position Id"
+
+msgid "Headcount"
+msgstr "Headcount"
+
+msgid "Salary Basis"
+msgstr "Salary Basis"
+
+msgid "Working Hours"
+msgstr "Working Hours"
+
+msgid "Wh Frequency"
+msgstr "Wh Frequency"
+
+msgid "Position Details"
+msgstr "Position Details"
+
+msgid "Position Status"
+msgstr "Position Status"
+
+msgid "Hr Position Hierarchy Header Id"
+msgstr "Hr Position Hierarchy Header Id"
+
+msgid "Starting Position Id"
+msgstr "Starting Position Id"
+
+msgid "Hierarchy Name"
+msgstr "Hierarchy Name"
+
+msgid "Revision"
+msgstr "Revision"
+
+msgid "Hr Position Hierarchy Line Id"
+msgstr "Hr Position Hierarchy Line Id"
+
+msgid "Hr Team Header Id"
+msgstr "Hr Team Header Id"
+
+msgid "Team Name"
+msgstr "Team Name"
+
+msgid "Team Lead Employee Id"
+msgstr "Team Lead Employee Id"
+
+msgid "Region"
+msgstr "Region"
+
+msgid "Objective"
+msgstr "Objective"
+
+msgid "Hr Team Line Id"
+msgstr "Hr Team Line Id"
+
+msgid "Member Employee Id"
+msgstr "Member Employee Id"
+
+msgid "Role"
+msgstr "Role"
+
+msgid "Responsibility"
+msgstr "Responsibility"
+
+msgid "Inv Abc Assignment Header Id"
+msgstr "Inv Abc Assignment Header Id"
+
+msgid "Abc Assignment Name"
+msgstr "Abc Assignment Name"
+
+msgid "Inv Abc Valuation Id"
+msgstr "Inv Abc Valuation Id"
+
+msgid "Inv Abc Assignment Line Id"
+msgstr "Inv Abc Assignment Line Id"
+
+msgid "Abc Class"
+msgstr "Abc Class"
+
+msgid "Valuation Name"
+msgstr "Valuation Name"
+
+msgid "Scope Org Id"
+msgstr "Scope Org Id"
+
+msgid "Scope Sub Inventory Id"
+msgstr "Scope Sub Inventory Id"
+
+msgid "Scope Org Hirearchy Id"
+msgstr "Scope Org Hirearchy Id"
+
+msgid "Scope Product Line"
+msgstr "Scope Product Line"
+
+msgid "Criteria"
+msgstr "Criteria"
+
+msgid "Inv Abc Valuation Result Id"
+msgstr "Inv Abc Valuation Result Id"
+
+msgid "Seq Number"
+msgstr "Seq Number"
+
+msgid "Cum Quantity"
+msgstr "Cum Quantity"
+
+msgid "Cum Value"
+msgstr "Cum Value"
+
+msgid "Inv Count Abc Ref Id"
+msgstr "Inv Count Abc Ref Id"
+
+msgid "Inv Count Header Id"
+msgstr "Inv Count Header Id"
+
+msgid "Class Code"
+msgstr "Class Code"
+
+msgid "Count Per Year"
+msgstr "Count Per Year"
+
+msgid "Inv Count Entries Id"
+msgstr "Inv Count Entries Id"
+
+msgid "Inv Count Schedule Id"
+msgstr "Inv Count Schedule Id"
+
+msgid "Lot Number"
+msgstr "Lot Number"
+
+msgid "Schedule Date"
+msgstr "Schedule Date"
+
+msgid "Adjustment Ac Id"
+msgstr "Adjustment Ac Id"
+
+msgid "Counted By"
+msgstr "Counted By"
+
+msgid "Count Date"
+msgstr "Count Date"
+
+msgid "Count Qty"
+msgstr "Count Qty"
+
+msgid "System Qty"
+msgstr "System Qty"
+
+msgid "Adjusted Qty"
+msgstr "Adjusted Qty"
+
+msgid "Count Name"
+msgstr "Count Name"
+
+msgid "Count Type"
+msgstr "Count Type"
+
+msgid "Approval Required"
+msgstr "Approval Required"
+
+msgid "Quantity Variance Positive"
+msgstr "Quantity Variance Positive"
+
+msgid "Quantity Variance Negative"
+msgstr "Quantity Variance Negative"
+
+msgid "Value Variance Positive"
+msgstr "Value Variance Positive"
+
+msgid "Value Variance Negative"
+msgstr "Value Variance Negative"
+
+msgid "Zero Count Cb"
+msgstr "Zero Count Cb"
+
+msgid "Abc Code"
+msgstr "Abc Code"
+
+msgid "Inv Interorg Transfer Header Id"
+msgstr "Inv Interorg Transfer Header Id"
+
+msgid "Order Number"
+msgstr "Order Number"
+
+msgid "From Org Id"
+msgstr "From Org Id"
+
+msgid "To Org Id"
+msgstr "To Org Id"
+
+msgid "Transfer To Gl"
+msgstr "Transfer To Gl"
+
+msgid "Transaction Date"
+msgstr "Transaction Date"
+
+msgid "Carrier"
+msgstr "Carrier"
+
+msgid "Vechile Number"
+msgstr "Vechile Number"
+
+msgid "Waybill"
+msgstr "Waybill"
+
+msgid "Inv Interorg Transfer Line Id"
+msgstr "Inv Interorg Transfer Line Id"
+
+msgid "From Subinventory Id"
+msgstr "From Subinventory Id"
+
+msgid "From Locator Id"
+msgstr "From Locator Id"
+
+msgid "Revision Name"
+msgstr "Revision Name"
+
+msgid "To Subinventory Id"
+msgstr "To Subinventory Id"
+
+msgid "To Locator Id"
+msgstr "To Locator Id"
+
+msgid "Transaction Quantity"
+msgstr "Transaction Quantity"
+
+msgid "Inv Item Revision Id"
+msgstr "Inv Item Revision Id"
+
+msgid "Implementation Date"
+msgstr "Implementation Date"
+
+msgid "Inv Location Default Id"
+msgstr "Inv Location Default Id"
+
+msgid "Default Type"
+msgstr "Default Type"
+
+msgid "Inv Lot Number Id"
+msgstr "Inv Lot Number Id"
+
+msgid "Generation"
+msgstr "Generation"
+
+msgid "Lock Cb"
+msgstr "Lock Cb"
+
+msgid "First Inv Transaction Id"
+msgstr "First Inv Transaction Id"
+
+msgid "Origination Type"
+msgstr "Origination Type"
+
+msgid "Activation Date"
+msgstr "Activation Date"
+
+msgid "Expiration Date"
+msgstr "Expiration Date"
+
+msgid "Supplier Sn"
+msgstr "Supplier Sn"
+
+msgid "Supplier Ln"
+msgstr "Supplier Ln"
+
+msgid "Expiration Action"
+msgstr "Expiration Action"
+
+msgid "Item Revision"
+msgstr "Item Revision"
+
+msgid "Parent Lot Number Id"
+msgstr "Parent Lot Number Id"
+
+msgid "Original Wip Wo Header Id"
+msgstr "Original Wip Wo Header Id"
+
+msgid "Last Inv Transaction Id"
+msgstr "Last Inv Transaction Id"
+
+msgid "Inv Lot Onhand Id"
+msgstr "Inv Lot Onhand Id"
+
+msgid "Onhand Id"
+msgstr "Onhand Id"
+
+msgid "Lot Quantity"
+msgstr "Lot Quantity"
+
+msgid "Inv Lot Transaction Id"
+msgstr "Inv Lot Transaction Id"
+
+msgid "Inv Transaction Id"
+msgstr "Inv Transaction Id"
+
+msgid "From Subinventory"
+msgstr "From Subinventory"
+
+msgid "To Subinventory"
+msgstr "To Subinventory"
+
+msgid "From Locator"
+msgstr "From Locator"
+
+msgid "To Locator"
+msgstr "To Locator"
+
+msgid "Lot Number Id"
+msgstr "Lot Number Id"
+
+msgid "Inv Receipt Header Id"
+msgstr "Inv Receipt Header Id"
+
+msgid "Receipt Date"
+msgstr "Receipt Date"
+
+msgid "Received By"
+msgstr "Received By"
+
+msgid "Inv Receipt Line Id"
+msgstr "Inv Receipt Line Id"
+
+msgid "Receving Account Id"
+msgstr "Receving Account Id"
+
+msgid "Accrual Account Id"
+msgstr "Accrual Account Id"
+
+msgid "Ref Doc Type"
+msgstr "Ref Doc Type"
+
+msgid "Ref Doc Number"
+msgstr "Ref Doc Number"
+
+msgid "Inv Serial Number Id"
+msgstr "Inv Serial Number Id"
+
+msgid "Current Org Id"
+msgstr "Current Org Id"
+
+msgid "Current Subinventory Id"
+msgstr "Current Subinventory Id"
+
+msgid "Current Locator Id"
+msgstr "Current Locator Id"
+
+msgid "Parent Serial Number Id"
+msgstr "Parent Serial Number Id"
+
+msgid "Current Wip Wo Header Id"
+msgstr "Current Wip Wo Header Id"
+
+msgid "Fixed Asset Cb"
+msgstr "Fixed Asset Cb"
+
+msgid "Inv Serial Transaction Id"
+msgstr "Inv Serial Transaction Id"
+
+msgid "Receipt Line Id"
+msgstr "Receipt Line Id"
+
+msgid "Logical Transaction Cb"
+msgstr "Logical Transaction Cb"
+
+msgid "Wip Wo Bom Id"
+msgstr "Wip Wo Bom Id"
+
+msgid "From Account Id"
+msgstr "From Account Id"
+
+msgid "To Account Id"
+msgstr "To Account Id"
+
+msgid "Unit Cost"
+msgstr "Unit Cost"
+
+msgid "Costed Amount"
+msgstr "Costed Amount"
+
+msgid "Transaction Rev Enabled Cb"
+msgstr "Transaction Rev Enabled Cb"
+
+msgid "Rev Start Number"
+msgstr "Rev Start Number"
+
+msgid "Inventory Id"
+msgstr "Inventory Id"
+
+msgid "Item Master Cb"
+msgstr "Item Master Cb"
+
+msgid "Master Org Id"
+msgstr "Master Org Id"
+
+msgid "Calendar"
+msgstr "Calendar"
+
+msgid "Locator Control"
+msgstr "Locator Control"
+
+msgid "Allow Negative Balance Cb"
+msgstr "Allow Negative Balance Cb"
+
+msgid "Costing Org"
+msgstr "Costing Org"
+
+msgid "Pos Price List Header Id"
+msgstr "Pos Price List Header Id"
+
+msgid "Costing Method"
+msgstr "Costing Method"
+
+msgid "Transfer To Gl Cb"
+msgstr "Transfer To Gl Cb"
+
+msgid "Default Cost Group"
+msgstr "Default Cost Group"
+
+msgid "Material Ac Id"
+msgstr "Material Ac Id"
+
+msgid "Material Oh Ac Id"
+msgstr "Material Oh Ac Id"
+
+msgid "Overhead Ac Id"
+msgstr "Overhead Ac Id"
+
+msgid "Resource Ac Id"
+msgstr "Resource Ac Id"
+
+msgid "Lot Uniqueness"
+msgstr "Lot Uniqueness"
+
+msgid "Lot Generation"
+msgstr "Lot Generation"
+
+msgid "Lot Prefix"
+msgstr "Lot Prefix"
+
+msgid "Lot Starting Number"
+msgstr "Lot Starting Number"
+
+msgid "Serial Uniqueness"
+msgstr "Serial Uniqueness"
+
+msgid "Serial Generation"
+msgstr "Serial Generation"
+
+msgid "Serial Prefix"
+msgstr "Serial Prefix"
+
+msgid "Serial Starting Number"
+msgstr "Serial Starting Number"
+
+msgid "Atp"
+msgstr "Atp"
+
+msgid "Picking Rule"
+msgstr "Picking Rule"
+
+msgid "Sourcing Rule"
+msgstr "Sourcing Rule"
+
+msgid "Inter Org Ppv Ac Id"
+msgstr "Inter Org Ppv Ac Id"
+
+msgid "Inter Org Receivable Ac Id"
+msgstr "Inter Org Receivable Ac Id"
+
+msgid "Inter Org Payable Ac Id"
+msgstr "Inter Org Payable Ac Id"
+
+msgid "Inter Org Intransit Ac Id"
+msgstr "Inter Org Intransit Ac Id"
+
+msgid "Inv Ap Accrual Ac Id"
+msgstr "Inv Ap Accrual Ac Id"
+
+msgid "Inv Ap Exp Accrual Ac Id"
+msgstr "Inv Ap Exp Accrual Ac Id"
+
+msgid "Inv Ppv Ac Id"
+msgstr "Inv Ppv Ac Id"
+
+msgid "Inv Ipv Ac Id"
+msgstr "Inv Ipv Ac Id"
+
+msgid "Sales Ac Id"
+msgstr "Sales Ac Id"
+
+msgid "Cogs Ac Id"
+msgstr "Cogs Ac Id"
+
+msgid "Deferred Cogs Ac Id"
+msgstr "Deferred Cogs Ac Id"
+
+msgid "Item Rev Enabled Cb"
+msgstr "Item Rev Enabled Cb"
+
+msgid "Item Id"
+msgstr "Item Id"
+
+msgid "Product Line Percentage"
+msgstr "Product Line Percentage"
+
+msgid "Long Description"
+msgstr "Long Description"
+
+msgid "Inventory Item Cb"
+msgstr "Inventory Item Cb"
+
+msgid "Stockable Cb"
+msgstr "Stockable Cb"
+
+msgid "Transactable Cb"
+msgstr "Transactable Cb"
+
+msgid "Reservable Cb"
+msgstr "Reservable Cb"
+
+msgid "Cycle Count Enabled Cb"
+msgstr "Cycle Count Enabled Cb"
+
+msgid "Kit Cb"
+msgstr "Kit Cb"
+
+msgid "Bom Enabled Cb"
+msgstr "Bom Enabled Cb"
+
+msgid "Inventory Asset Cb"
+msgstr "Inventory Asset Cb"
+
+msgid "Osp Ac Id"
+msgstr "Osp Ac Id"
+
+msgid "Purchased Cb"
+msgstr "Purchased Cb"
+
+msgid "Use Asl Cb"
+msgstr "Use Asl Cb"
+
+msgid "Invoice Matching"
+msgstr "Invoice Matching"
+
+msgid "Default Buyer"
+msgstr "Default Buyer"
+
+msgid "List Price"
+msgstr "List Price"
+
+msgid "Un Number"
+msgstr "Un Number"
+
+msgid "Hazard Classs"
+msgstr "Hazard Classs"
+
+msgid "Receipt Sub Inventory"
+msgstr "Receipt Sub Inventory"
+
+msgid "Over Receipt Percentage"
+msgstr "Over Receipt Percentage"
+
+msgid "Over Receipt Action"
+msgstr "Over Receipt Action"
+
+msgid "Receipt Days Early"
+msgstr "Receipt Days Early"
+
+msgid "Receipt Days Late"
+msgstr "Receipt Days Late"
+
+msgid "Receipt Day Action"
+msgstr "Receipt Day Action"
+
+msgid "Receipt Routing"
+msgstr "Receipt Routing"
+
+msgid "Weight Uom Id"
+msgstr "Weight Uom Id"
+
+msgid "Volume Uom Id"
+msgstr "Volume Uom Id"
+
+msgid "Volume"
+msgstr "Volume"
+
+msgid "Dimension Uom Id"
+msgstr "Dimension Uom Id"
+
+msgid "Width"
+msgstr "Width"
+
+msgid "Equipment Cb"
+msgstr "Equipment Cb"
+
+msgid "Electronic Format Cb"
+msgstr "Electronic Format Cb"
+
+msgid "Planning Method"
+msgstr "Planning Method"
+
+msgid "Wip Supply Subinventory"
+msgstr "Wip Supply Subinventory"
+
+msgid "Wip Supply Locator"
+msgstr "Wip Supply Locator"
+
+msgid "Fix Order Quantity"
+msgstr "Fix Order Quantity"
+
+msgid "Saftey Stock Percentage"
+msgstr "Saftey Stock Percentage"
+
+msgid "Fix Lot Multiplier"
+msgstr "Fix Lot Multiplier"
+
+msgid "Minimum Order Quantity"
+msgstr "Minimum Order Quantity"
+
+msgid "Maximum Order Quantity"
+msgstr "Maximum Order Quantity"
+
+msgid "Minmax Min Quantity"
+msgstr "Minmax Min Quantity"
+
+msgid "Minmax Max Quantity"
+msgstr "Minmax Max Quantity"
+
+msgid "Forecast Method"
+msgstr "Forecast Method"
+
+msgid "Forecast Control"
+msgstr "Forecast Control"
+
+msgid "Demand Timefence"
+msgstr "Demand Timefence"
+
+msgid "Planning Timefence"
+msgstr "Planning Timefence"
+
+msgid "Release Timefence"
+msgstr "Release Timefence"
+
+msgid "Pre Processing Lt"
+msgstr "Pre Processing Lt"
+
+msgid "Post Processing Lt"
+msgstr "Post Processing Lt"
+
+msgid "Processing Lt"
+msgstr "Processing Lt"
+
+msgid "Cumulative Mfg Lt"
+msgstr "Cumulative Mfg Lt"
+
+msgid "Cumulative Total Lt"
+msgstr "Cumulative Total Lt"
+
+msgid "Lt Lot Size"
+msgstr "Lt Lot Size"
+
+msgid "Build In Wip Cb"
+msgstr "Build In Wip Cb"
+
+msgid "Customer Ordered Cb"
+msgstr "Customer Ordered Cb"
+
+msgid "Internal Ordered Cb"
+msgstr "Internal Ordered Cb"
+
+msgid "Shippable Cb"
+msgstr "Shippable Cb"
+
+msgid "Returnable Cb"
+msgstr "Returnable Cb"
+
+msgid "Invoiceable Cb"
+msgstr "Invoiceable Cb"
+
+msgid "Ef1"
+msgstr "Ef1"
+
+msgid "Ef2"
+msgstr "Ef2"
+
+msgid "Deffered Cogs Ac Id"
+msgstr "Deffered Cogs Ac Id"
+
+msgid "Ip Tax Class"
+msgstr "Ip Tax Class"
+
+msgid "Op Tax Class"
+msgstr "Op Tax Class"
+
+msgid "Ap Payment Term"
+msgstr "Ap Payment Term"
+
+msgid "Ar Payment Term"
+msgstr "Ar Payment Term"
+
+msgid "Rounding Option"
+msgstr "Rounding Option"
+
+msgid "Onhand With Rev Cb"
+msgstr "Onhand With Rev Cb"
+
+msgid "Item Rev Number"
+msgstr "Item Rev Number"
+
+msgid "Am Asset Type"
+msgstr "Am Asset Type"
+
+msgid "Am Activity Cause"
+msgstr "Am Activity Cause"
+
+msgid "Am Activity Type"
+msgstr "Am Activity Type"
+
+msgid "Am Activity Source"
+msgstr "Am Activity Source"
+
+msgid "Item Status Id"
+msgstr "Item Status Id"
+
+msgid "Active"
+msgstr "Active"
+
+msgid "Inventory Item"
+msgstr "Inventory Item"
+
+msgid "Transactable"
+msgstr "Transactable"
+
+msgid "Reservable"
+msgstr "Reservable"
+
+msgid "Costing Enabled"
+msgstr "Costing Enabled"
+
+msgid "Customer Ordered"
+msgstr "Customer Ordered"
+
+msgid "Purchased"
+msgstr "Purchased"
+
+msgid "Build In Wip"
+msgstr "Build In Wip"
+
+msgid "Legal Id"
+msgstr "Legal Id"
+
+msgid "Legal Org Type"
+msgstr "Legal Org Type"
+
+msgid "Registration Number"
+msgstr "Registration Number"
+
+msgid "Place Of Registration"
+msgstr "Place Of Registration"
+
+msgid "Country Of Registration"
+msgstr "Country Of Registration"
+
+msgid "Identification Number"
+msgstr "Identification Number"
+
+msgid "Ein Tin Tan"
+msgstr "Ein Tin Tan"
+
+msgid "Balancing Segments"
+msgstr "Balancing Segments"
+
+msgid "Locator Structure"
+msgstr "Locator Structure"
+
+msgid "X Coordinate"
+msgstr "X Coordinate"
+
+msgid "Y Coordinate"
+msgstr "Y Coordinate"
+
+msgid "Z Coordinate"
+msgstr "Z Coordinate"
+
+msgid "Max Units"
+msgstr "Max Units"
+
+msgid "Max Volume Uom Id"
+msgstr "Max Volume Uom Id"
+
+msgid "Max Volume"
+msgstr "Max Volume"
+
+msgid "Max Weight Uom Id"
+msgstr "Max Weight Uom Id"
+
+msgid "Max Weight"
+msgstr "Max Weight"
+
+msgid "Sub Description"
+msgstr "Sub Description"
+
+msgid "Business Org Id"
+msgstr "Business Org Id"
+
+msgid "Inventory Org Id"
+msgstr "Inventory Org Id"
+
+msgid "Mdm Bank Account Id"
+msgstr "Mdm Bank Account Id"
+
+msgid "Mdm Bank Header Id"
+msgstr "Mdm Bank Header Id"
+
+msgid "Mdm Bank Site Id"
+msgstr "Mdm Bank Site Id"
+
+msgid "Account Number"
+msgstr "Account Number"
+
+msgid "Account Usage"
+msgstr "Account Usage"
+
+msgid "Cash Clearing Ac Id"
+msgstr "Cash Clearing Ac Id"
+
+msgid "Exchange Gl Ac Id"
+msgstr "Exchange Gl Ac Id"
+
+msgid "Hr Cash Ac Id"
+msgstr "Hr Cash Ac Id"
+
+msgid "Hr Cash Clearing Ac Id"
+msgstr "Hr Cash Clearing Ac Id"
+
+msgid "Hr Bank Charge Ac Id"
+msgstr "Hr Bank Charge Ac Id"
+
+msgid "Hr Exchange Gl Ac Id"
+msgstr "Hr Exchange Gl Ac Id"
+
+msgid "Netting Ac Cb"
+msgstr "Netting Ac Cb"
+
+msgid "Minimum Payment"
+msgstr "Minimum Payment"
+
+msgid "Maximum Payment"
+msgstr "Maximum Payment"
+
+msgid "Contact Id"
+msgstr "Contact Id"
+
+msgid "Ap Payment Method Id"
+msgstr "Ap Payment Method Id"
+
+msgid "Account Description"
+msgstr "Account Description"
+
+msgid "Bank Name"
+msgstr "Bank Name"
+
+msgid "Bank Number"
+msgstr "Bank Number"
+
+msgid "Bank Name Short"
+msgstr "Bank Name Short"
+
+msgid "Bank Name Alt"
+msgstr "Bank Name Alt"
+
+msgid "Branch Name"
+msgstr "Branch Name"
+
+msgid "Branch Country"
+msgstr "Branch Country"
+
+msgid "Branch Number"
+msgstr "Branch Number"
+
+msgid "Branch Name Short"
+msgstr "Branch Name Short"
+
+msgid "Branch Name Alt"
+msgstr "Branch Name Alt"
+
+msgid "Ifsc Code"
+msgstr "Ifsc Code"
+
+msgid "Swift Code"
+msgstr "Swift Code"
+
+msgid "Routing Number"
+msgstr "Routing Number"
+
+msgid "Iban Code"
+msgstr "Iban Code"
+
+msgid "Branch Tax Reg No"
+msgstr "Branch Tax Reg No"
+
+msgid "Branch Tax Payer Id"
+msgstr "Branch Tax Payer Id"
+
+msgid "Mdm Price List Header Id"
+msgstr "Mdm Price List Header Id"
+
+msgid "Price List"
+msgstr "Price List"
+
+msgid "Allow Mutli Currency Cb"
+msgstr "Allow Mutli Currency Cb"
+
+msgid "Mdm Price List Line Id"
+msgstr "Mdm Price List Line Id"
+
+msgid "Formula"
+msgstr "Formula"
+
+msgid "Mdm Tax Code Id"
+msgstr "Mdm Tax Code Id"
+
+msgid "Tax Code"
+msgstr "Tax Code"
+
+msgid "Tax Type"
+msgstr "Tax Type"
+
+msgid "Dr Cr"
+msgstr "Dr Cr"
+
+msgid "In Out"
+msgstr "In Out"
+
+msgid "Printed Tax Name"
+msgstr "Printed Tax Name"
+
+msgid "Tax Regime"
+msgstr "Tax Regime"
+
+msgid "Tax Jurisdiction"
+msgstr "Tax Jurisdiction"
+
+msgid "Offset Tax Code"
+msgstr "Offset Tax Code"
+
+msgid "Allow Adhoc Rate Cb"
+msgstr "Allow Adhoc Rate Cb"
+
+msgid "Allow Tax Exemptions Cb"
+msgstr "Allow Tax Exemptions Cb"
+
+msgid "Calculation Method"
+msgstr "Calculation Method"
+
+msgid "Percentage"
+msgstr "Percentage"
+
+msgid "Country Code"
+msgstr "Country Code"
+
+msgid "State"
+msgstr "State"
+
+msgid "Tax Region Name"
+msgstr "Tax Region Name"
+
+msgid "Mdm Tax Rule Id"
+msgstr "Mdm Tax Rule Id"
+
+msgid "Ship To Region Id"
+msgstr "Ship To Region Id"
+
+msgid "Ship From Region Id"
+msgstr "Ship From Region Id"
+
+msgid "Module Id"
+msgstr "Module Id"
+
+msgid "Lot Id"
+msgstr "Lot Id"
+
+msgid "Serial Id"
+msgstr "Serial Id"
+
+msgid "Onhand"
+msgstr "Onhand"
+
+msgid "Reservable Onhand"
+msgstr "Reservable Onhand"
+
+msgid "Transactable Onhand"
+msgstr "Transactable Onhand"
+
+msgid "Lot Status"
+msgstr "Lot Status"
+
+msgid "Serial Status"
+msgstr "Serial Status"
+
+msgid "Secondary Uom Id"
+msgstr "Secondary Uom Id"
+
+msgid "Onhand Status"
+msgstr "Onhand Status"
+
+msgid "Org Name"
+msgstr "Org Name"
+
+msgid "Onhand Value"
+msgstr "Onhand Value"
+
+msgid "Subinventory Type"
+msgstr "Subinventory Type"
+
+msgid "Option Detail Id"
+msgstr "Option Detail Id"
+
+msgid "Option Header Id"
+msgstr "Option Header Id"
+
+msgid "Option Line Id"
+msgstr "Option Line Id"
+
+msgid "Option Detail Value"
+msgstr "Option Detail Value"
+
+msgid "Access Level"
+msgstr "Access Level"
+
+msgid "Module Code"
+msgstr "Module Code"
+
+msgid "Option Assignments"
+msgstr "Option Assignments"
+
+msgid "Option Line Value"
+msgstr "Option Line Value"
+
+msgid "Value Group Id"
+msgstr "Value Group Id"
+
+msgid "Page Id"
+msgstr "Page Id"
+
+msgid "Show In Frontpage Cb"
+msgstr "Show In Frontpage Cb"
+
+msgid "Path Id"
+msgstr "Path Id"
+
+msgid "Path Link"
+msgstr "Path Link"
+
+msgid "Mode"
+msgstr "Mode"
+
+msgid "Id Column Name"
+msgstr "Id Column Name"
+
+msgid "Path Type"
+msgstr "Path Type"
+
+msgid "Search Path Cb"
+msgstr "Search Path Cb"
+
+msgid "Prepayment Cb"
+msgstr "Prepayment Cb"
+
+msgid "Payment Term Discount Id"
+msgstr "Payment Term Discount Id"
+
+msgid "Discount Percentage"
+msgstr "Discount Percentage"
+
+msgid "Due Days"
+msgstr "Due Days"
+
+msgid "Due Dates"
+msgstr "Due Dates"
+
+msgid "Due Date Of Month"
+msgstr "Due Date Of Month"
+
+msgid "Payment Term Schedule Id"
+msgstr "Payment Term Schedule Id"
+
+msgid "Amount Percentage"
+msgstr "Amount Percentage"
+
+msgid "Open Quantity"
+msgstr "Open Quantity"
+
+msgid "Po Asl Document Id"
+msgstr "Po Asl Document Id"
+
+msgid "Po Asl Line Id"
+msgstr "Po Asl Line Id"
+
+msgid "Document Header Id"
+msgstr "Document Header Id"
+
+msgid "Document Line Id"
+msgstr "Document Line Id"
+
+msgid "Po Asl Header Id"
+msgstr "Po Asl Header Id"
+
+msgid "Asl Type"
+msgstr "Asl Type"
+
+msgid "Item Category Id"
+msgstr "Item Category Id"
+
+msgid "Mfg Part Number"
+msgstr "Mfg Part Number"
+
+msgid "Business Type"
+msgstr "Business Type"
+
+msgid "Release Method"
+msgstr "Release Method"
+
+msgid "Min Order Quantity"
+msgstr "Min Order Quantity"
+
+msgid "Release Number"
+msgstr "Release Number"
+
+msgid "Agreement Start Date"
+msgstr "Agreement Start Date"
+
+msgid "Agreement End Date"
+msgstr "Agreement End Date"
+
+msgid "Po Requisition Header Id"
+msgstr "Po Requisition Header Id"
+
+msgid "Po Requisition Type"
+msgstr "Po Requisition Type"
+
+msgid "Po Requisition Number"
+msgstr "Po Requisition Number"
+
+msgid "Requisition Status"
+msgstr "Requisition Status"
+
+msgid "Po Requisition Line Id"
+msgstr "Po Requisition Line Id"
+
+msgid "Po Requisition Line Number"
+msgstr "Po Requisition Line Number"
+
+msgid "Bpa Po Line Id"
+msgstr "Bpa Po Line Id"
+
+msgid "Po Requisition Detail Id"
+msgstr "Po Requisition Detail Id"
+
+msgid "Ship To Org"
+msgstr "Ship To Org"
+
+msgid "Invoice Match Type"
+msgstr "Invoice Match Type"
+
+msgid "Ship To Location Id"
+msgstr "Ship To Location Id"
+
+msgid "Ref Po Header Id"
+msgstr "Ref Po Header Id"
+
+msgid "Price List Header Id"
+msgstr "Price List Header Id"
+
+msgid "Multi Bu Cb"
+msgstr "Multi Bu Cb"
+
+msgid "Bpa Line Id"
+msgstr "Bpa Line Id"
+
+msgid "Price Date"
+msgstr "Price Date"
+
+msgid "Reference Doc Type"
+msgstr "Reference Doc Type"
+
+msgid "Reference Doc Number"
+msgstr "Reference Doc Number"
+
+msgid "Kit Configured Cb"
+msgstr "Kit Configured Cb"
+
+msgid "Hold Cb"
+msgstr "Hold Cb"
+
+msgid "Po Approval Hierarchy"
+msgstr "Po Approval Hierarchy"
+
+msgid "Req Approval Hierarchy"
+msgstr "Req Approval Hierarchy"
+
+msgid "Po Quote Detail Id"
+msgstr "Po Quote Detail Id"
+
+msgid "Po Quote Header Id"
+msgstr "Po Quote Header Id"
+
+msgid "Po Quote Line Id"
+msgstr "Po Quote Line Id"
+
+msgid "Po Rfq Detail Id"
+msgstr "Po Rfq Detail Id"
+
+msgid "Requirement Value"
+msgstr "Requirement Value"
+
+msgid "Po Rfq Header Id"
+msgstr "Po Rfq Header Id"
+
+msgid "Quote Number"
+msgstr "Quote Number"
+
+msgid "Supplier Quote"
+msgstr "Supplier Quote"
+
+msgid "Quote Type"
+msgstr "Quote Type"
+
+msgid "Valid Date"
+msgstr "Valid Date"
+
+msgid "Quote Status"
+msgstr "Quote Status"
+
+msgid "Po Rfq Line Id"
+msgstr "Po Rfq Line Id"
+
+msgid "Supplier Part Number"
+msgstr "Supplier Part Number"
+
+msgid "Minimum Agreement Quantity"
+msgstr "Minimum Agreement Quantity"
+
+msgid "Daily Capacity"
+msgstr "Daily Capacity"
+
+msgid "Processing Lead Time"
+msgstr "Processing Lead Time"
+
+msgid "Replenishment Lead Time"
+msgstr "Replenishment Lead Time"
+
+msgid "Quote Unit Price"
+msgstr "Quote Unit Price"
+
+msgid "Ship To Inventory"
+msgstr "Ship To Inventory"
+
+msgid "Released Amount"
+msgstr "Released Amount"
+
+msgid "Po Requisition Interface Id"
+msgstr "Po Requisition Interface Id"
+
+msgid "Requirement Number"
+msgstr "Requirement Number"
+
+msgid "Requirement Name"
+msgstr "Requirement Name"
+
+msgid "Requirement Type"
+msgstr "Requirement Type"
+
+msgid "Max Evaludation Points"
+msgstr "Max Evaludation Points"
+
+msgid "Target Value"
+msgstr "Target Value"
+
+msgid "Rfq Number"
+msgstr "Rfq Number"
+
+msgid "Rfq Name"
+msgstr "Rfq Name"
+
+msgid "Outcome"
+msgstr "Outcome"
+
+msgid "Rfq Type"
+msgstr "Rfq Type"
+
+msgid "Due Date"
+msgstr "Due Date"
+
+msgid "Rfq Status"
+msgstr "Rfq Status"
+
+msgid "Target Price"
+msgstr "Target Price"
+
+msgid "Notes From Supplier"
+msgstr "Notes From Supplier"
+
+msgid "Po Sourcing Rule Header Id"
+msgstr "Po Sourcing Rule Header Id"
+
+msgid "Po Sourcing Rule Line Id"
+msgstr "Po Sourcing Rule Line Id"
+
+msgid "Sourcing Type"
+msgstr "Sourcing Type"
+
+msgid "Source From Org Id"
+msgstr "Source From Org Id"
+
+msgid "Allocation"
+msgstr "Allocation"
+
+msgid "Rank"
+msgstr "Rank"
+
+msgid "Transit Time"
+msgstr "Transit Time"
+
+msgid "Pos Barcode List Header Id"
+msgstr "Pos Barcode List Header Id"
+
+msgid "List Name"
+msgstr "List Name"
+
+msgid "Pos Barcode List Line Id"
+msgstr "Pos Barcode List Line Id"
+
+msgid "Line Amount"
+msgstr "Line Amount"
+
+msgid "Discount Amount"
+msgstr "Discount Amount"
+
+msgid "Discount Code"
+msgstr "Discount Code"
+
+msgid "Amount After Discount"
+msgstr "Amount After Discount"
+
+msgid "No Of Labels"
+msgstr "No Of Labels"
+
+msgid "Pos Inv Control Id"
+msgstr "Pos Inv Control Id"
+
+msgid "Customer Id"
+msgstr "Customer Id"
+
+msgid "Transaction Subinventory Id"
+msgstr "Transaction Subinventory Id"
+
+msgid "Transaction Locator Id"
+msgstr "Transaction Locator Id"
+
+msgid "Return Subinventory Id"
+msgstr "Return Subinventory Id"
+
+msgid "Return Locator Id"
+msgstr "Return Locator Id"
+
+msgid "Allow Negative Onhand Cb"
+msgstr "Allow Negative Onhand Cb"
+
+msgid "Customer Site Id"
+msgstr "Customer Site Id"
+
+msgid "Pos Terminal Id"
+msgstr "Pos Terminal Id"
+
+msgid "Sd Store Id"
+msgstr "Sd Store Id"
+
+msgid "Terminal Name"
+msgstr "Terminal Name"
+
+msgid "Primary Owner Id"
+msgstr "Primary Owner Id"
+
+msgid "Terminal Type"
+msgstr "Terminal Type"
+
+msgid "Refresh Time"
+msgstr "Refresh Time"
+
+msgid "Pos Transaction Header Id"
+msgstr "Pos Transaction Header Id"
+
+msgid "Total Amount"
+msgstr "Total Amount"
+
+msgid "Pos Transaction Line Id"
+msgstr "Pos Transaction Line Id"
+
+msgid "Project Type"
+msgstr "Project Type"
+
+msgid "Manager User Id"
+msgstr "Manager User Id"
+
+msgid "Project Class"
+msgstr "Project Class"
+
+msgid "Is Template Cb"
+msgstr "Is Template Cb"
+
+msgid "Project Status"
+msgstr "Project Status"
+
+msgid "Task Number"
+msgstr "Task Number"
+
+msgid "Task Name"
+msgstr "Task Name"
+
+msgid "Parent Prj Project Line Id"
+msgstr "Parent Prj Project Line Id"
+
+msgid "Service Type"
+msgstr "Service Type"
+
+msgid "Work Type"
+msgstr "Work Type"
+
+msgid "Allow Charges Cb"
+msgstr "Allow Charges Cb"
+
+msgid "Capitalizable Cb"
+msgstr "Capitalizable Cb"
+
+msgid "Rate Type"
+msgstr "Rate Type"
+
+msgid "Cip Asset It"
+msgstr "Cip Asset It"
+
+msgid "Task Status"
+msgstr "Task Status"
+
+msgid "Field Image"
+msgstr "Field Image"
+
+msgid "Field Price"
+msgstr "Field Price"
+
+msgid "Field Description"
+msgstr "Field Description"
+
+msgid "Role Access Id"
+msgstr "Role Access Id"
+
+msgid "Role Path Id"
+msgstr "Role Path Id"
+
+msgid "Role Id"
+msgstr "Role Id"
+
+msgid "Sd Delivery Header Id"
+msgstr "Sd Delivery Header Id"
+
+msgid "Delivery Number"
+msgstr "Delivery Number"
+
+msgid "Shipping Org Id"
+msgstr "Shipping Org Id"
+
+msgid "Delivery Date"
+msgstr "Delivery Date"
+
+msgid "Delivery Received By"
+msgstr "Delivery Received By"
+
+msgid "Carrier Receipt Number"
+msgstr "Carrier Receipt Number"
+
+msgid "Expetced Delivery Date"
+msgstr "Expetced Delivery Date"
+
+msgid "Actual Delivery Date"
+msgstr "Actual Delivery Date"
+
+msgid "Handling Instruction"
+msgstr "Handling Instruction"
+
+msgid "Sd Delivery Line Id"
+msgstr "Sd Delivery Line Id"
+
+msgid "Shipped Quantity"
+msgstr "Shipped Quantity"
+
+msgid "Staging Subinventory Id"
+msgstr "Staging Subinventory Id"
+
+msgid "Staging Locator Id"
+msgstr "Staging Locator Id"
+
+msgid "Delivery Status"
+msgstr "Delivery Status"
+
+msgid "Picking Date"
+msgstr "Picking Date"
+
+msgid "Actual Ship Date"
+msgstr "Actual Ship Date"
+
+msgid "Line Uom Id"
+msgstr "Line Uom Id"
+
+msgid "Total Volume"
+msgstr "Total Volume"
+
+msgid "Total Weight"
+msgstr "Total Weight"
+
+msgid "Sd Document Type Id"
+msgstr "Sd Document Type Id"
+
+msgid "Document Type Name"
+msgstr "Document Type Name"
+
+msgid "Bu Org Id R"
+msgstr "Bu Org Id R"
+
+msgid "Supply Source"
+msgstr "Supply Source"
+
+msgid "Process Flow Id"
+msgstr "Process Flow Id"
+
+msgid "Default Line Document"
+msgstr "Default Line Document"
+
+msgid "Default Shipfrom Org Id"
+msgstr "Default Shipfrom Org Id"
+
+msgid "Destination Type"
+msgstr "Destination Type"
+
+msgid "Ar Transaction Source"
+msgstr "Ar Transaction Source"
+
+msgid "Sd Lead Id"
+msgstr "Sd Lead Id"
+
+msgid "Lead Number"
+msgstr "Lead Number"
+
+msgid "Primary Contact Id"
+msgstr "Primary Contact Id"
+
+msgid "Lead Type"
+msgstr "Lead Type"
+
+msgid "Details"
+msgstr "Details"
+
+msgid "Contact Website"
+msgstr "Contact Website"
+
+msgid "Contact Address"
+msgstr "Contact Address"
+
+msgid "Sales Person Employee Id"
+msgstr "Sales Person Employee Id"
+
+msgid "Sales Team"
+msgstr "Sales Team"
+
+msgid "Campaign Id"
+msgstr "Campaign Id"
+
+msgid "Campaign Os"
+msgstr "Campaign Os"
+
+msgid "Referral Source"
+msgstr "Referral Source"
+
+msgid "Sales Channel"
+msgstr "Sales Channel"
+
+msgid "Close Reason"
+msgstr "Close Reason"
+
+msgid "Sd Opportunity Id"
+msgstr "Sd Opportunity Id"
+
+msgid "Opportunity Number"
+msgstr "Opportunity Number"
+
+msgid "Opportunity Subject"
+msgstr "Opportunity Subject"
+
+msgid "Win Probability"
+msgstr "Win Probability"
+
+msgid "Forecast Amount"
+msgstr "Forecast Amount"
+
+msgid "Expected Close Date"
+msgstr "Expected Close Date"
+
+msgid "So Status"
+msgstr "So Status"
+
+msgid "Wip Wo Header Id"
+msgstr "Wip Wo Header Id"
+
+msgid "Picked Quantity"
+msgstr "Picked Quantity"
+
+msgid "Line Status"
+msgstr "Line Status"
+
+msgid "Staging Subinventory"
+msgstr "Staging Subinventory"
+
+msgid "Staging Locator"
+msgstr "Staging Locator"
+
+msgid "Requested Date"
+msgstr "Requested Date"
+
+msgid "Sd Quote Header Id"
+msgstr "Sd Quote Header Id"
+
+msgid "New Customer Name"
+msgstr "New Customer Name"
+
+msgid "New Customer Address"
+msgstr "New Customer Address"
+
+msgid "Aggrement End Date"
+msgstr "Aggrement End Date"
+
+msgid "Sd Quote Line Id"
+msgstr "Sd Quote Line Id"
+
+msgid "New Item Number"
+msgstr "New Item Number"
+
+msgid "New Item Description"
+msgstr "New Item Description"
+
+msgid "Sd Sales Control Id"
+msgstr "Sd Sales Control Id"
+
+msgid "Deffer Invoicing Cb"
+msgstr "Deffer Invoicing Cb"
+
+msgid "Default Requested Date Cb"
+msgstr "Default Requested Date Cb"
+
+msgid "Default Schedule Ship Date Cb"
+msgstr "Default Schedule Ship Date Cb"
+
+msgid "Default Promise Date Cb"
+msgstr "Default Promise Date Cb"
+
+msgid "Sd Shipping Control Id"
+msgstr "Sd Shipping Control Id"
+
+msgid "Default Picking Rule Id"
+msgstr "Default Picking Rule Id"
+
+msgid "Delivery Onpicking Cb"
+msgstr "Delivery Onpicking Cb"
+
+msgid "Autosplit Onpicking Cb"
+msgstr "Autosplit Onpicking Cb"
+
+msgid "Store Name"
+msgstr "Store Name"
+
+msgid "Sd Store Subinventory Id"
+msgstr "Sd Store Subinventory Id"
+
+msgid "Floor Number"
+msgstr "Floor Number"
+
+msgid "Building Number"
+msgstr "Building Number"
+
+msgid "Wing Number"
+msgstr "Wing Number"
+
+msgid "Session Data"
+msgstr "Session Data"
+
+msgid "Sf Item Inv Category Id"
+msgstr "Sf Item Inv Category Id"
+
+msgid "Sf Item Inv Category Value"
+msgstr "Sf Item Inv Category Value"
+
+msgid "Sf Item Pur Category Id"
+msgstr "Sf Item Pur Category Id"
+
+msgid "Sf Item Pur Category Value"
+msgstr "Sf Item Pur Category Value"
+
+msgid "Default Home Page"
+msgstr "Default Home Page"
+
+msgid "Site Name"
+msgstr "Site Name"
+
+msgid "Maintenance Cb"
+msgstr "Maintenance Cb"
+
+msgid "Maintenance Msg"
+msgstr "Maintenance Msg"
+
+msgid "Disabled Action"
+msgstr "Disabled Action"
+
+msgid "Phone No"
+msgstr "Phone No"
+
+msgid "Logo Path"
+msgstr "Logo Path"
+
+msgid "Posts In Fp"
+msgstr "Posts In Fp"
+
+msgid "Summary Char Fp"
+msgstr "Summary Char Fp"
+
+msgid "Footer Message"
+msgstr "Footer Message"
+
+msgid "Anonymous User"
+msgstr "Anonymous User"
+
+msgid "Anonymous User Role"
+msgstr "Anonymous User Role"
+
+msgid "Access Denied"
+msgstr "Access Denied"
+
+msgid "Basic User Role"
+msgstr "Basic User Role"
+
+msgid "Shipment Pick Priority"
+msgstr "Shipment Pick Priority"
+
+msgid "Supplier Type"
+msgstr "Supplier Type"
+
+msgid "Supplier Contact Id"
+msgstr "Supplier Contact Id"
+
+msgid "Supplier Bu Id"
+msgstr "Supplier Bu Id"
+
+msgid "Liability Account Id"
+msgstr "Liability Account Id"
+
+msgid "Payable Account Id"
+msgstr "Payable Account Id"
+
+msgid "Payment Discount Account Id"
+msgstr "Payment Discount Account Id"
+
+msgid "Pre Payment Account Id"
+msgstr "Pre Payment Account Id"
+
+msgid "New Pos Cb"
+msgstr "New Pos Cb"
+
+msgid "All Invoices Cb"
+msgstr "All Invoices Cb"
+
+msgid "Unmatched Invoices Cb"
+msgstr "Unmatched Invoices Cb"
+
+msgid "Unaccounted Invoices Cb"
+msgstr "Unaccounted Invoices Cb"
+
+msgid "Unpaid Invoices Cb"
+msgstr "Unpaid Invoices Cb"
+
+msgid "Hold Reason"
+msgstr "Hold Reason"
+
+msgid "Po Amount Limit"
+msgstr "Po Amount Limit"
+
+msgid "Invoice Amount Limit"
+msgstr "Invoice Amount Limit"
+
+msgid "Payment Amount Limit"
+msgstr "Payment Amount Limit"
+
+msgid "Bu Bank Id"
+msgstr "Bu Bank Id"
+
+msgid "Bu Bank Site Id"
+msgstr "Bu Bank Site Id"
+
+msgid "Bu Tax Code"
+msgstr "Bu Tax Code"
+
+msgid "Invoice Match Document"
+msgstr "Invoice Match Document"
+
+msgid "Invoice Currency"
+msgstr "Invoice Currency"
+
+msgid "Payment Priority"
+msgstr "Payment Priority"
+
+msgid "Payment Group"
+msgstr "Payment Group"
+
+msgid "Invoice Date Basis"
+msgstr "Invoice Date Basis"
+
+msgid "Pay Date Basis"
+msgstr "Pay Date Basis"
+
+msgid "Default Payment Method"
+msgstr "Default Payment Method"
+
+msgid "Remittance Advice Method"
+msgstr "Remittance Advice Method"
+
+msgid "Remittance Advice Email"
+msgstr "Remittance Advice Email"
+
+msgid "Pay On"
+msgstr "Pay On"
+
+msgid "Debit Memo Onreturn Cb"
+msgstr "Debit Memo Onreturn Cb"
+
+msgid "Org Shipto Id"
+msgstr "Org Shipto Id"
+
+msgid "Org Billto Id"
+msgstr "Org Billto Id"
+
+msgid "Supplier Site Ref"
+msgstr "Supplier Site Ref"
+
+msgid "Supplier Site Type"
+msgstr "Supplier Site Type"
+
+msgid "Allow Substitute Receipts Cb"
+msgstr "Allow Substitute Receipts Cb"
+
+msgid "Allow Unordered Receipts Cb"
+msgstr "Allow Unordered Receipts Cb"
+
+msgid "Ap Invoice Match Level"
+msgstr "Ap Invoice Match Level"
+
+msgid "Ship To Location Variance"
+msgstr "Ship To Location Variance"
+
+msgid "Positive Qty Tolerance"
+msgstr "Positive Qty Tolerance"
+
+msgid "Negative Qty Tolerance"
+msgstr "Negative Qty Tolerance"
+
+msgid "Qty Variance"
+msgstr "Qty Variance"
+
+msgid "Positive Receipt Days Tolerance"
+msgstr "Positive Receipt Days Tolerance"
+
+msgid "Negative Receipt Days Tolerance"
+msgstr "Negative Receipt Days Tolerance"
+
+msgid "Receipt Days Variance"
+msgstr "Receipt Days Variance"
+
+msgid "Supplier Site Attachement Id"
+msgstr "Supplier Site Attachement Id"
+
+msgid "Sys Document Sequence Id"
+msgstr "Sys Document Sequence Id"
+
+msgid "Entry Type"
+msgstr "Entry Type"
+
+msgid "Pre Fix"
+msgstr "Pre Fix"
+
+msgid "Seq Separator"
+msgstr "Seq Separator"
+
+msgid "Next Number"
+msgstr "Next Number"
+
+msgid "Sys Dynamic Block Header Id"
+msgstr "Sys Dynamic Block Header Id"
+
+msgid "Sys Dynamic Block Line Id"
+msgstr "Sys Dynamic Block Line Id"
+
+msgid "Dynamic Block Header Id"
+msgstr "Dynamic Block Header Id"
+
+msgid "Reference Column"
+msgstr "Reference Column"
+
+msgid "Sys Extra Field Id"
+msgstr "Sys Extra Field Id"
+
+msgid "Field Type"
+msgstr "Field Type"
+
+msgid "Field Length"
+msgstr "Field Length"
+
+msgid "Display Type"
+msgstr "Display Type"
+
+msgid "Sys Extra Field Instance Id"
+msgstr "Sys Extra Field Instance Id"
+
+msgid "Referece Entity"
+msgstr "Referece Entity"
+
+msgid "Sys Hold Id"
+msgstr "Sys Hold Id"
+
+msgid "Hold Code"
+msgstr "Hold Code"
+
+msgid "Hold Name"
+msgstr "Hold Name"
+
+msgid "Hold Type"
+msgstr "Hold Type"
+
+msgid "Manual Released Cb"
+msgstr "Manual Released Cb"
+
+msgid "Sys Hold Reference Id"
+msgstr "Sys Hold Reference Id"
+
+msgid "Hold Applied By"
+msgstr "Hold Applied By"
+
+msgid "Hold Applied On"
+msgstr "Hold Applied On"
+
+msgid "Application Reason"
+msgstr "Application Reason"
+
+msgid "Hold Removed By"
+msgstr "Hold Removed By"
+
+msgid "Hold Removed On"
+msgstr "Hold Removed On"
+
+msgid "Removal Reason"
+msgstr "Removal Reason"
+
+msgid "Hold Count"
+msgstr "Hold Count"
+
+msgid "Notification Type"
+msgstr "Notification Type"
+
+msgid "Notification Name"
+msgstr "Notification Name"
+
+msgid "From User Id"
+msgstr "From User Id"
+
+msgid "To User Id"
+msgstr "To User Id"
+
+msgid "From User"
+msgstr "From User"
+
+msgid "To User"
+msgstr "To User"
+
+msgid "To User Id All"
+msgstr "To User Id All"
+
+msgid "To Email"
+msgstr "To Email"
+
+msgid "Cc Email"
+msgstr "Cc Email"
+
+msgid "Notification Subject"
+msgstr "Notification Subject"
+
+msgid "To Role"
+msgstr "To Role"
+
+msgid "Access Key"
+msgstr "Access Key"
+
+msgid "Mail Status"
+msgstr "Mail Status"
+
+msgid "Responder"
+msgstr "Responder"
+
+msgid "Responder Comment"
+msgstr "Responder Comment"
+
+msgid "User Key Name"
+msgstr "User Key Name"
+
+msgid "User Key Value"
+msgstr "User Key Value"
+
+msgid "Text Field1"
+msgstr "Text Field1"
+
+msgid "Notification Group Id"
+msgstr "Notification Group Id"
+
+msgid "Notification Group Seq"
+msgstr "Notification Group Seq"
+
+msgid "Start Sys Notification Id"
+msgstr "Start Sys Notification Id"
+
+msgid "Reference Key Table"
+msgstr "Reference Key Table"
+
+msgid "Sys Permission Id"
+msgstr "Sys Permission Id"
+
+msgid "Permision"
+msgstr "Permision"
+
+msgid "Class"
+msgstr "Class"
+
+msgid "Printer Name"
+msgstr "Printer Name"
+
+msgid "Printer Type"
+msgstr "Printer Type"
+
+msgid "Ip Address"
+msgstr "Ip Address"
+
+msgid "Port Number"
+msgstr "Port Number"
+
+msgid "Sys Process Flow Header Id"
+msgstr "Sys Process Flow Header Id"
+
+msgid "Process Flow"
+msgstr "Process Flow"
+
+msgid "Line Name"
+msgstr "Line Name"
+
+msgid "Class Name"
+msgstr "Class Name"
+
+msgid "Method Name"
+msgstr "Method Name"
+
+msgid "Next Line Seq Pass"
+msgstr "Next Line Seq Pass"
+
+msgid "Next Line Seq Fail"
+msgstr "Next Line Seq Fail"
+
+msgid "Next Line Seq Onhold"
+msgstr "Next Line Seq Onhold"
+
+msgid "Sys Profile Header Id"
+msgstr "Sys Profile Header Id"
+
+msgid "Sys Profile Line Id"
+msgstr "Sys Profile Line Id"
+
+msgid "Profile Level"
+msgstr "Profile Level"
+
+msgid "Level Name"
+msgstr "Level Name"
+
+msgid "Level Value"
+msgstr "Level Value"
+
+msgid "Sys Program Id"
+msgstr "Sys Program Id"
+
+msgid "Program Name"
+msgstr "Program Name"
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Parameters"
+msgstr "Parameters"
+
+msgid "Output Path"
+msgstr "Output Path"
+
+msgid "Sys Program Status Id"
+msgstr "Sys Program Status Id"
+
+msgid "Sys Role Permission Id"
+msgstr "Sys Role Permission Id"
+
+msgid "Permission Id"
+msgstr "Permission Id"
+
+msgid "Sys Secondary Field Id"
+msgstr "Sys Secondary Field Id"
+
+msgid "Sys Secondary Field Instance Id"
+msgstr "Sys Secondary Field Instance Id"
+
+msgid "Sys Value Group Header Id"
+msgstr "Sys Value Group Header Id"
+
+msgid "Value Group"
+msgstr "Value Group"
+
+msgid "Validation Type"
+msgstr "Validation Type"
+
+msgid "Min Size"
+msgstr "Min Size"
+
+msgid "Max Size"
+msgstr "Max Size"
+
+msgid "Min Value"
+msgstr "Min Value"
+
+msgid "Max Value"
+msgstr "Max Value"
+
+msgid "Fixed Size"
+msgstr "Fixed Size"
+
+msgid "Number Only Cb"
+msgstr "Number Only Cb"
+
+msgid "Uppercase Only Cb"
+msgstr "Uppercase Only Cb"
+
+msgid "Sys Value Group Line Id"
+msgstr "Sys Value Group Line Id"
+
+msgid "Code Value"
+msgstr "Code Value"
+
+msgid "Account Qualifier"
+msgstr "Account Qualifier"
+
+msgid "Allow Budgeting Cb"
+msgstr "Allow Budgeting Cb"
+
+msgid "Allow Posting Cb"
+msgstr "Allow Posting Cb"
+
+msgid "Parent Cb"
+msgstr "Parent Cb"
+
+msgid "Parent Line Id"
+msgstr "Parent Line Id"
+
+msgid "Path Name"
+msgstr "Path Name"
+
+msgid "Path Description"
+msgstr "Path Description"
+
+msgid "Path Value"
+msgstr "Path Value"
+
+msgid "Path Sec Id"
+msgstr "Path Sec Id"
+
+msgid "Path Revision Number"
+msgstr "Path Revision Number"
+
+msgid "Path Revision Enabled"
+msgstr "Path Revision Enabled"
+
+msgid "Path Creation Date"
+msgstr "Path Creation Date"
+
+msgid "Path Created By"
+msgstr "Path Created By"
+
+msgid "Path Last Update Date"
+msgstr "Path Last Update Date"
+
+msgid "Path Last Updated By"
+msgstr "Path Last Updated By"
+
+msgid "Transaction Type Number"
+msgstr "Transaction Type Number"
+
+msgid "Type Class"
+msgstr "Type Class"
+
+msgid "Transaction Action"
+msgstr "Transaction Action"
+
+msgid "Account Id"
+msgstr "Account Id"
+
+msgid "Primary Uom Id"
+msgstr "Primary Uom Id"
+
+msgid "Primary Relation"
+msgstr "Primary Relation"
+
+msgid "Person Id"
+msgstr "Person Id"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Assigned Ip"
+msgstr "Assigned Ip"
+
+msgid "User Language"
+msgstr "User Language"
+
+msgid "Date Format"
+msgstr "Date Format"
+
+msgid "Block Notif Count"
+msgstr "Block Notif Count"
+
+msgid "Dec Sep"
+msgstr "Dec Sep"
+
+msgid "Theme"
+msgstr "Theme"
+
+msgid "Page Size"
+msgstr "Page Size"
+
+msgid "Prices Dec"
+msgstr "Prices Dec"
+
+msgid "Qty Dec"
+msgstr "Qty Dec"
+
+msgid "Rates Dec"
+msgstr "Rates Dec"
+
+msgid "Percent Dec"
+msgstr "Percent Dec"
+
+msgid "Show Gl"
+msgstr "Show Gl"
+
+msgid "Show Codes"
+msgstr "Show Codes"
+
+msgid "Show Hints"
+msgstr "Show Hints"
+
+msgid "Last Visit Date"
+msgstr "Last Visit Date"
+
+msgid "Query Size"
+msgstr "Query Size"
+
+msgid "Graphic Links"
+msgstr "Graphic Links"
+
+msgid "Pos"
+msgstr "Pos"
+
+msgid "Print Profile"
+msgstr "Print Profile"
+
+msgid "Rep Popup"
+msgstr "Rep Popup"
+
+msgid "Auth Provider Name"
+msgstr "Auth Provider Name"
+
+msgid "Auth Provider Id"
+msgstr "Auth Provider Id"
+
+msgid "User Dashboard Config Id"
+msgstr "User Dashboard Config Id"
+
+msgid "Config Level"
+msgstr "Config Level"
+
+msgid "User Role"
+msgstr "User Role"
+
+msgid "Report Group"
+msgstr "Report Group"
+
+msgid "Report Type"
+msgstr "Report Type"
+
+msgid "Report Id"
+msgstr "Report Id"
+
+msgid "User Favourite Id"
+msgstr "User Favourite Id"
+
+msgid "External Link"
+msgstr "External Link"
+
+msgid "Fav Name"
+msgstr "Fav Name"
+
+msgid "Fav Group"
+msgstr "Fav Group"
+
+msgid "User Group Id"
+msgstr "User Group Id"
+
+msgid "User Group Code"
+msgstr "User Group Code"
+
+msgid "User Group Access Id"
+msgstr "User Group Access Id"
+
+msgid "User Password Reset Id"
+msgstr "User Password Reset Id"
+
+msgid "User Role Id"
+msgstr "User Role Id"
+
+msgid "User Supplier Id"
+msgstr "User Supplier Id"
+
+msgid "View Id"
+msgstr "View Id"
+
+msgid "View Name"
+msgstr "View Name"
+
+msgid "Custom Div Class"
+msgstr "Custom Div Class"
+
+msgid "Logical Settings"
+msgstr "Logical Settings"
+
+msgid "Query V"
+msgstr "Query V"
+
+msgid "Select V"
+msgstr "Select V"
+
+msgid "From V"
+msgstr "From V"
+
+msgid "Where V"
+msgstr "Where V"
+
+msgid "Group By V"
+msgstr "Group By V"
+
+msgid "Order By"
+msgstr "Order By"
+
+msgid "Query End"
+msgstr "Query End"
+
+msgid "Filters"
+msgstr "Filters"
+
+msgid "Page"
+msgstr "Page"
+
+msgid "Page Title"
+msgstr "Page Title"
+
+msgid "Page Header"
+msgstr "Page Header"
+
+msgid "Page Footer"
+msgstr "Page Footer"
+
+msgid "Use Pager Cb"
+msgstr "Use Pager Cb"
+
+msgid "Default Per Page"
+msgstr "Default Per Page"
+
+msgid "No Of Grid Columns"
+msgstr "No Of Grid Columns"
+
+msgid "Block Title"
+msgstr "Block Title"
+
+msgid "Show Graph Only Cb"
+msgstr "Show Graph Only Cb"
+
+msgid "Header Text"
+msgstr "Header Text"
+
+msgid "Footer Text"
+msgstr "Footer Text"
+
+msgid "Remove Default Header Cb"
+msgstr "Remove Default Header Cb"
+
+msgid "List Type"
+msgstr "List Type"
+
+msgid "Chart Type"
+msgstr "Chart Type"
+
+msgid "Chart Width"
+msgstr "Chart Width"
+
+msgid "Chart Height"
+msgstr "Chart Height"
+
+msgid "Chart Label"
+msgstr "Chart Label"
+
+msgid "Chart Value"
+msgstr "Chart Value"
+
+msgid "Chart Legend"
+msgstr "Chart Legend"
+
+msgid "View Path Id"
+msgstr "View Path Id"
+
+msgid "Column Name"
+msgstr "Column Name"
+
+msgid "Wip Accounting Group Id"
+msgstr "Wip Accounting Group Id"
+
+msgid "Wo Type"
+msgstr "Wo Type"
+
+msgid "Wip Accounting Group"
+msgstr "Wip Accounting Group"
+
+msgid "Var Material Ac Id"
+msgstr "Var Material Ac Id"
+
+msgid "Var Material Oh Ac Id"
+msgstr "Var Material Oh Ac Id"
+
+msgid "Var Overhead Ac Id"
+msgstr "Var Overhead Ac Id"
+
+msgid "Var Resource Ac Id"
+msgstr "Var Resource Ac Id"
+
+msgid "Var Osp Ac Id"
+msgstr "Var Osp Ac Id"
+
+msgid "Wip Control Id"
+msgstr "Wip Control Id"
+
+msgid "Default Accounting Group"
+msgstr "Default Accounting Group"
+
+msgid "Wo Number Type"
+msgstr "Wo Number Type"
+
+msgid "Allow One Operation Cb"
+msgstr "Allow One Operation Cb"
+
+msgid "Completion Subinventory Id"
+msgstr "Completion Subinventory Id"
+
+msgid "Completion Locator Id"
+msgstr "Completion Locator Id"
+
+msgid "Issue Subinventory Id"
+msgstr "Issue Subinventory Id"
+
+msgid "Issue Locator Id"
+msgstr "Issue Locator Id"
+
+msgid "So Change Effect"
+msgstr "So Change Effect"
+
+msgid "Auto Release Days"
+msgstr "Auto Release Days"
+
+msgid "Wip Move Transaction Id"
+msgstr "Wip Move Transaction Id"
+
+msgid "Wo Routing Line Id"
+msgstr "Wo Routing Line Id"
+
+msgid "Wo Routing Detail Id"
+msgstr "Wo Routing Detail Id"
+
+msgid "Wo Number"
+msgstr "Wo Number"
+
+msgid "From Routing Sequence"
+msgstr "From Routing Sequence"
+
+msgid "To Routing Sequence"
+msgstr "To Routing Sequence"
+
+msgid "From Operation Step"
+msgstr "From Operation Step"
+
+msgid "To Operation Step"
+msgstr "To Operation Step"
+
+msgid "Move Quantity"
+msgstr "Move Quantity"
+
+msgid "Scrap Account Id"
+msgstr "Scrap Account Id"
+
+msgid "Sales Order Header Id"
+msgstr "Sales Order Header Id"
+
+msgid "Sales Order Line Id"
+msgstr "Sales Order Line Id"
+
+msgid "Wip Resource Transaction Id"
+msgstr "Wip Resource Transaction Id"
+
+msgid "Wip Wo Routing Line Id"
+msgstr "Wip Wo Routing Line Id"
+
+msgid "Wip Wo Routing Detail Id"
+msgstr "Wip Wo Routing Detail Id"
+
+msgid "Required Quantity"
+msgstr "Required Quantity"
+
+msgid "Issued Quantity"
+msgstr "Issued Quantity"
+
+msgid "Wo Status"
+msgstr "Wo Status"
+
+msgid "Nettable Quantity"
+msgstr "Nettable Quantity"
+
+msgid "Reference Bom Item Id M"
+msgstr "Reference Bom Item Id M"
+
+msgid "Bom Exploded Cb"
+msgstr "Bom Exploded Cb"
+
+msgid "Routing Exploded Cb"
+msgstr "Routing Exploded Cb"
+
+msgid "Reference Routing Item Id M"
+msgstr "Reference Routing Item Id M"
+
+msgid "Completion Sub Inventory"
+msgstr "Completion Sub Inventory"
+
+msgid "Completed Quantity"
+msgstr "Completed Quantity"
+
+msgid "Scrapped Quantity"
+msgstr "Scrapped Quantity"
+
+msgid "Released Date"
+msgstr "Released Date"
+
+msgid "First Unit Completed Date"
+msgstr "First Unit Completed Date"
+
+msgid "Last Unit Completed Date"
+msgstr "Last Unit Completed Date"
+
+msgid "Schedule Group"
+msgstr "Schedule Group"
+
+msgid "Build Sequence"
+msgstr "Build Sequence"
+
+msgid "Line"
+msgstr "Line"
+
+msgid "Scheduling Priority"
+msgstr "Scheduling Priority"
+
+msgid "Closed Date"
+msgstr "Closed Date"
+
+msgid "Applied Quantity"
+msgstr "Applied Quantity"
+
+msgid "Queue Quantity"
+msgstr "Queue Quantity"
+
+msgid "Running Quantity"
+msgstr "Running Quantity"
+
+msgid "Rejected Quantity"
+msgstr "Rejected Quantity"
+
+msgid "Tomove Quantity"
+msgstr "Tomove Quantity"
+
+msgid "Progress Percentage"
+msgstr "Progress Percentage"
+
+msgid "Wip Wol Transaction Id"
+msgstr "Wip Wol Transaction Id"
+
+msgid "Search Paths"
+msgstr "Search Paths"
+
+msgid "All users"
+msgstr "All users"
+
+msgid "Search Users"
+msgstr "Search Users"
+
+msgid "New user registration"
+msgstr "New user registration"
+
+msgid "Registraion"
+msgstr "Registraion"
+
+msgid "Supplier"
+msgstr "Supplier"
+
+msgid "Options"
+msgstr "Options"
+
+msgid "Option"
+msgstr "Option"
+
+msgid "View all the options"
+msgstr "View all the options"
+
+msgid "View Options"
+msgstr "View Options"
+
+msgid "All modules"
+msgstr "All modules"
+
+msgid "View Modules"
+msgstr "View Modules"
+
+msgid "Module creation & update"
+msgstr "Module creation & update"
+
+msgid "Update Modules"
+msgstr "Update Modules"
+
+msgid "Organizations"
+msgstr "Organizations"
+
+msgid "Create & Update Enterprise"
+msgstr "Create & Update Enterprise"
+
+msgid "Enterprise"
+msgstr "Enterprise"
+
+msgid "Path - creation, update & delete"
+msgstr "Path - creation, update & delete"
+
+msgid "Create & Update Address"
+msgstr "Create & Update Address"
+
+msgid "Char of Account"
+msgstr "Char of Account"
+
+msgid "Chart Of Accounts"
+msgstr "Chart Of Accounts"
+
+msgid "GL Calendar"
+msgstr "GL Calendar"
+
+msgid "All chart of accounts"
+msgstr "All chart of accounts"
+
+msgid "Search Ac Combinations"
+msgstr "Search Ac Combinations"
+
+msgid "Char of account combinations"
+msgstr "Char of account combinations"
+
+msgid "Account Combination"
+msgstr "Account Combination"
+
+msgid "Legal Organization"
+msgstr "Legal Organization"
+
+msgid "Legal Org"
+msgstr "Legal Org"
+
+msgid "List of all Legal Orgs"
+msgstr "List of all Legal Orgs"
+
+msgid "Legal Orgs"
+msgstr "Legal Orgs"
+
+msgid "Business Organization"
+msgstr "Business Organization"
+
+msgid "Business Org"
+msgstr "Business Org"
+
+msgid "Inventory Organization"
+msgstr "Inventory Organization"
+
+msgid "Inventory Org"
+msgstr "Inventory Org"
+
+msgid "All inventory Orgs"
+msgstr "All inventory Orgs"
+
+msgid "Search Inventory"
+msgstr "Search Inventory"
+
+msgid "Search Business Org"
+msgstr "Search Business Org"
+
+msgid "Item Master"
+msgstr "Item Master"
+
+msgid "Search All Items"
+msgstr "Search All Items"
+
+msgid "Search Items"
+msgstr "Search Items"
+
+msgid "Unit of mesaures"
+msgstr "Unit of mesaures"
+
+msgid "View Unit of Measures"
+msgstr "View Unit of Measures"
+
+msgid "View UOM"
+msgstr "View UOM"
+
+msgid "Inventory Transaction Type"
+msgstr "Inventory Transaction Type"
+
+msgid "List of transaction types"
+msgstr "List of transaction types"
+
+msgid "Search Transaction Type"
+msgstr "Search Transaction Type"
+
+msgid "Sub Inventory"
+msgstr "Sub Inventory"
+
+msgid "Search All Sub Inventories"
+msgstr "Search All Sub Inventories"
+
+msgid "Search Subinventories"
+msgstr "Search Subinventories"
+
+msgid "Create & Update Locator"
+msgstr "Create & Update Locator"
+
+msgid "Inventory"
+msgstr "Inventory"
+
+msgid "Search Locator"
+msgstr "Search Locator"
+
+msgid "On hand Quantities"
+msgstr "On hand Quantities"
+
+msgid "On Hand"
+msgstr "On Hand"
+
+msgid "Inventory Transaction"
+msgstr "Inventory Transaction"
+
+msgid "create update page"
+msgstr "create update page"
+
+msgid "view all pages"
+msgstr "view all pages"
+
+msgid "Search Pages"
+msgstr "Search Pages"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Content Types"
+msgstr "Content Types"
+
+msgid "Search Content Type"
+msgstr "Search Content Type"
+
+msgid "Create & Update Content Type"
+msgstr "Create & Update Content Type"
+
+msgid "Create & Update Documents"
+msgstr "Create & Update Documents"
+
+msgid "Documentation"
+msgstr "Documentation"
+
+msgid "Create & Update blocks"
+msgstr "Create & Update blocks"
+
+msgid "Custom Block"
+msgstr "Custom Block"
+
+msgid "List of blocks"
+msgstr "List of blocks"
+
+msgid "All Blocks"
+msgstr "All Blocks"
+
+msgid "View, Create & Update categories"
+msgstr "View, Create & Update categories"
+
+msgid "Categories - List of all category"
+msgstr "Categories - List of all category"
+
+msgid "Search Categories"
+msgstr "Search Categories"
+
+msgid "Create & Update Forum"
+msgstr "Create & Update Forum"
+
+msgid "New Forum Topic"
+msgstr "New Forum Topic"
+
+msgid "Category Relationships"
+msgstr "Category Relationships"
+
+msgid "Category Relations"
+msgstr "Category Relations"
+
+msgid "Create & Updatecontent"
+msgstr "Create & Updatecontent"
+
+msgid "Write Content"
+msgstr "Write Content"
+
+msgid "Content Management - Create & Update Contents such as Forum, Article, etc"
+msgstr "Content Management - Create & Update Contents such as Forum, Article, etc"
+
+msgid "Content Management"
+msgstr "Content Management"
+
+msgid "Create & update view"
+msgstr "Create & update view"
+
+msgid "Custom Report (View)"
+msgstr "Custom Report (View)"
+
+msgid "List of views"
+msgstr "List of views"
+
+msgid "Search Custome Reports (Views)"
+msgstr "Search Custome Reports (Views)"
+
+msgid "view forum content type"
+msgstr "view forum content type"
+
+msgid "View forum"
+msgstr "View forum"
+
+msgid "Option lists"
+msgstr "Option lists"
+
+msgid "Search Options"
+msgstr "Search Options"
+
+msgid "Role Path"
+msgstr "Role Path"
+
+msgid "User - Creation & Update"
+msgstr "User - Creation & Update"
+
+msgid "User"
+msgstr "User"
+
+msgid "Json Basics"
+msgstr "Json Basics"
+
+msgid "Search Organizations"
+msgstr "Search Organizations"
+
+msgid "Search Orgs"
+msgstr "Search Orgs"
+
+msgid "View Address"
+msgstr "View Address"
+
+msgid "List of all enterprises"
+msgstr "List of all enterprises"
+
+msgid "Serach Enterprises"
+msgstr "Serach Enterprises"
+
+msgid "Search All Inventory Transactions"
+msgstr "Search All Inventory Transactions"
+
+msgid "Search Transactions"
+msgstr "Search Transactions"
+
+msgid "Purchase Order"
+msgstr "Purchase Order"
+
+msgid "Payment Terms"
+msgstr "Payment Terms"
+
+msgid "Search Payment Term"
+msgstr "Search Payment Term"
+
+msgid "All Purchased Orders"
+msgstr "All Purchased Orders"
+
+msgid "Search PO Headers"
+msgstr "Search PO Headers"
+
+msgid "All expected receipts"
+msgstr "All expected receipts"
+
+msgid "Expected Receipts"
+msgstr "Expected Receipts"
+
+msgid "All POs"
+msgstr "All POs"
+
+msgid "Search POs"
+msgstr "Search POs"
+
+msgid "All setups"
+msgstr "All setups"
+
+msgid "Setup"
+msgstr "Setup"
+
+msgid "Receipt POs, IRs and RMAs"
+msgstr "Receipt POs, IRs and RMAs"
+
+msgid "Inventory Receipt"
+msgstr "Inventory Receipt"
+
+msgid "All Receipts"
+msgstr "All Receipts"
+
+msgid "View Inv Receipts"
+msgstr "View Inv Receipts"
+
+msgid "Search Inventory Receipt"
+msgstr "Search Inventory Receipt"
+
+msgid "Search Inv Receipts"
+msgstr "Search Inv Receipts"
+
+msgid "Bill of materials"
+msgstr "Bill of materials"
+
+msgid "Search All BOMs"
+msgstr "Search All BOMs"
+
+msgid "Search BOM"
+msgstr "Search BOM"
+
+msgid "Create & Update Resources"
+msgstr "Create & Update Resources"
+
+msgid "All Resources"
+msgstr "All Resources"
+
+msgid "Search Resources"
+msgstr "Search Resources"
+
+msgid "Create & Update Cost Type"
+msgstr "Create & Update Cost Type"
+
+msgid "All Cost Types"
+msgstr "All Cost Types"
+
+msgid "Cost Types"
+msgstr "Cost Types"
+
+msgid "Search Material Elements"
+msgstr "Search Material Elements"
+
+msgid "Overhead - Resource & Material"
+msgstr "Overhead - Resource & Material"
+
+msgid "All Over heads"
+msgstr "All Over heads"
+
+msgid "Search Overhead"
+msgstr "Search Overhead"
+
+msgid "Create & Update Department"
+msgstr "Create & Update Department"
+
+msgid "All Departments"
+msgstr "All Departments"
+
+msgid "Search Department"
+msgstr "Search Department"
+
+msgid "Search Standard Operation"
+msgstr "Search Standard Operation"
+
+msgid "Create & Update Routing"
+msgstr "Create & Update Routing"
+
+msgid "Routing"
+msgstr "Routing"
+
+msgid "Search Routing"
+msgstr "Search Routing"
+
+msgid "Work In Process"
+msgstr "Work In Process"
+
+msgid "Create & Update Work Order"
+msgstr "Create & Update Work Order"
+
+msgid "Work Order"
+msgstr "Work Order"
+
+msgid "Search Work Orders"
+msgstr "Search Work Orders"
+
+msgid "Search Work Order"
+msgstr "Search Work Order"
+
+msgid "Work Order Move Transaction"
+msgstr "Work Order Move Transaction"
+
+msgid "WO Move Transaction"
+msgstr "WO Move Transaction"
+
+msgid "Search Move Transactions"
+msgstr "Search Move Transactions"
+
+msgid "Resource Transaction"
+msgstr "Resource Transaction"
+
+msgid "Search Resource Transaction"
+msgstr "Search Resource Transaction"
+
+msgid "WIP Material Transaction"
+msgstr "WIP Material Transaction"
+
+msgid "WO Inv Transaction"
+msgstr "WO Inv Transaction"
+
+msgid "WIP Work Order Completion & Return"
+msgstr "WIP Work Order Completion & Return"
+
+msgid "WO Completion/Return"
+msgstr "WO Completion/Return"
+
+msgid "Accounts Receivable"
+msgstr "Accounts Receivable"
+
+msgid "Customer"
+msgstr "Customer"
+
+msgid "Search Customer View"
+msgstr "Search Customer View"
+
+msgid "Search Customer"
+msgstr "Search Customer"
+
+msgid "Create & UpdatenewContent"
+msgstr "Create & UpdatenewContent"
+
+msgid "unused1"
+msgstr "unused1"
+
+msgid "Create & Updateissue"
+msgstr "Create & Updateissue"
+
+msgid "Issue Log"
+msgstr "Issue Log"
+
+msgid "Create Contents"
+msgstr "Create Contents"
+
+msgid "All Forums"
+msgstr "All Forums"
+
+msgid "Forums"
+msgstr "Forums"
+
+msgid "All Issues"
+msgstr "All Issues"
+
+msgid "Issue Logs"
+msgstr "Issue Logs"
+
+msgid "All Documentations"
+msgstr "All Documentations"
+
+msgid "Read Documentation"
+msgstr "Read Documentation"
+
+msgid "All Contents"
+msgstr "All Contents"
+
+msgid "Read Articles"
+msgstr "Read Articles"
+
+msgid "Json user"
+msgstr "Json user"
+
+msgid "Value Group Header"
+msgstr "Value Group Header"
+
+msgid "Create & Update Value Groups"
+msgstr "Create & Update Value Groups"
+
+msgid "Search Value Groups"
+msgstr "Search Value Groups"
+
+msgid "All Calendars"
+msgstr "All Calendars"
+
+msgid "Search Calendar"
+msgstr "Search Calendar"
+
+msgid "General Ledger"
+msgstr "General Ledger"
+
+msgid "Create update & ledger"
+msgstr "Create update & ledger"
+
+msgid "Serach Ledgers"
+msgstr "Serach Ledgers"
+
+msgid "Search Ledgers"
+msgstr "Search Ledgers"
+
+msgid "All Search Links"
+msgstr "All Search Links"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "View Value Group"
+msgstr "View Value Group"
+
+msgid "System"
+msgstr "System"
+
+msgid "View all BOMs"
+msgstr "View all BOMs"
+
+msgid "View BOM"
+msgstr "View BOM"
+
+msgid "View BOM Cost Type"
+msgstr "View BOM Cost Type"
+
+msgid "View BOM Departments"
+msgstr "View BOM Departments"
+
+msgid "View Departments"
+msgstr "View Departments"
+
+msgid "Mass Upload Home Page"
+msgstr "Mass Upload Home Page"
+
+msgid "Mass Upload"
+msgstr "Mass Upload"
+
+msgid "Mass Upload - Option Detail"
+msgstr "Mass Upload - Option Detail"
+
+msgid "Mass Upload - Option Lines"
+msgstr "Mass Upload - Option Lines"
+
+msgid "Mass Upload - Option Header"
+msgstr "Mass Upload - Option Header"
+
+msgid "View All PO"
+msgstr "View All PO"
+
+msgid "View Purchase Order"
+msgstr "View Purchase Order"
+
+msgid "View Legal Orgs"
+msgstr "View Legal Orgs"
+
+msgid "View Chart Of Accounts"
+msgstr "View Chart Of Accounts"
+
+msgid "View COA"
+msgstr "View COA"
+
+msgid "Search Chart Of Accounts"
+msgstr "Search Chart Of Accounts"
+
+msgid "Search COA"
+msgstr "Search COA"
+
+msgid "View Calendar"
+msgstr "View Calendar"
+
+msgid "Mass Upload Calendar"
+msgstr "Mass Upload Calendar"
+
+msgid "View Account Combination"
+msgstr "View Account Combination"
+
+msgid "View Ac Combination"
+msgstr "View Ac Combination"
+
+msgid "Mass Upload COA Combination"
+msgstr "Mass Upload COA Combination"
+
+msgid "Mass Upload GL Ledger"
+msgstr "Mass Upload GL Ledger"
+
+msgid "Mass Upload Ledger"
+msgstr "Mass Upload Ledger"
+
+msgid "View Ledger"
+msgstr "View Ledger"
+
+msgid "Create & Review GL Journals"
+msgstr "Create & Review GL Journals"
+
+msgid "Journal"
+msgstr "Journal"
+
+msgid "Open and Close GL Periods"
+msgstr "Open and Close GL Periods"
+
+msgid "GL Period"
+msgstr "GL Period"
+
+msgid "View GL Period Statuses"
+msgstr "View GL Period Statuses"
+
+msgid "View Periods"
+msgstr "View Periods"
+
+msgid "Serach GL Periods"
+msgstr "Serach GL Periods"
+
+msgid "Serach Periods"
+msgstr "Serach Periods"
+
+msgid "Search Journals"
+msgstr "Search Journals"
+
+msgid "Mass Upload GL Journal Header"
+msgstr "Mass Upload GL Journal Header"
+
+msgid "Upload Journal Header"
+msgstr "Upload Journal Header"
+
+msgid "Upload Mass Journal Lines"
+msgstr "Upload Mass Journal Lines"
+
+msgid "Upload Journal Lines"
+msgstr "Upload Journal Lines"
+
+msgid "GL Balance View"
+msgstr "GL Balance View"
+
+msgid "GL Balance From Base Table"
+msgstr "GL Balance From Base Table"
+
+msgid "GL Balance"
+msgstr "GL Balance"
+
+msgid "Search Journal Lines"
+msgstr "Search Journal Lines"
+
+msgid "Accounts Payable"
+msgstr "Accounts Payable"
+
+msgid "View Business Org"
+msgstr "View Business Org"
+
+msgid "Search Address"
+msgstr "Search Address"
+
+msgid "Mass Upload Address"
+msgstr "Mass Upload Address"
+
+msgid "Create & Update AP Transaction"
+msgstr "Create & Update AP Transaction"
+
+msgid "AP Transaction"
+msgstr "AP Transaction"
+
+msgid "Search Transaction"
+msgstr "Search Transaction"
+
+msgid "Transaction Header"
+msgstr "Transaction Header"
+
+msgid "Create Accounting"
+msgstr "Create Accounting"
+
+msgid "Create AP Trnx Accounting"
+msgstr "Create AP Trnx Accounting"
+
+msgid "Mass Upload AP Transaction Header"
+msgstr "Mass Upload AP Transaction Header"
+
+msgid "Mass Upload AP Transaction Line"
+msgstr "Mass Upload AP Transaction Line"
+
+msgid "Mass Upload AP Transaction Detail"
+msgstr "Mass Upload AP Transaction Detail"
+
+msgid "All Payments"
+msgstr "All Payments"
+
+msgid "Payment"
+msgstr "Payment"
+
+msgid "Search Payment"
+msgstr "Search Payment"
+
+msgid "Payment Header"
+msgstr "Payment Header"
+
+msgid "Confirm Payment"
+msgstr "Confirm Payment"
+
+msgid "Create AP Payment Accounting"
+msgstr "Create AP Payment Accounting"
+
+msgid "AP Payment Accounting"
+msgstr "AP Payment Accounting"
+
+msgid "Mass Upload Payment Header"
+msgstr "Mass Upload Payment Header"
+
+msgid "Upload Payment Header"
+msgstr "Upload Payment Header"
+
+msgid "Mass Upload Payment Line"
+msgstr "Mass Upload Payment Line"
+
+msgid "Upload Payment Line"
+msgstr "Upload Payment Line"
+
+msgid "Mass Upload Customer"
+msgstr "Mass Upload Customer"
+
+msgid "Upload Customer"
+msgstr "Upload Customer"
+
+msgid "Mass Upload Customer Site"
+msgstr "Mass Upload Customer Site"
+
+msgid "Upload Customer Site"
+msgstr "Upload Customer Site"
+
+msgid "Account Receviable Transactions"
+msgstr "Account Receviable Transactions"
+
+msgid "AR Transaction"
+msgstr "AR Transaction"
+
+msgid "Search ReceivableTransaction"
+msgstr "Search ReceivableTransaction"
+
+msgid "Search AR Transaction"
+msgstr "Search AR Transaction"
+
+msgid "Creaet Receviable Accounting"
+msgstr "Creaet Receviable Accounting"
+
+msgid "AR Transaction Accounting"
+msgstr "AR Transaction Accounting"
+
+msgid "Mass Upload AR Transaction"
+msgstr "Mass Upload AR Transaction"
+
+msgid "Upload AR Transaction"
+msgstr "Upload AR Transaction"
+
+msgid "Upload AR Transaction Line"
+msgstr "Upload AR Transaction Line"
+
+msgid "Upload AR Transaction Detail"
+msgstr "Upload AR Transaction Detail"
+
+msgid "AR Receipt"
+msgstr "AR Receipt"
+
+msgid "AR Multi Receipt"
+msgstr "AR Multi Receipt"
+
+msgid "Multi Receipt"
+msgstr "Multi Receipt"
+
+msgid "Confirm AR Multi Receipt"
+msgstr "Confirm AR Multi Receipt"
+
+msgid "Confirm Multi Receipt"
+msgstr "Confirm Multi Receipt"
+
+msgid "Search AR Receipt"
+msgstr "Search AR Receipt"
+
+msgid "Create AR Receipt Accounting"
+msgstr "Create AR Receipt Accounting"
+
+msgid "AR Receipt Accounting"
+msgstr "AR Receipt Accounting"
+
+msgid "Mass Upload AR Receipt Header"
+msgstr "Mass Upload AR Receipt Header"
+
+msgid "Upload AR Receipt Header"
+msgstr "Upload AR Receipt Header"
+
+msgid "Mass Upload Receipt Line"
+msgstr "Mass Upload Receipt Line"
+
+msgid "Upload Receipt Line"
+msgstr "Upload Receipt Line"
+
+msgid "View AR Receipt"
+msgstr "View AR Receipt"
+
+msgid "View Customer"
+msgstr "View Customer"
+
+msgid "View AR Transaction"
+msgstr "View AR Transaction"
+
+msgid "Sales & Distribution"
+msgstr "Sales & Distribution"
+
+msgid "Create & Update Sales Order"
+msgstr "Create & Update Sales Order"
+
+msgid "Sales Order"
+msgstr "Sales Order"
+
+msgid "Search Sales Order"
+msgstr "Search Sales Order"
+
+msgid "Search SO"
+msgstr "Search SO"
+
+msgid "View Sales Order"
+msgstr "View Sales Order"
+
+msgid "View SO"
+msgstr "View SO"
+
+msgid "View All Organizations"
+msgstr "View All Organizations"
+
+msgid "View Orgs"
+msgstr "View Orgs"
+
+msgid "Mass Upload Orgs"
+msgstr "Mass Upload Orgs"
+
+msgid "Upload Orgs"
+msgstr "Upload Orgs"
+
+msgid "View Enterprises"
+msgstr "View Enterprises"
+
+msgid "View Enterprise"
+msgstr "View Enterprise"
+
+msgid "View Inventory Org"
+msgstr "View Inventory Org"
+
+msgid "View Inventory"
+msgstr "View Inventory"
+
+msgid "View Item"
+msgstr "View Item"
+
+msgid "Mass Upload Items"
+msgstr "Mass Upload Items"
+
+msgid "Upload Items"
+msgstr "Upload Items"
+
+msgid "Mass Upload Subinventories"
+msgstr "Mass Upload Subinventories"
+
+msgid "Upload Subinventory"
+msgstr "Upload Subinventory"
+
+msgid "Multi Action Subinventory"
+msgstr "Multi Action Subinventory"
+
+msgid "Multi Action-Subinventory"
+msgstr "Multi Action-Subinventory"
+
+msgid "View Locator"
+msgstr "View Locator"
+
+msgid "Multi Action - Locators"
+msgstr "Multi Action - Locators"
+
+msgid "Mass Uplaod Locators"
+msgstr "Mass Uplaod Locators"
+
+msgid "Upload Locators"
+msgstr "Upload Locators"
+
+msgid "View Sub Inventory"
+msgstr "View Sub Inventory"
+
+msgid "Search UOM"
+msgstr "Search UOM"
+
+msgid "Multi Action-UOM"
+msgstr "Multi Action-UOM"
+
+msgid "Mass Upload UOM"
+msgstr "Mass Upload UOM"
+
+msgid "Upload UOM"
+msgstr "Upload UOM"
+
+msgid "PO Multi Action Receipt"
+msgstr "PO Multi Action Receipt"
+
+msgid "Multi Action Receipt"
+msgstr "Multi Action Receipt"
+
+msgid "Mass Upload BOM Header"
+msgstr "Mass Upload BOM Header"
+
+msgid "Upload BOM Header"
+msgstr "Upload BOM Header"
+
+msgid "Mass Upload BOM Line"
+msgstr "Mass Upload BOM Line"
+
+msgid "Upload BOM Line"
+msgstr "Upload BOM Line"
+
+msgid "View Resources"
+msgstr "View Resources"
+
+msgid "View Resource"
+msgstr "View Resource"
+
+msgid "Mass Upload BOM Cost Type"
+msgstr "Mass Upload BOM Cost Type"
+
+msgid "Upload Cost Type"
+msgstr "Upload Cost Type"
+
+msgid "Mass Upload Resource"
+msgstr "Mass Upload Resource"
+
+msgid "Upload Resources"
+msgstr "Upload Resources"
+
+msgid "View BOM Material Element"
+msgstr "View BOM Material Element"
+
+msgid "View Material Element"
+msgstr "View Material Element"
+
+msgid "View Over Head"
+msgstr "View Over Head"
+
+msgid "Mass Upload Department"
+msgstr "Mass Upload Department"
+
+msgid "Upload Department"
+msgstr "Upload Department"
+
+msgid "View Standard Operation"
+msgstr "View Standard Operation"
+
+msgid "View Routing"
+msgstr "View Routing"
+
+msgid "Mass Upload Routing Header"
+msgstr "Mass Upload Routing Header"
+
+msgid "Upload Routing Header"
+msgstr "Upload Routing Header"
+
+msgid "Mass Upload Routing Line"
+msgstr "Mass Upload Routing Line"
+
+msgid "Upload Routing Line"
+msgstr "Upload Routing Line"
+
+msgid "Mass Upload Routing Detail"
+msgstr "Mass Upload Routing Detail"
+
+msgid "Upload Routing Detail"
+msgstr "Upload Routing Detail"
+
+msgid "View Work Order"
+msgstr "View Work Order"
+
+msgid "Mass Upload Work Order"
+msgstr "Mass Upload Work Order"
+
+msgid "Upload Work Order"
+msgstr "Upload Work Order"
+
+msgid "Mass Upload WIP Material Transaction"
+msgstr "Mass Upload WIP Material Transaction"
+
+msgid "Upload WO Inv Transaction"
+msgstr "Upload WO Inv Transaction"
+
+msgid "Search WIP Material Transaction"
+msgstr "Search WIP Material Transaction"
+
+msgid "Search WO Inv Transaction"
+msgstr "Search WO Inv Transaction"
+
+msgid "View Resource Trnx"
+msgstr "View Resource Trnx"
+
+msgid "Costing"
+msgstr "Costing"
+
+msgid "Create & View Item Cost"
+msgstr "Create & View Item Cost"
+
+msgid "Item Cost"
+msgstr "Item Cost"
+
+msgid "View Item Cost"
+msgstr "View Item Cost"
+
+msgid "Search Item Cost"
+msgstr "Search Item Cost"
+
+msgid "Standard Cost Upate"
+msgstr "Standard Cost Upate"
+
+msgid "Cost Update"
+msgstr "Cost Update"
+
+msgid "Search BOM view"
+msgstr "Search BOM view"
+
+msgid "Search BOM V"
+msgstr "Search BOM V"
+
+msgid "Indented BOM"
+msgstr "Indented BOM"
+
+msgid "Program - Standard Cost Update"
+msgstr "Program - Standard Cost Update"
+
+msgid "Prg Cost Update"
+msgstr "Prg Cost Update"
+
+msgid "Search All Programs Requests"
+msgstr "Search All Programs Requests"
+
+msgid "Search Program Requests"
+msgstr "Search Program Requests"
+
+msgid "Start Program"
+msgstr "Start Program"
+
+msgid "Start Main Program"
+msgstr "Start Main Program"
+
+msgid "Item Cost Rollup"
+msgstr "Item Cost Rollup"
+
+msgid "Cost Rollup"
+msgstr "Cost Rollup"
+
+msgid "Cost Rollup Program"
+msgstr "Cost Rollup Program"
+
+msgid "Prg Cost RollUp"
+msgstr "Prg Cost RollUp"
+
+msgid "Check for circular BOM"
+msgstr "Check for circular BOM"
+
+msgid "Check Circular BOM"
+msgstr "Check Circular BOM"
+
+msgid "Search Item Cost View"
+msgstr "Search Item Cost View"
+
+msgid "Search Item Cost V"
+msgstr "Search Item Cost V"
+
+msgid "Create & Update Requisition"
+msgstr "Create & Update Requisition"
+
+msgid "Requisition"
+msgstr "Requisition"
+
+msgid "View Requisition"
+msgstr "View Requisition"
+
+msgid "Search Requisition"
+msgstr "Search Requisition"
+
+msgid "All Programs"
+msgstr "All Programs"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "Search WIP Accounting Group"
+msgstr "Search WIP Accounting Group"
+
+msgid "Search Accounting Group"
+msgstr "Search Accounting Group"
+
+msgid "View Users"
+msgstr "View Users"
+
+msgid "View User"
+msgstr "View User"
+
+msgid "Convert Requisition To Po"
+msgstr "Convert Requisition To Po"
+
+msgid "Convert Requisition"
+msgstr "Convert Requisition"
+
+msgid "Supplier View Search"
+msgstr "Supplier View Search"
+
+msgid "Supplier V Search"
+msgstr "Supplier V Search"
+
+msgid "View Sourcing Rule"
+msgstr "View Sourcing Rule"
+
+msgid "Search Sourcing Rule"
+msgstr "Search Sourcing Rule"
+
+msgid "Serach Req Header"
+msgstr "Serach Req Header"
+
+msgid "Forecast & Planning"
+msgstr "Forecast & Planning"
+
+msgid "Create & Update Forecast"
+msgstr "Create & Update Forecast"
+
+msgid "View Forecast"
+msgstr "View Forecast"
+
+msgid "Search Forecast"
+msgstr "Search Forecast"
+
+msgid "Create & Update Source List"
+msgstr "Create & Update Source List"
+
+msgid "Search FP Source List"
+msgstr "Search FP Source List"
+
+msgid "Min Max Planner"
+msgstr "Min Max Planner"
+
+msgid "Search Min Max Planner"
+msgstr "Search Min Max Planner"
+
+msgid "Search MinMax Planner"
+msgstr "Search MinMax Planner"
+
+msgid "Min Max Demand"
+msgstr "Min Max Demand"
+
+msgid "Min Max Planner Suggestions"
+msgstr "Min Max Planner Suggestions"
+
+msgid "Calculate Min Max Numbers"
+msgstr "Calculate Min Max Numbers"
+
+msgid "Update Item Min Max Parameters"
+msgstr "Update Item Min Max Parameters"
+
+msgid "Min Max Planner Work Bench"
+msgstr "Min Max Planner Work Bench"
+
+msgid "Create Supply - MinMax Program"
+msgstr "Create Supply - MinMax Program"
+
+msgid "Create Supply - MinMax"
+msgstr "Create Supply - MinMax"
+
+msgid "View Requisition Interface Lines"
+msgstr "View Requisition Interface Lines"
+
+msgid "View Requisition Interface"
+msgstr "View Requisition Interface"
+
+msgid "Import All Requisition"
+msgstr "Import All Requisition"
+
+msgid "Import Requisition"
+msgstr "Import Requisition"
+
+msgid "Purchasing Control"
+msgstr "Purchasing Control"
+
+msgid "Material Requirement Planning"
+msgstr "Material Requirement Planning"
+
+msgid "MRP"
+msgstr "MRP"
+
+msgid "Master Demand Schedule"
+msgstr "Master Demand Schedule"
+
+msgid "MDS"
+msgstr "MDS"
+
+msgid "Search MDS"
+msgstr "Search MDS"
+
+msgid "Search MRP"
+msgstr "Search MRP"
+
+msgid "Calculate MRP Demand"
+msgstr "Calculate MRP Demand"
+
+msgid "View MRP Demand"
+msgstr "View MRP Demand"
+
+msgid "Copy/Merge/Load MDS"
+msgstr "Copy/Merge/Load MDS"
+
+msgid "Load MDS"
+msgstr "Load MDS"
+
+msgid "MRP Planned Orders"
+msgstr "MRP Planned Orders"
+
+msgid "Planned Orders"
+msgstr "Planned Orders"
+
+msgid "MRP Work Bench"
+msgstr "MRP Work Bench"
+
+msgid "MRP Exceptions"
+msgstr "MRP Exceptions"
+
+msgid "Pick Sales Order"
+msgstr "Pick Sales Order"
+
+msgid "Sales Order Shipping Control"
+msgstr "Sales Order Shipping Control"
+
+msgid "Shipping Control"
+msgstr "Shipping Control"
+
+msgid "Reports & Analysis"
+msgstr "Reports & Analysis"
+
+msgid "RA"
+msgstr "RA"
+
+msgid "Onhand By Subinventory"
+msgstr "Onhand By Subinventory"
+
+msgid "Onhand Analysis"
+msgstr "Onhand Analysis"
+
+msgid "Purchasing Analysis"
+msgstr "Purchasing Analysis"
+
+msgid "Item & product Line Analysis"
+msgstr "Item & product Line Analysis"
+
+msgid "Item & Product Line"
+msgstr "Item & Product Line"
+
+msgid "WIP Value Analysis"
+msgstr "WIP Value Analysis"
+
+msgid "Ship Sales Orders"
+msgstr "Ship Sales Orders"
+
+msgid "Ship Sales Order"
+msgstr "Ship Sales Order"
+
+msgid "TAX Codes & Rates"
+msgstr "TAX Codes & Rates"
+
+msgid "TAX Codes"
+msgstr "TAX Codes"
+
+msgid "Tax Regions"
+msgstr "Tax Regions"
+
+msgid "Tax Region"
+msgstr "Tax Region"
+
+msgid "Search Blocks"
+msgstr "Search Blocks"
+
+msgid "Role Access"
+msgstr "Role Access"
+
+msgid "All Extensions"
+msgstr "All Extensions"
+
+msgid "Search All Comments"
+msgstr "Search All Comments"
+
+msgid "Search Comment"
+msgstr "Search Comment"
+
+msgid "Review & Update Comments"
+msgstr "Review & Update Comments"
+
+msgid "Comments Multi Action"
+msgstr "Comments Multi Action"
+
+msgid "Multi Action - Content Type"
+msgstr "Multi Action - Content Type"
+
+msgid "Search All Contents"
+msgstr "Search All Contents"
+
+msgid "Search Contents"
+msgstr "Search Contents"
+
+msgid "Basis Site Information"
+msgstr "Basis Site Information"
+
+msgid "Site Information"
+msgstr "Site Information"
+
+msgid "Price List Header"
+msgstr "Price List Header"
+
+msgid "Search Price Lists"
+msgstr "Search Price Lists"
+
+msgid "Search Price List"
+msgstr "Search Price List"
+
+msgid "Search Price List Line"
+msgstr "Search Price List Line"
+
+msgid "Profile"
+msgstr "Profile"
+
+msgid "Search Profile"
+msgstr "Search Profile"
+
+msgid "Sales Document Type"
+msgstr "Sales Document Type"
+
+msgid "Search Sales Document Type"
+msgstr "Search Sales Document Type"
+
+msgid "Search SD Document Type"
+msgstr "Search SD Document Type"
+
+msgid "Create & Update Process Flow"
+msgstr "Create & Update Process Flow"
+
+msgid "Search Delivries"
+msgstr "Search Delivries"
+
+msgid "Sales Deliveries"
+msgstr "Sales Deliveries"
+
+msgid "Search URL Alias"
+msgstr "Search URL Alias"
+
+msgid "search.php?class_name=ar_transaction_type"
+msgstr "search.php?class_name=ar_transaction_type"
+
+msgid "Search AR Transaction Type"
+msgstr "Search AR Transaction Type"
+
+msgid "Search AR Transaction Source"
+msgstr "Search AR Transaction Source"
+
+msgid "Purchasing"
+msgstr "Purchasing"
+
+msgid "Suppliers"
+msgstr "Suppliers"
+
+msgid "Setups"
+msgstr "Setups"
+
+msgid "AR Transaction Interface"
+msgstr "AR Transaction Interface"
+
+msgid "Transaction Interface"
+msgstr "Transaction Interface"
+
+msgid "All AR Programs"
+msgstr "All AR Programs"
+
+msgid "Programs"
+msgstr "Programs"
+
+msgid "Import Transaction"
+msgstr "Import Transaction"
+
+msgid "Unpaid Transactions"
+msgstr "Unpaid Transactions"
+
+msgid "Create & Update Bank"
+msgstr "Create & Update Bank"
+
+msgid "Bank"
+msgstr "Bank"
+
+msgid "Search Banks"
+msgstr "Search Banks"
+
+msgid "Generic Organization"
+msgstr "Generic Organization"
+
+msgid "Bank Account"
+msgstr "Bank Account"
+
+msgid "Search Bank Account"
+msgstr "Search Bank Account"
+
+msgid "Search Bank View"
+msgstr "Search Bank View"
+
+msgid "Search Bank V"
+msgstr "Search Bank V"
+
+msgid "AR Receipt Source"
+msgstr "AR Receipt Source"
+
+msgid "Search AR Receipt Source"
+msgstr "Search AR Receipt Source"
+
+msgid "Search Receipt Source"
+msgstr "Search Receipt Source"
+
+msgid "Search Customer Header"
+msgstr "Search Customer Header"
+
+msgid "Bank Account View"
+msgstr "Bank Account View"
+
+msgid "Inventory Setup"
+msgstr "Inventory Setup"
+
+msgid "ABC Valuation"
+msgstr "ABC Valuation"
+
+msgid "Inventory ABC Valuation"
+msgstr "Inventory ABC Valuation"
+
+msgid "Search ABC Valuation"
+msgstr "Search ABC Valuation"
+
+msgid "Inventory Programs"
+msgstr "Inventory Programs"
+
+msgid "New ABC Valuation"
+msgstr "New ABC Valuation"
+
+msgid "ABC Valuation Result"
+msgstr "ABC Valuation Result"
+
+msgid "Valuation Result"
+msgstr "Valuation Result"
+
+msgid "MRP View"
+msgstr "MRP View"
+
+msgid "MRP Demand View"
+msgstr "MRP Demand View"
+
+msgid "ABC Assignment"
+msgstr "ABC Assignment"
+
+msgid "Search ABC Assignment"
+msgstr "Search ABC Assignment"
+
+msgid "Inventory Count"
+msgstr "Inventory Count"
+
+msgid "Count Entries - Cycle Count & Physical Inventort"
+msgstr "Count Entries - Cycle Count & Physical Inventort"
+
+msgid "Count Entries"
+msgstr "Count Entries"
+
+msgid "Search Count Schedule"
+msgstr "Search Count Schedule"
+
+msgid "Search Count Entries"
+msgstr "Search Count Entries"
+
+msgid "Approve Count Entries"
+msgstr "Approve Count Entries"
+
+msgid "Inter Org Transfer"
+msgstr "Inter Org Transfer"
+
+msgid "Search Inter Org Transfer"
+msgstr "Search Inter Org Transfer"
+
+msgid "GL Setup"
+msgstr "GL Setup"
+
+msgid "Currency Conversion"
+msgstr "Currency Conversion"
+
+msgid "View Currency Conversion"
+msgstr "View Currency Conversion"
+
+msgid "Search Currency Conversion"
+msgstr "Search Currency Conversion"
+
+msgid "Purchaing Setup"
+msgstr "Purchaing Setup"
+
+msgid "Human Resource"
+msgstr "Human Resource"
+
+msgid "Employee"
+msgstr "Employee"
+
+msgid "Organization Jobs"
+msgstr "Organization Jobs"
+
+msgid "Job"
+msgstr "Job"
+
+msgid "Search Job"
+msgstr "Search Job"
+
+msgid "HR Positions"
+msgstr "HR Positions"
+
+msgid "Search Position"
+msgstr "Search Position"
+
+msgid "Position Hierarchy"
+msgstr "Position Hierarchy"
+
+msgid "Hierarchy"
+msgstr "Hierarchy"
+
+msgid "Search Hierarchy"
+msgstr "Search Hierarchy"
+
+msgid "Compensation Element"
+msgstr "Compensation Element"
+
+msgid "Search Compensation Element"
+msgstr "Search Compensation Element"
+
+msgid "Search Element"
+msgstr "Search Element"
+
+msgid "Employee Element Entry Assignment"
+msgstr "Employee Element Entry Assignment"
+
+msgid "Element Entry / Assignment"
+msgstr "Element Entry / Assignment"
+
+msgid "Search Element Entry"
+msgstr "Search Element Entry"
+
+msgid "Search Employee"
+msgstr "Search Employee"
+
+msgid "Employee Education"
+msgstr "Employee Education"
+
+msgid "Education"
+msgstr "Education"
+
+msgid "Experience"
+msgstr "Experience"
+
+msgid "Termination"
+msgstr "Termination"
+
+msgid "Employee Salary"
+msgstr "Employee Salary"
+
+msgid "Payroll Setup"
+msgstr "Payroll Setup"
+
+msgid "Payroll Payment Method"
+msgstr "Payroll Payment Method"
+
+msgid "Search Payroll Payment Methods"
+msgstr "Search Payroll Payment Methods"
+
+msgid "HR Payroll"
+msgstr "HR Payroll"
+
+msgid "Search Payroll"
+msgstr "Search Payroll"
+
+msgid "Leave Types"
+msgstr "Leave Types"
+
+msgid "Search Leave Type"
+msgstr "Search Leave Type"
+
+msgid "Leave Balance"
+msgstr "Leave Balance"
+
+msgid "Approval Limit"
+msgstr "Approval Limit"
+
+msgid "Search Approval Limit"
+msgstr "Search Approval Limit"
+
+msgid "Approval Object"
+msgstr "Approval Object"
+
+msgid "Search Approval Object"
+msgstr "Search Approval Object"
+
+msgid "Approval Limit Assignment"
+msgstr "Approval Limit Assignment"
+
+msgid "Notifications"
+msgstr "Notifications"
+
+msgid "Search Notification"
+msgstr "Search Notification"
+
+msgid "Apply Leave Self Service"
+msgstr "Apply Leave Self Service"
+
+msgid "Apply Leave - SS"
+msgstr "Apply Leave - SS"
+
+msgid "Search Leave"
+msgstr "Search Leave"
+
+msgid "Definen Block"
+msgstr "Definen Block"
+
+msgid "My Notifications"
+msgstr "My Notifications"
+
+msgid "User Leave Blalance"
+msgstr "User Leave Blalance"
+
+msgid "Leave Blalance"
+msgstr "Leave Blalance"
+
+msgid "Search All Leave"
+msgstr "Search All Leave"
+
+msgid "Leave Entitlement"
+msgstr "Leave Entitlement"
+
+msgid "Search Leave Entitlement"
+msgstr "Search Leave Entitlement"
+
+msgid "User Position View"
+msgstr "User Position View"
+
+msgid "Blanket Release"
+msgstr "Blanket Release"
+
+msgid "Document Sequence"
+msgstr "Document Sequence"
+
+msgid "Approved Supplier List"
+msgstr "Approved Supplier List"
+
+msgid "Search ASL"
+msgstr "Search ASL"
+
+msgid "ASL Document"
+msgstr "ASL Document"
+
+msgid "Search Blanket"
+msgstr "Search Blanket"
+
+msgid "form.php?class_name=sys_hold&mode=9"
+msgstr "form.php?class_name=sys_hold&mode=9"
+
+msgid "System Hold"
+msgstr "System Hold"
+
+msgid "Search Hold"
+msgstr "Search Hold"
+
+msgid "Release Hold"
+msgstr "Release Hold"
+
+msgid "Docs on Hold"
+msgstr "Docs on Hold"
+
+msgid "RFQ"
+msgstr "RFQ"
+
+msgid "RFQ & Quotes"
+msgstr "RFQ & Quotes"
+
+msgid "Search RFQ"
+msgstr "Search RFQ"
+
+msgid "User Supplier Association"
+msgstr "User Supplier Association"
+
+msgid "Supplier User"
+msgstr "Supplier User"
+
+msgid "Search Supplier User"
+msgstr "Search Supplier User"
+
+msgid "Quote"
+msgstr "Quote"
+
+msgid "Search Quote"
+msgstr "Search Quote"
+
+msgid "Search AP Transactions"
+msgstr "Search AP Transactions"
+
+msgid "Search Payments"
+msgstr "Search Payments"
+
+msgid "Journal Activity"
+msgstr "Journal Activity"
+
+msgid "Un Posted Balance"
+msgstr "Un Posted Balance"
+
+msgid "Search Serial Number"
+msgstr "Search Serial Number"
+
+msgid "Generate Predefined Serial Number"
+msgstr "Generate Predefined Serial Number"
+
+msgid "Generate Serial Number"
+msgstr "Generate Serial Number"
+
+msgid "Serial Transactions"
+msgstr "Serial Transactions"
+
+msgid "BOM"
+msgstr "BOM"
+
+msgid "BOM Programs"
+msgstr "BOM Programs"
+
+msgid "Search Routing Header"
+msgstr "Search Routing Header"
+
+msgid "Search Lot Number"
+msgstr "Search Lot Number"
+
+msgid "Lot Transactions"
+msgstr "Lot Transactions"
+
+msgid "Search Forecast Group"
+msgstr "Search Forecast Group"
+
+msgid "FP Setup"
+msgstr "FP Setup"
+
+msgid "Planning Control"
+msgstr "Planning Control"
+
+msgid "Extra Field"
+msgstr "Extra Field"
+
+msgid "Search Extra Field"
+msgstr "Search Extra Field"
+
+msgid "Work Order Work Bench"
+msgstr "Work Order Work Bench"
+
+msgid "WO Work Bench"
+msgstr "WO Work Bench"
+
+msgid "Manual Forecast Consumption"
+msgstr "Manual Forecast Consumption"
+
+msgid "Manual Consumption"
+msgstr "Manual Consumption"
+
+msgid "Forecast Line Date v"
+msgstr "Forecast Line Date v"
+
+msgid "Forecast Over Consumption"
+msgstr "Forecast Over Consumption"
+
+msgid "Favourite"
+msgstr "Favourite"
+
+msgid "Convert To Production"
+msgstr "Convert To Production"
+
+msgid "Custom report subinventory_locators - Subinventory Locators"
+msgstr "Custom report subinventory_locators - Subinventory Locators"
+
+msgid "Custom report subinventory_locators"
+msgstr "Custom report subinventory_locators"
+
+msgid "Custom report option_type - option types"
+msgstr "Custom report option_type - option types"
+
+msgid "Custom report option_type"
+msgstr "Custom report option_type"
+
+msgid "Custom report Onhand - Curret Onhand"
+msgstr "Custom report Onhand - Curret Onhand"
+
+msgid "Custom report Onhand"
+msgstr "Custom report Onhand"
+
+msgid "Custom Report - Onhand Inventory Wise"
+msgstr "Custom Report - Onhand Inventory Wise"
+
+msgid "Custom Report - Onhand"
+msgstr "Custom Report - Onhand"
+
+msgid "Secondary Field"
+msgstr "Secondary Field"
+
+msgid "Search Secondary Field"
+msgstr "Search Secondary Field"
+
+msgid "Secondary Field Instance"
+msgstr "Secondary Field Instance"
+
+msgid "Change Control - ECO, MCO and Other Changes requests"
+msgstr "Change Control - ECO, MCO and Other Changes requests"
+
+msgid "Change Control"
+msgstr "Change Control"
+
+msgid "Change Order Template"
+msgstr "Change Order Template"
+
+msgid "CO Template"
+msgstr "CO Template"
+
+msgid "Search Change Order Template"
+msgstr "Search Change Order Template"
+
+msgid "Search Template"
+msgstr "Search Template"
+
+msgid "Change Order"
+msgstr "Change Order"
+
+msgid "Search CO"
+msgstr "Search CO"
+
+msgid "Document & Analysis"
+msgstr "Document & Analysis"
+
+msgid "Search Process Flow"
+msgstr "Search Process Flow"
+
+msgid "Minmax Board"
+msgstr "Minmax Board"
+
+msgid "Programs for Document Administrator"
+msgstr "Programs for Document Administrator"
+
+msgid "Implement Change Order"
+msgstr "Implement Change Order"
+
+msgid "Implement CO"
+msgstr "Implement CO"
+
+msgid "RMA Receipt"
+msgstr "RMA Receipt"
+
+msgid "Compensation Element Multi Entry"
+msgstr "Compensation Element Multi Entry"
+
+msgid "Element Entry Tpl Header"
+msgstr "Element Entry Tpl Header"
+
+msgid "Search Element Entry Tpl Header"
+msgstr "Search Element Entry Tpl Header"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Payslip Header"
+msgstr "Payslip Header"
+
+msgid "Search All Paths"
+msgstr "Search All Paths"
+
+msgid "Search Payslip"
+msgstr "Search Payslip"
+
+msgid "HR Programs"
+msgstr "HR Programs"
+
+msgid "Generate Payroll Schedule"
+msgstr "Generate Payroll Schedule"
+
+msgid "Process Payroll Schedule"
+msgstr "Process Payroll Schedule"
+
+msgid "Process Payroll"
+msgstr "Process Payroll"
+
+msgid "Payroll Process"
+msgstr "Payroll Process"
+
+msgid "Search Payroll Process"
+msgstr "Search Payroll Process"
+
+msgid "Employee Self Service"
+msgstr "Employee Self Service"
+
+msgid "Self Service"
+msgstr "Self Service"
+
+msgid "Apply Leave"
+msgstr "Apply Leave"
+
+msgid "User Payslip"
+msgstr "User Payslip"
+
+msgid "Payslip"
+msgstr "Payslip"
+
+msgid "Cancel Payroll Process"
+msgstr "Cancel Payroll Process"
+
+msgid "Confirm Payroll Process"
+msgstr "Confirm Payroll Process"
+
+msgid "Barcode Setups"
+msgstr "Barcode Setups"
+
+msgid "Barcode"
+msgstr "Barcode"
+
+msgid "Barcode Label Format Header"
+msgstr "Barcode Label Format Header"
+
+msgid "Label Format"
+msgstr "Label Format"
+
+msgid "Search Label Format Header"
+msgstr "Search Label Format Header"
+
+msgid "Search Label Format"
+msgstr "Search Label Format"
+
+msgid "Printer"
+msgstr "Printer"
+
+msgid "Search Printer"
+msgstr "Search Printer"
+
+msgid "Label Auto Trigger"
+msgstr "Label Auto Trigger"
+
+msgid "Label Request"
+msgstr "Label Request"
+
+msgid "Search Label Request"
+msgstr "Search Label Request"
+
+msgid "Static Label"
+msgstr "Static Label"
+
+msgid "Search Static Label"
+msgstr "Search Static Label"
+
+msgid "Master Data"
+msgstr "Master Data"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Search Contact"
+msgstr "Search Contact"
+
+msgid "Contact Reference"
+msgstr "Contact Reference"
+
+msgid "Sales Lead"
+msgstr "Sales Lead"
+
+msgid "Lead"
+msgstr "Lead"
+
+msgid "Search Lead"
+msgstr "Search Lead"
+
+msgid "SD Setup"
+msgstr "SD Setup"
+
+msgid "HR Team"
+msgstr "HR Team"
+
+msgid "Search Team"
+msgstr "Search Team"
+
+msgid "Create & View Sales Team"
+msgstr "Create & View Sales Team"
+
+msgid "Opportunity"
+msgstr "Opportunity"
+
+msgid "Search Opportunity"
+msgstr "Search Opportunity"
+
+msgid "Sales Quote Header"
+msgstr "Sales Quote Header"
+
+msgid "Sales Quote"
+msgstr "Sales Quote"
+
+msgid "Search Quotes"
+msgstr "Search Quotes"
+
+msgid "View Transaction"
+msgstr "View Transaction"
+
+msgid "Vew AP Transaction"
+msgstr "Vew AP Transaction"
+
+msgid "Self-Service Education"
+msgstr "Self-Service Education"
+
+msgid "Employee Experience Self Service"
+msgstr "Employee Experience Self Service"
+
+msgid "Employee Experience"
+msgstr "Employee Experience"
+
+msgid "Web Contact"
+msgstr "Web Contact"
+
+msgid "WOL Transaction"
+msgstr "WOL Transaction"
+
+msgid "Site Search"
+msgstr "Site Search"
+
+msgid "Search WOL Transaction"
+msgstr "Search WOL Transaction"
+
+msgid "Fixed Asset"
+msgstr "Fixed Asset"
+
+msgid "Asset Book"
+msgstr "Asset Book"
+
+msgid "Search Asset Book"
+msgstr "Search Asset Book"
+
+msgid "Search Asset Category"
+msgstr "Search Asset Category"
+
+msgid "Search Depreciation Method"
+msgstr "Search Depreciation Method"
+
+msgid "Asset"
+msgstr "Asset"
+
+msgid "Search Asset"
+msgstr "Search Asset"
+
+msgid "Asset Book Information"
+msgstr "Asset Book Information"
+
+msgid "Asset Book Info"
+msgstr "Asset Book Info"
+
+msgid "Search Asset Book Info"
+msgstr "Search Asset Book Info"
+
+msgid "Fa Setups"
+msgstr "Fa Setups"
+
+msgid "Depreciation Header"
+msgstr "Depreciation Header"
+
+msgid "Depreciation"
+msgstr "Depreciation"
+
+msgid "Search Depreciation"
+msgstr "Search Depreciation"
+
+msgid "Fixed Asset Programs"
+msgstr "Fixed Asset Programs"
+
+msgid "Run Depreciation"
+msgstr "Run Depreciation"
+
+msgid "Point Of Sale - POS"
+msgstr "Point Of Sale - POS"
+
+msgid "Point Of Sale"
+msgstr "Point Of Sale"
+
+msgid "POS Transaction"
+msgstr "POS Transaction"
+
+msgid "Search Point of Sale Transaction"
+msgstr "Search Point of Sale Transaction"
+
+msgid "Search POS Trnx"
+msgstr "Search POS Trnx"
+
+msgid "Upload Value Group Line"
+msgstr "Upload Value Group Line"
+
+msgid "Search Lines"
+msgstr "Search Lines"
+
+msgid "Update Description"
+msgstr "Update Description"
+
+msgid "Geneledger Programs"
+msgstr "Geneledger Programs"
+
+msgid "Balance Sheet - Summary"
+msgstr "Balance Sheet - Summary"
+
+msgid "Balance Sheet Detailed"
+msgstr "Balance Sheet Detailed"
+
+msgid "Income Statement"
+msgstr "Income Statement"
+
+msgid "Income Statement - Detailed"
+msgstr "Income Statement - Detailed"
+
+msgid "GL Reports"
+msgstr "GL Reports"
+
+msgid "Reports"
+msgstr "Reports"
+
+msgid "All Account Combinations"
+msgstr "All Account Combinations"
+
+msgid "Balance Sheet - Multi Format Reporting"
+msgstr "Balance Sheet - Multi Format Reporting"
+
+msgid "Balance Sheet - MFR"
+msgstr "Balance Sheet - MFR"
+
+msgid "Income Statement - Multi Format Report"
+msgstr "Income Statement - Multi Format Report"
+
+msgid "Income Stmt - MFR"
+msgstr "Income Stmt - MFR"
+
+msgid "Trial Balance - General Ledger"
+msgstr "Trial Balance - General Ledger"
+
+msgid "Trial Balance"
+msgstr "Trial Balance"
+
+msgid "Terminal"
+msgstr "Terminal"
+
+msgid "Search Terminals"
+msgstr "Search Terminals"
+
+msgid "Search Terminal"
+msgstr "Search Terminal"
+
+msgid "Hybrid Point Of Sale Terminal"
+msgstr "Hybrid Point Of Sale Terminal"
+
+msgid "Hybrid POS"
+msgstr "Hybrid POS"
+
+msgid "Setup - POS"
+msgstr "Setup - POS"
+
+msgid "Inventory Control"
+msgstr "Inventory Control"
+
+msgid "Location Default"
+msgstr "Location Default"
+
+msgid "Search Location Default"
+msgstr "Search Location Default"
+
+msgid "Physical Store"
+msgstr "Physical Store"
+
+msgid "Store"
+msgstr "Store"
+
+msgid "Search Store"
+msgstr "Search Store"
+
+msgid "Sync POS with Inventory"
+msgstr "Sync POS with Inventory"
+
+msgid "Sync POS"
+msgstr "Sync POS"
+
+msgid "Barcode List Header"
+msgstr "Barcode List Header"
+
+msgid "Barcode List"
+msgstr "Barcode List"
+
+msgid "Search Barcode List"
+msgstr "Search Barcode List"
+
+msgid "Supply Analysis"
+msgstr "Supply Analysis"
+
+msgid "Config BOM"
+msgstr "Config BOM"
+
+msgid "Search Config BOM"
+msgstr "Search Config BOM"
+
+msgid "Print Pick List"
+msgstr "Print Pick List"
+
+msgid "Pick List"
+msgstr "Pick List"
+
+msgid "Asset Maintenance"
+msgstr "Asset Maintenance"
+
+msgid "Search Asset Number"
+msgstr "Search Asset Number"
+
+msgid "Search SO Header"
+msgstr "Search SO Header"
+
+msgid "Sales Control"
+msgstr "Sales Control"
+
+msgid "Create & Updatecollections"
+msgstr "Create & Updatecollections"
+
+msgid "collections"
+msgstr "collections"
+
+msgid "Search Collections"
+msgstr "Search Collections"
+
+msgid "Group Access"
+msgstr "Group Access"
+
+msgid "Sales Region"
+msgstr "Sales Region"
+
+msgid "DB Update"
+msgstr "DB Update"
+
+msgid "Block Information"
+msgstr "Block Information"
+
+msgid "Basic Info"
+msgstr "Basic Info"
+
+msgid "Block Content"
+msgstr "Block Content"
+
+msgid "Block Name"
+msgstr "Block Name"
+
+msgid "Block Info"
+msgstr "Block Info"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Block"
+msgstr "Block"
+
+msgid "Enabled"
+msgstr "Enabled"
+
+msgid "Show Title"
+msgstr "Show Title"
+
+msgid "Cache Content"
+msgstr "Cache Content"
+
+msgid "Category Header"
+msgstr "Category Header"
+
+msgid "Future"
+msgstr "Future"
+
+msgid "Parent Name"
+msgstr "Parent Name"
+
+msgid "Attachments"
+msgstr "Attachments"
+
+msgid "Notes"
+msgstr "Notes"
+
+msgid "Other Details"
+msgstr "Other Details"
+
+msgid "Numbers"
+msgstr "Numbers"
+
+msgid "Others"
+msgstr "Others"
+
+msgid "Categories"
+msgstr "Categories"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "Content Type Fields/Columns"
+msgstr "Content Type Fields/Columns"
+
+msgid "Main"
+msgstr "Main"
+
+msgid "Required"
+msgstr "Required"
+
+msgid "enum Values"
+msgstr "enum Values"
+
+msgid "Option List"
+msgstr "Option List"
+
+msgid "System Path"
+msgstr "System Path"
+
+msgid "Role Details"
+msgstr "Role Details"
+
+msgid "Class & Access Details"
+msgstr "Class & Access Details"
+
+msgid "Class Access"
+msgstr "Class Access"
+
+msgid "Class/Object Name"
+msgstr "Class/Object Name"
+
+msgid "Maintenance"
+msgstr "Maintenance"
+
+msgid "Home Page"
+msgstr "Home Page"
+
+msgid "Put in Maintenance Mode"
+msgstr "Put in Maintenance Mode"
+
+msgid "Maintenance Message"
+msgstr "Maintenance Message"
+
+msgid "Basic"
+msgstr "Basic"
+
+msgid "Messages"
+msgstr "Messages"
+
+msgid "Site Logo Path"
+msgstr "Site Logo Path"
+
+msgid "Access Denied Message"
+msgstr "Access Denied Message"
+
+msgid "User Details"
+msgstr "User Details"
+
+msgid "Preference"
+msgstr "Preference"
+
+msgid "Retype Password"
+msgstr "Retype Password"
+
+msgid "Employee Name"
+msgstr "Employee Name"
+
+msgid "Identification"
+msgstr "Identification"
+
+msgid "User Access Details"
+msgstr "User Access Details"
+
+msgid "Role Control"
+msgstr "Role Control"
+
+msgid "User Group Assignment"
+msgstr "User Group Assignment"
+
+msgid "User Role Access Id"
+msgstr "User Role Access Id"
+
+msgid "Role Name"
+msgstr "Role Name"
+
+msgid "Group Access Id"
+msgstr "Group Access Id"
+
+msgid "Group Name"
+msgstr "Group Name"
+
+msgid "User Group Details"
+msgstr "User Group Details"
+
+msgid "Group Access Details"
+msgstr "Group Access Details"
+
+msgid "Organization Access"
+msgstr "Organization Access"
+
+msgid "function"
+msgstr "function"
+
+msgid "Finance"
+msgstr "Finance"
+
+msgid "Payment Lines"
+msgstr "Payment Lines"
+
+msgid "References"
+msgstr "References"
+
+msgid "Seq"
+msgstr "Seq"
+
+msgid "Line Id"
+msgstr "Line Id"
+
+msgid "Trnx Id"
+msgstr "Trnx Id"
+
+msgid "Trnx Number"
+msgstr "Trnx Number"
+
+msgid "Payment Amount"
+msgstr "Payment Amount"
+
+msgid "Paid"
+msgstr "Paid"
+
+msgid "Remaining"
+msgstr "Remaining"
+
+msgid "Ref Key Name"
+msgstr "Ref Key Name"
+
+msgid "Ref Key Value"
+msgstr "Ref Key Value"
+
+msgid "View Ref Doc"
+msgstr "View Ref Doc"
+
+msgid "BU Assignment"
+msgstr "BU Assignment"
+
+msgid "Address Details"
+msgstr "Address Details"
+
+msgid "Corporate Address Id"
+msgstr "Corporate Address Id"
+
+msgid "Supplier Site Details"
+msgstr "Supplier Site Details"
+
+msgid "Receiving"
+msgstr "Receiving"
+
+msgid "Site Address"
+msgstr "Site Address"
+
+msgid "Quantity Tolerance"
+msgstr "Quantity Tolerance"
+
+msgid "Receipt Days Tolerance"
+msgstr "Receipt Days Tolerance"
+
+msgid "Supplier Business Unit Association"
+msgstr "Supplier Business Unit Association"
+
+msgid "Supplier BU Details"
+msgstr "Supplier BU Details"
+
+msgid "Local Addresses"
+msgstr "Local Addresses"
+
+msgid "Invoice & Payment"
+msgstr "Invoice & Payment"
+
+msgid "Ship To Site Id"
+msgstr "Ship To Site Id"
+
+msgid "Bill To Site Id"
+msgstr "Bill To Site Id"
+
+msgid "AP Transaction Header"
+msgstr "AP Transaction Header"
+
+msgid "Payments"
+msgstr "Payments"
+
+msgid "Transaction Lines & Details"
+msgstr "Transaction Lines & Details"
+
+msgid "Other Info"
+msgstr "Other Info"
+
+msgid "Accounting Details"
+msgstr "Accounting Details"
+
+msgid "Detail Id"
+msgstr "Detail Id"
+
+msgid "Account"
+msgstr "Account"
+
+msgid "Is Asset"
+msgstr "Is Asset"
+
+msgid "Project Header Id"
+msgstr "Project Header Id"
+
+msgid "Project Line Id"
+msgstr "Project Line Id"
+
+msgid "Trnx Header Id"
+msgstr "Trnx Header Id"
+
+msgid "Trnx Line Id"
+msgstr "Trnx Line Id"
+
+msgid "Cancel Line"
+msgstr "Cancel Line"
+
+msgid "Un match Only"
+msgstr "Un match Only"
+
+msgid "Change Quantity"
+msgstr "Change Quantity"
+
+msgid "Customer Information"
+msgstr "Customer Information"
+
+msgid "Customer Type "
+msgstr "Customer Type "
+
+msgid "Customer Site Details"
+msgstr "Customer Site Details"
+
+msgid "Sales"
+msgstr "Sales"
+
+msgid "New Contact"
+msgstr "New Contact"
+
+msgid "Customer BU Assignment"
+msgstr "Customer BU Assignment"
+
+msgid "Customer BU Details"
+msgstr "Customer BU Details"
+
+msgid "Accounts"
+msgstr "Accounts"
+
+msgid "Receipt Header"
+msgstr "Receipt Header"
+
+msgid "Document Print"
+msgstr "Document Print"
+
+msgid "Receipt Lines"
+msgstr "Receipt Lines"
+
+msgid "Cumulative Receipt"
+msgstr "Cumulative Receipt"
+
+msgid "Reporting"
+msgstr "Reporting"
+
+msgid "Id"
+msgstr "Id"
+
+msgid "Street"
+msgstr "Street"
+
+msgid "Region Name"
+msgstr "Region Name"
+
+msgid "Receivable Transaction Header"
+msgstr "Receivable Transaction Header"
+
+msgid "Basic-2"
+msgstr "Basic-2"
+
+msgid "Summary"
+msgstr "Summary"
+
+msgid "Receipts"
+msgstr "Receipts"
+
+msgid "Change Status"
+msgstr "Change Status"
+
+msgid "Trnx Status"
+msgstr "Trnx Status"
+
+msgid "Detail"
+msgstr "Detail"
+
+msgid "GL-Amount"
+msgstr "GL-Amount"
+
+msgid "Journal_Created?"
+msgstr "Journal_Created?"
+
+msgid "SO Header Id"
+msgstr "SO Header Id"
+
+msgid "SO Line Id"
+msgstr "SO Line Id"
+
+msgid "Project Line Idt"
+msgstr "Project Line Idt"
+
+msgid "Receivable Transaction Source"
+msgstr "Receivable Transaction Source"
+
+msgid "Transaction Source Details"
+msgstr "Transaction Source Details"
+
+msgid "Transaction Type Details"
+msgstr "Transaction Type Details"
+
+msgid "Bar code Label Auto Trigger"
+msgstr "Bar code Label Auto Trigger"
+
+msgid "Label Association"
+msgstr "Label Association"
+
+msgid "Values"
+msgstr "Values"
+
+msgid "Default Printer"
+msgstr "Default Printer"
+
+msgid "Barcode Label Format"
+msgstr "Barcode Label Format"
+
+msgid "Data Object"
+msgstr "Data Object"
+
+msgid "Object/Table Name"
+msgstr "Object/Table Name"
+
+msgid "No Of Copies"
+msgstr "No Of Copies"
+
+msgid "Static Labels"
+msgstr "Static Labels"
+
+msgid "Generate Label"
+msgstr "Generate Label"
+
+msgid "Cost Type Header"
+msgstr "Cost Type Header"
+
+msgid "Resource Assignment"
+msgstr "Resource Assignment"
+
+msgid "Overhead Rate"
+msgstr "Overhead Rate"
+
+msgid "Over Head"
+msgstr "Over Head"
+
+msgid "Over Head Details"
+msgstr "Over Head Details"
+
+msgid "Rate Assignment"
+msgstr "Rate Assignment"
+
+msgid "Resources"
+msgstr "Resources"
+
+msgid "OSP"
+msgstr "OSP"
+
+msgid "Equipment"
+msgstr "Equipment"
+
+msgid "Note"
+msgstr "Note"
+
+msgid "Resource Cost Id"
+msgstr "Resource Cost Id"
+
+msgid "Common Routing"
+msgstr "Common Routing"
+
+msgid "WIP"
+msgstr "WIP"
+
+msgid "Effectivity"
+msgstr "Effectivity"
+
+msgid "Data Collection"
+msgstr "Data Collection"
+
+msgid "Routing Seq"
+msgstr "Routing Seq"
+
+msgid "Standard Op"
+msgstr "Standard Op"
+
+msgid "Referenced"
+msgstr "Referenced"
+
+msgid "Operation Details"
+msgstr "Operation Details"
+
+msgid "Resource Seq"
+msgstr "Resource Seq"
+
+msgid "Usage"
+msgstr "Usage"
+
+msgid "Schedule"
+msgstr "Schedule"
+
+msgid "24 Hours"
+msgstr "24 Hours"
+
+msgid "Stnd. Rate"
+msgstr "Stnd. Rate"
+
+msgid "Count Point"
+msgstr "Count Point"
+
+msgid "Auto Charge"
+msgstr "Auto Charge"
+
+msgid "Back flush"
+msgstr "Back flush"
+
+msgid "MTQ"
+msgstr "MTQ"
+
+msgid "ECO Implemented"
+msgstr "ECO Implemented"
+
+msgid "Roll up"
+msgstr "Roll up"
+
+msgid "Cumm. Yield"
+msgstr "Cumm. Yield"
+
+msgid "Standard Operation Details"
+msgstr "Standard Operation Details"
+
+msgid "Assignment Id"
+msgstr "Assignment Id"
+
+msgid "BOM Header"
+msgstr "BOM Header"
+
+msgid "Common BOM"
+msgstr "Common BOM"
+
+msgid "BOM Lines"
+msgstr "BOM Lines"
+
+msgid "Control"
+msgstr "Control"
+
+msgid "Planning"
+msgstr "Planning"
+
+msgid "In cost Rollup"
+msgstr "In cost Rollup"
+
+msgid "Configured BOM Header"
+msgstr "Configured BOM Header"
+
+msgid "BOMLine Id"
+msgstr "BOMLine Id"
+
+msgid "Routing Sequenceg"
+msgstr "Routing Sequenceg"
+
+msgid "Usage Qty"
+msgstr "Usage Qty"
+
+msgid "Line Qty"
+msgstr "Line Qty"
+
+msgid "Transacted Qty"
+msgstr "Transacted Qty"
+
+msgid "Process Steps"
+msgstr "Process Steps"
+
+msgid "Secondary Fields"
+msgstr "Secondary Fields"
+
+msgid "Flow Diagram"
+msgstr "Flow Diagram"
+
+msgid "CO Action"
+msgstr "CO Action"
+
+msgid "Sub Process Name"
+msgstr "Sub Process Name"
+
+msgid "Process Actions"
+msgstr "Process Actions"
+
+msgid "Action Id"
+msgstr "Action Id"
+
+msgid "PF Line Id"
+msgstr "PF Line Id"
+
+msgid "Action Type"
+msgstr "Action Type"
+
+msgid "Change Control Template"
+msgstr "Change Control Template"
+
+msgid "Template Fields"
+msgstr "Template Fields"
+
+msgid "Mandatory Field"
+msgstr "Mandatory Field"
+
+msgid "List Option Type"
+msgstr "List Option Type"
+
+msgid "Item Cost Header"
+msgstr "Item Cost Header"
+
+msgid "Fixed Asset Details"
+msgstr "Fixed Asset Details"
+
+msgid "Tracking Info"
+msgstr "Tracking Info"
+
+msgid "Assignments"
+msgstr "Assignments"
+
+msgid "Expense"
+msgstr "Expense"
+
+msgid "Class Controls"
+msgstr "Class Controls"
+
+msgid "Natural Accounts"
+msgstr "Natural Accounts"
+
+msgid "Book Name"
+msgstr "Book Name"
+
+msgid "Asset Book Information Details"
+msgstr "Asset Book Information Details"
+
+msgid "Asset Book Category Association"
+msgstr "Asset Book Category Association"
+
+msgid "Cost Accounts"
+msgstr "Cost Accounts"
+
+msgid "Depreciation Accounts"
+msgstr "Depreciation Accounts"
+
+msgid "Cost Ac"
+msgstr "Cost Ac"
+
+msgid "Clearing Ac"
+msgstr "Clearing Ac"
+
+msgid "CIP Cost Ac"
+msgstr "CIP Cost Ac"
+
+msgid "CIP Clearing Ac"
+msgstr "CIP Clearing Ac"
+
+msgid "Depreciation Expense"
+msgstr "Depreciation Expense"
+
+msgid "Bonus Expense"
+msgstr "Bonus Expense"
+
+msgid "Bonus Reserve"
+msgstr "Bonus Reserve"
+
+msgid "Revalue Reserve"
+msgstr "Revalue Reserve"
+
+msgid "Unplanned Depreciation"
+msgstr "Unplanned Depreciation"
+
+msgid "Confirm Depreciation"
+msgstr "Confirm Depreciation"
+
+msgid "Post Depreciation"
+msgstr "Post Depreciation"
+
+msgid "Depreciation Details"
+msgstr "Depreciation Details"
+
+msgid "Rates"
+msgstr "Rates"
+
+msgid "Calculation"
+msgstr "Calculation"
+
+msgid "Rate Percentage"
+msgstr "Rate Percentage"
+
+msgid "Forecast Header"
+msgstr "Forecast Header"
+
+msgid "Forecast Lines"
+msgstr "Forecast Lines"
+
+msgid "Bucket"
+msgstr "Bucket"
+
+msgid "Current"
+msgstr "Current"
+
+msgid "Total Current"
+msgstr "Total Current"
+
+msgid "Forecast Details"
+msgstr "Forecast Details"
+
+msgid "Consumption Id"
+msgstr "Consumption Id"
+
+msgid "Forecasts"
+msgstr "Forecasts"
+
+msgid "MDS Header"
+msgstr "MDS Header"
+
+msgid "MDS Lines"
+msgstr "MDS Lines"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Source Header"
+msgstr "Source Header"
+
+msgid "Source Line"
+msgstr "Source Line"
+
+msgid "MRP Planner"
+msgstr "MRP Planner"
+
+msgid "Planning Control Header"
+msgstr "Planning Control Header"
+
+msgid "Planning Control Details"
+msgstr "Planning Control Details"
+
+msgid "Planning Info"
+msgstr "Planning Info"
+
+msgid "Source List Header"
+msgstr "Source List Header"
+
+msgid "Source List Lines"
+msgstr "Source List Lines"
+
+msgid "Financial Calendars"
+msgstr "Financial Calendars"
+
+msgid "Calendar Period Details"
+msgstr "Calendar Period Details"
+
+msgid "Basic - View Only"
+msgstr "Basic - View Only"
+
+msgid "Prefix"
+msgstr "Prefix"
+
+msgid "Adjusting Period"
+msgstr "Adjusting Period"
+
+msgid "Chart Of Account"
+msgstr "Chart Of Account"
+
+msgid "Chart of Account Details"
+msgstr "Chart of Account Details"
+
+msgid "Qualifiers"
+msgstr "Qualifiers"
+
+msgid "Display"
+msgstr "Display"
+
+msgid "Chart Of Account Code Combinations"
+msgstr "Chart Of Account Code Combinations"
+
+msgid "Field Values"
+msgstr "Field Values"
+
+msgid "CC Id"
+msgstr "CC Id"
+
+msgid "Code Combination"
+msgstr "Code Combination"
+
+msgid "Currency Conversions"
+msgstr "Currency Conversions"
+
+msgid "Conversion Details"
+msgstr "Conversion Details"
+
+msgid "Journal Header"
+msgstr "Journal Header"
+
+msgid "Reference Details"
+msgstr "Reference Details"
+
+msgid "Rate & Amounts"
+msgstr "Rate & Amounts"
+
+msgid "Journal Lines"
+msgstr "Journal Lines"
+
+msgid "Debit"
+msgstr "Debit"
+
+msgid "Credit"
+msgstr "Credit"
+
+msgid "Ledger Dr"
+msgstr "Ledger Dr"
+
+msgid "Ledger Cr"
+msgstr "Ledger Cr"
+
+msgid "Ref Type"
+msgstr "Ref Type"
+
+msgid "Ref Value"
+msgstr "Ref Value"
+
+msgid "Ledger Header"
+msgstr "Ledger Header"
+
+msgid "Ledger Options"
+msgstr "Ledger Options"
+
+msgid "Balancing Segment Values"
+msgstr "Balancing Segment Values"
+
+msgid "Balance Segment Value"
+msgstr "Balance Segment Value"
+
+msgid "Schedule & Discount Lines"
+msgstr "Schedule & Discount Lines"
+
+msgid "Discount"
+msgstr "Discount"
+
+msgid "Schedule Id"
+msgstr "Schedule Id"
+
+msgid "Date of Month"
+msgstr "Date of Month"
+
+msgid "Discount Id"
+msgstr "Discount Id"
+
+msgid "GL Periods"
+msgstr "GL Periods"
+
+msgid "Accounting Period"
+msgstr "Accounting Period"
+
+msgid "Current Open Period"
+msgstr "Current Open Period"
+
+msgid "Next Period"
+msgstr "Next Period"
+
+msgid "PeriodId"
+msgstr "PeriodId"
+
+msgid "Cal Name"
+msgstr "Cal Name"
+
+msgid "Cal Id"
+msgstr "Cal Id"
+
+msgid "Approval Limit Header"
+msgstr "Approval Limit Header"
+
+msgid "Approval Limit Lines"
+msgstr "Approval Limit Lines"
+
+msgid "Lowest Range"
+msgstr "Lowest Range"
+
+msgid "Highest Range"
+msgstr "Highest Range"
+
+msgid "Compensation Element Entry"
+msgstr "Compensation Element Entry"
+
+msgid "Element Entry Lines"
+msgstr "Element Entry Lines"
+
+msgid "Monetary Value"
+msgstr "Monetary Value"
+
+msgid "Compensation Element Entry Template"
+msgstr "Compensation Element Entry Template"
+
+msgid "Details Info"
+msgstr "Details Info"
+
+msgid "Employee Header"
+msgstr "Employee Header"
+
+msgid "Personal"
+msgstr "Personal"
+
+msgid "Employee Details"
+msgstr "Employee Details"
+
+msgid "Financial Info"
+msgstr "Financial Info"
+
+msgid "Work Experience"
+msgstr "Work Experience"
+
+msgid "On Boarding"
+msgstr "On Boarding"
+
+msgid "Exit"
+msgstr "Exit"
+
+msgid "Job History"
+msgstr "Job History"
+
+msgid "Supervisor"
+msgstr "Supervisor"
+
+msgid "Last Salary"
+msgstr "Last Salary"
+
+msgid "Projects"
+msgstr "Projects"
+
+msgid "Salary Component Break Up"
+msgstr "Salary Component Break Up"
+
+msgid "Employee Termination"
+msgstr "Employee Termination"
+
+msgid "Requirements"
+msgstr "Requirements"
+
+msgid "job Details & Responsibility"
+msgstr "job Details & Responsibility"
+
+msgid "Leave Details"
+msgstr "Leave Details"
+
+msgid "Current Balance"
+msgstr "Current Balance"
+
+msgid "Leave/Year"
+msgstr "Leave/Year"
+
+msgid "Available Balance"
+msgstr "Available Balance"
+
+msgid "Total Leave"
+msgstr "Total Leave"
+
+msgid "Leave/Period"
+msgstr "Leave/Period"
+
+msgid "Leave Application"
+msgstr "Leave Application"
+
+msgid "Approver"
+msgstr "Approver"
+
+msgid "Date Details"
+msgstr "Date Details"
+
+msgid "Bank Details"
+msgstr "Bank Details"
+
+msgid "Generate Schedule"
+msgstr "Generate Schedule"
+
+msgid "Line Details"
+msgstr "Line Details"
+
+msgid "Schedules"
+msgstr "Schedules"
+
+msgid "Employee Pay Slip"
+msgstr "Employee Pay Slip"
+
+msgid "Salary Details"
+msgstr "Salary Details"
+
+msgid "Position Header"
+msgstr "Position Header"
+
+msgid "Team Lead"
+msgstr "Team Lead"
+
+msgid "Team Members"
+msgstr "Team Members"
+
+msgid "Member Name"
+msgstr "Member Name"
+
+msgid "ABC Assignment Header"
+msgstr "ABC Assignment Header"
+
+msgid "Assign Items"
+msgstr "Assign Items"
+
+msgid "Sequence Number"
+msgstr "Sequence Number"
+
+msgid "% of Items"
+msgstr "% of Items"
+
+msgid "% of Value"
+msgstr "% of Value"
+
+msgid "View & Update Items"
+msgstr "View & Update Items"
+
+msgid "Item ABC Class"
+msgstr "Item ABC Class"
+
+msgid "Master Item Id"
+msgstr "Master Item Id"
+
+msgid "Valuation Details"
+msgstr "Valuation Details"
+
+msgid "Scope"
+msgstr "Scope"
+
+msgid "Count Header"
+msgstr "Count Header"
+
+msgid "Variance Limit/Approval"
+msgstr "Variance Limit/Approval"
+
+msgid "Count Frequence"
+msgstr "Count Frequence"
+
+msgid "Count Id"
+msgstr "Count Id"
+
+msgid "StatusStatus"
+msgstr "StatusStatus"
+
+msgid "Code On Count"
+msgstr "Code On Count"
+
+msgid "Count Entry Header"
+msgstr "Count Entry Header"
+
+msgid "Line Defaults"
+msgstr "Line Defaults"
+
+msgid "Inventory Count Name"
+msgstr "Inventory Count Name"
+
+msgid "Adjustments"
+msgstr "Adjustments"
+
+msgid "Count By"
+msgstr "Count By"
+
+msgid "Adjustment Ac"
+msgstr "Adjustment Ac"
+
+msgid "System Quantity"
+msgstr "System Quantity"
+
+msgid "Counted Quantity"
+msgstr "Counted Quantity"
+
+msgid "Adjusted Quantity"
+msgstr "Adjusted Quantity"
+
+msgid "Adjustment Amount"
+msgstr "Adjustment Amount"
+
+msgid "Inter-Org Transfer Header"
+msgstr "Inter-Org Transfer Header"
+
+msgid "Header Id"
+msgstr "Header Id"
+
+msgid "Inter-Org Transfer Lines"
+msgstr "Inter-Org Transfer Lines"
+
+msgid "General Info"
+msgstr "General Info"
+
+msgid "Transfer"
+msgstr "Transfer"
+
+msgid "Lot Serial"
+msgstr "Lot Serial"
+
+msgid "From SubInv"
+msgstr "From SubInv"
+
+msgid "To SubInv"
+msgstr "To SubInv"
+
+msgid "Ref Name"
+msgstr "Ref Name"
+
+msgid "Add Lot Numbers"
+msgstr "Add Lot Numbers"
+
+msgid "Add Serial Numbers"
+msgstr "Add Serial Numbers"
+
+msgid "Inventory Transaction "
+msgstr "Inventory Transaction "
+
+msgid "Lot & Serial"
+msgstr "Lot & Serial"
+
+msgid "Transaction Id"
+msgstr "Transaction Id"
+
+msgid "Kit Item"
+msgstr "Kit Item"
+
+msgid "Kit Config"
+msgstr "Kit Config"
+
+msgid "Config Id"
+msgstr "Config Id"
+
+msgid "Doc. Number"
+msgstr "Doc. Number"
+
+msgid "Doc. Id"
+msgstr "Doc. Id"
+
+msgid "Ref Doc"
+msgstr "Ref Doc"
+
+msgid "WO BOM Line Id"
+msgstr "WO BOM Line Id"
+
+msgid "Journal Header Id"
+msgstr "Journal Header Id"
+
+msgid "Inv Assignment"
+msgstr "Inv Assignment"
+
+msgid "Revisions"
+msgstr "Revisions"
+
+msgid "ECO"
+msgstr "ECO"
+
+msgid "Eff. Start Date"
+msgstr "Eff. Start Date"
+
+msgid "Item/Template"
+msgstr "Item/Template"
+
+msgid "Manufacturing"
+msgstr "Manufacturing"
+
+msgid "Financial"
+msgstr "Financial"
+
+msgid "Secondary"
+msgstr "Secondary"
+
+msgid "Lead Time Information"
+msgstr "Lead Time Information"
+
+msgid "Lot Information"
+msgstr "Lot Information"
+
+msgid "Serial Information"
+msgstr "Serial Information"
+
+msgid "Measurement Information"
+msgstr "Measurement Information"
+
+msgid "Rule Information"
+msgstr "Rule Information"
+
+msgid "Cost Information"
+msgstr "Cost Information"
+
+msgid "Order Modifiers"
+msgstr "Order Modifiers"
+
+msgid "Time Fences"
+msgstr "Time Fences"
+
+msgid "Min Max Planning"
+msgstr "Min Max Planning"
+
+msgid "Safety Stock"
+msgstr "Safety Stock"
+
+msgid "Item Transaction Location Default"
+msgstr "Item Transaction Location Default"
+
+msgid "Location Defaults"
+msgstr "Location Defaults"
+
+msgid "Item-Location"
+msgstr "Item-Location"
+
+msgid "Item"
+msgstr "Item"
+
+msgid "Storage Locator"
+msgstr "Storage Locator"
+
+msgid "Dimensions"
+msgstr "Dimensions"
+
+msgid "Capacity"
+msgstr "Capacity"
+
+msgid "Transactions"
+msgstr "Transactions"
+
+msgid "Relations"
+msgstr "Relations"
+
+msgid "From Sub Inventory"
+msgstr "From Sub Inventory"
+
+msgid "Transaction Details"
+msgstr "Transaction Details"
+
+msgid "From SubInv Id"
+msgstr "From SubInv Id"
+
+msgid "From Locator Id "
+msgstr "From Locator Id "
+
+msgid "To SubInv Id"
+msgstr "To SubInv Id"
+
+msgid "To Locator Id "
+msgstr "To Locator Id "
+
+msgid "Receipt Header Id"
+msgstr "Receipt Header Id"
+
+msgid "PO Info"
+msgstr "PO Info"
+
+msgid "Receipt"
+msgstr "Receipt"
+
+msgid "Line #"
+msgstr "Line #"
+
+msgid "PO #"
+msgstr "PO #"
+
+msgid "PO Line #"
+msgstr "PO Line #"
+
+msgid "Shipment #"
+msgstr "Shipment #"
+
+msgid "Shipment Qty"
+msgstr "Shipment Qty"
+
+msgid "Received Qty"
+msgstr "Received Qty"
+
+msgid "New Received Qty"
+msgstr "New Received Qty"
+
+msgid "Supplier #"
+msgstr "Supplier #"
+
+msgid "Site Id"
+msgstr "Site Id"
+
+msgid "Site #"
+msgstr "Site #"
+
+msgid "Site"
+msgstr "Site"
+
+msgid "RMA Receipt Header"
+msgstr "RMA Receipt Header"
+
+msgid "RMA Info"
+msgstr "RMA Info"
+
+msgid "Sales Order #"
+msgstr "Sales Order #"
+
+msgid "SO Line #"
+msgstr "SO Line #"
+
+msgid "New Received Quantity"
+msgstr "New Received Quantity"
+
+msgid "Serial Number Details"
+msgstr "Serial Number Details"
+
+msgid "Subinventory Details"
+msgstr "Subinventory Details"
+
+msgid "Unit Of Measure"
+msgstr "Unit Of Measure"
+
+msgid "UOM Details"
+msgstr "UOM Details"
+
+msgid "Relationship"
+msgstr "Relationship"
+
+msgid "Primary UOM"
+msgstr "Primary UOM"
+
+msgid "Bank Names"
+msgstr "Bank Names"
+
+msgid "Transaction"
+msgstr "Transaction"
+
+msgid "Other"
+msgstr "Other"
+
+msgid "Prices"
+msgstr "Prices"
+
+msgid "Restrictions"
+msgstr "Restrictions"
+
+msgid "Regime"
+msgstr "Regime"
+
+msgid "Jurisdiction"
+msgstr "Jurisdiction"
+
+msgid "In or Out"
+msgstr "In or Out"
+
+msgid "Dr or Cr"
+msgstr "Dr or Cr"
+
+msgid "Region Calculation"
+msgstr "Region Calculation"
+
+msgid "Ad hoc Rate"
+msgstr "Ad hoc Rate"
+
+msgid "Exemption"
+msgstr "Exemption"
+
+msgid "Printed Name"
+msgstr "Printed Name"
+
+msgid "Offset Tax"
+msgstr "Offset Tax"
+
+msgid "Address Header"
+msgstr "Address Header"
+
+msgid "BO Details"
+msgstr "BO Details"
+
+msgid "Type of Business Org"
+msgstr "Type of Business Org"
+
+msgid "Enterprise Name"
+msgstr "Enterprise Name"
+
+msgid "Enterprise Header"
+msgstr "Enterprise Header"
+
+msgid "Inventory Org Header"
+msgstr "Inventory Org Header"
+
+msgid "Item Attribute"
+msgstr "Item Attribute"
+
+msgid "Sourcing"
+msgstr "Sourcing"
+
+msgid "Costing Details"
+msgstr "Costing Details"
+
+msgid "Legal Org Header"
+msgstr "Legal Org Header"
+
+msgid "Legal Org Details"
+msgstr "Legal Org Details"
+
+msgid "Ledger Details"
+msgstr "Ledger Details"
+
+msgid "Organization"
+msgstr "Organization"
+
+msgid "Contacts"
+msgstr "Contacts"
+
+msgid "Web-site"
+msgstr "Web-site"
+
+msgid "Associate Contact"
+msgstr "Associate Contact"
+
+msgid "Supplier Site"
+msgstr "Supplier Site"
+
+msgid "MPN"
+msgstr "MPN"
+
+msgid "Documents"
+msgstr "Documents"
+
+msgid "Min Order Qty"
+msgstr "Min Order Qty"
+
+msgid "Lot Multiplier"
+msgstr "Lot Multiplier"
+
+msgid "ASL Basic Info"
+msgstr "ASL Basic Info"
+
+msgid "ASL Line Id"
+msgstr "ASL Line Id"
+
+msgid "ASL Documents"
+msgstr "ASL Documents"
+
+msgid "Detail Data"
+msgstr "Detail Data"
+
+msgid "Delivery"
+msgstr "Delivery"
+
+msgid "Shipment Id"
+msgstr "Shipment Id"
+
+msgid "Ship To Location"
+msgstr "Ship To Location"
+
+msgid "Charge Ac"
+msgstr "Charge Ac"
+
+msgid "Accrual Ac"
+msgstr "Accrual Ac"
+
+msgid "Budget Ac"
+msgstr "Budget Ac"
+
+msgid "PPV Ac"
+msgstr "PPV Ac"
+
+msgid "Received"
+msgstr "Received"
+
+msgid "Accepted"
+msgstr "Accepted"
+
+msgid "Delivered"
+msgstr "Delivered"
+
+msgid "Invoiced"
+msgstr "Invoiced"
+
+msgid "Purchasing Info"
+msgstr "Purchasing Info"
+
+msgid "PO Lines & Shipments"
+msgstr "PO Lines & Shipments"
+
+msgid "Agreement Details"
+msgstr "Agreement Details"
+
+msgid "Receiving Org"
+msgstr "Receiving Org"
+
+msgid "Shipments"
+msgstr "Shipments"
+
+msgid "Agreed Quantity"
+msgstr "Agreed Quantity"
+
+msgid "Released Quantity"
+msgstr "Released Quantity"
+
+msgid "Agreed Amount"
+msgstr "Agreed Amount"
+
+msgid "On Hold"
+msgstr "On Hold"
+
+msgid "Hold Details"
+msgstr "Hold Details"
+
+msgid "Configured"
+msgstr "Configured"
+
+msgid "Item Configuration"
+msgstr "Item Configuration"
+
+msgid "Ref Number"
+msgstr "Ref Number"
+
+msgid "Quotation"
+msgstr "Quotation"
+
+msgid "Detailed Description"
+msgstr "Detailed Description"
+
+msgid "Quote Lines"
+msgstr "Quote Lines"
+
+msgid "Factors"
+msgstr "Factors"
+
+msgid "Requirement Id"
+msgstr "Requirement Id"
+
+msgid "Max Evaluation Points"
+msgstr "Max Evaluation Points"
+
+msgid "Supplier Value"
+msgstr "Supplier Value"
+
+msgid "Min Agreement Qty"
+msgstr "Min Agreement Qty"
+
+msgid "Replenishment LT"
+msgstr "Replenishment LT"
+
+msgid "Blanket Agreement & Releases"
+msgstr "Blanket Agreement & Releases"
+
+msgid "BPA Line"
+msgstr "BPA Line"
+
+msgid "Requisition Header"
+msgstr "Requisition Header"
+
+msgid "Requisition Lines & Shipments"
+msgstr "Requisition Lines & Shipments"
+
+msgid "BPA Number"
+msgstr "BPA Number"
+
+msgid "Request For Quotation"
+msgstr "Request For Quotation"
+
+msgid "RFQ Lines & Details"
+msgstr "RFQ Lines & Details"
+
+msgid "Sourcing Rule Header"
+msgstr "Sourcing Rule Header"
+
+msgid "Sourcing Lines"
+msgstr "Sourcing Lines"
+
+msgid "Allocation % "
+msgstr "Allocation % "
+
+msgid "POS Barcode List"
+msgstr "POS Barcode List"
+
+msgid "List Lines"
+msgstr "List Lines"
+
+msgid "Final Amount"
+msgstr "Final Amount"
+
+msgid "POS Inventory Control"
+msgstr "POS Inventory Control"
+
+msgid "POS Terminal"
+msgstr "POS Terminal"
+
+msgid "Sales Items"
+msgstr "Sales Items"
+
+msgid "Lines"
+msgstr "Lines"
+
+msgid "Items"
+msgstr "Items"
+
+msgid "Hybrid Sales Items"
+msgstr "Hybrid Sales Items"
+
+msgid "Delivery Header"
+msgstr "Delivery Header"
+
+msgid "SO Info"
+msgstr "SO Info"
+
+msgid "Delivery Line Id"
+msgstr "Delivery Line Id"
+
+msgid "SO Id"
+msgstr "SO Id"
+
+msgid "SO"
+msgstr "SO"
+
+msgid "Shipped Qty"
+msgstr "Shipped Qty"
+
+msgid "SO Qty Change"
+msgstr "SO Qty Change"
+
+msgid "Line Action"
+msgstr "Line Action"
+
+msgid "Weight UOM"
+msgstr "Weight UOM"
+
+msgid "Volume UOM"
+msgstr "Volume UOM"
+
+msgid "Defaults"
+msgstr "Defaults"
+
+msgid "Existing Info"
+msgstr "Existing Info"
+
+msgid "Lead Details"
+msgstr "Lead Details"
+
+msgid "Primary Sales Person"
+msgstr "Primary Sales Person"
+
+msgid "Lead Contact"
+msgstr "Lead Contact"
+
+msgid "Sales Opportunity"
+msgstr "Sales Opportunity"
+
+msgid "Price"
+msgstr "Price"
+
+msgid "Dates"
+msgstr "Dates"
+
+msgid "Shipping Org"
+msgstr "Shipping Org"
+
+msgid "Order Header Id"
+msgstr "Order Header Id"
+
+msgid "Order Line Id"
+msgstr "Order Line Id"
+
+msgid "Defaulting Rules"
+msgstr "Defaulting Rules"
+
+msgid "Future Rules"
+msgstr "Future Rules"
+
+msgid "Shipping Info"
+msgstr "Shipping Info"
+
+msgid "Sales Order / RMA Header"
+msgstr "Sales Order / RMA Header"
+
+msgid "Copy Document"
+msgstr "Copy Document"
+
+msgid "SO / RMA Lines & Shipments"
+msgstr "SO / RMA Lines & Shipments"
+
+msgid "Configuration"
+msgstr "Configuration"
+
+msgid "References-2"
+msgstr "References-2"
+
+msgid "Schedule Ship / Receipt Date"
+msgstr "Schedule Ship / Receipt Date"
+
+msgid "Actual Ship / Receipt Date"
+msgstr "Actual Ship / Receipt Date"
+
+msgid "WO Header Id"
+msgstr "WO Header Id"
+
+msgid "Config Details"
+msgstr "Config Details"
+
+msgid "Destination Typet"
+msgstr "Destination Typet"
+
+msgid "Shipped /Received Quantity"
+msgstr "Shipped /Received Quantity"
+
+msgid "Sub Inventories"
+msgstr "Sub Inventories"
+
+msgid "Building"
+msgstr "Building"
+
+msgid "Floor"
+msgstr "Floor"
+
+msgid "Wing"
+msgstr "Wing"
+
+msgid "Extra Fields"
+msgstr "Extra Fields"
+
+msgid "Extra Field Details"
+msgstr "Extra Field Details"
+
+msgid "Instances"
+msgstr "Instances"
+
+msgid "No Instances Found"
+msgstr "No Instances Found"
+
+msgid "Notification"
+msgstr "Notification"
+
+msgid "Notification Details"
+msgstr "Notification Details"
+
+msgid "Reference Doc"
+msgstr "Reference Doc"
+
+msgid "Option Header"
+msgstr "Option Header"
+
+msgid "Option Code"
+msgstr "Option Code"
+
+msgid "Process Flow Header"
+msgstr "Process Flow Header"
+
+msgid "Process Flow Lines"
+msgstr "Process Flow Lines"
+
+msgid "Decision"
+msgstr "Decision"
+
+msgid "Next Seq On Pass"
+msgstr "Next Seq On Pass"
+
+msgid "Next Seq If Fail"
+msgstr "Next Seq If Fail"
+
+msgid "Next Seq On Return"
+msgstr "Next Seq On Return"
+
+msgid "Profile Header"
+msgstr "Profile Header"
+
+msgid "Profile Values"
+msgstr "Profile Values"
+
+msgid "Custom Query"
+msgstr "Custom Query"
+
+msgid "Validation"
+msgstr "Validation"
+
+msgid "Value Group Lines"
+msgstr "Value Group Lines"
+
+msgid "Parent Relationship"
+msgstr "Parent Relationship"
+
+msgid "Is Parent"
+msgstr "Is Parent"
+
+msgid "Allow Budgeting"
+msgstr "Allow Budgeting"
+
+msgid "Allow Posting"
+msgstr "Allow Posting"
+
+msgid "Accounting Group Details"
+msgstr "Accounting Group Details"
+
+msgid "Actual Accounts"
+msgstr "Actual Accounts"
+
+msgid "Variance Accounts"
+msgstr "Variance Accounts"
+
+msgid "Transfer Info"
+msgstr "Transfer Info"
+
+msgid "Reference Info"
+msgstr "Reference Info"
+
+msgid "Finance Info"
+msgstr "Finance Info"
+
+msgid "BOM Seq"
+msgstr "BOM Seq"
+
+msgid "BOM Id"
+msgstr "BOM Id"
+
+msgid "Journal Id"
+msgstr "Journal Id"
+
+msgid "WIP Move Transaction"
+msgstr "WIP Move Transaction"
+
+msgid "Tracking"
+msgstr "Tracking"
+
+msgid "Operation"
+msgstr "Operation"
+
+msgid "Scrap"
+msgstr "Scrap"
+
+msgid "BOM "
+msgstr "BOM "
+
+msgid "Quantity Status"
+msgstr "Quantity Status"
+
+msgid "Sequence"
+msgstr "Sequence"
+
+msgid "Queue"
+msgstr "Queue"
+
+msgid "Running"
+msgstr "Running"
+
+msgid "Rejected"
+msgstr "Rejected"
+
+msgid "Scrapped"
+msgstr "Scrapped"
+
+msgid "To Move"
+msgstr "To Move"
+
+msgid "From Seq"
+msgstr "From Seq"
+
+msgid "To Seq"
+msgstr "To Seq"
+
+msgid "Available Qty"
+msgstr "Available Qty"
+
+msgid "From Step"
+msgstr "From Step"
+
+msgid "To Step"
+msgstr "To Step"
+
+msgid "Move Qty"
+msgstr "Move Qty"
+
+msgid "Issued"
+msgstr "Issued"
+
+msgid "Applied"
+msgstr "Applied"
+
+msgid "History"
+msgstr "History"
+
+msgid "BOM & Routing"
+msgstr "BOM & Routing"
+
+msgid "Routing-2"
+msgstr "Routing-2"
+
+msgid "Routing - Data Collection"
+msgstr "Routing - Data Collection"
+
+msgid "BOM-2"
+msgstr "BOM-2"
+
+msgid "WO Routing Id"
+msgstr "WO Routing Id"
+
+msgid "Resource Details"
+msgstr "Resource Details"
+
+msgid "DetailId"
+msgstr "DetailId"
+
+msgid "Required Qty"
+msgstr "Required Qty"
+
+msgid "Applied Qty"
+msgstr "Applied Qty"
+
+msgid "Open Qty"
+msgstr "Open Qty"
+
+msgid "Progress"
+msgstr "Progress"
+
+msgid "WO BOM Id"
+msgstr "WO BOM Id"
+
+msgid "Open"
+msgstr "Open"
+
+msgid "Work Order Completion/Return"
+msgstr "Work Order Completion/Return"
+
+msgid "Work Order Details"
+msgstr "Work Order Details"
+
+msgid "Document Qty"
+msgstr "Document Qty"
+
+msgid "Transaction Qty"
+msgstr "Transaction Qty"
+
+msgid "Work Order Less Transaction"
+msgstr "Work Order Less Transaction"
+
+msgid "WOL Transaction Details"
+msgstr "WOL Transaction Details"
+
+msgid "Line "
+msgstr "Line "
+
+msgid "PO "
+msgstr "PO "
+
+msgid "PO Line "
+msgstr "PO Line "
+
+msgid "Shipment "
+msgstr "Shipment "
+
+msgid "Supplier "
+msgstr "Supplier "
+
+msgid "Site "
+msgstr "Site "
+
+msgid "Sales Order "
+msgstr "Sales Order "
+
+msgid "SO Line "
+msgstr "SO Line "
+

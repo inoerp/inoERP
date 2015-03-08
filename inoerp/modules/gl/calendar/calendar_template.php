@@ -113,7 +113,7 @@
 </div>
 <div id="js_data">
  <ul id="js_saving_data">
-  <li class="lineClassName" data-headerClassName="gl_calendar" ></li>
+  <!--<li class="headerClassName" data-headerClassName="gl_calendar" ></li>-->
   <li class="primary_column_id" data-primary_column_id="option_line_code" ></li>
   <li class="lineClassName" data-lineClassName="gl_calendar" ></li>
   <li class="line_key_field" data-line_key_field="name" ></li>

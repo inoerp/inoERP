@@ -1,17 +1,20 @@
+<div class="row small-left-padding">
 <div id="form_all">
  <div id="form_headerDiv">
   <form action=""  method="post" id="mdm_tax_code_line"  name="tax_code_line">
-   <div id="form_serach_header">
-    <label>Business Org :</label>
-    <?php echo form::select_field_from_object('org_id', org::find_all_business(), 'org_id', 'org', $org_id_h, 'org_id', $readonly1); ?>
-    <a name="show" href="form.php?class_name=mdm_tax_code&<?php echo "mode=$mode"; ?>" class="show document_id mdm_tax_code_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+   <span class="heading"><?php echo gettext('Tax Codes') ?></span>
+   <div id="form_serach_header" class="tabContainer">
+    <label><?php echo gettext('Business Org') ?></label></label>
+    <?php echo $f->select_field_from_object('org_id', org::find_all_business(), 'org_id', 'org', $org_id_h, 'org_id', $readonly1); ?>
+    <a name="show" href="form.php?class_name=mdm_tax_code&<?php echo "mode=$mode"; ?>" class="show document_id mdm_tax_code_id">
+     <i class="fa fa-refresh"></i></a> 
    </div>
    <div id ="form_line" class="mdm_tax_code"><span class="heading">Tax Details </span>
     <div id="tabsLine">
      <ul class="tabMain">
-      <li><a href="#tabsLine-1">Tax Code </a></li>
-      <li><a href="#tabsLine-2">Control </a></li>
-      <li><a href="#tabsLine-3">Reporting </a></li>
+      <li><a href="#tabsLine-1"><?php echo gettext('Tax Code') ?></a></li>
+      <li><a href="#tabsLine-2"><?php echo gettext('Control') ?></a></li>
+      <li><a href="#tabsLine-3"><?php echo gettext('Reporting') ?></a></li>
      </ul>
      <div class="tabContainer"> 
 
@@ -19,18 +22,17 @@
        <table class="form_table">
         <thead> 
          <tr>
-
-          <th>Action</th>
-          <th>Seq#</th>
-          <th>Id</th>
-          <th>Code</th>
-          <th>Type</th>
-          <th>Description</th>
-          <th>In or Out</th>
-          <th>Dr or Cr </th>
-          <th>Calculation</th>
-          <th>Percentage</th>
-          <th>Amount</th>
+          <th><?php echo gettext('Action') ?></th>
+          <th><?php echo gettext('Seq') ?>#</th>
+          <th><?php echo gettext('Id') ?></th>
+          <th><?php echo gettext('Code') ?>#</th>
+          <th><?php echo gettext('Type') ?>#</th>
+          <th><?php echo gettext('Description') ?></th>
+          <th><?php echo gettext('In or Out') ?></th>
+          <th><?php echo gettext('Dr or Cr') ?></th>
+          <th><?php echo gettext('Region Calculation') ?></th>
+          <th><?php echo gettext('Percentage') ?></th>
+          <th><?php echo gettext('Amount') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody tax_code_values" >
@@ -42,13 +44,9 @@
           $mdm_tax_code = $tax_code_object_ai->current();
           ?>         
           <tr class="mdm_tax_code<?php echo $count ?>">
-           <td>    
-            <ul class="inline_action">
-             <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-             <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-             <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class->mdm_tax_code_id); ?>"></li>           
-             <li><?php echo form::hidden_field('org_id', $org_id_h); ?></li>
-            </ul>
+           <td><?php
+            echo ino_inline_action($$class->mdm_tax_code_id, array('org_id' => $org_id_h));
+            ?>    
            </td>
            <td><?php $f->seq_field_d($count) ?></td>
            <td><?php form::number_field_drs('mdm_tax_code_id') ?></td>
@@ -76,13 +74,13 @@
        <table class="form_table">
         <thead> 
          <tr>
-          <th>Seq#</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>Account</th>
-          <th>Ad hoc Rate</th>
-          <th>Exemption</th>
-          <th>Status</th>
+          <th><?php echo gettext('Seq') ?>#</th>
+          <th><?php echo gettext('Start Date') ?></th>
+          <th><?php echo gettext('End Date') ?>#</th>
+          <th><?php echo gettext('Account') ?>#</th>
+          <th><?php echo gettext('Ad hoc Rate') ?></th>
+          <th><?php echo gettext('Exemption') ?></th>
+          <th><?php echo gettext('Status') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody tax_code_values" >
@@ -119,11 +117,11 @@
        <table class="form_table">
         <thead> 
          <tr>
-          <th>Seq#</th>
-          <th>Regime</th>
-          <th>Jurisdiction</th>
-          <th>Printed Name</th>
-          <th>Offset Tax</th>
+          <th><?php echo gettext('Seq') ?>#</th>
+          <th><?php echo gettext('Regime') ?></th>
+          <th><?php echo gettext('Jurisdiction') ?>#</th>
+          <th><?php echo gettext('Printed Name') ?>#</th>
+          <th><?php echo gettext('Offset Tax') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody tax_code_values" >
@@ -160,13 +158,17 @@
   </form>
  </div>
 </div>
+</div>
 
+<div class="row small-top-margin">
 <div id="pagination" style="clear: both;">
  <?php echo $pagination->show_pagination(); ?>
 </div>
+ </div>
 
 <div id="js_data">
  <ul id="js_saving_data">
+  <li class="primary_column_id" data-primary_column_id="org_id" ></li>
   <li class="lineClassName" data-lineClassName="mdm_tax_code" ></li>
   <li class="line_key_field" data-line_key_field="tax_code" ></li>
   <li class="single_line" data-single_line="false" ></li>

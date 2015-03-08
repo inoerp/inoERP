@@ -1,26 +1,25 @@
 <div id ="form_header">
- <form action=""  method="post" id="hr_leave_type"  name="hr_leave_type"><span class="heading">Leave Type </span>
+ <form action=""  method="post" id="hr_leave_type"  name="hr_leave_type">
+  <span class="heading"><?php echo gettext('Leave Type') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Attachments</a></li>
-     <li><a href="#tabsHeader-3">Notes</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
       <div class="large_shadow_box"> 
-       <ul class="column four_column"> 
-        <li> 
-         <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_leave_type_id select_popup clickable">
-          Leave Type Id : </label><?php $f->text_field_ds('hr_leave_type_id') ?>
-         <a name="show" href="form.php?class_name=hr_leave_type&<?php echo "mode=$mode"; ?>" class="show document_id hr_leave_type_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+       <ul class="column header_field"> 
+        <li><?php $f->l_text_field_dr_withSearch('hr_leave_type_id') ?>
+         <a name="show" href="form.php?class_name=hr_leave_type&<?php echo "mode=$mode"; ?>" class="show document_id hr_leave_type_id">
+          <i class="fa fa-refresh"></i></a> 
         </li>
-        <li><label>Leave Type :</label><?php $f->text_field_dm('leave_type'); ?> 
-        <li><label>Category  :</label>
-         <?php echo $f->select_field_from_object('leave_category', hr_leave_type::leave_category(), 'option_line_code', 'option_line_value', $$class->leave_category, 'leave_category', '', 1, $readonly1) ?></li>
-        <li><label>Status : </label><?php echo form::status_field($$class->status, $readonly); ?> </li>
-        <li><label>Description :</label><?php $f->text_field_dl('description'); ?> 	</li>
+        <li><?php $f->l_text_field_dm('leave_type'); ?> 
+        <li><?php $f->l_select_field_from_object('leave_category', hr_leave_type::leave_category(), 'option_line_code', 'option_line_value', $$class->leave_category, 'leave_category', '', 1, $readonly1) ?></li>
+        <li><?php $f->l_status_field_d('status'); ?> </li>
+        <li><?php $f->l_text_field_d('description'); ?> 	</li>
        </ul>
       </div>
      </div>
@@ -48,22 +47,23 @@
 
    </div>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading">Details  </span>
+  <div id ="form_line" class="form_line">
+   <span class="heading"><?php echo gettext('Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1">Details</a></li>
-     <li><a href="#tabsLine-2">Future</a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Details') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <ul class="column four_column"> 
-       <li><label>Allow Carry Forward :</label><?php $f->checkBox_field_d('allow_carry_forward_cb'); ?> 					</li>
-       <li><label>Auto Convert Salary :</label><?php $f->checkBox_field_d('auto_convert_salary_cb'); ?> 					</li>
-       <li><label>Allow Advance :</label><?php $f->checkBox_field_d('allow_advance_cb'); ?> 					</li>
-       <li><label>Leave w/o Pay :</label><?php $f->checkBox_field_d('lwp_cb'); ?> 					</li>
-       <li><label>Carry Forward/Year :</label><?php $f->text_field_d('carry_forward_per_year'); ?> 					</li>
-       <li><label>Max. Accumulation :</label><?php $f->text_field_d('maximum_accumulation'); ?> 					</li>
-       <li><label>Default Reason :</label><?php $f->text_field_dl('default_reason'); ?> 					</li>
+       <li><?php $f->l_checkBox_field_d('allow_carry_forward_cb'); ?> 					</li>
+       <li><?php $f->l_checkBox_field_d('auto_convert_salary_cb'); ?> 					</li>
+       <li><?php $f->l_checkBox_field_d('allow_advance_cb'); ?> 					</li>
+       <li><?php $f->l_checkBox_field_d('lwp_cb'); ?> 					</li>
+       <li><?php $f->l_text_field_d('carry_forward_per_year'); ?> 					</li>
+       <li><?php $f->l_text_field_d('maximum_accumulation'); ?> 					</li>
+       <li><?php $f->l_text_field_d('default_reason'); ?> 					</li>
       </ul>
      </div> 
      <div id="tabsLine-2"  class="tabContent">

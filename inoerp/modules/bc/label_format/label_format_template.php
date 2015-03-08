@@ -1,31 +1,30 @@
 <div id ="form_header">
- <form action=""  method="post" id="bc_label_format_header"  name="bc_label_format_header"><span class="heading">Barcode Label Format </span>
-  <div id="tabsHeader">
+ <form action=""  method="post" id="bc_label_format_header"  name="bc_label_format_header">
+  <span class="heading"><?php echo gettext('Barcode Label Format') ?></span>
+  <div id="tabsHeader"><?php $f = new inoform(); ?>
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1">Basic Info</a></li>
-    <li><a href="#tabsHeader-2">Data Object</a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Data Object') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
-      <ul class="column header_field">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bc_label_format_header_id select_popup clickable">
-         Header Id</label><?php $f->text_field_dsr('bc_label_format_header_id') ?>
-        <a name="show" href="form.php?class_name=bc_label_format_header&<?php echo "mode=$mode"; ?>" class="show document_id bc_label_format_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-       </li>
-       <li><label>Label Format Name</label><?php $f->text_field_d('format_name'); ?></li>
-       <li><label>Label Type</label><?php echo $f->select_field_from_object('label_type', bc_label_format_header::label_type(), 'option_line_code', 'option_line_value', $$class->label_type); ?></li>
-       <li><label>Disable Date</label><?php echo $f->date_fieldFromToday('disable_date', $$class->disable_date); ?></li>
-       <li><label>Description</label><?php $f->text_field_dl('description'); ?></li>
-       <li><label>Default</label><?php $f->checkBox_field_d('default_cb'); ?></li>
-      </ul>
-     </div>
+     <ul class="column header_field">
+      <li><?php $f->l_text_field_dr_withSearch('bc_label_format_header_id') ?>
+       <a name="show" href="form.php?class_name=bc_label_format_header&<?php echo "mode=$mode"; ?>" class="show document_id bc_label_format_header_id">
+        <i class="fa fa-refresh"></i></a> 
+      </li>
+      <li><?php $f->l_text_field_d('format_name'); ?></li>
+      <li><?php $f->l_select_field_from_object('label_type', bc_label_format_header::label_type(), 'option_line_code', 'option_line_value', $$class->label_type); ?></li>
+      <li><?php $f->l_date_fieldFromToday('disable_date', $$class->disable_date); ?></li>
+      <li><?php $f->l_text_field_d('description'); ?></li>
+      <li><?php $f->l_checkBox_field_d('default_cb'); ?></li>
+     </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column one_column">
-       <li><label>Generator Class Name: </label><?php $f->text_field_dl('generator_class_name'); ?></li>
-       <li><label>Generator Function Name: </label><?php $f->text_field_dl('generator_function_name'); ?></li>
+       <li><?php $f->l_text_field_d('generator_class_name'); ?></li>
+       <li><?php $f->l_text_field_d('generator_function_name'); ?></li>
       </ul>
      </div>
     </div>
@@ -38,20 +37,20 @@
  <form action=""  method="post" id="bc_label_format_line"  name="bc_label_format_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Basic Info </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th>Seq#</th>
-        <th>Line Id</th>
-        <th>Object/Table Name</th>
-        <th>Sys Field Name</th>
-        <th>Field Name</th>
-        <th>Field Description</th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Object/Table Name') ?></th>
+        <th><?php echo gettext('Sys Field Name') ?></th>
+        <th><?php echo gettext('Field Name') ?></th>
+        <th><?php echo gettext('Field Description') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -65,13 +64,9 @@
         }
         ?>         
         <tr class="bc_label_format_line<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="add_row_img clickable"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class_second->bc_label_format_line_id); ?>"></li>           
-           <li><?php echo form::hidden_field('bc_label_format_header_id', $bc_label_format_header->bc_label_format_header_id); ?></li>
-          </ul>
+         <td><?php
+          echo ino_inline_action($$class_second->bc_label_format_line_id, array('bc_label_format_header_id' => $bc_label_format_header->bc_label_format_header_id));
+          ?>        
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php echo $f->text_field_wid2sr('bc_label_format_line_id'); ?></td>

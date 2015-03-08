@@ -1,30 +1,28 @@
 <div id ="form_header">
- <form action=""  method="post" id="extn_contact"  name="extn_contact"><span class="heading">Contact </span>
+ <form action=""  method="post" id="extn_contact"  name="extn_contact">
+  <span class="heading">Contact </span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Attachments</a></li>
-     <li><a href="#tabsHeader-3">Notes</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
-       <ul class="column header_field"> 
-        <li> 
-         <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="extn_contact_id select_popup clickable">
-          Contact Id</label><?php $f->text_field_dsr('extn_contact_id') ?>
-         <a name="show" href="form.php?class_name=extn_contact&<?php echo "mode=$mode"; ?>" class="show document_id extn_contact_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-        </li>
-        <li><label>Contact Name</label><?php $f->text_field_dm('contact_name'); ?> 					</li>
-        <li><label>Last Name</label><?php $f->text_field_dm('last_name'); ?> 					</li>
-        <li><label>First Name</label><?php $f->text_field_d('first_name'); ?> 					</li>
-        <li><label>Middle Name</label><?php $f->text_field_d('middle_name'); ?> 					</li>
-        <li><label>e-Mail</label><?php $f->text_field_d('email_id'); ?> 					</li>
-        <li><label>Job Title</label><?php $f->text_field_d('job_titile'); ?> 					</li>
-        <li><label>Contact Type</label><?php $f->text_field_d('type'); ?> 					</li>
-       </ul>
-      </div>
+      <ul class="column header_field"> 
+       <li><?php $f->l_text_field_dr_withSearch('extn_contact_id') ?>
+        <a name="show" href="form.php?class_name=extn_contact&<?php echo "mode=$mode"; ?>" class="show document_id extn_contact_id">
+         <i class="fa fa-refresh"></i></a> 
+       </li>
+       <li><?php $f->l_text_field_dm('contact_name'); ?> 					</li>
+       <li><?php $f->l_text_field_dm('last_name'); ?> 					</li>
+       <li><?php $f->l_text_field_d('first_name'); ?> 					</li>
+       <li><?php $f->l_text_field_d('middle_name'); ?> 					</li>
+       <li><?php $f->l_text_field_d('email_id'); ?> 					</li>
+       <li><?php $f->l_text_field_d('job_titile'); ?> 					</li>
+       <li><?php $f->l_text_field_d('type'); ?> 					</li>
+      </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div> <?php echo ino_attachement($file) ?> </div>
@@ -50,30 +48,28 @@
 
    </div>
   </div>
-  <span class="heading">Other Details </span>
+  <span class="heading"><?php echo gettext('Other Details') ?></span>
   <div id ="form_line">
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1">Numbers</a></li>
-     <li><a href="#tabsLine-2">Others</a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Numbers') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Others') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
-      <div class="large_shadow_box"> 
-       <ul class="column four_column"> 
-        <li><label>Mobile :</label><?php $f->text_field_d('mobile_number'); ?> 					</li>
-        <li><label>Office :</label><?php $f->text_field_d('office_number'); ?> 					</li>
-        <li><label>Phone 2 :</label><?php $f->text_field_d('contact_number2'); ?> 					</li>
-        <li><label>Fax :</label><?php $f->text_field_dl('fax_no'); ?> 					</li>
+       <ul class="column header_field"> 
+        <li><?php $f->l_text_field_d('mobile_number'); ?> 					</li>
+        <li><?php $f->l_text_field_d('office_number'); ?> 					</li>
+        <li><?php $f->l_text_field_d('contact_number2'); ?> 					</li>
+        <li><?php $f->l_text_field_d('fax_no'); ?> 					</li>
        </ul>
-      </div>
      </div>
      <div id="tabsLine-2" class="tabContent">
       <div class="large_shadow_box"> 
-       <ul class="column four_column"> 
-        <li><label>Alternate e-Mail :</label><?php $f->text_field_dl('email_id2'); ?> 					</li>
-        <li><label>Time Zone :</label><?php $f->text_field_d('timezone'); ?> 					</li>
-        <li><label>Preferred Time :</label><?php $f->text_field_d('time_to_contact'); ?> 					</li>
+       <ul class="column header_field">
+        <li><?php $f->l_text_field_d('email_id2'); ?> 					</li>
+        <li><?php $f->l_text_field_d('timezone'); ?> 					</li>
+        <li><?php $f->l_text_field_d('time_to_contact'); ?> 					</li>
        </ul>
       </div>
      </div>

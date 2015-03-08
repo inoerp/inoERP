@@ -1,44 +1,45 @@
-<div id="form_all"><span class="heading">Value Group Header </span>
+
+<div class="row small-left-padding">
+<div id="form_all">
+ <span class="heading"><?php echo gettext('Value Group Header') ?></span>
  <form action=""  method="post" id="sys_value_group_header"  name="sys_value_group_header">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Validation</a></li>
-     <li><a href="#tabsHeader-3">Attachments</a></li>
-     <li><a href="#tabsHeader-4">Notes</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Validation') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field">
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sys_value_group_header_id select_popup clickable">
-          Value Group Id</label><?php echo form::number_field_drs('sys_value_group_header_id'); ?>
-         <a name="show" href="form.php?class_name=sys_value_group_header&<?php echo "mode=$mode"; ?>" class="show document_id sys_value_group_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <li><?php $f->l_text_field_dr_withSearch('sys_value_group_header_id'); ?>
+         <a name="show" href="form.php?class_name=sys_value_group_header&<?php echo "mode=$mode"; ?>" 
+            class="show document_id sys_value_group_header_id"><i class="fa fa-refresh"></i></a> 
         </li>
-        <li><label>Value Group(1)</label><?php echo form::text_field_dm('value_group'); ?></li>
-        <li><label>Access Level*</label><?php echo form::select_field_from_array('access_level', sys_value_group_header::$access_level_array, $$class->access_level, 'access_level', $readonly); ?>        </li>
-        <li><label>Description</label><?php echo form::text_field_dm('description'); ?></li>
-        <li><label>Module*</label><?php echo $f->select_field_from_object('module_code', option_header::modules(), 'option_line_code', 'option_line_value', $$class->module_code, 'module_code', '', 1) ?>        </li>
-        <li><label>Assignment</label><?php echo form::select_field_from_object('option_assignments', option_header::option_assignments(), 'option_line_code', 'option_line_value', $$class->option_assignments, 'option_assignments', $readonly); ?>        </li>
-        <li><label>Status</label><?php echo form::status_field_d('status'); ?></li>
-        <li><label>Revision</label><?php form::revision_enabled_field_d('rev_enabled'); ?></li>
-        <li><label>Revision No</label><?php form::text_field_ds('rev_number'); ?></li>
+        <li><?php $f->l_text_field_dm('value_group'); ?></li>
+        <li><?php $f->l_select_field_from_array('access_level', sys_value_group_header::$access_level_array, $$class->access_level, 'access_level', $readonly); ?>        </li>
+        <li><?php $f->l_text_field_dm('description'); ?></li>
+        <li><?php $f->l_select_field_from_object('module_code', option_header::modules(), 'option_line_code', 'option_line_value', $$class->module_code, 'module_code', '', 1) ?>        </li>
+        <li><?php $f->l_select_field_from_object('option_assignments', option_header::option_assignments(), 'option_line_code', 'option_line_value', $$class->option_assignments, 'option_assignments', $readonly); ?>        </li>
+        <li><?php $f->l_status_field_d('status'); ?></li>
+        <li><?php $f->l_checkBox_field_d('rev_enabled'); ?></li>
+        <li><?php $f->l_text_field_ds('rev_number'); ?></li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div> 
        <ul class="column header_field">
-        <li><label>Validation Type</label><?php echo form::select_field_from_object('validation_type', sys_value_group_header::validation_types(), 'option_line_code', 'option_line_value', $$class->validation_type, '', $readonly, 'validation_type', ''); ?></li>
-        <li><label>Field Type</label><?php echo form::select_field_from_object('field_type', content_type::content_field_type(), 'option_line_code', 'option_line_value', $$class->field_type, '', $readonly, 'field_type', ''); ?></li>
-        <li><label>Min Size</label><?php echo form::number_field_d('min_size'); ?></li>
-        <li><label>Max Size</label><?php echo form::number_field_d('max_size'); ?></li>
-        <li><label>Fixed Size</label><?php echo form::number_field_d('fixed_size'); ?></li>
-        <li><label>Min Value</label><?php echo form::number_field_d('min_value'); ?></li>
-        <li><label>Max Value </label><?php echo form::number_field_d('max_value'); ?></li>
-        <li><label>Number Only</label><?php form::checkBox_field_d('number_only_cb'); ?></li>
-        <li><label>Uppercase Only</label><?php form::checkBox_field_d('uppercase_only_cb'); ?></li>
+        <li><?php $f->l_select_field_from_object('validation_type', sys_value_group_header::validation_types(), 'option_line_code', 'option_line_value', $$class->validation_type, '', $readonly, 'validation_type', ''); ?></li>
+        <li><?php $f->l_select_field_from_object('field_type', content_type::content_field_type(), 'option_line_code', 'option_line_value', $$class->field_type, '', $readonly, 'field_type', ''); ?></li>
+        <li><?php $f->l_number_field_d('min_size'); ?></li>
+        <li><?php $f->l_number_field_d('max_size'); ?></li>
+        <li><?php $f->l_number_field_d('fixed_size'); ?></li>
+        <li><?php $f->l_number_field_d('min_value'); ?></li>
+        <li><?php $f->l_number_field_d('max_value'); ?></li>
+        <li><?php $f->l_checkBox_field_d('number_only_cb'); ?></li>
+        <li><?php $f->l_checkBox_field_d('uppercase_only_cb'); ?></li>
        </ul>
       </div>
      </div>
@@ -66,13 +67,14 @@
    </div>
   </div>
  </form>
- <div id ="form_line" class="form_line"><span class="heading">Value Group Lines </span>
+ <div id ="form_line" class="form_line">
+  <span class="heading"><?php echo gettext('Value Group Lines') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">values</a></li>
-    <li><a href="#tabsLine-2">Parent Relationship </a></li>
-    <li><a href="#tabsLine-3">Finance </a></li>
-    <li><a href="#tabsLine-4">Item </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Values') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Parent Relationship') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Finance') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('Item') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <form action=""  method="post" id="sys_value_group_line_line"  name="sys_value_group_line_line">
@@ -80,15 +82,15 @@
       <table class="form_table">
        <thead> 
         <tr>
-         <th>Action</th>
-         <th>Seq#</th>
-         <th>Line Id</th>
-         <th>Code</th>
-         <th>Value</th>
-         <th>Description</th>
-         <th>Status</th>
-         <th>Start Date</th>
-         <th>End Date</th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Seq') ?>#</th>
+         <th><?php echo gettext('Line Id') ?></th>
+         <th><?php echo gettext('Code') ?></th>
+         <th><?php echo gettext('Value') ?></th>
+         <th><?php echo gettext('Description') ?></th>
+         <th><?php echo gettext('Status') ?></th>
+         <th><?php echo gettext('Start Date') ?></th>
+         <th><?php echo gettext('End Date') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody sys_value_group_line_values" >
@@ -101,14 +103,10 @@
          $sys_value_group_line = $sys_value_group_line_object_ai->current();
          ?>         
          <tr class="sys_value_group_line<?php echo $count ?>">
-          <td>    
-           <ul class="inline_action">
-            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($sys_value_group_line->sys_value_group_line_id); ?>"></li>           
-            <li><?php echo form::hidden_field('sys_value_group_header_id', $$class->sys_value_group_header_id); ?></li>
-           </ul>
-          </td>
+          <td><?php
+            echo ino_inline_action($$class_second->sys_value_group_line_id, array('sys_value_group_header_id' => $$class->sys_value_group_header_id));
+            ?>     
+         </td>
           <td><?php $f->seq_field_d($count) ?></td>
           <td><?php form::number_field_wid2sr('sys_value_group_line_id'); ?></td>
           <td><?php form::text_field_wid2sm('code') ?></td>
@@ -133,9 +131,9 @@
       <table class="form_table">
        <thead> 
         <tr>
-         <th>Seq#</th>
-         <th>Is Parent</th>
-         <th>Parent Name</th>
+         <th><?php echo gettext('Seq') ?>#</th>
+         <th><?php echo gettext('Is Parent') ?></th>
+         <th><?php echo gettext('Parent Name') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody sys_value_group_line_values" >
@@ -155,7 +153,7 @@
            ?></td>
          </tr>
          <?php
-                  $sys_value_group_line_object_ai->next();
+         $sys_value_group_line_object_ai->next();
          if ($sys_value_group_line_object_ai->key() == $position + $per_page) {
           break;
          }
@@ -169,10 +167,10 @@
       <table class="form_table">
        <thead> 
         <tr>
-         <th>Seq#</th>
-         <th>Account Qualifier</th>
-         <th>Allow Budgeting</th>
-         <th>Allow Posting</th>
+         <th><?php echo gettext('Seq') ?></th>
+         <th><?php echo gettext('Account Qualifier') ?>#</th>
+         <th><?php echo gettext('Allow Budgeting') ?></th>
+         <th><?php echo gettext('Allow Posting') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody sys_value_group_line_values" >
@@ -190,7 +188,7 @@
           <td><?php echo form::checkBox_field_d2('allow_posting_cb'); ?></td>
          </tr>
          <?php
-                  $sys_value_group_line_object_ai->next();
+         $sys_value_group_line_object_ai->next();
          if ($sys_value_group_line_object_ai->key() == $position + $per_page) {
           break;
          }
@@ -209,9 +207,12 @@
   </div>
  </div> 
 </div>
+</div>
 
-<div id="pagination" style="clear: both;">
- <?php echo $pagination->show_pagination(); ?>
+<div class="row small-top-margin">
+ <div id="pagination" style="clear: both;">
+  <?php echo $pagination->show_pagination(); ?>
+ </div>
 </div>
 
 <div id="js_data">

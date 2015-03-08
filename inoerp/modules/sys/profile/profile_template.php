@@ -1,39 +1,34 @@
-<div id="form_all"><span class="heading">Profile Header </span>
+<div id="form_all">
+ <span class="heading"><?php echo gettext('Profile Header') ?></span>
  <form action=""  method="post" id="sys_profile_header"  name="sys_profile_header">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
-       <ul class="column four_column">
-        <li> <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sys_profile_header_id select_popup clickable">
-          Profile Id : </label><?php echo form::number_field_drs('sys_profile_header_id');       ?>
-        </li>
-        <li><label>Access Level : </label>
-         <?php echo $f->select_field_from_array('access_level', sys_profile_header::$access_level_a, $$class->access_level); ?>
-        </li>
-        <li><label>Profile Name : </label> <?php $f->text_field_dlm('profile_name'); ?> </li>
-        <li><label>Class Name : </label> <?php $f->text_field_dlm('class_name'); ?> </li>
-        <li><label>Description : </label> <?php $f->text_field_d('description'); ?></li>
-        <li><label>Profile Level : </label>
-         <?php echo $f->select_field_from_array('profile_level', sys_profile_header::$profile_level_a, $$class->profile_level, 'profile_level'); ?>
-         <a name="show" href="form.php?class_name=sys_profile_header&<?php echo "mode=$mode"; ?>" class="show2 document_id sys_profile_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a>
-        </li>
-       </ul>
-      </div>
+      <ul class="column header_field">
+       <li><?php $f->l_text_field_dr_withSearch('sys_profile_header_id'); ?></li>
+       <li><?php $f->l_select_field_from_array('access_level', sys_profile_header::$access_level_a, $$class->access_level); ?></li>
+       <li><?php $f->l_text_field_dm('profile_name'); ?> </li>
+       <li><?php $f->l_text_field_dm('class_name'); ?> </li>
+       <li><?php $f->l_text_field_d('description'); ?></li>
+       <li><?php $f->l_select_field_from_array('profile_level', sys_profile_header::$profile_level_a, $$class->profile_level, 'profile_level'); ?>
+        <a name="show" href="form.php?class_name=sys_profile_header&<?php echo "mode=$mode"; ?>" class="show2 document_id sys_profile_header_id">
+         <i class="fa fa-refresh"></i></a>
+       </li>
+      </ul>
      </div>
     </div>
    </div>
   </div>
  </form>
- <div id ="form_line" class="form_line"><span class="heading">Profile Values </span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Profile Values') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Values</a></li>
-    <li><a href="#tabsLine-2">Custom Query</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Values') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Custom Query') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <form action=""  method="post" id="sys_profile_line_line"  name="sys_profile_line_line">
@@ -83,8 +78,8 @@
          <tr class="sys_profile_line<?php echo $count ?>">
           <td>    
            <ul class="inline_action">
-            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+            <li class="add_row_img"><i class="fa fa-plus-circle"></i></li>
+            <li class="remove_row_img"><i class="fa fa-minus-circle"></i></li>
             <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($sys_profile_line->sys_profile_line_id); ?>"></li>           
             <li><?php echo form::hidden_field('sys_profile_header_id', $$class->sys_profile_header_id); ?></li>
             <li><?php echo form::hidden_field('profile_level', $$class->profile_level); ?></li>

@@ -144,7 +144,7 @@
       <ul class="nav nav-pills">
        <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
        <li><a href="http://inoideas.org/content/demo" >DEMO <div class="arrow-up"></div></a></li>
-       <li><a href="https://github.com/inoerp/inoERP/fork" >Download <div class="arrow-up"></div></a></li>
+       <li><a href="https://github.com/inoerp/inoERP" >Download <div class="arrow-up"></div></a></li>
        <li class="active"><a href="<?php echo HOME_URL; ?>content.php?mode=9&content_type=forum&category_id=7" ><i class="fa fa-comments-o"></i> Ask a Question <div class="arrow-up"></div></a></li>
        <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
        <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>

@@ -152,13 +152,13 @@ if (!empty($_GET['class_name'])) {
     $no_organization_access = true;
     return;
    }
-   $all_orgs_in_cls = "bu_org_id IN ('" . implode("','", array_keys($_SESSION['user_org_access'])) . "')";
+   $all_orgs_in_cls = "bu_org_id IN ('" . implode("','", array_keys($_SESSION['user_org_access'])) . "')  || org_id IS NULL ";
   } else if (property_exists($$class, 'org_id')) {
    if (empty($_SESSION['user_org_access'])) {
     $no_organization_access = true;
     return;
    }
-   $all_orgs_in_cls = "org_id IN ('" . implode("','", array_keys($_SESSION['user_org_access'])) . "')";
+   $all_orgs_in_cls = "org_id IN ('" . implode("','", array_keys($_SESSION['user_org_access'])) . "') || org_id IS NULL ";
   }
 
   if (count($whereFields) > 0) {

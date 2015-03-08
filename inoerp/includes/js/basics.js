@@ -31,7 +31,7 @@ function getFormDetails(url) {
   data: {
   },
   beforeSend: function () {
-   $('#overlay').css('display', 'block');
+     $('#overlay').css('display', 'block');
   },
   complete: function () {
 
@@ -3819,8 +3819,8 @@ getFormDetails(formUrl);
  });
 
  $('body').on('click', 'a.payslipBy_periodName', function (e) {
-  var headerId_v = $(this).closest('td').find('select').val();
-  var headerId = $(this).closest('td').find('select').attr('id');
+  var headerId_v = $(this).parent().find('select').val();
+  var headerId = $(this).parent().find('select').attr('id');
   e.preventDefault();
   var urlLink = $(this).attr('href');
   var urlLink_a = urlLink.split('?');
@@ -4133,6 +4133,11 @@ getFormDetails(formUrl);
   });
 
  });
+ 
+ $('body').on('focusin', '.always_readonly', function(){
+$(this).attr('readonly', true).css('background-color','none repeat scroll 0% 0% #F3F3D2;');
+alert('Read Only Field');
+});
 
 });
 function toUpperCase(str)

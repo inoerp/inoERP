@@ -1,53 +1,53 @@
 <div id ="form_header">
- <form action=""  method="post" id="cc_co_template_header"  name="cc_co_template_header"><span class="heading">Change Control Template </span>
-  <div id="tabsHeader">
+ <form action=""  method="post" id="cc_co_template_header"  name="cc_co_template_header">
+  <span class="heading"><?php echo gettext('Change Control Template') ?></span>
+  <div id="tabsHeader"><?php $f = new inoform(); ?>
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1">Basic Info</a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
       <ul class="column header_field">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="cc_co_template_header_id select_popup clickable">
-         Header Id</label><?php $f->text_field_dsr('cc_co_template_header_id') ?>
-        <a name="show" href="form.php?class_name=cc_co_template_header&<?php echo "mode=$mode"; ?>" class="show document_id cc_co_template_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+       <li><?php $f->l_text_field_dr_withSearch('cc_co_template_header_id') ?>
+        <a name="show" href="form.php?class_name=cc_co_template_header&<?php echo "mode=$mode"; ?>" 
+           class="show document_id cc_co_template_header_id"><i class="fa fa-refresh"></i></a> 
        </li>
-       <li><label>Template Name</label><?php $f->text_field_d('template_name'); ?></li>
-       <li><label>Inventory Org</label><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id'); ?>       </li>
-       <li><label>Status</label><?php echo form::status_field($$class->status, $readonly); ?></li>
-       <li><label>Description</label><?php $f->text_field_dl('description'); ?></li>
+       <li><?php $f->l_text_field_d('template_name'); ?></li>
+       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id'); ?>       </li>
+       <li><?php $f->l_status_field_d('status'); ?></li>
+       <li><?php $f->l_text_field_d('description'); ?></li>
       </ul>
-     </div>
     </div>
    </div>
   </div>
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading">Template Fields </span>
+<div id="form_line" class="form_line">
+ <span class="heading"><?php echo gettext('Template Fields') ?></span>
  <form action=""  method="post" id="cc_co_template_line"  name="cc_co_template_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Basic Info </a></li>
-    <li><a href="#tabsLine-2">List Values </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('List Values') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th>Seq#</th>
-        <th>Line Id</th>
-        <th>Field Name</th>
-        <th>Label</th>
-        <th>Value Type</th>
-        <th>Mandatory Field ?</th>
-        <th>Control Type</th>
-        <th>Control Value</th>
-        <th>Control UOM</th>
-        <th>Display Weight</th>
-        <th>Active</th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Field Name') ?>#</th>
+        <th><?php echo gettext('Label') ?></th>
+        <th><?php echo gettext('Value Type') ?></th>
+        <th><?php echo gettext('Mandatory Field') ?></th>
+        <th><?php echo gettext('Control Type') ?></th>
+        <th><?php echo gettext('Control Value') ?></th>
+        <th><?php echo gettext('Control UOM') ?>#</th>
+        <th><?php echo gettext('Display Weight') ?></th>
+        <th><?php echo gettext('Active') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -62,16 +62,12 @@
         }
         ?>         
         <tr class="cc_co_template_line<?php echo $count ?>">
-         <td>    
-          <ul class="inline_action">
-           <li class="add_row_img clickable"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class_second->cc_co_template_line_id); ?>"></li>           
-           <li><?php echo form::hidden_field('cc_co_template_header_id', $cc_co_template_header->cc_co_template_header_id); ?></li>
-          </ul>
+         <td><?php
+          echo ino_inline_action($$class_second->cc_co_template_line_id, array('cc_co_template_header_id' => $$class->cc_co_template_header_id));
+          ?>    
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
-         <td><?php echo $f->text_field('cc_co_template_line_id', $$class_second->cc_co_template_line_id, '8'); ?></td>
+         <td><?php echo $f->text_field('cc_co_template_line_id', $$class_second->cc_co_template_line_id, '8','','always_readonly'); ?></td>
          <td><?php
           if (!empty($$class_second->field_name) && !in_array($$class_second->field_name, get_dbColumns_valIndex('item'))) {
            echo $f->text_field('field_name', $$class_second->field_name, '20');
@@ -100,11 +96,11 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Seq#</th>
-        <th>Lower Limit</th>
-        <th>Upper Limit</th>
-        <th>List Option Type</th>
-        <th>List Values</th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Lower Limit') ?></th>
+        <th><?php echo gettext('Upper Limit') ?></th>
+        <th><?php echo gettext('List Option Type') ?></th>
+        <th><?php echo gettext('List Values') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

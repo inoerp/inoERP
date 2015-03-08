@@ -1,1450 +1,1449 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
+"POT-Creation-Date: 2015-03-09 00:12+0800\n"
+"PO-Revision-Date: 2015-03-09 00:13+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hi_IN\n"
 "X-Generator: Poedit 1.7.4\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 
-# Test token 1
-msgid "HELLO_WORLD"
-msgstr "हैलो वर्ल्ड"
 
 msgid "Address Id"
-msgstr "पता Id"
+msgstr "地址 Id"
 
 msgid "Type"
-msgstr "प्रकार"
+msgstr "类型"
 
 msgid "Address Name"
-msgstr "पता नाम"
+msgstr "地址名称"
 
 msgid "Mdm Tax Region Id"
-msgstr "मध्याह्न भोजन टैक्स क्षेत्र Id"
+msgstr "Mdm 税地区 Id"
 
 msgid "Description"
-msgstr "विवरण"
+msgstr "描述"
 
 msgid "Phone"
-msgstr "फोन"
+msgstr "电话"
 
 msgid "Email"
-msgstr "ईमेल"
+msgstr "电子邮件"
 
 msgid "Website"
-msgstr "वेबसाइट"
+msgstr "网站"
 
 msgid "Address"
-msgstr "पते"
+msgstr "地址"
 
 msgid "Country"
-msgstr "देश"
+msgstr "国家"
 
 msgid "Postal Code"
-msgstr "पोस्टल कोड"
+msgstr "邮政编码"
 
 msgid "Efid"
 msgstr "Efid"
 
 msgid "Status"
-msgstr "स्थिति"
+msgstr "状态"
 
 msgid "Rev Enabled"
-msgstr "रेव सक्षम किया गया"
+msgstr "冯启用"
 
 msgid "Rev Number"
-msgstr "रेव संख्या"
+msgstr "修订版本号"
 
 msgid "Created By"
-msgstr "के द्वारा बनाई गई"
+msgstr "创建由"
 
 msgid "Creation Date"
-msgstr "निर्माण दिनांक"
+msgstr "创建日期"
 
 msgid "Last Update By"
-msgstr "अंतिम अद्यतन के द्वारा"
+msgstr "上次更新"
 
 msgid "Last Update Date"
-msgstr "अंतिम अद्यतन दिनांक"
+msgstr "上次更新日期"
 
 msgid "Am Activity Reference Id"
-msgstr "गतिविधि संदर्भ Id हूँ"
+msgstr "我活动引用 Id"
 
 msgid "Am Asset Id"
-msgstr "परिसंपत्ति Id हूँ"
+msgstr "我资产 Id"
 
 msgid "Am Reference Id"
-msgstr "संदर्भ Id हूँ"
+msgstr "我引用 Id"
 
 msgid "Priority"
-msgstr "प्राथमिकता"
+msgstr "优先"
 
 msgid "Start Date"
-msgstr "प्रारंभ दिनांक"
+msgstr "开始日期"
 
 msgid "End Date"
-msgstr "समाप्ति दिनांक"
+msgstr "结束日期"
 
 msgid "Cause"
-msgstr "कारण"
+msgstr "原因"
 
 msgid "Activity Type"
-msgstr "गतिविधि प्रकार"
+msgstr "活动类型"
 
 msgid "Accounting Class Id"
-msgstr "लेखांकन वर्ग Id"
+msgstr "会计类别 Id"
 
 msgid "Owning Department Id"
-msgstr "विभाग Id मालिक"
+msgstr "所属部门 Id"
 
 msgid "Shutdown Type"
-msgstr "शट डाउन प्रकार"
+msgstr "关闭类型"
 
 msgid "Activity Source"
-msgstr "गतिविधि स्रोत"
+msgstr "活动源"
 
 msgid "Asset Number"
-msgstr "परिसंपत्ति क्रमांक"
+msgstr "资产编号"
 
 msgid "Tag Number"
-msgstr "टैग संख्या"
+msgstr "标记编号"
 
 msgid "Serial Number"
-msgstr "सीरियल नंबर"
+msgstr "序列号"
 
 msgid "Am Asset Category Id"
-msgstr "परिसंपत्ति वर्ग Id हूँ"
+msgstr "我的资产类别 Id"
 
 msgid "Parent Asset Id"
-msgstr "पैरेंट परिसंपत्ति आईडी"
+msgstr "父资产 Id"
 
 msgid "Manufacturer"
-msgstr "निर्माता"
+msgstr "制造商"
 
 msgid "Org Id"
-msgstr "Org आईडी"
+msgstr "组织结构图 Id"
 
 msgid "Item Id M"
-msgstr "आइटम Id M"
+msgstr "项目 Id M"
 
 msgid "Model Number"
-msgstr "मॉडल संख्या"
+msgstr "型号编号"
 
 msgid "Warranty Number"
-msgstr "वारंटी संख्या"
+msgstr "保修号"
 
 msgid "Warranty Exp Date"
-msgstr "वारंटी Exp दिनांक"
+msgstr "保修 Exp 日期"
 
 msgid "Maintainable Cb"
-msgstr "Maintainable सीबी"
+msgstr "可维护性的 Cb"
 
 msgid "Subinventory Id"
-msgstr "Subinventory Id"
+msgstr "Id subinventory"
 
 msgid "Locator Id"
-msgstr "लोकेटर आईडी"
+msgstr "定位器 Id"
 
 msgid "Equipment Item Id M"
-msgstr "उपकरण आइटम Id M"
+msgstr "设备项目 Id M"
 
 msgid "Fa Asset Id"
-msgstr "एफए परिसंपत्ति आईडी"
+msgstr "足总资产 Id"
 
 msgid "Production Org Id"
-msgstr "उत्पादन Org आईडी"
+msgstr "生产组织结构图 Id"
 
 msgid "Ap Payment Header Id"
-msgstr "एपी भुगतान हैडर Id"
+msgstr "Ap 付款标题 Id"
 
 msgid "Bu Org Id"
-msgstr "बुउ Org आईडी"
+msgstr "埠 Org Id"
 
 msgid "Payment Type"
-msgstr "भुगतान प्रकार"
+msgstr "付款类型"
 
 msgid "Payment Number"
-msgstr "भुगतान संख्या"
+msgstr "付款编号"
 
 msgid "Supplier Id"
-msgstr "आपूर्तिकर्ता आईडी"
+msgstr "供应商 Id"
 
 msgid "Supplier Site Id"
-msgstr "आपूर्तिकर्ता साइट Id"
+msgstr "供应商站点 Id"
 
 msgid "From Bank Header Id"
-msgstr "बैंक से हैडर Id"
+msgstr "从银行标题 Id"
 
 msgid "Header Amount"
-msgstr "शीर्ष लेख राशि"
+msgstr "标题数量"
 
 msgid "Currency"
-msgstr "मुद्रा"
+msgstr "货币"
 
 msgid "Document Number"
-msgstr "दस्तावेज़ क्रमांक"
+msgstr "文档编号"
 
 msgid "Payment Status"
-msgstr "भुगतान स्थिति"
+msgstr "付款状态"
 
 msgid "Gl Journal Header Id"
-msgstr "Gl जर्नल हैडर Id"
+msgstr "Gl 日志标题 Id"
 
 msgid "Ap Payment Line Id"
-msgstr "एपी भुगतान लाइन आईडी"
+msgstr "Ap 付款行 Id"
 
 msgid "Line Number"
-msgstr "पंक्ति संख्या"
+msgstr "行号"
 
 msgid "Amount"
-msgstr "राशि"
+msgstr "金额"
 
 msgid "Line Description"
-msgstr "पंक्ति वर्णन"
+msgstr "行描述"
 
 msgid "Ap Transaction Header Id"
-msgstr "एपी लेनदेन हैडर Id"
+msgstr "Ap 交易标题 Id"
 
 msgid "Transaction Type"
-msgstr "लेनदेन का प्रकार"
+msgstr "交易记录类型"
 
 msgid "Transaction Number"
-msgstr "लेनदेन संख्या"
+msgstr "交易记录编号"
 
 msgid "Document Owner"
-msgstr "दस्तावेज़ के मालिक"
+msgstr "文档所有者"
 
 msgid "Apth Currency"
-msgstr "Apth मुद्रा"
+msgstr "Apth 货币"
 
 msgid "Apth Header Amount"
-msgstr "Apth शीर्ष लेख राशि"
+msgstr "Apth 标头金额"
 
 msgid "Transaction Status"
-msgstr "हस्तांतरण स्थिति"
+msgstr "交易记录的状态"
 
 msgid "Paid Amount"
-msgstr "भुगतान राशि"
+msgstr "已付的金额"
 
 msgid "Apth Payment Status"
-msgstr "Apth भुगतान स्थिति"
+msgstr "Apth 付款状态"
 
 msgid "Supplier Name"
-msgstr "प्रदायक नाम"
+msgstr "供应商名称"
 
 msgid "Supplier Number"
-msgstr "आपूर्तिकर्ता संख्या"
+msgstr "供应商编号"
 
 msgid "Supplier Site Name"
-msgstr "आपूर्तिकर्ता साइट का नाम"
+msgstr "供应商的网站名称"
 
 msgid "Supplier Site Number"
-msgstr "आपूर्तिकर्ता साइट संख्या"
+msgstr "供应商站点编号"
 
 msgid "From Bank Line Id"
-msgstr "बैंक से लाइन आईडी"
+msgstr "从银行行 Id"
 
 msgid "To Bank Header Id"
-msgstr "बैंक हैडर Id करने के लिए"
+msgstr "到银行标题 Id"
 
 msgid "Doc Currency"
-msgstr "डॉक्टर मुद्रा"
+msgstr "Doc 货币"
 
 msgid "To Bank Line Id"
-msgstr "बैंक के लिए लाइन आईडी"
+msgstr "到银行行 Id"
 
 msgid "Exchange Rate Type"
-msgstr "विनिमय दर प्रकार"
+msgstr "汇率类型"
 
 msgid "Exchange Rate"
-msgstr "विनिमय दर"
+msgstr "汇率"
 
 msgid "Ef Id"
-msgstr "एफई आईडी"
+msgstr "Ef Id"
 
 msgid "Document Date"
-msgstr "दस्तावेज़ दिनांक"
+msgstr "单据日期"
 
 msgid "Ledger Id"
-msgstr "खाता बही आईडी"
+msgstr "分类帐 Id"
 
 msgid "Period Id"
-msgstr "अवधि आईडी"
+msgstr "期间 Id"
 
 msgid "Pay Group"
-msgstr "पे समूह"
+msgstr "工资组"
 
 msgid "Payment Method"
-msgstr "भुगतान विधि"
+msgstr "付款方法"
 
 msgid "Approval Status"
-msgstr "अनुमोदन स्थिति"
+msgstr "审批状态"
 
 msgid "Reference Type"
-msgstr "संदर्भ प्रकार"
+msgstr "引用类型"
 
 msgid "Reference Key Name"
-msgstr "संदर्भ कुंजी के नाम"
+msgstr "引用键名称"
 
 msgid "Reference Key Value"
-msgstr "संदर्भ कुंजी मान"
+msgstr "关键的参考价值"
 
 msgid "Ap Payment Interface Id"
-msgstr "एपी भुगतान इंटरफ़ेस Id"
+msgstr "Ap 支付接口 Id"
 
 msgid "Document Currency"
-msgstr "दस्तावेज़ मुद्रा"
+msgstr "文档货币"
 
 msgid "Gl Amount"
-msgstr "Gl मात्रा"
+msgstr "Gl 金额"
 
 msgid "Line Source"
-msgstr "रेखा स्रोत"
+msgstr "线源"
 
 msgid "Term Id"
-msgstr "शब्द आईडी"
+msgstr "术语 Id"
 
 msgid "Term Name"
-msgstr "पद नाम"
+msgstr "术语名称"
 
 msgid "Term Description"
-msgstr "शब्द वर्णन"
+msgstr "术语说明"
 
 msgid "Payment Term Id"
-msgstr "भुगतान अवधि आईडी"
+msgstr "付款期限 Id"
 
 msgid "Po Number"
-msgstr "पो संख्या"
+msgstr "采购订单编号"
 
 msgid "Po Type"
-msgstr "पो प्रकार"
+msgstr "Po 类型"
 
 msgid "Buyer"
-msgstr "खरीदार"
+msgstr "买方"
 
 msgid "Payment Term"
-msgstr "भुगतान शब्द"
+msgstr "付款期限"
 
 msgid "Ap Transaction Line Id"
-msgstr "एपी लेनदेन लाइन आईडी"
+msgstr "Ap 交易记录行 Id"
 
 msgid "Line Type"
-msgstr "लाइन प्रकार"
+msgstr "行类型"
 
 msgid "Item Description"
-msgstr "आइटम विवरण"
+msgstr "项目描述"
 
 msgid "Inv Line Quantity"
-msgstr "मात्रा Inv लाइन"
+msgstr "Inv 行数量"
 
 msgid "Inv Unit Price"
-msgstr "Inv इकाई मूल्य"
+msgstr "Inv 单价"
 
 msgid "Inv Line Price"
-msgstr "Inv लाइन मूल्य"
+msgstr "Inv 行价格"
 
 msgid "Gl Inv Line Price"
-msgstr "Gl Inv लाइन मूल्य"
+msgstr "Gl Inv 行价格"
 
 msgid "Po Header Id"
-msgstr "पो हैडर Id"
+msgstr "大埔头 Id"
 
 msgid "Po Line Id"
-msgstr "पो लाइन आईडी"
+msgstr "大埔行 Id"
 
 msgid "Po Detail Id"
-msgstr "पो विस्तार आईडी"
+msgstr "大埔详细 Id"
 
 msgid "Ref Transaction Header Id"
-msgstr "रेफरी लेनदेन हैडर Id"
+msgstr "引用交易记录标题 Id"
 
 msgid "Ref Transaction Line Id"
-msgstr "रेफरी लेनदेन लाइन आईडी"
+msgstr "引用交易记录行 Id"
 
 msgid "Item Number"
-msgstr "आइटम नंबर"
+msgstr "物料编号"
 
 msgid "Uom Id"
-msgstr "Uom आईडी"
+msgstr "Uom Id"
 
 msgid "Item Status"
-msgstr "आइटम की स्थिति"
+msgstr "项的状态"
 
 msgid "Po Status"
-msgstr "पो की स्थिति"
+msgstr "采购订单状态"
 
 msgid "Payment Term Description"
-msgstr "भुगतान अवधि विवरण"
+msgstr "付款期限描述"
 
 msgid "Po Line Number"
-msgstr "पो लाइन संख्या"
+msgstr "采购订单行编号"
 
 msgid "Line Quantity"
-msgstr "रेखा मात्रा"
+msgstr "行数量"
 
 msgid "Unit Price"
-msgstr "इकाई मूल्य"
+msgstr "单位价格"
 
 msgid "Line Price"
-msgstr "लाइन कीमत"
+msgstr "线路报价"
 
 msgid "Gl Line Price"
-msgstr "Gl लाइन मूल्य"
+msgstr "Gl 线价格"
 
 msgid "Gl Tax Amount"
-msgstr "Gl टैक्स राशि"
+msgstr "Gl 税额"
 
 msgid "Tax Amount"
-msgstr "टैक्स राशि"
+msgstr "税额"
 
 msgid "Shipment Number"
-msgstr "शिपमेंट संख्या"
+msgstr "装运数量"
 
 msgid "Receving Org Id"
-msgstr "Receving Org आईडी"
+msgstr "接收组织结构图 Id"
 
 msgid "Requestor"
-msgstr "अनुरोधक"
+msgstr "请求程序"
 
 msgid "Quantity"
-msgstr "मात्रा"
+msgstr "数量"
 
 msgid "Received Quantity"
-msgstr "प्राप्त मात्रा"
+msgstr "接收的数量"
 
 msgid "Receiving Open Quantity"
-msgstr "प्राप्त कर खुले मात्रा"
+msgstr "接收未结数量"
 
 msgid "Need By Date"
-msgstr "दिनांक के आधार पर की जरूरत"
+msgstr "需要日期"
 
 msgid "Promise Date"
-msgstr "वादा दिनांक"
+msgstr "承诺日期"
 
 msgid "Accepted Quantity"
-msgstr "स्वीकृत मात्रा"
+msgstr "接受的数量"
 
 msgid "Delivered Quantity"
-msgstr "दिया मात्रा"
+msgstr "已交货的数量"
 
 msgid "Invoiced Quantity"
-msgstr "इनवॉयस किए गए मात्रा"
+msgstr "开票的数量"
 
 msgid "Paid Quantity"
-msgstr "भुगतान मात्रा"
+msgstr "带薪的数量"
 
 msgid "Invoicing Open Quantity"
-msgstr "चालान के खुले मात्रा"
+msgstr "发票未结数量"
 
 msgid "Charge Ac Id"
-msgstr "प्रभारी एसी आईडी"
+msgstr "充电交流 Id"
 
 msgid "Accrual Ac Id"
-msgstr "प्रोद्भवन एसी आईडी"
+msgstr "权责发生制 Ac Id"
 
 msgid "Budget Ac Id"
-msgstr "बजट एसी आईडी"
+msgstr "预算交流 Id"
 
 msgid "Ppv Ac Id"
-msgstr "Ppv एसी आईडी"
+msgstr "Ppv 交流 Id"
 
 msgid "Receving Org"
-msgstr "Receving Org"
+msgstr "接收组织结构图"
 
 msgid "Ap Transaction Detail Id"
-msgstr "एपी लेनदेन विस्तार आईडी"
+msgstr "Ap 交易细节 Id"
 
 msgid "Account Type"
-msgstr "खाता प्रकार"
+msgstr "帐户类型"
 
 msgid "Detail Description"
-msgstr "विस्तार से वर्णन"
+msgstr "详细描述"
 
 msgid "Detail Ac Id"
-msgstr "विस्तार एसी आईडी"
+msgstr "详细交流 Id"
 
 msgid "Detail Number"
-msgstr "विस्तार संख्या"
+msgstr "详细数量"
 
 msgid "Journal Created Cb"
-msgstr "सीबी बनाई जर्नल"
+msgstr "创建 Cb 的日志"
 
 msgid "Ship To Id"
-msgstr "आईडी के लिए जहाज"
+msgstr "船到 Id"
 
 msgid "Bill To Id"
-msgstr "आईडी के लिए बिल"
+msgstr "条例草案为 Id"
 
 msgid "Payment Term Date"
-msgstr "भुगतान शब्द तारीख"
+msgstr "付款期限日期"
 
 msgid "Tax Code Id"
-msgstr "टैक्स कोड Id"
+msgstr "税务代码 Id"
 
 msgid "Asset Cb"
-msgstr "परिसंपत्ति सीबी"
+msgstr "资产 Cb"
 
 msgid "Fa Asset Category Id"
-msgstr "एफए परिसंपत्ति वर्ग Id"
+msgstr "足总资产类别 Id"
 
 msgid "Prj Project Header Id"
-msgstr "Prj परियोजना हैडर Id"
+msgstr "自行研制项目标题 Id"
 
 msgid "Prj Project Line Id"
-msgstr "Prj परियोजना लाइन आईडी"
+msgstr "自行研制项目行 Id"
 
 msgid "Ar Customer Id"
-msgstr "ए. आर. ग्राहक आईडी"
+msgstr "应收账款客户 Id"
 
 msgid "Customer Number"
-msgstr "ग्राहक संख्या"
+msgstr "客户编号"
 
 msgid "Customer Name"
-msgstr "ग्राहक का नाम"
+msgstr "客户名称"
 
 msgid "Customer Type"
-msgstr "ग्राहक के प्रकार"
+msgstr "客户类型"
 
 msgid "Tax Country"
-msgstr "टैक्स देश"
+msgstr "税国"
 
 msgid "Tax Reg No"
-msgstr "टैक्स Reg सं"
+msgstr "税务注册号"
 
 msgid "Tax Payer Id"
-msgstr "टैक्स भुगतानकर्ता आईडी"
+msgstr "税纳税 Id"
 
 msgid "Customer Contact Id"
-msgstr "ग्राहक संपर्क Id"
+msgstr "客户联系人 Id"
 
 msgid "Customer Credit Class"
-msgstr "ग्राहक क्रेडिट वर्ग"
+msgstr "客户信用等级"
 
 msgid "Profile Name"
-msgstr "प्रोफ़ाइल नाम"
+msgstr "配置文件名称"
 
 msgid "Rev Enabled Cb"
-msgstr "रेव सीबी सक्षम किया गया"
+msgstr "冯启用 Cb"
 
 msgid "Ar Customer Bu Id"
-msgstr "ए. आर. ग्राहक बुउ आईडी"
+msgstr "应收账款客户埠 Id"
 
 msgid "Profile Id"
-msgstr "प्रोफ़ाइल Id"
+msgstr "配置文件 Id"
 
 msgid "Finance Profile Id"
-msgstr "वित्त प्रोफ़ाइल Id"
+msgstr "金融配置文件 Id"
 
 msgid "Payment Method Id"
-msgstr "भुगतान विधि आईडी"
+msgstr "付款方法 Id"
 
 msgid "Order Type Id"
-msgstr "आदेश प्रकार Id"
+msgstr "订单类型 Id"
 
 msgid "Price List Id"
-msgstr "मूल्य सूची आईडी"
+msgstr "价格列表 Id"
 
 msgid "Internal Org Id"
-msgstr "आंतरिक Org आईडी"
+msgstr "组织结构图的内部 Id"
 
 msgid "Fob"
-msgstr "एफओबी"
+msgstr "离岸价格"
 
 msgid "Freight Terms"
-msgstr "परिवहन शर्तें"
+msgstr "货运条款"
 
 msgid "Transportation"
-msgstr "परिवहन"
+msgstr "运输"
 
 msgid "Country Of Origin"
-msgstr "देश की उत्पत्ति"
+msgstr "原籍国"
 
 msgid "Site Address Id"
-msgstr "साइट पता Id"
+msgstr "站点地址 Id"
 
 msgid "Site Contact Id"
-msgstr "साइट संपर्क Id"
+msgstr "站点联系人 Id"
 
 msgid "Customer Site Attachement Id"
-msgstr "ग्राहक साइट Attachement Id"
+msgstr "客户站点依附 Id"
 
 msgid "Bank Id"
-msgstr "बैंक आईडी"
+msgstr "银行 Id"
 
 msgid "Bank Account Id"
-msgstr "बैंक खाता Id"
+msgstr "银行帐户 Id"
 
 msgid "Receivable Ac Id"
-msgstr "प्राप्य एसी आईडी"
+msgstr "应收账款交流 Id"
 
 msgid "Revenue Ac Id"
-msgstr "राजस्व एसी आईडी"
+msgstr "收入 Ac Id"
 
 msgid "Tax Ac Id"
-msgstr "टैक्स एसी आईडी"
+msgstr "税收交流 Id"
 
 msgid "Freight Ac Id"
-msgstr "माल ढुलाई एसी आईडी"
+msgstr "货运交流 Id"
 
 msgid "Clearing Ac Id"
-msgstr "एसी Id समाशोधन"
+msgstr "清除 Ac Id"
 
 msgid "Unbilled Receivable Ac Id"
-msgstr "Unbilled प्राप्य एसी आईडी"
+msgstr "未发单的应收账款交流 Id"
 
 msgid "Unearned Revenue Ac Id"
-msgstr "अनर्जित राजस्व एसी आईडी"
+msgstr "不劳而获的收入 Ac Id"
 
 msgid "Ar Customer Site Id"
-msgstr "ए. आर. ग्राहक साइट Id"
+msgstr "应收账款客户站点 Id"
 
 msgid "Customer Site Number"
-msgstr "ग्राहक साइट संख्या"
+msgstr "客户站点的编号"
 
 msgid "Customer Site Name"
-msgstr "ग्राहक साइट का नाम"
+msgstr "客户站点名称"
 
 msgid "Site Tax Country"
-msgstr "साइट टैक्स देश"
+msgstr "网站税国"
 
 msgid "Site Tax Reg No"
-msgstr "साइट टैक्स Reg सं"
+msgstr "网站税务注册号"
 
 msgid "Site Tax Payer Id"
-msgstr "साइट टैक्स भुगतानकर्ता आईडी"
+msgstr "站点税纳税 Id"
 
 msgid "Site Tax Code"
-msgstr "साइट टैक्स कोड"
+msgstr "网站税码"
 
 msgid "Customer Site Ref"
-msgstr "ग्राहक साइट रेफरी"
+msgstr "客户站点 Ref"
 
 msgid "Customer Site Type"
-msgstr "ग्राहक साइट के प्रकार"
+msgstr "客户站点类型"
 
 msgid "Site Status"
-msgstr "साइट स्थिति"
+msgstr "站点状态"
 
 msgid "Ar Receipt Header Id"
-msgstr "ए. आर. रसीद हैडर Id"
+msgstr "应收帐款收据标题 Id"
 
 msgid "Ar Receipt Source Id"
-msgstr "ए. आर. रसीद स्रोत Id"
+msgstr "应收账款收到源 Id"
 
 msgid "Receipt Type"
-msgstr "रसीद प्रकार"
+msgstr "收据类型"
 
 msgid "Receipt Number"
-msgstr "रसीद संख्या"
+msgstr "收据号码"
 
 msgid "Receipt Method"
-msgstr "रसीद विधि"
+msgstr "收据方法"
 
 msgid "Receipt Status"
-msgstr "प्राप्ति स्थिति"
+msgstr "收货状态"
 
 msgid "Ar Receipt Interface Id"
-msgstr "ए. आर. रसीद इंटरफ़ेस Id"
+msgstr "应收帐款收据接口 Id"
 
 msgid "Ar Transaction Header Id"
-msgstr "एआर लेनदेन हैडर Id"
+msgstr "应收帐款交易记录标题 Id"
 
 msgid "Sales Person"
-msgstr "बिक्री व्यक्ति"
+msgstr "销售人员"
 
 msgid "Ar Receipt Line Id"
-msgstr "ए. आर. रसीद लाइन आईडी"
+msgstr "应收帐款收据行 Id"
 
 msgid "Receipt Source"
-msgstr "प्राप्ति सूचना स्रोत"
+msgstr "收到源"
 
 msgid "Creation Method"
-msgstr "निर्माण विधि"
+msgstr "创建方法"
 
 msgid "Remittance"
-msgstr "विप्रेषण"
+msgstr "汇款"
 
 msgid "Clearance"
-msgstr "क्लीयरेंस"
+msgstr "间隙"
 
 msgid "Sync Receipt Number Cb"
-msgstr "सिंक रसीद संख्या सीबी"
+msgstr "同步收据编号 Cb"
 
 msgid "Ar Transaction Detail Id"
-msgstr "एआर लेनदेन विस्तार आईडी"
+msgstr "应收帐款交易记录详细信息 Id"
 
 msgid "Ar Transaction Line Id"
-msgstr "एआर लेनदेन लाइन आईडी"
+msgstr "应收帐款交易记录行 Id"
 
 msgid "Sd So Header Id"
-msgstr "एसडी इतने हैडर Id"
+msgstr "Sd 如此标题 Id"
 
 msgid "Sd So Line Id"
-msgstr "एसडी तो लाइन आईडी"
+msgstr "Sd 所以行 Id"
 
 msgid "Sd So Detail Id"
-msgstr "एसडी इतना विस्तार से आईडी"
+msgstr "Sd 如此详细的 Id"
 
 msgid "Transaction Class"
-msgstr "लेन-देन वर्ग"
+msgstr "交易类"
 
 msgid "Receipt Amount"
-msgstr "राशि के रसीद"
+msgstr "收据金额"
 
 msgid "Ar Transaction Interface Id"
-msgstr "एआर लेनदेन इंटरफ़ेस Id"
+msgstr "应收帐款交易记录接口 Id"
 
 msgid "Ar Transaction Source Id"
-msgstr "एआर लेनदेन स्रोत Id"
+msgstr "应收帐款交易记录源 Id"
 
 msgid "Transaction Source"
-msgstr "लेन-देन स्रोत"
+msgstr "交易记录来源"
 
 msgid "Source Type"
-msgstr "स्रोत का प्रकार"
+msgstr "源类型"
 
 msgid "Legal Org Id"
-msgstr "कानूनी Org आईडी"
+msgstr "法律组织结构图 Id"
 
 msgid "Invoice Type Id"
-msgstr "इनवॉयस प्रकार Id"
+msgstr "发票类型 Id"
 
 msgid "Cm Type Id"
-msgstr "Cm प्रकार Id"
+msgstr "厘米类型 Id"
 
 msgid "Create Clearing Cb"
-msgstr "सीबी समाशोधन बनाएँ"
+msgstr "创建结算 Cb"
 
 msgid "Ar Transaction Type Id"
-msgstr "एआर लेनदेन प्रकार Id"
+msgstr "应收帐款交易记录类型 Id"
 
 msgid "Ar Transaction Type"
-msgstr "एआर लेनदेन का प्रकार"
+msgstr "应收帐款交易记录类型"
 
 msgid "Br Receivable Ac Id"
-msgstr "Br प्राप्य एसी आईडी"
+msgstr "Br 应收账款的 Ac Id"
 
 msgid "Br Offset Ac Id"
-msgstr "Br एसी Id ऑफसेट"
+msgstr "Br 抵消交流 Id"
 
 msgid "Remaing Amount"
-msgstr "आज राशि"
+msgstr "其余金额"
 
 msgid "So Number"
-msgstr "तो क्रमांक"
+msgstr "所以编号"
 
 msgid "Bc Label Auto Trigger Id"
-msgstr "ई. पू. लेबल ऑटो उत्प्रेरक आईडी"
+msgstr "公元前标签自动触发器 Id"
 
 msgid "Transaction Type Id"
-msgstr "लेन-देन प्रकार Id"
+msgstr "交易记录类型 Id"
 
 msgid "Bc Label Format Header Id"
-msgstr "ई. पू. लेबल स्वरूप हैडर Id"
+msgstr "公元前标签格式标题 Id"
 
 msgid "Association Level"
-msgstr "संघ स्तर"
+msgstr "协会一级"
 
 msgid "Association Level Value"
-msgstr "एसोसिएशन तर मान"
+msgstr "协会级别值"
 
 msgid "Sys Printer Id"
-msgstr "Sys प्रिंटर आईडी"
+msgstr "Sys 打印机 Id"
 
 msgid "Enabled Cb"
-msgstr "सक्षम सीबी"
+msgstr "启用的 Cb"
 
 msgid "Label Type"
-msgstr "लेबल प्रकार"
+msgstr "标签类型"
 
 msgid "Format Name"
-msgstr "नाम स्वरूप"
+msgstr "格式名称"
 
 msgid "Disable Date"
-msgstr "तारीख को अक्षम करें"
+msgstr "禁用日期"
 
 msgid "Default Cb"
-msgstr "डिफ़ॉल्ट सीबी"
+msgstr "默认 Cb"
 
 msgid "Generator Class Name"
-msgstr "जनरेटर वर्ग नाम"
+msgstr "生成器类名称"
 
 msgid "Generator Function Name"
-msgstr "जनरेटर फ़ंक्शन नाम"
+msgstr "生成器函数名称"
 
 msgid "Bc Label Format Line Id"
-msgstr "ई. पू. लेबल स्वरूप लाइन आईडी"
+msgstr "公元前标签格式行 Id"
 
 msgid "Object Name"
-msgstr "ऑब्जेक्ट नाम"
+msgstr "对象名称"
 
 msgid "Sys Field Name"
-msgstr "Sys फ़ील्ड नाम"
+msgstr "Sys 字段名称"
 
 msgid "Field Name"
-msgstr "फ़ील्ड नाम"
+msgstr "字段名称"
 
 msgid "Bc Label Request Id"
-msgstr "ई. पू. लेबल अनुरोध Id"
+msgstr "公元前标签请求 Id"
 
 msgid "Label Content"
-msgstr "लेबल सामग्री"
+msgstr "标签内容"
 
 msgid "Output File Path"
-msgstr "आउटपुट फ़ाइल पथ"
+msgstr "输出文件路径"
 
 msgid "File Name"
-msgstr "फ़ाइल का नाम"
+msgstr "文件名称"
 
 msgid "Bc Static Label Id"
-msgstr "ई. पू. स्थैतिक लेबल आईडी"
+msgstr "公元前静态标签 Id"
 
 msgid "Generate Label Class Name"
-msgstr "लेबल वर्ग नाम उत्पन्न"
+msgstr "生成标签类名称"
 
 msgid "Generate Label Function Name"
-msgstr "लेबल फ़ंक्शन नाम उत्पन्न"
+msgstr "生成标签功能名称"
 
 msgid "Block Id"
-msgstr "खंड Id"
+msgstr "块 Id"
 
 msgid "Reference Table"
-msgstr "संदर्भ तालिका"
+msgstr "引用表"
 
 msgid "Name"
-msgstr "नाम"
+msgstr "名称"
 
 msgid "Cached Cb"
-msgstr "कैश्ड सीबी"
+msgstr "缓存的 Cb"
 
 msgid "Restrict To Role"
-msgstr "भूमिका के लिए प्रतिबंधित करें"
+msgstr "限制作用"
 
 msgid "Visibility Option"
-msgstr "दृश्यता विकल्प"
+msgstr "可见性选项"
 
 msgid "Visibility"
-msgstr "दृश्यता"
+msgstr "可见性"
 
 msgid "Visibility Php Cb"
-msgstr "दृश्यता Php सीबी"
+msgstr "能见度 Php Cb"
 
 msgid "Title"
-msgstr "शीर्षक"
+msgstr "标题"
 
 msgid "Show Title Cb"
-msgstr "शीर्षक सीबी दिखाएँ"
+msgstr "显示标题 Cb"
 
 msgid "Position"
-msgstr "स्थिति"
+msgstr "位置"
 
 msgid "Weight"
-msgstr "वजन"
+msgstr "重量"
 
 msgid "Session Id"
-msgstr "सत्र Id"
+msgstr "会话 Id"
 
 msgid "Block Data"
-msgstr "ब्लॉक डेटा"
+msgstr "块数据"
 
 msgid "Block Content Id"
-msgstr "ब्लॉक सामग्री Id"
+msgstr "块内容 Id"
 
 msgid "Info"
-msgstr "जानकारी"
+msgstr "信息"
 
 msgid "Content"
-msgstr "सामग्री"
+msgstr "内容"
 
 msgid "Content Php Cb"
-msgstr "सामग्री Php सीबी"
+msgstr "内容的 Php Cb"
 
 msgid "Bom Header Id"
-msgstr "Bom हैडर Id"
+msgstr "物料清单标题 Id"
 
 msgid "Alternate Bom"
-msgstr "वैकल्पिक Bom"
+msgstr "备用物料清单"
 
 msgid "Bom Revision"
-msgstr "Bom संशोधन"
+msgstr "物料清单版本"
 
 msgid "Effective Date"
-msgstr "प्रभावी तिथि"
+msgstr "有效日期"
 
 msgid "Common Bom Item Id M"
-msgstr "आम Bom आइटम Id M"
+msgstr "通用物料清单物料 Id M"
 
 msgid "Item Type"
-msgstr "आइटम प्रकार"
+msgstr "项类型"
 
 msgid "Bom Type"
-msgstr "Bom प्रकार"
+msgstr "物料清单类型"
 
 msgid "Costing Enabled Cb"
-msgstr "सीबी की लागत से सक्षम किया गया"
+msgstr "成本核算启用 Cb"
 
 msgid "Make Buy"
-msgstr "कर खरीदें"
+msgstr "让买"
 
 msgid "Org"
-msgstr "Org"
+msgstr "组织结构图"
 
 msgid "Org Type"
-msgstr "Org प्रकार"
+msgstr "组织结构图类型"
 
 msgid "Org Status"
-msgstr "Org स्थिति"
+msgstr "组织结构图的地位"
 
 msgid "Org Description"
-msgstr "Org विवरण"
+msgstr "组织结构图描述"
 
 msgid "Org Code"
-msgstr "Org कोड"
+msgstr "组织结构图的代码"
 
 msgid "Bom Commonbom Line Id"
-msgstr "Bom Commonbom लाइन आईडी"
+msgstr "物料清单 Commonbom 行 Id"
 
 msgid "Bom Line Id"
-msgstr "Bom लाइन आईडी"
+msgstr "物料清单行 Id"
 
 msgid "Routing Sequence"
-msgstr "रूटिंग अनुक्रम"
+msgstr "路由序列"
 
 msgid "Planning Percentage"
-msgstr "प्रतिशत की योजना बना"
+msgstr "规划的百分比"
 
 msgid "Yield"
-msgstr "उपज"
+msgstr "产量"
 
 msgid "Include In Cost Rollup Cb"
-msgstr "सीबी लागत रोलअप में शामिल हैं"
+msgstr "列入成本的汇总 Cb"
 
 msgid "Wip Supply Type"
-msgstr "Wip आपूर्ति प्रकार"
+msgstr "Wip 供应类型"
 
 msgid "Supply Sub Inventory"
-msgstr "आपूर्ति उप सूची"
+msgstr "供应子库存"
 
 msgid "Supply Locator"
-msgstr "आपूर्ति लोकेटर"
+msgstr "供应定位器"
 
 msgid "Bom Config Header Id"
-msgstr "Bom Config हैडर Id"
+msgstr "Bom 配置标题 Id"
 
 msgid "Bom Config Line Id"
-msgstr "Bom Config लाइन आईडी"
+msgstr "Bom 配置行 Id"
 
 msgid "Bom Sequence"
-msgstr "Bom अनुक्रम"
+msgstr "物料清单序列"
 
 msgid "Component Item Id M"
-msgstr "घटक आइटम Id M"
+msgstr "组件项目 Id M"
 
 msgid "Component Revision"
-msgstr "घटक संशोधन"
+msgstr "组件版本"
 
 msgid "Usage Basis"
-msgstr "उपयोग के आधार"
+msgstr "使用基础"
 
 msgid "Usage Quantity"
-msgstr "उपयोग मात्रा"
+msgstr "使用数量"
 
 msgid "Transacted Quantity"
-msgstr "Transacted मात्रा"
+msgstr "事务处理的量"
 
 msgid "Auto Request Material Cb"
-msgstr "ऑटो अनुरोध सामग्री सीबी"
+msgstr "自动请求材料 Cb"
 
 msgid "Bom Cost Type Id"
-msgstr "Bom लागत प्रकार Id"
+msgstr "Bom 的成本类型 Id"
 
 msgid "Cost Type Code"
-msgstr "लागत प्रकार कोड"
+msgstr "成本的类型代码"
 
 msgid "Cost Type"
-msgstr "लागत प्रकार"
+msgstr "成本的类型"
 
 msgid "Multi Org Cb"
-msgstr "बहु Org सीबी"
+msgstr "多组织结构图 Cb"
 
 msgid "Default Cost Type"
-msgstr "डिफ़ॉल्ट लागत प्रकार"
+msgstr "默认成本的类型"
 
 msgid "Bom Department Id"
-msgstr "Bom विभाग आईडी"
+msgstr "物料清单部门 Id"
 
 msgid "Department"
-msgstr "विभाग"
+msgstr "新闻部"
 
 msgid "Location Id"
-msgstr "स्थान आईडी"
+msgstr "位置 Id"
 
 msgid "Department Type"
-msgstr "विभाग प्रकार"
+msgstr "部类型"
 
 msgid "Default Basis"
-msgstr "डिफ़ॉल्ट आधार"
+msgstr "默认基础"
 
 msgid "Absorption Ac Id"
-msgstr "अवशोषण एसी आईडी"
+msgstr "吸收交流 Id"
 
 msgid "Resource Assignment Id"
-msgstr "संसाधन असाइनमेंट आईडी"
+msgstr "资源分配 Id"
 
 msgid "Bom Department Resource Assignment Id"
-msgstr "Bom विभाग संसाधन असाइनमेंट आईडी"
+msgstr "物料清单部资源分配 Id"
 
 msgid "Cost Type Id"
-msgstr "लागत प्रकार Id"
+msgstr "成本的类型 Id"
 
 msgid "Resource Id"
-msgstr "संसाधन Id"
+msgstr "资源 Id"
 
 msgid "No Of Units"
-msgstr "इकाइयों की संख्या"
+msgstr "没有单位的"
 
 msgid "Efficiency"
-msgstr "दक्षता"
+msgstr "效率"
 
 msgid "Utilization"
-msgstr "उपयोगिता"
+msgstr "利用"
 
 msgid "Common Bom Org Id"
-msgstr "आम Bom Org आईडी"
+msgstr "通用物料清单组织结构图 Id"
 
 msgid "Effective Start Date"
-msgstr "प्रभावी प्रारंभ दिनांक"
+msgstr "有效开始日期"
 
 msgid "Effective End Date"
-msgstr "प्रभावी अंत दिनांक"
+msgstr "有效结束日期"
 
 msgid "Eco Number"
-msgstr "पारिस्थितिकी संख्या"
+msgstr "生态数量"
 
 msgid "Eco Implemented Cb"
-msgstr "पारिस्थितिकी सीबी कार्यान्वित"
+msgstr "生态实施 Cb"
 
 msgid "Bom Header Id H"
-msgstr "Bom हैडर Id ज"
+msgstr "物料清单标题 Id H"
 
 msgid "H Created By"
-msgstr "एच के द्वारा बनाई गई"
+msgstr "H 由创建"
 
 msgid "H Creation Date"
-msgstr "H निर्माण दिनांक"
+msgstr "H 创建日期"
 
 msgid "H Last Update By"
-msgstr "एच पिछले अद्यतन के द्वारा"
+msgstr "H 上次更新"
 
 msgid "H Last Update Date"
-msgstr "H अंतिम अद्यतन तिथि"
+msgstr "H 最后更新日期"
 
 msgid "Bom Material Element Id"
-msgstr "Bom सामग्री तत्व आईडी"
+msgstr "物料元素 Id"
 
 msgid "Material Element"
-msgstr "भौतिक तत्व"
+msgstr "物质元素"
 
 msgid "Bom Overhead Id"
-msgstr "Bom उपरि आईडी"
+msgstr "物料清单的开销 Id"
 
 msgid "Overhead"
-msgstr "भूमि के ऊपर"
+msgstr "开销"
 
 msgid "Overhead Type"
-msgstr "उपरि प्रकार"
+msgstr "架空的类型"
 
 msgid "Rate Assignment Id"
-msgstr "दर असाइनमेंट आईडी"
+msgstr "率分配 Id"
 
 msgid "Bom Overhead Rate Assignment Id"
-msgstr "Bom उपरि दर असाइनमेंट आईडी"
+msgstr "物料清单的开销率分配 Id"
 
 msgid "Bom Cost Type"
-msgstr "Bom लागत प्रकार"
+msgstr "Bom 的成本类型"
 
 msgid "Rate"
-msgstr "दर"
+msgstr "率"
 
 msgid "Bom Overhead Resource Assignment Id"
-msgstr "Bom उपरि संसाधन असाइनमेंट आईडी"
+msgstr "物料清单的开销资源分配 Id"
 
 msgid "Resource Bom Cost Type"
-msgstr "संसाधन Bom लागत प्रकार"
+msgstr "资源 Bom 的成本类型"
 
 msgid "Rate Bom Cost Type"
-msgstr "दर Bom लागत प्रकार"
+msgstr "Bom 的成本率类型"
 
 msgid "Bom Resource Id"
-msgstr "Bom संसाधन Id"
+msgstr "物料清单的资源 Id"
 
 msgid "Resource"
-msgstr "संसाधन"
+msgstr "资源"
 
 msgid "Resource Type"
-msgstr "संसाधन प्रकार"
+msgstr "资源类型"
 
 msgid "Charge Type"
-msgstr "प्रभारी प्रकार"
+msgstr "电荷类型"
 
 msgid "Uom"
-msgstr "Uom"
+msgstr "计量单位"
 
 msgid "Basis"
-msgstr "आधार"
+msgstr "基础"
 
 msgid "Osp Cb"
-msgstr "Osp सीबी"
+msgstr "Osp Cb"
 
 msgid "Osp Item Id"
-msgstr "Osp आइटम आईडी"
+msgstr "Osp 项 Id"
 
 msgid "Costed Cb"
-msgstr "सीबी costed"
+msgstr "整套的 Cb"
 
 msgid "Standard Rate Cb"
-msgstr "मानक दर सीबी"
+msgstr "标准税率 Cb"
 
 msgid "Variance Ac Id"
-msgstr "विचरण एसी आईडी"
+msgstr "方差交流 Id"
 
 msgid "Overheads"
-msgstr "ओवरहेड"
+msgstr "间接费用"
 
 msgid "Rate Reference Id"
-msgstr "दर संदर्भ Id"
+msgstr "率的参考 Id"
 
 msgid "Bom Resource Cost Id"
-msgstr "Bom संसाधन Id लागत"
+msgstr "物料清单资源成本 Id"
 
 msgid "Resource Rate"
-msgstr "संसाधन दर"
+msgstr "资源费率"
 
 msgid "Bom Routing Detail Id"
-msgstr "Bom रूटिंग विस्तार आईडी"
+msgstr "物料清单路由详细 Id"
 
 msgid "Bom Routing Line Id"
-msgstr "Bom रूटिंग लाइन आईडी"
+msgstr "物料清单路由行 Id"
 
 msgid "Bom Routing Header Id"
-msgstr "Bom रूटिंग हैडर Id"
+msgstr "物料清单路由头 Id"
 
 msgid "Bom Standard Operation Id"
-msgstr "Bom मानक प्रक्रिया Id"
+msgstr "物料清单标准操作 Id"
 
 msgid "Resource Sequence"
-msgstr "संसाधन अनुक्रम"
+msgstr "资源序列"
 
 msgid "Charge Basis"
-msgstr "प्रभारी आधार"
+msgstr "收费依据"
 
 msgid "Resource Usage"
-msgstr "संसाधन उपयोग"
+msgstr "资源使用情况"
 
 msgid "Resource Schedule"
-msgstr "संसाधन शेड्यूल"
+msgstr "资源计划"
 
 msgid "Assigned Units"
-msgstr "आबंटित इकाइयाँ"
+msgstr "分配的单位"
 
 msgid "Twenty Four Hr Cb"
-msgstr "चौबीस घंटा सीबी"
+msgstr "二十四小时 Cb"
 
 msgid "Alternate Routing"
-msgstr "वैकल्पिक मार्ग"
+msgstr "备用路由"
 
 msgid "Routing Revision"
-msgstr "रूटिंग संशोधन"
+msgstr "路由的修订"
 
 msgid "Common Routing Item Id M"
-msgstr "आम रूटिंग आइटम Id M"
+msgstr "常见的路由项 Id M"
 
 msgid "Completion Subinventory"
-msgstr "पूरा होने के Subinventory"
+msgstr "完成 Subinventory"
 
 msgid "Completion Locator"
-msgstr "समापन लोकेटर"
+msgstr "完成定位器"
 
 msgid "Standard Operation Id"
-msgstr "मानक प्रक्रिया Id"
+msgstr "标准操作 Id"
 
 msgid "Department Id"
-msgstr "विभाग आईडी"
+msgstr "部门 Id"
 
 msgid "Lead Time Percentage"
-msgstr "समय के प्रतिशत का नेतृत्व"
+msgstr "铅的时间百分比"
 
 msgid "Count Point Cb"
-msgstr "गिनती बिंदु सीबी"
+msgstr "计数点 Cb"
 
 msgid "Auto Charge Cb"
-msgstr "ऑटो प्रभारी सीबी"
+msgstr "汽车充电 Cb"
 
 msgid "Backflush Cb"
-msgstr "Backflush सीबी"
+msgstr "反冲 Cb"
 
 msgid "Include In Rollup Cb"
-msgstr "सीबी रोलअप में शामिल हैं"
+msgstr "在汇总 Cb 中包括"
 
 msgid "Minimum Transfer Quantity"
-msgstr "कम से कम स्थानान्तरण मात्रा"
+msgstr "最低的转移数量"
 
 msgid "Referenced Cb"
-msgstr "संदर्भित सीबी"
+msgstr "引用的 Cb"
 
 msgid "Cumm Yield"
-msgstr "Cumm उपज"
+msgstr "Cumm 屈服"
 
 msgid "Bom Routing Header Id H"
-msgstr "Bom रूटिंग हैडर Id ज"
+msgstr "物料清单路由头 Id H"
 
 msgid "Description H"
-msgstr "विवरण ज"
+msgstr "描述 H"
 
 msgid "Code"
-msgstr "कोड"
+msgstr "代码"
 
 msgid "Subinventory"
 msgstr "Subinventory"
 
 msgid "Locator"
-msgstr "लोकेटर"
+msgstr "定位器"
 
 msgid "Standard Operation"
-msgstr "मानक संचालन"
+msgstr "标准操作"
 
 msgid "Bom Standard Operation Resource Assignment Id"
-msgstr "Bom मानक संचालन संसाधन असाइनमेंट आईडी"
+msgstr "物料清单标准操作资源分配 Id"
 
 msgid "Business Id"
-msgstr "व्यवसाय Id"
+msgstr "业务 Id"
 
 msgid "Business Org Type"
-msgstr "व्यापार Org प्रकार"
+msgstr "企业组织结构图类型"
 
 msgid "Manager"
-msgstr "प्रबंधक"
+msgstr "经理"
 
 msgid "Enterprise Org Id"
-msgstr "एंटरप्राइज़ Org आईडी"
+msgstr "企业组织结构图 Id"
 
 msgid "Cash Ac Id"
-msgstr "नकद एसी आईडी"
+msgstr "现金交流 Id"
 
 msgid "Content Id"
-msgstr "सामग्री Id"
+msgstr "内容 Id"
 
 msgid "Length"
-msgstr "लंबाई"
+msgstr "长度"
 
 msgid "Height"
-msgstr "ऊँचाई"
+msgstr "高度"
 
 msgid "Chapter"
-msgstr "अध्याय"
+msgstr "章"
 
 msgid "Category"
-msgstr "श्रेणी"
+msgstr "类别"
 
 msgid "Component"
-msgstr "घटक"
+msgstr "组件"
 
 msgid "Testabab"
 msgstr "Testabab"
 
 msgid "Category Id"
-msgstr "श्रेणी आईडी"
+msgstr "类别 Id"
 
 msgid "Major Category Id"
-msgstr "मेजर श्रेणी आईडी"
+msgstr "主要类别 Id"
 
 msgid "Parent Id"
-msgstr "पैरेंट Id"
+msgstr "父 Id"
 
 msgid "Category Type"
-msgstr "श्रेणी प्रकार"
+msgstr "类别类型"
 
 msgid "Primary Cb"
-msgstr "प्राथमिक सीबी"
+msgstr "主断路器"
 
 msgid "Category Reference Id"
-msgstr "श्रेणी संदर्भ Id"
+msgstr "类别引用 Id"
 
 msgid "Reference Id"
-msgstr "संदर्भ Id"
+msgstr "引用 Id"
 
 msgid "Cc Co Header Id"
-msgstr "Cc सह हैडर Id"
+msgstr "Cc Co 标题 Id"
 
 msgid "Change Number"
-msgstr "नंबर परिवर्तित करें"
+msgstr "更改号码"
 
 msgid "Security Level"
-msgstr "सुरक्षा स्तर"
+msgstr "安全级别"
 
 msgid "Template Id"
-msgstr "टेम्पलेट Id"
+msgstr "模板 Id"
 
 msgid "Change Type"
-msgstr "प्रकार परिवर्तित करें"
+msgstr "更改类型"
 
 msgid "Originator"
-msgstr "प्रवर्तक"
+msgstr "原始发件人"
 
 msgid "Reason Code"
-msgstr "कारण कोड"
+msgstr "原因代码"
 
 msgid "Product Line"
-msgstr "उत्पाद पंक्ति"
+msgstr "产品线"
 
 msgid "Process Flow Header Id"
-msgstr "प्रक्रिया प्रवाह शीर्षक Id"
+msgstr "过程流程标题 Id"
 
 msgid "Current Process Flow Line Id"
-msgstr "वर्तमान प्रक्रिया के प्रवाह लाइन आईडी"
+msgstr "当前的进程流线 Id"
 
 msgid "Origination Date"
-msgstr "व्युत्पत्ति की तारीख"
+msgstr "发放日期"
 
 msgid "Owner User Id"
-msgstr "स्वामी उपयोगकर्ता Id"
+msgstr "所有者用户 Id"
 
 msgid "Release Date"
-msgstr "रिलीज की तारीख"
+msgstr "发布日期"
 
 msgid "Completion Date"
-msgstr "पूरा होने की तारीख"
+msgstr "完成日期"
 
 msgid "Project Task Id"
-msgstr "परियोजना कार्य Id"
+msgstr "项目任务 Id"
 
 msgid "Access Org"
-msgstr "पहुँच Org"
+msgstr "访问组织结构图"
 
 msgid "Related Changes"
-msgstr "पन्ने से जुडे बदलाव"
+msgstr "相关的更改"
 
 msgid "Cc Co Line Id"
-msgstr "Cc सह लाइन आईडी"
+msgstr "Cc Co 行 Id"
 
 msgid "New Revision"
-msgstr "नए संशोधन"
+msgstr "新的修订版本"
 
 msgid "Cc Co Line Value Id"
-msgstr "Cc सह रेखा मान आईडी"
+msgstr "Cc Co 行值 Id"
 
 msgid "Cc Co Template Line Id"
-msgstr "Cc सह टेम्पलेट लाइन आईडी"
+msgstr "Cc Co 模板行 Id"
 
 msgid "Field Value"
-msgstr "फ़ील्ड का मान"
+msgstr "字段值"
 
 msgid "Cc Co Process Flow Action Id"
-msgstr "Cc सह प्रक्रिया प्रवाह क्रिया आईडी"
+msgstr "Cc Co 过程流操作 Id"
 
 msgid "Sys Process Flow Line Id"
-msgstr "Sys प्रक्रिया प्रवाह लाइन पहचान"
+msgstr "Sys 进程流线 Id"
 
 msgid "Action Number"
-msgstr "क्रिया क्रमांक"
+msgstr "行动编号"
 
 msgid "Role Code"
-msgstr "भूमिका कोड"
+msgstr "角色代码"
 
 msgid "User Id"
-msgstr "उपयोगकर्ता Id"
+msgstr "用户 Id"
 
 msgid "Pf Action Type"
-msgstr "पीएफ क्रिया प्रकार"
+msgstr "Pf 操作类型"
 
 msgid "Required Cb"
-msgstr "आवश्यक सीबी"
+msgstr "所需的 Cb"
 
 msgid "Comment"
-msgstr "टिप्पणी"
+msgstr "评论"
 
 msgid "Action User Id"
-msgstr "कार्रवाई उपयोगकर्ता Id"
+msgstr "操作用户 Id"
 
 msgid "Action Duration"
-msgstr "कार्रवाई की अवधि"
+msgstr "行动的持续时间"
 
 msgid "Sys Process Flow Action Value Id"
-msgstr "Sys प्रक्रिया प्रवाह कार्रवाई मान आईडी"
+msgstr "Sys 过程流操作值 Id"
 
 msgid "Sys Process Flow Action Id"
-msgstr "Sys प्रक्रिया प्रवाह क्रिया आईडी"
+msgstr "Sys 过程流操作 Id"
 
 msgid "Value"
-msgstr "मान"
+msgstr "价值"
 
 msgid "Cc Co Template Header Id"
-msgstr "Cc सह टेम्पलेट शीर्ष लेख Id"
+msgstr "Cc Co 模板标题 Id"
 
 msgid "Template Name"
-msgstr "टेम्पलेट का नाम"
+msgstr "模板名称"
 
 msgid "Label"
-msgstr "लेबल"
+msgstr "标签"
 
 msgid "Value Type"
-msgstr "मान प्रकार"
+msgstr "值类型"
 
 msgid "Control Type"
-msgstr "नियंत्रण प्रकार"
+msgstr "控件类型"
 
 msgid "Control Value"
-msgstr "नियंत्रण मान"
+msgstr "控件的值"
 
 msgid "Control Uom"
-msgstr "नियंत्रण Uom"
+msgstr "控制计量单位"
 
 msgid "Active Cb"
-msgstr "सक्रिय सीबी"
+msgstr "活跃的 Cb"
 
 msgid "Display Weight"
-msgstr "वजन प्रदर्शित करें"
+msgstr "显示的重量"
 
 msgid "List Values"
-msgstr "सूची मान"
+msgstr "列表值"
 
 msgid "Lower Limit"
-msgstr "निचली सीमा"
+msgstr "下限"
 
 msgid "Upper Limit"
-msgstr "ऊपरी सीमा"
+msgstr "上限"
 
 msgid "List Value Option Type"
-msgstr "सूची मान विकल्प प्रकार"
+msgstr "列表中的值的选项类型"
 
 msgid "Coa Id"
-msgstr "Coa आईडी"
+msgstr "Coa Id"
 
 msgid "Coa Structure Id"
-msgstr "Coa संरचना आईडी"
+msgstr "Coa 结构 Id"
 
 msgid "Coa Name"
-msgstr "Coa का नाम"
+msgstr "农委会名称"
 
 msgid "Balancing"
-msgstr "संतुलन साधने"
+msgstr "平衡"
 
 msgid "Cost Center"
-msgstr "लागत केंद्र"
+msgstr "成本中心"
 
 msgid "Natural Account"
-msgstr "प्राकृतिक खाते"
+msgstr "自然的帐户"
 
 msgid "Inter Company"
-msgstr "कंपनी इंटर"
+msgstr "除公司"
 
 msgid "Field1"
-msgstr "फ़ील्ड1"
+msgstr "Field1"
 
 msgid "Field2"
 msgstr "Field2"
@@ -1468,457 +1467,457 @@ msgid "Field8"
 msgstr "Field8"
 
 msgid "Coa Combination Id"
-msgstr "Coa संयोजन आईडी"
+msgstr "Coa 结合 Id"
 
 msgid "Combination"
-msgstr "संयोजन"
+msgstr "组合"
 
 msgid "Ac Type"
-msgstr "एसी प्रकार"
+msgstr "交流类型"
 
 msgid "Coa Segment Values Id"
-msgstr "Coa सेगमेंट मानों आईडी"
+msgstr "辅酶 a 段值 id 号"
 
 msgid "Coa Segments"
-msgstr "Coa खंडों"
+msgstr "辅酶 a 段"
 
 msgid "Segment Code"
-msgstr "क्षेत्र कोड"
+msgstr "该段代码"
 
 msgid "Comment Id"
-msgstr "टिप्पणी आईडी"
+msgstr "注释 Id"
 
 msgid "Subject"
-msgstr "विषय"
+msgstr "主题"
 
 msgid "Terms"
-msgstr "शर्तें"
+msgstr "术语"
 
 msgid "Published Cb"
-msgstr "प्रकाशित सीबी"
+msgstr "已发布的 Cb"
 
 msgid "Weightage"
-msgstr "महत्व"
+msgstr "权重"
 
 msgid "Comment By"
-msgstr "द्वारा टिप्पणी"
+msgstr "评论"
 
 msgid "Content Type Id"
-msgstr "सामग्री प्रकार Id"
+msgstr "内容类型 Id"
 
 msgid "Show In Fp Cb"
-msgstr "Fp सीबी में दिखाएँ"
+msgstr "在 Fp Cb 中显示"
 
 msgid "Allow File Cb"
-msgstr "फ़ाइल सीबी की अनुमति दें"
+msgstr "允许文件 Cb"
 
 msgid "Allow Comment Cb"
-msgstr "टिप्पणी सीबी की अनुमति दें"
+msgstr "允许评论 Cb"
 
 msgid "Content Type"
-msgstr "सामग्री प्रकार"
+msgstr "内容类型"
 
 msgid "Read Role"
-msgstr "पढ़ें भूमिका"
+msgstr "读取角色"
 
 msgid "Write Role"
-msgstr "भूमिका लिखना"
+msgstr "写作用"
 
 msgid "Update Role"
-msgstr "भूमिका का अद्यतन"
+msgstr "更新角色"
 
 msgid "Comment Read Role"
-msgstr "टिप्पणी पढ़ें भूमिका"
+msgstr "评论读角色"
 
 msgid "Comment Write Role"
-msgstr "टिप्पणी लिखने के भूमिका"
+msgstr "评论写作用"
 
 msgid "Comment Update Role"
-msgstr "टिप्पणी अद्यतन भूमिका"
+msgstr "评论更新角色"
 
 msgid "Comment Order By"
-msgstr "द्वारा टिप्पणी क्रम"
+msgstr "按顺序排列的评论"
 
 msgid "Comments Perpage"
-msgstr "टिप्पणियाँ Perpage"
+msgstr "评论页每页"
 
 msgid "Has Subject Cb"
-msgstr "विषय सीबी है"
+msgstr "有主题 Cb"
 
 msgid "Subject Label"
-msgstr "विषय लेबल"
+msgstr "主题标签"
 
 msgid "Has Content Cb"
-msgstr "सामग्री सीबी है"
+msgstr "具有内容 Cb"
 
 msgid "Content Label"
-msgstr "सामग्री लेबल"
+msgstr "内容标签"
 
 msgid "Summary Display Type"
-msgstr "सारांश प्रदर्शन प्रकार"
+msgstr "摘要显示类型"
 
 msgid "Auto Url Alias Cb"
-msgstr "स्वत: यूआरएल उर्फ सीबी"
+msgstr "自动 Url 别名 Cb"
 
 msgid "Show Category Onsummary Cb"
-msgstr "दिखाएँ श्रेणी Onsummary सीबी"
+msgstr "显示类别 Onsummary Cb"
 
 msgid "Content Type Reference Id"
-msgstr "सामग्री प्रकार के संदर्भ Id"
+msgstr "内容类型引用 Id"
 
 msgid "Field Label"
-msgstr "फ़ील्ड लेबल"
+msgstr "字段标签"
 
 msgid "Field Position"
-msgstr "फ़ील्ड की स्थिति"
+msgstr "字段位置"
 
 msgid "Option Type"
-msgstr "विकल्प प्रकार"
+msgstr "选项类型"
 
 msgid "Cst Item Cost Header Id"
-msgstr "Cst आइटम लागत हैडर Id"
+msgstr "科学和技术委员会物料成本标题 Id"
 
 msgid "Based On Rollup Cb"
-msgstr "रोलअप सीबी पर आधारित"
+msgstr "基于汇总 Cb"
 
 msgid "Sales Price"
-msgstr "विक्रय मूल्य"
+msgstr "销售价"
 
 msgid "Purchase Price"
-msgstr "खरीद मूल्य"
+msgstr "购买价格"
 
 msgid "Cst Item Cost Line Id"
-msgstr "पंक्ति Id Cst मद की लागत"
+msgstr "科学和技术委员会项目成本的行 Id"
 
 msgid "Cost Element Type"
-msgstr "लागत तत्व प्रकार"
+msgstr "成本的要素类型"
 
 msgid "Cost Element Id"
-msgstr "लागत तत्व आईडी"
+msgstr "成本的元素 Id"
 
 msgid "Cost Basis"
-msgstr "लागत के आधार"
+msgstr "成本的基础"
 
 msgid "Cst Item Cost Line Pre Id"
-msgstr "Cst आइटम लाइन प्री Id लागत"
+msgstr "科学和技术委员会物料成本线预 Id"
 
 msgid "Standard Cost"
-msgstr "मानक लागत"
+msgstr "标准成本"
 
 msgid "Engine Id"
-msgstr "इंजन आईडी"
+msgstr "引擎 Id"
 
 msgid "Obj Class Name"
-msgstr "Obj वर्ग नाम"
+msgstr "Obj 的类名"
 
 msgid "Number"
-msgstr "संख्या"
+msgstr "数量"
 
 msgid "Db Version"
-msgstr "Db संस्करण"
+msgstr "数据库版本"
 
 msgid "Primary Entity Cb"
-msgstr "प्राथमिक एंटिटी सीबी"
+msgstr "主要实体 Cb"
 
 msgid "Module Name"
-msgstr "मॉड्यूल का नाम"
+msgstr "模块名称"
 
 msgid "Path"
-msgstr "पथ"
+msgstr "路径"
 
 msgid "Dependent Class"
-msgstr "निर्भर वर्ग"
+msgstr "从属类"
 
 msgid "Enterprise Id"
-msgstr "एंटरप्राइज़ आईडी"
+msgstr "企业 Id"
 
 msgid "Designation Option Header Id"
-msgstr "पदनाम विकल्प हैडर Id"
+msgstr "指定选项标题 Id"
 
 msgid "Type Option Header Id"
-msgstr "प्रकार विकल्प हैडर Id"
+msgstr "类型选项标题 Id"
 
 msgid "Ext Test Case Header Id"
-msgstr "Ext टेस्ट केस हैडर Id"
+msgstr "分机测试案例标题 Id"
 
 msgid "Ext Test Case Line Id"
-msgstr "Ext टेस्ट केस लाइन आईडी"
+msgstr "分机测试案例行 Id"
 
 msgid "Step Action"
-msgstr "कदम कार्रवाई"
+msgstr "一步行动"
 
 msgid "Input"
-msgstr "इनपुट"
+msgstr "输入"
 
 msgid "Expected Result"
-msgstr "उम्मीद परिणाम"
+msgstr "预期的结果"
 
 msgid "Ext Url Alias Id"
-msgstr "Ext Url उर्फ आईडी"
+msgstr "Ext Url 别名 Id"
 
 msgid "Original Url"
-msgstr "मूल Url"
+msgstr "原始 Url"
 
 msgid "Alias"
-msgstr "अन्य नाम"
+msgstr "别名"
 
 msgid "Extn Contact Id"
-msgstr "Extn संपर्क Id"
+msgstr "内线联系人 Id"
 
 msgid "Contact Name"
-msgstr "संपर्क नाम"
+msgstr "联系人姓名"
 
 msgid "Last Name"
-msgstr "अंतिम नाम"
+msgstr "姓氏"
 
 msgid "First Name"
-msgstr "प्रथम नाम"
+msgstr "第一个名字"
 
 msgid "Middle Name"
-msgstr "मध्य नाम"
+msgstr "中间的名字"
 
 msgid "Mobile Number"
-msgstr "मोबाइल नंबर"
+msgstr "移动电话号码"
 
 msgid "Office Number"
-msgstr "कार्यालय नंबर"
+msgstr "办公室电话号码"
 
 msgid "Contact Number2"
-msgstr "Number2 संपर्क करें"
+msgstr "接触数字 2"
 
 msgid "Email Id"
-msgstr "ईमेल आईडी"
+msgstr "电子邮件 Id"
 
 msgid "Email Id2"
-msgstr "ईमेल Id2"
+msgstr "电子邮件 Id2"
 
 msgid "Fax No"
-msgstr "फॅक्स नं"
+msgstr "传真号码： 2509"
 
 msgid "Timezone"
-msgstr "समय क्षेत्र"
+msgstr "时区"
 
 msgid "Time To Contact"
-msgstr "संपर्क करने के लिए समय"
+msgstr "联系时间"
 
 msgid "Job Titile"
-msgstr "नौकरी Titile"
+msgstr "作业题目"
 
 msgid "Extn Contact Reference Id"
-msgstr "Extn संपर्क संदर्भ Id"
+msgstr "内线联系引用 Id"
 
 msgid "Extn Web Tracking Id"
-msgstr "Extn वेब ट्रैकिंग आईडी"
+msgstr "内线 Web 跟踪 Id"
 
 msgid "Page Visited"
-msgstr "पृष्ठ का दौरा किया"
+msgstr "页面访问"
 
 msgid "Referrer"
-msgstr "संदर्भ"
+msgstr "推荐人"
 
 msgid "Query String"
-msgstr "क्वेरी स्ट्रिंग"
+msgstr "查询字符串"
 
 msgid "Hostname"
-msgstr "होस्टनाम"
+msgstr "主机名"
 
 msgid "City"
-msgstr "शहर"
+msgstr "城市"
 
 msgid "Http User Agent"
-msgstr "Http उपयोगकर्ता एजेंट"
+msgstr "Http 用户代理"
 
 msgid "Extra Field Calculated Power Id"
-msgstr "अतिरिक्त क्षेत्र गणना की शक्ति आईडी"
+msgstr "额外的字段计算的功率 Id"
 
 msgid "Reference Entity"
-msgstr "संदर्भ एंटिटी"
+msgstr "参照图元"
 
 msgid "Extra Field Calculated Power Value"
-msgstr "अतिरिक्त क्षेत्र शक्ति मान गणना"
+msgstr "额外的字段计算功率值"
 
 msgid "Extra Field Grade Id"
-msgstr "अतिरिक्त फ़ील्ड ग्रेड आईडी"
+msgstr "额外字段级 Id"
 
 msgid "Extra Field Grade Value"
-msgstr "अतिरिक्त फ़ील्ड ग्रेड मान"
+msgstr "额外字段级值"
 
 msgid "Extra Field Length Id"
-msgstr "अतिरिक्त फ़ील्ड की लंबाई आईडी"
+msgstr "额外字段长度 Id"
 
 msgid "Extra Field Length Value"
-msgstr "अतिरिक्त फ़ील्ड लंबाई का मान"
+msgstr "额外字段长度值"
 
 msgid "Extra Field Per Master File Id"
-msgstr "मास्टर फ़ाइल Id प्रति अतिरिक्त फ़ील्ड"
+msgstr "额外的字段，每个主文件 Id"
 
 msgid "Extra Field Per Master File Value"
-msgstr "मास्टर फ़ाइल मान प्रति अतिरिक्त फ़ील्ड"
+msgstr "额外的字段，每个主文件值"
 
 msgid "Extra Field Power Cable Id"
-msgstr "अतिरिक्त फ़ील्ड पावर केबल आईडी"
+msgstr "额外字段电源电缆 Id"
 
 msgid "Extra Field Power Cable Value"
-msgstr "अतिरिक्त फ़ील्ड पावर केबल मान"
+msgstr "额外字段电力电缆价值"
 
 msgid "Extra Field Serial Status Id"
-msgstr "अतिरिक्त फ़ील्ड धारावाहिक स्थिति आईडी"
+msgstr "额外字段串行状态 Id"
 
 msgid "Extra Field Serial Status Value"
-msgstr "अतिरिक्त फ़ील्ड धारावाहिक स्थिति मान"
+msgstr "额外字段串行状态值"
 
 msgid "Key Number"
-msgstr "प्रमुख नंबर"
+msgstr "键编号"
 
 msgid "Units"
-msgstr "इकाइयों"
+msgstr "单位"
 
 msgid "Ap Supplier Id"
-msgstr "एपी प्रदायक आईडी"
+msgstr "Ap 供应商 Id"
 
 msgid "Ap Supplier Site Id"
-msgstr "एपी आपूर्तिकर्ता साइट Id"
+msgstr "Ap 供应商站点 Id"
 
 msgid "Warrranty Number"
-msgstr "Warrranty संख्या"
+msgstr "保修数量"
 
 msgid "Lease Number"
-msgstr "लीज संख्या"
+msgstr "租赁数量"
 
 msgid "Physical Inventory Cb"
-msgstr "वास्तविक इनवेंट्री सीबी"
+msgstr "物理库存 Cb"
 
 msgid "Fa Asset Assignment Id"
-msgstr "एफए परिसंपत्ति असाइनमेंट आईडी"
+msgstr "足总资产分配 Id"
 
 msgid "Hr Employe Id"
-msgstr "मानव संसाधन Employe Id"
+msgstr "Hr 员工 Id"
 
 msgid "Expense Ac Id"
-msgstr "व्यय एसी आईडी"
+msgstr "费用 Ac Id"
 
 msgid "Fa Asset Book Id"
-msgstr "एफए परिसंपत्ति पुस्तिका आईडी"
+msgstr "足总资产帐簿 Id"
 
 msgid "Asset Book Name"
-msgstr "परिसंपत्ति पुस्तक का नाम"
+msgstr "资产帐簿名称"
 
 msgid "Primary Fa Asset Book Id"
-msgstr "प्राथमिक एफए परिसंपत्ति पुस्तिका आईडी"
+msgstr "主发资产帐簿 Id"
 
 msgid "Inactive On"
-msgstr "निष्क्रिय पर"
+msgstr "非活动状态"
 
 msgid "Gl Calendar Id"
-msgstr "Gl कैलेंडर आईडी"
+msgstr "总帐日历 Id"
 
 msgid "Allow Gl Posting Cb"
-msgstr "जीएल सीबी पोस्ट करने की अनुमति दें"
+msgstr "允许过帐 Cb 的 Gl"
 
 msgid "Fa Calendar Code"
-msgstr "एफए कैलेंडर कोड"
+msgstr "Fa 日历代码"
 
 msgid "Revalue Accum Depriciation Cb"
-msgstr "Accum Depriciation सीबी पुनर्मूल्यांकन"
+msgstr "重估博鑫电子减值 Cb"
 
 msgid "Retire Revaluation Reserve Cb"
-msgstr "पुनर्मूल्यांकन रिजर्व सीबी रिटायर"
+msgstr "退休重估储备 Cb"
 
 msgid "Revalue Ytd Depriciation Cb"
-msgstr "Ytd Depriciation सीबी पुनर्मूल्यांकन"
+msgstr "重估 Ytd 减值 Cb"
 
 msgid "Sale Proceeds Gain Id"
-msgstr "विक्रय की प्रक्रिया Id प्राप्त"
+msgstr "卖地收益获得 Id"
 
 msgid "Sale Proceeds Loss Id"
-msgstr "बिक्री आय हानि आईडी"
+msgstr "销售收益损失 Id"
 
 msgid "Sale Proceeds Clearing Id"
-msgstr "विक्रय की प्रक्रिया Id समाशोधन"
+msgstr "出售收益结算 Id"
 
 msgid "Removal Cost Gain Id"
-msgstr "को हटाने लागत लाभ आईडी"
+msgstr "去除成本的增益 Id"
 
 msgid "Removal Cost Loss Id"
-msgstr "को हटाने लागत घटाने आईडी"
+msgstr "去除成本的损失 Id"
 
 msgid "Removal Cost Clearing Id"
-msgstr "Id समाशोधन को हटाने लागत"
+msgstr "去除成本结算 Id"
 
 msgid "Nbv Retired Gain Id"
-msgstr "Nbv सेवानिवृत्त लाभ आईडी"
+msgstr "Nbv 退休的增益 Id"
 
 msgid "Nbv Retired Loss Id"
-msgstr "Nbv सेवानिवृत्त हानि आईडी"
+msgstr "Nbv 退休的损失 Id"
 
 msgid "Reval Reserve Retired Gain Id"
-msgstr "Reval रिजर्व सेवानिवृत्त लाभ आईडी"
+msgstr "Reval 储备退休的增益 Id"
 
 msgid "Reval Reserve Retired Loss Id"
-msgstr "Reval रिजर्व सेवानिवृत्त हानि आईडी"
+msgstr "Reval 储备退休的损失 Id"
 
 msgid "Deff Depriciation Reserve Id"
-msgstr "निश्चित रूप से Depriciation रिजर्व आईडी"
+msgstr "肯定减值准备金 Id"
 
 msgid "Deff Depriciation Expense Id"
-msgstr "निश्चित रूप से Depriciation व्यय आईडी"
+msgstr "肯定减值费用 Id"
 
 msgid "Deff Depriciation Adjustment Id"
-msgstr "निश्चित रूप से Depriciation समायोजन आईडी"
+msgstr "肯定减值调整 Id"
 
 msgid "Default Ac Id"
-msgstr "डिफ़ॉल्ट एसी आईडी"
+msgstr "默认交流 Id"
 
 msgid "Fa Asset Book Info Id"
-msgstr "एफए परिसंपत्ति पुस्तक जानकारी आईडी"
+msgstr "足总资产帐簿信息 Id"
 
 msgid "Referece"
-msgstr "Referece"
+msgstr "目的"
 
 msgid "Original Cost"
-msgstr "मूल लागत"
+msgstr "原始成本"
 
 msgid "Current Cost"
-msgstr "वर्तमान लागत"
+msgstr "当前成本"
 
 msgid "Ytd Depreciation"
-msgstr "Ytd मूल्यह्रास"
+msgstr "本年累计折旧"
 
 msgid "Accumulated Depreciation"
-msgstr "संचित मूल्यह्रास"
+msgstr "累计的折旧"
 
 msgid "Salvage Value Type"
-msgstr "उबार मान प्रकार"
+msgstr "残值类型"
 
 msgid "Salvage Value Amount"
-msgstr "उबार मूल्य राशि"
+msgstr "残值金额"
 
 msgid "Salvage Value Percentage"
-msgstr "उबार मान प्रतिशत"
+msgstr "残值百分比"
 
 msgid "Fa Depreciation Method Id"
-msgstr "एफए मूल्यह्रास विधि आईडी"
+msgstr "Fa 折旧方法 Id"
 
 msgid "Life Months"
-msgstr "जीवन महीनों"
+msgstr "几个月的生活"
 
 msgid "Depriciation Cb"
-msgstr "Depriciation सीबी"
+msgstr "减值 Cb"
 
 msgid "Date In Service"
-msgstr "सेवा में दिनांक"
+msgstr "服务日期"
 
 msgid "Depriciation Start Date"
-msgstr "Depriciation प्रारंभ दिनांक"
+msgstr "减值开始日期"
 
 msgid "Depriciation Limit Amount"
-msgstr "Depriciation सीमा राशि"
+msgstr "减值额度金额"
 
 msgid "Depriciation Limit Percentage"
-msgstr "Depriciation सीमा प्रतिशत"
+msgstr "减值限制百分比"
 
 msgid "Asset Category"
-msgstr "परिसंपत्ति वर्ग"
+msgstr "资产类别"
 
 msgid "Segment1"
 msgstr "Segment1"
@@ -1930,1798 +1929,1798 @@ msgid "Segment3"
 msgstr "Segment3"
 
 msgid "Capitalize Cb"
-msgstr "सीबी कैपिटल बनाएँ"
+msgstr "利用 Cb"
 
 msgid "In Physical Inv Cb"
-msgstr "में भौतिक Inv सीबी"
+msgstr "在物理 Inv Cb"
 
 msgid "Fa Asset Trasaction Id"
-msgstr "एफए परिसंपत्ति Trasaction Id"
+msgstr "足总资产事务 Id"
 
 msgid "Reference"
-msgstr "संदर्भ"
+msgstr "参考"
 
 msgid "Accounted Cb"
-msgstr "हिसाब सीबी"
+msgstr "占的 Cb"
 
 msgid "Fa Book Category Association Id"
-msgstr "एफए पुस्तक श्रेणी एसोसिएशन आईडी"
+msgstr "发书类别关联 Id"
 
 msgid "Asset Cost Ac Id"
-msgstr "एसी Id परिसंपत्ति लागत"
+msgstr "资产的成本是交流 Id"
 
 msgid "Asset Clearing Ac Id"
-msgstr "परिसंपत्ति समाशोधन एसी आईडी"
+msgstr "资产清算交流 Id"
 
 msgid "Depreciation Expense Ac Id"
-msgstr "मूल्यह्रास व्यय एसी आईडी"
+msgstr "折旧支出交流 Id"
 
 msgid "Accumulated Depreciation Ac Id"
-msgstr "संचित मूल्यह्रास एसी आईडी"
+msgstr "累计的折旧交流 Id"
 
 msgid "Bonus Expense Ac Id"
-msgstr "बोनस व्यय एसी आईडी"
+msgstr "奖金支出交流 Id"
 
 msgid "Bonus Reserve Ac Id"
-msgstr "बोनस रिजर्व एसी आईडी"
+msgstr "奖金储备交流 Id"
 
 msgid "Revalue Reserve Ac Id"
-msgstr "पुनर्मूल्यांकन रिजर्व एसी आईडी"
+msgstr "重估储备交流 Id"
 
 msgid "Cip Cost Ac Id"
-msgstr "Cip एसी Id लागत"
+msgstr "Cip 成本 Ac Id"
 
 msgid "Cip Clearing Ac Id"
-msgstr "Cip समाशोधन एसी आईडी"
+msgstr "Cip 结算交流 Id"
 
 msgid "Unplanned Depreciation Expense Ac Id"
-msgstr "अनियोजित मूल्यह्रास व्यय एसी आईडी"
+msgstr "计划外的折旧支出交流 Id"
 
 msgid "Fa Depreciation Header Id"
-msgstr "एफए मूल्यह्रास हैडर Id"
+msgstr "Fa 折旧标题 Id"
 
 msgid "Gl Period Id"
-msgstr "Gl अवधि आईडी"
+msgstr "总帐期间 Id"
 
 msgid "Fa Depreciation Line Id"
-msgstr "एफए मूल्यह्रास लाइन आईडी"
+msgstr "Fa 折旧行 Id"
 
 msgid "Asset Id"
-msgstr "परिसंपत्ति आईडी"
+msgstr "资产 Id"
 
 msgid "Depreciation Amount"
-msgstr "मूल्यह्रास राशि"
+msgstr "折旧金额"
 
 msgid "Unschedule Amount"
-msgstr "Unschedule राशि"
+msgstr "Unschedule 数额"
 
 msgid "Total Depreciation Amount"
-msgstr "कुल मूल्यह्रास राशि"
+msgstr "总折旧金额"
 
 msgid "Depreciation Account Id"
-msgstr "मूल्यह्रास खाता Id"
+msgstr "折旧帐户 Id"
 
 msgid "Cost Before Depreciation"
-msgstr "लागत से पहले मूल्यह्रास"
+msgstr "前的成本折旧"
 
 msgid "Nbv Before Depreciation"
-msgstr "Nbv मूल्यह्रास से पहले"
+msgstr "折旧前 Nbv"
 
 msgid "Salvage Value Bd"
-msgstr "उबार मान बी. डी."
+msgstr "抢救价值屋宇署"
 
 msgid "Depreciation Method"
-msgstr "मूल्यह्रास विधि"
+msgstr "折旧方法"
 
 msgid "Method Type"
-msgstr "विधि प्रकार"
+msgstr "方法类型"
 
 msgid "Calculation Basis"
-msgstr "गणना के आधार"
+msgstr "计算依据"
 
 msgid "Life Month"
-msgstr "जीवन माह"
+msgstr "生活月"
 
 msgid "Reducing Balance Rate"
-msgstr "संतुलन की दर को कम करने"
+msgstr "减少平衡率"
 
 msgid "Fa Depreciation Method Rate Id"
-msgstr "एफए मूल्यह्रास विधि दर आईडी"
+msgstr "Fa 折旧方法率 Id"
 
 msgid "Year"
-msgstr "वर्ष"
+msgstr "一年"
 
 msgid "Period"
-msgstr "अवधि"
+msgstr "期间"
 
 msgid "File Id"
-msgstr "फ़ाइल Id"
+msgstr "文件 Id"
 
 msgid "File Path"
-msgstr "फ़ाइल पथ"
+msgstr "文件路径"
 
 msgid "File Size"
-msgstr "फ़ाइल का आकार"
+msgstr "文件大小"
 
 msgid "File Type"
-msgstr "फ़ाइल प्रकार"
+msgstr "文件类型"
 
 msgid "Document Type"
-msgstr "दस्तावेज़ प्रकार"
+msgstr "文档类型"
 
 msgid "File Reference Id"
-msgstr "फ़ाइल संदर्भ Id"
+msgstr "文件引用 Id"
 
 msgid "Form Id"
-msgstr "प्रपत्र Id"
+msgstr "表单 Id"
 
 msgid "Form"
-msgstr "प्रपत्र"
+msgstr "窗体"
 
 msgid "Submit Button"
-msgstr "बटन सबमिट करें"
+msgstr "提交按钮"
 
 msgid "Action Link"
-msgstr "क्रिया लिंक"
+msgstr "操作链接"
 
 msgid "Fp Forecast Consumption Id"
-msgstr "Fp पूर्वानुमान की खपत आईडी"
+msgstr "Fp 预测消费 Id"
 
 msgid "Fp Forecast Line Date Id"
-msgstr "Fp पूर्वानुमान पंक्ति दिनांक आईडी"
+msgstr "Fp 预测行日期 Id"
 
 msgid "Fp Forecast Line Id"
-msgstr "Fp पूर्वानुमान लाइन आईडी"
+msgstr "Fp 预测行 Id"
 
 msgid "Fp Forecast Group Id"
-msgstr "Fp पूर्वानुमान समूह आईडी"
+msgstr "Fp 预测组 Id"
 
 msgid "Reason"
-msgstr "कारण"
+msgstr "原因"
 
 msgid "Forecast Group"
-msgstr "पूर्वानुमान समूह"
+msgstr "预测组"
 
 msgid "Bucket Type"
-msgstr "बाल्टी प्रकार"
+msgstr "斗式"
 
 msgid "Level"
-msgstr "स्तर"
+msgstr "水平"
 
 msgid "Consume Cb"
-msgstr "सीबी की खपत"
+msgstr "消耗 Cb"
 
 msgid "Backward Days"
-msgstr "पिछड़े दिनों"
+msgstr "落后的天"
 
 msgid "Forward Days"
-msgstr "दिनों के आगे"
+msgstr "几天前"
 
 msgid "Fp Forecast Header Id"
-msgstr "Fp पूर्वानुमान हैडर Id"
+msgstr "Fp 预测标题 Id"
 
 msgid "Forecast"
-msgstr "पूर्वानुमान"
+msgstr "预测"
 
 msgid "Forecast Group Id"
-msgstr "पूर्वानुमान समूह आईडी"
+msgstr "预测组 Id"
 
 msgid "Demand Class"
-msgstr "मांग वर्ग"
+msgstr "需求类"
 
 msgid "No Of Bucket"
-msgstr "बाल्टी के सं"
+msgstr "没有的桶"
 
 msgid "Original"
-msgstr "मूल"
+msgstr "源语言"
 
 msgid "Total Original"
-msgstr "कुल मूल"
+msgstr "完全的原创"
 
 msgid "Fp Consumption Id"
-msgstr "Fp खपत आईडी"
+msgstr "Fp 消费 Id"
 
 msgid "Forecast Date"
-msgstr "तारीख की भविष्यवाणी"
+msgstr "预测日期"
 
 msgid "Original Quantity"
-msgstr "मूल मात्रा"
+msgstr "原始数量"
 
 msgid "Current Quantity"
-msgstr "वर्तमान मात्रा"
+msgstr "当前数量"
 
 msgid "Source"
-msgstr "स्रोत"
+msgstr "源"
 
 msgid "Uom Name"
-msgstr "Uom नाम"
+msgstr "计量单位名称"
 
 msgid "Schedule Ship Date"
-msgstr "अनुसूची जहाज की तारीख"
+msgstr "日程安排装运日期"
 
 msgid "Mds Name"
-msgstr "Mds के नाम"
+msgstr "Mds 名称"
 
 msgid "Fp Source List Header Id"
-msgstr "Fp स्रोत सूची हैडर Id"
+msgstr "Fp 源列表标题 Id"
 
 msgid "Include So Cb"
-msgstr "इतने सीबी शामिल हैं"
+msgstr "包括所以 Cb"
 
 msgid "Fp Mds Header Id"
-msgstr "Fp Mds हैडर Id"
+msgstr "Fp Mds 标题 Id"
 
 msgid "Fp Mds Line Id"
-msgstr "Fp Mds लाइन आईडी"
+msgstr "Fp Mds 行 Id"
 
 msgid "Demand Date"
-msgstr "मांग की तारीख"
+msgstr "需求日期"
 
 msgid "Source Header Id"
-msgstr "स्रोत हैडर Id"
+msgstr "源标题 Id"
 
 msgid "Source Line Id"
-msgstr "स्रोत पंक्ति Id"
+msgstr "源行 Id"
 
 msgid "Fp Minmax Demand Id"
-msgstr "Fp Minmax मांग आईडी"
+msgstr "Fp 极小极大需求 Id"
 
 msgid "Plan Id"
-msgstr "योजना Id"
+msgstr "计划 Id"
 
 msgid "Demand Item Id M"
-msgstr "आइटम Id M की मांग"
+msgstr "要求项目 Id M"
 
 msgid "Toplevel Demand Item Id M"
-msgstr "Toplevel मांग आइटम Id M"
+msgstr "顶级需求项目 Id M"
 
 msgid "Demand Type"
-msgstr "मांग के प्रकार"
+msgstr "需求类型"
 
 msgid "Plan Name"
-msgstr "योजना का नाम"
+msgstr "计划名称"
 
 msgid "Planning Horizon Days"
-msgstr "क्षितिज के दिनों की योजना बना"
+msgstr "规划地平线天"
 
 msgid "Forecast Description"
-msgstr "पूर्वानुमान विवरण"
+msgstr "预测描述"
 
 msgid "Top Level Item Number"
-msgstr "शीर्ष स्तरीय आइटम नंबर"
+msgstr "顶尖级别的物料编号"
 
 msgid "Top Level Item Description"
-msgstr "शीर्ष स्तरीय आइटम विवरण"
+msgstr "顶尖级别的物料描述"
 
 msgid "Demand Item Number"
-msgstr "मांग आइटम नंबर"
+msgstr "需求的物料编号"
 
 msgid "Demand Item Description"
-msgstr "मांग आइटम विवरण"
+msgstr "需求物料描述"
 
 msgid "Fp Minmax Header Id"
-msgstr "Fp Minmax हैडर Id"
+msgstr "Fp 极小极大标题 Id"
 
 msgid "Demand Source"
-msgstr "मांग स्रोत"
+msgstr "需求源"
 
 msgid "Fp Minmax Line Id"
-msgstr "Fp Minmax लाइन आईडी"
+msgstr "Fp 极小极大行 Id"
 
 msgid "Min Quantity"
-msgstr "न्यूनतम मात्रा"
+msgstr "最小数量"
 
 msgid "Max Quantity"
-msgstr "अधिकतम मात्रा"
+msgstr "最大数量"
 
 msgid "Mb Min Quantity"
-msgstr "Mb न्यूनतम मात्रा"
+msgstr "Mb 最小数量"
 
 msgid "Mb Max Quantity"
-msgstr "Mb अधिकतम मात्रा"
+msgstr "Mb 的最大数量"
 
 msgid "Mb Bin Size"
-msgstr "एमबी बिन का आकार"
+msgstr "Mb Bin 大小"
 
 msgid "Total Demand"
-msgstr "कुल मांग"
+msgstr "总需求"
 
 msgid "Avg Daily Demand"
-msgstr "औसत दैनिक मांग"
+msgstr "Avg 日常需求"
 
 msgid "Lead Time"
-msgstr "ख़ास समय"
+msgstr "提前期"
 
 msgid "Saftey Stock Quantity"
-msgstr "सुरक्षा स्टॉक मात्रा"
+msgstr "安全库存数量"
 
 msgid "Saftey Stock Days"
-msgstr "दिनों के सुरक्षा स्टॉक"
+msgstr "安全库存天"
 
 msgid "Minimum Quantity"
-msgstr "न्यूनतम मात्रा"
+msgstr "最小数量"
 
 msgid "Fix Days Supply"
-msgstr "दिन तय की आपूर्ति"
+msgstr "修复天供应"
 
 msgid "Maximum Quantity"
-msgstr "अधिकतम मात्रा"
+msgstr "最大数量"
 
 msgid "Multibin Fix Days Supply"
-msgstr "Multibin फिक्स दिनों की आपूर्ति"
+msgstr "多纸盒修复天的供应量"
 
 msgid "Minmax Multibin Number"
-msgstr "Minmax Multibin संख्या"
+msgstr "极小极大多纸盒数目"
 
 msgid "Minmax Multibin Size"
-msgstr "Minmax Multibin आकार"
+msgstr "极小极大多纸盒大小"
 
 msgid "Multibin Minmax Quantity"
-msgstr "Multibin Minmax मात्रा"
+msgstr "多纸盒的极小极大数量"
 
 msgid "Fp Mrp Demand Id"
-msgstr "Fp Mrp मांग आईडी"
+msgstr "Fp Mrp 需求 Id"
 
 msgid "Fp Mrp Header Id"
-msgstr "Fp Mrp हैडर Id"
+msgstr "Fp Mrp 标题 Id"
 
 msgid "Primary Source Type"
-msgstr "प्राथमिक स्रोत प्रकार"
+msgstr "主源类型"
 
 msgid "Mrp Name"
-msgstr "एमआरपी नाम"
+msgstr "Mrp 名称"
 
 msgid "Planner"
-msgstr "नियोजक"
+msgstr "规划师"
 
 msgid "Fp Mrp Exception Id"
-msgstr "Fp Mrp अपवाद आईडी"
+msgstr "Fp Mrp 异常 Id"
 
 msgid "Exception Message"
-msgstr "अपवाद संदेश"
+msgstr "异常消息"
 
 msgid "Detailed Message"
-msgstr "विस्तृत संदेश"
+msgstr "详细的消息"
 
 msgid "Exception Type"
-msgstr "अपवाद प्रकार"
+msgstr "异常类型"
 
 msgid "Supply Date"
-msgstr "आपूर्ति की तारीख"
+msgstr "供应日期"
 
 msgid "Document Id"
-msgstr "दस्तावेज़ Id"
+msgstr "文档 Id"
 
 msgid "Fp Mrp Lowlevel Code Id"
-msgstr "Fp एमआरपी Lowlevel कोड Id"
+msgstr "Fp Mrp 低空代码 Id"
 
 msgid "Order Type"
-msgstr "आदेश प्रकार"
+msgstr "订单类型"
 
 msgid "Order Action"
-msgstr "आदेश क्रिया"
+msgstr "秩序行动"
 
 msgid "Fp Mrp Planned Order Id"
-msgstr "Fp Mrp क्रम Id की योजना बनाई"
+msgstr "Fp Mrp 计划的订单 Id"
 
 msgid "Fp Mrp Supply Id"
-msgstr "Fp एमआरपी आपूर्ति आईडी"
+msgstr "Fp Mrp 供应 Id"
 
 msgid "Supply Item Id M"
-msgstr "आइटम Id M की आपूर्ति"
+msgstr "提供项目 Id M"
 
 msgid "Toplevel Supply Item Id M"
-msgstr "Toplevel आपूर्ति आइटम Id M"
+msgstr "顶级供应项目 Id M"
 
 msgid "Supply Type"
-msgstr "आपूर्ति प्रकार"
+msgstr "供应类型"
 
 msgid "Primary Supply Type"
-msgstr "प्राथमिक आपूर्ति प्रकार"
+msgstr "主要供应类型"
 
 msgid "Supply Header Id"
-msgstr "हैडर Id की आपूर्ति"
+msgstr "供应标题 Id"
 
 msgid "Supply Line Id"
-msgstr "आपूर्ति लाइन आईडी"
+msgstr "供应线 Id"
 
 msgid "Toplevel Demand Item Number"
-msgstr "Toplevel मांग आइटम नंबर"
+msgstr "顶级需求物料编号"
 
 msgid "Toplevel Demand Item Description"
-msgstr "Toplevel मांग आइटम विवरण"
+msgstr "顶级需求物料描述"
 
 msgid "Sourcing Rule Id"
-msgstr "नियम आईडी सोर्सिंग"
+msgstr "采购规则 Id"
 
 msgid "Sales Order Line"
-msgstr "विक्रय आदेश पंक्ति"
+msgstr "销售订单行"
 
 msgid "Fp Planning Control Id"
-msgstr "Fp योजना नियंत्रण Id"
+msgstr "Fp 规划控制 Id"
 
 msgid "Auto Consumed Group Id"
-msgstr "ऑटो समूह Id भस्म"
+msgstr "汽车消耗组 Id"
 
 msgid "Auto Consumed Frwd Days"
-msgstr "ऑटो Frwd दिन भस्म"
+msgstr "汽车消耗 Frwd 天"
 
 msgid "Auto Consumed Backwd Days"
-msgstr "ऑटो Backwd दिन भस्म"
+msgstr "汽车消耗 Backwd 天"
 
 msgid "Default Abc"
-msgstr "डिफ़ॉल्ट एबीसी"
+msgstr "默认 Abc"
 
 msgid "Net Wip Cb"
-msgstr "नेट Wip सीबी"
+msgstr "净 Wip Cb"
 
 msgid "Net Po Cb"
-msgstr "नेट पो सीबी"
+msgstr "净宝 Cb"
 
 msgid "Source List"
-msgstr "स्रोत सूची"
+msgstr "源列表"
 
 msgid "Source List Type"
-msgstr "स्रोत सूची प्रकार"
+msgstr "源列表类型"
 
 msgid "Fp Source List Line Id"
-msgstr "Fp स्रोत सूची पंक्ति Id"
+msgstr "Fp 源列表行 Id"
 
 msgid "Source List Line Type"
-msgstr "स्रोत सूची पंक्ति प्रकार"
+msgstr "源列表行类型"
 
 msgid "Source List Id"
-msgstr "स्रोत सूची आईडी"
+msgstr "源列表 Id"
 
 msgid "Fp Urgent Card Id"
-msgstr "Fp तत्काल कार्ड Id"
+msgstr "Fp 紧急卡 Id"
 
 msgid "Card Details"
-msgstr "कार्ड विवरण"
+msgstr "卡详细信息"
 
 msgid "Gl Balance Id"
-msgstr "Gl संतुलन आईडी"
+msgstr "Gl 平衡 Id"
 
 msgid "Balance Type"
-msgstr "शेष प्रकार"
+msgstr "平衡类型"
 
 msgid "Period Net Dr"
-msgstr "अवधि नेट डॉ."
+msgstr "期间净博士"
 
 msgid "Period Net Cr"
-msgstr "अवधि नेट सी. आर."
+msgstr "期间净 Cr"
 
 msgid "Begin Balance Dr"
-msgstr "शुरू संतुलन डॉ."
+msgstr "开始平衡博士"
 
 msgid "Begin Balance Cr"
-msgstr "शुरू संतुलन सीआर"
+msgstr "开始平衡 Cr"
 
 msgid "Period Name"
-msgstr "अवधि का नाम"
+msgstr "期间名称"
 
 msgid "Option Line Code"
-msgstr "विकल्प लाइन कोड"
+msgstr "选项行代码"
 
 msgid "Adjustment Period Cb"
-msgstr "समायोजन अवधि सीबी"
+msgstr "调整期 Cb"
 
 msgid "Calendar Type"
-msgstr "कैलेंडर प्रकार"
+msgstr "日历类型"
 
 msgid "Quarter"
-msgstr "तिमाही"
+msgstr "季"
 
 msgid "From Date"
-msgstr "दिनांक से"
+msgstr "从日期"
 
 msgid "To Date"
-msgstr "तारीख करने के लिए"
+msgstr "到目前为止"
 
 msgid "Name Prefix"
-msgstr "नाम उपसर्ग"
+msgstr "名称前缀"
 
 msgid "Gl Currency Conversion Id"
-msgstr "जीएल मुद्रा रूपांतरण आईडी"
+msgstr "Gl 货币转换 Id"
 
 msgid "Currency Conversion Type"
-msgstr "मुद्रा रूपांतरण प्रकार"
+msgstr "货币换算类型"
 
 msgid "From Currency"
-msgstr "मुद्रा से"
+msgstr "从货币"
 
 msgid "To Currency"
-msgstr "मुद्रा के लिए"
+msgstr "货币"
 
 msgid "Use Reverse Conversion"
-msgstr "रिवर्स रूपांतरण का उपयोग करें"
+msgstr "使用反向转换"
 
 msgid "Journal Source"
-msgstr "जर्नल स्रोत"
+msgstr "日记帐来源"
 
 msgid "Journal Category"
-msgstr "पत्रिका श्रेणी"
+msgstr "日志类别"
 
 msgid "Journal Name"
-msgstr "पत्रिका का नाम"
+msgstr "日记帐名称"
 
 msgid "Post Date"
-msgstr "पोस्ट दिनांक"
+msgstr "发布日期"
 
 msgid "Exchange Type"
-msgstr "मुद्रा प्रकार"
+msgstr "交换类型"
 
 msgid "Exchange Date"
-msgstr "एक्सचेंज तारीख"
+msgstr "交换日期"
 
 msgid "Control Total"
-msgstr "नियंत्रण कुल"
+msgstr "控制总"
 
 msgid "Running Total Dr"
-msgstr "चल कुल डॉ."
+msgstr "运行总博士"
 
 msgid "Running Total Cr"
-msgstr "चल कुल सी. आर."
+msgstr "运行总铬"
 
 msgid "Running Toatl Ac Dr"
-msgstr "चल Toatl एसी डॉ."
+msgstr "运行共有条交流博士"
 
 msgid "Running Toatl Ac Cr"
-msgstr "Toatl एसी सीआर चल रहा"
+msgstr "运行共有条交流 Cr"
 
 msgid "Gl Journal Line Id"
-msgstr "Gl जर्नल लाइन आईडी"
+msgstr "Gl 日记帐行 Id"
 
 msgid "Line Num"
-msgstr "रेखा Num"
+msgstr "行号"
 
 msgid "Code Combination Id"
-msgstr "कोड संयोजन आईडी"
+msgstr "代码组合 Id"
 
 msgid "Total Dr"
-msgstr "कुल डॉ."
+msgstr "共有博士"
 
 msgid "Total Cr"
-msgstr "कुल सी. आर."
+msgstr "总铬"
 
 msgid "Total Ac Dr"
-msgstr "कुल एसी डॉ."
+msgstr "共交流博士"
 
 msgid "Total Ac Cr"
-msgstr "कुल एसी सी. आर."
+msgstr "共交流 Cr"
 
 msgid "Combination Description"
-msgstr "संयोजन विवरण"
+msgstr "组合描述"
 
 msgid "Gl Ledger Id"
-msgstr "Gl खाता Id"
+msgstr "Gl 分类帐 Id"
 
 msgid "Ledger"
-msgstr "खाता बही"
+msgstr "分类帐"
 
 msgid "Calendar Option Line Code"
-msgstr "कैलेंडर विकल्प लाइन कोड"
+msgstr "日历选项行代码"
 
 msgid "Currency Code"
-msgstr "मुद्रा कोड"
+msgstr "币种代码"
 
 msgid "Future Enabled Periods"
-msgstr "भविष्य अवधियों सक्षम किया गया"
+msgstr "未来启用时间"
 
 msgid "Currency Balancing Ac Id"
-msgstr "मुद्रा संतुलन एसी आईडी"
+msgstr "货币平衡交流 Id"
 
 msgid "Retained Earnings Ac Id"
-msgstr "अवितरित आय एसी आईडी"
+msgstr "留存的收益交流 Id"
 
 msgid "Suspense Ac Id"
-msgstr "रहस्य एसी आईडी"
+msgstr "悬念交流 Id"
 
 msgid "Gl Ledger Balancing Values Id"
-msgstr "Gl खाता बही संतुलन मान आईडी"
+msgstr "Gl 分类帐平衡值 Id"
 
 msgid "Balancing Values"
-msgstr "मानों संतुलन साधने"
+msgstr "平衡值"
 
 msgid "Hr Job Id"
-msgstr "मानव संसाधन नौकरी आईडी"
+msgstr "Hr 的作业 Id"
 
 msgid "Job Code"
-msgstr "नौकरी कोड"
+msgstr "作业代码"
 
 msgid "Job Name"
-msgstr "कार्य नाम"
+msgstr "作业名称"
 
 msgid "Min Education"
-msgstr "मिन शिक्षा"
+msgstr "民教育"
 
 msgid "Min Experience"
-msgstr "मिन अनुभव"
+msgstr "最小经验"
 
 msgid "Technology"
-msgstr "प्रौद्योगिकी"
+msgstr "技术"
 
 msgid "Skillset"
-msgstr "Skillset"
+msgstr "技能"
 
 msgid "Position Type"
-msgstr "स्थिति का प्रकार"
+msgstr "职位类型"
 
 msgid "Functional Area"
-msgstr "कार्यात्मक क्षेत्र"
+msgstr "功能区"
 
 msgid "Location"
-msgstr "स्थान"
+msgstr "位置"
 
 msgid "Job Details"
-msgstr "नौकरी विवरण"
+msgstr "作业详细信息"
 
 msgid "Primary Responsibility"
-msgstr "प्राथमिक जिम्मेदारी"
+msgstr "主要责任"
 
 msgid "Hr Approval Limit Assignment Id"
-msgstr "एचआर अनुमोदन सीमा असाइनमेंट आईडी"
+msgstr "Hr 审批限额分配 Id"
 
 msgid "Hr Approval Limit Header Id"
-msgstr "एचआर अनुमोदन सीमा हैडर Id"
+msgstr "人力资源部批准限制标题 Id"
 
 msgid "Job Id"
-msgstr "नौकरी आईडी"
+msgstr "作业 Id"
 
 msgid "Position Id"
-msgstr "स्थान आईडी"
+msgstr "位置 Id"
 
 msgid "Limit Name"
-msgstr "सीमा का नाम"
+msgstr "限制名称"
 
 msgid "Hr Approval Limit Line Id"
-msgstr "एचआर अनुमोदन सीमा रेखा आईडी"
+msgstr "人力资源部批准限制行 Id"
 
 msgid "Limit Object"
-msgstr "सीमा ऑब्जेक्ट"
+msgstr "限制对象"
 
 msgid "Limit Type"
-msgstr "सीमा प्रकार"
+msgstr "限制类型"
 
 msgid "Limit Range Low"
-msgstr "सीमा सीमा कम"
+msgstr "极限范围低"
 
 msgid "Limit Range High"
-msgstr "सीमा उच्च श्रेणी"
+msgstr "限制范围高"
 
 msgid "Amount Limit"
-msgstr "राशि की सीमा"
+msgstr "限额"
 
 msgid "Inactive Date"
-msgstr "निष्क्रिय दिनांक"
+msgstr "非活动日期"
 
 msgid "Hr Approval Object Id"
-msgstr "एचआर अनुमोदन ऑब्जेक्ट Id"
+msgstr "Hr 审批对象 Id"
 
 msgid "Object Code"
-msgstr "वस्तु कोड"
+msgstr "对象代码"
 
 msgid "Object Value"
-msgstr "ऑब्जेक्ट मान"
+msgstr "对象值"
 
 msgid "Return Type"
-msgstr "वापसी प्रकार"
+msgstr "返回类型"
 
 msgid "Hr Compensation Element Id"
-msgstr "एचआर मुआवजा तत्व आईडी"
+msgstr "Hr 补偿元素 Id"
 
 msgid "Element Type"
-msgstr "तत्व प्रकार"
+msgstr "元素类型"
 
 msgid "Element Name"
-msgstr "तत्व का नाम"
+msgstr "元素名称"
 
 msgid "Classification"
-msgstr "वर्गीकरण"
+msgstr "分类"
 
 msgid "Recurring Cb"
-msgstr "आवर्ती सीबी"
+msgstr "定期 Cb"
 
 msgid "Deduction Rule"
-msgstr "कटौती नियम"
+msgstr "扣除规则"
 
 msgid "Calculation Rule"
-msgstr "गणना नियम"
+msgstr "计算规则"
 
 msgid "Separate Check Cb"
-msgstr "अलग चेक सीबी"
+msgstr "单独检查 Cb"
 
 msgid "Frequency Months"
-msgstr "आवृत्ति महीनों"
+msgstr "几个月频率"
 
 msgid "Standard Link Cb"
-msgstr "मानक लिंक सीबी"
+msgstr "标准链接 Cb"
 
 msgid "Deduction Start Rule"
-msgstr "कटौती शुरू नियम"
+msgstr "扣除出发有效规则"
 
 msgid "Po Purchasing Control Id"
-msgstr "पो क्रय नियंत्रण Id"
+msgstr "大埔采购控件 Id"
 
 msgid "Hr Element Entry Header Id"
-msgstr "एचआर तत्व प्रविष्टि हैडर Id"
+msgstr "Hr 元素条目标题 Id"
 
 msgid "Hr Employee Id"
-msgstr "मानव संसाधन कर्मचारी Id"
+msgstr "Hr 员工 Id"
 
 msgid "Hr Element Entry Line Id"
-msgstr "एचआर तत्व प्रविष्टि पंक्ति Id"
+msgstr "Hr 元素条目行 Id"
 
 msgid "Element Id"
-msgstr "तत्व आईडी"
+msgstr "元素 Id"
 
 msgid "Element Value"
-msgstr "तत्व मान"
+msgstr "元素值"
 
 msgid "Hr Element Entry Tpl Header Id"
-msgstr "एचआर तत्व प्रविष्टि पोकर्ना हैडर Id"
+msgstr "Hr 元素进入第三方物流标题 Id"
 
 msgid "Hr Element Entry Tpl Line Id"
-msgstr "एचआर तत्व प्रविष्टि पोकर्ना लाइन आईडी"
+msgstr "Hr 元素进入第三方物流线 Id"
 
 msgid "Identification Id"
-msgstr "पहचान Id"
+msgstr "识别 Id"
 
 msgid "Identification Type"
-msgstr "पहचान प्रकार"
+msgstr "标识类型"
 
 msgid "Citizen Number"
-msgstr "नागरिक संख्या"
+msgstr "公民号码"
 
 msgid "Language"
-msgstr "भाषा"
+msgstr "语言"
 
 msgid "Gender"
-msgstr "लिंग"
+msgstr "性别"
 
 msgid "Person Type"
-msgstr "व्यक्ति प्रकार"
+msgstr "Person 类型"
 
 msgid "Date Of Birth"
-msgstr "जन्म तिथि"
+msgstr "出生日期"
 
 msgid "City Of Birth"
-msgstr "जन्म के शहर"
+msgstr "出生城市"
 
 msgid "Country Of Birth"
-msgstr "जन्म का देश"
+msgstr "出生的国家"
 
 msgid "Nationality"
-msgstr "राष्ट्रीयता"
+msgstr "国籍"
 
 msgid "Disability Code"
-msgstr "विकलांगता कोड"
+msgstr "残疾代码"
 
 msgid "Marital Status"
-msgstr "वैवाहिक स्थिति"
+msgstr "婚姻状况"
 
 msgid "Degree"
-msgstr "की डिग्री"
+msgstr "学位"
 
 msgid "Highest Education"
-msgstr "उच्चतम शिक्षा"
+msgstr "最高学历"
 
 msgid "Education Details"
-msgstr "शिक्षा विवरण"
+msgstr "教育细节"
 
 msgid "No Of Children"
-msgstr "नहीं बच्चों के"
+msgstr "儿童人数"
 
 msgid "Home Address Id"
-msgstr "निवासी-पता आईडी"
+msgstr "家庭地址 Id"
 
 msgid "Home Address"
-msgstr "घर का पता"
+msgstr "家庭住址"
 
 msgid "Permanent Address"
-msgstr "स्थायी पता"
+msgstr "永久地址"
 
 msgid "Permanent Address Id"
-msgstr "स्थायी पता Id"
+msgstr "永久地址 Id"
 
 msgid "Home Phone Number"
-msgstr "घर का फोन नंबर"
+msgstr "家里的电话号码"
 
 msgid "Other Email"
-msgstr "अन्य ईमेल"
+msgstr "其他的电子邮件"
 
 msgid "Date First Hired"
-msgstr "तारीख के पहले काम पर रखा"
+msgstr "第一次雇佣日期"
 
 msgid "Payroll Id"
-msgstr "पेरोल आईडी"
+msgstr "工资单 Id"
 
 msgid "Grade Id"
-msgstr "ग्रेड आईडी"
+msgstr "等级 Id"
 
 msgid "Job Type"
-msgstr "नौकरी प्रकार"
+msgstr "作业类型"
 
 msgid "Supervisor Employee Id"
-msgstr "पर्यवेक्षक कर्मचारी Id"
+msgstr "主管员工 Id"
 
 msgid "Probation Period Uom"
-msgstr "परिवीक्षा अवधि Uom"
+msgstr "缓刑期间 Uom"
 
 msgid "Probation Period"
-msgstr "परिवीक्षा अवधि"
+msgstr "试用期"
 
 msgid "Notice Period Uom"
-msgstr "नोटिस अवधि Uom"
+msgstr "通知期 Uom"
 
 msgid "Notice Period"
-msgstr "नोटिस अवधि"
+msgstr "通知期"
 
 msgid "Revision Enabled"
-msgstr "सक्षम संशोधन"
+msgstr "启用修订"
 
 msgid "Revision Number"
-msgstr "संशोधन संख्या"
+msgstr "修订号"
 
 msgid "Work Policy Id"
-msgstr "कार्य नीति आईडी"
+msgstr "工作政策 Id"
 
 msgid "Salary Ac Id"
-msgstr "वेतन एसी आईडी"
+msgstr "工资交流 Id"
 
 msgid "Performance Id"
-msgstr "निष्पादन Id"
+msgstr "性能 Id"
 
 msgid "Vehicle Number"
-msgstr "वाहन संख्या"
+msgstr "汽车号码"
 
 msgid "Asset Numbers"
-msgstr "परिसंपत्ति क्रमांक"
+msgstr "资产编号"
 
 msgid "Contract Id"
-msgstr "अनुबंध आईडी"
+msgstr "合同 Id"
 
 msgid "Tax Reg Number"
-msgstr "टैक्स Reg संख्या"
+msgstr "税务注册号"
 
 msgid "Social Ac No"
-msgstr "सामाजिक एसी सं"
+msgstr "社会交流无"
 
 msgid "Social Ac No2"
-msgstr "सामाजिक एसी No2"
+msgstr "社会交流 No2"
 
 msgid "Passport Number"
-msgstr "पासपोर्ट संख्या"
+msgstr "护照号码"
 
 msgid "Hr Employee Education Id"
-msgstr "मानव संसाधन कर्मचारी शिक्षा आईडी"
+msgstr "Hr 员工教育 Id"
 
 msgid "Employee Id"
-msgstr "कर्मचारी Id"
+msgstr "雇员 Id"
 
 msgid "Degree Name"
-msgstr "डिग्री का नाम"
+msgstr "学位名称"
 
 msgid "University"
-msgstr "विश्वविद्यालय"
+msgstr "大学"
 
 msgid "University Address"
-msgstr "विश्वविद्यालय पते"
+msgstr "大学地址"
 
 msgid "Specialization"
-msgstr "विशेषज्ञता"
+msgstr "专业化"
 
 msgid "Edu Start Date"
-msgstr "Edu प्रारंभ दिनांक"
+msgstr "Edu 开始日期"
 
 msgid "Edu End Date"
-msgstr "Edu अंत दिनांक"
+msgstr "Edu 结束日期"
 
 msgid "Mode Of Education"
-msgstr "शिक्षा के मोड"
+msgstr "教育模式"
 
 msgid "Grade"
-msgstr "ग्रेड"
+msgstr "年级"
 
 msgid "Marks Percentage"
-msgstr "मार्क्स प्रतिशत"
+msgstr "标志着百分比"
 
 msgid "Comments"
-msgstr "टिप्पणियाँ"
+msgstr "评论"
 
 msgid "Hr Employee Experience Id"
-msgstr "मानव संसाधन कर्मचारी अनुभव आईडी"
+msgstr "Hr 员工经验 Id"
 
 msgid "Organization Name"
-msgstr "संगठन का नाम"
+msgstr "组织名称"
 
 msgid "Designation"
-msgstr "पदनाम"
+msgstr "指定"
 
 msgid "Employee Number"
-msgstr "कर्मचारी संख्या"
+msgstr "员工编号"
 
 msgid "Work Start Date"
-msgstr "कार्य प्रारंभ दिनांक"
+msgstr "工作开始日期"
 
 msgid "Work End Date"
-msgstr "कार्य समाप्ति दिनांक"
+msgstr "工作结束日期"
 
 msgid "Last Manager"
-msgstr "पिछले प्रबंधक"
+msgstr "最后经理"
 
 msgid "Last Drawn Salary"
-msgstr "पिछले आरेखित वेतन"
+msgstr "最后所得工资额"
 
 msgid "Communication Details"
-msgstr "संचार विवरण"
+msgstr "通信详细信息"
 
 msgid "Project Details"
-msgstr "परियोजना विवरण"
+msgstr "项目详细信息"
 
 msgid "Username"
-msgstr "उपयोगकर्ता नाम"
+msgstr "用户名"
 
 msgid "Emp Start Date"
-msgstr "Emp प्रारंभ दिनांक"
+msgstr "Emp 开始日期"
 
 msgid "Emp First Name"
-msgstr "Emp प्रथम नाम"
+msgstr "Emp 的第一个名字"
 
 msgid "Emp Last Name"
-msgstr "Emp आखिरी नाम"
+msgstr "Emp 最后的名字"
 
 msgid "Emp Email"
-msgstr "Emp ईमेल"
+msgstr "Emp 电子邮件"
 
 msgid "Position Name"
-msgstr "स्थिति नाम"
+msgstr "职位名称"
 
 msgid "Emp Org Id"
-msgstr "Emp Org आईडी"
+msgstr "Emp Org Id"
 
 msgid "Limit Start Date"
-msgstr "सीमा प्रारंभ दिनांक"
+msgstr "限制开始日期"
 
 msgid "Hr Employee Termination Id"
-msgstr "मानव संसाधन कर्मचारी समाप्ति आईडी"
+msgstr "Hr 员工终止 Id"
 
 msgid "New Employer"
-msgstr "नए नियोक्ता"
+msgstr "新的雇主"
 
 msgid "Date Of Notification"
-msgstr "अधिसूचना की तारीख"
+msgstr "通知日期"
 
 msgid "Projected Last Date"
-msgstr "अंतिम तिथि का अनुमान"
+msgstr "预计最后日期"
 
 msgid "Actual Last Date"
-msgstr "वास्तविक अंतिम दिनांक"
+msgstr "实际的最后日期"
 
 msgid "Accpeted Date"
-msgstr "Accpeted तिथि"
+msgstr "收到日期"
 
 msgid "Accpeted By Employee Id"
-msgstr "कर्मचारी Id द्वारा Accpeted"
+msgstr "收到按雇员 Id"
 
 msgid "Hr Leave Balance Id"
-msgstr "मानव संसाधन को छोड़ शेष आईडी"
+msgstr "Hr 离开平衡 Id"
 
 msgid "Leave Type"
-msgstr "प्रकार छोड़ दो"
+msgstr "休假类型"
 
 msgid "Leave Per Year"
-msgstr "प्रति वर्ष छोड़ दो"
+msgstr "休假每年"
 
 msgid "Total Available"
-msgstr "कुल उपलब्ध"
+msgstr "可用合计"
 
 msgid "Total Used"
-msgstr "कुल प्रयुक्त"
+msgstr "共用"
 
 msgid "Hr Leave Entitlement Header Id"
-msgstr "एचआर छोड़ एनटाइटेलमेंट हैडर Id"
+msgstr "Hr 假应享权利标题 Id"
 
 msgid "Entitlement Name"
-msgstr "पात्रता का नाम"
+msgstr "权利名称"
 
 msgid "Hr Leave Entitlement Line Id"
-msgstr "एचआर छोड़ एनटाइटेलमेंट लाइन आईडी"
+msgstr "Hr 假应享权利行 Id"
 
 msgid "Leave Per Period"
-msgstr "प्रति अवधि छोड़ दो"
+msgstr "每个期间离开"
 
 msgid "Default No Of Period"
-msgstr "डिफ़ॉल्ट अवधि के सं"
+msgstr "默认没有的时期"
 
 msgid "Hr Leave Transaction Id"
-msgstr "एचआर छोड़ लेनदेन आईडी"
+msgstr "Hr 留下交易记录 Id"
 
 msgid "Requsted Date"
-msgstr "Requsted तिथि"
+msgstr "请求日期"
 
 msgid "Approved Date"
-msgstr "अनुमोदित दिनांक"
+msgstr "批准的日期"
 
 msgid "Approved By"
-msgstr "द्वारा अनुमोदित"
+msgstr "经批准"
 
 msgid "Approved By Employee Id"
-msgstr "कर्मचारी Id द्वारा अनुमोदित"
+msgstr "批准的雇员 Id"
 
 msgid "Leave Status"
-msgstr "स्तर छोड़"
+msgstr "离开状态"
 
 msgid "Leave Quantity"
-msgstr "मात्रा छोड़ दो"
+msgstr "离开数量"
 
 msgid "Contact Details"
-msgstr "सम्पर्क करने का विवरण"
+msgstr "联系方式"
 
 msgid "Sys Notification Id"
-msgstr "Sys अधिसूचना आईडी"
+msgstr "Sys 通知 Id"
 
 msgid "Sys Notification Group Id"
-msgstr "Sys अधिसूचना समूह आईडी"
+msgstr "Sys 通知组 Id"
 
 msgid "Hr Leave Type Id"
-msgstr "एचआर छोड़ दो प्रकार Id"
+msgstr "Hr 离开类型 Id"
 
 msgid "Leave Category"
-msgstr "श्रेणी छोड़ दो"
+msgstr "带薪休假类别"
 
 msgid "Allow Carry Forward Cb"
-msgstr "कैर्री आगे सीबी की अनुमति दें"
+msgstr "允许携带向前 Cb"
 
 msgid "Carry Forward Per Year"
-msgstr "प्रति वर्ष आगे ले"
+msgstr "每年结转"
 
 msgid "Maximum Accumulation"
-msgstr "अधिकतम संचय"
+msgstr "可累积最高"
 
 msgid "Auto Convert Salary Cb"
-msgstr "ऑटो कन्वर्ट वेतन सीबी"
+msgstr "自动转换薪炭黑"
 
 msgid "Allow Advance Cb"
-msgstr "अग्रिम सीबी की अनुमति दें"
+msgstr "允许提前 Cb"
 
 msgid "Lwp Cb"
-msgstr "Lwp सीबी"
+msgstr "Lwp Cb"
 
 msgid "Default Reason"
-msgstr "डिफ़ॉल्ट कारण"
+msgstr "默认原因"
 
 msgid "Hr Payroll Id"
-msgstr "एचआर पेरोल आईडी"
+msgstr "Hr 薪资 Id"
 
 msgid "Payroll"
-msgstr "पेरोल"
+msgstr "工资"
 
 msgid "Period Type"
-msgstr "अवधि का प्रकार"
+msgstr "期间类型"
 
 msgid "Hr Payroll Payment Method Id"
-msgstr "एचआर पेरोल भुगतान विधि आईडी"
+msgstr "Hr 薪资付款方法 Id"
 
 msgid "Bank Charge Ac Id"
-msgstr "बैंक प्रभार एसी आईडी"
+msgstr "银行收费交流 Id"
 
 msgid "Salary Payable Ac Id"
-msgstr "वेतन देय एसी आईडी"
+msgstr "工资支付交流 Id"
 
 msgid "Hr Payroll Process Id"
-msgstr "एचआर पेरोल प्रक्रिया Id"
+msgstr "Hr 薪资进程 Id"
 
 msgid "Hr Payroll Schedule Id"
-msgstr "एचआर पेरोल शेड्यूल आईडी"
+msgstr "人力资源工资计划 Id"
 
 msgid "Proces Name"
-msgstr "Proces नाम"
+msgstr "过程名称"
 
 msgid "Scheduled Date"
-msgstr "शेड्यूल किए गए दिनांक"
+msgstr "预定的日期"
 
 msgid "Hr Payslip Header Id"
-msgstr "एचआर Payslip हैडर Id"
+msgstr "Hr 工资单标题 Id"
 
 msgid "Period Name Id"
-msgstr "अवधि का नाम Id"
+msgstr "期间名称 Id"
 
 msgid "Pay Date"
-msgstr "दिनांक का भुगतान"
+msgstr "支付日期"
 
 msgid "No Of Days"
-msgstr "दिनों की सं"
+msgstr "不是的天"
 
 msgid "Payment Ref No"
-msgstr "भुगतान रेफरी सं"
+msgstr "付款参考号"
 
 msgid "Mode Of Payment"
-msgstr "भुगतान का तरीका"
+msgstr "支付方式"
 
 msgid "Pay Duration Type"
-msgstr "भुगतान अवधि प्रकार"
+msgstr "付薪持续时间类型"
 
 msgid "Hr Payslip Line Id"
-msgstr "एचआर Payslip लाइन आईडी"
+msgstr "Hr 工资单行 Id"
 
 msgid "Hr Position Id"
-msgstr "मानव संसाधन की स्थिति आईडी"
+msgstr "人力资源职位 Id"
 
 msgid "Headcount"
-msgstr "Headcount"
+msgstr "总人数"
 
 msgid "Salary Basis"
-msgstr "वेतन के आधार"
+msgstr "薪酬的基础"
 
 msgid "Working Hours"
-msgstr "कार्य समय"
+msgstr "工作小时"
 
 msgid "Wh Frequency"
-msgstr "Wh आवृत्ति"
+msgstr "Wh 频率"
 
 msgid "Position Details"
-msgstr "स्थिति विवरण"
+msgstr "职位的详细信息"
 
 msgid "Position Status"
-msgstr "स्थिति की स्थिति"
+msgstr "职位状态"
 
 msgid "Hr Position Hierarchy Header Id"
-msgstr "मानव संसाधन की स्थिति पदानुक्रम हैडर Id"
+msgstr "人力资源职位层次标题 Id"
 
 msgid "Starting Position Id"
-msgstr "प्रारंभिक स्थिति आईडी"
+msgstr "起始位置 Id"
 
 msgid "Hierarchy Name"
-msgstr "पदानुक्रम का नाम"
+msgstr "层次结构名称"
 
 msgid "Revision"
-msgstr "संशोधन"
+msgstr "修订"
 
 msgid "Hr Position Hierarchy Line Id"
-msgstr "मानव संसाधन की स्थिति पदानुक्रम लाइन आईडी"
+msgstr "人力资源职位层次结构行 Id"
 
 msgid "Hr Team Header Id"
-msgstr "मानव संसाधन टीम हैडर Id"
+msgstr "Hr 团队标题 Id"
 
 msgid "Team Name"
-msgstr "टीम नाम"
+msgstr "团队名称"
 
 msgid "Team Lead Employee Id"
-msgstr "टीम लीड कर्मचारी Id"
+msgstr "团队领导员工 Id"
 
 msgid "Region"
-msgstr "क्षेत्र"
+msgstr "地区"
 
 msgid "Objective"
-msgstr "उद्देश्य"
+msgstr "目的"
 
 msgid "Hr Team Line Id"
-msgstr "मानव संसाधन टीम लाइन आईडी"
+msgstr "Hr 团队行 Id"
 
 msgid "Member Employee Id"
-msgstr "सदस्य कर्मचारी Id"
+msgstr "成员雇员 Id"
 
 msgid "Role"
-msgstr "भूमिका"
+msgstr "作用"
 
 msgid "Responsibility"
-msgstr "जिम्मेदारी"
+msgstr "责任"
 
 msgid "Inv Abc Assignment Header Id"
-msgstr "Inv एबीसी असाइनमेंट हैडर Id"
+msgstr "Inv Abc 作业标题 Id"
 
 msgid "Abc Assignment Name"
-msgstr "एबीसी असाइनमेंट नाम"
+msgstr "Abc 作业名称"
 
 msgid "Inv Abc Valuation Id"
-msgstr "Inv एबीसी मूल्यांकन आईडी"
+msgstr "Inv Abc 估价 Id"
 
 msgid "Inv Abc Assignment Line Id"
-msgstr "Inv एबीसी असाइनमेंट लाइन आईडी"
+msgstr "Inv Abc 工作分配行 Id"
 
 msgid "Abc Class"
-msgstr "एबीसी वर्ग"
+msgstr "Abc 类"
 
 msgid "Valuation Name"
-msgstr "मूल्यांकन के नाम"
+msgstr "估价名称"
 
 msgid "Scope Org Id"
-msgstr "स्कोप Org आईडी"
+msgstr "组织结构图的作用域 Id"
 
 msgid "Scope Sub Inventory Id"
-msgstr "स्कोप उप इन्वेंटरी आईडी"
+msgstr "作用域子库存 Id"
 
 msgid "Scope Org Hirearchy Id"
-msgstr "स्कोप Org Hirearchy Id"
+msgstr "范围组织结构图 Hirearchy Id"
 
 msgid "Scope Product Line"
-msgstr "स्कोप उत्पाद लाइन"
+msgstr "范围的产品线"
 
 msgid "Criteria"
-msgstr "मापदंड"
+msgstr "标准"
 
 msgid "Inv Abc Valuation Result Id"
-msgstr "Inv एबीसी मूल्यांकन परिणाम आईडी"
+msgstr "Inv Abc 估价结果 Id"
 
 msgid "Seq Number"
-msgstr "Seq संख्या"
+msgstr "序列号"
 
 msgid "Cum Quantity"
-msgstr "सह मात्रा"
+msgstr "暨数量"
 
 msgid "Cum Value"
-msgstr "सह मान"
+msgstr "暨值"
 
 msgid "Inv Count Abc Ref Id"
-msgstr "Inv गिनती एबीसी रेफरी आईडी"
+msgstr "Inv 计数 Abc 引用 Id"
 
 msgid "Inv Count Header Id"
-msgstr "Inv गिनती हैडर Id"
+msgstr "Inv 计数标题 Id"
 
 msgid "Class Code"
-msgstr "वर्ग कोड"
+msgstr "类代码"
 
 msgid "Count Per Year"
-msgstr "प्रति वर्ष गणना"
+msgstr "每年数"
 
 msgid "Inv Count Entries Id"
-msgstr "Inv गिनती प्रविष्टियाँ आईडी"
+msgstr "Inv 计数条目 Id"
 
 msgid "Inv Count Schedule Id"
-msgstr "Inv गिनती शेड्यूल आईडी"
+msgstr "Inv 计数日程安排 Id"
 
 msgid "Lot Number"
-msgstr "बहुत कुछ संख्या"
+msgstr "批号"
 
 msgid "Schedule Date"
-msgstr "शेड्यूल दिनांक"
+msgstr "计划日期"
 
 msgid "Adjustment Ac Id"
-msgstr "समायोजन एसी आईडी"
+msgstr "调整交流 Id"
 
 msgid "Counted By"
-msgstr "द्वारा गिना"
+msgstr "由计数"
 
 msgid "Count Date"
-msgstr "गणना की तारीख"
+msgstr "计数日期"
 
 msgid "Count Qty"
-msgstr "गिनती मात्रा"
+msgstr "计数数量"
 
 msgid "System Qty"
-msgstr "सिस्टम मात्रा"
+msgstr "系统数量"
 
 msgid "Adjusted Qty"
-msgstr "समायोजित मात्रा"
+msgstr "调整的数量"
 
 msgid "Count Name"
-msgstr "गिनती का नाम"
+msgstr "计数名称"
 
 msgid "Count Type"
-msgstr "गिनती प्रकार"
+msgstr "计数类型"
 
 msgid "Approval Required"
-msgstr "अनुमोदन की आवश्यकता"
+msgstr "所需的批准"
 
 msgid "Quantity Variance Positive"
-msgstr "मात्रा विचरण सकारात्मक"
+msgstr "量方差阳性"
 
 msgid "Quantity Variance Negative"
-msgstr "मात्रा विचरण नकारात्मक"
+msgstr "量方差负"
 
 msgid "Value Variance Positive"
-msgstr "मान विचरण सकारात्मक"
+msgstr "值方差阳性"
 
 msgid "Value Variance Negative"
-msgstr "मान विचरण नकारात्मक"
+msgstr "值方差负"
 
 msgid "Zero Count Cb"
-msgstr "शून्य गिनती सीबी"
+msgstr "零计数 Cb"
 
 msgid "Abc Code"
-msgstr "एबीसी संहिता"
+msgstr "Abc 代码"
 
 msgid "Inv Interorg Transfer Header Id"
-msgstr "Inv Interorg हस्तांतरण हैडर Id"
+msgstr "Inv Interorg 传输标题 Id"
 
 msgid "Order Number"
-msgstr "क्रम संख्या"
+msgstr "订单编号"
 
 msgid "From Org Id"
-msgstr "Org आईडी से"
+msgstr "从组织结构图 Id"
 
 msgid "To Org Id"
-msgstr "Org Id करने के लिए"
+msgstr "为组织结构图 Id"
 
 msgid "Transfer To Gl"
-msgstr "Gl करने के लिए स्थानांतरण"
+msgstr "转移到总帐"
 
 msgid "Transaction Date"
-msgstr "लेनदेन की तारीख"
+msgstr "交易记录日期"
 
 msgid "Carrier"
-msgstr "वाहक"
+msgstr "承运人"
 
 msgid "Vechile Number"
-msgstr "Vechile संख्या"
+msgstr "汽车数量"
 
 msgid "Waybill"
-msgstr "बीजक"
+msgstr "运单"
 
 msgid "Inv Interorg Transfer Line Id"
-msgstr "Inv Interorg हस्तांतरण लाइन आईडी"
+msgstr "Inv Interorg 转让行 Id"
 
 msgid "From Subinventory Id"
-msgstr "Subinventory Id से"
+msgstr "从 Subinventory Id"
 
 msgid "From Locator Id"
-msgstr "लोकेटर आईडी से"
+msgstr "从定位器 Id"
 
 msgid "Revision Name"
-msgstr "संशोधन का नाम"
+msgstr "修改名称"
 
 msgid "To Subinventory Id"
-msgstr "करने के लिए Subinventory Id"
+msgstr "到 Subinventory Id"
 
 msgid "To Locator Id"
-msgstr "लोकेटर Id करने के लिए"
+msgstr "到定位器 Id"
 
 msgid "Transaction Quantity"
-msgstr "लेन-देन मात्रा"
+msgstr "交易记录数量"
 
 msgid "Inv Item Revision Id"
-msgstr "Inv मद संशोधन आईडी"
+msgstr "Inv 项目修订 Id"
 
 msgid "Implementation Date"
-msgstr "कार्यान्वयन की तारीख"
+msgstr "实施日期"
 
 msgid "Inv Location Default Id"
-msgstr "Inv स्थान डिफ़ॉल्ट Id"
+msgstr "Inv 位置默认 Id"
 
 msgid "Default Type"
-msgstr "डिफ़ॉल्ट प्रकार"
+msgstr "默认类型"
 
 msgid "Inv Lot Number Id"
-msgstr "Inv बहुत संख्या आईडी"
+msgstr "Inv 多数字 Id"
 
 msgid "Generation"
-msgstr "पीढ़ी"
+msgstr "一代人"
 
 msgid "Lock Cb"
-msgstr "ताला सीबी"
+msgstr "锁 Cb"
 
 msgid "First Inv Transaction Id"
-msgstr "पहली Inv लेनदेन आईडी"
+msgstr "第一个 Inv 事务 Id"
 
 msgid "Origination Type"
-msgstr "व्युत्पत्ति प्रकार"
+msgstr "源类型"
 
 msgid "Activation Date"
-msgstr "सक्रियण के दिनांक"
+msgstr "激活日期"
 
 msgid "Expiration Date"
-msgstr "समय सीमा समाप्ति दिनांक"
+msgstr "到期日期"
 
 msgid "Supplier Sn"
-msgstr "आपूर्तिकर्ता Sn"
+msgstr "供应商 Sn"
 
 msgid "Supplier Ln"
-msgstr "आपूर्तिकर्ता Ln"
+msgstr "供应商 Ln"
 
 msgid "Expiration Action"
-msgstr "समय सीमा समाप्ति कार्रवाई"
+msgstr "过期操作"
 
 msgid "Item Revision"
-msgstr "मद संशोधन"
+msgstr "项修订"
 
 msgid "Parent Lot Number Id"
-msgstr "माता-पिता बहुत संख्या आईडी"
+msgstr "父很多数字 Id"
 
 msgid "Original Wip Wo Header Id"
-msgstr "मूल Wip Wo हैडर Id"
+msgstr "原始的 Wip 窝标题 Id"
 
 msgid "Last Inv Transaction Id"
-msgstr "पिछले Inv लेनदेन आईडी"
+msgstr "最后 Inv 事务 Id"
 
 msgid "Inv Lot Onhand Id"
-msgstr "Inv बहुत Onhand Id"
+msgstr "Inv 许多现有 Id"
 
 msgid "Onhand Id"
-msgstr "Onhand Id"
+msgstr "现有 Id"
 
 msgid "Lot Quantity"
-msgstr "बहुत कुछ मात्रा"
+msgstr "批次数量"
 
 msgid "Inv Lot Transaction Id"
-msgstr "Inv बहुत लेनदेन आईडी"
+msgstr "Inv 批次交易记录 Id"
 
 msgid "Inv Transaction Id"
-msgstr "Inv लेनदेन आईडी"
+msgstr "Inv 事务 Id"
 
 msgid "From Subinventory"
-msgstr "Subinventory से"
+msgstr "从 Subinventory"
 
 msgid "To Subinventory"
-msgstr "Subinventory करना"
+msgstr "对 Subinventory"
 
 msgid "From Locator"
-msgstr "से लोकेटर"
+msgstr "从定位器"
 
 msgid "To Locator"
-msgstr "करने के लिए लोकेटर"
+msgstr "到定位器"
 
 msgid "Lot Number Id"
-msgstr "बहुत कुछ संख्या आईडी"
+msgstr "很多数字 Id"
 
 msgid "Inv Receipt Header Id"
-msgstr "Inv रसीद हैडर Id"
+msgstr "Inv 收据标题 Id"
 
 msgid "Receipt Date"
-msgstr "प्राप्ति दिनांक"
+msgstr "接收日期"
 
 msgid "Received By"
-msgstr "द्वारा प्राप्त"
+msgstr "收到的"
 
 msgid "Inv Receipt Line Id"
-msgstr "Inv रसीद लाइन आईडी"
+msgstr "Inv 收据行 Id"
 
 msgid "Receving Account Id"
-msgstr "Receving खाता Id"
+msgstr "接收帐户 Id"
 
 msgid "Accrual Account Id"
-msgstr "प्रोद्भवन खाता Id"
+msgstr "权责发生制帐户 Id"
 
 msgid "Ref Doc Type"
-msgstr "रेफरी डॉक्टर प्रकार"
+msgstr "Ref 文档类型"
 
 msgid "Ref Doc Number"
-msgstr "रेफरी डॉक्टर संख्या"
+msgstr "Ref 文档编号"
 
 msgid "Inv Serial Number Id"
-msgstr "Inv क्रम संख्या आईडी"
+msgstr "Inv 序号 Id"
 
 msgid "Current Org Id"
-msgstr "वर्तमान Org आईडी"
+msgstr "当前的组织结构图 Id"
 
 msgid "Current Subinventory Id"
-msgstr "वर्तमान Subinventory Id"
+msgstr "当前的 Subinventory Id"
 
 msgid "Current Locator Id"
-msgstr "वर्तमान लोकेटर आईडी"
+msgstr "当前定位器 Id"
 
 msgid "Parent Serial Number Id"
-msgstr "पैरेंट Id क्रमांक"
+msgstr "父序列号 Id"
 
 msgid "Current Wip Wo Header Id"
-msgstr "वर्तमान Wip Wo हैडर Id"
+msgstr "当前的 Wip 窝标题 Id"
 
 msgid "Fixed Asset Cb"
-msgstr "स्थायी संपत्ति सीबी"
+msgstr "固定资产 Cb"
 
 msgid "Inv Serial Transaction Id"
-msgstr "Inv सीरियल लेनदेन आईडी"
+msgstr "Inv 串行事务 Id"
 
 msgid "Receipt Line Id"
-msgstr "रसीद लाइन आईडी"
+msgstr "收据行 Id"
 
 msgid "Logical Transaction Cb"
-msgstr "तार्किक लेनदेन सीबी"
+msgstr "逻辑事务 Cb"
 
 msgid "Wip Wo Bom Id"
-msgstr "Wip Wo Bom आईडी"
+msgstr "Wip 窝物料清单 Id"
 
 msgid "From Account Id"
-msgstr "खाता Id से"
+msgstr "从帐户 Id"
 
 msgid "To Account Id"
-msgstr "खाता Id के लिए"
+msgstr "向帐户 Id"
 
 msgid "Unit Cost"
-msgstr "इकाई लागत"
+msgstr "单位成本"
 
 msgid "Costed Amount"
-msgstr "Costed राशि"
+msgstr "费用的金额"
 
 msgid "Transaction Rev Enabled Cb"
-msgstr "लेन-देन Rev सीबी सक्षम किया गया"
+msgstr "交易冯启用 Cb"
 
 msgid "Rev Start Number"
-msgstr "रेव प्रारंभ संख्या"
+msgstr "冯开始编号"
 
 msgid "Inventory Id"
-msgstr "इन्वेंटरी आईडी"
+msgstr "库存 Id"
 
 msgid "Item Master Cb"
-msgstr "आइटम मास्टर सीबी"
+msgstr "项目主断路器"
 
 msgid "Master Org Id"
-msgstr "मास्टर Org आईडी"
+msgstr "主组织结构图 Id"
 
 msgid "Calendar"
-msgstr "कैलेंडर"
+msgstr "日历"
 
 msgid "Locator Control"
-msgstr "लोकेटर नियंत्रण"
+msgstr "定位器控制"
 
 msgid "Allow Negative Balance Cb"
-msgstr "नकारात्मक शेष सीबी की अनुमति दें"
+msgstr "允许负平衡 Cb"
 
 msgid "Costing Org"
-msgstr "Org की लागत"
+msgstr "成本核算的组织结构图"
 
 msgid "Pos Price List Header Id"
-msgstr "Pos मूल्य सूची हैडर Id"
+msgstr "Pos 价格列表标题 Id"
 
 msgid "Costing Method"
-msgstr "लागत विधि"
+msgstr "分步成本计算法"
 
 msgid "Transfer To Gl Cb"
-msgstr "Gl सीबी करने के लिए स्थानांतरण"
+msgstr "转移到 Gl Cb"
 
 msgid "Default Cost Group"
-msgstr "डिफ़ॉल्ट लागत समूह"
+msgstr "默认成本组"
 
 msgid "Material Ac Id"
-msgstr "सामग्री एसी आईडी"
+msgstr "材料交流 Id"
 
 msgid "Material Oh Ac Id"
-msgstr "माल ओह एसी आईडी"
+msgstr "材料哦交流 Id"
 
 msgid "Overhead Ac Id"
-msgstr "उपरि एसी आईडी"
+msgstr "架空交流 Id"
 
 msgid "Resource Ac Id"
-msgstr "संसाधन एसी आईडी"
+msgstr "资源交流 Id"
 
 msgid "Lot Uniqueness"
-msgstr "बहुत कुछ विशिष्टता"
+msgstr "很多唯一性"
 
 msgid "Lot Generation"
-msgstr "बहुत कुछ पीढ़ी"
+msgstr "很多代"
 
 msgid "Lot Prefix"
-msgstr "बहुत कुछ उपसर्ग"
+msgstr "很多前缀"
 
 msgid "Lot Starting Number"
-msgstr "बहुत संख्या शुरू"
+msgstr "很多的起始编号"
 
 msgid "Serial Uniqueness"
-msgstr "धारावाहिक विशिष्टता"
+msgstr "串行的唯一性"
 
 msgid "Serial Generation"
-msgstr "धारावाहिक पीढ़ी"
+msgstr "串行生成"
 
 msgid "Serial Prefix"
-msgstr "धारावाहिक उपसर्ग"
+msgstr "串行前缀"
 
 msgid "Serial Starting Number"
-msgstr "सीरियल नंबर शुरू"
+msgstr "起始编号"
 
 msgid "Atp"
-msgstr "एटीपी"
+msgstr "Atp"
 
 msgid "Picking Rule"
-msgstr "नियम उठा"
+msgstr "领料规则"
 
 msgid "Sourcing Rule"
-msgstr "नियम सोर्सिंग"
+msgstr "采购规则"
 
 msgid "Inter Org Ppv Ac Id"
-msgstr "Org Ppv एसी आईडी इंटर"
+msgstr "除组织结构图 Ppv 交流 Id"
 
 msgid "Inter Org Receivable Ac Id"
-msgstr "Org प्राप्य एसी आईडी इंटर"
+msgstr "除组织结构图应收账款的 Ac Id"
 
 msgid "Inter Org Payable Ac Id"
-msgstr "Org देय एसी आईडी इंटर"
+msgstr "除组织结构图应付交流 Id"
 
 msgid "Inter Org Intransit Ac Id"
-msgstr "Org Intransit एसी आईडी इंटर"
+msgstr "除组织结构图途中交流 Id"
 
 msgid "Inv Ap Accrual Ac Id"
-msgstr "Inv एपी प्रोद्भवन एसी आईडी"
+msgstr "Inv Ap 权责发生制 Ac Id"
 
 msgid "Inv Ap Exp Accrual Ac Id"
-msgstr "Inv एपी ऍक्स्प प्रोद्भवन एसी आईडी"
+msgstr "Inv Ap Exp 权责发生制 Ac Id"
 
 msgid "Inv Ppv Ac Id"
-msgstr "Inv Ppv एसी आईडी"
+msgstr "Inv Ppv 交流 Id"
 
 msgid "Inv Ipv Ac Id"
-msgstr "Inv Ipv एसी आईडी"
+msgstr "Inv Ipv 交流 Id"
 
 msgid "Sales Ac Id"
-msgstr "विक्रय एसी आईडी"
+msgstr "销售交流 Id"
 
 msgid "Cogs Ac Id"
-msgstr "Cogs एसी आईडी"
+msgstr "Cogs 交流 Id"
 
 msgid "Deferred Cogs Ac Id"
-msgstr "आस्थगित Cogs एसी आईडी"
+msgstr "递延的 Cogs 交流 Id"
 
 msgid "Item Rev Enabled Cb"
-msgstr "आइटम Rev सीबी सक्षम किया गया"
+msgstr "项目冯启用 Cb"
 
 msgid "Item Id"
-msgstr "आइटम Id"
+msgstr "项目 Id"
 
 msgid "Product Line Percentage"
-msgstr "उत्पाद लाइन प्रतिशत"
+msgstr "产品线百分比"
 
 msgid "Long Description"
-msgstr "दीर्घ वर्णन"
+msgstr "较长说明"
 
 msgid "Inventory Item Cb"
-msgstr "सूची आइटम सीबी"
+msgstr "库存项目 Cb"
 
 msgid "Stockable Cb"
-msgstr "Stockable सीबी"
+msgstr "储存 Cb"
 
 msgid "Transactable Cb"
-msgstr "Transactable सीबी"
+msgstr "Transactable Cb"
 
 msgid "Reservable Cb"
-msgstr "Reservable सीबी"
+msgstr "保留 Cb"
 
 msgid "Cycle Count Enabled Cb"
-msgstr "सीबी चक्र गणना सक्षम किया गया"
+msgstr "周期盘点启用 Cb"
 
 msgid "Kit Cb"
-msgstr "किट सीबी"
+msgstr "工具包 Cb"
 
 msgid "Bom Enabled Cb"
-msgstr "सीबी Bom सक्षम किया गया"
+msgstr "物料清单启用 Cb"
 
 msgid "Inventory Asset Cb"
-msgstr "इन्वेंटरी परिसंपत्ति सीबी"
+msgstr "库存资产 Cb"
 
 msgid "Osp Ac Id"
-msgstr "Osp एसी आईडी"
+msgstr "Osp 交流 Id"
 
 msgid "Purchased Cb"
-msgstr "खरीदा गया सीबी"
+msgstr "购买的 Cb"
 
 msgid "Use Asl Cb"
-msgstr "Asl सीबी का उपयोग करें"
+msgstr "使用美国手语 Cb"
 
 msgid "Invoice Matching"
-msgstr "मिलान के चालान"
+msgstr "发票匹配"
 
 msgid "Default Buyer"
-msgstr "डिफ़ॉल्ट खरीदार"
+msgstr "默认买方"
 
 msgid "List Price"
-msgstr "सूची मूल्य"
+msgstr "标价"
 
 msgid "Un Number"
-msgstr "संयुक्त राष्ट्र संख्या"
+msgstr "联合国编号"
 
 msgid "Hazard Classs"
-msgstr "हैज़र्ड Classs"
+msgstr "危害舞台"
 
 msgid "Receipt Sub Inventory"
-msgstr "रसीद उप सूची"
+msgstr "收到子库存"
 
 msgid "Over Receipt Percentage"
-msgstr "रसीद प्रतिशत से अधिक"
+msgstr "在收到百分比"
 
 msgid "Over Receipt Action"
-msgstr "प्राप्ति सूचना पर कार्रवाई"
+msgstr "在收到行动"
 
 msgid "Receipt Days Early"
-msgstr "प्राप्ति सूचना दिन जल्दी"
+msgstr "提前收到天"
 
 msgid "Receipt Days Late"
-msgstr "प्राप्ति सूचना दिन देर"
+msgstr "收据天晚"
 
 msgid "Receipt Day Action"
-msgstr "रसीद कार्य दिवस"
+msgstr "收据天行动"
 
 msgid "Receipt Routing"
-msgstr "रसीद रूटिंग"
+msgstr "收到路由"
 
 msgid "Weight Uom Id"
-msgstr "वजन Uom आईडी"
+msgstr "重量计量单位 Id"
 
 msgid "Volume Uom Id"
-msgstr "वॉल्यूम Uom आईडी"
+msgstr "卷 Uom Id"
 
 msgid "Volume"
-msgstr "वॉल्यूम"
+msgstr "卷"
 
 msgid "Dimension Uom Id"
-msgstr "आयाम Uom आईडी"
+msgstr "维度 Uom Id"
 
 msgid "Width"
-msgstr "चौड़ाई"
+msgstr "宽度"
 
 msgid "Equipment Cb"
-msgstr "उपकरण सीबी"
+msgstr "设备 Cb"
 
 msgid "Electronic Format Cb"
-msgstr "इलेक्ट्रॉनिक स्वरूप सीबी"
+msgstr "电子格式 Cb"
 
 msgid "Planning Method"
-msgstr "विधि की योजना बना"
+msgstr "规划方法"
 
 msgid "Wip Supply Subinventory"
-msgstr "Wip आपूर्ति Subinventory"
+msgstr "Wip 供应 Subinventory"
 
 msgid "Wip Supply Locator"
-msgstr "Wip आपूर्ति लोकेटर"
+msgstr "Wip 供应定位器"
 
 msgid "Fix Order Quantity"
-msgstr "आदेश मात्रा ठीक करें"
+msgstr "修复订单数量"
 
 msgid "Saftey Stock Percentage"
-msgstr "प्रतिशत के सुरक्षा स्टॉक"
+msgstr "安全库存百分比"
 
 msgid "Fix Lot Multiplier"
-msgstr "बहुत कुछ गुणक ठीक करें"
+msgstr "修复多乘数"
 
 msgid "Minimum Order Quantity"
-msgstr "न्यूनतम आदेश मात्रा"
+msgstr "最小订单数量"
 
 msgid "Maximum Order Quantity"
-msgstr "अधिकतम आदेश मात्रा"
+msgstr "最大订单数量"
 
 msgid "Minmax Min Quantity"
-msgstr "Minmax मिन मात्रा"
+msgstr "极小的订货量"
 
 msgid "Minmax Max Quantity"
-msgstr "Minmax अधिकतम मात्रा"
+msgstr "极小极大最大数量"
 
 msgid "Forecast Method"
-msgstr "विधि की भविष्यवाणी"
+msgstr "预测方法"
 
 msgid "Forecast Control"
-msgstr "नियंत्रण की भविष्यवाणी"
+msgstr "预测控制"
 
 msgid "Demand Timefence"
-msgstr "मांग Timefence"
+msgstr "需求 Timefence"
 
 msgid "Planning Timefence"
-msgstr "Timefence योजना"
+msgstr "规划 Timefence"
 
 msgid "Release Timefence"
-msgstr "Timefence जारी"
+msgstr "版本 Timefence"
 
 msgid "Pre Processing Lt"
-msgstr "पूर्व प्रोसेसिंग लेफ्टिनेंट"
+msgstr "预加工 Lt"
 
 msgid "Post Processing Lt"
-msgstr "प्रसंस्करण लेफ्टिनेंट पद"
+msgstr "后加工 Lt"
 
 msgid "Processing Lt"
-msgstr "लेफ्टिनेंट प्रसंस्करण"
+msgstr "处理"
 
 msgid "Cumulative Mfg Lt"
-msgstr "संचयी Mfg लेफ्टिनेंट"
+msgstr "累积 Mfg Lt"
 
 msgid "Cumulative Total Lt"
-msgstr "संचयी कुल लेफ्टिनेंट"
+msgstr "累积总 Lt"
 
 msgid "Lt Lot Size"
-msgstr "Lt बहुत आकार"
+msgstr "这是很多的大小"
 
 msgid "Build In Wip Cb"
-msgstr "Wip सीबी में निर्माण"
+msgstr "建立在 Wip Cb"
 
 msgid "Customer Ordered Cb"
-msgstr "ग्राहक सीबी के आदेश दिए"
+msgstr "客户订购 Cb"
 
 msgid "Internal Ordered Cb"
-msgstr "आंतरिक आदेश दिया सीबी"
+msgstr "内部有序的 Cb"
 
 msgid "Shippable Cb"
-msgstr "Shippable सीबी"
+msgstr "可交付的 Cb"
 
 msgid "Returnable Cb"
-msgstr "Returnable सीबी"
+msgstr "可回收 Cb"
 
 msgid "Invoiceable Cb"
-msgstr "Invoiceable सीबी"
+msgstr "Invoiceable Cb"
 
 msgid "Ef1"
 msgstr "Ef1"
@@ -3730,1936 +3729,6125 @@ msgid "Ef2"
 msgstr "Ef2"
 
 msgid "Deffered Cogs Ac Id"
-msgstr "वसूली आस्थागित Cogs एसी आईडी"
+msgstr "待摊 Cogs 交流 Id"
 
 msgid "Ip Tax Class"
-msgstr "Ip टैक्स वर्ग"
+msgstr "Ip 税类"
 
 msgid "Op Tax Class"
-msgstr "सेशन कर क्लास"
+msgstr "Op 税类"
 
 msgid "Ap Payment Term"
-msgstr "एपी भुगतान शब्द"
+msgstr "Ap 付款期限"
 
 msgid "Ar Payment Term"
-msgstr "ए. आर. भुगतान शब्द"
+msgstr "应收帐款付款期限"
 
 msgid "Rounding Option"
-msgstr "घुमाव विकल्प"
+msgstr "舍入选项"
 
 msgid "Onhand With Rev Cb"
-msgstr "रेव सीबी के साथ Onhand"
+msgstr "现有与冯 Cb"
 
 msgid "Item Rev Number"
-msgstr "आइटम Rev संख्या"
+msgstr "冯智活的物料编号"
 
 msgid "Am Asset Type"
-msgstr "संपत्ति प्रकार रहा हूँ"
+msgstr "我的资产类型"
 
 msgid "Am Activity Cause"
-msgstr "गतिविधि कारण हूँ"
+msgstr "很大，因为活动"
 
 msgid "Am Activity Type"
-msgstr "गतिविधि प्रकार रहा हूँ"
+msgstr "我活动类型"
 
 msgid "Am Activity Source"
-msgstr "गतिविधि स्रोत रहा हूँ"
+msgstr "我的活动源"
 
 msgid "Item Status Id"
-msgstr "आइटम की स्थिति आईडी"
+msgstr "项目状态 Id"
 
 msgid "Active"
-msgstr "सक्रिय"
+msgstr "活动"
 
 msgid "Inventory Item"
-msgstr "सूची आइटम"
+msgstr "库存物料"
 
 msgid "Transactable"
 msgstr "Transactable"
 
 msgid "Reservable"
-msgstr "Reservable"
+msgstr "保留"
 
 msgid "Costing Enabled"
-msgstr "सक्षम की लागत"
+msgstr "成本核算已启用"
 
 msgid "Customer Ordered"
-msgstr "ग्राहक के आदेश दिए"
+msgstr "客户订购"
 
 msgid "Purchased"
-msgstr "खरीदी"
+msgstr "购买"
 
 msgid "Build In Wip"
-msgstr "Wip में निर्माण"
+msgstr "建立在 Wip 中"
 
 msgid "Legal Id"
-msgstr "कानूनी आईडी"
+msgstr "法律的 Id"
 
 msgid "Legal Org Type"
-msgstr "कानूनी Org प्रकार"
+msgstr "法律组织结构图类型"
 
 msgid "Registration Number"
-msgstr "पंजीकरण संख्या"
+msgstr "登记编号"
 
 msgid "Place Of Registration"
-msgstr "पंजीकरण की जगह"
+msgstr "注册地点"
 
 msgid "Country Of Registration"
-msgstr "पंजीकरण का देश"
+msgstr "登记国"
 
 msgid "Identification Number"
-msgstr "पहचान संख्या"
+msgstr "标识号"
 
 msgid "Ein Tin Tan"
-msgstr "ईआईऍन टिन तन"
+msgstr "艾因锡滩"
 
 msgid "Balancing Segments"
-msgstr "खंडों संतुलन साधने"
+msgstr "平衡段"
 
 msgid "Locator Structure"
-msgstr "लोकेटर संरचना"
+msgstr "定位器结构"
 
 msgid "X Coordinate"
-msgstr "समन्वय x"
+msgstr "X 坐标"
 
 msgid "Y Coordinate"
-msgstr "Y समन्वय"
+msgstr "Y 坐标"
 
 msgid "Z Coordinate"
-msgstr "Z समन्वय"
+msgstr "Z 坐标"
 
 msgid "Max Units"
-msgstr "मैक्स इकाइयों"
+msgstr "最大单位"
 
 msgid "Max Volume Uom Id"
-msgstr "अधिकतम वॉल्यूम Uom आईडी"
+msgstr "最大卷 Uom Id"
 
 msgid "Max Volume"
-msgstr "अधिकतम मात्रा"
+msgstr "最大音量"
 
 msgid "Max Weight Uom Id"
-msgstr "अधिकतम वजन Uom आईडी"
+msgstr "最大重量计量单位 Id"
 
 msgid "Max Weight"
-msgstr "अधिकतम वजन"
+msgstr "最大重量"
 
 msgid "Sub Description"
-msgstr "उप विवरण"
+msgstr "子描述"
 
 msgid "Business Org Id"
-msgstr "व्यापार Org आईडी"
+msgstr "业务组织结构图 Id"
 
 msgid "Inventory Org Id"
-msgstr "इन्वेंटरी Org आईडी"
+msgstr "库存组织结构图 Id"
 
 msgid "Mdm Bank Account Id"
-msgstr "मध्याह्न भोजन बैंक खाता Id"
+msgstr "Mdm 银行帐户 Id"
 
 msgid "Mdm Bank Header Id"
-msgstr "मध्याह्न भोजन बैंक हैडर Id"
+msgstr "Mdm 银行标题 Id"
 
 msgid "Mdm Bank Site Id"
-msgstr "मध्याह्न भोजन बैंक साइट Id"
+msgstr "Mdm 银行站点 Id"
 
 msgid "Account Number"
-msgstr "खाता संख्या"
+msgstr "账户号码"
 
 msgid "Account Usage"
-msgstr "खाता उपयोग"
+msgstr "帐户使用"
 
 msgid "Cash Clearing Ac Id"
-msgstr "कैश समाशोधन एसी आईडी"
+msgstr "现金结算交流 Id"
 
 msgid "Exchange Gl Ac Id"
-msgstr "Exchange Gl एसी आईडी"
+msgstr "交换 Gl 交流 Id"
 
 msgid "Hr Cash Ac Id"
-msgstr "एचआर नकद एसी आईडी"
+msgstr "Hr 现金交流 Id"
 
 msgid "Hr Cash Clearing Ac Id"
-msgstr "मानव संसाधन कैश समाशोधन एसी आईडी"
+msgstr "Hr 现金结算交流 Id"
 
 msgid "Hr Bank Charge Ac Id"
-msgstr "मानव संसाधन बैंक प्रभार एसी आईडी"
+msgstr "人力资源银行收费交流 Id"
 
 msgid "Hr Exchange Gl Ac Id"
-msgstr "मानव संसाधन एक्सचेंज Gl एसी आईडी"
+msgstr "人力资源交流 Gl 交流 Id"
 
 msgid "Netting Ac Cb"
-msgstr "नेटिंग एसी सीबी"
+msgstr "净额结算交流断路器"
 
 msgid "Minimum Payment"
-msgstr "न्यूनतम भुगतान"
+msgstr "最低付款"
 
 msgid "Maximum Payment"
-msgstr "अधिकतम भुगतान"
+msgstr "最大的支付"
 
 msgid "Contact Id"
-msgstr "संपर्क Id"
+msgstr "联系人 Id"
 
 msgid "Ap Payment Method Id"
-msgstr "एपी भुगतान विधि आईडी"
+msgstr "Ap 付款方法 Id"
 
 msgid "Account Description"
-msgstr "खाता विवरण"
+msgstr "帐户说明"
 
 msgid "Bank Name"
-msgstr "बैंक का नाम"
+msgstr "银行名称"
 
 msgid "Bank Number"
-msgstr "बैंक संख्या"
+msgstr "银行编号"
 
 msgid "Bank Name Short"
-msgstr "बैंक लघु नाम दें"
+msgstr "银行名称短"
 
 msgid "Bank Name Alt"
-msgstr "बैंक नाम Alt"
+msgstr "银行名称 alt 键"
 
 msgid "Branch Name"
-msgstr "शाखा का नाम"
+msgstr "分支名称"
 
 msgid "Branch Country"
-msgstr "शाखा देश"
+msgstr "科国家"
 
 msgid "Branch Number"
-msgstr "शाखा संख्या"
+msgstr "分枝数"
 
 msgid "Branch Name Short"
-msgstr "शाखा नाम लघु"
+msgstr "分支名称短"
 
 msgid "Branch Name Alt"
-msgstr "शाखा नाम Alt"
+msgstr "分支名称 alt 键"
 
 msgid "Ifsc Code"
-msgstr "आईएफएससी कोड"
+msgstr "Ifsc 代码"
 
 msgid "Swift Code"
-msgstr "स्विफ्ट कोड"
+msgstr "Swift 代码"
 
 msgid "Routing Number"
-msgstr "Number अनुमार्गण"
+msgstr "工艺路线编号"
 
 msgid "Iban Code"
-msgstr "Iban कोड"
+msgstr "Iban 代码"
 
 msgid "Branch Tax Reg No"
-msgstr "शाखा टैक्स Reg सं"
+msgstr "分公司税务注册号"
 
 msgid "Branch Tax Payer Id"
-msgstr "शाखा टैक्स भुगतानकर्ता आईडी"
+msgstr "分支税纳税 Id"
 
 msgid "Mdm Price List Header Id"
-msgstr "मध्याह्न भोजन की कीमत सूची हैडर Id"
+msgstr "Mdm 价格列表标题 Id"
 
 msgid "Price List"
-msgstr "मूल्य सूची"
+msgstr "价目表"
 
 msgid "Allow Mutli Currency Cb"
-msgstr "Mutli मुद्रा सीबी की अनुमति दें"
+msgstr "允许多货币 Cb"
 
 msgid "Mdm Price List Line Id"
-msgstr "मध्याह्न भोजन मूल्य सूची पंक्ति Id"
+msgstr "Mdm 价格列表行 Id"
 
 msgid "Formula"
-msgstr "सूत्र"
+msgstr "公式"
 
 msgid "Mdm Tax Code Id"
-msgstr "मध्याह्न भोजन टैक्स कोड Id"
+msgstr "Mdm 税务代码 Id"
 
 msgid "Tax Code"
-msgstr "कर कोड"
+msgstr "税码"
 
 msgid "Tax Type"
-msgstr "टैक्स प्रकार"
+msgstr "税种"
 
 msgid "Dr Cr"
-msgstr "डॉ. सी. आर."
+msgstr "博士 Cr"
 
 msgid "In Out"
-msgstr "में बाहर"
+msgstr "在..."
 
 msgid "Printed Tax Name"
-msgstr "मुद्रित कर नाम"
+msgstr "打印的税收名称"
 
 msgid "Tax Regime"
-msgstr "कर शासन"
+msgstr "税收制度"
 
 msgid "Tax Jurisdiction"
-msgstr "टैक्स क्षेत्राधिकार"
+msgstr "税收管辖权"
 
 msgid "Offset Tax Code"
-msgstr "ऑफसेट टैक्स कोड"
+msgstr "偏移量的税码"
 
 msgid "Allow Adhoc Rate Cb"
-msgstr "एडहॉक दर सीबी की अनुमति दें"
+msgstr "允许即席率 Cb"
 
 msgid "Allow Tax Exemptions Cb"
-msgstr "टैक्स में छूट सीबी की अनुमति दें"
+msgstr "允许税务豁免 Cb"
 
 msgid "Calculation Method"
-msgstr "परिकलन की विधि"
+msgstr "计算方法"
 
 msgid "Percentage"
-msgstr "प्रतिशत"
+msgstr "百分比"
 
 msgid "Country Code"
-msgstr "देश कोड"
+msgstr "国家/地区代码"
 
 msgid "State"
-msgstr "राज्य"
+msgstr "状态"
 
 msgid "Tax Region Name"
-msgstr "कर क्षेत्र का नाम"
+msgstr "税收区域名称"
 
 msgid "Mdm Tax Rule Id"
-msgstr "मध्याह्न भोजन टैक्स नियम आईडी"
+msgstr "Mdm 税收规则 Id"
 
 msgid "Ship To Region Id"
-msgstr "क्षेत्र आईडी के लिए जहाज"
+msgstr "船到区域 Id"
 
 msgid "Ship From Region Id"
-msgstr "क्षेत्र आईडी से जहाज"
+msgstr "船从区域 Id"
 
 msgid "Module Id"
-msgstr "मॉड्यूल आईडी"
+msgstr "模块 Id"
 
 msgid "Lot Id"
-msgstr "बहुत कुछ आईडी"
+msgstr "批次 Id"
 
 msgid "Serial Id"
-msgstr "धारावाहिक आईडी"
+msgstr "串行 Id"
 
 msgid "Onhand"
-msgstr "Onhand"
+msgstr "现有"
 
 msgid "Reservable Onhand"
-msgstr "Reservable Onhand"
+msgstr "保留现有"
 
 msgid "Transactable Onhand"
-msgstr "Transactable Onhand"
+msgstr "Transactable 现有"
 
 msgid "Lot Status"
-msgstr "बहुत कुछ स्थिति"
+msgstr "多状态"
 
 msgid "Serial Status"
-msgstr "धारावाहिक की स्थिति"
+msgstr "串行状态"
 
 msgid "Secondary Uom Id"
-msgstr "द्वितीयक Uom आईडी"
+msgstr "辅助 Uom Id"
 
 msgid "Onhand Status"
-msgstr "Onhand स्थिति"
+msgstr "现有状态"
 
 msgid "Org Name"
-msgstr "Org नाम"
+msgstr "组织结构图的名称"
 
 msgid "Onhand Value"
-msgstr "Onhand मान"
+msgstr "现有值"
 
 msgid "Subinventory Type"
-msgstr "Subinventory प्रकार"
+msgstr "Subinventory 型"
 
 msgid "Option Detail Id"
-msgstr "विकल्प विवरण Id"
+msgstr "选项详细信息 Id"
 
 msgid "Option Header Id"
-msgstr "विकल्प हैडर Id"
+msgstr "选项标题 Id"
 
 msgid "Option Line Id"
-msgstr "विकल्प लाइन आईडी"
+msgstr "选项行 Id"
 
 msgid "Option Detail Value"
-msgstr "विकल्प विवरण मान"
+msgstr "选项详细信息值"
 
 msgid "Access Level"
-msgstr "पहुँच स्तर"
+msgstr "访问级别"
 
 msgid "Module Code"
-msgstr "मॉड्यूल कोड"
+msgstr "模块代码"
 
 msgid "Option Assignments"
-msgstr "विकल्प असाइनमेंट्स"
+msgstr "选项指派"
 
 msgid "Option Line Value"
-msgstr "विकल्प रेखा मान"
+msgstr "选择行的值"
 
 msgid "Value Group Id"
-msgstr "मान समूह आईडी"
+msgstr "值组 Id"
 
 msgid "Page Id"
-msgstr "पेज Id"
+msgstr "页面 Id"
 
 msgid "Show In Frontpage Cb"
-msgstr "Frontpage सीबी में दिखाएँ"
+msgstr "在 Frontpage Cb 中显示"
 
 msgid "Path Id"
-msgstr "पथ Id"
+msgstr "路径 Id"
 
 msgid "Path Link"
-msgstr "पथ लिंक"
+msgstr "路径链接"
 
 msgid "Mode"
-msgstr "मोड"
+msgstr "模式"
 
 msgid "Id Column Name"
-msgstr "Id स्तंभ नाम"
+msgstr "Id 列名称"
 
 msgid "Path Type"
-msgstr "पथ प्रकार"
+msgstr "路径类型"
 
 msgid "Search Path Cb"
-msgstr "खोज पथ सीबी"
+msgstr "搜索路径 Cb"
 
 msgid "Prepayment Cb"
-msgstr "पूर्व भुगतान सीबी"
+msgstr "预付款 Cb"
 
 msgid "Payment Term Discount Id"
-msgstr "भुगतान शब्द छूट आईडी"
+msgstr "付款期限折扣 Id"
 
 msgid "Discount Percentage"
-msgstr "प्रतिशत छूट"
+msgstr "折扣百分比"
 
 msgid "Due Days"
-msgstr "नियत दिन"
+msgstr "由于天"
 
 msgid "Due Dates"
-msgstr "नियत दिनांक"
+msgstr "到期日期"
 
 msgid "Due Date Of Month"
-msgstr "माह की अन्तिम तिथि"
+msgstr "到期日期的月"
 
 msgid "Payment Term Schedule Id"
-msgstr "भुगतान अवधि शेड्यूल आईडी"
+msgstr "付款期限计划 Id"
 
 msgid "Amount Percentage"
-msgstr "राशि प्रतिशत"
+msgstr "金额百分比"
 
 msgid "Open Quantity"
-msgstr "खुला मात्रा"
+msgstr "未结数量"
 
 msgid "Po Asl Document Id"
-msgstr "पो Asl दस्तावेज़ Id"
+msgstr "大埔 Asl 文档 Id"
 
 msgid "Po Asl Line Id"
-msgstr "पो Asl लाइन आईडी"
+msgstr "大埔 Asl 行 Id"
 
 msgid "Document Header Id"
-msgstr "दस्तावेज़ शीर्ष लेख Id"
+msgstr "文档标题 Id"
 
 msgid "Document Line Id"
-msgstr "दस्तावेज़ पंक्ति Id"
+msgstr "文档行 Id"
 
 msgid "Po Asl Header Id"
-msgstr "पो Asl हैडर Id"
+msgstr "大埔 Asl 标题 Id"
 
 msgid "Asl Type"
-msgstr "Asl प्रकार"
+msgstr "Asl 类型"
 
 msgid "Item Category Id"
-msgstr "आइटम श्रेणी आईडी"
+msgstr "项目类别 Id"
 
 msgid "Mfg Part Number"
-msgstr "Mfg भाग संख्या"
+msgstr "制造部件编号"
 
 msgid "Business Type"
-msgstr "व्यवसाय प्रकार"
+msgstr "业务类型"
 
 msgid "Release Method"
-msgstr "रिलीज की विधि"
+msgstr "释放方法"
 
 msgid "Min Order Quantity"
-msgstr "न्यूनतम आदेश मात्रा"
+msgstr "最小订单数量"
 
 msgid "Release Number"
-msgstr "विज्ञप्ति संख्या"
+msgstr "发布版本号"
 
 msgid "Agreement Start Date"
-msgstr "अनुबंध प्रारंभ दिनांक"
+msgstr "协议的开始日期"
 
 msgid "Agreement End Date"
-msgstr "करार समाप्ति दिनांक"
+msgstr "协议结束日期"
 
 msgid "Po Requisition Header Id"
-msgstr "पो माँग हैडर Id"
+msgstr "大埔征用标题 Id"
 
 msgid "Po Requisition Type"
-msgstr "पो माँग प्रकार"
+msgstr "大埔申请类型"
 
 msgid "Po Requisition Number"
-msgstr "पो माँग संख्या"
+msgstr "大埔请购单编号"
 
 msgid "Requisition Status"
-msgstr "माँग की स्थिति"
+msgstr "申请状态"
 
 msgid "Po Requisition Line Id"
-msgstr "पो माँग लाइन आईडी"
+msgstr "大埔申请行 Id"
 
 msgid "Po Requisition Line Number"
-msgstr "पो माँग लाइन संख्या"
+msgstr "采购订单申请行编号"
 
 msgid "Bpa Po Line Id"
-msgstr "Bpa पो लाइन आईडी"
+msgstr "双酚 a 宝行 Id"
 
 msgid "Po Requisition Detail Id"
-msgstr "पो माँग विस्तार आईडी"
+msgstr "大埔征用详细 Id"
 
 msgid "Ship To Org"
-msgstr "Org करने के लिए जहाज"
+msgstr "船到组织结构图"
 
 msgid "Invoice Match Type"
-msgstr "इनवॉयस मिलान प्रकार"
+msgstr "发票匹配类型"
 
 msgid "Ship To Location Id"
-msgstr "स्थान आईडी के लिए जहाज"
+msgstr "船到位置 Id"
 
 msgid "Ref Po Header Id"
-msgstr "रेफरी पो हैडर Id"
+msgstr "Ref 大埔头 Id"
 
 msgid "Price List Header Id"
-msgstr "मूल्य सूची हैडर Id"
+msgstr "价格列表标题 Id"
 
 msgid "Multi Bu Cb"
-msgstr "बहु बुउ सीबी"
+msgstr "多埠 Cb"
 
 msgid "Bpa Line Id"
-msgstr "Bpa लाइन आईडी"
+msgstr "双酚 a 行 Id"
 
 msgid "Price Date"
-msgstr "मूल्य दिनांक"
+msgstr "价格、 日期"
 
 msgid "Reference Doc Type"
-msgstr "संदर्भ डॉक्टर प्रकार"
+msgstr "参考文档类型"
 
 msgid "Reference Doc Number"
-msgstr "संदर्भ डॉक्टर संख्या"
+msgstr "参考文档编号"
 
 msgid "Kit Configured Cb"
-msgstr "सीबी किट कॉन्फ़िगर किया गया"
+msgstr "工具包配置 Cb"
 
 msgid "Hold Cb"
-msgstr "सीबी पकड़"
+msgstr "持有 Cb"
 
 msgid "Po Approval Hierarchy"
-msgstr "पोस्ट ऑफ़िस अनुमोदन पदानुक्रम"
+msgstr "大埔的审批层次结构"
 
 msgid "Req Approval Hierarchy"
-msgstr "अनुरोध अनुमोदन पदानुक्रम"
+msgstr "必需的审批层次结构"
 
 msgid "Po Quote Detail Id"
-msgstr "पो बोली विवरण Id"
+msgstr "大埔报价单 Id 的详细信息"
 
 msgid "Po Quote Header Id"
-msgstr "पो बोली हैडर Id"
+msgstr "大埔报价单标题 Id"
 
 msgid "Po Quote Line Id"
-msgstr "पो बोली लाइन आईडी"
+msgstr "大埔报价单行 Id"
 
 msgid "Po Rfq Detail Id"
-msgstr "पो आरएफक्यू विस्तार आईडी"
+msgstr "大埔询价详细 Id"
 
 msgid "Requirement Value"
-msgstr "आवश्यकता के मूल्य"
+msgstr "要求值"
 
 msgid "Po Rfq Header Id"
-msgstr "पो आरएफक्यू हैडर Id"
+msgstr "大埔 rfq 单头 Id"
 
 msgid "Quote Number"
-msgstr "कोट संख्या"
+msgstr "报价编号"
 
 msgid "Supplier Quote"
-msgstr "आपूर्तिकर्ता बोली"
+msgstr "供应商报价"
 
 msgid "Quote Type"
-msgstr "बोली के प्रकार"
+msgstr "报价类型"
 
 msgid "Valid Date"
-msgstr "मान्य दिनांक"
+msgstr "有效的日期"
 
 msgid "Quote Status"
-msgstr "भाव प्रस्ताव स्थिति"
+msgstr "报价单状态"
 
 msgid "Po Rfq Line Id"
-msgstr "पो आरएफक्यू लाइन आईडी"
+msgstr "大埔 Rfq 行 Id"
 
 msgid "Supplier Part Number"
-msgstr "आपूर्तिकर्ता भाग संख्या"
+msgstr "供应商部件号"
 
 msgid "Minimum Agreement Quantity"
-msgstr "न्यूनतम अनुबंध मात्रा"
+msgstr "最低限度的协议数量"
 
 msgid "Daily Capacity"
-msgstr "दैनिक क्षमता"
+msgstr "日常的能力"
 
 msgid "Processing Lead Time"
-msgstr "प्रसंस्करण समय के लीड"
+msgstr "处理铅时间"
 
 msgid "Replenishment Lead Time"
-msgstr "पुनःपूर्ति लीड समय"
+msgstr "补货提前期"
 
 msgid "Quote Unit Price"
-msgstr "इकाई मूल्य उद्धरण"
+msgstr "报价单位价格"
 
 msgid "Ship To Inventory"
-msgstr "जहाज करने के लिए सूची"
+msgstr "船到库存"
 
 msgid "Released Amount"
-msgstr "रिलीज़ किए गए राशि"
+msgstr "释放的量"
 
 msgid "Po Requisition Interface Id"
-msgstr "पो माँग इंटरफ़ेस Id"
+msgstr "大埔征用接口 Id"
 
 msgid "Requirement Number"
-msgstr "आवश्यकता संख्या"
+msgstr "要求数量"
 
 msgid "Requirement Name"
-msgstr "आवश्यकता के नाम"
+msgstr "要求名称"
 
 msgid "Requirement Type"
-msgstr "आवश्यकता के प्रकार"
+msgstr "需求类型"
 
 msgid "Max Evaludation Points"
-msgstr "मैक्स Evaludation अंक"
+msgstr "Max Evaludation 点"
 
 msgid "Target Value"
-msgstr "लक्ष्य मान"
+msgstr "目标值"
 
 msgid "Rfq Number"
-msgstr "आरएफक्यू संख्या"
+msgstr "询价编号"
 
 msgid "Rfq Name"
-msgstr "आरएफक्यू का नाम"
+msgstr "Rfq 名称"
 
 msgid "Outcome"
-msgstr "परिणाम"
+msgstr "结果"
 
 msgid "Rfq Type"
-msgstr "आरएफक्यू प्रकार"
+msgstr "Rfq 类型"
 
 msgid "Due Date"
-msgstr "नियत दिनांक"
+msgstr "截止日期"
 
 msgid "Rfq Status"
-msgstr "आरएफक्यू स्थिति"
+msgstr "询价状态"
 
 msgid "Target Price"
-msgstr "लक्ष्य मूल्य"
+msgstr "目标价"
 
 msgid "Notes From Supplier"
-msgstr "आपूर्तिकर्ता से नोटों"
+msgstr "供应商注意的到"
 
 msgid "Po Sourcing Rule Header Id"
-msgstr "पो सोर्सिंग नियम हैडर Id"
+msgstr "大埔采购规则标题 Id"
 
 msgid "Po Sourcing Rule Line Id"
-msgstr "पो सोर्सिंग नियम लाइन आईडी"
+msgstr "大埔采购规则行 Id"
 
 msgid "Sourcing Type"
-msgstr "प्रकार सोर्सिंग"
+msgstr "采购类型"
 
 msgid "Source From Org Id"
-msgstr "Org आईडी से स्रोत"
+msgstr "组织结构图 Id 的源"
 
 msgid "Allocation"
-msgstr "आवंटन"
+msgstr "分配"
 
 msgid "Rank"
-msgstr "रैंक"
+msgstr "等级"
 
 msgid "Transit Time"
-msgstr "पारगमन समय"
+msgstr "运输时间"
 
 msgid "Pos Barcode List Header Id"
-msgstr "Pos बारकोड सूची हैडर Id"
+msgstr "Pos 条码列表标题 Id"
 
 msgid "List Name"
-msgstr "सूची नाम"
+msgstr "列表名称"
 
 msgid "Pos Barcode List Line Id"
-msgstr "Pos बारकोड सूची पंक्ति Id"
+msgstr "Pos 条码列表行 Id"
 
 msgid "Line Amount"
-msgstr "रेखा मात्रा"
+msgstr "行金额"
 
 msgid "Discount Amount"
-msgstr "छूट राशि"
+msgstr "折扣金额"
 
 msgid "Discount Code"
-msgstr "डिस्काउंट कोड"
+msgstr "折扣代码"
 
 msgid "Amount After Discount"
-msgstr "छूट के बाद राशि"
+msgstr "折扣后的金额"
 
 msgid "No Of Labels"
-msgstr "लेबल्स की सं"
+msgstr "没有的标签"
 
 msgid "Pos Inv Control Id"
-msgstr "Pos Inv नियंत्रण Id"
+msgstr "Pos Inv 控件 Id"
 
 msgid "Customer Id"
-msgstr "ग्राहक आईडी"
+msgstr "客户 Id"
 
 msgid "Transaction Subinventory Id"
-msgstr "लेन-देन Subinventory Id"
+msgstr "交易记录 Subinventory Id"
 
 msgid "Transaction Locator Id"
-msgstr "लेन-देन लोकेटर आईडी"
+msgstr "交易记录定位器 Id"
 
 msgid "Return Subinventory Id"
-msgstr "Subinventory Id लौटें"
+msgstr "返回 Subinventory Id"
 
 msgid "Return Locator Id"
-msgstr "लोकेटर आईडी वापसी"
+msgstr "返回定位器 Id"
 
 msgid "Allow Negative Onhand Cb"
-msgstr "नकारात्मक Onhand सीबी की अनुमति दें"
+msgstr "允许负现有 Cb"
 
 msgid "Customer Site Id"
-msgstr "ग्राहक साइट Id"
+msgstr "客户站点 Id"
 
 msgid "Pos Terminal Id"
-msgstr "Pos टर्मिनल Id"
+msgstr "Pos 终端 Id"
 
 msgid "Sd Store Id"
-msgstr "एसडी संग्रह Id"
+msgstr "Sd 存储库 Id"
 
 msgid "Terminal Name"
-msgstr "टर्मिनल नाम"
+msgstr "终端名称"
 
 msgid "Primary Owner Id"
-msgstr "प्राथमिक स्वामी Id"
+msgstr "主要所有者 Id"
 
 msgid "Terminal Type"
-msgstr "टर्मिनल प्रकार"
+msgstr "终端类型"
 
 msgid "Refresh Time"
-msgstr "समय को ताज़ा करें"
+msgstr "刷新时间"
 
 msgid "Pos Transaction Header Id"
-msgstr "Pos लेनदेन हैडर Id"
+msgstr "Pos 交易标题 Id"
 
 msgid "Total Amount"
-msgstr "कुल राशि"
+msgstr "总金额"
 
 msgid "Pos Transaction Line Id"
-msgstr "Pos लेनदेन लाइन आईडी"
+msgstr "Pos 交易记录行 Id"
 
 msgid "Project Type"
-msgstr "परियोजना के प्रकार"
+msgstr "项目类型"
 
 msgid "Manager User Id"
-msgstr "प्रबंधक उपयोगकर्ता Id"
+msgstr "管理员用户 Id"
 
 msgid "Project Class"
-msgstr "प्रोजेक्ट वर्ग"
+msgstr "项目类"
 
 msgid "Is Template Cb"
-msgstr "टेम्पलेट सीबी है"
+msgstr "是模板 Cb"
 
 msgid "Project Status"
-msgstr "परियोजना की स्थिति"
+msgstr "项目状态"
 
 msgid "Task Number"
-msgstr "कार्य संख्या"
+msgstr "任务编号"
 
 msgid "Task Name"
-msgstr "कार्य का नाम"
+msgstr "任务名称"
 
 msgid "Parent Prj Project Line Id"
-msgstr "पैरेंट Prj परियोजना लाइन आईडी"
+msgstr "父自行研制项目行 Id"
 
 msgid "Service Type"
-msgstr "सेवा के प्रकार"
+msgstr "服务类型"
 
 msgid "Work Type"
-msgstr "काम के प्रकार"
+msgstr "工作类型"
 
 msgid "Allow Charges Cb"
-msgstr "आरोप सीबी की अनुमति दें"
+msgstr "允许收费 Cb"
 
 msgid "Capitalizable Cb"
-msgstr "Capitalizable सीबी"
+msgstr "Capitalizable Cb"
 
 msgid "Rate Type"
-msgstr "दर प्रकार"
+msgstr "汇率类型"
 
 msgid "Cip Asset It"
-msgstr "Cip परिसंपत्ति यह"
+msgstr "Cip 资产它"
 
 msgid "Task Status"
-msgstr "कार्य स्थिति"
+msgstr "任务状态"
 
 msgid "Field Image"
-msgstr "क्षेत्र छवि"
+msgstr "场图像"
 
 msgid "Field Price"
-msgstr "फ़ील्ड की कीमत"
+msgstr "领域价格"
 
 msgid "Field Description"
-msgstr "फ़ील्ड वर्णन"
+msgstr "字段说明"
 
 msgid "Role Access Id"
-msgstr "भूमिका एक्सेस Id"
+msgstr "角色访问 Id"
 
 msgid "Role Path Id"
-msgstr "भूमिका पथ Id"
+msgstr "角色路径 Id"
 
 msgid "Role Id"
-msgstr "भूमिका Id"
+msgstr "角色 Id"
 
 msgid "Sd Delivery Header Id"
-msgstr "एसडी डिलीवरी हैडर Id"
+msgstr "Sd 交付标题 Id"
 
 msgid "Delivery Number"
-msgstr "डिलिवरी संख्या"
+msgstr "交货数量"
 
 msgid "Shipping Org Id"
-msgstr "नौवहन Org आईडी"
+msgstr "航运组织结构图 Id"
 
 msgid "Delivery Date"
-msgstr "डिलीवरी की तारीख"
+msgstr "交货日期"
 
 msgid "Delivery Received By"
-msgstr "वितरण द्वारा प्राप्त"
+msgstr "收到交付的"
 
 msgid "Carrier Receipt Number"
-msgstr "वाहक रसीद संख्या"
+msgstr "承运人收据号码"
 
 msgid "Expetced Delivery Date"
-msgstr "Expetced डिलीवरी की तारीख"
+msgstr "果然交货日期"
 
 msgid "Actual Delivery Date"
-msgstr "वास्तविक डिलीवरी की तारीख"
+msgstr "实际交货日期"
 
 msgid "Handling Instruction"
-msgstr "हैंडलिंग अनुदेश"
+msgstr "处理指令"
 
 msgid "Sd Delivery Line Id"
-msgstr "एसडी वितरण लाइन आईडी"
+msgstr "Sd 交货行 Id"
 
 msgid "Shipped Quantity"
-msgstr "भेज दिया मात्रा"
+msgstr "装运的数量"
 
 msgid "Staging Subinventory Id"
-msgstr "मचान Subinventory Id"
+msgstr "分期 Subinventory Id"
 
 msgid "Staging Locator Id"
-msgstr "स्टैगिंग लोकेटर आईडी"
+msgstr "分期定位器 Id"
 
 msgid "Delivery Status"
-msgstr "डिलीवरी स्थिति"
+msgstr "交货状态"
 
 msgid "Picking Date"
-msgstr "दिनांक उठा"
+msgstr "采摘日期"
 
 msgid "Actual Ship Date"
-msgstr "वास्तविक जहाज की तारीख"
+msgstr "实际装运日期"
 
 msgid "Line Uom Id"
-msgstr "रेखा Uom आईडी"
+msgstr "线 Uom Id"
 
 msgid "Total Volume"
-msgstr "कुल मात्रा"
+msgstr "总容积"
 
 msgid "Total Weight"
-msgstr "कुल वजन"
+msgstr "总重量"
 
 msgid "Sd Document Type Id"
-msgstr "एसडी दस्तावेज़ प्रकार Id"
+msgstr "Sd 文档类型 Id"
 
 msgid "Document Type Name"
-msgstr "दस्तावेज़ प्रकार नाम"
+msgstr "文档类型名称"
 
 msgid "Bu Org Id R"
-msgstr "बुउ Org Id R"
+msgstr "埠 Org Id R"
 
 msgid "Supply Source"
-msgstr "आपूर्ति स्रोत"
+msgstr "供应源"
 
 msgid "Process Flow Id"
-msgstr "प्रक्रिया प्रवाह आईडी"
+msgstr "过程流程 Id"
 
 msgid "Default Line Document"
-msgstr "डिफ़ॉल्ट रेखा दस्तावेज़"
+msgstr "默认行文档"
 
 msgid "Default Shipfrom Org Id"
-msgstr "डिफ़ॉल्ट Shipfrom Org आईडी"
+msgstr "默认贼船 Org Id"
 
 msgid "Destination Type"
-msgstr "गंतव्य प्रकार"
+msgstr "目标类型"
 
 msgid "Ar Transaction Source"
-msgstr "एआर लेनदेन स्रोत"
+msgstr "应收帐款交易记录来源"
 
 msgid "Sd Lead Id"
-msgstr "एसडी लीड आईडी"
+msgstr "Sd 铅 Id"
 
 msgid "Lead Number"
-msgstr "संख्या का नेतृत्व"
+msgstr "铅号码"
 
 msgid "Primary Contact Id"
-msgstr "प्राथमिक संपर्क Id"
+msgstr "主联系人 Id"
 
 msgid "Lead Type"
-msgstr "प्रकार का नेतृत्व"
+msgstr "引线式"
 
 msgid "Details"
-msgstr "विवरण"
+msgstr "详细信息"
 
 msgid "Contact Website"
-msgstr "संपर्क वेबसाइट"
+msgstr "联系网站"
 
 msgid "Contact Address"
-msgstr "संपर्क पता"
+msgstr "联系地址"
 
 msgid "Sales Person Employee Id"
-msgstr "बिक्री व्यक्ति कर्मचारी Id"
+msgstr "销售人员的雇员 Id"
 
 msgid "Sales Team"
-msgstr "बिक्री टीम"
+msgstr "销售团队"
 
 msgid "Campaign Id"
-msgstr "अभियान आईडी"
+msgstr "市场活动 Id"
 
 msgid "Campaign Os"
-msgstr "अभियान ओएस"
+msgstr "运动 Os"
 
 msgid "Referral Source"
-msgstr "रेफरल स्रोत"
+msgstr "引用源"
 
 msgid "Sales Channel"
-msgstr "बिक्री चैनल"
+msgstr "销售渠道"
 
 msgid "Close Reason"
-msgstr "कारण बंद करें"
+msgstr "关闭的原因"
 
 msgid "Sd Opportunity Id"
-msgstr "एसडी अवसर Id"
+msgstr "Sd 机会 Id"
 
 msgid "Opportunity Number"
-msgstr "अवसर संख्या"
+msgstr "机会号"
 
 msgid "Opportunity Subject"
-msgstr "अवसर के विषय"
+msgstr "机会主题"
 
 msgid "Win Probability"
-msgstr "संभाव्यता जीत"
+msgstr "赢的可能性"
 
 msgid "Forecast Amount"
-msgstr "राशि के पूर्वानुमान"
+msgstr "预测量"
 
 msgid "Expected Close Date"
-msgstr "तारीख के करीब की उम्मीद"
+msgstr "预期关闭日期"
 
 msgid "So Status"
-msgstr "इतने स्थिति"
+msgstr "如此状态"
 
 msgid "Wip Wo Header Id"
-msgstr "Wip Wo हैडर Id"
+msgstr "Wip 窝标题 Id"
 
 msgid "Picked Quantity"
-msgstr "उठाया मात्रा"
+msgstr "领料的数量"
 
 msgid "Line Status"
-msgstr "रेखा की स्थिति"
+msgstr "行状态"
 
 msgid "Staging Subinventory"
-msgstr "मचान Subinventory"
+msgstr "分期 Subinventory"
 
 msgid "Staging Locator"
-msgstr "स्टैगिंग लोकेटर"
+msgstr "分期定位器"
 
 msgid "Requested Date"
-msgstr "अनुरोधित दिनांक"
+msgstr "请求的日期"
 
 msgid "Sd Quote Header Id"
-msgstr "एसडी बोली हैडर Id"
+msgstr "Sd 报价单标题 Id"
 
 msgid "New Customer Name"
-msgstr "नया ग्राहक नाम"
+msgstr "新的客户名称"
 
 msgid "New Customer Address"
-msgstr "नया ग्राहक पते"
+msgstr "新客户地址"
 
 msgid "Aggrement End Date"
-msgstr "Aggrement समाप्ति दिनांक"
+msgstr "您看一下结束日期"
 
 msgid "Sd Quote Line Id"
-msgstr "एसडी बोली लाइन आईडी"
+msgstr "Sd 报价单行 Id"
 
 msgid "New Item Number"
-msgstr "नया आइटम नंबर"
+msgstr "新的物料编号"
 
 msgid "New Item Description"
-msgstr "नए आइटम विवरण"
+msgstr "新的项目说明"
 
 msgid "Sd Sales Control Id"
-msgstr "एसडी बिक्री नियंत्रण Id"
+msgstr "Sd 销售控件 Id"
 
 msgid "Deffer Invoicing Cb"
-msgstr "Deffer सीबी चालान"
+msgstr "Deffer 开票 Cb"
 
 msgid "Default Requested Date Cb"
-msgstr "डिफ़ॉल्ट दिनांक सीबी का अनुरोध किया"
+msgstr "默认请求的日期 Cb"
 
 msgid "Default Schedule Ship Date Cb"
-msgstr "डिफ़ॉल्ट शेड्यूल शिप दिनांक सीबी"
+msgstr "默认日程安排船日期 Cb"
 
 msgid "Default Promise Date Cb"
-msgstr "डिफ़ॉल्ट वादा दिनांक सीबी"
+msgstr "默认承诺日期 Cb"
 
 msgid "Sd Shipping Control Id"
-msgstr "एसडी शिपिंग नियंत्रण Id"
+msgstr "Sd 航运控件 Id"
 
 msgid "Default Picking Rule Id"
-msgstr "डिफ़ॉल्ट उठा नियम आईडी"
+msgstr "默认领料规则 Id"
 
 msgid "Delivery Onpicking Cb"
-msgstr "प्रसव Onpicking सीबी"
+msgstr "交付 Onpicking Cb"
 
 msgid "Autosplit Onpicking Cb"
-msgstr "Autosplit Onpicking सीबी"
+msgstr "Autosplit Onpicking Cb"
 
 msgid "Store Name"
-msgstr "दुकान का नाम"
+msgstr "商店名称"
 
 msgid "Sd Store Subinventory Id"
-msgstr "एसडी स्टोर Subinventory Id"
+msgstr "Sd 存储 Subinventory Id"
 
 msgid "Floor Number"
-msgstr "तल संख्या"
+msgstr "楼数"
 
 msgid "Building Number"
-msgstr "भवन संख्या"
+msgstr "建筑物编号"
 
 msgid "Wing Number"
-msgstr "विंग संख्या"
+msgstr "翼数"
 
 msgid "Session Data"
-msgstr "सत्र डेटा"
+msgstr "会话数据"
 
 msgid "Sf Item Inv Category Id"
-msgstr "एस एफ आइटम Inv श्रेणी आईडी"
+msgstr "Sf 项目 Inv 类别 Id"
 
 msgid "Sf Item Inv Category Value"
-msgstr "एस एफ आइटम Inv श्रेणी मान"
+msgstr "Sf 项目 Inv 类别值"
 
 msgid "Sf Item Pur Category Id"
-msgstr "एस एफ आइटम पुर श्रेणी आईडी"
+msgstr "Sf 项目 Pur 类别 Id"
 
 msgid "Sf Item Pur Category Value"
-msgstr "एस एफ आइटम पुर श्रेणी मान"
+msgstr "Sf 项目 Pur 类别值"
 
 msgid "Default Home Page"
-msgstr "डिफ़ॉल्ट मुख पृष्ठ"
+msgstr "默认主页"
 
 msgid "Site Name"
-msgstr "साइट का नाम"
+msgstr "站点名称"
 
 msgid "Maintenance Cb"
-msgstr "रखरखाव सीबी"
+msgstr "维护 Cb"
 
 msgid "Maintenance Msg"
-msgstr "रखरखाव Msg"
+msgstr "维护味精"
 
 msgid "Disabled Action"
-msgstr "विकलांग कार्रवाई"
+msgstr "残疾的行动"
 
 msgid "Phone No"
-msgstr "फोन नहीं"
+msgstr "电话号码"
 
 msgid "Logo Path"
-msgstr "लोगो पथ"
+msgstr "徽标路径"
 
 msgid "Posts In Fp"
-msgstr "Fp में डाक"
+msgstr "Fp 的职位"
 
 msgid "Summary Char Fp"
-msgstr "सारांश चार एफ पी"
+msgstr "摘要 Char Fp"
 
 msgid "Footer Message"
-msgstr "पाद लेख संदेश"
+msgstr "脚注消息"
 
 msgid "Anonymous User"
-msgstr "बेनामी उपयोगकर्ता"
+msgstr "匿名用户"
 
 msgid "Anonymous User Role"
-msgstr "अनाम उपयोगकर्ता भूमिका"
+msgstr "匿名用户角色"
 
 msgid "Access Denied"
-msgstr "पहुँच अस्वीकृत"
+msgstr "访问被拒绝"
 
 msgid "Basic User Role"
-msgstr "बुनियादी उपयोगकर्ता भूमिका"
+msgstr "基本用户角色"
 
 msgid "Shipment Pick Priority"
-msgstr "लदान प्राथमिकता उठाओ"
+msgstr "装运挑选优先"
 
 msgid "Supplier Type"
-msgstr "आपूर्तिकर्ता प्रकार"
+msgstr "供应商类型"
 
 msgid "Supplier Contact Id"
-msgstr "आपूर्तिकर्ता संपर्क Id"
+msgstr "供应商联系人 Id"
 
 msgid "Supplier Bu Id"
-msgstr "आपूर्तिकर्ता बुउ आईडी"
+msgstr "供应商埠 Id"
 
 msgid "Liability Account Id"
-msgstr "दायित्व खाता Id"
+msgstr "责任帐户 Id"
 
 msgid "Payable Account Id"
-msgstr "देय खाता Id"
+msgstr "应付帐户 Id"
 
 msgid "Payment Discount Account Id"
-msgstr "भुगतान छूट खाता Id"
+msgstr "付款折扣帐户 Id"
 
 msgid "Pre Payment Account Id"
-msgstr "पूर्व भुगतान खाता Id"
+msgstr "预支付帐户 Id"
 
 msgid "New Pos Cb"
-msgstr "नई Pos सीबी"
+msgstr "新的 Pos Cb"
 
 msgid "All Invoices Cb"
-msgstr "सभी इनवॉइस सीबी"
+msgstr "所有发票 Cb"
 
 msgid "Unmatched Invoices Cb"
-msgstr "बेजोड़ चालान सीबी"
+msgstr "无与伦比的发票 Cb"
 
 msgid "Unaccounted Invoices Cb"
-msgstr "बेहिसाब चालान सीबी"
+msgstr "下落不明的发票 Cb"
 
 msgid "Unpaid Invoices Cb"
-msgstr "अवैतनिक चालान सीबी"
+msgstr "未付的发票 Cb"
 
 msgid "Hold Reason"
-msgstr "कारण पकड़"
+msgstr "持有的原因"
 
 msgid "Po Amount Limit"
-msgstr "पो राशि सीमा"
+msgstr "大埔限额"
 
 msgid "Invoice Amount Limit"
-msgstr "चालान राशि सीमा"
+msgstr "发票金额限制"
 
 msgid "Payment Amount Limit"
-msgstr "भुगतान राशि सीमा"
+msgstr "付款金额限制"
 
 msgid "Bu Bank Id"
-msgstr "बुउ बैंक आईडी"
+msgstr "埠银行 Id"
 
 msgid "Bu Bank Site Id"
-msgstr "बुउ बैंक साइट Id"
+msgstr "埠银行站点 Id"
 
 msgid "Bu Tax Code"
-msgstr "बुउ कर कोड"
+msgstr "埠税码"
 
 msgid "Invoice Match Document"
-msgstr "इनवॉयस मैच दस्तावेज़"
+msgstr "发票匹配文档"
 
 msgid "Invoice Currency"
-msgstr "इनवॉइस मुद्रा"
+msgstr "发票币种"
 
 msgid "Payment Priority"
-msgstr "भुगतान प्राथमिकता"
+msgstr "付款优先"
 
 msgid "Payment Group"
-msgstr "भुगतान समूह"
+msgstr "付款组"
 
 msgid "Invoice Date Basis"
-msgstr "चालान की तारीख के आधार"
+msgstr "发票日期基础"
 
 msgid "Pay Date Basis"
-msgstr "दिनांक के आधार का भुगतान"
+msgstr "支付日期基础"
 
 msgid "Default Payment Method"
-msgstr "डिफ़ॉल्ट भुगतान विधि"
+msgstr "默认付款方式"
 
 msgid "Remittance Advice Method"
-msgstr "प्रेषण सलाह विधि"
+msgstr "汇款通知方法"
 
 msgid "Remittance Advice Email"
-msgstr "प्रेषण सलाह ईमेल"
+msgstr "汇款咨询电子邮件"
 
 msgid "Pay On"
-msgstr "पर भुगतान"
+msgstr "支付"
 
 msgid "Debit Memo Onreturn Cb"
-msgstr "डेबिट ज्ञापन Onreturn सीबी"
+msgstr "借记卡备注 Onreturn Cb"
 
 msgid "Org Shipto Id"
-msgstr "Org Shipto Id"
+msgstr "组织结构图 Shipto Id"
 
 msgid "Org Billto Id"
-msgstr "Org Billto Id"
+msgstr "组织结构图帐单寄往 Id"
 
 msgid "Supplier Site Ref"
-msgstr "आपूर्तिकर्ता साइट रेफरी"
+msgstr "供应商网站 Ref"
 
 msgid "Supplier Site Type"
-msgstr "आपूर्तिकर्ता साइट प्रकार"
+msgstr "供应商的网站类型"
 
 msgid "Allow Substitute Receipts Cb"
-msgstr "स्थानापन्न रसीदें सीबी की अनुमति दें"
+msgstr "允许替代收据 Cb"
 
 msgid "Allow Unordered Receipts Cb"
-msgstr "Unordered रसीदें सीबी की अनुमति दें"
+msgstr "允许无序的收据 Cb"
 
 msgid "Ap Invoice Match Level"
-msgstr "एपी इनवॉइस मैच स्तर"
+msgstr "Ap 发票匹配级别"
 
 msgid "Ship To Location Variance"
-msgstr "स्थान विचरण करने के लिए जहाज"
+msgstr "船到位置方差"
 
 msgid "Positive Qty Tolerance"
-msgstr "सकारात्मक मात्रा सहिष्णुता"
+msgstr "积极数量公差"
 
 msgid "Negative Qty Tolerance"
-msgstr "नकारात्मक मात्रा सहिष्णुता"
+msgstr "负数量公差"
 
 msgid "Qty Variance"
-msgstr "मात्रा विचरण"
+msgstr "数量差异"
 
 msgid "Positive Receipt Days Tolerance"
-msgstr "सकारात्मक रसीद दिनों सहिष्णुता"
+msgstr "积极的收据天公差"
 
 msgid "Negative Receipt Days Tolerance"
-msgstr "नकारात्मक रसीद दिनों सहिष्णुता"
+msgstr "消极的收据天公差"
 
 msgid "Receipt Days Variance"
-msgstr "रसीद दिनों विचरण"
+msgstr "收据天方差"
 
 msgid "Supplier Site Attachement Id"
-msgstr "आपूर्तिकर्ता साइट Attachement Id"
+msgstr "供应商网站依附 Id"
 
 msgid "Sys Document Sequence Id"
-msgstr "Sys दस्तावेज़ Id अनुक्रम"
+msgstr "Sys 文件序列 Id"
 
 msgid "Entry Type"
-msgstr "प्रविष्टि प्रकार"
+msgstr "条目类型"
 
 msgid "Pre Fix"
-msgstr "पूर्व निदान"
+msgstr "前修复"
 
 msgid "Seq Separator"
-msgstr "Seq विभाजक"
+msgstr "Seq 分隔符"
 
 msgid "Next Number"
-msgstr "अगली संख्या"
+msgstr "下一个编号"
 
 msgid "Sys Dynamic Block Header Id"
-msgstr "Sys गतिशील ब्लॉक हैडर Id"
+msgstr "Sys 动态块标题 Id"
 
 msgid "Sys Dynamic Block Line Id"
-msgstr "Sys गतिशील ब्लॉक लाइन आईडी"
+msgstr "Sys 动态块行 Id"
 
 msgid "Dynamic Block Header Id"
-msgstr "डायनामिक ब्लॉक हैडर Id"
+msgstr "动态块标题 Id"
 
 msgid "Reference Column"
-msgstr "संदर्भ स्तंभ"
+msgstr "引用列"
 
 msgid "Sys Extra Field Id"
-msgstr "Sys अतिरिक्त फ़ील्ड Id"
+msgstr "Sys 额外字段 Id"
 
 msgid "Field Type"
-msgstr "फ़ील्ड प्रकार"
+msgstr "字段类型"
 
 msgid "Field Length"
-msgstr "फ़ील्ड लम्बाई"
+msgstr "字段长度"
 
 msgid "Display Type"
-msgstr "प्रदर्शन प्रकार"
+msgstr "显示类型"
 
 msgid "Sys Extra Field Instance Id"
-msgstr "Sys अतिरिक्त फ़ील्ड इंस्टेंस Id"
+msgstr "Sys 额外字段实例 Id"
 
 msgid "Referece Entity"
-msgstr "Referece एंटिटी"
+msgstr "参考实体"
 
 msgid "Sys Hold Id"
-msgstr "Sys होल्ड आईडी"
+msgstr "Sys 持身份证"
 
 msgid "Hold Code"
-msgstr "कोड पकड़"
+msgstr "保存代码"
 
 msgid "Hold Name"
-msgstr "नाम पकड़"
+msgstr "保存名称"
 
 msgid "Hold Type"
-msgstr "प्रकार पकड़"
+msgstr "保存类型"
 
 msgid "Manual Released Cb"
-msgstr "सीबी मैनुअल जारी किया"
+msgstr "手动释放 Cb"
 
 msgid "Sys Hold Reference Id"
-msgstr "Sys संदर्भ Id पकड़"
+msgstr "Sys 持有引用 Id"
 
 msgid "Hold Applied By"
-msgstr "होल्ड करके लागू किया"
+msgstr "持有的应用"
 
 msgid "Hold Applied On"
-msgstr "होल्ड पर लागू"
+msgstr "保持在中的应用"
 
 msgid "Application Reason"
-msgstr "अनुप्रयोग कारण"
+msgstr "申请理由"
 
 msgid "Hold Removed By"
-msgstr "होल्ड द्वारा हटाया"
+msgstr "暂停删除"
 
 msgid "Hold Removed On"
-msgstr "होल्ड पर हटाया"
+msgstr "暂停删除"
 
 msgid "Removal Reason"
-msgstr "हटाने कारण"
+msgstr "去除原因"
 
 msgid "Hold Count"
-msgstr "गिनती पकड़"
+msgstr "持有计数"
 
 msgid "Notification Type"
-msgstr "सूचना प्रकार"
+msgstr "通知类型"
 
 msgid "Notification Name"
-msgstr "अधिसूचना का नाम"
+msgstr "通知名称"
 
 msgid "From User Id"
-msgstr "उपयोगकर्ता Id से"
+msgstr "从用户 Id"
 
 msgid "To User Id"
-msgstr "करने के लिए उपयोगकर्ता Id"
+msgstr "为用户 Id"
 
 msgid "From User"
-msgstr "से उपयोगकर्ता"
+msgstr "从用户"
 
 msgid "To User"
-msgstr "उपयोगकर्ता के लिए"
+msgstr "给用户"
 
 msgid "To User Id All"
-msgstr "उपयोगकर्ता Id करने के लिए सभी"
+msgstr "用户 Id 的所有"
 
 msgid "To Email"
-msgstr "ईमेल करने के लिए"
+msgstr "以电子邮件"
 
 msgid "Cc Email"
-msgstr "Cc ईमेल"
+msgstr "抄送的电子邮件"
 
 msgid "Notification Subject"
-msgstr "अधिसूचना विषय"
+msgstr "通知主题"
 
 msgid "To Role"
-msgstr "भूमिका के लिए"
+msgstr "给角色"
 
 msgid "Access Key"
-msgstr "पहुँच कुंजी"
+msgstr "访问键"
 
 msgid "Mail Status"
-msgstr "मेल स्थिति"
+msgstr "邮件状态"
 
 msgid "Responder"
-msgstr ": प्रत्युत्तर"
+msgstr "联机响应程序"
 
 msgid "Responder Comment"
-msgstr "उत्तरदाता टिप्पणी"
+msgstr "联机响应程序注释"
 
 msgid "User Key Name"
-msgstr "उपयोगकर्ता प्रमुख नाम"
+msgstr "用户主要名称"
 
 msgid "User Key Value"
-msgstr "उपयोगकर्ता कुंजी मान"
+msgstr "用户密钥值"
 
 msgid "Text Field1"
-msgstr "पाठ फ़ील्ड1"
+msgstr "文本 Field1"
 
 msgid "Notification Group Id"
-msgstr "अधिसूचना समूह आईडी"
+msgstr "通知组 Id"
 
 msgid "Notification Group Seq"
-msgstr "अधिसूचना समूह Seq"
+msgstr "通知组 Seq"
 
 msgid "Start Sys Notification Id"
-msgstr "Sys अधिसूचना Id प्रारंभ करें"
+msgstr "启动系统通知 Id"
 
 msgid "Reference Key Table"
-msgstr "संदर्भ कुंजी तालिका"
+msgstr "引用键表"
 
 msgid "Sys Permission Id"
-msgstr "Sys की अनुमति आईडी"
+msgstr "Sys 权限 Id"
 
 msgid "Permision"
-msgstr "Permision"
+msgstr "许可问题"
 
 msgid "Class"
-msgstr "कक्षा"
+msgstr "类"
 
 msgid "Printer Name"
-msgstr "प्रिंटर नाम"
+msgstr "打印机名称"
 
 msgid "Printer Type"
-msgstr "प्रिंटर प्रकार"
+msgstr "打印机类型"
 
 msgid "Ip Address"
-msgstr "आईपी पते"
+msgstr "Ip 地址"
 
 msgid "Port Number"
-msgstr "पोर्ट क्रमांक"
+msgstr "端口号"
 
 msgid "Sys Process Flow Header Id"
-msgstr "Sys प्रक्रिया प्रवाह शीर्षक Id"
+msgstr "Sys 过程流程标题 Id"
 
 msgid "Process Flow"
-msgstr "प्रक्रिया प्रवाह"
+msgstr "过程流"
 
 msgid "Line Name"
-msgstr "पंक्ति नाम"
+msgstr "行名称"
 
 msgid "Class Name"
-msgstr "वर्ग नाम"
+msgstr "类名称"
 
 msgid "Method Name"
-msgstr "विधि नाम"
+msgstr "方法名称"
 
 msgid "Next Line Seq Pass"
-msgstr "अगली लाइन Seq दर्रा"
+msgstr "下一步线 Seq 通"
 
 msgid "Next Line Seq Fail"
-msgstr "अगली लाइन Seq विफल"
+msgstr "下一步线 Seq 失败"
 
 msgid "Next Line Seq Onhold"
-msgstr "अगली लाइन Seq Onhold"
+msgstr "下一步线 Seq Onhold"
 
 msgid "Sys Profile Header Id"
-msgstr "Sys प्रोफ़ाइल हैडर Id"
+msgstr "系统配置文件标题 Id"
 
 msgid "Sys Profile Line Id"
-msgstr "Sys प्रोफ़ाइल लाइन आईडी"
+msgstr "系统配置文件的行 Id"
 
 msgid "Profile Level"
-msgstr "प्रोफ़ाइल स्तर"
+msgstr "配置文件级别"
 
 msgid "Level Name"
-msgstr "तर नाम"
+msgstr "级别名称"
 
 msgid "Level Value"
-msgstr "तर मान"
+msgstr "级别值"
 
 msgid "Sys Program Id"
-msgstr "Sys प्रोग्राम Id"
+msgstr "Sys 程序 Id"
 
 msgid "Program Name"
-msgstr "प्रोग्राम नाम"
+msgstr "程序名称"
 
 msgid "Message"
-msgstr "संदेश"
+msgstr "消息"
 
 msgid "Parameters"
-msgstr "पैरामीटर्स"
+msgstr "参数"
 
 msgid "Output Path"
-msgstr "आउटपुट पथ"
+msgstr "输出路径"
 
 msgid "Sys Program Status Id"
-msgstr "Sys प्रोग्राम स्थिति आईडी"
+msgstr "Sys 程序状态 Id"
 
 msgid "Sys Role Permission Id"
-msgstr "Sys भूमिका अनुमति आईडी"
+msgstr "Sys 角色权限 Id"
 
 msgid "Permission Id"
-msgstr "अनुमति आईडी"
+msgstr "权限 Id"
 
 msgid "Sys Secondary Field Id"
-msgstr "Sys माध्यमिक फ़ील्ड Id"
+msgstr "Sys 中学字段 Id"
 
 msgid "Sys Secondary Field Instance Id"
-msgstr "Sys माध्यमिक फ़ील्ड इंस्टेंस Id"
+msgstr "Sys 中学字段实例 Id"
 
 msgid "Sys Value Group Header Id"
-msgstr "Sys मान समूह शीर्ष लेख Id"
+msgstr "Sys 值组标题 Id"
 
 msgid "Value Group"
-msgstr "मान समूह"
+msgstr "值组"
 
 msgid "Validation Type"
-msgstr "सत्यापन प्रकार"
+msgstr "验证类型"
 
 msgid "Min Size"
-msgstr "न्यूनतम आकार"
+msgstr "最小尺寸"
 
 msgid "Max Size"
-msgstr "अधिकतम आकार"
+msgstr "最大大小"
 
 msgid "Min Value"
-msgstr "न्यूनतम मान"
+msgstr "最小值"
 
 msgid "Max Value"
-msgstr "अधिकतम मान"
+msgstr "最大值"
 
 msgid "Fixed Size"
-msgstr "निश्चित आकार"
+msgstr "固定的大小"
 
 msgid "Number Only Cb"
-msgstr "नंबर ही सीबी"
+msgstr "数只 Cb"
 
 msgid "Uppercase Only Cb"
-msgstr "केवल सीबी अपरकेस"
+msgstr "大写只 Cb"
 
 msgid "Sys Value Group Line Id"
-msgstr "Sys मान समूह लाइन आईडी"
+msgstr "Sys 值组行 Id"
 
 msgid "Code Value"
-msgstr "कोड मान"
+msgstr "代码值"
 
 msgid "Account Qualifier"
-msgstr "खाता क्वालीफायर"
+msgstr "帐户限定符"
 
 msgid "Allow Budgeting Cb"
-msgstr "बजट सीबी की अनुमति दें"
+msgstr "允许预算 Cb"
 
 msgid "Allow Posting Cb"
-msgstr "सीबी पोस्ट करने की अनुमति दें"
+msgstr "允许过帐 Cb"
 
 msgid "Parent Cb"
-msgstr "पैरेंट सीबी"
+msgstr "父 Cb"
 
 msgid "Parent Line Id"
-msgstr "पैरेंट पंक्ति Id"
+msgstr "父行 Id"
 
 msgid "Path Name"
-msgstr "पथ का नाम"
+msgstr "路径名称"
 
 msgid "Path Description"
-msgstr "पथ विवरण"
+msgstr "路径描述"
 
 msgid "Path Value"
-msgstr "पथ मान"
+msgstr "路径值"
 
 msgid "Path Sec Id"
-msgstr "पथ Sec आईडी"
+msgstr "美国证交会路径 Id"
 
 msgid "Path Revision Number"
-msgstr "पथ संशोधन संख्या"
+msgstr "路径修订号"
 
 msgid "Path Revision Enabled"
-msgstr "पथ सक्षम संशोधन"
+msgstr "启用的路径修改"
 
 msgid "Path Creation Date"
-msgstr "पथ निर्माण दिनांक"
+msgstr "路径创建日期"
 
 msgid "Path Created By"
-msgstr "पथ के द्वारा बनाई गई"
+msgstr "通过创建路径"
 
 msgid "Path Last Update Date"
-msgstr "पथ अंतिम अद्यतन तिथि"
+msgstr "路径最后更新日期"
 
 msgid "Path Last Updated By"
-msgstr "अंतिम अद्यतन द्वारा पथ"
+msgstr "最后由更新的路径"
 
 msgid "Transaction Type Number"
-msgstr "लेन-देन प्रकार संख्या"
+msgstr "交易记录类型编号"
 
 msgid "Type Class"
-msgstr "वर्ग के प्रकार"
+msgstr "类型类"
 
 msgid "Transaction Action"
-msgstr "लेन-देन कार्रवाई"
+msgstr "事务操作"
 
 msgid "Account Id"
-msgstr "खाता Id"
+msgstr "帐户 Id"
 
 msgid "Primary Uom Id"
-msgstr "प्राथमिक Uom आईडी"
+msgstr "主 Uom Id"
 
 msgid "Primary Relation"
-msgstr "प्राथमिक संबंध"
+msgstr "主的关系"
 
 msgid "Person Id"
-msgstr "व्यक्ति आईडी"
+msgstr "个人 Id"
 
 msgid "Password"
-msgstr "पासवर्ड"
+msgstr "密码"
 
 msgid "Assigned Ip"
-msgstr "असाइन किए गए Ip"
+msgstr "分配的 Ip"
 
 msgid "User Language"
-msgstr "उपयोगकर्ता भाषा"
+msgstr "用户语言"
 
 msgid "Date Format"
-msgstr "दिनांक स्वरूप"
+msgstr "日期格式"
 
 msgid "Block Notif Count"
-msgstr "ब्लॉक Notif गिनती"
+msgstr "块就没门计数"
 
 msgid "Dec Sep"
 msgstr "Dec Sep"
 
 msgid "Theme"
-msgstr "थीम"
+msgstr "主题"
 
 msgid "Page Size"
-msgstr "पृष्ठ आकार"
+msgstr "页面大小"
 
 msgid "Prices Dec"
-msgstr "कीमतें Dec"
+msgstr "价格 12 月"
 
 msgid "Qty Dec"
-msgstr "मात्रा Dec"
+msgstr "数量 Dec"
 
 msgid "Rates Dec"
-msgstr "दरें Dec"
+msgstr "费率 Dec"
 
 msgid "Percent Dec"
-msgstr "प्रतिशत Dec"
+msgstr "Dec %"
 
 msgid "Show Gl"
-msgstr "जीएल दिखाएँ"
+msgstr "显示总帐"
 
 msgid "Show Codes"
-msgstr "कोड दिखाएँ"
+msgstr "显示代码"
 
 msgid "Show Hints"
-msgstr "दिखाने के संकेत"
+msgstr "显示提示"
 
 msgid "Last Visit Date"
-msgstr "अंतिम यात्रा दिनांक"
+msgstr "上次访问日期"
 
 msgid "Query Size"
-msgstr "क्वेरी का आकार"
+msgstr "查询大小"
 
 msgid "Graphic Links"
-msgstr "ग्राफिक कड़ियाँ"
+msgstr "图形链接"
 
 msgid "Pos"
 msgstr "Pos"
 
 msgid "Print Profile"
-msgstr "मुद्रण प्रोफ़ाइल"
+msgstr "打印模板"
 
 msgid "Rep Popup"
-msgstr "प्रतिनिधि पॉपअप"
+msgstr "Rep 弹出式菜单"
 
 msgid "Auth Provider Name"
-msgstr "Auth प्रदाता का नाम"
+msgstr "身份验证提供程序的名称"
 
 msgid "Auth Provider Id"
-msgstr "Auth प्रदाता आईडी"
+msgstr "身份验证提供程序 Id"
 
 msgid "User Dashboard Config Id"
-msgstr "उपयोगकर्ता डैशबोर्ड Config Id"
+msgstr "用户仪表板配置 Id"
 
 msgid "Config Level"
-msgstr "Config स्तर"
+msgstr "配置级别"
 
 msgid "User Role"
-msgstr "उपयोगकर्ता भूमिका"
+msgstr "用户角色"
 
 msgid "Report Group"
-msgstr "रिपोर्ट समूह"
+msgstr "报告组"
 
 msgid "Report Type"
-msgstr "रिपोर्ट प्रकार"
+msgstr "报告类型"
 
 msgid "Report Id"
-msgstr "Id रिपोर्ट"
+msgstr "报表 Id"
 
 msgid "User Favourite Id"
-msgstr "उपयोगकर्ता पसंदीदा आईडी"
+msgstr "最喜欢的用户 Id"
 
 msgid "External Link"
-msgstr "बाहरी लिंक"
+msgstr "外部链接"
 
 msgid "Fav Name"
-msgstr "Fav नाम"
+msgstr "最喜欢的名字"
 
 msgid "Fav Group"
-msgstr "Fav समूह"
+msgstr "富达集团"
 
 msgid "User Group Id"
-msgstr "उपयोगकर्ता समूह आईडी"
+msgstr "用户组 Id"
 
 msgid "User Group Code"
-msgstr "उपयोगकर्ता समूह कोड"
+msgstr "用户组的代码"
 
 msgid "User Group Access Id"
-msgstr "उपयोगकर्ता समूह तक पहुँच आईडी"
+msgstr "用户组访问 Id"
 
 msgid "User Password Reset Id"
-msgstr "उपयोगकर्ता पासवर्ड रीसेट करें Id"
+msgstr "用户密码重置 Id"
 
 msgid "User Role Id"
-msgstr "उपयोगकर्ता भूमिका Id"
+msgstr "用户角色 Id"
 
 msgid "User Supplier Id"
-msgstr "उपयोगकर्ता प्रदायक आईडी"
+msgstr "用户的提供商 Id"
 
 msgid "View Id"
-msgstr "देखें आईडी"
+msgstr "视图 Id"
 
 msgid "View Name"
-msgstr "दृश्य नाम"
+msgstr "视图名称"
 
 msgid "Custom Div Class"
-msgstr "कस्टम Div वर्ग"
+msgstr "自定义 Div 类"
 
 msgid "Logical Settings"
-msgstr "तार्किक सेटिंग्स"
+msgstr "逻辑设置"
 
 msgid "Query V"
-msgstr "क्वेरी V"
+msgstr "查询 V"
 
 msgid "Select V"
-msgstr "V का चयन करें"
+msgstr "选择 V"
 
 msgid "From V"
-msgstr "V से"
+msgstr "从 V"
 
 msgid "Where V"
-msgstr "जहां V"
+msgstr "在 V"
 
 msgid "Group By V"
-msgstr "समूह V द्वारा"
+msgstr "第五组"
 
 msgid "Order By"
-msgstr "द्वारा क्रम"
+msgstr "按顺序"
 
 msgid "Query End"
-msgstr "क्वेरी अंत"
+msgstr "查询结束"
 
 msgid "Filters"
-msgstr "फिल्टर"
+msgstr "筛选器"
 
 msgid "Page"
-msgstr "पृष्ठ"
+msgstr "页"
 
 msgid "Page Title"
-msgstr "पृष्ठ शीर्षक"
+msgstr "页标题"
 
 msgid "Page Header"
-msgstr "पृष्ठ शीर्ष लेख"
+msgstr "页面页眉"
 
 msgid "Page Footer"
-msgstr "पृष्ठ पाद लेख"
+msgstr "页面页脚"
 
 msgid "Use Pager Cb"
-msgstr "पेजर सीबी का उपयोग करें"
+msgstr "使用寻呼机 Cb"
 
 msgid "Default Per Page"
-msgstr "प्रति पृष्ठ डिफ़ॉल्ट"
+msgstr "每个页面默认值"
 
 msgid "No Of Grid Columns"
-msgstr "ग्रिड कॉलम की सं"
+msgstr "没有的网格列"
 
 msgid "Block Title"
-msgstr "ब्लॉक शीर्षक"
+msgstr "区块标题"
 
 msgid "Show Graph Only Cb"
-msgstr "ग्राफ ही सीबी दिखाएँ"
+msgstr "显示图唯一 Cb"
 
 msgid "Header Text"
-msgstr "शीर्ष लेख पाठ"
+msgstr "页眉文本"
 
 msgid "Footer Text"
-msgstr "पाद लेख पाठ"
+msgstr "页脚文本"
 
 msgid "Remove Default Header Cb"
-msgstr "डिफ़ॉल्ट हैडर सीबी निकालें"
+msgstr "删除默认标题 Cb"
 
 msgid "List Type"
-msgstr "सूची प्रकार"
+msgstr "列表类型"
 
 msgid "Chart Type"
-msgstr "चार्ट प्रकार"
+msgstr "图表类型"
 
 msgid "Chart Width"
-msgstr "चार्ट चौड़ाई"
+msgstr "图表宽度"
 
 msgid "Chart Height"
-msgstr "चार्ट ऊँचाई"
+msgstr "图表高度"
 
 msgid "Chart Label"
-msgstr "चार्ट लेबल"
+msgstr "图表标签"
 
 msgid "Chart Value"
-msgstr "चार्ट मान"
+msgstr "图表值"
 
 msgid "Chart Legend"
-msgstr "चार्ट लेजेंड"
+msgstr "图表图例"
 
 msgid "View Path Id"
-msgstr "दृश्य पथ Id"
+msgstr "视图路径 Id"
 
 msgid "Column Name"
-msgstr "स्तंभ नाम"
+msgstr "列名称"
 
 msgid "Wip Accounting Group Id"
-msgstr "Wip लेखा समूह आईडी"
+msgstr "Wip 会计组 Id"
 
 msgid "Wo Type"
-msgstr "Wo प्रकार"
+msgstr "窝类型"
 
 msgid "Wip Accounting Group"
-msgstr "Wip लेखा समूह"
+msgstr "Wip 会计组"
 
 msgid "Var Material Ac Id"
-msgstr "Var माल एसी आईडी"
+msgstr "Var 材料交流 Id"
 
 msgid "Var Material Oh Ac Id"
-msgstr "Var माल ओह एसी आईडी"
+msgstr "Var 材料哦交流 Id"
 
 msgid "Var Overhead Ac Id"
-msgstr "Var उपरि एसी आईडी"
+msgstr "Var 开销交流 Id"
 
 msgid "Var Resource Ac Id"
-msgstr "Var संसाधन एसी आईडी"
+msgstr "无功资源交流 Id"
 
 msgid "Var Osp Ac Id"
-msgstr "Var Osp एसी आईडी"
+msgstr "Var Osp 交流 Id"
 
 msgid "Wip Control Id"
-msgstr "Wip नियंत्रण Id"
+msgstr "Wip 控制，Id"
 
 msgid "Default Accounting Group"
-msgstr "डिफ़ॉल्ट लेखा समूह"
+msgstr "默认会计组"
 
 msgid "Wo Number Type"
-msgstr "Wo संख्या प्रकार"
+msgstr "窝的数字类型）"
 
 msgid "Allow One Operation Cb"
-msgstr "एक ऑपरेशन सीबी की अनुमति दें"
+msgstr "允许一个操作 Cb"
 
 msgid "Completion Subinventory Id"
-msgstr "पूर्णता Subinventory Id"
+msgstr "完成 Subinventory Id"
 
 msgid "Completion Locator Id"
-msgstr "पूर्णता लोकेटर Id"
+msgstr "完成定位器 Id"
 
 msgid "Issue Subinventory Id"
-msgstr "मुद्दा Subinventory Id"
+msgstr "问题 Subinventory Id"
 
 msgid "Issue Locator Id"
-msgstr "मुद्दा लोकेटर आईडी"
+msgstr "问题定位器 Id"
 
 msgid "So Change Effect"
-msgstr "तो प्रभाव परिवर्तित करें"
+msgstr "所以改变的影响"
 
 msgid "Auto Release Days"
-msgstr "ऑटो रिलीज के दिन"
+msgstr "自动释放天"
 
 msgid "Wip Move Transaction Id"
-msgstr "Wip चाल लेनदेन आईडी"
+msgstr "Wip 移动交易记录 Id"
 
 msgid "Wo Routing Line Id"
-msgstr "Wo रूटिंग लाइन आईडी"
+msgstr "禾路由行 Id"
 
 msgid "Wo Routing Detail Id"
-msgstr "Wo रूटिंग विस्तार आईडी"
+msgstr "禾路由详细 Id"
 
 msgid "Wo Number"
-msgstr "Wo संख्या"
+msgstr "窝号码"
 
 msgid "From Routing Sequence"
-msgstr "रूटिंग अनुक्रम से"
+msgstr "从路由的序列"
 
 msgid "To Routing Sequence"
-msgstr "करने के लिए रूटिंग अनुक्रम"
+msgstr "到路由的序列"
 
 msgid "From Operation Step"
-msgstr "प्रचालन चरण से"
+msgstr "从操作步骤"
 
 msgid "To Operation Step"
-msgstr "कार्रवाई करने के लिए चरण"
+msgstr "对操作步骤"
 
 msgid "Move Quantity"
-msgstr "मात्रा ले जाएँ"
+msgstr "移动数量"
 
 msgid "Scrap Account Id"
-msgstr "स्क्रैप खाता Id"
+msgstr "废帐户 Id"
 
 msgid "Sales Order Header Id"
-msgstr "विक्रय क्रम हैडर Id"
+msgstr "销售订单标题 Id"
 
 msgid "Sales Order Line Id"
-msgstr "विक्रय आदेश पंक्ति Id"
+msgstr "销售订单行 Id"
 
 msgid "Wip Resource Transaction Id"
-msgstr "Wip संसाधन लेनदेन आईडी"
+msgstr "Wip 资源交易记录 Id"
 
 msgid "Wip Wo Routing Line Id"
-msgstr "Wip Wo रूटिंग लाइन आईडी"
+msgstr "Wip 禾路由行 Id"
 
 msgid "Wip Wo Routing Detail Id"
-msgstr "Wip Wo रूटिंग विस्तार आईडी"
+msgstr "Wip 禾路由详细 Id"
 
 msgid "Required Quantity"
-msgstr "आवश्यक मात्रा"
+msgstr "所需的数量"
 
 msgid "Issued Quantity"
-msgstr "जारी किए गए मात्रा"
+msgstr "发货的数量"
 
 msgid "Wo Status"
-msgstr "Wo स्थिति"
+msgstr "窝状态"
 
 msgid "Nettable Quantity"
-msgstr "Nettable मात्रा"
+msgstr "网状的数量"
 
 msgid "Reference Bom Item Id M"
-msgstr "संदर्भ Bom आइटम Id M"
+msgstr "引用的物料清单物料 Id M"
 
 msgid "Bom Exploded Cb"
-msgstr "सीबी Bom विस्फोट किया"
+msgstr "物料清单爆炸 Cb"
 
 msgid "Routing Exploded Cb"
-msgstr "एक्स्प्लोडेड सीबी रूटिंग"
+msgstr "路由爆炸的 Cb"
 
 msgid "Reference Routing Item Id M"
-msgstr "रूटिंग आइटम Id M का संदर्भ"
+msgstr "引用路由项 Id M"
 
 msgid "Completion Sub Inventory"
-msgstr "पूरा होने के उप सूची"
+msgstr "完成子库存"
 
 msgid "Completed Quantity"
-msgstr "पूर्ण किए गए मात्रा"
+msgstr "已完成的数量"
 
 msgid "Scrapped Quantity"
-msgstr "खत्म कर दिया मात्रा"
+msgstr "报废的数量"
 
 msgid "Released Date"
-msgstr "रिलीज़ दिनांक"
+msgstr "发布的日期"
 
 msgid "First Unit Completed Date"
-msgstr "पहली इकाई पूर्ण दिनांक"
+msgstr "第一单元完成日期"
 
 msgid "Last Unit Completed Date"
-msgstr "पिछले इकाई पूर्ण दिनांक"
+msgstr "最后单位完成日期"
 
 msgid "Schedule Group"
-msgstr "कार्यक्रम समूह"
+msgstr "计划组"
 
 msgid "Build Sequence"
-msgstr "अनुक्रम का निर्माण"
+msgstr "建造序列"
 
 msgid "Line"
-msgstr "रेखा"
+msgstr "线"
 
 msgid "Scheduling Priority"
-msgstr "शेड्यूलिंग प्राथमिकता"
+msgstr "调度优先级"
 
 msgid "Closed Date"
-msgstr "बंद दिनांक"
+msgstr "关闭的日期"
 
 msgid "Applied Quantity"
-msgstr "अनुप्रयुक्त मात्रा"
+msgstr "应用的数量"
 
 msgid "Queue Quantity"
-msgstr "कतार मात्रा"
+msgstr "队列数量"
 
 msgid "Running Quantity"
-msgstr "मात्रा चल रहा"
+msgstr "运行数量"
 
 msgid "Rejected Quantity"
-msgstr "अस्वीकृत मात्रा"
+msgstr "被拒绝的数量"
 
 msgid "Tomove Quantity"
-msgstr "Tomove मात्रा"
+msgstr "而名列前茅的数量"
 
 msgid "Progress Percentage"
-msgstr "प्रगति प्रतिशत"
+msgstr "进度百分比"
 
 msgid "Wip Wol Transaction Id"
-msgstr "Wip Wol लेनदेन आईडी"
+msgstr "Wip Wol 交易记录 Id"
+
+msgid "Search Paths"
+msgstr "搜索路径"
+
+msgid "All users"
+msgstr "所有用户"
+
+msgid "Search Users"
+msgstr "搜索用户"
+
+msgid "New user registration"
+msgstr "新的用户注册"
+
+msgid "Registraion"
+msgstr "登记"
+
+msgid "Supplier"
+msgstr "供应商"
+
+msgid "Options"
+msgstr "选项"
+
+msgid "Option"
+msgstr "选项"
+
+msgid "View all the options"
+msgstr "查看所有的选项"
+
+msgid "View Options"
+msgstr "视图选项"
+
+msgid "All modules"
+msgstr "所有模块"
+
+msgid "View Modules"
+msgstr "查看模块"
+
+msgid "Module creation & update"
+msgstr "模块创建 / 更新"
+
+msgid "Update Modules"
+msgstr "更新模块"
+
+msgid "Organizations"
+msgstr "组织"
+
+msgid "Create & Update Enterprise"
+msgstr "创建和更新企业"
+
+msgid "Enterprise"
+msgstr "企业"
+
+msgid "Path - creation, update & delete"
+msgstr "路径-创建、 更新和删除"
+
+msgid "Create & Update Address"
+msgstr "创建和更新地址"
+
+msgid "Char of Account"
+msgstr "烧焦的帐户"
+
+msgid "Chart Of Accounts"
+msgstr "会计科目表"
+
+msgid "GL Calendar"
+msgstr "总帐日历"
+
+msgid "All chart of accounts"
+msgstr "所有的会计科目表"
+
+msgid "Search Ac Combinations"
+msgstr "搜索 Ac 的组合"
+
+msgid "Char of account combinations"
+msgstr "烧焦的帐户组合"
+
+msgid "Account Combination"
+msgstr "会计科目组合"
+
+msgid "Legal Organization"
+msgstr "法律组织"
+
+msgid "Legal Org"
+msgstr "法律组织结构图"
+
+msgid "List of all Legal Orgs"
+msgstr "所有的法律组织的列表"
+
+msgid "Legal Orgs"
+msgstr "法律机构"
+
+msgid "Business Organization"
+msgstr "商业组织"
+
+msgid "Business Org"
+msgstr "商业组织结构图"
+
+msgid "Inventory Organization"
+msgstr "库存组织"
+
+msgid "Inventory Org"
+msgstr "库存组织结构图"
+
+msgid "All inventory Orgs"
+msgstr "所有库存组织"
+
+msgid "Search Inventory"
+msgstr "搜索库存"
+
+msgid "Search Business Org"
+msgstr "搜索业务组织结构图"
+
+msgid "Item Master"
+msgstr "物料主"
+
+msgid "Search All Items"
+msgstr "搜索所有项目"
+
+msgid "Search Items"
+msgstr "搜索项目"
+
+msgid "Unit of mesaures"
+msgstr "冻土的单位"
+
+msgid "View Unit of Measures"
+msgstr "查看单元的措施"
+
+msgid "View UOM"
+msgstr "视图 UOM"
+
+msgid "Inventory Transaction Type"
+msgstr "库存交易记录类型"
+
+msgid "List of transaction types"
+msgstr "交易记录类型的列表"
+
+msgid "Search Transaction Type"
+msgstr "搜索交易记录类型"
+
+msgid "Sub Inventory"
+msgstr "子库存"
+
+msgid "Search All Sub Inventories"
+msgstr "搜索所有子清单"
+
+msgid "Search Subinventories"
+msgstr "搜索 Subinventories"
+
+msgid "Create & Update Locator"
+msgstr "创建和更新定位器"
+
+msgid "Inventory"
+msgstr "库存"
+
+msgid "Search Locator"
+msgstr "搜索定位程序"
+
+msgid "On hand Quantities"
+msgstr "一方面数量"
+
+msgid "On Hand"
+msgstr "在手上"
+
+msgid "Inventory Transaction"
+msgstr "库存交易记录"
+
+msgid "create update page"
+msgstr "创建更新页"
+
+msgid "view all pages"
+msgstr "查看所有页面"
+
+msgid "Search Pages"
+msgstr "搜索页"
+
+msgid "Admin"
+msgstr "管理员"
+
+msgid "Content Types"
+msgstr "内容类型"
+
+msgid "Search Content Type"
+msgstr "搜索内容类型"
+
+msgid "Create & Update Content Type"
+msgstr "创建和更新内容类型"
+
+msgid "Create & Update Documents"
+msgstr "创建和更新的文档"
+
+msgid "Documentation"
+msgstr "文档"
+
+msgid "Create & Update blocks"
+msgstr "创建和更新块"
+
+msgid "Custom Block"
+msgstr "自定义块"
+
+msgid "List of blocks"
+msgstr "块的列表"
+
+msgid "All Blocks"
+msgstr "所有的块"
+
+msgid "View, Create & Update categories"
+msgstr "查看、 创建和更新的类别"
+
+msgid "Categories - List of all category"
+msgstr "类别-所有类别的列表"
+
+msgid "Search Categories"
+msgstr "搜索类别"
+
+msgid "Create & Update Forum"
+msgstr "创建和更新论坛"
+
+msgid "New Forum Topic"
+msgstr "新论坛主题"
+
+msgid "Category Relationships"
+msgstr "类别关系"
+
+msgid "Category Relations"
+msgstr "类别关系"
+
+msgid "Create & Updatecontent"
+msgstr "创建 & Updatecontent"
+
+msgid "Write Content"
+msgstr "写的内容"
+
+msgid "Content Management - Create & Update Contents such as Forum, Article, etc"
+msgstr "内容管理-创建和更新内容论坛、 文章等"
+
+msgid "Content Management"
+msgstr "内容管理"
+
+msgid "Create & update view"
+msgstr "创建和更新视图"
+
+msgid "Custom Report (View)"
+msgstr "自定义报表 （视图）"
+
+msgid "List of views"
+msgstr "视图的列表"
+
+msgid "Search Custome Reports (Views)"
+msgstr "搜索客户报告 （视图）"
+
+msgid "view forum content type"
+msgstr "查看论坛内容类型"
+
+msgid "View forum"
+msgstr "查看论坛"
+
+msgid "Option lists"
+msgstr "选项列表"
+
+msgid "Search Options"
+msgstr "搜索选项"
+
+msgid "Role Path"
+msgstr "角色路径"
+
+msgid "User - Creation & Update"
+msgstr "用户-创建和更新"
+
+msgid "User"
+msgstr "用户"
+
+msgid "Json Basics"
+msgstr "Json 基础知识"
+
+msgid "Search Organizations"
+msgstr "搜索组织"
+
+msgid "Search Orgs"
+msgstr "搜索组织"
+
+msgid "View Address"
+msgstr "查看地址"
+
+msgid "List of all enterprises"
+msgstr "所有的企业名单"
+
+msgid "Serach Enterprises"
+msgstr "搜索企业"
+
+msgid "Search All Inventory Transactions"
+msgstr "搜索所有库存交易记录"
+
+msgid "Search Transactions"
+msgstr "搜索交易"
+
+msgid "Purchase Order"
+msgstr "采购订单"
+
+msgid "Payment Terms"
+msgstr "付款条款"
+
+msgid "Search Payment Term"
+msgstr "搜索付款方式"
+
+msgid "All Purchased Orders"
+msgstr "所有购买订单"
+
+msgid "Search PO Headers"
+msgstr "搜索大埔头"
+
+msgid "All expected receipts"
+msgstr "所有预期的收益"
+
+msgid "Expected Receipts"
+msgstr "预期的收益"
+
+msgid "All POs"
+msgstr "所有 POs"
+
+msgid "Search POs"
+msgstr "搜索 POs"
+
+msgid "All setups"
+msgstr "所有设置"
+
+msgid "Setup"
+msgstr "安装程序"
+
+msgid "Receipt POs, IRs and RMAs"
+msgstr "收据 POs、 国税局和 Rma"
+
+msgid "Inventory Receipt"
+msgstr "库存收货"
+
+msgid "All Receipts"
+msgstr "所有收据"
+
+msgid "View Inv Receipts"
+msgstr "查看 Inv 收据"
+
+msgid "Search Inventory Receipt"
+msgstr "搜索库存收货"
+
+msgid "Search Inv Receipts"
+msgstr "搜索 Inv 收据"
+
+msgid "Bill of materials"
+msgstr "物料清单"
+
+msgid "Search All BOMs"
+msgstr "搜索所有物料清单"
+
+msgid "Search BOM"
+msgstr "搜索物料清单"
+
+msgid "Create & Update Resources"
+msgstr "创建和更新资源"
+
+msgid "All Resources"
+msgstr "所有资源"
+
+msgid "Search Resources"
+msgstr "搜索资源"
+
+msgid "Create & Update Cost Type"
+msgstr "创建和更新成本的类型"
+
+msgid "All Cost Types"
+msgstr "所有成本的类型"
+
+msgid "Cost Types"
+msgstr "成本的类型"
+
+msgid "Search Material Elements"
+msgstr "材料的搜索元素"
+
+msgid "Overhead - Resource & Material"
+msgstr "开销--资源与材料"
+
+msgid "All Over heads"
+msgstr "所有的头顶"
+
+msgid "Search Overhead"
+msgstr "搜索开销"
+
+msgid "Create & Update Department"
+msgstr "创建和更新部"
+
+msgid "All Departments"
+msgstr "所有部门"
+
+msgid "Search Department"
+msgstr "搜索部"
+
+msgid "Search Standard Operation"
+msgstr "搜索标准操作"
+
+msgid "Create & Update Routing"
+msgstr "创建和更新路由"
+
+msgid "Routing"
+msgstr "路由"
+
+msgid "Search Routing"
+msgstr "搜索路由"
+
+msgid "Work In Process"
+msgstr "在过程中工作"
+
+msgid "Create & Update Work Order"
+msgstr "创建和更新工作订单"
+
+msgid "Work Order"
+msgstr "工作订单"
+
+msgid "Search Work Orders"
+msgstr "搜索工作订单"
+
+msgid "Search Work Order"
+msgstr "搜索工作顺序"
+
+msgid "Work Order Move Transaction"
+msgstr "工作订单移动交易记录"
+
+msgid "WO Move Transaction"
+msgstr "窝移动交易"
+
+msgid "Search Move Transactions"
+msgstr "搜索移动交易"
+
+msgid "Resource Transaction"
+msgstr "资源交易"
+
+msgid "Search Resource Transaction"
+msgstr "搜索资源交易"
+
+msgid "WIP Material Transaction"
+msgstr "WIP 物料交易记录"
+
+msgid "WO Inv Transaction"
+msgstr "窝 Inv 事务"
+
+msgid "WIP Work Order Completion & Return"
+msgstr "WIP 工作订单完成并返回"
+
+msgid "WO Completion/Return"
+msgstr "窝完成/返回"
+
+msgid "Accounts Receivable"
+msgstr "应收账款"
+
+msgid "Customer"
+msgstr "客户"
+
+msgid "Search Customer View"
+msgstr "搜索客户视图"
+
+msgid "Search Customer"
+msgstr "搜索客户"
+
+msgid "Create & UpdatenewContent"
+msgstr "创建 & UpdatenewContent"
+
+msgid "unused1"
+msgstr "unused1"
+
+msgid "Create & Updateissue"
+msgstr "创建 & Updateissue"
+
+msgid "Issue Log"
+msgstr "问题日志"
+
+msgid "Create Contents"
+msgstr "创建内容"
+
+msgid "All Forums"
+msgstr "所有论坛"
+
+msgid "Forums"
+msgstr "论坛"
+
+msgid "All Issues"
+msgstr "所有的问题"
+
+msgid "Issue Logs"
+msgstr "问题日志"
+
+msgid "All Documentations"
+msgstr "所有文档"
+
+msgid "Read Documentation"
+msgstr "阅读文档"
+
+msgid "All Contents"
+msgstr "所有内容"
+
+msgid "Read Articles"
+msgstr "阅读的文章"
+
+msgid "Json user"
+msgstr "Json 用户"
+
+msgid "Value Group Header"
+msgstr "值组页眉"
+
+msgid "Create & Update Value Groups"
+msgstr "创建和更新值组"
+
+msgid "Search Value Groups"
+msgstr "搜索值组"
+
+msgid "All Calendars"
+msgstr "所有日历"
+
+msgid "Search Calendar"
+msgstr "搜索日历"
+
+msgid "General Ledger"
+msgstr "总分类账"
+
+msgid "Create update & ledger"
+msgstr "创建更新与分类帐"
+
+msgid "Serach Ledgers"
+msgstr "搜索分类帐"
+
+msgid "Search Ledgers"
+msgstr "搜索分类帐"
+
+msgid "All Search Links"
+msgstr "所有搜索链接"
+
+msgid "Search"
+msgstr "搜索"
+
+msgid "View Value Group"
+msgstr "查看值组"
+
+msgid "System"
+msgstr "系统"
+
+msgid "View all BOMs"
+msgstr "查看所有物料清单"
+
+msgid "View BOM"
+msgstr "查看物料清单"
+
+msgid "View BOM Cost Type"
+msgstr "查看物料清单成本的类型"
+
+msgid "View BOM Departments"
+msgstr "查看物料清单部门"
+
+msgid "View Departments"
+msgstr "查看部门"
+
+msgid "Mass Upload Home Page"
+msgstr "批量上传主页"
+
+msgid "Mass Upload"
+msgstr "批量上传"
+
+msgid "Mass Upload - Option Detail"
+msgstr "批量上传-选项详细信息"
+
+msgid "Mass Upload - Option Lines"
+msgstr "批量上传-选项行"
+
+msgid "Mass Upload - Option Header"
+msgstr "批量上传-选项标头"
+
+msgid "View All PO"
+msgstr "查看所有采购订单"
+
+msgid "View Purchase Order"
+msgstr "查看采购订单"
+
+msgid "View Legal Orgs"
+msgstr "认为法律组织"
+
+msgid "View Chart Of Accounts"
+msgstr "查看会计科目表"
+
+msgid "View COA"
+msgstr "查看 COA"
+
+msgid "Search Chart Of Accounts"
+msgstr "搜索的会计科目表"
+
+msgid "Search COA"
+msgstr "搜索 COA"
+
+msgid "View Calendar"
+msgstr "查看日历"
+
+msgid "Mass Upload Calendar"
+msgstr "大规模上载日历"
+
+msgid "View Account Combination"
+msgstr "查看会计科目组合"
+
+msgid "View Ac Combination"
+msgstr "Ac 组合视图"
+
+msgid "Mass Upload COA Combination"
+msgstr "批量上传 COA 结合"
+
+msgid "Mass Upload GL Ledger"
+msgstr "批量上传 GL 分类帐"
+
+msgid "Mass Upload Ledger"
+msgstr "大规模上载分类帐"
+
+msgid "View Ledger"
+msgstr "查看分类帐"
+
+msgid "Create & Review GL Journals"
+msgstr "创建和查看 GL 期刊"
+
+msgid "Journal"
+msgstr "杂志"
+
+msgid "Open and Close GL Periods"
+msgstr "打开和关闭 GL 期"
+
+msgid "GL Period"
+msgstr "总帐期间"
+
+msgid "View GL Period Statuses"
+msgstr "视图 GL 期间状态"
+
+msgid "View Periods"
+msgstr "查看时间"
+
+msgid "Serach GL Periods"
+msgstr "搜索 GL 期"
+
+msgid "Serach Periods"
+msgstr "搜索时间"
+
+msgid "Search Journals"
+msgstr "搜索日志"
+
+msgid "Mass Upload GL Journal Header"
+msgstr "批量上传 GL 日志标题"
+
+msgid "Upload Journal Header"
+msgstr "上载日志标题"
+
+msgid "Upload Mass Journal Lines"
+msgstr "上传大规模日记帐行"
+
+msgid "Upload Journal Lines"
+msgstr "上载日志行"
+
+msgid "GL Balance View"
+msgstr "GL 平衡视图"
+
+msgid "GL Balance From Base Table"
+msgstr "GL 平衡从基表"
+
+msgid "GL Balance"
+msgstr "GL 平衡"
+
+msgid "Search Journal Lines"
+msgstr "搜索日志行"
+
+msgid "Accounts Payable"
+msgstr "应付帐款"
+
+msgid "View Business Org"
+msgstr "查看业务组织结构图"
+
+msgid "Search Address"
+msgstr "搜索地址"
+
+msgid "Mass Upload Address"
+msgstr "大规模上传地址"
+
+msgid "Create & Update AP Transaction"
+msgstr "创建和更新 AP 交易"
+
+msgid "AP Transaction"
+msgstr "AP 交易"
+
+msgid "Search Transaction"
+msgstr "搜索交易"
+
+msgid "Transaction Header"
+msgstr "事务标头"
+
+msgid "Create Accounting"
+msgstr "创建会计"
+
+msgid "Create AP Trnx Accounting"
+msgstr "创建 AP Trnx 会计"
+
+msgid "Mass Upload AP Transaction Header"
+msgstr "批量上传 AP 事务标头"
+
+msgid "Mass Upload AP Transaction Line"
+msgstr "批量上传 AP 交易记录行"
+
+msgid "Mass Upload AP Transaction Detail"
+msgstr "批量上传 AP 交易记录明细"
+
+msgid "All Payments"
+msgstr "所有付款"
+
+msgid "Payment"
+msgstr "付款"
+
+msgid "Search Payment"
+msgstr "搜索付款"
+
+msgid "Payment Header"
+msgstr "付款页眉"
+
+msgid "Confirm Payment"
+msgstr "确认付款"
+
+msgid "Create AP Payment Accounting"
+msgstr "创建 AP 付款会计"
+
+msgid "AP Payment Accounting"
+msgstr "AP 付款会计"
+
+msgid "Mass Upload Payment Header"
+msgstr "批量上传付款页眉"
+
+msgid "Upload Payment Header"
+msgstr "上传付款页眉"
+
+msgid "Mass Upload Payment Line"
+msgstr "批量上传付款行"
+
+msgid "Upload Payment Line"
+msgstr "上传付款行"
+
+msgid "Mass Upload Customer"
+msgstr "大规模上载客户"
+
+msgid "Upload Customer"
+msgstr "上传客户"
+
+msgid "Mass Upload Customer Site"
+msgstr "批量上传客户站点"
+
+msgid "Upload Customer Site"
+msgstr "上传客户站点"
+
+msgid "Account Receviable Transactions"
+msgstr "帐户 Receviable 交易"
+
+msgid "AR Transaction"
+msgstr "应收帐款交易记录"
+
+msgid "Search ReceivableTransaction"
+msgstr "搜索 ReceivableTransaction"
+
+msgid "Search AR Transaction"
+msgstr "搜索应收帐款交易记录"
+
+msgid "Creaet Receviable Accounting"
+msgstr "Creaet Receviable 会计"
+
+msgid "AR Transaction Accounting"
+msgstr "应收账款交易核算"
+
+msgid "Mass Upload AR Transaction"
+msgstr "大规模上载 AR 事务"
+
+msgid "Upload AR Transaction"
+msgstr "上载应收帐款交易记录"
+
+msgid "Upload AR Transaction Line"
+msgstr "上载应收帐款交易记录行"
+
+msgid "Upload AR Transaction Detail"
+msgstr "上载应收帐款交易记录明细"
+
+msgid "AR Receipt"
+msgstr "应收帐款收据"
+
+msgid "AR Multi Receipt"
+msgstr "AR 多收据"
+
+msgid "Multi Receipt"
+msgstr "多收据"
+
+msgid "Confirm AR Multi Receipt"
+msgstr "确认应收账款多收到"
+
+msgid "Confirm Multi Receipt"
+msgstr "确认多收到"
+
+msgid "Search AR Receipt"
+msgstr "搜索 AR 收据"
+
+msgid "Create AR Receipt Accounting"
+msgstr "创建应收帐款收据会计"
+
+msgid "AR Receipt Accounting"
+msgstr "应收帐款收据会计"
+
+msgid "Mass Upload AR Receipt Header"
+msgstr "批量上传 AR 收到标头"
+
+msgid "Upload AR Receipt Header"
+msgstr "上载 AR 收到标头"
+
+msgid "Mass Upload Receipt Line"
+msgstr "批量上传收货行"
+
+msgid "Upload Receipt Line"
+msgstr "上传收货行"
+
+msgid "View AR Receipt"
+msgstr "查看应收帐款收据"
+
+msgid "View Customer"
+msgstr "查看客户"
+
+msgid "View AR Transaction"
+msgstr "查看应收帐款交易记录"
+
+msgid "Sales & Distribution"
+msgstr "销售管理"
+
+msgid "Create & Update Sales Order"
+msgstr "创建和更新销售订单"
+
+msgid "Sales Order"
+msgstr "销售订单"
+
+msgid "Search Sales Order"
+msgstr "搜索销售订单"
+
+msgid "Search SO"
+msgstr "搜索这样"
+
+msgid "View Sales Order"
+msgstr "查看销售订单"
+
+msgid "View SO"
+msgstr "查看这样"
+
+msgid "View All Organizations"
+msgstr "查看所有组织"
+
+msgid "View Orgs"
+msgstr "视图组织"
+
+msgid "Mass Upload Orgs"
+msgstr "大规模上载组织"
+
+msgid "Upload Orgs"
+msgstr "上传组织"
+
+msgid "View Enterprises"
+msgstr "查看企业"
+
+msgid "View Enterprise"
+msgstr "查看企业"
+
+msgid "View Inventory Org"
+msgstr "查看库存组织结构图"
+
+msgid "View Inventory"
+msgstr "查看库存量"
+
+msgid "View Item"
+msgstr "查看项目"
+
+msgid "Mass Upload Items"
+msgstr "大规模上载项目"
+
+msgid "Upload Items"
+msgstr "上载项目"
+
+msgid "Mass Upload Subinventories"
+msgstr "大规模上载 Subinventories"
+
+msgid "Upload Subinventory"
+msgstr "上传 Subinventory"
+
+msgid "Multi Action Subinventory"
+msgstr "多行动 Subinventory"
+
+msgid "Multi Action-Subinventory"
+msgstr "多行动-Subinventory"
+
+msgid "View Locator"
+msgstr "视图定位器"
+
+msgid "Multi Action - Locators"
+msgstr "多行动-定位器"
+
+msgid "Mass Uplaod Locators"
+msgstr "大规模 Uplaod 定位器"
+
+msgid "Upload Locators"
+msgstr "上载定位器"
+
+msgid "View Sub Inventory"
+msgstr "查看子库存量"
+
+msgid "Search UOM"
+msgstr "搜索 UOM"
+
+msgid "Multi Action-UOM"
+msgstr "多行动 UOM"
+
+msgid "Mass Upload UOM"
+msgstr "大规模上载 UOM"
+
+msgid "Upload UOM"
+msgstr "上载 UOM"
+
+msgid "PO Multi Action Receipt"
+msgstr "大埔多收到操作"
+
+msgid "Multi Action Receipt"
+msgstr "收到多操作"
+
+msgid "Mass Upload BOM Header"
+msgstr "批量上传物料清单标题"
+
+msgid "Upload BOM Header"
+msgstr "上传物料清单标题"
+
+msgid "Mass Upload BOM Line"
+msgstr "批量上传物料清单行"
+
+msgid "Upload BOM Line"
+msgstr "上传物料清单行"
+
+msgid "View Resources"
+msgstr "查看资源"
+
+msgid "View Resource"
+msgstr "查看资源"
+
+msgid "Mass Upload BOM Cost Type"
+msgstr "批量上传 BOM 成本的类型"
+
+msgid "Upload Cost Type"
+msgstr "上载成本的类型"
+
+msgid "Mass Upload Resource"
+msgstr "大规模上载资源"
+
+msgid "Upload Resources"
+msgstr "上传资源"
+
+msgid "View BOM Material Element"
+msgstr "查看物料清单物料元素"
+
+msgid "View Material Element"
+msgstr "查看材料元素"
+
+msgid "View Over Head"
+msgstr "查看头顶"
+
+msgid "Mass Upload Department"
+msgstr "上载党群工作部"
+
+msgid "Upload Department"
+msgstr "上传部"
+
+msgid "View Standard Operation"
+msgstr "视图的标准操作"
+
+msgid "View Routing"
+msgstr "查看路由"
+
+msgid "Mass Upload Routing Header"
+msgstr "批量上传路由头"
+
+msgid "Upload Routing Header"
+msgstr "上传路由头"
+
+msgid "Mass Upload Routing Line"
+msgstr "批量上传路由线"
+
+msgid "Upload Routing Line"
+msgstr "上传路由线"
+
+msgid "Mass Upload Routing Detail"
+msgstr "批量上传路由的详细信息"
+
+msgid "Upload Routing Detail"
+msgstr "上传路由的详细信息"
+
+msgid "View Work Order"
+msgstr "查看工作订单"
+
+msgid "Mass Upload Work Order"
+msgstr "批量上传工作订单"
+
+msgid "Upload Work Order"
+msgstr "上传工作订单"
+
+msgid "Mass Upload WIP Material Transaction"
+msgstr "大规模上载 WIP 物料交易记录"
+
+msgid "Upload WO Inv Transaction"
+msgstr "上载窝 Inv 事务"
+
+msgid "Search WIP Material Transaction"
+msgstr "搜索 WIP 物料交易记录"
+
+msgid "Search WO Inv Transaction"
+msgstr "搜索窝 Inv 事务"
+
+msgid "View Resource Trnx"
+msgstr "查看资源 Trnx"
+
+msgid "Costing"
+msgstr "成本核算"
+
+msgid "Create & View Item Cost"
+msgstr "创建和查看项目成本"
+
+msgid "Item Cost"
+msgstr "物料成本"
+
+msgid "View Item Cost"
+msgstr "查看项目成本"
+
+msgid "Search Item Cost"
+msgstr "搜索物料成本"
+
+msgid "Standard Cost Upate"
+msgstr "标准成本更新"
+
+msgid "Cost Update"
+msgstr "成本的更新"
+
+msgid "Search BOM view"
+msgstr "搜索物料清单视图"
+
+msgid "Search BOM V"
+msgstr "搜索物料清单 V"
+
+msgid "Indented BOM"
+msgstr "缩进的物料清单"
+
+msgid "Program - Standard Cost Update"
+msgstr "程序-标准成本更新"
+
+msgid "Prg Cost Update"
+msgstr "Prg 成本更新"
+
+msgid "Search All Programs Requests"
+msgstr "搜索程序的所有请求"
+
+msgid "Search Program Requests"
+msgstr "搜索程序请求"
+
+msgid "Start Program"
+msgstr "启动程序"
+
+msgid "Start Main Program"
+msgstr "启动主要程序"
+
+msgid "Item Cost Rollup"
+msgstr "项目成本的汇总"
+
+msgid "Cost Rollup"
+msgstr "成本的汇总"
+
+msgid "Cost Rollup Program"
+msgstr "成本汇总程序"
+
+msgid "Prg Cost RollUp"
+msgstr "Prg 成本汇总"
+
+msgid "Check for circular BOM"
+msgstr "检查循环物料清单"
+
+msgid "Check Circular BOM"
+msgstr "检查循环物料清单"
+
+msgid "Search Item Cost View"
+msgstr "项目成本的视图中搜索"
+
+msgid "Search Item Cost V"
+msgstr "项目搜索成本 V"
+
+msgid "Create & Update Requisition"
+msgstr "创建和更新申请"
+
+msgid "Requisition"
+msgstr "申请"
+
+msgid "View Requisition"
+msgstr "查看申请"
+
+msgid "Search Requisition"
+msgstr "搜索征用"
+
+msgid "All Programs"
+msgstr "所有的程序"
+
+msgid "Program"
+msgstr "程序"
+
+msgid "Search WIP Accounting Group"
+msgstr "搜索 WIP 会计组"
+
+msgid "Search Accounting Group"
+msgstr "搜索会计组"
+
+msgid "View Users"
+msgstr "查看用户"
+
+msgid "View User"
+msgstr "查看用户"
+
+msgid "Convert Requisition To Po"
+msgstr "申请转换为宝"
+
+msgid "Convert Requisition"
+msgstr "转换申请"
+
+msgid "Supplier View Search"
+msgstr "供应商视图搜索"
+
+msgid "Supplier V Search"
+msgstr "V 的供应商搜索"
+
+msgid "View Sourcing Rule"
+msgstr "查看采购规则"
+
+msgid "Search Sourcing Rule"
+msgstr "搜索采购规则"
+
+msgid "Serach Req Header"
+msgstr "搜索要求标头"
+
+msgid "Forecast & Planning"
+msgstr "预测和规划"
+
+msgid "Create & Update Forecast"
+msgstr "创建和更新预测"
+
+msgid "View Forecast"
+msgstr "查看预测"
+
+msgid "Search Forecast"
+msgstr "搜索预测"
+
+msgid "Create & Update Source List"
+msgstr "创建和更新源列表"
+
+msgid "Search FP Source List"
+msgstr "搜索 FP 源列表"
+
+msgid "Min Max Planner"
+msgstr "Min Max 规划师"
+
+msgid "Search Min Max Planner"
+msgstr "搜索 Min Max 规划师"
+
+msgid "Search MinMax Planner"
+msgstr "搜索极小极大规划师"
+
+msgid "Min Max Demand"
+msgstr "最小最大需量"
+
+msgid "Min Max Planner Suggestions"
+msgstr "Min Max 规划建议"
+
+msgid "Calculate Min Max Numbers"
+msgstr "计算最小最大数字"
+
+msgid "Update Item Min Max Parameters"
+msgstr "更新项目 Min Max 参数"
+
+msgid "Min Max Planner Work Bench"
+msgstr "Min Max 策划人工作台"
+
+msgid "Create Supply - MinMax Program"
+msgstr "创建供应-极小极大程序"
+
+msgid "Create Supply - MinMax"
+msgstr "创建供应-极小极大"
+
+msgid "View Requisition Interface Lines"
+msgstr "查看申请界面行"
+
+msgid "View Requisition Interface"
+msgstr "视图征用界面"
+
+msgid "Import All Requisition"
+msgstr "导入所有申请"
+
+msgid "Import Requisition"
+msgstr "进口申请"
+
+msgid "Purchasing Control"
+msgstr "采购控制"
+
+msgid "Material Requirement Planning"
+msgstr "物料需求计划"
+
+msgid "MRP"
+msgstr "物料需求计划"
+
+msgid "Master Demand Schedule"
+msgstr "主需求计划"
+
+msgid "MDS"
+msgstr "MDS"
+
+msgid "Search MDS"
+msgstr "搜索 MDS"
+
+msgid "Search MRP"
+msgstr "搜索物料需求计划"
+
+msgid "Calculate MRP Demand"
+msgstr "计算 MRP 需求"
+
+msgid "View MRP Demand"
+msgstr "查看 MRP 需求"
+
+msgid "Copy/Merge/Load MDS"
+msgstr "复制，合并，装载 MDS"
+
+msgid "Load MDS"
+msgstr "MDS 负载"
+
+msgid "MRP Planned Orders"
+msgstr "MRP 计划订单"
+
+msgid "Planned Orders"
+msgstr "计划的订单"
+
+msgid "MRP Work Bench"
+msgstr "MRP 工作台"
+
+msgid "MRP Exceptions"
+msgstr "MRP 例外"
+
+msgid "Pick Sales Order"
+msgstr "选择销售订单"
+
+msgid "Sales Order Shipping Control"
+msgstr "销售订单航运控制"
+
+msgid "Shipping Control"
+msgstr "航运控制"
+
+msgid "Reports & Analysis"
+msgstr "报告和分析"
+
+msgid "RA"
+msgstr "RA"
+
+msgid "Onhand By Subinventory"
+msgstr "现有的 Subinventory"
+
+msgid "Onhand Analysis"
+msgstr "现有分析"
+
+msgid "Purchasing Analysis"
+msgstr "采购分析"
+
+msgid "Item & product Line Analysis"
+msgstr "项目与产品线分析"
+
+msgid "Item & Product Line"
+msgstr "项目及产品线"
+
+msgid "WIP Value Analysis"
+msgstr "WIP 价值分析"
+
+msgid "Ship Sales Orders"
+msgstr "船舶销售订单"
+
+msgid "Ship Sales Order"
+msgstr "船舶销售订单"
+
+msgid "TAX Codes & Rates"
+msgstr "税码和费率"
+
+msgid "TAX Codes"
+msgstr "税码"
+
+msgid "Tax Regions"
+msgstr "税地区"
+
+msgid "Tax Region"
+msgstr "税地区"
+
+msgid "Search Blocks"
+msgstr "搜索块"
+
+msgid "Role Access"
+msgstr "角色的访问权限"
+
+msgid "All Extensions"
+msgstr "所有的扩展"
+
+msgid "Search All Comments"
+msgstr "搜索所有的批注"
+
+msgid "Search Comment"
+msgstr "搜索注释"
+
+msgid "Review & Update Comments"
+msgstr "审查和更新注释"
+
+msgid "Comments Multi Action"
+msgstr "评论多行动"
+
+msgid "Multi Action - Content Type"
+msgstr "多行动 — — 内容类型"
+
+msgid "Search All Contents"
+msgstr "搜索所有内容"
+
+msgid "Search Contents"
+msgstr "搜索内容"
+
+msgid "Basis Site Information"
+msgstr "依据网站信息"
+
+msgid "Site Information"
+msgstr "站点信息"
+
+msgid "Price List Header"
+msgstr "价格列表标题"
+
+msgid "Search Price Lists"
+msgstr "搜索价目表"
+
+msgid "Search Price List"
+msgstr "搜索价格列表"
+
+msgid "Search Price List Line"
+msgstr "搜索价格清单行"
+
+msgid "Profile"
+msgstr "配置文件"
+
+msgid "Search Profile"
+msgstr "搜索模板"
+
+msgid "Sales Document Type"
+msgstr "销售凭证类型"
+
+msgid "Search Sales Document Type"
+msgstr "搜索销售凭证类型"
+
+msgid "Search SD Document Type"
+msgstr "搜索 SD 文档类型"
+
+msgid "Create & Update Process Flow"
+msgstr "创建和更新过程流"
+
+msgid "Search Delivries"
+msgstr "搜索 Delivries"
+
+msgid "Sales Deliveries"
+msgstr "销售交货"
+
+msgid "Search URL Alias"
+msgstr "搜索 URL 别名"
+
+msgid "search.php?class_name=ar_transaction_type"
+msgstr "search.php?class_name=ar_transaction_type"
+
+msgid "Search AR Transaction Type"
+msgstr "搜索应收帐款交易记录类型"
+
+msgid "Search AR Transaction Source"
+msgstr "搜索应收帐款交易记录来源"
+
+msgid "Purchasing"
+msgstr "采购"
+
+msgid "Suppliers"
+msgstr "供应商"
+
+msgid "Setups"
+msgstr "设置"
+
+msgid "AR Transaction Interface"
+msgstr "应收帐款交易界面"
+
+msgid "Transaction Interface"
+msgstr "交易界面"
+
+msgid "All AR Programs"
+msgstr "应收帐款的所有程序"
+
+msgid "Programs"
+msgstr "程序"
+
+msgid "Import Transaction"
+msgstr "导入交易记录"
+
+msgid "Unpaid Transactions"
+msgstr "未缴的交易"
+
+msgid "Create & Update Bank"
+msgstr "创建和更新银行"
+
+msgid "Bank"
+msgstr "银行"
+
+msgid "Search Banks"
+msgstr "搜索银行"
+
+msgid "Generic Organization"
+msgstr "通用组织"
+
+msgid "Bank Account"
+msgstr "银行账户"
+
+msgid "Search Bank Account"
+msgstr "搜索银行帐户"
+
+msgid "Search Bank View"
+msgstr "搜索银行的观点"
+
+msgid "Search Bank V"
+msgstr "搜索银行 V"
+
+msgid "AR Receipt Source"
+msgstr "应收账款收到源"
+
+msgid "Search AR Receipt Source"
+msgstr "搜索 AR 收到源"
+
+msgid "Search Receipt Source"
+msgstr "搜索收到源"
+
+msgid "Search Customer Header"
+msgstr "搜索客户标题"
+
+msgid "Bank Account View"
+msgstr "银行帐户视图"
+
+msgid "Inventory Setup"
+msgstr "库存设置"
+
+msgid "ABC Valuation"
+msgstr "ABC 估价"
+
+msgid "Inventory ABC Valuation"
+msgstr "库存 ABC 估价"
+
+msgid "Search ABC Valuation"
+msgstr "搜索 ABC 估价"
+
+msgid "Inventory Programs"
+msgstr "库存计划"
+
+msgid "New ABC Valuation"
+msgstr "新的 ABC 估价"
+
+msgid "ABC Valuation Result"
+msgstr "ABC 估价结果"
+
+msgid "Valuation Result"
+msgstr "评估结果"
+
+msgid "MRP View"
+msgstr "MRP 视图"
+
+msgid "MRP Demand View"
+msgstr "MRP 需求视图"
+
+msgid "ABC Assignment"
+msgstr "ABC 赋值"
+
+msgid "Search ABC Assignment"
+msgstr "搜索 ABC 赋值"
+
+msgid "Inventory Count"
+msgstr "存货盘点"
+
+msgid "Count Entries - Cycle Count & Physical Inventort"
+msgstr "计数条目-周期盘点物理 Inventort"
+
+msgid "Count Entries"
+msgstr "计数条目"
+
+msgid "Search Count Schedule"
+msgstr "搜索次数的日程安排"
+
+msgid "Search Count Entries"
+msgstr "搜索次数的条目"
+
+msgid "Approve Count Entries"
+msgstr "审核条目计数"
+
+msgid "Inter Org Transfer"
+msgstr "除组织结构图转移"
+
+msgid "Search Inter Org Transfer"
+msgstr "搜索除组织结构图转移"
+
+msgid "GL Setup"
+msgstr "GL 安装程序"
+
+msgid "Currency Conversion"
+msgstr "货币换算"
+
+msgid "View Currency Conversion"
+msgstr "视图币种转换"
+
+msgid "Search Currency Conversion"
+msgstr "搜索币种转换"
+
+msgid "Purchaing Setup"
+msgstr "招安装程序"
+
+msgid "Human Resource"
+msgstr "人力资源管理"
+
+msgid "Employee"
+msgstr "员工"
+
+msgid "Organization Jobs"
+msgstr "组织工作"
+
+msgid "Job"
+msgstr "工作"
+
+msgid "Search Job"
+msgstr "搜索工作"
+
+msgid "HR Positions"
+msgstr "HR 的职位"
+
+msgid "Search Position"
+msgstr "搜索位置"
+
+msgid "Position Hierarchy"
+msgstr "职位层次结构"
+
+msgid "Hierarchy"
+msgstr "层次结构"
+
+msgid "Search Hierarchy"
+msgstr "搜索层次结构"
+
+msgid "Compensation Element"
+msgstr "补偿元件"
+
+msgid "Search Compensation Element"
+msgstr "搜索补偿元件"
+
+msgid "Search Element"
+msgstr "搜索元素"
+
+msgid "Employee Element Entry Assignment"
+msgstr "雇员元素条目分配"
+
+msgid "Element Entry / Assignment"
+msgstr "元素项 / 分配"
+
+msgid "Search Element Entry"
+msgstr "搜索元素条目"
+
+msgid "Search Employee"
+msgstr "搜索员工"
+
+msgid "Employee Education"
+msgstr "职工教育"
+
+msgid "Education"
+msgstr "教育"
+
+msgid "Experience"
+msgstr "经验"
+
+msgid "Termination"
+msgstr "终止"
+
+msgid "Employee Salary"
+msgstr "雇员的工资"
+
+msgid "Payroll Setup"
+msgstr "工资设置"
+
+msgid "Payroll Payment Method"
+msgstr "工资支付方法"
+
+msgid "Search Payroll Payment Methods"
+msgstr "搜索工资支付方法"
+
+msgid "HR Payroll"
+msgstr "HR 薪资"
+
+msgid "Search Payroll"
+msgstr "搜索工资单"
+
+msgid "Leave Types"
+msgstr "休假类型"
+
+msgid "Search Leave Type"
+msgstr "搜索休假类型"
+
+msgid "Leave Balance"
+msgstr "离开平衡"
+
+msgid "Approval Limit"
+msgstr "审核限制"
+
+msgid "Search Approval Limit"
+msgstr "搜索审核限制"
+
+msgid "Approval Object"
+msgstr "审核对象"
+
+msgid "Search Approval Object"
+msgstr "搜索审批对象"
+
+msgid "Approval Limit Assignment"
+msgstr "审批限额分配"
+
+msgid "Notifications"
+msgstr "通知"
+
+msgid "Search Notification"
+msgstr "搜索通知"
+
+msgid "Apply Leave Self Service"
+msgstr "申请的事假自助服务"
+
+msgid "Apply Leave - SS"
+msgstr "申请休假-SS"
+
+msgid "Search Leave"
+msgstr "搜索离开"
+
+msgid "Definen Block"
+msgstr "Definen 块"
+
+msgid "My Notifications"
+msgstr "我的通知"
+
+msgid "User Leave Blalance"
+msgstr "用户离开 Blalance"
+
+msgid "Leave Blalance"
+msgstr "离开 Blalance"
+
+msgid "Search All Leave"
+msgstr "搜索所有休假"
+
+msgid "Leave Entitlement"
+msgstr "可享有的假期"
+
+msgid "Search Leave Entitlement"
+msgstr "搜索产假"
+
+msgid "User Position View"
+msgstr "用户位置视图"
+
+msgid "Blanket Release"
+msgstr "橡皮布释放"
+
+msgid "Document Sequence"
+msgstr "文档序列"
+
+msgid "Approved Supplier List"
+msgstr "合格供应商名册"
+
+msgid "Search ASL"
+msgstr "搜索 ASL"
+
+msgid "ASL Document"
+msgstr "ASL 文档"
+
+msgid "Search Blanket"
+msgstr "搜索毯子"
+
+msgid "form.php?class_name=sys_hold&mode=9"
+msgstr "form.php?class_name=sys_hold & 模式 = 9"
+
+msgid "System Hold"
+msgstr "系统暂停"
+
+msgid "Search Hold"
+msgstr "搜索举行"
+
+msgid "Release Hold"
+msgstr "解除保留"
+
+msgid "Docs on Hold"
+msgstr "搁置的文档"
+
+msgid "RFQ"
+msgstr "SFp"
+
+msgid "RFQ & Quotes"
+msgstr "询价及报价"
+
+msgid "Search RFQ"
+msgstr "搜索询价"
+
+msgid "User Supplier Association"
+msgstr "用户供应商协会"
+
+msgid "Supplier User"
+msgstr "供应商用户"
+
+msgid "Search Supplier User"
+msgstr "搜索供应商用户"
+
+msgid "Quote"
+msgstr "报价"
+
+msgid "Search Quote"
+msgstr "报价搜索"
+
+msgid "Search AP Transactions"
+msgstr "搜索 AP 交易"
+
+msgid "Search Payments"
+msgstr "搜索付款"
+
+msgid "Journal Activity"
+msgstr "日记帐的活动"
+
+msgid "Un Posted Balance"
+msgstr "联合国发布的平衡"
+
+msgid "Search Serial Number"
+msgstr "搜索序列号"
+
+msgid "Generate Predefined Serial Number"
+msgstr "生成预定义的序列号"
+
+msgid "Generate Serial Number"
+msgstr "生成序列号"
+
+msgid "Serial Transactions"
+msgstr "串行交易"
+
+msgid "BOM"
+msgstr "物料清单"
+
+msgid "BOM Programs"
+msgstr "物料清单的程序"
+
+msgid "Search Routing Header"
+msgstr "搜索路由头"
+
+msgid "Search Lot Number"
+msgstr "搜索批号"
+
+msgid "Lot Transactions"
+msgstr "批次交易记录"
+
+msgid "Search Forecast Group"
+msgstr "搜索预测组"
+
+msgid "FP Setup"
+msgstr "FP 安装程序"
+
+msgid "Planning Control"
+msgstr "规划控制"
+
+msgid "Extra Field"
+msgstr "额外的字段"
+
+msgid "Search Extra Field"
+msgstr "搜索额外的字段"
+
+msgid "Work Order Work Bench"
+msgstr "工作订单工作台"
+
+msgid "WO Work Bench"
+msgstr "窝工作台"
+
+msgid "Manual Forecast Consumption"
+msgstr "手册预测消费"
+
+msgid "Manual Consumption"
+msgstr "手动消费"
+
+msgid "Forecast Line Date v"
+msgstr "预测行日期 v"
+
+msgid "Forecast Over Consumption"
+msgstr "过度消费预测"
+
+msgid "Favourite"
+msgstr "最喜欢的"
+
+msgid "Convert To Production"
+msgstr "转换为生产"
+
+msgid "Custom report subinventory_locators - Subinventory Locators"
+msgstr "自定义报告 subinventory_locators-Subinventory 定位器"
+
+msgid "Custom report subinventory_locators"
+msgstr "自定义报表 subinventory_locators"
+
+msgid "Custom report option_type - option types"
+msgstr "自定义报告 option_type-选项类型"
+
+msgid "Custom report option_type"
+msgstr "自定义报表 option_type"
+
+msgid "Custom report Onhand - Curret Onhand"
+msgstr "目前现有的自定义报表现有-"
+
+msgid "Custom report Onhand"
+msgstr "现有的自定义报表"
+
+msgid "Custom Report - Onhand Inventory Wise"
+msgstr "自定义报表-现有库存智者"
+
+msgid "Custom Report - Onhand"
+msgstr "自定义报表-现有"
+
+msgid "Secondary Field"
+msgstr "辅助字段"
+
+msgid "Search Secondary Field"
+msgstr "搜索辅助字段"
+
+msgid "Secondary Field Instance"
+msgstr "辅助字段实例"
+
+msgid "Change Control - ECO, MCO and Other Changes requests"
+msgstr "变更控制-生态、 MCO 和其他更改请求"
+
+msgid "Change Control"
+msgstr "变更控制"
+
+msgid "Change Order Template"
+msgstr "更改订单模板"
+
+msgid "CO Template"
+msgstr "CO 模板"
+
+msgid "Search Change Order Template"
+msgstr "搜索更改订单模板"
+
+msgid "Search Template"
+msgstr "搜索模板"
+
+msgid "Change Order"
+msgstr "更改顺序"
+
+msgid "Search CO"
+msgstr "搜索公司"
+
+msgid "Document & Analysis"
+msgstr "文档与分析"
+
+msgid "Search Process Flow"
+msgstr "搜索流程"
+
+msgid "Minmax Board"
+msgstr "极小极大板"
+
+msgid "Programs for Document Administrator"
+msgstr "为文档管理员程序"
+
+msgid "Implement Change Order"
+msgstr "实施更改顺序"
+
+msgid "Implement CO"
+msgstr "实施公司"
+
+msgid "RMA Receipt"
+msgstr "RMA 收据"
+
+msgid "Compensation Element Multi Entry"
+msgstr "补偿元素多项"
+
+msgid "Element Entry Tpl Header"
+msgstr "元素条目第三方物流头"
+
+msgid "Search Element Entry Tpl Header"
+msgstr "搜索元素条目第三方物流头"
+
+msgid "Home"
+msgstr "首页"
+
+msgid "Payslip Header"
+msgstr "工资单页眉"
+
+msgid "Search All Paths"
+msgstr "所有的路径中搜索"
+
+msgid "Search Payslip"
+msgstr "搜索工资单"
+
+msgid "HR Programs"
+msgstr "人力资源计划"
+
+msgid "Generate Payroll Schedule"
+msgstr "生成工资单日程表"
+
+msgid "Process Payroll Schedule"
+msgstr "过程工资单日程表"
+
+msgid "Process Payroll"
+msgstr "处理工资单"
+
+msgid "Payroll Process"
+msgstr "发薪过程"
+
+msgid "Search Payroll Process"
+msgstr "搜索的工资处理"
+
+msgid "Employee Self Service"
+msgstr "员工自助服务"
+
+msgid "Self Service"
+msgstr "自助服务"
+
+msgid "Apply Leave"
+msgstr "申请事假"
+
+msgid "User Payslip"
+msgstr "用户工资单"
+
+msgid "Payslip"
+msgstr "工资单"
+
+msgid "Cancel Payroll Process"
+msgstr "取消工资过程"
+
+msgid "Confirm Payroll Process"
+msgstr "确认发薪过程"
+
+msgid "Barcode Setups"
+msgstr "条码设置"
+
+msgid "Barcode"
+msgstr "条码"
+
+msgid "Barcode Label Format Header"
+msgstr "条码标签格式标头"
+
+msgid "Label Format"
+msgstr "标签格式"
+
+msgid "Search Label Format Header"
+msgstr "搜索标签格式标头"
+
+msgid "Search Label Format"
+msgstr "搜索标签格式"
+
+msgid "Printer"
+msgstr "打印机"
+
+msgid "Search Printer"
+msgstr "搜索打印机"
+
+msgid "Label Auto Trigger"
+msgstr "标签自动触发"
+
+msgid "Label Request"
+msgstr "标签要求"
+
+msgid "Search Label Request"
+msgstr "搜索标签请求"
+
+msgid "Static Label"
+msgstr "静态标签"
+
+msgid "Search Static Label"
+msgstr "搜索静态标签"
+
+msgid "Master Data"
+msgstr "主数据"
+
+msgid "Contact"
+msgstr "联系人"
+
+msgid "Search Contact"
+msgstr "搜索联系人"
+
+msgid "Contact Reference"
+msgstr "接触参考"
+
+msgid "Sales Lead"
+msgstr "销售线索"
+
+msgid "Lead"
+msgstr "铅"
+
+msgid "Search Lead"
+msgstr "搜索铅"
+
+msgid "SD Setup"
+msgstr "SD 安装程序"
+
+msgid "HR Team"
+msgstr "HR 团队"
+
+msgid "Search Team"
+msgstr "搜索队"
+
+msgid "Create & View Sales Team"
+msgstr "创建和查看销售团队"
+
+msgid "Opportunity"
+msgstr "机会"
+
+msgid "Search Opportunity"
+msgstr "搜索的机会"
+
+msgid "Sales Quote Header"
+msgstr "销售报价页眉"
+
+msgid "Sales Quote"
+msgstr "销售报价"
+
+msgid "Search Quotes"
+msgstr "搜索报价"
+
+msgid "View Transaction"
+msgstr "查看交易记录"
+
+msgid "Vew AP Transaction"
+msgstr "北区 AP 交易"
+
+msgid "Self-Service Education"
+msgstr "自助服务教育"
+
+msgid "Employee Experience Self Service"
+msgstr "员工自助服务的经验"
+
+msgid "Employee Experience"
+msgstr "员工经验"
+
+msgid "Web Contact"
+msgstr "Web 联系人"
+
+msgid "WOL Transaction"
+msgstr "WOL 交易"
+
+msgid "Site Search"
+msgstr "网站搜索"
+
+msgid "Search WOL Transaction"
+msgstr "搜索 WOL 交易"
+
+msgid "Fixed Asset"
+msgstr "固定资产"
+
+msgid "Asset Book"
+msgstr "资产帐簿"
+
+msgid "Search Asset Book"
+msgstr "搜索资产帐簿"
+
+msgid "Search Asset Category"
+msgstr "搜索资产类别"
+
+msgid "Search Depreciation Method"
+msgstr "搜索折旧法"
+
+msgid "Asset"
+msgstr "资产"
+
+msgid "Search Asset"
+msgstr "搜索资产"
+
+msgid "Asset Book Information"
+msgstr "资产簿信息"
+
+msgid "Asset Book Info"
+msgstr "资产簿信息"
+
+msgid "Search Asset Book Info"
+msgstr "搜索资产簿信息"
+
+msgid "Fa Setups"
+msgstr "Fa 设置"
+
+msgid "Depreciation Header"
+msgstr "折旧页眉"
+
+msgid "Depreciation"
+msgstr "折旧"
+
+msgid "Search Depreciation"
+msgstr "搜索折旧"
+
+msgid "Fixed Asset Programs"
+msgstr "固定资产的程序"
+
+msgid "Run Depreciation"
+msgstr "计提折旧"
+
+msgid "Point Of Sale - POS"
+msgstr "销售点点"
+
+msgid "Point Of Sale"
+msgstr "销售点"
+
+msgid "POS Transaction"
+msgstr "POS 交易"
+
+msgid "Search Point of Sale Transaction"
+msgstr "搜索点的销售交易记录"
+
+msgid "Search POS Trnx"
+msgstr "搜索 POS Trnx"
+
+msgid "Upload Value Group Line"
+msgstr "上载值组线"
+
+msgid "Search Lines"
+msgstr "搜索行"
+
+msgid "Update Description"
+msgstr "更新描述"
+
+msgid "Geneledger Programs"
+msgstr "Geneledger 程序"
+
+msgid "Balance Sheet - Summary"
+msgstr "资产负债表-摘要"
+
+msgid "Balance Sheet Detailed"
+msgstr "详细的资产负债表"
+
+msgid "Income Statement"
+msgstr "损益表"
+
+msgid "Income Statement - Detailed"
+msgstr "损益表-详细"
+
+msgid "GL Reports"
+msgstr "GL 报告"
+
+msgid "Reports"
+msgstr "报告"
+
+msgid "All Account Combinations"
+msgstr "所有的帐户组合"
+
+msgid "Balance Sheet - Multi Format Reporting"
+msgstr "资产负债表-多格式报告"
+
+msgid "Balance Sheet - MFR"
+msgstr "资产负债表-熔体流动速率"
+
+msgid "Income Statement - Multi Format Report"
+msgstr "损益表-多格式报告"
+
+msgid "Income Stmt - MFR"
+msgstr "收入 Stmt-熔体流动速率"
+
+msgid "Trial Balance - General Ledger"
+msgstr "试算平衡表-总帐"
+
+msgid "Trial Balance"
+msgstr "试算平衡表"
+
+msgid "Terminal"
+msgstr "终端"
+
+msgid "Search Terminals"
+msgstr "搜寻终端机"
+
+msgid "Search Terminal"
+msgstr "搜索终端"
+
+msgid "Hybrid Point Of Sale Terminal"
+msgstr "混合的销售点终端"
+
+msgid "Hybrid POS"
+msgstr "混合 POS"
+
+msgid "Setup - POS"
+msgstr "设置-POS"
+
+msgid "Inventory Control"
+msgstr "库存控制"
+
+msgid "Location Default"
+msgstr "默认位置"
+
+msgid "Search Location Default"
+msgstr "搜索位置默认"
+
+msgid "Physical Store"
+msgstr "物理存储区"
+
+msgid "Store"
+msgstr "存储区"
+
+msgid "Search Store"
+msgstr "搜索存储"
+
+msgid "Sync POS with Inventory"
+msgstr "POS 与库存同步"
+
+msgid "Sync POS"
+msgstr "同步 POS"
+
+msgid "Barcode List Header"
+msgstr "条码列表标题"
+
+msgid "Barcode List"
+msgstr "条形码清单"
+
+msgid "Search Barcode List"
+msgstr "搜索条码列表"
+
+msgid "Supply Analysis"
+msgstr "供给分析"
+
+msgid "Config BOM"
+msgstr "配置物料清单"
+
+msgid "Search Config BOM"
+msgstr "搜索配置物料清单"
+
+msgid "Print Pick List"
+msgstr "打印选取列表"
+
+msgid "Pick List"
+msgstr "选择列表"
+
+msgid "Asset Maintenance"
+msgstr "资产维护"
+
+msgid "Search Asset Number"
+msgstr "搜索资产编号"
+
+msgid "Search SO Header"
+msgstr "搜索等标题"
+
+msgid "Sales Control"
+msgstr "销售控制"
+
+msgid "Create & Updatecollections"
+msgstr "创建 & Updatecollections"
+
+msgid "collections"
+msgstr "收藏"
+
+msgid "Search Collections"
+msgstr "搜索集合"
+
+msgid "Group Access"
+msgstr "组的访问权限"
+
+msgid "Sales Region"
+msgstr "销售区域"
+
+msgid "DB Update"
+msgstr "数据库更新"
+
+msgid "Block Information"
+msgstr "块信息"
+
+msgid "Basic Info"
+msgstr "基本信息"
+
+msgid "Block Content"
+msgstr "阻止的内容"
+
+msgid "Block Name"
+msgstr "块的名称"
+
+msgid "Block Info"
+msgstr "块信息"
+
+msgid "Action"
+msgstr "行动"
+
+msgid "Block"
+msgstr "块"
+
+msgid "Enabled"
+msgstr "启用"
+
+msgid "Show Title"
+msgstr "显示标题"
+
+msgid "Cache Content"
+msgstr "缓存内容"
+
+msgid "Category Header"
+msgstr "类别标题"
+
+msgid "Future"
+msgstr "未来"
+
+msgid "Parent Name"
+msgstr "父名称"
+
+msgid "Attachments"
+msgstr "附件"
+
+msgid "Notes"
+msgstr "备注"
+
+msgid "Other Details"
+msgstr "其他详细信息"
+
+msgid "Numbers"
+msgstr "数字"
+
+msgid "Others"
+msgstr "其他人"
+
+msgid "Categories"
+msgstr "类别"
+
+msgid "Actions"
+msgstr "行动"
+
+msgid "Content Type Fields/Columns"
+msgstr "内容类型的字段/列"
+
+msgid "Main"
+msgstr "主要"
+
+msgid "Required"
+msgstr "必填"
+
+msgid "enum Values"
+msgstr "枚举值"
+
+msgid "Option List"
+msgstr "选项列表"
+
+msgid "System Path"
+msgstr "系统路径"
+
+msgid "Role Details"
+msgstr "角色详细信息"
+
+msgid "Class & Access Details"
+msgstr "类 & 访问详细信息"
+
+msgid "Class Access"
+msgstr "类的访问"
+
+msgid "Class/Object Name"
+msgstr "类/对象名称"
+
+msgid "Maintenance"
+msgstr "维护"
+
+msgid "Home Page"
+msgstr "主页"
+
+msgid "Put in Maintenance Mode"
+msgstr "放在维护模式"
+
+msgid "Maintenance Message"
+msgstr "维护消息"
+
+msgid "Basic"
+msgstr "基本"
+
+msgid "Messages"
+msgstr "消息"
+
+msgid "Site Logo Path"
+msgstr "网站徽标路径"
+
+msgid "Access Denied Message"
+msgstr "拒绝访问的消息"
+
+msgid "User Details"
+msgstr "用户详细信息"
+
+msgid "Preference"
+msgstr "首选项"
+
+msgid "Retype Password"
+msgstr "请重新键入密码"
+
+msgid "Employee Name"
+msgstr "雇员姓名"
+
+msgid "Identification"
+msgstr "标识"
+
+msgid "User Access Details"
+msgstr "用户访问详细信息"
+
+msgid "Role Control"
+msgstr "角色的控制"
+
+msgid "User Group Assignment"
+msgstr "用户组分配"
+
+msgid "User Role Access Id"
+msgstr "用户角色访问 Id"
+
+msgid "Role Name"
+msgstr "角色名称"
+
+msgid "Group Access Id"
+msgstr "组访问 Id"
+
+msgid "Group Name"
+msgstr "组名称"
+
+msgid "User Group Details"
+msgstr "用户组的详细信息"
+
+msgid "Group Access Details"
+msgstr "组访问详细信息"
+
+msgid "Organization Access"
+msgstr "组织访问"
+
+msgid "function"
+msgstr "功能"
+
+msgid "Finance"
+msgstr "财政部"
+
+msgid "Payment Lines"
+msgstr "付款行"
+
+msgid "References"
+msgstr "引用"
+
+msgid "Seq"
+msgstr "Seq"
+
+msgid "Line Id"
+msgstr "行 Id"
+
+msgid "Trnx Id"
+msgstr "Trnx Id"
+
+msgid "Trnx Number"
+msgstr "Trnx 号"
+
+msgid "Payment Amount"
+msgstr "付款金额"
+
+msgid "Paid"
+msgstr "支付"
+
+msgid "Remaining"
+msgstr "剩余"
+
+msgid "Ref Key Name"
+msgstr "Ref 密钥名称"
+
+msgid "Ref Key Value"
+msgstr "Ref 关键字值"
+
+msgid "View Ref Doc"
+msgstr "视图 Ref Doc"
+
+msgid "BU Assignment"
+msgstr "埠分配"
+
+msgid "Address Details"
+msgstr "详细地址"
+
+msgid "Corporate Address Id"
+msgstr "公司地址 Id"
+
+msgid "Supplier Site Details"
+msgstr "供应商站点详细信息"
+
+msgid "Receiving"
+msgstr "接收"
+
+msgid "Site Address"
+msgstr "站点地址"
+
+msgid "Quantity Tolerance"
+msgstr "差量"
+
+msgid "Receipt Days Tolerance"
+msgstr "收据天公差"
+
+msgid "Supplier Business Unit Association"
+msgstr "供应商业务单位协会"
+
+msgid "Supplier BU Details"
+msgstr "供应商埠详细信息"
+
+msgid "Local Addresses"
+msgstr "本地地址"
+
+msgid "Invoice & Payment"
+msgstr "发票及付款"
+
+msgid "Ship To Site Id"
+msgstr "船到站点 Id"
+
+msgid "Bill To Site Id"
+msgstr "条例草案对站点 Id"
+
+msgid "AP Transaction Header"
+msgstr "AP 事务标头"
+
+msgid "Payments"
+msgstr "付款"
+
+msgid "Transaction Lines & Details"
+msgstr "交易记录行及细节"
+
+msgid "Other Info"
+msgstr "其他信息"
+
+msgid "Accounting Details"
+msgstr "会计的详细信息"
+
+msgid "Detail Id"
+msgstr "详细 Id"
+
+msgid "Account"
+msgstr "帐户"
+
+msgid "Is Asset"
+msgstr "是资产"
+
+msgid "Project Header Id"
+msgstr "项目标题 Id"
+
+msgid "Project Line Id"
+msgstr "项目行 Id"
+
+msgid "Trnx Header Id"
+msgstr "Trnx 标题 Id"
+
+msgid "Trnx Line Id"
+msgstr "Trnx 行 Id"
+
+msgid "Cancel Line"
+msgstr "取消行"
+
+msgid "Un match Only"
+msgstr "只有与联合国达成匹配"
+
+msgid "Change Quantity"
+msgstr "更改数量"
+
+msgid "Customer Information"
+msgstr "客户信息"
+
+msgid "Customer Type "
+msgstr "客户类型"
+
+msgid "Customer Site Details"
+msgstr "客户站点详细信息"
+
+msgid "Sales"
+msgstr "销售"
+
+msgid "New Contact"
+msgstr "新联系人"
+
+msgid "Customer BU Assignment"
+msgstr "客户埠分配"
+
+msgid "Customer BU Details"
+msgstr "客户埠详细信息"
+
+msgid "Accounts"
+msgstr "帐户"
+
+msgid "Receipt Header"
+msgstr "收据标头"
+
+msgid "Document Print"
+msgstr "文档打印"
+
+msgid "Receipt Lines"
+msgstr "收据行"
+
+msgid "Cumulative Receipt"
+msgstr "累积的收据"
+
+msgid "Reporting"
+msgstr "报告"
+
+msgid "Id"
+msgstr "Id"
+
+msgid "Street"
+msgstr "街"
+
+msgid "Region Name"
+msgstr "区域名称"
+
+msgid "Receivable Transaction Header"
+msgstr "应收帐款交易记录标头"
+
+msgid "Basic-2"
+msgstr "基本 2"
+
+msgid "Summary"
+msgstr "摘要"
+
+msgid "Receipts"
+msgstr "收据"
+
+msgid "Change Status"
+msgstr "更改状态"
+
+msgid "Trnx Status"
+msgstr "Trnx 状态"
+
+msgid "Detail"
+msgstr "详细"
+
+msgid "GL-Amount"
+msgstr "GL 金额"
+
+msgid "Journal_Created?"
+msgstr "Journal_Created 吗？"
+
+msgid "SO Header Id"
+msgstr "所以标题 Id"
+
+msgid "SO Line Id"
+msgstr "如此行 Id"
+
+msgid "Project Line Idt"
+msgstr "项目行内幕交易审裁处"
+
+msgid "Receivable Transaction Source"
+msgstr "应收帐款交易记录来源"
+
+msgid "Transaction Source Details"
+msgstr "交易记录源详细信息"
+
+msgid "Transaction Type Details"
+msgstr "交易记录类型的详细信息"
+
+msgid "Bar code Label Auto Trigger"
+msgstr "条码标签自动触发"
+
+msgid "Label Association"
+msgstr "标签协会"
+
+msgid "Values"
+msgstr "值"
+
+msgid "Default Printer"
+msgstr "默认打印机"
+
+msgid "Barcode Label Format"
+msgstr "条码标签格式"
+
+msgid "Data Object"
+msgstr "数据对象"
+
+msgid "Object/Table Name"
+msgstr "对象/表名称"
+
+msgid "No Of Copies"
+msgstr "没有的副本"
+
+msgid "Static Labels"
+msgstr "静态标签"
+
+msgid "Generate Label"
+msgstr "生成标签"
+
+msgid "Cost Type Header"
+msgstr "成本的类型标头"
+
+msgid "Resource Assignment"
+msgstr "资源分配"
+
+msgid "Overhead Rate"
+msgstr "间接费用分配率"
+
+msgid "Over Head"
+msgstr "在头上"
+
+msgid "Over Head Details"
+msgstr "在头的详细信息"
+
+msgid "Rate Assignment"
+msgstr "率的分配"
+
+msgid "Resources"
+msgstr "资源"
+
+msgid "OSP"
+msgstr "OSP"
+
+msgid "Equipment"
+msgstr "设备"
+
+msgid "Note"
+msgstr "注"
+
+msgid "Resource Cost Id"
+msgstr "成本的资源 Id"
+
+msgid "Common Routing"
+msgstr "常见的路由"
+
+msgid "WIP"
+msgstr "WIP"
+
+msgid "Effectivity"
+msgstr "有效性"
+
+msgid "Data Collection"
+msgstr "数据收集"
+
+msgid "Routing Seq"
+msgstr "路由 Seq"
+
+msgid "Standard Op"
+msgstr "标准 Op"
+
+msgid "Referenced"
+msgstr "引用"
+
+msgid "Operation Details"
+msgstr "操作详细信息"
+
+msgid "Resource Seq"
+msgstr "资源 Seq"
+
+msgid "Usage"
+msgstr "使用"
+
+msgid "Schedule"
+msgstr "附表"
+
+msgid "24 Hours"
+msgstr "24 小时"
+
+msgid "Stnd. Rate"
+msgstr "率 Stnd。"
+
+msgid "Count Point"
+msgstr "计数点"
+
+msgid "Auto Charge"
+msgstr "自动费用"
+
+msgid "Back flush"
+msgstr "回冲"
+
+msgid "MTQ"
+msgstr "NT2"
+
+msgid "ECO Implemented"
+msgstr "实施生态"
+
+msgid "Roll up"
+msgstr "卷起"
+
+msgid "Cumm. Yield"
+msgstr "Cumm。产量"
+
+msgid "Standard Operation Details"
+msgstr "标准操作的详细信息"
+
+msgid "Assignment Id"
+msgstr "作业 Id"
+
+msgid "BOM Header"
+msgstr "物料清单标题"
+
+msgid "Common BOM"
+msgstr "通用物料清单"
+
+msgid "BOM Lines"
+msgstr "物料清单行"
+
+msgid "Control"
+msgstr "控制"
+
+msgid "Planning"
+msgstr "规划"
+
+msgid "In cost Rollup"
+msgstr "在成本汇总"
+
+msgid "Configured BOM Header"
+msgstr "已配置物料清单标题"
+
+msgid "BOMLine Id"
+msgstr "BOMLine Id"
+
+msgid "Routing Sequenceg"
+msgstr "路由 Sequenceg"
+
+msgid "Usage Qty"
+msgstr "使用数量"
+
+msgid "Line Qty"
+msgstr "线数量"
+
+msgid "Transacted Qty"
+msgstr "事务处理的数量"
+
+msgid "Process Steps"
+msgstr "过程步骤"
+
+msgid "Secondary Fields"
+msgstr "二级栏目"
+
+msgid "Flow Diagram"
+msgstr "工艺流程图"
+
+msgid "CO Action"
+msgstr "CO 行动"
+
+msgid "Sub Process Name"
+msgstr "子进程名称"
+
+msgid "Process Actions"
+msgstr "工艺操作"
+
+msgid "Action Id"
+msgstr "操作 Id"
+
+msgid "PF Line Id"
+msgstr "PF 线 Id"
+
+msgid "Action Type"
+msgstr "操作类型"
+
+msgid "Change Control Template"
+msgstr "更改控制模板"
+
+msgid "Template Fields"
+msgstr "模板字段"
+
+msgid "Mandatory Field"
+msgstr "必填字段"
+
+msgid "List Option Type"
+msgstr "列表选项类型"
+
+msgid "Item Cost Header"
+msgstr "项目成本的标头"
+
+msgid "Fixed Asset Details"
+msgstr "固定资产的详细信息"
+
+msgid "Tracking Info"
+msgstr "跟踪信息"
+
+msgid "Assignments"
+msgstr "工作分配"
+
+msgid "Expense"
+msgstr "费用"
+
+msgid "Class Controls"
+msgstr "类的控件"
+
+msgid "Natural Accounts"
+msgstr "自然的帐户"
+
+msgid "Book Name"
+msgstr "书的名字"
+
+msgid "Asset Book Information Details"
+msgstr "资产书信息详细信息"
+
+msgid "Asset Book Category Association"
+msgstr "资产图书类别协会"
+
+msgid "Cost Accounts"
+msgstr "成本的帐户"
+
+msgid "Depreciation Accounts"
+msgstr "折旧账户"
+
+msgid "Cost Ac"
+msgstr "成本的交流"
+
+msgid "Clearing Ac"
+msgstr "清除交流"
+
+msgid "CIP Cost Ac"
+msgstr "CIP 成本的交流"
+
+msgid "CIP Clearing Ac"
+msgstr "CIP 结算交流"
+
+msgid "Depreciation Expense"
+msgstr "折旧费用"
+
+msgid "Bonus Expense"
+msgstr "奖金支出"
+
+msgid "Bonus Reserve"
+msgstr "奖金储备"
+
+msgid "Revalue Reserve"
+msgstr "重估储备"
+
+msgid "Unplanned Depreciation"
+msgstr "计划外的折旧"
+
+msgid "Confirm Depreciation"
+msgstr "确认折旧"
+
+msgid "Post Depreciation"
+msgstr "过帐折旧"
+
+msgid "Depreciation Details"
+msgstr "折旧详细信息"
+
+msgid "Rates"
+msgstr "利率"
+
+msgid "Calculation"
+msgstr "计算"
+
+msgid "Rate Percentage"
+msgstr "率百分比"
+
+msgid "Forecast Header"
+msgstr "预测标头"
+
+msgid "Forecast Lines"
+msgstr "预测行"
+
+msgid "Bucket"
+msgstr "斗"
+
+msgid "Current"
+msgstr "当前"
+
+msgid "Total Current"
+msgstr "总电流"
+
+msgid "Forecast Details"
+msgstr "预测详细信息"
+
+msgid "Consumption Id"
+msgstr "消费 Id"
+
+msgid "Forecasts"
+msgstr "预测"
+
+msgid "MDS Header"
+msgstr "MDS 页眉"
+
+msgid "MDS Lines"
+msgstr "MDS 行"
+
+msgid "Date"
+msgstr "日期"
+
+msgid "Source Header"
+msgstr "源标题"
+
+msgid "Source Line"
+msgstr "源行"
+
+msgid "MRP Planner"
+msgstr "MRP 计划"
+
+msgid "Planning Control Header"
+msgstr "规划控制标头"
+
+msgid "Planning Control Details"
+msgstr "规划控制细节"
+
+msgid "Planning Info"
+msgstr "规划信息"
+
+msgid "Source List Header"
+msgstr "源列表标题"
+
+msgid "Source List Lines"
+msgstr "源列表行"
+
+msgid "Financial Calendars"
+msgstr "财经日历"
+
+msgid "Calendar Period Details"
+msgstr "日历期间的详细信息"
+
+msgid "Basic - View Only"
+msgstr "基本结构-仅视图"
+
+msgid "Prefix"
+msgstr "前缀"
+
+msgid "Adjusting Period"
+msgstr "调整期"
+
+msgid "Chart Of Account"
+msgstr "会计科目表"
+
+msgid "Chart of Account Details"
+msgstr "帐户详细信息的图表"
+
+msgid "Qualifiers"
+msgstr "预选赛"
+
+msgid "Display"
+msgstr "显示"
+
+msgid "Chart Of Account Code Combinations"
+msgstr "帐户代码组合图表"
+
+msgid "Field Values"
+msgstr "字段值"
+
+msgid "CC Id"
+msgstr "CC Id"
+
+msgid "Code Combination"
+msgstr "代码组合"
+
+msgid "Currency Conversions"
+msgstr "币种转换"
+
+msgid "Conversion Details"
+msgstr "转换详细信息"
+
+msgid "Journal Header"
+msgstr "日志标题"
+
+msgid "Reference Details"
+msgstr "参考详细信息"
+
+msgid "Rate & Amounts"
+msgstr "率及金额"
+
+msgid "Journal Lines"
+msgstr "日记帐行"
+
+msgid "Debit"
+msgstr "借记卡"
+
+msgid "Credit"
+msgstr "信贷"
+
+msgid "Ledger Dr"
+msgstr "分类帐博士"
+
+msgid "Ledger Cr"
+msgstr "分类帐 Cr"
+
+msgid "Ref Type"
+msgstr "Ref 类型"
+
+msgid "Ref Value"
+msgstr "Ref 值"
+
+msgid "Ledger Header"
+msgstr "会计科目表头"
+
+msgid "Ledger Options"
+msgstr "分类帐选项"
+
+msgid "Balancing Segment Values"
+msgstr "平衡段值"
+
+msgid "Balance Segment Value"
+msgstr "平衡段值"
+
+msgid "Schedule & Discount Lines"
+msgstr "附表及折扣行"
+
+msgid "Discount"
+msgstr "折扣"
+
+msgid "Schedule Id"
+msgstr "日程安排 Id"
+
+msgid "Date of Month"
+msgstr "月份的日期"
+
+msgid "Discount Id"
+msgstr "折扣 Id"
+
+msgid "GL Periods"
+msgstr "GL 期"
+
+msgid "Accounting Period"
+msgstr "会计期间"
+
+msgid "Current Open Period"
+msgstr "目前开放的时期"
+
+msgid "Next Period"
+msgstr "下一期"
+
+msgid "PeriodId"
+msgstr "PeriodId"
+
+msgid "Cal Name"
+msgstr "Cal 名称"
+
+msgid "Cal Id"
+msgstr "Cal Id"
+
+msgid "Approval Limit Header"
+msgstr "审批限额标头"
+
+msgid "Approval Limit Lines"
+msgstr "批准限制行"
+
+msgid "Lowest Range"
+msgstr "最低范围"
+
+msgid "Highest Range"
+msgstr "最大的范围"
+
+msgid "Compensation Element Entry"
+msgstr "补偿元素项"
+
+msgid "Element Entry Lines"
+msgstr "元素条目行"
+
+msgid "Monetary Value"
+msgstr "货币值"
+
+msgid "Compensation Element Entry Template"
+msgstr "补偿元素输入模板"
+
+msgid "Details Info"
+msgstr "详细信息"
+
+msgid "Employee Header"
+msgstr "员工头"
+
+msgid "Personal"
+msgstr "个人"
+
+msgid "Employee Details"
+msgstr "雇员详细信息"
+
+msgid "Financial Info"
+msgstr "财务信息"
+
+msgid "Work Experience"
+msgstr "工作经验"
+
+msgid "On Boarding"
+msgstr "登机"
+
+msgid "Exit"
+msgstr "退出"
+
+msgid "Job History"
+msgstr "作业历史记录"
+
+msgid "Supervisor"
+msgstr "主管"
+
+msgid "Last Salary"
+msgstr "最后的薪水"
+
+msgid "Projects"
+msgstr "项目"
+
+msgid "Salary Component Break Up"
+msgstr "工资组件分手"
+
+msgid "Employee Termination"
+msgstr "解雇员工"
+
+msgid "Requirements"
+msgstr "要求"
+
+msgid "job Details & Responsibility"
+msgstr "作业详细信息和责任"
+
+msgid "Leave Details"
+msgstr "留下的详细资料"
+
+msgid "Current Balance"
+msgstr "当前余额"
+
+msgid "Leave/Year"
+msgstr "离开/年"
+
+msgid "Available Balance"
+msgstr "可用余额"
+
+msgid "Total Leave"
+msgstr "全部假期"
+
+msgid "Leave/Period"
+msgstr "假期 /"
+
+msgid "Leave Application"
+msgstr "离开应用程序"
+
+msgid "Approver"
+msgstr "审批者"
+
+msgid "Date Details"
+msgstr "日期的详细信息"
+
+msgid "Bank Details"
+msgstr "银行详细信息"
+
+msgid "Generate Schedule"
+msgstr "生成日程安排"
+
+msgid "Line Details"
+msgstr "行详细信息"
+
+msgid "Schedules"
+msgstr "附表"
+
+msgid "Employee Pay Slip"
+msgstr "员工工资单"
+
+msgid "Salary Details"
+msgstr "工资细节"
+
+msgid "Position Header"
+msgstr "位置标头"
+
+msgid "Team Lead"
+msgstr "团队领导"
+
+msgid "Team Members"
+msgstr "团队成员"
+
+msgid "Member Name"
+msgstr "成员名称"
+
+msgid "ABC Assignment Header"
+msgstr "ABC 任务标题"
+
+msgid "Assign Items"
+msgstr "分配项目"
+
+msgid "Sequence Number"
+msgstr "序列号"
+
+msgid "% of Items"
+msgstr "项目所占比例"
+
+msgid "% of Value"
+msgstr "值的 %"
+
+msgid "View & Update Items"
+msgstr "查看并更新项目"
+
+msgid "Item ABC Class"
+msgstr "物料 ABC 分类"
+
+msgid "Master Item Id"
+msgstr "主项目 Id"
+
+msgid "Valuation Details"
+msgstr "估价的详细信息"
+
+msgid "Scope"
+msgstr "范围"
+
+msgid "Count Header"
+msgstr "计数头"
+
+msgid "Variance Limit/Approval"
+msgstr "方差极限/批准"
+
+msgid "Count Frequence"
+msgstr "计数频率"
+
+msgid "Count Id"
+msgstr "计数 Id"
+
+msgid "StatusStatus"
+msgstr "StatusStatus"
+
+msgid "Code On Count"
+msgstr "在计数上的代码"
+
+msgid "Count Entry Header"
+msgstr "计数条目头"
+
+msgid "Line Defaults"
+msgstr "行的默认值"
+
+msgid "Inventory Count Name"
+msgstr "库存盘点名称"
+
+msgid "Adjustments"
+msgstr "调整"
+
+msgid "Count By"
+msgstr "计数"
+
+msgid "Adjustment Ac"
+msgstr "调整交流"
+
+msgid "System Quantity"
+msgstr "系统的数量"
+
+msgid "Counted Quantity"
+msgstr "盘点的数量"
+
+msgid "Adjusted Quantity"
+msgstr "调整的数量"
+
+msgid "Adjustment Amount"
+msgstr "调整金额"
+
+msgid "Inter-Org Transfer Header"
+msgstr "除组织结构图传输报头"
+
+msgid "Header Id"
+msgstr "标题 Id"
+
+msgid "Inter-Org Transfer Lines"
+msgstr "除组织结构图转移行"
+
+msgid "General Info"
+msgstr "一般信息"
+
+msgid "Transfer"
+msgstr "转让"
+
+msgid "Lot Serial"
+msgstr "多序列"
+
+msgid "From SubInv"
+msgstr "从 SubInv"
+
+msgid "To SubInv"
+msgstr "对 SubInv"
+
+msgid "Ref Name"
+msgstr "引用名称"
+
+msgid "Add Lot Numbers"
+msgstr "添加批号"
+
+msgid "Add Serial Numbers"
+msgstr "添加序列号"
+
+msgid "Inventory Transaction "
+msgstr "库存交易记录"
+
+msgid "Lot & Serial"
+msgstr "很多和序列号"
+
+msgid "Transaction Id"
+msgstr "交易记录 Id"
+
+msgid "Kit Item"
+msgstr "工具箱项"
+
+msgid "Kit Config"
+msgstr "包配置"
+
+msgid "Config Id"
+msgstr "配置 Id"
+
+msgid "Doc. Number"
+msgstr "凭证号"
+
+msgid "Doc. Id"
+msgstr "文档 Id"
+
+msgid "Ref Doc"
+msgstr "Ref Doc"
+
+msgid "WO BOM Line Id"
+msgstr "窝物料清单行 Id"
+
+msgid "Journal Header Id"
+msgstr "日志标题 Id"
+
+msgid "Inv Assignment"
+msgstr "Inv 分配"
+
+msgid "Revisions"
+msgstr "修订"
+
+msgid "ECO"
+msgstr "生态"
+
+msgid "Eff. Start Date"
+msgstr "切实可行的开始日期"
+
+msgid "Item/Template"
+msgstr "项目/模板"
+
+msgid "Manufacturing"
+msgstr "制造业"
+
+msgid "Financial"
+msgstr "金融"
+
+msgid "Secondary"
+msgstr "中学"
+
+msgid "Lead Time Information"
+msgstr "铅的时间信息"
+
+msgid "Lot Information"
+msgstr "很多信息"
+
+msgid "Serial Information"
+msgstr "串行信息"
+
+msgid "Measurement Information"
+msgstr "测量信息"
+
+msgid "Rule Information"
+msgstr "规则信息"
+
+msgid "Cost Information"
+msgstr "成本的信息"
+
+msgid "Order Modifiers"
+msgstr "命令修饰符"
+
+msgid "Time Fences"
+msgstr "时限"
+
+msgid "Min Max Planning"
+msgstr "最小最大规划"
+
+msgid "Safety Stock"
+msgstr "安全库存"
+
+msgid "Item Transaction Location Default"
+msgstr "项目交易记录位置默认"
+
+msgid "Location Defaults"
+msgstr "位置的默认值"
+
+msgid "Item-Location"
+msgstr "项目位置"
+
+msgid "Item"
+msgstr "项目"
+
+msgid "Storage Locator"
+msgstr "存储定位器"
+
+msgid "Dimensions"
+msgstr "尺寸"
+
+msgid "Capacity"
+msgstr "能力"
+
+msgid "Transactions"
+msgstr "交易记录"
+
+msgid "Relations"
+msgstr "关系"
+
+msgid "From Sub Inventory"
+msgstr "从子库存"
+
+msgid "Transaction Details"
+msgstr "交易记录详细信息"
+
+msgid "From SubInv Id"
+msgstr "从 SubInv Id"
+
+msgid "From Locator Id "
+msgstr "从定位器 Id"
+
+msgid "To SubInv Id"
+msgstr "到 SubInv Id"
+
+msgid "To Locator Id "
+msgstr "到定位器 Id"
+
+msgid "Receipt Header Id"
+msgstr "收到标题 Id"
+
+msgid "PO Info"
+msgstr "大埔信息"
+
+msgid "Receipt"
+msgstr "收据"
+
+msgid "Line #"
+msgstr "线 #"
+
+msgid "PO #"
+msgstr "PO #"
+
+msgid "PO Line #"
+msgstr "蒲线 #"
+
+msgid "Shipment #"
+msgstr "装运 #"
+
+msgid "Shipment Qty"
+msgstr "装运数量"
+
+msgid "Received Qty"
+msgstr "接收的数量"
+
+msgid "New Received Qty"
+msgstr "新接收的数量"
+
+msgid "Supplier #"
+msgstr "供应商 #"
+
+msgid "Site Id"
+msgstr "站点 Id"
+
+msgid "Site #"
+msgstr "网站 #"
+
+msgid "Site"
+msgstr "网站"
+
+msgid "RMA Receipt Header"
+msgstr "RMA 收到标头"
+
+msgid "RMA Info"
+msgstr "RMA 信息"
+
+msgid "Sales Order #"
+msgstr "销售订单 #"
+
+msgid "SO Line #"
+msgstr "所以线 #"
+
+msgid "New Received Quantity"
+msgstr "新接收的数量"
+
+msgid "Serial Number Details"
+msgstr "序列号的详细信息"
+
+msgid "Subinventory Details"
+msgstr "Subinventory 的详细信息"
+
+msgid "Unit Of Measure"
+msgstr "度量单位"
+
+msgid "UOM Details"
+msgstr "计量单位的详细信息"
+
+msgid "Relationship"
+msgstr "关系"
+
+msgid "Primary UOM"
+msgstr "主要计量单位"
+
+msgid "Bank Names"
+msgstr "银行名称"
+
+msgid "Transaction"
+msgstr "交易记录"
+
+msgid "Other"
+msgstr "其他"
+
+msgid "Prices"
+msgstr "价格"
+
+msgid "Restrictions"
+msgstr "限制"
+
+msgid "Regime"
+msgstr "制度"
+
+msgid "Jurisdiction"
+msgstr "管辖权"
+
+msgid "In or Out"
+msgstr "或缩小"
+
+msgid "Dr or Cr"
+msgstr "Dr、 Cr"
+
+msgid "Region Calculation"
+msgstr "区域计算"
+
+msgid "Ad hoc Rate"
+msgstr "特设率"
+
+msgid "Exemption"
+msgstr "豁免"
+
+msgid "Printed Name"
+msgstr "打印的名称"
+
+msgid "Offset Tax"
+msgstr "抵扣税款"
+
+msgid "Address Header"
+msgstr "地址标头"
+
+msgid "BO Details"
+msgstr "博详细信息"
+
+msgid "Type of Business Org"
+msgstr "类型的业务组织结构图"
+
+msgid "Enterprise Name"
+msgstr "企业名称"
+
+msgid "Enterprise Header"
+msgstr "企业标头"
+
+msgid "Inventory Org Header"
+msgstr "库存组织结构图标题"
+
+msgid "Item Attribute"
+msgstr "项目属性"
+
+msgid "Sourcing"
+msgstr "采购"
+
+msgid "Costing Details"
+msgstr "成本计算的详细信息"
+
+msgid "Legal Org Header"
+msgstr "法律组织结构图标题"
+
+msgid "Legal Org Details"
+msgstr "法律组织结构图的详细信息"
+
+msgid "Ledger Details"
+msgstr "分类账详细信息"
+
+msgid "Organization"
+msgstr "组织"
+
+msgid "Contacts"
+msgstr "联系人"
+
+msgid "Web-site"
+msgstr "Web 站点"
+
+msgid "Associate Contact"
+msgstr "关联联系人"
+
+msgid "Supplier Site"
+msgstr "供应商网站"
+
+msgid "MPN"
+msgstr "MPN"
+
+msgid "Documents"
+msgstr "文件"
+
+msgid "Min Order Qty"
+msgstr "最小订单数量"
+
+msgid "Lot Multiplier"
+msgstr "很多乘数"
+
+msgid "ASL Basic Info"
+msgstr "ASL 基本信息"
+
+msgid "ASL Line Id"
+msgstr "ASL 行 Id"
+
+msgid "ASL Documents"
+msgstr "ASL 文件"
+
+msgid "Detail Data"
+msgstr "明细数据"
+
+msgid "Delivery"
+msgstr "交货"
+
+msgid "Shipment Id"
+msgstr "装运 Id"
+
+msgid "Ship To Location"
+msgstr "船到位置"
+
+msgid "Charge Ac"
+msgstr "充电交流"
+
+msgid "Accrual Ac"
+msgstr "权责发生制交流"
+
+msgid "Budget Ac"
+msgstr "预算交流"
+
+msgid "PPV Ac"
+msgstr "PPV 交流"
+
+msgid "Received"
+msgstr "收到"
+
+msgid "Accepted"
+msgstr "接受"
+
+msgid "Delivered"
+msgstr "交付"
+
+msgid "Invoiced"
+msgstr "开票"
+
+msgid "Purchasing Info"
+msgstr "购买信息"
+
+msgid "PO Lines & Shipments"
+msgstr "采购订单行和装运"
+
+msgid "Agreement Details"
+msgstr "协议详细信息"
+
+msgid "Receiving Org"
+msgstr "接收的组织结构图"
+
+msgid "Shipments"
+msgstr "出货"
+
+msgid "Agreed Quantity"
+msgstr "商定的数量"
+
+msgid "Released Quantity"
+msgstr "发布的数量"
+
+msgid "Agreed Amount"
+msgstr "同意支付"
+
+msgid "On Hold"
+msgstr "搁置"
+
+msgid "Hold Details"
+msgstr "保存详细信息"
+
+msgid "Configured"
+msgstr "配置"
+
+msgid "Item Configuration"
+msgstr "项目配置"
+
+msgid "Ref Number"
+msgstr "编号"
+
+msgid "Quotation"
+msgstr "报价"
+
+msgid "Detailed Description"
+msgstr "详细的说明"
+
+msgid "Quote Lines"
+msgstr "报价单行"
+
+msgid "Factors"
+msgstr "因素"
+
+msgid "Requirement Id"
+msgstr "要求 Id"
+
+msgid "Max Evaluation Points"
+msgstr "马克斯评估点"
+
+msgid "Supplier Value"
+msgstr "供应商的价值"
+
+msgid "Min Agreement Qty"
+msgstr "最小的协议数量"
+
+msgid "Replenishment LT"
+msgstr "LT 补货"
+
+msgid "Blanket Agreement & Releases"
+msgstr "橡皮布的协议及版本"
+
+msgid "BPA Line"
+msgstr "双酚 A 线"
+
+msgid "Requisition Header"
+msgstr "申请标头"
+
+msgid "Requisition Lines & Shipments"
+msgstr "申请行及出货"
+
+msgid "BPA Number"
+msgstr "双酚 A 的数量"
+
+msgid "Request For Quotation"
+msgstr "询价"
+
+msgid "RFQ Lines & Details"
+msgstr "询价行及细节"
+
+msgid "Sourcing Rule Header"
+msgstr "采购规则头"
+
+msgid "Sourcing Lines"
+msgstr "采购行"
+
+msgid "Allocation % "
+msgstr "分配 %"
+
+msgid "POS Barcode List"
+msgstr "POS 条形码清单"
+
+msgid "List Lines"
+msgstr "列表行"
+
+msgid "Final Amount"
+msgstr "最终金额"
+
+msgid "POS Inventory Control"
+msgstr "POS 库存控制"
+
+msgid "POS Terminal"
+msgstr "POS 终端"
+
+msgid "Sales Items"
+msgstr "销售物料"
+
+msgid "Lines"
+msgstr "行"
+
+msgid "Items"
+msgstr "项目"
+
+msgid "Hybrid Sales Items"
+msgstr "混合销售的项目"
+
+msgid "Delivery Header"
+msgstr "传递头"
+
+msgid "SO Info"
+msgstr "如此的信息"
+
+msgid "Delivery Line Id"
+msgstr "交货行 Id"
+
+msgid "SO Id"
+msgstr "所以 Id"
+
+msgid "SO"
+msgstr "所以"
+
+msgid "Shipped Qty"
+msgstr "发货的数量"
+
+msgid "SO Qty Change"
+msgstr "如此数量变化"
+
+msgid "Line Action"
+msgstr "行操作"
+
+msgid "Weight UOM"
+msgstr "重量计量单位"
+
+msgid "Volume UOM"
+msgstr "体积计量单位"
+
+msgid "Defaults"
+msgstr "默认值"
+
+msgid "Existing Info"
+msgstr "现有信息"
+
+msgid "Lead Details"
+msgstr "潜在客户详细信息"
+
+msgid "Primary Sales Person"
+msgstr "初级销售人员"
+
+msgid "Lead Contact"
+msgstr "铅接触"
+
+msgid "Sales Opportunity"
+msgstr "销售机会"
+
+msgid "Price"
+msgstr "价格"
+
+msgid "Dates"
+msgstr "日期"
+
+msgid "Shipping Org"
+msgstr "航运组织结构图"
+
+msgid "Order Header Id"
+msgstr "订单标题 Id"
+
+msgid "Order Line Id"
+msgstr "订单行 Id"
+
+msgid "Defaulting Rules"
+msgstr "违约规则"
+
+msgid "Future Rules"
+msgstr "未来的规则"
+
+msgid "Shipping Info"
+msgstr "航运信息"
+
+msgid "Sales Order / RMA Header"
+msgstr "销售订单 / RMA 页眉"
+
+msgid "Copy Document"
+msgstr "复制文档"
+
+msgid "SO / RMA Lines & Shipments"
+msgstr "所以 / RMA 线及出货"
+
+msgid "Configuration"
+msgstr "配置"
+
+msgid "References-2"
+msgstr "引用 2"
+
+msgid "Schedule Ship / Receipt Date"
+msgstr "船舶调度 / 收据日期"
+
+msgid "Actual Ship / Receipt Date"
+msgstr "实船 / 收据日期"
+
+msgid "WO Header Id"
+msgstr "窝标题 Id"
+
+msgid "Config Details"
+msgstr "配置详细信息"
+
+msgid "Destination Typet"
+msgstr "目的地 Typet"
+
+msgid "Shipped /Received Quantity"
+msgstr "装运 / 接收的数量"
+
+msgid "Sub Inventories"
+msgstr "子清单"
+
+msgid "Building"
+msgstr "建设"
+
+msgid "Floor"
+msgstr "地板"
+
+msgid "Wing"
+msgstr "翼"
+
+msgid "Extra Fields"
+msgstr "多余的字段"
+
+msgid "Extra Field Details"
+msgstr "额外的字段的详细信息"
+
+msgid "Instances"
+msgstr "实例"
+
+msgid "No Instances Found"
+msgstr "未找到任何实例"
+
+msgid "Notification"
+msgstr "通知"
+
+msgid "Notification Details"
+msgstr "通知详细信息"
+
+msgid "Reference Doc"
+msgstr "参考文档"
+
+msgid "Option Header"
+msgstr "选项标头"
+
+msgid "Option Code"
+msgstr "选项代码"
+
+msgid "Process Flow Header"
+msgstr "过程流头"
+
+msgid "Process Flow Lines"
+msgstr "过程流线"
+
+msgid "Decision"
+msgstr "决定"
+
+msgid "Next Seq On Pass"
+msgstr "在传递上的下一个 Seq"
+
+msgid "Next Seq If Fail"
+msgstr "下一个 Seq 如果失败"
+
+msgid "Next Seq On Return"
+msgstr "返回下一个 Seq"
+
+msgid "Profile Header"
+msgstr "配置文件标题"
+
+msgid "Profile Values"
+msgstr "配置文件值"
+
+msgid "Custom Query"
+msgstr "自定义查询"
+
+msgid "Validation"
+msgstr "验证"
+
+msgid "Value Group Lines"
+msgstr "值组行"
+
+msgid "Parent Relationship"
+msgstr "父关系"
+
+msgid "Is Parent"
+msgstr "是父"
+
+msgid "Allow Budgeting"
+msgstr "允许预算编制"
+
+msgid "Allow Posting"
+msgstr "允许过帐"
+
+msgid "Accounting Group Details"
+msgstr "会计组详细信息"
+
+msgid "Actual Accounts"
+msgstr "实际帐户"
+
+msgid "Variance Accounts"
+msgstr "方差帐户"
+
+msgid "Transfer Info"
+msgstr "转让信息"
+
+msgid "Reference Info"
+msgstr "参考信息"
+
+msgid "Finance Info"
+msgstr "财务信息"
+
+msgid "BOM Seq"
+msgstr "物料清单 Seq"
+
+msgid "BOM Id"
+msgstr "物料清单 Id"
+
+msgid "Journal Id"
+msgstr "日志 Id"
+
+msgid "WIP Move Transaction"
+msgstr "WIP 移动交易"
+
+msgid "Tracking"
+msgstr "跟踪"
+
+msgid "Operation"
+msgstr "操作"
+
+msgid "Scrap"
+msgstr "废钢"
+
+msgid "BOM "
+msgstr "物料清单"
+
+msgid "Quantity Status"
+msgstr "数量状况"
+
+msgid "Sequence"
+msgstr "序列"
+
+msgid "Queue"
+msgstr "队列"
+
+msgid "Running"
+msgstr "运行"
+
+msgid "Rejected"
+msgstr "拒绝"
+
+msgid "Scrapped"
+msgstr "报废"
+
+msgid "To Move"
+msgstr "要移动"
+
+msgid "From Seq"
+msgstr "从 Seq"
+
+msgid "To Seq"
+msgstr "Seq 到"
+
+msgid "Available Qty"
+msgstr "可用数量"
+
+msgid "From Step"
+msgstr "从步骤"
+
+msgid "To Step"
+msgstr "第步"
+
+msgid "Move Qty"
+msgstr "移动数量"
+
+msgid "Issued"
+msgstr "发出"
+
+msgid "Applied"
+msgstr "应用"
+
+msgid "History"
+msgstr "历史"
+
+msgid "BOM & Routing"
+msgstr "物料清单和路由"
+
+msgid "Routing-2"
+msgstr "路由 2"
+
+msgid "Routing - Data Collection"
+msgstr "路由数据收集"
+
+msgid "BOM-2"
+msgstr "物料清单 2"
+
+msgid "WO Routing Id"
+msgstr "禾路由 Id"
+
+msgid "Resource Details"
+msgstr "资源详细信息"
+
+msgid "DetailId"
+msgstr "DetailId"
+
+msgid "Required Qty"
+msgstr "所需的数量"
+
+msgid "Applied Qty"
+msgstr "应用的数量"
+
+msgid "Open Qty"
+msgstr "开放数量"
+
+msgid "Progress"
+msgstr "进展"
+
+msgid "WO BOM Id"
+msgstr "窝物料清单 Id"
+
+msgid "Open"
+msgstr "开放"
+
+msgid "Work Order Completion/Return"
+msgstr "工作订单完成/返回"
+
+msgid "Work Order Details"
+msgstr "工作订单详细信息"
+
+msgid "Document Qty"
+msgstr "文档数量"
+
+msgid "Transaction Qty"
+msgstr "交易数量"
+
+msgid "Work Order Less Transaction"
+msgstr "工作订单少交易"
+
+msgid "WOL Transaction Details"
+msgstr "WOL 交易记录详细信息"
+
+msgid "Line "
+msgstr "线"
+
+msgid "PO "
+msgstr "宝"
+
+msgid "PO Line "
+msgstr "蒲线"
+
+msgid "Shipment "
+msgstr "装运"
+
+msgid "Supplier "
+msgstr "供应商"
+
+msgid "Site "
+msgstr "网站"
+
+msgid "Sales Order "
+msgstr "销售订单"
+
+msgid "SO Line "
+msgstr "如此行"
+

@@ -1133,6 +1133,12 @@ EOD;
   echo $this->date_field($name, $value, '20', '', 'anyDate', '', 1);
  }
 
+  public function l_date_fieldAnyDay_m($name, $value, $div_class = '') {
+  $div_class = $div_class . ' anyDate';
+  echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo $this->date_field($name, $value, '20', '', 'anyDate', 1);
+ }
+ 
  public function date_fieldAnyDay_r($name, $value, $readonly) {
   return $this->date_field($name, $value, '20', '', 'anyDate', '', $readonly);
  }

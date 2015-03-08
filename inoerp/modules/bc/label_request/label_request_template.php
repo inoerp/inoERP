@@ -1,28 +1,26 @@
 <div id ="form_header">
- <form action=""  method="post" id="bc_label_request"  name="bc_label_request"><span class="heading">Label Request </span>
+ <form action=""  method="post" id="bc_label_request"  name="bc_label_request">
+  <span class="heading"><?php echo gettext('Label Request') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Notes</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field"> 
-        <li> 
-         <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bc_label_request_id select_popup clickable">
-          Request Id</label><?php $f->text_field_dsr('bc_label_request_id') ?>
-         <a name="show" href="form.php?class_name=bc_label_request&<?php echo "mode=$mode"; ?>" class="show document_id bc_label_request_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <li><?php $f->l_text_field_dr_withSearch('bc_label_request_id') ?>
+         <a name="show" href="form.php?class_name=bc_label_request&<?php echo "mode=$mode"; ?>" class="show document_id bc_label_request_id">
+          <i class="fa fa-refresh"></i></a> 
         </li>
-        <li><label>Printer Name</label><?php echo $f->select_field_from_object('sys_printer_id', sys_printer::find_all(), 'sys_printer_id', 'printer_name', $$class->sys_printer_id, 'sys_printer_id', '', '', 1); ?> 					</li>
-        <li><label>Transaction Type</label><?php echo $f->select_field_from_object('transaction_type_id', transaction_type::find_all(), 'transaction_type_id', 'transaction_type', $$class->transaction_type_id, 'transaction_type_id', '', '', 1); ?>        </li>
-        <li><label>Label Format</label><?php echo $f->select_field_from_object('bc_label_format_header_id', bc_label_format_header::find_all(), 'bc_label_format_header_id', 'format_name', $$class->bc_label_format_header_id, 'bc_label_format_header_id', '', '', 1); ?>              </li>
-        <li><label>Status</label><?php $f->text_field_d('status'); ?> 					</li>
-        <li><label>No Of Copies</label><?php echo $f->text_field_ap(array('name' => 'no_of_copies', 'value' => '', 'id' => 'no_of_copies')); ?> 					</li>
-        <li><button class="button" id="print_label">Reprint</button></li>
+        <li><?php $f->l_select_field_from_object('sys_printer_id', sys_printer::find_all(), 'sys_printer_id', 'printer_name', $$class->sys_printer_id, 'sys_printer_id', '', '', 1); ?> 					</li>
+        <li><?php $f->l_select_field_from_object('transaction_type_id', transaction_type::find_all(), 'transaction_type_id', 'transaction_type', $$class->transaction_type_id, 'transaction_type_id', '', '', 1); ?>        </li>
+        <li><?php $f->l_select_field_from_object('bc_label_format_header_id', bc_label_format_header::find_all(), 'bc_label_format_header_id', 'format_name', $$class->bc_label_format_header_id, 'bc_label_format_header_id', '', '', 1); ?>              </li>
+        <li><?php $f->l_text_field_d('status'); ?> 					</li>
+        <li><label><?php echo gettext('No Of Copies') ?></label><?php echo $f->text_field_ap(array('name' => 'no_of_copies', 'value' => '', 'id' => 'no_of_copies')); ?> 					</li>
+        <li><label><?php echo gettext('Label') ?></label><button class="button btn btn-warning" id="print_label"><?php echo gettext('Reprint') ?></button></li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div> 
@@ -45,10 +43,10 @@
 
    </div>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading">Content </span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Content') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1">Label Content</a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Label Content') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">

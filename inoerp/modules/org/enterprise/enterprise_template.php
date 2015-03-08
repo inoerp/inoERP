@@ -1,27 +1,24 @@
-<div id ="form_header"><span class="heading">Enterprise Header </span>
-
-
+<div id ="form_header">
+ <span class="heading"><?php echo gettext('Enterprise Header') ?></span>
  <form action=""  method="post" id="enterprise"  name="enterprise">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1">Basic Info</a></li>
-    <li><a href="#tabsHeader-2">Attachments</a></li>
-    <li><a href="#tabsHeader-3">Notes</a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
-      <ul class="column header_field"> 
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="enterprise_id select_popup clickable">
-         Enterprise Id</label><?php echo form::text_field('enterprise_id', $enterprise->enterprise_id, '10', '', '', 'System number', 'enterprise_id', $readonly); ?>
-        <a name="show" href="form.php?class_name=enterprise&<?php echo "mode=$mode"; ?>" class="show document_id enterprise_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-       </li>
-       <li><label>Organization</label><?php echo form::select_field_from_object('org_id', org::find_all_enterprise(), 'org_id', 'org', $enterprise->org_id, 'org', $readonly1); ?> </li>
-       <li><label>Status</label><?php echo form::status_field($enterprise->status, $readonly); ?></li>
-       <li><label>Revision</label><?php echo form::revision_enabled_field($enterprise->rev_enabled, $readonly); ?></li>
-       <li><label>Revision No</label><?php echo form::text_field('rev_number', $enterprise->rev_number, '10', '', '', '', '', $readonly); ?></li>
-      </ul>
-     </div>
+     <ul class="column header_field"> 
+      <li><?php $f->l_text_field_dr_withSearch('enterprise_id'); ?>
+       <a name="show" href="form.php?class_name=enterprise&<?php echo "mode=$mode"; ?>" class="show document_id enterprise_id">
+        <i class="fa fa-refresh"></i></a> 
+      </li>
+      <li><?php $f->l_select_field_from_object('org_id', org::find_all_enterprise(), 'org_id', 'org', $enterprise->org_id, 'org', '', '', $readonly1); ?> </li>
+      <li><?php $f->l_status_field_d('status'); ?></li>
+      <li><?php $f->l_checkBox_field_d('rev_enabled'); ?></li>
+      <li><?php $f->l_text_field_d('rev_number'); ?></li>
+     </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
@@ -48,22 +45,18 @@
   </div>
 
 
-  <span class="heading">Other Details </span>
+  <span class="heading"><?php echo gettext('Other Details') ?></span>
   <div id ="form_line">
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1">Enterprise</a></li>
-     <li><a href="#tabsLine-2">Future</a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Enterprise') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
-      <ul class="address inline_list">
-       <li><label>Designation Option  : </label>
-        <?php echo form::text_field('designation_option_header_id', $enterprise->designation_option_header_id, '30', '', '', 'Enter a valid number', 'designation_option_header_id', $readonly); ?>
-       </li>
-       <li><label>Type Option  : </label> 
-        <?php echo form::text_field('type_option_header_id', $enterprise->type_option_header_id, '30', '', '', '', 'type_option_header_id', $readonly); ?>
-       </li>
+      <ul class="column header_field">
+       <li><?php $f->l_text_field_d('designation_option_header_id'); ?>       </li>
+       <li><?php $f->l_text_field_d('type_option_header_id'); ?>       </li>
       </ul>
      </div>
      <div id="tabsLine-2" class="tabContent">

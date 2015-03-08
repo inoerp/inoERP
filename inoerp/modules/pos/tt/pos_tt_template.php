@@ -1,7 +1,5 @@
 <div id="pos_terminal">
- <!-- Example row of columns -->
-
- <div id="tabsDetailA">
+  <div id="tabsDetailA">
   <ul class="tabsDetail">
    <li><a href="#tabsDetailA-1"><i class="fa fa-laptop" title="Transaction Display"></i></a></li>
    <li><a href="#tabsDetailA-2"><i class="fa fa-shopping-cart" title="Customer Display"></i></a></li>
@@ -11,10 +9,11 @@
     <div class="row">
      <div class="col-md-8 col-sm-8 col-lg-8">
       <div id="form_all">
-       <div id ="form_line" class="form_line"><span class="heading">Sales Items </span>
+       <div id ="form_line" class="form_line">
+        <span class="heading"><?php echo gettext('Sales Items') ?></span>
         <div id="tabsLine">
          <ul class="tabMain">
-          <li><a href="#tabsLine-1">Lines</a></li>
+          <li><a href="#tabsLine-1"><?php echo gettext('Lines') ?></a></li>
          </ul>
          <div class="tabContainer"> 
           <form action=""  method="post" id="pos_transaction_line_line"  name="pos_transaction_line_line">
@@ -22,14 +21,14 @@
             <table class="form_table">
              <thead> 
               <tr>
-               <th>Action</th>
-               <th>Line Id</th>
-               <th>Item</th>
-               <th>Unit Price</th>
-               <th>Quantity</th>
-               <th>Discount Code</th>
-               <th>Discount</th>
-               <th>Line Amount</th>
+               <th><?php echo gettext('Action') ?></th>
+               <th><?php echo gettext('Line Id') ?></th>
+               <th><?php echo gettext('Item') ?>#</th>
+               <th><?php echo gettext('Unit Price') ?></th>
+               <th><?php echo gettext('Quantity') ?></th>
+               <th><?php echo gettext('Discount Code') ?></th>
+               <th><?php echo gettext('Discount') ?></th>
+               <th><?php echo gettext('Line Amount') ?></th>
               </tr>
              </thead>
              <tbody class="form_data_line_tbody pos_transaction_line_values" >
@@ -42,13 +41,9 @@
                $pos_transaction_line = $pos_transaction_line_object_ai->current();
                ?>         
                <tr class="pos_transaction_line<?php echo $count ?>">
-                <td>    
-                 <ul class="inline_action">
-                  <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-                  <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-                  <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($pos_transaction_line->pos_transaction_line_id); ?>"></li>           
-                  <li><?php echo form::hidden_field('pos_transaction_header_id', $$class->pos_transaction_header_id); ?></li>
-                 </ul>
+                <td><?php
+                 echo ino_inline_action($pos_transaction_line->pos_transaction_line_id, array('pos_transaction_header_id' => $$class->pos_transaction_header_id));
+                 ?>
                 </td>
                 <td><?php form::number_field_wid2sr('pos_transaction_line_id'); ?></td>
                 <td><?php $f->text_field_wid2('item_number'); ?></td>
@@ -75,31 +70,31 @@
 
         </div>
        </div> 
-       <form action=""  method="post" id="pos_transaction_header"  name="pos_transaction_header"><span class="heading">POS Transaction</span>
+       <form action=""  method="post" id="pos_transaction_header"  name="pos_transaction_header">
+        <span class="heading"><?php echo gettext('POS Transaction') ?></span>
         <div id ="form_header">
          <div id="tabsHeader">
           <ul class="tabMain">
-           <li><a href="#tabsHeader-1">Basic Info</a></li>
-           <li><a href="#tabsHeader-2">Attachments</a></li>
-           <li><a href="#tabsHeader-3">Notes</a></li>
+           <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+           <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+           <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
           </ul>
           <div class="tabContainer">
            <div id="tabsHeader-1" class="tabContent">
             <div class="large_shadow_box"> 
              <ul class="column header_field">
-              <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="pos_transaction_header_id select_popup clickable">
-                Transaction Id</label><?php echo form::number_field_drs('pos_transaction_header_id'); ?>
+              <li><?php $f->l_text_field_dr_withSearch('pos_transaction_header_id'); ?>
                <a name="show" href="form.php?class_name=pos_tt_header&<?php echo "mode=$mode"; ?>" class="show document_id pos_transaction_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
               </li>
               <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="pos_terminal_header_id select_popup clickable">
-                Terminal #</label><?php echo $f->text_field_dm('terminal_name');          ?> 
-              <i class="fa fa-save save_terminal_name clickable" title="save terminal name for the current session"></i></li>
-              <li><label>Line Sum Amount</label><?php echo $f->number_field('header_amount', $$class->header_amount, '', 'header_amount'); ?> </li>
-              <li><label>Tax</label><?php echo $f->number_field('tax_amount', $$class->tax_amount, '', 'tax_amount'); ?> </li>
-              <li><label>Discount</label><?php echo $f->number_field('discount_amount', $$class->discount_amount, '', 'discount_amount'); ?> </li>
-              <li><label>Total Amount</label><?php echo $f->number_field('total_amount', $$class->total_amount, '', 'total_amount'); ?> </li>
-              <li><label>Description</label><?php echo $f->text_field_d('description'); ?></li>
-              <li><label>Return Amount</label><?php echo $f->number_field('return_amount', '', '', 'return_amount'); ?> </li>
+                <?php echo gettext('Terminal') ?>#</label><?php echo $f->text_field_dm('terminal_name'); ?> 
+               <i class="fa fa-save save_terminal_name clickable" title="save terminal name for the current session"></i></li>
+              <li><?php $f->l_number_field('header_amount', $$class->header_amount, '', 'header_amount'); ?> </li>
+              <li><?php $f->l_number_field('tax_amount', $$class->tax_amount, '', 'tax_amount'); ?> </li>
+              <li><?php $f->l_number_field('discount_amount', $$class->discount_amount, '', 'discount_amount'); ?> </li>
+              <li><?php $f->l_number_field('total_amount', $$class->total_amount, '', 'total_amount'); ?> </li>
+              <li><?php $f->l_text_field_d('description'); ?></li>
+              <li><?php $f->l_number_field('return_amount', '', '', 'return_amount'); ?> </li>
              </ul>
             </div>
            </div>
@@ -191,15 +186,16 @@
     <div class="row">
      <div class="col-md-8 col-sm-8 col-lg-8">
       <div id="pos_transaction_line_cust_view">
-       <div class="form_line"><span class="heading">Items </span>
+       <div class="form_line">
+        <span class="heading"><?php echo gettext('Items') ?></span>
         <div>
          <table class="form_table">
           <thead> 
            <tr>
-            <th>Item</th>
-            <th>Unit Price</th>
-            <th>Quantity</th>
-            <th>Line Amount</th>
+            <th><?php echo gettext('Item') ?></th>
+            <th><?php echo gettext('Unit Price') ?></th>
+            <th><?php echo gettext('Quantity') ?>#</th>
+            <th><?php echo gettext('Line Amount') ?></th>
            </tr>
           </thead>
           <tbody class="form_data_line_tbody pos_transaction_line_values" >
@@ -230,23 +226,23 @@
         </div>
        </div> 
       </div>
-      
-             <div id="form_header_total_cust"><span class="heading">Total</span>
-        <div class="large_shadow_box"> 
-         <ul class="column header_field">
-          <li><label>Terminal #</label><?php     echo $f->text_field('terminal_number', '');     ?> </li>
-          <li><label>Line Sum Amount</label><?php echo $f->number_field('header_amount', $$class->header_amount); ?> </li>
-          <li><label>Tax</label><?php echo $f->number_field('tax_amount', $$class->tax_amount); ?> </li>
-          <li><label>Discount</label><?php echo $f->number_field('discount_amount', $$class->discount_amount); ?> </li>
-          <li><label>Total Amount</label><?php echo $f->number_field('total_amount', $$class->total_amount); ?> </li>
-          <li><label>Return Amount</label><?php echo $f->number_field('return_amount', ''); ?> </li>
-         </ul>
-        </div>
+
+      <div id="form_header_total_cust"><span class="heading">Total</span>
+       <div class="large_shadow_box"> 
+        <ul class="column header_field">
+         <li><?php $f->l_text_field_d('terminal_name', ''); ?> </li>
+         <li><?php $f->l_number_field_d('header_amount', $$class->header_amount); ?> </li>
+         <li><?php $f->l_number_field_d('tax_amount', $$class->tax_amount); ?> </li>
+         <li><?php $f->l_number_field_d('discount_amount', $$class->discount_amount); ?> </li>
+         <li><?php $f->l_number_field_d('total_amount', $$class->total_amount); ?> </li>
+         <li><?php $f->l_number_field('return_amount', '', '', 'return_amount'); ?> </li>
+        </ul>
        </div>
+      </div>
      </div>
      <div class="col-md-3 col-sm-3 col-lg-3">
       <div class="row">
-       
+
        <div id="form_header_total_cust"><span class="heading">Offers</span>
         <div class="large_shadow_box"> 
 

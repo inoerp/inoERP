@@ -1,40 +1,38 @@
 <div id ="form_header">
- <form action=""  method="post" id="sys_notification"  name="sys_notification"><span class="heading">Notification </span>
+ <form action=""  method="post" id="sys_notification"  name="sys_notification">
+  <span class="heading"><?php echo gettext('Notification') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Requirements</a></li>
-     <li><a href="#tabsHeader-3">Attachments</a></li>
-     <li><a href="#tabsHeader-4">Notes</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Requirements') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field"> 
-        <li> 
-         <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sys_notification_id select_popup clickable">
-          Notification Id</label><?php $f->text_field_dsr('sys_notification_id') ?>
-         <a name="show" href="form.php?class_name=sys_notification&<?php echo "mode=$mode"; ?>" class="show document_id sys_notification_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <li><?php $f->l_text_field_dr_withSearch('sys_notification_id') ?>
+         <a name="show" href="form.php?class_name=sys_notification&<?php echo "mode=$mode"; ?>" class="show document_id sys_notification_id">
+          <i class="fa fa-refresh"></i></a> 
         </li>
-        <li><label>Notification Type</label><?php $f->text_field_dr('notification_type'); ?> 					</li>
-        <li><label>From</label><?php $f->text_field_dr('from_user'); ?> 					</li>
-        <li><label>To</label><?php $f->text_field_dr('to_user'); ?> 					</li>
-        <li><label>Start Date</label><?php echo $f->date_fieldAnyDay('start_date', $$class->start_date); ?> 	</li>
-        <li><label>Status</label><?php echo $f->select_field_from_array('status', sys_notification::$status_a, $$class->status, '', '', '', '', 1); ?></li>
-        <li><label>Message</label><?php $f->text_field_dlr('notification_subject'); ?> 					</li>
-        <li><label>Action</label><?php echo $f->select_field_from_array('notification_action', $$class->notification_action_a, ''); ?></li>
+        <li><?php $f->l_text_field_dr('notification_type'); ?> 					</li>
+        <li><?php $f->l_text_field_dr('from_user'); ?> 					</li>
+        <li><?php $f->l_text_field_dr('to_user'); ?> 					</li>
+        <li><?php $f->l_date_fieldAnyDay_r('start_date', $$class->start_date); ?> 	</li>
+        <li><?php $f->l_select_field_from_array('status', sys_notification::$status_a, $$class->status, '', '', '', '', 1); ?></li>
+        <li><?php $f->l_text_field_dr('notification_subject'); ?> 					</li>
+        <li><?php $f->l_select_field_from_array('notification_action', $$class->notification_action_a, ''); ?></li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div class="large_shadow_box"> 
-       <ul class="column three_column"> 
-        <li><label>To eMail:</label><?php $f->text_field_dr('to_email'); ?> 					</li>
-        <li><label>Mail Status :</label><?php $f->text_field_dlr('mail_status'); ?> 					</li>
-        <li><label>Responder :</label><?php $f->text_field_dlr('responder'); ?> 					</li>
-        <li><label>Due Date :</label><?php echo $f->date_fieldAnyDay('due_date', $$class->due_date); ?> 	</li>
-        <li><label>End Date :</label><?php echo $f->date_fieldAnyDay('end_date', $$class->end_date); ?> 	</li>
+       <ul class="column header_field"> 
+        <li><?php $f->l_text_field_dr('to_email'); ?> </li>
+        <li><?php $f->l_text_field_dr('mail_status'); ?> </li>
+        <li><?php $f->l_text_field_dr('responder'); ?> </li>
+        <li><?php $f->l_date_fieldAnyDay_r('due_date', $$class->due_date); ?> 	</li>
+        <li><?php $f->l_date_fieldAnyDay_r('end_date', $$class->end_date); ?> 	</li>
        </ul>
       </div>
      </div>
@@ -65,15 +63,16 @@
   <div id ="form_line" class="form_line"><span class="heading">Details & References </span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1">Notification Details</a></li>
-     <li><a href="#tabsLine-2">Responder Comment</a></li>
-     <li><a href="#tabsLine-3">References</a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Notification Details') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Responder Comment') ?> </a></li>
+     <li><a href="#tabsLine-3"><?php echo gettext('References') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
-      <div> <?php echo $$class->text_field1;
-         echo $f->hidden_field('text_field1', $$class->text_field1);
-         ?> 	  </div> 
+      <div> <?php
+       echo $$class->text_field1;
+       echo $f->hidden_field('text_field1', $$class->text_field1);
+       ?> 	  </div> 
      </div> 
      <div id="tabsLine-2" class="tabContent">
       <div><?php echo $f->text_area_ap(array('name' => 'responder_comment', 'value' => $$class->responder_comment, 'row_size' => '10', 'column_size' => '90')); ?>	
@@ -81,15 +80,15 @@
      </div> 
      <div id="tabsLine-3"  class="tabContent">
       <div class="large_shadow_box"> 
-       <ul class="column three_column"> 
-        <li><label>Reference Key :</label><?php $f->text_field_dlr('reference_key_name'); ?> 					</li>
-        <li><label>Reference Value :</label><?php $f->text_field_dlr('reference_key_value'); ?> 					</li>
-        <li><label>User Key Name :</label><?php $f->text_field_dlr('user_key_name'); ?> 					</li>
-        <li><label>User Key Value :</label><?php $f->text_field_dlr('user_key_value'); ?> 					</li>
-        <li><label>Reference Doc :</label><?php echo $$class->ref_doc_stmt; ?> 					</li>
-        <li><label>From User Id :</label><?php $f->text_field_dsr('from_user_id'); ?> 					</li>
-        <li><label>To User Id :</label><?php $f->text_field_dsr('to_user_id'); ?> 					</li>
-        <li><label>Name :</label><?php $f->text_field_dr('notification_name'); ?> 					</li>
+       <ul class="column header_field"> 
+        <li><?php $f->l_text_field_dr('reference_key_name'); ?> 					</li>
+        <li><?php $f->l_text_field_dr('reference_key_value'); ?> 					</li>
+        <li><?php $f->l_text_field_dr('user_key_name'); ?> 					</li>
+        <li><?php $f->l_text_field_dr('user_key_value'); ?> 					</li>
+        <li><label><?php echo gettext('Reference Doc') ?></label><?php echo $$class->ref_doc_stmt; ?> 					</li>
+        <li><?php $f->l_text_field_dr('from_user_id'); ?> 					</li>
+        <li><?php $f->l_text_field_dr('to_user_id'); ?> 					</li>
+        <li><?php $f->l_text_field_dr('notification_name'); ?> 					</li>
        </ul>
       </div>
      </div>

@@ -1,52 +1,49 @@
-<span class="heading">Content Type </span>
+<span class="heading"><?php echo gettext('Content Type') ?></span>
 <form action=""  method="post" id="content_type_header"  name="content_type_header" class="content_type_header">
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1">Basic Info</a></li>
-    <li><a href="#tabsHeader-2">Comments</a></li>
-    <li><a href="#tabsHeader-3">Categories</a></li>
-    <li><a href="#tabsHeader-4">Actions</a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Comments') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Categories') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column header_field">
-       <li class="content_type_id">
-        <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="content_type_id select_popup clickable">
-         Type ID</label><?php form::number_field_drs('content_type_id'); ?>
-        <a name="show" href="form.php?class_name=content_type&<?php echo "mode=$mode"; ?>" class="show document_id content_type_id"><i class="fa fa-refresh"></i></a> 
+       <li class="content_type_id"><?php $f->l_text_field_dr_withSearch('content_type_id'); ?>
+        <a name="show" href="form.php?class_name=content_type&<?php echo "mode=$mode"; ?>" class="show document_id content_type_id">
+         <i class="fa fa-refresh"></i></a> 
        </li>
-       <li class="content_type_label"><label>Content Type</label><?php form::text_field_dm('content_type'); ?></li>
-       <li class="description"><label>Description</label><?php form::text_field_dm('description'); ?></li>
-       <li class="has_subject_vb"> <label>Allow Subject</label><?php echo form::checkBox_field('has_subject_cb', $$class->has_subject_cb); ?></li>
-       <li class="subject_label"><label>Subject Label</label><?php form::text_field_d('subject_label'); ?></li>
-       <li class="allow_file_cb"> <label>Allow Attachment</label><?php echo form::checkBox_field('allow_file_cb', $$class->allow_file_cb); ?></li>
-       <li class="role"><label>Read Role</label><?php echo $f->select_field_from_object('read_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->read_role, 'read_role'); ?></li>
-       <li class="role"><label>Write Role</label><?php echo $f->select_field_from_object('write_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->write_role, 'write_role'); ?></li>
-       <li class="role"> <label>Update Role</label><?php echo $f->select_field_from_object('update_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->update_role, 'update_role'); ?></li>
-       <li class="allow_file_cb"> <label>Auto URL Alias</label><?php echo form::checkBox_field('auto_url_alias_cb', $$class->auto_url_alias_cb); ?></li>
+       <li class="content_type_label"><?php $f->l_text_field_dm('content_type'); ?></li>
+       <li class="description"><?php $f->l_text_field_d('description'); ?></li>
+       <li class="has_subject_vb"><?php $f->l_checkBox_field_d('has_subject_cb'); ?></li>
+       <li class="subject_label"><?php $f->l_text_field_d('subject_label'); ?></li>
+       <li class="allow_file_cb"><?php $f->l_checkBox_field_d('allow_file_cb'); ?></li>
+       <li class="role"><?php $f->l_select_field_from_object('read_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->read_role, 'read_role'); ?></li>
+       <li class="role"><?php $f->l_select_field_from_object('write_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->write_role, 'write_role'); ?></li>
+       <li class="role"><?php $f->l_select_field_from_object('update_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->update_role, 'update_role'); ?></li>
+       <li class="allow_file_cb"><?php $f->l_checkBox_field_d('auto_url_alias_cb'); ?></li>
       </ul>
      </div>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div > 
       <ul class="column header_field">
-       <li class="allow_comment_cb"><label>Enable Comments ?</label><?php echo form::checkBox_field('allow_comment_cb', $$class->allow_comment_cb); ?></li>
-       <li class="role"><label>Read Role</label><?php echo $f->select_field_from_object('comment_read_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->comment_read_role, 'comment_read_role'); ?></li>
-       <li class="role"><label>Write Role</label><?php echo $f->select_field_from_object('comment_write_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->comment_write_role, 'comment_write_role'); ?></li>
-       <li class="role"> <label>Update Role</label><?php echo $f->select_field_from_object('comment_update_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->comment_update_role, 'comment_update_role'); ?></li>
-       <li class="subject_label"><label>Comment Listing</label><?php echo $f->select_field_from_array('comment_order_by', content_type::$comment_order_by_a, $$class->comment_order_by); ?></li>
-       <li class="allow_file_cb"><label>Comments Per Page</label><?php echo $f->select_field_from_array('comments_perpage', select_per_page_array(), $$class->comments_perpage); ?></li>
+       <li class="allow_comment_cb"><?php $f->l_checkBox_field_d('allow_comment_cb'); ?></li>
+       <li class="role"><?php $f->l_select_field_from_object('comment_read_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->comment_read_role, 'comment_read_role'); ?></li>
+       <li class="role"><?php $f->l_select_field_from_object('comment_write_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->comment_write_role, 'comment_write_role'); ?></li>
+       <li class="role"><?php $f->l_select_field_from_object('comment_update_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->comment_update_role, 'comment_update_role'); ?></li>
+       <li class="subject_label"><?php $f->l_select_field_from_array('comment_order_by', content_type::$comment_order_by_a, $$class->comment_order_by); ?></li>
+       <li class="allow_file_cb"><?php $f->l_select_field_from_array('comments_perpage', select_per_page_array(), $$class->comments_perpage); ?></li>
       </ul>
      </div>
     </div>
     <div id="tabsHeader-3" class="tabContent">
      <div> 
-      <ul class="column five_column">
-       <li class="show_category_onsummary_cb"> <label>Show Category on Summary List Page? : </label>    
-        <?php echo form::checkBox_field('show_category_onsummary_cb', $$class->show_category_onsummary_cb); ?></li>
-
+      <ul class="column header_field">
+       <li class="show_category_onsummary_cb"><?php $f->l_checkBox_field_d('show_category_onsummary_cb'); ?></li>
        <?php
        if ((isset($category)) && (count($category) > 0)) {
         foreach ($category as $obj) {
@@ -64,20 +61,20 @@
     </div>
     <div id="tabsHeader-4" class="tabContent">
      <div> 
-      <ul class="column four_column">
-       <li><input type="button" class="button drop_table" name="drop_table" id="drop_table" value="Delete Content Type"></li>
+      <ul class="column header_field">
+       <li><input type="button" class="button drop_table btn btn-danger" role="button" name="drop_table" id="drop_table" value="Delete Content Type"></li>
       </ul>
      </div>
     </div>
    </div>
   </div>
  </div>
- <span class="heading">Content Type Fields/Columns </span>
+ <span class="heading"><?php echo gettext('Content Type Fields/Columns') ?></span>
  <div id="form_line" class="form_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Main</a></li>
-    <li><a href="#tabsLine-2">Future</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Future') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
@@ -85,15 +82,15 @@
       <thead> 
        <tr>
        <tr>
-        <th>Action</th>
-        <th>Field Label</th>
-        <th>Position</th>
-        <th>Required</th>
-        <th>Field Name</th>
-        <th>Field Type</th>
-        <th>Number</th>
-        <th>enum Values</th>
-        <th>Option List</th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Field Label') ?></th>
+        <th><?php echo gettext('Position') ?>#</th>
+        <th><?php echo gettext('Required') ?></th>
+        <th><?php echo gettext('Field Name') ?></th>
+        <th><?php echo gettext('Field Type') ?></th>
+        <th><?php echo gettext('Number') ?></th>
+        <th><?php echo gettext('enum Values') ?></th>
+        <th><?php echo gettext('Option List') ?></th>
        </tr>
        </tr>
       </thead>

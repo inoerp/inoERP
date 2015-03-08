@@ -1366,7 +1366,7 @@ div.thumbnails .magnifier .buttons {
  position: absolute;
  top: 0;
  left: 0;
- z-index: 1010;
+ z-index: 10000;
  display: block;
  overflow:visible;
  max-width: 276px;

@@ -1,26 +1,27 @@
 <div id ="pos_terminal_divId">
- <form action=""  method="post" id="pos_terminal"  name="pos_terminal"><span class="heading">POS Terminal </span>
+ <form action=""  method="post" id="pos_terminal"  name="pos_terminal">
+  <span class="heading"><?php echo gettext('POS Terminal') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Attachments</a></li>
-     <li><a href="#tabsHeader-3">Notes</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
       <div class="large_shadow_box"> 
-         <ul class="column header_field"> 
-    <li><label><img class="pos_terminal select_popup clickable" src="<?php echo HOME_URL; ?>themes/images/serach.png">
-      Terminal Id</label><?php echo $f->text_field_dr('pos_terminal_id'); ?>
-      <a name="show" href="form.php?class_name=pos_terminal&<?php echo "mode=$mode"; ?>" class="show document_id pos_terminal_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-    </li>
-    <li><label>Store</label><?php echo $f->select_field_from_object('sd_store_id', sd_store::find_all(), 'sd_store_id', 'store_name', $$class->sd_store_id, 'sd_store_id', '', 1, $readonly); ?>    </li>
-    <li><label>Terminal Name</label><?php $f->text_field_dm('terminal_name'); ?></li>
-    <li><label>Location </label><?php echo $f->select_field_from_object('location_id', address::find_all() , 'address_id', 'address_name',$$class->location_id,'location_id'); ?>    </li>
-    <li><label>Description</label><?php $f->text_field_d('description'); ?></li>
-    <li><label>Status</label><?php echo form::status_field($$class->status, $readonly); ?>    </li>
-   </ul>
+       <ul class="column header_field"> 
+        <li><?php echo $f->l_text_field_dr_withSearch('pos_terminal_id'); ?>
+         <a name="show" href="form.php?class_name=pos_terminal&<?php echo "mode=$mode"; ?>" class="show document_id pos_terminal_id">
+          <i class="fa fa-refresh"></i></a> 
+        </li>
+        <li><?php $f->l_select_field_from_object('sd_store_id', sd_store::find_all(), 'sd_store_id', 'store_name', $$class->sd_store_id, 'sd_store_id', '', 1, $readonly); ?>    </li>
+        <li><?php $f->l_text_field_dm('terminal_name'); ?></li>
+        <li><?php $f->l_select_field_from_object('location_id', address::find_all(), 'address_id', 'address_name', $$class->location_id, 'location_id'); ?>    </li>
+        <li><?php $f->l_text_field_d('description'); ?></li>
+        <li><?php $f->l_status_field_d('status'); ?>    </li>
+       </ul>
       </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">

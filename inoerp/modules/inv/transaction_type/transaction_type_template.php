@@ -54,11 +54,11 @@
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <ul class="column four_column"> 
-       <li><?php $f->text_field_d('transaction_type_number') ?></li>
+       <li><?php $f->l_text_field_d('transaction_type_number') ?></li>
        <li><?php $f->l_checkBox_field_d('allow_negative_balance_cb'); ?></li>
        <li><?php $f->l_status_field_d('status'); ?></li>
        <li><?php $f->l_checkBox_field_d('rev_enabled_cb'); ?></li>
-       <li><?php $f->text_field_d('rev_number') ?></li>
+       <li><?php $f->l_text_field_d('rev_number') ?></li>
       </ul> 
      </div> 
      <!--end of tab1-->

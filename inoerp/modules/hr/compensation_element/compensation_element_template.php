@@ -1,30 +1,29 @@
 <div id ="form_header">
  <form action=""  method="post" id="hr_compensation_element"  name="hr_compensation_element">
-  <span class="heading">Compensation Element</span>
+  <span class="heading"><?php echo gettext('Compensation Element') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Attachments</a></li>
-     <li><a href="#tabsHeader-3">Notes</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
       <div class="large_shadow_box"> 
        <ul class="column header_field"> 
-        <li> 
-         <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_compensation_element_id select_popup clickable">
-          Header Id</label><?php $f->text_field_ds('hr_compensation_element_id') ?>
-         <a name="show" href="form.php?class_name=hr_compensation_element&<?php echo "mode=$mode"; ?>" class="show document_id hr_compensation_element_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <li><?php $f->l_text_field_dr_withSearch('hr_compensation_element_id') ?>
+         <a name="show" href="form.php?class_name=hr_compensation_element&<?php echo "mode=$mode"; ?>" class="show document_id hr_compensation_element_id">
+          <i class="fa fa-refresh"></i></a> 
         </li>
-        <li><label>Element Name</label><?php $f->text_field_d('element_name'); ?> 					</li>
-        <li><label>Type</label><?php echo $f->select_field_from_object('element_type', hr_compensation_element::compensation_element_type(), 'option_line_code', 'option_line_value', $$class->element_type, 'element_type', '', 1, $readonly1); ?> 					</li>
-        <li><label>Class</label><?php echo $f->select_field_from_object('classification', hr_compensation_element::compensation_element_class(), 'option_line_code', 'option_line_value', $$class->classification, 'classification', '', '', $readonly); ?> 					</li>
-        <li><label>Category</label><?php echo $f->select_field_from_object('category', hr_compensation_element::compensation_element_category(), 'option_line_code', 'option_line_value', $$class->category, 'category', '', 1, $readonly1); ?> 					</li>
-        <li><label>Start Date</label><?php echo $f->date_fieldAnyDay('start_date', $$class->start_date); ?> 	</li>
-        <li><label>End Date</label><?php echo $f->date_fieldAnyDay('start_date', $$class->start_date); ?> 	</li>
-        <li><label>Status</label><?php $f->status_field_d('status'); ?></li>
-        <li><label>Description</label><?php $f->text_field_dl('description'); ?> 					</li>
+        <li><?php $f->l_text_field_d('element_name'); ?> </li>
+        <li><?php $f->l_select_field_from_object('element_type', hr_compensation_element::compensation_element_type(), 'option_line_code', 'option_line_value', $$class->element_type, 'element_type', '', 1, $readonly1); ?> 					</li>
+        <li><?php $f->l_select_field_from_object('classification', hr_compensation_element::compensation_element_class(), 'option_line_code', 'option_line_value', $$class->classification, 'classification', '', '', $readonly); ?> 					</li>
+        <li><?php $f->l_select_field_from_object('category', hr_compensation_element::compensation_element_category(), 'option_line_code', 'option_line_value', $$class->category, 'category', '', 1, $readonly1); ?> 					</li>
+        <li><?php $f->l_date_fieldAnyDay('start_date', $$class->start_date); ?> 	</li>
+        <li><?php $f->l_date_fieldAnyDay('start_date', $$class->start_date); ?> 	</li>
+        <li><?php $f->l_status_field_d('status'); ?></li>
+        <li><?php $f->l_text_field_d('description'); ?> 					</li>
        </ul>
       </div>
      </div>
@@ -55,23 +54,20 @@
   <div id ="form_line" class="form_line"><span class="heading">Compensation Element Details </span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1">Details</a></li>
-     <li><a href="#tabsLine-2">Future</a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Details') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Future') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <ul class="column four_column"> 
-       <li><label>Priority :</label><?php echo $f->number_field('priority', $$class->priority); ?> 	</li>
-       <li><label>Recurring :</label><?php echo $f->checkBox_field('recurring_cb', $$class->recurring_cb); ?> 	</li>
-       <li><label>Separate Check :</label><?php echo $f->checkBox_field('separate_check_cb', $$class->separate_check_cb); ?> 	</li>
-       <li><label>Frequency Months :</label><?php echo $f->text_field_d('frequency_months'); ?> 	</li>
-       <li><label>Standard Link :</label><?php echo $f->checkBox_field('standard_link_cb', $$class->standard_link_cb); ?> 	</li>
-       <li><label>Deduction Start :</label>	
-        <?php echo $f->select_field_from_array('deduction_start_rule', hr_compensation_element::$deduction_start_rule_a, $$class->deduction_start_rule); ?> 	</li>
-       <li><label>Deduction Rule :</label>
-        <?php echo $f->select_field_from_array('deduction_rule', hr_compensation_element::$deduction_rule_a, $$class->deduction_rule); ?> 	</li>
-       <li><label>Earning Rule :</label>
-        <?php echo $f->select_field_from_array('calculation_rule', hr_compensation_element::$calculation_rule_a, $$class->calculation_rule); ?> 	</li>
+       <li><?php $f->l_number_field_d('priority'); ?> 	</li>
+       <li><?php $f->l_checkBox_field_d('recurring_cb'); ?> 	</li>
+       <li><?php $f->l_checkBox_field_d('separate_check_cb'); ?> 	</li>
+       <li><?php $f->l_text_field_d('frequency_months'); ?> 	</li>
+       <li><?php $f->l_checkBox_field_d('standard_link_cb'); ?> 	</li>
+       <li><?php $f->l_select_field_from_array('deduction_start_rule', hr_compensation_element::$deduction_start_rule_a, $$class->deduction_start_rule); ?> 	</li>
+       <li><?php $f->l_select_field_from_array('deduction_rule', hr_compensation_element::$deduction_rule_a, $$class->deduction_rule); ?> 	</li>
+       <li><?php $f->l_select_field_from_array('calculation_rule', hr_compensation_element::$calculation_rule_a, $$class->calculation_rule); ?> 	</li>
       </ul>
      </div> 
     </div>

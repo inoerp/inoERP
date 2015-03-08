@@ -1,26 +1,26 @@
 <div id ="form_header">
- <form action=""  method="post" id="bc_static_label"  name="bc_static_label"><span class="heading">Static Labels </span>
+ <form action=""  method="post" id="bc_static_label"  name="bc_static_label">
+  <span class="heading"><?php echo gettext('Static Labels') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Notes</a></li>
-     <li><a href="#tabsHeader-3">Generate Label</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Notes') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Generate Label') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
       <div class="large_shadow_box"> 
        <ul class="column one_column"> 
-        <li> 
-         <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bc_static_label_id select_popup clickable">
-          Label Id</label><?php $f->text_field_dsr('bc_static_label_id') ?>
-         <a name="show" href="form.php?class_name=bc_static_label&<?php echo "mode=$mode"; ?>" class="show document_id bc_static_label_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <li><?php $f->l_text_field_dr_withSearch('bc_static_label_id') ?>
+         <a name="show" href="form.php?class_name=bc_static_label&<?php echo "mode=$mode"; ?>" class="show document_id bc_static_label_id">
+          <i class="fa fa-refresh"></i></a> 
         </li>
-        <li><label>Printer Name</label><?php echo $f->select_field_from_object('sys_printer_id', sys_printer::find_all(), 'sys_printer_id', 'printer_name', $$class->sys_printer_id, 'sys_printer_id'); ?> 					</li>
-        <li><label>Label Type</label><?php echo $f->select_field_from_array('label_type', bc_static_label::$label_type_a, $$class->label_type); ?>              </li>
-        <li><label>Label Format</label><?php echo $f->select_field_from_object('bc_label_format_header_id', bc_label_format_header::find_all(), 'bc_label_format_header_id', 'format_name', $$class->bc_label_format_header_id, 'bc_label_format_header_id'); ?>              </li>
-        <li><label>Status</label><?php $f->text_field_d('status'); ?> 					</li>
-        <li><label>No Of Copies</label><?php echo $f->text_field_ap(array('name' => 'no_of_copies', 'value' => '', 'id' => 'no_of_copies')); ?> 					</li>
+        <li><?php $f->l_select_field_from_object('sys_printer_id', sys_printer::find_all(), 'sys_printer_id', 'printer_name', $$class->sys_printer_id, 'sys_printer_id'); ?> 					</li>
+        <li><?php $f->l_select_field_from_array('label_type', bc_static_label::$label_type_a, $$class->label_type); ?>              </li>
+        <li><?php $f->l_select_field_from_object('bc_label_format_header_id', bc_label_format_header::find_all(), 'bc_label_format_header_id', 'format_name', $$class->bc_label_format_header_id, 'bc_label_format_header_id'); ?>              </li>
+        <li><?php $f->l_text_field_d('status'); ?> 					</li>
+        <li><label><?php echo gettext('No Of Copies') ?></label><?php echo $f->text_field_ap(array('name' => 'no_of_copies', 'value' => '', 'id' => 'no_of_copies')); ?> 					</li>
        </ul>
       </div>
      </div>
