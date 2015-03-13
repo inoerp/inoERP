@@ -162,7 +162,8 @@
   var this_e = $(this);
   var defaults = {
    min_length: 3,
-   form_id: 'form_line'
+   form_id: 'form_line',
+   hidden_field_param: true
   };
   var settings = $.extend({}, defaults, options);
   var form_id_h = '#' + settings.form_id;
@@ -182,10 +183,20 @@
       var ac_type = null;
      }
 
+     var hidden_fields = {};
+     if (settings.hidden_field_param) {
+      $(auto_element).siblings('input:hidden').each(function (hidden_k, hidden_v) {
+       if (hidden_v) {
+        var f_name = $(this).prop('name').replace(/\[]+/g, '');
+        hidden_fields[f_name] = $(this).val();
+       }
+      });
+     }
+    
      var primary_column1_h = '#' + settings.primary_column1;
-          if ($(primary_column1_h).val()) {
+     if ($(primary_column1_h).val()) {
       var primary_column1_v = $(primary_column1_h).val();
-     } else if($(auto_element).closest("tr").attr('class')){
+     } else if ($(auto_element).closest("tr").attr('class')) {
       var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
       var primary_column1_d = '.' + settings.primary_column1;
       var primary_column1_v = $(form_id_h).find(trClass).find(primary_column1_d).val();
@@ -201,10 +212,11 @@
          field_name: settings.field_name,
          primary_column1: primary_column1_v,
          primary_column2: settings.primary_column2,
+         hidden_fields: hidden_fields,
          term: request.term,
          other_options: settings.other_options,
          ino_auto_complete: true,
-         ac_type: ac_type
+         ac_type: ac_type,
         },
         success: function (data) {
          response(data);

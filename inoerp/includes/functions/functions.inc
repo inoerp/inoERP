@@ -119,9 +119,9 @@ function get_class_name_from_path($path) {
  return $data;
 }
 
-function ino_arrayObj_to_array($array_obj, $keyname){
+function ino_arrayObj_to_array($array_obj, $keyname) {
  $ret_a = [];
- foreach($array_obj as $obj){
+ foreach ($array_obj as $obj) {
   $ret_a[] = $obj->$keyname;
  }
  return $ret_a;
@@ -169,17 +169,17 @@ function check_browser() {
  }
 }
 
-function ino_inline_action($line_id_cb_val, $hidden_field_a='', $add_image_class='add_row_img', $line_id_cb='line_id_cb') {
+function ino_inline_action($line_id_cb_val, $hidden_field_a = '', $add_image_class = 'add_row_img', $line_id_cb = 'line_id_cb') {
  global $f;
  $ret_stmt = ' <ul class="inline_action">
-           <li class="'.$add_image_class.' clickable"> <i class="fa fa-plus-circle"></i> </li>
+           <li class="' . $add_image_class . ' clickable"> <i class="fa fa-plus-circle"></i> </li>
            <li class="remove_row_img clickable"> <i class="fa fa-minus-circle"></i> </li>';
- $ret_stmt .= '<li><input type="checkbox" name="'.$line_id_cb.'" value="' . $line_id_cb_val . '"></li>';
+ $ret_stmt .= '<li><input type="checkbox" name="' . $line_id_cb . '" value="' . $line_id_cb_val . '"></li>';
  $ret_stmt .= '<li class="hidden">';
- if(!empty($hidden_field_a)){
-   foreach ($hidden_field_a as $k => $v) {
-  $ret_stmt .= $f->hidden_field($k, $v);
- }
+ if (!empty($hidden_field_a)) {
+  foreach ($hidden_field_a as $k => $v) {
+   $ret_stmt .= $f->hidden_field($k, $v);
+  }
  }
 
  $ret_stmt .= '</li></ul>';
@@ -190,28 +190,43 @@ function ino_inline_action($line_id_cb_val, $hidden_field_a='', $add_image_class
 function access_denied($msg = '') {
 // header("Location: access_denied.php?message=$msg");
 // redirect_to(HOME_URL . 'access_denied.php');
- $stmt  = '<div class="alert alert-danger">
+ $stmt = '<div class="alert alert-danger">
         <div class="jumbotron">
         <h1>Access Denied</h1>
         <p class="lead">ou dont have enough privillage to access the requested page.</p>
         <p><a class="btn btn-success" role="button" href="javascript:history.go(-1)"><span class="button">Click Here </a> to go back to the previous page </p>
 ';
-  if (!empty($msg)) {
-  $stmt .= '<p>'. $msg .'</p>';
+ if (!empty($msg)) {
+  $stmt .= '<p>' . $msg . '</p>';
  }
-   $stmt .= ' </div></div>';
+ $stmt .= ' </div></div>';
  return $stmt;
 }
 
 function ino_access_denied_organizationAcess($msg = '') {
-$stmt  = ' <div class="alert alert-danger">
+ $stmt = ' <div class="alert alert-danger">
         <div class="jumbotron">
         <h1>Access Denied</h1>
         <p class="lead">You dont have organization access required for this document.</p>
-        <p><a class="btn btn-success" role="button" href="form.php?class_name=user&mode=2&user_id='.$_SESSION['user_id'].'">Click Here </a> to check your access privileges </p>
+        <p><a class="btn btn-success" role="button" href="form.php?class_name=user&mode=2&user_id=' . $_SESSION['user_id'] . '">Click Here </a> to check your access privileges </p>
       </div>
  </div>';
-return $stmt;
+ return $stmt;
+}
+
+function ino_access_denied($msg = '') {
+ $stmt = ' <div class="alert alert-danger">
+        <div class="jumbotron">
+        <h1>Access Denied</h1>';
+ if (empty($msg)) {
+  $stmt .= '<p class="lead">You dont have organization access to this page.</p>';
+ } else {
+  $stmt .= '<p class="lead">' . $msg . '</p>';
+ }
+
+ $stmt .='</div>
+ </div>';
+ return $stmt;
 }
 
 function site_maintenance($msg) {
@@ -942,8 +957,7 @@ function search_convert_to_prod_mode() {
 
 function search_exclusion_mode() {
  global $f;
- $stmt = $f->select_field_from_array('exclusion_mode', 
-  array( 'ALL_SETUP' => 'Keep All Setups - Remove Transaction Data','LIMITED_SETUP' => 'Keep Important Setups - Remove Transaction & Some Setups ', 
+ $stmt = $f->select_field_from_array('exclusion_mode', array('ALL_SETUP' => 'Keep All Setups - Remove Transaction Data', 'LIMITED_SETUP' => 'Keep Important Setups - Remove Transaction & Some Setups ',
   'ONLY_SETUP' => 'Remove All - I Know What I\'m Doing '), '', 'exclusion_mode');
  return $stmt;
 }
@@ -1113,7 +1127,7 @@ function add_new_search_criteria() {
 function ino_attachement($file, $file_name = 'attachments') {
  $stmt = '<div id="show_attachment" class="show_attachment">
 						 <div id="file_upload_form" class="form-group">
-							<ul class="inRow asperWidth"><label for="exampleInputFile">'.__('Attach File').'</label>
+							<ul class="inRow asperWidth"><label for="exampleInputFile">' . __('Attach File') . '</label>
 							 <li><input type="file" id="attachments" class="attachments" name="' . $file_name . '[]" multiple/></li>
 							 <li> <button  form="file_upload" name="attach_submit" id="attach_submit" class="submit button">Attach</button></li>';
  $stmt.='<li class="show_loading_small"><img alt="Loading..." src="' . HOME_URL . 'themes/images/small_loading.gif"/></li>

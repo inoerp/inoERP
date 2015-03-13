@@ -9851,3 +9851,202 @@ msgstr "विक्रय ऑर्डर "
 
 msgid "SO Line "
 msgstr "तो रेखा"
+
+msgid "Could not call the header"
+msgstr " शीर्ष लेख कॉल नहीं कर सका"
+
+msgid "All tables have been sucessfully imported"
+msgstr "सभी तालिकाएँ सफलतापूर्वक आयात किया गया है"
+
+msgid "This action is not allowed"
+msgstr "इस कार्रवाई की अनुमति नहीं है"
+
+msgid "Mandatory"
+msgstr "अनिवार्य"
+
+msgid "Save failed!! error@inosavel line"
+msgstr "सहेजना विफल रहा!! error@inosavel रेखा"
+
+msgid "Data is sucessfully saved"
+msgstr "डेटा सफलतापूर्वक सहेजा गया है"
+
+msgid "Action Completed"
+msgstr "कार्रवाई पूरी की"
+
+msgid "is"
+msgstr "है"
+
+msgid "Transaction complete"
+msgstr "हस् तांतरण पूर्ण"
+
+msgid "You can not delete content_id.\n. Content_id is auto removed on deleting content type."
+msgstr " तुम content_id.\n. Content_id को नष्ट नहीं कर सकते हैं स्वत: सामग्री प्रकार को हटाने पर निकाल दिया गया है।"
+
+msgid "Two different passwords entered.\nRe-enter passwords"
+msgstr "दो अलग अलग पासवर्ड दर्ज किया गया। \nRe में प्रवेश-पासवर्डों"
+
+msgid "System will remove all data & drop all the tables in this module!"
+msgstr "प्रणाली सभी डेटा निकाल जाएगा एवं इस मॉड्यूल में सभी तालिकाओं ड्रॉप!"
+
+msgid "Uninstall is disabled due to security reasons"
+msgstr "स्थापना रद्द सुरक्षा कारणों से अक्षम है"
+
+msgid "You can only uninstall a module that is installed but disabled!"
+msgstr "आप केवल एक मॉड्यूल कि अक्षम है, लेकिन है स्थापित स्थापना रद्द कर सकते हैं!"
+
+msgid "You cant remove first field\nRemove table if required"
+msgstr "आप पहली field\nRemove तालिका यदि जरूरी हुआ तो निकाल नहीं सकते"
+
+msgid "You cant remove first table name"
+msgstr "आपको पहले तालिका नाम निकालें नहीं कर सकता"
+
+msgid "Sum of detail quantity should be same as sum of line quantity\nChange detail quanityt if required"
+msgstr "विस्तार मात्रा के योग यदि जरूरी हुआ तो रेखा quantity\nChange विस्तार quanityt की राशि के रूप में एक ही होना चाहिए"
+
+msgid "Select BU First!"
+msgstr "BU पहले का चयन!"
+
+msgid "settings.json_url"
+msgstr "settings.json_url"
+
+msgid "can not save data as no of serial numbers doesnt match quantity"
+msgstr "डेटा कोई सीरियल नंबर की मात्रा मैच नहीं करता के रूप में सहेज नहीं सकते हैं"
+
+msgid "Item is not serial controlled.\nNo serial informatio will be saved in database"
+msgstr "आइटम सीरियल नहीं है नियंत्रित. \nNo सीरियल informatio डेटाबेस में सहेजा जाएगा"
+
+msgid "value"
+msgstr "मान"
+
+msgid "readonly field"
+msgstr "केवल पढने योग्य फ़ील्ड"
+
+msgid "No period avaibale to open"
+msgstr "खोलने के लिए कोई अवधि avaibale"
+
+msgid "You cannot remove the last filter element\nClick on Done to close the filter form"
+msgstr "आप अंतिम फ़िल्टर element\nClick पर फ़िल्टर प्रपत्र बंद करने के लिए किया नहीं निकाल सकता"
+
+msgid "No Subject Entered. Subject is required!"
+msgstr "कोई विषय नहीं दर्ज किया गया। विषय की आवश्यकता है!"
+
+msgid "Read Only Field"
+msgstr "केवल फ़ील्ड पढ़ें"
+
+msgid "Sum of line amounts  + totalAmount +  is more than header amount  + header_amount + \n Re-enter Header Amount!"
+msgstr "रेखा मात्रा + totalAmount के sum + हैडर राशि + header_amount + \n पुनः दर्ज शीर्ष लेख राशि से अधिक है!"
+
+msgid "Entered amount is more than remaining amount + \n Re-enter the amount!"
+msgstr "दर्ज किए गए राशि शेष राशि + \n राशि पुन: दर्ज करें और अधिक है!"
+
+msgid "No Data Found"
+msgstr "कोई डेटा नहीं मिला"
+
+msgid "numberOfCheckedBoxes +"
+msgstr "numberOfCheckedBoxes +"
+
+msgid "Upload Completed\nCheck output/errors section for details"
+msgstr "Completed\nCheck आउटपुट/त्रुटियाँ अनुभाग विवरण के लिए अपलोड करें"
+
+msgid "can not save data as no of serial numbers doesnt match quantity \nNo of serial numbers entered :  + noOfSerials + \nNo of units : + qty"
+msgstr "डेटा के रूप में कोई सीरियल नंबर का अनुक्रमांक प्रविष्ट की मात्रा \nNo मैच नहीं बचा नहीं कर सकते हैं: + noOfSerials + इकाइयों के \nNo: + मात्रा"
+
+msgid "can not save data as no of lot quantities doesnt match line quantity"
+msgstr "नहीं करता कोई मात्रा बहुत सारे मैच लाइन मात्रा के रूप में डेटा सहेजें नहीं कर सकते हैं"
+
+msgid "formUrl"
+msgstr "formUrl"
+
+msgid "viewId"
+msgstr "viewId"
+
+msgid "filterData"
+msgstr "filterData"
+
+msgid "Readonly Field! "
+msgstr "केवल पढने योग्य फ़ील्ड!"
+
+msgid "You are not allowed to select a new transaction\nCancell or Viod the payment if required"
+msgstr "आप एक नए transaction\nCancell या Viod भुगतान आवश्यक हो तो का चयन करने के लिए अनुमति नहीं कर रहे हैं"
+
+msgid "No Transaction Header ID/nEnter or Save The Header Details"
+msgstr "कोई लेन-देन हैडर ID/nEnter या शीर्ष लेख जानकारी सहेजें"
+
+msgid "You can not chage the template for this change order."
+msgstr "तुम नहीं chage इस परिवर्तन के आदेश के लिए टेम्पलेट कर सकते हैं।"
+
+msgid "You cant directly entered FROZEN cost.\nEnter pending cost and then run standard cost update"
+msgstr "आप सीधे दर्ज हुए जमे हुए लागत. \nEnter लागत लंबित नहीं कर सकते और तब मानक लागत अद्यतन चलाएँ"
+
+msgid "Cant save data as sum of line units is not same as header unit :  + header_units +  & sum of line units is :  + sum_total_line_units"
+msgstr "रेखा इकाइयों का योग हैडर इकाई के रूप में एक ही नहीं है के रूप में डेटा नहीं सहेज सकता: + header_units + & लाइन इकाइयों का योग है: + sum_total_line_units"
+
+msgid "Wrong sequence number"
+msgstr "गलत अनुक्रम संख्या"
+
+msgid "Invalid Percentage -  Value should be <= 100"
+msgstr "अमान्य प्रतिशत - मान होना चाहिए < = 100"
+
+msgid "Wrong percentage"
+msgstr "गलत प्रतिशत"
+
+msgid "Invalid Value"
+msgstr "अमान्य मान"
+
+msgid "Invalid Data"
+msgstr "अमान्य डेटा"
+
+msgid "You can only search count entries in pending approval status."
+msgstr "आप केवल खोज कर सकते हैं गिनती प्रविष्टियों लंबित अनुमोदन स्थिति।"
+
+msgid "No interorg_transfer Header ID/nEnter or Save The Header Details"
+msgstr "कोई interorg_transfer हैडर ID/nEnter या शीर्ष लेख जानकारी सहेजें"
+
+msgid "Entered quantity is more than open quantity!"
+msgstr "दर्ज किए गए मात्रा खुले मात्रा से अधिक है!"
+
+msgid "No Serial Number Found!\nCheck the subinventory, locator and item number"
+msgstr "कोई सीरियल नंबर मिल गया! \nCheck subinventory, लोकेटर और आइटम नंबर"
+
+msgid "Enter the transaction type"
+msgstr "लेनदेन के प्रकार दर्ज करें"
+
+msgid "No lot Number Found!\nCheck the subinventory, locator and item number"
+msgstr "कोई बहुत संख्या पाया! \nCheck subinventory, लोकेटर और आइटम नंबर"
+
+msgid "No from subinventory"
+msgstr "कोई subinventory से"
+
+msgid "Item is not defined in the organization.Select a differnt organization"
+msgstr "आइटम संगठन में परिभाषित नहीं है।एक अलग संगठन का चयन करें"
+
+msgid "No Receipt Header ID/nEnter or Save The Header Details"
+msgstr "कोई रसीद हैडर ID/nEnter या शीर्ष लेख जानकारी सहेजें"
+
+msgid "Please update your terminal number!"
+msgstr "कृपया अपने टर्मिनल संख्या अद्यतन!"
+
+msgid "Selected delivery is assigned to a differnt delivery number"
+msgstr "चयनित वितरण करने के लिए एक अलग डिलीवरी संख्या असाइन किया गया है"
+
+msgid "You cant ship more than picked quantity"
+msgstr "आप उठाया मात्रा से ज्यादा जहाज नहीं कर सकते"
+
+msgid "No Line Selected For Shipment\nRemove/Reverse the required lines and the select the shipment action again"
+msgstr "कोई पंक्ति चयनित के लिए Shipment\nRemove/रिवर्स अपेक्षित रेखाएँ और शिपमेंट कार्यवाई का पुन: चयन करें"
+
+msgid "You can only search lines which are not picked"
+msgstr "आप केवल लाइनों जो नहीं उठाया हैं खोज सकते हैं"
+
+msgid "Available Onhand is less than line quantity"
+msgstr "उपलब्ध Onhand लाइन मात्रा से कम है"
+
+msgid "All line quantities are in picked status!"
+msgstr "सब लाइन मात्रा उठाया स्थिति में हैं!"
+
+msgid "No BOM found for the work order#"
+msgstr "कोई BOM काम आदेश # + $ के लिए पाया गया"
+
+msgid "Entered quantity is more than available quantity"
+msgstr "दर्ज किए गए मात्रा उपलब्ध मात्रा से अधिक है"
+

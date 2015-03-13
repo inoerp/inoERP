@@ -1,4 +1,5 @@
 <?php
+
 $form_page = true;
 $dont_check_login = true;
 $content_class = true;
@@ -7,6 +8,7 @@ $class_names = [
 ];
 ?>
 <?php
+
 include_once("includes/functions/loader.inc");
 $read_access = true;
 //exit script in case of delete statement
@@ -18,6 +20,7 @@ if ((!empty($_POST))) {
 }
 ?>
 <?php
+
 $content_rp = getrwuPrivilage($content_type->read_role, $_SESSION['user_roles'][0]);
 $content_wp = getrwuPrivilage($content_type->write_role, $_SESSION['user_roles'][0]);
 $content_up = getrwuPrivilage($content_type->update_role, $_SESSION['user_roles'][0]);
@@ -43,7 +46,8 @@ if (($content_privilage >= 6) && ($mode == 9)) {
 } else if (($content_privilage >= 4) && !empty($_SESSION['username']) && ($$class->created_by == $_SESSION['username']) && ($mode == 9)) {
  include_once(THEME_DIR . '/content_template.inc');
 } else if (($mode == 9)) {
- access_denied();
+ $access_denied_msg = 'You don\'t have access to this page';
+ include_once(THEME_DIR . '/content_template.inc');
 } else {
  require_once(INC_EXTENSIONS . DS . 'content' . DS . 'view' . DS . "content_view.php");
  echo!empty($breadCrum) ? '<div class="container">' . $breadCrum . '</div>' : false;

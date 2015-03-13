@@ -100,7 +100,7 @@
   // Tell user that the process is completed
   echo '<script language="javascript">document.getElementById("information").innerHTML="Process completed"</script>';
   echo '<ul class="list-unstyled">';
-  echo "<li>All the tables have been sucessfully imported</li>";
+  echo "<li>All tables have been sucessfully imported</li>";
   echo "<li>Verify that the file install.php is removed from home directory. If not, delete it.</li>";
   echo "<li><a href='".HOME_URL."'>Go to the home page </a> & Login to the system  with default user name/password :admin/admin and reset the password.</li>";
 

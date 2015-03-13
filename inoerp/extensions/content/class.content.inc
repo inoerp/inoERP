@@ -274,9 +274,10 @@ class content extends dbObject {
 
  Public function frontPage_contents($no_of_articles = 6, $noOfCharacters = '500') {
   $sql = " SELECT content.content_id, ct.content_type_id, content.subject, content.terms, 
-	         content.created_by, content.creation_date, ct.content_type
+	         content.created_by, content.creation_date, ct.content_type,  eua.alias as alias
 					FROM content
-					LEFT JOIN content_type ct ON ct.content_type_id = content.content_type_id 
+					LEFT JOIN content_type ct ON ct.content_type_id = content.content_type_id
+          LEFT JOIN ext_url_alias eua ON eua.content_id=content.content_id 
 					WHERE 
 					content.published_cb = 1 
 					AND content.show_in_fp_cb = 1 ";
@@ -297,9 +298,10 @@ class content extends dbObject {
 
  Public function findAll_contents($no_of_articles = '', $noOfCharacters = '100', $content_type_id = '1') {
   $sql = " SELECT content.content_id, ct.content_type_id, content.subject, content.terms, 
-	         content.created_by, content.creation_date, ct.content_type, cm.no_of_comments
+	         content.created_by, content.creation_date, ct.content_type, cm.no_of_comments,  eua.alias as alias
 					FROM content
 					LEFT JOIN content_type ct ON ct.content_type_id = content.content_type_id 
+          LEFT JOIN ext_url_alias eua ON eua.content_id=content.content_id 
           LEFT JOIN ( 
           SELECT reference_table, reference_id, count(comment_id) as no_of_comments
           FROM comment
@@ -316,7 +318,7 @@ class content extends dbObject {
    $sql .= " LIMIT {$no_of_articles} ";
   }
 //  echo $sql;
-    $result = $this->findBySql($sql);
+  $result = $this->findBySql($sql);
   if (empty($result)) {
    return false;
   }
@@ -345,8 +347,13 @@ class content extends dbObject {
     $page_string .= '<img src="' . HOME_URL . 'themes/default/images/remove.png" class="remove" width="12px" height="12px">&nbsp;';
     $page_string .= substr($records->subject, 0, $subject_no_of_char);
     $page_string .= '<span class="more_page">';
-    $page_string .= '<a href="' . HOME_URL . 'content.php?mode=2&'
-     . 'content_id=' . $records->content_id . '&content_type_id=' . $records->content_type_id . '">';
+    if (!empty($records->alias)) {
+     $page_string .= '<a href="' . HOME_URL . "content/$records->alias" . '">';
+    } else {
+     $page_string .= '<a href="' . HOME_URL . 'content.php?mode=2&'
+      . 'content_id=' . $records->content_id . '&content_type_id=' . $records->content_type_id . '">';
+    }
+
     $page_string .= 'Read More.. </a>';
     $page_string .= '</span>';
     $page_string .= '</span>';
@@ -363,7 +370,7 @@ class content extends dbObject {
  private function _getContent_byConteTypeCategory($pageno, $per_page, $query_string) {
   $sql = " 
 SELECT content.content_id, content.content_type_id, content.subject, ct.content_type, content.creation_date, 
-content.created_by, user.username  ";
+content.created_by, user.username , eua.alias as alias ";
   if (!empty($this->category_id)) {
    $sql .= " , category_reference.category_reference_id, category_reference.major_category_id, "
     . " category.category, category_reference.category_id, category_reference.reference_type  ";
@@ -371,7 +378,9 @@ content.created_by, user.username  ";
 
   $sql .= ' FROM content
 LEFT JOIN user ON user.user_id = content.created_by 
-LEFT JOIN content_type ct ON ct.content_type_id = content.content_type_id   ';
+LEFT JOIN content_type ct ON ct.content_type_id = content.content_type_id   
+LEFT JOIN ext_url_alias eua ON eua.content_id=content.content_id 
+';
   if (!empty($this->category_id)) {
    $sql .= " , category_reference LEFT JOIN category ON category.category_id = category_reference.category_id ";
   }
@@ -432,10 +441,15 @@ AND content.content_id = category_reference.reference_id  ";
     $con_count++;
     $content_string .= "<li class=\"front_page_summary count_$con_count\">";
     $content_string .= '<div class="heading1 subject_summary">';
-    $content_string .= '<img src="' . HOME_URL . 'themes/default/images/remove.png" class="remove" alt="remove" width="12" height="12">&nbsp;';
+    $content_string .= '<i class="fa fa-remove remove-content clickable"></i>&nbsp;';
     $content_string .= substr($records->subject, 0, $this->_subject_noof_char);
     $content_string .= '<span class="more_page">';
-    $link_read = HOME_URL . 'content.php?mode=2&content_id=' . $records->content_id . '&content_type_id=' . $records->content_type_id;
+    if (!empty($records->alias)) {
+     $link_read =   HOME_URL . "content/$records->alias";
+    } else {
+     $link_read =   HOME_URL . 'content.php?mode=2&'. 'content_id=' . $records->content_id . '&content_type_id=' . $records->content_type_id;
+    }
+    
     $content_string .= '<a href="' . htmlspecialchars($link_read) . '">';
     $content_string .= 'Read More.. </a>';
     $content_string .= '</span>';
@@ -493,8 +507,12 @@ AND content.content_id = category_reference.reference_id  ";
      $user_name = empty($recod_c->username) ? 'Anonymous\SelfWeb' : $recod_c->username;
      $content_string .= "<tr id=\"row_no$con_count\" class='new_row $even_odd'> "
       . " <td class='content_summary'>";
-     $content_string .= '<a href="' . HOME_URL . 'content.php?mode=2&'
-      . 'content_id=' . $recod_c->content_id . '&content_type_id=' . $recod_c->content_type_id . '">';
+     if (!empty($recod_c->alias)) {
+      $content_string .= '<a href="' . HOME_URL . "content/$recod_c->alias" . '">';
+     } else {
+      $content_string .= '<a href="' . HOME_URL . 'content.php?mode=2&'
+       . 'content_id=' . $recod_c->content_id . '&content_type_id=' . $recod_c->content_type_id . '">';
+     }
      if (!empty($recod_c->subject)) {
       $content_string .= substr(strip_tags($recod_c->subject), 0, $this->subject_noof_char);
      } else {
@@ -626,14 +644,12 @@ AND content.content_id = category_reference.reference_id  ";
   $content_string .= '</div>';
   $content_string .= '</div>';
   //end of first tab
-  
-    //start of second tab
+  //start of second tab
   $content_string .= '<div id="tabsHeader-2" class="tabContent">';
   $comment = new comment();
-    $content_string .= $comment->view_page();
+  $content_string .= $comment->view_page();
   $content_string .= '</div>';
   //snd of second tab
- 
   //start of third tab
   $content_string .= '<div id="tabsHeader-3" class="tabContent">';
   $content_string .= $category_relation_statement;

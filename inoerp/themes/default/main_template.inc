@@ -33,6 +33,7 @@
   <script src="<?php echo HOME_URL; ?>tparty/bootstrap/js/bootstrap.min.js"></script>
   <script src="<?php echo HOME_URL; ?>tparty/bootstrap/js/menu.js"></script>
   <script src="includes/js/custom/tinymce/tinymce.min.js"></script>
+  <script type="text/javascript" src="includes/basics/js_lang.php"></script>
   <script src="includes/js/save.js"></script>
   <script src="includes/js/custom_plugins.js"></script>
   <script src="includes/js/basics.js"></script>
@@ -149,12 +150,8 @@
 
   <?php
   if ($si->maintenance_cb == 1) {
-   echo "<div class='error'>Site is under maintenance mode </div>";
-  }
-
-  if (!empty($access_deined)) {
-   exit("Access denied ! <br> $msg <input action='action' class='button' type='button' value='Go Back' onclick='history.go(-1);
-       ' />");
+   echo ino_access_denied('Site is under maintenance mode');
+   return;
   }
   ?>
 
@@ -210,7 +207,9 @@
        $show_message .
        '</div>';
       }
-      if (!empty($template_file_names)) {
+      if (!empty($access_denied_msg)) {
+       echo ino_access_denied($access_denied_msg);
+      } else if (!empty($template_file_names)) {
        foreach ($template_file_names as $key => $tmpl_file) {
         include_once $tmpl_file;
        }
@@ -264,7 +263,7 @@
    echo ino_filter_form();
    ?>
   </div>
-  
+
  </body>
 </html>
 <?php

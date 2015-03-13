@@ -31,7 +31,7 @@ function getFormDetails(url) {
   data: {
   },
   beforeSend: function () {
-     $('#overlay').css('display', 'block');
+   $('#overlay').css('display', 'block');
   },
   complete: function () {
 
@@ -50,7 +50,8 @@ function getFormDetails(url) {
    if ($(result).find('div#document_history').html()) {
     $('#document_history').replaceWith('<div id="document_history">' + $(result).find('div#document_history').html() + '</div>');
    }
-   $.getScript("includes/js/reload.js");
+   var homeUrl = $('#home_url').val();
+   $.getScript(homeUrl + "includes/js/reload.js");
    $(result).find('#js_files').find('li').each(function () {
     $.getScript($(this).html());
    });
@@ -156,7 +157,7 @@ function updateComment(comment_id, ulId) {
  }).done(function (result) {
   var div = $(result).filter('div#commentForm').html();
   var ulId_h = '#' + ulId;
-  $('#content').find(ulId_h).find('li.line_li').append(div);
+  $('#content').find(ulId_h).find('li.update-comment').empty().append(div);
   $('#loading').hide();
  }).fail(function (e) {
   alert("Comment update failed ");
@@ -966,7 +967,7 @@ function get_supplier_detail_for_bu(search_all_bu) {
  }
  $("#supplier_id, #supplier_name, #supplier_number").data('last', '').on("blur", function () {
   if ((!all_bu) && !$('#bu_org_id').val()) {
-   alert('Select BU First!');
+   alert(select_bu_first);
    return;
   }
   var last = $(this).data('last');
@@ -1080,7 +1081,7 @@ function get_customer_detail_for_bu(search_all_bu) {
  }
  $("#ar_customer_id, #customer_name, #customer_number").data('last', '').on("blur", function () {
   if ((!all_bu) && !$('#bu_org_id').val()) {
-   alert('Select BU First!');
+   alert(select_bu_first);
    return;
   }
   var last = $(this).data('last');
@@ -2316,9 +2317,9 @@ function getItemRevision(options) {
   show_date: false
  };
  var settings = $.extend({}, defaults, options);
-// if (!settings.item_id_m) {
-//  return;
-// }
+ if (!settings.item_id_m) {
+  return;
+ }
  return $.ajax({
   url: settings.json_url,
   type: 'get',
@@ -2830,9 +2831,9 @@ $(document).ready(function () {
   }
  });
 
-$('body').on('click', '.make-draggable' , function(){
-$(this).closest('div').draggable();
-});
+ $('body').on('click', '.make-draggable', function () {
+  $(this).closest('div').draggable();
+ });
 
  //search reset button
  var link = localStorage.getItem("reset_link");
@@ -2870,7 +2871,8 @@ $(this).closest('div').draggable();
 
  $('.select_account').inoAutoCompleteElement({
   json_url: 'modules/gl/coa_combination/coa_search.php',
-  primary_column1: 'coa_id',
+  primary_column1: 'coa_id'
+
  });
 
  var supplierName = new autoCompleteMain();
@@ -3108,7 +3110,7 @@ $(this).closest('div').draggable();
  $('body').on('focus', ".anyDate", function () {
   if ($(this).hasClass('readonly')) {
    $(this).prop('disabled', true);
-   alert('readonly field');
+   alert(readonly_field);
   } else {
    var currentDate = new Date();
    $(this).datepicker({
@@ -3126,7 +3128,7 @@ $(this).closest('div').draggable();
  $('body').on('focus', ".dateFromToday", function () {
   if ($(this).hasClass('readonly')) {
    $(this).prop('disabled', true);
-   alert('readonly field');
+   alert(readonly_field);
   } else {
    var currentDate = new Date();
    $(this).datepicker({
@@ -3143,7 +3145,7 @@ $(this).closest('div').draggable();
  $('body').on('focus', ".MondayFromToday", function () {
   if ($(this).hasClass('readonly')) {
    $(this).prop('disabled', true);
-   alert('readonly field');
+   alert(readonly_field);
   } else {
    var currentDate = new Date();
    $(this).datepicker({
@@ -3209,6 +3211,8 @@ $(this).closest('div').draggable();
   plugins: 'textcolor link image lists code table emoticons',
   width: 680,
   height: 150,
+  relative_urls: false,
+  remove_script_host: false,
   toolbar: "styleselect code | emoticons forecolor backcolor bold italic pagebreak | alignleft aligncenter alignright | bullist numlist outdent indent | link image inserttable ",
   menubar: false,
   statusbar: false,
@@ -3225,6 +3229,8 @@ $(this).closest('div').draggable();
   plugins: 'textcolor link image lists code table emoticons',
   width: 740,
   height: 250,
+    relative_urls: false,
+  remove_script_host: false,
   toolbar: "styleselect code | emoticons forecolor backcolor bold italic pagebreak | alignleft aligncenter alignright | bullist numlist outdent indent | link image inserttable ",
   menubar: false,
   statusbar: false,
@@ -3232,17 +3238,6 @@ $(this).closest('div').draggable();
   file_browser_callback: function () {
    $('#attachment_button').click();
   }
- });
- //include tinymce for all text areas
- tinymce.init({
-//  selector:'textarea',
-  mode: "exact",
-  theme: "modern",
-  width: 200,
-  height: 30,
-  toolbar: false,
-  menubar: "format edit",
-  statusbar: false
  });
 
  //Popup for selecting address address_id for normal popup & address_popup for popup where address can be created
@@ -3491,7 +3486,7 @@ $(this).closest('div').draggable();
   $(this).removeClass('showDiv_input').addClass('hideDiv_input');
  });
 
-$('#content_divId .hideDiv_input').trigger('click');
+ $('#content_divId .hideDiv_input').trigger('click');
 
 // $('#user_info .block_menu').menu();
  $('#big_popover').popover({
@@ -3666,24 +3661,24 @@ $('#content_divId .hideDiv_input').trigger('click');
   }
   getFormDetails(formUrl);
  }).one();
- 
-$('body').on('click', '.ajax_content a', function (e) {
- if($(this).hasClass('non_ajax')){
-  return false;
- }
-e.preventDefault();
-var urlLink = $(this).attr('href');
-var urlLink_a = urlLink.split('?');
-var urlLink_firstPart_a = urlLink_a[0].split('/');
-var pageType = urlLink_firstPart_a.pop();
-if (pageType == 'form.php') {
- var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
-} else if (pageType == 'program.php') {
- var formUrl = 'includes/json/json_program.php?' + urlLink_a[1];
-} else {
- var formUrl = urlLink;
-}
-getFormDetails(formUrl);
+
+ $('body').on('click', '.ajax_content a', function (e) {
+  if ($(this).hasClass('non_ajax')) {
+   return false;
+  }
+  e.preventDefault();
+  var urlLink = $(this).attr('href');
+  var urlLink_a = urlLink.split('?');
+  var urlLink_firstPart_a = urlLink_a[0].split('/');
+  var pageType = urlLink_firstPart_a.pop();
+  if (pageType == 'form.php') {
+   var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
+  } else if (pageType == 'program.php') {
+   var formUrl = 'includes/json/json_program.php?' + urlLink_a[1];
+  } else {
+   var formUrl = urlLink;
+  }
+  getFormDetails(formUrl);
  })
 
 // $('#sys_menu_left_vertical .menu a').on('click', function (e) {
@@ -3761,14 +3756,14 @@ getFormDetails(formUrl);
   var headerData = $(this).closest('form').serializeArray();
   var homeUrl = $('#home_url').val();
   var savePath = homeUrl + 'form.php?class_name=comment';
-  $.when(saveHeader(savePath, headerData, '#comment_id', '', '', true, 'comment')).then(function(){
+  $.when(saveHeader(savePath, headerData, '#comment_id', '', '', true, 'comment')).then(function () {
    var message = '<div class="alert alert-success alert-dismissible" role="alert">';
    message += 'Comment is sucessfully posted. &nbsp; <input type="button" class="btn-sucess" value="Reload page" onclick="location.reload();">';
    message += '</div>';
    $(".comment_error").replaceWith(message);
    $('.show_loading_small').hide();
   });
-  
+
  });
 
  $('body').off('click', '#save_program').on('click', '#save_program', function () {
@@ -4107,13 +4102,13 @@ getFormDetails(formUrl);
   $(this).removeClass('fa-arrow-circle-up').addClass('fa-arrow-circle-down');
  });
  $('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
- 
- $('body').on('click',  '#save_content' , function () {
-    if (!$('#subject').val()) {
+
+ $('body').on('click', '#save_content', function () {
+  if (!$('#subject').val()) {
    alert('No Subject Entered. Subject is required!');
    return false;
   }
-    $(".error").append('<div class="alert alert-warning alert-dismissible" role="alert">Saving Post ...</div>');
+  $(".error").append('<div class="alert alert-warning alert-dismissible" role="alert">Saving Post ...</div>');
   var form_header_id = '#content_data';
   if ($('.mce-tinymce').length >= 1) {
    $(form_header_id).find('textarea').each(function () {
@@ -4133,11 +4128,11 @@ getFormDetails(formUrl);
   });
 
  });
- 
- $('body').on('focusin', '.always_readonly', function(){
-$(this).attr('readonly', true).css('background-color','none repeat scroll 0% 0% #F3F3D2;');
-alert('Read Only Field');
-});
+
+ $('body').on('focusin', '.always_readonly', function () {
+  $(this).attr('readonly', true).css('background-color', 'none repeat scroll 0% 0% #F3F3D2;');
+  alert(readonly_field);
+ });
 
 });
 function toUpperCase(str)

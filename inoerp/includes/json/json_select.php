@@ -147,13 +147,13 @@ if (!empty($_GET['class_name'])) {
   }
  } else {
   //validate organization access where applicable
-  if (property_exists($$class, 'bu_org_id')) {
+  if (property_exists($$class, 'bu_org_id') && in_array('bu_org_id', $$class->field_a)) {
    if (empty($_SESSION['user_org_access'])) {
     $no_organization_access = true;
     return;
    }
-   $all_orgs_in_cls = "bu_org_id IN ('" . implode("','", array_keys($_SESSION['user_org_access'])) . "')  || org_id IS NULL ";
-  } else if (property_exists($$class, 'org_id')) {
+   $all_orgs_in_cls = "bu_org_id IN ('" . implode("','", array_keys($_SESSION['user_org_access'])) . "')  || bu_org_id IS NULL ";
+  } else if (property_exists($$class, 'org_id') && in_array('org_id', $$class->field_a)) {
    if (empty($_SESSION['user_org_access'])) {
     $no_organization_access = true;
     return;

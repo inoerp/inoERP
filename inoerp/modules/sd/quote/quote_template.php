@@ -139,7 +139,7 @@ inoERP
        foreach ($sd_quote_line_object as $sd_quote_line) {
         ?>         
         <tr class="sd_quote_line<?php echo $count ?>">
-         <td><?php
+         <td><?php $f = new inoform();
           echo ino_inline_action($$class_second->sd_quote_line_id, array('sd_quote_header_id' => $$class->sd_quote_header_id,
            'tax_code_value' => $$class_second->tax_code_value));
           ?>    
@@ -154,6 +154,7 @@ inoERP
           ?>
           <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
          <td><?php form::text_field_wid2('item_description'); ?></td>
+         <td><?php $f->number_field('line_quantity', $$class_second->line_quantity); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small'); ?></td>
          <td><?php $f->text_field_wid2r('line_status'); ?></td>
          <td><?php form::number_field_wid2s('line_quantity'); ?></td>

@@ -374,7 +374,7 @@ class comment extends dbObject {
      $allow_content_update = true;
     }
     $comment_file = file::find_by_reference_table_and_id('comment', $records->comment_id);
-    $comment_string .= "<div id=\"comment_id_$records->comment_id\" class=\"panel panel-info\">";
+    $comment_string .= "<div id=\"comment_id_$records->comment_id\" class=\"panel panel-info commentRecord\">";
     $comment_string .= '<div class="panel-heading">';
     $comment_string .= '<ul class="header_li">';
     if (!empty($records->username)) {
@@ -390,6 +390,7 @@ class comment extends dbObject {
       $records->comment_id . '" >Update</button> </li>';
     }
     $comment_string .= '<li"><a href="#commentForm" class="comment-reply btn btn-default" role="button">Reply</a></li>';
+    $comment_string .= '<li class="update-comment"></li>';
     $comment_string .= '</ul>';
     $comment_string .= '</div>';
     $comment_string .= '<div class="comment panel-body">' . $records->comment;

@@ -7,7 +7,9 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id='bom_routing_divId'>
- <div id ="form_header"><span class="heading"><?php echo gettext('Routing') ?></span>
+ <span class="heading"><?php echo gettext('Routing Header') ;
+  echo !empty($form_name_header) ?  ' - '. gettext($form_name_header) : ' ';
+  ?></span>
   <form action=""  method="bom_routingst" id="bom_routing_header"  name="bom_routing_header">
    <div id="tabsHeader">
     <ul class="tabMain">
@@ -18,7 +20,6 @@ inoERP
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field">
         <li><?php $f->l_text_field_dr_withSearch('bom_routing_header_id') ?>
          <a name="show" href="form.php?class_name=bom_routing_header&<?php echo "mode=$mode"; ?>" class="show document_id bom_routing_header_id">
@@ -26,15 +27,19 @@ inoERP
         </li>
         <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $bom_routing_header->org_id, 'org_id', '', 1, $readonly1); ?>        </li>
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="item_id_m select_popup clickable">
-          <?php echo gettext('Item Number') ?></label><?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
-         <?php $f->text_field_dm('item_number', 'select_item_number_allowedBOM'); ?>
+          <?php echo gettext('Item Number') ?></label>
+         <?php
+        echo $f->hidden_field_withId('item_id_m', $$class->item_id_m);
+        echo $f->hidden_field_withCLass('bom_enabled_cb', '1', 'popup_value');
+        echo !empty($hidden_field) ? $hidden_field : '';
+        $f->text_field_dm('item_number', 'select_item_number_all');
+        ?>
         </li>
         <li><?php $f->l_select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, '', '', '', $readonly); ?>        </li>
         <li><?php $f->l_text_field_d('item_description'); ?> </li>
         <li><?php $f->l_text_field_d('routing_revision'); ?> </li>
         <li><?php $f->l_date_fieldAnyDay('effective_date', $$class->effective_date); ?>              </li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div> 

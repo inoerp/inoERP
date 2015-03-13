@@ -11,7 +11,7 @@ function getBlockForm() {
 	$("#new_block").append(div);
 	$('#loading').hide();
  }).fail(function() {
-	alert("Block block loading failed");
+	alert("Block Loading Failed");
 	$('#loading').hide();
  });
 // $(".form_table #subinventory_id").attr("disabled",false);
@@ -29,7 +29,7 @@ function deleteBlock(block_id) {
 	$(".error").append(div);
 	$('#loading').hide();
  }).fail(function() {
-	alert("Block delete failed");
+	alert("Block Delete Failed");
 	$('#loading').hide();
  });
 // $(".form_table #subinventory_id").attr("disabled",false);
@@ -47,7 +47,7 @@ function updateBlock(block_id, ulclass) {
 	$(ulclass).append(div);
 	$('#loading').hide();
  }).fail(function() {
-	alert("Block update failed");
+	alert("Block Update Failed");
 	$('#loading').hide();
  });
 // $(".form_table #subinventory_id").attr("disabled",false);

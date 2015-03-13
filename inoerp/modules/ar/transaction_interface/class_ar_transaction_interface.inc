@@ -157,10 +157,6 @@ class ar_transaction_interface extends dbObject {
  public $multi_action_class_pc_value;
  private $_ar_transaction_header_id;
 
- public function __set($name, $value) {
-  $this->$name = $value;
- }
-
  public function distinct_customer_sites() {
   $sql = " SELECT DISTINCT(ar_customer_site_id) FROM ";
   $sql .= self::$table_name;
@@ -242,6 +238,7 @@ class ar_transaction_interface extends dbObject {
  }
 
  private function _create_transaction_line_from_post() {
+  global $dbc;
   $line_number = 0;
 
   for ($i = 0; $i < count($_POST['item_description']); $i++) {
@@ -253,8 +250,10 @@ class ar_transaction_interface extends dbObject {
    //update the sales order line 
    $sol = new sd_so_line();
    $sol->findBy_id($_POST['sd_so_line_id'][$i]);
-   if ($sol->line_status != 'SHIPPED') {
-    echo "<br> Line is not available for invoicing";
+   $qty_available_for_inv = $sol->shipped_quantity - $sol->invoiced_quantity;
+   if ($qty_available_for_inv <= 0) {
+    echo "<br> Line is not available for invoicing . Qty available for invoicing is " . $qty_available_for_inv;
+    $dbc->rollback = true;
     return -99;
    }
 

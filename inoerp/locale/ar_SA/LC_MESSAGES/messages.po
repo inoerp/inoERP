@@ -1,0 +1,9854 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2015-03-09 00:38+0800\n"
+"PO-Revision-Date: 2015-03-09 00:39+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.4\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"Language: ar_SA\n"
+
+
+msgid "Address Id"
+msgstr "معرف عنوان"
+
+msgid "Type"
+msgstr "نوع"
+
+msgid "Address Name"
+msgstr "اسم العنوان"
+
+msgid "Mdm Tax Region Id"
+msgstr "معرف المنطقة ضريبة أطباء العالم"
+
+msgid "Description"
+msgstr "الوصف"
+
+msgid "Phone"
+msgstr "الهاتف"
+
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+msgid "Website"
+msgstr "موقع على شبكة الإنترنت"
+
+msgid "Address"
+msgstr "عنوان"
+
+msgid "Country"
+msgstr "البلد"
+
+msgid "Postal Code"
+msgstr "الرمز البريدي"
+
+msgid "Efid"
+msgstr "أفيد"
+
+msgid "Status"
+msgstr "مركز"
+
+msgid "Rev Enabled"
+msgstr "القس تمكين"
+
+msgid "Rev Number"
+msgstr "عدد Rev"
+
+msgid "Created By"
+msgstr "تم إنشاؤها بواسطة"
+
+msgid "Creation Date"
+msgstr "تاريخ الإنشاء"
+
+msgid "Last Update By"
+msgstr "آخر تحديث قبل"
+
+msgid "Last Update Date"
+msgstr "تاريخ التحديث الأخير"
+
+msgid "Am Activity Reference Id"
+msgstr "وأنا معرف مرجع النشاط"
+
+msgid "Am Asset Id"
+msgstr "وأنا معرف الأصل"
+
+msgid "Am Reference Id"
+msgstr "وأنا معرف مرجع"
+
+msgid "Priority"
+msgstr "أولوية"
+
+msgid "Start Date"
+msgstr "تاريخ البدء"
+
+msgid "End Date"
+msgstr "تاريخ الانتهاء"
+
+msgid "Cause"
+msgstr "السبب"
+
+msgid "Activity Type"
+msgstr "نوع النشاط"
+
+msgid "Accounting Class Id"
+msgstr "معرف فئة المحاسبة"
+
+msgid "Owning Department Id"
+msgstr "امتلاك معرف إدارة"
+
+msgid "Shutdown Type"
+msgstr "نوع إيقاف التشغيل"
+
+msgid "Activity Source"
+msgstr "مصدر النشاط"
+
+msgid "Asset Number"
+msgstr "عدد الأصول"
+
+msgid "Tag Number"
+msgstr "عدد البطاقات"
+
+msgid "Serial Number"
+msgstr "الرقم التسلسلي"
+
+msgid "Am Asset Category Id"
+msgstr "وأنا معرف فئة الأصول"
+
+msgid "Parent Asset Id"
+msgstr "معرف الأصل الأصل"
+
+msgid "Manufacturer"
+msgstr "الشركة المصنعة"
+
+msgid "Org Id"
+msgstr "معرف Org"
+
+msgid "Item Id M"
+msgstr "معرف العنصر M"
+
+msgid "Model Number"
+msgstr "رقم الموديل"
+
+msgid "Warranty Number"
+msgstr "رقم الضمان"
+
+msgid "Warranty Exp Date"
+msgstr "الضمان أكسب التاريخ"
+
+msgid "Maintainable Cb"
+msgstr "Cb تستعصي"
+
+msgid "Subinventory Id"
+msgstr "معرف سوبينفينتوري"
+
+msgid "Locator Id"
+msgstr "معرف محدد موقع المعلومات"
+
+msgid "Equipment Item Id M"
+msgstr "معرف عنصر المعدات M"
+
+msgid "Fa Asset Id"
+msgstr "معرف الأصل اتحاد كرة القدم"
+
+msgid "Production Org Id"
+msgstr "معرف Org الإنتاج"
+
+msgid "Ap Payment Header Id"
+msgstr "Ap دفع رأس معرف"
+
+msgid "Bu Org Id"
+msgstr "معرف Org بو"
+
+msgid "Payment Type"
+msgstr "نوع الدفع"
+
+msgid "Payment Number"
+msgstr "رقم الدفع"
+
+msgid "Supplier Id"
+msgstr "معرف المورد"
+
+msgid "Supplier Site Id"
+msgstr "معرف موقع المورد"
+
+msgid "From Bank Header Id"
+msgstr "من مصرف رأس معرف"
+
+msgid "Header Amount"
+msgstr "مقدار رأس"
+
+msgid "Currency"
+msgstr "تحويل العملات"
+
+msgid "Document Number"
+msgstr "رقم المستند"
+
+msgid "Payment Status"
+msgstr "حالة الدفع"
+
+msgid "Gl Journal Header Id"
+msgstr "مجلة Gl رأس معرف"
+
+msgid "Ap Payment Line Id"
+msgstr "معرف خط الدفع Ap"
+
+msgid "Line Number"
+msgstr "رقم السطر"
+
+msgid "Amount"
+msgstr "المبلغ"
+
+msgid "Line Description"
+msgstr "وصف خط"
+
+msgid "Ap Transaction Header Id"
+msgstr "معرف رأس المعاملات Ap"
+
+msgid "Transaction Type"
+msgstr "نوع الحركة"
+
+msgid "Transaction Number"
+msgstr "عدد المعاملات"
+
+msgid "Document Owner"
+msgstr "مالك المستند"
+
+msgid "Apth Currency"
+msgstr "العملة أبته"
+
+msgid "Apth Header Amount"
+msgstr "مقدار رأس أبته"
+
+msgid "Transaction Status"
+msgstr "حالة الحركة"
+
+msgid "Paid Amount"
+msgstr "المبلغ المدفوع"
+
+msgid "Apth Payment Status"
+msgstr "حالة الدفع أبته"
+
+msgid "Supplier Name"
+msgstr "اسم المورد"
+
+msgid "Supplier Number"
+msgstr "عدد الموردين"
+
+msgid "Supplier Site Name"
+msgstr "اسم موقع المورد"
+
+msgid "Supplier Site Number"
+msgstr "رقم الموقع المورد"
+
+msgid "From Bank Line Id"
+msgstr "من الضفة سطر معرف"
+
+msgid "To Bank Header Id"
+msgstr "للبنك رأس معرف"
+
+msgid "Doc Currency"
+msgstr "العملة doc"
+
+msgid "To Bank Line Id"
+msgstr "لمعرف خط البنك"
+
+msgid "Exchange Rate Type"
+msgstr "نوع سعر الصرف"
+
+msgid "Exchange Rate"
+msgstr "سعر الصرف"
+
+msgid "Ef Id"
+msgstr "معرف ef"
+
+msgid "Document Date"
+msgstr "تاريخ المستند"
+
+msgid "Ledger Id"
+msgstr "معرف دفتر الأستاذ"
+
+msgid "Period Id"
+msgstr "معرف الفترة"
+
+msgid "Pay Group"
+msgstr "مجموعة الدفع"
+
+msgid "Payment Method"
+msgstr "طريقة الدفع"
+
+msgid "Approval Status"
+msgstr "حالة الموافقة"
+
+msgid "Reference Type"
+msgstr "نوع المرجع"
+
+msgid "Reference Key Name"
+msgstr "مرجع اسم المفتاح"
+
+msgid "Reference Key Value"
+msgstr "القيمة المرجعية الرئيسية"
+
+msgid "Ap Payment Interface Id"
+msgstr "معرف الواجهة الدفع Ap"
+
+msgid "Document Currency"
+msgstr "العملة المستند"
+
+msgid "Gl Amount"
+msgstr "المبلغ Gl"
+
+msgid "Line Source"
+msgstr "مصدر الخط"
+
+msgid "Term Id"
+msgstr "مصطلح معرف"
+
+msgid "Term Name"
+msgstr "اسم المصطلح"
+
+msgid "Term Description"
+msgstr "وصف مصطلح"
+
+msgid "Payment Term Id"
+msgstr "معرف الدفع الأجل"
+
+msgid "Po Number"
+msgstr "رقم طلب الشراء"
+
+msgid "Po Type"
+msgstr "نوع Po"
+
+msgid "Buyer"
+msgstr "المشتري"
+
+msgid "Payment Term"
+msgstr "مصطلح الدفع"
+
+msgid "Ap Transaction Line Id"
+msgstr "معرف خط المعاملات Ap"
+
+msgid "Line Type"
+msgstr "نوع الخط"
+
+msgid "Item Description"
+msgstr "وصف الصنف"
+
+msgid "Inv Line Quantity"
+msgstr "كمية بند الاستثمارات"
+
+msgid "Inv Unit Price"
+msgstr "سعر الوحدة للاستثمارات"
+
+msgid "Inv Line Price"
+msgstr "سعر الخط للاستثمارات"
+
+msgid "Gl Inv Line Price"
+msgstr "سعر خط Gl للاستثمارات"
+
+msgid "Po Header Id"
+msgstr "بو رأس معرف"
+
+msgid "Po Line Id"
+msgstr "معرف خط بو"
+
+msgid "Po Detail Id"
+msgstr "معرف تفاصيل بو"
+
+msgid "Ref Transaction Header Id"
+msgstr "Ref حركة رأس معرف"
+
+msgid "Ref Transaction Line Id"
+msgstr "معرف خط المعاملات ref"
+
+msgid "Item Number"
+msgstr "رقم الصنف"
+
+msgid "Uom Id"
+msgstr "معرف Uom"
+
+msgid "Item Status"
+msgstr "حالة الصنف"
+
+msgid "Po Status"
+msgstr "مركز بو"
+
+msgid "Payment Term Description"
+msgstr "وصف مصطلح الدفع"
+
+msgid "Po Line Number"
+msgstr "ص. ب. رقم السطر"
+
+msgid "Line Quantity"
+msgstr "كمية سطر"
+
+msgid "Unit Price"
+msgstr "سعر الوحدة"
+
+msgid "Line Price"
+msgstr "سعر الخط"
+
+msgid "Gl Line Price"
+msgstr "سعر خط Gl"
+
+msgid "Gl Tax Amount"
+msgstr "مبلغ الضريبة Gl"
+
+msgid "Tax Amount"
+msgstr "مبلغ الضريبة"
+
+msgid "Shipment Number"
+msgstr "رقم الشحنة"
+
+msgid "Receving Org Id"
+msgstr "يتسلم Org معرف"
+
+msgid "Requestor"
+msgstr "الطالب"
+
+msgid "Quantity"
+msgstr "الكمية"
+
+msgid "Received Quantity"
+msgstr "الكمية المستلمة"
+
+msgid "Receiving Open Quantity"
+msgstr "استلام الكمية مفتوحة"
+
+msgid "Need By Date"
+msgstr "تحتاج حسب التاريخ"
+
+msgid "Promise Date"
+msgstr "تاريخ الوعد"
+
+msgid "Accepted Quantity"
+msgstr "الكمية المقبولة"
+
+msgid "Delivered Quantity"
+msgstr "الكمية التي تم تسليمها"
+
+msgid "Invoiced Quantity"
+msgstr "الكمية المفوترة"
+
+msgid "Paid Quantity"
+msgstr "الكمية المدفوعة"
+
+msgid "Invoicing Open Quantity"
+msgstr "فوترة الكمية مفتوحة"
+
+msgid "Charge Ac Id"
+msgstr "معرف المسؤول Ac"
+
+msgid "Accrual Ac Id"
+msgstr "معرف Ac الاستحقاق"
+
+msgid "Budget Ac Id"
+msgstr "معرف Ac الميزانية"
+
+msgid "Ppv Ac Id"
+msgstr "معرف Ac ببف"
+
+msgid "Receving Org"
+msgstr "Org استلامها"
+
+msgid "Ap Transaction Detail Id"
+msgstr "معرف تفاصيل المعاملات Ap"
+
+msgid "Account Type"
+msgstr "نوع الحساب"
+
+msgid "Detail Description"
+msgstr "وصف التفاصيل"
+
+msgid "Detail Ac Id"
+msgstr "معرف تفاصيل التيار المتردد"
+
+msgid "Detail Number"
+msgstr "عدد من التفاصيل"
+
+msgid "Journal Created Cb"
+msgstr "دفتر اليومية التي تم إنشاؤها Cb"
+
+msgid "Ship To Id"
+msgstr "السفينة إلى معرف"
+
+msgid "Bill To Id"
+msgstr "مشروع قانون لمعرف"
+
+msgid "Payment Term Date"
+msgstr "تاريخ الدفع الأجل"
+
+msgid "Tax Code Id"
+msgstr "معرف رمز الضريبة"
+
+msgid "Asset Cb"
+msgstr "Cb الأصول"
+
+msgid "Fa Asset Category Id"
+msgstr "معرف فئة الأصول اتحاد كرة القدم"
+
+msgid "Prj Project Header Id"
+msgstr "معرف المشروع Prj رأس"
+
+msgid "Prj Project Line Id"
+msgstr "معرف خط Prj المشروع"
+
+msgid "Ar Customer Id"
+msgstr "معرف العميل ع"
+
+msgid "Customer Number"
+msgstr "رقم العميل"
+
+msgid "Customer Name"
+msgstr "اسم العميل"
+
+msgid "Customer Type"
+msgstr "نوع العميل"
+
+msgid "Tax Country"
+msgstr "بلد الضرائب"
+
+msgid "Tax Reg No"
+msgstr "لا ضريبة ريج"
+
+msgid "Tax Payer Id"
+msgstr "معرف دافعي الضرائب"
+
+msgid "Customer Contact Id"
+msgstr "معرف اتصال العميل"
+
+msgid "Customer Credit Class"
+msgstr "فئة العملاء الائتمانية"
+
+msgid "Profile Name"
+msgstr "اسم التشكيل الجانبي"
+
+msgid "Rev Enabled Cb"
+msgstr "تمكين Rev Cb"
+
+msgid "Ar Customer Bu Id"
+msgstr "معرف العميل ع بو"
+
+msgid "Profile Id"
+msgstr "معرف الشخصية"
+
+msgid "Finance Profile Id"
+msgstr "معرف الشخصية المالية"
+
+msgid "Payment Method Id"
+msgstr "معرف طريقة الدفع"
+
+msgid "Order Type Id"
+msgstr "معرف نوع النظام"
+
+msgid "Price List Id"
+msgstr "معرف قائمة الأسعار"
+
+msgid "Internal Org Id"
+msgstr "معرف داخلي Org"
+
+msgid "Fob"
+msgstr "فوب"
+
+msgid "Freight Terms"
+msgstr "شروط الشحن"
+
+msgid "Transportation"
+msgstr "النقل"
+
+msgid "Country Of Origin"
+msgstr "بلد المنشأ"
+
+msgid "Site Address Id"
+msgstr "معرف عنوان الموقع"
+
+msgid "Site Contact Id"
+msgstr "موقع معرف جهة الاتصال"
+
+msgid "Customer Site Attachement Id"
+msgstr "معرف Attachement موقع العميل"
+
+msgid "Bank Id"
+msgstr "معرف البنك"
+
+msgid "Bank Account Id"
+msgstr "معرف الحساب البنكي"
+
+msgid "Receivable Ac Id"
+msgstr "معرف Ac المستحق"
+
+msgid "Revenue Ac Id"
+msgstr "معرف Ac الإيرادات"
+
+msgid "Tax Ac Id"
+msgstr "معرف الضريبة التيار المتردد"
+
+msgid "Freight Ac Id"
+msgstr "معرف Ac الشحن"
+
+msgid "Clearing Ac Id"
+msgstr "إزالة معرف التيار المتردد"
+
+msgid "Unbilled Receivable Ac Id"
+msgstr "معرف Ac المستحق لها فواتير"
+
+msgid "Unearned Revenue Ac Id"
+msgstr "معرف Ac غير مكتسب من الإيراد"
+
+msgid "Ar Customer Site Id"
+msgstr "معرف موقع العميل ع"
+
+msgid "Customer Site Number"
+msgstr "رقم الموقع العميل"
+
+msgid "Customer Site Name"
+msgstr "اسم موقع العميل"
+
+msgid "Site Tax Country"
+msgstr "موقع ضريبة البلد"
+
+msgid "Site Tax Reg No"
+msgstr "موقع الضرائب لا ريج"
+
+msgid "Site Tax Payer Id"
+msgstr "موقع معرف دافعي الضرائب"
+
+msgid "Site Tax Code"
+msgstr "رمز ضريبة الموقع"
+
+msgid "Customer Site Ref"
+msgstr "المرجع موقع العميل"
+
+msgid "Customer Site Type"
+msgstr "نوع موقع العميل"
+
+msgid "Site Status"
+msgstr "حالة الموقع"
+
+msgid "Ar Receipt Header Id"
+msgstr "تسلم ع رأس معرف"
+
+msgid "Ar Receipt Source Id"
+msgstr "معرف المصدر تلقي Ar"
+
+msgid "Receipt Type"
+msgstr "نوع الاستلام"
+
+msgid "Receipt Number"
+msgstr "رقم الإيصال"
+
+msgid "Receipt Method"
+msgstr "طريقة الاستلام"
+
+msgid "Receipt Status"
+msgstr "تلقي مركز"
+
+msgid "Ar Receipt Interface Id"
+msgstr "معرف الواجهة استلام Ar"
+
+msgid "Ar Transaction Header Id"
+msgstr "ع حركة رأس معرف"
+
+msgid "Sales Person"
+msgstr "مندوب المبيعات"
+
+msgid "Ar Receipt Line Id"
+msgstr "معرف خط استلام Ar"
+
+msgid "Receipt Source"
+msgstr "استلام المصدر"
+
+msgid "Creation Method"
+msgstr "طريقة إنشاء"
+
+msgid "Remittance"
+msgstr "التحويلات المالية"
+
+msgid "Clearance"
+msgstr "إزالة الألغام"
+
+msgid "Sync Receipt Number Cb"
+msgstr "تزامن استلام رقم Cb"
+
+msgid "Ar Transaction Detail Id"
+msgstr "معرف تفاصيل الصفقة Ar"
+
+msgid "Ar Transaction Line Id"
+msgstr "معرف خط المعاملات Ar"
+
+msgid "Sd So Header Id"
+msgstr "Sd حتى رأس معرف"
+
+msgid "Sd So Line Id"
+msgstr "Sd حتى سطر معرف"
+
+msgid "Sd So Detail Id"
+msgstr "Sd بالتفصيل حتى معرف"
+
+msgid "Transaction Class"
+msgstr "فئة الحركة"
+
+msgid "Receipt Amount"
+msgstr "استلام المبلغ"
+
+msgid "Ar Transaction Interface Id"
+msgstr "معرف الواجهة معاملة Ar"
+
+msgid "Ar Transaction Source Id"
+msgstr "معرف المصدر المعاملات Ar"
+
+msgid "Transaction Source"
+msgstr "مصدر الحركة"
+
+msgid "Source Type"
+msgstr "نوع المصدر"
+
+msgid "Legal Org Id"
+msgstr "معرف المؤسسة القانونية"
+
+msgid "Invoice Type Id"
+msgstr "معرف نوع الفاتورة"
+
+msgid "Cm Type Id"
+msgstr "معرف نوع سم"
+
+msgid "Create Clearing Cb"
+msgstr "إنشاء مركز سي بي"
+
+msgid "Ar Transaction Type Id"
+msgstr "معرف نوع المعاملات Ar"
+
+msgid "Ar Transaction Type"
+msgstr "نوع الحركة Ar"
+
+msgid "Br Receivable Ac Id"
+msgstr "معرف Ac المستحق Br"
+
+msgid "Br Offset Ac Id"
+msgstr "Br إزاحة معرف التيار المتردد"
+
+msgid "Remaing Amount"
+msgstr "المبلغ ريمينج"
+
+msgid "So Number"
+msgstr "حتى رقم"
+
+msgid "Bc Label Auto Trigger Id"
+msgstr "معرف المشغل التلقائي التسمية قبل الميلاد"
+
+msgid "Transaction Type Id"
+msgstr "معرف نوع المعاملة"
+
+msgid "Bc Label Format Header Id"
+msgstr "معرف رأس تنسيق التسمية قبل الميلاد"
+
+msgid "Association Level"
+msgstr "مستوى الرابطة"
+
+msgid "Association Level Value"
+msgstr "قيمة مستوى الرابطة"
+
+msgid "Sys Printer Id"
+msgstr "معرف الطابعة Sys"
+
+msgid "Enabled Cb"
+msgstr "تمكين Cb"
+
+msgid "Label Type"
+msgstr "نوع بطاقة العنونة"
+
+msgid "Format Name"
+msgstr "تنسيق اسم"
+
+msgid "Disable Date"
+msgstr "تعطيل تاريخ"
+
+msgid "Default Cb"
+msgstr "Cb الافتراضي"
+
+msgid "Generator Class Name"
+msgstr "مولد اسم الفئة"
+
+msgid "Generator Function Name"
+msgstr "مولد اسم الدالة"
+
+msgid "Bc Label Format Line Id"
+msgstr "معرف خط تنسيق التسمية قبل الميلاد"
+
+msgid "Object Name"
+msgstr "اسم الكائن"
+
+msgid "Sys Field Name"
+msgstr "اسم الحقل Sys"
+
+msgid "Field Name"
+msgstr "اسم الحقل"
+
+msgid "Bc Label Request Id"
+msgstr "معرف طلب التسمية قبل الميلاد"
+
+msgid "Label Content"
+msgstr "محتوى التسمية"
+
+msgid "Output File Path"
+msgstr "مسار ملف الإخراج"
+
+msgid "File Name"
+msgstr "اسم الملف"
+
+msgid "Bc Static Label Id"
+msgstr "معرف التسمية ثابتة قبل الميلاد"
+
+msgid "Generate Label Class Name"
+msgstr "إنشاء تسمية اسم الفئة"
+
+msgid "Generate Label Function Name"
+msgstr "إنشاء تسمية اسم الدالة"
+
+msgid "Block Id"
+msgstr "معرف كتلة"
+
+msgid "Reference Table"
+msgstr "جدول المراجع"
+
+msgid "Name"
+msgstr "الاسم"
+
+msgid "Cached Cb"
+msgstr "Cb المخزنة مؤقتاً"
+
+msgid "Restrict To Role"
+msgstr "تقييد لدور"
+
+msgid "Visibility Option"
+msgstr "خيار الرؤية"
+
+msgid "Visibility"
+msgstr "الرؤية"
+
+msgid "Visibility Php Cb"
+msgstr "الرؤية بي سي بي"
+
+msgid "Title"
+msgstr "العنوان"
+
+msgid "Show Title Cb"
+msgstr "إظهار العنوان Cb"
+
+msgid "Position"
+msgstr "موقف"
+
+msgid "Weight"
+msgstr "الوزن"
+
+msgid "Session Id"
+msgstr "معرف جلسة العمل"
+
+msgid "Block Data"
+msgstr "كتلة البيانات"
+
+msgid "Block Content Id"
+msgstr "كتلة معرف المحتوى"
+
+msgid "Info"
+msgstr "معلومات"
+
+msgid "Content"
+msgstr "المحتوى"
+
+msgid "Content Php Cb"
+msgstr "محتوى بي سي بي"
+
+msgid "Bom Header Id"
+msgstr "معرف رأس شجرة"
+
+msgid "Alternate Bom"
+msgstr "شجرة المواد البديلة"
+
+msgid "Bom Revision"
+msgstr "مراجعة شجرة المواد"
+
+msgid "Effective Date"
+msgstr "التاريخ الفعلي"
+
+msgid "Common Bom Item Id M"
+msgstr "معرف عنصر شجرة المواد المشتركة م"
+
+msgid "Item Type"
+msgstr "نوع البند"
+
+msgid "Bom Type"
+msgstr "نوع شجرة المواد"
+
+msgid "Costing Enabled Cb"
+msgstr "تكلف تمكين Cb"
+
+msgid "Make Buy"
+msgstr "جعل شراء"
+
+msgid "Org"
+msgstr "Org"
+
+msgid "Org Type"
+msgstr "نوع المؤسسة"
+
+msgid "Org Status"
+msgstr "Org حالة"
+
+msgid "Org Description"
+msgstr "وصف Org"
+
+msgid "Org Code"
+msgstr "Org التعليمات البرمجية"
+
+msgid "Bom Commonbom Line Id"
+msgstr "معرف خط شجرة كومونبوم"
+
+msgid "Bom Line Id"
+msgstr "معرف خط شجرة المواد"
+
+msgid "Routing Sequence"
+msgstr "تسلسل التوجيه"
+
+msgid "Planning Percentage"
+msgstr "تخطيط النسبة المئوية"
+
+msgid "Yield"
+msgstr "العائد"
+
+msgid "Include In Cost Rollup Cb"
+msgstr "وتشمل في Cb التكلفة التراكمية"
+
+msgid "Wip Supply Type"
+msgstr "نوع العرض Wip"
+
+msgid "Supply Sub Inventory"
+msgstr "إمداد المخزون Sub"
+
+msgid "Supply Locator"
+msgstr "توفير محدد موقع المعلومات"
+
+msgid "Bom Config Header Id"
+msgstr "تكوين شجرة رأس معرف"
+
+msgid "Bom Config Line Id"
+msgstr "معرف خط التكوين شجرة المواد"
+
+msgid "Bom Sequence"
+msgstr "شجرة التسلسل"
+
+msgid "Component Item Id M"
+msgstr "معرف عنصر مكون م"
+
+msgid "Component Revision"
+msgstr "مراجعة المكون"
+
+msgid "Usage Basis"
+msgstr "أساس الاستخدام"
+
+msgid "Usage Quantity"
+msgstr "كمية الاستخدام"
+
+msgid "Transacted Quantity"
+msgstr "الكمية المتعامل بها"
+
+msgid "Auto Request Material Cb"
+msgstr "السيارات طلب بناء القدرات المادية"
+
+msgid "Bom Cost Type Id"
+msgstr "معرف نوع تكلفة Bom"
+
+msgid "Cost Type Code"
+msgstr "رمز نوع التكلفة"
+
+msgid "Cost Type"
+msgstr "نوع التكلفة"
+
+msgid "Multi Org Cb"
+msgstr "Cb Org متعدد"
+
+msgid "Default Cost Type"
+msgstr "نوع التكلفة الافتراضية"
+
+msgid "Bom Department Id"
+msgstr "معرف إدارة شجرة المواد"
+
+msgid "Department"
+msgstr "إدارة"
+
+msgid "Location Id"
+msgstr "معرف الموقع"
+
+msgid "Department Type"
+msgstr "نوع الإدارة"
+
+msgid "Default Basis"
+msgstr "أساس الافتراضي"
+
+msgid "Absorption Ac Id"
+msgstr "معرف امتصاص التيار المتردد"
+
+msgid "Resource Assignment Id"
+msgstr "معرف المورد التعيين"
+
+msgid "Bom Department Resource Assignment Id"
+msgstr "شجرة إدارة المورد التعيين معرف"
+
+msgid "Cost Type Id"
+msgstr "معرف نوع التكلفة"
+
+msgid "Resource Id"
+msgstr "معرف المورد"
+
+msgid "No Of Units"
+msgstr "لا من الوحدات"
+
+msgid "Efficiency"
+msgstr "الكفاءة"
+
+msgid "Utilization"
+msgstr "استخدام"
+
+msgid "Common Bom Org Id"
+msgstr "معرف Org شجرة المواد المشتركة"
+
+msgid "Effective Start Date"
+msgstr "تاريخ البدء الفعلي"
+
+msgid "Effective End Date"
+msgstr "تاريخ الانتهاء الفعلي"
+
+msgid "Eco Number"
+msgstr "عدد منظمة التعاون الاقتصادي"
+
+msgid "Eco Implemented Cb"
+msgstr "تنفيذها الإيكولوجي Cb"
+
+msgid "Bom Header Id H"
+msgstr "معرف شجرة رأس ح"
+
+msgid "H Created By"
+msgstr "ح التي تم إنشاؤها بواسطة"
+
+msgid "H Creation Date"
+msgstr "تاريخ إنشاء ح"
+
+msgid "H Last Update By"
+msgstr "ح آخر تحديث قبل"
+
+msgid "H Last Update Date"
+msgstr "ح تاريخ آخر تحديث"
+
+msgid "Bom Material Element Id"
+msgstr "معرف عنصر شجرة المواد"
+
+msgid "Material Element"
+msgstr "العنصر المادي"
+
+msgid "Bom Overhead Id"
+msgstr "معرف شجرة النفقات العامة"
+
+msgid "Overhead"
+msgstr "النفقات العامة"
+
+msgid "Overhead Type"
+msgstr "نوع النفقات العامة"
+
+msgid "Rate Assignment Id"
+msgstr "معرف تعيين معدل"
+
+msgid "Bom Overhead Rate Assignment Id"
+msgstr "معرف تعيين معدل Bom النفقات العامة"
+
+msgid "Bom Cost Type"
+msgstr "نوع التكلفة Bom"
+
+msgid "Rate"
+msgstr "معدل"
+
+msgid "Bom Overhead Resource Assignment Id"
+msgstr "معرف تعيين المورد Bom النفقات العامة"
+
+msgid "Resource Bom Cost Type"
+msgstr "نوع مورد تكلفة Bom"
+
+msgid "Rate Bom Cost Type"
+msgstr "معدل تكلفة Bom نوع"
+
+msgid "Bom Resource Id"
+msgstr "معرف المورد Bom"
+
+msgid "Resource"
+msgstr "المورد"
+
+msgid "Resource Type"
+msgstr "نوع المورد"
+
+msgid "Charge Type"
+msgstr "نوع التهمة"
+
+msgid "Uom"
+msgstr "Uom"
+
+msgid "Basis"
+msgstr "أساس"
+
+msgid "Osp Cb"
+msgstr "Osp Cb"
+
+msgid "Osp Item Id"
+msgstr "معرف عنصر Osp"
+
+msgid "Costed Cb"
+msgstr "بناء القدرات المحددة التكاليف"
+
+msgid "Standard Rate Cb"
+msgstr "معدل قياسي Cb"
+
+msgid "Variance Ac Id"
+msgstr "معرف الفرق التيار المتردد"
+
+msgid "Overheads"
+msgstr "النفقات العامة"
+
+msgid "Rate Reference Id"
+msgstr "معدل مرجع معرف"
+
+msgid "Bom Resource Cost Id"
+msgstr "تكلفة المورد Bom معرف"
+
+msgid "Resource Rate"
+msgstr "معدل الموارد"
+
+msgid "Bom Routing Detail Id"
+msgstr "شجرة مواد التوجيه معرف التفاصيل"
+
+msgid "Bom Routing Line Id"
+msgstr "معرف خط التوجيه Bom"
+
+msgid "Bom Routing Header Id"
+msgstr "شجرة مواد التوجيه رأس معرف"
+
+msgid "Bom Standard Operation Id"
+msgstr "معرف العملية شجرة المواد القياسية"
+
+msgid "Resource Sequence"
+msgstr "تسلسل الموارد"
+
+msgid "Charge Basis"
+msgstr "أساس التهمة"
+
+msgid "Resource Usage"
+msgstr "استخدام الموارد"
+
+msgid "Resource Schedule"
+msgstr "الجدول الزمني للمورد"
+
+msgid "Assigned Units"
+msgstr "الوحدات المعينة"
+
+msgid "Twenty Four Hr Cb"
+msgstr "Cb أربع وعشرين ساعة"
+
+msgid "Alternate Routing"
+msgstr "المناوب توجيه"
+
+msgid "Routing Revision"
+msgstr "مراجعة التوجيه"
+
+msgid "Common Routing Item Id M"
+msgstr "معرف عنصر التوجيه المشتركة م"
+
+msgid "Completion Subinventory"
+msgstr "إنجاز سوبينفينتوري"
+
+msgid "Completion Locator"
+msgstr "إنجاز محدد موقع المعلومات"
+
+msgid "Standard Operation Id"
+msgstr "معرف العملية القياسية"
+
+msgid "Department Id"
+msgstr "معرف إدارة"
+
+msgid "Lead Time Percentage"
+msgstr "يؤدي الوقت النسبة المئوية"
+
+msgid "Count Point Cb"
+msgstr "عد نقطة Cb"
+
+msgid "Auto Charge Cb"
+msgstr "Cb رسوم السيارات"
+
+msgid "Backflush Cb"
+msgstr "Cb باكفلوش"
+
+msgid "Include In Rollup Cb"
+msgstr "وتشمل في Cb التراكمية"
+
+msgid "Minimum Transfer Quantity"
+msgstr "كمية التحويل الحد الأدنى"
+
+msgid "Referenced Cb"
+msgstr "بناء القدرات المشار إليها"
+
+msgid "Cumm Yield"
+msgstr "الغلة كوم"
+
+msgid "Bom Routing Header Id H"
+msgstr "شجرة مواد التوجيه رأس معرف ح"
+
+msgid "Description H"
+msgstr "وصف ح"
+
+msgid "Code"
+msgstr "التعليمات البرمجية"
+
+msgid "Subinventory"
+msgstr "سوبينفينتوري"
+
+msgid "Locator"
+msgstr "محدد موقع المعلومات"
+
+msgid "Standard Operation"
+msgstr "العملية القياسية"
+
+msgid "Bom Standard Operation Resource Assignment Id"
+msgstr "معرف المورد التعيين من شجرة المواد القياسية العملية"
+
+msgid "Business Id"
+msgstr "معرف وحدة الأعمال"
+
+msgid "Business Org Type"
+msgstr "نوع الأعمال Org"
+
+msgid "Manager"
+msgstr "مدير"
+
+msgid "Enterprise Org Id"
+msgstr "معرف المؤسسة Org"
+
+msgid "Cash Ac Id"
+msgstr "معرف Ac النقدية"
+
+msgid "Content Id"
+msgstr "معرف المحتوى"
+
+msgid "Length"
+msgstr "طول"
+
+msgid "Height"
+msgstr "الارتفاع"
+
+msgid "Chapter"
+msgstr "الفصل"
+
+msgid "Category"
+msgstr "الفئة"
+
+msgid "Component"
+msgstr "المكون"
+
+msgid "Testabab"
+msgstr "تيستاباب"
+
+msgid "Category Id"
+msgstr "معرف الفئة"
+
+msgid "Major Category Id"
+msgstr "معرف الفئة الرئيسية"
+
+msgid "Parent Id"
+msgstr "معرف الأصل"
+
+msgid "Category Type"
+msgstr "نوع الفئة"
+
+msgid "Primary Cb"
+msgstr "بناء القدرات الأولية"
+
+msgid "Category Reference Id"
+msgstr "معرف مرجع الفئة"
+
+msgid "Reference Id"
+msgstr "معرف مرجع"
+
+msgid "Cc Co Header Id"
+msgstr "معرف رأس cc Co"
+
+msgid "Change Number"
+msgstr "تغيير عدد"
+
+msgid "Security Level"
+msgstr "مستوى الأمان"
+
+msgid "Template Id"
+msgstr "معرف القالب"
+
+msgid "Change Type"
+msgstr "تغيير نوع"
+
+msgid "Originator"
+msgstr "المنشئ"
+
+msgid "Reason Code"
+msgstr "كود السبب"
+
+msgid "Product Line"
+msgstr "خط المنتج"
+
+msgid "Process Flow Header Id"
+msgstr "معرف عملية تدفق رأس"
+
+msgid "Current Process Flow Line Id"
+msgstr "معرف خط تدفق العملية الحالية"
+
+msgid "Origination Date"
+msgstr "تاريخ نشأة"
+
+msgid "Owner User Id"
+msgstr "معرف المستخدم المالك"
+
+msgid "Release Date"
+msgstr "تاريخ الإصدار"
+
+msgid "Completion Date"
+msgstr "تاريخ الانتهاء"
+
+msgid "Project Task Id"
+msgstr "معرف المهمة في المشروع"
+
+msgid "Access Org"
+msgstr "Org الوصول"
+
+msgid "Related Changes"
+msgstr "التغييرات ذات الصلة"
+
+msgid "Cc Co Line Id"
+msgstr "معرف خط cc Co"
+
+msgid "New Revision"
+msgstr "مراجعة جديدة"
+
+msgid "Cc Co Line Value Id"
+msgstr "معرف قيمة خط cc Co"
+
+msgid "Cc Co Template Line Id"
+msgstr "معرف خط القالب cc Co"
+
+msgid "Field Value"
+msgstr "قيمة الحقل"
+
+msgid "Cc Co Process Flow Action Id"
+msgstr "Cc Co عملية تدفق العمل معرف"
+
+msgid "Sys Process Flow Line Id"
+msgstr "معرف خط تدفق العملية Sys"
+
+msgid "Action Number"
+msgstr "عدد الإجراء"
+
+msgid "Role Code"
+msgstr "دور التعليمات البرمجية"
+
+msgid "User Id"
+msgstr "معرف المستخدم"
+
+msgid "Pf Action Type"
+msgstr "نوع الإجراء Pf"
+
+msgid "Required Cb"
+msgstr "بناء القدرات المطلوبة"
+
+msgid "Comment"
+msgstr "التعليق"
+
+msgid "Action User Id"
+msgstr "معرف المستخدم في العمل"
+
+msgid "Action Duration"
+msgstr "مدة العمل"
+
+msgid "Sys Process Flow Action Value Id"
+msgstr "Sys عملية تدفق العمل قيمة معرف"
+
+msgid "Sys Process Flow Action Id"
+msgstr "Sys عملية تدفق العمل معرف"
+
+msgid "Value"
+msgstr "القيمة"
+
+msgid "Cc Co Template Header Id"
+msgstr "معرف رأس قالب cc Co"
+
+msgid "Template Name"
+msgstr "اسم القالب"
+
+msgid "Label"
+msgstr "التسمية"
+
+msgid "Value Type"
+msgstr "نوع القيمة"
+
+msgid "Control Type"
+msgstr "نوع عنصر التحكم"
+
+msgid "Control Value"
+msgstr "قيمة عنصر التحكم"
+
+msgid "Control Uom"
+msgstr "Uom التحكم"
+
+msgid "Active Cb"
+msgstr "Cb النشطة"
+
+msgid "Display Weight"
+msgstr "عرض الوزن"
+
+msgid "List Values"
+msgstr "قائمة القيم"
+
+msgid "Lower Limit"
+msgstr "الحد الأدنى"
+
+msgid "Upper Limit"
+msgstr "الحد الأعلى"
+
+msgid "List Value Option Type"
+msgstr "قائمة قيمة نوع الخيار"
+
+msgid "Coa Id"
+msgstr "معرف Coa"
+
+msgid "Coa Structure Id"
+msgstr "معرف هيكل Coa"
+
+msgid "Coa Name"
+msgstr "اسم شهادة الأصالة"
+
+msgid "Balancing"
+msgstr "موازنة"
+
+msgid "Cost Center"
+msgstr "مركز التكلفة"
+
+msgid "Natural Account"
+msgstr "حساب الطبيعية"
+
+msgid "Inter Company"
+msgstr "وبين الشركة"
+
+msgid "Field1"
+msgstr "Field1"
+
+msgid "Field2"
+msgstr "Field2"
+
+msgid "Field3"
+msgstr "Field3"
+
+msgid "Field4"
+msgstr "الحقل 4"
+
+msgid "Field5"
+msgstr "Field5"
+
+msgid "Field6"
+msgstr "Field6"
+
+msgid "Field7"
+msgstr "Field7"
+
+msgid "Field8"
+msgstr "Field8"
+
+msgid "Coa Combination Id"
+msgstr "معرف مجموعة Coa"
+
+msgid "Combination"
+msgstr "تركيبة"
+
+msgid "Ac Type"
+msgstr "نوع التيار المتردد"
+
+msgid "Coa Segment Values Id"
+msgstr "الجزء Coa قيم معرف"
+
+msgid "Coa Segments"
+msgstr "شرائح Coa"
+
+msgid "Segment Code"
+msgstr "مقطع التعليمات البرمجية"
+
+msgid "Comment Id"
+msgstr "معرف التعليق"
+
+msgid "Subject"
+msgstr "هذا الموضوع"
+
+msgid "Terms"
+msgstr "شروط"
+
+msgid "Published Cb"
+msgstr "Cb المنشورة"
+
+msgid "Weightage"
+msgstr "Weightage"
+
+msgid "Comment By"
+msgstr "تعليق"
+
+msgid "Content Type Id"
+msgstr "معرف نوع المحتوى"
+
+msgid "Show In Fp Cb"
+msgstr "إظهار في بناء القدرات وتنظيم الأسرة"
+
+msgid "Allow File Cb"
+msgstr "يسمح ملف Cb"
+
+msgid "Allow Comment Cb"
+msgstr "السماح بالتعليق Cb"
+
+msgid "Content Type"
+msgstr "نوع المحتوى"
+
+msgid "Read Role"
+msgstr "دور القراءة"
+
+msgid "Write Role"
+msgstr "كتابة دور"
+
+msgid "Update Role"
+msgstr "دور التحديث"
+
+msgid "Comment Read Role"
+msgstr "دور قراءة التعليق"
+
+msgid "Comment Write Role"
+msgstr "دور كتابة تعليق"
+
+msgid "Comment Update Role"
+msgstr "دور تحديث التعليق"
+
+msgid "Comment Order By"
+msgstr "أمر التعليق قبل"
+
+msgid "Comments Perpage"
+msgstr "بيرباجي التعليقات"
+
+msgid "Has Subject Cb"
+msgstr "وقد سي بي الموضوع"
+
+msgid "Subject Label"
+msgstr "تسمية الموضوع"
+
+msgid "Has Content Cb"
+msgstr "وقد Cb المحتوى"
+
+msgid "Content Label"
+msgstr "تسمية المحتوى"
+
+msgid "Summary Display Type"
+msgstr "نوع العرض الموجز"
+
+msgid "Auto Url Alias Cb"
+msgstr "التلقائي Url اسم مستعار Cb"
+
+msgid "Show Category Onsummary Cb"
+msgstr "تظهر الفئة أونسوماري Cb"
+
+msgid "Content Type Reference Id"
+msgstr "معرف مرجع نوع المحتوى"
+
+msgid "Field Label"
+msgstr "تسمية الحقل"
+
+msgid "Field Position"
+msgstr "الموقف الميداني"
+
+msgid "Option Type"
+msgstr "نوع الخيار"
+
+msgid "Cst Item Cost Header Id"
+msgstr "معرف رأس تكلفة البند لجنة العلم والتكنولوجيا"
+
+msgid "Based On Rollup Cb"
+msgstr "يستند بناء القدرات التراكمي"
+
+msgid "Sales Price"
+msgstr "سعر المبيعات"
+
+msgid "Purchase Price"
+msgstr "سعر الشراء"
+
+msgid "Cst Item Cost Line Id"
+msgstr "معرف خط تكلفة البند لجنة العلم والتكنولوجيا"
+
+msgid "Cost Element Type"
+msgstr "نوع عنصر التكلفة"
+
+msgid "Cost Element Id"
+msgstr "معرف عنصر التكلفة"
+
+msgid "Cost Basis"
+msgstr "أساس التكلفة"
+
+msgid "Cst Item Cost Line Pre Id"
+msgstr "لجنة العلم والتكنولوجيا عنصر التكلفة معرف السطر ما قبل"
+
+msgid "Standard Cost"
+msgstr "التكاليف القياسية"
+
+msgid "Engine Id"
+msgstr "معرف محرك"
+
+msgid "Obj Class Name"
+msgstr "اسم فئة الكائنات"
+
+msgid "Number"
+msgstr "عدد"
+
+msgid "Db Version"
+msgstr "الإصدار db"
+
+msgid "Primary Entity Cb"
+msgstr "Cb الكيان الأساسي"
+
+msgid "Module Name"
+msgstr "اسم الوحدة النمطية"
+
+msgid "Path"
+msgstr "مسار"
+
+msgid "Dependent Class"
+msgstr "فئة تعتمد"
+
+msgid "Enterprise Id"
+msgstr "معرف المؤسسة"
+
+msgid "Designation Option Header Id"
+msgstr "تعيين خيار رأس معرف"
+
+msgid "Type Option Header Id"
+msgstr "نوع الخيار رأس معرف"
+
+msgid "Ext Test Case Header Id"
+msgstr "معرف رأس حالة اختبار تحويله"
+
+msgid "Ext Test Case Line Id"
+msgstr "معرف خط حالة اختبار تحويله"
+
+msgid "Step Action"
+msgstr "الإجراء خطوة"
+
+msgid "Input"
+msgstr "الإدخال"
+
+msgid "Expected Result"
+msgstr "النتيجة المتوقعة"
+
+msgid "Ext Url Alias Id"
+msgstr "معرف مستعار Url تحويله"
+
+msgid "Original Url"
+msgstr "Url الأصلي"
+
+msgid "Alias"
+msgstr "اسم مستعار"
+
+msgid "Extn Contact Id"
+msgstr "معرف الاتصال اكستن"
+
+msgid "Contact Name"
+msgstr "اسم جهة الاتصال"
+
+msgid "Last Name"
+msgstr "الاسم الأخير"
+
+msgid "First Name"
+msgstr "الاسم الأول"
+
+msgid "Middle Name"
+msgstr "الاسم الأوسط"
+
+msgid "Mobile Number"
+msgstr "رقم الهاتف المحمول"
+
+msgid "Office Number"
+msgstr "رقم مكتب"
+
+msgid "Contact Number2"
+msgstr "اتصل Number2"
+
+msgid "Email Id"
+msgstr "معرف البريد الإلكتروني"
+
+msgid "Email Id2"
+msgstr "Id2 البريد الإلكتروني"
+
+msgid "Fax No"
+msgstr "رقم الفاكس"
+
+msgid "Timezone"
+msgstr "المنطقة الزمنية"
+
+msgid "Time To Contact"
+msgstr "الوقت المناسب للاتصال"
+
+msgid "Job Titile"
+msgstr "تيتيلي الوظيفة"
+
+msgid "Extn Contact Reference Id"
+msgstr "معرف مرجع الاتصال اكستن"
+
+msgid "Extn Web Tracking Id"
+msgstr "معرف تتبع الويب اكستن"
+
+msgid "Page Visited"
+msgstr "زار الصفحة"
+
+msgid "Referrer"
+msgstr "الإحالات"
+
+msgid "Query String"
+msgstr "سلسلة الاستعلام"
+
+msgid "Hostname"
+msgstr "اسم المضيف"
+
+msgid "City"
+msgstr "مدينة"
+
+msgid "Http User Agent"
+msgstr "وكيل http المستخدم"
+
+msgid "Extra Field Calculated Power Id"
+msgstr "معرف حقل إضافي الطاقة المحسوبة"
+
+msgid "Reference Entity"
+msgstr "مرجع الكيان"
+
+msgid "Extra Field Calculated Power Value"
+msgstr "حقل إضافي يحسب قيمة الطاقة"
+
+msgid "Extra Field Grade Id"
+msgstr "معرف الحقل خارج الصف"
+
+msgid "Extra Field Grade Value"
+msgstr "قيمة الحقل خارج الصف"
+
+msgid "Extra Field Length Id"
+msgstr "معرف طول حقل إضافي"
+
+msgid "Extra Field Length Value"
+msgstr "طول الحقل إضافية قيمة"
+
+msgid "Extra Field Per Master File Id"
+msgstr "حقل إضافي لكل معرف الملف الرئيسي"
+
+msgid "Extra Field Per Master File Value"
+msgstr "حقل إضافي لكل قيمة الملف الرئيسي"
+
+msgid "Extra Field Power Cable Id"
+msgstr "معرف كبل طاقة إضافية من الحقل"
+
+msgid "Extra Field Power Cable Value"
+msgstr "قيمة كبل طاقة إضافية من الحقل"
+
+msgid "Extra Field Serial Status Id"
+msgstr "معرف حقل إضافي من مركز المسلسل"
+
+msgid "Extra Field Serial Status Value"
+msgstr "قيمة حقل إضافي في حالة المسلسل"
+
+msgid "Key Number"
+msgstr "رقم المفتاح"
+
+msgid "Units"
+msgstr "وحدات"
+
+msgid "Ap Supplier Id"
+msgstr "معرف المورد Ap"
+
+msgid "Ap Supplier Site Id"
+msgstr "معرف موقع المورد Ap"
+
+msgid "Warrranty Number"
+msgstr "عدد واررانتي"
+
+msgid "Lease Number"
+msgstr "رقم التأجير"
+
+msgid "Physical Inventory Cb"
+msgstr "Cb المخزون الفعلي"
+
+msgid "Fa Asset Assignment Id"
+msgstr "معرف تعيين الأصول اتحاد كرة القدم"
+
+msgid "Hr Employe Id"
+msgstr "معرف Employe الموارد البشرية"
+
+msgid "Expense Ac Id"
+msgstr "معرف حساب التيار المتردد"
+
+msgid "Fa Asset Book Id"
+msgstr "معرف دفتر الأصول اتحاد كرة القدم"
+
+msgid "Asset Book Name"
+msgstr "اسم الكتاب الأصل"
+
+msgid "Primary Fa Asset Book Id"
+msgstr "معرف دفتر الأصول الأولية Fa"
+
+msgid "Inactive On"
+msgstr "نشط في"
+
+msgid "Gl Calendar Id"
+msgstr "معرف التقويم Gl"
+
+msgid "Allow Gl Posting Cb"
+msgstr "السماح بنشر سي بي جي"
+
+msgid "Fa Calendar Code"
+msgstr "رمز التقويم فا"
+
+msgid "Revalue Accum Depriciation Cb"
+msgstr "إعادة تقييم Cb ديبريسييشن أككوم"
+
+msgid "Retire Revaluation Reserve Cb"
+msgstr "اعتزال Cb احتياطي إعادة التقييم"
+
+msgid "Revalue Ytd Depriciation Cb"
+msgstr "إعادة تقييم Cb ديبريسييشن منذ بداية السنة"
+
+msgid "Sale Proceeds Gain Id"
+msgstr "معرف كسب عائدات البيع"
+
+msgid "Sale Proceeds Loss Id"
+msgstr "معرف خسارة عائدات البيع"
+
+msgid "Sale Proceeds Clearing Id"
+msgstr "عائدات بيع تصفية معرف"
+
+msgid "Removal Cost Gain Id"
+msgstr "إزالة معرف مكسب التكلفة"
+
+msgid "Removal Cost Loss Id"
+msgstr "إزالة معرف الخسارة التكلفة"
+
+msgid "Removal Cost Clearing Id"
+msgstr "تكلفة إزالة إزالة معرف"
+
+msgid "Nbv Retired Gain Id"
+msgstr "معرف مكسب المتقاعد Nbv"
+
+msgid "Nbv Retired Loss Id"
+msgstr "معرف فقدان المتقاعد Nbv"
+
+msgid "Reval Reserve Retired Gain Id"
+msgstr "معرف مكسب المتقاعد الاحتياطي رفال"
+
+msgid "Reval Reserve Retired Loss Id"
+msgstr "رفال احتياطي فقدان المتقاعد معرف"
+
+msgid "Deff Depriciation Reserve Id"
+msgstr "بالتأكي ياطي معرف"
+
+msgid "Deff Depriciation Expense Id"
+msgstr "بالتأكيد  المصاري"
+
+msgid "Deff Depriciation Adjustment Id"
+msgstr "بالتأكيديل معرف"
+
+msgid "Default Ac Id"
+msgstr "معرف الافتراضي التيار المتردد"
+
+msgid "Fa Asset Book Info Id"
+msgstr "اتحاد كرة القدم الأصول كتاب معلومات معرف"
+
+msgid "Referece"
+msgstr "ريفرس"
+
+msgid "Original Cost"
+msgstr "التكلفة الأصلية"
+
+msgid "Current Cost"
+msgstr "التكلفة الحالية"
+
+msgid "Ytd Depreciation"
+msgstr "إهلاك منذ بداية السنة"
+
+msgid "Accumulated Depreciation"
+msgstr "الإهلاك المتراكم"
+
+msgid "Salvage Value Type"
+msgstr "نوع قيمة الخردة"
+
+msgid "Salvage Value Amount"
+msgstr "المبلغ قيمة الخردة"
+
+msgid "Salvage Value Percentage"
+msgstr "النسبة المئوية قيمة الخردة"
+
+msgid "Fa Depreciation Method Id"
+msgstr "معرف طريقة الإهلاك fa"
+
+msgid "Life Months"
+msgstr "أشهر الحياة"
+
+msgid "Depriciation Cb"
+msgstr "Cb ديبريسييشن"
+
+msgid "Date In Service"
+msgstr "التاريخ في خدمة"
+
+msgid "Depriciation Start Date"
+msgstr "تاريخ بدء ديبريسييشن"
+
+msgid "Depriciation Limit Amount"
+msgstr "مبلغ الحد ديبريسييشن"
+
+msgid "Depriciation Limit Percentage"
+msgstr "نسبة الحد الأقصى ديبريسييشن"
+
+msgid "Asset Category"
+msgstr "فئة الأصول"
+
+msgid "Segment1"
+msgstr "Segment1"
+
+msgid "Segment2"
+msgstr "Segment2"
+
+msgid "Segment3"
+msgstr "Segment3"
+
+msgid "Capitalize Cb"
+msgstr "الاستفادة من بناء القدرات"
+
+msgid "In Physical Inv Cb"
+msgstr "في بناء القدرات للاستثمارات المادية"
+
+msgid "Fa Asset Trasaction Id"
+msgstr "اتحاد كرة القدم الأصول تقرير معرف"
+
+msgid "Reference"
+msgstr "مرجع"
+
+msgid "Accounted Cb"
+msgstr "شكلت Cb"
+
+msgid "Fa Book Category Association Id"
+msgstr "اتحاد كرة القدم كتاب فئة اقتران معرف"
+
+msgid "Asset Cost Ac Id"
+msgstr "تكلفة الأصول معرف التيار المتردد"
+
+msgid "Asset Clearing Ac Id"
+msgstr "تعريف التيار المتردد مقاصة الأصول"
+
+msgid "Depreciation Expense Ac Id"
+msgstr "معرف Ac مصروفات الإهلاك"
+
+msgid "Accumulated Depreciation Ac Id"
+msgstr "معرف Ac الإهلاك المتراكم"
+
+msgid "Bonus Expense Ac Id"
+msgstr "تعريف التيار المتردد المصاريف مكافأة"
+
+msgid "Bonus Reserve Ac Id"
+msgstr "مكافأة الاحتياطي ميلان معرف"
+
+msgid "Revalue Reserve Ac Id"
+msgstr "إعادة تقييم احتياطي Ac معرف"
+
+msgid "Cip Cost Ac Id"
+msgstr "المركز الدولي للبطاطا تكلف معرف التيار المتردد"
+
+msgid "Cip Clearing Ac Id"
+msgstr "Cip تطهير التيار المتردد معرف"
+
+msgid "Unplanned Depreciation Expense Ac Id"
+msgstr "معرف Ac مصروفات الإهلاك غير المخطط له"
+
+msgid "Fa Depreciation Header Id"
+msgstr "اتحاد كرة القدم إهلاك رأس معرف"
+
+msgid "Gl Period Id"
+msgstr "معرف الفترة Gl"
+
+msgid "Fa Depreciation Line Id"
+msgstr "معرف خط الاستهلاك فا"
+
+msgid "Asset Id"
+msgstr "معرف الأصل"
+
+msgid "Depreciation Amount"
+msgstr "مبلغ الإهلاك"
+
+msgid "Unschedule Amount"
+msgstr "Unschedule كمية"
+
+msgid "Total Depreciation Amount"
+msgstr "مبلغ الإهلاك الكلي"
+
+msgid "Depreciation Account Id"
+msgstr "معرف حساب الإهلاك"
+
+msgid "Cost Before Depreciation"
+msgstr "التكلفة قبل الإهلاك"
+
+msgid "Nbv Before Depreciation"
+msgstr "Nbv قبل الإهلاك"
+
+msgid "Salvage Value Bd"
+msgstr "دينار بحريني قيمة الخردة"
+
+msgid "Depreciation Method"
+msgstr "طريقة الإهلاك"
+
+msgid "Method Type"
+msgstr "نوع الأسلوب"
+
+msgid "Calculation Basis"
+msgstr "أساس الحساب"
+
+msgid "Life Month"
+msgstr "الحياة في الشهر"
+
+msgid "Reducing Balance Rate"
+msgstr "خفض معدل التوازن"
+
+msgid "Fa Depreciation Method Rate Id"
+msgstr "معرف معدل طريقة الإهلاك fa"
+
+msgid "Year"
+msgstr "السنة"
+
+msgid "Period"
+msgstr "الفترة"
+
+msgid "File Id"
+msgstr "معرف الملف"
+
+msgid "File Path"
+msgstr "مسار الملف"
+
+msgid "File Size"
+msgstr "حجم الملف"
+
+msgid "File Type"
+msgstr "نوع الملف"
+
+msgid "Document Type"
+msgstr "نوع الوثيقة"
+
+msgid "File Reference Id"
+msgstr "معرف مرجع الملف"
+
+msgid "Form Id"
+msgstr "معرف النموذج"
+
+msgid "Form"
+msgstr "النموذج"
+
+msgid "Submit Button"
+msgstr "زر إرسال"
+
+msgid "Action Link"
+msgstr "ارتباط العمل"
+
+msgid "Fp Forecast Consumption Id"
+msgstr "Fp توقعات الاستهلاك معرف"
+
+msgid "Fp Forecast Line Date Id"
+msgstr "Fp توقع معرف تاريخ الخط"
+
+msgid "Fp Forecast Line Id"
+msgstr "معرف خط fp التنبؤ"
+
+msgid "Fp Forecast Group Id"
+msgstr "معرف مجموعة التوقعات fp"
+
+msgid "Reason"
+msgstr "والسبب"
+
+msgid "Forecast Group"
+msgstr "مجموعة التوقعات"
+
+msgid "Bucket Type"
+msgstr "نوع دلو"
+
+msgid "Level"
+msgstr "مستوى"
+
+msgid "Consume Cb"
+msgstr "تستهلك Cb"
+
+msgid "Backward Days"
+msgstr "يوما إلى الوراء"
+
+msgid "Forward Days"
+msgstr "أيام إلى الأمام"
+
+msgid "Fp Forecast Header Id"
+msgstr "تنبؤ fp رأس معرف"
+
+msgid "Forecast"
+msgstr "ويتوقع"
+
+msgid "Forecast Group Id"
+msgstr "معرف مجموعة التنبؤ"
+
+msgid "Demand Class"
+msgstr "فئة الطلب"
+
+msgid "No Of Bucket"
+msgstr "لا من دلو"
+
+msgid "Original"
+msgstr "اللغة الأصلية"
+
+msgid "Total Original"
+msgstr "المجموع الأصلي"
+
+msgid "Fp Consumption Id"
+msgstr "معرف استهلاك fp"
+
+msgid "Forecast Date"
+msgstr "التنبؤ بتاريخ"
+
+msgid "Original Quantity"
+msgstr "الكمية الأصلية"
+
+msgid "Current Quantity"
+msgstr "الكمية الحالية"
+
+msgid "Source"
+msgstr "المصدر"
+
+msgid "Uom Name"
+msgstr "اسم جامعة ميتشجان"
+
+msgid "Schedule Ship Date"
+msgstr "جدولة تاريخ السفينة"
+
+msgid "Mds Name"
+msgstr "اسم حركة الديمقراطيين الاشتراكيين"
+
+msgid "Fp Source List Header Id"
+msgstr "معرف رأس قائمة مصدر fp"
+
+msgid "Include So Cb"
+msgstr "يشمل ذلك بناء القدرات"
+
+msgid "Fp Mds Header Id"
+msgstr "حركة الديمقراطيين الاشتراكيين fp رأس معرف"
+
+msgid "Fp Mds Line Id"
+msgstr "معرف خط fp حركة الديمقراطيين الاشتراكيين"
+
+msgid "Demand Date"
+msgstr "تاريخ الطلب"
+
+msgid "Source Header Id"
+msgstr "مصدر رأس معرف"
+
+msgid "Source Line Id"
+msgstr "معرف خط المصدر"
+
+msgid "Fp Minmax Demand Id"
+msgstr "معرف الطلب fp Minmax"
+
+msgid "Plan Id"
+msgstr "معرف الخطة"
+
+msgid "Demand Item Id M"
+msgstr "طلب معرف العنصر M"
+
+msgid "Toplevel Demand Item Id M"
+msgstr "معرف عنصر الطلب توبليفيل م"
+
+msgid "Demand Type"
+msgstr "نوع الطلب"
+
+msgid "Plan Name"
+msgstr "اسم الخطة"
+
+msgid "Planning Horizon Days"
+msgstr "التخطيط الأفق يوما"
+
+msgid "Forecast Description"
+msgstr "التنبؤ بالوصف"
+
+msgid "Top Level Item Number"
+msgstr "رقم الصنف الأعلى مستوى"
+
+msgid "Top Level Item Description"
+msgstr "وصف عنصر المستوى الأعلى"
+
+msgid "Demand Item Number"
+msgstr "رقم الصنف الطلب"
+
+msgid "Demand Item Description"
+msgstr "وصف عنصر الطلب"
+
+msgid "Fp Minmax Header Id"
+msgstr "معرف رأس fp Minmax"
+
+msgid "Demand Source"
+msgstr "مصدر الطلب"
+
+msgid "Fp Minmax Line Id"
+msgstr "معرف خط fp Minmax"
+
+msgid "Min Quantity"
+msgstr "كمية دقيقة"
+
+msgid "Max Quantity"
+msgstr "الكمية ماكس"
+
+msgid "Mb Min Quantity"
+msgstr "كمية دقيقة mb"
+
+msgid "Mb Max Quantity"
+msgstr "الكمية ماكس mb"
+
+msgid "Mb Bin Size"
+msgstr "حجم بن mb"
+
+msgid "Total Demand"
+msgstr "إجمالي الطلب"
+
+msgid "Avg Daily Demand"
+msgstr "الطلب اليومي متوسط"
+
+msgid "Lead Time"
+msgstr "فترة إنتاج"
+
+msgid "Saftey Stock Quantity"
+msgstr "كمية الأسهم توفيرا"
+
+msgid "Saftey Stock Days"
+msgstr "أيام الأسهم توفيرا"
+
+msgid "Minimum Quantity"
+msgstr "الحد الأدنى للكمية"
+
+msgid "Fix Days Supply"
+msgstr "إصلاح أيام العرض"
+
+msgid "Maximum Quantity"
+msgstr "الحد الأقصى للكمية"
+
+msgid "Multibin Fix Days Supply"
+msgstr "إمداد أيام إصلاح الحاويات المتعددة"
+
+msgid "Minmax Multibin Number"
+msgstr "عدد الحاويات المتعددة مينماكس"
+
+msgid "Minmax Multibin Size"
+msgstr "حجم الحاويات المتعددة مينماكس"
+
+msgid "Multibin Minmax Quantity"
+msgstr "الحاويات المتعددة Minmax كمية"
+
+msgid "Fp Mrp Demand Id"
+msgstr "معرف الطلب fp Mrp"
+
+msgid "Fp Mrp Header Id"
+msgstr "Fp Mrp رأس معرف"
+
+msgid "Primary Source Type"
+msgstr "نوع المصدر الرئيسي"
+
+msgid "Mrp Name"
+msgstr "اسم Mrp"
+
+msgid "Planner"
+msgstr "مخطط"
+
+msgid "Fp Mrp Exception Id"
+msgstr "معرف الاستثناء fp Mrp"
+
+msgid "Exception Message"
+msgstr "رسالة الاستثناء"
+
+msgid "Detailed Message"
+msgstr "رسالة مفصلة"
+
+msgid "Exception Type"
+msgstr "نوع الاستثناء"
+
+msgid "Supply Date"
+msgstr "تاريخ العرض"
+
+msgid "Document Id"
+msgstr "معرف المستند"
+
+msgid "Fp Mrp Lowlevel Code Id"
+msgstr "معرف رمز Lowlevel fp Mrp"
+
+msgid "Order Type"
+msgstr "نوع الترتيب"
+
+msgid "Order Action"
+msgstr "عمل النظام"
+
+msgid "Fp Mrp Planned Order Id"
+msgstr "معرف الأمر المخطط fp Mrp"
+
+msgid "Fp Mrp Supply Id"
+msgstr "معرف العرض fp Mrp"
+
+msgid "Supply Item Id M"
+msgstr "توفير معرف العنصر M"
+
+msgid "Toplevel Supply Item Id M"
+msgstr "معرف عنصر العرض توبليفيل م"
+
+msgid "Supply Type"
+msgstr "نوع العرض"
+
+msgid "Primary Supply Type"
+msgstr "نوع العرض الأساسي"
+
+msgid "Supply Header Id"
+msgstr "توفير معرف الرأس"
+
+msgid "Supply Line Id"
+msgstr "معرف خط الإمداد"
+
+msgid "Toplevel Demand Item Number"
+msgstr "رقم الصنف الطلب توبليفيل"
+
+msgid "Toplevel Demand Item Description"
+msgstr "وصف عنصر الطلب توبليفيل"
+
+msgid "Sourcing Rule Id"
+msgstr "منبع معرف القاعدة"
+
+msgid "Sales Order Line"
+msgstr "سطر أمر التوريد"
+
+msgid "Fp Planning Control Id"
+msgstr "معرف عنصر التحكم تخطيط وتنظيم الأسرة"
+
+msgid "Auto Consumed Group Id"
+msgstr "السيارات المستهلكة معرف المجموعة"
+
+msgid "Auto Consumed Frwd Days"
+msgstr "السيارات المستهلكة أيام فرود"
+
+msgid "Auto Consumed Backwd Days"
+msgstr "السيارات المستهلكة يوما باكود"
+
+msgid "Default Abc"
+msgstr "أي بي سي الافتراضي"
+
+msgid "Net Wip Cb"
+msgstr "Net Wip Cb"
+
+msgid "Net Po Cb"
+msgstr "Cb بو صافي"
+
+msgid "Source List"
+msgstr "قائمة المصدر"
+
+msgid "Source List Type"
+msgstr "نوع القائمة المصدر"
+
+msgid "Fp Source List Line Id"
+msgstr "معرف خط القائمة المصدر fp"
+
+msgid "Source List Line Type"
+msgstr "نوع خط في قائمة مصدر"
+
+msgid "Source List Id"
+msgstr "معرف قائمة المصدر"
+
+msgid "Fp Urgent Card Id"
+msgstr "معرف بطاقة عاجلة fp"
+
+msgid "Card Details"
+msgstr "تفاصيل البطاقة"
+
+msgid "Gl Balance Id"
+msgstr "معرف الرصيد Gl"
+
+msgid "Balance Type"
+msgstr "نوع من التوازن"
+
+msgid "Period Net Dr"
+msgstr "الدكتور نت الفترة"
+
+msgid "Period Net Cr"
+msgstr "الجمهورية التشيكية الصافية في الفترة"
+
+msgid "Begin Balance Dr"
+msgstr "يبدأ الدكتور التوازن"
+
+msgid "Begin Balance Cr"
+msgstr "يبدأ التوازن Cr"
+
+msgid "Period Name"
+msgstr "اسم الفترة"
+
+msgid "Option Line Code"
+msgstr "الخيار سطر التعليمات البرمجية"
+
+msgid "Adjustment Period Cb"
+msgstr "Cb فترة التكيف"
+
+msgid "Calendar Type"
+msgstr "نوع التقويم"
+
+msgid "Quarter"
+msgstr "الربع"
+
+msgid "From Date"
+msgstr "من تاريخ"
+
+msgid "To Date"
+msgstr "وحتى الآن"
+
+msgid "Name Prefix"
+msgstr "بادئة اسم"
+
+msgid "Gl Currency Conversion Id"
+msgstr "معرف تحويل العملة Gl"
+
+msgid "Currency Conversion Type"
+msgstr "نوع تحويل العملة"
+
+msgid "From Currency"
+msgstr "من العملة"
+
+msgid "To Currency"
+msgstr "لتحويل العملات"
+
+msgid "Use Reverse Conversion"
+msgstr "استخدام التحويل العكسي"
+
+msgid "Journal Source"
+msgstr "المصدر مجلة"
+
+msgid "Journal Category"
+msgstr "فئة دفتر اليومية"
+
+msgid "Journal Name"
+msgstr "اسم المجلة"
+
+msgid "Post Date"
+msgstr "آخر تاريخ"
+
+msgid "Exchange Type"
+msgstr "نوع الصرف"
+
+msgid "Exchange Date"
+msgstr "تاريخ الصرف"
+
+msgid "Control Total"
+msgstr "المجموع التحكم"
+
+msgid "Running Total Dr"
+msgstr "يشغل الدكتور المجموع"
+
+msgid "Running Total Cr"
+msgstr "تشغيل السجل التجاري الإجمالي"
+
+msgid "Running Toatl Ac Dr"
+msgstr "يشغل الدكتور ميلان توتل"
+
+msgid "Running Toatl Ac Cr"
+msgstr "تشغيل Cr Ac توتل"
+
+msgid "Gl Journal Line Id"
+msgstr "معرف خط Gl دفتر اليومية"
+
+msgid "Line Num"
+msgstr "Num الخط"
+
+msgid "Code Combination Id"
+msgstr "معرف مجموعة التعليمات البرمجية"
+
+msgid "Total Dr"
+msgstr "الدكتور المجموع"
+
+msgid "Total Cr"
+msgstr "إجمالي الجمهورية التشيكية"
+
+msgid "Total Ac Dr"
+msgstr "مجموع Ac الدكتور"
+
+msgid "Total Ac Cr"
+msgstr "مجموع التيار المتردد Cr"
+
+msgid "Combination Description"
+msgstr "وصف تركيبة"
+
+msgid "Gl Ledger Id"
+msgstr "معرف دفتر الأستاذ Gl"
+
+msgid "Ledger"
+msgstr "دفتر الأستاذ"
+
+msgid "Calendar Option Line Code"
+msgstr "تقويم الخيار سطر التعليمات البرمجية"
+
+msgid "Currency Code"
+msgstr "رمز العملة"
+
+msgid "Future Enabled Periods"
+msgstr "تمكين المستقبل فترات"
+
+msgid "Currency Balancing Ac Id"
+msgstr "معرف Ac موازنة العملة"
+
+msgid "Retained Earnings Ac Id"
+msgstr "معرف Ac الأرباح المحتجزة"
+
+msgid "Suspense Ac Id"
+msgstr "معرف Ac المعلق"
+
+msgid "Gl Ledger Balancing Values Id"
+msgstr "الأستاذ Gl الموازنة بين قيم معرف"
+
+msgid "Balancing Values"
+msgstr "تحقيق التوازن بين القيم"
+
+msgid "Hr Job Id"
+msgstr "معرف وظيفة الموارد البشرية"
+
+msgid "Job Code"
+msgstr "كود الوظيفة"
+
+msgid "Job Name"
+msgstr "اسم الوظيفة"
+
+msgid "Min Education"
+msgstr "التعليم دقيقة"
+
+msgid "Min Experience"
+msgstr "تجربة دقيقة"
+
+msgid "Technology"
+msgstr "التكنولوجيا"
+
+msgid "Skillset"
+msgstr "Skillset"
+
+msgid "Position Type"
+msgstr "نوع المنصب"
+
+msgid "Functional Area"
+msgstr "المجال الوظيفي"
+
+msgid "Location"
+msgstr "موقع"
+
+msgid "Job Details"
+msgstr "تفاصيل الوظيفة"
+
+msgid "Primary Responsibility"
+msgstr "المسؤولية الرئيسية"
+
+msgid "Hr Approval Limit Assignment Id"
+msgstr "معرف تعيين الحد الموافقة على الموارد البشرية"
+
+msgid "Hr Approval Limit Header Id"
+msgstr "معرف رأس الحد الموافقة على الموارد البشرية"
+
+msgid "Job Id"
+msgstr "معرف الوظيفة"
+
+msgid "Position Id"
+msgstr "معرف الموقف"
+
+msgid "Limit Name"
+msgstr "اسم حد"
+
+msgid "Hr Approval Limit Line Id"
+msgstr "معرف خط الحد الموافقة على الموارد البشرية"
+
+msgid "Limit Object"
+msgstr "الكائن الحد الأقصى"
+
+msgid "Limit Type"
+msgstr "نوع الحد"
+
+msgid "Limit Range Low"
+msgstr "حد نطاق منخفض"
+
+msgid "Limit Range High"
+msgstr "حد نطاق عالية"
+
+msgid "Amount Limit"
+msgstr "حد المبلغ"
+
+msgid "Inactive Date"
+msgstr "تاريخ غير نشط"
+
+msgid "Hr Approval Object Id"
+msgstr "معرف الكائن الموافقة على الموارد البشرية"
+
+msgid "Object Code"
+msgstr "التعليمات البرمجية للكائن"
+
+msgid "Object Value"
+msgstr "قيمة الكائن"
+
+msgid "Return Type"
+msgstr "نوع الإرجاع"
+
+msgid "Hr Compensation Element Id"
+msgstr "معرف عنصر تعويض الموارد البشرية"
+
+msgid "Element Type"
+msgstr "نوع العنصر"
+
+msgid "Element Name"
+msgstr "اسم العنصر"
+
+msgid "Classification"
+msgstr "تصنيف"
+
+msgid "Recurring Cb"
+msgstr "Cb المتكررة"
+
+msgid "Deduction Rule"
+msgstr "حكم خصم"
+
+msgid "Calculation Rule"
+msgstr "قاعدة حساب"
+
+msgid "Separate Check Cb"
+msgstr "Cb الاختيار منفصلة"
+
+msgid "Frequency Months"
+msgstr "أشهر التردد"
+
+msgid "Standard Link Cb"
+msgstr "Cb وصلة قياسية"
+
+msgid "Deduction Start Rule"
+msgstr "خصم ابدأ القاعدة"
+
+msgid "Po Purchasing Control Id"
+msgstr "ص. ب شراء معرف عنصر التحكم"
+
+msgid "Hr Element Entry Header Id"
+msgstr "معرف رأس إدخال عنصر الموارد البشرية"
+
+msgid "Hr Employee Id"
+msgstr "معرف موظف الموارد البشرية"
+
+msgid "Hr Element Entry Line Id"
+msgstr "معرف خط إدخال عنصر الموارد البشرية"
+
+msgid "Element Id"
+msgstr "معرف العنصر"
+
+msgid "Element Value"
+msgstr "قيمة العنصر"
+
+msgid "Hr Element Entry Tpl Header Id"
+msgstr "معرف رأس لافوري إدخال عنصر الموارد البشرية"
+
+msgid "Hr Element Entry Tpl Line Id"
+msgstr "معرف خط لافوري إدخال عنصر الموارد البشرية"
+
+msgid "Identification Id"
+msgstr "تحديد معرف"
+
+msgid "Identification Type"
+msgstr "نوع الهوية"
+
+msgid "Citizen Number"
+msgstr "عدد المواطنين"
+
+msgid "Language"
+msgstr "اللغة"
+
+msgid "Gender"
+msgstr "نوع الجنس"
+
+msgid "Person Type"
+msgstr "نوع الشخص"
+
+msgid "Date Of Birth"
+msgstr "تاريخ الميلاد"
+
+msgid "City Of Birth"
+msgstr "مدينة الولادة"
+
+msgid "Country Of Birth"
+msgstr "بلد الميلاد"
+
+msgid "Nationality"
+msgstr "الجنسية"
+
+msgid "Disability Code"
+msgstr "قانون الإعاقة"
+
+msgid "Marital Status"
+msgstr "الحالة الزوجية"
+
+msgid "Degree"
+msgstr "درجة"
+
+msgid "Highest Education"
+msgstr "تعليم أعلى"
+
+msgid "Education Details"
+msgstr "تفاصيل التعليم"
+
+msgid "No Of Children"
+msgstr "لا للأطفال"
+
+msgid "Home Address Id"
+msgstr "معرف عنوان المنزل"
+
+msgid "Home Address"
+msgstr "عنوان المنزل"
+
+msgid "Permanent Address"
+msgstr "عنوان دائم"
+
+msgid "Permanent Address Id"
+msgstr "معرف عنوان دائم"
+
+msgid "Home Phone Number"
+msgstr "رقم هاتف المنزل"
+
+msgid "Other Email"
+msgstr "البريد الإلكتروني الأخرى"
+
+msgid "Date First Hired"
+msgstr "تاريخ التعاقد أولاً"
+
+msgid "Payroll Id"
+msgstr "معرف جدول الرواتب"
+
+msgid "Grade Id"
+msgstr "معرف الصف"
+
+msgid "Job Type"
+msgstr "نوع الوظيفة"
+
+msgid "Supervisor Employee Id"
+msgstr "معرف الموظف المشرف"
+
+msgid "Probation Period Uom"
+msgstr "Uom فترة الاختبار"
+
+msgid "Probation Period"
+msgstr "فترة الاختبار"
+
+msgid "Notice Period Uom"
+msgstr "Uom فترة الإشعار"
+
+msgid "Notice Period"
+msgstr "فترة الإشعار"
+
+msgid "Revision Enabled"
+msgstr "مراجعة تمكين"
+
+msgid "Revision Number"
+msgstr "رقم المراجعة"
+
+msgid "Work Policy Id"
+msgstr "معرف سياسة العمل"
+
+msgid "Salary Ac Id"
+msgstr "معرف Ac المرتب"
+
+msgid "Performance Id"
+msgstr "معرف الأداء"
+
+msgid "Vehicle Number"
+msgstr "عدد المركبات"
+
+msgid "Asset Numbers"
+msgstr "أرقام الأصول"
+
+msgid "Contract Id"
+msgstr "معرف العقد"
+
+msgid "Tax Reg Number"
+msgstr "رقم الضريبة ريج"
+
+msgid "Social Ac No"
+msgstr "عدم التدقيق الاجتماعي"
+
+msgid "Social Ac No2"
+msgstr "الاجتماعية Ac No2"
+
+msgid "Passport Number"
+msgstr "رقم جواز السفر"
+
+msgid "Hr Employee Education Id"
+msgstr "معرف التعليم موظف الموارد البشرية"
+
+msgid "Employee Id"
+msgstr "معرف الموظف"
+
+msgid "Degree Name"
+msgstr "اسم درجة"
+
+msgid "University"
+msgstr "جامعة"
+
+msgid "University Address"
+msgstr "عنوان الجامعة"
+
+msgid "Specialization"
+msgstr "التخصص"
+
+msgid "Edu Start Date"
+msgstr "تاريخ بدء إيدو"
+
+msgid "Edu End Date"
+msgstr "تاريخ نهاية إيدو"
+
+msgid "Mode Of Education"
+msgstr "وضع التعليم"
+
+msgid "Grade"
+msgstr "الصف"
+
+msgid "Marks Percentage"
+msgstr "علامات النسبة المئوية"
+
+msgid "Comments"
+msgstr "تعليقات"
+
+msgid "Hr Employee Experience Id"
+msgstr "موظف موارد بشرية خبرة معرف"
+
+msgid "Organization Name"
+msgstr "اسم المؤسسة"
+
+msgid "Designation"
+msgstr "تسمية"
+
+msgid "Employee Number"
+msgstr "رقم الموظف"
+
+msgid "Work Start Date"
+msgstr "تاريخ بدء العمل"
+
+msgid "Work End Date"
+msgstr "تاريخ انتهاء العمل"
+
+msgid "Last Manager"
+msgstr "مدير آخر"
+
+msgid "Last Drawn Salary"
+msgstr "آخر راتب مرسومة"
+
+msgid "Communication Details"
+msgstr "تفاصيل الاتصال"
+
+msgid "Project Details"
+msgstr "تفاصيل المشروع"
+
+msgid "Username"
+msgstr "اسم المستخدم"
+
+msgid "Emp Start Date"
+msgstr "تاريخ بدء الشراكة الأورو-متوسطية"
+
+msgid "Emp First Name"
+msgstr "الاسم الأول في الشراكة الأورو-متوسطية"
+
+msgid "Emp Last Name"
+msgstr "الاسم الأخير Emp"
+
+msgid "Emp Email"
+msgstr "البريد الإلكتروني Emp"
+
+msgid "Position Name"
+msgstr "اسم الموضع"
+
+msgid "Emp Org Id"
+msgstr "معرف Org Emp"
+
+msgid "Limit Start Date"
+msgstr "تاريخ بدء الحد"
+
+msgid "Hr Employee Termination Id"
+msgstr "الموارد البشرية الموظف إنهاء معرف"
+
+msgid "New Employer"
+msgstr "صاحب عمل جديد"
+
+msgid "Date Of Notification"
+msgstr "تاريخ الإخطار"
+
+msgid "Projected Last Date"
+msgstr "تاريخ آخر المسقطة"
+
+msgid "Actual Last Date"
+msgstr "تاريخ آخر الفعلية"
+
+msgid "Accpeted Date"
+msgstr "تاريخ أككبيتيد"
+
+msgid "Accpeted By Employee Id"
+msgstr "أككبيتيد بمعرف الموظف"
+
+msgid "Hr Leave Balance Id"
+msgstr "معرف رصيد الإجازة الموارد البشرية"
+
+msgid "Leave Type"
+msgstr "ترك نوع"
+
+msgid "Leave Per Year"
+msgstr "إجازة في السنة"
+
+msgid "Total Available"
+msgstr "مجموع المتاحة"
+
+msgid "Total Used"
+msgstr "إجمالي المستخدم"
+
+msgid "Hr Leave Entitlement Header Id"
+msgstr "معرف رأس استحقاق الإجازة الموارد البشرية"
+
+msgid "Entitlement Name"
+msgstr "اسم الاستحقاق"
+
+msgid "Hr Leave Entitlement Line Id"
+msgstr "معرف خط استحقاق الإجازة الموارد البشرية"
+
+msgid "Leave Per Period"
+msgstr "اترك كل فترة"
+
+msgid "Default No Of Period"
+msgstr "لا الافتراضي للفترة"
+
+msgid "Hr Leave Transaction Id"
+msgstr "الموارد البشرية ترك معرف المعاملة"
+
+msgid "Requsted Date"
+msgstr "تاريخ إتلاف"
+
+msgid "Approved Date"
+msgstr "التاريخ الموافق عليها"
+
+msgid "Approved By"
+msgstr "وافق عليها"
+
+msgid "Approved By Employee Id"
+msgstr "وافق عليها معرف الموظف"
+
+msgid "Leave Status"
+msgstr "إجازة الوضع"
+
+msgid "Leave Quantity"
+msgstr "اترك الكمية"
+
+msgid "Contact Details"
+msgstr "تفاصيل الاتصال"
+
+msgid "Sys Notification Id"
+msgstr "Sys إعلام معرف"
+
+msgid "Sys Notification Group Id"
+msgstr "معرف مجموعة إعلام Sys"
+
+msgid "Hr Leave Type Id"
+msgstr "معرف نوع الإجازة الموارد البشرية"
+
+msgid "Leave Category"
+msgstr "ترك الفئة"
+
+msgid "Allow Carry Forward Cb"
+msgstr "السماح بحمل Cb إلى الأمام"
+
+msgid "Carry Forward Per Year"
+msgstr "حمل الأمام في السنة"
+
+msgid "Maximum Accumulation"
+msgstr "الأقصى للتراكم"
+
+msgid "Auto Convert Salary Cb"
+msgstr "السيارات تحويل المرتبات Cb"
+
+msgid "Allow Advance Cb"
+msgstr "تسمح Cb مقدما"
+
+msgid "Lwp Cb"
+msgstr "Lwp Cb"
+
+msgid "Default Reason"
+msgstr "السبب الافتراضي"
+
+msgid "Hr Payroll Id"
+msgstr "معرف الموارد البشرية الرواتب"
+
+msgid "Payroll"
+msgstr "كشوف المرتبات"
+
+msgid "Period Type"
+msgstr "نوع الفترة"
+
+msgid "Hr Payroll Payment Method Id"
+msgstr "معرف طريقة دفع الرواتب الموارد البشرية"
+
+msgid "Bank Charge Ac Id"
+msgstr "المصرف المسؤول Ac معرف"
+
+msgid "Salary Payable Ac Id"
+msgstr "معرف Ac تدفع المرتبات"
+
+msgid "Hr Payroll Process Id"
+msgstr "الموارد البشرية الرواتب معرف العملية"
+
+msgid "Hr Payroll Schedule Id"
+msgstr "معرف جدول الرواتب الموارد البشرية"
+
+msgid "Proces Name"
+msgstr "اسم بروسس"
+
+msgid "Scheduled Date"
+msgstr "الموعد المقرر"
+
+msgid "Hr Payslip Header Id"
+msgstr "معرف الموارد البشرية رأس راتب"
+
+msgid "Period Name Id"
+msgstr "معرف اسم الفترة"
+
+msgid "Pay Date"
+msgstr "تاريخ الدفع"
+
+msgid "No Of Days"
+msgstr "لا من أيام"
+
+msgid "Payment Ref No"
+msgstr "لا Ref الدفع"
+
+msgid "Mode Of Payment"
+msgstr "طريقة الدفع"
+
+msgid "Pay Duration Type"
+msgstr "نوع مدة الدفع"
+
+msgid "Hr Payslip Line Id"
+msgstr "معرف خط راتب الموارد البشرية"
+
+msgid "Hr Position Id"
+msgstr "معرف موقع الموارد البشرية"
+
+msgid "Headcount"
+msgstr "عدد الفقراء"
+
+msgid "Salary Basis"
+msgstr "أساس الراتب"
+
+msgid "Working Hours"
+msgstr "ساعات العمل"
+
+msgid "Wh Frequency"
+msgstr "تردد ذوي الخوذات البيضاء"
+
+msgid "Position Details"
+msgstr "تفاصيل الموقف"
+
+msgid "Position Status"
+msgstr "وضع الموقف"
+
+msgid "Hr Position Hierarchy Header Id"
+msgstr "معرف رأس التسلسل الهرمي موقف الموارد البشرية"
+
+msgid "Starting Position Id"
+msgstr "انطلاق موقع معرف"
+
+msgid "Hierarchy Name"
+msgstr "اسم التسلسل الهرمي"
+
+msgid "Revision"
+msgstr "مراجعة"
+
+msgid "Hr Position Hierarchy Line Id"
+msgstr "معرف خط التسلسل الهرمي موقف الموارد البشرية"
+
+msgid "Hr Team Header Id"
+msgstr "معرف رأس فريق الموارد البشرية"
+
+msgid "Team Name"
+msgstr "اسم الفريق"
+
+msgid "Team Lead Employee Id"
+msgstr "معرف الموظف يؤدي الفريق"
+
+msgid "Region"
+msgstr "المنطقة"
+
+msgid "Objective"
+msgstr "والهدف"
+
+msgid "Hr Team Line Id"
+msgstr "معرف خط فريق الموارد البشرية"
+
+msgid "Member Employee Id"
+msgstr "عضو معرف الموظف"
+
+msgid "Role"
+msgstr "دور"
+
+msgid "Responsibility"
+msgstr "المسؤولية"
+
+msgid "Inv Abc Assignment Header Id"
+msgstr "أي بي سي للاستثمارات الإحالة رأس معرف"
+
+msgid "Abc Assignment Name"
+msgstr "اسم التعيين أي بي سي"
+
+msgid "Inv Abc Valuation Id"
+msgstr "أي بي سي للاستثمارات المقومة معرف"
+
+msgid "Inv Abc Assignment Line Id"
+msgstr "معرف خط تعيين أي بي سي للاستثمارات"
+
+msgid "Abc Class"
+msgstr "فئة سي"
+
+msgid "Valuation Name"
+msgstr "اسم التقييم"
+
+msgid "Scope Org Id"
+msgstr "معرف نطاق Org"
+
+msgid "Scope Sub Inventory Id"
+msgstr "معرف النطاق الفرعي المخزون"
+
+msgid "Scope Org Hirearchy Id"
+msgstr "معرف هيريرتشي Org النطاق"
+
+msgid "Scope Product Line"
+msgstr "نطاق خط المنتج"
+
+msgid "Criteria"
+msgstr "معايير"
+
+msgid "Inv Abc Valuation Result Id"
+msgstr "أي بي سي للاستثمارات المقومة معرف النتيجة"
+
+msgid "Seq Number"
+msgstr "رقم Seq"
+
+msgid "Cum Quantity"
+msgstr "نائب الرئيس الكمية"
+
+msgid "Cum Value"
+msgstr "نائب الرئيس القيمة"
+
+msgid "Inv Count Abc Ref Id"
+msgstr "معرف العد Ref أي بي سي للاستثمارات"
+
+msgid "Inv Count Header Id"
+msgstr "معرف رأس العد للاستثمارات"
+
+msgid "Class Code"
+msgstr "التعليمات البرمجية لفئة"
+
+msgid "Count Per Year"
+msgstr "العد في السنة"
+
+msgid "Inv Count Entries Id"
+msgstr "قوائم الجرد عدد إدخالات معرف"
+
+msgid "Inv Count Schedule Id"
+msgstr "معرف الجدول الزمني Count للاستثمارات"
+
+msgid "Lot Number"
+msgstr "رقم الشحنة"
+
+msgid "Schedule Date"
+msgstr "تاريخ الجدول الزمني"
+
+msgid "Adjustment Ac Id"
+msgstr "معرف التكيف Ac"
+
+msgid "Counted By"
+msgstr "عد من"
+
+msgid "Count Date"
+msgstr "تاريخ العد"
+
+msgid "Count Qty"
+msgstr "Qty العد"
+
+msgid "System Qty"
+msgstr "نظام Qty"
+
+msgid "Adjusted Qty"
+msgstr "الكمية المعدلة"
+
+msgid "Count Name"
+msgstr "اسم العد"
+
+msgid "Count Type"
+msgstr "نوع العد"
+
+msgid "Approval Required"
+msgstr "الموافقة المطلوبة"
+
+msgid "Quantity Variance Positive"
+msgstr "كمية الفرق الإيجابي"
+
+msgid "Quantity Variance Negative"
+msgstr "كمية التباين السلبية"
+
+msgid "Value Variance Positive"
+msgstr "قيمة الفرق الإيجابي"
+
+msgid "Value Variance Negative"
+msgstr "قيمة الفرق سالب"
+
+msgid "Zero Count Cb"
+msgstr "Cb العدد صفر"
+
+msgid "Abc Code"
+msgstr "كود Abc"
+
+msgid "Inv Interorg Transfer Header Id"
+msgstr "معرف رأس نقل Interorg للاستثمارات"
+
+msgid "Order Number"
+msgstr "رقم الطلب"
+
+msgid "From Org Id"
+msgstr "من معرف Org"
+
+msgid "To Org Id"
+msgstr "لمعرف Org"
+
+msgid "Transfer To Gl"
+msgstr "نقل إلى Gl"
+
+msgid "Transaction Date"
+msgstr "تاريخ الحركة"
+
+msgid "Carrier"
+msgstr "الناقل"
+
+msgid "Vechile Number"
+msgstr "عدد مركبات"
+
+msgid "Waybill"
+msgstr "بوليصة الشحن"
+
+msgid "Inv Interorg Transfer Line Id"
+msgstr "معرف خط نقل Interorg للاستثمارات"
+
+msgid "From Subinventory Id"
+msgstr "من معرف سوبينفينتوري"
+
+msgid "From Locator Id"
+msgstr "من معرف محدد موقع المعلومات"
+
+msgid "Revision Name"
+msgstr "اسم مراجعة"
+
+msgid "To Subinventory Id"
+msgstr "لمعرف سوبينفينتوري"
+
+msgid "To Locator Id"
+msgstr "لمعرف موقع المعلومات"
+
+msgid "Transaction Quantity"
+msgstr "كمية الحركة"
+
+msgid "Inv Item Revision Id"
+msgstr "معرف مراجعة البند للاستثمارات"
+
+msgid "Implementation Date"
+msgstr "تاريخ التنفيذ"
+
+msgid "Inv Location Default Id"
+msgstr "للاستثمارات الموقع الافتراضي معرف"
+
+msgid "Default Type"
+msgstr "النوع الافتراضي"
+
+msgid "Inv Lot Number Id"
+msgstr "معرف رقم الشحنة للاستثمارات"
+
+msgid "Generation"
+msgstr "جيل"
+
+msgid "Lock Cb"
+msgstr "قفل Cb"
+
+msgid "First Inv Transaction Id"
+msgstr "معرف معاملة الاستثمارات الأولى"
+
+msgid "Origination Type"
+msgstr "نشأة نوع"
+
+msgid "Activation Date"
+msgstr "تاريخ التنشيط"
+
+msgid "Expiration Date"
+msgstr "تاريخ انتهاء الصلاحية"
+
+msgid "Supplier Sn"
+msgstr "Sn المورد"
+
+msgid "Supplier Ln"
+msgstr "Ln المورد"
+
+msgid "Expiration Action"
+msgstr "انتهاء العمل"
+
+msgid "Item Revision"
+msgstr "مراجعة البند"
+
+msgid "Parent Lot Number Id"
+msgstr "معرف رقم الكثير من الأصل"
+
+msgid "Original Wip Wo Header Id"
+msgstr "الأصلي Wip Wo رأس معرف"
+
+msgid "Last Inv Transaction Id"
+msgstr "آخر معرف المعاملات للاستثمارات"
+
+msgid "Inv Lot Onhand Id"
+msgstr "معرف Onhand الكثير من الاستثمارات"
+
+msgid "Onhand Id"
+msgstr "معرف Onhand"
+
+msgid "Lot Quantity"
+msgstr "الكمية الكثير"
+
+msgid "Inv Lot Transaction Id"
+msgstr "معرف المعاملة الكثير للاستثمارات"
+
+msgid "Inv Transaction Id"
+msgstr "معرف العملية للاستثمارات"
+
+msgid "From Subinventory"
+msgstr "من سوبينفينتوري"
+
+msgid "To Subinventory"
+msgstr "إلى سوبينفينتوري"
+
+msgid "From Locator"
+msgstr "من محدد موقع المعلومات"
+
+msgid "To Locator"
+msgstr "إلى محدد موقع المعلومات"
+
+msgid "Lot Number Id"
+msgstr "معرف رقم الشحنة"
+
+msgid "Inv Receipt Header Id"
+msgstr "استلام قوائم الجرد رأس معرف"
+
+msgid "Receipt Date"
+msgstr "تاريخ الاستلام"
+
+msgid "Received By"
+msgstr "التي تلقاها"
+
+msgid "Inv Receipt Line Id"
+msgstr "معرف خط استلام قوائم الجرد"
+
+msgid "Receving Account Id"
+msgstr "معرف الحساب يتسلم"
+
+msgid "Accrual Account Id"
+msgstr "معرف حساب الاستحقاق"
+
+msgid "Ref Doc Type"
+msgstr "نوع المرجع Doc"
+
+msgid "Ref Doc Number"
+msgstr "عدد ref Doc"
+
+msgid "Inv Serial Number Id"
+msgstr "معرف الرقم التسلسلي للاستثمارات"
+
+msgid "Current Org Id"
+msgstr "معرف المؤسسة الحالية"
+
+msgid "Current Subinventory Id"
+msgstr "معرف سوبينفينتوري الحالي"
+
+msgid "Current Locator Id"
+msgstr "معرف موقع المعلومات الحالية"
+
+msgid "Parent Serial Number Id"
+msgstr "معرف الرقم التسلسلي الأصلي"
+
+msgid "Current Wip Wo Header Id"
+msgstr "الحالي Wip Wo رأس معرف"
+
+msgid "Fixed Asset Cb"
+msgstr "Cb الأصول الثابتة"
+
+msgid "Inv Serial Transaction Id"
+msgstr "معرف المعاملات التسلسلية للاستثمارات"
+
+msgid "Receipt Line Id"
+msgstr "معرف خط الاستلام"
+
+msgid "Logical Transaction Cb"
+msgstr "Cb المعاملات المنطقية"
+
+msgid "Wip Wo Bom Id"
+msgstr "معرف شجرة Wo Wip"
+
+msgid "From Account Id"
+msgstr "من معرف الحساب"
+
+msgid "To Account Id"
+msgstr "لمعرف الحساب"
+
+msgid "Unit Cost"
+msgstr "تكلفة الوحدة"
+
+msgid "Costed Amount"
+msgstr "مبلغ التكاليف"
+
+msgid "Transaction Rev Enabled Cb"
+msgstr "تمكين الحركة القس سي بي"
+
+msgid "Rev Start Number"
+msgstr "القس ابدأ عدد"
+
+msgid "Inventory Id"
+msgstr "معرف المخزون"
+
+msgid "Item Master Cb"
+msgstr "البند الرئيسي Cb"
+
+msgid "Master Org Id"
+msgstr "معرف Org ماجستير"
+
+msgid "Calendar"
+msgstr "التقويم"
+
+msgid "Locator Control"
+msgstr "عنصر تحكم محدد المواقع"
+
+msgid "Allow Negative Balance Cb"
+msgstr "السماح برصيد سلبي Cb"
+
+msgid "Costing Org"
+msgstr "Org التكاليف"
+
+msgid "Pos Price List Header Id"
+msgstr "معرف رأس قائمة الأسعار نقاط البيع"
+
+msgid "Costing Method"
+msgstr "طريقة حساب التكاليف"
+
+msgid "Transfer To Gl Cb"
+msgstr "نقل إلى جي سي بي"
+
+msgid "Default Cost Group"
+msgstr "مجموعة التكلفة الافتراضية"
+
+msgid "Material Ac Id"
+msgstr "المواد Ac معرف"
+
+msgid "Material Oh Ac Id"
+msgstr "مادة أوه معرف التيار المتردد"
+
+msgid "Overhead Ac Id"
+msgstr "معرف Ac علوية"
+
+msgid "Resource Ac Id"
+msgstr "معرف المورد التيار المتردد"
+
+msgid "Lot Uniqueness"
+msgstr "تفرد الكثير"
+
+msgid "Lot Generation"
+msgstr "جيل الكثير"
+
+msgid "Lot Prefix"
+msgstr "بادئة الكثير"
+
+msgid "Lot Starting Number"
+msgstr "الكثير ابتداء من عدد"
+
+msgid "Serial Uniqueness"
+msgstr "تفرد المسلسل"
+
+msgid "Serial Generation"
+msgstr "جيل المسلسل"
+
+msgid "Serial Prefix"
+msgstr "بادئة المسلسل"
+
+msgid "Serial Starting Number"
+msgstr "رقم البداية المسلسل"
+
+msgid "Atp"
+msgstr "Atp"
+
+msgid "Picking Rule"
+msgstr "قاعدة الانتقاء"
+
+msgid "Sourcing Rule"
+msgstr "تحديد مصادر القاعدة"
+
+msgid "Inter Org Ppv Ac Id"
+msgstr "Org ببف Ac معرف في جملة"
+
+msgid "Inter Org Receivable Ac Id"
+msgstr "Org المستحق Ac معرف في جملة"
+
+msgid "Inter Org Payable Ac Id"
+msgstr "Org يدفع التيار المتردد معرف في جملة"
+
+msgid "Inter Org Intransit Ac Id"
+msgstr "جملة Org تخويل معرف التيار المتردد"
+
+msgid "Inv Ap Accrual Ac Id"
+msgstr "معرف Ac الاستحقاق Ap للاستثمارات"
+
+msgid "Inv Ap Exp Accrual Ac Id"
+msgstr "معرف Ac الاستحقاق أكسب Ap للاستثمارات"
+
+msgid "Inv Ppv Ac Id"
+msgstr "معرف Ac Ppv للاستثمارات"
+
+msgid "Inv Ipv Ac Id"
+msgstr "معرف Ac الحميم للاستثمارات"
+
+msgid "Sales Ac Id"
+msgstr "معرف مبيعات التيار المتردد"
+
+msgid "Cogs Ac Id"
+msgstr "معرف Ac التروس"
+
+msgid "Deferred Cogs Ac Id"
+msgstr "معرف Ac Cogs المؤجلة"
+
+msgid "Item Rev Enabled Cb"
+msgstr "تمكين Rev عنصر بناء القدرات"
+
+msgid "Item Id"
+msgstr "معرف العنصر"
+
+msgid "Product Line Percentage"
+msgstr "النسبة المئوية خط المنتج"
+
+msgid "Long Description"
+msgstr "وصف طويل"
+
+msgid "Inventory Item Cb"
+msgstr "Cb عنصر المخزون"
+
+msgid "Stockable Cb"
+msgstr "Cb ستوكابل"
+
+msgid "Transactable Cb"
+msgstr "Cb ترانساكتابل"
+
+msgid "Reservable Cb"
+msgstr "Cb المحجوز"
+
+msgid "Cycle Count Enabled Cb"
+msgstr "عدد مرات دورة تمكين Cb"
+
+msgid "Kit Cb"
+msgstr "أدوات بناء القدرات"
+
+msgid "Bom Enabled Cb"
+msgstr "شجرة تمكين Cb"
+
+msgid "Inventory Asset Cb"
+msgstr "جرد الأصول Cb"
+
+msgid "Osp Ac Id"
+msgstr "معرف Osp التيار المتردد"
+
+msgid "Purchased Cb"
+msgstr "بناء القدرات التي تم شراؤها"
+
+msgid "Use Asl Cb"
+msgstr "استخدام لغة الإشارات الأميركية سي بي"
+
+msgid "Invoice Matching"
+msgstr "مطابقة الفاتورة"
+
+msgid "Default Buyer"
+msgstr "المشتري الافتراضي"
+
+msgid "List Price"
+msgstr "قائمة الأسعار"
+
+msgid "Un Number"
+msgstr "رقم الأمم المتحدة"
+
+msgid "Hazard Classs"
+msgstr "المخاطر كلاسس"
+
+msgid "Receipt Sub Inventory"
+msgstr "استلام المخزون Sub"
+
+msgid "Over Receipt Percentage"
+msgstr "على مدى تلقي نسبة مئوية"
+
+msgid "Over Receipt Action"
+msgstr "على استلام العمل"
+
+msgid "Receipt Days Early"
+msgstr "أيام تلقي أوائل"
+
+msgid "Receipt Days Late"
+msgstr "أيام تلقي في وقت متأخر"
+
+msgid "Receipt Day Action"
+msgstr "استلام يوم عمل"
+
+msgid "Receipt Routing"
+msgstr "تلقي التوجيه"
+
+msgid "Weight Uom Id"
+msgstr "معرف Uom الوزن"
+
+msgid "Volume Uom Id"
+msgstr "معرف وحدة التخزين Uom"
+
+msgid "Volume"
+msgstr "وحدة التخزين"
+
+msgid "Dimension Uom Id"
+msgstr "معرف Uom البعد"
+
+msgid "Width"
+msgstr "العرض"
+
+msgid "Equipment Cb"
+msgstr "معدات بناء القدرات"
+
+msgid "Electronic Format Cb"
+msgstr "بناء القدرات في شكل إلكتروني"
+
+msgid "Planning Method"
+msgstr "أسلوب التخطيط"
+
+msgid "Wip Supply Subinventory"
+msgstr "سوبينفينتوري إمدادات الأعمال تحت التنفيذ"
+
+msgid "Wip Supply Locator"
+msgstr "محدد موقع إمدادات الأعمال تحت التنفيذ"
+
+msgid "Fix Order Quantity"
+msgstr "تحديد كمية أمر التوريد"
+
+msgid "Saftey Stock Percentage"
+msgstr "نسبة الأسهم توفيرا"
+
+msgid "Fix Lot Multiplier"
+msgstr "إصلاح الكثير المضاعف"
+
+msgid "Minimum Order Quantity"
+msgstr "الحد الأدنى لكمية"
+
+msgid "Maximum Order Quantity"
+msgstr "الحد الأقصى لكمية"
+
+msgid "Minmax Min Quantity"
+msgstr "كمية دقيقة مينماكس"
+
+msgid "Minmax Max Quantity"
+msgstr "الكمية ماكس مينماكس"
+
+msgid "Forecast Method"
+msgstr "التنبؤ بالأسلوب"
+
+msgid "Forecast Control"
+msgstr "التنبؤ بالتحكم"
+
+msgid "Demand Timefence"
+msgstr "تيميفينسي الطلب"
+
+msgid "Planning Timefence"
+msgstr "التخطيط تيميفينسي"
+
+msgid "Release Timefence"
+msgstr "الإفراج عن تيميفينسي"
+
+msgid "Pre Processing Lt"
+msgstr "ما قبل المعالجة Lt"
+
+msgid "Post Processing Lt"
+msgstr "وظيفة تجهيز الملازم"
+
+msgid "Processing Lt"
+msgstr "تجهيز الملازم"
+
+msgid "Cumulative Mfg Lt"
+msgstr "التراكمي مبدعين Lt"
+
+msgid "Cumulative Total Lt"
+msgstr "الملازم المجموع التراكمي"
+
+msgid "Lt Lot Size"
+msgstr "حجم لوط Lt"
+
+msgid "Build In Wip Cb"
+msgstr "بناء في Wip Cb"
+
+msgid "Customer Ordered Cb"
+msgstr "العميل أمر Cb"
+
+msgid "Internal Ordered Cb"
+msgstr "بناء القدرات أمر داخلي"
+
+msgid "Shippable Cb"
+msgstr "Cb شحنها"
+
+msgid "Returnable Cb"
+msgstr "Cb الواجب إعادتها"
+
+msgid "Invoiceable Cb"
+msgstr "فوترة Cb"
+
+msgid "Ef1"
+msgstr "Ef1"
+
+msgid "Ef2"
+msgstr "Ef2"
+
+msgid "Deffered Cogs Ac Id"
+msgstr "ديفيريد التروس Ac معرف"
+
+msgid "Ip Tax Class"
+msgstr "فئة ضريبة الملكية الفكرية"
+
+msgid "Op Tax Class"
+msgstr "فئة ضريبة op"
+
+msgid "Ap Payment Term"
+msgstr "Ap الدفع الأجل"
+
+msgid "Ar Payment Term"
+msgstr "Ar الدفع الأجل"
+
+msgid "Rounding Option"
+msgstr "خيار التقريب"
+
+msgid "Onhand With Rev Cb"
+msgstr "Onhand مع القس سي بي"
+
+msgid "Item Rev Number"
+msgstr "رقم الصنف Rev"
+
+msgid "Am Asset Type"
+msgstr "أنا نوع الأصول"
+
+msgid "Am Activity Cause"
+msgstr "وأنا سبب النشاط"
+
+msgid "Am Activity Type"
+msgstr "أنا نوع النشاط"
+
+msgid "Am Activity Source"
+msgstr "وأنا مصدر النشاط"
+
+msgid "Item Status Id"
+msgstr "معرف حالة العنصر"
+
+msgid "Active"
+msgstr "نشط"
+
+msgid "Inventory Item"
+msgstr "صنف المخزون"
+
+msgid "Transactable"
+msgstr "ترانساكتابل"
+
+msgid "Reservable"
+msgstr "المحجوز"
+
+msgid "Costing Enabled"
+msgstr "تقدير التكاليف الممكنة"
+
+msgid "Customer Ordered"
+msgstr "أمر العميل"
+
+msgid "Purchased"
+msgstr "تم شراؤها"
+
+msgid "Build In Wip"
+msgstr "بناء في أعمال تحت التنفيذ"
+
+msgid "Legal Id"
+msgstr "معرف القانونية"
+
+msgid "Legal Org Type"
+msgstr "نوع المؤسسة القانونية"
+
+msgid "Registration Number"
+msgstr "رقم التسجيل"
+
+msgid "Place Of Registration"
+msgstr "مكان التسجيل"
+
+msgid "Country Of Registration"
+msgstr "بلد تسجيل"
+
+msgid "Identification Number"
+msgstr "رقم التعريف"
+
+msgid "Ein Tin Tan"
+msgstr "عين تين تان"
+
+msgid "Balancing Segments"
+msgstr "تحقيق التوازن بين شرائح"
+
+msgid "Locator Structure"
+msgstr "هيكل محدد موقع المعلومات"
+
+msgid "X Coordinate"
+msgstr "× تنسيق"
+
+msgid "Y Coordinate"
+msgstr "إحداثي Y"
+
+msgid "Z Coordinate"
+msgstr "إحداثي Z"
+
+msgid "Max Units"
+msgstr "الوحدات القصوى"
+
+msgid "Max Volume Uom Id"
+msgstr "ماكس حجم معرف Uom"
+
+msgid "Max Volume"
+msgstr "حجم الحد الأقصى"
+
+msgid "Max Weight Uom Id"
+msgstr "ماكس الوزن Uom معرف"
+
+msgid "Max Weight"
+msgstr "وزن ماكس"
+
+msgid "Sub Description"
+msgstr "وصف sub"
+
+msgid "Business Org Id"
+msgstr "معرف المؤسسة التجارية"
+
+msgid "Inventory Org Id"
+msgstr "معرف Org المخزون"
+
+msgid "Mdm Bank Account Id"
+msgstr "معرف حساب بنك Mdm"
+
+msgid "Mdm Bank Header Id"
+msgstr "بنك Mdm رأس معرف"
+
+msgid "Mdm Bank Site Id"
+msgstr "معرف موقع بنك Mdm"
+
+msgid "Account Number"
+msgstr "رقم الحساب"
+
+msgid "Account Usage"
+msgstr "استخدام الحساب"
+
+msgid "Cash Clearing Ac Id"
+msgstr "معرف Ac المقاصة النقدية"
+
+msgid "Exchange Gl Ac Id"
+msgstr "تبادل معرف Ac Gl"
+
+msgid "Hr Cash Ac Id"
+msgstr "معرف Ac النقدية الموارد البشرية"
+
+msgid "Hr Cash Clearing Ac Id"
+msgstr "معرف Ac المقاصة النقدية الموارد البشرية"
+
+msgid "Hr Bank Charge Ac Id"
+msgstr "بنك الموارد البشرية المسؤول Ac معرف"
+
+msgid "Hr Exchange Gl Ac Id"
+msgstr "معرف Ac Gl تبادل الموارد البشرية"
+
+msgid "Netting Ac Cb"
+msgstr "المعاوضة Cb التيار المتردد"
+
+msgid "Minimum Payment"
+msgstr "الحد الأدنى للدفع"
+
+msgid "Maximum Payment"
+msgstr "دفع الحد الأقصى"
+
+msgid "Contact Id"
+msgstr "معرف الاتصال"
+
+msgid "Ap Payment Method Id"
+msgstr "Ap معرف طريقة الدفع"
+
+msgid "Account Description"
+msgstr "وصف الحساب"
+
+msgid "Bank Name"
+msgstr "اسم البنك"
+
+msgid "Bank Number"
+msgstr "رقم البنك"
+
+msgid "Bank Name Short"
+msgstr "البنك الاسم القصير"
+
+msgid "Bank Name Alt"
+msgstr "Alt اسم البنك"
+
+msgid "Branch Name"
+msgstr "اسم الفرع"
+
+msgid "Branch Country"
+msgstr "فرع البلد"
+
+msgid "Branch Number"
+msgstr "رقم فرع"
+
+msgid "Branch Name Short"
+msgstr "فرع اسم قصير"
+
+msgid "Branch Name Alt"
+msgstr "فرع اسم Alt"
+
+msgid "Ifsc Code"
+msgstr "Ifsc مدونة"
+
+msgid "Swift Code"
+msgstr "رمز سويفت"
+
+msgid "Routing Number"
+msgstr "التوجيه رقم"
+
+msgid "Iban Code"
+msgstr "رمز الايبان"
+
+msgid "Branch Tax Reg No"
+msgstr "فرع الضرائب لا ريج"
+
+msgid "Branch Tax Payer Id"
+msgstr "فرع معرف دافعي الضرائب"
+
+msgid "Mdm Price List Header Id"
+msgstr "معرف رأس قائمة الأسعار أطباء العالم"
+
+msgid "Price List"
+msgstr "قائمة الأسعار"
+
+msgid "Allow Mutli Currency Cb"
+msgstr "السماح Mutli العملة Cb"
+
+msgid "Mdm Price List Line Id"
+msgstr "معرف خط قائمة الأسعار أطباء العالم"
+
+msgid "Formula"
+msgstr "الصيغة"
+
+msgid "Mdm Tax Code Id"
+msgstr "معرف التعليمات البرمجية الضريبة أطباء العالم"
+
+msgid "Tax Code"
+msgstr "قانون الضرائب"
+
+msgid "Tax Type"
+msgstr "نوع الضريبة"
+
+msgid "Dr Cr"
+msgstr "Dr Cr"
+
+msgid "In Out"
+msgstr "في الخارج"
+
+msgid "Printed Tax Name"
+msgstr "اسم ضريبة المطبوعة"
+
+msgid "Tax Regime"
+msgstr "النظام الضريبي"
+
+msgid "Tax Jurisdiction"
+msgstr "ضريبة الولاية"
+
+msgid "Offset Tax Code"
+msgstr "رمز ضريبة الإزاحة"
+
+msgid "Allow Adhoc Rate Cb"
+msgstr "السماح لمعدل Adhoc Cb"
+
+msgid "Allow Tax Exemptions Cb"
+msgstr "السماح ببناء القدرات في الإعفاءات الضريبية"
+
+msgid "Calculation Method"
+msgstr "طريقة الحساب"
+
+msgid "Percentage"
+msgstr "النسبة المئوية"
+
+msgid "Country Code"
+msgstr "رمز البلد"
+
+msgid "State"
+msgstr "الدولة"
+
+msgid "Tax Region Name"
+msgstr "اسم المنطقة الضرائب"
+
+msgid "Mdm Tax Rule Id"
+msgstr "معرف القاعدة الضريبية أطباء العالم"
+
+msgid "Ship To Region Id"
+msgstr "السفينة إلى معرف المنطقة"
+
+msgid "Ship From Region Id"
+msgstr "السفينة من معرف المنطقة"
+
+msgid "Module Id"
+msgstr "معرف الوحدة النمطية"
+
+msgid "Lot Id"
+msgstr "معرف الكثير"
+
+msgid "Serial Id"
+msgstr "معرف المسلسل"
+
+msgid "Onhand"
+msgstr "Onhand"
+
+msgid "Reservable Onhand"
+msgstr "Onhand المحجوز"
+
+msgid "Transactable Onhand"
+msgstr "Onhand ترانساكتابل"
+
+msgid "Lot Status"
+msgstr "حالة الكثير"
+
+msgid "Serial Status"
+msgstr "حالة المسلسل"
+
+msgid "Secondary Uom Id"
+msgstr "الثانوي Uom معرف"
+
+msgid "Onhand Status"
+msgstr "مركز Onhand"
+
+msgid "Org Name"
+msgstr "اسم المؤسسة"
+
+msgid "Onhand Value"
+msgstr "قيمة Onhand"
+
+msgid "Subinventory Type"
+msgstr "نوع سوبينفينتوري"
+
+msgid "Option Detail Id"
+msgstr "معرف تفاصيل الخيار"
+
+msgid "Option Header Id"
+msgstr "معرف الخيار رأس"
+
+msgid "Option Line Id"
+msgstr "معرف خط الخيار"
+
+msgid "Option Detail Value"
+msgstr "قيمة التفصيل الخيار"
+
+msgid "Access Level"
+msgstr "مستوى الوصول"
+
+msgid "Module Code"
+msgstr "الوحدة النمطية للتعليمات البرمجية"
+
+msgid "Option Assignments"
+msgstr "تعيينات الخيار"
+
+msgid "Option Line Value"
+msgstr "قيمة خيار الخط"
+
+msgid "Value Group Id"
+msgstr "معرف المجموعة القيمة"
+
+msgid "Page Id"
+msgstr "معرف الصفحة"
+
+msgid "Show In Frontpage Cb"
+msgstr "وتظهر في Frontpage Cb"
+
+msgid "Path Id"
+msgstr "معرف المسار"
+
+msgid "Path Link"
+msgstr "مسار الارتباط"
+
+msgid "Mode"
+msgstr "وضع"
+
+msgid "Id Column Name"
+msgstr "اسم عمود معرف"
+
+msgid "Path Type"
+msgstr "نوع المسار"
+
+msgid "Search Path Cb"
+msgstr "بناء القدرات في مسار البحث"
+
+msgid "Prepayment Cb"
+msgstr "Cb الدفعة المقدمة"
+
+msgid "Payment Term Discount Id"
+msgstr "معرف الخصم الأجل الدفع"
+
+msgid "Discount Percentage"
+msgstr "النسبة المئوية للخصم"
+
+msgid "Due Days"
+msgstr "أيام الاستحقاق"
+
+msgid "Due Dates"
+msgstr "تواريخ الاستحقاق"
+
+msgid "Due Date Of Month"
+msgstr "تاريخ الاستحقاق لشهر"
+
+msgid "Payment Term Schedule Id"
+msgstr "معرف الجدول الزمني للدفع الأجل"
+
+msgid "Amount Percentage"
+msgstr "مقدار النسبة المئوية"
+
+msgid "Open Quantity"
+msgstr "الكمية مفتوحة"
+
+msgid "Po Asl Document Id"
+msgstr "معرف الوثيقة Asl بو"
+
+msgid "Po Asl Line Id"
+msgstr "معرف خط Asl بو"
+
+msgid "Document Header Id"
+msgstr "معرف رأس المستند"
+
+msgid "Document Line Id"
+msgstr "معرف خط المستند"
+
+msgid "Po Asl Header Id"
+msgstr "بو رأس Asl معرف"
+
+msgid "Asl Type"
+msgstr "نوع Asl"
+
+msgid "Item Category Id"
+msgstr "معرف فئة عنصر"
+
+msgid "Mfg Part Number"
+msgstr "رقم جزء مبدعين"
+
+msgid "Business Type"
+msgstr "نوع الأعمال"
+
+msgid "Release Method"
+msgstr "الإفراج عن الأسلوب"
+
+msgid "Min Order Quantity"
+msgstr "الحد الأدنى لكمية"
+
+msgid "Release Number"
+msgstr "رقم الإصدار"
+
+msgid "Agreement Start Date"
+msgstr "تاريخ بدء الاتفاق"
+
+msgid "Agreement End Date"
+msgstr "تاريخ انتهاء الاتفاق"
+
+msgid "Po Requisition Header Id"
+msgstr "ص. ب طلب رأس معرف"
+
+msgid "Po Requisition Type"
+msgstr "نوع طلب بو"
+
+msgid "Po Requisition Number"
+msgstr "ص. ب رقم طلب"
+
+msgid "Requisition Status"
+msgstr "حالة طلب"
+
+msgid "Po Requisition Line Id"
+msgstr "معرف خط طلب بو"
+
+msgid "Po Requisition Line Number"
+msgstr "ص. ب. رقم سطر طلب"
+
+msgid "Bpa Po Line Id"
+msgstr "معرف خط بو Bpa"
+
+msgid "Po Requisition Detail Id"
+msgstr "معرف تفاصيل طلب بو"
+
+msgid "Ship To Org"
+msgstr "السفينة إلى Org"
+
+msgid "Invoice Match Type"
+msgstr "نوع مطابقة الفاتورة"
+
+msgid "Ship To Location Id"
+msgstr "السفينة إلى معرف الموقع"
+
+msgid "Ref Po Header Id"
+msgstr "Ref بو رأس معرف"
+
+msgid "Price List Header Id"
+msgstr "معرف رأس قائمة الأسعار"
+
+msgid "Multi Bu Cb"
+msgstr "Cb بو متعدد"
+
+msgid "Bpa Line Id"
+msgstr "معرف خط Bpa"
+
+msgid "Price Date"
+msgstr "تاريخ الأسعار"
+
+msgid "Reference Doc Type"
+msgstr "نوع الوثيقة المرجعية"
+
+msgid "Reference Doc Number"
+msgstr "الرقم المرجعي Doc"
+
+msgid "Kit Configured Cb"
+msgstr "طقم مكون بناء القدرات"
+
+msgid "Hold Cb"
+msgstr "عقد بناء القدرات"
+
+msgid "Po Approval Hierarchy"
+msgstr "ص. ب الموافقة على التسلسل الهرمي"
+
+msgid "Req Approval Hierarchy"
+msgstr "التسلسل الهرمي للموافقة Req"
+
+msgid "Po Quote Detail Id"
+msgstr "معرف تفاصيل اقتباس بو"
+
+msgid "Po Quote Header Id"
+msgstr "ص. ب اقتباس رأس معرف"
+
+msgid "Po Quote Line Id"
+msgstr "ص. ب اقتباس سطر معرف"
+
+msgid "Po Rfq Detail Id"
+msgstr "ص. ب معرف تفاصيل طلب عرض الأسعار"
+
+msgid "Requirement Value"
+msgstr "قيمة الشرط"
+
+msgid "Po Rfq Header Id"
+msgstr "ص. ب معرف رأس طلب عرض الأسعار"
+
+msgid "Quote Number"
+msgstr "اقتبس عدد"
+
+msgid "Supplier Quote"
+msgstr "عرض أسعار المورد"
+
+msgid "Quote Type"
+msgstr "نوع عرض الأسعار"
+
+msgid "Valid Date"
+msgstr "تاريخ صحيح"
+
+msgid "Quote Status"
+msgstr "حالة عرض الأسعار"
+
+msgid "Po Rfq Line Id"
+msgstr "معرف خط Rfq بو"
+
+msgid "Supplier Part Number"
+msgstr "رقم جزء المورد"
+
+msgid "Minimum Agreement Quantity"
+msgstr "اتفاق الحد الأدنى الكمية"
+
+msgid "Daily Capacity"
+msgstr "القدرة اليومية"
+
+msgid "Processing Lead Time"
+msgstr "تجهيز المهلة الزمنية"
+
+msgid "Replenishment Lead Time"
+msgstr "تجديد المهلة الزمنية"
+
+msgid "Quote Unit Price"
+msgstr "سعر الوحدة"
+
+msgid "Ship To Inventory"
+msgstr "السفينة للمخزون"
+
+msgid "Released Amount"
+msgstr "المبلغ المفرج عنهم"
+
+msgid "Po Requisition Interface Id"
+msgstr "ص. ب طلب معرف الواجهة"
+
+msgid "Requirement Number"
+msgstr "عدد الشرط"
+
+msgid "Requirement Name"
+msgstr "اسم الشرط"
+
+msgid "Requirement Type"
+msgstr "نوع الشرط"
+
+msgid "Max Evaludation Points"
+msgstr "ماكس افالوديشن النقاط"
+
+msgid "Target Value"
+msgstr "القيمة المستهدفة"
+
+msgid "Rfq Number"
+msgstr "رقم طلب عرض الأسعار"
+
+msgid "Rfq Name"
+msgstr "اسم طلب عرض الأسعار"
+
+msgid "Outcome"
+msgstr "نتائج"
+
+msgid "Rfq Type"
+msgstr "نوع طلب عرض الأسعار"
+
+msgid "Due Date"
+msgstr "تاريخ الاستحقاق"
+
+msgid "Rfq Status"
+msgstr "حالة طلب عرض الأسعار"
+
+msgid "Target Price"
+msgstr "السعر المستهدف"
+
+msgid "Notes From Supplier"
+msgstr "ويلاحظ من الموردين"
+
+msgid "Po Sourcing Rule Header Id"
+msgstr "ص. ب. منبع رأس معرف القاعدة"
+
+msgid "Po Sourcing Rule Line Id"
+msgstr "ص. ب. منبع معرف خط القاعدة"
+
+msgid "Sourcing Type"
+msgstr "منبع نوع"
+
+msgid "Source From Org Id"
+msgstr "المصدر من معرف Org"
+
+msgid "Allocation"
+msgstr "تخصيص"
+
+msgid "Rank"
+msgstr "رتبة"
+
+msgid "Transit Time"
+msgstr "وقت العبور"
+
+msgid "Pos Barcode List Header Id"
+msgstr "معرف رأس قائمة الباركود pos"
+
+msgid "List Name"
+msgstr "اسم القائمة"
+
+msgid "Pos Barcode List Line Id"
+msgstr "معرف خط قائمة الباركود pos"
+
+msgid "Line Amount"
+msgstr "حجم الخط"
+
+msgid "Discount Amount"
+msgstr "مبلغ الخصم"
+
+msgid "Discount Code"
+msgstr "كود الخصم"
+
+msgid "Amount After Discount"
+msgstr "المبلغ بعد الخصم"
+
+msgid "No Of Labels"
+msgstr "لا من التسميات"
+
+msgid "Pos Inv Control Id"
+msgstr "معرف عنصر التحكم نقاط البيع للاستثمارات"
+
+msgid "Customer Id"
+msgstr "معرف العميل"
+
+msgid "Transaction Subinventory Id"
+msgstr "معرف المعاملة سوبينفينتوري"
+
+msgid "Transaction Locator Id"
+msgstr "معرف محدد موقع الحركة"
+
+msgid "Return Subinventory Id"
+msgstr "إرجاع معرف سوبينفينتوري"
+
+msgid "Return Locator Id"
+msgstr "إرجاع معرف محدد موقع المعلومات"
+
+msgid "Allow Negative Onhand Cb"
+msgstr "السماح بالسلبية Onhand Cb"
+
+msgid "Customer Site Id"
+msgstr "معرف موقع العميل"
+
+msgid "Pos Terminal Id"
+msgstr "معرف المحطة الطرفية pos"
+
+msgid "Sd Store Id"
+msgstr "معرف التخزين Sd"
+
+msgid "Terminal Name"
+msgstr "اسم المحطة الطرفية"
+
+msgid "Primary Owner Id"
+msgstr "معرف المالك الرئيسي"
+
+msgid "Terminal Type"
+msgstr "نوع المحطة الطرفية"
+
+msgid "Refresh Time"
+msgstr "تحديث الوقت"
+
+msgid "Pos Transaction Header Id"
+msgstr "نقاط البيع معاملة رأس معرف"
+
+msgid "Total Amount"
+msgstr "المبلغ الإجمالي"
+
+msgid "Pos Transaction Line Id"
+msgstr "معرف خط معاملات نقاط البيع"
+
+msgid "Project Type"
+msgstr "نوع المشروع"
+
+msgid "Manager User Id"
+msgstr "معرف المستخدم مدير"
+
+msgid "Project Class"
+msgstr "فئة المشروع"
+
+msgid "Is Template Cb"
+msgstr "هو قالب Cb"
+
+msgid "Project Status"
+msgstr "حالة المشروع"
+
+msgid "Task Number"
+msgstr "رقم المهمة"
+
+msgid "Task Name"
+msgstr "اسم المهمة"
+
+msgid "Parent Prj Project Line Id"
+msgstr "معرف خط Prj المشروع الأصل"
+
+msgid "Service Type"
+msgstr "نوع الخدمة"
+
+msgid "Work Type"
+msgstr "نوع العمل"
+
+msgid "Allow Charges Cb"
+msgstr "السماح برسوم Cb"
+
+msgid "Capitalizable Cb"
+msgstr "Cb كابيتاليزابل"
+
+msgid "Rate Type"
+msgstr "نوع معدل"
+
+msgid "Cip Asset It"
+msgstr "Cip الأصول أنه"
+
+msgid "Task Status"
+msgstr "حالة المهمة"
+
+msgid "Field Image"
+msgstr "حقل الصورة"
+
+msgid "Field Price"
+msgstr "حقل السعر"
+
+msgid "Field Description"
+msgstr "وصف الحقل"
+
+msgid "Role Access Id"
+msgstr "معرف الوصول إلى الدور"
+
+msgid "Role Path Id"
+msgstr "معرف المسار دور"
+
+msgid "Role Id"
+msgstr "معرف دور"
+
+msgid "Sd Delivery Header Id"
+msgstr "Sd تسليم رأس معرف"
+
+msgid "Delivery Number"
+msgstr "رقم إيصال"
+
+msgid "Shipping Org Id"
+msgstr "معرف Org الشحن"
+
+msgid "Delivery Date"
+msgstr "تاريخ التسليم"
+
+msgid "Delivery Received By"
+msgstr "التسليم التي تلقاها"
+
+msgid "Carrier Receipt Number"
+msgstr "رقم الإيصال الناقل"
+
+msgid "Expetced Delivery Date"
+msgstr "تاريخ تسليم اكسبيتسيد"
+
+msgid "Actual Delivery Date"
+msgstr "تاريخ التسليم الفعلي"
+
+msgid "Handling Instruction"
+msgstr "التعامل مع التعليمات"
+
+msgid "Sd Delivery Line Id"
+msgstr "معرف خط توصيل Sd"
+
+msgid "Shipped Quantity"
+msgstr "الكمية التي تم شحنها"
+
+msgid "Staging Subinventory Id"
+msgstr "التدريج معرف سوبينفينتوري"
+
+msgid "Staging Locator Id"
+msgstr "معرف محدد موقع التدريج"
+
+msgid "Delivery Status"
+msgstr "حالة التسليم"
+
+msgid "Picking Date"
+msgstr "تاريخ الانتقاء"
+
+msgid "Actual Ship Date"
+msgstr "تاريخ الشحن الفعلي"
+
+msgid "Line Uom Id"
+msgstr "معرف خط Uom"
+
+msgid "Total Volume"
+msgstr "الحجم الإجمالي"
+
+msgid "Total Weight"
+msgstr "الوزن الإجمالي"
+
+msgid "Sd Document Type Id"
+msgstr "معرف نوع الوثيقة Sd"
+
+msgid "Document Type Name"
+msgstr "اسم نوع المستند"
+
+msgid "Bu Org Id R"
+msgstr "بو Org معرف R"
+
+msgid "Supply Source"
+msgstr "مصدر إمدادات"
+
+msgid "Process Flow Id"
+msgstr "معرف عملية تدفق"
+
+msgid "Default Line Document"
+msgstr "وثيقة الخط الافتراضي"
+
+msgid "Default Shipfrom Org Id"
+msgstr "معرف الافتراضي شيبفروم Org"
+
+msgid "Destination Type"
+msgstr "نوع الوجهة"
+
+msgid "Ar Transaction Source"
+msgstr "مصدر الحركة Ar"
+
+msgid "Sd Lead Id"
+msgstr "معرف يؤدي Sd"
+
+msgid "Lead Number"
+msgstr "يؤدي عدد"
+
+msgid "Primary Contact Id"
+msgstr "معرف جهة الاتصال الأساسية"
+
+msgid "Lead Type"
+msgstr "يؤدي نوع"
+
+msgid "Details"
+msgstr "تفاصيل"
+
+msgid "Contact Website"
+msgstr "موقع جهة الاتصال"
+
+msgid "Contact Address"
+msgstr "عنوان الاتصال"
+
+msgid "Sales Person Employee Id"
+msgstr "معرف الموظف مندوب المبيعات"
+
+msgid "Sales Team"
+msgstr "فريق المبيعات"
+
+msgid "Campaign Id"
+msgstr "معرف الحملة"
+
+msgid "Campaign Os"
+msgstr "حملة نظام التشغيل"
+
+msgid "Referral Source"
+msgstr "مصدر الإحالة"
+
+msgid "Sales Channel"
+msgstr "قناة المبيعات"
+
+msgid "Close Reason"
+msgstr "إغلاق السبب"
+
+msgid "Sd Opportunity Id"
+msgstr "معرف الفرصة Sd"
+
+msgid "Opportunity Number"
+msgstr "رقم الفرصة"
+
+msgid "Opportunity Subject"
+msgstr "هذا الموضوع الفرصة"
+
+msgid "Win Probability"
+msgstr "احتمال فوز"
+
+msgid "Forecast Amount"
+msgstr "التنبؤ بمقدار"
+
+msgid "Expected Close Date"
+msgstr "تاريخ إغلاق المتوقعة"
+
+msgid "So Status"
+msgstr "حالة حتى"
+
+msgid "Wip Wo Header Id"
+msgstr "معرف رأس Wo Wip"
+
+msgid "Picked Quantity"
+msgstr "الكمية المنتقاة"
+
+msgid "Line Status"
+msgstr "حالة الخط"
+
+msgid "Staging Subinventory"
+msgstr "سوبينفينتوري التدريج"
+
+msgid "Staging Locator"
+msgstr "محدد موقع التدريج"
+
+msgid "Requested Date"
+msgstr "التاريخ المطلوب"
+
+msgid "Sd Quote Header Id"
+msgstr "Sd اقتبس رأس معرف"
+
+msgid "New Customer Name"
+msgstr "اسم العميل الجديد"
+
+msgid "New Customer Address"
+msgstr "عنوان العميل الجديد"
+
+msgid "Aggrement End Date"
+msgstr "تاريخ نهاية أجريمينت"
+
+msgid "Sd Quote Line Id"
+msgstr "معرف خط الاقتباس Sd"
+
+msgid "New Item Number"
+msgstr "رقم الصنف الجديد"
+
+msgid "New Item Description"
+msgstr "وصف الصنف الجديد"
+
+msgid "Sd Sales Control Id"
+msgstr "معرف عنصر التحكم المبيعات Sd"
+
+msgid "Deffer Invoicing Cb"
+msgstr "Cb ديفير الفوترة"
+
+msgid "Default Requested Date Cb"
+msgstr "افتراضي طلب سي بي تاريخ"
+
+msgid "Default Schedule Ship Date Cb"
+msgstr "Cb تاريخ السفينة الجدول الزمني الافتراضي"
+
+msgid "Default Promise Date Cb"
+msgstr "Cb تاريخ الوعد الافتراضي"
+
+msgid "Sd Shipping Control Id"
+msgstr "معرف عنصر التحكم الشحن Sd"
+
+msgid "Default Picking Rule Id"
+msgstr "معرف قاعدة الانتقاء الافتراضي"
+
+msgid "Delivery Onpicking Cb"
+msgstr "Cb أونبيكينج التسليم"
+
+msgid "Autosplit Onpicking Cb"
+msgstr "Cb أونبيكينج أوتوسبليت"
+
+msgid "Store Name"
+msgstr "اسم مخزن"
+
+msgid "Sd Store Subinventory Id"
+msgstr "Sd تخزين معرف سوبينفينتوري"
+
+msgid "Floor Number"
+msgstr "رقم الطابق"
+
+msgid "Building Number"
+msgstr "رقم المبنى"
+
+msgid "Wing Number"
+msgstr "رقم الجناح"
+
+msgid "Session Data"
+msgstr "بيانات الدورة"
+
+msgid "Sf Item Inv Category Id"
+msgstr "معرف الفئة عنصر سادس"
+
+msgid "Sf Item Inv Category Value"
+msgstr "قيمة الفئة عنصر سادس"
+
+msgid "Sf Item Pur Category Id"
+msgstr "معرف الفئة البولي يوريثان عنصر سادس"
+
+msgid "Sf Item Pur Category Value"
+msgstr "البند sf قيمة الفئة البولي يوريثان"
+
+msgid "Default Home Page"
+msgstr "الصفحة الرئيسية الافتراضية"
+
+msgid "Site Name"
+msgstr "اسم الموقع"
+
+msgid "Maintenance Cb"
+msgstr "صيانة Cb"
+
+msgid "Maintenance Msg"
+msgstr "صيانة جي إس"
+
+msgid "Disabled Action"
+msgstr "عمل المعاقين"
+
+msgid "Phone No"
+msgstr "رقم الهاتف"
+
+msgid "Logo Path"
+msgstr "مسار شعار"
+
+msgid "Posts In Fp"
+msgstr "المشاركات في تنظيم الأسرة"
+
+msgid "Summary Char Fp"
+msgstr "Fp شار موجزة"
+
+msgid "Footer Message"
+msgstr "تذييل الرسالة"
+
+msgid "Anonymous User"
+msgstr "مستخدم مجهول"
+
+msgid "Anonymous User Role"
+msgstr "دور المستخدم المجهول"
+
+msgid "Access Denied"
+msgstr "تم رفض الوصول"
+
+msgid "Basic User Role"
+msgstr "دور المستخدم الأساسي"
+
+msgid "Shipment Pick Priority"
+msgstr "انتقاء الشحنة ذات الأولوية"
+
+msgid "Supplier Type"
+msgstr "نوع المورد"
+
+msgid "Supplier Contact Id"
+msgstr "معرف اتصال المورد"
+
+msgid "Supplier Bu Id"
+msgstr "معرف المورد بو"
+
+msgid "Liability Account Id"
+msgstr "معرف الحساب المسؤولية"
+
+msgid "Payable Account Id"
+msgstr "معرف الحساب المستحقة الدفع"
+
+msgid "Payment Discount Account Id"
+msgstr "معرف حساب خصم الدفع"
+
+msgid "Pre Payment Account Id"
+msgstr "معرف الحساب قبل الدفع"
+
+msgid "New Pos Cb"
+msgstr "الجديد Pos Cb"
+
+msgid "All Invoices Cb"
+msgstr "جميع الفواتير Cb"
+
+msgid "Unmatched Invoices Cb"
+msgstr "Cb الفواتير لا مثيل لها"
+
+msgid "Unaccounted Invoices Cb"
+msgstr "Cb الفواتير في عداد المفقودين"
+
+msgid "Unpaid Invoices Cb"
+msgstr "Cb الفواتير غير المدفوعة"
+
+msgid "Hold Reason"
+msgstr "عقد السبب"
+
+msgid "Po Amount Limit"
+msgstr "حد المبلغ بو"
+
+msgid "Invoice Amount Limit"
+msgstr "حد مبلغ الفاتورة"
+
+msgid "Payment Amount Limit"
+msgstr "حد المبلغ دفع"
+
+msgid "Bu Bank Id"
+msgstr "معرف البنك بو"
+
+msgid "Bu Bank Site Id"
+msgstr "معرف موقع بنك بو"
+
+msgid "Bu Tax Code"
+msgstr "قانون الضرائب بو"
+
+msgid "Invoice Match Document"
+msgstr "وثيقة مطابقة الفاتورة"
+
+msgid "Invoice Currency"
+msgstr "عمله الفاتورة"
+
+msgid "Payment Priority"
+msgstr "أولوية السداد"
+
+msgid "Payment Group"
+msgstr "مجموعة الدفع"
+
+msgid "Invoice Date Basis"
+msgstr "أساس تاريخ الفاتورة"
+
+msgid "Pay Date Basis"
+msgstr "الدفع على أساس تاريخ"
+
+msgid "Default Payment Method"
+msgstr "طريقة الدفع الافتراضية"
+
+msgid "Remittance Advice Method"
+msgstr "أسلوب المشورة التحويلات"
+
+msgid "Remittance Advice Email"
+msgstr "تحويل الأموال الإلكتروني المشورة"
+
+msgid "Pay On"
+msgstr "دفع في"
+
+msgid "Debit Memo Onreturn Cb"
+msgstr "Cb أونريتورن مذكرة الخصم"
+
+msgid "Org Shipto Id"
+msgstr "Org شيتو معرف"
+
+msgid "Org Billto Id"
+msgstr "Org معرف بيلتو"
+
+msgid "Supplier Site Ref"
+msgstr "المرجع موقع المورد"
+
+msgid "Supplier Site Type"
+msgstr "نوع موقع المورد"
+
+msgid "Allow Substitute Receipts Cb"
+msgstr "تتيح بديلاً إيصالات Cb"
+
+msgid "Allow Unordered Receipts Cb"
+msgstr "تسمح Cb إيصالات غير مرتبة"
+
+msgid "Ap Invoice Match Level"
+msgstr "مستوى مطابقة الفاتورة Ap"
+
+msgid "Ship To Location Variance"
+msgstr "السفينة إلى موقع تباين"
+
+msgid "Positive Qty Tolerance"
+msgstr "التسامح Qty الإيجابية"
+
+msgid "Negative Qty Tolerance"
+msgstr "التسامح Qty السلبية"
+
+msgid "Qty Variance"
+msgstr "الفرق Qty"
+
+msgid "Positive Receipt Days Tolerance"
+msgstr "أيام تلقي إيجابية التسامح"
+
+msgid "Negative Receipt Days Tolerance"
+msgstr "السلبية أيام تلقي التسامح"
+
+msgid "Receipt Days Variance"
+msgstr "استلام أيام الفرق"
+
+msgid "Supplier Site Attachement Id"
+msgstr "معرف مورد موقع Attachement"
+
+msgid "Sys Document Sequence Id"
+msgstr "معرف تسلسل المستند Sys"
+
+msgid "Entry Type"
+msgstr "نوع الإدخال"
+
+msgid "Pre Fix"
+msgstr "ما قبل الإصلاح"
+
+msgid "Seq Separator"
+msgstr "فاصل Seq"
+
+msgid "Next Number"
+msgstr "الرقم التالي"
+
+msgid "Sys Dynamic Block Header Id"
+msgstr "معرف رأس كتلة حيوية Sys"
+
+msgid "Sys Dynamic Block Line Id"
+msgstr "معرف خط كتلة حيوية Sys"
+
+msgid "Dynamic Block Header Id"
+msgstr "معرف رأس كتلة حيوية"
+
+msgid "Reference Column"
+msgstr "عمود الإشارة"
+
+msgid "Sys Extra Field Id"
+msgstr "معرف حقل إضافي Sys"
+
+msgid "Field Type"
+msgstr "نوع الحقل"
+
+msgid "Field Length"
+msgstr "طول الحقل"
+
+msgid "Display Type"
+msgstr "نوع العرض"
+
+msgid "Sys Extra Field Instance Id"
+msgstr "Sys خارج حقل معرف المثيل"
+
+msgid "Referece Entity"
+msgstr "كيان ريفرس"
+
+msgid "Sys Hold Id"
+msgstr "Sys عقد معرف"
+
+msgid "Hold Code"
+msgstr "إجراء التعليمات البرمجية"
+
+msgid "Hold Name"
+msgstr "الاحتفاظ باسم"
+
+msgid "Hold Type"
+msgstr "عقد من نوع"
+
+msgid "Manual Released Cb"
+msgstr "صدر دليل Cb"
+
+msgid "Sys Hold Reference Id"
+msgstr "Sys عقد معرف مرجع"
+
+msgid "Hold Applied By"
+msgstr "عقد تطبقها"
+
+msgid "Hold Applied On"
+msgstr "تطبق على عقد"
+
+msgid "Application Reason"
+msgstr "السبب في التطبيق"
+
+msgid "Hold Removed By"
+msgstr "عقد إزالة بواسطة"
+
+msgid "Hold Removed On"
+msgstr "إزالة عقد في"
+
+msgid "Removal Reason"
+msgstr "إزالة السبب"
+
+msgid "Hold Count"
+msgstr "عقد عدد"
+
+msgid "Notification Type"
+msgstr "نوع الإخطار"
+
+msgid "Notification Name"
+msgstr "اسم الإخطار"
+
+msgid "From User Id"
+msgstr "من معرف المستخدم"
+
+msgid "To User Id"
+msgstr "لمعرف المستخدم"
+
+msgid "From User"
+msgstr "من المستخدم"
+
+msgid "To User"
+msgstr "للمستخدم"
+
+msgid "To User Id All"
+msgstr "لمعرف المستخدم كافة"
+
+msgid "To Email"
+msgstr "للبريد الإلكتروني"
+
+msgid "Cc Email"
+msgstr "البريد الإلكتروني cc"
+
+msgid "Notification Subject"
+msgstr "موضوع الإخطار"
+
+msgid "To Role"
+msgstr "لدور"
+
+msgid "Access Key"
+msgstr "مفتاح الوصول"
+
+msgid "Mail Status"
+msgstr "مركز البريد"
+
+msgid "Responder"
+msgstr "المستجيب"
+
+msgid "Responder Comment"
+msgstr "تعليق المستجيب"
+
+msgid "User Key Name"
+msgstr "اسم المفتاح المستخدم"
+
+msgid "User Key Value"
+msgstr "قيمة المفتاح المستخدم"
+
+msgid "Text Field1"
+msgstr "النص Field1"
+
+msgid "Notification Group Id"
+msgstr "معرف مجموعة الإشعار"
+
+msgid "Notification Group Seq"
+msgstr "مجموعة إشعار Seq"
+
+msgid "Start Sys Notification Id"
+msgstr "بدء تشغيل معرف إعلام Sys"
+
+msgid "Reference Key Table"
+msgstr "جدول المراجع الرئيسية"
+
+msgid "Sys Permission Id"
+msgstr "Sys إذن معرف"
+
+msgid "Permision"
+msgstr "بيرميسيون"
+
+msgid "Class"
+msgstr "الفئة"
+
+msgid "Printer Name"
+msgstr "اسم الطابعة"
+
+msgid "Printer Type"
+msgstr "نوع الطابعة"
+
+msgid "Ip Address"
+msgstr "عنوان Ip"
+
+msgid "Port Number"
+msgstr "رقم المنفذ"
+
+msgid "Sys Process Flow Header Id"
+msgstr "Sys عملية تدفق رأس معرف"
+
+msgid "Process Flow"
+msgstr "عملية تدفق"
+
+msgid "Line Name"
+msgstr "اسم الخط"
+
+msgid "Class Name"
+msgstr "اسم الفئة"
+
+msgid "Method Name"
+msgstr "اسم الأسلوب"
+
+msgid "Next Line Seq Pass"
+msgstr "تمرير Seq السطر التالي"
+
+msgid "Next Line Seq Fail"
+msgstr "فشل Seq السطر التالي"
+
+msgid "Next Line Seq Onhold"
+msgstr "السطر التالي Seq Onhold"
+
+msgid "Sys Profile Header Id"
+msgstr "Sys الشخصية رأس معرف"
+
+msgid "Sys Profile Line Id"
+msgstr "معرف خط الشخصية Sys"
+
+msgid "Profile Level"
+msgstr "مستوى الشخصية"
+
+msgid "Level Name"
+msgstr "اسم المستوى"
+
+msgid "Level Value"
+msgstr "قيمة مستوى"
+
+msgid "Sys Program Id"
+msgstr "معرف البرنامج Sys"
+
+msgid "Program Name"
+msgstr "اسم البرنامج"
+
+msgid "Message"
+msgstr "رسالة"
+
+msgid "Parameters"
+msgstr "المعلمات"
+
+msgid "Output Path"
+msgstr "مسار الإخراج"
+
+msgid "Sys Program Status Id"
+msgstr "معرف حالة البرنامج Sys"
+
+msgid "Sys Role Permission Id"
+msgstr "معرف إذن دور Sys"
+
+msgid "Permission Id"
+msgstr "معرف إذن"
+
+msgid "Sys Secondary Field Id"
+msgstr "معرف الحقل الثانوي Sys"
+
+msgid "Sys Secondary Field Instance Id"
+msgstr "Sys ثانوية حقل معرف المثيل"
+
+msgid "Sys Value Group Header Id"
+msgstr "Sys قيمة المجموعة رأس معرف"
+
+msgid "Value Group"
+msgstr "قيمة المجموعة"
+
+msgid "Validation Type"
+msgstr "نوع التحقق من الصحة"
+
+msgid "Min Size"
+msgstr "دقيقة الحجم"
+
+msgid "Max Size"
+msgstr "الحد الأقصى لحجم"
+
+msgid "Min Value"
+msgstr "قيمة الحد الأدنى"
+
+msgid "Max Value"
+msgstr "قيمة الحد الأقصى"
+
+msgid "Fixed Size"
+msgstr "حجم ثابت"
+
+msgid "Number Only Cb"
+msgstr "رقم سي بي فقط"
+
+msgid "Uppercase Only Cb"
+msgstr "أحرف كبيرة فقط Cb"
+
+msgid "Sys Value Group Line Id"
+msgstr "معرف خط Sys قيمة المجموعة"
+
+msgid "Code Value"
+msgstr "قيمة الرمز"
+
+msgid "Account Qualifier"
+msgstr "تصفيات الحساب"
+
+msgid "Allow Budgeting Cb"
+msgstr "السماح ببناء القدرات الميزنة"
+
+msgid "Allow Posting Cb"
+msgstr "السماح بنشر سي بي"
+
+msgid "Parent Cb"
+msgstr "الأم سي بي"
+
+msgid "Parent Line Id"
+msgstr "معرف خط الأصل"
+
+msgid "Path Name"
+msgstr "اسم المسار"
+
+msgid "Path Description"
+msgstr "وصف المسار"
+
+msgid "Path Value"
+msgstr "قيمة مسار"
+
+msgid "Path Sec Id"
+msgstr "معرف المسار ثانية"
+
+msgid "Path Revision Number"
+msgstr "رقم مراجعة مسار"
+
+msgid "Path Revision Enabled"
+msgstr "مراجعة مسار تمكين"
+
+msgid "Path Creation Date"
+msgstr "تاريخ إنشاء المسار"
+
+msgid "Path Created By"
+msgstr "المسار التي تم إنشاؤها بواسطة"
+
+msgid "Path Last Update Date"
+msgstr "مسار تاريخ آخر تحديث"
+
+msgid "Path Last Updated By"
+msgstr "مسار آخر تحديث قبل"
+
+msgid "Transaction Type Number"
+msgstr "رقم نوع المعاملة"
+
+msgid "Type Class"
+msgstr "نوع الفئة"
+
+msgid "Transaction Action"
+msgstr "عمل الحركة"
+
+msgid "Account Id"
+msgstr "معرف الحساب"
+
+msgid "Primary Uom Id"
+msgstr "الابتدائي Uom معرف"
+
+msgid "Primary Relation"
+msgstr "العلاقة الأولية"
+
+msgid "Person Id"
+msgstr "معرف الشخص"
+
+msgid "Password"
+msgstr "كلمة المرور"
+
+msgid "Assigned Ip"
+msgstr "Ip تم تعيينها"
+
+msgid "User Language"
+msgstr "لغة المستخدم"
+
+msgid "Date Format"
+msgstr "تنسيق التاريخ"
+
+msgid "Block Notif Count"
+msgstr "كتلة نوتيف العد"
+
+msgid "Dec Sep"
+msgstr "سبتمبر ديسمبر"
+
+msgid "Theme"
+msgstr "الموضوع"
+
+msgid "Page Size"
+msgstr "حجم الصفحة"
+
+msgid "Prices Dec"
+msgstr "أسعار ديسمبر"
+
+msgid "Qty Dec"
+msgstr "Qty Dec"
+
+msgid "Rates Dec"
+msgstr "معدلات Dec"
+
+msgid "Percent Dec"
+msgstr "في المئة Dec"
+
+msgid "Show Gl"
+msgstr "إظهار Gl"
+
+msgid "Show Codes"
+msgstr "إظهار رموز"
+
+msgid "Show Hints"
+msgstr "إظهار تلميحات"
+
+msgid "Last Visit Date"
+msgstr "تاريخ آخر زيارة"
+
+msgid "Query Size"
+msgstr "حجم الاستعلام"
+
+msgid "Graphic Links"
+msgstr "ارتباطات الرسومات"
+
+msgid "Pos"
+msgstr "نقاط البيع"
+
+msgid "Print Profile"
+msgstr "طباعة الشخصية"
+
+msgid "Rep Popup"
+msgstr "مندوب منبثقة"
+
+msgid "Auth Provider Name"
+msgstr "اسم موفر المصادقة"
+
+msgid "Auth Provider Id"
+msgstr "معرف موفر المصادقة"
+
+msgid "User Dashboard Config Id"
+msgstr "معرف المستخدم لوحة معلومات التكوين"
+
+msgid "Config Level"
+msgstr "مستوى التكوين"
+
+msgid "User Role"
+msgstr "دور المستخدم"
+
+msgid "Report Group"
+msgstr "تقرير الفريق"
+
+msgid "Report Type"
+msgstr "نوع التقرير"
+
+msgid "Report Id"
+msgstr "معرف التقرير"
+
+msgid "User Favourite Id"
+msgstr "معرف المستخدم المفضلة"
+
+msgid "External Link"
+msgstr "ارتباط خارجي"
+
+msgid "Fav Name"
+msgstr "اسم الصوت العربي الحر"
+
+msgid "Fav Group"
+msgstr "مجموعة الصوت العربي الحر"
+
+msgid "User Group Id"
+msgstr "معرف المجموعة المستخدم"
+
+msgid "User Group Code"
+msgstr "رمز مجموعة المستخدم"
+
+msgid "User Group Access Id"
+msgstr "معرف الوصول إلى مجموعة المستخدم"
+
+msgid "User Password Reset Id"
+msgstr "معرف إعادة تعيين كلمة مرور المستخدم"
+
+msgid "User Role Id"
+msgstr "معرف دور المستخدم"
+
+msgid "User Supplier Id"
+msgstr "معرف المورد المستخدم"
+
+msgid "View Id"
+msgstr "عرض معرف"
+
+msgid "View Name"
+msgstr "اسم العرض"
+
+msgid "Custom Div Class"
+msgstr "شعبة مخصصة من الدرجة الأولى"
+
+msgid "Logical Settings"
+msgstr "إعدادات المنطقية"
+
+msgid "Query V"
+msgstr "الاستعلام الخامس"
+
+msgid "Select V"
+msgstr "حدد الخامس"
+
+msgid "From V"
+msgstr "من الخامس"
+
+msgid "Where V"
+msgstr "حيث V"
+
+msgid "Group By V"
+msgstr "المجموعة قبل الخامس"
+
+msgid "Order By"
+msgstr "ترتيب حسب"
+
+msgid "Query End"
+msgstr "نهاية الاستعلام"
+
+msgid "Filters"
+msgstr "عوامل التصفية"
+
+msgid "Page"
+msgstr "الصفحة"
+
+msgid "Page Title"
+msgstr "عنوان الصفحة"
+
+msgid "Page Header"
+msgstr "رأس الصفحة"
+
+msgid "Page Footer"
+msgstr "تذييل الصفحة"
+
+msgid "Use Pager Cb"
+msgstr "استخدام جهاز النداء Cb"
+
+msgid "Default Per Page"
+msgstr "الافتراضي في الصفحة الواحدة"
+
+msgid "No Of Grid Columns"
+msgstr "لا من أعمدة الشبكة"
+
+msgid "Block Title"
+msgstr "كتلة العنوان"
+
+msgid "Show Graph Only Cb"
+msgstr "إظهار الرسم البياني فقط سي بي"
+
+msgid "Header Text"
+msgstr "نص رأس الصفحة"
+
+msgid "Footer Text"
+msgstr "نص تذييل الصفحة"
+
+msgid "Remove Default Header Cb"
+msgstr "إزالة الافتراضي رأس Cb"
+
+msgid "List Type"
+msgstr "نوع القائمة"
+
+msgid "Chart Type"
+msgstr "نوع المخطط"
+
+msgid "Chart Width"
+msgstr "عرض الرسم البياني"
+
+msgid "Chart Height"
+msgstr "ارتفاع الرسم البياني"
+
+msgid "Chart Label"
+msgstr "مخطط التسمية"
+
+msgid "Chart Value"
+msgstr "قيمة الرسم البياني"
+
+msgid "Chart Legend"
+msgstr "وسيلة إيضاح التخطيط"
+
+msgid "View Path Id"
+msgstr "عرض معرف المسار"
+
+msgid "Column Name"
+msgstr "اسم العمود"
+
+msgid "Wip Accounting Group Id"
+msgstr "معرف المجموعة حساب الأعمال تحت التنفيذ"
+
+msgid "Wo Type"
+msgstr "نوع Wo"
+
+msgid "Wip Accounting Group"
+msgstr "مجموعة حساب الأعمال تحت التنفيذ"
+
+msgid "Var Material Ac Id"
+msgstr "معرف Ac المواد فأر"
+
+msgid "Var Material Oh Ac Id"
+msgstr "المواد فأر يا معرف التيار المتردد"
+
+msgid "Var Overhead Ac Id"
+msgstr "معرف Ac فأر النفقات العامة"
+
+msgid "Var Resource Ac Id"
+msgstr "فأر مورد معرف التيار المتردد"
+
+msgid "Var Osp Ac Id"
+msgstr "فأر Osp Ac معرف"
+
+msgid "Wip Control Id"
+msgstr "معرف عنصر التحكم Wip"
+
+msgid "Default Accounting Group"
+msgstr "مجموعة المحاسبة الافتراضية"
+
+msgid "Wo Number Type"
+msgstr "نوع رقم Wo"
+
+msgid "Allow One Operation Cb"
+msgstr "السماح ببناء القدرات عملية واحدة"
+
+msgid "Completion Subinventory Id"
+msgstr "معرف إتمام سوبينفينتوري"
+
+msgid "Completion Locator Id"
+msgstr "إنجاز محدد معرف"
+
+msgid "Issue Subinventory Id"
+msgstr "معرف المسألة سوبينفينتوري"
+
+msgid "Issue Locator Id"
+msgstr "معرف محدد موقع القضية"
+
+msgid "So Change Effect"
+msgstr "لذا على تغيير تأثير"
+
+msgid "Auto Release Days"
+msgstr "أيام الإفراج عن السيارات"
+
+msgid "Wip Move Transaction Id"
+msgstr "معرف معاملة نقل الأعمال تحت التنفيذ"
+
+msgid "Wo Routing Line Id"
+msgstr "معرف خط التوجيه Wo"
+
+msgid "Wo Routing Detail Id"
+msgstr "معرف تفاصيل التوجيه Wo"
+
+msgid "Wo Number"
+msgstr "رقم Wo"
+
+msgid "From Routing Sequence"
+msgstr "من تسلسل التوجيه"
+
+msgid "To Routing Sequence"
+msgstr "لتسلسل التوجيه"
+
+msgid "From Operation Step"
+msgstr "من الخطوة العملية"
+
+msgid "To Operation Step"
+msgstr "أن الخطوة العملية"
+
+msgid "Move Quantity"
+msgstr "كمية التحرك"
+
+msgid "Scrap Account Id"
+msgstr "معرف حساب الخردة"
+
+msgid "Sales Order Header Id"
+msgstr "معرف رأس أمر التوريد"
+
+msgid "Sales Order Line Id"
+msgstr "معرف خط أمر التوريد"
+
+msgid "Wip Resource Transaction Id"
+msgstr "معرف معاملة الموارد الأعمال تحت التنفيذ"
+
+msgid "Wip Wo Routing Line Id"
+msgstr "معرف خط التوجيه Wip Wo"
+
+msgid "Wip Wo Routing Detail Id"
+msgstr "معرف تفاصيل التوجيه Wip Wo"
+
+msgid "Required Quantity"
+msgstr "الكمية المطلوبة"
+
+msgid "Issued Quantity"
+msgstr "الكمية الصادرة"
+
+msgid "Wo Status"
+msgstr "مركز Wo"
+
+msgid "Nettable Quantity"
+msgstr "الكمية نيتابل"
+
+msgid "Reference Bom Item Id M"
+msgstr "مرجع معرف عنصر شجرة المواد M"
+
+msgid "Bom Exploded Cb"
+msgstr "شجرة المواد انفجرت Cb"
+
+msgid "Routing Exploded Cb"
+msgstr "Cb انفجرت التوجيه"
+
+msgid "Reference Routing Item Id M"
+msgstr "مرجع معرف عنصر التوجيه M"
+
+msgid "Completion Sub Inventory"
+msgstr "إنجاز جرد Sub"
+
+msgid "Completed Quantity"
+msgstr "الكمية المنجزة"
+
+msgid "Scrapped Quantity"
+msgstr "الكمية التي تم تخريدها"
+
+msgid "Released Date"
+msgstr "تاريخ إصدارها"
+
+msgid "First Unit Completed Date"
+msgstr "أنجزت الوحدة الأولى تاريخ"
+
+msgid "Last Unit Completed Date"
+msgstr "أنجزت الوحدة الأخيرة تاريخ"
+
+msgid "Schedule Group"
+msgstr "الجدول الزمني للفريق"
+
+msgid "Build Sequence"
+msgstr "بناء التسلسل"
+
+msgid "Line"
+msgstr "خط"
+
+msgid "Scheduling Priority"
+msgstr "زيادة أولوية الجدولة"
+
+msgid "Closed Date"
+msgstr "تاريخ الإغلاق"
+
+msgid "Applied Quantity"
+msgstr "الكمية التطبيقية"
+
+msgid "Queue Quantity"
+msgstr "كمية قائمة الانتظار"
+
+msgid "Running Quantity"
+msgstr "تشغيل الكمية"
+
+msgid "Rejected Quantity"
+msgstr "الكمية المرفوضة"
+
+msgid "Tomove Quantity"
+msgstr "الكمية توموفي"
+
+msgid "Progress Percentage"
+msgstr "نسبة التقدم"
+
+msgid "Wip Wol Transaction Id"
+msgstr "معرف معاملة Wip Wol"
+
+msgid "Search Paths"
+msgstr "مسارات البحث"
+
+msgid "All users"
+msgstr "كافة المستخدمين"
+
+msgid "Search Users"
+msgstr "البحث عن المستخدمين"
+
+msgid "New user registration"
+msgstr "تسجيل مستخدم جديد"
+
+msgid "Registraion"
+msgstr "ريجيستريون"
+
+msgid "Supplier"
+msgstr "المورد"
+
+msgid "Options"
+msgstr "خيارات"
+
+msgid "Option"
+msgstr "الخيار"
+
+msgid "View all the options"
+msgstr "عرض كافة الخيارات"
+
+msgid "View Options"
+msgstr "خيارات العرض"
+
+msgid "All modules"
+msgstr "كافة الوحدات النمطية"
+
+msgid "View Modules"
+msgstr "عرض الوحدات النمطية"
+
+msgid "Module creation & update"
+msgstr "إنشاء وحدة نمطية والتحديث"
+
+msgid "Update Modules"
+msgstr "تحديث الوحدات النمطية"
+
+msgid "Organizations"
+msgstr "المنظمات"
+
+msgid "Create & Update Enterprise"
+msgstr "إنشاء وتحديث المؤسسة"
+
+msgid "Enterprise"
+msgstr "المؤسسة"
+
+msgid "Path - creation, update & delete"
+msgstr "المسار--إنشاء وتحديث وحذف"
+
+msgid "Create & Update Address"
+msgstr "إنشاء وتحديث عنوان"
+
+msgid "Char of Account"
+msgstr "شار للحساب"
+
+msgid "Chart Of Accounts"
+msgstr "مخطط الحسابات"
+
+msgid "GL Calendar"
+msgstr "تقويم GL"
+
+msgid "All chart of accounts"
+msgstr "كل مخطط الحسابات"
+
+msgid "Search Ac Combinations"
+msgstr "البحث عن تركيبات Ac"
+
+msgid "Char of account combinations"
+msgstr "شار لحساب مجموعات"
+
+msgid "Account Combination"
+msgstr "تركيبة الحساب"
+
+msgid "Legal Organization"
+msgstr "المنظمة القانونية"
+
+msgid "Legal Org"
+msgstr "Org القانونية"
+
+msgid "List of all Legal Orgs"
+msgstr "قائمة بجميع Orgs القانونية"
+
+msgid "Legal Orgs"
+msgstr "Orgs القانونية"
+
+msgid "Business Organization"
+msgstr "تنظيم الأعمال"
+
+msgid "Business Org"
+msgstr "Org الأعمال"
+
+msgid "Inventory Organization"
+msgstr "تنظيم المخزون"
+
+msgid "Inventory Org"
+msgstr "Org المخزون"
+
+msgid "All inventory Orgs"
+msgstr "كل المخزون Orgs"
+
+msgid "Search Inventory"
+msgstr "البحث عن المخزون"
+
+msgid "Search Business Org"
+msgstr "Org أعمال البحث"
+
+msgid "Item Master"
+msgstr "الصنف الرئيسي"
+
+msgid "Search All Items"
+msgstr "البحث في كافة عناصر"
+
+msgid "Search Items"
+msgstr "البحث عن العناصر"
+
+msgid "Unit of mesaures"
+msgstr "وحدة ميسوريس"
+
+msgid "View Unit of Measures"
+msgstr "وحدة عرض للتدابير"
+
+msgid "View UOM"
+msgstr "عرض UOM"
+
+msgid "Inventory Transaction Type"
+msgstr "نوع حركة المخزون"
+
+msgid "List of transaction types"
+msgstr "قائمة بأنواع المعاملات"
+
+msgid "Search Transaction Type"
+msgstr "البحث عن نوع الحركة"
+
+msgid "Sub Inventory"
+msgstr "جرد sub"
+
+msgid "Search All Sub Inventories"
+msgstr "البحث في جميع القوائم الفرعية"
+
+msgid "Search Subinventories"
+msgstr "سوبينفينتوريس البحث"
+
+msgid "Create & Update Locator"
+msgstr "إنشاء وتحديث محدد موقع المعلومات"
+
+msgid "Inventory"
+msgstr "المخزون"
+
+msgid "Search Locator"
+msgstr "مواقع البحث"
+
+msgid "On hand Quantities"
+msgstr "ومن ناحية كميات"
+
+msgid "On Hand"
+msgstr "ومن ناحية"
+
+msgid "Inventory Transaction"
+msgstr "حركة المخزون"
+
+msgid "create update page"
+msgstr "إنشاء صفحة التحديث"
+
+msgid "view all pages"
+msgstr "عرض كافة الصفحات"
+
+msgid "Search Pages"
+msgstr "صفحات البحث"
+
+msgid "Admin"
+msgstr "المشرف"
+
+msgid "Content Types"
+msgstr "أنواع المحتوى"
+
+msgid "Search Content Type"
+msgstr "نوع محتوى البحث"
+
+msgid "Create & Update Content Type"
+msgstr "إنشاء وتحديث نوع محتوى"
+
+msgid "Create & Update Documents"
+msgstr "إنشاء وتحديث الوثائق"
+
+msgid "Documentation"
+msgstr "الوثائق"
+
+msgid "Create & Update blocks"
+msgstr "إنشاء وتحديث القطع"
+
+msgid "Custom Block"
+msgstr "كتلة مخصصة"
+
+msgid "List of blocks"
+msgstr "قائمة بالقطع"
+
+msgid "All Blocks"
+msgstr "جميع الكتل"
+
+msgid "View, Create & Update categories"
+msgstr "الفئات في طريقة العرض، وإنشاء وتحديث"
+
+msgid "Categories - List of all category"
+msgstr "فئات--قائمة بجميع الفئة"
+
+msgid "Search Categories"
+msgstr "فئات البحث"
+
+msgid "Create & Update Forum"
+msgstr "إنشاء وتحديث المنتدى"
+
+msgid "New Forum Topic"
+msgstr "موضوع جديد في المنتدى"
+
+msgid "Category Relationships"
+msgstr "علاقات الفئة"
+
+msgid "Category Relations"
+msgstr "فئة العلاقات"
+
+msgid "Create & Updatecontent"
+msgstr "إنشاء & أوبداتيكونتينت"
+
+msgid "Write Content"
+msgstr "كتابة المحتوى"
+
+msgid "Content Management - Create & Update Contents such as Forum, Article, etc"
+msgstr "محتوى الإدارة-إنشاء & تحديث المحتويات مثل المنتدى، المادة، إلخ"
+
+msgid "Content Management"
+msgstr "إدارة المحتوى"
+
+msgid "Create & update view"
+msgstr "إنشاء وتحديث طريقة العرض"
+
+msgid "Custom Report (View)"
+msgstr "تقرير مخصص "
+
+msgid "List of views"
+msgstr "قائمة طرق العرض"
+
+msgid "Search Custome Reports (Views)"
+msgstr "البحث في تقارير Custome "
+
+msgid "view forum content type"
+msgstr "عرض نوع محتوى المنتدى"
+
+msgid "View forum"
+msgstr "عرض المنتدى"
+
+msgid "Option lists"
+msgstr "قوائم الخيار"
+
+msgid "Search Options"
+msgstr "خيارات البحث"
+
+msgid "Role Path"
+msgstr "مسار الدور"
+
+msgid "User - Creation & Update"
+msgstr "المستخدم-إنشاء وتحديث"
+
+msgid "User"
+msgstr "المستخدم"
+
+msgid "Json Basics"
+msgstr "أساسيات Json"
+
+msgid "Search Organizations"
+msgstr "مؤسسات البحث"
+
+msgid "Search Orgs"
+msgstr "البحث Orgs"
+
+msgid "View Address"
+msgstr "عرض عنوان"
+
+msgid "List of all enterprises"
+msgstr "قائمة بجميع الشركات"
+
+msgid "Serach Enterprises"
+msgstr "الشركات Serach"
+
+msgid "Search All Inventory Transactions"
+msgstr "البحث عن كافة العمليات المخزنية"
+
+msgid "Search Transactions"
+msgstr "البحث عن معاملات"
+
+msgid "Purchase Order"
+msgstr "أمر الشراء"
+
+msgid "Payment Terms"
+msgstr "شروط الدفع"
+
+msgid "Search Payment Term"
+msgstr "البحث عن الدفع الأجل"
+
+msgid "All Purchased Orders"
+msgstr "شراء جميع أوامر"
+
+msgid "Search PO Headers"
+msgstr "رؤوس البحث PO"
+
+msgid "All expected receipts"
+msgstr "الإيرادات المتوقعة من جميع"
+
+msgid "Expected Receipts"
+msgstr "الإيرادات المتوقعة"
+
+msgid "All POs"
+msgstr "جميع نقاط البيع"
+
+msgid "Search POs"
+msgstr "البحث عن نقاط البيع"
+
+msgid "All setups"
+msgstr "جميع الأجهزة"
+
+msgid "Setup"
+msgstr "برنامج الإعداد"
+
+msgid "Receipt POs, IRs and RMAs"
+msgstr "استلام نقاط البيع، ومصلحة الضرائب و RMAs"
+
+msgid "Inventory Receipt"
+msgstr "إيصال استلام المخزون"
+
+msgid "All Receipts"
+msgstr "جميع الإيصالات"
+
+msgid "View Inv Receipts"
+msgstr "عرض إيصالات للاستثمارات"
+
+msgid "Search Inventory Receipt"
+msgstr "البحث عن استلام المخزون"
+
+msgid "Search Inv Receipts"
+msgstr "البحث عن إيصالات للاستثمارات"
+
+msgid "Bill of materials"
+msgstr "شجرة المواد"
+
+msgid "Search All BOMs"
+msgstr "البحث عن كل شجرة مواد"
+
+msgid "Search BOM"
+msgstr "البحث عن شجرة"
+
+msgid "Create & Update Resources"
+msgstr "إنشاء وتحديث الموارد"
+
+msgid "All Resources"
+msgstr "جميع الموارد"
+
+msgid "Search Resources"
+msgstr "البحث عن الموارد"
+
+msgid "Create & Update Cost Type"
+msgstr "إنشاء وتحديث نوع التكلفة"
+
+msgid "All Cost Types"
+msgstr "أنواع جميع التكاليف"
+
+msgid "Cost Types"
+msgstr "أنواع التكلفة"
+
+msgid "Search Material Elements"
+msgstr "البحث عن العناصر المادية"
+
+msgid "Overhead - Resource & Material"
+msgstr "النفقات العامة-الموارد والمواد"
+
+msgid "All Over heads"
+msgstr "جميع أنحاء رؤساء"
+
+msgid "Search Overhead"
+msgstr "البحث عن النفقات العامة"
+
+msgid "Create & Update Department"
+msgstr "إنشاء وتحديث الإدارة"
+
+msgid "All Departments"
+msgstr "جميع الإدارات"
+
+msgid "Search Department"
+msgstr "إدارة البحث"
+
+msgid "Search Standard Operation"
+msgstr "عملية البحث القياسية"
+
+msgid "Create & Update Routing"
+msgstr "إنشاء وتحديث التوجيه"
+
+msgid "Routing"
+msgstr "التوجيه"
+
+msgid "Search Routing"
+msgstr "البحث عن توجيه"
+
+msgid "Work In Process"
+msgstr "العمل في عملية"
+
+msgid "Create & Update Work Order"
+msgstr "إنشاء وتحديث نظام العمل"
+
+msgid "Work Order"
+msgstr "أمر عمل"
+
+msgid "Search Work Orders"
+msgstr "أوامر العمل البحث"
+
+msgid "Search Work Order"
+msgstr "ترتيب البحث في العمل"
+
+msgid "Work Order Move Transaction"
+msgstr "حركة نقل أمر العمل"
+
+msgid "WO Move Transaction"
+msgstr "حركة نقل WO"
+
+msgid "Search Move Transactions"
+msgstr "معاملات نقل البحث"
+
+msgid "Resource Transaction"
+msgstr "معاملة الموارد"
+
+msgid "Search Resource Transaction"
+msgstr "البحث عن موارد المعاملات"
+
+msgid "WIP Material Transaction"
+msgstr "حركة مواد الأعمال تحت التنفيذ"
+
+msgid "WO Inv Transaction"
+msgstr "حركة الاستثمارات WO"
+
+msgid "WIP Work Order Completion & Return"
+msgstr "استكمال ترتيب عمل WIP & العودة"
+
+msgid "WO Completion/Return"
+msgstr "إتمام الوثيقة WO/عودة"
+
+msgid "Accounts Receivable"
+msgstr "حسابات القبض"
+
+msgid "Customer"
+msgstr "العملاء"
+
+msgid "Search Customer View"
+msgstr "عرض البحث عن العملاء"
+
+msgid "Search Customer"
+msgstr "البحث عن العملاء"
+
+msgid "Create & UpdatenewContent"
+msgstr "إنشاء & أوبداتينيوكونتينت"
+
+msgid "unused1"
+msgstr "unused1"
+
+msgid "Create & Updateissue"
+msgstr "إنشاء & أوبداتيسوي"
+
+msgid "Issue Log"
+msgstr "سجل القضية"
+
+msgid "Create Contents"
+msgstr "إنشاء محتويات"
+
+msgid "All Forums"
+msgstr "جميع المنتديات"
+
+msgid "Forums"
+msgstr "منتديات"
+
+msgid "All Issues"
+msgstr "جميع القضايا"
+
+msgid "Issue Logs"
+msgstr "سجلات القضية"
+
+msgid "All Documentations"
+msgstr "جميع الوثائق"
+
+msgid "Read Documentation"
+msgstr "قراءة الوثائق"
+
+msgid "All Contents"
+msgstr "جميع المحتويات"
+
+msgid "Read Articles"
+msgstr "قراءة المقالات"
+
+msgid "Json user"
+msgstr "المستخدم Json"
+
+msgid "Value Group Header"
+msgstr "رأس المجموعة القيمة"
+
+msgid "Create & Update Value Groups"
+msgstr "إنشاء وتحديث المجموعات القيمة"
+
+msgid "Search Value Groups"
+msgstr "البحث عن قيمة المجموعات"
+
+msgid "All Calendars"
+msgstr "كافة التقويمات"
+
+msgid "Search Calendar"
+msgstr "التقويم البحث"
+
+msgid "General Ledger"
+msgstr "دفتر الأستاذ العام"
+
+msgid "Create update & ledger"
+msgstr "إنشاء تحديث & دفتر الأستاذ"
+
+msgid "Serach Ledgers"
+msgstr "دفاتر Serach"
+
+msgid "Search Ledgers"
+msgstr "دفاتر البحث"
+
+msgid "All Search Links"
+msgstr "البحث كل الروابط"
+
+msgid "Search"
+msgstr "البحث"
+
+msgid "View Value Group"
+msgstr "عرض قيمة المجموعة"
+
+msgid "System"
+msgstr "نظام"
+
+msgid "View all BOMs"
+msgstr "عرض كل شجرة مواد"
+
+msgid "View BOM"
+msgstr "طريقة عرض شجرة"
+
+msgid "View BOM Cost Type"
+msgstr "عرض شجرة نوع التكلفة"
+
+msgid "View BOM Departments"
+msgstr "عرض شجرة الإدارات"
+
+msgid "View Departments"
+msgstr "عرض الأقسام"
+
+msgid "Mass Upload Home Page"
+msgstr "الصفحة الرئيسية تحميل الكتلة"
+
+msgid "Mass Upload"
+msgstr "تحميل جماعي"
+
+msgid "Mass Upload - Option Detail"
+msgstr "تحميل قداس--الخيار التفصيل"
+
+msgid "Mass Upload - Option Lines"
+msgstr "تحميل قداس--الخيار خطوط"
+
+msgid "Mass Upload - Option Header"
+msgstr "تحميل قداس--الخيار رأس"
+
+msgid "View All PO"
+msgstr "أعرض بو جميع"
+
+msgid "View Purchase Order"
+msgstr "عرض أمر الشراء"
+
+msgid "View Legal Orgs"
+msgstr "الرأي القانوني Orgs"
+
+msgid "View Chart Of Accounts"
+msgstr "عرض مخطط الحسابات"
+
+msgid "View COA"
+msgstr "عرض COA"
+
+msgid "Search Chart Of Accounts"
+msgstr "البحث عن مخطط الحسابات"
+
+msgid "Search COA"
+msgstr "البحث عن شهادة الأصالة"
+
+msgid "View Calendar"
+msgstr "طريقة عرض التقويم"
+
+msgid "Mass Upload Calendar"
+msgstr "التقويم الشامل تحميل"
+
+msgid "View Account Combination"
+msgstr "عرض حساب الجمع"
+
+msgid "View Ac Combination"
+msgstr "عرض تركيبة التيار المتردد"
+
+msgid "Mass Upload COA Combination"
+msgstr "تحميل الشامل COA تركيبة"
+
+msgid "Mass Upload GL Ledger"
+msgstr "تحميل الشامل GL دفتر الأستاذ"
+
+msgid "Mass Upload Ledger"
+msgstr "تحميل الشامل دفتر الأستاذ"
+
+msgid "View Ledger"
+msgstr "عرض دفتر الأستاذ"
+
+msgid "Create & Review GL Journals"
+msgstr "إنشاء واستعراض المجلات GL"
+
+msgid "Journal"
+msgstr "دفتر اليومية"
+
+msgid "Open and Close GL Periods"
+msgstr "فترات GL فتح وإغلاق"
+
+msgid "GL Period"
+msgstr "الفترة GL"
+
+msgid "View GL Period Statuses"
+msgstr "عرض GL الحالات الفترة"
+
+msgid "View Periods"
+msgstr "عرض فترات"
+
+msgid "Serach GL Periods"
+msgstr "فترات Serach GL"
+
+msgid "Serach Periods"
+msgstr "فترات Serach"
+
+msgid "Search Journals"
+msgstr "البحث عن المجلات"
+
+msgid "Mass Upload GL Journal Header"
+msgstr "تحميل قداس رأس دفتر اليومية GL"
+
+msgid "Upload Journal Header"
+msgstr "تحميل رأس دفتر اليومية"
+
+msgid "Upload Mass Journal Lines"
+msgstr "تحميل خطوط يومية جماعية"
+
+msgid "Upload Journal Lines"
+msgstr "تحميل خطوط دفتر اليومية"
+
+msgid "GL Balance View"
+msgstr "عرض الرصيد GL"
+
+msgid "GL Balance From Base Table"
+msgstr "رصيد GL من الجدول الأساسي"
+
+msgid "GL Balance"
+msgstr "رصيد GL"
+
+msgid "Search Journal Lines"
+msgstr "البحث عن بنود دفتر اليومية"
+
+msgid "Accounts Payable"
+msgstr "الحسابات الدائنة"
+
+msgid "View Business Org"
+msgstr "عرض الأعمال Org"
+
+msgid "Search Address"
+msgstr "البحث عن عنوان"
+
+msgid "Mass Upload Address"
+msgstr "عنوان التحميل الجماعي"
+
+msgid "Create & Update AP Transaction"
+msgstr "إنشاء وتحديث المعاملات AP"
+
+msgid "AP Transaction"
+msgstr "المعاملات AP"
+
+msgid "Search Transaction"
+msgstr "البحث عن المعاملات"
+
+msgid "Transaction Header"
+msgstr "رأس الحركة"
+
+msgid "Create Accounting"
+msgstr "إنشاء حساب"
+
+msgid "Create AP Trnx Accounting"
+msgstr "إنشاء وكالة اسوشييتد برس ترنكس المحاسبة"
+
+msgid "Mass Upload AP Transaction Header"
+msgstr "تحميل قداس رأس المعاملات AP"
+
+msgid "Mass Upload AP Transaction Line"
+msgstr "تحميل قداس خط المعاملات AP"
+
+msgid "Mass Upload AP Transaction Detail"
+msgstr "تحميل الشامل AP تفاصيل الحركة"
+
+msgid "All Payments"
+msgstr "جميع المدفوعات"
+
+msgid "Payment"
+msgstr "الدفع"
+
+msgid "Search Payment"
+msgstr "البحث عن الدفع"
+
+msgid "Payment Header"
+msgstr "رأس الدفع"
+
+msgid "Confirm Payment"
+msgstr "تأكيد الدفع"
+
+msgid "Create AP Payment Accounting"
+msgstr "إنشاء وكالة اسوشييتد برس دفع المحاسبة"
+
+msgid "AP Payment Accounting"
+msgstr "AP الدفع المحاسبة"
+
+msgid "Mass Upload Payment Header"
+msgstr "تحميل قداس رأس الدفع"
+
+msgid "Upload Payment Header"
+msgstr "تحميل رأس الدفع"
+
+msgid "Mass Upload Payment Line"
+msgstr "تحميل قداس خط الدفع"
+
+msgid "Upload Payment Line"
+msgstr "تحميل خط الدفع"
+
+msgid "Mass Upload Customer"
+msgstr "تحميل الشامل العملاء"
+
+msgid "Upload Customer"
+msgstr "تحميل العميل"
+
+msgid "Mass Upload Customer Site"
+msgstr "موقع العميل تحميل جماعي"
+
+msgid "Upload Customer Site"
+msgstr "تحميل موقع العميل"
+
+msgid "Account Receviable Transactions"
+msgstr "حساب المعاملات ريسيفيابل"
+
+msgid "AR Transaction"
+msgstr "الحركة ع"
+
+msgid "Search ReceivableTransaction"
+msgstr "ريسيفابليترانساكشن البحث"
+
+msgid "Search AR Transaction"
+msgstr "الحركة ع البحث"
+
+msgid "Creaet Receviable Accounting"
+msgstr "كريات ريسيفيابل المحاسبة"
+
+msgid "AR Transaction Accounting"
+msgstr "AR المعاملات المحاسبية"
+
+msgid "Mass Upload AR Transaction"
+msgstr "تحميل الشامل ع الحركة"
+
+msgid "Upload AR Transaction"
+msgstr "تحميل الحركة AR"
+
+msgid "Upload AR Transaction Line"
+msgstr "تحميل خط الحركة AR"
+
+msgid "Upload AR Transaction Detail"
+msgstr "تحميل تفاصيل الحركة AR"
+
+msgid "AR Receipt"
+msgstr "تسلم ع"
+
+msgid "AR Multi Receipt"
+msgstr "استلام متعدد AR"
+
+msgid "Multi Receipt"
+msgstr "استلام متعدد"
+
+msgid "Confirm AR Multi Receipt"
+msgstr "تأكيد استلام متعدد AR"
+
+msgid "Confirm Multi Receipt"
+msgstr "تأكيد استلام متعدد"
+
+msgid "Search AR Receipt"
+msgstr "تسلم ع البحث"
+
+msgid "Create AR Receipt Accounting"
+msgstr "إنشاء ع استلام المحاسبة"
+
+msgid "AR Receipt Accounting"
+msgstr "استلام ع المحاسبة"
+
+msgid "Mass Upload AR Receipt Header"
+msgstr "تحميل الشامل ع استلام رأس"
+
+msgid "Upload AR Receipt Header"
+msgstr "تحميل ع استلام رأس"
+
+msgid "Mass Upload Receipt Line"
+msgstr "تحميل الشامل تلقي الخط"
+
+msgid "Upload Receipt Line"
+msgstr "تحميل خط الاستلام"
+
+msgid "View AR Receipt"
+msgstr "تسلم ع العرض"
+
+msgid "View Customer"
+msgstr "عرض العملاء"
+
+msgid "View AR Transaction"
+msgstr "ع رأي الحركة"
+
+msgid "Sales & Distribution"
+msgstr "المبيعات والتوزيع"
+
+msgid "Create & Update Sales Order"
+msgstr "إنشاء وتحديث أمر التوريد"
+
+msgid "Sales Order"
+msgstr "أمر التوريد"
+
+msgid "Search Sales Order"
+msgstr "البحث عن أمر التوريد"
+
+msgid "Search SO"
+msgstr "البحث في ذلك"
+
+msgid "View Sales Order"
+msgstr "عرض أمر التوريد"
+
+msgid "View SO"
+msgstr "عرض ذلك"
+
+msgid "View All Organizations"
+msgstr "عرض جميع المنظمات"
+
+msgid "View Orgs"
+msgstr "عرض Orgs"
+
+msgid "Mass Upload Orgs"
+msgstr "تحميل الشامل Orgs"
+
+msgid "Upload Orgs"
+msgstr "تحميل Orgs"
+
+msgid "View Enterprises"
+msgstr "عرض المشاريع"
+
+msgid "View Enterprise"
+msgstr "عرض المشاريع"
+
+msgid "View Inventory Org"
+msgstr "عرض المخزون Org"
+
+msgid "View Inventory"
+msgstr "يستخدم لعرض المخزون"
+
+msgid "View Item"
+msgstr "عرض العنصر"
+
+msgid "Mass Upload Items"
+msgstr "عناصر التحميل الجماعي"
+
+msgid "Upload Items"
+msgstr "تحميل العناصر"
+
+msgid "Mass Upload Subinventories"
+msgstr "تحميل الشامل سوبينفينتوريس"
+
+msgid "Upload Subinventory"
+msgstr "تحميل سوبينفينتوري"
+
+msgid "Multi Action Subinventory"
+msgstr "سوبينفينتوري عمل متعددة"
+
+msgid "Multi Action-Subinventory"
+msgstr "عمل متعددة-سوبينفينتوري"
+
+msgid "View Locator"
+msgstr "عرض محدد موقع المعلومات"
+
+msgid "Multi Action - Locators"
+msgstr "عمل متعددة--لتحديد المواقع"
+
+msgid "Mass Uplaod Locators"
+msgstr "أوبلاود الشامل لتحديد المواقع"
+
+msgid "Upload Locators"
+msgstr "تحميل محدد موقع"
+
+msgid "View Sub Inventory"
+msgstr "يستخدم لعرض المخزون Sub"
+
+msgid "Search UOM"
+msgstr "البحث عن جامعة ميتشجان"
+
+msgid "Multi Action-UOM"
+msgstr "متعدد العمل-جامعة ميتشجان"
+
+msgid "Mass Upload UOM"
+msgstr "تحميل الشامل UOM"
+
+msgid "Upload UOM"
+msgstr "تحميل UOM"
+
+msgid "PO Multi Action Receipt"
+msgstr "ص. ب متعدد استلام العمل"
+
+msgid "Multi Action Receipt"
+msgstr "استلام العمل متعدد"
+
+msgid "Mass Upload BOM Header"
+msgstr "تحميل قداس رأس شجرة"
+
+msgid "Upload BOM Header"
+msgstr "تحميل رأس شجرة"
+
+msgid "Mass Upload BOM Line"
+msgstr "تحميل الشامل شجرة خط"
+
+msgid "Upload BOM Line"
+msgstr "تحميل خط شجرة المواد"
+
+msgid "View Resources"
+msgstr "عرض الموارد"
+
+msgid "View Resource"
+msgstr "عرض الموارد"
+
+msgid "Mass Upload BOM Cost Type"
+msgstr "تحميل الشامل شجرة نوع التكلفة"
+
+msgid "Upload Cost Type"
+msgstr "تحميل نوع التكلفة"
+
+msgid "Mass Upload Resource"
+msgstr "تحميل الشامل المورد"
+
+msgid "Upload Resources"
+msgstr "تحميل الموارد"
+
+msgid "View BOM Material Element"
+msgstr "عرض شجرة العنصر المادي"
+
+msgid "View Material Element"
+msgstr "عرض العنصر المادي"
+
+msgid "View Over Head"
+msgstr "عرض ما يزيد على رأسها"
+
+msgid "Mass Upload Department"
+msgstr "قسم تحميل الجماهيري"
+
+msgid "Upload Department"
+msgstr "إدارة التحميل"
+
+msgid "View Standard Operation"
+msgstr "عرض العملية القياسية"
+
+msgid "View Routing"
+msgstr "عرض توجيه"
+
+msgid "Mass Upload Routing Header"
+msgstr "تحميل قداس رأس التوجيه"
+
+msgid "Upload Routing Header"
+msgstr "تحميل رأس التوجيه"
+
+msgid "Mass Upload Routing Line"
+msgstr "تحميل قداس خط التوجيه"
+
+msgid "Upload Routing Line"
+msgstr "تحميل خط التوجيه"
+
+msgid "Mass Upload Routing Detail"
+msgstr "تحميل قداس التفصيل التوجيه"
+
+msgid "Upload Routing Detail"
+msgstr "تحميل تفاصيل التوجيه"
+
+msgid "View Work Order"
+msgstr "عرض عمل النظام"
+
+msgid "Mass Upload Work Order"
+msgstr "تحميل الشامل أمر العمل"
+
+msgid "Upload Work Order"
+msgstr "تحميل ترتيب العمل"
+
+msgid "Mass Upload WIP Material Transaction"
+msgstr "تحميل الشامل WIP المعاملات المادية"
+
+msgid "Upload WO Inv Transaction"
+msgstr "تحميل الحركة WO للاستثمارات"
+
+msgid "Search WIP Material Transaction"
+msgstr "البحث WIP المعاملات المادية"
+
+msgid "Search WO Inv Transaction"
+msgstr "البحث عن الاستثمارات WO الحركة"
+
+msgid "View Resource Trnx"
+msgstr "طريقة عرض مورد ترنكس"
+
+msgid "Costing"
+msgstr "تقدير التكاليف"
+
+msgid "Create & View Item Cost"
+msgstr "إنشاء وعرض بند التكلفة"
+
+msgid "Item Cost"
+msgstr "تكلفة الصنف"
+
+msgid "View Item Cost"
+msgstr "عرض عنصر التكلفة"
+
+msgid "Search Item Cost"
+msgstr "البحث عن عنصر التكلفة"
+
+msgid "Standard Cost Upate"
+msgstr "التكلفة المعيارية Upate"
+
+msgid "Cost Update"
+msgstr "تكلفة التحديث"
+
+msgid "Search BOM view"
+msgstr "عرض شجرة مواد البحث"
+
+msgid "Search BOM V"
+msgstr "البحث الخامس BOM"
+
+msgid "Indented BOM"
+msgstr "شجرة المواد ذات مسافة بادئة"
+
+msgid "Program - Standard Cost Update"
+msgstr "برنامج-تحديث التكاليف القياسية"
+
+msgid "Prg Cost Update"
+msgstr "Prg تكلفة التحديث"
+
+msgid "Search All Programs Requests"
+msgstr "جميع البرامج طلبات البحث"
+
+msgid "Search Program Requests"
+msgstr "طلبات برنامج البحث"
+
+msgid "Start Program"
+msgstr "بدء تشغيل البرنامج"
+
+msgid "Start Main Program"
+msgstr "بدء تشغيل البرنامج الرئيسي"
+
+msgid "Item Cost Rollup"
+msgstr "البند التكلفة التراكمية"
+
+msgid "Cost Rollup"
+msgstr "التكلفة التراكمية"
+
+msgid "Cost Rollup Program"
+msgstr "تكلفة البرنامج التراكمي"
+
+msgid "Prg Cost RollUp"
+msgstr "Prg التكلفة التراكمية"
+
+msgid "Check for circular BOM"
+msgstr "الاختيار لشجرة دائرية"
+
+msgid "Check Circular BOM"
+msgstr "تحقق من شجرة دائرية"
+
+msgid "Search Item Cost View"
+msgstr "البحث في طريقة عرض عنصر التكلفة"
+
+msgid "Search Item Cost V"
+msgstr "البحث عن عنصر التكلفة الخامس"
+
+msgid "Create & Update Requisition"
+msgstr "إنشاء وتحديث طلب"
+
+msgid "Requisition"
+msgstr "طلب"
+
+msgid "View Requisition"
+msgstr "طلب عرض"
+
+msgid "Search Requisition"
+msgstr "طلب البحث"
+
+msgid "All Programs"
+msgstr "كافة البرامج"
+
+msgid "Program"
+msgstr "البرنامج"
+
+msgid "Search WIP Accounting Group"
+msgstr "البحث عن مجموعة المحاسبة WIP"
+
+msgid "Search Accounting Group"
+msgstr "البحث عن مجموعة المحاسبة"
+
+msgid "View Users"
+msgstr "عرض المستخدمين"
+
+msgid "View User"
+msgstr "عرض المستخدم"
+
+msgid "Convert Requisition To Po"
+msgstr "تحويل طلب بو"
+
+msgid "Convert Requisition"
+msgstr "طلب تحويل"
+
+msgid "Supplier View Search"
+msgstr "بحث عرض المورد"
+
+msgid "Supplier V Search"
+msgstr "البحث عن المورد الخامس"
+
+msgid "View Sourcing Rule"
+msgstr "عرض مصادر القاعدة"
+
+msgid "Search Sourcing Rule"
+msgstr "البحث عن مصادر القاعدة"
+
+msgid "Serach Req Header"
+msgstr "رأس Req Serach"
+
+msgid "Forecast & Planning"
+msgstr "التنبؤ والتخطيط"
+
+msgid "Create & Update Forecast"
+msgstr "إنشاء وتحديث التوقعات"
+
+msgid "View Forecast"
+msgstr "التنبؤ بالعرض"
+
+msgid "Search Forecast"
+msgstr "التنبؤ بالبحث"
+
+msgid "Create & Update Source List"
+msgstr "إنشاء وتحديث قائمة المصدر"
+
+msgid "Search FP Source List"
+msgstr "البحث عن مصدر FP قائمة"
+
+msgid "Min Max Planner"
+msgstr "مخطط ماكس دقيقة"
+
+msgid "Search Min Max Planner"
+msgstr "البحث عن مخطط ماكس دقيقة"
+
+msgid "Search MinMax Planner"
+msgstr "البحث عن مخطط مينماكس"
+
+msgid "Min Max Demand"
+msgstr "مين ماكس الطلب"
+
+msgid "Min Max Planner Suggestions"
+msgstr "اقتراحات مخطط ماكس دقيقة"
+
+msgid "Calculate Min Max Numbers"
+msgstr "حساب أرقام دقيقة ماكس"
+
+msgid "Update Item Min Max Parameters"
+msgstr "تحديث البند Min Max المعلمات"
+
+msgid "Min Max Planner Work Bench"
+msgstr "مين ماكس مخطط عمل مقاعد البدلاء"
+
+msgid "Create Supply - MinMax Program"
+msgstr "إنشاء العرض-برنامج مينماكس"
+
+msgid "Create Supply - MinMax"
+msgstr "إنشاء العرض--مينماكس"
+
+msgid "View Requisition Interface Lines"
+msgstr "عرض طلب خطوط الواجهة"
+
+msgid "View Requisition Interface"
+msgstr "عرض طلب واجهة"
+
+msgid "Import All Requisition"
+msgstr "استيراد جميع طلب"
+
+msgid "Import Requisition"
+msgstr "طلب الاستيراد"
+
+msgid "Purchasing Control"
+msgstr "شراء عنصر التحكم"
+
+msgid "Material Requirement Planning"
+msgstr "تخطيط متطلبات المواد"
+
+msgid "MRP"
+msgstr "جواز سفر يقرأ إلكترونيا"
+
+msgid "Master Demand Schedule"
+msgstr "جدول الطلب الرئيسي"
+
+msgid "MDS"
+msgstr "حركة الديمقراطيين الاشتراكيين"
+
+msgid "Search MDS"
+msgstr "البحث عن حركة الديمقراطيين الاشتراكيين"
+
+msgid "Search MRP"
+msgstr "البحث عن جواز سفر يقرأ إلكترونيا"
+
+msgid "Calculate MRP Demand"
+msgstr "حساب MRP الطلب"
+
+msgid "View MRP Demand"
+msgstr "عرض MRP الطلب"
+
+msgid "Copy/Merge/Load MDS"
+msgstr "نسخة/دمج/تحميل حركة الديمقراطيين الاشتراكيين"
+
+msgid "Load MDS"
+msgstr "تحميل حركة الديمقراطيين الاشتراكيين"
+
+msgid "MRP Planned Orders"
+msgstr "MRP الأوامر المخططة"
+
+msgid "Planned Orders"
+msgstr "الأوامر المخططة"
+
+msgid "MRP Work Bench"
+msgstr "MRP عمل مقاعد البدلاء"
+
+msgid "MRP Exceptions"
+msgstr "استثناءات MRP"
+
+msgid "Pick Sales Order"
+msgstr "اختر أمر التوريد"
+
+msgid "Sales Order Shipping Control"
+msgstr "مراقبة الشحن أمر التوريد"
+
+msgid "Shipping Control"
+msgstr "مراقبة الشحن"
+
+msgid "Reports & Analysis"
+msgstr "التقارير والتحليل"
+
+msgid "RA"
+msgstr "جمهورية أرمينيا"
+
+msgid "Onhand By Subinventory"
+msgstr "Onhand قبل سوبينفينتوري"
+
+msgid "Onhand Analysis"
+msgstr "تحليل Onhand"
+
+msgid "Purchasing Analysis"
+msgstr "شراء التحليل"
+
+msgid "Item & product Line Analysis"
+msgstr "البند & الحليل الخط"
+
+msgid "Item & Product Line"
+msgstr "البند & خط المنتج"
+
+msgid "WIP Value Analysis"
+msgstr "تحليل قيمة الأعمال تحت التنفيذ"
+
+msgid "Ship Sales Orders"
+msgstr "سفينة أوامر التوريد"
+
+msgid "Ship Sales Order"
+msgstr "السفينة أمر التوريد"
+
+msgid "TAX Codes & Rates"
+msgstr "أكواد الضرائب والأسعار"
+
+msgid "TAX Codes"
+msgstr "القوانين الضريبية"
+
+msgid "Tax Regions"
+msgstr "المناطق الضريبية"
+
+msgid "Tax Region"
+msgstr "المنطقة الضرائب"
+
+msgid "Search Blocks"
+msgstr "البحث عن القطع"
+
+msgid "Role Access"
+msgstr "الوصول إلى الدور"
+
+msgid "All Extensions"
+msgstr "جميع ملحقات"
+
+msgid "Search All Comments"
+msgstr "البحث في جميع التعليقات"
+
+msgid "Search Comment"
+msgstr "البحث عن تعليق"
+
+msgid "Review & Update Comments"
+msgstr "استعراض وتحديث التعليقات"
+
+msgid "Comments Multi Action"
+msgstr "تعليقات متعددة العمل"
+
+msgid "Multi Action - Content Type"
+msgstr "عمل متعدد-نوع المحتوى"
+
+msgid "Search All Contents"
+msgstr "البحث في كافة محتويات"
+
+msgid "Search Contents"
+msgstr "محتويات البحث"
+
+msgid "Basis Site Information"
+msgstr "للحصول على معلومات الموقع"
+
+msgid "Site Information"
+msgstr "معلومات الموقع"
+
+msgid "Price List Header"
+msgstr "رأس قائمة الأسعار"
+
+msgid "Search Price Lists"
+msgstr "البحث عن قوائم الأسعار"
+
+msgid "Search Price List"
+msgstr "البحث عن قائمة الأسعار"
+
+msgid "Search Price List Line"
+msgstr "بحث بند قائمة الأسعار"
+
+msgid "Profile"
+msgstr "الشخصية"
+
+msgid "Search Profile"
+msgstr "البحث عن الشخصية"
+
+msgid "Sales Document Type"
+msgstr "نوع مستند المبيعات"
+
+msgid "Search Sales Document Type"
+msgstr "البحث عن نوع مستند المبيعات"
+
+msgid "Search SD Document Type"
+msgstr "نوع المستند البحث عن التنمية المستدامة"
+
+msgid "Create & Update Process Flow"
+msgstr "إنشاء وتحديث عملية تدفق"
+
+msgid "Search Delivries"
+msgstr "ديليفريس البحث"
+
+msgid "Sales Deliveries"
+msgstr "تسليم المبيعات"
+
+msgid "Search URL Alias"
+msgstr "البحث عن عنوان URL اسم مستعار"
+
+msgid "search.php?class_name=ar_transaction_type"
+msgstr "search.php?class_name=ar_transaction_type"
+
+msgid "Search AR Transaction Type"
+msgstr "نوع الحركة ع البحث"
+
+msgid "Search AR Transaction Source"
+msgstr "مصدر الحركة ع البحث"
+
+msgid "Purchasing"
+msgstr "شراء"
+
+msgid "Suppliers"
+msgstr "الموردين"
+
+msgid "Setups"
+msgstr "على الأجهزة"
+
+msgid "AR Transaction Interface"
+msgstr "واجهة الحركة AR"
+
+msgid "Transaction Interface"
+msgstr "واجهة الحركة"
+
+msgid "All AR Programs"
+msgstr "جميع ع البرامج"
+
+msgid "Programs"
+msgstr "البرامج"
+
+msgid "Import Transaction"
+msgstr "استيراد المعاملة"
+
+msgid "Unpaid Transactions"
+msgstr "المعاملات غير المسددة"
+
+msgid "Create & Update Bank"
+msgstr "إنشاء وتحديث مصرف"
+
+msgid "Bank"
+msgstr "مصرف"
+
+msgid "Search Banks"
+msgstr "البحث في المصارف"
+
+msgid "Generic Organization"
+msgstr "منظمة عامة"
+
+msgid "Bank Account"
+msgstr "الحساب البنكي"
+
+msgid "Search Bank Account"
+msgstr "الحساب البنكي البحث"
+
+msgid "Search Bank View"
+msgstr "عرض البحث عن البنك"
+
+msgid "Search Bank V"
+msgstr "بحث البنك الخامس"
+
+msgid "AR Receipt Source"
+msgstr "AR استلام المصدر"
+
+msgid "Search AR Receipt Source"
+msgstr "مصدر تلقي ع البحث"
+
+msgid "Search Receipt Source"
+msgstr "البحث عن استلام المصدر"
+
+msgid "Search Customer Header"
+msgstr "البحث عن العملاء رأس"
+
+msgid "Bank Account View"
+msgstr "عرض الحساب البنكي"
+
+msgid "Inventory Setup"
+msgstr "إعداد قوائم الجرد"
+
+msgid "ABC Valuation"
+msgstr "التقييم أي بي سي"
+
+msgid "Inventory ABC Valuation"
+msgstr "تقييم المخزون أي بي سي"
+
+msgid "Search ABC Valuation"
+msgstr "البحث عن أي بي سي التقييم"
+
+msgid "Inventory Programs"
+msgstr "برامج المخزون"
+
+msgid "New ABC Valuation"
+msgstr "جديد ABC التقييم"
+
+msgid "ABC Valuation Result"
+msgstr "نتيجة التقييم أي بي سي"
+
+msgid "Valuation Result"
+msgstr "نتيجة التقييم"
+
+msgid "MRP View"
+msgstr "عرض MRP"
+
+msgid "MRP Demand View"
+msgstr "عرض الطلب MRP"
+
+msgid "ABC Assignment"
+msgstr "تعيين أي بي سي"
+
+msgid "Search ABC Assignment"
+msgstr "البحث عن أي بي سي التعيين"
+
+msgid "Inventory Count"
+msgstr "جرد المخزون"
+
+msgid "Count Entries - Cycle Count & Physical Inventort"
+msgstr "عدد إدخالات-دورة العد & إينفينتورت المادية"
+
+msgid "Count Entries"
+msgstr "عدد إدخالات"
+
+msgid "Search Count Schedule"
+msgstr "عدد مرات البحث عن الجدول الزمني"
+
+msgid "Search Count Entries"
+msgstr "عدد مرات البحث عن إدخالات"
+
+msgid "Approve Count Entries"
+msgstr "الموافقة على عدد الإدخالات"
+
+msgid "Inter Org Transfer"
+msgstr "جملة نقل Org"
+
+msgid "Search Inter Org Transfer"
+msgstr "البحث في جملة نقل Org"
+
+msgid "GL Setup"
+msgstr "إعداد GL"
+
+msgid "Currency Conversion"
+msgstr "تحويل العملة"
+
+msgid "View Currency Conversion"
+msgstr "عرض تحويل العملة"
+
+msgid "Search Currency Conversion"
+msgstr "البحث عن تحويل العملة"
+
+msgid "Purchaing Setup"
+msgstr "الإعداد بورتشينج"
+
+msgid "Human Resource"
+msgstr "الموارد البشرية"
+
+msgid "Employee"
+msgstr "الموظف"
+
+msgid "Organization Jobs"
+msgstr "وظائف المنظمة"
+
+msgid "Job"
+msgstr "الوظيفة"
+
+msgid "Search Job"
+msgstr "البحث عن الوظيفة"
+
+msgid "HR Positions"
+msgstr "وظائف الموارد البشرية"
+
+msgid "Search Position"
+msgstr "موضع البحث"
+
+msgid "Position Hierarchy"
+msgstr "التسلسل الهرمي للموقف"
+
+msgid "Hierarchy"
+msgstr "التسلسل الهرمي"
+
+msgid "Search Hierarchy"
+msgstr "التسلسل الهرمي للبحث"
+
+msgid "Compensation Element"
+msgstr "عنصر التعويض"
+
+msgid "Search Compensation Element"
+msgstr "البحث عن عنصر التعويض"
+
+msgid "Search Element"
+msgstr "البحث عن عنصر"
+
+msgid "Employee Element Entry Assignment"
+msgstr "تعيين إدخال العنصر الموظف"
+
+msgid "Element Entry / Assignment"
+msgstr "إدخال العنصر/الانتداب"
+
+msgid "Search Element Entry"
+msgstr "إدخال عنصر البحث"
+
+msgid "Search Employee"
+msgstr "البحث عن الموظف"
+
+msgid "Employee Education"
+msgstr "موظف التعليم"
+
+msgid "Education"
+msgstr "التعليم"
+
+msgid "Experience"
+msgstr "تجربة"
+
+msgid "Termination"
+msgstr "إنهاء الخدمة"
+
+msgid "Employee Salary"
+msgstr "راتب الموظف"
+
+msgid "Payroll Setup"
+msgstr "إعداد كشوف المرتبات"
+
+msgid "Payroll Payment Method"
+msgstr "طريقة دفع الرواتب"
+
+msgid "Search Payroll Payment Methods"
+msgstr "البحث عن طرق دفع الرواتب"
+
+msgid "HR Payroll"
+msgstr "الموارد البشرية الرواتب"
+
+msgid "Search Payroll"
+msgstr "البحث عن الرواتب"
+
+msgid "Leave Types"
+msgstr "أنواع الإجازات"
+
+msgid "Search Leave Type"
+msgstr "البحث عن نوع الإجازة"
+
+msgid "Leave Balance"
+msgstr "ترك التوازن"
+
+msgid "Approval Limit"
+msgstr "حد الاعتماد"
+
+msgid "Search Approval Limit"
+msgstr "حد الموافقة على البحث"
+
+msgid "Approval Object"
+msgstr "الموافقة على الكائن"
+
+msgid "Search Approval Object"
+msgstr "البحث عن كائن الموافقة"
+
+msgid "Approval Limit Assignment"
+msgstr "الموافقة على تعيين الحد"
+
+msgid "Notifications"
+msgstr "الإخطارات"
+
+msgid "Search Notification"
+msgstr "البحث عن إعلام"
+
+msgid "Apply Leave Self Service"
+msgstr "تطبيق إجازة الخدمة الذاتية"
+
+msgid "Apply Leave - SS"
+msgstr "تطبيق إجازة-SS"
+
+msgid "Search Leave"
+msgstr "إجازة البحث"
+
+msgid "Definen Block"
+msgstr "كتلة ديفينين"
+
+msgid "My Notifications"
+msgstr "بلدي الإخطارات"
+
+msgid "User Leave Blalance"
+msgstr "المستخدم إجازة بلالانسي"
+
+msgid "Leave Blalance"
+msgstr "ترك بلالانسي"
+
+msgid "Search All Leave"
+msgstr "البحث عن جميع الإجازات"
+
+msgid "Leave Entitlement"
+msgstr "استحقاق إجازة"
+
+msgid "Search Leave Entitlement"
+msgstr "استحقاق إجازة البحث"
+
+msgid "User Position View"
+msgstr "عرض موقف المستخدم"
+
+msgid "Blanket Release"
+msgstr "الإفراج عن بطانية"
+
+msgid "Document Sequence"
+msgstr "تسلسل المستند"
+
+msgid "Approved Supplier List"
+msgstr "قائمة الموردين المعتمدة"
+
+msgid "Search ASL"
+msgstr "ASL البحث"
+
+msgid "ASL Document"
+msgstr "الوثيقة ASL"
+
+msgid "Search Blanket"
+msgstr "بحث شامل"
+
+msgid "form.php?class_name=sys_hold&mode=9"
+msgstr "الوضع & form.php?class_name=sys_hold = 9"
+
+msgid "System Hold"
+msgstr "عقد النظام"
+
+msgid "Search Hold"
+msgstr "عقد البحث"
+
+msgid "Release Hold"
+msgstr "الإفراج عن عقد"
+
+msgid "Docs on Hold"
+msgstr "مستندات معلقة"
+
+msgid "RFQ"
+msgstr "طلب عرض الأسعار"
+
+msgid "RFQ & Quotes"
+msgstr "طلب عرض الأسعار وعروض الأسعار"
+
+msgid "Search RFQ"
+msgstr "البحث عن طلب عرض الأسعار"
+
+msgid "User Supplier Association"
+msgstr "جمعية المورد المستخدم"
+
+msgid "Supplier User"
+msgstr "المورد المستخدم"
+
+msgid "Search Supplier User"
+msgstr "البحث عن المورد المستخدم"
+
+msgid "Quote"
+msgstr "عرض الأسعار"
+
+msgid "Search Quote"
+msgstr "البحث عن علامة الاقتباس"
+
+msgid "Search AP Transactions"
+msgstr "معاملات البحث AP"
+
+msgid "Search Payments"
+msgstr "البحث عن المدفوعات"
+
+msgid "Journal Activity"
+msgstr "مجلة النشاط"
+
+msgid "Un Posted Balance"
+msgstr "نشرت الأمم المتحدة التوازن"
+
+msgid "Search Serial Number"
+msgstr "البحث عن الرقم التسلسلي"
+
+msgid "Generate Predefined Serial Number"
+msgstr "توليد المعرفة مسبقاً الرقم التسلسلي"
+
+msgid "Generate Serial Number"
+msgstr "توليد الرقم التسلسلي"
+
+msgid "Serial Transactions"
+msgstr "المعاملات التسلسلية"
+
+msgid "BOM"
+msgstr "شجرة المواد"
+
+msgid "BOM Programs"
+msgstr "برامج BOM"
+
+msgid "Search Routing Header"
+msgstr "رأس توجيه البحث"
+
+msgid "Search Lot Number"
+msgstr "البحث عن رقم الشحنة"
+
+msgid "Lot Transactions"
+msgstr "حركات الشحنة"
+
+msgid "Search Forecast Group"
+msgstr "البحث عن توقعات المجموعة"
+
+msgid "FP Setup"
+msgstr "إعداد وتنظيم الأسرة"
+
+msgid "Planning Control"
+msgstr "تخطيط عنصر التحكم"
+
+msgid "Extra Field"
+msgstr "حقل إضافي"
+
+msgid "Search Extra Field"
+msgstr "البحث في حقل إضافي"
+
+msgid "Work Order Work Bench"
+msgstr "عمل ترتيب عمل مقاعد البدلاء"
+
+msgid "WO Work Bench"
+msgstr "هيئة العمل WO"
+
+msgid "Manual Forecast Consumption"
+msgstr "دليل توقعات الاستهلاك"
+
+msgid "Manual Consumption"
+msgstr "استهلاك اليدوي"
+
+msgid "Forecast Line Date v"
+msgstr "تنبؤ لخامس"
+
+msgid "Forecast Over Consumption"
+msgstr "ويتوقع على الاستهلاك"
+
+msgid "Favourite"
+msgstr "المفضلة"
+
+msgid "Convert To Production"
+msgstr "تحويل إلى الإنتاج"
+
+msgid "Custom report subinventory_locators - Subinventory Locators"
+msgstr "تقرير مخصص subinventory_locators-سوبينفينتوري لتحديد المواقع"
+
+msgid "Custom report subinventory_locators"
+msgstr "Subinventory_locators تقرير مخصص"
+
+msgid "Custom report option_type - option types"
+msgstr "تقرير مخصص option_type-أنواع الخيار"
+
+msgid "Custom report option_type"
+msgstr "Option_type تقرير مخصص"
+
+msgid "Custom report Onhand - Curret Onhand"
+msgstr "تقرير مخصص Onhand-Onhand كورت"
+
+msgid "Custom report Onhand"
+msgstr "تقرير مخصص Onhand"
+
+msgid "Custom Report - Onhand Inventory Wise"
+msgstr "تقرير مخصص-المخزون Onhand الحكمة"
+
+msgid "Custom Report - Onhand"
+msgstr "تقرير مخصص-Onhand"
+
+msgid "Secondary Field"
+msgstr "الحقل الثانوي"
+
+msgid "Search Secondary Field"
+msgstr "حقل البحث الثانوية"
+
+msgid "Secondary Field Instance"
+msgstr "مثيل الحقل الثانوي"
+
+msgid "Change Control - ECO, MCO and Other Changes requests"
+msgstr "تغيير عنصر التحكم--منظمة التعاون الاقتصادي، ونادي مولودية وطلبات التغييرات الأخرى"
+
+msgid "Change Control"
+msgstr "تغيير عنصر التحكم"
+
+msgid "Change Order Template"
+msgstr "تغيير ترتيب القالب"
+
+msgid "CO Template"
+msgstr "قالب المشارك"
+
+msgid "Search Change Order Template"
+msgstr "البحث عن تغيير ترتيب القالب"
+
+msgid "Search Template"
+msgstr "قالب البحث"
+
+msgid "Change Order"
+msgstr "تغيير ترتيب"
+
+msgid "Search CO"
+msgstr "البحث عن شركة"
+
+msgid "Document & Analysis"
+msgstr "الوثيقة والتحليل"
+
+msgid "Search Process Flow"
+msgstr "تدفق عملية البحث"
+
+msgid "Minmax Board"
+msgstr "المجلس مينماكس"
+
+msgid "Programs for Document Administrator"
+msgstr "برامج للمسؤول عن الوثيقة"
+
+msgid "Implement Change Order"
+msgstr "تنفيذ تغيير الترتيب"
+
+msgid "Implement CO"
+msgstr "تنفيذ أول أكسيد الكربون"
+
+msgid "RMA Receipt"
+msgstr "تلقي الجيش الملكي المغربي"
+
+msgid "Compensation Element Multi Entry"
+msgstr "دخول متعدد عنصر التعويض"
+
+msgid "Element Entry Tpl Header"
+msgstr "رأس لافوري دخول عنصر"
+
+msgid "Search Element Entry Tpl Header"
+msgstr "البحث عن عنصر إدخال رأس لافوري"
+
+msgid "Home"
+msgstr "الصفحة الرئيسية"
+
+msgid "Payslip Header"
+msgstr "رأس راتب"
+
+msgid "Search All Paths"
+msgstr "البحث في كافة مسارات"
+
+msgid "Search Payslip"
+msgstr "البحث عن راتب"
+
+msgid "HR Programs"
+msgstr "برامج الموارد البشرية"
+
+msgid "Generate Payroll Schedule"
+msgstr "إنشاء جدول الرواتب"
+
+msgid "Process Payroll Schedule"
+msgstr "الجدول الزمني لعملية كشف الرواتب"
+
+msgid "Process Payroll"
+msgstr "عملية كشوف المرتبات"
+
+msgid "Payroll Process"
+msgstr "عملية كشوف المرتبات"
+
+msgid "Search Payroll Process"
+msgstr "عملية البحث عن الرواتب"
+
+msgid "Employee Self Service"
+msgstr "الخدمة الذاتية للموظفين"
+
+msgid "Self Service"
+msgstr "الخدمة الذاتية"
+
+msgid "Apply Leave"
+msgstr "تطبيق إجازة"
+
+msgid "User Payslip"
+msgstr "راتب المستخدم"
+
+msgid "Payslip"
+msgstr "راتب"
+
+msgid "Cancel Payroll Process"
+msgstr "إلغاء عملية كشوف المرتبات"
+
+msgid "Confirm Payroll Process"
+msgstr "تأكيد عملية كشوف المرتبات"
+
+msgid "Barcode Setups"
+msgstr "الرمز الشريطي على الأجهزة"
+
+msgid "Barcode"
+msgstr "الرمز الشريطي"
+
+msgid "Barcode Label Format Header"
+msgstr "رأس تنسيق تسمية الرمز الشريطي"
+
+msgid "Label Format"
+msgstr "تنسيق التسمية"
+
+msgid "Search Label Format Header"
+msgstr "رأس تنسيق تسمية البحث"
+
+msgid "Search Label Format"
+msgstr "تنسيق تسمية البحث"
+
+msgid "Printer"
+msgstr "الطابعة"
+
+msgid "Search Printer"
+msgstr "البحث عن طابعة"
+
+msgid "Label Auto Trigger"
+msgstr "تسمية السيارات الزناد"
+
+msgid "Label Request"
+msgstr "طلب تسمية"
+
+msgid "Search Label Request"
+msgstr "طلب تسمية البحث"
+
+msgid "Static Label"
+msgstr "تسمية ثابتة"
+
+msgid "Search Static Label"
+msgstr "البحث عن تسمية ثابتة"
+
+msgid "Master Data"
+msgstr "البيانات الرئيسية"
+
+msgid "Contact"
+msgstr "جهة الاتصال"
+
+msgid "Search Contact"
+msgstr "البحث عن جهة اتصال"
+
+msgid "Contact Reference"
+msgstr "اتصل بالمرجع"
+
+msgid "Sales Lead"
+msgstr "يؤدي المبيعات"
+
+msgid "Lead"
+msgstr "يؤدي"
+
+msgid "Search Lead"
+msgstr "يؤدي البحث"
+
+msgid "SD Setup"
+msgstr "الإعداد SD"
+
+msgid "HR Team"
+msgstr "فريق الموارد البشرية"
+
+msgid "Search Team"
+msgstr "فريق البحث"
+
+msgid "Create & View Sales Team"
+msgstr "إنشاء وعرض فريق المبيعات"
+
+msgid "Opportunity"
+msgstr "الفرصة"
+
+msgid "Search Opportunity"
+msgstr "البحث عن الفرصة"
+
+msgid "Sales Quote Header"
+msgstr "رأس عرض أسعار المبيعات"
+
+msgid "Sales Quote"
+msgstr "عرض أسعار المبيعات"
+
+msgid "Search Quotes"
+msgstr "البحث عن علامات اقتباس"
+
+msgid "View Transaction"
+msgstr "عرض الحركة"
+
+msgid "Vew AP Transaction"
+msgstr "الحركة Vew AP"
+
+msgid "Self-Service Education"
+msgstr "التعليم الخدمة الذاتية"
+
+msgid "Employee Experience Self Service"
+msgstr "خبرة الموظف الخدمة الذاتية"
+
+msgid "Employee Experience"
+msgstr "خبرة الموظف"
+
+msgid "Web Contact"
+msgstr "اتصال ويب"
+
+msgid "WOL Transaction"
+msgstr "الحركة WOL"
+
+msgid "Site Search"
+msgstr "البحث في الموقع"
+
+msgid "Search WOL Transaction"
+msgstr "البحث عن معاملة WOL"
+
+msgid "Fixed Asset"
+msgstr "الأصول الثابتة"
+
+msgid "Asset Book"
+msgstr "كتاب الأصول"
+
+msgid "Search Asset Book"
+msgstr "كتاب أصول البحث"
+
+msgid "Search Asset Category"
+msgstr "البحث عن فئة الأصول"
+
+msgid "Search Depreciation Method"
+msgstr "البحث عن أسلوب الإهلاك"
+
+msgid "Asset"
+msgstr "الأصول"
+
+msgid "Search Asset"
+msgstr "البحث عن الأصول"
+
+msgid "Asset Book Information"
+msgstr "معلومات الكتاب الأصل"
+
+msgid "Asset Book Info"
+msgstr "معلومات كتاب الأصول"
+
+msgid "Search Asset Book Info"
+msgstr "البحث عن الأصول كتاب معلومات"
+
+msgid "Fa Setups"
+msgstr "اتحاد كرة القدم على الأجهزة"
+
+msgid "Depreciation Header"
+msgstr "رأس الإهلاك"
+
+msgid "Depreciation"
+msgstr "الإهلاك"
+
+msgid "Search Depreciation"
+msgstr "البحث عن الإهلاك"
+
+msgid "Fixed Asset Programs"
+msgstr "برامج الأصول الثابتة"
+
+msgid "Run Depreciation"
+msgstr "تشغيل الإهلاك"
+
+msgid "Point Of Sale - POS"
+msgstr "نقطة البيع-نقاط البيع"
+
+msgid "Point Of Sale"
+msgstr "نقطة البيع"
+
+msgid "POS Transaction"
+msgstr "معاملات نقاط البيع"
+
+msgid "Search Point of Sale Transaction"
+msgstr "نقطة البحث من صفقة البيع"
+
+msgid "Search POS Trnx"
+msgstr "البحث عن نقاط البيع ترنكس"
+
+msgid "Upload Value Group Line"
+msgstr "تحميل مجموعة قيمة الخط"
+
+msgid "Search Lines"
+msgstr "البحث عن الخطوط"
+
+msgid "Update Description"
+msgstr "وصف التحديث"
+
+msgid "Geneledger Programs"
+msgstr "برامج جينيليدجير"
+
+msgid "Balance Sheet - Summary"
+msgstr "الميزانية العمومية-ملخص"
+
+msgid "Balance Sheet Detailed"
+msgstr "الميزانية العمومية بالتفصيل"
+
+msgid "Income Statement"
+msgstr "بيان الدخل"
+
+msgid "Income Statement - Detailed"
+msgstr "بيان الدخل-بالتفصيل"
+
+msgid "GL Reports"
+msgstr "تقارير GL"
+
+msgid "Reports"
+msgstr "تقارير"
+
+msgid "All Account Combinations"
+msgstr "كل حساب تركيبات"
+
+msgid "Balance Sheet - Multi Format Reporting"
+msgstr "الميزانية العمومية-تنسيق متعدد الإبلاغ"
+
+msgid "Balance Sheet - MFR"
+msgstr "الميزانية العمومية-الفنزويلي"
+
+msgid "Income Statement - Multi Format Report"
+msgstr "بيان الدخل-تقرير متعدد الشكل"
+
+msgid "Income Stmt - MFR"
+msgstr "ستمت الدخل-الفنزويلي"
+
+msgid "Trial Balance - General Ledger"
+msgstr "ميزان المراجعة-دفتر الأستاذ العام"
+
+msgid "Trial Balance"
+msgstr "ميزان المراجعة"
+
+msgid "Terminal"
+msgstr "المحطة الطرفية"
+
+msgid "Search Terminals"
+msgstr "محطات البحث"
+
+msgid "Search Terminal"
+msgstr "محطة البحث"
+
+msgid "Hybrid Point Of Sale Terminal"
+msgstr "طرفية نقطة البيع الهجين"
+
+msgid "Hybrid POS"
+msgstr "الهجين POS"
+
+msgid "Setup - POS"
+msgstr "الإعداد--نقاط البيع"
+
+msgid "Inventory Control"
+msgstr "مراقبة المخزون"
+
+msgid "Location Default"
+msgstr "الموقع الافتراضي"
+
+msgid "Search Location Default"
+msgstr "البحث عن الموقع الافتراضي"
+
+msgid "Physical Store"
+msgstr "مخزن البدنية"
+
+msgid "Store"
+msgstr "مخزن"
+
+msgid "Search Store"
+msgstr "البحث عن متجر"
+
+msgid "Sync POS with Inventory"
+msgstr "مزامنة نقاط البيع مع المخزون"
+
+msgid "Sync POS"
+msgstr "مزامنة نقاط البيع"
+
+msgid "Barcode List Header"
+msgstr "رأس قائمة الباركود"
+
+msgid "Barcode List"
+msgstr "قائمة الباركود"
+
+msgid "Search Barcode List"
+msgstr "البحث في قائمة الباركود"
+
+msgid "Supply Analysis"
+msgstr "تحليل العرض"
+
+msgid "Config BOM"
+msgstr "شجرة مواد التكوين"
+
+msgid "Search Config BOM"
+msgstr "البحث عن شجرة مواد التكوين"
+
+msgid "Print Pick List"
+msgstr "طباعة قائمة الانتقاء"
+
+msgid "Pick List"
+msgstr "قائمة انتقاء"
+
+msgid "Asset Maintenance"
+msgstr "صيانة الأصول"
+
+msgid "Search Asset Number"
+msgstr "البحث عن رقم الأصل"
+
+msgid "Search SO Header"
+msgstr "رأس ذلك البحث"
+
+msgid "Sales Control"
+msgstr "مراقبة المبيعات"
+
+msgid "Create & Updatecollections"
+msgstr "إنشاء & أوبداتيكوليكشنز"
+
+msgid "collections"
+msgstr "مجموعات"
+
+msgid "Search Collections"
+msgstr "البحث عن مجموعات"
+
+msgid "Group Access"
+msgstr "الوصول إلى مجموعة"
+
+msgid "Sales Region"
+msgstr "منطقة المبيعات"
+
+msgid "DB Update"
+msgstr "تحديث الديسيبل"
+
+msgid "Block Information"
+msgstr "كتلة المعلومات"
+
+msgid "Basic Info"
+msgstr "معلومات أساسية"
+
+msgid "Block Content"
+msgstr "كتلة محتوى"
+
+msgid "Block Name"
+msgstr "اسم الكتلة"
+
+msgid "Block Info"
+msgstr "كتلة من المعلومات"
+
+msgid "Action"
+msgstr "عمل"
+
+msgid "Block"
+msgstr "كتلة"
+
+msgid "Enabled"
+msgstr "تمكين"
+
+msgid "Show Title"
+msgstr "إظهار العنوان"
+
+msgid "Cache Content"
+msgstr "محتوى ذاكرة التخزين المؤقت"
+
+msgid "Category Header"
+msgstr "رأس الفئة"
+
+msgid "Future"
+msgstr "المستقبل"
+
+msgid "Parent Name"
+msgstr "اسم الوالد"
+
+msgid "Attachments"
+msgstr "المرفقات"
+
+msgid "Notes"
+msgstr "وتلاحظ"
+
+msgid "Other Details"
+msgstr "تفاصيل أخرى"
+
+msgid "Numbers"
+msgstr "أرقام"
+
+msgid "Others"
+msgstr "الآخرين"
+
+msgid "Categories"
+msgstr "فئات"
+
+msgid "Actions"
+msgstr "الإجراءات"
+
+msgid "Content Type Fields/Columns"
+msgstr "نوع المحتوى الحقول/أعمدة"
+
+msgid "Main"
+msgstr "الرئيسية"
+
+msgid "Required"
+msgstr "مطلوب"
+
+msgid "enum Values"
+msgstr "قيم التعداد"
+
+msgid "Option List"
+msgstr "قائمة الخيار"
+
+msgid "System Path"
+msgstr "مسار النظام"
+
+msgid "Role Details"
+msgstr "تفاصيل الدور"
+
+msgid "Class & Access Details"
+msgstr "فئة & تفاصيل الوصول"
+
+msgid "Class Access"
+msgstr "الوصول إلى فئة"
+
+msgid "Class/Object Name"
+msgstr "اسم كائن الفئة/"
+
+msgid "Maintenance"
+msgstr "صيانة"
+
+msgid "Home Page"
+msgstr "الصفحة الرئيسية"
+
+msgid "Put in Maintenance Mode"
+msgstr "وضع في وضع الصيانة"
+
+msgid "Maintenance Message"
+msgstr "رسالة صيانة"
+
+msgid "Basic"
+msgstr "الأساسية"
+
+msgid "Messages"
+msgstr "رسائل"
+
+msgid "Site Logo Path"
+msgstr "مسار شعار الموقع"
+
+msgid "Access Denied Message"
+msgstr "تم رفض الوصول رسالة"
+
+msgid "User Details"
+msgstr "تفاصيل المستخدم"
+
+msgid "Preference"
+msgstr "تفضيل"
+
+msgid "Retype Password"
+msgstr "أعد كتابة كلمة المرور"
+
+msgid "Employee Name"
+msgstr "اسم الموظف"
+
+msgid "Identification"
+msgstr "تحديد الهوية"
+
+msgid "User Access Details"
+msgstr "تفاصيل وصول المستخدم"
+
+msgid "Role Control"
+msgstr "التحكم في الدور"
+
+msgid "User Group Assignment"
+msgstr "تعيين مجموعة المستخدم"
+
+msgid "User Role Access Id"
+msgstr "دور المستخدم الوصول إلى معرف"
+
+msgid "Role Name"
+msgstr "اسم الدور"
+
+msgid "Group Access Id"
+msgstr "معرف المجموعة الوصول"
+
+msgid "Group Name"
+msgstr "اسم المجموعة"
+
+msgid "User Group Details"
+msgstr "تفاصيل مجموعة المستخدم"
+
+msgid "Group Access Details"
+msgstr "تفاصيل وصول المجموعة"
+
+msgid "Organization Access"
+msgstr "الوصول إلى المنظمة"
+
+msgid "function"
+msgstr "الدالة"
+
+msgid "Finance"
+msgstr "الشؤون المالية"
+
+msgid "Payment Lines"
+msgstr "بنود الدفع"
+
+msgid "References"
+msgstr "مراجع"
+
+msgid "Seq"
+msgstr "Seq"
+
+msgid "Line Id"
+msgstr "معرف خط"
+
+msgid "Trnx Id"
+msgstr "معرف ترنكس"
+
+msgid "Trnx Number"
+msgstr "عدد ترنكس"
+
+msgid "Payment Amount"
+msgstr "المبلغ المدفوع"
+
+msgid "Paid"
+msgstr "دفعت"
+
+msgid "Remaining"
+msgstr "المتبقية"
+
+msgid "Ref Key Name"
+msgstr "اسم مفتاح المرجع"
+
+msgid "Ref Key Value"
+msgstr "قيمة مفتاح المرجع"
+
+msgid "View Ref Doc"
+msgstr "عرض المرجع Doc"
+
+msgid "BU Assignment"
+msgstr "تعيين بو"
+
+msgid "Address Details"
+msgstr "تفاصيل العنوان"
+
+msgid "Corporate Address Id"
+msgstr "معرف عنوان الشركة"
+
+msgid "Supplier Site Details"
+msgstr "تفاصيل موقع المورد"
+
+msgid "Receiving"
+msgstr "تلقي"
+
+msgid "Site Address"
+msgstr "عنوان الموقع"
+
+msgid "Quantity Tolerance"
+msgstr "كمية التسامح"
+
+msgid "Receipt Days Tolerance"
+msgstr "استلام أيام التسامح"
+
+msgid "Supplier Business Unit Association"
+msgstr "جمعية وحدة الأعمال المورد"
+
+msgid "Supplier BU Details"
+msgstr "تفاصيل المورد بو"
+
+msgid "Local Addresses"
+msgstr "العناوين المحلية"
+
+msgid "Invoice & Payment"
+msgstr "الفاتورة والدفع"
+
+msgid "Ship To Site Id"
+msgstr "السفينة إلى معرف الموقع"
+
+msgid "Bill To Site Id"
+msgstr "مشروع قانون لمعرف الموقع"
+
+msgid "AP Transaction Header"
+msgstr "رأس المعاملات AP"
+
+msgid "Payments"
+msgstr "المدفوعات"
+
+msgid "Transaction Lines & Details"
+msgstr "خطوط الحركة والتفاصيل"
+
+msgid "Other Info"
+msgstr "معلومات أخرى"
+
+msgid "Accounting Details"
+msgstr "تفاصيل المحاسبة"
+
+msgid "Detail Id"
+msgstr "معرف التفاصيل"
+
+msgid "Account"
+msgstr "حساب"
+
+msgid "Is Asset"
+msgstr "هو الأصل"
+
+msgid "Project Header Id"
+msgstr "معرف المشروع رأس"
+
+msgid "Project Line Id"
+msgstr "معرف خط المشروع"
+
+msgid "Trnx Header Id"
+msgstr "معرف رأس ترنكس"
+
+msgid "Trnx Line Id"
+msgstr "معرف خط ترنكس"
+
+msgid "Cancel Line"
+msgstr "إلغاء بند"
+
+msgid "Un match Only"
+msgstr "مباراة الأمم المتحدة فقط"
+
+msgid "Change Quantity"
+msgstr "تغيير كمية"
+
+msgid "Customer Information"
+msgstr "معلومات العميل"
+
+msgid "Customer Type "
+msgstr "نوع العميل "
+
+msgid "Customer Site Details"
+msgstr "تفاصيل موقع العميل"
+
+msgid "Sales"
+msgstr "المبيعات"
+
+msgid "New Contact"
+msgstr "جهة اتصال جديدة"
+
+msgid "Customer BU Assignment"
+msgstr "تعيين العملاء بو"
+
+msgid "Customer BU Details"
+msgstr "تفاصيل العميل بو"
+
+msgid "Accounts"
+msgstr "حسابات"
+
+msgid "Receipt Header"
+msgstr "استلام رأس"
+
+msgid "Document Print"
+msgstr "طباعة المستند"
+
+msgid "Receipt Lines"
+msgstr "استلام الخطوط"
+
+msgid "Cumulative Receipt"
+msgstr "استلام التراكمي"
+
+msgid "Reporting"
+msgstr "إعداد التقارير"
+
+msgid "Id"
+msgstr "معرف"
+
+msgid "Street"
+msgstr "شارع"
+
+msgid "Region Name"
+msgstr "اسم المنطقة"
+
+msgid "Receivable Transaction Header"
+msgstr "رأس المعاملة قيد التحصيل"
+
+msgid "Basic-2"
+msgstr "الأساسية--2"
+
+msgid "Summary"
+msgstr "ملخص"
+
+msgid "Receipts"
+msgstr "إيصالات"
+
+msgid "Change Status"
+msgstr "تغيير الحالة"
+
+msgid "Trnx Status"
+msgstr "مركز ترنكس"
+
+msgid "Detail"
+msgstr "التفاصيل"
+
+msgid "GL-Amount"
+msgstr "GL-المبلغ"
+
+msgid "Journal_Created?"
+msgstr "Journal_Created؟"
+
+msgid "SO Header Id"
+msgstr "حتى رأس معرف"
+
+msgid "SO Line Id"
+msgstr "حتى سطر معرف"
+
+msgid "Project Line Idt"
+msgstr "مشروع خط الصندوق الاستئماني المستقل"
+
+msgid "Receivable Transaction Source"
+msgstr "مصدر المعاملة قيد التحصيل"
+
+msgid "Transaction Source Details"
+msgstr "تفاصيل مصدر الحركة"
+
+msgid "Transaction Type Details"
+msgstr "تفاصيل نوع الحركة"
+
+msgid "Bar code Label Auto Trigger"
+msgstr "الزناد التلقائي تسمية الرمز الشريطي"
+
+msgid "Label Association"
+msgstr "رابطة التسمية"
+
+msgid "Values"
+msgstr "قيم"
+
+msgid "Default Printer"
+msgstr "الطابعة الافتراضية"
+
+msgid "Barcode Label Format"
+msgstr "تنسيق تسمية الرمز الشريطي"
+
+msgid "Data Object"
+msgstr "كائن البيانات"
+
+msgid "Object/Table Name"
+msgstr "اسم الكائن/الجدول"
+
+msgid "No Of Copies"
+msgstr "لا للنسخ"
+
+msgid "Static Labels"
+msgstr "تسميات ثابتة"
+
+msgid "Generate Label"
+msgstr "إنشاء تسمية"
+
+msgid "Cost Type Header"
+msgstr "رأس نوع التكلفة"
+
+msgid "Resource Assignment"
+msgstr "تعيين الموارد"
+
+msgid "Overhead Rate"
+msgstr "معدل النفقات العامة"
+
+msgid "Over Head"
+msgstr "فوق رأسه"
+
+msgid "Over Head Details"
+msgstr "عبر رئيس تفاصيل"
+
+msgid "Rate Assignment"
+msgstr "تعيين معدل"
+
+msgid "Resources"
+msgstr "الموارد"
+
+msgid "OSP"
+msgstr "OSP"
+
+msgid "Equipment"
+msgstr "المعدات"
+
+msgid "Note"
+msgstr "ملاحظة"
+
+msgid "Resource Cost Id"
+msgstr "معرف مورد التكلفة"
+
+msgid "Common Routing"
+msgstr "التوجيه المشتركة"
+
+msgid "WIP"
+msgstr "الأعمال تحت التنفيذ"
+
+msgid "Effectivity"
+msgstr "الفعالية"
+
+msgid "Data Collection"
+msgstr "جمع البيانات"
+
+msgid "Routing Seq"
+msgstr "Seq التوجيه"
+
+msgid "Standard Op"
+msgstr "Op القياسية"
+
+msgid "Referenced"
+msgstr "المشار إليها"
+
+msgid "Operation Details"
+msgstr "تفاصيل العملية"
+
+msgid "Resource Seq"
+msgstr "Seq المورد"
+
+msgid "Usage"
+msgstr "الاستخدام"
+
+msgid "Schedule"
+msgstr "الجدول الزمني"
+
+msgid "24 Hours"
+msgstr "24 ساعة"
+
+msgid "Stnd. Rate"
+msgstr "معدل ستند."
+
+msgid "Count Point"
+msgstr "عد نقطة"
+
+msgid "Auto Charge"
+msgstr "رسوم السيارات"
+
+msgid "Back flush"
+msgstr "عودة تدفق"
+
+msgid "MTQ"
+msgstr "متق"
+
+msgid "ECO Implemented"
+msgstr "منظمة التعاون الاقتصادي التي نفذت"
+
+msgid "Roll up"
+msgstr "نشمر"
+
+msgid "Cumm. Yield"
+msgstr "كوم. العائد"
+
+msgid "Standard Operation Details"
+msgstr "تفاصيل العملية القياسية"
+
+msgid "Assignment Id"
+msgstr "معرف المهمة"
+
+msgid "BOM Header"
+msgstr "رأس شجرة"
+
+msgid "Common BOM"
+msgstr "شجرة المواد المشتركة"
+
+msgid "BOM Lines"
+msgstr "خطوط شجرة المواد"
+
+msgid "Control"
+msgstr "عنصر التحكم"
+
+msgid "Planning"
+msgstr "التخطيط"
+
+msgid "In cost Rollup"
+msgstr "في التكلفة التراكمية"
+
+msgid "Configured BOM Header"
+msgstr "رأس شجرة المواد المكونة"
+
+msgid "BOMLine Id"
+msgstr "معرف بومليني"
+
+msgid "Routing Sequenceg"
+msgstr "سيكوينسيج التوجيه"
+
+msgid "Usage Qty"
+msgstr "استخدام الكمية"
+
+msgid "Line Qty"
+msgstr "خط Qty"
+
+msgid "Transacted Qty"
+msgstr "الكمية المتعامل بها"
+
+msgid "Process Steps"
+msgstr "الخطوات العملية"
+
+msgid "Secondary Fields"
+msgstr "الحقول الثانوية"
+
+msgid "Flow Diagram"
+msgstr "رسم تخطيطي لتدفق"
+
+msgid "CO Action"
+msgstr "عمل أول أكسيد الكربون"
+
+msgid "Sub Process Name"
+msgstr "اسم العملية الفرعية"
+
+msgid "Process Actions"
+msgstr "إجراءات عملية"
+
+msgid "Action Id"
+msgstr "معرف العمل"
+
+msgid "PF Line Id"
+msgstr "معرف خط الجبهة الوطنية"
+
+msgid "Action Type"
+msgstr "نوع العمل"
+
+msgid "Change Control Template"
+msgstr "تغيير عنصر تحكم القالب"
+
+msgid "Template Fields"
+msgstr "حقول القالب"
+
+msgid "Mandatory Field"
+msgstr "حقل إلزامي"
+
+msgid "List Option Type"
+msgstr "نوع خيار القائمة"
+
+msgid "Item Cost Header"
+msgstr "رأس عنصر التكلفة"
+
+msgid "Fixed Asset Details"
+msgstr "تفاصيل الأصول الثابتة"
+
+msgid "Tracking Info"
+msgstr "معلومات التعقب"
+
+msgid "Assignments"
+msgstr "التعيينات"
+
+msgid "Expense"
+msgstr "المصروفات"
+
+msgid "Class Controls"
+msgstr "عناصر الفئة"
+
+msgid "Natural Accounts"
+msgstr "الحسابات الطبيعية"
+
+msgid "Book Name"
+msgstr "اسم الكتاب"
+
+msgid "Asset Book Information Details"
+msgstr "تفاصيل المعلومات في كتاب الأصول"
+
+msgid "Asset Book Category Association"
+msgstr "رابطة فئة كتاب الأصول"
+
+msgid "Cost Accounts"
+msgstr "حسابات التكلفة"
+
+msgid "Depreciation Accounts"
+msgstr "حسابات الإهلاك"
+
+msgid "Cost Ac"
+msgstr "تكلفة التيار المتردد"
+
+msgid "Clearing Ac"
+msgstr "تطهير التيار المتردد"
+
+msgid "CIP Cost Ac"
+msgstr "CIP تكلفة التيار المتردد"
+
+msgid "CIP Clearing Ac"
+msgstr "CIP تطهير التيار المتردد"
+
+msgid "Depreciation Expense"
+msgstr "مصروفات الإهلاك"
+
+msgid "Bonus Expense"
+msgstr "حساب المكافأة"
+
+msgid "Bonus Reserve"
+msgstr "الاحتياطي مكافأة"
+
+msgid "Revalue Reserve"
+msgstr "إعادة تقييم احتياطي"
+
+msgid "Unplanned Depreciation"
+msgstr "الاستهلاك غير المخطط له"
+
+msgid "Confirm Depreciation"
+msgstr "تأكيد الإهلاك"
+
+msgid "Post Depreciation"
+msgstr "ترحيل الإهلاك"
+
+msgid "Depreciation Details"
+msgstr "تفاصيل الإهلاك"
+
+msgid "Rates"
+msgstr "معدلات"
+
+msgid "Calculation"
+msgstr "حساب"
+
+msgid "Rate Percentage"
+msgstr "النسبة المئوية لمعدل"
+
+msgid "Forecast Header"
+msgstr "التنبؤ برأس"
+
+msgid "Forecast Lines"
+msgstr "التنبؤ بخطوط"
+
+msgid "Bucket"
+msgstr "دلو"
+
+msgid "Current"
+msgstr "الحالي"
+
+msgid "Total Current"
+msgstr "الإجمالي الحالي"
+
+msgid "Forecast Details"
+msgstr "التنبؤ بالتفاصيل"
+
+msgid "Consumption Id"
+msgstr "معرف استهلاك"
+
+msgid "Forecasts"
+msgstr "تنبؤات"
+
+msgid "MDS Header"
+msgstr "رأس حركة الديمقراطيين الاشتراكيين"
+
+msgid "MDS Lines"
+msgstr "خطوط حركة الديمقراطيين الاشتراكيين"
+
+msgid "Date"
+msgstr "تاريخ"
+
+msgid "Source Header"
+msgstr "مصدر الرأس"
+
+msgid "Source Line"
+msgstr "خط المصدر"
+
+msgid "MRP Planner"
+msgstr "مخطط MRP"
+
+msgid "Planning Control Header"
+msgstr "تخطيط عنصر تحكم رأس"
+
+msgid "Planning Control Details"
+msgstr "تخطيط عنصر التحكم تفاصيل"
+
+msgid "Planning Info"
+msgstr "معلومات التخطيط"
+
+msgid "Source List Header"
+msgstr "رأس قائمة المصدر"
+
+msgid "Source List Lines"
+msgstr "مصدر قائمة الخطوط"
+
+msgid "Financial Calendars"
+msgstr "التقويمات المالية"
+
+msgid "Calendar Period Details"
+msgstr "تفاصيل فترة التقويم"
+
+msgid "Basic - View Only"
+msgstr "الأساسية--عرض فقط"
+
+msgid "Prefix"
+msgstr "بادئة"
+
+msgid "Adjusting Period"
+msgstr "ضبط الفترة"
+
+msgid "Chart Of Account"
+msgstr "التخطيط لحساب"
+
+msgid "Chart of Account Details"
+msgstr "الرسم البياني لتفاصيل الحساب"
+
+msgid "Qualifiers"
+msgstr "تصفيات"
+
+msgid "Display"
+msgstr "عرض"
+
+msgid "Chart Of Account Code Combinations"
+msgstr "التخطيط لحساب مجموعات التعليمات البرمجية"
+
+msgid "Field Values"
+msgstr "قيم الحقل"
+
+msgid "CC Id"
+msgstr "معرف CC"
+
+msgid "Code Combination"
+msgstr "مجموعة التعليمات البرمجية"
+
+msgid "Currency Conversions"
+msgstr "تحويلات العملة"
+
+msgid "Conversion Details"
+msgstr "تفاصيل التحويل"
+
+msgid "Journal Header"
+msgstr "رأس دفتر اليومية"
+
+msgid "Reference Details"
+msgstr "تفاصيل مرجع"
+
+msgid "Rate & Amounts"
+msgstr "معدل & المبالغ"
+
+msgid "Journal Lines"
+msgstr "بنود دفتر اليومية"
+
+msgid "Debit"
+msgstr "الخصم"
+
+msgid "Credit"
+msgstr "الائتمان"
+
+msgid "Ledger Dr"
+msgstr "الأستاذ الدكتور"
+
+msgid "Ledger Cr"
+msgstr "Cr دفتر الأستاذ"
+
+msgid "Ref Type"
+msgstr "نوع المرجع"
+
+msgid "Ref Value"
+msgstr "قيمة المرجع"
+
+msgid "Ledger Header"
+msgstr "رأس دفتر الأستاذ"
+
+msgid "Ledger Options"
+msgstr "خيارات دفتر الأستاذ"
+
+msgid "Balancing Segment Values"
+msgstr "موازنة الجزء المتعلق بالقيم"
+
+msgid "Balance Segment Value"
+msgstr "قيمة الجزء المتعلق بالتوازن"
+
+msgid "Schedule & Discount Lines"
+msgstr "جدول & خطوط الخصم"
+
+msgid "Discount"
+msgstr "الخصم"
+
+msgid "Schedule Id"
+msgstr "معرف الجدول الزمني"
+
+msgid "Date of Month"
+msgstr "تاريخ شهر"
+
+msgid "Discount Id"
+msgstr "خصم معرف"
+
+msgid "GL Periods"
+msgstr "فترات GL"
+
+msgid "Accounting Period"
+msgstr "الفترة المحاسبية"
+
+msgid "Current Open Period"
+msgstr "الفترة المفتوحة الحالية"
+
+msgid "Next Period"
+msgstr "الفترة القادمة"
+
+msgid "PeriodId"
+msgstr "بيريوديد"
+
+msgid "Cal Name"
+msgstr "اسم وحدة حرارية"
+
+msgid "Cal Id"
+msgstr "معرف Cal"
+
+msgid "Approval Limit Header"
+msgstr "الموافقة على رأس الحد"
+
+msgid "Approval Limit Lines"
+msgstr "خطوط الحد الموافقة"
+
+msgid "Lowest Range"
+msgstr "النطاق الأدنى"
+
+msgid "Highest Range"
+msgstr "نطاق أعلى"
+
+msgid "Compensation Element Entry"
+msgstr "إدخال عنصر التعويض"
+
+msgid "Element Entry Lines"
+msgstr "عنصر إدخال خطوط"
+
+msgid "Monetary Value"
+msgstr "القيمة النقدية"
+
+msgid "Compensation Element Entry Template"
+msgstr "قالب إدخال عنصر التعويض"
+
+msgid "Details Info"
+msgstr "معلومات تفاصيل"
+
+msgid "Employee Header"
+msgstr "رأس الموظف"
+
+msgid "Personal"
+msgstr "شخصية"
+
+msgid "Employee Details"
+msgstr "التفاصيل الخاصة بالموظف"
+
+msgid "Financial Info"
+msgstr "المعلومات المالية"
+
+msgid "Work Experience"
+msgstr "الخبرة في العمل"
+
+msgid "On Boarding"
+msgstr "على الصعود"
+
+msgid "Exit"
+msgstr "خروج"
+
+msgid "Job History"
+msgstr "التاريخ الوظيفي"
+
+msgid "Supervisor"
+msgstr "المشرف"
+
+msgid "Last Salary"
+msgstr "آخر راتب"
+
+msgid "Projects"
+msgstr "المشاريع"
+
+msgid "Salary Component Break Up"
+msgstr "المرتب المكون تفكك"
+
+msgid "Employee Termination"
+msgstr "إنهاء الموظف"
+
+msgid "Requirements"
+msgstr "متطلبات"
+
+msgid "job Details & Responsibility"
+msgstr "تفاصيل الوظيفة والمسؤولية"
+
+msgid "Leave Details"
+msgstr "ترك التفاصيل"
+
+msgid "Current Balance"
+msgstr "الرصيد الحالي"
+
+msgid "Leave/Year"
+msgstr "إجازة في السنة"
+
+msgid "Available Balance"
+msgstr "الرصيد المتاح"
+
+msgid "Total Leave"
+msgstr "مجموع الإجازات"
+
+msgid "Leave/Period"
+msgstr "فترة الإجازة/"
+
+msgid "Leave Application"
+msgstr "ترك التطبيق"
+
+msgid "Approver"
+msgstr "المعتمد"
+
+msgid "Date Details"
+msgstr "تاريخ تفاصيل"
+
+msgid "Bank Details"
+msgstr "تفاصيل البنك"
+
+msgid "Generate Schedule"
+msgstr "إنشاء جدول"
+
+msgid "Line Details"
+msgstr "تفاصيل الخط"
+
+msgid "Schedules"
+msgstr "الجداول الزمنية"
+
+msgid "Employee Pay Slip"
+msgstr "قسيمة دفع الموظف"
+
+msgid "Salary Details"
+msgstr "تفاصيل الراتب"
+
+msgid "Position Header"
+msgstr "موقف رأس"
+
+msgid "Team Lead"
+msgstr "قائد الفريق"
+
+msgid "Team Members"
+msgstr "أعضاء الفريق"
+
+msgid "Member Name"
+msgstr "اسم العضو"
+
+msgid "ABC Assignment Header"
+msgstr "رأس تعيين أي بي سي"
+
+msgid "Assign Items"
+msgstr "تعيين العناصر"
+
+msgid "Sequence Number"
+msgstr "رقم التسلسل"
+
+msgid "% of Items"
+msgstr "% من البنود"
+
+msgid "% of Value"
+msgstr "% من القيمة"
+
+msgid "View & Update Items"
+msgstr "عرض & تحديث العناصر"
+
+msgid "Item ABC Class"
+msgstr "فئة سي العنصر"
+
+msgid "Master Item Id"
+msgstr "معرف العنصر الرئيسي"
+
+msgid "Valuation Details"
+msgstr "تفاصيل التقييم"
+
+msgid "Scope"
+msgstr "نطاق"
+
+msgid "Count Header"
+msgstr "رأس العد"
+
+msgid "Variance Limit/Approval"
+msgstr "الحد/الموافقة على الفرق"
+
+msgid "Count Frequence"
+msgstr "عد الترددية"
+
+msgid "Count Id"
+msgstr "معرف العد"
+
+msgid "StatusStatus"
+msgstr "ستاتوستاتوس"
+
+msgid "Code On Count"
+msgstr "التعليمات البرمجية في العد"
+
+msgid "Count Entry Header"
+msgstr "عدد مرات دخول رأس"
+
+msgid "Line Defaults"
+msgstr "افتراضيات الخط"
+
+msgid "Inventory Count Name"
+msgstr "اسم جرد المخزون"
+
+msgid "Adjustments"
+msgstr "التعديلات"
+
+msgid "Count By"
+msgstr "عد من"
+
+msgid "Adjustment Ac"
+msgstr "التكيف Ac"
+
+msgid "System Quantity"
+msgstr "نظام الكمية"
+
+msgid "Counted Quantity"
+msgstr "الكمية التي تم جردها"
+
+msgid "Adjusted Quantity"
+msgstr "الكمية المعدلة"
+
+msgid "Adjustment Amount"
+msgstr "مبلغ التسوية"
+
+msgid "Inter-Org Transfer Header"
+msgstr "Org جملة نقل رأس"
+
+msgid "Header Id"
+msgstr "معرف الرأس"
+
+msgid "Inter-Org Transfer Lines"
+msgstr "Org جملة خطوط نقل"
+
+msgid "General Info"
+msgstr "معلومات عامة"
+
+msgid "Transfer"
+msgstr "نقل"
+
+msgid "Lot Serial"
+msgstr "المسلسل الكثير"
+
+msgid "From SubInv"
+msgstr "من سوبينف"
+
+msgid "To SubInv"
+msgstr "إلى سوبينف"
+
+msgid "Ref Name"
+msgstr "اسم المرجع"
+
+msgid "Add Lot Numbers"
+msgstr "إضافة أرقام الكثير"
+
+msgid "Add Serial Numbers"
+msgstr "إضافة الأرقام التسلسلية"
+
+msgid "Inventory Transaction "
+msgstr "حركة المخزون "
+
+msgid "Lot & Serial"
+msgstr "الكثير & المسلسل"
+
+msgid "Transaction Id"
+msgstr "معرف العملية"
+
+msgid "Kit Item"
+msgstr "البند كيت"
+
+msgid "Kit Config"
+msgstr "مجموعة التكوين"
+
+msgid "Config Id"
+msgstr "معرف الملف Config"
+
+msgid "Doc. Number"
+msgstr "رقم الوثيقة"
+
+msgid "Doc. Id"
+msgstr "معرف الوثيقة"
+
+msgid "Ref Doc"
+msgstr "Ref Doc"
+
+msgid "WO BOM Line Id"
+msgstr "معرف خط WO BOM"
+
+msgid "Journal Header Id"
+msgstr "معرف رأس دفتر اليومية"
+
+msgid "Inv Assignment"
+msgstr "التعيين للاستثمارات"
+
+msgid "Revisions"
+msgstr "التنقيحات"
+
+msgid "ECO"
+msgstr "منظمة التعاون الاقتصادي"
+
+msgid "Eff. Start Date"
+msgstr "تاريخ بدء مزارعوا"
+
+msgid "Item/Template"
+msgstr "البند/قالب"
+
+msgid "Manufacturing"
+msgstr "الصناعة التحويلية"
+
+msgid "Financial"
+msgstr "المالية"
+
+msgid "Secondary"
+msgstr "الثانوية"
+
+msgid "Lead Time Information"
+msgstr "تؤدي المعلومات الوقت"
+
+msgid "Lot Information"
+msgstr "الكثير من المعلومات"
+
+msgid "Serial Information"
+msgstr "معلومات المسلسل"
+
+msgid "Measurement Information"
+msgstr "معلومات القياس"
+
+msgid "Rule Information"
+msgstr "قاعدة المعلومات"
+
+msgid "Cost Information"
+msgstr "معلومات التكلفة"
+
+msgid "Order Modifiers"
+msgstr "ترتيب المعدلات"
+
+msgid "Time Fences"
+msgstr "أسوار الزمن"
+
+msgid "Min Max Planning"
+msgstr "ماكس دقيقة التخطيط"
+
+msgid "Safety Stock"
+msgstr "مخزون الأمان"
+
+msgid "Item Transaction Location Default"
+msgstr "عنصر الحركة الموقع الافتراضي"
+
+msgid "Location Defaults"
+msgstr "افتراضيات الموقع"
+
+msgid "Item-Location"
+msgstr "موقع العنصر"
+
+msgid "Item"
+msgstr "البند"
+
+msgid "Storage Locator"
+msgstr "محدد موقع التخزين"
+
+msgid "Dimensions"
+msgstr "أبعاد"
+
+msgid "Capacity"
+msgstr "القدرات"
+
+msgid "Transactions"
+msgstr "المعاملات"
+
+msgid "Relations"
+msgstr "العلاقات"
+
+msgid "From Sub Inventory"
+msgstr "من المخزون Sub"
+
+msgid "Transaction Details"
+msgstr "تفاصيل الصفقة"
+
+msgid "From SubInv Id"
+msgstr "من معرف سوبينف"
+
+msgid "From Locator Id "
+msgstr "من معرف محدد موقع المعلومات "
+
+msgid "To SubInv Id"
+msgstr "لمعرف سوبينف"
+
+msgid "To Locator Id "
+msgstr "لمعرف موقع المعلومات "
+
+msgid "Receipt Header Id"
+msgstr "استلام رأس معرف"
+
+msgid "PO Info"
+msgstr "معلومات بو"
+
+msgid "Receipt"
+msgstr "استلام"
+
+msgid "Line #"
+msgstr "السطر #"
+
+msgid "PO #"
+msgstr "ص. ب #"
+
+msgid "PO Line #"
+msgstr "ص. ب خط #"
+
+msgid "Shipment #"
+msgstr "الشحن #"
+
+msgid "Shipment Qty"
+msgstr "كمية الشحن"
+
+msgid "Received Qty"
+msgstr "الكمية المستلمة"
+
+msgid "New Received Qty"
+msgstr "الكمية المستلمة الجديدة"
+
+msgid "Supplier #"
+msgstr "المورد #"
+
+msgid "Site Id"
+msgstr "معرف الموقع"
+
+msgid "Site #"
+msgstr "الموقع #"
+
+msgid "Site"
+msgstr "الموقع"
+
+msgid "RMA Receipt Header"
+msgstr "رأس استلام الجيش الملكي المغربي"
+
+msgid "RMA Info"
+msgstr "معلومات الجيش الملكي المغربي"
+
+msgid "Sales Order #"
+msgstr "أمر التوريد #"
+
+msgid "SO Line #"
+msgstr "حتى السطر #"
+
+msgid "New Received Quantity"
+msgstr "الكمية المستلمة الجديدة"
+
+msgid "Serial Number Details"
+msgstr "تفاصيل الرقم التسلسلي"
+
+msgid "Subinventory Details"
+msgstr "تفاصيل سوبينفينتوري"
+
+msgid "Unit Of Measure"
+msgstr "وحدة القياس"
+
+msgid "UOM Details"
+msgstr "تفاصيل جامعة ميتشجان"
+
+msgid "Relationship"
+msgstr "العلاقة"
+
+msgid "Primary UOM"
+msgstr "UOM الابتدائي"
+
+msgid "Bank Names"
+msgstr "أسماء البنك"
+
+msgid "Transaction"
+msgstr "الحركة"
+
+msgid "Other"
+msgstr "الأخرى"
+
+msgid "Prices"
+msgstr "أسعار"
+
+msgid "Restrictions"
+msgstr "القيود"
+
+msgid "Regime"
+msgstr "نظام"
+
+msgid "Jurisdiction"
+msgstr "الولاية القضائية"
+
+msgid "In or Out"
+msgstr "أو التصغير"
+
+msgid "Dr or Cr"
+msgstr "الدكتور أو Cr"
+
+msgid "Region Calculation"
+msgstr "حساب المنطقة"
+
+msgid "Ad hoc Rate"
+msgstr "معدل المخصصة"
+
+msgid "Exemption"
+msgstr "الإعفاء"
+
+msgid "Printed Name"
+msgstr "اسم المطبوعة"
+
+msgid "Offset Tax"
+msgstr "معادلة الضرائب"
+
+msgid "Address Header"
+msgstr "عنوان رأس"
+
+msgid "BO Details"
+msgstr "تفاصيل بو"
+
+msgid "Type of Business Org"
+msgstr "نوع من الأعمال Org"
+
+msgid "Enterprise Name"
+msgstr "اسم المؤسسة"
+
+msgid "Enterprise Header"
+msgstr "رأس المؤسسة"
+
+msgid "Inventory Org Header"
+msgstr "رأس Org المخزون"
+
+msgid "Item Attribute"
+msgstr "السمة العنصر"
+
+msgid "Sourcing"
+msgstr "منبع"
+
+msgid "Costing Details"
+msgstr "تفاصيل التكاليف"
+
+msgid "Legal Org Header"
+msgstr "القانونية Org رأس"
+
+msgid "Legal Org Details"
+msgstr "التفاصيل القانونية Org"
+
+msgid "Ledger Details"
+msgstr "تفاصيل دفتر الأستاذ"
+
+msgid "Organization"
+msgstr "المنظمة"
+
+msgid "Contacts"
+msgstr "جهات الاتصال"
+
+msgid "Web-site"
+msgstr "الموقع على شبكة الإنترنت"
+
+msgid "Associate Contact"
+msgstr "ربط جهة الاتصال"
+
+msgid "Supplier Site"
+msgstr "موقع المورد"
+
+msgid "MPN"
+msgstr "MPN"
+
+msgid "Documents"
+msgstr "الوثائق"
+
+msgid "Min Order Qty"
+msgstr "دقيقة أمر Qty"
+
+msgid "Lot Multiplier"
+msgstr "المضاعف الكثير"
+
+msgid "ASL Basic Info"
+msgstr "معلومات أساسية ASL"
+
+msgid "ASL Line Id"
+msgstr "معرف خط ASL"
+
+msgid "ASL Documents"
+msgstr "وثائق ASL"
+
+msgid "Detail Data"
+msgstr "بيانات التفاصيل"
+
+msgid "Delivery"
+msgstr "التسليم"
+
+msgid "Shipment Id"
+msgstr "معرف الشحنة"
+
+msgid "Ship To Location"
+msgstr "السفينة إلى مكان"
+
+msgid "Charge Ac"
+msgstr "اتهام التيار المتردد"
+
+msgid "Accrual Ac"
+msgstr "Ac الاستحقاق"
+
+msgid "Budget Ac"
+msgstr "الميزانية التيار المتردد"
+
+msgid "PPV Ac"
+msgstr "ميلان ببف"
+
+msgid "Received"
+msgstr "وتلقى"
+
+msgid "Accepted"
+msgstr "قبلت"
+
+msgid "Delivered"
+msgstr "تسليم"
+
+msgid "Invoiced"
+msgstr "مفوتر"
+
+msgid "Purchasing Info"
+msgstr "شراء معلومات"
+
+msgid "PO Lines & Shipments"
+msgstr "خطوط بو & الشحنات"
+
+msgid "Agreement Details"
+msgstr "تفاصيل الاتفاق"
+
+msgid "Receiving Org"
+msgstr "Org المستقبلة"
+
+msgid "Shipments"
+msgstr "الشحنات"
+
+msgid "Agreed Quantity"
+msgstr "الكمية المتفق عليها"
+
+msgid "Released Quantity"
+msgstr "الكمية التي تم إصدارها"
+
+msgid "Agreed Amount"
+msgstr "وافق على المبلغ"
+
+msgid "On Hold"
+msgstr "معلقة"
+
+msgid "Hold Details"
+msgstr "عقد التفاصيل"
+
+msgid "Configured"
+msgstr "تكوين"
+
+msgid "Item Configuration"
+msgstr "عنصر التكوين"
+
+msgid "Ref Number"
+msgstr "رقم المرجع"
+
+msgid "Quotation"
+msgstr "اقتباس"
+
+msgid "Detailed Description"
+msgstr "وصف مفصل"
+
+msgid "Quote Lines"
+msgstr "خطوط عرض الأسعار"
+
+msgid "Factors"
+msgstr "العوامل"
+
+msgid "Requirement Id"
+msgstr "معرف شرط"
+
+msgid "Max Evaluation Points"
+msgstr "ماكس نقاط التقييم"
+
+msgid "Supplier Value"
+msgstr "قيمة المورد"
+
+msgid "Min Agreement Qty"
+msgstr "Qty اتفاق الحد الأدنى"
+
+msgid "Replenishment LT"
+msgstr "تجديد LT"
+
+msgid "Blanket Agreement & Releases"
+msgstr "اتفاق بطانية والنشرات"
+
+msgid "BPA Line"
+msgstr "خط BPA"
+
+msgid "Requisition Header"
+msgstr "رأس طلب"
+
+msgid "Requisition Lines & Shipments"
+msgstr "طلب خطوط & الشحنات"
+
+msgid "BPA Number"
+msgstr "عدد BPA"
+
+msgid "Request For Quotation"
+msgstr "طلب عرض أسعار"
+
+msgid "RFQ Lines & Details"
+msgstr "خطوط طلب عرض الأسعار والتفاصيل"
+
+msgid "Sourcing Rule Header"
+msgstr "منبع رأس القاعدة"
+
+msgid "Sourcing Lines"
+msgstr "تحديد مصادر خطوط"
+
+msgid "Allocation % "
+msgstr "تخصيص % "
+
+msgid "POS Barcode List"
+msgstr "قائمة الباركود POS"
+
+msgid "List Lines"
+msgstr "قائمة خطوط"
+
+msgid "Final Amount"
+msgstr "المبلغ النهائي"
+
+msgid "POS Inventory Control"
+msgstr "مراقبة المخزون نقاط البيع"
+
+msgid "POS Terminal"
+msgstr "نقاط البيع الطرفية"
+
+msgid "Sales Items"
+msgstr "أصناف المبيعات"
+
+msgid "Lines"
+msgstr "خطوط"
+
+msgid "Items"
+msgstr "العناصر"
+
+msgid "Hybrid Sales Items"
+msgstr "أصناف مبيعات الهجين"
+
+msgid "Delivery Header"
+msgstr "عنوان التسليم"
+
+msgid "SO Info"
+msgstr "معلومات حتى"
+
+msgid "Delivery Line Id"
+msgstr "معرف خط توصيل"
+
+msgid "SO Id"
+msgstr "معرف حتى"
+
+msgid "SO"
+msgstr "لذا"
+
+msgid "Shipped Qty"
+msgstr "الكمية التي تم شحنها"
+
+msgid "SO Qty Change"
+msgstr "حتى Qty التغيير"
+
+msgid "Line Action"
+msgstr "خط العمل"
+
+msgid "Weight UOM"
+msgstr "الوزن UOM"
+
+msgid "Volume UOM"
+msgstr "حجم UOM"
+
+msgid "Defaults"
+msgstr "الإعدادات الافتراضية"
+
+msgid "Existing Info"
+msgstr "معلومات القائمة"
+
+msgid "Lead Details"
+msgstr "تؤدي التفاصيل"
+
+msgid "Primary Sales Person"
+msgstr "مندوب المبيعات الأولية"
+
+msgid "Lead Contact"
+msgstr "يؤدي الاتصال"
+
+msgid "Sales Opportunity"
+msgstr "فرصة المبيعات"
+
+msgid "Price"
+msgstr "الأسعار"
+
+msgid "Dates"
+msgstr "التواريخ"
+
+msgid "Shipping Org"
+msgstr "Org الشحن"
+
+msgid "Order Header Id"
+msgstr "معرف رأس النظام"
+
+msgid "Order Line Id"
+msgstr "معرف خط النظام"
+
+msgid "Defaulting Rules"
+msgstr "قواعد المقصر"
+
+msgid "Future Rules"
+msgstr "قواعد المستقبل"
+
+msgid "Shipping Info"
+msgstr "معلومات الشحن"
+
+msgid "Sales Order / RMA Header"
+msgstr "أمر التوريد/رأس الجيش الملكي المغربي"
+
+msgid "Copy Document"
+msgstr "نسخ المستند"
+
+msgid "SO / RMA Lines & Shipments"
+msgstr "لذا/خطوط الجيش الملكي المغربي والشحنات"
+
+msgid "Configuration"
+msgstr "التكوين"
+
+msgid "References-2"
+msgstr "2-المراجع"
+
+msgid "Schedule Ship / Receipt Date"
+msgstr "جدولة السفينة/تاريخ الاستلام"
+
+msgid "Actual Ship / Receipt Date"
+msgstr "السفينة الفعلية/تاريخ الاستلام"
+
+msgid "WO Header Id"
+msgstr "معرف رأس WO"
+
+msgid "Config Details"
+msgstr "تفاصيل التكوين"
+
+msgid "Destination Typet"
+msgstr "تايبيه الوجهة"
+
+msgid "Shipped /Received Quantity"
+msgstr "الكمية التي تم شحنها/المستلمة"
+
+msgid "Sub Inventories"
+msgstr "قوائم فرعية"
+
+msgid "Building"
+msgstr "بناء"
+
+msgid "Floor"
+msgstr "الكلمة"
+
+msgid "Wing"
+msgstr "الجناح"
+
+msgid "Extra Fields"
+msgstr "حقول إضافية"
+
+msgid "Extra Field Details"
+msgstr "حقل إضافي من التفاصيل"
+
+msgid "Instances"
+msgstr "مثيلات"
+
+msgid "No Instances Found"
+msgstr "لا توجد حالات العثور على"
+
+msgid "Notification"
+msgstr "إعلام"
+
+msgid "Notification Details"
+msgstr "إعلام تفاصيل"
+
+msgid "Reference Doc"
+msgstr "الوثيقة المرجعية"
+
+msgid "Option Header"
+msgstr "رأس الخيار"
+
+msgid "Option Code"
+msgstr "رمز خيار"
+
+msgid "Process Flow Header"
+msgstr "عملية تدفق رأس"
+
+msgid "Process Flow Lines"
+msgstr "خطوط تدفق العملية"
+
+msgid "Decision"
+msgstr "قرار"
+
+msgid "Next Seq On Pass"
+msgstr "Seq التالية على تمرير"
+
+msgid "Next Seq If Fail"
+msgstr "المقبل إذا Seq تفشل"
+
+msgid "Next Seq On Return"
+msgstr "Seq التالية على عودة"
+
+msgid "Profile Header"
+msgstr "رأس الشخصية"
+
+msgid "Profile Values"
+msgstr "القيم الشخصية"
+
+msgid "Custom Query"
+msgstr "استعلام مخصص"
+
+msgid "Validation"
+msgstr "التحقق من الصحة"
+
+msgid "Value Group Lines"
+msgstr "خطوط مجموعة قيمة"
+
+msgid "Parent Relationship"
+msgstr "علاقة الأصل"
+
+msgid "Is Parent"
+msgstr "هو الأصل"
+
+msgid "Allow Budgeting"
+msgstr "السماح بوضع الميزانيات"
+
+msgid "Allow Posting"
+msgstr "السماح بالترحيل"
+
+msgid "Accounting Group Details"
+msgstr "تفاصيل مجموعة المحاسبة"
+
+msgid "Actual Accounts"
+msgstr "الحسابات الفعلية"
+
+msgid "Variance Accounts"
+msgstr "حسابات الفرق"
+
+msgid "Transfer Info"
+msgstr "نقل المعلومات"
+
+msgid "Reference Info"
+msgstr "معلومات مرجعية"
+
+msgid "Finance Info"
+msgstr "المعلومات المالية"
+
+msgid "BOM Seq"
+msgstr "BOM Seq"
+
+msgid "BOM Id"
+msgstr "معرف شجرة المواد"
+
+msgid "Journal Id"
+msgstr "معرف دفتر اليومية"
+
+msgid "WIP Move Transaction"
+msgstr "حركة نقل الأعمال تحت التنفيذ"
+
+msgid "Tracking"
+msgstr "تتبع"
+
+msgid "Operation"
+msgstr "العملية"
+
+msgid "Scrap"
+msgstr "خردة"
+
+msgid "BOM "
+msgstr "شجرة المواد "
+
+msgid "Quantity Status"
+msgstr "حالة كمية"
+
+msgid "Sequence"
+msgstr "تسلسل"
+
+msgid "Queue"
+msgstr "قائمة الانتظار"
+
+msgid "Running"
+msgstr "تشغيل"
+
+msgid "Rejected"
+msgstr "ورفض"
+
+msgid "Scrapped"
+msgstr "ألغت"
+
+msgid "To Move"
+msgstr "لنقل"
+
+msgid "From Seq"
+msgstr "من Seq"
+
+msgid "To Seq"
+msgstr "إلى Seq"
+
+msgid "Available Qty"
+msgstr "الكمية المتوفرة"
+
+msgid "From Step"
+msgstr "من الخطوة"
+
+msgid "To Step"
+msgstr "أن الخطوة"
+
+msgid "Move Qty"
+msgstr "نقل الكمية"
+
+msgid "Issued"
+msgstr "أصدر"
+
+msgid "Applied"
+msgstr "تطبيق"
+
+msgid "History"
+msgstr "التاريخ"
+
+msgid "BOM & Routing"
+msgstr "شجرة المواد والتوجيه"
+
+msgid "Routing-2"
+msgstr "2-التوجيه"
+
+msgid "Routing - Data Collection"
+msgstr "التوجيه--جمع البيانات"
+
+msgid "BOM-2"
+msgstr "شجرة المواد-2"
+
+msgid "WO Routing Id"
+msgstr "معرف التوجيه WO"
+
+msgid "Resource Details"
+msgstr "تفاصيل المورد"
+
+msgid "DetailId"
+msgstr "ديتيليد"
+
+msgid "Required Qty"
+msgstr "الكمية المطلوبة"
+
+msgid "Applied Qty"
+msgstr "الكمية التطبيقية"
+
+msgid "Open Qty"
+msgstr "الكمية مفتوحة"
+
+msgid "Progress"
+msgstr "التقدم المحرز"
+
+msgid "WO BOM Id"
+msgstr "معرف شجرة WO"
+
+msgid "Open"
+msgstr "مفتوحة"
+
+msgid "Work Order Completion/Return"
+msgstr "العمل أمر إنجاز/عودة"
+
+msgid "Work Order Details"
+msgstr "تفاصيل ترتيب العمل"
+
+msgid "Document Qty"
+msgstr "Qty الوثيقة"
+
+msgid "Transaction Qty"
+msgstr "كمية الحركة"
+
+msgid "Work Order Less Transaction"
+msgstr "أمر عمل أقل حركة"
+
+msgid "WOL Transaction Details"
+msgstr "تفاصيل الصفقة WOL"
+
+msgid "Line "
+msgstr "خط "
+
+msgid "PO "
+msgstr "ص. ب. "
+
+msgid "PO Line "
+msgstr "بو خط "
+
+msgid "Shipment "
+msgstr "الشحنة "
+
+msgid "Supplier "
+msgstr "المورد "
+
+msgid "Site "
+msgstr "الموقع "
+
+msgid "Sales Order "
+msgstr "أمر التوريد "
+
+msgid "SO Line "
+msgstr "حتى خط"
+

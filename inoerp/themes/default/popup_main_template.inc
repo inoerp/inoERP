@@ -49,12 +49,8 @@
  <body>
   <?php
   if ($si->maintenance_cb == 1) {
-   echo "<div class='error'>Site is under maintenance mode </div>";
-  }
-
-  if (!empty($access_deined)) {
-   exit("Access denied ! <br> $msg <input action='action' class='button' type='button' value='Go Back' onclick='history.go(-1);
-       ' />");
+   echo ino_access_denied('Site is under maintenance mode');
+   return;
   }
   ?>
   <div id="popup-window">
@@ -101,11 +97,13 @@
         $show_message.
         '</div>';
        }
-       if (!empty($template_file_names)) {
-        foreach ($template_file_names as $key => $tmpl_file) {
-         include_once $tmpl_file;
-        }
+             if (!empty($access_denied_msg)) {
+       echo ino_access_denied($access_denied_msg);
+      } else if (!empty($template_file_names)) {
+       foreach ($template_file_names as $key => $tmpl_file) {
+        include_once $tmpl_file;
        }
+      }
        ?>
       </div>
       <!--   end of structure-->

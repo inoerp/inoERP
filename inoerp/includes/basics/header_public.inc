@@ -153,12 +153,8 @@ check_browser(); ?>
   ?>
 
   <?php
-  if ($si->maintenance_cb == 1) {
-   echo "<div class='error'>Site is under maintenance mode </div>";
-  }
+//  if ($si->maintenance_cb == 1) {
+//   echo "<div class='error'>Site is under maintenance mode </div>";
+//  }
 
-  if (!empty($access_deined)) {
-   exit("Access denied ! <br> $msg <input action='action' class='button' type='button' value='Go Back' onclick='history.go(-1);
-       ' />");
-  }
   ?>

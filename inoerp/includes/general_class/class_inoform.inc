@@ -49,6 +49,165 @@ class inoform {
   '_update_action_meassge' => 'Update',
   '_show_view_path' => 1,
  ];
+ public static $docs_notAllowd_inDirectWebForm = [
+  'bom_cost_type',
+  'bom_material_element',
+  'coa',
+  'enterprise',
+  'gl_calendar',
+  'gl_ledger',
+  'gl_period',
+  'role_access',
+  'site_info',
+  'transaction_type',
+  'uom',
+  'bc_label_format_header',
+  'bc_static_label',
+  'bc_label_format_line',
+  'bc_label_auto_trigger',
+  'sys_process_flow_line',
+  'sys_process_flow_header',
+  'cc_co_template_header',
+  'cc_co_template_line',
+  'sd_document_type',
+  'ap_payment_terms',
+  'ar_receipt_source',
+  'ar_transaction_source',
+  'ar_transaction_type',
+  'bom_department',
+  'bom_department_resource_assignment',
+  'bom_overhead',
+  'bom_overhead_rate_assignment',
+  'bom_overhead_resource_assignment',
+  'bom_resource',
+  'bom_resource_cost',
+  'business',
+  'hr_approval_limit_assignment',
+  'hr_approval_limit_header',
+  'hr_approval_limit_line',
+  'hr_approval_object',
+  'hr_compensation_element',
+  'hr_control',
+  'hr_element_entry_header',
+  'hr_element_entry_line',
+  'hr_element_entry_tpl_header',
+  'hr_element_entry_tpl_line',
+  'hr_job',
+  'hr_leave_type',
+  'hr_payroll',
+  'hr_payroll_payment_method',
+  'hr_payroll_schedule',
+  'hr_position',
+  'hr_position_hierarchy_header',
+  'hr_position_hierarchy_line',
+  'inventory',
+  'item_status',
+  'legal',
+  'mdm_tax_code',
+  'mdm_tax_region',
+  'mdm_tax_rule',
+  'org',
+  'payment_term',
+  'payment_term_discount',
+  'payment_term_schedule',
+  'po_purchasing_control',
+  'po_header',
+  'role_path',
+  'sd_shipping_control',
+  'sys_document_sequence',
+  'sys_extra_field',
+  'sys_extra_field_instance',
+  'sys_hold_reference',
+  'sys_notification_group',
+  'wip_control',
+  'fp_planning_control',
+  'sd_document_type',
+  'am_activity_reference',
+  'am_asset',
+  'ar_customer',
+  'ar_customer_bu',
+  'ar_customer_site',
+  'bom_commonbom_line',
+  'bom_config_header',
+  'bom_config_line',
+  'bom_header',
+  'bom_line',
+  'bom_routing_detail',
+  'bom_routing_header',
+  'bom_routing_line',
+  'bom_standard_operation',
+  'bom_standard_operation_resource_assignment',
+  'common_bom_line',
+  'cst_item_cost_header',
+  'cst_item_cost_line',
+  'cst_item_cost_line_pre',
+  'ext_test_case_header',
+  'ext_test_case_line',
+  'fa_asset',
+  'fa_asset_assignment',
+  'fa_asset_book',
+  'fa_asset_book_info',
+  'fa_asset_category',
+  'fa_book_category_association',
+  'fa_depreciation_method',
+  'fa_depreciation_method_rate',
+  'fp_forecast_group',
+  'fp_forecast_header',
+  'fp_mds_header',
+  'fp_mrp_header',
+  'gl_balance',
+  'gl_currency_conversion',
+  'hr_employee',
+  'hr_employee_education',
+  'hr_employee_experience',
+  'hr_employee_termination',
+  'hr_leave_balance',
+  'hr_leave_entitlement_header',
+  'hr_leave_entitlement_line',
+  'hr_leave_transaction',
+  'hr_payslip_header',
+  'hr_payslip_line',
+  'hr_team_header',
+  'hr_team_line',
+  'inv_abc_assignment_header',
+  'inv_abc_assignment_line',
+  'inv_abc_valuation',
+  'inv_abc_valuation_result',
+  'inv_item_revision',
+  'inv_location_default',
+  'item',
+  'locator',
+  'mdm_bank_account',
+  'mdm_bank_header',
+  'mdm_bank_site',
+  'mdm_price_list_header',
+  'mdm_price_list_line',
+  'po_asl_document',
+  'po_requisition_header',
+  'po_quote_header',
+  'po_asl_header',
+  'po_asl_line',
+  'po_sourcing_rule_header',
+  'po_sourcing_rule_line',
+  'pos_barcode_list_header',
+  'pos_barcode_list_line',
+  'pos_inv_control',
+  'sd_document_relation',
+  'sd_sales_control',
+  'sd_store',
+  'sd_store_subinventory',
+  'subinventory',
+  'supplier',
+  'supplier_bu',
+  'supplier_site',
+  'sys_printer',
+  'sys_secondary_field',
+  'sys_secondary_field_instance',
+  'user_dashboard_config',
+  'user_group',
+  'user_group_access',
+  'wip_accounting_group'
+  ];
  public $pageTitle = " inoFrom - All Forms "; //page Title
  public $option_lists = [
 //		 'supplier_type' => 'SUPPLIER_TYPE',
@@ -370,17 +529,17 @@ EOD;
 
  public function l_text_field_d_withSearch($field_name, $div_class = "") {
   global $readonly, $class, $$class;
-  $search_class = ucwords('Search '.  str_replace('_', ' ', $class));
+  $search_class = ucwords('Search ' . str_replace('_', ' ', $class));
   $search_class_gt = gettext($search_class);
   echo '<label class="big_popover"><a href="#" id="big_popover" ><i class="fa fa-search  clickable" 
       title="Click here to open the serch form" data-toggle="tooltip" ></i></a>
-         <div id="popover-head" class="hide">'.$search_class_gt.
-   '<i title="Click Here To Make This Element Draggable"  class="fa fa-arrows medium small-left-padding make-draggable large-text clickable ">
+         <div id="popover-head" class="hide">' . $search_class_gt .
+  '<i title="Click Here To Make This Element Draggable"  class="fa fa-arrows medium small-left-padding make-draggable large-text clickable ">
     </i> <span  class="close_big_popover f-right medium large-text clickable" aria-hidden="true" title="Close This Window">&times;</span></div>
          <div id="popover-content" class="hide"><div id="search-popover">';
   $class_o = $class;
   $$class_o = $$class;
-  include HOME_DIR . '\popover_select.php';
+  include __DIR__ . '/../../popover_select.php';
   $class = $class_o;
   $$class = $$class_o;
   echo '</div></div>';
@@ -388,20 +547,19 @@ EOD;
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class);
  }
 
-
  public function l_text_field_dr_withSearch($field_name, $div_class = "") {
   global $readonly, $class, $$class;
-   $search_class = ucwords('Search '.  str_replace('_', ' ', $class));
+  $search_class = ucwords('Search ' . str_replace('_', ' ', $class));
   $search_class_gt = gettext($search_class);
   echo '<label class="big_popover"><a href="#" id="big_popover" ><i class="fa fa-search  clickable" 
       title="Click here to open the serch form" data-toggle="tooltip" ></i></a>
-         <div id="popover-head" class="hide">'.$search_class_gt.
-   '<i title="Click Here To Make This Element Draggable" class="fa fa-arrows small-left-padding make-draggable medium large-text clickable ">
+         <div id="popover-head" class="hide">' . $search_class_gt .
+  '<i title="Click Here To Make This Element Draggable" class="fa fa-arrows small-left-padding make-draggable medium large-text clickable ">
     </i> <span  class="close_big_popover f-right medium large-text clickable" aria-hidden="true"  title="Close This Window">&times;</span></div>
          <div id="popover-content" class="hide"><div id="search-popover">';
   $class_o = $class;
   $$class_o = $$class;
-  include HOME_DIR . '\popover_select.php';
+  include __DIR__ . '/../../popover_select.php';
   $class = $class_o;
   $$class = $$class_o;
   echo '</div></div>';
@@ -887,7 +1045,7 @@ EOD;
  public function ac_field_d3($field_name, $div_class = '', $ac_type = '') {
   global $class_third, $$class_third;
   $ac_d = $this->_get_account($$class_third->$field_name);
-   echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", '', $this->readonly3, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", '', $this->readonly3, $ac_type, '', $ac_d->description);
  }
 
  public function ac_field_d3m($field_name, $div_class = '', $ac_type = '') {
@@ -1133,12 +1291,12 @@ EOD;
   echo $this->date_field($name, $value, '20', '', 'anyDate', '', 1);
  }
 
-  public function l_date_fieldAnyDay_m($name, $value, $div_class = '') {
+ public function l_date_fieldAnyDay_m($name, $value, $div_class = '') {
   $div_class = $div_class . ' anyDate';
   echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->date_field($name, $value, '20', '', 'anyDate', 1);
  }
- 
+
  public function date_fieldAnyDay_r($name, $value, $readonly) {
   return $this->date_field($name, $value, '20', '', 'anyDate', '', $readonly);
  }
@@ -1529,8 +1687,8 @@ EOD;
   echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->status_field($$class->$field_name, $this->readonly);
  }
- 
-  public function l_status_field_dr($field_name) {
+
+ public function l_status_field_dr($field_name) {
   global $readonly, $class, $$class;
   echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->status_field($$class->$field_name, 1);

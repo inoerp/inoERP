@@ -116,6 +116,12 @@ $(document).ready(function () {
  if (!($('.shipment_number:first').val())) {
   $('.shipment_number:first').val('1');
  }
+ 
+ $('body').off('change','#action').on('change','#action', function(){
+  if($(this).val() == 'CONVERT_SO'){
+   $('#bu_org_id').prop('disabled', false).prop('required', true);
+  }
+ });
 
  //get tax code
  $('#content').off('change', '.shipping_org_id').on('change', '.shipping_org_id', function () {

@@ -31,7 +31,17 @@ if ((!empty($_GET['delete'])) && ($_GET['delete'] == 1)) {
 
 if (empty($_POST)) {
  try {
-//  $mode = !empty($mode) ? $mode : 2;
+
+//     if(in_array($class, inoform::$docs_notAllowd_inDirectWebForm) && ($verify_web_form_allowed)){
+//    $access_denied_msg = ('You can\'t open this page directly from webfrom. Please use the navigator');
+//   }
+   
+  if (!in_array('ADMIN', $_SESSION['user_roles'])) {
+   if(in_array($class, inoform::$docs_notAllowd_inDirectWebForm) && ($verify_web_form_allowed)){
+    $access_denied_msg = ('You can\'t open this page directly from webfrom. Please use the navigator');
+   }
+  }
+
   if ($continue) {
    if (!empty($_GET['window_type']) && $_GET['window_type'] == 'popup') {
     include_once(THEME_DIR . '/popup_main_template.inc');

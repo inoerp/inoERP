@@ -1489,10 +1489,13 @@ ul.add_new_search li, ul.tabMain li{
   opacity: 0;
 }
 
-.input_file{
-        width: 200px;
-        font-weight: bold !important;
+#comment_attachments{
+        width: 140px;
+}
 
+.input_file {
+    width: 140px;
+    font-weight: bold !important;
 }
 
 .submit_comment{

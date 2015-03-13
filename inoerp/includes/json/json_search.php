@@ -143,13 +143,13 @@ if (!empty($_GET['class_name'])) {
   }
  } else {
   //validate organization access where applicable
-  if (property_exists($$class, 'bu_org_id')) {
+  if (property_exists($$class, 'bu_org_id') && in_array('bu_org_id', $$class->field_a)) {
    if (empty($_SESSION['user_org_access'])) {
     $no_organization_access = true;
     return;
    }
    $all_orgs_in_cls = "bu_org_id IN ('" . implode("','", array_keys($_SESSION['user_org_access'])) . "')  ||  bu_org_id IS NULL ";
-  } else if (property_exists($$class, 'org_id')) {
+  } else if (property_exists($$class, 'org_id') && in_array('org_id', $$class->field_a)) {
    if (empty($_SESSION['user_org_access'])) {
     $no_organization_access = true;
     return;
@@ -207,7 +207,7 @@ if (!empty($_GET['class_name'])) {
     $all_download_sql .= ' ORDER BY ' . $search_order_by . ' ' . $search_asc_desc;
    }
   }
-echo $count_sql;
+
   $total_count = $class::count_all_by_sql($count_sql);
   $total_count_all = $class::count_all_by_sql($count_sql_all_records);
 
@@ -217,7 +217,7 @@ echo $count_sql;
    $sql .=" LIMIT {$per_page} ";
    $sql .=" OFFSET {$pagination->offset()}";
   }
-  echo "<br><br><br> sql is $sql";
+//  echo "<br><br><br> sql is $sql";
   $search_result = $class::find_by_sql($sql);
 //  pa($search_result);
  }

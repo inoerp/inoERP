@@ -40,7 +40,11 @@
   echo '</ul>';
  }
 
- if (!empty($template_file_names)) {
+ if (!empty($access_denied_msg)) {
+  echo '<div id="structure">';
+  echo ino_access_denied($access_denied_msg);
+  echo '</div>';
+ } else if (!empty($template_file_names)) {
   echo '<div id="structure">';
   foreach ($template_file_names as $key => $tmpl_file) {
    include_once $tmpl_file;

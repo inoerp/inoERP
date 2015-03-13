@@ -19,7 +19,7 @@ if (!empty($_GET['search_class_name'])) {
  $class_names = $_GET['class_name'];
  $pageTitle = " $class_names - Select value of $class_names ";
 } else {
- $access_deined = 1;
+ $access_denied_msg = 'In correct class defination/election. Error @ multi_select @@ line '.__LINE__;
 }
 
 

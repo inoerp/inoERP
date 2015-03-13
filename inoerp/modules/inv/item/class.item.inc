@@ -221,7 +221,7 @@ class item extends dbObject {
   "inventory_asset_cb",
   "build_in_wip_cb",
   "item_number",
-   'am_asset_type',
+  'am_asset_type',
  ];
  public $column = [
   'item_id',
@@ -439,6 +439,7 @@ class item extends dbObject {
  private $_effective_start_date = false;
  private $_origination_date = false;
  private $_implementation_date = false;
+ public $template_item_id;
 
  Public static function product_line() {
   $option_header = option_header::find_by_name('INV_ITEM_PRODUCT_LINE');
@@ -607,7 +608,7 @@ class item extends dbObject {
   $sql .= self::$table_name;
   $sql .= " WHERE item_id_m = '{$item_id}' AND org_id = '{$org_id}'  LIMIT 1";
   $result = self::find_by_sql($sql);
-    return !empty($result) ? array_pop($result) : false;
+  return !empty($result) ? array_pop($result) : false;
  }
 
  public static function find_item_number_by_item_number($item_number) {
@@ -999,14 +1000,20 @@ class item extends dbObject {
   }
   if (!empty($options)) {
    foreach ($options as $key => $val) {
-    $sql .= " AND $key  = '{$val}' ";
+    if (!empty($val)) {
+     $sql .= " AND $key  = '{$val}' ";
+    }
    }
   }
+
   $result = self::find_by_sql($sql);
 
-  foreach ($result as &$obj) {
-   $obj->label = $obj->item_number;
+  if (!empty($result)) {
+   foreach ($result as &$obj) {
+    $obj->label = $obj->item_number;
+   }
   }
+
   return $result;
  }
 

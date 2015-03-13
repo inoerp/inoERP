@@ -60,12 +60,13 @@
 
   <?php
   if ($si->maintenance_cb == 1) {
-   echo "<div class='error'>Site is under maintenance mode </div>";
+   echo ino_access_denied('Site is under maintenance mode');
+   return;
   }
 
-  if (!empty($access_deined)) {
-   exit("Access denied ! <br> $msg <input action='action' class='button' type='button' value='Go Back' onclick='history.go(-1);
-       ' />");
+  if (!empty($access_denied_msg)) {
+   echo ino_access_denied($access_denied_msg);
+   return;
   }
   ?>
 

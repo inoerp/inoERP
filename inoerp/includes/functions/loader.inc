@@ -6,6 +6,8 @@ $write_access = false;
 $update_access = false;
 $access_level = null;
 $no_organization_access = false;
+$access_denied_msg = null;
+$verify_web_form_allowed = true;
 
 if (empty($mode)) {
  if (!empty($_GET['mode'])) {
@@ -211,6 +213,7 @@ if (($continue) && (!empty($class_names))) {
    $class_id = property_exists($class, 'primary_column') ? $class::$primary_column : $class_id = $class . '_id';
    if (!empty($_GET[$class_id])) {
     $class_id_value = $_GET[$class_id];
+    $verify_web_form_allowed = false;
    } else {
 //     pa($_SESSION);
     $class_id_value = null;

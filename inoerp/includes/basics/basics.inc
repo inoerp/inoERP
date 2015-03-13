@@ -155,6 +155,7 @@ require_once(INC_MODULE . DS . "fa" . DS . "depreciation" . DS . "class_fa_depre
 require_once(INC_MODULE . DS . "fa" . DS . "depreciation" . DS . "class_fa_depreciation_line.inc");
 require_once(INC_MODULE . DS . "am" . DS . "asset" . DS . "class_am_asset.inc");
 require_once(INC_MODULE . DS . "am" . DS . "asset" . DS . "class_am_activity_reference.inc");
+require_once(INC_MODULE . DS . "am" . DS . "asset_activity" . DS . "class_am_asset_activity.inc");
 require_once(INC_PO . DS . "class_po_header.inc");
 require_once(INC_PO . DS . "class_po_line.inc");
 require_once(INC_PO . DS . "class_po_detail.inc");
@@ -384,7 +385,7 @@ require_once(INC_EXTENSIONS . DS . "site_search" . DS . "class_extn_site_search.
 require_once(INC_EXTENSIONS . DS . "test_case" . DS . "class_ext_test_case_header.inc");
 require_once(INC_EXTENSIONS . DS . "test_case" . DS . "class_ext_test_case_line.inc");
 
- require_once __DIR__.'/../../locale/gettext.inc';
+require_once __DIR__.'/../../locale/gettext.inc';
 $locale = (isset($_SESSION['lang'])) ? $_SESSION['lang'] : DEFAULT_LOCALE;
 $encoding = 'UTF-8';
 T_setlocale(LC_MESSAGES, $locale);

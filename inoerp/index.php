@@ -90,63 +90,63 @@ include_once("includes/functions/loader.inc");
   <div id="topbar" class="clearfix ">
    <div class="container">
     <div class="row">
-    <?php
-    if ($showBlock) {
-     echo '<div id = "header_top" class = "clear"></div>';
-    }
-    ?>
-    <div class="col-lg-4 col-md-4 col-sm-4">
      <?php
-     $show_header_links = true;
-     if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
-      if (empty($current_page_path)) {
-       $current_page_path = thisPage_url();
-      }
-      $f->form_button_withImage($current_page_path);
-      $show_header_links = false;
+     if ($showBlock) {
+      echo '<div id = "header_top" class = "clear"></div>';
      }
      ?>
-     <?php if ($show_header_links) { ?>
-      <div class="social-icons">
-       <span><a class="fa fa-dashboard clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
-      </div><!-- end social icons -->
-     <?php } ?>
-
-    </div><!-- end columns -->
-
-    <div class="col-lg-8 col-md-8 col-sm-8 ">
-     <div class="topmenu">
-      <div class="topbar-login">
-       <?php if (!empty($_SESSION['login_status'])) { ?>
-        <div class="dropdown">
-         <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="fa fa-user"> </i><?php echo ' ' . ucfirst($_SESSION['username']); ?>
-          <span class="caret"></span></button>
-         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-          <!--<li role="presentation" class="dropdown-header">Dropdown header 1</li>-->
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL; ?>"><i class="fa fa-home"></i> Home</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user&mode=9&user_id=' . $_SESSION['user_id']; ?>"> My Details</a></li>
-          <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-tasks"></i> Activities</a></li>
-          <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'search.php?class_name=sys_notification_user'; ?>"><i class="fa fa-bell-slash-o"></i> Notification</a></li>
-          <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-          <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-cog"></i> Configure</a></li>
-          <li role="presentation" class="divider"></li>
-          <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'extensions/user/user_logout.php'; ?>"><i class="fa fa-sign-out"></i> LogOut</a></li>
-         </ul>
-        </div>
-
-        <?php
-       } else {
-        include_once 'extensions/user/popup_login/user_popup_login_template.php';
+     <div class="col-lg-4 col-md-4 col-sm-4">
+      <?php
+      $show_header_links = true;
+      if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
+       if (empty($current_page_path)) {
+        $current_page_path = thisPage_url();
        }
-       ?>
-      </div>
+       $f->form_button_withImage($current_page_path);
+       $show_header_links = false;
+      }
+      ?>
+      <?php if ($show_header_links) { ?>
+       <div class="social-icons">
+        <span><a class="fa fa-dashboard clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
+       </div><!-- end social icons -->
+      <?php } ?>
 
-     </div><!-- end top menu -->
-     <div class="callus">
-      <span class="topbar-email"><i class="fa fa-envelope"></i> <a href="<?php echo HOME_URL . 'content.php?mode=9&content_type=web_contact' ?>"><?php echo!empty($si->email) ? $si->email : 'contact@site.org' ?></a></span>
-      <span class="topbar-phone"><i class="fa fa-phone"></i> <a href="#"><?php echo!empty($si->phone_no) ? $si->phone_no : '1-111-1111' ?></a></span>
-     </div><!-- end callus -->
-    </div><!-- end columns -->
+     </div><!-- end columns -->
+
+     <div class="col-lg-8 col-md-8 col-sm-8 ">
+      <div class="topmenu">
+       <div class="topbar-login">
+        <?php if (!empty($_SESSION['login_status'])) { ?>
+         <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="fa fa-user"> </i><?php echo ' ' . ucfirst($_SESSION['username']); ?>
+           <span class="caret"></span></button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+           <!--<li role="presentation" class="dropdown-header">Dropdown header 1</li>-->
+           <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL; ?>"><i class="fa fa-home"></i> Home</a></li>
+           <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user&mode=9&user_id=' . $_SESSION['user_id']; ?>"> My Details</a></li>
+           <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-tasks"></i> Activities</a></li>
+           <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'search.php?class_name=sys_notification_user'; ?>"><i class="fa fa-bell-slash-o"></i> Notification</a></li>
+           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-cog"></i> Configure</a></li>
+           <li role="presentation" class="divider"></li>
+           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'extensions/user/user_logout.php'; ?>"><i class="fa fa-sign-out"></i> LogOut</a></li>
+          </ul>
+         </div>
+
+         <?php
+        } else {
+         include_once 'extensions/user/popup_login/user_popup_login_template.php';
+        }
+        ?>
+       </div>
+
+      </div><!-- end top menu -->
+      <div class="callus">
+       <span class="topbar-email"><i class="fa fa-envelope"></i> <a href="<?php echo HOME_URL . 'content.php?mode=9&content_type=web_contact' ?>"><?php echo!empty($si->email) ? $si->email : 'contact@site.org' ?></a></span>
+       <span class="topbar-phone"><i class="fa fa-phone"></i> <a href="#"><?php echo!empty($si->phone_no) ? $si->phone_no : '1-111-1111' ?></a></span>
+      </div><!-- end callus -->
+     </div><!-- end columns -->
     </div>
    </div><!-- end container -->
   </div><!-- end topbar -->
@@ -191,12 +191,13 @@ include_once("includes/functions/loader.inc");
 
   <?php
   if ($si->maintenance_cb == 1) {
-   echo "<div class='error'>Site is under maintenance mode </div>";
+   echo ino_access_denied('Site is under maintenance mode');
+   return;
   }
 
-  if (!empty($access_deined)) {
-   exit("Access denied ! <br> $msg <input action='action' class='button' type='button' value='Go Back' onclick='history.go(-1);
-       ' />");
+  if (!empty($access_denied_msg)) {
+   echo ino_access_denied($access_denied_msg);
+   return;
   }
   ?>
   <!-- end grey-wrapper -->

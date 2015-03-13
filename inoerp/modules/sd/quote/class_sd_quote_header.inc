@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -7,6 +8,7 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
+
 /**
  * sd_quote_header
  * Contains all the sd_quote_header information, such as - quote_number, sd_lead_id, customer info, etc
@@ -20,7 +22,7 @@ class sd_quote_header extends dbObject {
  public static $primary_column2 = "quote_number";
  public static $key_column = 'ar_customer_id';
  public static $module = "sd";
-    public static $system_info = [
+ public static $system_info = [
   'name' => 'Sales Quote',
   'number' => '2303',
   'description' => 'Create & Mainten Sales Quote',
@@ -220,11 +222,25 @@ class sd_quote_header extends dbObject {
  public function _after_save() {
   if ((!empty($this->sd_quote_header_id)) && empty($this->quote_number)) {
    $sd_quote_header_id = $this->sd_quote_header_id;
-   $quote_number =  $sd_quote_header_id;
+   $quote_number = $sd_quote_header_id;
    $this->quote_number = $quote_number;
    echo '<br/> New Quote number is ' . $quote_number;
-    $this->update_soNumber();
+   $this->update_soNumber();
   }
+  if ((!empty($this->sd_quote_header_id)) && ($this->action = 'CONVERT_SO')) {
+   if (empty($this->bu_org_id)) {
+    echo gettext('No business organization found. Please enter a business org name in the quote');
+   } else if (in_array($this->status, ['ENTERED', 'OPEN'])) {
+    //Conevrt to SO
+    $this->_convert_to_so();
+   } else {
+    echo gettext('Quote Status Error. You cannot convert quote in the current status to a sales order');
+   }
+  }
+ }
+ 
+ private function _convert_to_so(){
+  //pending
  }
 
  private function update_soNumber() {

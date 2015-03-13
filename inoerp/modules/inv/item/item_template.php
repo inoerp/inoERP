@@ -131,7 +131,8 @@
       <ul class="column four_column">
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_template select_popup clickable">
          <?php echo gettext('Item/Template') ?>: </label><input type="text" class="text_field select_item_template item_template" id="item_template">
-        <button class="button non_clickable apply_item_template " id="apply_item_template">Apply</button>
+         <?php $f = new inoform();  echo $f->hidden_field_withId('template_item_id', '') ?>
+        <button class="button non_clickable apply_item_template btn btn-warning" id="apply_item_template">Apply</button>
        </li>
       </ul>
      </div>
