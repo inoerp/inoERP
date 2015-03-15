@@ -472,5 +472,11 @@ $('table.view th').find('img').hide();
    return $("#popover-content").html();
   }
  });
+ 
+ $('.small_popover').popover({
+  html : true,
+  trigger : 'hover'
+  
+});
   
 });

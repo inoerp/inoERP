@@ -33,7 +33,7 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
    className: form_header},
   type: 'post',
   beforeSend: function () {
-   
+
   },
   complete: function () {
   }
@@ -69,7 +69,7 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
   }
   if (savingOnlyHeader) {
    $('#overlay').css('display', 'none');
-    $('#form_top_image').css('display', 'block');
+   $('#form_top_image').css('display', 'block');
   }
 
  }).fail(function (error, textStatus, xhr) {
@@ -293,7 +293,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
   }
 
 
-  var headerData = $(form_header_id_h +' :input').not('.search, .text_search').serializeArray();
+  var headerData = $(form_header_id_h + ' :input').not('.search, .text_search').serializeArray();
   if (savingOnlyHeader) {
    savingOnlyHeader = true;
   } else if (($('#form_line').html()) && ($(primary_column_id_h).val()) && ($(line_key_field_d).val())) {
@@ -423,8 +423,10 @@ saveMainClass.prototype.saveMain = function (beforeSave)
       } else {
        detailData = "";
       }
-//      alert('400');
-      saveLine(json_url, lineData, trclass, detailData, primary_column_id_h, lineClassName, detailClassName);
+      if (lineData.length > 1) {
+       saveLine(json_url, lineData, trclass, detailData, primary_column_id_h, lineClassName, detailClassName);
+      }
+
      });
     } else {
 //for forms without tabs @ line level - Options - savetype4b
@@ -1163,7 +1165,7 @@ mandatoryFieldMain.prototype.mandatoryHeader = function ()
    var header_id_h = '#' + header_id;
    var header_id_c = '.' + header_id;
    if (!$(header_id_h).val()) {
-    if (confirm('Header data is not saved : Do you want to save the header')){
+    if (confirm('Header data is not saved : Do you want to save the header')) {
      $('#save').trigger('click');
     }
    } else {

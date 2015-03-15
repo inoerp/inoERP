@@ -31,7 +31,7 @@ inoERP
          <?php echo gettext('Customer Name') ?></label><?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
        <li><label class="auto_complete"><?php echo gettext('Customer Number') ?></label><?php $f->text_field_d('customer_number'); ?></li>
        <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
-       <li><?php $f->l_status_field_d('so_status') ?></li>
+       <li><?php $f->l_text_field_dr('so_status') ?></li>
        <li><?php $f->l_checkBox_field_d('rev_enabled_cb'); ?></li> 
        <li><?php $f->l_text_field_d('rev_number'); ?> </li> 
        <li><?php $f->l_text_field_d('sales_person'); ?></li> 

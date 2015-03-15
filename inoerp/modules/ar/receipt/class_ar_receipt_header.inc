@@ -12,7 +12,7 @@
 /**
  * ar_receipt_header
  * Used for generating AR receipt and appling to AR Transactions
-  * 
+ * 
  */
 class ar_receipt_header extends dbObject {
 
@@ -38,7 +38,8 @@ class ar_receipt_header extends dbObject {
  public static $receipt_status_a = [
   'INCOMPLETE' => 'Incomplete',
   'COMPLETE' => 'Complete',
-  'CLOSED' => 'Closed'
+  'CLOSED' => 'Closed',
+  'CANCELLED' => 'Cancelled'
  ];
  public $receipt_action_a = [
   'VIEW_JOURNAL' => 'View Journal',
@@ -48,7 +49,6 @@ class ar_receipt_header extends dbObject {
  public $checkbox = [
 //		 "rev_enabled_cb"
  ];
- 
  public static $receipt_type_a = [
   'MANUAL' => 'Manual',
   'ELECTROINC' => 'Electronic',
@@ -128,7 +128,7 @@ class ar_receipt_header extends dbObject {
  public $requiredField = [
   'bu_org_id',
   'ar_receipt_source_id',
-   'currency',
+  'currency',
   'ledger_id',
   'period_id'
  ];
@@ -145,12 +145,10 @@ class ar_receipt_header extends dbObject {
  public $notUpdatedFromWebForm = [
   'gl_journal_header_id',
  ];
- 
-  public $profile_default = [
+ public $profile_default = [
   'exchange_rate_type' => 'gl_currency_conversion_type',
   'bu_org_id' => 'org_bu_name_default'
  ];
-  
  public $search = [
   '_show_update_path' => 1,
   '_update_action_meassge' => 'Update',
@@ -259,7 +257,7 @@ class ar_receipt_header extends dbObject {
   }
 
   if ((!empty($this->ar_receipt_header_id)) && ($this->receipt_action == 'CANCEL')) {
-   $this->_cancel_transaction();
+   $this->_cancel_receipt();
    return 10;
   }
  }
@@ -279,6 +277,7 @@ class ar_receipt_header extends dbObject {
     $arrh->$value = isset($ar_int_i->$value) ? $ar_int_i->$value : null;
    }
    $arrh->header_amount = $ar_int_i->amount;
+   $arrh->ar_receipt_source_id = 1;
    try {
     $arrh->audit_trial();
     $arrh->save();
@@ -526,9 +525,10 @@ class ar_receipt_header extends dbObject {
   * 3. Update the transaction header & line 
   */
 
- private function _cancel_transaction() {
+ private function _cancel_receipt() {
+  global $dbc;
   if (empty($this->ar_receipt_header_id)) {
-   echo "<br>Cancellation failed!. No transaction header id found.";
+   echo "<br>Cancellation failed!. No receipt header id found.";
   }
   if (!empty($this->gl_journal_header_id)) {
    $gjh = new gl_journal_header();
@@ -540,91 +540,57 @@ class ar_receipt_header extends dbObject {
    try {
     $gjh->_before_save();
    } catch (Exception $e) {
+    $dbc->rollback = 1;
     echo "Journal Reversal Failed!. Error @ class_ar_receipt_header _cancel_transaction" . $e->getMessage();
     return;
    }
   }
 
-  //update PO & invoice
-  try {
-   $this->_cancel_transaction_poInv_lines();
-   try {
-    $this->_cancel_transaction_header();
-   } catch (Exception $e) {
-    echo "PO Header Update Failed!. Error @ class_ar_receipt_header _cancel_transaction" . $e->getMessage();
-    return;
-   }
-  } catch (Exception $e) {
-   echo "PO Detail Update Failed!. Error @ class_ar_receipt_header _cancel_transaction" . $e->getMessage();
-   return;
-  }
+  $this->_cancel_ar_receipt_lines();
+  $this->_cancel_receipt_header();
  }
 
- private function _cancel_transaction_header() {
+ private function _cancel_receipt_header() {
+  global $dbc;
   $new_apth = new ar_receipt_header();
   $new_apth_i = $new_apth->findBy_id($this->ar_receipt_header_id);
-  $new_apth->approval_status = 'CANCELLED';
+  $new_apth->receipt_status = 'CANCELLED';
   $new_apth->header_amount = '0.0';
   $new_apth->ar_receipt_header_id = $new_apth_i->ar_receipt_header_id;
-  $new_apth->audit_trial();
   try {
    $new_apth->save();
   } catch (Exception $e) {
+   $dbc->rollback = 1;
    echo "AR Transaction Lines Update Failed!. Error @ class_ar_receipt_header _transaction_cancell_poInv_lines " . $e->getMessage();
    return;
   }
  }
 
- private function _cancel_transaction_poInv_lines() {
-  $aptl = new ar_receipt_line();
-  $all_lines = $aptl->findBy_parentId($this->ar_receipt_header_id);
+ private function _cancel_ar_receipt_lines() {
+  global $dbc;
+  $aprl = new ar_receipt_line();
+  $all_lines = $aprl->findBy_parentId($this->ar_receipt_header_id);
   foreach ($all_lines as $lines) {
+   $ar_lines = new ar_receipt_line();
+   $ar_lines->findBy_id($lines->ar_receipt_line_id);
 
-   if (!empty($lines->po_detail_id)) {
-    $po_detail = new po_detail();
-    $po_detail_i = $po_detail->findBy_id($lines->po_detail_id);
-    $po_detail->po_detail_id = $po_detail_i->po_detail_id;
-    $po_detail->invoiced_quantity = $po_detail->invoiced_quantity - $lines->inv_line_quantity;
-    $po_detail->audit_trial();
-    try {
-     $po_detail->save();
-    } catch (Exception $e) {
-     echo "PO Details Update Failed!. Error @ class_ar_receipt_header _transaction_cancell_poInv_lines " . $e->getMessage();
-     return;
-    }
-   }
-//update the invlice details
-   $aptd = new ar_receipt_detail();
-   $all_details = $aptd->findBy_parentId($lines->ar_receipt_line_id);
-   foreach ($all_details as $details) {
-    $new_aptd = new ar_receipt_detail();
-    $new_aptd_i = $new_aptd->findBy_id($details->ar_receipt_detail_id);
-    $new_aptd->status = 'Cancelled';
-    $new_aptd->amount = '0.0';
-    $new_aptd->ar_receipt_detail_id = $new_aptd_i->ar_receipt_detail_id;
-    $new_aptd->audit_trial();
-    try {
-     $new_aptd->save();
-    } catch (Exception $e) {
-     echo "AR Transaction Details Update Failed!. Error @ class_ar_receipt_header _transaction_cancell_poInv_lines " . $e->getMessage();
+//update transaction
+   if (!empty($ar_lines->ar_transaction_header_id)) {
+    $arth = new ar_transaction_header();
+    $arth->findBy_id($ar_lines->ar_transaction_header_id);
+    $arth->receipt_amount = $arth->receipt_amount - $ar_lines->amount;
+    if ($arth->receipt_amount >= 0) {
+     $arth->save();
+    } else {
+     $dbc->rollback = 1;
+     echo "<br>Receipt amount is less than Zero (".$arth->receipt_amount .".) Error @ ar_receipt_header @@ line " . ' '  . __LINE__;
      return;
     }
    }
 
-   //update the invoice lines
-   $new_aptl = new ar_receipt_line();
-   $new_aptl_i = $new_aptl->findBy_id($lines->ar_receipt_line_id);
-   $new_aptl->status = 'Cancelled';
-   $new_aptl->inv_line_quantity = '0.0';
-   $new_aptl->inv_line_price = '0.0';
-   $new_aptl->ar_receipt_line_id = $new_aptl_i->ar_receipt_line_id;
-   $new_aptl->audit_trial();
-   try {
-    $new_aptl->save();
-   } catch (Exception $e) {
-    echo "AP Transaction Lines Update Failed!. Error @ class_ar_receipt_header _transaction_cancell_poInv_lines " . $e->getMessage();
-    return;
-   }
+   $ar_lines->amount = $ar_lines->gl_amount = 0;
+   $ar_lines->status = 'CANCELLED';
+   $ar_lines->save();
   }
  }
 

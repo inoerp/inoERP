@@ -102,6 +102,7 @@ class content extends dbObject {
  public $file_id_values;
  public $summary_characters;
  public $content_summary;
+ public $content_full;
  public $content_id;
  public $content_type_id;
  public $parent_id;
@@ -325,10 +326,11 @@ class content extends dbObject {
   $result_a = &$result;
   foreach ($result_a as $cont) {
    $cont_tableName = 'c_' . $cont->content_type;
-   $sql_c = "SELECT SUBSTRING(content,1,$noOfCharacters) AS content_summary " .
+   $sql_c = "SELECT SUBSTRING(content,1,$noOfCharacters) AS content_summary, content " .
     "FROM " . $cont_tableName . " where content_id='{$cont->content_id}' LIMIT 1";
    $result_cont = $this->findBySql($sql_c);
    $cont->content_summary = !empty($result_cont[0]) ? $result_cont[0]->content_summary : '';
+   $cont->content_full = !empty($result_cont[0]) ? $result_cont[0]->content : '';
   }
 
   return $result;
@@ -445,11 +447,11 @@ AND content.content_id = category_reference.reference_id  ";
     $content_string .= substr($records->subject, 0, $this->_subject_noof_char);
     $content_string .= '<span class="more_page">';
     if (!empty($records->alias)) {
-     $link_read =   HOME_URL . "content/$records->alias";
+     $link_read = HOME_URL . "content/$records->alias";
     } else {
-     $link_read =   HOME_URL . 'content.php?mode=2&'. 'content_id=' . $records->content_id . '&content_type_id=' . $records->content_type_id;
+     $link_read = HOME_URL . 'content.php?mode=2&' . 'content_id=' . $records->content_id . '&content_type_id=' . $records->content_type_id;
     }
-    
+
     $content_string .= '<a href="' . htmlspecialchars($link_read) . '">';
     $content_string .= 'Read More.. </a>';
     $content_string .= '</span>';
@@ -489,10 +491,10 @@ AND content.content_id = category_reference.reference_id  ";
    if (count($content_result) > 0) {
     $content_string .='<table id="content_list" class="table table-striped table-hover"><thead> 
 						 <tr class="headerBgColor">
+             <th class="post_date">Replies</th>
 							<th class="topics">Subject</th>
 							<th class="created_by">Created By</th>
 							<th class="post_date">Post Date</th>
-              <th class="post_date">Comments</th>
 						 </tr>
 						</thead>';
     foreach ($content_result as $recod_c_k => $recod_c) {
@@ -505,12 +507,21 @@ AND content.content_id = category_reference.reference_id  ";
      }
      $even_odd = ($con_count % 2 == 0) ? 'even' : 'odd';
      $user_name = empty($recod_c->username) ? 'Anonymous\SelfWeb' : $recod_c->username;
-     $content_string .= "<tr id=\"row_no$con_count\" class='new_row $even_odd'> "
-      . " <td class='content_summary'>";
-     if (!empty($recod_c->alias)) {
-      $content_string .= '<a href="' . HOME_URL . "content/$recod_c->alias" . '">';
+     $content_string .= "<tr id=\"row_no$con_count\" class='new_row $even_odd'> ";
+     $content_string .= '<td class="no_of_comments"><b>';
+     $content_string .= '<span class="vs-right-margin">' . $recod_c->no_of_comments . '</span>';
+     if (!empty($recod_c->no_of_comments)) {
+      $content_string .= "&nbsp;&nbsp;<i class='fa fa-comments-o'></i></b>";
      } else {
-      $content_string .= '<a href="' . HOME_URL . 'content.php?mode=2&'
+      $content_string .= "&nbsp;&nbsp;<i class='fa fa-circle-o' title='No Replies'></i></b>";
+     }
+     $content_string .= '</td>';
+     $content_string .= "<td class='content_summary'>";
+     $content_string .= '<a class="small_popover" data-placement="right"  data-toggle="popover"  data-content="' . strip_tags($recod_c->content_full).'"';
+     if (!empty($recod_c->alias)) {
+      $content_string .= ' href="' . HOME_URL . "content/$recod_c->alias" . '">';
+     } else {
+      $content_string .= ' href="' . HOME_URL . 'content.php?mode=2&'
        . 'content_id=' . $recod_c->content_id . '&content_type_id=' . $recod_c->content_type_id . '">';
      }
      if (!empty($recod_c->subject)) {
@@ -523,9 +534,7 @@ AND content.content_id = category_reference.reference_id  ";
      $content_string .= '<td class="created_by">';
      $content_string .= $user_name;
      $content_string .= '</td><td class="post_date">';
-     $content_string .= $recod_c->creation_date;
-     $content_string .= '</td><td class="no_of_comments">';
-     $content_string .= $recod_c->no_of_comments;
+     $content_string .= date('F j, Y', strtotime($recod_c->creation_date));
      $content_string .= '</td>';
      $content_string .= '</tr>';
      $con_count++;

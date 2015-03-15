@@ -23,7 +23,7 @@ inoERP
        <a name="show" href="form.php?class_name=sd_delivery_header&<?php echo "mode=$mode"; ?>" class="show document_id sd_delivery_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
       <li><?php $f->l_select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', $$class->shipping_org_id, '', '', 1, $readonly1); ?>       </li>
-      <li><?php $f->l_number_field('delivery_number', $$class->delivery_number); ?></li>
+      <li><?php $f->l_text_field_d('delivery_number'); ?></li>
       <li><?php $f->l_select_field_from_array('status', sd_delivery_header::$status_a, $$class->status, '', '', 1, 1, 1) ?>       </li>
       <li><?php $f->l_date_fieldFromToday('delivery_date', ino_date($$class->delivery_date)); ?></li>
      </ul>

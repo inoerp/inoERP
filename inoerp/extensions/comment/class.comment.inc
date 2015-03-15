@@ -271,7 +271,7 @@ class comment extends dbObject {
  public function view_page() {
   $pageno = !empty($_GET['pageno']) ? $_GET['pageno'] : 1;
   $per_page = !empty($_GET['per_page']) ? $_GET['per_page'] : 20;
-  $this->subject_noof_char = empty($this->subject_noof_char) ? 300 : $this->subject_noof_char;
+  $this->subject_noof_char = empty($this->subject_noof_char) ? 100 : $this->subject_noof_char;
   $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
   $comment_result = $this->content_comment_with_reference();
   $total_count_c = count($comment_result);
@@ -291,7 +291,7 @@ class comment extends dbObject {
 						</thead>';
     foreach ($comment_result as $recod_c_k => $recod_c) {
      $continue_act1 = true;
-     if (($recod_c_k > ($pageno - 1) * $per_page) && ($recod_c_k <= (($pageno - 1) * $per_page) + $per_page)) {
+     if (($recod_c_k >= ($pageno - 1) * $per_page) && ($recod_c_k <= (($pageno - 1) * $per_page) + $per_page)) {
       $continue_act1 = false;
      }
      if ($continue_act1) {
@@ -303,11 +303,8 @@ class comment extends dbObject {
       . " <td class='subject_summary'>";
      $comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&'
       . 'content_id=' . $recod_c->reference_id . '&content_type_id=' . $recod_c->content_type_id .'#comment_id_' .$recod_c->comment_id .'">';
-     if (!empty($recod_c->subject)) {
-      $comment_string .= substr(strip_tags($recod_c->subject), 0, $this->subject_noof_char);
-     } else {
-      $comment_string .= substr(strip_tags($recod_c->comment), 0, $this->subject_noof_char);
-     }
+     $comment_string .= "<i class='fa fa-comment'></i> &nbsp;";
+     $comment_string .= substr(strip_tags($recod_c->comment), 0, $this->subject_noof_char);
      $comment_string .= ' </a>';
      $comment_string .= '</td>';
      $comment_string .= '<td class="created_by">';

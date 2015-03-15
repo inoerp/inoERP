@@ -3772,7 +3772,11 @@ $(document).ready(function () {
   var class_name = $('.class_name').val();
   var homeUrl = $('#home_url').val();
   var savePath = homeUrl + 'program.php?class_name=' + class_name;
-  saveHeader(savePath, headerData, '#sys_program', '', '', true, 'program_header');
+  $.when(saveHeader(savePath, headerData, '#sys_program', '', '', true, 'program_header')).then(function(){
+   $('.show_loading_small').hide();
+  });
+  
+  
  });
 
  //FILE attachment
@@ -4133,6 +4137,11 @@ $(document).ready(function () {
   $(this).attr('readonly', true).css('background-color', 'none repeat scroll 0% 0% #F3F3D2;');
   alert(readonly_field);
  });
+
+$('.small_popover').popover({
+  html : true,
+  trigger : 'hover'
+  });
 
 });
 function toUpperCase(str)

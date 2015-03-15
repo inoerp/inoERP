@@ -172,6 +172,21 @@ $(document).ready(function () {
   $('body').trigger('cash_calculateHeaderAmount');
  });
 
+
+
+$('body').off('chage','#receipt_action').on('blur','#receipt_action', function(){
+  if($(this).val() === 'CANCEL'){
+    if(confirm('Do you really want to cancel this receipt?')){
+    $('#form_line :input').prop('disabled', true);
+      $(this).prop('readonly', true);
+    }else{
+    
+    $(this).val('');
+    }
+
+  }
+})
+
 });
 
 //all actions

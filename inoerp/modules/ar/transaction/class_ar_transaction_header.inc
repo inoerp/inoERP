@@ -1,8 +1,9 @@
 <?php
+
 /**
  * inoERP 
  *
- *Version 0.1.1
+ * Version 0.1.1
  *
  * @copyright 2014 Nishit R. Das
  * @license   https://www.mozilla.org/MPL/2.0/
@@ -16,7 +17,6 @@
  * Contains all the AR Transaction header level information, such as - Customer, Document Type, Currency, Trnx Number
  * 
  */
-
 class ar_transaction_header extends dbObject {
 
  public static $table_name = "ar_transaction_header";
@@ -44,14 +44,12 @@ class ar_transaction_header extends dbObject {
   'COMPLETE' => 'Complete',
   'CLOSED' => 'Closed'
  ];
- 
  public $action_a = [
   'CREATE_RECEIPT' => 'Create Receipt',
   'CREATE_ACCOUNT' => 'Create Accounting',
   'VIEW_JOURNAL' => 'View Journal',
   'CREDIT' => 'Credit Transaction',
   'CANCEL' => 'Cancel Transaction',
-  
  ];
  public $account = [
   'receivable_ac_id'
@@ -534,7 +532,7 @@ class ar_transaction_header extends dbObject {
 
   //update PO & invoice
   try {
-   $this->_cancel_transaction_poInv_lines();
+   $this->_update_so_lines();
    try {
     $this->_cancel_transaction_header();
    } catch (Exception $e) {
@@ -557,27 +555,26 @@ class ar_transaction_header extends dbObject {
   try {
    $new_arth->save();
   } catch (Exception $e) {
-   echo "AP Transaction Lines Update Failed!. Error @ class_ar_transaction_header _transaction_cancell_poInv_lines " . $e->getMessage();
+   echo "AR Transaction Lines Update Failed!. Error @ class_ar_transaction_header _transaction_cancell_poInv_lines " . $e->getMessage();
    return;
   }
  }
 
  //needs to be updated after SD SO
- private function _cancel_transaction_poInv_lines() {
+ private function _update_so_lines() {
+  global $dbc;
   $aptl = new ar_transaction_line();
   $all_lines = $aptl->findBy_parentId($this->ar_transaction_header_id);
   foreach ($all_lines as $lines) {
-
-   if (!empty($lines->om_so_detail_id)) {
-    $om_so_detail = new om_so_detail();
-    $om_so_detail_i = $om_so_detail->findBy_id($lines->om_so_detail_id);
-    $om_so_detail->om_so_detail_id = $om_so_detail_i->om_so_detail_id;
-    $om_so_detail->invoiced_quantity = $om_so_detail->invoiced_quantity - $lines->inv_line_quantity;
-    $om_so_detail->audit_trial();
+   if (!empty($lines->sd_so_line_id)) {
+    $ss_line = new sd_so_line();
+    $ss_line->findBy_id($lines->sd_so_line_id);
+    $ss_line->invoiced_quantity -= $lines->invoiced_quantity;
     try {
-     $om_so_detail->save();
+     $ss_line->save();
     } catch (Exception $e) {
-     echo "PO Details Update Failed!. Error @ class_ar_transaction_header _transaction_cancell_poInv_lines " . $e->getMessage();
+     $dbc->rollback = true;
+     echo "SO Line Update Failed!. Error @ class_ar_transaction_header _update_so_lines @ line" . __LINE__ . $e->getMessage();
      return;
     }
    }

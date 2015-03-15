@@ -1325,7 +1325,10 @@ function next_monday($date_p) {
 }
 
 function convert_to_url($str) {
- return str_replace(' ', '-', trim($str));
+ $string = str_replace(' ', '-', trim($str));
+ $string_1 = preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
+
+ return preg_replace('/-+/', '-', $string_1); // Replaces multiple hyphens with single one.
 }
 
 function searching_tips() {
