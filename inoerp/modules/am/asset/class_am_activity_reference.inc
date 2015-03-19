@@ -19,9 +19,9 @@ class am_activity_reference extends dbObject {
 
  public static $table_name = "am_activity_reference";
  public static $primary_column = "am_activity_reference_id";
- public static $dependent_classes = ['am_activity_reference_activity'];
- public static $key_column = 'activity_reference_number';
- public static $module = "fa";
+ public static $parent_primary_column = "am_asset_id";
+ public static $key_column = 'activity_item_id_m';
+ public static $module = "am";
 // public static $js_fileName = 'modules/inv/am_activity_reference/js/multi_select.js';
  public static $system_info = [
   'name' => 'Activity Reference',
@@ -34,20 +34,18 @@ class am_activity_reference extends dbObject {
   'module_name' => 'am',
   'weight' => 1
  ];
- 
-
  public $checkbox = [
   "physical_inventory_cb"
  ];
  public $field_a = [
   'am_activity_reference_id',
   'am_asset_id',
-  'am_reference_id',
+  'activity_item_id_m',
   'priority',
   'start_date',
   'end_date',
   'description',
-  'cause',
+  'activity_cause',
   'activity_type',
   'accounting_class_id',
   'owning_department_id',
@@ -63,9 +61,10 @@ class am_activity_reference extends dbObject {
  ];
  public $requiredField = [
   'am_asset_id',
-  'am_reference_id',
+  'activity_item_id_m',
  ];
  public $fields_inForm_notInDataBase = [
+  'activity_item_number'
  ];
  public $search = [
   '_show_update_path' => 1,
@@ -75,12 +74,12 @@ class am_activity_reference extends dbObject {
  public $pageTitle = " Asset Maintenance "; //page Title
  public $am_activity_reference_id;
  public $am_asset_id;
- public $am_reference_id;
+ public $activity_item_id_m;
  public $priority;
  public $start_date;
  public $end_date;
  public $description;
- public $cause;
+ public $activity_cause;
  public $activity_type;
  public $accounting_class_id;
  public $owning_department_id;
@@ -90,6 +89,7 @@ class am_activity_reference extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
+ public $activity_item_number;
 
  public function findBy_am_activity_reference_id_m($am_activity_reference_id) {
   $sql = " SELECT * FROM ";

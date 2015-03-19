@@ -10,9 +10,10 @@ inoERP
 
 <div id ="form_header">
  <form action=""  method="post" id="bom_header"  name="bom_header">
-  <span class="heading"><?php echo gettext('BOM Header') ;
-  echo !empty($form_name_header) ?  ' - '. gettext($form_name_header) : ' ';
-  ?></span>
+  <span class="heading"><?php
+   echo gettext('BOM Header');
+   echo!empty($form_name_header) ? ' - ' . gettext($form_name_header) : ' ';
+   ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -25,14 +26,13 @@ inoERP
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $bom_header->org_id, 'org_id', '', '', $readonly); ?>       </li>
-      <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup clickable"><?php 
-      echo gettext('Item Number') ?></label><?php
-        echo $f->hidden_field_withId('bom_header_id', $$class->bom_header_id);
-        echo $f->hidden_field_withId('item_id_m', $$class->item_id_m);
-        echo $f->hidden_field_withCLass('bom_enabled_cb', '1', 'popup_value');
-        echo !empty($hidden_field) ? $hidden_field : '';
-        $f->text_field_dm('item_number', 'select_item_number_all');
-        ?>
+      <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup clickable"><?php echo gettext('Item Number') ?></label><?php
+       echo $f->hidden_field_withId('bom_header_id', $$class->bom_header_id);
+       echo $f->hidden_field_withId('item_id_m', $$class->item_id_m);
+       echo $f->hidden_field_withCLass('bom_enabled_cb', '1', 'popup_value');
+       echo !empty($hidden_field) ? $hidden_field : '';
+       $f->text_field_dm('item_number', 'select_item_number_all');
+       ?>
 
       </li>
       <li><?php $f->l_select_field_from_object('revision_name', $revision_name_a, 'revision_name', array('revision_name', 'effective_start_date'), $revision_name_val, 'revision_name', 'medium', '', '', '', '', '', 'effective_start_date'); ?>
@@ -131,7 +131,7 @@ inoERP
          <td><?php echo!empty($routing_line_details) ? form::select_field_from_object('routing_sequence', $routing_line_details, 'bom_routing_line_id', 'routing_sequence', $$class_second->routing_sequence, '', $readonly, 'usage_basis', '', 1) : form::text_field_wid2sm('routing_sequence'); ?></td>
          <td><?php
           $f->text_field_wid2('component_item_number', 'select_item_number');
-          $f->hidden_field_withCLass('component_item_id_m', $$class_second->component_item_id_m, 'item_id_m');
+          echo $f->hidden_field_withCLass('component_item_id_m', $$class_second->component_item_id_m, 'item_id_m');
           ?><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
          <td><?php
           if (!empty($$class_second->component_item_id_m) && !empty($$class->org_id)) {

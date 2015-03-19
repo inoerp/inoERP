@@ -62,13 +62,6 @@ $(document).ready(function () {
  });
  
  
-  var select_item_number_am_asset_activity_options = {'am_asset_type': 'ASSET_ACTIVITY'};
- $('.select_item_number_am_asset_activity').inoAutoCompleteElement({
-  json_url: 'modules/inv/item/json_item.php',
-  primary_column1: 'org_id',
-  other_options: select_item_number_am_asset_activity_options
- });
- 
  $('body').off('click', 'a.findBy_item_number').on('click', 'a.findBy_item_number', function (e) {
   e.preventDefault();
   var item_number = $('#item_number').val();
@@ -96,8 +89,4 @@ $(document).ready(function () {
   }
  });
 
-
 });
-
-
-

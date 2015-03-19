@@ -19,7 +19,7 @@ class am_maintenance_schedule extends dbObject {
 
  public static $table_name = "am_maintenance_schedule";
  public static $primary_column = "am_maintenance_schedule_id";
- public static $dependent_classes = ['am_activity_reference'];
+ public static $dependent_classes = ['am_ms_activity_reference'];
  public static $key_column = 'schedule_name';
  public static $module = "am";
 // public static $js_fileName = 'modules/inv/am_maintenance_schedule/js/multi_select.js';
@@ -42,6 +42,7 @@ class am_maintenance_schedule extends dbObject {
   'am_maintenance_schedule_id',
   'schedule_name',
   'schedule_number',
+  'item_id_m',
   'am_asset_id',
   'effective_from_date',
   'effective_start_date',
@@ -64,11 +65,11 @@ class am_maintenance_schedule extends dbObject {
  ];
  public $requiredField = [
   'schedule_name',
-  'org_id',
-  'am_asset_id'
+  'org_id'
  ];
  public $fields_inForm_notInDataBase = [
   "am_asset_number",
+  'item_number',
  ];
  public $search = [
   '_show_update_path' => 1,
@@ -79,6 +80,7 @@ class am_maintenance_schedule extends dbObject {
  public $am_maintenance_schedule_id;
  public $schedule_name;
  public $am_asset_id;
+ public $item_id_m;
  public $schedule_number;
  public $effective_from_date;
  public $effective_start_date;
@@ -95,6 +97,8 @@ class am_maintenance_schedule extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
+ public $am_asset_number;
+ public $item_number;
 
  public function findBy_am_maintenance_schedule_id_m($am_maintenance_schedule_id) {
   $sql = " SELECT * FROM ";

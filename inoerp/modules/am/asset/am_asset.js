@@ -5,7 +5,7 @@ function setValFromSelectPage(am_asset_id, asset_number, item_id_m, item_number,
  this.item_id_m = item_id_m;
  this.item_number = item_number;
  this.item_description = item_description;
-  this.address_id = address_id;
+ this.address_id = address_id;
  this.address_name = address_name;
 }
 
@@ -34,21 +34,40 @@ setValFromSelectPage.prototype.setVal = function () {
   $("#address_name").val(this.address_name);
  }
 
- var item_obj = [{id: 'item_id_m', data: this.item_id_m},
-  {id: 'item_number', data: this.item_number},
-  {id: 'item_description', data: this.item_description},
-  {id: 'uom', data: this.uom_id},
-  {id: 'processing_lt', data: this.processing_lt}
- ];
+ if (localStorage.getItem("li_divId")) {
+  var li_divId = '#' + localStorage.getItem("li_divId");
+  var item_obj = [{id: 'item_id_m', data: this.item_id_m},
+   {id: 'item_number', data: this.item_number},
+   {id: 'item_description', data: this.item_description}
+  ];
+  $(item_obj).each(function (i, value) {
+   if (value.data) {
+    var fieldId = '#' + value.id;
+    $('#content').find(fieldId).val(value.data);
+   }
+  });
+ } else {
+  var item_obj = [{id: 'activity_item_id_m', data: this.item_id_m},
+   {id: 'activity_item_number', data: this.item_number}
+  ];
 
-
+  $(item_obj).each(function (i, value) {
+   if (value.data) {
+    var fieldClass = '.' + value.id;
+    $('#content').find(rowClass).find(fieldClass).val(value.data);
+   }
+  });
+ }
  localStorage.removeItem("row_class");
-
+ localStorage.removeItem("field_class");
+ localStorage.removeItem("li_divId");
 };
 
 
 
 $(document).ready(function () {
+ var mandatoryCheck = new mandatoryFieldMain();
+ mandatoryCheck.mandatoryHeader();
 
  //selecting Id
  $(".am_asset_id.select_popup").on("click", function () {
@@ -56,12 +75,6 @@ $(document).ready(function () {
           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- var select_item_number_am_asset_item_options = {'am_asset_type': 'ASSET_ITEM'};
- $('.select_item_number_am_asset_item').inoAutoCompleteElement({
-  json_url: 'modules/inv/item/json_item.php',
-  primary_column1: 'org_id',
-  other_options: select_item_number_am_asset_item_options
- });
 
  //get Subinventory Name
  $('body').off("change", '#org_id').on("change", '#org_id', function () {

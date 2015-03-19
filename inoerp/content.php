@@ -50,7 +50,7 @@ if (($content_privilage >= 6) && ($mode == 9)) {
  include_once(THEME_DIR . '/content_template.inc');
 } else {
  require_once(INC_EXTENSIONS . DS . 'content' . DS . 'view' . DS . "content_view.php");
- echo!empty($breadCrum) ? '<div class="container">' . $breadCrum . '</div>' : false;
+ echo!empty($breadCrum) ?  $breadCrum  : false;
  if ((!empty($content->content_id)) && ($content_type_name)) {
   include_once(THEME_DIR . '/view_content_template.inc');
  } elseif (!empty($non_db_content_type)) {

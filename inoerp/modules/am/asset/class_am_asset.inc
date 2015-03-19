@@ -129,6 +129,9 @@ class am_asset extends dbObject {
   public $item_number;
  public $item_description;
  public $address_name;
+ 
+
+
 
  public function findBy_am_asset_id_m($am_asset_id) {
   $sql = " SELECT * FROM ";

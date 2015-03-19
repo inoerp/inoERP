@@ -1006,7 +1006,7 @@ class item extends dbObject {
    }
   }
 
-  $result = self::find_by_sql($sql);
+    $result = self::find_by_sql($sql);
 
   if (!empty($result)) {
    foreach ($result as &$obj) {

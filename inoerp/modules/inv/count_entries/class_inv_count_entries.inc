@@ -94,7 +94,7 @@
    'action',
    'approval_action'
   ];
-  public $pageTitle = " Count abc_ref  "; //page Title
+  public $pageTitle = " Enter Inventory Count "; //page Title
   public $inv_count_entries_id;
   public $inv_count_schedule_id;
   public $item_id_m;

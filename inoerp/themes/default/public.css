@@ -1498,9 +1498,9 @@ ul.add_new_search li, ul.tabMain li{
     font-weight: bold !important;
 }
 
-.submit_comment{
- margin-left: 250px;
-}
+/*.submit_comment{
+ margin-left: 200px;
+}*/
 
 
 
@@ -1514,4 +1514,16 @@ legend.major{
 
 .vertical-align-top >div{
         vertical-align: top;
+}
+
+#file_upload_form ul li{
+        vertical-align: top;
+}
+
+#file_upload_form .input-group{
+ width: 200px;
+}
+
+.height-unset{
+ height: unset !important;
 }

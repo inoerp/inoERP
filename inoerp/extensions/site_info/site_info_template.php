@@ -43,6 +43,7 @@
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
     <li><a href="#tabsLine-2"><?php echo gettext('Messages') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Hidden Texts') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">
@@ -67,6 +68,17 @@
       <ul class="inRow asperWidth"> 
        <li><label><?php echo gettext('Access Denied Message') ?></label> 
         <textarea required name="footer_message" class="plaintext" rows="8" cols="80"><?php echo htmlentities($$class->access_denied); ?> </textarea>
+       </li> 
+      </ul>
+     </div>
+     <!--                end of tab2 div three_column-->
+    </div>
+
+    <div id="tabsLine-3" class="tabContent">
+     <div class="first_rowset"> 
+      <ul class="inRow asperWidth"> 
+       <li><label><?php echo gettext('Analytics Code') ?></label> 
+        <textarea name="analytics_code" class="plaintext" rows="8" cols="80"><?php echo htmlentities($$class->analytics_code); ?> </textarea>
        </li> 
       </ul>
      </div>

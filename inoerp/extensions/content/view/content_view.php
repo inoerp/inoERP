@@ -20,7 +20,7 @@ if ($childs_of_parent_id_array && (count($childs_of_parent_id_array) > 0)) {
 
 if (!empty($content->parent_id)) {
  $parent_content = content::find_by_id($content->parent_id);
- $parent_of_content = '<a href="content.php?content_type=' . $content_type_name . '&amp;content_id=' . $parent_content->content_id . '"   
+ $parent_of_content = '<a href="'.HOME_URL.'content.php?content_type=' . $content_type_name . '&amp;content_id=' . $parent_content->content_id . '"   
                class="content_subject"> ' . $parent_content->subject . ' </a>';
 }
 //end of parent & child details
@@ -30,9 +30,7 @@ if (!empty($content->parent_id)) {
 if (!empty($category)) {
  $category_statement = "";
  foreach ($category as $object) {
-	$category_statement .= '<a href=' .
-					"\"content.php?content_type=$content_type_name&amp;category_id=$object->category_id\">" .
-					$object->category . '</a> &nbsp; &nbsp; ';
+	$category_statement .= '<a href="'.HOME_URL.'content.php?content_type='.$content_type_name.'&amp;category_id='.$object->category_id.'">'.$object->category . '</a> &nbsp; &nbsp; ';
  }
 }
 

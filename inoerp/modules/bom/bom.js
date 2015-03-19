@@ -13,7 +13,6 @@ setValFromSelectPage.prototype.setVal = function () {
   $("#bom_header_id").val(bom_header_id);
  }
  var row_class = localStorage.getItem("row_class");
- ;
  var rowClass = '.' + row_class;
  rowClass = rowClass.replace(/\s+/g, '.');
 

@@ -157,7 +157,7 @@ function updateComment(comment_id, ulId) {
  }).done(function (result) {
   var div = $(result).filter('div#commentForm').html();
   var ulId_h = '#' + ulId;
-  $('#content').find(ulId_h).find('li.update-comment').empty().append(div);
+  $('#content').find(ulId_h).find('.update-comment').empty().append(div);
   $('#loading').hide();
  }).fail(function (e) {
   alert("Comment update failed ");
@@ -2905,6 +2905,7 @@ $(document).ready(function () {
   primary_column1: 'org_id'
  });
 
+ 
 
 
  //auto complete for allowed BOM
@@ -3747,12 +3748,12 @@ $(document).ready(function () {
 
  $('body').on('click', '.submit_comment', function () {
   $('.show_loading_small').show();
-  $(this).prop('disabled', true)
-  $(this).closest('form').find('textarea').each(function () {
-   var divId = $(this).prop('id');
-   var data = tinyMCE.get(divId).getContent();
-   $(this).html(data);
-  });
+  $(this).prop('disabled', true);
+//  $(this).closest('form').find('textarea').each(function () {
+//   var divId = $(this).prop('id');
+//   var data = tinyMCE.get(divId).getContent();
+//   $(this).html(data);
+//  });
   var headerData = $(this).closest('form').serializeArray();
   var homeUrl = $('#home_url').val();
   var savePath = homeUrl + 'form.php?class_name=comment';
@@ -4142,6 +4143,28 @@ $('.small_popover').popover({
   html : true,
   trigger : 'hover'
   });
+
+
+$('body').on('click','.enable-editor', function(){
+tinymce.init({
+  selector: '.ed-bigtext',
+  mode: "exact",
+//    theme: "modern",
+  plugins: 'textcolor link image lists code table emoticons',
+  width: 680,
+  height: 150,
+  relative_urls: false,
+  remove_script_host: false,
+  toolbar: "styleselect code | emoticons forecolor backcolor bold italic pagebreak | alignleft aligncenter alignright | bullist numlist outdent indent | link image inserttable ",
+  menubar: false,
+  statusbar: false,
+  valid_elements: '*[*]',
+  file_browser_callback: function () {
+   $('#comment_attachments').trigger('click');
+  }
+ });
+
+});
 
 });
 function toUpperCase(str)

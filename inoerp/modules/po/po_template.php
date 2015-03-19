@@ -323,7 +323,7 @@ inoERP
           <td><?php $f->text_field_wid2r('po_line_id'); ?></td>
           <td><?php echo $f->checkBox_field('kit_cb', $$class_second->kit_cb, '', 'dontCopy'); ?></td>
           <td><?php echo $f->checkBox_field('kit_configured_cb', $$class_second->kit_configured_cb, '', 'dontCopy'); ?></td>
-          <td> <a class="popup popup-form view-item-config medium" href="form.php?class_name=bom_config_header&mode=9&window_type=popup"> <i class="fa fa-edit"></i></a></td>
+          <td><a class="popup popup-form view-item-config medium" href="form.php?class_name=bom_config_header&mode=9&window_type=popup"> <i class="fa fa-edit"></i></a></td>
           <td><?php form::text_field_wid2('reference_doc_type'); ?></td>
           <td><?php form::text_field_wid2('reference_doc_number'); ?></td>
          </tr>

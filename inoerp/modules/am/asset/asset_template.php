@@ -18,21 +18,20 @@
        </li>
        <li><?php $f->l_select_field_from_object('org_id', $org->findAll_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?></li>
        <li><?php $f->l_text_field_d('asset_number'); ?></li>
-       <li><label><i class="select_item_number select_popup clickable fa fa-search"></i><?php
-         echo gettext('Inv Item Number') . '</label>';
-         echo $f->hidden_field_withId('item_id_m', $$class->item_id_m);
-         ?>
-         <?php $f->text_field_dm('item_number', 'select_item_number_am_asset_item'); ?>
-         <?php echo $f->hidden_field_withCLass('am_asset_type', 'ASSET_ITEM', 'popup_value'); ?>
-         </li>
-         <li><?php $f->l_text_field_d('item_description'); ?></li>
-         <li><?php $f->l_select_field_from_object('am_asset_category_id', fa_asset_category::find_all(), 'fa_asset_category_id', 'asset_category', $$class->am_asset_category_id, 'am_asset_category_id', '', 1); ?></li>
-         <li><?php $f->l_select_field_from_array('status', am_asset::$status_a, $$class->status, 'status'); ?></li>
-         <li><?php $f->l_text_field_dm('serial_number'); ?></li>
-         <li><?php $f->l_select_field_from_array('type', am_asset::$type_a, $$class->type, '', '', 1, 1, 1); ?></li>
-         <li><?php $f->l_text_field_d('parent_asset_id'); ?></li>
-         <li><?php $f->l_text_field_d('accounting_class_id'); ?></li>
-         <li><?php $f->l_text_field_d('description'); ?></li>
+       <li><label><i class="select_item_number select_popup clickable fa fa-search"></i><?php echo gettext('Inv Item Number') ?></label><?php
+        echo $f->hidden_field_withId('item_id_m', $$class->item_id_m);
+        $f->text_field_dm('item_number', 'select_item_number_am_asset_item');
+        echo $f->hidden_field_withCLass('am_asset_type', 'ASSET_ITEM', 'popup_value');
+        ?>
+       </li>
+       <li><?php $f->l_text_field_d('item_description'); ?></li>
+       <li><?php $f->l_select_field_from_object('am_asset_category_id', fa_asset_category::find_all(), 'fa_asset_category_id', 'asset_category', $$class->am_asset_category_id, 'am_asset_category_id', '', 1); ?></li>
+       <li><?php $f->l_select_field_from_array('status', am_asset::$status_a, $$class->status, 'status'); ?></li>
+       <li><?php $f->l_text_field_dm('serial_number'); ?></li>
+       <li><?php $f->l_select_field_from_array('type', am_asset::$type_a, $$class->type, '', '', 1, 1, 1); ?></li>
+       <li><?php $f->l_text_field_d('parent_asset_id'); ?></li>
+       <li><?php $f->l_text_field_d('accounting_class_id'); ?></li>
+       <li><?php $f->l_text_field_d('description'); ?></li>
       </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
@@ -97,12 +96,13 @@
          <th><?php echo gettext('Action') ?></th>
          <th><?php echo gettext('Seq') ?>#</th>
          <th><?php echo gettext('Line Id') ?></th>
-         <th><?php echo gettext('Priority') ?></th>
+         <th><?php echo gettext('Activity Item') ?></th>
          <th><?php echo gettext('Start Date') ?></th>
          <th><?php echo gettext('End Date') ?></th>
+         <th><?php echo gettext('Type') ?></th>
          <th><?php echo gettext('Cause') ?></th>
+         <th><?php echo gettext('Source') ?></th>
          <th><?php echo gettext('Description') ?></th>
-         <th><?php echo gettext('Activity Type') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody am_activity_reference_values" >
@@ -118,6 +118,12 @@
          } else {
           $am_activity_reference->employee_name = null;
          }
+         if (!empty($$class_second->activity_item_id_m)) {
+          $activity_item_i = item::find_by_item_id_m($$class_second->activity_item_id_m);
+          $$class_second->activity_item_number = !empty($activity_item_i->item_number) ? $activity_item_i->item_number : '';
+         } else {
+          $$class_second->activity_item_number = '';
+         }
          ?>         
          <tr class="am_activity_reference<?php echo $count ?>">
           <td>
@@ -126,13 +132,19 @@
            ?>
           </td>
           <td><?php $f->seq_field_d($count) ?></td>
-          <td><?php echo $f->number_field('am_activity_reference_id', $$class_second->am_activity_reference_id,'','','small'); ?></td>
-          <td><?php echo $f->number_field('priority', $$class_second->priority, '', '', 'priority small'); ?></td>
+          <td><?php $f->text_field_wid2sr('am_activity_reference_id'); ?></td>
+          <td><i class="select_item_number select_popup clickable fa fa-search"></i><?php
+           echo $f->hidden_field_withCLass('activity_item_id_m', $$class_second->activity_item_id_m, 'item_id_m');
+           $f->text_field_wid2('activity_item_number', 'select_item_number_am_asset_activity');
+           echo $f->hidden_field_withCLass('am_asset_type', 'ASSET_ACTIVITY', 'popup_value');
+           ?>
+          </td>
           <td><?php echo $f->date_fieldAnyDay('start_date', $$class_second->start_date); ?></td>
           <td><?php echo $f->date_fieldAnyDay('end_date', $$class_second->end_date); ?></td>
-          <td><?php $f->text_field_wid2('cause'); ?></td>
+          <td><?php echo $f->select_field_from_object('activity_cause', am_asset_activity::activity_cause(), 'option_line_code', 'option_line_value', $$class_second->activity_cause); ?></td>
+          <td><?php echo $f->select_field_from_object('activity_type', am_asset_activity::activity_type(), 'option_line_code', 'option_line_value', $$class_second->activity_type); ?></td>
+          <td><?php echo $f->select_field_from_object('activity_source', am_asset_activity::activity_source(), 'option_line_code', 'option_line_value', $$class_second->activity_source); ?></td>
           <td><?php $f->text_field_wid2('description'); ?></td>
-          <td><?php $f->text_field_wid2('activity_type'); ?></td>
          </tr>
          <?php
          $am_activity_reference_object_ai->next();
@@ -151,7 +163,7 @@
        <thead> 
         <tr>
          <th><?php echo gettext('Seq') ?>#</th>
-         <th><?php echo gettext('Source') ?></th>
+         <th><?php echo gettext('Priority') ?></th>
          <th><?php echo gettext('Shutdown Type') ?>#</th>
          <th><?php echo gettext('Accounting Class') ?></th>
          <th><?php echo gettext('Owning Department') ?></th>
@@ -173,7 +185,7 @@
          ?>         
          <tr class="am_activity_reference<?php echo $count ?>">
           <td><?php $f->seq_field_d($count) ?></td>
-          <td><?php $f->text_field_wid2('activity_source'); ?></td>
+          <td><?php echo $f->number_field('priority', $$class_second->priority, '', '', 'priority small'); ?></td>
           <td><?php $f->text_field_wid2('shutdown_type'); ?></td>
           <td><?php $f->text_field_wid2('accounting_class_id'); ?></td>
           <td><?php $f->text_field_wid2('owning_department_id'); ?></td>
@@ -193,31 +205,21 @@
      <div id="tabsLine-3" class="tabContent">
       <ul class='column four_column'>
        <li>      <button type="button" class="btn btn-primary btn-lg disabled">
-         <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Source Lines
+         <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Activity Meter
         </button>
        </li>
 
        <li>      <button type="button" class="btn btn-primary btn-lg disabled">
-         <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Components
+         <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Maintenance Schedules
         </button>
        </li>
 
-       <li>      <button type="button" class="btn btn-primary btn-lg disabled">
-         <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> Retirements
-        </button>
-       </li>
-
-       <li class=" margin-top">      <button type="button" class="btn btn-primary btn-lg disabled">
-         <i class="fa fa-money" aria-hidden="true"></i> Financial Inquiry
-        </button>
-       </li>
-
-      </ul>
+     </ul>
 
      </div>
-    <div id="tabsLine-4" class="tabContent">
-     <?php echo!empty($secondary_field_stmt) ? $secondary_field_stmt : null; ?>
-    </div>
+     <div id="tabsLine-4" class="tabContent">
+      <?php echo!empty($secondary_field_stmt) ? $secondary_field_stmt : null; ?>
+     </div>
     </div>
 
 

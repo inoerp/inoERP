@@ -409,9 +409,9 @@
       <div class="panel-heading"><div class="panel-title"><?php echo gettext('Asset Maintenance') ?></div></div>
       <div class="panel-body">
        <ul class="column line_field">
-        <li><?php $f->l_text_field_d('am_activity_cause'); ?></li>
-        <li><?php $f->l_text_field_d('am_activity_type'); ?></li>
-        <li><?php $f->l_text_field_d('am_activity_source'); ?></li>
+        <li><?php $f->l_select_field_from_object('am_activity_cause', am_asset_activity::activity_cause(),'option_line_code','option_line_value', $$class->am_activity_cause); ?></li>
+        <li><?php $f->l_select_field_from_object('am_activity_type', am_asset_activity::activity_type(),'option_line_code','option_line_value', $$class->am_activity_type); ?></li>
+        <li><?php $f->l_select_field_from_object('am_activity_source', am_asset_activity::activity_source(),'option_line_code','option_line_value', $$class->am_activity_source); ?></li>
        </ul>
       </div>
 

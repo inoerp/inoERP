@@ -74,9 +74,7 @@
   ];
   public $requiredField = [
    'item_id_m',
-   'org_id',
-   'bom_revision',
-   'effective_date'
+   'org_id'
   ];
   public $profile_default = [
    'org_id' => 'org_inv_name_default',

@@ -296,6 +296,7 @@ include_once("includes/functions/loader.inc");
   global $f;
   echo (!empty($footer_bottom)) ? "<div id=\"footer_bottom\"> $footer_bottom </div>" : "";
   echo $f->hidden_field_withId('home_url', HOME_URL);
+  echo $si->analytics_code;
   ?>
  </body>
 </html>

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * inoERP
  *
@@ -16,10 +15,28 @@
  * 
  */
 // public $rev_enabled_cb;  needs to be dropped - use item rev only
-class am_asset_activity extends item{
- 
+class am_asset_activity extends item {
+
  public $pageTitle = " Asset Activity "; //page Title
+
+ Public static function activity_type() {
+	$option_header = option_header::find_by_name('AM_ACTIVITY_TYPE');
+	$coa_account_types = option_line::find_by_option_id($option_header->option_header_id);
+	return $coa_account_types;
+ }
  
+  Public static function activity_cause() {
+	$option_header = option_header::find_by_name('AM_ACTIVITY_CAUSE');
+	$coa_account_types = option_line::find_by_option_id($option_header->option_header_id);
+	return $coa_account_types;
+ }
+ 
+   Public static function activity_source() {
+	$option_header = option_header::find_by_name('AM_ACTIVITY_SOURCE');
+	$coa_account_types = option_line::find_by_option_id($option_header->option_header_id);
+	return $coa_account_types;
+ }
+
 }
 
 //end of item class

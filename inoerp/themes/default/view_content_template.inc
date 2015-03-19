@@ -27,7 +27,9 @@
           <?php } ?>
          </ul>
         </div>
-        <div id="content_extra"><?php echo content::content_by_id($content_type_name, $$class->content_id); ?></div>
+        <div id="content_extra"><?php $cont_html = content::content_by_id($content_type_name, $$class->content_id); 
+        echo nl2br($cont_html);
+        ?></div>
         <div id="after_content_extra">
         <div id='content_info'>
          <ul>
@@ -43,7 +45,7 @@
           </li>
           <li class="child_contents"><label>Child Content : </label>
 
-           <?php echo '<a href="content.php?mode=9&amp;content_type=' . $content_type_name . '&amp;parent_id=' . $content->content_id . '"   
+           <?php echo '<a href="'.HOME_URL.'content.php?mode=9&amp;content_type=' . $content_type_name . '&amp;parent_id=' . $content->content_id . '"   
                class="button add_child_content">Add Child Content </a>'; ?>
           </li>
          </ul>

@@ -81,7 +81,8 @@ class comment extends dbObject {
  public $fields_inForm_notInDataBase = [
   'multi_action_class_pc',
   'multi_action_class_pc_value',
-  'action'
+  'action',
+  'comment_user_name'
  ];
  public $pageTitle = " Comment - Create & View differnt Comments ";
  public $search = [
@@ -162,7 +163,7 @@ class comment extends dbObject {
   $sql = " SELECT comment.comment_id, comment.subject,
 	         content.content_id, content.content_type_id,
            comment.reference_table, comment.reference_id, comment.comment ,comment.published_cb, comment.creation_date,
-           user.username
+          IFNULL(user.username, comment.comment_by) as username
 					FROM comment LEFT JOIN user ON comment.created_by = user.user_id ,
             content 
 					WHERE comment.reference_table = 'content'
@@ -188,10 +189,10 @@ class comment extends dbObject {
   $start_from = empty($param->start_from) ? 0 : $param->start_from;
   $this->subject_noof_char = empty($this->subject_noof_char) ? 200 : $this->subject_noof_char;
   $result = $this->content_comment_with_reference($numbers, $start_from);
-    $comment_string = '';
+  $comment_string = '';
   if (count($result) > 0) {
    $comment_string .= '<ul class="documentation_list comment">';
-   $comment_string .= '<li class="all_comments"><span class="badge"><a href="'.HOME_URL.'content.php?content_type=comment">'
+   $comment_string .= '<li class="all_comments"><span class="badge"><a href="' . HOME_URL . 'content.php?content_type=comment">'
     . 'All Comments <i class="fa fa-comments-o"></i></a></span></li>';
    foreach ($result as $records) {
     $comment_string .= '<li class="comment_subject">';
@@ -302,7 +303,7 @@ class comment extends dbObject {
      $comment_string .= "<tr id=\"row_no$con_count\" class='new_row $even_odd'> "
       . " <td class='subject_summary'>";
      $comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&'
-      . 'content_id=' . $recod_c->reference_id . '&content_type_id=' . $recod_c->content_type_id .'#comment_id_' .$recod_c->comment_id .'">';
+      . 'content_id=' . $recod_c->reference_id . '&content_type_id=' . $recod_c->content_type_id . '#comment_id_' . $recod_c->comment_id . '">';
      $comment_string .= "<i class='fa fa-comment'></i> &nbsp;";
      $comment_string .= substr(strip_tags($recod_c->comment), 0, $this->subject_noof_char);
      $comment_string .= ' </a>';
@@ -350,7 +351,7 @@ class comment extends dbObject {
   $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
   $comment_string = " ";
   $sql = "SELECT comment.comment_id, comment.comment, comment.created_by,  comment.creation_date, "
-   . "  comment.creation_date, user.username  "
+   . "  comment.creation_date, IFNULL(user.username, comment.comment_by) as username "
    . " FROM comment left JOIN user ON user.user_id = comment.created_by" .
    " WHERE reference_table = '{$reference_table}'
            AND reference_id = '{$reference_id}' ";
@@ -374,10 +375,12 @@ class comment extends dbObject {
     $comment_string .= "<div id=\"comment_id_$records->comment_id\" class=\"panel panel-info commentRecord\">";
     $comment_string .= '<div class="panel-heading">';
     $comment_string .= '<ul class="header_li">';
-    if (!empty($records->username)) {
+    if (!empty($records->username) && ($records->created_by != -99)) {
      $comment_string .= '<li class="comment_by"><a href="' . HOME_URL . 'form.php?class_name=user_activity_v&mode=2&user_id=' . ($records->created_by) . '">' . ($records->username) . '</a></li>';
+    } else if (!empty($records->username)) {
+     $comment_string .= '<li class="comment_by">' . ($records->username) . '</li>';
     } else {
-     $comment_string .= '<li class="comment_by">selfWeb</li>';
+     $comment_string .= '<li class="comment_by">Anonymous</li>';
     }
     $comment_string .= '<li class="creation_date">' . $records->creation_date . '</li>';
     if ($allow_content_update) {
@@ -386,16 +389,16 @@ class comment extends dbObject {
      $comment_string .= ' <button name="update_button" class="update_button btn btn-warning " value="' .
       $records->comment_id . '" >Update</button> </li>';
     }
-    $comment_string .= '<li"><a href="#commentForm" class="comment-reply btn btn-default" role="button">Reply</a></li>';
-    $comment_string .= '<li class="update-comment"></li>';
+    
     $comment_string .= '</ul>';
     $comment_string .= '</div>';
-    $comment_string .= '<div class="comment panel-body">' . $records->comment;
+    $comment_string .= '<div class="comment panel-body update-comment">' . $records->comment;
     if (count($comment_file) > 0) {
      foreach ($comment_file as $file_record) {
       $comment_string .= '<p><a href=' . HOME_URL . $file_record->file_path . $file_record->file_name . '>' . $file_record->file_name . '</a></p>';
      }
     }
+    $comment_string .= '<span class="comment-reply"><a href="#commentForm" class="btn btn-success" role="button">Reply</a></span>';
     $comment_string .= '</div>';
     $comment_string .= '</div>';
    }

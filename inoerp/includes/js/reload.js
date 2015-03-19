@@ -478,5 +478,24 @@ $('table.view th').find('img').hide();
   trigger : 'hover'
   
 });
+
+ $('.select_item_number_all').inoAutoCompleteElement({
+  json_url: 'modules/inv/item/json_item.php',
+  primary_column1: 'org_id'
+ });
   
+    var select_item_number_am_asset_activity_options = {'am_asset_type': 'ASSET_ACTIVITY'};
+ $('.select_item_number_am_asset_activity').inoAutoCompleteElement({
+  json_url: 'modules/inv/item/json_item.php',
+  primary_column1: 'org_id',
+  other_options: select_item_number_am_asset_activity_options
+ });
+ 
+  var select_item_number_am_asset_item_options = {'am_asset_type': 'ASSET_ITEM'};
+ $('.select_item_number_am_asset_item').inoAutoCompleteElement({
+  json_url: 'modules/inv/item/json_item.php',
+  primary_column1: 'org_id',
+  other_options: select_item_number_am_asset_item_options
+ });
+ 
 });
