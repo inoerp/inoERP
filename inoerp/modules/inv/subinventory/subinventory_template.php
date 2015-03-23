@@ -99,6 +99,6 @@
  </ul>
  <ul id="js_contextMenu_data">
   <li class="docHedaderId" data-docHedaderId="subinventory_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="subinventory ></li>
+  <li class="btn1DivId" data-btn1DivId="subinventory"></li>
       </ul>
       </div>

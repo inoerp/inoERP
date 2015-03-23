@@ -44,6 +44,7 @@ class user extends dbObject {
   "phone",
   'hr_employee_id',
   'block_notif_count',
+  'image_file_id',
   "created_by",
   "creation_date",
   "last_update_by",
@@ -102,6 +103,7 @@ class user extends dbObject {
  public $user_language;
  public $phone;
  public $block_notif_count;
+ public $image_file_id;
  Public $email;
  Public $status;
  Public $date_format;
@@ -222,7 +224,7 @@ class user extends dbObject {
    return false;
   }
   $sql = " SELECT user_id, username, first_name, last_name, email,  phone, hr_employee_id, user_language,
-            block_notif_count,    created_by,    creation_date,  last_update_by,    last_update_date FROM ";
+            block_notif_count,    created_by,    creation_date,  last_update_by,    last_update_date , image_file_id FROM ";
   $sql.= static::$table_name;
   $sql.= " WHERE " . static::$primary_column . "= :primary_id ";
   $sql.= " LIMIT 1 ";

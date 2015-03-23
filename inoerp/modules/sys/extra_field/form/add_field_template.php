@@ -55,8 +55,8 @@
               <tr class="sys_extra_field<?php echo $count . '-' . $detailCount; ?>">
                <td>   
                 <ul class="inline_action">
-                 <li class="add_row_detail_img3"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-                 <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+                 <li class="add_row_detail_img3"><i class="fa fa-plus-circle"></i></li>
+                 <li class="remove_row_img"><i class="fa fa-minus-circle"></i></li>
                  <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($extra_field->sys_extra_field_instance_id); ?>">
                  </li>           
                 </ul>

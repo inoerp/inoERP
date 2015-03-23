@@ -346,12 +346,13 @@ class comment extends dbObject {
  }
 
  public static function comment_list($reference_table, $reference_id, $extension_id) {
+  global $f;
   $pageno = !empty($_GET['pageno']) ? $_GET['pageno'] : 1;
   $per_page = !empty($_GET['per_page']) ? $_GET['per_page'] : 10;
   $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
   $comment_string = " ";
   $sql = "SELECT comment.comment_id, comment.comment, comment.created_by,  comment.creation_date, "
-   . "  comment.creation_date, IFNULL(user.username, comment.comment_by) as username "
+   . "  comment.creation_date, IFNULL(user.username, comment.comment_by) as username, user.image_file_id as image_file_id "
    . " FROM comment left JOIN user ON user.user_id = comment.created_by" .
    " WHERE reference_table = '{$reference_table}'
            AND reference_id = '{$reference_id}' ";
@@ -375,6 +376,10 @@ class comment extends dbObject {
     $comment_string .= "<div id=\"comment_id_$records->comment_id\" class=\"panel panel-info commentRecord\">";
     $comment_string .= '<div class="panel-heading">';
     $comment_string .= '<ul class="header_li">';
+    if (!empty($records->image_file_id)) {
+     $profile_image = $f->show_existing_image($records->image_file_id, 'img-vs');
+     $comment_string .= "<li class='user-profile-image'>$profile_image</li>";
+    }
     if (!empty($records->username) && ($records->created_by != -99)) {
      $comment_string .= '<li class="comment_by"><a href="' . HOME_URL . 'form.php?class_name=user_activity_v&mode=2&user_id=' . ($records->created_by) . '">' . ($records->username) . '</a></li>';
     } else if (!empty($records->username)) {
@@ -389,10 +394,10 @@ class comment extends dbObject {
      $comment_string .= ' <button name="update_button" class="update_button btn btn-warning " value="' .
       $records->comment_id . '" >Update</button> </li>';
     }
-    
+
     $comment_string .= '</ul>';
     $comment_string .= '</div>';
-    $comment_string .= '<div class="comment panel-body update-comment">' . $records->comment;
+    $comment_string .= '<div class="comment panel-body update-comment">' . nl2br($records->comment);
     if (count($comment_file) > 0) {
      foreach ($comment_file as $file_record) {
       $comment_string .= '<p><a href=' . HOME_URL . $file_record->file_path . $file_record->file_name . '>' . $file_record->file_name . '</a></p>';

@@ -9,8 +9,7 @@
    <div id="tabsHeader-1" class="tabContent">
     <ul class="column header_field">
      <li><label><i class="am_maintenance_schedule_id select_popup clickable fa fa-search"></i>
-       <?php echo gettext('Sehedule ID') ?></label><?php 
-       echo $f->text_field('am_maintenance_schedule_id', $maint_sch->am_maintenance_schedule_id, '', 'am_maintenance_schedule_id', '', '', 1) ?>
+       <?php echo gettext('Sehedule ID') ?></label><?php echo $f->text_field('am_maintenance_schedule_id', $maint_sch->am_maintenance_schedule_id, '', 'am_maintenance_schedule_id', '', '', 1) ?>
       <a name="show" href="form.php?class_name=am_ms_meter_rule&<?php echo "mode=$mode"; ?>" class="show document_id am_maintenance_schedule_id"><i class="fa fa-refresh"></i></a> 
      </li>
      <li><?php $f->l_select_field_from_object('org_id', $org->findAll_inventory(), 'org_id', 'org', $maint_sch->org_id, 'org_id', '', 1, 1); ?></li>
@@ -22,7 +21,7 @@
      <li><?php $f->l_date_fieldAnyDay_r('effective_from_date', $maint_sch->effective_from_date); ?></li>
      <li><?php $f->l_date_fieldAnyDay_r('effective_start_date', $maint_sch->effective_start_date); ?></li>
      <li><?php $f->l_number_field('intervals_per_cycle', $maint_sch->intervals_per_cycle, '', 'intervals_per_cycle', '', '', 1); ?></li>
-     
+
     </ul>
    </div>
    <div id="tabsHeader-2" class="tabContent">
@@ -60,26 +59,34 @@
        <?php
        $count = 0;
        foreach ($am_ms_meter_rule_object as $am_ms_meter_rule) {
+        if (!empty($am_ms_meter_rule->am_meter_id)) {
+         $meter_d = am_meter::find_by_id($am_ms_meter_rule->am_meter_id);
+         $am_ms_meter_rule->rate = !empty($meter_d->rate) ? $meter_d->rate : '';
+         $am_ms_meter_rule->uom_id = !empty($meter_d->uom_id) ? $meter_d->uom_id : '';
+        } else {
+         $am_ms_meter_rule->rate =  '';
+         $am_ms_meter_rule->uom_id =  '';
+        }
         ?>         
         <tr class="am_ms_meter_rule<?php echo $count ?>">
          <td>
-          <?php
-          echo ino_inline_action($$class->am_ms_meter_rule_id, array('am_maintenance_schedule_id' => $am_maintenance_schedule_id_h));
-          ?>
+ <?php
+ echo ino_inline_action($$class->am_ms_meter_rule_id, array('am_maintenance_schedule_id' => $am_maintenance_schedule_id_h));
+ ?>
          </td>
          <td><?php $f->text_field_widsr('am_ms_meter_rule_id'); ?></td>
-         <td><?php $f->text_field_wid('am_meter_id'); ?></td>
+         <td><?php echo $f->select_field_from_object('am_meter_id', am_meter::find_all(), 'am_meter_id', 'name', $$class->am_meter_id, '', '', 1, '', '', '', '', 'uom_id'); ?></td>
          <td><?php $f->text_field_widsr('rate'); ?></td>
-         <td><?php $f->text_field_widr('uom_id'); ?></td>
+         <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, 'uom_id', '', 1, 1); ?></td>
          <td><?php echo $f->number_field('base_interval', $$class->base_interval); ?></td>
-         <td><?php echo $f->number_field('cycle_interval', $$class->cycle_interval,'','','','',1); ?></td>
+         <td><?php echo $f->number_field('cycle_interval', $$class->cycle_interval, '', '', '', '', 1); ?></td>
          <td><?php echo $f->date_fieldAnyDay('from_date', $$class->from_date); ?></td>
          <td><?php echo $f->date_fieldAnyDay('to_date', $$class->to_date); ?></td>
         </tr>
-        <?php
-        $count = $count + 1;
-       }
-       ?>
+ <?php
+ $count = $count + 1;
+}
+?>
       </tbody>
      </table>
     </div>

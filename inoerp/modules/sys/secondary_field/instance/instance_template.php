@@ -46,8 +46,8 @@
          <tr class="sys_secondary_field_instance<?php echo $count; ?>">
           <td>   
            <ul class="inline_action">
-            <li class="add_row_img clickable"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+            <li class="add_row_img clickable"><i class="fa fa-plus-circle"></i></li>
+            <li class="remove_row_img"><i class="fa fa-minus-circle"></i></li>
             <li><input type="checkbox" name="line_id_cb" value="<?php echo ($secondary_field->sys_secondary_field_instance_id); ?>">
              <?php echo form::hidden_field('reference_key_name', $obj_class_name_h); ?>
             </li>           
@@ -114,6 +114,7 @@
 
 <div id="js_data">
  <ul id="js_saving_data">
+  <li class="primary_column_id" data-primary_column_id="obj_class_name" ></li>
   <li class="headerClassName" data-headerClassName="sys_secondary_field_instance" ></li>
   <li class="lineClassName" data-lineClassName="sys_secondary_field_instance" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>

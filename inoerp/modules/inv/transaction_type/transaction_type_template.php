@@ -10,13 +10,13 @@
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <ul class="column four_column"> 
+      <ul class="column header_field"> 
        <li><?php $f->l_text_field_dr_withSearch('transaction_type_id') ?>
         <a name="show" href="form.php?class_name=transaction_type&<?php echo "mode=$mode"; ?>" class="show document_id transaction_type_id">
          <i class='fa fa-refresh'></i></a> 
        </li> 
-       <li><?php $f->text_field_d('transaction_type_number') ?></li>
-       <li><?php $f->text_field_d('transaction_type') ?></li>
+       <li><?php $f->l_text_field_d('transaction_type_number') ?></li>
+       <li><?php $f->l_text_field_d('transaction_type') ?></li>
        <li><?php $f->l_select_field_from_object('type_class', transaction_type::transaction_type_class(), 'option_line_code', 'description', $$class->type_class, '', '', 1, $readonly1); ?>        </li>
        <li><?php $f->l_select_field_from_object('transaction_action', transaction_type::transaction_action(), 'option_line_code', 'description', $$class->transaction_action, '', '', 1, $readonly); ?>        </li>
       </ul>
@@ -54,11 +54,11 @@
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <ul class="column four_column"> 
-       <li><?php $f->l_text_field_d('transaction_type_number') ?></li>
        <li><?php $f->l_checkBox_field_d('allow_negative_balance_cb'); ?></li>
        <li><?php $f->l_status_field_d('status'); ?></li>
        <li><?php $f->l_checkBox_field_d('rev_enabled_cb'); ?></li>
        <li><?php $f->l_text_field_d('rev_number') ?></li>
+       <li><?php // $f->l_text_field_d('transaction_type_number') ?></li>
       </ul> 
      </div> 
      <!--end of tab1-->

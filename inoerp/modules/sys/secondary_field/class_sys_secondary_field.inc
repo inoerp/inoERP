@@ -36,6 +36,7 @@ class sys_secondary_field extends dbObject {
   'MULTI_SELECT' => 'Multi Select',
   'TEXT_AREA' => 'Text Area',
   'CHECK_BOX' => 'Check Box',
+  'IMAGE' => 'Image'
  ];
  public $field_a = [
   'sys_secondary_field_id',

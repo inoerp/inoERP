@@ -4647,7 +4647,7 @@ table.form {
  border-color: #999999;
  border-collapse: collapse;
  float : left;
- max-width: 90%;
+ /*max-width: 90%;*/
 }
 
 table.form th {

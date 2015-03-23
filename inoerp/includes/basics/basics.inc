@@ -154,13 +154,6 @@ require_once(INC_MODULE . DS . "fa" . DS . "depreciation_method" . DS . "class_f
 require_once(INC_MODULE . DS . "fa" . DS . "depreciation_method" . DS . "class_fa_depreciation_method_rate.inc");
 require_once(INC_MODULE . DS . "fa" . DS . "depreciation" . DS . "class_fa_depreciation_header.inc");
 require_once(INC_MODULE . DS . "fa" . DS . "depreciation" . DS . "class_fa_depreciation_line.inc");
-require_once(INC_MODULE . DS . "am" . DS . "asset" . DS . "class_am_asset.inc");
-require_once(INC_MODULE . DS . "am" . DS . "asset" . DS . "class_am_activity_reference.inc");
-require_once(INC_MODULE . DS . "am" . DS . "asset_activity" . DS . "class_am_asset_activity.inc");
-require_once(INC_MODULE . DS . "am" . DS . "maintenance_schedule" . DS . "class_am_maintenance_schedule.inc");
-require_once(INC_MODULE . DS . "am" . DS . "maintenance_schedule" . DS . "class_am_ms_activity_reference.inc");
-require_once(INC_MODULE . DS . "am" . DS . "ms_date_rule" . DS . "class_am_ms_date_rule.inc");
-require_once(INC_MODULE . DS . "am" . DS . "ms_meter_rule" . DS . "class_am_ms_meter_rule.inc");
 require_once(INC_PO . DS . "class_po_header.inc");
 require_once(INC_PO . DS . "class_po_line.inc");
 require_once(INC_PO . DS . "class_po_detail.inc");
@@ -357,6 +350,22 @@ require_once(INC_MODULE . DS . "bc" . DS . "label_format" . DS . "class_bc_label
 require_once(INC_MODULE . DS . "bc" . DS . "label_format" . DS . "class_bc_label_format_line.inc");
 require_once(INC_MODULE . DS . "bc" . DS . "label_request" . DS . "class_bc_label_request.inc");
 require_once(INC_MODULE . DS . "bc" . DS . "static_label" . DS . "class_bc_static_label.inc");
+require_once(INC_MODULE . DS . "am" . DS . "asset" . DS . "class_am_asset.inc");
+require_once(INC_MODULE . DS . "am" . DS . "asset" . DS . "class_am_activity_reference.inc");
+require_once(INC_MODULE . DS . "am" . DS . "asset_activity" . DS . "class_am_asset_activity.inc");
+require_once(INC_MODULE . DS . "am" . DS . "maintenance_schedule" . DS . "class_am_maintenance_schedule.inc");
+require_once(INC_MODULE . DS . "am" . DS . "maintenance_schedule" . DS . "class_am_ms_activity_reference.inc");
+require_once(INC_MODULE . DS . "am" . DS . "ms_date_rule" . DS . "class_am_ms_date_rule.inc");
+require_once(INC_MODULE . DS . "am" . DS . "ms_meter_rule" . DS . "class_am_ms_meter_rule.inc");
+require_once(INC_MODULE . DS . "am" . DS . "ms_calendar_date" . DS . "class_am_ms_calendar_date.inc");
+require_once(INC_MODULE . DS . "am" . DS . "wo" . DS . "class_am_wo_header.inc");
+require_once(INC_MODULE . DS . "am" . DS . "wo" . DS . "class_am_wo_bom.inc");
+require_once(INC_MODULE . DS . "am" . DS . "wo" . DS . "class_am_wo_routing_line.inc");
+require_once(INC_MODULE . DS . "am" . DS . "wo" . DS . "class_am_wo_routing_detail.inc");
+require_once(INC_MODULE . DS . "am" . DS . "material_transaction" . DS . "class_am_material_transaction.inc");
+require_once(INC_MODULE . DS . "am" . DS . "resource_transaction" . DS . "class_am_resource_transaction.inc");
+require_once(INC_MODULE . DS . "am" . DS . "move_transaction" . DS . "class_am_move_transaction.inc");
+
 
 //
 require_once(INC_TPARTY . DS . "barcode" . DS . "class_ino_barcode.inc");

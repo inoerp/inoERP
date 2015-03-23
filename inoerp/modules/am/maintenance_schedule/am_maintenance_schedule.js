@@ -65,6 +65,20 @@ $(document).ready(function () {
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
  
+  $('body').off('click', '.popup-form.view-meter-rule').on('click', '.popup-form.view-meter-rule', function (e) {
+  e.preventDefault();
+  var openUrl = $(this).prop('href');
+  void window.open(openUrl, '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+ 
+   $('body').off('click', '.popup-form.view-calendar-date').on('click', '.popup-form.view-calendar-date', function (e) {
+  e.preventDefault();
+  var openUrl = $(this).prop('href');
+  void window.open(openUrl, '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+ 
 
 });
 

@@ -88,6 +88,11 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
                <li class="btn btn-info active inline input_file clickable"  role="button"><input type="file" id="comment_attachments"  class="input_file_btn" name="attachments[]" multiple/>
                 <i class="fa fa-paperclip clickable"></i>&nbsp;&nbsp;Select File</li>
                <li><input type="button"  role="button" value="Attach"  name="attach_submit" id="comment_attach_submit" class="btn btn-info active comment_attach_submit"></li>
+               <?php $user_name = isset($_SESSION['username']) ? $_SESSION['username'] : 'Anonymous'; ?>
+               <li><div class="input-group">
+                 <span class="input-group-addon" id="basic-addon1">Reply as </span>
+                 <input type="text" name="comment_by" class="form-control content_by height-unset" placeholder="<?php echo $user_name ?>" aria-describedby="basic-addon1" >
+                </div></li>
                <?php
                if ($mode == 9) {
                 echo '<li><input type="button" id="save_content" role="button" name="submit_content" class="btn btn-warning ino-btn save_content submit_content" Value="Post"></li>';

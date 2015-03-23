@@ -1417,11 +1417,6 @@ ul.column.two_column_form li {
  width: 600px;
 }*/
 
-#content_data div label{ 
- width: 100px;
- text-align: right;
-}
-
 input.multi_select_input{
  background:  none repeat scroll 0% 0% #FFF !important;
 }
@@ -1443,12 +1438,12 @@ input.multi_select_input{
 }
 
 .show_loading_small_pagination{
-  display: none;      
+ display: none;      
 }
 
 .second_rowset{
-        display: block;
-        margin-top: 20px;
+ display: block;
+ margin-top: 20px;
 }
 
 .big_popover .popover{
@@ -1457,45 +1452,45 @@ input.multi_select_input{
 }
 
 .big_popover .popover{
-box-shadow: 100px 200px 200px 100px rgba(33, 42, 39, 0.72);
+ box-shadow: 100px 200px 200px 100px rgba(33, 42, 39, 0.72);
 }
 
 
 .f-right{
-        float: right !important;
+ float: right !important;
 }
 
 .large-text{
-        font-size: 2em;
-        font-weight: bold;
+ font-size: 2em;
+ font-weight: bold;
 }
 
 ul.add_new_search li, ul.tabMain li{
-        width: unset!important;
+ width: unset!important;
 }
 
 .comment img{
-        max-width: 650px;
+ max-width: 650px;
 }
 
 .input_file{
  position: relative;
 }
 .input_file_btn {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	z-index: 1;
-  opacity: 0;
+ position: absolute;
+ top: 0px;
+ left: 0px;
+ z-index: 1;
+ opacity: 0;
 }
 
 #comment_attachments{
-        width: 140px;
+ width: 140px;
 }
 
 .input_file {
-    width: 140px;
-    font-weight: bold !important;
+ width: 140px;
+ font-weight: bold !important;
 }
 
 /*.submit_comment{
@@ -1505,19 +1500,19 @@ ul.add_new_search li, ul.tabMain li{
 
 
 legend.major{
-        font-size: 1em;
+ font-size: 1em;
 }
 
 .table_container{
-        border-top: 5px solid#E3D6D6;
+ border-top: 5px solid#E3D6D6;
 }
 
 .vertical-align-top >div{
-        vertical-align: top;
+ vertical-align: top;
 }
 
 #file_upload_form ul li{
-        vertical-align: top;
+ vertical-align: top;
 }
 
 #file_upload_form .input-group{
@@ -1526,4 +1521,48 @@ legend.major{
 
 .height-unset{
  height: unset !important;
+}
+
+.form-group input{
+ display: inline-block !important;
+ margin-left: 15px;
+}
+
+#content_data div label {
+ min-width: 100px;
+ text-align: right;
+}
+
+.img-vs{
+ height: 40px;
+}
+
+.img-small{
+ height: 200px;
+}
+
+.img-medium{
+ height: 450px;
+}
+
+.img-large{
+ height: 550px;
+}
+
+.created_by .existing-image{
+        display: inline-block;
+}
+
+ul.free_column li{
+        margin-right: 30px;
+        display: inline-block;
+}
+
+.ino-images{
+ display: inline-block;
+width: 700px;
+margin: 10px 0;
+background-color: #D9EDF7;
+padding: 5px;
+border-radius: 10px;
 }

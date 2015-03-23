@@ -1,5 +1,4 @@
 <div id ="form_header"><span class="heading"><?php
-  $f = new inoform();
   echo gettext('Receipt Header')
   ?> </span>
 

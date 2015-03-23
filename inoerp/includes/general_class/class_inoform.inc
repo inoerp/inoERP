@@ -207,7 +207,7 @@ class inoform {
   'user_group',
   'user_group_access',
   'wip_accounting_group'
-  ];
+ ];
  public $pageTitle = " inoFrom - All Forms "; //page Title
  public $option_lists = [
 //		 'supplier_type' => 'SUPPLIER_TYPE',
@@ -317,6 +317,41 @@ EOD;
   $value = htmlentities($value);
   $element_hidden_field = "<input type=\"hidden\" id=\"$name\" name=\"$bracketName\" value=\"$value\" class=\"hidden $name $class\" >";
   return $element_hidden_field;
+ }
+
+ public function image_field($name, $value_file_id, $size = "15", $id = "", $div_class = "", $label = 'Select Image', $display_type = 'image') {
+   $stmt = '<div class="ino-images">';
+  $stmt .= "<div class='existing-image'>" . $this->show_existing_image($value_file_id, $div_class) . '</div>';
+  $stmt .= "<div class='show_attachment'>";
+  $stmt .= '<div class="form-group">
+							<ul class="inRow asperWidth"><label for="exampleInputFile">' . gettext($label) . '</label>
+							 <li><input type="file" id="attachments" class="attachments" value="" name="uploaded_file[]" multiple/></li>
+              <li><input type="hidden" class="hidden display_type" name="display_type[]" value="' . $display_type . '"/></li>
+              <li><input type="hidden" class="hidden file_id ' . $name . '" name="' . $name . '[]" value="' . $value_file_id . '"/></li>
+							 <li><button  form="file_upload" name="attach_submit" class="submit button upload_file">Upload</button></li>';
+  $stmt .= '<li role="button" class="delete_image btn btn-danger "  name="delete_image">Delete Image</li>';
+  $stmt.='<li class="show_loading_small"><img alt="Loading..." src="' . HOME_URL . 'themes/images/small_loading.gif"/></li>
+							</ul>
+							<div class="uploaded_file_details"></div>
+						 </div>';
+  $stmt .= '</div>';
+  $stmt .= '</div>';
+
+  return $stmt;
+ }
+
+ public function show_existing_image($value, $div_class) {
+  if (empty($value)) {
+   return;
+  }
+  $file = file::find_by_id($value);
+  if (empty($file)) {
+   return;
+  }
+  $attachment_statement = "<div class=\"existing-image \">";
+  $attachment_statement .= '<img class="img ' . $div_class . '" src="' . $file->file_path . $file->file_name . '"/>';
+  $attachment_statement .= "</div>";
+  return $attachment_statement;
  }
 
  public function text_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $maxlength = "256") {

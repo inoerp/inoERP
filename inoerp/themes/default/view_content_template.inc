@@ -15,9 +15,15 @@
         <div id="content_element">
          <ul>
           <li><span class='content_heading'> <?php echo ($content->subject); ?></span></li>
-          <li class="created_by"><?php 
+          <li class="created_by f-right"><?php
            $content_user = user::find_by_id($content->created_by);
-           echo!empty($content_user) ? ($content_user->username) : '';
+           if (!empty($content_user)) {
+           echo '<a href="' . HOME_URL . 'form.php?class_name=user_activity_v&mode=2&user_id=' . ($content->created_by) . '">' . ($content_user->username) . '</a>';
+            $profile_image = $f->show_existing_image($content_user->image_file_id, 'img-vs');
+            if (!empty($profile_image)) {
+             echo "&nbsp; $profile_image";
+            }
+           }
            ?></li>
           <li class="creation_date"><?php echo ($content->creation_date); ?></li>
           <?php
@@ -27,48 +33,49 @@
           <?php } ?>
          </ul>
         </div>
-        <div id="content_extra"><?php $cont_html = content::content_by_id($content_type_name, $$class->content_id); 
-        echo nl2br($cont_html);
-        ?></div>
+        <div id="content_extra"><?php
+          $cont_html = content::content_by_id($content_type_name, $$class->content_id);
+          echo nl2br($cont_html);
+          ?></div>
         <div id="after_content_extra">
-        <div id='content_info'>
-         <ul>
-          <li class="attachment_content"><label>Attachments : </label><?php echo (!empty($file)) ? file::show_file_list($file) : ""; ?></li>
-          <li class="terms"><label>Tags : </label><?php echo ($content->terms); ?></li>
-          <li class="categories"><label>Category : </label><?php echo!(empty($category_statement)) ? $category_statement : ""; ?></li>
-         </ul>
-        </div>
-        <div id="content_navigation">
-         <ul>
-          <li class="parent_id"><label>Parent Content : </label>
-           <?php echo!(empty($parent_of_content)) ? $parent_of_content : "" ?>
-          </li>
-          <li class="child_contents"><label>Child Content : </label>
+         <div id='content_info'>
+          <ul>
+           <li class="attachment_content"><label>Attachments : </label><?php echo (!empty($file)) ? file::show_file_list($file) : ""; ?></li>
+           <li class="terms"><label>Tags : </label><?php echo ($content->terms); ?></li>
+           <li class="categories"><label>Category : </label><?php echo!(empty($category_statement)) ? $category_statement : ""; ?></li>
+          </ul>
+         </div>
+         <div id="content_navigation">
+          <ul>
+           <li class="parent_id"><label>Parent Content : </label>
+            <?php echo!(empty($parent_of_content)) ? $parent_of_content : "" ?>
+           </li>
+           <li class="child_contents"><label>Child Content : </label>
 
-           <?php echo '<a href="'.HOME_URL.'content.php?mode=9&amp;content_type=' . $content_type_name . '&amp;parent_id=' . $content->content_id . '"   
+            <?php echo '<a href="' . HOME_URL . 'content.php?mode=9&amp;content_type=' . $content_type_name . '&amp;parent_id=' . $content->content_id . '"   
                class="button add_child_content">Add Child Content </a>'; ?>
-          </li>
-         </ul>
-        </div>
-        <div id="child_conetnt_list"><?php
-         echo!(empty($childs_of_parent_id)) ? '<span class="heading">Next Read</span>' . $childs_of_parent_id : "";
-         ?></div>
-        <div id="comments">
-         <div id="comment_list">
-          <?php echo!(empty($comments) && $comment_privilage >= 2) ? $comments : ""; ?>
+           </li>
+          </ul>
          </div>
-         <?php
-         if ($comment_privilage >= 4) {
-          $reference_table = 'content';
-          $reference_id = $content->content_id;
-          include_once 'comment.php';
-         } else {
-          echo "<a href='extensions/user/user_login.php' class='comment post button btn btn-info active btn-lg' role='button' id='commentForm'>Login To Comment </a>";
-         }
-         ?>
-         <div id="new_comment">
+         <div id="child_conetnt_list"><?php
+          echo!(empty($childs_of_parent_id)) ? '<span class="heading">Next Read</span>' . $childs_of_parent_id : "";
+          ?></div>
+         <div id="comments">
+          <div id="comment_list">
+           <?php echo!(empty($comments) && $comment_privilage >= 2) ? $comments : ""; ?>
+          </div>
+          <?php
+          if ($comment_privilage >= 4) {
+           $reference_table = 'content';
+           $reference_id = $content->content_id;
+           include_once 'comment.php';
+          } else {
+           echo "<a href='extensions/user/user_login.php' class='comment post button btn btn-info active btn-lg' role='button' id='commentForm'>Login To Comment </a>";
+          }
+          ?>
+          <div id="new_comment">
+          </div>
          </div>
-        </div>
         </div>
        </div>
       </div>

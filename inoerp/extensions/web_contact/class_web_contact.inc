@@ -18,7 +18,7 @@ class web_contact extends dbObject {
 
 
  public $description;
-
+public static $after_save_message = "Thank you for your time.<br>We have received your message and will be get back to you shortly. ";
 
  Public static function web_contact_category() {
   $option_header = option_header::find_by_name('EXT_WEB_CONTACT_CATEGORY');
@@ -31,10 +31,10 @@ class web_contact extends dbObject {
   $f = new inoform();
   $entry_form = "<h1>Contact <small>You can leave a message using the contact form below.</small></h1>";
   $entry_form .= '<div class="form-group">';
-  $entry_form .= "<label for='youName'>Your Name</label>" . $f->text_field('visitor_name', '', '', 'visitor_name', 'form-control');
+  $entry_form .= "<label for='youName'>Your Name</label>" . $f->text_field('visitor_name', '', '', 'visitor_name', 'form-control', 1);
   $entry_form .= "</div>";
   $entry_form .= '<div class="form-group">';
-  $entry_form .= "<label for='emailId'>eMail Id</label>" . $f->text_field('visitor_email', '', '', 'visitor_email', 'form-control');
+  $entry_form .= "<label for='emailId'>eMail Id</label>" . $f->text_field('visitor_email', '', '', 'visitor_email', 'form-control', 1);
   $entry_form .= "</div>";
   $entry_form .= '<div class="form-group">';
   $entry_form .= "<label for='phone'>Phone #</label>" . $f->text_field('visitor_phone_no', '', '', 'visitor_phone_no', 'form-control');
@@ -43,7 +43,7 @@ class web_contact extends dbObject {
   $entry_form .= "<label for='subject'>Subject</label>" . $f->text_field('subject', '', '', 'subject', 'form-control');
   $entry_form .= "</div>";
   $entry_form .= '<div class="form-group">';
-  $entry_form .= "<label for='message'>Message</label>" . $f->text_area('message', '', '10', 'message', 'form-control');
+  $entry_form .= "<label for='message'>Message</label>" . $f->text_area('message', '', '5', 'message', 'form-control', 1);
   $entry_form .= "</div>";
   $entry_form .= '<div class="form-group">';
   $entry_form .= "<label for='message'>Select a category to help us route your request</label>"

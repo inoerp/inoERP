@@ -117,12 +117,12 @@ $(document).ready(function () {
    localStorage.setItem("item_type", 'item');
   }
   void window.open('select.php?class_name=item', '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
  $('#content').on('click', '.select_sourcing_rule', function () {
   void window.open('select.php?class_name=po_sourcing_rule_header', '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
 
  });
 

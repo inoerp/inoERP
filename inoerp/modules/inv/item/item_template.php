@@ -2,12 +2,13 @@
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info')  ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
     <li><a href="#tabsHeader-2"><?php echo gettext('Inv Assignment') ?></a></li>
     <li><a href="#tabsHeader-3"><?php echo gettext('Revisions') ?></a></li>
     <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
     <li><a href="#tabsHeader-5"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-6"><?php echo gettext('Actions') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo gettext('Image') ?></a></li>
+    <li><a href="#tabsHeader-7"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -127,11 +128,15 @@
      </div>
     </div>
     <div id="tabsHeader-6" class="tabContent">
+     <div class="image"> <?php echo $f->image_field('image_file_id', $$class->image_file_id, '', '', 'img-medium'); ?> </div>
+    </div>
+    <div id="tabsHeader-7" class="tabContent">
      <div> 
       <ul class="column four_column">
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_template select_popup clickable">
          <?php echo gettext('Item/Template') ?>: </label><input type="text" class="text_field select_item_template item_template" id="item_template">
-         <?php $f = new inoform();  echo $f->hidden_field_withId('template_item_id', '') ?>
+         <?php $f = new inoform();
+         echo $f->hidden_field_withId('template_item_id', '') ?>
         <button class="button non_clickable apply_item_template btn btn-warning" id="apply_item_template">Apply</button>
        </li>
       </ul>
@@ -282,7 +287,7 @@
        <li><?php $f->l_checkBox_field_d('customer_ordered_cb'); ?></li>
        <li><?php $f->l_checkBox_field_d('customer_ordered_cb'); ?></li>
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_popup select_sourcing_rule clickable">
-         <?php echo gettext('Sourcing Rule') ?></label><?php $f->text_field_d('sourcing_rule') ?></li>
+<?php echo gettext('Sourcing Rule') ?></label><?php $f->text_field_d('sourcing_rule') ?></li>
        <li><?php $f->l_text_field_d('invoice_matching'); ?></li>
        <li><?php $f->l_text_field_d('default_buyer'); ?></li>
        <li><?php $f->l_text_field_d('list_price'); ?></li>
@@ -409,9 +414,9 @@
       <div class="panel-heading"><div class="panel-title"><?php echo gettext('Asset Maintenance') ?></div></div>
       <div class="panel-body">
        <ul class="column line_field">
-        <li><?php $f->l_select_field_from_object('am_activity_cause', am_asset_activity::activity_cause(),'option_line_code','option_line_value', $$class->am_activity_cause); ?></li>
-        <li><?php $f->l_select_field_from_object('am_activity_type', am_asset_activity::activity_type(),'option_line_code','option_line_value', $$class->am_activity_type); ?></li>
-        <li><?php $f->l_select_field_from_object('am_activity_source', am_asset_activity::activity_source(),'option_line_code','option_line_value', $$class->am_activity_source); ?></li>
+        <li><?php $f->l_select_field_from_object('am_activity_cause', am_asset_activity::activity_cause(), 'option_line_code', 'option_line_value', $$class->am_activity_cause); ?></li>
+        <li><?php $f->l_select_field_from_object('am_activity_type', am_asset_activity::activity_type(), 'option_line_code', 'option_line_value', $$class->am_activity_type); ?></li>
+        <li><?php $f->l_select_field_from_object('am_activity_source', am_asset_activity::activity_source(), 'option_line_code', 'option_line_value', $$class->am_activity_source); ?></li>
        </ul>
       </div>
 
@@ -446,7 +451,7 @@
     </div>
     <!--                  end of tab7 (Fiance)--> 
     <div id="tabsLine-9" class="tabContent">
-     <?php echo!empty($secondary_field_stmt) ? $secondary_field_stmt : null; ?>
+<?php echo!empty($secondary_field_stmt) ? $secondary_field_stmt : null; ?>
     </div>
    </div>
 

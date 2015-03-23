@@ -52,6 +52,7 @@ class content extends dbObject {
   "rev_enabled_cb",
   "rev_number",
   'show_in_fp_cb',
+  'content_by',
   "created_by",
   "creation_date",
   "last_update_by",

@@ -73,7 +73,7 @@ inoERP
     </div>
    </div>
   </form>
- </div>
+
 
  <div id="form_line" class="form_line"><span class="heading">Operation & Resource Details </span>
   <form action=""  method="bom_routingst" id="bom_routing_site"  name="bom_routing_line">

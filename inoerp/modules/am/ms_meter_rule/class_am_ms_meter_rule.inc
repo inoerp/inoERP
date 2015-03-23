@@ -70,7 +70,8 @@ class am_ms_meter_rule extends dbObject {
   'org_id',
   'meter_name',
   'rate',
-  'uom_id'
+  'uom_id',
+  'rate'
  ];
  public $pageTitle = " MS Meter Rule "; //page Title
  public $am_ms_meter_rule_id;

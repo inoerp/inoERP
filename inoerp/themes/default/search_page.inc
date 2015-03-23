@@ -117,6 +117,8 @@
         <?php echo $fav->show_currentUser_fav(true); ?>
        </div>
       </li>
+      <li role="presentation"><a  class="erp-links search-list-page" href="<?php echo HOME_URL; ?>"><i class="fa fa-search" title="Search & List Page"></i></a></li>
+      <li role="presentation"><a  class="erp-links form-page" href="<?php echo HOME_URL; ?>"><i class="fa fa-list-alt" title="Form Page"></i></a></li>
       <li class="show_loading_small"><img src="<?php echo HOME_URL ?>/themes/images/form/small_loading_bar.gif"></li>
      </ul>
     </div>

@@ -35,14 +35,18 @@
             <!--create empty form or a single id when search is not clicked and the id is referred from other content -->
 
             <!--End of Content-->
-            <div> <?php // echo ino_attachement($file)  ?> </div>
-            <?php echo $non_db_page;
+            <div> <?php // echo ino_attachement($file)   ?> </div>
+            <?php
+            echo $non_db_page;
             echo $f->hidden_field_withId('non_db_content_type', $non_db_content_type);
             ?>
             <?php
-            if ($access_level <= 3 && $mode == 9) {
-             echo '<div id="save" class="submit"><input type="button" value="Submit" name="submit_content" class="button"></div>';
+            if (property_exists($non_db_content_type, 'after_save_message')) {
+             $after_save_message = $non_db_content_type::$after_save_message;
+            } else {
+             $after_save_message = 'Action Comleted';
             }
+            echo '<div id="generic_save" class="submit" data-save_message="' . $after_save_message . '"><input type="button" value="Submit" name="submit_content" class="button"></div>';
            }
            ?>
           </form>

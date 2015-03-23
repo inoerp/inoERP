@@ -12,7 +12,7 @@ $childs_of_parent_id_array = content::find_childs_of_parent_id($$class->content_
 if ($childs_of_parent_id_array && (count($childs_of_parent_id_array) > 0)) {
  $childs_of_parent_id = "<ul>";
  foreach ($childs_of_parent_id_array as $child_content) {
-	$childs_of_parent_id .= '<li><a href="content.php?content_type=' . $content_type_name . '&amp;content_id=' . $child_content->content_id . '"   
+	$childs_of_parent_id .= '<li><a href="'.HOME_URL.'content.php?content_type=' . $content_type_name . '&amp;content_id=' . $child_content->content_id . '"   
                class="content_subject"> ' . $child_content->subject . ' </a></li>';
  }
  $childs_of_parent_id .="</ul>";

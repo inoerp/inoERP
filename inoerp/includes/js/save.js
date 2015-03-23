@@ -1065,13 +1065,14 @@ autoCompleteMain.prototype.autoComplete = function ()
  });
 };
 //file upload
-function fileUploadMain(json_url, module_name, document_type, class_name, upload_type, directory) {
+function fileUploadMain(json_url, module_name, document_type, class_name, upload_type, directory, display_type) {
  this.json_url = json_url;
  this.module_name = module_name;
  this.class_name = class_name;
  this.document_type = document_type;
  this.upload_type = upload_type;
  this.directory = directory;
+ this.display_type = display_type;
 }
 fileUploadMain.prototype.fileUpload = function () {
  var json_url = this.json_url;
@@ -1080,11 +1081,18 @@ fileUploadMain.prototype.fileUpload = function () {
  var document_type = this.document_type;
  var upload_type = this.upload_type;
  var directory = this.directory;
- $('body').on('click', '#attach_submit, #comment_attach_submit', function () {
+ var display_type = this.display_type;
+ $('body').on('click', '#attach_submit, #comment_attach_submit, .upload_file', function () {
+  var this_e = $(this);
   var divId = '#' + $(this).prop('id');
   $('.show_loading_small').show();
   formData = new FormData();
-  if ($(this).hasClass('comment_attach_submit')) {
+  if ($(this).hasClass('upload_file')) {
+   jQuery.each($(this).closest('ul').find('input')[0].files, function (i, file) {
+    formData.append('attachments-' + i, file);
+    display_type = $(this_e).closest('.show_attachment').find('.display_type').val();
+   });
+  } else if ($(this).hasClass('comment_attachments')) {
    jQuery.each($('#comment_attachments')[0].files, function (i, file) {
     formData.append('attachments-' + i, file);
    });
@@ -1114,6 +1122,10 @@ fileUploadMain.prototype.fileUpload = function () {
   if (document_type !== null) {
    formData.append('directory', directory);
   }
+
+  if (display_type !== null) {
+   formData.append('display_type', display_type);
+  }
   return $.ajax({
    url: json_url,
    data: formData,
@@ -1132,6 +1144,11 @@ fileUploadMain.prototype.fileUpload = function () {
    $(divId).closest('#file_upload_form').find(".uploaded_file_details").append(result);
    if (message) {
     $('#uploaded_file_details').append(message);
+   }
+   if (this_e.hasClass('upload_file')) {
+    var file_id = +($(result).find('.file_id_values').val().trim());
+    $(this_e).closest('.show_attachment').find('.uploaded_file_details').append(result);
+    $(this_e).closest('.show_attachment').find('.file_id').val(file_id);
    }
    $('.show_loading_small').hide();
    alert('Upload Completed\nCheck output/errors section for details');

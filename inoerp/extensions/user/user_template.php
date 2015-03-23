@@ -9,6 +9,7 @@
     <li><a href="#tabsHeader-4"><?php echo gettext('Supplier') ?></a></li>
     <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
     <li><a href="#tabsHeader-6"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-7"><?php echo gettext('Profile Picture') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -75,6 +76,9 @@
        </div>
       </div>
      </div>
+    </div>
+    <div id="tabsHeader-7" class="tabContent">
+     <div class="image"> <?php echo $f->image_field('image_file_id', $$class->image_file_id, '' , '' , 'img-medium'); ?> </div>
     </div>
    </div>
   </div>

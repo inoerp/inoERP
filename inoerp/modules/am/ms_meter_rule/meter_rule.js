@@ -77,12 +77,13 @@ $(document).ready(function() {
  deleteData('form.php?class_name=am_ms_meter_rule&line_class_name=am_ms_meter_rule');
 
  //defalut values to line
-$('body').off('blur', '.base_interval_days').on('blur', '.base_interval_days', function(){
+ $('body').off('blur', '.base_interval').on('blur', '.base_interval', function(){
   if($(this).val()){
-  var cycle_interval_days = (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"))*(+$('#intervals_per_cycle').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-  $(this).closest('tr').find('.cycle_interval_days').val(cycle_interval_days);
+  var cycle_interval = (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"))*(+$('#intervals_per_cycle').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+  $(this).closest('tr').find('.cycle_interval').val(cycle_interval);
   }
 });
+
  
   $('body').off('click', 'a.am_ms_meter_rule_id').on('click', 'a.am_ms_meter_rule_id', function (e) {
   e.preventDefault();
@@ -94,6 +95,10 @@ $('body').off('blur', '.base_interval_days').on('blur', '.base_interval_days', f
   getFormDetails(formUrl);
  }).one();
 
+$('body').off('change', '.am_meter_id').on('change', '.am_meter_id' , function(){
+  var uom_id = $(this).find('option:selected').data('uom_id');
+  $(this).closest('tr').find('.uom_id').val(uom_id);
+});
 
 });
 

@@ -92,6 +92,7 @@ class item extends dbObject {
   "org_id",
   "item_number",
   "item_description",
+  'image_file_id',
   'product_line',
   'product_line_percentage',
   "locator_control",
@@ -294,6 +295,7 @@ class item extends dbObject {
  public $org;
  public $item_number;
  public $item_description;
+ public $image_file_id;
  public $product_line;
  public $product_line_percentage;
  public $locator_control;

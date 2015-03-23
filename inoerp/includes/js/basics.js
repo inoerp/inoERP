@@ -2860,15 +2860,6 @@ $(document).ready(function () {
 
  remove_row();
 
- //Coa auto complete
-// var coaCombination = new autoCompleteMain();
-//// var coa_id = $('#coa_id').val();
-// coaCombination.json_url = 'modules/gl/coa_combination/coa_search.php';
-// coaCombination.primary_column1 = 'coa_id';
-// coaCombination.select_class = 'select_account';
-// coaCombination.min_length = 4;
-// coaCombination.autoComplete();
-
  $('.select_account').inoAutoCompleteElement({
   json_url: 'modules/gl/coa_combination/coa_search.php',
   primary_column1: 'coa_id'
@@ -2905,7 +2896,7 @@ $(document).ready(function () {
   primary_column1: 'org_id'
  });
 
- 
+
 
 
  //auto complete for allowed BOM
@@ -3230,7 +3221,7 @@ $(document).ready(function () {
   plugins: 'textcolor link image lists code table emoticons',
   width: 740,
   height: 250,
-    relative_urls: false,
+  relative_urls: false,
   remove_script_host: false,
   toolbar: "styleselect code | emoticons forecolor backcolor bold italic pagebreak | alignleft aligncenter alignright | bullist numlist outdent indent | link image inserttable ",
   menubar: false,
@@ -3773,11 +3764,11 @@ $(document).ready(function () {
   var class_name = $('.class_name').val();
   var homeUrl = $('#home_url').val();
   var savePath = homeUrl + 'program.php?class_name=' + class_name;
-  $.when(saveHeader(savePath, headerData, '#sys_program', '', '', true, 'program_header')).then(function(){
+  $.when(saveHeader(savePath, headerData, '#sys_program', '', '', true, 'program_header')).then(function () {
    $('.show_loading_small').hide();
   });
-  
-  
+
+
  });
 
  //FILE attachment
@@ -4134,36 +4125,101 @@ $(document).ready(function () {
 
  });
 
+ $('body').on('click', '#generic_save', function () {
+  var noOfRequiredFileValuesMissing = 0;
+  var missingMandatoryValues = [];
+  $('body').find('input:required').each(function () {
+   if (!$(this).val())
+   {
+    missingMandatoryValues.push($(this).attr('class'));
+    noOfRequiredFileValuesMissing++;
+   }
+  });
+  
+  if (noOfRequiredFileValuesMissing > 0) {
+   var showMessage = ' <div id="dialog_box" class="dialog mandatory_message"> ' + noOfRequiredFileValuesMissing + ' mandatory field(s) is/are missing....... <br>';
+   $.map(missingMandatoryValues, function (val, i) {
+    showMessage += i + ' : ' + val.replace(/_+/, ' ') + ' <br>';
+   });
+   showMessage += '</div>';
+   $("#content").append(showMessage);
+   show_dialog_box();
+   return;
+  }
+  $(".error").append('<div class="alert alert-warning alert-dismissible" role="alert">Requet In Progress ...</div>');
+  var form_header_id = '#content_data';
+  if ($('.mce-tinymce').length >= 1) {
+   $(form_header_id).find('textarea').each(function () {
+    var name = $(this).attr('name');
+    var data = tinyMCE.get(name).getContent();
+    $(this).html(data);
+   });
+  }
+  var save_message = $(this).data('save_message');
+  var headerData = $(form_header_id).serializeArray();
+  $(this).prop('disabled', true);
+  $.when(saveHeader('content.php', headerData, '#content_id', '', '', true, 'content')).then(function () {
+   var message = '<div class="alert alert-success alert-dismissible" role="alert">' + save_message + '</div>';
+   $(".error").replaceWith(message);
+   $('.show_loading_small').hide();
+  });
+
+ });
+
  $('body').on('focusin', '.always_readonly', function () {
   $(this).attr('readonly', true).css('background-color', 'none repeat scroll 0% 0% #F3F3D2;');
   alert(readonly_field);
  });
 
-$('.small_popover').popover({
-  html : true,
-  trigger : 'hover'
-  });
-
-
-$('body').on('click','.enable-editor', function(){
-tinymce.init({
-  selector: '.ed-bigtext',
-  mode: "exact",
-//    theme: "modern",
-  plugins: 'textcolor link image lists code table emoticons',
-  width: 680,
-  height: 150,
-  relative_urls: false,
-  remove_script_host: false,
-  toolbar: "styleselect code | emoticons forecolor backcolor bold italic pagebreak | alignleft aligncenter alignright | bullist numlist outdent indent | link image inserttable ",
-  menubar: false,
-  statusbar: false,
-  valid_elements: '*[*]',
-  file_browser_callback: function () {
-   $('#comment_attachments').trigger('click');
-  }
+ $('.small_popover').popover({
+  html: true,
+  trigger: 'hover'
  });
 
+
+ $('body').on('click', '.enable-editor', function () {
+  tinymce.init({
+   selector: '.ed-bigtext',
+   mode: "exact",
+//    theme: "modern",
+   plugins: 'textcolor link image lists code table emoticons',
+   width: 680,
+   height: 150,
+   relative_urls: false,
+   remove_script_host: false,
+   toolbar: "styleselect code | emoticons forecolor backcolor bold italic pagebreak | alignleft aligncenter alignright | bullist numlist outdent indent | link image inserttable ",
+   menubar: false,
+   statusbar: false,
+   valid_elements: '*[*]',
+   file_browser_callback: function () {
+    $('#comment_attachments').trigger('click');
+   }
+  });
+
+ });
+
+ $('body').on('click', 'a.erp-links', function (e) {
+  e.preventDefault();
+
+  if ($(this).hasClass('search-list-page')) {
+   if ($('ul#js_saving_data').find('.headerClassName').data('headerclassname')) {
+    var headerClassName = $('ul#js_saving_data').find('.headerClassName').data('headerclassname');
+    var formUrl = 'search.php?class_name=' + headerClassName;
+    getFormDetails(formUrl);
+   }
+  } else if ($(this).hasClass('form-page')) {
+   if ($('input[name="search_class"]')) {
+    var headerClassName = $('input[name="search_class"]').val();
+    var formUrl = 'form.php?mode=9&class_name=' + headerClassName;
+    getFormDetails(formUrl);
+   }
+  }
+ });
+ 
+ $('body').on('click','.delete_image', function(){
+$(this).closest('.ino-images').find('.file_id').val('');
+  console.log($(this).closest('.ino-images').find('.img'));
+  $(this).closest('.ino-images').find('.existing-image').css('display','none');
 });
 
 });

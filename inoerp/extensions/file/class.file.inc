@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -7,6 +8,7 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
+
 /**
  * 
  *
@@ -32,6 +34,8 @@ class file extends dbObject {
   "file_name",
   "file_size",
   "file_type",
+  'display_type',
+  'description',
   "created_by",
   "creation_date",
   "last_update_by",
@@ -84,9 +88,10 @@ class file extends dbObject {
 
  public $file_id;
  public $file_path;
- public $file_name;
+ public $file_name = 'attachments';
  public $file_size;
  public $file_type;
+ public $display_type;
  public $description;
  public $reference_table;
  public $file_reference_id;
@@ -126,6 +131,55 @@ class file extends dbObject {
      break;
    }
   }
+ }
+
+ public function show_attachement($file, $label = 'Select Image') {
+  $stmt = '<div class="existing-image">'. $this->show_existing_files($file) .'</div>';
+  $stmt .= '<div  class="show_attachment">';
+		$stmt .= '<div id="file_upload_form" class="form-group">
+							<ul class="inRow asperWidth"><label for="exampleInputFile">' . gettext($label) . '</label>
+							 <li><input type="file" id="attachments" class="attachments" name="' . $this->file_name . '[]" multiple/></li>
+                <li><input type="hidden" class="hidden" name="display_type[]" value="' . $this->display_type . '"/></li>
+							 <li><button  form="file_upload" name="attach_submit" id="attach_submit" class="submit button">Attach</button></li>';
+  $stmt.='<li class="show_loading_small"><img alt="Loading..." src="' . HOME_URL . 'themes/images/small_loading.gif"/></li>
+							</ul>
+							<div class="uploaded_file_details"></div>
+						 </div>';
+  $stmt .= '</div>';
+
+  return $stmt;
+ }
+
+ public function show_existing_files(&$file) {
+  $attachment_statement = "<div id=\"existing_attachment_list\"><ul class='first_level'>";
+
+  if (!empty($file) && count($file) > 0) {
+   if ($this->display_type == 'file') {
+    $attachment_statement .= '<li><ul  class="second_level header"><li>Hide</li><li>Delete</li><li>File</li><li></li></ul></li>';
+   }
+   foreach ($file as $records) {
+    switch ($records->display_type) {
+     case 'image':
+      $attachment_statement .= '<li><img src="' . $records->file_path . $records->file_name . '"/></li>';
+      break;
+
+     case 'file' :
+      $attachment_statement .= '<li><ul class="second_level">';
+      $attachment_statement .= '<li><input type="checkbox" class="hide_file" name="hide_file[]" value="' . $records->file_reference_id . '"></li>';
+      $attachment_statement .= '<li><input type="checkbox" class="delete_file" name="delete_file[]" value="' . $records->file_reference_id . '"></li>';
+      $attachment_statement .= '<li><a href=' . HOME_URL . $records->file_path . $records->file_name . '>' . $records->file_name . '</a></li>';
+//		$attachment_statement .= '<li class="remove_row_img"><img src="' . HOME_URL . 'themes/images/remove.png" alt="remove this file" /> </li>';
+      $attachment_statement .= '</ul></li>';
+      break;
+
+     default:
+      break;
+    }
+   }
+  }
+
+ $attachment_statement .= "</ul></div>";
+  return $attachment_statement;
  }
 
  private function check_extension($extension) {
@@ -212,7 +266,7 @@ class file extends dbObject {
     while (($data = fgetcsv($fh, 3000, ",")) !== FALSE) {
      array_push($data_array, $data);
     }
-        $this->mass_upload($data_array, $this->_class_name);
+    $this->mass_upload($data_array, $this->_class_name);
     fclose($fh);
    }
 
@@ -233,8 +287,11 @@ class file extends dbObject {
      $file = file::find_by_id($values);
      echo '<ul class="inRow asperWidth">';
      echo '<li><button name="remove_file" class="remove_file" >Remove</button></li>';
-     echo '<li><input type="hidden" name=file_id_values[] class="hidden" value="' . $values . '"></li>';
+     echo '<li><input type="hidden" name=file_id_values[] class="hidden file_id_values" value="' . $values . '"></li>';
      echo '<li><a href=' . HOME_URL . "$this->file_path" . $file->file_name . '>' . $file->file_name . '</a></li>';
+     if($this->display_type =='image'){
+      echo '<li><img src="' . $file->file_path . $file->file_name . '"/ class="img img-medium"></li>';
+     }
      echo '</ul>';
     }
     echo '</div>';
@@ -248,7 +305,7 @@ class file extends dbObject {
   $sql = "SELECT file.file_id as file_id, 
                file.file_path as file_path, 
                file.file_name as file_name, 
-               file.description as description,
+               file.description as description,file.display_type as display_type,
 							 file_reference.file_reference_id as file_reference_id,
 							 file_reference.status as status
        FROM 
@@ -319,5 +376,6 @@ class file extends dbObject {
 
 }
 
+$file_z = new file();
 //end of file class
 ?>
