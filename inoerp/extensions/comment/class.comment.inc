@@ -194,6 +194,9 @@ class comment extends dbObject {
    $comment_string .= '<ul class="documentation_list comment">';
    $comment_string .= '<li class="all_comments"><span class="badge"><a href="' . HOME_URL . 'content.php?content_type=comment">'
     . 'All Comments <i class="fa fa-comments-o"></i></a></span></li>';
+   if(empty($result)){
+    return;
+   }
    foreach ($result as $records) {
     $comment_string .= '<li class="comment_subject">';
     $comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&' . 'content_id=' . $records->content_id .

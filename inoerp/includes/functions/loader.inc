@@ -193,6 +193,8 @@ if (($continue) && (!empty($class_names))) {
   if (class_exists($class)) {
    $$class = new $class;
   } else {
+ $continue = false;
+ return;
 //   pa(get_declared_classes());
 //   redirect_to(HOME_URL);
   }
@@ -215,7 +217,7 @@ if (($continue) && (!empty($class_names))) {
     $class_id_value = $_GET[$class_id];
     $verify_web_form_allowed = false;
    } else {
-//     pa($_SESSION);
+  
     $class_id_value = null;
     if (property_exists($$class, 'profile_default')) {
      if (!empty($$class->profile_default) && (is_array($$class->profile_default))) {

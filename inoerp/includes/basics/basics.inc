@@ -365,6 +365,8 @@ require_once(INC_MODULE . DS . "am" . DS . "wo" . DS . "class_am_wo_routing_deta
 require_once(INC_MODULE . DS . "am" . DS . "material_transaction" . DS . "class_am_material_transaction.inc");
 require_once(INC_MODULE . DS . "am" . DS . "resource_transaction" . DS . "class_am_resource_transaction.inc");
 require_once(INC_MODULE . DS . "am" . DS . "move_transaction" . DS . "class_am_move_transaction.inc");
+require_once(INC_MODULE . DS . "am" . DS . "work_bench" . DS . "class_am_wo_work_bench.inc");
+require_once(INC_MODULE . DS . "am" . DS . "work_bench" . DS . "class_am_wo_work_bench_line.inc");
 
 
 //

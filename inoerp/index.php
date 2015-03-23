@@ -221,7 +221,9 @@ include_once("includes/functions/loader.inc");
       $position = ($pageno - 1) * $per_page;
 
       $fp_contnts_ai = new ArrayIterator($fp_contnts);
-      $fp_contnts_ai->seek($position);
+      if ($position > 0) {
+       $fp_contnts_ai->seek($position);
+      }
       $cont_count = 1;
       while ($fp_contnts_ai->valid()) {
        $contnent = $fp_contnts_ai->current();
