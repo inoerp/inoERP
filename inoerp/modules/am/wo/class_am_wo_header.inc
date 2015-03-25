@@ -72,6 +72,8 @@ class am_wo_header extends dbObject {
   'scheduling_priority',
   'closed_date',
   'suggested_end_date',
+  'cycle',
+  'cycle_interval',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -118,10 +120,6 @@ class am_wo_header extends dbObject {
    'form.php?class_name=wip_resource_transaction&mode=9' => 'Resource Tnx',)
  ];
  public $pageTitle = " WO - Maintenance Work Order "; //page Title
- public $option_lists = [
-  'am_wo_type' => 'am_wo_TYPE',
-  'am_wo_status' => 'am_wo_STATUS',
- ];
  public $am_wo_header_id;
  public $am_asset_id;
  public $activity_item_id_m;
@@ -151,11 +149,14 @@ class am_wo_header extends dbObject {
  public $scheduling_priority;
  public $closed_date;
  public $suggested_end_date;
+ public $cycle;
+ public $cycle_interval;
  public $created_by;
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
  public $msg;
+ public $message;
  public $remaining_quantity;
  public $item_number;
  public $item_description;
@@ -165,6 +166,16 @@ class am_wo_header extends dbObject {
  public $activity_item_number;
  public $am_asset_type;
  public $revision_name; //for activity item_id_m
+ public $cut_off_date;
+ public $prg_create_wo_parameters = [
+  'Organization' => 'search_org_name',
+  'Cut Off Date' => 'search_cut_off_date',
+  'Asset Number' => 'search_asset_number',
+ ];
+ public $prg_create_wo_details = [
+  'name' => 'Generate Maintenance WOs',
+  'description' => 'Generate Maintenance Work Orders',
+ ];
 
  Public static function am_wo_type() {
   $option_header = option_header::find_by_name('AM_WO_TYPE');
@@ -390,6 +401,157 @@ class am_wo_header extends dbObject {
    echo "<br> WIP WO Number Update Failed" . $e->getMessage();
    return false;
   }
+ }
+
+ public function prg_create_wo($seralized_parameters) {
+  $parameters = unserialize($seralized_parameters);
+  $this->message .= '<br> Staring Create WO Program. ';
+  if (!empty($parameters['org_id'][0])) {
+   $this->org_id = $parameters['org_id'][0];
+   $this->message .= '<br> Entered Org Id is : ' . $this->org_id;
+  } else {
+   $this->message .= '<br> No org id found, Exiting the program<br> . Error message @ am_wo_header @@ line ' . __LINE__;
+   return $this->message;
+  }
+
+  if (!empty($parameters['am_asset_id'][0])) {
+   $this->am_asset_id = $parameters['am_asset_id'][0];
+   $this->message .= '<br> Entered am_asset_id is : ' . $this->am_asset_id;
+  }
+
+  if (!empty($parameters['am_asset_id'][0])) {
+   $this->cut_off_date = $parameters['cut_off_date'][0];
+  } else {
+   $date_i = new DateTime();
+   $date_i->add(new DateInterval('P365D'));
+   $this->cut_off_date = $date_i->format('Y-m-d');
+  }
+
+  if (!empty($this->am_asset_id)) {
+   $this->message .= '<br> Creating WO for am_asset_id : ' . $this->am_asset_id;
+   $this->_create_WO_from_assetId($this->am_asset_id);
+  } else if (!empty($this->org_id)) {
+   $all_assets = am_asset::find_by_orgId($this->org_id);
+   foreach ($all_assets as $asset) {
+    $this->message .= '<br> Trying to cerate WO for am_asset_id : ' . $asset->am_asset_id;
+    try {
+     $this->_create_WO_from_assetId($asset->am_asset_id);
+     $this->message .= "<br/>WO is sucessfully created for am_asset_id id " . $asset->am_asset_id;
+    } catch (Exception $e) {
+     $this->message .= "<br/>WO creation program failed  for for am_asset_id id " . $asset->am_asset_id . $e->getMessage();
+    }
+   }
+  }
+
+  return $this->message;
+ }
+
+ private function _create_WO_from_assetId($am_asset_id, $order_typ = 'ACTUAL') {
+  global $dbc;
+  /*
+   * 1. Find all active/blank schedules where effective from date is greater than equal to day and effective end date is blank or
+   * greater than today
+   * 2. Check if there is a calendar date - if yes use it
+   * 3. If no calendar date then use date rule & meter rule
+   * 4. Find out WO details as per the date rule & activity; Check if WO exists, If not then create WO
+   */
+  $am_schedule = new am_maintenance_schedule();
+  $am_schedule->org_id = $this->org_id;
+  $am_schedule->am_asset_id = $am_asset_id;
+  $all_schedules = $am_schedule->findBy_orgId_assetId_otherDetails();
+  if (empty($all_schedules)) {
+   $this->message .= "<br/>No schedule found for the entered details. Error message @ am_wo_header @@ line " . __LINE__;
+   return;
+  }
+  foreach ($all_schedules as $am_schedule_fl) {
+   $all_activities = am_ms_activity_reference::find_by_scheduleId($am_schedule_fl->am_maintenance_schedule_id);
+   if (empty($all_activities)) {
+    continue;
+   } else {
+    foreach ($all_activities as $activities) {
+
+     //check calendar rule
+     $cal_dates = am_ms_calendar_date::find_by_maintenance_schedule_id($am_schedule_fl->am_maintenance_schedule_id);
+     if ($cal_dates) {
+      //verify & create WO
+      foreach ($cal_dates as $date) {
+       $this->_verify_create_WO($am_asset_id, $activities->activity_item_id_m, $date->date, $am_schedule_fl->wo_status);
+      }
+     } else {
+      //check date rule
+      $date_rule = am_ms_date_rule::find_by_maintenance_schedule_id($am_schedule_fl->am_maintenance_schedule_id);
+      if(empty($date_rule)){
+       return;
+      }
+      $wo_date = $am_schedule_fl->schedule_basis_date;
+      $cycle = $am_schedule_fl->current_cycle;
+      $cycle_interval = $am_schedule_fl->current_cycle_interval;
+      $wo_date_obj = new DateTime($wo_date);
+      $cut_off_date_obj = new DateTime($this->cut_off_date);
+      do {
+       $cycle_interval++;
+       if ($cut_off_date_obj > $wo_date_obj) {
+        $this->_verify_create_WO($am_asset_id, $activities->activity_item_id_m, $wo_date, $am_schedule_fl->wo_status, $cycle, $cycle_interval);
+       }
+       if (!empty($am_schedule_fl->intervals_per_cycle) && $cycle_interval == $am_schedule_fl->intervals_per_cycle) {
+        $cycle++;
+       }
+       $date_rule_days = $date_rule->base_interval_days * $activities->interval_multiple;
+       if (empty($date_rule_days)) {
+        $this->message .= "<br/>Either base_interval_days or interval_multiple is zero ";
+        $dbc->rollback = true;
+        return;
+       }
+       $wo_date_obj->add(new DateInterval("P$date_rule_days" . "D"));
+       $wo_date = $wo_date_obj->format('Y-m-d');
+      } while ($cut_off_date_obj >= $wo_date_obj);
+     }
+    }
+   }
+  }
+ }
+
+ private function _verify_create_WO($am_asset_id, $activity_item_id_m, $date, $wo_status = 'UN_RELEASED', $cycle = '', $cycle_interval = '') {
+  global $dbc;
+  $asset_details = am_asset::find_by_id($am_asset_id);
+  $existing_wo = self::find_by_asset_activity_date($am_asset_id, $activity_item_id_m, $date);
+  if ($existing_wo) {
+   $this->message .= "<br/>WO exists for am_asset_id"
+    . " activity_item_id_m, & date [$am_asset_id , $activity_item_id_m , $date ]. WO Id " . $existing_wo[0]->am_wo_header_id;
+  } else {
+   //create WO
+   $new_amwo = new am_wo_header();
+   $new_amwo->org_id = $this->org_id;
+   $new_amwo->am_asset_id = $am_asset_id;
+   $new_amwo->activity_item_id_m = $activity_item_id_m;
+   $new_amwo->wip_accounting_group_id = $asset_details->wip_accounting_group_id;
+   $new_amwo->wo_type = 'PREVENTIVE';
+   $new_amwo->wo_status = $wo_status;
+   $new_amwo->department_id = $asset_details->owning_department_id;
+   $new_amwo->start_date = $date;
+   $new_amwo->cycle = $cycle;
+   $new_amwo->cycle_interval = $cycle_interval;
+   $new_amwo->quantity = 1;
+   try {
+    $new_amwo->save();
+    $new_amwo->_after_save();
+   } catch (Exception $e) {
+    $this->message .= "<br/>Unable to save the WO details"
+     . " Error @ am_wo_header @@ line  " . __LINE__ . '<br>' . $e->getMessage();
+    $dbc->rollback = true;
+   }
+  }
+ }
+
+ public static function find_by_asset_activity_date($am_asset_id, $activity_item_id_m, $date) {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE am_asset_id = '{$am_asset_id}'  ";
+  $sql .= " AND activity_item_id_m = '{$activity_item_id_m}'  ";
+  $sql .= " AND start_date = '{$date}'  ";
+
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
  }
 
 }

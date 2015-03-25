@@ -14,7 +14,11 @@ if (!empty($_POST)) {
   try {
    $p->save();
    $dbc->confirm();
-   echo "<div id='json_save_header'><div class='message'>The program is sucessfully saved; Program Id is " . $p->sys_program_id . '</div></div>';
+   echo "<div id='json_save_header'>";
+   echo '<div class="alert alert-success alert-dismissible" role="alert">
+   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+   echo "<div class='message'>The program is sucessfully saved; Program Id is " . $p->sys_program_id . '</div>'
+   . '</div></div>';
   } catch (Exception $e) {
    echo " Saving the program failed! " . $e->getMessage();
    return -99;

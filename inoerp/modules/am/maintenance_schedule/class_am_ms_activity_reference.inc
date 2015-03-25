@@ -104,6 +104,14 @@ class am_ms_activity_reference extends dbObject {
   $result = $db->find_by_sql($sql);
   return $result;
  }
+ 
+  public static function find_by_scheduleId($am_maintenance_schedule_id) {
+  $sql = "SELECT * FROM " .
+   self::$table_name .
+   " where am_maintenance_schedule_id= '{$am_maintenance_schedule_id}' ";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
 
 }
 

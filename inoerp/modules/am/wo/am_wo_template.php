@@ -63,6 +63,8 @@ inoERP
          <li><?php $f->l_text_field_d('schedule_group'); ?> </li>
          <li><?php $f->l_text_field_d('line'); ?> </li>
          <li><?php $f->l_number_field_d('scheduling_priority'); ?> </li>
+         <li><?php $f->l_text_field_dr('cycle'); ?> </li>
+         <li><?php $f->l_text_field_dr('cycle_interval'); ?> </li>
         </ul>
        </div>
       </div>

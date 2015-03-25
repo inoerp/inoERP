@@ -401,7 +401,7 @@ class inosave extends dbObject {
     }
     echo '</ul>';
    } else if (!empty($$class->$primaryColumn)) {
-    echo '<div class="message">'.gettext('Data is sucessfully saved') .' ' . $primaryColumn . gettext('is') . ' </div>';
+    echo '<div class="message">'.gettext('Data is sucessfully saved') .' ' . $primaryColumn . gettext(' is ') . ' </div>';
     echo '<div id="headerId">' . $$class->$primaryColumn . '</div>';
     if (!empty($primaryColumn2)) {
      echo '<div id="primary_column2">' . $$class->$primaryColumn2 . '</div>';

@@ -380,7 +380,7 @@ class comment extends dbObject {
     $comment_string .= '<div class="panel-heading">';
     $comment_string .= '<ul class="header_li">';
     if (!empty($records->image_file_id)) {
-     $profile_image = $f->show_existing_image($records->image_file_id, 'img-vs');
+     $profile_image = $f->show_existing_image($records->image_file_id, 'img-vs', 1);
      $comment_string .= "<li class='user-profile-image'>$profile_image</li>";
     }
     if (!empty($records->username) && ($records->created_by != -99)) {

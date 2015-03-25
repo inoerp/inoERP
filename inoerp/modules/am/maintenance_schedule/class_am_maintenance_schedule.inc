@@ -34,6 +34,20 @@ class am_maintenance_schedule extends dbObject {
   'module_name' => 'am',
   'weight' => 1
  ];
+ public static $schedule_basis_a = [
+  'BASE_DATE' => 'Base Date',
+  'ACTUATL_START_DATE' => 'Actual Start Date',
+  'ACTUATL_END_DATE' => 'Actual End Date'
+ ];
+ public static $schedule_method_a = [
+  'FORWARD' => 'Forward From Start Date',
+  'BACKWARD' => 'BAckward From End Data'
+ ];
+ public static $status_a = [
+  'ACTIVE' => 'Active',
+  'INACTIVE' => 'Inactive',
+  'PLANNING_ONLY' => 'Planning Only'
+ ];
  public $checkbox = [
   "create_wo_cb",
   'reschedule_wo_cb'
@@ -44,17 +58,21 @@ class am_maintenance_schedule extends dbObject {
   'schedule_number',
   'item_id_m',
   'am_asset_id',
-  'effective_from_date',
   'effective_start_date',
+  'effective_end_date',
   'wo_status',
   'description',
   'intervals_per_cycle',
   'create_wo_cb',
   'current_cycle',
   'current_cycle_interval',
+  'schedule_basis',
+  'schedule_basis_date',
+  'schedule_method',
   'reschedule_wo_cb',
   'org_id',
   'address_id',
+  'status',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -65,7 +83,10 @@ class am_maintenance_schedule extends dbObject {
  ];
  public $requiredField = [
   'schedule_name',
-  'org_id'
+  'org_id',
+  'schedule_basis',
+  'schedule_basis_date',
+  'schedule_method',
  ];
  public $fields_inForm_notInDataBase = [
   "am_asset_number",
@@ -82,7 +103,7 @@ class am_maintenance_schedule extends dbObject {
  public $am_asset_id;
  public $item_id_m;
  public $schedule_number;
- public $effective_from_date;
+ public $effective_end_date;
  public $effective_start_date;
  public $wo_status;
  public $description;
@@ -90,6 +111,9 @@ class am_maintenance_schedule extends dbObject {
  public $create_wo_cb;
  public $current_cycle;
  public $current_cycle_interval;
+ public $schedule_basis;
+ public $schedule_basis_date;
+ public $schedule_method;
  public $reschedule_wo_cb;
  public $org_id;
  public $address_id;
@@ -116,6 +140,32 @@ class am_maintenance_schedule extends dbObject {
    " where am_maintenance_schedule_number= '{$am_maintenance_schedule_number}' ";
   $result = $db->find_by_sql($sql);
   return $result;
+ }
+ 
+  public function findBy_orgId_itemIdM_otherDetails() {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE item_id_m = '{$this->item_id_m}' ";
+  $sql .= " AND org_id = '{$this->org_id}' ";
+  $sql .= " AND status = 'ACTIVE' ";
+  $sql .= " AND ( effective_start_date IS NULL OR effective_start_date <= NOW() ) ";
+  $sql .= " AND ( effective_end_date IS NULL OR effective_end_date > NOW() ) ";
+  
+  $result = $this->findBySql($sql);
+  return !empty($result) ? $result : false;
+ }
+ 
+   public function findBy_orgId_assetId_otherDetails() {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE am_asset_id = '{$this->am_asset_id}' ";
+  $sql .= " AND org_id = '{$this->org_id}' ";
+  $sql .= " AND status = 'ACTIVE' ";
+  $sql .= " AND ( effective_start_date IS NULL OR effective_start_date <= NOW() ) ";
+  $sql .= " AND ( effective_end_date IS NULL OR effective_end_date > NOW() ) ";
+  
+  $result = $this->findBySql($sql);
+  return !empty($result) ? $result : false;
  }
 
 }

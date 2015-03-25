@@ -1566,3 +1566,8 @@ background-color: #D9EDF7;
 padding: 5px;
 border-radius: 10px;
 }
+
+.hidden-image{
+        position:absolute;
+        display:none;
+}

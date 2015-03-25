@@ -83,6 +83,15 @@ class am_ms_calendar_date extends dbObject {
  public $item_number;
  public $org_id;
 
+ public static function find_by_maintenance_schedule_id($am_maintenance_schedule_id) {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE am_maintenance_schedule_id = '{$am_maintenance_schedule_id}' ";
+
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
+
 }
 
 //end of path class

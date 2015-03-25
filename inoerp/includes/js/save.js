@@ -32,50 +32,52 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
   data: {headerData: headerData,
    className: form_header},
   type: 'post',
-  beforeSend: function () {
-
-  },
-  complete: function () {
-  }
- }).done(function (result) {
-  var div = $(result).filter('div#json_save_header').html();
+  success: function (result) {
+   if (result) {
+    var div = $(result).filter('div#json_save_header').html();
 //  if ($(div).length > 1) {
 //   $(".error").append(div);
 //  }
 
-  var message = $(result).find('.message, .rollback_msg').html();
-  if (message && message.length > 1) {
-   $(".error").prepend(result);
-   $("#accordion").accordion({active: 0});
-  }
+    var message = $(result).find('.message, .rollback_msg').html();
+    if (message && message.length > 1) {
+     $(".error").prepend(result);
+     $("#accordion").accordion({active: 0});
+    }
 
-  if (primary_column_id) {
-   var primary_column_class = primary_column_id.replace('#', '.');
-   var header_id = $(result).find('div#headerId').html();
-   var header_id2 = $(result).find('div#primary_column2').html();
-   var header_id3 = $(result).find('div#primary_column3').html();
+    if (primary_column_id) {
+     var primary_column_class = primary_column_id.replace('#', '.');
+     var header_id = $(result).find('div#headerId').html();
+     var header_id2 = $(result).find('div#primary_column2').html();
+     var header_id3 = $(result).find('div#primary_column3').html();
 
-   if (header_id && header_id !== 'undefined') {
-    $(primary_column_id).val(header_id);
-    $(primary_column_class).val(header_id);
+     if (header_id && header_id !== 'undefined') {
+      $(primary_column_id).val(header_id);
+      $(primary_column_class).val(header_id);
+     }
+
+     if ($(primary_column_id2)) {
+      $('.primary_column2').val(header_id2);
+     }
+     if ($(primary_column_id3)) {
+      $('.primary_column3').val(header_id3);
+     }
+    }
+    if (savingOnlyHeader) {
+     $('#overlay').css('display', 'none');
+     $('#form_top_image').css('display', 'block');
+    }
    }
+  },
+  beforeSend: function () {
 
-   if ($(primary_column_id2)) {
-    $('.primary_column2').val(header_id2);
-   }
-   if ($(primary_column_id3)) {
-    $('.primary_column3').val(header_id3);
-   }
+  },
+  error: function (request, errorType, errorMessage) {
+   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+  },
+  complete: function () {
+   $('.show_loading_small').hide();
   }
-  if (savingOnlyHeader) {
-   $('#overlay').css('display', 'none');
-   $('#form_top_image').css('display', 'block');
-  }
-
- }).fail(function (error, textStatus, xhr) {
-  $('#overlay').css('display', 'none');
-  $('#form_top_image').css('display', 'block');
-  alert("save failed \n" + error + textStatus + xhr);
  });
 }
 
@@ -1082,7 +1084,8 @@ fileUploadMain.prototype.fileUpload = function () {
  var upload_type = this.upload_type;
  var directory = this.directory;
  var display_type = this.display_type;
- $('body').on('click', '#attach_submit, #comment_attach_submit, .upload_file', function () {
+ $('body').on('click', '#attach_submit, #comment_attach_submit, .upload_file', function (e) {
+  e.preventDefault();
   var this_e = $(this);
   var divId = '#' + $(this).prop('id');
   $('.show_loading_small').show();

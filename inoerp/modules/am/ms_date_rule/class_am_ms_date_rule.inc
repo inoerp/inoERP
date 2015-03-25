@@ -33,7 +33,6 @@ class am_ms_date_rule extends dbObject {
   'module_name' => 'am',
   'weight' => 5
  ];
-
  public $field_a = [
   'am_ms_date_rule_id',
   'am_maintenance_schedule_id',
@@ -90,6 +89,18 @@ class am_ms_date_rule extends dbObject {
  public $am_asset_number;
  public $item_number;
  public $org_id;
+
+ public static function find_by_maintenance_schedule_id($am_maintenance_schedule_id) {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE am_maintenance_schedule_id = '{$am_maintenance_schedule_id}' ";
+  $sql .= " AND ( from_date IS NULL OR from_date <= NOW() ) ";
+  $sql .= " AND ( to_date IS NULL OR to_date > NOW() ) ";
+  $sql .= " ORDER BY  am_ms_date_rule_id ASC";
+
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? array_pop($result) : false;
+ }
 
 }
 

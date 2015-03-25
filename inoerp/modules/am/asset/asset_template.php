@@ -30,7 +30,7 @@
        <li><?php $f->l_text_field_dm('serial_number'); ?></li>
        <li><?php $f->l_select_field_from_array('type', am_asset::$type_a, $$class->type, '', '', 1, 1, 1); ?></li>
        <li><?php $f->l_text_field_d('parent_asset_id'); ?></li>
-       <li><?php $f->l_text_field_d('accounting_class_id'); ?></li>
+       <li><label><?php echo gettext('Accounting Group') ?></label><?php echo $f->select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_orgId($$class->org_id), 'wip_accounting_group_id', 'wip_accounting_group', $$class->wip_accounting_group_id, 'wip_accounting_group_id', '', 1, 'readonly1'); ?>         </li>
        <li><?php $f->l_text_field_d('description'); ?></li>
       </ul>
      </div>

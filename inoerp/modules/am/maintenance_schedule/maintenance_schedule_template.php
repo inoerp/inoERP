@@ -18,10 +18,12 @@
        <li><?php $f->l_select_field_from_object('org_id', $org->findAll_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?></li>
        <li><?php $f->l_text_field_dm('schedule_name'); ?></li>
        <li><?php $f->l_text_field_d('schedule_number'); ?></li>
-       <li><label><i class="select_item_number select_popup clickable fa fa-search"></i><?php echo gettext('Inv Item Number') ?>
+       <li><label>
+         <!--<i class="select_item_number select_popup clickable fa fa-search"></i>-->
+        <?php echo gettext('Inv Item Number') ?>
         </label><?php
         echo $f->hidden_field_withId('item_id_m', $$class->item_id_m);
-        $f->text_field_d('item_number', 'select_item_number_am_asset_item');
+        $f->text_field_dr('item_number', 'select_item_number_am_asset_item');
         echo $f->hidden_field_withCLass('am_asset_type', 'ASSET_ITEM', 'popup_value');
         ?>
        </li>
@@ -31,18 +33,22 @@
         echo $f->hidden_field_withId('am_asset_id', $$class->am_asset_id);
         ?>
        </li>
-       <li><?php $f->l_date_fieldAnyDay('effective_from_date', $$class->effective_from_date); ?></li>
        <li><?php $f->l_date_fieldAnyDay('effective_start_date', $$class->effective_start_date); ?></li>
+       <li><?php $f->l_date_fieldAnyDay('effective_end_date', $$class->effective_end_date); ?></li>
        <li><?php $f->l_text_field_d('description'); ?></li>
       </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <ul class="column header_field">
+       <li><?php $f->l_select_field_from_array('schedule_basis', am_maintenance_schedule::$schedule_basis_a, $$class->schedule_basis,'schedule_basis','',1); ?></li>
+       <li><?php $f->l_date_fieldAnyDay('schedule_basis_date', $$class->schedule_basis_date); ?></li>
+       <li><?php $f->l_select_field_from_array('schedule_method', am_maintenance_schedule::$schedule_method_a, $$class->schedule_method,'schedule_method','',1); ?></li>
        <li><?php $f->l_number_field_d('intervals_per_cycle'); ?></li>
        <li><?php $f->l_number_field_d('current_cycle'); ?></li>
        <li><?php $f->l_number_field_d('current_cycle_interval'); ?></li>
        <li><?php $f->l_checkBox_field('create_wo_cb', $$class->create_wo_cb); ?></li>
        <li><?php $f->l_checkBox_field('reschedule_wo_cb', $$class->reschedule_wo_cb); ?></li>
+        <li><?php $f->l_select_field_from_array('status', am_maintenance_schedule::$status_a, $$class->status,'status'); ?></li>
       </ul>
      </div>
      <div id="tabsHeader-3" class="tabContent">

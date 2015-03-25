@@ -50,14 +50,6 @@ $(document).ready(function () {
  var mandatoryCheck = new mandatoryFieldMain();
  mandatoryCheck.mandatoryHeader();
 
- //selecting Id
- $(".select_am_asset_number.select_popup").on("click", function () {
-  void window.open('select.php?class_name=am_asset', '_blank',
-          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
-
-
-
  $('body').off('click', '.popup-form.view-date-rule').on('click', '.popup-form.view-date-rule', function (e) {
   e.preventDefault();
   var openUrl = $(this).prop('href');
@@ -79,6 +71,12 @@ $(document).ready(function () {
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
  
-
+ 
+ $('body').off('blur', '.interval_multiple').on('blur', '.interval_multiple' , function(){
+  if(+$(this).val() > + $('#intervals_per_cycle').val() ){
+    $(this).val('');
+  alert('Interval Multiple should be less than equal to Intervals Per Cycle');
+  }
 });
 
+});

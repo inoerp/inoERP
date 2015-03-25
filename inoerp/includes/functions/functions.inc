@@ -909,6 +909,20 @@ function search_org_name() {
  return $stmt;
 }
 
+function search_cut_off_date() {
+ global $f;
+ $stmt = $f->date_fieldFromToday('date', '');
+ return $stmt;
+}
+
+function search_asset_number() {
+ global $f;
+ $stmt = $f->text_field('am_asset_number', '');
+ $stmt .= $f->hidden_field_withId('am_asset_id', '');
+ $stmt .= '<i class="select_am_asset_number select_popup clickable fa fa-search"></i>';
+ return $stmt;
+}
+
 function search_sd_store() {
  global $f;
  $stmt = $f->select_field_from_object('sd_store_id', sd_store::find_all(), 'sd_store_id', 'store_name', '', 'sd_store_id');

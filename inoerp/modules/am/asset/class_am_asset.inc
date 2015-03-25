@@ -39,7 +39,7 @@ class am_asset extends dbObject {
   'CAPITALIZED' => 'Capitalized',
   'EXPENSED' => 'Expensed',
  ];
-  public static $status_a = [
+ public static $status_a = [
   'ACTIVE' => 'Active',
   'RUNNING' => 'Running',
   'STOPPED' => 'Stopped',
@@ -58,7 +58,7 @@ class am_asset extends dbObject {
   'description',
   'status',
   'am_asset_category_id',
-  'accounting_class_id',
+  'wip_accounting_group_id',
   'parent_asset_id',
   'manufacturer',
   'org_id',
@@ -86,6 +86,7 @@ class am_asset extends dbObject {
   'type',
   'serial_number',
   'owning_department_id',
+  'wip_accounting_group_id'
  ];
  public $fields_inForm_notInDataBase = [
   "item_number",
@@ -107,7 +108,7 @@ class am_asset extends dbObject {
  public $description;
  public $status;
  public $am_asset_category_id;
- public $accounting_class_id;
+ public $wip_accounting_group_id;
  public $parent_asset_id;
  public $manufacturer;
  public $org_id;
@@ -126,12 +127,9 @@ class am_asset extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
-  public $item_number;
+ public $item_number;
  public $item_description;
  public $address_name;
- 
-
-
 
  public function findBy_am_asset_id_m($am_asset_id) {
   $sql = " SELECT * FROM ";
@@ -149,6 +147,15 @@ class am_asset extends dbObject {
    " where am_asset_number= '{$am_asset_number}' ";
   $result = $db->find_by_sql($sql);
   return $result;
+ }
+
+ public static function find_by_orgId($org_id) {
+  global $db;
+  $sql = "SELECT * FROM " .
+   self::$table_name .
+   " where org_id= '{$org_id}' ";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
  }
 
 }

@@ -2794,24 +2794,65 @@ $(document).ready(function () {
 
 //select page data selction in parent window
  $('body').on('click', '#selectResult_page .quick_select', function () {
-  var setData = new opener.setValFromSelectPage;
+  var useOpenerFunc = false;
+  if (typeof opener.setValFromSelectPage === 'function') {
+   var setData = new opener.setValFromSelectPage;
+   useOpenerFunc = true;
+  }
+
+  var selectedData = [];
   var elemenType = $(this).parent().prop('tagName');
   if (elemenType === 'LI') {
    $(this).closest('ul').find('input').each(function () {
-    setData[$(this).data('field_name')] = $(this).prop('value');
+    if (useOpenerFunc) {
+     setData[$(this).data('field_name')] = $(this).prop('value');
+    }
+    var selectedData_obj = {};
+    selectedData_obj.field_name = $(this).data('field_name');
+    selectedData_obj.field_value = $(this).prop('value');
+    selectedData.push(selectedData_obj);
    });
   } else {
    $(this).closest('tr').find('td').each(function () {
-    setData[$(this).data('field_name')] = $(this).text();
+    if (useOpenerFunc) {
+     setData[$(this).data('field_name')] = $(this).text();
+    }
+    var selectedData_obj = {};
+    selectedData_obj.field_name = $(this).data('field_name');
+    selectedData_obj.field_value = $(this).text();
+    selectedData.push(selectedData_obj);
    });
   }
-  setData.setVal();
-  if (opener.setPopUpValue) {
-   opener.setPopUpValue(setData);
+
+  if (useOpenerFunc) {
+   setData.setVal();
+   if (opener.setPopUpValue) {
+    opener.setPopUpValue(setData);
+   }
   }
+
+  if (localStorage.getItem("close_field_class") !== null) {
+   var close_field_class = localStorage.getItem("close_field_class");
+   window.opener.console.log(selectedData);
+   $(selectedData).each(function (i, currentData) {
+    $(currentData).each(function (k, v) {
+     if (v.field_name !== 'undefined') {
+      var field_d = '.' + v.field_name;
+      window.opener.$(close_field_class).parent().parent().find(field_d).val(v.field_value);
+     }
+    });
+   });
+   window.opener.$(close_field_class).val($(this).data('select_field_value'));
+   localStorage.removeItem("close_field_class");
+  }
+
   localStorage.removeItem("field_class");
   localStorage.removeItem("reset_link");
   window.close();
+
+  if (localStorage.getItem("auto_refresh_class") !== null) {
+   window.opener.$(localStorage.getItem("auto_refresh_class")).trigger('click');
+  }
  });
 
  $('body').on('click', '#selectResult_page .popover_quick_select', function (e) {
@@ -3758,7 +3799,7 @@ $(document).ready(function () {
 
  });
 
- $('body').off('click', '#save_program').on('click', '#save_program', function () {
+ $('body').on('click', '#save_program', function () {
   $('.show_loading_small').show();
   var headerData = $(this).closest('form').serializeArray();
   var class_name = $('.class_name').val();
@@ -4135,7 +4176,7 @@ $(document).ready(function () {
     noOfRequiredFileValuesMissing++;
    }
   });
-  
+
   if (noOfRequiredFileValuesMissing > 0) {
    var showMessage = ' <div id="dialog_box" class="dialog mandatory_message"> ' + noOfRequiredFileValuesMissing + ' mandatory field(s) is/are missing....... <br>';
    $.map(missingMandatoryValues, function (val, i) {
@@ -4215,11 +4256,24 @@ $(document).ready(function () {
    }
   }
  });
- 
- $('body').on('click','.delete_image', function(){
-$(this).closest('.ino-images').find('.file_id').val('');
+
+ $('body').on('click', '.delete_image', function () {
+  $(this).closest('.ino-images').find('.file_id').val('');
   console.log($(this).closest('.ino-images').find('.img'));
-  $(this).closest('.ino-images').find('.existing-image').css('display','none');
+  $(this).closest('.ino-images').find('.existing-image').css('display', 'none');
+ });
+
+ $("body").on("click", ".select_am_asset_number.select_popup", function () {
+  var close_field_class = '.' + $(this).parent().find(':input').not('hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+  void window.open('select.php?class_name=am_asset', '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
+$("body").on( 'mouseenter', '.img-vs', function(){
+  $(this).next(".hidden-image").show();
+}).on( 'mouseout', '.img-vs', function(){
+  $(this).next(".hidden-image").hide();
 });
 
 });

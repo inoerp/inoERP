@@ -38,11 +38,17 @@ if ($continue) {
  if (!empty($_SERVER['REDIRECT_QUERY_STRING'])) {
   $_SESSION['recent_visit'][$_SERVER['REDIRECT_QUERY_STRING']] = $current_url;
  } else if (!empty($_REQUEST['class_name'])) {
-  $id = $_REQUEST['class_name'] . '_id';
+  if(is_array($_REQUEST['class_name'])){
+   $id = $_REQUEST['class_name'][0] . '_id';
+   $request_class_name = $_REQUEST['class_name'][0] ;
+  }else{
+   $id = $_REQUEST['class_name'] . '_id';
+   $request_class_name = $_REQUEST['class_name'];
+  }
   if (!empty($_REQUEST[$id]) && !is_array($_REQUEST[$id])) {
-   $_SESSION['recent_visit'][$_REQUEST['class_name'] . ' Id ' . $_REQUEST[$id]] = $current_url;
+   $_SESSION['recent_visit'][$request_class_name . ' Id ' . $_REQUEST[$id]] = $current_url;
   } else {
-   $_SESSION['recent_visit'][$_REQUEST['class_name']] = $current_url;
+   $_SESSION['recent_visit'][$request_class_name] = $current_url;
   }
  } else {
   $_SESSION['recent_visit'][$_SERVER['QUERY_STRING']] = $current_url;

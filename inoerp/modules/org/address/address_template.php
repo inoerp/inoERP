@@ -17,8 +17,8 @@
         </li>
         <li><?php $f->l_select_field_from_object('type', address::address_types(), 'option_line_code', 'option_line_code', $address->type, 'type', '' , '' , $readonly); ?>    </li>
         <li><?php $f->l_text_field_dm('address_name'); ?>    </li>
-        <li><label><img class="tax_region_id select_popup clickable" src="<?php echo HOME_URL; ?>themes/images/serach.png">
-         <?php echo gettext('Tax Region') ?></label><?php $f->text_field_d('tax_region_name') ?></li>
+        <li><label><?php echo gettext('Tax Region') ?></label><?php $f->text_field_d('tax_region_name') ?>
+        <i class="fa fa-search tax_region_id select_popup clickable"></i></li>
         <li><?php $f->l_text_field_d('description'); ?>    </li>
         <li><?php $f->l_status_field_d('status'); ?></li>
         <li><?php $f->l_checkBox_field_d('rev_enabled'); ?></li>

@@ -340,7 +340,7 @@ EOD;
   return $stmt;
  }
 
- public function show_existing_image($value, $div_class) {
+ public function show_existing_image($value, $div_class, $full_size_on_hover = false) {
   if (empty($value)) {
    return;
   }
@@ -349,7 +349,10 @@ EOD;
    return;
   }
   $attachment_statement = "<div class=\"existing-image \">";
-  $attachment_statement .= '<img class="img ' . $div_class . '" src="' . $file->file_path . $file->file_name . '"/>';
+  $attachment_statement .= '<img class="img ' . $div_class . '" src="' . HOME_URL. $file->file_path . $file->file_name . '"/>';
+  if($full_size_on_hover){
+   $attachment_statement .= '<img class="img img-medium hidden-image'  . '" src="' . HOME_URL. $file->file_path . $file->file_name . '"/>';
+  }
   $attachment_statement .= "</div>";
   return $attachment_statement;
  }

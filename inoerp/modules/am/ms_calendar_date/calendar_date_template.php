@@ -19,8 +19,8 @@
      <li><label><?php echo gettext('Inv Item Number') ?>
       </label><?php echo $f->text_field('item_number', $maint_sch->item_number, '', '', '', '', 1); ?>    </li>
      <li><label><?php echo gettext('Asset Number') ?></label><?php echo $f->text_field('am_asset_number', $maint_sch->am_asset_number, '', '', '', '', 1); ?>  </li>
-     <li><?php $f->l_date_fieldAnyDay_r('effective_from_date', $maint_sch->effective_from_date); ?></li>
      <li><?php $f->l_date_fieldAnyDay_r('effective_start_date', $maint_sch->effective_start_date); ?></li>
+     <li><?php $f->l_date_fieldAnyDay_r('effective_end_date', $maint_sch->effective_end_date); ?></li>
      <li><?php $f->l_number_field('intervals_per_cycle', $maint_sch->intervals_per_cycle, '', 'intervals_per_cycle', '', '', 1); ?></li>
      
     </ul>
