@@ -25,7 +25,8 @@
         <li><a href="form.php?module_code=cst"><i class="fa fa-cubes"></i> <?php echo gettext('Cost Management') ; ?> </a></li>
         <li><a href="form.php?module_code=wip"><i class="fa fa-tasks"></i> <?php echo gettext('WIP & MES') ; ?> </a></li>
         <li><a href="form.php?module_code=fp"><i class="fa fa-th-large"></i> <?php echo gettext('Forecast & Planning') ; ?> </a></li>
-        <li class="Point Of Sale"><a href="form.php?module_code=pos"><i class="fa fa-shopping-cart"></i> <?php echo gettext('Point Of Sale') ; ?> </a></li>
+        <li><a href="form.php?module_code=am"><i class="fa fa-wrench"></i> <?php echo gettext('Asset Maintenance') ; ?> </a></li>
+        <li><a href="form.php?module_code=pos"><i class="fa fa-shopping-cart"></i> <?php echo gettext('Point Of Sale') ; ?> </a></li>
         <li><a href="form.php?module_code=gl"><i class="fa fa-money"></i> <?php echo gettext('General Ledger') ; ?></a></li>
         <li><a href="form.php?module_code=sys"><span class='inline'><j class="fa fa-dollar"></j><i class="fa fa-arrow-circle-right"></i></span> <?php echo gettext('Accounts Payable') ; ?> </a></li>
         <li><a href="form.php?module_code=sys"><span class='inline'><j class="fa fa-dollar"></j><i class="fa fa-arrow-circle-left"></i></span> <?php echo gettext('Accounts Receivable') ; ?></a></li>

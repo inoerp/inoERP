@@ -367,6 +367,7 @@ require_once(INC_MODULE . DS . "am" . DS . "resource_transaction" . DS . "class_
 require_once(INC_MODULE . DS . "am" . DS . "move_transaction" . DS . "class_am_move_transaction.inc");
 require_once(INC_MODULE . DS . "am" . DS . "work_bench" . DS . "class_am_wo_work_bench.inc");
 require_once(INC_MODULE . DS . "am" . DS . "work_bench" . DS . "class_am_wo_work_bench_line.inc");
+require_once(INC_MODULE . DS . "ec" . DS . "product" . DS . "class_ec_product.inc");
 
 
 //
@@ -381,6 +382,8 @@ require_once(INC_EXTENSIONS . DS . "contact" . DS . "class_extn_contact.inc");
 require_once(INC_EXTENSIONS . DS . "contact" . DS . "class_extn_contact_reference.inc");
 require_once(INC_EXTENSIONS . DS . "file" . DS . "class.file.inc");
 require_once(INC_EXTENSIONS . DS . "file" . DS . "class.file_reference.inc");
+require_once(INC_EXTENSIONS . DS . "image" . DS . "class_extn_image.inc");
+require_once(INC_EXTENSIONS . DS . "image" . DS . "class_extn_image_reference.inc");
 require_once(INC_EXTENSIONS . DS . "file" . DS . "class_massupload.inc");
 require_once(INC_EXTENSIONS . DS . "content_type" . DS . "class_content_type.inc");
 require_once(INC_EXTENSIONS . DS . "content_type" . DS . "class_new_content_type.inc");

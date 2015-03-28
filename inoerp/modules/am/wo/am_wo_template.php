@@ -25,32 +25,31 @@ inoERP
      </ul>
      <div class="tabContainer">
       <div id="tabsHeader-1" class="tabContent">
-        <ul class="column header_field">
-         <li><?php $f->l_text_field_dr_withSearch('am_wo_header_id'); ?>
-          <a name="show" href="form.php?class_name=am_wo_header&<?php echo "mode=$mode"; ?>" class="show document_id am_wo_header_id">
-           <i class="fa fa-refresh"></i></a> 
-         </li>
-         <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', '', $readonly); ?>         </li>
-         <li><?php $f->l_text_field_d('wo_number', 'primary_column2'); ?> </li>
-         <li><?php $f->l_select_field_from_object('wo_type', am_wo_header::am_wo_type(), 'option_line_code', 'option_line_value', $$class->wo_type, 'wo_type', '', 1, $readonly); ?>         </li>
-         <li><label><?php echo gettext('Accounting Group') ?></label><?php echo $f->select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_orgId($$class->org_id), 'wip_accounting_group_id', 'wip_accounting_group', $$class->wip_accounting_group_id, 'wip_accounting_group_id', '', 1, 'readonly1'); ?>         </li>
-         <li><label><?php echo gettext('Asset Number') ?></label><?php
-          $f->text_field_dm('am_asset_number');
-          echo $f->hidden_field_withId('am_asset_id', $$class->am_asset_id);
-          echo $f->hidden_field_withId('item_id_m', $$class->item_id_m);
-          ?><i class="select_am_asset_number select_popup clickable fa fa-search"></i>
-         </li>
-         <li><?php
-          $f->l_text_field_dm('activity_item_number', 'select_item_number_am_asset_activity');
-          echo $f->hidden_field_withId('activity_item_id_m', $$class->activity_item_id_m);
-          echo $f->hidden_field_withCLass('am_asset_type', 'ASSET_ACTIVITY', 'popup_value');
-          ?><i class="fa fa-search select_item_number select_popup"></i></li>
-         <li><label><?php echo gettext('Owning Department') ?></label><?php 
-         echo $f->select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class->department_id, 'department_id', '' , '', $readonly); ?></li>
-         <li><label><?php echo gettext('Status') ?></label>                      
-          <span class="button"><?php echo!empty($$class->wo_status) ? $$class->wo_status : "NA"; ?></span>
-         </li>
-        </ul>
+       <ul class="column header_field">
+        <li><?php $f->l_text_field_dr_withSearch('am_wo_header_id'); ?>
+         <a name="show" href="form.php?class_name=am_wo_header&<?php echo "mode=$mode"; ?>" class="show document_id am_wo_header_id">
+          <i class="fa fa-refresh"></i></a> 
+        </li>
+        <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', '', $readonly); ?>         </li>
+        <li><?php $f->l_text_field_d('wo_number', 'primary_column2'); ?> </li>
+        <li><?php $f->l_select_field_from_object('wo_type', am_wo_header::am_wo_type(), 'option_line_code', 'option_line_value', $$class->wo_type, 'wo_type', '', 1, $readonly); ?>         </li>
+        <li><label><?php echo gettext('Accounting Group') ?></label><?php echo $f->select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_orgId($$class->org_id), 'wip_accounting_group_id', 'wip_accounting_group', $$class->wip_accounting_group_id, 'wip_accounting_group_id', '', 1, 'readonly1'); ?>         </li>
+        <li><label><?php echo gettext('Asset Number') ?></label><?php
+         $f->text_field_dm('am_asset_number');
+         echo $f->hidden_field_withId('am_asset_id', $$class->am_asset_id);
+         echo $f->hidden_field_withId('item_id_m', $$class->item_id_m);
+         ?><i class="select_am_asset_number select_popup clickable fa fa-search"></i>
+        </li>
+        <li><?php
+         $f->l_text_field_dm('activity_item_number', 'select_item_number_am_asset_activity');
+         echo $f->hidden_field_withId('activity_item_id_m', $$class->activity_item_id_m);
+         echo $f->hidden_field_withCLass('am_asset_type', 'ASSET_ACTIVITY', 'popup_value');
+         ?><i class="fa fa-search select_item_number select_popup"></i></li>
+        <li><label><?php echo gettext('Owning Department') ?></label><?php echo $f->select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class->department_id, 'department_id', '', '', $readonly); ?></li>
+        <li><label><?php echo gettext('Status') ?></label>                      
+         <span class="button"><?php echo!empty($$class->wo_status) ? $$class->wo_status : "NA"; ?></span>
+        </li>
+       </ul>
       </div>
       <div id="tabsHeader-2" class="tabContent">
        <div> 
@@ -63,8 +62,6 @@ inoERP
          <li><?php $f->l_text_field_d('schedule_group'); ?> </li>
          <li><?php $f->l_text_field_d('line'); ?> </li>
          <li><?php $f->l_number_field_d('scheduling_priority'); ?> </li>
-         <li><?php $f->l_text_field_dr('cycle'); ?> </li>
-         <li><?php $f->l_text_field_dr('cycle_interval'); ?> </li>
         </ul>
        </div>
       </div>
@@ -72,6 +69,9 @@ inoERP
        <div> 
         <ul class="column header_field">
          <li><?php $f->l_text_field_d('released_date', $$class->released_date) ?></li>
+         <li><?php $f->l_text_field_dr('cycle'); ?> </li>
+         <li><?php $f->l_text_field_dr('cycle_interval'); ?> </li>
+         <li><?php $f->l_text_field_dr('am_maintenance_schedule_id'); ?> </li>
         </ul>
        </div>
       </div>
@@ -205,9 +205,9 @@ inoERP
                     ?>
                     <tr class="am_wo_routing_detail<?php echo $count . '-' . $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
                      <td><?php
-                      echo ino_inline_action($$class_third->am_wo_routing_detail_id, array('am_wo_header_id' => $$class->am_wo_header_id,
-                       'am_wo_routing_line_id' => $$class_second->am_wo_routing_line_id), 'add_row_detail_img', 'detail_id_cb');
-                      ?>                       </td>
+                  echo ino_inline_action($$class_third->am_wo_routing_detail_id, array('am_wo_header_id' => $$class->am_wo_header_id,
+                   'am_wo_routing_line_id' => $$class_second->am_wo_routing_line_id), 'add_row_detail_img', 'detail_id_cb');
+                    ?>                       </td>
                      <td><?php $f->text_field_wid3sr('am_wo_routing_detail_id'); ?></td>
                      <td><?php $f->text_field_wid3sm('resource_sequence', 'seq_number'); ?></td>
                      <td><?php echo $f->select_field_from_object('resource_id', bom_resource::find_all(), 'bom_resource_id', 'resource', $$class_third->resource_id, '', '', 1, $readonly); ?></td>
@@ -364,13 +364,13 @@ inoERP
            <td><?php echo $f->text_field('component_item_number', $$class_fourth->component_item_number, '20', '', 'select_item_number', '', $readonly); ?>
             <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
            <td><?php
-            if (!empty($$class_fourth->component_item_id_m) && !empty($$class->org_id)) {
-             $revision_name_a = inv_item_revision::find_by_itemIdM_orgId($$class_fourth->component_item_id_m, $$class->org_id);
-            } else {
-             $revision_name_a = array();
-            }
-            echo $f->select_field_from_object('component_revision', $revision_name_a, 'revision_name', 'revision_name', $$class_fourth->component_revision, '', 'small');
-            ?></td>
+         if (!empty($$class_fourth->component_item_id_m) && !empty($$class->org_id)) {
+          $revision_name_a = inv_item_revision::find_by_itemIdM_orgId($$class_fourth->component_item_id_m, $$class->org_id);
+         } else {
+          $revision_name_a = array();
+         }
+         echo $f->select_field_from_object('component_revision', $revision_name_a, 'revision_name', 'revision_name', $$class_fourth->component_revision, '', 'small');
+          ?></td>
            <td><?php echo $f->text_field('component_description', $$class_fourth->component_description, '20', '', 'item_description', '', $readonly); ?></td>
            <td><?php echo $f->select_field_from_object('component_uom', uom::find_all(), 'uom_id', 'uom_name', $$class_fourth->component_uom, '', 'uom_id', '', $readonly); ?></td>
            <td><?php echo form::select_field_from_object('usage_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_fourth->usage_basis, '', $readonly, 'usage_basis', '', 1); ?></td>

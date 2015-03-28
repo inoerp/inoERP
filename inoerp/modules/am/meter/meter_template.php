@@ -63,8 +63,8 @@ echo gettext('Meter')
        <ul class="column header_field"> 
         <li><?php $f->l_number_field('initial_reading', $$class->initial_reading); ?></li>
         <li><?php $f->l_date_fieldAnyDay('initial_reading_date', $$class->initial_reading_date); ?></li>
-        <li><?php $f->l_number_field('rate_per_day', $$class->rate_per_day); ?></li>
-        <li><?php $f->l_number_field('no_of_past_readings', $$class->no_of_past_readings); ?></li>
+        <li><?php $f->l_number_field('rate_per_day', $$class->rate_per_day,'','','',1); ?></li>
+        <li><?php $f->l_number_field('no_of_past_readings', $$class->no_of_past_readings,'','','',1); ?></li>
         </li>
        </ul> 
       </div> 

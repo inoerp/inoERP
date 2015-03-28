@@ -1,4 +1,4 @@
-<div id="form_all"> <?php $f = new inoform() ?>
+<div id="form_all">
  <form action=""  method="post" id="am_asset"  name="am_asset">
   <span class="heading"><?php echo gettext('Asset Numbers') ?></span>
   <div id ="form_header">

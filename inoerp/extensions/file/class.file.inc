@@ -46,7 +46,7 @@ class file extends dbObject {
  public $checkbox = [];
  public $column = [];
  public $requiredField = ["file_name"];
- private $_allowedExts = [
+ protected $_allowedExts = [
   "pdf",
   "doc",
   "docx",
@@ -63,7 +63,7 @@ class file extends dbObject {
   "xlsx",
   "csv"
  ];
- private $_allowedMimeTypes = [
+ protected $_allowedMimeTypes = [
   'application/msword',
   'application/pdf',
   'image/gif',
@@ -78,11 +78,11 @@ class file extends dbObject {
   'application/vnd.ms-excel'
  ];
  public static $primary_column = "file_id";
- private $_upload_types = ['only_server', 'data_base'];
- private $_class_name;
- private $_file_dir;
- private $_upload_type;
- private $_max_size = '2097152';
+ protected $_upload_types = ['only_server', 'data_base'];
+ protected $_class_name;
+ protected $_file_dir;
+ protected $_upload_type;
+ protected $_max_size = '2097152';
 
  const MAX_SIZE = '2097152';
 
@@ -182,7 +182,7 @@ class file extends dbObject {
   return $attachment_statement;
  }
 
- private function check_extension($extension) {
+ protected function check_extension($extension) {
   if (!( in_array(strtolower($extension), $this->_allowedExts) )) {
    $error = '<div class="message">File extension ' . strtolower($extension) . ' is not allowed.</div>';
    throw new Exception($error);
@@ -190,7 +190,7 @@ class file extends dbObject {
   return true;
  }
 
- private function check_mimetypes($mimetype) {
+ protected function check_mimetypes($mimetype) {
   if (!(in_array($mimetype, $this->_allowedMimeTypes))) {
    $error = "<div class='message'>File type $mimetype is not allowed.</div>";
    throw new Exception($error);
@@ -198,7 +198,7 @@ class file extends dbObject {
   return true;
  }
 
- private function check_file_size($file_size) {
+ protected function check_file_size($file_size) {
   if ($file_size > $this->_max_size) {
    $error = "<div class='message'>File size must be less than 2 MB</div>";
    throw new Exception($error);
@@ -206,7 +206,7 @@ class file extends dbObject {
   return true;
  }
 
- private function mass_upload($data_array, $class_name) {
+ protected function mass_upload($data_array, $class_name) {
   $mu = new massupload();
   $mu->setProperty('_class_name', $class_name);
   if (!$mu->mass_upload($data_array)) {
@@ -275,6 +275,7 @@ class file extends dbObject {
     if ($new_entry == 1) {
      $msg = "File is sucessfully uploaded!";
      array_push($uploaded_file_ids, $this->file_id);
+     $this->file_id = null;
     } else {
      $msg = "File is sucessfully uploaded but record cldnt saved in database";
     }
@@ -287,7 +288,11 @@ class file extends dbObject {
      $file = file::find_by_id($values);
      echo '<ul class="inRow asperWidth">';
      echo '<li><button name="remove_file" class="remove_file" >Remove</button></li>';
+     if(!empty($this->display_type) && ($this->display_type == 'extn_image')){
+      echo '<li><input type="hidden" name=extn_image_id_values[] class="hidden file_id_values" value="' . $values . '"></li>';
+     }else{
      echo '<li><input type="hidden" name=file_id_values[] class="hidden file_id_values" value="' . $values . '"></li>';
+     }
      echo '<li><a href=' . HOME_URL . "$this->file_path" . $file->file_name . '>' . $file->file_name . '</a></li>';
      if($this->display_type =='image'){
       echo '<li><img src="' . $file->file_path . $file->file_name . '"/ class="img img-medium"></li>';

@@ -2,7 +2,14 @@
 <?php
 
 if (isset($_FILES)) {
- $file = new file();
+  if (!empty($_POST['display_type']) && ($_POST['display_type'] == 'extn_image')) {
+  $file = new extn_image();
+  $temp_dir = 'temp_images';
+ }else{
+  $file = new file();
+  $temp_dir = 'temp';
+ }
+ 
  if (!empty($_POST['upload_type']) && ($_POST['upload_type'] != 'undefined')) {
   $file->setProperty('_upload_type', $_POST['upload_type']);
  } else {
@@ -11,7 +18,7 @@ if (isset($_FILES)) {
  if (!empty($_POST['file_dir'])) {
   $file->setProperty('_file_dir', $_POST['file_dir']);
  } else {
-  $file->setProperty('_file_dir', 'temp');
+  $file->setProperty('_file_dir', $temp_dir);
  }
 
  if (!empty($_POST['class_name'])) {

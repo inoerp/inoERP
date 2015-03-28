@@ -74,6 +74,7 @@ class am_wo_header extends dbObject {
   'suggested_end_date',
   'cycle',
   'cycle_interval',
+  'am_maintenance_schedule_id',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -151,6 +152,7 @@ class am_wo_header extends dbObject {
  public $suggested_end_date;
  public $cycle;
  public $cycle_interval;
+ public $am_maintenance_schedule_id;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -475,7 +477,7 @@ class am_wo_header extends dbObject {
      if ($cal_dates) {
       //verify & create WO
       foreach ($cal_dates as $date) {
-       $this->_verify_create_WO($am_asset_id, $activities->activity_item_id_m, $date->date, $am_schedule_fl->wo_status);
+       $this->_verify_create_WO($am_asset_id, $activities->activity_item_id_m, $date->date, $am_schedule_fl->am_maintenance_schedule_id, $am_schedule_fl->wo_status);
       }
      } else {
       //check date rule
@@ -491,7 +493,7 @@ class am_wo_header extends dbObject {
       do {
        $cycle_interval++;
        if ($cut_off_date_obj > $wo_date_obj) {
-        $this->_verify_create_WO($am_asset_id, $activities->activity_item_id_m, $wo_date, $am_schedule_fl->wo_status, $cycle, $cycle_interval);
+        $this->_verify_create_WO($am_asset_id, $activities->activity_item_id_m, $wo_date, $am_schedule_fl->am_maintenance_schedule_id, $am_schedule_fl->wo_status, $cycle, $cycle_interval);
        }
        if (!empty($am_schedule_fl->intervals_per_cycle) && $cycle_interval == $am_schedule_fl->intervals_per_cycle) {
         $cycle++;
@@ -511,7 +513,8 @@ class am_wo_header extends dbObject {
   }
  }
 
- private function _verify_create_WO($am_asset_id, $activity_item_id_m, $date, $wo_status = 'UN_RELEASED', $cycle = '', $cycle_interval = '') {
+ private function _verify_create_WO($am_asset_id, $activity_item_id_m, $date, $am_maintenance_schedule_id,
+  $wo_status = 'UN_RELEASED', $cycle = '', $cycle_interval = '') {
   global $dbc;
   $asset_details = am_asset::find_by_id($am_asset_id);
   $existing_wo = self::find_by_asset_activity_date($am_asset_id, $activity_item_id_m, $date);
@@ -529,6 +532,7 @@ class am_wo_header extends dbObject {
    $new_amwo->wo_status = $wo_status;
    $new_amwo->department_id = $asset_details->owning_department_id;
    $new_amwo->start_date = $date;
+   $new_amwo->am_maintenance_schedule_id = $am_maintenance_schedule_id;
    $new_amwo->cycle = $cycle;
    $new_amwo->cycle_interval = $cycle_interval;
    $new_amwo->quantity = 1;

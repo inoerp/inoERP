@@ -70,7 +70,7 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
    }
   },
   beforeSend: function () {
-
+$('#overlay').css('display', 'block');
   },
   error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);

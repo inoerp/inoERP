@@ -75,6 +75,8 @@ class am_meter extends dbObject {
   'uom_id',
   'value_change',
   'from_date',
+    'rate_per_day',
+  'no_of_past_readings',
  ];
  public $search = [
   '_show_update_path' => 1,

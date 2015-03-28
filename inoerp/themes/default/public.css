@@ -1550,24 +1550,39 @@ legend.major{
 }
 
 .created_by .existing-image{
-        display: inline-block;
+ display: inline-block;
 }
 
 ul.free_column li{
-        margin-right: 30px;
-        display: inline-block;
+ margin-right: 30px;
+ display: inline-block;
 }
 
 .ino-images{
  display: inline-block;
-width: 700px;
-margin: 10px 0;
-background-color: #D9EDF7;
-padding: 5px;
-border-radius: 10px;
+ width: 700px;
+ margin: 10px 0;
+ background-color: #D9EDF7;
+ padding: 5px;
+ border-radius: 10px;
 }
 
 .hidden-image{
-        position:absolute;
-        display:none;
+ position:absolute;
+ display:none;
+}
+
+.image-with-text{
+ position: relative;
+ margin : 20px 0 20px 20px;
+}
+span.delete_image{
+ position: absolute; 
+ bottom: 10px; 
+ left: 10px; 
+}
+
+.add-category{
+ clear: both;
+ margin: 10px 0;
 }

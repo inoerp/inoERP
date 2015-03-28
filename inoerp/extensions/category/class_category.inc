@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -7,6 +8,7 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
+
 /**
  * 
  *
@@ -24,7 +26,7 @@ class category extends dbObject {
  public static $key_column = "category";
  public static $module = "extension";
 //  data base variables as stored database column name
-    public static $system_info = [
+ public static $system_info = [
   'name' => 'Category',
   'number' => '10011',
   'description' => 'Create & Mainten Categories',
@@ -35,6 +37,11 @@ class category extends dbObject {
   'module_name' => 'extn',
   'weight' => 11
  ];
+ 
+ public static $content_relation_a = [
+  'ONLY_ONE' => 'One Category From Primary',
+  'MULTIPLE' => 'Multiple Category From Primary',
+ ];
  public $field_a = [
   "category_id",
   "major_category_id",
@@ -43,6 +50,7 @@ class category extends dbObject {
   'category_type',
   "description",
   "primary_cb",
+  'content_relation',
   "created_by",
   "creation_date",
   "last_update_by",
@@ -83,6 +91,7 @@ class category extends dbObject {
  public $category_id;
  public $major_category_id;
  public $parent_id;
+ public $content_relation;
  public $category;
  public $category_type;
  public $description;
@@ -93,13 +102,12 @@ class category extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
- 
-  Public static function category_types() {
+
+ Public static function category_types() {
   $option_header = option_header::find_by_exact_name('EXTN_CATEGORY_TYPE');
   $countries = option_line::find_by_option_id($option_header->option_header_id);
   return $countries;
  }
-
 
  public function _before_showing() {
   if (!empty($_GET['parent_id'])) {
@@ -303,9 +311,9 @@ class category extends dbObject {
 	        <thead>
           <tr class='headerBgColor2'>
            <th>Category</th>
-           <th>Description</th>".
+           <th>Description</th>" .
 //           <th>Posts</th>
-          "</tr>
+   "</tr>
          </thead><tbody>
 				 ";
 
@@ -466,6 +474,17 @@ class category extends dbObject {
   return $result;
  }
 
+ public static function parent_category_ofType($category_type = '') {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE parent_id IS NULL ";
+  $sql .= " AND primary_cb = '1' ";
+  $sql .= " AND category_type = '{$category_type}' ";
+  $sql .= " LIMIT 1 ";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? array_pop($result) : false;
+ }
+
  public static function minor_categories() {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
@@ -542,6 +561,7 @@ class category extends dbObject {
  }
 
  public static function find_major_category_id($category_id = "") {
+  //convert to procedure
   $category_details = self::find_by_id($category_id);
   $parent_id = $category_details->parent_id;
   if (empty($parent_id)) {
@@ -795,12 +815,12 @@ class category extends dbObject {
   $sql .= " UNION SELECT COUNT(cr.category_reference_id) as count_t FROM category_reference cr ";
   $sql .= " WHERE cr.major_category_id = '{$category_id}'  ";
   $sql .= " AND cr.reference_table = '{$content_type}'  ";
-  
+
   $result = self::find_by_sql($sql);
   $count_v = 0;
-  if(!empty($result)){
-      foreach($result as $r ){
-   $count_v += $r->count_t;
+  if (!empty($result)) {
+   foreach ($result as $r) {
+    $count_v += $r->count_t;
    }
   }
   return $count_v;
@@ -864,6 +884,19 @@ class category extends dbObject {
   return $bc_statement;
  }
 
+ public static function category_stmt($category){
+        $stmt = '<ul class="category-stmt">';
+      foreach ($category as $cat) {
+       $stmt .= '<li class="inline"><button type="button" class="btn btn-default delete-category"  title="' . $cat->description . '" '
+        . ' data-category_reference_id="' . $cat->category_reference_id . '" >';
+       $stmt .= '<i class="fa fa-remove"></i> &nbsp;&nbsp;';
+       $stmt .= $cat->category;
+       $stmt .='</button></li>';
+      }
+      $stmt .= '</ul>';
+      return $stmt;
+ }
+ 
 }
 
 ?>

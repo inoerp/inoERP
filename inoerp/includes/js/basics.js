@@ -145,6 +145,44 @@ function deleteComment() {
  });
 }
 
+function deleteImage() {
+ var homeUrl = $('#home_url').val();
+ var daletePath = homeUrl + 'form.php?class_name=extn_image_reference';
+ $("body").on('click', '.delete_image', function (e) {
+  var this_e = $(this);
+  var headerId = $(this).data('extn_image_reference_id');
+  $(".delete_button").addClass("show_loading_small");
+  $(".delete_button").prop('disabled', true);
+  e.preventDefault();
+  if (confirm("Do you really want to delete ?\n" + headerId)) {
+   $.ajax({
+    url: daletePath,
+    data: {
+     delete_id: headerId,
+     deleteType: 'header',
+     delete: '1'},
+    type: 'get',
+    beforeSend: function () {
+     $('.show_loading_small').show();
+    },
+    complete: function () {
+     $('.show_loading_small').hide();
+    }
+   }).done(function (result) {
+    $(".error").prepend(result);
+    $("#accordion").accordion({active: 0});
+    $(".delete_button").removeClass("show_loading_small");
+    $(".delete_button").prop('disabled', false);
+    this_e.parent().remove();
+   }).fail(function (error, textStatus, xhr) {
+    alert("delete failed \n" + error + textStatus + xhr);
+    $(".delete_button").removeClass("show_loading_small");
+    $(".delete_button").prop('disabled', false);
+   });
+  }
+ });
+}
+
 function updateComment(comment_id, ulId) {
  var homeUrl = $('#home_url').val();
  var savePath = homeUrl + 'comment.php';
@@ -4270,11 +4308,30 @@ $(document).ready(function () {
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
-$("body").on( 'mouseenter', '.img-vs', function(){
+ $("body").on('mouseenter', '.img-vs', function () {
   $(this).next(".hidden-image").show();
-}).on( 'mouseout', '.img-vs', function(){
+ }).on('mouseout', '.img-vs', function () {
   $(this).next(".hidden-image").hide();
-});
+ });
+
+ deleteImage();
+
+ $('body').on('blur', '.select.category', function () {
+  if ($(this).val()) {
+   console.log('in 1');
+   $(this).clone().appendTo($(this).parent());
+  } else {
+   var select_count = 0;
+   $(this).parent().find('.select.category').each(function () {
+    if (!$(this).val()) {
+     select_count++;
+    }
+    if (select_count > 1) {
+     $(this).remove();
+    }
+   });
+  }
+ });
 
 });
 function toUpperCase(str)
