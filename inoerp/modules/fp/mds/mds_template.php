@@ -11,7 +11,6 @@
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field">
         <li><?php $f->l_text_field_dr_withSearch('fp_mds_header_id') ?>
          <a name="show" href="form.php?class_name=fp_mds_header&<?php echo "mode=$mode"; ?>" class="show document_id fp_mds_header_id">
@@ -24,7 +23,6 @@
         <li><?php $f->l_checkBox_field_d('include_so_cb'); ?></li>
         <li><?php $f->l_status_field_d('status'); ?></li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div> <?php echo ino_attachement($file) ?> </div>
@@ -115,7 +113,7 @@
           <td><?php form::text_field_wid2sr('fp_mds_line_id'); ?></td>
           <td><?php form::text_field_wid2sr('item_id_m'); ?></td>
           <td><?php form::text_field_wid2('item_number', 'select_item_number'); ?>
-           <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
+           <i class="select_item_number select_popup clickable fa fa-search"></i></td>
           <td><?php echo $f->date_fieldAnyDay('demand_date', $$class_second->demand_date); ?></td>
           <td><?php $f->text_field_wid2s('source_type'); ?></td>
           <td><?php $f->text_field_wid2s('source_header_id'); ?></td>

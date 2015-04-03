@@ -35,14 +35,34 @@ h1,h2,h3,h4,h5,h6{
 }
 
 h1{
- font-size: 22px; 
+ font-size: 28px; 
+ color: #39C;
 }
-h2{
- font-size: 20px; 	
+
+h1.bgc {
+ background-color: #eee;
+ Padding: 10px;
 }
+
+h2 {
+ font-size: 24px;
+ color: #39C;
+}
+
+h2.bgc {
+ background-color: #eee;
+ Padding: 10px;
+}
+
 h3{
  font-size: 18px; 
 }
+
+h3.bgc {
+ background-color: #eee;
+ Padding: 10px;
+}
+
 h4{
  font-size: 16px; 		
 }
@@ -268,8 +288,8 @@ section::after {
 }
 #header-style-1 {
  padding:14px 0;
- background-color:#ffffff;
- background: none repeat scroll 0% 0% rgba(91, 161, 104, 0.73);
+ background-color:#39C;
+ /*background: none repeat scroll 0% 0% rgba(91, 161, 104, 0.73);*/
  border-bottom:1px solid #f2f2f2;
 }
 #header-style-1 .navbar-default {
@@ -376,12 +396,24 @@ section::after {
  border-bottom: 0;  
 }    
 
-#topbar {
+/*#topbar {
  border-bottom: 1px solid #EDEDED;
  font-family: "PT Sans",sans-serif;
  box-shadow: 100px #ccc;
  box-shadow: 1px 5px 10px 5px #230505;
  background: rgba(255, 255, 255, 0.16);
+}*/
+
+.topbar{
+ border-bottom: 1px solid #EDEDED;
+ font-family: "PT Sans",sans-serif;
+ box-shadow: 100px #ccc;
+ box-shadow: 1px 5px 10px 5px #230505;
+ background: rgba(255, 255, 255, 0.16);
+}
+
+.product-topbar {
+    background: #044D72;
 }
 
 /*#header_bottom {
@@ -3664,7 +3696,7 @@ mark,
 #header-style-1 .navbar-default .navbar-nav > .open > a:hover,
 #header-style-1 .navbar-default .navbar-nav > .open > a:focus,
 #topbar .social-icons span a:hover {
- background-color:#019f69;
+ background-color:#39C;
 }
 .flex-direction-nav a,
 .rsUni .rsThumb.rsNavSelected .thumbIco,
@@ -3958,7 +3990,7 @@ li.child_link{
 
 /*Form Line*/
 #form_line td select, #form_line td input[type="text"] {
-        width: 100%;
+ width: 100%;
 }
 
 
@@ -4059,10 +4091,10 @@ ul.form_top{
 }
 
 .small_box, .medium_box, .large_box, .extra_large_box{
-background: none repeat scroll 0% 0% rgba(240, 241, 242, 0.34);
-display: inline-block;
-margin-right: 20px;
-padding-bottom: 10px;
+ background: none repeat scroll 0% 0% rgba(240, 241, 242, 0.34);
+ display: inline-block;
+ margin-right: 20px;
+ padding-bottom: 10px;
 }
 
 ul.small_box li, ul.medium_box li, ul.large_box li{
@@ -4784,9 +4816,9 @@ fieldset.form_detail_data_fs legend{
 }
 fieldset.form_detail_data_fs {
  padding : 10px; 
-  background: lightgrey;
+ background: lightgrey;
  border: 1px solid #ccc;
-/* margin-top: 30px;*/
+ /* margin-top: 30px;*/
 }
 
 /*Overlay Login Modal*/
@@ -4864,38 +4896,48 @@ fieldset.form_detail_data_fs {
 }
 
 #sys_menu_left_vertical ul.child_menu li a:hover {
-        color: #2574A9;font-weight: bold;
+ color: #2574A9;font-weight: bold;
 }
 
 #sys_menu_left_vertical ul.child_menu li:hover {
-        background-color: rgba(181, 215, 183, 0.77);
-        border: 2px solid #fff;
-        border-radius: 5px;
+ background-color: rgba(181, 215, 183, 0.77);
+ border: 2px solid #fff;
+ border-radius: 5px;
 }
 
 h3.nav-panel{
-        background-color : #3FB6DA;
-        padding: 10px 10px;
-        margin : 10px -10px;
-        font-weight: bold;
-        font-family: "Lato",sans-serif;
-        color: #fff;
+ background-color : #3FB6DA;
+ padding: 10px 10px;
+ margin : 10px -10px;
+ font-weight: bold;
+ font-family: "Lato",sans-serif;
+ color: #fff;
 }
 
 
 .panel-ino-classy > .panel-heading {
-    color: #111;
-    background-color: rgba(238, 246, 206, 0.91);
-    border-color: rgba(222, 222, 222, 0.91);
+ color: #111;
+ background-color: rgba(238, 246, 206, 0.91);
+ border-color: rgba(222, 222, 222, 0.91);
 }
 
 .panel-ino-classy {
-    border-color: rgba(222, 222, 222, 0.91);
+ border-color: rgba(222, 222, 222, 0.91);
+}
+
+.panel-ino-light-grey > .panel-heading {
+ color: #000;
+ background-color: rgba(237, 227, 227, 0.65);
+ border-color: rgba(222, 222, 222, 0.91);
+}
+
+.panel-ino-light-grey {
+ border-color: rgba(222, 222, 222, 0.91);
 }
 
 .ino-btn{
-        background-color: #337AB7;
-color: #fff;
-font-weight: bold;
-padding: 5px 30px;
+ background-color: #337AB7;
+ color: #fff;
+ font-weight: bold;
+ padding: 5px 30px;
 }

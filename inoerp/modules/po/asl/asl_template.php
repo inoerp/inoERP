@@ -25,7 +25,7 @@ inoERP
        echo $f->hidden_field('item_id_m', $$class->item_id_m);
        echo $f->text_field_d('item_number', 'select_item_number');
        ?>
-       <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></li>
+       <i class="select_item_number select_popup clickable fa fa-search"></i></li>
       <li><?php $f->l_text_field_d('description', 'item_description'); ?>     </li>
      </ul>
     </div>

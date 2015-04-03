@@ -320,7 +320,7 @@ EOD;
  }
 
  public function image_field($name, $value_file_id, $size = "15", $id = "", $div_class = "", $label = 'Select Image', $display_type = 'image') {
-   $stmt = '<div class="ino-images">';
+  $stmt = '<div class="ino-images">';
   $stmt .= "<div class='existing-image'>" . $this->show_existing_image($value_file_id, $div_class) . '</div>';
   $stmt .= "<div class='show_attachment'>";
   $stmt .= '<div class="form-group">
@@ -349,9 +349,9 @@ EOD;
    return;
   }
   $attachment_statement = "<div class=\"existing-image \">";
-  $attachment_statement .= '<img class="img ' . $div_class . '" src="' . HOME_URL. $file->file_path . $file->file_name . '"/>';
-  if($full_size_on_hover){
-   $attachment_statement .= '<img class="img img-medium hidden-image'  . '" src="' . HOME_URL. $file->file_path . $file->file_name . '"/>';
+  $attachment_statement .= '<img class="img ' . $div_class . '" src="' . HOME_URL . $file->file_path . $file->file_name . '"/>';
+  if ($full_size_on_hover) {
+   $attachment_statement .= '<img class="img img-medium hidden-image' . '" src="' . HOME_URL . $file->file_path . $file->file_name . '"/>';
   }
   $attachment_statement .= "</div>";
   return $attachment_statement;
@@ -489,19 +489,55 @@ EOD;
   return $text_field;
  }
 
- public function address_field_d($field_name, $div_class = "") {
+ public function address_field_d($field_name, $show_all_fields = true, $div_class = "") {
   global $class, $$class;
   $ttl = $field_val = null;
+  $addr = new address();
   if (!empty($$class->$field_name)) {
-   $addr = address::find_by_id($$class->$field_name);
+   $addr->findBy_id($$class->$field_name);
    if ($addr) {
     $field_val = $addr->address_name;
     $ttl = $addr->address . ' ' . $addr->country . ' ' . $addr->postal_code;
    }
   }
-  $text_field = $this->hidden_field_withId($field_name, $$class->$field_name);
-  $text_field .= $this->text_field('address_name', $field_val, '', 'address_name', '', '', 1, '', $ttl);
-  $text_field .= '<img src="' . HOME_URL . 'themes/images/serach.png" class="address_id select_popup">';
+  $text_field = '<ul class="column header_field ' . $div_class . '">';
+  $text_field .= '<li><label>' . ucwords(str_replace('_', ' ', $field_name)) . '</label>';
+  $text_field .= $this->hidden_field_withIdClass($field_name, $$class->$field_name, 'address_id');
+  $text_field .= $this->text_field('address_name', $field_val, '', '', 'address_name', '', 1, '', $ttl);
+  $text_field .= '<i class="fa fa-search address_id select_popup clickable"></i></li>';
+  if ($show_all_fields) {
+   $text_field .= '<li><label>Country</label>' . $this->text_field('xxcountry', $addr->country, '', '', 'country', '', 1) . '</li>';
+   $text_field .= '<li><label>Postal Code</label>' . $this->text_field('xxpostal_code', $addr->postal_code, '', '', 'postal_code', '', 1) . '</li>';
+   $text_field .= '<li><label>Details</label>' . $this->text_area('xxaddress', $addr->address, '3', '', 'address', '', 1) . '</li>';
+  }
+  $text_field .= '</ul>';
+
+  echo $text_field;
+ }
+
+ public function address_field_d2($field_name, $show_all_fields = true, $div_class = "") {
+  global $class_second, $$class_second;
+  $ttl = $field_val = null;
+  $addr = new address();
+  if (!empty($$class_second->$field_name)) {
+   $text_field .= $this->hidden_field_withIdClass($field_name, $$class_second->$field_name, 'address_id');
+   if ($addr) {
+    $field_val = $addr->address_name;
+    $ttl = $addr->address . ' ' . $addr->country . ' ' . $addr->postal_code;
+   }
+  }
+  $text_field = '<ul class="column header_field ' . $div_class . '">';
+  $text_field .= '<li><label>' . ucwords(str_replace('_', ' ', $field_name)) . '</label>';
+  $text_field .= $this->hidden_field_withId($field_name, $$class_second->$field_name);
+  $text_field .= $this->text_field('address_name', $field_val, '', '', 'address_name', '', 1, '', $ttl);
+  $text_field .= '<i class="fa fa-search address_id select_popup clickable"></i></li>';
+  if ($show_all_fields) {
+   $text_field .= '<li><label>Country</label>' . $this->text_field('xxcountry', $addr->country, '', '', 'country', '', 1) . '</li>';
+   $text_field .= '<li><label>Postal Code</label>' . $this->text_field('xxpostal_code', $addr->postal_code, '', '', 'postal_code', '', 1) . '</li>';
+   $text_field .= '<li><label>Details</label>' . $this->text_area('xxaddress', $addr->address, '3', '', 'address', '', 1) . '</li>';
+  }
+  $text_field .= '</ul>';
+
   echo $text_field;
  }
 
@@ -563,6 +599,31 @@ EOD;
   global $readonly, $class, $$class;
   echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, 1, $this->readonly);
+ }
+
+ public function l_text_field_d2($field_name, $div_class = "") {
+  global $readonly, $class_second, $$class_second;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->text_field($field_name, $$class_second->$field_name, '20', $field_name, $div_class, '', $this->readonly);
+ }
+
+ public function l_text_field_d2s($field_name, $div_class = "") {
+  global $readonly, $class_second, $$class_second;
+  $div_class = $div_class . ' small';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->text_field($field_name, $$class_second->$field_name, '20', $field_name, $div_class, '', $this->readonly);
+ }
+
+ public function l_text_field_d2r($field_name, $div_class = "") {
+  global $readonly, $class_second, $$class_second;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->text_field($field_name, $$class_second->$field_name, '20', $field_name, $div_class, '', 1);
+ }
+
+ public function l_text_field_d2m($field_name, $div_class = "") {
+  global $readonly, $class_second, $$class_second;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->text_field($field_name, $$class_second->$field_name, '20', $field_name, $div_class, 1, $this->readonly);
  }
 
  public function l_text_field_d_withSearch($field_name, $div_class = "") {
@@ -967,7 +1028,7 @@ EOD;
    $required = '';
   }
   if (!empty($id)) {
-   $idvalue = 'id="' . $id . '"';
+   $idvalue = 'id="combination_' . $id . '"';
   } else {
    $idvalue = "";
   }
@@ -976,18 +1037,30 @@ EOD;
   } else {
    $ac_type_i = '';
   }
-  $element_text_field = "<span class='acField_withSearchImage'>";
-  $element_text_field .= "<input type=\"text\" name=\"$bracketName\" value=\"$value\" 
-	 maxlength=\"$maxlength\" size=\"$size\" class=\"textfield $div_class $name\" "
+  $combination = null;
+  if (!empty($value)) {
+   $ac_d = $this->_get_account($value);
+   $combination = $ac_d->combination;
+   $title = $ac_d->description;
+  }
+
+  $element_text_field = '';
+  if (!empty($id)) {
+   $element_text_field .= $this->hidden_field_withIdClass($name, $value, 'coa_combination_id');
+  } else {
+   $element_text_field .= $this->hidden_field_withCLass($name, $value, 'coa_combination_id');
+  }
+  
+  $element_text_field .= "<input type=\"text\" name=\"ac_combinations[]\" value=\"$combination\" 
+	 maxlength=\"$maxlength\" size=\"$size\" class=\"combination $name textfield $div_class account_combination\" "
    . "placeholder=\"$place_holder\"  $required $idvalue $readonly title=\"$title\"  data-toggle=\"tooltip\" $ac_type_i >";
   $element_text_field .= $this->accpup_stmt();
-  $element_text_field .= "</span>";
-  ;
   return $element_text_field;
  }
 
  public function accpup_stmt() {
-  return "<img src=\"" . HOME_URL . "/themes/images/serach.png\" class=\"account_popup select_popup clickable\" >";
+//  return "<img src=\"" . HOME_URL . "/themes/images/serach.png\" class=\"account_popup select_popup clickable\" >";
+  return '<i class="select_account select_popup clickable fa fa-search"></i>';
  }
 
  private function _get_account($ac_id = "") {
@@ -1006,183 +1079,155 @@ EOD;
 
  public function ac_field_d($field_name, $div_class = '', $ac_type = '') {
   global $class, $$class;
-  $ac_d = $this->_get_account($$class->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", '', $this->readonly, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class->$field_name, $this->ac_field_length, $field_name, "$div_class select_account", '', $this->readonly, $ac_type);
  }
 
  public function l_ac_field_d($field_name, $div_class = '', $ac_type = '') {
   global $class, $$class;
-  $ac_d = $this->_get_account($$class->$field_name);
   echo '<label>' . gettext(ucwords(str_replace(['_', '_id'], ' ', $field_name))) . '</label>';
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", '', $this->readonly, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class->$field_name, $this->ac_field_length, $field_name, "$div_class select_account", '', $this->readonly, $ac_type);
  }
 
  public function l_ac_field_dm($field_name, $div_class = '', $ac_type = '') {
   global $class, $$class;
-  $ac_d = $this->_get_account($$class->$field_name);
   echo '<label>' . gettext(ucwords(str_replace(['_', '_id'], ' ', $field_name))) . '</label>';
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", 1, $this->readonly, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class->$field_name, $this->ac_field_length, $field_name, "$div_class select_account", 1, $this->readonly, $ac_type);
  }
 
  public function l_ac_field_dr($field_name, $div_class = '', $ac_type = '') {
   global $class, $$class;
-  $ac_d = $this->_get_account($$class->$field_name);
   echo '<label>' . gettext(ucwords(str_replace(['_', '_id'], ' ', $field_name))) . '</label>';
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", '', 1, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class->$field_name, $this->ac_field_length, $field_name, "$div_class select_account", '', 1, $ac_type);
  }
 
  public function l_ac_field_drm($field_name, $div_class = '', $ac_type = '') {
   global $class, $$class;
-  $ac_d = $this->_get_account($$class->$field_name);
   echo '<label>' . gettext(ucwords(str_replace(['_', '_id'], ' ', $field_name))) . '</label>';
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", 1, 1, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class->$field_name, $this->ac_field_length, $field_name, "$div_class select_account", 1, 1, $ac_type);
  }
 
  public function ac_field_dm($field_name, $div_class = '', $ac_type = '') {
   global $class, $$class;
-  $ac_d = $this->_get_account($$class->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", 1, $this->readonly, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class->$field_name, $this->ac_field_length, $field_name, "$div_class select_account", 1, $this->readonly, $ac_type);
  }
 
  public function ac_field_dr($field_name, $div_class = '', $ac_type = '') {
   global $class, $$class;
-  $ac_d = $this->_get_account($$class->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", '', 1, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class->$field_name, $this->ac_field_length, $field_name, "$div_class select_account", '', 1, $ac_type);
  }
 
  public function ac_field_drm($field_name, $div_class = '', $ac_type = '') {
   global $class, $$class;
-  $ac_d = $this->_get_account($$class->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", 1, 1, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class->$field_name, $this->ac_field_length, $field_name, "$div_class select_account", 1, 1, $ac_type);
  }
 
  public function ac_field_d2($field_name, $div_class = '', $ac_type = '') {
   global $class_second, $$class_second;
-  $ac_d = $this->_get_account($$class_second->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", '', $this->readonly2, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class_second->$field_name, $this->ac_field_length, $field_name, "$div_class select_account", '', $this->readonly2, $ac_type);
  }
 
  public function ac_field_d2m($field_name, $div_class = '', $ac_type = '') {
   global $class_second, $$class_second;
-  $ac_d = $this->_get_account($$class_second->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", 1, $this->readonly2, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class_second->$field_name, $this->ac_field_length, $field_name, "$div_class select_account", 1, $this->readonly2, $ac_type);
  }
 
  public function ac_field_d2r($field_name, $div_class = '', $ac_type = '') {
   global $class_second, $$class_second;
-  $ac_d = $this->_get_account($$class_second->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", '', 1, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class_second->$field_name, $this->ac_field_length, $field_name, "$div_class select_account", '', 1, $ac_type);
  }
 
  public function ac_field_d2rm($field_name, $div_class = '', $ac_type = '') {
   global $class_second, $$class_second;
-  $ac_d = $this->_get_account($$class_second->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", 1, 1, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class_second->$field_name, $this->ac_field_length, $field_name, "$div_class select_account", 1, 1, $ac_type);
  }
 
  public function ac_field_d3($field_name, $div_class = '', $ac_type = '') {
   global $class_third, $$class_third;
-  $ac_d = $this->_get_account($$class_third->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", '', $this->readonly3, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class_third->$field_name, $this->ac_field_length, $field_name, "$div_class select_account", '', $this->readonly3, $ac_type);
  }
 
  public function ac_field_d3m($field_name, $div_class = '', $ac_type = '') {
   global $class_third, $$class_third;
-  $ac_d = $this->_get_account($$class_third->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", 1, $this->readonly3, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class_third->$field_name, $this->ac_field_length, $field_name, "$div_class select_account", 1, $this->readonly3, $ac_type);
  }
 
  public function ac_field_d3r($field_name, $div_class = '', $ac_type = '') {
   global $class_third, $$class_third;
-  $ac_d = $this->_get_account($$class_third->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, $field_name, "$div_class select_account", '', 1, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class_third->$field_name, $this->ac_field_length, $field_name, "$div_class select_account", '', 1, $ac_type);
  }
 
  public function ac_field_d3rm($field_name, $div_class = '', $ac_type = '') {
   global $class_third, $$class_third;
-  $ac_d = $this->_get_account($$class_third->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, "$div_class select_account", 'select_account', 1, 1, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class_third->$field_name, $this->ac_field_length, "$div_class select_account", 'select_account', 1, 1, $ac_type);
  }
 
  public function ac_field_wid($field_name, $div_class = '', $ac_type = '') {
   global $class, $$class;
-  $ac_d = $this->_get_account($$class->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, '', "$div_class select_account", '', $this->readonly, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class->$field_name, $this->ac_field_length, '', "$div_class select_account", '', $this->readonly, $ac_type);
  }
 
  public function ac_field_widm($field_name, $div_class = '', $ac_type = '') {
   global $class, $$class;
-  $ac_d = $this->_get_account($$class->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, '', "$div_class select_account", 1, $this->readonly, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class->$field_name, $this->ac_field_length, '', "$div_class select_account", 1, $this->readonly, $ac_type);
  }
 
  public function ac_field_widr($field_name, $div_class = '', $ac_type = '') {
   global $class, $$class;
-  $ac_d = $this->_get_account($$class->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, '', "$div_class select_account", '', 1, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class->$field_name, $this->ac_field_length, '', "$div_class select_account", '', 1, $ac_type);
  }
 
  public function ac_field_widrm($field_name, $div_class = '', $ac_type = '') {
   global $class, $$class;
-  $ac_d = $this->_get_account($$class->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, '', "$div_class select_account", 1, 1, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class->$field_name, $this->ac_field_length, '', "$div_class select_account", 1, 1, $ac_type);
  }
 
  public function ac_field_wid2($field_name, $div_class = '', $ac_type = '') {
   global $class_second, $$class_second;
-  $ac_d = $this->_get_account($$class_second->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, '', "$div_class select_account", '', $this->readonly2, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class_second->$field_name, $this->ac_field_length, '', "$div_class select_account", '', $this->readonly2, $ac_type);
  }
 
  public function ac_field_wid2m($field_name, $div_class = '', $ac_type = '') {
   global $class_second, $$class_second;
-  $ac_d = $this->_get_account($$class_second->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, '', "$div_class select_account", 1, $this->readonly2, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class_second->$field_name, $this->ac_field_length, '', "$div_class select_account", 1, $this->readonly2, $ac_type);
  }
 
  public function ac_field_wid2r($field_name, $div_class = '', $ac_type = '') {
   global $class_second, $$class_second;
-  $ac_d = $this->_get_account($$class_second->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, '', "$div_class select_account", '', 1, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class_second->$field_name, $this->ac_field_length, '', "$div_class select_account", '', 1, $ac_type);
  }
 
  public function ac_field_wid2rm($field_name, $div_class = '', $ac_type = '') {
   global $class_second, $$class_second;
-  $ac_d = $this->_get_account($$class_second->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, '', "$div_class select_account", 1, 1, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class_second->$field_name, $this->ac_field_length, '', "$div_class select_account", 1, 1, $ac_type);
  }
 
  public function ac_field_wid3($field_name, $div_class = '', $ac_type = '') {
   global $class_third, $$class_third;
-  $ac_d = $this->_get_account($$class_third->$field_name);
   $div_class = $div_class . ' select_account';
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, '', "$div_class select_account", '', $this->readonly3, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class_third->$field_name, $this->ac_field_length, '', "$div_class select_account", '', $this->readonly3, $ac_type);
  }
 
  public function ac_field_wid3m($field_name, $div_class = '', $ac_type = '') {
   global $class_third, $$class_third;
-  $ac_d = $this->_get_account($$class_third->$field_name);
   $div_class = $div_class . ' select_account';
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, '', "$div_class select_account", 1, $this->readonly3, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class_third->$field_name, $this->ac_field_length, '', "$div_class select_account", 1, $this->readonly3, $ac_type);
  }
 
  public function ac_field_wid3r($field_name, $div_class = '', $ac_type = '') {
   global $class_third, $$class_third;
-  $ac_d = $this->_get_account($$class_third->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, '', "$div_class select_account", '', 1, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class_third->$field_name, $this->ac_field_length, '', "$div_class select_account", '', 1, $ac_type);
  }
 
  public function ac_field_wid3rm($field_name, $div_class = '', $ac_type = '') {
   global $class_third, $$class_third;
-  $ac_d = $this->_get_account($$class_third->$field_name);
-  echo $this->account_field($field_name, $ac_d->combination, $this->ac_field_length, '', "$div_class select_account", 1, 1, $ac_type, '', $ac_d->description);
+  echo $this->account_field($field_name, $$class_third->$field_name, $this->ac_field_length, '', "$div_class select_account", 1, 1, $ac_type);
  }
 
  /* --------------------End of default accoun fields and begining of text area -----------------------------
   * textarea
   */
 
- public function text_area($name, $value, $rowsize = "1", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $columnsize = "16") {
+ public function text_area($name, $value, $rowsize = "1", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $columnsize = "17") {
   $bracketName = $name . '[]';
   $value = htmlentities($value);
   if ($readonly == 1) {

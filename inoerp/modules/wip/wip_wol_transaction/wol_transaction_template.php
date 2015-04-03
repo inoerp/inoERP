@@ -31,8 +31,10 @@ inoERP
           <i class="fa fa-refresh"></i></a> 
         </li>
         <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>        </li>
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup clickable">
-          <?php echo gettext('Item Number') ?></label><?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?><?php $f->text_field_dm('item_number', 'select_item_number'); ?>        </li>
+        <li><label><?php echo gettext('Item Number') ?></label><?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
+         <?php $f->text_field_dm('item_number', 'select_item_number'); ?>        
+        <i class="select_item_number select_popup clickable fa fa-search"></i>
+        </li>
         <li><?php $f->l_select_field_from_object('revision_name', $revision_name_a, 'revision_name', 'revision_name', $$class->revision_name, 'revision_name', 'small'); ?>        </li>
         <li><?php $f->l_number_field_d('quantity'); ?></li>
         <li><?php $f->l_select_field_from_array('transaction_type_id', wip_wol_transaction::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1); ?>
@@ -117,7 +119,7 @@ inoERP
           <td><?php echo!empty($bom_sequence_stament) ? $bom_sequence_stament : form::text_field_wids('bom_sequence'); ?></td>
           <td><?php echo $f->text_field('item_id_m', $wip_wo_bom->component_item_id_m, '', '', 'item_id_m', '', 1); ?></td>
           <td><?php echo $f->text_field('component_item_number', $item_i->item_number, '20', '', 'select_item_number', '', $readonly); ?>
-           <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
+           <i class="select_item_number select_popup clickable fa fa-search"></i></td>
           <td><?php echo $f->text_field('component_description', $item_i->item_description, '20', '', 'item_description', '', $readonly); ?></td>
           <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $item_i->uom_id, '', 'uom_id', '', $readonly); ?></td>
           <td><?php

@@ -87,7 +87,7 @@ include_once("includes/functions/loader.inc");
  </head>
  <body>
 
-  <div id="topbar" class="clearfix ">
+  <div id="topbar" class="topbar clearfix ">
    <div class="container">
     <div class="row">
      <?php

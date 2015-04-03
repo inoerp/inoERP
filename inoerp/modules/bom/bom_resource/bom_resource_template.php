@@ -53,10 +53,10 @@ inoERP
      <div class="large_shadow_box">
       <ul class="column five_column"> 
        <li><?php $f->l_checkBox_field_d('osp_cb'); ?> </li>
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup">
-         <?php echo gettext('Item Number') ?></label>
+       <li><label><?php echo gettext('Item Number') ?></label>
         <?php $f->text_field_wid('osp_item_number', 'select_item_number'); ?>
         <?php $f->hidden_field_withId('osp_item_id', $$class->osp_item_id); ?>
+        <i class="select_item_number select_popup clickable fa fa-search"></i>
        </li>
        <li><?php $f->l_text_field_d('osp_item_description', 'item_description'); ?></li>
       </ul>

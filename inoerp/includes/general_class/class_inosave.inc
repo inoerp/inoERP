@@ -38,7 +38,6 @@ class inosave extends dbObject {
 
 
 // pa($this);
-// pa($_POST);
 // pa($_POST[$this->_key_field]);
   for ($i = 0; $i < count($_POST[$this->_key_field]); $i++) {
    $$class = new $class;
@@ -109,28 +108,6 @@ class inosave extends dbObject {
     $$class->item_id_m = $item->findBy_itemNumber_OrgId($_POST['item_number'][$i], $_POST['org_id']);
    }
 
-   if (!empty($$class->account)) {
-    $ledger_id = !empty($$class->ledger_id) ? $$class->ledger_id : null;
-    if (!empty($ledger_id)) {
-     $ledg = new gl_ledger();
-     $ledg_i = $ledg->findBy_id($ledger_id);
-     $ledg->coa_structure_id = $ledg_i->coa_structure_id;
-     $coa = $ledg->find_coa_byLedgerId();
-    }
-    $cc->coa_id = !empty($coa) ? $coa->coa_id : $coa_id;
-    foreach ($$class->account as $key => $value) {
-     if (!empty($_POST[$value][$i])) {
-      $cc->combination = $_POST[$value][$i];
-      try {
-       $combination_id = $cc->findIdBy_combination_coaId();
-       $$class->$value = $combination_id;
-      } catch (Exception $e) {
-       echo "<br> Error @inoSaveL76: Invalid account" . $e->getMessage();
-       return;
-      }
-     }
-    }
-   }
 
    if (!empty($$class->dateFields)) {
     foreach ($$class->dateFields as $key => $value) {
@@ -237,7 +214,7 @@ class inosave extends dbObject {
     * 10 means all the data are update and leave save.
     * Normall return (1,2 or w/o value), completes the after save and then proceed to save
     */
-//pa($$class);
+
    if (method_exists($$class, '_before_save')) {
     $before_save_result = $$class->_before_save();
     if ($before_save_result < 0) {
@@ -278,7 +255,6 @@ class inosave extends dbObject {
      if (method_exists($$class, '_after_save')) {
       $$class->_after_save();
      }
-
      $secondary_fields = sys_secondary_field_instance::find_by_referenceKey($class);
      if ($secondary_fields) {
       $this->_save_secondary_field($secondary_fields, $$class->$primaryColumn);
@@ -309,6 +285,8 @@ class inosave extends dbObject {
        $ext_ir->extn_image_id = $extn_image_id_values_v;
        $ext_ir->reference_table = $class;
        $ext_ir->reference_id = $$class->{$class::$primary_column};
+       $ext_ir->img_description1 =$_POST['img_description1'][$extn_image_id_values_k];
+       $ext_ir->img_description2 =$_POST['img_description2'][$extn_image_id_values_k];
        $ext_ir->save();
       }
      }

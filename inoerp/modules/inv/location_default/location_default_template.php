@@ -54,7 +54,7 @@
            <td><?php
             echo $f->hidden_field('item_id_m', $$class->item_id_m);
             $f->text_field_wid('item_number', 'select_item_number');
-            ?><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
+            ?><i class="select_item_number select_popup clickable fa fa-search"></i></td>
            <td><?php echo $f->select_field_from_object('default_type', inv_location_default::location_default_types(), 'option_line_code', 'option_line_value', $$class->default_type); ?></td>
            <td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->subinventory_id, '', 'subinventory_id copyValue', ''); ?>           </td>
            <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class->subinventory_id), 'locator_id', 'locator', $$class->locator_id, '', 'locator_id copyValue', ''); ?>       </td>

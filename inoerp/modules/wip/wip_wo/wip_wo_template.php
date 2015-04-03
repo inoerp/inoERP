@@ -32,17 +32,17 @@ inoERP
          <li><?php $f->l_text_field_d('wo_number', 'primary_column2'); ?> </li>
          <li><?php $f->l_select_field_from_object('wo_type', wip_wo_header::wip_wo_type(), 'option_line_code', 'option_line_value', $$class->wo_type, 'wo_type', '', '', $readonly); ?>         </li>
          <li><?php $f->l_select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_orgId($$class->org_id), 'wip_accounting_group_id', 'wip_accounting_group', $$class->wip_accounting_group_id, 'wip_accounting_group_id', '', 1, 'readonly1'); ?>         </li>
-         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup clickable">
-           <?php echo gettext('Item Number') ?></label> 
+         <li><label><?php echo gettext('Item Number') ?></label> 
           <?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
           <?php echo $f->hidden_field_withId('processing_lt', $$class->processing_lt); ?>
           <?php $f->text_field_dm('item_number', 'select_item_number'); ?>
+          <i class="select_item_number select_popup clickable fa fa-search"></i>
          </li>
-         <li><?php $f->l_select_field_from_object('revision_name', $revision_name_a, 'revision_name', 'revision_name', $$class->revision_name, 'revision_name', 'small'); ?>         </li>
          <li><?php $f->l_text_field_d('item_description'); ?></li>
          <li><?php $f->l_select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom_id', 'uom_id', '', $readonly1); ?>         </li>
+         <li><?php $f->l_select_field_from_object('revision_name', $revision_name_a, 'revision_name', 'revision_name', $$class->revision_name, 'revision_name', ''); ?> </li>
          <li><label><?php echo gettext('Status') ?></label>                      
-          <span class="button"><?php echo!empty($$class->wo_status) ? $$class->wo_status : ""; ?></span>
+          <?php echo !empty($$class->wo_status) ? $$class->wo_status : ""; ?>
          </li>
         </ul>
        </div>
@@ -364,7 +364,7 @@ inoERP
            <td><?php echo!empty($routing_line_details) ? form::select_field_from_object('routing_sequence', $routing_line_details, 'routing_sequence', 'routing_sequence', $$class_fourth->routing_sequence, 'routing_sequence') : form::text_field_wid4s('routing_sequence'); ?></td>
            <td><?php echo $f->text_field('component_item_id_m', $$class_fourth->component_item_id_m, '8', '', 'item_id_m', 1, $readonly); ?></td>
            <td><?php echo $f->text_field('component_item_number', $$class_fourth->component_item_number, '20', '', 'select_item_number', '', $readonly); ?>
-            <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
+            <i class="select_item_number select_popup clickable fa fa-search"></i></td>
            <td><?php
             if (!empty($$class_fourth->component_item_id_m) && !empty($$class->org_id)) {
              $revision_name_a = inv_item_revision::find_by_itemIdM_orgId($$class_fourth->component_item_id_m, $$class->org_id);

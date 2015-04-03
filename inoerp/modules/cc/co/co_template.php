@@ -358,7 +358,7 @@
              echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
              form::text_field_wid2('item_number', 'select_item_number_all_fm2');
              ?>
-             <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
+             <i class="select_item_number select_popup clickable fa fa-search"></i></td>
             <td><?php echo $f->text_field_wid2s('new_revision'); ?></td>
             <td><?php echo $f->text_field('item_description', $$class_second->item_description); ?></td>
             <?php

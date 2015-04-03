@@ -21,11 +21,11 @@ inoERP
       <li><?php $f->l_text_field_dr_withSearch('bom_config_header_id') ?>
        <a name="show" href="form.php?class_name=bom_config_header&<?php echo "mode=$mode"; ?>" class="show document_id bom_config_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
-      <li><?php $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $bom_config_header->org_id, 'org_id', '', '', $readonly); ?>       </li>
-      <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_config_header_id select_popup clickable">
-        <?php echo gettext('Item Number') ?></label>
-       <?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
+      <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $bom_config_header->org_id, 'org_id', '', '', $readonly); ?>       </li>
+      <li><label><?php echo gettext('Item Number') ?></label><?php 
+      echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
        <?php $f->text_field_dm('item_number', 'select_item_number_allowedBOM'); ?>
+       <i class="select_item_number select_popup clickable fa fa-search"></i>
       </li>
       <li><?php $f->l_select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom_id', 'uom_id'); ?>       </li>
       <li><?php $f->l_text_field_dr('item_description'); ?></li>
@@ -107,7 +107,7 @@ inoERP
          <td><?php echo!empty($routing_line_details) ? form::select_field_from_object('routing_sequence', $routing_line_details, 'bom_config_routing_line_id', 'routing_sequence', $$class_second->routing_sequence, '', $readonly, 'usage_basis', '', 1) : form::text_field_wid2sm('routing_sequence'); ?></td>
          <td><?php $f->text_field_wid2sr('component_item_id_m', 'item_id_m'); ?></td>
          <td><?php $f->text_field_wid2('component_item_number', 'select_item_number'); ?>
-          <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
+          <i class="select_item_number select_popup clickable fa fa-search"></i></td>
          <td><?php
           if (!empty($$class_second->component_item_id_m) && !empty($$class->org_id)) {
            $revision_name_a = inv_item_revision::find_by_itemIdM_orgId($$class_second->component_item_id_m, $$class->org_id);

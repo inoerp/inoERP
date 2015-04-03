@@ -132,7 +132,7 @@
          while ($tax_code_object_ai->valid()) {
           $mdm_tax_code = $tax_code_object_ai->current();
           ?>         
-          <tr class="tax_code_line<?php echo $count ?>">
+          <tr class="mdm_tax_code<?php echo $count ?>">
            <td><?php $f->seq_field_d($count) ?></td>
            <td><?php form::text_field_wid('tax_regime'); ?></td>
            <td><?php form::text_field_wid('tax_jurisdiction'); ?></td>

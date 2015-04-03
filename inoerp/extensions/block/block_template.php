@@ -24,8 +24,7 @@
        <li><?php $f->l_checkBox_field_d('cached_cb'); ?> </li> 
        <li><?php $f->l_select_field_from_object('restrict_to_role', role_access::roles(), 'option_line_code', 'option_line_value', $block->restrict_to_role, 'role_code'); ?></li>
        <li><label><?php echo gettext('Reference Table') ?></label><?php
-        echo $f->text_field_ap(array('name' => 'reference_table', 'value' => $$class->reference_table,
-         'readonly' => $readonly_id));
+        $f->text_field_dr('reference_table');
         ?></li>
        <li><label><?php echo gettext('Block Name') ?></label>
         <?php

@@ -105,9 +105,10 @@
             <?php
             If (!empty($search_result)) {
              echo '<tbody>';
-             foreach ($search_result as $record) {
+             foreach ($search_result as $k=> $record) {
               $primary_column = $class::$primary_column;
-              echo '<tr>';
+              $tr_class = 'rowno_' . $k;
+              echo "<tr class='{$tr_class}'>";
               echo '<td><button  class="quick_select button ' . $primary_column . '">' . $record->$primary_column . '</button></td>';
               foreach ($column_array as $key => $value) {
                echo "<td class=\"$value\">" . $record->$value . '</td>';

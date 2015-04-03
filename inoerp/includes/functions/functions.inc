@@ -567,6 +567,26 @@ function ino_showDecimal($number, $decimal = '.') {
  return $final_number;
 }
 
+function get_user_ip() {
+ $ipaddress = '';
+ if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+  $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+ } else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+  $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+ } else if (!empty($_SERVER['HTTP_X_FORWARDED'])) {
+  $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+ } else if (!empty($_SERVER['HTTP_FORWARDED_FOR'])) {
+  $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+ } else if (!empty($_SERVER['HTTP_FORWARDED'])) {
+  $ipaddress = $_SERVER['HTTP_FORWARDED'];
+ } else if (!empty($_SERVER['REMOTE_ADDR'])) {
+  $ipaddress = $_SERVER['REMOTE_ADDR'];
+ } else {
+  $ipaddress = 'NOTFOUND';
+ }
+ return $ipaddress;
+}
+
 function get_postArray_From_jqSearializedArray($serialezed_postedArray) {
  $nameArray = [];
  $valueArray = [];
@@ -587,6 +607,7 @@ function get_postArray_From_jqSearializedArray($serialezed_postedArray) {
     array_push($$value, $finalArray[$value]);
    }
   }
+
   $postArray[$value] = $$value;
  }
  return $postArray;
@@ -1110,7 +1131,7 @@ function search_item_number_from() {
  $stmt = '<input id="item_number_from" class="textfield select_item_number item_number item_number_from" '
   . 'type="text" title="" placeholder="From Item" size="20" maxlength="256" value="" '
   . 'name="from_item_number" >';
- $stmt .= "<img src='" . HOME_URL . "themes/images/serach.png' class='select_item_number select_popup clickable'>";
+ $stmt .= '<i class="select_item_number select_popup clickable fa fa-search"></i>';
  return $stmt;
 }
 
@@ -1118,7 +1139,7 @@ function search_item_number_to() {
  $stmt = '<input id="item_number_to" class="textfield select_item_number item_number item_number_to" '
   . 'type="text" title="" placeholder="To Item" size="20" maxlength="256" value="" '
   . 'name="to_item_number" >';
- $stmt .= "<img src='" . HOME_URL . "themes/images/serach.png' class='select_item_number select_popup clickable'>";
+ $stmt .= '<i class="select_item_number select_popup clickable fa fa-search"></i>';
  return $stmt;
 }
 
@@ -1523,6 +1544,26 @@ function ino_recent_visits() {
   $recent_visit .= '</ul>';
  }
  return $recent_visit;
+}
+
+function ino_show_collapse_content($content, $length = '350', $divid = 'collapse', $readmore = 'Read More..') {
+ if (strlen($content) <= $length) {
+  return $content;
+ } else {
+  $content_small = substr($content, 0, $length);
+ }
+ $stmt = '<div class="small-content">' . $content_small . '</div>';
+ $content_full = substr($content, $length);
+ $stmt .= '<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#' . $divid . '" 
+  aria-expanded="false" aria-controls="collapseExample">
+  ' . $readmore . '
+</button>
+<div class="collapse" id="' . $divid . '">
+  <div class="well">
+    ' . $content_full . '
+  </div>
+</div>';
+ return $stmt;
 }
 
 ?>

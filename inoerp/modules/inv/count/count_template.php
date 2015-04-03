@@ -7,10 +7,9 @@
      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
      <li><a href="#tabsHeader-2"><?php echo gettext('Variance Limit/Approval') ?></a></li>
      <li><a href="#tabsHeader-3"><?php echo gettext('Count Frequence') ?></a></li>
-    </ul><?php $f = new inoform(); ?>
+    </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field">
         <li><?php $f->l_text_field_dr_withSearch('inv_count_header_id') ?>
          <a name="show" href="form.php?class_name=inv_count_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_count_header_id"><i class="fa fa-refresh"></i></a> 
@@ -26,7 +25,6 @@
         <li><?php $f->l_ac_field_dm('adjustment_ac_id'); ?></li>
         <li><?php $f->l_text_field_d('description'); ?></li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <ul class="column header_field">
@@ -117,7 +115,7 @@
           </td>
           <td><?php form::number_field_wid2sr('inv_count_schedule_id'); ?></td>
           <td><?php $f->text_field_d2sr('item_id_m'); ?></td>
-          <td><?php $f->text_field_wid2('item_number', 'select_item_number'); ?> <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number_only select_popup"></td>
+          <td><?php $f->text_field_wid2('item_number', 'select_item_number'); ?><i class="select_item_number select_popup clickable fa fa-search"></i></td>
           <td><?php $f->text_field_wid2('item_description'); ?></td>
           <td><?php echo $f->date_fieldAnyDay('schedule_date', $$class_second->schedule_date); ?></td>
           <td><?php echo $f->select_field_from_array('status', inv_count_schedule::$status_a, $$class_second->status, '', '', '', '', 1); ?></td>

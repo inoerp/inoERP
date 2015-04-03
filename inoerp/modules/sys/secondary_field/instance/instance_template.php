@@ -1,16 +1,13 @@
 <div id="secondary_fieldId">
  <!--    START OF FORM HEADER-->
  <div id ="form_header">
-  <span class="heading">Secondary Field for Objects </span>
-  <div class="large_shadow_box">
-   <ul class="column two_column">
-    <li>
-     <label> Object Name : </label>
-     <?php echo $f->select_field_from_object('obj_class_name', view::find_all_tables(), 'TABLE_NAME', 'TABLE_NAME', $obj_class_name_h, 'obj_class_name'); ?>
-     <a name="show" href="form.php?class_name=sys_secondary_field_instance&<?php echo "mode=$mode"; ?>" class="show document_id sys_secondary_field_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-    </li>						
-   </ul>
-  </div>
+  <span class="heading"><?php echo gettext('Secondary Field For Objects') ?></span>
+     <div id="form_serach_header" class="tabContainer">
+    <label><?php echo gettext('Object Name') ?></label></label>
+    <?php echo $f->select_field_from_object('obj_class_name', view::find_all_tables(), 'TABLE_NAME', 'TABLE_NAME', $obj_class_name_h, 'obj_class_name'); ?>
+    <a name="show" href="form.php?class_name=sys_secondary_field_instance&<?php echo "mode=$mode"; ?>" class="show document_id sys_secondary_field_id">
+     <i class="fa fa-refresh"></i></a> 
+   </div>
  </div>
  <form action=""  method="post" id="secondary_field"  name="secondary_field">
   <!--END OF FORM HEADER-->

@@ -18,11 +18,11 @@
        </li>
        <li><?php $f->l_select_field_from_object('org_id', $org->findAll_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?></li>
        <li><?php $f->l_text_field_d('asset_number'); ?></li>
-       <li><label><i class="select_item_number select_popup clickable fa fa-search"></i><?php echo gettext('Inv Item Number') ?></label><?php
+       <li><label><?php echo gettext('Inv Item Number') ?></label><?php
         echo $f->hidden_field_withId('item_id_m', $$class->item_id_m);
         $f->text_field_dm('item_number', 'select_item_number_am_asset_item');
         echo $f->hidden_field_withCLass('am_asset_type', 'ASSET_ITEM', 'popup_value');
-        ?>
+        ?><i class="select_item_number select_popup clickable fa fa-search"></i>
        </li>
        <li><?php $f->l_text_field_d('item_description'); ?></li>
        <li><?php $f->l_select_field_from_object('am_asset_category_id', fa_asset_category::find_all(), 'fa_asset_category_id', 'asset_category', $$class->am_asset_category_id, 'am_asset_category_id', '', 1); ?></li>
@@ -133,11 +133,11 @@
           </td>
           <td><?php $f->seq_field_d($count) ?></td>
           <td><?php $f->text_field_wid2sr('am_activity_reference_id'); ?></td>
-          <td><i class="select_item_number select_popup clickable fa fa-search"></i><?php
+          <td><?php
            echo $f->hidden_field_withCLass('activity_item_id_m', $$class_second->activity_item_id_m, 'item_id_m');
            $f->text_field_wid2('activity_item_number', 'select_item_number_am_asset_activity');
            echo $f->hidden_field_withCLass('am_asset_type', 'ASSET_ACTIVITY', 'popup_value');
-           ?>
+           ?><i class="select_item_number select_popup clickable fa fa-search"></i>
           </td>
           <td><?php echo $f->date_fieldAnyDay('start_date', $$class_second->start_date); ?></td>
           <td><?php echo $f->date_fieldAnyDay('end_date', $$class_second->end_date); ?></td>

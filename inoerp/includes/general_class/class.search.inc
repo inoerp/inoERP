@@ -143,7 +143,8 @@ class search extends dbObject {
     $count = 0;
     foreach ($this->result as $record) {
      $count++;
-     $search_result .='<tr>';
+     $tr_class = 'rowno_' . $count;
+     $search_result .="<tr class='{$tr_class}'>";
      $search_result .= "<td>$count</td>";
      if ($i == 0) {
       $search_result .= '<td class="search_result action">';
@@ -245,7 +246,8 @@ class search extends dbObject {
     $count = 0;
     foreach ($this->result as $record) {
      $count++;
-     $search_result .='<tr>';
+     $tr_class = 'rowno_'.$count;
+     $search_result .="<tr class='{$tr_class}'>";
      $search_result .= "<td>$count</td>";
      if ($i == 0) {
       $search_result .= '<td><a href="#" role="button" data-select_field="' . $primary_column . '"  data-select_field_value="' . $record->$primary_column . '"'

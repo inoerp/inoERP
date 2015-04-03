@@ -71,8 +71,8 @@ enableLineForSaveAfterFieldChange();
  $('.select_account').inoAutoCompleteElement({
   json_url: 'modules/gl/coa_combination/coa_search.php',
   primary_column1: 'coa_id',
+  set_value_for_one_field : true
  });
- 
  //Coa auto complete
 // var coaCombination = new autoCompleteMain();
 //// var coa_id = $('#coa_id').val();

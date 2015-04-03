@@ -1,3 +1,0 @@
-gl_journal_line_id,gl_journal_header_id,line_num,status,line_type,description,code_combination_id,total_cr,total_dr,total_ac_dr,total_ac_cr,reference_type,reference_key_name,reference_key_value,ef_id
-,1,3,U,,,501-502-0000-110500-3100-501,,400000,400000,,,,,
-,1,4,U,,,501-502-0000-110500-3100-501,400000,,,400000,,,,

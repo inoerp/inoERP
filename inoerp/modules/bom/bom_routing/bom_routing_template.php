@@ -26,7 +26,7 @@ inoERP
           <i class="fa fa-refresh"></i></a> 
         </li>
         <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $bom_routing_header->org_id, 'org_id', '', 1, $readonly1); ?>        </li>
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="item_id_m select_popup clickable">
+        <li><label>
           <?php echo gettext('Item Number') ?></label>
          <?php
         echo $f->hidden_field_withId('item_id_m', $$class->item_id_m);
@@ -34,6 +34,7 @@ inoERP
         echo !empty($hidden_field) ? $hidden_field : '';
         $f->text_field_dm('item_number', 'select_item_number_all');
         ?>
+         <i class="select_item_number select_popup clickable fa fa-search"></i>
         </li>
         <li><?php $f->l_select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, '', '', '', $readonly); ?>        </li>
         <li><?php $f->l_text_field_d('item_description'); ?> </li>
@@ -44,9 +45,11 @@ inoERP
      <div id="tabsHeader-2" class="tabContent">
       <div> 
        <ul class="column five_column">
-        <li><label><?php echo gettext('Item Number') ?></label>
-         <?php echo $f->hidden_field_withIdClass('common_routing_item_id_m', $$class->common_routing_item_id_m, 'item_id_m'); ?>
-          <?php $f->text_field_d('commonRouting_item_number', 'select_item_number'); ?>  </li>
+        <li><label><?php echo gettext('Item Number') ?></label><?php 
+        echo $f->hidden_field_withIdClass('common_routing_item_id_m', $$class->common_routing_item_id_m, 'item_id_m'); ?>
+          <?php $f->text_field_d('commonRouting_item_number', 'select_item_number'); ?>
+         <i class="select_item_number2 select_popup clickable fa fa-search"></i>
+        </li>
         <li><label><?php echo gettext('Description') ?></label><?php $f->text_field_d('commonRouting_item_description', 'commonRouting_item_description'); ?>  </li>
        </ul>
       </div>

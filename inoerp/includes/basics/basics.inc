@@ -91,6 +91,9 @@ require_once(INC_MODULE . DS . "sys" . DS . "extra_field" . DS . "class_sys_extr
 require_once(INC_MODULE . DS . "sys" . DS . "extra_field" . DS . "instance" . DS . "class_sys_extra_field_instance.inc");
 require_once(INC_MODULE . DS . "sys" . DS . "printer" . DS . "class_sys_printer.inc");
 require_once(INC_MODULE . DS . "sys" . DS . "db_update" . DS . "class_sys_db_update.inc");
+require_once(INC_MODULE . DS . "sys" . DS . "catalog" . DS . "class_sys_catalog_header.inc");
+require_once(INC_MODULE . DS . "sys" . DS . "catalog" . DS . "class_sys_catalog_line.inc");
+require_once(INC_MODULE . DS . "sys" . DS ."catalog" . DS . "value" . DS . "class_sys_catalog_value.inc");
 require_once(INC_ORGS . DS . "class_org.inc");
 require_once(INC_ORGS . DS . "class_org_v.inc");
 require_once(INC_ORGS . DS . "enterprise" . DS . "class_enterprise.inc");
@@ -117,6 +120,7 @@ require_once(INC_MODULE . DS . "gl" . DS . "currency_conversion" . DS . "class_g
 require_once(INC_INV . DS . "item" . DS . "class.item.inc");
 require_once(INC_MODULE . DS . "inv" . DS . "item" . DS . "class_ra_item.inc");
 require_once(INC_MODULE . DS . "inv" . DS . "item" . DS . "class_item_select.inc");
+require_once(INC_MODULE . DS . "inv" . DS . "item_relation" . DS . "class_inv_item_relation.inc");
 require_once(INC_INV . DS . "onhand" . DS . "class_onhand.inc");
 require_once(INC_INV . DS . "onhand" . DS . "class_onhand_v.inc");
 require_once(INC_INV . DS . "subinventory" . DS . "class_subinventory.inc");
@@ -368,6 +372,7 @@ require_once(INC_MODULE . DS . "am" . DS . "move_transaction" . DS . "class_am_m
 require_once(INC_MODULE . DS . "am" . DS . "work_bench" . DS . "class_am_wo_work_bench.inc");
 require_once(INC_MODULE . DS . "am" . DS . "work_bench" . DS . "class_am_wo_work_bench_line.inc");
 require_once(INC_MODULE . DS . "ec" . DS . "product" . DS . "class_ec_product.inc");
+require_once(INC_MODULE . DS . "ec" . DS . "product_view" . DS . "class_ec_product_view.inc");
 
 
 //
@@ -400,6 +405,9 @@ require_once(INC_EXTENSIONS . DS . "web_tracking" . DS . "class_web_tracking.inc
 require_once(INC_EXTENSIONS . DS . "url_alias" . DS . "class_ext_url_alias.inc");
 require_once(INC_EXTENSIONS . DS . "web_contact" . DS . "class_web_contact.inc");
 require_once(INC_EXTENSIONS . DS . "site_search" . DS . "class_extn_site_search.inc");
+require_once(INC_EXTENSIONS . DS . "rating" . DS . "class_extn_rating_values.inc");
+require_once(INC_EXTENSIONS . DS . "rating" . DS . "class_extn_rating_control.inc");
+
 
 require_once(INC_EXTENSIONS . DS . "test_case" . DS . "class_ext_test_case_header.inc");
 require_once(INC_EXTENSIONS . DS . "test_case" . DS . "class_ext_test_case_line.inc");

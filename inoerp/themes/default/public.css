@@ -378,7 +378,6 @@ ul.add_new_search li{
 #comment_list{
  margin: 10px 0;
  padding: 10px 0;
- border-bottom: 5px  groove #98bf21 ;
 }
 
 ul.commentRecord{
@@ -1396,6 +1395,7 @@ ul.header_li li{
 input.extra_large{
  width: 100% !important;
  text-align: left;  
+ min-width: 600px;
 }
 
 #myModal .modal-dialog{
@@ -1585,4 +1585,196 @@ span.delete_image{
 .add-category{
  clear: both;
  margin: 10px 0;
+}
+
+.catalog-list-element{
+ width: 500px;
+}
+
+
+.catalog-ul li{
+ border: dotted #000;
+ border-width: 1px 1px 0 1px;
+ margin-top: -3px;     
+}
+
+.catalog-ul label{
+ background-color : #eee;
+ padding: 10px 0;
+ margin-bottom: -0.1px;
+}
+
+.catalog-ul li:last-child{
+ border-bottom: dotted 1px #000;  
+}
+
+.catalog-list-element{
+ display: inline-block;
+ margin-right: 20px;
+}
+
+ul.category-stmt li{
+ margin-bottom: 20px;
+}
+
+.box-54{
+ max-width: 570px;
+ height: 400px;
+ overflow: hidden;
+}
+
+hr{
+ margin-top: 10px !important;
+ margin-bottom: 10px !important;
+ border-right: 0px none;
+ border-width: 3px !important;
+ border-style: solid none none;
+}
+
+hr.blue-divider{
+ border-color: #57B5F0 ;
+}
+
+hr.grey-divider {
+ border-color: #C8D3DA;
+}
+
+.ino-breadcrumb {
+ padding: 8px 15px;
+ margin-bottom: 20px;
+ list-style: none;
+ background-color: #f5f5f5;
+ border-radius: 4px;
+}
+
+.ino-breadcrumb>.active {
+ color: #777;
+}
+
+.ino-breadcrumb a {
+ color: #337ab7 !important;
+ text-decoration: none;
+ font-size: 1.1em;
+ padding: 0px 10px;      
+}
+.ino-breadcrumb>li {
+ display: inline-block;
+}
+
+.ino-breadcrumb>li+li:before {
+ padding: 0 5px;
+ color: #337ab7;
+ content: ">\00a0";
+ font-weight: 2boldem;      
+}
+
+ol {
+ display: block;
+}
+
+.ratings_vote {
+ color: green !important;
+ text-fill-color: green !important;
+}
+
+.ratings_stars {
+ color: #39C;
+ text-fill-color: #39C;
+}
+
+.ratings_over {
+ color: #000;
+ text-fill-color: transparent;
+}
+
+.rate-list li{
+ font-size: 14px;
+}
+
+
+hr.light {
+    border-width: 2px !important;
+    margin: 5px 0px;
+}
+
+/*Some CSS*/
+* {margin: 0; padding: 0;}
+.magnify { position: relative;}
+
+/*Lets create the magnifying glass*/
+.large {
+	width: 350px; height: 350px;
+	position: absolute;
+	border-radius: 100%;
+	
+	/*Multiple box shadows to achieve the glass effect*/
+	box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85), 
+	0 0 7px 7px rgba(0, 0, 0, 0.25), 
+	inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
+	
+
+	/*hide the glass by default*/
+	display: none;
+}
+.sm-image{
+        height:120px;
+}
+ul.summary_list{
+position: relative; 
+}
+
+ul.summary_list li.summary{
+        margin:  10px 40px;
+        word-wrap: break-word;
+        width: 200px;
+        height: 200px;
+        overflow:hidden;
+        vertical-align: bottom;
+}
+
+.move-left, .move-right{
+ position: absolute;
+top: 50%;
+}
+
+#product-view-divId .product.level-1{
+        height: 400px;
+        overflow: hidden;
+}
+
+.product .panel-footer {
+    padding: 10px 15px 50px 15px;
+}
+
+.small-top-padding{
+ padding: 1px 10px;
+}
+
+.vertical-list h3{
+ border-color: rgb(204, 204, 204);
+padding: 5px 10px;
+margin: 10px -15px;
+border-width: 1px 0px;
+border-style: solid;
+}
+
+h3.odd{
+        background-color: #eee;
+}
+
+h3.even{
+        background-color: rgba(237, 237, 207, 0.44);
+}
+
+h3.filter-title{
+ padding: 0px 10px;
+margin-bottom: -10px;
+color: rgb(51, 153, 204);
+text-align: center;
+font-weight: bold;
+}
+
+.not-active {
+   pointer-events: none;
+   cursor: default;
 }

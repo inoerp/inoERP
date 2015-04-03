@@ -68,7 +68,7 @@
          </td>
          <td><?php $f->text_field_d2srm('inv_count_schedule_id'); ?></td>
          <td><?php $f->text_field_d2sr('item_id_m'); ?></td>
-         <td><?php $f->text_field_wid2('item_number', 'select_item_number'); ?> <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number_only select_popup"></td>
+         <td><?php $f->text_field_wid2('item_number', 'select_item_number'); ?><i class="select_item_number select_popup clickable fa fa-search"></i></td>
          <td><?php $f->text_field_wid2('item_description'); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small', '', 1); ?></td>
          <td><?php echo $f->date_fieldAnyDay('schedule_date', $$class_second->schedule_date); ?></td>

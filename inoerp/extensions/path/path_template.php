@@ -1,8 +1,8 @@
- <div id="path_divId"><?php  $f = new inoform();  ?>
+ <div id="path_divId">
  <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
  <!--    End of place for showing error messages-->
  <div id ="form_header">
-  <form action="path.php" method="post" size="30" id="path" name="path"  >
+  <form  method="post" size="30" id="path" name="path"  >
    <span class="heading"><?php echo gettext('System Path') ?></span>
    <div class="tabContainer"> 
     <ul class="column header_field two_column_form"> 
@@ -40,3 +40,15 @@
  </div>
 </div>
 
+<div id="js_data">
+ <ul id="js_saving_data">
+  <li class="headerClassName" data-headerClassName="path" ></li>
+  <li class="savingOnlyHeader" data-savingOnlyHeader="true" ></li>
+  <li class="primary_column_id" data-primary_column_id="path_id" ></li>
+  <li class="form_header_id" data-form_header_id="path" ></li>
+ </ul>
+ <ul id="js_contextMenu_data">
+  <li class="docHedaderId" data-docHedaderId="path_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="path_id" ></li>
+ </ul>
+</div>

@@ -27,9 +27,9 @@
         <li><?php $f->l_checkBox_field_d('allow_negative_onhand_cb') ?>       </li>
         <li><?php $f->l_ac_field_d('cogs_ac_id'); ?></li>
         <li><?php $f->l_select_field_from_object('ar_transaction_type_id', ar_transaction_type::find_all(), 'ar_transaction_type_id', 'ar_transaction_type', $$class->ar_transaction_type_id, 'transaction_type', '', 1) ?>        </li>
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup clickable">
-          <?php echo gettext('Item Number') ?></label><?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
+        <li><label><?php echo gettext('Item Number') ?></label><?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
          <?php $f->text_field_dm('item_number', 'select_item_number'); ?>
+         <i class="select_item_number select_popup clickable fa fa-search"></i>
         </li>
        </ul> 
       </div> 

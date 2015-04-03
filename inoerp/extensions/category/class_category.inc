@@ -37,7 +37,6 @@ class category extends dbObject {
   'module_name' => 'extn',
   'weight' => 11
  ];
- 
  public static $content_relation_a = [
   'ONLY_ONE' => 'One Category From Primary',
   'MULTIPLE' => 'Multiple Category From Primary',
@@ -51,6 +50,11 @@ class category extends dbObject {
   "description",
   "primary_cb",
   'content_relation',
+  'priority',
+  'image_file_id',
+  'content_block_id',
+  'long_description',
+  'filter_catalog_id',
   "created_by",
   "creation_date",
   "last_update_by",
@@ -96,6 +100,11 @@ class category extends dbObject {
  public $category_type;
  public $description;
  public $primary_cb;
+ public $priority;
+ public $image_file_id;
+ public $long_description;
+ public $content_block_id;
+ public $filter_catalog_id;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -394,7 +403,7 @@ class category extends dbObject {
  public static function find_by_reference_table_and_id($reference_table, $reference_id) {
   global $db;
 
-  $sql = "SELECT category.category_id as category_id,
+  $sql = "SELECT category.category_id as category_id,category.priority,
               category.major_category_id as major_category_id,
                category.category as category, 
                category.parent_id as parent_id, 
@@ -884,19 +893,59 @@ class category extends dbObject {
   return $bc_statement;
  }
 
- public static function category_stmt($category){
-        $stmt = '<ul class="category-stmt">';
-      foreach ($category as $cat) {
-       $stmt .= '<li class="inline"><button type="button" class="btn btn-default delete-category"  title="' . $cat->description . '" '
-        . ' data-category_reference_id="' . $cat->category_reference_id . '" >';
-       $stmt .= '<i class="fa fa-remove"></i> &nbsp;&nbsp;';
-       $stmt .= $cat->category;
-       $stmt .='</button></li>';
-      }
-      $stmt .= '</ul>';
-      return $stmt;
+ public static function breadCrum_by_category($category_id, &$element_a = '', $content_type = '') {
+  if (empty($category_id)) {
+   $bc_statement = '<ol class="ino-breadcrumb"><li><a href="' . HOME_URL . '">Home</a></li></ol>';
+   return $bc_statement;
+  }
+
+  if (empty($element_a)) {
+   $element_a = [];
+  }
+  $category = self::find_by_id($category_id);
+//	$parent_of_category = self::parent_of_child($category->parent_id);
+  if (self::is_major_category($category->category_id)) {
+   if (!empty($content_type)) {
+    $linkFor_parent = '<a href="' . HOME_URL . 'content.php?content_type=' . $content_type .
+     '&amp;category_id=' . $category->category_id . '">' . $category->category . '</a>';
+   } else {
+    $linkFor_parent = '<a href="' . HOME_URL . 'product.php?category_id=' . $category->category_id . '">' . $category->category . '</a>';
+   }
+   array_push($element_a, $linkFor_parent);
+   //end of category class
+   $element_a_r = array_reverse($element_a);
+   $bc_statement = '<ol class="ino-breadcrumb"><li><a href="' . HOME_URL . '">Home</a></li>';
+   foreach ($element_a_r as $key => $value) {
+    $bc_statement .= '<li>' . $value . '</li>';
+   }
+   $bc_statement .= '</ol>';
+   echo $bc_statement;
+  } else {
+   if (!empty($content_type)) {
+    $linkFor_parent = '<a href="' . HOME_URL . 'content.php?content_type=' . $content_type .
+     '&amp;category_id=' . $category->category_id . '">' . $category->category . '</a>';
+   } else {
+    $linkFor_parent = '<a class="ino-bradcrum-link" href="' . HOME_URL . 'product.php?category_id=' . $category->category_id . '">' . $category->category . '</a>';
+   }
+   array_push($element_a, $linkFor_parent);
+   $category1 = self::find_by_id($category->parent_id);
+   self::breadCrum_by_category($category1->category_id, $element_a, $content_type);
+  }
  }
- 
+
+ public static function category_stmt($category) {
+  $stmt = '<ul class="category-stmt">';
+  foreach ($category as $cat) {
+   $stmt .= '<li class="inline"><button type="button" class="btn btn-default delete-category"  title="' . $cat->description . '" '
+    . ' data-category_reference_id="' . $cat->category_reference_id . '" >';
+   $stmt .= '<i class="fa fa-remove"></i> &nbsp;&nbsp;';
+   $stmt .= $cat->category;
+   $stmt .='</button></li>';
+  }
+  $stmt .= '</ul>';
+  return $stmt;
+ }
+
 }
 
 ?>

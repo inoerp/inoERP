@@ -63,6 +63,10 @@ class ec_product extends dbObject {
   'meta_keywords',
   'meta_description',
   'price_list_id',
+  'list_price',
+  'sales_price',
+  'sp_from_date',
+  'sp_to_date',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -85,6 +89,7 @@ class ec_product extends dbObject {
   '_show_update_path' => 1,
   '_update_action_meassge' => 'Update',
   '_show_view_path' => 1,
+  '_view_path' => 'product.php?'
  ];
  public $pageTitle = " eComm Product "; //page Title
  public $ec_product_id;
@@ -101,6 +106,10 @@ class ec_product extends dbObject {
  public $meta_keywords;
  public $meta_description;
  public $price_list_id;
+ public $list_price;
+ public $sales_price;
+ public $sp_from_date;
+ public $sp_to_date;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -133,6 +142,67 @@ class ec_product extends dbObject {
    " where org_id= '{$org_id}' ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
+ }
+
+ public static function find_similar_products($product_id) {
+  $sql = "SELECT ec_product_id , ec.item_id_m , ec.org_id , product_name , product_description, item.item_description,
+          item.image_file_id
+           FROM 
+           ec_product ec,
+           category_reference cr,
+           item
+           WHERE ec.ec_product_id = cr.reference_id
+           AND cr.reference_table = 'ec_product'
+           AND item.item_id_m = ec.item_id_m
+           AND item.org_id = ec.org_id
+           AND ec.ec_product_id != '{$product_id}'
+           AND cr.category_id IN (
+           SELECT DISTINCT(cr.category_id)
+           FROM 
+           ec_product ec,
+           category_reference cr
+           WHERE ec.ec_product_id = cr.reference_id
+           AND cr.reference_table = 'ec_product'
+           AND ec.ec_product_id = '{$product_id}'
+           )
+ ";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
+
+ public static function find_by_category_id($category_id, $param = '') {
+  $sql = "SELECT DISTINCT(ec.ec_product_id) , ec.item_id_m , ec.org_id , ec.product_name , ec.product_description, item.item_description,
+          item.image_file_id, ec.list_price, ec.sales_price
+           FROM 
+           ec_product ec,
+           category_reference cr,
+           item ";
+  if (!empty($param['sys_catalog_line_id'])) {
+   $sql .= ", sys_catalog_value scv";
+  }
+  $sql .= " WHERE ec.ec_product_id = cr.reference_id
+           AND cr.reference_table = 'ec_product'
+           AND item.item_id_m = ec.item_id_m
+           AND item.org_id = ec.org_id
+           AND cr.category_id = '{$category_id}'
+ ";
+  if (!empty($param['sys_catalog_line_id'])) {
+   $sql .= " AND scv.reference_table = 'ec_product'  ";
+   $sql .= " AND scv.reference_id = ec.ec_product_id  ";
+   $line_id_a = $param['sys_catalog_line_id'];
+   $line_id_val_a = $param['sys_catalog_line_id_value'];
+   $line_id_val_a_str = "('" . implode("','", $line_id_val_a)."')";
+   $line_id_a_str = "('" . implode("','", $line_id_a)."')";
+   $sql .= " AND scv.line_value IN  $line_id_val_a_str  ";
+   $sql .= " AND scv.sys_catalog_line_id IN  $line_id_a_str  ";
+  }
+
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
+
+ public static function find_featured_products_id($category_id) {
+  return self::find_by_category_id($category_id);
  }
 
 }

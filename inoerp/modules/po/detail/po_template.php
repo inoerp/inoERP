@@ -216,7 +216,7 @@
                  echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
                  form::text_field_wid2('item_number', 'select_item_number');
                  ?>
-                 <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
+                 <i class="select_item_number select_popup clickable fa fa-search"></i></td>
                 <td><?php form::text_field_wid2('item_description'); ?></td>
                 <td><?php echo $f->number_field('line_quantity', $$class_second->line_quantity); ?></td>
                 <td><?php

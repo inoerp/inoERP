@@ -49,7 +49,8 @@
                  ?>
                 </td>
                 <td><?php form::number_field_wid2sr('pos_transaction_line_id'); ?></td>
-                <td><?php $f->text_field_wid2('item_number', 'select_item_number'); ?><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
+                <td><?php $f->text_field_wid2('item_number', 'select_item_number'); ?>
+                 <i class="select_item_number select_popup clickable fa fa-search"></i></td>
                 <td><?php echo $f->number_field('unit_price', $$class_second->unit_price, '', '', 'medium'); ?></td>
                 <td><?php echo $f->number_field('quantity', $$class_second->quantity); ?></td>
                 <td><?php $f->text_field_wid2('discount_code', 'medium'); ?></td>

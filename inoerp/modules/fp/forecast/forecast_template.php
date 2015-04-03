@@ -102,7 +102,7 @@
            <td><?php form::text_field_wid2sr('fp_forecast_line_id'); ?></td>
            <td><?php echo $f->hidden_field('item_id_m', $$class_second->item_id_m); ?> 
             <?php form::text_field_wid2('item_number', 'select_item_number'); ?>
-            <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup clickable"></td>
+            <i class="select_item_number select_popup clickable fa fa-search"></i></td>
            <td><?php form::text_field_wid2r('item_description'); ?></td>
            <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small', '', 1); ?></td>
            <td><?php echo $f->select_field_from_object('bucket_type', fp_forecast_header::fp_bucket(), 'option_line_code', 'option_line_value', $$class_second->bucket_type, '', '', 1, $readonly); ?></td>
@@ -141,6 +141,7 @@
          $fp_forecast_line_object_ai->seek($position);
          while ($fp_forecast_line_object_ai->valid()) {
           $fp_forecast_line = $fp_forecast_line_object_ai->current();
+          $$class_second->current = $$class_second->total_current = null;
           ?>         
           <tr class="fp_forecast_line<?php echo $count ?>">
            <td><?php $f->seq_field_d($count); ?></td>

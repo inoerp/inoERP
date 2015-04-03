@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -45,7 +46,8 @@ class ar_customer extends dbObject {
   "tax_country",
   "tax_reg_no",
   "tax_payer_id",
-  "address_id",
+  "bill_to_id",
+  "ship_to_id",
   'customer_credit_class',
   'profile_name',
   "status",
@@ -62,13 +64,7 @@ class ar_customer extends dbObject {
   "customer_name",
   "tax_country"
  ];
- public $column = [
-  "ar_customer_id",
-  "customer_number",
-  "customer_name",
-  "tax_country",
-  "tax_reg_no"
- ];
+
  public $account = [
  ];
  public $checkbox = [
@@ -82,6 +78,10 @@ class ar_customer extends dbObject {
   'header_address',
   'header_country',
   'header_postal_code',
+  'shipto_address_name',
+  'shipto_address',
+  'shipto_country',
+  'shipto_postal_code',
  ];
  public $requiredField = [
   "customer_number",
@@ -107,7 +107,8 @@ class ar_customer extends dbObject {
  public $tax_country;
  public $tax_reg_no;
  public $tax_payer_id;
- public $address_id;
+ public $bill_to_id;
+ public $ship_to_id;
  public $customer_contact_id;
  public $profile_name;
  public $status;
@@ -124,6 +125,10 @@ class ar_customer extends dbObject {
  public $header_address;
  public $header_country;
  public $header_postal_code;
+ public $shipto_address_name;
+ public $shipto_address;
+ public $shipto_country;
+ public $shipto_postal_code;
 
  Public static function customer_types() {
   $option_header = option_header::find_by_name('AR_CUSTOMER_TYPE');
@@ -150,7 +155,7 @@ class ar_customer extends dbObject {
 
  public function findBy_customerName_OrgId($limit = 30) {
   global $db;
-  $sql = " SELECT ac.customer_name, ac.ar_customer_id, ac.customer_number ";
+  $sql = " SELECT * ";
   $sql .= " FROM ar_customer ac ";
   $sql .= " RIGHT JOIN ar_customer_bu acu ON  acu.ar_customer_id = ac.ar_customer_id ";
   $sql .= " WHERE  acu.org_id = :org_id ";
@@ -180,11 +185,9 @@ class ar_customer extends dbObject {
   $data = array();
   if (!empty($result)) {
    foreach ($result as $obj) {
-    $data[] = array(
-     'label' => $obj->customer_name,
-     'ar_customer_id' => $obj->ar_customer_id,
-     'customer_number' => $obj->customer_number
-    );
+    $data_a = (array) $obj;
+    $data_a['label'] = $obj->customer_name;
+    array_push($data, $data_a);
    }
   }
   return $data;
@@ -195,11 +198,9 @@ class ar_customer extends dbObject {
   $data = array();
   if (!empty($result)) {
    foreach ($result as $obj) {
-    $data[] = array(
-     'label' => $obj->customer_name,
-     'ar_customer_id' => $obj->ar_customer_id,
-     'customer_number' => $obj->customer_number
-    );
+    $data_a = (array) $obj;
+    $data_a['label'] = $obj->customer_name;
+    array_push($data, $data_a);
    }
   }
   return $data;

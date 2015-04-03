@@ -108,6 +108,7 @@
       </div>
       <!--   end of structure-->
      </div>
+     <div id='overlay'></div>
     </div>
 
    </div>

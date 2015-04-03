@@ -56,7 +56,7 @@ check_browser(); ?>
  </head>
  <body>
 
-  <div id="topbar" class="clearfix">
+  <div id="topbar" class="topbar clearfix">
    <div class="container">
     <?php
     if (!empty($showBlock)) {

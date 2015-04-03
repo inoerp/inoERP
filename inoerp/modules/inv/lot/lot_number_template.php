@@ -21,7 +21,7 @@
        <li><?php echo $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>       </li>
        <li><label> <?php
          if (empty($$class->inv_lot_number_id)) {
-          echo "<img src='" . HOME_URL . "themes/images/serach.png' class='select_item_number select_popup clickable'>";
+          echo '<i class="select_item_number select_popup clickable fa fa-search"></i>';
          }
          ?> <?php echo gettext('Item Number') ?></label>
         <?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>

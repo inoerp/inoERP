@@ -21,11 +21,10 @@
        }
        ?> 
       </li>
-      <li>
-       <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup clickable">
-        <?php echo gettext('Item Id') ?></label><?php $f->text_field_dsr('item_id') ;
+      <li><label><?php echo gettext('Item Id') ?></label><?php $f->text_field_dsr('item_id') ;
           echo $f->hidden_field_withCLass('am_asset_type', 'ASSET_ACTIVITY', 'popup_value');
          ?>
+       <i class="select_item_number select_popup clickable fa fa-search"></i>
        <a name="show" href="form.php?class_name=am_asset_activity&<?php echo "mode=$mode"; ?>" class="show document_id item_id"><i class="fa fa-refresh"></i></a> 
       </li>
       <li><label><?php echo gettext('Item Number') ?></label>

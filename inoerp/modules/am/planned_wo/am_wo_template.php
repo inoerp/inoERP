@@ -360,7 +360,7 @@ inoERP
            <td><?php echo!empty($routing_line_details) ? form::select_field_from_object('routing_sequence', $routing_line_details, 'routing_sequence', 'routing_sequence', $$class_fourth->routing_sequence, 'routing_sequence') : form::text_field_wid4s('routing_sequence'); ?></td>
            <td><?php echo $f->text_field('component_item_id_m', $$class_fourth->component_item_id_m, '8', '', 'item_id_m', 1, $readonly); ?></td>
            <td><?php echo $f->text_field('component_item_number', $$class_fourth->component_item_number, '20', '', 'select_item_number', '', $readonly); ?>
-            <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
+            <i class="select_item_number select_popup clickable fa fa-search"></i></td>
            <td><?php
             if (!empty($$class_fourth->component_item_id_m) && !empty($$class->org_id)) {
              $revision_name_a = inv_item_revision::find_by_itemIdM_orgId($$class_fourth->component_item_id_m, $$class->org_id);

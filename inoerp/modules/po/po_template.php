@@ -187,7 +187,7 @@ inoERP
            form::text_field_wid2('item_number', 'select_item_number');
            echo $f->hidden_field('processing_lt', '');
            ?>
-           <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
+           <i class="select_item_number select_popup clickable fa fa-search"></i></td>
           <td><?php
            if (!empty($$class_second->item_id_m) && !empty($$class_second->receving_org_id)) {
             $revision_name_a = inv_item_revision::find_by_itemIdM_orgId($$class_second->item_id_m, $$class_second->receving_org_id);

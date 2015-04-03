@@ -32,7 +32,8 @@ class ar_customer_site extends dbObject {
 //		 'freight_terms',
 //		 'transportation',
 //		 'country_of_origin',
-  'site_address_id',
+  'ship_to_id',
+  'bill_to_id',
 //		 'site_contact_id',
 //		 'customer_site_attachement_id',
 //		 'bank_id',
@@ -84,7 +85,8 @@ class ar_customer_site extends dbObject {
  public $freight_terms;
  public $transportation;
  public $country_of_origin;
- public $site_address_id;
+ public $bill_to_id;
+ public $ship_to_id;
  public $site_contact_id;
  public $customer_site_attachement_id;
  public $ar_sales_region_id;

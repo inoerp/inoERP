@@ -1,7 +1,7 @@
 <div id="selectResult">
  <div id="selectResult_page">
   <?php
-    if (!empty($total_count)) {
+  if (!empty($total_count)) {
    ?>
    <div id="searchResultMessages">
     <ul class="inline_list">
@@ -38,7 +38,7 @@
          foreach ($column_array as $key => $value) {
           echo '<th>' . $value . '</th>';
           $column_count++;
-          if($column_count >= 8){
+          if ($column_count >= 8) {
            break;
           }
          }
@@ -54,9 +54,10 @@
          $quick_select_class = 'quick_select';
         }
         echo '<tbody>';
-        foreach ($search_result as $record) {
+        foreach ($search_result as $k => $record) {
          $primary_column = $class::$primary_column;
-         echo '<tr>';
+         $tr_class = 'rowno_' . $k;
+         echo "<tr class='{$tr_class}'>";
          echo '<td><button data-select_field="' . $primary_column . '"  data-select_field_value="' . $record->$primary_column . '"'
          . ' class=" button ' . $primary_column . ' ' . $quick_select_class . '">' . $record->$primary_column . '</button></td>';
          foreach ($column_array as $key => $value) {

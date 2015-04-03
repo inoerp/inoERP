@@ -23,6 +23,8 @@ if ((!empty($_REQUEST['action'])) && ($_REQUEST['action'] = 'search')) {
  //return from this file
  return;
 }
+
+
  if ((!empty($_GET['ar_customer_id'])) && (!empty($_GET['org_id']))) {
 	echo '<div id="customer_bu_addresses">';
 	$ar_customer_id = $_GET['ar_customer_id'];
@@ -46,7 +48,9 @@ if ((!empty($_REQUEST['action'])) && ($_REQUEST['action'] = 'search')) {
 		 $arcbu->ar_customer_id = $ar_customer_id;
 		 $arcbu->org_id = $org_id;
 		 $arcbu_i = $arcbu->findBy_orgId_customerId();
-		 echo "<div id='receivable_ac_id'>".coa_combination::find_by_id($arcbu_i->receivable_ac_id)->combination.'</div>';
+     if($arcbu_i->receivable_ac_id){
+      echo "<div id='receivable_ac_id'>".coa_combination::find_by_id($arcbu_i->receivable_ac_id)->combination.'</div>';
+     }
 		} else {
 		 echo "<div class=\"errorMsg\">Customer BU Assignment doesn't exists</div>";
 		}

@@ -105,6 +105,7 @@ class extn_image extends file {
  public $msg;
 
  public static function show_existing_images($image) {
+  $f = new inoform();
   $attachment_statement = "<div class=\"existing-image\"><ul class='first_level'>";
 
   if (!empty($image) && count($image) > 0) {
@@ -127,6 +128,8 @@ class extn_image extends file {
       $attachment_statement .= '<li class="image-with-text inline"><img  class="img img-medium pos-relative" src="' .HOME_URL. $records->file_path . $records->file_name . '"/>';
       $attachment_statement .= '<span role="button" data-extn_image_reference_id="' . $records->extn_image_reference_id . '" '
        . 'class="delete_image btn btn-danger "  name="delete_extn_image">Delete Image</span></li>';
+      $attachment_statement .= '<li>'.$f->text_field('img_description1', $records->img_description1,'','','extra_large','','','Image Description 1').'</li>';
+      $attachment_statement .= '<li>'.$f->text_field('img_description2', $records->img_description2,'','','extra_large','','','Image Description 2').'</li>';
       break;
     }
    }
@@ -155,13 +158,53 @@ $stmt = "<div class='existing-image'>" . self::show_existing_images($images) . '
 
   return $stmt;
  }
+ 
+public function simple_carousel($div_class="box-54", $show_caption = true) {
+  $images = self::find_by_reference_table_and_id($this->reference_table, $this->reference_id);
+  if (empty($images)) {
+   return;
+  }
+  $stmt = '<div id="myCarousel" class="carousel slide '.$div_class.' magnify" data-ride="carousel">';
+  $stmt .= '<ol class="carousel-indicators">';
+  for ($c = 0; $c < count($images); $c++) {
+   $active = ($c == 0) ? ' class="active" ' : '';
+   $stmt .= '<li data-target="#myCarousel" data-slide-to="' . $c . '" ' . $active . '></li>';
+  }
+  $stmt .= '</ol>';
+  $stmt .= '<div class="carousel-inner" role="listbox">';
+  foreach ($images as $d => $records) {
+   $active = ($d == 0) ? ' active' : '';
+   $stmt .= '<div class="item ' . $active . '">';
+   $stmt .= '<div class="large"></div>';
+   $stmt .= '<img  class="img img-medium pos-relative small" src="' . HOME_URL . $records->file_path . $records->file_name . '" alt="' . $records->file_name . '" >';
+   if($show_caption && !empty($records->img_description1)){
+    $stmt .='<div class="carousel-caption">
+    <h3>'.$records->img_description1.'</h3>
+    <p>'.$records->img_description2.'</p>
+  </div>';
+   }
+   $stmt .= '</div>';
+  }
+  $stmt .= '</div>';
+  $stmt .= '<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>';
+  $stmt .= '</div>';
 
+  return $stmt;
+ }
+ 
  public static function find_by_reference_table_and_id($reference_table, $reference_id) {
   $sql = "SELECT image.extn_image_id , image.file_path as file_path, 
                image.file_name as file_name,  image.description as description,
                image.display_type as display_type,
 							 ir.extn_image_reference_id as extn_image_reference_id,
-							 ir.status as status
+							 ir.status as status, ir.img_description1,ir.img_description2
        FROM 
        extn_image image , extn_image_reference ir
        WHERE ir.reference_table = '{$reference_table}'
@@ -261,10 +304,13 @@ $stmt = "<div class='existing-image'>" . self::show_existing_images($images) . '
      echo '<li><button name="remove_file" class="remove_file" >Remove</button></li>';
      if (!empty($this->display_type) && ($this->display_type == 'extn_image')) {
       echo '<li><input type="hidden" name=extn_image_id_values[] class="hidden file_id_values" value="' . $values . '"></li>';
+      
      } else {
       echo '<li><input type="hidden" name=file_id_values[] class="hidden file_id_values" value="' . $values . '"></li>';
      }
      echo '<li><img src="' . $file->file_path . $file->file_name . '"/ class="img img-medium"></li>';
+     echo '<li><input class="textfield extra_large img_description1" type="text" data-toggle="tooltip" title="" placeholder="Image Description 1" size="" maxlength="256" value="" name="img_description1[]"></input></li>';
+      echo '<li><input class="textfield extra_large img_description2" type="text" data-toggle="tooltip" title="" placeholder="Image Description 2" size="" maxlength="256" value="" name="img_description2[]"></input></li>';
      echo '</ul>';
     }
     echo '</div>';

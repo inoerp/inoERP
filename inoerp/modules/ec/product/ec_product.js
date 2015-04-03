@@ -93,5 +93,12 @@ $(document).ready(function () {
   }
  });
 
-});
+ $('body').off('change', '#price_list').on('change', '#price_list', function () {
+  if ($(this).val()) {
+   $('.list_price, .sales_price,sp_form_date,.sp_to_date').prop('readonly', true).val('').addClass('readonly');
+  } else {
+   $('.list_price, .sales_price,sp_form_date,.sp_to_date').prop('readonly', false).removeClass('readonly');
+  }
+ });
 
+});

@@ -253,11 +253,12 @@ class coa_combination extends dbObject {
   $result = $this->findBy_coaId_combination();
   $data = array();
   if (!empty($result)) {
-   foreach ($result as $obj) {
-    $desc = $obj->combination . ' | ' . $obj->description;
+   foreach ($result as $row) {
+    $desc = $row->combination . ' | ' . $row->description;
     $data[] = array(
      'label' => $desc,
-     'value' => $obj->combination
+     'value' => $row->combination,
+     'coa_combination_id' => $row->coa_combination_id
     );
    }
   }
@@ -268,11 +269,12 @@ class coa_combination extends dbObject {
   $result = self::find_by_coaId_description(1, $this->description, $this->ac_type);
   $data = array();
   if (!empty($result)) {
-   foreach ($result as $obj) {
-    $desc = $obj->combination . ' | ' . $obj->description;
+   foreach ($result as $row) {
+    $desc = $row->combination . ' | ' . $row->description;
     $data[] = array(
      'label' => $desc,
-     'value' => $obj->combination
+     'value' => $row->combination,
+     'coa_combination_id' => $row->coa_combination_id
     );
    }
   }

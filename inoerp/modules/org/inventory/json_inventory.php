@@ -8,13 +8,16 @@
    $cc = new coa_combination;
 
    if (!empty($cc->findBy_id($inventory_i->inv_ap_accrual_ac_id))) {
-    echo '<div id="json_ap_accrual_ac_id">' . $cc->findBy_id($inventory_i->inv_ap_accrual_ac_id)->combination . '</div>';
+    $inv_ap_accrual_ac = $cc->findBy_id($inventory_i->inv_ap_accrual_ac_id);
+    echo '<div id="json_ap_accrual_ac_id" data-ac_id="' . $inv_ap_accrual_ac->coa_combination_id . '">' . $inv_ap_accrual_ac->combination . '</div>';
    }
    if (!empty($cc->findBy_id($inventory_i->material_ac_id))) {
-    echo '<div id="json_material_ac_id">' . $cc->findBy_id($inventory_i->material_ac_id)->combination . '</div>';
+    $material_ac = $cc->findBy_id($inventory_i->material_ac_id);
+    echo '<div id="json_material_ac_id" data-ac_id="' . $material_ac->coa_combination_id . '">'. $material_ac->combination . '</div>';
    }
    if (!empty($cc->findBy_id($inventory_i->inv_ppv_ac_id))) {
-    echo '<div id="json_inv_ppv_ac_id">' . $cc->findBy_id($inventory_i->inv_ppv_ac_id)->combination . '</div>';
+    $inv_ppv_ac = $cc->findBy_id($inventory_i->inv_ppv_ac_id);
+    echo '<div id="json_inv_ppv_ac_id" data-ac_id="' . $inv_ppv_ac->coa_combination_id . '">'. $inv_ppv_ac->combination . '</div>';
    }
   }
  ?>

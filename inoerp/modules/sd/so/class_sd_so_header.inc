@@ -37,6 +37,12 @@ class sd_so_header extends dbObject {
  public $checkbox = [
   "rev_enabled_cb"
  ];
+ public static $order_source_type_a = [
+  'MANUAL' => 'Manual',
+  'ECOMMERCE' => 'eCommerce',
+  'INV' => 'Inventory',
+  'COPY' => 'Copy',
+ ];
  public $field_a = [
   'sd_so_header_id',
   'bu_org_id',
@@ -60,7 +66,9 @@ class sd_so_header extends dbObject {
   'exchange_rate_type',
   'exchange_rate',
   'released_amount',
-  "ef_id",
+  "order_source_type",
+  "order_reference_table",
+  "order_reference_id",
   'so_status',
   "rev_enabled_cb",
   "rev_number",
@@ -114,14 +122,10 @@ class sd_so_header extends dbObject {
   'bill_to_country',
   'bill_to_postal_code',
  ];
- 
-  public $profile_default = [
+ public $profile_default = [
   'exchange_rate_type' => 'gl_currency_conversion_type',
   'bu_org_id' => 'org_bu_name_default',
-  'ship_to_id' => 'ship_to_address_default',
-  'bill_to_id' => 'bill_to_address_default'
  ];
-  
  public $search = [
   '_show_update_path' => 1,
   '_show_view_path' => 1,
@@ -155,7 +159,9 @@ class sd_so_header extends dbObject {
  public $exchange_rate_type;
  public $exchange_rate;
  public $released_amount;
- public $ef_id;
+ public $order_source_type;
+ public $order_reference_table;
+ public $order_reference_id;
  public $action;
  public $so_status;
  public $rev_enabled_cb;

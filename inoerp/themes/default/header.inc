@@ -65,7 +65,7 @@
     fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));</script>
 
-  <div id="topbar" class="clearfix">
+  <div id="topbar" class="topbar clearfix">
    <div class="container">
     <?php
     if ($showBlock) {

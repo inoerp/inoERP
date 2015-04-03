@@ -158,12 +158,50 @@
   });
  };
 
+ //form amount validations
+ $.fn.getAddressDetails = function (options) {
+  var this_e = $(this);
+  var defaults = {
+   address_id: this_e.val()
+  };
+  var settings = $.extend({}, $.fn.getAddressDetails.defaults, options);
+
+  return $.ajax({
+   url: 'modules/org/address/json_address.php',
+   data: {
+    address_id: settings.address_id,
+    find_address_details: 1},
+   type: 'get',
+   beforeSend: function () {
+    $('.show_loading_small').show();
+   },
+   complete: function () {
+    $('.show_loading_small').hide();
+   },
+   success: function (result) {
+    $.each(result, function (key, value) {
+     switch (key) {
+      default :
+       var className = '.' + key.replace(/\s+/g, '.');
+       this_e.parent().parent().find(className).val(value);
+       break;
+     }
+    });
+    $('.show_loading_small').hide();
+   },
+   error: function (request, errorType, errorMessage) {
+    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+   }
+  });
+ };
+
  $.fn.inoAutoCompleteElement = function (options) {
   var this_e = $(this);
   var defaults = {
    min_length: 3,
    form_id: 'form_line',
-   hidden_field_param: true
+   hidden_field_param: true,
+   set_value_for_one_field: false
   };
   var settings = $.extend({}, defaults, options);
   var form_id_h = '#' + settings.form_id;
@@ -176,7 +214,9 @@
     }
 
     if (!$(this).data("autocomplete")) {
-     var auto_element = this;
+     var auto_element = $(this);
+     var auto_element_class = $(this).prop('class');
+     var auto_element_class_d = '.' + auto_element_class.replace(/\s+/g, '.');
      if ($(this).attr('data-ac_type')) {
       var ac_type = $(this).data('ac_type');
      } else {
@@ -192,7 +232,7 @@
        }
       });
      }
-    
+
      var primary_column1_h = '#' + settings.primary_column1;
      if ($(primary_column1_h).val()) {
       var primary_column1_v = $(primary_column1_h).val();
@@ -237,16 +277,25 @@
          var v_d = '.' + key;
          if (elemenType === 'LI') {
           if (key.substr(-3) === '_cb') {
-           $(auto_element).closest("ul").find(v_d).prop('checked', true);
+           $(auto_element).closest("form").find(v_d).prop('checked', true);
           } else {
-           $(auto_element).closest("ul").find(v_d).val(value);
+           if (settings.set_value_for_one_field === true ) {
+            $(auto_element_class_d).parent().find(v_d).val(value);
+           } else {
+            $(auto_element).closest("form").find(v_d).val(value);
+           }
           }
          } else if (elemenType === 'TD') {
           var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
           if (key.substr(-3) === '_cb') {
            $(form_id_h).find(trClass).find(v_d).prop('checked', true);
           } else {
-           $(form_id_h).find(trClass).find(v_d).val(value);
+           if (settings.set_value_for_one_field === true) {
+            $(auto_element_class_d).parent().find(v_d).val(value);
+           } else {
+            $(form_id_h).find(trClass).find(v_d).val(value);
+           }
+
           }
          }
         });
@@ -269,16 +318,25 @@
          var v_d = '.' + value_k;
          if (elemenType === 'LI') {
           if (value_k.substr(-3) === '_cb') {
-           $(auto_element).closest("ul").find(v_d).prop('checked', true);
+           $(auto_element).closest("form").find(v_d).prop('checked', true);
           } else {
-           $(auto_element).closest("ul").find(v_d).val(value_v);
+           if (settings.set_value_for_one_field === true) {
+            $(auto_element_class_d).parent().find(v_d).val(value_v);
+           } else {
+            $(auto_element).closest("form").find(v_d).val(value_v);
+           }
           }
          } else if (elemenType === 'TD') {
           var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
           if (value_k.substr(-3) === '_cb') {
            $(form_id_h).find(trClass).find(v_d).prop('checked', true);
           } else {
-           $(form_id_h).find(trClass).find(v_d).val(value_v);
+           if (settings.set_value_for_one_field === true) {
+            $(auto_element_class_d).parent().find(v_d).val(value_v);
+           } else {
+            $(form_id_h).find(trClass).find(v_d).val(value_v);
+           }
+
           }
          }
         });

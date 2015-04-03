@@ -103,8 +103,8 @@ public $no_of_copies;
     break;
 
    case 'ITEM':
-    $stmt .='<li><img src="' . HOME_URL .'themes/images/serach.png" class="select_item_number select_popup clickable">'
-    . '<label>Item : </label>' . $f->text_field('item_number', '', '15', 'item_number', 'select_item_number', 1) . '</li>';
+    $stmt .='<li><label>Item : </label>' . $f->text_field('item_number', '', '15', 'item_number', 'select_item_number', 1) . 
+    '<i class="select_item_number select_popup clickable fa fa-search"></i></li>';
     break;
    
    case 'POS_LIST':

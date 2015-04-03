@@ -113,7 +113,7 @@ function beforeContextMenu() {
 $(document).ready(function () {
 //mandatory and field sequence
  var mandatoryCheck = new mandatoryFieldMain();
-  mandatoryCheck.mandatoryHeader();
+ mandatoryCheck.mandatoryHeader();
 // mandatoryCheck.form_area = 'form_header';
 // mandatoryCheck.mandatory_fields = ["bu_org_id", "so_type"];
 // mandatoryCheck.mandatory_messages = ["First Select BU Org", "No Order Type"];
@@ -141,7 +141,7 @@ $(document).ready(function () {
  $("#content").off("change", '#ar_customer_site_id').on("change", '#ar_customer_site_id', function () {
   var customer_site_id = $("#ar_customer_site_id").val();
   if (customer_site_id) {
-   $.when(getCustomerSiteDetails('modules/ar/customer/json_customer.php', customer_site_id)).then(function(){
+   $.when(getCustomerSiteDetails('modules/ar/customer/json_customer.php', customer_site_id)).then(function () {
     getExchangeRate();
    });
   }
@@ -328,4 +328,5 @@ $(document).ready(function () {
   $('.line_status').val('ENTERED');
   $('.picked_quantity, .shipped_quantity, .schedule_ship_date, .invoiced_quantity, .ar_transaction_header_id, .ar_transaction_line_id, .ar_transaction_number').val('');
  });
+
 });

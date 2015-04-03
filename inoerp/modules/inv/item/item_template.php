@@ -4,12 +4,14 @@
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
     <li><a href="#tabsHeader-2"><?php echo gettext('Inv Assignment') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('References') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Revisions') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-6"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-7"><?php echo gettext('Image') ?></a></li>
-    <li><a href="#tabsHeader-8"><?php echo gettext('Actions') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Revisions') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Category') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Catalog') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo gettext('Relation') ?></a></li>
+    <li><a href="#tabsHeader-7"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-8"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-9"><?php echo gettext('Image') ?></a></li>
+    <li><a href="#tabsHeader-10"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -23,13 +25,15 @@
        ?> 
       </li>
       <li>
-       <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="item_id select_popup clickable">
-        <?php echo gettext('Item Id') ?></label><?php $f->text_field_dsr('item_id') ?>
+       <label><?php echo gettext('Item Id') ?></label><?php $f->text_field_dsr('item_id') ?>
+       <i class="select_item_number select_popup clickable fa fa-search"></i>
        <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show document_id item_id"><i class="fa fa-refresh"></i></a> 
       </li>
       <li><label><?php echo gettext('Item Number') ?><img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete item_number clickable">
        </label><?php echo $f->text_field('item_number', $$class->item_number, '15', 'item_number', 'select_item_number', 1, $readonly_mas); ?>
-       <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show2 document_id findBy_item_number"><i class="fa fa-refresh"></i></a> 
+        <i class="select_item_number select_popup clickable fa fa-search"></i>
+       <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show2 document_id findBy_item_number">
+        <i class="fa fa-refresh"></i></a> 
       </li>
       <li><?php $f->l_text_field('item_description', $$class->item_description, '20', 'item_description', '', 1, $readonly_mas); ?></li>
       <li><?php $f->l_select_field_from_object('product_line', item::product_line(), 'option_line_code', 'option_line_value', $$class->product_line, 'product_line', '', '', $readonly_mas); ?></li>
@@ -44,13 +48,6 @@
      </div>
     </div>
     <div id="tabsHeader-3" class="tabContent">
-     <div class="category-div">
-      <span class="heading"><?php echo gettext('Categories'); ?></span>
-      <div class="existing-category"><?php echo !empty($category) ? category::category_stmt($category) : '';  ?></div>
-      <div class="add-category"><?php echo $categoriey_select_option;  ?></div>
-     </div>
-    </div>
-    <div id="tabsHeader-4" class="tabContent">
      <div><ul class='column header_field'><li><?php $f->l_checkBox_field('update_revision_cb', '') ?></li></ul>
       <div id="tabsDetail">
        <div>
@@ -115,10 +112,31 @@
       </div>
      </div>
     </div>
+    <div id="tabsHeader-4" class="tabContent">
+     <div class="category-div">
+      <span class="heading"><?php echo gettext('Categories'); ?></span>
+      <div class="existing-category"><?php echo!empty($category) ? category::category_stmt($category) : ''; ?></div>
+      <div class="add-category"><?php echo $categoriey_select_option; ?></div>
+     </div>
+    </div>
     <div id="tabsHeader-5" class="tabContent">
+     <div id="catalog-details"><?php echo $catalog_stmt; ?></div>
+     <ul class='column four_column'>
+      <li><a class="popup popup-form view-catalog btn btn-default btn-lg" id="product_catalog" role="button"
+             href="form.php?class_name=sys_catalog_value&mode=9&window_type=popup&reference_table=item&reference_id=<?php echo $$class->item_id ?>">
+        <i class="fa fa-list-alt"></i> Add/Update Catalog Values</a>
+      </li>
+     </ul>
+     <!--                end of tab2 div three_column-->
+    </div>
+        <div id="tabsHeader-6" class="tabContent">
+     
+    </div>
+
+    <div id="tabsHeader-7" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
     </div>
-    <div id="tabsHeader-6" class="tabContent">
+    <div id="tabsHeader-8" class="tabContent">
      <div id="comments">
       <div id="comment_list">
        <?php echo!(empty($comments)) ? $comments : ""; ?>
@@ -135,10 +153,10 @@
      <div> 
      </div>
     </div>
-    <div id="tabsHeader-7" class="tabContent">
+    <div id="tabsHeader-9" class="tabContent">
      <div class="image"> <?php echo $f->image_field('image_file_id', $$class->image_file_id, '', '', 'img-medium'); ?> </div>
     </div>
-    <div id="tabsHeader-8" class="tabContent">
+    <div id="tabsHeader-10" class="tabContent">
      <div> 
       <ul class="column four_column">
        <li><?php echo $categoriey_select_option; ?></li>
@@ -289,11 +307,8 @@
     <div id="tabsLine-4" class="tabContent">
      <div class="first_rowset"> 
       <ul class="column header_field">
-       <li><?php $f->l_checkBox_field_d('customer_ordered_cb'); ?></li>
        <li><?php $f->l_checkBox_field_d('purchased_cb'); ?></li>
        <li><?php $f->l_checkBox_field_d('use_asl_cb'); ?></li>
-       <li><?php $f->l_checkBox_field_d('customer_ordered_cb'); ?></li>
-       <li><?php $f->l_checkBox_field_d('customer_ordered_cb'); ?></li>
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_popup select_sourcing_rule clickable">
          <?php echo gettext('Sourcing Rule') ?></label><?php $f->text_field_d('sourcing_rule') ?></li>
        <li><?php $f->l_text_field_d('invoice_matching'); ?></li>
