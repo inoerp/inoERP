@@ -5,11 +5,12 @@
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
     <li><a href="#tabsHeader-2"><?php echo gettext('Preference') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Employee') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Supplier') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Association') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Future') ?></a></li>
     <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
     <li><a href="#tabsHeader-6"><?php echo gettext('Notes') ?></a></li>
     <li><a href="#tabsHeader-7"><?php echo gettext('Profile Picture') ?></a></li>
+    <li><a href="#tabsHeader-8"><?php echo gettext('Addresses') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -37,25 +38,23 @@
     <div id="tabsHeader-3" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column header_field">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
-         <?php echo gettext('Employee Name') ?></label><?php $f->text_field_d('employee_name'); ?>
+       <li><label><?php echo gettext('Employee Name') ?></label><?php $f->text_field_d('employee_name'); ?>
         <?php echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id); ?>
+        <i class="fa fa-search hr_employee_id select_popup clickable"></i>
        </li>
-       <li><label><?php echo gettext('Identification') ?></label><?php $f->text_field_dr('identification_id'); ?>  </li>
+       <li><label><?php echo gettext('Supplier Name') ?></label><?php $f->text_field_d('supplier_name'); ?>
+        <?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
+        <i class="fa fa-search supplier_id select_popup clickable"></i>
+       </li>
+       <li><label><?php echo gettext('Customer Name') ?></label><?php $f->text_field_d('customer_name'); ?>
+        <?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
+        <i class="fa fa-search ar_customer_id select_popup clickable"></i>
+       </li>
       </ul>
      </div>
     </div>
     <div id="tabsHeader-4" class="tabContent">
-     <div class="large_shadow_box"> 
-      <ul class="column header_field">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
-         <?php echo gettext('Employee Name') ?></label><?php $f->text_field_d('employee_name'); ?>
-        <?php echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id); ?>
-       </li>
-       <li><label><?php echo gettext('Identification') ?></label><?php $f->text_field_dr('identification_id'); ?>  </li>
-       <li><?php $f->l_select_field_from_array('block_notif_count', dbObject::$position_array, $$class->block_notif_count); ?>  </li>
-      </ul>
-     </div>
+
     </div>
     <div id="tabsHeader-5" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
@@ -78,8 +77,21 @@
      </div>
     </div>
     <div id="tabsHeader-7" class="tabContent">
-     <div class="image"> <?php echo $f->image_field('image_file_id', $$class->image_file_id, '' , '' , 'img-medium'); ?> </div>
+     <div class="image"> <?php
+      echo $f->image_field('image_file_id', $$class->image_file_id, '', '', 'img-medium');
+      ?> </div>
     </div>
+    <div id="tabsHeader-8" class="tabContent">
+     <div class="existing-address col-md-6">
+      <label><?php echo gettext('Existing Addresses'); ?></label>
+      <?php echo!empty($existing_address_arr) ? address_reference::show_address($existing_address_arr) : ''; ?>
+     </div>
+     <div class="new-address col-md-6"><label><?php echo gettext('Add New Address'); ?></label>
+      <?php $existing_address_c = !empty($existing_address_arr) ? count($existing_address_arr) : 0;
+      echo $f->add_new_address(); ?>
+     </div>
+     <!--end of tab1 div three_column-->
+    </div> 
    </div>
   </div>
  </form>

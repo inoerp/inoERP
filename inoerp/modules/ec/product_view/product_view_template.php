@@ -57,9 +57,9 @@
    </div>
    <div class="row product-buttons">
     <ul class="button-lists inline">
-     <li><button class="btn btn-lg btn-default add-to-cart" role="button">Add To Cart </button></li>
-     <li><button class="btn btn-lg btn-default add-to-wl"  role="button">Add To Wish List</button></li>
-     <li><button class="btn btn-lg  btn-primary buy-now" role="button">Buy Now </button></li>
+     <li><a href="#" role="button" class="btn btn-lg btn-default add-to-cart" role="button">Add To Cart </a></li>
+     <li><a href="#" role="button" class="btn btn-lg btn-default add-to-wl"  role="button">Add To Wish List</a></li>
+     <li><a href="<?php echo HOME_URL?>?dtype=product&class_name=ec_user_cart&ec_product_id=<?php echo $$class->ec_product_id ?>" role="button" class="btn btn-lg  btn-success buy-now" role="button">Buy Now </a></li>
     </ul>
    </div>
    <div class="row product-description">

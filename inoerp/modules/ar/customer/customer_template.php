@@ -22,7 +22,10 @@
        <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', 1, $readonly1); ?>
       </li>
       <li><label><?php echo gettext('Customer Type ') ?></label><?php echo form::select_field_from_object('customer_type', ar_customer::customer_types(), 'option_line_code', 'option_line_value', $$class->customer_type, 'customer_type', $readonly, '', ''); ?>       </li>
-      <li><?php $f->l_text_field_ds('supplier_id'); ?></li>
+      <li><label><?php echo gettext('Supplier Name') ?></label><?php $f->text_field_d('supplier_name'); ?>
+       <?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
+       <i class="fa fa-search supplier_id select_popup clickable"></i>
+      </li>
       <li><?php $f->l_select_field_from_object('tax_country', option_header::COUNTRIES(), 'option_line_code', 'option_line_value', $$class->tax_country, 'tax_country', '', '', $readonly); ?>       </li>
       <li><?php $f->l_text_field_ds('tax_reg_no'); ?></li>
       <li><?php $f->l_text_field_ds('tax_payer_id'); ?></li>
@@ -47,8 +50,8 @@
      </div>
     </div>
     <div id="tabsHeader-4" class="tabContent">
-     <div class="header_address"><?php $f->address_field_d('bill_to_id'); ?></div>
-     <div class="shipto_address"><?php $f->address_field_d('ship_to_id'); ?></div>
+     <div class="header_address"><?php $f->address_field_d('bill_to_id', 1, 'customer_header'); ?></div>
+     <div class="shipto_address"><?php $f->address_field_d('ship_to_id', 1, 'customer_header'); ?></div>
     </div>
    </div>
 
@@ -139,8 +142,8 @@
     </div>
     <!--end of tab2 (purchasing)!!!! start of sales tab-->
     <div id="tabsLine-5" class="tabContent">
-     <div class="site_address"><?php $f->address_field_d2('ship_to_id'); ?></div>
-     <div class="site_address"><?php $f->address_field_d2('bill_to_id'); ?></div>
+     <div class="site_address"><?php $f->address_field_d2('ship_to_id', 1, 'customer_line'); ?></div>
+     <div class="site_address"><?php $f->address_field_d2('bill_to_id', 1, 'customer_line'); ?></div>
     </div> 
     <!--                end of tab3 div three_column-->
     <!--end of tab3 (sales)!!!!start of purchasing tab-->

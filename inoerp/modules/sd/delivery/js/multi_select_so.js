@@ -1,6 +1,6 @@
 $(document).ready(function () {
 // $('#generic_search_form').find('.line_status').val('AWAITING_PICKING');
- 
+
  $('#content').off('click', '.line_status').on('click', '.line_status', function () {
   alert('You can only search lines which are not picked');
   $(this).attr('readonly', true);
@@ -75,17 +75,18 @@ $(document).ready(function () {
  $('body').off('click', '.pick_list.button').on('click', '.pick_list.button', function () {
   var allData = [];
   $('#form_line').find('input.line_id_cb[type="checkbox"]:checked').each(function () {
-   var trClass = '.'+$(this).closest('tr').prop('class').replace(/\+s/g,'.');
+   var trClass = '.' + $(this).closest('tr').prop('class').replace(/\+s/g, '.');
    var lineData = [];
-     $("#form_line").find(trClass).each(function () {
+   $("#form_line").find(trClass).each(function () {
     var ThisLineData = $(this).find(":input").serializeArray();
     lineData = $.merge(lineData, ThisLineData);
    });
    allData = $.merge(allData, lineData);
   });
-    save_dataInSession({
+  save_dataInSession({
    data_name: 'pick_list',
-   data_value: allData
+   data_value: allData,
+   openUrl: 'form.php?class_name=sd_pick_list_v&mode=2&window_type=popup'
 
   });
 

@@ -82,11 +82,11 @@ class ar_customer extends dbObject {
   'shipto_address',
   'shipto_country',
   'shipto_postal_code',
+  'supplier_name'
  ];
  public $requiredField = [
   "customer_number",
-  "customer_name",
-  "tax_country"
+  "customer_name"
  ];
  public $search = [
   '_update_path' => 'form.php?class_name=ar_customer',
@@ -129,6 +129,7 @@ class ar_customer extends dbObject {
  public $shipto_address;
  public $shipto_country;
  public $shipto_postal_code;
+ public $supplier_name;
 
  Public static function customer_types() {
   $option_header = option_header::find_by_name('AR_CUSTOMER_TYPE');

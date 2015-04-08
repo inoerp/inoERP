@@ -93,7 +93,7 @@ require_once(INC_MODULE . DS . "sys" . DS . "printer" . DS . "class_sys_printer.
 require_once(INC_MODULE . DS . "sys" . DS . "db_update" . DS . "class_sys_db_update.inc");
 require_once(INC_MODULE . DS . "sys" . DS . "catalog" . DS . "class_sys_catalog_header.inc");
 require_once(INC_MODULE . DS . "sys" . DS . "catalog" . DS . "class_sys_catalog_line.inc");
-require_once(INC_MODULE . DS . "sys" . DS ."catalog" . DS . "value" . DS . "class_sys_catalog_value.inc");
+require_once(INC_MODULE . DS . "sys" . DS . "catalog" . DS . "value" . DS . "class_sys_catalog_value.inc");
 require_once(INC_ORGS . DS . "class_org.inc");
 require_once(INC_ORGS . DS . "class_org_v.inc");
 require_once(INC_ORGS . DS . "enterprise" . DS . "class_enterprise.inc");
@@ -101,6 +101,7 @@ require_once(INC_ORGS . DS . "legal" . DS . "class_legal.inc");
 require_once(INC_ORGS . DS . "business" . DS . "class_business.inc");
 require_once(INC_ORGS . DS . "inventory" . DS . "class_inventory.inc");
 require_once(INC_ORGS . DS . "address" . DS . "class_address.inc");
+require_once(INC_ORGS . DS . "address" . DS . "class_address_reference.inc");
 require_once(INC_GL . DS . "coa" . DS . "class_coa.inc");
 require_once(INC_GL . DS . "coa_combination" . DS . "class_coa_combination.inc");
 require_once(INC_GL . DS . "calendar" . DS . "class_gl_calendar.inc");
@@ -372,7 +373,13 @@ require_once(INC_MODULE . DS . "am" . DS . "move_transaction" . DS . "class_am_m
 require_once(INC_MODULE . DS . "am" . DS . "work_bench" . DS . "class_am_wo_work_bench.inc");
 require_once(INC_MODULE . DS . "am" . DS . "work_bench" . DS . "class_am_wo_work_bench_line.inc");
 require_once(INC_MODULE . DS . "ec" . DS . "product" . DS . "class_ec_product.inc");
+require_once(INC_MODULE . DS . "ec" . DS . "cart" . DS . "class_ec_cart.inc");
+require_once(INC_MODULE . DS . "ec" . DS . "cart" . DS . "user_cart" . DS . "class_ec_user_cart.inc");
+require_once(INC_MODULE . DS . "ec" . DS . "payment_method" . DS . "class_ec_payment_method.inc");
 require_once(INC_MODULE . DS . "ec" . DS . "product_view" . DS . "class_ec_product_view.inc");
+require_once(INC_MODULE . DS . "ec" . DS . "confirm_order" . DS . "class_ec_confirm_order.inc");
+require_once(INC_MODULE . DS . "ec" . DS . "paid_order" . DS . "class_ec_paid_order.inc");
+require_once(INC_MODULE . DS . "ec" . DS . "order_success" . DS . "class_ec_order_success.inc");
 
 
 //

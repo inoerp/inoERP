@@ -331,3 +331,40 @@ table.ui-datepicker-calendar tr th{
  z-index:  9999;
 }
 
+.accordion input{
+ height: 32px;
+}
+
+.accordion .ui-accordion-content {
+	width: 100%;
+	background-color: #f3f3f3;
+	color: #777;
+	font-size: 14px;
+	line-height: 32px;
+	box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .2),
+				inset 0px -1px 0px 0px rgba(0, 0, 0, .4);
+}
+.accordion .ui-accordion-content > * {
+	margin: 0;
+	padding: 20px;
+}
+.accordion .ui-accordion-content a {
+	color: #777;
+}
+
+.accordion .ui-accordion-header {
+	background-color: #3296B1;
+
+        margin-bottom:10px;
+        color: #fff;
+        padding: 5px 10px;
+        font-weight: bold;
+        cursor :pointer;        
+}
+.accordion .ui-accordion-header:first-of-type a {
+	box-shadow: 0px -1px 0px 0px #b85c0f;
+}
+.accordion .ui-accordion-content:last-of-type {
+	box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .2),
+				inset 0px 0 0px 0px rgba(0, 0, 0, .5);
+}

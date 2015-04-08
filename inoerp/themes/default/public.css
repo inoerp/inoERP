@@ -1339,10 +1339,14 @@ ul.inline-block {
 ul.inline_action {
  margin-top: 5px;
 }
-ul.inline_action .fa, #form_line .fa{
+/*ul.inline_action .fa, #form_line .fa{
  font-size: 16px;
  color: #768D38;
  margin: 2px;
+}*/
+
+ul.inline_action .fa, #form_line .fa{
+ color: #768D38;
 }
 
 #popup-window #navigation_bar {
@@ -1777,4 +1781,49 @@ font-weight: bold;
 .not-active {
    pointer-events: none;
    cursor: default;
+}
+
+.category-browser-list li{
+        width: 250px;
+        overflow: hidden;
+        margin-right: 40px;
+        text-align: center;
+        margin-bottom: 20px;
+}
+
+.fa-white{
+    color : #fff;
+}
+
+a.buy-now{
+ color : #fff;
+}
+
+.cart_values input{
+        height: 32px;
+}
+
+.long-td {
+        width: 400px;
+}
+
+#no-of-cart-items{
+ vertical-align: top;
+margin: 5px;
+}
+
+.table-large .inline_action .fa{
+        margin : 6px;
+}
+
+.panel.address-stmt{
+ width: 400px;
+ float: left;
+ margin-right: 50px;
+}
+
+.small-hint{
+ font-size: 0.9em;
+background-color: yellow;
+padding: 2px 5px;
 }

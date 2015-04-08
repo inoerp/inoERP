@@ -43,6 +43,8 @@ class user extends dbObject {
   'user_language',
   "phone",
   'hr_employee_id',
+  'ar_customer_id',
+  'supplier_id',
   'block_notif_count',
   'image_file_id',
   "created_by",
@@ -76,7 +78,10 @@ class user extends dbObject {
   "enteredPassword",
   "enteredRePassword",
   "employee_name",
-  'identification_id'
+  'identification_id',
+  'address_id',
+  'customer_name',
+  'supplier_name'
  ];
  public $search = [
   '_show_update_path' => 1,
@@ -106,18 +111,25 @@ class user extends dbObject {
  public $image_file_id;
  Public $email;
  Public $status;
+ public $ar_customer_id;
+ public $supplier_id;
  Public $date_format;
  Public $theme;
  public $time;
  public $msg;
  public $employee_name;
  public $identification_id;
+ public $address_id;
+ public $customer_name;
+ public $supplier_name;
+ 
 
  public function _before_showing() {
   
  }
 
  public function _before_save() {
+  pa($this);pa($_POST);
   if ($this->verify_user()) {
    return 1;
   } else {
@@ -224,7 +236,8 @@ class user extends dbObject {
    return false;
   }
   $sql = " SELECT user_id, username, first_name, last_name, email,  phone, hr_employee_id, user_language,
-            block_notif_count,    created_by,    creation_date,  last_update_by,    last_update_date , image_file_id FROM ";
+            block_notif_count,  ar_customer_id, supplier_id,  created_by,    creation_date, 
+            last_update_by,    last_update_date , image_file_id FROM ";
   $sql.= static::$table_name;
   $sql.= " WHERE " . static::$primary_column . "= :primary_id ";
   $sql.= " LIMIT 1 ";
@@ -327,7 +340,45 @@ class user extends dbObject {
   else {
    $msg = "New user registration Failed!" . mysql_error();
   }// registraion failed
+  //verify & create new address
+
+  if ((!empty($_POST['addr_address'][0]))) {
+   $this->_create_address();
+  }
   return $this->msg;
+ }
+
+ private function _create_address() {
+  //create address
+  $addr = new address();
+  $addr->address_name = $this->username . '-' . $_POST['addr_address_name'][0];
+  $addr->phone = $_POST['addr_phone'][0];
+  $addr->email = $_POST['addr_email'][0];
+  $addr->website = $_POST['addr_website'][0];
+  $addr->country = $_POST['addr_country'][0];
+  $addr->postal_code = $_POST['addr_postal_code'][0];
+  $addr->usage_type = $_POST['addr_usage_type'][0];
+  $addr->address = $_POST['addr_address'][0];
+  try {
+   $addr->save();
+  } catch (Exception $e) {
+   echo "<br>Unable to add new address. Error @ user @@ " . __LINE__ . $e->getMessage();
+  }
+
+
+  //created address reference
+  if ($addr->address_id) {
+   $add_ref = new address_reference();
+   $add_ref->reference_table = 'user';
+   $add_ref->reference_id = $this->user_id;
+   $add_ref->address_id = $addr->address_id;
+   try {
+    $add_ref->save();
+    echo "<br> New address is sucessfully added";
+   } catch (Exception $e) {
+    echo "<br>Unable to add new address. Error @ user @@ " . __LINE__ . $e->getMessage();
+   }
+  }
  }
 
 }

@@ -2752,6 +2752,8 @@ function save_ratings(options) {
 function save_dataInSession(options) {
  var defaults = {
   json_url: 'includes/json/json_session.php',
+  openUrl: false,
+  over_write: true
  };
  var settings = $.extend({}, defaults, options);
 
@@ -2761,12 +2763,15 @@ function save_dataInSession(options) {
   data: {
    data_name: settings.data_name,
    data_value: settings.data_value,
-   save_dataInSession: 1
+   save_dataInSession: 1,
+   over_write: settings.over_write
   },
   success: function () {
-   var openUrl = 'form.php?class_name=sd_pick_list_v&mode=2&window_type=popup';
-   void window.open(openUrl, '_blank',
-           'width=1200,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+   if (settings.openUrl !== false) {
+    var openUrl = 'form.php?class_name=sd_pick_list_v&mode=2&window_type=popup';
+    void window.open(openUrl, '_blank',
+            'width=1200,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+   }
   },
   complete: function () {
    $('.show_loading_small').hide();
@@ -3139,7 +3144,7 @@ $(document).ready(function () {
     ulink += 'ac_type=' + $(this).closest('td').find('input').data('ac_type');
    }
   }
-  var close_field_class = '.' + $(this).parent().find(':input').not('hidden').prop('class').replace(/\s+/g, '.');
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
   localStorage.setItem("set_value_for_one_field", true);
 
@@ -3159,7 +3164,7 @@ $(document).ready(function () {
    var liId = $(this).closest('li').find('.item_number').prop('id');
    localStorage.setItem("li_divId", liId);
   }
-  var close_field_class = '.' + $(this).parent().find(':input').not('hidden').prop('class').replace(/\s+/g, '.');
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
   var openUrl = 'select.php?class_name=item';
   if ($(this).siblings('.org_id').val()) {
@@ -3409,13 +3414,10 @@ $(document).ready(function () {
  //Popup for selecting address address_id for normal popup & address_popup for popup where address can be created
  $('body').on('click', '.address_id.select_popup', function (e) {
   e.preventDefault();
-//  var rowClass = $(this).parent().find('input').first().prop('class');
-//  localStorage.setItem("field_class", rowClass);
-//  var DivClass = $(this).closest('div').prop('class');
-//  localStorage.removeItem("addressPopupDivClass");
-//  localStorage.setItem("addressPopupDivClass", DivClass);
-  var close_field_class = '.' + $(this).parent().find(':input').not('hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("set_value_for_one_field", true);
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
+  
   void window.open('select.php?class_name=address&mode=2', '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
   return false;
@@ -3607,7 +3609,7 @@ $(document).ready(function () {
 
 //selecting customer
  $('body').on("click", '.ar_customer_id.select_popup', function () {
-  var close_field_class = '.' + $(this).parent().find(':input').not('hidden').prop('class').replace(/\s+/g, '.');
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
   void window.open('select.php?class_name=ar_customer', '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
@@ -3615,7 +3617,8 @@ $(document).ready(function () {
 
 //selecting supplier
  $('body').on("click", '.supplier_id.select_popup', function () {
-  localStorage.idValue = "";
+    var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
   void window.open('select.php?class_name=supplier', '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
@@ -4247,11 +4250,36 @@ $(document).ready(function () {
   }
  });
 
- $("#accordion").accordion({
-  heightStyle: "content",
-  active: 1,
-  collapsible: true
- });
+$("#accordion").accordion({
+ heightStyle: "content",
+ active: 1,
+ collapsible: true
+});
+
+var available_indexes = [0, 1 , 2];
+$("#accordion0").accordion({
+ heightStyle: "content",
+ activate: function (event, ui) {
+  if (ui.newHeader.find('i').hasClass('fa-plus-circle')) {
+   ui.newHeader.find('i').removeClass('fa-plus-circle').addClass('fa-minus-circle');
+  } 
+   
+   if (ui.oldHeader.find('i').hasClass('fa-minus-circle')) {
+   ui.oldHeader.find('i').removeClass('fa-minus-circle').addClass('fa-plus-circle');
+  }
+ },
+// beforeActivate: function (event, ui) {
+//  var newIndex = $(ui.newHeader).index('h3');
+//  console.log( 'new i' + newIndex);
+//  if (jQuery.inArray(newIndex, available_indexes) === -1) {
+//   var oldIndex = $(ui.oldHeader).index('h3');
+//   console.log( 'old i' + oldIndex);
+//   alert('You cant access this panel. First enter data in previous panel(s)');
+//    return false;
+//  }
+// }
+
+});
 
  $('body').on('click', '#accordion h3.recent-visits', function () {
   refreshData({
@@ -4399,7 +4427,7 @@ $(document).ready(function () {
  });
 
  $("body").on("click", ".select_am_asset_number.select_popup", function () {
-  var close_field_class = '.' + $(this).parent().find(':input').not('hidden').prop('class').replace(/\s+/g, '.');
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
   void window.open('select.php?class_name=am_asset', '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
@@ -4441,6 +4469,17 @@ $(document).ready(function () {
 // });
  magnifier();
 
+ $('body').on('click', 'a.add-to-cart', function (e) {
+  e.preventDefault();
+  $.when(save_dataInSession({
+   data_name: 'ec_product_id',
+   data_value: $('#ec_product_id').val(),
+   over_write: false
+  })).then(function () {
+   alert('Cart is updated');
+  });
+ });
+
 });
 function toUpperCase(str)
 {
@@ -4465,7 +4504,6 @@ function magnifier() {
   if ((!native_width && !native_height))
   {
    var image_src = $(this).find('.item.active').find('.img').prop('src');
-   console.log(image_src);
    var image_object = new Image();
    image_object.src = image_src;
    native_width = image_object.width;

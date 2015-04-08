@@ -15,6 +15,7 @@
 //  echo (!empty($content_class)) ? '/content_layout.css' : '/layout.css'
   ?>" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo THEME_URL; ?>/public.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="<?php echo THEME_URL; ?>/css/product.css" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo THEME_URL; ?>/menu.css" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo THEME_URL; ?>/jquery.css" media="all" rel="stylesheet" type="text/css" />
   <?php
@@ -60,7 +61,7 @@
      echo '<div id = "header_top" class = "clear"></div>';
     }
     ?>
-    <div class="col-xs-6 col-sm-4 col-md-4">
+    <div class="col-md-8">
      <?php
      $show_header_links = true;
      if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
@@ -82,7 +83,9 @@
      <?php } ?>
 
     </div><!-- end columns --><!-- end columns -->
-    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+    <div class="col-md-2"><a title="View Cart" href="<?php echo HOME_URL ?>?dtype=product&class_name=ec_user_cart">
+      <i class="fa fa-white fa-2x fa-shopping-cart clickable"></i><span id="no-of-cart-items" class="badge"> <?php echo ino_noOfItems_inCart(); ?> </span> </a></div>
+    <div class="col-md-2">
      <div class="topmenu">
       <div class="topbar-login">
        <?php if (!empty($_SESSION['login_status'])) { ?>

@@ -44,10 +44,9 @@ class address extends dbObject {
 		 "address",
 		 "country",
 		 "postal_code",
-		 "efid",
+		 "default_cb",
 		 "status",
-		 "rev_enabled",
-		 "rev_number",
+		 "usage_type",
 		 "created_by",
 		 "creation_date",
 		 "last_update_by",
@@ -68,17 +67,6 @@ class address extends dbObject {
 		 "rev_enabled",
  ];
  
- public $column = [
-		 "address_id",
-		 "address_name",
-		 "description",
-		 "phone",
-		 "email",
-		 "website",
-		 "country",
-		 "postal_code",
-		 'address'
- ];
  
  public $requiredField = [
 		 "address_name",
@@ -111,9 +99,9 @@ class address extends dbObject {
  public $address;
  public $country;
  public $postal_code;
- public $efid;
+ public $default_cb;
  public $status;
- public $rev_enabled;
+ public $usage_type;
  public $rev_number;
  public $created_by;
  public $creation_date;
@@ -138,6 +126,12 @@ class address extends dbObject {
  
  Public static function address_types() {
 	$option_header = option_header::find_by_name('ADDRESS_TYPE');
+	$type = option_line::find_by_option_id($option_header->option_header_id);
+	return $type;
+ }
+ 
+  Public static function address_usage_type() {
+	$option_header = option_header::find_by_name('ADDRESS_USAGE_TYPE');
 	$type = option_line::find_by_option_id($option_header->option_header_id);
 	return $type;
  }

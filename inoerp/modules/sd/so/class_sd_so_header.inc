@@ -92,13 +92,11 @@ class sd_so_header extends dbObject {
  ];
  public $requiredField = [
   'ar_customer_id',
-  'ar_customer_site_id',
   'ship_to_id',
   'bill_to_id',
-  'currency',
   'doc_currency',
-  'payment_term_id'
- ];
+  'document_type'
+  ];
  public $addressField = [
   'ship_to_id',
   'bill_to_id'

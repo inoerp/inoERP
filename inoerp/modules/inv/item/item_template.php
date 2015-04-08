@@ -154,7 +154,7 @@
      </div>
     </div>
     <div id="tabsHeader-9" class="tabContent">
-     <div class="image"> <?php echo $f->image_field('image_file_id', $$class->image_file_id, '', '', 'img-medium'); ?> </div>
+     <div class="image"><?php echo $f->image_field('image_file_id', $$class->image_file_id, '', '', 'img-medium'); ?></div>
     </div>
     <div id="tabsHeader-10" class="tabContent">
      <div> 

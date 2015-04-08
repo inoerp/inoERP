@@ -1,24 +1,24 @@
 var multi_slect = $('.single_multi_select');
 var e_name = $(multi_slect).attr('name');
-var new_name = 'xx'+e_name;
+var new_name = 'xx' + e_name;
 var new_element = '<span class="multi-select-container"><ul class="selection-hidden">';
- new_element  += '<li class="input-element"><input type="text" value="" class="ino-multi-select" name=' + e_name + ' ></li>';
- new_element  += '<li class="select-element"></li>';
- new_element  += '</ul></span>';
+new_element += '<li class="input-element"><input type="text" value="" class="ino-multi-select" name=' + e_name + ' ></li>';
+new_element += '<li class="select-element"></li>';
+new_element += '</ul></span>';
 $('.single_multi_select').replaceWith(new_element);
 $(multi_slect).attr('name', new_name).removeAttr('multiple').removeClass('single_multi_select').addClass('');
 console.log($(multi_slect).attr('name'));
-$('body').on('focusin', '.input-element' , function(){
+$('body').on('focusin', '.input-element', function () {
  $(multi_slect).addClass('active-selection');
-$('li.select-element').append(multi_slect);
+ $('li.select-element').append(multi_slect);
 });
-$('body').on('change, focusout',  '.active-selection' , function(){
-alert('value selected' + $(this).val());
-var existing_text = $(this).closest('ul').find('input.ino-multi-select').prop('value');
-  if(existing_text){
+$('body').on('change, focusout', '.active-selection', function () {
+ alert('value selected' + $(this).val());
+ var existing_text = $(this).closest('ul').find('input.ino-multi-select').prop('value');
+ if (existing_text) {
   existing_text += ', ';
-  }
-$(this).closest('ul').find('input.ino-multi-select').prop( 'value', existing_text + $(this).val());
+ }
+ $(this).closest('ul').find('input.ino-multi-select').prop('value', existing_text + $(this).val());
  $('li.select-element').empty();
  $(multi_slect).removeClass('active-selection');
 });
@@ -264,13 +264,13 @@ function getFormDetails(url) {
   type: 'get',
   data: {
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   }
- }).done(function(result) {
+ }).done(function (result) {
   var newContent = $(result).find('div#structure').html();
   var allButton = $(result).find('#form_top_image').html();
   if (newContent) {
@@ -283,22 +283,22 @@ function getFormDetails(url) {
     }
    }
    $.getScript("includes/js/reload.js");
-    $(result).find('#js_files').find('li').each(function(){
-      $.getScript($(this).html());
-    });
+   $(result).find('#js_files').find('li').each(function () {
+    $.getScript($(this).html());
+   });
   }
- }).fail(function() {
+ }).fail(function () {
   alert("Form loading failed!");
  });
 }
 
 
-$('#header_top').on('click', '.menu a, a.show', function(e){
-e.preventDefault();
-var urlLink =  $(this).attr('href');
-  var urlLink_a = urlLink.split('?');
-  var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
-  getFormDetails(formUrl);
+$('#header_top').on('click', '.menu a, a.show', function (e) {
+ e.preventDefault();
+ var urlLink = $(this).attr('href');
+ var urlLink_a = urlLink.split('?');
+ var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
+ getFormDetails(formUrl);
 });
 
 
@@ -462,7 +462,7 @@ $('.view_filters').on('click', '.filtered_field, .show_sort_remove', function ()
   view_id: viewId,
   show_from_query: false
  });
-}); 	
+});
 
 
 function getFormDetails(url) {
@@ -471,41 +471,41 @@ function getFormDetails(url) {
   type: 'get',
   data: {
   },
-  beforeSend: function() {
+  beforeSend: function () {
    $('.show_loading_small').show();
   },
-  complete: function() {
+  complete: function () {
    $('.show_loading_small').hide();
   }
- }).done(function(result) {
+ }).done(function (result) {
   var newContent = $(result).find('div#structure').html();
-    var allButton = $(result).find('div#header_top_container').html();
+  var allButton = $(result).find('div#header_top_container').html();
   if (newContent) {
    $('#structure').replaceWith('<div id="structure">' + newContent + '</div>');
-    $('#header_top_container').replaceWith('<div id="header_top_container" style="display: block;">' + allButton + '</div>');
+   $('#header_top_container').replaceWith('<div id="header_top_container" style="display: block;">' + allButton + '</div>');
    $.getScript("includes/js/reload.js");
-    $(result).find('#js_files').find('li').each(function(){
-      $.getScript($(this).html());
-    });
+   $(result).find('#js_files').find('li').each(function () {
+    $.getScript($(this).html());
+   });
   }
- }).fail(function() {
+ }).fail(function () {
   alert("Form loading failed!");
  });
 }
 
 
-$('body').on('click', '#header_top .menu a,#search_result .action a', function(e){
-e.preventDefault();
-var urlLink =  $(this).attr('href');
-var urlLink_a = urlLink.split('?');
-var urlLink_firstPart_a =   urlLink_a[0].split('/');
-var pageType =   urlLink_firstPart_a.pop();
-  if(pageType == 'form.php'){
-var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
-  }else{
+$('body').on('click', '#header_top .menu a,#search_result .action a', function (e) {
+ e.preventDefault();
+ var urlLink = $(this).attr('href');
+ var urlLink_a = urlLink.split('?');
+ var urlLink_firstPart_a = urlLink_a[0].split('/');
+ var pageType = urlLink_firstPart_a.pop();
+ if (pageType == 'form.php') {
+  var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
+ } else {
   var formUrl = urlLink;
-  }
-  getFormDetails(formUrl);
+ }
+ getFormDetails(formUrl);
 });
 
 //Get the ap_payment_header_id on refresh button click
@@ -517,4 +517,29 @@ $('a.show.document_id').click(function (e) {
  var urlLink_a = urlLink.split('?');
  var formUrl = 'includes/json/json_form.php?' + urlLink_a[1] + '&' + headerId + '=' + headerId_v;
  getFormDetails(formUrl);
+});
+
+var available_indexes = [0, 1];
+$("#accordion0").accordion({
+ heightStyle: "content",
+ activate: function (event, ui) {
+  if (ui.newHeader.find('i').hasClass('fa-plus-circle')) {
+   ui.newHeader.find('i').removeClass('fa-plus-circle').addClass('fa-minus-circle');
+  } 
+   
+   if (ui.oldHeader.find('i').hasClass('fa-minus-circle')) {
+   ui.oldHeader.find('i').removeClass('fa-minus-circle').addClass('fa-plus-circle');
+  }
+ },
+ beforeActivate: function (event, ui) {
+  var newIndex = $(ui.newHeader).index('h3');
+  console.log( 'new i' + newIndex);
+  if (jQuery.inArray(newIndex, available_indexes) === -1) {
+   var oldIndex = $(ui.oldHeader).index('h3');
+   console.log( 'old i' + oldIndex);
+   alert('You cant access this panel. First enter data in previous panel(s)');
+    return false;
+  }
+ }
+
 });

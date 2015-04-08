@@ -21,8 +21,8 @@
         <i class="fa fa-search tax_region_id select_popup clickable"></i></li>
         <li><?php $f->l_text_field_d('description'); ?>    </li>
         <li><?php $f->l_status_field_d('status'); ?></li>
-        <li><?php $f->l_checkBox_field_d('rev_enabled'); ?></li>
-        <li><?php $f->l_text_field_d('rev_number'); ?>    </li>
+        <li><?php $f->l_checkBox_field_d('default_cb'); ?></li>
+        <li><?php $f->l_select_field_from_object('usage_type', address::address_usage_type(), 'option_line_code', 'option_line_value', $address->usage_type, 'usage_type', '' , '' , $readonly); ?>    </li>
         <?php
         if ((!empty($_GET) && isset($_GET['window_type']) && $_GET['window_type'] = 'popup')) {
          echo $f->hidden_field_withId('window_type', 'popup');

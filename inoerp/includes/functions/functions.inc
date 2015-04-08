@@ -1566,4 +1566,12 @@ function ino_show_collapse_content($content, $length = '350', $divid = 'collapse
  return $stmt;
 }
 
+function ino_noOfItems_inCart(){
+ if(!empty($_SESSION['ec_product_id'])){
+  return count($_SESSION['ec_product_id']);
+ }else{
+  return 0;
+ }
+}
+
 ?>

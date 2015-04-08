@@ -1,0 +1,13 @@
+basics.js
+comment class file
+public.css
+
+
+#comment_attachments{
+        width: 140px;
+}
+
+.input_file {
+    width: 140px;
+    font-weight: bold !important;
+}

@@ -67,6 +67,8 @@ class ec_product extends dbObject {
   'sales_price',
   'sp_from_date',
   'sp_to_date',
+  'no_of_view',
+  'featured_product_cb',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -110,6 +112,8 @@ class ec_product extends dbObject {
  public $sales_price;
  public $sp_from_date;
  public $sp_to_date;
+ public $no_of_view;
+ public $featured_product_cb;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -169,6 +173,20 @@ class ec_product extends dbObject {
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
  }
+ 
+  public static function find_all_feaured_products() {
+  $sql = "SELECT ec_product_id , ec.item_id_m , ec.org_id , product_name , product_description, item.item_description,
+          item.image_file_id
+           FROM 
+           ec_product ec,
+           item
+           WHERE item.item_id_m = ec.item_id_m
+           AND item.org_id = ec.org_id
+           AND ec.featured_product_cb = '1'
+ ";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
 
  public static function find_by_category_id($category_id, $param = '') {
   $sql = "SELECT DISTINCT(ec.ec_product_id) , ec.item_id_m , ec.org_id , ec.product_name , ec.product_description, item.item_description,
@@ -202,7 +220,11 @@ class ec_product extends dbObject {
  }
 
  public static function find_featured_products_id($category_id) {
-  return self::find_by_category_id($category_id);
+  $fp =  self::find_by_category_id($category_id);
+  if(empty($fp)){
+   $fp = self::find_all_feaured_products();
+  }
+  return $fp;
  }
 
 }

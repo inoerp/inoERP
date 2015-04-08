@@ -489,6 +489,30 @@ EOD;
   return $text_field;
  }
 
+ public function add_new_address($existing_add_count = 0, $div_class = "") {
+  global $class, $$class, $f, $ino_user;
+  if(!empty($ino_user->email)){
+   $email = $ino_user->email;
+  }
+  $default_add_name = 'New Address ' . ($existing_add_count + 1);
+  $add_field = '<div class="new-address">
+        <ul class="column header_field address">';
+  $add_field .= '<li><label>' . gettext('Address Name') . '</label>' . $f->text_field('addr_address_name', $default_add_name, '', '', '', 1) . '</li>';
+  $add_field .= '<li><label>' . gettext('Phone') . '</label>'. $f->text_field('addr_phone', '') . '</li>';
+  $add_field .= '<li><label>' . gettext('eMail') . '</label>' . $f->text_field('addr_email', $email) . '</li>';
+  $add_field .= '<li><label>' . gettext('Website') . '</label>' . $f->text_field('addr_website', '') . '</li>';
+  $add_field .= '<li><label>' . gettext('Coutry') . '</label>' . $f->text_field('addr_country', '') . '</li>';
+  $add_field .= '<li><label>' . gettext('Postal Code') . '</label>' . $f->text_field('addr_postal_code', '') . '</li>';
+  $add_field .= '<li><label>' . gettext('Default') . '</label>' . $f->checkBox_field('addr_default_cb', '') . '</li>';
+  $add_field .= '<li><label>' . gettext('Usage Type') . '</label>' . $f->select_field_from_object('addr_usage_type', address::address_usage_type(), 'option_line_code', 'option_line_value', '', 'usage_type') . '</li>';
+  $add_field .= '<li><label>' . gettext('Address') . '</label>' . form::text_area('addr_address', '', '3', '22', '', 'Complete Address', 'address') . '</li>';
+  $add_field .= '<li class="hidden">'. $f->hidden_field('address_id', '') . '</li>';
+  $add_field .= '</ul>
+       </div>';
+
+  return $add_field;
+ }
+
  public function address_field_d($field_name, $show_all_fields = true, $div_class = "") {
   global $class, $$class;
   $ttl = $field_val = null;
@@ -503,7 +527,8 @@ EOD;
   $text_field = '<ul class="column header_field ' . $div_class . '">';
   $text_field .= '<li><label>' . ucwords(str_replace('_', ' ', $field_name)) . '</label>';
   $text_field .= $this->hidden_field_withIdClass($field_name, $$class->$field_name, 'address_id');
-  $text_field .= $this->text_field('address_name', $field_val, '', '', 'address_name', '', 1, '', $ttl);
+  $field_class_name = $field_name . ' ' . $div_class;
+  $text_field .= $this->text_field('address_name', $field_val, '', '', $field_class_name, '', 1, '', $ttl);
   $text_field .= '<i class="fa fa-search address_id select_popup clickable"></i></li>';
   if ($show_all_fields) {
    $text_field .= '<li><label>Country</label>' . $this->text_field('xxcountry', $addr->country, '', '', 'country', '', 1) . '</li>';
@@ -526,10 +551,12 @@ EOD;
     $ttl = $addr->address . ' ' . $addr->country . ' ' . $addr->postal_code;
    }
   }
+
   $text_field = '<ul class="column header_field ' . $div_class . '">';
   $text_field .= '<li><label>' . ucwords(str_replace('_', ' ', $field_name)) . '</label>';
   $text_field .= $this->hidden_field_withId($field_name, $$class_second->$field_name);
-  $text_field .= $this->text_field('address_name', $field_val, '', '', 'address_name', '', 1, '', $ttl);
+  $field_class_name = $field_name . ' ' . $div_class;
+  $text_field .= $this->text_field('address_name', $field_val, '', '', $field_class_name, '', 1, '', $ttl);
   $text_field .= '<i class="fa fa-search address_id select_popup clickable"></i></li>';
   if ($show_all_fields) {
    $text_field .= '<li><label>Country</label>' . $this->text_field('xxcountry', $addr->country, '', '', 'country', '', 1) . '</li>';
@@ -541,7 +568,7 @@ EOD;
   echo $text_field;
  }
 
- public function address_field_wid($field_name, $div_class = "") {
+ public function address_field_wid($field_name, $show_all_fields = true, $div_class = "") {
   global $class, $$class;
   $ttl = $field_val = null;
   if (!empty($$class->$field_name)) {
@@ -552,14 +579,15 @@ EOD;
    }
   }
   $text_field = $this->hidden_field_withCLass($field_name, $$class->$field_name, $field_name);
-  $text_field .= $this->text_field('address_name', $field_val, '', '', 'address_name', '', 1, '', $ttl);
+  $field_class_name = 'address_name ' . $field_name . ' ' . $div_class;
+  $text_field .= $this->text_field('address_name', $field_val, '', '', $field_class_name, '', 1, '', $ttl);
   $text_field .= '<img src="' . HOME_URL . 'themes/images/serach.png" class="address_id select_popup">';
   echo $text_field;
  }
 
  public function l_address_field_d($field_name, $div_class = "") {
   global $readonly, $class, $$class;
-  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+//  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->address_field_d($field_name, $div_class);
  }
 
@@ -1050,7 +1078,7 @@ EOD;
   } else {
    $element_text_field .= $this->hidden_field_withCLass($name, $value, 'coa_combination_id');
   }
-  
+
   $element_text_field .= "<input type=\"text\" name=\"ac_combinations[]\" value=\"$combination\" 
 	 maxlength=\"$maxlength\" size=\"$size\" class=\"combination $name textfield $div_class account_combination\" "
    . "placeholder=\"$place_holder\"  $required $idvalue $readonly title=\"$title\"  data-toggle=\"tooltip\" $ac_type_i >";
