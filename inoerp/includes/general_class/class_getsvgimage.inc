@@ -668,7 +668,7 @@
    
    if (!empty($this->_legend)) {
     foreach ($this->_legend as $l_k => $l_v) {
-     $legne_l_n = strlen($l_v);
+     $legne_l_n = strlen($l_v) * 2;
      $legne_l = $legne_l_n > $legne_l ? $legne_l_n : $legne_l;
     }
    }
@@ -680,7 +680,7 @@
    $this->_height_for_xaxis_chart_label = 0;
    foreach ($this->_data as $data) {
     $value = $data['label'];
-    $height_for_xaxis_chart_label_n = strlen(strval($value)) * 4.5;
+    $height_for_xaxis_chart_label_n = strlen(strval($value)) * 6;
     $this->_height_for_xaxis_chart_label = ($height_for_xaxis_chart_label_n > $this->_height_for_xaxis_chart_label ) ? $height_for_xaxis_chart_label_n : $this->_height_for_xaxis_chart_label;
    }
    $this->_chart_height = $this->_chart_height - $this->_height_of_text - $this->_height_for_xaxis_chart_label;
@@ -700,7 +700,7 @@
      $legne_l = $legne_l_n > $legne_l ? $legne_l_n : $legne_l;
     }
    }
-   $this->_width_for_xaxis_chart_label = 6 * $legne_l;
+   $this->_width_for_xaxis_chart_label = 10 * $legne_l;
    $this->_right_margin += $this->_width_for_xaxis_chart_label;
 
    $this->_width_for_xaxis_chart_label = 0;

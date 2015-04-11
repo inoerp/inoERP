@@ -51,7 +51,95 @@
    }
   }
   ?>
+  <style>
+   .hf-nav {float:left; position:relative;  padding: 5px 5px; z-index:999}
+   #hf-nav-1 .hf-menu {padding:0; margin:0; list-style:none; clear:left; float:left; text-align:left;}
+   #hf-nav-1 .hf-menu li 
+   {
+    /*background: none repeat scroll 0% 0% rgba(3, 52, 84, 0.5);*/
+    margin: 5px -10px;
+    /*overflow: hidden*/
+   }
 
+   .hf-menu > li 
+   {
+    background: #eee;
+
+   }
+
+   .hf-menu li a 
+   {
+    display: block;
+    width: 180px;
+    float: left;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 1.1em;
+   }
+
+   li.top-li a{
+    width: 220px;
+   }
+
+ 
+   .hf-menu ul {padding:5px 0 0 20px; margin:0  ; list-style:none; z-index:999}
+   .hf-menu ul li.sub {width:250px; float:left; }
+   #hf-nav-1 .hf-menu ul li h4 {
+    padding:0 0 0 10px; 
+    margin:0;
+    text-align:center;
+    font-weight: bold;
+    color: #082A57;
+    border-bottom: 1px solid #fff;
+    width: 250px;
+    display: block;
+    font-weight: bold;
+   }
+   #hf-nav-1 .hf-menu ul li a { 
+    padding:5px 10px;
+    width:200px; 
+    font-size:15px; 
+    font-weight:bold; 
+    float:left;
+    text-align:left;
+   }
+
+   .hf-menu li.close {display:none; position:absolute;}
+
+   .hf-menu ul.sub {
+    position:absolute; 
+    left:-9999px; 
+    background: #eee;
+    margin-left: 45px;
+    top:-5px;  
+    border:5px solid #eee; 
+    border-width: 15px 15px 15px 0;
+    width: 750px;
+    height: 265px;
+   }
+
+   .hf-menu li.top-li:hover {direction:ltr;}
+   .hf-menu li.top-li:hover ul.sub {left:149px; display:block}
+   .hf-menu li.top-li ul.sub li.sub { float:left}
+
+   .hf-menu ul li.bottomLine {clear:left; width:100%; background:#333; height:40px;}
+   #hf-nav-1 .hf-menu ul li.bottomLine p {padding:0 10px; margin:0; line-height:20px; color:#fff; font-size:12px;}
+   #hf-nav-1 .hf-menu ul li.bottomLine p a {display:inline; width:auto; float:none; padding:0; margin:0; background:none; color:#6cf;line-height:11px; }
+   #hf-nav-1 .hf-menu ul li.bottomLine p a:hover {background:#000;}
+
+   .clear {clear:left;}
+
+   /* for IE6 */
+   .hf-menu table {border-collapse:collapse; margin-bottom:-1px;}
+   .hf-menu li.top-li a:hover {direction:ltr;}
+   .hf-menu li.top-li a:hover ul.sub {left:149px; background-color:#555;}
+   .hf-menu li.top-li a:hover ul li {float:left; margin-left: 150px}
+   #hf-nav-1 .hf-menu li.top-li a:hover ul li a {font-weight:normal; float:left; line-height:11px;}
+   #hf-nav-1 .hf-menu li.top-li a:hover ul li.bottomLine p {font-weight:normal;}
+   #hf-nav-1 .hf-menu li.top-li a:hover ul li.bottomLine p a {float:none;}
+  </style>
  </head>
  <body>
   <div id="topbar" class="product-topbar clearfix">
@@ -62,25 +150,14 @@
     }
     ?>
     <div class="col-md-8">
-     <?php
-     $show_header_links = true;
-     if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
-      if (empty($current_page_path)) {
-       $current_page_path = thisPage_url();
-      }
-      echo '<div id="header_top_container">';
-      $f->form_button_withImage($current_page_path);
-      echo '</div>';
-      $show_header_links = false;
-     }
-     ?>
-     <?php if ($show_header_links) { ?>
-      <div class="social-icons">
-       <span class="fb-like" data-href="https://www.facebook.com/inoerp" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></span>
-       <span><a  href="https://github.com/inoerp/inoERP" title="gitHUB"><i class="fa fa-github clickable"></i></a></span>
-       <span><a  href="#" title="inoerp"><i class="fa fa-skype clickable skype"></i></a></span>
-      </div><!-- end social icons -->
-     <?php } ?>
+      <div class="dropdown">
+       <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+        <i class='fa fa-th'></i> Browse By Category
+       </button>
+       <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        <li role="presentation"><?php echo ec_product::category_menu(); ?></li>
+       </ul>
+      </div>
 
     </div><!-- end columns --><!-- end columns -->
     <div class="col-md-2"><a title="View Cart" href="<?php echo HOME_URL ?>?dtype=product&class_name=ec_user_cart">

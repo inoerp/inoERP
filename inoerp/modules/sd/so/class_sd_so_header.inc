@@ -66,6 +66,8 @@ class sd_so_header extends dbObject {
   'exchange_rate_type',
   'exchange_rate',
   'released_amount',
+  'prepaid_amount',
+  'prepaid_status',
   "order_source_type",
   "order_reference_table",
   "order_reference_id",
@@ -148,6 +150,8 @@ class sd_so_header extends dbObject {
  public $price_list_header_id;
  public $header_amount;
  public $tax_amount;
+ public $prepaid_amount;
+ public $prepaid_status;
  public $currency;
  public $doc_currency;
  public $payment_term_id;
@@ -237,7 +241,6 @@ class sd_so_header extends dbObject {
    $so_number = $bu_org_id . '-' . $sd_so_header_id;
    $this->so_number = $so_number;
    echo '<br/> New SO number is ' . $so_number;
-   $this->audit_trial();
    $this->update_soNumber();
   }
  }

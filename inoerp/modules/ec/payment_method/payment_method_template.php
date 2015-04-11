@@ -3,8 +3,9 @@
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Message') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -14,6 +15,7 @@
       </li>
       <li><?php $f->l_text_field_dm('payment_method_name'); ?></li>
       <li><?php $f->l_text_field_dm('display_name'); ?></li>
+      <li><?php $f->l_text_field_d('submit_button_name'); ?></li>
       <li><?php $f->l_text_field_d('type'); ?></li>
       <li><?php $f->l_text_field_d('mode'); ?></li>
       <li><?php $f->l_text_field_d('username'); ?></li>
@@ -24,9 +26,12 @@
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
-     <div> <?php echo ino_attachement($file) ?> </div>
+     <?php echo form::text_area('user_message', $$class->user_message, '5', '140', '', 'Maximum 255 Characters'); ?>   
     </div>
     <div id="tabsHeader-3" class="tabContent">
+     <div> <?php echo ino_attachement($file) ?> </div>
+    </div>
+    <div id="tabsHeader-4" class="tabContent">
      <div id="comments">
       <div id="comment_list">
        <?php echo!(empty($comments)) ? $comments : ""; ?>

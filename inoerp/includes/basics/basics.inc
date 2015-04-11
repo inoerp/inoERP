@@ -380,6 +380,7 @@ require_once(INC_MODULE . DS . "ec" . DS . "product_view" . DS . "class_ec_produ
 require_once(INC_MODULE . DS . "ec" . DS . "confirm_order" . DS . "class_ec_confirm_order.inc");
 require_once(INC_MODULE . DS . "ec" . DS . "paid_order" . DS . "class_ec_paid_order.inc");
 require_once(INC_MODULE . DS . "ec" . DS . "order_success" . DS . "class_ec_order_success.inc");
+require_once(INC_MODULE . DS . "ec" . DS . "control" . DS . "class_ec_control.inc");
 
 
 //

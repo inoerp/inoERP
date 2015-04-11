@@ -31,7 +31,7 @@
      $all_address = address_reference::find_by_reference_detailts('user', $ino_user->user_id);
      if ($all_address) {
       $ship_add = $bill_add = $all_address[0];
-      $ship_to_id= $bill_to_id = $all_address[0]->address_id;
+      $ship_to_id = $bill_to_id = $all_address[0]->address_id;
      } else {
       $ship_add = $bill_add = new address();
      }
@@ -54,8 +54,8 @@
       </div>
      </div>  
     </div>
-    <h3 disabled><i class="fa fa-plus-circle"></i> Order Summary</h3>
-    <div disabled>
+    <h3><i class="fa fa-plus-circle"></i> Order Summary</h3>
+    <div>
      <table class="table table-bordered table-large cart ">
       <thead> 
        <tr>
@@ -68,34 +68,41 @@
       </thead>
       <tbody class="form_data_line_tbody cart_values" >
        <?php
-       $count = 1;
-       $total = 0;
-       $tax_p = 0;
-       $precision = 2;
-       $cart_object_ai = new ArrayIterator($cart_object);
-       $cart_object_ai->seek($position);
-       $curr = 'USD';
-       while ($cart_object_ai->valid()) {
-        $ec_user_cart = $cart_object_ai->current();
-        ?>         
-        <tr class="ec_cart<?php echo $count ?>">
-         <td><?php echo $count; ?></td>
-         <td><?php echo $ec_user_cart->product_name; ?></td>
-         <td><?php echo $ec_user_cart->quantity ?></td>
-         <td><?php echo $curr . round($ec_user_cart->sales_price, $precision) ?></td>
-         <td data-currency="<?php echo $curr; ?>"><?php
-          echo $curr;
-          $sub_total = round($ec_user_cart->sales_price * $ec_user_cart->quantity, $precision);
-          $total += $sub_total;
-          echo $sub_total;
-          ?></td>
-        </tr>
-        <?php
-        $cart_object_ai->next();
-        if ($cart_object_ai->key() == $position + $per_page) {
-         break;
+       if (empty($cart_object)) {
+        $total_amount = $tax_amount = 0;
+        echo '<div class="alert alert-danger" role="alert">
+        <strong>Cart Empty</strong> Please select any product to proceed further.
+      </div>';
+       } else {
+        $count = 1;
+        $total = 0;
+        $tax_p = 0;
+        $precision = 2;
+        $cart_object_ai = new ArrayIterator($cart_object);
+        $cart_object_ai->seek($position);
+        $curr = 'USD';
+        while ($cart_object_ai->valid()) {
+         $ec_user_cart = $cart_object_ai->current();
+         ?>         
+         <tr class="ec_cart<?php echo $count ?>">
+          <td><?php echo $count; ?></td>
+          <td><?php echo $ec_user_cart->product_name; ?></td>
+          <td><?php echo $ec_user_cart->quantity ?></td>
+          <td><?php echo $curr . round($ec_user_cart->sales_price, $precision) ?></td>
+          <td data-currency="<?php echo $curr; ?>"><?php
+           echo $curr;
+           $sub_total = round($ec_user_cart->sales_price * $ec_user_cart->quantity, $precision);
+           $total += $sub_total;
+           echo $sub_total;
+           ?></td>
+         </tr>
+         <?php
+         $cart_object_ai->next();
+         if ($cart_object_ai->key() == $position + $per_page) {
+          break;
+         }
+         $count = $count + 1;
         }
-        $count = $count + 1;
        }
        ?>
        <tr class="summar_details">
@@ -110,15 +117,19 @@
     </div>
     <h3><i class="fa fa-plus-circle"></i> Payment Details</h3>
     <div>
-     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#cash-on-delivery" aria-expanded="false" aria-controls="cash-on-delivery">
-      Cash On Delivery
-     </button>
-     <div class="collapse" id="cash-on-delivery">
-      <div class="well">
-       <?php echo $f->checkBox_field('cash-on-delivery', '') ?> I promise to pay on delivery.
-      </div>
-     </div>
-     <?php echo ec_payment_method::show_payment_methods($total_amount, $curr, $ship_to_id, $bill_to_id ); ?>
+     <?php
+     if (empty($ship_to_id) || empty($bill_to_id)) {
+      echo '<div class="alert alert-danger" role="alert">
+        <strong>No Address Found!</strong> Please <a href="#accordion0">login</a> to proceed further.
+      </div>';
+     } else if (empty($cart_object)) {
+      echo '<div class="alert alert-danger" role="alert">
+        <strong>Cart Empty</strong> Please select any product to proceed further.
+      </div>';
+     } else {
+      echo ec_payment_method::show_payment_methods($total_amount, $curr, $ship_to_id, $bill_to_id);
+     }
+     ?>
     </div>
    </div>
   </div>

@@ -20,7 +20,6 @@
 interface i_ec_create_paid_order {
 
  public function create_paid_order();
-
 }
 
 class ec_paid_order extends dbObject {
@@ -67,6 +66,17 @@ class ec_paid_order extends dbObject {
   'user_id',
   'email',
  ];
+ public $column = [
+  'ec_paid_order_id',
+  'payment_method_id',
+  'total_amount',
+  'doc_currency',
+  'service_provider',
+  'sp_transaction_id',
+  'user_id',
+  'email',
+  'status',
+ ];
  public $requiredField = [
   'email',
   'confirm_order_details',
@@ -93,14 +103,24 @@ class ec_paid_order extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
+ public $message;
+ public $prg_create_so_parameters = [
+  'Cut Off Date' => 'search_cut_off_date',
+ ];
+ public $prg_create_so_details = [
+  'name' => 'Generate Sales Orders',
+  'description' => 'Generate Sales Orders From Paid eCommerce Orders',
+ ];
 
- public function findBy_ec_paid_order_id_m($ec_paid_order_id) {
+ private function _findOrders_forSOImport($cut_off_date = '') {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE ec_paid_order_id = ec_paid_order_id_m ";
-  $sql .= " AND ec_paid_order_id = '{$ec_paid_order_id}' ";
+  $sql .= " WHERE status != 'CONVERTED' ";
+  if (!empty($cut_off_date)) {
+   $sql .= " AND ec_paid_order_id <='{$cut_off_date}' ";
+  }
   $result = $this->findBySql($sql);
-  return !empty($result) ? array_pop($result) : false;
+  return !empty($result) ? $result : false;
  }
 
  public static function find_all_assigned_orgs($ec_paid_order_number) {
@@ -121,7 +141,140 @@ class ec_paid_order extends dbObject {
   return $result;
  }
 
- 
+ private $_cut_off_date;
+
+ public function prg_create_so($seralized_parameters) {
+  global $dbc;
+  $parameters = unserialize($seralized_parameters);
+
+  if (!empty($parameters['cut_off_date'][0])) {
+   $this->_cut_off_date = $parameters['cut_off_date'][0];
+  }
+
+  //ecommerce Control details
+  $ec_con = new ec_control();
+  $ec_con_details = $ec_con->findAll_singleRecord_db();
+
+  //find all elligible orders & create SO
+  $all_orders = $this->_findOrders_forSOImport($this->_cut_off_date);
+
+  if (!empty($all_orders)) {
+   foreach ($all_orders as $odkey => $ecp_order) {
+    $this->message .= '<br> Trying to cerate SO for ec_paid_order_id : ' . $ecp_order->ec_paid_order_id;
+    try {
+     $so_header_id = $this->_create_sales_order($ecp_order, $ec_con_details);
+     $this->message .= '<br> SO is sucessfully created. so_header_id is : ' . $so_header_id;
+     //update ec_paid_order status
+     $ec_paid_order_su = new ec_paid_order();
+     $ec_paid_order_su->ec_paid_order_id = $ecp_order->ec_paid_order_id;
+     $ec_paid_order_su->status = 'CONVERTED';
+     $ec_paid_order_su->save();
+    } catch (Exception $e) {
+     $this->message .= '<br> Failed to create sales order. Error @ ec_paid_order @@ line ' . __LINE__ . ' ' . $e->getMessage();
+    }
+   }
+  } else {
+   $this->message .= '<br> No elligible paid orders found for SO creation ';
+  }
+
+  return $this->message;
+ }
+
+ public function _create_sales_order($ecp_order, $ec_con_details) {
+  global $dbc;
+  $order_user = new user();
+  $order_user->findBy_id($ecp_order->user_id);
+
+  $confirm_order_details = json_decode($ecp_order->confirm_order_details);
+//  pa($confirm_order_details);
+  $sp_return_data = $ecp_order->sp_return_data;
+
+  if (empty($order_user->ar_customer_id)) {
+   //create a new customer
+   try {
+    $ar_customer_id = $this->_create_customer($order_user);
+   } catch (Exception $e) {
+    $this->message .= '<br> Failed to create sales order. line Error @ ec_paid_order @@ line ' . __LINE__ . ' ' . $e->getMessage();
+    $dbc->rollback = true;
+    return false;
+   }
+  } else {
+   $ar_customer_id = $order_user->ar_customer_id;
+  }
+
+  $sd_so = new sd_so_header();
+  $sd_so->order_source_type = $ec_con_details->order_source_type;
+  $sd_so->document_type = $ec_con_details->sales_document_type;
+  $sd_so->ar_customer_id = $ar_customer_id;
+  $sd_so->doc_currency = $confirm_order_details->sp_currency_code;
+  $sd_so->bill_to_id = $confirm_order_details->bill_to_id;
+  $sd_so->ship_to_id = $confirm_order_details->ship_to_id;
+  $sd_so->header_amount = $confirm_order_details->total_amount[0];
+  $sd_so->tax_amount = $confirm_order_details->tax_amount[0];
+  $sd_so->prepaid_amount = $confirm_order_details->tax_amount[0];
+//  $sd_so->prepaid_status = $sp_return_data->tax_amount[0];
+  $sd_so->so_status = 'ENTERED';
+  $sd_so->bu_org_id = $ec_con_details->bu_org_id;
+  $sd_so->payment_term_id = $ec_con_details->payment_term_id;
+  $sd_so->payment_term_date = current_time(true);
+  $sd_so->exchange_rate_type = $ec_con_details->exchange_rate_type;
+  $sd_so->order_reference_table = 'ec_confirm_order';
+  $sd_so->order_reference_id = $ecp_order->ec_paid_order_id;
+  try {
+   $sd_so->save();
+   $sd_so->_after_save();
+  } catch (Exception $e) {
+   $this->message .= '<br> Failed to create sales order. line Error @ ec_paid_order @@ line ' . __LINE__ . ' ' . $e->getMessage();
+   $dbc->rollback = true;
+   return false;
+  }
+
+  $ec_product_ids = $confirm_order_details->ec_product_id;
+  foreach ($ec_product_ids as $k => $ec_product_id) {
+   $sd_so_line = new sd_so_line();
+   $sd_so_line->sd_so_header_id = $sd_so->sd_so_header_id;
+   $product_details = ec_product::find_by_id($ec_product_id);
+   $item_details = item::find_by_id($product_details->item_id_m);
+   $sd_so_line->item_id_m = $product_details->item_id_m;
+   $sd_so_line->shipping_org_id = $ec_con_details->shipping_org_id;
+   $sd_so_line->sd_so_header_id = $sd_so->sd_so_header_id;
+   $sd_so_line->item_description = $item_details->item_description;
+   $sd_so_line->uom_id = $item_details->uom_id;
+   $sd_so_line->line_number = ($k + 1);
+   $sd_so_line->line_type = $ec_con_details->line_type;
+   $sd_so_line->line_status = 'ENTERED';
+   $sd_so_line->line_quantity = $confirm_order_details->quantity[$k];
+   $sd_so_line->line_description = 'product_name : ' . $confirm_order_details->quantity[$k];
+   $sd_so_line->line_price = $confirm_order_details->sales_price[$k];
+   $sd_so_line->unit_price = $sd_so_line->line_price / $sd_so_line->line_quantity;
+   $sd_so_line->tax_code_id = $confirm_order_details->tax_code[$k];
+   $sd_so_line->supply_source = 'INV';
+   try {
+    $sd_so_line->save();
+   } catch (Exception $e) {
+    $this->message .= '<br> Failed to create sales order. line Error @ ec_paid_order @@ line ' . __LINE__ . ' ' . $e->getMessage();
+    $dbc->rollback = true;
+    return false;
+   }
+  }
+  return $sd_so->sd_so_header_id;
+ }
+
+ private function _create_customer($order_user) {
+  $cust = new ar_customer();
+  $cust->customer_name = $order_user->first_name . ' ' . $order_user->last_name . '-' . $order_user->email;
+  $cust->customer_number = $order_user->username . '-' . $order_user->user_id;
+  $cust->ship_to_id = $_SESSION['confirm_order']['ship_to_id'];
+  $cust->bill_to_id = $_SESSION['confirm_order']['bill_to_id'];
+  $cust->save();
+
+  $user = new user();
+  $user->user_id = $order_user->user_id;
+  $user->ar_customer_id = $cust->ar_customer_id;
+  $user->save();
+
+  return $cust->ar_customer_id;
+ }
 
 }
 

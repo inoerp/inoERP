@@ -50,7 +50,7 @@ inoERP
     </div>
     <div id="tabsHeader-3" class="tabContent">
      <ul class="column header_field">
-      <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly1); ?>						 </li></li>
+      <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly1); ?>						 </li>
       <li><?php $f->l_date_fieldAnyDay('payment_term_date', $$class->payment_term_date) ?></li>
       <li><?php $f->l_select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', '', 1, $readonly); ?></li>
       <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, 1); ?></li>
@@ -61,7 +61,8 @@ inoERP
       <li><?php $f->l_select_field_from_object('price_list_header_id', mdm_price_list_header::find_all_purchasing_pl(), 'mdm_price_list_header_id', 'price_list', $$class->price_list_header_id); ?></li>
       <li><?php $f->l_number_field('header_amount', $$class->header_amount, '15', 'header_amount'); ?></li>
       <li><?php $f->l_number_field('tax_amount', $$class->tax_amount, '15', 'tax_amount'); ?></li>
-      <li><?php $f->l_text_field_d('sales_person') ?></li>
+      <li><?php $f->l_number_field('prepaid_amount', $$class->prepaid_amount, '15', 'prepaid_amount'); ?></li>
+      <li><?php $f->l_text_field_d('prepaid_status'); ?></li>
      </ul>
     </div>
     <div id="tabsHeader-4" class="tabContent">

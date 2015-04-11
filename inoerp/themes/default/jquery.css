@@ -12,23 +12,23 @@ ul.tabMain li {
  float:left;
  height:25px;
  line-height:24px;
- border:1px solid #999;
+/* border:1px solid #999;*/
  overflow:hidden;
  position:relative;
- background-color:#ccc;
+ background-color: rgba(222, 221, 221, 0.94);
+
  -webkit-border-top-left-radius:8px;
  -webkit-border-top-right-radius:8px;
  -moz-border-radius-topleft:8px;
  -moz-border-radius-topright:8px;
  border-top-left-radius:8px;
  border-top-right-radius:8px;
- margin:0 5px -1px 0;
- padding:0;
+ padding:2px;
+ margin: 0 10px -3px 0;
 }
 
 ul.tabMain li.ui-state-active{
-background-color: rgba(181, 215, 183, 0.77);
-border-bottom: 1px solid rgba(195, 221, 224, 0.46);
+background-color:rgba(123, 186, 81, 0.57);
 }
 
 ul.tabMain li a{
@@ -36,7 +36,7 @@ ul.tabMain li a{
  color:#000;
  display:block;
  font-size:0.9em;
- border:1px solid #fff;
+ /*border:1px solid #fff;*/
  outline:none;
  -webkit-border-top-left-radius:8px;
  -webkit-border-top-right-radius:8px;
@@ -48,7 +48,7 @@ ul.tabMain li a{
 }
 
 ul.tabMain li a:hover {
- background-color:#d4e3e5;
+ background-color:rgba(123, 207, 128, 0.77);
 }
 
 html ul.tabMain li.active,html ul.tabMain li.active a:hover {
@@ -57,7 +57,7 @@ html ul.tabMain li.active,html ul.tabMain li.active a:hover {
 }
 
 .tabContainer {
-border: 1px solid rgba(209, 192, 192, 0.7);
+border: 1px solid rgba(222, 221, 221, 0.94);
 /*overflow: hidden;*/
 padding: 8px;
 clear: both;

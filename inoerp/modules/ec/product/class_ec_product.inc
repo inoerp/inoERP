@@ -173,8 +173,8 @@ class ec_product extends dbObject {
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
  }
- 
-  public static function find_all_feaured_products() {
+
+ public static function find_all_feaured_products() {
   $sql = "SELECT ec_product_id , ec.item_id_m , ec.org_id , product_name , product_description, item.item_description,
           item.image_file_id
            FROM 
@@ -209,8 +209,8 @@ class ec_product extends dbObject {
    $sql .= " AND scv.reference_id = ec.ec_product_id  ";
    $line_id_a = $param['sys_catalog_line_id'];
    $line_id_val_a = $param['sys_catalog_line_id_value'];
-   $line_id_val_a_str = "('" . implode("','", $line_id_val_a)."')";
-   $line_id_a_str = "('" . implode("','", $line_id_a)."')";
+   $line_id_val_a_str = "('" . implode("','", $line_id_val_a) . "')";
+   $line_id_a_str = "('" . implode("','", $line_id_a) . "')";
    $sql .= " AND scv.line_value IN  $line_id_val_a_str  ";
    $sql .= " AND scv.sys_catalog_line_id IN  $line_id_a_str  ";
   }
@@ -220,11 +220,53 @@ class ec_product extends dbObject {
  }
 
  public static function find_featured_products_id($category_id) {
-  $fp =  self::find_by_category_id($category_id);
-  if(empty($fp)){
+  $fp = self::find_by_category_id($category_id);
+  if (empty($fp)) {
    $fp = self::find_all_feaured_products();
   }
   return $fp;
+ }
+
+ public static function category_menu() {
+  $cat = new category();
+  $all_categories_arr = $cat->category_explosion_withPCRelation('38');
+  $all_categories = array_pop($all_categories_arr);
+  $stmt = '<div id="hf-nav-1">
+      <div class="hf-nav">';
+  foreach ($all_categories as $k1 => $v1) {
+   $catg_d = category::find_by_id($k1);
+   $stmt .= '<ul class="hf-menu">
+          <li class="top-li p3">';
+   $stmt .= '<a href="' . HOME_URL . 'product.php?ec_product_id=' . $k1 . '" title="' . $catg_d->description . '">' . $catg_d->category . '</a>';
+   if (is_array($v1)) {
+    $stmt .= '<ul class="sub sub-ul">';
+    foreach ($v1 as $k2 => $v2) {
+     $catg_d2 = category::find_by_id($k2);
+     $stmt .= '<li class="sub">';
+     $stmt .= '<h2><a href="' . HOME_URL . 'product.php?ec_product_id=' . $k2 . '" title="' . $catg_d2->description . '">' . $catg_d2->category . '</a></h2>';
+     if (is_array($v2)) {
+      $stmt .= '<ul>';
+      foreach ($v2 as $k3 => $v3) {
+       $catg_d3 = category::find_by_id($k3);
+       $stmt .= '<li><a href="' . HOME_URL . 'product.php?ec_product_id=' . $k3 . '" title="' . $catg_d3->description . '">' . $catg_d3->category . '</a></li>';
+      }
+      $stmt .='</ul>';
+      $stmt .='</li>';
+     } else {
+      $stmt .='</li>';
+     }
+    }
+    $stmt .='</ul>';
+    $stmt .='</li>';
+   } else {
+    $stmt .='</li>';
+   }
+   $stmt .='</ul>';
+  }
+
+  $stmt .= '</div></div>';
+
+  return $stmt;
  }
 
 }

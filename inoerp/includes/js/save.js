@@ -1095,7 +1095,7 @@ fileUploadMain.prototype.fileUpload = function () {
     formData.append('attachments-' + i, file);
     display_type = $(this_e).closest('.show_attachment').find('.display_type').val();
    });
-  } else if ($(this).hasClass('comment_attachments')) {
+  } else if ($(this).hasClass('comment_attach_submit')) {
    jQuery.each($('#comment_attachments')[0].files, function (i, file) {
     formData.append('attachments-' + i, file);
    });

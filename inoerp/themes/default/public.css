@@ -1827,3 +1827,15 @@ margin: 5px;
 background-color: yellow;
 padding: 2px 5px;
 }
+#dropdownMenu1{
+ margin-top: 5px;
+}
+
+.button{
+        padding: 2px 10px;
+        margin-right: 10px;
+}
+
+.tabContainer ul{
+ margin-bottom: 0 !important;
+}

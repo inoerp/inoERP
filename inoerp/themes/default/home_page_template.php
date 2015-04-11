@@ -26,9 +26,9 @@ if (file_exists('install.php')) {
 $content_class = true;
 if (empty($_GET['class_name']) && empty($_GET['cname'])) {
  $class_names[] = 'content';
-}else if (!empty($_GET['class_name'])){
+} else if (!empty($_GET['class_name'])) {
  $class_names[] = $_GET['class_name'];
-}elseif (!empty($_GET['cname'])){
+} elseif (!empty($_GET['cname'])) {
  $class_names[] = $_GET['cname'];
 }
 ?>
@@ -81,7 +81,8 @@ include_once("includes/functions/loader.inc");
   <script src="<?php echo HOME_URL; ?>includes/js/custom_plugins.js"></script>
   <script src="<?php echo HOME_URL; ?>includes/js/basics.js"></script>
   <script src="<?php echo HOME_URL; ?>includes/js/jssor.slider.mini.js"></script>
-  <?php
+
+   <?php
   if (!empty($js_file_paths)) {
    foreach ($js_file_paths as $key => $js_file) {
     ?>
@@ -210,6 +211,7 @@ include_once("includes/functions/loader.inc");
   <div class="grey-wrapper jt-shadow padding-top content_summary">
    <div class="make-center wow fadeInUp animated" style="visibility: visible;">
     <div class="container">
+    
      <div id="structure">
       <?php
 //      pa($_SESSION['user_profile']);

@@ -210,9 +210,9 @@ item.item_number, item.uom_id, item.item_status,
 org.org, sdsl.shipping_org_id,
 sdsl.created_by, sdsl.creation_date, sdsl.last_update_by, sdsl.last_update_date
 FROM sd_so_header sdsh
-LEFT JOIN payment_term ON sdsh.payment_term_id = payment_term.payment_term_id,
+LEFT JOIN payment_term ON sdsh.payment_term_id = payment_term.payment_term_id
+LEFT JOIN ar_customer_site ON sdsh.ar_customer_site_id = ar_customer_site.ar_customer_site_id
 ar_customer, 
-ar_customer_site, 
 sd_so_line sdsl
 LEFT JOIN onhand_summary_v osv ON osv.item_id_m = sdsl.item_id_m AND osv.org_id = sdsl.shipping_org_id,
 item,
@@ -224,7 +224,6 @@ LEFT JOIN locator ON locator.locator_id = ssc.staging_locator_id
 WHERE
 sdsh.sd_so_header_id = sdsl.sd_so_header_id
 AND sdsh.ar_customer_id = ar_customer.ar_customer_id
-AND sdsh.ar_customer_site_id = ar_customer_site.ar_customer_site_id
 AND sdsl.item_id_m = item.item_id_m AND item.org_id = sdsl.shipping_org_id
 AND sdsl.shipping_org_id = org.org_id
 AND ssc.org_id = sdsl.shipping_org_id

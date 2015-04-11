@@ -4013,6 +4013,8 @@ ul.column li label,
 .four_column ul li label{
  display : inline-block;
  font-size : 0.9em;
+ margin-bottom: 5px;
+ 
 }
 
 ul.column.one_column li{
@@ -4450,14 +4452,24 @@ table.document_table input{
 }
 
 #erp_form_area input[type=text],#erp_form_area input[type=password], #erp_form_area input[type=date], #erp_form_area input[type=textarea],
-#erp_form_area input[type=number], #erp_form_area input[type=search], #erp_form_area checkbox, #erp_form_area radio button, #erp_form_area select
+#erp_form_area input[type=number], #erp_form_area input[type=search], #erp_form_area checkbox, #erp_form_area radio button
 {
  height: 25px;
  /*padding: 3px 2px;*/
+  /*border: 1px solid #eee;*/
+  border: 1px solid #e6e8ea;
+}
+
+#erp_form_area li input[type=text], #erp_form_area li input[type=date],#erp_form_area li input[type=textarea],
+#erp_form_area li input[type=number]
+{
+ border-radius: 5px;
 }
 
 #erp_form_area select{
  height: 25px;
+/*   border: 1px solid #e6e8ea;
+  border-radius: 5px;*/
 }
 
 #erp_form_area .select.medium{

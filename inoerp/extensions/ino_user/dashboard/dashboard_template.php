@@ -26,6 +26,7 @@
         <li><a href="form.php?module_code=wip"><i class="fa fa-tasks"></i> WIP & MES </a></li>
         <li><a href="form.php?module_code=fp"><i class="fa fa-th-large"></i>Forecast & Planning </a></li>
         <li class="Point Of Sale"><a href="form.php?module_code=pos"><i class="fa fa-shopping-cart"></i>Point Of Sale </a></li>
+        <li><a href="form.php?module_code=ec"><i class="fa fa-sitemap"></i>eCommerce </a></li>
         <li><a href="form.php?module_code=gl"><i class="fa fa-money"></i> General Ledger</a></li>
         <li><a href="form.php?module_code=sys"><span class='inline'><j class="fa fa-dollar"></j><i class="fa fa-arrow-circle-right"></i></span>Accounts Payable</a></li>
         <li><a href="form.php?module_code=sys"><span class='inline'><j class="fa fa-dollar"></j><i class="fa fa-arrow-circle-left"></i></span>Accounts Receivable</a></li>

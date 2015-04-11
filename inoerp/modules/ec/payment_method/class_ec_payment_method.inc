@@ -38,6 +38,8 @@ class ec_payment_method extends dbObject {
   'ec_payment_method_id',
   'payment_method_name',
   'display_name',
+  'user_message',
+  'submit_button_name',
   'type',
   'mode',
   'username',
@@ -69,6 +71,8 @@ class ec_payment_method extends dbObject {
  public $pageTitle = " eComm Payment Method "; //page Title
  public $payment_method_name;
  public $display_name;
+ public $submit_button_name;
+ public $user_message;
  public $image_file_id;
  public $ec_payment_method_id;
  public $type;
@@ -131,11 +135,15 @@ class ec_payment_method extends dbObject {
    $stmt .= $f->hidden_field('bill_to_id', $bill_to_id);
    $stmt .= $f->hidden_field('total_amount', $total_amount);
    $stmt .= $f->hidden_field('doc_currency', $curr);
+   
+   if (!empty($pm->user_message)) {
+    $stmt .= '<p>'.$pm->user_message .'</p>';
+   }
    if (!empty($pm->image_file_id)) {
     $img_file = file::find_by_id($pm->image_file_id);
     $stmt .= '<input type="image" class="img-height-120" name="submit" src="' . HOME_URL . $img_file->file_path . $img_file->file_name . '" border="0" alt="Submit" />';
    } else {
-    $stmt .= '<input class="btn btn-warning ino-btn" type="submit" value="' . $pm->payment_method_name . '" name="submit" role="button">';
+    $stmt .= '<input class="btn btn-warning ino-btn" type="submit" value="' . $pm->submit_button_name . '" name="submit" role="button">';
    }
    $stmt .= '</form>';
    $stmt .= '</div>';

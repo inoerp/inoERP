@@ -162,7 +162,7 @@ $(document).ready(function () {
   }
  });
 
- if ($('#currency').val() != $('#doc_currency').val()) {
+ if ($('#currency').val() && $('#doc_currency').val() && ($('#currency').val() != $('#doc_currency').val())) {
   getExchangeRate();
  }
 
@@ -170,7 +170,7 @@ $(document).ready(function () {
          .on('change', '#currency, #doc_currency, #exchange_rate_type', function () {
           getExchangeRate();
          });
-
+$('#currency').val()
 //get tax code
  $('#content').off('change', '.shipping_org_id').on('change', '.shipping_org_id', function () {
   var org_id = $(this).val();
