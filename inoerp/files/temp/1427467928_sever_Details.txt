@@ -1,4 +1,0 @@
-Can you try connecting to SIN-SUPERBOM01 with the below username and password
-
-Username           : SINSUPERBOM01
-Password            : Coherent123

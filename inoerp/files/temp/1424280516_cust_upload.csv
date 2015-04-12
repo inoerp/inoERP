@@ -1,2 +1,0 @@
-ar_customer_id,customer_number,customer_name,supplier_id,customer_type,tax_country,tax_reg_no,tax_payer_id,address_id,customer_contact_id,customer_credit_class,ef_id,status,rev_enabled_cb,rev_number
-,3,ABC Corp4,11,EXTERNAL_FORGEIN,IN,REG001121,3433,88,22,1,,active,0,0
