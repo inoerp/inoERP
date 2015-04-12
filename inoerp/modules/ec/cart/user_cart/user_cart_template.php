@@ -67,14 +67,18 @@
           <td><?php echo $count; ?></td>
           <td><?php echo $product_name; ?></td>
           <td class="long-td"><?php echo ('<a href="' . HOME_URL . 'product.php?ec_product_id=' . $$class->ec_product_id . '" title="' . $product_description . '">' . substr($product_description, 0, 100) . '</a>'); ?></td>
-          <td><?php $f->text_field_ds('quantity') ?></td>
-          <td><?php echo $curr . round($$class->sales_price, $precision) ?></td>
+          <td><?php $f->text_field_wids('quantity') ?></td>
+          <td class="unit-price"><?php
+           echo '<span class="currency">' . $curr . '</span>';
+           $unit_price = round($$class->sales_price, $precision);
+           echo '<span class="unit-price-value">' . $unit_price . '</span>';
+           ?></td>
           <td><?php echo $f->text_area('description', $$class->description) ?></td>
-          <td data-currency="<?php echo $curr; ?>"><?php
-           echo $curr;
+          <td  class="line-price" data-currency="<?php echo $curr; ?>"><?php
+           echo '<span class="currency">' . $curr . '</span>';
            $sub_total = round($$class->sales_price * $$class->quantity, $precision);
            $total += $sub_total;
-           echo $sub_total;
+           echo '<span class="line-price-value">' . $sub_total . '</span>';
            ?></td>
          </tr>
          <?php
@@ -109,7 +113,7 @@
         <?php echo $f->hidden_field('tax_amount', $tax_amount) ?>
         <?php echo $f->hidden_field('total_amount', $total) ?>
         <div class="col-md-3"><input type="submit" role="button" class="btn btn-lg btn-primary place-order" value="Place Order" form="ec_cart_line"></div>
-        <div class="col-md-2"><span class="btn btn-lg"> Total Amount : <?php echo $curr . $total; ?></span></div>
+        <div class="col-md-2"><span class="btn btn-lg"> Total Amount : <?php echo $curr ; echo '<span class="total-amount">' .$total.'</span>'; ?></span></div>
        </div>
       </div>
      </div> 

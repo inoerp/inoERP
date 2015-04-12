@@ -26,5 +26,19 @@ $(document).ready(function() {
 
 deleteData('form.php?class_name=mdm_cart&line_class_name=mdm_cart');
 
-
+$('body').on('blur', '#ec_cart_line .quantity', function(){
+var qnty = $(this).val();
+var unit_price = +$(this).closest('tr').find('.unit-price-value').html();
+var line_price = qnty * unit_price;
+  $(this).closest('tr').find('.line-price-value').html(' ' + line_price + ' ');
+  var total_line_p = 0;
+  $('.line-price-value').each(function(){
+  var line_p = + $(this).html();
+    total_line_p += line_p;
+  });
+  var tax_amount = +$('.hidden.tax_amount').val();
+  var total_amount = tax_amount + total_line_p;
+  $('.hidden.total_amount').val(total_amount);
+  $('.total-amount').html(total_amount);
+})
 });  

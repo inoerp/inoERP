@@ -1,176 +1,176 @@
 .class_detail_form{
-margin-top: 2em;
-  margin-left: -57em;
+ margin-top: 2em;
+ margin-left: -57em;
 }
 
 #view_content{
-max-width: 1010px;
-    background-color: #fff;
-    padding: 10px;
+ max-width: 1010px;
+ background-color: #fff;
+ padding: 10px;
 }
 
 #category_relationDiv, #contents_listDiv{
-    clear: both;
-    margin: 5px 0;
+ clear: both;
+ margin: 5px 0;
 }
 
 table#category_list{
-margin-bottom: 20px;
+ margin-bottom: 20px;
 }
 table#category_lis {
-width: 730px;
+ width: 730px;
 }
 
 table#forum_list, table#forum_type_category_list{
-width: 730px;
+ width: 730px;
 }
 
 table#forum_list td, table#forum_type_category_list td{
-    padding: 5px;
-    line-height : 20px;
+ padding: 5px;
+ line-height : 20px;
 }
 
- table#forum_type_category_list{
-    font-size: 1.1em;
-    
+table#forum_type_category_list{
+ font-size: 1.1em;
+
 }
 
 table#forum_type_category_list a {
-    color : #067CBE;
+ color : #067CBE;
 }
 
 
 table#forum_type_category_list tr.level_2 {
-    background-color : rgba(13, 171, 14, 0.3);
+ background-color : rgba(13, 171, 14, 0.3);
 }
 
 
 
 table#forum_type_category_list tr.level_2 td.link{
-padding-left: 20px;
+ padding-left: 20px;
 }
 
 table#forum_type_category_list tr.level_3 td.link{
-padding-left: 45px;
+ padding-left: 45px;
 }
 
 table#forum_type_category_list tr.level_4 td.link{
-padding-left: 80px;
+ padding-left: 80px;
 }
 
 table#forum_list tr.even{
-    background-color : rgba(13, 171, 14, 0.1);
+ background-color : rgba(13, 171, 14, 0.1);
 }
 
 table#forum_list tr.odd{
-    background-color : rgba(255, 171, 140, 0.1);
+ background-color : rgba(255, 171, 140, 0.1);
 }
 
 
 
 
 table#forum_list td.no_of_replies{
-width: 40px;
+ width: 40px;
 }
 
 table#forum_list td.created_by{
-width: 80px;
+ width: 80px;
 }
 
 table#forum_list td.post_date{
-width: 140px;
+ width: 140px;
 }
 
 
 #content{
-font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif;
+ font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif;
 }
 .heading{
-font-size: 1.6em;
-margin: 10px 20px 10px 0;
-font-weight: bold;
+ font-size: 1.6em;
+ margin: 10px 20px 10px 0;
+ font-weight: bold;
 }
 
 .new_element{
-margin: 10px;
+ margin: 10px;
 }
 
 #subject label, #categories label, 
 .new_element label{
-display: inline-block;
-font-size: 1.2em;
-width: 100px;
-font-weight: bold;
-margin-left: 20px;
+ display: inline-block;
+ font-size: 1.2em;
+ width: 100px;
+ font-weight: bold;
+ margin-left: 20px;
 }
 
 .priority{
-margin-top: 30px;
+ margin-top: 30px;
 }
 
 
 #extra_form_element .text{
-float: left;
+ float: left;
 }
 
 #content_element, #show_attachment, #content_info{
-clear: both;
-width: 740px;
-margin-left: 30px;
+ clear: both;
+ width: 740px;
+ margin-left: 30px;
 }
 
 #content_info{
-padding-top: 5px;
+ padding-top: 5px;
 }
 #content_info ul li{
-display: inline-block;
-width: 32%;
+ display: inline-block;
+ width: 32%;
 }
 
 #child_conetnt_list{
-    background-color: rgba(105, 149, 144, 0.23);
-    padding: 2px 0 2px 20px;
-    text-align: left;
+ background-color: rgba(105, 149, 144, 0.23);
+ padding: 2px 0 2px 20px;
+ text-align: left;
 }
 
 
 #child_conetnt_list:empty{
-    display: none;
+ display: none;
 }
 
 
 #content_element{
-display: block;
-background-color: rgba(105, 149, 144, 0.23);
-background-image: url("images/heading_bg7.png");
-border: 1px solid #CCC;
-width: 740px;
-float: left;
-margin-bottom: 20px;
-padding: 5px 10px;
-margin-left: 10px;
+ display: block;
+ background-color: rgba(105, 149, 144, 0.23);
+ background-image: url("images/heading_bg7.png");
+ border: 1px solid #CCC;
+ width: 740px;
+ float: left;
+ margin-bottom: 20px;
+ padding: 5px 10px;
+ margin-left: 10px;
 }
 
 #content_element ul{
-    padding: 10px;
-    
+ padding: 10px;
+
 }
 
 #content_element ul li {
-display: inline-block;
-    float: left;
-margin-right: 20px;
-    text-align: left;
+ display: inline-block;
+ float: left;
+ margin-right: 20px;
+ text-align: left;
 }
 
 
 #content_navigation ul li{
-display: inline-block;
+ display: inline-block;
 }
 
 .child_contents{
-float: right;
-margin-right: 100px;
+ float: right;
+ margin-right: 100px;
 }
 
 #page_element ul li{
@@ -180,33 +180,33 @@ margin-right: 100px;
 }
 
 .content_heading{
-font-size: 1.4em;
+ font-size: 1.4em;
 }
 
 
 ul.summary_list li {
-    display: inline-block;
-    width: 350px;
-    vertical-align: top;
-    padding: 0px 10px;
-    height: 220px;
-    overflow: hidden;
+ display: inline-block;
+ vertical-align: top;
+ padding: 0px 10px;
+ overflow: hidden;
+ width: 100%;
+ margin: 10px 10px 20px 0px;
 }
 
 ul.summary_list li .subject_summary{
-display: block;
-font-size: 1.2em;
-font-weight: bold;
-margin-bottom: 10px;
-padding: 6px 12px;
-/*border-bottom: 1px solid;*/
-overflow: hidden;
+ display: block;
+ font-size: 1.2em;
+ font-weight: bold;
+ margin-bottom: 10px;
+ padding: 6px 12px;
+ /*border-bottom: 1px solid;*/
+ overflow: hidden;
 }
 
 #form_top_image{
-        margin-top: 5px;
+ margin-top: 5px;
 }
 
 #subject{
-        margin-left: 10px;
+ margin-left: 10px;
 }

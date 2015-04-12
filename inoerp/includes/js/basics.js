@@ -4477,6 +4477,10 @@ $("#accordion0").accordion({
    over_write: false
   })).then(function () {
    alert('Cart is updated');
+   var no_of_item = +$('#no-of-cart-items').html();
+   no_of_item++;
+   +$('#no-of-cart-items').html(' ' + no_of_item + ' ' );
+   console.log(no_of_item);
   });
  });
 

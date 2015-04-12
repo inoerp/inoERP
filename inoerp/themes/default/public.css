@@ -672,18 +672,21 @@ ul.inline_list li{
 }
 
 .heading1 {
- border: 1px solid rgba(74, 93, 98, 0.52);
- background-image: url("images/heading_bg6.png");
- /* background-color: rgba(26, 120, 38, 0.52);
-  background-image: linear-gradient(to bottom, #98BFB6, rgba(188, 192, 190, 0.91));*/
+border-bottom: 2px dotted rgb(51, 153, 204);
  margin-left: -10px;
  margin-right: -10px;
 
 }
 
+.heading1 .more_page a{
+        padding: 5px;
+        background-color: #39c;
+        font-size: 1.2em
+}
+
 .front_page_summary{
  background-color: rgba(255, 256, 256, 0.8);
- box-shadow: 1px 1px 1px 2px #888;
+ /*box-shadow: 1px 1px 1px 2px #888;*/
  margin: 10px;
 }
 
