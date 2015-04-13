@@ -129,7 +129,6 @@ class user extends dbObject {
  }
 
  public function _before_save() {
-  pa($this);pa($_POST);
   if ($this->verify_user()) {
    return 1;
   } else {
