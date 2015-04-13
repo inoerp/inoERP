@@ -3658,7 +3658,7 @@ $(document).ready(function () {
   $(this).removeClass('showDiv_input').addClass('hideDiv_input');
  });
 
- $('#content_divId .hideDiv_input').trigger('click');
+ $('#content_divId .hideDiv_input, #program_header .hideDiv_input').trigger('click');
 
 // $('#user_info .block_menu').menu();
  $('#big_popover').popover({

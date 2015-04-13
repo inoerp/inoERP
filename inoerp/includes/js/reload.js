@@ -498,4 +498,6 @@ $('table.view th').find('img').hide();
   other_options: select_item_number_am_asset_item_options
  });
  
+ $('#program_header .hideDiv_input').trigger('click');
+ 
 });

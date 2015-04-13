@@ -68,6 +68,7 @@ require_once(INC_EXTENSIONS . DS . "role_path" . DS . "class_role_path.inc");
 
 //require_once(INC_BASICS.DS."class.dbObject.inc"); 
 //load other objects
+require_once(INC_SYS . DS . "program_schedule" . DS . "class_sys_program_schedule.inc");
 require_once(INC_SYS . DS . "program" . DS . "class_sys_program.inc");
 require_once(INC_SYS . DS . "option" . DS . "class.option_header.inc");
 require_once(INC_SYS . DS . "option" . DS . "class.option_line.inc");

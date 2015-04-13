@@ -1,17 +1,16 @@
 <div id ="form_header">
  <form action=""  method="post" id="sys_program"  name="sys_program">
-  <div class="large_shadow_box">
-   <ul class="column five_column"> 
-    <li> 
-     <label><img src="<?php echo HOME_URL; ?>themes/default/images/serach.png" class="program_id select_popup clickable">
-      Program Id : </label> 
-     <?php $f->text_field_ds('sys_program_id') ?>
-     <a name="show" href="form.php?class_name=sys_program&<?php echo "mode=$mode"; ?>" class="show document_id sys_program_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-    </li> 
+  <div class="tabContainer"> 
+   <ul class="column header_field"> 
+    <li><?php $f->l_text_field_dr_withSearch('sys_program_id') ?>
+     <a name="show" href="form.php?class_name=sys_program&<?php echo "mode=$mode"; ?>" class="show document_id sys_program_id">
+      <i class="fa fa-refresh"></i></a> 
+    </li>
     <li><label>Program : </label> <?php $f->text_field_dm('program_name'); ?> </li> 
     <li><label>Status : </label> <?php $f->text_field_d('status'); ?> </li> 
     <li><label>Module : </label> <?php $f->text_field_d('module_name'); ?> </li> 
     <li><label>Class : </label> <?php $f->text_field_d('class'); ?> </li> 
+    <li><?php $f->l_text_field_dr('program_source'); ?> </li>
     <li><label>Description : </label> <?php $f->text_field_d('description'); ?> </li> 
    </ul> 
   </div>

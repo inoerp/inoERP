@@ -10,8 +10,8 @@ if (!empty($_POST)) {
   $p->class = $class;
   $p->parameters = serialize($postArray);
   $p->status = 'Initiated';
-  $p->audit_trial();
   try {
+   $p->_before_save($postArray);
    $p->save();
    $dbc->confirm();
    echo "<div id='json_save_header'>";

@@ -491,14 +491,14 @@ EOD;
 
  public function add_new_address($existing_add_count = 0, $div_class = "") {
   global $class, $$class, $f, $ino_user;
-  if(!empty($ino_user->email)){
+  if (!empty($ino_user->email)) {
    $email = $ino_user->email;
   }
   $default_add_name = 'New Address ' . ($existing_add_count + 1);
   $add_field = '<div class="new-address">
         <ul class="column header_field address">';
   $add_field .= '<li><label>' . gettext('Address Name') . '</label>' . $f->text_field('addr_address_name', $default_add_name, '', '', '', 1) . '</li>';
-  $add_field .= '<li><label>' . gettext('Phone') . '</label>'. $f->text_field('addr_phone', '') . '</li>';
+  $add_field .= '<li><label>' . gettext('Phone') . '</label>' . $f->text_field('addr_phone', '') . '</li>';
   $add_field .= '<li><label>' . gettext('eMail') . '</label>' . $f->text_field('addr_email', $email) . '</li>';
   $add_field .= '<li><label>' . gettext('Website') . '</label>' . $f->text_field('addr_website', '') . '</li>';
   $add_field .= '<li><label>' . gettext('Coutry') . '</label>' . $f->text_field('addr_country', '') . '</li>';
@@ -506,7 +506,7 @@ EOD;
   $add_field .= '<li><label>' . gettext('Default') . '</label>' . $f->checkBox_field('addr_default_cb', '') . '</li>';
   $add_field .= '<li><label>' . gettext('Usage Type') . '</label>' . $f->select_field_from_object('addr_usage_type', address::address_usage_type(), 'option_line_code', 'option_line_value', '', 'usage_type') . '</li>';
   $add_field .= '<li><label>' . gettext('Address') . '</label>' . form::text_area('addr_address', '', '3', '22', '', 'Complete Address', 'address') . '</li>';
-  $add_field .= '<li class="hidden">'. $f->hidden_field('address_id', '') . '</li>';
+  $add_field .= '<li class="hidden">' . $f->hidden_field('address_id', '') . '</li>';
   $add_field .= '</ul>
        </div>';
 
@@ -1340,6 +1340,11 @@ EOD;
 
  public function dateTime_field($name, $value) {
   return $this->date_field($name, $value, '20', '', 'dateTime');
+ }
+
+ public function l_dateTime_field($name, $value) {
+  echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo $this->date_field($name, $value, '20', '', 'dateTime');
  }
 
  public function date_fieldFromToday($name, $value, $divClass = '') {

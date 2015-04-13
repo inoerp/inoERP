@@ -246,7 +246,7 @@ class search extends dbObject {
     $count = 0;
     foreach ($this->result as $record) {
      $count++;
-     $tr_class = 'rowno_'.$count;
+     $tr_class = 'rowno_' . $count;
      $search_result .="<tr class='{$tr_class}'>";
      $search_result .= "<td>$count</td>";
      if ($i == 0) {
@@ -261,9 +261,9 @@ class search extends dbObject {
       }
       $col_val = $this->column_array_s[$k];
       if (isset($record->$col_val)) {
-       $search_result .= '<td data-field_name="'.$col_val.'">' . ucwords(str_replace('_', ' ', $record->$col_val)) . '</td>';
+       $search_result .= '<td data-field_name="' . $col_val . '">' . ucwords(str_replace('_', ' ', $record->$col_val)) . '</td>';
       } else {
-       $search_result .= '<td data-field_name="'.$col_val.'"></td>';
+       $search_result .= '<td data-field_name="' . $col_val . '"></td>';
       }
      }
      $search_result .= '</tr>';
@@ -510,7 +510,7 @@ class search extends dbObject {
 //start of the srach statement
   $program_form_statement = "";
   $program_form_statement .= "<form action=\"$action\" name=\"$this->_form_name\" "
-   . " method='POST' class=\"search_box $this->_form_name\" target=\"$target\"  id=\"$this->_form_name\">";
+   . " method='POST' class=\"search_box submit_program_form $this->_form_name\" target=\"$target\"  id=\"$this->_form_name\">";
 
   //start of first ul
   $program_form_statement .= '<ul class="program_form">';
@@ -561,6 +561,22 @@ class search extends dbObject {
   $program_form_statement .=$this->_add_hidden_fields();
   $program_form_statement .= "</ul>";
 //end of first ul
+//$f = new inoform();
+//start of schdule details
+  $program_form_statement .= '<fieldset><legend class="fs-default">Auto-Schedule Details</legend>';
+  $program_form_statement .= '<div class="hideDiv_input"></div>';
+  $program_form_statement .= '<ul class="simple_column schdule_details hideDiv_input_element">';
+  $program_form_statement .= "<li><label>Frequency UOM </label>";
+  $program_form_statement .= $f->select_field_from_array('frequency_uom', sys_program_schedule::$frequency_uom_a, '', 'frequency_uom');
+  $program_form_statement .= '</li>';
+  $program_form_statement .= '<li><label>Frequency </label>';
+  $program_form_statement .= $f->text_field('frequency_value','');
+  $program_form_statement .= '</li>';
+  $program_form_statement .= '<li><label>Start DateTime </label>' . $f->dateTime_field('start_date_time','') . '</li>';
+  $program_form_statement .= '<li><label>Increase Date Parameter </label>' . $f->checkBox_field('increase_date_parameter_cb','') . '</li>';
+  $program_form_statement .= '</ul>';
+  $program_form_statement .= '</fieldset>';
+
 //start of form button ul
   $program_form_statement .="<ul class=\"form_buttons\">";
   //add the hidden fields if any

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -7,76 +8,93 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
+
 /**
  * 
  *
  */
-class extn_contact extends dbObject {
+class sys_program_schedule extends dbObject {
 
- public static $table_name = "extn_contact";
- public static $primary_column = "extn_contact_id";
- public static $key_column = 'contact_name';
-// public static $dependent_classes = ['extn_contact_reference'];
- public static $module = "extn";
-  public static $system_info = [
-  'name' => 'Contacts',
+ public static $table_name = "sys_program_schedule";
+ public static $primary_column = "sys_program_schedule_id";
+ public static $key_column = 'program_name';
+// public static $dependent_classes = ['sys_program_schedule_reference'];
+ public static $module = "sys";
+ public static $system_info = [
+  'name' => 'Program Schedule',
   'number' => '10013',
-  'description' => 'Contacts for Persons & Entities',
+  'description' => 'Program Schdule',
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',
   'primary_entity_cb' => '',
-  'module_name' => 'extn',
+  'module_name' => 'sys',
   'weight' => 13
  ];
+ public static $frequency_uom_a = [
+  'MINUTELY' => 'Minutely',
+  'HOURLY' => 'Hourly',
+  'DAILY' => 'Daily',
+  'WEEKLY' => 'Weekly',
+  'MONTHLY' => 'Monthly',
+  'CALENDAR' => 'Calendar'
+ ];
  public $field_a = [
-  'extn_contact_id',
-  'contact_name',
-  'last_name',
-  'first_name',
-  'middle_name',
-  'mobile_number',
-  'office_number',
-  'contact_number2',
-  'email_id',
-  'website',
-  'email_id2',
-  'fax_no',
-  'timezone',
-  'time_to_contact',
-  'type',
+  'sys_program_schedule_id',
+  'frequency_uom',
+  'frequency_value',
+  'one_time_cb',
+  'increase_date_parameter_cb',
+  'program_name',
+  'description',
+  'parameter',
+  'module_name',
+  'program_class_name',
   'status',
-  'job_titile',
+  'start_date_time',
+  'output_path',
   'created_by',
   'creation_date',
   'last_update_by',
   'last_update_date',
  ];
+ 
+  public $column = [
+  'sys_program_schedule_id',
+  'frequency_uom',
+  'frequency_value',
+  'one_time_cb',
+  'increase_date_parameter_cb',
+  'program_name',
+  'description',
+  'module_name',
+  'program_class_name',
+  'status',
+  'start_date_time',
+ ];
+  
  public $initial_search = [
-  'contact_name',
-  'last_name',
+  'program_name',
+  'description',
+  'program_class_name'
  ];
  public $requiredField = [
-  'contact_name',
-  'last_name',
+  'program_name',
+  'program_class_name',
  ];
- public $extn_contact_id;
- public $contact_name;
- public $last_name;
- public $first_name;
- public $middle_name;
- public $mobile_number;
- public $office_number;
- public $contact_number2;
- public $email_id;
- public $website;
- public $email_id2;
- public $fax_no;
- public $timezone;
- public $time_to_contact;
- public $type;
+ public $sys_program_schedule_id;
+ public $frequency_uom;
+ public $frequency_value;
+ public $one_time_cb;
+ public $increase_date_parameter_cb;
+ public $program_name;
+ public $description;
+ public $parameter;
+ public $module_name;
+ public $program_class_name;
  public $status;
- public $job_titile;
+ public $start_date_time;
+ public $output_path;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -85,25 +103,24 @@ class extn_contact extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Contact  "; //page Title
+ public $pageTitle = " Program Schedule  "; //page Title
 
-
- public static function find_by_reference($ref_obj,$ref_id) {
-  $sql = " SELECT cont.extn_contact_id,cont.contact_name, cont.last_name, cont.first_name, cont.middle_name, 
+ public static function find_by_reference($ref_obj, $ref_id) {
+  $sql = " SELECT cont.sys_program_schedule_id,cont.contact_name, cont.last_name, cont.first_name, cont.middle_name, 
    cont.mobile_number, cont.office_number, cont.contact_number2, cont.email_id, cont.website, cont.email_id2,
    cont.fax_no, cont.timezone, cont.time_to_contact, cont.type, cont.status, cont.job_titile, 
-   cont.created_by, cont.creation_date, cont.last_update_by, cont.last_update_date, cr.extn_contact_reference_id, 
-   cr.extn_contact_id, cr.status, cr.reference_type, cr.reference_table, cr.reference_id, cr.created_by, 
+   cont.created_by, cont.creation_date, cont.last_update_by, cont.last_update_date, cr.sys_program_schedule_reference_id, 
+   cr.sys_program_schedule_id, cr.status, cr.reference_type, cr.reference_table, cr.reference_id, cr.created_by, 
    cr.creation_date, cr.last_update_by, cr.last_update_date 
 
-FROM extn_contact cont,
-extn_contact_reference cr 
+FROM sys_program_schedule cont,
+sys_program_schedule_reference cr 
 
-WHERE cr.extn_contact_id = cont.extn_contact_id
+WHERE cr.sys_program_schedule_id = cont.sys_program_schedule_id
 AND cr.reference_table = '{$ref_obj}'
  AND cr.reference_id = '{$ref_id}'
 ";
- 
+
   $result = self::find_by_sql($sql);
 //  echo $sql; pa($result);
   return !empty($result) ? ($result) : false;
@@ -111,5 +128,5 @@ AND cr.reference_table = '{$ref_obj}'
 
 }
 
-//end of extn_contact class
+//end of sys_program_schedule class
 ?>

@@ -1,11 +1,13 @@
-function setValFromSelectPage(extn_contact_id) {
- this.extn_contact_id = extn_contact_id;
-}
+$(document).ready(function(){
+ $('body').off('change', '#frequency_uom').on('change', '#frequency_uom' , function(){
+  if($(this).val()== 'CALENDAR'){
+     $('#frequency_value').prop('readonly', true).css('background-color', '#F3F3D2');
+  }else{
+   $('#frequency_value').prop('readonly', false).css('background-color', '#FFF');}
+});
+ 
+});
 
-
-setValFromSelectPage.prototype.setVal = function () {
- if (this.extn_contact_id) {
-  $("#extn_contact_id").val(this.extn_contact_id);
- }
-};
-
+$(document).ready(function() {
+ deleteData('form.php?class_name=sys_program_schedule');
+});

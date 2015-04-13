@@ -55,7 +55,6 @@
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">
     <?php echo form::text_area('confirm_order_details', $$class->confirm_order_details, '10', '150', '', 'Maximum 255 Characters', '', 1); ?>
-    </ul>
     </div>
     <div id="tabsLine-2" class="tabContent">
       <?php echo form::text_area('sp_return_data', $$class->sp_return_data, '10', '150', '', 'Maximum 255 Characters', '', 1); ?>
