@@ -49,6 +49,10 @@ class user_group extends user {
 	$result = $this->findBySql($sql, $value_a);
 	return !empty($result) ? $result : false;
  }
+ 
+ public function _after_save(){
+  
+ }
 
 }
 

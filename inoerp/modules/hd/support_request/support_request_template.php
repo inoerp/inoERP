@@ -1,47 +1,46 @@
-<div id ="form_header">
- <form action=""  method="post" id="hr_job"  name="hr_job"><span class="heading">Job </span>
+<div id ="form_all"><span class="heading"><?php
+  $f = new inoform();
+  echo gettext('Support Request')
+  ?></span>
+ <form action=""  method="post" id="hd_support_request"  name="hd_support_request">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Requirements</a></li>
-     <li><a href="#tabsHeader-3">Attachments</a></li>
-     <li><a href="#tabsHeader-4">Notes</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
-       <ul class="column header_field"> 
-        <li> 
-         <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_job_id select_popup clickable">
-          job Id</label><?php $f->text_field_ds('hr_job_id') ?>
-         <a name="show" href="form.php?class_name=hr_job&<?php echo "mode=$mode"; ?>" class="show document_id hr_job_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-        </li>
-        <li><label>Job Name</label><?php $f->text_field_d('job_name'); ?></li>
-        <li><label>Job Code</label><?php $f->text_field_d('job_code'); ?></li>
-        <li><label>Start Date</label><?php echo $f->date_fieldAnyDay('start_date', $$class->start_date); ?></li>
-        <li><label>End Date</label><?php echo $f->date_fieldAnyDay('start_date', $$class->start_date); ?></li>
-        <li><label>Position Type</label><?php echo $f->select_field_from_object('position_type', hr_job::job_position_type(), 'option_line_code', 'option_line_value', $$class->position_type, '', 'position_type', '', $readonly); ?></li>
-        <li><label>Status</label><?php echo form::status_field($$class->status, $readonly); ?></li>
-        <li><label>Description</label><?php $f->text_field_dl('description'); ?></li>
-        <li><label>Functional Area</label><?php echo $f->select_field_from_object('functional_area', hr_job::job_functional_area(), 'option_line_code', 'option_line_value', $$class->functional_area, '', 'functional_area', '', $readonly); ?></li>
-       </ul>
-      </div>
+      <ul class="column header_field"> 
+       <li><?php $f->l_text_field_dr_withSearch('hd_support_request_id') ?>
+        <a name="show" href="form.php?class_name=hd_support_request&<?php echo "mode=$mode"; ?>" class="show document_id hd_support_request_id">
+         <i class='fa fa-refresh'></i></a> 
+       </li> 
+       <li><?php $f->l_text_field_d('request_number'); ?></li>
+       <li><?php
+        $f->l_text_field_d('requester_username', 'username');
+        echo $f->hidden_field_withCLass('requester_user_id', $$class->requester_user_id, 'user_id');
+        ?>
+        <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="user_id select_popup clickable">
+       </li>
+       <li><?php $f->l_text_field_d('requester_email', 'email'); ?></li>
+       <li><?php $f->l_text_field_d('requester_phone', 'phone'); ?></li>
+       <li><?php $f->l_select_field_from_object('request_type', hd_support_request::sr_type(), 'option_line_code', 'option_line_value', $$class->request_type, 'request_type'); ?></li>
+       <li><?php $f->l_select_field_from_object('impact', hd_support_request::sr_impact(), 'option_line_code', 'option_line_value', $$class->impact, 'impact'); ?></li>
+       <li><?php $f->l_select_field_from_object('request_category', hd_support_request::sr_category(), 'option_line_code', 'option_line_value', $$class->request_category , 'request_category'); ?></li>
+       <li><?php $f->l_select_field_from_array('priority', dbObject::$position_array, $$class->priority); ?></li>
+       <li><?php $f->l_text_field_d('hd_change_request_id'); ?></li>
+       <li><?php $f->l_text_field_d('urgency'); ?></li>
+       <li><?php $f->l_select_field_from_object('escalation', hd_support_request::sr_escalation(), 'option_line_code', 'option_line_value', $$class->escalation, 'escalation'); ?></li>
+       <li><?php $f->l_select_field_from_object('status', hd_support_request::sr_status(), 'option_line_code', 'option_line_value', $$class->status, 'status'); ?></li>
+       <li><?php $f->l_text_field_dm('subject'); ?></li>
+      </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
-      <div class="large_shadow_box"> 
-       <ul class="column header_field"> 
-        <li><label>Education</label><?php $f->text_field_dl('min_education'); ?> 					</li>
-        <li><label>Experience</label><?php $f->text_field_dl('min_experience'); ?> 					</li>
-        <li><label>Technology</label><?php $f->text_field_dl('technology'); ?> 					</li>
-        <li><label>Skill Set</label><?php $f->text_field_dl('skillset'); ?> 					</li>
-       </ul>
-      </div>
-     </div>
-     <div id="tabsHeader-3" class="tabContent">
       <div> <?php echo ino_attachement($file) ?> </div>
      </div>
-     <div id="tabsHeader-4" class="tabContent">
+     <div id="tabsHeader-3" class="tabContent">
       <div> 
        <div id="comments">
         <div id="comment_list">
@@ -49,8 +48,8 @@
         </div>
         <div id ="display_comment_form">
          <?php
-         $reference_table = 'hr_job';
-         $reference_id = $$class->hr_job_id;
+         $reference_table = 'hd_support_request';
+         $reference_id = $$class->hd_support_request_id;
          ?>
         </div>
         <div id="new_comment">
@@ -62,41 +61,64 @@
 
    </div>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading">job Details & Responsibility </span>
+
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Request Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1">Job Details</a></li>
-     <li><a href="#tabsLine-2">Responsibility</a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Description') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Assignment') ?></a></li>
+     <li><a href="#tabsLine-3"><?php echo gettext('Resolution') ?></a></li>
+     <li><a href="#tabsLine-4"><?php echo gettext('Closure') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
-      <div><label class="text_area_label">Job Details  :</label><?php
-       echo $f->text_area_ap(array('name' => 'job_details', 'value' => $$class->job_details,
-        'row_size' => '10', 'column_size' => '90'));
-       ?> 	
-      </div> 
+      <?php echo form::text_area('description', $$class->description, '5', '140', 1, '', 'description'); ?>
+      <!--end of tab1 div three_column-->
      </div> 
      <div id="tabsLine-2"  class="tabContent">
-      <div><label class="text_area_label">Primary Responsibility  :</label><?php
-       echo $f->text_area_ap(array('name' => 'primary_responsibility', 'value' => $$class->primary_responsibility,
-        'row_size' => '10', 'column_size' => '90'));
-       ?> 	
-      </div> 
+      <ul class="column header_field"> 
+       <li><?php $f->l_text_field_d('assignment_group'); ?></li>
+       <li><?php
+        $f->l_text_field_d('assigned_username', 'username');
+        echo $f->hidden_field_withCLass('assigned_to_user_id', $$class->assigned_to_user_id, 'user_id');
+        ?>
+        <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="user_id select_popup clickable">
+       </li>
+      </ul>
+     </div>
+          <div id="tabsLine-3"  class="tabContent">
+      <?php echo form::text_area('resolution_details', $$class->resolution_details, '5', '140', '', '', 'description'); ?>
+     </div>
+     <div id="tabsLine-4"  class="tabContent">
+      <ul class="column header_field"> 
+       <li><?php $f->l_text_field_d('close_code'); ?></li>
+              <li><?php
+        $f->l_text_field_d('closed_by_username', 'username');
+        echo $f->hidden_field_withCLass('closed_by_user_id', $$class->closed_by_user_id, 'user_id');
+        ?>
+        <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="user_id select_popup clickable">
+       </li>
+       <li><?php $f->l_date_fieldAnyDay('closed_date', $$class->closed_date); ?></li>
+      </ul>
      </div>
     </div>
-   </div> 
+   </div>
+
   </div> 
- </form>
+</div> 
+</form>
 </div>
+
+
 <div id="js_data">
  <ul id="js_saving_data">
-  <li class="headerClassName" data-headerClassName="hr_job" ></li>
+  <li class="headerClassName" data-headerClassName="hd_support_request" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="true" ></li>
-  <li class="primary_column_id" data-primary_column_id="hr_job_id" ></li>
-  <li class="form_header_id" data-form_header_id="hr_job" ></li>
+  <li class="primary_column_id" data-primary_column_id="hd_support_request_id" ></li>
+  <li class="form_header_id" data-form_header_id="hd_support_request" ></li>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedaderId" data-docHedaderId="hr_job_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="hr_job_id" ></li>
+  <li class="docHedaderId" data-docHedaderId="hd_support_request_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="hd_support_request" ></li>
  </ul>
 </div>

@@ -49,6 +49,10 @@ function start_next_program() {
   $sys_prg->class = $prg_schedule->program_class_name;
   $sys_prg->program_name = $prg_schedule->program_name;
   $sys_prg->program_source = 'SCHEDULER';
+  $sys_prg->request_type = $prg_schedule->request_type;
+  $sys_prg->report_query = $prg_schedule->report_query;
+  $sys_prg->op_email_address = $prg_schedule->op_email_address;
+  $sys_prg->op_email_format = $prg_schedule->op_email_format;
   $sys_prg->creation_date = $curr_time->format('Y-m-d');
 
   $existing_schl = $sys_prg->findBy_schdule_details();

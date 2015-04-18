@@ -3,14 +3,17 @@
  if (!empty($total_count)) {
   ?>
   <div id="searchResultMessages">
-   <ul class="inline_list">
+   <div class='well-lg'>
+    <ul class="inline_list">
     <li>Download All Data in </li>
     <li>
      <!--download page creation for all records-->
      <?php
      if (!empty($all_download_sql)) {
-      $search_class_obj_all = $$class->findBySql($all_download_sql);
-      $search_class_array_all = json_decode(json_encode($search_class_obj_all), true);
+      if (empty($search_class_array_all)) {
+       $search_class_obj_all = $$class->findBySql($all_download_sql);
+       $search_class_array_all = json_decode(json_encode($search_class_obj_all), true);
+      }
       ?>
       <!--download page form-->
       <form action="<?php echo HOME_URL; ?>download.php" method="POST" name="download_all" id="download_all" target="_blank">
@@ -31,6 +34,8 @@
     <li><button class="btn btn-primary" type="button">Accessible Records <span class="badge"><?php echo $total_count; ?></span></button></li>
     <li><button class="btn btn-warning" type="button">Total Records <span class="badge"><?php echo $total_count_all; ?></span></button></li>
    </ul>
+   </div>
+   
   </div>
  <?php } ?>
  <div id="scrollElement">

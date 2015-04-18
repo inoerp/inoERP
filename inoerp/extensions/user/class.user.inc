@@ -65,7 +65,8 @@ class user extends dbObject {
   "username",
   "first_name",
   "last_name",
-  "email"
+  "email",
+  "phone",
  ];
  public $requiredField = [
   "username",
@@ -311,30 +312,24 @@ class user extends dbObject {
  }
 
  public function _after_save() {
-  global $si;
+  global $si; 
   if ($this->user_id) {
    $msg = "New user registration is sucessful!";
    $subject = "User Registrtion @ " . $si->site_name;
    $message = "Dear " . $this->username . '<br> your regitraton is sucessful';
 //    $replyto = "From : admin@site.com";
-   $to = $this->email;
    $subject = "User Reginstration @" . $si->site_name;
    $message = "<html> <body>Dear " . $this->username . ',<br><br>';
    $message .= "<p>Welcome to " . $si->site_name . ' <br>You can now access the site with your registered user '
     . ' name & password ';
    $message .='<br><br>Thanks<br>' . $si->site_name . '</body></html>';
-   $from = "admin@" . $si->site_name;
-   $headers = "From: $from\r\n";
-   $headers .= "Content-type: text/html\r\n";
-   try {
-    if (mail($to, $subject, $message, $headers)) {
-     $msg = "mail has been sent";
-    } else {
-     $msg = "mail failed!";
-    }//email complete
-   } catch (Exception $e) {
-    echo "<br>Failed to send e-mail. Error @ class_user @@ " . __LINE__ . $e->getMessage();
-   }
+   $im = new inomail();
+   $im->FromName =  $si->site_name;
+   $im->addAddress($this->email, $this->username );
+   $im->addReplyTo($si->email, 'User Registration');
+   $im->Subject = $subject;
+   $im->Body = $message;
+   $im->ino_sendMail();
   }//new user registration complete
   else {
    $msg = "New user registration Failed!" . mysql_error();

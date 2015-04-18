@@ -160,7 +160,7 @@
 
   <div class="container-fluid">
    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
+    <div class="col-sm-3 col-md-2 sidebar">
      <div id="accordion">
       <h3 class="clickable nav-panel"><i class="fa fa-warning"></i> Transaction Alerts</h3>
       <div>
@@ -184,7 +184,7 @@
       <h3 class="clickable nav-panel recent-visits"><i class="fa fa-history"></i> Recent Visits</h3>
       <div>
        <div id="recent-visits">
-        <?php echo ino_recent_visits();  ?>
+        <?php echo ino_recent_visits(); ?>
        </div>
       </div>
 
@@ -193,74 +193,76 @@
     <div id="divider-bar" class="col-m-1"><i class="fa fa-toggle-left clickable"></i></div>
 
     <div id="erp_form_area" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
-      <div id="content">
-       <div id="structure"><span class="heading">
-         <?php
-         if (!empty($_GET['function_name'])) {
-          echo '<div class="alert alert-info" role="alert" >' . ucwords(str_replace('_', ' ', $_GET['function_name'])) . ' Report</div>';
-         }else{
-           echo '<div class="alert alert-info" role="alert" >Search' .  ucwords(str_replace('_', ' ', $class)) . '</div>';
-         }
-         ?>
-        </span>
-        <div id="search_page">
-         <div id ="form_header">
-          <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
-         </div>
-         <div id="list_contents">
-          <div id="searchForm" ><div class='hideDiv_input'></div>
-           <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
-          <div id="searchResult">
-           <?php
-           if (!empty($total_count)) {
-            ?>
-            <div id="searchResultMessages">
-              <ul class="inline_list">
-              <li>Download All Data in </li>
-              <li>
-               <!--download page creation for all records-->
-               <?php
-               if (!empty($all_download_sql)) {
+     <div id="content">
+      <div id="structure"><span class="heading">
+        <?php
+        if (!empty($_GET['function_name'])) {
+         echo '<div class="alert alert-info" role="alert" >' . ucwords(str_replace('_', ' ', $_GET['function_name'])) . ' Report</div>';
+        } else {
+         echo '<div class="alert alert-info" role="alert" >Search ' . ucwords(str_replace('_', ' ', $class)) . '</div>';
+        }
+        ?>
+       </span>
+       <div id="search_page">
+        <div id ="form_header">
+         <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
+        </div>
+        <div id="list_contents">
+         <div id="searchForm" ><div class='hideDiv_input'></div>
+          <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
+         <div id="searchResult" class="heading">
+          <?php
+          if (!empty($total_count)) {
+           ?>
+           <div id="searchResultMessages">
+            <ul class="inline_list">
+             <li>Download All Data in </li>
+             <li>
+              <!--download page creation for all records-->
+              <?php
+              if (!empty($all_download_sql)) {
+               if (empty($search_class_array_all)) {
                 $search_class_obj_all = $$class->findBySql($all_download_sql);
                 $search_class_array_all = json_decode(json_encode($search_class_obj_all), true);
-                ?>
-                <!--download page form-->
-                <form action="<?php echo HOME_URL; ?>download.php" method="POST" name="download_all" id="download_all" target="_blank">
-                 <input type="hidden"  name="data" value="<?php print base64_encode(serialize($search_class_array_all)) ?>" >
-                 <input type="radio" name="download_format" checked="checked" value="excel_format">Excel 
-                 <input type="radio" name="download_format" value="text_format">Text
-                 <input type="radio" name="download_format" value="pdf_format">Pdf
-                 <input type="radio" name="download_format" value="xml_format">XML
-                 <input type="radio" name="download_format" value="worddoc_format">Word Doc
-                 <input type="submit"  name="export_allResult" value="Download" id="export_excel_allResult" class="clickable button"  >
-                </form>
-               <?php }
+               }
                ?>
-               <!--download page completion-->	 
-              </li>
-              <li id="export_excel_searchResult" class="clickable" title="Export to Excel"><i class="fa fa-file-excel-o"></i></li>
-              <li id="print_searchResult" class="print clickable" title="Print"><i class="fa fa-print"></i></li>
-              <li><button class="btn btn-primary" type="button">Total records <span class="badge"><?php echo $total_count; ?></span></button></li>
-             </ul>
-            </div>
-           <?php } ?>
-           <div id="scrollElement">
-            <div id="print">
-             <div id="search_result"> <?php echo!(empty($search_result_statement)) ? $search_result_statement : ""; ?></div>
-            </div>
+               <!--download page form-->
+               <form action="<?php echo HOME_URL; ?>download.php" method="POST" name="download_all" id="download_all" target="_blank">
+                <input type="hidden"  name="data" value="<?php print base64_encode(serialize($search_class_array_all)) ?>" >
+                <input type="radio" name="download_format" checked="checked" value="excel_format">Excel 
+                <input type="radio" name="download_format" value="text_format">Text
+                <input type="radio" name="download_format" value="pdf_format">Pdf
+                <input type="radio" name="download_format" value="xml_format">XML
+                <input type="radio" name="download_format" value="worddoc_format">Word Doc
+                <input type="submit"  name="export_allResult" value="Download" id="export_excel_allResult" class="clickable button"  >
+               </form>
+              <?php }
+              ?>
+              <!--download page completion-->	 
+             </li>
+             <li id="export_excel_searchResult" class="clickable" title="Export to Excel"><i class="fa fa-file-excel-o"></i></li>
+             <li id="print_searchResult" class="print clickable" title="Print"><i class="fa fa-print"></i></li>
+             <li><button class="btn btn-primary" type="button">Total records <span class="badge"><?php echo $total_count; ?></span></button></li>
+            </ul>
            </div>
-           <div class="pagination" style="clear: both;">
-            <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
-            ?>
+          <?php } ?>
+          <div id="scrollElement">
+           <div id="print">
+            <div id="search_result"> <?php echo!(empty($search_result_statement)) ? $search_result_statement : ""; ?></div>
            </div>
-
+          </div>
+          <div class="pagination" style="clear: both;">
+           <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
+           ?>
           </div>
 
          </div>
+
         </div>
        </div>
-       <!--   end of structure-->
       </div>
+      <!--   end of structure-->
+     </div>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
      <div class="hidden" id="document_history"></div>

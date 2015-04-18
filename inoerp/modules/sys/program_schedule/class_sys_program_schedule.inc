@@ -31,6 +31,10 @@ class sys_program_schedule extends dbObject {
   'module_name' => 'sys',
   'weight' => 13
  ];
+ public static $request_type_a = [
+  'REPORT' => 'Report',
+  'PROGRAM' => 'Program'
+ ];
  public static $frequency_uom_a = [
   'MINUTELY' => 'Minutely',
   'HOURLY' => 'Hourly',
@@ -46,25 +50,29 @@ class sys_program_schedule extends dbObject {
   'one_time_cb',
   'increase_date_parameter_cb',
   'program_name',
+  'request_type',
   'description',
   'parameter',
   'module_name',
   'program_class_name',
+  'report_query',
   'status',
   'start_date_time',
+  'op_email_address',
+  'op_email_format',
   'output_path',
   'created_by',
   'creation_date',
   'last_update_by',
   'last_update_date',
  ];
- 
-  public $column = [
+ public $column = [
   'sys_program_schedule_id',
   'frequency_uom',
   'frequency_value',
   'one_time_cb',
   'increase_date_parameter_cb',
+  'request_type',
   'program_name',
   'description',
   'module_name',
@@ -72,7 +80,6 @@ class sys_program_schedule extends dbObject {
   'status',
   'start_date_time',
  ];
-  
  public $initial_search = [
   'program_name',
   'description',
@@ -81,6 +88,9 @@ class sys_program_schedule extends dbObject {
  public $requiredField = [
   'program_name',
   'program_class_name',
+ ];
+ public $base_encoded_array = [
+  "report_query"
  ];
  public $sys_program_schedule_id;
  public $frequency_uom;
@@ -91,9 +101,13 @@ class sys_program_schedule extends dbObject {
  public $description;
  public $parameter;
  public $module_name;
+ public $request_type;
  public $program_class_name;
+ public $report_query;
  public $status;
  public $start_date_time;
+ public $op_email_address;
+ public $op_email_format;
  public $output_path;
  public $created_by;
  public $creation_date;

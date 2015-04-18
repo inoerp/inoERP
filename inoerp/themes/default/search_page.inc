@@ -200,7 +200,7 @@
         if (!empty($_GET['function_name'])) {
          echo '<div class="alert alert-info" role="alert" >' . ucwords(str_replace('_', ' ', $_GET['function_name'])) . ' Report</div>';
         } else {
-         echo '<div class="alert alert-info" role="alert" >Search' . ucwords(str_replace('_', ' ', $class)) . '</div>';
+         echo '<div class="alert alert-info" role="alert" >Search ' . ucwords(str_replace('_', ' ', $class)) . '</div>';
         }
         ?>
        </span>
@@ -215,15 +215,17 @@
           <?php
           if (!empty($total_count)) {
            ?>
-           <div id="searchResultMessages">
-            <ul class="inline_list">
+           <div id="searchResultMessages" >
+            <ul class="inline_list heading">
              <li>Download All Data in </li>
              <li>
               <!--download page creation for all records-->
               <?php
               if (!empty($all_download_sql)) {
-               $search_class_obj_all = $$class->findBySql($all_download_sql);
-               $search_class_array_all = json_decode(json_encode($search_class_obj_all), true);
+               if (empty($search_class_array_all)) {
+                $search_class_obj_all = $$class->findBySql($all_download_sql);
+                $search_class_array_all = json_decode(json_encode($search_class_obj_all), true);
+               }
                ?>
                <!--download page form-->
                <form action="<?php echo HOME_URL; ?>download.php" method="POST" name="download_all" id="download_all" target="_blank">

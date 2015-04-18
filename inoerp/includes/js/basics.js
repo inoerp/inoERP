@@ -2933,7 +2933,7 @@ $(document).ready(function () {
        if (localStorage.getItem("set_value_for_one_field") !== null) {
         window.opener.$(close_field_class).parent().find(field_d).val(v.field_value);
        } else {
-        window.opener.$(close_field_class).closest('form').find(field_d).val(v.field_value);
+        window.opener.$(close_field_class).closest('.tabContent').find(field_d).val(v.field_value);
        }
       }
      });
@@ -3122,10 +3122,8 @@ $(document).ready(function () {
   void window.open(openUrl, '_blank',
           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
-
-
-
- //popu for selecting accounts
+ 
+//popu for selecting accounts
  $('body').on('click', '.select_account.select_popup', function () {
   var ulink = 'select.php?class_name=coa_combination';
   var elemenType = $(this).parent().prop('tagName');
@@ -3622,6 +3620,14 @@ $(document).ready(function () {
   void window.open('select.php?class_name=supplier', '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
+ 
+ //selecting user
+ $('body').on("click", '.user_id.select_popup', function () {
+    var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+  void window.open('select.php?class_name=user', '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
 
  onClick_addDetailLine(2, '.add_row_detail_img3', 'tabsDetailC');
  $('#content').on('change', '.sys_extra_field_id', function () {
@@ -3851,23 +3857,8 @@ $(document).ready(function () {
    var formUrl = urlLink;
   }
   getFormDetails(formUrl);
- })
+ });
 
-// $('#sys_menu_left_vertical .menu a').on('click', function (e) {
-//  e.preventDefault();
-//  var urlLink = $(this).attr('href');
-//  var urlLink_a = urlLink.split('?');
-//  var urlLink_firstPart_a = urlLink_a[0].split('/');
-//  var pageType = urlLink_firstPart_a.pop();
-//  if (pageType == 'form.php') {
-//   var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
-//  } else if (pageType == 'program.php') {
-//   var formUrl = 'includes/json/json_program.php?' + urlLink_a[1];
-//  } else {
-//   var formUrl = urlLink;
-//  }
-//  getFormDetails(formUrl);
-// }).one();
 
  $('body').on('click', '#pagination a.content_per_page', function (e) {
   e.preventDefault();
@@ -4172,32 +4163,6 @@ $(document).ready(function () {
   $('#searchForm').find('.search_asc_desc').val('desc');
   getSelectResult();
  });
-
-
-
- $('select.search_document_list').find('option[value="gl_calendar"]').prepend('<i class="fa fa-calendar"></i> ');
- $('select.search_document_list').find('option[value="mdm_bank_header"]').prepend('<i class="fa fa-bank"></i> ');
- $('select.search_document_list').find('option[value="bc_label_format_header"]').prepend('<i class="fa fa-barcode"></i> ');
- $('select.search_document_list').find('option[value="gl_journal_header"]').prepend('<i class="fa fa-book"></i> ');
- $('select.search_document_list').find('option[value="all"]').prepend('<i class="fa fa-database"></i> ');
- $('select.search_document_list').find('option[value="org"]').prepend('<i class="fa fa-university  "></i> ');
- $('select.search_document_list').find('option[value="supplier"]').prepend('<i class="fa fa-university"></i> ');
- $('select.search_document_list').find('option[value="ar_customer"]').prepend('<i class="fa fa-university"></i> ');
- $('select.search_document_list').find('option[value="user"]').prepend('<i class="fa fa-user"></i> ');
- $('select.search_document_list').find('option[value="all_bom_routing_v"]').prepend('<i class="fa fa-cog"></i> ');
- $('select.search_document_list').find('option[value="bom_header"]').prepend('<i class="fa fa-sitemap"></i> ');
- $('select.search_document_list').find('option[value="sd_so_header"]').prepend('<i class="fa fa-shopping-cart"></i> ');
- $('select.search_document_list').find('option[value="po_header"]').prepend('<i class="fa fa-file-text-o"></i> ');
- $('select.search_document_list').find('option[value="item"]').prepend('<i class="fa fa-tags"></i> ');
- $('select.search_document_list').find('option[value="address"]').prepend('<i class="fa fa-bars"></i> ');
- $('select.search_document_list').find('option[value="cc_co_header"]').prepend('<i class="fa fa-square-o"></i> ');
- $('select.search_document_list').find('option[value="inv_receipt_header"]').prepend('<i class="fa fa-square-o"></i> ');
- $('select.search_document_list').find('option[value="sd_delivery_header"]').prepend('<i class="fa fa-truck"></i> ');
- $('select.search_document_list').find('option[value="inv_transaction"]').prepend('<i class="fa fa-tasks"></i> ');
- $('select.search_document_list').find('option[value="ar_receipt_header"]').prepend('<i class="fa fa-money"></i> ');
- $('select.search_document_list').find('option[value="ap_payment_header"]').prepend('<i class="fa fa-money"></i> ');
- $('select.search_document_list').find('option[value="ap_transaction_header"]').prepend('<i class="fa fa-info-circle"></i> ');
- $('select.search_document_list').find('option[value="ar_transaction_header"]').prepend('<i class="fa fa-info-circle"></i> ');
 
 
  $('body').on('click', '#reset_program', function () {

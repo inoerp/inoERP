@@ -18,24 +18,33 @@
      <div class="tabContainer"> 
       <div id="tabsHeader-1" class="tabContent">
        <ul id='dashborad_menu'>
-        <li><a href="form.php?module_code=inv"><i class="fa fa-bank"></i> <?php echo gettext('Inventory') ; ?></a></li>
-        <li><a href="form.php?module_code=sd"><i class="fa fa-truck"></i> <?php echo gettext('Sales & Distribution') ; ?> </a></li>
-        <li><a href="form.php?module_code=sys"><i class="fa fa-file-text-o"></i> <?php echo gettext('Purchasing') ; ?></a></li>
-        <li><a href="form.php?module_code=bom"><i class="fa fa-sitemap"></i> <?php echo gettext('Bills Of Material') ; ?></a></li>
-        <li><a href="form.php?module_code=cst"><i class="fa fa-cubes"></i> <?php echo gettext('Cost Management') ; ?> </a></li>
-        <li><a href="form.php?module_code=wip"><i class="fa fa-tasks"></i> <?php echo gettext('WIP & MES') ; ?> </a></li>
-        <li><a href="form.php?module_code=fp"><i class="fa fa-th-large"></i> <?php echo gettext('Forecast & Planning') ; ?> </a></li>
-        <li><a href="form.php?module_code=am"><i class="fa fa-wrench"></i> <?php echo gettext('Asset Maintenance') ; ?> </a></li>
-        <li><a href="form.php?module_code=pos"><i class="fa fa-shopping-cart"></i> <?php echo gettext('Point Of Sale') ; ?> </a></li>
-        <li><a href="form.php?module_code=ec"><i class="fa fa-globe"></i> <?php echo gettext('eCommerce') ; ?> </a></li>
-        <li><a href="form.php?module_code=gl"><i class="fa fa-money"></i> <?php echo gettext('General Ledger') ; ?></a></li>
-        <li><a href="form.php?module_code=sys"><span class='inline'><j class="fa fa-dollar"></j><i class="fa fa-arrow-circle-right"></i></span> <?php echo gettext('Accounts Payable') ; ?> </a></li>
-        <li><a href="form.php?module_code=sys"><span class='inline'><j class="fa fa-dollar"></j><i class="fa fa-arrow-circle-left"></i></span> <?php echo gettext('Accounts Receivable') ; ?></a></li>
-        <li><a href="form.php?module_code=fa"><i class="fa fa-building"></i> <?php echo gettext('Fixed Asset') ; ?> </a></li>
-        <li><a href="form.php?module_code=hr"><i class="fa fa-users"></i> <?php echo gettext('Human Resource') ; ?> </a></li>
-        <li><a href="form.php?module_code=sys"><i class="fa fa-database"></i> <?php echo gettext('Admin') ; ?></a></li>
-        <li><a href="form.php?module_code=sys"><i class="fa fa-cogs"></i> <?php echo gettext('Global Setup') ; ?></a></li>
-        <li><a href="form.php?module_code=sys"><i class="fa fa-book"></i> <?php echo gettext('Document & Analysis') ; ?> </a></li>
+        <li><a href="form.php?module_code=inv"><i class="fa fa-bank"></i> <?php echo gettext('Inventory'); ?></a></li>
+        <li><a href="form.php?module_code=sd"><i class="fa fa-truck"></i> <?php echo gettext('Sales & Distribution'); ?> </a></li>
+        <li><a href="form.php?module_code=pur"><i class="fa fa-file-text-o"></i> <?php echo gettext('Purchasing'); ?></a></li>
+        <li><a href="form.php?module_code=bom"><i class="fa fa-sitemap"></i> <?php echo gettext('Bills Of Material'); ?></a></li>
+        <li><a href="form.php?module_code=cst"><i class="fa fa-cubes"></i> <?php echo gettext('Cost Management'); ?> </a></li>
+        <li><a href="form.php?module_code=wip"><i class="fa fa-tasks"></i> <?php echo gettext('WIP & MES'); ?> </a></li>
+        <li><a href="form.php?module_code=fp"><i class="fa fa-th-large"></i> <?php echo gettext('Forecast & Planning'); ?> </a></li>
+        <li><a href="form.php?module_code=am"><i class="fa fa-wrench"></i> <?php echo gettext('Asset Maintenance'); ?> </a></li>
+        <li><a href="form.php?module_code=pos"><i class="fa fa-shopping-cart"></i> <?php echo gettext('Point Of Sale'); ?> </a></li>
+        <li><a href="form.php?module_code=ec"><i class="fa fa-globe"></i> <?php echo gettext('eCommerce'); ?> </a></li>
+        <li><a href="form.php?module_code=gl"><i class="fa fa-money"></i> <?php echo gettext('General Ledger'); ?></a></li>
+        <li><a href="form.php?module_code=ap"><dl class='inline-list'>
+           <dd class='inline'><k class="fa fa-arrow-circle-left"></k></dd>
+           <dd class='inline'><j class="fa fa-dollar"></j></dd>
+           <dd class='inline'><i class="fa fa-arrow-circle-right"></i></dd></dl>
+          <?php echo gettext('Payable'); ?> </a></li>
+        <li><a href="form.php?module_code=ar"><dl class='inline-list'>
+           <dd class='inline'><k class="fa fa-arrow-circle-right"></k></dd>
+           <dd class='inline'><j class="fa fa-dollar"></j></dd>
+           <dd class='inline'><i class="fa fa-arrow-circle-left"></i></dd></dl>
+          <?php echo gettext('Receivable'); ?> </a></li>
+        <li><a href="form.php?module_code=fa"><i class="fa fa-building"></i> <?php echo gettext('Fixed Asset'); ?> </a></li>
+        <li><a href="form.php?module_code=hr"><i class="fa fa-users"></i> <?php echo gettext('Human Resource'); ?> </a></li>
+        <li><a href="form.php?module_code=hd"><i class="fa fa-support"></i> <?php echo gettext('Help Desk'); ?> </a></li>
+        <li><a href="form.php?module_code=adm"><i class="fa fa-database"></i> <?php echo gettext('Admin'); ?></a></li>
+        <li><a href="form.php?module_code=sys"><i class="fa fa-cogs"></i> <?php echo gettext('Global Setup'); ?></a></li>
+        <li><a href="form.php?module_code=da"><i class="fa fa-book"></i> <?php echo gettext('Document & Analysis'); ?> </a></li>
        </ul>
 
       </div>

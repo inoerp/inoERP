@@ -1,6 +1,6 @@
 <div id ="form_header">
  <form action=""  method="post" id="sys_program_schedule"  name="sys_program_schedule">
-  <span class="heading">Program Schedule </span>
+  <span class="heading">Program / Report Scheduler </span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
@@ -19,6 +19,7 @@
          <i class="fa fa-refresh"></i></a> 
        </li>
        <li><?php $f->l_text_field_dm('program_name'); ?> 					</li>
+       <li><?php $f->l_select_field_from_array('request_type', sys_program_schedule::$request_type_a, $$class->request_type, 'request_type', '', 1); ?> 					</li>
        <li><?php $f->l_text_field_dm('program_class_name'); ?> 					</li>
        <li><?php $f->l_text_field_d('module_name'); ?> 					</li>
        <li><?php $f->l_select_field_from_array('frequency_uom', sys_program_schedule::$frequency_uom_a, $$class->frequency_uom, 'frequency_uom', '', 1); ?> 					</li>
@@ -29,6 +30,7 @@
        <li><?php $f->l_text_field_d('description'); ?> 					</li>
        <li><?php $f->l_status_field_d('status'); ?> 					</li>
        <li><?php $f->l_text_field_d('output_path'); ?> 					</li>
+       <li><label>Email Format</label><?php echo $f->select_field_from_array('email_format', dbObject::$download_format, 'excel_format') ?> </li>
       </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
@@ -60,18 +62,18 @@
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Entered Parameters') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo gettext('Day Calendar') ?></a></li>
-     <li><a href="#tabsLine-3"><?php echo gettext('Date Calendar') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Report Query') ?></a></li>
+     <li><a href="#tabsLine-3"><?php echo gettext('Email Address') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <?php echo form::text_area('parameter', $$class->parameter, '10', '150', '', '', '', 1); ?>
      </div>
-     <div id="tabsLine-2" class="tabContent">
-      <?php echo form::text_area('parameter', $$class->parameter, '10', '150', '', '', '', 1); ?>
+     <div id="tabsLine-2" class="tabContent"><label>SQL Query</label>
+      <?php echo form::text_area('parameter', base64_decode($$class->report_query), '10', '150', '', '', '', 1); ?>
      </div>
      <div id="tabsLine-3" class="tabContent">
-      <?php echo form::text_area('parameter', $$class->parameter, '10', '150', '', '', '', 1); ?>
+      <?php echo form::text_area('email_addresses', $$class->op_email_address, '3', '120', '', 'Separate each email address by comma(,) or a new line','',1) ?>
      </div>
     </div>
    </div>

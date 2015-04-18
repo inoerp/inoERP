@@ -48,6 +48,7 @@
   $search->setProperty('_per_page', filter_input(INPUT_GET, 'per_page'));
   $search->setProperty('_searching_class', $class);
   $search->setProperty('_form_post_link', 'select');
+  $search->setProperty('_window_type', 'popover');
   $search->setProperty('_initial_search_array', $$class->initial_search);
   $search_form = $search->search_form($$class);
   $select_result_statement = $search->select_result_op();

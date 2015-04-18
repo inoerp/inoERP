@@ -240,7 +240,80 @@ if (!empty($_GET['class_name'])) {
  $s->setProperty('column_array_s', $column_array);
  $search_result_statement = $search->search_result_op();
 
+
+//check for schduling and schdule the report accordingly
+ if (!empty($_GET['frequency_uom'][0]) && !empty($_GET['frequency_value'][0])) {
+  $ps = new sys_program_schedule();
+  $ps->program_class_name = $class;
+  $program_name = !empty($function_name) ? $function_name : 'search_records';
+  $ps->program_name = $program_name;
+  $ps->frequency_uom = $_GET['frequency_uom'][0];
+  $ps->frequency_value = $_GET['frequency_value'][0];
+  $ps->start_date_time = $_GET['start_date_time'][0];
+  $ps->op_email_address = $_GET['email_addresses'][0];
+  $ps->op_email_format = $_GET['email_format'][0];
+  $ps->status = 'ACTIVE';
+  $ps->request_type = 'REPORT';
+  $ps->parameter = serialize($postArray);
+  $ps->report_query = base64_encode($all_download_sql);
+  try {
+   $ps->save();
+   echo "<div class='message'>The program is sucessfully schduled.sys_program_schedule_id id  " . $ps->sys_program_schedule_id . '</div>';
+  } catch (Exception $e) {
+   echo "<br>Unable to schedule the program. Error @ class_sys_program @@ line " . __LINE__ . '<br>' . $e->getMessage();
+  }
+ }
+
+
+ $search_class_obj_all = $$class->findBySql($all_download_sql);
+ $search_class_array_all = json_decode(json_encode($search_class_obj_all), true);
+
+ if (!empty($_GET['email_addresses'])) {
+  //send email
+  $im = new inomail();
+  $im->FromName = $si->site_name;
+  $email_a = explode(',', $_GET['email_addresses'][0]);
+  foreach ($email_a as $em_k => $email_v) {
+   $im->addAddress($email_v);
+  }
+  $im->addReplyTo($si->email, 'Search Output');
+  $im->Subject = 'Search Result';
+  $im->Body = 'Please find attached the search result';
+
+  switch ($_GET['email_format'][0]) {
+   case 'text_format' :
+    $report_op = array2text($search_class_array_all);
+    $file_name = date("Y-m-d") . '_' . $class . '_report_output.txt';
+    break;
+
+   case 'pdf_format' :
+    $report_op = array2pdf($search_class_array_all);
+    $file_name = date("Y-m-d") . '_' . $class . '_report_output.pdf';
+    break;
+
+   case 'xml_format' :
+    $report_op = array2xml($search_class_array_all);
+    $file_name = date("Y-m-d") . '_' . $class . '_report_output.txt';
+    break;
+
+   case 'worddoc_format' :
+    $report_op = array2worddoc($search_class_array_all);
+    $file_name = date("Y-m-d") . '_' . $class . '_report_output.doc';
+    break;
+
+   default :
+    $report_op = array2csv($search_class_array_all);
+    $file_name = date("Y-m-d") . '_' . $class . '_report_output.csv';
+    break;
+  }
+
+  $im->addStringAttachment($report_op, $file_name);
+  $im->ino_sendMail();
+ }
+
  include_once(__DIR__ . '/../template/json_search_template.inc');
  echo '</div>';
+
+ $dbc->confirm();
 }
 ?>

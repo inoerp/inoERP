@@ -33,29 +33,29 @@ class extn_site_search extends dbObject {
   'weight' => 6
  ];
  public static $search_document_list_a = [
-  'all' => 'All Elements',
-  'address' => 'Address',
-  'ap_payment_header' => 'AP Payment',
-  'ap_transaction_header' => 'AP Invoice',
-  'ar_transaction_header' => 'AR Invoice',
-  'ar_receipt_header' => 'AR Receipt',
-  'mdm_bank_header' => 'Bank',
-  'bc_label_format_header' => 'Barcode',
-  'bom_header' => 'Bills Of Material',
-  'cc_co_header' => 'Change Order',
-  'ar_customer' => 'Customer',
-  'gl_calendar' => 'GL Calendar',
-  'gl_journal_header' => 'Journal',
-  'inv_transaction' => 'Inventory Transactions',
-  'item' => 'Item',
-  'org' => 'Org',
-  'po_header' => 'Purchase Order',
-  'inv_receipt_header' => 'PO Receipt',
-  'all_bom_routing_v' => 'Routing',
-  'sd_so_header' => 'Sales Order',
-  'sd_delivery_header' => 'Sales Delivery',
-  'supplier' => 'Supplier',
-  'user' => 'User',
+  'all' => '&#xf103; All Elements',
+  'address' => '&#xf0c9; Address',
+  'ap_payment_header' => '&#xf0d6; AP Payment',
+  'ap_transaction_header' => '&#xf05a; AP Invoice',
+  'ar_transaction_header' => '&#xf05a; AR Invoice',
+  'ar_receipt_header' => '&#xf0d6; AR Receipt',
+  'mdm_bank_header' => '&#xf19c; Bank',
+  'bc_label_format_header' => '&#xf080; Barcode',
+  'bom_header' => '&#xf0e8; Bills Of Material',
+  'cc_co_header' => '&#xf147; Change Order',
+  'ar_customer' => '&#xf19c; Customer',
+  'gl_calendar' => '&#xf073; GL Calendar',
+  'gl_journal_header' => '&#xf02d; Journal',
+  'inv_transaction' => '&#xf0ae; Inventory Transactions',
+  'item' => '&#xf02c; Item',
+  'org' => '&#xf19c; Org',
+  'po_header' => '&#xf0f6; Purchase Order',
+  'inv_receipt_header' => '&#xf096; PO Receipt',
+  'all_bom_routing_v' => '&#xf085; Routing',
+  'sd_so_header' => '&#xf07a; Sales Order',
+  'sd_delivery_header' => '&#xf0d1; Sales Delivery',
+  'supplier' => '&#xf19c; Supplier',
+  'user' => '&#xf0f0; User',
  ];
  public $field_a = [
   "site_search_form_id",
@@ -474,7 +474,7 @@ class extn_site_search extends dbObject {
   $entry_form .= '<div class="col-lg-12">
             <div class="input-group">';
   $entry_form .= '<span class="input-group-btn left-side">'
-   . $f->select_field_from_array('search_document_list', self::$search_document_list_a, 'all', '', 'form-control') . '</span>';
+   . $f->select_field_from_array('search_document_list', self::$search_document_list_a, 'all', '', 'form-control fa-select') . '</span>';
   $entry_form .= ' <input type="text" class="form-control" name="search_text" placeholder="Data To Search...">
               <span class="input-group-btn">
                 <button class="btn btn-default" type="button"  id="site_search_submit">Go!</button>

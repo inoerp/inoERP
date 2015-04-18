@@ -20,6 +20,10 @@
 
 }
 
+.fa-select {
+    font-family: sans-serif, 'FontAwesome';
+}
+
 #overlay {
  position: absolute;
  top: 0;
@@ -46,6 +50,9 @@ blockquote{
  padding: 10px;
 }
 
+.full-width{
+ width: 1200px;
+}
 .clickable{
  cursor: pointer; 
  cursor: hand; 
@@ -332,16 +339,7 @@ ul.pages { padding-left: 2em; list-style: square; }
 }
 
 
-#search_form_divID{
- clear : both;
- margin: 10px 20px 20px;
- border-radius: 5px 5px 5px 5px;
- float: left;
- text-align: left;
- padding: 20px 15px;
- box-shadow: 1px 5px 10px 5px rgb(136, 136, 136);
- background-color: rgba(211, 215, 216, 0.68);
-}
+
 
 #searchResultMessages ul.inline_list img{
  width: 25px;
@@ -445,6 +443,8 @@ ul.commentRecord li ul.line{
 
 #attachments{
  margin: 15px 0px;
+ font-size: 1.2em;
+cursor: pointer;
 }
 
 #page_navigation, #content_navigation{
@@ -672,16 +672,16 @@ ul.inline_list li{
 }
 
 .heading1 {
-border-bottom: 2px dotted rgb(51, 153, 204);
+ border-bottom: 2px dotted rgb(51, 153, 204);
  margin-left: -10px;
  margin-right: -10px;
 
 }
 
 .heading1 .more_page a{
-        padding: 5px;
-        background-color: #39c;
-        font-size: 1.2em
+ padding: 5px;
+ background-color: #39c;
+ font-size: 1.2em
 }
 
 .front_page_summary{
@@ -1491,7 +1491,7 @@ ul.add_new_search li, ul.tabMain li{
  opacity: 0;
 }
 
-#comment_attachments{
+.input_file_btn{
  width: 140px;
 }
 
@@ -1519,7 +1519,7 @@ legend.major{
 }
 
 #file_upload_form ul li{
- vertical-align: top;
+ vertical-align: middle;
 }
 
 #file_upload_form .input-group{
@@ -1700,8 +1700,8 @@ ol {
 
 
 hr.light {
-    border-width: 2px !important;
-    margin: 5px 0px;
+ border-width: 2px !important;
+ margin: 5px 0px;
 }
 
 /*Some CSS*/
@@ -1710,47 +1710,47 @@ hr.light {
 
 /*Lets create the magnifying glass*/
 .large {
-	width: 350px; height: 350px;
-	position: absolute;
-	border-radius: 100%;
-	
-	/*Multiple box shadows to achieve the glass effect*/
-	box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85), 
-	0 0 7px 7px rgba(0, 0, 0, 0.25), 
-	inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
-	
+ width: 350px; height: 350px;
+ position: absolute;
+ border-radius: 100%;
 
-	/*hide the glass by default*/
-	display: none;
+ /*Multiple box shadows to achieve the glass effect*/
+ box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85), 
+  0 0 7px 7px rgba(0, 0, 0, 0.25), 
+  inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
+
+
+ /*hide the glass by default*/
+ display: none;
 }
 .sm-image{
-        height:120px;
+ height:120px;
 }
 ul.summary_list{
-position: relative; 
+ position: relative; 
 }
 
 ul.summary_list li.summary{
-        margin:  10px 40px;
-        word-wrap: break-word;
-        width: 200px;
-        height: 200px;
-        overflow:hidden;
-        vertical-align: bottom;
+ margin:  10px 40px;
+ word-wrap: break-word;
+ width: 200px;
+ height: 200px;
+ overflow:hidden;
+ vertical-align: bottom;
 }
 
 .move-left, .move-right{
  position: absolute;
-top: 50%;
+ top: 50%;
 }
 
 #product-view-divId .product.level-1{
-        height: 400px;
-        overflow: hidden;
+ height: 400px;
+ overflow: hidden;
 }
 
 .product .panel-footer {
-    padding: 10px 15px 50px 15px;
+ padding: 10px 15px 50px 15px;
 }
 
 .small-top-padding{
@@ -1759,43 +1759,43 @@ top: 50%;
 
 .vertical-list h3{
  border-color: rgb(204, 204, 204);
-padding: 5px 10px;
-margin: 10px -15px;
-border-width: 1px 0px;
-border-style: solid;
+ padding: 5px 10px;
+ margin: 10px -15px;
+ border-width: 1px 0px;
+ border-style: solid;
 }
 
 h3.odd{
-        background-color: #eee;
+ background-color: #eee;
 }
 
 h3.even{
-        background-color: rgba(237, 237, 207, 0.44);
+ background-color: rgba(237, 237, 207, 0.44);
 }
 
 h3.filter-title{
  padding: 0px 10px;
-margin-bottom: -10px;
-color: rgb(51, 153, 204);
-text-align: center;
-font-weight: bold;
+ margin-bottom: -10px;
+ color: rgb(51, 153, 204);
+ text-align: center;
+ font-weight: bold;
 }
 
 .not-active {
-   pointer-events: none;
-   cursor: default;
+ pointer-events: none;
+ cursor: default;
 }
 
 .category-browser-list li{
-        width: 250px;
-        overflow: hidden;
-        margin-right: 40px;
-        text-align: center;
-        margin-bottom: 20px;
+ width: 250px;
+ overflow: hidden;
+ margin-right: 40px;
+ text-align: center;
+ margin-bottom: 20px;
 }
 
 .fa-white{
-    color : #fff;
+ color : #fff;
 }
 
 a.buy-now{
@@ -1803,20 +1803,20 @@ a.buy-now{
 }
 
 .cart_values input{
-        height: 32px;
+ height: 32px;
 }
 
 .long-td {
-        width: 400px;
+ width: 400px;
 }
 
 #no-of-cart-items{
  vertical-align: top;
-margin: 5px;
+ margin: 5px;
 }
 
 .table-large .inline_action .fa{
-        margin : 6px;
+ margin : 6px;
 }
 
 .panel.address-stmt{
@@ -1827,16 +1827,16 @@ margin: 5px;
 
 .small-hint{
  font-size: 0.9em;
-background-color: yellow;
-padding: 2px 5px;
+ background-color: yellow;
+ padding: 2px 5px;
 }
 #dropdownMenu1{
  margin-top: 5px;
 }
 
 .button{
-        padding: 2px 10px;
-        margin-right: 10px;
+ padding: 2px 10px;
+ margin-right: 10px;
 }
 
 .tabContainer ul{
@@ -1844,27 +1844,58 @@ padding: 2px 5px;
 }
 
 .submit_program_form fieldset{
-        border: 2px solid #39c;
-        Padding: 10px;
-        margin: 50px 0 20px 0;
+ border: 2px solid #39c;
+ Padding: 10px;
+ margin: 10px;
 }
 
 .submit_program_form legend{
-        border: 2px solid #39c;
-        padding: 5px;
-        background-color: #39c;
-        color: #fff;
-        font-weight: bold;
-        font-size: 1em;
+ border: 2px solid #39c;
+ padding: 5px;
+ background-color: #39c;
+ color: #fff;
+ font-weight: bold;
+ font-size: 1em;
 }
 
 ul.simple_column label{
-        width: 40%;
-        text-align: right;
-        padding-right: 5px;
+ width: 40%;
+ text-align: right;
+ padding-right: 5px;
 
 }
 
 ul.simple_column li{
-        margin-bottom: 10px;
+ margin-bottom: 10px;
+}
+
+#program_form{
+ width: 1200px;
+}
+
+fieldset.parameters li label{
+        width: 200px;
+        text-align:right;
+        margin-right: 10px;
+}
+
+fieldset.parameters li:nth-child(odd) {
+background-color: #F2F2F2;
+}
+
+fieldset.parameters li {
+padding : 10px 0;
+margin: 0 -10px;        
+}
+
+
+dl.inline-list  dd{
+        margin: 0 2px;
+        text-align: center;
+}
+
+dl.inline-list {
+        margin: 0 ;
+        text-align: center;
+        padding-left: 15px;
 }

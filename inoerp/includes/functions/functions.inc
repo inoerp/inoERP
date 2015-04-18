@@ -1162,9 +1162,11 @@ function add_new_search_criteria() {
 function ino_attachement($file, $file_name = 'attachments') {
  $stmt = '<div id="show_attachment" class="show_attachment">
 						 <div id="file_upload_form" class="form-group">
-							<ul class="inRow asperWidth"><label for="exampleInputFile">' . gettext('Attach File') . '</label>
-							 <li><input type="file" id="attachments" class="attachments" name="' . $file_name . '[]" multiple/></li>
-							 <li> <button  form="file_upload" name="attach_submit" id="attach_submit" class="submit button">Attach</button></li>';
+							<ul class="inRow asperWidth">
+                  <li class="btn btn-info active inline input_file clickable" role="button">
+                  <input id="attachments" class="input_file_btn clickable" type="file" multiple="" name="' . $file_name . '[]"></input>
+    <i class="fa fa-paperclip clickable"> &nbsp;&nbsp;&nbsp;</i>Select File </li>
+							 <li> <button  form="file_upload" name="attach_submit" id="attach_submit" class="btn btn-info active submit button">Attach</button></li>';
  $stmt.='<li class="show_loading_small"><img alt="Loading..." src="' . HOME_URL . 'themes/images/small_loading.gif"/></li>
 							</ul>
 							<div class="uploaded_file_details"></div>
@@ -1235,28 +1237,29 @@ function array2text(array &$array) {
  return ob_get_clean();
 }
 
-function array2pdf(array &$array) {
+function array2pdf(array &$array, $print_in_browser = true) {
  if (count($array) == 0) {
   return null;
  }
  include(dirname(__FILE__) . "/../../tparty/mpdf/mpdf.php");
  $mpdf = new mPDF('c');
- ob_start();
 
+ $html = '';
  foreach ($array as $data) {
   foreach ($data as $key => $value) {
-   echo "<br> $key : $value";
+   $html .= "<br> $key : $value";
   }
-  echo '<br><br>';
+  $html .= '<br><br>';
  }
- $html = ob_get_contents();
- ob_end_clean();
 
+ ob_start();
 // send the captured HTML from the output buffer to the mPDF class for processing
  $mpdf->WriteHTML($html);
- download_send_headers("search_record" . date("Y-m-d") . ".pdf", 'pdf_format');
- $mpdf->Output();
- exit;
+ if ($print_in_browser) {
+  download_send_headers("search_record" . date("Y-m-d") . ".pdf", 'pdf_format');
+ }
+ echo $mpdf->Output();
+ return ob_get_clean();
 }
 
 function array2worddoc(array &$array) {
@@ -1566,10 +1569,10 @@ function ino_show_collapse_content($content, $length = '350', $divid = 'collapse
  return $stmt;
 }
 
-function ino_noOfItems_inCart(){
- if(!empty($_SESSION['ec_product_id'])){
+function ino_noOfItems_inCart() {
+ if (!empty($_SESSION['ec_product_id'])) {
   return count($_SESSION['ec_product_id']);
- }else{
+ } else {
   return 0;
  }
 }

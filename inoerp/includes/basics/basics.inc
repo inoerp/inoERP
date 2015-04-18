@@ -48,6 +48,7 @@ require_once(INC_CLASS . DS . "class.form.inc");
 require_once(INC_CLASS . DS . "class_inoform.inc");
 require_once(INC_PATHS . DS . "class.path.inc");
 require_once(INC_CLASS . DS . "class.pagination.inc");
+require_once(INC_CLASS . DS . "class_inomail.inc");
 require_once(INC_CLASS . DS . "class.search.inc");
 require_once(INC_CLASS . DS . "class.ino_exception.inc");
 require_once(INC_CLASS . DS . "class_inosave.inc");
@@ -95,6 +96,7 @@ require_once(INC_MODULE . DS . "sys" . DS . "db_update" . DS . "class_sys_db_upd
 require_once(INC_MODULE . DS . "sys" . DS . "catalog" . DS . "class_sys_catalog_header.inc");
 require_once(INC_MODULE . DS . "sys" . DS . "catalog" . DS . "class_sys_catalog_line.inc");
 require_once(INC_MODULE . DS . "sys" . DS . "catalog" . DS . "value" . DS . "class_sys_catalog_value.inc");
+require_once(INC_MODULE . DS . "sys" . DS . "message_format" .  DS . "class_sys_message_format.inc");
 require_once(INC_ORGS . DS . "class_org.inc");
 require_once(INC_ORGS . DS . "class_org_v.inc");
 require_once(INC_ORGS . DS . "enterprise" . DS . "class_enterprise.inc");
@@ -382,6 +384,7 @@ require_once(INC_MODULE . DS . "ec" . DS . "confirm_order" . DS . "class_ec_conf
 require_once(INC_MODULE . DS . "ec" . DS . "paid_order" . DS . "class_ec_paid_order.inc");
 require_once(INC_MODULE . DS . "ec" . DS . "order_success" . DS . "class_ec_order_success.inc");
 require_once(INC_MODULE . DS . "ec" . DS . "control" . DS . "class_ec_control.inc");
+require_once(INC_MODULE . DS . "hd" . DS . "support_request" . DS . "class_hd_support_request.inc");
 
 
 //
