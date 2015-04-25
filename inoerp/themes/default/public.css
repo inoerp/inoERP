@@ -1899,3 +1899,7 @@ dl.inline-list {
         text-align: center;
         padding-left: 15px;
 }
+
+.img-large-width{
+ width: 750px;
+}

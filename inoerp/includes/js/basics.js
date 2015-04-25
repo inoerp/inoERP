@@ -3628,6 +3628,23 @@ $(document).ready(function () {
   void window.open('select.php?class_name=user', '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
+ 
+ //selecting change request
+ $('body').on("click", '.hd_change_request_id.select_popup', function () {
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+  void window.open('select.php?class_name=hd_change_request', '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+ 
+  //selecting support request
+ $('body').on("click", '.hd_support_request_id.select_popup', function () {
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+  void window.open('select.php?class_name=hd_support_request', '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+ 
 
  onClick_addDetailLine(2, '.add_row_detail_img3', 'tabsDetailC');
  $('#content').on('change', '.sys_extra_field_id', function () {
