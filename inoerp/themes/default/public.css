@@ -1903,3 +1903,7 @@ dl.inline-list {
 .img-large-width{
  width: 750px;
 }
+
+ul.inline_action .fa{
+        font-size: 20px;
+}

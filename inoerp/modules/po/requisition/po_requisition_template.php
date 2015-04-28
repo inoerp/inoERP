@@ -1,4 +1,4 @@
-<div id="po_requisition_divId"><?php $f = new inoform(); ?>
+<div id="po_requisition_divId">
 
  <div id ="form_header"><span class="heading"><?php echo gettext('Requisition Header') ?></span>
   <form action=""  method="post" id="po_requisition_header"  name="po_requisition_header">
@@ -45,35 +45,13 @@
         <li><?php $f->l_text_field_d('exchange_rate_type'); ?></li>
         <li><?php $f->l_text_field_d('exchange_rate'); ?></li>
         <li><?php $f->l_text_field_d('header_amount'); ?></li>
-        <li<?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, 'payment_term_id', '', 1, $readonly); ?>        </li>
+        <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, 'payment_term_id', '', 1, $readonly); ?>        </li>
        </ul>
       </div>
      </div>
      <div id="tabsHeader-3" class="tabContent">
-      <div> 
-       <div class="left_half shipto address_details">
-        <ul class="column four_column">
-         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-           <?php echo gettext('Ship To Site Id') ?></label>
-          <?php $f->text_field_d('ship_to_id', 'address_id site_address_id'); ?>
-         </li>
-         <li><label><?php echo gettext('Address Name') ?></label><?php $f->text_field_dr('ship_to_address_name', 'address_name'); ?></li>
-         <li><?php $f->l_text_field_dr('ship_to_address', 'address'); ?></li>
-         <li><?php $f->l_text_field_dr('ship_to_country', 'country'); ?></li>
-         <li><?php $f->l_text_field_dr('ship_to_postal_code', 'postal_code'); ?></li>
-        </ul>
-       </div> 
-       <div class="right_half billto address_details">
-        <ul class="column four_column">
-         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-           <?php echo gettext('Bill To Site Id') ?></label><?php $f->text_field_d('bill_to_id', 'address_id site_address_id'); ?></li>
-         <li><?php $f->l_text_field_dr('bill_to_address_name', 'address_name'); ?> </li>
-         <li><?php $f->l_text_field_dr('bill_to_address', 'address'); ?></li>
-         <li><?php $f->l_text_field_dr('bill_to_country', 'country'); ?></li>
-         <li><?php $f->l_text_field_dr('bill_to_postal_code', 'postal_code'); ?></li>
-        </ul>
-       </div> 
-      </div>
+      <div class="shipto_address"><?php $f->address_field_d('ship_to_id'); ?></div>
+      <div class="billto_address"><?php $f->address_field_d('bill_to_id'); ?></div>
      </div>
      <div id="tabsHeader-4" class="tabContent">
       <div> 
@@ -186,7 +164,7 @@
            ?>
           <!--						 <tr><td>-->
            <div class="class_detail_form">
-            <fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
+            <fieldset class="form_detail_data_fs">
              <div class="tabsDetail">
               <ul class="tabMain">
                <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo gettext('Basic') ?></a></li>

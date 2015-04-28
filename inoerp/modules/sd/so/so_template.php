@@ -211,8 +211,8 @@ inoERP
          <td><?php form::number_field_wid2('line_price'); ?></td>
          <td><?php echo $f->select_field_from_object('tax_code_id', mdm_tax_code::find_all_outTax_by_inv_org_id($$class_second->shipping_org_id), 'mdm_tax_code_id', 'tax_code', $$class_second->tax_code_id, '', 'output_tax medium') ?></td>
          <td><?php form::number_field_wid2('tax_amount'); ?></td>
-         <td><?php form::number_field_wid2('gl_line_price'); ?></td>
-         <td><?php form::number_field_wid2('gl_tax_amount'); ?></td>
+         <td><?php form::number_field_wid2sr('gl_line_price'); ?></td>
+         <td><?php form::number_field_wid2sr('gl_tax_amount'); ?></td>
         </tr>
         <?php
         $count = $count + 1;

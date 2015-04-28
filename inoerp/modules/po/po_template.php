@@ -5,7 +5,7 @@ inoERP
  * @license     https://www.mozilla.org/MPL/2.0/
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
- -->
+-->
 <div id="po_divId">
  <!--    START OF FORM HEADER-->
 
@@ -25,29 +25,29 @@ inoERP
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
-       <ul class="column header_field">
-        <li><?php $f->l_text_field_dr_withSearch('po_header_id') ?>
-         <a name="show" href="form.php?class_name=po_header&<?php echo "mode=$mode"; ?>" class="show document_id po_header_id"><i class="fa fa-refresh"></i></a> 
-        </li>
-        <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>        </li>
-        <li><?php $f->l_select_field_from_array('po_type', po_header::$po_type_a, $$class->po_type, 'po_type', '', 1, $readonly1, $readonly1); ?>        </li>
-        <li><?php $f->l_text_field_d('po_number', 'primary_column2'); ?> </li>
-        <li><?php $f->l_text_field_d('release_number'); ?></li>
-        <li><?php $f->l_select_field_from_object('status', po_header::po_status(), 'option_line_code', 'option_line_value', $$class->po_status, 'po_status', 'dont_copy', '', 1); ?></li>
-        <li><?php echo $f->hidden_field_withId('ref_po_header_id', $$class->ref_po_header_id); ?>
-         <?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
-         <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supplier_id select_popup clickable">
-          <?php echo gettext('Supplier Name') ?></label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> </li>
-        <li><?php $f->l_text_field_d('supplier_number'); ?></li>
-        <li><label><?php echo gettext('Supplier Site') ?></label><?php
-         $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
-         echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
-         ?> </li>
-        <li><?php $f->l_text_field_d('rev_number'); ?></li> 
-        <li><?php $f->l_checkBox_field_d('multi_bu_cb'); ?></li> 
-        <li><?php $f->l_text_field_d('buyer'); ?></li> 
-        <li><?php $f->l_text_field_d('description'); ?></li> 
-       </ul>
+      <ul class="column header_field">
+       <li><?php $f->l_text_field_dr_withSearch('po_header_id') ?>
+        <a name="show" href="form.php?class_name=po_header&<?php echo "mode=$mode"; ?>" class="show document_id po_header_id"><i class="fa fa-refresh"></i></a> 
+       </li>
+       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>        </li>
+       <li><?php $f->l_select_field_from_array('po_type', po_header::$po_type_a, $$class->po_type, 'po_type', '', 1, $readonly1, $readonly1); ?>        </li>
+       <li><?php $f->l_text_field_d('po_number', 'primary_column2'); ?> </li>
+       <li><?php $f->l_text_field_d('release_number'); ?></li>
+       <li><?php $f->l_select_field_from_object('status', po_header::po_status(), 'option_line_code', 'option_line_value', $$class->po_status, 'po_status', 'dont_copy', '', 1); ?></li>
+       <li><?php echo $f->hidden_field_withId('ref_po_header_id', $$class->ref_po_header_id); ?>
+        <?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
+        <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supplier_id select_popup clickable">
+         <?php echo gettext('Supplier Name') ?></label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> </li>
+       <li><?php $f->l_text_field_d('supplier_number'); ?></li>
+       <li><label><?php echo gettext('Supplier Site') ?></label><?php
+        $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
+        echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
+        ?> </li>
+       <li><?php $f->l_text_field_d('rev_number'); ?></li> 
+       <li><?php $f->l_checkBox_field_d('multi_bu_cb'); ?></li> 
+       <li><?php $f->l_text_field_d('buyer'); ?></li> 
+       <li><?php $f->l_text_field_d('description'); ?></li> 
+      </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div> 
@@ -66,29 +66,8 @@ inoERP
       </div>
      </div>
      <div id="tabsHeader-3" class="tabContent">
-      <div class="left_half shipto address_details">
-       <ul class="column four_column">
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-          <?php gettext('Ship To Site Id'); ?></label><?php $f->text_field_d('ship_to_id', 'address_id site_address_id'); ?>
-        </li>
-        <li><?php $f->l_text_field_dr('ship_to_address_name', 'address_name'); ?></li>
-        <li><?php $f->l_text_field_dr('ship_to_address', 'address'); ?></li>
-        <li><?php $f->l_text_field_dr('ship_to_country', 'country'); ?></li>
-        <li><?php echo $f->l_text_field_dr('ship_to_postal_code', 'postal_code'); ?></li>
-       </ul>
-      </div> 
-      <div class="right_half billto address_details">
-       <ul class="column four_column">
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-          <?php gettext('Bill To Site Id'); ?></label>
-         <?php $f->text_field_d('bill_to_id', 'address_id  site_address_id'); ?>
-        </li>
-        <li><?php $f->l_text_field_dr('bill_to_address_name', 'address_name'); ?></li>
-        <li><?php $f->l_text_field_dr('bill_to_address', 'address'); ?></li>
-        <li><?php $f->l_text_field_dr('bill_to_country', 'country'); ?></li>
-        <li><?php echo $f->l_text_field_dr('bill_to_postal_code', 'postal_code'); ?></li>
-       </ul>
-      </div> 
+      <div class="shipto_address"><?php $f->address_field_d('ship_to_id'); ?></div>
+      <div class="billto_address"><?php $f->address_field_d('bill_to_id'); ?></div>
      </div>
      <div id="tabsHeader-4" class="tabContent">
       <div id="comments">
@@ -178,7 +157,7 @@ inoERP
            ?>
           </td>
           <td><?php $f->seq_field_d($count) ?></td>
-          <td><?php $f->text_field_wid2sr('po_line_id','always_readonly'); ?></td>
+          <td><?php $f->text_field_wid2sr('po_line_id', 'always_readonly'); ?></td>
           <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
           <td><?php echo $f->select_field_from_object('receving_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->receving_org_id, '', 'org_id copyValue', 1, $readonly); ?></td>
           <td><?php echo $f->select_field_from_object('line_type', po_line::po_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, '', 'copyValue', 1, $readonly); ?></td>
@@ -227,7 +206,7 @@ inoERP
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
-        <?php
+        <?php $f = new inoform();
         $count = 0;
         foreach ($po_line_object as $po_line) {
          ?>         
@@ -240,8 +219,8 @@ inoERP
           <td><?php echo $f->number_field('line_price', $$class_second->line_price); ?></td>
           <td><?php echo $f->select_field_from_object('tax_code_id', mdm_tax_code::find_all_inTax_by_bu_org_id($$class->bu_org_id), 'mdm_tax_code_id', 'tax_code', $$class_second->tax_code_id, '', 'input_tax medium', '', $readonly, '', '', '', 'percentage') ?></td>
           <td><?php form::number_field_wid2('tax_amount'); ?></td>
-          <td><?php form::number_field_wid2('gl_line_price'); ?></td>
-          <td><?php form::number_field_wid2('gl_tax_amount'); ?></td>
+          <td><?php $f->text_field_d2sr('gl_line_price'); ?></td>
+          <td><?php $f->text_field_d2sr('gl_tax_amount'); ?></td>
           <td><?php form::text_field_wid2('line_description'); ?></td>
 
          </tr>
@@ -260,9 +239,9 @@ inoERP
          <th><?php echo gettext('Seq') ?>#</th>
          <th><?php echo gettext('Agreed Quantity') ?></th>
          <th><?php echo gettext('Released Quantity') ?></th>
-         <th><?php echo gettext('Agreed Amount') ?>#</th>
-         <th><?php echo gettext('Released Amount') ?>#</th>
-         </tr>
+         <th><?php echo gettext('Agreed Amount') ?></th>
+         <th><?php echo gettext('Released Amount') ?></th>
+        </tr>
        </thead>
        <tbody class="form_data_line_tbody">
         <?php
@@ -302,10 +281,10 @@ inoERP
       <table class="form_line_data_table">
        <thead> 
         <tr>
-          <th><?php echo gettext('Seq') ?>#</th>
+         <th><?php echo gettext('Seq') ?>#</th>
          <th><?php echo gettext('On Hold') ?></th>
          <th><?php echo gettext('Hold Details') ?></th>
-         <th><?php echo gettext('Kit Item') ?>#</th>
+         <th><?php echo gettext('Kit Item') ?>?</th>
          <th><?php echo gettext('Configured') ?>?</th>
          <th><?php echo gettext('Item Configuration') ?></th>
          <th><?php echo gettext('Ref Doc Type') ?></th>

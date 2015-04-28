@@ -55,29 +55,8 @@
      </div> 
     </div>
     <div id="tabsHeader-3" class="tabContent">
-     <div class="left_half shipto address_details">
-      <ul class="column four_column">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-         <?php gettext('Ship To Site Id'); ?></label><?php $f->text_field_d('ship_to_id', 'address_id site_address_id'); ?>
-       </li>
-       <li><?php $f->l_text_field_dr('ship_to_address_name', 'address_name'); ?></li>
-       <li><?php $f->l_text_field_dr('ship_to_address', 'address'); ?></li>
-       <li><?php $f->l_text_field_dr('ship_to_country', 'country'); ?></li>
-       <li><?php echo $f->l_text_field_dr('ship_to_postal_code', 'postal_code'); ?></li>
-      </ul>
-     </div> 
-     <div class="right_half billto address_details">
-      <ul class="column four_column">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-         <?php gettext('Bill To Site Id'); ?></label>
-        <?php $f->text_field_d('bill_to_id', 'address_id  site_address_id'); ?>
-       </li>
-       <li><?php $f->l_text_field_dr('bill_to_address_name', 'address_name'); ?></li>
-       <li><?php $f->l_text_field_dr('bill_to_address', 'address'); ?></li>
-       <li><?php $f->l_text_field_dr('bill_to_country', 'country'); ?></li>
-       <li><?php echo $f->l_text_field_dr('bill_to_postal_code', 'postal_code'); ?></li>
-      </ul>
-     </div> 
+     <div class="shipto_address"><?php $f->address_field_d('ship_to_id'); ?></div>
+     <div class="billto_address"><?php $f->address_field_d('bill_to_id'); ?></div>
     </div>
     <div id="tabsHeader-4" class="tabContent">
      <div> 
@@ -172,7 +151,7 @@
          <td><?php $f->text_field_wid2('manufacturer'); ?></td>
          <td><?php echo ino_showDecimal($$class_second->minimum_quantity); ?></td>
          <td><?php echo ino_showDecimal($$class_second->maximum_quantity); ?></td>
-         <td class="add_detail_values"><img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+         <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i>
           <!--</td></tr>-->	
           <?php
           $po_quote_detail_object = [];
@@ -241,10 +220,10 @@
                    </td>
                    <td><?php $f->seq_field_detail_d($detailCount) ?></td>
                    <td><?php form::text_field_wid3sr('po_quote_detail_id'); ?></td>
-                   <td><?php echo $f->number_field('requirement_number', $$class_third->requirement_number, '', '', 'detail_number'); ?></td>
-                   <td><?php $f->text_field_wid3('requirement_name'); ?></td>
-                   <td><?php echo $f->select_field_from_array('requirement_type', po_rfq_detail::$requirement_type_a, $$class_third->requirement_type); ?></td>
-                   <td><?php echo $f->number_field('max_evaludation_points', $$class_third->max_evaludation_points); ?></td>
+                   <td><?php echo $f->number_field('requirement_number', $$class_third->requirement_number, '', '', 'detail_number', '', 1); ?></td>
+                   <td><?php $f->text_field_wid3r('requirement_name'); ?></td>
+                   <td><?php echo $f->select_field_from_array('requirement_type', po_rfq_detail::$requirement_type_a, $$class_third->requirement_type, '', '', '', 1, 1); ?></td>
+                   <td><?php echo $f->number_field('max_evaludation_points', $$class_third->max_evaludation_points, '', '', '', '', 1); ?></td>
                   </tr>
                   <?php
                   $detailCount++;
