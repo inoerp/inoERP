@@ -59,12 +59,8 @@ inoERP
      </div>
     </div>
     <div id="tabsHeader-3" class="tabContent">
-     <div class="left_half shipto address_details">
-      <ul class="column four_column">
-       <li><?php $f->l_address_field_wid('ship_to_id'); ?> </li>
-       <li><?php $f->l_address_field_wid('bill_to_id'); ?> </li>
-      </ul>
-     </div> 
+     <div class="shipto_address"><?php $f->address_field_d('ship_to_id'); ?></div>
+     <div class="billto_address"><?php $f->address_field_d('bill_to_id'); ?></div>
     </div>
     <div id="tabsHeader-4" class="tabContent">
      <div> 
@@ -139,7 +135,8 @@ inoERP
        foreach ($sd_quote_line_object as $sd_quote_line) {
         ?>         
         <tr class="sd_quote_line<?php echo $count ?>">
-         <td><?php $f = new inoform();
+         <td><?php
+          $f = new inoform();
           echo ino_inline_action($$class_second->sd_quote_line_id, array('sd_quote_header_id' => $$class->sd_quote_header_id,
            'tax_code_value' => $$class_second->tax_code_value));
           ?>    
@@ -152,7 +149,7 @@ inoERP
           echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
           form::text_field_wid2('item_number', 'select_item_number');
           ?>
-         <i class="select_item_number select_popup clickable fa fa-search"></i></td>
+          <i class="select_item_number select_popup clickable fa fa-search"></i></td>
          <td><?php form::text_field_wid2('item_description'); ?></td>
          <td><?php $f->number_field('line_quantity', $$class_second->line_quantity); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small'); ?></td>

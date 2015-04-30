@@ -3859,6 +3859,7 @@ $(document).ready(function () {
 
  $('body').on('click', '.ajax_content a', function (e) {
   if ($(this).hasClass('non_ajax')) {
+   location.href($(this).prop('href'));
    return false;
   }
   e.preventDefault();
@@ -3948,7 +3949,7 @@ $(document).ready(function () {
 
  $('body').on('click', '#save_program', function () {
   $('.show_loading_small').show();
-  var headerData = $(this).closest('form').serializeArray();
+  var headerData = $('#program_header').serializeArray();
   var class_name = $('.class_name').val();
   var homeUrl = $('#home_url').val();
   var savePath = homeUrl + 'program.php?class_name=' + class_name;
@@ -4423,12 +4424,12 @@ $("#accordion0").accordion({
 
  deleteImage();
 
- $('body').on('blur', '.select.category', function () {
+ $('body').on('blur', '.select.multi-category', function () {
   if ($(this).val()) {
    $(this).clone().appendTo($(this).parent());
   } else {
    var select_count = 0;
-   $(this).parent().find('.select.category').each(function () {
+   $(this).parent().find('.select.multi-category').each(function () {
     if (!$(this).val()) {
      select_count++;
     }

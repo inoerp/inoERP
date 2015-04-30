@@ -889,13 +889,13 @@ class category extends dbObject {
   foreach ($bcElements as $key => $value) {
    $bc_statement = '>>' . $value . $bc_statement;
   }
-  $bc_statement = '<a href="' . HOME_URL . '">Home</a>' . $bc_statement;
+  $bc_statement = '<a class="home_link non_ajax" href="' . HOME_URL . '">Home</a>' . $bc_statement;
   return $bc_statement;
  }
 
  public static function breadCrum_by_category($category_id, &$element_a = '', $content_type = '') {
   if (empty($category_id)) {
-   $bc_statement = '<ol class="ino-breadcrumb"><li><a href="' . HOME_URL . '">Home</a></li></ol>';
+   $bc_statement = '<ol class="ino-breadcrumb"><li><a class="home_link non_ajax" href="' . HOME_URL . '">Home</a></li></ol>';
    return $bc_statement;
   }
 

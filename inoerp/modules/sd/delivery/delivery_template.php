@@ -175,16 +175,10 @@ inoERP
        <tr>
         <th><?php echo gettext('Customer Id') ?></th>
         <th><?php echo gettext('Customer Number') ?></th>
-        <th><?php echo gettext('Customer') ?></th>
-        <th><?php echo gettext('UOM') ?></th>
-        <th><?php echo gettext('Sub Inventory') ?></th>
-        <th><?php echo gettext('Locator') ?></th>
-        <th> Id</th>
-        <th> #</th>
-        <th></th>
-        <th>Site Id</th>
-        <th>Site #</th>
-        <th>Site </th>
+        <th><?php echo gettext('Customer Name') ?></th>
+        <th><?php echo gettext('Site Id') ?></th>
+        <th><?php echo gettext('Site Number') ?></th>
+        <th><?php echo gettext('Site Name') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
