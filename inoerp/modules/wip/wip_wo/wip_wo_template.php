@@ -22,7 +22,6 @@ inoERP
      </ul>
      <div class="tabContainer">
       <div id="tabsHeader-1" class="tabContent">
-       <div class="large_shadow_box"> 
         <ul class="column header_field">
          <li><?php $f->l_text_field_dr_withSearch('wip_wo_header_id'); ?>
           <a name="show" href="form.php?class_name=wip_wo_header&<?php echo "mode=$mode"; ?>" class="show document_id wip_wo_header_id">
@@ -45,7 +44,6 @@ inoERP
           <?php echo !empty($$class->wo_status) ? $$class->wo_status : ""; ?>
          </li>
         </ul>
-       </div>
       </div>
       <div id="tabsHeader-2" class="tabContent">
        <div> 
@@ -82,7 +80,7 @@ inoERP
          <li><?php $f->l_checkBox_field_d('bom_exploded_cb'); ?> </li>
          <li><?php $f->l_checkBox_field_d('routing_exploded_cb'); ?> </li>
          <li><?php $f->l_select_field_from_object('completion_sub_inventory', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->completion_sub_inventory, 'completion_sub_inventory', 'subinventory_id', '', $readonly); ?>         </li>
-         <li><?php echo $f->select_field_from_object('completion_locator', locator::find_all_of_subinventory($$class->completion_sub_inventory), 'locator_id', 'locator', $$class->completion_locator, 'completion_locator', 'locator_id', '', $readonly); ?>         </li>
+         <li><?php $f->l_select_field_from_object('completion_locator', locator::find_all_of_subinventory($$class->completion_sub_inventory), 'locator_id', 'locator', $$class->completion_locator, 'completion_locator', 'locator_id', '', $readonly); ?>         </li>
         </ul>
        </div>
       </div>
@@ -353,8 +351,8 @@ inoERP
           <tr class="wip_wo_bom<?php echo $count ?>">
            <td>    
             <ul class="inline_action">
-             <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-             <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+             <li class="add_row_img"><i class="fa fa-plus-circle"></i></li>
+             <li class="remove_row_img"><i class="fa fa-minus-circle"></i></li>
              <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($wip_wo_bom->wip_wo_bom_id); ?>"></li>           
              <li><?php echo form::hidden_field('wip_wo_header_id', $$class->wip_wo_header_id); ?></li>
             </ul>

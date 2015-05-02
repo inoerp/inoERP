@@ -30,8 +30,8 @@ inoERP
        <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', '', $readonly1); ?>      </li>
        <li><?php $f->l_text_field_d('resource'); ?> </li>
        <li><?php $f->l_text_field_d('description'); ?></li>
-       <li><?php $f->l_select_field_from_object('resource_type', bom_resource::resource_type(), 'option_line_code', 'option_line_code', $$class->resource_type, '', '', 1, $readonly1); ?>       </li>
-       <li><?php $f->l_select_field_from_object('charge_type', bom_resource::charge_type(), 'option_line_code', 'option_line_code', $$class->charge_type, '', '', 1, $readonly); ?>       </li> 
+       <li><?php $f->l_select_field_from_object('resource_type', bom_resource::resource_type(), 'option_line_code', 'option_line_value', $$class->resource_type, '', '', 1, $readonly1); ?>       </li>
+       <li><?php $f->l_select_field_from_object('charge_type', bom_resource::charge_type(), 'option_line_code', 'option_line_value', $$class->charge_type, '', '', 1, $readonly); ?>       </li> 
        <li><?php $f->l_select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom', '', 1, $readonly1); ?>       </li>
        <li><?php $f->l_status_field_d('status'); ?></li>
       </ul>

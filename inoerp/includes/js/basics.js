@@ -3122,7 +3122,7 @@ $(document).ready(function () {
   void window.open(openUrl, '_blank',
           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
- 
+
 //popu for selecting accounts
  $('body').on('click', '.select_account.select_popup', function () {
   var ulink = 'select.php?class_name=coa_combination';
@@ -3382,6 +3382,9 @@ $(document).ready(function () {
   height: 150,
   relative_urls: false,
   remove_script_host: false,
+  force_br_newlines: true,
+  force_p_newlines: false,
+  forced_root_block: '',
   toolbar: "styleselect code | emoticons forecolor backcolor bold italic pagebreak | alignleft aligncenter alignright | bullist numlist outdent indent | link image inserttable ",
   menubar: false,
   statusbar: false,
@@ -3400,6 +3403,9 @@ $(document).ready(function () {
   height: 250,
   relative_urls: false,
   remove_script_host: false,
+  force_br_newlines: true,
+  force_p_newlines: false,
+  forced_root_block: '',
   toolbar: "styleselect code | emoticons forecolor backcolor bold italic pagebreak | alignleft aligncenter alignright | bullist numlist outdent indent | link image inserttable ",
   menubar: false,
   statusbar: false,
@@ -3415,7 +3421,7 @@ $(document).ready(function () {
   localStorage.setItem("set_value_for_one_field", true);
   var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
-  
+
   void window.open('select.php?class_name=address&mode=2', '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
   return false;
@@ -3615,20 +3621,20 @@ $(document).ready(function () {
 
 //selecting supplier
  $('body').on("click", '.supplier_id.select_popup', function () {
-    var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
   void window.open('select.php?class_name=supplier', '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
- 
+
  //selecting user
  $('body').on("click", '.user_id.select_popup', function () {
-    var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
   void window.open('select.php?class_name=user', '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
- 
+
  //selecting change request
  $('body').on("click", '.hd_change_request_id.select_popup', function () {
   var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
@@ -3636,15 +3642,15 @@ $(document).ready(function () {
   void window.open('select.php?class_name=hd_change_request', '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
- 
-  //selecting support request
+
+ //selecting support request
  $('body').on("click", '.hd_support_request_id.select_popup', function () {
   var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
   void window.open('select.php?class_name=hd_support_request', '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
- 
+
 
  onClick_addDetailLine(2, '.add_row_detail_img3', 'tabsDetailC');
  $('#content').on('change', '.sys_extra_field_id', function () {
@@ -4233,24 +4239,24 @@ $(document).ready(function () {
   }
  });
 
-$("#accordion").accordion({
- heightStyle: "content",
- active: 1,
- collapsible: true
-});
+ $("#accordion").accordion({
+  heightStyle: "content",
+  active: 1,
+  collapsible: true
+ });
 
-var available_indexes = [0, 1 , 2];
-$("#accordion0").accordion({
- heightStyle: "content",
- activate: function (event, ui) {
-  if (ui.newHeader.find('i').hasClass('fa-plus-circle')) {
-   ui.newHeader.find('i').removeClass('fa-plus-circle').addClass('fa-minus-circle');
-  } 
-   
+ var available_indexes = [0, 1, 2];
+ $("#accordion0").accordion({
+  heightStyle: "content",
+  activate: function (event, ui) {
+   if (ui.newHeader.find('i').hasClass('fa-plus-circle')) {
+    ui.newHeader.find('i').removeClass('fa-plus-circle').addClass('fa-minus-circle');
+   }
+
    if (ui.oldHeader.find('i').hasClass('fa-minus-circle')) {
-   ui.oldHeader.find('i').removeClass('fa-minus-circle').addClass('fa-plus-circle');
-  }
- },
+    ui.oldHeader.find('i').removeClass('fa-minus-circle').addClass('fa-plus-circle');
+   }
+  },
 // beforeActivate: function (event, ui) {
 //  var newIndex = $(ui.newHeader).index('h3');
 //  console.log( 'new i' + newIndex);
@@ -4262,7 +4268,7 @@ $("#accordion0").accordion({
 //  }
 // }
 
-});
+ });
 
  $('body').on('click', '#accordion h3.recent-visits', function () {
   refreshData({
@@ -4373,6 +4379,9 @@ $("#accordion0").accordion({
    plugins: 'textcolor link image lists code table emoticons',
    width: 680,
    height: 150,
+   force_br_newlines: true,
+   force_p_newlines: false,
+   forced_root_block: '',
    relative_urls: false,
    remove_script_host: false,
    toolbar: "styleselect code | emoticons forecolor backcolor bold italic pagebreak | alignleft aligncenter alignright | bullist numlist outdent indent | link image inserttable ",
@@ -4415,6 +4424,27 @@ $("#accordion0").accordion({
   void window.open('select.php?class_name=am_asset', '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
+
+ $("body").on("click", ".wo_number.select_popup", function () {
+  var close_field_class = '.' + $(this).closest('li').find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+  var openUrl = 'select.php?class_name=wip_wo_header';
+  $(this).parent().parent().find('.popup_value').each(function () {
+   var dataName = $(this).prop('name').replace(/\[]+/g, '');
+   openUrl += '&' + dataName + '=' + $(this).val();
+  });
+  void window.open(openUrl, '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
+ $('body').on('click', 'a.show2.wip_wo_header_id', function (e) {
+  e.preventDefault();
+  var wip_wo_header_id = $('#wip_wo_header_id').val();
+  var urlLink = $(this).attr('href');
+  var formUrl = urlLink + '&wip_wo_header_id=' + wip_wo_header_id;
+  getFormDetails(formUrl);
+ });
+
 
  $("body").on('mouseenter', '.img-vs', function () {
   $(this).next(".hidden-image").show();
@@ -4462,7 +4492,7 @@ $("#accordion0").accordion({
    alert('Cart is updated');
    var no_of_item = +$('#no-of-cart-items').html();
    no_of_item++;
-   +$('#no-of-cart-items').html(' ' + no_of_item + ' ' );
+   +$('#no-of-cart-items').html(' ' + no_of_item + ' ');
    console.log(no_of_item);
   });
  });

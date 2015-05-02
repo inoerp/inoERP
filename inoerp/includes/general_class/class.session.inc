@@ -54,10 +54,12 @@ class session {
    $_SESSION['user_id'] = $this->user_id = $user->user_id;
    $_SESSION['username'] = $this->username = $user->username;
    $_SESSION['login_status'] = $this->login_status = true;
-   if(!empty($_POST['user_language'][0])){
+   if (!empty($_POST['user_language'][0])) {
     $_SESSION['lang'] = $_POST['user_language'][0];
-   }else{
+   } else if(!empty($user->user_language)){
     $_SESSION['lang'] = $user->user_language;
+   } else {
+    $_SESSION['lang'] = DEFAULT_LOCALE;
    }
    $this->login_flag = true;
    if (!empty($_SESSION['orginal_page'])) {

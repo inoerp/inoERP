@@ -1,32 +1,3 @@
-function setValFromSelectPage(wip_wo_header_id, wo_number, org_id, combination) {
- this.wip_wo_header_id = wip_wo_header_id;
- this.wo_number = wo_number;
- this.org_id = org_id;
- this.combination = combination;
-}
-
-setValFromSelectPage.prototype.setVal = function() {
- var wo_obj = [{id: 'wip_wo_header_id', data: this.wip_wo_header_id},
-	{id: 'wo_number', data: this.wo_number},
-	{id: 'org_id', data: this.org_id}
- ];
-
- $(wo_obj).each(function(i, value) {
-	if (value.data) {
-	 var fieldId = '#' + value.id;
-	 $('#content').find(fieldId).val(value.data);
-	}
- });
- 
-  if (this.combination) {
-	$('#scrap_account_id').val(this.combination);
-	localStorage.removeItem("field_class");
- }
- 
-  if (this.wip_wo_header_id) {
-    $('a.show.wip_wo_header_id').trigger('click');
- }
-};
 
 $(document).ready(function() {
  //mandatory and field sequence

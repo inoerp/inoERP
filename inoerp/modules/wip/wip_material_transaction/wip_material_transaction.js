@@ -1,26 +1,3 @@
-function setValFromSelectPage(wip_wo_header_id, wo_number, org_id) {
- this.wip_wo_header_id = wip_wo_header_id;
- this.wo_number = wo_number;
- this.org_id = org_id;
-}
-
-setValFromSelectPage.prototype.setVal = function () {
- var wo_obj = [{id: 'wip_wo_header_id', data: this.wip_wo_header_id},
-  {id: 'wo_number', data: this.wo_number},
-  {id: 'org_id', data: this.org_id}
- ];
-
- $(wo_obj).each(function (i, value) {
-  if (value.data) {
-   var fieldId = '#' + value.id;
-   $('#content').find(fieldId).val(value.data);
-  }
- });
-  if (this.wip_wo_header_id) {
-    $('a.show.wip_wo_header_id').trigger('click');
- }
-};
-
 function serial_details(generation_type, trClass) {
  var trClass_d = '.' + trClass;
  if (!generation_type) {
@@ -294,14 +271,6 @@ $(document).ready(function () {
          });
 
 
-
- //selecting wo header id data
- $('body').off("click", '.wip_wo_header_id.select_popup')
-         .on("click", '.wip_wo_header_id.select_popup', function () {
-          var openUrl = 'select.php?class_name=wip_wo_header&wo_status=%3DRELEASED';
-          void window.open(openUrl, '_blank',
-                  'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-         });
 
  $('body').off('click', 'a.wip_material_transaction_id').on('click', 'a.wip_material_transaction_id', function (e) {
   e.preventDefault();

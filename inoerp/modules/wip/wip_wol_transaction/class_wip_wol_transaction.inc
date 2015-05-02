@@ -10,7 +10,8 @@
  */
 
 /**
- * wip_wo_completion 
+ * wip_wol_completion 
+ * Need to be tested and completed
  *
  */
 class wip_wol_transaction extends dbObject {

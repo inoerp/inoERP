@@ -14,17 +14,23 @@ inoERP
  <!--create empty form or a single id when search is not clicked and the id is referred from other page -->
  <div id ="form_header"><span class="heading"><?php echo gettext('WIP Material Transaction') ?></span> 
   <div id="form_serach_header" class="tabContainer">
-   <ul class="column header_field">
-    <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>    </li>
-    <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="wip_wo_header_id select_popup clickable">
-      <?php echo gettext('WO Header Id') ?></label> <?php $f->text_field_drm('wip_wo_header_id'); ?>
-    </li>
-    <li><?php $f->l_text_field_d('wo_number'); ?> </li>
-    <li><?php $f->l_select_field_from_array('transaction_type_id', wip_material_transaction::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1); ?>
-     <a name="show" href="form.php?class_name=wip_material_transaction&<?php echo "mode=$mode"; ?>" class="show2 document_id wip_material_transaction_id">          
-      <i class="fa fa-refresh"></i></a> 
-    </li>
-   </ul>
+   <div class="tabContent">
+    <ul class="column header_field">
+     <li><label><i class="wo_number select_popup clickable fa fa-search"></i>
+       <?php echo gettext('WO Number') ?></label><?php
+      $f->text_field_d('wo_number');
+      echo $f->hidden_field_withId('wip_wo_header_id', $$class->wip_wo_header_id);
+      echo $f->hidden_field_withCLass('wo_status', 'RELEASED', 'popup_value');
+      ?>
+     </li>
+
+     <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>    </li>
+     <li><?php $f->l_select_field_from_array('transaction_type_id', wip_material_transaction::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1); ?>
+      <a name="show" href="form.php?class_name=wip_material_transaction&<?php echo "mode=$mode"; ?>" class="show2 document_id wip_material_transaction_id">          
+       <i class="fa fa-refresh"></i></a> 
+     </li>
+    </ul>
+   </div>
   </div>
  </div>
  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Transaction Details') ?></span>
