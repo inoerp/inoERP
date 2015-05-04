@@ -300,8 +300,10 @@ class content extends dbObject {
 
  Public function findAll_contents($no_of_articles = '', $noOfCharacters = '100', $content_type_id = '1') {
   $sql = " SELECT content.content_id, ct.content_type_id, content.subject, content.terms, 
-	         content.created_by, content.creation_date, ct.content_type, cm.no_of_comments,  eua.alias as alias
+	         content.created_by, content.creation_date, ct.content_type, cm.no_of_comments,  eua.alias as alias,
+            IFNULL(content.content_by, user.username) as username
 					FROM content
+          LEFT JOIN user ON user.user_id = content.created_by
 					LEFT JOIN content_type ct ON ct.content_type_id = content.content_type_id 
           LEFT JOIN ext_url_alias eua ON eua.content_id=content.content_id 
           LEFT JOIN ( 
@@ -311,7 +313,7 @@ class content extends dbObject {
            )
           cm ON cm.reference_table = 'content' AND content.content_id = cm.reference_id
 					WHERE 
-					content.published_cb = 1 
+					content.published_cb = '1' 
           AND content.content_type_id = '{$content_type_id}'
 					 ";
 
@@ -319,8 +321,7 @@ class content extends dbObject {
   if (!empty($no_of_articles)) {
    $sql .= " LIMIT {$no_of_articles} ";
   }
-//  echo $sql;
-  $result = $this->findBySql($sql);
+    $result = $this->findBySql($sql);
   if (empty($result)) {
    return false;
   }
@@ -333,7 +334,6 @@ class content extends dbObject {
    $cont->content_summary = !empty($result_cont[0]) ? $result_cont[0]->content_summary : '';
    $cont->content_full = !empty($result_cont[0]) ? $result_cont[0]->content : '';
   }
-
   return $result;
  }
 
@@ -518,7 +518,7 @@ AND content.content_id = category_reference.reference_id  ";
      }
      $content_string .= '</td>';
      $content_string .= "<td class='content_summary'>";
-     $content_string .= '<a class="small_popover" data-placement="right"  data-toggle="popover"  data-content="' . strip_tags($recod_c->content_full).'"';
+     $content_string .= '<a class="small_popover" data-placement="right"  data-toggle="popover"  data-content="' . strip_tags($recod_c->content_full) . '"';
      if (!empty($recod_c->alias)) {
       $content_string .= ' href="' . HOME_URL . "content/$recod_c->alias" . '">';
      } else {

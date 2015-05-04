@@ -90,8 +90,8 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
                <li><input type="button"  role="button" value="Attach"  name="attach_submit" id="comment_attach_submit" class="btn btn-info active comment_attach_submit"></li>
                <?php $user_name = isset($_SESSION['username']) ? $_SESSION['username'] : 'Anonymous'; ?>
                <li><div class="input-group">
-                 <span class="input-group-addon" id="basic-addon1">Reply as </span>
-                 <input type="text" name="comment_by" class="form-control content_by height-unset" placeholder="<?php echo $user_name ?>" aria-describedby="basic-addon1" >
+                 <span class="input-group-addon" id="basic-addon1">Post As </span>
+                 <input type="text" name="content_by" class="form-control content_by height-unset" placeholder="<?php echo $user_name ?>" aria-describedby="basic-addon1" >
                 </div></li>
                <?php
                if ($mode == 9) {

@@ -42,7 +42,8 @@
  background-repeat: no-repeat;
 }
 
-p {margin: 0; padding: 0;}
+p {margin: 0 !important; 
+   padding: 0;}
 
 blockquote{
  display: block;
