@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -7,6 +8,7 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
+
 /**
  * 
  *
@@ -70,6 +72,28 @@ class user_dashboard_v extends dbObject {
  public $content_type;
  public $reference_table;
  public $phone;
+ public static $icon_stmt_a = [
+  'inv' => ['div_class' => 'fa-bank', 'description' => 'Inventory'],
+  'sd' => ['div_class' => 'fa-truck', 'description' => 'Sales & Distribution'],
+  'pur' => ['div_class' => 'fa-file-text-o', 'description' => 'Purchasing'],
+  'bom' => ['div_class' => 'fa-sitemap', 'description' => 'Bills Of Material'],
+  'cst' => ['div_class' => 'fa-cubes', 'description' => 'Cost Management'],
+  'wip' => ['div_class' => 'fa-tasks', 'description' => 'WIP & MES'],
+  'fp' => ['div_class' => 'fa-th-large', 'description' => 'Forecast & Planning'],
+  'am' => ['div_class' => 'fa-wrench', 'description' => 'Asset Maintenance'],
+  'pos' => ['div_class' => 'fa-shopping-cart', 'description' => 'Point Of Sale'],
+  'ec' => ['div_class' => 'fa-globe', 'description' => 'eCommerce'],
+  'gl' => ['div_class' => 'fa-money', 'description' => 'General Ledger'],
+  'ap' => ['div_class' => 'fa-credit-card', 'description' => 'Payable'],
+  'ar' => ['div_class' => 'fa-dollar', 'description' => 'Receivable'],
+  'fa' => ['div_class' => 'fa-building', 'description' => 'Fixed Asset'],
+  'hr' => ['div_class' => 'fa-users', 'description' => 'Human Resource'],
+  'hd' => ['div_class' => 'fa-support', 'description' => 'Help Desk'],
+  'da' => ['div_class' => 'fa-book', 'description' => 'Document & Analysis'],
+  'adm' => ['div_class' => 'fa-database', 'description' => 'Admin'],
+  'sys' => ['div_class' => 'fa-cogs', 'description' => 'Global Setup'],
+  'ext' => ['div_class' => 'fa-sliders', 'description' => 'Extensions'],
+ ];
 
  public function user_contents() {
 

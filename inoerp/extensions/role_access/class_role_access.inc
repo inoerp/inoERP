@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -7,6 +8,7 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
+
 /**
  * 
  *
@@ -18,7 +20,7 @@ class role_access extends dbObject {
  public static $key_column = 'obj_class_name';
  public static $module = "extensions";
  public static $system_info = [
-   'name' => 'Role Access',
+  'name' => 'Role Access',
   'number' => '10019',
   'description' => 'Define and mainten role access',
   'version' => '0.1.1',
@@ -28,7 +30,6 @@ class role_access extends dbObject {
   'module_name' => 'extn',
   'weight' => 19
  ];
-
 //  data base variables as stored database column name
  public static $access_map = [
   '2' => 'Read',
@@ -101,25 +102,34 @@ class role_access extends dbObject {
   if (empty($_SESSION['allowed_path_ids']) &&
    !empty($_SESSION['user_id']) &&
    (in_array('ADMIN', $_SESSION['user_roles']))) {
-   $paths = path::find_all('display_weight');
    $allowed_path_ids = [];
+   $allowed_modules = [];
+   $paths = path::find_all('display_weight');
    foreach ($paths as $path) {
     $allowed_path_ids[] = $path->path_id;
+    if (!in_array($path->module_code, $allowed_modules)) {
+     $allowed_modules[] = $path->module_code;
+    }
    }
    $_SESSION['allowed_path_ids'] = $allowed_path_ids;
+   $_SESSION['allowed_modules'] = $allowed_modules;
   } else if (empty($_SESSION['allowed_path_ids']) &&
    (!empty($_SESSION['user_roles']))) {
    $allowed_path_ids = [];
-
+   $allowed_modules = [];
    foreach ($_SESSION['role_access'] as $obj_class_name => $mode) {
     $path = new path();
     $paths = $path->findBy_oBjClassName_Mode($obj_class_name, $mode);
     if (!empty($paths)) {
      foreach ($paths as $path) {
-        array_push($allowed_path_ids, $path->path_id);
+      array_push($allowed_path_ids, $path->path_id);
+      if (!in_array($path->module_code, $allowed_modules)) {
+       $allowed_modules[] = $path->module_code;
+      }
      }
     }
    }
+   $_SESSION['allowed_modules'] = $allowed_modules;
    $_SESSION['allowed_path_ids'] = $allowed_path_ids;
   }
  }
@@ -155,14 +165,12 @@ class role_access extends dbObject {
   $result = $this->findBySql($sql);
   return !empty($result) ? $result : false;
  }
- 
- 
+
  public function find_by_roleCode($role_code) {
   $sql = "SELECT * FROM " . self::$table_name . " where role_code='{$role_code}' ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
  }
-
 
  public static function role_access_all_v() {
   global $db;

@@ -3958,12 +3958,12 @@ $(document).ready(function () {
   var headerData = $('#program_header').serializeArray();
   var class_name = $('.class_name').val();
   var homeUrl = $('#home_url').val();
-  var savePath = homeUrl + 'program.php?class_name=' + class_name;
+  if(headerData){
+     var savePath = homeUrl + 'program.php?class_name=' + class_name;
   $.when(saveHeader(savePath, headerData, '#sys_program', '', '', true, 'program_header')).then(function () {
    $('.show_loading_small').hide();
   });
-
-
+  }
  });
 
  //FILE attachment

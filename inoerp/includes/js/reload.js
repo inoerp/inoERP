@@ -454,14 +454,14 @@ $('table.view th').find('img').hide();
   position: {my: "left top", at: "left top", of: "#structure "}
  });
 
-  $('body').off('click', '#save_program').on('click', '#save_program', function () {
-  $('.show_loading_small').show();
-  var headerData = $(this).closest('form').serializeArray();
-  var class_name = $('.class_name').val();
-  var homeUrl = $('#home_url').val();
-  var savePath = homeUrl + 'program.php?class_name='+class_name;
-  saveHeader(savePath, headerData, '#sys_program', '', '', true, 'program_header');
-  });
+//  $('body').off('click', '#save_program').on('click', '#save_program', function () {
+//  $('.show_loading_small').show();
+//  var headerData = $(this).closest('form').serializeArray();
+//  var class_name = $('.class_name').val();
+//  var homeUrl = $('#home_url').val();
+//  var savePath = homeUrl + 'program.php?class_name='+class_name;
+//  saveHeader(savePath, headerData, '#sys_program', '', '', true, 'program_header');
+//  });
   
    $('#big_popover').popover({
   html: true,
