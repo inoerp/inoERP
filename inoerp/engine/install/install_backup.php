@@ -6,7 +6,7 @@
 
  $db_type_a = [
   'demo' => 'Demo Instance',
-// 'production' =>'Production Instance',
+  'production' =>'Production Instance',
  ];
  $dont_check_login = true;
  $class_names = 'ino_install';
