@@ -26,10 +26,6 @@
        <li><?php $f->l_status_field_d('status'); ?></li>
        <li><?php $f->l_checkBox_field_d('rev_enabled'); ?></li>
        <li><?php $f->l_text_field_d('rev_number') ?></li>
-       <li><label><?php echo gettext('Address Id') ?><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-        </label><input type="text"  name="address_id[]" value="<?php echo htmlentities($org->address_id);
-?>" maxlength="50" id="address_id"> 
-       </li> 
       </ul> 
      </div>
      <div id="tabsHeader-2" class="tabContent">
@@ -65,16 +61,7 @@
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
-      <ul class="column header_field address">
-       <li><label><?php echo gettext('Phone') ?></label> <?php $f->text_field_d2r('phone'); ?></li>
-       <li><label><?php echo gettext('Email') ?></label> <?php $f->text_field_d2r('website'); ?></li>
-       <li><label><?php echo gettext('Web-site') ?></label><?php $f->text_field_d2r('website'); ?></li>
-       <li><label><?php echo gettext('Country') ?></label><?php $f->text_field_d2r('country'); ?></li>
-       <li><label><?php echo gettext('Postal Code') ?></label> <?php $f->text_field_d2r('postal_code'); ?></li>
-       <li><label><?php echo gettext('Address') ?></label>  
-        <textarea readonly name="address" id="address" cols="22" rows="3" placeholder="Select address Id"><?php echo trim(htmlentities($address->address)); ?></textarea>
-       </li>
-      </ul>
+      <div class="address_id"><?php $f->address_field_d('address_id'); ?></div>
      </div>
      <div id="tabsLine-2" class="tabContent">
       <?php
