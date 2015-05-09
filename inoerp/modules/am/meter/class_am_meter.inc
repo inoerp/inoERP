@@ -24,7 +24,7 @@ class am_meter extends dbObject {
 //  data base variables as stored database column name
  public static $system_info = [
   'name' => 'Meter',
-  'number' => '2117',
+  'number' => '4106',
   'description' => 'Maintenance Meter',
   'version' => '0.1.1',
   'db_version' => '1001',

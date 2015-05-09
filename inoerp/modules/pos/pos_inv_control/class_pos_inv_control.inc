@@ -22,7 +22,7 @@ class pos_inv_control extends dbObject {
  public static $module = "pos";
  public static $system_info = [
   'name' => 'POS Shipping Control',
-  'number' => '2705',
+  'number' => '2722',
   'description' => 'POS Shipping Control',
   'version' => '0.1.1',
   'db_version' => '1001',

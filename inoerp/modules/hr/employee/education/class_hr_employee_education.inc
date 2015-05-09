@@ -6,6 +6,19 @@
   public static $primary_column = "hr_employee_education_id";
   public static $key_column = 'degree_name';
   public static $module = "hr";
+    public static $system_info = [
+  'name' => 'Employee Education',
+  'number' => '3113',
+  'description' => 'HR Employee Education',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'dependent_class' => '',
+  'primary_entity_cb' => '',
+  'module_name' => 'hr',
+  'weight' => 7
+ ];
+    
   public $field_a = [
    'hr_employee_education_id',
    'employee_id',

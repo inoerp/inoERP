@@ -23,7 +23,7 @@ class am_wo_header extends dbObject {
  public static $module = "wip";
  public static $system_info = [
   'name' => 'AM Work Order',
-  'number' => '2606',
+  'number' => '4112',
   'description' => 'Maintenance Work Order',
   'version' => '0.1.1',
   'db_version' => '1001',

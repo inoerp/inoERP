@@ -23,7 +23,7 @@ class pos_barcode_list_header extends dbObject {
  public static $module = "pos";
  public static $system_info = [
   'name' => 'Barcode List',
-  'number' => '9402',
+  'number' => '2721',
   'description' => 'Define and mainten price list',
   'version' => '0.1.1',
   'db_version' => '1001',

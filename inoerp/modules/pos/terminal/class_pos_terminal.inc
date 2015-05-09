@@ -24,7 +24,7 @@ class pos_terminal extends dbObject {
  public static $module = "pos";
  public static $system_info = [
   'name' => 'pos_terminal',
-  'number' => '2505',
+  'number' => '2723',
   'description' => 'POS Terminal',
   'version' => '0.1.1',
   'db_version' => '1001',

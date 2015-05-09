@@ -4,7 +4,7 @@ class hr_employee_experience_ss extends hr_employee_experience {
 
  public static $system_info = [
   'name' => 'SS - Employee Experience ',
-  'number' => '9107',
+  'number' => '3116',
   'description' => 'Self Service Employee Experience',
   'version' => '0.1.1',
   'db_version' => '1001',

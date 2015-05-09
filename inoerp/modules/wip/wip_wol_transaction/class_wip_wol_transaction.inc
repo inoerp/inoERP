@@ -23,7 +23,7 @@ class wip_wol_transaction extends dbObject {
  public static $module = "wip";
  public static $system_info = [
   'name' => 'WOL Completion',
-  'number' => '2608',
+  'number' => '2609',
   'description' => 'Work Order Less Transaction',
   'version' => '0.1.1',
   'db_version' => '1001',

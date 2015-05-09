@@ -22,7 +22,7 @@ class ar_sales_region extends dbObject {
  public static $key_column = "sales_region_name";
  public static $system_info = [
   'name' => 'Sales Region',
-  'number' => '3203',
+  'number' => '3205',
   'description' => 'Define and mainten Sales Region',
   'version' => '0.1.1',
   'db_version' => '1001',

@@ -8,7 +8,7 @@ class inv_location_default extends dbObject {
  public static $key_column = "item_id_m";
  public static $system_info = [
   'name' => 'Location Default',
-  'number' => '1701',
+  'number' => '2118',
   'description' => 'Item Transaction Location Default',
   'version' => '0.1.1',
   'db_version' => '1001',

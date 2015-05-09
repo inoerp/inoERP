@@ -25,7 +25,7 @@ class am_asset extends dbObject {
 // public static $js_fileName = 'modules/inv/am_asset/js/multi_select.js';
  public static $system_info = [
   'name' => 'Asset Maintenance',
-  'number' => '1401',
+  'number' => '4101',
   'description' => 'Asset Maintenance',
   'version' => '0.1.4',
   'db_version' => '1001',

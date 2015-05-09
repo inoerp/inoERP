@@ -14,7 +14,7 @@
 class wip_wo_work_bench extends wip_move_transaction {
     public static $system_info = [
   'name' => 'WO Work Bench',
-  'number' => '2608',
+  'number' => '2610',
   'description' => 'Work Order Work Bench',
   'version' => '0.1.1',
   'db_version' => '1001',

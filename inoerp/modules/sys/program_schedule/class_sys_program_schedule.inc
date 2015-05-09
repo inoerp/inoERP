@@ -22,7 +22,7 @@ class sys_program_schedule extends dbObject {
  public static $module = "sys";
  public static $system_info = [
   'name' => 'Program Schedule',
-  'number' => '10013',
+  'number' => '8201',
   'description' => 'Program Schdule',
   'version' => '0.1.1',
   'db_version' => '1001',

@@ -25,7 +25,7 @@ class bom_config_header extends dbObject {
  public static $module = "bom";
  public static $system_info = [
   'name' => 'BOM',
-  'number' => '2401',
+  'number' => '2410',
   'description' => 'View and Update Config BOM ',
   'version' => '0.1.1',
   'db_version' => '1001',

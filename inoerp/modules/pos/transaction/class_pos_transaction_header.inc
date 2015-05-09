@@ -24,7 +24,7 @@ class pos_transaction_header extends dbObject {
  public static $dont_show_save_msg = true;
  public static $system_info = [
   'name' => 'POS Transaction',
-  'number' => '9402',
+  'number' => '2724',
   'description' => 'Point Of Sale Transaction',
   'version' => '0.1.1',
   'db_version' => '1001',

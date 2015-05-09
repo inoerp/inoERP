@@ -1,6 +1,13 @@
-<?php 
+<?php
+$ref_stmt = '';
 if (empty($all_contacts)) {
  return;
+} else {
+ $reference_table = !empty($_SESSION['comment_reference_table']) ? $_SESSION['comment_reference_table'] : '';
+ $reference_id = !empty($_SESSION['comment_reference_id']) ? $_SESSION['comment_reference_id'] : '';
+ $ref_stmt = "&reference_table=$reference_table&reference_id=$reference_id";
+ unset($_SESSION['comment_reference_table']);
+ unset($_SESSION['comment_reference_id']);
 }
 ?>
 <div class="tabsDetail">
@@ -33,7 +40,9 @@ if (empty($all_contacts)) {
       <tr class="extn_contact<?php echo $detailCount; ?>">
        <td>   
         <ul class="inline_action">
-         <li class="add_row_detail_img"><i class="fa fa-plus-circle"></i></li>
+         <li class="send_email"><a target="_blank" class="contact_link" 
+                                   href="form.php?class_name=web_mail&window_type=popup&<?php echo 'email=' . $cont->email_id . $ref_stmt; ?>">
+           <i class="fa fa-envelope-o clickable"></i></a></li>
          <li class="remove_row_img"><i class="fa fa-minus-circle"></i></li>
          <li class="clickable delete_ref" data-delete_id = "<?php echo htmlentities($cont->extn_contact_reference_id); ?>"><i class="fa fa-trash-o"></i></li>
         </ul>
@@ -43,13 +52,13 @@ if (empty($all_contacts)) {
         echo $f->hidden_field('extn_contact_id', $cont->extn_contact_id);
         echo $f->text_field('contact_name', $cont->contact_name);
         ?> 					</td>
-       <td><?php echo $f->text_field('last_name', $cont->last_name,'','','medium'); ?> 					</td>
-       <td><?php echo $f->text_field('first_name', $cont->last_name,'','','medium'); ?> 					</td>
-       <td><?php echo $f->text_field('middle_name', $cont->middle_name,'','','medium'); ?> 					</td>
-       <td><?php echo $f->text_field('email_id', $cont->email_id,'','','medium'); ?> 					</td>
-       <td><?php echo $f->text_field('job_titile', $cont->job_titile,'','','medium'); ?> 					</td>
+       <td><?php echo $f->text_field('last_name', $cont->last_name, '', '', 'medium'); ?> 					</td>
+       <td><?php echo $f->text_field('first_name', $cont->last_name, '', '', 'medium'); ?> 					</td>
+       <td><?php echo $f->text_field('middle_name', $cont->middle_name, '', '', 'medium'); ?> 					</td>
+       <td><?php echo $f->text_field('email_id', $cont->email_id, '', '', 'medium'); ?> 					</td>
+       <td><?php echo $f->text_field('job_titile', $cont->job_titile, '', '', 'medium'); ?> 					</td>
        <td><?php echo $f->text_field('type', $cont->type); ?> 					</td>
-       <td><?php echo $f->text_field('mobile_number', $cont->mobile_number,'','','medium'); ?> 					</td>
+       <td><?php echo $f->text_field('mobile_number', $cont->mobile_number, '', '', 'medium'); ?> 					</td>
       </tr>
       <?php
       $detailCount++;

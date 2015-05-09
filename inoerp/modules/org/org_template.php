@@ -64,22 +64,7 @@
       <div class="address_id"><?php $f->address_field_d('address_id'); ?></div>
      </div>
      <div id="tabsLine-2" class="tabContent">
-      <?php
-      if (!empty($all_contacts)) {
-       include_once HOME_DIR . '/extensions/contact/view/contact_view_template.php';
-      }
-      ?>
-      <div>
-       <ul id="new_contact_reference">
-        <li class='new_object1'><label><img class="extn_contact_id select_popup clickable"  src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
-          <?php echo gettext('Associate Contact') ?></label>  
-         <?php
-         echo $f->hidden_field('extn_contact_id_new', '');
-         echo $f->text_field('contact_name_new', '', '20', '', 'select_contact');
-         ?>  </li>
-        <li class='clickable' id='add_new_contact' title='New contact reference field'><i class="fa fa-plus-circle"></i></li>
-       </ul>
-      </div>
+      <?php echo $f->contact_field('org', $$class->org_id, $all_contacts); ?>
      </div>
     </div>
 

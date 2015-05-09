@@ -25,7 +25,7 @@ class sys_message_format extends dbObject {
 // public static $js_fileName = 'modules/inv/sys_message_format/js/multi_select.js';
  public static $system_info = [
   'name' => 'Message Format',
-  'number' => '1401',
+  'number' => '8101',
   'description' => 'Message Format',
   'version' => '0.1.4',
   'db_version' => '1001',

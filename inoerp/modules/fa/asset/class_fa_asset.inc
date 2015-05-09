@@ -25,7 +25,7 @@ class fa_asset extends dbObject {
 // public static $js_fileName = 'modules/inv/fa_asset/js/multi_select.js';
  public static $system_info = [
   'name' => 'Fixed Asset',
-  'number' => '1401',
+  'number' => '1407',
   'description' => 'Fixed Asset',
   'version' => '0.1.4',
   'db_version' => '1001',

@@ -21,7 +21,7 @@ class inv_item_relation extends dbObject {
  public static $key_column = "relation_type";
  public static $system_info = [
   'name' => 'Item Relation',
-  'number' => '9404',
+  'number' => '2119',
   'description' => 'Define and Mainten Item Relations',
   'version' => '0.1.1',
   'db_version' => '1001',

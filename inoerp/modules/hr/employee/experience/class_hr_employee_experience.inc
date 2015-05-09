@@ -1,7 +1,18 @@
 <?php
 
  class hr_employee_experience extends dbObject {
-
+  public static $system_info = [
+  'name' => 'Employee Experience',
+  'number' => '3114',
+  'description' => 'HR Employee Experience',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'dependent_class' => '',
+  'primary_entity_cb' => '',
+  'module_name' => 'hr',
+  'weight' => 7
+ ];
   public static $table_name = "hr_employee_experience";
   public static $primary_column = "hr_employee_experience_id";
   public static $key_column = 'organization_name';

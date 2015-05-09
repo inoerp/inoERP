@@ -597,6 +597,26 @@ EOD;
   echo $this->address_field_wid($field_name, $div_class);
  }
 
+ public function contact_field($ref_table, $reference_id='', $all_contacts = '') {
+  global $f;
+  if (!empty($all_contacts)) {
+   $_SESSION['comment_reference_table'] = $ref_table;
+   $_SESSION['comment_reference_id'] = $reference_id;
+   include_once HOME_DIR . '/extensions/contact/view/contact_view_template.php';
+  }
+  $contact_stmt = '<div>
+      <ul id="new_contact_reference">
+       <li class="new_object1">
+        <label><i class="fa fa-search extn_contact_id select_popup clickable" ></i> Associate Contact : </label> ';
+  $contact_stmt .= $this->hidden_field_withCLass('extn_contact_id_new', '', 'extn_contact_id');
+  $contact_stmt .= $this->text_field('contact_name_new', '', '20', '', 'select_contact contact_name');
+  $contact_stmt .=' </li>
+<li class="clickable" id="add_new_contact" title="New contact reference field"><i class="fa fa-plus-circle"></i></li>
+</ul>
+</div>';
+  return $contact_stmt;
+ }
+
 //d - default , r- readonly, s- small size, m - mandatory
 //textfields
  public function text_field_d($field_name, $div_class = "") {
@@ -659,11 +679,11 @@ EOD;
   $search_class = ucwords('Search ' . str_replace('_', ' ', $class));
   $search_class_gt = gettext($search_class);
   echo '<label class="big_popover"><a href="#" id="big_popover" ><i class="fa fa-search  clickable" 
-      title="Click here to open the serch form" data-toggle="tooltip" ></i></a>
-         <div id="popover-head" class="hide">' . $search_class_gt .
+                                                                  title="Click here to open the serch form" data-toggle="tooltip" ></i></a>
+ <div id="popover-head" class="hide">' . $search_class_gt .
   '<i title="Click Here To Make This Element Draggable"  class="fa fa-arrows medium small-left-padding make-draggable large-text clickable ">
-    </i> <span  class="close_big_popover f-right medium large-text clickable" aria-hidden="true" title="Close This Window">&times;</span></div>
-         <div id="popover-content" class="hide"><div id="search-popover">';
+  </i> <span  class="close_big_popover f-right medium large-text clickable" aria-hidden="true" title="Close This Window">&times;</span></div>
+ <div id="popover-content" class="hide"><div id="search-popover">';
   $class_o = $class;
   $$class_o = $$class;
   include __DIR__ . '/../../popover_select.php';
@@ -679,11 +699,11 @@ EOD;
   $search_class = ucwords('Search ' . str_replace('_', ' ', $class));
   $search_class_gt = gettext($search_class);
   echo '<label class="big_popover"><a href="#" id="big_popover" ><i class="fa fa-search  clickable" 
-      title="Click here to open the serch form" data-toggle="tooltip" ></i></a>
-         <div id="popover-head" class="hide">' . $search_class_gt .
+                                                                  title="Click here to open the serch form" data-toggle="tooltip" ></i></a>
+ <div id="popover-head" class="hide">' . $search_class_gt .
   '<i title="Click Here To Make This Element Draggable" class="fa fa-arrows small-left-padding make-draggable medium large-text clickable ">
-    </i> <span  class="close_big_popover f-right medium large-text clickable" aria-hidden="true"  title="Close This Window">&times;</span></div>
-         <div id="popover-content" class="hide"><div id="search-popover">';
+  </i> <span  class="close_big_popover f-right medium large-text clickable" aria-hidden="true"  title="Close This Window">&times;</span></div>
+ <div id="popover-content" class="hide"><div id="search-popover">';
   $class_o = $class;
   $$class_o = $$class;
   include __DIR__ . '/../../popover_select.php';
@@ -1080,14 +1100,14 @@ EOD;
   }
 
   $element_text_field .= "<input type=\"text\" name=\"ac_combinations[]\" value=\"$combination\" 
-	 maxlength=\"$maxlength\" size=\"$size\" class=\"combination $name textfield $div_class account_combination\" "
+                               maxlength=\"$maxlength\" size=\"$size\" class=\"combination $name textfield $div_class account_combination\" "
    . "placeholder=\"$place_holder\"  $required $idvalue $readonly title=\"$title\"  data-toggle=\"tooltip\" $ac_type_i >";
   $element_text_field .= $this->accpup_stmt();
   return $element_text_field;
  }
 
  public function accpup_stmt() {
-//  return "<img src=\"" . HOME_URL . "/themes/images/serach.png\" class=\"account_popup select_popup clickable\" >";
+  //  return "<img src=\"" . HOME_URL . "/themes/images/serach.png\" class=\"account_popup select_popup clickable\" >";
   return '<i class="select_account select_popup clickable fa fa-search"></i>';
  }
 
@@ -1274,7 +1294,7 @@ EOD;
    $idvalue = "";
   }
   $element_text_field = "<textarea name=\"$bracketName\" 
-	 cols=\"$columnsize\" rows=\"$rowsize\" class=\"textfield $name $div_class \" title=\"$title\" placeholder=\"$place_holder\" $required $idvalue $readonly>$value</textarea>";
+                                 cols=\"$columnsize\" rows=\"$rowsize\" class=\"textfield $name $div_class \" title=\"$title\" placeholder=\"$place_holder\" $required $idvalue $readonly>$value</textarea>";
   return $element_text_field;
  }
 
@@ -1309,7 +1329,7 @@ EOD;
    $idvalue = "";
   }
   $element_text_field = "<textarea name=\"$bracketName\" 
-	 cols=\"$columnsize\" rows=\"$rowsize\" class=\"textfield $name $div_class \" title=\"$title\" placeholder=\"$place_holder\" $required $idvalue $readonly>$value_html</textarea>";
+                                 cols=\"$columnsize\" rows=\"$rowsize\" class=\"textfield $name $div_class \" title=\"$title\" placeholder=\"$place_holder\" $required $idvalue $readonly>$value_html</textarea>";
   return $element_text_field;
  }
 
@@ -1716,7 +1736,7 @@ EOD;
   }
   $value = htmlentities($value);
   $element_extra_field = "<input type=\"text\" name=\"efid[]\" value=\"$value\" maxlength=\"200\" 
-										size=\"$size\" class=\"efid\" $readonly \>";
+                               size=\"$size\" class=\"efid\" $readonly \>";
   return $element_extra_field;
  }
 
@@ -1734,7 +1754,7 @@ EOD;
   }
 
   $element_extra_field = "<input type=\"checkbox\" name=\"$bracketName\"  class=\"checkBox $name $class_name \" id=\"$id\" 
-	 value=\"1\"  $checked $readonly>";
+                               value=\"1\"  $checked $readonly>";
   return $element_extra_field;
  }
 
@@ -1829,12 +1849,12 @@ EOD;
 
   $stmt_rtn = '';
   $stmt_rtn .= '<div id="tabsLine">
-				 <ul class="tabMain">';
+ <ul class="tabMain">';
   for ($i = 0; $i < $no_of_tabs; $i++) {
    $stmt_rtn .= "<li><a href=\"#tabsLine-$i\">Tab No $i </a></li>";
   }
   $stmt_rtn .= ' </ul>
-				 <div class="tabContainer"> ';
+ <div class="tabContainer"> ';
 
   for ($i = 0; $i < $no_of_tabs; $i++) {
    $stmt_rtn .= "<div id=\"tabsLine-$i\" class='tabContent'>";

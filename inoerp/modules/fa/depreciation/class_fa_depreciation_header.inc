@@ -24,7 +24,7 @@ class fa_depreciation_header extends dbObject {
  public static $js_fileName_prg = 'modules/fa/depreciation/depreciation.js';
  public static $system_info = [
   'name' => 'depreciation',
-  'number' => '1405',
+  'number' => '1406',
   'description' => 'Depreciation ',
   'version' => '0.1.1',
   'db_version' => '1001',

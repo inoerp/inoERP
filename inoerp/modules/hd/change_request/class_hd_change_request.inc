@@ -22,7 +22,7 @@ class hd_change_request extends dbObject {
  public static $module = "hd";
  public static $system_info = [
   'name' => 'change Request',
-  'number' => '3108',
+  'number' => '5101',
   'description' => 'change Request',
   'version' => '0.1.1',
   'db_version' => '1001',

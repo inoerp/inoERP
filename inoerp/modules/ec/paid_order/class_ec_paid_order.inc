@@ -30,9 +30,9 @@ class ec_paid_order extends dbObject {
  public static $module = "ec";
 // public static $js_fileName = 'modules/inv/ec_paid_order/js/multi_select.js';
  public static $system_info = [
-  'name' => 'eComm Payment Method',
-  'number' => '1401',
-  'description' => 'eCommerce Payment Methods',
+  'name' => 'eComm Paid Order',
+  'number' => '4206',
+  'description' => 'eCommerce Paid Orders',
   'version' => '0.1.4',
   'db_version' => '1001',
   'mod_version' => '1.1.1',

@@ -165,7 +165,6 @@ trait dbObject_t {
   $comment->comment = $comment_msg;
   $comment->subject = $comment_sub;
   $comment->published_cb = 1;
-  $comment->audit_trial();
   $comment->save();
  }
 

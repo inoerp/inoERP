@@ -22,7 +22,7 @@ class hd_support_request extends dbObject {
  public static $module = "hd";
  public static $system_info = [
   'name' => 'Support Request',
-  'number' => '3108',
+  'number' => '5104',
   'description' => 'Support Request',
   'version' => '0.1.1',
   'db_version' => '1001',

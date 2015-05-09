@@ -3835,15 +3835,6 @@ $(document).ready(function () {
   contactObjectCount++;
  });
 
- //popup for contact
- $('#content').on('click', '.extn_contact_id.select_popup', function () {
-  var fieldClass = $(this).closest('li').prop('class');
-  localStorage.setItem("contact_field_class", fieldClass);
-  void window.open('select.php?class_name=extn_contact', '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
-
-
  getBlocks();
 
 
@@ -4418,11 +4409,25 @@ $(document).ready(function () {
   $(this).closest('.ino-images').find('.existing-image').css('display', 'none');
  });
 
+ //popup for contact
+ $('#content').on('click', '.extn_contact_id.select_popup', function () {
+  var close_field_class = '.' + $(this).closest('li').find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+  void window.open('select.php?class_name=extn_contact', '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+ 
  $("body").on("click", ".select_am_asset_number.select_popup", function () {
   var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
   void window.open('select.php?class_name=am_asset', '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+ 
+  $("body").on("click", "a.contact_link", function (e) {
+   e.preventDefault();
+  void window.open($(this).prop('href'), '_blank',
+          'width=1000,height=600,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
  $("body").on("click", ".wo_number.select_popup", function () {

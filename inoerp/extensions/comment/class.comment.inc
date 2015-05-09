@@ -159,7 +159,7 @@ class comment extends dbObject {
   $this->_disable_block('comment_recent_comments');
  }
 
- public function content_comment_with_reference($numbers = '', $start_from = '') {
+ public function content_comment_with_reference($numbers = 10, $start_from = '') {
   $sql = " SELECT comment.comment_id, comment.subject,
 	         content.content_id, content.content_type_id,
            comment.reference_table, comment.reference_id, comment.comment ,comment.published_cb, comment.creation_date,
@@ -169,7 +169,6 @@ class comment extends dbObject {
 					WHERE comment.reference_table = 'content'
           AND content.content_id = comment.reference_id 
 					AND comment.subject IS NOT NULL AND comment.subject !='' 
-            
           ";
 
   $sql .=" ORDER BY comment.comment_id DESC, comment.weightage DESC ";
@@ -197,7 +196,10 @@ class comment extends dbObject {
    if(empty($result)){
     return;
    }
-   foreach ($result as $records) {
+   foreach ($result as $records_c => $records) {
+    if($records_c >= $numbers){
+     break;
+    }
     $comment_string .= '<li class="comment_subject">';
     $comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&' . 'content_id=' . $records->content_id .
      '&content_type_id=' . $records->content_type_id . '#comment_id_' . $records->comment_id . '">';

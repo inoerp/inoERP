@@ -24,7 +24,7 @@ class am_ms_date_rule extends dbObject {
  public static $module = "am";
  public static $system_info = [
   'name' => 'MS Date Rule',
-  'number' => '2105',
+  'number' => '4109',
   'description' => 'Maintenace Schedule Date Rule',
   'version' => '0.1.1',
   'db_version' => '1001',

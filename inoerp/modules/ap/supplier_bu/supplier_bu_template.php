@@ -15,8 +15,6 @@
     <li><?php $f->l_text_field_d('supplier_number'); ?></li>               
     <li><?php $f->l_text_field_d('supplier_name'); ?></li>
     <li><?php $f->l_status_field_d('status'); ?></li>
-    <li><?php $f->l_checkBox_field_d('rev_enabled_cb'); ?></li> 
-    <li><?php $f->l_text_field_d('rev_number'); ?></li> 
    </ul>
   </div>
 
@@ -51,29 +49,8 @@
      <!--end of tab1 div three_column-->
     </div> 
     <div id="tabsLine-2" class="tabContent">
-     <div class="left_half shipto address_details">
-      <ul class="column four_column">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-         <?php gettext('Ship To Site Id'); ?></label><?php $f->text_field_d('org_shipto_id', 'address_id site_address_id'); ?>
-       </li>
-       <li><?php $f->l_text_field_dr('ship_to_address_name', 'address_name'); ?></li>
-       <li><?php $f->l_text_field_dr('ship_to_address', 'address'); ?></li>
-       <li><?php $f->l_text_field_dr('ship_to_country', 'country'); ?></li>
-       <li><?php echo $f->l_text_field_dr('ship_to_postal_code', 'postal_code'); ?></li>
-      </ul>
-     </div> 
-     <div class="right_half billto address_details">
-      <ul class="column four_column">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-         <?php gettext('Bill To Site Id'); ?></label>
-        <?php $f->text_field_d('org_billto_id', 'address_id  site_address_id'); ?>
-       </li>
-       <li><?php $f->l_text_field_dr('bill_to_address_name', 'address_name'); ?></li>
-       <li><?php $f->l_text_field_dr('bill_to_address', 'address'); ?></li>
-       <li><?php $f->l_text_field_dr('bill_to_country', 'country'); ?></li>
-       <li><?php echo $f->l_text_field_dr('bill_to_postal_code', 'postal_code'); ?></li>
-      </ul>
-     </div> 
+      <div class="shipto_address"><?php $f->address_field_d('org_shipto_id'); ?></div>
+      <div class="billto_address"><?php $f->address_field_d('org_billto_id'); ?></div>
     </div> 
     <!--end of tab1-->
     <div id="tabsLine-3" class="tabContent">

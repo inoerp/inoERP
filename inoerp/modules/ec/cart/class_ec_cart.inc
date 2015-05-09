@@ -24,7 +24,7 @@ class ec_cart extends dbObject {
 // public static $js_fileName = 'modules/inv/ec_cart/js/multi_select.js';
  public static $system_info = [
   'name' => 'Cart',
-  'number' => '1401',
+  'number' => '4201',
   'description' => 'Product Cart',
   'version' => '0.1.4',
   'db_version' => '1001',

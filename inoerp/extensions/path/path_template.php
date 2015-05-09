@@ -2,7 +2,7 @@
  <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
  <!--    End of place for showing error messages-->
  <div id ="form_header">
-  <form  method="post" size="30" id="path" name="path"  >
+  <form  method="post" id="path" name="path"  >
    <span class="heading"><?php echo gettext('System Path') ?></span>
    <div class="tabContainer"> 
     <ul class="column header_field two_column_form"> 

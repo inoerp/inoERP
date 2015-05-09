@@ -4,7 +4,7 @@
 
    public static $system_info = [
   'name' => 'SS - Employee Termination ',
-  'number' => '9107',
+  'number' => '3117',
   'description' => 'Self Service Employee Termination',
   'version' => '0.1.1',
   'db_version' => '1001',

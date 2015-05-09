@@ -20,7 +20,7 @@ class am_resource_transaction extends dbObject {
  public static $module = "am";
  public static $system_info = [
   'name' => 'Resource Transaction',
-  'number' => '2605',
+  'number' => '4113',
   'description' => 'Resource Transaction',
   'version' => '0.1.1',
   'db_version' => '1001',

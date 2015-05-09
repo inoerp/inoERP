@@ -8,7 +8,7 @@ class bc_label_auto_trigger extends dbObject {
  public static $module = "sys";
   public static $system_info = [
   'name' => 'BC Auto-trigger',
-  'number' => '9201',
+  'number' => '9220',
   'description' => 'Barcode label auto trigger',
   'version' => '0.1.1',
   'db_version' => '1001',

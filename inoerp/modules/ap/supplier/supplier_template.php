@@ -1,6 +1,6 @@
 <div id ="form_header">
  <form action=""  method="post" id="supplier_header"  name="supplier_header">
-  <span class="heading"><?php echo gettext('Supplier') ?></span>
+  <span class="heading"><?php echo gettext('Supplier Master') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -9,27 +9,26 @@
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
-      <ul class="column header_field">
-       <li><?php $f->l_text_field_dr_withSearch('supplier_id'); ?>
-        <a name="show" href="form.php?class_name=supplier&<?php echo "mode=$mode"; ?>" class="show document_id supplier_id">
-         <i class="fa fa-refresh"></i></a> 
-       </li>
-       <li><?php $f->l_number_field_d('supplier_number'); ?></li>               
-       <li><label><?php echo gettext('Supplier Name') ?></label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly); ?>
-        <img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete supplier_name clickable">
-       </li>
-       <li><?php $f->l_select_field_from_object('supplier_type', supplier::supplier_types(), 'option_line_code', 'option_line_code', $$class->supplier_type, 'supplier_type', '', '', $readonly); ?>       </li>
-       <li><?php $f->l_number_field_d('customer_id'); ?></li>
-       <li><?php $f->l_select_field_from_object('tax_country', option_header::COUNTRIES(), 'option_line_code', 'option_line_code', $$class->tax_country, 'tax_country', '', '', $readonly); ?>             </li>
-       <li><?php $f->l_text_field_d('tax_reg_no'); ?></li>
-       <li><?php $f->l_text_field_d('tax_payer_id'); ?></li>
-       <li><?php $f->l_text_field_d('supplier_contact_id'); ?></li>
-       <li><?php $f->l_status_field_d('status'); ?></li>
-       <li><?php $f->l_checkBox_field_d('rev_enabled_cb'); ?>             </li> 
-       <li><?php $f->l_text_field_d('rev_number'); ?></li> 
-      </ul>
-     </div>
+     <ul class="column header_field">
+      <li><?php $f->l_text_field_dr_withSearch('supplier_id'); ?>
+       <a name="show" href="form.php?class_name=supplier&<?php echo "mode=$mode"; ?>" class="show document_id supplier_id">
+        <i class="fa fa-refresh"></i></a> 
+      </li>
+      <li><?php $f->l_number_field_d('supplier_number'); ?></li>               
+      <li><label><?php echo gettext('Supplier Name') ?></label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly); ?>
+       <img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete supplier_name clickable">
+      </li>
+      <li><?php $f->l_select_field_from_object('supplier_type', supplier::supplier_types(), 'option_line_code', 'option_line_value', $$class->supplier_type, 'supplier_type', '', '', $readonly); ?>       </li>
+      <li><?php $f->l_select_field_from_object('supplier_category', supplier::supplier_category(), 'option_line_code', 'option_line_value', $$class->supplier_category, 'supplier_category', '', '', $readonly); ?>       </li>
+      <li><label><?php echo gettext('Customer Name') ?></label><?php $f->text_field_d('customer_name', 'select_customer_name'); ?>
+       <?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
+      </li>
+      <li><?php $f->l_select_field_from_object('tax_country', option_header::COUNTRIES(), 'option_line_code', 'option_line_value', $$class->tax_country, 'tax_country', '', '', $readonly); ?>             </li>
+      <li><?php $f->l_text_field_d('tax_reg_no'); ?></li>
+      <li><?php $f->l_text_field_d('tax_payer_id'); ?></li>
+      <li><?php $f->l_status_field_d('status'); ?></li>
+      <li><?php $f->l_text_field_d('alt_name'); ?></li> 
+     </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div class="column header_field"> 
@@ -39,14 +38,13 @@
     <div id="tabsHeader-3" class="tabContent">
      <div class="header_address"><?php $f->address_field_d('address_id', 1, 'suplier_header'); ?></div>
     </div>
-
    </div>
 
   </div>
  </form>
 </div>
-<span class="heading"><?php echo gettext('Supplier Site Details') ?></span>
-<div id ="form_line" class="form_line">
+
+<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Supplier Site Details') ?></span>
  <form action=""  method="post" id="supplier_site"  name="supplier_site">
   <div id='line_before_tab' class="line_before_tab"> 
    <ul class="column five_column inline_list"> 
@@ -70,6 +68,7 @@
     <li><a href="#tabsLine-5"><?php echo gettext('Attachments') ?></a></li>
     <li><a href="#tabsLine-6"><?php echo gettext('Contact') ?> </a></li>
     <li><a href="#tabsLine-7"><?php echo gettext('Notes') ?> </a></li>
+    <li><a href="#tabsLine-8"><?php echo gettext('Secondary') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
@@ -79,7 +78,7 @@
        <li><?php $f->l_select_field_from_object('site_tax_country', option_header::COUNTRIES(), 'option_line_code', 'option_line_code', $supplier_site->site_tax_country, 'tax_country', '', '', $readonly); ?>       </li>
        <li><?php $f->l_text_field('site_tax_reg_no', $$class_second->site_tax_reg_no); ?></li>
        <li><?php $f->l_text_field('site_tax_payer_id', $$class_second->site_tax_payer_id); ?></li>
-       <li><?php // $f->l_text_field('site_tax_reg_no', $$class_second->site_tax_reg_no);      ?></li>
+       <li><?php $f->l_text_field('site_tax_reg_no', $$class_second->site_tax_reg_no); ?></li>
        <li><?php $f->l_text_field('bank_id', $$class_second->bank_id); ?></li>
        <li><?php $f->l_text_field('bank_account_id', $$class_second->bank_account_id); ?></li>
       </ul>
@@ -96,13 +95,11 @@
        <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $supplier_site->currency, 'currency', '', '', $readonly); ?>       </li>
        <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $supplier_site->payment_term_id, 'payment_term_id', $readonly, '', ''); ?>       </li>
        <li><?php $f->l_checkBox_field('debit_memo_onreturn_cb', $$class_second->debit_memo_onreturn_cb); ?>       </li> 
-       <li><?php $f->l_text_field('site_tax_reg_no', $$class_second->pay_on); ?></li>
-       <li><?php $f->l_text_field('site_tax_payer_id', $$class_second->fob); ?></li>
-       <li><?php $f->l_text_field('site_tax_reg_no', $$class_second->freight_terms); ?></li>
-       <li><?php $f->l_text_field('site_tax_payer_id', $$class_second->transportation); ?></li>
-       <li><label>Country Of Origin : </label>
-        <?php $f->l_select_field_from_object('country_of_origin', option_header::COUNTRIES(), 'option_line_code', 'option_line_value', $supplier_site->country_of_origin, 'country_of_origin'); ?>
-       </li> 
+       <li><?php $f->l_text_field('pay_on', $$class_second->pay_on); ?></li>
+       <li><?php $f->l_text_field('fob', $$class_second->fob); ?></li>
+       <li><?php $f->l_text_field('freight_terms', $$class_second->freight_terms); ?></li>
+       <li><?php $f->l_text_field('transportation', $$class_second->transportation); ?></li>
+       <li><?php $f->l_select_field_from_object('country_of_origin', option_header::COUNTRIES(), 'option_line_code', 'option_line_value', $supplier_site->country_of_origin, 'country_of_origin'); ?>       </li> 
       </ul>
      </div>
      <div class="second_rowset">
@@ -145,7 +142,7 @@
     </div>
     <!--end of tab2 (purchasing)!!!! start of sales tab-->
     <div id="tabsLine-4" class="tabContent">
-<div class="header_address"><?php $f->address_field_d('address_id', 1, 'site_address'); ?></div>
+     <div class="header_address"><?php $f->address_field_d('address_id', 1, 'site_address'); ?></div>
     </div> 
     <!--                end of tab3 div three_column-->
     <!--end of tab3 (sales)!!!!start of purchasing tab-->
@@ -154,22 +151,7 @@
     </div>
     <!--end of tab4(purchasing)!!! start of MFG tab-->
     <div id="tabsLine-6" class="tabContent">
-     <?php
-     if (!empty($all_contacts)) {
-      include_once HOME_DIR . '/extensions/contact/view/contact_view_template.php';
-     }
-     ?>
-     <div>
-      <ul id="new_contact_reference">
-       <li class='new_object1'><label><img class="extn_contact_id select_popup clickable"  src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
-         Associate Contact : </label>  
-        <?php
-        echo $f->hidden_field('extn_contact_id_new', '');
-        echo $f->text_field('contact_name_new', '', '20', '', 'select_contact');
-        ?>  </li>
-       <li class='clickable' id='add_new_contact' title='New contact reference field'><i class="fa fa-plus-circle"></i></li>
-      </ul>
-     </div>
+     <?php echo $f->contact_field('supplier_site', $$class_second->supplier_site_id, $all_contacts); ?>
     </div>
 
     <div id="tabsLine-7" class="tabContent">
@@ -186,6 +168,9 @@
       <div id="new_comment">
       </div>
      </div>
+    </div>
+    <div id="tabsLine-8" class="tabContent">
+     <?php echo!empty($secondary_field_stmt) ? $secondary_field_stmt : null; ?>
     </div>
     <!--end of tab5 (Manufacturing)!! start of planning -->
    </div>

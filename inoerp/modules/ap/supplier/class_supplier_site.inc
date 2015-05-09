@@ -157,6 +157,14 @@ class supplier_site extends dbObject {
 	return $coa_account_types;
  }
 
+  public function _after_save() {
+
+  if ((!empty($this->supplier_site_id)) && empty($this->supplier_site_number)) {
+   $this->supplier_site_number = $this->supplier_site_id;
+   $this->save();
+  }
+ }
+ 
  public static function find_all_sitesOfSupplier_array($supplier_id = "") {
 	global $db;
 	$sql = " SELECT * FROM ";

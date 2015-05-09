@@ -22,7 +22,7 @@ class am_move_transaction extends dbObject {
  public static $module = "wip";
  public static $system_info = [
   'name' => 'Move Transaction',
-  'number' => '2604',
+  'number' => '4107',
   'description' => 'Work Order Move Transaction',
   'version' => '0.1.1',
   'db_version' => '1001',

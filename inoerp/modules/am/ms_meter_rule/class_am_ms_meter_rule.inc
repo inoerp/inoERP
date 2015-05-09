@@ -24,7 +24,7 @@ class am_ms_meter_rule extends dbObject {
  public static $module = "am";
  public static $system_info = [
   'name' => 'MS Meter Rule',
-  'number' => '2105',
+  'number' => '4111',
   'description' => 'Maintenace Schedule Meter Rule',
   'version' => '0.1.1',
   'db_version' => '1001',

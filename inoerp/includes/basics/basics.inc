@@ -417,6 +417,7 @@ require_once(INC_EXTENSIONS . DS . "view" . DS . "result" . DS . "class_view_res
 require_once(INC_EXTENSIONS . DS . "web_tracking" . DS . "class_web_tracking.inc");
 require_once(INC_EXTENSIONS . DS . "url_alias" . DS . "class_ext_url_alias.inc");
 require_once(INC_EXTENSIONS . DS . "web_contact" . DS . "class_web_contact.inc");
+require_once(INC_EXTENSIONS . DS . "web_mail" . DS . "class_web_mail.inc");
 require_once(INC_EXTENSIONS . DS . "site_search" . DS . "class_extn_site_search.inc");
 require_once(INC_EXTENSIONS . DS . "rating" . DS . "class_extn_rating_values.inc");
 require_once(INC_EXTENSIONS . DS . "rating" . DS . "class_extn_rating_control.inc");

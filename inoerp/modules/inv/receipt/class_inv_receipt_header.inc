@@ -25,7 +25,7 @@ class inv_receipt_header extends dbObject {
  public static $js_fileName = 'modules/inv/receipt/extra/extra_inv_receipt.js';
   public static $system_info = [
   'name' => 'INV Receipt',
-  'number' => '2112',
+  'number' => '2120',
   'description' => 'Inventory Receipt',
   'version' => '0.1.1',
   'db_version' => '1001',

@@ -24,7 +24,7 @@ class am_ms_calendar_date extends dbObject {
  public static $module = "am";
  public static $system_info = [
   'name' => 'MS Calendar Date',
-  'number' => '2105',
+  'number' => '4108',
   'description' => 'Maintenace Schedule Calendar Date',
   'version' => '0.1.1',
   'db_version' => '1001',

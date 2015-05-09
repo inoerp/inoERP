@@ -14,7 +14,7 @@
 class am_wo_work_bench extends am_move_transaction {
     public static $system_info = [
   'name' => 'WO Work Bench',
-  'number' => '2608',
+  'number' => '4115',
   'description' => 'Work Order Work Bench',
   'version' => '0.1.1',
   'db_version' => '1001',

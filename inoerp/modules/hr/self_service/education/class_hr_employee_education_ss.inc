@@ -4,7 +4,7 @@ class hr_employee_education_ss extends hr_employee_education {
 
  public static $system_info = [
   'name' => 'SS - Employe Education ',
-  'number' => '9107',
+  'number' => '3115',
   'description' => 'Self Service Employee Education',
   'version' => '0.1.1',
   'db_version' => '1001',

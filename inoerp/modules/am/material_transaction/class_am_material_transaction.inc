@@ -19,7 +19,7 @@ class am_material_transaction extends inv_transaction {
  public static $module = "am";
  public static $system_info = [
   'name' => 'AM Material Transaction',
-  'number' => '2603',
+  'number' => '4105',
   'description' => 'AM Work Order Material Transaction',
   'version' => '0.1.1',
   'db_version' => '1001',

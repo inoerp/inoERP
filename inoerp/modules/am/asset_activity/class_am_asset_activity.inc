@@ -16,6 +16,18 @@
  */
 // public $rev_enabled_cb;  needs to be dropped - use item rev only
 class am_asset_activity extends item {
+ 
+  public static $system_info = [
+  'name' => 'Asset Activity',
+  'number' => '4103',
+  'description' => 'Asset Maintenance',
+  'version' => '0.1.4',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'am',
+  'weight' => 1
+ ];
 
  public $pageTitle = " Asset Activity "; //page Title
 
