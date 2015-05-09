@@ -72,8 +72,7 @@ class user extends dbObject {
   "username",
   "first_name",
   "last_name",
-  "email",
-  'password'
+  "email"
  ];
  public $fields_inForm_notInDataBase = [
   "enteredPassword",

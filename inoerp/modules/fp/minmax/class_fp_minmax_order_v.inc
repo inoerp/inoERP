@@ -1,7 +1,7 @@
 <?php
 
 class fp_minmax_order_v extends dbObject {
-
+public static $form_class_name = "fp_minmax_demand";
  public static $table_name = "fp_minmax_order_v";
  public static $primary_column = "fp_minmax_demand_id";
  public static $key_column = 'item_id_m';

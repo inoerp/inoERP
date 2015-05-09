@@ -29,8 +29,8 @@ if (!empty($_POST['submitLogin'])) { //form is submitted for login
 	$session->login($loggedin_user);
 //	$session->assign_role($_SESSION['user_id']);
 	if (!empty($_SESSION['orginal_page'])) {
-//   redirect_to(HOME_URL . "form.php?class_name=user_dashboard_v");
-	 header('Location: http://' . $session->orginal_page);
+   redirect_to(HOME_URL . "form.php?class_name=user_dashboard_v");
+//	 header('Location: http://' . $session->orginal_page);
 //	 unset($_SESSION['orginal_page']);
 //	 unset($session->orginal_page);
 	} else {

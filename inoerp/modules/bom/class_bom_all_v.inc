@@ -1,7 +1,7 @@
 <?php
 
 class bom_all_v extends dbObject {
-
+public static $form_class_name = "bom_header";
  public static $table_name = "bom_all_v";
  public static $primary_column = "bom_header_id";
  public $field_a = [

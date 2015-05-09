@@ -3,6 +3,7 @@
 // public $rev_enabled_cb;  needs to be dropped - use item rev only
 class item_select extends dbObject {
 
+ public static $form_class_name = "item_select";
  public static $table_name = "item_select_v";
  public static $primary_column = "item_id_m";
  public static $key_column = 'item_number';

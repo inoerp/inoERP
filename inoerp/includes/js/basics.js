@@ -3838,7 +3838,7 @@ $(document).ready(function () {
  getBlocks();
 
 
- $('body').on('click', '#path_by_module a,.search_result a, #header_top .menu a, #sys_menu_left_vertical .menu a,#search_result .action a, #pagination .page_nos a, #new_page_button', function (e) {
+ $('body').on('click', '#path_by_module a,.search_result a,#erp_form_area a.ajax-link , #header_top .menu a, #sys_menu_left_vertical .menu a,#search_result .action a, #pagination .page_nos a, #new_page_button', function (e) {
   e.preventDefault();
   var urlLink = $(this).attr('href');
   var urlLink_a = urlLink.split('?');

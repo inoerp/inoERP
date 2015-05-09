@@ -66,7 +66,7 @@
    'to_bank_line_id',
    'exchange_rate_type',
    'exchange_rate',
-   'ef_id',
+   'processing_method',
    'document_date',
    'document_number',
    'ledger_id',
@@ -158,7 +158,7 @@
   public $to_bank_line_id;
   public $exchange_rate_type;
   public $exchange_rate;
-  public $ef_id;
+  public $processing_method;
   public $document_date;
   public $document_number;
   public $ledger_id;

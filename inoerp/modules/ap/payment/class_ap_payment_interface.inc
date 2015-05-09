@@ -160,19 +160,6 @@ class ap_payment_interface extends dbObject {
  public $multi_action_class_pc;
  public $multi_action_class_pc_value;
 
- public function __set($name, $value) {
-	switch ($value) {
-	 case $value:
-
-
-		break;
-
-	 default:
-		$this->$name = $value;
-		break;
-	}
- }
-
  public function _before_save() {
 	if ((!empty($this->ap_transaction_header_id)) && ($this->action == 'multi_payment')) {
 	 $this->_multi_payment_action();

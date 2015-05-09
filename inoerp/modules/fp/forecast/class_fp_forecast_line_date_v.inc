@@ -1,7 +1,7 @@
 <?php
 
  class fp_forecast_line_date_v extends dbObject {
-
+public static $form_class_name = "fp_forecast_header";
   public static $table_name = "fp_forecast_line_date_v";
   public static $primary_column = "fp_forecast_line_date_id";
   public static $key_column = 'item_id_m';

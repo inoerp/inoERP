@@ -2,6 +2,7 @@
 
 class org_v extends dbObject {
 
+ public static $form_class_name = "org";
  public static $table_name = "org_v";
  public static $primary_column = "org_id";
  public static $key_column = 'org';

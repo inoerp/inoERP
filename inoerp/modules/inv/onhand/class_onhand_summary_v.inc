@@ -2,6 +2,7 @@
 
  class onhand_summary_v extends dbObject {
 
+  public static $form_class_name = "item";
   public static $table_name = "onhand_summary_v";
   public static $primary_column = "onhand_id";
   public $field_a = [

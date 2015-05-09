@@ -2,6 +2,7 @@
 
 class po_convert_requisition_v extends dbObject {
 
+ public static $form_class_name = "po_requisition_header";
  public static $table_name = "po_convert_requisition_v";
  public static $primary_column = "po_requisition_detail_id";
  public $field_a = [

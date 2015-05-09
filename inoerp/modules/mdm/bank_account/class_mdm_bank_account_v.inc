@@ -2,6 +2,7 @@
 
 class mdm_bank_account_v extends dbObject {
 
+ public static $form_class_name = "mdm_bank_account";
  public static $table_name = "mdm_bank_account_v";
  public static $primary_column = "mdm_bank_account_id";
  public static $key_column = 'account_number';

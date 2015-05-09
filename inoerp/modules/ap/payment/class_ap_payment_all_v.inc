@@ -1,7 +1,7 @@
 <?php
 
  class ap_payment_all_v extends dbObject {
-
+public static $form_class_name = "ap_payment_header";
   public static $table_name = "ap_payment_all_v";
   public static $primary_column = "ap_payment_header_id";
   public $field_a = [

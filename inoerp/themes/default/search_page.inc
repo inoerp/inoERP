@@ -197,6 +197,16 @@
      <div id="content">
       <div id="structure"><span class="heading">
         <?php
+        if (property_exists($class_first, 'module') && !property_exists($class_first, 'dont_show_bread_crum')) {
+         $module_name = $class_first::$module;
+         $module_name_c = strtoupper($module_name);
+         $form_bread_crum = '<ul class=inline-list>';
+         $form_bread_crum .= "<li title=\"My Dashboard\" >" . '<a  class="ajax-link" href="' . HOME_URL . 'form.php?class_name=user_dashboard_v"> Dashboard  >> </a></li>';
+         $form_bread_crum .= '<li title="'.$module_name_c.'" ><a  class="ajax-link" href="' . HOME_URL . 'form.php?module_code=' . $module_name . '">&nbsp; ' . $module_name_c . ' </a></li>';
+         $form_bread_crum .= '</ul>';
+         echo $form_bread_crum;
+        }
+
         if (!empty($_GET['function_name'])) {
          echo '<div class="alert alert-info" role="alert" >' . ucwords(str_replace('_', ' ', $_GET['function_name'])) . ' Report</div>';
         } else {

@@ -137,15 +137,9 @@ table#forum_list td.post_date{
 
 
 #content_element{
- display: block;
- background-color: rgba(105, 149, 144, 0.23);
- background-image: url("images/heading_bg7.png");
- border: 1px solid #CCC;
- width: 740px;
- float: left;
- margin-bottom: 20px;
- padding: 5px 10px;
- margin-left: 10px;
+border-bottom: 6px groove #A1A78F;
+margin: 0px 0 20px 0;
+padding: 0 0 10px 0;
 }
 
 #content_element ul{

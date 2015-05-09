@@ -2,6 +2,7 @@
 
 class wip_wo_routing_v extends dbObject {
 
+ public static $form_class_name = "wip_wo_header";
  public static $table_name = "wip_wo_routing_v";
  public static $primary_column = "wip_wo_routing_detail_id";
  public $field_a = [

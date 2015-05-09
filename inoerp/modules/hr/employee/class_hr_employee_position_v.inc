@@ -1,9 +1,9 @@
 <?php
 
  class hr_employee_position_v extends dbObject {
-
+public static $form_class_name = "hr_employee";
   public static $table_name = "hr_employee_position_v";
-  public static $primary_column = "sd_so_header_id";
+  public static $primary_column = "hr_employee_id";
   public $field_a = [
    'user_id',
    'username',

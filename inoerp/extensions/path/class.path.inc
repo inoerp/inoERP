@@ -506,11 +506,16 @@ class path extends dbObject {
    $url = $path->fullPath($path->path_link);
    $p_name = $path->name;
    $p_desc = $path->description;
+   $allPaths .= '<div class="panel-heading dashboard">';
+   $allPaths .= '<ul class=inline-list>';
+   $allPaths .= "<li title=\"My Dashboard\" >" . 
+    '<a  class="ajax-link" href="'.HOME_URL.'form.php?class_name=user_dashboard_v"> Dashboard  >> </a></li>';
    if ($this->show_description) {
-    $allPaths .= "<div title=\"$p_name\" class='panel-heading {$path->name} '>" . '<a href="' . $url . '">' . $p_desc . '</a></div>';
+    $allPaths .= "<li title=\"$p_name\" class='{$path->name} '>" . '<a  class="ajax-link" href="' . $url . '">' . $p_desc . '</a></li>';
    } else {
-    $allPaths .= "<div title=\"$p_desc\" class='panel-heading {$path->name} '>" . '<a href="' . $url . '">' . $p_name . '</a></div>';
+    $allPaths .= "<li title=\"$p_desc\" class='{$path->name} '>" . '<a  class="ajax-link" href="' . $url . '">' . $p_name . '</a></li>';
    }
+   $allPaths .= '</ul></div>';
    $allPaths .= '<div class="panel-body"><ul class="child_menu">';
    $childs = $path->findAll_childOfPartent($path_id);
    foreach ($childs as $child_paths) {

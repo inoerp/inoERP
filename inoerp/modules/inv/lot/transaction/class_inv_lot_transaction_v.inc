@@ -1,6 +1,8 @@
 <?php
 
  class inv_lot_transaction_v extends dbObject {
+  
+  public static $form_class_name = "inv_lot_transaction";
 
   public static $table_name = "inv_lot_transaction_v";
   public static $primary_column = "po_header_id";

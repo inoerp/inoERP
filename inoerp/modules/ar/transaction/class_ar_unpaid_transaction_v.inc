@@ -1,7 +1,7 @@
 <?php
 
 class ar_unpaid_transaction_v extends dbObject {
-
+public static $form_class_name = "ar_transaction_header";
  public static $table_name = "ar_unpaid_transaction_v";
  public static $primary_column = "ar_transaction_header_id";
  public static $key_column = 'transaction_number';

@@ -16,6 +16,7 @@
  */
 class sd_pick_list_v extends dbObject {
 
+ public static $form_class_name = "sd_so_header";
  public static $table_name = "sd_pick_list_v";
  public static $primary_column = "sd_so_header_id";
  public $field_a = [

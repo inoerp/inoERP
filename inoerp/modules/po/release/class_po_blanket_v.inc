@@ -1,6 +1,8 @@
 <?php
 
  class po_blanket_v extends dbObject {
+  
+  public static $form_class_name = "po_header";
 
   public static $table_name = "po_blanket_v";
   public static $primary_column = "po_header_id";

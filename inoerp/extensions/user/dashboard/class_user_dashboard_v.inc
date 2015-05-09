@@ -18,7 +18,8 @@ class user_dashboard_v extends dbObject {
  public static $table_name = "user";
  public static $primary_column = "user_id";
  public static $key_column = 'item_id_m';
- public static $module = "fp";
+ public static $module = "extensions";
+ public static $dont_show_bread_crum = true;
  public static $system_info = [
   'name' => 'User Dashboard',
   'number' => '10027',

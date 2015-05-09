@@ -1908,3 +1908,7 @@ dl.inline-list {
 ul.inline_action .fa{
         font-size: 20px;
 }
+
+ul.inline-list li{
+ display:inline-block;
+}

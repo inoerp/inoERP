@@ -2,6 +2,7 @@
 
 class bom_cost_type extends dbObject {
 
+ 
  public static $table_name = "bom_cost_type";
  public static $key_column = 'cost_type';
  public static $primary_column = "bom_cost_type_id";

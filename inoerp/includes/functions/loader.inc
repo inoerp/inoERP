@@ -164,11 +164,20 @@ if ((!empty($class_names)) && (!(is_array($class_names)))) {
  $class_names = [];
  $class_names[] = $class_names_str;
  if (!(strpos($_SERVER['SCRIPT_NAME'], '/search.php'))) {
+  //check if class name is a view. if, yes then change class name for a form_class_name
+  if (!empty($form_page) && property_exists($class_names_str, 'form_class_name')) {
+   $class_names[0] = $class_names_str = $class_names_str::$form_class_name;
+  }
   if (property_exists($class_names_str, 'dependent_classes')) {
    foreach ($class_names_str::$dependent_classes as $key => $dep_class_name) {
     array_push($class_names, $dep_class_name);
    }
   }
+ }
+} else if ((!empty($class_names)) && (is_array($class_names))) {
+  $class_names_str = $class_names[0];
+ if (!empty($form_page) && property_exists($class_names_str, 'form_class_name')) {
+  $class_names[0] = $class_names_str::$form_class_name;
  }
 }
 
@@ -182,7 +191,8 @@ if (empty($_POST)) {
  * Initalize all the classes in the module
  */
 if (($continue) && (!empty($class_names))) {
- foreach ($class_names as $class) {
+ foreach ($class_names as $class_k => $class) {
+
   //check if site is in disbaled mode and the module is disabled
   if (!empty($si->disabled_action)) {
    $eng_info = engine::find_by_className($class);

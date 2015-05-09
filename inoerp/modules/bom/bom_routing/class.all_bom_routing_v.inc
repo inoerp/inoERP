@@ -1,7 +1,7 @@
 <?php
 
 class all_bom_routing_v extends bom_routing_line {
-
+public static $form_class_name = "bom_routing_header";
  public static $table_name = "all_bom_routing_v";
  public static $account_array = [
  ];

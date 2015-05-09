@@ -2,55 +2,57 @@
 
 class ar_customer_v extends dbObject {
 
+ 
  public static $table_name = "ar_customer_v";
  public static $primary_column = "ar_customer_id";
+ public static $form_class_name = "ar_customer";
  public static $key_column = 'customer_name';
  public static $module = "mdm";
  public $field_a = [
-		 'ar_customer_id',
-		 'customer_number',
-		 'customer_name',
-		 'ar_customer_site_id',
-		 'customer_site_number',
-		 'customer_site_name',
-		 'status',
-		 'creation_date',
-		 'last_update_by',
-		 'last_update_date',
-		 'site_tax_country',
-		 'site_tax_reg_no',
-		 'site_status',
-		 'currency',
-		 'payment_term_id',
+  'ar_customer_id',
+  'customer_number',
+  'customer_name',
+  'ar_customer_site_id',
+  'customer_site_number',
+  'customer_site_name',
+  'status',
+  'creation_date',
+  'last_update_by',
+  'last_update_date',
+  'site_tax_country',
+  'site_tax_reg_no',
+  'site_status',
+  'currency',
+  'payment_term_id',
  ];
  public $initial_search = [
-		 'customer_number',
-		 'customer_name',
-		 'customer_site_number',
-		 'customer_site_name',
+  'customer_number',
+  'customer_name',
+  'customer_site_number',
+  'customer_site_name',
  ];
  public $column = [
-		 'ar_customer_id',
-		 'customer_number',
-		 'customer_name',
-		 'ar_customer_site_id',
-		 'customer_site_number',
-		 'customer_site_name',
-		 'status',
-		 'creation_date',
-		 'last_update_by',
-		 'last_update_date',
-		 'site_tax_country',
-		 'site_tax_reg_no',
-		 'site_status',
-		 'currency',
-		 'payment_term_id',
+  'ar_customer_id',
+  'customer_number',
+  'customer_name',
+  'ar_customer_site_id',
+  'customer_site_number',
+  'customer_site_name',
+  'status',
+  'creation_date',
+  'last_update_by',
+  'last_update_date',
+  'site_tax_country',
+  'site_tax_reg_no',
+  'site_status',
+  'currency',
+  'payment_term_id',
  ];
  public $search = [
-		 '_update_path' => 'form.php?class_name=ar_customer',
-		 '_show_update_path' => 1,
-		 '_view_path' => 'form.php?class_name=ar_customer',
-		 '_show_view_path' => 1,
+  '_update_path' => 'form.php?class_name=ar_customer',
+  '_show_update_path' => 1,
+  '_view_path' => 'form.php?class_name=ar_customer',
+  '_show_view_path' => 1,
  ];
  public $pageTitle = " Customer - Find All Customers "; //page Title
  public $ar_customer_id;
@@ -70,11 +72,11 @@ class ar_customer_v extends dbObject {
  public $payment_term_id;
 
  public function __set($name, $value) {
-	$this->$name = $value;
+  $this->$name = $value;
  }
 
  private function create_ar_customer_v() {
-	$sql = "
+  $sql = "
 CREATE OR REPLACE VIEW ar_customer_v
 (
 ar_customer_id,customer_number, customer_name ,

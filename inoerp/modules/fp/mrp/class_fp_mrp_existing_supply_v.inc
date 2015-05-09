@@ -2,6 +2,7 @@
 
 class fp_mrp_existing_supply_v extends dbObject {
 
+ public static $form_class_name = "fp_mrp_header";
  public static $table_name = "fp_mrp_existing_supply_v";
  public static $primary_column = "document_id";
  public static $key_column = 'item_id_m';

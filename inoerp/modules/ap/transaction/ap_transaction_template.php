@@ -120,7 +120,7 @@
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Other Info') ?> </a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Finance') ?> </a></li>
     <li><a href="#tabsLine-3"><?php echo gettext('References') ?> </a></li>
     <li><a href="#tabsLine-4"><?php echo gettext('Actions') ?> </a></li>
    </ul>

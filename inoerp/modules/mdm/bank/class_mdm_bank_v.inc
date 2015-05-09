@@ -1,6 +1,8 @@
 <?php
 
 class mdm_bank_v extends dbObject {
+ 
+ public static $form_class_name = "mdm_bank_header";
 
  public static $table_name = "mdm_bank_v";
  public static $primary_column = "mdm_bank_header_id";

@@ -2,6 +2,7 @@
 
 class locator_v extends dbObject {
 
+ public static $form_class_name = "locator";
  public static $table_name = "locator_v";
  public static $primary_column = "locator_id";
  public static $key_column = 'locator';

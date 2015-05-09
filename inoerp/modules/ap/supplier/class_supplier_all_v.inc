@@ -2,13 +2,14 @@
 
  class supplier_all_v extends dbObject {
 
+  public static $form_class_name = "supplier";
   public static $table_name = "supplier_all_v";
   public static $primary_column = "supplier_id";
   public $field_a = [
    'supplier_id',
    'supplier_site_id',
    'supplier_type',
-   'customer_id',
+   'ar_customer_id',
    'creation_date',
    'supplier_bu_id',
    'payable_account_id',
@@ -48,7 +49,7 @@
    "supplier_site_id",
    "supplier_site_number",
    "supplier_site_name",
-   "customer_id",
+   "ar_customer_id",
    "status"
   ];
   public $dateField = [
@@ -73,6 +74,7 @@
   public $po_type;
   public $po_number;
   public $supplier_site_id;
+  public $ar_customer_id;
   public $buyer;
   public $currency;
   public $header_amount;
@@ -122,7 +124,7 @@ CREATE OR REPLACE VIEW supplier_all_v
 supplier_id,supplier_number, supplier_name ,
 supplier_site_id, supplier_site_number, supplier_site_name,
  supplier_type, tax_country, created_by,
-customer_id, status,
+ar_customer_id, status,
 creation_date, last_update_by, last_update_date,
  supplier_bu_id, org_id, liability_account_id,
 payable_account_id, payment_discount_account_id, pre_payment_account_id,
@@ -133,7 +135,7 @@ SELECT
 su.supplier_id,su.supplier_number, su.supplier_name ,
 ss.supplier_site_id, ss.supplier_site_number, ss.supplier_site_name,
  su.supplier_type, su.tax_country, su.created_by,
-su.customer_id, su.status,
+su.ar_customer_id, su.status,
 su.creation_date, su.last_update_by, su.last_update_date,
  sb.supplier_bu_id, sb.org_id, liability_account_id,
 payable_account_id, payment_discount_account_id, pre_payment_account_id,

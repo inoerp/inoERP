@@ -21,11 +21,11 @@ function importSQL($sqlfile, $connection) {
    // Calculate the percentation
    $percent = intval($count / $total * 100) ;
    $percent = ($percent <= 100) ? $percent : '100';
-   $percent_p = $percent . ' %';
+   $percent_p = $percent . '%';
 
    // Javascript for updating the progress bar and information
    echo '<script language="javascript">
-     document.getElementById("progress").innerHTML="<div style=\"width:' . $percent . ';background-color:rgba(144, 238, 144, 0.51);\">' . $percent_p . ' Completed.</div>";
+     document.getElementById("progress").innerHTML="<div style=\"width:' . $percent_p . ';background-color:rgba(144, 238, 144, 0.51);\">' . $percent . '&nbsp; % Completed.</div>";
     document.getElementById("information").innerHTML="' . $count . ' row(s) processed.";
     </script>';
 // This is for the buffer achieve the minimum size in order to flush data

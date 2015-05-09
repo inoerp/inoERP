@@ -1,52 +1,53 @@
 <?php
 
- class fp_forecast_over_consumption_v extends dbObject {
+class fp_forecast_over_consumption_v extends dbObject {
 
-  public static $table_name = "fp_forecast_over_consumption_v";
-  public static $primary_column = "fp_forecast_over_consumption_id";
-  public static $key_column = 'sd_so_line_id';
-  public static $module = "fp";
-  public $field_a = [
-   'forecast_group',
-   'org',
-   'so_number',
-   'line_number',
-   'item_number',
-   'uom_name',
-   'item_description',
-   'schedule_ship_date',
-   'quantity',
-   'item_id_m',
-   'uom_id',
-   'fp_forecast_consumption_id',
-   'sd_so_line_id',
-   'sd_so_header_id',
-  ];
-  public $initial_search = [
-   'item_number',
-  ];
-  public $pageTitle = " Forecast Details "; //page Title
-  public $search_functions = [
-   'Organization' => 'search_org_name',
-   'Forecast Group ' => 'search_forecast_group',
-  ];
-  public $forecast_group;
-  public $org;
-  public $so_number;
-  public $line_number;
-  public $item_number;
-  public $uom_name;
-  public $item_description;
-  public $schedule_ship_date;
-  public $quantity;
-  public $item_id_m;
-  public $uom_id;
-  public $fp_forecast_consumption_id;
-  public $sd_so_line_id;
-  public $sd_so_header_id;
+ public static $form_class_name = "fp_forecast_header";
+ public static $table_name = "fp_forecast_over_consumption_v";
+ public static $primary_column = "fp_forecast_over_consumption_id";
+ public static $key_column = 'sd_so_line_id';
+ public static $module = "fp";
+ public $field_a = [
+  'forecast_group',
+  'org',
+  'so_number',
+  'line_number',
+  'item_number',
+  'uom_name',
+  'item_description',
+  'schedule_ship_date',
+  'quantity',
+  'item_id_m',
+  'uom_id',
+  'fp_forecast_consumption_id',
+  'sd_so_line_id',
+  'sd_so_header_id',
+ ];
+ public $initial_search = [
+  'item_number',
+ ];
+ public $pageTitle = " Forecast Details "; //page Title
+ public $search_functions = [
+  'Organization' => 'search_org_name',
+  'Forecast Group ' => 'search_forecast_group',
+ ];
+ public $forecast_group;
+ public $org;
+ public $so_number;
+ public $line_number;
+ public $item_number;
+ public $uom_name;
+ public $item_description;
+ public $schedule_ship_date;
+ public $quantity;
+ public $item_id_m;
+ public $uom_id;
+ public $fp_forecast_consumption_id;
+ public $sd_so_line_id;
+ public $sd_so_header_id;
 
-  private function create_fp_forecast_over_consumption_v() {
-   $sql = "
+ private function create_fp_forecast_over_consumption_v() {
+  $sql = "
       CREATE OR REPLACE VIEW fp_forecast_over_consumption_v
       (
       forecast_group, org, so_number, line_number,
@@ -78,8 +79,8 @@
       AND sosh.sd_so_header_id = sosl.sd_so_header_id
       AND foc.quantity < 0
 ";
-  }
-
  }
+
+}
 
 ?>

@@ -2,6 +2,7 @@
 
  class inv_serial_transaction_v extends dbObject {
 
+  public static $form_class_name = "inv_serial_transaction";
   public static $table_name = "inv_serial_transaction_v";
   public static $primary_column = "po_header_id";
   public $field_a = [

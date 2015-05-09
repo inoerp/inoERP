@@ -4,6 +4,7 @@ class po_all_v extends dbObject {
 
  public static $table_name = "po_all_v";
  public static $primary_column = "po_header_id";
+ public static $form_class_name = "po_header";
  public static $system_info = [
   'name' => 'PO All View',
   'number' => '2220',

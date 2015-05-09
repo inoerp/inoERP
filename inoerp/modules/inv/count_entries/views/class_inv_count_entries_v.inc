@@ -2,6 +2,8 @@
 
 class inv_count_entries_v extends dbObject {
 
+ public static $form_class_name = "inv_count_entries";
+ 
  public static $table_name = "inv_count_entries_v";
  public static $primary_column = "inv_count_entries_id";
  public $field_a = [
