@@ -525,9 +525,9 @@ class path extends dbObject {
     if ($key) {
      $url_1 = $path->fullPath($child_paths->path_link);
      if ($this->show_description) {
-      $allPaths .= "<li title=\"$p_name_child\" class='expandable {$child_paths->name}'>" . '<a href="' . $url_1 . '">' . $p_desc_child . '</a>';
+      $allPaths .= "<li title=\"$p_name_child\" class='expandable {$child_paths->name}'>" . '<a class="list-header" href="' . $url_1 . '">' . $p_desc_child . '</a>';
      } else {
-      $allPaths .= "<li title=\"$p_desc_child\" class='expandable {$child_paths->name}'>" . '<a href="' . $url_1 . '">' . $p_name_child . '</a>';
+      $allPaths .= "<li title=\"$p_desc_child\" class='expandable {$child_paths->name}'>" . '<a class="list-header" href="' . $url_1 . '">' . $p_name_child . '</a>';
      }
      $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths);
      unset($allowed_path_ids[$key]);

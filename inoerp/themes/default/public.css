@@ -20,6 +20,7 @@
 
 }
 
+
 .fa-select {
     font-family: sans-serif, 'FontAwesome';
 }
@@ -52,7 +53,7 @@ blockquote{
 }
 
 .full-width{
- width: 1200px;
+ width: 100%;
 }
 .clickable{
  cursor: pointer; 
@@ -692,7 +693,7 @@ ul.inline_list li{
 }
 
 a.link_class_green {
- font-size: 11px;
+ font-size: 10px;
  padding: 0px 5px;
  background-color: rgba(30, 40, 20, 0.6);
  color: #FFF;
@@ -777,7 +778,7 @@ a.link_class_green:hover{
 .showDiv::after, .showDiv_input::after{
  content : 'Show Details';
  margin-left: 40px;
- font-size: 16px;
+ font-size: 12px;
  font-weight: bold;
  line-height: 26px;
  color : rgba(11, 87, 11, 1);
@@ -1167,14 +1168,14 @@ select.search_document_list option:nth-child(even) {
 }
 
 #header_top_quick_nav{
- font-size: 20px;
+ font-size: 14px;
 }
 #dashborad_menu li{
  display: block;
  float: left;
- margin : 30px;
+ margin : 15px;
  border: 1px solid #ddd;
- width: 140px;
+ width: 120px;
  height: 120px;
  text-align: center;
  vertical-align: middle;
@@ -1906,9 +1907,27 @@ dl.inline-list {
 }
 
 ul.inline_action .fa{
-        font-size: 20px;
+        font-size: 15px;
 }
 
 ul.inline-list li{
  display:inline-block;
+}
+
+.imp-link a{
+        font-weight: bold;
+        color : rgba(12, 23, 32, 0.75) !important;
+}
+
+.imp-link a:hover{
+        font-size: 1.05em;
+        color : green !important;
+}
+
+.search_document_list, #site_search .form-control{
+        font-size: 12px !important;
+}
+
+#site_search_submit{
+        height: 34px;
 }

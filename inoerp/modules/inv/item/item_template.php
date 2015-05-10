@@ -3,15 +3,14 @@
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Inv Assignment') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Assignment') ?></a></li>
     <li><a href="#tabsHeader-3"><?php echo gettext('Revisions') ?></a></li>
     <li><a href="#tabsHeader-4"><?php echo gettext('Category') ?></a></li>
     <li><a href="#tabsHeader-5"><?php echo gettext('Catalog') ?></a></li>
-    <li><a href="#tabsHeader-6"><?php echo gettext('Relation') ?></a></li>
-    <li><a href="#tabsHeader-7"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-8"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-9"><?php echo gettext('Image') ?></a></li>
-    <li><a href="#tabsHeader-10"><?php echo gettext('Actions') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-7"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-8"><?php echo gettext('Image') ?></a></li>
+    <li><a href="#tabsHeader-9"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -129,14 +128,11 @@
      </ul>
      <!--                end of tab2 div three_column-->
     </div>
-        <div id="tabsHeader-6" class="tabContent">
-     
-    </div>
 
-    <div id="tabsHeader-7" class="tabContent">
+    <div id="tabsHeader-6" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
     </div>
-    <div id="tabsHeader-8" class="tabContent">
+    <div id="tabsHeader-7" class="tabContent">
      <div id="comments">
       <div id="comment_list">
        <?php echo!(empty($comments)) ? $comments : ""; ?>
@@ -153,10 +149,10 @@
      <div> 
      </div>
     </div>
-    <div id="tabsHeader-9" class="tabContent">
+    <div id="tabsHeader-8" class="tabContent">
      <div class="image"><?php echo $f->image_field('image_file_id', $$class->image_file_id, '', '', 'img-medium'); ?></div>
     </div>
-    <div id="tabsHeader-10" class="tabContent">
+    <div id="tabsHeader-9" class="tabContent">
      <div> 
       <ul class="column four_column">
        <li><?php echo $categoriey_select_option; ?></li>
