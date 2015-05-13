@@ -720,20 +720,28 @@ a.link_class_green:hover{
  margin-top: 20px;
 }
 
+#path_by_module a{
+        padding-left:5px;
+}
+
 #path_by_module  ul.child_menu > li  {
- display: inline-block;
- float: left;
- margin-right: 50px;        
+ display:inline-block;
+ margin: 20px 50px 0 0;  
+ vertical-align: top;
+ width: 250px;        
+  border: 2px solid #3e9cca;      
 }
 
 
 #path_by_module  ul.child_menu > li > a  {
- color: #082A57;
- border-bottom: 1px solid #ddd;
- width: 250px;
- display: block;
- margin-top: 20px;
- font-weight: bold;        
+ color: #00687E;
+      
+ font-weight: bold;
+        display:flex;
+width: 246px !important;
+padding: 5px  ;
+color: #fff;
+background-color: rgba(42, 147, 177, 0.89);   
 }
 
 

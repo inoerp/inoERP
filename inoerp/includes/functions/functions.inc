@@ -100,13 +100,13 @@ function getBreadCrumb($class_first) {
  if (property_exists($class_first, 'module') && !property_exists($class_first, 'dont_show_bread_crum')) {
   $module_name = $class_first::$module;
   $module_line = option_line::find_by_optionId_lineCode('182', $module_name);
-  if($module_line){
-    $module_name_c = ucwords($module_line->option_line_value);
-  $module_description = ucwords($module_line->description);
-  }else{
+  if ($module_line) {
+   $module_name_c = ucwords($module_line->option_line_value);
+   $module_description = ucwords($module_line->description);
+  } else {
    $module_name_c = $module_description = strtoupper($module_name);
   }
- 
+
   $form_bread_crum = '<ul class="inline-list imp-link">';
   $form_bread_crum .= "<li title=\"My Dashboard\" >" . '<a  class="ajax-link" href="' . HOME_URL . 'form.php?class_name=user_dashboard_v"> Dashboard  >> </a></li>';
   $form_bread_crum .= '<li title="' . $module_description . '" ><a  class="ajax-link" href="' . HOME_URL . 'form.php?module_code=' . $module_name . '">&nbsp; ' . $module_name_c . ' </a></li>';
@@ -271,6 +271,49 @@ function getrwuPrivilage($rwu_role, $user_role) {
  }
 
  return $prv;
+}
+
+function ino_icon($icon_type) {
+ $fa_icon = '';
+ switch ($icon_type) {
+  case 'FORM':
+   $fa_icon = '<i class="fa fa-list-alt"></i>';
+   break;
+
+  case 'SEARCH':
+   $fa_icon = '<i class="fa fa-search"></i>';
+   break;
+
+  case 'SETUP':
+   $fa_icon = '<i class="fa fa-cogs"></i>';
+   break;
+
+  case 'PROGRAM':
+   $fa_icon = '<i class="fa fa-terminal"></i>';
+   break;
+
+  case 'TRANSACTION':
+   $fa_icon = '<i class="fa fa-tasks"></i>';
+   break;
+
+  case 'REPORT':
+   $fa_icon = '<i class="fa fa-pie-chart"></i>';
+   break;
+
+  case 'UPLOAD':
+   $fa_icon = '<i class="fa fa-upload"></i>';
+   break;
+
+  case 'DOCUMENT':
+  case 'CONTENT':
+   $fa_icon = '<i class="fa fa-file-text-o"></i>';
+   break;
+
+  default:
+   $fa_icon = '<i class="fa fa-dot-circle-o"></i>';
+   break;
+ }
+ return $fa_icon;
 }
 
 function find_by_sql($sql = "") {

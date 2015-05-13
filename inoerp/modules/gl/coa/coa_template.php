@@ -7,7 +7,7 @@
     <li><a href="#tabsHeader-2">Notes</a></li>
     <li><a href="#tabsHeader-3">Attachments</a></li>
    </ul>
-   <div class="tabContainer">
+   <div class="tabContainer panel-ino-light-grey">
     <div id="tabsHeader-1" class="tabContent">
       <ul class="column header_field">
        <li><?php $f->l_text_field_dr_withSearch('coa_id'); ?><a name="show" href="form.php?class_name=coa&<?php echo "mode=$mode"; ?>" class="show document_id coa_id">

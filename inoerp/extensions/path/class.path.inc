@@ -437,8 +437,8 @@ class path extends dbObject {
       }
       $allPaths .= '</li>';
      }
-       $allPaths .= '</ul>';
-   $allPaths .= '</li>';
+     $allPaths .= '</ul>';
+     $allPaths .= '</li>';
     }
     continue;
    }
@@ -500,7 +500,7 @@ class path extends dbObject {
  public function panel_pathMenu(&$allowed_path_ids, $divClass = '') {
   $path = new path();
   $level = 0;
-  $allPaths = '<div class="panel panel-info">';
+  $allPaths = '<div class="panel panel-ino-light-grey">';
   foreach ($this->_path_parent_ids as $path_id) {
    $path->findBy_id($path_id);
    $url = $path->fullPath($path->path_link);
@@ -508,8 +508,8 @@ class path extends dbObject {
    $p_desc = $path->description;
    $allPaths .= '<div class="panel-heading dashboard">';
    $allPaths .= '<ul class=inline-list>';
-   $allPaths .= "<li title=\"My Dashboard\" >" . 
-    '<a  class="ajax-link" href="'.HOME_URL.'form.php?class_name=user_dashboard_v"> Dashboard  >> </a></li>';
+   $allPaths .= "<li title=\"My Dashboard\" >" .
+    '<a  class="ajax-link" href="' . HOME_URL . 'form.php?class_name=user_dashboard_v"> Dashboard  >> </a></li>';
    if ($this->show_description) {
     $allPaths .= "<li title=\"$p_name\" class='{$path->name} '>" . '<a  class="ajax-link" href="' . $url . '">' . $p_desc . '</a></li>';
    } else {
@@ -522,12 +522,13 @@ class path extends dbObject {
     $key = array_search($child_paths->path_id, $allowed_path_ids);
     $p_name_child = $child_paths->name;
     $p_desc_child = $child_paths->description;
+    $fa_icon = ino_icon($child_paths->path_type);
     if ($key) {
      $url_1 = $path->fullPath($child_paths->path_link);
      if ($this->show_description) {
-      $allPaths .= "<li title=\"$p_name_child\" class='expandable {$child_paths->name}'>" . '<a class="list-header" href="' . $url_1 . '">' . $p_desc_child . '</a>';
+      $allPaths .= "<li title=\"$p_name_child\" class='expandable {$child_paths->name}'>" . '<a class="list-header" href="' . $url_1 . '">&nbsp;' .$fa_icon. ' &nbsp; ' . $p_desc_child . '</a>';
      } else {
-      $allPaths .= "<li title=\"$p_desc_child\" class='expandable {$child_paths->name}'>" . '<a class="list-header" href="' . $url_1 . '">' . $p_name_child . '</a>';
+      $allPaths .= "<li title=\"$p_desc_child\" class='expandable {$child_paths->name}'>" . '<a class="list-header" href="' . $url_1 . '">&nbsp;' .$fa_icon. ' &nbsp; '  . $p_name_child.  '</a>';
      }
      $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths);
      unset($allowed_path_ids[$key]);
@@ -569,14 +570,15 @@ class path extends dbObject {
   if (empty($all_child)) {
    return;
   }
-  $allPaths .= '<ul>';
+  $allPaths .= '<ul class="list-line-ul">';
   foreach ($all_child as $child_paths) {
    $key = array_search($child_paths->path_id, $allowed_path_ids);
+   $fa_icon = ino_icon($child_paths->path_type);
    if ($key) {
     $url = $path->fullPath($child_paths->path_link);
     $path_name = gettext($child_paths->name);
     $path_description = gettext($child_paths->description);
-    $allPaths .= "<li title=\"$path_description\" class='expandable {$path->name} '>" . '<a href="' . $url . '">' . $path_name . '</a>';
+    $allPaths .= "<li title=\"$path_description\" class='expandable {$path->name} '>&nbsp;" . $fa_icon . '&nbsp;<a href="' . $url . '">' . $path_name . '</a>';
     $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths);
     $allPaths .= '</li>';
     unset($allowed_path_ids[$key]);
