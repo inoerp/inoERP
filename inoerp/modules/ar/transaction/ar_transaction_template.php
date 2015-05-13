@@ -51,29 +51,8 @@
      </ul>					 
     </div>
     <div id="tabsHeader-3" class="tabContent">
-     <div class="left_half shipto address_details">
-      <ul class="column four_column">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-         <?php gettext('Ship To Site Id'); ?></label><?php $f->text_field_d('ship_to_id', 'address_id site_address_id'); ?>
-       </li>
-       <li><?php $f->l_text_field_dr('ship_to_address_name', 'address_name'); ?></li>
-       <li><?php $f->l_text_field_dr('ship_to_address', 'address'); ?></li>
-       <li><?php $f->l_text_field_dr('ship_to_country', 'country'); ?></li>
-       <li><?php echo $f->l_text_field_dr('ship_to_postal_code', 'postal_code'); ?></li>
-      </ul>
-     </div> 
-     <div class="right_half billto address_details">
-      <ul class="column four_column">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-         <?php gettext('Bill To Site Id'); ?></label>
-        <?php $f->text_field_d('bill_to_id', 'address_id  site_address_id'); ?>
-       </li>
-       <li><?php $f->l_text_field_dr('bill_to_address_name', 'address_name'); ?></li>
-       <li><?php $f->l_text_field_dr('bill_to_address', 'address'); ?></li>
-       <li><?php $f->l_text_field_dr('bill_to_country', 'country'); ?></li>
-       <li><?php echo $f->l_text_field_dr('bill_to_postal_code', 'postal_code'); ?></li>
-      </ul>
-     </div> 
+  <div class="shipto_address"><?php $f->address_field_d('ship_to_id'); ?></div>
+     <div class="billto_address"><?php $f->address_field_d('bill_to_id'); ?></div>
     </div>
 
     <div id="tabsHeader-4" class="tabContent">
@@ -173,7 +152,7 @@
         <th><?php echo gettext('Item Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('Quantity') ?></th>
-        <th><?php echo gettext('Trnx Status') ?></th>
+        <th><?php echo gettext('Trnx Account') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -351,8 +330,8 @@
          <td><?php form::text_field_wid2m('inv_line_price'); ?></td>
          <td><?php echo $f->select_field_from_object('tax_code_id', mdm_tax_code::find_all_outTax_by_bu_org_id($$class->bu_org_id), 'mdm_tax_code_id', 'tax_code', $$class_second->tax_code_id, '', 'output_tax medium', '', $readonly1, '', '', '', 'percentage') ?></td>
          <td><?php form::number_field_wid2('tax_amount'); ?></td>
-         <td><?php form::number_field_wid2('gl_inv_line_price'); ?></td>
-         <td><?php form::number_field_wid2('gl_tax_amount'); ?></td>
+         <td><?php form::number_field_wid2sr('gl_inv_line_price'); ?></td>
+         <td><?php form::number_field_wid2sr('gl_tax_amount'); ?></td>
          <td><?php $f->text_field_wid2('line_description'); ?></td>
          <td><?php $f->text_field_wid2sr('status'); ?></td>
         </tr>

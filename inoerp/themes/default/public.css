@@ -1455,9 +1455,14 @@ input.multi_select_input{
  margin-top: 20px;
 }
 
+.popover{
+ font-size: 12px !important;
+ }
+ 
+ 
 .big_popover .popover{
- width: 900px !important;
- max-width: 900px !important;
+ width: 750px !important;
+ max-width: 750px !important;
 }
 
 .big_popover .popover{

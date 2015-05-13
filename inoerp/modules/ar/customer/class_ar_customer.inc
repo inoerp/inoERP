@@ -43,6 +43,7 @@ class ar_customer extends dbObject {
   "customer_name",
   "supplier_id",
   "customer_type",
+  'customer_category',
   "tax_country",
   "tax_reg_no",
   "tax_payer_id",
@@ -51,7 +52,7 @@ class ar_customer extends dbObject {
   'customer_credit_class',
   'profile_name',
   "status",
-  "rev_enabled_cb",
+  "alt_name",
   "rev_number",
   "created_by",
   "creation_date",
@@ -67,9 +68,7 @@ class ar_customer extends dbObject {
 
  public $account = [
  ];
- public $checkbox = [
-  "rev_enabled_cb"
- ];
+
  public $addressField = [
   "address_id"
  ];
@@ -104,6 +103,7 @@ class ar_customer extends dbObject {
  public $customer_name;
  public $supplier_id;
  public $customer_type;
+ public $customer_category;
  public $tax_country;
  public $tax_reg_no;
  public $tax_payer_id;
@@ -112,7 +112,7 @@ class ar_customer extends dbObject {
  public $customer_contact_id;
  public $profile_name;
  public $status;
- public $rev_enabled_cb;
+ public $alt_name;
  public $rev_number;
  public $created_by;
  public $creation_date;
@@ -136,6 +136,12 @@ class ar_customer extends dbObject {
   $customer_types = option_line::find_by_option_id($option_header->option_header_id);
   return $customer_types;
  }
+ 
+  Public static function customer_category() {
+  $option_header = option_header::find_by_name('AR_CUSTOMER_CATEGORY');
+  $customer_types = option_line::find_by_option_id($option_header->option_header_id);
+  return $customer_types;
+ }
 
  Public static function customer_credit_class() {
   $option_header = option_header::find_by_name('AR_CUSTOMER_CREDIT_CLASS');
@@ -151,6 +157,14 @@ class ar_customer extends dbObject {
    $this->header_address = $address->address;
    $this->header_country = $address->country;
    $this->header_postal_code = $address->postal_code;
+  }
+ }
+ 
+  public function _after_save() {
+
+  if ((!empty($this->ar_customer_id)) && empty($this->customer_number)) {
+   $this->customer_number = $this->ar_customer_id;
+   $this->save();
   }
  }
 

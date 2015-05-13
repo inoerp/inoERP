@@ -44,7 +44,6 @@
  </form>
 </div>
 
-</div>
 <div id="js_data">
  <ul id="js_saving_data">
   <li class="headerClassName" data-headerClassName="ar_transaction_source" ></li>

@@ -334,6 +334,70 @@ function treeView_simple() {
 }
 
 
+function toUpperCase(str)
+{
+ return str.toLowerCase().replace(/([^a-z])([a-z])(?=[a-z]{2})|^([a-z])/g, function (_, g1, g2, g3) {
+  return (typeof g1 === 'undefined') ? g3.toUpperCase() : g1 + g2.toUpperCase();
+ });
+}
+
+function recentVisitInAjax() {
+ $('body #recent-visits').on('click', 'a', function (e) {
+  e.preventDefault();
+  getFormDetails($(this).attr('href'));
+
+ });
+}
+
+function magnifier() {
+ //image maginifier
+ var native_width = 0;
+ var native_height = 0;
+ $('body').on('mousemove', '.magnify', function (e) {
+  if ((!native_width && !native_height))
+  {
+   var image_src = $(this).find('.item.active').find('.img').prop('src');
+   var image_object = new Image();
+   image_object.src = image_src;
+   native_width = image_object.width;
+   native_height = image_object.height;
+  }
+  else
+  {
+   var magnify_offset = $(this).offset();
+   var mx = e.pageX - magnify_offset.left;
+   var my = e.pageY - magnify_offset.top;
+
+   //Finally the code to fade out the glass if the mouse is outside the container
+   if (mx < $(this).width() && my < $(this).height() && mx > 0 && my > 0)
+   {
+    $(".large").fadeIn(100);
+   }
+   else
+   {
+    $(".large").fadeOut(100);
+    $.magnifier().one();
+
+   }
+
+   if ($(".large").is(":visible"))
+   {
+    var rx = Math.round(mx / $(".small").width() * native_width - $(".large").width() / 2) * -1;
+    var ry = Math.round(my / $(".small").height() * native_height - $(".large").height() / 2) * -1;
+    var bgp = rx + "px " + ry + "px";
+
+    var px = mx - $(".large").width() / 2;
+    var py = my - $(".large").height() / 2;
+    var image_src = $(this).find('.item.active').find('.img').prop('src');
+    $(".large").css('background-image', 'url(' + image_src + ')');
+    $(".large").css({left: px, top: py, backgroundPosition: bgp});
+   }
+  }
+ }).on('mouseout', '.magnify', function () {
+  $(".large").hide();
+ });
+}
+
 
 //get blocks
 function setConetntRightLeft() {
@@ -3700,21 +3764,6 @@ $(document).ready(function () {
   }
  });
 
-// $('body').on('click', '#selectResult_page .popover_quick_select', function () {
-//  var select_field = $(this).data('select_field');
-//  var select_field_h = '#' + select_field;
-//  var select_field_d = '.' + select_field;
-//  var select_field_val = $(this).data('select_field_value');
-//  $('#erp_form_area').find(select_field_h).val(select_field_val);
-//  var primary_column_id = $('ul#js_saving_data').find('.primary_column_id').data('primary_column_id');
-//  if (primary_column_id === select_field) {
-//   var show_btn = 'a.show' + select_field_d;
-//   $('#big_popover').trigger('click');
-////   $(show_btn).trigger('click');
-//  } else {
-//   $('#big_popover').trigger('click');
-//  }
-// });
 
  $('body').on('click', '.close_big_popover', function () {
   $('#big_popover').trigger('click');
@@ -3995,6 +4044,7 @@ $(document).ready(function () {
   }
  });
 
+  
  $('body').on('click', 'a.payslipBy_periodName', function (e) {
   var headerId_v = $(this).parent().find('select').val();
   var headerId = $(this).parent().find('select').attr('id');
@@ -4075,7 +4125,7 @@ $(document).ready(function () {
   position: {my: "center center", at: "center center"}
  });
 
-
+ 
  $('body').off('click', '.apply-filter').on('click', '.apply-filter', function () {
   var inputFieldName = $(this).closest('.list_filter').find('select.field_name').val();
   var inputFieldCondition = $(this).closest('.list_filter').find('select.condition_name').val();
@@ -4184,7 +4234,7 @@ $(document).ready(function () {
   $(this).closest('form').find(':input').not('.button').val('');
  });
 
- $('body').on('click', '.right_bar_navigation_menu', function () {
+  $('body').on('click', '.right_bar_navigation_menu', function () {
   if ($('.sidebar').is(':visible')) {
    var containerWidth = $('body').width();
    $('#divider-bar').css({
@@ -4236,7 +4286,6 @@ $(document).ready(function () {
   collapsible: true
  });
 
- var available_indexes = [0, 1, 2];
  $("#accordion0").accordion({
   heightStyle: "content",
   activate: function (event, ui) {
@@ -4247,18 +4296,7 @@ $(document).ready(function () {
    if (ui.oldHeader.find('i').hasClass('fa-minus-circle')) {
     ui.oldHeader.find('i').removeClass('fa-minus-circle').addClass('fa-plus-circle');
    }
-  },
-// beforeActivate: function (event, ui) {
-//  var newIndex = $(ui.newHeader).index('h3');
-//  console.log( 'new i' + newIndex);
-//  if (jQuery.inArray(newIndex, available_indexes) === -1) {
-//   var oldIndex = $(ui.oldHeader).index('h3');
-//   console.log( 'old i' + oldIndex);
-//   alert('You cant access this panel. First enter data in previous panel(s)');
-//    return false;
-//  }
-// }
-
+  }
  });
 
  $('body').on('click', '#accordion h3.recent-visits', function () {
@@ -4278,11 +4316,14 @@ $(document).ready(function () {
  $('body').on('click', '.fa-arrow-circle-down', function () {
   $(this).removeClass('fa-arrow-circle-down').addClass('fa-arrow-circle-up');
  });
-
- $('body').on('click', '.fa-arrow-circle-up', function () {
+ 
+  $('body').on('click', '.fa-arrow-circle-up', function () {
   $(this).removeClass('fa-arrow-circle-up').addClass('fa-arrow-circle-down');
  });
- $('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
+ 
+ //tool tip causing error in firefox
+// $('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
+ 
 
  $('body').on('click', '#save_content', function () {
   if (!$('#subject').val()) {
@@ -4309,6 +4350,7 @@ $(document).ready(function () {
   });
 
  });
+
 
  $('body').on('click', '#generic_save', function () {
   var noOfRequiredFileValuesMissing = 0;
@@ -4503,66 +4545,3 @@ $(document).ready(function () {
  });
 
 });
-function toUpperCase(str)
-{
- return str.toLowerCase().replace(/([^a-z])([a-z])(?=[a-z]{2})|^([a-z])/g, function (_, g1, g2, g3) {
-  return (typeof g1 === 'undefined') ? g3.toUpperCase() : g1 + g2.toUpperCase();
- });
-}
-
-function recentVisitInAjax() {
- $('body #recent-visits').on('click', 'a', function (e) {
-  e.preventDefault();
-  getFormDetails($(this).attr('href'));
-
- });
-}
-
-function magnifier() {
- //image maginifier
- var native_width = 0;
- var native_height = 0;
- $('body').on('mousemove', '.magnify', function (e) {
-  if ((!native_width && !native_height))
-  {
-   var image_src = $(this).find('.item.active').find('.img').prop('src');
-   var image_object = new Image();
-   image_object.src = image_src;
-   native_width = image_object.width;
-   native_height = image_object.height;
-  }
-  else
-  {
-   var magnify_offset = $(this).offset();
-   var mx = e.pageX - magnify_offset.left;
-   var my = e.pageY - magnify_offset.top;
-
-   //Finally the code to fade out the glass if the mouse is outside the container
-   if (mx < $(this).width() && my < $(this).height() && mx > 0 && my > 0)
-   {
-    $(".large").fadeIn(100);
-   }
-   else
-   {
-    $(".large").fadeOut(100);
-    $.magnifier().one();
-
-   }
-
-   if ($(".large").is(":visible"))
-   {
-    var rx = Math.round(mx / $(".small").width() * native_width - $(".large").width() / 2) * -1;
-    var ry = Math.round(my / $(".small").height() * native_height - $(".large").height() / 2) * -1;
-    var bgp = rx + "px " + ry + "px";
-
-    var px = mx - $(".large").width() / 2;
-    var py = my - $(".large").height() / 2;
-    var image_src = $(this).find('.item.active').find('.img').prop('src');
-    $(".large").css('background-image', 'url(' + image_src + ')');
-    $(".large").css({left: px, top: py, backgroundPosition: bgp});
-   }
-  }
- }).on('mouseout', '.magnify', function () {
-  $(".large").hide();
- });
-}

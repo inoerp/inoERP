@@ -21,14 +21,16 @@
       <li><label><?php echo gettext('Customer Name') ?><img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete supplier_name clickable"></label>
        <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', 1, $readonly1); ?>
       </li>
-      <li><label><?php echo gettext('Customer Type ') ?></label><?php echo form::select_field_from_object('customer_type', ar_customer::customer_types(), 'option_line_code', 'option_line_value', $$class->customer_type, 'customer_type', $readonly, '', ''); ?>       </li>
+      <li><?php $f->l_select_field_from_object('customer_type', ar_customer::customer_types(), 'option_line_code', 'option_line_value', $$class->customer_type, 'customer_type'); ?>       </li>
+      <li><?php echo $f->l_select_field_from_object('customer_category', ar_customer::customer_category(), 'option_line_code', 'option_line_value', $$class->customer_category, 'customer_category'); ?>       </li>
       <li><label><?php echo gettext('Supplier Name') ?></label><?php $f->text_field_d('supplier_name'); ?>
        <?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
        <i class="fa fa-search supplier_id select_popup clickable"></i>
       </li>
       <li><?php $f->l_select_field_from_object('tax_country', option_header::COUNTRIES(), 'option_line_code', 'option_line_value', $$class->tax_country, 'tax_country', '', '', $readonly); ?>       </li>
-      <li><?php $f->l_text_field_ds('tax_reg_no'); ?></li>
-      <li><?php $f->l_text_field_ds('tax_payer_id'); ?></li>
+      <li><?php $f->l_text_field_d('tax_reg_no'); ?></li>
+      <li><?php $f->l_text_field_d('tax_payer_id'); ?></li>
+      <li><?php $f->l_text_field_d('alt_name'); ?></li> 
       <li><?php $f->l_status_field_d('status'); ?></li>
      </ul>
     </div>
@@ -130,13 +132,13 @@
     <div id="tabsLine-4" class="tabContent">
      <div class="first_rowset"> 
       <ul class="column header_field">
-       <li><?php $f->l_text_field('order_type_id', $$class_second->order_type_id); ?></li> 
-       <li><?php $f->l_text_field('price_list_id', $$class_second->price_list_id); ?></li> 
-       <li><?php $f->l_text_field('internal_org_id', $$class_second->internal_org_id); ?></li> 
+       <li><?php $f->l_select_field_from_object('order_type_id', sd_document_type::find_all_header_levels(), 'sd_document_type_id', 'document_type_name', $$class_second->order_type_id, 'document_type', 'medium'); ?>						 </li>
+       <li><?php $f->l_select_field_from_object('price_list_id', mdm_price_list_header::find_all_sales_pl(), 'mdm_price_list_header_id', 'price_list', $$class_second->price_list_id); ?></li>
+       <li><?php $f->l_select_field_from_object('internal_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->internal_org_id, 'internal_org_id'); ?>  </li>
        <li><?php $f->l_text_field('fob', $$class_second->fob); ?></li> 
        <li><?php $f->l_text_field('freight_terms', $$class_second->freight_terms); ?></li> 
        <li><?php $f->l_text_field('transportation', $$class_second->transportation); ?></li> 
-       <li><?php $f->l_text_field('country_of_origin', $$class_second->country_of_origin); ?></li> 
+       <li><?php $f->l_select_field_from_object('country_of_origin', option_header::COUNTRIES(), 'option_line_code', 'option_line_code', $$class_second->country_of_origin, '', '', '', $readonly); ?>       </li>
       </ul>
      </div>
     </div>

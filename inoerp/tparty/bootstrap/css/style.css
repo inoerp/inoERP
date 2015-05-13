@@ -4086,7 +4086,7 @@ ul.form_top{
 .second_rowset ul li{
  display : inline-block;
  min-width: 200px;
- max-width: 500px;
+ max-width: 250px;
  float: left;
 }
 
@@ -4116,12 +4116,12 @@ ul.small_box li, ul.medium_box li, ul.large_box li{
 }
 
 .large_box{
- width: 680px;
+ width: 600px;
  text-align: center;
 }
 
 .extra_large_box{
- width: 980px;
+ width: 950px;
 }
 
 .second_rowset ul li.large_box li{

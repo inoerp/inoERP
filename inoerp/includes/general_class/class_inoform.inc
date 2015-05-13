@@ -545,7 +545,8 @@ EOD;
   $ttl = $field_val = null;
   $addr = new address();
   if (!empty($$class_second->$field_name)) {
-   $text_field .= $this->hidden_field_withIdClass($field_name, $$class_second->$field_name, 'address_id');
+   $text_field = $this->hidden_field_withIdClass($field_name, $$class_second->$field_name, 'address_id');
+   $addr->findBy_id($$class_second->$field_name);
    if ($addr) {
     $field_val = $addr->address_name;
     $ttl = $addr->address . ' ' . $addr->country . ' ' . $addr->postal_code;

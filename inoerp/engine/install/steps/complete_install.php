@@ -14,12 +14,15 @@ function importSQL($sqlfile, $connection) {
  $count = 0;
  $total = count($queries);
  foreach ($queries as $query) {
+  if (strpos($query, 'DEFINER=`root`@`localhost`') !== false) {
+   str_replace('DEFINER=`root`@`localhost`', ' ', $query);
+  }
   $count++;
   try {
    $connection->connection->exec($query);
    $_SESSION['progress_percentage'] = round($count / 600);
    // Calculate the percentation
-   $percent = intval($count / $total * 100) ;
+   $percent = intval($count / $total * 100);
    $percent = ($percent <= 100) ? $percent : '100';
    $percent_p = $percent . '%';
 

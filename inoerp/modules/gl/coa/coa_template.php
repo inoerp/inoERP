@@ -9,7 +9,6 @@
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
       <ul class="column header_field">
        <li><?php $f->l_text_field_dr_withSearch('coa_id'); ?><a name="show" href="form.php?class_name=coa&<?php echo "mode=$mode"; ?>" class="show document_id coa_id">
          <i class='fa fa-refresh'></i></a> 
@@ -23,7 +22,6 @@
        <li><?php $f->l_checkBox_field_d('rev_enabled_cb'); ?></li>
        <li><?php $f->l_text_field_d('rev_number'); ?></li>
       </ul>
-     </div>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div id="comments">

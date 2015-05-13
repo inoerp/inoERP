@@ -1,23 +1,23 @@
 <form action=""  method="post" id="customer_bu"  name="customer_bu">
  <div id ="form_header"><span class="heading"><?php echo gettext('Customer BU Assignment') ?></span>
   <div class="tabContainer">
-  <ul class="column header_field"><?php $f = new inoform(); ?>
+   <ul class="column header_field">
     <li><?php $f->l_text_field_dr_withSearch('ar_customer_bu_id') ?><a name="show" href="?ar_customer_bu_id=" class="show ar_customer_bu_id">
       <i class='fa fa-refresh'></i></a> 
     </li>
-    <li><label>Customer Id</label><span class="button"><a href="form.php?class_name=ar_customer&mode=<?php echo $mode; ?>&ar_customer_id=
-                                                          <?php echo $$class->ar_customer_id; ?>"><?php echo $$class->ar_customer_id; ?></a></span>
-      <?php echo form::hidden_field('ar_customer_id', $$class->ar_customer_id); ?>
+    <li><label>Customer Id</label><a class='ajax-link' href="form.php?class_name=ar_customer&mode=<?php echo $mode; ?>&ar_customer_id=
+                                     <?php echo $$class->ar_customer_id; ?>"><?php echo $$class->ar_customer_id; ?></a>
+                                     <?php echo form::hidden_field('ar_customer_id', $$class->ar_customer_id); ?>
     </li>
     <li><?php $f->l_text_field_d('org_id'); ?></li>      
-    <li><?php $f->l_text_field_d('org'); ?></li>      
-    <li><?php $f->l_text_field_d('customer_number'); ?></li>      
-    <li><?php $f->l_text_field_d('customer_name'); ?></li>      
+    <li><?php $f->l_text_field_dr('org'); ?></li>      
+    <li><?php $f->l_text_field_dr('customer_number'); ?></li>      
+    <li><?php $f->l_text_field_dr('customer_name'); ?></li>      
     <li><?php $f->l_status_field_d('status'); ?></li>      
     <li><?php $f->l_text_field_d('rev_enabled_cb'); ?></li>      
     <li><?php $f->l_text_field_d('rev_number'); ?></li>      
    </ul>
-   </div>
+  </div>
  </div>
  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Customer BU Details') ?></span>
   <div id="tabsLine">
@@ -39,8 +39,8 @@
       <li><?php $f->l_ac_field_d('clearing_ac_id', '', 'X'); ?></li>
       <li><?php $f->l_ac_field_d('unbilled_receivable_ac_id', '', 'A'); ?></li>
       <li><?php $f->l_ac_field_d('unearned_revenue_ac_id', '', 'L'); ?></li>
-      </ul>
-      <!--end of tab1 div three_column-->
+     </ul>
+     <!--end of tab1 div three_column-->
     </div> 
     <div id="tabsLine-2" class="tabContent">
      <div> 
@@ -65,14 +65,12 @@
 
 
     <div id="tabsLine-4" class="tabContent">
-     <ul class="column five_column"> 
-      <li><?php $f->l_text_field_d('order_type_id'); ?> </li>
-      <li><?php $f->l_text_field_d('price_list_id'); ?> </li>
-      <li><?php $f->l_text_field_d('internal_org_id'); ?> </li>
+     <ul class="column five_column">
+      <li><?php $f->l_select_field_from_object('order_type_id', sd_document_type::find_all_header_levels(), 'sd_document_type_id', 'document_type_name', $$class->order_type_id, 'document_type', 'medium'); ?>						 </li>
+      <li><?php $f->l_select_field_from_object('price_list_id', mdm_price_list_header::find_all_sales_pl(), 'mdm_price_list_header_id', 'price_list', $$class->price_list_id); ?></li>
       <li><?php $f->l_text_field_d('fob'); ?> </li>
       <li><?php $f->l_text_field_d('freight_terms'); ?> </li>
       <li><?php $f->l_text_field_d('transportation'); ?> </li>
-      <li><?php $f->l_text_field_d('country_of_origin'); ?> </li>
      </ul>
     </div>
 
