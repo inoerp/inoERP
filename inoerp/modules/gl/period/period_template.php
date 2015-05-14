@@ -10,10 +10,9 @@
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field">
-        <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $gl_period_object[0]->ledger_id, 'ledger_id'); ?>
-         <a name="show" href="form.php?class_name=gl_period&<?php echo "mode=$mode"; ?>" class="show document_id ledger_id">
+        <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $gl_period_object[0]->ledger_id, 'gl_ledger_id'); ?>
+         <a name="show" href="form.php?class_name=gl_period&<?php echo "mode=$mode"; ?>" class="show document_id gl_ledger_id">
           <i class="fa fa-refresh"></i></a> 
         </li>
         <li><label><?php echo gettext('Current Open Period') ?></label><?php echo $cop_stmt; ?></li>
@@ -22,7 +21,6 @@
         <li><label><?php echo gettext('Next Period') ?></label><input type="button" class="btn btn-warning" role="button" id="open_next_period" value="Open" 
                                                                       <?php echo ($readonly == 1) ? 'disabled' : ''; ?>				></li>
        </ul>
-      </div>
       <div id="tabsHeader-2" class="tabContent">
        <div id="comments">
         <div id="comment_list">
@@ -141,7 +139,7 @@
 <div id="js_data">
  <ul id="js_saving_data">
   <li class="lineClassName" data-lineClassName="gl_period" ></li>
-  <li class="primary_column_id" data-primary_column_id="ledger_id" ></li>
+  <li class="primary_column_id" data-primary_column_id="gl_ledger_id" ></li>
   <li class="line_key_field" data-line_key_field="period_name" ></li>
   <li class="single_line" data-single_line="false" ></li>
   <li class="form_line_id" data-form_line_id="gl_period" ></li>

@@ -1134,7 +1134,7 @@ ul.program_form li label{
 }*/
 
 #search_result th:first-child{
- width: 30px;
+ /*width: 30px;*/
 }
 
 #search_result th:nth-child(2){

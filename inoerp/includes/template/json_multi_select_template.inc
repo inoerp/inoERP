@@ -68,7 +68,7 @@
              if ($i == 0) {
               echo "<th>Select</th>";
              }
-             echo "<th>Seq#</th>";
+             echo '<th>'.gettext(ucwords(str_replace('_', ' ', $primary_column_v))).'</th>';
              if (($i == 0) && (!empty($multi_selct_input_fields) && !is_array($multi_selct_input_fields))) {
               echo '<th>Line Action</th>';
              }
@@ -113,7 +113,7 @@
                 echo "<input type=\"hidden\" name=\"action\" class=\"hidden action\"  value=\"$action_message\"></td>";
                 echo!empty($hidden_field_stmt) ? $hidden_field_stmt : '';
                }
-               echo "<td>$count</td>";
+               echo '<td>'.$records->$primary_column_v.'</td>';
                if (!empty($multi_select_tabs) && ($i == $no_of_tabs - 1)) {
 //                 echo $multi_select_tabs;
                 echo $multi_select_tabs['tab_row_content'];
