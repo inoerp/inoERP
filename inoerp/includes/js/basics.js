@@ -51,7 +51,7 @@ function getFormDetails(url) {
     $('#document_history').replaceWith('<div id="document_history">' + $(result).find('div#document_history').html() + '</div>');
    }
    var homeUrl = $('#home_url').val();
-   $.getScript(homeUrl + "includes/js/reload.js");
+
    $(result).find('#js_files').find('li').each(function () {
     $.getScript($(this).html());
    });
@@ -61,8 +61,13 @@ function getFormDetails(url) {
      $('<link href="' + filePath + '" rel="stylesheet">').appendTo("head");
     }
    });
+   $.getScript(homeUrl + "includes/js/reload.js").done(function () {
+    $('#overlay').css('display', 'none');
+   });
+  } else {
+   $('#overlay').css('display', 'none');
   }
-  $('#overlay').css('display', 'none');
+
  }).fail(function () {
   alert("Form loading failed!");
   $('#overlay').css('display', 'none');
@@ -2229,9 +2234,10 @@ function getSearchResult(options) {
  }).done(function (result) {
   var newContent = $(result).find('div#searchResult').html();
   $('#searchResult').empty().append(newContent);
-  $.getScript("includes/js/reload.js");
-  $('.show_loading_small').hide();
-  $('#overlay').css('display', 'none');
+  $.getScript( "includes/js/reload.js").done(function () {
+   $('#overlay').css('display', 'none');
+   $('.show_loading_small').hide();
+  });
  }).fail(function () {
   alert("Search Failed");
   $('#overlay').css('display', 'none');
@@ -2269,9 +2275,10 @@ function getSelectResult(options) {
  }).done(function (result) {
   var newContent = $(result).find('div#selectResult').html();
   $('#selectResult').empty().append(newContent);
-  $.getScript("includes/js/reload.js");
-  $('.show_loading_small').hide();
-  $('#overlay').css('display', 'none');
+    $.getScript( "includes/js/reload.js").done(function () {
+   $('#overlay').css('display', 'none');
+   $('.show_loading_small').hide();
+  });
  }).fail(function () {
   alert("Search Failed");
   $('#overlay').css('display', 'none');
@@ -3998,11 +4005,11 @@ $(document).ready(function () {
   var headerData = $('#program_header').serializeArray();
   var class_name = $('.class_name').val();
   var homeUrl = $('#home_url').val();
-  if(headerData){
-     var savePath = homeUrl + 'program.php?class_name=' + class_name;
-  $.when(saveHeader(savePath, headerData, '#sys_program', '', '', true, 'program_header')).then(function () {
-   $('.show_loading_small').hide();
-  });
+  if (headerData) {
+   var savePath = homeUrl + 'program.php?class_name=' + class_name;
+   $.when(saveHeader(savePath, headerData, '#sys_program', '', '', true, 'program_header')).then(function () {
+    $('.show_loading_small').hide();
+   });
   }
  });
 
@@ -4044,7 +4051,7 @@ $(document).ready(function () {
   }
  });
 
-  
+
  $('body').on('click', 'a.payslipBy_periodName', function (e) {
   var headerId_v = $(this).parent().find('select').val();
   var headerId = $(this).parent().find('select').attr('id');
@@ -4125,7 +4132,7 @@ $(document).ready(function () {
   position: {my: "center center", at: "center center"}
  });
 
- 
+
  $('body').off('click', '.apply-filter').on('click', '.apply-filter', function () {
   var inputFieldName = $(this).closest('.list_filter').find('select.field_name').val();
   var inputFieldCondition = $(this).closest('.list_filter').find('select.condition_name').val();
@@ -4234,7 +4241,7 @@ $(document).ready(function () {
   $(this).closest('form').find(':input').not('.button').val('');
  });
 
-  $('body').on('click', '.right_bar_navigation_menu', function () {
+ $('body').on('click', '.right_bar_navigation_menu', function () {
   if ($('.sidebar').is(':visible')) {
    var containerWidth = $('body').width();
    $('#divider-bar').css({
@@ -4316,14 +4323,14 @@ $(document).ready(function () {
  $('body').on('click', '.fa-arrow-circle-down', function () {
   $(this).removeClass('fa-arrow-circle-down').addClass('fa-arrow-circle-up');
  });
- 
-  $('body').on('click', '.fa-arrow-circle-up', function () {
+
+ $('body').on('click', '.fa-arrow-circle-up', function () {
   $(this).removeClass('fa-arrow-circle-up').addClass('fa-arrow-circle-down');
  });
- 
+
  //tool tip causing error in firefox
 // $('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
- 
+
 
  $('body').on('click', '#save_content', function () {
   if (!$('#subject').val()) {
@@ -4458,16 +4465,16 @@ $(document).ready(function () {
   void window.open('select.php?class_name=extn_contact', '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
- 
+
  $("body").on("click", ".select_am_asset_number.select_popup", function () {
   var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
   void window.open('select.php?class_name=am_asset', '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
- 
-  $("body").on("click", "a.contact_link", function (e) {
-   e.preventDefault();
+
+ $("body").on("click", "a.contact_link", function (e) {
+  e.preventDefault();
   void window.open($(this).prop('href'), '_blank',
           'width=1000,height=600,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });

@@ -9,7 +9,6 @@
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
       <ul class="column header_field">
        <li><?php $f->l_text_field_dr_withSearch('fa_asset_book_id') ?>
         <a name="show" href="form.php?class_name=fa_asset_book&<?php echo "mode=$mode"; ?>" class="show document_id fa_asset_book_id">
@@ -22,7 +21,6 @@
        <li<?php $f->select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, '', '', '', $readonly) ?>        </li> 
        <li><?php $f->l_checkBox_field_d('allow_gl_posting_cb'); ?></li>
       </ul>
-     </div>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>

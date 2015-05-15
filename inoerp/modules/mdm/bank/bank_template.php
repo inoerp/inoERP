@@ -109,7 +109,7 @@
      </div>
     </div> 
     <div id="tabsLine-4" class="tabContent">
-     <?php echo $f->contact_field('mdm_bank_site', $$class_second->mdm_bank_site_id, $all_contacts); ?>
+     <?php echo $f->contact_field('supplier_site', $$class_second->supplier_site_id, $all_contacts); ?>
     </div>
     <div id="tabsLine-5" class="tabContent">
      <div id="comments">

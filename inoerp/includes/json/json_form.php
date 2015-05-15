@@ -22,6 +22,9 @@ if (empty($_POST)) {
  try {
   if ($continue) {
    header("Content-type: text/html; charset=UTF-8");
+   if(!isset($all_contacts)){
+    $all_contacts = null;
+   }
    include_once(__DIR__.'/../template/json_form_template.inc');
   } else {
    $continue = false;

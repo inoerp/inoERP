@@ -300,8 +300,7 @@ if (($continue) && (!empty($class_names))) {
     } catch (Exception $e) {
      
     }
-
-    if (($class != 'extn_contact') && class_exists('extn_contact')) {
+      if (($class != 'extn_contact')) {
      $all_contacts = extn_contact::find_by_reference($table_name, $class_id_value);
     }
     if ($class != 'category') {
