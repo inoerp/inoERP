@@ -673,6 +673,18 @@ ul.inline_list li{
  cursor: pointer;
 }
 
+span.heading-right{
+ font-weight: bold;
+padding: 3px 10px;
+display: inline-block;
+width: 50%;
+float: right;
+}
+
+ul.inline-list.ino-breadcrumb-simple {
+ float: left;
+width: 40%;        
+}
 .heading1 {
  border-bottom: 2px dotted rgb(51, 153, 204);
  margin-left: -10px;
@@ -1943,4 +1955,8 @@ ul.inline-list li{
 
 #site_search_submit{
         height: 34px;
+}
+
+.font-medium{
+ font-size: 12px !important;
 }

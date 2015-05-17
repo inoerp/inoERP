@@ -51,6 +51,7 @@
       </div>
      </div>
     </div>
+    <div id='overlay'></div>
     <div id="content_bottom" class="row"></div>
    </div>
   </div>

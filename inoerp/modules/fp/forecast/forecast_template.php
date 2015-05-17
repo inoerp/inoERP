@@ -7,6 +7,7 @@
       <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>
       <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
       <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+      <li><a href="#tabsHeader-4"><?php echo gettext('Secondary') ?></a></li>
      </ul>
      <div class="tabContainer">
       <div id="tabsHeader-1" class="tabContent">
@@ -46,6 +47,9 @@
          </div>
         </div>
        </div>
+      </div>
+      <div id="tabsHeader-4" class="tabContent">
+       <?php echo!empty($secondary_field_stmt) ? $secondary_field_stmt : null; ?>
       </div>
      </div>
 
@@ -95,8 +99,8 @@
           ?>         
           <tr class="fp_forecast_line<?php echo $count ?>">
            <td>           <?php
-           echo ino_inline_action($$class_second->fp_forecast_line_id, array('fp_forecast_header_id' => $$class->fp_forecast_header_id));
-           ?>   
+            echo ino_inline_action($$class_second->fp_forecast_line_id, array('fp_forecast_header_id' => $$class->fp_forecast_header_id));
+            ?>   
            </td>
            <td><?php $f->seq_field_d($count); ?></td>
            <td><?php form::text_field_wid2sr('fp_forecast_line_id'); ?></td>
@@ -151,7 +155,7 @@
            <td><?php echo $f->number_field('total_original', $$class_second->total_original, '', '', '', '', 1); ?></td>
            <td><?php
             $link_fd = HOME_URL . "search.php?fp_forecast_line_id[]=%3D{$$class_second->fp_forecast_line_id}&search_order_by[]=fp_forecast_line_date_id&search_asc_desc[]=desc&per_page[]=10&search_class_name=fp_forecast_line_date_v&submit_search=Search";
-            echo '<a class=\'button\' href="' . $link_fd . '">Date Specific</a>';
+            echo '<a target="_blank" window_type="popup" class=\'button\' href="' . $link_fd . '">Date Specific</a>';
             ?></td>
            <td><?php $f->text_field_d2r('fp_consumption_id'); ?></td>
           </tr>

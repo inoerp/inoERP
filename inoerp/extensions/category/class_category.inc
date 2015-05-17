@@ -299,10 +299,16 @@ class category extends dbObject {
   $statement = '';
   foreach ($category_a as $category_id => $category_a) {
    $cat->findBy_id($category_id);
+   $content_count = content::content_count_by_categoryId_contentType($category_id);
    $statement .= "<tr class=\"level_$level\"><td class='link'>";
    $statement .= '<a href="' . HOME_URL . 'content.php?content_type=' .
     $content_type_name . '&amp;category_id=' . $category_id . '">' . $cat->category . '</a></td>';
-   $statement .= '<td>' . $cat->description . '</td>';
+   if(!empty($content_count)){
+    $statement .= '<td>' . $cat->description ." <span class='badge'> $content_count </span> </td>";
+   }else{
+    $statement .= '<td>' . $cat->description ."</td>";
+   }
+   
 //   $statement .= '<td>' . self::contentCount_by_categoryId_contentType($category_id) . '</td>';
    $statement .= '</tr>';
    if (is_array($category_a)) {
@@ -328,11 +334,17 @@ class category extends dbObject {
 
   $cat = new category();
   $cat->findBy_id($category_id);
+  $content_count = content::content_count_by_categoryId_contentType($category_id);
   $level = 1;
   $statement .= "<tr class=\"level_$level\"><td class='link'>";
   $link_cat = HOME_URL . 'content.php?content_type=' . $content_type_name . '&category_id=' . $category_id;
   $statement .= '<a href="' . htmlspecialchars($link_cat) . '">' . $cat->category . '</a></td>';
-  $statement .= '<td>' . $cat->description . '</td>';
+  if(!empty($content_count)){
+   $statement .= '<td>' . $cat->description . " <span class='badge'> $content_count </span> </td>";
+  }else{
+   $statement .= '<td>' . $cat->description . "</td>";
+  }
+  
 //  $statement .= '<td>' . self::contentCount_by_categoryId_contentType($category_id) . '</td>';
   $statement .= '</tr>';
 

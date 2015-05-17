@@ -47,6 +47,7 @@ class gl_journal_header extends dbObject {
   'gl_journal_header_id',
   'ledger_id',
   'currency',
+  'doc_currency',
   'document_date',
   'period_id',
   'journal_source',
@@ -67,7 +68,7 @@ class gl_journal_header extends dbObject {
   'reference_type',
   'reference_key_name',
   'reference_key_value',
-  'ef_id',
+  
   'status',
   'rev_enabled_cb',
   'rev_number',
@@ -136,6 +137,7 @@ class gl_journal_header extends dbObject {
  public $gl_journal_header_id;
  public $ledger_id;
  public $currency;
+ public $doc_currency;
  public $period_id;
  public $document_date;
  public $journal_source;

@@ -194,7 +194,7 @@
 
      <div class="second_rowset">
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title"><?php echo gettext('Long Description') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Long Description') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
          <li><?php echo form::text_area('long_description', $item->long_description, '5', '30', ''); ?></li>
@@ -202,7 +202,7 @@
        </div>
       </div>
       <div class="panel panel-collapse panel-ino-classy large_box">
-       <div class="panel-heading"><div class="panel-title"><?php echo gettext('Lead Time Information') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Lead Time Information') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
          <li><?php $f->l_text_field_d('pre_processing_lt'); ?></li>
@@ -236,7 +236,7 @@
      </div>
      <div class="second_rowset">
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title"><?php echo gettext('Lot Information') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Lot Information') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
          <li><?php $f->l_select_field_from_array('lot_uniqueness', item::$ls_uniqueness_a, $$class->lot_uniqueness); ?>   </li>
@@ -247,7 +247,7 @@
        </div>
       </div>
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title"><?php echo gettext('Serial Information') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Serial Information') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
          <li><?php $f->l_select_field_from_array('serial_uniqueness', item::$ls_uniqueness_a, $$class->serial_uniqueness); ?>         </li>
@@ -258,7 +258,7 @@
        </div>
       </div>
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title"><?php echo gettext('Measurement Information') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Measurement Information') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
          <li><?php $f->l_select_field_from_object('weight_uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->weight_uom_id, 'weight_uom_id', '', '', $readonly); ?></li>
@@ -288,7 +288,7 @@
      </div>
      <div class="second_rowset">
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title"><?php echo gettext('Rule Information') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Rule Information') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
          <li><?php $f->l_text_field_d('atp'); ?></li>
@@ -315,7 +315,7 @@
      </div>
      <div class="second_rowset">
       <div class="panel panel-collapse panel-ino-classy extra_large_box">
-       <div class="panel-heading"><div class="panel-title">Receipt Information</div></div>
+       <div class="panel-heading"><div class="panel-title font-medium">Receipt Information</div></div>
        <div class="panel-body">
         <ul class="column header_field">
          <li><?php $f->l_text_field_d('receipt_routing'); ?></li>
@@ -370,7 +370,7 @@
      </div>
      <div class="second_rowset">
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title"><?php echo gettext('Order Modifiers') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Order Modifiers') ?></div></div>
        <div class="panel-body">
         <ul class="column header_field">
          <li><?php $f->l_number_field_d('fix_order_quantity'); ?></li>
@@ -383,7 +383,7 @@
       </div>
 
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title"><?php echo gettext('Time Fences') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Time Fences') ?></div></div>
        <div class="panel-body">
         <ul class="column header_field">
          <li><?php $f->l_text_field_d('demand_timefence'); ?></li>
@@ -395,7 +395,7 @@
       </div>
 
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title"><?php echo gettext('Min Max Planning') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Min Max Planning') ?></div></div>
        <div class="panel-body">
         <ul class="column header_field">
          <li><?php $f->l_number_field_d('minmax_min_quantity'); ?></li>
@@ -419,7 +419,7 @@
       </ul>
      </div>
      <div class="panel panel-collapse panel-ino-classy medium_box">
-      <div class="panel-heading"><div class="panel-title"><?php echo gettext('Safety Stock') ?></div></div>
+      <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Safety Stock') ?></div></div>
       <div class="panel-body">
        <ul class="column header_field">
         <li><?php $f->l_number_field_d('saftey_stock_quantity'); ?></li>
@@ -429,7 +429,7 @@
       </div>
      </div>
      <div class="panel panel-collapse panel-ino-classy medium_box">
-      <div class="panel-heading"><div class="panel-title"><?php echo gettext('Asset Maintenance') ?></div></div>
+      <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Asset Maintenance') ?></div></div>
       <div class="panel-body">
        <ul class="column line_field">
         <li><?php $f->l_select_field_from_object('am_activity_cause', am_asset_activity::activity_cause(), 'option_line_code', 'option_line_value', $$class->am_activity_cause); ?></li>
@@ -452,7 +452,7 @@
      </div> 
      <div class="second_rowset">
       <div class="panel panel-collapse panel-ino-classy extra_large_box">
-       <div class="panel-heading"><div class="panel-title">Account</div></div>
+       <div class="panel-heading"><div class="panel-title font-medium">Account</div></div>
        <div class="panel-body">
         <ul class="column line_field">
          <li><?php $f->l_ac_field_d('material_ac_id'); ?></li>

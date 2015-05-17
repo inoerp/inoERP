@@ -1,13 +1,14 @@
 *.xcuserstate
+inoerp_index.php
+test.*
+mailsettings.inc
+dbsettings.inc
 
 #################
 ## Eclipse
 #################
 
-inoerp_index.php
-test.*
-mailsettings.inc
-dbsettings.inc
+
 
 *.pydevproject
 .project

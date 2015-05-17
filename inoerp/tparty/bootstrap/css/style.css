@@ -4083,7 +4083,7 @@ ul.form_top{
 }
 
 
-.second_rowset ul li{
+ul.line_field li{
  display : inline-block;
  min-width: 200px;
  max-width: 250px;

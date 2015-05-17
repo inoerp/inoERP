@@ -120,6 +120,7 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
       </div>
      </div>
     </div>
+    <div id='overlay'></div>
     <div id="content_bottom"></div>
    </div>
   </div>

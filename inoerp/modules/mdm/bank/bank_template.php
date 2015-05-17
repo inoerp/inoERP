@@ -69,6 +69,7 @@
     <li><a href="#tabsLine-3"><?php echo gettext('Site Address') ?> </a></li>
     <li><a href="#tabsLine-4"><?php echo gettext('Contact') ?> </a></li>
     <li><a href="#tabsLine-5"><?php echo gettext('Notes') ?> </a></li>
+    <li><a href="#tabsLine-6"><?php echo gettext('Secondary') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
@@ -109,7 +110,7 @@
      </div>
     </div> 
     <div id="tabsLine-4" class="tabContent">
-     <?php echo $f->contact_field('supplier_site', $$class_second->supplier_site_id, $all_contacts); ?>
+     <?php echo $f->contact_field('mdm_bank_site_id', $$class_second->mdm_bank_site_id, $all_contacts); ?>
     </div>
     <div id="tabsLine-5" class="tabContent">
      <div id="comments">
@@ -124,6 +125,9 @@
       <div id="new_comment">
       </div>
      </div>
+    </div>
+    <div id="tabsLine-5" class="tabContent">
+     <?php echo!empty($secondary_field_stmt) ? $secondary_field_stmt : null; ?>
     </div>
    </div>
 

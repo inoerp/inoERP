@@ -166,11 +166,9 @@ ul.second_level li{
  z-index:1000;
  position: absolute;
  background-color: #ddd;
- font-size: 11px;
+ font-size: 10px;
  border: 1px solid #ddd;
  box-shadow: 4px 4px 1px grey;
- line-height:22px;
-
 }
 #right_click_menu ul {
  padding: 0px;
