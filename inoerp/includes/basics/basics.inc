@@ -12,6 +12,7 @@ defined('INO_DATE_TIME_FORMAT') ? null : define('INO_DATE_TIME_FORMAT', 'Y-m-d H
 defined('PROJECT_DIR') ? null : define('PROJECT_DIR', realpath('./'));
 defined('LOCALE_DIR') ? null : define('LOCALE_DIR', HOME_DIR . '/locale');
 defined('DEFAULT_LOCALE') ? null : define('DEFAULT_LOCALE', 'en_US');
+defined('NUM_ROUND') ? null : define('NUM_ROUND',5);
 defined('INC_BASICS') ? null : define('INC_BASICS', INC_PATH . DS . 'basics');
 defined('INC_CLASS') ? null : define('INC_CLASS', INC_PATH . DS . 'general_class');
 defined('INC_MODULE') ? null : define('INC_MODULE', HOME_DIR . DS . 'modules');
@@ -97,6 +98,7 @@ require_once(INC_MODULE . DS . "sys" . DS . "catalog" . DS . "class_sys_catalog_
 require_once(INC_MODULE . DS . "sys" . DS . "catalog" . DS . "class_sys_catalog_line.inc");
 require_once(INC_MODULE . DS . "sys" . DS . "catalog" . DS . "value" . DS . "class_sys_catalog_value.inc");
 require_once(INC_MODULE . DS . "sys" . DS . "message_format" .  DS . "class_sys_message_format.inc");
+require_once(INC_MODULE . DS . "sys" . DS . "form_personalization" .  DS . "class_sys_form_personalization.inc");
 require_once(INC_ORGS . DS . "class_org.inc");
 require_once(INC_ORGS . DS . "class_org_v.inc");
 require_once(INC_ORGS . DS . "enterprise" . DS . "class_enterprise.inc");

@@ -188,7 +188,7 @@
        <li><?php $f->l_select_field_from_object('item_type', item::item_types(), 'option_line_code', 'option_line_value', $item->item_type, 'item_type', '', 1, $readonly); ?>       </li> 
        <li><?php echo $f->l_select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->uom_id, 'uom_id', '', 1, $readonly); ?>       </li>
        <li><?php echo $f->l_number_field('product_line_percentage', $$class->product_line_percentage, '8'); ?></li>
-       <li><?php echo $f->l_select_field_from_object('item_status', item::item_status(), 'option_line_id', 'option_line_code', $item->item_status, 'item_status', '', '', $readonly); ?>       </li>
+       <li><?php echo $f->l_select_field_from_object('item_status', item::item_status(), 'option_line_id', 'option_line_code', $item->item_status, 'item_status', '', 1, $readonly); ?>       </li>
       </ul>
      </div>
 

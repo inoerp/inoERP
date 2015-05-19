@@ -9,7 +9,6 @@
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field">
         <li><?php echo $f->l_text_field_dr_withSearch('fp_source_list_header_id') ?>
          <a name="show" href="form.php?class_name=fp_source_list_header&<?php echo "mode=$mode"; ?>" class="show document_id fp_source_list_header_id">
@@ -21,7 +20,6 @@
         <li><?php $f->l_text_field_d('description'); ?></li>
         <li><?php $f->l_status_field_d('status'); ?></li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div> <?php echo ino_attachement($file) ?> </div>

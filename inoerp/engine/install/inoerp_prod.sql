@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2015 at 03:46 PM
+-- Generation Time: May 19, 2015 at 10:03 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `inoerp_dev2`
+-- Database: `inoerp_prod2`
 --
 
 -- --------------------------------------------------------
@@ -5513,7 +5513,7 @@ CREATE TABLE IF NOT EXISTS `gl_journal_header` (
   `reference_type` varchar(25) DEFAULT NULL,
   `reference_key_name` varchar(25) DEFAULT NULL,
   `reference_key_value` varchar(25) DEFAULT NULL,
-  `ef_id` int(12) DEFAULT NULL,
+  `doc_currency` decimal(25,0) DEFAULT NULL,
   `status` varchar(25) NOT NULL DEFAULT 'ENTERED',
   `rev_enabled_cb` tinyint(1) DEFAULT NULL,
   `rev_number` int(12) DEFAULT NULL,
@@ -8686,7 +8686,7 @@ INSERT INTO `option_header` (`option_header_id`, `access_level`, `option_type`, 
 (119, 'BOTH', 'USER_ROLES', 'User roles', 'sys', NULL, NULL, NULL, NULL, 1, 0, '2014-09-05 03:32:31', 34, '2015-05-06 04:38:52'),
 (120, 'BOTH', 'INVENTORY_ORG_TYPE', 'Inventory Organization Type', 'inv', NULL, 0, 'active', 'enabled', 1, 0, '2013-09-28 14:40:38', 0, '2013-09-28 14:40:38'),
 (121, 'BOTH', 'COSTING_METHODS', 'Costing Methods', 'inv', NULL, 0, 'active', '', 0, 0, '2013-09-28 14:45:26', 0, '2013-09-28 14:45:26'),
-(122, 'SYSTEM', 'MANUFACTURING_ITEM_TYPE', 'Manufacuting Item Type', 'inv', NULL, 0, 'active', '', 0, 0, '2013-10-05 10:34:51', 0, '2013-10-05 10:34:51'),
+(122, 'SYSTEM', 'MANUFACTURING_ITEM_TYPE', 'Manufacuting Item Type', 'inv', NULL, NULL, NULL, NULL, NULL, 0, '2013-10-05 10:34:51', 34, '2015-05-18 09:35:27'),
 (123, 'BOTH', 'ITEM_STATUS', 'Item Status', 'inv', NULL, 0, 'active', 'enabled', 0, 0, '2013-10-05 11:18:49', 0, '2013-10-05 11:18:49'),
 (124, 'BOTH', 'SUPPLIER_TYPE', 'Supplier Type', 'ap', NULL, NULL, NULL, NULL, 2, 0, '2013-10-12 16:32:50', 34, '2015-05-08 03:42:56'),
 (125, 'BOTH', 'COUNTRY', 'All countries', 'sys', '', 0, 'active', 'enabled', 0, 0, '2014-06-03 13:00:25', 0, '2003-06-14 13:00:25'),
@@ -8967,8 +8967,8 @@ INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_co
 (271, 121, 'Average', '', 'Average Costing', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2013-09-28 14:45:26', 0, '2013-09-28 14:45:26'),
 (272, 121, 'Standard', '', 'Standard Costing', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2013-09-28 14:45:26', 0, '2013-09-28 14:45:26'),
 (273, 121, 'FIFO', '', 'First In First Out', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2013-09-28 14:45:27', 0, '2013-09-28 14:45:27'),
-(275, 122, 'Buy', '', 'Buy Item', NULL, 0, 'active', '', 0, '01/01/2001', '', 0, '2013-10-05 10:34:52', 0, '2013-10-05 10:34:52'),
-(276, 122, 'Make', '', 'Make Item', NULL, NULL, 'active', NULL, NULL, '01/01/2001', NULL, 0, '2013-10-05 10:28:53', 0, '2013-10-05 10:28:53'),
+(275, 122, 'BUY', 'Buy', 'Buy Item', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-10-05 10:34:52', 34, '2015-05-18 09:35:27'),
+(276, 122, 'MAKE', 'Make', 'Make Item', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-10-05 10:28:53', 34, '2015-05-18 09:35:28'),
 (277, 123, 'Active', '', 'Status', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2013-10-05 11:18:49', 0, '2013-10-05 11:18:49'),
 (278, 123, 'Inactive', '', 'Inactive', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2013-10-05 11:18:49', 0, '2013-10-05 11:18:49'),
 (279, 123, 'Engineering', '', 'Engineering', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2013-10-05 11:18:50', 0, '2013-10-05 11:18:50'),
@@ -9960,7 +9960,7 @@ CREATE TABLE IF NOT EXISTS `path` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`path_id`),
   UNIQUE KEY `name` (`name`,`module_code`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=676 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=677 ;
 
 --
 -- Dumping data for table `path`
@@ -10211,8 +10211,8 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (282, 280, 'Search Sourcing Rule', 'search.php?class_name=po_sourcing_rule_header', 'Search Sourcing Rule', 'pur', 'po_sourcing_rule_header', NULL, NULL, '', NULL, 1, NULL, 0, '2014-05-02 00:00:00', 0, '2010-06-14 00:00:00'),
 (283, 273, 'Serach Req Header', 'search.php?class_name=po_requisition_header', 'Serach Req Header', 'pur', 'po_requisition_header', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-05-02 00:00:00', 0, '2010-06-14 00:00:00'),
 (284, NULL, 'Forecast & Planning', 'form.php?module_code=fp', 'Forecast & Planning', 'fp', 'fp', 2, NULL, NULL, 'SETUP', NULL, 16, 0, '2014-07-23 00:00:00', 34, '2015-05-09 11:31:14'),
-(285, 284, 'Forecast', 'form.php?class_name=fp_forecast_header&mode=9', 'Create & Update Forecast', 'fa', 'fp_forecast_header', 9, NULL, 'fp_forecast_group_id', NULL, NULL, NULL, 0, '2014-05-03 00:00:00', 0, '2010-06-14 00:00:00'),
-(286, 285, 'View Forecast', 'form.php?class_name=fp_forecast_header&mode=2', 'View Forecast', 'fa', 'fp_forecast_header', 2, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-03 00:00:00', 0, '2010-06-14 00:00:00'),
+(285, 284, 'Forecast', 'form.php?class_name=fp_forecast_header&mode=9', 'Create & Update Forecast', 'fp', 'fp_forecast_header', 9, NULL, 'fp_forecast_group_id', NULL, NULL, NULL, 0, '2014-05-03 00:00:00', 34, '2015-05-17 05:24:03'),
+(286, 285, 'View Forecast', 'form.php?class_name=fp_forecast_header&mode=2', 'View Forecast', 'fp', 'fp_forecast_header', 2, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-03 00:00:00', 34, '2015-05-17 05:23:48'),
 (287, 285, 'Search Forecast', 'search.php?class_name=fp_forecast_header', 'Search Forecast', 'fp', 'fp_forecast_header', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-05-03 00:00:00', 0, '2010-06-14 00:00:00'),
 (288, 284, 'Source List', 'form.php?class_name=fp_source_list_header&mode=9', 'Create & Update Source List', 'fp', 'fp_source_list_header', 9, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-05 00:00:00', 0, '2010-06-14 00:00:00'),
 (289, 288, 'Search FP Source List', 'search.php?class_name=fp_source_list_header', 'Search FP Source List', 'fa', 'fp_source_list_header', NULL, NULL, '', NULL, 1, NULL, 0, '2014-05-05 00:00:00', 0, '2010-06-14 00:00:00'),
@@ -10409,7 +10409,7 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (486, 485, 'Search CO', 'search.php?class_name=cc_co_header', 'Search CO', 'cc', 'cc_co_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2014-11-09 10:35:15', 34, '2014-11-09 10:35:15'),
 (487, NULL, 'Document & Analysis', 'form.php?module_code=da', 'Document & Analysis', 'da', 'da', 2, NULL, NULL, NULL, NULL, 3, 34, '2014-11-09 14:45:58', 34, '2015-05-05 15:51:32'),
 (488, 337, 'Search Process Flow', 'search.php?class_name=sys_process_flow_header', 'Search Process Flow', 'sys', 'sys_process_flow_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2014-11-11 04:18:04', 34, '2014-11-11 04:36:11'),
-(489, 290, 'Minmax Board', 'form.php?class_name=fp_minmax_board_v', 'Minmax Board', 'fp', 'fp_minmax_board_v', 2, NULL, NULL, 'REPORT', NULL, 1, 34, '2014-11-12 08:51:39', 34, '2014-11-12 08:51:44'),
+(489, 284, 'Minmax Board', 'form.php?class_name=fp_minmax_board_v', 'Minmax Board', 'fp', 'fp_minmax_board_v', 2, NULL, NULL, 'REPORT', NULL, 1, 34, '2014-11-12 08:51:39', 34, '2015-05-18 09:25:18'),
 (490, 487, 'Programs', 'form.php?module_code=cc&type=program', 'Programs for Document Administrator', 'cc', NULL, 2, NULL, NULL, 'PROGRAM', NULL, 4, 34, '2014-11-15 08:18:37', 34, '2014-11-15 09:49:06'),
 (491, 490, 'Implement CO', 'program.php?class_name=cc_co_header&program_name=prg_implement_co', 'Implement Change Order', 'cc', 'cc_co_header', 2, NULL, NULL, 'PROGRAM', NULL, NULL, 34, '2014-11-15 08:58:24', 34, '2014-11-15 08:58:24'),
 (492, 106, 'RMA Receipt', 'form.php?class_name=inv_rma_receipt_header&mode=9', 'RMA Receipt', 'inv', 'inv_rma_receipt_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-11-17 11:15:33', 34, '2015-02-06 16:21:00'),
@@ -10588,7 +10588,8 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (672, 669, 'Change Request', 'form.php?class_name=hd_change_request&mode=9', 'Change Request', 'hd', 'hd_change_request', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-04-19 06:26:00', 34, '2015-04-19 06:26:00'),
 (673, 672, 'Search Change Request', 'search.php?class_name=hd_change_request', 'Search Change Request', 'hd', 'hd_change_request', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-04-19 06:26:59', 34, '2015-04-19 06:26:59'),
 (674, NULL, 'Extensions', 'form.php?module_code=ext', 'Extensions', 'ext', 'ext', 2, NULL, NULL, 'CONTENT', NULL, NULL, 34, '2015-05-05 15:53:49', 34, '2015-05-05 15:53:49'),
-(675, 194, 'Multi Select Payment', 'multi_select.php?search_class_name=ap_payment_interface&action=multi_payment&mode=9', 'Multi Select Payment', 'ap', 'ap_payment_interface', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-05-09 06:35:54', 34, '2015-05-09 06:35:54');
+(675, 194, 'Multi Select Payment', 'multi_select.php?search_class_name=ap_payment_interface&action=multi_payment&mode=9', 'Multi Select Payment', 'ap', 'ap_payment_interface', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-05-09 06:35:54', 34, '2015-05-09 06:35:54'),
+(676, 59, 'Form Personalization', 'form.php?class_name=sys_form_personalization', 'Form Personalization', 'adm', 'sys_form_personalization', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-05-18 16:28:25', 34, '2015-05-18 16:28:25');
 
 -- --------------------------------------------------------
 

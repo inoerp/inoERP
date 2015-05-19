@@ -10,17 +10,16 @@
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field"> 
         <li><?php $f->l_text_field_dr_withSearch('fp_forecast_group_id') ?>
-         <a name="show" href="form.php?class_name=fp_forecast_group&<?php echo "mode=$mode"; ?>" class="show document_id fp_forecast_group_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+         <a name="show" href="form.php?class_name=fp_forecast_group&<?php echo "mode=$mode"; ?>" class="show document_id fp_forecast_group_id">
+                    <i class="fa fa-refresh"></i></a> 
         </li>
         <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>        </li>
         <li><?php $f->l_text_field_d('forecast_group'); ?></li>
         <li><?php $f->l_text_field_d('description'); ?> 					</li>
         <li><?php $f->l_status_field_d('status'); ?>  </li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div> <?php echo ino_attachement($file) ?> </div>

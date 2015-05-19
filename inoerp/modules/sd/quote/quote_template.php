@@ -20,7 +20,6 @@ inoERP
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
       <ul class="column header_field">
        <li><?php $f->l_text_field_dr_withSearch('sd_quote_header_id') ?>
         <a name="show" href="form.php?class_name=sd_quote_header&<?php echo "mode=$mode"; ?>" class="show document_id sd_quote_header_id">
@@ -37,10 +36,8 @@ inoERP
        <li><?php $f->l_text_field_d('rev_number'); ?> </li> 
        <li><?php $f->l_text_field_d('description'); ?></li> 
       </ul>
-     </div>
     </div>
     <div id="tabsHeader-2" class="tabContent">
-     <div class="large_shadow_box"> 
       <ul class="column header_field">
        <li><?php $f->l_select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', 'currency', 1, $readonly); ?>						 </li>
        <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly1); ?>						 </li>
@@ -56,7 +53,6 @@ inoERP
        <li><?php $f->l_text_field_d('new_customer_name'); ?></li> 
        <li><label><?php echo gettext('New Customer Address') ?></label><?php echo $f->text_area('new_customer_address', $$class->new_customer_address); ?></li> 
       </ul>
-     </div>
     </div>
     <div id="tabsHeader-3" class="tabContent">
      <div class="shipto_address"><?php $f->address_field_d('ship_to_id'); ?></div>

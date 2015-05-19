@@ -19,7 +19,6 @@ inoERP
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
       <ul class="column header_field">
        <li><?php $f->l_text_field_dr_withSearch('cst_item_cost_header_id'); ?>
         <a name="show" href="form.php?class_name=cst_item_cost_header&<?php echo "mode=$mode"; ?>" class="show document_id cst_item_cost_header_id">
@@ -34,7 +33,6 @@ inoERP
        <li><?php $f->l_text_field_d('item_description'); ?></li>
        <li><?php $f->l_select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom_id', 'uom_id', '', $readonly); ?>       </li>
       </ul>
-     </div>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div> 

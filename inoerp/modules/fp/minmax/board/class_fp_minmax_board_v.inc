@@ -139,6 +139,11 @@ class fp_minmax_board_v extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
+ public $planner;
+ public $make_buy;
+ public $fix_lot_multiplier;
+ public $flm;
+ public $total_delta;
 
  private function create_fp_minmax_board_v() {
   $sql = "
@@ -150,7 +155,7 @@ item_id_m, revision_name, org_id, subinventory_id, subinventory_type,
 locator_id, lot_id, serial_id, reservable_onhand, 
 transactable_onhand, lot_status, serial_status,  
 secondary_uom_id, onhand_status, ef_id, created_by, 
-creation_date, last_update_by, last_update_date)
+creation_date, last_update_by, last_update_date, min_delta)
 AS
 SELECT onhand.onhand_id, 
 item.item_number, item.item_description, item.product_line,
@@ -161,8 +166,8 @@ onhand.item_id_m, onhand.revision_name, onhand.org_id, onhand.subinventory_id, s
 onhand.locator_id, onhand.lot_id, onhand.serial_id, onhand.reservable_onhand, 
 onhand.transactable_onhand, onhand.lot_status, onhand.serial_status,  
 onhand.secondary_uom_id, onhand.onhand_status, onhand.ef_id, onhand.created_by, 
-onhand.creation_date, onhand.last_update_by, onhand.last_update_date
-
+onhand.creation_date, onhand.last_update_by, onhand.last_update_date,
+(onhand.onhand + po_summary.open_quantity - item.minmax_min_quantity)as min_delta
 FROM onhand  
 LEFT JOIN org ON onhand.org_id = org.org_id
 LEFT JOIN subinventory ON onhand.subinventory_id = subinventory.subinventory_id
@@ -226,13 +231,15 @@ AND item.minmax_min_quantity IS NOT NULL
 item.item_number, item.item_description, item.product_line,
 org.org, subinventory.subinventory, locator.locator,
 onhand.uom_id,onhand.onhand, item.minmax_min_quantity, item.minmax_max_quantity, 
-(onhand.onhand - item.minmax_min_quantity) as onhand_delta, po_summary.open_quantity as open_po,
+(IFNULL(onhand.onhand,0) - IFNULL(item.minmax_min_quantity,0)) as onhand_delta, po_summary.open_quantity as open_po,
 cic.standard_cost, (onhand.onhand * cic.standard_cost) as onhand_value,
 onhand.item_id_m, onhand.revision_name, onhand.org_id, onhand.subinventory_id, subinventory.type,
 onhand.locator_id, onhand.lot_id, onhand.serial_id, onhand.reservable_onhand, 
 onhand.transactable_onhand, onhand.lot_status, onhand.serial_status,  
 onhand.secondary_uom_id, onhand.onhand_status, onhand.ef_id, onhand.created_by, 
-onhand.creation_date, onhand.last_update_by, onhand.last_update_date
+onhand.creation_date, onhand.last_update_by, onhand.last_update_date,
+(IFNULL(onhand.onhand,0) + IFNULL(po_summary.open_quantity,0)- IFNULL(item.minmax_min_quantity,0))as total_delta,
+item.fix_lot_multiplier as flm, item.planner, item.make_buy
 
 FROM onhand  
 LEFT JOIN org ON onhand.org_id = org.org_id
@@ -258,7 +265,7 @@ AND onhand.org_id = '{$org_id}'";
   if (!empty($subinventory_id)) {
    $sql .= " AND onhand.subinventory_id = '{$subinventory_id}' ";
   }
-  $sql .="  ORDER BY onhand_delta ASC ";
+  $sql .="  ORDER BY total_delta ASC ";
 
   $result = self::find_by_sql($sql);
 

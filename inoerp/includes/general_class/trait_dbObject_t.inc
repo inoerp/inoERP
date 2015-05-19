@@ -57,9 +57,13 @@ trait dbObject_t {
  public $file_id_values;
  public static $audit_trial = [ 'created_by', 'creation_date', 'last_update_by', 'last_update_date',];
 
- //public $dateFields = [];
- //public $number_fields = [];
-
+function __construct(){
+ foreach($this->field_a as $k => $v){
+  if(property_exists($this, $k)){
+   $this->$k = null;
+  }
+ }
+}
 
  function query($sql) {
   global $dbc;
