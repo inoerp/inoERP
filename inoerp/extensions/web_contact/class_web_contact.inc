@@ -16,9 +16,8 @@
  */
 class web_contact extends dbObject {
 
-
  public $description;
-public static $after_save_message = "Thank you for your time.<br>We have received your message and will be get back to you shortly. ";
+ public static $after_save_message = "Thank you for your time.<br>We have received your message and will be get back to you shortly. ";
 
  Public static function web_contact_category() {
   $option_header = option_header::find_by_name('EXT_WEB_CONTACT_CATEGORY');
@@ -58,11 +57,11 @@ public static $after_save_message = "Thank you for your time.<br>We have receive
   $to = $si->email;
   $subject = "Web Contact @ " . $si->site_name;
   $message = "<html> <body><br>Message as submited on web contact form : <br><br>";
-  foreach($param as $k => $val){
+  foreach ($param as $k => $val) {
    $message .= "<br> $k : $val[0]";
   }
   $message .='<br><br>Thanks<br>' . $si->site_name . '</body></html>';
-  
+
   $from = "admin@" . $si->site_name;
   $headers = "From: $from\r\n";
   $headers .= "Content-type: text/html\r\n";

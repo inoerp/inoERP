@@ -10,13 +10,13 @@
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box">
-      <ul class="column three_column"> 
+      <ul class="column header_field"> 
        <li> 
         <label><img src="<?php echo HOME_URL; ?>themes/default/images/serach.png" class="view_id select_popup clickable">
          View Id : </label> 
         <?php $f->text_field_ds('view_id') ?>
-        <a name="show" href="form.php?class_name=view&<?php echo "mode=$mode"; ?>" class="show document_id view_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <a name="show" href="form.php?class_name=view&<?php echo "mode=$mode"; ?>" class="show document_id view_id">
+         <i class="fa fa-search"></i></a> 
        </li> 
        <li><label>View Name : </label> <?php $f->text_field_dm('view_name'); ?> </li> 
        <li><label>Description : </label> <?php $f->text_field_dl('description'); ?> </li> 
@@ -24,12 +24,10 @@
         <?php echo $f->select_field_from_object('display_type', view::view_display_type(), 'option_line_code', 'option_line_value', $$class->display_type, 'display_type'); ?>
        </li>
       </ul> 
-     </div>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div> 
       <ul class="column three_column">
-
        <li><label>Path Id : </label> <?php echo $f->text_field_dr('path_id'); ?></li>
        <li><label>Path Value : </label><?php echo $f->text_field_dlr('path'); ?></li>
        <li><label>View  : </label><a target='_blank' href="<?php echo HOME_URL . $$class->path; ?>"> Online </a></li>

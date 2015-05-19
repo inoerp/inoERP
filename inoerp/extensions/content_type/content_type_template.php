@@ -8,9 +8,8 @@
     <li><a href="#tabsHeader-3"><?php echo gettext('Categories') ?></a></li>
     <li><a href="#tabsHeader-4"><?php echo gettext('Actions') ?></a></li>
    </ul>
-   <div class="tabContainer">
+   <div class="tabContainer" >
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
       <ul class="column header_field">
        <li class="content_type_id"><?php $f->l_text_field_dr_withSearch('content_type_id'); ?>
         <a name="show" href="form.php?class_name=content_type&<?php echo "mode=$mode"; ?>" class="show document_id content_type_id">
@@ -26,7 +25,6 @@
        <li class="role"><?php $f->l_select_field_from_object('update_role', role_access::roles(), 'option_line_code', 'option_line_value', $$class->update_role, 'update_role'); ?></li>
        <li class="allow_file_cb"><?php $f->l_checkBox_field_d('auto_url_alias_cb'); ?></li>
       </ul>
-     </div>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div > 
