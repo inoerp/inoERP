@@ -3789,7 +3789,7 @@ $(document).ready(function () {
   getSelectResult();
  });
 
- $('body').on('click', '#search_page .page_nos a', function (e) {
+ $('body').on('click', '#search_page .page_nos a, #left-clipboard-data .page_nos a', function (e) {
   e.preventDefault();
   $('.hideDiv_input').trigger('click');
   var page_no = getUrlValues('pageno', $(this).prop('href'));
@@ -4550,5 +4550,24 @@ $(document).ready(function () {
    console.log(no_of_item);
   });
  });
+ 
+ $('body').off('click', '#copy_clipboard').on('click', '#copy_clipboard',  function(){
+var actionStmt = '<div class="search_result"><table>'; 
+$('td.search_result.action').each(function(){
+actionStmt += '<tr><td>' + $(this).prev().html() + '</td>';  
+actionStmt += '<td>' + $(this).html() + '</td></tr>';
+});
+actionStmt += '</table></div>'; 
+//actionStmt += '<div class="page_nos">' +$('#searchResult').find('.page_nos.pagination').html() + '</div>';
+
+$('#left-clipboard-data').append(actionStmt);
+$('#accordion h3.clipboard-data').trigger('click');
+});
+
+
+$('body').on('click','.clear-clipboard', function(){
+$('#left-clipboard-data').empty();
+});
+
 
 });

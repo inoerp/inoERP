@@ -7,7 +7,7 @@ function setValFromSelectPage(po_asl_header_id, asl, supplier_id, supplier_numbe
  this.supplier_name = supplier_name;
  this.supplier_site_id = supplier_site_id;
  this.supplier_site_name = supplier_site_name;
- this.item_id_m_m = item_id_m;
+ this.item_id_m = item_id_m;
  this.item_number = item_number;
  this.item_description = item_description;
 }

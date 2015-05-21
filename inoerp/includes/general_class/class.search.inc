@@ -128,7 +128,7 @@ class search extends dbObject {
    $search_result .= "<table class=\"normal\"><thead><tr>";
    $search_result .= '<th>'.gettext(ucwords(str_replace('_', ' ', $this->primary_column_s))).'</th>';
    if ($i == 0) {
-    $search_result .= "<th>Action</th>";
+    $search_result .= "<th>Action<span id='copy_clipboard'>&nbsp;&nbsp;&nbsp;<i class='fa fa-clipboard clickable'></i></span></th>";
    }
    $new_start = ($i * ($no_of_columns_per_tab - 1)) + $i;
    $new_end = $new_start + ($no_of_columns_per_tab - 1);

@@ -81,7 +81,7 @@
       <!--end of tab1 div three_column-->
      </div> 
      <div id="tabsLine-2"  class="tabContent">
-      <ul> 
+      <ul class="column fixed_field"> 
        <li><Label>Change Plan</Label>
         <?php echo form::text_area('change_plan', $$class->change_plan, '5', '150', '', '', 'change_plan'); ?></li>
        <li><Label>Communication Plan</Label>
@@ -144,10 +144,9 @@
    </div>
 
   </div> 
-</div> 
-</form>
-</div>
 
+</form>
+</div> 
 
 <div id="js_data">
  <ul id="js_saving_data">

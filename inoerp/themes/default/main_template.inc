@@ -193,6 +193,17 @@
        </div>
       </div>
 
+      <h3 class="clickable nav-panel clipboard-data"><i class="fa fa-clipboard"></i> Clipboard</h3>
+      <div id="left-clipboard">
+              <div id="left-clipboard-icons">
+        <i class="fa fa-save save-clipboard clickable"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <i class="fa fa-eraser clear-clipboard clickable"></i> 
+        </div>
+       <div id="left-clipboard-data">
+       </div>
+
+      </div>
+
      </div>
     </div>
 

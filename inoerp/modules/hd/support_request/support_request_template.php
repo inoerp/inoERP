@@ -1,5 +1,4 @@
 <div id ="form_all"><span class="heading"><?php
-  $f = new inoform();
   echo gettext('Support Request')
   ?></span>
  <form action=""  method="post" id="hd_support_request"  name="hd_support_request">
@@ -110,10 +109,9 @@
    </div>
 
   </div> 
-</div> 
-</form>
-</div>
 
+</form>
+</div> 
 
 <div id="js_data">
  <ul id="js_saving_data">

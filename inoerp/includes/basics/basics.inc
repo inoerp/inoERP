@@ -387,6 +387,7 @@ require_once(INC_MODULE . DS . "ec" . DS . "paid_order" . DS . "class_ec_paid_or
 require_once(INC_MODULE . DS . "ec" . DS . "order_success" . DS . "class_ec_order_success.inc");
 require_once(INC_MODULE . DS . "ec" . DS . "control" . DS . "class_ec_control.inc");
 require_once(INC_MODULE . DS . "hd" . DS . "support_request" . DS . "class_hd_support_request.inc");
+require_once(INC_MODULE . DS . "hd" . DS . "service_request" . DS . "class_hd_service_request.inc");
 require_once(INC_MODULE . DS . "hd" . DS . "change_request" . DS . "class_hd_change_request.inc");
 
 

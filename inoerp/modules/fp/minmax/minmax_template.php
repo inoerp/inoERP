@@ -10,7 +10,6 @@
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field"> 
         <li><?php $f->l_text_field_dr_withSearch('fp_minmax_header_id'); ?>
          <a name="show" href="form.php?class_name=fp_minmax_header&<?php echo "mode=$mode"; ?>" class="show document_id fp_minmax_header_id">
@@ -23,7 +22,6 @@
         <li><?php $f->l_select_field_from_object('demand_source', fp_forecast_header::find_all(), 'fp_forecast_header_id', 'forecast', $$class->demand_source, '', '', 1, $readonly); ?>     </label>
         <li><?php $f->l_status_field_d('status'); ?>    </li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div> <?php echo ino_attachement($file) ?> </div>

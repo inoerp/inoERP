@@ -9,7 +9,7 @@ class wip_wo_routing_v extends dbObject {
 		 'item_number',
 		 'item_description',
 		 'uom_id',
-		 'item_id_m_m',
+		 'item_id_m',
 		 'wo_number',
 		 'org_id',
 		 'wip_accounting_group_id',
@@ -30,7 +30,7 @@ class wip_wo_routing_v extends dbObject {
  ];
  public $initial_search = [
 		 'item_number',
-		 'item_id_m_m',
+		 'item_id_m',
 		 'wo_number',
 		 'org_id',
 		 'routing_sequence',
@@ -42,7 +42,7 @@ class wip_wo_routing_v extends dbObject {
  ];
  public $column = [
 		 'item_number',
-		 'item_id_m_m',
+		 'item_id_m',
 		 'wo_number',
 		 'org_id',
 		 'routing_sequence',
@@ -71,7 +71,7 @@ class wip_wo_routing_v extends dbObject {
  public $item_number;
  public $item_description;
  public $uom_id;
- public $item_id_m_m;
+ public $item_id_m;
  public $wo_number;
  public $org_id;
  public $wip_accounting_group_id;

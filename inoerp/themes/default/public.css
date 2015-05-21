@@ -1960,3 +1960,7 @@ ul.inline-list li{
 .font-medium{
  font-size: 12px !important;
 }
+
+ul.fixed_field li label{
+        width: 150px;
+}
