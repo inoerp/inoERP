@@ -5,7 +5,7 @@ Demo: <http://inoerp.org/extensions/user/user_login.php>
 
 Homepage: <http://inoideas.org/>
 
-Video Documentation: <http://youtube.com/embed/AS8idx2Cg_U?list=PLI9s_lIFpC099xADLymQcDCmrDhnkxcjM>
+Documentation: <http://inoideas.org/content.php?content_type=documentation&category_id=30>
 
 Facebook: <https://www.facebook.com/inoerp>
 
