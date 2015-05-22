@@ -17,7 +17,7 @@
  * two entitites.
  *
  */
-class extn_social_login extends user {
+class ino_social_login extends user {
 
  
 

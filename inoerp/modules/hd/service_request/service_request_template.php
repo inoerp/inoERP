@@ -19,7 +19,7 @@
         <a name="show" href="form.php?class_name=hd_service_request&<?php echo "mode=$mode"; ?>" class="show document_id hd_service_request_id">
          <i class='fa fa-refresh'></i></a> 
        </li> 
-       <li><?php $f->l_text_field_d('service_number'); ?></li>
+       <li><?php $f->l_text_field_d('service_request_number'); ?></li>
        <li><?php
         $f->l_text_field_d('requester_username', 'username');
         echo $f->hidden_field_withCLass('requester_user_id', $$class->requester_user_id, 'user_id');
@@ -34,7 +34,6 @@
         ?>
         <i class="ar_customer_id select_popup clickable fa fa-search"></i></li>
        <li><label class="auto_complete"><?php echo gettext('Customer Number') ?></label><?php $f->text_field_d('customer_number'); ?></li>
-       <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
        <li><label><?php echo gettext('Item Number') ?></label><?php
         echo $f->hidden_field_withId('item_id_m', $$class->item_id_m);
         $f->text_field_dm('item_number', 'select_item_number');
@@ -45,8 +44,8 @@
         echo $f->hidden_field_withId('inv_serial_number_id', $$class->inv_serial_number_id);
         $f->text_field_dm('serial_number', 'select_serial_number');
         echo $f->hidden_field_withCLass('serial_status', 'OUT_STORE', 'popup_value');
-        echo $f->hidden_field_withCLass('serial_item_id_m', $$class->item_id_m, 'popup_value');
-        ?><i class="select_item_number select_popup clickable fa fa-search"></i>
+        echo $f->hidden_field_withCLass('serial_item_id_m', $$class->item_id_m, 'item_id_m');
+        ?><i class="select_serial_number select_popup clickable fa fa-search"></i>
        </li>
        <li><?php $f->l_select_field_from_object('status', hd_service_request::sr_status(), 'option_line_code', 'option_line_value', $$class->status, 'status'); ?></li>
        <li><?php $f->l_text_field_dm('problem_summary'); ?></li>
@@ -133,7 +132,7 @@
    </div>
 
   </div> 
-</div> 
+
 </form>
 </div>
 

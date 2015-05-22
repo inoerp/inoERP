@@ -18,7 +18,7 @@ class hd_service_request extends dbObject {
 
  public static $table_name = "hd_service_request";
  public static $primary_column = "hd_service_request_id";
- public static $key_column = 'subject';
+ public static $key_column = 'problem_summary';
  public static $module = "hd";
  public static $system_info = [
   'name' => 'service Request',
@@ -34,9 +34,8 @@ class hd_service_request extends dbObject {
  public $field_a = [
   'hd_service_request_id',
   'service_request_number',
-  'org_id',
   'ar_customer_id',
-  'ar_customer_site_id',
+//  'ar_customer_site_id',
   'inv_serial_number_id',
   'item_id_m',
   'urgency',
@@ -65,9 +64,7 @@ class hd_service_request extends dbObject {
   'problem_summary',
  ];
  public $requiredField = [
-  'org_id',
   'ar_customer_id',
-  'ar_customer_site_id',
   'item_id_m',
   'problem_summary',
  ];

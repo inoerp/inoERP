@@ -1964,3 +1964,17 @@ ul.inline-list li{
 ul.fixed_field li label{
         width: 150px;
 }
+
+ul.single-column label{
+        width: 20%;
+        text-align: right;
+        margin-right: 5px;
+}
+
+ul.single-column li{
+  margin-bottom: 10px;
+}
+
+.login-form li{
+        line-height: 20px !important;
+}

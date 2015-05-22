@@ -168,6 +168,15 @@ class user extends dbObject {
   return !empty($result) ? array_pop($result) : false;
  }
 
+  public function findBy_providerName_and_provierId() {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE auth_provider_name = :auth_provider_name AND auth_provider_id = :auth_provider_id LIMIT 1";
+  $value_a = ['auth_provider_name' => $this->auth_provider_name , 'auth_provider_id' => $this->auth_provider_id ];
+  $result = $this->findBySql($sql, $value_a);
+  return !empty($result) ? array_pop($result) : false;
+ }
+ 
  Public static function find_by_user_name($username) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;

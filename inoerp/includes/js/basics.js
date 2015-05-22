@@ -3266,16 +3266,36 @@ $(document).ready(function () {
  });
 
 
- //toggle sereah form
-// $('#searchForm').on('dblclick', function() {
-//	$(this).find('.search_form').toggle();
-// });
- //add new columns
-// $('body').on('change', '.new_column:first', function () {
-//  if ($(this).val()) {
-//   $(this).clone().insertBefore($(this));
-//  }
-// });
+ //popu for selecting serial_number
+ $('body').on('click', '.select_serial_number.select_popup', function () {
+  var elemenType = $(this).parent().prop('tagName');
+  if (elemenType === 'TD') {
+   var rowClass = $(this).closest('tr').prop('class');
+   var fieldClass = $(this).closest('td').find('.select_serial_number').prop('class');
+   localStorage.setItem("row_class", rowClass);
+   localStorage.setItem("field_class", fieldClass);
+  } else {
+   var liId = $(this).closest('li').find('.serial_number').prop('id');
+   localStorage.setItem("li_divId", liId);
+  }
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+  var openUrl = 'select.php?class_name=inv_serial_number';
+  if ($(this).siblings('.org_id').val()) {
+   openUrl += '&org_id=' + $(this).siblings('.org_id').val();
+  } else if ($('#org_id').val()) {
+   openUrl += '&org_id=%3D' + $('#org_id').val();
+  }
+  if ($(this).siblings('.item_id_m').val()) {
+   openUrl += '&item_id_m=' + $(this).siblings('.item_id_m').val();
+  }
+  $(this).parent().parent().find('.popup_value').each(function () {
+   var dataName = $(this).prop('name').replace(/\[]+/g, '');
+   openUrl += '&' + dataName + '=' + $(this).val();
+  });
+  void window.open(openUrl, '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
  //add new order by
  $('#content').on('change', '.search_order_by', function () {
   if ($(this).val() !== 'remove') {

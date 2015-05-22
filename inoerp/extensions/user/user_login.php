@@ -1,5 +1,6 @@
-<?php include_once __DIR__.'/../../includes/basics/basics.inc'; ?>
+<?php include_once __DIR__ . '/../../includes/basics/basics.inc'; ?>
 <?php
+
 if ($session->login_status()) {
  redirect_to(HOME_URL);
 }
@@ -20,26 +21,104 @@ $$class_third = new $class_third;
 
 
 if (!empty($_POST['submitLogin'])) { //form is submitted for login
- $username = trim(mysql_prep($_POST['username']));
- $password = trim(mysql_prep($_POST['password']));
+ //check use credentials if username & provided 
+ if (!empty($_POST['username']) && !empty($_POST['password'])) {
+  $username = trim(mysql_prep($_POST['username']));
+  $password = trim(mysql_prep($_POST['password']));
 
- $loggedin_user = $$class->authenticate($username, $password);
+  $loggedin_user = $$class->authenticate($username, $password);
 
- If ($loggedin_user) {
-	$session->login($loggedin_user);
+  If ($loggedin_user) {
+   $session->login($loggedin_user);
 //	$session->assign_role($_SESSION['user_id']);
-	if (!empty($_SESSION['orginal_page'])) {
-   redirect_to(HOME_URL . "form.php?class_name=user_dashboard_v");
-//	 header('Location: http://' . $session->orginal_page);
+   if (!empty($_SESSION['orginal_page'])) {
+//   redirect_to(HOME_URL . "form.php?class_name=user_dashboard_v");
+    header('Location: http://' . $session->orginal_page);
 //	 unset($_SESSION['orginal_page']);
 //	 unset($session->orginal_page);
-	} else {
-	 redirect_to(HOME_URL . "form.php?class_name=user_dashboard_v");
-	}
+   } else {
+    redirect_to(HOME_URL . "form.php?class_name=user_dashboard_v");
+   }
+  } else {
+   $msg .= "<div class='message error'> Username or password is incorrect <br/> </div>";
+   //        echo "Actual password is ".$login_status;
+  }//en of if else  
+ }
+}
+
+If (isset($_REQUEST["provider"])) {
+ // the selected provider
+ $provider_name = $_REQUEST["provider"];
+
+ try {
+  // inlcude HybridAuth library
+  // change the following paths if necessary 
+  $config = __DIR__ . '/../../tparty/extensions/social_login/hybridauth/config.php';
+  require_once( __DIR__ . "/../../tparty/extensions/social_login/hybridauth/Hybrid/Auth.php" );
+
+  // initialize Hybrid_Auth class with the config file
+  $hybridauth = new Hybrid_Auth($config);
+
+  // try to authenticate with the selected provider
+  $adapter = $hybridauth->authenticate($provider_name);
+
+  // then grab the user profile 
+  $user_profile = $adapter->getUserProfile();
+ }
+
+ // something went wrong?
+ catch (Exception $e) {
+  redirect_to(HOME_URL . "access_denied.php");
+ }
+
+ // check if the current user already have authenticated using this provider before 
+ $$class->auth_provider_name = $provider_name;
+ $$class->auth_provider_id = $user_profile->identifier;
+ $user_exist = $$class->findBy_providerName_and_provierId();
+
+ // if the used didn't authenticate using the selected provider before 
+ if (!empty($user_exist)) {
+  $loggedin_user = $user_exist;
  } else {
-	$msg .= "<div class='message error'> Username or password is incorrect <br/> </div>";
-	//        echo "Actual password is ".$login_status;
- }//en of if else  
+  $new_user = new user();
+  $new_user->username = $user_profile->displayName;
+  $new_user->email = $user_profile->email;
+  $new_user->enteredPassword = $new_user->enteredRePassword = $new_user->auth_provider_id = $user_profile->identifier;
+  $new_user->auth_provider_name = $provider_name;
+  $new_user->first_name = $user_profile->firstName;
+  $new_user->last_name = $user_profile->lastName;
+
+  if ($new_user->_before_save() == 1) {
+   $new_user->save();
+   $new_user->_after_save();
+   $dbc->confirm();
+  }else{
+   $msg .= '<div class="message error"> Account creation failed!. Contact the admin. </div>';
+   redirect_to(HOME_URL . "extensions/user/user_login.php?error_message=email_error");
+  }
+
+  if (!empty($new_user->user_id)) {
+   //Assign basic role
+   $user_role = new user_role();
+   $user_role->user_id = $new_user->user_id;
+   $user_role->role_code = 'BASIC';
+   $user_role->save();
+   $dbc->confirm();
+  }
+
+  // set the user as connected and redirect him
+  $loggedin_user = $new_user;
+ }
+ If (!empty($loggedin_user)) {
+  $session->login($loggedin_user);
+  if (!empty($_SESSION['orginal_page'])) {
+   header('Location: http://' . $session->orginal_page);
+  } else {
+   redirect_to(HOME_URL . "form.php?class_name=user_dashboard_v");
+  }
+ }
+
+ //Social login
 }//end of if post submit
 ?>
 <?php include_once('../../includes/basics/header_public.inc'); ?>
@@ -55,22 +134,22 @@ if (!empty($_POST['newUser'])) {
  $new_user->last_name = trim($_POST['last_name'][0]);
  $new_user->email = trim($_POST['email'][0]);
  if ($new_user->_before_save() == 1) {
-	$new_user->audit_trial();
-	$new_user->save();
-	$new_user->_after_save();
-	$dbc->confirm();
+  $new_user->audit_trial();
+  $new_user->save();
+  $new_user->_after_save();
+  $dbc->confirm();
  }
 
  if (!empty($new_user->user_id)) {
-	//Assign basic role
-	$user_role = new user_role();
-	$user_role->user_id = $new_user->user_id;
-	$user_role->role_code = 'BASIC';
-	$user_role->save();
-	$dbc->confirm();
-	$msg .= '<div class="message error"> Account is sucessfully created!. Please check your mail box for further details. </div>';
+  //Assign basic role
+  $user_role = new user_role();
+  $user_role->user_id = $new_user->user_id;
+  $user_role->role_code = 'BASIC';
+  $user_role->save();
+  $dbc->confirm();
+  $msg .= '<div class="message error"> Account is sucessfully created!. Please check your mail box for further details. </div>';
  } else {
-	$msg .= '<div class="message error"> Account creation failed!. Contact the admin. </div>';
+  $msg .= '<div class="message error"> Account creation failed!. Contact the admin. </div>';
  }
 }
 
@@ -78,18 +157,18 @@ if (!empty($_POST['resetPassword'])) {
  $pr = new user_password_reset();
  $ru = new user();
  if (!empty($_POST['username'][0])) {
-	$username = $_POST['username'][0];
-	$resetUser = $ru->findBy_userName($username);
+  $username = $_POST['username'][0];
+  $resetUser = $ru->findBy_userName($username);
  } elseif (!empty($_POST['email'][0])) {
-	$email = $_POST['email'][0];
-	$resetUser = $ru->findBy_eMail($email);
+  $email = $_POST['email'][0];
+  $resetUser = $ru->findBy_eMail($email);
  } else {
-	$msg .='<div class="error"> No record found! Check the entered user name or email. </div>';
+  $msg .='<div class="error"> No record found! Check the entered user name or email. </div>';
  }
 
  if (!empty($resetUser)) {
-	$result_msg = $pr->generateResetPassword($resetUser);
-	$msg .= '<div class="error">' . $result_msg . ' A new pasword reset link has been set to the registered email address </div>';
+  $result_msg = $pr->generateResetPassword($resetUser);
+  $msg .= '<div class="error">' . $result_msg . ' A new pasword reset link has been set to the registered email address </div>';
  }
 }
 ?>
@@ -98,14 +177,14 @@ if (!empty($_POST['resetPassword'])) {
 
 if (!empty($msg)) {
  $show_message = '<div class="error">';
- if(is_array($msg)){
- foreach ($msg as $key => $value) {
-	$x = $key + 1;
-	$show_message .= 'Message ' . $x . ' : ' . $value . '<br />';
+ if (is_array($msg)) {
+  foreach ($msg as $key => $value) {
+   $x = $key + 1;
+   $show_message .= 'Message ' . $x . ' : ' . $value . '<br />';
+  }
+ } else {
+  $show_message = $msg;
  }
-	}else{
-	 $show_message = $msg;
-	}
  $show_message .= '</div>';
 }
 ?>

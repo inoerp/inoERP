@@ -398,6 +398,7 @@ require_once(INC_TPARTY . DS . "extensions" . DS . "social_login" . DS . "class_
 //include extensions
 require_once(INC_EXTENSIONS . DS . "ino_generic" . DS . "class_ino_generic.inc");
 require_once(INC_EXTENSIONS . DS . "page" . DS . "class_page.inc");
+require_once(INC_EXTENSIONS . DS . "social_login" . DS . "class_extn_social_login.inc");
 require_once(INC_EXTENSIONS . DS . "comment" . DS . "class.comment.inc");
 require_once(INC_EXTENSIONS . DS . "contact" . DS . "class_extn_contact.inc");
 require_once(INC_EXTENSIONS . DS . "contact" . DS . "class_extn_contact_reference.inc");

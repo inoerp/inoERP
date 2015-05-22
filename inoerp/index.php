@@ -24,6 +24,8 @@ if (file_exists('install.php')) {
  return;
 }
 
+//header('location: form.php?class_name=user_dashboard_v');
+
 if (empty($_GET['class_name']) && empty($_GET['cname'])) {
  $class_names[] = 'index';
 } else if (!empty($_GET['class_name'])) {
@@ -43,25 +45,31 @@ if (empty($_GET['doc_type']) && empty($_GET['dtype'])) {
 
 include_once("includes/functions/loader.inc");
 
-  switch ($doc_type) {
-   case 'content' :
-    if ($class == 'index') {
-     include_once THEME_DIR . '/home_page_template.php';
-    } else {
-     include_once 'content.php';
-    }
-    break;
-
-   case 'product' :
-    include_once 'product.php';
-    break;
-
-   case 'form' :
-    include_once 'form.php';
-    break;
-
-   default :
-    include_once 'content.php';
-    break;
+switch ($doc_type) {
+ case 'content' :
+  if ($class == 'index') {
+   if (!empty($si) && ($si->default_home_page == 'content')) {
+    include_once THEME_DIR . '/home_page_template.php';
+   } else if (!empty($si) && !empty(($si->default_home_page))) {
+    include_once THEME_DIR . $si->default_home_page;
+   } else {
+    header('location: form.php?class_name=user_dashboard_v');
+   }
+  } else {
+   include_once 'content.php';
   }
-  ?>
+  break;
+
+ case 'product' :
+  include_once 'product.php';
+  break;
+
+ case 'form' :
+  include_once 'form.php';
+  break;
+
+ default :
+  include_once 'content.php';
+  break;
+}
+?>
