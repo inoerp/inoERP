@@ -1,10 +1,10 @@
 <?php
 
-class sd_so_line extends dbObject {
+class hd_ro_line extends dbObject {
 
- public static $table_name = "sd_so_line";
- public static $primary_column = "sd_so_line_id";
- public static $parent_primary_column = "sd_so_header_id";
+ public static $table_name = "hd_ro_line";
+ public static $primary_column = "hd_ro_line_id";
+ public static $parent_primary_column = "hd_ro_header_id";
  public static $key_column = 'line_number';
  public static $module = "sd";
  public $checkbox = [
@@ -20,8 +20,8 @@ class sd_so_line extends dbObject {
   'CLOSED' => 'Closed',
  ];
  public $field_a = [
-  'sd_so_line_id',
-  'sd_so_header_id',
+  'hd_ro_line_id',
+  'hd_ro_header_id',
   'line_type',
   'line_number',
   'item_id_m',
@@ -62,21 +62,21 @@ class sd_so_line extends dbObject {
   "last_update_date"
  ];
  public $initial_search = [
-  "sd_so_header_id",
+  "hd_ro_header_id",
   "so_number",
   "item_id_m",
   "item_number",
   "item_description"
  ];
  public $column = [
-  "sd_so_header_id",
+  "hd_ro_header_id",
   "so_number",
   "item_id_m",
   "item_number",
   "item_description"
  ];
  public $requiredField = [
-  'sd_so_header_id',
+  'hd_ro_header_id',
   'line_number',
   'item_description'
  ];
@@ -97,13 +97,13 @@ class sd_so_line extends dbObject {
   'ar_transaction_number'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "sd_so_header_id"
+  "hd_ro_header_id"
  ];
  public $notUpdatedFromWebForm = [
   'actual_ship_date',
  ];
- public $sd_so_line_id;
- public $sd_so_header_id;
+ public $hd_ro_line_id;
+ public $hd_ro_header_id;
  public $line_type;
  public $line_number;
  public $item_id_m;
@@ -221,14 +221,14 @@ class sd_so_line extends dbObject {
   return !empty($result_array) ? $result_array : false;
  }
 
- Public static function sd_so_line_types() {
+ Public static function hd_ro_line_types() {
   $option_header = option_header::find_by_name('PO_LINE_TYPE');
   $po_types = option_line::find_by_option_id($option_header->option_header_id);
   return $po_types;
  }
 
- public static function find_by_sd_so_headerId($sd_so_header_id) {
-  $sql = "SELECT * FROM " . self::$table_name . " where sd_so_header_id = '{$sd_so_header_id}'";
+ public static function find_by_hd_ro_headerId($hd_ro_header_id) {
+  $sql = "SELECT * FROM " . self::$table_name . " where hd_ro_header_id = '{$hd_ro_header_id}'";
   $result_array = self::find_by_sql($sql);
   return $result_array;
  }
@@ -248,17 +248,17 @@ class sd_so_line extends dbObject {
   return !empty($result_array) ? $result_array : false;
  }
 
- public function copy($sd_so_line_id) {
+ public function copy($hd_ro_line_id) {
   global $db;
-  $sql1 = " CREATE TEMPORARY TABLE tmptable SELECT * FROM sd_so_line WHERE `sd_so_line_id` = '{$sd_so_line_id}' ";
+  $sql1 = " CREATE TEMPORARY TABLE tmptable SELECT * FROM hd_ro_line WHERE `hd_ro_line_id` = '{$hd_ro_line_id}' ";
   if ($db->query($sql1)) {
-   $sql2 = "  UPDATE tmptable SET `sd_so_line_id` = '' ,
+   $sql2 = "  UPDATE tmptable SET `hd_ro_line_id` = '' ,
            `org_id` = '{$this->org_id}' 
-          WHERE `sd_so_line_id` = '{$sd_so_line_id}' ";
+          WHERE `hd_ro_line_id` = '{$hd_ro_line_id}' ";
    if ($db->query($sql2)) {
-    $sql3 = " INSERT INTO `sd_so_line` SELECT * FROM tmptable WHERE `sd_so_line_id` = '' ";
+    $sql3 = " INSERT INTO `hd_ro_line` SELECT * FROM tmptable WHERE `hd_ro_line_id` = '' ";
     if ($db->query($sql3)) {
-     $this->sd_so_line_id = $db->insert_id();
+     $this->hd_ro_line_id = $db->insert_id();
      $this->msg = 1;
     } else {
      $this->msg = 0;
@@ -270,5 +270,5 @@ class sd_so_line extends dbObject {
 
 }
 
-//end of sd_so_line class
+//end of hd_ro_line class
 ?>

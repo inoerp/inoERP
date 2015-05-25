@@ -8,7 +8,11 @@ if (!empty($_GET['class_name'])) {
  $type = !empty($_GET['type']) ? $_GET['type'] : null;
  include_once('includes/basics/basics.inc');
  $path = new path();
- $ino_generic_html = $path->findBy_moduleCode($_GET['module_code'], $type);
+ if (!empty($_GET['path_id'])) {
+  $ino_generic_html = $path->findBy_moduleCode($_GET['module_code'],$type, array($_GET['path_id']));
+ } else {
+  $ino_generic_html = $path->findBy_moduleCode($_GET['module_code'], $type, null);
+ }
  include_once('includes/functions/loader.inc');
  if (!empty($_GET['window_type']) && $_GET['window_type'] == 'popup') {
   include_once(THEME_DIR . '/popup_main_template.inc');
@@ -35,9 +39,9 @@ if (empty($_POST)) {
 //     if(in_array($class, inoform::$docs_notAllowd_inDirectWebForm) && ($verify_web_form_allowed)){
 //    $access_denied_msg = ('You can\'t open this page directly from webfrom. Please use the navigator');
 //   }
-   
+
   if (!in_array('ADMIN', $_SESSION['user_roles'])) {
-   if(in_array($class, inoform::$docs_notAllowd_inDirectWebForm) && ($verify_web_form_allowed)){
+   if (in_array($class, inoform::$docs_notAllowd_inDirectWebForm) && ($verify_web_form_allowed)) {
     $access_denied_msg = ('You can\'t open this page directly from webfrom. Please use the navigator');
    }
   }

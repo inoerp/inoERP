@@ -97,6 +97,7 @@ class path extends dbObject {
  private $_path_display_type = 'menu';
  private $_path_parent_ids = '';
  private $_allowed_path_ids = '';
+ private $_show_misc_paths = true;
 
  Public static function path_types() {
   $option_header = option_header::find_by_name('EXT_PATH_TYPE');
@@ -302,10 +303,14 @@ class path extends dbObject {
   return !empty($path->path_id) ? $path->path_id : "";
  }
 
- public function findBy_moduleCode($module_code, $type = '') {
-  $sql = " SELECT path_id from path where  module_code = '{$module_code}'"
-   . " AND (parent_id IS NULL OR parent_id = 0) ";
-  $parent_ids = $this->findFirstColumn_BySql_array($sql);
+ public function findBy_moduleCode($module_code, $type = '', array $parent_ids = null) {
+  if (empty($parent_ids)) {
+   $sql = " SELECT path_id from path where  module_code = '{$module_code}'"
+    . " AND (parent_id IS NULL OR parent_id = 0) ";
+   $parent_ids = $this->findFirstColumn_BySql_array($sql);
+  }else{
+   $this->_show_misc_paths = false;
+  }
   $path_sql = " SELECT path_id from path WHERE module_code = '{$module_code}' ";
   if (!empty($type)) {
    $path_sql .= " AND path_type = '{$type}' ";
@@ -358,7 +363,7 @@ class path extends dbObject {
   }
 
 //  if (!empty($allowed_path_ids) && is_array($allowed_path_ids) && $allowed_path_ids[0] != '11') {
-  if (!empty($allowed_path_ids) && is_array($allowed_path_ids)) {
+  if (!empty($allowed_path_ids) && is_array($allowed_path_ids) && ($this->_show_misc_paths)) {
    $allPaths .= '<li class="parent_menu expandable">' . '<a href="' . HOME_URL . '">MISC</a>';
    $allPaths .= '<ul class="child_menu">';
    foreach ($allowed_path_ids as $path_key => $path_id) {
@@ -526,9 +531,9 @@ class path extends dbObject {
     if ($key) {
      $url_1 = $path->fullPath($child_paths->path_link);
      if ($this->show_description) {
-      $allPaths .= "<li title=\"$p_name_child\" class='expandable {$child_paths->name}'>" . '<a class="list-header" href="' . $url_1 . '">&nbsp;' .$fa_icon. ' &nbsp; ' . $p_desc_child . '</a>';
+      $allPaths .= "<li title=\"$p_name_child\" class='expandable {$child_paths->name}'>" . '<a class="list-header" href="' . $url_1 . '">&nbsp;' . $fa_icon . ' &nbsp; ' . $p_desc_child . '</a>';
      } else {
-      $allPaths .= "<li title=\"$p_desc_child\" class='expandable {$child_paths->name}'>" . '<a class="list-header" href="' . $url_1 . '">&nbsp;' .$fa_icon. ' &nbsp; '  . $p_name_child.  '</a>';
+      $allPaths .= "<li title=\"$p_desc_child\" class='expandable {$child_paths->name}'>" . '<a class="list-header" href="' . $url_1 . '">&nbsp;' . $fa_icon . ' &nbsp; ' . $p_name_child . '</a>';
      }
      $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths);
      unset($allowed_path_ids[$key]);
@@ -540,7 +545,7 @@ class path extends dbObject {
 
   if (!empty($allowed_path_ids) && is_array($allowed_path_ids) && !empty($allowed_path_ids['0']) && $allowed_path_ids[0] != '11') {
 
-   if (!empty($allowed_path_ids) && is_array($allowed_path_ids)) {
+   if (!empty($allowed_path_ids) && is_array($allowed_path_ids) && ($this->_show_misc_paths)) {
     $allPaths .= '<ul>';
     $allPaths .= '<li class="parent_menu expandable misc">' . '<a href="' . HOME_URL . '">MISC</a>';
     $allPaths .= '<ul class="child_menu">';

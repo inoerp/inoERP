@@ -1,13 +1,13 @@
 <?php include_once("../basics/basics.inc"); ?>
 <div id="header_top_container" style="display: block;">
  <?php
-  $f->form_button_withImage();
+ $f->form_button_withImage();
  ?>
 </div>
 <?php
 if (!empty($_GET['search_class_name'])) {
- 
-  require_once __DIR__ . '/../../locale/gettext.inc';
+
+ require_once __DIR__ . '/../../locale/gettext.inc';
  $locale = (isset($_SESSION['lang'])) ? $_SESSION['lang'] : DEFAULT_LOCALE;
  $encoding = 'UTF-8';
  T_setlocale(LC_MESSAGES, $locale);
@@ -15,7 +15,7 @@ if (!empty($_GET['search_class_name'])) {
  T_bindtextdomain($domain, LOCALE_DIR);
  T_bind_textdomain_codeset($domain, $encoding);
  T_textdomain($domain);
- 
+
  $class = $class_names = $_GET['search_class_name'];
  $$class = new $class;
  $mode = !empty($_GET['mode']) ? $_GET['mode'] : 9;
@@ -54,11 +54,11 @@ if (!empty($_GET['search_class_name'])) {
    $multi_select_tabs = $action_class_i->multi_select_tabs();
   }
 
-     if (method_exists($action_class, 'multi_select_actions')) {
+  if (method_exists($action_class, 'multi_select_actions')) {
    $multi_select_actions = $action_class_i->multi_select_actions();
   }
-  
-  
+
+
   if (method_exists($action_class, 'multi_select_input_fields')) {
    $multi_selct_input_fields = $action_class_i->multi_select_input_fields();
   }
@@ -68,7 +68,7 @@ if (!empty($_GET['search_class_name'])) {
   }
 
   $search_param_values = get_postArray_From_jqSearializedArray($_GET['search_parameters']);
-  
+
   if (method_exists($action_class, 'multi_select_hidden_fields')) {
    $hidden_field_names = $action_class_i->multi_select_hidden_fields();
    if (!empty($search_param_values)) {
@@ -214,58 +214,58 @@ if (!empty($_GET['search_class_name'])) {
   }
  }
 
-  if (count($whereFields) > 0) {
-   $whereClause = " WHERE " . implode(" AND ", $whereFields);
-   // And then create the SQL query itself.
-   $sql = "SELECT * FROM " . $table_name . $whereClause;
-   $count_sql = "SELECT COUNT(*) FROM " . $table_name . $whereClause;
-   $all_download_sql = "SELECT * FROM  " . $table_name . $whereClause;
-  } else {
-   $sql = "SELECT * FROM " . $table_name;
-   $count_sql = "SELECT COUNT(*) FROM " . $table_name;
-   $all_download_sql = "SELECT * FROM  " . $table_name;
-   $whereClause = null;
-  }
+ if (count($whereFields) > 0) {
+  $whereClause = " WHERE " . implode(" AND ", $whereFields);
+  // And then create the SQL query itself.
+  $sql = "SELECT * FROM " . $table_name . $whereClause;
+  $count_sql = "SELECT COUNT(*) FROM " . $table_name . $whereClause;
+  $all_download_sql = "SELECT * FROM  " . $table_name . $whereClause;
+ } else {
+  $sql = "SELECT * FROM " . $table_name;
+  $count_sql = "SELECT COUNT(*) FROM " . $table_name;
+  $all_download_sql = "SELECT * FROM  " . $table_name;
+  $whereClause = null;
+ }
 
-  if (!empty($_GET['group_by'][0])) {
-   $sum_element = $$class->search_groupBy_sum;
-   $fetch_as = 'sum_' . $sum_element;
-   $sql = "SELECT * , SUM($sum_element) as $fetch_as FROM " . $table_name . $whereClause;
-   $sql .= " GROUP BY " . $_GET['group_by'][0];
-   $count_sql .= " GROUP BY " . $_GET['group_by'][0];
-   $all_download_sql = "SELECT  * , SUM($sum_element) FROM  " . $table_name . $whereClause;
-   $all_download_sql .= " GROUP BY " . $_GET['group_by'][0];
-  }
+ if (!empty($_GET['group_by'][0])) {
+  $sum_element = $$class->search_groupBy_sum;
+  $fetch_as = 'sum_' . $sum_element;
+  $sql = "SELECT * , SUM($sum_element) as $fetch_as FROM " . $table_name . $whereClause;
+  $sql .= " GROUP BY " . $_GET['group_by'][0];
+  $count_sql .= " GROUP BY " . $_GET['group_by'][0];
+  $all_download_sql = "SELECT  * , SUM($sum_element) FROM  " . $table_name . $whereClause;
+  $all_download_sql .= " GROUP BY " . $_GET['group_by'][0];
+ }
 
-  if ((!empty($search_order_by)) && (!empty($search_asc_desc))) {
-   if (is_array($search_order_by)) {
-    $sql .= ' ORDER BY ';
-    $all_download_sql .= ' ORDER BY ';
-    foreach ($search_order_by as $key_oby => $value_oby) {
-     if (empty($search_asc_desc[$key_oby])) {
-      $search_asc_desc[$key_oby] = ' DESC ';
-     }
-     $sql .= $value_oby . ' ' . $search_asc_desc[$key_oby] . ' ,';
-     $all_download_sql .= $value_oby . ' ' . $search_asc_desc[$key_oby] . ' ,';
+ if ((!empty($search_order_by)) && (!empty($search_asc_desc))) {
+  if (is_array($search_order_by)) {
+   $sql .= ' ORDER BY ';
+   $all_download_sql .= ' ORDER BY ';
+   foreach ($search_order_by as $key_oby => $value_oby) {
+    if (empty($search_asc_desc[$key_oby])) {
+     $search_asc_desc[$key_oby] = ' DESC ';
     }
-    $sql = rtrim($sql, ',');
-    $all_download_sql = rtrim($all_download_sql, ',');
-   } else {
-    $sql .= ' ORDER BY ' . $search_order_by . ' ' . $search_asc_desc;
-    $all_download_sql .= ' ORDER BY ' . $search_order_by . ' ' . $search_asc_desc;
+    $sql .= $value_oby . ' ' . $search_asc_desc[$key_oby] . ' ,';
+    $all_download_sql .= $value_oby . ' ' . $search_asc_desc[$key_oby] . ' ,';
    }
+   $sql = rtrim($sql, ',');
+   $all_download_sql = rtrim($all_download_sql, ',');
+  } else {
+   $sql .= ' ORDER BY ' . $search_order_by . ' ' . $search_asc_desc;
+   $all_download_sql .= ' ORDER BY ' . $search_order_by . ' ' . $search_asc_desc;
   }
+ }
 
-  $total_count = $class::count_all_by_sql($count_sql);
+ $total_count = $class::count_all_by_sql($count_sql);
 
-  if (!empty($per_page)) {
-   $pagination = new pagination($pageno, $per_page, $total_count);
-   $pagination_statement = $pagination->show_pagination();
+ if (!empty($per_page)) {
+  $pagination = new pagination($pageno, $per_page, $total_count);
+  $pagination_statement = $pagination->show_pagination();
 
-   $sql .=" LIMIT {$per_page} ";
-   $sql .=" OFFSET {$pagination->offset()}";
-  }
-  $search_result = $class::find_by_sql($sql);
+  $sql .=" LIMIT {$per_page} ";
+  $sql .=" OFFSET {$pagination->offset()}";
+ }
+ $search_result = $class::find_by_sql($sql);
 
  if (method_exists($class, 'search_add_extra_fields')) {
   $class::search_add_extra_fields($search_result);
@@ -279,21 +279,36 @@ if (!empty($_GET['search_class_name'])) {
 
  $s->setProperty('result', $search_result);
  $s->setProperty('_searching_class', $class);
+ $s->setProperty('_search_order_by', filter_input(INPUT_GET, 'search_order_by'));
+ $s->setProperty('_search_asc_desc', filter_input(INPUT_GET, 'search_asc_desc'));
  $s->setProperty('_per_page', $per_page);
  $s->setProperty('primary_column_s', $primary_column);
  $s->setProperty('column_array_s', $column_array);
+ if (property_exists($$class, 'option_lists')) {
+  $s->option_lists = $$class->option_lists;
+ }
+ $s->setProperty('_initial_search_array', $$class->initial_search);
 // $search_result_statement = $search->search_result();
 
  /* Start of Search */
 
- $hidden_field_stmt = $search->hidden_fields();
+ $hidden_field_stmt = $s->hidden_fields();
  if (!empty($pagination)) {
   $pagination->setProperty('_path', 'multi_select');
   $pagination_statement = $pagination->show_pagination();
  }
 
  echo '<div id="json_search_result">';
- require_once("../template/json_multi_select_template.inc");
+ if (!empty($$class) && property_exists($$class, 'multi_select_template_path')) {
+  if (empty($readonly)) {
+   $s->setProperty('_form_post_link', 'multi_select');
+   $search_form = $s->search_form($$class);
+  }
+  require_once('../../' . $class::$multi_select_template_path);
+ } else {
+  require_once("../template/json_multi_select_template.inc");
+ }
+
  echo '</div>';
 }
 ?>

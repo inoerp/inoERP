@@ -10,15 +10,15 @@
  */
 
 /**
- * sd_so_header CLass
- * Contains all the sd_so_header information, such as - document_type, so_number, ar_customer_id
+ * hd_ro_header CLass
+ * Contains all the hd_ro_header information, such as - document_type, so_number, ar_customer_id
  *
  */
-class sd_so_header extends dbObject {
+class hd_ro_header extends dbObject {
 
- public static $table_name = "sd_so_header";
- public static $dependent_classes = ['sd_so_line'];
- public static $primary_column = "sd_so_header_id";
+ public static $table_name = "hd_ro_header";
+ public static $dependent_classes = ['hd_ro_line'];
+ public static $primary_column = "hd_ro_header_id";
  public static $primary_column2 = "so_number";
  public static $key_column = 'ar_customer_id';
  public static $module = "sd";
@@ -29,7 +29,7 @@ class sd_so_header extends dbObject {
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',
-  'dependent_class' => array('sd_so_line'),
+  'dependent_class' => array('hd_ro_line'),
   'primary_entity_cb' => '',
   'module_name' => 'sd',
   'weight' => 1
@@ -44,7 +44,7 @@ class sd_so_header extends dbObject {
   'COPY' => 'Copy',
  ];
  public $field_a = [
-  'sd_so_header_id',
+  'hd_ro_header_id',
   'bu_org_id',
   'document_type',
   'so_number',
@@ -80,13 +80,13 @@ class sd_so_header extends dbObject {
   "last_update_date"
  ];
  public $initial_search = [
-  "sd_so_header_id",
+  "hd_ro_header_id",
   "so_number",
   "ar_customer_id",
   "sales_person"
  ];
  public $column = [
-  "sd_so_header_id",
+  "hd_ro_header_id",
   "so_number",
   "so_status",
   "ar_customer_id",
@@ -137,7 +137,7 @@ class sd_so_header extends dbObject {
  public $option_lists = [
   'approval_status' => 'APPROVAL_STATUS',
  ];
- public $sd_so_header_id;
+ public $hd_ro_header_id;
  public $bu_org_id;
  public $document_type;
  public $so_number;
@@ -235,10 +235,10 @@ class sd_so_header extends dbObject {
  }
 
  public function _after_save() {
-  if ((!empty($this->sd_so_header_id)) && empty($this->so_number)) {
-   $sd_so_header_id = $this->sd_so_header_id;
+  if ((!empty($this->hd_ro_header_id)) && empty($this->so_number)) {
+   $hd_ro_header_id = $this->hd_ro_header_id;
    $bu_org_id = $this->bu_org_id;
-   $so_number = $bu_org_id . '-' . $sd_so_header_id;
+   $so_number = $bu_org_id . '-' . $hd_ro_header_id;
    $this->so_number = $so_number;
    echo '<br/> New SO number is ' . $so_number;
    $this->update_soNumber();
@@ -248,7 +248,7 @@ class sd_so_header extends dbObject {
  private function update_soNumber() {
   $sql = " UPDATE " . self::$table_name;
   $sql .= " SET so_number = '{$this->so_number}'  ";
-  $sql .= " WHERE sd_so_header_id = '{$this->sd_so_header_id}'  ";
+  $sql .= " WHERE hd_ro_header_id = '{$this->hd_ro_header_id}'  ";
   try {
    $this->runSQL($sql);
   } catch (Exception $e) {
@@ -276,22 +276,22 @@ class sd_so_header extends dbObject {
  }
 
  Public static function so_status() {
-  $option_header = option_header::find_by_name('SD_SO_STATUS');
+  $option_header = option_header::find_by_name('hd_ro_STATUS');
   $so_status = option_line::find_by_option_id($option_header->option_header_id);
   return $so_status;
  }
 
- public function copy($sd_so_header_id) {
+ public function copy($hd_ro_header_id) {
   global $db;
-  $sql1 = " CREATE TEMPORARY TABLE tmptable SELECT * FROM sd_so_header WHERE `sd_so_header_id` = '{$sd_so_header_id}' ";
+  $sql1 = " CREATE TEMPORARY TABLE tmptable SELECT * FROM hd_ro_header WHERE `hd_ro_header_id` = '{$hd_ro_header_id}' ";
   if ($db->query($sql1)) {
-   $sql2 = "  UPDATE tmptable SET `sd_so_header_id` = '' ,
+   $sql2 = "  UPDATE tmptable SET `hd_ro_header_id` = '' ,
            `org_id` = '{$this->org_id}' 
-          WHERE `sd_so_header_id` = '{$sd_so_header_id}' ";
+          WHERE `hd_ro_header_id` = '{$hd_ro_header_id}' ";
    if ($db->query($sql2)) {
-    $sql3 = " INSERT INTO `sd_so_header` SELECT * FROM tmptable WHERE `sd_so_header_id` = '' ";
+    $sql3 = " INSERT INTO `hd_ro_header` SELECT * FROM tmptable WHERE `hd_ro_header_id` = '' ";
     if ($db->query($sql3)) {
-     $this->sd_so_header_id = $db->insert_id();
+     $this->hd_ro_header_id = $db->insert_id();
      $this->msg = 1;
     } else {
      $this->msg = 0;
@@ -317,5 +317,5 @@ class sd_so_header extends dbObject {
 // }
 }
 
-//end of sd_so_header class
+//end of hd_ro_header class
 ?>

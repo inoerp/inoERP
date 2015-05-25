@@ -341,7 +341,7 @@ class search extends dbObject {
   if ((isset($_GET['window_type']) && $_GET['window_type'] == 'popover') || $this->_window_type =='popover' ){
    $search_form_statement .= '<div class="tabContainer"> ';
   } else {
-   $search_form_statement .= "<form action=\"\" name=\"$this->_form_name\" method='GET' class=\"full-width search_box $this->_form_name\" id=\"$this->_form_name\">";
+   $search_form_statement .= "<form action=\"$this->_form_post_link.php\" name=\"$this->_form_name\" method='GET' class=\"full-width search_box $this->_form_name\" id=\"$this->_form_name\">";
    $search_form_statement .= '<div id="tabsHeader">';
    $search_form_statement .= '<ul class="tabMain">
      <li><a href="#tabsHeader-1">' . gettext("Search Parameters") . '</a></li>

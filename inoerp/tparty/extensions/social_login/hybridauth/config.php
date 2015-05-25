@@ -65,6 +65,7 @@
  */
 
 $sl_home_url = HOME_URL . 'tparty/extensions/social_login/hybridauth';
+
 $providers_a = [];
 $all_providers = extn_social_login::find_all();
 foreach ($all_providers as $k => $sp) {
@@ -86,6 +87,3 @@ return array(
  "base_url" => $sl_home_url,
  'providers' => $providers_a
 );
-
-
-

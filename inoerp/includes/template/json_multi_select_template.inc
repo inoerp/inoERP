@@ -41,7 +41,7 @@
 
         $all_columns = (!empty($multi_selct_input_fields) && is_array($multi_selct_input_fields)) ? array_merge($multi_selct_input_fields, $column_array) : $column_array;
         $no_of_columns_per_tab = 9;
-        $total_columns = is_array($multi_selct_input_fields) ? count($multi_selct_input_fields) + count($column_array) : count($column_array);
+        $total_columns = (!empty($multi_selct_input_fields) && is_array($multi_selct_input_fields)) ? count($multi_selct_input_fields) + count($column_array) : count($column_array);
         if (!empty($multi_select_select_fields) && is_array($multi_select_select_fields) && count($multi_select_select_fields) > 2) {
          $no_of_columns_per_tab = 8;
         }

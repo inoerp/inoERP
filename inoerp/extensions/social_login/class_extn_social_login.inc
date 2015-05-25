@@ -81,28 +81,30 @@ class extn_social_login extends dbObject {
 
  Public static function sl_stmt() {
   $sl_exnt_details = engine::find_by_className('extn_social_login');
-  if(empty($sl_exnt_details) || ($sl_exnt_details->enabled_cb !=1)){
+  
+  if (empty($sl_exnt_details) || ($sl_exnt_details->enabled_cb != 1)) {
    return false;
   }
-  
   $all_providers = self::find_all();
+  
   if (empty($all_providers)) {
    return false;
   }
   $stmt = '<fieldset>
           <ul>
            <li>Connect With</li>';
-  
+
   foreach ($all_providers as $k => $sp) {
+
    switch ($sp->provider_name) {
     case 'Facebook':
      $stmt .='<li><a class="btn btn-default" role="button" '
-     . 'href="'. HOME_URL .'extensions/user/user_login.php?provider=facebook"><i class="fa fa-facebook-square"></i> Facebook</a></li>';
+      . 'href="' . HOME_URL . 'extensions/user/user_login.php?provider=facebook"><i class="fa fa-facebook-square"></i> Facebook</a></li>';
      break;
 
     case 'Google':
      $stmt .='<li><a class="btn btn-default" role="button" '
-     . 'href="'. HOME_URL .'extensions/user/user_login.php?provider=google"><i class="fa fa-google-plus-square"></i> Google</a></li>';
+      . 'href="' . HOME_URL . 'extensions/user/user_login.php?provider=google"><i class="fa fa-google-plus-square"></i> Google</a></li>';
      break;
 
     default:

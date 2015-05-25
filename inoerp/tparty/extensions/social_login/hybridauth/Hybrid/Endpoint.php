@@ -4,7 +4,8 @@
 * http://hybridauth.sourceforge.net | http://github.com/hybridauth/hybridauth
 * (c) 2009-2014, HybridAuth authors | http://hybridauth.sourceforge.net/licenses.html
 */
-
+require_once realpath( dirname( __FILE__ ) )  . "/Exception.php";
+require_once realpath( dirname( __FILE__ ) )  . "/Logger.php";
 /**
  * Hybrid_Endpoint class
  * 

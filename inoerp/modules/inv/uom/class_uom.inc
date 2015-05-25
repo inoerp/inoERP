@@ -94,6 +94,8 @@ class uom extends dbObject {
  public $time;
  public $msg;
  public $primary_uom;
+
+ 
  public static $table_line_tr = <<<'VAR'
 <thead> 
  				 <tr>

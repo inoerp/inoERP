@@ -81,9 +81,9 @@ inoERP
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Seq') ?>#</th>
         <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Business Unit') ?>#</th>
         <th><?php echo gettext('Header Type') ?></th>
         <th><?php echo gettext('Line Type') ?></th>
+        <th><?php echo gettext('Description') ?>#</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -94,25 +94,14 @@ inoERP
         <tr class="hd_service_activity_line<?php echo $count ?>">
          <td>
           <?php
-          echo ino_inline_action($hd_service_activity_line->hd_service_activity_line_id, array('hd_service_activity_header_id' => $$class->hd_service_activity_header_id,
-           'tax_code_value' => $$class_second->tax_code_value));
+          echo ino_inline_action($hd_service_activity_line->hd_service_activity_line_id, array('hd_service_activity_header_id' => $$class->hd_service_activity_header_id));
           ?>
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('hd_service_activity_line_id'); ?></td>
-         <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
-         <td><?php echo $f->select_field_from_object('line_type', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class_second->line_type, '', 'medium', 1, $readonly); ?></td>
-         <td><?php echo $f->select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->shipping_org_id, '', 'small', 1, $readonly); ?></td>
-         <td><?php
-          echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
-          form::text_field_wid2('item_number', 'select_item_number');
-          ?>
-          <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
-         <td><?php form::text_field_wid2s('item_description'); ?></td>
-         <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small'); ?></td>
-
-         <td><?php form::number_field_wid2s('line_quantity'); ?></td>
-         <td><?php $f->text_field_wid2r('line_status'); ?></td>
+         <td><?php echo $f->select_field_from_object('header_type_id', sd_document_type::find_all_header_levels(), 'sd_document_type_id', 'document_type_name', $$class_second->header_type_id, '', 'medium', 1, $readonly); ?></td>
+         <td><?php echo $f->select_field_from_object('line_type_id', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class_second->line_type_id, '', 'medium', 1, $readonly); ?></td>
+         <td><?php $f->text_field_wid2r('description'); ?></td>
         </tr>
         <?php
         $count = $count + 1;

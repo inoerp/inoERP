@@ -1,4 +1,5 @@
 <?php
+
 $form_page = true;
 if (!empty($_GET['class_name'])) {
  $class_names = $_GET['class_name'];
@@ -7,9 +8,13 @@ if (!empty($_GET['class_name'])) {
  $type = !empty($_GET['type']) ? $_GET['type'] : null;
  include_once('../basics/basics.inc');
  $path = new path();
- $ino_generic_html = $path->findBy_moduleCode($_GET['module_code'], $type);
+ if (!empty($_GET['path_id'])) {
+  $ino_generic_html = $path->findBy_moduleCode($_GET['module_code'], $type, array($_GET['path_id']));
+ } else {
+  $ino_generic_html = $path->findBy_moduleCode($_GET['module_code'], $type);
+ }
  include_once('../functions/loader.inc');
- include_once(__DIR__.'/../template/json_form_template.inc');
+ include_once(__DIR__ . '/../template/json_form_template.inc');
  return;
 } else {
  include_once('../functions/functions.inc');
@@ -17,15 +22,16 @@ if (!empty($_GET['class_name'])) {
 }
 ?>
 <?php
+
 include_once('../functions/loader.inc');
 if (empty($_POST)) {
  try {
   if ($continue) {
    header("Content-type: text/html; charset=UTF-8");
-   if(!isset($all_contacts)){
+   if (!isset($all_contacts)) {
     $all_contacts = null;
    }
-   include_once(__DIR__.'/../template/json_form_template.inc');
+   include_once(__DIR__ . '/../template/json_form_template.inc');
   } else {
    $continue = false;
    echo "<h2>Could n't call the header</h2>";
@@ -35,5 +41,4 @@ if (empty($_POST)) {
   echo $e->getMessage();
  }
 }
-
 ?>

@@ -389,6 +389,9 @@ require_once(INC_MODULE . DS . "ec" . DS . "control" . DS . "class_ec_control.in
 require_once(INC_MODULE . DS . "hd" . DS . "support_request" . DS . "class_hd_support_request.inc");
 require_once(INC_MODULE . DS . "hd" . DS . "service_request" . DS . "class_hd_service_request.inc");
 require_once(INC_MODULE . DS . "hd" . DS . "change_request" . DS . "class_hd_change_request.inc");
+require_once(INC_MODULE . DS . "hd" . DS . "service_activity" . DS . "class_hd_service_activity_header.inc");
+require_once(INC_MODULE . DS . "hd" . DS . "service_activity" . DS . "class_hd_service_activity_line.inc");
+require_once(INC_MODULE . DS . "adm" . DS . "task_type" . DS . "class_adm_task_type.inc");
 
 
 //
