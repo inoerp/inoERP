@@ -1,29 +1,8 @@
 <div id="subinventory_divId">
- <div class="row small-top-margin">
-  <div id="subinventory_search">
-   <?php
-   if (empty($readonly)) {
-    if (property_exists($$class, 'option_lists')) {
-     $s->option_lists = $$class->option_lists;
-    }
-    $s->setProperty('_search_order_by', filter_input(INPUT_GET, 'search_order_by'));
-    $s->setProperty('_search_asc_desc', filter_input(INPUT_GET, 'search_asc_desc'));
-    $s->setProperty('_per_page', filter_input(INPUT_GET, 'per_page'));
-    $s->setProperty('_searching_class', $class);
-    $s->setProperty('_initial_search_array', $$class->initial_search);
-    $search_form = $search->search_form($$class);
-    if (!empty($pagination)) {
-     $pagination_statement = $pagination->show_pagination($pagination, 'subinventory', $pageno, $query_string);
-    }
-   }
-   ?>
-  </div>
-  <div id="form_top">
-  </div>
-
+ <div class="row small-top-margin" id="multi_select">
   <div id="searchForm" ><div class='hideDiv_input'></div>
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
-  <div id ="form_header">
+  <div id ="searchResult">
    <form action=""  method="post" id="subinventory"  name="subinventory">
     <div id ="form_line" class="form_line"><span class="heading">Sub Inventory Details </span>
      <div id="tabsLine">
@@ -154,22 +133,14 @@
  </div>
 
 </div>
-<script type=text/javascript>
- var classSave = new saveMainClass();
- classSave.json_url = 'form.php?class_name=subinventory';
- classSave.line_key_field = 'subinventory';
- classSave.single_line = false;
- classSave.savingOnlyHeader = false;
- classSave.lineClassName = 'subinventory';
- classSave.saveMain();
-
- //add new row in multi action template
- $("#content").on("click", ".add_row_img", function () {
-  var addNewRow = new add_new_rowMain();
-  addNewRow.trClass = 'subinventory_line';
-  addNewRow.tbodyClass = 'form_data_line_tbody';
-  addNewRow.noOfTabs = 3;
-  addNewRow.removeDefault = true;
-  addNewRow.add_new_row();
- });
-</script>
+<div id="js_data">
+ <ul id="js_saving_data">
+  <li class="lineClassName" data-lineClassName="subinventory" ></li>
+  <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
+  <li class="form_header_id" data-form_header_id="subinventory" ></li>
+ </ul>
+ <ul id="js_contextMenu_data">
+  <li class="btn1DivId" data-btn1DivId="subinventory"></li>
+  <li class="noOfTabbs" data-noOfTabbs="3" ></li>
+ </ul>
+</div>

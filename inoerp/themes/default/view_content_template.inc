@@ -70,7 +70,7 @@
            $reference_id = $content->content_id;
            include_once 'comment.php';
           } else {
-           echo "<a href='extensions/user/user_login.php' class='comment post button btn btn-info active btn-lg' role='button' id='commentForm'>Login To Comment </a>";
+           echo "<a href='".HOME_URL."extensions/user/user_login.php' class='comment post button btn btn-info active btn-lg' role='button' id='commentForm'>Login To Comment </a>";
           }
           ?>
           <div id="new_comment">

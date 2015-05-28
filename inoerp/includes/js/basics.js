@@ -3623,6 +3623,7 @@ $(document).ready(function () {
   var primary_column_id2 = $('ul#js_saving_data').find('.primary_column_id2').data('primary_column_id2');
   var line_key_field = $('ul#js_saving_data').find('.line_key_field').data('line_key_field');
   var savingOnlyHeader = $('ul#js_saving_data').find('.savingOnlyHeader').data('savingonlyheader');
+  var onlyHeaderOverLay = $('ul#js_saving_data').find('.onlyHeaderOverLay').data('onlyheaderoverlay');
   var save_vertical_tab = $('ul#js_saving_data').find('.save_vertical_tab').data('save_vertical_tab');
   var onlyOneLineAtATime = $('ul#js_saving_data').find('.onlyOneLineAtATime').data('onlyonelineatatime');
   var allLineTogether = $('ul#js_saving_data').find('.allLineTogether').data('alllinetogether');
@@ -3642,6 +3643,7 @@ $(document).ready(function () {
   classSave.primary_column_id = primary_column_id;
   classSave.primary_column_id2 = primary_column_id2;
   classSave.savingOnlyHeader = (savingOnlyHeader == true) ? true : false;
+  classSave.onlyHeaderOverLay = (onlyHeaderOverLay == true) ? true : false;
   classSave.saveVerticalTab = (save_vertical_tab == true) ? true : false;
   classSave.allLineTogether = (allLineTogether == true) ? true : false;
   classSave.onlyOneLineAtATime = (onlyOneLineAtATime == true) ? true : false;

@@ -46,7 +46,11 @@
            </ul>
           </td>
           <td><?php form::number_field_drs('role_access_id') ?></td>
-          <td><?php echo $f->select_field_from_object('obj_class_name', engine::find_all(), 'obj_class_name', 'obj_class_name', $$class->obj_class_name, '', '', 1); ?></td>
+          <td><?php $eng_all = engine::find_all();
+          foreach($eng_all as $k => $v ){
+           $v->obj_class_name_fn = ucwords(str_replace('_', ' ', $v->obj_class_name));
+          }
+          echo $f->select_field_from_object('obj_class_name', $eng_all, 'obj_class_name', 'obj_class_name_fn', $$class->obj_class_name, '', '', 1); ?></td>
           <td><?php echo $f->select_field_from_array('access_level', role_access::$access_map, $$class->access_level); ?></td>
          </tr>
          <?php

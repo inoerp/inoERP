@@ -4446,7 +4446,11 @@ table.document_table input{
 }
 
 #erp_form_area input.xlarge{
- width: 220px;
+ width: 180px !important;
+}
+
+#erp_form_area input.xxlarge{
+ width: 220px !important;
 }
 
 #erp_form_area input[type=text],#erp_form_area input[type=password], #erp_form_area input[type=date], #erp_form_area input[type=textarea],

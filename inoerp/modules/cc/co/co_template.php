@@ -2,7 +2,7 @@
  <?php
  $template_lines_ia = new ArrayIterator($template_lines);
  ?> 
- <div id="tabsDetailD"><?php $f = new inoform(); ?>
+ <div id="tabsDetailD">
   <ul class="tabMain">
    <li><a href="#tabsDetailD-1"><?php echo gettext('Change Order') ?></a></li>
    <li><a href="#tabsDetailD-2"><?php echo gettext('Process Steps') ?></a></li>
@@ -23,7 +23,6 @@
        </ul>
        <div class="tabContainer">
         <div id="tabsHeader-1" class="tabContent">
-         <div class="large_shadow_box"> 
           <ul class="column header_field">
            <li><?php $f->l_text_field_dr_withSearch('cc_co_header_id') ?>
             <a name="show" href="form.php?class_name=cc_co_header&<?php echo "mode=$mode"; ?>" class="show document_id cc_co_header_id_id">
@@ -36,7 +35,6 @@
            <li><?php $f->l_text_field_dr('status'); ?></li>
            <li><?php $f->l_text_field_d('description'); ?></li>
           </ul>
-         </div>
         </div>
         <div id="tabsHeader-2" class="tabContent">
          <ul class="column header_field">

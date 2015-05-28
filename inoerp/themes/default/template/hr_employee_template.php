@@ -12,7 +12,6 @@
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field"> 
         <li><?php $f->l_text_field_dr_withSearch('hr_employee_id') ?>
          <a name="show" href="form.php?class_name=hr_employee&<?php echo "mode=$mode"; ?>" class="show document_id hr_employee_id">
@@ -30,10 +29,8 @@
         <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', $readonly, '', '', 1); ?>        </li>
         <li><?php $f->l_status_field_d('status'); ?></li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field"> 
         <li><?php $f->l_date_fieldFromToday('date_of_birth', $$class->date_of_birth); ?> </li>
         <li><?php $f->l_select_field_from_object('country_of_birth', mdm_tax_region::country(), 'option_line_code', 'option_line_value', $$class->country_of_birth, '', 'country_code', '', $readonly); ?>              </li>
@@ -44,10 +41,8 @@
         <li><?php $f->l_text_field_d('no_of_children'); ?> 					</li>
         <li><?php $f->l_text_field_d('passport_number'); ?> 					</li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-3" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field">
         <li><?php $f->l_text_field_d('home_phone_number'); ?> 					</li>
         <li><?php $f->l_text_field_d('phone'); ?> 					</li>
@@ -58,7 +53,6 @@
         <li><?php $f->l_text_field_d('permanent_address'); ?> 					</li>
         <li><?php $f->l_text_field_d('location_id'); ?> 					</li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-4" class="tabContent">
       <div> <?php echo ino_attachement($file) ?> </div>
@@ -81,7 +75,6 @@
       </div>
      </div>
     </div>
-
    </div>
   </div>
   <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Employee Details') ?></span>
@@ -89,6 +82,7 @@
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Assignments') ?></a></li>
      <li><a href="#tabsLine-2"><?php echo gettext('Financial Info') ?> </a></li>
+     <li><a href="#tabsLine-3"><?php echo gettext('Education') ?> </a></li>
      <li><a href="#tabsLine-4"><?php echo gettext('Work Experience') ?> </a></li>
      <li><a href="#tabsLine-5"><?php echo gettext('On Boarding') ?></a></li>
      <li><a href="#tabsLine-6"><?php echo gettext('Exit') ?> </a></li>
@@ -121,8 +115,99 @@
        </ul> 
       </div> 
      </div>
-   
-    <div id="tabsLine-4"  class="tabContent">
+     <div id="tabsLine-3"  class="tabContent">
+      <div class="tabsDetail">
+       <ul class="tabMain">
+        <li><a href="#tabsLine-11"><?php echo gettext('Basic Info') ?></a></li>
+        <li><a href="#tabsLine-12"><?php echo gettext('Details Info') ?></a></li>
+       </ul>
+       <div class="tabContainer"> 
+        <div id="tabsLine-11" class="tabContent">
+         <table class="form_table">
+          <thead> 
+           <tr>
+            <th><?php echo gettext('Action') ?></th>
+            <th><?php echo gettext('Seq') ?>#</th>
+            <th><?php echo gettext('Line Id') ?></th>
+            <th><?php echo gettext('Degree Name') ?>#</th>
+            <th><?php echo gettext('University') ?></th>
+            <th><?php echo gettext('Start Date') ?></th>
+            <th><?php echo gettext('End Date') ?></th>
+            <th><?php echo gettext('Mode') ?></th>
+            <th><?php echo gettext('Percentage') ?></th>
+            <th><?php echo gettext('Grade') ?></th>
+           </tr>
+          </thead>
+          <tbody class="form_data_line_tbody employee_education_values" >
+           <?php
+           $count = 0;
+           $employee_education_object1 = hr_employee_education::find_by_employeeId($$class->hr_employee_id);
+           $employee_education_object = empty($employee_education_object1) ? array(new hr_employee_education()) : $employee_education_object1;
+           foreach ($employee_education_object as $hr_employee_education) {
+            ?>         
+            <tr class="employee_education_line<?php echo $count ?>">
+             <td>    
+              <ul class="inline_action">
+               <li class="add_row_img1 clickable"><i class="fa fa-plus-circle"></i></li>
+               <li class="remove_row_img"><i class="fa fa-minus-circle"></i> </li>
+               <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class_second->hr_employee_education_id); ?>"></li> 
+               <li><?php echo $f->hidden_field('education_line_id_cb', ''); ?>
+                <?php echo form::hidden_field('employee_id', $$class->hr_employee_id); ?></li>
+              </ul>
+             </td>
+             <td><?php $f->seq_field_d($count) ?></td>
+             <td><?php $f->text_field_wid2sr('hr_employee_education_id') ?></td>
+             <td><?php $f->text_field_wid2m('degree_name'); ?></td>
+             <td><?php $f->text_field_wid2m('university'); ?></td>
+             <td><?php echo $f->date_fieldAnyDay('edu_start_date', $$class_second->edu_start_date); ?></td>
+             <td><?php echo $f->date_fieldAnyDay('edu_end_date', $$class_second->edu_end_date); ?></td>
+             <td><?php $f->text_field_wid2('mode_of_education'); ?></td>
+             <td><?php $f->text_field_wid2s('marks_percentage'); ?></td>
+             <td><?php $f->text_field_wid2s('grade'); ?></td>
+            </tr>
+            <?php
+            $count = $count + 1;
+           }
+           ?>
+          </tbody>
+         </table>
+        </div>
+        <div id="tabsLine-12" class="tabContent">
+         <table class="form_table">
+          <thead> 
+           <tr>
+            <th><?php echo gettext('Seq') ?>#</th>
+            <th><?php echo gettext('Specialization') ?></th>
+            <th><?php echo gettext('University Address') ?>#</th>
+            <th><?php echo gettext('Notes') ?></th>
+           </tr>
+          </thead>
+          <tbody class="form_data_line_tbody employee_education_values" >
+           <?php
+           $count = 0;
+           foreach ($employee_education_object as $employee_education) {
+            ?>         
+            <tr class="employee_education_line<?php echo $count ?>">
+             <td><?php $f->seq_field_d($count) ?></td>
+             <td><?php $f->text_field_wid2('specialization'); ?></td>
+             <td><?php $f->text_field_wid2l('university_address'); ?></td>
+             <td><?php
+              echo $f->text_area_ap(array('name' => 'comments', 'value' => $$class_second->comments,
+               'row_size' => '1', 'column_size' => '60'));
+              ?> 	
+             </td> 
+            </tr>
+            <?php
+            $count = $count + 1;
+           }
+           ?>
+          </tbody>
+         </table>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div id="tabsLine-4"  class="tabContent">
       <div class="tabsDetail">
        <ul class="tabMain">
         <li><a href="#tabsLine-21"><?php echo gettext('Basic') ?></a></li>

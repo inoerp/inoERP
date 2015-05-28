@@ -99,6 +99,10 @@ require_once(INC_MODULE . DS . "sys" . DS . "catalog" . DS . "class_sys_catalog_
 require_once(INC_MODULE . DS . "sys" . DS . "catalog" . DS . "value" . DS . "class_sys_catalog_value.inc");
 require_once(INC_MODULE . DS . "sys" . DS . "message_format" .  DS . "class_sys_message_format.inc");
 require_once(INC_MODULE . DS . "sys" . DS . "form_personalization" .  DS . "class_sys_form_personalization.inc");
+require_once(INC_MODULE . DS . "sys" . DS . "pd" .  DS . "class_sys_pd_header.inc");
+require_once(INC_MODULE . DS . "sys" . DS . "pd" .  DS . "class_sys_pd_process_flow_action.inc");
+require_once(INC_MODULE . DS . "sys" . DS . "pd" .  DS . "class_sys_pd_process_flow_action_value.inc");
+
 require_once(INC_ORGS . DS . "class_org.inc");
 require_once(INC_ORGS . DS . "class_org_v.inc");
 require_once(INC_ORGS . DS . "enterprise" . DS . "class_enterprise.inc");
@@ -392,6 +396,7 @@ require_once(INC_MODULE . DS . "hd" . DS . "change_request" . DS . "class_hd_cha
 require_once(INC_MODULE . DS . "hd" . DS . "service_activity" . DS . "class_hd_service_activity_header.inc");
 require_once(INC_MODULE . DS . "hd" . DS . "service_activity" . DS . "class_hd_service_activity_line.inc");
 require_once(INC_MODULE . DS . "adm" . DS . "task_type" . DS . "class_adm_task_type.inc");
+require_once(INC_MODULE . DS . "adm" . DS . "task_status" . DS . "class_adm_task_status.inc");
 
 
 //

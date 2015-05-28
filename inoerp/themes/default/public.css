@@ -1,3 +1,4 @@
+
 @media print{
  body, html, #content {
   width: 100%;
@@ -936,21 +937,28 @@ ul.form_top li, ul#form_top_image li{
 }
 
 /*Process Flow*/
+ul.process_flow_diagram_list label{
+        display: block !important;
+}
+
+ul.process_flow_diagram_list label .fa{
+        display: block !important;
+        font-size: 20px;
+        color: #fff !important; 
+}
 
 ul.process_flow_diagram_list li:not(.flow_coneector){
- width: 170px;
- height: 170px;
+ width: 140px;
+ height: 140px;
  display: inline-block;
  border: 2px solid #ccc;
  margin:  20px 40px;
  vertical-align: top;
- text-overflow: hidden;
- padding: 20px;
+ overflow:hidden;
+ padding: 20px 2px;
  text-align: center;
- /*background-color: rgba(40,140,240,0.1);*/
- background-color: rgba(130, 150, 92, 0.35);
- box-shadow: 1px 5px 10px 5px #888;
-
+ background-color: rgba(42, 147, 177, 0.89);
+ color: #fff; 
 }
 
 ul.process_flow_diagram_list li.flow_coneector{
@@ -960,34 +968,35 @@ ul.process_flow_diagram_list li.flow_coneector{
 ul.process_flow_diagram_list li.start, ul.process_flow_diagram_list li.end   {
  border-radius: 80px;
  /*background-color: rgba(40,140,40,0.4);*/
- border: 5px solid rgba(40,140,40,0.2);
+ border: 5px solid rgba(14, 177, 183, 0.92);
 }
 
 ul.process_flow_diagram_list li.decision   {
- /*background-color: rgba(191, 119, 104, 0.41);*/
- border: 5px solid rgba(191, 119, 104, 0.41);
- transform: rotate(45deg) scale(0.75);
+     background-color: rgba(161, 19, 19, 0.54);
+}
+
+ul.process_flow_diagram_list li.start,
+ul.process_flow_diagram_list li.end {
+     background-color: rgba(14, 177, 183, 0.92);
+        
 }
 
 ul.process_flow_diagram_list li.decision bdi{
  display: block;
- transform: rotate(-45deg) scale(1.25) translate(-10px, 10px);
+
 }
 
 
 ul.process_flow_diagram_list li.flow_coneector{
  display: inline-block;
  position:relative;
- top:80px;
- width: 80px;
+ top:70px;
+ width: 10px !important;
  border-bottom: 20px solid transparent;
- margin-left: -40px ;
- margin-right: -40px ;
+ font-size: 40px;        
 }
 
-ul.process_flow_diagram_list li.flow_coneector{
- background: url('images/right_arrow.png') no-repeat ;
-}
+
 
 .add_detail_values_img, .add_row_img, .remove_row_img{
  cursor: pointer; 
@@ -995,7 +1004,7 @@ ul.process_flow_diagram_list li.flow_coneector{
 }
 
 ul.process_flow_diagram_list li.current_processs{
- background: rgba(35, 141, 231, 0.45);
+background-color: rgba(80, 176, 122, 0.76);
 }
 
 ul.header_field li, ul.line_field li{
@@ -1736,20 +1745,7 @@ hr.light {
 .magnify { position: relative;}
 
 /*Lets create the magnifying glass*/
-.large {
- width: 350px; height: 350px;
- position: absolute;
- border-radius: 100%;
 
- /*Multiple box shadows to achieve the glass effect*/
- box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85), 
-  0 0 7px 7px rgba(0, 0, 0, 0.25), 
-  inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
-
-
- /*hide the glass by default*/
- display: none;
-}
 .sm-image{
  height:120px;
 }
@@ -1977,4 +1973,8 @@ ul.single-column li{
 
 .login-form li{
         line-height: 20px !important;
+}
+
+.white-font-link a{
+        color : #fff !important;
 }

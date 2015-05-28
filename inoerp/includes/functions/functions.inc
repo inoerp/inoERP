@@ -21,6 +21,7 @@ function autoLoadModules($className) {
  }
 // $path .= $paths[2] . '/';
  $filename = getcwd() . "/modules/" . $path . 'class_' . $className . ".inc";
+ $dirname = HOME_DIR . DS . 'modules' . DS . $paths[0];
  if (is_readable($filename)) {
   require $filename;
  } elseif (is_readable(HOME_DIR . '/modules/' . $path . 'class_' . $className . ".inc")) {
@@ -30,12 +31,36 @@ function autoLoadModules($className) {
   $filename = HOME_DIR . '/modules/' . $path . 'class_' . $className . ".inc";
   if (is_readable($filename)) {
    require $filename;
+   return;
+  } elseif (is_dir($dirname . DS . $paths[1] . '_' . $paths[2])) {
+   $filename = $dirname . DS . $paths[1] . '_' . $paths[2] . DS . 'class_' . $className . ".inc";
+//   echo '<br>L ' . __LINE__ . ' : ' . $filename;
+   if (is_readable($filename)) {
+    require $filename;
+    return;
+   }
   }
- } elseif (!empty($paths[3])) {
-  $path .= $paths[3] . '/';
-  $filename = HOME_DIR . '/modules/' . $path . 'class_' . $className . ".inc";
-  if (is_readable($filename)) {
-   require $filename;
+ } 
+ 
+ if (!empty($paths[3])) {
+  if (is_dir(is_dir($dirname . DS . $paths[1] . '_' . $paths[2] . '_' . $paths[3]))) {
+   $filename = $dirname . DS . $paths[1] . '_' . $paths[2] . '_' . $paths[3] . DS . 'class_' . $className . ".inc";
+//   echo '<br>L ' . __LINE__ . ' : ' . $filename;
+   if (is_readable($filename)) {
+    require $filename;
+   }
+  } else if (is_dir($dirname . DS . $paths[1] . '_' . $paths[2] . DS . $paths[3])) {
+   $filename = $dirname . DS . $paths[1] . '_' . $paths[2] . DS . $paths[3] . DS . 'class_' . $className . ".inc";
+//   echo '<br>L ' . __LINE__ . ' : ' . $filename;
+   if (is_readable($filename)) {
+    require $filename;
+   }
+  } else if (is_dir($dirname . DS . $paths[1] . DS . $paths[2] . '_' . $paths[3])) {
+   $filename = $dirname . DS . $paths[1] . DS . $paths[2] . '_' . $paths[3] . DS . 'class_' . $className . ".inc";
+//   echo '<br>L ' . __LINE__ . ' : ' . $filename;
+   if (is_readable($filename)) {
+    require $filename;
+   }
   }
  }
 }

@@ -9,17 +9,17 @@
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-      <ul class="column header_field">
-       <li><?php $f->l_text_field_dr_withSearch('sys_process_flow_header_id') ?>
-        <a name="show" href="form.php?class_name=sys_process_flow_header&<?php echo "mode=$mode"; ?>" class="show document_id sys_process_flow_header_id">
-         <i class="fa fa-refresh"></i></a> 
-       </li>
-       <li><?php $f->l_text_field_dm('process_flow'); ?> </li>
-       <li><?php $f->l_text_field_d('description'); ?></li>
-       <li><?php $f->l_select_field_from_array('type', sys_process_flow_header::$type_a, $$class->type); ?></li>
-       <li><?php $f->l_status_field_d('status'); ?></li>
-       <li><?php $f->l_select_field_from_object('module_name', option_header::modules(), 'option_line_code', 'option_line_value', $$class->module_name, 'module_name', '', 1, $readonly) ?></li>
-      </ul>
+     <ul class="column header_field">
+      <li><?php $f->l_text_field_dr_withSearch('sys_process_flow_header_id') ?>
+       <a name="show" href="form.php?class_name=sys_process_flow_header&<?php echo "mode=$mode"; ?>" class="show document_id sys_process_flow_header_id">
+        <i class="fa fa-refresh"></i></a> 
+      </li>
+      <li><?php $f->l_text_field_dm('process_flow'); ?> </li>
+      <li><?php $f->l_text_field_d('description'); ?></li>
+      <li><?php $f->l_select_field_from_array('type', sys_process_flow_header::$type_a, $$class->type); ?></li>
+      <li><?php $f->l_status_field_d('status'); ?></li>
+      <li><?php $f->l_select_field_from_object('module_name', option_header::modules(), 'option_line_code', 'option_line_value', $$class->module_name, 'module_name', '', 1, $readonly) ?></li>
+     </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div id="comments">
@@ -130,8 +130,8 @@
                   <tr class="sys_process_flow_action<?php echo $count . '-' . $detailCount; ?>">
                    <td>   
                     <ul class="inline_action">
-                     <li class="add_row_detail_img"><i class="fa fa-plus-circle"></li>
-                     <li class="remove_row_img"><i class="fa fa-minus-circle"> </li>
+                     <li class="add_row_detail_img"><i class="fa fa-plus-circle"></i></li>
+                     <li class="remove_row_img"><i class="fa fa-minus-circle"> </i></li>
                      <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($sys_process_flow_action->sys_process_flow_action_id); ?>"></li>           
                      <li><?php echo form::hidden_field('sys_process_flow_line_id', $$class_second->sys_process_flow_line_id); ?></li>
                      <li><?php echo form::hidden_field('sys_process_flow_header_id', $$class->sys_process_flow_header_id); ?></li>
@@ -181,6 +181,7 @@
         <th><?php echo gettext('Next Seq On Pass') ?></th>
         <th><?php echo gettext('Next Seq If Fail') ?></th>
         <th><?php echo gettext('Next Seq On Return') ?>#</th>
+        <th><?php echo gettext('Activity Path') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -193,6 +194,7 @@
          <td><?php $f->text_field_wid2('next_line_seq_pass'); ?></td>
          <td><?php $f->text_field_wid2('next_line_seq_fail'); ?></td>
          <td><?php $f->text_field_wid2('next_line_seq_onhold'); ?></td>
+         <td><?php $f->text_field_wid2('activity_path'); ?></td>
         </tr>
         <?php
         $count = $count + 1;

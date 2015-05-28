@@ -12,7 +12,6 @@
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field"> 
         <li><?php $f->l_text_field_dr_withSearch('hr_employee_id') ?>
          <a name="show" href="form.php?class_name=hr_employee&<?php echo "mode=$mode"; ?>" class="show document_id hr_employee_id">
@@ -30,10 +29,8 @@
         <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', $readonly, '', '', 1); ?>        </li>
         <li><?php $f->l_status_field_d('status'); ?></li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field"> 
         <li><?php $f->l_date_fieldFromToday('date_of_birth', $$class->date_of_birth); ?> </li>
         <li><?php $f->l_select_field_from_object('country_of_birth', mdm_tax_region::country(), 'option_line_code', 'option_line_value', $$class->country_of_birth, '', 'country_code', '', $readonly); ?>              </li>
@@ -44,10 +41,8 @@
         <li><?php $f->l_text_field_d('no_of_children'); ?> 					</li>
         <li><?php $f->l_text_field_d('passport_number'); ?> 					</li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-3" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field">
         <li><?php $f->l_text_field_d('home_phone_number'); ?> 					</li>
         <li><?php $f->l_text_field_d('phone'); ?> 					</li>
@@ -58,7 +53,6 @@
         <li><?php $f->l_text_field_d('permanent_address'); ?> 					</li>
         <li><?php $f->l_text_field_d('location_id'); ?> 					</li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-4" class="tabContent">
       <div> <?php echo ino_attachement($file) ?> </div>
@@ -81,7 +75,6 @@
       </div>
      </div>
     </div>
-
    </div>
   </div>
   <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Employee Details') ?></span>

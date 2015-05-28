@@ -42,7 +42,7 @@ $(document).ready(function () {
  });
 
 
- deleteData('form.php?class_name=sys_process_flow_header&line_class_name=sys_process_flow_line');
+ deleteData('form.php?class_name=sys_process_flow_header&line_class_name=sys_process_flow_line&detail_class_name=sys_process_flow_action');
 
 // addOrShow_lineDetails();
 // onClick_addDetailLine(1);

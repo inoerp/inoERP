@@ -150,5 +150,6 @@
  </ul>
  <ul id="js_contextMenu_data">
   <li class="btn1DivId" data-btn1DivId="adm_task_type"></li>
+  <li class="noOfTabbs" data-noOfTabbs="2" ></li>
  </ul>
 </div>

@@ -54,7 +54,8 @@ if (empty($_POST)) {
    }
   } else {
    $continue = false;
-   echo "<h2>Could n't call the header</h2>";
+//   pa($$class);
+   echo "<h2>Could n't call the header</h2> Error @ form.php line ".__LINE__;
    return;
   }
 

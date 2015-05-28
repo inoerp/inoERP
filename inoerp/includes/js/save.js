@@ -26,7 +26,7 @@
  */
 
 function saveHeader(json_url, headerData, primary_column_id, primary_column_id2, primary_column_id3, savingOnlyHeader,
-        form_header) {
+        form_header, onlyHeaderOverLay) {
  return $.ajax({
   url: json_url,
   data: {headerData: headerData,
@@ -63,7 +63,8 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
       $('.primary_column3').val(header_id3);
      }
     }
-    if (savingOnlyHeader) {
+    
+    if (savingOnlyHeader || onlyHeaderOverLay) {
      $('#overlay').css('display', 'none');
      $('#form_top_image').css('display', 'block');
     }
@@ -170,7 +171,7 @@ function saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassNa
 function saveMainClass(json_url, form_header_id, primary_column_id, single_line,
         line_key_field, form_line_id, primary_column_id2, primary_column_id3, enable_select, savingOnlyHeader,
         headerClassName, lineClassName, detailClassName, lineClassName2, onlyOneLineAtATime,
-        allLineTogether, saveVerticalTab) {
+        allLineTogether, saveVerticalTab, onlyHeaderOverLay) {
  this.json_url = json_url;
  this.form_header_id = form_header_id;
  this.primary_column_id = primary_column_id;
@@ -188,6 +189,7 @@ function saveMainClass(json_url, form_header_id, primary_column_id, single_line,
  this.onlyOneLineAtATime = onlyOneLineAtATime;
  this.allLineTogether = allLineTogether;
  this.saveVerticalTab = saveVerticalTab;
+ this.onlyHeaderOverLay = onlyHeaderOverLay;
 }
 
 saveMainClass.prototype.saveMain = function (beforeSave)
@@ -217,6 +219,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
  var lineClassName2 = this.lineClassName2;
  var onlyOneLineAtATime = this.onlyOneLineAtATime;
  var allLineTogether = this.allLineTogether;
+ var onlyHeaderOverLay = this.onlyHeaderOverLay;
  var saveVerticalTab = this.saveVerticalTab;
  var line_key_field_d = '.' + line_key_field;
  $('#save').on('click', function (e) {
@@ -314,8 +317,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
   }
 
   if ((typeof headerData !== undefined) && (headerData.length > 0)) {
-//   alert('300');
-   saveHeader(json_url, headerData, primary_column_id_h, primary_column_id2_h, primary_column_id3_h, savingOnlyHeader, headerClassName);
+   saveHeader(json_url, headerData, primary_column_id_h, primary_column_id2_h, primary_column_id3_h, savingOnlyHeader, headerClassName, onlyHeaderOverLay);
   }
 
   /*---Special for multi select*/

@@ -13,7 +13,7 @@
  * am_wo_header 
  *
  */
-class am_wo_header extends dbObject {
+class am_planned_wo extends dbObject {
 
  public static $table_name = "am_wo_header";
  public static $dependent_classes = ['am_wo_routing_line', 'am_wo_routing_detail', 'am_wo_bom'];
