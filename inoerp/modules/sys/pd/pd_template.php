@@ -9,7 +9,6 @@
      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
      <li><a href="#tabsHeader-2"><?php echo gettext('Other Info') ?></a></li>
      <li><a href="#tabsHeader-3"><?php echo gettext('Secondary Fields') ?></a></li>
-     <li><a href="#tabsHeader-4"><?php echo gettext('Flow Diagram') ?></a></li>
      <li><a href="#tabsHeader-5"><?php echo gettext('Notes') ?></a></li>
      <li><a href="#tabsHeader-6"><?php echo gettext('Attachments') ?></a></li>
      <li><a href="#tabsHeader-7"><?php echo gettext('Action') ?></a></li>
@@ -47,9 +46,6 @@
       <div class="large_shadow_box"> 
 <?php echo!empty($secondary_field_stmt) ? $secondary_field_stmt : null; ?>
       </div>
-     </div>
-     <div id="tabsHeader-4" class="tabContent">
-
      </div>
      <div id="tabsHeader-5" class="tabContent">
       <div id="comments">
@@ -253,7 +249,7 @@
                     <td>
                      <?php echo $f->select_field_from_object('object_name', $eng_all, 'obj_class_name', 'obj_class_name_fn', $$class_third->object_name,'','medium');  ?>
                     </td>
-                    <td><?php form::text_field_wid3r('object_primary_id'); ?></td>
+                    <td><?php form::text_field_wid3('object_primary_id'); ?></td>
                    </tr>
                    <?php
                    $detailCount++;

@@ -188,7 +188,8 @@ WHERE module_name = 'hr'";
 
   while ($process_flow_line_obj_ai->valid()) {
    $path_link = '';
-   if ($process_flow_line_obj_ai->key() == 0) {
+   
+   if (($process_flow_line_obj_ai->key() == 0 ) && !empty($this->primary_document)) {
     $primary_doc_class = $this->primary_document;
     if (property_exists($primary_doc_class, 'primary_column')) {
      $primary_doc_class_pri_id = $primary_doc_class::$primary_column;
@@ -196,8 +197,11 @@ WHERE module_name = 'hr'";
     }
    } else {
     $pd_process_flow_action = sys_pd_process_flow_action::find_by_headerId_pfLineId($this->sys_pd_header_id, $process_flow_line_obj_ai->current()->sys_process_flow_line_id);
-    if($pd_process_flow_action){
+    
+    if ($pd_process_flow_action) {
      $path_link = HOME_URL . $process_flow_line_obj_ai->current()->activity_path . '&' . $pd_process_flow_action[0]->object_name . '=' . $pd_process_flow_action[0]->object_primary_id;
+    }else{
+     $path_link = HOME_URL . $process_flow_line_obj_ai->current()->activity_path ;
     }
    }
 

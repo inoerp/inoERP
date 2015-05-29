@@ -22,7 +22,7 @@ class sys_pd_process_flow_action extends dbObject {
  public static $parent_primary_column = "sys_pd_header_id";
  public static $key_column = "pf_action_type";
  public static $module = "sys";
-  public static $system_info = [
+ public static $system_info = [
   'name' => 'CC Action',
   'number' => '9302',
   'description' => 'Change Control Process Flow Actions',
@@ -33,7 +33,6 @@ class sys_pd_process_flow_action extends dbObject {
   'module_name' => 'cc',
   'weight' => '2'
  ];
-  
  public static $pf_action_type_a = [
   'APPROVAL' => 'Approval',
   'INFORMATION' => 'Information',

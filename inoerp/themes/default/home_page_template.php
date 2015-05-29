@@ -94,6 +94,7 @@ include_once("includes/functions/loader.inc");
  </head>
  <body>
 
+<nav class="navbar navbar-default navbar-fixed-top">
   <div id="topbar" class="topbar clearfix ">
    <div class="container">
     <div class="row">
@@ -189,7 +190,7 @@ include_once("includes/functions/loader.inc");
     </nav>
    </div><!-- end container -->
   </header><!-- end header-style-1 -->
-
+</nav>
   <?php
   if ($showBlock) {
    echo '<div id="header_bottom"></div>';
@@ -208,8 +209,8 @@ include_once("includes/functions/loader.inc");
   }
   ?>
   <!-- end grey-wrapper -->
-  <div class="grey-wrapper jt-shadow padding-top content_summary">
-   <div class="make-center wow fadeInUp animated" style="visibility: visible;">
+  <div class="jt-shadow grey-wrapper first_content padding-top content_summary">
+     <div class="make-center wow fadeInUp animated" style="visibility: visible;">
     <div class="container">
     
      <div id="structure">

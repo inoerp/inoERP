@@ -64,11 +64,11 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
      <ul class="nav navbar-nav navbar-right">
-      <li><a href="http://demo.inoideas.org/extensions/user/user_login.php" >Demo <div class="arrow-up"></div></a></li>
-      <li><a href="https://github.com/inoerp/inoERP" >Download <div class="arrow-up"></div></a></li>
-      <li class="active"><a href="http://inoideas.org/content.php?mode=9&content_type=forum&category_id=7" ><i class="fa fa-comments-o"></i> Ask a Question <div class="arrow-up"></div></a></li>
-      <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
-      <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
+      <li class='hidden-sm hidden-xs'><a href="http://demo.inoideas.org/extensions/user/user_login.php" >Demo <div class="arrow-up"></div></a></li>
+      <li class='hidden-sm hidden-xs'><a href="https://github.com/inoerp/inoERP" >Download <div class="arrow-up"></div></a></li>
+      <li class="active hidden-sm hidden-xs"><a href="http://inoideas.org/content.php?mode=9&content_type=forum&category_id=7" ><i class="fa fa-comments-o"></i> Ask a Question <div class="arrow-up"></div></a></li>
+      <li class='hidden-sm hidden-xs'><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
+      <li class='hidden-sm hidden-xs'><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
 
       <li>
        <div class="topbar-login ino_right_top">
@@ -102,8 +102,8 @@
 
   </nav>
   <div class="ino navbar-form">
-   <div id="navigation_bar"   class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
-    <div id="header_top_quick_nav" >
+   <div id="navigation_bar"   class="col-sm-12 col-xs-12 col-md-10 col-md-offset-2 mainbar">
+    <div id="header_top_quick_nav" class='hidden-xs' >
      <ul class="list-group inline_list">
       <li role="presentation"><i class="fa fa-toggle-left clickable right_bar_navigation_menu" title="Toggle Navigation Menu"></i></li>
       <li role="presentation"><a  href="<?php echo HOME_URL; ?>"><i class="fa fa-home" title="Home"></i></a></li>
@@ -124,7 +124,7 @@
       <li class="show_loading_small"><img src="<?php echo HOME_URL ?>/themes/images/form/small_loading_bar.gif"></li>
      </ul>
     </div>
-    <div id="header_top_container">
+    <div id="header_top_container" >
      <?php
      $show_header_links = true;
      if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
@@ -159,7 +159,7 @@
 
   <div class="container-fluid">
    <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
+    <div class="hidden-sm hidden-xs col-md-2 sidebar">
      <div id="accordion">
       <h3 class="clickable nav-panel"><i class="fa fa-warning"></i> Transaction Alerts</h3>
       <div>
@@ -209,9 +209,9 @@
 
 
    </div>
-   <div id="divider-bar" class="col-m-1"><i class="fa fa-toggle-left clickable"></i></div>
+   <div id="divider-bar" class="col-m-1 hidden-sm hidden-xs"><i class="fa fa-toggle-left clickable"></i></div>
 
-   <div id="erp_form_area" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
+   <div id="erp_form_area" class="col-md-10 col-md-offset-2 mainbar">
     <div id="content">
      <div id="structure">
       <?php
@@ -238,7 +238,7 @@
     </div>
     <div id='overlay'></div>
    </div>
-   <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
+   <div class="col-sm-12 col-md-10 col-md-offset-2 mainbar">
     <div class="hidden" id="document_history"></div>
     <div class="footer-menu">
      <div id="half_copyrights">

@@ -413,7 +413,7 @@ section::after {
 }
 
 .product-topbar {
-    background: #044D72;
+ background: #044D72;
 }
 
 /*#header_bottom {
@@ -1698,12 +1698,12 @@ div.thumbnails .magnifier .buttons {
 }
 .green-wrapper {
  background-color: rgba(217, 221, 209, 0.59);
- padding:40px 0;
+ padding:30px 0;
 }
 
 .white-wrapper {
  background-color:#ffffff;
- padding:40px 0;
+ padding:30px 0;
 }
 .blog-wrapper {
  background-color:#ffffff;
@@ -4012,7 +4012,7 @@ ul.column li label,
  display : inline-block;
  font-size : 0.9em;
  margin-bottom: 3px;
- 
+
 }
 
 ul.column.one_column li{
@@ -4458,8 +4458,8 @@ table.document_table input{
 {
  height: 20px;
  /*padding: 3px 2px;*/
-  /*border: 1px solid #eee;*/
-  border: 1px solid #e6e8ea;
+ /*border: 1px solid #eee;*/
+ border: 1px solid #e6e8ea;
 }
 
 #erp_form_area li input[type=text], #erp_form_area li input[type=date],#erp_form_area li input[type=textarea],
@@ -4470,8 +4470,8 @@ table.document_table input{
 
 #erp_form_area select{
  height: 20px;
-/*   border: 1px solid #e6e8ea;
-  border-radius: 5px;*/
+ /*   border: 1px solid #e6e8ea;
+   border-radius: 5px;*/
 }
 
 #erp_form_area .select.medium{
@@ -4521,14 +4521,15 @@ a.show {
  z-index: 999;
  background: none repeat scroll 0% 0% #F2F2F2;
  border-bottom: 1px solid #E4E4E4;
- height: 50px;
+ 
  position: relative;
 }
 
 @media (min-width: 320px) {
  #navigation_bar {
-  top: 30px;
-  margin-bottom: 40px;
+  height: 30px;
+  top: 50px;
+  margin-bottom: 60px;
  }
 }
 
@@ -4548,27 +4549,25 @@ a.show {
  }
 
  #navigation_bar {
-  top: 70px;
-  margin-bottom: 80px;
+  top: 40px;
+  height: 50px;
+  position: fixed;
+ }
+  #header_bottom{
+  margin-bottom: 120px;
  }
 }
 
 @media (min-width: 1212px) {
  #navigation_bar {
-  top: 30px;
-  margin-bottom: 40px;
-
+  height: 50px;
+  top: 40px;
+  position: fixed;
+ }
+ #header_bottom{
+  margin-bottom: 90px;
  }
 }
-
-@media (min-width: 1212px) {
- #navigation_bar {
-  top: 30px;
-  margin-bottom: 40px;
-
- }
-}
-
 
 
 /* Sidebar navigation */
@@ -4832,7 +4831,7 @@ fieldset.form_detail_data_fs {
  padding : 10px; 
  background: lightgrey;
  border: 1px solid #ccc;
-  /*margin-top: 26px;*/
+ /*margin-top: 26px;*/
 }
 
 /*Overlay Login Modal*/
@@ -4962,4 +4961,8 @@ h3.nav-panel{
 
 #sys_menu_left_vertical .btn {
  font-size: 10px !important;
+}
+
+.navbar-collapse{
+ padding-right : 20px !important;
 }

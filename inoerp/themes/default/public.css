@@ -1978,3 +1978,19 @@ ul.single-column li{
 .white-font-link a{
         color : #fff !important;
 }
+
+.release_message {
+ font-size: 1.1em;
+}
+
+.grey-wrapper.first_content,.first_content{
+ padding: 140px 0 30px 0 !important;
+}
+
+.content-top-padding{
+ padding: 70px 0 !important;
+}
+
+.right-float{
+ float : right !important;
+}

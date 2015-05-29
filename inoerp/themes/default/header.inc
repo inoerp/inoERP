@@ -64,7 +64,7 @@
     js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.0";
     fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));</script>
-
+<nav class="navbar navbar-default navbar-fixed-top">
   <div id="topbar" class="topbar clearfix">
    <div class="container">
     <?php
@@ -154,13 +154,13 @@
     </nav><!-- end navbar yamm navbar-default -->
    </div><!-- end container -->
   </header><!-- end header-style-1 -->
-
+</nav>
   <?php
   if ($showBlock) {
    echo '<div id="header_bottom"></div>';
   }
   ?>
-
+<div class='content-top-padding'></div>
   <?php
 //  if ($si->maintenance_cb == 1) {
 //   echo "<div class='error'>Site is under maintenance mode </div>";
