@@ -79,7 +79,7 @@ A multi segment chart of account structure to represent all the segments of a bu
       1020202 – a Natural account such as Asset, Liability, Expense, Income or Owners Equity
 
 2.	Calendars 
-Define as many different finical calendars as required
+Define as many different financial calendars as required
 Ex : One calendar INO_CORP for Corporate and INO_USA, INO_UK for specific countries
 3.	Account Combinations
 4.	Currency & Conversions
