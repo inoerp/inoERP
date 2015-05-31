@@ -8,6 +8,7 @@
   }
   ?>
   <meta name="keywords" content="ERP,PHP ERP,Open Source ERP ">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title><?php echo isset($pageTitle) ? $pageTitle . ' - inoERP!' : ' inoERP! ' ?></title>
   <link rel="shortcut icon" type="image/x-icon" href="files/favicon.ico">
   <link href="<?php echo THEME_URL; ?>/public.css" media="all" rel="stylesheet" type="text/css" />
@@ -51,7 +52,7 @@
  <body>
   <nav class="navbar navbar-inverse navbar-fixed-top">
    <div class="container-fluid">
-    <div class="navbar-header">
+    <div class="navbar-header col-md-6">
      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
       <span class="sr-only">Toggle navigation</span>
       <span class="icon-bar"></span>
@@ -62,14 +63,8 @@
      ?>" class="logo_image" alt="logo"/>
      <a class="navbar-brand" href="<?php echo HOME_URL; ?>"><?php echo!empty($si->site_name) ? $si->site_name : 'inoERP'; ?></a>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
+    <div id="navbar" class="navbar-collapse collapse col-md-6 navbar-right">
      <ul class="nav navbar-nav navbar-right">
-      <li class='hidden-sm hidden-xs'><a href="http://demo.inoideas.org/extensions/user/user_login.php" >Demo <div class="arrow-up"></div></a></li>
-      <li class='hidden-sm hidden-xs'><a href="https://github.com/inoerp/inoERP" >Download <div class="arrow-up"></div></a></li>
-      <li class="active hidden-sm hidden-xs"><a href="http://inoideas.org/content.php?mode=9&content_type=forum&category_id=7" ><i class="fa fa-comments-o"></i> Ask a Question <div class="arrow-up"></div></a></li>
-      <li class='hidden-sm hidden-xs'><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
-      <li class='hidden-sm hidden-xs'><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
-
       <li>
        <div class="topbar-login ino_right_top">
         <?php if (!empty($_SESSION['login_status'])) { ?>
@@ -96,7 +91,26 @@
        </div>
       </li>
      </ul>
-     <?php echo $ss->entry_form($_GET); ?>
+     <ul class='nav navbar-nav hidden-xs'><li>
+       <?php echo $ss->entry_form($_GET); ?>
+      </li>
+     </ul>
+     <ul class='nav navbar-nav visible-sm visible-xs navbar-right' id="top-path-menu-ul"><li>
+       <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="top-path-menu" data-toggle="dropdown">
+         <i class="fa fa-navicon"> </i><span class="caret"></span></button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="top-path-menu">
+         <li role="presentation">
+          <?php
+          $pat = new path();
+          $menu_path = $pat->path_allpaths_block(array('divClass' => 'tree_view'));
+          echo $menu_path;
+          ?>          
+         </li>
+        </ul>
+       </div>
+      </li>
+     </ul>
     </div>
    </div>
 
@@ -175,8 +189,7 @@
          <button type="button" id='collapse_all_nav' class="btn btn-default">Collapse All</button>
         </div>
         <?php
-        $pat = new path();
-        echo ($pat->path_allpaths_block(array('divClass' => 'tree_view')));
+        echo $menu_path;
         ?>
        </div>
       </div>
@@ -195,10 +208,10 @@
 
       <h3 class="clickable nav-panel clipboard-data"><i class="fa fa-clipboard"></i> Clipboard</h3>
       <div id="left-clipboard">
-              <div id="left-clipboard-icons">
+       <div id="left-clipboard-icons">
         <i class="fa fa-save save-clipboard clickable"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <i class="fa fa-eraser clear-clipboard clickable"></i> 
-        </div>
+       </div>
        <div id="left-clipboard-data">
        </div>
 
@@ -212,8 +225,16 @@
    <div id="divider-bar" class="col-m-1 hidden-sm hidden-xs"><i class="fa fa-toggle-left clickable"></i></div>
 
    <div id="erp_form_area" class="col-md-10 col-md-offset-2 mainbar">
+    <div class='visible-xs visible-sm'>
+     <div class="error"></div><div id="loading"></div>
+    </div>
     <div id="content">
      <div id="structure">
+      <div id='form-modal'>
+       <div id='mod-header_top_container'> </div>
+       <div id='mod-structure'> </div>
+
+      </div>
       <?php
       if (!isset($all_contacts)) {
        $all_contacts = null;
@@ -238,6 +259,7 @@
     </div>
     <div id='overlay'></div>
    </div>
+   <!--   Dont Change Anything Below This Row-->
    <div class="col-sm-12 col-md-10 col-md-offset-2 mainbar">
     <div class="hidden" id="document_history"></div>
     <div class="footer-menu">
@@ -248,10 +270,13 @@
       ?>
       <ul>
        <li><a href="http://inoideas.org/content.php?mode=9&content_type=web_contact">Contact</a></li>
-       <li><a href="https://github.com/inoerp/inoERP/releases">Releases</a></li>
+       <li><a href="http://inoerp.org/extensions/user/user_login.php">Demo</a></li>
+       <li><a href="https://github.com/inoerp/inoERP">Download</a></li>
+       <li><a href="http://localhost/inoerp/content.php?content_type=documentation&category_id=30">Documentation</a></li>
+       <li><a href="http://localhost/inoerp/content.php?content_type=forum&category_id=1">Forum</a></li>
        <li><a href="https://www.mozilla.org/MPL/2.0/">MPL 2</a></li>
-       <li><a href="#">Cookie Preferences</a></li>
-       <li class="active"><a href="#">Terms of Use</a></li>
+       <li><a href="#">Cookie</a></li>
+       <li class="active"><a href="#">TOU</a></li>
       </ul>
      </div>
     </div><!-- end large-7 --> 

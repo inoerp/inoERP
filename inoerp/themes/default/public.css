@@ -23,7 +23,7 @@
 
 
 .fa-select {
-    font-family: sans-serif, 'FontAwesome';
+ font-family: sans-serif, 'FontAwesome';
 }
 
 #overlay {
@@ -447,7 +447,7 @@ ul.commentRecord li ul.line{
 #attachments{
  margin: 15px 0px;
  font-size: 1.2em;
-cursor: pointer;
+ cursor: pointer;
 }
 
 #page_navigation, #content_navigation{
@@ -676,15 +676,15 @@ ul.inline_list li{
 
 span.heading-right{
  font-weight: bold;
-padding: 3px 10px;
-display: inline-block;
-width: 50%;
-float: right;
+ padding: 3px 10px;
+ display: inline-block;
+ width: 50%;
+ float: right;
 }
 
 ul.inline-list.ino-breadcrumb-simple {
  float: left;
-width: 40%;        
+ width: 40%;        
 }
 .heading1 {
  border-bottom: 2px dotted rgb(51, 153, 204);
@@ -729,33 +729,6 @@ a.link_class_green:hover{
  margin: 5px 10px;
 }
 
-#path_by_module {
- margin-top: 20px;
-}
-
-#path_by_module a{
-        padding-left:5px;
-}
-
-#path_by_module  ul.child_menu > li  {
- display:inline-block;
- margin: 20px 50px 0 0;  
- vertical-align: top;
- width: 250px;        
-  border: 2px solid #3e9cca;      
-}
-
-
-#path_by_module  ul.child_menu > li > a  {
- color: #00687E;
-      
- font-weight: bold;
-        display:flex;
-width: 246px !important;
-padding: 5px  ;
-color: #fff;
-background-color: rgba(42, 147, 177, 0.89);   
-}
 
 
 .multi_select{
@@ -929,22 +902,52 @@ ul.inline, ul.inline li{
 
 ul.form_top li, ul#form_top_image li{
  display:inline;
- margin-right : 15px;
+ margin-right : 35px;
 }
+
+#form_top_image li a, #form_top_image .fa-refresh{
+ color: #246204;
+ font-size: 22px;
+}
+
+ul#form_top_image li {
+ font-size: 22px;
+ font-style: normal;
+ color: #246204;
+ margin-left: 10px;
+}
+
 
 #form_top_image a.clickable {
  text-decoration: none;
 }
 
+
+#top-path-menu-ul{
+ /*top: 8px;*/
+ margin-right: 20px;
+}
+
+#top-path-menu-ul li{
+ /* top: 8px;*/
+ line-height: 40px;
+}
+
+#top-path-menu-ul li a{
+ font-size: 16px;
+ margin-left: 6px;
+}
+
+
 /*Process Flow*/
 ul.process_flow_diagram_list label{
-        display: block !important;
+ display: block !important;
 }
 
 ul.process_flow_diagram_list label .fa{
-        display: block !important;
-        font-size: 20px;
-        color: #fff !important; 
+ display: block !important;
+ font-size: 20px;
+ color: #fff !important; 
 }
 
 ul.process_flow_diagram_list li:not(.flow_coneector){
@@ -972,13 +975,13 @@ ul.process_flow_diagram_list li.start, ul.process_flow_diagram_list li.end   {
 }
 
 ul.process_flow_diagram_list li.decision   {
-     background-color: rgba(161, 19, 19, 0.54);
+ background-color: rgba(161, 19, 19, 0.54);
 }
 
 ul.process_flow_diagram_list li.start,
 ul.process_flow_diagram_list li.end {
-     background-color: rgba(14, 177, 183, 0.92);
-        
+ background-color: rgba(14, 177, 183, 0.92);
+
 }
 
 ul.process_flow_diagram_list li.decision bdi{
@@ -1004,7 +1007,7 @@ ul.process_flow_diagram_list li.flow_coneector{
 }
 
 ul.process_flow_diagram_list li.current_processs{
-background-color: rgba(80, 176, 122, 0.76);
+ background-color: rgba(80, 176, 122, 0.76);
 }
 
 ul.header_field li, ul.line_field li{
@@ -1486,9 +1489,9 @@ input.multi_select_input{
 
 .popover{
  font-size: 12px !important;
- }
- 
- 
+}
+
+
 .big_popover .popover{
  width: 750px !important;
  max-width: 750px !important;
@@ -1897,30 +1900,30 @@ ul.simple_column li{
 }
 
 fieldset.parameters li label{
-        width: 200px;
-        text-align:right;
-        margin-right: 10px;
+ width: 200px;
+ text-align:right;
+ margin-right: 10px;
 }
 
 fieldset.parameters li:nth-child(odd) {
-background-color: #F2F2F2;
+ background-color: #F2F2F2;
 }
 
 fieldset.parameters li {
-padding : 10px 0;
-margin: 0 -10px;        
+ padding : 10px 0;
+ margin: 0 -10px;        
 }
 
 
 dl.inline-list  dd{
-        margin: 0 2px;
-        text-align: center;
+ margin: 0 2px;
+ text-align: center;
 }
 
 dl.inline-list {
-        margin: 0 ;
-        text-align: center;
-        padding-left: 15px;
+ margin: 0 ;
+ text-align: center;
+ padding-left: 15px;
 }
 
 .img-large-width{
@@ -1928,7 +1931,7 @@ dl.inline-list {
 }
 
 ul.inline_action .fa{
-        font-size: 15px;
+ font-size: 15px;
 }
 
 ul.inline-list li{
@@ -1936,21 +1939,21 @@ ul.inline-list li{
 }
 
 .imp-link a{
-        font-weight: bold;
-        color : rgba(12, 23, 32, 0.75) !important;
+ font-weight: bold;
+ color : rgba(12, 23, 32, 0.75) !important;
 }
 
 .imp-link a:hover{
-        font-size: 1.05em;
-        color : green !important;
+ font-size: 1.05em;
+ color : green !important;
 }
 
 .search_document_list, #site_search .form-control{
-        font-size: 12px !important;
+ font-size: 12px !important;
 }
 
 #site_search_submit{
-        height: 34px;
+ height: 34px;
 }
 
 .font-medium{
@@ -1958,25 +1961,25 @@ ul.inline-list li{
 }
 
 ul.fixed_field li label{
-        width: 150px;
+ width: 150px;
 }
 
 ul.single-column label{
-        width: 20%;
-        text-align: right;
-        margin-right: 5px;
+ width: 20%;
+ text-align: right;
+ margin-right: 5px;
 }
 
 ul.single-column li{
-  margin-bottom: 10px;
+ margin-bottom: 10px;
 }
 
 .login-form li{
-        line-height: 20px !important;
+ line-height: 20px !important;
 }
 
 .white-font-link a{
-        color : #fff !important;
+ color : #fff !important;
 }
 
 .release_message {
@@ -1984,13 +1987,128 @@ ul.single-column li{
 }
 
 .grey-wrapper.first_content,.first_content{
- padding: 140px 0 30px 0 !important;
+ padding: 60px 0 30px 0 !important;
 }
 
 .content-top-padding{
- padding: 70px 0 !important;
+ padding: 20px 0 !important;
 }
 
 .right-float{
  float : right !important;
+}
+
+#site_search select.search_document_list{
+ width: 70px;
+}
+
+@media only screen and (min-width: 970px) {
+ #site_search select.search_document_list{
+  width: 170px;
+ }
+}
+
+#site_search input.search-element{
+ width: 120px;
+}
+
+
+@media only screen and (min-width: 970px) {
+ #path_by_module ul.list-line-ul li{
+  line-height:30px;
+
+ }
+}
+
+
+.form-modal.ui-dialog {
+ padding: 10px 20px;
+ border: 2px solid #FFF;
+ font-size: 14px;
+ min-width: 600px;
+ margin-top: 200px;
+ border-radius: 0px !important;
+ z-index: 1100;
+ background-color: rgba(233, 233, 233, 0.95);
+}
+
+.form-modal .ui-dialog-titlebar, .form-modal .ino-breadcrumb-simple{
+ display: none;
+}
+
+/*#path_by_module .list-line-ul a{
+        width: 210px;
+        display: inline-block;
+        margin: 10px 10px;
+        background-color: rgba(42, 147, 177, 0.89);
+        color: #fff;
+        padding: 8px 20px ;
+        font-size: 1.1em;
+        font-weight: bold;
+        text-align: left;     
+        border-radius : 10px;
+}*/
+
+#path_by_module {
+ margin-top: 20px;
+}
+
+#path_by_module a{
+ padding-left:5px;
+}
+
+#path_by_module  ul.child_menu > li  {
+ display: inline-block;
+ margin: 20px 20px 0px 0px;
+ vertical-align: top;
+ border: 2px solid #3E9CCA;
+ width: 340px; 
+}
+
+
+#path_by_module  ul.child_menu > li > a  {
+ color: #fff;
+ font-weight: bold;
+ display:flex;
+ width: 100% !important;
+ padding: 5px  ;
+ background-color: rgba(42, 147, 177, 0.89);   
+}
+
+
+
+@media only screen and (max-width: 970px) {
+ #path_by_module .list-line-ul li{
+  overflow: hidden;
+  display: inline-block;
+  margin: 10px;
+  background-color: rgba(42, 147, 177, 0.89);
+  padding: 8px 20px;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-align: left;
+  border-radius: 15px;
+  vertical-align: middle;
+  float: left;
+  min-width: 150px;
+ }
+
+ #path_by_module .list-line-ul a{
+  color: #fff;    
+ }
+
+ #path_by_module  ul.child_menu > li  {
+  width: 45% !important;
+  min-width: 240px; 
+ }
+}
+
+@media only screen and (min-width: 971px) {
+ #path_by_module .list-line-ul li{
+  background-color: #fff;
+ };
+
+ #path_by_module  ul.child_menu > li  {
+  width: 340px; 
+ }
 }

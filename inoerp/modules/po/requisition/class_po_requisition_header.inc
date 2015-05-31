@@ -19,7 +19,7 @@
   public static $primary_column = "po_requisition_header_id";
   public static $primary_column2 = "po_requisition_number";
   public static $key_column = 'bu_org_id';
-  public static $module = "po";
+  public static $module = "pur";
   public static $po_requisition_type_a = [
    'EXTERNAL' => 'External',
    'INTERNAL' => 'Internal'

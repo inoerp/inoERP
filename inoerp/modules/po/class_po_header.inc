@@ -22,7 +22,7 @@ class po_header extends dbObject {
  public static $primary_column2 = "po_number";
  public static $primary_column3 = "release_number";
  public static $key_column = 'supplier_id';
- public static $module = "po";
+ public static $module = "pur";
  public static $js_fileName = 'modules/po/js/multi_select.js';
  public static $system_info = [
   'name' => 'Purchasing',

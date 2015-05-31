@@ -33,7 +33,7 @@ background-color:rgba(123, 186, 81, 0.57);
 
 ul.tabMain li a{
  text-decoration:none;
- color:#000;
+ color:#000 !important;
  display:block;
  font-size:0.9em;
  /*border:1px solid #fff;*/

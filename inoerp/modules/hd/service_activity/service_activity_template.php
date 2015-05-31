@@ -6,10 +6,7 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php
-  $f = new inoform();
-  echo gettext('Service Activity')
-  ?></span>
+<div id ="form_header"><span class="heading"><?php   echo gettext('Service Activity')   ?></span>
  <form action=""  method="post" id="hd_service_activity_header"  name="hd_service_activity_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -81,9 +78,10 @@ inoERP
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Seq') ?>#</th>
         <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Business Org') ?></th>
         <th><?php echo gettext('Header Type') ?></th>
         <th><?php echo gettext('Line Type') ?></th>
-        <th><?php echo gettext('Description') ?>#</th>
+        <th><?php echo gettext('Description') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -99,9 +97,10 @@ inoERP
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('hd_service_activity_line_id'); ?></td>
+         <td><?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class_second->bu_org_id, '', '', 1); ?>						 </td>
          <td><?php echo $f->select_field_from_object('header_type_id', sd_document_type::find_all_header_levels(), 'sd_document_type_id', 'document_type_name', $$class_second->header_type_id, '', 'medium', 1, $readonly); ?></td>
          <td><?php echo $f->select_field_from_object('line_type_id', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class_second->line_type_id, '', 'medium', 1, $readonly); ?></td>
-         <td><?php $f->text_field_wid2r('description'); ?></td>
+         <td><?php $f->text_field_wid2('description'); ?></td>
         </tr>
         <?php
         $count = $count + 1;
@@ -123,7 +122,7 @@ inoERP
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
   <li class="primary_column_id" data-primary_column_id="hd_service_activity_header_id" ></li>
   <li class="form_header_id" data-form_header_id="hd_service_activity_header" ></li>
-  <li class="line_key_field" data-line_key_field="item_description" ></li>
+  <li class="line_key_field" data-line_key_field="header_type_id" ></li>
   <li class="single_line" data-single_line="false" ></li>
   <li class="form_line_id" data-form_line_id="hd_service_activity_line" ></li>
  </ul>
@@ -133,6 +132,6 @@ inoERP
   <li class="btn1DivId" data-btn1DivId="hd_service_activity_header" ></li>
   <li class="btn2DivId" data-btn2DivId="form_line" ></li>
   <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>
-  <li class="noOfTabbs" data-noOfTabbs="6" ></li>
+  <li class="noOfTabbs" data-noOfTabbs="1" ></li>
  </ul>
 </div>

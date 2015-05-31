@@ -18,7 +18,7 @@ class po_sourcing_rule_header extends dbObject {
  public static $primary_column = "po_sourcing_rule_header_id";
  public static $dependent_classes = ['po_sourcing_rule_line'];
  public static $key_column = 'sourcing_rule';
- public static $module = "po";
+ public static $module = "pur";
  public static $system_info = [
 		 'name' => 'Sourcing Rule',
 		 'number' => '2202',

@@ -583,7 +583,7 @@ class path extends dbObject {
     $url = $path->fullPath($child_paths->path_link);
     $path_name = gettext($child_paths->name);
     $path_description = gettext($child_paths->description);
-    $allPaths .= "<li title=\"$path_description\" class='expandable {$path->name} '>&nbsp;" . $fa_icon . '&nbsp;<a href="' . $url . '">' . $path_name . '</a>';
+    $allPaths .= "<li title=\"$path_description\" class='expandable {$path->name} '>&nbsp;" . '&nbsp;<a href="' . $url . '">' . $fa_icon .'&nbsp;' . $path_name . '</a>';
     $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths);
     $allPaths .= '</li>';
     unset($allowed_path_ids[$key]);

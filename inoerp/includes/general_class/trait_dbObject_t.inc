@@ -412,6 +412,18 @@ function __construct(){
   $result_array = static::find_by_sql($sql);
   return !empty($result_array) ? array_shift($result_array) : false;
  }
+ 
+  public static function find_by_oneColumn(array $colmn_details_ap) {
+   if(!empty($colmn_details_ap['column_name'])){
+    $column_name = $colmn_details_ap['column_name'];
+   }else{
+    return null;
+   }
+   $column_val = !empty($colmn_details_ap['column_value']) ? $colmn_details_ap['column_value'] : null;
+  $sql = "SELECT * FROM " . static::$table_name . " where `" . $column_name . "` ='{$column_val}'  ";
+  $result_array = static::find_by_sql($sql);
+  return !empty($result_array) ? $result_array : false;
+ }
 
  public static function find_by_keyColumn_all($columnName_val) {
   $sql = "SELECT * FROM " . static::$table_name . " where `" . static::$key_column . "` ='{$columnName_val}' ";

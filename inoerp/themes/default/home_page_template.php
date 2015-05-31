@@ -82,7 +82,7 @@ include_once("includes/functions/loader.inc");
   <script src="<?php echo HOME_URL; ?>includes/js/basics.js"></script>
   <script src="<?php echo HOME_URL; ?>includes/js/jssor.slider.mini.js"></script>
 
-   <?php
+  <?php
   if (!empty($js_file_paths)) {
    foreach ($js_file_paths as $key => $js_file) {
     ?>
@@ -94,103 +94,103 @@ include_once("includes/functions/loader.inc");
  </head>
  <body>
 
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div id="topbar" class="topbar clearfix ">
-   <div class="container">
-    <div class="row">
-     <?php
-     if ($showBlock) {
-      echo '<div id = "header_top" class = "clear"></div>';
-     }
-     ?>
-     <div class="col-lg-4 col-md-4 col-sm-4">
+  <nav class="navbar navbar-default navbar-fixed-top">
+   <div id="topbar" class="topbar clearfix ">
+    <div class="container">
+     <div class="row">
       <?php
-      $show_header_links = true;
-      if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
-       if (empty($current_page_path)) {
-        $current_page_path = thisPage_url();
-       }
-       $f->form_button_withImage($current_page_path);
-       $show_header_links = false;
+      if ($showBlock) {
+       echo '<div id = "header_top" class = "clear"></div>';
       }
       ?>
-      <?php if ($show_header_links) { ?>
-       <div class="social-icons">
-        <span><a class="fa fa-dashboard clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
-       </div><!-- end social icons -->
-      <?php } ?>
-
-     </div><!-- end columns -->
-
-     <div class="col-lg-8 col-md-8 col-sm-8 ">
-      <div class="topmenu">
-       <div class="topbar-login">
-        <?php if (!empty($_SESSION['login_status'])) { ?>
-         <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="fa fa-user"> </i><?php echo ' ' . ucfirst($_SESSION['username']); ?>
-           <span class="caret"></span></button>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-           <!--<li role="presentation" class="dropdown-header">Dropdown header 1</li>-->
-           <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL; ?>"><i class="fa fa-home"></i> Home</a></li>
-           <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user&mode=9&user_id=' . $_SESSION['user_id']; ?>"> My Details</a></li>
-           <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-tasks"></i> Activities</a></li>
-           <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'search.php?class_name=sys_notification_user'; ?>"><i class="fa fa-bell-slash-o"></i> Notification</a></li>
-           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-cog"></i> Configure</a></li>
-           <li role="presentation" class="divider"></li>
-           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'extensions/user/user_logout.php'; ?>"><i class="fa fa-sign-out"></i> LogOut</a></li>
-          </ul>
-         </div>
-
-         <?php
-        } else {
-         include_once 'extensions/user/popup_login/user_popup_login_template.php';
+      <div class="col-lg-4 col-md-4 col-sm-4">
+       <?php
+       $show_header_links = true;
+       if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
+        if (empty($current_page_path)) {
+         $current_page_path = thisPage_url();
         }
-        ?>
-       </div>
+        $f->form_button_withImage($current_page_path);
+        $show_header_links = false;
+       }
+       ?>
+       <?php if ($show_header_links) { ?>
+        <div class="social-icons">
+         <span><a class="fa fa-dashboard clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
+        </div><!-- end social icons -->
+       <?php } ?>
 
-      </div><!-- end top menu -->
-      <div class="callus">
-       <span class="topbar-email"><i class="fa fa-envelope"></i> <a href="<?php echo HOME_URL . 'content.php?mode=9&content_type=web_contact' ?>"><?php echo!empty($si->email) ? $si->email : 'contact@site.org' ?></a></span>
-       <span class="topbar-phone"><i class="fa fa-phone"></i> <a href="#"><?php echo!empty($si->phone_no) ? $si->phone_no : '1-111-1111' ?></a></span>
-      </div><!-- end callus -->
-     </div><!-- end columns -->
-    </div>
-   </div><!-- end container -->
-  </div><!-- end topbar -->
+      </div><!-- end columns -->
 
-  <header id="header-style-1">
-   <div class="container">
-    <nav class="navbar yamm navbar-default ">
-     <div class="navbar-header">
-      <img src="<?php
-      echo HOME_URL;
-      echo!empty($si->logo_path) ? $si->logo_path : 'files/logo.png'
-      ?>" class="logo_image" alt="logo"/>
-      <a href="<?php echo HOME_URL; ?>" class="navbar-brand"><?php echo!empty($si->site_name) ? $si->site_name : 'inoERP'; ?></a>
+      <div class="col-lg-8 col-md-8 col-sm-8 ">
+       <div class="topmenu">
+        <div class="topbar-login">
+         <?php if (!empty($_SESSION['login_status'])) { ?>
+          <div class="dropdown">
+           <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="fa fa-user"> </i><?php echo ' ' . ucfirst($_SESSION['username']); ?>
+            <span class="caret"></span></button>
+           <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+            <!--<li role="presentation" class="dropdown-header">Dropdown header 1</li>-->
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL; ?>"><i class="fa fa-home"></i> Home</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user&mode=9&user_id=' . $_SESSION['user_id']; ?>"> My Details</a></li>
+            <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-tasks"></i> Activities</a></li>
+            <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'search.php?class_name=sys_notification_user'; ?>"><i class="fa fa-bell-slash-o"></i> Notification</a></li>
+            <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-cog"></i> Configure</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'extensions/user/user_logout.php'; ?>"><i class="fa fa-sign-out"></i> LogOut</a></li>
+           </ul>
+          </div>
+
+          <?php
+         } else {
+          include_once 'extensions/user/popup_login/user_popup_login_template.php';
+         }
+         ?>
+        </div>
+
+       </div><!-- end top menu -->
+       <div class="callus">
+        <span class="topbar-email"><i class="fa fa-envelope"></i> <a href="<?php echo HOME_URL . 'content.php?mode=9&content_type=web_contact' ?>"><?php echo!empty($si->email) ? $si->email : 'contact@site.org' ?></a></span>
+        <span class="topbar-phone"><i class="fa fa-phone"></i> <a href="#"><?php echo!empty($si->phone_no) ? $si->phone_no : '1-111-1111' ?></a></span>
+       </div><!-- end callus -->
+      </div><!-- end columns -->
      </div>
-     <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right">
-      <ul class="nav nav-pills">
-       <li><a href="http://inoideas.org/content/demo" >Demo <div class="arrow-up"></div></a></li>
-       <li><a href="https://github.com/inoerp/inoERP" >Download <div class="arrow-up"></div></a></li>
-       <li class="active"><a href="<?php echo HOME_URL; ?>content.php?mode=9&content_type=forum&category_id=7" ><i class="fa fa-comments-o"></i> Ask a Question <div class="arrow-up"></div></a></li>
-       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
-       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
-       <li role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-         More <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu" role="menu">
-         <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
-         <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47">About <div class="arrow-up"></div></a> </li><!-- end drop down -->
-        </ul>
-       </li>
-      </ul><!-- end navbar-nav -->
-     </div><!-- #navbar-collapse-1 -->			
-    </nav>
-   </div><!-- end container -->
-  </header><!-- end header-style-1 -->
-</nav>
+    </div><!-- end container -->
+   </div><!-- end topbar -->
+
+   <header id="header-style-1">
+    <div class="container">
+     <nav class="navbar yamm navbar-default ">
+      <div class="navbar-header">
+       <img src="<?php
+       echo HOME_URL;
+       echo!empty($si->logo_path) ? $si->logo_path : 'files/logo.png'
+       ?>" class="logo_image" alt="logo"/>
+       <a href="<?php echo HOME_URL; ?>" class="navbar-brand"><?php echo!empty($si->site_name) ? $si->site_name : 'inoERP'; ?></a>
+      </div>
+      <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right">
+       <ul class="nav nav-pills">
+        <li><a href="http://inoideas.org/content/demo" >Demo <div class="arrow-up"></div></a></li>
+        <li><a href="https://github.com/inoerp/inoERP" >Download <div class="arrow-up"></div></a></li>
+        <li class="active"><a href="<?php echo HOME_URL; ?>content.php?mode=9&content_type=forum&category_id=7" ><i class="fa fa-comments-o"></i> Ask a Question <div class="arrow-up"></div></a></li>
+        <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
+        <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
+        <li role="presentation" class="dropdown">
+         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+          More <span class="caret"></span>
+         </a>
+         <ul class="dropdown-menu" role="menu">
+          <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
+          <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47">About <div class="arrow-up"></div></a> </li><!-- end drop down -->
+         </ul>
+        </li>
+       </ul><!-- end navbar-nav -->
+      </div><!-- #navbar-collapse-1 -->			
+     </nav>
+    </div><!-- end container -->
+   </header><!-- end header-style-1 -->
+  </nav>
   <?php
   if ($showBlock) {
    echo '<div id="header_bottom"></div>';
@@ -210,13 +210,17 @@ include_once("includes/functions/loader.inc");
   ?>
   <!-- end grey-wrapper -->
   <div class="jt-shadow grey-wrapper first_content padding-top content_summary">
-     <div class="make-center wow fadeInUp animated" style="visibility: visible;">
+   <div class="make-center wow fadeInUp animated" style="visibility: visible;">
     <div class="container">
-    
      <div id="structure">
+<!--      <a class="list-header" href="http://localhost/inoerp/form.php?class_name=po_requisition_header&amp;mode=9">&nbsp;<i class="fa fa-dot-circle-o"></i> &nbsp; Requisition</a>
+      <div id='form-modal'>
+       Form Here
+       <div id='mod-structure'> </div>
+       <div id='mod-header_top_container'> </div>
+      </div>-->
+
       <?php
-//      pa($_SESSION['user_profile']);
-//      pa(get_declared_classes());
       $content = new content();
       $subject_no_of_char = 50;
       $summary_no_of_char = 300;
@@ -309,5 +313,95 @@ include_once("includes/functions/loader.inc");
   echo $f->hidden_field_withId('home_url', HOME_URL);
   echo $si->analytics_code;
   ?>
+  <script>
+           $(document).ready(function () {
+   dialog = $("#form-modal").dialog({
+   autoOpen: false,
+           height: 500,
+           width: 900,
+           modal: true,
+           buttons: {
+                   Cancel: function () {
+                   dialog.dialog("close");
+                   }
+           },
+           close: function () {
+           form[ 0 ].reset();
+                   allFields.removeClass("ui-state-error");
+           }
+   });
+           $("#structure a.list-header").on("click", function(e) {
+   e.preventDefault();
+           var urlLink = $(this).attr('href');
+           var urlLink_a = urlLink.split('?');
+           var urlLink_firstPart_a = urlLink_a[0].split('/');
+           var pageType = urlLink_firstPart_a.pop();
+           if (pageType == 'form.php') {
+   var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
+   } else if (pageType == 'program.php') {
+   var formUrl = 'includes/json/json_program.php?' + urlLink_a[1];
+   } else {
+   var formUrl = urlLink;
+   }
+   
+   $.when(getModalFormDetails(formUrl)).then(
+    dialog.dialog("open"));
+           
+   });
+   });
+   
+   
+   function getModalFormDetails(url) {
+ return $.ajax({
+  url: url,
+  type: 'get',
+  data: {
+  },
+  beforeSend: function () {
+   $('#overlay').css('display', 'block');
+  },
+  complete: function () {
+
+  }
+ }).done(function (result) {
+  var newContent = $(result).find('div#structure').html();
+  var allButton = $(result).find('div#header_top_container #form_top_image').html();
+  if (typeof allButton === 'undefined') {
+   allButton = '';
+  }
+  var commentForm = $(result).find('div#comment_form').html();
+  if (newContent) {
+   $('#mod-structure').replaceWith('<div id="mod-structure">' + newContent + '</div>');
+   $('#mod-header_top_container').replaceWith('<div id="mod-header_top_container"> <ul id="form_top_image" class="draggable">' + allButton + '</ul></div>');
+   $('#display_comment_form').append(commentForm);
+   if ($(result).find('div#document_history').html()) {
+    $('#document_history').replaceWith('<div id="document_history">' + $(result).find('div#document_history').html() + '</div>');
+   }
+   var homeUrl = $('#home_url').val();
+
+   $(result).find('#js_files').find('li').each(function () {
+    $.getScript($(this).html());
+   });
+   $(result).find('ul#css_files').find('li').each(function () {
+    var filePath = $(this).html();
+    if (!$("link[href='" + filePath + "']").length) {
+     $('<link href="' + filePath + '" rel="stylesheet">').appendTo("head");
+    }
+   });
+   $.getScript(homeUrl + "includes/js/reload.js").done(function () {
+    $('#overlay').css('display', 'none');
+   });
+  } else {
+   $('#overlay').css('display', 'none');
+  }
+
+ }).fail(function () {
+  alert("Form loading failed!");
+  $('#overlay').css('display', 'none');
+ });
+}
+
+
+  </script>
  </body>
 </html>

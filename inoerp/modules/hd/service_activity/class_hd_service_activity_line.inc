@@ -5,12 +5,12 @@ class hd_service_activity_line extends dbObject {
  public static $table_name = "hd_service_activity_line";
  public static $primary_column = "hd_service_activity_line_id";
  public static $parent_primary_column = "hd_service_activity_header_id";
- public static $key_column = 'line_number';
+ public static $key_column = 'header_type_id';
  public static $module = "hd";
  public $field_a = [
   'hd_service_activity_line_id',
   'hd_service_activity_header_id',
-  'org_id',
+  'bu_org_id',
   'header_type_id',
   'line_type_id',
   'description',
@@ -21,7 +21,7 @@ class hd_service_activity_line extends dbObject {
  ];
  public $requiredField = [
   'hd_service_activity_header_id',
-  'org_id'
+  'bu_org_id'
  ];
 
  public $fields_inHeader_needsToBeInserted_inPOST = [
@@ -30,7 +30,7 @@ class hd_service_activity_line extends dbObject {
  
  public $hd_service_activity_line_id;
  public $hd_service_activity_header_id;
- public $org_id;
+ public $bu_org_id;
  public $header_type_id;
  public $line_type_id;
  public $description;

@@ -349,7 +349,6 @@ class Hybrid_Auth
 	public static function redirect( $url, $mode = "PHP" )
 	{
 		Hybrid_Logger::info( "Enter Hybrid_Auth::redirect( $url, $mode )" );
-
 		if( $mode == "PHP" ){
 			header( "Location: $url" ) ;
 		}

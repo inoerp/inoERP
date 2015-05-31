@@ -20,7 +20,7 @@ class po_asl_header extends dbObject {
  public static $primary_column = "po_asl_header_id";
  public static $dependent_classes = ['po_asl_line'];
  public static $key_column = 'description';
- public static $module = "po";
+ public static $module = "pur";
  public static $system_info = [
   'name' => 'ASL',
   'number' => '2203',

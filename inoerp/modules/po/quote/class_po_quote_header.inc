@@ -19,7 +19,7 @@
   public static $primary_column = "po_quote_header_id";
   public static $primary_column2 = "quote_number";
   public static $key_column = 'po_rfq_header_id';
-  public static $module = "po";
+  public static $module = "pur";
   public static $js_fileName = 'modules/po/js/multi_select.js';
   public static $system_info = [
    'name' => 'Quote',

@@ -15,7 +15,7 @@
   public static $table_name = "po_purchasing_control";
   public static $primary_column = "po_purchasing_control_id";
   public static $key_column = 'org_id';
-  public static $module = "po";
+  public static $module = "pur";
   public static $system_info = [
    'name' => 'Purchasing Control',
    'number' => '2201',
