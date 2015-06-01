@@ -907,11 +907,11 @@ ul.form_top li, ul#form_top_image li{
 
 #form_top_image li a, #form_top_image .fa-refresh{
  color: #246204;
- font-size: 22px;
+ font-size: 18px;
 }
 
 ul#form_top_image li {
- font-size: 22px;
+ font-size: 18px;
  font-style: normal;
  color: #246204;
  margin-left: 10px;
@@ -1034,7 +1034,7 @@ ul.line_field li{
 }
 
 ul.header_field li label{
- width: 120px;
+ width: 135px;
 }
 
 /*CSS Arrows*/
@@ -2026,10 +2026,10 @@ ul.single-column li{
  border: 2px solid #FFF;
  font-size: 14px;
  min-width: 600px;
- margin-top: 200px;
+ margin-top: 60px !important;
  border-radius: 0px !important;
  z-index: 1100;
- background-color: rgba(233, 233, 233, 0.95);
+ background-color: #fff;
 }
 
 .form-modal .ui-dialog-titlebar, .form-modal .ino-breadcrumb-simple{
@@ -2111,4 +2111,46 @@ ul.single-column li{
  #path_by_module  ul.child_menu > li  {
   width: 340px; 
  }
+}
+
+#mod-structure {
+ font-size: 0.9em;
+}
+
+.ui-dialog-buttonset{
+ top: 5px;
+ /*position: absolute;*/
+}
+
+#form-modal button.close {
+ padding: 0px;
+ cursor: pointer;
+ background: transparent none repeat scroll 0% 0%;
+ border: 0px none;
+ background-color: rgba(146, 41, 89, 0.9);
+ padding: 5px;
+ color: #fff;
+ border-radius: 3px;
+}
+
+#form-modal .close {
+ float: right;
+ font-size: 11px;
+ font-weight: bold;
+ line-height: 1;
+ opacity: 1;
+ text-shadow: unset;
+}
+
+.img-button{
+ padding: 0px;
+ cursor: pointer;
+ background: transparent none repeat scroll 0% 0%;
+ border: 0px none;
+ background-color: rgba(182, 26, 114, 0.78);
+ padding: 2px 10px;
+ color: #FFF;
+ border-radius: 3px;
+ font-size: 11px;
+ height: 24px;
 }

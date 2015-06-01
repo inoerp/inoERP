@@ -234,6 +234,25 @@ class inoform {
  public $action_message = 'Comments';
  public $column_array_s;
 
+ public static function form_button_withImage_new1($current_page_path = "", $homeUrl = '') {
+  $home_url_wos = rtrim(HOME_URL, '/');
+  $homeUrl = empty($homeUrl) ? $home_url_wos : $homeUrl;
+  if (empty($current_page_path)) {
+   $current_page_path = thisPage_url();
+  }
+  echo <<<EOD
+			 <ul id="form_top_image" class="draggable">
+      	<li id='refresh_buttonsave' title='Refresh & Reload The Page'><button type="button" class="img-button"><i class='fa fa-refresh'></i>Refresh</button></li>
+        <li><a class='img-button clickable' Title="Create a New Document" id="new_page_button" href="$current_page_path"><i class="fa fa-file-text-o"></i> New</a></li>
+    		<li id='save' title='Save The Form'><button type="button" class="img-button"><i class='fa fa-save'></i> Save</button></li>
+        <li><a class='fa fa-eraser clickable' Title="Clear All, Quick Entry" id="new_object_button" href="$current_page_path"></a></li>
+        <li class='fa fa-trash-o clickable' id='delete_button' title='Delete'></li>
+        <li class='fa fa-remove clickable' id='remove_row_button' title='Remove'></li>
+        <li class='fa fa-print clickable print' id='print_searchResult' title='Print'></li>
+</ul>
+EOD;
+ }
+
  public static function form_button_withImage($current_page_path = "", $homeUrl = '') {
   $home_url_wos = rtrim(HOME_URL, '/');
   $homeUrl = empty($homeUrl) ? $home_url_wos : $homeUrl;
@@ -249,35 +268,6 @@ class inoform {
         <li class='fa fa-trash-o clickable' id='delete_button' title='Delete'></li>
         <li class='fa fa-remove clickable' id='remove_row_button' title='Remove'></li>
         <li class='fa fa-print clickable print' id='print_searchResult' title='Print'></li>
-</ul>
-EOD;
- }
-
- public static function form_button_withImage_xx($current_page_path = "", $homeUrl = '') {
-  $home_url_wos = rtrim(HOME_URL, '/');
-  $homeUrl = empty($homeUrl) ? $home_url_wos : $homeUrl;
-  if (empty($current_page_path)) {
-   $current_page_path = thisPage_url();
-  }
-  echo <<<EOD
-			 <ul id="form_top_image" class="draggable">
-        <li class="show_loading_small"><img src="$homeUrl/themes/images/form/small_loading_bar.gif"></li>	
-        <li><input type="button" class="button_image"  name="refresh"/>
-				 <img src="$homeUrl/themes/images/form/refresh.png" id="refresh_button" alt="Refresh" Title="Refresh" class="showPointer"></li>
-				<li><a id="new_object_button" href="$current_page_path">
-				 <img src="$homeUrl/themes/images/form/new_object.png" alt="Quick Entry" Title="Quick Entry" class="showPointer"></a> </li> 
-				<li><a id="new_page_button" href="$current_page_path">
-				 <img src="$homeUrl/themes/images/form/new_line.png" alt="New Entry" Title="New Entry" class="showPointer"></a> </li> 
-				<li><input type="button" class="button_image save" name="save" id="save_button">
-				 <img src="$homeUrl/themes/images/form/save.png" id="save" alt="Save" Title="Save" class="showPointer"></li>
-				<li><input type="button" class="button_image delete"  name="delete_row" id="delete_row">
-				 <img src="$homeUrl/themes/images/form/delete.png" id="delete_button" alt="Delete" Title="Delete" class="showPointer"></li>
-        <li><input type="button" class="button_image remove_row" name="remove_row" >
-				 <img src="$homeUrl/themes/images/form/remove.png" id="remove_row_button" alt="Remove" Title="Remove" class="showPointer"></li>
-        <li><input type="reset" class="button_image reset"  name="reset" Value="Rese*t">
-				 <img src="$homeUrl/themes/images/form/reset.png" id="reset_button" alt="Reset" Title="Reset" class="showPointer"></li>
-             <li><input type="button" class="button_image print clickable showPointer"  name="print"/>
-				 <img src="$homeUrl/files/images/print.png" id="refresh_button" alt="print" Title="Print" class="print showPointer" id='print_searchResult'></li>
 </ul>
 EOD;
  }
@@ -598,7 +588,7 @@ EOD;
   echo $this->address_field_wid($field_name, $div_class);
  }
 
- public function contact_field($ref_table, $reference_id='', $all_contacts = '') {
+ public function contact_field($ref_table, $reference_id = '', $all_contacts = '') {
   global $f;
   if (!empty($all_contacts)) {
    $_SESSION['comment_reference_table'] = $ref_table;

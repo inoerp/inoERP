@@ -4615,6 +4615,10 @@ $(document).ready(function () {
 // var offsetLeft = $("#erp_form_area")[0].offsetLeft;
 // var dWidth = $("#erp_form_area")[0].clientWidth;
 // var dHeight = $("#erp_form_area")[0].clientHeight;
+// 
+// $('body').on('click', '.close-modal', function(){
+//    dialog.dialog("close");
+// });
 //
 // dialog = $("#form-modal").dialog({
 //  autoOpen: false,
@@ -4624,7 +4628,7 @@ $(document).ready(function () {
 //  draggable: true,
 //  title: '',
 //  dialogClass: "form-modal",
-//  position: { my: 'center ', at: 'center', of :'#header_top_quick_nav' },
+//  position: {my: 'center ', at: 'center', of: '#header_top_quick_nav'},
 //  buttons: {
 //   Cancel: function () {
 //    dialog.dialog("close");
@@ -4632,6 +4636,12 @@ $(document).ready(function () {
 //  },
 //  close: function () {
 //   dialog.dialog("close");
+//  },
+//  hide: function () {
+//   $(this).slideDown();
+//  },
+//  show: function () {
+//   $(this).slideUp();
 //  }
 // });
 // $("#path_by_module a").on("click", function (e) {

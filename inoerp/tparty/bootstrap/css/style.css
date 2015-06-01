@@ -4444,55 +4444,65 @@ table.document_table input{
 }
 
 
-#erp_form_area input.seq_number, #erp_form_area input.small,  #erp_form_area input.detail_seq_number{
+#erp_form_area input.seq_number, #erp_form_area input.small,  #erp_form_area input.detail_seq_number,
+#form-modal input.seq_number, #form-modal input.small,  #form-modal input.detail_seq_number{
  width: 40px;
 }
 
-#erp_form_area input.date,#erp_form_area input.medium, #form_line td input.medium{
+#erp_form_area input.date,#erp_form_area input.medium, #form_line td input.medium,
+#form-modal input.date,#form-modal input.medium, #form_line td input.medium{
  width: 90px;
 }
 
-#erp_form_area input.large{
+#erp_form_area input.large,
+#form-modal input.large{
  width: 140px;
 }
 
-#erp_form_area input.xlarge{
+#erp_form_area input.xlarge,
+#form-modal input.xlarge{
  width: 180px !important;
 }
 
-#erp_form_area input.xxlarge{
+#erp_form_area input.xxlarge,
+#form-modal input.xxlarge{
  width: 220px !important;
 }
 
 #erp_form_area input[type=text],#erp_form_area input[type=password], #erp_form_area input[type=date], #erp_form_area input[type=textarea],
-#erp_form_area input[type=number], #erp_form_area input[type=search], #erp_form_area checkbox, #erp_form_area radio button
+#erp_form_area input[type=number], #erp_form_area input[type=search], #erp_form_area checkbox, #erp_form_area radio button,
+#form-modal input
 {
- height: 20px;
+ height: 24px;
  /*padding: 3px 2px;*/
  /*border: 1px solid #eee;*/
  border: 1px solid #e6e8ea;
 }
 
 #erp_form_area li input[type=text], #erp_form_area li input[type=date],#erp_form_area li input[type=textarea],
-#erp_form_area li input[type=number]
+#erp_form_area li input[type=number], #form-modal li input[type=text], #form-modal li input[type=date],#form-modal li input[type=textarea],
+#form-modal li input[type=number]
 {
  border-radius: 5px;
 }
 
-#erp_form_area select{
- height: 20px;
+#erp_form_area select, #form-modal select{
+ height: 24px;
  /*   border: 1px solid #e6e8ea;
    border-radius: 5px;*/
 }
 
-#erp_form_area .select.medium{
+#erp_form_area .select.medium,
+#form-modal .select.medium{
  width: 10em;
 }
 
-#erp_form_area .select.small{
+#erp_form_area .select.small,
+#form-modal .select.small{
  width: 5em;
 }
-#erp_form_area .select.large{
+#erp_form_area .select.large,
+#form-modal .select.large{
  width: 20em;
 }
 
@@ -4545,13 +4555,17 @@ a.show {
  }
 }
 
+.navbar-fixed-top, .navbar-fixed-bottom{
+ z-index: 1200;
+}
+
 @media (min-width: 768px) {
  .sidebar {
   position: fixed;
   top: 60px;
   bottom: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 1200;
   display: block;
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */

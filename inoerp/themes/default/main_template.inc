@@ -231,6 +231,7 @@
     <div id="content">
      <div id="structure">
       <div id='form-modal'>
+<!--       <button type="button" class="close close-modal">Close <span aria-hidden="true">&times;</span></button>-->
        <div id='mod-header_top_container'> </div>
        <div id='mod-structure'> </div>
 

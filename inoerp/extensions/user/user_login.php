@@ -1,14 +1,10 @@
 <?php include_once __DIR__ . '/../../includes/basics/basics.inc'; ?>
 <?php
-
-if ($session->login_status()) {
+ if ($session->login_status()) {
  redirect_to(HOME_URL);
 }
 ?>
 <?php
-
-global $dbc;
-global $session;
 if (!isset($msg)) {
  $msg = '';
 }
@@ -53,8 +49,8 @@ If (isset($_REQUEST["provider"])) {
  try {
   // inlcude HybridAuth library
   // change the following paths if necessary 
-  $config = __DIR__ . '/../../tparty/extensions/social_login/hybridauth/config.php';
-  require_once( __DIR__ . "/../../tparty/extensions/social_login/hybridauth/Hybrid/Auth.php" );
+  $config = HOME_DIR . '/tparty/extensions/social_login/hybridauth/config.php';
+  require_once( HOME_DIR . "/tparty/extensions/social_login/hybridauth/Hybrid/Auth.php" );
 
   // initialize Hybrid_Auth class with the config file
   $hybridauth = new Hybrid_Auth($config);
