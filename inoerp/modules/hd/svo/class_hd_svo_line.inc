@@ -1,14 +1,16 @@
 <?php
 
-class hd_ro_line extends dbObject {
+class hd_svo_line extends dbObject {
 
- public static $table_name = "hd_ro_line";
- public static $primary_column = "hd_ro_line_id";
- public static $parent_primary_column = "hd_ro_header_id";
- public static $key_column = 'line_number';
+ public static $table_name = "hd_svo_line";
+ public static $primary_column = "hd_svo_line_id";
+ public static $parent_primary_column = "hd_svo_header_id";
+ public static $key_column = 'item_id_m';
  public static $module = "sd";
- public $checkbox = [
-  "rev_enabled_cb"
+ public static $action_a = [
+  "PROCESS" => 'Process Order',
+  "BOOK" => 'Book Order',
+  "CANCEL" => 'Cancel Order',
  ];
  public $line_status_a = [
   'ENTERED' => 'Entered',
@@ -20,140 +22,101 @@ class hd_ro_line extends dbObject {
   'CLOSED' => 'Closed',
  ];
  public $field_a = [
-  'hd_ro_line_id',
-  'hd_ro_header_id',
-  'line_type',
+  'hd_svo_line_id',
+  'hd_svo_header_id',
   'line_number',
+  'inv_org_id',
+  'sd_so_header_id',
+  'sd_so_line_id',
   'item_id_m',
-  'shipping_org_id',
-  'line_status',
-  'requested_date',
-  'promise_date',
-  'schedule_ship_date',
-  'actual_ship_date',
-  'item_description',
-  'line_description',
-  'uom_id',
-  'line_quantity',
-  'picked_quantity',
-  'shipped_quantity',
-  'invoiced_quantity',
+  'quantity',
+  'action_type_id',
+  'status',
   'price_list_header_id',
   'price_date',
   'unit_price',
   'line_price',
+  'line_status',
+  'requested_date',
+  'promise_date',
+  'schedule_ship_date',
   'reference_doc_type',
+  'reference_doc_number',
+  'line_type',
   'supply_source',
   'destination_type',
-  'tax_code_id',
-  'tax_amount',
-  'gl_line_price',
-  'gl_tax_amount',
-  'reference_doc_number',
-  'ar_transaction_header_id',
-  'ar_transaction_line_id',
-  "kit_cb",
-  'kit_configured_cb',
-  'bom_config_header_id',
-  'wip_wo_header_id',
-  "created_by",
-  "creation_date",
-  "last_update_by",
-  "last_update_date"
- ];
- public $initial_search = [
-  "hd_ro_header_id",
-  "so_number",
-  "item_id_m",
-  "item_number",
-  "item_description"
- ];
- public $column = [
-  "hd_ro_header_id",
-  "so_number",
-  "item_id_m",
-  "item_number",
-  "item_description"
+  'line_description',
+  'uom_id',
+  'return_reason',
+  'created_by',
+  'creation_date',
+  'last_update_by',
+  'last_update_date',
  ];
  public $requiredField = [
-  'hd_ro_header_id',
+  'hd_svo_header_id',
   'line_number',
-  'item_description'
+  'inv_org_id',
+  'item_id_m',
+  'quantity'
  ];
- 
-  public $numberField = [
-  'exchange_rate',
-  'line_quantity',
-  'unit_price',
-  'line_price',
-  'gl_line_price',
-  'gl_tax_amount'
- ];
-  
  public $fields_inForm_notInDataBase = [
-  "so_number",
+  "svo_number",
   "item_number",
   'tax_code_value',
-  'ar_transaction_number'
+  'ar_transaction_number',
+  'item_description',
+  'so_number',
+  'so_line_number',
+  'action'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "hd_ro_header_id"
+  "hd_svo_header_id"
  ];
- public $notUpdatedFromWebForm = [
-  'actual_ship_date',
- ];
- public $hd_ro_line_id;
- public $hd_ro_header_id;
- public $line_type;
+ public $hd_svo_line_id;
+ public $hd_svo_header_id;
  public $line_number;
+ public $inv_org_id;
  public $item_id_m;
- public $item_description;
- public $line_description;
- public $uom_id;
- public $line_quantity;
- public $picked_quantity;
- public $shipped_quantity;
- public $invoiced_quantity;
+ public $quantity;
+ public $hd_service_type_header_id;
+ public $sd_so_header_id;
+ public $sd_so_line_id;
+ public $action_type_id;
+ public $status;
  public $price_list_header_id;
  public $price_date;
  public $unit_price;
  public $line_price;
- public $tax_code_id;
- public $tax_amount;
-  public $gl_tax_amount; 
- public $gl_line_price;
- public $reference_doc_type;
- public $reference_doc_number;
- public $ar_transaction_header_id;
- public $ar_transaction_line_id;
- public $supply_source;
- public $destination_type;
- public $kit_configured_cb;
- public $kit_cb;
- public $bom_config_header_id;
- public $wip_wo_header_id;
- public $po_status;
- public $rev_enabled_cb;
- public $rev_number;
- public $created_by;
- public $creation_date;
- public $last_update_by;
- public $last_update_date;
- public $shipping_org_id;
  public $line_status;
  public $requested_date;
  public $promise_date;
  public $schedule_ship_date;
- public $actual_ship_date;
+ public $reference_doc_type;
+ public $reference_doc_number;
+ public $line_type;
+ public $supply_source;
+ public $destination_type;
+ public $line_description;
+ public $uom_id;
+ public $return_reason;
+ public $created_by;
+ public $creation_date;
+ public $last_update_by;
+ public $last_update_date;
  public $time;
  public $msg;
  public $item_number;
  public $tax_code_value;
  public $ar_transaction_number;
+ public $item_description;
+ public $action;
+ public $so_number;
+ public $so_line_number;
 
  private function _validate_before_save() {
   $ret = 1;
-  $item = item::find_by_orgId_item_id_m($this->item_id_m, $this->shipping_org_id);
+  $item = item::find_by_orgId_item_id_m($this->item_id_m, $this->inv_org_id);
   if ($item) {
    if (empty($item->customer_ordered_cb)) {
     $ret = -90;
@@ -164,13 +127,6 @@ class hd_ro_line extends dbObject {
    echo "<br> The item is not assigned to the organization";
   }
 
-  if (!empty($this->kit_cb) && empty($this->bom_config_header_id)) {
-   $ret = -90;
-   echo "<br><div class='message'><div class='alert alert-danger'>Sales line is not saved as selected <strong>configured item has no configuration.</strong></div> "
-   . "<br>Select configuration & save again.</div>";
-  } else if (empty($this->bom_config_header_id) && !empty($this->kit_cb) && !empty($this->bom_config_header_id)) {
-   $this->bom_config_header_id = 1;
-  }
   return $ret;
  }
 
@@ -179,27 +135,9 @@ class hd_ro_line extends dbObject {
    return -90;
   }
 
-  if (!(empty($this->shipping_org_id))) {
-   if (!(empty($this->item_number))) {
-    $item_s = item::find_by_itemNumber_orgId($this->item_number, $this->shipping_org_id);
-    $this->item_id_m = $item_s->item_id_m;
-   }
-  } else {
-   echo "<br> Saving line data failed!. No shipping organization. Error @ po_line @" . __LINE__;
-   return -99;
-  }
-
-  if ((empty($this->line_status)) && (!empty($this->schedule_ship_date))) {
-   $this->line_status = $this->line_quantity < 0 ? 'AWAITING_RETURN' : 'AWAITING_PICKING';
-   echo "<div class='alert alert-danger'>Line status is updated to <strong> ".$this->line_status.".</strong></div> ";
-  } else if (($this->line_status = 'ENTERED') && (!empty($this->schedule_ship_date))) {
-   $this->line_status = $this->line_quantity < 0 ? 'AWAITING_RETURN' : 'AWAITING_PICKING';
-  } else if ((empty($this->line_status)) && (empty($this->schedule_ship_date))) {
-   $this->line_status = 'ENTERED';
-  }
-
-  if ((empty($this->supply_source))) {
-   $this->supply_source = 'INV';
+  if ((empty($this->line_status)) && (empty($this->sd_so_line_id))) {
+   $this->line_status = 'PENDING_IMPORT';
+   echo "<div class='alert alert-danger'>Line status is updated to <strong> " . $this->line_status . ".</strong></div> ";
   }
  }
 
@@ -221,17 +159,17 @@ class hd_ro_line extends dbObject {
   return !empty($result_array) ? $result_array : false;
  }
 
- Public static function hd_ro_line_types() {
+ Public static function hd_svo_line_types() {
   $option_header = option_header::find_by_name('PO_LINE_TYPE');
   $po_types = option_line::find_by_option_id($option_header->option_header_id);
   return $po_types;
  }
 
- public static function find_by_hd_ro_headerId($hd_ro_header_id) {
-  $sql = "SELECT * FROM " . self::$table_name . " where hd_ro_header_id = '{$hd_ro_header_id}'";
-  $result_array = self::find_by_sql($sql);
-  return $result_array;
- }
+// public static function find_by_hd_ro_headerId($hd_ro_header_id) {
+//  $sql = "SELECT * FROM " . self::$table_name . " where hd_ro_header_id = '{$hd_ro_header_id}'";
+//  $result_array = self::find_by_sql($sql);
+//  return $result_array;
+// }
 
  public static function find_by_orgId_itemId_ssd($org_id, $item_id_m = '', $ssd = '') {
   $sql = " SELECT * FROM ";
@@ -248,27 +186,7 @@ class hd_ro_line extends dbObject {
   return !empty($result_array) ? $result_array : false;
  }
 
- public function copy($hd_ro_line_id) {
-  global $db;
-  $sql1 = " CREATE TEMPORARY TABLE tmptable SELECT * FROM hd_ro_line WHERE `hd_ro_line_id` = '{$hd_ro_line_id}' ";
-  if ($db->query($sql1)) {
-   $sql2 = "  UPDATE tmptable SET `hd_ro_line_id` = '' ,
-           `org_id` = '{$this->org_id}' 
-          WHERE `hd_ro_line_id` = '{$hd_ro_line_id}' ";
-   if ($db->query($sql2)) {
-    $sql3 = " INSERT INTO `hd_ro_line` SELECT * FROM tmptable WHERE `hd_ro_line_id` = '' ";
-    if ($db->query($sql3)) {
-     $this->hd_ro_line_id = $db->insert_id();
-     $this->msg = 1;
-    } else {
-     $this->msg = 0;
-    }
-   }
-  }
-  return $this->msg;
- }
-
 }
 
-//end of hd_ro_line class
+//end of hd_svo_line class
 ?>

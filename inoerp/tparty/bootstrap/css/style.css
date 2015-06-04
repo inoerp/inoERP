@@ -4010,8 +4010,9 @@ ul.column li label,
 .four_column ul li, 
 .four_column ul li label{
  display : inline-block;
- font-size : 0.9em;
+ font-size : 0.95em;
  margin-bottom: 3px;
+ font-weight: normal;
 
 }
 
@@ -4684,7 +4685,7 @@ table th {
 }
 
 table th {
- background-color: rgba(204, 187, 187, 0.2);
+background-color: rgba(147, 160, 164, 0.17);
 }
 
 table tr {

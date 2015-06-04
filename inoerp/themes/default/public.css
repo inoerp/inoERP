@@ -2154,3 +2154,29 @@ ul.single-column li{
  font-size: 11px;
  height: 24px;
 }
+
+.header_field li {
+/*    padding: 3px 0px;
+    background : #fff;
+    background: rgba(140, 173, 180, 0.09);
+    color: #333;*/
+}
+
+.big_popover .popover{
+        z-index: 1220;
+}
+
+ .tabContainer{
+background-color: rgba(233, 237, 237, 0.32) !important;
+}
+
+#navigation_bar, .sidebar{
+ background-color: rgba(233, 237, 237, 1) !important;
+}
+
+.m-margin-top-20{
+ margin-top: -20px;
+}
+.margin-left-20{
+ margin-left: 20px;
+}

@@ -11,94 +11,87 @@
 
 /**
  * hd_ro_header CLass
- * Contains all the hd_ro_header information, such as - document_type, so_number, ar_customer_id
+ * Contains all the hd_svo_header information, such as - document_type, so_number, ar_customer_id
  *
  */
-class hd_ro_header extends dbObject {
+class hd_svo_header extends dbObject {
 
- public static $table_name = "hd_ro_header";
- public static $dependent_classes = ['hd_ro_line'];
- public static $primary_column = "hd_ro_header_id";
- public static $primary_column2 = "so_number";
+ public static $table_name = "hd_svo_header";
+ public static $dependent_classes = ['hd_svo_line', 'hd_svo_estimates'];
+ public static $primary_column = "hd_svo_header_id";
+ public static $primary_column2 = "order_number";
  public static $key_column = 'ar_customer_id';
- public static $module = "sd";
+ public static $module = "hd";
  public static $system_info = [
-  'name' => 'Sales Order',
+  'name' => 'Service Order',
   'number' => '2301',
-  'description' => 'Create & Mainten Sales Order',
+  'description' => 'Create & Mainten Service Order',
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',
-  'dependent_class' => array('hd_ro_line'),
+  'dependent_class' => array('hd_svo_line'),
   'primary_entity_cb' => '',
-  'module_name' => 'sd',
+  'module_name' => 'hd',
   'weight' => 1
  ];
- public $checkbox = [
-  "rev_enabled_cb"
- ];
- public static $order_source_type_a = [
-  'MANUAL' => 'Manual',
-  'ECOMMERCE' => 'eCommerce',
-  'INV' => 'Inventory',
-  'COPY' => 'Copy',
+ public $action_a = [
+  'APPROVE' => 'Approve',
+  'PRINT' => 'Copy',
+  'CANCEL' => 'Cancel',
+  'CLOSE' => 'Close',
+  'CREATE_WO' => 'Create Work Order',
  ];
  public $field_a = [
-  'hd_ro_header_id',
+  'hd_svo_header_id',
   'bu_org_id',
-  'document_type',
-  'so_number',
+  'repair_type',
+  'order_number',
+  'hd_service_request_id',
+  'promise_date',
   'ar_customer_id',
   'ar_customer_site_id',
-  'sales_person',
-  "description",
+  'service_person_employee_id',
+  'service_team_id',
+  'description',
   'ship_to_id',
   'bill_to_id',
+  'item_id_m',
+  'inv_serial_number_id',
+  'lot_number_id',
   'price_list_header_id',
-  'header_amount',
-  'tax_amount',
-  'currency',
+  'quantity',
+  'estimate_amount',
   'doc_currency',
+  'prepaid_status',
+  'prepaid_amount',
+  'currency',
   'payment_term_id',
   'payment_term_date',
-  'agreement_start_date',
-  'aggrement_end_date',
+  'warrenty_status',
+  'escalation',
   'exchange_rate_type',
   'exchange_rate',
-  'released_amount',
-  'prepaid_amount',
-  'prepaid_status',
-  "order_source_type",
-  "order_reference_table",
-  "order_reference_id",
-  'so_status',
-  "rev_enabled_cb",
-  "rev_number",
-  "created_by",
-  "creation_date",
-  "last_update_by",
-  "last_update_date"
+  'inventory_org_id',
+  'close_date',
+  'order_reference_table',
+  'order_reference_id',
+  'repair_status',
+  'estimate_status',
+  'created_by',
+  'creation_date',
+  'last_update_by',
+  'last_update_date',
  ];
  public $initial_search = [
-  "hd_ro_header_id",
-  "so_number",
-  "ar_customer_id",
-  "sales_person"
- ];
- public $column = [
-  "hd_ro_header_id",
-  "so_number",
-  "so_status",
-  "ar_customer_id",
-  "creation_date",
+  'repair_type',
+  'order_number',
  ];
  public $requiredField = [
+  'bu_org_id',
+  'repair_type',
   'ar_customer_id',
-  'ship_to_id',
-  'bill_to_id',
-  'doc_currency',
-  'document_type'
-  ];
+//  'item_id_m'
+ ];
  public $addressField = [
   'ship_to_id',
   'bill_to_id'
@@ -108,19 +101,10 @@ class hd_ro_header extends dbObject {
   "customer_name",
   "customer_number",
   "customer_site_name",
-  "ship_to_address_name",
-  "bill_to_address_name",
-  'sales_action',
-  'ship_to_phone',
-  'ship_to_email',
-  'ship_to_address',
-  'ship_to_country',
-  'ship_to_postal_code',
-  'bill_to_phone',
-  'bill_to_email',
-  'bill_to_address',
-  'bill_to_country',
-  'bill_to_postal_code',
+  "item_number",
+  "item_description",
+  'serial_number',
+  'lot_number',
  ];
  public $profile_default = [
   'exchange_rate_type' => 'gl_currency_conversion_type',
@@ -130,44 +114,46 @@ class hd_ro_header extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1,
 //		 '_view_action_meassge' => 'View',
-  '_extra_path' => array('form.php?class_name=ar_transaction_header&mode=9' => 'Invoice',
-   'form.php?class_name=sd_delivery_header&mode=9' => 'Ship')
+//  '_extra_path' => array('form.php?class_name=ar_transaction_header&mode=9' => 'Invoice',
+//   'form.php?class_name=sd_delivery_header&mode=9' => 'Ship')
  ];
- public $pageTitle = " SO - Sales Orders "; //page Title
- public $option_lists = [
-  'approval_status' => 'APPROVAL_STATUS',
- ];
- public $hd_ro_header_id;
+ public $pageTitle = " Service Order "; //page Title
+ public $hd_svo_header_id;
  public $bu_org_id;
- public $document_type;
- public $so_number;
+ public $repair_type;
+ public $order_number;
+ public $hd_service_request_id;
+ public $promise_date;
  public $ar_customer_id;
  public $ar_customer_site_id;
- public $sales_person;
+ public $service_person;
+ public $service_team_id;
+ public $service_person_employee_id;
  public $description;
  public $ship_to_id;
  public $bill_to_id;
- public $price_list_header_id;
- public $header_amount;
- public $tax_amount;
- public $prepaid_amount;
- public $prepaid_status;
- public $currency;
+ public $item_id_m;
+ public $inv_serial_number_id;
+ public $lot_number_id;
+ public $quantity;
+ public $estimate_amount;
  public $doc_currency;
+ public $prepaid_status;
+ public $prepaid_amount;
+ public $currency;
  public $payment_term_id;
  public $payment_term_date;
- public $agreement_start_date;
- public $aggrement_end_date;
+ public $warrenty_status;
+ public $escalation;
  public $exchange_rate_type;
  public $exchange_rate;
- public $released_amount;
- public $order_source_type;
+ public $inventory_org_id;
+ public $close_date;
  public $order_reference_table;
  public $order_reference_id;
- public $action;
- public $so_status;
- public $rev_enabled_cb;
- public $rev_number;
+ public $repair_status;
+ public $estimate_status;
+ public $price_list_header_id;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -177,21 +163,10 @@ class hd_ro_header extends dbObject {
  public $customer_name;
  public $customer_number;
  public $customer_site_name;
- public $sales_action;
- public $pick_from_subinventory;
- public $pick_from_locator;
- public $staging_subinventory;
- public $staging_locator;
- public $ship_to_address;
- public $bill_to_address_name;
- public $ship_to_phone;
- public $ship_to_address_name;
- public $ship_to_country;
- public $ship_to_postal_code;
- public $bill_to_phone;
- public $bill_to_address;
- public $bill_to_country;
- public $bill_to_postal_code;
+ public $item_number;
+ public $item_description;
+ public $serial_number;
+ public $lot_number;
 
  public function _before_showing() {
   $address = new address();
@@ -235,11 +210,11 @@ class hd_ro_header extends dbObject {
  }
 
  public function _after_save() {
-  if ((!empty($this->hd_ro_header_id)) && empty($this->so_number)) {
-   $hd_ro_header_id = $this->hd_ro_header_id;
+  if ((!empty($this->hd_svo_header_id)) && empty($this->order_number)) {
+   $hd_svo_header_id = $this->hd_svo_header_id;
    $bu_org_id = $this->bu_org_id;
-   $so_number = $bu_org_id . '-' . $hd_ro_header_id;
-   $this->so_number = $so_number;
+   $so_number = $bu_org_id . '-' . $hd_svo_header_id;
+   $this->order_number = $so_number;
    echo '<br/> New SO number is ' . $so_number;
    $this->update_soNumber();
   }
@@ -247,8 +222,8 @@ class hd_ro_header extends dbObject {
 
  private function update_soNumber() {
   $sql = " UPDATE " . self::$table_name;
-  $sql .= " SET so_number = '{$this->so_number}'  ";
-  $sql .= " WHERE hd_ro_header_id = '{$this->hd_ro_header_id}'  ";
+  $sql .= " SET order_number = '{$this->order_number}'  ";
+  $sql .= " WHERE hd_svo_header_id = '{$this->hd_svo_header_id}'  ";
   try {
    $this->runSQL($sql);
   } catch (Exception $e) {
@@ -281,17 +256,17 @@ class hd_ro_header extends dbObject {
   return $so_status;
  }
 
- public function copy($hd_ro_header_id) {
+ public function copy($hd_svo_header_id) {
   global $db;
-  $sql1 = " CREATE TEMPORARY TABLE tmptable SELECT * FROM hd_ro_header WHERE `hd_ro_header_id` = '{$hd_ro_header_id}' ";
+  $sql1 = " CREATE TEMPORARY TABLE tmptable SELECT * FROM hd_svo_header WHERE `hd_svo_header_id` = '{$hd_svo_header_id}' ";
   if ($db->query($sql1)) {
-   $sql2 = "  UPDATE tmptable SET `hd_ro_header_id` = '' ,
+   $sql2 = "  UPDATE tmptable SET `hd_svo_header_id` = '' ,
            `org_id` = '{$this->org_id}' 
-          WHERE `hd_ro_header_id` = '{$hd_ro_header_id}' ";
+          WHERE `hd_svo_header_id` = '{$hd_svo_header_id}' ";
    if ($db->query($sql2)) {
-    $sql3 = " INSERT INTO `hd_ro_header` SELECT * FROM tmptable WHERE `hd_ro_header_id` = '' ";
+    $sql3 = " INSERT INTO `hd_svo_header` SELECT * FROM tmptable WHERE `hd_svo_header_id` = '' ";
     if ($db->query($sql3)) {
-     $this->hd_ro_header_id = $db->insert_id();
+     $this->hd_svo_header_id = $db->insert_id();
      $this->msg = 1;
     } else {
      $this->msg = 0;
@@ -317,5 +292,5 @@ class hd_ro_header extends dbObject {
 // }
 }
 
-//end of hd_ro_header class
+//end of hd_svo_header class
 ?>

@@ -314,6 +314,7 @@ require_once(INC_MODULE . DS . "mdm" . DS . "bank" . DS . "class_mdm_bank_site.i
 require_once(INC_MODULE . DS . "mdm" . DS . "bank_account" . DS . "class_mdm_bank_account.inc");
 require_once(INC_MODULE . DS . "mdm" . DS . "bank_account" . DS . "class_mdm_bank_account_v.inc");
 require_once(INC_MODULE . DS . "hr" . DS . "employee" . DS . "class_hr_employee.inc");
+require_once(INC_MODULE . DS . "hr" . DS . "employee" . DS . "class_hr_employee_v.inc");
 require_once(INC_MODULE . DS . "hr" . DS . "employee" . DS . "class_hr_employee_position_v.inc");
 require_once(INC_MODULE . DS . "hr" . DS . "employee" . DS . "education" . DS . "class_hr_employee_education.inc");
 require_once(INC_MODULE . DS . "hr" . DS . "employee" . DS . "experience" . DS . "class_hr_employee_experience.inc");
@@ -395,6 +396,8 @@ require_once(INC_MODULE . DS . "hd" . DS . "service_request" . DS . "class_hd_se
 require_once(INC_MODULE . DS . "hd" . DS . "change_request" . DS . "class_hd_change_request.inc");
 require_once(INC_MODULE . DS . "hd" . DS . "service_activity" . DS . "class_hd_service_activity_header.inc");
 require_once(INC_MODULE . DS . "hd" . DS . "service_activity" . DS . "class_hd_service_activity_line.inc");
+require_once(INC_MODULE . DS . "hd" . DS . "svo" . DS . "class_hd_svo_line.inc");
+require_once(INC_MODULE . DS . "hd" . DS . "svo" . DS . "class_hd_svo_header.inc");
 require_once(INC_MODULE . DS . "adm" . DS . "task_type" . DS . "class_adm_task_type.inc");
 require_once(INC_MODULE . DS . "adm" . DS . "task_status" . DS . "class_adm_task_status.inc");
 

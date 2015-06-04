@@ -1895,6 +1895,7 @@ function getSerialNumber(options) {
  var defaults = {
   json_url: 'modules/inv/serial/json_serial_number.php',
   org_id: $('#org_id').val(),
+  status: $('#serial_status').val(),
   trclass: false
  };
  var settings = $.extend({}, defaults, options);
@@ -1926,8 +1927,10 @@ function getSerialNumber(options) {
      var trclass_d = '.' + settings.trclass;
      $(trclass_d).find('.serial_number').replaceWith(select_stmt);
     } else {
-     $('#serial_number').replaceWith(select_stmt);
+     $('#inv_serial_number_id').replaceWith(select_stmt);
     }
+   } else {
+    console.log(result);
    }
   },
   complete: function () {
@@ -1937,7 +1940,7 @@ function getSerialNumber(options) {
    $('.show_loading_small').show();
   },
   error: function (request, errorType, errorMessage) {
-   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+   alert('No valid serail number found \n' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
 }
@@ -3180,7 +3183,10 @@ $(document).ready(function () {
    localStorage.setItem("li_divId", liId);
    localStorage.removeItem("row_class");
   }
-  var openUrl = 'select.php?class_name=hr_employee';
+
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+  var openUrl = 'select.php?class_name=hr_employee_v';
   if ($(this).siblings('.org_id').val()) {
    openUrl += '&org_id=' + $(this).siblings('.org_id').val();
   } else if ($('#org_id').val()) {
@@ -3296,6 +3302,134 @@ $(document).ready(function () {
   void window.open(openUrl, '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
+
+ //select serial number
+ $('body').on('click', '.select.inv_serial_number_id', function () {
+  if ($(this).find('option').length > 0) {
+   return true;
+  }
+  var elemenType = $(this).parent().prop('tagName');
+  if (elemenType === 'TD') {
+   var rowClass = $(this).closest('tr').prop('class');
+   var item_id_m = $(this).closest('tr').find('.item_id_m').val();
+   if (!item_id_m) {
+    return true;
+   }
+   var status = $(this).parent().find('.serial_status').val();
+   getSerialNumber({
+    status: status,
+    item_id_m: item_id_m,
+    trclass: rowClass
+   });
+  } else {
+   var rowClass = $(this).closest('tr').prop('class');
+   var item_id_m = $(this).closest('ul').find('.item_id_m').val();
+   var status = $(this).parent().find('.serial_status').val();
+   if (!item_id_m) {
+    return true;
+   }
+   getSerialNumber({
+    status: status,
+    item_id_m: item_id_m
+   });
+  }
+ });
+ 
+  //Popup for selecting address address_id for normal popup & address_popup for popup where address can be created
+ $('body').on('click', '.address_id.select_popup', function (e) {
+  e.preventDefault();
+  localStorage.setItem("set_value_for_one_field", true);
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+
+  void window.open('select.php?class_name=address&mode=2', '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+  return false;
+ });
+
+
+//selecting customer
+ $('body').on("click", '.ar_customer_id.select_popup', function () {
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+  void window.open('select.php?class_name=ar_customer', '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
+//selecting supplier
+ $('body').on("click", '.supplier_id.select_popup', function () {
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+  void window.open('select.php?class_name=supplier', '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
+ //selecting user
+ $('body').on("click", '.user_id.select_popup', function () {
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+  void window.open('select.php?class_name=user', '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
+ //selecting change request
+ $('body').on("click", '.hd_change_request_id.select_popup', function () {
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+  void window.open('select.php?class_name=hd_change_request', '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
+ //selecting support request
+ $('body').on("click", '.hd_support_request_id.select_popup', function () {
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+  void window.open('select.php?class_name=hd_support_request', '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+ 
+  //popup for contact
+ $('#content').on('click', '.extn_contact_id.select_popup', function () {
+  var close_field_class = '.' + $(this).closest('li').find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+  void window.open('select.php?class_name=extn_contact', '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+ 
+   //popup for hd_service_request_id
+ $('#content').on('click', '.hd_service_request_id.select_popup', function () {
+  var close_field_class = '.' + $(this).closest('li').find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+  void window.open('select.php?class_name=hd_service_request', '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
+ $("body").on("click", ".select_am_asset_number.select_popup", function () {
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+  void window.open('select.php?class_name=am_asset', '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
+ $("body").on("click", "a.contact_link", function (e) {
+  e.preventDefault();
+  void window.open($(this).prop('href'), '_blank',
+          'width=1000,height=600,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
+ $("body").on("click", ".wo_number.select_popup", function () {
+  var close_field_class = '.' + $(this).closest('li').find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+  var openUrl = 'select.php?class_name=wip_wo_header';
+  $(this).parent().parent().find('.popup_value').each(function () {
+   var dataName = $(this).prop('name').replace(/\[]+/g, '');
+   openUrl += '&' + dataName + '=' + $(this).val();
+  });
+  void window.open(openUrl, '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
+
  //add new order by
  $('#content').on('change', '.search_order_by', function () {
   if ($(this).val() !== 'remove') {
@@ -3506,18 +3640,9 @@ $(document).ready(function () {
   }
  });
 
- //Popup for selecting address address_id for normal popup & address_popup for popup where address can be created
- $('body').on('click', '.address_id.select_popup', function (e) {
-  e.preventDefault();
-  localStorage.setItem("set_value_for_one_field", true);
-  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
-  localStorage.setItem("close_field_class", close_field_class);
 
-  void window.open('select.php?class_name=address&mode=2', '_blank',
-          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-  return false;
- });
-
+ 
+ 
  //diable/enable auto complete
  $('#content').on('click', '.disable_autocomplete', function () {
   $(this).parent().siblings().each(function () {
@@ -3704,45 +3829,7 @@ $(document).ready(function () {
  addOrShow_lineDetails();
  onClick_addDetailLine();
 
-//selecting customer
- $('body').on("click", '.ar_customer_id.select_popup', function () {
-  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
-  localStorage.setItem("close_field_class", close_field_class);
-  void window.open('select.php?class_name=ar_customer', '_blank',
-          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
 
-//selecting supplier
- $('body').on("click", '.supplier_id.select_popup', function () {
-  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
-  localStorage.setItem("close_field_class", close_field_class);
-  void window.open('select.php?class_name=supplier', '_blank',
-          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
-
- //selecting user
- $('body').on("click", '.user_id.select_popup', function () {
-  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
-  localStorage.setItem("close_field_class", close_field_class);
-  void window.open('select.php?class_name=user', '_blank',
-          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
-
- //selecting change request
- $('body').on("click", '.hd_change_request_id.select_popup', function () {
-  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
-  localStorage.setItem("close_field_class", close_field_class);
-  void window.open('select.php?class_name=hd_change_request', '_blank',
-          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
-
- //selecting support request
- $('body').on("click", '.hd_support_request_id.select_popup', function () {
-  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
-  localStorage.setItem("close_field_class", close_field_class);
-  void window.open('select.php?class_name=hd_support_request', '_blank',
-          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
 
 
  onClick_addDetailLine(2, '.add_row_detail_img3', 'tabsDetailC');
@@ -4480,38 +4567,6 @@ $(document).ready(function () {
   $(this).closest('.ino-images').find('.existing-image').css('display', 'none');
  });
 
- //popup for contact
- $('#content').on('click', '.extn_contact_id.select_popup', function () {
-  var close_field_class = '.' + $(this).closest('li').find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
-  localStorage.setItem("close_field_class", close_field_class);
-  void window.open('select.php?class_name=extn_contact', '_blank',
-          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
-
- $("body").on("click", ".select_am_asset_number.select_popup", function () {
-  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
-  localStorage.setItem("close_field_class", close_field_class);
-  void window.open('select.php?class_name=am_asset', '_blank',
-          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
-
- $("body").on("click", "a.contact_link", function (e) {
-  e.preventDefault();
-  void window.open($(this).prop('href'), '_blank',
-          'width=1000,height=600,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
-
- $("body").on("click", ".wo_number.select_popup", function () {
-  var close_field_class = '.' + $(this).closest('li').find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
-  localStorage.setItem("close_field_class", close_field_class);
-  var openUrl = 'select.php?class_name=wip_wo_header';
-  $(this).parent().parent().find('.popup_value').each(function () {
-   var dataName = $(this).prop('name').replace(/\[]+/g, '');
-   openUrl += '&' + dataName + '=' + $(this).val();
-  });
-  void window.open(openUrl, '_blank',
-          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
 
  $('body').on('click', 'a.show2.wip_wo_header_id', function (e) {
   e.preventDefault();

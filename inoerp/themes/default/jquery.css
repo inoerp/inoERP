@@ -12,7 +12,7 @@ ul.tabMain li {
  float:left;
  height:25px;
  line-height:24px;
-/* border:1px solid #999;*/
+ /* border:1px solid #999;*/
  overflow:hidden;
  position:relative;
  background-color: rgba(222, 221, 221, 0.94);
@@ -28,7 +28,7 @@ ul.tabMain li {
 }
 
 ul.tabMain li.ui-state-active{
-background-color:rgba(123, 186, 81, 0.57);
+ background-color:rgba(123, 186, 81, 0.57);
 }
 
 ul.tabMain li a{
@@ -57,14 +57,14 @@ html ul.tabMain li.active,html ul.tabMain li.active a:hover {
 }
 
 .tabContainer {
-border: 1px solid rgba(222, 221, 221, 0.94);
-/*overflow: hidden;*/
-padding: 8px;
-clear: both;
-float: left;
-min-width: 97%;
-max-width: 98%;
-background-color: rgba(242, 242, 242, 0.94);
+ border: 1px solid rgba(222, 221, 221, 0.94);
+ /*overflow: hidden;*/
+ padding: 8px;
+ clear: both;
+ float: left;
+ min-width: 97%;
+ max-width: 98%;
+ background-color: rgba(242, 242, 242, 0.94);
 }
 
 .tabContainer.no_tab{
@@ -287,6 +287,7 @@ ul.tabVerticalMain li a {
 .ui-datepicker .ui-datepicker-title select {
  font-size: 1em;
  margin: 1px 0;
+ color: #333
 }
 
 .ui-datepicker-prev{
@@ -336,39 +337,39 @@ table.ui-datepicker-calendar tr th{
 }
 
 .accordion .ui-accordion-content {
-	width: 100%;
-	background-color: #f3f3f3;
-	color: #777;
-	font-size: 14px;
-	line-height: 32px;
-	box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .2),
-				inset 0px -1px 0px 0px rgba(0, 0, 0, .4);
+ width: 100%;
+ background-color: #f3f3f3;
+ color: #777;
+ font-size: 14px;
+ line-height: 32px;
+ box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .2),
+  inset 0px -1px 0px 0px rgba(0, 0, 0, .4);
 }
 .accordion .ui-accordion-content > * {
-	margin: 0;
-	padding: 20px;
+ margin: 0;
+ padding: 20px;
 }
 .accordion .ui-accordion-content a {
-	color: #777;
+ color: #777;
 }
 
 .accordion .ui-accordion-header {
-	background-color: #3296B1;
+ background-color: #3296B1;
 
-        margin-bottom:10px;
-        color: #fff;
-        padding: 5px 10px;
-        font-weight: bold;
-        cursor :pointer;        
+ margin-bottom:10px;
+ color: #fff;
+ padding: 5px 10px;
+ font-weight: bold;
+ cursor :pointer;        
 }
 .accordion .ui-accordion-header:first-of-type a {
-	box-shadow: 0px -1px 0px 0px #b85c0f;
+ box-shadow: 0px -1px 0px 0px #b85c0f;
 }
 .accordion .ui-accordion-content:last-of-type {
-	box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .2),
-				inset 0px 0 0px 0px rgba(0, 0, 0, .5);
+ box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .2),
+  inset 0px 0 0px 0px rgba(0, 0, 0, .5);
 }
 
 .ui-widget-header, .ui-widget-content{
-    border: none;
+ border: none;
 }

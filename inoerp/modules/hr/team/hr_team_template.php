@@ -15,7 +15,7 @@
        <a name="show" href="form.php?class_name=hr_team_header&<?php echo "mode=$mode"; ?>" class="show document_id hr_team_header_id">
         <i class="fa fa-refresh"></i></a> 
       </li>
-      <li><?php $f->l_select_field_from_array('type', hr_team_header::$type_a, $$class->type, 'type', '', 1, $type_r, $type_r); ?> </li>
+      <li><?php $f->l_select_field_from_object('type', hr_team_header::team_type(), 'option_line_code', 'option_line_value', $$class->type, 'type'); ?> </li>
       <li><?php $f->l_text_field_d('team_name'); ?> </li>
       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_employee_name select_popup clickable">
         <?php echo gettext('Team Lead') ?></label><?php $f->text_field_d('lead_employee_name'); ?>

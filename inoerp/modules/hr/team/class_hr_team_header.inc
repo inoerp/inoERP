@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -29,12 +30,6 @@ class hr_team_header extends dbObject {
   'primary_entity_cb' => '',
   'module_name' => 'hr',
   'weight' => 22
- ];
- public static $type_a = [
-  'SALES' => 'Sales',
-  'PROJECT' => 'Project',
-  'CONTRACT' => 'Contract',
-  'OTHER' => 'Others'
  ];
  public $field_a = [
   'hr_team_header_id',
@@ -116,6 +111,13 @@ class hr_team_header extends dbObject {
   return $option_lines;
  }
 
+ Public static function team_type() {
+  $option_header = option_header::find_by_name('HR_TEAM_TYPE');
+  $ol = new option_line();
+  $option_lines = $ol->findBy_parentId($option_header->option_header_id);
+  return $option_lines;
+ }
+
  Public static function hr_role() {
   $option_header = option_header::find_by_name('HR_ROLE');
   $ol = new option_line();
@@ -127,6 +129,15 @@ class hr_team_header extends dbObject {
   $sql = " SELECT * 
        FROM hr_team_header eeh 
        WHERE eeh.type = 'SALES'   
+";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? ($result) : false;
+ }
+
+ Public static function find_all_by_type($type) {
+  $sql = " SELECT * 
+       FROM hr_team_header eeh 
+       WHERE eeh.type = '{$type}'   
 ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? ($result) : false;

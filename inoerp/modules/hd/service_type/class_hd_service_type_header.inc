@@ -37,13 +37,11 @@ class hd_service_type_header extends dbObject {
   'ORDER' => 'Order',
   'RETURN' => 'Return'
  ];
- 
-  public static $repair_mode_a = [
+ public static $repair_mode_a = [
   'WO' => 'Work Order',
   'TASK' => 'Task',
-   'NO_TRACKING' => 'No Tracking',
+  'NO_TRACKING' => 'No Tracking',
  ];
-  
  public $field_a = [
   'hd_service_type_header_id',
   'service_type',
@@ -68,7 +66,7 @@ class hd_service_type_header extends dbObject {
   'line_category',
  ];
  public $requiredField = [
-    'service_type',
+  'service_type',
   'primary_service_type'
  ];
  public $fields_inForm_notInDataBase = [
@@ -102,8 +100,8 @@ class hd_service_type_header extends dbObject {
   $option_lines = $ol->findBy_parentId($option_header->option_header_id);
   return $option_lines;
  }
- 
-  Public static function billing_type() {
+
+ Public static function billing_type() {
   $option_header = option_header::find_by_name('SYS_BILLING_TYPE');
   $ol = new option_line();
   $option_lines = $ol->findBy_parentId($option_header->option_header_id);

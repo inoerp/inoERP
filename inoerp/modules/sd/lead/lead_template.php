@@ -101,7 +101,6 @@ inoERP
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field">
         <li><label class="auto_complete"><?php echo gettext('Customer Name') ?></label><?php
          echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id);
@@ -118,7 +117,6 @@ inoERP
          <?php echo $f->hidden_field_withId('sales_person_employee_id', $$class->sales_person_employee_id); ?>
         </li>
        </ul>
-      </div>
      </div>
      <div id="tabsLine-2" class="tabContent">
       <div class="header_address"><?php $f->address_field_d('address_id'); ?></div>

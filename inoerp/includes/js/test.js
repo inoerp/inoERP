@@ -542,4 +542,57 @@ $("#accordion0").accordion({
   }
  }
 
-});z
+});
+
+
+
+
+$('#path_by_module a').on('click', function(e) {
+  e.preventDefault();
+    var urlLink = $(this).attr('href');
+  var urlLink_a = urlLink.split('?');
+  var urlLink_firstPart_a = urlLink_a[0].split('/');
+  var pageType = urlLink_firstPart_a.pop();
+  if (pageType == 'form.php') {
+   var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
+  } else if (pageType == 'program.php') {
+   var formUrl = 'includes/json/json_program.php?' + urlLink_a[1];
+  } else {
+   var formUrl = urlLink;
+  }
+ 
+  $('#path_by_module a').popover({
+  content :  getFormDetails(formUrl)
+});
+   
+});
+
+
+
+$(document).ready(function(){
+ // When the DOM is ready
+		$(function() {
+		  
+		  // Init ScrollMagic Controller
+		  var scrollMagicController = new ScrollMagic();
+		  
+		  // Create Animation for 0.5s
+		  var tween = TweenMax.to('#forest-brush-r', 0.5, {
+		    backgroundColor: 'rgb(255, 39, 46)',
+		    scale: 5,
+		    rotation: 360
+		  });
+		  
+		  // Create the Scene and trigger when visible
+		  var scene = new ScrollScene({
+		    triggerElement: '#trigger-1',
+		    offset: 250 /* offset the trigger 150px below #scene's top */
+		  })
+		  .setTween(tween)
+		  .addTo(scrollMagicController);
+		  
+		  // Add debug indicators fixed on right side
+		   scene.addIndicators();
+		  
+		});
+});
