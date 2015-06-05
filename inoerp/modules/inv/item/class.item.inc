@@ -84,7 +84,8 @@ class item extends dbObject {
   "build_in_wip_cb",
   "allow_negative_balance_cb",
   'update_revision_cb',
-  'invoiceable_cb'
+  'invoiceable_cb',
+  'service_request_cb'
  ];
  public $field_a = [
   "item_id",
@@ -160,8 +161,6 @@ class item extends dbObject {
   "cumulative_total_lt",
   "lt_lot_size",
   "wip_supply_type",
-  "ef1",
-  "ef2",
   "atp",
   "picking_rule",
   "sourcing_rule_id",
@@ -208,6 +207,8 @@ class item extends dbObject {
   'am_activity_cause',
   'am_activity_type',
   'am_activity_source',
+  'billing_type',
+  'service_request_cb'
  ];
  public $initial_search = [
   'item_id',
@@ -401,8 +402,6 @@ class item extends dbObject {
  public $ip_tax_class;
  public $ap_payment_term;
  public $ar_payment_term;
- public $ef1;
- public $ef2;
  public $atp;
  public $picking_rule;
  public $sourcing_rule_id;
@@ -436,12 +435,15 @@ class item extends dbObject {
  public $am_activity_cause;
  public $am_activity_type;
  public $am_activity_source;
+ public $service_request_cb;
+ public $billing_type;
  private $_existing_rev_number = false;
  private $_eco_number = false;
  private $_effective_start_date = false;
  private $_origination_date = false;
  private $_implementation_date = false;
  public $template_item_id;
+ 
 
  Public static function product_line() {
   $option_header = option_header::find_by_name('INV_ITEM_PRODUCT_LINE');

@@ -373,3 +373,22 @@ table.ui-datepicker-calendar tr th{
 .ui-widget-header, .ui-widget-content{
  border: none;
 }
+
+.ui-autocomplete{
+    border:1px solid #fff;
+    font-size: 0.9em;
+    background-color:#3FB6DA;
+  color: #fff;
+}
+
+.ui-autocomplete li{
+  border-bottom:2px solid #fff;
+  padding: 0;
+   cursor: pointer; 
+  margin:0;
+  text-decoration: none;
+}
+
+/*input.ui-autocomplete-input{
+  width: 88% !important;
+}*/

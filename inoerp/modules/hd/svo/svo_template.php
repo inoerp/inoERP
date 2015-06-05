@@ -29,7 +29,8 @@ inoERP
       </li>
       <li><?php $f->l_text_field_d('order_number', 'primary_column2'); ?></li>
       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', $readonly1, '', ''); ?>						 </li>
-      <li><?php $f->l_select_field_from_object('repair_type', hd_service_type_header::find_all(), 'hd_service_type_header_id', 'service_type', $$class->repair_type, 'repair_type', 'medium', 1, $readonly1); ?>						 </li>
+      <li><label>Service Type</label>
+       <?php echo $f->select_field_from_object('hd_service_type_header_id', hd_service_type_header::find_all(), 'hd_service_type_header_id', 'service_type', $$class->hd_service_type_header_id, 'hd_service_type_header_id', 'medium', 1, $readonly1); ?>						 </li>
       <li><label class="auto_complete"><?php echo gettext('Customer Name') ?></label><?php
        echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id);
        echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1);
@@ -151,7 +152,7 @@ inoERP
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('Quantity') ?></th>
         <th><?php echo gettext('Action') ?></th>
-        
+
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -168,17 +169,15 @@ inoERP
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('hd_svo_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
-         <td><?php echo $f->select_field_from_object('line_type', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class_second->line_type, '', 'medium', 1, $readonly); ?></td>
+         <td><?php echo $f->select_field_from_object('service_activity_header_id', hd_service_activity_header::find_all(), 'hd_service_activity_header_id', 'activity_name', $$class_second->service_activity_header_id, '', 'medium', 1, $readonly); ?></td>
          <td><?php echo $f->select_field_from_object('inv_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->inv_org_id, '', 'small', 1, $readonly); ?></td>
-         <td><?php
-          echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
-          form::text_field_wid2('item_number', 'select_item_number');
-          ?>  <i class="select_item_number select_popup clickable fa fa-search"></i></td>
+         <td><?php echo $f->text_field('item_number', $$class_second->item_number, '20', '', 'select_item_number', '', $readonly); echo $f->hidden_field('item_id_m', $$class_second->item_id_m); ?>
+          <i class="select_item_number select_popup clickable fa fa-search"></i></td>
          <td><?php form::text_field_wid2s('item_description'); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small'); ?></td>
          <td><?php form::number_field_wid2s('quantity'); ?></td>
          <td><?php echo $f->select_field_from_array('action', hd_svo_line::$action_a, ''); ?></td>
-         
+
         </tr>
         <?php
         $count = $count + 1;
@@ -262,7 +261,7 @@ inoERP
          </td>
          <td><?php form::text_field_wid3sr('hd_svo_estimates_id'); ?></td>
          <td><?php echo $f->text_field_wid3('billing_source'); ?></td>
-         <td><?php echo $f->text_field_wid3('billing_category'); ?></td>
+         <td><?php echo $f->text_field_wid3('billing_type'); ?></td>
          <td><?php echo $f->text_field('item_id_m', $$class_third->item_id_m, '8', '', 'item_id_m', 1, $readonly); ?></td>
          <td><?php echo $f->text_field('billing_item_number', $$class_third->billing_item_number, '20', '', 'select_item_number', '', $readonly); ?>
           <i class="select_item_number select_popup clickable fa fa-search"></i></td>

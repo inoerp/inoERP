@@ -30,7 +30,7 @@
       </li>
       <li><label><?php echo gettext('Item Number') ?><img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete item_number clickable">
        </label><?php echo $f->text_field('item_number', $$class->item_number, '15', 'item_number', 'select_item_number', 1, $readonly_mas); ?>
-        <i class="select_item_number select_popup clickable fa fa-search"></i>
+       <i class="select_item_number select_popup clickable fa fa-search"></i>
        <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show2 document_id findBy_item_number">
         <i class="fa fa-refresh"></i></a> 
       </li>
@@ -419,22 +419,33 @@
       </ul>
      </div>
      <div class="panel panel-collapse panel-ino-classy medium_box">
-      <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Safety Stock') ?></div></div>
-      <div class="panel-body">
-       <ul class="column header_field">
-        <li><?php $f->l_number_field_d('saftey_stock_quantity'); ?></li>
-        <li><?php $f->l_number_field_d('saftey_stock_days'); ?></li>
-        <li><?php $f->l_number_field_d('saftey_stock_percentage'); ?></li>
-       </ul>
-      </div>
-     </div>
-     <div class="panel panel-collapse panel-ino-classy medium_box">
       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Asset Maintenance') ?></div></div>
       <div class="panel-body">
        <ul class="column line_field">
         <li><?php $f->l_select_field_from_object('am_activity_cause', am_asset_activity::activity_cause(), 'option_line_code', 'option_line_value', $$class->am_activity_cause); ?></li>
         <li><?php $f->l_select_field_from_object('am_activity_type', am_asset_activity::activity_type(), 'option_line_code', 'option_line_value', $$class->am_activity_type); ?></li>
         <li><?php $f->l_select_field_from_object('am_activity_source', am_asset_activity::activity_source(), 'option_line_code', 'option_line_value', $$class->am_activity_source); ?></li>
+       </ul>
+      </div>
+
+     </div>
+     <div class="panel panel-collapse panel-ino-classy medium_box">
+      <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Safety Stock') ?></div></div>
+      <div class="panel-body">
+       <ul class="column line_field">
+        <li><?php $f->l_number_field_d('saftey_stock_quantity'); ?></li>
+        <li><?php $f->l_number_field_d('saftey_stock_days'); ?></li>
+        <li><?php $f->l_number_field_d('saftey_stock_percentage'); ?></li>
+       </ul>
+      </div>
+
+     </div>
+     <div class="panel panel-collapse panel-ino-classy medium_box">
+      <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Service') ?></div></div>
+      <div class="panel-body">
+       <ul class="column line_field">
+        <li><?php $f->l_checkBox_field_d('service_request_cb'); ?></li>
+        <li><?php $f->l_select_field_from_object('billing_type', hd_service_type_header::billing_type(), 'option_line_code', 'option_line_value', $$class->billing_type); ?></li>
        </ul>
       </div>
 

@@ -36,8 +36,10 @@ inoERP
        <li><?php $f->l_select_field_from_object('status', po_header::po_status(), 'option_line_code', 'option_line_value', $$class->po_status, 'po_status', 'dont_copy', '', 1); ?></li>
        <li><?php echo $f->hidden_field_withId('ref_po_header_id', $$class->ref_po_header_id); ?>
         <?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
-        <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supplier_id select_popup clickable">
-         <?php echo gettext('Supplier Name') ?></label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> </li>
+        <label><?php echo gettext('Supplier Name') ?></label>
+          <?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> 
+       <i class="fa fa-search supplier_id select_popup clickable"></i>
+       </li>
        <li><?php $f->l_text_field_d('supplier_number'); ?></li>
        <li><label><?php echo gettext('Supplier Site') ?></label><?php
         $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();

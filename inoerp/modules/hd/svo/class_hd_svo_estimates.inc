@@ -14,7 +14,7 @@ class hd_svo_estimates extends dbObject {
   'line_number',
   'item_id_m',
   'billing_source',
-  'billing_category',
+  'billing_type',
   'price_list_header_id',
   'quantity',
   'uom_id',
@@ -40,7 +40,7 @@ class hd_svo_estimates extends dbObject {
   'hd_svo_header_id',
   'item_id_m',
   'billing_source',
-  'billing_category',
+  'billing_type',
   'price_list_header_id',
   'quantity',
  ];
@@ -49,7 +49,7 @@ class hd_svo_estimates extends dbObject {
  public $line_number;
  public $item_id_m;
  public $billing_source;
- public $billing_category;
+ public $billing_type;
  public $price_list_header_id;
  public $quantity;
  public $uom_id;

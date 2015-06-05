@@ -42,7 +42,7 @@ class hd_svo_line extends dbObject {
   'schedule_ship_date',
   'reference_doc_type',
   'reference_doc_number',
-  'line_type',
+  'service_activity_header_id',
   'supply_source',
   'destination_type',
   'line_description',
@@ -94,7 +94,7 @@ class hd_svo_line extends dbObject {
  public $schedule_ship_date;
  public $reference_doc_type;
  public $reference_doc_number;
- public $line_type;
+ public $service_activity_header_id;
  public $supply_source;
  public $destination_type;
  public $line_description;

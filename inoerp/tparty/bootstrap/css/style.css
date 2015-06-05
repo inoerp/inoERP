@@ -4101,6 +4101,7 @@ ul.line_field li{
 ul.small_box li, ul.medium_box li, ul.large_box li{
  display: inline-block;
  margin-right : 20px;
+ float: left;
 }
 .small_box{
  width: 220px;;
@@ -4108,7 +4109,7 @@ ul.small_box li, ul.medium_box li, ul.large_box li{
 }
 
 .medium_box{
- width: 300px;
+ width: 290px;
 }
 
 .medium_box li{
@@ -4685,7 +4686,7 @@ table th {
 }
 
 table th {
-background-color: rgba(147, 160, 164, 0.17);
+background-color: #F2F2F2 ;
 }
 
 table tr {
@@ -4771,21 +4772,31 @@ table.form_table {
  clear: both;
 }
 
-table.form_table th {
+table.form_table th{
  border-width: 1px;
  border-style: solid;
- border-color: #ddd;
+ border-color: rgba(92, 85, 85, 0.2);
 }
 
-table.form_table tr {
- background-color:rgba(0,0,0,0.1);
+table.form_table td{
+ border-width: 1px;
+ border-style: solid;
+ border-color: #ccc;
+}
+
+table.form_table tr:nth-child(odd) {
+ background-color:rgba(206, 206, 206, 0.1);
+}
+
+table.form_table tr:nth-child(even) {
+    background-color: rgba(191, 207, 149, 0.4);
 }
 
 table.form_table td {
  border-width: 1px;
  padding: 4px;
  border-style: solid;
- border-color: #fff;
+ border-color: #DBCFCF;
 }
 
 #form_all{

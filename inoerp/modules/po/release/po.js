@@ -113,9 +113,6 @@ function copy_line_to_details() {
 
 $(document).ready(function () {
  //defalut values
- if (!$('#po_type').val()) {
-  $('#po_type').val('STANDARD');
- }
 
  $('#form_line').find('.line_type').each(function () {
   if (!$(this).val()) {

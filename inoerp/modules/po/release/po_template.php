@@ -18,34 +18,37 @@
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
-      <ul class="column header_field">
-       <li><?php $f->l_text_field_dr_withSearch('po_header_id') ?>
-        <a name="show" href="form.php?class_name=po_release&<?php echo "mode=$mode"; ?>" class="show document_id po_header_id"><i class="fa fa-refresh"></i></a> 
-       </li>
-       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>        </li>
-       <li><?php $f->l_select_field_from_array('po_type', po_header::$po_type_a, $$class->po_type, 'po_type', '', 1, $readonly1, $readonly1); ?>        </li>
-       <li><?php $f->l_text_field_d('po_number', 'primary_column2'); ?> </li>
-       <li><?php $f->l_select_field_from_array('release_number', $bpa_release_number_a, $$class->release_number, 'release_number', 'primary_column3'); ?>
-        <?php echo $f->hidden_field_withId('ref_po_header_id', $$class->ref_po_header_id); ?>
-        <a name="show" href="form.php?class_name=po_release&<?php echo "mode=$mode"; ?>" class="show2 document_id po_release_id"><i class="fa fa-refresh"></i></a> 
-       </li>
-       <li><?php $f->l_select_field_from_object('status', po_header::po_status(), 'option_line_code', 'option_line_value', $$class->po_status, 'po_status', 'dont_copy', '', 1); ?></li>
-       <li><?php echo $f->hidden_field_withId('ref_po_header_id', $$class->ref_po_header_id); ?>
-        <?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
-        <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supplier_id select_popup clickable">
-         <?php echo gettext('Supplier Name') ?></label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> </li>
-       <li><?php $f->l_text_field_d('supplier_number'); ?></li>
-       <li><label><?php echo gettext('Supplier Site') ?></label><?php
-        $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
-        echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
-        ?> </li>
-       <li><?php $f->l_text_field_d('rev_number'); ?></li> 
-       <li><?php $f->l_checkBox_field_d('multi_bu_cb'); ?></li> 
-       <li><?php $f->l_text_field_d('buyer'); ?></li> 
-       <li><?php $f->l_text_field_d('description'); ?></li> 
-      </ul>
-     </div>
+     <ul class="column header_field">
+      <li><label><?php echo gettext('PO Header Id') ?></label><?php
+       echo $f->text_field_dsr('po_header_id');
+       echo $f->hidden_field_withCLass('po_type', 'BLANKET', 'popup_value');
+       ?>
+       <a name="show" href="form.php?class_name=po_release&<?php echo "mode=$mode"; ?>" class="show document_id po_header_id"><i class="fa fa-refresh"></i></a> 
+       <i class="select_popup select_popup_default_class clickable fa fa-search" data-default_class="po_header"></i>
+      </li>
+      <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>        </li>
+      <li><?php $f->l_select_field_from_array('po_type', po_header::$po_type_a, $$class->po_type, 'po_type', '', 1, $readonly1, $readonly1); ?>        </li>
+      <li><?php $f->l_text_field_d('po_number', 'primary_column2'); ?> </li>
+      <li><?php $f->l_select_field_from_array('release_number', $bpa_release_number_a, $$class->release_number, 'release_number', 'primary_column3'); ?>
+<?php echo $f->hidden_field_withId('ref_po_header_id', $$class->ref_po_header_id); ?>
+       <a name="show" href="form.php?class_name=po_release&<?php echo "mode=$mode"; ?>" class="show2 document_id po_release_id"><i class="fa fa-refresh"></i></a> 
+      </li>
+      <li><?php $f->l_select_field_from_object('status', po_header::po_status(), 'option_line_code', 'option_line_value', $$class->po_status, 'po_status', 'dont_copy', '', 1); ?></li>
+      <li><?php echo $f->hidden_field_withId('ref_po_header_id', $$class->ref_po_header_id); ?>
+<?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
+       <label><?php echo gettext('Supplier Name') ?></label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> 
+       <i class="supplier_id select_popup clickable fa fa-search"></i>
+      </li>
+      <li><?php $f->l_text_field_d('supplier_number'); ?></li>
+      <li><label><?php echo gettext('Supplier Site') ?></label><?php
+       $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
+       echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
+       ?> </li>
+      <li><?php $f->l_text_field_d('rev_number'); ?></li> 
+      <li><?php $f->l_checkBox_field_d('multi_bu_cb'); ?></li> 
+      <li><?php $f->l_text_field_d('buyer'); ?></li> 
+      <li><?php $f->l_text_field_d('description'); ?></li> 
+     </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div> 
@@ -67,7 +70,7 @@
      <div class="left_half shipto address_details">
       <ul class="column four_column">
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-         <?php gettext('Ship To Site Id'); ?></label><?php $f->text_field_d('ship_to_id', 'address_id site_address_id'); ?>
+<?php gettext('Ship To Site Id'); ?></label><?php $f->text_field_d('ship_to_id', 'address_id site_address_id'); ?>
        </li>
        <li><?php $f->l_text_field_dr('ship_to_address_name', 'address_name'); ?></li>
        <li><?php $f->l_text_field_dr('ship_to_address', 'address'); ?></li>
@@ -78,8 +81,8 @@
      <div class="right_half billto address_details">
       <ul class="column four_column">
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-         <?php gettext('Bill To Site Id'); ?></label>
-        <?php $f->text_field_d('bill_to_id', 'address_id  site_address_id'); ?>
+        <?php gettext('Bill To Site Id'); ?></label>
+<?php $f->text_field_d('bill_to_id', 'address_id  site_address_id'); ?>
        </li>
        <li><?php $f->l_text_field_dr('bill_to_address_name', 'address_name'); ?></li>
        <li><?php $f->l_text_field_dr('bill_to_address', 'address'); ?></li>
@@ -92,7 +95,7 @@
      <div> 
       <div id="comments">
        <div id="comment_list">
-        <?php echo!(empty($comments)) ? $comments : ""; ?>
+<?php echo!(empty($comments)) ? $comments : ""; ?>
        </div>
        <div id ="display_comment_form">
         <?php
@@ -287,10 +290,10 @@
                   ?>
                   <tr class="po_detail<?php echo $count . '-' . $detailCount; ?> ">
                    <td>
-                    <?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class_second->receving_org_id), 'subinventory_id', 'subinventory', $$class_third->subinventory_id, '', 'subinventory_id copyValue', ''); ?>
+  <?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class_second->receving_org_id), 'subinventory_id', 'subinventory', $$class_third->subinventory_id, '', 'subinventory_id copyValue', ''); ?>
                    </td>
                    <td>
-                    <?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_third->subinventory_id), 'locator_id', 'locator', $$class_third->locator_id, '', 'locator_id copyValue', ''); ?>
+  <?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_third->subinventory_id), 'locator_id', 'locator', $$class_third->locator_id, '', 'locator_id copyValue', ''); ?>
                    </td>
                    <td><?php $f->text_field_wid3('requestor'); ?></td>
                    <td><?php echo $f->select_field_from_array('invoice_match_type', po_detail::$invoice_match_type_a, $$class_third->invoice_match_type); ?></td>

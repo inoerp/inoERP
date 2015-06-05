@@ -44,7 +44,7 @@ class hd_svo_header extends dbObject {
  public $field_a = [
   'hd_svo_header_id',
   'bu_org_id',
-  'repair_type',
+  'hd_service_type_header_id',
   'order_number',
   'hd_service_request_id',
   'promise_date',
@@ -83,12 +83,12 @@ class hd_svo_header extends dbObject {
   'last_update_date',
  ];
  public $initial_search = [
-  'repair_type',
+  'hd_service_type_header_id',
   'order_number',
  ];
  public $requiredField = [
   'bu_org_id',
-  'repair_type',
+  'hd_service_type_header_id',
   'ar_customer_id',
 //  'item_id_m'
  ];
@@ -120,7 +120,7 @@ class hd_svo_header extends dbObject {
  public $pageTitle = " Service Order "; //page Title
  public $hd_svo_header_id;
  public $bu_org_id;
- public $repair_type;
+ public $hd_service_type_header_id;
  public $order_number;
  public $hd_service_request_id;
  public $promise_date;

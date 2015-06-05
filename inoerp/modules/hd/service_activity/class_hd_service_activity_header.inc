@@ -33,12 +33,10 @@ class hd_service_activity_header extends dbObject {
   'module_name' => 'hd',
   'weight' => 1
  ];
-
  public static $line_category_a = [
   'ORDER' => 'Order',
   'RETURN' => 'Return'
  ];
- 
  public $field_a = [
   'hd_service_activity_header_id',
   'activity_name',
@@ -92,6 +90,20 @@ class hd_service_activity_header extends dbObject {
  public $last_update_by;
  public $last_update_date;
 
+ public static function find_all_activity_of_serviceType($service_type_id) {
+  $sql = "SELECT sah.activity_name, sah.activity_description,
+sah.line_category,
+stl.billing_type, stl.service_activity_id, stl.description, stl.hd_service_type_line_id, stl.hd_service_type_header_id
+
+FROM hd_service_type_line stl,
+hd_service_activity_header sah
+
+WHERE sah.hd_service_activity_header_id =stl.service_activity_id
+AND sah.hd_service_activity_header_id ='{$service_type_id}'
+";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? ($result) : false;
+ }
 
 }
 

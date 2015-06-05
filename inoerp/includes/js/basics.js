@@ -2920,10 +2920,22 @@ $(document).ready(function () {
  $('#content').on('focusin', 'input', function () {
   $('#content').find('.select_popup').hide();
   $(this).parent().find('.select_popup').show();
-//  if(!$(this).prop('readonly')){
-//  $(this).parent().find('.select_popup').show();
-// }
+//  if ($(this).parent().find('.select_popup').length > 0) {
+//   $(this).parent().find('.select_popup').show();
+//   $(this).css('width', '80%');
+//   localStorage.setItem("change_field_width", true);
+//   var parent =$(this).parent();
+//   localStorage.setItem("change_field_width", true);
+//  }
  });
+ 
+// .on('focusout', parent, function () {
+//  if (localStorage.getItem("change_field_width") == 'true') {
+//   $(this).css('width', '125%');
+//   localStorage.setItem("change_field_width", false);
+//  }
+// });
+// 
 
  if ($('#display_comment_form').length > 0) {
   $('#display_comment_form').html($('#commentForm_witoutjs').html());
@@ -3334,8 +3346,8 @@ $(document).ready(function () {
    });
   }
  });
- 
-  //Popup for selecting address address_id for normal popup & address_popup for popup where address can be created
+
+ //Popup for selecting address address_id for normal popup & address_popup for popup where address can be created
  $('body').on('click', '.address_id.select_popup', function (e) {
   e.preventDefault();
   localStorage.setItem("set_value_for_one_field", true);
@@ -3347,6 +3359,17 @@ $(document).ready(function () {
   return false;
  });
 
+ //Popup for selecting po_header_id
+ $('body').on('click', '.select_popup_default_class', function (e) {
+  e.preventDefault();
+  localStorage.setItem("set_value_for_one_field", true);
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+  var urLink = 'select.php?class_name='+$(this).data('default_class')+'&mode=2' ;
+  void window.open(urLink, '_blank',
+          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+  return false;
+ });
 
 //selecting customer
  $('body').on("click", '.ar_customer_id.select_popup', function () {
@@ -3387,16 +3410,16 @@ $(document).ready(function () {
   void window.open('select.php?class_name=hd_support_request', '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
- 
-  //popup for contact
+
+ //popup for contact
  $('#content').on('click', '.extn_contact_id.select_popup', function () {
   var close_field_class = '.' + $(this).closest('li').find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
   void window.open('select.php?class_name=extn_contact', '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
- 
-   //popup for hd_service_request_id
+
+ //popup for hd_service_request_id
  $('#content').on('click', '.hd_service_request_id.select_popup', function () {
   var close_field_class = '.' + $(this).closest('li').find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
@@ -3641,8 +3664,8 @@ $(document).ready(function () {
  });
 
 
- 
- 
+
+
  //diable/enable auto complete
  $('#content').on('click', '.disable_autocomplete', function () {
   $(this).parent().siblings().each(function () {
