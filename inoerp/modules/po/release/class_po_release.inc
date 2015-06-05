@@ -16,6 +16,7 @@
   ];
   public static $po_type_a = [
    'BLANKET_RELEASE' => 'Blanket Release',
+   'BLANKET' => 'Blanket Agreeement',
   ];
 
  }
