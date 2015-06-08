@@ -45,8 +45,9 @@ h1.bgc {
 }
 
 h2 {
- font-size: 24px;
- color: #39C;
+font-size: 1.2em;
+color: #39C;
+font-weight: bold;
 }
 
 h2.bgc {

@@ -817,11 +817,11 @@ tr:nth-child(even) {
  background-color: rgba(184, 215, 102, 0.38);
 }
 .chart{
- background : rgba(256,256,256,0.4);
- border: 2px solid #ccc;
- padding: 10px 2px;
- margin: 10px 0px;
- box-shadow: 1px 5px 10px 5px #888;
+background: rgba(255, 255, 255, 0.4) none repeat scroll 0% 0%;
+border: 5px solid #fff;
+padding: 10px 2px;
+margin: 10px 0px;
+box-shadow: 1px 5px 10px 5px rgba(222, 218, 218, 0.42);
 }
 
 .show_remove_filter{
@@ -1022,11 +1022,21 @@ ul.header_field li, ul.line_field li{
  display: inline-block;
 }
 
-ul.header_field li{
- width: 310px;
+ul.header_field li label{
+ width: 135px;
 }
 
-ul.header_field li label{
+ul.header_field_small li{
+ width: 270px;
+ display: inline-block;
+}
+
+ul.header_field_small li label{
+ width: 110px;
+}
+
+
+ul.header_field li label, ul.header_field_small li label{
  text-align: right;
  padding-right: 5px;        
 }
@@ -1040,9 +1050,7 @@ ul.line_field li{
  margin-bottom:6px;
 }
 
-ul.header_field li label{
- width: 135px;
-}
+
 
 /*CSS Arrows*/
 .arrow-down {
