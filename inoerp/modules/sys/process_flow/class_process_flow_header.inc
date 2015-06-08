@@ -34,7 +34,8 @@ class sys_process_flow_header extends dbObject {
  ];
  public static $type_a = [
   'APPROVAL' => 'Approval',
-  'DOCUMENT' => 'Document'
+  'DOCUMENT' => 'Document',
+  'SYS_DOCUMENT' => 'System Document'
  ];
  public $field_a = [
   'sys_process_flow_header_id',
@@ -83,6 +84,17 @@ class sys_process_flow_header extends dbObject {
 //  Public static function processFlowActions_by_headerId($header_id) {
 //  return self::find_by_parent_id($header_id, 'seq_number');
 //  }
+
+ Public static function find_by_type($type='SYS_DOCUMENT') {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= "  WHERE type =  '{$type}'
+         ORDER BY process_flow ASC
+";
+  
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
 
  Public static function processFlowActions_by_headerId($header_id) {
   $sql = " SELECT line_name, sys_process_flow_line_id 

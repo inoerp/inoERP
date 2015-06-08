@@ -301,7 +301,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
   var headerData = $(form_header_id_h + ' :input').not('.search, .text_search').serializeArray();
   if (savingOnlyHeader) {
    savingOnlyHeader = true;
-  } else if (($('#form_line').html()) && ($(primary_column_id_h).val()) && ($(line_key_field_d).val())) {
+  } else if (($('#form_line').html()) && ($(primary_column_id_h).val()) &&  ($('input[name="line_id_cb"]:checked').length > 0) && ($(line_key_field_d).val())) {
    savingOnlyHeader = false;
   }
   else {
@@ -412,41 +412,41 @@ saveMainClass.prototype.saveMain = function (beforeSave)
    }
 //i--------------completion of checked line -- start of all lines---------------------------------
 
-   else if (($(line_key_field_d).val()) && $(primary_column_id_h).val()) {
-//for forms with tab @line level - PO - savetype4a
-    if ($("#tabsLine-1").html()) {
-     $("#tabsLine-1 tbody.form_data_line_tbody > tr").each(function () {
-      var trclass = $(this).attr('class');
-      var lineData = [];
-      $("#form_line").find('.' + trclass).each(function () {
-       var ThisLineData = $(this).find(":input").serializeArray();
-       lineData = $.merge(lineData, ThisLineData);
-      });
-      if ($(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray()) {
-       var detailData = $(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray();
-      } else {
-       detailData = "";
-      }
-      if (lineData.length > 1) {
-       saveLine(json_url, lineData, trclass, detailData, primary_column_id_h, lineClassName, detailClassName);
-      }
-
-     });
-    } else {
-//for forms without tabs @ line level - Options - savetype4b
-     $("tbody.form_data_line_tbody > tr").each(function () {
-      var lineData = $(this).find(":input").serializeArray();
-      var trclass = $(this).attr('class');
-      if ($(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray()) {
-       var detailData = $(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray();
-      } else {
-       detailData = "";
-      }
-//      alert('388');
-      saveLine(json_url, lineData, trclass, detailData, primary_column_id_h, lineClassName, detailClassName);
-     });
-    }
-   }
+//   else if (($(line_key_field_d).val()) && $(primary_column_id_h).val()) {
+////for forms with tab @line level - PO - savetype4a
+//    if ($("#tabsLine-1").html()) {
+//     $("#tabsLine-1 tbody.form_data_line_tbody > tr").each(function () {
+//      var trclass = $(this).attr('class');
+//      var lineData = [];
+//      $("#form_line").find('.' + trclass).each(function () {
+//       var ThisLineData = $(this).find(":input").serializeArray();
+//       lineData = $.merge(lineData, ThisLineData);
+//      });
+//      if ($(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray()) {
+//       var detailData = $(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray();
+//      } else {
+//       detailData = "";
+//      }
+//      if (lineData.length > 1) {
+//       saveLine(json_url, lineData, trclass, detailData, primary_column_id_h, lineClassName, detailClassName);
+//      }
+//
+//     });
+//    } else {
+////for forms without tabs @ line level - Options - savetype4b
+//     $("tbody.form_data_line_tbody > tr").each(function () {
+//      var lineData = $(this).find(":input").serializeArray();
+//      var trclass = $(this).attr('class');
+//      if ($(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray()) {
+//       var detailData = $(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray();
+//      } else {
+//       detailData = "";
+//      }
+////      alert('388');
+//      saveLine(json_url, lineData, trclass, detailData, primary_column_id_h, lineClassName, detailClassName);
+//     });
+//    }
+//   }
    /*----------------------End of single header multiple line ----start of second form---------------------------------------------------------------------------*/
 //for the third form (second form in line) - savetype5a
    if ((typeof lineClassName2 !== undefined) && (lineClassName2 !== null)) {
@@ -701,7 +701,7 @@ function copy_document(doc_header_id, doc_line_id, doc_detail_id) {
  var doc_line_id_c = '.' + doc_line_id;
  var doc_detail_id_d = '.' + doc_detail_id;
  $(doc_header_id_h).val('');
- $('.dont_copy').val('');
+ $('.dont_copy, .dontCopy').val('');
  $('.primary_column2').val('');
  $(doc_header_id_c).val('');
  $(doc_line_id_c).val('');
@@ -715,7 +715,7 @@ function copy_document(doc_header_id, doc_line_id, doc_detail_id) {
 function copy_header(doc_header_id) {
  var doc_header_id_h = '#' + doc_header_id;
  $(doc_header_id_h).val('');
- $('.dont_copy').val('');
+ $('.dont_copy, dontCopy').val('');
  $('.primary_column2').val('');
  var trClass = '.' + $("#form_line tbody tr:first").prop('class');
  $("#form_line tbody tr:not(" + trClass + ")").remove();

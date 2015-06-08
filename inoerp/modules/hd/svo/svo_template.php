@@ -19,7 +19,7 @@ inoERP
     <li><a href="#tabsHeader-4"><?php echo gettext('Address Details') ?></a></li>
     <li><a href="#tabsHeader-5"><?php echo gettext('Note') ?></a></li>
     <li><a href="#tabsHeader-6"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-7"><?php echo gettext('Actuals') ?></a></li>
+    <li><a href="#tabsHeader-7"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -65,6 +65,7 @@ inoERP
       <li><?php $f->l_text_field_d('description'); ?></li> 
       <li><?php $f->l_text_field_dr('order_reference_id'); ?> </li> 
       <li><?php $f->l_text_field_dr('order_reference_table'); ?></li> 
+      <li><?php echo empty($$class->primary_sd_so_header_id) ? $f->l_text_field_d('primary_sd_so_header_id', 'dont_copy') : $f->l_text_field_dr('primary_sd_so_header_id', 'dont_copy'); ?></li> 
      </ul>
     </div>
     <div id="tabsHeader-3" class="tabContent">
@@ -107,16 +108,14 @@ inoERP
     </div>
 
     <div id="tabsHeader-7" class="tabContent">
-     <div> 
-      <ul class="column header_field">
-       <li id="document_status"><label><?php echo gettext('Action') ?></label>
-        <?php echo $f->select_field_from_array('action', $$class->action_a, ''); ?>
-       </li>
-      </ul>
-
-      <div id="comment" class="shoe_comments">
-      </div>
-     </div>
+     <ul class="column header_field">
+      <li id="document_status"><label><?php echo gettext('Action') ?></label>
+       <?php echo $f->select_field_from_array('action', $$class->action_a, '', 'action'); ?>
+      </li>
+      <li><label><?php echo gettext('Add To Order') ?></label>
+       <?php echo $f->select_field_from_array('add_to_order', $add_to_order_a, '', 'add_to_order', '', '', '', 1); ?>
+      </li>
+     </ul>
     </div>
    </div>
 
@@ -133,6 +132,8 @@ inoERP
   <li><a href="#tabsLine-3"><?php echo gettext('Estimates') ?> </a></li>
   <li><a href="#tabsLine-4"><?php echo gettext('Estimates-2') ?> </a></li>
   <li><a href="#tabsLine-5"><?php echo gettext('Repair WO') ?> </a></li>
+  <li><a href="#tabsLine-6"><?php echo gettext('Actuals-1') ?> </a></li>
+  <li><a href="#tabsLine-7"><?php echo gettext('Actuals-2') ?> </a></li>
  </ul>
  <div class="tabContainer">
   <form action=""  method="post" id="hd_svo_line"  name="hd_svo_line" class="m-margin-top-20">
@@ -151,7 +152,8 @@ inoERP
         <th><?php echo gettext('Item Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('Quantity') ?></th>
-        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Add To Order') ?></th>
+        <th><?php echo gettext('Logistic Action') ?></th>
 
        </tr>
       </thead>
@@ -170,14 +172,17 @@ inoERP
          <td><?php form::text_field_wid2sr('hd_svo_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
          <td><?php echo $f->select_field_from_object('service_activity_header_id', hd_service_activity_header::find_all(), 'hd_service_activity_header_id', 'activity_name', $$class_second->service_activity_header_id, '', 'medium', 1, $readonly); ?></td>
-         <td><?php echo $f->select_field_from_object('inv_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->inv_org_id, '', 'small', 1, $readonly); ?></td>
-         <td><?php echo $f->text_field('item_number', $$class_second->item_number, '20', '', 'select_item_number', '', $readonly); echo $f->hidden_field('item_id_m', $$class_second->item_id_m); ?>
+         <td><?php echo $f->select_field_from_object('inv_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->inv_org_id, '', '', 1, $readonly); ?></td>
+         <td><?php
+          echo $f->text_field('item_number', $$class_second->item_number, '20', '', 'select_item_number', '', $readonly);
+          echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
+          ?>
           <i class="select_item_number select_popup clickable fa fa-search"></i></td>
          <td><?php form::text_field_wid2s('item_description'); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small'); ?></td>
          <td><?php form::number_field_wid2s('quantity'); ?></td>
-         <td><?php echo $f->select_field_from_array('action', hd_svo_line::$action_a, ''); ?></td>
-
+         <td><?php echo empty($$class_second->sd_so_header_id) ? $f->select_field_from_array('add_to_order', $add_to_order_a, '') : ''; ?></td>
+         <td><?php echo $f->select_field_from_array('logistic_action', hd_svo_line::$action_a, ''); ?></td>
         </tr>
         <?php
         $count = $count + 1;
@@ -194,10 +199,12 @@ inoERP
         <th><?php echo gettext('Seq#') ?></th>
         <th><?php echo gettext('SO Line Id') ?></th>
         <th><?php echo gettext('SO Header Id') ?></th>
-        <th><?php echo gettext('SO Number') ?></th>
-        <th><?php echo gettext('SO Line Number') ?></th>
         <th><?php echo gettext('Line Status') ?></th>
-        <th><?php echo gettext('View Details') ?>#</th>
+        <th><?php echo gettext('Price List') ?></th>
+        <th><?php echo gettext('Price Date') ?></th>
+        <th><?php echo gettext('Unit Price') ?></th>
+        <th><?php echo gettext('Line Price') ?></th>
+        <th><?php echo gettext('View Details') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -207,12 +214,14 @@ inoERP
         ?>         
         <tr class="hd_svo_line<?php echo $count ?>">
          <td><?php $f->seq_field_d($count) ?></td>
-         <td><?php $f->text_field_wid2r('sd_so_line_id'); ?></td>
-         <td><?php $f->text_field_wid2r('sd_so_header_id'); ?></td>
-         <td><?php $f->text_field_wid2r('so_number'); ?></td>
-         <td><?php $f->text_field_wid2r('so_line_number'); ?></td>
-         <td><?php $f->text_field_wid2r('line_status'); ?></td>
-         <td><a href="#" ><i class="fa fa-file-text-o margin-left-20"></i></a></td>
+         <td><?php $f->text_field_wid2r('sd_so_line_id', 'dontCopy'); ?></td>
+         <td><?php $f->text_field_wid2r('sd_so_header_id', 'dontCopy'); ?></td>
+         <td><?php $f->text_field_wid2r('line_status', 'dontCopy'); ?></td>
+         <td><?php echo $f->select_field_from_object('price_list_header_id', mdm_price_list_header::find_all_sales_pl(), 'mdm_price_list_header_id', 'price_list', $$class_second->price_list_header_id, '', 'medium copyValue'); ?>         </td>
+         <td><?php echo $f->date_fieldAnyDay('price_date', $$class_second->price_date) ?></td>
+         <td><?php form::number_field_wid2('unit_price'); ?></td>
+         <td><?php form::number_field_wid2('line_price'); ?></td>
+         <td><a target="_blank" href="form.php?class_name=sd_so_header&sd_so_header_id=<?php echo $hd_svo_line->sd_so_header_id ?>" ><i class="fa fa-file-text-o margin-left-20"></i></a></td>
         </tr>
         <?php
         $count = $count + 1;
@@ -260,11 +269,11 @@ inoERP
           </ul>
          </td>
          <td><?php form::text_field_wid3sr('hd_svo_estimates_id'); ?></td>
-         <td><?php echo $f->text_field_wid3('billing_source'); ?></td>
-         <td><?php echo $f->text_field_wid3('billing_type'); ?></td>
-         <td><?php echo $f->text_field('item_id_m', $$class_third->item_id_m, '8', '', 'item_id_m', 1, $readonly); ?></td>
-         <td><?php echo $f->text_field('billing_item_number', $$class_third->billing_item_number, '20', '', 'select_item_number', '', $readonly); ?>
-          <i class="select_item_number select_popup clickable fa fa-search"></i></td>
+         <td><?php echo $f->select_field_from_array('billing_source', hd_svo_estimates::$billing_source_a, $$class_third->billing_source, '', 'medium'); ?></td>
+         <td><?php echo $f->select_field_from_object('billing_type', hd_service_type_header::billing_type(), 'option_line_code', 'option_line_value', $$class_third->billing_type, '', 'medium'); ?></td>
+         <td><?php echo $f->text_field('item_id_m', $$class_third->item_id_m, '8', '', 'item_id_m', 1, 1); ?></td>
+         <td><?php echo $f->text_field('billing_item_number', $$class_third->billing_item_number, '20', '', 'select_item_number', '', $readonly);
+        ?><i class="select_item_number select_popup clickable fa fa-search"></i></td>
          <td><?php echo $f->text_field('billing_description', $$class_third->billing_description, '20', '', 'item_description', '', $readonly); ?></td>
          <td><?php echo $f->select_field_from_object('billing_uom', uom::find_all(), 'uom_id', 'uom_name', $$class_third->billing_uom, '', 'uom_id', '', $readonly); ?></td>
         </tr>
@@ -309,7 +318,88 @@ inoERP
     </div>
    </form>
   </div>
-  <div id="tabsLine-5" class="scrollElement tabContent">
+  <div id="tabsLine-5" class="tabContent">
+  </div>
+  <div id="tabsLine-6" class="tabContent">
+   <table class="form_line_data_table3">
+    <thead> 
+     <tr>
+      <th><?php echo gettext('Action') ?></th>
+      <th><?php echo gettext('Actuals Id') ?></th>
+      <th><?php echo gettext('Source') ?></th>
+      <th><?php echo gettext('Billing Category') ?></th>
+      <th><?php echo gettext('Item Id') ?></th>
+      <th><?php echo gettext('Item Number') ?></th>
+      <th><?php echo gettext('Item Description') ?></th>
+      <th><?php echo gettext('UOM') ?></th>
+     </tr>
+    </thead>
+    <tbody class="form_data_line_tbody3 wip_wo_bom_values" >
+     <?php
+     $count = 0;
+     foreach ($hd_svo_actuals_object as $hd_svo_actuals) {
+      if (!empty($hd_svo_actuals->item_id_m)) {
+       $item = item::find_by_item_id_m($hd_svo_actuals->item_id_m);
+       $$class_fourth->billing_item_number = $item->item_number;
+       $$class_fourth->billing_description = $item->item_description;
+       $$class_fourth->billing_uom = $item->uom_id;
+      }
+      ?>         
+      <tr class="hd_svo_actuals<?php echo $count ?>">
+       <td>    
+        <ul class="inline_action">
+         <li class="add_row_img"><i class="fa fa-plus-circle"></i></li>
+         <li class="remove_row_img"><i class="fa fa-minus-circle"></i></li>
+         <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($hd_svo_actuals->hd_svo_actuals_id); ?>"></li>           
+         <li><?php echo form::hidden_field('hd_svo_header_id', $$class->hd_svo_header_id); ?></li>
+        </ul>
+       </td>
+       <td><?php form::text_field_wid4sr('hd_svo_actuals_id'); ?></td>
+       <td><?php echo $f->select_field_from_array('source', hd_svo_actuals::$source_a, $$class_fourth->source, '', 'medium'); ?></td>
+       <td><?php echo $f->select_field_from_object('billing_type', hd_service_type_header::billing_type(), 'option_line_code', 'option_line_value', $$class_fourth->billing_type, '', 'medium', '', 1); ?></td>
+       <td><?php echo $f->text_field('item_id_m', $$class_fourth->item_id_m, '8', '', 'item_id_m', '', 1); ?></td>
+       <td><?php echo $f->text_field('billing_item_number', $$class_fourth->billing_item_number, '20', '', '', '', $readonly); ?></td>
+       <td><?php echo $f->text_field('billing_description', $$class_fourth->billing_description, '20', '', 'item_description', '', $readonly); ?></td>
+       <td><?php echo $f->select_field_from_object('billing_uom', uom::find_all(), 'uom_id', 'uom_name', $$class_fourth->billing_uom, '', 'uom_id', '', 1); ?></td>
+      </tr>
+      <?php
+      $count = $count + 1;
+     }
+     ?>
+    </tbody>
+   </table>
+  </div>
+  <div id="tabsLine-7" class="tabContent">
+   <table class="form_line_data_table3">
+    <thead> 
+     <tr>
+      <th><?php echo gettext('Actual Id') ?></th>
+      <th><?php echo gettext('Quantity') ?></th>
+      <th><?php echo gettext('Unit Price') ?></th>
+      <th><?php echo gettext('Line Price') ?></th>
+      <th><?php echo gettext('Line Status') ?></th>
+      <th><?php echo gettext('SO Line Id') ?></th>
+     </tr>
+    </thead>
+    <tbody class="form_data_line_tbody3 wip_wo_bom_values" >
+     <?php
+     $count = 0;
+     foreach ($hd_svo_actuals_object as $hd_svo_actuals) {
+      ?>         
+      <tr class="hd_svo_actuals<?php echo $count ?>">
+       <td><?php echo $$class_fourth->hd_svo_actuals_id; ?></td>
+       <td><?php form::number_field_wid4sr('quantity'); ?></td>
+       <td><?php echo $f->text_field_wid4r('unit_price'); ?></td>
+       <td><?php echo $f->text_field_wid4('line_price'); ?></td>
+       <td><?php echo $f->text_field_wid4r('line_status'); ?></td>
+       <td><?php echo $f->text_field_wid4r('sd_so_line_id'); ?></td>
+      </tr>
+      <?php
+      $count = $count + 1;
+     }
+     ?>
+    </tbody>
+   </table>
   </div>
 
  </div>

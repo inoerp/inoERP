@@ -6,7 +6,7 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php  echo gettext('Sales Order / RMA Header') ?></span>
+<div id ="form_header"><span class="heading"><?php $f = new inoform();  echo gettext('Sales Order / RMA Header') ?></span>
  <form action=""  method="post" id="sd_so_header"  name="sd_so_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -135,9 +135,9 @@ inoERP
         <th><?php echo gettext('Line Id') ?></th>
         <th><?php echo gettext('Line') ?>#</th>
         <th><?php echo gettext('Type') ?></th>
-        <th><?php echo gettext('Shipping Org') ?></th>
+        <th><?php echo gettext('Org') ?></th>
         <th><?php echo gettext('Item Number') ?></th>
-        <th><?php echo gettext('Item Description') ?></th>
+        <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('Quantity') ?></th>
         <th><?php echo gettext('Line Status') ?></th>
@@ -158,13 +158,14 @@ inoERP
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('sd_so_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
-         <td><?php echo $f->select_field_from_object('line_type', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class_second->line_type, '', 'medium', 1, $readonly); ?></td>
-         <td><?php echo $f->select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->shipping_org_id, '', 'small', 1, $readonly); ?></td>
+         <td><?php echo $f->select_field_from_object('line_type', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class_second->line_type, '', 'medium', 1, $readonly1,'','','','process_flow_id'); ?></td>
+         <td><?php echo $f->select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->shipping_org_id, '', '', 1, $readonly1); ?></td>
          <td><?php
           echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
+          echo $f->hidden_field_withCLass('customer_ordered_cb', '1', 'popup_value');
           form::text_field_wid2('item_number', 'select_item_number');
           ?>
-          <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_number select_popup"></td>
+          <i class="select_item_number select_popup fa fa-search"></I></td>
          <td><?php form::text_field_wid2s('item_description'); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small'); ?></td>
 
@@ -339,6 +340,9 @@ inoERP
         <th>ar_transaction_header_id </th>
         <th>ar_transaction_line_id</th>
         <th>Invoice/CM # </th>
+        <th>Process Id </th>
+        <th>View Process</th>
+        <th>Action</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -353,6 +357,9 @@ inoERP
          <td><?php form::text_field_wid2r('ar_transaction_header_id'); ?></td>
          <td><?php form::text_field_wid2r('ar_transaction_line_id'); ?></td>
          <td><?php form::text_field_wid2r('ar_transaction_number'); ?></td>
+         <td><?php $f->text_field_wid2r('sys_spd_header_id' ,'dont_copy'); ?></td>
+         <td><a role="button" target="_blank" class="btn btn-sm btn-default dont_copy" href="form.php?class_name=sys_spd_header&sys_spd_header_id=<?php echo $$class_second->sys_spd_header_id; ?>"><?php echo $$class_second->sys_spd_header_id; ?></a></td>
+         <td><?php echo $f->select_field_from_array('line_action', sd_so_line::$line_action_a, ''); ?></td>
         </tr>
         <?php
         $count = $count + 1;

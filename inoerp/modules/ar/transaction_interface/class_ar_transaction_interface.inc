@@ -308,7 +308,7 @@ class ar_transaction_interface extends dbObject {
    //update the sales order line 
    $sol = new sd_so_line();
    $sol->findBy_id($obj->sd_so_line_id);
-   if ($sol->line_status != 'SHIPPED') {
+   if (in_array($sol->line_status, array('SHIPPED','AWAITING_INVOICING'))) {
     $msg .= "<br> Line is not available for invoicing. Line Id is " . $obj->sd_so_line_id;
     continue;
    }

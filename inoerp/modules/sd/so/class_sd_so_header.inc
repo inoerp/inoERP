@@ -40,6 +40,7 @@ class sd_so_header extends dbObject {
  public static $order_source_type_a = [
   'MANUAL' => 'Manual',
   'ECOMMERCE' => 'eCommerce',
+  'SERVICE' => 'Serive',
   'INV' => 'Inventory',
   'COPY' => 'Copy',
  ];
@@ -85,13 +86,7 @@ class sd_so_header extends dbObject {
   "ar_customer_id",
   "sales_person"
  ];
- public $column = [
-  "sd_so_header_id",
-  "so_number",
-  "so_status",
-  "ar_customer_id",
-  "creation_date",
- ];
+
  public $requiredField = [
   'ar_customer_id',
   'ship_to_id',

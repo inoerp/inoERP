@@ -72,6 +72,22 @@ class sys_process_flow_line extends dbObject {
  public $last_update_by;
  public $last_update_date;
 
+ public static function find_lines_fromStatus_by_headerId($header_id, $status = 'Start') {
+  $sql = " SELECT * 
+            FROM sys_process_flow_line
+            WHERE 
+            sys_process_flow_header_id = '{$header_id}'
+            AND line_number >= (
+            SELECT line_number 
+            FROM sys_process_flow_line 
+            WHERE sys_process_flow_header_id = '{$header_id}'
+            AND line_name ='{$status}'
+          ) 
+            ORDER BY line_number ASC ";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
+
 }
 
 //end of path class

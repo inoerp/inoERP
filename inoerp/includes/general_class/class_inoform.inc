@@ -254,11 +254,8 @@ EOD;
  }
 
  public static function form_button_withImage($current_page_path = "", $homeUrl = '') {
-  $home_url_wos = rtrim(HOME_URL, '/');
-  $homeUrl = empty($homeUrl) ? $home_url_wos : $homeUrl;
-  if (empty($current_page_path)) {
-   $current_page_path = thisPage_url();
-  }
+  global $class;
+  $current_page_path = 'form.php?mode=9&class_name='.$class;
   echo <<<EOD
 			 <ul id="form_top_image" class="draggable">
         <li class='fa fa-refresh clickable' id='refresh_button' title='Refresh'></li>

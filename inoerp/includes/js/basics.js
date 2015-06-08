@@ -2928,7 +2928,7 @@ $(document).ready(function () {
 //   localStorage.setItem("change_field_width", true);
 //  }
  });
- 
+
 // .on('focusout', parent, function () {
 //  if (localStorage.getItem("change_field_width") == 'true') {
 //   $(this).css('width', '125%');
@@ -3365,8 +3365,12 @@ $(document).ready(function () {
   localStorage.setItem("set_value_for_one_field", true);
   var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
-  var urLink = 'select.php?class_name='+$(this).data('default_class')+'&mode=2' ;
-  void window.open(urLink, '_blank',
+  var openUrl = 'select.php?class_name=' + $(this).data('default_class') + '&mode=2';
+  $(this).parent().find('.popup_value').each(function () {
+   var dataName = $(this).prop('name').replace(/\[]+/g, '');
+   openUrl += '&' + dataName + '=' + $(this).val();
+  });
+  void window.open(openUrl, '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
   return false;
  });
@@ -4040,6 +4044,7 @@ $(document).ready(function () {
    var formUrl = urlLink;
   }
   getFormDetails(formUrl);
+  history.pushState(null, null, urlLink); 
  }).one();
 
  $('body').on('click', '.ajax_content a', function (e) {
@@ -4060,6 +4065,7 @@ $(document).ready(function () {
    var formUrl = urlLink;
   }
   getFormDetails(formUrl);
+  history.pushState(null, null, urlLink); 
  });
 
 
@@ -4793,3 +4799,15 @@ $(document).ready(function () {
 // });
 //}
 
+
+
+//$('body').on('click', '.top_header_details_toggle', function () {
+// if ($('.navbar-fixed-top').is(':visible')) {
+//  $('.navbar-fixed-top').hide();
+//  $('#header_top_quick_nav .top_header_details_toggle').removeClass('fa-toggle-up').addClass('fa-toggle-down');
+// } else {
+//$('.navbar-fixed-top').show();
+//  $('#header_top_quick_nav .top_header_details_toggle').removeClass('fa-toggle-down').addClass('fa-toggle-up');
+// }
+// $('.navbar-fixed-top').slideToggle();
+//});

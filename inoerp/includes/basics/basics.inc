@@ -398,6 +398,7 @@ require_once(INC_MODULE . DS . "hd" . DS . "service_activity" . DS . "class_hd_s
 require_once(INC_MODULE . DS . "hd" . DS . "service_activity" . DS . "class_hd_service_activity_line.inc");
 require_once(INC_MODULE . DS . "hd" . DS . "svo" . DS . "class_hd_svo_line.inc");
 require_once(INC_MODULE . DS . "hd" . DS . "svo" . DS . "class_hd_svo_header.inc");
+require_once(INC_MODULE . DS . "hd" . DS . "svo" . DS . "class_hd_svo_actuals.inc");
 require_once(INC_MODULE . DS . "adm" . DS . "task_type" . DS . "class_adm_task_type.inc");
 require_once(INC_MODULE . DS . "adm" . DS . "task_status" . DS . "class_adm_task_status.inc");
 

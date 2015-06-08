@@ -23,6 +23,13 @@ $(document).ready(function () {
   $('.lines_number:first').val('1');
  }
 
+$('body').off('change','#action').on('change','#action', function(){
+  if($(this).val() == 'PROCESS_ACTUALS'){
+    $('#add_to_order').prop('disabled', false);
+  }else{
+    $('#add_to_order').prop('disabled', true);
+  }
+});
 
  $('body').off('change', '#bu_org_id').on('change', '#bu_org_id', function () {
   getBUDetails($(this).val());
@@ -32,7 +39,7 @@ $(document).ready(function () {
   getBUDetails($('#bu_org_id').val());
  }
 
-// get_customer_detail_for_bu();
+ get_customer_detail_for_bu();
 
  $("#content").off("change", '#ar_customer_site_id').on("change", '#ar_customer_site_id', function () {
   var customer_site_id = $("#ar_customer_site_id").val();

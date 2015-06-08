@@ -68,7 +68,7 @@ class hd_svo_line extends dbObject {
   'item_description',
   'so_number',
   'so_line_number',
-  'action'
+  'logistic_action'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
   "hd_svo_header_id"
@@ -110,7 +110,7 @@ class hd_svo_line extends dbObject {
  public $tax_code_value;
  public $ar_transaction_number;
  public $item_description;
- public $action;
+ public $logistic_action;
  public $so_number;
  public $so_line_number;
 
@@ -135,6 +135,10 @@ class hd_svo_line extends dbObject {
    return -90;
   }
 
+  if (!empty($this->action)) {
+   $this->_do_action();
+  }
+
   if ((empty($this->line_status)) && (empty($this->sd_so_line_id))) {
    $this->line_status = 'PENDING_IMPORT';
    echo "<div class='alert alert-danger'>Line status is updated to <strong> " . $this->line_status . ".</strong></div> ";
@@ -143,6 +147,33 @@ class hd_svo_line extends dbObject {
 
  public function _after_save() {
   
+ }
+
+ private function _do_action() {
+  switch ($this->action) {
+   case 'PROCESS':
+    $this->_process_line_to_so();
+    break;
+
+   case 'PROCESS_ACTUALS':
+    $this->copy_estimates();
+    break;
+
+   default :
+    break;
+  }
+ }
+ 
+ private function _process_line_to_so(){
+  
+ }
+ 
+  public static function find_by_headerId_and_status($hd_svo_header_id, $line_status = 'PENDING_IMPORT') {
+  $sql = "SELECT * FROM " .
+   self::$table_name .
+   " where hd_svo_header_id= '{$hd_svo_header_id}' AND line_status= '{$line_status}' ";
+  $result = self::find_by_sql($sql);
+  return $result;
  }
 
  public function findAll_ByOrgId($org_id, $status = '') {

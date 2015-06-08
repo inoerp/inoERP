@@ -39,6 +39,16 @@ class hd_service_activity_line extends dbObject {
  public $last_update_by;
  public $last_update_date;
 
+ 
+ 
+   public static function find_by_headerId_and_buOrgId($hd_service_activity_header_id, $bu_org_id) {
+  $sql = "SELECT * FROM " .
+   self::$table_name .
+   " where hd_service_activity_header_id= '{$hd_service_activity_header_id}' AND bu_org_id= '{$bu_org_id}' LIMIT 1 ";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? array_pop($result) : false;
+ }
+ 
 }
 
 //end of hd_service_activity_line class
