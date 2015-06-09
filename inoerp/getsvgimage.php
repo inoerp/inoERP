@@ -104,6 +104,18 @@ $data2 = [
 		array('label' => 'blanket po', 'value' => array('23', '111', '345', '250', '1228','340', '250', '1228','340', )),
 		array('label' => 'planned po', 'value' => array('343', '78', '900','23', '111', '345','23', '111', '345' )),
 ];
+
+$data5 = ['Opportunity' => '80', 'Leads' => '190', 'Quotes' => '70', 'Sales' => '40'];
+
+$svgimage10 = new getsvgimage();
+$svgimage10->setProperty('_chart_name', $chart_name);
+$svgimage10->setProperty('_chart_width', $chart_width);
+$svgimage10->setProperty('_chart_height', $chart_height);
+$svgimage10->setProperty('_chart_type', 'funnel');
+$svgimage10->setProperty('_bottom_margin', '30');
+$svgimage10->setProperty('_data', $data5);
+$chart_image10 = $svgimage10->draw_chart();
+
 $svgimage9->setProperty('_chart_name', $chart_name);
 $svgimage9->setProperty('_chart_width', $chart_width);
 $svgimage9->setProperty('_chart_height', $chart_height);
@@ -111,6 +123,8 @@ $svgimage9->setProperty('_chart_type', 'line');
 $svgimage9->setProperty('_legend', $legend);
 $svgimage9->setProperty('_data', $data2);
 $chart_image9 = $svgimage9->draw_chart();
+
+
 
 require_once(INC_BASICS . DS . "getsvgimage_template.inc");
 ?>

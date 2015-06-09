@@ -220,13 +220,16 @@ $(document).ready(function() {
  });
 
 //remove fields
- $('#content').on('blur', '.table_fields', function() {
-  if (!$(this).val()) {
-   if ($(this).closest('.display_records').find('li').length > 2) {
-    $(this).closest('li').remove();
-   }
+$('#content').on('blur', '.table_fields', function() {
+   console.log($(this).val());
+ if (!$(this).val() || $(this).val() == 'remove') {
+  if ($(this).closest('.display_records').find('li').length > 2) {
+   $(this).closest('li').remove();
+  }else{
+  alert('You cant remove first field\nRemove table if required');
   }
- });
+ }
+});
 
  $('#content').on('dblclick', '.draggable_element', function() {
   if ($(this).parent().prop('tagName') == 'TR') {
@@ -240,6 +243,9 @@ $(document).ready(function() {
 
 //get table fields
  $("#content").on('change', '.all_table_names', function() {
+  if(!$(this).val()){
+   return;
+  }
   var tableName = $(this).val();
   var parentClass = $(this).closest('ul').attr("class");
   if (tableName !== 'remove_table') {
@@ -250,13 +256,6 @@ $(document).ready(function() {
   }
  });
 
- $("#content").on('click', '.remove_option', function() {
-  if ($(this).closest('ul').find('li').length > 2) {
-   $(this).closest('li').remove();
-  } else {
-   alert('You cant remove first field\nRemove table if required');
-  }
- });
 
  $("#content").on('blur', '.all_table_names', function() {
   if (!$(this).val()) {
@@ -382,15 +381,38 @@ $(document).ready(function() {
   getSvgImage();
  });
  
-//  //save class
-// var classSave = new saveMainClass();
-// classSave.json_url = 'form.php?class_name=view';
-// classSave.form_header_id = 'view_header';
-// classSave.primary_column_id = 'view_id';
-// classSave.single_line = false;
-// classSave.savingOnlyHeader = true;
-// classSave.enable_select = true;
-// classSave.headerClassName = 'view';
-// classSave.saveMain();
+//Mathematical functions
+$('#content').on('focusout', 'input.showField_buttons', function() {
+$('#content').data('lastSelected', $(this));
+});
 
+$('body').off('click','#func_sum').on('click','#func_sum' , function(){
+var lastSelected = $('#content').data('lastSelected');
+var sumValue = 'SUM('+$(lastSelected).val()+')';  
+$(lastSelected).val(sumValue);
+});
+
+$('body').off('click','#func_count').on('click','#func_count' , function(){
+var lastSelected = $('#content').data('lastSelected');
+var sumValue = 'COUNT('+$(lastSelected).val()+')';  
+$(lastSelected).val(sumValue);
+});
+
+$('body').off('click','#func_avg') .on('click','#func_avg' , function(){
+var lastSelected = $('#content').data('lastSelected');
+var sumValue = 'AVG('+$(lastSelected).val()+')';  
+$(lastSelected).val(sumValue);
+});
+
+$('body').off('click','#func_max').on('click','#func_max' , function(){
+var lastSelected = $('#content').data('lastSelected');
+var sumValue = 'MAX('+$(lastSelected).val()+')';  
+$(lastSelected).val(sumValue);
+});
+
+$('body').off('click','#func_min').on('click','#func_min' , function(){
+var lastSelected = $('#content').data('lastSelected');
+var sumValue = 'MIN('+$(lastSelected).val()+')';  
+$(lastSelected).val(sumValue);
+});
 });

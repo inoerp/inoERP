@@ -78,8 +78,8 @@ $(document).ready(function() {
   newSortField += '<input class="hidden sorted_field" type="hidden" value="' + 'sort_up' + '" name="' + fieldName + '"></span>';
   $(this).closest('div.view_content').find('.view_filters').append(newSortField);
   $(this).getViewResult_e();
- }).on('click', '.view_content .ino_sort_Z_A', function() {
-  var fieldName = $(this).closest('th').data('fieldname');
+ }).on('click', '.view_content .ino_sort_z_a', function() {
+  var fieldName = $(this).closest('th').data('field_name');
   var newSortField = '<span class="show_sort_remove show_remove_filter ' + fieldName + '">' + fieldName + ' : ' + 'Sort Down';
   newSortField += '<input class="hidden sorted_field" type="hidden" value="' + 'sort_down' + '" name="' + fieldName + '"></span>';
   $(this).closest('div.view_content').find('.view_filters').append(newSortField);

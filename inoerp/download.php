@@ -20,9 +20,13 @@ if (!empty($_POST) && !empty($_POST['program_name'])) {
 } else {
  $str_var = $_POST["data"];
  $array_var = unserialize(base64_decode($str_var));
- $download_format = !empty($_POST['download_format']) ? $_POST['download_format'] : 'text_format';
+ if(!empty($_POST['download_format'])){
+  $download_format = is_array($_POST['download_format']) ? $_POST['download_format'][0] : 'text_format';
+ }else{
+  $download_format =  'text_format';
+ }
+ 
 }
-
 
 
 

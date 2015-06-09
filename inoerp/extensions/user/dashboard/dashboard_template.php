@@ -11,8 +11,9 @@
      <li><a href="#tabsHeader-1">Navigation</a></li>
      <li><a href="#tabsHeader-2">Quick Info</a></li>
      <li><a href="#tabsHeader-3">On hand</a></li>
-     <li><a href="#tabsHeader-4">Purchasing</a></li>
-     <li><a href="#tabsHeader-5">WIP Value</a></li>
+     <li><a href="#tabsHeader-4">Sales Funnel</a></li>
+     <li><a href="#tabsHeader-5">Purchasing</a></li>
+     <li><a href="#tabsHeader-6">WIP Value</a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -34,14 +35,13 @@
         ?>
        </li>
        <li>
-        <span class="button"><a href="<?php echo HOME_URL ?>form.php?class_name=user_favourite&mode=9">Favourites 
-          <img src="<?php echo THEME_URL; ?>/images/edit.png" alt=" update favourite" title='Update Favourite'/>
-         </a></span>
+      <a title='Update Favourite' href="<?php echo HOME_URL ?>form.php?class_name=user_favourite&mode=9"><h2>Favourites 
+           <i class="fa fa-edit"> </i></h2></a>
         <?php
         echo $fav->show_currentUser_fav();
-        echo block::show_block_content_by_BlockId('57');
+        
         ?>
-       </li>               
+       </li>
       </ul>
      </div>
      <div id="tabsHeader-3" class="tabContent">
@@ -51,14 +51,20 @@
       $view_i->viewResultById();
       ?>
      </div>
-     <div id="tabsHeader-4" class="tabContent">
+          <div id="tabsHeader-4" class="tabContent">
+      <?php
+      $view_i->view_id = 13;
+      $view_i->viewResultById();
+      ?>
+     </div>
+     <div id="tabsHeader-5" class="tabContent">
       <?php
       $view_i->view_id = 12;
       $view_i->viewResultById();
       ?>
      </div>
 
-     <div id="tabsHeader-5" class="tabContent">
+     <div id="tabsHeader-6" class="tabContent">
       <div>                
        <?php
        $raw = new ra_wip();

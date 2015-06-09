@@ -16,6 +16,7 @@
 	<?php echo $chart_image7 ; ?>
 	<?php echo $chart_image8 ; ?>
 	<?php echo $chart_image9 ; ?>
+  <?php echo $chart_image10 ; ?>
  </div>
 </body>
 </html>

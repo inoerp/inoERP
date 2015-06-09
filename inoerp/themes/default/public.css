@@ -2195,3 +2195,11 @@ background-color: rgba(233, 237, 237, 0.32) !important;
 .margin-left-20{
  margin-left: 20px;
 }
+
+#searchResultMessages ul.inline_list  {
+        float: right;
+}
+
+#searchResultMessages ul.inline_list  h3{
+        margin-top: 0 !important;
+}

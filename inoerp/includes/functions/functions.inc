@@ -1279,7 +1279,7 @@ function show_download_button($result_data) {
  $return_stmt = '<div id="searchResultMessages">';
  $return_stmt .='<ul class="inline_list"><li>';
  $return_stmt .='<h3>Total records : ' . count($result_data) . '</h3></li>';
- $return_stmt .= '<li>Download All Data in </li><li>';
+ $return_stmt .= '<li>';
  $result_data_all = json_decode(json_encode($result_data), true);
  $return_stmt .= '<form action="' . HOME_URL . 'download.php"  method="POST" name="download_all" id="download_all" target="_blank">';
  $return_stmt .= '<input type="hidden"  name="data" value="' . base64_encode(serialize($result_data_all)) . '" >';
@@ -1293,6 +1293,29 @@ function show_download_button($result_data) {
  $return_stmt .= '<li id="export_excel_searchResult" class="clickable"><i class="fa fa-file-excel-o"></i></li>
   <li id="print_searchResult" class="print clickable" title="Print"><i class="fa fa-print"></i></li>
 </ul>
+</div>';
+ return $return_stmt;
+}
+
+function show_download_button_inSelectFormat($result_data, $total_count = 0, $total_count_all = 0) {
+ global $f;
+ $return_stmt = '<div id="searchResultMessages">';
+ $return_stmt .='<ul class="inline_list">';
+ $return_stmt .= '<li>';
+ $result_data_all = json_decode(json_encode($result_data), true);
+ $return_stmt .= '<form action="' . HOME_URL . 'download.php"  method="POST" name="download_all" id="download_all" target="_blank">';
+ $return_stmt .= '<input type="hidden"  name="data" value="' . base64_encode(serialize($result_data_all)) . '" >';
+ $return_stmt .= $f->select_field_from_array('download_format', dbObject::$download_format, 'excel_format');
+ $return_stmt .= '<input type="submit"  role="button" name="export_allResult" value="Download" id="export_excel_allResult" class="clickable btn btn-sm btn-default"  >';
+ $return_stmt .= '</form></li>';
+ $return_stmt .= '<li id="export_excel_searchResult" class="clickable"><i class="fa fa-file-excel-o"></i></li>
+  <li id="print_searchResult" class="print clickable" title="Print"><i class="fa fa-print"></i></li>';
+ if(!empty($total_count)){
+      $return_stmt .= '  <li><button class="btn btn-primary" type="button">Accessible Records<span class="badge">'.$total_count.'</span></button></li>
+    <li><button class="btn btn-warning" type="button">Total Records <span class="badge">'.$total_count_all.'</span></button></li>';
+ }
+
+$return_stmt .='</ul>
 </div>';
  return $return_stmt;
 }

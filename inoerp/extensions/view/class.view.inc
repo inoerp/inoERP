@@ -699,7 +699,9 @@ class view extends dbObject {
   if (!empty($this->user_filter) || !empty($this->user_sort)) {
    $this->query_v = ' SELECT ' . $view_i->select_v;
    $this->query_v .= ' FROM ' . $view_i->from_v;
-   $this->query_v .= ' WHERE ' . $view_i->where_v;
+   if(!empty($view_i->where_v)){
+    $this->query_v .= ' WHERE ' . $view_i->where_v;
+   }
    if (!empty($this->user_filter)) {
     $user_filter = $this->_update_queryByFilter();
     if (empty($view_i->where_v)) {

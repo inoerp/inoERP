@@ -746,6 +746,24 @@ function rightClickMenu(menuContent) {
  });
 }
 
+//right click menu
+function rightClickDocMenu(menuContent) {
+ if (localStorage.getItem("disableContextMenu")) {
+  return;
+ }
+ var menu = "<div id='right_click_doc_menu'>" + menuContent + "</div>";
+ $('.right_click_doc_menu_field').bind("contextDocMenu", function (event) {
+  event.preventDefault();
+  if ($("#right_click_doc_menu")) {
+   $("div#right_click_doc_menu").remove();
+  }
+  $(menu).appendTo('body').css({top: event.pageY + "px", left: event.pageX + "px"});
+ });
+ $('body').bind("click", function (event) {
+  $("div#right_click_doc_menu").remove();
+ });
+}
+
 function contextMenuMain(docHedaderId, docLineId, docDetailId, trClass, tbodyClass, noOfTabbs, btn1DivId, btn2DivId,
         btn2_1DivId, btn6DivId, btn7DivId, btn8DivId,
         btn9DivId, btn9_1DivId, btn9_2DivId, btn9_3DivId, btn10DivId, btn10_1DivId, btn11DivId,

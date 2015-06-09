@@ -25,8 +25,10 @@ margin: 5px 2px;
 }
 
 #logical_settings li label{
-padding : 0 5px 5px 10px;
-background: none repeat scroll 0% 0% rgba(147, 45, 174, 0.25);
+padding: 2px 10px;
+background: rgba(189, 183, 191, 0.31) none repeat scroll 0% 0%;
+display: block;
+width: 100%;
 }
 
 #logical_settings li.field_records label{
@@ -83,11 +85,11 @@ border:1px solid #ccc;
 
 li#sort_sqlQuery ul li{
 display: inline-block;
-border-right:2px solid #ccc;
 }
 
-li#sort_sqlQuery ul li#sorting_li{
-width: 49.5%;
+li#sort_sqlQuery ul li#sorting_li, 
+li#sort_sqlQuery ul li#groupBy_li{
+width: 49.8%;
 }
 
 .select.all_table_names{
@@ -106,19 +108,18 @@ span.view_name{
 
 table#sort_fields_table tr td, table#group_by_table tr td, table#group_by_table tr th{
     border: 1px solid #ccc;
-    width: 100%;
 }
 
 table#group_by_table td {
     display: block;
     min-height: 18px;
-   min-width: 540px;
+   min-width: 450px;
 }
 
 .ui-draggable{
  margin:5px;
  background : lightgreen;
- width: 310px;
+ width: 210px;
 }
 
 .draggable_element{
@@ -126,5 +127,5 @@ table#group_by_table td {
 }
 
 #view_divId .draggable_element input[type="text"], #view_divId .draggable_element select {
-    width: 280px;
+    width: 180px;
 }

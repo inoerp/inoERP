@@ -4315,7 +4315,24 @@ $(document).ready(function () {
   getSearchResult();
  });
 
+ $('body').on('click', '#search_result .ino_sort_z_a', function () {
+  $('#searchForm').find('.search_order_by').val($(this).closest('th').data('field_name'));
+  $('#searchForm').find('.search_asc_desc').val('desc');
+  getSearchResult();
+ });
+ 
+ $('body').on('click', '#select_result .ino_sort_a_z', function () {
+  $('#searchForm').find('.search_order_by').val($(this).closest('th').data('field_name'));
+  $('#searchForm').find('.search_asc_desc').val('asc');
+  getSelectResult();
+ });
 
+ $('body').on('click', '#select_result .ino_sort_z_a', function () {
+  $('#searchForm').find('.search_order_by').val($(this).closest('th').data('field_name'));
+  $('#searchForm').find('.search_asc_desc').val('desc');
+  getSelectResult();
+ });
+ 
  $('body').on('click', '.add-element', function () {
   $(this).closest('.list_filter').clone().appendTo($(this).closest('.well'));
  });
@@ -4362,11 +4379,7 @@ $(document).ready(function () {
  });
 
 
- $('body').on('click', '#select_result .ino_sort_a_z', function () {
-  $('#searchForm').find('.search_order_by').val($(this).closest('th').data('field_name'));
-  $('#searchForm').find('.search_asc_desc').val('asc');
-  getSelectResult();
- });
+
 
  $('body').on('click', '#select_result .ino_sort_z_a', function () {
   $('#searchForm').find('.search_order_by').val($(this).closest('th').data('field_name'));
