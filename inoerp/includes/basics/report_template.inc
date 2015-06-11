@@ -1,4 +1,3 @@
-<script src="<?php echo HOME_URL; ?>includes/js/report.js"></script>
 <link href="<?php echo HOME_URL; ?>includes/ecss/report.css" media="all" rel="stylesheet" type="text/css" />
 <?php
 if (!empty($msg)) {

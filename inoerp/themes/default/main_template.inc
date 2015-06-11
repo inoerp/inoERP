@@ -29,25 +29,6 @@
    }
   }
   ?>
-  <script src="includes/js/jquery-2.0.3.min.js"></script>
-  <script src="includes/js/jquery-ui.min.js"></script>
-  <script src="<?php echo HOME_URL; ?>tparty/bootstrap/js/bootstrap.min.js"></script>
-  <script src="<?php echo HOME_URL; ?>tparty/bootstrap/js/menu.js"></script>
-  <script src="includes/js/custom/tinymce/tinymce.min.js"></script>
-  <script type="text/javascript" src="includes/basics/js_lang.php"></script>
-  <script src="includes/js/save.js"></script>
-  <script src="includes/js/custom_plugins.js"></script>
-  <script src="includes/js/basics.js"></script>
-
-  <?php
-  if (!empty($js_file_paths)) {
-   foreach ($js_file_paths as $key => $js_file) {
-    ?>
-    <script src="<?php echo HOME_URL . $js_file; ?>"></script>
-    <?php
-   }
-  }
-  ?>
  </head>
  <body>
   <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -308,7 +289,26 @@
    echo ino_filter_form();
    ?>
   </div>
+<!--  Load JavaScrips-->
+  <script src="includes/js/jquery-2.0.3.min.js"></script>
+  <script src="includes/js/jquery-ui.min.js"></script>
+  <script src="<?php echo HOME_URL; ?>tparty/bootstrap/js/bootstrap.min.js"></script>
+  <script src="<?php echo HOME_URL; ?>tparty/bootstrap/js/menu.js"></script>
+  <script src="includes/js/custom/tinymce/tinymce.min.js"></script>
+  <script type="text/javascript" src="includes/basics/js_control.php"></script>
+  <script src="includes/js/save.js"></script>
+  <script src="includes/js/custom_plugins.js"></script>
+  <script src="includes/js/basics.js"></script>
 
+  <?php
+  if (!empty($js_file_paths)) {
+   foreach ($js_file_paths as $key => $js_file) {
+    ?>
+    <script src="<?php echo HOME_URL . $js_file; ?>"></script>
+    <?php
+   }
+  }
+  ?>
  </body>
 </html>
 <?php

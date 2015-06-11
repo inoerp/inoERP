@@ -44,6 +44,7 @@ class ar_customer extends dbObject {
   "supplier_id",
   "customer_type",
   'customer_category',
+  'customer_relationship',
   "tax_country",
   "tax_reg_no",
   "tax_payer_id",
@@ -104,6 +105,7 @@ class ar_customer extends dbObject {
  public $supplier_id;
  public $customer_type;
  public $customer_category;
+ public $customer_relationship;
  public $tax_country;
  public $tax_reg_no;
  public $tax_payer_id;
@@ -133,6 +135,12 @@ class ar_customer extends dbObject {
 
  Public static function customer_types() {
   $option_header = option_header::find_by_name('AR_CUSTOMER_TYPE');
+  $customer_types = option_line::find_by_option_id($option_header->option_header_id);
+  return $customer_types;
+ }
+ 
+ Public static function customer_relationship() {
+  $option_header = option_header::find_by_name('AR_CUSTOMER_RELATIONSHIP');
   $customer_types = option_line::find_by_option_id($option_header->option_header_id);
   return $customer_types;
  }

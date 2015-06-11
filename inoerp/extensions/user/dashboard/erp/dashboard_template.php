@@ -1,4 +1,3 @@
-<script src="<?php echo HOME_URL; ?>includes/js/report.js"></script>
 <link href="<?php echo HOME_URL; ?>includes/ecss/getsvgimage.css" media="all" rel="stylesheet" type="text/css" />
 <div id ="form_header">
  <div id="tabsHeader">

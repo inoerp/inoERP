@@ -21,9 +21,8 @@
        <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>        </li>
        <li><?php $f->l_select_field_from_array('po_requisition_type', po_requisition_header::$po_requisition_type_a, $$class->po_requisition_type, 'po_requisition_type', '', 1, $readonly1); ?>        </li>
        <li><?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
-        <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supplier_id select_popup clickable">
-         <?php echo gettext('Supplier Name') ?></label> 
-        <?php echo $f->text_field_D('supplier_name', 'select_supplier_name'); ?> </li>
+        <label class="auto_complete"><?php echo gettext('Supplier Name') ?></label> 
+        <?php echo $f->text_field_D('supplier_name', 'select_supplier_name'); ?> <i class="supplier_id select_popup clickable fa fa-search"></i></li>
        <li><label class="auto_complete"><?php echo gettext('Supplier Number') ?></label><?php $f->text_field_d('supplier_number'); ?></li>
        <li><label><?php echo gettext('Supplier Site') ?></label><?php
         $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();

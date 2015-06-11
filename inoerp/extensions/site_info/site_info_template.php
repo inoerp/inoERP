@@ -9,16 +9,15 @@
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
-      <ul class="column four_column"> 
+      <ul class="column header_field"> 
        <li><?php $f->l_text_field_d('site_name'); ?> </li> 
        <li><?php $f->l_text_field_d('email'); ?> </li> 
        <li><?php $f->l_text_field_d('phone_no'); ?> </li> 
        <li><?php $f->l_select_field_from_array('disabled_action', site_info::$disabled_action_a, $$class->disabled_action, 'disabled_action'); ?> </li> 
-       <li><label><?php echo gettext('Home Page') ?></label><?php echo HOME_URL . $f->text_field('default_home_page', $$class->default_home_page, '20'); ?> </li> 
-
-      </ul> 
-     </div>
+       <li><label><?php echo gettext('Home Page : ') . ' ' . HOME_URL ?></label><?php echo $f->text_field('default_home_page', $$class->default_home_page, '20'); ?> </li>
+       <li><?php $f->l_select_field_from_array('move_line_wo_header', site_info::$move_line_wo_header_a, $$class->move_line_wo_header, 'move_line_wo_header'); ?> </li> 
+      </ul>
+     
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div class="first_rowset"> 

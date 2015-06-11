@@ -2,14 +2,17 @@
   $f = new inoform();
   echo gettext('Customer Information')
   ?></span>
- <form action=""  method="post" id="customer_header"  name="customer_header">
-  <div id="tabsHeader">
-   <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('BU Assignment') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Profile') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Address Details') ?></a></li>
-   </ul>
+
+ <div id="tabsHeader">
+  <ul class="tabMain">
+   <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+   <li><a href="#tabsHeader-2"><?php echo gettext('BU Assignment') ?></a></li>
+   <li><a href="#tabsHeader-3"><?php echo gettext('Profile') ?></a></li>
+   <li><a href="#tabsHeader-4"><?php echo gettext('Address Details') ?></a></li>
+   <li><a href="#tabsHeader-5"><?php echo gettext('Notes') ?></a></li>
+   <li><a href="#tabsHeader-6"><?php echo gettext('Relationship') ?></a></li>
+  </ul>
+  <form action=""  method="post" id="customer_header"  name="customer_header">
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
@@ -23,6 +26,7 @@
       </li>
       <li><?php $f->l_select_field_from_object('customer_type', ar_customer::customer_types(), 'option_line_code', 'option_line_value', $$class->customer_type, 'customer_type'); ?>       </li>
       <li><?php echo $f->l_select_field_from_object('customer_category', ar_customer::customer_category(), 'option_line_code', 'option_line_value', $$class->customer_category, 'customer_category'); ?>       </li>
+      <li><?php echo $f->l_select_field_from_object('customer_relationship', ar_customer::customer_relationship(), 'option_line_code', 'option_line_value', $$class->customer_relationship, 'customer_relationship'); ?>       </li>
       <li><label><?php echo gettext('Supplier Name') ?></label><?php $f->text_field_d('supplier_name'); ?>
        <?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
        <i class="fa fa-search supplier_id select_popup clickable"></i>
@@ -55,10 +59,25 @@
      <div class="header_address"><?php $f->address_field_d('bill_to_id', 1, 'customer_header'); ?></div>
      <div class="shipto_address"><?php $f->address_field_d('ship_to_id', 1, 'customer_header'); ?></div>
     </div>
+    <div id="tabsHeader-5" class="tabContent">
+     <div id="comments">
+      <div id="comment_list">
+       <?php echo!(empty($comments)) ? $comments : ""; ?>
+      </div>
+      <div id ="display_comment_form">
+       <?php
+       $reference_table = 'ar_customer_id';
+       $reference_id = $$class->ar_customer_id;
+       ?>
+      </div>
+      <div id="new_comment">
+      </div>
+     </div>
+    </div>
    </div>
+  </form>
+ </div>
 
-  </div>
- </form>
 </div>
 <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Customer Site Details') ?></span>
  <form action=""  method="post" id="customer_site"  name="customer_site">

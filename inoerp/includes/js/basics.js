@@ -2163,6 +2163,41 @@ function getViewResult(options) {
  });
 }
 
+
+function getViewResultByViewId(options) {
+ var defaults = {
+  json_url: 'extensions/view/json_view.php'
+ };
+ var settings = $.extend({}, defaults, options);
+
+ return $.ajax({
+  url: settings.json_url,
+  type: 'get',
+  data: {
+   viewResultById: true,
+   view_id: settings.view_id,
+  },
+  success: function (result) {
+   if (result) {
+    if (settings.update_divId_h) {
+     var divHtml = $(result).filter('div#return_divId').html();
+     $(settings.update_divId_h).empty().append(divHtml);
+     $.getScript("includes/js/reload.js");
+    }
+   }
+  },
+  complete: function () {
+   $('.show_loading_small').hide();
+  },
+  beforeSend: function () {
+   $('.show_loading_small').show();
+  },
+  error: function (request, errorType, errorMessage) {
+   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+  }
+ });
+}
+
 function viewResultWith_pagination() {
  $('body').on('click', '.ajax_view.pagination .page_nos a', function (e) {
   e.preventDefault();
@@ -3469,6 +3504,7 @@ $(document).ready(function () {
  $('body').on('change', '#searchForm .new_search_criteria', function () {
   if ($(this).val()) {
    var newSearchCriteria = $(this).val();
+   var newSearchCriteriaText = $(this).find('option:selected').prop('innerHTML');
    var newSearchCriteriaName = newSearchCriteria + '[]';
    var elementToBeCloned = $('.text_search').first().closest('li');
    var elementClass = $('.text_search').first().prop('class');
@@ -3476,11 +3512,14 @@ $(document).ready(function () {
    var elementLabelClass = '.label_' + elementName;
    elementLabelClass = elementLabelClass.replace('[', '');
    elementLabelClass = elementLabelClass.replace(']', '');
-   clonedElement = elementToBeCloned.clone();
-   $('label[for="' + elementName + '"]').text(newSearchCriteria);
+   var clonedElement = elementToBeCloned.clone();
+//  $('label[for="' + newSearchCriteria + '"]').text(newSearchCriteriaText);
+   clonedElement.find('label').prop('textContent', newSearchCriteriaText);
+   clonedElement.find('label').text(newSearchCriteriaText);
    clonedElement.children().removeClass(elementClass);
    clonedElement.children().addClass(newSearchCriteria);
    clonedElement.children().prop('name', newSearchCriteriaName);
+
    clonedElement.find("input").each(function () {
     $(this).val("");
    });
@@ -3855,11 +3894,11 @@ $(document).ready(function () {
 
  addOrShow_lineDetails();
  onClick_addDetailLine();
-
-
-
-
  onClick_addDetailLine(2, '.add_row_detail_img3', 'tabsDetailC');
+
+ var mandatoryCheck = new mandatoryFieldMain();
+ mandatoryCheck.mandatoryHeader();
+
  $('#content').on('change', '.sys_extra_field_id', function () {
   var field_type = $(this).find('option:selected').data('field_type');
   $(this).closest('tr').find('.field_type').val(field_type);
@@ -4044,7 +4083,7 @@ $(document).ready(function () {
    var formUrl = urlLink;
   }
   getFormDetails(formUrl);
-  history.pushState(null, null, urlLink); 
+  history.pushState(null, null, urlLink);
  }).one();
 
  $('body').on('click', '.ajax_content a', function (e) {
@@ -4065,7 +4104,7 @@ $(document).ready(function () {
    var formUrl = urlLink;
   }
   getFormDetails(formUrl);
-  history.pushState(null, null, urlLink); 
+  history.pushState(null, null, urlLink);
  });
 
 
@@ -4320,7 +4359,7 @@ $(document).ready(function () {
   $('#searchForm').find('.search_asc_desc').val('desc');
   getSearchResult();
  });
- 
+
  $('body').on('click', '#select_result .ino_sort_a_z', function () {
   $('#searchForm').find('.search_order_by').val($(this).closest('th').data('field_name'));
   $('#searchForm').find('.search_asc_desc').val('asc');
@@ -4332,7 +4371,7 @@ $(document).ready(function () {
   $('#searchForm').find('.search_asc_desc').val('desc');
   getSelectResult();
  });
- 
+
  $('body').on('click', '.add-element', function () {
   $(this).closest('.list_filter').clone().appendTo($(this).closest('.well'));
  });
@@ -4687,6 +4726,24 @@ $(document).ready(function () {
  $('body').on('click', '.clear-clipboard', function () {
   $('#left-clipboard-data').empty();
  });
+ 
+ $('body').on('click', '.get-view-content', function () {
+var view_id = $(this).data('view_id');
+  if($(this).data('update_divId')){
+  var update_divId_h = '#' + $(this).data('update_divId');
+  }else{
+  var update_divId_h = $(this).prop('hash');
+  }
+  
+ if(!$(update_divId_h).text().trim()){
+      getViewResultByViewId({
+    view_id : view_id,
+    update_divId_h : update_divId_h
+  
+  });
+  }
+
+});
 
 
 });

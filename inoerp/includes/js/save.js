@@ -63,7 +63,7 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
       $('.primary_column3').val(header_id3);
      }
     }
-    
+
     if (savingOnlyHeader || onlyHeaderOverLay) {
      $('#overlay').css('display', 'none');
      $('#form_top_image').css('display', 'block');
@@ -71,7 +71,7 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
    }
   },
   beforeSend: function () {
-$('#overlay').css('display', 'block');
+   $('#overlay').css('display', 'block');
   },
   error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
@@ -223,6 +223,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
  var saveVerticalTab = this.saveVerticalTab;
  var line_key_field_d = '.' + line_key_field;
  $('#save').on('click', function (e) {
+
   if ($.isFunction(window.beforeSave)) {
    var beforeSaveResult = window.beforeSave();
    if (beforeSaveResult < 0) {
@@ -301,7 +302,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
   var headerData = $(form_header_id_h + ' :input').not('.search, .text_search').serializeArray();
   if (savingOnlyHeader) {
    savingOnlyHeader = true;
-  } else if (($('#form_line').html()) && ($(primary_column_id_h).val()) &&  ($('input[name="line_id_cb"]:checked').length > 0) && ($(line_key_field_d).val())) {
+  } else if (($('#form_line').html()) && ($(primary_column_id_h).val()) && ($('input[name="line_id_cb"]:checked').length > 0) && ($(line_key_field_d).val())) {
    savingOnlyHeader = false;
   }
   else {
@@ -1191,7 +1192,7 @@ function mandatoryFieldMain(form_area, mandatory_fields, mandatory_messages, hea
 
 mandatoryFieldMain.prototype.mandatoryHeader = function ()
 {
- $('body').off("click", '#form_line').on("click", '#form_line', function () {
+ $('body').off("click", '#form_line, #form_line2').on("click", '#form_line, #form_line2', function () {
   var header_id = $('ul#js_saving_data').find('.primary_column_id').data('primary_column_id');
   var no_headerid_check = $('ul#js_saving_data').find('.no_headerid_check').data('no_headerid_check');
   var lineClassName = $('ul#js_saving_data').find('.lineClassName').data('lineclassname');
@@ -1205,9 +1206,14 @@ mandatoryFieldMain.prototype.mandatoryHeader = function ()
    var header_id_h = '#' + header_id;
    var header_id_c = '.' + header_id;
    if (!$(header_id_h).val()) {
-    if (confirm('Header data is not saved : Do you want to save the header')) {
+    if (move_line_wo_header == 'SAVE_HEADER') {
      $('#save').trigger('click');
+    } else if (move_line_wo_header == 'SHOW_WARNING') {
+     if (confirm('Header data is not saved : Do you want to save the header')) {
+      $('#save').trigger('click');
+     }
     }
+
    } else {
     var headerIdVal = $(header_id_h).val();
     if (!$(this).find(header_id_c).val()) {

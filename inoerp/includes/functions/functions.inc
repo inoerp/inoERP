@@ -1689,4 +1689,35 @@ function ino_noOfItems_inCart() {
  }
 }
 
+
+function update_htaccessFile() {
+ $return = false;
+ $file_link = HOME_DIR . DS . 'engine/install/.htaccess';
+ if (is_readable($file_link)) {
+  $hta_file = fopen($file_link, 'rb');
+  $file_content = fread($hta_file, filesize($file_link));
+ } else {
+  echo "<h2>.htaccess file is missing in engine/install/ </h2>";
+ }
+
+ $write_file_link = HOME_DIR . DS . '.htaccess';
+
+ if (is_writable($write_file_link)) {
+  $write_file = fopen($write_file_link, 'wb');
+  try {
+   if (fwrite($write_file, $file_content) === FALSE) {
+    echo "<br>Unable to update the .htaccess file. Make sure the file has 777 mode";
+   }else{
+    $return = true;
+   }
+  } catch (Exception $e) {
+   echo "<br>Unable to update the .htaccess file. Make sure the file has 777 mode";
+  }
+ } else {
+  echo "<h2>.htaccess file is missing in home directtory </h2>";
+ }
+ fclose($hta_file);
+ fclose($write_file);
+ return $return;
+}
 ?>

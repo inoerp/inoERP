@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2015 at 10:03 AM
+-- Generation Time: Jun 11, 2015 at 11:10 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `inoerp_prod2`
+-- Database: `inoerp_prod3`
 --
 
 -- --------------------------------------------------------
@@ -66,6 +66,109 @@ CREATE TABLE IF NOT EXISTS `address_reference` (
   `status` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`address_reference_id`),
   UNIQUE KEY `address_id` (`address_id`,`reference_table`,`reference_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `adm_task_status`
+--
+
+CREATE TABLE IF NOT EXISTS `adm_task_status` (
+  `adm_task_status_id` int(12) NOT NULL AUTO_INCREMENT,
+  `status` varchar(25) NOT NULL,
+  `access_level` varchar(25) DEFAULT NULL,
+  `start_by` varchar(50) NOT NULL,
+  `due_date` int(12) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `from_date` date DEFAULT NULL,
+  `to_date` date DEFAULT NULL,
+  `usage` varchar(25) DEFAULT NULL,
+  `primary_task_type` varchar(25) DEFAULT NULL,
+  `send_notification_cb` tinyint(1) DEFAULT NULL,
+  `schedule_cb` tinyint(1) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`adm_task_status_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `adm_task_template_header`
+--
+
+CREATE TABLE IF NOT EXISTS `adm_task_template_header` (
+  `adm_task_template_header_id` int(12) NOT NULL AUTO_INCREMENT,
+  `template_name` varchar(25) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `application` varchar(25) DEFAULT NULL,
+  `document_type` varchar(25) DEFAULT NULL,
+  `from_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`adm_task_template_header_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `adm_task_template_line`
+--
+
+CREATE TABLE IF NOT EXISTS `adm_task_template_line` (
+  `adm_task_template_line_id` int(12) NOT NULL AUTO_INCREMENT,
+  `adm_task_template_header_id` int(12) NOT NULL,
+  `status` varchar(25) NOT NULL,
+  `task_type_id` int(12) NOT NULL,
+  `priority_code` varchar(25) NOT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `duration_uom_id` int(12) DEFAULT NULL,
+  `duration` decimal(15,5) DEFAULT NULL,
+  `planned_uom_id` int(12) DEFAULT NULL,
+  `planned_uom` varchar(25) DEFAULT NULL,
+  `holiday_cb` tinyint(1) DEFAULT NULL,
+  `milestone_cb` tinyint(1) DEFAULT NULL,
+  `confirm_required_cb` tinyint(1) DEFAULT NULL,
+  `publish_cb` tinyint(1) DEFAULT NULL,
+  `billable_cb` tinyint(1) DEFAULT NULL,
+  `private_cb` tinyint(1) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`adm_task_template_line_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `adm_task_type`
+--
+
+CREATE TABLE IF NOT EXISTS `adm_task_type` (
+  `adm_task_type_id` int(12) NOT NULL AUTO_INCREMENT,
+  `access_level` varchar(25) NOT NULL,
+  `task_type` varchar(50) NOT NULL,
+  `process_flow_header_id` int(12) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `from_date` date DEFAULT NULL,
+  `to_date` date DEFAULT NULL,
+  `effort_uom_id` int(12) DEFAULT NULL,
+  `effort_value` decimal(15,5) DEFAULT NULL,
+  `send_notification_cb` tinyint(1) DEFAULT NULL,
+  `schedule_cb` tinyint(1) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`adm_task_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -706,7 +809,7 @@ CREATE TABLE IF NOT EXISTS `ap_payment_trnx_v` (
 ,`ref_transaction_line_id` int(12)
 ,`item_number` varchar(50)
 ,`uom_id` int(12)
-,`item_status` varchar(50)
+,`item_status` varchar(15)
 ,`created_by` int(12)
 ,`creation_date` datetime
 ,`last_update_by` int(12)
@@ -749,7 +852,7 @@ CREATE TABLE IF NOT EXISTS `ap_po_matching_v` (
 ,`tax_amount` decimal(20,5)
 ,`item_number` varchar(50)
 ,`uom_id` int(12)
-,`item_status` varchar(50)
+,`item_status` varchar(15)
 ,`po_detail_id` int(12)
 ,`shipment_number` int(12)
 ,`receving_org_id` int(12)
@@ -820,7 +923,7 @@ CREATE TABLE IF NOT EXISTS `ap_transaction_all_v` (
 ,`ref_transaction_line_id` int(12)
 ,`item_number` varchar(50)
 ,`uom_id` int(12)
-,`item_status` varchar(50)
+,`item_status` varchar(15)
 ,`ap_transaction_detail_id` int(12)
 ,`account_type` varchar(25)
 ,`detail_description` varchar(256)
@@ -967,6 +1070,7 @@ CREATE TABLE IF NOT EXISTS `ar_customer` (
   `ar_customer_id` int(12) NOT NULL AUTO_INCREMENT,
   `customer_number` varchar(25) NOT NULL,
   `customer_name` varchar(60) NOT NULL,
+  `customer_relationship` varchar(25) DEFAULT NULL,
   `alt_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `supplier_id` int(12) DEFAULT NULL,
   `customer_type` varchar(50) DEFAULT NULL,
@@ -1035,6 +1139,28 @@ CREATE TABLE IF NOT EXISTS `ar_customer_bu` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`ar_customer_bu_id`),
   UNIQUE KEY `ar_customer_id` (`ar_customer_id`,`org_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ar_customer_relation`
+--
+
+CREATE TABLE IF NOT EXISTS `ar_customer_relation` (
+  `ar_customer_relation_id` int(12) NOT NULL AUTO_INCREMENT,
+  `ar_customer_id` int(12) NOT NULL,
+  `org_id` int(12) NOT NULL,
+  `reciprocal_cb` tinyint(1) DEFAULT NULL,
+  `bill_to_cb` tinyint(1) DEFAULT NULL,
+  `ship_to_cb` tinyint(1) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`ar_customer_relation_id`),
+  UNIQUE KEY `customer_number` (`ar_customer_id`),
+  UNIQUE KEY `customer_name` (`org_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -1868,11 +1994,11 @@ CREATE TABLE IF NOT EXISTS `bom_all_v` (
 ,`item_number` varchar(50)
 ,`item_description` varchar(256)
 ,`uom_id` int(12)
-,`item_type` varchar(50)
-,`item_status` varchar(50)
-,`bom_type` varchar(50)
+,`item_type` varchar(20)
+,`item_status` varchar(15)
+,`bom_type` varchar(15)
 ,`costing_enabled_cb` tinyint(1)
-,`make_buy` varchar(50)
+,`make_buy` varchar(10)
 ,`org` varchar(50)
 ,`org_type` varchar(50)
 ,`org_status` varchar(50)
@@ -2168,7 +2294,7 @@ CREATE TABLE IF NOT EXISTS `bom_line_v` (
 ,`planning_percentage` decimal(6,2)
 ,`yield` decimal(6,6)
 ,`include_in_cost_rollup_cb` tinyint(4)
-,`wip_supply_type` varchar(50)
+,`wip_supply_type` varchar(20)
 ,`supply_sub_inventory` int(12)
 ,`supply_locator` int(12)
 ,`created_by` int(12)
@@ -2554,11 +2680,11 @@ CREATE TABLE IF NOT EXISTS `bom_routing_v` (
 ,`item_number` varchar(50)
 ,`item_description` varchar(256)
 ,`uom_id` int(12)
-,`item_type` varchar(50)
-,`item_status` varchar(50)
-,`bom_type` varchar(50)
+,`item_type` varchar(20)
+,`item_status` varchar(15)
+,`bom_type` varchar(15)
 ,`costing_enabled_cb` tinyint(1)
-,`make_buy` varchar(50)
+,`make_buy` varchar(10)
 ,`org` varchar(50)
 ,`type` varchar(50)
 ,`status` varchar(50)
@@ -3714,7 +3840,7 @@ CREATE TABLE IF NOT EXISTS `engine` (
   PRIMARY KEY (`engine_id`),
   UNIQUE KEY `reference_table` (`obj_class_name`,`type`),
   UNIQUE KEY `number` (`number`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=253 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=255 ;
 
 --
 -- Dumping data for table `engine`
@@ -3924,7 +4050,8 @@ INSERT INTO `engine` (`engine_id`, `obj_class_name`, `number`, `type`, `enabled_
 (246, 'sys_catalog_header', 9118, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-06 14:06:28', 34, '2015-05-06 14:06:28'),
 (249, 'sys_message_format', 8101, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-06 14:08:24', 34, '2015-05-06 14:08:24'),
 (251, 'sys_program_schedule', 8201, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-06 14:09:30', 34, '2015-05-06 14:09:30'),
-(252, 'wip_wol_transaction', 2609, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-06 14:10:11', 34, '2015-05-06 14:10:11');
+(252, 'wip_wol_transaction', 2609, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-06 14:10:11', 34, '2015-05-06 14:10:11'),
+(254, 'extn_social_login', 10033, 'extensions', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-22 07:03:42', 34, '2015-05-22 17:32:55');
 
 -- --------------------------------------------------------
 
@@ -4098,6 +4225,30 @@ CREATE TABLE IF NOT EXISTS `extn_rating_values` (
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`extn_rating_values_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `extn_social_login`
+--
+
+CREATE TABLE IF NOT EXISTS `extn_social_login` (
+  `extn_social_login_id` int(12) NOT NULL AUTO_INCREMENT,
+  `provider_name` varchar(50) DEFAULT NULL,
+  `enabled_cb` tinyint(1) DEFAULT NULL,
+  `sl_key` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `sl_id` varchar(255) DEFAULT NULL,
+  `sl_secret` varchar(255) DEFAULT NULL,
+  `sl_scope` text,
+  `display_weight` int(10) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`extn_social_login_id`),
+  UNIQUE KEY `name` (`enabled_cb`,`sl_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -4305,7 +4456,7 @@ CREATE TABLE IF NOT EXISTS `ext_url_alias` (
   PRIMARY KEY (`ext_url_alias_id`),
   UNIQUE KEY `original_url` (`original_url`),
   UNIQUE KEY `alias` (`alias`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `ext_url_alias`
@@ -4321,7 +4472,8 @@ INSERT INTO `ext_url_alias` (`ext_url_alias_id`, `content_id`, `original_url`, `
 (7, 208, 'content_id=208&content_type=documentation', 'Inventory-&-Production-Planning', 34, '2014-11-20 07:55:26', 34, '2014-11-20 07:55:26'),
 (8, 240, 'content_id=240&content_type=documentation', 'Item-Master', 34, '2015-01-05 06:28:34', 34, '2015-01-05 06:28:34'),
 (9, 241, 'content_id=241&content_type=content', 'demo', 34, '2015-01-16 14:39:33', 34, '2015-01-16 18:22:25'),
-(10, 159, 'content_id=159&content_type=documentation', 'Form-Type', 34, '2015-02-18 09:24:32', 34, '2015-02-18 09:24:32');
+(10, 159, 'content_id=159&content_type=documentation', 'Form-Type', 34, '2015-02-18 09:24:32', 34, '2015-02-18 09:24:32'),
+(11, 262, 'content_id=262&content_type=documentation', 'Welcome-to-inoERP', 34, '2015-05-21 16:46:23', 34, '2015-05-21 16:51:53');
 
 -- --------------------------------------------------------
 
@@ -5080,8 +5232,8 @@ CREATE TABLE IF NOT EXISTS `fp_mrp_demand_v` (
 ,`source_line_id` int(12)
 ,`item_number` varchar(50)
 ,`item_description` varchar(256)
-,`planner` varchar(50)
-,`product_line` varchar(50)
+,`planner` varchar(20)
+,`product_line` varchar(20)
 ,`standard_cost` decimal(42,5)
 ,`sales_price` decimal(20,5)
 ,`purchase_price` decimal(20,5)
@@ -5790,6 +5942,71 @@ CREATE TABLE IF NOT EXISTS `hd_change_request` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `hd_repair_type_line`
+--
+
+CREATE TABLE IF NOT EXISTS `hd_repair_type_line` (
+  `hd_service_activity_line_id` int(12) NOT NULL AUTO_INCREMENT,
+  `hd_service_activity_header_id` int(12) NOT NULL,
+  `bu_org_id` int(12) NOT NULL,
+  `header_type_id` int(12) DEFAULT NULL,
+  `line_type_id` int(12) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`hd_service_activity_line_id`),
+  UNIQUE KEY `sd_so_header_id_2` (`hd_service_activity_header_id`,`bu_org_id`),
+  UNIQUE KEY `sd_so_header_id` (`hd_service_activity_header_id`,`line_type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hd_sbp_header`
+--
+
+CREATE TABLE IF NOT EXISTS `hd_sbp_header` (
+  `hd_sbp_header_id` int(6) NOT NULL AUTO_INCREMENT,
+  `business_process` varchar(25) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `service_order_cb` tinyint(1) DEFAULT NULL,
+  `service_request_cb` tinyint(1) DEFAULT NULL,
+  `service_contract_cb` tinyint(1) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`hd_sbp_header_id`),
+  UNIQUE KEY `customer_number` (`business_process`),
+  UNIQUE KEY `customer_name` (`description`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hd_sbp_line`
+--
+
+CREATE TABLE IF NOT EXISTS `hd_sbp_line` (
+  `hd_sbp_line_id` int(12) NOT NULL AUTO_INCREMENT,
+  `hd_sbp_header_id` int(12) NOT NULL,
+  `hd_service_activity_header_id` int(12) NOT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`hd_sbp_line_id`),
+  UNIQUE KEY `hd_sbp_header_id` (`hd_sbp_header_id`,`hd_service_activity_header_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `hd_service_activity_header`
 --
 
@@ -5823,17 +6040,181 @@ CREATE TABLE IF NOT EXISTS `hd_service_activity_header` (
 CREATE TABLE IF NOT EXISTS `hd_service_activity_line` (
   `hd_service_activity_line_id` int(12) NOT NULL AUTO_INCREMENT,
   `hd_service_activity_header_id` int(12) NOT NULL,
-  `org_id` int(12) NOT NULL,
+  `bu_org_id` int(12) NOT NULL,
   `header_type_id` int(12) DEFAULT NULL,
   `line_type_id` int(12) DEFAULT NULL,
-  `description` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
   `created_by` int(12) NOT NULL,
   `creation_date` datetime NOT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime NOT NULL,
   PRIMARY KEY (`hd_service_activity_line_id`),
-  UNIQUE KEY `sd_so_header_id_2` (`hd_service_activity_header_id`,`org_id`),
+  UNIQUE KEY `sd_so_header_id_2` (`hd_service_activity_header_id`,`bu_org_id`),
   UNIQUE KEY `sd_so_header_id` (`hd_service_activity_header_id`,`line_type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hd_service_contract_detail`
+--
+
+CREATE TABLE IF NOT EXISTS `hd_service_contract_detail` (
+  `hd_service_contract_detail_id` int(12) NOT NULL AUTO_INCREMENT,
+  `hd_service_contract_line_id` int(12) NOT NULL,
+  `item_id_m` int(12) NOT NULL,
+  `detail_number` int(12) NOT NULL,
+  `ar_customer_id` int(25) NOT NULL,
+  `amount` decimal(20,5) DEFAULT NULL,
+  `gl_amount` decimal(15,5) DEFAULT NULL,
+  `line_ref` varchar(100) DEFAULT NULL,
+  `journal_created_cb` tinyint(1) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  `reference_type` varchar(25) DEFAULT NULL,
+  `reference_key_name` varchar(25) DEFAULT NULL,
+  `reference_key_value` varchar(25) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `quantity` decimal(15,5) DEFAULT NULL,
+  `uom_id` int(12) DEFAULT NULL,
+  `line_amount` decimal(15,5) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date NOT NULL,
+  `duration_uom_id` int(12) DEFAULT NULL,
+  `duration` decimal(15,5) NOT NULL,
+  `tax_amount` decimal(15,5) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`hd_service_contract_detail_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hd_service_contract_header`
+--
+
+CREATE TABLE IF NOT EXISTS `hd_service_contract_header` (
+  `hd_service_contract_header_id` int(12) NOT NULL AUTO_INCREMENT,
+  `bu_org_id` int(12) NOT NULL,
+  `category` varchar(25) NOT NULL,
+  `contract_number` varchar(15) DEFAULT NULL,
+  `version` varchar(5) DEFAULT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `duration_uom_id` int(12) DEFAULT NULL,
+  `duration` decimal(10,5) DEFAULT NULL,
+  `ar_customer_id` int(12) NOT NULL,
+  `ar_customer_site_id` int(12) NOT NULL,
+  `document_owner` varchar(256) DEFAULT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `ship_to_id` int(12) DEFAULT NULL,
+  `bill_to_id` int(12) DEFAULT NULL,
+  `header_amount` decimal(20,5) DEFAULT NULL,
+  `tax_amount` decimal(20,5) DEFAULT NULL,
+  `receipt_amount` decimal(20,5) DEFAULT NULL,
+  `currency` varchar(256) NOT NULL,
+  `doc_currency` varchar(25) DEFAULT NULL,
+  `receivable_ac_id` int(12) NOT NULL,
+  `payment_term_id` int(12) NOT NULL,
+  `exchange_rate_type` varchar(50) DEFAULT NULL,
+  `exchange_rate` decimal(20,5) DEFAULT NULL,
+  `negotiation_status` varchar(25) DEFAULT NULL,
+  `status` varchar(25) DEFAULT NULL,
+  `document_date` date DEFAULT NULL,
+  `document_number` varchar(50) DEFAULT NULL,
+  `ledger_id` int(12) DEFAULT NULL,
+  `period_id` int(12) DEFAULT NULL,
+  `payment_term_date` date DEFAULT NULL,
+  `ar_transaction_type_id` int(12) DEFAULT NULL,
+  `billing_cb` tinyint(1) DEFAULT NULL,
+  `invoicing_rule` varchar(25) DEFAULT NULL,
+  `accounting_rule` varchar(25) DEFAULT NULL,
+  `renewal_process` varchar(25) DEFAULT NULL,
+  `renew_upto_date` date DEFAULT NULL,
+  `rewnew_pricing_method` varchar(25) DEFAULT NULL,
+  `rewnew_price_list_id` int(12) DEFAULT NULL,
+  `reference_type` varchar(25) DEFAULT NULL,
+  `reference_key_name` varchar(25) DEFAULT NULL,
+  `reference_key_value` varchar(25) DEFAULT NULL,
+  `sd_so_header_id` int(12) DEFAULT NULL,
+  `gl_journal_header_id` int(12) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`hd_service_contract_header_id`),
+  UNIQUE KEY `transaction_number` (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hd_service_contract_line`
+--
+
+CREATE TABLE IF NOT EXISTS `hd_service_contract_line` (
+  `hd_service_contract_line_id` int(12) NOT NULL AUTO_INCREMENT,
+  `hd_service_contract_lheader_id` int(12) NOT NULL,
+  `line_number` int(12) NOT NULL,
+  `item_id_m` int(12) DEFAULT NULL,
+  `item_description` varchar(256) NOT NULL,
+  `line_type` varchar(25) DEFAULT NULL,
+  `inv_unit_price` decimal(20,5) DEFAULT NULL,
+  `inv_line_price` decimal(20,5) DEFAULT NULL,
+  `tax_code_id` int(12) DEFAULT NULL,
+  `tax_amount` decimal(20,5) DEFAULT NULL,
+  `gl_inv_line_price` decimal(15,5) DEFAULT NULL,
+  `gl_tax_amount` decimal(15,5) DEFAULT NULL,
+  `start_date` date NOT NULL,
+  `line_description` varchar(256) DEFAULT NULL,
+  `end_date` decimal(10,0) DEFAULT NULL,
+  `duration_uom_id` int(12) DEFAULT NULL,
+  `duration` decimal(10,5) DEFAULT NULL,
+  `renewal_type` int(12) DEFAULT NULL,
+  `uom_id` int(12) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  `line_source` varchar(25) DEFAULT NULL,
+  `reference_type` varchar(25) DEFAULT NULL,
+  `reference_key_name` varchar(25) DEFAULT NULL,
+  `reference_key_value` varchar(25) DEFAULT NULL,
+  `counter_instance_id` int(12) DEFAULT NULL,
+  `event_id` int(12) DEFAULT NULL,
+  `termination_date` decimal(10,0) DEFAULT NULL,
+  `period_id` int(12) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`hd_service_contract_line_id`),
+  UNIQUE KEY `ap_transaction_header_id` (`hd_service_contract_lheader_id`,`line_number`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hd_service_contract_schedule`
+--
+
+CREATE TABLE IF NOT EXISTS `hd_service_contract_schedule` (
+  `hd_service_contract_schedule_id` int(12) NOT NULL AUTO_INCREMENT,
+  `hd_service_contract_line_id` int(12) DEFAULT NULL,
+  `hd_service_contract_detail_id` int(12) DEFAULT NULL,
+  `hd_service_contract_header_id` int(12) NOT NULL,
+  `line_num` int(5) DEFAULT NULL,
+  `amount` decimal(20,5) DEFAULT NULL,
+  `gl_amount` decimal(15,5) DEFAULT NULL,
+  `invoice_date` date DEFAULT NULL,
+  `from_date` date DEFAULT NULL,
+  `to_date` date DEFAULT NULL,
+  `interface_date` date DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`hd_service_contract_schedule_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -5845,7 +6226,6 @@ CREATE TABLE IF NOT EXISTS `hd_service_activity_line` (
 CREATE TABLE IF NOT EXISTS `hd_service_request` (
   `hd_service_request_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `service_request_number` varchar(25) DEFAULT NULL,
-  `org_id` int(12) DEFAULT NULL,
   `ar_customer_id` int(12) NOT NULL,
   `ar_customer_site_id` int(12) DEFAULT NULL,
   `inv_serial_number_id` int(12) DEFAULT NULL,
@@ -5871,6 +6251,52 @@ CREATE TABLE IF NOT EXISTS `hd_service_request` (
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime NOT NULL,
   PRIMARY KEY (`hd_service_request_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hd_service_type_header`
+--
+
+CREATE TABLE IF NOT EXISTS `hd_service_type_header` (
+  `hd_service_type_header_id` int(12) NOT NULL AUTO_INCREMENT,
+  `service_type` varchar(50) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `active_cb` tinyint(1) DEFAULT NULL,
+  `repair_mode` varchar(25) DEFAULT NULL,
+  `primary_service_type` varchar(25) DEFAULT NULL,
+  `pre_repair_activity_rma` int(12) DEFAULT NULL,
+  `pre_repair_activity_so` int(12) DEFAULT NULL,
+  `post_repair_activity_rma` int(12) DEFAULT NULL,
+  `post_repair_activity_so` int(12) DEFAULT NULL,
+  `auto_create_so_rma_cb` tinyint(1) DEFAULT NULL,
+  `prices_list_id` int(12) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`hd_service_type_header_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hd_service_type_line`
+--
+
+CREATE TABLE IF NOT EXISTS `hd_service_type_line` (
+  `hd_service_type_line_id` int(12) NOT NULL AUTO_INCREMENT,
+  `hd_service_type_header_id` int(12) NOT NULL,
+  `billing_type` varchar(25) NOT NULL,
+  `service_activity_id` int(12) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`hd_service_type_line_id`),
+  UNIQUE KEY `hd_service_type_header_id` (`hd_service_type_header_id`,`billing_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -5908,6 +6334,183 @@ CREATE TABLE IF NOT EXISTS `hd_support_request` (
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime NOT NULL,
   PRIMARY KEY (`hd_support_request_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hd_svo_actuals`
+--
+
+CREATE TABLE IF NOT EXISTS `hd_svo_actuals` (
+  `hd_svo_actuals_id` int(12) NOT NULL AUTO_INCREMENT,
+  `hd_svo_header_id` int(12) NOT NULL,
+  `item_id_m` int(12) NOT NULL,
+  `source` varchar(25) DEFAULT NULL,
+  `billing_type` varchar(25) NOT NULL,
+  `hd_svo_estimates_id` varchar(15) DEFAULT NULL,
+  `wip_wo_header_id` int(12) DEFAULT NULL,
+  `quantity` decimal(15,5) DEFAULT NULL,
+  `uom_id` int(12) DEFAULT NULL,
+  `unit_price` decimal(20,5) DEFAULT NULL,
+  `line_price` decimal(20,5) DEFAULT NULL,
+  `line_status` varchar(25) NOT NULL,
+  `sd_so_header_id` int(12) DEFAULT NULL,
+  `sd_so_line_id` int(12) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`hd_svo_actuals_id`),
+  UNIQUE KEY `hd_svo_header_id` (`hd_svo_header_id`,`source`,`wip_wo_header_id`),
+  UNIQUE KEY `hd_svo_header_id_2` (`hd_svo_header_id`,`hd_svo_estimates_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hd_svo_estimates`
+--
+
+CREATE TABLE IF NOT EXISTS `hd_svo_estimates` (
+  `hd_svo_estimates_id` int(12) NOT NULL AUTO_INCREMENT,
+  `hd_svo_header_id` int(12) NOT NULL,
+  `item_id_m` int(12) NOT NULL,
+  `billing_source` varchar(25) DEFAULT NULL,
+  `billing_type` varchar(15) DEFAULT NULL,
+  `price_list_header_id` int(12) DEFAULT NULL,
+  `quantity` decimal(15,5) DEFAULT NULL,
+  `uom_id` int(12) DEFAULT NULL,
+  `action_type_id` int(12) DEFAULT NULL,
+  `price_date` date DEFAULT NULL,
+  `unit_price` decimal(20,5) DEFAULT NULL,
+  `line_price` decimal(20,5) DEFAULT NULL,
+  `line_status` varchar(25) NOT NULL,
+  `sd_so_line_id` int(12) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`hd_svo_estimates_id`),
+  UNIQUE KEY `sd_so_header_id_2` (`hd_svo_header_id`),
+  UNIQUE KEY `sd_so_header_id` (`hd_svo_header_id`,`billing_source`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hd_svo_header`
+--
+
+CREATE TABLE IF NOT EXISTS `hd_svo_header` (
+  `hd_svo_header_id` int(12) NOT NULL AUTO_INCREMENT,
+  `bu_org_id` int(12) NOT NULL,
+  `hd_service_type_header_id` int(12) NOT NULL,
+  `order_number` varchar(50) DEFAULT NULL,
+  `hd_service_request_id` int(12) DEFAULT NULL,
+  `promise_date` date DEFAULT NULL,
+  `ar_customer_id` int(12) NOT NULL,
+  `ar_customer_site_id` int(12) DEFAULT NULL,
+  `service_team_id` int(12) DEFAULT NULL,
+  `service_person_employee_id` int(12) DEFAULT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `price_list_header_id` int(12) DEFAULT NULL,
+  `ship_to_id` int(12) NOT NULL,
+  `bill_to_id` int(12) NOT NULL,
+  `item_id_m` int(12) DEFAULT NULL,
+  `inv_serial_number_id` int(12) DEFAULT NULL,
+  `lot_number_id` int(12) DEFAULT NULL,
+  `quantity` decimal(15,5) DEFAULT NULL,
+  `estimate_amount` decimal(20,5) DEFAULT NULL,
+  `doc_currency` varchar(25) DEFAULT NULL,
+  `prepaid_status` varchar(25) DEFAULT NULL,
+  `prepaid_amount` decimal(15,5) DEFAULT NULL,
+  `currency` varchar(20) DEFAULT NULL,
+  `payment_term_id` int(12) DEFAULT NULL,
+  `payment_term_date` date DEFAULT NULL,
+  `warrenty_status` varchar(25) DEFAULT NULL,
+  `escalation` varchar(25) DEFAULT NULL,
+  `exchange_rate_type` varchar(50) DEFAULT NULL,
+  `exchange_rate` decimal(20,5) DEFAULT NULL,
+  `inventory_org_id` int(12) DEFAULT NULL,
+  `close_date` date DEFAULT NULL,
+  `order_reference_table` varchar(100) DEFAULT NULL,
+  `order_reference_id` int(12) DEFAULT NULL,
+  `repair_status` varchar(25) DEFAULT NULL,
+  `estimate_status` varchar(25) DEFAULT NULL,
+  `primary_sd_so_header_id` int(12) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`hd_svo_header_id`),
+  UNIQUE KEY `primary_sd_so_header_id` (`primary_sd_so_header_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hd_svo_line`
+--
+
+CREATE TABLE IF NOT EXISTS `hd_svo_line` (
+  `hd_svo_line_id` int(12) NOT NULL AUTO_INCREMENT,
+  `hd_svo_header_id` int(12) NOT NULL,
+  `line_number` int(12) NOT NULL,
+  `inv_org_id` int(12) NOT NULL,
+  `hd_service_type_header_id` int(12) DEFAULT NULL,
+  `sd_so_header_id` int(12) DEFAULT NULL,
+  `sd_so_line_id` int(12) DEFAULT NULL,
+  `quantity` decimal(15,5) DEFAULT NULL,
+  `item_id_m` int(12) NOT NULL,
+  `action_type_id` int(12) DEFAULT NULL,
+  `status` varchar(25) DEFAULT NULL,
+  `price_list_header_id` int(12) DEFAULT NULL,
+  `price_date` date DEFAULT NULL,
+  `unit_price` decimal(20,5) DEFAULT NULL,
+  `line_price` decimal(20,5) DEFAULT NULL,
+  `line_status` varchar(25) NOT NULL,
+  `requested_date` date DEFAULT NULL,
+  `promise_date` date DEFAULT NULL,
+  `schedule_ship_date` date DEFAULT NULL,
+  `reference_doc_type` int(12) DEFAULT NULL,
+  `reference_doc_number` int(12) DEFAULT NULL,
+  `service_activity_header_id` int(12) DEFAULT NULL,
+  `supply_source` varchar(25) DEFAULT NULL,
+  `destination_type` varchar(25) DEFAULT NULL,
+  `line_description` varchar(256) DEFAULT NULL,
+  `uom_id` varchar(25) DEFAULT NULL,
+  `return_reason` varchar(25) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`hd_svo_line_id`),
+  UNIQUE KEY `sd_so_header_id_2` (`hd_svo_header_id`,`line_number`),
+  UNIQUE KEY `sd_so_header_id` (`hd_svo_header_id`,`hd_service_type_header_id`,`requested_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hd_task_type`
+--
+
+CREATE TABLE IF NOT EXISTS `hd_task_type` (
+  `hd_task_type_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `task_type` varchar(100) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `from_date` date DEFAULT NULL,
+  `to_date` date DEFAULT NULL,
+  `effort_uom_id` int(12) DEFAULT NULL,
+  `effort_duration` decimal(15,5) DEFAULT NULL,
+  `auto_schedule_cb` tinyint(1) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`hd_task_type_id`),
+  UNIQUE KEY `org` (`task_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -6434,6 +7037,37 @@ CREATE TABLE IF NOT EXISTS `hr_employee_termination` (
   UNIQUE KEY `employee_id` (`employee_id`,`new_employer`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `hr_employee_v`
+--
+CREATE TABLE IF NOT EXISTS `hr_employee_v` (
+`user_id` int(12) unsigned
+,`username` varchar(256)
+,`first_name` varchar(100)
+,`last_name` varchar(60)
+,`email` varchar(100)
+,`hr_employee_id` int(12)
+,`status` tinyint(1)
+,`identification_id` varchar(50)
+,`emp_start_date` date
+,`citizen_number` varchar(256)
+,`emp_first_name` varchar(50)
+,`emp_last_name` varchar(50)
+,`phone` varchar(30)
+,`employee_name` varchar(102)
+,`emp_email` varchar(100)
+,`gender` enum('MALE','FEMALE','UNKNOWN','')
+,`person_type` varchar(25)
+,`org_id` int(12)
+,`job_id` int(12)
+,`position_id` int(12)
+,`expense_ac_id` int(12)
+,`supervisor_employee_id` int(12)
+,`currency_code` varchar(20)
+,`org` varchar(50)
+);
 -- --------------------------------------------------------
 
 --
@@ -7842,16 +8476,16 @@ CREATE TABLE IF NOT EXISTS `item` (
   `item_number` varchar(50) NOT NULL,
   `item_description` varchar(256) DEFAULT NULL,
   `image_file_id` int(12) DEFAULT NULL,
-  `product_line` varchar(50) DEFAULT NULL,
+  `product_line` varchar(20) DEFAULT NULL,
   `product_line_percentage` decimal(10,5) DEFAULT NULL,
-  `locator_control` varchar(50) DEFAULT NULL,
+  `locator_control` varchar(15) DEFAULT NULL,
   `allow_negative_balance_cb` tinyint(1) DEFAULT NULL,
   `long_description` text,
   `uom_id` int(12) NOT NULL,
   `origination_type` varchar(25) NOT NULL,
   `origination_date` date NOT NULL,
-  `item_type` varchar(50) DEFAULT NULL,
-  `item_status` varchar(50) NOT NULL,
+  `item_type` varchar(20) DEFAULT NULL,
+  `item_status` varchar(15) NOT NULL,
   `inventory_item_cb` tinyint(1) DEFAULT NULL,
   `stockable_cb` tinyint(1) DEFAULT NULL,
   `transactable_cb` tinyint(1) DEFAULT NULL,
@@ -7859,10 +8493,10 @@ CREATE TABLE IF NOT EXISTS `item` (
   `cycle_count_enabled_cb` tinyint(1) DEFAULT NULL,
   `kit_cb` tinyint(1) DEFAULT NULL,
   `bom_enabled_cb` tinyint(1) DEFAULT NULL,
-  `bom_type` varchar(50) DEFAULT NULL,
+  `bom_type` varchar(15) DEFAULT NULL,
   `costing_enabled_cb` tinyint(1) DEFAULT NULL,
   `inventory_asset_cb` tinyint(1) DEFAULT NULL,
-  `default_cost_group` varchar(50) DEFAULT NULL,
+  `default_cost_group` varchar(15) DEFAULT NULL,
   `material_ac_id` int(12) DEFAULT NULL,
   `material_oh_ac_id` int(12) DEFAULT NULL,
   `overhead_ac_id` int(12) DEFAULT NULL,
@@ -7880,17 +8514,17 @@ CREATE TABLE IF NOT EXISTS `item` (
   `purchased_cb` tinyint(1) DEFAULT NULL,
   `use_asl_cb` tinyint(1) DEFAULT NULL,
   `invoice_matching` varchar(25) DEFAULT NULL,
-  `default_buyer` varchar(50) DEFAULT NULL,
-  `list_price` varchar(50) DEFAULT NULL,
-  `un_number` varchar(256) DEFAULT NULL,
-  `hazard_classs` varchar(256) DEFAULT NULL,
-  `receipt_sub_inventory` varchar(50) DEFAULT NULL,
+  `default_buyer` int(12) DEFAULT NULL,
+  `list_price` decimal(15,5) DEFAULT NULL,
+  `un_number` varchar(50) DEFAULT NULL,
+  `hazard_classs` varchar(50) DEFAULT NULL,
+  `receipt_sub_inventory` int(12) DEFAULT NULL,
   `over_receipt_percentage` int(10) DEFAULT NULL,
-  `over_receipt_action` varchar(50) DEFAULT NULL,
+  `over_receipt_action` varchar(20) DEFAULT NULL,
   `receipt_days_early` int(10) DEFAULT NULL,
   `receipt_days_late` int(10) DEFAULT NULL,
-  `receipt_day_action` varchar(50) DEFAULT NULL,
-  `receipt_routing` varchar(50) DEFAULT NULL,
+  `receipt_day_action` varchar(20) DEFAULT NULL,
+  `receipt_routing` varchar(20) DEFAULT NULL,
   `weight_uom_id` int(12) DEFAULT NULL,
   `weight` int(12) DEFAULT NULL,
   `volume_uom_id` int(12) DEFAULT NULL,
@@ -7901,9 +8535,9 @@ CREATE TABLE IF NOT EXISTS `item` (
   `height` int(12) DEFAULT NULL,
   `equipment_cb` tinyint(1) DEFAULT NULL,
   `electronic_format_cb` tinyint(1) DEFAULT NULL,
-  `planning_method` varchar(50) DEFAULT NULL,
-  `planner` varchar(50) DEFAULT NULL,
-  `make_buy` varchar(50) DEFAULT NULL,
+  `planning_method` varchar(20) DEFAULT NULL,
+  `planner` varchar(20) DEFAULT NULL,
+  `make_buy` varchar(10) DEFAULT NULL,
   `wip_supply_subinventory` int(12) DEFAULT NULL,
   `wip_supply_locator` int(12) DEFAULT NULL,
   `fix_order_quantity` int(12) DEFAULT NULL,
@@ -7918,8 +8552,8 @@ CREATE TABLE IF NOT EXISTS `item` (
   `minmax_max_quantity` decimal(20,5) DEFAULT NULL,
   `minmax_multibin_number` int(5) DEFAULT NULL,
   `minmax_multibin_size` decimal(20,5) DEFAULT NULL,
-  `forecast_method` varchar(50) DEFAULT NULL,
-  `forecast_control` varchar(50) DEFAULT NULL,
+  `forecast_method` varchar(20) DEFAULT NULL,
+  `forecast_control` varchar(20) DEFAULT NULL,
   `demand_timefence` int(12) DEFAULT NULL,
   `planning_timefence` int(12) DEFAULT NULL,
   `release_timefence` int(12) DEFAULT NULL,
@@ -7930,24 +8564,24 @@ CREATE TABLE IF NOT EXISTS `item` (
   `cumulative_total_lt` int(12) DEFAULT NULL,
   `lt_lot_size` int(12) DEFAULT NULL,
   `build_in_wip_cb` tinyint(1) DEFAULT NULL,
-  `wip_supply_type` varchar(50) DEFAULT NULL,
+  `wip_supply_type` varchar(20) DEFAULT NULL,
   `customer_ordered_cb` tinyint(1) DEFAULT NULL,
   `internal_ordered_cb` tinyint(1) DEFAULT NULL,
   `shippable_cb` tinyint(1) DEFAULT NULL,
   `returnable_cb` tinyint(1) DEFAULT NULL,
   `invoiceable_cb` tinyint(1) DEFAULT NULL,
-  `ef1` varchar(256) DEFAULT NULL,
-  `ef2` varchar(256) DEFAULT NULL,
-  `atp` varchar(50) DEFAULT NULL,
-  `picking_rule` varchar(50) DEFAULT NULL,
+  `billing_type` varchar(15) DEFAULT NULL,
+  `service_request_cb` tinyint(1) DEFAULT NULL,
+  `atp` varchar(20) DEFAULT NULL,
+  `picking_rule` varchar(20) DEFAULT NULL,
   `sourcing_rule_id` int(12) DEFAULT NULL,
   `sales_ac_id` int(12) DEFAULT NULL,
   `cogs_ac_id` int(12) DEFAULT NULL,
   `deffered_cogs_ac_id` int(12) DEFAULT NULL,
   `ip_tax_class` varchar(25) DEFAULT NULL,
   `op_tax_class` varchar(25) DEFAULT NULL,
-  `ap_payment_term` varchar(50) DEFAULT NULL,
-  `ar_payment_term` varchar(50) DEFAULT NULL,
+  `ap_payment_term` int(12) DEFAULT NULL,
+  `ar_payment_term` int(12) DEFAULT NULL,
   `ef_id` int(12) DEFAULT NULL,
   `rev_enabled_cb` tinyint(1) DEFAULT NULL,
   `rounding_option` varchar(25) DEFAULT NULL,
@@ -7974,7 +8608,7 @@ CREATE TABLE IF NOT EXISTS `item` (
 CREATE TABLE IF NOT EXISTS `item_select_v` (
 `item_number` varchar(50)
 ,`item_description` varchar(256)
-,`product_line` varchar(50)
+,`product_line` varchar(20)
 ,`item_id_m` int(12)
 );
 -- --------------------------------------------------------
@@ -8544,7 +9178,7 @@ CREATE TABLE IF NOT EXISTS `onhand_v` (
 `onhand_id` int(12)
 ,`item_number` varchar(50)
 ,`item_description` varchar(256)
-,`product_line` varchar(50)
+,`product_line` varchar(20)
 ,`org_name` varchar(50)
 ,`subinventory` varchar(25)
 ,`locator` varchar(256)
@@ -8658,7 +9292,7 @@ CREATE TABLE IF NOT EXISTS `option_header` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`option_header_id`),
   UNIQUE KEY `option_type` (`option_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=240 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=245 ;
 
 --
 -- Dumping data for table `option_header`
@@ -8746,9 +9380,9 @@ INSERT INTO `option_header` (`option_header_id`, `access_level`, `option_type`, 
 (179, 'SYSTEM', 'FP_MRP_EXCEPTION_TYPE', 'MRP Exceptions', 'fp', '', 0, '', '', 0, 0, '2014-05-21 09:32:10', 0, '2021-05-14 09:32:10'),
 (180, 'SYSTEM', 'MDM_TAX_TYPE', 'Tax Types', 'sys', '', 0, 'active', 'enabled', 2, 0, '2014-06-03 02:56:45', 0, '2003-06-14 02:56:45'),
 (181, 'BOTH', 'INV_ITEM_TAX_CLASS', 'Product Tax Classification', 'inv', '', 0, '', '', 0, 0, '2014-06-04 08:13:47', 0, '2004-06-14 08:13:47'),
-(182, 'SYSTEM', 'SYS_MODULE', 'Module Name', 'sys', NULL, NULL, NULL, NULL, NULL, 0, '2014-08-07 09:55:00', 34, '2015-05-05 15:32:06'),
+(182, 'SYSTEM', 'SYS_MODULE', 'Module Name', 'sys', NULL, NULL, NULL, NULL, NULL, 0, '2014-08-07 09:55:00', 34, '2015-06-08 04:44:39'),
 (183, 'SYSTEM', 'SD_SO_STATUS', 'Sales Order Header Status', 'sys', '', 0, 'active', 'enabled', 0, 0, '2014-06-29 11:56:44', 0, '2029-06-14 11:56:44'),
-(184, 'SYSTEM', 'EXT_PATH_TYPE', 'Extension Path Types', 'sys', NULL, NULL, NULL, 'enabled', NULL, 0, '2014-07-19 05:45:25', 34, '2015-01-22 02:44:43'),
+(184, 'SYSTEM', 'EXT_PATH_TYPE', 'Extension Path Types', 'sys', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-19 05:45:25', 34, '2015-05-25 04:13:48'),
 (185, 'BOTH', 'MDM_BANK_ACCOUNT_TYPE', 'Bank Account Types', 'gl', '', 0, 'active', 'enabled', 0, 0, '2014-07-15 12:15:20', 0, '2015-07-14 12:15:20'),
 (186, 'BOTH', 'INV_ABC_CODE', 'Inventory ABC Codes', 'inv', '', 0, 'active', 'enabled', 0, 0, '2014-07-18 14:47:03', 0, '2018-07-14 14:47:03'),
 (187, 'BOTH', 'INV_ABC_CRITERIA', 'ABC Valuation Criterias', 'inv', '', 0, 'active', 'enabled', 0, 0, '2014-07-22 07:36:49', 0, '2022-07-14 07:36:49'),
@@ -8803,7 +9437,12 @@ INSERT INTO `option_header` (`option_header_id`, `access_level`, `option_type`, 
 (236, 'BOTH', 'HD_SR_CLOSE_CODE', 'Service Request Close Type', 'hd', NULL, NULL, NULL, NULL, 1, 34, '2015-04-18 15:20:05', 34, '2015-04-18 15:22:14'),
 (237, 'BOTH', 'HD_CR_TYPE', 'Change Request Type', 'hd', NULL, NULL, NULL, NULL, 1, 34, '2015-04-19 04:53:53', 34, '2015-04-19 04:55:20'),
 (238, 'BOTH', 'SUPPLIER_CATEGORY', 'Supplier Category', 'ap', NULL, NULL, NULL, NULL, 2, 34, '2015-05-08 03:36:06', 34, '2015-05-08 03:37:29'),
-(239, 'BOTH', 'AR_CUSTOMER_CATEGORY', 'AR Customer Category', 'ar', NULL, NULL, NULL, NULL, NULL, 34, '2015-05-11 04:33:46', 34, '2015-05-11 04:35:25');
+(239, 'BOTH', 'AR_CUSTOMER_CATEGORY', 'AR Customer Category', 'ar', NULL, NULL, NULL, NULL, NULL, 34, '2015-05-11 04:33:46', 34, '2015-05-11 04:35:25'),
+(240, 'BOTH', 'ADM_PRIMARY_TASK_STATUS', 'Primary Task Type', 'adm', NULL, NULL, NULL, NULL, 1, 34, '2015-05-25 20:19:57', 34, '2015-05-25 20:22:59'),
+(241, 'BOTH', 'HD_PRI_SERVICE_TYPE', 'Primary Service Type', 'hd', NULL, NULL, NULL, NULL, 1, 34, '2015-05-31 04:57:21', 34, '2015-05-31 05:10:46'),
+(242, 'BOTH', 'SYS_BILLING_TYPE', 'Billing Type', 'sys', NULL, NULL, NULL, NULL, 1, 34, '2015-05-31 19:42:17', 34, '2015-05-31 19:43:31'),
+(243, 'BOTH', 'HR_TEAM_TYPE', 'HR Team Type', 'hr', NULL, NULL, NULL, NULL, NULL, 34, '2015-06-02 14:19:19', 34, '2015-06-02 14:20:47'),
+(244, 'SYSTEM', 'AR_CUSTOMER_RELATIONSHIP', 'AR Customer Relationship', 'ar', NULL, NULL, NULL, NULL, NULL, 34, '2015-06-09 16:29:51', 34, '2015-06-09 16:34:30');
 
 -- --------------------------------------------------------
 
@@ -8831,7 +9470,7 @@ CREATE TABLE IF NOT EXISTS `option_line` (
   PRIMARY KEY (`option_line_id`),
   UNIQUE KEY `option_header_id_2` (`option_header_id`,`option_line_code`),
   KEY `option_header_id` (`option_header_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1181 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1208 ;
 
 --
 -- Dumping data for table `option_line`
@@ -9830,7 +10469,35 @@ INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_co
 (1177, 239, 'END_CUST', 'End Customer', 'End Customer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-11 04:35:25', 34, '2015-05-11 04:35:25'),
 (1178, 239, 'BLANKET', 'Blanket Agreement', 'Blanket Agreement', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-11 04:35:26', 34, '2015-05-11 04:35:26'),
 (1179, 239, 'VMI', 'VMI', 'VMI', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-11 04:35:27', 34, '2015-05-11 04:35:27'),
-(1180, 239, 'TRADE_CUST', 'Trade Customer', 'Trade Customer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-11 04:35:27', 34, '2015-05-11 04:35:27');
+(1180, 239, 'TRADE_CUST', 'Trade Customer', 'Trade Customer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-11 04:35:27', 34, '2015-05-11 04:35:27'),
+(1181, 184, 'CONTAINER', 'Container', 'Container', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 04:13:49', 34, '2015-05-25 04:13:49'),
+(1182, 240, 'CLOSED', 'Closed', 'Closed', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:20:31', 34, '2015-05-25 20:23:00'),
+(1183, 240, 'CANCELLED', 'Cancelled', 'Cancelled', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:20:31', 34, '2015-05-25 20:23:03'),
+(1184, 240, 'COMPLETED', 'Completed', 'Completed', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:20:32', 34, '2015-05-25 20:23:01'),
+(1185, 240, 'APPROVED', 'Approved', 'Approved', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:20:33', 34, '2015-05-25 20:23:02'),
+(1186, 240, 'ON_HOLD', 'On Hold', 'On Hold', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:23:01', 34, '2015-05-25 20:23:01'),
+(1187, 240, 'REJECTED', 'Rejected', 'Rejected', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:23:04', 34, '2015-05-25 20:23:04'),
+(1188, 240, 'ACCEPTED', 'Accepted', 'Accepted', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:23:04', 34, '2015-05-25 20:23:04'),
+(1189, 241, 'EXCHANGE', 'Exchange', 'Exchange', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:47', 34, '2015-05-31 05:10:47'),
+(1190, 241, 'LOANER', 'Loaner', 'Loaner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:47', 34, '2015-05-31 05:10:47'),
+(1191, 241, 'LOANER_REPAIR_RETURN', 'Loaner, Repair and Return', 'Loaner, Repair and Return', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:48', 34, '2015-05-31 05:10:48'),
+(1192, 241, 'ADVANCE_EXCHANGE', 'Advance Exchange', 'Advance Exchange', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:48', 34, '2015-05-31 05:10:48'),
+(1193, 241, 'REPAIR_RETURN', 'Repair and Return', 'Repair and Return', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:49', 34, '2015-05-31 05:10:49'),
+(1194, 241, 'REPLACEMENT', 'Replacement', 'Replacement', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:49', 34, '2015-05-31 05:10:49'),
+(1195, 241, 'STANDARD', 'Standard', 'Standard', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:50', 34, '2015-05-31 05:10:50'),
+(1196, 242, 'MATERIAL', 'Material', 'Material', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 19:43:32', 34, '2015-05-31 19:43:32');
+INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_code`, `option_line_value`, `description`, `value_group_id`, `efid`, `status`, `rev_enabled`, `rev_number`, `effective_start_date`, `effective_end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+(1197, 242, 'LABOR', 'Labor', 'Labor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 19:43:32', 34, '2015-05-31 19:43:32'),
+(1198, 242, 'EXPENSE', 'Expense', 'Expense', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 19:43:32', 34, '2015-05-31 19:43:32'),
+(1199, 243, 'CONTRACT', 'Contract', 'Contract', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-02 14:20:48', 34, '2015-06-02 14:20:48'),
+(1200, 243, 'PROJECT', 'Project', 'Project', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-02 14:20:49', 34, '2015-06-02 14:20:49'),
+(1201, 243, 'OTHER', 'Others', 'Others', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-02 14:20:49', 34, '2015-06-02 14:20:49'),
+(1202, 243, 'SERVICE', 'Service', 'Service', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-02 14:20:50', 34, '2015-06-02 14:20:50'),
+(1203, 243, 'SALES', 'Sales', 'Sales', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-02 14:20:50', 34, '2015-06-02 14:20:50'),
+(1204, 243, 'RUSSIA', 'Russia', 'Russia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-02 14:20:51', 34, '2015-06-02 14:20:51'),
+(1205, 182, 'prj', 'Projects', '400. Projects', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-08 04:44:40', 34, '2015-06-08 04:44:40'),
+(1206, 244, 'PRIMARY', 'Primary', 'Primary', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-09 16:34:29', 34, '2015-06-09 16:34:29'),
+(1207, 244, 'SECONDARY', 'Secondary', 'Secondary', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-09 16:34:30', 34, '2015-06-09 16:34:30');
 
 -- --------------------------------------------------------
 
@@ -9863,7 +10530,7 @@ CREATE TABLE IF NOT EXISTS `org` (
   KEY `enterprise_id` (`enterprise_org_id`),
   KEY `legal_id` (`legal_org_id`),
   KEY `business_id` (`business_org_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `org`
@@ -9884,7 +10551,10 @@ INSERT INTO `org` (`org_id`, `org`, `code`, `type`, `description`, `enterprise_o
 (13, 'InoIT Inc.', 'E_IN0', 'ENTERPRISE', 'MI Enterprise 01', 13, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 87, 34, '2014-11-17 16:56:05', 34, '2015-05-07 16:49:13'),
 (14, 'inoHarware', 'L01', 'LEGAL_ORG', 'inoHarware', 13, 14, NULL, NULL, NULL, NULL, NULL, NULL, 87, 34, '2014-11-17 16:58:58', 34, '2014-11-17 16:58:58'),
 (15, 'CalBO', 'B01', 'BUSINESS_ORG', 'CalBO', 13, 14, 15, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-17 17:00:01', 34, '2014-12-06 10:43:19'),
-(16, 'SantaClara', 'I001', 'INVENTORY_ORG', 'SantaClara', 13, 14, 15, 16, NULL, NULL, NULL, 1, 89, 34, '2014-11-17 17:01:06', 34, '2014-12-27 17:23:25');
+(16, 'SantaClara', 'I001', 'INVENTORY_ORG', 'SantaClara', 13, 14, 15, 16, NULL, NULL, NULL, 1, 89, 34, '2014-11-17 17:01:06', 34, '2014-12-27 17:23:25'),
+(17, 'TEST Enterprise', 'TE01', 'ENTERPRISE', 'TEST Enterprise', 17, NULL, NULL, NULL, NULL, 'ACTIVE', NULL, NULL, NULL, 34, '2015-05-27 13:15:51', 34, '2015-05-27 13:15:51'),
+(18, 'Lgela T01', 'LT01', 'LEGAL_ORG', 'Lgela T01', 17, 18, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-27 16:31:29', 34, '2015-05-27 16:31:29'),
+(19, 'TEST Org 2', 'TO2', 'ENTERPRISE', 'TEST Org 2', 19, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-11 08:23:05', 34, '2015-06-11 08:23:05');
 
 -- --------------------------------------------------------
 
@@ -9960,7 +10630,7 @@ CREATE TABLE IF NOT EXISTS `path` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`path_id`),
   UNIQUE KEY `name` (`name`,`module_code`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=677 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=706 ;
 
 --
 -- Dumping data for table `path`
@@ -9974,7 +10644,7 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (20, 18, 'View Options', 'form.php?class_name=option_header&mode=2', 'View all the options', 'sys', 'option_header', 2, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-27 00:00:00', 0, '2010-06-14 00:00:00'),
 (21, 22, 'View Modules', 'form.php?class_name=option_header&mode=2&option_header_id=182', 'All modules', 'sys', 'option_header', 2, NULL, '', NULL, NULL, NULL, 0, '2014-06-27 00:00:00', 0, '2027-06-14 00:00:00'),
 (22, 18, 'Update Modules', 'form.php?class_name=option_header&mode=9&option_header_id=182', 'Module creation & update', 'sys', 'option_header', 9, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 00:00:00', 34, '2014-12-05 16:36:39'),
-(23, 105, 'Org', 'form.php?module_code=org', 'Organizations', 'org', 'org', NULL, NULL, 'org_id', 'SETUP', NULL, 10, 0, '2014-09-26 00:00:00', 1, '2014-12-05 16:28:40'),
+(23, 105, 'Org', 'form.php?module_code=org&path_id=23', 'Generic Organization', 'org', 'org', 2, NULL, 'org_id', 'SETUP', NULL, 10, 0, '2014-09-26 00:00:00', 34, '2015-06-10 17:19:36'),
 (24, 23, 'Enterprise', 'form.php?class_name=enterprise&mode=9', 'Create & Update Enterprise', 'org', 'enterprise', 9, NULL, NULL, NULL, NULL, NULL, 0, '2014-03-27 00:00:00', 0, '2010-06-14 00:00:00'),
 (26, 59, 'Path', 'form.php?class_name=path&mode=9', 'Path - creation, update & delete', 'adm', 'path', 9, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-26 00:00:00', 0, '2010-06-14 00:00:00'),
 (28, 23, 'Address', 'form.php?class_name=address&mode=9', 'Create & Update Address', 'org', 'address', 9, NULL, 'address_id', NULL, NULL, NULL, 0, '2014-03-11 00:00:00', 0, '2010-06-14 00:00:00'),
@@ -10004,7 +10674,7 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (57, 141, 'Page', 'form.php?class_name=page', 'create update page', 'ext', 'page', NULL, NULL, 'page_id', NULL, NULL, NULL, 0, '2014-06-06 00:00:00', 0, '2010-06-14 00:00:00'),
 (58, 85, 'Search Pages', 'search.php?class_name=page', 'view all pages', 'ext', 'page', NULL, NULL, '', NULL, 1, NULL, 0, '2014-06-06 00:00:00', 0, '2010-06-14 00:00:00'),
 (59, NULL, 'Admin', 'form.php?module_code=adm', 'Admin', 'adm', 'adm', 2, NULL, NULL, 'FORM', 1, 1, 0, '2014-07-23 00:00:00', 1, '2015-02-17 13:19:49'),
-(60, 61, 'Search Content Type', 'search.php?class_name=content_type', 'Content Types', 'ext', 'content_type', NULL, NULL, '', NULL, 1, NULL, 0, '2014-06-04 00:00:00', 0, '2010-06-14 00:00:00'),
+(60, 61, 'Search Content Type', 'search.php?class_name=content_type', 'Search  Content Types', 'ext', 'content_type', 2, NULL, NULL, 'SEARCH', NULL, NULL, 0, '2014-06-04 00:00:00', 34, '2015-05-25 18:34:56'),
 (61, 59, 'Content Type', 'form.php?class_name=content_type&mode=9', 'Create & Update Content Type', 'ext', 'content_type', 9, NULL, '', NULL, NULL, NULL, 0, '2014-06-04 00:00:00', 0, '2010-06-14 00:00:00'),
 (72, 141, 'Documentation ', 'content.php?content_type=documentation&mode=9', 'Create & Update Documents', 'da', NULL, 9, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-04 00:00:00', 34, '2015-05-05 15:24:03'),
 (76, 77, 'Custom Block', 'form.php?class_name=block&mode=9&custom_block=1', 'Create & Update blocks', 'adm', 'block', 9, NULL, '', NULL, NULL, NULL, 0, '2014-06-06 00:00:00', 0, '2010-06-14 00:00:00'),
@@ -10014,12 +10684,12 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (82, 141, 'New Forum Topic', 'content.php?mode=9&content_type=forum', 'Create & Update Forum', 'da', NULL, 9, NULL, 'content_id', NULL, NULL, NULL, 0, '2014-06-04 00:00:00', 34, '2015-05-05 15:23:58'),
 (83, 80, 'Category Relations', 'form.php?class_name=category_relation&mode=2', 'Category Relationships', 'ext', 'category_relation', 2, NULL, '', NULL, NULL, NULL, 0, '2014-06-05 00:00:00', 0, '2010-06-14 00:00:00'),
 (84, 141, 'Write Content', 'content.php?mode=9&content_type=content', 'Create & Updatecontent', 'da', NULL, 9, NULL, 'content_id', NULL, NULL, NULL, 0, '2014-06-12 00:00:00', 34, '2015-05-05 15:23:54'),
-(85, 487, 'Content Management', '#', 'Content Management - Create & Update Contents such as Forum, Article, etc', 'da', NULL, 2, NULL, NULL, NULL, NULL, 3, 0, '2014-07-23 00:00:00', 34, '2015-05-05 15:48:19'),
+(85, 487, 'Content Management', 'form.php?module_code=da&path_id=85', 'Content Management - Create & Update Contents such as Forum, Article, etc', 'da', 'da', 2, NULL, NULL, 'CONTAINER', NULL, 3, 0, '2014-07-23 00:00:00', 34, '2015-05-25 04:58:54'),
 (87, 59, 'Custom Report (View)', 'form.php?class_name=view&mode=9', 'Create & update view', 'ext', 'extension', 9, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-06 00:00:00', 1, '2014-10-25 10:06:42'),
 (88, 87, 'Search Custome Reports (Views)', 'search.php?class_name=view', 'List of views', 'ext', 'extension', 2, NULL, NULL, NULL, 1, NULL, 0, '2014-06-21 00:00:00', 1, '2014-10-25 10:07:22'),
 (89, 84, 'View forum', 'extensions/content/contents.php?content_type=forum', 'view forum content type', 'da', NULL, NULL, NULL, 'content_id', NULL, NULL, NULL, 0, '2013-09-07 00:00:00', 34, '2015-05-05 15:23:46'),
 (90, 18, 'Search Options', 'search.php?class_name=option_header', 'Option lists', 'sys', 'option_header', NULL, NULL, 'option_header_id', NULL, 1, NULL, 0, '2014-02-27 00:00:00', 0, '2010-06-14 00:00:00'),
-(91, 59, 'Role Path', 'form.php?class_name=role_path&mode=9&role_id=261', 'Role Path', 'adm', 'role_path', 9, NULL, 'role_path_id', NULL, NULL, NULL, 0, '2014-06-09 00:00:00', 0, '2010-06-14 00:00:00'),
+(91, 323, 'Role Path', 'form.php?class_name=role_path&mode=9&role_id=261', 'Role Path', 'adm', 'role_path', 9, NULL, 'role_path_id', NULL, NULL, NULL, 0, '2014-06-09 00:00:00', 34, '2015-05-25 09:32:53'),
 (92, 59, 'User', 'form.php?class_name=user&mode=9', 'User - Creation & Update', 'adm', 'user', 9, NULL, 'user_id', NULL, NULL, NULL, 0, '2014-05-01 00:00:00', 0, '2010-06-14 00:00:00'),
 (94, 155, 'Json Basics', 'include/basics/json.basics.php', 'Json Basics', 'adm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-19 00:00:00', 0, '2010-06-14 00:00:00'),
 (95, 23, 'Search Orgs', 'search.php?class_name=org', 'Search Organizations', 'sys', 'org', NULL, NULL, 'org_id', NULL, 1, NULL, 0, '2014-03-26 00:00:00', 34, '2015-05-05 14:14:06'),
@@ -10078,7 +10748,7 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (150, NULL, 'General Ledger', 'form.php?module_code=gl', 'General Ledger', 'gl', NULL, NULL, NULL, NULL, 'SETUP', NULL, 22, 0, '2014-07-23 00:00:00', 34, '2015-01-09 11:17:21'),
 (151, 150, 'Ledger', 'form.php?class_name=gl_ledger&mode=9', 'Create update & ledger', 'gl', 'gl_ledger', 9, NULL, 'gl_ledger_id', NULL, NULL, NULL, 0, '2014-02-25 00:00:00', 0, '2010-06-14 00:00:00'),
 (152, 151, 'Search Ledgers', 'search.php?class_name=gl_ledger', 'Serach Ledgers', 'gl', 'gl_ledger', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-02-25 00:00:00', 0, '2010-06-14 00:00:00'),
-(153, 59, 'Search', 'search.php', 'All Search Links', 'adm', NULL, NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-02-10 00:00:00', 0, '2010-06-14 00:00:00'),
+(153, 155, 'Search', 'search.php', 'All Search Links', 'adm', NULL, NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-02-10 00:00:00', 34, '2015-05-25 09:32:18'),
 (154, 147, 'View Value Group', 'form.php?class_name=sys_value_group_header&mode=2', 'View Value Group', 'sys', '', 2, NULL, '', NULL, NULL, NULL, 0, '2014-06-20 00:00:00', 0, '2020-06-14 00:00:00'),
 (155, 59, 'System', '/', 'System', 'adm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-19 00:00:00', 0, '2010-06-14 00:00:00'),
 (156, 110, 'View BOM', 'form.php?class_name=bom_header&mode=2', 'View all BOMs', 'bom', 'bom_header', 2, NULL, NULL, NULL, NULL, NULL, 0, '2014-04-04 00:00:00', 0, '2010-06-14 00:00:00'),
@@ -10231,7 +10901,7 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (302, 284, 'MDS', 'form.php?class_name=fp_mds_header&mode=9', 'Master Demand Schedule', 'fa', 'fp_mds_header', 9, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-15 00:00:00', 0, '2010-06-14 00:00:00'),
 (303, 302, 'Search MDS', 'search.php?class_name=fp_mds_header', 'Search MDS', 'fp', 'fp_mds_header', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-05-15 00:00:00', 0, '2010-06-14 00:00:00'),
 (304, 301, 'Search MRP', 'search.php?class_name=fp_mrp_header', 'Search MRP', 'fp', 'fp_mrp_header', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-05-17 00:00:00', 0, '2010-06-14 00:00:00'),
-(305, 301, 'Calculate MRP Demand', 'program.php?class_name=fp_mrp_demand&program_name=prg_mrp_demand_calculator', 'Calculate MRP Demand', 'fp', 'fp_mrp_demand', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-17 00:00:00', 0, '2010-06-14 00:00:00'),
+(305, 301, 'Calculate MRP Demand', 'program.php?class_name=fp_mrp_demand&program_name=prg_mrp_demand_calculator', 'Calculate MRP Demand', 'fp', 'fp_mrp_demand', 9, NULL, NULL, 'PROGRAM', NULL, NULL, 0, '2014-05-17 00:00:00', 34, '2015-05-20 16:29:02'),
 (306, 301, 'View MRP Demand', 'search.php?class_name=fp_mrp_demand', 'View MRP Demand', 'fp', 'fp_mrp_demand', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-05-17 00:00:00', 0, '2010-06-14 00:00:00'),
 (307, 302, 'Load MDS', 'program.php?class_name=fp_mds_header&program_name=prg_load_mds', 'Copy/Merge/Load MDS', 'fp', 'fp_mds_header', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-17 00:00:00', 0, '2010-06-14 00:00:00'),
 (308, 301, 'Planned Orders', 'search.php?class_name=fp_mrp_planned_order', 'MRP Planned Orders', 'fp', 'fp_mrp_planned_order', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-05-20 00:00:00', 0, '2010-06-14 00:00:00'),
@@ -10261,7 +10931,7 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (332, 330, 'Search Price List Line', 'search.php?class_name=mdm_price_list_header', 'Search Price List Line', 'sys', 'mdm_price_list_line', 9, NULL, NULL, NULL, 1, NULL, 0, '2014-06-21 00:00:00', 0, '2014-06-21 00:00:00'),
 (333, 105, 'Profile', 'form.php?class_name=sys_profile_header&mode=9', 'Profile Name', 'sys', 'profile', 9, NULL, 'sys_profile_header_id', NULL, NULL, NULL, 0, '2014-06-24 00:00:00', 0, '2024-06-14 00:00:00'),
 (334, 333, 'Search Profile', 'search.php?class_name=sys_profile_header', 'Search Profile', 'sys', 'profile', 9, NULL, NULL, NULL, 1, NULL, 0, '2014-06-24 00:00:00', 0, '2014-06-24 00:00:00'),
-(335, 219, 'Sales Document Type', 'form.php?class_name=sd_document_type&mode=9', 'Sales Document Type', 'sd', 'sd_document_type', 9, NULL, 'sd_document_type_id', 'SETUP', NULL, NULL, 0, '2014-07-01 00:00:00', 0, '2001-07-14 00:00:00'),
+(335, 526, 'Sales Document Type', 'form.php?class_name=sd_document_type&mode=9', 'Sales Document Type', 'sd', 'sd_document_type', 9, NULL, 'sd_document_type_id', 'SETUP', NULL, NULL, 0, '2014-07-01 00:00:00', 34, '2015-06-06 12:59:03'),
 (336, 335, 'Search SD Document Type', 'search.php?class_name=sd_document_type', 'Search Sales Document Type', 'sd', 'sd_document_type', 9, NULL, '', 'SETUP', 1, NULL, 0, '2014-07-01 00:00:00', 0, '2001-07-14 00:00:00'),
 (337, 520, 'Process Flow', 'form.php?class_name=sys_process_flow_header&mode=9', 'Create & Update Process Flow', 'sys', 'sys_process_flow_header', 9, NULL, 'sys_process_flow_header_id', NULL, NULL, NULL, 0, '2014-06-27 00:00:00', 34, '2014-12-05 16:38:58'),
 (338, 318, 'Sales Deliveries', 'search.php?class_name=sd_delivery_header', 'Search Delivries', 'sd', 'sd_delivery_header', 2, NULL, '', NULL, 1, NULL, 0, '2014-07-01 00:00:00', 0, '2001-07-14 00:00:00'),
@@ -10402,7 +11072,7 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (479, 105, 'Secondary Field', 'form.php?class_name=sys_secondary_field&mode=9', 'Secondary Field', 'sys', 'sys_secondary_field', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-11-06 16:10:57', 34, '2014-11-06 16:10:57'),
 (480, 479, 'Search Secondary Field', 'search.php?class_name=sys_secondary_field', 'Search Secondary Field', 'sd', 'sys_secondary_field', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2014-11-06 16:12:32', 34, '2014-11-06 16:12:32'),
 (481, 479, 'Secondary Field Instance', 'form.php?class_name=sys_secondary_field_instance&mode=9', 'Secondary Field Instance', 'sys', 'sys_secondary_field_instance', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-11-06 16:13:25', 34, '2014-11-06 16:13:25'),
-(482, 487, 'Change Control', '#', 'Change Control - ECO, MCO and Other Changes requests', 'da', NULL, 2, NULL, NULL, NULL, NULL, 3, 34, '2014-11-08 12:00:36', 34, '2015-05-05 15:25:29'),
+(482, 487, 'Change Control', 'form.php?module_code=da&path_id=482', 'Change Control - ECO, MCO and Other Changes requests', 'da', 'da', 2, NULL, NULL, 'CONTAINER', NULL, 3, 34, '2014-11-08 12:00:36', 34, '2015-05-25 04:58:18'),
 (483, 482, 'CO Template', 'form.php?class_name=cc_co_template_header&mode=9', 'Change Order Template', 'da', 'cc_co_template_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-11-08 14:15:29', 34, '2015-05-05 15:26:33'),
 (484, 483, 'Search Template', 'search.php?class_name=cc_co_template_header', 'Search Change Order Template', 'cc', 'cc_co_template_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2014-11-08 14:53:39', 34, '2014-11-08 14:53:39'),
 (485, 482, 'Change Order', 'form.php?class_name=cc_co_header&mode=9', 'Change Order', 'da', 'cc_co_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-11-09 10:29:13', 34, '2015-05-05 15:25:37'),
@@ -10425,12 +11095,12 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (502, 500, 'Process Payroll', 'program.php?class_name=hr_payroll_schedule&program_name=prg_process_payroll', 'Process Payroll Schedule', 'hr', 'hr_payroll_schedule', 9, NULL, NULL, 'PROGRAM', NULL, NULL, 34, '2014-11-25 17:27:35', 34, '2014-11-26 04:32:16'),
 (503, 402, 'Payroll Process', 'form.php?class_name=hr_payroll_process&mode=9', 'Payroll Process', 'hr', 'hr_payroll_process', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-11-26 08:30:47', 34, '2014-11-26 08:30:47'),
 (504, 503, 'Search Payroll Process', 'search.php?class_name=hr_payroll_process', 'Search Payroll Process', 'hr', 'hr_payroll_process', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2014-11-26 08:44:27', 34, '2014-11-26 08:45:29'),
-(505, 382, 'Self Service', '#', 'Employee Self Service', 'hr', 'user', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-11-28 09:33:24', 34, '2014-11-28 09:33:24'),
+(505, 382, 'Self Service', 'form.php?module_code=hr&path_id=505', 'HR Self Service', 'hr', 'hr', 2, NULL, NULL, 'CONTAINER', NULL, NULL, 34, '2014-11-28 09:33:24', 34, '2015-05-25 04:57:15'),
 (506, 420, 'Apply Leave', 'form.php?class_name=hr_leave_transaction&mode=9', 'Apply Leave', 'hr', 'hr_leave_transaction', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-11-28 09:41:36', 34, '2014-11-28 09:46:17'),
 (507, 505, 'Payslip', 'form.php?class_name=hr_payslip_user', 'User Payslip', 'hr', 'hr_payslip_user', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-11-28 12:02:40', 34, '2014-11-28 12:02:40'),
 (508, 500, 'Cancel Payroll Process', 'program.php?class_name=hr_payroll_process&program_name=prg_cancel_payroll_process', 'Cancel Payroll Process', 'hr', 'hr_payroll_process', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-11-29 13:40:08', 34, '2014-11-29 13:40:08'),
 (509, 500, 'Confirm Payroll Process', 'program.php?class_name=hr_payroll_process&program_name=prg_confirm_payroll_process', 'Confirm Payroll Process', 'hr', 'hr_payroll_process', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-11-29 13:41:34', 34, '2014-11-29 13:41:34'),
-(510, 105, 'Barcode', '#', 'Barcode Setups', 'sys', NULL, 2, NULL, NULL, 'SETUP', NULL, NULL, 34, '2014-12-01 05:57:24', 34, '2014-12-01 06:05:27'),
+(510, 105, 'Barcode', 'form.php?module_code=sys&path_id=510', 'Barcode Setup', 'sys', 'sys', 2, NULL, NULL, 'CONTAINER', NULL, NULL, 34, '2014-12-01 05:57:24', 34, '2015-05-25 04:56:46'),
 (511, 510, 'Label Format', 'form.php?class_name=bc_label_format_header&mode=9', 'Barcode Label Format Header', 'sd', 'bc_label_format_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-12-01 05:57:51', 34, '2014-12-01 05:57:51'),
 (512, 511, 'Search Label Format', 'search.php?class_name=bc_label_format_header', 'Search Label Format Header', 'sys', 'bc_label_format_header', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-12-01 05:59:07', 34, '2014-12-01 05:59:07'),
 (513, 105, 'Printer', 'form.php?class_name=sys_printer&mode=9', 'Printer', 'sys', 'sys_printer', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-12-01 11:10:39', 34, '2014-12-01 11:11:31'),
@@ -10441,13 +11111,13 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (517, 516, 'Search Label Request', 'search.php?class_name=bc_label_request&mode=9', 'Search Label Request', 'sd', 'bc_label_request', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2014-12-02 17:39:10', 34, '2014-12-02 17:39:10'),
 (518, 510, 'Static Label', 'form.php?class_name=bc_static_label&mode=9', 'Static Label', 'sys', 'bc_static_label', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-12-03 11:22:15', 34, '2014-12-03 11:22:15'),
 (519, 518, 'Search Static Label', 'search.php?class_name=bc_static_label&mode=9', 'Search Static Label', 'sys', 'bc_static_label', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2014-12-03 11:23:01', 34, '2014-12-03 11:23:01'),
-(520, 105, 'Master Data', '#', 'Master Data', 'sys', NULL, NULL, NULL, NULL, 'SETUP', NULL, NULL, 34, '2014-12-05 16:33:55', 34, '2014-12-05 16:34:20'),
+(520, 105, 'Master Data', 'form.php?module_code=sys&path_id=520', 'Master Data', 'sys', 'sys', 2, NULL, NULL, 'CONTAINER', NULL, NULL, 34, '2014-12-05 16:33:55', 34, '2015-05-25 04:24:35'),
 (521, 520, 'Contact', 'form.php?class_name=extn_contact&mode=9', 'Contact', 'sys', 'extn_contact', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-12-05 16:41:31', 34, '2014-12-05 16:53:30'),
 (522, 521, 'Search Contact', 'search.php?class_name=extn_contact', 'Search Contact', 'sys', 'extn_contact', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2014-12-05 16:45:34', 34, '2014-12-05 16:45:34'),
 (523, 521, 'Contact Reference', 'search.php?class_name=extn_contact_reference', 'Contact Reference', 'sys', 'extn_contact_reference', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2014-12-06 09:11:43', 34, '2014-12-06 09:11:43'),
 (524, 219, 'Lead', 'form.php?class_name=sd_lead&mode=9', 'Sales Lead', 'sd', 'sd_lead', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-12-06 17:36:36', 34, '2014-12-06 17:36:36'),
 (525, 524, 'Search Lead', 'search.php?class_name=sd_lead&mode=9', 'Search Lead', 'sd', 'sd_lead', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2014-12-06 17:37:08', 34, '2014-12-06 17:37:08'),
-(526, 219, 'Setup', '#', 'SD Setup', 'sd', 'sd', 2, NULL, NULL, 'FORM', NULL, 30, 34, '2014-12-07 04:08:42', 34, '2014-12-07 04:35:33'),
+(526, 219, 'Setup', 'form.php?module_code=sd&type=setup', 'Sales & Distribution Setup', 'sd', 'sd', 2, NULL, NULL, 'FORM', NULL, 30, 34, '2014-12-07 04:08:42', 34, '2015-05-25 04:54:43'),
 (527, 526, 'Sales Channel', 'form.php?class_name=option_header&mode=9&option_header_id=213', 'Sales Channel', 'sd', 'option_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-12-07 04:46:10', 34, '2014-12-07 04:47:09'),
 (528, 382, 'HR Team', 'form.php?class_name=hr_team_header&mode=9', 'HR Team', 'hr', 'hr_team_header', 9, NULL, NULL, 'FORM', NULL, NULL, 1, '2014-12-08 05:49:30', 1, '2014-12-08 05:49:30'),
 (529, 528, 'Search Team', 'search.php?class_name=hr_team_header', 'Search Team', 'hr', 'hr_team_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 1, '2014-12-08 05:50:29', 1, '2014-12-08 05:50:29'),
@@ -10582,14 +11252,41 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (666, 664, 'Start Scheduler', 'modules/sys/program_schedule/start_program_scheduler.php', 'Start Program Scheduler', 'adm', 'sys_program_schedule', 10, NULL, NULL, 'PROGRAM', NULL, NULL, 34, '2015-04-13 07:04:47', 34, '2015-04-13 07:04:47'),
 (667, 329, 'Message Format', 'form.php?class_name=sys_message_format&mode=9', 'Message Format', 'adm', 'sys_message_format', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-04-15 16:41:13', 34, '2015-04-15 16:41:13'),
 (668, 667, 'Search Message Format', 'searc.php?class_name=sys_message_format&mode=9', 'Search Message Format', 'adm', 'sys_message_format', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-04-15 16:42:22', 34, '2015-04-15 16:42:22'),
-(669, NULL, 'Help Desk', 'form.php?module_code=hd', 'Help Desk', 'hd', 'hd', 2, NULL, NULL, 'CONTENT', NULL, 15, 34, '2015-04-16 08:37:55', 34, '2015-04-16 17:31:51'),
+(669, NULL, 'Service Help Desk', 'form.php?module_code=hd', 'Help Desk', 'hd', 'hd', 2, NULL, NULL, 'CONTENT', NULL, 15, 34, '2015-04-16 08:37:55', 34, '2015-06-08 04:32:05'),
 (670, 669, 'Support Request', 'form.php?class_name=hd_support_request&mode=9', 'Support Request', 'hd', 'hd_support_request', 9, NULL, NULL, 'FORM', NULL, 12, 34, '2015-04-16 08:38:53', 34, '2015-04-16 08:38:53'),
 (671, 670, 'Search Support Request', 'search.php?class_name=hd_support_request&mode=9', 'Search Support Request', 'hd', 'hd_support_request', 9, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-04-16 08:40:49', 34, '2015-04-16 08:40:49'),
-(672, 669, 'Change Request', 'form.php?class_name=hd_change_request&mode=9', 'Change Request', 'hd', 'hd_change_request', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-04-19 06:26:00', 34, '2015-04-19 06:26:00'),
+(672, 669, 'Change Request', 'form.php?class_name=hd_change_request&mode=9', 'Change Request', 'hd', 'hd_change_request', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-04-19 06:26:00', 34, '2015-06-10 08:42:30'),
 (673, 672, 'Search Change Request', 'search.php?class_name=hd_change_request', 'Search Change Request', 'hd', 'hd_change_request', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-04-19 06:26:59', 34, '2015-04-19 06:26:59'),
 (674, NULL, 'Extensions', 'form.php?module_code=ext', 'Extensions', 'ext', 'ext', 2, NULL, NULL, 'CONTENT', NULL, NULL, 34, '2015-05-05 15:53:49', 34, '2015-05-05 15:53:49'),
 (675, 194, 'Multi Select Payment', 'multi_select.php?search_class_name=ap_payment_interface&action=multi_payment&mode=9', 'Multi Select Payment', 'ap', 'ap_payment_interface', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-05-09 06:35:54', 34, '2015-05-09 06:35:54'),
-(676, 59, 'Form Personalization', 'form.php?class_name=sys_form_personalization', 'Form Personalization', 'adm', 'sys_form_personalization', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-05-18 16:28:25', 34, '2015-05-18 16:28:25');
+(676, 155, 'Form Personalization', 'form.php?class_name=sys_form_personalization', 'Form Personalization', 'adm', 'sys_form_personalization', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-05-18 16:28:25', 34, '2015-05-25 09:31:32'),
+(678, 669, 'Service Request', 'form.php?class_name=hd_service_request&mode=9', 'Service Request', 'hd', 'hd_service_request', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-05-21 15:57:48', 34, '2015-05-21 15:57:48'),
+(679, 678, 'Search Service Request', 'search.php?class_name=hd_service_request', 'Search Service Request', 'hd', 'hd_service_request', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-05-21 15:59:11', 34, '2015-05-22 02:14:10'),
+(680, 329, 'Social Login', 'form.php?class_name=extn_social_login&mode=9', 'Social Login', 'adm', 'extn_social_login', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-05-22 06:02:02', 34, '2015-05-22 06:02:02'),
+(681, 680, 'Search Social Login', 'search.php?class_name=extn_social_login', 'Search Social Login', 'adm', 'extn_social_login', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-05-22 06:22:34', 34, '2015-05-22 06:22:34'),
+(682, 685, 'Service Activity', 'form.php?class_name=hd_service_activity_header&mode=9', 'Service Activity', 'hd', 'hd_service_activity_header', 9, NULL, NULL, 'SETUP', NULL, NULL, 34, '2015-05-24 10:00:42', 34, '2015-05-24 10:05:35'),
+(683, 682, 'Search Service Activity', 'search.php?class_name=hd_service_activity_header', 'Search Service Activity', 'hd', 'hd_service_activity_header', 2, NULL, NULL, 'SETUP', NULL, NULL, 34, '2015-05-24 10:01:33', 34, '2015-05-24 10:06:02'),
+(685, 669, 'Setup', 'form.php?module_code=hd&type=setup', 'Setup', 'hd', 'hd', 2, NULL, NULL, 'SETUP', NULL, 90, 34, '2015-05-24 10:03:53', 34, '2015-05-31 19:26:47'),
+(686, 59, 'Common Entities', 'form.php?module_code=adm&path_id=686', 'Common Entities', 'adm', 'adm', 2, NULL, NULL, 'CONTAINER', NULL, NULL, 34, '2015-05-25 08:45:20', 34, '2015-05-25 08:45:33'),
+(687, 686, 'Task Type', 'form.php?class_name=adm_task_type&mode=9', 'Task Type', 'adm', 'adm_task_type', 9, NULL, NULL, 'SETUP', NULL, NULL, 34, '2015-05-25 08:46:39', 34, '2015-05-25 08:46:39'),
+(688, 687, 'Search Task Type', 'search.php?class_name=adm_task_type', 'Search Task Type', 'adm', 'adm_task_type', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-05-25 09:27:48', 34, '2015-05-25 09:27:48'),
+(689, 687, 'Task Type Multi Action', 'multi_select.php?class_name=adm_task_type&mode=9&show_block=1', 'Task Type Multi Action', 'adm', 'adm_task_type', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-05-25 09:29:08', 34, '2015-05-25 09:30:28'),
+(690, 686, 'Task Status', 'form.php?class_name=adm_task_status&mode=9', 'Task Status', 'adm', 'adm_task_status', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-05-25 20:32:58', 34, '2015-05-25 20:32:58'),
+(691, 690, 'Search Task Status', 'search.php?class_name=adm_task_status', 'Search Task Status', 'adm', 'adm_task_status', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-05-25 20:33:43', 34, '2015-05-25 20:33:43'),
+(692, 690, 'Multi Action Task Status', 'multi_select.php?class_name=adm_task_status&mode=9&show_block=1', 'Multi Action Task Status', 'adm', 'adm_task_status', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-05-25 20:34:44', 34, '2015-05-25 20:34:44'),
+(693, 487, 'Process Document', 'form.php?class_name=sys_pd_header&mode=9', 'Process Document', 'da', 'sys_pd_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-05-26 16:34:20', 34, '2015-05-26 16:34:20'),
+(694, 693, 'Search Process Document', 'search.php?class_name=sys_pd_header&mode=9', 'Search Process Document', 'da', 'sys_pd_header', 9, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-05-26 17:01:44', 34, '2015-05-26 17:01:44'),
+(695, 685, 'Task Type', 'form.php?class_name=adm_task_type&mode=9', 'Task Type', 'hd', 'adm_task_type', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-05-29 18:00:10', 34, '2015-05-29 18:00:10'),
+(696, 685, 'Task Status', 'form.php?class_name=adm_task_status&mode=9', 'Task Status', 'hd', 'adm_task_status', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-05-29 18:01:56', 34, '2015-05-29 18:01:56'),
+(697, 685, 'Service Type', 'form.php?class_name=hd_service_type_header&mode=9', 'Service Type Header', 'hd', 'hd_service_type_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-05-31 06:06:51', 34, '2015-05-31 06:06:51'),
+(698, 697, 'Search Service Type', 'search.php?class_name=hd_service_type_header', 'Search Service Type', 'hd', 'hd_service_type_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-05-31 06:09:33', 34, '2015-05-31 06:09:33'),
+(699, 669, 'Service Order', 'form.php?class_name=hd_svo_header&mode=9', 'Service Order', 'hd', 'hd_svo_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-02 11:00:52', 34, '2015-06-02 11:00:52'),
+(700, 699, 'Search SVO', 'search.php?class_name=hd_svo_header&mode=9', 'Search Service Order', 'hd', 'hd_svo_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-06-02 11:02:26', 34, '2015-06-02 11:02:26'),
+(701, 487, 'Sys Process Document', 'form.php?class_name=sys_spd_header&mode=9', 'System Process Document', 'da', 'sys_spd_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-06 11:25:22', 34, '2015-06-06 11:25:22'),
+(702, 701, 'Search Sys Process Docs', 'search.php?class_name=sys_spd_header', 'Search System Process Documets', 'da', 'sys_spd_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-06-06 11:30:39', 34, '2015-06-06 11:30:39'),
+(703, 524, 'Custom report Sales Funnel', 'form.php?class_name=view_result&mode=2&view_id=13', 'Custom report Sales Funnel - Sales Funnel', 'sys', NULL, 2, NULL, NULL, 'REPORT', NULL, NULL, 34, '2015-06-09 09:34:12', 34, '2015-06-09 09:34:12'),
+(704, 669, 'Svc Business Process', 'form.php?class_name=hd_sbp_header&mode=9', 'Service Business Process', 'hd', 'hd_sbp_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-10 08:29:45', 34, '2015-06-10 08:29:45'),
+(705, 704, 'Search Business Process', 'search.php?class_name=hd_sbp_header', 'Search Service Business Process', 'hd', 'hd_sbp_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-06-10 08:30:38', 34, '2015-06-10 08:30:38');
 
 -- --------------------------------------------------------
 
@@ -10889,7 +11586,7 @@ CREATE TABLE IF NOT EXISTS `po_all_v` (
 ,`gl_tax_amount` decimal(15,5)
 ,`item_number` varchar(50)
 ,`uom_id` int(12)
-,`item_status` varchar(50)
+,`item_status` varchar(15)
 ,`serial_generation` varchar(25)
 ,`lot_generation` varchar(25)
 ,`po_detail_id` int(12)
@@ -11025,7 +11722,7 @@ CREATE TABLE IF NOT EXISTS `po_blanket_v` (
 ,`line_price` decimal(20,5)
 ,`item_number` varchar(50)
 ,`uom_id` int(12)
-,`item_status` varchar(50)
+,`item_status` varchar(15)
 ,`po_detail_id` int(12)
 ,`shipment_number` int(12)
 ,`receving_org_id` int(12)
@@ -11087,7 +11784,7 @@ CREATE TABLE IF NOT EXISTS `po_convert_requisition_v` (
 ,`receving_org_id` int(12)
 ,`item_number` varchar(50)
 ,`uom_id` int(12)
-,`item_status` varchar(50)
+,`item_status` varchar(15)
 ,`po_requisition_detail_id` int(12)
 ,`shipment_number` int(12)
 ,`subinventory_id` int(12)
@@ -11180,7 +11877,7 @@ CREATE TABLE IF NOT EXISTS `po_document_v` (
 ,`line_price` decimal(20,5)
 ,`item_number` varchar(50)
 ,`uom_id` int(12)
-,`item_status` varchar(50)
+,`item_status` varchar(15)
 ,`po_detail_id` int(12)
 ,`shipment_number` int(12)
 ,`receving_org_id` int(12)
@@ -11447,7 +12144,7 @@ CREATE TABLE IF NOT EXISTS `po_requisition_all_v` (
 ,`line_price` decimal(20,5)
 ,`item_number` varchar(50)
 ,`uom_id` int(12)
-,`item_status` varchar(50)
+,`item_status` varchar(15)
 ,`po_requisition_detail_id` int(12)
 ,`shipment_number` int(12)
 ,`ship_to_inventory` varchar(50)
@@ -11820,6 +12517,70 @@ CREATE TABLE IF NOT EXISTS `prj_project_line` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `prj_status_header`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_status_header` (
+  `prj_status_header_id` int(12) NOT NULL AUTO_INCREMENT,
+  `user_status` varchar(25) NOT NULL,
+  `system_status` varchar(25) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `from_date` date DEFAULT NULL,
+  `to_date` date DEFAULT NULL,
+  `starting_status_cb` tinyint(1) DEFAULT NULL,
+  `ending_status_cb` tinyint(1) DEFAULT NULL,
+  `sys_process_flow_header_id` int(12) DEFAULT NULL,
+  `next_allowed_status` varchar(25) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`prj_status_header_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_status_line`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_status_line` (
+  `prj_status_line_id` int(12) NOT NULL AUTO_INCREMENT,
+  `prj_status_header_id` int(12) NOT NULL,
+  `action_code` varchar(25) NOT NULL,
+  `allow_cb` tinyint(1) DEFAULT NULL,
+  `default_cb` tinyint(1) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`prj_status_line_id`),
+  UNIQUE KEY `sd_so_header_id_2` (`prj_status_header_id`,`action_code`),
+  UNIQUE KEY `sd_so_header_id` (`prj_status_header_id`,`default_cb`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_status_next`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_status_next` (
+  `prj_status_next_id` int(12) NOT NULL AUTO_INCREMENT,
+  `prj_status_header_id` int(12) NOT NULL,
+  `status_name` varchar(25) NOT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`prj_status_next_id`),
+  UNIQUE KEY `sd_so_header_id_2` (`prj_status_header_id`,`status_name`),
+  UNIQUE KEY `sd_so_header_id` (`prj_status_header_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `product`
 --
 
@@ -12064,7 +12825,7 @@ CREATE TABLE IF NOT EXISTS `sd_document_type` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`sd_document_type_id`),
   UNIQUE KEY `document_type_name` (`document_type_name`,`bu_org_id_r`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `sd_document_type`
@@ -12074,7 +12835,8 @@ INSERT INTO `sd_document_type` (`sd_document_type_id`, `document_type_name`, `bu
 (1, 'STD_EXTERNAL', 0, 'HEADER', 'SALES_ORDER', 'INV', 'Standard External', 'BOTH', 0, 2, 1, 6, 'EXTERNAL', '1', '', 0, '2014-07-10 11:06:41', 0, '2010-07-14 11:06:41'),
 (2, 'SD_EXTERNAL_LINE', 5, 'LINE', 'SALES_ORDER', 'INV', 'External Line', 'BOTH', NULL, 1, 1, 6, 'EXTERNAL', '1', NULL, 0, '2014-08-30 19:16:00', 0, '2030-08-14 19:16:00'),
 (3, 'INTERNAL_STD_H', NULL, 'HEADER', 'SALES_ORDER', 'INV', 'Internal Orders', 'BOTH', NULL, NULL, 1, 6, NULL, '1', NULL, 0, '2014-06-27 10:27:27', 34, '2014-12-29 13:24:44'),
-(4, 'INTERNAL_STD_L', NULL, 'LINE', 'SALES_ORDER', 'INV', 'Internal Standard Line', 'BOTH', NULL, NULL, 1, 6, NULL, '1', NULL, 0, '2014-06-27 10:28:15', 34, '2014-12-29 13:30:48');
+(4, 'INTERNAL_STD_L', NULL, 'LINE', 'SALES_ORDER', 'INV', 'Internal Standard Line', 'BOTH', NULL, NULL, 1, 6, NULL, '1', NULL, 0, '2014-06-27 10:28:15', 34, '2014-12-29 13:30:48'),
+(5, 'Invoice Only', 5, 'LINE', 'SALES_ORDER', 'INV', 'Invoice Only', 'BOTH', 4, 1, 1, 6, 'EXTERNAL', '1', NULL, 34, '2015-06-06 13:01:17', 34, '2015-06-06 15:12:56');
 
 -- --------------------------------------------------------
 
@@ -12223,7 +12985,7 @@ CREATE TABLE IF NOT EXISTS `sd_pick_list_v` (
 ,`actual_ship_date` date
 ,`item_number` varchar(50)
 ,`uom_id` int(12)
-,`item_status` varchar(50)
+,`item_status` varchar(15)
 ,`org` varchar(50)
 ,`shipping_org_id` int(12)
 ,`created_by` int(12)
@@ -12339,6 +13101,19 @@ CREATE TABLE IF NOT EXISTS `sd_sales_control` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `sd_sales_documents_v`
+--
+CREATE TABLE IF NOT EXISTS `sd_sales_documents_v` (
+`document_id` int(12) unsigned
+,`docuemnt_number` varchar(50)
+,`sales_team` varchar(25)
+,`creation_date` datetime
+,`document_type` varchar(11)
+,`status` varchar(25)
+);
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sd_shipping_control`
 --
 
@@ -12422,7 +13197,7 @@ CREATE TABLE IF NOT EXISTS `sd_so_all_v` (
 ,`actual_ship_date` date
 ,`item_number` varchar(50)
 ,`uom_id` int(12)
-,`item_status` varchar(50)
+,`item_status` varchar(15)
 ,`org` varchar(50)
 ,`shipping_org_id` int(12)
 ,`created_by` int(12)
@@ -12473,7 +13248,8 @@ CREATE TABLE IF NOT EXISTS `sd_so_header` (
   `last_update_date` datetime NOT NULL,
   `rev_enabled_cb` tinyint(1) DEFAULT NULL,
   `rev_number` int(12) DEFAULT NULL,
-  PRIMARY KEY (`sd_so_header_id`)
+  PRIMARY KEY (`sd_so_header_id`),
+  UNIQUE KEY `order_reference_table` (`order_reference_table`,`order_reference_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -12520,12 +13296,11 @@ CREATE TABLE IF NOT EXISTS `sd_so_line` (
   `bom_config_header_id` int(12) DEFAULT NULL,
   `wip_wo_header_id` int(12) DEFAULT NULL,
   `so_status` varchar(50) DEFAULT NULL,
+  `sys_spd_header_id` int(12) DEFAULT NULL,
   `created_by` int(12) NOT NULL,
   `creation_date` datetime NOT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime NOT NULL,
-  `rev_enabled_cb` tinyint(1) DEFAULT NULL,
-  `rev_number` int(12) DEFAULT NULL,
   PRIMARY KEY (`sd_so_line_id`),
   UNIQUE KEY `sd_so_header_id_2` (`sd_so_header_id`,`line_number`),
   UNIQUE KEY `sd_so_header_id` (`sd_so_header_id`,`item_id_m`,`requested_date`)
@@ -12725,6 +13500,7 @@ CREATE TABLE IF NOT EXISTS `site_info` (
   `access_denied` text,
   `analytics_code` text,
   `basic_user_role` varchar(50) DEFAULT NULL,
+  `move_line_wo_header` varchar(25) DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
   UNIQUE KEY `name` (`site_name`)
@@ -12734,8 +13510,8 @@ CREATE TABLE IF NOT EXISTS `site_info` (
 -- Dumping data for table `site_info`
 --
 
-INSERT INTO `site_info` (`default_home_page`, `site_name`, `maintenance_cb`, `maintenance_msg`, `disabled_action`, `email`, `phone_no`, `logo_path`, `posts_in_fp`, `summary_char_fp`, `footer_message`, `anonymous_user`, `anonymous_user_role`, `access_denied`, `analytics_code`, `basic_user_role`, `last_update_by`, `last_update_date`) VALUES
-('content', 'inoERP', NULL, ' <h1>Thanks for Visiting inoERP <br>\r\n Site in under maintenance & ''ll be back online shortly.     </h1>            ', '', 'contact@inoideas.org', '1-205-419-5131', 'files/logo.png', 6, 60, '<span class="developed_by">Copyright @ 2014 inoERP - <a href=''http://inoideas.org''>Powered By inoCMS </a></span>                 ', '', '', NULL, ' <script>\r\n  (function(i,s,o,g,r,a,m){i[''GoogleAnalyticsObject'']=r;i[r]=i[r]||function(){\r\n  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\r\n  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\r\n  })(window,document,''script'',''//www.google-analytics.com/analytics.js'',''ga'');\r\n\r\n  ga(''create'', ''UA-48829329-1'', ''auto'');\r\n  ga(''send'', ''pageview'');\r\n\r\n</script> ', NULL, 34, '2015-05-10 09:15:15');
+INSERT INTO `site_info` (`default_home_page`, `site_name`, `maintenance_cb`, `maintenance_msg`, `disabled_action`, `email`, `phone_no`, `logo_path`, `posts_in_fp`, `summary_char_fp`, `footer_message`, `anonymous_user`, `anonymous_user_role`, `access_denied`, `analytics_code`, `basic_user_role`, `move_line_wo_header`, `last_update_by`, `last_update_date`) VALUES
+('content', 'inoERP', NULL, ' <h1>Thanks for Visiting inoERP <br>\r\n Site in under maintenance & ''ll be back online shortly.     </h1>               ', '', 'contact@inoideas.org', '1-205-419-5131', 'files/logo.png', 6, 60, '<span class="developed_by">Copyright @ 2014 inoERP - <a href=''http://inoideas.org''>Powered By inoCMS </a></span>                    ', '', '', NULL, ' <script>\r\n  (function(i,s,o,g,r,a,m){i[''GoogleAnalyticsObject'']=r;i[r]=i[r]||function(){\r\n  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\r\n  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\r\n  })(window,document,''script'',''//www.google-analytics.com/analytics.js'',''ga'');\r\n\r\n  ga(''create'', ''UA-48829329-1'', ''auto'');\r\n  ga(''send'', ''pageview'');\r\n\r\n</script>    ', NULL, 'SAVE_HEADER', 34, '2015-06-11 06:09:14');
 
 -- --------------------------------------------------------
 
@@ -13394,6 +14170,95 @@ CREATE TABLE IF NOT EXISTS `sys_notification_group` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sys_pd_header`
+--
+
+CREATE TABLE IF NOT EXISTS `sys_pd_header` (
+  `sys_pd_header_id` int(12) NOT NULL AUTO_INCREMENT,
+  `org_id` int(12) NOT NULL,
+  `document_number` varchar(20) DEFAULT NULL,
+  `status` varchar(25) DEFAULT NULL,
+  `security_level` varchar(25) DEFAULT NULL,
+  `primary_document` varchar(100) DEFAULT NULL,
+  `primary_document_id` int(12) DEFAULT NULL,
+  `template_id` int(12) DEFAULT NULL,
+  `change_type` varchar(25) DEFAULT NULL,
+  `originator` varchar(256) DEFAULT NULL,
+  `description` text,
+  `reason_code` varchar(100) DEFAULT NULL,
+  `product_line` varchar(50) DEFAULT NULL,
+  `process_flow_header_id` int(12) NOT NULL,
+  `current_process_flow_line_id` int(12) DEFAULT NULL,
+  `origination_date` date DEFAULT NULL,
+  `owner_user_id` int(12) DEFAULT NULL,
+  `release_date` date DEFAULT NULL,
+  `completion_date` date DEFAULT NULL,
+  `project_task_id` int(12) DEFAULT NULL,
+  `access_org` text,
+  `related_changes` text,
+  `priority` int(4) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`sys_pd_header_id`),
+  UNIQUE KEY `release_number` (`security_level`,`change_type`),
+  UNIQUE KEY `po_header_id` (`sys_pd_header_id`,`security_level`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sys_pd_process_flow_action`
+--
+
+CREATE TABLE IF NOT EXISTS `sys_pd_process_flow_action` (
+  `sys_pd_process_flow_action_id` int(12) NOT NULL AUTO_INCREMENT,
+  `sys_pd_header_id` int(12) NOT NULL,
+  `sys_process_flow_line_id` int(12) NOT NULL,
+  `action_number` mediumint(6) NOT NULL,
+  `role_code` varchar(25) DEFAULT NULL,
+  `user_id` int(12) DEFAULT NULL,
+  `pf_action_type` varchar(25) DEFAULT NULL,
+  `required_cb` varchar(5) DEFAULT NULL,
+  `field_value` varchar(25) DEFAULT NULL,
+  `comment` varchar(256) DEFAULT NULL,
+  `action_user_id` int(12) DEFAULT NULL,
+  `action_duration` decimal(20,5) DEFAULT NULL,
+  `object_name` varchar(100) DEFAULT NULL,
+  `object_primary_id` int(12) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`sys_pd_process_flow_action_id`),
+  UNIQUE KEY `sys_pd_header_id` (`sys_pd_header_id`,`sys_process_flow_line_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sys_pd_process_flow_action_value`
+--
+
+CREATE TABLE IF NOT EXISTS `sys_pd_process_flow_action_value` (
+  `sys_pd_process_flow_action_value_id` int(12) NOT NULL AUTO_INCREMENT,
+  `sys_process_flow_action_id` int(12) NOT NULL,
+  `value` varchar(256) NOT NULL,
+  `comment` varchar(256) DEFAULT NULL,
+  `action_user_id` int(12) NOT NULL,
+  `action_duration` decimal(10,2) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`sys_pd_process_flow_action_value_id`),
+  UNIQUE KEY `document_type_name` (`sys_process_flow_action_id`,`comment`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sys_permission`
 --
 
@@ -13446,6 +14311,8 @@ CREATE TABLE IF NOT EXISTS `sys_process_flow_action` (
   `role_code` varchar(25) DEFAULT NULL,
   `user_id` int(12) DEFAULT NULL,
   `pf_action_type` varchar(25) DEFAULT NULL,
+  `object_name` varchar(100) DEFAULT NULL,
+  `object_primary_id` int(12) DEFAULT NULL,
   `required_cb` varchar(5) DEFAULT NULL,
   `created_by` int(12) NOT NULL,
   `creation_date` datetime DEFAULT NULL,
@@ -13488,7 +14355,7 @@ CREATE TABLE IF NOT EXISTS `sys_process_flow_header` (
   `sys_process_flow_header_id` int(12) NOT NULL AUTO_INCREMENT,
   `process_flow` varchar(25) NOT NULL,
   `module_name` varchar(25) NOT NULL,
-  `type` enum('APPROVAL','DOCUMENT','','') NOT NULL,
+  `type` varchar(25) NOT NULL,
   `status` enum('active','inactive','','') DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL,
   `created_by` int(12) NOT NULL,
@@ -13497,15 +14364,17 @@ CREATE TABLE IF NOT EXISTS `sys_process_flow_header` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`sys_process_flow_header_id`),
   UNIQUE KEY `document_type_name` (`process_flow`,`module_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `sys_process_flow_header`
 --
 
 INSERT INTO `sys_process_flow_header` (`sys_process_flow_header_id`, `process_flow`, `module_name`, `type`, `status`, `description`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
-(1, 'SD_STD_SALES_L', 'sd', 'DOCUMENT', NULL, 'Standard Sales Line', 0, '2014-06-28 06:38:47', 34, '2014-12-27 11:09:29'),
-(2, 'ECO Standard', 'cc', 'DOCUMENT', NULL, 'ECO Standard Flow1', 34, '2014-11-11 04:45:56', 34, '2015-03-08 09:53:40');
+(1, 'SD_STD_SALES_L', 'sd', 'SYS_DOCUMENT', NULL, 'Standard Sales Line', 0, '2014-06-28 06:38:47', 34, '2015-06-06 09:55:51'),
+(2, 'ECO Standard', 'cc', 'DOCUMENT', NULL, 'ECO Standard Flow1', 34, '2014-11-11 04:45:56', 34, '2015-03-08 09:53:40'),
+(3, 'NEW_HIRE_CONTRACT', 'hr', 'APPROVAL', NULL, 'New Hire For Contractual Position', 34, '2015-05-25 21:57:49', 34, '2015-05-28 17:24:28'),
+(4, 'Invoice Only Line', 'sd', 'SYS_DOCUMENT', NULL, 'Invoice Only Line Process Flow', 34, '2015-06-06 13:12:18', 34, '2015-06-06 13:14:13');
 
 -- --------------------------------------------------------
 
@@ -13525,36 +14394,54 @@ CREATE TABLE IF NOT EXISTS `sys_process_flow_line` (
   `next_line_seq_pass` int(12) DEFAULT NULL,
   `next_line_seq_fail` int(12) DEFAULT NULL,
   `next_line_seq_onhold` int(12) DEFAULT NULL,
+  `activity_path` varchar(255) DEFAULT NULL,
   `created_by` int(12) NOT NULL,
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`sys_process_flow_line_id`),
   UNIQUE KEY `document_type_name` (`sys_process_flow_header_id`,`line_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
 
 --
 -- Dumping data for table `sys_process_flow_line`
 --
 
-INSERT INTO `sys_process_flow_line` (`sys_process_flow_line_id`, `sys_process_flow_header_id`, `line_number`, `line_name`, `line_type`, `description`, `class_name`, `method_name`, `next_line_seq_pass`, `next_line_seq_fail`, `next_line_seq_onhold`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
-(1, '1', 1, 'Start', 'start', 'Start the order', '', '', 0, 0, 0, 0, '2014-06-28 06:38:49', 0, '2028-06-14 06:38:49'),
-(2, '1', 3, 'Find Supply', 'decision', 'Find the supply', 'sd_so_line', 'find_supply', 0, 0, 0, 0, '2014-06-28 06:38:49', 0, '2028-06-14 06:38:49'),
-(3, '1', 2, 'Schedule', 'activity', 'Schedule Sales Order', 'sd_so_header', 'schedule_line', 0, 0, 0, 0, '2014-06-28 06:38:48', 0, '2028-06-14 06:38:48'),
-(4, '1', 4, 'Onhand Supply', 'decision', 'Is Supply Onhand', '', '', 0, 0, 0, 0, '2014-06-28 06:38:50', 0, '2028-06-14 06:38:50'),
-(5, '1', 7, 'Picking', 'activity', 'Pick the SO Line', 'sd_so_line', 'pick_line', 0, 0, 0, 0, '2014-06-28 06:38:51', 0, '2028-06-14 06:38:51'),
-(6, '1', 5, 'WO Supply', 'decision', 'Is Supply Work Order', '', '', 0, 0, 0, 0, '2014-06-28 06:38:50', 0, '2028-06-14 06:38:50'),
-(7, '1', 6, 'Req Supply', 'decision', 'Is Supply Requisition', '', '', 0, 0, 0, 0, '2014-06-28 06:38:51', 0, '2028-06-14 06:38:51'),
-(8, '1', 8, 'Shipping', 'activity', 'Ship the SO line', 'sd_so_line', 'ship_line', 0, 0, 0, 0, '2014-06-28 06:38:52', 0, '2028-06-14 06:38:52'),
-(9, '1', 9, 'Close', 'end', 'Close the Line', 'sd_so_line', 'close_line', NULL, NULL, NULL, 0, '2014-06-28 06:38:52', 34, '2014-12-27 11:09:30'),
-(10, '2', 1, 'Start', 'start', 'Enter the Change Details1', 'cc_co_header', 'pf_open', NULL, NULL, NULL, 34, '2014-11-11 04:46:03', 34, '2015-03-08 09:53:40'),
-(11, '2', 2, 'Collaborate', 'activity', 'Collaborate with others', 'cc_co_header', 'pf_allow_collaboration', NULL, NULL, NULL, 34, '2014-11-11 04:46:04', 34, '2014-11-12 15:47:54'),
-(12, '2', 5, 'Management Review', 'decision', 'Management Review', 'cc_co_header', 'pf_management_reveiew', NULL, NULL, NULL, 34, '2014-11-11 04:46:04', 34, '2014-11-11 04:46:04'),
-(13, '2', 3, 'Approval', 'decision', 'Submit For Approval', 'cc_co_header', 'pf_submit_for_approval', 4, 2, 3, 34, '2014-11-11 04:46:04', 34, '2014-11-12 15:57:08'),
-(15, '2', 6, 'Implement', 'activity', 'Implement the changes', 'cc_co_line', 'pf_implement_changes', NULL, NULL, NULL, 34, '2014-11-11 04:46:05', 34, '2014-11-11 04:46:05'),
-(16, '2', 7, 'Review', 'decision', 'Review the changes', 'cc_co_line', 'pf_review_changes', NULL, NULL, NULL, 34, '2014-11-11 04:46:05', 34, '2014-11-11 04:46:05'),
-(17, '2', 8, 'Sign-off', 'decision', 'Sign-off the process', 'cc_co_header', 'pf_sign_off', NULL, NULL, NULL, 34, '2014-11-11 04:46:05', 34, '2014-11-11 04:46:05'),
-(18, '2', 9, 'Close', 'end', 'Close the Change', 'cc_co_header', 'pf_close', NULL, NULL, NULL, 34, '2014-11-11 04:46:06', 34, '2014-11-11 04:46:06');
+INSERT INTO `sys_process_flow_line` (`sys_process_flow_line_id`, `sys_process_flow_header_id`, `line_number`, `line_name`, `line_type`, `description`, `class_name`, `method_name`, `next_line_seq_pass`, `next_line_seq_fail`, `next_line_seq_onhold`, `activity_path`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+(1, '1', 1, 'Start', 'start', 'Start the order', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-28 06:38:49', 34, '2015-06-06 09:45:45'),
+(2, '1', 3, 'Find Supply', 'decision', 'Find the supply', 'sd_so_line', 'find_supply', NULL, NULL, NULL, NULL, 0, '2014-06-28 06:38:49', 34, '2015-06-06 09:45:46'),
+(3, '1', 2, 'Schedule', 'activity', 'Schedule Sales Order', 'sd_so_header', 'schedule_line', NULL, NULL, NULL, NULL, 0, '2014-06-28 06:38:48', 34, '2015-06-06 09:45:46'),
+(4, '1', 4, 'Onhand Supply', 'decision', 'Is Supply Onhand', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-28 06:38:50', 34, '2015-06-06 09:45:45'),
+(5, '1', 7, 'Picking', 'activity', 'Pick the SO Line', 'sd_so_line', 'pick_line', NULL, NULL, NULL, NULL, 0, '2014-06-28 06:38:51', 34, '2015-06-06 09:45:47'),
+(6, '1', 5, 'WO Supply', 'decision', 'Is Supply Work Order', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-28 06:38:50', 34, '2015-06-06 09:45:44'),
+(7, '1', 6, 'Req Supply', 'decision', 'Is Supply Requisition', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-28 06:38:51', 34, '2015-06-06 09:45:46'),
+(8, '1', 8, 'Shipping', 'activity', 'Ship the SO line', 'sd_so_line', 'ship_line', NULL, NULL, NULL, NULL, 0, '2014-06-28 06:38:52', 34, '2015-06-06 09:45:47'),
+(9, '1', 9, 'Close', 'end', 'Close the Line', 'sd_so_line', 'close_line', NULL, NULL, NULL, NULL, 0, '2014-06-28 06:38:52', 34, '2015-06-06 09:45:48'),
+(10, '2', 1, 'Start', 'start', 'Enter the Change Details1', 'cc_co_header', 'pf_open', NULL, NULL, NULL, NULL, 34, '2014-11-11 04:46:03', 34, '2015-03-08 09:53:40'),
+(11, '2', 2, 'Collaborate', 'activity', 'Collaborate with others', 'cc_co_header', 'pf_allow_collaboration', NULL, NULL, NULL, NULL, 34, '2014-11-11 04:46:04', 34, '2014-11-12 15:47:54'),
+(12, '2', 5, 'Management Review', 'decision', 'Management Review', 'cc_co_header', 'pf_management_reveiew', NULL, NULL, NULL, NULL, 34, '2014-11-11 04:46:04', 34, '2014-11-11 04:46:04'),
+(13, '2', 3, 'Approval', 'decision', 'Submit For Approval', 'cc_co_header', 'pf_submit_for_approval', 4, 2, 3, NULL, 34, '2014-11-11 04:46:04', 34, '2014-11-12 15:57:08'),
+(15, '2', 6, 'Implement', 'activity', 'Implement the changes', 'cc_co_line', 'pf_implement_changes', NULL, NULL, NULL, NULL, 34, '2014-11-11 04:46:05', 34, '2014-11-11 04:46:05'),
+(16, '2', 7, 'Review', 'decision', 'Review the changes', 'cc_co_line', 'pf_review_changes', NULL, NULL, NULL, NULL, 34, '2014-11-11 04:46:05', 34, '2014-11-11 04:46:05'),
+(17, '2', 8, 'Sign-off', 'decision', 'Sign-off the process', 'cc_co_header', 'pf_sign_off', NULL, NULL, NULL, NULL, 34, '2014-11-11 04:46:05', 34, '2014-11-11 04:46:05'),
+(18, '2', 9, 'Close', 'end', 'Close the Change', 'cc_co_header', 'pf_close', NULL, NULL, NULL, NULL, 34, '2014-11-11 04:46:06', 34, '2014-11-11 04:46:06'),
+(19, '3', 1, 'Verify CV', 'start', 'Verify CV of the new hire', NULL, NULL, 2, 1, NULL, 'form.php?class_name=hr_employee&mode=9', 34, '2015-05-25 21:59:05', 34, '2015-05-27 15:30:26'),
+(20, '3', 4, 'Submit Profile', 'activity', 'Submit CV to the office', NULL, NULL, 4, 3, NULL, 'form.php?class_name=hr_employee&mode=9', 34, '2015-05-26 05:25:22', 34, '2015-05-28 16:47:30'),
+(21, '3', 3, 'Request Information', 'activity', 'Request Information if required', NULL, NULL, 3, 2, NULL, 'form.php?class_name=hr_employee&mode=9', 34, '2015-05-26 05:25:23', 34, '2015-05-28 17:24:29'),
+(22, '3', 9, 'External Office - Sign Of', 'decision', 'External office procedures', NULL, NULL, 6, 5, NULL, NULL, 34, '2015-05-26 05:25:24', 34, '2015-05-28 16:47:31'),
+(23, '3', 8, 'External Office', 'activity', 'Start external office  work', NULL, NULL, 5, 4, NULL, NULL, 34, '2015-05-26 05:25:24', 34, '2015-05-28 16:47:31'),
+(24, '3', 10, 'Local Office', 'activity', 'Local office approvals / legal docs', NULL, NULL, 7, 6, NULL, NULL, 34, '2015-05-26 05:25:25', 34, '2015-05-28 16:47:30'),
+(25, '3', 11, 'Qatar Visit', 'decision', 'Person arrives in Qatar', NULL, NULL, 8, 7, NULL, NULL, 34, '2015-05-26 05:25:25', 34, '2015-05-28 16:47:32'),
+(26, '3', 12, 'Starts Work', 'activity', 'Contact worker starts work', NULL, NULL, 9, 8, NULL, NULL, 34, '2015-05-26 05:25:26', 34, '2015-05-28 16:47:32'),
+(27, '3', 13, 'Work Verification', 'decision', 'Verify work after 3 months', NULL, NULL, 10, 9, NULL, NULL, 34, '2015-05-26 05:25:27', 34, '2015-05-28 16:47:32'),
+(28, '3', 14, 'Close Process', 'end', 'Close Process', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-26 05:25:27', 34, '2015-05-28 16:47:33'),
+(29, '3', 2, 'CV to Customer', 'activity', 'Associate Customer Details', NULL, NULL, NULL, NULL, NULL, 'form.php?class_name=ar_customer&mode=9', 34, '2015-05-28 16:42:27', 34, '2015-05-28 16:42:27'),
+(30, '3', 5, 'Sales Order', 'activity', 'Create Sales Order', NULL, NULL, NULL, NULL, NULL, 'form.php?class_name=sd_so_header&mode=9', 34, '2015-05-28 16:42:28', 34, '2015-05-28 17:24:28'),
+(31, '3', 6, 'Send Invoice', 'activity', 'Invoice For Advance Payment', NULL, NULL, NULL, NULL, NULL, 'form.php?class_name=ar_transaction_header&mode=9', 34, '2015-05-28 16:42:28', 34, '2015-05-28 16:42:28'),
+(32, '3', 7, 'Advance Payment', 'decision', 'Apply Advace Payment', NULL, NULL, NULL, NULL, NULL, 'form.php?class_name=ar_receipt_header&mode=9', 34, '2015-05-28 16:42:28', 34, '2015-05-28 16:42:28'),
+(41, '4', 3, 'Close', 'end', 'Close the Line', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-06 13:13:14', 34, '2015-06-06 13:14:14'),
+(42, '4', 2, 'Shipping', 'activity', 'Change the line status', 'sd_so_line', 'pf_invoice_only', NULL, NULL, NULL, NULL, 34, '2015-06-06 13:13:15', 34, '2015-06-06 13:14:14'),
+(43, '4', 1, 'Start', 'start', 'Start the order', NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-06 13:13:23', 34, '2015-06-06 13:14:14');
 
 -- --------------------------------------------------------
 
@@ -13575,7 +14462,7 @@ CREATE TABLE IF NOT EXISTS `sys_profile_header` (
   PRIMARY KEY (`sys_profile_header_id`),
   UNIQUE KEY `value_group` (`profile_name`),
   UNIQUE KEY `profile_name` (`profile_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `sys_profile_header`
@@ -13595,7 +14482,10 @@ INSERT INTO `sys_profile_header` (`sys_profile_header_id`, `access_level`, `prof
 (11, 'BOTH', 'hd_support_request_number_prefix', 'hd_support_request', 'Support Request Number Prefix', 34, '2015-04-17 10:05:17', 34, '2015-04-17 10:05:23'),
 (12, 'BOTH', 'hd_change_request_number_prefix', 'hd_change_request', 'Change Request Number Prefix', 34, '2015-04-19 04:49:57', 34, '2015-04-19 04:50:01'),
 (13, 'BOTH', 'hd_change_request_type', 'hd_change_request', 'Change Request Type', 34, '2015-04-19 04:53:00', 34, '2015-04-19 04:53:03'),
-(14, 'BOTH', 'hd_change_request_impact', 'hd_change_request', 'Change Request Impact', 34, '2015-04-19 06:23:55', 34, '2015-04-19 06:24:35');
+(14, 'BOTH', 'hd_change_request_impact', 'hd_change_request', 'Change Request Impact', 34, '2015-04-19 06:23:55', 34, '2015-04-19 06:24:35'),
+(15, 'BOTH', 'hd_service_request_number_prefix', 'hd_service_request', 'Service Request Number Prefix', 34, '2015-05-21 15:46:22', 34, '2015-05-21 15:46:26'),
+(16, 'BOTH', 'hd_service_request_type', 'hd_service_request', 'Service Request Type', 34, '2015-05-21 15:47:14', 34, '2015-05-21 15:47:21'),
+(17, 'BOTH', 'hd_service_request_impact', 'hd_service_request', 'Service Request Impact', 34, '2015-05-21 15:47:51', 34, '2015-05-21 15:47:55');
 
 -- --------------------------------------------------------
 
@@ -13615,7 +14505,7 @@ CREATE TABLE IF NOT EXISTS `sys_profile_line` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`sys_profile_line_id`),
   UNIQUE KEY `sys_profile_header_id_2` (`sys_profile_header_id`,`profile_level`,`level_name`,`level_value`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
 
 --
 -- Dumping data for table `sys_profile_line`
@@ -13644,7 +14534,10 @@ INSERT INTO `sys_profile_line` (`sys_profile_line_id`, `sys_profile_header_id`, 
 (23, 11, 'SITE', 'SITE', 'SR', 34, '2015-04-17 10:05:25', 34, '2015-04-17 10:05:25'),
 (24, 12, 'SITE', 'SITE', 'CR', 34, '2015-04-19 04:50:00', 34, '2015-04-19 04:50:00'),
 (25, 13, 'SITE', 'SITE', 'BUG_FIX', 34, '2015-04-19 04:53:02', 34, '2015-04-19 04:53:02'),
-(26, 14, 'SITE', 'SITE', 'LOW', 34, '2015-04-19 06:24:36', 34, '2015-04-19 06:24:36');
+(26, 14, 'SITE', 'SITE', 'LOW', 34, '2015-04-19 06:24:36', 34, '2015-04-19 06:24:36'),
+(27, 15, 'SITE', 'SITE', 'SRVC', 34, '2015-05-21 15:46:25', 34, '2015-05-21 15:46:25'),
+(28, 16, 'SITE', 'SITE', 'REQUEST', 34, '2015-05-21 15:47:22', 34, '2015-05-21 15:47:22'),
+(29, 17, 'SITE', 'SITE', 'LOW', 34, '2015-05-21 15:47:56', 34, '2015-05-21 15:47:56');
 
 -- --------------------------------------------------------
 
@@ -13790,6 +14683,75 @@ CREATE TABLE IF NOT EXISTS `sys_secondary_field_instance` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sys_spd_header`
+--
+
+CREATE TABLE IF NOT EXISTS `sys_spd_header` (
+  `sys_spd_header_id` int(12) NOT NULL AUTO_INCREMENT,
+  `org_id` int(12) NOT NULL,
+  `document_number` varchar(20) DEFAULT NULL,
+  `status` varchar(25) DEFAULT NULL,
+  `security_level` varchar(25) DEFAULT NULL,
+  `primary_document` varchar(100) DEFAULT NULL,
+  `primary_document_id` int(12) DEFAULT NULL,
+  `template_id` int(12) DEFAULT NULL,
+  `change_type` varchar(25) DEFAULT NULL,
+  `originator` varchar(256) DEFAULT NULL,
+  `description` text,
+  `reason_code` varchar(100) DEFAULT NULL,
+  `product_line` varchar(50) DEFAULT NULL,
+  `process_flow_header_id` int(12) NOT NULL,
+  `current_process_flow_line_id` int(12) DEFAULT NULL,
+  `origination_date` date DEFAULT NULL,
+  `owner_user_id` int(12) DEFAULT NULL,
+  `release_date` date DEFAULT NULL,
+  `completion_date` date DEFAULT NULL,
+  `project_task_id` int(12) DEFAULT NULL,
+  `access_org` text,
+  `related_changes` text,
+  `priority` int(4) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`sys_spd_header_id`),
+  UNIQUE KEY `release_number` (`security_level`,`change_type`),
+  UNIQUE KEY `po_header_id` (`sys_spd_header_id`,`security_level`),
+  UNIQUE KEY `primary_document` (`primary_document`,`primary_document_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sys_spd_process_flow_action`
+--
+
+CREATE TABLE IF NOT EXISTS `sys_spd_process_flow_action` (
+  `sys_spd_process_flow_action_id` int(12) NOT NULL AUTO_INCREMENT,
+  `sys_spd_header_id` int(12) NOT NULL,
+  `sys_process_flow_line_id` int(12) NOT NULL,
+  `action_number` mediumint(6) NOT NULL,
+  `role_code` varchar(25) DEFAULT NULL,
+  `user_id` int(12) DEFAULT NULL,
+  `pf_action_type` varchar(25) DEFAULT NULL,
+  `required_cb` varchar(5) DEFAULT NULL,
+  `field_value` varchar(25) DEFAULT NULL,
+  `comment` varchar(256) DEFAULT NULL,
+  `action_user_id` int(12) DEFAULT NULL,
+  `action_duration` decimal(20,5) DEFAULT NULL,
+  `object_name` varchar(100) DEFAULT NULL,
+  `object_primary_id` int(12) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`sys_spd_process_flow_action_id`),
+  UNIQUE KEY `sys_pd_header_id` (`sys_spd_header_id`,`sys_process_flow_line_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sys_value_group_header`
 --
 
@@ -13834,7 +14796,7 @@ INSERT INTO `sys_value_group_header` (`sys_value_group_header_id`, `access_level
 (7, 'both', 'Operating System', 'Operating System', 'ec', NULL, 'varchar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'active', NULL, NULL, 34, '2015-04-03 11:05:21', 34, '2015-04-03 11:07:01'),
 (8, 'both', 'Display Size', 'Display Size', 'ec', NULL, 'varchar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'active', NULL, NULL, 34, '2015-04-03 11:08:10', 34, '2015-04-03 11:10:57'),
 (9, 'both', 'Processor Type', 'Processor Type', 'ec', NULL, 'varchar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'active', NULL, NULL, 34, '2015-04-03 11:14:16', 34, '2015-04-03 11:16:11'),
-(10, 'both', 'Hard Drive Size', 'Hard Drive Size', 'ec', NULL, 'varchar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-03 11:32:08', 34, '2015-04-03 11:32:17');
+(10, 'both', 'Hard Drive Size', 'Hard Drive Size', 'ec', NULL, 'varchar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-03 11:32:08', 34, '2015-05-27 11:13:20');
 
 -- --------------------------------------------------------
 
@@ -15568,11 +16530,11 @@ INSERT INTO `sys_value_group_line` (`sys_value_group_line_id`, `sys_value_group_
 (1917, 9, 'INTEL_ATOM', 'Intel Atom', 'Intel Atom', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-03 11:16:06', 34, '2015-04-03 11:16:06'),
 (1918, 9, 'INTEL_CELERON', 'Intel Celeron', 'Intel Celeron', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-03 11:16:07', 34, '2015-04-03 11:16:07'),
 (1919, 9, 'INTEL_PENTIUM', 'Intel Pentium', 'Intel Pentium', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-03 11:16:12', 34, '2015-04-03 11:16:12'),
-(1920, 10, '80_320GB', '80 to 320 GB', '80 to 320 GB', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-03 11:32:16', 34, '2015-04-03 11:32:16'),
-(1921, 10, '1TB', '1 TB', '1 TB', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-03 11:32:18', 34, '2015-04-03 11:32:18'),
-(1922, 10, 'UNDER_80GB', 'Under 80GB', 'Under 80GB', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-03 11:32:19', 34, '2015-04-03 11:32:19'),
-(1923, 10, '501_999GB', '501 to 999GB', '501 to 999GB', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-03 11:32:20', 34, '2015-04-03 11:32:20'),
-(1924, 10, '321_500GB', '321 to 500 GB', '321 to 500 GB', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-03 11:32:21', 34, '2015-04-03 11:32:21');
+(1920, 10, '80_320GB', '80 to 320 GB', '80 to 320 GB', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-03 11:32:16', 34, '2015-05-27 11:13:22'),
+(1921, 10, '1TB', '1 TB', '1 TB', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-03 11:32:18', 34, '2015-05-27 11:13:22'),
+(1922, 10, 'UNDER_80GB', 'Under 80GB', 'Under 80GB', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-03 11:32:19', 34, '2015-05-27 11:13:23'),
+(1923, 10, '501_999GB', '501 to 999GB', '501 to 999GB', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-03 11:32:20', 34, '2015-05-27 11:13:21'),
+(1924, 10, '321_500GB', '321 to 500 GB', '321 to 500 GB', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-03 11:32:21', 34, '2015-05-27 11:13:20');
 
 -- --------------------------------------------------------
 
@@ -15668,16 +16630,16 @@ INSERT INTO `uom` (`uom_id`, `class`, `uom_name`, `description`, `primary_cb`, `
 (29, 'Time', 'Min', 'Minutes', NULL, 29, 1, NULL, NULL, NULL, 11, 0, '2013-12-16 02:29:13', 34, '2014-12-29 05:04:07'),
 (30, 'Area', 'Centi Meter', 'Centi Meter', NULL, 28, 100, NULL, 'active', NULL, NULL, 0, '2014-03-31 02:55:18', 0, '2014-03-31 02:55:18'),
 (31, 'Time', 'Second', 'Second', NULL, 29, 0.0166, NULL, 'active', NULL, NULL, 0, '2014-03-31 05:07:25', 0, '2014-03-31 05:07:25'),
-(32, 'Area', 'M2', 'Square Meter', 1, NULL, NULL, NULL, 'ACTIVE', NULL, NULL, 34, '2015-02-10 06:04:14', 34, '2015-02-10 06:04:14'),
-(33, 'Area', 'FT2', 'Square Foot', NULL, 32, 0.092903, NULL, 'ACTIVE', NULL, NULL, 34, '2015-02-10 06:05:04', 34, '2015-02-10 06:05:04'),
-(34, 'Document', 'REF', 'Reference', 1, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-10 06:05:31', 34, '2015-02-10 06:05:31'),
-(35, 'Length', 'FT', 'Foot', NULL, 28, 0.3048, NULL, NULL, NULL, NULL, 34, '2015-02-10 06:06:14', 34, '2015-02-10 06:06:14'),
-(36, 'Length', 'IN', 'Inch', NULL, 28, 0.0254, NULL, NULL, NULL, NULL, 34, '2015-02-10 06:07:09', 34, '2015-02-10 06:07:09'),
-(37, 'Length', 'KM', 'Kilometer', NULL, 28, 1000, NULL, NULL, NULL, NULL, 34, '2015-02-10 06:07:52', 34, '2015-02-10 06:07:52'),
-(38, 'Quantity', 'BT', 'Bottle', NULL, 27, 1, NULL, NULL, NULL, NULL, 34, '2015-02-10 06:09:52', 34, '2015-02-10 06:09:52'),
-(39, 'Weight', 'KG', 'Kilogram', 1, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-10 06:21:01', 34, '2015-02-10 06:21:01'),
-(40, 'Weight', 'GM', 'Gram', NULL, 39, 0.001, NULL, NULL, NULL, NULL, 34, '2015-02-10 06:21:32', 34, '2015-02-10 06:21:32'),
-(41, 'Weight', 'MG', 'Milligram', NULL, 39, 0.000001, NULL, 'ACTIVE', NULL, NULL, 34, '2015-02-10 06:22:11', 34, '2015-02-10 06:22:11');
+(32, 'Area', 'M2', 'Square Meter', 1, NULL, NULL, NULL, 'ACTIVE', NULL, NULL, 34, '2015-02-10 06:04:14', 34, '2015-05-25 11:17:03'),
+(33, 'Area', 'FT2', 'Square Foot', 1, 32, 0.092903, NULL, 'ACTIVE', NULL, NULL, 34, '2015-02-10 06:05:04', 34, '2015-05-25 11:17:03'),
+(34, 'Document', 'REF', 'Reference', 1, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-10 06:05:31', 34, '2015-05-25 11:17:03'),
+(35, 'Length', 'FT', 'Foot', 1, 28, 0.3048, NULL, 'ACTIVE', NULL, NULL, 34, '2015-02-10 06:06:14', 34, '2015-05-25 11:17:03'),
+(36, 'Length', 'IN', 'Inch', 1, 28, 0.0254, NULL, 'ACTIVE', NULL, NULL, 34, '2015-02-10 06:07:09', 34, '2015-05-25 11:17:03'),
+(37, 'Length', 'KM', 'Kilometer', 1, 28, 1000, NULL, 'ACTIVE', NULL, NULL, 34, '2015-02-10 06:07:52', 34, '2015-05-25 11:17:03'),
+(38, 'Quantity', 'BT', 'Bottle', 1, 27, 1, NULL, 'ACTIVE', NULL, NULL, 34, '2015-02-10 06:09:52', 34, '2015-05-25 11:17:03'),
+(39, 'Weight', 'KG', 'Kilogram', 1, NULL, NULL, NULL, 'ACTIVE', NULL, NULL, 34, '2015-02-10 06:21:01', 34, '2015-05-25 11:17:03'),
+(40, 'Weight', 'GM', 'Gram', 1, 39, 0.001, NULL, 'ACTIVE', NULL, 2, 34, '2015-02-10 06:21:32', 34, '2015-05-25 11:17:05'),
+(41, 'Weight', 'MG', 'Milligram', 1, 39, 0.000001, NULL, 'ACTIVE', NULL, 1, 34, '2015-02-10 06:22:11', 34, '2015-05-25 11:17:03');
 
 -- --------------------------------------------------------
 
@@ -15727,7 +16689,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `user_name` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=103 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=104 ;
 
 --
 -- Dumping data for table `user`
@@ -15746,7 +16708,8 @@ INSERT INTO `user` (`user_id`, `person_id`, `username`, `password`, `first_name`
 (99, NULL, 'Nishit Das', 'bd0d028a69ab6fed644369c3d3eb61d6fcddd45df2c2e0f3e9243f021e4051f3', 'Nishit', 'Das', NULL, NULL, 'inoerp1@gmail.com', NULL, 0, NULL, NULL, NULL, 'default', NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, 'google', '107555006955106696169', 1, -99, '2015-02-18 17:13:44', 34, '2015-05-09 14:44:30', 'N', NULL),
 (100, NULL, 'ladmin', 'b66e176542e726dcabab39ce24eec28631be061bd5e79b1fbde1aa1809f57fb1', 'Local', 'Admin', NULL, NULL, 'ladmin@localhsot', NULL, 0, NULL, NULL, NULL, 'default', NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, NULL, 1, '1', 1, NULL, NULL, 1, 34, '2015-05-06 04:40:14', 34, '2015-05-06 04:40:32', 'N', NULL),
 (101, NULL, 'sales', '4f38c2604934d71614ff342a467e4e666289016ede25d230151069fb30c39f1a', 'sales', 'contact', NULL, NULL, 'sales.contact@localhost', NULL, 0, NULL, NULL, NULL, 'default', NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, NULL, 1, '1', 1, NULL, NULL, 1, 34, '2015-05-06 07:21:53', 34, '2015-05-06 07:23:14', 'N', NULL),
-(102, NULL, 'management', '9658893f8d26db6d863ef60171b3551802bd4407d1676908d8141c2a95f78435', 'management', 'management', NULL, NULL, 'management@localhost', NULL, 0, NULL, NULL, NULL, 'default', NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, NULL, 1, '1', 1, NULL, NULL, 1, 34, '2015-05-06 07:25:28', 34, '2015-05-06 07:26:02', 'N', NULL);
+(102, NULL, 'management', '9658893f8d26db6d863ef60171b3551802bd4407d1676908d8141c2a95f78435', 'management', 'management', NULL, NULL, 'management@localhost', NULL, 0, NULL, NULL, NULL, 'default', NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, NULL, 1, '1', 1, NULL, NULL, 1, 34, '2015-05-06 07:25:28', 34, '2015-05-06 07:26:02', 'N', NULL),
+(103, NULL, 'Endy Sng', 'c873cd76ed13733d50e4600c41eab9d86149fcf000ac8b52080714bff3a6e783', 'Endy', 'Sng', NULL, NULL, 'endy.sng@gmail.com', NULL, 0, NULL, NULL, NULL, 'default', NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, NULL, 1, '1', 1, NULL, NULL, 1, -99, '2015-05-22 07:15:15', -99, '2015-05-22 07:15:15', 'N', NULL);
 
 -- --------------------------------------------------------
 
@@ -15883,7 +16846,7 @@ CREATE TABLE IF NOT EXISTS `user_role` (
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`user_role_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
 
 --
 -- Dumping data for table `user_role`
@@ -15927,7 +16890,8 @@ INSERT INTO `user_role` (`user_role_id`, `role_code`, `user_id`, `created_by`, `
 (38, 'BUYER', 99, -99, '2015-02-18 17:13:45', 34, '2015-05-09 14:44:32'),
 (39, 'LOCAL_ADMIN', 100, 34, '2015-05-06 04:40:31', 34, '2015-05-06 04:40:31'),
 (40, 'SALES', 101, 34, '2015-05-06 07:23:13', 34, '2015-05-06 07:23:13'),
-(42, 'MANAGEMENT', 102, 34, '2015-05-06 07:26:24', 34, '2015-05-06 07:26:24');
+(42, 'MANAGEMENT', 102, 34, '2015-05-06 07:26:24', 34, '2015-05-06 07:26:24'),
+(43, 'BASIC', 103, -99, '2015-05-22 07:15:16', -99, '2015-05-22 07:15:16');
 
 -- --------------------------------------------------------
 
@@ -16005,7 +16969,7 @@ CREATE TABLE IF NOT EXISTS `view` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`view_id`),
   UNIQUE KEY `name` (`view_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `view`
@@ -16016,7 +16980,8 @@ INSERT INTO `view` (`view_id`, `view_name`, `description`, `custom_div_class`, `
 (9, 'option_type', 'option types', 'ino_option', NULL, 'U0VMRUNUIG9wdGlvbl9oZWFkZXIub3B0aW9uX2hlYWRlcl9pZCBBUyBvcHRpb25faGVhZGVyX19vcHRpb25faGVhZGVyX2lkLG9wdGlvbl9oZWFkZXIub3B0aW9uX3R5cGUgQVMgb3B0aW9uX2hlYWRlcl9fb3B0aW9uX3R5cGUsb3B0aW9uX2xpbmUub3B0aW9uX2xpbmVfaWQgQVMgb3B0aW9uX2xpbmVfX29wdGlvbl9saW5lX2lkLG9wdGlvbl9saW5lLm9wdGlvbl9oZWFkZXJfaWQgQVMgb3B0aW9uX2xpbmVfX29wdGlvbl9oZWFkZXJfaWQsb3B0aW9uX2xpbmUub3B0aW9uX2xpbmVfY29kZSBBUyBvcHRpb25fbGluZV9fb3B0aW9uX2xpbmVfY29kZSxvcHRpb25fbGluZS5vcHRpb25fbGluZV92YWx1ZSBBUyBvcHRpb25fbGluZV9fb3B0aW9uX2xpbmVfdmFsdWUsb3B0aW9uX2xpbmUuZGVzY3JpcHRpb24gQVMgb3B0aW9uX2xpbmVfX2Rlc2NyaXB0aW9uDQpGUk9NIA0KIG9wdGlvbl9oZWFkZXIgTEVGVCBKT0lOIG9wdGlvbl9saW5lIE9OIG9wdGlvbl9oZWFkZXIub3B0aW9uX2hlYWRlcl9pZCA9IG9wdGlvbl9saW5lLm9wdGlvbl9oZWFkZXJfaWQNCk9SREVSIEJZIG9wdGlvbl9oZWFkZXIub3B0aW9uX3R5cGUgQVND', 'option_header.option_header_id AS option_header__option_header_id,option_header.option_type AS option_header__option_type,option_line.option_line_id AS option_line__option_line_id,option_line.option_header_id AS option_line__option_header_id,option_line.option_line_code AS option_line__option_line_code,option_line.option_line_value AS option_line__option_line_value,option_line.description AS option_line__description', ' option_header LEFT JOIN option_line ON option_header.option_header_id = option_line.option_header_id', NULL, NULL, 'option_header.option_type ASC', NULL, 'option_header.option_header_id,option_header.access_level,option_header.option_type,option_line.option_line_id,option_line.option_header_id,option_line.option_line_code', 'TABLE', NULL, NULL, NULL, NULL, NULL, NULL, 5, 'form.php?class_name=view_result&mode=2&view_id=9', 475, NULL, NULL, NULL, NULL, NULL, 'Header Sample', 'Footer Sample', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-09-18 04:07:54', 34, '2014-10-29 11:08:18'),
 (10, 'Inventory Onhand', 'Curret Onhand Inventory Wise', NULL, NULL, 'U0VMRUNUIG9uaGFuZF92Lml0ZW1fbnVtYmVyIEFTIG9uaGFuZF92X19pdGVtX251bWJlcixvbmhhbmRfdi5pdGVtX2Rlc2NyaXB0aW9uIEFTIG9uaGFuZF92X19pdGVtX2Rlc2NyaXB0aW9uLG9uaGFuZF92LnByb2R1Y3RfbGluZSBBUyBvbmhhbmRfdl9fcHJvZHVjdF9saW5lLG9uaGFuZF92Lm9yZ19uYW1lIEFTIG9uaGFuZF92X19vcmdfbmFtZSxvbmhhbmRfdi5zdGFuZGFyZF9jb3N0IEFTIG9uaGFuZF92X19zdGFuZGFyZF9jb3N0LG9uaGFuZF92Lml0ZW1faWRfbSBBUyBvbmhhbmRfdl9faXRlbV9pZF9tLG9uaGFuZF92Lm9yZ19pZCBBUyBvbmhhbmRfdl9fb3JnX2lkLG9uaGFuZF92Lm9uaGFuZCBBUyBvbmhhbmRfdl9fb25oYW5kLG9uaGFuZF92Lm9uaGFuZF92YWx1ZSBBUyBvbmhhbmRfdl9fb25oYW5kX3ZhbHVlLGl0ZW0uaXRlbV9pZCBBUyBpdGVtX19pdGVtX2lkLGl0ZW0ub3JnX2lkIEFTIGl0ZW1fX29yZ19pZCxpdGVtLml0ZW1fdHlwZSBBUyBpdGVtX19pdGVtX3R5cGUsaXRlbS5pdGVtX2lkX20gQVMgaXRlbV9faXRlbV9pZF9tDQpGUk9NIA0Kb25oYW5kX3YsDQppdGVtDQpXSEVSRSBvbmhhbmRfdi5pdGVtX2lkX20gPSBpdGVtLml0ZW1faWRfbQ0KQU5EIGl0ZW0ub3JnX2lkID0gb25oYW5kX3Yub3JnX2lkDQpHUk9VUCBCWSBvbmhhbmRfdi5pdGVtX2lkX20saXRlbS5vcmdfaWQNCk9SREVSIEJZIG9uaGFuZF92Lm9uaGFuZF92YWx1ZSBERVND', 'onhand_v.item_number AS onhand_v__item_number,onhand_v.item_description AS onhand_v__item_description,onhand_v.product_line AS onhand_v__product_line,onhand_v.org_name AS onhand_v__org_name,onhand_v.standard_cost AS onhand_v__standard_cost,onhand_v.item_id_m AS onhand_v__item_id_m,onhand_v.org_id AS onhand_v__org_id,onhand_v.onhand AS onhand_v__onhand,onhand_v.onhand_value AS onhand_v__onhand_value,item.item_id AS item__item_id,item.org_id AS item__org_id,item.item_type AS item__item_type,item.item_id_m AS item__item_id_m', 'onhand_v,\r\nitem', 'onhand_v.item_id_m = item.item_id_m\r\nAND item.org_id = onhand_v.org_id', 'onhand_v.item_id_m,item.org_id', 'onhand_v.onhand_value DESC', NULL, NULL, 'TABLE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'form.php?class_name=view_result&mode=2&view_id=10', 476, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'pie', 500, 300, 'onhand_v__item_number', 'onhand_v__onhand_value', 'onhand_v__org_name', 34, '2014-10-27 03:05:56', 34, '2014-10-29 08:42:03'),
 (11, 'Inventory Onhand Unsort', 'Curret Onhand Un sorted', NULL, NULL, 'U0VMRUNUIG9uaGFuZF92Lml0ZW1fbnVtYmVyIEFTIG9uaGFuZF92X19pdGVtX251bWJlcixvbmhhbmRfdi5pdGVtX2Rlc2NyaXB0aW9uIEFTIG9uaGFuZF92X19pdGVtX2Rlc2NyaXB0aW9uLG9uaGFuZF92LnByb2R1Y3RfbGluZSBBUyBvbmhhbmRfdl9fcHJvZHVjdF9saW5lLG9uaGFuZF92Lm9yZ19uYW1lIEFTIG9uaGFuZF92X19vcmdfbmFtZSxvbmhhbmRfdi5zdGFuZGFyZF9jb3N0IEFTIG9uaGFuZF92X19zdGFuZGFyZF9jb3N0LG9uaGFuZF92Lml0ZW1faWRfbSBBUyBvbmhhbmRfdl9faXRlbV9pZF9tLG9uaGFuZF92Lm9yZ19pZCBBUyBvbmhhbmRfdl9fb3JnX2lkLG9uaGFuZF92Lm9uaGFuZCBBUyBvbmhhbmRfdl9fb25oYW5kLG9uaGFuZF92Lm9uaGFuZF92YWx1ZSBBUyBvbmhhbmRfdl9fb25oYW5kX3ZhbHVlLGl0ZW0uaXRlbV9pZCBBUyBpdGVtX19pdGVtX2lkLGl0ZW0ub3JnX2lkIEFTIGl0ZW1fX29yZ19pZCxpdGVtLml0ZW1fdHlwZSBBUyBpdGVtX19pdGVtX3R5cGUsaXRlbS5pdGVtX2lkX20gQVMgaXRlbV9faXRlbV9pZF9tDQpGUk9NIA0Kb25oYW5kX3YsDQppdGVtDQpXSEVSRSBvbmhhbmRfdi5pdGVtX2lkX20gPSBpdGVtLml0ZW1faWRfbQ0KQU5EIGl0ZW0ub3JnX2lkID0gb25oYW5kX3Yub3JnX2lkDQpHUk9VUCBCWSBvbmhhbmRfdi5pdGVtX2lkX20saXRlbS5vcmdfaWQNCk9SREVSIEJZIG9uaGFuZF92Lm9uaGFuZF92YWx1ZSBERVND', 'onhand_v.item_number AS onhand_v__item_number,onhand_v.item_description AS onhand_v__item_description,onhand_v.product_line AS onhand_v__product_line,onhand_v.org_name AS onhand_v__org_name,onhand_v.standard_cost AS onhand_v__standard_cost,onhand_v.item_id_m AS onhand_v__item_id_m,onhand_v.org_id AS onhand_v__org_id,onhand_v.onhand AS onhand_v__onhand,onhand_v.onhand_value AS onhand_v__onhand_value,item.item_id AS item__item_id,item.org_id AS item__org_id,item.item_type AS item__item_type,item.item_id_m AS item__item_id_m', 'onhand_v,\r\nitem', 'onhand_v.item_id_m = item.item_id_m\r\nAND item.org_id = onhand_v.org_id', 'onhand_v.item_id_m,item.org_id', NULL, NULL, NULL, 'TABLE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'form.php?class_name=view_result&mode=2&view_id=10', 476, 57, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'stacked_bar', 500, 300, 'onhand_v__item_number', 'onhand_v__onhand_value', 'onhand_v__org_name', 34, '2014-10-29 08:42:56', 34, '2014-11-01 12:27:39'),
-(12, 'Open PO', 'Open PO 001', NULL, NULL, 'U0VMRUNUIHBvX2FsbF92LnBvX3N0YXR1cyBBUyBwb19hbGxfdl9fcG9fc3RhdHVzLHBvX2FsbF92LnN1cHBsaWVyX25hbWUgQVMgcG9fYWxsX3ZfX3N1cHBsaWVyX25hbWUsU1VNKHBvX2FsbF92LmhlYWRlcl9hbW91bnQpIEFTIFNVTV9wb19hbGxfdl9faGVhZGVyX2Ftb3VudCxwb19hbGxfdi5pdGVtX251bWJlciBBUyBwb19hbGxfdl9faXRlbV9udW1iZXIsU1VNKHBvX2FsbF92Lm9wZW5fcXVhbnRpdHkpIEFTIFNVTV9wb19hbGxfdl9fb3Blbl9xdWFudGl0eSxwb19hbGxfdi5jcmVhdGlvbl9kYXRlIEFTIHBvX2FsbF92X19jcmVhdGlvbl9kYXRlLHBvX2FsbF92LmJ1X29yZ19pZCBBUyBwb19hbGxfdl9fYnVfb3JnX2lkLFNVTShwb19hbGxfdi5xdWFudGl0eSkgQVMgU1VNX3BvX2FsbF92X19xdWFudGl0eSxwb19hbGxfdi5wb19zdGF0dXMgQVMgcG9fYWxsX3ZfX3BvX3N0YXR1cyxvcmdfdi5vcmdfaWQgQVMgb3JnX3ZfX29yZ19pZCxvcmdfdi5vcmcgQVMgb3JnX3ZfX29yZw0KRlJPTSANCnBvX2FsbF92LA0Kb3JnX3YNCldIRVJFIHBvX2FsbF92LmJ1X29yZ19pZCA9IG9yZ192Lm9yZ19pZA0KR1JPVVAgQlkgcG9fYWxsX3Yuc3VwcGxpZXJfbmFtZQ0KT1JERVIgQlkgU1VNKHBvX2FsbF92LmhlYWRlcl9hbW91bnQpIEFTQw==', 'po_all_v.po_status AS po_all_v__po_status,po_all_v.supplier_name AS po_all_v__supplier_name,SUM(po_all_v.header_amount) AS SUM_po_all_v__header_amount,po_all_v.item_number AS po_all_v__item_number,SUM(po_all_v.open_quantity) AS SUM_po_all_v__open_quantity,po_all_v.creation_date AS po_all_v__creation_date,po_all_v.bu_org_id AS po_all_v__bu_org_id,SUM(po_all_v.quantity) AS SUM_po_all_v__quantity,po_all_v.po_status AS po_all_v__po_status,org_v.org_id AS org_v__org_id,org_v.org AS org_v__org', 'po_all_v,\r\norg_v', 'po_all_vbu_org_id = org_vorg_id', 'po_all_v.supplier_name', 'SUM(po_all_v.header_amount) ASC', NULL, NULL, 'TABLE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'form.php?class_name=view_result&mode=2&view_id=12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'clustered_column', 600, 400, 'po_all_v__supplier_name', 'SUM_po_all_v__open_quantity', 'org_v__org', 34, '2014-10-29 18:17:49', 34, '2014-12-26 13:42:00');
+(12, 'Open PO', 'Open PO 001', NULL, NULL, 'U0VMRUNUIHBvX2FsbF92LnBvX3N0YXR1cyBBUyBwb19hbGxfdl9fcG9fc3RhdHVzLHBvX2FsbF92LnN1cHBsaWVyX25hbWUgQVMgcG9fYWxsX3ZfX3N1cHBsaWVyX25hbWUsU1VNKHBvX2FsbF92LmhlYWRlcl9hbW91bnQpIEFTIFNVTV9wb19hbGxfdl9faGVhZGVyX2Ftb3VudCxwb19hbGxfdi5pdGVtX251bWJlciBBUyBwb19hbGxfdl9faXRlbV9udW1iZXIsU1VNKHBvX2FsbF92Lm9wZW5fcXVhbnRpdHkpIEFTIFNVTV9wb19hbGxfdl9fb3Blbl9xdWFudGl0eSxwb19hbGxfdi5jcmVhdGlvbl9kYXRlIEFTIHBvX2FsbF92X19jcmVhdGlvbl9kYXRlLHBvX2FsbF92LmJ1X29yZ19pZCBBUyBwb19hbGxfdl9fYnVfb3JnX2lkLFNVTShwb19hbGxfdi5xdWFudGl0eSkgQVMgU1VNX3BvX2FsbF92X19xdWFudGl0eSxwb19hbGxfdi5wb19zdGF0dXMgQVMgcG9fYWxsX3ZfX3BvX3N0YXR1cyxvcmdfdi5vcmdfaWQgQVMgb3JnX3ZfX29yZ19pZCxvcmdfdi5vcmcgQVMgb3JnX3ZfX29yZw0KRlJPTSANCnBvX2FsbF92LA0Kb3JnX3YNCldIRVJFIHBvX2FsbF92LmJ1X29yZ19pZCA9IG9yZ192Lm9yZ19pZA0KR1JPVVAgQlkgcG9fYWxsX3Yuc3VwcGxpZXJfbmFtZQ0KT1JERVIgQlkgU1VNKHBvX2FsbF92LmhlYWRlcl9hbW91bnQpIEFTQw==', 'po_all_v.po_status AS po_all_v__po_status,po_all_v.supplier_name AS po_all_v__supplier_name,SUM(po_all_v.header_amount) AS SUM_po_all_v__header_amount,po_all_v.item_number AS po_all_v__item_number,SUM(po_all_v.open_quantity) AS SUM_po_all_v__open_quantity,po_all_v.creation_date AS po_all_v__creation_date,po_all_v.bu_org_id AS po_all_v__bu_org_id,SUM(po_all_v.quantity) AS SUM_po_all_v__quantity,po_all_v.po_status AS po_all_v__po_status,org_v.org_id AS org_v__org_id,org_v.org AS org_v__org', 'po_all_v,\r\norg_v', 'po_all_vbu_org_id = org_vorg_id', 'po_all_v.supplier_name', 'SUM(po_all_v.header_amount) ASC', NULL, NULL, 'TABLE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'form.php?class_name=view_result&mode=2&view_id=12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'clustered_column', 600, 400, 'po_all_v__supplier_name', 'SUM_po_all_v__open_quantity', 'org_v__org', 34, '2014-10-29 18:17:49', 34, '2014-12-26 13:42:00'),
+(13, 'Sales Funnel', 'Sales Funnel', NULL, NULL, 'U0VMRUNUIENPVU5UKHNkX3NhbGVzX2RvY3VtZW50c192LmRvY3VtZW50X2lkKSBBUyBDT1VOVF9zZF9zYWxlc19kb2N1bWVudHNfdl9fZG9jdW1lbnRfaWQsc2Rfc2FsZXNfZG9jdW1lbnRzX3YuZG9jdWVtbnRfbnVtYmVyIEFTIHNkX3NhbGVzX2RvY3VtZW50c192X19kb2N1ZW1udF9udW1iZXIsc2Rfc2FsZXNfZG9jdW1lbnRzX3Yuc3RhdHVzIEFTIHNkX3NhbGVzX2RvY3VtZW50c192X19zdGF0dXMsc2Rfc2FsZXNfZG9jdW1lbnRzX3YuZG9jdW1lbnRfdHlwZSBBUyBzZF9zYWxlc19kb2N1bWVudHNfdl9fZG9jdW1lbnRfdHlwZSxzZF9zYWxlc19kb2N1bWVudHNfdi5jcmVhdGlvbl9kYXRlIEFTIHNkX3NhbGVzX2RvY3VtZW50c192X19jcmVhdGlvbl9kYXRlDQpGUk9NIA0Kc2Rfc2FsZXNfZG9jdW1lbnRzX3YNCkdST1VQIEJZIHNkX3NhbGVzX2RvY3VtZW50c192LmRvY3VtZW50X3R5cGU=', 'COUNT(sd_sales_documents_v.document_id) AS COUNT_sd_sales_documents_v__document_id,sd_sales_documents_v.docuemnt_number AS sd_sales_documents_v__docuemnt_number,sd_sales_documents_v.status AS sd_sales_documents_v__status,sd_sales_documents_v.document_type AS sd_sales_documents_v__document_type,sd_sales_documents_v.creation_date AS sd_sales_documents_v__creation_date', 'sd_sales_documents_v', NULL, 'sd_sales_documents_v.document_type', NULL, NULL, NULL, 'TABLE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'form.php?class_name=view_result&mode=2&view_id=13', 703, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'funnel', 600, 400, 'sd_sales_documents_v__document_type', 'COUNT_sd_sales_documents_v__document_id', NULL, 34, '2015-06-09 09:34:12', 34, '2015-06-09 13:25:56');
 
 -- --------------------------------------------------------
 
@@ -16377,7 +17342,7 @@ CREATE TABLE IF NOT EXISTS `wip_wo_routing_v` (
 --
 DROP TABLE IF EXISTS `ap_payment_all_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ap_payment_all_v` AS select `apph`.`ap_payment_header_id` AS `ap_payment_header_id`,`apph`.`bu_org_id` AS `bu_org_id`,`apph`.`payment_type` AS `payment_type`,`apph`.`payment_number` AS `payment_number`,`apph`.`supplier_id` AS `supplier_id`,`apph`.`supplier_site_id` AS `supplier_site_id`,`apph`.`from_bank_header_id` AS `from_bank_header_id`,`apph`.`header_amount` AS `header_amount`,`apph`.`currency` AS `currency`,`apph`.`document_number` AS `document_number`,`apph`.`payment_status` AS `payment_status`,`apph`.`gl_journal_header_id` AS `gl_journal_header_id`,`appl`.`ap_payment_line_id` AS `ap_payment_line_id`,`appl`.`line_number` AS `line_number`,`appl`.`amount` AS `amount`,`appl`.`line_description` AS `line_description`,`apth`.`ap_transaction_header_id` AS `ap_transaction_header_id`,`apth`.`transaction_type` AS `transaction_type`,`apth`.`transaction_number` AS `transaction_number`,`apth`.`document_owner` AS `document_owner`,`apth`.`currency` AS `apth_currency`,`apth`.`header_amount` AS `apth_header_amount`,`apth`.`transaction_status` AS `transaction_status`,`apth`.`paid_amount` AS `paid_amount`,`apth`.`payment_status` AS `apth_payment_status`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number` from ((((`ap_payment_header` `apph` join `ap_payment_line` `appl`) join `ap_transaction_header` `apth`) join `supplier`) join `supplier_site`) where ((`apph`.`ap_payment_header_id` = `appl`.`ap_payment_header_id`) and (`appl`.`ap_transaction_header_id` = `apth`.`ap_transaction_header_id`) and (`apph`.`supplier_id` = `supplier`.`supplier_id`) and (`apph`.`supplier_site_id` = `supplier_site`.`supplier_site_id`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ap_payment_all_v` AS select `apph`.`ap_payment_header_id` AS `ap_payment_header_id`,`apph`.`bu_org_id` AS `bu_org_id`,`apph`.`payment_type` AS `payment_type`,`apph`.`payment_number` AS `payment_number`,`apph`.`supplier_id` AS `supplier_id`,`apph`.`supplier_site_id` AS `supplier_site_id`,`apph`.`from_bank_header_id` AS `from_bank_header_id`,`apph`.`header_amount` AS `header_amount`,`apph`.`currency` AS `currency`,`apph`.`document_number` AS `document_number`,`apph`.`payment_status` AS `payment_status`,`apph`.`gl_journal_header_id` AS `gl_journal_header_id`,`appl`.`ap_payment_line_id` AS `ap_payment_line_id`,`appl`.`line_number` AS `line_number`,`appl`.`amount` AS `amount`,`appl`.`line_description` AS `line_description`,`apth`.`ap_transaction_header_id` AS `ap_transaction_header_id`,`apth`.`transaction_type` AS `transaction_type`,`apth`.`transaction_number` AS `transaction_number`,`apth`.`document_owner` AS `document_owner`,`apth`.`currency` AS `apth_currency`,`apth`.`header_amount` AS `apth_header_amount`,`apth`.`transaction_status` AS `transaction_status`,`apth`.`paid_amount` AS `paid_amount`,`apth`.`payment_status` AS `apth_payment_status`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number` from ((((`ap_payment_header` `apph` join `ap_payment_line` `appl`) join `ap_transaction_header` `apth`) join `supplier`) join `supplier_site`) where ((`apph`.`ap_payment_header_id` = `appl`.`ap_payment_header_id`) and (`appl`.`ap_transaction_header_id` = `apth`.`ap_transaction_header_id`) and (`apph`.`supplier_id` = `supplier`.`supplier_id`) and (`apph`.`supplier_site_id` = `supplier_site`.`supplier_site_id`));
 
 -- --------------------------------------------------------
 
@@ -16386,7 +17351,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ap_payment_all_v` AS sele
 --
 DROP TABLE IF EXISTS `ap_payment_trnx_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ap_payment_trnx_v` AS select `ap_transaction_header`.`ap_transaction_header_id` AS `ap_transaction_header_id`,`ap_transaction_header`.`bu_org_id` AS `bu_org_id`,`ap_transaction_header`.`transaction_type` AS `transaction_type`,`ap_transaction_header`.`transaction_number` AS `transaction_number`,`ap_transaction_header`.`supplier_id` AS `supplier_id`,`ap_transaction_header`.`supplier_site_id` AS `supplier_site_id`,`ap_transaction_header`.`exchange_rate` AS `exchange_rate`,`ap_transaction_header`.`document_owner` AS `document_owner`,`ap_transaction_header`.`currency` AS `currency`,`ap_transaction_header`.`header_amount` AS `header_amount`,`ap_transaction_header`.`transaction_status` AS `transaction_status`,`ap_transaction_header`.`payment_term_id` AS `payment_term_id`,`ap_transaction_header`.`paid_amount` AS `paid_amount`,`ap_transaction_header`.`payment_status` AS `payment_status`,`ap_transaction_header`.`ledger_id` AS `ledger_id`,`ap_transaction_header`.`period_id` AS `period_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`ph`.`po_number` AS `po_number`,`ph`.`po_type` AS `po_type`,`ph`.`buyer` AS `buyer`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `description`,`ap_transaction_line`.`ap_transaction_line_id` AS `ap_transaction_line_id`,`ap_transaction_line`.`line_type` AS `line_type`,`ap_transaction_line`.`line_number` AS `line_number`,`ap_transaction_line`.`item_id_m` AS `item_id_m`,`ap_transaction_line`.`item_description` AS `item_description`,`ap_transaction_line`.`line_description` AS `line_description`,`ap_transaction_line`.`inv_line_quantity` AS `inv_line_quantity`,`ap_transaction_line`.`inv_unit_price` AS `inv_unit_price`,`ap_transaction_line`.`inv_line_price` AS `inv_line_price`,`ap_transaction_line`.`gl_inv_line_price` AS `gl_inv_line_price`,`ap_transaction_line`.`po_header_id` AS `po_header_id`,`ap_transaction_line`.`po_line_id` AS `po_line_id`,`ap_transaction_line`.`po_detail_id` AS `po_detail_id`,`ap_transaction_line`.`ref_transaction_header_id` AS `ref_transaction_header_id`,`ap_transaction_line`.`ref_transaction_line_id` AS `ref_transaction_line_id`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`ap_transaction_header`.`created_by` AS `created_by`,`ap_transaction_header`.`creation_date` AS `creation_date`,`ap_transaction_header`.`last_update_by` AS `last_update_by`,`ap_transaction_header`.`last_update_date` AS `last_update_date` from ((((((`ap_transaction_header` left join `supplier` on((`ap_transaction_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`ap_transaction_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`ap_transaction_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `ap_transaction_line` on((`ap_transaction_header`.`ap_transaction_header_id` = `ap_transaction_line`.`ap_transaction_header_id`))) left join `item` on(((`ap_transaction_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`item_id_m` = `item`.`item_id`)))) left join `po_header` `ph` on((`ph`.`po_header_id` = `ap_transaction_line`.`po_header_id`))) where ((ifnull(`ap_transaction_header`.`paid_amount`,0) < `ap_transaction_header`.`header_amount`) and (isnull(`ap_transaction_header`.`payment_status`) or (`ap_transaction_header`.`payment_status` <> 'FULLY_PAID')));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ap_payment_trnx_v` AS select `ap_transaction_header`.`ap_transaction_header_id` AS `ap_transaction_header_id`,`ap_transaction_header`.`bu_org_id` AS `bu_org_id`,`ap_transaction_header`.`transaction_type` AS `transaction_type`,`ap_transaction_header`.`transaction_number` AS `transaction_number`,`ap_transaction_header`.`supplier_id` AS `supplier_id`,`ap_transaction_header`.`supplier_site_id` AS `supplier_site_id`,`ap_transaction_header`.`exchange_rate` AS `exchange_rate`,`ap_transaction_header`.`document_owner` AS `document_owner`,`ap_transaction_header`.`currency` AS `currency`,`ap_transaction_header`.`header_amount` AS `header_amount`,`ap_transaction_header`.`transaction_status` AS `transaction_status`,`ap_transaction_header`.`payment_term_id` AS `payment_term_id`,`ap_transaction_header`.`paid_amount` AS `paid_amount`,`ap_transaction_header`.`payment_status` AS `payment_status`,`ap_transaction_header`.`ledger_id` AS `ledger_id`,`ap_transaction_header`.`period_id` AS `period_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`ph`.`po_number` AS `po_number`,`ph`.`po_type` AS `po_type`,`ph`.`buyer` AS `buyer`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `description`,`ap_transaction_line`.`ap_transaction_line_id` AS `ap_transaction_line_id`,`ap_transaction_line`.`line_type` AS `line_type`,`ap_transaction_line`.`line_number` AS `line_number`,`ap_transaction_line`.`item_id_m` AS `item_id_m`,`ap_transaction_line`.`item_description` AS `item_description`,`ap_transaction_line`.`line_description` AS `line_description`,`ap_transaction_line`.`inv_line_quantity` AS `inv_line_quantity`,`ap_transaction_line`.`inv_unit_price` AS `inv_unit_price`,`ap_transaction_line`.`inv_line_price` AS `inv_line_price`,`ap_transaction_line`.`gl_inv_line_price` AS `gl_inv_line_price`,`ap_transaction_line`.`po_header_id` AS `po_header_id`,`ap_transaction_line`.`po_line_id` AS `po_line_id`,`ap_transaction_line`.`po_detail_id` AS `po_detail_id`,`ap_transaction_line`.`ref_transaction_header_id` AS `ref_transaction_header_id`,`ap_transaction_line`.`ref_transaction_line_id` AS `ref_transaction_line_id`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`ap_transaction_header`.`created_by` AS `created_by`,`ap_transaction_header`.`creation_date` AS `creation_date`,`ap_transaction_header`.`last_update_by` AS `last_update_by`,`ap_transaction_header`.`last_update_date` AS `last_update_date` from ((((((`ap_transaction_header` left join `supplier` on((`ap_transaction_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`ap_transaction_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`ap_transaction_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `ap_transaction_line` on((`ap_transaction_header`.`ap_transaction_header_id` = `ap_transaction_line`.`ap_transaction_header_id`))) left join `item` on(((`ap_transaction_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`item_id_m` = `item`.`item_id`)))) left join `po_header` `ph` on((`ph`.`po_header_id` = `ap_transaction_line`.`po_header_id`))) where ((ifnull(`ap_transaction_header`.`paid_amount`,0) < `ap_transaction_header`.`header_amount`) and (isnull(`ap_transaction_header`.`payment_status`) or (`ap_transaction_header`.`payment_status` <> 'FULLY_PAID')));
 
 -- --------------------------------------------------------
 
@@ -16395,7 +17360,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ap_payment_trnx_v` AS sel
 --
 DROP TABLE IF EXISTS `ap_po_matching_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ap_po_matching_v` AS select `po_header`.`po_header_id` AS `po_header_id`,`po_header`.`bu_org_id` AS `bu_org_id`,`po_header`.`po_type` AS `po_type`,`po_header`.`po_number` AS `po_number`,`po_header`.`supplier_id` AS `supplier_id`,`po_header`.`supplier_site_id` AS `supplier_site_id`,`po_header`.`buyer` AS `buyer`,`po_header`.`currency` AS `currency`,`po_header`.`header_amount` AS `header_amount`,`po_header`.`po_status` AS `po_status`,`po_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_line`.`po_line_id` AS `po_line_id`,`po_line`.`line_type` AS `line_type`,`po_line`.`line_number` AS `po_line_number`,`po_line`.`item_id_m` AS `item_id_m`,`po_line`.`item_description` AS `item_description`,`po_line`.`line_description` AS `line_description`,`po_line`.`line_quantity` AS `line_quantity`,`po_line`.`unit_price` AS `unit_price`,`po_line`.`line_price` AS `line_price`,`po_line`.`gl_line_price` AS `gl_line_price`,`po_line`.`gl_tax_amount` AS `gl_tax_amount`,`po_line`.`tax_amount` AS `tax_amount`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_detail`.`po_detail_id` AS `po_detail_id`,`po_detail`.`shipment_number` AS `shipment_number`,`po_line`.`receving_org_id` AS `receving_org_id`,`po_detail`.`subinventory_id` AS `subinventory_id`,`po_detail`.`locator_id` AS `locator_id`,`po_detail`.`requestor` AS `requestor`,`po_detail`.`quantity` AS `quantity`,ifnull(`po_detail`.`received_quantity`,0) AS `received_quantity`,(`po_detail`.`quantity` - ifnull(`po_detail`.`received_quantity`,0)) AS `receiving_open_quantity`,`po_detail`.`need_by_date` AS `need_by_date`,`po_detail`.`promise_date` AS `promise_date`,`po_detail`.`accepted_quantity` AS `accepted_quantity`,`po_detail`.`delivered_quantity` AS `delivered_quantity`,`po_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_detail`.`paid_quantity` AS `paid_quantity`,(case `po_detail`.`invoice_match_type` when 'THREE_WAY' then (ifnull(`po_detail`.`received_quantity`,0) - ifnull(`po_detail`.`invoiced_quantity`,0)) else (`po_detail`.`quantity` - ifnull(`po_detail`.`invoiced_quantity`,0)) end) AS `invoicing_open_quantity`,`po_detail`.`charge_ac_id` AS `charge_ac_id`,`po_detail`.`accrual_ac_id` AS `accrual_ac_id`,`po_detail`.`budget_ac_id` AS `budget_ac_id`,`po_detail`.`ppv_ac_id` AS `ppv_ac_id`,`org`.`org` AS `receving_org`,`po_header`.`created_by` AS `created_by`,`po_header`.`creation_date` AS `creation_date`,`po_header`.`last_update_by` AS `last_update_by`,`po_header`.`last_update_date` AS `last_update_date` from (((((((`po_header` left join `supplier` on((`po_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_line` on((`po_header`.`po_header_id` = `po_line`.`po_header_id`))) left join `item` on(((`po_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_line`.`receving_org_id`)))) left join `org` on((`po_line`.`receving_org_id` = `org`.`org_id`))) join `po_detail`) where ((`po_header`.`po_status` = 'APPROVED') and (`po_header`.`po_type` in ('BLANKET_RELEASE','STANDARD')) and (`po_line`.`po_line_id` = `po_detail`.`po_line_id`) and (((ifnull(`po_detail`.`invoiced_quantity`,0) < `po_detail`.`quantity`) and ((`po_detail`.`invoice_match_type` = 'TWO_WAY') or isnull(`po_detail`.`invoice_match_type`))) or ((ifnull(`po_detail`.`invoiced_quantity`,0) < ifnull(`po_detail`.`received_quantity`,0)) and (`po_detail`.`invoice_match_type` = 'THREE_WAY'))) and (`po_detail`.`po_detail_id` is not null));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ap_po_matching_v` AS select `po_header`.`po_header_id` AS `po_header_id`,`po_header`.`bu_org_id` AS `bu_org_id`,`po_header`.`po_type` AS `po_type`,`po_header`.`po_number` AS `po_number`,`po_header`.`supplier_id` AS `supplier_id`,`po_header`.`supplier_site_id` AS `supplier_site_id`,`po_header`.`buyer` AS `buyer`,`po_header`.`currency` AS `currency`,`po_header`.`header_amount` AS `header_amount`,`po_header`.`po_status` AS `po_status`,`po_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_line`.`po_line_id` AS `po_line_id`,`po_line`.`line_type` AS `line_type`,`po_line`.`line_number` AS `po_line_number`,`po_line`.`item_id_m` AS `item_id_m`,`po_line`.`item_description` AS `item_description`,`po_line`.`line_description` AS `line_description`,`po_line`.`line_quantity` AS `line_quantity`,`po_line`.`unit_price` AS `unit_price`,`po_line`.`line_price` AS `line_price`,`po_line`.`gl_line_price` AS `gl_line_price`,`po_line`.`gl_tax_amount` AS `gl_tax_amount`,`po_line`.`tax_amount` AS `tax_amount`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_detail`.`po_detail_id` AS `po_detail_id`,`po_detail`.`shipment_number` AS `shipment_number`,`po_line`.`receving_org_id` AS `receving_org_id`,`po_detail`.`subinventory_id` AS `subinventory_id`,`po_detail`.`locator_id` AS `locator_id`,`po_detail`.`requestor` AS `requestor`,`po_detail`.`quantity` AS `quantity`,ifnull(`po_detail`.`received_quantity`,0) AS `received_quantity`,(`po_detail`.`quantity` - ifnull(`po_detail`.`received_quantity`,0)) AS `receiving_open_quantity`,`po_detail`.`need_by_date` AS `need_by_date`,`po_detail`.`promise_date` AS `promise_date`,`po_detail`.`accepted_quantity` AS `accepted_quantity`,`po_detail`.`delivered_quantity` AS `delivered_quantity`,`po_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_detail`.`paid_quantity` AS `paid_quantity`,(case `po_detail`.`invoice_match_type` when 'THREE_WAY' then (ifnull(`po_detail`.`received_quantity`,0) - ifnull(`po_detail`.`invoiced_quantity`,0)) else (`po_detail`.`quantity` - ifnull(`po_detail`.`invoiced_quantity`,0)) end) AS `invoicing_open_quantity`,`po_detail`.`charge_ac_id` AS `charge_ac_id`,`po_detail`.`accrual_ac_id` AS `accrual_ac_id`,`po_detail`.`budget_ac_id` AS `budget_ac_id`,`po_detail`.`ppv_ac_id` AS `ppv_ac_id`,`org`.`org` AS `receving_org`,`po_header`.`created_by` AS `created_by`,`po_header`.`creation_date` AS `creation_date`,`po_header`.`last_update_by` AS `last_update_by`,`po_header`.`last_update_date` AS `last_update_date` from (((((((`po_header` left join `supplier` on((`po_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_line` on((`po_header`.`po_header_id` = `po_line`.`po_header_id`))) left join `item` on(((`po_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_line`.`receving_org_id`)))) left join `org` on((`po_line`.`receving_org_id` = `org`.`org_id`))) join `po_detail`) where ((`po_header`.`po_status` = 'APPROVED') and (`po_header`.`po_type` in ('BLANKET_RELEASE','STANDARD')) and (`po_line`.`po_line_id` = `po_detail`.`po_line_id`) and (((ifnull(`po_detail`.`invoiced_quantity`,0) < `po_detail`.`quantity`) and ((`po_detail`.`invoice_match_type` = 'TWO_WAY') or isnull(`po_detail`.`invoice_match_type`))) or ((ifnull(`po_detail`.`invoiced_quantity`,0) < ifnull(`po_detail`.`received_quantity`,0)) and (`po_detail`.`invoice_match_type` = 'THREE_WAY'))) and (`po_detail`.`po_detail_id` is not null));
 
 -- --------------------------------------------------------
 
@@ -16404,7 +17369,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ap_po_matching_v` AS sele
 --
 DROP TABLE IF EXISTS `ap_transaction_all_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ap_transaction_all_v` AS select `ap_transaction_header`.`ap_transaction_header_id` AS `ap_transaction_header_id`,`ap_transaction_header`.`bu_org_id` AS `bu_org_id`,`ap_transaction_header`.`transaction_type` AS `transaction_type`,`ap_transaction_header`.`transaction_number` AS `transaction_number`,`ap_transaction_header`.`supplier_id` AS `supplier_id`,`ap_transaction_header`.`supplier_site_id` AS `supplier_site_id`,`ap_transaction_header`.`document_owner` AS `document_owner`,`ap_transaction_header`.`currency` AS `currency`,`ap_transaction_header`.`header_amount` AS `header_amount`,`ap_transaction_header`.`transaction_status` AS `transaction_status`,`ap_transaction_header`.`payment_term_id` AS `payment_term_id`,`ap_transaction_header`.`paid_amount` AS `paid_amount`,`ap_transaction_header`.`payment_status` AS `payment_status`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`ph`.`po_number` AS `po_number`,`ph`.`po_type` AS `po_type`,`ph`.`buyer` AS `buyer`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`ap_transaction_line`.`ap_transaction_line_id` AS `ap_transaction_line_id`,`ap_transaction_line`.`line_type` AS `line_type`,`ap_transaction_line`.`line_number` AS `line_number`,`ap_transaction_line`.`item_id_m` AS `item_id_m`,`ap_transaction_line`.`item_description` AS `item_description`,`ap_transaction_line`.`line_description` AS `line_description`,`ap_transaction_line`.`inv_line_quantity` AS `inv_line_quantity`,`ap_transaction_line`.`inv_unit_price` AS `inv_unit_price`,`ap_transaction_line`.`inv_line_price` AS `inv_line_price`,`ap_transaction_line`.`po_header_id` AS `po_header_id`,`ap_transaction_line`.`po_line_id` AS `po_line_id`,`ap_transaction_line`.`po_detail_id` AS `po_detail_id`,`ap_transaction_line`.`ref_transaction_header_id` AS `ref_transaction_header_id`,`ap_transaction_line`.`ref_transaction_line_id` AS `ref_transaction_line_id`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`ap_transaction_detail`.`ap_transaction_detail_id` AS `ap_transaction_detail_id`,`ap_transaction_detail`.`account_type` AS `account_type`,`ap_transaction_detail`.`description` AS `detail_description`,`ap_transaction_detail`.`amount` AS `amount`,`ap_transaction_detail`.`detail_ac_id` AS `detail_ac_id`,`ap_transaction_header`.`created_by` AS `created_by`,`ap_transaction_header`.`creation_date` AS `creation_date`,`ap_transaction_header`.`last_update_by` AS `last_update_by`,`ap_transaction_header`.`last_update_date` AS `last_update_date` from (((((((`ap_transaction_header` left join `supplier` on((`ap_transaction_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`ap_transaction_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`ap_transaction_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `ap_transaction_line` on((`ap_transaction_header`.`ap_transaction_header_id` = `ap_transaction_line`.`ap_transaction_header_id`))) left join `item` on(((`ap_transaction_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`item_id_m` = `item`.`item_id`)))) left join `ap_transaction_detail` on((`ap_transaction_line`.`ap_transaction_line_id` = `ap_transaction_detail`.`ap_transaction_line_id`))) left join `po_header` `ph` on((`ph`.`po_header_id` = `ap_transaction_line`.`po_header_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ap_transaction_all_v` AS select `ap_transaction_header`.`ap_transaction_header_id` AS `ap_transaction_header_id`,`ap_transaction_header`.`bu_org_id` AS `bu_org_id`,`ap_transaction_header`.`transaction_type` AS `transaction_type`,`ap_transaction_header`.`transaction_number` AS `transaction_number`,`ap_transaction_header`.`supplier_id` AS `supplier_id`,`ap_transaction_header`.`supplier_site_id` AS `supplier_site_id`,`ap_transaction_header`.`document_owner` AS `document_owner`,`ap_transaction_header`.`currency` AS `currency`,`ap_transaction_header`.`header_amount` AS `header_amount`,`ap_transaction_header`.`transaction_status` AS `transaction_status`,`ap_transaction_header`.`payment_term_id` AS `payment_term_id`,`ap_transaction_header`.`paid_amount` AS `paid_amount`,`ap_transaction_header`.`payment_status` AS `payment_status`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`ph`.`po_number` AS `po_number`,`ph`.`po_type` AS `po_type`,`ph`.`buyer` AS `buyer`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`ap_transaction_line`.`ap_transaction_line_id` AS `ap_transaction_line_id`,`ap_transaction_line`.`line_type` AS `line_type`,`ap_transaction_line`.`line_number` AS `line_number`,`ap_transaction_line`.`item_id_m` AS `item_id_m`,`ap_transaction_line`.`item_description` AS `item_description`,`ap_transaction_line`.`line_description` AS `line_description`,`ap_transaction_line`.`inv_line_quantity` AS `inv_line_quantity`,`ap_transaction_line`.`inv_unit_price` AS `inv_unit_price`,`ap_transaction_line`.`inv_line_price` AS `inv_line_price`,`ap_transaction_line`.`po_header_id` AS `po_header_id`,`ap_transaction_line`.`po_line_id` AS `po_line_id`,`ap_transaction_line`.`po_detail_id` AS `po_detail_id`,`ap_transaction_line`.`ref_transaction_header_id` AS `ref_transaction_header_id`,`ap_transaction_line`.`ref_transaction_line_id` AS `ref_transaction_line_id`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`ap_transaction_detail`.`ap_transaction_detail_id` AS `ap_transaction_detail_id`,`ap_transaction_detail`.`account_type` AS `account_type`,`ap_transaction_detail`.`description` AS `detail_description`,`ap_transaction_detail`.`amount` AS `amount`,`ap_transaction_detail`.`detail_ac_id` AS `detail_ac_id`,`ap_transaction_header`.`created_by` AS `created_by`,`ap_transaction_header`.`creation_date` AS `creation_date`,`ap_transaction_header`.`last_update_by` AS `last_update_by`,`ap_transaction_header`.`last_update_date` AS `last_update_date` from (((((((`ap_transaction_header` left join `supplier` on((`ap_transaction_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`ap_transaction_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`ap_transaction_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `ap_transaction_line` on((`ap_transaction_header`.`ap_transaction_header_id` = `ap_transaction_line`.`ap_transaction_header_id`))) left join `item` on(((`ap_transaction_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`item_id_m` = `item`.`item_id`)))) left join `ap_transaction_detail` on((`ap_transaction_line`.`ap_transaction_line_id` = `ap_transaction_detail`.`ap_transaction_line_id`))) left join `po_header` `ph` on((`ph`.`po_header_id` = `ap_transaction_line`.`po_header_id`)));
 
 -- --------------------------------------------------------
 
@@ -16413,7 +17378,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ap_transaction_all_v` AS 
 --
 DROP TABLE IF EXISTS `ar_customer_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ar_customer_v` AS select `ac`.`ar_customer_id` AS `ar_customer_id`,`ac`.`customer_number` AS `customer_number`,`ac`.`customer_name` AS `customer_name`,`acs`.`ar_customer_site_id` AS `ar_customer_site_id`,`acs`.`customer_site_number` AS `customer_site_number`,`acs`.`customer_site_name` AS `customer_site_name`,`ac`.`status` AS `status`,`ac`.`creation_date` AS `creation_date`,`ac`.`last_update_by` AS `last_update_by`,`ac`.`last_update_date` AS `last_update_date`,`acs`.`site_tax_country` AS `site_tax_country`,`acs`.`site_tax_reg_no` AS `site_tax_reg_no`,`acs`.`status` AS `site_status`,`acs`.`currency` AS `currency`,`acs`.`payment_term_id` AS `payment_term_id` from (`ar_customer` `ac` left join `ar_customer_site` `acs` on((`acs`.`ar_customer_id` = `ac`.`ar_customer_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ar_customer_v` AS select `ac`.`ar_customer_id` AS `ar_customer_id`,`ac`.`customer_number` AS `customer_number`,`ac`.`customer_name` AS `customer_name`,`acs`.`ar_customer_site_id` AS `ar_customer_site_id`,`acs`.`customer_site_number` AS `customer_site_number`,`acs`.`customer_site_name` AS `customer_site_name`,`ac`.`status` AS `status`,`ac`.`creation_date` AS `creation_date`,`ac`.`last_update_by` AS `last_update_by`,`ac`.`last_update_date` AS `last_update_date`,`acs`.`site_tax_country` AS `site_tax_country`,`acs`.`site_tax_reg_no` AS `site_tax_reg_no`,`acs`.`status` AS `site_status`,`acs`.`currency` AS `currency`,`acs`.`payment_term_id` AS `payment_term_id` from (`ar_customer` `ac` left join `ar_customer_site` `acs` on((`acs`.`ar_customer_id` = `ac`.`ar_customer_id`)));
 
 -- --------------------------------------------------------
 
@@ -16422,7 +17387,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ar_customer_v` AS select 
 --
 DROP TABLE IF EXISTS `ar_unpaid_transaction_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ar_unpaid_transaction_v` AS select `arth`.`ar_transaction_header_id` AS `ar_transaction_header_id`,`arth`.`bu_org_id` AS `bu_org_id`,`arth`.`transaction_class` AS `transaction_class`,`arth`.`transaction_number` AS `transaction_number`,`arth`.`header_amount` AS `header_amount`,`arth`.`tax_amount` AS `tax_amount`,`arth`.`exchange_rate` AS `receipt_amount`,`arth`.`receipt_amount` AS `exchange_rate`,(ifnull(`arth`.`header_amount`,0) - ifnull(`arth`.`receipt_amount`,0)) AS `remaing_amount`,`arth`.`currency` AS `currency`,`arth`.`doc_currency` AS `doc_currency`,`arth`.`document_date` AS `document_date`,`arth`.`document_number` AS `document_number`,`arth`.`gl_journal_header_id` AS `gl_journal_header_id`,`arth`.`ledger_id` AS `ledger_id`,`arth`.`sd_so_header_id` AS `sd_so_header_id`,`arth`.`ar_customer_id` AS `ar_customer_id`,`arth`.`ar_customer_site_id` AS `ar_customer_site_id`,`arc`.`customer_name` AS `customer_name`,`arc`.`customer_number` AS `customer_number`,`arcs`.`customer_site_name` AS `customer_site_name`,`arcs`.`customer_site_number` AS `customer_site_number`,`sosh`.`so_number` AS `so_number` from (((`ar_transaction_header` `arth` left join `sd_so_header` `sosh` on((`arth`.`sd_so_header_id` = `sosh`.`sd_so_header_id`))) join `ar_customer` `arc`) join `ar_customer_site` `arcs`) where ((`arth`.`ar_customer_id` = `arc`.`ar_customer_id`) and (`arth`.`ar_customer_site_id` = `arcs`.`ar_customer_site_id`) and (`arth`.`ar_customer_id` = `arcs`.`ar_customer_id`) and (ifnull(`arth`.`header_amount`,0) > ifnull(`arth`.`receipt_amount`,0)) and (`arth`.`transaction_class` in ('INVOICE','DEPOSIT','CHARGE_BACK','PREPAYMENT','DEBIT_MEMO')));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ar_unpaid_transaction_v` AS select `arth`.`ar_transaction_header_id` AS `ar_transaction_header_id`,`arth`.`bu_org_id` AS `bu_org_id`,`arth`.`transaction_class` AS `transaction_class`,`arth`.`transaction_number` AS `transaction_number`,`arth`.`header_amount` AS `header_amount`,`arth`.`tax_amount` AS `tax_amount`,`arth`.`exchange_rate` AS `receipt_amount`,`arth`.`receipt_amount` AS `exchange_rate`,(ifnull(`arth`.`header_amount`,0) - ifnull(`arth`.`receipt_amount`,0)) AS `remaing_amount`,`arth`.`currency` AS `currency`,`arth`.`doc_currency` AS `doc_currency`,`arth`.`document_date` AS `document_date`,`arth`.`document_number` AS `document_number`,`arth`.`gl_journal_header_id` AS `gl_journal_header_id`,`arth`.`ledger_id` AS `ledger_id`,`arth`.`sd_so_header_id` AS `sd_so_header_id`,`arth`.`ar_customer_id` AS `ar_customer_id`,`arth`.`ar_customer_site_id` AS `ar_customer_site_id`,`arc`.`customer_name` AS `customer_name`,`arc`.`customer_number` AS `customer_number`,`arcs`.`customer_site_name` AS `customer_site_name`,`arcs`.`customer_site_number` AS `customer_site_number`,`sosh`.`so_number` AS `so_number` from (((`ar_transaction_header` `arth` left join `sd_so_header` `sosh` on((`arth`.`sd_so_header_id` = `sosh`.`sd_so_header_id`))) join `ar_customer` `arc`) join `ar_customer_site` `arcs`) where ((`arth`.`ar_customer_id` = `arc`.`ar_customer_id`) and (`arth`.`ar_customer_site_id` = `arcs`.`ar_customer_site_id`) and (`arth`.`ar_customer_id` = `arcs`.`ar_customer_id`) and (ifnull(`arth`.`header_amount`,0) > ifnull(`arth`.`receipt_amount`,0)) and (`arth`.`transaction_class` in ('INVOICE','DEPOSIT','CHARGE_BACK','PREPAYMENT','DEBIT_MEMO')));
 
 -- --------------------------------------------------------
 
@@ -16431,7 +17396,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ar_unpaid_transaction_v` 
 --
 DROP TABLE IF EXISTS `bom_all_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_all_v` AS select `bh`.`bom_header_id` AS `bom_header_id`,`bh`.`item_id_m` AS `item_id_m`,`bh`.`alternate_bom` AS `alternate_bom`,`bh`.`org_id` AS `org_id`,`bh`.`bom_revision` AS `bom_revision`,`bh`.`effective_date` AS `effective_date`,`bh`.`common_bom_item_id_m` AS `common_bom_item_id_m`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`uom_id` AS `uom_id`,`item`.`item_type` AS `item_type`,`item`.`item_status` AS `item_status`,`item`.`bom_type` AS `bom_type`,`item`.`costing_enabled_cb` AS `costing_enabled_cb`,`item`.`make_buy` AS `make_buy`,`org`.`org` AS `org`,`org`.`type` AS `org_type`,`org`.`status` AS `org_status`,`org`.`description` AS `org_description`,`org`.`code` AS `org_code` from ((`bom_header` `bh` left join `item` on(((`item`.`item_id_m` = `bh`.`item_id_m`) and (`item`.`org_id` = `bh`.`org_id`)))) left join `org` on((`org`.`org_id` = `bh`.`org_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bom_all_v` AS select `bh`.`bom_header_id` AS `bom_header_id`,`bh`.`item_id_m` AS `item_id_m`,`bh`.`alternate_bom` AS `alternate_bom`,`bh`.`org_id` AS `org_id`,`bh`.`bom_revision` AS `bom_revision`,`bh`.`effective_date` AS `effective_date`,`bh`.`common_bom_item_id_m` AS `common_bom_item_id_m`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`uom_id` AS `uom_id`,`item`.`item_type` AS `item_type`,`item`.`item_status` AS `item_status`,`item`.`bom_type` AS `bom_type`,`item`.`costing_enabled_cb` AS `costing_enabled_cb`,`item`.`make_buy` AS `make_buy`,`org`.`org` AS `org`,`org`.`type` AS `org_type`,`org`.`status` AS `org_status`,`org`.`description` AS `org_description`,`org`.`code` AS `org_code` from ((`bom_header` `bh` left join `item` on(((`item`.`item_id_m` = `bh`.`item_id_m`) and (`item`.`org_id` = `bh`.`org_id`)))) left join `org` on((`org`.`org_id` = `bh`.`org_id`)));
 
 -- --------------------------------------------------------
 
@@ -16440,7 +17405,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_all_v` AS select `bh`
 --
 DROP TABLE IF EXISTS `bom_line_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_line_v` AS select `bh`.`bom_header_id` AS `bom_header_id_h`,`bh`.`item_id_m` AS `item_id_m`,`bh`.`org_id` AS `org_id`,`bh`.`alternate_bom` AS `alternate_bom`,`bh`.`effective_date` AS `effective_date`,`bh`.`common_bom_item_id_m` AS `common_bom_item_id_m`,`bh`.`common_bom_org_id` AS `common_bom_org_id`,`bh`.`created_by` AS `h_created_by`,`bh`.`creation_date` AS `h_creation_date`,`bh`.`last_update_by` AS `h_last_update_by`,`bh`.`last_update_date` AS `h_last_update_date`,`bl`.`bom_header_id` AS `bom_header_id`,`bl`.`bom_line_id` AS `bom_line_id`,`bl`.`bom_sequence` AS `bom_sequence`,`bl`.`routing_sequence` AS `routing_sequence`,`bl`.`component_item_id_m` AS `component_item_id_m`,`bl`.`usage_basis` AS `usage_basis`,`bl`.`usage_quantity` AS `usage_quantity`,`bl`.`auto_request_material_cb` AS `auto_request_material_cb`,`bl`.`effective_start_date` AS `effective_start_date`,`bl`.`effective_end_date` AS `effective_end_date`,`bl`.`eco_number` AS `eco_number`,`bl`.`eco_implemented_cb` AS `eco_implemented_cb`,`bl`.`planning_percentage` AS `planning_percentage`,`bl`.`yield` AS `yield`,`bl`.`include_in_cost_rollup_cb` AS `include_in_cost_rollup_cb`,(case coalesce(`bl`.`wip_supply_type`,0) when '0' then (select `item`.`wip_supply_type` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`wip_supply_type` end) AS `wip_supply_type`,(case coalesce(`bl`.`supply_sub_inventory`,0) when '0' then (select `item`.`wip_supply_subinventory` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`supply_sub_inventory` end) AS `supply_sub_inventory`,(case coalesce(`bl`.`supply_locator`,0) when '0' then (select `item`.`wip_supply_locator` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`supply_locator` end) AS `supply_locator`,`bl`.`created_by` AS `created_by`,`bl`.`creation_date` AS `creation_date`,`bl`.`last_update_by` AS `last_update_by`,`bl`.`last_update_date` AS `last_update_date` from (`bom_line` `bl` join `bom_header` `bh`) where ((`bh`.`bom_header_id` = `bl`.`bom_header_id`) and (isnull(`bh`.`common_bom_item_id_m`) or (`bh`.`common_bom_item_id_m` = 0))) union select `bh`.`bom_header_id` AS `bom_header_id_h`,`bhc`.`item_id_m` AS `item_id_m`,`bhc`.`org_id` AS `org_id`,`bhc`.`alternate_bom` AS `alternate_bom`,`bhc`.`effective_date` AS `effective_date`,`bhc`.`common_bom_item_id_m` AS `common_bom_item_id_m`,`bhc`.`common_bom_org_id` AS `common_bom_org_id`,`bh`.`created_by` AS `h_created_by`,`bh`.`creation_date` AS `h_creation_date`,`bh`.`last_update_by` AS `h_last_update_by`,`bh`.`last_update_date` AS `h_last_update_date`,`bl`.`bom_header_id` AS `bom_header_id`,`bl`.`bom_line_id` AS `bom_line_id`,`bl`.`bom_sequence` AS `bom_sequence`,`bl`.`routing_sequence` AS `routing_sequence`,`bl`.`component_item_id_m` AS `component_item_id_m`,`bl`.`usage_basis` AS `usage_basis`,`bl`.`usage_quantity` AS `usage_quantity`,`bl`.`auto_request_material_cb` AS `auto_request_material_cb`,`bl`.`effective_start_date` AS `effective_start_date`,`bl`.`effective_end_date` AS `effective_end_date`,`bl`.`eco_number` AS `eco_number`,`bl`.`eco_implemented_cb` AS `eco_implemented_cb`,`bl`.`planning_percentage` AS `planning_percentage`,`bl`.`yield` AS `yield`,`bl`.`include_in_cost_rollup_cb` AS `include_in_cost_rollup_cb`,(case coalesce(`bl`.`wip_supply_type`,0) when '0' then (select `item`.`wip_supply_type` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`wip_supply_type` end) AS `wip_supply_type`,(case coalesce(`bl`.`supply_sub_inventory`,0) when '0' then (select `item`.`wip_supply_subinventory` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`supply_sub_inventory` end) AS `supply_sub_inventory`,(case coalesce(`bl`.`supply_locator`,0) when '0' then (select `item`.`wip_supply_locator` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`supply_locator` end) AS `supply_locator`,`bl`.`created_by` AS `created_by`,`bl`.`creation_date` AS `creation_date`,`bl`.`last_update_by` AS `last_update_by`,`bl`.`last_update_date` AS `last_update_date` from ((`bom_line` `bl` join `bom_header` `bh`) join `bom_header` `bhc`) where ((`bh`.`bom_header_id` = `bl`.`bom_header_id`) and ((`bhc`.`common_bom_item_id_m` is not null) or (`bhc`.`common_bom_item_id_m` = 0)) and (`bhc`.`common_bom_item_id_m` = `bh`.`item_id_m`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bom_line_v` AS select `bh`.`bom_header_id` AS `bom_header_id_h`,`bh`.`item_id_m` AS `item_id_m`,`bh`.`org_id` AS `org_id`,`bh`.`alternate_bom` AS `alternate_bom`,`bh`.`effective_date` AS `effective_date`,`bh`.`common_bom_item_id_m` AS `common_bom_item_id_m`,`bh`.`common_bom_org_id` AS `common_bom_org_id`,`bh`.`created_by` AS `h_created_by`,`bh`.`creation_date` AS `h_creation_date`,`bh`.`last_update_by` AS `h_last_update_by`,`bh`.`last_update_date` AS `h_last_update_date`,`bl`.`bom_header_id` AS `bom_header_id`,`bl`.`bom_line_id` AS `bom_line_id`,`bl`.`bom_sequence` AS `bom_sequence`,`bl`.`routing_sequence` AS `routing_sequence`,`bl`.`component_item_id_m` AS `component_item_id_m`,`bl`.`usage_basis` AS `usage_basis`,`bl`.`usage_quantity` AS `usage_quantity`,`bl`.`auto_request_material_cb` AS `auto_request_material_cb`,`bl`.`effective_start_date` AS `effective_start_date`,`bl`.`effective_end_date` AS `effective_end_date`,`bl`.`eco_number` AS `eco_number`,`bl`.`eco_implemented_cb` AS `eco_implemented_cb`,`bl`.`planning_percentage` AS `planning_percentage`,`bl`.`yield` AS `yield`,`bl`.`include_in_cost_rollup_cb` AS `include_in_cost_rollup_cb`,(case coalesce(`bl`.`wip_supply_type`,0) when '0' then (select `item`.`wip_supply_type` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`wip_supply_type` end) AS `wip_supply_type`,(case coalesce(`bl`.`supply_sub_inventory`,0) when '0' then (select `item`.`wip_supply_subinventory` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`supply_sub_inventory` end) AS `supply_sub_inventory`,(case coalesce(`bl`.`supply_locator`,0) when '0' then (select `item`.`wip_supply_locator` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`supply_locator` end) AS `supply_locator`,`bl`.`created_by` AS `created_by`,`bl`.`creation_date` AS `creation_date`,`bl`.`last_update_by` AS `last_update_by`,`bl`.`last_update_date` AS `last_update_date` from (`bom_line` `bl` join `bom_header` `bh`) where ((`bh`.`bom_header_id` = `bl`.`bom_header_id`) and (isnull(`bh`.`common_bom_item_id_m`) or (`bh`.`common_bom_item_id_m` = 0))) union select `bh`.`bom_header_id` AS `bom_header_id_h`,`bhc`.`item_id_m` AS `item_id_m`,`bhc`.`org_id` AS `org_id`,`bhc`.`alternate_bom` AS `alternate_bom`,`bhc`.`effective_date` AS `effective_date`,`bhc`.`common_bom_item_id_m` AS `common_bom_item_id_m`,`bhc`.`common_bom_org_id` AS `common_bom_org_id`,`bh`.`created_by` AS `h_created_by`,`bh`.`creation_date` AS `h_creation_date`,`bh`.`last_update_by` AS `h_last_update_by`,`bh`.`last_update_date` AS `h_last_update_date`,`bl`.`bom_header_id` AS `bom_header_id`,`bl`.`bom_line_id` AS `bom_line_id`,`bl`.`bom_sequence` AS `bom_sequence`,`bl`.`routing_sequence` AS `routing_sequence`,`bl`.`component_item_id_m` AS `component_item_id_m`,`bl`.`usage_basis` AS `usage_basis`,`bl`.`usage_quantity` AS `usage_quantity`,`bl`.`auto_request_material_cb` AS `auto_request_material_cb`,`bl`.`effective_start_date` AS `effective_start_date`,`bl`.`effective_end_date` AS `effective_end_date`,`bl`.`eco_number` AS `eco_number`,`bl`.`eco_implemented_cb` AS `eco_implemented_cb`,`bl`.`planning_percentage` AS `planning_percentage`,`bl`.`yield` AS `yield`,`bl`.`include_in_cost_rollup_cb` AS `include_in_cost_rollup_cb`,(case coalesce(`bl`.`wip_supply_type`,0) when '0' then (select `item`.`wip_supply_type` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`wip_supply_type` end) AS `wip_supply_type`,(case coalesce(`bl`.`supply_sub_inventory`,0) when '0' then (select `item`.`wip_supply_subinventory` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`supply_sub_inventory` end) AS `supply_sub_inventory`,(case coalesce(`bl`.`supply_locator`,0) when '0' then (select `item`.`wip_supply_locator` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`supply_locator` end) AS `supply_locator`,`bl`.`created_by` AS `created_by`,`bl`.`creation_date` AS `creation_date`,`bl`.`last_update_by` AS `last_update_by`,`bl`.`last_update_date` AS `last_update_date` from ((`bom_line` `bl` join `bom_header` `bh`) join `bom_header` `bhc`) where ((`bh`.`bom_header_id` = `bl`.`bom_header_id`) and ((`bhc`.`common_bom_item_id_m` is not null) or (`bhc`.`common_bom_item_id_m` = 0)) and (`bhc`.`common_bom_item_id_m` = `bh`.`item_id_m`));
 
 -- --------------------------------------------------------
 
@@ -16449,7 +17414,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_line_v` AS select `bh
 --
 DROP TABLE IF EXISTS `bom_overhead_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_overhead_v` AS select `res`.`bom_overhead_resource_assignment_id` AS `bom_overhead_resource_assignment_id`,`res`.`bom_cost_type` AS `resource_bom_cost_type`,`res`.`resource_id` AS `resource_id`,`ora`.`bom_overhead_rate_assignment_id` AS `bom_overhead_rate_assignment_id`,`ora`.`bom_overhead_id` AS `bom_overhead_id`,`ora`.`bom_cost_type` AS `rate_bom_cost_type`,`ora`.`default_basis` AS `default_basis`,`ora`.`rate` AS `rate`,`bo`.`overhead` AS `overhead`,`bo`.`description` AS `description`,`bo`.`org_id` AS `org_id`,`bo`.`overhead_type` AS `overhead_type`,`bo`.`absorption_ac_id` AS `absorption_ac_id` from ((`bom_overhead_rate_assignment` `ora` left join `bom_overhead` `bo` on((`bo`.`bom_overhead_id` = `ora`.`bom_overhead_id`))) left join `bom_overhead_resource_assignment` `res` on((`res`.`bom_overhead_id` = `ora`.`bom_overhead_id`))) where (`res`.`bom_cost_type` = `ora`.`bom_cost_type`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bom_overhead_v` AS select `res`.`bom_overhead_resource_assignment_id` AS `bom_overhead_resource_assignment_id`,`res`.`bom_cost_type` AS `resource_bom_cost_type`,`res`.`resource_id` AS `resource_id`,`ora`.`bom_overhead_rate_assignment_id` AS `bom_overhead_rate_assignment_id`,`ora`.`bom_overhead_id` AS `bom_overhead_id`,`ora`.`bom_cost_type` AS `rate_bom_cost_type`,`ora`.`default_basis` AS `default_basis`,`ora`.`rate` AS `rate`,`bo`.`overhead` AS `overhead`,`bo`.`description` AS `description`,`bo`.`org_id` AS `org_id`,`bo`.`overhead_type` AS `overhead_type`,`bo`.`absorption_ac_id` AS `absorption_ac_id` from ((`bom_overhead_rate_assignment` `ora` left join `bom_overhead` `bo` on((`bo`.`bom_overhead_id` = `ora`.`bom_overhead_id`))) left join `bom_overhead_resource_assignment` `res` on((`res`.`bom_overhead_id` = `ora`.`bom_overhead_id`))) where (`res`.`bom_cost_type` = `ora`.`bom_cost_type`);
 
 -- --------------------------------------------------------
 
@@ -16458,7 +17423,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_overhead_v` AS select
 --
 DROP TABLE IF EXISTS `bom_routing_line_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_routing_line_v` AS select `brh`.`bom_routing_header_id` AS `bom_routing_header_id_h`,`brh`.`item_id_m` AS `item_id_m`,`brh`.`alternate_routing` AS `alternate_routing`,`brh`.`org_id` AS `org_id`,`brh`.`routing_revision` AS `routing_revision`,`brh`.`effective_date` AS `effective_date`,`brh`.`common_routing_item_id_m` AS `common_routing_item_id_m`,`brh`.`description` AS `description_h`,`brh`.`completion_subinventory` AS `completion_subinventory`,`brh`.`completion_locator` AS `completion_locator`,`brl`.`bom_routing_line_id` AS `bom_routing_line_id`,`brl`.`bom_routing_header_id` AS `bom_routing_header_id`,`brl`.`routing_sequence` AS `routing_sequence`,`brl`.`standard_operation_id` AS `standard_operation_id`,`brl`.`department_id` AS `department_id`,`brl`.`description` AS `description`,`brl`.`count_point_cb` AS `count_point_cb`,`brl`.`auto_charge_cb` AS `auto_charge_cb`,`brl`.`backflush_cb` AS `backflush_cb`,`brl`.`minimum_transfer_quantity` AS `minimum_transfer_quantity`,`brl`.`lead_time_percentage` AS `lead_time_percentage`,`brl`.`effective_start_date` AS `effective_start_date`,`brl`.`effective_end_date` AS `effective_end_date`,`brl`.`eco_number` AS `eco_number`,`brl`.`eco_implemented_cb` AS `eco_implemented_cb`,`brl`.`include_in_rollup_cb` AS `include_in_rollup_cb`,`brl`.`referenced_cb` AS `referenced_cb`,`brl`.`yield` AS `yield`,`brl`.`cumm_yield` AS `cumm_yield` from (`bom_routing_header` `brh` join `bom_routing_line` `brl`) where ((`brh`.`bom_routing_header_id` = `brl`.`bom_routing_header_id`) and (isnull(`brh`.`common_routing_item_id_m`) or (`brh`.`common_routing_item_id_m` = 0))) union select `brhc`.`bom_routing_header_id` AS `bom_routing_header_id_h`,`brhc`.`item_id_m` AS `item_id_m`,`brhc`.`alternate_routing` AS `alternate_routing`,`brhc`.`org_id` AS `org_id`,`brhc`.`routing_revision` AS `routing_revision`,`brhc`.`effective_date` AS `effective_date`,`brhc`.`common_routing_item_id_m` AS `common_routing_item_id_m`,`brhc`.`description` AS `description_h`,`brhc`.`completion_subinventory` AS `completion_subinventory`,`brhc`.`completion_locator` AS `completion_locator`,`brl`.`bom_routing_line_id` AS `bom_routing_line_id`,`brl`.`bom_routing_header_id` AS `bom_routing_header_id`,`brl`.`routing_sequence` AS `routing_sequence`,`brl`.`standard_operation_id` AS `standard_operation_id`,`brl`.`department_id` AS `department_id`,`brl`.`description` AS `description`,`brl`.`count_point_cb` AS `count_point_cb`,`brl`.`auto_charge_cb` AS `auto_charge_cb`,`brl`.`backflush_cb` AS `backflush_cb`,`brl`.`minimum_transfer_quantity` AS `minimum_transfer_quantity`,`brl`.`lead_time_percentage` AS `lead_time_percentage`,`brl`.`effective_start_date` AS `effective_start_date`,`brl`.`effective_end_date` AS `effective_end_date`,`brl`.`eco_number` AS `eco_number`,`brl`.`eco_implemented_cb` AS `eco_implemented_cb`,`brl`.`include_in_rollup_cb` AS `include_in_rollup_cb`,`brl`.`referenced_cb` AS `referenced_cb`,`brl`.`yield` AS `yield`,`brl`.`cumm_yield` AS `cumm_yield` from ((`bom_routing_header` `brh` join `bom_routing_header` `brhc`) join `bom_routing_line` `brl`) where ((`brh`.`bom_routing_header_id` = `brl`.`bom_routing_header_id`) and ((`brhc`.`common_routing_item_id_m` is not null) or (`brhc`.`common_routing_item_id_m` = 0)) and (`brhc`.`common_routing_item_id_m` = `brh`.`item_id_m`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bom_routing_line_v` AS select `brh`.`bom_routing_header_id` AS `bom_routing_header_id_h`,`brh`.`item_id_m` AS `item_id_m`,`brh`.`alternate_routing` AS `alternate_routing`,`brh`.`org_id` AS `org_id`,`brh`.`routing_revision` AS `routing_revision`,`brh`.`effective_date` AS `effective_date`,`brh`.`common_routing_item_id_m` AS `common_routing_item_id_m`,`brh`.`description` AS `description_h`,`brh`.`completion_subinventory` AS `completion_subinventory`,`brh`.`completion_locator` AS `completion_locator`,`brl`.`bom_routing_line_id` AS `bom_routing_line_id`,`brl`.`bom_routing_header_id` AS `bom_routing_header_id`,`brl`.`routing_sequence` AS `routing_sequence`,`brl`.`standard_operation_id` AS `standard_operation_id`,`brl`.`department_id` AS `department_id`,`brl`.`description` AS `description`,`brl`.`count_point_cb` AS `count_point_cb`,`brl`.`auto_charge_cb` AS `auto_charge_cb`,`brl`.`backflush_cb` AS `backflush_cb`,`brl`.`minimum_transfer_quantity` AS `minimum_transfer_quantity`,`brl`.`lead_time_percentage` AS `lead_time_percentage`,`brl`.`effective_start_date` AS `effective_start_date`,`brl`.`effective_end_date` AS `effective_end_date`,`brl`.`eco_number` AS `eco_number`,`brl`.`eco_implemented_cb` AS `eco_implemented_cb`,`brl`.`include_in_rollup_cb` AS `include_in_rollup_cb`,`brl`.`referenced_cb` AS `referenced_cb`,`brl`.`yield` AS `yield`,`brl`.`cumm_yield` AS `cumm_yield` from (`bom_routing_header` `brh` join `bom_routing_line` `brl`) where ((`brh`.`bom_routing_header_id` = `brl`.`bom_routing_header_id`) and (isnull(`brh`.`common_routing_item_id_m`) or (`brh`.`common_routing_item_id_m` = 0))) union select `brhc`.`bom_routing_header_id` AS `bom_routing_header_id_h`,`brhc`.`item_id_m` AS `item_id_m`,`brhc`.`alternate_routing` AS `alternate_routing`,`brhc`.`org_id` AS `org_id`,`brhc`.`routing_revision` AS `routing_revision`,`brhc`.`effective_date` AS `effective_date`,`brhc`.`common_routing_item_id_m` AS `common_routing_item_id_m`,`brhc`.`description` AS `description_h`,`brhc`.`completion_subinventory` AS `completion_subinventory`,`brhc`.`completion_locator` AS `completion_locator`,`brl`.`bom_routing_line_id` AS `bom_routing_line_id`,`brl`.`bom_routing_header_id` AS `bom_routing_header_id`,`brl`.`routing_sequence` AS `routing_sequence`,`brl`.`standard_operation_id` AS `standard_operation_id`,`brl`.`department_id` AS `department_id`,`brl`.`description` AS `description`,`brl`.`count_point_cb` AS `count_point_cb`,`brl`.`auto_charge_cb` AS `auto_charge_cb`,`brl`.`backflush_cb` AS `backflush_cb`,`brl`.`minimum_transfer_quantity` AS `minimum_transfer_quantity`,`brl`.`lead_time_percentage` AS `lead_time_percentage`,`brl`.`effective_start_date` AS `effective_start_date`,`brl`.`effective_end_date` AS `effective_end_date`,`brl`.`eco_number` AS `eco_number`,`brl`.`eco_implemented_cb` AS `eco_implemented_cb`,`brl`.`include_in_rollup_cb` AS `include_in_rollup_cb`,`brl`.`referenced_cb` AS `referenced_cb`,`brl`.`yield` AS `yield`,`brl`.`cumm_yield` AS `cumm_yield` from ((`bom_routing_header` `brh` join `bom_routing_header` `brhc`) join `bom_routing_line` `brl`) where ((`brh`.`bom_routing_header_id` = `brl`.`bom_routing_header_id`) and ((`brhc`.`common_routing_item_id_m` is not null) or (`brhc`.`common_routing_item_id_m` = 0)) and (`brhc`.`common_routing_item_id_m` = `brh`.`item_id_m`));
 
 -- --------------------------------------------------------
 
@@ -16467,7 +17432,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_routing_line_v` AS se
 --
 DROP TABLE IF EXISTS `bom_routing_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_routing_v` AS select `brh`.`bom_routing_header_id` AS `bom_routing_header_id`,`brh`.`item_id_m` AS `item_id_m`,`brh`.`alternate_routing` AS `alternate_routing`,`brh`.`org_id` AS `org_id`,`brh`.`routing_revision` AS `routing_revision`,`brh`.`effective_date` AS `effective_date`,`brh`.`common_routing_item_id_m` AS `common_routing_item_id_m`,`brh`.`description` AS `description`,`brh`.`completion_subinventory` AS `completion_subinventory`,`brh`.`completion_locator` AS `completion_locator`,`brh`.`ef_id` AS `ef_id`,`brh`.`created_by` AS `created_by`,`brh`.`creation_date` AS `creation_date`,`brh`.`last_update_by` AS `last_update_by`,`brh`.`last_update_date` AS `last_update_date`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`uom_id` AS `uom_id`,`item`.`item_type` AS `item_type`,`item`.`item_status` AS `item_status`,`item`.`bom_type` AS `bom_type`,`item`.`costing_enabled_cb` AS `costing_enabled_cb`,`item`.`make_buy` AS `make_buy`,`org`.`org` AS `org`,`org`.`type` AS `type`,`org`.`status` AS `status`,`org`.`description` AS `org_description`,`org`.`code` AS `code`,`sub`.`subinventory` AS `subinventory`,`loc`.`locator` AS `locator` from ((((`bom_routing_header` `brh` left join `item` on(((`item`.`item_id_m` = `brh`.`item_id_m`) and (`item`.`org_id` = `brh`.`org_id`)))) left join `org` on((`org`.`org_id` = `brh`.`org_id`))) left join `subinventory` `sub` on((`sub`.`subinventory_id` = `brh`.`completion_subinventory`))) left join `locator` `loc` on((`loc`.`locator_id` = `brh`.`completion_locator`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bom_routing_v` AS select `brh`.`bom_routing_header_id` AS `bom_routing_header_id`,`brh`.`item_id_m` AS `item_id_m`,`brh`.`alternate_routing` AS `alternate_routing`,`brh`.`org_id` AS `org_id`,`brh`.`routing_revision` AS `routing_revision`,`brh`.`effective_date` AS `effective_date`,`brh`.`common_routing_item_id_m` AS `common_routing_item_id_m`,`brh`.`description` AS `description`,`brh`.`completion_subinventory` AS `completion_subinventory`,`brh`.`completion_locator` AS `completion_locator`,`brh`.`ef_id` AS `ef_id`,`brh`.`created_by` AS `created_by`,`brh`.`creation_date` AS `creation_date`,`brh`.`last_update_by` AS `last_update_by`,`brh`.`last_update_date` AS `last_update_date`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`uom_id` AS `uom_id`,`item`.`item_type` AS `item_type`,`item`.`item_status` AS `item_status`,`item`.`bom_type` AS `bom_type`,`item`.`costing_enabled_cb` AS `costing_enabled_cb`,`item`.`make_buy` AS `make_buy`,`org`.`org` AS `org`,`org`.`type` AS `type`,`org`.`status` AS `status`,`org`.`description` AS `org_description`,`org`.`code` AS `code`,`sub`.`subinventory` AS `subinventory`,`loc`.`locator` AS `locator` from ((((`bom_routing_header` `brh` left join `item` on(((`item`.`item_id_m` = `brh`.`item_id_m`) and (`item`.`org_id` = `brh`.`org_id`)))) left join `org` on((`org`.`org_id` = `brh`.`org_id`))) left join `subinventory` `sub` on((`sub`.`subinventory_id` = `brh`.`completion_subinventory`))) left join `locator` `loc` on((`loc`.`locator_id` = `brh`.`completion_locator`)));
 
 -- --------------------------------------------------------
 
@@ -16476,7 +17441,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_routing_v` AS select 
 --
 DROP TABLE IF EXISTS `cst_item_cost_sum_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `cst_item_cost_sum_v` AS select `ich`.`cst_item_cost_header_id` AS `cst_item_cost_header_id`,sum(`icl`.`amount`) AS `standard_cost` from (`cst_item_cost_header` `ich` join `cst_item_cost_line` `icl`) where (`icl`.`cst_item_cost_header_id` = `ich`.`cst_item_cost_header_id`) group by `ich`.`cst_item_cost_header_id`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cst_item_cost_sum_v` AS select `ich`.`cst_item_cost_header_id` AS `cst_item_cost_header_id`,sum(`icl`.`amount`) AS `standard_cost` from (`cst_item_cost_header` `ich` join `cst_item_cost_line` `icl`) where (`icl`.`cst_item_cost_header_id` = `ich`.`cst_item_cost_header_id`) group by `ich`.`cst_item_cost_header_id`;
 
 -- --------------------------------------------------------
 
@@ -16485,7 +17450,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `cst_item_cost_sum_v` AS s
 --
 DROP TABLE IF EXISTS `cst_item_cost_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `cst_item_cost_v` AS select `item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`cich`.`item_id_m` AS `item_id_m`,`cich`.`org_id` AS `org_id`,`org`.`org` AS `org`,`cich`.`sales_price` AS `sales_price`,`cich`.`purchase_price` AS `purchase_price`,`cich`.`cst_item_cost_header_id` AS `cst_item_cost_header_id`,`cich`.`bom_cost_type` AS `bom_cost_type`,`icsv`.`standard_cost` AS `standard_cost` from (((`cst_item_cost_header` `cich` join `cst_item_cost_sum_v` `icsv`) join `item`) join `org`) where ((`icsv`.`cst_item_cost_header_id` = `cich`.`cst_item_cost_header_id`) and (`item`.`item_id_m` = `cich`.`item_id_m`) and (`item`.`org_id` = `cich`.`org_id`) and (`org`.`org_id` = `cich`.`org_id`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cst_item_cost_v` AS select `item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`cich`.`item_id_m` AS `item_id_m`,`cich`.`org_id` AS `org_id`,`org`.`org` AS `org`,`cich`.`sales_price` AS `sales_price`,`cich`.`purchase_price` AS `purchase_price`,`cich`.`cst_item_cost_header_id` AS `cst_item_cost_header_id`,`cich`.`bom_cost_type` AS `bom_cost_type`,`icsv`.`standard_cost` AS `standard_cost` from (((`cst_item_cost_header` `cich` join `cst_item_cost_sum_v` `icsv`) join `item`) join `org`) where ((`icsv`.`cst_item_cost_header_id` = `cich`.`cst_item_cost_header_id`) and (`item`.`item_id_m` = `cich`.`item_id_m`) and (`item`.`org_id` = `cich`.`org_id`) and (`org`.`org_id` = `cich`.`org_id`));
 
 -- --------------------------------------------------------
 
@@ -16494,7 +17459,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `cst_item_cost_v` AS selec
 --
 DROP TABLE IF EXISTS `fp_forecast_line_date_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_forecast_line_date_v` AS select `fld`.`fp_forecast_line_date_id` AS `fp_forecast_line_date_id`,`fld`.`fp_forecast_line_id` AS `fp_forecast_line_id`,`fh`.`forecast` AS `forecast`,`fg`.`forecast_group` AS `forecast_group`,`org`.`org` AS `org`,`item`.`item_number` AS `item_number`,`uom`.`uom_name` AS `uom_name`,`item`.`item_description` AS `item_description`,`fld`.`forecast_date` AS `forecast_date`,`fl`.`bucket_type` AS `bucket_type`,`fld`.`original_quantity` AS `original_quantity`,`fld`.`current_quantity` AS `current_quantity`,`fld`.`source` AS `source`,`fl`.`item_id_m` AS `item_id_m`,`item`.`uom_id` AS `uom_id` from ((((`fp_forecast_line_date` `fld` join `fp_forecast_line` `fl`) join `org`) join (`fp_forecast_header` `fh` left join `fp_forecast_group` `fg` on((`fg`.`fp_forecast_group_id` = `fh`.`forecast_group_id`)))) join (`item` left join `uom` on((`uom`.`uom_id` = `item`.`uom_id`)))) where ((`fl`.`fp_forecast_line_id` = `fld`.`fp_forecast_line_id`) and (`fl`.`fp_forecast_header_id` = `fh`.`fp_forecast_header_id`) and (`item`.`item_id_m` = `fl`.`item_id_m`) and (`item`.`org_id` = `fh`.`org_id`) and (`org`.`org_id` = `fh`.`org_id`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fp_forecast_line_date_v` AS select `fld`.`fp_forecast_line_date_id` AS `fp_forecast_line_date_id`,`fld`.`fp_forecast_line_id` AS `fp_forecast_line_id`,`fh`.`forecast` AS `forecast`,`fg`.`forecast_group` AS `forecast_group`,`org`.`org` AS `org`,`item`.`item_number` AS `item_number`,`uom`.`uom_name` AS `uom_name`,`item`.`item_description` AS `item_description`,`fld`.`forecast_date` AS `forecast_date`,`fl`.`bucket_type` AS `bucket_type`,`fld`.`original_quantity` AS `original_quantity`,`fld`.`current_quantity` AS `current_quantity`,`fld`.`source` AS `source`,`fl`.`item_id_m` AS `item_id_m`,`item`.`uom_id` AS `uom_id` from ((((`fp_forecast_line_date` `fld` join `fp_forecast_line` `fl`) join `org`) join (`fp_forecast_header` `fh` left join `fp_forecast_group` `fg` on((`fg`.`fp_forecast_group_id` = `fh`.`forecast_group_id`)))) join (`item` left join `uom` on((`uom`.`uom_id` = `item`.`uom_id`)))) where ((`fl`.`fp_forecast_line_id` = `fld`.`fp_forecast_line_id`) and (`fl`.`fp_forecast_header_id` = `fh`.`fp_forecast_header_id`) and (`item`.`item_id_m` = `fl`.`item_id_m`) and (`item`.`org_id` = `fh`.`org_id`) and (`org`.`org_id` = `fh`.`org_id`));
 
 -- --------------------------------------------------------
 
@@ -16503,7 +17468,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_forecast_line_date_v` 
 --
 DROP TABLE IF EXISTS `fp_forecast_over_consumption_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_forecast_over_consumption_v` AS select `fg`.`forecast_group` AS `forecast_group`,`org`.`org` AS `org`,`sosh`.`so_number` AS `so_number`,`sosl`.`line_number` AS `line_number`,`item`.`item_number` AS `item_number`,`uom`.`uom_name` AS `uom_name`,`item`.`item_description` AS `item_description`,`sosl`.`schedule_ship_date` AS `schedule_ship_date`,`foc`.`quantity` AS `quantity`,`sosl`.`item_id_m` AS `item_id_m`,`item`.`uom_id` AS `uom_id`,`foc`.`fp_forecast_consumption_id` AS `fp_forecast_consumption_id`,`foc`.`sd_so_line_id` AS `sd_so_line_id`,`sosl`.`sd_so_header_id` AS `sd_so_header_id` from (((((`fp_forecast_consumption` `foc` join `fp_forecast_group` `fg`) join `sd_so_line` `sosl`) join `sd_so_header` `sosh`) join `org`) join (`item` left join `uom` on((`uom`.`uom_id` = `item`.`uom_id`)))) where ((`foc`.`sd_so_line_id` = `sosl`.`sd_so_line_id`) and (`fg`.`fp_forecast_group_id` = `foc`.`fp_forecast_group_id`) and (`item`.`item_id_m` = `sosl`.`item_id_m`) and (`item`.`org_id` = `sosl`.`shipping_org_id`) and (`org`.`org_id` = `sosl`.`shipping_org_id`) and (`sosh`.`sd_so_header_id` = `sosl`.`sd_so_header_id`) and (`foc`.`quantity` < 0));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fp_forecast_over_consumption_v` AS select `fg`.`forecast_group` AS `forecast_group`,`org`.`org` AS `org`,`sosh`.`so_number` AS `so_number`,`sosl`.`line_number` AS `line_number`,`item`.`item_number` AS `item_number`,`uom`.`uom_name` AS `uom_name`,`item`.`item_description` AS `item_description`,`sosl`.`schedule_ship_date` AS `schedule_ship_date`,`foc`.`quantity` AS `quantity`,`sosl`.`item_id_m` AS `item_id_m`,`item`.`uom_id` AS `uom_id`,`foc`.`fp_forecast_consumption_id` AS `fp_forecast_consumption_id`,`foc`.`sd_so_line_id` AS `sd_so_line_id`,`sosl`.`sd_so_header_id` AS `sd_so_header_id` from (((((`fp_forecast_consumption` `foc` join `fp_forecast_group` `fg`) join `sd_so_line` `sosl`) join `sd_so_header` `sosh`) join `org`) join (`item` left join `uom` on((`uom`.`uom_id` = `item`.`uom_id`)))) where ((`foc`.`sd_so_line_id` = `sosl`.`sd_so_line_id`) and (`fg`.`fp_forecast_group_id` = `foc`.`fp_forecast_group_id`) and (`item`.`item_id_m` = `sosl`.`item_id_m`) and (`item`.`org_id` = `sosl`.`shipping_org_id`) and (`org`.`org_id` = `sosl`.`shipping_org_id`) and (`sosh`.`sd_so_header_id` = `sosl`.`sd_so_header_id`) and (`foc`.`quantity` < 0));
 
 -- --------------------------------------------------------
 
@@ -16512,7 +17477,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_forecast_over_consumpt
 --
 DROP TABLE IF EXISTS `fp_minmax_demand_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_minmax_demand_v` AS select `mmh`.`plan_name` AS `plan_name`,`mmh`.`org_id` AS `org_id`,`mmh`.`planning_horizon_days` AS `planning_horizon_days`,`org`.`org` AS `org`,`fh`.`forecast` AS `forecast`,`fh`.`description` AS `forecast_description`,`fmd`.`fp_minmax_demand_id` AS `fp_minmax_demand_id`,`fmd`.`plan_id` AS `plan_id`,`fmd`.`item_id_m` AS `item_id_m`,`fmd`.`quantity` AS `quantity`,`fmd`.`demand_item_id_m` AS `demand_item_id_m`,`fmd`.`toplevel_demand_item_id_m` AS `toplevel_demand_item_id_m`,`fmd`.`demand_type` AS `demand_type`,`fmd`.`source` AS `source`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item2`.`item_number` AS `top_level_item_number`,`item2`.`item_description` AS `top_level_item_description`,`item3`.`item_number` AS `demand_item_number`,`item3`.`item_description` AS `demand_item_description`,`fmd`.`created_by` AS `created_by`,`fmd`.`creation_date` AS `creation_date`,`fmd`.`last_update_by` AS `last_update_by`,`fmd`.`last_update_date` AS `last_update_date` from ((((((`fp_minmax_demand` `fmd` left join `fp_minmax_header` `mmh` on((`mmh`.`fp_minmax_header_id` = `fmd`.`plan_id`))) left join `fp_forecast_header` `fh` on((`fh`.`fp_forecast_header_id` = `fmd`.`source`))) left join `item` on((`item`.`item_id_m` = `fmd`.`item_id_m`))) left join `item` `item2` on((`item2`.`item_id_m` = `fmd`.`toplevel_demand_item_id_m`))) left join `item` `item3` on((`item3`.`item_id_m` = `fmd`.`demand_item_id_m`))) left join `org` on((`org`.`org_id` = `mmh`.`org_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fp_minmax_demand_v` AS select `mmh`.`plan_name` AS `plan_name`,`mmh`.`org_id` AS `org_id`,`mmh`.`planning_horizon_days` AS `planning_horizon_days`,`org`.`org` AS `org`,`fh`.`forecast` AS `forecast`,`fh`.`description` AS `forecast_description`,`fmd`.`fp_minmax_demand_id` AS `fp_minmax_demand_id`,`fmd`.`plan_id` AS `plan_id`,`fmd`.`item_id_m` AS `item_id_m`,`fmd`.`quantity` AS `quantity`,`fmd`.`demand_item_id_m` AS `demand_item_id_m`,`fmd`.`toplevel_demand_item_id_m` AS `toplevel_demand_item_id_m`,`fmd`.`demand_type` AS `demand_type`,`fmd`.`source` AS `source`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item2`.`item_number` AS `top_level_item_number`,`item2`.`item_description` AS `top_level_item_description`,`item3`.`item_number` AS `demand_item_number`,`item3`.`item_description` AS `demand_item_description`,`fmd`.`created_by` AS `created_by`,`fmd`.`creation_date` AS `creation_date`,`fmd`.`last_update_by` AS `last_update_by`,`fmd`.`last_update_date` AS `last_update_date` from ((((((`fp_minmax_demand` `fmd` left join `fp_minmax_header` `mmh` on((`mmh`.`fp_minmax_header_id` = `fmd`.`plan_id`))) left join `fp_forecast_header` `fh` on((`fh`.`fp_forecast_header_id` = `fmd`.`source`))) left join `item` on((`item`.`item_id_m` = `fmd`.`item_id_m`))) left join `item` `item2` on((`item2`.`item_id_m` = `fmd`.`toplevel_demand_item_id_m`))) left join `item` `item3` on((`item3`.`item_id_m` = `fmd`.`demand_item_id_m`))) left join `org` on((`org`.`org_id` = `mmh`.`org_id`)));
 
 -- --------------------------------------------------------
 
@@ -16521,7 +17486,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_minmax_demand_v` AS se
 --
 DROP TABLE IF EXISTS `fp_minmax_suggestion_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_minmax_suggestion_v` AS select `mmh`.`plan_name` AS `plan_name`,`mmh`.`org_id` AS `org_id`,`mmh`.`planning_horizon_days` AS `planning_horizon_days`,`org`.`org` AS `org`,`fmd`.`item_id_m` AS `item_id_m`,`item`.`item_number` AS `item_number`,sum(`fmd`.`quantity`) AS `total_demand`,(sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`) AS `avg_daily_demand`,`item`.`saftey_stock_quantity` AS `saftey_stock_quantity`,((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) AS `lead_time`,`item`.`saftey_stock_days` AS `saftey_stock_days`,(((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0)) AS `minimum_quantity`,`item`.`fix_days_supply` AS `fix_days_supply`,if(((`item`.`fix_days_supply` * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) > (((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0))),(`item`.`fix_days_supply` * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)),((((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * 1.5) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0))) AS `maximum_quantity`,ifnull(`item`.`fix_days_supply`,30) AS `multibin_fix_days_supply`,(ceiling((ifnull(((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`),0) / ifnull(`item`.`fix_days_supply`,30))) + 1) AS `minmax_multibin_number`,((((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0)) / ceiling((ifnull(((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`),0) / ifnull(`item`.`fix_days_supply`,30)))) AS `minmax_multibin_size`,((((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0)) + 1) AS `multibin_minmax_quantity`,`fh`.`forecast` AS `forecast`,`fh`.`description` AS `forecast_description`,`fmd`.`fp_minmax_demand_id` AS `fp_minmax_demand_id`,`fmd`.`plan_id` AS `plan_id`,`fmd`.`demand_item_id_m` AS `demand_item_id_m`,`fmd`.`toplevel_demand_item_id_m` AS `toplevel_demand_item_id_m`,`fmd`.`demand_type` AS `demand_type`,`fmd`.`source` AS `source`,`item`.`item_description` AS `item_description`,`item2`.`item_number` AS `top_level_item_number`,`item2`.`item_description` AS `top_level_item_description`,`item3`.`item_number` AS `demand_item_number`,`item3`.`item_description` AS `demand_item_description`,`fmd`.`created_by` AS `created_by`,`fmd`.`creation_date` AS `creation_date`,`fmd`.`last_update_by` AS `last_update_by`,`fmd`.`last_update_date` AS `last_update_date` from ((((((`fp_minmax_demand` `fmd` left join `fp_minmax_header` `mmh` on((`mmh`.`fp_minmax_header_id` = `fmd`.`plan_id`))) left join `fp_forecast_header` `fh` on((`fh`.`fp_forecast_header_id` = `fmd`.`source`))) left join `item` on((`item`.`item_id_m` = `fmd`.`item_id_m`))) left join `item` `item2` on((`item2`.`item_id_m` = `fmd`.`toplevel_demand_item_id_m`))) left join `item` `item3` on((`item3`.`item_id_m` = `fmd`.`demand_item_id_m`))) left join `org` on((`org`.`org_id` = `mmh`.`org_id`))) group by `fmd`.`item_id_m`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fp_minmax_suggestion_v` AS select `mmh`.`plan_name` AS `plan_name`,`mmh`.`org_id` AS `org_id`,`mmh`.`planning_horizon_days` AS `planning_horizon_days`,`org`.`org` AS `org`,`fmd`.`item_id_m` AS `item_id_m`,`item`.`item_number` AS `item_number`,sum(`fmd`.`quantity`) AS `total_demand`,(sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`) AS `avg_daily_demand`,`item`.`saftey_stock_quantity` AS `saftey_stock_quantity`,((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) AS `lead_time`,`item`.`saftey_stock_days` AS `saftey_stock_days`,(((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0)) AS `minimum_quantity`,`item`.`fix_days_supply` AS `fix_days_supply`,if(((`item`.`fix_days_supply` * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) > (((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0))),(`item`.`fix_days_supply` * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)),((((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * 1.5) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0))) AS `maximum_quantity`,ifnull(`item`.`fix_days_supply`,30) AS `multibin_fix_days_supply`,(ceiling((ifnull(((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`),0) / ifnull(`item`.`fix_days_supply`,30))) + 1) AS `minmax_multibin_number`,((((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0)) / ceiling((ifnull(((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`),0) / ifnull(`item`.`fix_days_supply`,30)))) AS `minmax_multibin_size`,((((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0)) + 1) AS `multibin_minmax_quantity`,`fh`.`forecast` AS `forecast`,`fh`.`description` AS `forecast_description`,`fmd`.`fp_minmax_demand_id` AS `fp_minmax_demand_id`,`fmd`.`plan_id` AS `plan_id`,`fmd`.`demand_item_id_m` AS `demand_item_id_m`,`fmd`.`toplevel_demand_item_id_m` AS `toplevel_demand_item_id_m`,`fmd`.`demand_type` AS `demand_type`,`fmd`.`source` AS `source`,`item`.`item_description` AS `item_description`,`item2`.`item_number` AS `top_level_item_number`,`item2`.`item_description` AS `top_level_item_description`,`item3`.`item_number` AS `demand_item_number`,`item3`.`item_description` AS `demand_item_description`,`fmd`.`created_by` AS `created_by`,`fmd`.`creation_date` AS `creation_date`,`fmd`.`last_update_by` AS `last_update_by`,`fmd`.`last_update_date` AS `last_update_date` from ((((((`fp_minmax_demand` `fmd` left join `fp_minmax_header` `mmh` on((`mmh`.`fp_minmax_header_id` = `fmd`.`plan_id`))) left join `fp_forecast_header` `fh` on((`fh`.`fp_forecast_header_id` = `fmd`.`source`))) left join `item` on((`item`.`item_id_m` = `fmd`.`item_id_m`))) left join `item` `item2` on((`item2`.`item_id_m` = `fmd`.`toplevel_demand_item_id_m`))) left join `item` `item3` on((`item3`.`item_id_m` = `fmd`.`demand_item_id_m`))) left join `org` on((`org`.`org_id` = `mmh`.`org_id`))) group by `fmd`.`item_id_m`;
 
 -- --------------------------------------------------------
 
@@ -16530,7 +17495,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_minmax_suggestion_v` A
 --
 DROP TABLE IF EXISTS `fp_mrp_demand_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_mrp_demand_v` AS select `fmd`.`fp_mrp_demand_id` AS `fp_mrp_demand_id`,`fmd`.`fp_mrp_header_id` AS `fp_mrp_header_id`,`fmh`.`mrp_name` AS `mrp_name`,`fmd`.`org_id` AS `org_id`,`fmd`.`item_id_m` AS `item_id_m`,`fmd`.`demand_date` AS `demand_date`,`fmd`.`quantity` AS `quantity`,`fmd`.`demand_item_id_m` AS `demand_item_id_m`,`fmd`.`toplevel_demand_item_id_m` AS `toplevel_demand_item_id_m`,`fmd`.`source_type` AS `source_type`,`fmd`.`primary_source_type` AS `primary_source_type`,`fmd`.`source_header_id` AS `source_header_id`,`fmd`.`source_line_id` AS `source_line_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`planner` AS `planner`,`item`.`product_line` AS `product_line`,`cic`.`standard_cost` AS `standard_cost`,`cic`.`sales_price` AS `sales_price`,`cic`.`purchase_price` AS `purchase_price` from (((`fp_mrp_demand` `fmd` left join `item` on(((`item`.`item_id_m` = `fmd`.`item_id_m`) and (`item`.`org_id` = `fmd`.`org_id`)))) left join `cst_item_cost_v` `cic` on(((`cic`.`item_id_m` = `fmd`.`item_id_m`) and (`cic`.`org_id` = `cic`.`org_id`) and (`cic`.`bom_cost_type` = 'FROZEN')))) join `fp_mrp_header` `fmh`) where (`fmh`.`fp_mrp_header_id` = `fmd`.`fp_mrp_header_id`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fp_mrp_demand_v` AS select `fmd`.`fp_mrp_demand_id` AS `fp_mrp_demand_id`,`fmd`.`fp_mrp_header_id` AS `fp_mrp_header_id`,`fmh`.`mrp_name` AS `mrp_name`,`fmd`.`org_id` AS `org_id`,`fmd`.`item_id_m` AS `item_id_m`,`fmd`.`demand_date` AS `demand_date`,`fmd`.`quantity` AS `quantity`,`fmd`.`demand_item_id_m` AS `demand_item_id_m`,`fmd`.`toplevel_demand_item_id_m` AS `toplevel_demand_item_id_m`,`fmd`.`source_type` AS `source_type`,`fmd`.`primary_source_type` AS `primary_source_type`,`fmd`.`source_header_id` AS `source_header_id`,`fmd`.`source_line_id` AS `source_line_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`planner` AS `planner`,`item`.`product_line` AS `product_line`,`cic`.`standard_cost` AS `standard_cost`,`cic`.`sales_price` AS `sales_price`,`cic`.`purchase_price` AS `purchase_price` from (((`fp_mrp_demand` `fmd` left join `item` on(((`item`.`item_id_m` = `fmd`.`item_id_m`) and (`item`.`org_id` = `fmd`.`org_id`)))) left join `cst_item_cost_v` `cic` on(((`cic`.`item_id_m` = `fmd`.`item_id_m`) and (`cic`.`org_id` = `cic`.`org_id`) and (`cic`.`bom_cost_type` = 'FROZEN')))) join `fp_mrp_header` `fmh`) where (`fmh`.`fp_mrp_header_id` = `fmd`.`fp_mrp_header_id`);
 
 -- --------------------------------------------------------
 
@@ -16539,7 +17504,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_mrp_demand_v` AS selec
 --
 DROP TABLE IF EXISTS `fp_mrp_existing_supply_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_mrp_existing_supply_v` AS select `item`.`item_id_m` AS `item_id_m`,'PO' AS `document_type`,(`pd`.`quantity` - `pd`.`received_quantity`) AS `quantity`,ifnull(`pd`.`promise_date`,`pd`.`need_by_date`) AS `supply_date`,`pd`.`po_detail_id` AS `document_id` from (((`item` join `po_line` `pl`) join `po_detail` `pd`) join `po_header` `ph`) where ((`pl`.`item_id_m` = `item`.`item_id_m`) and (`pd`.`po_line_id` = `pl`.`po_line_id`) and (`pd`.`po_header_id` = `ph`.`po_header_id`)) union select `item`.`item_id_m` AS `item_id_m`,'Requisition' AS `document_type`,`prd`.`quantity` AS `quantity`,ifnull(`prd`.`promise_date`,`prd`.`need_by_date`) AS `supply_date`,`prd`.`po_requisition_detail_id` AS `document_id` from (((`item` join `po_requisition_line` `prl`) join `po_requisition_detail` `prd`) join `po_requisition_header` `prh`) where ((`prl`.`item_id_m` = `item`.`item_id_m`) and (`prd`.`po_requisition_line_id` = `prl`.`po_requisition_line_id`) and (`prd`.`po_requisition_header_id` = `prh`.`po_requisition_header_id`) and isnull(`prd`.`order_number`)) union select `item`.`item_id_m` AS `item_id_m`,'Onhand' AS `document_type`,sum(`oh`.`onhand`) AS `quantity`,curdate() AS `supply_date`,`oh`.`onhand_id` AS `document_id` from (`onhand` `oh` join `item`) where (`oh`.`item_id_m` = `item`.`item_id_m`) group by `oh`.`item_id_m` union select `item`.`item_id_m` AS `item_id_m`,'WO' AS `document_type`,((`wwh`.`nettable_quantity` - ifnull(`wwh`.`completed_quantity`,0)) - ifnull(`wwh`.`scrapped_quantity`,0)) AS `quantity`,`wwh`.`completion_date` AS `supply_date`,`wwh`.`wip_wo_header_id` AS `document_id` from (`wip_wo_header` `wwh` join `item`) where (`wwh`.`item_id_m` = `item`.`item_id_m`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fp_mrp_existing_supply_v` AS select `item`.`item_id_m` AS `item_id_m`,'PO' AS `document_type`,(`pd`.`quantity` - `pd`.`received_quantity`) AS `quantity`,ifnull(`pd`.`promise_date`,`pd`.`need_by_date`) AS `supply_date`,`pd`.`po_detail_id` AS `document_id` from (((`item` join `po_line` `pl`) join `po_detail` `pd`) join `po_header` `ph`) where ((`pl`.`item_id_m` = `item`.`item_id_m`) and (`pd`.`po_line_id` = `pl`.`po_line_id`) and (`pd`.`po_header_id` = `ph`.`po_header_id`)) union select `item`.`item_id_m` AS `item_id_m`,'Requisition' AS `document_type`,`prd`.`quantity` AS `quantity`,ifnull(`prd`.`promise_date`,`prd`.`need_by_date`) AS `supply_date`,`prd`.`po_requisition_detail_id` AS `document_id` from (((`item` join `po_requisition_line` `prl`) join `po_requisition_detail` `prd`) join `po_requisition_header` `prh`) where ((`prl`.`item_id_m` = `item`.`item_id_m`) and (`prd`.`po_requisition_line_id` = `prl`.`po_requisition_line_id`) and (`prd`.`po_requisition_header_id` = `prh`.`po_requisition_header_id`) and isnull(`prd`.`order_number`)) union select `item`.`item_id_m` AS `item_id_m`,'Onhand' AS `document_type`,sum(`oh`.`onhand`) AS `quantity`,curdate() AS `supply_date`,`oh`.`onhand_id` AS `document_id` from (`onhand` `oh` join `item`) where (`oh`.`item_id_m` = `item`.`item_id_m`) group by `oh`.`item_id_m` union select `item`.`item_id_m` AS `item_id_m`,'WO' AS `document_type`,((`wwh`.`nettable_quantity` - ifnull(`wwh`.`completed_quantity`,0)) - ifnull(`wwh`.`scrapped_quantity`,0)) AS `quantity`,`wwh`.`completion_date` AS `supply_date`,`wwh`.`wip_wo_header_id` AS `document_id` from (`wip_wo_header` `wwh` join `item`) where (`wwh`.`item_id_m` = `item`.`item_id_m`);
 
 -- --------------------------------------------------------
 
@@ -16548,7 +17513,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_mrp_existing_supply_v`
 --
 DROP TABLE IF EXISTS `fp_mrp_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_mrp_v` AS select `fmh`.`mrp_name` AS `mrp_name`,`fmh`.`org_id` AS `org_id`,`org`.`org` AS `org`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item2`.`item_number` AS `demand_item_number`,`item2`.`item_description` AS `demand_item_description`,`item3`.`item_number` AS `toplevel_demand_item_number`,`item3`.`item_description` AS `toplevel_demand_item_description`,`item`.`sourcing_rule_id` AS `sourcing_rule_id`,`fmd`.`fp_mrp_planned_order_id` AS `fp_mrp_planned_order_id`,`fmd`.`fp_mrp_header_id` AS `fp_mrp_header_id`,`fmd`.`order_type` AS `order_type`,`fmd`.`order_action` AS `order_action`,`fmd`.`item_id_m` AS `item_id_m`,`fmd`.`quantity` AS `quantity`,`fmd`.`need_by_date` AS `need_by_date`,`fmd`.`supplier_id` AS `supplier_id`,`fmd`.`supplier_site_id` AS `supplier_site_id`,`fmd`.`demand_item_id_m` AS `demand_item_id_m`,`fmd`.`toplevel_demand_item_id_m` AS `toplevel_demand_item_id_m`,`fmd`.`source_type` AS `source_type`,`fmd`.`primary_source_type` AS `primary_source_type`,`fmd`.`source_header_id` AS `source_header_id`,`fmd`.`source_line_id` AS `source_line_id`,`ssh`.`so_number` AS `so_number`,`ffh`.`forecast` AS `forecast`,`soline`.`line_number` AS `sales_order_line` from ((((((((`fp_mrp_planned_order` `fmd` left join `fp_mrp_header` `fmh` on((`fmh`.`fp_mrp_header_id` = `fmd`.`fp_mrp_header_id`))) left join `item` on((`item`.`item_id_m` = `fmd`.`item_id_m`))) left join `item` `item2` on((`item2`.`item_id_m` = `fmd`.`demand_item_id_m`))) left join `item` `item3` on((`item3`.`item_id_m` = `fmd`.`toplevel_demand_item_id_m`))) left join `sd_so_header` `ssh` on(((`ssh`.`sd_so_header_id` = `fmd`.`source_header_id`) and (`fmd`.`primary_source_type` = 'Sales_Order')))) left join `fp_forecast_header` `ffh` on(((`ffh`.`fp_forecast_header_id` = `fmd`.`source_header_id`) and (`fmd`.`primary_source_type` = 'Forecast')))) left join `sd_so_line` `soline` on(((`soline`.`sd_so_line_id` = `fmd`.`source_line_id`) and (`fmd`.`primary_source_type` = 'Sales_Order')))) left join `org` on((`org`.`org_id` = `fmh`.`org_id`))) order by `item`.`item_number`,`fmd`.`need_by_date`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fp_mrp_v` AS select `fmh`.`mrp_name` AS `mrp_name`,`fmh`.`org_id` AS `org_id`,`org`.`org` AS `org`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item2`.`item_number` AS `demand_item_number`,`item2`.`item_description` AS `demand_item_description`,`item3`.`item_number` AS `toplevel_demand_item_number`,`item3`.`item_description` AS `toplevel_demand_item_description`,`item`.`sourcing_rule_id` AS `sourcing_rule_id`,`fmd`.`fp_mrp_planned_order_id` AS `fp_mrp_planned_order_id`,`fmd`.`fp_mrp_header_id` AS `fp_mrp_header_id`,`fmd`.`order_type` AS `order_type`,`fmd`.`order_action` AS `order_action`,`fmd`.`item_id_m` AS `item_id_m`,`fmd`.`quantity` AS `quantity`,`fmd`.`need_by_date` AS `need_by_date`,`fmd`.`supplier_id` AS `supplier_id`,`fmd`.`supplier_site_id` AS `supplier_site_id`,`fmd`.`demand_item_id_m` AS `demand_item_id_m`,`fmd`.`toplevel_demand_item_id_m` AS `toplevel_demand_item_id_m`,`fmd`.`source_type` AS `source_type`,`fmd`.`primary_source_type` AS `primary_source_type`,`fmd`.`source_header_id` AS `source_header_id`,`fmd`.`source_line_id` AS `source_line_id`,`ssh`.`so_number` AS `so_number`,`ffh`.`forecast` AS `forecast`,`soline`.`line_number` AS `sales_order_line` from ((((((((`fp_mrp_planned_order` `fmd` left join `fp_mrp_header` `fmh` on((`fmh`.`fp_mrp_header_id` = `fmd`.`fp_mrp_header_id`))) left join `item` on((`item`.`item_id_m` = `fmd`.`item_id_m`))) left join `item` `item2` on((`item2`.`item_id_m` = `fmd`.`demand_item_id_m`))) left join `item` `item3` on((`item3`.`item_id_m` = `fmd`.`toplevel_demand_item_id_m`))) left join `sd_so_header` `ssh` on(((`ssh`.`sd_so_header_id` = `fmd`.`source_header_id`) and (`fmd`.`primary_source_type` = 'Sales_Order')))) left join `fp_forecast_header` `ffh` on(((`ffh`.`fp_forecast_header_id` = `fmd`.`source_header_id`) and (`fmd`.`primary_source_type` = 'Forecast')))) left join `sd_so_line` `soline` on(((`soline`.`sd_so_line_id` = `fmd`.`source_line_id`) and (`fmd`.`primary_source_type` = 'Sales_Order')))) left join `org` on((`org`.`org_id` = `fmh`.`org_id`))) order by `item`.`item_number`,`fmd`.`need_by_date`;
 
 -- --------------------------------------------------------
 
@@ -16557,7 +17522,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_mrp_v` AS select `fmh`
 --
 DROP TABLE IF EXISTS `gl_balance_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `gl_balance_v` AS select `gp`.`period_name` AS `period_name`,`gp`.`gl_period_id` AS `gl_period_id`,`cc`.`combination` AS `combination`,`cc`.`description` AS `description`,`gb`.`gl_balance_id` AS `gl_balance_id`,`gb`.`ledger_id` AS `ledger_id`,`gb`.`coa_combination_id` AS `coa_combination_id`,`gb`.`period_id` AS `period_id`,`gb`.`balance_type` AS `balance_type`,`gb`.`period_net_dr` AS `period_net_dr`,`gb`.`period_net_cr` AS `period_net_cr`,`gb`.`begin_balance_dr` AS `begin_balance_dr`,`gb`.`begin_balance_cr` AS `begin_balance_cr`,`gb`.`last_update_by` AS `last_update_by`,`gb`.`last_update_date` AS `last_update_date`,`cc`.`field1` AS `field1`,`cc`.`field2` AS `field2`,`cc`.`field3` AS `field3`,`cc`.`field4` AS `field4`,`cc`.`field5` AS `field5`,`cc`.`field6` AS `field6`,`cc`.`field7` AS `field7`,`cc`.`field8` AS `field8` from ((`gl_balance` `gb` left join `gl_period` `gp` on((`gp`.`gl_period_id` = `gb`.`period_id`))) left join `coa_combination` `cc` on((`cc`.`coa_combination_id` = `gb`.`coa_combination_id`))) order by `gp`.`gl_period_id` desc;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `gl_balance_v` AS select `gp`.`period_name` AS `period_name`,`gp`.`gl_period_id` AS `gl_period_id`,`cc`.`combination` AS `combination`,`cc`.`description` AS `description`,`gb`.`gl_balance_id` AS `gl_balance_id`,`gb`.`ledger_id` AS `ledger_id`,`gb`.`coa_combination_id` AS `coa_combination_id`,`gb`.`period_id` AS `period_id`,`gb`.`balance_type` AS `balance_type`,`gb`.`period_net_dr` AS `period_net_dr`,`gb`.`period_net_cr` AS `period_net_cr`,`gb`.`begin_balance_dr` AS `begin_balance_dr`,`gb`.`begin_balance_cr` AS `begin_balance_cr`,`gb`.`last_update_by` AS `last_update_by`,`gb`.`last_update_date` AS `last_update_date`,`cc`.`field1` AS `field1`,`cc`.`field2` AS `field2`,`cc`.`field3` AS `field3`,`cc`.`field4` AS `field4`,`cc`.`field5` AS `field5`,`cc`.`field6` AS `field6`,`cc`.`field7` AS `field7`,`cc`.`field8` AS `field8` from ((`gl_balance` `gb` left join `gl_period` `gp` on((`gp`.`gl_period_id` = `gb`.`period_id`))) left join `coa_combination` `cc` on((`cc`.`coa_combination_id` = `gb`.`coa_combination_id`))) order by `gp`.`gl_period_id` desc;
 
 -- --------------------------------------------------------
 
@@ -16566,7 +17531,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `gl_balance_v` AS select `
 --
 DROP TABLE IF EXISTS `gl_journal_line_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `gl_journal_line_v` AS select `cc`.`combination` AS `combination`,`gjl`.`code_combination_id` AS `code_combination_id`,`gp`.`period_name` AS `period_name`,`gjl`.`total_cr` AS `total_cr`,`gjl`.`total_dr` AS `total_dr`,`gjl`.`total_ac_dr` AS `total_ac_dr`,`gjl`.`total_ac_cr` AS `total_ac_cr`,`cc`.`coa_id` AS `coa_id`,`gjh`.`ledger_id` AS `ledger_id`,`cc`.`description` AS `combination_description`,`gjl`.`gl_journal_line_id` AS `gl_journal_line_id`,`gjl`.`status` AS `status`,`gjl`.`gl_journal_header_id` AS `gl_journal_header_id`,`gjl`.`line_num` AS `line_num`,`gjl`.`line_type` AS `line_type`,`gjl`.`description` AS `line_description`,`gjl`.`reference_type` AS `reference_type`,`gjl`.`reference_key_name` AS `reference_key_name`,`gjl`.`reference_key_value` AS `reference_key_value`,`cc`.`coa_structure_id` AS `coa_structure_id`,`cc`.`field1` AS `field1`,`cc`.`field2` AS `field2`,`cc`.`field3` AS `field3`,`cc`.`field4` AS `field4`,`cc`.`field5` AS `field5`,`cc`.`field6` AS `field6`,`cc`.`field7` AS `field7`,`cc`.`field8` AS `field8`,`gjh`.`balance_type` AS `balance_type`,`gjh`.`post_date` AS `post_date`,`gp`.`gl_period_id` AS `gl_period_id`,`gjl`.`created_by` AS `created_by`,`gjl`.`creation_date` AS `creation_date`,`gjl`.`last_update_by` AS `last_update_by`,`gjl`.`last_update_date` AS `last_update_date` from (((`gl_journal_line` `gjl` left join `gl_journal_header` `gjh` on((`gjl`.`gl_journal_header_id` = `gjh`.`gl_journal_header_id`))) left join `gl_period` `gp` on((`gp`.`gl_period_id` = `gjh`.`period_id`))) left join `coa_combination` `cc` on((`gjl`.`code_combination_id` = `cc`.`coa_combination_id`))) order by `gp`.`gl_period_id` desc,`cc`.`combination` desc;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `gl_journal_line_v` AS select `cc`.`combination` AS `combination`,`gjl`.`code_combination_id` AS `code_combination_id`,`gp`.`period_name` AS `period_name`,`gjl`.`total_cr` AS `total_cr`,`gjl`.`total_dr` AS `total_dr`,`gjl`.`total_ac_dr` AS `total_ac_dr`,`gjl`.`total_ac_cr` AS `total_ac_cr`,`cc`.`coa_id` AS `coa_id`,`gjh`.`ledger_id` AS `ledger_id`,`cc`.`description` AS `combination_description`,`gjl`.`gl_journal_line_id` AS `gl_journal_line_id`,`gjl`.`status` AS `status`,`gjl`.`gl_journal_header_id` AS `gl_journal_header_id`,`gjl`.`line_num` AS `line_num`,`gjl`.`line_type` AS `line_type`,`gjl`.`description` AS `line_description`,`gjl`.`reference_type` AS `reference_type`,`gjl`.`reference_key_name` AS `reference_key_name`,`gjl`.`reference_key_value` AS `reference_key_value`,`cc`.`coa_structure_id` AS `coa_structure_id`,`cc`.`field1` AS `field1`,`cc`.`field2` AS `field2`,`cc`.`field3` AS `field3`,`cc`.`field4` AS `field4`,`cc`.`field5` AS `field5`,`cc`.`field6` AS `field6`,`cc`.`field7` AS `field7`,`cc`.`field8` AS `field8`,`gjh`.`balance_type` AS `balance_type`,`gjh`.`post_date` AS `post_date`,`gp`.`gl_period_id` AS `gl_period_id`,`gjl`.`created_by` AS `created_by`,`gjl`.`creation_date` AS `creation_date`,`gjl`.`last_update_by` AS `last_update_by`,`gjl`.`last_update_date` AS `last_update_date` from (((`gl_journal_line` `gjl` left join `gl_journal_header` `gjh` on((`gjl`.`gl_journal_header_id` = `gjh`.`gl_journal_header_id`))) left join `gl_period` `gp` on((`gp`.`gl_period_id` = `gjh`.`period_id`))) left join `coa_combination` `cc` on((`gjl`.`code_combination_id` = `cc`.`coa_combination_id`))) order by `gp`.`gl_period_id` desc,`cc`.`combination` desc;
 
 -- --------------------------------------------------------
 
@@ -16575,7 +17540,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `gl_journal_line_v` AS sel
 --
 DROP TABLE IF EXISTS `gl_unposted_balance_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `gl_unposted_balance_v` AS select `cc`.`combination` AS `combination`,`gjl`.`code_combination_id` AS `code_combination_id`,`gp`.`period_name` AS `period_name`,`cc`.`coa_id` AS `coa_id`,sum(`gjl`.`total_cr`) AS `total_cr`,sum(`gjl`.`total_dr`) AS `total_dr`,sum(`gjl`.`total_ac_dr`) AS `total_ac_dr`,sum(`gjl`.`total_ac_cr`) AS `total_ac_cr`,`gjh`.`ledger_id` AS `ledger_id`,`cc`.`description` AS `description`,`gjl`.`gl_journal_line_id` AS `gl_journal_line_id`,`gjl`.`gl_journal_header_id` AS `gl_journal_header_id`,`gjl`.`line_num` AS `line_num`,`gjl`.`line_type` AS `line_type`,`gjl`.`description` AS `line_description`,`gjl`.`reference_type` AS `reference_type`,`gjl`.`reference_key_name` AS `reference_key_name`,`gjl`.`reference_key_value` AS `reference_key_value`,`cc`.`coa_structure_id` AS `coa_structure_id`,`cc`.`field1` AS `field1`,`cc`.`field2` AS `field2`,`cc`.`field3` AS `field3`,`cc`.`field4` AS `field4`,`cc`.`field5` AS `field5`,`cc`.`field6` AS `field6`,`cc`.`field7` AS `field7`,`cc`.`field8` AS `field8`,`gjh`.`balance_type` AS `balance_type`,`gjh`.`post_date` AS `post_date`,`gp`.`gl_period_id` AS `gl_period_id` from (((`gl_journal_line` `gjl` left join `gl_journal_header` `gjh` on((`gjl`.`gl_journal_header_id` = `gjh`.`gl_journal_header_id`))) left join `gl_period` `gp` on((`gp`.`gl_period_id` = `gjh`.`period_id`))) left join `coa_combination` `cc` on((`gjl`.`code_combination_id` = `cc`.`coa_combination_id`))) where (`gjl`.`status` = 'U') group by `gjl`.`code_combination_id`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `gl_unposted_balance_v` AS select `cc`.`combination` AS `combination`,`gjl`.`code_combination_id` AS `code_combination_id`,`gp`.`period_name` AS `period_name`,`cc`.`coa_id` AS `coa_id`,sum(`gjl`.`total_cr`) AS `total_cr`,sum(`gjl`.`total_dr`) AS `total_dr`,sum(`gjl`.`total_ac_dr`) AS `total_ac_dr`,sum(`gjl`.`total_ac_cr`) AS `total_ac_cr`,`gjh`.`ledger_id` AS `ledger_id`,`cc`.`description` AS `description`,`gjl`.`gl_journal_line_id` AS `gl_journal_line_id`,`gjl`.`gl_journal_header_id` AS `gl_journal_header_id`,`gjl`.`line_num` AS `line_num`,`gjl`.`line_type` AS `line_type`,`gjl`.`description` AS `line_description`,`gjl`.`reference_type` AS `reference_type`,`gjl`.`reference_key_name` AS `reference_key_name`,`gjl`.`reference_key_value` AS `reference_key_value`,`cc`.`coa_structure_id` AS `coa_structure_id`,`cc`.`field1` AS `field1`,`cc`.`field2` AS `field2`,`cc`.`field3` AS `field3`,`cc`.`field4` AS `field4`,`cc`.`field5` AS `field5`,`cc`.`field6` AS `field6`,`cc`.`field7` AS `field7`,`cc`.`field8` AS `field8`,`gjh`.`balance_type` AS `balance_type`,`gjh`.`post_date` AS `post_date`,`gp`.`gl_period_id` AS `gl_period_id` from (((`gl_journal_line` `gjl` left join `gl_journal_header` `gjh` on((`gjl`.`gl_journal_header_id` = `gjh`.`gl_journal_header_id`))) left join `gl_period` `gp` on((`gp`.`gl_period_id` = `gjh`.`period_id`))) left join `coa_combination` `cc` on((`gjl`.`code_combination_id` = `cc`.`coa_combination_id`))) where (`gjl`.`status` = 'U') group by `gjl`.`code_combination_id`;
 
 -- --------------------------------------------------------
 
@@ -16584,7 +17549,16 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `gl_unposted_balance_v` AS
 --
 DROP TABLE IF EXISTS `hr_employee_position_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `hr_employee_position_v` AS select `user`.`user_id` AS `user_id`,`user`.`username` AS `username`,`user`.`first_name` AS `first_name`,`user`.`last_name` AS `last_name`,`user`.`email` AS `email`,`user`.`hr_employee_id` AS `hr_employee_id`,`user`.`status` AS `status`,`he`.`identification_id` AS `identification_id`,`he`.`start_date` AS `emp_start_date`,`he`.`citizen_number` AS `citizen_number`,`he`.`first_name` AS `emp_first_name`,`he`.`last_name` AS `emp_last_name`,`he`.`phone` AS `phone`,`he`.`email` AS `emp_email`,`he`.`gender` AS `gender`,`he`.`person_type` AS `person_type`,`he`.`org_id` AS `org_id`,`he`.`job_id` AS `job_id`,`he`.`position_id` AS `position_id`,`he`.`expense_ac_id` AS `expense_ac_id`,`he`.`supervisor_employee_id` AS `supervisor_employee_id`,`hp`.`position_name` AS `position_name`,`he`.`org_id` AS `emp_org_id`,`hala`.`hr_approval_limit_header_id` AS `hr_approval_limit_header_id`,`hala`.`document_type` AS `document_type`,`hala`.`start_date` AS `limit_start_date`,`hall`.`limit_type` AS `limit_type`,`hall`.`limit_range_low` AS `limit_range_low`,`hall`.`limit_range_high` AS `limit_range_high`,`hall`.`amount_limit` AS `amount_limit`,`hall`.`limit_object` AS `limit_object`,`halh`.`bu_org_id` AS `bu_org_id`,`org_v`.`currency_code` AS `currency_code` from (((((((`user` left join `hr_employee` `he` on((`he`.`hr_employee_id` = `user`.`hr_employee_id`))) left join `hr_position` `hp` on((`hp`.`hr_position_id` = `he`.`position_id`))) left join `hr_approval_limit_assignment` `hala` on((`he`.`position_id` = `hala`.`position_id`))) left join `hr_approval_limit_line` `hall` on((`hala`.`hr_approval_limit_header_id` = `hall`.`hr_approval_limit_header_id`))) left join `hr_approval_object` `hao` on((`hao`.`hr_approval_object_id` = `hall`.`limit_object`))) left join `hr_approval_limit_header` `halh` on((`hall`.`hr_approval_limit_header_id` = `halh`.`hr_approval_limit_header_id`))) left join `org_v` on((`org_v`.`org_id` = `halh`.`bu_org_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `hr_employee_position_v` AS select `user`.`user_id` AS `user_id`,`user`.`username` AS `username`,`user`.`first_name` AS `first_name`,`user`.`last_name` AS `last_name`,`user`.`email` AS `email`,`user`.`hr_employee_id` AS `hr_employee_id`,`user`.`status` AS `status`,`he`.`identification_id` AS `identification_id`,`he`.`start_date` AS `emp_start_date`,`he`.`citizen_number` AS `citizen_number`,`he`.`first_name` AS `emp_first_name`,`he`.`last_name` AS `emp_last_name`,`he`.`phone` AS `phone`,`he`.`email` AS `emp_email`,`he`.`gender` AS `gender`,`he`.`person_type` AS `person_type`,`he`.`org_id` AS `org_id`,`he`.`job_id` AS `job_id`,`he`.`position_id` AS `position_id`,`he`.`expense_ac_id` AS `expense_ac_id`,`he`.`supervisor_employee_id` AS `supervisor_employee_id`,`hp`.`position_name` AS `position_name`,`he`.`org_id` AS `emp_org_id`,`hala`.`hr_approval_limit_header_id` AS `hr_approval_limit_header_id`,`hala`.`document_type` AS `document_type`,`hala`.`start_date` AS `limit_start_date`,`hall`.`limit_type` AS `limit_type`,`hall`.`limit_range_low` AS `limit_range_low`,`hall`.`limit_range_high` AS `limit_range_high`,`hall`.`amount_limit` AS `amount_limit`,`hall`.`limit_object` AS `limit_object`,`halh`.`bu_org_id` AS `bu_org_id`,`org_v`.`currency_code` AS `currency_code` from (((((((`user` left join `hr_employee` `he` on((`he`.`hr_employee_id` = `user`.`hr_employee_id`))) left join `hr_position` `hp` on((`hp`.`hr_position_id` = `he`.`position_id`))) left join `hr_approval_limit_assignment` `hala` on((`he`.`position_id` = `hala`.`position_id`))) left join `hr_approval_limit_line` `hall` on((`hala`.`hr_approval_limit_header_id` = `hall`.`hr_approval_limit_header_id`))) left join `hr_approval_object` `hao` on((`hao`.`hr_approval_object_id` = `hall`.`limit_object`))) left join `hr_approval_limit_header` `halh` on((`hall`.`hr_approval_limit_header_id` = `halh`.`hr_approval_limit_header_id`))) left join `org_v` on((`org_v`.`org_id` = `halh`.`bu_org_id`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `hr_employee_v`
+--
+DROP TABLE IF EXISTS `hr_employee_v`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `hr_employee_v` AS select `user`.`user_id` AS `user_id`,`user`.`username` AS `username`,`user`.`first_name` AS `first_name`,`user`.`last_name` AS `last_name`,`user`.`email` AS `email`,`user`.`hr_employee_id` AS `hr_employee_id`,`user`.`status` AS `status`,`he`.`identification_id` AS `identification_id`,`he`.`start_date` AS `emp_start_date`,`he`.`citizen_number` AS `citizen_number`,`he`.`first_name` AS `emp_first_name`,`he`.`last_name` AS `emp_last_name`,`he`.`phone` AS `phone`,concat(`he`.`last_name`,', ',`he`.`first_name`) AS `employee_name`,`he`.`email` AS `emp_email`,`he`.`gender` AS `gender`,`he`.`person_type` AS `person_type`,`he`.`org_id` AS `org_id`,`he`.`job_id` AS `job_id`,`he`.`position_id` AS `position_id`,`he`.`expense_ac_id` AS `expense_ac_id`,`he`.`supervisor_employee_id` AS `supervisor_employee_id`,`org_v`.`currency_code` AS `currency_code`,`org_v`.`org` AS `org` from ((`hr_employee` `he` left join `user` on((`he`.`hr_employee_id` = `user`.`hr_employee_id`))) left join `org_v` on((`org_v`.`org_id` = `he`.`org_id`)));
 
 -- --------------------------------------------------------
 
@@ -16593,7 +17567,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `hr_employee_position_v` A
 --
 DROP TABLE IF EXISTS `inv_count_entries_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `inv_count_entries_v` AS select `ice`.`inv_count_entries_id` AS `inv_count_entries_id`,`ice`.`inv_count_schedule_id` AS `inv_count_schedule_id`,`ice`.`item_id_m` AS `item_id_m`,`ice`.`uom_id` AS `uom_id`,`ice`.`org_id` AS `org_id`,`ice`.`subinventory_id` AS `subinventory_id`,`ice`.`locator_id` AS `locator_id`,`ice`.`lot_number` AS `lot_number`,`ice`.`serial_number` AS `serial_number`,`ice`.`schedule_date` AS `schedule_date`,`ice`.`adjustment_ac_id` AS `adjustment_ac_id`,`ice`.`status` AS `status`,`ice`.`reason` AS `reason`,`ice`.`reference` AS `reference`,`ice`.`counted_by` AS `counted_by`,`ice`.`count_date` AS `count_date`,`ice`.`count_qty` AS `count_qty`,`ice`.`system_qty` AS `system_qty`,`ice`.`adjusted_qty` AS `adjusted_qty`,`ice`.`description` AS `description`,`ice`.`created_by` AS `created_by`,`ice`.`creation_date` AS `creation_date`,`ice`.`last_update_by` AS `last_update_by`,`ice`.`last_update_date` AS `last_update_date`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`sin`.`subinventory` AS `subinventory`,`loc`.`locator` AS `locator`,`uom`.`uom_name` AS `uom_name`,`org`.`org` AS `org` from (((((`inv_count_entries` `ice` left join `item` on(((`item`.`item_id_m` = `ice`.`item_id_m`) and (`item`.`org_id` = `ice`.`org_id`)))) left join `subinventory` `sin` on((`sin`.`subinventory_id` = `ice`.`subinventory_id`))) left join `locator` `loc` on((`loc`.`locator_id` = `ice`.`locator_id`))) left join `uom` on((`uom`.`uom_id` = `ice`.`uom_id`))) left join `org` on((`org`.`org_id` = `ice`.`org_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `inv_count_entries_v` AS select `ice`.`inv_count_entries_id` AS `inv_count_entries_id`,`ice`.`inv_count_schedule_id` AS `inv_count_schedule_id`,`ice`.`item_id_m` AS `item_id_m`,`ice`.`uom_id` AS `uom_id`,`ice`.`org_id` AS `org_id`,`ice`.`subinventory_id` AS `subinventory_id`,`ice`.`locator_id` AS `locator_id`,`ice`.`lot_number` AS `lot_number`,`ice`.`serial_number` AS `serial_number`,`ice`.`schedule_date` AS `schedule_date`,`ice`.`adjustment_ac_id` AS `adjustment_ac_id`,`ice`.`status` AS `status`,`ice`.`reason` AS `reason`,`ice`.`reference` AS `reference`,`ice`.`counted_by` AS `counted_by`,`ice`.`count_date` AS `count_date`,`ice`.`count_qty` AS `count_qty`,`ice`.`system_qty` AS `system_qty`,`ice`.`adjusted_qty` AS `adjusted_qty`,`ice`.`description` AS `description`,`ice`.`created_by` AS `created_by`,`ice`.`creation_date` AS `creation_date`,`ice`.`last_update_by` AS `last_update_by`,`ice`.`last_update_date` AS `last_update_date`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`sin`.`subinventory` AS `subinventory`,`loc`.`locator` AS `locator`,`uom`.`uom_name` AS `uom_name`,`org`.`org` AS `org` from (((((`inv_count_entries` `ice` left join `item` on(((`item`.`item_id_m` = `ice`.`item_id_m`) and (`item`.`org_id` = `ice`.`org_id`)))) left join `subinventory` `sin` on((`sin`.`subinventory_id` = `ice`.`subinventory_id`))) left join `locator` `loc` on((`loc`.`locator_id` = `ice`.`locator_id`))) left join `uom` on((`uom`.`uom_id` = `ice`.`uom_id`))) left join `org` on((`org`.`org_id` = `ice`.`org_id`)));
 
 -- --------------------------------------------------------
 
@@ -16602,7 +17576,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `inv_count_entries_v` AS s
 --
 DROP TABLE IF EXISTS `inv_lot_transaction_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `inv_lot_transaction_v` AS select `ist`.`inv_lot_transaction_id` AS `inv_lot_transaction_id`,`ist`.`inv_transaction_id` AS `inv_transaction_id`,`ist`.`inv_lot_number_id` AS `inv_lot_number_id`,`isn`.`lot_number` AS `lot_number`,`it`.`transaction_type_id` AS `transaction_type_id`,`tt`.`transaction_type` AS `transaction_type`,`it`.`org_id` AS `org_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`it`.`item_id_m` AS `item_id_m`,`subf`.`subinventory` AS `from_subinventory`,`subt`.`subinventory` AS `to_subinventory`,`locf`.`locator` AS `from_locator`,`loct`.`locator` AS `to_locator`,`it`.`uom_id` AS `uom_id`,`it`.`lot_number_id` AS `lot_number_id`,`it`.`document_type` AS `document_type`,`it`.`document_number` AS `document_number`,`it`.`document_id` AS `document_id`,`it`.`po_header_id` AS `po_header_id`,`it`.`po_line_id` AS `po_line_id`,`it`.`po_detail_id` AS `po_detail_id`,`it`.`sd_so_line_id` AS `sd_so_line_id`,`it`.`reason` AS `reason`,`it`.`reference_key_name` AS `reference_key_name`,`it`.`reference_key_value` AS `reference_key_value`,`it`.`description` AS `description`,`it`.`from_org_id` AS `from_org_id`,`it`.`from_subinventory_id` AS `from_subinventory_id`,`it`.`to_org_id` AS `to_org_id`,`it`.`to_subinventory_id` AS `to_subinventory_id`,`it`.`from_locator_id` AS `from_locator_id`,`it`.`to_locator_id` AS `to_locator_id` from ((((((((`inv_lot_transaction` `ist` left join `inv_lot_number` `isn` on((`isn`.`inv_lot_number_id` = `ist`.`inv_lot_number_id`))) left join `inv_transaction` `it` on((`it`.`inv_transaction_id` = `ist`.`inv_transaction_id`))) left join `item` on(((`item`.`item_id_m` = `it`.`item_id_m`) and (`item`.`org_id` = `it`.`org_id`)))) left join `transaction_type` `tt` on((`tt`.`transaction_type_id` = `it`.`transaction_type_id`))) left join `subinventory` `subf` on((`subf`.`subinventory_id` = `it`.`from_subinventory_id`))) left join `subinventory` `subt` on((`subt`.`subinventory_id` = `it`.`to_subinventory_id`))) left join `locator` `locf` on((`locf`.`locator_id` = `it`.`from_locator_id`))) left join `locator` `loct` on((`loct`.`locator_id` = `it`.`to_locator_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `inv_lot_transaction_v` AS select `ist`.`inv_lot_transaction_id` AS `inv_lot_transaction_id`,`ist`.`inv_transaction_id` AS `inv_transaction_id`,`ist`.`inv_lot_number_id` AS `inv_lot_number_id`,`isn`.`lot_number` AS `lot_number`,`it`.`transaction_type_id` AS `transaction_type_id`,`tt`.`transaction_type` AS `transaction_type`,`it`.`org_id` AS `org_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`it`.`item_id_m` AS `item_id_m`,`subf`.`subinventory` AS `from_subinventory`,`subt`.`subinventory` AS `to_subinventory`,`locf`.`locator` AS `from_locator`,`loct`.`locator` AS `to_locator`,`it`.`uom_id` AS `uom_id`,`it`.`lot_number_id` AS `lot_number_id`,`it`.`document_type` AS `document_type`,`it`.`document_number` AS `document_number`,`it`.`document_id` AS `document_id`,`it`.`po_header_id` AS `po_header_id`,`it`.`po_line_id` AS `po_line_id`,`it`.`po_detail_id` AS `po_detail_id`,`it`.`sd_so_line_id` AS `sd_so_line_id`,`it`.`reason` AS `reason`,`it`.`reference_key_name` AS `reference_key_name`,`it`.`reference_key_value` AS `reference_key_value`,`it`.`description` AS `description`,`it`.`from_org_id` AS `from_org_id`,`it`.`from_subinventory_id` AS `from_subinventory_id`,`it`.`to_org_id` AS `to_org_id`,`it`.`to_subinventory_id` AS `to_subinventory_id`,`it`.`from_locator_id` AS `from_locator_id`,`it`.`to_locator_id` AS `to_locator_id` from ((((((((`inv_lot_transaction` `ist` left join `inv_lot_number` `isn` on((`isn`.`inv_lot_number_id` = `ist`.`inv_lot_number_id`))) left join `inv_transaction` `it` on((`it`.`inv_transaction_id` = `ist`.`inv_transaction_id`))) left join `item` on(((`item`.`item_id_m` = `it`.`item_id_m`) and (`item`.`org_id` = `it`.`org_id`)))) left join `transaction_type` `tt` on((`tt`.`transaction_type_id` = `it`.`transaction_type_id`))) left join `subinventory` `subf` on((`subf`.`subinventory_id` = `it`.`from_subinventory_id`))) left join `subinventory` `subt` on((`subt`.`subinventory_id` = `it`.`to_subinventory_id`))) left join `locator` `locf` on((`locf`.`locator_id` = `it`.`from_locator_id`))) left join `locator` `loct` on((`loct`.`locator_id` = `it`.`to_locator_id`)));
 
 -- --------------------------------------------------------
 
@@ -16611,7 +17585,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `inv_lot_transaction_v` AS
 --
 DROP TABLE IF EXISTS `inv_serial_transaction_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `inv_serial_transaction_v` AS select `ist`.`inv_serial_transaction_id` AS `inv_serial_transaction_id`,`ist`.`inv_transaction_id` AS `inv_transaction_id`,`ist`.`inv_serial_number_id` AS `inv_serial_number_id`,`isn`.`serial_number` AS `serial_number`,`it`.`transaction_type_id` AS `transaction_type_id`,`tt`.`transaction_type` AS `transaction_type`,`it`.`org_id` AS `org_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`it`.`item_id_m` AS `item_id_m`,`subf`.`subinventory` AS `from_subinventory`,`subt`.`subinventory` AS `to_subinventory`,`locf`.`locator` AS `from_locator`,`loct`.`locator` AS `to_locator`,`it`.`uom_id` AS `uom_id`,`it`.`lot_number_id` AS `lot_number_id`,`it`.`document_type` AS `document_type`,`it`.`document_number` AS `document_number`,`it`.`document_id` AS `document_id`,`it`.`po_header_id` AS `po_header_id`,`it`.`po_line_id` AS `po_line_id`,`it`.`po_detail_id` AS `po_detail_id`,`it`.`sd_so_line_id` AS `sd_so_line_id`,`it`.`reason` AS `reason`,`it`.`reference_key_name` AS `reference_key_name`,`it`.`reference_key_value` AS `reference_key_value`,`it`.`description` AS `description`,`it`.`from_org_id` AS `from_org_id`,`it`.`from_subinventory_id` AS `from_subinventory_id`,`it`.`to_org_id` AS `to_org_id`,`it`.`to_subinventory_id` AS `to_subinventory_id`,`it`.`from_locator_id` AS `from_locator_id`,`it`.`to_locator_id` AS `to_locator_id` from ((((((((`inv_serial_transaction` `ist` left join `inv_serial_number` `isn` on((`isn`.`inv_serial_number_id` = `ist`.`inv_serial_number_id`))) left join `inv_transaction` `it` on((`it`.`inv_transaction_id` = `ist`.`inv_transaction_id`))) left join `item` on(((`item`.`item_id_m` = `it`.`item_id_m`) and (`item`.`org_id` = `it`.`org_id`)))) left join `transaction_type` `tt` on((`tt`.`transaction_type_id` = `it`.`transaction_type_id`))) left join `subinventory` `subf` on((`subf`.`subinventory_id` = `it`.`from_subinventory_id`))) left join `subinventory` `subt` on((`subt`.`subinventory_id` = `it`.`to_subinventory_id`))) left join `locator` `locf` on((`locf`.`locator_id` = `it`.`from_locator_id`))) left join `locator` `loct` on((`loct`.`locator_id` = `it`.`to_locator_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `inv_serial_transaction_v` AS select `ist`.`inv_serial_transaction_id` AS `inv_serial_transaction_id`,`ist`.`inv_transaction_id` AS `inv_transaction_id`,`ist`.`inv_serial_number_id` AS `inv_serial_number_id`,`isn`.`serial_number` AS `serial_number`,`it`.`transaction_type_id` AS `transaction_type_id`,`tt`.`transaction_type` AS `transaction_type`,`it`.`org_id` AS `org_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`it`.`item_id_m` AS `item_id_m`,`subf`.`subinventory` AS `from_subinventory`,`subt`.`subinventory` AS `to_subinventory`,`locf`.`locator` AS `from_locator`,`loct`.`locator` AS `to_locator`,`it`.`uom_id` AS `uom_id`,`it`.`lot_number_id` AS `lot_number_id`,`it`.`document_type` AS `document_type`,`it`.`document_number` AS `document_number`,`it`.`document_id` AS `document_id`,`it`.`po_header_id` AS `po_header_id`,`it`.`po_line_id` AS `po_line_id`,`it`.`po_detail_id` AS `po_detail_id`,`it`.`sd_so_line_id` AS `sd_so_line_id`,`it`.`reason` AS `reason`,`it`.`reference_key_name` AS `reference_key_name`,`it`.`reference_key_value` AS `reference_key_value`,`it`.`description` AS `description`,`it`.`from_org_id` AS `from_org_id`,`it`.`from_subinventory_id` AS `from_subinventory_id`,`it`.`to_org_id` AS `to_org_id`,`it`.`to_subinventory_id` AS `to_subinventory_id`,`it`.`from_locator_id` AS `from_locator_id`,`it`.`to_locator_id` AS `to_locator_id` from ((((((((`inv_serial_transaction` `ist` left join `inv_serial_number` `isn` on((`isn`.`inv_serial_number_id` = `ist`.`inv_serial_number_id`))) left join `inv_transaction` `it` on((`it`.`inv_transaction_id` = `ist`.`inv_transaction_id`))) left join `item` on(((`item`.`item_id_m` = `it`.`item_id_m`) and (`item`.`org_id` = `it`.`org_id`)))) left join `transaction_type` `tt` on((`tt`.`transaction_type_id` = `it`.`transaction_type_id`))) left join `subinventory` `subf` on((`subf`.`subinventory_id` = `it`.`from_subinventory_id`))) left join `subinventory` `subt` on((`subt`.`subinventory_id` = `it`.`to_subinventory_id`))) left join `locator` `locf` on((`locf`.`locator_id` = `it`.`from_locator_id`))) left join `locator` `loct` on((`loct`.`locator_id` = `it`.`to_locator_id`)));
 
 -- --------------------------------------------------------
 
@@ -16620,7 +17594,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `inv_serial_transaction_v`
 --
 DROP TABLE IF EXISTS `item_select_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `item_select_v` AS select distinct `item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`product_line` AS `product_line`,`item`.`item_id_m` AS `item_id_m` from `item`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `item_select_v` AS select distinct `item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`product_line` AS `product_line`,`item`.`item_id_m` AS `item_id_m` from `item`;
 
 -- --------------------------------------------------------
 
@@ -16629,7 +17603,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `item_select_v` AS select 
 --
 DROP TABLE IF EXISTS `locator_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `locator_v` AS select `org`.`org_id` AS `org_id`,`loca`.`locator` AS `locator`,`loca`.`alias` AS `alias`,`loca`.`locator_id` AS `locator_id`,`sub`.`subinventory` AS `subinventory`,`sub`.`subinventory_id` AS `subinventory_id`,`sub`.`description` AS `sub_description`,`org`.`org` AS `org`,`org`.`type` AS `type`,`org`.`code` AS `code`,`org`.`description` AS `description`,`org`.`enterprise_org_id` AS `enterprise_org_id`,`org`.`legal_org_id` AS `legal_org_id`,`org`.`business_org_id` AS `business_org_id`,`org`.`inventory_org_id` AS `inventory_org_id`,`org`.`address_id` AS `address_id`,`legal`.`ledger_id` AS `ledger_id`,`gl`.`ledger` AS `ledger`,`gl`.`coa_structure_id` AS `coa_structure_id`,`gl`.`currency_code` AS `currency_code` from ((((`org` join `subinventory` `sub`) join `locator` `loca`) join `legal`) join `gl_ledger` `gl`) where ((`sub`.`org_id` = `org`.`org_id`) and (`loca`.`subinventory_id` = `sub`.`subinventory_id`) and (`legal`.`org_id` = `org`.`legal_org_id`) and (`gl`.`gl_ledger_id` = `legal`.`ledger_id`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `locator_v` AS select `org`.`org_id` AS `org_id`,`loca`.`locator` AS `locator`,`loca`.`alias` AS `alias`,`loca`.`locator_id` AS `locator_id`,`sub`.`subinventory` AS `subinventory`,`sub`.`subinventory_id` AS `subinventory_id`,`sub`.`description` AS `sub_description`,`org`.`org` AS `org`,`org`.`type` AS `type`,`org`.`code` AS `code`,`org`.`description` AS `description`,`org`.`enterprise_org_id` AS `enterprise_org_id`,`org`.`legal_org_id` AS `legal_org_id`,`org`.`business_org_id` AS `business_org_id`,`org`.`inventory_org_id` AS `inventory_org_id`,`org`.`address_id` AS `address_id`,`legal`.`ledger_id` AS `ledger_id`,`gl`.`ledger` AS `ledger`,`gl`.`coa_structure_id` AS `coa_structure_id`,`gl`.`currency_code` AS `currency_code` from ((((`org` join `subinventory` `sub`) join `locator` `loca`) join `legal`) join `gl_ledger` `gl`) where ((`sub`.`org_id` = `org`.`org_id`) and (`loca`.`subinventory_id` = `sub`.`subinventory_id`) and (`legal`.`org_id` = `org`.`legal_org_id`) and (`gl`.`gl_ledger_id` = `legal`.`ledger_id`));
 
 -- --------------------------------------------------------
 
@@ -16638,7 +17612,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `locator_v` AS select `org
 --
 DROP TABLE IF EXISTS `mdm_bank_account_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `mdm_bank_account_v` AS select `mba`.`mdm_bank_account_id` AS `mdm_bank_account_id`,`mba`.`account_number` AS `account_number`,`mba`.`description` AS `account_description`,`mba`.`account_usage` AS `account_usage`,`mba`.`account_type` AS `account_type`,`mba`.`bu_org_id` AS `bu_org_id`,`mba`.`supplier_id` AS `supplier_id`,`mba`.`supplier_site_id` AS `supplier_site_id`,`mba`.`ar_customer_id` AS `ar_customer_id`,`mba`.`ar_customer_site_id` AS `ar_customer_site_id`,`mba`.`cash_ac_id` AS `cash_ac_id`,`mba`.`cash_clearing_ac_id` AS `cash_clearing_ac_id`,`mba`.`bank_charge_ac_id` AS `bank_charge_ac_id`,`mba`.`exchange_gl_ac_id` AS `exchange_gl_ac_id`,`mba`.`netting_ac_cb` AS `netting_ac_cb`,`mba`.`minimum_payment` AS `minimum_payment`,`mba`.`maximum_payment` AS `maximum_payment`,`mba`.`contact_id` AS `contact_id`,`mba`.`ap_payment_method_id` AS `ap_payment_method_id`,`mbh`.`mdm_bank_header_id` AS `mdm_bank_header_id`,`mbh`.`country` AS `country`,`mbh`.`bank_name` AS `bank_name`,`mbh`.`bank_number` AS `bank_number`,`mbh`.`description` AS `description`,`mbh`.`bank_name_short` AS `bank_name_short`,`mbh`.`bank_name_alt` AS `bank_name_alt`,`mbh`.`tax_reg_no` AS `tax_reg_no`,`mbh`.`tax_payer_id` AS `tax_payer_id`,`mbs`.`branch_name` AS `branch_name`,`mbs`.`country` AS `branch_country`,`mbs`.`branch_number` AS `branch_number`,`mbs`.`mdm_bank_site_id` AS `mdm_bank_site_id`,`mbs`.`branch_name_short` AS `branch_name_short`,`mbs`.`branch_name_alt` AS `branch_name_alt`,`mbs`.`ifsc_code` AS `ifsc_code`,`mbs`.`swift_code` AS `swift_code`,`mbs`.`routing_number` AS `routing_number`,`mbs`.`iban_code` AS `iban_code`,`mbs`.`tax_reg_no` AS `branch_tax_reg_no`,`mbs`.`tax_payer_id` AS `branch_tax_payer_id`,`mbs`.`site_address_id` AS `site_address_id`,`sav`.`supplier_name` AS `supplier_name`,`sav`.`supplier_site_name` AS `supplier_site_name`,`acv`.`customer_name` AS `customer_name`,`acv`.`customer_number` AS `customer_number` from (((((`mdm_bank_account` `mba` left join `supplier_all_v` `sav` on((`mba`.`supplier_site_id` = `sav`.`supplier_site_id`))) left join `ar_customer_v` `acv` on((`mba`.`ar_customer_site_id` = `acv`.`ar_customer_site_id`))) left join `org_v` `ov` on((`ov`.`org_id` = `mba`.`bu_org_id`))) join `mdm_bank_header` `mbh`) join `mdm_bank_site` `mbs`) where ((`mbs`.`mdm_bank_header_id` = `mbh`.`mdm_bank_header_id`) and (`mbh`.`mdm_bank_header_id` = `mba`.`mdm_bank_header_id`) and (`mbs`.`mdm_bank_site_id` = `mba`.`mdm_bank_site_id`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mdm_bank_account_v` AS select `mba`.`mdm_bank_account_id` AS `mdm_bank_account_id`,`mba`.`account_number` AS `account_number`,`mba`.`description` AS `account_description`,`mba`.`account_usage` AS `account_usage`,`mba`.`account_type` AS `account_type`,`mba`.`bu_org_id` AS `bu_org_id`,`mba`.`supplier_id` AS `supplier_id`,`mba`.`supplier_site_id` AS `supplier_site_id`,`mba`.`ar_customer_id` AS `ar_customer_id`,`mba`.`ar_customer_site_id` AS `ar_customer_site_id`,`mba`.`cash_ac_id` AS `cash_ac_id`,`mba`.`cash_clearing_ac_id` AS `cash_clearing_ac_id`,`mba`.`bank_charge_ac_id` AS `bank_charge_ac_id`,`mba`.`exchange_gl_ac_id` AS `exchange_gl_ac_id`,`mba`.`netting_ac_cb` AS `netting_ac_cb`,`mba`.`minimum_payment` AS `minimum_payment`,`mba`.`maximum_payment` AS `maximum_payment`,`mba`.`contact_id` AS `contact_id`,`mba`.`ap_payment_method_id` AS `ap_payment_method_id`,`mbh`.`mdm_bank_header_id` AS `mdm_bank_header_id`,`mbh`.`country` AS `country`,`mbh`.`bank_name` AS `bank_name`,`mbh`.`bank_number` AS `bank_number`,`mbh`.`description` AS `description`,`mbh`.`bank_name_short` AS `bank_name_short`,`mbh`.`bank_name_alt` AS `bank_name_alt`,`mbh`.`tax_reg_no` AS `tax_reg_no`,`mbh`.`tax_payer_id` AS `tax_payer_id`,`mbs`.`branch_name` AS `branch_name`,`mbs`.`country` AS `branch_country`,`mbs`.`branch_number` AS `branch_number`,`mbs`.`mdm_bank_site_id` AS `mdm_bank_site_id`,`mbs`.`branch_name_short` AS `branch_name_short`,`mbs`.`branch_name_alt` AS `branch_name_alt`,`mbs`.`ifsc_code` AS `ifsc_code`,`mbs`.`swift_code` AS `swift_code`,`mbs`.`routing_number` AS `routing_number`,`mbs`.`iban_code` AS `iban_code`,`mbs`.`tax_reg_no` AS `branch_tax_reg_no`,`mbs`.`tax_payer_id` AS `branch_tax_payer_id`,`mbs`.`site_address_id` AS `site_address_id`,`sav`.`supplier_name` AS `supplier_name`,`sav`.`supplier_site_name` AS `supplier_site_name`,`acv`.`customer_name` AS `customer_name`,`acv`.`customer_number` AS `customer_number` from (((((`mdm_bank_account` `mba` left join `supplier_all_v` `sav` on((`mba`.`supplier_site_id` = `sav`.`supplier_site_id`))) left join `ar_customer_v` `acv` on((`mba`.`ar_customer_site_id` = `acv`.`ar_customer_site_id`))) left join `org_v` `ov` on((`ov`.`org_id` = `mba`.`bu_org_id`))) join `mdm_bank_header` `mbh`) join `mdm_bank_site` `mbs`) where ((`mbs`.`mdm_bank_header_id` = `mbh`.`mdm_bank_header_id`) and (`mbh`.`mdm_bank_header_id` = `mba`.`mdm_bank_header_id`) and (`mbs`.`mdm_bank_site_id` = `mba`.`mdm_bank_site_id`));
 
 -- --------------------------------------------------------
 
@@ -16647,7 +17621,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `mdm_bank_account_v` AS se
 --
 DROP TABLE IF EXISTS `mdm_bank_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `mdm_bank_v` AS select `mbh`.`mdm_bank_header_id` AS `mdm_bank_header_id`,`mbh`.`country` AS `country`,`mbh`.`bank_name` AS `bank_name`,`mbh`.`bank_number` AS `bank_number`,`mbh`.`description` AS `description`,`mbh`.`bank_name_short` AS `bank_name_short`,`mbh`.`bank_name_alt` AS `bank_name_alt`,`mbh`.`tax_reg_no` AS `tax_reg_no`,`mbh`.`tax_payer_id` AS `tax_payer_id`,`mbs`.`branch_name` AS `branch_name`,`mbs`.`country` AS `branch_country`,`mbs`.`branch_number` AS `branch_number`,`mbs`.`mdm_bank_site_id` AS `mdm_bank_site_id`,`mbs`.`branch_name_short` AS `branch_name_short`,`mbs`.`branch_name_alt` AS `branch_name_alt`,`mbs`.`ifsc_code` AS `ifsc_code`,`mbs`.`swift_code` AS `swift_code`,`mbs`.`routing_number` AS `routing_number`,`mbs`.`iban_code` AS `iban_code`,`mbs`.`tax_reg_no` AS `branch_tax_reg_no`,`mbs`.`tax_payer_id` AS `branch_tax_payer_id`,`mbs`.`site_address_id` AS `site_address_id` from (`mdm_bank_header` `mbh` join `mdm_bank_site` `mbs`) where (`mbs`.`mdm_bank_header_id` = `mbh`.`mdm_bank_header_id`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mdm_bank_v` AS select `mbh`.`mdm_bank_header_id` AS `mdm_bank_header_id`,`mbh`.`country` AS `country`,`mbh`.`bank_name` AS `bank_name`,`mbh`.`bank_number` AS `bank_number`,`mbh`.`description` AS `description`,`mbh`.`bank_name_short` AS `bank_name_short`,`mbh`.`bank_name_alt` AS `bank_name_alt`,`mbh`.`tax_reg_no` AS `tax_reg_no`,`mbh`.`tax_payer_id` AS `tax_payer_id`,`mbs`.`branch_name` AS `branch_name`,`mbs`.`country` AS `branch_country`,`mbs`.`branch_number` AS `branch_number`,`mbs`.`mdm_bank_site_id` AS `mdm_bank_site_id`,`mbs`.`branch_name_short` AS `branch_name_short`,`mbs`.`branch_name_alt` AS `branch_name_alt`,`mbs`.`ifsc_code` AS `ifsc_code`,`mbs`.`swift_code` AS `swift_code`,`mbs`.`routing_number` AS `routing_number`,`mbs`.`iban_code` AS `iban_code`,`mbs`.`tax_reg_no` AS `branch_tax_reg_no`,`mbs`.`tax_payer_id` AS `branch_tax_payer_id`,`mbs`.`site_address_id` AS `site_address_id` from (`mdm_bank_header` `mbh` join `mdm_bank_site` `mbs`) where (`mbs`.`mdm_bank_header_id` = `mbh`.`mdm_bank_header_id`);
 
 -- --------------------------------------------------------
 
@@ -16656,7 +17630,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `mdm_bank_v` AS select `mb
 --
 DROP TABLE IF EXISTS `onhand_summary_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `onhand_summary_v` AS select `onhand`.`onhand_id` AS `onhand_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`org`.`org` AS `org_name`,`onhand`.`uom_id` AS `uom_id`,sum(`onhand`.`onhand`) AS `onhand`,`onhand`.`item_id_m` AS `item_id_m`,`onhand`.`org_id` AS `org_id`,`onhand`.`reservable_onhand` AS `reservable_onhand`,`onhand`.`transactable_onhand` AS `transactable_onhand` from ((`onhand` left join `item` on(((`onhand`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `onhand`.`org_id`)))) left join `org` on((`onhand`.`org_id` = `org`.`org_id`))) group by `onhand`.`item_id_m`,`onhand`.`org_id`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `onhand_summary_v` AS select `onhand`.`onhand_id` AS `onhand_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`org`.`org` AS `org_name`,`onhand`.`uom_id` AS `uom_id`,sum(`onhand`.`onhand`) AS `onhand`,`onhand`.`item_id_m` AS `item_id_m`,`onhand`.`org_id` AS `org_id`,`onhand`.`reservable_onhand` AS `reservable_onhand`,`onhand`.`transactable_onhand` AS `transactable_onhand` from ((`onhand` left join `item` on(((`onhand`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `onhand`.`org_id`)))) left join `org` on((`onhand`.`org_id` = `org`.`org_id`))) group by `onhand`.`item_id_m`,`onhand`.`org_id`;
 
 -- --------------------------------------------------------
 
@@ -16665,7 +17639,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `onhand_summary_v` AS sele
 --
 DROP TABLE IF EXISTS `onhand_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `onhand_v` AS select `onhand`.`onhand_id` AS `onhand_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`product_line` AS `product_line`,`org`.`org` AS `org_name`,`subinventory`.`subinventory` AS `subinventory`,`locator`.`locator` AS `locator`,`onhand`.`uom_id` AS `uom_id`,`onhand`.`onhand` AS `onhand`,`cic`.`standard_cost` AS `standard_cost`,(`onhand`.`onhand` * `cic`.`standard_cost`) AS `onhand_value`,`onhand`.`item_id_m` AS `item_id_m`,`onhand`.`revision_name` AS `revision_name`,`onhand`.`org_id` AS `org_id`,`onhand`.`subinventory_id` AS `subinventory_id`,`subinventory`.`type` AS `subinventory_type`,`onhand`.`locator_id` AS `locator_id`,`onhand`.`lot_id` AS `lot_id`,`onhand`.`serial_id` AS `serial_id`,`onhand`.`reservable_onhand` AS `reservable_onhand`,`onhand`.`transactable_onhand` AS `transactable_onhand`,`onhand`.`lot_status` AS `lot_status`,`onhand`.`serial_status` AS `serial_status`,`onhand`.`secondary_uom_id` AS `secondary_uom_id`,`onhand`.`onhand_status` AS `onhand_status`,`onhand`.`ef_id` AS `ef_id`,`onhand`.`created_by` AS `created_by`,`onhand`.`creation_date` AS `creation_date`,`onhand`.`last_update_by` AS `last_update_by`,`onhand`.`last_update_date` AS `last_update_date` from (((((`onhand` left join `item` on(((`onhand`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `onhand`.`org_id`)))) left join `org` on((`onhand`.`org_id` = `org`.`org_id`))) left join `subinventory` on((`onhand`.`subinventory_id` = `subinventory`.`subinventory_id`))) left join `locator` on((`onhand`.`locator_id` = `locator`.`locator_id`))) left join `cst_item_cost_v` `cic` on(((`cic`.`item_id_m` = `onhand`.`item_id_m`) and (`cic`.`bom_cost_type` = 'FROZEN') and (`cic`.`org_id` = `onhand`.`org_id`))));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `onhand_v` AS select `onhand`.`onhand_id` AS `onhand_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`product_line` AS `product_line`,`org`.`org` AS `org_name`,`subinventory`.`subinventory` AS `subinventory`,`locator`.`locator` AS `locator`,`onhand`.`uom_id` AS `uom_id`,`onhand`.`onhand` AS `onhand`,`cic`.`standard_cost` AS `standard_cost`,(`onhand`.`onhand` * `cic`.`standard_cost`) AS `onhand_value`,`onhand`.`item_id_m` AS `item_id_m`,`onhand`.`revision_name` AS `revision_name`,`onhand`.`org_id` AS `org_id`,`onhand`.`subinventory_id` AS `subinventory_id`,`subinventory`.`type` AS `subinventory_type`,`onhand`.`locator_id` AS `locator_id`,`onhand`.`lot_id` AS `lot_id`,`onhand`.`serial_id` AS `serial_id`,`onhand`.`reservable_onhand` AS `reservable_onhand`,`onhand`.`transactable_onhand` AS `transactable_onhand`,`onhand`.`lot_status` AS `lot_status`,`onhand`.`serial_status` AS `serial_status`,`onhand`.`secondary_uom_id` AS `secondary_uom_id`,`onhand`.`onhand_status` AS `onhand_status`,`onhand`.`ef_id` AS `ef_id`,`onhand`.`created_by` AS `created_by`,`onhand`.`creation_date` AS `creation_date`,`onhand`.`last_update_by` AS `last_update_by`,`onhand`.`last_update_date` AS `last_update_date` from (((((`onhand` left join `item` on(((`onhand`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `onhand`.`org_id`)))) left join `org` on((`onhand`.`org_id` = `org`.`org_id`))) left join `subinventory` on((`onhand`.`subinventory_id` = `subinventory`.`subinventory_id`))) left join `locator` on((`onhand`.`locator_id` = `locator`.`locator_id`))) left join `cst_item_cost_v` `cic` on(((`cic`.`item_id_m` = `onhand`.`item_id_m`) and (`cic`.`bom_cost_type` = 'FROZEN') and (`cic`.`org_id` = `onhand`.`org_id`))));
 
 -- --------------------------------------------------------
 
@@ -16674,7 +17648,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `onhand_v` AS select `onha
 --
 DROP TABLE IF EXISTS `org_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `org_v` AS select `org`.`org_id` AS `org_id`,`org`.`org` AS `org`,`org`.`type` AS `type`,`org`.`code` AS `code`,`org`.`description` AS `description`,`org`.`enterprise_org_id` AS `enterprise_org_id`,`org`.`legal_org_id` AS `legal_org_id`,`org`.`business_org_id` AS `business_org_id`,`org`.`inventory_org_id` AS `inventory_org_id`,`org`.`address_id` AS `address_id`,`legal`.`ledger_id` AS `ledger_id`,`gl`.`ledger` AS `ledger`,`gl`.`coa_structure_id` AS `coa_structure_id`,`gl`.`currency_code` AS `currency_code` from ((`org` left join `legal` on((`legal`.`org_id` = `org`.`legal_org_id`))) left join `gl_ledger` `gl` on((`gl`.`gl_ledger_id` = `legal`.`ledger_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `org_v` AS select `org`.`org_id` AS `org_id`,`org`.`org` AS `org`,`org`.`type` AS `type`,`org`.`code` AS `code`,`org`.`description` AS `description`,`org`.`enterprise_org_id` AS `enterprise_org_id`,`org`.`legal_org_id` AS `legal_org_id`,`org`.`business_org_id` AS `business_org_id`,`org`.`inventory_org_id` AS `inventory_org_id`,`org`.`address_id` AS `address_id`,`legal`.`ledger_id` AS `ledger_id`,`gl`.`ledger` AS `ledger`,`gl`.`coa_structure_id` AS `coa_structure_id`,`gl`.`currency_code` AS `currency_code` from ((`org` left join `legal` on((`legal`.`org_id` = `org`.`legal_org_id`))) left join `gl_ledger` `gl` on((`gl`.`gl_ledger_id` = `legal`.`ledger_id`)));
 
 -- --------------------------------------------------------
 
@@ -16683,7 +17657,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `org_v` AS select `org`.`o
 --
 DROP TABLE IF EXISTS `po_all_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_all_v` AS select `po_header`.`po_header_id` AS `po_header_id`,`po_header`.`bu_org_id` AS `bu_org_id`,`po_header`.`po_type` AS `po_type`,`po_header`.`po_number` AS `po_number`,`po_header`.`supplier_id` AS `supplier_id`,`po_header`.`supplier_site_id` AS `supplier_site_id`,`po_header`.`buyer` AS `buyer`,`po_header`.`currency` AS `currency`,`po_header`.`header_amount` AS `header_amount`,`po_header`.`po_status` AS `po_status`,`po_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_line`.`po_line_id` AS `po_line_id`,`po_line`.`line_type` AS `line_type`,`po_line`.`line_number` AS `po_line_number`,`po_line`.`item_id_m` AS `item_id_m`,`po_line`.`kit_cb` AS `kit_cb`,`po_line`.`revision_name` AS `revision_name`,`po_line`.`item_description` AS `item_description`,`po_line`.`line_description` AS `line_description`,`po_line`.`line_quantity` AS `line_quantity`,`po_line`.`unit_price` AS `unit_price`,`po_line`.`line_price` AS `line_price`,`po_line`.`gl_line_price` AS `gl_line_price`,`po_line`.`gl_tax_amount` AS `gl_tax_amount`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`item`.`serial_generation` AS `serial_generation`,`item`.`lot_generation` AS `lot_generation`,`po_detail`.`po_detail_id` AS `po_detail_id`,`po_detail`.`shipment_number` AS `shipment_number`,`po_line`.`receving_org_id` AS `receving_org_id`,`po_line`.`receving_org_id` AS `org_id`,`po_detail`.`subinventory_id` AS `subinventory_id`,`po_detail`.`locator_id` AS `locator_id`,`po_detail`.`requestor` AS `requestor`,`po_detail`.`quantity` AS `quantity`,ifnull(`po_detail`.`received_quantity`,0) AS `received_quantity`,(`po_detail`.`quantity` - ifnull(`po_detail`.`received_quantity`,0)) AS `open_quantity`,`po_detail`.`need_by_date` AS `need_by_date`,`po_detail`.`promise_date` AS `promise_date`,`po_detail`.`accepted_quantity` AS `accepted_quantity`,`po_detail`.`delivered_quantity` AS `delivered_quantity`,`po_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_detail`.`paid_quantity` AS `paid_quantity`,`po_detail`.`charge_ac_id` AS `charge_ac_id`,`po_detail`.`accrual_ac_id` AS `accrual_ac_id`,`po_detail`.`budget_ac_id` AS `budget_ac_id`,`po_detail`.`ppv_ac_id` AS `ppv_ac_id`,`org`.`org` AS `receving_org`,`po_header`.`created_by` AS `created_by`,`po_header`.`creation_date` AS `creation_date`,`po_header`.`last_update_by` AS `last_update_by`,`po_header`.`last_update_date` AS `last_update_date` from (((((((`po_header` left join `supplier` on((`po_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_line` on((`po_header`.`po_header_id` = `po_line`.`po_header_id`))) left join `item` on(((`po_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_line`.`receving_org_id`)))) left join `po_detail` on((`po_line`.`po_line_id` = `po_detail`.`po_line_id`))) left join `org` on((`po_line`.`receving_org_id` = `org`.`org_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `po_all_v` AS select `po_header`.`po_header_id` AS `po_header_id`,`po_header`.`bu_org_id` AS `bu_org_id`,`po_header`.`po_type` AS `po_type`,`po_header`.`po_number` AS `po_number`,`po_header`.`supplier_id` AS `supplier_id`,`po_header`.`supplier_site_id` AS `supplier_site_id`,`po_header`.`buyer` AS `buyer`,`po_header`.`currency` AS `currency`,`po_header`.`header_amount` AS `header_amount`,`po_header`.`po_status` AS `po_status`,`po_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_line`.`po_line_id` AS `po_line_id`,`po_line`.`line_type` AS `line_type`,`po_line`.`line_number` AS `po_line_number`,`po_line`.`item_id_m` AS `item_id_m`,`po_line`.`kit_cb` AS `kit_cb`,`po_line`.`revision_name` AS `revision_name`,`po_line`.`item_description` AS `item_description`,`po_line`.`line_description` AS `line_description`,`po_line`.`line_quantity` AS `line_quantity`,`po_line`.`unit_price` AS `unit_price`,`po_line`.`line_price` AS `line_price`,`po_line`.`gl_line_price` AS `gl_line_price`,`po_line`.`gl_tax_amount` AS `gl_tax_amount`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`item`.`serial_generation` AS `serial_generation`,`item`.`lot_generation` AS `lot_generation`,`po_detail`.`po_detail_id` AS `po_detail_id`,`po_detail`.`shipment_number` AS `shipment_number`,`po_line`.`receving_org_id` AS `receving_org_id`,`po_line`.`receving_org_id` AS `org_id`,`po_detail`.`subinventory_id` AS `subinventory_id`,`po_detail`.`locator_id` AS `locator_id`,`po_detail`.`requestor` AS `requestor`,`po_detail`.`quantity` AS `quantity`,ifnull(`po_detail`.`received_quantity`,0) AS `received_quantity`,(`po_detail`.`quantity` - ifnull(`po_detail`.`received_quantity`,0)) AS `open_quantity`,`po_detail`.`need_by_date` AS `need_by_date`,`po_detail`.`promise_date` AS `promise_date`,`po_detail`.`accepted_quantity` AS `accepted_quantity`,`po_detail`.`delivered_quantity` AS `delivered_quantity`,`po_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_detail`.`paid_quantity` AS `paid_quantity`,`po_detail`.`charge_ac_id` AS `charge_ac_id`,`po_detail`.`accrual_ac_id` AS `accrual_ac_id`,`po_detail`.`budget_ac_id` AS `budget_ac_id`,`po_detail`.`ppv_ac_id` AS `ppv_ac_id`,`org`.`org` AS `receving_org`,`po_header`.`created_by` AS `created_by`,`po_header`.`creation_date` AS `creation_date`,`po_header`.`last_update_by` AS `last_update_by`,`po_header`.`last_update_date` AS `last_update_date` from (((((((`po_header` left join `supplier` on((`po_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_line` on((`po_header`.`po_header_id` = `po_line`.`po_header_id`))) left join `item` on(((`po_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_line`.`receving_org_id`)))) left join `po_detail` on((`po_line`.`po_line_id` = `po_detail`.`po_line_id`))) left join `org` on((`po_line`.`receving_org_id` = `org`.`org_id`)));
 
 -- --------------------------------------------------------
 
@@ -16692,7 +17666,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_all_v` AS select `po_h
 --
 DROP TABLE IF EXISTS `po_blanket_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_blanket_v` AS select `po_header`.`po_header_id` AS `po_header_id`,`po_header`.`bu_org_id` AS `bu_org_id`,`po_header`.`po_type` AS `po_type`,`po_header`.`po_number` AS `po_number`,`po_header`.`release_number` AS `release_number`,`po_header`.`supplier_id` AS `supplier_id`,`po_header`.`supplier_site_id` AS `supplier_site_id`,`po_header`.`buyer` AS `buyer`,`po_header`.`currency` AS `currency`,`po_header`.`header_amount` AS `header_amount`,`po_header`.`po_status` AS `po_status`,`po_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_header`.`agreement_start_date` AS `agreement_start_date`,`po_header`.`agreement_end_date` AS `agreement_end_date`,`po_line`.`po_line_id` AS `po_line_id`,`po_line`.`line_type` AS `line_type`,`po_line`.`line_number` AS `po_line_number`,`po_line`.`item_id_m` AS `item_id_m`,`po_line`.`item_description` AS `item_description`,`po_line`.`line_description` AS `line_description`,`po_line`.`line_quantity` AS `line_quantity`,`po_line`.`unit_price` AS `unit_price`,`po_line`.`line_price` AS `line_price`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_detail`.`po_detail_id` AS `po_detail_id`,`po_detail`.`shipment_number` AS `shipment_number`,`po_line`.`receving_org_id` AS `receving_org_id`,`po_detail`.`subinventory_id` AS `subinventory_id`,`po_detail`.`locator_id` AS `locator_id`,`po_detail`.`requestor` AS `requestor`,`po_detail`.`quantity` AS `quantity`,ifnull(`po_detail`.`received_quantity`,0) AS `received_quantity`,(`po_detail`.`quantity` - ifnull(`po_detail`.`received_quantity`,0)) AS `open_quantity`,`po_detail`.`need_by_date` AS `need_by_date`,`po_detail`.`promise_date` AS `promise_date`,`po_detail`.`accepted_quantity` AS `accepted_quantity`,`po_detail`.`delivered_quantity` AS `delivered_quantity`,`po_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_detail`.`paid_quantity` AS `paid_quantity`,`po_detail`.`charge_ac_id` AS `charge_ac_id`,`po_detail`.`accrual_ac_id` AS `accrual_ac_id`,`po_detail`.`budget_ac_id` AS `budget_ac_id`,`po_detail`.`ppv_ac_id` AS `ppv_ac_id`,`org`.`org` AS `receving_org`,`po_header`.`created_by` AS `created_by`,`po_header`.`creation_date` AS `creation_date`,`po_header`.`last_update_by` AS `last_update_by`,`po_header`.`last_update_date` AS `last_update_date` from (((((((`po_header` left join `supplier` on((`po_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_line` on((`po_header`.`po_header_id` = `po_line`.`po_header_id`))) left join `item` on(((`po_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_line`.`receving_org_id`)))) left join `po_detail` on((`po_line`.`po_line_id` = `po_detail`.`po_line_id`))) left join `org` on((`po_line`.`receving_org_id` = `org`.`org_id`))) where (`po_header`.`po_type` in ('BLANKET','BLANKET_RELEASE'));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `po_blanket_v` AS select `po_header`.`po_header_id` AS `po_header_id`,`po_header`.`bu_org_id` AS `bu_org_id`,`po_header`.`po_type` AS `po_type`,`po_header`.`po_number` AS `po_number`,`po_header`.`release_number` AS `release_number`,`po_header`.`supplier_id` AS `supplier_id`,`po_header`.`supplier_site_id` AS `supplier_site_id`,`po_header`.`buyer` AS `buyer`,`po_header`.`currency` AS `currency`,`po_header`.`header_amount` AS `header_amount`,`po_header`.`po_status` AS `po_status`,`po_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_header`.`agreement_start_date` AS `agreement_start_date`,`po_header`.`agreement_end_date` AS `agreement_end_date`,`po_line`.`po_line_id` AS `po_line_id`,`po_line`.`line_type` AS `line_type`,`po_line`.`line_number` AS `po_line_number`,`po_line`.`item_id_m` AS `item_id_m`,`po_line`.`item_description` AS `item_description`,`po_line`.`line_description` AS `line_description`,`po_line`.`line_quantity` AS `line_quantity`,`po_line`.`unit_price` AS `unit_price`,`po_line`.`line_price` AS `line_price`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_detail`.`po_detail_id` AS `po_detail_id`,`po_detail`.`shipment_number` AS `shipment_number`,`po_line`.`receving_org_id` AS `receving_org_id`,`po_detail`.`subinventory_id` AS `subinventory_id`,`po_detail`.`locator_id` AS `locator_id`,`po_detail`.`requestor` AS `requestor`,`po_detail`.`quantity` AS `quantity`,ifnull(`po_detail`.`received_quantity`,0) AS `received_quantity`,(`po_detail`.`quantity` - ifnull(`po_detail`.`received_quantity`,0)) AS `open_quantity`,`po_detail`.`need_by_date` AS `need_by_date`,`po_detail`.`promise_date` AS `promise_date`,`po_detail`.`accepted_quantity` AS `accepted_quantity`,`po_detail`.`delivered_quantity` AS `delivered_quantity`,`po_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_detail`.`paid_quantity` AS `paid_quantity`,`po_detail`.`charge_ac_id` AS `charge_ac_id`,`po_detail`.`accrual_ac_id` AS `accrual_ac_id`,`po_detail`.`budget_ac_id` AS `budget_ac_id`,`po_detail`.`ppv_ac_id` AS `ppv_ac_id`,`org`.`org` AS `receving_org`,`po_header`.`created_by` AS `created_by`,`po_header`.`creation_date` AS `creation_date`,`po_header`.`last_update_by` AS `last_update_by`,`po_header`.`last_update_date` AS `last_update_date` from (((((((`po_header` left join `supplier` on((`po_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_line` on((`po_header`.`po_header_id` = `po_line`.`po_header_id`))) left join `item` on(((`po_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_line`.`receving_org_id`)))) left join `po_detail` on((`po_line`.`po_line_id` = `po_detail`.`po_line_id`))) left join `org` on((`po_line`.`receving_org_id` = `org`.`org_id`))) where (`po_header`.`po_type` in ('BLANKET','BLANKET_RELEASE'));
 
 -- --------------------------------------------------------
 
@@ -16701,7 +17675,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_blanket_v` AS select `
 --
 DROP TABLE IF EXISTS `po_convert_requisition_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_convert_requisition_v` AS select `po_requisition_header`.`po_requisition_header_id` AS `po_requisition_header_id`,`po_requisition_header`.`bu_org_id` AS `bu_org_id`,`po_requisition_header`.`po_requisition_type` AS `po_requisition_type`,`po_requisition_header`.`po_requisition_number` AS `po_requisition_number`,`po_requisition_header`.`supplier_id` AS `supplier_id`,`po_requisition_header`.`supplier_site_id` AS `supplier_site_id`,`po_requisition_header`.`buyer` AS `buyer`,`po_requisition_header`.`currency` AS `currency`,`po_requisition_header`.`header_amount` AS `header_amount`,`po_requisition_header`.`requisition_status` AS `requisition_status`,ifnull(`po_requisition_header`.`payment_term_id`,`supplier_site`.`payment_term_id`) AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_requisition_line`.`po_requisition_line_id` AS `po_requisition_line_id`,`po_requisition_line`.`line_type` AS `line_type`,`po_requisition_line`.`line_number` AS `po_requisition_line_number`,`po_requisition_line`.`item_id_m` AS `item_id_m`,`po_requisition_line`.`bpa_po_line_id` AS `bpa_po_line_id`,`po_requisition_line`.`item_description` AS `item_description`,`po_requisition_line`.`line_description` AS `line_description`,`po_requisition_line`.`line_quantity` AS `line_quantity`,`po_requisition_line`.`unit_price` AS `unit_price`,`po_requisition_line`.`line_price` AS `line_price`,`po_requisition_line`.`receving_org_id` AS `receving_org_id`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_requisition_detail`.`po_requisition_detail_id` AS `po_requisition_detail_id`,`po_requisition_detail`.`shipment_number` AS `shipment_number`,`po_requisition_detail`.`subinventory_id` AS `subinventory_id`,`po_requisition_detail`.`locator_id` AS `locator_id`,`po_requisition_detail`.`requestor` AS `requestor`,`po_requisition_detail`.`quantity` AS `quantity`,`po_requisition_detail`.`need_by_date` AS `need_by_date`,`po_requisition_detail`.`promise_date` AS `promise_date`,`po_requisition_detail`.`received_quantity` AS `received_quantity`,`po_requisition_detail`.`accepted_quantity` AS `accepted_quantity`,`po_requisition_detail`.`delivered_quantity` AS `delivered_quantity`,`po_requisition_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_requisition_detail`.`paid_quantity` AS `paid_quantity`,`po_requisition_detail`.`order_number` AS `order_number`,`org`.`org` AS `ship_to_org`,`po_requisition_header`.`created_by` AS `created_by`,`po_requisition_header`.`creation_date` AS `creation_date`,`po_requisition_header`.`last_update_by` AS `last_update_by`,`po_requisition_header`.`last_update_date` AS `last_update_date` from (((((((`po_requisition_header` left join `supplier` on((`po_requisition_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_requisition_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_requisition_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_requisition_line` on((`po_requisition_header`.`po_requisition_header_id` = `po_requisition_line`.`po_requisition_header_id`))) left join `item` on(((`po_requisition_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_requisition_line`.`receving_org_id`)))) left join `po_requisition_detail` on((`po_requisition_line`.`po_requisition_line_id` = `po_requisition_detail`.`po_requisition_line_id`))) left join `org` on((`po_requisition_line`.`receving_org_id` = `org`.`org_id`))) where ((`po_requisition_header`.`requisition_status` = 'APPROVED') and (isnull(`po_requisition_detail`.`order_number`) or (`po_requisition_detail`.`order_number` = '')));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `po_convert_requisition_v` AS select `po_requisition_header`.`po_requisition_header_id` AS `po_requisition_header_id`,`po_requisition_header`.`bu_org_id` AS `bu_org_id`,`po_requisition_header`.`po_requisition_type` AS `po_requisition_type`,`po_requisition_header`.`po_requisition_number` AS `po_requisition_number`,`po_requisition_header`.`supplier_id` AS `supplier_id`,`po_requisition_header`.`supplier_site_id` AS `supplier_site_id`,`po_requisition_header`.`buyer` AS `buyer`,`po_requisition_header`.`currency` AS `currency`,`po_requisition_header`.`header_amount` AS `header_amount`,`po_requisition_header`.`requisition_status` AS `requisition_status`,ifnull(`po_requisition_header`.`payment_term_id`,`supplier_site`.`payment_term_id`) AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_requisition_line`.`po_requisition_line_id` AS `po_requisition_line_id`,`po_requisition_line`.`line_type` AS `line_type`,`po_requisition_line`.`line_number` AS `po_requisition_line_number`,`po_requisition_line`.`item_id_m` AS `item_id_m`,`po_requisition_line`.`bpa_po_line_id` AS `bpa_po_line_id`,`po_requisition_line`.`item_description` AS `item_description`,`po_requisition_line`.`line_description` AS `line_description`,`po_requisition_line`.`line_quantity` AS `line_quantity`,`po_requisition_line`.`unit_price` AS `unit_price`,`po_requisition_line`.`line_price` AS `line_price`,`po_requisition_line`.`receving_org_id` AS `receving_org_id`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_requisition_detail`.`po_requisition_detail_id` AS `po_requisition_detail_id`,`po_requisition_detail`.`shipment_number` AS `shipment_number`,`po_requisition_detail`.`subinventory_id` AS `subinventory_id`,`po_requisition_detail`.`locator_id` AS `locator_id`,`po_requisition_detail`.`requestor` AS `requestor`,`po_requisition_detail`.`quantity` AS `quantity`,`po_requisition_detail`.`need_by_date` AS `need_by_date`,`po_requisition_detail`.`promise_date` AS `promise_date`,`po_requisition_detail`.`received_quantity` AS `received_quantity`,`po_requisition_detail`.`accepted_quantity` AS `accepted_quantity`,`po_requisition_detail`.`delivered_quantity` AS `delivered_quantity`,`po_requisition_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_requisition_detail`.`paid_quantity` AS `paid_quantity`,`po_requisition_detail`.`order_number` AS `order_number`,`org`.`org` AS `ship_to_org`,`po_requisition_header`.`created_by` AS `created_by`,`po_requisition_header`.`creation_date` AS `creation_date`,`po_requisition_header`.`last_update_by` AS `last_update_by`,`po_requisition_header`.`last_update_date` AS `last_update_date` from (((((((`po_requisition_header` left join `supplier` on((`po_requisition_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_requisition_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_requisition_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_requisition_line` on((`po_requisition_header`.`po_requisition_header_id` = `po_requisition_line`.`po_requisition_header_id`))) left join `item` on(((`po_requisition_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_requisition_line`.`receving_org_id`)))) left join `po_requisition_detail` on((`po_requisition_line`.`po_requisition_line_id` = `po_requisition_detail`.`po_requisition_line_id`))) left join `org` on((`po_requisition_line`.`receving_org_id` = `org`.`org_id`))) where ((`po_requisition_header`.`requisition_status` = 'APPROVED') and (isnull(`po_requisition_detail`.`order_number`) or (`po_requisition_detail`.`order_number` = '')));
 
 -- --------------------------------------------------------
 
@@ -16710,7 +17684,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_convert_requisition_v`
 --
 DROP TABLE IF EXISTS `po_document_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_document_v` AS select `po_header`.`po_header_id` AS `po_header_id`,`po_header`.`bu_org_id` AS `bu_org_id`,`po_header`.`po_type` AS `po_type`,`po_header`.`po_number` AS `po_number`,`po_header`.`supplier_id` AS `supplier_id`,`po_header`.`supplier_site_id` AS `supplier_site_id`,`po_header`.`buyer` AS `buyer`,`po_header`.`currency` AS `currency`,`po_header`.`header_amount` AS `header_amount`,`po_header`.`po_status` AS `po_status`,`po_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_line`.`po_line_id` AS `po_line_id`,`po_line`.`line_type` AS `line_type`,`po_line`.`line_number` AS `po_line_number`,`po_line`.`item_id_m` AS `item_id_m`,`po_line`.`item_description` AS `item_description`,`po_line`.`line_description` AS `line_description`,`po_line`.`line_quantity` AS `line_quantity`,`po_line`.`unit_price` AS `unit_price`,`po_line`.`line_price` AS `line_price`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_detail`.`po_detail_id` AS `po_detail_id`,`po_detail`.`shipment_number` AS `shipment_number`,`po_line`.`receving_org_id` AS `receving_org_id`,`po_detail`.`subinventory_id` AS `subinventory_id`,`po_detail`.`locator_id` AS `locator_id`,`po_detail`.`requestor` AS `requestor`,`po_detail`.`quantity` AS `quantity`,ifnull(`po_detail`.`received_quantity`,0) AS `received_quantity`,(`po_detail`.`quantity` - ifnull(`po_detail`.`received_quantity`,0)) AS `open_quantity`,`po_detail`.`need_by_date` AS `need_by_date`,`po_detail`.`promise_date` AS `promise_date`,`po_detail`.`accepted_quantity` AS `accepted_quantity`,`po_detail`.`delivered_quantity` AS `delivered_quantity`,`po_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_detail`.`paid_quantity` AS `paid_quantity`,`po_detail`.`charge_ac_id` AS `charge_ac_id`,`po_detail`.`accrual_ac_id` AS `accrual_ac_id`,`po_detail`.`budget_ac_id` AS `budget_ac_id`,`po_detail`.`ppv_ac_id` AS `ppv_ac_id`,`org`.`org` AS `receving_org`,`po_header`.`created_by` AS `created_by`,`po_header`.`creation_date` AS `creation_date`,`po_header`.`last_update_by` AS `last_update_by`,`po_header`.`last_update_date` AS `last_update_date` from (((((((`po_header` left join `supplier` on((`po_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_line` on((`po_header`.`po_header_id` = `po_line`.`po_header_id`))) left join `item` on(((`po_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_line`.`receving_org_id`)))) left join `po_detail` on((`po_line`.`po_line_id` = `po_detail`.`po_line_id`))) left join `org` on((`po_line`.`receving_org_id` = `org`.`org_id`))) where (`po_header`.`po_type` in ('STANDARD','BLANKET','CONTRACT'));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `po_document_v` AS select `po_header`.`po_header_id` AS `po_header_id`,`po_header`.`bu_org_id` AS `bu_org_id`,`po_header`.`po_type` AS `po_type`,`po_header`.`po_number` AS `po_number`,`po_header`.`supplier_id` AS `supplier_id`,`po_header`.`supplier_site_id` AS `supplier_site_id`,`po_header`.`buyer` AS `buyer`,`po_header`.`currency` AS `currency`,`po_header`.`header_amount` AS `header_amount`,`po_header`.`po_status` AS `po_status`,`po_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_line`.`po_line_id` AS `po_line_id`,`po_line`.`line_type` AS `line_type`,`po_line`.`line_number` AS `po_line_number`,`po_line`.`item_id_m` AS `item_id_m`,`po_line`.`item_description` AS `item_description`,`po_line`.`line_description` AS `line_description`,`po_line`.`line_quantity` AS `line_quantity`,`po_line`.`unit_price` AS `unit_price`,`po_line`.`line_price` AS `line_price`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_detail`.`po_detail_id` AS `po_detail_id`,`po_detail`.`shipment_number` AS `shipment_number`,`po_line`.`receving_org_id` AS `receving_org_id`,`po_detail`.`subinventory_id` AS `subinventory_id`,`po_detail`.`locator_id` AS `locator_id`,`po_detail`.`requestor` AS `requestor`,`po_detail`.`quantity` AS `quantity`,ifnull(`po_detail`.`received_quantity`,0) AS `received_quantity`,(`po_detail`.`quantity` - ifnull(`po_detail`.`received_quantity`,0)) AS `open_quantity`,`po_detail`.`need_by_date` AS `need_by_date`,`po_detail`.`promise_date` AS `promise_date`,`po_detail`.`accepted_quantity` AS `accepted_quantity`,`po_detail`.`delivered_quantity` AS `delivered_quantity`,`po_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_detail`.`paid_quantity` AS `paid_quantity`,`po_detail`.`charge_ac_id` AS `charge_ac_id`,`po_detail`.`accrual_ac_id` AS `accrual_ac_id`,`po_detail`.`budget_ac_id` AS `budget_ac_id`,`po_detail`.`ppv_ac_id` AS `ppv_ac_id`,`org`.`org` AS `receving_org`,`po_header`.`created_by` AS `created_by`,`po_header`.`creation_date` AS `creation_date`,`po_header`.`last_update_by` AS `last_update_by`,`po_header`.`last_update_date` AS `last_update_date` from (((((((`po_header` left join `supplier` on((`po_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_line` on((`po_header`.`po_header_id` = `po_line`.`po_header_id`))) left join `item` on(((`po_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_line`.`receving_org_id`)))) left join `po_detail` on((`po_line`.`po_line_id` = `po_detail`.`po_line_id`))) left join `org` on((`po_line`.`receving_org_id` = `org`.`org_id`))) where (`po_header`.`po_type` in ('STANDARD','BLANKET','CONTRACT'));
 
 -- --------------------------------------------------------
 
@@ -16719,7 +17693,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_document_v` AS select 
 --
 DROP TABLE IF EXISTS `po_requisition_all_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_requisition_all_v` AS select `po_requisition_header`.`po_requisition_header_id` AS `po_requisition_header_id`,`po_requisition_header`.`bu_org_id` AS `bu_org_id`,`po_requisition_header`.`po_requisition_type` AS `po_requisition_type`,`po_requisition_header`.`po_requisition_number` AS `po_requisition_number`,`po_requisition_header`.`supplier_id` AS `supplier_id`,`po_requisition_header`.`supplier_site_id` AS `supplier_site_id`,`po_requisition_header`.`buyer` AS `buyer`,`po_requisition_header`.`currency` AS `currency`,`po_requisition_header`.`header_amount` AS `header_amount`,`po_requisition_header`.`requisition_status` AS `requisition_status`,`po_requisition_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_requisition_line`.`po_requisition_line_id` AS `po_requisition_line_id`,`po_requisition_line`.`line_type` AS `line_type`,`po_requisition_line`.`line_number` AS `po_requisition_line_number`,`po_requisition_line`.`item_id_m` AS `item_id_m`,`po_requisition_line`.`item_description` AS `item_description`,`po_requisition_line`.`line_description` AS `line_description`,`po_requisition_line`.`line_quantity` AS `line_quantity`,`po_requisition_line`.`unit_price` AS `unit_price`,`po_requisition_line`.`line_price` AS `line_price`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_requisition_detail`.`po_requisition_detail_id` AS `po_requisition_detail_id`,`po_requisition_detail`.`shipment_number` AS `shipment_number`,`po_requisition_detail`.`ship_to_inventory` AS `ship_to_inventory`,`po_requisition_detail`.`subinventory_id` AS `subinventory_id`,`po_requisition_detail`.`locator_id` AS `locator_id`,`po_requisition_detail`.`requestor` AS `requestor`,`po_requisition_detail`.`quantity` AS `quantity`,`po_requisition_detail`.`need_by_date` AS `need_by_date`,`po_requisition_detail`.`promise_date` AS `promise_date`,`po_requisition_detail`.`received_quantity` AS `received_quantity`,`po_requisition_detail`.`accepted_quantity` AS `accepted_quantity`,`po_requisition_detail`.`delivered_quantity` AS `delivered_quantity`,`po_requisition_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_requisition_detail`.`paid_quantity` AS `paid_quantity`,`po_requisition_detail`.`order_number` AS `order_number`,`org`.`org` AS `ship_to_org`,`po_requisition_header`.`created_by` AS `created_by`,`po_requisition_header`.`creation_date` AS `creation_date`,`po_requisition_header`.`last_update_by` AS `last_update_by`,`po_requisition_header`.`last_update_date` AS `last_update_date` from (((((((`po_requisition_header` left join `supplier` on((`po_requisition_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_requisition_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_requisition_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_requisition_line` on((`po_requisition_header`.`po_requisition_header_id` = `po_requisition_line`.`po_requisition_header_id`))) left join `item` on(((`po_requisition_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_requisition_line`.`receving_org_id`)))) left join `po_requisition_detail` on((`po_requisition_line`.`po_requisition_line_id` = `po_requisition_detail`.`po_requisition_line_id`))) left join `org` on((`po_requisition_detail`.`ship_to_inventory` = `org`.`org_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `po_requisition_all_v` AS select `po_requisition_header`.`po_requisition_header_id` AS `po_requisition_header_id`,`po_requisition_header`.`bu_org_id` AS `bu_org_id`,`po_requisition_header`.`po_requisition_type` AS `po_requisition_type`,`po_requisition_header`.`po_requisition_number` AS `po_requisition_number`,`po_requisition_header`.`supplier_id` AS `supplier_id`,`po_requisition_header`.`supplier_site_id` AS `supplier_site_id`,`po_requisition_header`.`buyer` AS `buyer`,`po_requisition_header`.`currency` AS `currency`,`po_requisition_header`.`header_amount` AS `header_amount`,`po_requisition_header`.`requisition_status` AS `requisition_status`,`po_requisition_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_requisition_line`.`po_requisition_line_id` AS `po_requisition_line_id`,`po_requisition_line`.`line_type` AS `line_type`,`po_requisition_line`.`line_number` AS `po_requisition_line_number`,`po_requisition_line`.`item_id_m` AS `item_id_m`,`po_requisition_line`.`item_description` AS `item_description`,`po_requisition_line`.`line_description` AS `line_description`,`po_requisition_line`.`line_quantity` AS `line_quantity`,`po_requisition_line`.`unit_price` AS `unit_price`,`po_requisition_line`.`line_price` AS `line_price`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_requisition_detail`.`po_requisition_detail_id` AS `po_requisition_detail_id`,`po_requisition_detail`.`shipment_number` AS `shipment_number`,`po_requisition_detail`.`ship_to_inventory` AS `ship_to_inventory`,`po_requisition_detail`.`subinventory_id` AS `subinventory_id`,`po_requisition_detail`.`locator_id` AS `locator_id`,`po_requisition_detail`.`requestor` AS `requestor`,`po_requisition_detail`.`quantity` AS `quantity`,`po_requisition_detail`.`need_by_date` AS `need_by_date`,`po_requisition_detail`.`promise_date` AS `promise_date`,`po_requisition_detail`.`received_quantity` AS `received_quantity`,`po_requisition_detail`.`accepted_quantity` AS `accepted_quantity`,`po_requisition_detail`.`delivered_quantity` AS `delivered_quantity`,`po_requisition_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_requisition_detail`.`paid_quantity` AS `paid_quantity`,`po_requisition_detail`.`order_number` AS `order_number`,`org`.`org` AS `ship_to_org`,`po_requisition_header`.`created_by` AS `created_by`,`po_requisition_header`.`creation_date` AS `creation_date`,`po_requisition_header`.`last_update_by` AS `last_update_by`,`po_requisition_header`.`last_update_date` AS `last_update_date` from (((((((`po_requisition_header` left join `supplier` on((`po_requisition_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_requisition_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_requisition_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_requisition_line` on((`po_requisition_header`.`po_requisition_header_id` = `po_requisition_line`.`po_requisition_header_id`))) left join `item` on(((`po_requisition_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_requisition_line`.`receving_org_id`)))) left join `po_requisition_detail` on((`po_requisition_line`.`po_requisition_line_id` = `po_requisition_detail`.`po_requisition_line_id`))) left join `org` on((`po_requisition_detail`.`ship_to_inventory` = `org`.`org_id`)));
 
 -- --------------------------------------------------------
 
@@ -16728,7 +17702,16 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_requisition_all_v` AS 
 --
 DROP TABLE IF EXISTS `sd_pick_list_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `sd_pick_list_v` AS select `sdsh`.`sd_so_header_id` AS `sd_so_header_id`,`sdsh`.`bu_org_id` AS `bu_org_id`,`sdsh`.`document_type` AS `document_type`,`sdsh`.`so_number` AS `so_number`,`sdsh`.`ar_customer_id` AS `ar_customer_id`,`sdsh`.`ar_customer_site_id` AS `ar_customer_site_id`,`sdsh`.`sales_person` AS `sales_person`,`sdsh`.`doc_currency` AS `doc_currency`,`sdsh`.`header_amount` AS `header_amount`,`sdsh`.`so_status` AS `so_status`,`sdsh`.`payment_term_id` AS `payment_term_id`,`osv`.`onhand` AS `onhand`,`ar_customer`.`customer_name` AS `customer_name`,`ar_customer`.`customer_number` AS `customer_number`,`ar_customer_site`.`customer_site_name` AS `customer_site_name`,`ar_customer_site`.`customer_site_number` AS `customer_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`sdsl`.`sd_so_line_id` AS `sd_so_line_id`,`sdsl`.`line_type` AS `line_type`,`sdsl`.`line_number` AS `line_number`,`sdsl`.`item_id_m` AS `item_id_m`,`sdsl`.`kit_cb` AS `kit_cb`,`sdsl`.`kit_configured_cb` AS `kit_configured_cb`,`sdsl`.`bom_config_header_id` AS `bom_config_header_id`,`sdsl`.`wip_wo_header_id` AS `wip_wo_header_id`,`sdsl`.`item_description` AS `item_description`,`sdsl`.`line_description` AS `line_description`,`sdsl`.`line_quantity` AS `line_quantity`,`sdsl`.`picked_quantity` AS `picked_quantity`,`sdsl`.`shipped_quantity` AS `shipped_quantity`,`sdsl`.`unit_price` AS `unit_price`,`sdsl`.`line_price` AS `line_price`,`sdsl`.`line_status` AS `line_status`,`ssc`.`staging_subinventory_id` AS `staging_subinventory_id`,`ssc`.`staging_locator_id` AS `staging_locator_id`,`subinventory`.`subinventory` AS `staging_subinventory`,`locator`.`locator` AS `staging_locator`,`sdsl`.`requested_date` AS `requested_date`,`sdsl`.`promise_date` AS `promise_date`,`sdsl`.`schedule_ship_date` AS `schedule_ship_date`,`sdsl`.`actual_ship_date` AS `actual_ship_date`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`org`.`org` AS `org`,`sdsl`.`shipping_org_id` AS `shipping_org_id`,`sdsl`.`created_by` AS `created_by`,`sdsl`.`creation_date` AS `creation_date`,`sdsl`.`last_update_by` AS `last_update_by`,`sdsl`.`last_update_date` AS `last_update_date` from (((((((`sd_so_header` `sdsh` left join `payment_term` on((`sdsh`.`payment_term_id` = `payment_term`.`payment_term_id`))) join `ar_customer`) join `ar_customer_site`) join (`sd_so_line` `sdsl` left join `onhand_summary_v` `osv` on(((`osv`.`item_id_m` = `sdsl`.`item_id_m`) and (`osv`.`org_id` = `sdsl`.`shipping_org_id`))))) join `item`) join `org`) join ((`sd_shipping_control` `ssc` left join `subinventory` on((`subinventory`.`subinventory_id` = `ssc`.`staging_subinventory_id`))) left join `locator` on((`locator`.`locator_id` = `ssc`.`staging_locator_id`)))) where ((`sdsh`.`sd_so_header_id` = `sdsl`.`sd_so_header_id`) and (`sdsh`.`ar_customer_id` = `ar_customer`.`ar_customer_id`) and (`sdsh`.`ar_customer_site_id` = `ar_customer_site`.`ar_customer_site_id`) and (`sdsl`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `sdsl`.`shipping_org_id`) and (`sdsl`.`shipping_org_id` = `org`.`org_id`) and (`ssc`.`org_id` = `sdsl`.`shipping_org_id`) and (`sdsh`.`so_status` = 'BOOKED') and (`sdsl`.`line_status` in ('AWAITING_PICKING','PARTIAL_PICKED','PARTIAL_SHIPPED')));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `sd_pick_list_v` AS select `sdsh`.`sd_so_header_id` AS `sd_so_header_id`,`sdsh`.`bu_org_id` AS `bu_org_id`,`sdsh`.`document_type` AS `document_type`,`sdsh`.`so_number` AS `so_number`,`sdsh`.`ar_customer_id` AS `ar_customer_id`,`sdsh`.`ar_customer_site_id` AS `ar_customer_site_id`,`sdsh`.`sales_person` AS `sales_person`,`sdsh`.`doc_currency` AS `doc_currency`,`sdsh`.`header_amount` AS `header_amount`,`sdsh`.`so_status` AS `so_status`,`sdsh`.`payment_term_id` AS `payment_term_id`,`osv`.`onhand` AS `onhand`,`ar_customer`.`customer_name` AS `customer_name`,`ar_customer`.`customer_number` AS `customer_number`,`ar_customer_site`.`customer_site_name` AS `customer_site_name`,`ar_customer_site`.`customer_site_number` AS `customer_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`sdsl`.`sd_so_line_id` AS `sd_so_line_id`,`sdsl`.`line_type` AS `line_type`,`sdsl`.`line_number` AS `line_number`,`sdsl`.`item_id_m` AS `item_id_m`,`sdsl`.`kit_cb` AS `kit_cb`,`sdsl`.`kit_configured_cb` AS `kit_configured_cb`,`sdsl`.`bom_config_header_id` AS `bom_config_header_id`,`sdsl`.`wip_wo_header_id` AS `wip_wo_header_id`,`sdsl`.`item_description` AS `item_description`,`sdsl`.`line_description` AS `line_description`,`sdsl`.`line_quantity` AS `line_quantity`,`sdsl`.`picked_quantity` AS `picked_quantity`,`sdsl`.`shipped_quantity` AS `shipped_quantity`,`sdsl`.`unit_price` AS `unit_price`,`sdsl`.`line_price` AS `line_price`,`sdsl`.`line_status` AS `line_status`,`ssc`.`staging_subinventory_id` AS `staging_subinventory_id`,`ssc`.`staging_locator_id` AS `staging_locator_id`,`subinventory`.`subinventory` AS `staging_subinventory`,`locator`.`locator` AS `staging_locator`,`sdsl`.`requested_date` AS `requested_date`,`sdsl`.`promise_date` AS `promise_date`,`sdsl`.`schedule_ship_date` AS `schedule_ship_date`,`sdsl`.`actual_ship_date` AS `actual_ship_date`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`org`.`org` AS `org`,`sdsl`.`shipping_org_id` AS `shipping_org_id`,`sdsl`.`created_by` AS `created_by`,`sdsl`.`creation_date` AS `creation_date`,`sdsl`.`last_update_by` AS `last_update_by`,`sdsl`.`last_update_date` AS `last_update_date` from (((((((`sd_so_header` `sdsh` left join `payment_term` on((`sdsh`.`payment_term_id` = `payment_term`.`payment_term_id`))) join `ar_customer`) join `ar_customer_site`) join (`sd_so_line` `sdsl` left join `onhand_summary_v` `osv` on(((`osv`.`item_id_m` = `sdsl`.`item_id_m`) and (`osv`.`org_id` = `sdsl`.`shipping_org_id`))))) join `item`) join `org`) join ((`sd_shipping_control` `ssc` left join `subinventory` on((`subinventory`.`subinventory_id` = `ssc`.`staging_subinventory_id`))) left join `locator` on((`locator`.`locator_id` = `ssc`.`staging_locator_id`)))) where ((`sdsh`.`sd_so_header_id` = `sdsl`.`sd_so_header_id`) and (`sdsh`.`ar_customer_id` = `ar_customer`.`ar_customer_id`) and (`sdsh`.`ar_customer_site_id` = `ar_customer_site`.`ar_customer_site_id`) and (`sdsl`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `sdsl`.`shipping_org_id`) and (`sdsl`.`shipping_org_id` = `org`.`org_id`) and (`ssc`.`org_id` = `sdsl`.`shipping_org_id`) and (`sdsh`.`so_status` = 'BOOKED') and (`sdsl`.`line_status` in ('AWAITING_PICKING','PARTIAL_PICKED','PARTIAL_SHIPPED')));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `sd_sales_documents_v`
+--
+DROP TABLE IF EXISTS `sd_sales_documents_v`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `sd_sales_documents_v` AS select `sd_lead`.`sd_lead_id` AS `document_id`,`sd_lead`.`lead_number` AS `docuemnt_number`,`sd_lead`.`sales_team` AS `sales_team`,`sd_lead`.`creation_date` AS `creation_date`,'lead' AS `document_type`,`sd_lead`.`status` AS `status` from `sd_lead` union select `sd_opportunity`.`sd_opportunity_id` AS `document_id`,`sd_opportunity`.`opportunity_number` AS `docuemnt_number`,`sd_opportunity`.`sales_team` AS `sales_team`,`sd_opportunity`.`creation_date` AS `creation_date`,'opportunity' AS `document_type`,`sd_opportunity`.`status` AS `status` from `sd_opportunity` union select `sd_quote_header`.`sd_quote_header_id` AS `document_id`,`sd_quote_header`.`quote_number` AS `docuemnt_number`,'Quote' AS `sales_team`,`sd_quote_header`.`creation_date` AS `creation_date`,'quote' AS `document_type`,`sd_quote_header`.`status` AS `status` from `sd_quote_header` union select `sd_so_header`.`sd_so_header_id` AS `document_id`,`sd_so_header`.`so_number` AS `docuemnt_number`,'SO' AS `sales_team`,`sd_so_header`.`creation_date` AS `creation_date`,'Sales Order' AS `document_type`,`sd_so_header`.`so_status` AS `status` from `sd_so_header`;
 
 -- --------------------------------------------------------
 
@@ -16737,7 +17720,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `sd_pick_list_v` AS select
 --
 DROP TABLE IF EXISTS `sd_so_all_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `sd_so_all_v` AS select `sdsh`.`sd_so_header_id` AS `sd_so_header_id`,`sdsh`.`bu_org_id` AS `bu_org_id`,`sdsh`.`document_type` AS `document_type`,`sdsh`.`so_number` AS `so_number`,`sdsh`.`ar_customer_id` AS `ar_customer_id`,`sdsh`.`ar_customer_site_id` AS `ar_customer_site_id`,`sdsh`.`sales_person` AS `sales_person`,`sdsh`.`doc_currency` AS `doc_currency`,`sdsh`.`header_amount` AS `header_amount`,`sdsh`.`so_status` AS `so_status`,`sdsh`.`payment_term_id` AS `payment_term_id`,`osv`.`onhand` AS `onhand`,`ar_customer`.`customer_name` AS `customer_name`,`ar_customer`.`customer_number` AS `customer_number`,`ar_customer_site`.`customer_site_name` AS `customer_site_name`,`ar_customer_site`.`customer_site_number` AS `customer_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`sdsl`.`sd_so_line_id` AS `sd_so_line_id`,`sdsl`.`line_type` AS `line_type`,`sdsl`.`line_number` AS `line_number`,`sdsl`.`item_id_m` AS `item_id_m`,`sdsl`.`kit_cb` AS `kit_cb`,`sdsl`.`kit_configured_cb` AS `kit_configured_cb`,`sdsl`.`bom_config_header_id` AS `bom_config_header_id`,`sdsl`.`wip_wo_header_id` AS `wip_wo_header_id`,`sdsl`.`item_description` AS `item_description`,`sdsl`.`line_description` AS `line_description`,`sdsl`.`line_quantity` AS `line_quantity`,`sdsl`.`picked_quantity` AS `picked_quantity`,`sdsl`.`shipped_quantity` AS `shipped_quantity`,`sdsl`.`unit_price` AS `unit_price`,`sdsl`.`line_price` AS `line_price`,`sdsl`.`line_status` AS `line_status`,`ssc`.`staging_subinventory_id` AS `staging_subinventory_id`,`ssc`.`staging_locator_id` AS `staging_locator_id`,`subinventory`.`subinventory` AS `staging_subinventory`,`locator`.`locator` AS `staging_locator`,`sdsl`.`requested_date` AS `requested_date`,`sdsl`.`promise_date` AS `promise_date`,`sdsl`.`schedule_ship_date` AS `schedule_ship_date`,`sdsl`.`actual_ship_date` AS `actual_ship_date`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`org`.`org` AS `org`,`sdsl`.`shipping_org_id` AS `shipping_org_id`,`sdsl`.`created_by` AS `created_by`,`sdsl`.`creation_date` AS `creation_date`,`sdsl`.`last_update_by` AS `last_update_by`,`sdsl`.`last_update_date` AS `last_update_date` from (((((((`sd_so_header` `sdsh` left join `payment_term` on((`sdsh`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `ar_customer_site` on((`sdsh`.`ar_customer_site_id` = `ar_customer_site`.`ar_customer_site_id`))) join `ar_customer`) join (`sd_so_line` `sdsl` left join `onhand_summary_v` `osv` on(((`osv`.`item_id_m` = `sdsl`.`item_id_m`) and (`osv`.`org_id` = `sdsl`.`shipping_org_id`))))) join `item`) join `org`) join ((`sd_shipping_control` `ssc` left join `subinventory` on((`subinventory`.`subinventory_id` = `ssc`.`staging_subinventory_id`))) left join `locator` on((`locator`.`locator_id` = `ssc`.`staging_locator_id`)))) where ((`sdsh`.`sd_so_header_id` = `sdsl`.`sd_so_header_id`) and (`sdsh`.`ar_customer_id` = `ar_customer`.`ar_customer_id`) and (`sdsl`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `sdsl`.`shipping_org_id`) and (`sdsl`.`shipping_org_id` = `org`.`org_id`) and (`ssc`.`org_id` = `sdsl`.`shipping_org_id`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `sd_so_all_v` AS select `sdsh`.`sd_so_header_id` AS `sd_so_header_id`,`sdsh`.`bu_org_id` AS `bu_org_id`,`sdsh`.`document_type` AS `document_type`,`sdsh`.`so_number` AS `so_number`,`sdsh`.`ar_customer_id` AS `ar_customer_id`,`sdsh`.`ar_customer_site_id` AS `ar_customer_site_id`,`sdsh`.`sales_person` AS `sales_person`,`sdsh`.`doc_currency` AS `doc_currency`,`sdsh`.`header_amount` AS `header_amount`,`sdsh`.`so_status` AS `so_status`,`sdsh`.`payment_term_id` AS `payment_term_id`,`osv`.`onhand` AS `onhand`,`ar_customer`.`customer_name` AS `customer_name`,`ar_customer`.`customer_number` AS `customer_number`,`ar_customer_site`.`customer_site_name` AS `customer_site_name`,`ar_customer_site`.`customer_site_number` AS `customer_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`sdsl`.`sd_so_line_id` AS `sd_so_line_id`,`sdsl`.`line_type` AS `line_type`,`sdsl`.`line_number` AS `line_number`,`sdsl`.`item_id_m` AS `item_id_m`,`sdsl`.`kit_cb` AS `kit_cb`,`sdsl`.`kit_configured_cb` AS `kit_configured_cb`,`sdsl`.`bom_config_header_id` AS `bom_config_header_id`,`sdsl`.`wip_wo_header_id` AS `wip_wo_header_id`,`sdsl`.`item_description` AS `item_description`,`sdsl`.`line_description` AS `line_description`,`sdsl`.`line_quantity` AS `line_quantity`,`sdsl`.`picked_quantity` AS `picked_quantity`,`sdsl`.`shipped_quantity` AS `shipped_quantity`,`sdsl`.`unit_price` AS `unit_price`,`sdsl`.`line_price` AS `line_price`,`sdsl`.`line_status` AS `line_status`,`ssc`.`staging_subinventory_id` AS `staging_subinventory_id`,`ssc`.`staging_locator_id` AS `staging_locator_id`,`subinventory`.`subinventory` AS `staging_subinventory`,`locator`.`locator` AS `staging_locator`,`sdsl`.`requested_date` AS `requested_date`,`sdsl`.`promise_date` AS `promise_date`,`sdsl`.`schedule_ship_date` AS `schedule_ship_date`,`sdsl`.`actual_ship_date` AS `actual_ship_date`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`org`.`org` AS `org`,`sdsl`.`shipping_org_id` AS `shipping_org_id`,`sdsl`.`created_by` AS `created_by`,`sdsl`.`creation_date` AS `creation_date`,`sdsl`.`last_update_by` AS `last_update_by`,`sdsl`.`last_update_date` AS `last_update_date` from (((((((`sd_so_header` `sdsh` left join `payment_term` on((`sdsh`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `ar_customer_site` on((`sdsh`.`ar_customer_site_id` = `ar_customer_site`.`ar_customer_site_id`))) join `ar_customer`) join (`sd_so_line` `sdsl` left join `onhand_summary_v` `osv` on(((`osv`.`item_id_m` = `sdsl`.`item_id_m`) and (`osv`.`org_id` = `sdsl`.`shipping_org_id`))))) join `item`) join `org`) join ((`sd_shipping_control` `ssc` left join `subinventory` on((`subinventory`.`subinventory_id` = `ssc`.`staging_subinventory_id`))) left join `locator` on((`locator`.`locator_id` = `ssc`.`staging_locator_id`)))) where ((`sdsh`.`sd_so_header_id` = `sdsl`.`sd_so_header_id`) and (`sdsh`.`ar_customer_id` = `ar_customer`.`ar_customer_id`) and (`sdsl`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `sdsl`.`shipping_org_id`) and (`sdsl`.`shipping_org_id` = `org`.`org_id`) and (`ssc`.`org_id` = `sdsl`.`shipping_org_id`));
 
 -- --------------------------------------------------------
 
@@ -16746,7 +17729,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `sd_so_all_v` AS select `s
 --
 DROP TABLE IF EXISTS `supplier_all_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `supplier_all_v` AS select `su`.`supplier_id` AS `supplier_id`,`su`.`supplier_number` AS `supplier_number`,`su`.`supplier_name` AS `supplier_name`,`ss`.`supplier_site_id` AS `supplier_site_id`,`ss`.`supplier_site_number` AS `supplier_site_number`,`ss`.`supplier_site_name` AS `supplier_site_name`,`su`.`supplier_type` AS `supplier_type`,`su`.`tax_country` AS `tax_country`,`su`.`created_by` AS `created_by`,`su`.`ar_customer_id` AS `ar_customer_id`,`su`.`status` AS `status`,`su`.`creation_date` AS `creation_date`,`su`.`last_update_by` AS `last_update_by`,`su`.`last_update_date` AS `last_update_date`,`sb`.`supplier_bu_id` AS `supplier_bu_id`,`sb`.`org_id` AS `org_id`,`sb`.`liability_account_id` AS `liability_account_id`,`sb`.`payable_account_id` AS `payable_account_id`,`sb`.`payment_discount_account_id` AS `payment_discount_account_id`,`sb`.`pre_payment_account_id` AS `pre_payment_account_id`,`ss`.`site_tax_country` AS `site_tax_country`,`ss`.`site_tax_reg_no` AS `site_tax_reg_no`,`ss`.`status` AS `site_status`,`ss`.`currency` AS `currency`,`ss`.`payment_term_id` AS `payment_term_id` from ((`supplier` `su` left join `supplier_site` `ss` on((`ss`.`supplier_id` = `su`.`supplier_id`))) left join `supplier_bu` `sb` on((`su`.`supplier_id` = `sb`.`supplier_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `supplier_all_v` AS select `su`.`supplier_id` AS `supplier_id`,`su`.`supplier_number` AS `supplier_number`,`su`.`supplier_name` AS `supplier_name`,`ss`.`supplier_site_id` AS `supplier_site_id`,`ss`.`supplier_site_number` AS `supplier_site_number`,`ss`.`supplier_site_name` AS `supplier_site_name`,`su`.`supplier_type` AS `supplier_type`,`su`.`tax_country` AS `tax_country`,`su`.`created_by` AS `created_by`,`su`.`ar_customer_id` AS `ar_customer_id`,`su`.`status` AS `status`,`su`.`creation_date` AS `creation_date`,`su`.`last_update_by` AS `last_update_by`,`su`.`last_update_date` AS `last_update_date`,`sb`.`supplier_bu_id` AS `supplier_bu_id`,`sb`.`org_id` AS `org_id`,`sb`.`liability_account_id` AS `liability_account_id`,`sb`.`payable_account_id` AS `payable_account_id`,`sb`.`payment_discount_account_id` AS `payment_discount_account_id`,`sb`.`pre_payment_account_id` AS `pre_payment_account_id`,`ss`.`site_tax_country` AS `site_tax_country`,`ss`.`site_tax_reg_no` AS `site_tax_reg_no`,`ss`.`status` AS `site_status`,`ss`.`currency` AS `currency`,`ss`.`payment_term_id` AS `payment_term_id` from ((`supplier` `su` left join `supplier_site` `ss` on((`ss`.`supplier_id` = `su`.`supplier_id`))) left join `supplier_bu` `sb` on((`su`.`supplier_id` = `sb`.`supplier_id`)));
 
 -- --------------------------------------------------------
 
@@ -16755,7 +17738,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `supplier_all_v` AS select
 --
 DROP TABLE IF EXISTS `wip_wo_routing_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `wip_wo_routing_v` AS select `item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`uom_id` AS `uom_id`,`wwh`.`item_id_m` AS `item_id_m`,`wwh`.`wo_number` AS `wo_number`,`wwh`.`org_id` AS `org_id`,`wwh`.`wip_accounting_group_id` AS `wip_accounting_group_id`,`wwh`.`quantity` AS `quantity`,`wwh`.`completed_quantity` AS `completed_quantity`,`wwrl`.`routing_sequence` AS `routing_sequence`,`wwrl`.`department_id` AS `department_id`,`wwrd`.`wip_wo_routing_detail_id` AS `wip_wo_routing_detail_id`,`wwrd`.`wip_wo_routing_line_id` AS `wip_wo_routing_line_id`,`wwrd`.`wip_wo_header_id` AS `wip_wo_header_id`,`wwrd`.`resource_sequence` AS `resource_sequence`,`wwrd`.`resource_id` AS `resource_id`,`wwrd`.`resource_usage` AS `resource_usage`,`wwrd`.`resource_schedule` AS `resource_schedule`,`wwrd`.`required_quantity` AS `required_quantity`,`wwrd`.`applied_quantity` AS `applied_quantity`,`wwrd`.`charge_type` AS `charge_type` from (((`wip_wo_routing_detail` `wwrd` left join `wip_wo_routing_line` `wwrl` on((`wwrl`.`wip_wo_routing_line_id` = `wwrd`.`wip_wo_routing_line_id`))) left join `wip_wo_header` `wwh` on((`wwh`.`wip_wo_header_id` = `wwrd`.`wip_wo_header_id`))) left join `item` on(((`item`.`item_id_m` = `wwh`.`item_id_m`) and (`item`.`org_id` = `wwh`.`org_id`))));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `wip_wo_routing_v` AS select `item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`uom_id` AS `uom_id`,`wwh`.`item_id_m` AS `item_id_m`,`wwh`.`wo_number` AS `wo_number`,`wwh`.`org_id` AS `org_id`,`wwh`.`wip_accounting_group_id` AS `wip_accounting_group_id`,`wwh`.`quantity` AS `quantity`,`wwh`.`completed_quantity` AS `completed_quantity`,`wwrl`.`routing_sequence` AS `routing_sequence`,`wwrl`.`department_id` AS `department_id`,`wwrd`.`wip_wo_routing_detail_id` AS `wip_wo_routing_detail_id`,`wwrd`.`wip_wo_routing_line_id` AS `wip_wo_routing_line_id`,`wwrd`.`wip_wo_header_id` AS `wip_wo_header_id`,`wwrd`.`resource_sequence` AS `resource_sequence`,`wwrd`.`resource_id` AS `resource_id`,`wwrd`.`resource_usage` AS `resource_usage`,`wwrd`.`resource_schedule` AS `resource_schedule`,`wwrd`.`required_quantity` AS `required_quantity`,`wwrd`.`applied_quantity` AS `applied_quantity`,`wwrd`.`charge_type` AS `charge_type` from (((`wip_wo_routing_detail` `wwrd` left join `wip_wo_routing_line` `wwrl` on((`wwrl`.`wip_wo_routing_line_id` = `wwrd`.`wip_wo_routing_line_id`))) left join `wip_wo_header` `wwh` on((`wwh`.`wip_wo_header_id` = `wwrd`.`wip_wo_header_id`))) left join `item` on(((`item`.`item_id_m` = `wwh`.`item_id_m`) and (`item`.`org_id` = `wwh`.`org_id`))));
 
 --
 -- Constraints for dumped tables

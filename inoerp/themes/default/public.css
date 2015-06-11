@@ -1227,8 +1227,13 @@ select.search_document_list option:nth-child(even) {
  text-align: center;
  vertical-align: middle;
  padding-top: 20px;
- border-radius: 10px;
- background-color: rgba(42, 147, 177, 0.89);;
+ border-radius: 5px;
+ background-color: rgba(42, 147, 177, 0.89);
+}
+
+#dashborad_menu li:hover{
+  background-color: #2574A9;
+  /*border-radius: 60px;*/ 
 }
 
 #dashborad_menu li a{
@@ -2202,4 +2207,8 @@ background-color: rgba(233, 237, 237, 0.32) !important;
 
 #searchResultMessages ul.inline_list  h3{
         margin-top: 0 !important;
+}
+#export_excel_allResult{
+ padding: 2px 15px !important;
+vertical-align: top !important;
 }

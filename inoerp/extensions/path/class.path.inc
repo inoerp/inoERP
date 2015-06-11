@@ -523,12 +523,13 @@ class path extends dbObject {
    $allPaths .= '</ul></div>';
    $allPaths .= '<div class="panel-body"><ul class="child_menu">';
    $childs = $path->findAll_childOfPartent($path_id);
+//   pa($childs);pa($allowed_path_ids);
    foreach ($childs as $child_paths) {
     $key = array_search($child_paths->path_id, $allowed_path_ids);
     $p_name_child = $child_paths->name;
     $p_desc_child = $child_paths->description;
     $fa_icon = ino_icon($child_paths->path_type);
-    if ($key) {
+    if ($key || $key == 0) {
      $url_1 = $path->fullPath($child_paths->path_link);
      if ($this->show_description) {
       $allPaths .= "<li title=\"$p_name_child\" class='expandable {$child_paths->name}'>" . '<a class="list-header" href="' . $url_1 . '">&nbsp;' . $fa_icon . ' &nbsp; ' . $p_desc_child . '</a>';

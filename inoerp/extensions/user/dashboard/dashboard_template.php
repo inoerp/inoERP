@@ -1,4 +1,3 @@
-<script src="<?php echo HOME_URL; ?>includes/js/report.js"></script>
 <link href="<?php echo HOME_URL; ?>includes/ecss/getsvgimage.css" media="all" rel="stylesheet" type="text/css" />
 <div id ="user_dashboard_divId">
  <div id="tabsHeader">
@@ -10,9 +9,9 @@
     <ul class="tabMain">
      <li><a href="#tabsHeader-1">Navigation</a></li>
      <li><a href="#tabsHeader-2">Quick Info</a></li>
-     <li><a href="#tabsHeader-3">On hand</a></li>
-     <li><a href="#tabsHeader-4">Sales Funnel</a></li>
-     <li><a href="#tabsHeader-5">Purchasing</a></li>
+     <li><a href="#tabsHeader-3" class="get-view-content" data-view_id="11">On hand</a></li>
+     <li><a href="#tabsHeader-4" class="get-view-content" data-view_id="12">Sales Funnel</a></li>
+     <li><a href="#tabsHeader-5" class="get-view-content" data-view_id="13">Purchasing</a></li>
      <li><a href="#tabsHeader-6">WIP Value</a></li>
     </ul>
     <div class="tabContainer"> 
@@ -35,35 +34,17 @@
         ?>
        </li>
        <li>
-      <a title='Update Favourite' href="<?php echo HOME_URL ?>form.php?class_name=user_favourite&mode=9"><h2>Favourites 
-           <i class="fa fa-edit"> </i></h2></a>
+        <a title='Update Favourite' href="<?php echo HOME_URL ?>form.php?class_name=user_favourite&mode=9"><h2>Favourites 
+          <i class="fa fa-edit"> </i></h2></a>
         <?php
         echo $fav->show_currentUser_fav();
-        
         ?>
        </li>
       </ul>
      </div>
-     <div id="tabsHeader-3" class="tabContent">
-      <?php
-      $view_i = new view();
-      $view_i->view_id = 11;
-      $view_i->viewResultById();
-      ?>
-     </div>
-          <div id="tabsHeader-4" class="tabContent">
-      <?php
-      $view_i->view_id = 13;
-      $view_i->viewResultById();
-      ?>
-     </div>
-     <div id="tabsHeader-5" class="tabContent">
-      <?php
-      $view_i->view_id = 12;
-      $view_i->viewResultById();
-      ?>
-     </div>
-
+     <div id="tabsHeader-3" class="tabContent"></div>
+     <div id="tabsHeader-4" class="tabContent"></div>
+     <div id="tabsHeader-5" class="tabContent"></div>
      <div id="tabsHeader-6" class="tabContent">
       <div>                
        <?php

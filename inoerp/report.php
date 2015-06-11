@@ -84,7 +84,6 @@ if ((!empty($class_names)) && (!empty($report_name))) {
 <script type="text/javascript">
  $(document).ready(function () {
    $.getScript("includes/js/erp.js");
-  $.getScript("includes/js/report.js");
   $("head").append("<link id='getsvgimage' href='http://localhost/inoerp/includes/ecss/getsvgimage.css' type='text/css' rel='stylesheet' />");
  });
 </script>

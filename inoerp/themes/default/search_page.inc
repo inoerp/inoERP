@@ -34,7 +34,7 @@
   <script src="<?php echo HOME_URL; ?>tparty/bootstrap/js/bootstrap.min.js"></script>
   <script src="<?php echo HOME_URL; ?>tparty/bootstrap/js/menu.js"></script>
   <script src="includes/js/custom/tinymce/tinymce.min.js"></script>
-  <script type="text/javascript" src="includes/basics/js_lang.php"></script>
+  <script type="text/javascript" src="includes/basics/js_control.php"></script>
   <script src="includes/js/save.js"></script>
   <script src="includes/js/custom_plugins.js"></script>
   <script src="includes/js/basics.js"></script>

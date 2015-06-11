@@ -40,8 +40,10 @@
     <div id="tabsHeader-2" class="tabContent">
      <ul class="column header_field">
       <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
-       <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup clickable">
-        <?php echo gettext('Customer Name') ?></label><?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
+       <label class="auto_complete"><?php echo gettext('Customer Name') ?></label>
+        <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?>
+      <i class="ar_customer_id select_popup clickable fa fa-search"></i>
+      </li>
       <li><?php $f->l_text_field_d('customer_number'); ?></li>
       <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
       <li><?php $f->l_text_field_dr('sd_so_number'); ?></li>
