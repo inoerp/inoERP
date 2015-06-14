@@ -1226,13 +1226,13 @@ mandatoryFieldMain.prototype.mandatoryHeader = function ()
    var header_id_h = '#' + header_id;
    var header_id_c = '.' + header_id;
    if (!$(header_id_h).val()) {
-//    if (move_line_wo_header == 'SAVE_HEADER') {
-//     $('#save').trigger('click');
-//    } else if (move_line_wo_header == 'SHOW_WARNING') {
-//     if (confirm('Header data is not saved : Do you want to save the header')) {
-//      $('#save').trigger('click');
-//     }
-//    }
+    if (move_line_wo_header == 'SAVE_HEADER') {
+     $('#save').trigger('click');
+    } else if (move_line_wo_header == 'SHOW_WARNING') {
+     if (confirm('Header data is not saved : Do you want to save the header')) {
+      $('#save').trigger('click');
+     }
+    }
 
    } else {
     var headerIdVal = $(header_id_h).val();
