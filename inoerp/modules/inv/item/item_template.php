@@ -16,6 +16,7 @@
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
       <li><?php
+       $f = new inoform();
        if (!empty($item->org_id)) {
         $f->l_select_field_from_object('org_id', $org->findAll_inventory(), 'org_id', 'org', $item->org_id, 'org_id', '', 1, $readonly);
        } else {
@@ -28,8 +29,8 @@
        <i class="select_item_number select_popup clickable fa fa-search"></i>
        <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show document_id item_id"><i class="fa fa-refresh"></i></a> 
       </li>
-      <li><label><?php echo gettext('Item Number') ?><img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete item_number clickable">
-       </label><?php echo $f->text_field('item_number', $$class->item_number, '15', 'item_number', 'select_item_number', 1, $readonly_mas); ?>
+      <li><label><?php echo gettext('Item Number') ?>&nbsp; <i class="disable_autocomplete item_number clickable fa fa-plus"></i> 
+       </label><?php echo $f->text_field('item_number', $$class->item_number, '15', 'item_number', 'select_item_number', 1, $readonly_mas, 'Enter Item Number To Serach', 'Click on the + sign before this field to enter a new item'); ?>
        <i class="select_item_number select_popup clickable fa fa-search"></i>
        <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show2 document_id findBy_item_number">
         <i class="fa fa-refresh"></i></a> 
@@ -310,7 +311,6 @@
        <li><?php $f->l_text_field_d('invoice_matching'); ?></li>
        <li><?php $f->l_text_field_d('default_buyer'); ?></li>
        <li><?php $f->l_text_field_d('list_price'); ?></li>
-       <li><?php $f->l_text_field_d('un_number'); ?></li>
       </ul>
      </div>
      <div class="second_rowset">
@@ -446,6 +446,9 @@
        <ul class="column line_field">
         <li><?php $f->l_checkBox_field_d('service_request_cb'); ?></li>
         <li><?php $f->l_select_field_from_object('billing_type', hd_service_type_header::billing_type(), 'option_line_code', 'option_line_value', $$class->billing_type); ?></li>
+        <li><?php $f->l_select_field_from_array('contract_item_type', hd_service_contract_line::$line_type_a, $$class->contract_item_type); ?></li>
+        <li><?php $f->l_select_field_from_object('duration_uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->duration_uom_id, 'duration_uom_id', 'uom_id', '', $readonly1); ?>         </li>
+        <li><?php $f->l_text_field_d('duration') ?></li>
        </ul>
       </div>
 

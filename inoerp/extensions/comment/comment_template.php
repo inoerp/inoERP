@@ -1,8 +1,4 @@
 <div id="commentForm">
- <script src="<?php
-$f = new inoform();
-echo HOME_URL . 'extensions/comment/'
-?>comment.js"></script> 
  <div id="commentForm_witoutjs">
   <div id="output">
   </div>

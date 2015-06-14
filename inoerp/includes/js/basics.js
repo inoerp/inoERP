@@ -24,6 +24,10 @@ function animateCycle()
 
 }
 
+function daysBetweenDates(date1, date2){
+ return (Date.parse(date1)- Date.parse(date2))/(1000*60*60*24);
+}
+
 function getFormDetails(url) {
  return $.ajax({
   url: url,
@@ -3708,18 +3712,21 @@ $(document).ready(function () {
 
 
 
-
  //diable/enable auto complete
  $('#content').on('click', '.disable_autocomplete', function () {
-  $(this).parent().siblings().each(function () {
+  $(this).parent().siblings('input').each(function () {
    $(this).autocomplete({
     disabled: true
    });
+    var fname = $(this).prop('name').replace(/\[]+/g, ' ').replace(/_+/g,' ');
+    $(this).prop('placeholder' , 'Enter new ' + fname);
   });
-  $(this).parent().children().each(function () {
+  $(this).parent().children('input').each(function () {
    $(this).autocomplete({
     disabled: true
    });
+        var fname = $(this).prop('name').replace(/\[]+/g, ' ').replace(/_+/g,' ');
+    $(this).prop('placeholder' , 'Enter new ' + fname);
   });
  });
 

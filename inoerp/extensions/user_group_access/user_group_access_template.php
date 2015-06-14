@@ -40,7 +40,7 @@
            echo ino_inline_action($$class->user_group_access_id, array('user_group_code' => $user_group_code_h));
            ?>
           </td>
-          <td><?php form::number_field_drs('user_group_access_id') ?></td>
+          <td><?php $f->text_field_dsr('user_group_access_id' , 'always_readonly') ?></td>
           <td><?php echo $f->select_field_from_object('org_id', org::find_all(), 'org_id', 'org', $$class->org_id, '', '', 1); ?></td>
           <td><?php echo $f->select_field_from_array('access_level', user_group_access::$access_map, $$class->access_level); ?></td>
          </tr>

@@ -9,20 +9,16 @@
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
-       <ul class="column header_field"> 
-        <li><?php $f->l_text_field_dr_withSearch('uom_id') ?>
-         <a name="show" href="form.php?class_name=uom&<?php echo "mode=$mode"; ?>" class="show document_id uom_id"><i class='fa fa-refresh'></i></a> 
-        </li> 
-        <li><?php $f->l_text_field_d('uom_name'); ?></li>
-        <li><?php $f->l_select_field_from_object('class', uom::uom_class(), 'option_line_code', 'option_line_code', $$class->class, 'class', '','' ,$readonly); ?></li>
-        <li><?php $f->l_text_field_d('description'); ?></li>
-        <li><?php $f->l_checkBox_field_d('primary_cb'); ?></li>
-        <li><?php $f->l_status_field_d('status'); ?></li>
-        <li><?php $f->l_checkBox_field_d('rev_enabled_cb'); ?></li>
-        <li><?php $f->l_text_field_d('rev_number'); ?></li>
-       </ul>
-      </div>
+      <ul class="column header_field"> 
+       <li><?php $f->l_text_field_dr_withSearch('uom_id') ?>
+        <a name="show" href="form.php?class_name=uom&<?php echo "mode=$mode"; ?>" class="show document_id uom_id"><i class='fa fa-refresh'></i></a> 
+       </li> 
+       <li><?php $f->l_text_field_d('uom_name'); ?></li>
+       <li><?php $f->l_select_field_from_object('class', uom::uom_class(), 'option_line_code', 'option_line_code', $$class->class, 'class', '', '', $readonly); ?></li>
+       <li><?php $f->l_text_field_d('description'); ?></li>
+       <li><?php $f->l_checkBox_field_d('primary_cb'); ?></li>
+       <li><?php $f->l_status_field_d('status'); ?></li>
+      </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div> <?php echo ino_attachement($file) ?> </div>
@@ -58,15 +54,28 @@
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <div > 
-       <ul class="column four_column" > 
-        <li><?php $f->l_text_field_dr('primary_uom_id'); ?></li>
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="primary_uom_id select_popup clickable">
-          <?php echo gettext('Primary UOM') ?></label><?php $f->text_field_d('primary_uom'); ?></li>
-        <li><label> Operator</label>
-         <input type="image"  src="<?php echo HOME_URL; ?>themes/images/multiply.png" alt="multiply"/> 
-        </li> 
-        <li><?php $f->l_text_field_d('primary_relation'); ?></li> 
-       </ul> 
+       <table class="form form_detail_data_table detail">
+        <thead>
+         <tr>
+          <th><?php echo gettext('UOM') ?></th>
+          <th><?php echo gettext('Equals') ?></th>
+          <th><?php echo gettext('Primary UOM Id') ?></th>
+          <th><?php echo gettext('Primary UOM') ?></th>
+          <th><?php echo gettext('Operator') ?></th>
+          <th><?php echo gettext('Relation Value') ?></th>
+         </tr>
+        </thead>
+        <tbody class="form_data_detail_tbody">
+         <tr class="uom_line_tr">
+          <td><?php echo $$class->uom_name; ?> </td>
+          <td class="large-text small-left-padding">&#61;</td>
+          <td><?php $f->text_field_d('primary_uom_id'); ?><i class="primary_uom_id select_popup clickable fa fa-search"></i></td>
+          <td><?php $f->text_field_d('primary_uom'); ?></td>
+          <td class="large-text small-left-padding">&#120;</td>
+          <td><?php $f->text_field_d('primary_relation'); ?></td>
+         </tr>
+        </tbody>
+       </table>
       </div> 
       <!--end of tab1 div three_column-->
      </div> 

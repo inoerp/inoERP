@@ -36,7 +36,7 @@ setValFromSelectPage.prototype.setVal = function () {
  var rowClass = '.' + localStorage.getItem("row_class");
  var fieldClass = '.' + localStorage.getItem("field_class");
  var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass");
- addressPopupDivClass =addressPopupDivClass.replace(/\s+/g, '.');
+ addressPopupDivClass = addressPopupDivClass.replace(/\s+/g, '.');
 
  if (address_id) {
   $('#form_header').find(addressPopupDivClass).find('.address_id').val(address_id);
@@ -161,14 +161,6 @@ function create_receipt() {
 }
 
 $(document).ready(function () {
-//mandatory and field sequence
- var mandatoryCheck = new mandatoryFieldMain();
- mandatoryCheck.header_id = 'ar_transaction_header_id';
- mandatoryCheck.mandatoryHeader();
- mandatoryCheck.form_area = 'form_header';
- mandatoryCheck.mandatory_fields = ["bu_org_id", "transaction_type"];
- mandatoryCheck.mandatory_messages = ["First Select BU Org", "No Transaction Type"];
-// mandatoryCheck.mandatoryField();
 
 //setting the first line & shipment number
  if (!($('.lines_number:first').val())) {
@@ -208,17 +200,6 @@ $(document).ready(function () {
   void window.open('select.php?class_name=ar_transaction_header', '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
-
- //function to coply line to details
- function copy_line_to_details() {
-  $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function () {
-   var detailExists = $(this).closest("td").find(".form_detail_data_fs").length;
-   if (detailExists === 0) {
-    var lineQuantity = $(this).closest('tr').find('.inv_line_quantity').val();
-    $(this).closest("td").find(".quantity:first").val(lineQuantity);
-   }
-  });
- }
 
  copy_line_to_details();
 
@@ -351,4 +332,58 @@ $(document).ready(function () {
  });
 
 
+//New Functions
+ $('body').off('change', '#category').on('change', '#category', function () {
+contractLineType();
+ });
+contractLineType();
+
+ $('body').off('blur', '#hd_service_contract_header .start_date, #hd_service_contract_header .end_date')
+         .on('blur', '#hd_service_contract_header .start_date, #hd_service_contract_header .end_date', function () {
+          if ($('#hd_service_contract_header .start_date').val() && $('#hd_service_contract_header .end_date').val()) {
+           var endDate = $('#hd_service_contract_header .end_date').val();
+           var startDate = $('#hd_service_contract_header .start_date').val();
+           var daysDiff = +daysBetweenDates(endDate, startDate);
+           $('#duration').val(daysDiff);
+           $('#duration_uom_id').val('42');
+          }
+         });
+ $('body').off('click', '#duration, #duration_uom_id').on('click', '#duration, #duration_uom_id', function () {
+  if ($('#hd_service_contract_header .start_date').val() && $('#hd_service_contract_header .end_date').val()) {
+   var endDate = $('#hd_service_contract_header .end_date').val();
+   var startDate = $('#hd_service_contract_header .start_date').val();
+   var daysDiff = +daysBetweenDates(endDate, startDate);
+   $('#duration').val(daysDiff);
+   $('#duration_uom_id').val('42');
+  }
+ });
+
 });
+
+function contractLineType() {
+ if ($('#category').val() === 'WARRANTY') {
+  var optionArray = ['SERVICE', 'USAGE', 'SUBSCRIPTION'];
+  changeContractLineType(optionArray);
+ } else  if ($('#category').val() === 'SERVICE'){
+  var optionArray = ['WARENTY', 'EXTND_WARENTY'];
+  changeContractLineType(optionArray);
+ }
+}
+
+function changeContractLineType(optionArrayToBeDisabled) {
+ $('.line_type option').removeAttr('disabled');
+ $(optionArrayToBeDisabled).each(function (i, curVal) {
+  $('.line_type option[value="' + curVal + '"]').prop('disabled', 'disabled');
+ });
+}
+
+//function to coply line to details
+function copy_line_to_details() {
+ $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function () {
+  var detailExists = $(this).closest("td").find(".form_detail_data_fs").length;
+  if (detailExists === 0) {
+   var lineQuantity = $(this).closest('tr').find('.inv_line_quantity').val();
+   $(this).closest("td").find(".quantity:first").val(lineQuantity);
+  }
+ });
+}

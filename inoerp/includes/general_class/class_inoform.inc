@@ -743,7 +743,7 @@ EOD;
 
  public function text_field_dsr($field_name, $div_class = "") {
   global $class, $$class;
-  $div_class = $field_name . ' small';
+  $div_class = $field_name . " $div_class small";
   echo $this->text_field($field_name, $$class->$field_name, '8', $field_name, $div_class, '', 1);
  }
 

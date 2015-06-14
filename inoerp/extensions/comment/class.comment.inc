@@ -27,7 +27,6 @@ class comment extends dbObject {
  public static $primary_column = "comment_id";
  public static $key_column = "comment";
  public static $module = "extension";
- public static $js_fileName = 'extensions/comment/comment.js';
  public static $system_info = [
   'name' => 'Comment',
   'number' => '10012',

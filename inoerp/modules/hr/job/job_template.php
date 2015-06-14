@@ -5,7 +5,7 @@
    <div id="tabsHeader">
     <ul class="tabMain">
      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo gettext('Requirements') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Basics-2') ?></a></li>
      <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
      <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
     </ul>
@@ -27,14 +27,14 @@
       </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field">
+        <li><?php $f->l_select_field_from_array('usage', hr_job::$usage_a, $$class->usage); ?></li>
+        <li><?php $f->l_select_field_from_object('group_hr_job_id', hr_job::find_all(), 'hr_job_id', 'job_name', $$class->group_hr_job_id, 'group_hr_job_id', '', '', $readonly); ?></li>
         <li><?php $f->l_text_field_d('min_education'); ?></li>
         <li><?php $f->l_text_field_d('min_experience'); ?></li>
         <li><?php $f->l_text_field_d('technology'); ?></li>
         <li><?php $f->l_text_field_d('skillset'); ?></li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-3" class="tabContent">
       <div> <?php echo ino_attachement($file) ?> </div>

@@ -175,7 +175,7 @@ if ((!empty($class_names)) && (!(is_array($class_names)))) {
   }
  }
 } else if ((!empty($class_names)) && (is_array($class_names))) {
-  $class_names_str = $class_names[0];
+ $class_names_str = $class_names[0];
  if (!empty($form_page) && property_exists($class_names_str, 'form_class_name')) {
   $class_names[0] = $class_names_str::$form_class_name;
  }
@@ -300,7 +300,7 @@ if (($continue) && (!empty($class_names))) {
     } catch (Exception $e) {
      
     }
-      if (($class != 'extn_contact')) {
+    if (($class != 'extn_contact')) {
      $all_contacts = extn_contact::find_by_reference($table_name, $class_id_value);
     }
     if ($class != 'category') {
@@ -616,7 +616,14 @@ if ($continue && !empty($form_page)) {
 
  if (empty($template_file_names)) {
   $custom_template_name = THEME_DIR . '/template/' . $class . '_template.php';
-  if (file_exists($custom_template_name)) {
+  $role_custom_template_name = '';
+  if (isset($_SESSION['user_roles'])) {
+   $primary_user_role = $_SESSION['user_roles'][0];
+   $role_custom_template_name = THEME_DIR . '/template/' .$primary_user_role .'_' . $class . '_template.php';
+  }
+  if (!empty($role_custom_template_name) && file_exists($role_custom_template_name)) {
+   $template_file_names = [$role_custom_template_name];
+  } else if (file_exists($custom_template_name)) {
    $template_file_names = [$custom_template_name];
   } else {
    $template_file_names = glob($fdir . DS . "*_template.php");

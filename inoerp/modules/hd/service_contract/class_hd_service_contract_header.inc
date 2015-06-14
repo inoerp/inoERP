@@ -3,7 +3,7 @@
 /**
  * inoERP 
  *
- * Version 0.1.1
+ * 
  *
  * @copyright 2014 Nishit R. Das
  * @license   https://www.mozilla.org/MPL/2.0/
@@ -12,37 +12,36 @@
  */
 
 /**
- * AR_TRANSACTION_HEADER
+ * hd_service_contract_HEADER
  * Used for generating AR Invoice, Debit Memo, Credit Memo, Deposit, Guarantee
  * Contains all the AR Transaction header level information, such as - Customer, Document Type, Currency, Trnx Number
  * 
  */
-class ar_transaction_header extends dbObject {
+class hd_service_contract_header extends dbObject {
 
- public static $table_name = "ar_transaction_header";
- public static $dependent_classes = ['ar_transaction_line', 'ar_transaction_detail'];
- public static $primary_column = "ar_transaction_header_id";
- public static $primary_column2 = "transaction_number";
+ public static $table_name = "hd_service_contract_header";
+ public static $dependent_classes = ['hd_service_contract_line', 'hd_service_contract_detail'];
+ public static $primary_column = "hd_service_contract_header_id";
+ public static $primary_column2 = "contract_number";
  public static $key_column = 'ar_customer_id';
- public static $module = "ar"; //same as gl_journal_source
- public static $gl_journal_category = "AR_INVOICE";
- public static $js_fileName = 'modules/ar/transaction/ar_transaction.js';
+ public static $module = "hd"; //same as gl_journal_source
+ public static $gl_journal_category = "HD_CONTRACT";
+// public static $js_fileName = 'modules/ar/transaction/hd_service_contract.js';
  public static $system_info = [
-  'name' => 'AR Transaction',
+  'name' => 'Service COntracts',
   'number' => '1303',
-  'description' => 'Create & Mainten AR Transactions, such as - Invoice, Debit Memo, Credit Memo etc',
+  'description' => 'Create & Mainten Service Contracts',
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',
-  'dependent_class' => array('ar_transaction_line', 'ar_transaction_detail'),
+  'dependent_class' => array('hd_service_contract_line', 'hd_service_contract_detail'),
   'primary_entity_cb' => '',
-  'module_name' => 'ar',
+  'module_name' => 'hd',
   'weight' => 3
  ];
- public static $transaction_status_a = [
-  'INCOMPLETE' => 'Incomplete',
-  'COMPLETE' => 'Complete',
-  'CLOSED' => 'Closed'
+ public static $category_a = [
+  'WARRANTY' => 'Warranty & Extended ',
+  'SERVICE' => 'Service Agreement',
  ];
  public $action_a = [
   'CREATE_RECEIPT' => 'Create Receipt',
@@ -51,15 +50,17 @@ class ar_transaction_header extends dbObject {
   'CREDIT' => 'Credit Transaction',
   'CANCEL' => 'Cancel Transaction',
  ];
- public $account = [
-  'receivable_ac_id'
- ];
+
  public $field_a = [
-  'ar_transaction_header_id',
+  'hd_service_contract_header_id',
   'bu_org_id',
-  'transaction_type',
-  'transaction_class',
-  'transaction_number',
+  'category',
+  'contract_number',
+  'version',
+  'start_date',
+  'end_date',
+  'duration_uom_id',
+  'duration',
   'ar_customer_id',
   'ar_customer_site_id',
   'document_owner',
@@ -67,119 +68,81 @@ class ar_transaction_header extends dbObject {
   'ship_to_id',
   'bill_to_id',
   'header_amount',
-  'receipt_amount',
   'tax_amount',
+  'receipt_amount',
   'currency',
   'doc_currency',
-  'receivable_ac_id',
   'payment_term_id',
   'exchange_rate_type',
   'exchange_rate',
-  'ef_id',
-  'transaction_status',
+  'negotiation_status',
+  'status',
   'document_date',
   'document_number',
   'ledger_id',
   'period_id',
   'payment_term_date',
-  'sales_person',
-  'receipt_method',
-  'approval_status',
-  'receipt_status',
+  'ar_transaction_type_id',
+  'billing_cb',
+  'invoicing_rule',
+  'accounting_rule',
+  'renewal_process',
+  'renew_upto_date',
+  'rewnew_pricing_method',
+  'rewnew_price_list_id',
   'reference_type',
   'reference_key_name',
   'reference_key_value',
-  'sd_so_header_id',
-  'gl_journal_header_id',
+  'approval_status',
+  'sales_person_employee_id',
   'created_by',
   'creation_date',
   'last_update_by',
-  'last_update_date'
+  'last_update_date',
  ];
- public $profile_default = [
+ 
+  public $profile_default = [
   'exchange_rate_type' => 'gl_currency_conversion_type',
-  'bu_org_id' => 'org_bu_name_default'
+  'bu_org_id' => 'org_bu_name_default',
+  'ship_to_id' => 'ship_to_address_default',
+  'bill_to_id' => 'bill_to_address_default'
  ];
- public $notUpdatedFromWebForm = [
-  'gl_journal_header_id',
- ];
- public $initial_search = [
-  'ar_transaction_header_id',
-  'bu_org_id',
-  'ledger_id',
-  'period_id',
-  'transaction_type',
-  'transaction_number',
-  'document_number',
-  'ar_customer_id',
-  'ar_customer_site_id',
-  'document_owner',
-  'approval_status',
-  'gl_journal_header_id'
- ];
- public $column = [
-  'ar_transaction_header_id',
-  'document_number',
-  'transaction_type',
-  'transaction_number',
-  'header_amount',
-  'receipt_amount',
-  'ar_customer_id',
-  'ar_customer_site_id',
-  'bu_org_id',
-  'ledger_id',
-  'period_id',
-  'document_owner',
-  'doc_currency',
-  'currency',
-  'gl_journal_header_id'
- ];
- public $requiredField = [
-  'bu_org_id',
-  'transaction_type',
-  'ar_customer_id',
-  'ar_customer_site_id',
-  'currency',
-  'payment_term_id',
-  'document_date',
-  'ledger_id',
-  'period_id',
-  'receivable_ac_id'
- ];
- public $fields_inForm_notInDataBase = [
-//		 '', //not updatable through form
-
-  "customer_name",
-  "customer_number",
-  "customer_site_name",
-  'sd_so_number',
-  'sd_so_header_id',
-  'action',
-  'transaction_action',
+  
+   public $fields_inForm_notInDataBase = [
+  "supplier_name",
+  "supplier_number",
+  "supplier_site_name",
+  "ship_to_address",
+  "bill_to_address",
   'multi_action_class_pc',
   'multi_action_class_pc_value',
+  'action',
+  'ship_to_phone',
+  'ship_to_email',
+  'ship_to_address',
+  'ship_to_country',
+  'ship_to_postal_code',
+  'bill_to_phone',
+  'bill_to_email',
+  'bill_to_address',
+  'bill_to_country',
+  'bill_to_postal_code',
  ];
- public $numberField = [
-  'header_amount'
- ];
+   
  public $search = [
   '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
   '_show_view_path' => 1,
-//		 '_view_action_meassge' => 'View',
-//		 '_extra_path' => '',
-  '_extra_path' => array('form.php?class_name=ar_payment_header&mode=9' => 'Pay',
-   'form.php?class_name=ar_transaction_header&mode=9&transaction_type=DEBIT_MEMO' => 'Credit')
  ];
- public $pageTitle = " AR Transaction - Invoice, Debit/Credit Memo, Deposit/Guarentee etc "; //page Title
- public $option_lists = [
-  'transaction_class' => 'AR_TRANSACTION_CLASS',
-//		 'om_so_status' => 'AR_TRANSACTION_TYPE',
- ];
- public $ar_transaction_header_id;
+ public $pageTitle = " Service Contracts "; //page Title
+ public $hd_service_contract_header_id;
  public $bu_org_id;
- public $transaction_type;
- public $transaction_number;
+ public $category;
+ public $contract_number;
+ public $version;
+ public $start_date;
+ public $end_date;
+ public $duration_uom_id;
+ public $duration;
  public $ar_customer_id;
  public $ar_customer_site_id;
  public $document_owner;
@@ -191,26 +154,30 @@ class ar_transaction_header extends dbObject {
  public $receipt_amount;
  public $currency;
  public $doc_currency;
- public $payment_term_id;
  public $receivable_ac_id;
+ public $payment_term_id;
  public $exchange_rate_type;
  public $exchange_rate;
- public $ef_id;
- public $transaction_status;
+ public $negotiation_status;
+ public $status;
  public $document_date;
  public $document_number;
  public $ledger_id;
  public $period_id;
  public $payment_term_date;
- public $sales_person;
- public $receipt_method;
- public $approval_status;
- public $receipt_status;
+ public $ar_transaction_type_id;
+ public $billing_cb;
+ public $invoicing_rule;
+ public $accounting_rule;
+ public $renewal_process;
+ public $renew_upto_date;
+ public $rewnew_pricing_method;
+ public $rewnew_price_list_id;
  public $reference_type;
  public $reference_key_name;
  public $reference_key_value;
- public $sd_so_header_id;
- public $gl_journal_header_id;
+ public $approval_status;
+ public $sales_person_employee_id;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -222,7 +189,7 @@ class ar_transaction_header extends dbObject {
  public $multi_action_class_pc_value;
  public $action;
  public $transaction_action;
- public $transaction_class;
+ 
  public $ship_to_address;
  public $bill_to_address_name;
  public $ship_to_phone;
@@ -235,29 +202,6 @@ class ar_transaction_header extends dbObject {
  public $bill_to_postal_code;
  private $_max_line_num;
 
- public function __set($name, $value) {
-  switch ($value) {
-   case $value:
-
-
-    break;
-
-   default:
-    $this->$name = $value;
-    break;
-  }
- }
-
-// private function _update_journalHeaderId() {
-//	$arth = new ar_transaction_header();
-//	$arth->ar_transaction_header_id = $this->ar_transaction_header_id;
-//	$arth->gl_journal_header_id = $this->gl_journal_header_id;
-//	$arth->created_by = $this->created_by;
-//	$arth->creation_date = $this->creation_date;
-//	$arth->last_update_by = $this->last_update_by;
-//	$arth->last_update_date = $this->last_update_date;
-//	$arth->save();
-// }
 
  public function _before_showing() {
   $address = new address();
@@ -281,49 +225,49 @@ class ar_transaction_header extends dbObject {
 
  public function _before_save() {
 
-  if ((!empty($this->ar_transaction_header_id)) && ($this->action === 'create_accounting')) {
-   //if journal header id excists then save journal lines only else first header & then lines
-   $this->findBy_id($this->ar_transaction_header_id);
-   if (empty($this->gl_journal_header_id)) {
-    try {
-     $this->_save_journal_header();
-    } catch (Exception $e) {
-     echo "Create accounting failed" . $e->getMessage();
-    }
-   }
-   if (!empty($this->gl_journal_header_id)) {
-    //check the status is not updated and then save/update journal lines
-    $gjh = new gl_journal_header();
-    $gjh->findBy_id($this->gl_journal_header_id);
-    $max_line_num = $gjh->highest_line_num()->max_line_num;
-    $this->_max_line_num = !empty($max_line_num) ? $max_line_num + 1 : 1;
-    if ($gjh->status == 'ENTERED') {
-     $this->_save_journal_lines();
-    } else {
-     echo "<br> The Journal Header \" $gjh->journal_name \" (id : $this->gl_journal_header_id ) is not in Entered Status."
-     . "<br>From Subledger, You can only update Jouranls in Entered Status";
-     return;
-    }
-   }
-
-   return 10;
-  }
-
-  if ((!empty($this->ar_transaction_header_id)) && ($this->transaction_action == 'CANCEL')) {
-   $this->_cancel_transaction();
-   return 10;
-  }
+//  if ((!empty($this->hd_service_contract_header_id)) && ($this->action === 'create_accounting')) {
+//   //if journal header id excists then save journal lines only else first header & then lines
+//   $this->findBy_id($this->hd_service_contract_header_id);
+//   if (empty($this->gl_journal_header_id)) {
+//    try {
+//     $this->_save_journal_header();
+//    } catch (Exception $e) {
+//     echo "Create accounting failed" . $e->getMessage();
+//    }
+//   }
+//   if (!empty($this->gl_journal_header_id)) {
+//    //check the status is not updated and then save/update journal lines
+//    $gjh = new gl_journal_header();
+//    $gjh->findBy_id($this->gl_journal_header_id);
+//    $max_line_num = $gjh->highest_line_num()->max_line_num;
+//    $this->_max_line_num = !empty($max_line_num) ? $max_line_num + 1 : 1;
+//    if ($gjh->status == 'ENTERED') {
+//     $this->_save_journal_lines();
+//    } else {
+//     echo "<br> The Journal Header \" $gjh->journal_name \" (id : $this->gl_journal_header_id ) is not in Entered Status."
+//     . "<br>From Subledger, You can only update Jouranls in Entered Status";
+//     return;
+//    }
+//   }
+//
+//   return 10;
+//  }
+//
+//  if ((!empty($this->hd_service_contract_header_id)) && ($this->transaction_action == 'CANCEL')) {
+//   $this->_cancel_transaction();
+//   return 10;
+//  }
  }
 
  public function _after_save() {
-  if (!$this->transaction_number) {
-   echo '<br/> No transaction number is entered';
+  if (!$this->contract_number) {
+   echo '<br/> No contract number is entered';
   }
-  if ((!empty($this->ar_transaction_header_id)) && empty($this->transaction_number)) {
-   $ar_transaction_header_id = $this->ar_transaction_header_id;
+  if ((!empty($this->hd_service_contract_header_id)) && empty($this->contract_number)) {
+   $hd_service_contract_header_id = $this->hd_service_contract_header_id;
    $bu_org_id = $this->bu_org_id;
-   $this->transaction_number = $bu_org_id . '-' . $ar_transaction_header_id;
-   echo '<br/> System created transaction number is ' . $this->transaction_number;
+   $this->contract_number = $bu_org_id . '-' . $hd_service_contract_header_id;
+   echo '<br/> System created contract number is ' . $this->contract_number;
    $this->save();
   }
  }
@@ -338,7 +282,7 @@ class ar_transaction_header extends dbObject {
   $gjh->journal_category = 'AR_' . $this->transaction_class;
   $gjh->reference_type = 'table';
   $gjh->reference_key_name = self::$table_name;
-  $gjh->reference_key_value = $this->ar_transaction_header_id;
+  $gjh->reference_key_value = $this->hd_service_contract_header_id;
   $gjh->journal_name = $gjh->journal_category . '-' . $gjh->reference_key_value;
   $gjh->description = $gjh->journal_name . '-' . current_time();
   $gjh->balance_type = 'A';
@@ -347,9 +291,9 @@ class ar_transaction_header extends dbObject {
    $gjh->save();
    $this->gl_journal_header_id = $gjh->gl_journal_header_id;
    echo "<br> Jounral Header Id #" . $this->gl_journal_header_id . ' is created';
-   //need to create a new insatnce of ar_transaction_header as the gl_journal_header_id is not allowed to updated from webform
-   $ar_th = new ar_transaction_header();
-   $ar_th->findBy_id($this->ar_transaction_header_id);
+   //need to create a new insatnce of hd_service_contract_header as the gl_journal_header_id is not allowed to updated from webform
+   $ar_th = new hd_service_contract_header();
+   $ar_th->findBy_id($this->hd_service_contract_header_id);
    $ar_th->gl_journal_header_id = $gjh->gl_journal_header_id;
    $ar_th->audit_trial();
    $ar_th->save();
@@ -359,17 +303,17 @@ class ar_transaction_header extends dbObject {
  }
 
  private function _save_journal_lines() {
-  $artl = new ar_transaction_line();
-  $all_lines = $artl->findBy_parentId($this->ar_transaction_header_id);
+  $artl = new hd_service_contract_line();
+  $all_lines = $artl->findBy_parentId($this->hd_service_contract_header_id);
   foreach ($all_lines as $lines) {
-   $artd = new ar_transaction_detail();
-   $all_details = $artd->findBy_parentId($lines->ar_transaction_line_id);
+   $artd = new hd_service_contract_detail();
+   $all_details = $artd->findBy_parentId($lines->hd_service_contract_line_id);
    foreach ($all_details as $deatils) {
     $new_gjl = new gl_journal_line();
-    $artd->findBy_id($deatils->ar_transaction_detail_id);
+    $artd->findBy_id($deatils->hd_service_contract_detail_id);
     $new_gjl->gl_journal_header_id = $this->gl_journal_header_id;
-    $new_gjl->reference_key_name = 'ar_transaction_detail';
-    $new_gjl->reference_key_value = $deatils->ar_transaction_detail_id;
+    $new_gjl->reference_key_name = 'hd_service_contract_detail';
+    $new_gjl->reference_key_value = $deatils->hd_service_contract_detail_id;
     //check if line lready exists
     $jl_exists = $new_gjl->findBy_reference_keyName_keyValue();
     if ($jl_exists) {
@@ -403,8 +347,8 @@ class ar_transaction_header extends dbObject {
 //	save the Receviable Account
   $receviable_gjl = new gl_journal_line();
   $receviable_gjl->gl_journal_header_id = $this->gl_journal_header_id;
-  $receviable_gjl->reference_key_name = 'ar_transaction_header';
-  $receviable_gjl->reference_key_value = $this->ar_transaction_header_id;
+  $receviable_gjl->reference_key_name = 'hd_service_contract_header';
+  $receviable_gjl->reference_key_value = $this->hd_service_contract_header_id;
   //check if line lready exists
   $jl_exists_receviable = $receviable_gjl->findBy_reference_keyName_keyValue();
   if ($jl_exists_receviable) {
@@ -431,15 +375,15 @@ class ar_transaction_header extends dbObject {
   $receviable_gjl->save();
  }
 
- public function _post_gl_process($ar_transaction_id) {
+ public function _post_gl_process($hd_service_contract_id) {
   try {
-   $this->findBy_id($ar_transaction_id);
+   $this->findBy_id($hd_service_contract_id);
    $this->transaction_status = 'CLOSED';
    $this->audit_trial();
    $this->save();
    return 1;
   } catch (Exception $e) {
-   echo "<br>Updating transaction status failed.Error @ ar_transaction_header @@ " . __LINE__ . $e->getMessage();
+   echo "<br>Updating transaction status failed.Error @ hd_service_contract_header @@ " . __LINE__ . $e->getMessage();
    return -99;
   }
  }
@@ -458,13 +402,13 @@ class ar_transaction_header extends dbObject {
  }
 
  Public static function transaction_class() {
-  $option_header = option_header::find_by_name('AR_TRANSACTION_CLASS');
+  $option_header = option_header::find_by_name('hd_service_contract_CLASS');
   $transaction_types = option_line::find_by_option_id($option_header->option_header_id);
   return $transaction_types;
  }
 
  Public static function transaction_action() {
-  $option_header = option_header::find_by_name('AR_TRANSACTION_ACTION');
+  $option_header = option_header::find_by_name('hd_service_contract_ACTION');
   $transaction_types = option_line::find_by_option_id($option_header->option_header_id);
   return $transaction_types;
  }
@@ -475,17 +419,17 @@ class ar_transaction_header extends dbObject {
   return $ar_approval_status;
  }
 
- public function copy($ar_transaction_header_id) {
+ public function copy($hd_service_contract_header_id) {
   global $db;
-  $sql1 = " CREATE TEMPORARY TABLE tmptable SELECT * FROM ar_transaction_header WHERE `ar_transaction_header_id` = '{$ar_transaction_header_id}' ";
+  $sql1 = " CREATE TEMPORARY TABLE tmptable SELECT * FROM hd_service_contract_header WHERE `hd_service_contract_header_id` = '{$hd_service_contract_header_id}' ";
   if ($db->query($sql1)) {
-   $sql2 = "  UPDATE tmptable SET `ar_transaction_header_id` = '' ,
+   $sql2 = "  UPDATE tmptable SET `hd_service_contract_header_id` = '' ,
            `org_id` = '{$this->org_id}' 
-          WHERE `ar_transaction_header_id` = '{$ar_transaction_header_id}' ";
+          WHERE `hd_service_contract_header_id` = '{$hd_service_contract_header_id}' ";
    if ($db->query($sql2)) {
-    $sql3 = " INSERT INTO `ar_transaction_header` SELECT * FROM tmptable WHERE `ar_transaction_header_id` = '' ";
+    $sql3 = " INSERT INTO `hd_service_contract_header` SELECT * FROM tmptable WHERE `hd_service_contract_header_id` = '' ";
     if ($db->query($sql3)) {
-     $this->ar_transaction_header_id = $db->insert_id();
+     $this->hd_service_contract_header_id = $db->insert_id();
      $this->msg = 1;
     } else {
      $this->msg = 0;
@@ -496,14 +440,14 @@ class ar_transaction_header extends dbObject {
  }
 
  public function save() {
-  $primary_column = static::$primary_column;
-  if (empty($this->$primary_column)) {
-   $this->ar_approval_status = 'ENTER';
-   $this->create();
-  } else {
-   $this->update($this->$primary_column);
-  }
-  return $this->msg;
+//  $primary_column = static::$primary_column;
+//  if (empty($this->$primary_column)) {
+//   $this->ar_approval_status = 'ENTER';
+//   $this->create();
+//  } else {
+//   $this->update($this->$primary_column);
+//  }
+//  return $this->msg;
  }
 
  /* 1. Reverse the journal header
@@ -512,7 +456,7 @@ class ar_transaction_header extends dbObject {
   */
 
  private function _cancel_transaction() {
-  if (empty($this->ar_transaction_header_id)) {
+  if (empty($this->hd_service_contract_header_id)) {
    echo "<br>Cancellation failed!. No transaction header id found.";
   }
   if (!empty($this->gl_journal_header_id)) {
@@ -525,7 +469,7 @@ class ar_transaction_header extends dbObject {
    try {
     $gjh->_before_save();
    } catch (Exception $e) {
-    echo "Journal Reversal Failed!. Error @ class_ar_transaction_header _cancel_transaction" . $e->getMessage();
+    echo "Journal Reversal Failed!. Error @ class_hd_service_contract_header _cancel_transaction" . $e->getMessage();
     return;
    }
   }
@@ -536,26 +480,26 @@ class ar_transaction_header extends dbObject {
    try {
     $this->_cancel_transaction_header();
    } catch (Exception $e) {
-    echo "PO Header Update Failed!. Error @ class_ar_transaction_header _cancel_transaction" . $e->getMessage();
+    echo "PO Header Update Failed!. Error @ class_hd_service_contract_header _cancel_transaction" . $e->getMessage();
     return;
    }
   } catch (Exception $e) {
-   echo "PO Detail Update Failed!. Error @ class_ar_transaction_header _cancel_transaction" . $e->getMessage();
+   echo "PO Detail Update Failed!. Error @ class_hd_service_contract_header _cancel_transaction" . $e->getMessage();
    return;
   }
  }
 
  private function _cancel_transaction_header() {
-  $new_arth = new ar_transaction_header();
-  $new_arth_i = $new_arth->findBy_id($this->ar_transaction_header_id);
+  $new_arth = new hd_service_contract_header();
+  $new_arth_i = $new_arth->findBy_id($this->hd_service_contract_header_id);
   $new_arth->arproval_status = 'CANCELLED';
   $new_arth->header_amount = '0.0';
-  $new_arth->ar_transaction_header_id = $new_arth_i->ar_transaction_header_id;
+  $new_arth->hd_service_contract_header_id = $new_arth_i->hd_service_contract_header_id;
   $new_arth->audit_trial();
   try {
    $new_arth->save();
   } catch (Exception $e) {
-   echo "AR Transaction Lines Update Failed!. Error @ class_ar_transaction_header _transaction_cancell_poInv_lines " . $e->getMessage();
+   echo "AR Transaction Lines Update Failed!. Error @ class_hd_service_contract_header _transaction_cancell_poInv_lines " . $e->getMessage();
    return;
   }
  }
@@ -563,8 +507,8 @@ class ar_transaction_header extends dbObject {
  //needs to be updated after SD SO
  private function _update_so_lines() {
   global $dbc;
-  $aptl = new ar_transaction_line();
-  $all_lines = $aptl->findBy_parentId($this->ar_transaction_header_id);
+  $aptl = new hd_service_contract_line();
+  $all_lines = $aptl->findBy_parentId($this->hd_service_contract_header_id);
   foreach ($all_lines as $lines) {
    if (!empty($lines->sd_so_line_id)) {
     $ss_line = new sd_so_line();
@@ -574,40 +518,40 @@ class ar_transaction_header extends dbObject {
      $ss_line->save();
     } catch (Exception $e) {
      $dbc->rollback = true;
-     echo "SO Line Update Failed!. Error @ class_ar_transaction_header _update_so_lines @ line" . __LINE__ . $e->getMessage();
+     echo "SO Line Update Failed!. Error @ class_hd_service_contract_header _update_so_lines @ line" . __LINE__ . $e->getMessage();
      return;
     }
    }
 //update the invlice details
-   $aptd = new ar_transaction_detail();
-   $all_details = $aptd->findBy_parentId($lines->ar_transaction_line_id);
+   $aptd = new hd_service_contract_detail();
+   $all_details = $aptd->findBy_parentId($lines->hd_service_contract_line_id);
    foreach ($all_details as $details) {
-    $new_aptd = new ar_transaction_detail();
-    $new_aptd_i = $new_aptd->findBy_id($details->ar_transaction_detail_id);
+    $new_aptd = new hd_service_contract_detail();
+    $new_aptd_i = $new_aptd->findBy_id($details->hd_service_contract_detail_id);
     $new_aptd->status = 'Cancelled';
     $new_aptd->amount = '0.0';
-    $new_aptd->ar_transaction_detail_id = $new_aptd_i->ar_transaction_detail_id;
+    $new_aptd->hd_service_contract_detail_id = $new_aptd_i->hd_service_contract_detail_id;
     $new_aptd->audit_trial();
     try {
      $new_aptd->save();
     } catch (Exception $e) {
-     echo "AP Transaction Details Update Failed!. Error @ class_ar_transaction_header _transaction_cancell_poInv_lines " . $e->getMessage();
+     echo "AP Transaction Details Update Failed!. Error @ class_hd_service_contract_header _transaction_cancell_poInv_lines " . $e->getMessage();
      return;
     }
    }
 
    //update the invoice lines
-   $new_aptl = new ar_transaction_line();
-   $new_aptl_i = $new_aptl->findBy_id($lines->ar_transaction_line_id);
+   $new_aptl = new hd_service_contract_line();
+   $new_aptl_i = $new_aptl->findBy_id($lines->hd_service_contract_line_id);
    $new_aptl->status = 'Cancelled';
    $new_aptl->inv_line_quantity = '0.0';
    $new_aptl->inv_line_price = '0.0';
-   $new_aptl->ar_transaction_line_id = $new_aptl_i->ar_transaction_line_id;
+   $new_aptl->hd_service_contract_line_id = $new_aptl_i->hd_service_contract_line_id;
    $new_aptl->audit_trial();
    try {
     $new_aptl->save();
    } catch (Exception $e) {
-    echo "AP Transaction Lines Update Failed!. Error @ class_ar_transaction_header _transaction_cancell_poInv_lines " . $e->getMessage();
+    echo "AP Transaction Lines Update Failed!. Error @ class_hd_service_contract_header _transaction_cancell_poInv_lines " . $e->getMessage();
     return;
    }
   }
@@ -647,5 +591,5 @@ class ar_transaction_header extends dbObject {
 
 }
 
-//end of ar_transaction_header class
+//end of hd_service_contract_header class
 ?>

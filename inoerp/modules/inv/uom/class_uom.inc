@@ -39,10 +39,7 @@ class uom extends dbObject {
 		 "primary_cb",
 		 "primary_uom_id",
 		 "primary_relation",
-		 "ef_id",
 		 "status",
-		 "rev_enabled_cb",
-		 "rev_number",
 		 "created_by",
 		 "creation_date",
 		 "last_update_by",
@@ -124,7 +121,8 @@ VAR;
 
  public function _before_showing() {
 	if (!empty($this->primary_uom_id)) {
-	 $primar_uom_i = $this->findBy_id($this->primary_uom_id);
+   $p_uom = new uom();
+	 $primar_uom_i = $p_uom->findBy_id($this->primary_uom_id);
 	 $this->primary_uom = $primar_uom_i->uom_name;
 	}
  }

@@ -38,6 +38,13 @@ class hr_job extends dbObject {
   'nooffields_line_tab1' => 6,
   'nooffields_line_tab2' => 6,
  ];
+ 
+ public static $usage_a = [
+  'HR' => 'Human Resource',
+  'PROJECT' => 'Project',
+  'ALL' => 'All',
+ ];
+ 
  public $field_a = [
   'hr_job_id',
   'job_code',
@@ -51,6 +58,8 @@ class hr_job extends dbObject {
   'skillset',
   'position_type',
   'functional_area',
+  'usage',
+  'group_hr_job_id',
   'location',
   'status',
   'job_details',
@@ -91,6 +100,8 @@ class hr_job extends dbObject {
  public $position_type;
  public $functional_area;
  public $location;
+ public $usage;
+ public $group_hr_job_id;
  public $status;
  public $job_details;
  public $primary_responsibility;

@@ -116,8 +116,8 @@ class item extends dbObject {
   'invoiceable_cb',
   "default_buyer",
   "list_price",
-  "un_number",
-  "hazard_classs",
+  "contract_item_type",
+  "duration_uom_id",
   "over_receipt_percentage",
   "receipt_days_early",
   "receipt_days_late",
@@ -168,7 +168,7 @@ class item extends dbObject {
   "op_tax_class",
   "ap_payment_term",
   "ar_payment_term",
-  "ef_id",
+  "duration",
   "created_by",
   "creation_date",
   "last_update_by",
@@ -343,8 +343,8 @@ class item extends dbObject {
  public $invoice_matching;
  public $default_buyer;
  public $list_price;
- public $un_number;
- public $hazard_classs;
+ public $contract_item_type;
+ public $duration_uom_id;
  public $receipt_sub_inventory;
  public $over_receipt_percentage;
  public $over_receipt_action;
@@ -411,7 +411,7 @@ class item extends dbObject {
  public $sales_ac_id;
  public $cogs_ac_id;
  public $deffered_cogs_ac_id;
- public $ef_id;
+ public $duration;
  public $rev_enabled_cb;
  public $rev_number;
  public $created_by;

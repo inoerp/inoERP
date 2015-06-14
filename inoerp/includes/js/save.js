@@ -72,6 +72,7 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
   },
   beforeSend: function () {
    $('#overlay').css('display', 'block');
+   $('#form_top_image').css('display', 'none');
   },
   error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
@@ -84,13 +85,17 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
 
 function saveSingleLine(json_url, lineData, primary_column_id, lineClassName) {
  var header_id = $(primary_column_id).val();
- $.ajax({
+ return $.ajax({
   url: json_url,
   data: {
    lineData: lineData,
    header_id: header_id,
    className: lineClassName},
-  type: 'post'
+  type: 'post',
+  beforeSend: function () {
+   $('#overlay').css('display', 'block');
+   $('#form_top_image').css('display', 'none');
+  }
  }).done(function (result) {
 //  var div = $(result).filter('div#json_save_line').html();
   var message = $(result).find('.message, .rollback_msg').html();
@@ -119,7 +124,11 @@ function saveLine(json_url, lineData, trclass, detailData, primary_column_id, li
    header_id: header_id,
    className: lineClassName,
    detail_classname: detailClassName},
-  type: 'post'
+  type: 'post',
+  beforeSend: function () {
+   $('#overlay').css('display', 'block');
+   $('#form_top_image').css('display', 'none');
+  }
  }).done(function (result) {
   var div = $(result).filter('div#json_save_line').html();
 
@@ -283,8 +292,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
     return;
    }
   }
-  $('#overlay').css('display', 'block');
-  $('#form_top_image').css('display', 'none');
+
   e.preventDefault();
 //for all form headers - savetype1
   /*-----------------------------------Completion of mandator fields check & start of header save--------------------------------
@@ -327,9 +335,11 @@ saveMainClass.prototype.saveMain = function (beforeSave)
    $('input[name="line_id_cb"]:checked').each(function () {
     var trclass = $(this).closest('tr').attr('class');
     var lineData = [];
-    $("#form_line").find('.' + trclass).each(function () {
-     var ThisLineData = $(this).find(":input").serializeArray();
-     lineData = $.merge(lineData, ThisLineData);
+    $("#form_line").find('.' + trclass + ' > td').each(function () {
+     if (!$(this).hasClass('add_detail_values')) {
+      var ThisLineData = $(this).find(":input").serializeArray();
+      lineData = $.merge(lineData, ThisLineData);
+     }
     });
     allData = $.merge(allData, lineData);
    });
@@ -382,9 +392,11 @@ saveMainClass.prototype.saveMain = function (beforeSave)
       var trclass = $(this).closest('tr').attr('class');
       var trclass_d = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
       var lineData = [];
-      $("#form_line").find(trclass_d).each(function () {
-       var ThisLineData = $(this).find(":input").serializeArray();
-       lineData = $.merge(lineData, ThisLineData);
+      $("#form_line").find(trclass_d + ' > td').each(function () {
+       if (!$(this).hasClass('add_detail_values')) {
+        var ThisLineData = $(this).find(":input").serializeArray();
+        lineData = $.merge(lineData, ThisLineData);
+       }
       });
       if ($(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray()) {
        var detailData = $(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray();
@@ -457,9 +469,11 @@ saveMainClass.prototype.saveMain = function (beforeSave)
      $('#form_line2 input[name="line_id_cb"]:checked').each(function () {
       var trclass = $(this).closest('tr').attr('class');
       var lineData = [];
-      $("#form_line2").find('.' + trclass).each(function () {
-       var ThisLineData = $(this).find(":input").serializeArray();
-       lineData = $.merge(lineData, ThisLineData);
+      $("#form_line2").find('.' + trclass  + ' > td' ).each(function () {
+       if (!$(this).hasClass('add_detail_values')) {
+        var ThisLineData = $(this).find(":input").serializeArray();
+        lineData = $.merge(lineData, ThisLineData);
+       }
       });
       if ($(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray()) {
        var detailData = $(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray();
@@ -471,7 +485,13 @@ saveMainClass.prototype.saveMain = function (beforeSave)
      });
     } else {//if the third form doesnt have any tab-----------------savetype5b------------------------------------------
      $('#form_line2 input[name="line_id_cb"]:checked').each(function () {
-      var lineData = $(this).closest("tr").find(":input").serializeArray();
+      var lineData = [];
+      $(this).closest("tr > td ").each(function () {
+       if (!$(this).hasClass('add_detail_values')) {
+        var ThisLineData = $(this).find(":input").serializeArray();
+        lineData = $.merge(lineData, ThisLineData);
+       }
+      });
       var trclass = $(this).closest("tr").attr('class');
       if ($(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray()) {
        var detailData = $(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray();
@@ -1206,13 +1226,13 @@ mandatoryFieldMain.prototype.mandatoryHeader = function ()
    var header_id_h = '#' + header_id;
    var header_id_c = '.' + header_id;
    if (!$(header_id_h).val()) {
-    if (move_line_wo_header == 'SAVE_HEADER') {
-     $('#save').trigger('click');
-    } else if (move_line_wo_header == 'SHOW_WARNING') {
-     if (confirm('Header data is not saved : Do you want to save the header')) {
-      $('#save').trigger('click');
-     }
-    }
+//    if (move_line_wo_header == 'SAVE_HEADER') {
+//     $('#save').trigger('click');
+//    } else if (move_line_wo_header == 'SHOW_WARNING') {
+//     if (confirm('Header data is not saved : Do you want to save the header')) {
+//      $('#save').trigger('click');
+//     }
+//    }
 
    } else {
     var headerIdVal = $(header_id_h).val();
