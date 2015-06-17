@@ -224,27 +224,27 @@
        <input type="button" value="Update Query" class="button save_query" id="save_query">
 
        <div id="view_query"><label>SQL Query</label>
-        <textarea name="query_v" readonly query_v="query" id="query_v" rows="6" cols="118"><?php echo base64_decode($view->query_v); ?></textarea>
+        <textarea name="query_v"  query_v="query" id="query_v" rows="6" cols="118"><?php echo base64_decode($view->query_v); ?></textarea>
         <ul id="sql_query">
          <li class="select">
           <label>SELECT</label>
-          <textarea name="select_v" readonly class="select_v" id="select_v" rows="6" cols="30"><?php echo $view->select_v; ?></textarea>
+          <textarea name="select_v"  class="select_v" id="select_v" rows="6" cols="30"><?php echo $view->select_v; ?></textarea>
          </li>
          <li class="select">
           <label>FROM</label>
-          <textarea name="from_v" readonly class="from_v" id="from_v" rows="6" cols="15"><?php echo $view->from_v; ?></textarea>
+          <textarea name="from_v"  class="from_v" id="from_v" rows="6" cols="15"><?php echo $view->from_v; ?></textarea>
          </li>
          <li class="select">
           <label>WHERE</label>
-          <textarea name="where_v" readonly class="where_v" id="where_v" rows="6" cols="15"><?php echo $view->where_v; ?></textarea>
+          <textarea name="where_v"  class="where_v" id="where_v" rows="6" cols="15"><?php echo $view->where_v; ?></textarea>
          </li>
          <li class="select">
           <label>GROUP BY</label>
-          <textarea name="group_by_v" readonly class="group_by_v" id="group_by_v" rows="6" cols="15"><?php echo $view->group_by_v; ?></textarea>
+          <textarea name="group_by_v"  class="group_by_v" id="group_by_v" rows="6" cols="15"><?php echo $view->group_by_v; ?></textarea>
          </li>
          <li class="select">
           <label>ORDER BY</label>
-          <textarea name="order_by" readonly class="order_by" id="order_by" rows="6" cols="15"><?php echo $view->order_by; ?></textarea>
+          <textarea name="order_by"  class="order_by" id="order_by" rows="6" cols="15"><?php echo $view->order_by; ?></textarea>
          </li>
          <li class="select">
           <label>FILTERS</label>

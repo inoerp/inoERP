@@ -122,8 +122,14 @@ function ino_protocol() {
 }
 
 function getBreadCrumb($class_first) {
+ global $$class_first;
  if (property_exists($class_first, 'module') && !property_exists($class_first, 'dont_show_bread_crum')) {
-  $module_name = $class_first::$module;
+  if(!empty($$class_first) && is_object($$class_first) && method_exists($$class_first, 'module_code')){
+   $module_name = call_user_func(array($$class_first, 'module_code'));
+  }else{
+   $module_name = $class_first::$module;
+  }
+  
   $module_line = option_line::find_by_optionId_lineCode('182', $module_name);
   if ($module_line) {
    $module_name_c = ucwords($module_line->option_line_value);

@@ -1,26 +1,4 @@
-<link href="<?php echo HOME_URL; ?>includes/ecss/getsvgimage.css" media="all" rel="stylesheet" type="text/css" />
-<div class ="view_content">
- <span class="heading">
-  <?php echo!empty($$class->view_name) ? "Custom Report : " . ucwords(str_replace('_', ' ', $$class->view_name)) : ''; ?></span>
- <div id="tabsDetailA">
-  <ul class="tabMain">
-   <li><a href="#tabsDetailA-1">Result Data</a></li>
-   <li><a href="#tabsDetailA-2">Result Graph</a></li>
-   <li><img class="showPointer" title="Refresh" alt="Refresh" class="view_refresh_button" src="<?php echo HOME_URL; ?>themes/default/images/refresh_24.png"></li>
-  </ul>
-  <div class="tabContainer">
-   <div id="tabsDetailA-1" class="tabContent">
-    <?php echo $f->hidden_field('view_id', $$class->view_id); ?>
-    <div class="view_filters">
-    </div>
-    <div class ="live_display_data scrollElement" >
-     <?php
-     echo $f->hidden_field_withId('view_id', $$class->view_id);
-     echo!empty($$class->view_id) ? $$class->show_viewResult($$class->view_id) : "";
-     ?>
-    </div>
-   </div>
-   <div id="tabsDetailA-2" class="tabContent">
+ <div id="tabsDetailA-1" class="tabContent">
     <div class="draw_chart">
      <div class="draw_chart_data" class="scrollElement">
       <div class="svg_image">
@@ -62,6 +40,3 @@
      </ul>
     </div>
    </div>
-  </div>
- </div>
-</div>
