@@ -9,7 +9,6 @@
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field"> 
         <li><?php $f->l_text_field_dr_withSearch('subinventory_id') ?>
          <a name="show" href="form.php?class_name=subinventory&<?php echo "mode=$mode"; ?>" class="show document_id subinventory_id"><i class='fa fa-refresh'></i></a> 
@@ -22,7 +21,6 @@
         <li><?php $f->l_checkBox_field_d('rev_enabled_cb'); ?></li>
         <li><?php $f->l_text_field_d('rev_number'); ?></li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div> <?php echo ino_attachement($file) ?> </div>
@@ -58,7 +56,7 @@
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <div > 
-       <ul class="column four_column"> 
+       <ul class="column header_field"> 
         <li><?php $f->l_select_field_from_object('locator_control', subinventory::locator_control(), 'option_line_code', 'option_line_code', $$class->locator_control, 'locator_control', $readonly); ?>	         </li>
         <li><?php $f->l_checkBox_field_d('allow_negative_balance_cb'); ?></li> 
         <li><?php $f->l_text_field_d('default_cost_group'); ?></li> 
@@ -70,7 +68,7 @@
      </div> 
      <div id="tabsLine-2"  class="tabContent">
       <div> 
-       <ul class="column four_column">
+       <ul class="column header_field">
         <li><?php $f->l_ac_field_d('material_ac_id', '', 'A'); ?></li>  
         <li><?php $f->l_ac_field_d('overhead_ac_id', '', 'A'); ?></li> 
         <li><?php $f->l_ac_field_d('material_oh_ac_id', '', 'A'); ?></li> 

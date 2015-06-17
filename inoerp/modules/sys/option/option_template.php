@@ -2,7 +2,7 @@
 <div id="option">
  <!--    START OF FORM HEADER-->
  <form action=""  method="post" id="option_header"  name="option_header">
-  <span class="heading"><?php echo gettext('Option Header') ?></span>
+  <span class="heading"><?php $f = new inoform(); echo gettext('Option Header') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
@@ -17,7 +17,7 @@
          <a name="show" href="form.php?class_name=option_header&<?php echo "mode=$mode"; ?>" class="show document_id option_header_id">
           <i class="fa fa-refresh"></i></a>  
         </li>
-        <li><?php $f->l_text_field_dm('option_type'); ?></li>
+        <li><label>Option Name</label><?php echo $f->text_field('option_type', $$class->option_type , '' , 'option_type' ,'' , 1, $readonly1); ?></li>
         <li><?php $f->l_select_field_from_array('access_level', option_header::$access_level_a, $option_header->access_level, 'access_level', '', '', $readonly); ?>					</li>
         <li><?php $f->l_text_field_d('description'); ?></li>
         <li><?php $f->l_select_field_from_object('module_code', option_header::modules(), 'option_line_code', 'option_line_value', $$class->module_code, 'module_code', '', 1) ?>				</li>

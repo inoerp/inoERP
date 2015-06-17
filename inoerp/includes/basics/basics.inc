@@ -407,6 +407,7 @@ require_once(INC_MODULE . DS . "adm" . DS . "task_status" . DS . "class_adm_task
 //require_once(INC_MODULE . DS . "hd" . DS . "service_contract" . DS . "class_hd_service_contract_line.inc");
 //require_once(INC_MODULE . DS . "hd" . DS . "service_contract" . DS . "class_hd_service_contract_detail.inc");
 
+
 //
 require_once(INC_TPARTY . DS . "barcode" . DS . "class_ino_barcode.inc");
 require_once(INC_TPARTY . DS . "extensions" . DS . "social_login" . DS . "class_social_login.inc");

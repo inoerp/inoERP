@@ -4753,22 +4753,8 @@ var view_id = $(this).data('view_id');
 });
 
 
+
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //$(document).ready(function () {
@@ -4888,3 +4874,4 @@ var view_id = $(this).data('view_id');
 // }
 // $('.navbar-fixed-top').slideToggle();
 //});
+

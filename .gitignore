@@ -3,13 +3,13 @@ inoerp_index.php
 test.*
 mailsettings.inc
 dbsettings.inc
-
+*.dbsettings
 #################
 ## Eclipse
 #################
 
 
-
+*.dbsettings
 *.pydevproject
 .project
 .metadata

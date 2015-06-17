@@ -42,6 +42,7 @@
   <script src="<?php echo HOME_URL; ?>includes/js/save.js"></script>
   <script src="<?php echo HOME_URL; ?>includes/js/custom_plugins.js"></script>
   <script src="<?php echo HOME_URL; ?>includes/js/basics.js"></script>
+  <script src="themes/default/js/theme.js"></script>
   <?php
   if (!empty($js_file_paths)) {
    foreach ($js_file_paths as $key => $js_file) {

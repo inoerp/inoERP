@@ -39,9 +39,21 @@
  opacity: 0.7;
  z-index: 10000;
  display: none;
- background-image: url('/themes/images/form/small_loading_bar.gif');
+ /*background-image: url('/themes/images/form/small_loading_bar.gif');*/
  background-position: center;
  background-repeat: no-repeat;
+}
+
+#overlay.fa{
+        font-size: 100px;
+        color : #fff;
+        padding: 20% 0 0 20%;
+}
+
+#overlay.fa::after{
+font-size: 40px !important;
+content : "Loading...";
+padding: 20% 0 0 5% !important;
 }
 
 p {margin: 0 !important; 
@@ -1222,26 +1234,58 @@ select.search_document_list option:nth-child(even) {
  float: left;
  margin : 15px;
  border: 1px solid #ddd;
- width: 120px;
- height: 120px;
+ width: 100px;
+ height: 100px;
  text-align: center;
  vertical-align: middle;
  padding-top: 20px;
  border-radius: 5px;
- background-color: rgba(42, 147, 177, 0.89);
+ 
+}
+
+#dashborad_menu li:nth-child(n){
+         background-color: rgba(77, 21, 136, 0.62);
+}
+
+#dashborad_menu li:nth-child(2n){
+        background-color: rgba(142, 147, 17, 0.89) ;
+}
+
+#dashborad_menu li:nth-child(3n){
+        background-color: rgba(41, 162, 51, 0.8) ;
+}
+
+#dashborad_menu li:nth-child(4n){
+        background-color: rgba(42, 147, 177, 0.89);
+}
+
+#dashborad_menu li:nth-child(5n) {
+  background-color: rgba(41, 67, 136, 0.77);
 }
 
 #dashborad_menu li:hover{
-  background-color: #2574A9;
+  /*background-color: #2574A9;*/
   /*border-radius: 60px;*/ 
+  overflow: hidden;      
 }
 
 #dashborad_menu li a{
- font-size: 1.4em;
+ font-size: 1.7em;
  font-weight: bold; 
- color: #fee;        
+ color: #fff;        
 }
 
+#dashborad_menu li .circle-frame a :hover{
+ font-size: 3.5em;
+}
+
+.very-small-text{
+   font-size: 0.5em;     
+}
+
+.very-small-text :hover{
+   display: none;
+}
 #dashborad_menu li .fa{
  font-size: 2em;
  display: block;

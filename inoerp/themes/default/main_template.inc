@@ -160,7 +160,7 @@
       <h3 class="clickable nav-panel"><i class="fa fa-warning"></i> Transaction Alerts</h3>
       <div>
        <div id="sys_msg_box">
-        <div class="error"></div><div id="loading"></div>
+        <div class="error"></div><div class="loading"></div>
        </div>
       </div>
       <h3 class="clickable nav-panel"><i class="fa fa-navicon"></i> Navigation Menu</h3>
@@ -299,7 +299,7 @@
   <script src="includes/js/save.js"></script>
   <script src="includes/js/custom_plugins.js"></script>
   <script src="includes/js/basics.js"></script>
-
+  <script src="themes/default/js/theme.js"></script>
   <?php
   if (!empty($js_file_paths)) {
    foreach ($js_file_paths as $key => $js_file) {

@@ -1320,13 +1320,21 @@ $return_stmt .='</ul>
  return $return_stmt;
 }
 
+function is_array_key_numberic($array) {
+ return (bool) count(array_filter(array_keys($array), 'is_numeric'));
+}
+
 function array2csv(array &$array) {
  if (count($array) == 0) {
   return null;
  }
+
  ob_start();
  $df = fopen("php://output", 'w');
- fputcsv($df, array_keys(reset($array)));
+ if(!is_array_key_numberic($array[0])){
+  fputcsv($df, array_keys(reset($array)));
+ }
+
  foreach ($array as $row) {
   fputcsv($df, $row);
  }
@@ -1340,7 +1348,10 @@ function array2text(array &$array) {
  }
  ob_start();
  $df = fopen("php://output", 'w');
- fwrite($df, implode('|', array_keys(reset($array))));
+  if(!is_array_key_numberic($array[0])){
+  fwrite($df, implode('|', array_keys(reset($array))));
+ }
+
  foreach ($array as $row) {
   fwrite($df, PHP_EOL);
   fwrite($df, trim(preg_replace('/\s+/', ' ', implode('|', $row))));

@@ -90,6 +90,7 @@ class user_dashboard_v extends dbObject {
   'fa' => ['div_class' => 'fa-building', 'description' => 'Fixed Asset'],
   'hr' => ['div_class' => 'fa-users', 'description' => 'Human Resource'],
   'hd' => ['div_class' => 'fa-support', 'description' => 'Service Help Desk'],
+  'prj' => ['div_class' => 'fa-briefcase', 'description' => 'Projects'],
   'da' => ['div_class' => 'fa-book', 'description' => 'Document & Analysis'],
   'adm' => ['div_class' => 'fa-database', 'description' => 'Admin'],
   'sys' => ['div_class' => 'fa-cogs', 'description' => 'Global Setup'],
