@@ -6,12 +6,8 @@
    <div id="content">
     <div id="structure">
      <div id="po_divId">
-      <!--    START OF FORM HEADER-->
-      <div class="error"></div><div id="loading"></div>
       <?php
-       echo (!empty($show_message)) ? $show_message : "";
-       $f = new inoform();
-      ?> 
+       echo (!empty($show_message)) ? $show_message : "";      ?> 
       <!--    End of place for showing error messages-->
 
       <div id ="form_header"><span class="heading">Purchase Order </span>

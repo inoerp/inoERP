@@ -346,8 +346,8 @@ EOD;
 	 $idvalue = "";
 	}
 	$element_text_field = "<input type=\"text\" name=\"$bracketName\" value=\"$valueAfterDecimal\"  size=\"$size\"
-	 min=\"$min\" max=\"$max\" class=\"number $divClass $name\" placeholder=\"$place_holder\" "
-					. "pattern=\"[0-9]+([\.][0-9]+)?\" step='any' $required $idvalue $readonly>";
+	 class=\"number $divClass $name\" placeholder=\"$place_holder\" "
+					. "pattern=\"[0-9]+([\.][0-9]+)?\"  $required $idvalue $readonly>";
 	return $element_text_field;
  }
 
@@ -484,7 +484,7 @@ EOD;
 
  public static function text_field_wid2($field_name, $class_name="") {
 	global $class_second, $$class_second, $readonly;
-	echo self::text_field($field_name, $$class_second->$field_name, '20', '', '', '', '', $readonly, $class_name);
+	echo self::text_field($field_name, $$class_second->$field_name, '20', '255', '', '', '', $readonly, $class_name);
  }
 
  public static function text_field_wid2m($field_name, $class_name="") {
@@ -499,7 +499,7 @@ EOD;
 
  public static function text_field_wid2s($field_name, $class_name="") {
 	global $class_second, $$class_second, $readonly;
-	echo self::text_field($field_name, $$class_second->$field_name, '8', '', '', '', '', $readonly, $class_name);
+	echo self::text_field($field_name, $$class_second->$field_name, '8', '255', '', '', '', $readonly, $class_name);
  }
 
  public static function text_field_wid2l($field_name, $class_name="") {

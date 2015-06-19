@@ -17,9 +17,9 @@
       </li>
       <li><?php $f->l_select_field_from_object('type', hr_team_header::team_type(), 'option_line_code', 'option_line_value', $$class->type, 'type'); ?> </li>
       <li><?php $f->l_text_field_d('team_name'); ?> </li>
-      <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_employee_name select_popup clickable">
-        <?php echo gettext('Team Lead') ?></label><?php $f->text_field_d('lead_employee_name'); ?>
+      <li><label><?php echo gettext('Team Lead') ?></label><?php $f->text_field_d('lead_employee_name'); ?>
        <?php echo $f->hidden_field_withId('team_lead_employee_id', $$class->team_lead_employee_id); ?>
+       <i class="select_employee_name select_popup clickable fa fa-search"></i>
       </li>
       <li><?php $f->l_select_field_from_object('region', hr_team_header::team_region(), 'option_line_code', 'option_line_value', $$class->region, 'region'); ?> </li>
       <li><?php $f->l_text_field_d('email'); ?> </li>

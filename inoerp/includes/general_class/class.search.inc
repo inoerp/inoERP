@@ -262,7 +262,7 @@ class search extends dbObject {
       }
       $col_val = $this->column_array_s[$k];
       if (isset($record->$col_val)) {
-       $search_result .= '<td data-field_name="' . $col_val . '">' . ucwords(str_replace('_', ' ', $record->$col_val)) . '</td>';
+       $search_result .= '<td data-field_name="' . $col_val . '">' . $record->$col_val . '</td>';
       } else {
        $search_result .= '<td data-field_name="' . $col_val . '"></td>';
       }

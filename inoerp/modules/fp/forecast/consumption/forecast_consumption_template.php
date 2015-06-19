@@ -6,9 +6,7 @@
    <div id="content">
     <div id="structure">
      <div id="fp_forecast_group_divId">
-      <!--    START OF FORM HEADER-->
-      <div class="error"></div><div id="loading"></div>
-      <div class="show_loading_small"></div>
+
       <?php        echo (!empty($show_message)) ? $show_message : "";  ?> 
       <!--    End of place for showing error messages-->
       <div id ="form_header">

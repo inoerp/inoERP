@@ -40,8 +40,8 @@ function autoLoadModules($className) {
     return;
    }
   }
- } 
- 
+ }
+
  if (!empty($paths[3])) {
   if (is_dir(is_dir($dirname . DS . $paths[1] . '_' . $paths[2] . '_' . $paths[3]))) {
    $filename = $dirname . DS . $paths[1] . '_' . $paths[2] . '_' . $paths[3] . DS . 'class_' . $className . ".inc";
@@ -116,6 +116,15 @@ function pa($array = "") {
  echo '</pre></div>';
 }
 
+function set_default_theme() {
+ $extn_theme = extn_theme::find_default_theme();
+ if ($extn_theme) {
+  $_SESSION['default_theme'] = $extn_theme->theme_name;
+ } else {
+  $_SESSION['default_theme'] = 'default';
+ }
+}
+
 function ino_protocol() {
  $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
  return $protocol;
@@ -124,12 +133,12 @@ function ino_protocol() {
 function getBreadCrumb($class_first) {
  global $$class_first;
  if (property_exists($class_first, 'module') && !property_exists($class_first, 'dont_show_bread_crum')) {
-  if(!empty($$class_first) && is_object($$class_first) && method_exists($$class_first, 'module_code')){
+  if (!empty($$class_first) && is_object($$class_first) && method_exists($$class_first, 'module_code')) {
    $module_name = call_user_func(array($$class_first, 'module_code'));
-  }else{
+  } else {
    $module_name = $class_first::$module;
   }
-  
+
   $module_line = option_line::find_by_optionId_lineCode('182', $module_name);
   if ($module_line) {
    $module_name_c = ucwords($module_line->option_line_value);
@@ -1316,12 +1325,12 @@ function show_download_button_inSelectFormat($result_data, $total_count = 0, $to
  $return_stmt .= '</form></li>';
  $return_stmt .= '<li id="export_excel_searchResult" class="clickable"><i class="fa fa-file-excel-o"></i></li>
   <li id="print_searchResult" class="print clickable" title="Print"><i class="fa fa-print"></i></li>';
- if(!empty($total_count)){
-      $return_stmt .= '  <li><button class="btn btn-primary" type="button">Accessible Records<span class="badge">'.$total_count.'</span></button></li>
-    <li><button class="btn btn-warning" type="button">Total Records <span class="badge">'.$total_count_all.'</span></button></li>';
+ if (!empty($total_count)) {
+  $return_stmt .= '  <li><button class="btn btn-primary" type="button">Accessible Records<span class="badge">' . $total_count . '</span></button></li>
+    <li><button class="btn btn-warning" type="button">Total Records <span class="badge">' . $total_count_all . '</span></button></li>';
  }
 
-$return_stmt .='</ul>
+ $return_stmt .='</ul>
 </div>';
  return $return_stmt;
 }
@@ -1337,7 +1346,7 @@ function array2csv(array &$array) {
 
  ob_start();
  $df = fopen("php://output", 'w');
- if(!is_array_key_numberic($array[0])){
+ if (!is_array_key_numberic($array[0])) {
   fputcsv($df, array_keys(reset($array)));
  }
 
@@ -1354,7 +1363,7 @@ function array2text(array &$array) {
  }
  ob_start();
  $df = fopen("php://output", 'w');
-  if(!is_array_key_numberic($array[0])){
+ if (!is_array_key_numberic($array[0])) {
   fwrite($df, implode('|', array_keys(reset($array))));
  }
 
@@ -1667,12 +1676,12 @@ function ino_recent_visits() {
     break;
    }
    if (!is_numeric($k)) {
-    $recent_visit .= '<li><a href="' . $v . '">' . str_replace('_', ' ', substr($k, 0, 30)) . '</a>';
+    $recent_visit .= '<li><a href="' . htmlspecialchars($v) . '">' . str_replace('_', ' ', substr($k, 0, 30)) . '</a>';
    } else {
-    $recent_visit .= '<li><a href="' . $v . '"> Vsiti ' . $k . '</a>';
+    $recent_visit .= '<li><a href="' . htmlspecialchars($v) . '"> Vsiti ' . $k . '</a>';
    }
   }
-  $recent_visit .= '<li class="view_all"><a href="' . HOME_URL . 'form.php?class_name=user_activity_v&mode=2"> View More ...</a>';
+  $recent_visit .= '<li class="view_all"><a href="' . HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2"> View More ...</a>';
   $recent_visit .= '</ul>';
  }
  return $recent_visit;
@@ -1706,7 +1715,6 @@ function ino_noOfItems_inCart() {
  }
 }
 
-
 function update_htaccessFile() {
  $return = false;
  $file_link = HOME_DIR . DS . 'engine/install/.htaccess';
@@ -1724,7 +1732,7 @@ function update_htaccessFile() {
   try {
    if (fwrite($write_file, $file_content) === FALSE) {
     echo "<br>Unable to update the .htaccess file. Make sure the file has 777 mode";
-   }else{
+   } else {
     $return = true;
    }
   } catch (Exception $e) {
@@ -1737,4 +1745,5 @@ function update_htaccessFile() {
  fclose($write_file);
  return $return;
 }
+
 ?>

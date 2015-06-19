@@ -96,9 +96,11 @@ class user_favourite extends dbObject {
    $fav_stmt .= '<li class="' . $divClass . '">';
    if (!empty($links->path_id)) {
     $path = path::find_by_id($links->path_id);
-    $fav_stmt .= '<a href="' . HOME_URL . $path->path_link . '">' . $links->fav_name . '</a>';
+    $url_1 = htmlspecialchars(HOME_URL . $path->path_link);
+    $fav_stmt .= '<a href="' . $url_1 . '">' . $links->fav_name . '</a>';
    } else {
-    $fav_stmt .= '<a href="http://' . $links->external_link . '">' . $links->fav_name . '</a>';
+    $url_1 = htmlspecialchars($links->external_link);
+    $fav_stmt .= '<a href="http://' . $url_1 . '">' . $links->fav_name . '</a>';
    }
    $fav_stmt .= '</li>';
   }

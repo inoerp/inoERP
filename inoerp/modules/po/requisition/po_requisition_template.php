@@ -130,7 +130,6 @@
            echo ino_inline_action($$class_second->po_requisition_line_id, array('po_requisition_header_id' => $$class->po_requisition_header_id));
            ?>
           </td>
-          </td>
           <td><?php form::text_field_wid2sr('po_requisition_line_id'); ?></td>
           <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
           <td><?php echo $f->select_field_from_object('receving_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->receving_org_id, '', '', 1, $readonly); ?></td>

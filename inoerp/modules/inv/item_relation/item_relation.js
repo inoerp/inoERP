@@ -1,17 +1,3 @@
-function setValFromSelectPage( combination) {
- this.combination = combination;
-}
-
-setValFromSelectPage.prototype.setVal = function() {
- var combination = this.combination;
- var fieldClass = '.' + localStorage.getItem("field_class");
- fieldClass = fieldClass.replace(/\s+/g, '.');
- if (combination) {
-	$('#content').find(fieldClass).val(combination);
-	localStorage.removeItem("field_class");
- }
-};
-
 $(document).ready(function() {
 // var Mandatory_Fields = ["#org_id", "First Select Calendar Name"];
 // select_mandatory_fields(Mandatory_Fields);

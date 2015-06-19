@@ -16,7 +16,6 @@
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
       <li><?php
-       $f = new inoform();
        if (!empty($item->org_id)) {
         $f->l_select_field_from_object('org_id', $org->findAll_inventory(), 'org_id', 'org', $item->org_id, 'org_id', '', 1, $readonly);
        } else {

@@ -70,40 +70,25 @@ function setSubinventory(transaction_type_id) {
  $(".transaction_type_id").val(transaction_type_id);
  switch (transaction_type_id) {
   case "1":
-   $(".from_subinventory_id").prop("disabled", false).prop("required", true);
-   $(".from_locator_id").prop("disabled", false);
-   $(".account_id").prop("required", true);
-   $(".to_subinventory_id").val('');
-   $(".to_subinventory_id").prop("disabled", true).prop("required", false);
-   $(".to_locator_id").val('');
-   $(".to_locator_id").prop("disabled", true);
-   $('.select_account').prop('required', true);
+   $(".from_subinventory_id, .from_locator_id").removeAttr("disabled");
+   $(".from_subinventory_id,.account_id").prop("required", true).css('backgroundColor', mandatory_field_color);
+   $(".to_subinventory_id, .to_locator_id").val('').prop("disabled", true).removeAttr("required").css('backgroundColor', '');
    break;
 
   case "2":
-   $(".to_subinventory_id").prop("disabled", false).prop("required", true);
-   $(".to_locator_id").prop("disabled", false);
-   $(".account_id").prop("required", true);
-   $(".from_subinventory_id").val('');
-   $(".from_subinventory_id").prop("disabled", true).prop("required", false);
-   $(".from_locator_id").val("");
-   $(".from_locator_id").prop("disabled", true);
-   $('.select_account').prop('required', true);
+   $(".to_subinventory_id, .to_locator_id").removeAttr("disabled");
+   $(".to_subinventory_id,.account_id").prop("required", true).css('backgroundColor', mandatory_field_color);
+   $(".from_subinventory_id, .from_locator_id").val('').prop("disabled", true).removeAttr("required").css('backgroundColor', '');
    break;
 
   case "3":
-   $(".to_subinventory_id").prop("disabled", false).prop("required", true);
-   $(".to_locator_id").prop("disabled", false);
-   $(".from_subinventory_id").prop("disabled", false).prop("required", true);
-   $(".from_locator_id").prop("disabled", false);
-   $('.select_account').prop('required', false);
+   $(".to_subinventory_id, .to_locator_id, .from_subinventory_id, .from_locator_id").removeAttr("disabled");
+   $(".to_subinventory_id, .from_subinventory_id").prop("required", true).css('backgroundColor', mandatory_field_color);;
+   $(".account_id").removeAttr("required disabled").css('backgroundColor', '#fff');
    break;
 
   default:
-   $(".to_subinventory_id").prop("disabled", true);
-   $(".to_locator_id").prop("disabled", true);
-   $(".from_subinventory_id").prop("disabled", true);
-   $(".from_locator_id").prop("disabled", true);
+   $(".to_subinventory_id, .to_locator_id, .from_subinventory_id, .from_locator_id ,.account_id").removeAttr("required").prop("disabled", true).css('backgroundColor', '');
  }
 }
 
@@ -119,7 +104,7 @@ function callGetLocatorForTo(subinventory_id, rowIdValue) {
 }
 
 $(document).ready(function () {
- $("#transaction_type_id").on("change", function () {
+ $("body").off("change", '#transaction_type_id').on("change", '#transaction_type_id', function () {
   var transaction_type_id = $(this).val();
   setSubinventory(transaction_type_id);
  });
@@ -131,7 +116,7 @@ $(document).ready(function () {
  $('#form_line').off('click', '.popup.view-item-config').on('click', '.popup.view-item-config', function (e) {
   e.preventDefault();
   localStorage.removeItem("row_class_b");
-   var openUrl = $(this).prop('href') + '&reference_key_name=sd_so_line';
+  var openUrl = $(this).prop('href') + '&reference_key_name=sd_so_line';
   var trClass = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
   if ($('#form_line').find(trClass).find('.org_id').val()) {
    openUrl += '&org_id=' + $('#form_line').find(trClass).find('.org_id').val();

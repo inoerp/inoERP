@@ -8,9 +8,6 @@
 		 <div id="sd_shipping_control_divId">
 			<div id="form_top">
 			</div>
-			<!--    START OF FORM HEADER-->
-			<div class="error"></div><div id="loading"></div>
-			<div class="show_loading_small"></div>
 			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 			<!--    End of place for showing error messages-->
 			<div id ="form_header"><span class="heading">Shipping Control </span>

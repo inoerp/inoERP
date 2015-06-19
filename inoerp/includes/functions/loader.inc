@@ -75,7 +75,14 @@ if ($continue) {
   * First call the theme class to find out the selected theme.
   * Select the default theme if no theme found
   */
- $selected_theme = 'default';
+//   $_SESSION['default_theme'] = 'default';
+ if (!empty($_SESSION['default_theme'])) {
+  $selected_theme = $_SESSION['default_theme'];
+ } else {
+  set_default_theme();
+  $selected_theme = $_SESSION['default_theme'];
+ }
+
  defined('THEME_DIR') ? null : define('THEME_DIR', HOME_DIR . DS . 'themes' . DS . $selected_theme);
  defined('THEME_URL') ? null : define("THEME_URL", HOME_URL . 'themes/' . $selected_theme);
 // if(!empty($si->maintenance_cb) && ($si->maintenance_cb == 1) && ($_SESSION['user_roles'][0] !='ADMIN')){
@@ -619,7 +626,7 @@ if ($continue && !empty($form_page)) {
   $role_custom_template_name = '';
   if (isset($_SESSION['user_roles'])) {
    $primary_user_role = $_SESSION['user_roles'][0];
-   $role_custom_template_name = THEME_DIR . '/template/' .$primary_user_role .'_' . $class . '_template.php';
+   $role_custom_template_name = THEME_DIR . '/template/' . $primary_user_role . '_' . $class . '_template.php';
   }
   if (!empty($role_custom_template_name) && file_exists($role_custom_template_name)) {
    $template_file_names = [$role_custom_template_name];

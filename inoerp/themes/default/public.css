@@ -21,6 +21,14 @@
 
 }
 
+.ui-widget{
+ font-family: "Lato",sans-serif !important;
+   font-size: 0.95em !important;
+}
+
+label.big_popover{
+        width: 120px !important;
+}
 
 .fa-select {
  font-family: sans-serif, 'FontAwesome';
@@ -31,7 +39,7 @@
  top: 0;
  left: 0;
  width: 100%;
- height: 100%;
+ min-height: 1000px;
  background-color: #fff;
  filter:alpha(opacity=70);
  -moz-opacity:0.7;
@@ -1031,12 +1039,12 @@ ul.process_flow_diagram_list li.current_processs{
 }
 
 ul.header_field li, ul.line_field li{
- width: 310px;
+ width: 300px;
  display: inline-block;
 }
 
 ul.header_field li label{
- width: 135px;
+ width: 125px;
 }
 
 ul.header_field_small li{
@@ -1234,9 +1242,8 @@ select.search_document_list option:nth-child(even) {
  display: block;
  float: left;
  margin : 15px;
- border: 1px solid #ddd;
- width: 100px;
- height: 100px;
+ width: 110px;
+ height: 110px;
  text-align: center;
  vertical-align: middle;
  padding-top: 20px;
@@ -1277,11 +1284,12 @@ select.search_document_list option:nth-child(even) {
 }
 
 #dashborad_menu li .circle-frame a :hover{
- font-size: 3.5em;
+ font-size: 4.1em;
 }
 
 .very-small-text{
-   font-size: 0.5em;     
+   font-size: 0.5em;
+   white-space: nowrap;
 }
 
 .very-small-text :hover{

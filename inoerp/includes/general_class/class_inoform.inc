@@ -255,7 +255,7 @@ EOD;
 
  public static function form_button_withImage($current_page_path = "", $homeUrl = '') {
   global $class;
-  $current_page_path = 'form.php?mode=9&class_name='.$class;
+  $current_page_path = 'form.php?mode=9&amp;class_name='.$class;
   echo <<<EOD
 			 <ul id="form_top_image" class="draggable">
         <li class='fa fa-refresh clickable' id='refresh_button' title='Refresh'></li>
@@ -440,8 +440,8 @@ EOD;
    $idvalue = "";
   }
   $element_text_field = "<input type=\"text\" name=\"$bracketName\" value=\"$valueAfterDecimal\"  size=\"$size\"
-	 min=\"$min\" max=\"$max\" class=\"number $div_class $name\" placeholder=\"$place_holder\" "
-   . "pattern=\"[0-9]+([\.][0-9]+)?\" step='any' $required $idvalue $readonly title=\"$title\" >";
+	 class=\"number $div_class $name\" placeholder=\"$place_holder\" "
+   . "pattern=\"[0-9]+([\.][0-9]+)?\"  $required $idvalue $readonly title=\"$title\" >";
   return $element_text_field;
  }
 
@@ -515,11 +515,11 @@ EOD;
   $text_field .= '<li><label>' . ucwords(str_replace('_', ' ', $field_name)) . '</label>';
   $text_field .= $this->hidden_field_withIdClass($field_name, $$class->$field_name, 'address_id');
   $field_class_name = $field_name . ' ' . $div_class;
-  $text_field .= $this->text_field('address_name', $field_val, '', '', $field_class_name, '', 1, '', $ttl);
+  $text_field .= $this->text_field('address_name', $field_val, '15', '', $field_class_name, '', 1, '', $ttl);
   $text_field .= '<i class="fa fa-search address_id select_popup clickable"></i></li>';
   if ($show_all_fields) {
-   $text_field .= '<li><label>Country</label>' . $this->text_field('xxcountry', $addr->country, '', '', 'country', '', 1) . '</li>';
-   $text_field .= '<li><label>Postal Code</label>' . $this->text_field('xxpostal_code', $addr->postal_code, '', '', 'postal_code', '', 1) . '</li>';
+   $text_field .= '<li><label>Country</label>' . $this->text_field('xxcountry', $addr->country, '15', '', 'country', '', 1) . '</li>';
+   $text_field .= '<li><label>Postal Code</label>' . $this->text_field('xxpostal_code', $addr->postal_code, '15', '', 'postal_code', '', 1) . '</li>';
    $text_field .= '<li><label>Details</label>' . $this->text_area('xxaddress', $addr->address, '3', '', 'address', '', 1) . '</li>';
   }
   $text_field .= '</ul>';
@@ -666,7 +666,7 @@ EOD;
   global $readonly, $class, $$class;
   $search_class = ucwords('Search ' . str_replace('_', ' ', $class));
   $search_class_gt = gettext($search_class);
-  echo '<label class="big_popover"><a href="#" id="big_popover" ><i class="fa fa-search  clickable" 
+  echo '<span class="big_popover"><a href="#" id="big_popover" ><i class="fa fa-search  clickable" 
                                                                   title="Click here to open the serch form" data-toggle="tooltip" ></i></a>
  <div id="popover-head" class="hide">' . $search_class_gt .
   '<i title="Click Here To Make This Element Draggable"  class="fa fa-arrows medium small-left-padding make-draggable large-text clickable ">
@@ -677,8 +677,8 @@ EOD;
   include __DIR__ . '/../../popover_select.php';
   $class = $class_o;
   $$class = $$class_o;
-  echo '</div></div>';
-  echo gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '</div></div></span>';
+  echo '<label class="big_popover">'.gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class);
  }
 
@@ -686,7 +686,8 @@ EOD;
   global $readonly, $class, $$class;
   $search_class = ucwords('Search ' . str_replace('_', ' ', $class));
   $search_class_gt = gettext($search_class);
-  echo '<label class="big_popover"><a href="#" id="big_popover" ><i class="fa fa-search  clickable" 
+  echo '<label class="big_popover">' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<span class="big_popover"><a href="#" id="big_popover" ><i class="fa fa-search  clickable" 
                                                                   title="Click here to open the serch form" data-toggle="tooltip" ></i></a>
  <div id="popover-head" class="hide">' . $search_class_gt .
   '<i title="Click Here To Make This Element Draggable" class="fa fa-arrows small-left-padding make-draggable medium large-text clickable ">
@@ -697,8 +698,7 @@ EOD;
   include __DIR__ . '/../../popover_select.php';
   $class = $class_o;
   $$class = $$class_o;
-  echo '</div></div>';
-  echo gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '</div></div></span>';
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', 1);
  }
 
@@ -1451,7 +1451,7 @@ EOD;
   $bracketName = $name . '[]';
   $idvalue = $this->_convert_id($id);
   $element_select_field = "<Select name=\"$bracketName\" class=\"from_array select $class_name $name\" $idvalue $required $readonly $disabled >";
-  $element_select_field .= "<option value=\"\" ></option>";
+  $element_select_field .= "<option value=\"\" >Select</option>";
   foreach ($array as $key => $arraValue) {
    if ($key == $value) {
     $selected = 'selected';
@@ -1536,7 +1536,7 @@ EOD;
    $disabled = '';
   }
   $element_select_field = "<Select name=\"$bracketName\" class=\"select $divClass $name\" $idvalue $readonly $required $disabled>";
-  $element_select_field .= "<option value=\"\" ></option>";
+  $element_select_field .= "<option value=\"\" >Select</option>";
   if ((is_array($object)) && (count($object) > 0 )) {
    foreach ($object as $record) {
     if ((!empty($value)) && ($record->$objectValueKey == $value)) {

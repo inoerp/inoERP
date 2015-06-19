@@ -24,8 +24,8 @@ function animateCycle()
 
 }
 
-function daysBetweenDates(date1, date2){
- return (Date.parse(date1)- Date.parse(date2))/(1000*60*60*24);
+function daysBetweenDates(date1, date2) {
+ return (Date.parse(date1) - Date.parse(date2)) / (1000 * 60 * 60 * 24);
 }
 
 function getFormDetails(url) {
@@ -66,15 +66,15 @@ function getFormDetails(url) {
     }
    });
    $.getScript(homeUrl + "includes/js/reload.js").done(function () {
-    $('#overlay').css('display', 'none');
+    hideOverLay();
    });
   } else {
-   $('#overlay').css('display', 'none');
+   hideOverLay();
   }
 
  }).fail(function () {
   alert("Form loading failed!");
-  $('#overlay').css('display', 'none');
+  hideOverLay();
  });
 }
 
@@ -3314,10 +3314,13 @@ $(document).ready(function () {
   var fieldClass = $(this).closest('td').find('.select_item_number').prop('class');
   localStorage.setItem("row_class", rowClass);
   localStorage.setItem("field_class", fieldClass);
+    var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
   var openUrl = 'select.php?class_name=item_select';
   if ($(this).siblings('.item_number').val()) {
    openUrl += '&item_number=' + $(this).siblings('.item_number').val();
   }
+  localStorage.setItem("set_value_for_one_field", true);
   void window.open(openUrl, '_blank',
           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
@@ -3718,15 +3721,15 @@ $(document).ready(function () {
    $(this).autocomplete({
     disabled: true
    });
-    var fname = $(this).prop('name').replace(/\[]+/g, ' ').replace(/_+/g,' ');
-    $(this).prop('placeholder' , 'Enter new ' + fname);
+   var fname = $(this).prop('name').replace(/\[]+/g, ' ').replace(/_+/g, ' ');
+   $(this).prop('placeholder', 'Enter new ' + fname);
   });
   $(this).parent().children('input').each(function () {
    $(this).autocomplete({
     disabled: true
    });
-        var fname = $(this).prop('name').replace(/\[]+/g, ' ').replace(/_+/g,' ');
-    $(this).prop('placeholder' , 'Enter new ' + fname);
+   var fname = $(this).prop('name').replace(/\[]+/g, ' ').replace(/_+/g, ' ');
+   $(this).prop('placeholder', 'Enter new ' + fname);
   });
  });
 
@@ -4733,24 +4736,24 @@ $(document).ready(function () {
  $('body').on('click', '.clear-clipboard', function () {
   $('#left-clipboard-data').empty();
  });
- 
+
  $('body').on('click', '.get-view-content', function () {
-var view_id = $(this).data('view_id');
-  if($(this).data('update_divId')){
-  var update_divId_h = '#' + $(this).data('update_divId');
-  }else{
-  var update_divId_h = $(this).prop('hash');
-  }
-  
- if(!$(update_divId_h).text().trim()){
-      getViewResultByViewId({
-    view_id : view_id,
-    update_divId_h : update_divId_h
-  
-  });
+  var view_id = $(this).data('view_id');
+  if ($(this).data('update_divId')) {
+   var update_divId_h = '#' + $(this).data('update_divId');
+  } else {
+   var update_divId_h = $(this).prop('hash');
   }
 
-});
+  if (!$(update_divId_h).text().trim()) {
+   getViewResultByViewId({
+    view_id: view_id,
+    update_divId_h: update_divId_h
+
+   });
+  }
+
+ });
 
 
 

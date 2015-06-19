@@ -82,21 +82,42 @@ class inv_item_relation extends dbObject {
  public $option_list = [
   'relation_type' => 'INV_ITEM_RELATION',
  ]; //list of search fields wh
-public $inv_item_relation_id;
-public $relation_type;
-public $from_item_id_m;
-public $to_item_id_m;
-public $org_id;
-public $from_date;
-public $to_date;
-public $description;
-public $planning_cb;
-public $status;
-public $created_by;
-public $creation_date;
-public $last_update_by;
-public $last_update_date;
+ public $inv_item_relation_id;
+ public $relation_type;
+ public $from_item_id_m;
+ public $to_item_id_m;
+ public $org_id;
+ public $from_date;
+ public $to_date;
+ public $description;
+ public $planning_cb;
+ public $status;
+ public $created_by;
+ public $creation_date;
+ public $last_update_by;
+ public $last_update_date;
+ public $from_item_number;
+ public $to_item_number;
 
+ public function _before_save() {
+  if (!empty($this->from_item_number)) {
+   $item_i = item::find_by_itemNumber_fromMasterOrg($this->from_item_number);
+   if ($item_i) {
+    $this->from_item_id_m = $item_i->item_id_m;
+   } else {
+    echo "<br>Wrong item number. Error @ " . __FILE__ . ' @ line num ' . __LINE__;
+   }
+  }
+
+  if (!empty($this->to_item_number)) {
+   $item_j = item::find_by_itemNumber_fromMasterOrg($this->to_item_number);
+   if ($item_j) {
+    $this->to_item_id_m = $item_j->item_id_m;
+   } else {
+    echo "<br>Wrong item number. Error @ " . __FILE__ . ' @ line num ' . __LINE__;
+   }
+  }
+ }
 
  Public static function item_relation() {
   $option_header = option_header::find_by_name('INV_ITEM_RELATION');
@@ -124,8 +145,8 @@ public $last_update_date;
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
  }
- 
-  public static function find_all_by_fromItemIdM($from_item_id_m) {
+
+ public static function find_all_by_fromItemIdM($from_item_id_m) {
   $sql = " 
 	 SELECT *
 	 FROM inv_item_relation
