@@ -206,7 +206,7 @@
    </div>
    <div id="divider-bar" class="col-m-1 hidden-sm hidden-xs"><i class="fa fa-toggle-left clickable"></i></div>
 
-   <div id="erp_form_area" class="col-md-10 col-md-offset-2 mainbar">
+   <div id="erp_form_area" class="col-md-10 col-md-offset-2 mainbar" >
     <div class='visible-xs visible-sm'>
      <div class="error"></div><div id="loading"></div>
     </div>
@@ -240,7 +240,7 @@
      </div>
      <!--   end of structure-->
     </div>
-    <div id='overlay'></div>
+    <div id='overlay' data-actionmsg='Loading..'></div>
    </div>
    <!--   Dont Change Anything Below This Row-->
    <div class="col-sm-12 col-md-10 col-md-offset-2 mainbar">

@@ -26,7 +26,7 @@ if (!empty($_POST['submitLogin'])) { //form is submitted for login
 
   If ($loggedin_user) {
    $session->login($loggedin_user);
-   set_default_theme();
+   set_default_theme($loggedin_user);
 //	$session->assign_role($_SESSION['user_id']);
    if (!empty($_SESSION['orginal_page'])) {
 //   redirect_to(HOME_URL . "form.php?class_name=user_dashboard_v");

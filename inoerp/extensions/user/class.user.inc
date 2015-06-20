@@ -47,6 +47,7 @@ class user extends dbObject {
   'supplier_id',
   'block_notif_count',
   'image_file_id',
+  'default_theme',
   "created_by",
   "creation_date",
   "last_update_by",
@@ -115,6 +116,7 @@ class user extends dbObject {
  public $supplier_id;
  Public $date_format;
  Public $theme;
+ public $default_theme;
  public $time;
  public $msg;
  public $employee_name;
@@ -244,7 +246,7 @@ class user extends dbObject {
    return false;
   }
   $sql = " SELECT user_id, username, first_name, last_name, email,  phone, hr_employee_id, user_language,
-            block_notif_count,  ar_customer_id, supplier_id,  created_by,    creation_date, 
+           default_theme, block_notif_count,  ar_customer_id, supplier_id,  created_by,    creation_date, 
             last_update_by,    last_update_date , image_file_id FROM ";
   $sql.= static::$table_name;
   $sql.= " WHERE " . static::$primary_column . "= :primary_id ";

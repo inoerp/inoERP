@@ -74,6 +74,10 @@ blockquote{
  padding: 10px;
 }
 
+input.search-text-field{
+ width: 44% !important;
+}
+
 .full-width{
  width: 100%;
 }

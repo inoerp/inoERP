@@ -105,10 +105,31 @@ function autoLoadTparty($className) {
  }
 }
 
+function autoLoadRegex($className) {
+ if (substr($className, 0, 4) == 'extn') {
+  $search_dir = 'extensions';
+ } else {
+  $search_dir = 'modules';
+ }
+
+ $dir = new RecursiveDirectoryIterator(HOME_DIR . DS . $search_dir);
+ $ite = new RecursiveIteratorIterator($dir);
+ $files = new RegexIterator($ite, '([^\s]+(\.(?i)(inc))$)', RegexIterator::GET_MATCH);
+ $class_file_name = 'class_' . $className . '.inc';
+ foreach ($files as $file) {
+  if (substr($file[0], -1) != '.') {
+   if (strpos($file[0], $class_file_name)) {
+    require $class_file_name;
+   }
+  }
+ }
+}
+
 spl_autoload_register("autoLoadFromCwd");
 spl_autoload_register("autoLoadModules");
 spl_autoload_register("autoLoadExtensions");
 spl_autoload_register("autoLoadTparty");
+spl_autoload_register("autoLoadRegex");
 
 function pa($array = "") {
  echo '<div class="message">Printing array/object <pre>';
@@ -116,12 +137,26 @@ function pa($array = "") {
  echo '</pre></div>';
 }
 
-function set_default_theme() {
- $extn_theme = extn_theme::find_default_theme();
- if ($extn_theme) {
-  $_SESSION['default_theme'] = $extn_theme->theme_name;
- } else {
-  $_SESSION['default_theme'] = 'default';
+function set_default_theme(&$loggedin_user = '') {
+ if (!empty($loggedin_user) && !empty($loggedin_user->default_theme)) {
+  $theme_dir = HOME_DIR . DS . 'themes' . DS . $loggedin_user->default_theme;
+  if (is_dir($theme_dir)) {
+   $_SESSION['default_theme'] = $loggedin_user->default_theme;
+  }
+ }
+
+ if (empty($_SESSION['default_theme'])) {
+  $extn_theme = extn_theme::find_default_theme();
+  if ($extn_theme) {
+   $theme_dir_1 = HOME_DIR . DS . 'themes' . DS . $extn_theme->theme_name;
+  } else {
+   $theme_dir_1 = null;
+  }
+  if ($theme_dir_1 && is_dir($theme_dir_1)) {
+   $_SESSION['default_theme'] = $extn_theme->theme_name;
+  } else {
+   $_SESSION['default_theme'] = 'default';
+  }
  }
 }
 

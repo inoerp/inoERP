@@ -28,15 +28,13 @@
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
-     <div class="large_shadow_box"> 
       <ul class="column header_field">
        <li><?php $f->l_select_field_from_object('user_language', user::all_languages(), 'option_line_code', 'description', $$class->user_language, 'user_language'); ?>  </li>
+       <li><?php $f->l_select_field_from_object('default_theme', extn_theme::find_all_enabled_theme(), 'theme_name', 'theme_name', $$class->default_theme, 'default_theme'); ?>  </li>
        <li><?php $f->l_select_field_from_array('block_notif_count', dbObject::$position_array, $$class->block_notif_count); ?>  </li>
       </ul>
-     </div>
     </div>
     <div id="tabsHeader-3" class="tabContent">
-     <div class="large_shadow_box"> 
       <ul class="column header_field">
        <li><label><?php echo gettext('Employee Name') ?></label><?php $f->text_field_d('employee_name'); ?>
         <?php echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id); ?>
@@ -51,7 +49,6 @@
         <i class="fa fa-search ar_customer_id select_popup clickable"></i>
        </li>
       </ul>
-     </div>
     </div>
     <div id="tabsHeader-4" class="tabContent">
 

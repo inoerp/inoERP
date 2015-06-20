@@ -401,6 +401,8 @@ require_once(INC_MODULE . DS . "hd" . DS . "svo" . DS . "class_hd_svo_header.inc
 require_once(INC_MODULE . DS . "hd" . DS . "svo" . DS . "class_hd_svo_actuals.inc");
 require_once(INC_MODULE . DS . "hd" . DS . "sbp" . DS . "class_hd_sbp_header.inc");
 require_once(INC_MODULE . DS . "hd" . DS . "sbp" . DS . "class_hd_sbp_line.inc");
+require_once(INC_MODULE . DS . "prj" . DS . "rate_schedule" . DS . "class_prj_rate_schedule_header.inc");
+require_once(INC_MODULE . DS . "prj" . DS . "rate_schedule" . DS . "class_prj_rate_schedule_line.inc");
 require_once(INC_MODULE . DS . "adm" . DS . "task_type" . DS . "class_adm_task_type.inc");
 require_once(INC_MODULE . DS . "adm" . DS . "task_status" . DS . "class_adm_task_status.inc");
 //require_once(INC_MODULE . DS . "hd" . DS . "service_contract" . DS . "class_hd_service_contract_header.inc");

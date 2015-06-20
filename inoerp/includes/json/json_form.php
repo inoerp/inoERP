@@ -22,7 +22,7 @@ if (!empty($_GET['class_name'])) {
 }
 ?>
 <?php
-
+$json_loader = 1;
 include_once('../functions/loader.inc');
 if (empty($_POST)) {
  try {

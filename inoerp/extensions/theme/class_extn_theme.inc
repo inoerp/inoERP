@@ -149,6 +149,15 @@ class extn_theme extends dbObject {
   return !empty($result) ? array_pop($result) : false;
  }
  
+  public static function find_all_enabled_theme() {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE enabled_cb = 1 ";
+
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
+ 
  
 
 }

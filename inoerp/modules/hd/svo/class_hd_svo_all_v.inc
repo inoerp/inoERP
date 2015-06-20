@@ -1,6 +1,6 @@
 <?php
 
-class hd_ro_all_v extends dbObject {
+class hd_svo_all_v extends dbObject {
 
  public static $form_class_name = "hd_ro_header";
  public static $table_name = "hd_ro_all_v";

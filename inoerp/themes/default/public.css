@@ -60,7 +60,7 @@ label.big_popover{
 
 #overlay.fa::after{
 font-size: 40px !important;
-content : "Loading...";
+content : attr(data-actionmsg);
 padding: 20% 0 0 5% !important;
 
 }
@@ -80,6 +80,10 @@ blockquote{
 .clickable{
  cursor: pointer; 
  cursor: hand; 
+}
+
+input.search-text-field{
+ width: 44% !important;
 }
 
 .account_popup, .select_popup{

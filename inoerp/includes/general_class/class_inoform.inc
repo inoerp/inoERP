@@ -679,6 +679,7 @@ EOD;
   $$class = $$class_o;
   echo '</div></div></span>';
   echo '<label class="big_popover">'.gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  $div_class .= 'search-text-field';
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class);
  }
 
@@ -699,6 +700,7 @@ EOD;
   $class = $class_o;
   $$class = $$class_o;
   echo '</div></div></span>';
+  $div_class .= 'search-text-field';
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', 1);
  }
 

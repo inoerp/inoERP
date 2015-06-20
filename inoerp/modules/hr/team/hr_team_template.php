@@ -17,7 +17,7 @@
       </li>
       <li><?php $f->l_select_field_from_object('type', hr_team_header::team_type(), 'option_line_code', 'option_line_value', $$class->type, 'type'); ?> </li>
       <li><?php $f->l_text_field_d('team_name'); ?> </li>
-      <li><label><?php echo gettext('Team Lead') ?></label><?php $f->text_field_d('lead_employee_name'); ?>
+      <li><label><?php echo gettext('Team Lead') ?></label><?php $f->text_field_d('lead_employee_name' , 'employee_name'); ?>
        <?php echo $f->hidden_field_withId('team_lead_employee_id', $$class->team_lead_employee_id); ?>
        <i class="select_employee_name select_popup clickable fa fa-search"></i>
       </li>
@@ -97,9 +97,9 @@
          </td>
          <td><?php $f->text_field_wid2sr('hr_team_line_id'); ?></td>
          <td><?php
-          $f->text_field_wid2('member_employee_name', 'select employee');
+          $f->text_field_wid2('member_employee_name', 'select employee employee_name');
           echo $f->hidden_field('member_employee_id', $$class_second->member_employee_id);
-          ?><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_employee_name select_popup clickable"></td>
+          ?><i class="select_employee_name select_popup clickable fa fa-search"></i></td>
          <td><?php echo $f->select_field_from_object('region', sys_value_group_line::find_by_parent_id($team_reg_vg_id), 'sys_value_group_line_id', 'code_value', $$class_second->region); ?></td>
          <td><?php echo $f->select_field_from_object('role', hr_team_header::hr_role(), 'option_line_code', 'option_line_value', $$class_second->role); ?></td>
          <td><?php echo $f->select_field_from_array('responsibility', hr_team_line::$responsibility_a, $$class_second->responsibility); ?></td>

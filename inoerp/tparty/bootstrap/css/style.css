@@ -4487,7 +4487,7 @@ table.document_table input{
 #erp_form_area li input[type=number], #form-modal li input[type=text], #form-modal li input[type=date],#form-modal li input[type=textarea],
 #form-modal li input[type=number]
 {
- border-radius: 5px;
+ border-radius: 3px;
 }
 
 #erp_form_area select, #form-modal select{
