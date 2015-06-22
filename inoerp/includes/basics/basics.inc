@@ -67,9 +67,7 @@ require_once(INC_EXTENSIONS . DS . "user" . DS . "favourite" . DS . "class_user_
 require_once(INC_EXTENSIONS . DS . "role_access" . DS . "class_role_access.inc");
 require_once(INC_EXTENSIONS . DS . "user_group_access" . DS . "class_user_group_access.inc");
 require_once(INC_EXTENSIONS . DS . "role_path" . DS . "class_role_path.inc");
-
-//require_once(INC_BASICS.DS."class.dbObject.inc"); 
-//load other objects
+require_once(INC_EXTENSIONS . DS . "site_search" . DS . "class_extn_site_search.inc");
 require_once(INC_SYS . DS . "program_schedule" . DS . "class_sys_program_schedule.inc");
 require_once(INC_SYS . DS . "program" . DS . "class_sys_program.inc");
 require_once(INC_SYS . DS . "option" . DS . "class.option_header.inc");
@@ -80,6 +78,23 @@ require_once(INC_SYS . DS . "value_group" . DS . "class_sys_value_group_header.i
 require_once(INC_SYS . DS . "value_group" . DS . "class_sys_value_group_line.inc");
 require_once(INC_SYS . DS . "profile" . DS . "class_sys_profile_header.inc");
 require_once(INC_SYS . DS . "profile" . DS . "class_sys_profile_line.inc");
+require_once(INC_EXTENSIONS . DS . "file" . DS . "class.file.inc");
+require_once(INC_EXTENSIONS . DS . "file" . DS . "class.file_reference.inc");
+require_once(INC_EXTENSIONS . DS . "image" . DS . "class_extn_image.inc");
+require_once(INC_EXTENSIONS . DS . "image" . DS . "class_extn_image_reference.inc");
+require_once(INC_EXTENSIONS . DS . "file" . DS . "class_massupload.inc");
+require_once(INC_EXTENSIONS . DS . "ino_generic" . DS . "class_ino_generic.inc");
+require_once(INC_EXTENSIONS . DS . "page" . DS . "class_page.inc");
+require_once(INC_EXTENSIONS . DS . "social_login" . DS . "class_extn_social_login.inc");
+require_once(INC_EXTENSIONS . DS . "theme" . DS . "class_extn_theme.inc");
+require_once(INC_EXTENSIONS . DS . "comment" . DS . "class.comment.inc");
+require_once(INC_EXTENSIONS . DS . "block" . DS . "class.block.inc");
+require_once(INC_EXTENSIONS . DS . "block" . DS . "class.block_content.inc");
+require_once(INC_EXTENSIONS . DS . "block" . DS . "class_block_cache.inc");
+
+//require_once(INC_BASICS.DS."class.dbObject.inc"); 
+//load other objects
+
 require_once(INC_SYS . DS . "process_flow" . DS . "class_sys_process_flow_header.inc");
 require_once(INC_SYS . DS . "process_flow" . DS . "class_sys_process_flow_line.inc");
 require_once(INC_SYS . DS . "process_flow" . DS . "class_sys_process_flow_action.inc");
@@ -102,7 +117,6 @@ require_once(INC_MODULE . DS . "sys" . DS . "form_personalization" .  DS . "clas
 require_once(INC_MODULE . DS . "sys" . DS . "pd" .  DS . "class_sys_pd_header.inc");
 require_once(INC_MODULE . DS . "sys" . DS . "pd" .  DS . "class_sys_pd_process_flow_action.inc");
 require_once(INC_MODULE . DS . "sys" . DS . "pd" .  DS . "class_sys_pd_process_flow_action_value.inc");
-
 require_once(INC_ORGS . DS . "class_org.inc");
 require_once(INC_ORGS . DS . "class_org_v.inc");
 require_once(INC_ORGS . DS . "enterprise" . DS . "class_enterprise.inc");
@@ -232,7 +246,6 @@ require_once(INC_MODULE . DS . "bom" . DS . "bom_routing" . DS . "class_bom_rout
 require_once(INC_MODULE . DS . "bom" . DS . "bom_routing" . DS . "class_bom_routing_line_v.inc");
 require_once(INC_MODULE . DS . "bom" . DS . "config" . DS . "class_bom_config_header.inc");
 require_once(INC_MODULE . DS . "bom" . DS . "config" . DS . "class_bom_config_line.inc");
-
 require_once(INC_MODULE . DS . "pos" . DS . "terminal" . DS . "class_pos_terminal.inc");
 require_once(INC_MODULE . DS . "pos" . DS . "transaction" . DS . "class_pos_transaction_header.inc");
 require_once(INC_MODULE . DS . "pos" . DS . "transaction" . DS . "class_pos_transaction_line.inc");
@@ -242,7 +255,6 @@ require_once(INC_MODULE . DS . "pos" . DS . "tt" . DS . "class_pos_tt_line.inc")
 require_once(INC_MODULE . DS . "pos" . DS . "tt_with_search" . DS . "class_pos_tt_with_search_header.inc");
 require_once(INC_MODULE . DS . "pos" . DS . "barcode_list" . DS . "class_pos_barcode_list_header.inc");
 require_once(INC_MODULE . DS . "pos" . DS . "barcode_list" . DS . "class_pos_barcode_list_line.inc");
-
 require_once(INC_MODULE . DS . "wip" . DS . "wip_wo" . DS . "class_wip_wo_header.inc");
 require_once(INC_MODULE . DS . "wip" . DS . "wip_wo" . DS . "class_wip_wo_bom.inc");
 require_once(INC_MODULE . DS . "wip" . DS . "wip_wo" . DS . "class_wip_wo_routing_line.inc");
@@ -321,7 +333,6 @@ require_once(INC_MODULE . DS . "hr" . DS . "employee" . DS . "experience" . DS .
 require_once(INC_MODULE . DS . "hr" . DS . "employee" . DS . "termination" . DS . "class_hr_employee_termination.inc");
 require_once(INC_MODULE . DS . "hr" . DS . "self_service" . DS . "education" . DS . "class_hr_employee_education_ss.inc");
 require_once(INC_MODULE . DS . "hr" . DS . "self_service" . DS . "experience" . DS . "class_hr_employee_experience_ss.inc");
-
 require_once(INC_MODULE . DS . "hr" . DS . "position" . DS . "class_hr_position.inc");
 require_once(INC_MODULE . DS . "hr" . DS . "position_hierarchy" . DS . "class_hr_position_hierarchy_header.inc");
 require_once(INC_MODULE . DS . "hr" . DS . "position_hierarchy" . DS . "class_hr_position_hierarchy_line.inc");
@@ -408,32 +419,15 @@ require_once(INC_MODULE . DS . "adm" . DS . "task_status" . DS . "class_adm_task
 //require_once(INC_MODULE . DS . "hd" . DS . "service_contract" . DS . "class_hd_service_contract_header.inc");
 //require_once(INC_MODULE . DS . "hd" . DS . "service_contract" . DS . "class_hd_service_contract_line.inc");
 //require_once(INC_MODULE . DS . "hd" . DS . "service_contract" . DS . "class_hd_service_contract_detail.inc");
-
-
-//
 require_once(INC_TPARTY . DS . "barcode" . DS . "class_ino_barcode.inc");
 require_once(INC_TPARTY . DS . "extensions" . DS . "social_login" . DS . "class_social_login.inc");
-//
 //include extensions
-require_once(INC_EXTENSIONS . DS . "ino_generic" . DS . "class_ino_generic.inc");
-require_once(INC_EXTENSIONS . DS . "page" . DS . "class_page.inc");
-require_once(INC_EXTENSIONS . DS . "social_login" . DS . "class_extn_social_login.inc");
-require_once(INC_EXTENSIONS . DS . "theme" . DS . "class_extn_theme.inc");
-require_once(INC_EXTENSIONS . DS . "comment" . DS . "class.comment.inc");
 require_once(INC_EXTENSIONS . DS . "contact" . DS . "class_extn_contact.inc");
 require_once(INC_EXTENSIONS . DS . "contact" . DS . "class_extn_contact_reference.inc");
-require_once(INC_EXTENSIONS . DS . "file" . DS . "class.file.inc");
-require_once(INC_EXTENSIONS . DS . "file" . DS . "class.file_reference.inc");
-require_once(INC_EXTENSIONS . DS . "image" . DS . "class_extn_image.inc");
-require_once(INC_EXTENSIONS . DS . "image" . DS . "class_extn_image_reference.inc");
-require_once(INC_EXTENSIONS . DS . "file" . DS . "class_massupload.inc");
 require_once(INC_EXTENSIONS . DS . "content_type" . DS . "class_content_type.inc");
 require_once(INC_EXTENSIONS . DS . "content_type" . DS . "class_new_content_type.inc");
 require_once(INC_EXTENSIONS . DS . "content_type" . DS . "class_content_type_reference.inc");
 require_once(INC_EXTENSIONS . DS . "content" . DS . "class.content.inc");
-require_once(INC_EXTENSIONS . DS . "block" . DS . "class.block.inc");
-require_once(INC_EXTENSIONS . DS . "block" . DS . "class.block_content.inc");
-require_once(INC_EXTENSIONS . DS . "block" . DS . "class_block_cache.inc");
 require_once(INC_EXTENSIONS . DS . "category" . DS . "class_category.inc");
 require_once(INC_EXTENSIONS . DS . "category" . DS . "class_category_reference.inc");
 require_once(INC_EXTENSIONS . DS . "view" . DS . "class.view.inc");
@@ -445,13 +439,10 @@ require_once(INC_EXTENSIONS . DS . "web_tracking" . DS . "class_web_tracking.inc
 require_once(INC_EXTENSIONS . DS . "url_alias" . DS . "class_ext_url_alias.inc");
 require_once(INC_EXTENSIONS . DS . "web_contact" . DS . "class_web_contact.inc");
 require_once(INC_EXTENSIONS . DS . "web_mail" . DS . "class_web_mail.inc");
-require_once(INC_EXTENSIONS . DS . "site_search" . DS . "class_extn_site_search.inc");
 require_once(INC_EXTENSIONS . DS . "rating" . DS . "class_extn_rating_values.inc");
 require_once(INC_EXTENSIONS . DS . "rating" . DS . "class_extn_rating_control.inc");
 
 
-require_once(INC_EXTENSIONS . DS . "test_case" . DS . "class_ext_test_case_header.inc");
-require_once(INC_EXTENSIONS . DS . "test_case" . DS . "class_ext_test_case_line.inc");
 
 require_once __DIR__ . '/../../locale/gettext.inc';
 $locale = (isset($_SESSION['lang'])) ? $_SESSION['lang'] : DEFAULT_LOCALE;
