@@ -52,8 +52,8 @@ inoERP
     </div>
     <div id="tabsHeader-3" class="tabContent">
      <ul class="column header_field">
-      <li><?php $f->l_text_field_d('cost_budget_method'); ?></li> 
-      <li><?php $f->l_text_field_d('revenue_budget_method'); ?></li> 
+      <li><?php $f->l_select_field_from_object('cost_budget_method' , option_header::find_options_byName('PRJ_BUDGET_ENTRY_METHOD'), 'option_line_code' ,'option_line_value', $$class->cost_budget_method); ?></li> 
+      <li><?php $f->l_select_field_from_object('revenue_budget_method' , option_header::find_options_byName('PRJ_BUDGET_ENTRY_METHOD'), 'option_line_code' ,'option_line_value', $$class->revenue_budget_method); ?></li> 
       <li><?php $f->l_text_field_d('resource_list_id'); ?></li> 
      </ul>
     </div>
