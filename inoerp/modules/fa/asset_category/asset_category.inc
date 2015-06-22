@@ -1,1 +1,0 @@
-<?php if(!empty($_GET['fa_asset_category_id']) && !empty($_GET['fa_asset_book_id'])){ $$class_second = fa_book_category_association::find_by_asset_book_and_category($_GET['fa_asset_book_id'], $_GET['fa_asset_category_id']);}?>
