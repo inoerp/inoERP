@@ -9,7 +9,6 @@
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
       <ul class="column header_field">
        <li><?php $f->l_text_field_dr_withSearch('fa_asset_category_id'); ?><a name="show" href="form.php?class_name=fa_asset_category&<?php echo "mode=$mode"; ?>" class="show document_id fa_asset_category_id">
          <i class="fa fa-refresh"></i></a></li>
@@ -23,7 +22,6 @@
        <li><?php $f->l_checkBox_field_d('capitalize_cb'); ?></li>
        <li><?php $f->l_checkBox_field_d('in_physical_inv_cb'); ?></li>
       </ul>
-     </div>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>

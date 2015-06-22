@@ -36,8 +36,7 @@ $user_password_reset = new user_password_reset();
                    value="<?php echo ($user->password); ?>" >
            </li>
            <li><?php $f->l_select_field_from_object('user_language', user::all_languages(), 'option_line_code', 'description', $user->user_language, 'user_language'); ?>  </li>
-           <li><label></label><input type="submit" name="submitLogin" class="button btn btn-success" value="Log in">
-            <input type="button" name="cancelLogin" id="cancelLogin" class="button btn btn-warning" value="Cancel & Go Back"></li>
+           <li><label></label><input type="submit" name="submitLogin" class="button btn btn-success" value="Log in"> </li>
           </ul>
          </form>
         </div>

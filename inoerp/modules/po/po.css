@@ -1,16 +1,16 @@
 #po_line .class_detail_form{
-margin-left: -910px;
+margin-left: -688px;
+}
 
+
+#po_divId .form_detail_data_fs{
+  width: 870px;
 }
 
 
 #multi_select .class_detail_form{
 margin-top: 15px;
  margin-left: -10px;
-}
-
-#po_divId .form_detail_data_fs{
-  width: 900px;
 }
 
 #multi_select .form_detail_data_fs{

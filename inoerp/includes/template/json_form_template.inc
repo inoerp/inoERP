@@ -22,6 +22,15 @@
  <?php
  $mode = !empty($_GET['mode']) ? ($_GET['mode']) : '2';
  echo "<div id='mode'>$mode</mode>";
+ if (property_exists($$class, 'pageTitle')) {
+  $pageTitle = $$class->pageTitle;
+
+  if (!empty($pageTitle)) {
+   echo "<div id='page_title' >$pageTitle</div>";
+  } else {
+   echo "<div id='page_title' ></div>";
+  }
+ }
  ?>
  <?php
  if (!empty($js_file_paths)) {
@@ -71,6 +80,8 @@
    echo '</ul></div>';
   }
  }
+
+
 
 
  if (!empty($reference_table) && !empty($reference_id)) {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -7,12 +8,11 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
+
 /**
  * option_header
  *
  */
-
-
 class option_header extends dbObject {
 
  public static $table_name = "option_header";
@@ -108,6 +108,12 @@ class option_header extends dbObject {
 
  public function __set($name, $value) {
   $this->$name = $value;
+ }
+
+ Public static function find_options_byName($name) {
+  $option_header = self::find_by_name($name);
+  $countries = option_line::find_by_option_id($option_header->option_header_id);
+  return $countries;
  }
 
  Public static function countries() {

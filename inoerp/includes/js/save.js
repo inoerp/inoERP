@@ -463,44 +463,23 @@ saveMainClass.prototype.saveMain = function (beforeSave)
    /*----------------------End of single header multiple line ----start of second form---------------------------------------------------------------------------*/
 //for the third form (second form in line) - savetype5a
    if ((typeof lineClassName2 !== undefined) && (lineClassName2 !== null)) {
-    var noOfTabsInForm3 = $("tbody.form_data_line_tbody2").length;
-    //if the third form has tab
-    if (noOfTabsInForm3 > 1) {
-     $('#form_line2 input[name="line_id_cb"]:checked').each(function () {
-      var trclass = $(this).closest('tr').attr('class');
-      var lineData = [];
-      $("#form_line2").find('.' + trclass  + ' > td' ).each(function () {
-       if (!$(this).hasClass('add_detail_values')) {
-        var ThisLineData = $(this).find(":input").serializeArray();
-        lineData = $.merge(lineData, ThisLineData);
-       }
-      });
-      if ($(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray()) {
-       var detailData = $(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray();
-      } else {
-       detailData = "";
+    $('#form_line2 input[name="line_id_cb"]:checked').each(function () {
+     var trclass = $(this).closest('tr').attr('class');
+     var lineData = [];
+     $("#form_line2").find('.' + trclass + ' > td').each(function () {
+      if (!$(this).hasClass('add_detail_values')) {
+       var ThisLineData = $(this).find(":input").serializeArray();
+       lineData = $.merge(lineData, ThisLineData);
       }
-      count++;
-      saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassName2);
      });
-    } else {//if the third form doesnt have any tab-----------------savetype5b------------------------------------------
-     $('#form_line2 input[name="line_id_cb"]:checked').each(function () {
-      var lineData = [];
-      $(this).closest("tr > td ").each(function () {
-       if (!$(this).hasClass('add_detail_values')) {
-        var ThisLineData = $(this).find(":input").serializeArray();
-        lineData = $.merge(lineData, ThisLineData);
-       }
-      });
-      var trclass = $(this).closest("tr").attr('class');
-      if ($(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray()) {
-       var detailData = $(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray();
-      } else {
-       detailData = "";
-      }
-      saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassName2);
-     });
-    }
+     if ($(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray()) {
+      var detailData = $(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray();
+     } else {
+      detailData = "";
+     }
+     count++;
+     saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassName2);
+    });
    }
   }
  });

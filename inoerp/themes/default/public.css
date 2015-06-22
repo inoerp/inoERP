@@ -2269,3 +2269,14 @@ background-color: rgba(233, 237, 237, 0.32) !important;
  padding: 2px 15px !important;
 vertical-align: top !important;
 }
+
+.login-form input, .login-form select{
+        width: 200px !important;
+}
+
+#erp_form_area input:focus , #erp_form_area select :focus, input:focus , select :focus{
+  border:1px solid #2574A9 !important;
+   outline: none;
+    border-color: #2574A9;
+    box-shadow: 0 0 2px #2574A9;
+}

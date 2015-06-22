@@ -201,11 +201,11 @@ ul.second_level li{
  text-align: left;
  padding-left: 42px;
  margin-right: 0px;
- background: #ccc; /* Old browsers */
+ background: #eee; /* Old browsers */
 }
 
 #right_click_menu li:hover ul{
- background-color: #bbb;
+ background-color: #ddd;
  line-height:22px;
  left:100%; 
  margin-top:-26px; 

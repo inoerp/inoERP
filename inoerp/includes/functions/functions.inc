@@ -1,5 +1,4 @@
 <?php
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -119,7 +118,7 @@ function autoLoadRegex($className) {
  foreach ($files as $file) {
   if (substr($file[0], -1) != '.') {
    if (strpos($file[0], $class_file_name)) {
-    require $class_file_name;
+    require $file[0];
    }
   }
  }
@@ -128,8 +127,9 @@ function autoLoadRegex($className) {
 spl_autoload_register("autoLoadFromCwd");
 spl_autoload_register("autoLoadModules");
 spl_autoload_register("autoLoadExtensions");
-spl_autoload_register("autoLoadTparty");
 spl_autoload_register("autoLoadRegex");
+spl_autoload_register("autoLoadTparty");
+
 
 function pa($array = "") {
  echo '<div class="message">Printing array/object <pre>';

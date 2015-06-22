@@ -55,6 +55,9 @@ function getFormDetails(url) {
     $('#document_history').replaceWith('<div id="document_history">' + $(result).find('div#document_history').html() + '</div>');
    }
    var homeUrl = $('#home_url').val();
+   if( $(result).find('div#page_title').html()){
+    $(document).prop('title', $(result).find('div#page_title').html() + ' - inoERP');
+   }
 
    $(result).find('#js_files').find('li').each(function () {
     $.getScript($(this).html());

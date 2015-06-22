@@ -28,12 +28,13 @@
      </div>
      <div id="tabsHeader-2" class="tabContent">
        <ul class="column header_field">
-        <li><?php $f->l_select_field_from_array('usage', hr_job::$usage_a, $$class->usage); ?></li>
+        <li><?php $f->l_select_field_from_array('job_usage', hr_job::$usage_a, $$class->job_usage); ?></li>
         <li><?php $f->l_select_field_from_object('group_hr_job_id', hr_job::find_all(), 'hr_job_id', 'job_name', $$class->group_hr_job_id, 'group_hr_job_id', '', '', $readonly); ?></li>
         <li><?php $f->l_text_field_d('min_education'); ?></li>
         <li><?php $f->l_text_field_d('min_experience'); ?></li>
         <li><?php $f->l_text_field_d('technology'); ?></li>
         <li><?php $f->l_text_field_d('skillset'); ?></li>
+        <li><?php $f->l_select_field_from_array('job_level', range(0,50), $$class->job_level , 'job_level'); ?></li>
        </ul>
      </div>
      <div id="tabsHeader-3" class="tabContent">

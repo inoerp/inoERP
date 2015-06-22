@@ -58,9 +58,10 @@ class hr_job extends dbObject {
   'skillset',
   'position_type',
   'functional_area',
-  'usage',
+  'job_usage',
   'group_hr_job_id',
   'location',
+  'job_level',
   'status',
   'job_details',
   'primary_responsibility',
@@ -100,7 +101,8 @@ class hr_job extends dbObject {
  public $position_type;
  public $functional_area;
  public $location;
- public $usage;
+ public $job_usage;
+ public $job_level;
  public $group_hr_job_id;
  public $status;
  public $job_details;

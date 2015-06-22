@@ -32,9 +32,7 @@
                    value="<?php echo ($user->password); ?>" >
            </li>
            <li><?php $f->l_select_field_from_object('user_language', user::all_languages(), 'option_line_code', 'description', $user->user_language, 'user_language'); ?>  </li>
-           <li><label></label><input type="button" name="cancelLogin" id="cancelLogin" class="button btn btn-warning" value="Cancel">
-            <input type="submit" name="submitLogin" class="button btn btn-success" value="Log in">
-           </li>
+           <li><label></label><input type="submit" name="submitLogin" class="button btn btn-success" value="Log in"></li>
           </ul>
 
          </form>
