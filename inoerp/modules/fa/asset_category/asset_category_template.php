@@ -70,7 +70,7 @@
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
-     <ul class="column four_column"> 
+     <ul class="column header_field"> 
       <li><label><?php echo gettext('Cost Ac') ?></label><?php $f->ac_field_d2m('asset_cost_ac_id'); ?></li>
       <li><label><?php echo gettext('Clearing Ac') ?></label><?php $f->ac_field_d2m('asset_clearing_ac_id'); ?></li>
       <li><label><?php echo gettext('CIP Cost Ac') ?></label><?php $f->ac_field_d2m('cip_cost_ac_id'); ?></li>

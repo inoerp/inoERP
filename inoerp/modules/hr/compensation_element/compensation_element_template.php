@@ -10,7 +10,6 @@
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field"> 
         <li><?php $f->l_text_field_dr_withSearch('hr_compensation_element_id') ?>
          <a name="show" href="form.php?class_name=hr_compensation_element&<?php echo "mode=$mode"; ?>" class="show document_id hr_compensation_element_id">
@@ -25,7 +24,6 @@
         <li><?php $f->l_status_field_d('status'); ?></li>
         <li><?php $f->l_text_field_d('description'); ?> 					</li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div> <?php echo ino_attachement($file) ?> </div>
@@ -59,7 +57,7 @@
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
-      <ul class="column four_column"> 
+      <ul class="column header_field"> 
        <li><?php $f->l_number_field_d('priority'); ?> 	</li>
        <li><?php $f->l_checkBox_field_d('recurring_cb'); ?> 	</li>
        <li><?php $f->l_checkBox_field_d('separate_check_cb'); ?> 	</li>

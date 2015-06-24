@@ -1,4 +1,5 @@
 <?php
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -11,6 +12,78 @@ function autoLoadFromCwd($className) {
  }
 }
 
+function autoLoadAll($className) {
+ $paths = explode('_', $className);
+
+ if (count($paths) <= 1) {
+  return;
+ }
+
+ switch ($paths[0]) {
+  case 'extn' :
+   extension_auto_load($paths, $className);
+   return;
+   break;
+
+  default :
+   $doc_type = 'modules';
+   break;
+ }
+
+
+ switch (count($paths)) {
+  case 2:
+   $filename = HOME_DIR . DS . $doc_type . DS . $paths[0] . DS . $paths[1] . DS . 'class_' . $className . ".inc";
+   if (!is_readable($filename)) {
+    $filename = HOME_DIR . DS . $doc_type . DS . $paths[0] . DS . 'class_' . $className . ".inc";
+   }
+   break;
+
+  case 3:
+   $filename = HOME_DIR . DS . $doc_type . DS . $paths[0] . DS . $paths[1] . DS . 'class_' . $className . ".inc";
+   if (!is_readable($filename)) {
+    $filename = HOME_DIR . DS . $doc_type . DS . $paths[0] . DS . $paths[1] . '_' . $paths[2] . DS . 'class_' . $className . ".inc";
+   }
+   break;
+
+  case 4:
+   $filename = HOME_DIR . DS . $doc_type . DS . $paths[0] . DS . $paths[1] . '_' . $paths[2] . DS . 'class_' . $className . ".inc";
+   if (!is_readable($filename)) {
+    $filename = HOME_DIR . DS . $doc_type . DS . $paths[0] . DS . $paths[1] . DS . $paths[2] . '_' . $paths[3] . DS . 'class_' . $className . ".inc";
+    if (!is_readable($filename)) {
+     $filename = HOME_DIR . DS . $doc_type . DS . $paths[0] . DS . $paths[1] . DS . $paths[2] . DS . 'class_' . $className . ".inc";
+    }
+   }
+   break;
+
+  case 5:
+  case 6:
+   $filename = HOME_DIR . DS . $doc_type . DS . $paths[0] . DS . $paths[1] . '_' . $paths[2] . DS . $paths[3] . '_' . $paths[4] . DS . 'class_' . $className . ".inc";
+   if (!is_readable($filename)) {
+    $filename = HOME_DIR . DS . $doc_type . DS . $paths[0] . DS . $paths[1] . '_' . $paths[2] . DS . $paths[3] . DS . 'class_' . $className . ".inc";
+   }
+   break;
+
+  default :
+   break;
+ }
+//echo $filename;
+ if (!empty($filename) && is_readable($filename)) {
+  require $filename;
+ }
+}
+
+function extension_auto_load(&$paths, $className) {
+ $filename = HOME_DIR . DS . 'extensions' . DS . $paths[1] . DS . 'class_' . $className . ".inc";
+ if (!is_readable($filename)) {
+  $filename = HOME_DIR . DS . 'extensions' . DS . $paths[1] . '_' . $paths[2] . DS . 'class_' . $className . ".inc";
+ }
+// echo $filename;
+ if (!empty($filename) && is_readable($filename)) {
+  require $filename;
+ }
+}
+
 function autoLoadModules($className) {
  $paths = explode('_', $className);
  // echo "paths $paths";
@@ -19,7 +92,7 @@ function autoLoadModules($className) {
   $path .= $paths[1] . '/';
  }
 // $path .= $paths[2] . '/';
- $filename = getcwd() . "/modules/" . $path . 'class_' . $className . ".inc";
+ $filename = HOME_DIR . "/modules/" . $path . 'class_' . $className . ".inc";
  $dirname = HOME_DIR . DS . 'modules' . DS . $paths[0];
  if (is_readable($filename)) {
   require $filename;
@@ -124,11 +197,13 @@ function autoLoadRegex($className) {
  }
 }
 
-spl_autoload_register("autoLoadFromCwd");
-spl_autoload_register("autoLoadModules");
-spl_autoload_register("autoLoadExtensions");
-spl_autoload_register("autoLoadRegex");
-spl_autoload_register("autoLoadTparty");
+spl_autoload_register("autoLoadAll");
+
+//spl_autoload_register("autoLoadModules");
+//spl_autoload_register("autoLoadFromCwd");
+//spl_autoload_register("autoLoadExtensions");
+//spl_autoload_register("autoLoadTparty");
+//spl_autoload_register("autoLoadRegex");
 
 
 function pa($array = "") {
@@ -694,8 +769,7 @@ function ino_showDecimal($number, $decimal = '.') {
    $final_number = rtrim(number_format($exploded_number[0]) . $decimal . $exploded_number[1], '0');
 //	 echo ' in 1 ';
   } else {
-//	 echo ' in 2 ';
-   $final_number = number_format($exploded_number[0]);
+   $final_number = !empty($exploded_number[0]) && is_numeric($exploded_number[0]) ? number_format($exploded_number[0]) : 0;
   }
   $final_number = ($is_neg == true ) ? (-$final_number) : $final_number;
  } else {

@@ -49,6 +49,8 @@
   echo '</ul>';
  }
 
+
+
  if (!empty($access_denied_msg)) {
   echo '<div id="structure">';
   echo ino_access_denied($access_denied_msg);
@@ -59,6 +61,8 @@
   foreach ($template_file_names as $key => $tmpl_file) {
    include_once $tmpl_file;
   }
+//  echo "<h1>Memory </h1>" . memory_get_peak_usage(true) / 1000000 . " mb";
+//  echo "<h1>Time </h1>" . execution_time(true);
   echo '</div>';
  }
 

@@ -307,6 +307,8 @@
     <script src="<?php echo HOME_URL . $js_file; ?>"></script>
     <?php
    }
+//  echo "<h1>Memory </h1>" . memory_get_peak_usage(true) / 1000000 . " mb";
+//   echo "<h1>Time </h1>" . execution_time(true);
   }
   ?>
  </body>

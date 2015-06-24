@@ -20,7 +20,6 @@ inoERP
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field"> 
         <li><?php $f->l_text_field_dr_withSearch('sd_opportunity_id') ?>
          <a name="show" href="form.php?class_name=sd_opportunity&<?php echo "mode=$mode"; ?>" class="show document_id sd_opportunity_id"><i class="fa fa-refresh"></i></a> 
@@ -37,7 +36,6 @@ inoERP
         <li><?php $f->l_select_field_from_object('sales_channel', sd_lead::sales_channel(), 'option_line_code', 'option_line_value', $$class->sales_channel, 'sales_channel'); ?> 					</li>
         <li><?php $f->l_text_field_d('description'); ?> 					</li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div class="large_shadow_box"> 

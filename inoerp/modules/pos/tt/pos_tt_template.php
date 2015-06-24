@@ -84,7 +84,8 @@
             <div class="large_shadow_box"> 
              <ul class="column header_field">
               <li><?php $f->l_text_field_dr_withSearch('pos_transaction_header_id'); ?>
-               <a name="show" href="form.php?class_name=pos_tt_header&<?php echo "mode=$mode"; ?>" class="show document_id pos_transaction_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+               <a name="show" href="form.php?class_name=pos_tt_header&<?php echo "mode=$mode"; ?>" class="show document_id pos_transaction_header_id">
+                <i class='fa fa-refresh'></i></a> 
               </li>
               <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="pos_terminal_header_id select_popup clickable">
                 <?php echo gettext('Terminal') ?>#</label><?php echo $f->text_field_dm('terminal_name'); ?> 

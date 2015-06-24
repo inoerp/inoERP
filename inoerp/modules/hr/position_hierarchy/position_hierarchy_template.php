@@ -6,19 +6,18 @@
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-     <div class="large_shadow_box"> 
-      <ul class="column header_field">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_position_hierarchy_header_id select_popup clickable">
-         Hierarchy Id</label><?php $f->text_field_ds('hr_position_hierarchy_header_id') ?>
-        <a name="show" href="form.php?class_name=hr_position_hierarchy_header&<?php echo "mode=$mode"; ?>" class="show document_id hr_position_hierarchy_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-       </li>
-       <li><label>Name</label><?php $f->text_field_d('hierarchy_name'); ?></li>
-       <li><label>Starting Position</label><?php echo $f->select_field_from_object('starting_position_id', hr_position::find_all(), 'hr_position_id', 'position_name', $$class->starting_position_id, 'starting_position_id', '', 1, $readonly); ?>   </li>
-       <li><label>Description</label><?php $f->text_field_dl('description'); ?> </li>
-       <li><label>Start Date</label><?php echo $f->date_fieldAnyDay('effective_date', $$class->effective_date); ?> </li>
-       <li><label>Revision</label><?php echo $f->number_field('revision', $$class->revision); ?></li>
-      </ul>
-     </div>
+     <ul class="column header_field">
+
+      <li><?php $f->l_text_field_dr_withSearch('hr_position_hierarchy_header_id') ?>
+       <a name="show" href="form.php?class_name=hr_position_hierarchy_header&<?php echo "mode=$mode"; ?>" class="show document_id hr_position_hierarchy_header_id">
+        <i class="fa fa-refresh"></i></a> 
+      </li>
+      <li><label>Name</label><?php $f->text_field_d('hierarchy_name'); ?></li>
+      <li><label>Starting Position</label><?php echo $f->select_field_from_object('starting_position_id', hr_position::find_all(), 'hr_position_id', 'position_name', $$class->starting_position_id, 'starting_position_id', '', 1, $readonly); ?>   </li>
+      <li><label>Description</label><?php $f->text_field_dl('description'); ?> </li>
+      <li><label>Start Date</label><?php echo $f->date_fieldAnyDay('effective_date', $$class->effective_date); ?> </li>
+      <li><label>Revision</label><?php echo $f->number_field('revision', $$class->revision); ?></li>
+     </ul>
     </div>
    </div>
   </div>

@@ -633,13 +633,6 @@ th.add_detail_values_header{
  float: left;
 }
 
-.large_shadow_box{
- width: 97%;
- padding: 20px 2px 2px 20px ;
- margin: 2px;
- border-radius: 5px;
- /*box-shadow: 1px 5px 10px 5px rgb(136, 136, 136);*/
-}
 
 #specific_content ul li ul{
  display: block;

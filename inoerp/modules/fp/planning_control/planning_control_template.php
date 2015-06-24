@@ -2,7 +2,7 @@
  <span class="heading"><?php echo gettext('Planning Control Header') ?></span>
  <form action=""  method="post" id="fp_planning_control"  name="fp_planning_control">
   <div class="tabContainer">
-   <ul class="column header_field"> 
+   <ul class="column header_field">
     <?php echo form::hidden_field('fp_planning_control_id', $$class->fp_planning_control_id); ?>
     <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>
      <a name="show" href="form.php?class_name=fp_planning_control&<?php echo "mode=$mode"; ?>" class="show document_id fp_planning_control_id">
@@ -47,7 +47,7 @@
  <ul id="js_saving_data">
   <li class="headerClassName" data-headerClassName="fp_planning_control" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="true" ></li>
-  <li class="primary_column_id" data-primary_column_id="fp_planning_control_id" ></li>
+  <li class="primary_column_id" data-primary_column_id="org_id" ></li>
   <li class="form_header_id" data-form_header_id="fp_planning_control" ></li>
  </ul>
  <ul id="js_contextMenu_data">

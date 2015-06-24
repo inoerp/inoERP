@@ -14,7 +14,7 @@
         <a name="show" href="form.php?class_name=hr_element_entry_header&<?php echo "mode=$mode"; ?>" class="show document_id hr_element_entry_header_id">
          <i class="fa fa-refresh"></i></a> 
        </li>
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
+       <li><label><i class="hr_employee_id select_popup clickable fa fa-search"></i>
          <?php echo gettext('Employee Name') ?></label><?php $f->text_field_d('employee_name'); ?>
         <?php echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id); ?>
        </li>

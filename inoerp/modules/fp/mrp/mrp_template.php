@@ -10,7 +10,6 @@
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <div class="large_shadow_box"> 
        <ul class="column header_field"> 
         <li><?php $f->l_text_field_dr_withSearch('fp_mrp_header_id', $$class->fp_mrp_header_id, '10', '', '', 'System number', 'fp_mrp_header_id', $readonly); ?>
          <a name="show" href="form.php?class_name=fp_mrp_header&<?php echo "mode=$mode"; ?>" class="show document_id fp_mrp_header_id">
@@ -23,7 +22,6 @@
         <li><?php $f->l_select_field_from_object('demand_source', fp_mds_header::find_all(), 'fp_mds_header_id', 'mds_name', $$class->demand_source, '', '', 1, $readonly); ?></li>
         <li><?php $f->l_status_field_d('status'); ?> </li>
        </ul>
-      </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div> <?php echo ino_attachement($file) ?> </div>

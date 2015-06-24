@@ -7,14 +7,14 @@
 				</ul>
 				<div class="tabContainer">
 				 <div id="tabsHeader-1" class="tabContent">
-					<div class="large_shadow_box"> 
-					 <ul class="column four_column">
+				 <ul class="column header_field">
 						<li><label>Org Name(1) : </label>
 						 <?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id','','',1); ?>
 						</li>
 						<li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_header_id select_popup clickable">
 							BOM Id : </label><?php echo form::text_field_d('bom_header_id') ?>
-             <a name="show" href="form.php?class_name=indented_bom&<?php echo "mode=$mode"; ?>" class="show document_id bom_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+             <a name="show" href="form.php?class_name=indented_bom&<?php echo "mode=$mode"; ?>" class="show document_id bom_header_id">
+              <i class='fa fa-refresh'></i></a> 
 						</li>
 						<li><label>Item Id : </label>
 						 <?php form::text_field_drm('item_id_m'); ?>
@@ -29,11 +29,10 @@
 						 <?php echo form::select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom'); ?>
 						</li>
 					 </ul>
-					</div>
 				 </div>
 				 <div id="tabsHeader-2" class="tabContent">
 					<div> 
-					 <ul class="column five_column">
+					 <ul class="column header_field">
 						<li><label>Alternate Bom : </label>
 						 <?php echo form::text_field_d('alternate_bom'); ?>
 						</li>
@@ -48,7 +47,7 @@
 				 </div>
 				 <div id="tabsHeader-3" class="tabContent">
 					<div> 
-					 <ul class="column five_column">
+					 <ul class="column header_field">
 						<li><label>Common BOM Item Id: </label>
 						 <?php form::text_field_widsr('item_id_m'); ?>
 						</li>

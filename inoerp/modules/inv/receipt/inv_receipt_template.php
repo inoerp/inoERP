@@ -12,7 +12,7 @@
   <div class="tabContainer">
    <form action=""  method="post" id="inv_receipt_header"  name="inv_receipt_header">
     <div id="tabsHeader-1" class="tabContent">
-     <ul class="column five_column">
+     <ul class="column header_field">
       <li><label> <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_receipt_header_id select_popup clickable">
         <?php echo gettext('Receipt Header Id') ?>  </label><?php echo form::text_field_dsr('inv_receipt_header_id'); ?>
        <a name="show" href="form.php?class_name=inv_receipt_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_receipt_header_id"><i class="fa fa-refresh"></i></a> 
