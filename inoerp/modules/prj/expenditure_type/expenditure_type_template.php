@@ -1,4 +1,4 @@
-<div id ="form_all"><span class="heading"><?php  echo gettext('Expenditure Type') ?></span>
+<div id ="form_all"><span class="heading"><?php echo gettext('Expenditure Type') ?></span>
  <form action=""  method="post" id="prj_expenditure_type"  name="prj_expenditure_type">
   <div id ="form_header">
    <div id="tabsHeader">
@@ -17,7 +17,7 @@
        <li><?php $f->l_select_field_from_object('expenditure_category', prj_expenditure_type::prj_expenditure_category(), 'option_line_code', 'option_line_value', $$class->expenditure_category, 'expenditure_category', '', '', $readonly1); ?>    </li>
        <li><?php $f->l_select_field_from_object('revenue_category', prj_expenditure_type::prj_revenue_category(), 'option_line_code', 'option_line_value', $$class->revenue_category, 'revenue_category', '', '', $readonly1); ?>    </li>
        <li><?php $f->l_text_field_d('description'); ?></li>
-       <li><?php $f->l_date_fieldAnyDay('effective_from' , $$class->effective_from); ?></li>
+       <li><?php $f->l_date_fieldAnyDay('effective_from', $$class->effective_from); ?></li>
        <li><?php $f->l_date_fieldAnyDay('effective_to', $$class->effective_to); ?></li>
        <li><?php $f->l_select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, 'uom_id', 'uom_id', '', $readonly1); ?>         </li>
       </ul>
@@ -29,7 +29,7 @@
       <div> 
        <div id="comments">
         <div id="comment_list">
-<?php echo!(empty($comments)) ? $comments : ""; ?>
+         <?php echo!(empty($comments)) ? $comments : ""; ?>
         </div>
         <div id ="display_comment_form">
          <?php
@@ -50,17 +50,24 @@
   <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Expenditure Type Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Control Options') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Expenditure Class Control') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
-      <div > 
+      <div class='col-md-3'>
+       <span class='heading bg-primary text-muted'><?php echo gettext('Labor Expenditures') ?></span>
+       <ul class="column header_field"> 
+        <li><?php $f->l_checkBox_field_d('direct_labor_cb'); ?></li> 
+        <li><?php $f->l_checkBox_field_d('over_time_cb'); ?></li> 
+       </ul>
+       </div>
+      <div class='col-md-9'>
+       <span class='heading bg-primary'><?php echo gettext('Non-Labor Expenditures') ?></span>
        <ul class="column header_field"> 
         <li><?php $f->l_checkBox_field_d('inventory_cb'); ?></li> 
         <li><?php $f->l_checkBox_field_d('burden_cb'); ?></li> 
         <li><?php $f->l_checkBox_field_d('expense_reports_cb'); ?></li> 
         <li><?php $f->l_checkBox_field_d('misc_transaction_cb'); ?></li> 
-        <li><?php $f->l_checkBox_field_d('over_time_cb'); ?></li> 
         <li><?php $f->l_checkBox_field_d('invoice_cb'); ?></li> 
         <li><?php $f->l_checkBox_field_d('usages_cb'); ?></li> 
         <li><?php $f->l_checkBox_field_d('wip_cb'); ?></li> 

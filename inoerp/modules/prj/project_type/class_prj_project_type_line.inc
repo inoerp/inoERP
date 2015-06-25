@@ -5,7 +5,7 @@ class prj_project_type_line extends dbObject {
  public static $table_name = "prj_project_type_line";
  public static $primary_column = "prj_project_type_line_id";
  public static $parent_primary_column = "prj_project_type_header_id";
- public static $key_column = 'item_id_m';
+ public static $key_column = 'prj_category_header_id';
  public static $module = "prj";
  public $field_a = [
   'prj_project_type_line_id',

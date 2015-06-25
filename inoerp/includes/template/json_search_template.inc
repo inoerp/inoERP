@@ -5,11 +5,11 @@
   <div id="searchResultMessages">
       <?php
       if (!empty($all_download_sql)) {
-       if (empty($search_class_array_all)) {
-        $search_class_obj_all = $$class->findBySql($all_download_sql);
-        $search_class_array_all = json_decode(json_encode($search_class_obj_all), true);
-       }
-       echo show_download_button_inSelectFormat($search_class_array_all, $total_count, $total_count_all);
+//       if (empty($search_class_array_all)) {
+//        $search_class_obj_all = $$class->findBySql($all_download_sql);
+//        $search_class_array_all = json_decode(json_encode($search_class_obj_all), true);
+//       }
+       echo show_download_button_inSelectFormat(($all_download_sql), $total_count, $total_count_all, 'sql_query');
       }
       ?>
   </div>

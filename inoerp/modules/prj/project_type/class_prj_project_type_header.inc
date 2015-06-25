@@ -19,8 +19,7 @@ class prj_project_type_header extends dbObject {
  public static $table_name = "prj_project_type_header";
  public static $dependent_classes = ['prj_project_type_line', 'prj_project_type_billing'];
  public static $primary_column = "prj_project_type_header_id";
- public static $primary_column2 = "order_number";
- public static $key_column = 'ar_customer_id';
+ public static $key_column = 'project_type';
  public static $module = "prj";
  public static $system_info = [
   'name' => 'Project Type',
@@ -45,13 +44,15 @@ class prj_project_type_header extends dbObject {
   'PROCESS_LOGISTICS' => 'Process Logistics',
   'PROCESS_ACTUALS' => 'Process Actuals',
  ];
- 
  public static $project_class_a = [
   'INDIRECT' => 'Indirect',
   'CAPITAL' => 'Capital',
   'CONTRACT' => 'Contract',
  ];
- 
+ public static $schedule_type_a = [
+  'SCHEDULE' => 'Schedule Rate',
+  'BURDEN' => 'Burden Rate',
+ ];
  public $field_a = [
   'prj_project_type_header_id',
   'bu_org_id',
@@ -81,9 +82,11 @@ class prj_project_type_header extends dbObject {
   'nlr_billing_type',
   'employee_schedule_id',
   'job_schedule_id',
+  'l_revenue_burden_id',
+  'l_invoice_burdern_id',
   'nlr_schedule_id',
-  'nlr_burden_schedule_id',
-  'labor_burden_schedule_id',
+  'nrl_revenue_burden_id',
+  'nlr_invoice_burdern_id',
   'billing_cycle_id',
   'cost_cost_cb',
   'cost_event_cb',
@@ -148,9 +151,11 @@ class prj_project_type_header extends dbObject {
  public $nlr_billing_type;
  public $employee_schedule_id;
  public $job_schedule_id;
+ public $l_revenue_burden_id;
+ public $l_invoice_burdern_id;
  public $nlr_schedule_id;
- public $nlr_burden_schedule_id;
- public $labor_burden_schedule_id;
+ public $nrl_revenue_burden_id;
+ public $nlr_invoice_burdern_id;
  public $billing_cycle_id;
  public $cost_cost_cb;
  public $cost_event_cb;
@@ -173,7 +178,6 @@ class prj_project_type_header extends dbObject {
  public $serial_number;
  public $lot_number;
  public $add_to_order;
- 
 
  Public static function so_types() {
   $option_header = option_header::find_by_name('SO_TYPE');
@@ -181,6 +185,9 @@ class prj_project_type_header extends dbObject {
   return $so_types;
  }
 
+ 
+ 
+ 
 }
 
 //end of prj_project_type_header class

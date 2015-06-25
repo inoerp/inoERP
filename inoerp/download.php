@@ -19,13 +19,20 @@ if (!empty($_POST) && !empty($_POST['program_name'])) {
  }
 } else {
  $str_var = $_POST["data"];
- $array_var = unserialize(base64_decode($str_var));
- if(!empty($_POST['download_format'])){
-  $download_format = is_array($_POST['download_format']) ? $_POST['download_format'][0] : 'text_format';
- }else{
-  $download_format =  'text_format';
+
+ if (!empty($_POST['data_type']) && $_POST['data_type'] == 'sql_query') {
+  $sql =  unserialize(base64_decode($str_var));
+  $array_var = json_decode(json_encode(dbObject::find_by_sql($sql)), true);
+
+  } else {
+  $array_var = unserialize(base64_decode($str_var));
  }
- 
+
+ if (!empty($_POST['download_format'])) {
+  $download_format = is_array($_POST['download_format']) ? $_POST['download_format'][0] : 'text_format';
+ } else {
+  $download_format = 'text_format';
+ }
 }
 
 

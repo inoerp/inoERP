@@ -83,6 +83,18 @@ class prj_rate_schedule_header extends dbObject {
   $lines = $option_line->findBy_parentId($header->option_header_id);
   return $lines;
  }
+ 
+ 
+ public static function find_all_by_rateType($rate_type='EMPLOYEE'){
+  
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name ;
+  $sql .= " WHERE rate_type = '{$rate_type}' " ;
+  
+  $result = self::find_by_sql($sql);
+  
+  return !empty($result) ? $result : false;
+ }
 
 }
 

@@ -46,6 +46,7 @@ class prj_expenditure_type extends dbObject {
   'burden_cb',
   'expense_reports_cb',
   'misc_transaction_cb',
+  'direct_labor_cb',
   'over_time_cb',
   'invoice_cb',
   'usages_cb',
@@ -65,6 +66,7 @@ class prj_expenditure_type extends dbObject {
   'burden_cb',
   'expense_reports_cb',
   'misc_transaction_cb',
+  'direct_labor_cb',
   'over_time_cb',
   'invoice_cb',
   'usages_cb',
@@ -93,6 +95,7 @@ class prj_expenditure_type extends dbObject {
  public $burden_cb;
  public $expense_reports_cb;
  public $misc_transaction_cb;
+ public $direct_labor_cb;
  public $over_time_cb;
  public $invoice_cb;
  public $usages_cb;
