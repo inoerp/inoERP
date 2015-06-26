@@ -1,6 +1,5 @@
-<div id="po_requisition_divId">
-
- <div id ="form_header"><span class="heading"><?php echo gettext('Requisition Header') ?></span>
+<div id="po_requisition_divId"><span class="heading"><?php echo gettext('Requisition Header') ?></span>
+ <div id ="form_header">
   <form action=""  method="post" id="po_requisition_header"  name="po_requisition_header">
    <div id="tabsHeader">
     <ul class="tabMain">

@@ -6,9 +6,9 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  -->
-<div id ="form_header">
+<span class="heading"><?php echo gettext('Sales Opportunity') ?></span>
+ <div id ="form_header">
  <form action=""  method="post" id="sd_opportunity"  name="sd_opportunity">
-  <span class="heading"><?php echo gettext('Sales Opportunity') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">

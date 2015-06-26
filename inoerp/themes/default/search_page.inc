@@ -229,15 +229,13 @@
        <div class="error"></div><div id="loading"></div>
       </div>
     <div id="content">
-     <div id="structure">
+     <div id="structure"><?php echo getBreadCrumb($class_first); ?>
       <span class="heading">
        <?php
-       echo getBreadCrumb($class_first);
-
        if (!empty($_GET['function_name'])) {
-        echo '<div class="alert alert-info" role="alert" >' . ucwords(str_replace('_', ' ', $_GET['function_name'])) . ' Report</div>';
+        echo '<div class="alert ino-alert-info" role="alert" >' . ucwords(str_replace('_', ' ', $_GET['function_name'])) . ' Report</div>';
        } else {
-        echo '<div class="alert alert-info" role="alert" >Search ' . ucwords(str_replace('_', ' ', $class)) . '</div>';
+        echo '<div class="alert ino-alert-info" role="alert" >Search ' . ucwords(str_replace('_', ' ', $class)) . '</div>';
        }
        ?>
       </span>

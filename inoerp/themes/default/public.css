@@ -23,11 +23,11 @@
 
 .ui-widget{
  font-family: "Lato",sans-serif !important;
-   font-size: 0.95em !important;
+ font-size: 0.95em !important;
 }
 
 label.big_popover{
-        width: 120px !important;
+ width: 120px !important;
 }
 
 .fa-select {
@@ -53,15 +53,15 @@ label.big_popover{
 }
 
 #overlay.fa{
-        font-size: 100px;
-        color : #fff;
-        padding: 20% 0 0 20%;
+ font-size: 100px;
+ color : #fff;
+ padding: 20% 0 0 20%;
 }
 
 #overlay.fa::after{
-font-size: 40px !important;
-content : attr(data-actionmsg);
-padding: 20% 0 0 5% !important;
+ font-size: 40px !important;
+ content : attr(data-actionmsg);
+ padding: 20% 0 0 5% !important;
 
 }
 
@@ -701,14 +701,27 @@ span.heading-right{
 }
 
 ul.inline-list.ino-breadcrumb-simple {
- float: left;
- width: 40%;        
+float: right;
+margin: 0px;
+padding: 0px;  
 }
 .heading1 {
  border-bottom: 2px dotted rgb(51, 153, 204);
  margin-left: -10px;
  margin-right: -10px;
 
+}
+
+.ino-breadcrumb-simple li a{
+padding: 2px 10px;
+background-color: rgba(242, 242, 242, 0.94);
+border: 1px solid rgba(206, 198, 198, 0.9);
+}
+
+#structure ul.ino-breadcrumb-simple{
+ position: absolute;
+right: 0px;
+top: 0px;
 }
 
 .heading1 .more_page a{
@@ -723,7 +736,7 @@ ul.inline-list.ino-breadcrumb-simple {
  margin: 10px;
 }
 
-a.link_class_green {
+/*a.link_class_green {
  font-size: 10px;
  padding: 0px 5px;
  background-color: rgba(30, 40, 20, 0.6);
@@ -732,14 +745,9 @@ a.link_class_green {
  border-radius: 2px;
  box-shadow: 1px 2px 2px 2px #888;
  margin-right: 10px;
-}
+}*/
 
-a.link_class_green:hover{
- text-decoration: none;
- color : green;
- font-weight: bold;
- background-color: rgba(230, 240, 100, 0.8);
-}
+
 
 .logo_image{
  height: 35px;
@@ -835,11 +843,11 @@ tr:nth-child(even) {
  background-color: rgba(184, 215, 102, 0.38);
 }
 .chart{
-background: rgba(255, 255, 255, 0.4) none repeat scroll 0% 0%;
-border: 5px solid #fff;
-padding: 10px 2px;
-margin: 10px 0px;
-box-shadow: 1px 5px 10px 5px rgba(222, 218, 218, 0.42);
+ background: rgba(255, 255, 255, 0.4) none repeat scroll 0% 0%;
+ border: 5px solid #fff;
+ padding: 10px 2px;
+ margin: 10px 0px;
+ box-shadow: 1px 5px 10px 5px rgba(222, 218, 218, 0.42);
 }
 
 .show_remove_filter{
@@ -925,9 +933,9 @@ ul.form_top li, ul#form_top_image li{
 }
 
 ul#form_top_image li:hover, ul#form_top_image li a:hover{
-background-color: #fff;
-font-weight: bold;
-color: #2FBCF3  !important;        
+ background-color: #fff;
+ font-weight: bold;
+ color: #2FBCF3  !important;        
 }
 
 #form_top_image li a, #form_top_image .fa-refresh{
@@ -1167,13 +1175,27 @@ ul.program_form li label{
 
 #search_tip{
  float:right;
- font-size: 11px;
- padding: 0 5px;
- background-color : rgba(10,100,10,0.4);
- color: #fff;
- font-weight: bold;
- border-radius: 5px;
- box-shadow: 1px 5px 10px 5px #888;
+}
+
+.ino-btn2{
+font-size: 0.9em !important;
+padding: 0px 5px;
+background-color: rgba(40, 142, 194, 0.86);
+color: #FFF !important;
+font-weight: bold;
+border-radius: 2px;
+box-shadow: 1px 1px 1px 1px rgba(137, 124, 34, 0.52);
+display: inline-block;
+}
+
+.ino-btn2:hover{
+  background-color: #1C8316;
+}
+
+.ino-alert-info {
+    color: #31708F;
+    background-color: rgba(243, 246, 232, 0.38);
+    border-color: rgb(230, 233, 219);
 }
 
 #searchResultMessages [class^="flaticon-"]:before, 
@@ -1245,33 +1267,33 @@ select.search_document_list option:nth-child(even) {
  vertical-align: middle;
  padding-top: 20px;
  border-radius: 5px;
- 
+
 }
 
 #dashborad_menu li:nth-child(n){
-         background-color: rgba(77, 21, 136, 0.62);
+ background-color: rgba(77, 21, 136, 0.62);
 }
 
 #dashborad_menu li:nth-child(2n){
-        background-color: rgba(142, 147, 17, 0.89) ;
+ background-color: rgba(142, 147, 17, 0.89) ;
 }
 
 #dashborad_menu li:nth-child(3n){
-        background-color: rgba(41, 162, 51, 0.8) ;
+ background-color: rgba(41, 162, 51, 0.8) ;
 }
 
 #dashborad_menu li:nth-child(4n){
-        background-color: rgba(42, 147, 177, 0.89);
+ background-color: rgba(42, 147, 177, 0.89);
 }
 
 #dashborad_menu li:nth-child(5n) {
-  background-color: rgba(41, 67, 136, 0.77);
+ background-color: rgba(41, 67, 136, 0.77);
 }
 
 #dashborad_menu li:hover{
-  /*background-color: #2574A9;*/
-  /*border-radius: 60px;*/ 
-  overflow: hidden;      
+ /*background-color: #2574A9;*/
+ /*border-radius: 60px;*/ 
+ overflow: hidden;      
 }
 
 #dashborad_menu li a{
@@ -1285,12 +1307,12 @@ select.search_document_list option:nth-child(even) {
 }
 
 .very-small-text{
-   font-size: 0.5em;
-   white-space: nowrap;
+ font-size: 0.5em;
+ white-space: nowrap;
 }
 
 .very-small-text :hover{
-   display: none;
+ display: none;
 }
 #dashborad_menu li .fa{
  font-size: 2em;
@@ -2010,12 +2032,12 @@ ul.inline-list li{
 
 .imp-link a{
  font-weight: bold;
+ font-size: 0.9em;
  color : rgba(12, 23, 32, 0.75) !important;
 }
 
 .imp-link a:hover{
- font-size: 1.05em;
- color : green !important;
+  color : green !important;
 }
 
 .search_document_list, #site_search .form-control{
@@ -2226,18 +2248,18 @@ ul.single-column li{
 }
 
 .header_field li {
-/*    padding: 3px 0px;
-    background : #fff;
-    background: rgba(140, 173, 180, 0.09);
-    color: #333;*/
+ /*    padding: 3px 0px;
+     background : #fff;
+     background: rgba(140, 173, 180, 0.09);
+     color: #333;*/
 }
 
 .big_popover .popover{
-        z-index: 1220;
+ z-index: 1220;
 }
 
- .tabContainer{
-background-color: rgba(233, 237, 237, 0.32) !important;
+.tabContainer{
+ background-color: rgba(233, 237, 237, 0.32) !important;
 }
 
 #navigation_bar, .sidebar{
@@ -2252,24 +2274,24 @@ background-color: rgba(233, 237, 237, 0.32) !important;
 }
 
 #searchResultMessages ul.inline_list  {
-        float: right;
+ float: right;
 }
 
 #searchResultMessages ul.inline_list  h3{
-        margin-top: 0 !important;
+ margin-top: 0 !important;
 }
 #export_excel_allResult{
  padding: 2px 15px !important;
-vertical-align: top !important;
+ vertical-align: top !important;
 }
 
 .login-form input, .login-form select{
-        width: 200px !important;
+ width: 200px !important;
 }
 
 #erp_form_area input:focus , #erp_form_area select :focus, input:focus , select :focus{
-  border:1px solid #2574A9 !important;
-   outline: none;
-    border-color: #2574A9;
-    box-shadow: 0 0 2px #2574A9;
+ border:1px solid #2574A9 !important;
+ outline: none;
+ border-color: #2574A9;
+ box-shadow: 0 0 2px #2574A9;
 }

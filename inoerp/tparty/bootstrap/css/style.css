@@ -4546,7 +4546,6 @@ a.show {
  z-index: 999;
  background: none repeat scroll 0% 0% #F2F2F2;
  border-bottom: 1px solid #E4E4E4;
-
  position: relative;
 }
 
@@ -4585,7 +4584,7 @@ a.show {
   z-index: 1;
  }
  #header_bottom{
-  margin-bottom: 120px;
+  margin-bottom: 100px;
  }
 }
 
@@ -5001,3 +5000,6 @@ h3.nav-panel{
 
 
 /*overwritten*/
+.dropdown-menu {
+    font-size: 12px !important;
+}

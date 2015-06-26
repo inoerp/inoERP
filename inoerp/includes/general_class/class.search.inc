@@ -153,23 +153,23 @@ class search extends dbObject {
        if ($this->_searching_class == 'comment') {
         $search_result .= $this->_readPath_forComments($record->{$this->primary_column_s});
        } else if ($this->_searching_class == 'content') {
-        $search_result .= "&nbsp;&nbsp;<a class=\"view link_class_green\" href=\"content.php?" . $window_type . "mode=2&content_type_id=" . $record->content_type_id . "&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_view_action_meassge . '</a> ';
+        $search_result .= "&nbsp;&nbsp;<a class=\"view ino-btn2\" href=\"content.php?" . $window_type . "mode=2&content_type_id=" . $record->content_type_id . "&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_view_action_meassge . '</a> ';
        } else {
-        $search_result .= "&nbsp;&nbsp;<a class=\"view link_class_green\" href=\"$this->_view_path&mode=2&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_view_action_meassge . '</a>';
+        $search_result .= "&nbsp;&nbsp;<a class=\"view ino-btn2\" href=\"$this->_view_path&mode=2&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_view_action_meassge . '</a>';
        }
       }
       if (!empty($this->_extra_path)) {
        foreach ($this->_extra_path as $pathname => $pathmsg) {
-        $search_result .= "&nbsp;&nbsp;<a class=\"extra_path link_class_green\" "
+        $search_result .= "&nbsp;&nbsp;<a class=\"extra_path ino-btn2\" "
          . "href=\"$pathname&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $pathmsg . '</a>';
        }
       }
       if ($this->_show_update_path) {
        if ($this->_searching_class == 'content') {
-        $search_result .= "&nbsp;&nbsp;<a class=\"update link_class_green\" "
+        $search_result .= "&nbsp;&nbsp;<a class=\"update ino-btn2\" "
          . "href=\"content.php?mode=9" . $window_type . "&content_type_id=" . $record->content_type_id . "&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_update_action_meassge . '</a> ';
        } else {
-        $search_result .= "&nbsp;&nbsp;<a class=\"update link_class_green\" "
+        $search_result .= "&nbsp;&nbsp;<a class=\"update ino-btn2\" "
          . "href=\"$this->_update_path&mode=9&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_update_action_meassge . '</a> ';
        }
       }
@@ -337,7 +337,7 @@ class search extends dbObject {
 
 //start of the srach statement
   $search_form_statement = "";
-  $search_form_statement .= "<span id='search_tip' class='clickable'>Searching Tips</span>";
+  $search_form_statement .= "<span id='search_tip' class='clickable ino-btn2'>Searching Tips</span>";
   if ((isset($_GET['window_type']) && $_GET['window_type'] == 'popover') || $this->_window_type =='popover' ){
    $search_form_statement .= '<div class="tabContainer"> ';
   } else {
