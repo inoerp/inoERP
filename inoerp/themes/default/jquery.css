@@ -46,13 +46,15 @@ ul.tabMain li a{
 
 }
 
-ul.tabMain li a:hover {
+.ui-state-active, ul.tabMain li:hover {
  background-color:rgba(123, 207, 128, 0.77);
+ border-color:rgba(123, 207, 128, 0.77) !important;
 }
 
-html ul.tabMain li.active,html ul.tabMain li.active a:hover {
- background-color:#c3dde0;
- border-bottom:1px solid #fff;
+html ul.tabMain li.active, html ul.tabMain li.active a:hover {
+/* background-color:#c3dde0;
+ border-color:#c3dde0;
+ border-bottom:1px solid #fff;*/
 }
 
 .tabContainer {
@@ -371,7 +373,7 @@ table.ui-datepicker-calendar tr th{
 }
 
 .ui-widget-header, .ui-widget-content{
- border: none;
+ border: none !important;
 }
 
 .ui-autocomplete{

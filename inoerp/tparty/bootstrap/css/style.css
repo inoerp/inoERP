@@ -4012,9 +4012,9 @@ ul.column li label,
 .four_column ul li, 
 .four_column ul li label{
  display : inline-block;
- font-size : 0.95em;
+ font-size: 10px !important;
  margin-bottom: 3px;
- font-weight: normal;
+ /*font-weight: normal;*/
 
 }
 
@@ -4339,7 +4339,6 @@ ul.second_level li{
 /*Other elements*/
 .date{
  display: inline-block;
- width: 90px;
  height: 20px;
 }
 
@@ -4443,8 +4442,12 @@ table.document_table input{
  font: 10px "Lucida Grande",Lucida,Verdana,sans-serif;
 }*/
 
-#form_header input[type="text"], #form_header select{
+#form_header input, #form_header select, textarea.address  , #form_header input.date{
  width: 140px;
+}
+
+#form_header input.date{
+ /*width: 140px !important;*/
 }
 
 
@@ -4453,7 +4456,7 @@ table.document_table input{
  width: 40px;
 }
 
-#erp_form_area input.date,#erp_form_area input.medium, #form_line td input.medium,
+#erp_form_area input.medium, #form_line td input.medium,
 #form-modal input.date,#form-modal input.medium, #form_line td input.medium{
  width: 90px;
 }
@@ -4492,8 +4495,17 @@ table.document_table input{
 
 #erp_form_area select, #form-modal select{
  height: 24px;
+ border: 1px solid #e6e8ea;
+ border-radius: 3px;
  /*   border: 1px solid #e6e8ea;
    border-radius: 5px;*/
+}
+
+select {
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+    -webkit-appearance: none;
 }
 
 #erp_form_area .select.medium,

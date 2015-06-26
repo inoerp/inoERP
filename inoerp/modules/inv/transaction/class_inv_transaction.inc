@@ -857,7 +857,7 @@ class inv_transaction extends dbObject {
  }
 
  private function _generate_bc_labels() {
-  $bc_auto = bc_label_auto_trigger::find_by_transactionTypId($this->transaction_type_id);
+  $bc_auto = bc_label_auto_trigger::find_by_transactionTypId($this);
   if ($bc_auto) {
    //get the correct association level
    $bc_auto_i = $bc_auto[0];
