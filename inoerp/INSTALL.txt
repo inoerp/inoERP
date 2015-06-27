@@ -20,3 +20,6 @@ Requirements & Installation
 3. Import the database file @  enine\install\inoerp.sql
 4. Change the .htaccess
 5. Login in to the application using user id /password - admin/admin
+
+== IIS == 
+If using IIS then modify the define_const.inc file as instructed in that file.
