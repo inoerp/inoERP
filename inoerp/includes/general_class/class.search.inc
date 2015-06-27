@@ -307,14 +307,14 @@ class search extends dbObject {
    $window_type = '';
   }
   $class = is_array($this->_searching_class) ? $this->_searching_class[0] : $this->_searching_class;
-  if (property_exists($class, 'field_a')) {
+  if (is_object($class_obj) && property_exists($class, 'field_a')) {
    $search_array = $class_obj->field_a;
   } else {
    $search_array = $class::$field_array;
   }
 
   if (empty($_GET['column_array'])) {
-   if (property_exists($class_obj, 'column')) {
+   if (is_object($class_obj) &&  property_exists($class_obj, 'column')) {
     $column_array = $class_obj->column;
    } else if (property_exists($class_obj, 'field_a')) {
     $column_array = $class_obj->field_a;

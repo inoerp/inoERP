@@ -104,6 +104,8 @@
                if ($i == 0) {
                 if (isset($records->$primary_column_v)) {
                  $primary_column_val = $records->$primary_column_v;
+                }else{
+                 $primary_column_val = null;
                 }
                 echo "<td><input type=\"checkbox\" name=\"line_id_cb\" class=\"line_id_cb\"  value=\"$primary_column_val\">";
                 echo "<input type=\"hidden\" name=\"multi_action_class\" class=\"hidden multi_action_class\"  value=\"$action_class\">";

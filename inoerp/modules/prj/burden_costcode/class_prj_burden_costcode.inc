@@ -18,9 +18,9 @@ class prj_burden_costcode extends dbObject {
 
  public static $table_name = "prj_burden_costcode";
  public static $primary_column = "prj_burden_costcode_id";
- public static $key_column = 'burden_costcode';
+ public static $key_column = 'costcode';
  public static $module = "prj";
- public static $multi_select_template_path = 'modules/prj/burden_cost/multi_action/prj_burden_cost_template_ma.php';
+ public static $multi_select_template_path = 'modules/prj/burden_costcode/multi_action/prj_burden_costcode_template_ma.php';
 //  data base variables as stored database column name
  public static $system_info = [
   'name' => 'Burden Cost Code',
@@ -30,17 +30,16 @@ class prj_burden_costcode extends dbObject {
   'db_version' => '1001',
   'mod_version' => '1.1.1',
   'primary_entity_cb' => '',
-  'module_name' => 'inv',
+  'module_name' => 'prj',
   'weight' => 17
  ];
  public $field_a = [
   'prj_burden_costcode_id',
   'costcode',
   'description',
-  'costcode_type',
+  'prj_exependiture_type_id',
   'effective_from',
   'effective_to',
-  'priority',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -58,14 +57,13 @@ class prj_burden_costcode extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Burdden Cost Base"; //page Title
+ public $pageTitle = " Burdden Cost Code"; //page Title
  public $prj_burden_costcode_id;
  public $costcode;
  public $description;
- public $costcode_type;
+ public $prj_exependiture_type_id;
  public $effective_from;
  public $effective_to;
- public $priority;
  public $created_by;
  public $creation_date;
  public $last_update_by;

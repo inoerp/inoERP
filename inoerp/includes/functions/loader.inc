@@ -490,12 +490,12 @@ if (($continue) && (!empty($class_names))) {
 
 //Assign dependet classes to class_second & class_third and so on
 $class_first = $class = $class_names[0];
-$$class_first = $$class_names[0];
+//$$class_first = $$class_names[0];
 $class_id_first = property_exists($class, 'primary_column') ? $class::$primary_column : $class_id = $class . '_id';
 
 if (isset($class_names[1])) {
  $class_second = $class_names[1];
- $$class_second = $$class_names[1];
+ //$$class_second = $$class_names[1];
  $line_obj = $class_second . '_object';
  if (property_exists($class, 'primary_column')) {
   $primar_column_class1 = $class::$primary_column;
@@ -515,12 +515,12 @@ if (isset($class_names[1])) {
 
 if (isset($class_names[2])) {
  $class_third = $class_names[2];
- $$class_third = $$class_names[2];
+ //$$class_third = $$class_names[2];
 }
 
 if (isset($class_names[3])) {
  $class_fourth = $class_names[3];
- $$class_fourth = $$class_names[3];
+ //$$class_fourth = $$class_names[3];
 }
 
 
@@ -542,7 +542,7 @@ if ($readonly) {
 if (($class == 'content') && (!empty($content->subject))) {
  $pageTitle = $content->subject;
 } else {
- $pageTitle = property_exists($$class, 'pageTitle') ? $$class->pageTitle : 'inoERP';
+ $pageTitle = is_object($$class)  && property_exists($$class, 'pageTitle') ? $$class->pageTitle : 'inoERP';
 }
 
 
