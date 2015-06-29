@@ -868,7 +868,7 @@ function ino_delete($data_array) {
    break;
 
   case 'line2':
-   $class = $data_array['line2_class_name'];
+   $class = $data_array['line_class_name2'];
    $delete_id = !empty($data_array['delete_id']) ? $data_array['delete_id'] : null;
    break;
 

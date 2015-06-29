@@ -18,7 +18,7 @@ class prj_burden_cost_base extends dbObject {
 
  public static $table_name = "prj_burden_cost_base";
  public static $primary_column = "prj_burden_cost_base_id";
- public static $key_column = 'burden_cost_base';
+ public static $key_column = 'cost_base';
  public static $module = "prj";
  public static $multi_select_template_path = 'modules/prj/burden_cost/multi_action/prj_burden_cost_template_ma.php';
 //  data base variables as stored database column name

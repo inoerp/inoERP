@@ -27,6 +27,15 @@
 
 function saveHeader(json_url, headerData, primary_column_id, primary_column_id2, primary_column_id3, savingOnlyHeader,
         form_header, onlyHeaderOverLay) {
+ if (localStorage.getItem("dont_save_header") == 9) {
+  localStorage.removeItem("dont_save_header");
+  return true;
+ }
+ if ($(primary_column_id).val()) {
+  var trigger_save_for_line = false;
+ } else {
+  var trigger_save_for_line = true;
+ }
  return $.ajax({
   url: json_url,
   data: {headerData: headerData,
@@ -63,7 +72,16 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
       $('.primary_column3').val(header_id3);
      }
     }
-
+    if (localStorage.getItem("save_all_lines") == 9) {
+     $('input[name="line_id_cb"]').prop('checked', true);
+     $('input[name="detail_id_cb"]').prop('checked', true);
+     localStorage.removeItem("save_all_lines");
+     localStorage.setItem("dont_save_header", 9);
+     $('#save').trigger('click');
+    } else if ($('ul#js_saving_data').find('.lineClassName').data('lineclassname') && trigger_save_for_line) {
+     localStorage.setItem("dont_save_header", 9);
+     $('#save').trigger('click');
+    }
     if (savingOnlyHeader || onlyHeaderOverLay) {
      $('#overlay').css('display', 'none');
      $('#form_top_image').css('display', 'block');
@@ -123,7 +141,9 @@ function saveLine(json_url, lineData, trclass, detailData, primary_column_id, li
    detailData: detailData,
    header_id: header_id,
    className: lineClassName,
-   detail_classname: detailClassName},
+   detail_classname: detailClassName,
+   trclass: trclass
+  },
   type: 'post',
   beforeSend: function () {
    $('#overlay').css('display', 'block');
@@ -138,8 +158,10 @@ function saveLine(json_url, lineData, trclass, detailData, primary_column_id, li
    $("#accordion").accordion({active: 0});
   }
 
-  var line_id = $(div).filter('.lineId').html();
-  $('#form_data_table tbody tr' + '.' + trclass).find(".line_id").val(line_id);
+  var line_id = $(result).find('.lineId').data('trclass');
+  $('#content ' + '.' + trclass).find(".line_id").val(line_id);
+  console.log(line_id);
+  console.log($('#content ' + '.' + trclass).find(".line_id"));
   $('#overlay').css('display', 'none');
   $('#form_top_image').css('display', 'block');
  }).fail(function (error, textStatus, xhr) {
@@ -156,11 +178,13 @@ function saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassNa
   data: {lineData2: lineData,
    detailData: detailData,
    header_id: header_id,
-   className: lineClassName},
+   className: lineClassName,
+   trclass: trclass
+  },
   type: 'post'
  }).done(function (result) {
   var div = $(result).filter('div#json_save_line2').html();
-  var line_id = $(div).filter('.lineId').html();
+  var line_id = $(result).find('.lineId').data('trclass');
   $('tbody.form_data_line_tbody2 tr' + '.' + trclass).find(".line_id").val(line_id);
 
   var message = $(result).find('.message, .rollback_msg').html();
@@ -710,6 +734,7 @@ function copy_document(doc_header_id, doc_line_id, doc_detail_id) {
   $(this).prop('readonly', false);
   $(this).prop('disabled', false);
  });
+ localStorage.setItem("save_all_lines", 9);
 }
 
 function copy_header(doc_header_id) {

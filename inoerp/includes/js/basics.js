@@ -3909,8 +3909,8 @@ $(document).ready(function () {
  onClick_addDetailLine();
  onClick_addDetailLine(2, '.add_row_detail_img3', 'tabsDetailC');
 
- var mandatoryCheck = new mandatoryFieldMain();
- mandatoryCheck.mandatoryHeader();
+// var mandatoryCheck = new mandatoryFieldMain();
+// mandatoryCheck.mandatoryHeader();
 
  $('#content').on('change', '.sys_extra_field_id', function () {
   var field_type = $(this).find('option:selected').data('field_type');
@@ -4726,6 +4726,7 @@ $(document).ready(function () {
   var actionStmt = '<div class="search_result"><table>';
   $('td.search_result.action').each(function () {
    actionStmt += '<tr><td>' + $(this).prev().html() + '</td>';
+   actionStmt += '<td>' + $(this).nextAll().slice(1, 2).html() + '</td>';
    actionStmt += '<td>' + $(this).html() + '</td></tr>';
   });
   actionStmt += '</table></div>';

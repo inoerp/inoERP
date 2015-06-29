@@ -453,12 +453,12 @@ class inosave extends dbObject {
     echo '<div class="message">' . gettext('Data is sucessfully saved') . ' ' . ' </div>';
     echo '<ul id="linids">';
     foreach ($$class as $array) {
-     echo '<li class="' . $array->$keyField . '">' . $array->$primaryColumn . '</li>';
+     echo '<li class="lineId" data-trclass="'.$$class->$primaryColumn.'">' . $array->$primaryColumn . '</li>';
     }
     echo '</ul>';
    } elseif (!empty($$class->$primaryColumn)) {
     echo '<div class="message">' . gettext('Transaction complete') . ' ' . '</div>';
-    echo '<div class="lineId">' . $$class->$primaryColumn . '</div>';
+    echo '<div class="lineId" data-trclass="'.$$class->$primaryColumn.'">' . $$class->$primaryColumn . '</div>';
    } else {
     echo '<div class="message">' . gettext('Transaction complete') . ' ' . '</div>';
    }
@@ -496,12 +496,12 @@ class inosave extends dbObject {
       echo '<div class="message">' . gettext('Data is sucessfully saved') . ' ' . ' </div>';
       echo '<ul id="linids">';
       foreach ($$class as $array) {
-       echo '<li class="' . $array->$keyField . '">' . $array->$primaryColumn . '</li>';
+       echo '<li class="' . $trClass . '">' . $array->$primaryColumn . '</li>';
       }
       echo '</ul>';
      } elseif (!empty($$class->$primaryColumn)) {
       echo '<div class="message">' . gettext('Data is sucessfully saved') . ' ' . ' </div>';
-      echo '<div id="lineId">' . $$class->$primaryColumn . '</div>';
+      echo '<div class="lineId" data-trclass="'.$$class->$primaryColumn.'">' . $$class->$primaryColumn . '</div>';
      } else {
       echo ' Error code:  ! ';
      }

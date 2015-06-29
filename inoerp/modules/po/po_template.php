@@ -159,7 +159,7 @@ inoERP
            ?>
           </td>
           <td><?php $f->seq_field_d($count) ?></td>
-          <td><?php $f->text_field_wid2sr('po_line_id', 'always_readonly'); ?></td>
+          <td><?php $f->text_field_wid2sr('po_line_id', 'always_readonly line_id'); ?></td>
           <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
           <td><?php echo $f->select_field_from_object('receving_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->receving_org_id, '', 'org_id copyValue', 1, $readonly); ?></td>
           <td><?php echo $f->select_field_from_object('line_type', po_line::po_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, '', 'copyValue', 1, $readonly); ?></td>

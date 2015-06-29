@@ -541,8 +541,8 @@ if ($readonly) {
 
 if (($class == 'content') && (!empty($content->subject))) {
  $pageTitle = $content->subject;
-} else {
- $pageTitle = is_object($$class)  && property_exists($$class, 'pageTitle') ? $$class->pageTitle : 'inoERP';
+} else if (is_object($$class)) {
+ $pageTitle = property_exists($$class, 'pageTitle') ? $$class->pageTitle : 'inoERP';
 }
 
 

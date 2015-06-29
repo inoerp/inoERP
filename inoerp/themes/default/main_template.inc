@@ -101,7 +101,6 @@
     <div id="header_top_quick_nav" class='hidden-xs' >
      <ul class="list-group inline_list">
       <li role="presentation"><i class="fa fa-toggle-left clickable right_bar_navigation_menu" title="Toggle Navigation Menu"></i></li>
-      <!--<li role="presentation"><i class="fa fa-toggle-up clickable top_header_details_toggle" title="Toggle Header"></i></li>-->
       <li role="presentation"><a  href="<?php echo HOME_URL; ?>"><i class="fa fa-home" title="Home"></i></a></li>
       <li role="presentation"><a  href="#"><i class="fa fa-info" title="Messages"></i></a></li>
       <li role="presentation"><a  href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard" title="Dashborad"></i></a></li>
@@ -115,6 +114,7 @@
         <?php echo $fav->show_currentUser_fav(true); ?>
        </div>
       </li>
+      <!--<li role="presentation"><i class="fa fa-gears right-click-menu clickable" title="Actions"></i></li>-->
       <li role="presentation"><a  class="erp-links search-list-page" href="<?php echo HOME_URL; ?>"><i class="fa fa-search" title="Search & List Page"></i></a></li>
       <li role="presentation"><a  class="erp-links form-page" href="<?php echo HOME_URL; ?>"><i class="fa fa-list-alt" title="Form Page"></i></a></li>
       <li class="show_loading_small"><img src="<?php echo HOME_URL ?>/themes/images/form/small_loading_bar.gif"></li>

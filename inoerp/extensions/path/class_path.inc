@@ -33,8 +33,8 @@ class path extends dbObject {
 //  data base variables as stored database column name
  public $field_a = [
   "path_id",
-  "parent_id",
   "name",
+  "parent_id",
   "path_link",
   "description",
   "module_code",
@@ -308,7 +308,7 @@ class path extends dbObject {
    $sql = " SELECT path_id from path where  module_code = '{$module_code}'"
     . " AND (parent_id IS NULL OR parent_id = 0) ";
    $parent_ids = $this->findFirstColumn_BySql_array($sql);
-  }else{
+  } else {
    $this->_show_misc_paths = false;
   }
   $path_sql = " SELECT path_id from path WHERE module_code = '{$module_code}' ";
@@ -485,7 +485,7 @@ class path extends dbObject {
    $allPaths .= '</ul>';
   }
 
- 
+
   if (!empty($allowed_path_ids) && is_array($allowed_path_ids) && !empty($allowed_path_ids['1']) && $allowed_path_ids[0] != '11') {
    if (!empty($allowed_path_ids) && is_array($allowed_path_ids) && ($this->_show_misc_paths)) {
     $allPaths .= '<ul>';
@@ -525,7 +525,7 @@ class path extends dbObject {
     $url = $path->fullPath($child_paths->path_link);
     $path_name = gettext($child_paths->name);
     $path_description = gettext($child_paths->description);
-    $allPaths .= "<li title=\"$path_description\" class='expandable {$path->name} '>&nbsp;&nbsp;" . '<a href="' . $url . '">' . $fa_icon .'&nbsp;' . $path_name . '</a>';
+    $allPaths .= "<li title=\"$path_description\" class='expandable {$path->name} '>&nbsp;&nbsp;" . '<a href="' . $url . '">' . $fa_icon . '&nbsp;' . $path_name . '</a>';
     $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths);
     $allPaths .= '</li>';
     unset($allowed_path_ids[$key]);
