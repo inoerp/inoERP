@@ -41,9 +41,9 @@ Requirements & Installation
 
 == Requirements ==
 
-1. HTTP web server Ex. Apache, IIS. 
+1. HTTP web server Ex. Nginx, Apache, IIS, Oracle HTTP
 2. PHP 5.5+    
-3. MySQL Server version: 5.6.17+
+3. MySQL(Server version: 5.6.17+) or MariaDB
     
 == Auto Installation ==
 
