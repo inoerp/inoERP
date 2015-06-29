@@ -3,7 +3,7 @@
 include_once __DIR__.'/../../tparty/PHPMailer/class.phpmailer.php';
 include_once __DIR__.'/../../tparty/PHPMailer/class.smtp.php';
 include_once __DIR__.'/../../tparty/PHPMailer/class.pop3.php';
-include_once __DIR__.'/../basics/mailsettings.inc';
+include_once __DIR__.'/../basics/settings/mailsettings.inc';
 
 class inomail extends PHPMailer {
 
