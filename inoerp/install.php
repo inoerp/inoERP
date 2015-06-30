@@ -31,7 +31,7 @@
  $dir_array = array('files');
 
  // Files to check
- $file1 = 'includes' . DS . 'basics' . DS . 'dbsettings.inc';
+ $file1 = 'includes' . DS . 'basics' . DS . 'settings' . DS . 'dbsettings.inc';
  $file_array = array($file1);
 
 //exit script in case of delete statement
