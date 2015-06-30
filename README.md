@@ -61,6 +61,7 @@ Requirements & Installation
 5. Login in to the application using user id /password - admin/admin
 
 == Security Consideration ==
+
 It is always advisable to keep the settings files outside the public directory. If you decide to keep the settings folder in the root directory then make below 2 changes
 1. basics.inc @ includes\basic modify below lines 
 require_once(INC_BASICS . DS .  'settings'. DS. "dbsettings.inc");
