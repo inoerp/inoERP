@@ -78,12 +78,12 @@
    }
   }
 
-  if (is_writable('.htaccess')) {
-   echo '<li class="proceed alert alert-success">' . translation('Main .htaccess file writable', 'system') . '</li>';
-  } else {
-   echo '<li class="error alert alert-danger">' . translation('Main .htaccess file not writable', 'system') . '</li>';
-   $proceed = false;
-  }
+//  if (is_writable('.htaccess')) {
+//   echo '<li class="proceed alert alert-success">' . translation('Main .htaccess file writable', 'system') . '</li>';
+//  } else {
+//   echo '<li class="error alert alert-danger">' . translation('Main .htaccess file not writable', 'system') . '</li>';
+//   $proceed = false;
+//  }
  ?>
 </ul>
 <?php
