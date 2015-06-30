@@ -4,18 +4,13 @@ Options -Indexes
 #Make index.php as home page
 DirectoryIndex index.php 
 
+<Files ~ "\.inc$">
+	Order allow,deny
+	Deny from all
+</Files>
+
 #for conten url alias
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule    ^content/([A-Za-z0-9-]+)/?$    content.php?$1    [NC,L]   
-
-<files dbsettings.inc>
-order allow,deny
-deny from all
-</files>
-
-<files mailsettings.inc>
-order allow,deny
-deny from all
-</files>
