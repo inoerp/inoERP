@@ -64,14 +64,14 @@ Requirements & Installation
 
 It is always advisable to keep the settings files outside the public directory. If you decide to keep the settings folder in the root directory then make below 2 changes
 
-1. basics.inc @ includes\basic modify below lines 
-require_once(INC_BASICS . DS .  'settings'. DS. "dbsettings.inc");
-to 
+1. basics.inc @ includes\basic modify below lines  
+require_once(INC_BASICS . DS .  'settings'. DS. "dbsettings.inc");  
+to  
 require_once(HOME_DIR . DS .  '/../settings'. DS. "dbsettings.inc");
 
-2. Modify inomail file @ includes\general_class
-include_once __DIR__.'/../basics/settings/mailsettings.inc';
-to
+2. Modify inomail file @ includes\general_class  
+include_once __DIR__.'/../basics/settings/mailsettings.inc';  
+to  
 require_once(HOME_DIR . DS .  '/../settings'. DS. "mailsettings.inc");
 
 
