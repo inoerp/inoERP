@@ -64,7 +64,7 @@ Requirements & Installation
 
 It is always advisable to keep the settings files outside the public directory. If you decide to keep the settings folder in the root directory then make below 2 changes
 
-1. basics.inc @ includes\basic modify below lines  
+1. Modify basics.inc @ includes\basic modify     
 require_once(INC_BASICS . DS .  'settings'. DS. "dbsettings.inc");  
 to  
 require_once(HOME_DIR . DS .  '/../settings'. DS. "dbsettings.inc");
