@@ -160,8 +160,8 @@ function saveLine(json_url, lineData, trclass, detailData, primary_column_id, li
 
   var line_id = $(result).find('.lineId').data('trclass');
   $('#content ' + '.' + trclass).find(".line_id").val(line_id);
-  console.log(line_id);
-  console.log($('#content ' + '.' + trclass).find(".line_id"));
+//  console.log(line_id);
+//  console.log($('#content ' + '.' + trclass).find(".line_id"));
   $('#overlay').css('display', 'none');
   $('#form_top_image').css('display', 'block');
  }).fail(function (error, textStatus, xhr) {
@@ -256,7 +256,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
  var saveVerticalTab = this.saveVerticalTab;
  var line_key_field_d = '.' + line_key_field;
  $('#save').on('click', function (e) {
-
+  remove_unsaved_msg();
   if ($.isFunction(window.beforeSave)) {
    var beforeSaveResult = window.beforeSave();
    if (beforeSaveResult < 0) {

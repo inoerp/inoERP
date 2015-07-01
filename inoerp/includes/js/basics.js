@@ -28,7 +28,18 @@ function daysBetweenDates(date1, date2) {
  return (Date.parse(date1) - Date.parse(date2)) / (1000 * 60 * 60 * 24);
 }
 
+function hideOverLay() {
+ $('#overlay').css('display', 'none');
+}
+
 function getFormDetails(url) {
+ if ($('#unsaved_fields').data('no_of_fields') >= 1) {
+  if (confirm("Unsaved chages exists. Do you want to proceed with the action ?") !== true) {
+   return false;
+  } else {
+   remove_unsaved_msg();
+  }
+ }
  return $.ajax({
   url: url,
   type: 'get',
@@ -55,7 +66,7 @@ function getFormDetails(url) {
     $('#document_history').replaceWith('<div id="document_history">' + $(result).find('div#document_history').html() + '</div>');
    }
    var homeUrl = $('#home_url').val();
-   if( $(result).find('div#page_title').html()){
+   if ($(result).find('div#page_title').html()) {
     $(document).prop('title', $(result).find('div#page_title').html() + ' - inoERP');
    }
 
@@ -1937,7 +1948,7 @@ function getSerialNumber(options) {
      $('#inv_serial_number_id').replaceWith(select_stmt);
     }
    } else {
-    console.log(result);
+//    console.log(result);
    }
   },
   complete: function () {
@@ -3317,7 +3328,7 @@ $(document).ready(function () {
   var fieldClass = $(this).closest('td').find('.select_item_number').prop('class');
   localStorage.setItem("row_class", rowClass);
   localStorage.setItem("field_class", fieldClass);
-    var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
   var openUrl = 'select.php?class_name=item_select';
   if ($(this).siblings('.item_number').val()) {
@@ -4718,7 +4729,7 @@ $(document).ready(function () {
    var no_of_item = +$('#no-of-cart-items').html();
    no_of_item++;
    +$('#no-of-cart-items').html(' ' + no_of_item + ' ');
-   console.log(no_of_item);
+//   console.log(no_of_item);
   });
  });
 
@@ -4759,10 +4770,22 @@ $(document).ready(function () {
 
  });
 
-
+//tracking unsaved changes
+ $('#erp_form_area').on('change', 'form[method="post"] :input', function (e) {
+  var noof_field_changes = $('#unsaved_fields').data('no_of_fields');
+  if (noof_field_changes < 1) {
+   $('#unsaved_fields').html('<span role="button" class="btn btn-warning btn-sm unsaved-msg">Unsaved Changes</span>');
+  }
+  noof_field_changes++;
+  $('#unsaved_fields').data('no_of_fields', noof_field_changes);
+ });
 
 });
 
+function remove_unsaved_msg() {
+ $('#unsaved_fields').html('');
+ $('#unsaved_fields').data('no_of_fields', '0');
+}
 
 //$(document).ready(function () {
 // var offsetTop = $("#erp_form_area")[0].offsetTop;

@@ -2295,3 +2295,8 @@ ul.single-column li{
  border-color: #2574A9;
  box-shadow: 0 0 2px #2574A9;
 }
+
+.btn.unsaved-msg{
+ font-size: 9px !important;
+font-weight: bold;
+}
