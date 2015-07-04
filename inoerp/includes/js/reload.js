@@ -322,6 +322,7 @@ $(document).ready(function () {
   var headerClassName = $('ul#js_saving_data').find('.headerClassName').data('headerclassname');
   var lineClassName = $('ul#js_saving_data').find('.lineClassName').data('lineclassname');
   var lineClassName2 = $('ul#js_saving_data').find('.lineClassName2').data('lineclassname2');
+  var lineClassName3 = $('ul#js_saving_data').find('.lineClassName3').data('lineclassname3');
   var detailClassName = $('ul#js_saving_data').find('.detailClassName').data('detailclassname');
   var form_header_id = $('ul#js_saving_data').find('.form_header_id').data('form_header_id');
   var form_line_id = $('ul#js_saving_data').find('.form_line_id').data('form_line_id');
@@ -363,6 +364,7 @@ $(document).ready(function () {
   classSave.headerClassName = headerClassName;
   classSave.lineClassName = (typeof lineClassName !== 'undefined') ? lineClassName : null;
   classSave.lineClassName2 = (typeof lineClassName2 !== 'undefined') ? lineClassName2 : null;
+  classSave.lineClassName3 = (typeof lineClassName3 !== 'undefined') ? lineClassName3 : null;
   classSave.detailClassName = (typeof detailClassName !== 'undefined') ? detailClassName : null;
   classSave.saveMain(before_save_function);
  }

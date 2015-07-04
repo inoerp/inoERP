@@ -42,8 +42,7 @@ inoERP
      <ul class="column header_field">
       <li><?php $f->l_checkBox_field_d('sponsored_cb'); ?></li>
       <li><?php $f->l_checkBox_field_d('cost_burdened_cb'); ?></li>
-      <li><?php $f->l_text_field_d('cost_burden_schedule_id'); ?></li> 
-      <li><?php $f->l_select_field_from_object('cost_burden_schedule_id'); ?></li> 
+      <li><?php $f->l_select_field_from_object('cost_burden_schedule_id',  prj_burden_list_header::find_all(),'prj_burden_list_header_id','burden_list', $$class->cost_burden_schedule_id,'cost_burden_schedule_id'); ?></li> 
       <li><?php $f->l_checkBox_field_d('account_burdened_cost_cb'); ?></li> 
       <li><?php $f->l_text_field_d('cip_cost_type'); ?></li> 
       <li><?php $f->l_text_field_d('asset_cost_allocation_method'); ?></li> 
@@ -63,12 +62,12 @@ inoERP
       <li><?php $f->l_select_field_from_array('labor_billing_type', prj_project_type_header::$schedule_type_a, $$class->labor_billing_type, 'labor_billing_type'); ?></li> 
       <li class='labor-rate'><?php $f->l_select_field_from_object('employee_schedule_id', prj_rate_schedule_header::find_all_by_rateType(), 'prj_rate_schedule_header_id', 'schedule_name', $$class->employee_schedule_id, 'employee_schedule_id'); ?></li> 
       <li class='labor-rate'><?php $f->l_select_field_from_object('job_schedule_id', prj_rate_schedule_header::find_all_by_rateType('JOB'), 'prj_rate_schedule_header_id', 'schedule_name', $$class->job_schedule_id, 'job_schedule_id'); ?></li> 
-      <li class='burden-rate'><?php $f->l_select_field_from_object('l_revenue_burden_id', prj_rate_schedule_header::find_all_by_rateType(), 'prj_rate_schedule_header_id', 'schedule_name', $$class->l_revenue_burden_id, 'l_revenue_burden_id'); ?></li> 
-      <li class='burden-rate'><?php $f->l_select_field_from_object('l_invoice_burdern_id', prj_rate_schedule_header::find_all_by_rateType('JOB'), 'prj_rate_schedule_header_id', 'schedule_name', $$class->l_invoice_burdern_id, 'l_invoice_burdern_id'); ?></li> 
+      <li class='burden-rate'><?php $f->l_select_field_from_object('l_revenue_burden_id',  prj_burden_list_header::find_all(),'prj_burden_list_header_id','burden_list', $$class->l_revenue_burden_id,'l_revenue_burden_id','l_revenue_burden_id'); ?></li> 
+      <li class='burden-rate'><?php $f->l_select_field_from_object('l_invoice_burdern_id',  prj_burden_list_header::find_all(),'prj_burden_list_header_id','burden_list', $$class->l_invoice_burdern_id,'l_invoice_burdern_id','l_invoice_burdern_id'); ?></li> 
       <li><?php $f->l_select_field_from_array('nlr_billing_type', prj_project_type_header::$schedule_type_a, $$class->nlr_billing_type, 'nlr_billing_type'); ?></li> 
       <li><?php $f->l_text_field_d('nlr_schedule_id'); ?></li> 
-      <li><?php $f->l_text_field_d('nrl_revenue_burden_id'); ?></li> 
-      <li><?php $f->l_text_field_d('nlr_invoice_burdern_id'); ?></li> 
+      <li><?php $f->l_select_field_from_object('nrl_revenue_burden_id',  prj_burden_list_header::find_all(),'prj_burden_list_header_id','burden_list', $$class->nrl_revenue_burden_id,'nrl_revenue_burden_id'); ?></li> 
+      <li><?php $f->l_select_field_from_object('nlr_invoice_burdern_id',  prj_burden_list_header::find_all(),'prj_burden_list_header_id','burden_list', $$class->nlr_invoice_burdern_id,'nlr_invoice_burdern_id'); ?></li> 
       <li><?php $f->l_text_field_d('billing_cycle_id'); ?></li> 
      </ul>
     </div>

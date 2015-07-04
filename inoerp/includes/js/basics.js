@@ -2216,6 +2216,41 @@ function getViewResultByViewId(options) {
  });
 }
 
+function getReportResultByReportId(options) {
+ var defaults = {
+  json_url: 'extensions/extn_report/json_report.php'
+ };
+ var settings = $.extend({}, defaults, options);
+
+ return $.ajax({
+  url: settings.json_url,
+  type: 'get',
+  data: {
+   find_result: 1,
+   viewReportById: true,
+   report_id: settings.report_id
+  },
+  success: function (result) {
+   if (result) {
+    if (settings.update_divId_h) {
+     var divHtml = $(result).filter('div#return_divId').html();
+     $(settings.update_divId_h).empty().append(divHtml);
+     $.getScript("includes/js/reload.js");
+    }
+   }
+  },
+  complete: function () {
+   $('.show_loading_small').hide();
+  },
+  beforeSend: function () {
+   $('.show_loading_small').show();
+  },
+  error: function (request, errorType, errorMessage) {
+   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+  }
+ });
+}
+
 function viewResultWith_pagination() {
  $('body').on('click', '.ajax_view.pagination .page_nos a', function (e) {
   e.preventDefault();
@@ -3265,6 +3300,31 @@ $(document).ready(function () {
           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
+ //popu for selecting user
+ $('#content').on('click', '.select_username.select_popup', function () {
+  var elemenType = $(this).parent().prop('tagName');
+  if (elemenType === 'TD') {
+   var rowClass = $(this).closest('tr').prop('class');
+   var fieldClass = $(this).closest('td').find('.select_username').prop('class');
+   localStorage.setItem("row_class", rowClass);
+   localStorage.removeItem("li_divId", liId);
+  } else {
+   var liId = $(this).closest('li').find('.username').prop('id');
+   localStorage.setItem("li_divId", liId);
+   localStorage.removeItem("row_class");
+  }
+
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+  var openUrl = 'select.php?class_name=user';
+
+  if ($(this).siblings('.username').val()) {
+   openUrl += '&username=' + $(this).siblings('.username').val();
+  }
+  void window.open(openUrl, '_blank',
+          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+
 //popu for selecting accounts
  $('body').on('click', '.select_account.select_popup', function () {
   var ulink = 'select.php?class_name=coa_combination';
@@ -3831,6 +3891,7 @@ $(document).ready(function () {
   var headerClassName = $('ul#js_saving_data').find('.headerClassName').data('headerclassname');
   var lineClassName = $('ul#js_saving_data').find('.lineClassName').data('lineclassname');
   var lineClassName2 = $('ul#js_saving_data').find('.lineClassName2').data('lineclassname2');
+  var lineClassName3 = $('ul#js_saving_data').find('.lineClassName3').data('lineclassname3');
   var detailClassName = $('ul#js_saving_data').find('.detailClassName').data('detailclassname');
   var form_header_id = $('ul#js_saving_data').find('.form_header_id').data('form_header_id');
   var form_line_id = $('ul#js_saving_data').find('.form_line_id').data('form_line_id');
@@ -3874,6 +3935,7 @@ $(document).ready(function () {
   classSave.headerClassName = headerClassName;
   classSave.lineClassName = (typeof lineClassName !== 'undefined') ? lineClassName : null;
   classSave.lineClassName2 = (typeof lineClassName2 !== 'undefined') ? lineClassName2 : null;
+  classSave.lineClassName3 = (typeof lineClassName3 !== 'undefined') ? lineClassName3 : null;
   classSave.detailClassName = (typeof detailClassName !== 'undefined') ? detailClassName : null;
   classSave.saveMain(before_save_function);
  }
@@ -4778,6 +4840,22 @@ $(document).ready(function () {
   }
   noof_field_changes++;
   $('#unsaved_fields').data('no_of_fields', noof_field_changes);
+ });
+
+ $('body').on('click', '.get-report-content', function () {
+  var report_id = $(this).data('report_id');
+  if ($(this).data('update_divId')) {
+   var update_divId_h = '#' + $(this).data('update_divId');
+  } else {
+   var update_divId_h = $(this).prop('hash');
+  }
+
+  if (!$(update_divId_h).text().trim()) {
+   getReportResultByReportId({
+    report_id: report_id,
+    update_divId_h: update_divId_h
+   });
+  }
  });
 
 });

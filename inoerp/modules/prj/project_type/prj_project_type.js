@@ -8,15 +8,19 @@ $(document).ready(function () {
   addNewRow.removeDefault = true;
   addNewRow.add_new_row();
  });
+prj_update_l_billing_type();
+ $('body').off('change', '#labor_billing_type').on('change', '#labor_billing_type', function () {
+  prj_update_l_billing_type();
+ });
+ deleteData('form.php?class_name=prj_project_type_header&line_class_name=prj_project_type_line&line_class_name2=prj_project_type_billing');
+});
 
-$('body').on('change', '#labor_billing_type', function(){
-  if($(this).val() === 'SCHEDULE'){
-  $('#l_revenue_burden_id, #l_invoice_burdern_id').prop('disabled','disabled');
+function prj_update_l_billing_type() {
+ if ($('#labor_billing_type').val() === 'SCHEDULE') {
+  $('#l_revenue_burden_id, #l_invoice_burdern_id').prop('disabled', 'disabled');
   $('#employee_schedule_id, #job_schedule_id').removeAttr('disabled');
-  }else{
-    $('#l_revenue_burden_id, #l_invoice_burdern_id').removeAttr('disabled');
-  $('#employee_schedule_id, #job_schedule_id').prop('disabled','disabled');
-  }
-});
-deleteData('form.php?class_name=prj_project_type_header&line_class_name=prj_project_type_line&line_class_name2=prj_project_type_billing');
-});
+ } else {
+  $('#l_revenue_burden_id, #l_invoice_burdern_id').removeAttr('disabled');
+  $('#employee_schedule_id, #job_schedule_id').prop('disabled', 'disabled');
+ }
+}

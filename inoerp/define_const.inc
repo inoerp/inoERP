@@ -10,7 +10,7 @@ defined('HOME_DIR') ? null : define('HOME_DIR', $home_dir);
 defined('HOME_URL') ? null : define("HOME_URL", $home_url);
 
 /*Applicable only for IIS server
- * 1. Coomment all the labove lines (from line 3 to line 11)
+ * 1. Comment all the above lines (from line 3 to line 11)
  * 2. Uncomment below 3 line and modify the HOME_DIR and HOME_URL value
  */
 //$protocol_g = ino_protocol();

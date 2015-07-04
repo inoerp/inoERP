@@ -171,7 +171,7 @@ function saveLine(json_url, lineData, trclass, detailData, primary_column_id, li
  });
 }
 
-function saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassName) {
+function saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassName, tbodyClass) {
  var header_id = $("#header_id").val();
  $.ajax({
   url: json_url,
@@ -185,8 +185,7 @@ function saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassNa
  }).done(function (result) {
   var div = $(result).filter('div#json_save_line2').html();
   var line_id = $(result).find('.lineId').data('trclass');
-  $('tbody.form_data_line_tbody2 tr' + '.' + trclass).find(".line_id").val(line_id);
-
+  $('tbody.'+tbodyClass +' tr' + '.' + trclass).find(".line_id").val(line_id);
   var message = $(result).find('.message, .rollback_msg').html();
   if (message && message.length > 1) {
    $(".error").prepend(div);
@@ -203,7 +202,7 @@ function saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassNa
 
 function saveMainClass(json_url, form_header_id, primary_column_id, single_line,
         line_key_field, form_line_id, primary_column_id2, primary_column_id3, enable_select, savingOnlyHeader,
-        headerClassName, lineClassName, detailClassName, lineClassName2, onlyOneLineAtATime,
+        headerClassName, lineClassName, detailClassName, lineClassName2, lineClassName3, onlyOneLineAtATime,
         allLineTogether, saveVerticalTab, onlyHeaderOverLay) {
  this.json_url = json_url;
  this.form_header_id = form_header_id;
@@ -219,6 +218,7 @@ function saveMainClass(json_url, form_header_id, primary_column_id, single_line,
  this.lineClassName = lineClassName;
  this.detailClassName = detailClassName;
  this.lineClassName2 = lineClassName2;
+ this.lineClassName3 = lineClassName3;
  this.onlyOneLineAtATime = onlyOneLineAtATime;
  this.allLineTogether = allLineTogether;
  this.saveVerticalTab = saveVerticalTab;
@@ -250,6 +250,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
  var lineClassName = this.lineClassName;
  var detailClassName = this.detailClassName;
  var lineClassName2 = this.lineClassName2;
+ var lineClassName3 = this.lineClassName3;
  var onlyOneLineAtATime = this.onlyOneLineAtATime;
  var allLineTogether = this.allLineTogether;
  var onlyHeaderOverLay = this.onlyHeaderOverLay;
@@ -502,7 +503,28 @@ saveMainClass.prototype.saveMain = function (beforeSave)
       detailData = "";
      }
      count++;
-     saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassName2);
+     saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassName2, 'form_data_line_tbody2');
+    });
+   }
+
+   /*---------------Save 4th form - third line class--------------------*/
+   if ((typeof lineClassName3 !== undefined) && (lineClassName3 !== null)) {
+    $('#form_line3 input[name="line_id_cb"]:checked').each(function () {
+     var trclass = $(this).closest('tr').attr('class');
+     var lineData = [];
+     $("#form_line3").find('.' + trclass + ' > td').each(function () {
+      if (!$(this).hasClass('add_detail_values')) {
+       var ThisLineData = $(this).find(":input").serializeArray();
+       lineData = $.merge(lineData, ThisLineData);
+      }
+     });
+     if ($(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray()) {
+      var detailData = $(this).closest("tr").find("tbody.form_data_detail_tbody").find(":input").serializeArray();
+     } else {
+      detailData = "";
+     }
+     count++;
+     saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassName3 , 'form_data_line_tbody3');
     });
    }
   }

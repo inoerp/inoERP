@@ -240,6 +240,14 @@ function ino_protocol() {
  return $protocol;
 }
 
+function ino_validate_num($num){
+ if(is_numeric(trim($num))){
+  return $num;
+ }else{
+  return false;
+ }
+}
+
 function getBreadCrumb($class_first) {
  global $$class_first;
  if (property_exists($class_first, 'module') && !property_exists($class_first, 'dont_show_bread_crum')) {
