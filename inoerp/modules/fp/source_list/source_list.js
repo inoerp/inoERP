@@ -115,10 +115,4 @@ $(document).ready(function() {
 	return false;
  });
 
-
-//get the attachement form
- deleteData('form.php?class_name=fp_source_list_header&line_class_name=fp_source_list_line');
-
-
-
 });

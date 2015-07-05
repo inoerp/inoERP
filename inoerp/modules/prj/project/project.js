@@ -104,9 +104,7 @@ $('body').off('click', '.add_child').on('click', '.add_child', function () {
          });
  $('#currency').val()
 
- deleteData('form.php?class_name=prj_project_header&line_class_name=prj_project_line&line_class_name2=prj_project_control');
-
- //default quantity
+  //default quantity
  $("#content").off("click", "table.form_line_data_table .add_detail_values_img")
          .on("click", "table.form_line_data_table .add_detail_values_img", function () {
           var lineQuantity = $(this).closest('tr').find('.line_quantity:first').val();

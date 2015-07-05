@@ -77,8 +77,4 @@ $(document).ready(function() {
   addNewRow.add_new_row();
  });
 
-//get the attachement form
- deleteData('form.php?class_name=hr_leave_transaction_header&line_class_name=hr_leave_transaction_line');
-
-
 });

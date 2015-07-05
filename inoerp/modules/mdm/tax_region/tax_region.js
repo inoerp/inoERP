@@ -14,7 +14,5 @@ $(document).ready(function() {
 $('#content').on('focusin', '.line_data', function() {
 	$(this).prop('disabled', true);
  });
-// deleteData('json_tax_region.php');
- deleteData('form.php?class_name=mdm_tax_region&line_class_name=mdm_tax_region');
 
  });  

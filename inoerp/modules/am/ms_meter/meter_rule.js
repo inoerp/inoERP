@@ -73,9 +73,6 @@ $(document).ready(function() {
    'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
-  // deleteData('json_tax_code.php');
- deleteData('form.php?class_name=am_ms_meter_rule&line_class_name=am_ms_meter_rule');
-
  //defalut values to line
  $('body').off('blur', '.base_interval').on('blur', '.base_interval', function(){
   if($(this).val()){

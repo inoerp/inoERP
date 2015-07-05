@@ -98,7 +98,6 @@ $(document).ready(function () {
 
 
  copy_sys_profile_header_id();
- deleteData('form.php?class_name=sys_profile_header&line_class_name=sys_profile_line');
 
 });
 

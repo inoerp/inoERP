@@ -12,8 +12,7 @@ prj_update_l_billing_type();
  $('body').off('change', '#labor_billing_type').on('change', '#labor_billing_type', function () {
   prj_update_l_billing_type();
  });
- deleteData('form.php?class_name=prj_project_type_header&line_class_name=prj_project_type_line&line_class_name2=prj_project_type_billing');
-});
+ });
 
 function prj_update_l_billing_type() {
  if ($('#labor_billing_type').val() === 'SCHEDULE') {

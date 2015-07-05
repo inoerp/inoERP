@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/../functions/functions.inc";
 require_once (dirname(__FILE__) . '/../../define_const.inc');
-defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
+const DS = DIRECTORY_SEPARATOR;
 
 /* ---------------------Dont Update anything Below-------------------------------------- */
 //Basic Paths 

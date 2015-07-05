@@ -40,6 +40,6 @@ $(document).ready(function () {
   $('#parent_id').val('').prop('disabled', true);
  }
 
- deleteData('form.php?class_name=category', 'category_id');
+ 
 
 });

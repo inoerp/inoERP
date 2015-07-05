@@ -24,8 +24,6 @@ $(document).ready(function() {
 	$(this).closest('tr').find('.name').val(name);
  });
 
-deleteData('form.php?class_name=mdm_cart&line_class_name=mdm_cart');
-
 $('body').on('blur', '#ec_cart_line .quantity', function(){
 var qnty = $(this).val();
 var unit_price = +$(this).closest('tr').find('.unit-price-value').html();

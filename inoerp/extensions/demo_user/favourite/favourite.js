@@ -22,6 +22,6 @@ $('#content').on('blur', '.select.path_id', function(){
   $(this).closest('tr').find('.fav_name').val($(this).find(':selected').text());
   });
 
-deleteData('form.php?class_name=user_favourite&line_class_name=user_favourite');
+
 
 });  

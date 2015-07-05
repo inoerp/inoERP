@@ -183,10 +183,6 @@ $(document).ready(function () {
   });
  });
 
- deleteData('form.php?class_name=ap_transaction_header&line_class_name=ap_transaction_line&detail_class_name=ap_transaction_detail');
-//exhhnge rate
-
-
  $('#content').on('blur', '#currency, #doc_currency, #exchange_rate_type, #exchange_rate', function () {
   if ($('#exchange_rate_type').val() != 'USER') {
    getExchangeRate();

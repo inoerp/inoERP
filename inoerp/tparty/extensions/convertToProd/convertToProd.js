@@ -117,8 +117,6 @@ $(document).ready(function() {
  classContextMenu.noOfTabbs = 1;
  classContextMenu.contextMenu();
 
-deleteData('form.php?class_name=sys_profile_header&line_class_name=sys_profile_line');
-//deleteData('json.option.php');
 // save('json.value_group.php', '#sys_profile_header', 'line_id_cb', 'code', '#sys_profile_header_id');
  var classSave = new saveMainClass();
  classSave.json_url = 'form.php?class_name=sys_profile_header';

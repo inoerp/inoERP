@@ -18,8 +18,7 @@ $(document).ready(function() {
 
 
  onClick_add_new_row('tr.block_line', 'tbody.form_data_line_tbody', 1);
-// deleteData('json_tax_code.php');
-deleteData('form.php?class_name=block&line_class_name=block');
+
 
  //context menu
  var classContextMenu = new contextMenuMain();

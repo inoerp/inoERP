@@ -1,0 +1,61 @@
+#page_print{
+width : 900px;
+border : 3px solid #ddd;
+padding : 5px;
+}
+
+#print_body{
+margin: 10px 0;
+border-top : 1.5px solid #ddd;
+border-bottom : 1.5px solid #ddd;
+}
+
+table#document_header_info{
+  width: 100%;
+  background:none;
+  border: 0;
+}
+
+table#document_header_info td{
+  border: 0;
+  padding: 10px 0 0 30px;
+}
+
+.full_page{
+width: 100%;
+clear: both;
+}
+
+.half_page{
+width: 45%;
+display: inline-block;
+}
+
+ul li{
+list-style: none;
+margin-top: 5px;
+}
+
+.form_line_data_table{
+margin-top: 10px;
+width: 100%;
+text-align: center;
+border: 2px solid #aaa;
+}
+tr.line_header, .form_data_line_tbody{
+background-color: #eee;
+height: 2.5em;
+padding: 5px;
+}
+
+tr.line_header{
+background-color: #ccc;
+}
+
+.form_data_line_tbody{
+background-color: #eee;
+}
+
+tr.detail_header{
+font-size: 0.8em;
+}

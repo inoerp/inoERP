@@ -90,7 +90,4 @@ $(document).ready(function() {
 
  copy_sys_profile_header_id();
 
-deleteData('form.php?class_name=bc_label_auto_trigger&line_class_name=bc_label_auto_trigger');
-
 });
-

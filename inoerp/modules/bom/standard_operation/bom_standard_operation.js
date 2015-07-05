@@ -29,6 +29,4 @@ $(document).ready(function() {
 					'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
-deleteData('form.php?class_name=bom_standard_operation&line_class_name=bom_standard_operation_resource_assignment');
-
 });

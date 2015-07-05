@@ -24,7 +24,6 @@ $(this).prop('checked', false);
 }
 });
 
-// deleteData('json_theme.php');
-deleteData('form.php?class_name=theme&line_class_name=theme');
+
 
 });  

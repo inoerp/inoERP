@@ -361,12 +361,36 @@ $(document).ready(function () {
     classSave.savingOnlyHeader = false;
    }
   }
+
   classSave.headerClassName = headerClassName;
-  classSave.lineClassName = (typeof lineClassName !== 'undefined') ? lineClassName : null;
-  classSave.lineClassName2 = (typeof lineClassName2 !== 'undefined') ? lineClassName2 : null;
-  classSave.lineClassName3 = (typeof lineClassName3 !== 'undefined') ? lineClassName3 : null;
-  classSave.detailClassName = (typeof detailClassName !== 'undefined') ? detailClassName : null;
+  var deleteLink = 'form.php?class_name=' + headerClassName;
+
+  if (typeof lineClassName !== 'undefined') {
+   deleteLink += '&line_class_name=' + lineClassName;
+   classSave.lineClassName = lineClassName;
+  } else {
+   classSave.lineClassName = null;
+  }
+  if (typeof lineClassName2 !== 'undefined') {
+   deleteLink += '&line_class_name2=' + lineClassName2;
+   classSave.lineClassName2 = lineClassName2;
+  } else {
+   classSave.lineClassName2 = null;
+  }
+  if (typeof lineClassName3 !== 'undefined') {
+   deleteLink += '&line_class_name3=' + lineClassName3;
+   classSave.lineClassName3 = lineClassName3;
+  } else {
+   classSave.lineClassName3 = null;
+  }
+  if (typeof detailClassName !== 'undefined') {
+   deleteLink += '&detail_class_name=' + detailClassName;
+   classSave.detailClassName = detailClassName;
+  } else {
+   classSave.detailClassName = null;
+  }
   classSave.saveMain(before_save_function);
+  deleteData(deleteLink);
  }
 
 //context menu

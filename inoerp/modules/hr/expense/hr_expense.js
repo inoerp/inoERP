@@ -271,9 +271,7 @@ get_customer_detail_for_bu();
  classContextMenu.noOfTabbs = 5;
  classContextMenu.contextMenu();
 
- deleteData('form.php?class_name=sd_so_header&line_class_name=sd_so_line');
-
- var classSave = new saveMainClass();
+  var classSave = new saveMainClass();
  classSave.json_url = 'form.php?class_name=sd_so_header';
  classSave.form_header_id = 'so_header';
  classSave.primary_column_id = 'sd_so_header_id';

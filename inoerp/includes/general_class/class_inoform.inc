@@ -255,7 +255,7 @@ EOD;
 
  public static function form_button_withImage($current_page_path = "", $homeUrl = '') {
   global $class;
-  $current_page_path = 'form.php?mode=9&amp;class_name='.$class;
+  $current_page_path = 'form.php?mode=9&amp;class_name=' . $class;
   echo <<<EOD
 			 <ul id="form_top_image" class="draggable">
         <li class='fa fa-refresh clickable' id='refresh_button' title='Refresh'></li>
@@ -460,6 +460,12 @@ EOD;
   global $class, $$class;
   echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->number_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', 1);
+ }
+
+ public function l_number_field_dm($field_name, $div_class = "") {
+  global $class, $$class;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->number_field($field_name, $$class->$field_name, '20', $field_name, $div_class, 1);
  }
 
  public function l_number_field_dsr($field_name, $div_class = "") {
@@ -678,7 +684,7 @@ EOD;
   $class = $class_o;
   $$class = $$class_o;
   echo '</div></div></span>';
-  echo '<label class="big_popover">'.gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label class="big_popover">' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   $div_class .= 'search-text-field';
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class);
  }

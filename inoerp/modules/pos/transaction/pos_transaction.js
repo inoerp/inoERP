@@ -99,6 +99,4 @@ $('#content').off('click', '.remove_row_img').on('click', '.remove_row_img', fun
  }
 });
 
-deleteData('form.php?class_name=pos_transaction_header&line_class_name=pos_transaction_line');
-
 });

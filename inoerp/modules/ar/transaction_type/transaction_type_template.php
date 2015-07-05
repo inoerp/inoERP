@@ -1,5 +1,5 @@
 <div id ="form_header">
- <form action=""  method="post" id="ar_transaction_type_form"  name="ar_transaction_type_form">
+ <form  method="post" id="ar_transaction_type"  name="ar_transaction_type">
   <span class="heading"><?php echo gettext('AR Transaction Type') ?></span>
   <div class="tabContainer">
    <ul class="column header_field"> 

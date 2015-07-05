@@ -67,9 +67,7 @@ $('body').off('change','#action').on('change','#action', function(){
          });
  $('#currency').val()
 
- deleteData('form.php?class_name=hd_svo_header&line_class_name=hd_svo_line&line_class_name2=hd_svo_actuals');
-
- //default quantity
+  //default quantity
  $("#content").off("click", "table.form_line_data_table .add_detail_values_img")
          .on("click", "table.form_line_data_table .add_detail_values_img", function () {
           var lineQuantity = $(this).closest('tr').find('.line_quantity:first').val();

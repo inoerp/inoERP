@@ -67,8 +67,6 @@ $('body').off('change','#action').on('change','#action', function(){
          });
  $('#currency').val()
 
- deleteData('form.php?class_name=sd_so_header&line_class_name=sd_so_line');
-
  //default quantity
  $("#content").off("click", "table.form_line_data_table .add_detail_values_img")
          .on("click", "table.form_line_data_table .add_detail_values_img", function () {

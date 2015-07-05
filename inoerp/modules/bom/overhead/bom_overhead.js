@@ -59,9 +59,4 @@ $(document).ready(function() {
 	addNewRow.add_new_row();
  });
 
-//delete line
- deleteData('form.php?class_name=bom_overhead&line_class_name=bom_overhead_resource_assignment&line_class_name2=bom_overhead_rate_assignment');
-
 });
-
-

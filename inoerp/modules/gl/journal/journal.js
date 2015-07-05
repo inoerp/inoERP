@@ -154,6 +154,4 @@ mandatoryCheck.mandatoryHeader();
 	});
  });
  
- deleteData('form.php?class_name=gl_journal_header&line_class_name=gl_journal_line');
-
-});
+ });

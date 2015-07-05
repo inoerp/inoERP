@@ -43,6 +43,4 @@ $(document).ready(function() {
   });
  });
  
- deleteData('form.php?class_name=sd_store&line_class_name=sd_store_subinventory');
-
-});
+ });

@@ -18,5 +18,5 @@ $('body').on('change', '#labor_expendituretype_type', function(){
   $('#employee_schedule_id, #job_schedule_id').prop('disabled','disabled');
   }
 });
-deleteData('form.php?class_name=prj_burden_structure_header&line_class_name=prj_burden_structure_costcode&line_class_name2=prj_burden_structure_expendituretype');
+
 });

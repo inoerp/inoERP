@@ -16,6 +16,4 @@ $(document).ready(function() {
  });
 
 
-deleteData('form.php?class_name=sys_program' , 'sys_program_id');
-
 });

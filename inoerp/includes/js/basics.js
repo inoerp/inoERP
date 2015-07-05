@@ -898,6 +898,7 @@ function deleteReferences(options) {
 
 function deleteData(json_url) {
  $("#delete_button").click(function (e) {
+  remove_unsaved_msg();
   $("#delete_button").addClass("show_loading_small");
   $("#delete_button").prop('disabled', true);
   e.preventDefault();
@@ -928,7 +929,8 @@ function deleteData(json_url) {
     deleteLine(json_url, headerId, 'header');
    }
   }
-
+  $("#accordion").accordion({active: 0});
+  $('#content a.show').trigger('click');
  });
 }
 
@@ -3324,6 +3326,29 @@ $(document).ready(function () {
   void window.open(openUrl, '_blank',
           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
+ 
+  //popu for selecting project
+ $('#content').on('click', '.select_project_number.select_popup', function () {
+  var elemenType = $(this).parent().prop('tagName');
+  if (elemenType === 'TD') {
+   var rowClass = $(this).closest('tr').prop('class');
+   var fieldClass = $(this).closest('td').find('.select_project_number').prop('class');
+   localStorage.setItem("row_class", rowClass);
+   localStorage.removeItem("li_divId", liId);
+  } else {
+   var liId = $(this).closest('li').find('.username').prop('id');
+   localStorage.setItem("li_divId", liId);
+   localStorage.removeItem("row_class");
+  }
+
+  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_field_class", close_field_class);
+  var openUrl = 'select.php?class_name=prj_project_header';
+
+ void window.open(openUrl, '_blank',
+          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+ });
+ 
 
 //popu for selecting accounts
  $('body').on('click', '.select_account.select_popup', function () {
@@ -3933,11 +3958,34 @@ $(document).ready(function () {
    }
   }
   classSave.headerClassName = headerClassName;
-  classSave.lineClassName = (typeof lineClassName !== 'undefined') ? lineClassName : null;
-  classSave.lineClassName2 = (typeof lineClassName2 !== 'undefined') ? lineClassName2 : null;
-  classSave.lineClassName3 = (typeof lineClassName3 !== 'undefined') ? lineClassName3 : null;
-  classSave.detailClassName = (typeof detailClassName !== 'undefined') ? detailClassName : null;
+  var deleteLink = 'form.php?class_name=' + headerClassName;
+
+  if (typeof lineClassName !== 'undefined') {
+   deleteLink += '&line_class_name=' + lineClassName;
+   classSave.lineClassName = lineClassName;
+  } else {
+   classSave.lineClassName = null;
+  }
+  if (typeof lineClassName2 !== 'undefined') {
+   deleteLink += '&line_class_name2=' + lineClassName2;
+   classSave.lineClassName2 = lineClassName2;
+  } else {
+   classSave.lineClassName2 = null;
+  }
+  if (typeof lineClassName3 !== 'undefined') {
+   deleteLink += '&line_class_name3=' + lineClassName3;
+   classSave.lineClassName3 = lineClassName3;
+  } else {
+   classSave.lineClassName3 = null;
+  }
+  if (typeof detailClassName !== 'undefined') {
+   deleteLink += '&detail_class_name=' + detailClassName;
+   classSave.detailClassName = detailClassName;
+  } else {
+   classSave.detailClassName = null;
+  }
   classSave.saveMain(before_save_function);
+  deleteData(deleteLink);
  }
 
 //context menu

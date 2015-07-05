@@ -43,8 +43,4 @@ $(document).ready(function() {
   return false;
  });
 
-//get the attachement form
- deleteData('form.php?class_name=hr_element_entry_header&line_class_name=hr_element_entry_line');
-
-
 });

@@ -230,8 +230,7 @@ $(document).ready(function () {
   });
  });
 
- deleteData('form.php?class_name=ar_transaction_header&line_class_name=ar_transaction_line&detail_class_name=ar_transaction_detail');
-
+ 
 //all actions
 //Popup for selecting match 
  $('#transaction_action').on('change', function () {

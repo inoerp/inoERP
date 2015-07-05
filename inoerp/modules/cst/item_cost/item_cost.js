@@ -107,11 +107,7 @@ $(document).ready(function () {
  });
 
 
- deleteData('form.php?class_name=cst_item_cost_header&line_class_name=cst_item_cost_line');
-
-
-
- $('#content').off('change', '.cost_element_type').on('change', '.cost_element_type', function () {
+  $('#content').off('change', '.cost_element_type').on('change', '.cost_element_type', function () {
   var json_url = 'modules/cst/item_cost/json_item_cost.php';
   var cost_element_type = $(this).val();
   var row_class = $(this).closest('tr').prop('class');

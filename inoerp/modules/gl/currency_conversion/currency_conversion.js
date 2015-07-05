@@ -22,8 +22,6 @@ $(document).ready(function() {
  $('#content').on('focusin', '.line_data', function() {
 	$(this).prop('disabled', true);
  });
-// deleteData('json_tax_region.php');
- deleteData('form.php?class_name=gl_currency_conversion&line_class_name=gl_currency_conversion');
 
  //context menu
 // var classContextMenu = new contextMenuMain();

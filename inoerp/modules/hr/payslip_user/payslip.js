@@ -69,8 +69,5 @@ $(document).ready(function() {
 
  onClick_add_new_row('payslip_line_line0','form_data_line_tbody',1);
 
-//get the attachement form
- deleteData('form.php?class_name=hr_payslip_header&line_class_name=hr_payslip_line');
-
 
 });

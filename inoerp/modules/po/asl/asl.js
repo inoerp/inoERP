@@ -102,8 +102,6 @@ $(document).ready(function () {
           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
-//get the attachement form
- deleteData('form.php?class_name=po_asl_header&line_class_name=po_asl_line');
 
  $("body").off("click", ".add_row_img").on("click", ".add_row_img", function () {
   $('.supplier_site_id').last().replaceWith('<input class="textfield supplier_site_id" type="text" title="" size="15" maxlength="256" value="" name="supplier_site_id[]" >');

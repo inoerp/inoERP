@@ -29,8 +29,5 @@ $(document).ready(function() {
 	return false;
  });
 
-// deleteData('json_asl_document.php');
- deleteData('form.php?class_name=po_asl_document&line_class_name=po_asl_document');
-
 
 });  

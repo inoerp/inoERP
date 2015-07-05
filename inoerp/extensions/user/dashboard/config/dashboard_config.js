@@ -66,8 +66,7 @@ $(document).ready(function() {
  });
 
  onClick_add_new_row('tr.user_dashboard_config_line0', 'tbody.user_dashboard_config_values', '1', 'copyData');
-// deleteData('json_user_dashboard_config.php');
- deleteData('form.php?class_name=user_dashboard_config&line_class_name=user_dashboard_config');
+
 
  //context menu
  var classContextMenu = new contextMenuMain();

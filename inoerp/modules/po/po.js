@@ -292,7 +292,7 @@ $(document).ready(function () {
  }
 
 
- deleteData('form.php?class_name=po_header&line_class_name=po_line&detail_class_name=po_detail');
+
 //
  //exhhnge rate
  $('body').on('change', '#doc_currency', function () {

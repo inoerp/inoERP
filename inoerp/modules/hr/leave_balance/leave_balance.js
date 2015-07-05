@@ -42,8 +42,4 @@ $(document).ready(function() {
 					'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
-deleteData('form.php?class_name=hr_leave_balance&line_class_name=hr_leave_balance');
-
-//
-
 });  

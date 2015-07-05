@@ -50,6 +50,4 @@ $(document).ready(function () {
  var mandatoryCheck = new mandatoryFieldMain();
  mandatoryCheck.mandatoryHeader();
 
-deleteData('form.php?class_name=sys_catalog_header&line_class_name=sys_catalog_line');
-
 });

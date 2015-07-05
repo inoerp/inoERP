@@ -29,9 +29,6 @@ $(document).ready(function() {
 					'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
-//delete line
- deleteData('form.php?class_name=bom_department&line_class_name=bom_department_resource_assignment');
-
 });
 
 

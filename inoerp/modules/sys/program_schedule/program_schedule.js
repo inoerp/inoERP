@@ -7,7 +7,3 @@ $(document).ready(function(){
 });
  
 });
-
-$(document).ready(function() {
- deleteData('form.php?class_name=sys_program_schedule');
-});

@@ -184,9 +184,6 @@ $(document).ready(function () {
   addNewRow.add_new_row();
  });
 
-//delete line
- deleteData('form.php?class_name=am_wo_header&line2_class_name=am_wo_bom&line_class_name=am_wo_routing_line&detail_class_name=am_wo_routing_detail');
-
  $('#content').off('blur', '#org_id, #item_number').on('blur', '#org_id, #item_number', function () {
   getItemRevision({
    'org_id': $('#org_id').val(),

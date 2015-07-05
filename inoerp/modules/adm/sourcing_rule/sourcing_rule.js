@@ -88,8 +88,4 @@ $(document).ready(function() {
 					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
-//get the attachement form
- deleteData('form.php?class_name=po_sourcing_rule_header&line_class_name=po_sourcing_rule_line');
-
-
 });

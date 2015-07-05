@@ -68,8 +68,6 @@ alert('Two different passwords entered.\nRe-enter passwords');
 
 //onClick_add_new_row('user_role_assignment', 'form_data_line_tbody', 1)
 
-deleteData('form.php?class_name=user&line_class_name=user_role');
-
 // //context menu
 // var classContextMenu = new contextMenuMain();
 // classContextMenu.docHedaderId = 'user_header';

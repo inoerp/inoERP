@@ -54,9 +54,7 @@ $("#content").on('change', '.object_name', function() {
   return false;
  });
 
- //get the attachement form
- deleteData('form.php?class_name=bc_label_format_header&line_class_name=bc_label_format_line');
-
+ 
  $("#content").on("blur", '.field_name', function() {
   if ($(this).val() === 'newentry') {
    if (confirm("Do you want to create a field not part of item master ?")) {

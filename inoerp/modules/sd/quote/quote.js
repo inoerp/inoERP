@@ -151,10 +151,7 @@ $(document).ready(function () {
 //  getDocumentTypeDetails(document_type_id);
 // })
 
-
- deleteData('form.php?class_name=sd_quote_header&line_class_name=sd_quote_line');
-
-//price from price list
+ //price from price list
  $('#content').off('change', '.item_id_m, .item_number, .price_list_header_id, .price_date')
          .on('change', '.item_id_m, .item_number, .price_list_header_id, .price_date', function () {
           var rowClass = '.' + $(this).closest('tr').prop('class');

@@ -24,7 +24,4 @@ $(document).ready(function() {
 	$(this).closest('tr').find('.name').val(name);
  });
 
-deleteData('form.php?class_name=mdm_tax_code&line_class_name=mdm_tax_code');
-
-
 });  

@@ -49,6 +49,5 @@ $(document).ready(function() {
 
  copy_option_header_id();
 
- deleteData('form.php?class_name=option_header&line_class_name=option_line&detail_class_name=option_detail');
 });
 

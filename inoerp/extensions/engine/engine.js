@@ -33,8 +33,7 @@ $(this).prop('checked', false);
 }
 });
 
-// deleteData('json_engine.php');
-deleteData('form.php?class_name=engine&line_class_name=engine');
+
 
  //context menu
 // var classContextMenu = new contextMenuMain();

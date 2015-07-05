@@ -55,9 +55,7 @@ $(document).ready(function () {
   return false;
  });
 
- deleteData('form.php?class_name=cc_co_header&line_class_name=cc_co_line');
-
- $('#template_id').on('change', function () {
+  $('#template_id').on('change', function () {
   if ($('#cc_co_header_id').val()) {
    alert('You can\'t chage the template for this change order.');
    $(this).attr('disabled', true);

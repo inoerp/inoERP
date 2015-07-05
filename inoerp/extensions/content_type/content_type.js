@@ -197,7 +197,7 @@ $(document).ready(function () {
  });
 
 //delete from multi action
- deleteData('form.php?class_name=content_type&line_class_name=content_type');
+ 
 
 // var classSave = new saveMainClass();
 // classSave.json_url = 'form.php?class_name=content_type';

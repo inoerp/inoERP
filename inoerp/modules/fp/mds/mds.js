@@ -33,9 +33,4 @@ mandatoryCheck.mandatoryHeader();
 	return false;
  });
 
-
- deleteData('form.php?class_name=fp_mds_header&line_class_name=fp_mds_line');
-
-
-
 });

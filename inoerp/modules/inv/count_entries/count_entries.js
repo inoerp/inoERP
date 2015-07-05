@@ -84,9 +84,6 @@ $(document).ready(function() {
 
  });
 
-  // deleteData('json_tax_code.php');
- deleteData('form.php?class_name=inv_count_entries&line_class_name=inv_count_entries');
-
  //defalut values to line
  $('body').off('blur', '#adjustment_ac_id').on('blur', '#adjustment_ac_id' , function() {
   var acvalue = $(this).val();

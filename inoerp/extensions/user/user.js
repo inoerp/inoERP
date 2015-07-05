@@ -45,6 +45,6 @@ alert('Two different passwords entered.\nRe-enter passwords');
 	addNewRow.add_new_row();
  });
 
-deleteData('form.php?class_name=user&line_class_name=user_role&line_class_name2=user_group');
+
 });
 

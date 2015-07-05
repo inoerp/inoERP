@@ -151,7 +151,5 @@ $(document).ready(function () {
   getBUDetails($('#bu_org_id').val());
  }
 
- deleteData('form.php?class_name=po_rfq_header&line_class_name=po_rfq_line&detail_class_name=po_rfq_detail');
 
 });
-

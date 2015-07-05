@@ -246,8 +246,7 @@ mandatoryCheck.mandatoryHeader();
  }
 
 
- deleteData('form.php?class_name=po_header&line_class_name=po_line&detail_class_name=po_detail');
-//
+ 
  //exhhnge rate
  if ($('#currency').val() != $('#doc_currency').val()) {
   getExchangeRate();

@@ -49,6 +49,4 @@ $(this).closest('tr').find('.parent_line_id').removeAttr('disabled');
 
  copy_sys_value_group_header_id();
 
- deleteData('form.php?class_name=sys_value_group_header&line_class_name=sys_value_group_line');
 });
-

@@ -110,10 +110,6 @@ $(document).ready(function () {
   getLocator('modules/inv/locator/json_locator.php', subinventory_id, 'subinventory', trClass);
  });
 
-//get the attachement form
- deleteData('form.php?class_name=bom_config_header&line_class_name=bom_config_line');
-
-
  //popu for selecting items
  $('#content').off('click', '.select_item_number1.select_popup')
          .on('click', '.select_item_number1.select_popup', function () {

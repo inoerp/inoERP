@@ -10,6 +10,4 @@ $(document).ready(function() {
 	$(this).closest('tr').find('.name').val(name);
  });
 
-deleteData('form.php?class_name=gl_calendar&line_class_name=gl_calendar');
-
 });  

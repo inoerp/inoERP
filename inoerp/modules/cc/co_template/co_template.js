@@ -47,7 +47,4 @@ $(document).ready(function() {
   return false;
  });
 
-//get the attachement form
- deleteData('form.php?class_name=cc_co_template_header&line_class_name=cc_co_template_line');
-
 });

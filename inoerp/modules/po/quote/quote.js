@@ -145,8 +145,4 @@ $(document).ready(function() {
  }
 
 
- deleteData('form.php?class_name=po_quote_header&line_class_name=po_quote_line&detail_class_name=po_quote_detail');
-
-
-});
-
+ });

@@ -58,10 +58,7 @@ $(document).ready(function () {
 
 // onClick_add_new_row('tr.approval_limit_assignment_line0', 'tbody.approval_limit_assignment_values', 2);
 
-// deleteData('json_approval_limit_assignment.php');
- deleteData('form.php?class_name=hr_approval_limit_assignment&line_class_name=hr_approval_limit_assignment');
-
- //context menu
+//context menu
 // var classContextMenu = new contextMenuMain();
 // classContextMenu.docLineId = 'hr_approval_limit_assignment_id';
 // classContextMenu.btn2DivId = 'form_line';

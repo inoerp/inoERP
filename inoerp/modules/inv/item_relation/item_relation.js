@@ -10,8 +10,6 @@ $(document).ready(function() {
 	$(this).closest('tr').find('.name').val(name);
  });
 
-deleteData('form.php?class_name=mdm_tax_code&line_class_name=mdm_tax_code');
-
  $('body').off('click', 'a.relation_type').on('click', 'a.relation_type', function (e) {
   e.preventDefault();
   var relation_type = $('#relation_type').val();

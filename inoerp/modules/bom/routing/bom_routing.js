@@ -105,9 +105,7 @@ $(document).ready(function() {
 //
 
  
- deleteData('json.bom_routing.php');
-
- onClick_addDetailLine(2, '.add_row_detail_img1','tabsDetailC')
+  onClick_addDetailLine(2, '.add_row_detail_img1','tabsDetailC')
 
  $('#content').off('change', '.extra_field_name').on('change', '.extra_field_name', function() {
   var count = 0;
@@ -127,7 +125,5 @@ $(document).ready(function() {
   }
 
  });
-
- deleteData('form.php?class_name=bom_routing_header&line_class_name=bom_routing_line&detail_class_name=bom_routing_detail');
 
 });

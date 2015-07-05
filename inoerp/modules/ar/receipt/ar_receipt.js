@@ -102,9 +102,7 @@ $(document).ready(function () {
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
-
- deleteData('form.php?class_name=ar_receipt_header&line_class_name=ar_receipt_line&detail_class_name=ar_receipt_detail');
-
+ 
  //popu for selecting AR Transaction
  $('body').off('click', '.select_transaction_number.select_popup').on('click', '.select_transaction_number.select_popup', function () {
   if ($(this).closest('tr').find('.ar_receipt_line_id').first().val()) {

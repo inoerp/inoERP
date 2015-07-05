@@ -48,7 +48,4 @@ $(document).ready(function () {
   });
  });
 
- deleteData('form.php?class_name=mdm_location_default&line_class_name=mdm_location_default');
-
-
-});  
+ });  

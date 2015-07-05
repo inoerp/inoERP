@@ -73,10 +73,7 @@ $(document).ready(function() {
    'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
-  // deleteData('json_tax_code.php');
- deleteData('form.php?class_name=am_ms_date_rule&line_class_name=am_ms_date_rule');
-
- //defalut values to line
+   //defalut values to line
 $('body').off('blur', '.base_interval_days').on('blur', '.base_interval_days', function(){
   if($(this).val()){
   var cycle_interval_days = (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"))*(+$('#intervals_per_cycle').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));

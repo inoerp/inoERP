@@ -43,7 +43,4 @@ $(document).ready(function() {
 // });
 
 
- deleteData('form.php?class_name=sys_hold_reference&line_class_name=sys_hold_reference');
-
-
-});  
+ });  
