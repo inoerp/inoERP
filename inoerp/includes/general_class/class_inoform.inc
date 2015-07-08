@@ -1765,6 +1765,12 @@ EOD;
   echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->checkBox_field($field_name, $$class->$field_name, $field_name, '', $this->readonly);
  }
+ 
+  public function l_checkBox_field_dr($field_name) {
+  global $class, $$class;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->checkBox_field($field_name, $$class->$field_name, $field_name, '', 1);
+ }
 
  public function checkBox_field_d($field_name) {
   global $readonly, $class, $$class;

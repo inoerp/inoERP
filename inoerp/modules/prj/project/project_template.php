@@ -46,7 +46,7 @@ inoERP
       <li><?php $f->l_date_fieldAnyDay('start_date', $$class->start_date) ?></li>
       <li><?php $f->l_date_fieldAnyDay('completion_date', $$class->completion_date) ?></li>
       <li><?php $f->l_text_field_d('life_cycle') ?></li>
-      <li><?php $f->l_text_field_d('current_phase') ?></li>
+      <li><?php $f->l_select_field_from_object('current_phase', option_header::find_options_byName('PRJ_PROJECT_PHASE'), 'option_line_code','option_line_value', $$class->current_phase) ?></li>
      </ul> 
     </div>
     <div id="tabsHeader-2" class="tabContent">
@@ -333,7 +333,7 @@ inoERP
           </ul>
          </td>
          <td><?php form::text_field_wid4sr('prj_project_control_id'); ?></td>
-         <td><?php echo $f->select_field_from_object('prj_expenditure_type_id', prj_expenditure_type::find_all(), 'prj_expenditure_type_id', 'expenditure_type', $$class_fourth->prj_expenditure_type_id, '', 'medium'); ?></td>
+         <td><?php echo $f->select_field_from_object('prj_expenditure_type_id', prj_expenditure_type_header::find_all(), 'prj_expenditure_type_header_id', 'expenditure_type', $$class_fourth->prj_expenditure_type_id, '', 'medium'); ?></td>
          <td><?php echo $f->select_field_from_object('prj_expenditure_category_code', option_header::find_by_name('PRJ_EXPENDITURE_CATEGORY'), 'option_line_code', 'option_line_value', $$class_fourth->prj_expenditure_category_code, '', 'medium'); ?></td>
          <td><?php $f->text_field_wid4('description'); ?></td>
          <td><?php echo $f->select_field_from_object('hr_job_id', hr_job::find_all(), 'hr_job_id', 'job_name', $$class_fourth->hr_job_id); ?></td>

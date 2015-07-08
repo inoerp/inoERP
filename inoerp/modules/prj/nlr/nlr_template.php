@@ -21,7 +21,7 @@ inoERP
        <a name="show" href="form.php?class_name=prj_nlr_header&<?php echo "mode=$mode"; ?>" class="show document_id prj_nlr_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
       <li><?php $f->l_text_field_d('resource_name'); ?></li>
-      <li><?php $f->l_select_field_from_object('prj_expenditure_type_id', prj_expenditure_type::find_all(),'prj_expenditure_type_id','expenditure_type',$$class->prj_expenditure_type_id,'prj_expenditure_type_id','',1); ?></li>
+      <li><?php $f->l_select_field_from_object('prj_expenditure_type_id', prj_expenditure_type_header::find_all(),'prj_expenditure_type_header_id','expenditure_type',$$class->prj_expenditure_type_id,'prj_expenditure_type_id','',1); ?></li>
       <li><?php $f->l_text_field_d('description'); ?></li> 
       <li><?php $f->l_date_fieldAnyDay('effective_from', $$class->effective_from); ?></li> 
       <li><?php $f->l_date_fieldAnyDay('effective_to', $$class->effective_to); ?></li> 

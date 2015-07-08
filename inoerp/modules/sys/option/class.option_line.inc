@@ -14,7 +14,7 @@ class option_line extends dbObject {
   "option_line_value",
   "description",
   'value_group_id',
-  "efid",
+  "priority",
   "status",
   "rev_enabled",
   "rev_number",
@@ -59,7 +59,7 @@ class option_line extends dbObject {
  public $option_line_value;
  public $description;
  public $value_group_id;
- public $efid;
+ public $priority;
  public $status;
  public $rev_enabled;
  public $rev_number;

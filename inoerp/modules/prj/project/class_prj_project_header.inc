@@ -45,6 +45,13 @@ class prj_project_header extends dbObject {
   'PROCESS_LOGISTICS' => 'Process Logistics',
   'PROCESS_ACTUALS' => 'Process Actuals',
  ];
+ public static $approval_status_a = [
+  'ENTERED' => 'Entered',
+  'APPROVED' => 'Approved',
+  'REQ_APPROVAL' => 'Requires Re-Aproval',
+  'REJECTED' => 'Rejected',
+ ];
+
  public $field_a = [
   'prj_project_header_id',
   'bu_org_id',

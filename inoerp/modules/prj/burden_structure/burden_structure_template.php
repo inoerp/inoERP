@@ -137,7 +137,7 @@ inoERP
           </ul>
          </td>
          <td><?php form::text_field_wid3sr('prj_burden_structure_expendituretype_id'); ?></td>
-         <td><?php echo $f->select_field_from_object('prj_expenditure_type_id', prj_expenditure_type::find_all(), 'prj_expenditure_type_id', 'expenditure_type', $$class_third->prj_expenditure_type_id, '', 'large', 1, ''); ?></td>
+         <td><?php echo $f->select_field_from_object('prj_expenditure_type_id', prj_expenditure_type_header::find_all(), 'prj_expenditure_type_header_id', 'expenditure_type', $$class_third->prj_expenditure_type_id, '', 'large', 1, ''); ?></td>
          <td><?php echo $f->select_field_from_object('burden_cost_base_id', prj_burden_cost_base::find_all(), 'prj_burden_cost_base_id', 'cost_base', $$class_third->burden_cost_base_id, '', 'large', 1, ''); ?></td>
          <td><?php form::text_field_wid3('description'); ?></td>        </tr>
         <?php
