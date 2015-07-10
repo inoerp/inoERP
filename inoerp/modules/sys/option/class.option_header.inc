@@ -110,10 +110,10 @@ class option_header extends dbObject {
   $this->$name = $value;
  }
 
- Public static function find_options_byName($name) {
+ Public static function find_options_byName($name, $order_by_field = 'priority' , $order_by_seq = 'ASC') {
   $option_header = self::find_by_name($name);
-  $countries = option_line::find_by_option_id($option_header->option_header_id);
-  return $countries;
+  return option_line::find_by_parent_id($option_header->option_header_id, $order_by_field ,$order_by_seq);
+
  }
 
  Public static function countries() {

@@ -51,7 +51,11 @@ class prj_project_header extends dbObject {
   'REQ_APPROVAL' => 'Requires Re-Aproval',
   'REJECTED' => 'Rejected',
  ];
-
+ public static $accrual_method_a = [
+  'WORK' => 'Work',
+  'COST' => 'Cost',
+  'EVENT' => 'Event',
+ ];
  public $field_a = [
   'prj_project_header_id',
   'bu_org_id',
@@ -351,7 +355,7 @@ class prj_project_header extends dbObject {
  }
 
  public function _after_save() {
-  if ((!empty($this->prj_project_header_id)) && empty($this->order_number)) {
+  if ((!empty($this->prj_project_header_id)) && empty($this->project_number)) {
    $prj_project_header_id = $this->prj_project_header_id;
    $bu_org_id = $this->bu_org_id;
    $prj_number = $bu_org_id . '-' . $prj_project_header_id;

@@ -121,8 +121,7 @@ inoERP
          </td>
          <td><?php $f->seq_field_d($count); ?></td>
          <td><?php $f->text_field_wid2sr('prj_budget_line_id', 'always_readonly'); ?></td>
-         <td><?php
-          $f->text_field_wid2('task_number', 'select project_task_number');
+         <td><?php $f->val_field_wid2m('task_number', 'prj_project_all_v' , 'task_number', '', 'select project_task_number');
           echo $f->hidden_field('prj_project_line_id', $$class_second->prj_project_line_id);
           ?><i class="select_project_task_number select_popup clickable fa fa-search"></i></td>
          <td><?php $f->text_field_d2('prj_resource_line_id'); ?></td>

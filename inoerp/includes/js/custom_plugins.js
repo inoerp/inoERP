@@ -198,7 +198,7 @@
  $.fn.inoAutoCompleteElement = function (options) {
   var this_e = $(this);
   var defaults = {
-   min_length: 3,
+   min_length: 2,
    form_id: 'form_line',
    hidden_field_param: true,
    set_value_for_one_field: false
@@ -216,13 +216,46 @@
     if (!$(this).data("autocomplete")) {
      var auto_element = $(this);
      var auto_element_class = $(this).prop('class');
+     var elemenType = $(this).parent().prop('tagName');
      var auto_element_class_d = '.' + auto_element_class.replace(/\s+/g, '.');
+     if ($(this).attr('data-val_field') && $(this).attr('data-val_value')) {
+      var val_field = $(this).data('val_field');
+      var val_value = $(this).data('val_value');
+     } else {
+      var val_value = val_field = null;
+     }
+
      if ($(this).attr('data-ac_type')) {
       var ac_type = $(this).data('ac_type');
      } else {
       var ac_type = null;
      }
 
+     if ($(this).attr('data-ac_type')) {
+      var ac_type = $(this).data('ac_type');
+     } else {
+      var ac_type = null;
+     }
+
+     var dependent_fields = {};
+     if ($(auto_element).data('dependent_field')) {
+      var dependent_field_a = $('.project_task_number').data('dependent_field').split(' ');
+      if (elemenType === 'TD') {
+       $(dependent_field_a).each(function (d_k, d_v) {
+        var d_v_class = '.' + d_v;
+        if ($(auto_element).closest('tr').find(d_v_class).val()) {
+         dependent_fields[d_v] = $(auto_element).closest('tr').find(d_v_class).val();
+        }
+       });
+      } else if (elemenType === 'LI') {
+       $(dependent_field_a).each(function (d_k, d_v) {
+        if ($('#content').find('#' + d_v).val()) {
+         dependent_fields[d_v] = $('#content').find('#' + d_v).val();
+        }
+       });
+      }
+     }
+     
      var hidden_fields = {};
      if (settings.hidden_field_param) {
       $(auto_element).siblings('input:hidden').each(function (hidden_k, hidden_v) {
@@ -257,6 +290,9 @@
          other_options: settings.other_options,
          ino_auto_complete: true,
          ac_type: ac_type,
+         val_value: val_value,
+         val_field: val_field,
+         dependent_fields: dependent_fields
         },
         success: function (data) {
          response(data);
@@ -272,14 +308,14 @@
        if (ui.content.length === 1)
        {
         $(this).val(ui.content[0].value);
-        var elemenType = $(this).parent().prop('tagName');
+//        var elemenType = $(this).parent().prop('tagName');
         $.each(ui.content[0], function (key, value) {
          var v_d = '.' + key;
          if (elemenType === 'LI') {
           if (key.substr(-3) === '_cb') {
            $(auto_element).closest("form").find(v_d).prop('checked', true);
           } else {
-           if (settings.set_value_for_one_field === true ) {
+           if (settings.set_value_for_one_field === true) {
             $(auto_element_class_d).parent().find(v_d).val(value);
            } else {
             $(auto_element).closest("form").find(v_d).val(value);
@@ -303,11 +339,13 @@
         $(this).autocomplete("close");
        } else if (ui.content.length === 0) {
         alert('No Data Found');
-        $(this).attr('value', '');
+        this_e.attr('value', '').prop('value', '');
         //close the auto complete
         $(this).autocomplete("close");
+       } else if (ui.content == 'false' || ui.content == false) {
+        alert('No Data Found');
+        this_e.attr('value', '').prop('value', '');
        }
-
       },
       //select
       select: function (event, ui) {

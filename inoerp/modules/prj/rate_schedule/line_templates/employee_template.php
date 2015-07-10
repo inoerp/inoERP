@@ -33,8 +33,8 @@
           ?>
          </td>
          <td><?php $f->text_field_wid2sr('prj_rate_schedule_line_id', 'always_readonly'); ?></td>
-         <td><?php
-          $f->text_field_wid2('employee_name', 'select employee resource_type_control');
+         <td><?php 
+          $f->val_field_wid2m('employee_name', 'hr_employee_v', 'employee_name' , '', 'select employee resource_type_control');
           echo $f->hidden_field_withCLass('reference_key_value', $$class_second->reference_key_value, 'resource_type_control employee hr_employee_id');
           ?><i class="select_employee_name select_popup clickable fa fa-search"></i></td>
          <td><?php $f->text_field_d2('description'); ?></td>

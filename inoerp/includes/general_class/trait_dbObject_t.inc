@@ -11,7 +11,7 @@ trait dbObject_t {
  public $checkbox = [];
 //  public $column = [];
  public $requiredField = [];
- public static $position_array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,0];
+ public static $position_array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 0];
  public static $control_type_a = [
   'EQUAL' => '=',
   'NE' => '!=',
@@ -57,13 +57,13 @@ trait dbObject_t {
  public $file_id_values;
  public static $audit_trial = [ 'created_by', 'creation_date', 'last_update_by', 'last_update_date',];
 
-function __construct(){
- foreach($this->field_a as $k => $v){
-  if(property_exists($this, $k)){
-   $this->$k = null;
+ function __construct() {
+  foreach ($this->field_a as $k => $v) {
+   if (property_exists($this, $k)) {
+    $this->$k = null;
+   }
   }
  }
-}
 
  function query($sql) {
   global $dbc;
@@ -223,8 +223,7 @@ function __construct(){
   return $result_fetchAll;
  }
 
- 
-  public static function find_by_sql($sql = "") {
+ public static function find_by_sql($sql = "") {
   global $dbc;
   $prepare = $dbc->connection->prepare($sql);
   try {
@@ -236,7 +235,7 @@ function __construct(){
    return false;
   }
  }
- 
+
 // public static function find_by_sql($sql = "") {
 //  global $dbc;
 //  $conn = $dbc->connection;
@@ -249,7 +248,7 @@ function __construct(){
 //   return false;
 //  }
 // }
- 
+
 
  public static function find_by_sql_array($sql = "") {
   global $dbc;
@@ -412,14 +411,27 @@ function __construct(){
   $result_array = static::find_by_sql($sql);
   return !empty($result_array) ? array_shift($result_array) : false;
  }
- 
-  public static function find_by_oneColumn(array $colmn_details_ap) {
-   if(!empty($colmn_details_ap['column_name'])){
-    $column_name = $colmn_details_ap['column_name'];
-   }else{
-    return null;
+
+ public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields='') {
+  $sql = "SELECT * FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  "; 
+  if(!empty($dependent_fields)){
+   foreach($dependent_fields as $k => $v ){
+    if(!empty($k) && !empty($v) ){
+     $sql .= " AND $k = '{$v}' ";
+    }
    }
-   $column_val = !empty($colmn_details_ap['column_value']) ? $colmn_details_ap['column_value'] : null;
+  }
+  $result_array = static::find_by_sql($sql);
+  return !empty($result_array) ? ($result_array) : false;
+ }
+
+ public static function find_by_oneColumn(array $colmn_details_ap) {
+  if (!empty($colmn_details_ap['column_name'])) {
+   $column_name = $colmn_details_ap['column_name'];
+  } else {
+   return null;
+  }
+  $column_val = !empty($colmn_details_ap['column_value']) ? $colmn_details_ap['column_value'] : null;
   $sql = "SELECT * FROM " . static::$table_name . " where `" . $column_name . "` ='{$column_val}'  ";
   $result_array = static::find_by_sql($sql);
   return !empty($result_array) ? $result_array : false;
@@ -1088,15 +1100,14 @@ function __construct(){
   return $result;
  }
 
- 
-  public function find_all_views($db_name = DB_NAME) {
+ public function find_all_views($db_name = DB_NAME) {
   global $db;
   $query = " SELECT * from information_schema.views  "
    . " where  TABLE_SCHEMA= '" . $db_name . "' ";
   $result = $db->find_by_sql($query);
   return $result;
  }
- 
+
  public static function find_all_tables_and_views($db_name = DB_NAME) {
   global $db;
   $query = " SELECT TABLE_NAME from information_schema.tables  "
@@ -1104,8 +1115,6 @@ function __construct(){
   $result = $db->find_by_sql($query);
   return $result;
  }
- 
- 
 
  public static function count_all_tables($db_name = DB_NAME) {
   global $db;

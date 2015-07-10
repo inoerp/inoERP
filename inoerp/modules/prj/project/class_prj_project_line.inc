@@ -154,8 +154,8 @@ class prj_project_line extends dbObject {
 //  if ($this->_validate_before_save() < 0) {
 //   return -90;
 //  }
-  
-  if(empty($this->task_level_weight) && !empty($this->task_number)){
+
+  if (empty($this->task_level_weight) && !empty($this->task_number)) {
    $task_number_a = explode('-', $this->task_number);
    $this->task_level_weight = array_pop($task_number_a);
   }
@@ -189,55 +189,19 @@ class prj_project_line extends dbObject {
   }
  }
 
- private function _process_line_to_so() {
-  
- }
+ public static function find_allLowestTask_byHeaderId($header_id) {
+  $sql = " SELECT prl.task_number, prl.task_name,  prl.description as task_description, 
+   prl.prj_project_line_id, prl.prj_project_header_id, prl.parent_prj_task_num
+FROM prj_project_line prl
+WHERE    
+prl.prj_project_header_id = '{$header_id}'
+prl.task_number NOT IN(
+SELECT prl.parent_prj_task_num
+FROM prj_project_line prl
+WHERE    prl.parent_prj_task_num IS NOT NULL
+)
+";
 
- public static function find_by_headerId_and_status($prj_project_header_id, $line_status = 'PENDING_IMPORT') {
-  $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where prj_project_header_id= '{$prj_project_header_id}' AND line_status= '{$line_status}' ";
-  $result = self::find_by_sql($sql);
-  return $result;
- }
-
- public function findAll_ByOrgId($org_id, $status = '') {
-  $sql = " SELECT * FROM " .
-   self::$table_name .
-   " WHERE shipping_org_id= :shipping_org_id  ";
-  if (!empty($status)) {
-   $sql .= " AND line_status = :line_status ";
-   $value_a = ['shipping_org_id' => $org_id, 'line_status' => $status];
-  } else {
-   $value_a = ['shipping_org_id' => $org_id];
-  }
-  $result_array = $this->findBySql($sql, $value_a);
-  return !empty($result_array) ? $result_array : false;
- }
-
- Public static function prj_project_line_types() {
-  $option_header = option_header::find_by_name('PO_LINE_TYPE');
-  $po_types = option_line::find_by_option_id($option_header->option_header_id);
-  return $po_types;
- }
-
-// public static function find_by_hd_ro_headerId($hd_ro_header_id) {
-//  $sql = "SELECT * FROM " . self::$table_name . " where hd_ro_header_id = '{$hd_ro_header_id}'";
-//  $result_array = self::find_by_sql($sql);
-//  return $result_array;
-// }
-
- public static function find_by_orgId_itemId_ssd($org_id, $item_id_m = '', $ssd = '') {
-  $sql = " SELECT * FROM ";
-  $sql .= self::$table_name;
-  $sql .= " WHERE shipping_org_id = '{$org_id}'";
-  $sql .= " AND schedule_ship_date IS NOT NULL ";
-  if (!empty($item_id_m)) {
-   $sql .= " AND item_id_m = '{$item_id_m}'";
-  }
-  if (!empty($ssd)) {
-   $sql .= " AND schedule_ship_date >= '{$ssd}'";
-  }
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? $result_array : false;
  }

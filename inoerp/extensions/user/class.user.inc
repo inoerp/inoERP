@@ -124,7 +124,6 @@ class user extends dbObject {
  public $address_id;
  public $customer_name;
  public $supplier_name;
- 
 
  public function _before_showing() {
   
@@ -170,15 +169,15 @@ class user extends dbObject {
   return !empty($result) ? array_pop($result) : false;
  }
 
-  public function findBy_providerName_and_provierId() {
+ public function findBy_providerName_and_provierId() {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE auth_provider_name = :auth_provider_name AND auth_provider_id = :auth_provider_id LIMIT 1";
-  $value_a = ['auth_provider_name' => $this->auth_provider_name , 'auth_provider_id' => $this->auth_provider_id ];
+  $value_a = ['auth_provider_name' => $this->auth_provider_name, 'auth_provider_id' => $this->auth_provider_id];
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
- 
+
  Public static function find_by_user_name($username) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
@@ -268,6 +267,14 @@ class user extends dbObject {
   }
  }
 
+ public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields='') {
+  $sql = "SELECT user_id, username, first_name, last_name, email,  phone, hr_employee_id, user_language,
+           default_theme, block_notif_count,  ar_customer_id, supplier_id,  created_by,    creation_date, 
+            last_update_by,    last_update_date , image_file_id  FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
+  $result_array = static::find_by_sql($sql);
+  return !empty($result_array) ? ($result_array) : false;
+ }
+
  public static function check_email_userName($email, $userName) {
   global $db;
   $email = $db->escape_value($email);
@@ -322,7 +329,7 @@ class user extends dbObject {
  }
 
  public function _after_save() {
-  global $si; 
+  global $si;
   if ($this->user_id) {
    $msg = "New user registration is sucessful!";
    $subject = "User Registrtion @ " . $si->site_name;
@@ -334,8 +341,8 @@ class user extends dbObject {
     . ' name & password ';
    $message .='<br><br>Thanks<br>' . $si->site_name . '</body></html>';
    $im = new inomail();
-   $im->FromName =  $si->site_name;
-   $im->addAddress($this->email, $this->username );
+   $im->FromName = $si->site_name;
+   $im->addAddress($this->email, $this->username);
    $im->addReplyTo($si->email, 'User Registration');
    $im->Subject = $subject;
    $im->Body = $message;

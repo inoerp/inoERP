@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2015 at 04:33 AM
+-- Generation Time: Jul 10, 2015 at 06:50 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `inoerp_prod5`
+-- Database: `inoerp_prod`
 --
 
 -- --------------------------------------------------------
@@ -1656,14 +1656,15 @@ CREATE TABLE IF NOT EXISTS `ar_transaction_type` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`ar_transaction_type_id`),
   UNIQUE KEY `document_type_name` (`ar_transaction_type`,`transaction_class`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `ar_transaction_type`
 --
 
 INSERT INTO `ar_transaction_type` (`ar_transaction_type_id`, `ar_transaction_type`, `transaction_class`, `bu_org_id`, `legal_org_id`, `invoice_type_id`, `description`, `cm_type_id`, `payment_term_id`, `status`, `receivable_ac_id`, `revenue_ac_id`, `freight_ac_id`, `tax_ac_id`, `clearing_ac_id`, `unbilled_receivable_ac_id`, `unearned_revenue_ac_id`, `br_receivable_ac_id`, `br_offset_ac_id`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
-(1, 'External Sales - SD', 'INVOICE', 5, 19, NULL, 'External Sales  from SD', NULL, 1, 'active', 905, 905, 905, 905, 905, 905, 905, NULL, NULL, 0, '2014-07-03 15:43:04', 0, '2014-07-03 15:43:04');
+(1, 'External Sales - SD', 'INVOICE', 5, 19, NULL, 'External Sales  from SD', NULL, 1, 'active', 905, 905, 905, 905, 905, 905, 905, NULL, NULL, 0, '2014-07-03 15:43:04', 0, '2014-07-03 15:43:04'),
+(2, 'External Sales - SD2', 'INVOICE', 5, 19, NULL, 'External Sales  from SD2', NULL, 1, NULL, 905, 905, 905, 905, 905, 905, 905, NULL, NULL, 34, '2015-07-05 12:53:08', 34, '2015-07-05 12:53:08');
 
 -- --------------------------------------------------------
 
@@ -1716,7 +1717,7 @@ CREATE TABLE IF NOT EXISTS `bc_label_auto_trigger` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`bc_label_auto_trigger_id`),
   UNIQUE KEY `transaction_type_id` (`transaction_type_id`,`association_level`,`association_level_value`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `bc_label_auto_trigger`
@@ -1725,7 +1726,8 @@ CREATE TABLE IF NOT EXISTS `bc_label_auto_trigger` (
 INSERT INTO `bc_label_auto_trigger` (`bc_label_auto_trigger_id`, `transaction_type_id`, `bc_label_format_header_id`, `association_level`, `association_level_value`, `sys_printer_id`, `enabled_cb`, `description`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (9, 4, 6, 'INVENTORY', 6, 1, NULL, NULL, 34, '2015-02-05 11:31:08', 34, '2015-02-05 11:31:08'),
 (11, 3, 6, 'FROM_SUBINV', 2, 1, NULL, NULL, 34, '2015-02-05 13:34:16', 34, '2015-02-05 13:34:16'),
-(13, 2, 1, 'FROM_SUBINV', 1, 1, NULL, NULL, 34, '2015-03-08 11:45:35', 34, '2015-03-08 11:45:35');
+(13, 2, 1, 'FROM_SUBINV', 1, 1, NULL, NULL, 34, '2015-03-08 11:45:35', 34, '2015-03-08 11:45:35'),
+(14, 1, 1, 'FROM_SUBINV', 1, 1, NULL, NULL, 34, '2015-06-26 09:51:45', 34, '2015-06-26 09:51:45');
 
 -- --------------------------------------------------------
 
@@ -2106,7 +2108,7 @@ CREATE TABLE IF NOT EXISTS `bom_cost_type` (
   PRIMARY KEY (`bom_cost_type_id`),
   UNIQUE KEY `cost_type` (`cost_type`,`org_id`),
   UNIQUE KEY `cost_type_code` (`cost_type_code`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `bom_cost_type`
@@ -2117,7 +2119,8 @@ INSERT INTO `bom_cost_type` (`bom_cost_type_id`, `cost_type_code`, `cost_type`, 
 (2, 'PENDING', 'Pending', 'Pending 02', 6, 'active', 1, 0, NULL, 0, '2013-12-16 00:00:00', 0, '2013-12-16 00:00:00'),
 (3, 'GLOBAL', 'Global', 'Global 01', 6, 'active', 1, 1, NULL, 0, '2014-04-04 00:00:00', 0, '2004-04-14 00:00:00'),
 (4, 'FUTURE', 'Future', 'Future Cost Type', 6, 'ACTIVE', 1, 1, NULL, 0, '2014-02-19 00:00:00', 34, '2014-12-30 08:23:19'),
-(5, 'AVERAGE', 'Average', 'Average 01', 9, 'ACTIVE', 1, 1, NULL, 0, '2014-04-04 00:00:00', 34, '2015-02-28 07:13:03');
+(5, 'AVERAGE', 'Average', 'Average 01', 9, 'ACTIVE', 1, 1, NULL, 0, '2014-04-04 00:00:00', 34, '2015-02-28 07:13:03'),
+(7, 'AVERAGE2', 'Average2', 'Average 01', 16, 'ACTIVE', 1, 1, NULL, 34, '2015-06-29 08:58:17', 34, '2015-06-29 08:58:17');
 
 -- --------------------------------------------------------
 
@@ -2366,7 +2369,7 @@ CREATE TABLE IF NOT EXISTS `bom_overhead` (
 INSERT INTO `bom_overhead` (`bom_overhead_id`, `overhead`, `description`, `org_id`, `status`, `overhead_type`, `default_basis`, `absorption_ac_id`, `resource_assignment_id`, `rate_assignment_id`, `ef_id`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (1, 'MTL_OH', 'Material Over Head01', 6, NULL, 'MOH', 'ITEM', 541, NULL, NULL, NULL, 0, '2014-04-30 00:00:00', 34, '2014-12-30 12:15:54'),
 (2, 'MFG_PRODA_OH01', 'Mfg Overhead for Product A', 6, '', 'MOH', 'ITEM', 0, NULL, NULL, NULL, 0, '2014-04-30 00:00:00', 0, '2030-04-14 00:00:00'),
-(3, 'MI_RESOH02', 'Resource OH 02AA', 6, NULL, 'OH', 'ITEM', 83, NULL, NULL, NULL, 0, '2014-09-26 00:00:00', 34, '2015-02-28 10:11:09');
+(3, 'MI_RESOH02', 'Resource OH 02AA', 6, NULL, 'OH', 'ITEM', 83, NULL, NULL, NULL, 0, '2014-09-26 00:00:00', 34, '2015-06-22 17:17:25');
 
 -- --------------------------------------------------------
 
@@ -2395,7 +2398,7 @@ INSERT INTO `bom_overhead_rate_assignment` (`bom_overhead_rate_assignment_id`, `
 (1, 1, 'PENDING', 'ITEM', 22, 0, '2014-04-30 00:00:00', 0, '2030-04-14 00:00:00'),
 (2, 1, 'GLOBAL', 'ITEM', 22, 0, '2014-04-30 00:00:00', 0, '2030-04-14 00:00:00'),
 (3, 1, 'FROZEN', 'ITEM', 22, 0, '2014-04-30 00:00:00', 0, '2030-04-14 00:00:00'),
-(4, 3, 'PENDING', 'ITEM', 500, 0, '2014-09-26 00:00:00', 0, '2026-09-14 00:00:00'),
+(4, 3, 'PENDING', 'ITEM', 650, 0, '2014-09-26 00:00:00', 34, '2015-06-22 17:17:26'),
 (5, 3, 'FROZEN', 'ITEM', 650, 0, '2014-09-26 00:00:00', 0, '2026-09-14 00:00:00'),
 (6, 2, 'PENDING', 'ITEM', 300, 0, '2014-04-30 00:00:00', 0, '2014-04-30 00:00:00'),
 (7, 1, 'GLOBAL', 'ITEM', 10, 34, '2014-12-30 12:15:56', 34, '2014-12-30 12:15:56');
@@ -2427,8 +2430,8 @@ INSERT INTO `bom_overhead_resource_assignment` (`bom_overhead_resource_assignmen
 (2, 2, 'FROZEN', 1, 0, '2014-04-30 00:00:00', 0, '2030-04-14 00:00:00'),
 (3, 1, 'PENDING', 1, 0, '2014-04-30 00:00:00', 0, '2030-04-14 00:00:00'),
 (4, 1, 'PENDING', 3, 0, '2014-04-30 00:00:00', 0, '2030-04-14 00:00:00'),
-(5, 3, 'PENDING', 1, 0, '2014-09-26 00:00:00', 34, '2015-02-28 10:11:10'),
-(6, 3, 'FROZEN', 3, 0, '2014-09-26 00:00:00', 34, '2015-02-28 10:11:10'),
+(5, 3, 'PENDING', 2, 0, '2014-09-26 00:00:00', 34, '2015-06-22 17:17:24'),
+(6, 3, 'FROZEN', 2, 0, '2014-09-26 00:00:00', 34, '2015-06-22 17:17:25'),
 (7, 3, 'PENDING', 2, 0, '2014-04-30 00:00:00', 34, '2015-02-28 10:11:10'),
 (8, 3, 'FROZEN', 2, 0, '2014-04-30 00:00:00', 34, '2015-02-28 10:11:10'),
 (9, 1, 'GLOBAL', 4, 34, '2014-12-30 12:15:54', 34, '2014-12-30 12:15:54');
@@ -5515,14 +5518,17 @@ CREATE TABLE IF NOT EXISTS `fp_planning_control` (
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`fp_planning_control_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `fp_planning_control`
 --
 
 INSERT INTO `fp_planning_control` (`fp_planning_control_id`, `org_id`, `auto_consumed_group_id`, `auto_consumed_frwd_days`, `auto_consumed_backwd_days`, `default_abc`, `net_wip_cb`, `net_po_cb`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
-(1, 6, 1, 20, 20, '111', 1, 1, 0, '2014-10-07 00:00:00', 34, '2015-03-01 11:41:18');
+(1, 6, 1, 40, 40, '111', 1, 1, 0, '2014-10-07 00:00:00', 34, '2015-06-23 04:10:10'),
+(2, 6, 1, 20, 20, '111', NULL, NULL, 34, '2015-06-23 04:04:39', 34, '2015-06-23 04:04:39'),
+(3, 6, 1, 40, 40, '111', 1, 1, 34, '2015-06-23 04:04:52', 34, '2015-06-23 04:04:52'),
+(4, 6, 1, 20, 20, '111', NULL, NULL, 34, '2015-06-23 04:05:43', 34, '2015-06-23 04:05:43');
 
 -- --------------------------------------------------------
 
@@ -6631,7 +6637,7 @@ CREATE TABLE IF NOT EXISTS `hr_approval_limit_assignment` (
 --
 
 INSERT INTO `hr_approval_limit_assignment` (`hr_approval_limit_assignment_id`, `hr_approval_limit_header_id`, `bu_org_id`, `job_id`, `position_id`, `document_type`, `start_date`, `end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
-(1, 1, 8, NULL, 1, 'PUR_STANDRAD_PO', '2000-08-01', NULL, 0, '2014-08-19 00:00:00', 0, '2019-08-14 00:00:00'),
+(1, 1, 5, 1, 1, 'PUR_STANDRAD_PO', '2000-08-02', NULL, 0, '2014-08-19 00:00:00', 34, '2015-06-23 09:23:09'),
 (2, 1, 8, NULL, 1, 'PUR_REQUISITION_EXTERN', '2000-08-01', NULL, 0, '2014-08-19 00:00:00', 0, '2019-08-14 00:00:00'),
 (3, 2, 8, NULL, 4, 'PUR_STANDRAD_PO', '2004-08-01', NULL, 0, '2014-08-19 00:00:00', 0, '2014-08-19 00:00:00'),
 (4, 2, 8, NULL, 4, 'PUR_REQUISITION_EXTERN', '2004-08-01', NULL, 0, '2014-08-19 00:00:00', 0, '2014-08-19 00:00:00'),
@@ -6675,7 +6681,7 @@ CREATE TABLE IF NOT EXISTS `hr_approval_limit_header` (
 
 INSERT INTO `hr_approval_limit_header` (`hr_approval_limit_header_id`, `bu_org_id`, `limit_name`, `description`, `status`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (1, 5, 'Level 1', 'Level 1', 'active', 0, '2014-08-24 00:00:00', 0, '2024-08-14 00:00:00'),
-(2, 5, 'Level 2', 'Level 2a', NULL, 0, '2014-08-24 00:00:00', 34, '2014-12-25 08:11:01');
+(2, 5, 'Level 2', 'Level 2a', NULL, 0, '2014-08-24 00:00:00', 34, '2015-06-23 09:22:25');
 
 -- --------------------------------------------------------
 
@@ -6898,7 +6904,7 @@ CREATE TABLE IF NOT EXISTS `hr_element_entry_tpl_header` (
 
 INSERT INTO `hr_element_entry_tpl_header` (`hr_element_entry_tpl_header_id`, `template_name`, `description`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (1, 'Grade 1A Standard', 'Grade 1A Standard Template', 34, '2014-11-20 12:09:20', 34, '2014-11-20 12:10:42'),
-(2, 'Grade 9', 'Grade 9 Template01', 34, '2014-11-22 08:18:10', 34, '2014-12-24 14:56:14');
+(2, 'Grade 9', 'Grade 9 Template01', 34, '2014-11-22 08:18:10', 34, '2015-06-23 08:55:24');
 
 -- --------------------------------------------------------
 
@@ -6929,9 +6935,9 @@ INSERT INTO `hr_element_entry_tpl_line` (`hr_element_entry_tpl_line_id`, `hr_ele
 (1, 1, 1, '5000', NULL, NULL, 34, '2014-11-20 12:10:42', 34, '2014-11-20 12:10:42'),
 (2, 1, 2, '2000', NULL, NULL, 34, '2014-11-20 12:10:42', 34, '2014-11-20 12:10:42'),
 (3, 1, 3, '1000', NULL, NULL, 34, '2014-11-20 12:10:42', 34, '2014-11-20 12:10:42'),
-(7, 2, 1, '30000', NULL, NULL, 34, '2014-11-22 08:26:19', 34, '2014-12-24 14:56:15'),
-(8, 2, 2, '20', NULL, NULL, 34, '2014-11-22 08:26:19', 34, '2014-12-24 14:56:15'),
-(9, 2, 3, '10', NULL, NULL, 34, '2014-11-22 08:26:19', 34, '2014-12-24 14:56:15');
+(7, 2, 1, '30000', NULL, NULL, 34, '2014-11-22 08:26:19', 34, '2015-06-23 08:55:25'),
+(8, 2, 2, '20', NULL, NULL, 34, '2014-11-22 08:26:19', 34, '2015-06-23 08:55:25'),
+(9, 2, 3, '10', NULL, NULL, 34, '2014-11-22 08:26:19', 34, '2015-06-23 08:55:25');
 
 -- --------------------------------------------------------
 
@@ -7176,10 +7182,11 @@ CREATE TABLE IF NOT EXISTS `hr_job` (
   `technology` varchar(256) DEFAULT NULL,
   `skillset` varchar(256) DEFAULT NULL,
   `position_type` varchar(25) DEFAULT NULL,
-  `usage` varchar(25) DEFAULT NULL,
+  `job_usage` varchar(25) DEFAULT NULL,
   `group_hr_job_id` int(25) DEFAULT NULL,
   `functional_area` varchar(50) DEFAULT NULL,
   `location` varchar(50) DEFAULT NULL,
+  `job_level` int(4) DEFAULT NULL,
   `status` varchar(20) DEFAULT NULL,
   `job_details` text,
   `primary_responsibility` text,
@@ -7198,9 +7205,9 @@ CREATE TABLE IF NOT EXISTS `hr_job` (
 -- Dumping data for table `hr_job`
 --
 
-INSERT INTO `hr_job` (`hr_job_id`, `job_code`, `job_name`, `start_date`, `end_date`, `description`, `min_education`, `min_experience`, `technology`, `skillset`, `position_type`, `usage`, `group_hr_job_id`, `functional_area`, `location`, `status`, `job_details`, `primary_responsibility`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
-(1, 'MFG_1211', 'Technician', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, 'FULL_TIME_REGULAR', NULL, NULL, 'ENGG', NULL, 'active', NULL, NULL, 0, '2014-08-08 00:00:00', 0, '2008-08-14 00:00:00'),
-(2, 'MFG_1210', 'Ops Manager', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, 'FULL_TIME_REGULAR', NULL, NULL, 'OPR', NULL, NULL, 'Job Details : Job Details : Job Details : Job Details :\r\nJob Details : Job Details : Job Details : Job Details :\r\nJob Details : Job Details : Job Details : Job Details :', NULL, 0, '2014-08-08 00:00:00', 34, '2014-12-24 11:40:56');
+INSERT INTO `hr_job` (`hr_job_id`, `job_code`, `job_name`, `start_date`, `end_date`, `description`, `min_education`, `min_experience`, `technology`, `skillset`, `position_type`, `job_usage`, `group_hr_job_id`, `functional_area`, `location`, `job_level`, `status`, `job_details`, `primary_responsibility`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+(1, 'MFG_1211', 'Technician', '0000-00-00', '0', '', '', '', '', '', 'FULL_TIME_REGULAR', '', 0, 'ENGG', '', 10, 'active', '', '', 0, '2014-08-08 00:00:00', 34, '2015-06-21 07:36:31'),
+(2, 'MFG_1210', 'Ops Manager', '0000-00-00', '0', '', '', '', '', '', 'FULL_TIME_REGULAR', '', 0, 'OPR', '', 20, '', 'Job Details : Job Details : Job Details : Job Details :\r\nJob Details : Job Details : Job Details : Job Details :\r\nJob Details : Job Details : Job Details : Job Details :', '', 0, '2014-08-08 00:00:00', 34, '2015-06-21 07:36:31');
 
 -- --------------------------------------------------------
 
@@ -7332,7 +7339,7 @@ CREATE TABLE IF NOT EXISTS `hr_leave_type` (
 INSERT INTO `hr_leave_type` (`hr_leave_type_id`, `leave_type`, `leave_category`, `description`, `allow_carry_forward_cb`, `carry_forward_per_year`, `maximum_accumulation`, `auto_convert_salary_cb`, `allow_advance_cb`, `lwp_cb`, `default_reason`, `status`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (1, 'Paid Leave', 'PAID', NULL, 1, '10.00000', '50.00000', 1, 1, 1, NULL, 'active', 0, '2014-08-17 00:00:00', 0, '2017-08-14 00:00:00'),
 (2, 'Medical Leave', 'PAID', NULL, NULL, '12.00000', '50.00000', NULL, 1, NULL, NULL, 'active', 0, '2014-08-17 00:00:00', 0, '2017-08-14 00:00:00'),
-(3, 'Legal Leave', 'LEGAL', 'TEST01', 1, '2.00000', '5.00000', 1, 1, 1, NULL, NULL, 0, '2014-08-17 00:00:00', 34, '2015-03-07 08:40:11');
+(3, 'Legal Leave', 'LEGAL', 'TEST01', 1, '2.00000', '5.00000', 1, 1, 1, NULL, NULL, 0, '2014-08-17 00:00:00', 34, '2015-06-23 09:42:45');
 
 -- --------------------------------------------------------
 
@@ -9106,11 +9113,11 @@ CREATE TABLE IF NOT EXISTS `mdm_tax_code` (
 
 INSERT INTO `mdm_tax_code` (`mdm_tax_code_id`, `org_id`, `tax_code`, `tax_type`, `dr_cr`, `in_out`, `description`, `printed_tax_name`, `tax_regime`, `tax_jurisdiction`, `offset_tax_code`, `allow_adhoc_rate_cb`, `allow_tax_exemptions_cb`, `calculation_method`, `percentage`, `tax_amount`, `tax_ac_id`, `status`, `effective_start_date`, `effective_end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (1, 5, 'I_US_STD_V10', 'VAT', 'DR', 'IN', 'US Standard VAT 10.2', NULL, NULL, NULL, NULL, 1, 1, 'PERCENTAGE', '10.20000', NULL, 46, '', '2014-06-24', NULL, 0, '2014-06-03 05:12:48', 34, '2015-03-08 09:03:38'),
-(2, 5, 'I_US_STD_V0', 'VAT', 'DR', 'IN', 'US Standard VAT 0', NULL, NULL, NULL, NULL, 1, 1, 'PERCENTAGE', NULL, NULL, 46, '', '2001-01-01', NULL, 0, '2014-06-03 05:12:47', 34, '2015-03-08 09:04:30'),
-(3, 5, 'O_US_STD_V10', 'VAT', 'CR', 'OUT', 'US Standard VAT 10.2', NULL, NULL, NULL, NULL, 1, 1, 'PERCENTAGE', '10.20000', NULL, 541, 'ACTIVE', '2001-01-01', NULL, 0, '2014-06-03 05:12:49', 34, '2014-12-26 17:55:31'),
-(5, 5, 'O_US_STD_V0', 'VAT', 'CR', 'OUT', 'US Standard VAT 0', NULL, NULL, NULL, NULL, 1, 1, 'PERCENTAGE', NULL, NULL, 1966, 'active', '2014-01-01', NULL, 0, '2014-06-03 05:35:10', 0, '2014-06-03 05:35:10'),
+(2, 5, 'I_US_STD_V0', 'VAT', 'DR', 'IN', 'US Standard VAT 0', NULL, NULL, NULL, NULL, 1, 1, 'PERCENTAGE', NULL, NULL, 46, '', '2001-01-01', NULL, 0, '2014-06-03 05:12:47', 34, '2015-06-23 04:15:19'),
+(3, 5, 'O_US_STD_V10', 'VAT', 'CR', 'OUT', 'US Standard VAT 10.2', NULL, NULL, NULL, NULL, 1, 1, 'PERCENTAGE', '10.10000', NULL, 46, 'ACTIVE', '2001-01-01', NULL, 0, '2014-06-03 05:12:49', 34, '2015-06-23 04:15:20'),
+(5, 5, 'O_US_STD_V0', 'VAT', 'CR', 'OUT', 'US Standard VAT 0', NULL, NULL, NULL, NULL, 1, 1, 'PERCENTAGE', NULL, NULL, 46, '', '2014-01-01', NULL, 0, '2014-06-03 05:35:10', 34, '2015-06-23 04:15:19'),
 (6, 5, 'O_US_STD_V12P5', 'VAT', 'CR', 'OUT', 'US Standard VAT 10.5', NULL, NULL, NULL, NULL, 1, 1, 'PERCENTAGE', '11.50000', NULL, 52, 'ACTIVE', '2014-01-01', NULL, 34, '2014-12-26 17:55:31', 34, '2015-03-08 09:01:17'),
-(7, 5, 'O_US_STD_V12P10', 'VAT', 'CR', 'OUT', 'US Standard VAT 12.10', NULL, NULL, NULL, NULL, 1, 1, 'PERCENTAGE', '12.10000', NULL, 4852, 'ACTIVE', '2015-01-10', NULL, 34, '2015-01-09 11:40:24', 34, '2015-01-09 11:40:24');
+(7, 5, 'O_US_STD_V12P10', 'VAT', 'CR', 'OUT', 'US Standard VAT 12.10', NULL, NULL, NULL, NULL, 1, 1, 'PERCENTAGE', '12.10000', NULL, 46, 'ACTIVE', '2015-01-10', NULL, 34, '2015-01-09 11:40:24', 34, '2015-06-23 04:15:19');
 
 -- --------------------------------------------------------
 
@@ -9384,7 +9391,7 @@ CREATE TABLE IF NOT EXISTS `option_header` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`option_header_id`),
   UNIQUE KEY `option_type` (`option_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=250 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=254 ;
 
 --
 -- Dumping data for table `option_header`
@@ -9539,7 +9546,11 @@ INSERT INTO `option_header` (`option_header_id`, `access_level`, `option_type`, 
 (246, 'SYSTEM', 'PRJ_EXPENDITURE_CATEGORY', 'Project Expenditure Categories', 'prj', NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:17:02', 34, '2015-06-14 09:19:57'),
 (247, 'BOTH', 'PRJ_REVENUE_CATEGORY', 'Project Revenue Categories', 'prj', NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:23:42', 34, '2015-06-14 09:25:14'),
 (248, 'SYSTEM', 'PRJ_RESOURCE_CLASS', 'Project Resource Class', 'prj', NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 15:21:20', 34, '2015-06-14 15:22:17'),
-(249, 'BOTH', 'PRJ_WORK_UTILIZATION_TYPE', 'Project Work Utilization Type', 'prj', NULL, NULL, NULL, NULL, NULL, 34, '2015-06-18 06:41:22', 34, '2015-06-18 06:41:22');
+(249, 'BOTH', 'PRJ_WORK_UTILIZATION_TYPE', 'Project Work Utilization Type', 'prj', NULL, NULL, NULL, NULL, NULL, 34, '2015-06-18 06:41:22', 34, '2015-06-18 06:41:22'),
+(250, 'BOTH', 'CE_SERVICE TYPE', 'Service Type - Common Entity', 'adm', NULL, NULL, NULL, NULL, NULL, 34, '2015-06-21 06:35:53', 34, '2015-06-21 06:37:59'),
+(251, 'SYSTEM', 'PRJ_BUDGET_ENTRY_METHOD', 'Project Budget Entry Method', 'prj', NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:20:27', 34, '2015-06-22 07:24:45'),
+(252, 'BOTH', 'PRJ_BUDGET_TYPE', 'Project Budget Type', 'prj', NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:08', 34, '2015-07-03 15:32:40'),
+(253, 'BOTH', 'PRJ_PROJECT_PHASE', 'Project Phases', 'prj', NULL, NULL, NULL, NULL, NULL, 34, '2015-07-08 03:35:43', 34, '2015-07-08 05:05:38');
 
 -- --------------------------------------------------------
 
@@ -9554,7 +9565,7 @@ CREATE TABLE IF NOT EXISTS `option_line` (
   `option_line_value` varchar(50) CHARACTER SET latin1 NOT NULL,
   `description` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
   `value_group_id` int(12) DEFAULT NULL,
-  `efid` int(12) DEFAULT NULL,
+  `priority` int(4) DEFAULT NULL,
   `status` enum('active','inactive') CHARACTER SET latin1 DEFAULT NULL,
   `rev_enabled` enum('enabled','disabled') CHARACTER SET latin1 DEFAULT NULL,
   `rev_number` int(12) DEFAULT NULL,
@@ -9567,13 +9578,13 @@ CREATE TABLE IF NOT EXISTS `option_line` (
   PRIMARY KEY (`option_line_id`),
   UNIQUE KEY `option_header_id_2` (`option_header_id`,`option_line_code`),
   KEY `option_header_id` (`option_header_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1227 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1253 ;
 
 --
 -- Dumping data for table `option_line`
 --
 
-INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_code`, `option_line_value`, `description`, `value_group_id`, `efid`, `status`, `rev_enabled`, `rev_number`, `effective_start_date`, `effective_end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_code`, `option_line_value`, `description`, `value_group_id`, `priority`, `status`, `rev_enabled`, `rev_number`, `effective_start_date`, `effective_end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (71, 77, 'ENTERPRISE', 'Enterprise', 'Enterprise Org', NULL, 0, '', 'enabled', 1, '2000-01-01', '', 0, '2014-03-26 07:45:39', 0, '2026-03-14 07:45:39'),
 (72, 77, 'LEGAL_ORG', 'Legal', 'Legal Org', NULL, 0, '', 'enabled', 1, '2000-01-01', '', 0, '2014-03-26 07:45:40', 0, '2026-03-14 07:45:40'),
 (73, 77, 'BUSINESS_ORG', 'Business', 'Business Org', NULL, 0, '', 'enabled', 1, '2000-01-01', '', 0, '2014-03-26 07:45:38', 0, '2026-03-14 07:45:38'),
@@ -9910,7 +9921,7 @@ INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_co
 (486, 156, 'UNPOSTED', 'Unposted', 'Unposted', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-02 12:03:19', 2, '0000-00-00 00:00:00'),
 (487, 157, 'GL_REVERSAL', 'GL Reversal', 'GL Reversal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-03-03 03:04:14', 0, '2014-03-03 03:04:14'),
 (488, 159, 'CANCELLED', 'Cancelled', 'Cancelled', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 07:38:04', 0, '2024-03-14 07:38:04');
-INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_code`, `option_line_value`, `description`, `value_group_id`, `efid`, `status`, `rev_enabled`, `rev_number`, `effective_start_date`, `effective_end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_code`, `option_line_value`, `description`, `value_group_id`, `priority`, `status`, `rev_enabled`, `rev_number`, `effective_start_date`, `effective_end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (489, 159, 'INCOMPLETE', 'Incomplete', 'Incomplete', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 07:38:01', 0, '2024-03-14 07:38:01'),
 (490, 159, 'APPROVED', 'Approved', 'Approved', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 07:38:04', 0, '2024-03-14 07:38:04'),
 (491, 159, 'REAPPROVAL', 'Require ReApproval', 'Require ReApproval', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 07:38:02', 0, '2024-03-14 07:38:02'),
@@ -10246,7 +10257,7 @@ INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_co
 (848, 134, 'XOF', 'XOF', 'Benin, Burkina Faso, C?te d''Ivoire, Guinea-Bissau, Mali, Niger, Senegal, Togo', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:34', 0, '2002-08-14 13:40:34'),
 (849, 134, 'XPT', 'Platinum', ' (one Troy ounce)', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
 (850, 134, 'XTS', 'Code ', 'reserved for testing purposes', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42');
-INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_code`, `option_line_value`, `description`, `value_group_id`, `efid`, `status`, `rev_enabled`, `rev_number`, `effective_start_date`, `effective_end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_code`, `option_line_value`, `description`, `value_group_id`, `priority`, `status`, `rev_enabled`, `rev_number`, `effective_start_date`, `effective_end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (851, 134, 'YER', 'Yemeni Rial', 'Yemen', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
 (852, 134, 'ZAR', 'South African Rand', 'South Africa', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:34', 0, '2002-08-14 13:40:34'),
 (853, 134, 'ZMK', 'Kwacha', 'Zambia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
@@ -10583,7 +10594,7 @@ INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_co
 (1194, 241, 'REPLACEMENT', 'Replacement', 'Replacement', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:49', 34, '2015-05-31 05:10:49'),
 (1195, 241, 'STANDARD', 'Standard', 'Standard', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:50', 34, '2015-05-31 05:10:50'),
 (1196, 242, 'MATERIAL', 'Material', 'Material', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 19:43:32', 34, '2015-05-31 19:43:32');
-INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_code`, `option_line_value`, `description`, `value_group_id`, `efid`, `status`, `rev_enabled`, `rev_number`, `effective_start_date`, `effective_end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_code`, `option_line_value`, `description`, `value_group_id`, `priority`, `status`, `rev_enabled`, `rev_number`, `effective_start_date`, `effective_end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (1197, 242, 'LABOR', 'Labor', 'Labor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 19:43:32', 34, '2015-05-31 19:43:32'),
 (1198, 242, 'EXPENSE', 'Expense', 'Expense', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 19:43:32', 34, '2015-05-31 19:43:32'),
 (1199, 243, 'CONTRACT', 'Contract', 'Contract', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-02 14:20:48', 34, '2015-06-02 14:20:48'),
@@ -10613,7 +10624,33 @@ INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_co
 (1223, 248, 'ITEM', 'Material Items', 'Material Items', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 15:22:16', 34, '2015-06-14 15:22:16'),
 (1224, 248, 'LABOR', 'Labor', 'Labor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 15:22:16', 34, '2015-06-14 15:22:16'),
 (1225, 248, 'FINANCE', 'Financial Elements', 'Financial Elements', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 15:22:17', 34, '2015-06-14 15:22:17'),
-(1226, 248, 'EQUIPMENT', 'Equipment', 'Equipment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 15:22:17', 34, '2015-06-14 15:22:17');
+(1226, 248, 'EQUIPMENT', 'Equipment', 'Equipment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 15:22:17', 34, '2015-06-14 15:22:17'),
+(1227, 250, 'BENEFITS', 'Benefits', 'Benefits', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-21 06:38:00', 34, '2015-06-21 06:38:00'),
+(1228, 250, 'CONTRACT_ADMINISTRATION', 'Contract Administration', 'Contract Administration', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-21 06:38:00', 34, '2015-06-21 06:38:00'),
+(1229, 250, 'BUDGET_CONTROL', 'Budget Control', 'Budget Control', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-21 06:38:01', 34, '2015-06-21 06:38:01'),
+(1230, 250, 'BUSINESS_DEVELOPMENT', 'Business Development', 'Business Development', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-21 06:38:01', 34, '2015-06-21 06:38:01'),
+(1231, 250, 'BUILD', 'Build', 'Build', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-21 06:38:02', 34, '2015-06-21 06:38:02'),
+(1232, 250, 'CONTRACT CHANGE MANAGEMENT', 'Contract Change Management', 'Contract Change Management', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-21 06:38:02', 34, '2015-06-21 06:38:02'),
+(1233, 251, 'LOWEST_TASK', 'Lowest Task', 'Lowest Task', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:45', 34, '2015-06-22 07:24:45'),
+(1234, 251, 'LOWEST_TASK_PERIOD', 'Lowest Task, Period', 'Lowest Task, Period', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:46', 34, '2015-06-22 07:24:46'),
+(1235, 251, 'TOP_TASK_DATE', 'Top Task, Date Range', 'Top Task, Date Range', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:46', 34, '2015-06-22 07:24:46'),
+(1236, 251, 'LOWEST_TASK_DATE', 'Lowest Task, Date Range', 'Lowest Task, Date Range', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:47', 34, '2015-06-22 07:24:47'),
+(1237, 251, 'TOP_TASK', 'Top Task', 'Equipment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:47', 34, '2015-06-22 07:24:47'),
+(1238, 251, 'TOP_TASK_PERIOD', 'Top Task, Period', 'Top Task, Period', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:48', 34, '2015-06-22 07:24:48'),
+(1239, 251, 'PROJECT_PERIOD', 'Project by Period', 'Project by Period', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:48', 34, '2015-06-22 07:24:48'),
+(1240, 251, 'WORK_ORDER', 'Work Order', 'Work Order', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:49', 34, '2015-06-22 07:24:49'),
+(1241, 252, 'APPR_COST', 'Approved Cost', 'Approved Cost', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:09', 34, '2015-07-03 15:32:41'),
+(1242, 252, 'APPR_REV', 'Approved Revenue', 'Approved Revenue', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:09', 34, '2015-07-03 15:32:40'),
+(1243, 252, 'COST_EST', 'Cost Estimate', 'Cost Estimate', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:09', 34, '2015-07-03 15:32:41'),
+(1244, 252, 'REV_EST', 'Revenue Estimate', 'Revenue Estimate', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:09', 34, '2015-07-03 15:32:40'),
+(1245, 252, 'COST_FORECAST', 'Cost Forecast', 'Cost Forecast', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:10', 34, '2015-07-03 15:32:40'),
+(1246, 252, 'REV_FORECAST', 'Revenue Forecast', 'Revenue Forecast', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:10', 34, '2015-07-03 15:32:41'),
+(1247, 253, 'IN', 'Initiation', 'Initiation', NULL, 1, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-08 03:35:44', 34, '2015-07-08 05:05:38'),
+(1248, 253, 'PL', 'Planning', 'Planning', NULL, 2, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-08 03:35:44', 34, '2015-07-08 05:05:38'),
+(1249, 253, 'EX', 'Execution', 'Execution', NULL, 3, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-08 03:35:44', 34, '2015-07-08 05:05:38'),
+(1250, 253, 'MC', 'Monitoring & Control', 'Monitoring & Control', NULL, 4, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-08 03:35:44', 34, '2015-07-08 05:05:38'),
+(1251, 253, 'CL', 'Closure', 'Closure', NULL, 5, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-08 03:35:44', 34, '2015-07-08 05:05:39'),
+(1252, 253, 'DE', 'Definition', 'Definition', NULL, 6, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-08 03:35:44', 34, '2015-07-08 05:05:39');
 
 -- --------------------------------------------------------
 
@@ -10746,7 +10783,7 @@ CREATE TABLE IF NOT EXISTS `path` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`path_id`),
   UNIQUE KEY `name` (`name`,`module_code`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=734 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=761 ;
 
 --
 -- Dumping data for table `path`
@@ -10974,7 +11011,7 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (260, 258, 'Search Item Cost', 'search.php?class_name=cst_item_cost_header', 'Search Item Cost', 'cst', 'cst_item_cost_header', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-04-11 00:00:00', 34, '2015-05-05 14:58:45'),
 (261, 257, 'Cost Update', 'multi_select.php?class_name=cst_item_cost_header&action=COST_UPDATE&mode=9&action_class_name=cst_item_cost_header&show_block=1', 'Standard Cost Upate', 'cst', 'cst_item_cost_header', 9, NULL, NULL, NULL, NULL, NULL, 0, '2014-04-22 00:00:00', 34, '2015-05-05 14:59:11'),
 (262, 109, 'Search BOM V', 'search.php?class_name=bom_all_v', 'Search BOM view', 'bom', 'bom_all_v', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-09-23 00:00:00', 0, '2023-09-14 00:00:00'),
-(263, 109, 'Indented BOM', 'form.php?class_name=indented_bom&mode=2', 'Indented BOM', 'bom', 'indented_bom', 2, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-23 00:00:00', 0, '2023-09-14 00:00:00'),
+(263, 109, 'Indented BOM', 'form.php?class_name=bom_indented_bom&mode=2', 'Indented BOM', 'bom', 'bom_indented_bom', 2, NULL, NULL, 'REPORT', NULL, NULL, 0, '2014-09-23 00:00:00', 34, '2015-06-22 17:38:27'),
 (264, 261, 'Prg Cost Update', 'program.php?class_name=cst_item_cost_header&program_name=prg_standard_cost_update', 'Program - Standard Cost Update', 'cst', 'cst_item_cost_header', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-04-22 00:00:00', 34, '2015-05-05 14:45:44'),
 (265, 274, 'Search Program Requests', 'search.php?class_name=sys_program', 'Search All Programs Requests', 'adm', 'sys_program', NULL, NULL, 'sys_program_id', NULL, 1, NULL, 0, '2014-04-24 00:00:00', 0, '2010-06-14 00:00:00'),
 (266, 274, 'Start Main Program', 'modules/sys/program/start_program.php', 'Start Program', 'adm', NULL, NULL, NULL, '', NULL, NULL, NULL, 0, '2014-04-24 00:00:00', 0, '2010-06-14 00:00:00'),
@@ -11159,14 +11196,14 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (444, 53, 'Serial Number', 'form.php?class_name=inv_serial_number&mode=9', 'Serial Number', 'inv', 'inv_serial_number', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-09-19 00:00:00', 0, '2019-09-14 00:00:00'),
 (447, 444, 'Search Serial Number', 'search.php?class_name=inv_serial_number', 'Search Serial Number', 'inv', 'inv_serial_number', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-09-15 00:00:00', 0, '2014-09-15 00:00:00'),
 (448, 364, 'Generate Serial Number', 'program.php?class_name=inv_serial_number&program_name=prg_create_serial_number', 'Generate Predefined Serial Number', 'inv', 'inv_serial_number', 2, NULL, NULL, 'PROGRAM', NULL, NULL, 0, '2014-09-15 00:00:00', 0, '2014-09-15 00:00:00'),
-(449, 444, 'Serial Transactions', 'form.php?class_name=inv_serial_transaction_v&mode=2', 'Serial Transactions', 'inv', 'inv_serial_transaction_v', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-09-19 00:00:00', 0, '2014-09-19 00:00:00'),
+(449, 444, 'Serial Transactions', 'search.php?class_name=inv_serial_transaction_v&mode=2', 'Search Serial Transactions', 'inv', 'inv_serial_transaction_v', 2, NULL, NULL, 'SEARCH', NULL, NULL, 0, '2014-09-19 00:00:00', 34, '2015-06-23 11:55:55'),
 (450, NULL, 'BOM', 'form.php?module_code=bom', 'BOM', 'bom', 'bom', 2, NULL, NULL, NULL, NULL, 13, 0, '2014-09-23 00:00:00', 0, '2023-09-14 00:00:00'),
 (451, 450, 'Programs', 'form.php?module_code=bom&type=program', 'BOM Programs', 'bom', 'bom', 2, NULL, NULL, 'PROGRAM', NULL, 99, 0, '2014-09-23 00:00:00', 0, '2014-09-23 00:00:00'),
 (452, 124, 'Search Routing Header', 'search.php?class_name=bom_routing_header', 'Search Routing Header', 'bom', 'bom_routing_header', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-09-24 00:00:00', 0, '2024-09-14 00:00:00'),
 (453, 125, 'Setup', 'form.php?module_code=wip&type=setup', 'Setup', 'wip', 'wip', 9, NULL, NULL, 'SETUP', NULL, 50, 0, '2014-10-10 00:00:00', 1, '2015-01-05 17:19:54'),
 (454, 53, 'Lot Number', 'form.php?class_name=inv_lot_number&mode=9', 'Lot Number', 'inv', 'inv_lot_number', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-09-30 00:00:00', 0, '2014-09-30 00:00:00'),
 (456, 454, 'Search Lot Number', 'search.php?class_name=inv_lot_number', 'Search Lot Number', 'inv', 'inv_lot_number', 2, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-30 00:00:00', 0, '2014-09-30 00:00:00'),
-(457, 454, 'Lot Transactions', 'form.php?class_name=inv_lot_transaction_v&mode=2', 'Lot Transactions', 'inv', 'inv_lot_transaction_v', 2, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-10-03 00:00:00', 0, '2014-10-03 00:00:00'),
+(457, 454, 'Lot Transactions', 'search.php?class_name=inv_lot_transaction_v&mode=2', 'Lot Transactions', 'inv', 'inv_lot_transaction_v', 2, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-10-03 00:00:00', 34, '2015-06-23 14:39:47'),
 (458, 285, 'Forecast Group', 'form.php?class_name=fp_forecast_group&mode=9', 'Forecast Group', 'fp', 'fp_forecast_group', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-10-07 00:00:00', 0, '2014-10-07 00:00:00'),
 (460, 458, 'Search Forecast Group', 'search.php?class_name=fp_forecast_group', 'Search Forecast Group', 'fp', 'fp_forecast_group', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-10-07 00:00:00', 0, '2014-10-07 00:00:00'),
 (461, 284, 'Setup', 'form.php?module_code=fp&type=setup', 'FP Setup', 'fp', 'fp', 2, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 00:00:00', 0, '2014-10-07 00:00:00'),
@@ -11179,7 +11216,7 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (468, 285, 'Forecast Line Date v', 'search.php?class_name=fp_forecast_line_date_v', 'Forecast Line Date v', 'fp', 'fp_forecast_line_date_v', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-10-17 00:00:00', 0, '2017-10-14 00:00:00'),
 (469, 285, 'Forecast Over Consumption', 'search.php?class_name=fp_forecast_over_consumption_v', 'Forecast Over Consumption', 'fp', 'fp_forecast_over_consumption_v', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-10-18 13:33:42', 0, '2014-10-18 13:33:42'),
 (470, 59, 'Favourite', 'form.php?class_name=user_favourite&mode=9', 'Favourite', 'adm', 'user_favourite', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-10-22 13:34:59', 34, '2015-06-14 07:40:24'),
-(471, 274, 'Convert To Production', 'program.php?class_name=convertToProd&program_name=prg_convert_to_prod', 'Convert To Production', 'adm', 'convertToProd', 9, NULL, NULL, 'PROGRAM', NULL, NULL, 34, '2014-10-23 05:37:52', 34, '2014-10-23 05:37:52'),
+(471, 274, 'Convert To Production', 'program.php?class_name=extn_convertToProd&program_name=prg_convert_to_prod', 'Convert To Production', 'adm', 'extn_convertToProd', 2, NULL, NULL, 'PROGRAM', NULL, NULL, 34, '2014-10-23 05:37:52', 34, '2015-07-10 06:43:42'),
 (474, 50, 'Custom report subinventory_locators', 'form.php?class_name=view_result&mode=2&view_id=1', 'Custom report subinventory_locators - Subinventory Locators', 'sys', NULL, NULL, NULL, NULL, 'REPORT', NULL, NULL, 34, '2014-10-25 10:58:29', 34, '2014-10-25 10:58:29'),
 (475, 18, 'Custom report option_type', 'form.php?class_name=view_result&mode=2&view_id=9', 'Custom report option_type - option types', 'sys', NULL, 2, NULL, NULL, 'REPORT', NULL, NULL, 34, '2014-10-25 11:04:35', 34, '2014-10-25 11:04:35'),
 (476, 55, 'Custom report Onhand', 'form.php?class_name=view_result&mode=2&view_id=10', 'Custom report Onhand - Curret Onhand', 'sys', NULL, 2, NULL, NULL, 'REPORT', NULL, NULL, 34, '2014-10-27 05:03:03', 34, '2014-10-27 05:03:03'),
@@ -11336,7 +11373,7 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (632, 636, 'Material Transaction', 'form.php?class_name=am_material_transaction&mode=9', 'Material Transaction', 'am', 'am_material_transaction', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-03-22 05:04:12', 34, '2015-03-23 13:54:14'),
 (633, 632, 'Search Transactions', 'search.php?class_name=am_material_transaction&transaction_type_id=24,25', 'Search Material Transactions', 'am', 'am_material_transaction', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-03-22 06:08:30', 34, '2015-03-22 06:08:30'),
 (634, 636, 'Resource Transaction', 'form.php?class_name=am_resource_transaction&mode=9', 'Resource Transaction', 'am', 'am_resource_transaction', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-03-22 15:38:45', 34, '2015-03-23 13:54:23'),
-(635, 634, 'Search Resource Trnx.', 'serach.php?class_name=am_resource_transaction&mode=9', 'Search Resource Transaction', 'am', 'am_resource_transaction', 9, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-03-22 15:39:50', 34, '2015-03-22 15:39:50'),
+(635, 634, 'Search Resource Trnx.', 'search.php?class_name=am_resource_transaction&mode=9', 'Search Resource Trnx.', 'am', 'am_resource_transaction', 9, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-03-22 15:39:50', 34, '2015-06-23 14:41:20'),
 (636, 594, 'Mainteance Work Bench', 'form.php?class_name=am_wo_work_bench&mode=9', 'Mainteance Work Bench', 'am', 'am_wo_work_bench', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-03-23 13:52:31', 34, '2015-03-23 13:52:31'),
 (637, 636, 'Move Transaction', 'form.php?class_name=am_move_transaction&mode=9', 'Move Transaction', 'am', 'am_move_transaction', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-03-23 13:54:03', 34, '2015-03-23 13:54:03'),
 (638, 594, 'Programs', 'form.php?module_code=am&type=program', 'Programs', 'am', 'am', 2, NULL, NULL, 'PROGRAM', NULL, NULL, 34, '2015-03-25 09:36:50', 34, '2015-03-25 09:36:50'),
@@ -11367,7 +11404,7 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (665, 664, 'Search Program Schedule', 'search.php?class_name=sys_program_schedule', 'Search Program Schedule', 'adm', 'sys_program_schedule', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-04-13 04:40:59', 34, '2015-04-13 04:42:22'),
 (666, 664, 'Start Scheduler', 'modules/sys/program_schedule/start_program_scheduler.php', 'Start Program Scheduler', 'adm', 'sys_program_schedule', 10, NULL, NULL, 'PROGRAM', NULL, NULL, 34, '2015-04-13 07:04:47', 34, '2015-04-13 07:04:47'),
 (667, 329, 'Message Format', 'form.php?class_name=sys_message_format&mode=9', 'Message Format', 'adm', 'sys_message_format', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-04-15 16:41:13', 34, '2015-04-15 16:41:13'),
-(668, 667, 'Search Message Format', 'searc.php?class_name=sys_message_format&mode=9', 'Search Message Format', 'adm', 'sys_message_format', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-04-15 16:42:22', 34, '2015-04-15 16:42:22'),
+(668, 667, 'Search Message Format', 'search.php?class_name=sys_message_format&mode=9', 'Search Message Format', 'adm', 'sys_message_format', 9, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-04-15 16:42:22', 34, '2015-06-23 15:56:34'),
 (669, NULL, 'Service Help Desk', 'form.php?module_code=hd', 'Help Desk', 'hd', 'hd', 2, NULL, NULL, 'CONTENT', NULL, 15, 34, '2015-04-16 08:37:55', 34, '2015-06-08 04:32:05'),
 (670, 669, 'Support Request', 'form.php?class_name=hd_support_request&mode=9', 'Support Request', 'hd', 'hd_support_request', 9, NULL, NULL, 'FORM', NULL, 12, 34, '2015-04-16 08:38:53', 34, '2015-04-16 08:38:53'),
 (671, 670, 'Search Support Request', 'search.php?class_name=hd_support_request&mode=9', 'Search Support Request', 'hd', 'hd_support_request', 9, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-04-16 08:40:49', 34, '2015-04-16 08:40:49'),
@@ -11406,30 +11443,58 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (706, 669, 'Service Contract', 'form.php?class_name=hd_service_contract_header&mode=9', 'Service Contract Header', 'hd', 'hd_service_contract_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-12 20:42:57', 34, '2015-06-12 20:42:57'),
 (707, 706, 'Search Contract', 'search.php?class_name=hd_service_contract_header', 'Service Contract Header', 'hd', 'hd_service_contract_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-06-12 20:45:08', 34, '2015-06-12 20:45:08'),
 (708, NULL, 'Projects', 'form.php?module_code=prj', 'Projects', 'prj', 'prj', 2, NULL, NULL, 'CONTAINER', NULL, 35, 34, '2015-06-14 07:18:52', 34, '2015-06-14 07:58:55'),
-(709, 708, 'Project Category', 'form.php?class_name=prj_category_header&mode=9', 'Project Category Header', 'pos', 'prj_category_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-14 07:19:50', 34, '2015-06-14 07:19:50'),
+(709, 755, 'Project Category', 'form.php?class_name=prj_category_header&mode=9', 'Category Header', 'prj', 'prj_category_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-14 07:19:50', 34, '2015-07-07 04:28:50'),
 (710, 709, 'Search Category', 'search.php?class_name=prj_category_header', 'Search Project Categories', 'prj', 'prj_category_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-06-14 07:21:41', 34, '2015-06-14 07:21:41'),
 (711, 708, 'Setup', 'form.php?module_code=prj&type=setup', 'Project Setups', 'prj', 'prj', 2, NULL, NULL, 'SETUP', NULL, 90, 34, '2015-06-14 08:24:13', 34, '2015-06-16 10:40:07'),
 (712, 711, 'Customer Relationship', 'form.php?class_name=option_header&option_header_id=245&mode=9', 'Customer Relationship', 'prj', 'option_header', 9, NULL, NULL, 'SETUP', NULL, NULL, 34, '2015-06-14 08:26:23', 34, '2015-06-14 09:31:41'),
 (713, 711, 'Expenditure Category', 'form.php?class_name=option_header&option_header_id=246&mode=9', 'Expenditure Category', 'prj', 'option_header', 9, NULL, NULL, 'SETUP', NULL, NULL, 34, '2015-06-14 09:23:02', 34, '2015-06-14 09:29:17'),
 (714, 711, 'Revenue Category', 'form.php?class_name=option_header&option_header_id=247&mode=9', 'Revenue Category', 'prj', 'option_header', 9, NULL, NULL, 'SETUP', NULL, NULL, 34, '2015-06-14 09:26:47', 34, '2015-06-14 09:26:47'),
 (716, 711, 'Project Customer Relation', 'form.php?class_name=option_header&option_header_id=245&mode=9', 'Project Customer Relationship', 'prj', 'option_header', 9, NULL, NULL, 'SETUP', NULL, NULL, 34, '2015-06-14 09:34:21', 34, '2015-06-14 09:34:21'),
-(717, 708, 'Expenditure Type', 'form.php?class_name=prj_expenditure_type&mode=9', 'Expenditure Type', 'prj', 'prj_expenditure_type', 9, NULL, NULL, 'SETUP', NULL, NULL, 34, '2015-06-14 12:46:55', 34, '2015-06-14 13:05:48'),
-(718, 717, 'Multi-Action Expenditure Type', 'multi_select.php?class_name=prj_expenditure_type&mode=9&show_block=1', 'Multi-Action Expenditure Type', 'prj', 'prj_expenditure_type', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-14 13:03:29', 34, '2015-06-14 13:06:03'),
-(719, 717, 'Search Expenditure Type', 'search.php?class_name=prj_expenditure_type', 'Search Expenditure Type', 'prj', 'prj_expenditure_type', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-06-14 13:04:29', 34, '2015-06-14 13:04:29'),
-(720, 708, 'Non-Labor Reource', 'form.php?class_name=prj_nlr_header&mode=9', 'Non-Labor Reources For Projects', 'prj', 'prj_nlr_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-14 14:45:54', 34, '2015-06-14 14:45:54'),
+(717, 754, 'Expenditure Type', 'form.php?class_name=prj_expenditure_type_header&mode=9', 'Expenditure Type Header', 'prj', 'prj_expenditure_type_header', 9, NULL, NULL, 'SETUP', NULL, NULL, 34, '2015-06-14 12:46:55', 34, '2015-07-07 04:19:01'),
+(718, 717, 'Multi Expenditure Type', 'multi_select.php?class_name=prj_expenditure_type_header&mode=9&show_block=1', 'Expenditure Type Header', 'prj', 'prj_expenditure_type_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-14 13:03:29', 34, '2015-07-06 11:01:30'),
+(719, 717, 'Search Expenditure Type', 'search.php?class_name=prj_expenditure_type_header', 'Search Expenditure Type', 'prj', 'prj_expenditure_type_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-06-14 13:04:29', 34, '2015-07-06 11:01:53'),
+(720, 754, 'Non-Labor Resource', 'form.php?class_name=prj_nlr_header&mode=9', 'Non-Labor Resource', 'prj', 'prj_nlr_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-14 14:45:54', 34, '2015-07-07 03:24:07'),
 (721, 720, 'Search Non-Labor Resource', 'search.php?class_name=prj_nlr_header', 'Search Non-Labor Resource', 'prj', 'prj_nlr_header', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-14 14:50:49', 34, '2015-06-14 14:50:49'),
 (722, 711, 'Resource Class', 'form.php?class_name=option_header&option_header_id=248&mode=2', 'Resource Class', 'prj', 'option_header', 2, NULL, NULL, 'SETUP', NULL, NULL, 34, '2015-06-14 15:33:45', 34, '2015-06-14 15:33:45'),
-(723, 708, 'Resource List', 'form.php?class_name=prj_resource_list_header&mode=9', 'Project Resource List', 'prj', 'prj_resource_list_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-16 06:44:20', 34, '2015-06-16 06:44:20'),
+(723, 756, 'Resource List', 'form.php?class_name=prj_resource_list_header&mode=9', 'Project Resource List', 'prj', 'prj_resource_list_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-16 06:44:20', 34, '2015-07-07 04:34:10'),
 (724, 723, 'Search Resource List', 'search.php?class_name=prj_resource_list_header', 'Resource List Header', 'prj', 'prj_resource_list_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-06-16 07:17:14', 34, '2015-06-16 07:17:14'),
 (725, 87, 'Report Builder', 'form.php?class_name=extn_report&mode=9', 'Custom Report Builder', 'ext', 'extn_report', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-17 08:33:17', 34, '2015-06-17 08:33:17'),
 (726, 183, 'Reports', 'form.php?module_code=ap&type=report&path_id=726', 'Reports', 'ap', 'ap', 2, NULL, NULL, 'REPORT', NULL, NULL, 34, '2015-06-17 09:54:49', 34, '2015-06-17 09:55:02'),
 (727, 726, 'Supplier Balance', 'form.php?class_name=extn_report_result&mode=2&extn_report_id=1', 'Supplier Balance', 'ap', 'extn_report_result', 2, NULL, NULL, 'REPORT', NULL, NULL, 34, '2015-06-17 09:56:19', 34, '2015-06-17 09:56:25'),
 (728, 726, 'Supplier Payment Summary', 'form.php?class_name=extn_report_result&mode=2&extn_report_id=2', 'Supplier Payment Summary', 'ap', 'extn_report_result', 2, NULL, NULL, 'REPORT', NULL, NULL, 34, '2015-06-17 10:07:54', 34, '2015-06-17 10:07:54'),
-(729, 708, 'Work Type', 'form.php?class_name=prj_work_type&mode=9', 'Project Work Type', 'prj', 'prj_work_type', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-18 06:14:07', 34, '2015-06-18 06:14:07'),
+(729, 755, 'Work Type', 'form.php?class_name=prj_work_type&mode=9', 'Project Work Type', 'prj', 'prj_work_type', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-18 06:14:07', 34, '2015-07-07 04:29:10'),
 (730, 729, 'Search Work Type', 'search.php?class_name=prj_work_type&mode=2', 'Work Type', 'prj', 'prj_work_type', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-06-18 06:15:04', 34, '2015-06-18 06:15:04'),
 (731, 329, 'Themes', 'form.php?class_name=extn_theme&mode=9', 'Enable & Disable Themes', 'adm', 'extn_theme', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-18 13:13:32', 34, '2015-06-18 13:13:32'),
-(732, 708, 'Rate Schedule', 'form.php?class_name=prj_rate_schedule_header&mode=9', 'Rate Schedule Header', 'prj', 'prj_rate_schedule_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-20 01:11:29', 34, '2015-06-20 01:11:29'),
-(733, 732, 'Search Rate Schedule', 'search.php?class_name=prj_rate_schedule_header&mode=9', 'Search Rate Schedule', 'prj', 'prj_rate_schedule_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-20 01:15:27', 34, '2015-06-20 01:15:27');
+(732, 708, 'Rate Schedule', 'form.php?class_name=prj_rate_schedule_header&mode=9', 'Rate Schedule Header', 'prj', 'prj_rate_schedule_header', 9, NULL, NULL, 'FORM', NULL, 90, 34, '2015-06-20 01:11:29', 34, '2015-07-07 04:33:49'),
+(733, 732, 'Search Rate Schedule', 'search.php?class_name=prj_rate_schedule_header&mode=9', 'Search Rate Schedule', 'prj', 'prj_rate_schedule_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-20 01:15:27', 34, '2015-06-20 01:15:27'),
+(734, 755, 'Project Type', 'form.php?class_name=prj_project_type_header&mode=9', 'Project Type Header', 'prj', 'prj_project_type_header', 9, NULL, NULL, 'FORM', NULL, 20, 34, '2015-06-20 20:33:47', 34, '2015-07-07 04:30:44'),
+(735, 734, 'Search Project Type', 'search.php?class_name=prj_project_type_header', 'Search Project Type', 'prj', 'prj_project_type_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-06-20 20:34:57', 34, '2015-06-20 20:38:09'),
+(736, 711, 'Service Type', 'form.php?class_name=option_header&option_header_id=248&mode=9', 'Service Type', 'adm', 'option_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-21 06:40:30', 34, '2015-06-21 06:40:30'),
+(737, 711, 'Project Role', 'form.php?class_name=prj_role&mode=9', 'Project Role', 'prj', 'prj_role', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-22 05:11:41', 34, '2015-06-22 05:11:41'),
+(738, 737, 'Search Role', 'search.php?class_name=prj_role', 'Search Project Role', 'prj', 'prj_role', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-06-22 05:12:30', 34, '2015-06-22 05:12:30'),
+(739, 732, 'Burden Cost Base', 'form.php?class_name=prj_burden_cost_base&mode=9', 'Burden Cost Base', 'prj', 'prj_burden_cost_base', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-24 11:28:41', 34, '2015-06-25 04:11:16'),
+(740, 739, 'Multi Action Burden Cost', 'multi_select.php?class_name=prj_burden_cost_base&mode=9&show_block=1', 'Multi Action Burden Cost', 'prj', 'prj_burden_cost_base', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-26 03:45:19', 34, '2015-06-26 03:45:19'),
+(741, 732, 'Burden Cost Code', 'form.php?class_name=prj_burden_costcode&mode=9', 'Burden Cost Code', 'prj', 'prj_burden_costcode', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-27 17:35:30', 34, '2015-06-27 17:35:30'),
+(742, 741, 'Multi Axtion Cost Code', 'multi_select.php?class_name=prj_burden_costcode&mode=9&show_block=1', 'Multi Axtion Cost Code', 'prj', 'prj_burden_costcode', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-27 17:46:38', 34, '2015-06-27 17:46:38'),
+(743, 732, 'Burden Structure', 'form.php?class_name=prj_burden_structure_header&mode=9', 'Burden Structure Header', 'prj', 'prj_burden_structure_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-28 10:44:10', 34, '2015-06-29 03:43:50'),
+(744, 743, 'Search Burden Structure', 'search.php?class_name=prj_burden_structure_header&?mode=9', 'Search Burden Structure', 'prj', 'prj_burden_structure_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-06-28 10:44:53', 34, '2015-06-28 10:44:53'),
+(745, 732, 'Burden List', 'form.php?class_name=prj_burden_list_header&mode=9', 'Burden List', 'prj', 'prj_burden_list_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-06-30 12:00:11', 34, '2015-06-30 12:00:11'),
+(746, 745, 'Search Burden List', 'search.php?class_name=prj_burden_list_header', 'Search Burden List Header', 'prj', 'prj_burden_list_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-06-30 12:01:08', 34, '2015-06-30 12:01:08'),
+(747, 708, 'Project', 'form.php?class_name=prj_project_header&mode=9', 'Project', 'prj', 'prj_project_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-07-02 15:58:38', 34, '2015-07-02 15:58:38'),
+(748, 747, 'Search Project', 'search.php?class_name=prj_project_header&mode=9', 'Search Project', 'prj', 'prj_project_header', 9, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-07-02 16:00:48', 34, '2015-07-02 17:07:06'),
+(749, 711, 'Budget Type', 'form.php?class_name=option_header&option_header_id=252&mode=9', 'Budget Type', 'prj', 'option_header', 9, NULL, NULL, 'SETUP', NULL, NULL, 34, '2015-07-03 15:36:57', 34, '2015-07-03 15:36:57'),
+(750, 757, 'Agreement', 'form.php?class_name=prj_agreement_header&mode=9', 'Project Agreement Header', 'prj', 'prj_agreement_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-07-04 14:06:15', 34, '2015-07-08 18:58:41'),
+(751, 747, 'Search Agreement', 'search.php?class_name=prj_agreement_header', 'Search Agreement', 'prj', 'prj_agreement_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-07-04 14:06:43', 34, '2015-07-04 14:06:43'),
+(752, 756, 'Budget Entry Method', 'form.php?class_name=prj_bem&mode=9', 'Budget Entry Method', 'prj', 'prj_bem', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-07-04 17:49:16', 34, '2015-07-07 04:34:33'),
+(753, 752, 'Search BEM', 'search.php?class_name=prj_bem', 'Search Budget Entry Method', 'prj', 'prj_bem', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-07-04 17:50:12', 34, '2015-07-04 17:50:12'),
+(754, 708, 'Costing Setup', 'form.php?module_code=prj&path_id=754', 'Costing Setup', 'prj', 'prj', 2, NULL, NULL, 'SETUP', NULL, 86, 34, '2015-07-07 03:20:51', 34, '2015-07-07 03:21:09'),
+(755, 708, 'Project Setup', 'form.php?module_code=prj&path_id=755', 'Project Setup', 'prj', 'prj', 2, NULL, NULL, 'SETUP', NULL, 86, 34, '2015-07-07 04:25:51', 34, '2015-07-07 04:25:51'),
+(756, 708, 'Budgeting Setup', 'form.php?module_code=prj&path_id=756', 'Budgeting Setup', 'prj', 'prj', 2, NULL, NULL, 'SETUP', NULL, 86, 34, '2015-07-07 04:32:56', 34, '2015-07-07 04:32:56');
+INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, `module_code`, `obj_class_name`, `mode`, `status`, `id_column_name`, `path_type`, `search_path_cb`, `display_weight`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+(757, 708, 'Project Budget', 'form.php?class_name=prj_budget_header&mode=9', 'Project Budget', 'prj', 'prj_budget_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-07-07 09:16:14', 34, '2015-07-07 09:16:14'),
+(758, 757, 'Search Budget', 'search.php?class_name=prj_budget_header', 'Search Budget Header', 'prj', 'prj_budget_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-07-07 09:19:09', 34, '2015-07-07 09:19:09'),
+(759, 747, 'Project Expenditure', 'form.php?class_name=prj_expenditure_header&mode=9', 'Project Expenditure', 'prj', 'prj_expenditure_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-07-08 18:48:43', 34, '2015-07-08 18:48:43'),
+(760, 759, 'Search Expenditure', 'search.php?class_name=prj_expenditure_header', 'Search Expenditure', 'prj', 'prj_expenditure_header', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-07-08 18:49:29', 34, '2015-07-08 18:49:29');
 
 -- --------------------------------------------------------
 
@@ -12589,6 +12654,327 @@ CREATE TABLE IF NOT EXISTS `po_sourcing_rule_line` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `prj_agreement_header`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_agreement_header` (
+  `prj_agreement_header_id` int(12) NOT NULL AUTO_INCREMENT,
+  `bu_org_id` int(12) NOT NULL,
+  `agreement_type` varchar(25) DEFAULT NULL,
+  `agreement_number` varchar(25) DEFAULT NULL,
+  `ar_customer_id` int(12) DEFAULT NULL,
+  `ar_customer_site_id` int(12) DEFAULT NULL,
+  `admin_employee_id` int(12) DEFAULT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `payment_term_id` int(12) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `header_amount` decimal(20,5) DEFAULT NULL,
+  `currency` varchar(25) DEFAULT NULL,
+  `doc_currency` varchar(25) DEFAULT NULL,
+  `exchange_rate_type` varchar(25) DEFAULT NULL,
+  `exchange_rate` decimal(15,5) DEFAULT NULL,
+  `r_hard_limt_cb` tinyint(1) DEFAULT NULL,
+  `i_hard_limt_cb` tinyint(1) DEFAULT NULL,
+  `advanced_required_cb` tinyint(1) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`prj_agreement_header_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_agreement_line`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_agreement_line` (
+  `prj_agreement_line_id` int(12) NOT NULL AUTO_INCREMENT,
+  `prj_agreement_header_id` int(12) NOT NULL,
+  `prj_project_header_id` int(12) NOT NULL,
+  `prj_project_line_id` int(12) DEFAULT NULL,
+  `allocation_date` date DEFAULT NULL,
+  `allocation_amount` decimal(15,5) DEFAULT NULL,
+  `classification` varchar(25) DEFAULT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`prj_agreement_line_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_bem`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_bem` (
+  `prj_bem_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `bem` varchar(25) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `budget_entry_level` varchar(25) DEFAULT NULL,
+  `effective_from` date DEFAULT NULL,
+  `effective_to` date DEFAULT NULL,
+  `quantity_cost_cb` tinyint(1) DEFAULT NULL,
+  `raw_cost_cb` tinyint(1) DEFAULT NULL,
+  `burdened_cost_cb` tinyint(1) DEFAULT NULL,
+  `revenue_cb` tinyint(1) DEFAULT NULL,
+  `quantity_revenue_cb` tinyint(1) DEFAULT NULL,
+  `time_phased_by` varchar(25) DEFAULT NULL,
+  `categorized_by_resource_cb` tinyint(1) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_bem_id`),
+  UNIQUE KEY `value_group` (`bem`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_budget_detail`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_budget_detail` (
+  `prj_budget_detail_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `prj_budget_line_id` int(12) DEFAULT NULL,
+  `prj_budget_header_id` int(12) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `gl_period_id` int(12) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `quantity` decimal(15,5) DEFAULT NULL,
+  `raw_cost` decimal(15,5) DEFAULT NULL,
+  `burdened_cost` decimal(15,5) DEFAULT NULL,
+  `revenue_quantity` decimal(15,5) DEFAULT NULL,
+  `revenue_amount` decimal(15,5) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_budget_detail_id`),
+  UNIQUE KEY `value_group` (`prj_budget_line_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_budget_header`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_budget_header` (
+  `prj_budget_header_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `budget_type` varchar(25) DEFAULT NULL,
+  `prj_project_header_id` int(12) NOT NULL,
+  `prj_project_line_id` int(12) DEFAULT NULL,
+  `version_number` int(3) NOT NULL,
+  `version_name` varchar(25) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `status` varchar(25) DEFAULT NULL,
+  `raw_cost` decimal(15,5) DEFAULT NULL,
+  `burdened_cost` decimal(15,5) DEFAULT NULL,
+  `labor_effort` decimal(15,5) DEFAULT NULL,
+  `nlr_effort` decimal(15,5) DEFAULT NULL,
+  `revenue` decimal(15,5) DEFAULT NULL,
+  `curent_cb` tinyint(1) DEFAULT NULL,
+  `original_cb` tinyint(1) DEFAULT NULL,
+  `baselined_by` varchar(25) DEFAULT NULL,
+  `baselined_cb` tinyint(1) DEFAULT NULL,
+  `baselined_date` date DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_budget_header_id`),
+  UNIQUE KEY `prj_project_header_id` (`prj_project_header_id`,`version_number`,`baselined_cb`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_budget_line`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_budget_line` (
+  `prj_budget_line_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `prj_budget_header_id` int(12) DEFAULT NULL,
+  `prj_project_header_id` int(12) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `prj_project_line_id` int(12) DEFAULT NULL,
+  `prj_resource_line_id` int(12) DEFAULT NULL,
+  `uom_id` int(12) DEFAULT NULL,
+  `quantity` decimal(15,5) DEFAULT NULL,
+  `raw_cost` decimal(15,5) DEFAULT NULL,
+  `revenue_quantity` decimal(15,5) DEFAULT NULL,
+  `revenue_amount` decimal(15,5) DEFAULT NULL,
+  `burden_cost` decimal(15,5) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_budget_line_id`),
+  UNIQUE KEY `value_group` (`prj_budget_header_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_burden_costcode`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_burden_costcode` (
+  `prj_burden_costcode_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `costcode` varchar(25) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `prj_exependiture_type_id` int(12) DEFAULT NULL,
+  `effective_from` date DEFAULT NULL,
+  `effective_to` date DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_burden_costcode_id`),
+  UNIQUE KEY `value_group` (`costcode`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_burden_cost_base`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_burden_cost_base` (
+  `prj_burden_cost_base_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `cost_base` varchar(25) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `cost_base_type` varchar(25) DEFAULT NULL,
+  `effective_from` date DEFAULT NULL,
+  `effective_to` date DEFAULT NULL,
+  `priority` int(4) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_burden_cost_base_id`),
+  UNIQUE KEY `value_group` (`cost_base`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_burden_list_header`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_burden_list_header` (
+  `prj_burden_list_header_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `burden_list` varchar(25) NOT NULL,
+  `prj_burden_structure_header_id` int(12) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `effective_from` date DEFAULT NULL,
+  `effective_to` date DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_burden_list_header_id`),
+  UNIQUE KEY `value_group` (`burden_list`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Project burden structure header information' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_burden_list_line`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_burden_list_line` (
+  `prj_burden_list_line_id` int(12) NOT NULL AUTO_INCREMENT,
+  `prj_burden_list_header_id` int(12) NOT NULL,
+  `prj_burden_costcode_id` int(12) NOT NULL,
+  `bu_org_id` int(12) DEFAULT NULL,
+  `multiplier` decimal(10,5) DEFAULT NULL,
+  `burden_value` int(12) DEFAULT NULL,
+  `formula` text,
+  `effective_start_date` date NOT NULL,
+  `effective_end_date` date DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_burden_list_line_id`),
+  UNIQUE KEY `mdm_price_list_header_id` (`prj_burden_list_header_id`,`bu_org_id`,`multiplier`,`effective_start_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_burden_structure_costcode`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_burden_structure_costcode` (
+  `prj_burden_structure_costcode_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `prj_burden_structure_header_id` int(12) NOT NULL,
+  `burden_cost_code_id` int(12) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `burden_cost_base_id` int(12) DEFAULT NULL,
+  `priority` int(12) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_burden_structure_costcode_id`),
+  UNIQUE KEY `prj_burden_structure_header_id` (`prj_burden_structure_header_id`,`burden_cost_code_id`,`burden_cost_base_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Project burden structure cost code information' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_burden_structure_expendituretype`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_burden_structure_expendituretype` (
+  `prj_burden_structure_expendituretype_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `prj_burden_structure_header_id` int(12) NOT NULL,
+  `prj_expenditure_type_id` int(12) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `burden_cost_base_id` int(12) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_burden_structure_expendituretype_id`),
+  UNIQUE KEY `prj_burden_structure_header_id` (`prj_burden_structure_header_id`,`prj_expenditure_type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Project burden expenditure type information' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_burden_structure_header`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_burden_structure_header` (
+  `prj_burden_structure_header_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `structure` varchar(25) NOT NULL,
+  `structure_type` varchar(25) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `allow_override_cb` tinyint(1) DEFAULT NULL,
+  `effective_from` date DEFAULT NULL,
+  `effective_to` date DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_burden_structure_header_id`),
+  UNIQUE KEY `value_group` (`structure`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Project burden structure header information' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `prj_category_header`
 --
 
@@ -12650,11 +13036,72 @@ CREATE TABLE IF NOT EXISTS `prj_category_value` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `prj_expenditure_type`
+-- Table structure for table `prj_expenditure_header`
 --
 
-CREATE TABLE IF NOT EXISTS `prj_expenditure_type` (
-  `prj_expenditure_type_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `prj_expenditure_header` (
+  `prj_expenditure_header_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `bu_org_id` int(12) DEFAULT NULL,
+  `batch_name` varchar(50) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `expenditure_class` varchar(25) DEFAULT NULL,
+  `effective_to` date DEFAULT NULL,
+  `status` varchar(25) DEFAULT NULL,
+  `reference_type` varchar(25) DEFAULT NULL,
+  `reference_key_name` varchar(25) DEFAULT NULL,
+  `reference_key_value` varchar(25) DEFAULT NULL,
+  `submitted_by_user_id` int(12) DEFAULT NULL,
+  `submitted_on` date DEFAULT NULL,
+  `misc_transaction_cb` tinyint(1) DEFAULT NULL,
+  `over_time_cb` tinyint(1) DEFAULT NULL,
+  `invoice_cb` tinyint(1) DEFAULT NULL,
+  `usages_cb` tinyint(1) DEFAULT NULL,
+  `wip_cb` tinyint(1) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_expenditure_header_id`),
+  UNIQUE KEY `value_group` (`batch_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_expenditure_line`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_expenditure_line` (
+  `prj_expenditure_line_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `prj_expenditure_header_id` int(12) NOT NULL,
+  `org_id` int(12) DEFAULT NULL,
+  `hr_employee_id` date DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `job_id` int(12) DEFAULT NULL,
+  `expenditure_date` date DEFAULT NULL,
+  `prj_project_header_id` int(12) DEFAULT NULL,
+  `prj_project_line_id` int(12) DEFAULT NULL,
+  `prj_nlr_header_id` int(12) DEFAULT NULL,
+  `prj_exepnditure_type_header_id` int(12) NOT NULL,
+  `uom_id` int(12) NOT NULL,
+  `quantity` decimal(15,5) NOT NULL,
+  `rate` decimal(15,5) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_expenditure_line_id`),
+  UNIQUE KEY `sys_catalog_header_id` (`prj_expenditure_header_id`,`org_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_expenditure_type_header`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_expenditure_type_header` (
+  `prj_expenditure_type_header_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `expenditure_type` varchar(25) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `expenditure_category` varchar(25) DEFAULT NULL,
@@ -12662,6 +13109,7 @@ CREATE TABLE IF NOT EXISTS `prj_expenditure_type` (
   `effective_to` date DEFAULT NULL,
   `revenue_category` varchar(25) DEFAULT NULL,
   `uom_id` int(12) DEFAULT NULL,
+  `direct_labor_cb` tinyint(1) DEFAULT NULL,
   `inventory_cb` tinyint(1) DEFAULT NULL,
   `burden_cb` tinyint(1) DEFAULT NULL,
   `expense_reports_cb` tinyint(1) DEFAULT NULL,
@@ -12674,8 +13122,32 @@ CREATE TABLE IF NOT EXISTS `prj_expenditure_type` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`prj_expenditure_type_id`),
+  PRIMARY KEY (`prj_expenditure_type_header_id`),
   UNIQUE KEY `value_group` (`expenditure_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_expenditure_type_line`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_expenditure_type_line` (
+  `prj_expenditure_type_line_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `prj_expenditure_type_header_id` int(12) NOT NULL,
+  `bu_org_id` int(12) DEFAULT NULL,
+  `effective_from` date DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `effective_to` date DEFAULT NULL,
+  `uom_id` int(12) DEFAULT NULL,
+  `currency` varchar(25) DEFAULT NULL,
+  `rate` decimal(15,5) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_expenditure_type_line_id`),
+  UNIQUE KEY `sys_catalog_header_id` (`prj_expenditure_type_header_id`,`bu_org_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -12727,17 +13199,115 @@ CREATE TABLE IF NOT EXISTS `prj_nlr_line` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `prj_project_all_lowesttask_v`
+--
+CREATE TABLE IF NOT EXISTS `prj_project_all_lowesttask_v` (
+`org` varchar(50)
+,`project_number` varchar(50)
+,`description` varchar(256)
+,`task_number` varchar(25)
+,`task_name` varchar(50)
+,`task_description` varchar(256)
+,`project_status` varchar(25)
+,`approval_status` varchar(25)
+,`prj_project_line_id` int(12)
+,`prj_project_header_id` int(12)
+,`task_level_weight` int(12)
+,`parent_prj_task_num` varchar(25)
+,`task_start_date` date
+,`task_end_date` date
+,`task_manager_user_id` int(12)
+,`org_id` int(12)
+,`service_type` varchar(25)
+,`work_type` varchar(25)
+,`allow_charges_cb` tinyint(1)
+,`capitalizable_cb` tinyint(1)
+,`bu_org_id` int(12)
+,`prj_project_type_id` int(12)
+,`ar_customer_id` int(12)
+,`ar_customer_site_id` int(12)
+,`pm_employee_id` int(12)
+,`manager_user_id` int(12)
+,`start_date` date
+,`completion_date` date
+,`header_amount` decimal(20,5)
+);
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `prj_project_all_v`
+--
+CREATE TABLE IF NOT EXISTS `prj_project_all_v` (
+`org` varchar(50)
+,`project_number` varchar(50)
+,`description` varchar(256)
+,`task_number` varchar(25)
+,`task_name` varchar(50)
+,`task_description` varchar(256)
+,`project_status` varchar(25)
+,`approval_status` varchar(25)
+,`prj_project_line_id` int(12)
+,`prj_project_header_id` int(12)
+,`task_level_weight` int(12)
+,`parent_prj_task_num` varchar(25)
+,`task_start_date` date
+,`task_end_date` date
+,`task_manager_user_id` int(12)
+,`org_id` int(12)
+,`service_type` varchar(25)
+,`work_type` varchar(25)
+,`allow_charges_cb` tinyint(1)
+,`capitalizable_cb` tinyint(1)
+,`bu_org_id` int(12)
+,`prj_project_type_id` int(12)
+,`ar_customer_id` int(12)
+,`ar_customer_site_id` int(12)
+,`pm_employee_id` int(12)
+,`manager_user_id` int(12)
+,`start_date` date
+,`completion_date` date
+,`header_amount` decimal(20,5)
+);
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_project_control`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_project_control` (
+  `prj_project_control_id` int(12) NOT NULL AUTO_INCREMENT,
+  `prj_project_header_id` int(12) NOT NULL,
+  `prj_expenditure_type_id` int(12) DEFAULT NULL,
+  `prj_expenditure_category_code` varchar(25) DEFAULT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `prj_nlr_header_id` int(12) DEFAULT NULL,
+  `hr_employee_id` int(12) DEFAULT NULL,
+  `hr_job_id` int(11) DEFAULT NULL,
+  `billable_cb` tinyint(1) DEFAULT NULL,
+  `chargeable_cb` tinyint(1) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`prj_project_control_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `prj_project_header`
 --
 
 CREATE TABLE IF NOT EXISTS `prj_project_header` (
   `prj_project_header_id` int(12) NOT NULL AUTO_INCREMENT,
   `bu_org_id` int(12) NOT NULL,
-  `project_type` int(12) NOT NULL,
-  `number` varchar(50) DEFAULT NULL,
+  `prj_project_type_id` int(12) NOT NULL,
+  `project_number` varchar(50) DEFAULT NULL,
   `ar_customer_id` int(12) DEFAULT NULL,
   `ar_customer_site_id` int(12) DEFAULT NULL,
-  `sales_person` varchar(256) DEFAULT NULL,
+  `pm_employee_id` int(12) DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL,
   `manager_user_id` int(12) DEFAULT NULL,
   `start_date` date DEFAULT NULL,
@@ -12745,11 +13315,39 @@ CREATE TABLE IF NOT EXISTS `prj_project_header` (
   `header_amount` decimal(20,5) DEFAULT NULL,
   `project_class` varchar(25) DEFAULT NULL,
   `category` varchar(25) DEFAULT NULL,
+  `finance_structure_cb` tinyint(1) DEFAULT NULL,
+  `operation_structure_cb` tinyint(1) DEFAULT NULL,
+  `life_cycle` varchar(25) DEFAULT NULL,
+  `current_phase` varchar(25) DEFAULT NULL,
+  `role_list_id` int(12) DEFAULT NULL,
+  `prj_work_type` int(12) NOT NULL,
+  `probability` decimal(6,3) DEFAULT NULL,
+  `currency` varchar(25) DEFAULT NULL,
+  `doc_currency` varchar(25) DEFAULT NULL,
+  `exchange_rate_type` varchar(25) DEFAULT NULL,
+  `exchange_rate` decimal(15,5) DEFAULT NULL,
+  `opportunity_value` decimal(15,3) DEFAULT NULL,
+  `expected_approval_date` date DEFAULT NULL,
+  `revenue_accrual_method` varchar(20) DEFAULT NULL,
+  `invoice_accrual_method` varchar(20) DEFAULT NULL,
+  `billing_cycle` varchar(20) DEFAULT NULL,
+  `cost_burden_schedule_id` int(12) DEFAULT NULL,
+  `account_burdened_cost_cb` tinyint(1) DEFAULT NULL,
+  `labor_billing_type` varchar(20) DEFAULT NULL,
+  `nlr_billing_type` varchar(20) DEFAULT NULL,
+  `employee_schedule_id` int(12) DEFAULT NULL,
+  `job_schedule_id` int(12) DEFAULT NULL,
+  `l_revenue_burden_id` int(12) DEFAULT NULL,
+  `l_invoice_burdern_id` int(12) DEFAULT NULL,
+  `nlr_schedule_id` int(12) DEFAULT NULL,
+  `nrl_revenue_burden_id` int(12) DEFAULT NULL,
+  `nlr_invoice_burdern_id` int(12) DEFAULT NULL,
   `source` varchar(25) DEFAULT NULL,
   `name` varchar(50) DEFAULT NULL,
   `reference_type` varchar(25) DEFAULT NULL,
   `reference_key_name` varchar(25) DEFAULT NULL,
   `reference_key_value` varchar(25) DEFAULT NULL,
+  `direct_labor_cb` tinyint(1) DEFAULT NULL,
   `is_template_cb` tinyint(1) DEFAULT NULL,
   `project_status` varchar(25) DEFAULT NULL,
   `approval_status` varchar(25) DEFAULT NULL,
@@ -12772,8 +13370,9 @@ CREATE TABLE IF NOT EXISTS `prj_project_line` (
   `prj_project_line_id` int(12) NOT NULL AUTO_INCREMENT,
   `prj_project_header_id` int(12) NOT NULL,
   `task_number` varchar(25) NOT NULL,
+  `task_level_weight` int(12) NOT NULL,
   `task_name` varchar(50) NOT NULL,
-  `parent_prj_project_line_id` int(12) DEFAULT NULL,
+  `parent_prj_task_num` varchar(25) DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
@@ -12785,7 +13384,7 @@ CREATE TABLE IF NOT EXISTS `prj_project_line` (
   `capitalizable_cb` tinyint(1) DEFAULT NULL,
   `currency` varchar(10) DEFAULT NULL,
   `rate_type` varchar(25) DEFAULT NULL,
-  `cip_asset_it` int(12) DEFAULT NULL,
+  `cip_asset_id` int(12) DEFAULT NULL,
   `line_description` varchar(256) DEFAULT NULL,
   `task_status` varchar(25) DEFAULT NULL,
   `created_by` int(12) NOT NULL,
@@ -12793,6 +13392,122 @@ CREATE TABLE IF NOT EXISTS `prj_project_line` (
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime NOT NULL,
   PRIMARY KEY (`prj_project_line_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_project_member`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_project_member` (
+  `prj_project_member_id` int(12) NOT NULL AUTO_INCREMENT,
+  `prj_project_header_id` int(12) NOT NULL,
+  `user_id` int(12) NOT NULL,
+  `prj_role_id` int(12) NOT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`prj_project_member_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_project_type_billing`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_project_type_billing` (
+  `prj_project_type_billing_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `prj_project_type_header_id` int(12) NOT NULL,
+  `prj_billing_extn_id` int(12) NOT NULL,
+  `currency` varchar(15) DEFAULT NULL,
+  `amount` decimal(15,5) DEFAULT NULL,
+  `percentage` decimal(6,3) DEFAULT NULL,
+  `active_cb` tinyint(1) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_project_type_billing_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_project_type_header`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_project_type_header` (
+  `prj_project_type_header_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `bu_org_id` int(12) NOT NULL,
+  `project_class` varchar(15) NOT NULL,
+  `project_type` varchar(50) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `effective_from` date DEFAULT NULL,
+  `effective_to` date DEFAULT NULL,
+  `service_type` varchar(25) DEFAULT NULL,
+  `role_list_id` int(11) DEFAULT NULL,
+  `prj_work_type_id` int(12) DEFAULT NULL,
+  `sponsored_cb` tinyint(1) DEFAULT NULL,
+  `organization_planning_cb` tinyint(1) DEFAULT NULL,
+  `intercompany_billing_cb` tinyint(1) DEFAULT NULL,
+  `cost_burden_schedule_id` int(12) DEFAULT NULL,
+  `cost_burdened_cb` tinyint(1) DEFAULT NULL,
+  `account_burdened_cost_cb` tinyint(1) DEFAULT NULL,
+  `cost_budget_method` varchar(12) DEFAULT NULL,
+  `revenue_budget_method` varchar(12) DEFAULT NULL,
+  `resource_list_id` int(12) DEFAULT NULL,
+  `project_status` varchar(25) DEFAULT NULL,
+  `cip_cost_type` varchar(25) DEFAULT NULL,
+  `asset_cost_allocation_method` varchar(25) DEFAULT NULL,
+  `event_processing_method` varchar(25) DEFAULT NULL,
+  `grouping_method` varchar(25) DEFAULT NULL,
+  `labor_billing_type` varchar(15) DEFAULT NULL,
+  `nlr_billing_type` varchar(15) DEFAULT NULL,
+  `employee_schedule_id` int(12) DEFAULT NULL,
+  `job_schedule_id` int(12) DEFAULT NULL,
+  `l_revenue_burden_id` int(12) DEFAULT NULL,
+  `l_invoice_burdern_id` int(12) DEFAULT NULL,
+  `nrl_revenue_burden_id` int(12) DEFAULT NULL,
+  `nlr_invoice_burdern_id` int(12) DEFAULT NULL,
+  `nlr_schedule_id` int(12) DEFAULT NULL,
+  `billing_cycle_id` int(12) DEFAULT NULL,
+  `cost_cost_cb` tinyint(1) DEFAULT NULL,
+  `cost_event_cb` tinyint(1) DEFAULT NULL,
+  `cost_work_cb` tinyint(1) DEFAULT NULL,
+  `event_event_cb` tinyint(1) DEFAULT NULL,
+  `event_work_cb` tinyint(1) DEFAULT NULL,
+  `work_event_cb` tinyint(1) DEFAULT NULL,
+  `work_work_cb` tinyint(1) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_project_type_header_id`),
+  UNIQUE KEY `value_group` (`project_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_project_type_line`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_project_type_line` (
+  `prj_project_type_line_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `prj_project_type_header_id` int(12) NOT NULL,
+  `prj_category_header_id` int(12) NOT NULL,
+  `required_cb` tinyint(1) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_project_type_line_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -12887,6 +13602,35 @@ CREATE TABLE IF NOT EXISTS `prj_resource_list_line` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`prj_resource_list_line_id`),
   UNIQUE KEY `sys_catalog_header_id` (`prj_resource_list_header_id`,`resource_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_role`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_role` (
+  `prj_role_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(25) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `user_role` varchar(25) DEFAULT NULL,
+  `effective_from` date DEFAULT NULL,
+  `effective_to` date DEFAULT NULL,
+  `labor_cost_cb` tinyint(1) DEFAULT NULL,
+  `contract_member_cb` tinyint(1) DEFAULT NULL,
+  `project_member_cb` tinyint(1) DEFAULT NULL,
+  `task_member_cb` tinyint(1) DEFAULT NULL,
+  `scheduling_cb` tinyint(1) DEFAULT NULL,
+  `min_job_level` int(4) DEFAULT NULL,
+  `max_job_level` int(4) DEFAULT NULL,
+  `hr_job_id` int(12) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime(1) DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_role_id`),
+  UNIQUE KEY `value_group` (`role_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -13548,7 +14292,7 @@ CREATE TABLE IF NOT EXISTS `sd_shipping_control` (
 --
 
 INSERT INTO `sd_shipping_control` (`sd_shipping_control_id`, `org_id`, `ef_id`, `rev_enabled`, `rev_number`, `staging_subinventory_id`, `staging_locator_id`, `default_picking_rule_id`, `delivery_onpicking_cb`, `autosplit_onpicking_cb`, `deffer_invoicing_cb`, `default_requested_date_cb`, `default_schedule_ship_date_cb`, `default_promise_date_cb`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
-(4, 6, NULL, 'enabled', 11, 13, 17, NULL, 1, 1, NULL, 1, 1, 1, 0, '2014-07-10 00:00:00', 34, '2015-02-20 10:12:27'),
+(4, 6, NULL, NULL, 11, 1, 1, NULL, 1, NULL, NULL, 1, 1, 1, 0, '2014-07-10 00:00:00', 34, '2015-06-23 04:07:33'),
 (5, 9, NULL, NULL, NULL, 38, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-10 00:00:00', 0, '2014-07-10 00:00:00');
 
 -- --------------------------------------------------------
@@ -13915,7 +14659,7 @@ CREATE TABLE IF NOT EXISTS `site_info` (
 --
 
 INSERT INTO `site_info` (`default_home_page`, `site_name`, `maintenance_cb`, `maintenance_msg`, `disabled_action`, `email`, `phone_no`, `logo_path`, `posts_in_fp`, `summary_char_fp`, `footer_message`, `anonymous_user`, `anonymous_user_role`, `access_denied`, `analytics_code`, `basic_user_role`, `move_line_wo_header`, `last_update_by`, `last_update_date`) VALUES
-('content', 'inoERP', NULL, ' <h1>Thanks for Visiting inoERP <br>\r\n Site in under maintenance & ''ll be back online shortly.     </h1>                ', '', 'contact@inoideas.org', '1-205-419-5131', 'files/logo.png', 6, 60, '<span class="developed_by">Copyright @ 2014 inoERP - <a href=''http://inoideas.org''>Powered By inoCMS </a></span>                     ', '', '', NULL, ' <script>\r\n  (function(i,s,o,g,r,a,m){i[''GoogleAnalyticsObject'']=r;i[r]=i[r]||function(){\r\n  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\r\n  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\r\n  })(window,document,''script'',''//www.google-analytics.com/analytics.js'',''ga'');\r\n\r\n  ga(''create'', ''UA-48829329-1'', ''auto'');\r\n  ga(''send'', ''pageview'');\r\n\r\n</script>     ', NULL, 'SHOW_WARNING', 34, '2015-06-14 07:51:39');
+('', 'inoERP', NULL, ' <h1>Thanks for Visiting inoERP <br>\r\n Site in under maintenance & ''ll be back online shortly.     </h1>                      ', '', 'contact@inoideas.org', '1-205-419-5131', 'files/logo.png', 6, 60, '<span class="developed_by">Copyright @ 2014 inoERP - <a href=''http://inoideas.org''>Powered By inoCMS </a></span>                           ', '', '', NULL, ' <script>\r\n  (function(i,s,o,g,r,a,m){i[''GoogleAnalyticsObject'']=r;i[r]=i[r]||function(){\r\n  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\r\n  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\r\n  })(window,document,''script'',''//www.google-analytics.com/analytics.js'',''ga'');\r\n\r\n  ga(''create'', ''UA-48829329-1'', ''auto'');\r\n  ga(''send'', ''pageview'');\r\n\r\n</script>           ', NULL, 'SHOW_WARNING', 34, '2015-07-10 06:50:03');
 
 -- --------------------------------------------------------
 
@@ -17104,7 +17848,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`user_id`, `person_id`, `username`, `password`, `first_name`, `last_name`, `assigned_ip`, `phone`, `email`, `user_language`, `date_format`, `hr_employee_id`, `block_notif_count`, `supplier_id`, `default_theme`, `ar_customer_id`, `prices_dec`, `qty_dec`, `rates_dec`, `percent_dec`, `show_gl`, `show_codes`, `show_hints`, `last_visit_date`, `query_size`, `image_file_id`, `pos`, `print_profile`, `rep_popup`, `auth_provider_name`, `auth_provider_id`, `status`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`, `revision_enabled`, `revision_number`) VALUES
 (1, NULL, 'admin', '2c848e7e18ea0e55b413a6ac73ee276bafa479994213c32e3a4ce920efc37508', 'Admin', 'Admin', NULL, NULL, 'admin@thissite.com', NULL, 0, NULL, NULL, 0, 'default', 0, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 0, '2014-09-13 19:16:52', 34, '2015-02-25 03:09:17', 'N', NULL),
-(34, NULL, 'inoerp', 'f5b9ac93ee7df536f02b4e58ef702020470aa74fed06eb46475d8264f9fdc7f6', 'inoerp', 'inoerp', NULL, '34543543', 'inoerp@no-site.com', 'en_US', 0, 1, 3, NULL, 'default', 8, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 594, 1, '1', 1, '0', '', 0, 0, '2014-08-26 12:51:31', 34, '2015-06-20 01:26:26', 'N', NULL),
+(34, NULL, 'inoerp', 'f5b9ac93ee7df536f02b4e58ef702020470aa74fed06eb46475d8264f9fdc7f6', 'inoerp', 'inoerp', NULL, '34543543', 'inoerp@no-site.com', 'en_US', 0, 1, 3, NULL, 'default', 8, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 594, 1, '1', 1, '0', '', 0, 0, '2014-08-26 12:51:31', 34, '2015-07-04 11:46:09', 'N', NULL),
 (88, NULL, 'nishit50', 'fd2063e7246ed74534e2cec236276fe594c98a9f83ea4e4fa9caf46e26b7ccdb', 'Nishit', 'das11', NULL, NULL, 'nishitdas@outlook.com', NULL, 0, 4, 0, 0, 'default', 0, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 0, '2014-08-20 09:48:07', 0, '2020-08-14 09:48:07', 'N', NULL),
 (91, NULL, 'nishit', '4c2c32b3f9b6b9906305b5789b4cc42c15694ed6cd141f7fd3dbf35b223f58b3', 'Nishit', 'das', NULL, NULL, 'nishitdas@yahoo.co.in', NULL, 0, NULL, NULL, 0, 'default', 0, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 0, '2014-08-24 12:12:37', 34, '2014-10-21 06:31:52', 'N', NULL),
 (93, NULL, 'ino_supp', 'fd2063e7246ed74534e2cec236276fe594c98a9f83ea4e4fa9caf46e26b7ccdb', 'ino', 'supp', NULL, NULL, 'ino_supp@inoerp.com', NULL, 0, NULL, NULL, 0, 'default', 0, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 0, '2014-09-04 15:26:43', 0, '2004-09-14 15:26:43', 'N', NULL),
@@ -17262,7 +18006,7 @@ CREATE TABLE IF NOT EXISTS `user_role` (
 INSERT INTO `user_role` (`user_role_id`, `role_code`, `user_id`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (1, '263', 38, 0, NULL, 0, NULL),
 (2, '261', 38, 0, NULL, 0, NULL),
-(3, 'ADMIN', 34, 0, '2014-08-26 00:00:00', 34, '2015-05-09 14:44:03'),
+(3, 'ADMIN', 34, 0, '2014-08-26 00:00:00', 34, '2015-06-22 12:15:42'),
 (4, '262', 57, 0, NULL, 0, NULL),
 (5, '264', 56, 0, NULL, 0, NULL),
 (6, '261', 56, 0, NULL, 0, NULL),
@@ -18103,6 +18847,24 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_document_v` AS select 
 DROP TABLE IF EXISTS `po_requisition_all_v`;
 
 CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_requisition_all_v` AS select `po_requisition_header`.`po_requisition_header_id` AS `po_requisition_header_id`,`po_requisition_header`.`bu_org_id` AS `bu_org_id`,`po_requisition_header`.`po_requisition_type` AS `po_requisition_type`,`po_requisition_header`.`po_requisition_number` AS `po_requisition_number`,`po_requisition_header`.`supplier_id` AS `supplier_id`,`po_requisition_header`.`supplier_site_id` AS `supplier_site_id`,`po_requisition_header`.`buyer` AS `buyer`,`po_requisition_header`.`currency` AS `currency`,`po_requisition_header`.`header_amount` AS `header_amount`,`po_requisition_header`.`requisition_status` AS `requisition_status`,`po_requisition_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_requisition_line`.`po_requisition_line_id` AS `po_requisition_line_id`,`po_requisition_line`.`line_type` AS `line_type`,`po_requisition_line`.`line_number` AS `po_requisition_line_number`,`po_requisition_line`.`item_id_m` AS `item_id_m`,`po_requisition_line`.`item_description` AS `item_description`,`po_requisition_line`.`line_description` AS `line_description`,`po_requisition_line`.`line_quantity` AS `line_quantity`,`po_requisition_line`.`unit_price` AS `unit_price`,`po_requisition_line`.`line_price` AS `line_price`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_requisition_detail`.`po_requisition_detail_id` AS `po_requisition_detail_id`,`po_requisition_detail`.`shipment_number` AS `shipment_number`,`po_requisition_detail`.`ship_to_inventory` AS `ship_to_inventory`,`po_requisition_detail`.`subinventory_id` AS `subinventory_id`,`po_requisition_detail`.`locator_id` AS `locator_id`,`po_requisition_detail`.`requestor` AS `requestor`,`po_requisition_detail`.`quantity` AS `quantity`,`po_requisition_detail`.`need_by_date` AS `need_by_date`,`po_requisition_detail`.`promise_date` AS `promise_date`,`po_requisition_detail`.`received_quantity` AS `received_quantity`,`po_requisition_detail`.`accepted_quantity` AS `accepted_quantity`,`po_requisition_detail`.`delivered_quantity` AS `delivered_quantity`,`po_requisition_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_requisition_detail`.`paid_quantity` AS `paid_quantity`,`po_requisition_detail`.`order_number` AS `order_number`,`org`.`org` AS `ship_to_org`,`po_requisition_header`.`created_by` AS `created_by`,`po_requisition_header`.`creation_date` AS `creation_date`,`po_requisition_header`.`last_update_by` AS `last_update_by`,`po_requisition_header`.`last_update_date` AS `last_update_date` from (((((((`po_requisition_header` left join `supplier` on((`po_requisition_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_requisition_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_requisition_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_requisition_line` on((`po_requisition_header`.`po_requisition_header_id` = `po_requisition_line`.`po_requisition_header_id`))) left join `item` on(((`po_requisition_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_requisition_line`.`receving_org_id`)))) left join `po_requisition_detail` on((`po_requisition_line`.`po_requisition_line_id` = `po_requisition_detail`.`po_requisition_line_id`))) left join `org` on((`po_requisition_detail`.`ship_to_inventory` = `org`.`org_id`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `prj_project_all_lowesttask_v`
+--
+DROP TABLE IF EXISTS `prj_project_all_lowesttask_v`;
+
+CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `prj_project_all_lowesttask_v` AS select `org`.`org` AS `org`,`prh`.`project_number` AS `project_number`,`prh`.`description` AS `description`,`prl`.`task_number` AS `task_number`,`prl`.`task_name` AS `task_name`,`prl`.`description` AS `task_description`,`prh`.`project_status` AS `project_status`,`prh`.`approval_status` AS `approval_status`,`prl`.`prj_project_line_id` AS `prj_project_line_id`,`prl`.`prj_project_header_id` AS `prj_project_header_id`,`prl`.`task_level_weight` AS `task_level_weight`,`prl`.`parent_prj_task_num` AS `parent_prj_task_num`,`prl`.`start_date` AS `task_start_date`,`prl`.`end_date` AS `task_end_date`,`prl`.`manager_user_id` AS `task_manager_user_id`,`prl`.`org_id` AS `org_id`,`prl`.`service_type` AS `service_type`,`prl`.`work_type` AS `work_type`,`prl`.`allow_charges_cb` AS `allow_charges_cb`,`prl`.`capitalizable_cb` AS `capitalizable_cb`,`prh`.`bu_org_id` AS `bu_org_id`,`prh`.`prj_project_type_id` AS `prj_project_type_id`,`prh`.`ar_customer_id` AS `ar_customer_id`,`prh`.`ar_customer_site_id` AS `ar_customer_site_id`,`prh`.`pm_employee_id` AS `pm_employee_id`,`prh`.`manager_user_id` AS `manager_user_id`,`prh`.`start_date` AS `start_date`,`prh`.`completion_date` AS `completion_date`,`prh`.`header_amount` AS `header_amount` from ((`prj_project_header` `prh` join `prj_project_line` `prl`) join `org`) where ((`prl`.`prj_project_header_id` = `prh`.`prj_project_header_id`) and (`prh`.`bu_org_id` = `org`.`org_id`) and (not(`prl`.`task_number` in (select `prl`.`parent_prj_task_num` from `prj_project_line` `prl` where (`prl`.`parent_prj_task_num` is not null)))));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `prj_project_all_v`
+--
+DROP TABLE IF EXISTS `prj_project_all_v`;
+
+CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `prj_project_all_v` AS select `org`.`org` AS `org`,`prh`.`project_number` AS `project_number`,`prh`.`description` AS `description`,`prl`.`task_number` AS `task_number`,`prl`.`task_name` AS `task_name`,`prl`.`description` AS `task_description`,`prh`.`project_status` AS `project_status`,`prh`.`approval_status` AS `approval_status`,`prl`.`prj_project_line_id` AS `prj_project_line_id`,`prl`.`prj_project_header_id` AS `prj_project_header_id`,`prl`.`task_level_weight` AS `task_level_weight`,`prl`.`parent_prj_task_num` AS `parent_prj_task_num`,`prl`.`start_date` AS `task_start_date`,`prl`.`end_date` AS `task_end_date`,`prl`.`manager_user_id` AS `task_manager_user_id`,`prl`.`org_id` AS `org_id`,`prl`.`service_type` AS `service_type`,`prl`.`work_type` AS `work_type`,`prl`.`allow_charges_cb` AS `allow_charges_cb`,`prl`.`capitalizable_cb` AS `capitalizable_cb`,`prh`.`bu_org_id` AS `bu_org_id`,`prh`.`prj_project_type_id` AS `prj_project_type_id`,`prh`.`ar_customer_id` AS `ar_customer_id`,`prh`.`ar_customer_site_id` AS `ar_customer_site_id`,`prh`.`pm_employee_id` AS `pm_employee_id`,`prh`.`manager_user_id` AS `manager_user_id`,`prh`.`start_date` AS `start_date`,`prh`.`completion_date` AS `completion_date`,`prh`.`header_amount` AS `header_amount` from ((`prj_project_header` `prh` join `prj_project_line` `prl`) join `org`) where ((`prl`.`prj_project_header_id` = `prh`.`prj_project_header_id`) and (`prh`.`bu_org_id` = `org`.`org_id`));
 
 -- --------------------------------------------------------
 

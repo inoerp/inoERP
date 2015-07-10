@@ -3232,6 +3232,13 @@ $(document).ready(function () {
   primary_column1: 'bu_org_id'
  });
 
+ //vaidation field auto complete
+ $('.val_field').inoAutoCompleteElement({
+  json_url: 'includes/json/json_validation_field.php',
+  primary_column1: 'bu_org_id',
+  min_length: 2
+ });
+
 
  var itemNumber = new autoCompleteMain();
  itemNumber.json_url = 'modules/inv/item/item_search.php';
@@ -3352,22 +3359,30 @@ $(document).ready(function () {
 
  //popu for selecting project project_task_number
  $('#content').on('click', '.select_project_task_number.select_popup', function () {
+  if($(this).data('class_name')){
+   var className = $(this).data('class_name');
+  }else{
+   var className = 'prj_project_all_v';
+  }
+  var openUrl = 'select.php?class_name='+className;
   var elemenType = $(this).parent().prop('tagName');
   if (elemenType === 'TD') {
    var rowClass = $(this).closest('tr').prop('class');
    var fieldClass = $(this).closest('td').find('.select_project_task_number').prop('class');
    localStorage.setItem("row_class", rowClass);
    localStorage.removeItem("li_divId", liId);
+   if($(this).closest('tr').find('.prj_project_header_id').val()){
+    openUrl += '&prj_project_header_id=%3D' + $(this).closest('tr').find('.prj_project_header_id').val();
+   }
+   
   } else {
    var liId = $(this).closest('li').find('.username').prop('id');
    localStorage.setItem("li_divId", liId);
    localStorage.removeItem("row_class");
   }
-
   var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
-  var openUrl = 'select.php?class_name=prj_project_all_v';
-
+  
   if ($('#prj_project_header_id').val()) {
    openUrl += '&prj_project_header_id=%3D' + $('#prj_project_header_id').val();
   }

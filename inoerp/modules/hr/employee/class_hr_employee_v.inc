@@ -65,6 +65,14 @@ class hr_employee_v extends dbObject {
   'bu_org_id',
   'currency_code',
  ];
+ 
+  public static $json_label_fields = [
+   'username',
+   'email',
+   'status',
+  'identification_id',
+   'employee_name'
+ ];
  public $dateField = [
   'limit_start_date',
  ];

@@ -344,6 +344,30 @@ EOD;
   return $attachment_statement;
  }
 
+ public function val_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $val_field_n='', $val_field_v='', $dependent_field='' , $title='') {
+  $bracketName = $name . '[]';
+  $value = htmlentities($value);
+  if ($readonly == 1) {
+   $readonly = 'readonly';
+  } else {
+   $readonly = '';
+  }
+  if ($required == 1) {
+   $required = 'required';
+  } else {
+   $required = '';
+  }
+  if (!empty($id)) {
+   $idvalue = 'id="' . $id . '"';
+  } else {
+   $idvalue = "";
+  }
+  $element_text_field = "<input type=\"text\" name=\"$bracketName\" value=\"$value\" 
+	  size=\"$size\" class=\"val_field textfield $div_class $name\" "
+   . "data-val_value=\"$val_field_v\"  data-val_field=\"$val_field_n\" data-dependent_field=\"$dependent_field\"  $required $idvalue $readonly title=\"$title\"  data-toggle=\"tooltip\">";
+  return $element_text_field;
+ }
+
  public function text_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $maxlength = "256") {
   $bracketName = $name . '[]';
   $value = htmlentities($value);
@@ -616,6 +640,82 @@ EOD;
  public function text_field_d($field_name, $div_class = "") {
   global $readonly, $class, $$class;
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
+ }
+
+ public function val_field_d($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
+  global $class, $$class;
+  echo $this->val_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
+ }
+
+ public function val_field_dm($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
+  global $class, $$class;
+  echo $this->val_field($field_name, $$class->$field_name, '20', $field_name, $div_class, 1, $this->readonly, $val_field_n, $val_field_v, $dependent_field);
+ }
+
+ public function l_val_field_d($field_name, $val_field_n, $val_field_v, $dependent_field , $div_class = "") {
+  global $class, $$class;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->val_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
+ }
+
+ public function l_val_field_dm($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
+  global $class, $$class;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->val_field($field_name, $$class->$field_name, '20', $field_name, $div_class, 1, $this->readonly, $val_field_n, $val_field_v, $dependent_field);
+ }
+
+ public function l_val_field_d2($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
+  global $class_second, $$class_second;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->val_field($field_name, $$class_second->$field_name, '20', $field_name, $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
+ }
+
+ public function l_val_field_d2m($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
+  global $class_second, $$class_second;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->val_field($field_name, $$class_second->$field_name, '20', $field_name, $div_class, 1, $this->readonly, $val_field_n, $val_field_v, $dependent_field);
+ }
+
+ public function l_val_field_d3($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
+  global $class_third, $$class_third;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->val_field($field_name, $$class_third->$field_name, '20', $field_name, $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
+ }
+
+ public function l_val_field_d3m($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
+  global $class_third, $$class_third;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->val_field($field_name, $$class_third->$field_name, '20', $field_name, $div_class, 1, $this->readonly, $val_field_n, $val_field_v, $dependent_field);
+ }
+
+ public function val_field_wid($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
+  global  $class, $$class;
+  echo $this->val_field($field_name, $$class->$field_name, '20', '', $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
+ }
+
+ public function val_field_widm($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
+  global  $class, $$class;
+  echo $this->val_field($field_name, $$class->$field_name, '20', 1, $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
+ }
+
+ public function val_field_wid2($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
+  global $class_second, $$class_second;
+  echo $this->val_field($field_name, $$class_second->$field_name, '20', '', $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
+ }
+
+ public function val_field_wid2m($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
+  global $class_second, $$class_second;
+  echo $this->val_field($field_name, $$class_second->$field_name, '20', '', $div_class, 1, $this->readonly, $val_field_n, $val_field_v, $dependent_field);
+ }
+
+ public function val_field_wid3($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
+  global $class_third, $$class_third;
+  echo $this->val_field($field_name, $$class_third->$field_name, '20', '', $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
+ }
+
+ public function val_field_wid3m($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
+  global $class_third, $$class_third;
+  echo $this->val_field($field_name, $$class_third->$field_name, '20', 1, $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
  }
 
  public function l_text_field_d($field_name, $div_class = "") {
@@ -1765,8 +1865,8 @@ EOD;
   echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->checkBox_field($field_name, $$class->$field_name, $field_name, '', $this->readonly);
  }
- 
-  public function l_checkBox_field_dr($field_name) {
+
+ public function l_checkBox_field_dr($field_name) {
   global $class, $$class;
   echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->checkBox_field($field_name, $$class->$field_name, $field_name, '', 1);

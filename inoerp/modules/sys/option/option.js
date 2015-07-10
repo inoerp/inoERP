@@ -36,9 +36,9 @@ setValFromSelectPage.prototype.setVal = function() {
 
 
 $(document).ready(function() {
-  var mandatoryCheck = new mandatoryFieldMain();
- mandatoryCheck.header_id = 'option_header_id';
- mandatoryCheck.mandatoryHeader();
+//  var mandatoryCheck = new mandatoryFieldMain();
+// mandatoryCheck.header_id = 'option_header_id';
+// mandatoryCheck.mandatoryHeader();
  
  //Popup for selecting option type
   $(".option_header_id.select_popup").on("click", function() {

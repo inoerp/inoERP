@@ -30,7 +30,7 @@
        <li><?php $f->l_select_field_from_object('request_category', hd_support_request::sr_category(), 'option_line_code', 'option_line_value', $$class->request_category, 'request_category'); ?></li>
        <li><?php $f->l_select_field_from_array('priority', dbObject::$position_array, $$class->priority); ?></li>
        <li><?php
-        $f->l_text_field_d('change_request_number', 'request_number');
+        $f->l_val_field_d('change_request_number',  'hd_service_request' , '' , 'service_request_number' ,'select change_request_number');
         echo $f->hidden_field_withCLass('hd_change_request_id', $$class->hd_change_request_id, 'hd_change_request_id');
         ?>
         <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hd_change_request_id select_popup clickable">

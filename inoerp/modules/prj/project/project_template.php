@@ -66,8 +66,8 @@ inoERP
     </div>
     <div id="tabsHeader-3" class="tabContent">
      <ul class="column header_field">
-      <li><?php $f->l_text_field_d('revenue_accrual_method'); ?></li>
-      <li><?php $f->l_text_field_d('invoice_accrual_method'); ?></li>
+      <li><?php $f->l_select_field_from_array('revenue_accrual_method', prj_project_header::$accrual_method_a, $$class->revenue_accrual_method, 'revenue_accrual_method');  ?></li>
+      <li><?php $f->l_select_field_from_array('invoice_accrual_method', prj_project_header::$accrual_method_a, $$class->invoice_accrual_method, 'invoice_accrual_method');  ?></li>
       <li><?php $f->l_text_field_d('billing_cycle'); ?></li>
       <li><?php $f->l_select_field_from_object('cost_burden_schedule_id', prj_burden_list_header::find_all(), 'prj_burden_list_header_id', 'burden_list', $$class->cost_burden_schedule_id, 'cost_burden_schedule_id'); ?></li> 
       <li><?php $f->l_checkBox_field_d('account_burdened_cost_cb'); ?></li> 
@@ -283,7 +283,7 @@ inoERP
          </td>
          <td><?php form::text_field_wid3sr('prj_project_member_id'); ?></td>
          <td><?php
-          $f->text_field_wid3('member_username', 'select user username');
+          $f->val_field_wid3('member_username',  'user' ,  'username' , '', 'select user username');
           echo $f->hidden_field('user_id', $$class_third->user_id);
           ?><i class="select_username select_popup clickable fa fa-search"></i></td>
          <td><?php echo $f->select_field_from_object('prj_role_id', prj_role::find_all(), 'prj_role_id', 'role_name', $$class_third->prj_role_id, '', 'medium'); ?></td>

@@ -36,14 +36,19 @@ class prj_project_all_v extends dbObject {
   'completion_date',
   'header_amount',
  ];
- 
-  public $initial_search = [
+ public $initial_search = [
   'prj_project_header_id',
   'project_number',
-   'prj_project_line_id'
+  'prj_project_line_id'
  ];
-  
-  
+ public static $json_label_fields = [
+  'org',
+  'project_number',
+  'description',
+  'task_number',
+  'task_name',
+  'task_description',
+ ];
  public $search = [
   '_update_path' => 'form.php?class_name=prj_project_header',
   '_show_update_path' => 1,
