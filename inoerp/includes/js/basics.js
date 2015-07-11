@@ -1913,7 +1913,7 @@ function getBPALineDetails(options) {
 
 function getSerialNumber(options) {
  var defaults = {
-  json_url: 'modules/inv/serial/json_serial_number.php',
+  json_url: 'modules/inv/serial_number/json_serial_number.php',
   org_id: $('#org_id').val(),
   status: $('#serial_status').val(),
   trclass: false
@@ -1960,7 +1960,7 @@ function getSerialNumber(options) {
    $('.show_loading_small').show();
   },
   error: function (request, errorType, errorMessage) {
-   alert('No valid serail number found \n' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+   console.log('No valid serail number found \n' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
 }
@@ -3218,14 +3218,6 @@ $(document).ready(function () {
  supplierName.extra_elements = ['supplier_id', 'supplier_number'];
  supplierName.min_length = 3;
  supplierName.autoComplete();
-
-// var customerName = new autoCompleteMain();
-// customerName.json_url = 'modules/ar/customer/json_customer.php';
-// customerName.primary_column1 = 'bu_org_id';
-// customerName.select_class = 'select_customer_name';
-// customerName.extra_elements = ['ar_customer_id', 'customer_number'];
-// customerName.min_length = 3;
-// customerName.autoComplete();
 
  $('.select_customer_name').inoAutoCompleteElement({
   json_url: 'modules/ar/customer/json_customer.php',

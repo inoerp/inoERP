@@ -344,7 +344,7 @@ EOD;
   return $attachment_statement;
  }
 
- public function val_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $val_field_n='', $val_field_v='', $dependent_field='' , $title='') {
+ public function val_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $val_field_class_n='', $val_field_v='', $dependent_field='' , $title='') {
   $bracketName = $name . '[]';
   $value = htmlentities($value);
   if ($readonly == 1) {
@@ -364,7 +364,7 @@ EOD;
   }
   $element_text_field = "<input type=\"text\" name=\"$bracketName\" value=\"$value\" 
 	  size=\"$size\" class=\"val_field textfield $div_class $name\" "
-   . "data-val_value=\"$val_field_v\"  data-val_field=\"$val_field_n\" data-dependent_field=\"$dependent_field\"  $required $idvalue $readonly title=\"$title\"  data-toggle=\"tooltip\">";
+   . "data-val_value=\"$val_field_v\"  data-val_field=\"$val_field_class_n\" data-dependent_field=\"$dependent_field\"  $required $idvalue $readonly title=\"$title\"  data-toggle=\"tooltip\">";
   return $element_text_field;
  }
 

@@ -224,21 +224,22 @@ class item extends dbObject {
   "build_in_wip_cb",
   "item_number",
   'am_asset_type',
+  'transactable_cb'
  ];
- public $column = [
-  'item_id',
-  'item_id_m',
-  "org_id",
-  "item_number",
-  "item_description",
-  "item_type",
-  "serial_generation",
-  "lot_generation",
-  "uom_id",
-  "item_status",
-  'processing_lt',
-  'kit_cb'
- ];
+// public $column = [
+//  'item_id',
+//  'item_id_m',
+//  "org_id",
+//  "item_number",
+//  "item_description",
+//  "item_type",
+//  "serial_generation",
+//  "lot_generation",
+//  "uom_id",
+//  "item_status",
+//  'processing_lt',
+//  'kit_cb'
+// ];
  public $requiredField = [
   "item_number",
   "uom_id",
@@ -262,6 +263,20 @@ class item extends dbObject {
   'overwrite_minmax_multibin_number',
   'overwrite_minmax_multibin_size'
  ];
+ 
+ public static $json_label_fields = [
+  'item_id_m',
+  "item_number",
+  "item_description",
+  'product_line',
+  "item_type",
+  "lot_generation",
+  "serial_generation",
+  "list_price",
+  "planner",
+  "fix_lot_multiplier",
+ ];
+ 
  public $search = [
   '_show_update_path' => 1,
   '_update_action_meassge' => 'Update',

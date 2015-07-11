@@ -1,65 +1,3 @@
-function setValFromSelectPage(inv_transaction_header_id, combination, item_id_m, item_number, item_description, uom_id,
-        serial_generation, lot_generation, bom_config_header_id) {
- this.inv_transaction_header_id = inv_transaction_header_id;
- this.combination = combination;
- this.item_id_m = item_id_m;
- this.item_number = item_number;
- this.item_description = item_description;
- this.uom_id = uom_id;
- this.serial_generation = serial_generation;
- this.lot_generation = lot_generation;
- this.bom_config_header_id = bom_config_header_id;
-}
-
-setValFromSelectPage.prototype.setVal = function () {
- var inv_transaction_header_id = this.inv_transaction_header_id;
- var combination = this.combination;
- var item_id_m = this.item_id_m;
- var item_number = this.item_number;
- var item_description = this.item_description;
- var uom_id = this.uom_id;
-
- var rowClass = '.' + localStorage.getItem("row_class");
- var fieldClass = '.' + localStorage.getItem("field_class");
- if (inv_transaction_header_id) {
-  $("#inv_transaction_header_id").val(inv_transaction_header_id);
- }
- rowClass = rowClass.replace(/\s+/g, '.');
- fieldClass = fieldClass.replace(/\s+/g, '.');
-
- if (combination) {
-  $('#content').find(rowClass).find(fieldClass).val(combination);
- }
- if (item_id_m) {
-  $('#content').find(rowClass).find('.item_id_m').val(item_id_m);
- }
- if (item_number) {
-  $('#content').find(rowClass).find('.item_number').val(item_number);
- }
- if (item_description) {
-  $('#content').find(rowClass).find('.item_description').val(item_description);
- }
- if (uom_id) {
-  $('#content').find(rowClass).find('.uom_id').val(uom_id);
- }
- if (this.serial_generation) {
-  $('#content').find(rowClass).find('.serial_generation').val(this.serial_generation);
-  $('#content').find(rowClass).find('.serial_number').attr('required', true).css('background-color', 'pink');
- }
- if (this.lot_generation) {
-  $('#content').find(rowClass).find('.lot_generation').val(this.lot_generation);
-  $('#content').find(rowClass).find('.lot_number').attr('required', true).css('background-color', 'pink');
- }
- if (this.bom_config_header_id) {
-  var rowClass_b = '.' + localStorage.getItem("row_class_b");
-  rowClass_b = rowClass_b.replace(/\s+/g, '.');
-  $('#content').find(rowClass_b).find('.bom_config_header_id').val(this.bom_config_header_id);
- }
- localStorage.removeItem("row_class");
- localStorage.removeItem("field_class");
-
-};
-
 function beforeSave() {
  return lotSerial_quantityValidation({
   quantity_divClass: '.quantity'
@@ -162,8 +100,8 @@ $(document).ready(function () {
 
  onClick_addDetailLine(1, '.add_row_detail_img1');
 
- $('body').off('blur', '.item_number, .from_subinventory_id, .from_locator_id ')
-         .on('blur', '.item_number, .from_subinventory_id, .from_locator_id', function () {
+ $('body').off('blur', '.from_subinventory_id, .from_locator_id ')
+         .on('blur', '.from_subinventory_id, .from_locator_id', function () {
           var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
           var trClass_d = '.' + trClass;
           var generation_type = $('#content').find(trClass_d).find('.serial_generation').val();
@@ -226,8 +164,8 @@ $(document).ready(function () {
 
          });
 
- $('body').off('blur', '.item_number, .from_subinventory_id, .from_locator_id ')
-         .on('blur', '.item_number, .from_subinventory_id, .from_locator_id', function () {
+ $('body').off('blur', '.from_subinventory_id, .from_locator_id ')
+         .on('blur', '.from_subinventory_id, .from_locator_id', function () {
           var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
           var trClass_d = '.' + trClass;
           var generation_type = $('#content').find(trClass_d).find('.lot_generation').val();

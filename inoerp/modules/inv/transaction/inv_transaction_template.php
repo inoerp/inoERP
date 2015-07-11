@@ -1,7 +1,7 @@
 <form action=""  method="post" id="inv_transaction"  name="inv_transaction">
  <?php echo (!empty($hidden_stmt)) ? $hidden_stmt : ""; ?> 
  <!--create empty form or a single id when search is not clicked and the id is referred from other page -->
- <span class="heading"><?php   echo gettext('Inventory Transaction ')   ?></span> 
+ <span class="heading"><?php echo gettext('Inventory Transaction ') ?></span> 
  <div class='tabContainer'>
   <ul class='column header_field'>
    <li>
@@ -46,6 +46,7 @@
        <tr class="inv_transaction_line0" id="tab1_1">
         <td>
          <?php
+         $f = new inoform();
          echo ino_inline_action($$class->inv_transaction_id, array('org_id' => $$class->org_id,
           'transaction_type_id' => $$class->transaction_type_id));
          ?>
@@ -54,8 +55,11 @@
          <?php echo $f->text_field_dsr('inv_transaction_id', 'lineId'); ?>
         </td>
         <td><?php $f->text_field_widsr('item_id_m'); ?></td>
-        <td><?php $f->text_field_widm('item_number', 'select_item_number'); ?>
-         <i class="select_item_number select_popup clickable fa fa-search"></i></td>
+        <td><?php
+         $f->val_field_widm('item_number', 'item', 'item_number', '', 'vf_select_item_number');
+         echo $f->hidden_field_withCLass('transactable_cb', '1', 'popup_value');
+         ?>
+         <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
         <td><?php $f->text_field_widsr('revision_name'); ?></td>
         <td><?php $f->text_field_wid('item_description'); ?></td>
         <td>
@@ -154,17 +158,17 @@
       <th><?php echo gettext('Add Serial Numbers') ?></th>
       </thead>
       <tbody class="form_data_line_tbody">
-       <tr class="inv_transaction_line0" id="tab4_1">
+       <tr class="inv_transaction_line0">
         <td class="add_detail_values0">	<?php
          echo $f->hidden_field('lot_number_id', $$class->lot_number_id);
          echo $f->hidden_field('lot_generation', $$class->lot_generation);
          ?> 
-         <img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+         <i class="fa fa-arrow-circle-down add_detail_values_img" alt="View/Add Lot Numbers"></i>
          <div class="class_detail_form">
-          <fieldset class="form_detail_data_fs"><legend>lot</legend>
+          <fieldset class="form_detail_data_fs">
            <div class="tabsDetail">
             <ul class="tabMain">
-             <li class="tabLink"><a href="#tabsDetail-1-1"> Numbers</a></li>
+             <li class="tabLink"><a href="#tabsDetail-1-1">Lot Numbers</a></li>
             </ul>
             <div class="tabContainer">
              <div id="tabsDetail-1-1" class="tabContent">
@@ -199,8 +203,8 @@
                  <tr class="inv_lot_number<?php echo $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
                   <td>   
                    <ul class="inline_action">
-                    <li class="add_row_detail_img1"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-                    <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+                    <li class="add_row_detail_img1"><i class="fa fa-plus-circle clickable" alt="add new line"></i></li>
+                    <li class="remove_row_img"><i class="fa fa-minus-circle clickable" alt="remove this line"></i></li>
                     <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($lot_no->inv_lot_number_id); ?>"></li>           
                     <li><?php echo form::hidden_field('inv_transaction_id', $$class->inv_transaction_id); ?></li>
                    </ul>
@@ -233,12 +237,12 @@
          echo $f->hidden_field('serial_number_id', $$class->serial_number_id);
          echo $f->hidden_field('serial_generation', $$class->serial_generation);
          ?>
-         <img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+         <i class="fa fa-arrow-circle-down add_detail_values_img" alt="View/Add Serial Numbers"></i>
          <div class="class_detail_form">
-          <fieldset class="form_detail_data_fs"><legend>Serial</legend>
+          <fieldset class="form_detail_data_fs">
            <div class="tabsDetail">
             <ul class="tabMain">
-             <li class="tabLink"><a href="#tabsDetail-2-1"> Numbers</a></li>
+             <li class="tabLink"><a href="#tabsDetail-2-1">Serial Numbers</a></li>
             </ul>
             <div class="tabContainer">
              <div id="tabsDetail-2-1" class="tabContent">
@@ -271,8 +275,8 @@
                  <tr class="inv_serial_number<?php echo $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
                   <td>   
                    <ul class="inline_action">
-                    <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-                    <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+                    <li class="add_row_detail_img"><i class="fa fa-plus-circle clickable" alt="add new line"></i></li>
+                    <li class="remove_row_img"><i class="fa fa-minus-circle clickable" alt="remove this line"></i></li>
                     <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($serial_no->inv_serial_number_id); ?>"></li>           
                     <li><?php echo form::hidden_field('inv_transaction_id', $$class->inv_transaction_id); ?></li>
                    </ul>
