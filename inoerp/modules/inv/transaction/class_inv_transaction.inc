@@ -212,6 +212,10 @@ class inv_transaction extends dbObject {
  private $_asset_create_journal = true;
  public $am_wo_header_id;
  private $_am_accounting_group_id;
+ public $exchange_rate_type;
+ public $exchange_rate = null;
+ public $currency;
+ public $doc_currency;
 
  public function setProperty($property, $value) {
   if (property_exists($this, $property)) {
@@ -900,7 +904,7 @@ class inv_transaction extends dbObject {
  }
 
  private function _save_journal_header() {
-
+  global $dbc;
   $gled = new gl_ledger();
   $gled->findBy_id($this->_ledger_id);
   $gp = new gl_period();
@@ -909,6 +913,18 @@ class inv_transaction extends dbObject {
   $gjh->ledger_id = $this->_ledger_id;
   $gjh->status = 'ENTERED';
   $gjh->currency = $gled->currency_code;
+
+  if (!empty($this->exchange_rate) && !empty($this->currency)) {
+   if ($gjh->currency != $this->currency) {
+    echo "<br>GL Currency of ledger (" . $gjh->currency . ") and document " . $this->currency . ") does n't match ";
+    $dbc->rollback = true;
+    return -90;
+   }
+   $gjh->doc_currency = $this->doc_currency;
+   $gjh->exchange_type = $this->exchange_rate_type;
+   $gjh->exchange_rate = $this->exchange_rate;
+  }
+
   $gjh->period_id = $current_open_period->gl_period_id;
   $gjh->journal_source = self::$module;
   $gjh->journal_category = self::$gl_journal_category;
@@ -938,10 +954,18 @@ class inv_transaction extends dbObject {
   $new_gjl->code_combination_id = $data_a['account_id'];
   if (($data_a['dr_cr']) == 'dr') {
    $new_gjl->total_dr = $data_a['amount'];
-   $new_gjl->total_ac_dr = $data_a['amount'];
+   if (!empty($this->exchange_rate)) {
+    $new_gjl->total_ac_dr = $data_a['amount'] * $this->exchange_rate;
+   } else {
+    $new_gjl->total_ac_dr = $data_a['amount'];
+   }
   } else {
    $new_gjl->total_cr = $data_a['amount'];
-   $new_gjl->total_ac_cr = $data_a['amount'];
+   if (!empty($this->exchange_rate)) {
+    $new_gjl->total_ac_cr = $data_a['amount'] * $this->exchange_rate;
+   } else {
+    $new_gjl->total_ac_cr = $data_a['amount'];
+   }
   }
   $new_gjl->description = 'Inv Transaction Id ' . $this->inv_transaction_id . ' item id ' . $this->item_id_m;
   $new_gjl->reference_type = 'table';

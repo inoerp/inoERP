@@ -73,7 +73,7 @@ $user_password_reset = new user_password_reset();
        </div>
 
        <div id="tabsLine-3" class="tabContent">
-        <form action=" " method="post" id="user_reset_password_onPage" name="user_reset_password_onPage">
+        <form action="<?php echo HOME_URL ?>extensions/user/user_login.php" method="post" id="user_reset_password_onPage" name="user_reset_password_onPage">
          <ul class="single-column">
           <li><label>User Name</label>
            <input type="text" name="username" maxlength="50" size="30" id="username" placeholder="example : sachin.god"

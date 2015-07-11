@@ -255,7 +255,7 @@
        });
       }
      }
-     
+
      var hidden_fields = {};
      if (settings.hidden_field_param) {
       $(auto_element).siblings('input:hidden').each(function (hidden_k, hidden_v) {
@@ -308,11 +308,10 @@
        if (ui.content.length === 1)
        {
         $(this).val(ui.content[0].value);
-//        var elemenType = $(this).parent().prop('tagName');
         $.each(ui.content[0], function (key, value) {
          var v_d = '.' + key;
          if (elemenType === 'LI') {
-          if (key.substr(-3) === '_cb') {
+          if (value_k.substr(-3) === '_cb' && (value_v == 1)) {
            $(auto_element).closest("form").find(v_d).prop('checked', true);
           } else {
            if (settings.set_value_for_one_field === true) {
@@ -323,8 +322,8 @@
           }
          } else if (elemenType === 'TD') {
           var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
-          if (key.substr(-3) === '_cb') {
-           $(form_id_h).find(trClass).find(v_d).prop('checked', true);
+          if (value_k.substr(-3) === '_cb' && (value_v == 1)) {
+           $(form_id_h).find(trClass).find(trClass).prop('checked', true);
           } else {
            if (settings.set_value_for_one_field === true) {
             $(auto_element_class_d).parent().find(v_d).val(value);
@@ -355,7 +354,7 @@
         $.each(value, function (value_k, value_v) {
          var v_d = '.' + value_k;
          if (elemenType === 'LI') {
-          if (value_k.substr(-3) === '_cb') {
+          if (value_k.substr(-3) === '_cb' && (value_v == 1)) {
            $(auto_element).closest("form").find(v_d).prop('checked', true);
           } else {
            if (settings.set_value_for_one_field === true) {
@@ -366,7 +365,7 @@
           }
          } else if (elemenType === 'TD') {
           var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
-          if (value_k.substr(-3) === '_cb') {
+          if (value_k.substr(-3) === '_cb' && (value_v == 1)) {
            $(form_id_h).find(trClass).find(v_d).prop('checked', true);
           } else {
            if (settings.set_value_for_one_field === true) {

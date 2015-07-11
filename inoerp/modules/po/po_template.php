@@ -37,8 +37,8 @@ inoERP
        <li><?php echo $f->hidden_field_withId('ref_po_header_id', $$class->ref_po_header_id); ?>
         <?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
         <label><?php echo gettext('Supplier Name') ?></label>
-          <?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> 
-       <i class="fa fa-search supplier_id select_popup clickable"></i>
+        <?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> 
+        <i class="fa fa-search supplier_id select_popup clickable"></i>
        </li>
        <li><?php $f->l_text_field_d('supplier_number'); ?></li>
        <li><label><?php echo gettext('Supplier Site') ?></label><?php
@@ -57,9 +57,9 @@ inoERP
         <li><?php $f->l_date_fieldFromToday('agreement_start_date', $$class->agreement_start_date) ?></li>
         <li><?php $f->l_date_fieldFromToday('agreement_end_date', $$class->agreement_start_date) ?></li>
         <li><?php $f->l_select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', '', 1, $readonly); ?></li>
-        <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, 1); ?></li>
+        <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', 'always_readonly', 1, 1); ?></li>
         <li><?php $f->l_select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
-        <li><?php $f->l_number_field('exchange_rate', $$class->exchange_rate, '', 'exchange_rate'); ?> </li>
+        <li><?php $f->l_number_field('exchange_rate', $$class->exchange_rate, '', 'exchange_rate', '', 1, $readonly); ?> </li>
         <li><?php $f->l_select_field_from_object('price_list_header_id', mdm_price_list_header::find_all_purchasing_pl(), 'mdm_price_list_header_id', 'price_list', $$class->price_list_header_id); ?></li>
         <li><?php $f->l_number_field('header_amount', $$class->header_amount, '15', 'header_amount'); ?></li>
         <li><?php $f->l_number_field('tax_amount', $$class->tax_amount, '15', 'tax_amount'); ?></li>
@@ -208,7 +208,8 @@ inoERP
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
-        <?php $f = new inoform();
+        <?php
+        
         $count = 0;
         foreach ($po_line_object as $po_line) {
          ?>         

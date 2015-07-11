@@ -45,7 +45,7 @@
 
        <div id="tabsHeader-2" class="tabContent">
         <div id="create_new_user" class="col-md-8">
-         <form action=" " method="post" id="user_header_onPage" name="user_header_onPage">
+         <form action="<?php echo HOME_URL ?>extensions/user/user_login.php" method="post" id="user_header_onPage" name="user_header_onPage">
           <ul class="single-column"><li><label>First Name</label><?php echo form::text_field('first_name', $user->first_name); ?></li>
            <li><label>Last Name</label><?php echo form::text_field('last_name', $user->last_name); ?></li>
            <li><label>Username</label><?php echo form::text_field('username', $user->username); ?></li>
@@ -69,7 +69,7 @@
        </div>
 
        <div id="tabsHeader-3" class="tabContent">
-        <form action=" " method="post" id="user_reset_password_onPage" name="user_reset_password_onPage">
+        <form action="<?php echo HOME_URL ?>extensions/user/user_login.php" method="post" id="user_reset_password_onPage" name="user_reset_password_onPage">
          <ul class="single-column">
           <li><label>Username</label><?php echo form::text_field('username', $user_password_reset->username, 35, 200, '', 'Login User Name', 'reset_password_user_name', '', 'reset_password_user_name'); ?>         </li>
           <li><label></label> Or </li>

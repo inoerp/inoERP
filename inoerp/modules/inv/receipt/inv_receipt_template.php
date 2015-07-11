@@ -13,8 +13,7 @@
    <form action=""  method="post" id="inv_receipt_header"  name="inv_receipt_header">
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
-      <li><label> <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_receipt_header_id select_popup clickable">
-        <?php echo gettext('Receipt Header Id') ?>  </label><?php echo form::text_field_dsr('inv_receipt_header_id'); ?>
+      <li><?php $f->l_text_field_dr_withSearch('inv_receipt_header_id') ?>
        <a name="show" href="form.php?class_name=inv_receipt_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_receipt_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
       <li><label><?php echo gettext('Inventory') ?></label><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>       </li>
@@ -76,6 +75,7 @@
       <thead> 
        <tr>
         <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
         <th><?php echo gettext('Receipt Line Id') ?></th>
         <th><?php echo gettext('Line #') ?></th>
         <th><?php echo gettext('Header Id') ?></th>
@@ -90,6 +90,7 @@
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
+       $f = new inoform();
        $count = 0;
        foreach ($inv_receipt_line_object as $inv_receipt_line) {
         $f->readonly2 = !empty($inv_receipt_line->inv_receipt_line_id) ? true : false;
@@ -101,11 +102,15 @@
            'inv_receipt_header_id' => $$class->inv_receipt_header_id, 'transaction_type_id' => $$class->transaction_type_id));
           ?>
          </td>
+         <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('inv_receipt_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
          <td><?php $f->text_field_wid2sr('po_header_id'); ?></td>
-         <td><?php $f->text_field_wid2s('po_number', 'select_po_number medium'); ?>
-          <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_po_number select_popup clickable"></td>
+         <td><?php
+          $f->val_field_wid2m('po_number', 'po_all_v', 'po_number', '', 'select');
+          echo $f->hidden_field_withCLass('po_status', 'approved', 'popup_value');
+          echo $f->hidden_field_withCLass('receving_org_id', '', 'popup_value receving_org_id org_id');
+          ?><i class="generic select_po_number select_popup clickable fa fa-search" data-class_name="po_all_v"></i></td>
          <td><?php $f->text_field_wid2sr('po_line_number', 'medium'); ?></td>
          <td><?php $f->text_field_wid2s('po_line_id'); ?></td>
          <td><?php $f->text_field_wid2sr('shipment_number', 'medium'); ?></td>
@@ -124,6 +129,7 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
+        <th><?php echo gettext('Seq') ?>#</th>
         <th><?php echo gettext('Item Id') ?></th>
         <th><?php echo gettext('Item Number') ?></th>
         <th><?php echo gettext('Revision') ?></th>
@@ -142,6 +148,7 @@
        foreach ($inv_receipt_line_object as $inv_receipt_line) {
         ?>         
         <tr class="inv_receipt_line<?php echo $count ?>">
+         <td><?php $f->seq_field_d($count) ?></td>
          <td><?php $f->text_field_wid2sr('item_id_m'); ?></td>
          <td><?php $f->text_field_d2('item_number', 'select_item_number'); ?></td>
          <td><?php $f->text_field_wid2sr('revision_name'); ?></td>
@@ -149,8 +156,8 @@
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $inv_receipt_line->uom_id, '', '', '', $readonly1); ?></td>
          <td><?php echo $f->checkBox_field('kit_cb', $$class_second->kit_cb, '', 'dontCopy'); ?></td>
          <td><?php echo $f->number_field('transaction_quantity', $$class_second->transaction_quantity, '8', '', '', 1, $readonly1); ?></td>
-         <td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_second->subinventory_id, '', 'subinventory_id', '', $readonly1); ?></td>
-         <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_second->subinventory_id), 'locator_id', 'locator', $$class_second->locator_id, '', 'locator_id', '', $readonly1); ?></td>
+         <td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_second->subinventory_id, '', 'subinventory_id', 1, $readonly); ?></td>
+         <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_second->subinventory_id), 'locator_id', 'locator', $$class_second->locator_id, '', 'locator_id', '', $readonly); ?></td>
          <td><button type="button" class="popup btn  btn-default view-item-config medium">
            <a href="form.php?class_name=bom_config_header&mode=9&window_type=popup"> View Configuration</a></button></td>
         </tr>
@@ -166,6 +173,7 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
+        <th><?php echo gettext('Seq') ?>#</th>
         <th><?php echo gettext('Add Lot Numbers') ?></th>
         <th><?php echo gettext('Add Serial Numbers') ?></th>
        </tr>
@@ -176,16 +184,17 @@
        foreach ($inv_receipt_line_object as $inv_receipt_line) {
         ?>    
         <tr class="inv_receipt_line<?php echo $count ?>">
+         <td><?php $f->seq_field_d($count) ?></td>
          <td class="add_detail_values0">	<?php
           echo!empty($$class_second->lot_number_id) ? $f->hidden_field('lot_number_id', $$class_second->lot_number_id) : $f->hidden_field('lot_number_id', '');
           echo!empty($$class_second->lot_generation) ? $f->hidden_field('lot_generation', $$class_second->lot_generation) : $f->hidden_field('lot_generation', '');
-          ?> 
-          <img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+          ?>
+          <i class="fa fa-arrow-circle-down add_detail_values_img" alt="View/Add Lot Numbers"></i>
           <div class="class_detail_form">
-           <fieldset class="form_detail_data_fs"><legend>lot</legend>
+           <fieldset class="form_detail_data_fs">
             <div class="tabsDetail">
              <ul class="tabMain">
-              <li class="tabLink"><a href="#tabsDetail-1-1"> Numbers</a></li>
+              <li class="tabLink"><a href="#tabsDetail-1-1">Lot Numbers</a></li>
              </ul>
              <div class="tabContainer">
               <div id="tabsDetail-1-1" class="tabContent">
@@ -221,8 +230,8 @@
                   <tr class="inv_lot_number<?php echo $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
                    <td>   
                     <ul class="inline_action">
-                     <li class="add_row_detail_img1"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-                     <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+                     <li class="add_row_detail_img1"><i class="fa fa-plus-circle clickable" alt="add new line"></i></li>
+                     <li class="remove_row_img"><i class="fa fa-minus-circle clickable" alt="remove this line"></i></li>
                      <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($lot_no->inv_lot_number_id); ?>"></li>           
                     </ul>
                    </td>
@@ -253,13 +262,13 @@
           <?php
           echo!empty($$class_second->serial_number_id) ? $f->hidden_field('serial_number_id', $$class_second->serial_number_id) : $f->hidden_field('serial_number_id', '');
           echo!empty($$class_second->serial_generation) ? $f->hidden_field('serial_generation', $$class_second->serial_generation) : $f->hidden_field('serial_generation', '');
-          ?> 
-          <img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+          ?>
+          <i class="fa fa-arrow-circle-down add_detail_values_img" alt="View/Add Serial Numbers"></i>
           <div class="class_detail_form">
-           <fieldset class="form_detail_data_fs"><legend>Serial</legend>
+           <fieldset class="form_detail_data_fs">
             <div class="tabsDetail">
              <ul class="tabMain">
-              <li class="tabLink"><a href="#tabsDetail-2-1"> Numbers</a></li>
+              <li class="tabLink"><a href="#tabsDetail-2-1">Serial Numbers</a></li>
              </ul>
              <div class="tabContainer">
               <div id="tabsDetail-2-1" class="tabContent">
@@ -295,8 +304,8 @@
                   <tr class="inv_serial_number<?php echo $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
                    <td>   
                     <ul class="inline_action">
-                     <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-                     <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+                     <li class="add_row_detail_img"><i class="fa fa-plus-circle clickable" alt="add new line"></i></li>
+                     <li class="remove_row_img"><i class="fa fa-minus-circle clickable" alt="remove this line"></i></li>
                      <li><input type="checkbox" name="detail_id_cb" value="<?php echo ($serial_no->inv_serial_number_id); ?>"></li>           
 
                     </ul>
@@ -340,6 +349,7 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
+        <th><?php echo gettext('Seq') ?>#</th>
         <th><?php echo gettext('Supplier Id') ?></th>
         <th><?php echo gettext('Supplier #') ?></th>
         <th><?php echo gettext('Supplier') ?></th>
@@ -354,12 +364,13 @@
        foreach ($inv_receipt_line_object as $inv_receipt_line) {
         ?>         
         <tr class="inv_receipt_line<?php echo $count ?>">
-         <td><?php form::text_field_wid2('supplier_id'); ?></td>
-         <td><?php form::text_field_wid2('supplier_number'); ?></td>
-         <td><?php form::text_field_wid2('supplier_name'); ?></td>
-         <td><?php form::text_field_wid2('supplier_site_id'); ?></td>
-         <td><?php form::text_field_wid2('supplier_site_number'); ?></td>
-         <td><?php form::text_field_wid2('supplier_site_name'); ?></td>
+         <td><?php $f->seq_field_d($count) ?></td>
+         <td><?php form::text_field_wid2r('supplier_id'); ?></td>
+         <td><?php form::text_field_wid2r('supplier_number'); ?></td>
+         <td><?php form::text_field_wid2r('supplier_name'); ?></td>
+         <td><?php form::text_field_wid2r('supplier_site_id'); ?></td>
+         <td><?php form::text_field_wid2r('supplier_site_number'); ?></td>
+         <td><?php form::text_field_wid2r('supplier_site_name'); ?></td>
         </tr>
         <?php
         $count = $count + 1;
@@ -372,7 +383,36 @@
     </div>
 
     <div id="tabsLine-5" class="form_data_line_tbody">
+     <table class="form_line_data_table">
+      <thead> 
+       <tr>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Currency') ?></th>
+        <th><?php echo gettext('Document Currency') ?></th>
+        <th><?php echo gettext('Exchange Rate Type') ?></th>
+        <th><?php echo gettext('Exchange Rate') ?></th>
+       </tr>
+      </thead>
+      <tbody class="form_data_line_tbody">
+       <?php
+       $count = 0;
+       foreach ($inv_receipt_line_object as $inv_receipt_line) {
+        ?>         
+        <tr class="inv_receipt_line<?php echo $count ?>">
+         <td><?php $f->seq_field_d($count) ?></td>
+         <td><?php form::text_field_wid2r('currency'); ?></td>
+         <td><?php form::text_field_wid2r('doc_currency'); ?></td>
+         <td><?php form::text_field_wid2r('exchange_rate_type'); ?></td>
+         <td><?php form::text_field_wid2r('exchange_rate'); ?></td>
+        </tr>
+        <?php
+        $count = $count + 1;
+       }
+       ?>
+      </tbody>
+      <!--                  Showing a blank form for new entry-->
 
+     </table>
     </div>
 
    </div>
@@ -391,6 +431,7 @@
   <li class="line_key_field" data-line_key_field="item_description" ></li>
   <li class="single_line" data-single_line="false" ></li>
   <li class="form_line_id" data-form_line_id="inv_receipt_line" ></li>
+  <li class="before_save_function" data-before_save_function="beforeSave" ></li>
  </ul>
  <ul id="js_contextMenu_data">
   <li class="docHedaderId" data-docHedaderId="inv_receipt_header_id" ></li>

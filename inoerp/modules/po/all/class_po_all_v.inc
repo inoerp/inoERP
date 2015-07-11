@@ -25,6 +25,7 @@ class po_all_v extends dbObject {
   'supplier_site_id',
   'buyer',
   'currency',
+  'doc_currency',
   'header_amount',
   'po_status',
   'payment_term_id',
@@ -32,6 +33,8 @@ class po_all_v extends dbObject {
   'supplier_number',
   'supplier_site_name',
   'supplier_site_number',
+  'exchange_rate_type',
+  'exchange_rate',
   'payment_term',
   'payment_term_description',
   'po_line_id',
@@ -94,6 +97,8 @@ class po_all_v extends dbObject {
   'received_quantity',
   'unit_price',
   'line_price',
+  'exchange_rate_type',
+  'exchange_rate',
   'uom_id',
   'po_header_id',
   'po_type',
@@ -114,6 +119,7 @@ class po_all_v extends dbObject {
   'supplier_number',
   'supplier_site_number',
   'currency',
+  'doc_currency',
   'header_amount',
   'bu_org_id',
   'supplier_id',
@@ -155,6 +161,8 @@ class po_all_v extends dbObject {
   'supplier_site_number',
   'item_number',
   'item_description',
+  'exchange_rate_type',
+  'exchange_rate',
   'item_id_m',
   'revision_name',
   'serial_generation',
@@ -164,6 +172,20 @@ class po_all_v extends dbObject {
   'po_line_id',
   'po_detail_id',
   'po_status'
+ ];
+ public static $json_label_fields = [
+  'po_number',
+  'po_line_number',
+  'shipment_number',
+  'po_detail_id',
+  'po_status',
+  'supplier_name',
+  'supplier_site_name',
+  'item_description',
+  'item_number',
+  'org_id',
+  'quantity',
+  'open_quantity',
  ];
  public $dateField = [
   'need_by_date',
@@ -226,6 +248,7 @@ class po_all_v extends dbObject {
  public $supplier_site_id;
  public $buyer;
  public $currency;
+ public $doc_currency;
  public $header_amount;
  public $po_status;
  public $payment_term_id;
@@ -233,6 +256,8 @@ class po_all_v extends dbObject {
  public $supplier_number;
  public $supplier_site_name;
  public $supplier_site_number;
+ public $exchange_rate_type;
+ public $exchange_rate;
  public $payment_term;
  public $payment_term_description;
  public $po_line_id;
@@ -281,8 +306,8 @@ class po_all_v extends dbObject {
   $sql = "
 CREATE OR REPLACE VIEW po_all_v
 (
-po_header_id, bu_org_id, po_type, po_number, supplier_id, supplier_site_id, buyer, currency, header_amount, po_status,
-payment_term_id,
+po_header_id, bu_org_id, po_type, po_number, supplier_id, supplier_site_id, buyer, currency, doc_currency, header_amount, po_status,
+payment_term_id,exchange_rate,exchange_rate_type,
 supplier_name, supplier_number,
 supplier_site_name, supplier_site_number,
 payment_term, payment_term_description,
@@ -299,8 +324,8 @@ receving_org, created_by, creation_date, last_update_by, last_update_date
 AS
 SELECT 
 po_header.po_header_id, po_header.bu_org_id, po_header.po_type, po_header.po_number, po_header.supplier_id, 
-po_header.supplier_site_id, po_header.buyer, po_header.currency, po_header.header_amount, po_header.po_status,
-po_header.payment_term_id,
+po_header.supplier_site_id, po_header.buyer, po_header.currency, po_header.doc_currency, po_header.header_amount, po_header.po_status,
+po_header.payment_term_id,po_header.exchange_rate,po_header.exchange_rate_type,
 supplier.supplier_name, supplier.supplier_number,
 supplier_site.supplier_site_name, supplier_site.supplier_site_number,
 payment_term.payment_term, payment_term.description,
@@ -387,6 +412,24 @@ LEFT JOIN org ON po_line.receving_org_id = org.org_id
   $result = $this->findBySql($sql);
   $result_f = ra_conevrt_data_pie($result);
   return !empty($result_f) ? ($result_f) : false;
+ }
+
+ public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '') {
+  $sql = "SELECT * FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
+  $sql .= " AND po_status = 'APPROVED' ";
+  if(!empty($_GET['hidden_fields']['receving_org_id'])){
+   $rec_org_id = $_GET['hidden_fields']['receving_org_id'];
+   $sql .= " AND receving_org_id = '{$rec_org_id}' ";
+  }
+  if (!empty($dependent_fields)) {
+   foreach ($dependent_fields as $k => $v) {
+    if (!empty($k) && !empty($v)) {
+     $sql .= " AND $k = '{$v}' ";
+    }
+   }
+  }
+  $result_array = static::find_by_sql($sql);
+  return !empty($result_array) ? ($result_array) : false;
  }
 
 }

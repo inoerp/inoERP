@@ -33,6 +33,10 @@ class inv_receipt_line extends dbObject {
   "receving_account_id",
   "accrual_account_id",
   'country_of_origin',
+  'currency',
+  'doc_currency',
+  'exchange_rate_type',
+  'exchange_rate',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -120,6 +124,10 @@ class inv_receipt_line extends dbObject {
  public $transaction_type_id;
  public $po_number;
  public $line_number;
+ public $currency;
+ public $doc_currency;
+ public $exchange_rate_type;
+ public $exchange_rate;
  public $shipment_number;
  public $item_number;
  public $uom_name;
@@ -206,10 +214,10 @@ class inv_receipt_line extends dbObject {
    }
    $this->save();
   } else if (!empty($this->inv_receipt_line_id) && !empty($this->sd_so_line_id)) {
-   if(!empty($this->item_id_m)){
+   if (!empty($this->item_id_m)) {
     $this->_create_inv_transactions();
    }
-      $this->_after_save_rmaReceipt();
+   $this->_after_save_rmaReceipt();
   }
  }
 
@@ -288,7 +296,7 @@ class inv_receipt_line extends dbObject {
   global $dbc;
 
   $po_line = po_line::find_by_id($this->_po_line_id);
-  
+
   $inv = new inventory();
   $inv_i = $inv->findRelatedDetail_ByOrgId($this->org_id);
   $gled = new gl_ledger();
@@ -358,10 +366,10 @@ class inv_receipt_line extends dbObject {
   $line_num++;
   $new_gjl->status = 'U';
   $new_gjl->code_combination_id = $inv_i->expense_ac_id;
-   $new_gjl->total_ac_cr = $new_gjl->total_cr = $po_unit_price * $this->transaction_quantity;
+  $new_gjl->total_ac_cr = $new_gjl->total_cr = $po_unit_price * $this->transaction_quantity;
   $new_gjl->total_ac_dr = $new_gjl->total_dr = 0;
   $ppv_amnt = $po_unit_price * $this->transaction_quantity - $this->_standard_cost_for_all_kit_items;
-  
+
   $val_result = $new_gjl->validate_requiredField();
   if ($val_result) {
    try {
@@ -412,21 +420,29 @@ class inv_receipt_line extends dbObject {
   $item_id_m_f = empty($item_id_m) ? $this->item_id_m : $item_id_m;
   $revision_name_f = empty($revision_name) ? $this->revision_name : $revision_name;
   $transaction_qty_f = empty($transaction_qty) ? $this->transaction_quantity : $transaction_qty;
+
+//  if (!empty($this->exchange_rate)) {
+//   $inv_transaction->exchange_rate_type = $this->exchange_rate_type;
+//   $inv_transaction->exchange_rate = $this->exchange_rate;
+//  }
+  $inv_transaction->currency = $this->currency;
+//  $inv_transaction->doc_currency = $this->doc_currency;
+  $inv_transaction->org_id = $this->org_id;
+  $inv_transaction->quantity = $transaction_qty_f;
+  $inv_transaction->item_id_m = $item_id_m_f;
+  $inv_transaction->revision_name = $revision_name_f;
+  $inv_transaction->transaction_type_id = $this->transaction_type_id;
+  $inv_transaction->reference_type = 'table';
+  $inv_transaction->reference_key_name = 'inv_receipt_line';
+  $inv_transaction->reference_key_value = $this->inv_receipt_line_id;
+
   switch ($this->transaction_type_id) {
    case 5 :
-    $inv_transaction->org_id = $this->org_id;
     $inv_transaction->to_subinventory_id = $this->subinventory_id;
     if (!empty($this->locator_id)) {
      $inv_transaction->to_locator_id = $this->locator_id;
     }
-    $inv_transaction->quantity = $transaction_qty_f;
-    $inv_transaction->item_id_m = $item_id_m_f;
-    $inv_transaction->revision_name = $revision_name_f;
-    $inv_transaction->transaction_type_id = $this->transaction_type_id;
     $inv_transaction->po_detail_id = $this->po_detail_id;
-    $inv_transaction->reference_type = 'table';
-    $inv_transaction->reference_key_name = 'inv_receipt_line';
-    $inv_transaction->reference_key_value = $this->inv_receipt_line_id;
     $inv_transaction->document_type = 'PO';
     $inv_transaction->document_number = $this->po_number;
     $inv_transaction->_before_save();
@@ -435,19 +451,11 @@ class inv_receipt_line extends dbObject {
     break;
 
    case 21 :
-    $inv_transaction->org_id = $this->org_id;
     $inv_transaction->from_subinventory_id = $this->subinventory_id;
     if (!empty($this->locator_id)) {
      $inv_transaction->from_locator_id = $this->locator_id;
     }
-    $inv_transaction->quantity = $transaction_qty_f;
-    $inv_transaction->item_id_m = $item_id_m_f;
-    $inv_transaction->revision_name = $revision_name_f;
-    $inv_transaction->transaction_type_id = $this->transaction_type_id;
     $inv_transaction->po_detail_id = $this->po_detail_id;
-    $inv_transaction->reference_type = 'table';
-    $inv_transaction->reference_key_name = 'inv_receipt_line';
-    $inv_transaction->reference_key_value = $this->inv_receipt_line_id;
     $inv_transaction->document_type = 'PO';
     $inv_transaction->document_number = $this->po_number;
     $inv_transaction->_before_save();
@@ -456,19 +464,11 @@ class inv_receipt_line extends dbObject {
     break;
 
    case 23 :
-    $inv_transaction->org_id = $this->org_id;
     $inv_transaction->to_subinventory_id = $this->subinventory_id;
     if (!empty($this->locator_id)) {
      $inv_transaction->to_locator_id = $this->locator_id;
     }
-    $inv_transaction->quantity = $transaction_qty_f;
-    $inv_transaction->item_id_m = $item_id_m_f;
-    $inv_transaction->revision_name = $revision_name_f;
-    $inv_transaction->transaction_type_id = $this->transaction_type_id;
     $inv_transaction->sd_so_line_id = $this->sd_so_line_id;
-    $inv_transaction->reference_type = 'table';
-    $inv_transaction->reference_key_name = 'inv_receipt_line';
-    $inv_transaction->reference_key_value = $this->inv_receipt_line_id;
     $inv_transaction->document_type = 'RMA';
     $inv_transaction->document_number = $this->so_number;
     $inv_transaction->_before_save();

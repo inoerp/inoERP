@@ -1,113 +1,5 @@
-function setValFromSelectPage(inv_receipt_header_id, combination, supplier_id, supplier_number,
-        supplier_name, supplier_site_id, supplier_site_name, supplier_site_number,
-        item_id_m, item_number, revision_name, item_description, uom_id, po_header_id, po_line_id, po_detail_id,
-        po_number, po_line_number, shipment_number, quantity, received_quantity,
-        serial_generation, lot_generation, kit_cb) {
- this.inv_receipt_header_id = inv_receipt_header_id;
- this.combination = combination;
- this.supplier_id = supplier_id;
- this.supplier_number = supplier_number;
- this.supplier_name = supplier_name;
- this.supplier_site_id = supplier_site_id;
- this.supplier_site_name = supplier_site_name;
- this.supplier_site_number = supplier_site_number;
- this.item_id_m = item_id_m;
- this.item_number = item_number;
- this.revision_name = revision_name;
- this.item_description = item_description;
- this.uom_id = uom_id;
- this.kit_cb = kit_cb;
- this.po_header_id = po_header_id;
- this.po_line_id = po_line_id;
- this.po_detail_id = po_detail_id;
- this.po_number = po_number;
- this.po_line_number = po_line_number;
- this.shipment_number = shipment_number;
- this.quantity = quantity;
- this.received_quantity = received_quantity;
- this.serial_generation = serial_generation;
- this.lot_generation = lot_generation;
-}
-
-setValFromSelectPage.prototype.setVal = function () {
- var inv_receipt_header_id = this.inv_receipt_header_id;
- var rowClass = '.' + localStorage.getItem("row_class");
- var fieldClass = '.' + localStorage.getItem("field_class");
- if (inv_receipt_header_id) {
-  $("#inv_receipt_header_id").val(inv_receipt_header_id);
- }
- rowClass = rowClass.replace(/\s+/g, '.');
- fieldClass = fieldClass.replace(/\s+/g, '.');
-
- var item_obj = [{id: 'item_id_m', data: this.item_id_m},
-  {id: 'po_line_id', data: this.po_line_id},
-  {id: 'revision_name', data: this.revision_name},
-  {id: 'item_number', data: this.item_number},
-  {id: 'item_description', data: this.item_description},
-  {id: 'uom_id', data: this.uom_id}
- ];
-
- var suppleir_obj = [{id: 'supplier_id', data: this.supplier_id},
-  {id: 'supplier_site_id', data: this.supplier_site_id},
-  {id: 'supplier_number', data: this.supplier_number},
-  {id: 'supplier_name', data: this.supplier_name},
-  {id: 'supplier_site_number', data: this.supplier_site_number},
-  {id: 'supplier_site_name', data: this.supplier_site_name}
- ];
-
- var po_obj = [{id: 'po_header_id', data: this.po_header_id},
-  {id: 'po_line_id', data: this.po_line_id},
-  {id: 'po_detail_id', data: this.po_detail_id},
-  {id: 'po_number', data: this.po_number},
-  {id: 'shipment_number', data: this.shipment_number},
-  {id: 'po_line_number', data: this.po_line_number},
-  {id: 'shipment_number', data: this.shipment_number},
-  {id: 'received_quantity', data: this.received_quantity},
-  {id: 'quantity', data: this.quantity}
- ];
-
- $(suppleir_obj).each(function (i, value) {
-  if (value.data) {
-   var fieldClass = '.' + value.id;
-   $('#content').find(rowClass).find(fieldClass).val(value.data);
-  }
- });
-
- $(item_obj).each(function (i, value) {
-  if (value.data) {
-   var fieldClass = '.' + value.id;
-   $('#content').find(rowClass).find(fieldClass).val(value.data);
-  }
- });
-
- $(po_obj).each(function (i, value) {
-  if (value.data) {
-   var fieldClass = '.' + value.id;
-   $('#content').find(rowClass).find(fieldClass).val(value.data);
-  }
- });
-
- if (this.serial_generation) {
-  $('#content').find(rowClass).find('.serial_generation').val(this.serial_generation);
-  $('#content').find(rowClass).find('.serial_number').attr('required', true).css('background-color', 'pink');
- }
- if (this.lot_generation) {
-  $('#content').find(rowClass).find('.lot_generation').val(this.lot_generation);
-  $('#content').find(rowClass).find('.lot_number').attr('required', true).css('background-color', 'pink');
- }
-   if (this.kit_cb) {
-  $('#content').find(rowClass).find('.kit_cb').prop('checked',true);
- }
- 
-
- localStorage.removeItem("row_class");
- localStorage.removeItem("row_class");
-
-};
-
 function beforeSave() {
  return lotSerial_quantityValidation();
-
 }
 
 //Popup for adding receipt lines
@@ -139,8 +31,8 @@ $(document).ready(function () {
  if (!($('.lines_number:first').val())) {
   $('.lines_number:first').val('1');
  }
- 
-$('body').off('click', '.popup.view-item-config').on('click', '.popup.view-item-config', function () {
+
+ $('body').off('click', '.popup.view-item-config').on('click', '.popup.view-item-config', function () {
   var openUrl = $(this).find('a').prop('href') + '&reference_key_name=po_line';
   var trClass = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
   if ($('#form_line').find(trClass).find('input.po_line_id').val()) {
@@ -176,10 +68,15 @@ $('body').off('click', '.popup.view-item-config').on('click', '.popup.view-item-
  $('body').off('change', '#org_id').on("change", '#org_id', function () {
   getSubInventory({
    json_url: 'modules/inv/subinventory/json_subinventory.php',
-   org_id: val($("#org_id").val())
+   org_id: $("#org_id").val()
   });
   $('.org_id').val($(this).val());
  });
+
+ if ($('#org_id').val()) {
+  var org_id_val = +($('#org_id').val());
+  $('.org_id').val(org_id_val);
+ }
 
  //get locators on changing sub inventory
  $('body').off('change', '.subinventory_id').on('change', '.subinventory_id', function () {
@@ -187,18 +84,6 @@ $('body').off('click', '.popup.view-item-config').on('click', '.popup.view-item-
   var subinventory_id = $(this).val();
   getLocator('modules/inv/locator/json_locator.php', subinventory_id, 'subinventory', trClass);
  });
-
-//popu for selecting PO number
- $('#content').off('click', '.select_po_number.select_popup').on('click', '.select_po_number.select_popup', function () {
-  var rowClass = $(this).closest('tr').prop('class');
-  var fieldClass = $(this).closest('td').find('.select_po_number').prop('class');
-  localStorage.setItem("row_class", rowClass);
-  localStorage.setItem("field_class", fieldClass);
-  var openUrl = 'select.php?class_name=po_all_v&po_status=approved&receving_org_id=' + $('#org_id').val();
-  void window.open(openUrl, '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
-
 
  //selecting Header Id
  $(".inv_receipt_header_id.select_popup").on("click", function () {
@@ -218,7 +103,6 @@ $('body').off('click', '.popup.view-item-config').on('click', '.popup.view-item-
            var field_stmt = '<input class="textfield serial_number" type="text" size="25" readonly name="serial_number[]" >';
            $('#content').find(trClass_d).find('.inv_serial_number_id').replaceWith(field_stmt);
            $('#content').find(trClass_d).find('.serial_number').replaceWith(field_stmt);
-//   alert('Item is not serial controlled.\nNo serial informatio \'ll be saved in database');
            return;
           } else if (generation_type != 'PRE_DEFINED') {
            var field_stmt = '<input class="textfield serial_number" type="text" size="25" name="serial_number[]" >';
