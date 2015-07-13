@@ -244,7 +244,7 @@ if (!empty($_POST[$submit_extension]) && empty($_POST['download'])) {
         $file_reference->save();
        }
     }
-    $newMsg = 'Record is sucessfully saved';
+    $newMsg = 'Record is Successfully saved';
     array_push($msg, $newMsg);
    }//end of locator entry & msg
    else {

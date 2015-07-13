@@ -16,10 +16,10 @@
    $proceed = false;
   }
 
-  if (in_array('SimpleXML', $php_modules)) {
-   echo '<li class="proceed alert alert-success">' . translation('Module SimpleXML is installed', 'system') . '</li>';
+  if (in_array('gettext', $php_modules)) {
+   echo '<li class="proceed alert alert-success">' . translation('Module gettext is installed', 'system') . '</li>';
   } else {
-   echo '<li class="error alert alert-danger">' . translation('SimpleXML module is required', 'system') . '</li>';
+   echo '<li class="error alert alert-danger">' . translation('gettext module is required', 'system') . '</li>';
    $proceed = false;
   }
   
@@ -32,10 +32,10 @@
    }
   }
 
-  if (in_array('dom', $php_modules)) {
-   echo '<li class="proceed alert alert-success">' . translation('Module DOM is installed', 'system') . '</li>';
+  if (in_array('PDO', $php_modules)) {
+   echo '<li class="proceed alert alert-success">' . translation('Module PDO is installed', 'system') . '</li>';
   } else {
-   echo '<li class="error alert alert-danger">' . translation('Module DOM is required', 'system') . '</li>';
+   echo '<li class="error alert alert-danger">' . translation('Module PDO is required', 'system') . '</li>';
    $proceed = false;
   }
   

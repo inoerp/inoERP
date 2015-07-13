@@ -270,7 +270,7 @@ class am_wo_header extends dbObject {
     $am_wo_routing_line->audit_trial();
     try {
      $am_wo_routing_line->save();
-     echo "<br> Routing is sucessfully copied !";
+     echo "<br> Routing is Successfully copied !";
      //copy the extra fields
      $this->_copy_extra_fields($routing_line_id, $am_wo_routing_line->am_wo_routing_line_id);
      foreach ($brd_i as $routing_details) {
@@ -289,7 +289,7 @@ class am_wo_header extends dbObject {
       $am_wo_routing_detail->audit_trial();
       try {
        $am_wo_routing_detail->save();
-       echo "<br> Routing details are sucessfully copied !";
+       echo "<br> Routing details are Successfully copied !";
       } catch (Exception $e) {
        $dbc->rollback = true;
        echo "<br> System failed to copy the Routing Details!" . __LINE__ . $e->getMessage();
@@ -346,7 +346,7 @@ class am_wo_header extends dbObject {
     try {
      $am_wo_bom->save();
      $this->bom_exploded_cb = 1;
-     echo "<br> BOM is sucessfully copied";
+     echo "<br> BOM is Successfullycopied";
     } catch (Exception $e) {
      echo "<br> System failed to copy the BOM!" . __LINE__ . $e->getMessage();
     }
@@ -438,7 +438,7 @@ class am_wo_header extends dbObject {
     $this->message .= '<br> Trying to cerate WO for am_asset_id : ' . $asset->am_asset_id;
     try {
      $this->_create_WO_from_assetId($asset->am_asset_id);
-     $this->message .= "<br/>WO is sucessfully created for am_asset_id id " . $asset->am_asset_id;
+     $this->message .= "<br/>WO is Successfullycreated for am_asset_id id " . $asset->am_asset_id;
     } catch (Exception $e) {
      $this->message .= "<br/>WO creation program failed  for for am_asset_id id " . $asset->am_asset_id . $e->getMessage();
     }

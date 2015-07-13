@@ -68,7 +68,7 @@ if (!empty($_POST['newUser'])) {
 	$user_role->role_code = 'BASIC';
 	$user_role->save();
 	$dbc->confirm();
-	$msg .= '<div class="message error"> Account is sucessfully created!. Please check your mail box for further details. </div>';
+	$msg .= '<div class="message error"> Account is Successfully created!. Please check your mail box for further details. </div>';
  } else {
 	$msg .= '<div class="message error"> Account creation failed!. Contact the admin. </div>';
  }

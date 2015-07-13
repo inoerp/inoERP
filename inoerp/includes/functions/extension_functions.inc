@@ -459,7 +459,7 @@ if (!empty($extension)) {
 			}
 		 }
 
-		 $newMsg = 'Record is sucessfully saved';
+		 $newMsg = 'Record is Successfully saved';
 		 array_push($msg, $newMsg);
 		}//end of locator entry & msg
 		else {

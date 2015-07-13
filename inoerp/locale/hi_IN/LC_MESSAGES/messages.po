@@ -9855,7 +9855,7 @@ msgstr "तो रेखा"
 msgid "Could not call the header"
 msgstr " शीर्ष लेख कॉल नहीं कर सका"
 
-msgid "All tables have been sucessfully imported"
+msgid "All tables have been Successfullyimported"
 msgstr "सभी तालिकाएँ सफलतापूर्वक आयात किया गया है"
 
 msgid "This action is not allowed"
@@ -9867,7 +9867,7 @@ msgstr "अनिवार्य"
 msgid "Save failed!! error@inosavel line"
 msgstr "सहेजना विफल रहा!! error@inosavel रेखा"
 
-msgid "Data is sucessfully saved"
+msgid "Data is Successfullysaved"
 msgstr "डेटा सफलतापूर्वक सहेजा गया है"
 
 msgid "Action Completed"

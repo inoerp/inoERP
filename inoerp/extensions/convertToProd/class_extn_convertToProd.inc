@@ -277,7 +277,7 @@ class extn_convertToProd extends dbObject {
 
   try {
    $this->convert_to_prod($convert_to_prod_mode);
-   $this->message .= "<br>Convert to Prod program is sucessfully completed";
+   $this->message .= "<br>Convert to Prod program is Successfully completed";
   } catch (Exception $e) {
    $this->message .= "<br>Convert to Prod program failed!" . $e->getMessage();
   }

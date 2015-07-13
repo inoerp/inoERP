@@ -261,7 +261,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
   if ($this->onhand < 0) {
    $item_i = item::find_by_orgId_item_id_m($this->item_id_m, $this->_from_org_id);
    if (empty($item_i->allow_negative_balance_cb)) {
-    pa($item_i);
+//    pa($item_i);
     echo "<br>Negative balance is not allowed for the item";
     $dbc->rollback = true;
     return -99;
@@ -282,7 +282,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
    $this->audit_trial();
    $this->save();
    $this->onhand_id_from = $this->onhand_id;
-   echo "<br>Onhand is Sucessfully Updated. The onhand Id is " . $this->onhand_id . ' & Onhand Value is ' . $this->onhand;
+   echo "<br>Onhand is SuccessfullyUpdated. The onhand Id is " . $this->onhand_id . ' & Onhand Value is ' . $this->onhand;
    return 1;
   } catch (Exception $e) {
    $dbc->rollback = true;
@@ -333,7 +333,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
    $this->audit_trial();
    $this->save();
    $this->onhand_id_to = $this->onhand_id;
-   echo "<br>Onhand is Sucessfully Updated. The onhand Id is " . $this->onhand_id . ' & Onhand Value is ' . $this->onhand;
+   echo "<br>Onhand is SuccessfullyUpdated. The onhand Id is " . $this->onhand_id . ' & Onhand Value is ' . $this->onhand;
    return 1;
   } catch (Exception $e) {
    $dbc->rollback = true;

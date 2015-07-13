@@ -26,7 +26,7 @@ class web_mail extends dbObject {
  public $create_comment_cb;
  public $reference_table;
  public $reference_id;
- public static $after_save_message = "Mail is sucessfully sent";
+ public static $after_save_message = "Mail is Successfully sent";
 
  public function _before_save() {
   global $si, $ino_user;

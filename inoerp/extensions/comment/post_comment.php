@@ -142,7 +142,7 @@ if (!empty($_POST['submit_comment'])) {
 		 $file_reference->save();
 		}
 	 }
-	 $newMsg = 'Comment is sucessfully posted';
+	 $newMsg = 'Comment is Successfully posted';
 	 array_push($msg, $newMsg);
 	}//end of locator entry & msg
 	else {

@@ -273,11 +273,11 @@ class file extends dbObject {
    if (($upload_status) && ($this->_upload_type == 'only_server')) {
     $new_entry = $this->save();
     if ($new_entry == 1) {
-     $msg = "File is sucessfully uploaded!";
+     $msg = "File is Successfully uploaded!";
      array_push($uploaded_file_ids, $this->file_id);
      $this->file_id = null;
     } else {
-     $msg = "File is sucessfully uploaded but record cldnt saved in database";
+     $msg = "File is Successfully uploaded but record cldnt saved in database";
     }
    }
   }//complete of for loop

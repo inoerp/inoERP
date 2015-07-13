@@ -239,7 +239,7 @@ class wip_resource_transaction extends dbObject {
      array_push($journal_line_a, $journal_line);
      $this->_save_journal_lines($journal_line_a);
     }
-    echo "<br> The resource quantity is sucessfully applied ";
+    echo "<br> The resource quantity is Successfullyapplied ";
    } catch (Exception $e) {
     echo "<br> Resource quantity application " . $e->getMessage();
    }

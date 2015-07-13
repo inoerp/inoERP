@@ -385,7 +385,7 @@ class user extends dbObject {
    $add_ref->address_id = $addr->address_id;
    try {
     $add_ref->save();
-    echo "<br> New address is sucessfully added";
+    echo "<br> New address is Successfully added";
    } catch (Exception $e) {
     echo "<br>Unable to add new address. Error @ user @@ " . __LINE__ . $e->getMessage();
    }

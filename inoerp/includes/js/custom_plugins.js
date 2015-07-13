@@ -311,7 +311,7 @@
         $.each(ui.content[0], function (key, value) {
          var v_d = '.' + key;
          if (elemenType === 'LI') {
-          if (value_k.substr(-3) === '_cb' && (value_v == 1)) {
+          if (key.substr(-3) === '_cb' && (value == 1)) {
            $(auto_element).closest("form").find(v_d).prop('checked', true);
           } else {
            if (settings.set_value_for_one_field === true) {
@@ -322,7 +322,7 @@
           }
          } else if (elemenType === 'TD') {
           var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
-          if (value_k.substr(-3) === '_cb' && (value_v == 1)) {
+          if (key.substr(-3) === '_cb' && (value == 1)) {
            $(form_id_h).find(trClass).find(trClass).prop('checked', true);
           } else {
            if (settings.set_value_for_one_field === true) {
@@ -454,6 +454,102 @@
   return $(this);
 
  };
+ 
+ $.fn.inoSerialLotDetails = function (options) {
+ var this_e = $(this);
+ var defaults = {
+  min_length: 2,
+  form_id: 'form_line',
+  hidden_field_param: true,
+  set_value_for_one_field: false
+ };
+ var settings = $.extend({}, defaults, options);
+ var form_id_h = '#' + settings.form_id;
+//  settings.select_class = $(this).attr('class').replace(/\s+/g, '.');
+
+ var methods = {
+  jsonAutoComplete: function () {
+   var trClass = '.' + this_e.closest('tr').attr('class');
+   var item_id_m = $('#content').find(trClass).find('.item_id_m').val();
+   var from_org_id = $('#from_org_id').val();
+   var from_subinventory_id = $('#content').find(trClass).find('.from_subinventory_id').val();
+   if (item_id_m && from_org_id && from_subinventory_id) {
+    getOnhandDetails({
+     item_id_m: item_id_m,
+     org_id: from_org_id,
+     subinventory_id: from_subinventory_id,
+     locator_id: $('#form_line').find(trClass).find('.from_locator_id').val(),
+     trClass: trClass,
+     fieldClass: 'from_current_onhand',
+    });
+   }
+
+
+   /*Serial number details*/
+   var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
+   var trClass_d = '.' + trClass;
+   var generation_type = $('#content').find(trClass_d).find('.serial_generation').val();
+   if (!generation_type) {
+    var field_stmt = '<input class="textfield serial_number" type="text" size="25" readonly name="serial_number[]" >';
+    $('#content').find(trClass_d).find('.inv_serial_number_id').replaceWith(field_stmt);
+    $('#content').find(trClass_d).find('.serial_number').replaceWith(field_stmt);
+//   alert('Item is not serial controlled.\nNo serial information \'ll be saved in database');
+    return;
+   }
+   var itemIdM = $('#content').find(trClass_d).find('.item_id_m').val();
+   if (!itemIdM) {
+    return;
+   }
+
+   getSerialNumber({
+    'org_id': $('#from_org_id').val(),
+    'status': 'IN_STORE',
+    'item_id_m': itemIdM,
+    'trclass': trClass,
+    'current_subinventory_id': $('#content').find(trClass_d).find('.from_subinventory_id').val(),
+    'current_locator_id': $('#content').find(trClass_d).find('.from_locator_id').val(),
+   });
+
+
+   /*Lot Details*/
+
+   var trClass = $(this).closest("tr").attr('class').replace(/\s+/g, '.');
+   var trClass_d = '.' + trClass;
+   var generation_type = $('#content').find(trClass_d).find('.lot_generation').val();
+
+   if (!generation_type) {
+    var field_stmt = '<input class="textfield lot_number" type="text" size="25" readonly name="lot_number[]" >';
+    $('#content').find(trClass_d).find('.inv_lot_number_id').replaceWith(field_stmt);
+    $('#content').find(trClass_d).find('.lot_number').replaceWith(field_stmt);
+//   alert('Item is not lot controlled.\nNo lot information \'ll be saved in database');
+    return;
+   }
+   var itemIdM = $('#content').find(trClass_d).find('.item_id_m').val();
+   if (!itemIdM) {
+    return;
+   }
+
+   getlotNumber({
+    'org_id': $('#from_org_id').val(),
+    'status': 'ACTIVE',
+    'item_id_m': itemIdM,
+    'trclass': trClass,
+    'subinventory_id': $('#content').find(trClass_d).find('.from_subinventory_id').val(),
+    'locator_id': $('#content').find(trClass_d).find('.from_locator_id').val(),
+   });
+
+
+  }
+ };
+
+ return this.each(function () {
+  var select_class_d = '.' + $(this).attr('class').replace(/\s+/g, '.');
+  $('body').on("focus.nsAutoComplete", select_class_d, methods.jsonAutoComplete);
+ });
+};
 
 }(jQuery));
+
+
+
 

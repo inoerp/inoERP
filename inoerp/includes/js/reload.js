@@ -509,6 +509,13 @@ $(document).ready(function () {
   json_url: 'modules/inv/item/json_item.php',
   primary_column1: 'org_id'
  });
+ 
+  //vaidation field auto complete
+ $('.val_field').inoAutoCompleteElement({
+  json_url: 'includes/json/json_validation_field.php',
+  primary_column1: 'bu_org_id',
+  min_length: 2
+ });
 
  var select_item_number_am_asset_activity_options = {'am_asset_type': 'ASSET_ACTIVITY'};
  $('.select_item_number_am_asset_activity').inoAutoCompleteElement({

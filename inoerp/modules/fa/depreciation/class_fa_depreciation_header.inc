@@ -202,7 +202,7 @@ class fa_depreciation_header extends dbObject {
    $this->message .= "<br/>Using fa_depreciation_header_id $this->fa_depreciation_header_id ";
    try {
     $this->_create_depreciation_lines();
-    $this->message .= "<br/>Depreciation program is sucessfully completed for fa_depreciation_header_id " . $this->fa_depreciation_header_id;
+    $this->message .= "<br/>Depreciation program is Successfullycompleted for fa_depreciation_header_id " . $this->fa_depreciation_header_id;
    } catch (Exception $e) {
     $this->message .= "<br/>Depreciation program fialed for Item fa_depreciation_header_id " . $this->fa_depreciation_header_id . $e->getMessage();
    }

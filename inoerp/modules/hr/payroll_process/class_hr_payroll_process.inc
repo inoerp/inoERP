@@ -115,7 +115,7 @@ class hr_payroll_process extends dbObject {
    $this->message .= "<br> Creating Payroll schedule by  hr_payroll_process_id  " . $this->hr_payroll_process_id;
    try {
     $this->_cancel_payroll_process();
-    $this->message .= "<br>Payroll schdule cancel program is sucessfully completed.";
+    $this->message .= "<br>Payroll schdule cancel program is Successfullycompleted.";
    } catch (Exception $e) {
     $this->message .= "<br>_cancel_payroll_process schdule program failed!. Error @ payroll_process @@ Line " . __LINE__ . $e->getMessage();
    }
@@ -168,7 +168,7 @@ class hr_payroll_process extends dbObject {
    $this->message .= "<br> Confirming payroll proces with hr_payroll_process_id  " . $this->hr_payroll_process_id;
    try {
     $this->_confirm_payroll_process();
-    $this->message .= "<br>Payroll schdule confirm program is sucessfully completed.";
+    $this->message .= "<br>Payroll schdule confirm program is Successfullycompleted.";
    } catch (Exception $e) {
     $this->message .= "<br>_confirm_payroll_process program failed!. Error @ payroll_process @@ Line " . __LINE__ . $e->getMessage();
    }

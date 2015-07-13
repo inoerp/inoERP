@@ -206,7 +206,7 @@ class cst_item_cost_header extends dbObject {
 		try {
 		 $this->_save_journal_header();
 		 try {
-			echo "<br>Accounting records are sucessfully created " . $this->gl_journal_header_id;
+			echo "<br>Accounting records are Successfullycreated " . $this->gl_journal_header_id;
 			$this->_update_journalHeaderId();
 		 } catch (Exception $e) {
 			echo "<br>Updating gl journal header id failed" . $e->getMessage();
@@ -284,7 +284,7 @@ class cst_item_cost_header extends dbObject {
 	try {
 	 $ich_f->save();
 	 if (!empty($ich_f->cst_item_cost_header_id)) {
-		$message .=" <br>Item cost head is sucessfully updated for cst_item_cost_header_id " . $ich_f->cst_item_cost_header_id;
+		$message .=" <br>Item cost head is Successfullyupdated for cst_item_cost_header_id " . $ich_f->cst_item_cost_header_id;
 		//save cost line
 		$message .= $this->_update_standard_cost_lines($ich_f, $old_records_a, $parameters);
 		//update the WIP & Onhand Value Balances
@@ -323,7 +323,7 @@ class cst_item_cost_header extends dbObject {
 		$icl->audit_trial();
 		array_push($new_records_a, $cost_line);
 		$icl->save();
-		$message .= "<br>Frozen cost line is sucessfully saved!";
+		$message .= "<br>Frozen cost line is Successfullysaved!";
 	 } catch (Exception $e) {
 		$message .= "<br>Saving frozen cost line failed!" . $e->getMessage();
 	 }
@@ -498,7 +498,7 @@ class cst_item_cost_header extends dbObject {
 		$ich->cst_item_cost_header_id = $ich_i->cst_item_cost_header_id;
 		try {
 		 $this->message .= $ich->_update_standard_cost($parameters);
-		 $this->message .= "<br/>Standard cost update is sucessfully updated for item_id_m - " . $ich->item_id_m .
+		 $this->message .= "<br/>Standard cost update is Successfullyupdated for item_id_m - " . $ich->item_id_m .
 						 ' bom_cost_type : ' . $ich->bom_cost_type;
 		} catch (Exception $e) {
 		 $this->message .= "<br/>Standard cost update fialed for Item id " . $ich->item_id_m . $e->getMessage();
@@ -531,7 +531,7 @@ class cst_item_cost_header extends dbObject {
 		 try {
 			$this->message .= "<br> Going for standard cost update for item header... ";
 			$this->message .= $ich->_update_standard_cost($parameters);
-			$this->message .= "<br> Standard cost update is sucessfully updated for item_id_m - " . $ich->item_id_m .
+			$this->message .= "<br> Standard cost update is Successfullyupdated for item_id_m - " . $ich->item_id_m .
 							' bom_cost_type : ' . $ich->bom_cost_type;
 		 } catch (Exception $e) {
 			$this->message .= "<br/>Standard cost update fialed for Item id " . $ich->item_id_m . $e->getMessage();
@@ -699,7 +699,7 @@ class cst_item_cost_header extends dbObject {
 	 }
 	}
 	$this->_update_linesum_by_resource_overhead($line_sums, $rol_i, $header_obj->bom_cost_type);
-	pa($line_sums);
+//	pa($line_sums);
 	$this->_add_update_cost_lines($header_obj, $line_sums);
  }
 
@@ -720,7 +720,7 @@ class cst_item_cost_header extends dbObject {
 	try {
 	 $ich->save();
 	 if (!empty($ich->cst_item_cost_header_id)) {
-		$this->message .=" <br>Item cost heade is sucessfully updated for cst_item_cost_header_id " . $ich->cst_item_cost_header_id;
+		$this->message .=" <br>Item cost heade is Successfullyupdated for cst_item_cost_header_id " . $ich->cst_item_cost_header_id;
 		//save cost line
 		$this->_cost_rollup_cost_lines($ich);
 	 }
@@ -749,7 +749,7 @@ class cst_item_cost_header extends dbObject {
 		if ($item->make_buy == 'Make') {
 		 try {
 			$this->_cost_rollup_forItem($item->item_id_m, $cost_type);
-			$this->message .= "Cost roll up is sucessfully completed for Item Number : $item->item_number & Cost Type : $cost_type";
+			$this->message .= "Cost roll up is Successfullycompleted for Item Number : $item->item_number & Cost Type : $cost_type";
 		 } catch (Exception $e) {
 			$this->message .= "Cost roll up failed for Item Number : $item->item_number & Cost Type : $cost_type. Error @ " . __LINE__
 							. '<br>' . $e->getMessage();
@@ -786,7 +786,7 @@ class cst_item_cost_header extends dbObject {
 	 $item_id_m = $parameters['item_id_m'][0];
 	 try {
 		$this->cost_rollup($item_id_m, $bom_cost_type);
-		$this->message .= "<br/>Cost Roll Up is sucessfully updated for item_id_m - " . $item_id_m .
+		$this->message .= "<br/>Cost Roll Up is Successfullyupdated for item_id_m - " . $item_id_m .
 						' bom_cost_type : ' . $bom_cost_type;
 	 } catch (Exception $e) {
 		$this->message .= "<br/>Cost Roll Up fialed for Item id " . $item_id_m . $e->getMessage();
@@ -808,7 +808,7 @@ class cst_item_cost_header extends dbObject {
 	 foreach ($item_range as $items) {
 		try {
 		 $this->cost_rollup($items->item_id_m, $bom_cost_type);
-		 $this->message .= "<br/>Cost Roll Up is sucessfully updated for item_id_m - " . $items->item_id_m .
+		 $this->message .= "<br/>Cost Roll Up is Successfullyupdated for item_id_m - " . $items->item_id_m .
 						 ' bom_cost_type : ' . $bom_cost_type;
 		} catch (Exception $e) {
 		 $this->message .= "<br/>Cost Roll Up fialed for Item id " . $items->item_id_m . $e->getMessage();
@@ -830,7 +830,7 @@ class cst_item_cost_header extends dbObject {
 	 foreach ($item_range as $items) {
 		try {
 		 $this->cost_rollup($items->item_id_m, $bom_cost_type);
-		 $this->message .= "<br/>Cost Roll Up is sucessfully updated for item_id_m - " . $items->item_id_m .
+		 $this->message .= "<br/>Cost Roll Up is Successfullyupdated for item_id_m - " . $items->item_id_m .
 						 ' bom_cost_type : ' . $bom_cost_type;
 		} catch (Exception $e) {
 		 $this->message .= "<br/>Cost Roll Up fialed for Item id " . $items->item_id_m . $e->getMessage();

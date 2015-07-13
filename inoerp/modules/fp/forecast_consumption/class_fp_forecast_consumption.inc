@@ -449,7 +449,7 @@ class fp_forecast_consumption extends dbObject {
 
   try {
    $this->_do_forecast_consumption();
-   $this->message .= "<br>Forecast consumption is sucessfully completed";
+   $this->message .= "<br>Forecast consumption is Successfullycompleted";
   } catch (Exception $e) {
    $this->message .= "<br>Forecast consumption failed!" . $e->getMessage();
   }

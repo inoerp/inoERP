@@ -197,7 +197,7 @@ class content_type extends dbObject {
     $new_fild_entry = $field_record->save_table_field($enum_array);
 //		echo "<div class='message>'<br>coming out of field $i </div>";
     if ($new_fild_entry) {
-     $newMsg = 'Record is sucessfully saved';
+     $newMsg = 'Record is Successfully saved';
     }
 
     //create or update the field_reference_table

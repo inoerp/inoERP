@@ -152,164 +152,17 @@
      </table>
     </div>
     <div id="tabsLine-5" class="tabContent scrollElement">
-     <table class="form_line_data_table">
-      <thead>
-      <th><?php echo gettext('Add Lot Numbers') ?></th>
-      <th><?php echo gettext('Add Serial Numbers') ?></th>
-      </thead>
-      <tbody class="form_data_line_tbody">
-       <tr class="inv_transaction_line0">
-        <td class="add_detail_values0">	<?php
-         echo $f->hidden_field('lot_number_id', $$class->lot_number_id);
-         echo $f->hidden_field('lot_generation', $$class->lot_generation);
-         ?> 
-         <i class="fa fa-arrow-circle-down add_detail_values_img" alt="View/Add Lot Numbers"></i>
-         <div class="class_detail_form">
-          <fieldset class="form_detail_data_fs">
-           <div class="tabsDetail">
-            <ul class="tabMain">
-             <li class="tabLink"><a href="#tabsDetail-1-1">Lot Numbers</a></li>
-            </ul>
-            <div class="tabContainer">
-             <div id="tabsDetail-1-1" class="tabContent">
-              <table class="form form_detail_data_table detail">
-               <thead>
-                <tr>
-                 <th><?php echo gettext('Action') ?></th>
-                 <th><?php echo gettext('Lot Number') ?></th>
-                 <th><?php echo gettext('Quantity') ?></th>
-                </tr>
-               </thead>
-               <tbody class="form_data_detail_tbody_ln">
-                <?php
-                $detailCount = 0;
-                if (!empty($$class->inv_transaction_id)) {
-                 $lot_object = [];
-                 $lot_trnxs = inv_lot_transaction::find_by_invTransactionId($$class->inv_transaction_id);
-                 if (!empty($lot_trnxs)) {
-                  foreach ($lot_trnxs as $lot_trnx) {
-                   $lot_no = new inv_lot_number();
-                   $lot_no->findBy_id($lot_trnx->inv_lot_number_id);
-                   $lot_no->lot_quantity = $lot_trnx->lot_quantity;
-                   array_push($lot_object, $lot_no);
-                  }
-                 }
-                }
-                if (empty($lot_object)) {
-                 $lot_object = array(new inv_lot_number());
-                }
-                foreach ($lot_object as $lot_no) {
-                 ?>
-                 <tr class="inv_lot_number<?php echo $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
-                  <td>   
-                   <ul class="inline_action">
-                    <li class="add_row_detail_img1"><i class="fa fa-plus-circle clickable" alt="add new line"></i></li>
-                    <li class="remove_row_img"><i class="fa fa-minus-circle clickable" alt="remove this line"></i></li>
-                    <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($lot_no->inv_lot_number_id); ?>"></li>           
-                    <li><?php echo form::hidden_field('inv_transaction_id', $$class->inv_transaction_id); ?></li>
-                   </ul>
-                  </td>
-                  <td><?php
-                   echo $f->text_field('lot_number', $lot_no->lot_number, '25');
-                   echo $f->hidden_field('lot_generation', $$class->lot_generation);
-                   ?>
-                  </td>
-                  <td><?php echo $f->number_field('lot_quantity', $lot_no->lot_quantity, '25'); ?>
-                  </td>
-                 </tr>
-                 <?php
-                 $detailCount++;
-                }
-                ?>
-               </tbody>
-              </table>
-             </div>
-            </div>
-           </div>
-
-
-          </fieldset>
-
-         </div>
-        </td>
-        <td class="add_detail_values1">
-         <?php
-         echo $f->hidden_field('serial_number_id', $$class->serial_number_id);
-         echo $f->hidden_field('serial_generation', $$class->serial_generation);
-         ?>
-         <i class="fa fa-arrow-circle-down add_detail_values_img" alt="View/Add Serial Numbers"></i>
-         <div class="class_detail_form">
-          <fieldset class="form_detail_data_fs">
-           <div class="tabsDetail">
-            <ul class="tabMain">
-             <li class="tabLink"><a href="#tabsDetail-2-1">Serial Numbers</a></li>
-            </ul>
-            <div class="tabContainer">
-             <div id="tabsDetail-2-1" class="tabContent">
-              <table class="form form_detail_data_table detail">
-               <thead>
-                <tr>
-                 <th><?php echo gettext('Action') ?></th>
-                 <th><?php echo gettext('Serial Number') ?></th>
-                </tr>
-               </thead>
-               <tbody class="form_data_detail_tbody_sn">
-                <?php
-                $detailCount = 0;
-                if (!empty($$class->inv_transaction_id)) {
-                 $serial_object = [];
-                 $serial_trnxs = inv_serial_transaction::find_by_invTransactionId($$class->inv_transaction_id);
-                 if (!empty($serial_trnxs)) {
-                  foreach ($serial_trnxs as $serial_trnx) {
-                   $serial_no = new inv_serial_number();
-                   $serial_no->findBy_id($serial_trnx->inv_serial_number_id);
-                   array_push($serial_object, $serial_no);
-                  }
-                 }
-                }
-                if (empty($serial_object)) {
-                 $serial_object = array(new inv_serial_number());
-                }
-                foreach ($serial_object as $serial_no) {
-                 ?>
-                 <tr class="inv_serial_number<?php echo $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
-                  <td>   
-                   <ul class="inline_action">
-                    <li class="add_row_detail_img"><i class="fa fa-plus-circle clickable" alt="add new line"></i></li>
-                    <li class="remove_row_img"><i class="fa fa-minus-circle clickable" alt="remove this line"></i></li>
-                    <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($serial_no->inv_serial_number_id); ?>"></li>           
-                    <li><?php echo form::hidden_field('inv_transaction_id', $$class->inv_transaction_id); ?></li>
-                   </ul>
-                  </td>
-                  <td><?php
-                   echo $f->text_field('serial_number', $serial_no->serial_number, '25');
-                   echo $f->hidden_field('serial_generation', $$class->serial_generation);
-                   ?>
-                  </td>
-
-                 </tr>
-                 <?php
-                 $detailCount++;
-                }
-                ?>
-               </tbody>
-              </table>
-             </div>
-            </div>
-           </div>
-
-
-          </fieldset>
-
-         </div>
-
-        </td>
-       </tr>
-      </tbody>
-     </table>
+     <?php
+     $ls_trclass = 'inv_transaction_line';
+     $line_object_ls = array($$class);
+     $each_line_ls = $class;
+     $line_class_name_sl = &$class;
+     $ref_key_name = 'inv_transaction';
+     $ref_key_val = 'inv_transaction_id';
+     include_once HOME_DIR . '/includes/template/lot_serial_template.inc'
+     ?>
     </div>
    </div>
-
   </div>
  </div>
  <!--                 complete Showing a blank form for new entry-->

@@ -35,7 +35,7 @@ class sys_db_update extends dbObject {
 
   try {
    $this->update_db($program_mode);
-   $this->message .= "<br>Update DB program is sucessfully completed";
+   $this->message .= "<br>Update DB program is Successfullycompleted";
   } catch (Exception $e) {
    $this->message .= "<br>Update DB program failed!" . $e->getMessage();
   }
@@ -124,7 +124,7 @@ class sys_db_update extends dbObject {
   $dbc2->ddlexecute($sql4);
   $dbc2->confirm();
 
-  echo "<div class='alert alert-sucess'>$old_db_table is sucessfully updated</div>";
+  echo "<div class='alert alert-sucess'>$old_db_table is Successfullyupdated</div>";
  }
 
  private function _ino_isSame_tablesInTwoDataBases($tbl1) {
@@ -183,7 +183,7 @@ class sys_db_update extends dbObject {
   $sql = " CREATE TABLE $old_db_table LIKE $new_db_table ";
   $dbc2->ddlexecute($sql);
   $dbc2->confirm();
-  echo "<div class='alert alert-sucess'>$old_db_table is sucessfully created</div>";
+  echo "<div class='alert alert-sucess'>$old_db_table is Successfullycreated</div>";
  }
 
  private function _ino_create_views_in_oldDB($mode = 'TEST') {
@@ -213,7 +213,7 @@ class sys_db_update extends dbObject {
   echo $sql;
   $dbc2->ddlexecute($sql);
   $dbc2->confirm();
-  echo "<div class='alert alert-sucess'>$drop_db_table is sucessfully dropped</div>";
+  echo "<div class='alert alert-sucess'>$drop_db_table is Successfullydropped</div>";
  }
 
 }

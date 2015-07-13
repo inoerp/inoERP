@@ -181,9 +181,9 @@ class sd_delivery_line extends dbObject {
   $sol->picked_quantity -= $this->quantity;
   try {
    $sol->save();
-   echo "<br>Sales Order Line Status is Sucessfully Updated";
+   echo "<br>Sales Order Line Status is SuccessfullyUpdated";
    $this->delete();
-   echo "<br>Delivery Line is Sucessfully Deleted";
+   echo "<br>Delivery Line is SuccessfullyDeleted";
   } catch (Exception $e) {
    echo "<br>Upate Failed. Error @sd_delivery_line @@ " . __LINE__ . $e->getMessage();
   }
@@ -326,7 +326,7 @@ class sd_delivery_line extends dbObject {
   try {
    $this->audit_trial();
    $this->save();
-   echo "<br>Delivery Line Status is Sucessfully Updated";
+   echo "<br>Delivery Line Status is SuccessfullyUpdated";
   } catch (Exception $e) {
    echo "<br>Failed to update the delivery line Status. Error @ sd_delivery_leader @@ line " . __LINE__;
    $dbc->rollback = true;

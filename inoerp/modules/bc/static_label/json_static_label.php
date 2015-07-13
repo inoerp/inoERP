@@ -40,14 +40,14 @@ if ((!empty($_GET['bc_static_label_id'])) && ($_GET['print_label'] == 1)) {
    $xml_content = $bc_lr->generate_label($data_obj);
    $bc_lr->print_XMLlabel($xml_content);
   }
-  $err_msg .= '<br>Label is sucessfully printed';
+  $err_msg .= '<br>Label is Successfullyprinted';
  } else if (!empty($data_obj_a)) {
   $bc_lr = new bc_label_request();
   $bc_lr->sys_printer_id = $sl->sys_printer_id;
   $bc_lr->bc_label_format_header_id = $sl->bc_label_format_header_id;
   $xml_content = $bc_lr->generate_label($data_obj_a);
   $bc_lr->print_XMLlabel($xml_content);
-  $err_msg .= '<br>Label is sucessfully printed';
+  $err_msg .= '<br>Label is Successfullyprinted';
  }
 
  $lbl_frmt_hdr = bc_label_format_header::find_by_id($sl->bc_label_format_header_id);

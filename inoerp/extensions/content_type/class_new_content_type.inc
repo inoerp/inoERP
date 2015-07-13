@@ -75,7 +75,7 @@
 //		$new_category = trim(mysql_prep($_POST['category']));
 //		$new_fild_entry = $field_record->save_table_field($new_category, $field_name, $field_type, $field_num);
 //		if ($new_fild_entry) {
-//		 $newMsg = 'Record is sucessfully saved';
+//		 $newMsg = 'Record is Successfullysaved';
 //		}
 //		$i++;
 //	 }

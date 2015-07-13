@@ -215,7 +215,7 @@ class content extends dbObject {
     }
     try {
      $stmt->execute();
-     $newMsg = "Record is sucessfully saved in $class";
+     $newMsg = "Record is Successfully saved in $class";
     } catch (PDOException $e) {
      print "Record couldnt be saved!!: " . $e->getMessage() . "<br/>";
     }
@@ -255,7 +255,7 @@ class content extends dbObject {
     try {
      $stmt->execute();
      $$class->content_id = $dbc->connection->lastInsertId();
-     $newMsg = "Record is sucessfully saved in $class";
+     $newMsg = "Record is Successfully saved in $class";
     } catch (PDOException $e) {
      print "Record couldnt be saved!!: " . $e->getMessage() . "<br/>";
     }

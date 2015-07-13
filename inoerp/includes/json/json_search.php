@@ -258,7 +258,7 @@ if (!empty($_GET['class_name'])) {
   $ps->report_query = base64_encode($all_download_sql);
   try {
    $ps->save();
-   echo "<div class='message'>The program is sucessfully schduled.sys_program_schedule_id id  " . $ps->sys_program_schedule_id . '</div>';
+   echo "<div class='message'>The program is Successfully schduled.sys_program_schedule_id id  " . $ps->sys_program_schedule_id . '</div>';
   } catch (Exception $e) {
    echo "<br>Unable to schedule the program. Error @ class_sys_program @@ line " . __LINE__ . '<br>' . $e->getMessage();
   }

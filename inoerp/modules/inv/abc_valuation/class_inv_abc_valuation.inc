@@ -442,7 +442,7 @@ class inv_abc_valuation extends dbObject {
    $this->message .= "<br>Using ABC valuation by  inv_abc_valuation_id  " . $this->inv_abc_valuation_id;
    try {
     $this->_do_abc_valuation();
-    $this->message .= "<br>ABC Valuation is sucessfully completed";
+    $this->message .= "<br>ABC Valuation is Successfullycompleted";
    } catch (Exception $e) {
     $this->message .= "<br>ABC Valuation failed!" . $e->getMessage();
    }

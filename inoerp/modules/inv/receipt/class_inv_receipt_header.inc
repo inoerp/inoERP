@@ -65,18 +65,9 @@ public static $transaction_type_id_a = [
   "org",
   "receipt_date",
   "received_by",
-  "carrier",
-  "comments",
+  "transaction_type_id",
  ];
- public $column = [
-  "inv_receipt_header_id",
-  "receipt_number",
-  "org_id",
-  "receipt_date",
-  "received_by",
-  "carrier",
-  "vechile_number",
- ];
+
  public $fields_inForm_notInDataBase = [
   "org",
   'multi_action_class_pc',

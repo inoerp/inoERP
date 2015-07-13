@@ -171,7 +171,7 @@ class am_move_transaction extends dbObject {
    $am_resource_transaction->audit_trial();
    $am_resource_transaction->save();
    $am_resource_transaction->_after_save();
-   echo "<br> Resource Transaction is sucessfully updated";
+   echo "<br> Resource Transaction is Successfully updated";
   } catch (Exception $e) {
    $dbc->roll_back = true;
    echo "<br> Resource Transaction Update Failed! @  " . __LINE__ . ' ' . $e->getMessage();
@@ -273,7 +273,7 @@ class am_move_transaction extends dbObject {
    try {
     $wwrl_from->audit_trial();
     $wwrl_from->save();
-    echo "<br> From routing line quantity is sucessfully updated";
+    echo "<br> From routing line quantity is Successfullyupdated";
    } catch (Exception $e) {
     echo "<br> From routing line quantity update failed! @  " . __LINE__ . ' ' . $e->getMessage();
    }
@@ -536,7 +536,7 @@ class am_move_transaction extends dbObject {
    try {
     $wwrl_to->audit_trial();
     $wwrl_to->save();
-    echo "<br> To routing line quantity is sucessfully updated";
+    echo "<br> To routing line quantity is Successfully updated";
    } catch (Exception $e) {
     echo "<br> To routing line quantity update failed! @  " . __LINE__ . ' ' . $e->getMessage();
    }

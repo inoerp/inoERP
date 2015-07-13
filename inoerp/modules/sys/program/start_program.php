@@ -65,7 +65,7 @@ function start_next_program() {
     $im->addStringAttachment($report_op, $file_name);
     try {
      $im->ino_sendMail();
-     $p->message = "Program $p->program_name is sucessfully completed <br>" . execution_time();
+     $p->message = "Program $p->program_name is Successfullycompleted <br>" . execution_time();
      $p->status = 'Completed';
     } catch (Exception $e) {
      $p->status = 'Error';
@@ -77,7 +77,7 @@ function start_next_program() {
     $result = call_user_func(array($$class, $p->program_name), $p->parameters);
     $result_message = is_array($result) ? $result[0] : $result;
     $result_output = is_array($result) ? $result[1] : null;
-    $p->message = "Program $p->program_name is sucessfully completed <br>" . $result_message . '<br>' . execution_time();
+    $p->message = "Program $p->program_name is Successfullycompleted <br>" . $result_message . '<br>' . execution_time();
     $p->status = 'Completed';
     try {
      if (!empty($result_output)) {

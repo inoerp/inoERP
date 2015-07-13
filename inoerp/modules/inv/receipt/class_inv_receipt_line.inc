@@ -30,6 +30,8 @@ class inv_receipt_line extends dbObject {
   'po_detail_id',
   'sd_so_line_id',
   'sd_so_header_id',
+  'inv_interorg_transfer_line_id',
+  'inv_interorg_transfer_header_id',
   "receving_account_id",
   "accrual_account_id",
   'country_of_origin',
@@ -76,6 +78,8 @@ class inv_receipt_line extends dbObject {
   'ar_customer_site_id',
   'so_number',
   'so_line_number',
+  'io_order_number',
+  'io_line_number;'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
   "inv_receipt_header_id",
@@ -110,6 +114,8 @@ class inv_receipt_line extends dbObject {
  public $po_detail_id;
  public $sd_so_line_id;
  public $sd_so_header_id;
+ public $inv_interorg_transfer_line_id;
+ public $inv_interorg_transfer_header_id;
  public $receving_account_id;
  public $accrual_account_id;
  public $country_of_origin;
@@ -156,6 +162,8 @@ class inv_receipt_line extends dbObject {
  public $customer_site_number;
  public $so_number;
  public $so_line_number;
+ public $io_order_number;
+ public $io_line_number;
  private $_standard_cost_for_all_kit_items;
  private $_po_line_id;
  private $_gl_journal_header_id;
@@ -186,11 +194,11 @@ class inv_receipt_line extends dbObject {
     }
     $po_d->po_detail_id = $po_d_i->po_detail_id;
     $po_d->save();
-    echo "<br>PO Received Quantity is Sucessfully Updated ";
+    echo "<br>PO Received Quantity is SuccessfullyUpdated ";
     if (!empty($this->item_id_m) && empty($this->kit_cb)) {
      try {
       $this->_create_inv_transactions();
-      echo "<br>INV Transaction Lines are Sucessfully Created ";
+      echo "<br>INV Transaction Lines are SuccessfullyCreated ";
      } catch (Exception $e) {
       $update_satus = -99;
       $dbc->rollback = true;
@@ -218,6 +226,32 @@ class inv_receipt_line extends dbObject {
     $this->_create_inv_transactions();
    }
    $this->_after_save_rmaReceipt();
+  } else if (!empty($this->inv_receipt_line_id) && !empty($this->inv_interorg_transfer_line_id)) {
+   if (!empty($this->item_id_m)) {
+    $this->_create_inv_transactions();
+   }
+   $this->_after_save_interOrgReceipt();
+  }
+ }
+
+ private function _after_save_interOrgReceipt() {
+  global $dbc;
+  if (!empty($this->inv_interorg_transfer_line_id)) {
+   $iitl = new inv_interorg_transfer_line();
+   $iitl->findBy_id($this->inv_interorg_transfer_line_id);
+   try {
+    $iitl->status = 'RECEIVED';
+    $iitl->save();
+    echo "<br> Inter Org Transfer Line is Successfully updated ";
+   } catch (Exception $e) {
+    echo "<br> Not able to find inv_interorg_transfer_line_id. Error @ inv_transaction " . __LINE__ . '<br>' . $e->getMessage();
+    $dbc->rollback = true;
+    return;
+   }
+  } else {
+   echo "<br> Not able to find inv_interorg_transfer_line_id. Error @ inv_transaction " . __LINE__;
+   $dbc->rollback = true;
+   return;
   }
  }
 
@@ -230,7 +264,7 @@ class inv_receipt_line extends dbObject {
    $so_line->shipped_quantity = $newcurrent_shped_qty;
    try {
     $so_line->save();
-    echo "<br> SO Line is sucessfully updated ";
+    echo "<br> SO Line is Successfullyupdated ";
    } catch (Exception $e) {
     echo "<br> Not able to find sd_so_line_id. Error @ inv_transaction " . __LINE__ . '<br>' . $e->getMessage();
     $dbc->rollback = true;
@@ -458,6 +492,23 @@ class inv_receipt_line extends dbObject {
     $inv_transaction->po_detail_id = $this->po_detail_id;
     $inv_transaction->document_type = 'PO';
     $inv_transaction->document_number = $this->po_number;
+    $inv_transaction->_before_save();
+    $inv_transaction->save();
+    $update_result = $inv_transaction->_after_save();
+    break;
+
+   case 20 :
+    $inv_transaction->to_subinventory_id = $this->subinventory_id;
+    if (!empty($this->locator_id)) {
+     $inv_transaction->to_locator_id = $this->locator_id;
+    }
+//    $inv_transaction->reference_key_name = 'inv_interorg_transfer_line';
+//    $inv_transaction->reference_key_value = $this->inv_interorg_transfer_line_id;
+    $to_org = inventory::find_by_org_id($this->org_id);
+//    pa($to_org);
+    $inv_transaction->account_id = $to_org->inter_org_payable_ac_id;
+    $inv_transaction->document_type = 'Inter Org';
+    $inv_transaction->document_number = $this->io_order_number;
     $inv_transaction->_before_save();
     $inv_transaction->save();
     $update_result = $inv_transaction->_after_save();

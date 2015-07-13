@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -38,6 +39,12 @@ class inv_interorg_transfer_header extends dbObject {
   '18' => 'Direct Inter-Org',
   '19' => 'In-transit Inter-Org',
  ];
+
+  public $action_a = [
+  'SHIP' => 'Ship Lines',
+  'GENERATE_DOC' => 'Generate Shipping Documents',
+ ];
+  
  public $field_a = [
   'inv_interorg_transfer_header_id',
   'order_number',

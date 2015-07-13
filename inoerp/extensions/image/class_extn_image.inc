@@ -287,11 +287,11 @@ public function simple_carousel($div_class="box-54", $show_caption = true) {
    if (($upload_status) && ($this->_upload_type == 'only_server')) {
     $new_entry = $this->save();
     if ($new_entry == 1) {
-     $msg = "File is sucessfully uploaded!";
+     $msg = "File is Successfully uploaded!";
      array_push($uploaded_file_ids, $this->extn_image_id);
      $this->extn_image_id = null;
     } else {
-     $msg = "File is sucessfully uploaded but record cldnt saved in database";
+     $msg = "File is Successfully uploaded but record cldnt saved in database";
     }
    }
   }//complete of for loop

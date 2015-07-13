@@ -2756,7 +2756,7 @@ function openNextGLPeriod(options) {
   json_url: 'modules/gl/period/json_period.php',
   new_gl_calendar_id: $('#new_gl_calendar_id').val(),
   new_gl_calendar_name: $('#new_gl_calendar_id :selected').text(),
-  ledger_id: $('#ledger_id').val(),
+  ledger_id: $('#gl_ledger_id').val()
  };
  var settings = $.extend({}, defaults, options);
 
@@ -2770,7 +2770,8 @@ function openNextGLPeriod(options) {
   },
   success: function (result) {
    if (result) {
-    $('.error').append('<br>Period ' + settings.new_gl_calendar_name + ' is opened<br>' + result);
+    $(".error").prepend(result);
+    $("#accordion").accordion({active: 0});
    }
   },
   complete: function () {
@@ -4361,7 +4362,7 @@ $(document).ready(function () {
   var savePath = homeUrl + 'form.php?class_name=comment';
   $.when(saveHeader(savePath, headerData, '#comment_id', '', '', true, 'comment')).then(function () {
    var message = '<div class="alert alert-success alert-dismissible" role="alert">';
-   message += 'Comment is sucessfully posted. &nbsp; <input type="button" class="btn-sucess" value="Reload page" onclick="location.reload();">';
+   message += 'Comment is Successfullyposted. &nbsp; <input type="button" class="btn-sucess" value="Reload page" onclick="location.reload();">';
    message += '</div>';
    $(".comment_error").replaceWith(message);
    $('.show_loading_small').hide();
@@ -4732,7 +4733,7 @@ $(document).ready(function () {
   $(this).prop('disabled', true);
   $.when(saveHeader('content.php', headerData, '#content_id', '', '', true, 'content')).then(function () {
    var message = '<div class="alert alert-success alert-dismissible" role="alert">';
-   message += 'Document is sucessfully posted. <br> Click on view to view the post';
+   message += 'Document is Successfullyposted. <br> Click on view to view the post';
    message += '</div>';
    $(".error").replaceWith(message);
    $('.show_loading_small').hide();

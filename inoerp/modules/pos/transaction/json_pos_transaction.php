@@ -4,7 +4,7 @@
   $terminal_name = !empty($_GET['terminal_name']) ? ($_GET['terminal_name']) : '';
     try{
    $_SESSION['terminal_name'] = $terminal_name;
-   $data = ['result' => 'Terminal name is sucessfully saved'];
+   $data = ['result' => 'Terminal name is Successfullysaved'];
   }catch(Exception $e){
    $data = ['result' => 'Action Faield! Terminal name is not saved'];
   }

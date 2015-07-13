@@ -66,7 +66,7 @@ class wip_wol_transaction_line extends dbObject {
 //    if (!empty($this->item_id_m)) {
 //     try {
 //      $this->_create_inv_transactions();
-//      echo "<br>INV Transaction Lines are Sucessfully Created ";
+//      echo "<br>INV Transaction Lines are SuccessfullyCreated ";
 //     } catch (Exception $e) {
 //      $update_satus = -99;
 //      echo "<br>Creating the transaction lines failed @ inv_interorg_transfer_line after save" . $e->getMessage();
@@ -182,7 +182,7 @@ class wip_wol_transaction_line extends dbObject {
    try {
     $wip_wol_tran->transaction_status = 'Completed';
     $wip_wol_tran->save();
-    echo '<br>All transactions are sucessfully completed';
+    echo '<br>All transactions are Successfullycompleted';
    } catch (Exception $e) {
     echo '<br>Transaction failed. Error @ wol_transaction_line @@ line ' . __LINE__ . '<br>' . $e->getMessage();
     $dbc->rollback = true;

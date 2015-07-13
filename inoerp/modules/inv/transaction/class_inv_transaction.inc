@@ -549,7 +549,7 @@ class inv_transaction extends dbObject {
    $return_val = $return_val1 && $return_val2;
   }
 
-  if (in_array($this->transaction_type_id, array(6, 18, 13, 21, 24))) {
+  if (in_array($this->transaction_type_id, array(6, 18, 19, 13, 21, 24))) {
    $return_val = $this->_transact_serial_issue();
   }
 
@@ -600,7 +600,7 @@ class inv_transaction extends dbObject {
    $return_val = $return_val1 && $return_val2;
   }
 
-  if (in_array($this->transaction_type_id, array(6, 18, 13, 21, 24))) {
+  if (in_array($this->transaction_type_id, array(6, 18, 19, 13, 21, 24))) {
    $return_val = $this->_transact_lot_issue();
   }
 
@@ -908,8 +908,8 @@ class inv_transaction extends dbObject {
   $gled = new gl_ledger();
   $gled->findBy_id($this->_ledger_id);
   $gp = new gl_period();
-  $current_open_period = $gp->current_open_period($this->_ledger_id);
-  $gjh = new gl_journal_header;
+    $current_open_period = $gp->current_open_period($this->_ledger_id);
+    $gjh = new gl_journal_header;
   $gjh->ledger_id = $this->_ledger_id;
   $gjh->status = 'ENTERED';
   $gjh->currency = $gled->currency_code;
@@ -1100,6 +1100,7 @@ class inv_transaction extends dbObject {
    case 15 :
    case 16 :
    case 18 :
+   case 19 :
    case 21 :
    case 22 :
    case 24 :
@@ -1139,7 +1140,7 @@ class inv_transaction extends dbObject {
     }
 
     //form misc issue - debit the entered account
-    if (in_array($this->transaction_type_id, array(1, 16, 18))) {
+    if (in_array($this->transaction_type_id, array(1, 16, 18, 19))) {
      $total_amount = 0;
      $line_number = 1;
      foreach ($journal_line_a as $journal_line) {
@@ -1273,12 +1274,13 @@ class inv_transaction extends dbObject {
     }
 
     //start of cr
+    $cr_inv_receving_trnx_a = [2, 17, 23];
     if (!empty($this->_cr_amount) && ($this->transaction_type_id == 20)) {
      $this->_journal_line_for_cr_adjustmet_amount($journal_line_a);
     } else if ($this->transaction_type_id == 20) {
-     array_push($inv_receving_trnx_a, 20);
+     array_push($cr_inv_receving_trnx_a, 20);
     }
-    if (in_array($this->transaction_type_id, array(2, 17, 23))) {
+    if (in_array($this->transaction_type_id, $cr_inv_receving_trnx_a)) {
      $total_amount = 0;
      $line_number = 1;
      foreach ($journal_line_a as $journal_line) {

@@ -158,7 +158,7 @@ class fp_minmax_header extends dbObject {
 	 $item_id_m = $parameters['item_id_m'][0];
 	 try {
 		$this->minmax_demand_calculator($item_id_m, $mmh);
-		$this->message .= "<br/> Min Max Planner is sucessfully updated for item_id_m - " . $item_id_m .
+		$this->message .= "<br/> Min Max Planner is Successfullyupdated for item_id_m - " . $item_id_m .
 						' bom_cost_type : ' . $fp_minmax_header_id;
 	 } catch (Exception $e) {
 		$this->message .= "<br/> Min Max Planner fialed for Item id " . $item_id_m . $e->getMessage();
@@ -180,7 +180,7 @@ class fp_minmax_header extends dbObject {
 	 foreach ($item_range as $items) {
 		try {
 		 $this->minmax_demand_calculator($items->item_id_m, $mmh);
-		 $this->message .= "<br>Min Max Planner is sucessfully updated for item_id_m - " . $items->item_id_m .
+		 $this->message .= "<br>Min Max Planner is Successfullyupdated for item_id_m - " . $items->item_id_m .
 						 ' bom_cost_type : ' . $fp_minmax_header_id;
 		} catch (Exception $e) {
 		 $this->message .= "<br>Min Max Plannerp failed for Item id " . $items->item_id_m . $e->getMessage();
@@ -202,7 +202,7 @@ class fp_minmax_header extends dbObject {
 	 foreach ($item_range as $items) {
 		try {
 		 $this->minmax_demand_calculator($items->item_id_m, $mmh);
-		 $this->message .= "<br>Min Max Planner is sucessfully updated for item_id_m - " . $items->item_id_m .
+		 $this->message .= "<br>Min Max Planner is Successfullyupdated for item_id_m - " . $items->item_id_m .
 						 ' bom_cost_type : ' . $bom_cost_type;
 		} catch (Exception $e) {
 		 $this->message .= "<br>Min Max Plannerp failed for Item id " . $items->item_id_m . $e->getMessage();
@@ -220,7 +220,7 @@ class fp_minmax_header extends dbObject {
 	foreach ($fcl_i as $items) {
 	 try {
 		$this->minmax_demand_calculator($items->item_id_m, $mmh);
-		$this->message .= "<br>Min Max Planner is sucessfully updated for item_id_m - " . $items->item_id_m .
+		$this->message .= "<br>Min Max Planner is Successfullyupdated for item_id_m - " . $items->item_id_m .
 						' bom_cost_type : ' . $fp_minmax_header_id;
 	 } catch (Exception $e) {
 		$this->message .= "<br>Min Max Plannerp failed for Item id " . $items->item_id_m . $e->getMessage();
@@ -518,7 +518,7 @@ class fp_minmax_header extends dbObject {
 	 try {
 		$op = $this->_create_supply_for_minmax($item_id_m);
 		array_push($output_a, $op);
-		$this->message .= "<br/> Min Max Planner is sucessfully updated for item_id_m - " . $item_id_m;
+		$this->message .= "<br/> Min Max Planner is Successfullyupdated for item_id_m - " . $item_id_m;
 	 } catch (Exception $e) {
 		$this->message .= "<br/> Min Max Planner fialed for Item id " . $item_id_m . $e->getMessage();
 	 }
@@ -539,7 +539,7 @@ class fp_minmax_header extends dbObject {
 		try {
 		 $op = $this->_create_supply_for_minmax($items->item_id_m);
 		 array_push($output_a, $op);
-		 $this->message .= "<br>Min Max Program is sucessfully updated for item_id_m - " . $items->item_id_m;
+		 $this->message .= "<br>Min Max Program is Successfullyupdated for item_id_m - " . $items->item_id_m;
 		} catch (Exception $e) {
 		 $this->message .= "<br>Min Max Program failed for Item id " . $items->item_id_m . $e->getMessage();
 		}
@@ -561,7 +561,7 @@ class fp_minmax_header extends dbObject {
 		try {
 		 $op = $this->_create_supply_for_minmax($items->item_id_m);
 		 array_push($output_a, $op);
-		 $this->message .= "<br>Min Max Planner is sucessfully updated for item_id_m - " . $items->item_id_m;
+		 $this->message .= "<br>Min Max Planner is Successfullyupdated for item_id_m - " . $items->item_id_m;
 		} catch (Exception $e) {
 		 $this->message .= "<br>Min Max Program failed for Item id " . $items->item_id_m . $e->getMessage();
 		}
@@ -579,7 +579,7 @@ class fp_minmax_header extends dbObject {
 		if (!empty($op)) {
 		 array_push($output_a, $op);
 		}
-		$this->message .= "<br>Min Max Program is sucessfully updated for item_id_m - " . $items->item_id_m;
+		$this->message .= "<br>Min Max Program is Successfullyupdated for item_id_m - " . $items->item_id_m;
 	 } catch (Exception $e) {
 		$this->message .= "<br>Min Max Plannerp failed for Item id " . $items->item_id_m . $e->getMessage();
 	 }

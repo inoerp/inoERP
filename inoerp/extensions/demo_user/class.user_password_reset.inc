@@ -93,7 +93,7 @@ class user_password_reset extends dbObject {
 	 $headers .= "Content-type: text/html\r\n";
 
 	 if (mail($to, $subject, $message, $headers)) {
-//		$msg = "New password reset details have been sucessfully sent";
+//		$msg = "New password reset details have been Successfully sent";
 		$new_password_request = new user_password_reset();
 		$new_password_request->code = $code;
 		$new_password_request->user_id = $user_id;

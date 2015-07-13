@@ -198,7 +198,7 @@ class fp_mds_header extends dbObject {
   if ($mdsh->include_so_cb == 1) {
    try {
     $this->_load_so_to_mds($mdsh);
-    $this->message .= "<br>All Sales Orders are sucessfully loaded into MDS";
+    $this->message .= "<br>All Sales Orders are Successfullyloaded into MDS";
    } catch (Exception $e) {
     $this->message .= "<br>Sales Order loading to MDS failed!" . $e->getMessage();
    }
@@ -206,7 +206,7 @@ class fp_mds_header extends dbObject {
   //load all the forecasts from source list
   try {
    $this->_load_sourceListDemand_to_mds($mdsh);
-   $this->message .= "<br>All Demands from Source List are sucessfully loaded into MDS";
+   $this->message .= "<br>All Demands from Source List are Successfullyloaded into MDS";
   } catch (Exception $e) {
    $this->message .= "<br>Demand Loading from Source List to MDS failed!" . $e->getMessage();
   }

@@ -269,7 +269,7 @@ class po_requisition_interface extends dbObject {
 		$interface_lines = $this->_findBy_supplier_site_id($interfaceLines->supplier_site_id);
 		try {
 		 $this->_importAndDelete_fromInterface($interface_lines);
-		 $this->message .= "<br>All line with supplier site id are sucessfully imported. Count is " . count($interface_lines);
+		 $this->message .= "<br>All line with supplier site id are Successfullyimported. Count is " . count($interface_lines);
 		} catch (Exception $e) {
 		 $this->message .= "<br>Import Failed for lines with out supplier site id. Count is " . count($interface_lines);
 		}
@@ -281,7 +281,7 @@ class po_requisition_interface extends dbObject {
 	if ($all_external_lines) {
 	 try {
 		$this->_importAndDelete_fromInterface($all_external_lines);
-		$this->message .= "<br>All line without supplier site id are sucessfully imported. Count is " . count($all_external_lines);
+		$this->message .= "<br>All line without supplier site id are Successfullyimported. Count is " . count($all_external_lines);
 	 } catch (Exception $e) {
 		$this->message .= "<br>Import Failed for lines with out supplier site id. Count is " . count($all_external_lines);
 	 }
@@ -292,7 +292,7 @@ class po_requisition_interface extends dbObject {
 	if ($all_internal_lines) {
 	 try {
 		$this->_importAndDelete_fromInterface($all_internal_lines);
-		$this->message .= "<br>All Interanl lines are sucessfully imported. Count is " . count($all_external_lines);
+		$this->message .= "<br>All Interanl lines are Successfullyimported. Count is " . count($all_external_lines);
 	 } catch (Exception $e) {
 		$this->message .= "<br>Import Failed for Internal Lines. Count is " . count($all_external_lines);
 	 }

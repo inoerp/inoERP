@@ -203,7 +203,7 @@ class hr_payroll_schedule extends dbObject {
    $this->message .= "<br> Creating Payroll schedule by  hr_payroll_id  " . $this->hr_payroll_id;
    try {
     $this->_create_payroll_schedule();
-    $this->message .= "<br>Payroll schdule is sucessfully created";
+    $this->message .= "<br>Payroll schdule is Successfullycreated";
    } catch (Exception $e) {
     $this->message .= "<br>_create_payroll_schedule schdule program failed!. Error @ payroll_schedule @@ Line " . __LINE__ . $e->getMessage();
    }
@@ -315,7 +315,7 @@ class hr_payroll_schedule extends dbObject {
    $this->message .= "<br> Creating pay roll process by  hr_payroll_schedule_id  " . $this->hr_payroll_schedule_id;
    try {
     $this->_do_payroll_processing();
-    $this->message .= "<br>Payroll process is sucessfully created";
+    $this->message .= "<br>Payroll process is Successfullycreated";
    } catch (Exception $e) {
     $this->message .= "<br>_create_payroll_process schdule program failed!. Error @ payroll_schedule @@ Line " . __LINE__ . $e->getMessage();
    }

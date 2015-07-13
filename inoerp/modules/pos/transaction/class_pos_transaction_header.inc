@@ -198,7 +198,7 @@ AND pt.pos_terminal_id = '{$terminal_id}'
     $invt->save();
     $invt->_after_save();
 //    pa($invt);
-    $this->msg .= "<br>Inventory Transaction is sucessfully created for POS transaction id " . $tl_record->pos_transaction_header_id;
+    $this->msg .= "<br>Inventory Transaction is Successfullycreated for POS transaction id " . $tl_record->pos_transaction_header_id;
    } catch (Exception $e) {
     $this->msg .= "<br>Failed to Complete the inventory transaction. Error @ pos transaction_header @@ " . __LINE__ . $e->getMessage();
     $dbc->rollback = true;
@@ -263,7 +263,7 @@ AND pt.pos_terminal_id = '{$terminal_id}'
      foreach ($terminals_for_sync as $terminals) {
       try {
        $this->_sync_pos_by_terminalId($terminals->pos_terminal_id);
-       $this->message .= "<br/>Sync is sucessfully completed for termianl id " . $terminals->pos_terminal_id;
+       $this->message .= "<br/>Sync is Successfullycompleted for termianl id " . $terminals->pos_terminal_id;
       } catch (Exception $e) {
        $this->message .= "<br/>Sync failed fialed for termianl id " . $terminals->pos_terminal_id . $e->getMessage();
       }

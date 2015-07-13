@@ -58,7 +58,7 @@
      $stmt->bindvalue(':last_update_by', $_SESSION['username'], PDO::PARAM_INT);
      try {
       $stmt->execute();
-      echo "<br>Record is sucessfully saved in $class";
+      echo "<br>Record is Successfullysaved in $class";
      } catch (PDOException $e) {
       $dbc->rollback = 1;
       echo "<br> $sql <br>";
@@ -112,7 +112,7 @@
      try {
       $stmt->execute();
       $$class->content_id = $dbc->connection->lastInsertId();
-      echo "<br>Record is sucessfully saved in $class";
+      echo "<br>Record is Successfullysaved in $class";
      } catch (PDOException $e) {
       $dbc->rollback = 1;
       echo "<br>Record couldnt be saved. Error @wip_wo_work_bench_line @@ Line " . __LINE__ . $e->getMessage() . "<br/>";
@@ -167,7 +167,7 @@
      }
      try {
       $stmt->execute();
-      $newMsg = "Record is sucessfully saved in $class";
+      $newMsg = "Record is Successfullysaved in $class";
      } catch (PDOException $e) {
       print "Record couldnt be saved!!: " . $e->getMessage() . "<br/>";
      }
@@ -207,7 +207,7 @@
      try {
       $stmt->execute();
       $$class->content_id = $dbc->connection->lastInsertId();
-      $newMsg = "Record is sucessfully saved in $class";
+      $newMsg = "Record is Successfullysaved in $class";
      } catch (PDOException $e) {
       print "Record couldnt be saved!!: " . $e->getMessage() . "<br/>";
      }

@@ -760,7 +760,7 @@ class item extends dbObject {
   $item_n->audit_trial();
   try {
    $item_n->save();
-   echo "<br>Update of Min Max numbers for " . $item_n->item_number . ' is sucessfully updated ';
+   echo "<br>Update of Min Max numbers for " . $item_n->item_number . ' is Successfullyupdated ';
   } catch (Exception $e) {
    echo "<br>Update of Min Max numbers for " . $item_n->item_number . ' is failed!' . $e->getMessage();
   }
@@ -802,7 +802,7 @@ class item extends dbObject {
      }
     }
     $mm_item->_update_item_minmax();
-    $this->message .= "<br/> Min Max Item Update is sucessfully updated for item_id - " . $item_id .
+    $this->message .= "<br/> Min Max Item Update is Successfullyupdated for item_id - " . $item_id .
      ' min max header id : ' . $fp_minmax_header_id;
    } catch (Exception $e) {
     $this->message .= "<br/> Min Max Item Updat fialed for Item id " . $item_id . $e->getMessage();
@@ -831,7 +831,7 @@ class item extends dbObject {
     }
     try {
      $mm_item->_update_item_minmax();
-     $this->message .= "<br>Min Max Item Attributes is sucessfully updated for item_id - " . $mms->plan_id .
+     $this->message .= "<br>Min Max Item Attributes is Successfullyupdated for item_id - " . $mms->plan_id .
       ' fp_minmax_header_id : ' . $fp_minmax_header_id;
     } catch (Exception $e) {
      $this->message .= "<br>Min Max Plannerp failed for Item id " . $mms_records->item_id . $e->getMessage();
@@ -861,7 +861,7 @@ class item extends dbObject {
     }
     try {
      $mm_item->_update_item_minmax();
-     $this->message .= "<br>Min Max Item Attributes is sucessfully updated for item_id - " . $mms->plan_id .
+     $this->message .= "<br>Min Max Item Attributes is Successfullyupdated for item_id - " . $mms->plan_id .
       ' fp_minmax_header_id : ' . $fp_minmax_header_id;
     } catch (Exception $e) {
      $this->message .= "<br>Min Max Plannerp failed for Item id " . $mms_records->item_id . $e->getMessage();
@@ -882,7 +882,7 @@ class item extends dbObject {
    }
    try {
     $mm_item->_update_item_minmax();
-    $this->message .= "<br>Min Max Item Attributes is sucessfully updated for item_id - " . $mms_records->item_id .
+    $this->message .= "<br>Min Max Item Attributes is Successfullyupdated for item_id - " . $mms_records->item_id .
      ' fp_minmax_header_id : ' . $mms->plan_id;
    } catch (Exception $e) {
     $this->message .= "<br>Min Max Plannerp failed for Item id " . $mms_records->item_id . $e->getMessage();

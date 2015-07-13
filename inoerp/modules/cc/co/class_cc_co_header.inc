@@ -209,7 +209,7 @@ WHERE module_name = 'cc'";
    foreach ($all_changes as $co_header) {
     try {
      $this->_implement_co($co_header->change_number);
-     $this->message .= '<br/>Change order # ' . $co_header->change_number . ' is sucessfully implemented ';
+     $this->message .= '<br/>Change order # ' . $co_header->change_number . ' is Successfullyimplemented ';
     } catch (Exception $e) {
      $this->message .= '<br/>Change order # ' . $co_header->change_number . ' failed to implement ' . $e->getMessage();
     }
@@ -218,7 +218,7 @@ WHERE module_name = 'cc'";
    $this->message .= "<br/>Starting implementation of CO# " . $parameters['change_number'][0];
    try {
     $this->_implement_co($parameters['change_number'][0]);
-    $this->message .= '<br/>Change order # ' . $parameters['change_number'][0] . ' is sucessfully implemented ';
+    $this->message .= '<br/>Change order # ' . $parameters['change_number'][0] . ' is Successfullyimplemented ';
    } catch (Exception $e) {
     $this->message .= '<br/>Change order # ' . $parameters['change_number'][0] . ' failed to implement ' . $e->getMessage();
    }

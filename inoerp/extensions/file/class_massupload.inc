@@ -68,7 +68,7 @@ class massupload extends dbObject {
     $count++;
    }
 
-   echo "<div class='message'> ".$count ."Record(s) is/are sucessfully imported </div>";
+   echo "<div class='message'> ".$count ."Record(s) is/are Successfully imported </div>";
    return true;
   } catch (Exception $e) {
    echo 'Error Message: ' . $e->getMessage();

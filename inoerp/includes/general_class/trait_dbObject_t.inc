@@ -791,7 +791,7 @@ trait dbObject_t {
   try {
    $stmt->execute();
    $this->msg = 1;
-   echo "<div class='message'>Record is sucessfully deleted.</div>";
+   echo "<div class='message'>Record is Successfully deleted.</div>";
    $dbc->confirm();
   } catch (PDOException $e) {
    $this->msg = 0;
@@ -820,7 +820,7 @@ trait dbObject_t {
 //	 $dbc->connection->commit();
    $this->msg = 1;
    $dbc->confirm();
-   echo "<div class='message'>Records are sucessfully deleted.</div>";
+   echo "<div class='message'>Records are Successfully deleted.</div>";
   } catch (PDOException $e) {
    $this->msg = 0;
    $dbc->rollback = 1;
@@ -848,7 +848,7 @@ trait dbObject_t {
 //	 $dbc->connection->commit();
    $this->msg = 1;
    $dbc->confirm();
-   echo "<div class='message'>Records are sucessfully deleted.</div>";
+   echo "<div class='message'>Records are Successfully deleted.</div>";
   } catch (PDOException $e) {
    $dbc->rollback = 1;
    $this->msg = 0;
@@ -975,7 +975,7 @@ trait dbObject_t {
     $stmt->bindvalue(':last_update_by', $_SESSION['username'], PDO::PARAM_INT);
     try {
      $stmt->execute();
-     echo "<br>Record is sucessfully saved in $class";
+     echo "<br>Record is Successfully saved in $class";
     } catch (PDOException $e) {
      $dbc->rollback = 1;
      echo "<br> $sql <br>";
@@ -1029,7 +1029,7 @@ trait dbObject_t {
     try {
      $stmt->execute();
      $$class->content_id = $dbc->connection->lastInsertId();
-     echo "<br>Record is sucessfully saved in $class";
+     echo "<br>Record is Successfully saved in $class";
     } catch (PDOException $e) {
      $dbc->rollback = 1;
      echo "<br>Record couldnt be saved. Error @wip_wo_work_bench_line @@ Line " . __LINE__ . $e->getMessage() . "<br/>";

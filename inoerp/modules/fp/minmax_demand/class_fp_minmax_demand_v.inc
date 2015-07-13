@@ -95,7 +95,7 @@ public static $form_class_name = "fp_minmax_demand";
 	 $stmt->execute();
 	 $dbc->connection->commit();
 	 $this->msg = 1;
-	 echo "<div class='message'>Records are sucessfully deleted.</div>";
+	 echo "<div class='message'>Records are Successfullydeleted.</div>";
 	} catch (PDOException $e) {
 	 $this->msg = 0;
 	 echo "<div class='message'>failing for sql is $sql</div>";
