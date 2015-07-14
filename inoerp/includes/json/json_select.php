@@ -9,10 +9,10 @@ if (!empty($_GET['class_name'])) {
  $pageno = !(empty($_GET['pageno'])) ? (int) $_GET['pageno'] : 1;
  $per_page = !(empty($_GET['per_page'])) ? (int) $_GET['per_page'] : 0;
 
- if(!empty($_GET['search_parameters'])){
+ if (!empty($_GET['search_parameters'])) {
   $_GET = get_postArray_From_jqSearializedArray($_GET['search_parameters']);
  }
- 
+
  $_GET['pageno'] = $pageno;
  $_GET['class_name'] = $class;
  $_GET['per_page'] = $per_page;
@@ -80,10 +80,19 @@ if (!empty($_GET['class_name'])) {
     $whereFields[] = sprintf("%s IN %s ", $value, $comma_sep_search_parameters_in_str);
    } else {
     $entered_search_criteria = str_replace(' ', '%', trim($_GET[$value][0]));
-    if (strpos($value, '_ID') !== false) {
-     $whereFields[] = sprintf("%s = %s ", $value, trim($entered_search_criteria));
+
+    if (strpos($value, '_ID') !== false || strpos($value, '_id') !== false) {
+     if ($entered_search_criteria == 'null') {
+      $whereFields[] = " $value IS NULL ";
+     } else {
+      $whereFields[] = sprintf("%s = %s ", $value, trim($entered_search_criteria));
+     }
     } else if (substr($entered_search_criteria, 0, 1) == '=') {
-     $whereFields[] = sprintf("%s = '%s' ", $value, trim(substr($entered_search_criteria, 1)));
+     if ($entered_search_criteria == 'null') {
+      $whereFields[] = " $value IS NULL ";
+     } else {
+      $whereFields[] = sprintf("%s = '%s' ", $value, trim(substr($entered_search_criteria, 1)));
+     }
     } else if (substr($entered_search_criteria, 0, 2) == '!=') {
      $whereFields[] = sprintf("%s != '%s' ", $value, trim(substr($entered_search_criteria, 2)));
     } else if (substr($entered_search_criteria, 0, 1) == '>') {

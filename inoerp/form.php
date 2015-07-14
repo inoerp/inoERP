@@ -1,7 +1,15 @@
 <?php
 
 $form_page = true;
-if (!empty($_GET['class_name'])) {
+if (!empty($_GET['router'])) {
+ $router = $_GET['router'];
+ $router_file = __DIR__ . "/includes/router/$router.php";
+ if (file_exists($router_file)) {
+  include_once __DIR__ . "/includes/router/$router.php";
+ }else{
+  die('No router found!. Error @ form.php @@ line 10');
+ }
+} else if (!empty($_GET['class_name'])) {
  $class_names = $_GET['class_name'];
 } else if (!empty($_GET['module_code'])) {
  $class_names = 'ino_generic';
@@ -9,7 +17,7 @@ if (!empty($_GET['class_name'])) {
  include_once('includes/basics/basics.inc');
  $path = new path();
  if (!empty($_GET['path_id'])) {
-  $ino_generic_html = $path->findBy_moduleCode($_GET['module_code'],$type, array($_GET['path_id']));
+  $ino_generic_html = $path->findBy_moduleCode($_GET['module_code'], $type, array($_GET['path_id']));
  } else {
   $ino_generic_html = $path->findBy_moduleCode($_GET['module_code'], $type, null);
  }
@@ -55,7 +63,7 @@ if (empty($_POST)) {
   } else {
    $continue = false;
 //   pa($$class);
-   echo "<h2>Could n't call the header</h2> Error @ form.php line ".__LINE__;
+   echo "<h2>Could n't call the header</h2> Error @ form.php line " . __LINE__;
    return;
   }
 

@@ -94,7 +94,7 @@ inoERP
        <ul class="column four_column">
         <li id="document_print"><label><?php echo gettext('Document Print') ?></label>
          <a class="button" target="_blank"
-            href="<?php echo HOME_URL ?>modules/po/po_print.php?po_header_id=<?php echo!(empty($$class->po_header_id)) ? $$class->po_header_id : ""; ?>" >Print PO</a>
+            href="<?php echo HOME_URL ?>form.php?class_name=po_header&amp;router=pdf_print&amp;po_header_id=<?php echo!(empty($$class->po_header_id)) ? $$class->po_header_id : ""; ?>" >Print PO</a>
         </li>
         <li><label>Action</label>
          <?php

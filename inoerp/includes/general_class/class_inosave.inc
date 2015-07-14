@@ -357,6 +357,7 @@ class inosave extends dbObject {
      }
     }//end of after save functions
    } else {
+    $dbc->rollback = true;
     $error = [ 'Input Error!' => 'Mandatory Fields are missing. '];
     array_push($ie->page_exception, $error);
    }

@@ -228,9 +228,15 @@ class inv_receipt_line extends dbObject {
    $this->_after_save_rmaReceipt();
   } else if (!empty($this->inv_receipt_line_id) && !empty($this->inv_interorg_transfer_line_id)) {
    if (!empty($this->item_id_m)) {
-    $this->_create_inv_transactions();
+    try{
+     $this->_create_inv_transactions();
+     $this->_after_save_interOrgReceipt();
+    }catch(Exception $e){
+     echo "<br> Not able to complete inventory transaction. Error @ inv_transaction " . __LINE__ . '<br>' . $e->getMessage();
+     $dbc->rollback = true;
+    }
+    
    }
-   $this->_after_save_interOrgReceipt();
   }
  }
 

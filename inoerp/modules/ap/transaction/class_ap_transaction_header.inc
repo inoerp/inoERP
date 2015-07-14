@@ -113,23 +113,7 @@
    'approval_status',
    'gl_journal_header_id'
   ];
-  public $column = [
-   'ap_transaction_header_id',
-   'document_number',
-   'transaction_type',
-   'transaction_number',
-   'header_amount',
-   'paid_amount',
-   'supplier_id',
-   'supplier_site_id',
-   'bu_org_id',
-   'ledger_id',
-   'period_id',
-   'document_owner',
-   'doc_currency',
-   'currency',
-   'gl_journal_header_id'
-  ];
+
   public $requiredField = [
    'bu_org_id',
    'transaction_type',

@@ -101,7 +101,7 @@
           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
          <td><?php $f->text_field_wid2sr('revision_name'); ?></td>
          <td><?php $f->text_field_wid2('item_description'); ?></td>
-         <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, 'uom_id', $readonly); ?>  </td>
+         <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'uom_id', 1, $readonly); ?>  </td>
          <td><?php echo $f->number_field('transaction_quantity', $$class_second->transaction_quantity, '', '', '', 1, $f->readonly2); ?></td>
          <td><?php $f->text_field_wid2('reason'); ?>							</td>
 

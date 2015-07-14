@@ -78,10 +78,18 @@ if (!empty($_GET['class_name'])) {
     $whereFields[] = sprintf("%s IN %s ", $value, $comma_sep_search_parameters_in_str);
    } else {
     $entered_search_criteria = str_replace(' ', '%', trim($_GET[$value][0]));
-    if (strpos($value, '_ID') !== false) {
-     $whereFields[] = sprintf("%s = %s ", $value, trim($entered_search_criteria));
+    if (strpos($value, '_ID') !== false || strpos($value, '_id') !== false) {
+     if ($entered_search_criteria == 'null') {
+      $whereFields[] = " $value IS NULL ";
+     } else {
+      $whereFields[] = sprintf("%s = %s ", $value, trim($entered_search_criteria));
+     }
     } else if (substr($entered_search_criteria, 0, 1) == '=') {
-     $whereFields[] = sprintf("%s = '%s' ", $value, trim(substr($entered_search_criteria, 1)));
+     if ($entered_search_criteria == 'null') {
+      $whereFields[] = " $value IS NULL ";
+     } else {
+      $whereFields[] = sprintf("%s = '%s' ", $value, trim(substr($entered_search_criteria, 1)));
+     }
     } else if (substr($entered_search_criteria, 0, 2) == '!=') {
      $whereFields[] = sprintf("%s != '%s' ", $value, trim(substr($entered_search_criteria, 2)));
     } else if (substr($entered_search_criteria, 0, 1) == '>') {
@@ -104,6 +112,7 @@ if (!empty($_GET['class_name'])) {
    $noof_criteria++;
   }
  }
+
  if ((!empty($_GET['report_name'])) && method_exists($$class, $_GET['report_name'][0])) {
   $report_name = $_GET['report_name'][0];
   $search_result_statement = call_user_func(array($$class, $report_name), $_GET);

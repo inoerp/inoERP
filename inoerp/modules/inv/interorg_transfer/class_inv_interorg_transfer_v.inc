@@ -116,7 +116,13 @@ AND item.org_id = ith.from_org_id
  }
 
  public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '') {
-  $sql = "SELECT * FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
+  $sql = "SELECT inv_interorg_transfer_header_id, order_number , io_order_number,    io_line_number,   item_number,  
+  inv_interorg_transfer_line_id,   from_org_id,   to_org_id,   carrier,   uom_id,
+  vechile_number,  waybill,   from_subinventory_id,   from_locator_id,   item_id_m,
+  item_description,   to_subinventory_id,   to_locator_id,   transaction_quantity, 
+  serial_number, lot_number
+  
+FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
   $sql .= " AND status = 'SHIPPED' ";
   if (!empty($_GET['hidden_fields']['to_org_id'])) {
    $rec_org_id = $_GET['hidden_fields']['to_org_id'];

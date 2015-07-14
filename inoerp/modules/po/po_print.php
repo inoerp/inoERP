@@ -4,7 +4,6 @@ include("../../tparty/mpdf/mpdf.php");
 $mpdf = new mPDF('c');
 ob_start();
 global $si;
-echo '<link href="../../themes/default/layout.css"  media="all" rel="stylesheet" type="text/css" />';
 echo '<link href="../../themes/default/public.css" media="all" rel="stylesheet" type="text/css" />';
 echo '<link href="po.css" media="all" rel="stylesheet" type="text/css"  />';
 $po_header = new po_header();
@@ -179,10 +178,10 @@ if (!empty($$class->$external_entity_lineId)) {
 <?php
 $html = ob_get_contents();
 ob_end_clean();
-
+echo $html;
 // send the captured HTML from the output buffer to the mPDF class for processing
-$mpdf->WriteHTML($html);
-download_send_headers("po_print" . date("Y-m-d") . ".pdf", 'pdf_format');
-$mpdf->Output();
+//$mpdf->WriteHTML($html);
+//download_send_headers("po_print" . date("Y-m-d") . ".pdf", 'pdf_format');
+//$mpdf->Output();
 exit;
 ?>

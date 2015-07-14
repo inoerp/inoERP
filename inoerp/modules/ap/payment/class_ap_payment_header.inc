@@ -90,16 +90,12 @@
    'payment_type',
    'payment_number',
    'supplier_id',
-   'from_bank_header_id',
-   'description',
    'document_date',
    'document_number',
-   'ledger_id',
-   'period_id',
    'pay_group',
    'payment_method',
-   'approval_status',
    'payment_status',
+   'gl_journal_header_id'
   ];
   public $requiredField = [
    'bu_org_id',

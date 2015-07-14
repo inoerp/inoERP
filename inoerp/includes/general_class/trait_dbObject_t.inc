@@ -421,6 +421,7 @@ trait dbObject_t {
     }
    }
   }
+//  echo $sql;
   $result_array = static::find_by_sql($sql);
   return !empty($result_array) ? ($result_array) : false;
  }

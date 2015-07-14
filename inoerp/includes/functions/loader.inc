@@ -256,11 +256,11 @@ if (($continue) && (!empty($class_names))) {
    //-------------------------------------------------------------------------------------
    if (!empty($class_id_value) && (!is_array($class_id_value))) {
     $$class->findBy_id($class_id_value);
-    foreach ($$class as $key => $value) {
-     if ((!empty($value)) && (property_exists($$class, $key))) {
-      $$class->$key = $value;
-     }
-    }
+//    foreach ($$class as $key => $value) {
+//     if ((!empty($value)) && (property_exists($$class, $key))) {
+//      $$class->$key = $value;
+//     }
+//    }
     //catalog statement
     if (!empty($class_id_value)) {
      $cat_val = new sys_catalog_value();
@@ -495,6 +495,7 @@ $class_id_first = property_exists($class, 'primary_column') ? $class::$primary_c
 
 if (isset($class_names[1])) {
  $class_second = $class_names[1];
+ $$class_second = new $class_second;
  //$$class_second = $$class_names[1];
  $line_obj = $class_second . '_object';
  if (property_exists($class, 'primary_column')) {

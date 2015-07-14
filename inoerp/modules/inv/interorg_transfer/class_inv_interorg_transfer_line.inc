@@ -74,7 +74,7 @@ class inv_interorg_transfer_line extends dbObject {
   'transaction_type_id',
   'from_locator_id',
   'item_id_m',
-//   'uom_id',
+   'uom_id',
   'to_subinventory_id',
   'transaction_quantity',
  ];
