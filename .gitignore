@@ -3,6 +3,7 @@ inoerp_index.php
 test.*
 mailsettings.inc
 inoerp/includes/basics/settings/dbsettings.inc
+inoerp/includes/basics/settings
 *.dbsettings
 #################
 ## Eclipse
