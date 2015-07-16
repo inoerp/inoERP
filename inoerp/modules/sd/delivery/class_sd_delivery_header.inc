@@ -56,7 +56,7 @@ class sd_delivery_header extends dbObject {
   'status',
   'received_by',
   'carrier',
-  'vechile_number',
+  'vehicle_number',
   'delivery_received_by',
   'carrier_receipt_number',
   'expetced_delivery_date',
@@ -117,7 +117,7 @@ class sd_delivery_header extends dbObject {
  public $status;
  public $received_by;
  public $carrier;
- public $vechile_number;
+ public $vehicle_number;
  public $delivery_received_by;
  public $carrier_receipt_number;
  public $expetced_delivery_date;

@@ -76,10 +76,9 @@
      <div id="tabsHeader-6" class="tabContent">
       <div> 
        <ul class="column four_column">
-        <li id="document_print"><label><?php echo gettext('Document Print') ?></label>
-         <a class="button" target="_blank"
-            href="<?php echo HOME_URL ?>form.php?class_name=po_requisition_all_v&amp;router=pdf_print&amp;po_requisition_header_id=<?php echo!(empty($$class->po_requisition_header_id)) ? $$class->po_requisition_header_id : ""; ?>" >Print Requisition</a>
-        </li>
+        <li><label></label><a  role="button" class="quick_select button btn btn-info" target="_blank" 
+          href="<?php echo HOME_URL ?>form.php?class_name=po_requisition_all_v&amp;router=pdf_print&amp;po_requisition_header_id=<?php echo!(empty($$class->po_requisition_header_id)) ? $$class->po_requisition_header_id : ""; ?>" >
+          <?php echo gettext('Print Requisition') ?></a></li>
         <li><label>Action</label>
          <?php
          echo $f->select_field_from_array('action', $$class->action_a, '', 'action', '', '', $readonly, $action_readonly)

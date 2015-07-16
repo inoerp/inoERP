@@ -56,7 +56,7 @@ class inv_interorg_transfer_header extends dbObject {
   'transfer_to_gl',
   'transaction_date',
   'carrier',
-  'vechile_number',
+  'vehicle_number',
   'waybill',
   'created_by',
   'creation_date',
@@ -81,7 +81,7 @@ class inv_interorg_transfer_header extends dbObject {
   'transfer_to_gl',
   'transaction_date',
   'carrier',
-  'vechile_number',
+  'vehicle_number',
   'waybill',
   'created_by',
   'creation_date',
@@ -114,7 +114,7 @@ class inv_interorg_transfer_header extends dbObject {
  public $transfer_to_gl;
  public $transaction_date;
  public $carrier;
- public $vechile_number;
+ public $vehicle_number;
  public $waybill;
  public $created_by;
  public $creation_date;

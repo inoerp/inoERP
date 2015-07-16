@@ -30,7 +30,7 @@ class inv_interorg_transfer_v extends dbObject {
   'to_org_id',
   'carrier',
   'uom_id',
-  'vechile_number',
+  'vehicle_number',
   'waybill',
   'from_subinventory_id',
   'from_locator_id',
@@ -69,7 +69,7 @@ class inv_interorg_transfer_v extends dbObject {
  public $transaction_type_id;
  public $to_org_id;
  public $carrier;
- public $vechile_number;
+ public $vehicle_number;
  public $waybill;
  public $from_subinventory_id;
  public $from_locator_id;
@@ -87,14 +87,14 @@ class inv_interorg_transfer_v extends dbObject {
 CREATE OR REPLACE VIEW inv_interorg_transfer_v
 (
 inv_interorg_transfer_header_id, order_number, io_order_number, line_number, io_line_number, item_number, status, inv_interorg_transfer_line_id, 
-comment, from_org_id, transaction_type_id, to_org_id, carrier, vechile_number, waybill, uom_id,
+comment, from_org_id, transaction_type_id, to_org_id, carrier, vehicle_number, waybill, uom_id,
 from_subinventory_id, from_locator_id, item_id_m, item_description, to_subinventory_id, to_locator_id,  
 transaction_quantity, serial_number, lot_number
 )
 AS
 SELECT
 ith.inv_interorg_transfer_header_id, ith.order_number, ith.order_number,itl.line_number, itl.line_number,item.item_number, itl.status, itl.inv_interorg_transfer_line_id, 
-ith.comment, ith.from_org_id, ith.transaction_type_id, ith.to_org_id, ith.carrier, ith.vechile_number, ith.waybill, itl.uom_id,
+ith.comment, ith.from_org_id, ith.transaction_type_id, ith.to_org_id, ith.carrier, ith.vehicle_number, ith.waybill, itl.uom_id,
 itl.from_subinventory_id, itl.from_locator_id, itl.item_id_m, itl.item_description, itl.to_subinventory_id, itl.to_locator_id,  
 itl.transaction_quantity, itl.serial_number, itl.lot_number
 FROM inv_interorg_transfer_header ith,
@@ -118,7 +118,7 @@ AND item.org_id = ith.from_org_id
  public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '') {
   $sql = "SELECT inv_interorg_transfer_header_id, order_number , io_order_number,    io_line_number,   item_number,  
   inv_interorg_transfer_line_id,   from_org_id,   to_org_id,   carrier,   uom_id,
-  vechile_number,  waybill,   from_subinventory_id,   from_locator_id,   item_id_m,
+  vehicle_number,  waybill,   from_subinventory_id,   from_locator_id,   item_id_m,
   item_description,   to_subinventory_id,   to_locator_id,   transaction_quantity, 
   serial_number, lot_number
   

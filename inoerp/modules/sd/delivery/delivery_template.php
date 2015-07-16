@@ -45,7 +45,7 @@ inoERP
     </div>
     <div id="tabsHeader-3" class="tabContent">
      <div> 
-      <ul class="column five_column">
+      <ul class="column header_field">
        <li><label><?php echo gettext('Action') ?></label>
         <?php
         if ($$class->status == 'SHIPPED') {
@@ -54,6 +54,9 @@ inoERP
         echo $f->select_field_from_array('action', $$class->action_a, '', 'action')
         ?>
        </li>
+       <li><label></label><a  role="button" class="quick_select button btn btn-info" target="_blank" 
+       href="<?php echo HOME_URL ?>form.php?class_name=sd_delivery_all_v&amp;router=pdf_print&amp;sd_delivery_header_id=<?php echo!(empty($$class->sd_delivery_header_id)) ? $$class->sd_delivery_header_id : ""; ?>" >
+         <?php echo gettext('Print Requisition') ?></a></li>
       </ul>
      </div>
     </div>

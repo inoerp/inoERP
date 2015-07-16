@@ -41,19 +41,19 @@
      <ul class="column header_field">
       <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
        <label class="auto_complete"><?php echo gettext('Customer Name') ?></label>
-        <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?>
-      <i class="ar_customer_id select_popup clickable fa fa-search"></i>
+       <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?>
+       <i class="ar_customer_id select_popup clickable fa fa-search"></i>
       </li>
       <li><?php $f->l_text_field_d('customer_number'); ?></li>
       <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
       <li><?php $f->l_text_field_dr('sd_so_number'); ?></li>
       <li><?php $f->l_text_field_d('document_owner'); ?></li> 
-      <li><label><?php echo gettext('Approval Status') ?></label><span class="button"><?php echo !empty($$class->approval_status) ? $$class->approval_status : " No Status "; ?></span></li>
+      <li><label><?php echo gettext('Approval Status') ?></label><span class="button"><?php echo!empty($$class->approval_status) ? $$class->approval_status : " No Status "; ?></span></li>
       <li><?php $f->l_text_field_d('description'); ?></li> 
      </ul>					 
     </div>
     <div id="tabsHeader-3" class="tabContent">
-  <div class="shipto_address"><?php $f->address_field_d('ship_to_id'); ?></div>
+     <div class="shipto_address"><?php $f->address_field_d('ship_to_id'); ?></div>
      <div class="billto_address"><?php $f->address_field_d('bill_to_id'); ?></div>
     </div>
 
@@ -111,10 +111,9 @@
      <div> 
       <ul class="column header_field">
        <li><?php $f->l_select_field_from_array('transaction_action', $$class->action_a, '', 'transaction_action', '', '', $readonly); ?>       </li>
-       <li id="document_print"><label><?php echo gettext('Document Print') ?></label>
-        <a class="button" target="_blank"
-           href="modules/ar/transaction/transaction_print.php?ar_transaction_header_id=<?php echo!(empty($$class->ar_transaction_header_id)) ? $$class->ar_transaction_header_id : ""; ?>" >Transaction</a>
-       </li>
+       <li><label></label><a  role="button" class="quick_select button btn btn-info" target="_blank" 
+       href="<?php echo HOME_URL ?>form.php?class_name=ar_transaction_all_v&amp;router=pdf_print&amp;ar_transaction_header_id=<?php echo!(empty($$class->ar_transaction_header_id)) ? $$class->ar_transaction_header_id : ""; ?>" >
+         <?php echo gettext('Print Transaction') ?></a></li>
        <li id="document_status"><label><?php echo gettext('Change Status') ?></label>
         <?php echo form::select_field_from_object('approval_status', ar_transaction_header::ar_approval_status(), 'option_line_code', 'option_line_value', $ar_transaction_header->approval_status, 'set_approval_status', $readonly, '', ''); ?>
        </li>

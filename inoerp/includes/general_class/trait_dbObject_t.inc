@@ -353,6 +353,7 @@ trait dbObject_t {
   } catch (PDOException $e) {
    $this->msg = "No Records Found" . $e->getMessage();
   }
+
   return !empty($result) ? $result : false;
  }
 

@@ -2300,3 +2300,7 @@ ul.single-column li{
  font-size: 9px !important;
 font-weight: bold;
 }
+
+a.btn-info{
+ color: #fff !important;
+}

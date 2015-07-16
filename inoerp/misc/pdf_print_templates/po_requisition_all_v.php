@@ -50,6 +50,7 @@
     <tbody>
      <?php
      $count = 0;
+     if(!empty($$line_obj)){
      foreach ($$line_obj as $req_line) {
       ?>
       <tr class="line_rows">
@@ -65,6 +66,7 @@
       </tr>
       <?php
       $count = $count + 1;
+     }
      }
      ?>
     </tbody>

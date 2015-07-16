@@ -93,16 +93,10 @@
         echo $f->select_field_from_array('transaction_action', $$class->action_a, '', 'transaction_action', '', '', $readonly, $action_readonly)
         ?>
        </li>
-       <li id="document_print"><label>Document Print : </label>
+<!--       <li id="document_print"><label>Document Print : </label>
         <a class="button" target="_blank"
-           href="po_print.php?ap_transaction_header_id=<?php echo!(empty($$class->ap_transaction_header_id)) ? $$class->ap_transaction_header_id : ""; ?>" >Transaction</a>
-       </li>
-       <li id="copy_header"><label>Copy Document : </label>
-        <input type="button" class="button" id="copy_docHeader" value="Header">
-       </li>
-       <li id="copy_line"><label></label>
-        <input type="button" class="button" id="copy_docLine" value="Lines">
-       </li>
+           href="po_print.php?ap_transaction_header_id=<?php // echo!(empty($$class->ap_transaction_header_id)) ? $$class->ap_transaction_header_id : ""; ?>" >Transaction</a>
+       </li>-->
       </ul>
 
       <div id="comment" class="shoe_comments">

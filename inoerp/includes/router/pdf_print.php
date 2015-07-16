@@ -19,12 +19,16 @@
  <head>
   <meta charset="utf-8">
   <title>inoERP Document Print</title>
-  <meta name="description" content="The HTML5 Herald">
+  <meta name="description" content="inoERP Document PDF Print">
   <meta name="inoerp" content="Print">
-    <link href="<?php echo HOME_URL; ?>tparty/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="<?php echo HOME_URL; ?>tparty/bootstrap/css/bootstrap.css" rel="stylesheet">
   <link href="<?php echo HOME_URL; ?>tparty/bootstrap/css/style.css" rel="stylesheet">
   <link href="<?php echo THEME_URL ?>/public.css" media="all" rel="stylesheet" type="text/css" />
-  <link href="<?php echo HOME_URL ?>/misc/ecss/pdf_print.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="<?php echo THEME_URL ?>/print.css" media="all" rel="stylesheet" type="text/css" />
+  <!--  <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,400italic,300italic,700,700italic,900' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Exo:400,300,600,500,400italic,700italic,800,900' rel='stylesheet' type='text/css'>-->
+
  </head>
  <body>
   <?php
@@ -63,12 +67,14 @@
   $class_id = property_exists($class, 'primary_column') ? $class::$primary_column : $table_name . '_id';
   if (!empty($_GET[$class_id])) {
    $class_id_value = $_GET[$class_id];
+  } else {
+   $class_id_value = null;
   }
   if (!empty($class_id_value) && (!is_array($class_id_value))) {
    $class_i = $$class->findBy_id($class_id_value);
   }
 
-  if (isset($class_names[1])) {
+  if (isset($class_names[1]) && !empty($class_id_value)) {
    $class_second = $class_names[1];
    $$class_second = new $class_second;
    //$$class_second = $$class_names[1];
@@ -87,7 +93,7 @@
      }
     }
    }
-  } else if (strpos($class, '_v') != false) {
+  } else if (strpos($class, '_v') != false && !empty($class_id_value)) {
    $class_second = $class;
    $$class_second = new $class_second;
    $$line_obj = $class::find_by_ColumnNameVal($class_id, $class_i->$class_id);
@@ -98,14 +104,21 @@
    //$$class_third = $$class_names[2];
   }
 
-  $theme_pdd_tpl_file = THEME_DIR . DS . "pdf_print_templates" . DS . "$class.php";
-// echo "1 . theme_pdd_tpl_file is $theme_pdd_tpl_file ";  
+  if(!empty($_GET['doc_name'])){
+   $doc_name = $_GET['doc_name'];
+  }else{
+   $doc_name = $class;
+  }
+  
+  $theme_pdd_tpl_file = THEME_DIR . DS . "pdf_print_templates" . DS . "$doc_name.php";
   if (file_exists($theme_pdd_tpl_file)) {
    include_once $theme_pdd_tpl_file;
   } else {
-   $pdd_tpl_file = __DIR__ . "/../../misc/pdf_print_templates/$class.php";
+   $pdd_tpl_file = __DIR__ . "/../../misc/pdf_print_templates/$doc_name.php";
    if (file_exists($pdd_tpl_file)) {
     include_once $pdd_tpl_file;
+   }else{
+    echo "<h1 class='error'>No Template Founds! <br> Template Name : $theme_pdd_tpl_file </h1>";
    }
   }
   ?>

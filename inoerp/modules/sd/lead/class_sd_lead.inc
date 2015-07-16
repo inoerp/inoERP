@@ -177,12 +177,14 @@ class sd_lead extends dbObject {
     }else{
     $oppr->$v = $this->$v;
     }
+    $oppr->opportunity_subject = $this->subject;
     $oppr->referral_source = 'Lead id '. $this->sd_lead_id;
     $oppr->status = 'ENTERED';
    }
   }
 
   try {
+//   pa($oppr);
    $oppr->save();
    echo "Opportunity is Successfullycreated. New Opportunity id is " . $oppr->sd_opportunity_id;
   } catch (Exception $e) {

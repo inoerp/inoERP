@@ -32,7 +32,7 @@ public static $table_name = "inv_receipt_header";
 CREATE OR REPLACE VIEW inv_interorg_receipt_header
 (
 inv_receipt_header_id,  receipt_number,   org_id,   transaction_type_id,
-  receipt_date,  received_by,   carrier,   vechile_number,   comment,   ef_id,
+  receipt_date,  received_by,   carrier,   vehicle_number,   comment,   ef_id,
   created_by,   creation_date,   last_update_by,   last_update_date
 )
 AS
