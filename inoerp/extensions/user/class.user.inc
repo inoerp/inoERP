@@ -267,7 +267,7 @@ class user extends dbObject {
   }
  }
 
- public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields='') {
+ public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields='', $hidden_fields='') {
   $sql = "SELECT user_id, username, first_name, last_name, email,  phone, hr_employee_id, user_language,
            default_theme, block_notif_count,  ar_customer_id, supplier_id,  created_by,    creation_date, 
             last_update_by,    last_update_date , image_file_id  FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";

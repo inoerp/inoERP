@@ -5,9 +5,9 @@ inoERP
  * @license     https://www.mozilla.org/MPL/2.0/
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
- -->
+-->
 <span class="heading"><?php echo gettext('Sales Opportunity') ?></span>
- <div id ="form_header">
+<div id ="form_header">
  <form action=""  method="post" id="sd_opportunity"  name="sd_opportunity">
   <div id ="form_header">
    <div id="tabsHeader">
@@ -20,22 +20,22 @@ inoERP
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-       <ul class="column header_field"> 
-        <li><?php $f->l_text_field_dr_withSearch('sd_opportunity_id') ?>
-         <a name="show" href="form.php?class_name=sd_opportunity&<?php echo "mode=$mode"; ?>" class="show document_id sd_opportunity_id"><i class="fa fa-refresh"></i></a> 
-        </li>
-        <li><?php $f->l_text_field_dr('sd_lead_id'); ?> 					</li>
-        <li><?php $f->l_text_field_dm('opportunity_number'); ?> 					</li>
-        <li><?php $f->l_text_field_dm('opportunity_subject'); ?> 					</li>
-        <li><?php $f->l_select_field_from_array('status', sd_opportunity::$status_a, $$class->status, 'status', '', '', 1, 1); ?> 					</li>
-        <li><?php $f->l_number_field('win_probability', $$class->win_probability); ?> 					</li>
-        <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency'); ?></li>
-        <li><?php $f->l_number_field('forecast_amount', $$class->forecast_amount); ?> 					</li>
-        <li><?php $f->l_date_fieldFromToday('expected_close_date', $$class->expected_close_date); ?> 					</li>
-        <li><?php $f->l_text_field_d('referral_source'); ?> 					</li>
-        <li><?php $f->l_select_field_from_object('sales_channel', sd_lead::sales_channel(), 'option_line_code', 'option_line_value', $$class->sales_channel, 'sales_channel'); ?> 					</li>
-        <li><?php $f->l_text_field_d('description'); ?> 					</li>
-       </ul>
+      <ul class="column header_field"> 
+       <li><?php $f->l_text_field_dr_withSearch('sd_opportunity_id') ?>
+        <a name="show" href="form.php?class_name=sd_opportunity&<?php echo "mode=$mode"; ?>" class="show document_id sd_opportunity_id"><i class="fa fa-refresh"></i></a> 
+       </li>
+       <li><?php $f->l_text_field_dr('sd_lead_id'); ?> 					</li>
+       <li><?php $f->l_text_field_dm('opportunity_number'); ?> 					</li>
+       <li><?php $f->l_text_field_dm('opportunity_subject'); ?> 					</li>
+       <li><?php $f->l_select_field_from_array('status', sd_opportunity::$status_a, $$class->status, 'status', '', '', 1, 1); ?> 					</li>
+       <li><?php $f->l_number_field('win_probability', $$class->win_probability); ?> 					</li>
+       <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency'); ?></li>
+       <li><?php $f->l_number_field('forecast_amount', $$class->forecast_amount); ?> 					</li>
+       <li><?php $f->l_date_fieldFromToday('expected_close_date', $$class->expected_close_date); ?> 					</li>
+       <li><?php $f->l_text_field_d('referral_source'); ?> 					</li>
+       <li><?php $f->l_select_field_from_object('sales_channel', sd_lead::sales_channel(), 'option_line_code', 'option_line_value', $$class->sales_channel, 'sales_channel'); ?> 					</li>
+       <li><?php $f->l_text_field_d('description'); ?> 					</li>
+      </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div class="large_shadow_box"> 
@@ -78,7 +78,7 @@ inoERP
        <ul class="column header_field">
         <li><label><?php echo gettext('Action') ?></label>
          <?php
-         echo $f->select_field_from_array('action', sd_lead::$action_a, '', 'action');
+         echo $f->select_field_from_array('action', $$class->action_a, '', 'action');
          ?>
         </li>
         <li><label><?php echo gettext('Close Reason') ?></label><?php $f->text_field_d('close_reason'); ?> 					</li>
@@ -101,21 +101,25 @@ inoERP
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
-        <ul class="column header_field"> 
-        <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
-         <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup clickable">
-          <?php echo gettext('Customer Name') ?></label> <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
-        <li><?php $f->l_text_field_d('customer_number'); ?></li>
-        <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
-        <li><?php $f->l_text_field_d('campaign_id'); ?>	</li>
-        <li><?php $f->l_text_field_d('campaign_os'); ?>	</li>
-        <li><?php $f->l_select_field_from_object('sales_team', hr_team_header::find_all_sales_team(), 'hr_team_header_id', 'team_name', $$class->sales_team, 'sales_team'); ?> 					</li>
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_employee_name select_popup clickable">
-          <?php echo gettext('Primary Sales Person') ?></label><?php $f->text_field_d('sales_person_employee_name'); ?>
-         <?php echo $f->hidden_field_withId('sales_person_employee_id', $$class->sales_person_employee_id); ?>
-        </li>
-        <li><?php $f->l_address_field_d('address_id'); ?></li> 
-       </ul>
+      <ul class="column header_field">
+       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', '', $readonly); ?>						 </li>
+       <li><?php
+        echo $f->l_val_field_dm('customer_name', 'ar_customer', 'customer_name', '', 'customer_name', 'vf_select_customer_name');
+        echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id);
+        ?><i class="generic g_select_customer_name select_popup clickable fa fa-search" data-class_name="ar_customer"></i></li>
+       <li><?php
+        echo $f->l_val_field_d('customer_number', 'ar_customer', 'customer_number', '', '', 'vf_select_customer_number');
+        ?><i class="generic g_select_customer_number select_popup clickable fa fa-search" data-class_name="ar_customer"></i></li>
+       <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', '', '', $readonly); ?> </li>
+       <li><?php $f->l_text_field_d('campaign_id'); ?>	</li>
+       <li><?php $f->l_text_field_d('campaign_os'); ?>	</li>
+       <li><?php $f->l_select_field_from_object('sales_team', hr_team_header::find_all_sales_team(), 'hr_team_header_id', 'team_name', $$class->sales_team, 'sales_team'); ?> 					</li>
+       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_employee_name select_popup clickable">
+         <?php echo gettext('Primary Sales Person') ?></label><?php $f->text_field_d('sales_person_employee_name'); ?>
+        <?php echo $f->hidden_field_withId('sales_person_employee_id', $$class->sales_person_employee_id); ?>
+       </li>
+       <li><?php $f->l_address_field_d('address_id'); ?></li> 
+      </ul>
      </div>
      <div id="tabsLine-2" class="tabContent">
       <ul class="address inline_list">

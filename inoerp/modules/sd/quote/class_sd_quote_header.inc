@@ -67,6 +67,9 @@ class sd_quote_header extends dbObject {
   'aggrement_end_date',
   'exchange_rate_type',
   'exchange_rate',
+   'reference_type',
+  'reference_key_name',
+  'reference_key_value',
   'rev_enabled_cb',
   'rev_number',
   'created_by',
@@ -161,6 +164,9 @@ class sd_quote_header extends dbObject {
  public $exchange_rate_type;
  public $exchange_rate;
  public $rev_enabled_cb;
+  public $reference_type;
+ public $reference_key_name;
+ public $reference_key_value;
  public $rev_number;
  public $created_by;
  public $creation_date;

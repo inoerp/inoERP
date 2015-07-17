@@ -413,7 +413,7 @@ trait dbObject_t {
   return !empty($result_array) ? array_shift($result_array) : false;
  }
 
- public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields='') {
+ public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields='' , $hidden_fields = '') {
   $sql = "SELECT * FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  "; 
   if(!empty($dependent_fields)){
    foreach($dependent_fields as $k => $v ){

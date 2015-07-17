@@ -239,7 +239,7 @@
 
      var dependent_fields = {};
      if ($(auto_element).data('dependent_field')) {
-      var dependent_field_a = $('.project_task_number').data('dependent_field').split(' ');
+      var dependent_field_a = $(auto_element).data('dependent_field').split(' ');
       if (elemenType === 'TD') {
        $(dependent_field_a).each(function (d_k, d_v) {
         var d_v_class = '.' + d_v;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -7,6 +8,7 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
+
 /**
  * sd_opportunity
  * Contains all the sd_quote_header information, such as - sd_opportunity_id, sd_lead_id, customer info, etc
@@ -18,7 +20,7 @@ class sd_opportunity extends dbObject {
  public static $primary_column = "sd_opportunity_id";
  public static $key_column = 'opportunity_subject';
  public static $module = "sd";
-     public static $system_info = [
+ public static $system_info = [
   'name' => 'Sales Opportunity',
   'number' => '2304',
   'description' => 'Create & Mainten Sales Opportunity',
@@ -44,6 +46,7 @@ class sd_opportunity extends dbObject {
  public $field_a = [
   'sd_opportunity_id',
   'sd_lead_id',
+  'bu_org_id',
   'opportunity_number',
   'primary_contact_id',
   'opportunity_subject',
@@ -74,6 +77,9 @@ class sd_opportunity extends dbObject {
   'referral_source',
   'sales_channel',
   'close_reason',
+  'reference_type',
+  'reference_key_name',
+  'reference_key_value',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -104,9 +110,11 @@ class sd_opportunity extends dbObject {
   "country",
   "postal_code",
   'sales_person_employee_name',
-  'address_name'
+  'address_name',
+  'action'
  ];
  public $sd_opportunity_id;
+ public $bu_org_id;
  public $sd_lead_id;
  public $opportunity_number;
  public $primary_contact_id;
@@ -135,6 +143,9 @@ class sd_opportunity extends dbObject {
  public $campaign_os;
  public $sales_person_employee_id;
  public $sales_team;
+ public $reference_type;
+ public $reference_key_name;
+ public $reference_key_value;
  public $referral_source;
  public $sales_channel;
  public $close_reason;
@@ -153,16 +164,60 @@ class sd_opportunity extends dbObject {
  public $postal_code;
  public $sales_person_employee_name;
  public $address_name;
+ public $action;
  public $search = [
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
  public $pageTitle = " Sales Opportunity  "; //page Title
- 
+
  Public static function opportunity_type() {
   $option_header = option_header::find_by_name('SD_LEAD_TYPE');
   $lines = option_line::find_by_option_id($option_header->option_header_id);
   return $lines;
+ }
+
+ private function _convert_OpportunityToQuote() {
+  if (empty($this->bu_org_id) || empty($this->ar_customer_site_id) || empty($this->ar_customer_id)) {
+   echo "<br>Cant convert to Quote as customer site is missing";
+   return -90;
+  }
+  $quote = new sd_quote_header();
+  foreach ($this->field_a as $k => $v) {
+   if (property_exists($quote, $v)) {
+    if ($v == 'subject' || $v == 'description') {
+     $quote->$v = $this->$v . ' - As in Quote ';
+    } else {
+     $quote->$v = $this->$v;
+    }
+    $quote->description = $this->opportunity_subject;
+    $quote->referral_source = 'Opportunity id ' . $this->sd_opportunity_id;
+    $quote->reference_key_name = 'sd_opportunity_id';
+    $quote->reference_key_value = $this->sd_opportunity_id;
+    $quote->status = 'ENTERED';
+   }
+  }
+
+  try {
+//   pa($oppr);
+   $quote->save();
+   $quote->_after_save();
+   echo "Quote is Successfully created. New quote id is " . $quote->sd_quote_header_id;
+  } catch (Exception $e) {
+   echo "Failed to convert the Opportunity to Quote. Error @  " . __FILE__ . ' @@ line ' . __LINE__ . $e->getMessage();
+  }
+ }
+
+ public function _after_save() {
+  if ($this->action == 'CREATE_QUOTE') {
+   try {
+    $this->_convert_OpportunityToQuote();
+    $this->status = 'CONVERTED_OPPORTUNITY';
+    $this->save();
+   } catch (Exception $e) {
+    echo "Failed to convert the lead to opportunity. Error @ sd_lead @@ line " . __LINE__ . $e->getMessage();
+   }
+  }
  }
 
  public static function find_by_reference($ref_obj, $ref_id) {

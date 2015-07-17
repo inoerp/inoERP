@@ -34,7 +34,7 @@
       <li><?php $f->l_text_field_dr('transaction_class'); ?></li>
       <li><?php $f->l_date_fieldFromToday_d('document_date', $$class->document_date) ?></li>
       <li><?php $f->l_text_field_d('document_number') ?></li>
-      <li><?php $f->l_select_field_from_array('transaction_status', ar_transaction_header::$transaction_status_a, $$class->transaction_status); ?>         </li> 
+      <li><?php $f->l_select_field_from_array('transaction_status', ar_transaction_header::$transaction_status_a, $$class->transaction_status ,'transaction_status','always_readonly','',1); ?>         </li> 
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
@@ -110,7 +110,7 @@
     <div id="tabsHeader-9" class="tabContent">
      <div> 
       <ul class="column header_field">
-       <li><?php $f->l_select_field_from_array('transaction_action', $$class->action_a, '', 'transaction_action', '', '', $readonly); ?>       </li>
+       <li><?php $f->l_select_field_from_array('action', $$class->action_a, '', 'action', '', '', $readonly); ?>       </li>
        <li><label></label><a  role="button" class="quick_select button btn btn-info" target="_blank" 
        href="<?php echo HOME_URL ?>form.php?class_name=ar_transaction_all_v&amp;router=pdf_print&amp;ar_transaction_header_id=<?php echo!(empty($$class->ar_transaction_header_id)) ? $$class->ar_transaction_header_id : ""; ?>" >
          <?php echo gettext('Print Transaction') ?></a></li>
@@ -198,7 +198,7 @@
           ?>
                                          <!--						 <tr><td>-->
           <div class="class_detail_form">
-           <fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
+           <fieldset class="form_detail_data_fs">
             <div class="tabsDetail">
              <ul class="tabMain">
               <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>">Basic</a></li>
@@ -329,7 +329,7 @@
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::number_field_wid2m('inv_unit_price'); ?></td>
          <td><?php form::text_field_wid2m('inv_line_price'); ?></td>
-         <td><?php echo $f->select_field_from_object('tax_code_id', mdm_tax_code::find_all_outTax_by_bu_org_id($$class->bu_org_id), 'mdm_tax_code_id', 'tax_code', $$class_second->tax_code_id, '', 'output_tax medium', '', $readonly1, '', '', '', 'percentage') ?></td>
+         <td><?php echo $f->select_field_from_object('tax_code_id', mdm_tax_code::find_all_outTax_by_bu_org_id($$class->bu_org_id), 'mdm_tax_code_id', 'tax_code', $$class_second->tax_code_id, '', 'output_tax medium', '', $readonly, '', '', '', 'percentage') ?></td>
          <td><?php form::number_field_wid2('tax_amount'); ?></td>
          <td><?php form::number_field_wid2sr('gl_inv_line_price'); ?></td>
          <td><?php form::number_field_wid2sr('gl_tax_amount'); ?></td>

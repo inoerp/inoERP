@@ -414,7 +414,7 @@ LEFT JOIN org ON po_line.receving_org_id = org.org_id
   return !empty($result_f) ? ($result_f) : false;
  }
 
- public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '') {
+ public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
   $sql = "SELECT * FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
   $sql .= " AND po_status = 'APPROVED' ";
   if(!empty($_GET['hidden_fields']['receving_org_id'])){

@@ -60,16 +60,22 @@ class ar_customer extends dbObject {
   "last_update_by",
   "last_update_date"
  ];
+ 
+ public static $json_label_fields = [
+  "customer_number",
+  "customer_name",
+  'customer_category',
+  "tax_country",
+   "alt_name",
+ ];
  public $initial_search = [
   "ar_customer_id",
   "customer_number",
   "customer_name",
   "tax_country"
  ];
-
  public $account = [
  ];
-
  public $addressField = [
   "address_id"
  ];
@@ -138,14 +144,14 @@ class ar_customer extends dbObject {
   $customer_types = option_line::find_by_option_id($option_header->option_header_id);
   return $customer_types;
  }
- 
+
  Public static function customer_relationship() {
   $option_header = option_header::find_by_name('AR_CUSTOMER_RELATIONSHIP');
   $customer_types = option_line::find_by_option_id($option_header->option_header_id);
   return $customer_types;
  }
- 
-  Public static function customer_category() {
+
+ Public static function customer_category() {
   $option_header = option_header::find_by_name('AR_CUSTOMER_CATEGORY');
   $customer_types = option_line::find_by_option_id($option_header->option_header_id);
   return $customer_types;
@@ -167,8 +173,8 @@ class ar_customer extends dbObject {
    $this->header_postal_code = $address->postal_code;
   }
  }
- 
-  public function _after_save() {
+
+ public function _after_save() {
 
   if ((!empty($this->ar_customer_id)) && empty($this->customer_number)) {
    $this->customer_number = $this->ar_customer_id;
@@ -354,6 +360,28 @@ class ar_customer extends dbObject {
    }
   }
   return $this->msg;
+ }
+ 
+  public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
+  $sql = "SELECT  ar_customer_id,   customer_number,   customer_name,
+  supplier_id,   customer_type,   customer_category,
+  customer_relationship,  tax_country,   tax_reg_no,
+  tax_payer_id,   bill_to_id,   ship_to_id,
+  customer_credit_class,   profile_name,   alt_name FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
+  
+//  if(!empty($_GET['hidden_fields']['receving_org_id'])){
+//   $rec_org_id = $_GET['hidden_fields']['receving_org_id'];
+//   $sql .= " AND receving_org_id = '{$rec_org_id}' ";
+//  }
+  if (!empty($dependent_fields)) {
+   foreach ($dependent_fields as $k => $v) {
+    if (!empty($k) && !empty($v)) {
+     $sql .= " AND $k = '{$v}' ";
+    }
+   }
+  }
+  $result_array = static::find_by_sql($sql);
+  return !empty($result_array) ? ($result_array) : false;
  }
 
 }

@@ -9,8 +9,14 @@ if ((!empty($_GET['val_value'])) && (!empty($_GET['val_field']))) {
 
  if (!empty($_GET['dependent_fields'])) {
   $dependent_fields = ($_GET['dependent_fields']);
- }else{
+ } else {
   $dependent_fields = null;
+ }
+
+ if (!empty($_GET['hidden_fields'])) {
+  $hidden_fields = ($_GET['hidden_fields']);
+ } else {
+  $hidden_fields = null;
  }
 
  $f_val = $_REQUEST['term'];
@@ -18,7 +24,7 @@ if ((!empty($_GET['val_value'])) && (!empty($_GET['val_field']))) {
  $class_name = $_GET['val_field'];
  $f_name = $_GET['val_value'];
 
- $data = $class_name::find_by_ColumnNameVal($f_name, $f_val, $dependent_fields);
+ $data = $class_name::find_by_ColumnNameVal($f_name, $f_val, $dependent_fields, $hidden_fields);
 
  if ($data) {
   if (property_exists($class_name, 'json_label_fields')) {

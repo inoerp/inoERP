@@ -263,7 +263,6 @@ class item extends dbObject {
   'overwrite_minmax_multibin_number',
   'overwrite_minmax_multibin_size'
  ];
- 
  public static $json_label_fields = [
   'item_id_m',
   "item_number",
@@ -275,8 +274,8 @@ class item extends dbObject {
   "list_price",
   "planner",
   "fix_lot_multiplier",
+  'item_id'
  ];
- 
  public $search = [
   '_show_update_path' => 1,
   '_update_action_meassge' => 'Update',
@@ -458,7 +457,6 @@ class item extends dbObject {
  private $_origination_date = false;
  private $_implementation_date = false;
  public $template_item_id;
- 
 
  Public static function product_line() {
   $option_header = option_header::find_by_name('INV_ITEM_PRODUCT_LINE');
@@ -1025,7 +1023,7 @@ class item extends dbObject {
    }
   }
 
-    $result = self::find_by_sql($sql);
+  $result = self::find_by_sql($sql);
 
   if (!empty($result)) {
    foreach ($result as &$obj) {
@@ -1054,6 +1052,37 @@ class item extends dbObject {
    }
   }
   return $this->msg;
+ }
+
+ public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
+  $sql = "SELECT * FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
+
+  if (!empty($hidden_fields)) {
+   foreach ($hidden_fields as $k => $v) {
+    if (!empty($k) && !empty($v)) {
+     if (strpos($k, 'org_id') !== false) {
+      $sql .= " AND org_id = '{$v}' ";
+     } else {
+      $sql .= " AND $k = '{$v}' ";
+     }
+    }
+   }
+  }
+
+  if (!empty($dependent_fields)) {
+   foreach ($dependent_fields as $k1 => $v1) {
+    if (!empty($k1) && !empty($v1)) {
+     if (strpos($k1, 'org_id') !== false) {
+      $sql .= " AND org_id = '{$v1}' ";
+     } else {
+      $sql .= " AND $k1 = '{$v1}' ";
+     }
+    }
+   }
+  }
+//  echo $sql;
+  $result_array = static::find_by_sql($sql);
+  return !empty($result_array) ? ($result_array) : false;
  }
 
  public function multi_select_input_fields() {

@@ -72,6 +72,9 @@ class sd_so_header extends dbObject {
   "order_source_type",
   "order_reference_table",
   "order_reference_id",
+  'reference_type',
+  'reference_key_name',
+  'reference_key_value',
   'so_status',
   "rev_enabled_cb",
   "rev_number",
@@ -86,14 +89,13 @@ class sd_so_header extends dbObject {
   "ar_customer_id",
   "sales_person"
  ];
-
  public $requiredField = [
   'ar_customer_id',
   'ship_to_id',
   'bill_to_id',
   'doc_currency',
   'document_type'
-  ];
+ ];
  public $addressField = [
   'ship_to_id',
   'bill_to_id'
@@ -159,6 +161,9 @@ class sd_so_header extends dbObject {
  public $order_source_type;
  public $order_reference_table;
  public $order_reference_id;
+ public $reference_type;
+ public $reference_key_name;
+ public $reference_key_value;
  public $action;
  public $so_status;
  public $rev_enabled_cb;
@@ -226,6 +231,21 @@ class sd_so_header extends dbObject {
 
   if (empty($this->so_status)) {
    $this->so_status = 'ENTERED';
+  }
+
+  if (empty($this->sd_so_header_id) && !empty($this->bu_org_id)) {
+   $this->_do_initial_defaults();
+  }
+ }
+
+ private function _do_initial_defaults() {
+  global $dbc;
+  $fin_details = org::find_financial_details_from_orgId($this->bu_org_id);
+  if ($fin_details) {
+   $this->currency = $fin_details->currency_code;
+  } else {
+   $dbc->rollback = true;
+   echo "<br>Setup in complete. No currency found. Error @ " . __FILE__ . ' @@ line ' . __LINE__;
   }
  }
 

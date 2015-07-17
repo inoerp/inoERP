@@ -45,6 +45,8 @@ class ar_transaction_header extends dbObject {
   'CLOSED' => 'Closed'
  ];
  public $action_a = [
+  'COMPLETE' => 'Complete Transacion',
+  'INCOMPLETE' => 'Incomplete Transacion',
   'CREATE_RECEIPT' => 'Create Receipt',
   'CREATE_ACCOUNT' => 'Create Accounting',
   'VIEW_JOURNAL' => 'View Journal',
@@ -115,23 +117,6 @@ class ar_transaction_header extends dbObject {
   'ar_customer_site_id',
   'document_owner',
   'approval_status',
-  'gl_journal_header_id'
- ];
- public $column = [
-  'ar_transaction_header_id',
-  'document_number',
-  'transaction_type',
-  'transaction_number',
-  'header_amount',
-  'receipt_amount',
-  'ar_customer_id',
-  'ar_customer_site_id',
-  'bu_org_id',
-  'ledger_id',
-  'period_id',
-  'document_owner',
-  'doc_currency',
-  'currency',
   'gl_journal_header_id'
  ];
  public $requiredField = [
@@ -235,19 +220,6 @@ class ar_transaction_header extends dbObject {
  public $bill_to_postal_code;
  private $_max_line_num;
 
- public function __set($name, $value) {
-  switch ($value) {
-   case $value:
-
-
-    break;
-
-   default:
-    $this->$name = $value;
-    break;
-  }
- }
-
 // private function _update_journalHeaderId() {
 //	$arth = new ar_transaction_header();
 //	$arth->ar_transaction_header_id = $this->ar_transaction_header_id;
@@ -280,38 +252,67 @@ class ar_transaction_header extends dbObject {
  }
 
  public function _before_save() {
+  if (!empty($this->ar_transaction_header_id) && !empty($this->action)) {
+   $return = false;
+   switch ($this->action) {
+    case 'INCOMPLETE' :
+     $this->_incomplete_transacion();
+     $return = 10;
+     break;
 
-  if ((!empty($this->ar_transaction_header_id)) && ($this->action === 'create_accounting')) {
-   //if journal header id excists then save journal lines only else first header & then lines
-   $this->findBy_id($this->ar_transaction_header_id);
-   if (empty($this->gl_journal_header_id)) {
-    try {
-     $this->_save_journal_header();
-    } catch (Exception $e) {
-     echo "Create accounting failed" . $e->getMessage();
-    }
-   }
-   if (!empty($this->gl_journal_header_id)) {
-    //check the status is not updated and then save/update journal lines
-    $gjh = new gl_journal_header();
-    $gjh->findBy_id($this->gl_journal_header_id);
-    $max_line_num = $gjh->highest_line_num()->max_line_num;
-    $this->_max_line_num = !empty($max_line_num) ? $max_line_num + 1 : 1;
-    if ($gjh->status == 'ENTERED') {
-     $this->_save_journal_lines();
-    } else {
-     echo "<br> The Journal Header \" $gjh->journal_name \" (id : $this->gl_journal_header_id ) is not in Entered Status."
-     . "<br>From Subledger, You can only update Jouranls in Entered Status";
-     return;
-    }
+    case 'COMPLETE' :
+     $this->_complete_transacion();
+     $return = 10;
+     break;
+
+    case 'CANCEL' :
+     $this->_cancel_transaction();
+     $return = 10;
+     break;
+
+    case 'CREATE_ACCOUNT' :
+     if ($this->transaction_status != 'COMPLETE') {
+      echo "<div class='alert alert-danger alert-dismissible' role='alert'>You can create account only for transactions in complete status</div>";
+      return 10;
+     }
+     //if journal header id excists then save journal lines only else first header & then lines
+     $this->findBy_id($this->ar_transaction_header_id);
+     if (empty($this->gl_journal_header_id)) {
+      try {
+       $this->_save_journal_header();
+      } catch (Exception $e) {
+       echo "Create accounting failed" . $e->getMessage();
+      }
+     }
+     if (!empty($this->gl_journal_header_id)) {
+      //check the status is not updated and then save/update journal lines
+      $gjh = new gl_journal_header();
+      $gjh->findBy_id($this->gl_journal_header_id);
+      $max_line_num = $gjh->highest_line_num()->max_line_num;
+      $this->_max_line_num = !empty($max_line_num) ? $max_line_num + 1 : 1;
+      if ($gjh->status == 'ENTERED') {
+       $this->_save_journal_lines();
+      } else {
+       echo "<br> The Journal Header \" $gjh->journal_name \" (id : $this->gl_journal_header_id ) is not in Entered Status."
+       . "<br>From Subledger, You can only update Jouranls in Entered Status";
+       return;
+      }
+     }
+     $return = 10;
+     break;
+
+    default :
+     $return = null;
+     break;
    }
 
-   return 10;
+   if (!empty($return)) {
+    return $return;
+   }
   }
-
-  if ((!empty($this->ar_transaction_header_id)) && ($this->transaction_action == 'CANCEL')) {
-   $this->_cancel_transaction();
-   return 10;
+  if ($this->transaction_status == 'COMPLETE') {
+   echo "<div class='alert alert-danger alert-dismissible' role='alert'>You cant make any changes to a transaction in Complete Status</div>";
+   return -90;
   }
  }
 
@@ -470,7 +471,7 @@ class ar_transaction_header extends dbObject {
  }
 
  Public static function ar_approval_status() {
-  $option_header = option_header::find_by_name('APPROVAL_STATUS');
+  $option_header = option_header::find_by_name('AR_TRNX_APPROVAL_STATUS');
   $ar_approval_status = option_line::find_by_option_id($option_header->option_header_id);
   return $ar_approval_status;
  }
@@ -548,16 +549,30 @@ class ar_transaction_header extends dbObject {
  private function _cancel_transaction_header() {
   $new_arth = new ar_transaction_header();
   $new_arth_i = $new_arth->findBy_id($this->ar_transaction_header_id);
-  $new_arth->arproval_status = 'CANCELLED';
+  $new_arth->transaction_status = 'CANCELLED';
   $new_arth->header_amount = '0.0';
   $new_arth->ar_transaction_header_id = $new_arth_i->ar_transaction_header_id;
-  $new_arth->audit_trial();
   try {
    $new_arth->save();
   } catch (Exception $e) {
-   echo "AR Transaction Lines Update Failed!. Error @ class_ar_transaction_header _transaction_cancell_poInv_lines " . $e->getMessage();
+   echo "AR Transaction Lines Update Failed!. Error @ file " . __FILE__ . ' @@ line ' . __LINE__ . $e->getMessage();
    return;
   }
+ }
+
+ private function _complete_transacion() {
+  $trnx_amounts = ar_transaction_line::find_sumAmounts($this->ar_transaction_header_id);
+
+  $this->transaction_status = 'COMPLETE';
+  $this->header_amount = $trnx_amounts->total_line_amount;
+  $this->tax_amount = $trnx_amounts->total_tax_amount;
+
+  $this->save();
+ }
+
+ private function _incomplete_transacion() {
+  $this->transaction_status = 'INCOMPLETE';
+  $this->save();
  }
 
  //needs to be updated after SD SO

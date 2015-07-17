@@ -1,91 +1,91 @@
-function setValFromSelectPage(ar_transaction_header_id, combination, ar_customer_id, customer_number, customer_name,
-        item_id_m, item_number, item_description, uom_id, address_id, address_name, address,
-        country, postal_code) {
- this.ar_transaction_header_id = ar_transaction_header_id;
- this.combination = combination;
- this.ar_customer_id = ar_customer_id;
- this.customer_number = customer_number;
- this.customer_name = customer_name;
- this.item_id_m = item_id_m;
- this.item_number = item_number;
- this.item_description = item_description;
- this.uom_id = uom_id;
- this.address_id = address_id;
- this.address_name = address_name;
- this.address = address;
- this.country = country;
- this.postal_code = postal_code;
-}
-
-setValFromSelectPage.prototype.setVal = function () {
- var ar_transaction_header_id = this.ar_transaction_header_id;
- var ar_customer_id = this.ar_customer_id;
- var customer_number = this.customer_number;
- var customer_name = this.customer_name;
- var combination = this.combination;
- var item_id_m = this.item_id_m;
- var item_number = this.item_number;
- var item_description = this.item_description;
- var uom_id = this.uom_id;
- var address_id = this.address_id;
- var address_name = this.address_name;
- var address = this.address;
- var country = this.country;
- var postal_code = this.postal_code;
-
- var rowClass = '.' + localStorage.getItem("row_class");
- var fieldClass = '.' + localStorage.getItem("field_class");
- var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass");
- addressPopupDivClass =addressPopupDivClass.replace(/\s+/g, '.');
-
- if (address_id) {
-  $('#form_header').find(addressPopupDivClass).find('.address_id').val(address_id);
- }
- if (address_name) {
-  $('#form_header').find(addressPopupDivClass).find('.address_name').val(address_name);
- }
- if (address) {
-  $('#form_header').find(addressPopupDivClass).find('.address').val(address);
- }
-
- if (ar_transaction_header_id) {
-  $("#ar_transaction_header_id").val(ar_transaction_header_id);
- }
- if (ar_customer_id) {
-  $("#ar_customer_id").val(ar_customer_id);
- }
- if (customer_number) {
-  $("#customer_number").val(customer_number);
- }
- if (customer_name) {
-  $("#customer_name").val(customer_name);
- }
- rowClass = rowClass.replace(/\s+/g, '.');
- fieldClass = fieldClass.replace(/\s+/g, '.');
- if (combination) {
-  $('#content').find(rowClass).find(fieldClass).val(combination);
- }
- if (item_id_m) {
-  $('#content').find(rowClass).find('.item_id_m').val(item_id_m);
- }
- if (item_number) {
-  $('#content').find(rowClass).find('.item_number').val(item_number);
- }
- if (item_description) {
-  $('#content').find(rowClass).find('.item_description').val(item_description);
- }
- if (uom_id) {
-  $('#content').find(rowClass).find('.uom_id').val(uom_id);
- }
-
- localStorage.removeItem("row_class");
- localStorage.removeItem("row_class");
-
- if (this.ar_transaction_header_id) {
-  $('a.show.ar_transaction_header_id').trigger('click');
- }
-
-};
+//function setValFromSelectPage(ar_transaction_header_id, combination, ar_customer_id, customer_number, customer_name,
+//        item_id_m, item_number, item_description, uom_id, address_id, address_name, address,
+//        country, postal_code) {
+// this.ar_transaction_header_id = ar_transaction_header_id;
+// this.combination = combination;
+// this.ar_customer_id = ar_customer_id;
+// this.customer_number = customer_number;
+// this.customer_name = customer_name;
+// this.item_id_m = item_id_m;
+// this.item_number = item_number;
+// this.item_description = item_description;
+// this.uom_id = uom_id;
+// this.address_id = address_id;
+// this.address_name = address_name;
+// this.address = address;
+// this.country = country;
+// this.postal_code = postal_code;
+//}
+//
+//setValFromSelectPage.prototype.setVal = function () {
+// var ar_transaction_header_id = this.ar_transaction_header_id;
+// var ar_customer_id = this.ar_customer_id;
+// var customer_number = this.customer_number;
+// var customer_name = this.customer_name;
+// var combination = this.combination;
+// var item_id_m = this.item_id_m;
+// var item_number = this.item_number;
+// var item_description = this.item_description;
+// var uom_id = this.uom_id;
+// var address_id = this.address_id;
+// var address_name = this.address_name;
+// var address = this.address;
+// var country = this.country;
+// var postal_code = this.postal_code;
+//
+// var rowClass = '.' + localStorage.getItem("row_class");
+// var fieldClass = '.' + localStorage.getItem("field_class");
+// var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass");
+// addressPopupDivClass =addressPopupDivClass.replace(/\s+/g, '.');
+//
+// if (address_id) {
+//  $('#form_header').find(addressPopupDivClass).find('.address_id').val(address_id);
+// }
+// if (address_name) {
+//  $('#form_header').find(addressPopupDivClass).find('.address_name').val(address_name);
+// }
+// if (address) {
+//  $('#form_header').find(addressPopupDivClass).find('.address').val(address);
+// }
+//
+// if (ar_transaction_header_id) {
+//  $("#ar_transaction_header_id").val(ar_transaction_header_id);
+// }
+// if (ar_customer_id) {
+//  $("#ar_customer_id").val(ar_customer_id);
+// }
+// if (customer_number) {
+//  $("#customer_number").val(customer_number);
+// }
+// if (customer_name) {
+//  $("#customer_name").val(customer_name);
+// }
+// rowClass = rowClass.replace(/\s+/g, '.');
+// fieldClass = fieldClass.replace(/\s+/g, '.');
+// if (combination) {
+//  $('#content').find(rowClass).find(fieldClass).val(combination);
+// }
+// if (item_id_m) {
+//  $('#content').find(rowClass).find('.item_id_m').val(item_id_m);
+// }
+// if (item_number) {
+//  $('#content').find(rowClass).find('.item_number').val(item_number);
+// }
+// if (item_description) {
+//  $('#content').find(rowClass).find('.item_description').val(item_description);
+// }
+// if (uom_id) {
+//  $('#content').find(rowClass).find('.uom_id').val(uom_id);
+// }
+//
+// localStorage.removeItem("row_class");
+// localStorage.removeItem("row_class");
+//
+// if (this.ar_transaction_header_id) {
+//  $('a.show.ar_transaction_header_id').trigger('click');
+// }
+//
+//};
 
 function header_amount() {
  var header_amount = 0;
@@ -134,7 +134,7 @@ function match_transaction() {
 function create_accounting() {
  var ar_transaction_header_id = $("#ar_transaction_header_id").val();
  if (ar_transaction_header_id) {
-  var link = 'multi_select.php?window_type=popup&class_name=ar_transaction_header&action=create_accounting&mode=9&action_class_name=ar_transaction_header&ar_transaction_header_id=' + ar_transaction_header_id;
+  var link = 'multi_select.php?window_type=popup&class_name=ar_transaction_header&action=CREATE_ACCOUNT&mode=9&action_class_name=ar_transaction_header&ar_transaction_header_id=' + ar_transaction_header_id;
   localStorage.removeItem("reset_link");
   localStorage.setItem("reset_link", link);
   localStorage.removeItem("jsfile");
@@ -162,13 +162,19 @@ function create_receipt() {
 
 $(document).ready(function () {
 //mandatory and field sequence
- var mandatoryCheck = new mandatoryFieldMain();
- mandatoryCheck.header_id = 'ar_transaction_header_id';
- mandatoryCheck.mandatoryHeader();
- mandatoryCheck.form_area = 'form_header';
- mandatoryCheck.mandatory_fields = ["bu_org_id", "transaction_type"];
- mandatoryCheck.mandatory_messages = ["First Select BU Org", "No Transaction Type"];
-// mandatoryCheck.mandatoryField();
+// var mandatoryCheck = new mandatoryFieldMain();
+// mandatoryCheck.header_id = 'ar_transaction_header_id';
+// mandatoryCheck.mandatoryHeader();
+// mandatoryCheck.form_area = 'form_header';
+// mandatoryCheck.mandatory_fields = ["bu_org_id", "transaction_type"];
+// mandatoryCheck.mandatory_messages = ["First Select BU Org", "No Transaction Type"];
+//// mandatoryCheck.mandatoryField();
+ $('body').off('click', '[id*="menu_button4"]').on('click', '[id*="menu_button4"]', function () {
+  $('#transaction_status').val('');
+  $(".add_detail_values").find(':input').each(function () {
+   $(this).attr('value', '');
+  });
+ });
 
 //setting the first line & shipment number
  if (!($('.lines_number:first').val())) {
@@ -230,10 +236,10 @@ $(document).ready(function () {
   });
  });
 
- 
+
 //all actions
 //Popup for selecting match 
- $('#transaction_action').on('change', function () {
+ $('#action').on('change', function () {
   var selected_value = $(this).val();
   switch (selected_value) {
    case 'CREATE_ACCOUNT' :

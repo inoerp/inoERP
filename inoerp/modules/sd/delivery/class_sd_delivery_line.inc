@@ -215,7 +215,12 @@ class sd_delivery_line extends dbObject {
   $sol->findBy_id($this->sd_so_line_id);
   $ar_ti->inv_unit_price = $sol->unit_price;
   $ar_ti->inv_line_price = $ar_ti->inv_line_quantity * $ar_ti->inv_unit_price;
-  $ar_ti->gl_inv_line_price = $ar_ti->inv_line_price * $soh->exchange_rate;
+  if(!empty($soh->exchange_rate)){
+   $ar_ti->gl_inv_line_price = $ar_ti->inv_line_price * $soh->exchange_rate;
+  }else{
+   $ar_ti->gl_inv_line_price = $ar_ti->inv_line_price;
+  }
+  
   $ar_ti->tax_code_id = $sol->tax_code_id;
   $ar_ti->item_description = $sol->item_description;
   $mm_tax = new mdm_tax_code();

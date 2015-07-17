@@ -179,6 +179,16 @@ class ar_transaction_line extends dbObject {
   return $om_so_types;
  }
 
+ Public static function find_sumAmounts($ar_transaction_header_id) {
+  $sql = " SELECT SUM(inv_line_price) as total_line_amount, SUM(tax_amount) as total_tax_amount, ar_transaction_line_id
+FROM ar_transaction_line
+WHERE ar_transaction_header_id = '{$ar_transaction_header_id}'
+GROUP BY ar_transaction_line_id ";
+
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? array_pop($result) : null;
+ }
+
  public static function find_by_ar_transaction_headerId($ar_transaction_header_id) {
   $sql = "SELECT * FROM " . self::$table_name . " where ar_transaction_header_id = '{$ar_transaction_header_id}'";
   $result_array = self::find_by_sql($sql);

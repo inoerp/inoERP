@@ -115,7 +115,7 @@ AND item.org_id = ith.from_org_id
   return !empty($result) ? $result : false;
  }
 
- public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '') {
+ public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '', $hidden_fields = '') {
   $sql = "SELECT inv_interorg_transfer_header_id, order_number , io_order_number,    io_line_number,   item_number,  
   inv_interorg_transfer_line_id,   from_org_id,   to_org_id,   carrier,   uom_id,
   vehicle_number,  waybill,   from_subinventory_id,   from_locator_id,   item_id_m,

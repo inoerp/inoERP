@@ -56,7 +56,7 @@ inoERP
        </li>
        <li><label></label><a  role="button" class="quick_select button btn btn-info" target="_blank" 
        href="<?php echo HOME_URL ?>form.php?class_name=sd_delivery_all_v&amp;router=pdf_print&amp;sd_delivery_header_id=<?php echo!(empty($$class->sd_delivery_header_id)) ? $$class->sd_delivery_header_id : ""; ?>" >
-         <?php echo gettext('Print Requisition') ?></a></li>
+         <?php echo gettext('Print Delivery') ?></a></li>
       </ul>
      </div>
     </div>

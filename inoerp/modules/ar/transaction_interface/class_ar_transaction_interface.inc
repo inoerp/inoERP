@@ -70,7 +70,6 @@ class ar_transaction_interface extends dbObject {
   'ar_customer_id',
   'item_description',
  ];
-
  public $dateField = [
   'document_date'
  ];
@@ -279,6 +278,12 @@ class ar_transaction_interface extends dbObject {
    $ar_tl->audit_trial();
    $ar_tl->save();
 
+   //update transaction header amount
+   $ar_th = new ar_transaction_header();
+   $ar_th->findBy_id($ar_tl->ar_transaction_header_id);
+   $ar_th->header_amount += $ar_tl->inv_line_price;
+   $ar_th->tax_amount += $ar_tl->tax_amount;
+   $ar_th->save();
 
    //update so line details
    $sol->invoiced_quantity = $ar_tl->inv_line_quantity;
@@ -308,7 +313,7 @@ class ar_transaction_interface extends dbObject {
    //update the sales order line 
    $sol = new sd_so_line();
    $sol->findBy_id($obj->sd_so_line_id);
-   if (in_array($sol->line_status, array('SHIPPED','AWAITING_INVOICING'))) {
+   if (in_array($sol->line_status, array('SHIPPED', 'AWAITING_INVOICING'))) {
     $msg .= "<br> Line is not available for invoicing. Line Id is " . $obj->sd_so_line_id;
     continue;
    }

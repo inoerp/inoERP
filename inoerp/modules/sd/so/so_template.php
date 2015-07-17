@@ -6,7 +6,10 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php $f = new inoform();  echo gettext('Sales Order / RMA Header') ?></span>
+<div id ="form_header"><span class="heading"><?php
+  $f = new inoform();
+  echo gettext('Sales Order / RMA Header')
+  ?></span>
  <form action=""  method="post" id="sd_so_header"  name="sd_so_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -27,15 +30,16 @@ inoERP
       <li><?php $f->l_text_field_d('so_number', 'primary_column2'); ?></li>
       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $sd_so_header->bu_org_id, 'bu_org_id', $readonly1, '', ''); ?>						 </li>
       <li><?php $f->l_select_field_from_object('document_type', sd_document_type::find_all_header_levels(), 'sd_document_type_id', 'document_type_name', $sd_so_header->document_type, 'document_type', 'medium', 1, $readonly1); ?>						 </li>
-      <li><label class="auto_complete"><?php echo gettext('Customer Name') ?></label><?php
+      <li><?php
+       echo $f->l_val_field_dm('customer_name', 'ar_customer', 'customer_name', '', 'customer_name', 'vf_select_customer_name');
        echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id);
-       echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1);
-       ?>
-       <i class="ar_customer_id select_popup clickable fa fa-search"></i></li>
-      <li><label class="auto_complete"><?php echo gettext('Customer Number') ?></label><?php $f->text_field_d('customer_number'); ?></li>
+       ?><i class="generic g_select_customer_name select_popup clickable fa fa-search" data-class_name="ar_customer"></i></li>
+      <li><?php
+       echo $f->l_val_field_d('customer_number', 'ar_customer', 'customer_number', '', '', 'vf_select_customer_number');
+       ?><i class="generic g_select_customer_number select_popup clickable fa fa-search" data-class_name="ar_customer"></i></li>
       <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
       <li><?php $f->l_text_field_dr('so_status') ?></li>
-      <li><?php $f->l_select_field_from_array('order_source_type', sd_so_header::$order_source_type_a, $$class->order_source_type,'order_source_type','',1,1); ?> </li> 
+      <li><?php $f->l_select_field_from_array('order_source_type', sd_so_header::$order_source_type_a, $$class->order_source_type, 'order_source_type', '', 1, 1); ?> </li> 
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
@@ -44,7 +48,7 @@ inoERP
       <li><?php $f->l_text_field_d('rev_number'); ?> </li> 
       <li><?php $f->l_text_field_d('sales_person'); ?></li> 
       <li><?php $f->l_text_field_d('description'); ?></li> 
-            <li><?php $f->l_text_field_dr('order_reference_id'); ?> </li> 
+      <li><?php $f->l_text_field_dr('order_reference_id'); ?> </li> 
       <li><?php $f->l_text_field_dr('order_reference_table'); ?></li> 
      </ul>
     </div>
@@ -53,7 +57,7 @@ inoERP
       <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly1); ?>						 </li>
       <li><?php $f->l_date_fieldAnyDay('payment_term_date', $$class->payment_term_date) ?></li>
       <li><?php $f->l_select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', '', 1, $readonly); ?></li>
-      <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, 1); ?></li>
+      <li><?php $f->l_select_field_from_object('ledger_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', 'currency', 1, 1); ?></li>
       <li><?php $f->l_date_fieldFromToday('agreement_start_date', $$class->agreement_start_date) ?></li>
       <li><?php $f->l_date_fieldFromToday('agreement_end_date', $$class->agreement_start_date) ?></li>
       <li><?php $f->l_select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
@@ -95,12 +99,6 @@ inoERP
       <ul class="column header_field">
        <li id="document_status"><label><?php echo gettext('Action') ?></label>
         <?php echo $f->select_field_from_object('action', sd_so_header::so_status(), 'option_line_code', 'option_line_value', '', 'action'); ?>
-       </li>
-       <li id="copy_header"><label><?php echo gettext('Copy Document') ?></label>
-        <input type="button" class="button" id="copy_docHeader" value="Header">
-       </li>
-       <li id="copy_line"><label></label>
-        <input type="button" class="button" id="copy_docLine" value="Lines">
        </li>
       </ul>
 
@@ -158,14 +156,14 @@ inoERP
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('sd_so_line_id', 'line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
-         <td><?php echo $f->select_field_from_object('line_type', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class_second->line_type, '', 'medium', 1, $readonly,'','','','process_flow_id'); ?></td>
+         <td><?php echo $f->select_field_from_object('line_type', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class_second->line_type, '', 'medium', 1, $readonly, '', '', '', 'process_flow_id'); ?></td>
          <td><?php echo $f->select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->shipping_org_id, '', '', 1, $readonly); ?></td>
          <td><?php
+          $f->val_field_wid2('item_number', 'item', 'item_number', 'shipping_org_id');
           echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
           echo $f->hidden_field_withCLass('customer_ordered_cb', '1', 'popup_value');
-          form::text_field_wid2('item_number', 'select_item_number');
           ?>
-          <i class="select_item_number select_popup fa fa-search"></I></td>
+          <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
          <td><?php form::text_field_wid2s('item_description'); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small'); ?></td>
 
@@ -357,7 +355,7 @@ inoERP
          <td><?php form::text_field_wid2r('ar_transaction_header_id'); ?></td>
          <td><?php form::text_field_wid2r('ar_transaction_line_id'); ?></td>
          <td><?php form::text_field_wid2r('ar_transaction_number'); ?></td>
-         <td><?php $f->text_field_wid2r('sys_spd_header_id' ,'dont_copy'); ?></td>
+         <td><?php $f->text_field_wid2r('sys_spd_header_id', 'dont_copy'); ?></td>
          <td><a role="button" target="_blank" class="btn btn-sm btn-default dont_copy" href="form.php?class_name=sys_spd_header&sys_spd_header_id=<?php echo $$class_second->sys_spd_header_id; ?>"><?php echo $$class_second->sys_spd_header_id; ?></a></td>
          <td><?php echo $f->select_field_from_array('line_action', sd_so_line::$line_action_a, ''); ?></td>
         </tr>
