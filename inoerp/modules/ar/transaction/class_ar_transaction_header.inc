@@ -251,7 +251,22 @@ class ar_transaction_header extends dbObject {
   }
  }
 
+ private function _do_initial_defaults() {
+  global $dbc;
+  $fin_details = org::find_financial_details_from_orgId($this->bu_org_id);
+  if ($fin_details) {
+   $this->currency = $fin_details->currency_code;
+  } else {
+   $dbc->rollback = true;
+   echo "<br>Setup in complete. No currency found. Error @ " . __FILE__ . ' @@ line ' . __LINE__;
+  }
+ }
+
  public function _before_save() {
+  if (empty($this->ar_transaction_header_id) && !empty($this->bu_org_id)) {
+   $this->_do_initial_defaults();
+  }
+
   if (!empty($this->ar_transaction_header_id) && !empty($this->action)) {
    $return = false;
    switch ($this->action) {

@@ -34,17 +34,18 @@
       <li><?php $f->l_text_field_dr('transaction_class'); ?></li>
       <li><?php $f->l_date_fieldFromToday_d('document_date', $$class->document_date) ?></li>
       <li><?php $f->l_text_field_d('document_number') ?></li>
-      <li><?php $f->l_select_field_from_array('transaction_status', ar_transaction_header::$transaction_status_a, $$class->transaction_status ,'transaction_status','always_readonly','',1); ?>         </li> 
+      <li><?php $f->l_select_field_from_array('transaction_status', ar_transaction_header::$transaction_status_a, $$class->transaction_status, 'transaction_status', 'always_readonly', '', 1); ?>         </li> 
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <ul class="column header_field">
-      <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
-       <label class="auto_complete"><?php echo gettext('Customer Name') ?></label>
-       <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?>
-       <i class="ar_customer_id select_popup clickable fa fa-search"></i>
-      </li>
-      <li><?php $f->l_text_field_d('customer_number'); ?></li>
+      <li><?php
+       echo $f->l_val_field_dm('customer_name', 'ar_customer', 'customer_name', '', 'customer_name', 'vf_select_customer_name');
+       echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id);
+       ?><i class="generic g_select_customer_name select_popup clickable fa fa-search" data-class_name="ar_customer"></i></li>
+      <li><?php
+       echo $f->l_val_field_d('customer_number', 'ar_customer', 'customer_number', '', '', 'vf_select_customer_number');
+       ?><i class="generic g_select_customer_number select_popup clickable fa fa-search" data-class_name="ar_customer"></i></li>
       <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
       <li><?php $f->l_text_field_dr('sd_so_number'); ?></li>
       <li><?php $f->l_text_field_d('document_owner'); ?></li> 
@@ -61,7 +62,7 @@
      <div>
       <ul class="column header_field">
        <li><?php $f->l_select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', '', 1, $readonly); ?></li>
-       <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, 1); ?></li>
+       <li><?php $f->l_select_field_from_object('ledger_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', 'currency', 1, 1); ?></li>
        <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly1); ?>						 </li></li>
        <li><?php $f->l_date_fieldAnyDay('payment_term_date', $$class->payment_term_date) ?></li>
        <li><?php $f->l_select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
@@ -112,7 +113,7 @@
       <ul class="column header_field">
        <li><?php $f->l_select_field_from_array('action', $$class->action_a, '', 'action', '', '', $readonly); ?>       </li>
        <li><label></label><a  role="button" class="quick_select button btn btn-info" target="_blank" 
-       href="<?php echo HOME_URL ?>form.php?class_name=ar_transaction_all_v&amp;router=pdf_print&amp;ar_transaction_header_id=<?php echo!(empty($$class->ar_transaction_header_id)) ? $$class->ar_transaction_header_id : ""; ?>" >
+                               href="<?php echo HOME_URL ?>form.php?class_name=ar_transaction_all_v&amp;router=pdf_print&amp;ar_transaction_header_id=<?php echo!(empty($$class->ar_transaction_header_id)) ? $$class->ar_transaction_header_id : ""; ?>" >
          <?php echo gettext('Print Transaction') ?></a></li>
        <li id="document_status"><label><?php echo gettext('Change Status') ?></label>
         <?php echo form::select_field_from_object('approval_status', ar_transaction_header::ar_approval_status(), 'option_line_code', 'option_line_value', $ar_transaction_header->approval_status, 'set_approval_status', $readonly, '', ''); ?>
@@ -174,10 +175,12 @@
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
          <td><?php echo $f->select_field_from_object('line_type', ar_transaction_line::ar_transaction_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, '', 'line_type', '', $readonly1); ?></td>
          <td><?php
+          $f->val_field_wid2('item_number', 'item', 'item_number', '');
           echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
-          $f->text_field_wid2('item_number', 'select_item_number');
+          echo $f->hidden_field_withCLass('customer_ordered_cb', '1', 'popup_value');
+          echo $f->hidden_field_withCLass('invoiceable_cb', '1', 'popup_value');
           ?>
-          <i class="select_item_number select_popup clickable fa fa-search"></i></td>
+          <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
          <td><?php $f->text_field_wid2m('item_description'); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $ar_transaction_line->uom_id); ?></td>
          <td><?php form::number_field_wid2sm('inv_line_quantity'); ?></td>

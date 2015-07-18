@@ -60,6 +60,7 @@ class ar_receipt_line extends dbObject {
  public $line_number;
  public $amount;
  public $line_description;
+ public $ar_transaction_header_id;
  public $gl_amount;
  public $exchange_rate;
  public $status;

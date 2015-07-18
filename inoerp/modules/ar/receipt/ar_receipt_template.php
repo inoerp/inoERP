@@ -106,7 +106,6 @@
         <th><?php echo gettext('Seq') ?>#</th>
         <th><?php echo gettext('Line Id') ?></th>
         <th><?php echo gettext('Line') ?>#</th>
-        <th><?php echo gettext('Trnx Id') ?></th>
         <th><?php echo gettext('Trnx Number') ?></th>
         <th><?php echo gettext('Receipt Amount') ?></th>
         <th><?php echo gettext('Exchange Rate') ?></th>
@@ -131,9 +130,12 @@
          <td><?php $f->seq_field_d($count); ?></td>
          <td><?php form::text_field_wid2sr('ar_receipt_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
-         <td><?php $f->text_field_wid2sr('ar_transaction_header_id'); ?></td>
-         <td><?php $f->text_field_wid2('transaction_number', 'select_transaction_number'); ?>
-          <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_transaction_number select_popup clickable"></td>
+         <td><?php
+          $f->val_field_wid2('transaction_number', 'ar_transaction_header', 'transaction_number', 'ar_customer_id');
+          echo $f->hidden_field('ar_transaction_header_id', $$class_second->ar_transaction_header_id);
+          echo $f->hidden_field_withCLass('ar_customer_id', $$class->ar_customer_id, 'popup_value ar_customer_id');
+          ?>
+          <i class="generic g_select_ar_transaction_number select_popup clickable fa fa-search" data-class_name="ar_transaction_header"></i></td>
          <td><?php !empty($$class_second->ar_receipt_line_id) ? form::number_field_wid2sr('amount') : $f->text_field_wid2s('amount'); ?></td>
          <td><?php !empty($$class_second->ar_receipt_line_id) ? form::number_field_wid2sr('exchange_rate') : $f->text_field_wid2s('exchange_rate'); ?></td>
          <td><?php !empty($$class_second->ar_receipt_line_id) ? form::number_field_wid2sr('gl_amount') : $f->text_field_wid2s('gl_amount'); ?></td>
