@@ -70,7 +70,7 @@ class sd_opportunity extends dbObject {
   'time_to_contact',
   'ar_customer_id',
   'ar_customer_site_id',
-  'sales_person_employee_id',
+  'hr_employee_id',
   'campaign_id',
   'campaign_os',
   'sales_team',
@@ -109,9 +109,9 @@ class sd_opportunity extends dbObject {
   "address",
   "country",
   "postal_code",
-  'sales_person_employee_name',
   'address_name',
-  'action'
+  'action',
+  'sales_person'
  ];
  public $sd_opportunity_id;
  public $bu_org_id;
@@ -141,7 +141,8 @@ class sd_opportunity extends dbObject {
  public $ar_customer_site_id;
  public $campaign_id;
  public $campaign_os;
- public $sales_person_employee_id;
+ public $hr_employee_id;
+ public $sales_person;
  public $sales_team;
  public $reference_type;
  public $reference_key_name;
@@ -162,7 +163,6 @@ class sd_opportunity extends dbObject {
  public $address;
  public $country;
  public $postal_code;
- public $sales_person_employee_name;
  public $address_name;
  public $action;
  public $search = [

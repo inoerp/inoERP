@@ -117,6 +117,9 @@
    'ap_transaction_header_id',
    'payment_action'
   ];
+   public $fields_inDataBase_notInForm = [
+  'currency'
+ ];
   public $numberField = [
    'header_amount',
    'tax_amount'

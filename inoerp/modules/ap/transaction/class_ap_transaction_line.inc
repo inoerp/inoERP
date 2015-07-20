@@ -70,7 +70,9 @@ class ap_transaction_line extends dbObject {
   'cm_transaction_header_id',
   'credit_line_quantity',
   'credit_unit_price',
-  'detail_ac_id'
+  'detail_ac_id',
+  'inv_doc_currency',
+  'doc_currency'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
   "ap_transaction_header_id"
@@ -134,21 +136,22 @@ class ap_transaction_line extends dbObject {
  public $detail_ac_id;
  public $gl_line_price;
  public $line_price;
+ public $doc_currency;
+ public $inv_doc_currency;
 
- 
-  private function _validate_delete() {
-	if (!empty($this->po_detail_id) || ($this->ap_transaction_header_id)) {
-	 echo "<br>Delete is not allowed for this line as references (po_detail_id /ap_transaction_header_id ) exists ";
-	 return -99;
-	} else {
-	 return 1;
-	}
+ private function _validate_delete() {
+  if (!empty($this->po_detail_id) || ($this->ap_transaction_header_id)) {
+   echo "<br>Delete is not allowed for this line as references (po_detail_id /ap_transaction_header_id ) exists ";
+   return -99;
+  } else {
+   return 1;
+  }
  }
 
  public function _before_delete() {
-	return $this->_validate_delete();
+  return $this->_validate_delete();
  }
- 
+
  private function _validate_tax_detail_line() {
   $tax_detail_detail = new ap_transaction_detail();
   $tax_detail_detail->ap_transaction_line_id = $this->ap_transaction_line_id;
@@ -171,7 +174,7 @@ class ap_transaction_line extends dbObject {
  private function _create_transaction_details() {
   if (($this->action === 'match_purchase_order') && (!empty($this->po_line_id)) && (!empty($this->po_detail_id))) {
    $ap_th = new ap_transaction_header();
-   $ap_th_i = $ap_th->findBy_id($this->ap_transaction_header_id);
+   $ap_th->findBy_id($this->ap_transaction_header_id);
    $po_d = new po_detail();
    $po_d_i = $po_d->findBy_id($this->po_detail_id);
    $ap_td = new ap_transaction_detail();
@@ -190,7 +193,7 @@ class ap_transaction_line extends dbObject {
    $ap_td->po_header_id = $this->po_header_id;
    $ap_td->po_line_id = $this->po_line_id;
    $ap_td->po_detail_id = $this->po_detail_id;
-   $ap_td->period_id = $ap_th_i->period_id;
+   $ap_td->period_id = $ap_th->period_id;
    $ap_td->audit_trial();
    //update PO details
    foreach ($po_d_i as $pd_key => $pd_value) {
@@ -201,6 +204,12 @@ class ap_transaction_line extends dbObject {
    $po_d->invoiced_quantity += $this->inv_line_quantity;
    $po_d->save();
    $ap_td->save();
+
+   //update the ap transaction header amount
+   $ap_th->header_amount += $this->inv_line_price;
+   $ap_th->tax_amount += $this->tax_amount;
+   $ap_th->save();
+   
   }
  }
 
@@ -223,6 +232,12 @@ class ap_transaction_line extends dbObject {
    $this->line_number = $current_highest_line_no->line_number + 1;
   }
   if (($this->action === 'match_purchase_order') && (!empty($this->po_line_id)) && (!empty($this->po_detail_id))) {
+
+   if ($this->doc_currency != $this->inv_doc_currency) {
+    ino_showWarning_message('Invoice Matching failed as PO Currency (' . $this->doc_currency . ') and Invoice Currency (' . $this->inv_doc_currency . ') are differnt');
+    return -90;
+   }
+
    if (empty(trim($this->inv_line_quantity))) {
     $this->inv_line_quantity = $this->invoicing_open_quantity;
    }
@@ -293,6 +308,7 @@ class ap_transaction_line extends dbObject {
    'mode',
    'po_status',
    'supplier_site_id',
+   'inv_doc_currency'
   ];
 
   return $multi_select_hidden;

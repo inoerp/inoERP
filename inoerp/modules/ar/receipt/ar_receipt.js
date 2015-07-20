@@ -1,56 +1,3 @@
-function setValFromSelectPage(ar_receipt_header_id, ar_transaction_header_id, transaction_number,
-        header_amount, ar_customer_id, customer_number, customer_name, receipt_amount, exchange_rate) {
- this.ar_receipt_header_id = ar_receipt_header_id;
- this.ar_transaction_header_id = ar_transaction_header_id;
- this.header_amount = header_amount;
- this.receipt_amount = receipt_amount;
- this.transaction_number = transaction_number;
- this.ar_customer_id = ar_customer_id;
- this.customer_number = customer_number;
- this.customer_name = customer_name;
- this.exchange_rate = exchange_rate;
-}
-
-setValFromSelectPage.prototype.setVal = function () {
- var ar_receipt_header_id = this.ar_receipt_header_id;
- var header_amount = this.header_amount;
- var receipt_amount = this.receipt_amount;
- var ar_customer_id = this.ar_customer_id;
- var customer_number = this.customer_number;
- var customer_name = this.customer_name;
- var ar_transaction_header_id = this.ar_transaction_header_id;
- var transaction_number = this.transaction_number;
-
- var rowClass = '.' + localStorage.getItem("row_class");
- var fieldClass = '.' + localStorage.getItem("field_class");
- if (ar_receipt_header_id) {
-  $("#ar_receipt_header_id").val(ar_receipt_header_id);
- }
- if (ar_customer_id) {
-  $("#ar_customer_id").val(ar_customer_id);
- }
- if (customer_number) {
-  $("#customer_number").val(customer_number);
- }
- if (customer_name) {
-  $("#customer_name").val(customer_name);
- }
- rowClass = rowClass.replace(/\s+/g, '.');
- fieldClass = fieldClass.replace(/\s+/g, '.');
- if (ar_transaction_header_id) {
-  $('#content').find(rowClass).find(fieldClass).val(transaction_number);
-  $('#content').find(rowClass).find('.ar_transaction_header_id').first().val(ar_transaction_header_id);
-  $('#content').find(rowClass).find('.invoice_amount').first().val(header_amount);
-  $('#content').find(rowClass).find('.receipt_amount').first().val(receipt_amount);
-  $('#content').find(rowClass).find('.exchange_rate').first().val(this.exchange_rate);
- }
- localStorage.removeItem("row_class");
- localStorage.removeItem("row_class");
- if (this.ar_receipt_header_id) {
-  $('a.show.ar_receipt_header_id').trigger('click');
- }
-};
-
 $(document).ready(function () {
 //mandatory and field sequence
  var mandatoryCheck = new mandatoryFieldMain();
@@ -102,7 +49,7 @@ $(document).ready(function () {
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- 
+
  //popu for selecting AR Transaction
  $('body').off('click', '.select_transaction_number.select_popup').on('click', '.select_transaction_number.select_popup', function () {
   if ($(this).closest('tr').find('.ar_receipt_line_id').first().val()) {
@@ -120,11 +67,18 @@ $(document).ready(function () {
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- $('#receipt_action').on('change', function () {
+ $('body').off('change', '#action').on('change', '#action', function () {
   var selected_value = $(this).val();
   switch (selected_value) {
    case 'CREATE_ACCOUNT' :
     create_accounting();
+    break;
+
+   case 'CANCEL' :
+    if (confirm('Do you really want to cancel this receipt?')) {
+     $('#form_line :input').prop('disabled', true);
+     $(this).prop('readonly', true);
+    }
     break;
 
    case 'REVERSE' :
@@ -170,21 +124,6 @@ $(document).ready(function () {
   $('body').trigger('cash_calculateHeaderAmount');
  });
 
-
-
-$('body').off('chage','#receipt_action').on('blur','#receipt_action', function(){
-  if($(this).val() === 'CANCEL'){
-    if(confirm('Do you really want to cancel this receipt?')){
-    $('#form_line :input').prop('disabled', true);
-      $(this).prop('readonly', true);
-    }else{
-    
-    $(this).val('');
-    }
-
-  }
-})
-
 });
 
 //all actions
@@ -192,7 +131,7 @@ $('body').off('chage','#receipt_action').on('blur','#receipt_action', function()
 function create_accounting() {
  var ar_receipt_header_id = $("#ar_receipt_header_id").val();
  if (ar_receipt_header_id) {
-  var link = 'multi_select.php?class_name=ar_receipt_header&action=create_accounting&mode=9&action_class_name=ar_receipt_header&ar_receipt_header_id=' + ar_receipt_header_id;
+  var link = 'multi_select.php?window_type=popup&class_name=ar_receipt_header&action=CREATE_ACCOUNT&mode=9&action_class_name=ar_receipt_header&ar_receipt_header_id=' + ar_receipt_header_id;
   localStorage.removeItem("reset_link");
   localStorage.setItem("reset_link", link);
   localStorage.removeItem("jsfile");

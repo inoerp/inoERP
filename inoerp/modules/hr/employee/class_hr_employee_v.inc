@@ -68,8 +68,7 @@ class hr_employee_v extends dbObject {
  
   public static $json_label_fields = [
    'username',
-   'email',
-   'status',
+   'person_type',
   'identification_id',
    'employee_name'
  ];
@@ -154,6 +153,29 @@ LEFT JOIN org_v ON org_v.org_id =  he.org_id
   return !empty($result) ? ($result) : false;
  }
 
+ 
+  public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
+  $sql = " SELECT   user_id,   username,   first_name,   last_name,   email,
+  hr_employee_id,     identification_id,   emp_start_date,   citizen_number,
+  emp_first_name,   emp_last_name,    emp_email,   gender,   person_type,  employee_name  ";
+
+  $sql .= " FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
+
+//  if(!empty($_GET['hidden_fields']['receving_org_id'])){
+//   $rec_org_id = $_GET['hidden_fields']['receving_org_id'];
+//   $sql .= " AND receving_org_id = '{$rec_org_id}' ";
+//  }
+  if (!empty($dependent_fields)) {
+   foreach ($dependent_fields as $k => $v) {
+    if (!empty($k) && !empty($v)) {
+     $sql .= " AND $k = '{$v}' ";
+    }
+   }
+  }
+  $result_array = static::find_by_sql($sql);
+  return !empty($result_array) ? ($result_array) : false;
+ }
+ 
 }
 
 //end of so_detail class

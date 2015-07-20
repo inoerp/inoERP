@@ -2304,3 +2304,14 @@ font-weight: bold;
 a.btn-info{
  color: #fff !important;
 }
+#form_header [name="line_id_cb"]{
+        width : 10px !important;
+}
+
+#popup-window #structure{
+ margin-top: 50px;
+}
+
+#form_line .small{
+    width: 80px !important;
+}

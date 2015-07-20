@@ -21,6 +21,7 @@ class sd_delivery_all_v extends dbObject {
   'ship_to_id',
   'bill_to_id',
   'ar_customer_site_id',
+  'hr_employee_id',
   'sales_person',
   'doc_currency',
   'header_amount',
@@ -93,6 +94,7 @@ class sd_delivery_all_v extends dbObject {
  public $ship_to_id;
  public $bill_to_id;
  public $ar_customer_site_id;
+ public $hr_employee_id;
  public $sales_person;
  public $doc_currency;
  public $header_amount;
@@ -151,7 +153,7 @@ CREATE OR REPLACE VIEW sd_delivery_all_v
 sd_delivery_header_id, delivery_number,  carrier ,  vehicle_number,  handling_instruction,
 delivery_shipped_quantity ,delivery_status,
 sd_so_header_id, bu_org_id, document_type, so_number, ar_customer_id, ship_to_id,bill_to_id,
-ar_customer_site_id, sales_person, doc_currency,  header_amount, so_status, payment_term_id,
+ar_customer_site_id, hr_employee_id, doc_currency,  header_amount, so_status, payment_term_id,
 customer_name, customer_number,
 customer_site_name, customer_site_number,
 sd_so_line_id, line_type, line_number,	item_id_m, 
@@ -163,14 +165,15 @@ item_number, uom_id, item_status,
 org, shipping_org_id,
 created_by, creation_date, last_update_by, last_update_date,
 address,country,postal_code,phone,email,website,
-address_b,country_b,postal_code_b, phone_b, email_b, website_b
+address_b,country_b,postal_code_b, phone_b, email_b, website_b,
+sales_person
 )
 AS
   SELECT
   sddh.sd_delivery_header_id, sddh.delivery_number,  sddh.carrier ,  sddh.vehicle_number,  sddh.handling_instruction,
   sddl.shipped_quantity as 	shipped_quantity , sddl.delivery_status as delivery_status,
   sdsh.sd_so_header_id, sdsh.bu_org_id, sdsh.document_type, sdsh.so_number, sdsh.ar_customer_id, sdsh.ship_to_id,sdsh.bill_to_id,
-  sdsh.ar_customer_site_id, sdsh.sales_person, sdsh.doc_currency,  sdsh.header_amount, sdsh.so_status, sdsh.payment_term_id,
+  sdsh.ar_customer_site_id, sdsh.hr_employee_id, sdsh.doc_currency,  sdsh.header_amount, sdsh.so_status, sdsh.payment_term_id,
   ar_customer.customer_name, ar_customer.customer_number,
   ar_customer_site.customer_site_name, ar_customer_site.customer_site_number,
   sdsl.sd_so_line_id, sdsl.line_type, sdsl.line_number,	sdsl.item_id_m, 
@@ -183,7 +186,8 @@ AS
   sdsl.created_by, sdsl.creation_date, sdsl.last_update_by, sdsl.last_update_date,
   ship_address.address,ship_address.country,ship_address.postal_code,ship_address.phone,ship_address.email,ship_address.website,
   bill_address.address as address_b,bill_address.country as country_b,bill_address.postal_code as postal_code_b,
-  bill_address.phone as phone_b,bill_address.email as email_b,bill_address.website as website_b
+  bill_address.phone as phone_b,bill_address.email as email_b,bill_address.website as website_b,
+  CONCAT(hre.last_name, ', ' , hre.first_name) as sales_person
   FROM 
   sd_delivery_header sddh, 
   sd_delivery_line sddl,
@@ -193,8 +197,10 @@ AS
   address as ship_address,
   address as bill_address,
   sd_so_header sdsh
+  LEFT JOIN hr_employee hre ON sdsh.hr_employee_id = hre.hr_employee_id
   LEFT JOIN ar_customer_site ON sdsh.ar_customer_site_id = ar_customer_site.ar_customer_site_id,
   sd_so_line sdsl
+  
 
   WHERE
   sdsh.sd_so_header_id = sdsl.sd_so_header_id

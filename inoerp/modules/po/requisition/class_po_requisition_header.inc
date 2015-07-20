@@ -121,6 +121,12 @@
    'bill_to_country',
    'bill_to_postal_code',
   ];
+  
+   public $fields_inDataBase_notInForm = [
+  'currency'
+ ];
+ 
+   
   public $profile_default = [
    'exchange_rate_type' => 'gl_currency_conversion_type',
    'bu_org_id' => 'org_bu_name_default',

@@ -26,7 +26,7 @@ class sd_pick_list_v extends dbObject {
 		 'so_number',
 		 'ar_customer_id',
 		 'ar_customer_site_id',
-		 'sales_person',
+		 'hr_employee_id',
 		 'doc_currency',
 		 'header_amount',
 		 'so_status',
@@ -89,7 +89,7 @@ class sd_pick_list_v extends dbObject {
 		 'shipping_org_id',
 		 'ar_customer_id',
 		 'ar_customer_site_id',
-		 'sales_person',
+		 'hr_employee_id',
 		 'doc_currency',
 		 'header_amount',
 		 'so_status',
@@ -144,7 +144,7 @@ class sd_pick_list_v extends dbObject {
  public $so_number;
  public $ar_customer_id;
  public $ar_customer_site_id;
- public $sales_person;
+ public $hr_employee_id;
  public $staging_subinventory;
  public $staging_locator;
  public $staging_subinventory_id;
@@ -194,7 +194,7 @@ class sd_pick_list_v extends dbObject {
 	$sql = "
 CREATE OR REPLACE VIEW sd_pick_list_v
 (
-sd_so_header_id, bu_org_id, document_type, so_number, ar_customer_id, ar_customer_site_id, sales_person,
+sd_so_header_id, bu_org_id, document_type, so_number, ar_customer_id, ar_customer_site_id, hr_employee_id,
 doc_currency, header_amount, so_status,  payment_term_id, onhand, customer_name, customer_number, 
 customer_site_name, customer_site_number, payment_term, payment_term_description, sd_so_line_id, line_type,
 line_number, item_id_m,
@@ -208,7 +208,7 @@ last_update_date
 AS
  SELECT 
 sdsh.sd_so_header_id, sdsh.bu_org_id, sdsh.document_type, sdsh.so_number, sdsh.ar_customer_id, 
-sdsh.ar_customer_site_id, sdsh.sales_person, sdsh.doc_currency,  sdsh.header_amount, sdsh.so_status, sdsh.payment_term_id,
+sdsh.ar_customer_site_id, sdsh.hr_employee_id, sdsh.doc_currency,  sdsh.header_amount, sdsh.so_status, sdsh.payment_term_id,
 osv.onhand,
 ar_customer.customer_name, ar_customer.customer_number,
 ar_customer_site.customer_site_name, ar_customer_site.customer_site_number,

@@ -29,9 +29,13 @@
       <li><?php $f->l_select_field_from_object('ar_receipt_source_id', ar_receipt_source::find_all(), 'ar_receipt_source_id', 'receipt_source', $$class->ar_receipt_source_id, 'ar_receipt_source_id', '', 1, $readonly); ?>			 </li>
       <li><?php $f->l_date_fieldFromToday_m('document_date', $$class->document_date, 1) ?></li>
       <li><?php $f->l_text_field_d('document_number') ?></li>
-      <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?><label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup clickable">
-        <?php echo gettext('Customer Name') ?></label><?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
-      <li><?php $f->l_text_field_d('customer_number'); ?></li>
+      <li><?php
+       echo $f->l_val_field_d('customer_name', 'ar_customer', 'customer_name', '', 'customer_name', 'vf_select_customer_name');
+       echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id);
+       ?><i class="generic g_select_customer_name select_popup clickable fa fa-search" data-class_name="ar_customer"></i></li>
+      <li><?php
+       echo $f->l_val_field_d('customer_number', 'ar_customer', 'customer_number', '', '', 'vf_select_customer_number');
+       ?><i class="generic g_select_customer_number select_popup clickable fa fa-search" data-class_name="ar_customer"></i></li>
       <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
       <li><?php $f->l_select_field_from_array('receipt_status', ar_receipt_header::$receipt_status_a, $$class->receipt_status, '', '', '', '', $readonly); ?>			 </li> 
       <li><?php $f->l_text_field_d('description'); ?></li> 
@@ -41,7 +45,7 @@
      <div> 
       <ul class="column header_field">
        <li><?php $f->l_select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', '', 1, $readonly); ?></li>
-       <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, 1); ?></li>
+       <li><?php $f->l_select_field_from_object('ledger_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, 1); ?></li>
        <li><?php $f->l_select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
        <li><?php $f->l_number_field('exchange_rate', $$class->exchange_rate, '', 'exchange_rate'); ?> </li>
        <li><?php $f->l_number_field('header_amount', $$class->header_amount, '15', 'header_amount'); ?></li>
@@ -71,14 +75,10 @@
     <div id="tabsHeader-5" class="tabContent">
      <div> 
       <ul class="column header_field">
-       <li><?php $f->l_select_field_from_array('receipt_action', $$class->receipt_action_a, '', 'receipt_action'); ?>       </li>
-       <li id="document_print"><label><?php echo gettext('Document Print') ?></label>
-        <a class="button" target="_blank"
-           href="po_print.php?ar_receipt_header_id=<?php echo!(empty($$class->ar_receipt_header_id)) ? $$class->ar_receipt_header_id : ""; ?>" >Receipt</a>
-       </li>
+       <li><?php $f->l_select_field_from_array('action', $$class->receipt_action_a, '', 'action'); ?>       </li>
       </ul>
 
-      <div id="comment" class="shoe_comments">
+      <div id="comment" class="show_comments">
       </div>
      </div>
     </div>
@@ -139,7 +139,7 @@
          <td><?php !empty($$class_second->ar_receipt_line_id) ? form::number_field_wid2sr('amount') : $f->text_field_wid2s('amount'); ?></td>
          <td><?php !empty($$class_second->ar_receipt_line_id) ? form::number_field_wid2sr('exchange_rate') : $f->text_field_wid2s('exchange_rate'); ?></td>
          <td><?php !empty($$class_second->ar_receipt_line_id) ? form::number_field_wid2sr('gl_amount') : $f->text_field_wid2s('gl_amount'); ?></td>
-         <td><?php $f->text_field_wid2sr('invoice_amount'); ?></td>
+         <td><?php $f->text_field_wid2sr('invoice_amount' ,'header_amount'); ?></td>
          <td><?php $f->text_field_wid2sr('receipt_amount'); ?></td>
          <td><?php $f->text_field_wid2r('remaining_amount'); ?></td>
         </tr>

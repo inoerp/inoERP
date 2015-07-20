@@ -413,12 +413,20 @@ trait dbObject_t {
   return !empty($result_array) ? array_shift($result_array) : false;
  }
 
- public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields='' , $hidden_fields = '') {
-  $sql = "SELECT * FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  "; 
-  if(!empty($dependent_fields)){
-   foreach($dependent_fields as $k => $v ){
-    if(!empty($k) && !empty($v) ){
+ public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
+  $sql = "SELECT * FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
+  if (!empty($dependent_fields)) {
+   foreach ($dependent_fields as $k => $v) {
+    if (!empty($k) && !empty($v)) {
      $sql .= " AND $k = '{$v}' ";
+    }
+   }
+  }
+
+  if (!empty($hidden_fields)) {
+   foreach ($hidden_fields as $k1 => $v1) {
+    if (!empty($k1) && !empty($v1)) {
+     $sql .= " AND $k1 = '{$v1}' ";
     }
    }
   }
@@ -616,6 +624,11 @@ trait dbObject_t {
   } else {
    $field_array = static::$field_array;
   }
+
+  if (property_exists($this, 'fields_inDataBase_notInForm')) {
+   $field_array = array_diff($field_array, $this->fields_inDataBase_notInForm);
+  }
+
   $field_stmt = '';
   foreach ($field_array as $key => $value) {
    if (in_array($value, array('created_by', 'creation_date'))) {
@@ -673,6 +686,11 @@ trait dbObject_t {
   if (property_exists($this, 'field_a')) {
    $field_array = $this->field_a;
   }
+
+  if (property_exists($this, 'fields_inDataBase_notInForm')) {
+   $field_array = array_diff($field_array, $this->fields_inDataBase_notInForm);
+  }
+
   $field_stmt = '';
   foreach ($field_array as $key => $value) {
    if (in_array($value, array('created_by', 'creation_date'))) {
@@ -1168,6 +1186,17 @@ trait dbObject_t {
    $query = "SHOW COLUMNS FROM $table_name ";
    $result = $db->find_by_sql($query);
    return $result;
+  }
+ }
+
+ protected function _do_initial_defaults() {
+  global $dbc;
+  $fin_details = org::find_financial_details_from_orgId($this->bu_org_id);
+  if ($fin_details) {
+   $this->currency = $fin_details->currency_code;
+  } else {
+   $dbc->rollback = true;
+   echo "<br>Setup in complete. No currency found. Error @ " . __FILE__ . ' @@ line ' . __LINE__;
   }
  }
 

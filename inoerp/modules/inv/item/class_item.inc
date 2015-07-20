@@ -1056,12 +1056,14 @@ class item extends dbObject {
 
  public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
   $sql = "SELECT * FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
-
+  $show_only_master_items = true; 
+  
   if (!empty($hidden_fields)) {
    foreach ($hidden_fields as $k => $v) {
     if (!empty($k) && !empty($v)) {
      if (strpos($k, 'org_id') !== false) {
       $sql .= " AND org_id = '{$v}' ";
+      $show_only_master_items = false;
      } else {
       $sql .= " AND $k = '{$v}' ";
      }
@@ -1074,13 +1076,18 @@ class item extends dbObject {
     if (!empty($k1) && !empty($v1)) {
      if (strpos($k1, 'org_id') !== false) {
       $sql .= " AND org_id = '{$v1}' ";
+      $show_only_master_items = false;
      } else {
       $sql .= " AND $k1 = '{$v1}' ";
      }
     }
    }
   }
-//  echo $sql;
+  
+  if($show_only_master_items){
+   $sql .= " AND item_id = item_id_m ";
+  }
+  
   $result_array = static::find_by_sql($sql);
   return !empty($result_array) ? ($result_array) : false;
  }

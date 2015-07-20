@@ -221,7 +221,7 @@ class gl_journal_header extends dbObject {
     echo " <br> Period is not open";
     return -99;
    }
-   if (empty($this->post_date)) {
+   if (!empty($this->post_date)) {
     if (!empty($this->reference_key_name) && ($this->reference_key_value)) {
      if ($this->_update_referenced_class() < 0) {
       echo "<br>POST to GL process failed! in module. Error @ gl_journal_header @@ " . __LINE__ . '<br>' . $e->getMessage();

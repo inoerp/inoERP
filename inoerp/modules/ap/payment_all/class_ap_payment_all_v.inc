@@ -24,7 +24,7 @@ public static $form_class_name = "ap_payment_header";
    'ap_transaction_header_id',
    'transaction_type',
    'transaction_number',
-   'document_owner',
+   'hr_employee_id',
    'apth_currency',
    'apth_header_amount',
    'transaction_status',
@@ -65,7 +65,7 @@ public static $form_class_name = "ap_payment_header";
   public $from_bank_header_id;
   public $header_amount;
   public $currency;
-  public $document_number;
+  public $hr_employee_id;
   public $payment_status;
   public $gl_journal_header_id;
   public $ap_payment_line_id;
@@ -95,7 +95,7 @@ payment_number, supplier_id, supplier_site_id, from_bank_header_id,
 header_amount,  currency, document_number, payment_status, gl_journal_header_id,
 ap_payment_line_id, line_number, amount, line_description,
 ap_transaction_header_id, transaction_type, transaction_number,
-document_owner, apth_currency, apth_header_amount, transaction_status,
+hr_employee_id, apth_currency, apth_header_amount, transaction_status,
 paid_amount,apth_payment_status,
 supplier_name, supplier_number,
 supplier_site_name, supplier_site_number
@@ -107,7 +107,7 @@ apph.payment_number, apph.supplier_id, apph.supplier_site_id, apph.from_bank_hea
 apph.header_amount,  apph.currency, apph.document_number, apph.payment_status, apph.gl_journal_header_id,
 appl.ap_payment_line_id, appl.line_number, appl.amount, appl.line_description,
 apth.ap_transaction_header_id, apth.transaction_type, apth.transaction_number,
-apth.document_owner, apth.currency, apth.header_amount, apth.transaction_status,
+apth.hr_employee_id, apth.currency, apth.header_amount, apth.transaction_status,
 apth.paid_amount, apth.payment_status,
 supplier.supplier_name, supplier.supplier_number,
 supplier_site.supplier_site_name, supplier_site.supplier_site_number

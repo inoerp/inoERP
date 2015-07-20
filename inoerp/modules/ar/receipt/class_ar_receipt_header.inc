@@ -98,37 +98,14 @@ class ar_receipt_header extends dbObject {
   'description',
   'document_date',
   'document_number',
-  'ledger_id',
-  'period_id',
-  'pay_group',
-  'receipt_method',
-  'approval_status',
-  'receipt_status',
- ];
- public $column = [
-  'ar_receipt_header_id',
-  'bu_org_id',
-  'receipt_number',
-  'ar_customer_id',
-  'from_bank_header_id',
-  'description',
-  'document_date',
-  'document_number',
-  'ledger_id',
-  'period_id',
-  'pay_group',
   'gl_journal_header_id',
   'receipt_method',
   'approval_status',
   'receipt_status',
-  'header_amount',
-  'currency',
-  'doc_currency',
  ];
  public $requiredField = [
   'bu_org_id',
   'ar_receipt_source_id',
-  'currency',
   'ledger_id',
   'period_id'
  ];
@@ -144,6 +121,9 @@ class ar_receipt_header extends dbObject {
  ];
  public $notUpdatedFromWebForm = [
   'gl_journal_header_id',
+ ];
+ public $fields_inDataBase_notInForm = [
+  'currency'
  ];
  public $profile_default = [
   'exchange_rate_type' => 'gl_currency_conversion_type',
@@ -205,29 +185,30 @@ class ar_receipt_header extends dbObject {
  private $_max_line_num;
  public $lines_from_transaction_header = false;
 
- public function __set($name, $value) {
-  switch ($value) {
-   case $value:
-
-
-    break;
-
-   default:
-    $this->$name = $value;
-    break;
+ private function _do_initial_defaults() {
+  global $dbc;
+  $fin_details = org::find_financial_details_from_orgId($this->bu_org_id);
+  if ($fin_details) {
+   $this->currency = $fin_details->currency_code;
+  } else {
+   $dbc->rollback = true;
+   echo "<br>Setup in complete. No currency found. Error @ " . __FILE__ . ' @@ line ' . __LINE__;
   }
  }
 
  public function _before_save() {
+  if (empty($this->ar_receipt_header_id) && !empty($this->bu_org_id)) {
+   $this->_do_initial_defaults();
+  }
+
   if (($this->receipt_action == 'REVERSE')) {
-   pa($this);
    return -90;
   }
   if (($this->action == 'confirm_receipt')) {
    $this->_confirm_receipt();
    return 10;
   }
-  if ((!empty($this->ar_receipt_header_id)) && ($this->action === 'create_accounting')) {
+  if ((!empty($this->ar_receipt_header_id)) && ($this->action === 'CREATE_ACCOUNT')) {
    $this->findBy_id($this->ar_receipt_header_id);
 
    //if journal header id excists then save journal lines only else first header & then lines
@@ -583,7 +564,7 @@ class ar_receipt_header extends dbObject {
      $arth->save();
     } else {
      $dbc->rollback = 1;
-     echo "<br>Receipt amount is less than Zero (".$arth->receipt_amount .".) Error @ ar_receipt_header @@ line " . ' '  . __LINE__;
+     echo "<br>Receipt amount is less than Zero (" . $arth->receipt_amount . ".) Error @ ar_receipt_header @@ line " . ' ' . __LINE__;
      return;
     }
    }

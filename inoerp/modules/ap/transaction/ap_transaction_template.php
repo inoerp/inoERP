@@ -30,15 +30,21 @@
       <li><?php $f->l_select_field_from_object('transaction_type', ap_transaction_header::transaction_types(), 'option_line_code', 'option_line_value', $ap_transaction_header->transaction_type, 'transaction_type', '', 1, $readonly1); ?>       </li>
       <li><?php $f->l_date_fieldFromToday_d('document_date', $$class->document_date) ?>              </li>
       <li><?php $f->l_text_field_d('document_number') ?>      </li>
-      <li><?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
-       <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supplier_id select_popup clickable">
-        <?php echo gettext('Supplier Name') ?></label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> </li>
-      <li><label class="auto_complete"><?php echo gettext('Supplier Number') ?></label><?php $f->text_field_d('supplier_number'); ?></li>
+      <li><?php
+       echo $f->l_val_field_dm('supplier_name', 'supplier', 'supplier_name', '', 'supplier_name', 'vf_select_supplier_name');
+       echo $f->hidden_field_withId('supplier_id', $$class->supplier_id);
+       ?><i class="generic g_select_supplier_name select_popup clickable fa fa-search" data-class_name="supplier"></i></li>
+      <li><?php
+       echo $f->l_val_field_d('supplier_number', 'supplier', 'supplier_number', '', '', 'vf_select_supplier_number');
+       ?><i class="generic g_select_supplier_number select_popup clickable fa fa-search" data-class_name="supplier"></i></li>
       <li><label>Supplier Site</label><?php
        $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
        echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
        ?> </li>
-      <li><?php $f->l_text_field_d('document_owner'); ?>    </li> 
+      <li><?php 
+       echo $f->l_val_field_d('document_owner', 'hr_employee_v', 'employee_name', '', 'vf_select_document_owner employee_name');
+       echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id);
+       ?><i class="generic g_select_document_owner select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
       <li><?php $f->l_select_field_from_array('transaction_status', ap_transaction_header::$transaction_status_a, $$class->transaction_status, 'transaction_status', 'dont_copy', '', '', $readonly); ?>      </li> 
       <li><?php $f->l_text_field_d('description'); ?>       </li> 
      </ul>
@@ -47,7 +53,7 @@
      <div> 
       <ul class="column header_field">
        <li><?php $f->l_select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', '', 1, $readonly); ?></li>
-       <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, 1); ?></li>
+       <li><?php $f->l_select_field_from_object('ledger_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', 'currency', 1, 1); ?></li>
        <li><?php $f->l_select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
        <li><?php $f->l_number_field('exchange_rate', $$class->exchange_rate, '', 'exchange_rate'); ?> </li>
        <li><?php $f->l_number_field('header_amount', $$class->header_amount, '15', 'header_amount'); ?></li>
@@ -90,13 +96,13 @@
       <ul class="column five_column">
        <li><label>Action</label>
         <?php
-        echo $f->select_field_from_array('transaction_action', $$class->action_a, '', 'transaction_action', '', '', $readonly, $action_readonly)
+        echo $f->select_field_from_array('transaction_action', $$class->action_a, '', 'transaction_action', 'action', '', $readonly, $action_readonly)
         ?>
        </li>
-<!--       <li id="document_print"><label>Document Print : </label>
-        <a class="button" target="_blank"
-           href="po_print.php?ap_transaction_header_id=<?php // echo!(empty($$class->ap_transaction_header_id)) ? $$class->ap_transaction_header_id : ""; ?>" >Transaction</a>
-       </li>-->
+       <!--       <li id="document_print"><label>Document Print : </label>
+               <a class="button" target="_blank"
+                  href="po_print.php?ap_transaction_header_id=<?php // echo!(empty($$class->ap_transaction_header_id)) ? $$class->ap_transaction_header_id : "";    ?>" >Transaction</a>
+              </li>-->
       </ul>
 
       <div id="comment" class="shoe_comments">
@@ -151,15 +157,16 @@
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('ap_transaction_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
-         <td><?php echo $f->select_field_from_object('line_type', ap_transaction_line::ap_transaction_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, '', 'line_type', '', $readonly); ?></td>
+         <td><?php echo $f->select_field_from_object('line_type', ap_transaction_line::ap_transaction_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, '', 'line_type', '', $f->readonly2, $f->readonly2); ?></td>
          <td><?php
-          echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
-          form::text_field_wid2('item_number', 'select_item_number');
+          $f->val_field_wid2('item_number', 'item', 'item_number', 'receving_org_id');
+          echo $f->hidden_field_withCLass('item_id_m', $$class_second->item_id_m,'dont_copy_r');
+          echo $f->hidden_field_withCLass('invoiceable_cb', '1', 'popup_value');
           ?>
-          <i class="select_item_number select_popup clickable fa fa-search"></i></td>
+          <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
          <td><?php $f->text_field_wid2('item_description'); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', '', $readonly); ?></td>
-         <td><?php echo $f->number_field('inv_line_quantity', $$class_second->inv_line_quantity, '', '', '', '', $readonly1); ?></td>
+         <td><?php echo $f->number_field('inv_line_quantity', $$class_second->inv_line_quantity, '', '', 'small', '', $readonly1); ?></td>
          <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i>
           <!--</td></tr>-->	
           <?php
@@ -177,7 +184,7 @@
           ?>
                                   <!--						 <tr><td>-->
           <div class="class_detail_form">
-           <fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
+           <fieldset class="form_detail_data_fs">
             <div class="tabsDetail">
              <ul class="tabMain">
               <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>">Basic</a></li>
@@ -301,7 +308,7 @@
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php echo $f->number_field('inv_unit_price', $$class_second->inv_unit_price); ?></td>
          <td><?php echo $f->number_field('inv_line_price', $$class_second->inv_line_price); ?></td>
-         <td><?php echo $f->select_field_from_object('tax_code_id', mdm_tax_code::find_all_inTax_by_bu_org_id($$class->bu_org_id), 'mdm_tax_code_id', 'tax_code', $$class_second->tax_code_id, '', 'input_tax medium', '', $readonly1, '', '', '', 'percentage') ?></td>
+         <td><?php echo $f->select_field_from_object('tax_code_id', mdm_tax_code::find_all_inTax_by_bu_org_id($$class->bu_org_id), 'mdm_tax_code_id', 'tax_code', $$class_second->tax_code_id, '', 'input_tax medium', '', $readonly, '', '', '', 'percentage') ?></td>
          <td><?php echo $f->number_field('tax_amount', $$class_second->tax_amount); ?></td>
          <td><?php form::number_field_wid2('gl_inv_line_price'); ?></td>
          <td><?php form::number_field_wid2('gl_tax_amount'); ?></td>
@@ -418,6 +425,6 @@
   <li class="btn1DivId" data-btn1DivId="ap_transaction_header" ></li>
   <li class="btn2DivId" data-btn2DivId="form_line" ></li>
   <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>
-  <li class="noOfTabbs" data-noOfTabbs="3" ></li>
+  <li class="noOfTabbs" data-noOfTabbs="4" ></li>
  </ul>
 </div>

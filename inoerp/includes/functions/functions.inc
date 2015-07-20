@@ -240,10 +240,10 @@ function ino_protocol() {
  return $protocol;
 }
 
-function ino_validate_num($num){
- if(is_numeric(trim($num))){
+function ino_validate_num($num) {
+ if (is_numeric(trim($num))) {
   return $num;
- }else{
+ } else {
   return false;
  }
 }
@@ -1437,28 +1437,27 @@ function show_download_button_inSelectFormat($result_data_query, $total_count = 
  $return_stmt .= '<li>';
  $result_data_all = json_decode(json_encode($result_data_query), true);
  $return_stmt .= '<form action="' . HOME_URL . 'download.php"  method="POST" name="download_all" id="download_all" target="_blank">';
- if(!empty($data_type)){
+ if (!empty($data_type)) {
   $return_stmt .= '<input type="hidden"  name="data" value="' . base64_encode(serialize($result_data_all)) . '" >';
-  $return_stmt .= '<input type="hidden"  name="data_type" value="'.$data_type.'" >';
- }else{
+  $return_stmt .= '<input type="hidden"  name="data_type" value="' . $data_type . '" >';
+ } else {
   $return_stmt .= '<input type="hidden"  name="data" value="' . base64_encode(serialize($result_data_all)) . '" >';
  }
- 
+
  $return_stmt .= $f->select_field_from_array('download_format', dbObject::$download_format, 'excel_format');
  $return_stmt .= '<input type="submit"  role="button" name="export_allResult" value="Download" id="export_excel_allResult" class="clickable btn btn-sm btn-default"  >';
  $return_stmt .= '</form></li>';
  $return_stmt .= '<li id="export_excel_searchResult" class="clickable"><i class="fa fa-file-excel-o"></i></li>
   <li id="print_searchResult" class="print clickable" title="Print"><i class="fa fa-print"></i></li>';
- if(!empty($total_count)){
-      $return_stmt .= '  <li><button class="btn btn-primary" type="button">Accessible Records<span class="badge">'.$total_count.'</span></button></li>
-    <li><button class="btn btn-warning" type="button">Total Records <span class="badge">'.$total_count_all.'</span></button></li>';
+ if (!empty($total_count)) {
+  $return_stmt .= '  <li><button class="btn btn-primary" type="button">Accessible Records<span class="badge">' . $total_count . '</span></button></li>
+    <li><button class="btn btn-warning" type="button">Total Records <span class="badge">' . $total_count_all . '</span></button></li>';
  }
 
-$return_stmt .='</ul>
+ $return_stmt .='</ul>
 </div>';
  return $return_stmt;
 }
-
 
 function xxshow_download_button_inSelectFormat($result_data, $total_count = 0, $total_count_all = 0) {
  global $f;
@@ -1861,6 +1860,14 @@ function ino_noOfItems_inCart() {
  } else {
   return 0;
  }
+}
+
+function ino_showWarning_message($msg) {
+ 
+ echo '<div class="alert alert-danger alert-dismissible" role="alert">
+       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+ echo gettext($msg) ;
+ echo '</div>';
 }
 
 function update_htaccessFile() {

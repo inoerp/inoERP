@@ -20,39 +20,39 @@ inoERP
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-      <ul class="column header_field">
-       <li><?php $f->l_text_field_dr_withSearch('sd_quote_header_id') ?>
-        <a name="show" href="form.php?class_name=sd_quote_header&<?php echo "mode=$mode"; ?>" class="show document_id sd_quote_header_id">
-         <i class='fa fa-refresh'></i></a> 
-       </li>
-       <li><?php $f->l_text_field_d('quote_number', 'primary_column2'); ?></li>
-       <li><?php $f->l_text_field_dr('sd_opportunity_id'); ?>						 </li>
-       <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?><label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup clickable">
-         <?php echo gettext('Customer Name') ?></label><?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
-       <li><label class="auto_complete"><?php echo gettext('Customer Number') ?></label><?php $f->text_field_d('customer_number'); ?></li>
-       <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
-       <li><label><?php echo gettext('Status') ?></label><span class="button"><?php echo!empty($$class->quote_status) ? $$class->quote_status : ""; ?></span></li>
-       <li><?php $f->l_checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?></li> 
-       <li><?php $f->l_text_field_d('rev_number'); ?> </li> 
-       <li><?php $f->l_text_field_d('description'); ?></li> 
-      </ul>
+     <ul class="column header_field">
+      <li><?php $f->l_text_field_dr_withSearch('sd_quote_header_id') ?>
+       <a name="show" href="form.php?class_name=sd_quote_header&<?php echo "mode=$mode"; ?>" class="show document_id sd_quote_header_id">
+        <i class='fa fa-refresh'></i></a> 
+      </li>
+      <li><?php $f->l_text_field_d('quote_number', 'primary_column2'); ?></li>
+      <li><?php $f->l_text_field_dr('sd_opportunity_id'); ?>						 </li>
+      <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?><label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup clickable">
+        <?php echo gettext('Customer Name') ?></label><?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
+      <li><label class="auto_complete"><?php echo gettext('Customer Number') ?></label><?php $f->text_field_d('customer_number'); ?></li>
+      <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
+      <li><label><?php echo gettext('Status') ?></label><span class="button"><?php echo!empty($$class->quote_status) ? $$class->quote_status : ""; ?></span></li>
+      <li><?php $f->l_checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?></li> 
+      <li><?php $f->l_text_field_d('rev_number'); ?> </li> 
+      <li><?php $f->l_text_field_d('description'); ?></li> 
+     </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
-      <ul class="column header_field">
-       <li><?php $f->l_select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', 'currency', 1, $readonly); ?>						 </li>
-       <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly1); ?>						 </li>
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_employee_name select_popup clickable">
-         <?php echo gettext('Sales Person') ?></label><?php $f->text_field_d('sales_person_employee_name'); ?>
-        <?php echo $f->hidden_field_withId('sales_person_employee_id', $$class->sales_person_employee_id); ?>
-       </li>
-       <li><?php $f->l_select_field_from_object('price_list_header_id', mdm_price_list_header::find_all(), 'mdm_price_list_header_id', 'price_list', $$class->price_list_header_id); ?>		 </li>
-       <li><?php $f->l_text_field_d('exchange_rate_type'); ?></li>
-       <li><?php $f->l_number_field_d('exchange_rate'); ?></li>
-       <li><?php $f->l_number_field_d('header_amount'); ?></li>
-       <li><?php $f->l_number_field_d('tax_amount'); ?></li>
-       <li><?php $f->l_text_field_d('new_customer_name'); ?></li> 
-       <li><label><?php echo gettext('New Customer Address') ?></label><?php echo $f->text_area('new_customer_address', $$class->new_customer_address); ?></li> 
-      </ul>
+     <ul class="column header_field">
+      <li><?php $f->l_select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', 'currency', 1, $readonly); ?>						 </li>
+      <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly1); ?>						 </li>
+      <li><?php
+       echo $f->l_val_field_d('sales_person', 'hr_employee_v', 'employee_name', '', 'vf_select_document_owner employee_name');
+       echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id);
+       ?><i class="generic g_select_document_owner select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
+      <li><?php $f->l_select_field_from_object('price_list_header_id', mdm_price_list_header::find_all(), 'mdm_price_list_header_id', 'price_list', $$class->price_list_header_id); ?>		 </li>
+      <li><?php $f->l_text_field_d('exchange_rate_type'); ?></li>
+      <li><?php $f->l_number_field_d('exchange_rate'); ?></li>
+      <li><?php $f->l_number_field_d('header_amount'); ?></li>
+      <li><?php $f->l_number_field_d('tax_amount'); ?></li>
+      <li><?php $f->l_text_field_d('new_customer_name'); ?></li> 
+      <li><label><?php echo gettext('New Customer Address') ?></label><?php echo $f->text_area('new_customer_address', $$class->new_customer_address); ?></li> 
+     </ul>
     </div>
     <div id="tabsHeader-3" class="tabContent">
      <div class="shipto_address"><?php $f->address_field_d('ship_to_id'); ?></div>
@@ -142,10 +142,11 @@ inoERP
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
          <td><?php echo $f->select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->shipping_org_id, '', 'medium', 1, $readonly); ?></td>
          <td><?php
-          echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
-          form::text_field_wid2('item_number', 'select_item_number');
+          $f->val_field_wid2('item_number', 'item', 'item_number', 'shipping_org_id');
+          echo $f->hidden_field_withCLass('item_id_m', $$class_second->item_id_m, 'dont_copy_r');
+          echo $f->hidden_field_withCLass('customer_ordered_cb', '1', 'popup_value');
           ?>
-          <i class="select_item_number select_popup clickable fa fa-search"></i></td>
+          <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
          <td><?php form::text_field_wid2('item_description'); ?></td>
          <td><?php $f->number_field('line_quantity', $$class_second->line_quantity); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small'); ?></td>

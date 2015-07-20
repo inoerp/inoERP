@@ -102,7 +102,9 @@
    'po_header_id',
    'po_line_id',
    'po_detail_id',
-   'po_status'
+   'po_status',
+   'currency',
+   'doc_currency'
   ];
   public $dateField = [
    'need_by_date',
@@ -124,6 +126,7 @@
   public $supplier_site_id;
   public $buyer;
   public $currency;
+  public $doc_currency;
   public $header_amount;
   public $po_status;
   public $payment_term_id;
@@ -178,7 +181,7 @@
    $sql = "
 CREATE OR REPLACE VIEW ap_po_matching_v
 (
-po_header_id, bu_org_id, po_type, po_number, supplier_id, supplier_site_id, buyer, currency, header_amount, po_status,
+po_header_id, bu_org_id, po_type, po_number, supplier_id, supplier_site_id, buyer, currency, doc_currency, header_amount, po_status,
 payment_term_id,
 supplier_name, supplier_number,
 supplier_site_name, supplier_site_number,
@@ -196,7 +199,7 @@ receving_org, created_by, creation_date, last_update_by, last_update_date
 AS
 SELECT 
 po_header.po_header_id, po_header.bu_org_id, po_header.po_type, po_header.po_number, po_header.supplier_id, 
-po_header.supplier_site_id, po_header.buyer, po_header.currency, po_header.header_amount, po_header.po_status,
+po_header.supplier_site_id, po_header.buyer, po_header.currency, po_header.doc_currency, po_header.header_amount, po_header.po_status,
 po_header.payment_term_id,
 supplier.supplier_name, supplier.supplier_number,
 supplier_site.supplier_site_name, supplier_site.supplier_site_number,

@@ -4941,6 +4941,9 @@ $(document).ready(function () {
 
 //tracking unsaved changes
  $('#erp_form_area').on('change', 'form[method="post"] :input', function (e) {
+  if($(this).hasClass('action')){
+   return true;
+  }
   var noof_field_changes = $('#unsaved_fields').data('no_of_fields');
   if (noof_field_changes < 1) {
    $('#unsaved_fields').html('<span role="button" class="btn btn-warning btn-sm unsaved-msg">Unsaved Changes</span>');

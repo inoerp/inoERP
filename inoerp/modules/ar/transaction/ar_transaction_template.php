@@ -176,7 +176,7 @@
          <td><?php echo $f->select_field_from_object('line_type', ar_transaction_line::ar_transaction_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, '', 'line_type', '', $readonly1); ?></td>
          <td><?php
           $f->val_field_wid2('item_number', 'item', 'item_number', '');
-          echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
+          echo $f->hidden_field_withCLass('item_id_m', $$class_second->item_id_m, 'dont_copy_r');
           echo $f->hidden_field_withCLass('customer_ordered_cb', '1', 'popup_value');
           echo $f->hidden_field_withCLass('invoiceable_cb', '1', 'popup_value');
           ?>

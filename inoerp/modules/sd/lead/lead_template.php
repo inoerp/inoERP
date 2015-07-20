@@ -21,19 +21,19 @@ inoERP
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-       <ul class="column header_field"> 
-        <li><?php $f->l_text_field_dr_withSearch('sd_lead_id') ?>
-         <a name="show" href="form.php?class_name=sd_lead&<?php echo "mode=$mode"; ?>" class="show document_id sd_lead_id"><i class="fa fa-refresh"></i></a> 
-        </li>
-        <li><?php $f->l_text_field_dm('lead_number'); ?> 					</li>
-        <li><?php $f->l_text_field_dm('subject'); ?> 					</li>
-        <li><?php $f->l_select_field_from_object('lead_type', sd_lead::lead_type(), 'option_line_code', 'option_line_value', $$class->lead_type, 'lead_type'); ?> 					</li>
-        <li><?php $f->l_select_field_from_array('status', sd_lead::$status_a, $$class->status, 'status', '', '', 1, 1); ?> 					</li>
-        <li><?php $f->l_select_field_from_array('priority', dbObject::$position_array, $$class->priority); ?> 					</li>
-        <li><?php $f->l_text_field_d('referral_source'); ?> 					</li>
-        <li><?php $f->l_select_field_from_object('sales_channel', sd_lead::sales_channel(), 'option_line_code', 'option_line_value', $$class->sales_channel, 'sales_channel'); ?> 					</li>
-        <li><?php $f->l_text_field_d('description'); ?> 					</li>
-       </ul>
+      <ul class="column header_field"> 
+       <li><?php $f->l_text_field_dr_withSearch('sd_lead_id') ?>
+        <a name="show" href="form.php?class_name=sd_lead&<?php echo "mode=$mode"; ?>" class="show document_id sd_lead_id"><i class="fa fa-refresh"></i></a> 
+       </li>
+       <li><?php $f->l_text_field_dm('lead_number'); ?> 					</li>
+       <li><?php $f->l_text_field_dm('subject'); ?> 					</li>
+       <li><?php $f->l_select_field_from_object('lead_type', sd_lead::lead_type(), 'option_line_code', 'option_line_value', $$class->lead_type, 'lead_type'); ?> 					</li>
+       <li><?php $f->l_select_field_from_array('status', sd_lead::$status_a, $$class->status, 'status', '', '', 1, 1); ?> 					</li>
+       <li><?php $f->l_select_field_from_array('priority', dbObject::$position_array, $$class->priority); ?> 					</li>
+       <li><?php $f->l_text_field_d('referral_source'); ?> 					</li>
+       <li><?php $f->l_select_field_from_object('sales_channel', sd_lead::sales_channel(), 'option_line_code', 'option_line_value', $$class->sales_channel, 'sales_channel'); ?> 					</li>
+       <li><?php $f->l_text_field_d('description'); ?> 					</li>
+      </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div class="large_shadow_box"> 
@@ -101,22 +101,22 @@ inoERP
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
-       <ul class="column header_field">
-        <li><label class="auto_complete"><?php echo gettext('Customer Name') ?></label><?php
-         echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id);
-         echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1);
-         ?>
-         <i class="ar_customer_id select_popup clickable fa fa-search"></i></li>
-        <li><label class="auto_complete"><?php echo gettext('Customer Number') ?></label><?php $f->text_field_d('customer_number'); ?></li>
-        <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
+      <ul class="column header_field">
+       <li><label class="auto_complete"><?php echo gettext('Customer Name') ?></label><?php
+        echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id);
+        echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1);
+        ?>
+        <i class="ar_customer_id select_popup clickable fa fa-search"></i></li>
+       <li><label class="auto_complete"><?php echo gettext('Customer Number') ?></label><?php $f->text_field_d('customer_number'); ?></li>
+       <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
        <li><?php $f->l_text_field_d('campaign_id'); ?>	</li>
-        <li><?php $f->l_text_field_d('campaign_os'); ?>	</li>
-        <li><?php $f->l_select_field_from_object('sales_team', hr_team_header::find_all_sales_team(), 'hr_team_header_id', 'team_name', $$class->sales_team, 'sales_team'); ?> 					</li>
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_employee_name select_popup clickable">
-          <?php echo gettext('Primary Sales Person') ?></label><?php $f->text_field_d('sales_person_employee_name'); ?>
-         <?php echo $f->hidden_field_withId('sales_person_employee_id', $$class->sales_person_employee_id); ?>
-        </li>
-       </ul>
+       <li><?php $f->l_text_field_d('campaign_os'); ?>	</li>
+       <li><?php $f->l_select_field_from_object('sales_team', hr_team_header::find_all_sales_team(), 'hr_team_header_id', 'team_name', $$class->sales_team, 'sales_team'); ?> 					</li>
+       <li><?php
+        echo $f->l_val_field_d('sales_person', 'hr_employee_v', 'employee_name', '', 'vf_select_document_owner employee_name');
+        echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id);
+        ?><i class="generic g_select_document_owner select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
+      </ul>
      </div>
      <div id="tabsLine-2" class="tabContent">
       <div class="header_address"><?php $f->address_field_d('address_id'); ?></div>

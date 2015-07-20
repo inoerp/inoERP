@@ -543,15 +543,15 @@ EOD;
   }
   $text_field = '<ul class="column header_field ' . $div_class . '">';
   $text_field .= '<li><label>' . ucwords(str_replace('_', ' ', $field_name)) . '</label>';
-  $text_field .= $this->hidden_field_withIdClass($field_name, $$class->$field_name, 'address_id');
   $field_class_name = $field_name . ' ' . $div_class;
-  $text_field .= $this->text_field('address_name', $field_val, '15', '', $field_class_name, '', 1, '', $ttl);
+  $text_field .= $this->val_field('address_name', $field_val, '15', '', $field_class_name, '', '', 'address', 'address_name');
   $text_field .= '<i class="fa fa-search address_id select_popup clickable"></i></li>';
   if ($show_all_fields) {
    $text_field .= '<li><label>Country</label>' . $this->text_field('xxcountry', $addr->country, '15', '', 'country', '', 1) . '</li>';
    $text_field .= '<li><label>Postal Code</label>' . $this->text_field('xxpostal_code', $addr->postal_code, '15', '', 'postal_code', '', 1) . '</li>';
    $text_field .= '<li><label>Details</label>' . $this->text_area('xxaddress', $addr->address, '3', '', 'address', '', 1) . '</li>';
   }
+  $text_field .= '<li>' . $this->hidden_field_withIdClass($field_name, $$class->$field_name, 'address_id') . '</li>';
   $text_field .= '</ul>';
 
   echo $text_field;

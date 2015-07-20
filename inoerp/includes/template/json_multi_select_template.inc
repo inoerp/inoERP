@@ -112,10 +112,10 @@
                 if (!empty($header_id_value)) {
                  echo "<input type=\"hidden\" name=\"$header_id_name\" class=\"hidden $header_id_name\"  value=\"$header_id_value\">";
                 }
-                echo "<input type=\"hidden\" name=\"action\" class=\"hidden action\"  value=\"$action_message\"></td>";
+                echo "<input type=\"hidden\" name=\"action\" class=\"hidden action\"  value=\"$action_message\">";
                 echo!empty($hidden_field_stmt) ? $hidden_field_stmt : '';
                }
-               echo '<td>'.$records->$primary_column_v.'</td>';
+               echo '</td><td>'.$records->$primary_column_v.'</td>';
                if (!empty($multi_select_tabs) && ($i == $no_of_tabs - 1)) {
 //                 echo $multi_select_tabs;
                 echo $multi_select_tabs['tab_row_content'];

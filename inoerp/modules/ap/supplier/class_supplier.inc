@@ -58,6 +58,13 @@ class supplier extends dbObject {
   "last_update_by",
   "last_update_date"
  ];
+ public static $json_label_fields = [
+  "supplier_number",
+  "supplier_name",
+  "supplier_type",
+  "tax_country",
+  "alt_name",
+ ];
  public $initial_search = [
   "supplier_id",
   "supplier_number",
@@ -340,6 +347,30 @@ FROM supplier su
 LEFT JOIN supplier_site ss ON ss.supplier_id = su.supplier_id
 LEFT JOIN supplier_bu sb ON su.supplier_id = sb.supplier_id
 ";
+ }
+
+ public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
+  $sql = " SELECT supplier_id,   supplier_number,   supplier_name,   ar_customer_id,
+  supplier_type,   tax_country,  supplier_category,
+  status as supplier_status,   alt_name  ";
+
+  $sql .= " FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
+
+//  if(!empty($_GET['hidden_fields']['receving_org_id'])){
+//   $rec_org_id = $_GET['hidden_fields']['receving_org_id'];
+//   $sql .= " AND receving_org_id = '{$rec_org_id}' ";
+//  }
+  if (!empty($dependent_fields)) {
+   foreach ($dependent_fields as $k => $v) {
+    if (!empty($k) && !empty($v)) {
+     $sql .= " AND $k = '{$v}' ";
+    }
+   }
+  }
+  
+  
+  $result_array = static::find_by_sql($sql);
+  return !empty($result_array) ? ($result_array) : false;
  }
 
 }

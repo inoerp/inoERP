@@ -37,7 +37,7 @@ class inosave extends dbObject {
   $coa_id = 1;
 
 
-// pa($this);
+// pa($_POST);
 // pa($_POST[$this->_key_field]);
   for ($i = 0; $i < count($_POST[$this->_key_field]); $i++) {
    $$class = new $class;
@@ -221,7 +221,7 @@ class inosave extends dbObject {
      if ($before_save_result == -99) {
       echo '<br>' . gettext("This action is not allowed") . ' ' . $class . ' : _before_save() ';
      }
-     return;
+     return $before_save_result;
     } else if ($before_save_result == 10) {
 //     echo "<br> All data are Successfully saved @ before save "; //before save completed all activities
      return $$class;
@@ -285,8 +285,8 @@ class inosave extends dbObject {
        $ext_ir->extn_image_id = $extn_image_id_values_v;
        $ext_ir->reference_table = $class;
        $ext_ir->reference_id = $$class->{$class::$primary_column};
-       $ext_ir->img_description1 =$_POST['img_description1'][$extn_image_id_values_k];
-       $ext_ir->img_description2 =$_POST['img_description2'][$extn_image_id_values_k];
+       $ext_ir->img_description1 = $_POST['img_description1'][$extn_image_id_values_k];
+       $ext_ir->img_description2 = $_POST['img_description2'][$extn_image_id_values_k];
        $ext_ir->save();
       }
      }
@@ -448,18 +448,20 @@ class inosave extends dbObject {
    if (empty($$class)) {
     return;
    }
+   if (is_object($$class)) {
+    $$primaryColumn = $$class->$primaryColumn;
+   }
 
-   $$primaryColumn = $$class->$primaryColumn;
-   if ((!empty($$class)) && (count($$class) > 1)) {
+   if ((!empty($$class)) && (count($$class) > 1) && is_object($$class)) {
     echo '<div class="message">' . gettext('Data is Successfully saved') . ' ' . ' </div>';
     echo '<ul id="linids">';
     foreach ($$class as $array) {
-     echo '<li class="lineId" data-trclass="'.$$class->$primaryColumn.'">' . $array->$primaryColumn . '</li>';
+     echo '<li class="lineId" data-trclass="' . $$class->$primaryColumn . '">' . $array->$primaryColumn . '</li>';
     }
     echo '</ul>';
    } elseif (!empty($$class->$primaryColumn)) {
     echo '<div class="message">' . gettext('Transaction complete') . ' ' . '</div>';
-    echo '<div class="lineId" data-trclass="'.$$class->$primaryColumn.'">' . $$class->$primaryColumn . '</div>';
+    echo '<div class="lineId" data-trclass="' . $$class->$primaryColumn . '">' . $$class->$primaryColumn . '</div>';
    } else {
     echo '<div class="message">' . gettext('Transaction complete') . ' ' . '</div>';
    }
@@ -502,7 +504,7 @@ class inosave extends dbObject {
       echo '</ul>';
      } elseif (!empty($$class->$primaryColumn)) {
       echo '<div class="message">' . gettext('Data is Successfully saved') . ' ' . ' </div>';
-      echo '<div class="lineId" data-trclass="'.$$class->$primaryColumn.'">' . $$class->$primaryColumn . '</div>';
+      echo '<div class="lineId" data-trclass="' . $$class->$primaryColumn . '">' . $$class->$primaryColumn . '</div>';
      } else {
       echo ' Error code:  ! ';
      }

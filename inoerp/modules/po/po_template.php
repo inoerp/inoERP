@@ -32,21 +32,27 @@ inoERP
        <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>        </li>
        <li><?php $f->l_select_field_from_array('po_type', po_header::$po_type_a, $$class->po_type, 'po_type', '', 1, $readonly1, $readonly1); ?>        </li>
        <li><?php $f->l_text_field_d('po_number', 'primary_column2'); ?> </li>
-       <li><?php $f->l_text_field_d('release_number'); ?></li>
-       <li><?php $f->l_select_field_from_object('status', po_header::po_status(), 'option_line_code', 'option_line_value', $$class->po_status, 'po_status', 'dont_copy', '', 1); ?></li>
-       <li><?php echo $f->hidden_field_withId('ref_po_header_id', $$class->ref_po_header_id); ?>
-        <?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
-        <label><?php echo gettext('Supplier Name') ?></label>
-        <?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> 
-        <i class="fa fa-search supplier_id select_popup clickable"></i>
+       <li><?php $f->l_text_field_d('release_number'); ?>
+        <?php echo $f->hidden_field_withId('ref_po_header_id', $$class->ref_po_header_id); ?>
        </li>
-       <li><?php $f->l_text_field_d('supplier_number'); ?></li>
+       <li><?php $f->l_select_field_from_object('status', po_header::po_status(), 'option_line_code', 'option_line_value', $$class->po_status, 'po_status', 'dont_copy', '', 1); ?></li>
+       <li><?php
+        echo $f->l_val_field_dm('supplier_name', 'supplier', 'supplier_name', '', 'supplier_name', 'vf_select_supplier_name');
+        echo $f->hidden_field_withId('supplier_id', $$class->supplier_id);
+        ?><i class="generic g_select_supplier_name select_popup clickable fa fa-search" data-class_name="supplier"></i></li>
+       <li><?php
+        echo $f->l_val_field_d('supplier_number', 'supplier', 'supplier_number', '', '', 'vf_select_supplier_number');
+        ?><i class="generic g_select_supplier_number select_popup clickable fa fa-search" data-class_name="supplier"></i></li>
        <li><label><?php echo gettext('Supplier Site') ?></label><?php
         $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
         echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
         ?> </li>
        <li><?php $f->l_text_field_d('rev_number'); ?></li> 
        <li><?php $f->l_checkBox_field_d('multi_bu_cb'); ?></li> 
+       <li><?php
+        echo $f->l_val_field_d('buyer', 'hr_employee_v', 'employee_name', '', 'vf_select_document_owner employee_name');
+        echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id);
+        ?><i class="generic g_select_document_owner select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
        <li><?php $f->l_text_field_d('buyer'); ?></li> 
        <li><?php $f->l_text_field_d('description'); ?></li> 
       </ul>
@@ -57,7 +63,7 @@ inoERP
         <li><?php $f->l_date_fieldFromToday('agreement_start_date', $$class->agreement_start_date) ?></li>
         <li><?php $f->l_date_fieldFromToday('agreement_end_date', $$class->agreement_start_date) ?></li>
         <li><?php $f->l_select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', '', 1, $readonly); ?></li>
-        <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', 'always_readonly', 1, 1); ?></li>
+        <li><?php $f->l_select_field_from_object('ledger_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', 'currency', 1, 1); ?></li>
         <li><?php $f->l_select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
         <li><?php $f->l_number_field('exchange_rate', $$class->exchange_rate, '', 'exchange_rate', '', 1, $readonly); ?> </li>
         <li><?php $f->l_select_field_from_object('price_list_header_id', mdm_price_list_header::find_all_purchasing_pl(), 'mdm_price_list_header_id', 'price_list', $$class->price_list_header_id); ?></li>
@@ -137,11 +143,11 @@ inoERP
          <th><?php echo gettext('Seq') ?>#</th>
          <th><?php echo gettext('Line Id') ?></th>
          <th><?php echo gettext('Line') ?>#</th>
-         <th><?php echo gettext('Receiving Org') ?></th>
+         <th><?php echo gettext('Receiving') ?></th>
          <th><?php echo gettext('Type') ?></th>
          <th><?php echo gettext('Item Number') ?></th>
          <th><?php echo gettext('Revision') ?></th>
-         <th><?php echo gettext('Item Description') ?></th>
+         <th><?php echo gettext('Description') ?></th>
          <th><?php echo gettext('Quantity') ?></th>
          <th><?php echo gettext('UOM') ?></th>
          <th><?php echo gettext('Shipments') ?></th>
@@ -164,11 +170,12 @@ inoERP
           <td><?php echo $f->select_field_from_object('receving_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->receving_org_id, '', 'org_id copyValue', 1, $readonly); ?></td>
           <td><?php echo $f->select_field_from_object('line_type', po_line::po_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, '', 'copyValue', 1, $readonly); ?></td>
           <td><?php
-           echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
-           form::text_field_wid2('item_number', 'select_item_number');
+           $f->val_field_wid2('item_number', 'item', 'item_number', 'receving_org_id');
+           echo $f->hidden_field_withCLass('item_id_m', $$class_second->item_id_m,'dont_copy_r');
+           echo $f->hidden_field_withCLass('purchased_cb', '1', 'popup_value');
            echo $f->hidden_field('processing_lt', '');
            ?>
-           <i class="select_item_number select_popup clickable fa fa-search"></i></td>
+           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
           <td><?php
            if (!empty($$class_second->item_id_m) && !empty($$class_second->receving_org_id)) {
             $revision_name_a = inv_item_revision::find_by_itemIdM_orgId($$class_second->item_id_m, $$class_second->receving_org_id);
@@ -209,7 +216,6 @@ inoERP
        </thead>
        <tbody class="form_data_line_tbody">
         <?php
-        
         $count = 0;
         foreach ($po_line_object as $po_line) {
          ?>         

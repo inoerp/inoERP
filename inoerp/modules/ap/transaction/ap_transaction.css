@@ -1,11 +1,14 @@
 #ap_transaction_line .class_detail_form{
-margin-left: -810px;
+margin-left: -774px;
 }
-
 
 #ap_transaction_line .form_detail_data_fs{
-  width: 900px;
+  width: 774px;
 }
+#ap_transaction_line .class_detail_form{
+margin-top: 24px;
+}
+
 
 td.blank{
     border: none;

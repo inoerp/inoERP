@@ -40,7 +40,7 @@
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div class="large_shadow_box"> 
-      <ul class="column five_column">
+      <ul class="column header_field">
        <li><?php echo $f->l_text_field_dr('item_id_m'); ?> </li>
       </ul>
       <?php echo!(empty($assigned_inventory_statement)) ? $assigned_inventory_statement : ""; ?>
@@ -79,7 +79,7 @@
             ?>         
             <tr class="inv_item_revision<?php echo $count ?>">
              <td>
-              <?php
+              <?php 
               echo ino_inline_action($inv_item_revision->inv_item_revision_id, '');
               ?>
              </td>
@@ -95,10 +95,10 @@
                $f->text_field_wid2('eco_number');
               }
               ?></td>
-             <td><?php echo ($reaonly_ir == true) ? $f->date_fieldAnyDay_r('effective_start_date', $$class_second->effective_start_date, 1) : $f->date_fieldAnyDay('effective_start_date', $$class_second->effective_start_date); ?></td>
-             <td><?php echo ($reaonly_ir == true) ? $f->date_fieldAnyDay('effective_end_date', $$class_second->effective_end_date, 1) : $f->date_fieldAnyDay('effective_end_date', $$class_second->effective_end_date); ?></td>
-             <td><?php echo ($reaonly_ir == true) ? $f->date_fieldAnyDay_r('implementation_date', $$class_second->implementation_date, 1) : $f->date_fieldAnyDay('implementation_date', $$class_second->implementation_date); ?></td>
-             <td><?php echo ($reaonly_ir == true) ? $f->date_fieldAnyDay_r('origination_date', $$class_second->origination_date, 1) : $f->date_fieldAnyDay('origination_date', $$class_second->origination_date); ?></td>
+             <td><?php echo ($reaonly_ir == true) ? $f->date_fieldAnyDay_r('effective_start_date', $$class_second->effective_start_date, 1) : $f->date_fieldAnyDay('effective_start_date', $$class_second->effective_start_date,'small'); ?></td>
+             <td><?php echo ($reaonly_ir == true) ? $f->date_fieldAnyDay('effective_end_date', $$class_second->effective_end_date, 'small') : $f->date_fieldAnyDay('effective_end_date', $$class_second->effective_end_date,'small'); ?></td>
+             <td><?php echo ($reaonly_ir == true) ? $f->date_fieldAnyDay_r('implementation_date', $$class_second->implementation_date, 1) : $f->date_fieldAnyDay('implementation_date', $$class_second->implementation_date,'small'); ?></td>
+             <td><?php echo ($reaonly_ir == true) ? $f->date_fieldAnyDay_r('origination_date', $$class_second->origination_date, 1) : $f->date_fieldAnyDay('origination_date', $$class_second->origination_date,'small'); ?></td>
             </tr>
             <?php
             $count = $count + 1;
@@ -184,7 +184,7 @@
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">
      <div class="first_rowset"> 
-      <ul class="column five_column"> 
+      <ul class="column header_field"> 
        <li><?php $f->l_select_field_from_object('item_type', item::item_types(), 'option_line_code', 'option_line_value', $item->item_type, 'item_type', '', 1, $readonly); ?>       </li> 
        <li><?php echo $f->l_select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->uom_id, 'uom_id', '', 1, $readonly); ?>       </li>
        <li><?php echo $f->l_number_field('product_line_percentage', $$class->product_line_percentage, '8'); ?></li>

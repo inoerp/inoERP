@@ -12,7 +12,7 @@ class ap_transaction_all_v extends dbObject {
   'transaction_number',
   'supplier_id',
   'supplier_site_id',
-  'document_owner',
+  'hr_employee_id',
   'currency',
   'header_amount',
   'transaction_status',
@@ -80,7 +80,7 @@ class ap_transaction_all_v extends dbObject {
  public $transaction_number;
  public $supplier_id;
  public $supplier_site_id;
- public $document_owner;
+ public $hr_employee_id;
  public $currency;
  public $header_amount;
  public $paid_amount;
@@ -127,7 +127,7 @@ class ap_transaction_all_v extends dbObject {
   $sql = "
 CREATE OR REPLACE VIEW ap_transaction_all_v
 (
-ap_transaction_header_id, bu_org_id, transaction_type, transaction_number, supplier_id, supplier_site_id, document_owner, currency, 
+ap_transaction_header_id, bu_org_id, transaction_type, transaction_number, supplier_id, supplier_site_id, hr_employee_id, currency, 
 header_amount, transaction_status, payment_term_id, paid_amount, payment_status,
 supplier_name, supplier_number,
 supplier_site_name, supplier_site_number,
@@ -143,7 +143,7 @@ AS
 SELECT 
 ap_transaction_header.ap_transaction_header_id, ap_transaction_header.bu_org_id, ap_transaction_header.transaction_type, ap_transaction_header.transaction_number,
 ap_transaction_header.supplier_id, 
-ap_transaction_header.supplier_site_id, ap_transaction_header.document_owner, ap_transaction_header.currency, ap_transaction_header.header_amount, ap_transaction_header.transaction_status,
+ap_transaction_header.supplier_site_id, ap_transaction_header.hr_employee_id, ap_transaction_header.currency, ap_transaction_header.header_amount, ap_transaction_header.transaction_status,
 ap_transaction_header.payment_term_id, ap_transaction_header.paid_amount, ap_transaction_header.payment_status,
 supplier.supplier_name, supplier.supplier_number,
 supplier_site.supplier_site_name, supplier_site.supplier_site_number,

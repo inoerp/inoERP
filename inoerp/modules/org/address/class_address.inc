@@ -77,6 +77,17 @@ class address extends dbObject {
 		 "tax_region_name",
    'window_type'
  ];
+  
+   public static $json_label_fields = [
+ "address_name",
+		 "type",
+		 "description",
+		 "phone",
+		 "email",
+		 "website",
+		 "country",
+		 "postal_code"
+ ];
 	
    public $search = [
 		 '_update_path' => 'form.php?class_name=address',

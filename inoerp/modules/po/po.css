@@ -1,10 +1,14 @@
 #po_line .class_detail_form{
-margin-left: -688px;
+margin-left: -822px;
 }
 
 
 #po_divId .form_detail_data_fs{
-  width: 870px;
+  width: 820px;
+}
+
+#po_divId .class_detail_form{
+margin-top: 24px;
 }
 
 

@@ -51,7 +51,7 @@ class sd_quote_header extends dbObject {
   'new_customer_address',
   'ar_customer_id',
   'ar_customer_site_id',
-  'sales_person_employee_id',
+  'hr_employee_id',
   'status',
   'approval_status',
   'description',
@@ -81,7 +81,6 @@ class sd_quote_header extends dbObject {
   "sd_quote_header_id",
   "quote_number",
   "ar_customer_id",
-  "sales_person_employee_id"
  ];
  public $requiredField = [
   'ar_customer_id',
@@ -112,8 +111,8 @@ class sd_quote_header extends dbObject {
   'bill_to_address',
   'bill_to_country',
   'bill_to_postal_code',
-  'sales_person_employee_name',
-  'action'
+  'action',
+  'sales_person'
  ];
  public $numberField = [
   'sd_quote_header_id',
@@ -147,7 +146,7 @@ class sd_quote_header extends dbObject {
  public $new_customer_address;
  public $ar_customer_id;
  public $ar_customer_site_id;
- public $sales_person_employee_id;
+ public $hr_employee_id;
  public $status;
  public $approval_status;
  public $description;
@@ -192,7 +191,7 @@ class sd_quote_header extends dbObject {
  public $bill_to_address;
  public $bill_to_country;
  public $bill_to_postal_code;
- public $sales_person_employee_name;
+ public $sales_person;
  public $action;
 
  public function _before_showing() {

@@ -21,13 +21,24 @@ $(document).ready(function () {
  classSave.single_line = false;
  classSave.line_key_field = line_key_field;
  classSave.lineClassName = action_class;
- classSave.savingOnlyHeader = true;
+ classSave.savingOnlyHeader = false;
  classSave.headerClassName = action_class;
+ classSave.form_line_id = 'form_line';
  var actionValue = $('.action').first().val();
- if ((actionValue === 'convert_requisition') || 'sales_order_picking' || 'multi_receipt' || 'po_receipt'
-         || 'import_ar_transaction') {
-  classSave.allLineTogether = true;
+ switch (actionValue) {
+  case 'convert_requisition' :
+  case 'sales_order_picking' :
+  case 'multi_receipt' :
+  case 'po_receipt' :
+  case 'import_ar_transaction' :
+   classSave.allLineTogether = true;
+   break;
+
+  default :
+   classSave.allLineTogether = false;
+   break
  }
  classSave.saveMain(beforeSave);
+
 
 });

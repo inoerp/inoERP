@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -13,7 +14,6 @@
  * Contains all the po header level information, such as - Supplier, Document Type, Currency, Addresses
  * Same for standard, blanket & planned POs
  */
-
 class po_header extends dbObject {
 
  public static $table_name = "po_header";
@@ -68,6 +68,7 @@ class po_header extends dbObject {
   'supplier_id',
   'supplier_site_id',
   'buyer',
+  'hr_employee_id',
   "description",
   'ship_to_id',
   'bill_to_id',
@@ -106,13 +107,11 @@ class po_header extends dbObject {
   "supplier_site_name",
   "buyer"
  ];
-
  public $requiredField = [
   'supplier_id',
   'supplier_site_id',
   'ship_to_id',
   'bill_to_id',
-  'currency',
   'payment_term_id'
  ];
  public $addressField = [
@@ -152,6 +151,11 @@ class po_header extends dbObject {
   'bill_to_country',
   'bill_to_postal_code',
  ];
+ 
+ public $fields_inDataBase_notInForm = [
+  'currency'
+ ];
+ 
  public $search = [
   '_show_update_path' => 1,
   '_update_action_meassge' => 'Update PO',
@@ -174,6 +178,7 @@ class po_header extends dbObject {
  public $supplier_id;
  public $supplier_site_id;
  public $buyer;
+ public $hr_employee_id;
  public $description;
  public $ship_to_id;
  public $bill_to_id;
@@ -244,6 +249,10 @@ class po_header extends dbObject {
    echo "<br> saving before PO SAVE";
    $this->_convert_requisition_toPO();
    return 10;
+  }
+
+  if (empty($this->po_header_id) && !empty($this->bu_org_id)) {
+   $this->_do_initial_defaults();
   }
  }
 

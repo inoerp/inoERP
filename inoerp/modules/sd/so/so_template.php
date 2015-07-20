@@ -6,10 +6,7 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php
-  $f = new inoform();
-  echo gettext('Sales Order / RMA Header')
-  ?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Sales Order / RMA Header') ?></span>
  <form action=""  method="post" id="sd_so_header"  name="sd_so_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -46,7 +43,10 @@ inoERP
      <ul class="column header_field">
       <li><?php $f->l_checkBox_field_d('rev_enabled_cb'); ?></li> 
       <li><?php $f->l_text_field_d('rev_number'); ?> </li> 
-      <li><?php $f->l_text_field_d('sales_person'); ?></li> 
+      <li><?php
+       echo $f->l_val_field_d('sales_person', 'hr_employee_v', 'employee_name', '', 'vf_select_document_owner employee_name');
+       echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id);
+       ?><i class="generic g_select_document_owner select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
       <li><?php $f->l_text_field_d('description'); ?></li> 
       <li><?php $f->l_text_field_dr('order_reference_id'); ?> </li> 
       <li><?php $f->l_text_field_dr('order_reference_table'); ?></li> 
@@ -160,7 +160,7 @@ inoERP
          <td><?php echo $f->select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->shipping_org_id, '', '', 1, $readonly); ?></td>
          <td><?php
           $f->val_field_wid2('item_number', 'item', 'item_number', 'shipping_org_id');
-          echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
+          echo $f->hidden_field_withCLass('item_id_m', $$class_second->item_id_m,'dont_copy_r');
           echo $f->hidden_field_withCLass('customer_ordered_cb', '1', 'popup_value');
           ?>
           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>

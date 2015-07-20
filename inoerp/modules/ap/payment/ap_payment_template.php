@@ -82,12 +82,6 @@
         echo $f->select_field_from_array('payment_action', $$class->action_a, '', 'payment_action', '', '', $readonly, $readonly)
         ?>
        </li>
-       <li id="copy_header"><label>Copy Document : </label>
-        <input type="button" class="button" id="copy_docHeader" value="Header">
-       </li>
-       <li id="copy_line"><label></label>
-        <input type="button" class="button" id="copy_docLine" value="Lines">
-       </li>
       </ul>
      </div>
     </div>

@@ -98,6 +98,20 @@ class ar_transaction_header extends dbObject {
   'last_update_by',
   'last_update_date'
  ];
+ public static $json_label_fields = [
+  'transaction_number',
+  'ar_transaction_header_id',
+  'bu_org_id',
+  'transaction_type',
+  'transaction_class',
+  'ar_customer_id',
+  'ar_customer_site_id',
+  'document_owner',
+  'header_amount',
+  'receipt_amount',
+  'tax_amount',
+  'doc_currency',
+ ];
  public $profile_default = [
   'exchange_rate_type' => 'gl_currency_conversion_type',
   'bu_org_id' => 'org_bu_name_default'
@@ -147,6 +161,10 @@ class ar_transaction_header extends dbObject {
  public $numberField = [
   'header_amount'
  ];
+  public $fields_inDataBase_notInForm = [
+  'currency'
+ ];
+ 
  public $search = [
   '_show_update_path' => 1,
   '_update_action_meassge' => 'Update',

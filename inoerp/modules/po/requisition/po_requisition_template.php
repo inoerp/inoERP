@@ -77,7 +77,7 @@
       <div> 
        <ul class="column four_column">
         <li><label></label><a  role="button" class="quick_select button btn btn-info" target="_blank" 
-          href="<?php echo HOME_URL ?>form.php?class_name=po_requisition_all_v&amp;router=pdf_print&amp;po_requisition_header_id=<?php echo!(empty($$class->po_requisition_header_id)) ? $$class->po_requisition_header_id : ""; ?>" >
+                                href="<?php echo HOME_URL ?>form.php?class_name=po_requisition_all_v&amp;router=pdf_print&amp;po_requisition_header_id=<?php echo!(empty($$class->po_requisition_header_id)) ? $$class->po_requisition_header_id : ""; ?>" >
           <?php echo gettext('Print Requisition') ?></a></li>
         <li><label>Action</label>
          <?php
@@ -133,10 +133,12 @@
           <td><?php echo $f->select_field_from_object('receving_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->receving_org_id, '', '', 1, $readonly); ?></td>
           <td><?php echo form::select_field_from_object('line_type', po_requisition_line::po_requisition_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, 'line_type', $readonly); ?></td>
           <td><?php
-           echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
-           form::text_field_wid2('item_number', 'select_item_number');
+           $f->val_field_wid2('item_number', 'item', 'item_number', 'receving_org_id');
+           echo $f->hidden_field_withCLass('item_id_m', $$class_second->item_id_m, 'dont_copy_r');
+           echo $f->hidden_field_withCLass('purchased_cb', '1', 'popup_value');
+           echo $f->hidden_field('processing_lt', '');
            ?>
-           <i class="select_item_number select_popup clickable fa fa-search"></i></td>
+           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
           <td><?php form::text_field_wid2('item_description'); ?></td>
           <td><?php
            echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id');

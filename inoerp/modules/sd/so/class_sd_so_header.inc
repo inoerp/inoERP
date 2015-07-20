@@ -51,7 +51,7 @@ class sd_so_header extends dbObject {
   'so_number',
   'ar_customer_id',
   'ar_customer_site_id',
-  'sales_person',
+  'hr_employee_id',
   "description",
   'ship_to_id',
   'bill_to_id',
@@ -87,7 +87,6 @@ class sd_so_header extends dbObject {
   "sd_so_header_id",
   "so_number",
   "ar_customer_id",
-  "sales_person"
  ];
  public $requiredField = [
   'ar_customer_id',
@@ -118,7 +117,14 @@ class sd_so_header extends dbObject {
   'bill_to_address',
   'bill_to_country',
   'bill_to_postal_code',
+  'sales_person'
  ];
+ 
+  public $fields_inDataBase_notInForm = [
+  'currency'
+ ];
+ 
+  
  public $profile_default = [
   'exchange_rate_type' => 'gl_currency_conversion_type',
   'bu_org_id' => 'org_bu_name_default',
@@ -140,6 +146,7 @@ class sd_so_header extends dbObject {
  public $so_number;
  public $ar_customer_id;
  public $ar_customer_site_id;
+ public $hr_employee_id;
  public $sales_person;
  public $description;
  public $ship_to_id;
@@ -238,16 +245,7 @@ class sd_so_header extends dbObject {
   }
  }
 
- private function _do_initial_defaults() {
-  global $dbc;
-  $fin_details = org::find_financial_details_from_orgId($this->bu_org_id);
-  if ($fin_details) {
-   $this->currency = $fin_details->currency_code;
-  } else {
-   $dbc->rollback = true;
-   echo "<br>Setup in complete. No currency found. Error @ " . __FILE__ . ' @@ line ' . __LINE__;
-  }
- }
+
 
  public function _after_save() {
   if ((!empty($this->sd_so_header_id)) && empty($this->so_number)) {

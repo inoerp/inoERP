@@ -65,7 +65,7 @@ class sd_lead extends dbObject {
   'time_to_contact',
   'ar_customer_id',
   'ar_customer_site_id',
-  'sales_person_employee_id',
+  'hr_employee_id',
   'sales_team',
   'priority',
   'campaign_id',
@@ -101,9 +101,9 @@ class sd_lead extends dbObject {
   "address",
   "country",
   "postal_code",
-  'sales_person_employee_name',
   'address_name',
-  'action'
+  'action',
+  'sales_person'
  ];
  public $sd_lead_id;
  public $lead_number;
@@ -125,7 +125,8 @@ class sd_lead extends dbObject {
  public $time_to_contact;
  public $ar_customer_id;
  public $ar_customer_site_id;
- public $sales_person_employee_id;
+ public $sales_person;
+ public $hr_employee_id;
  public $sales_team;
  public $priority;
  public $campaign_id;

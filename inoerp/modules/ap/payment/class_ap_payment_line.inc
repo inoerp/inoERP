@@ -50,6 +50,7 @@
   ];
   public $ap_payment_line_id;
   public $ap_payment_header_id;
+  public $ap_transaction_header_id;
   public $line_number;
   public $amount;
   public $line_description;

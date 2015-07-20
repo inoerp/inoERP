@@ -13,7 +13,7 @@ class ap_payment_trnx_v extends dbObject {
   'supplier_id',
   'supplier_site_id',
   'exchange_rate',
-  'document_owner',
+  'hr_employee_id',
   'currency',
   'header_amount',
   'transaction_status',
@@ -62,7 +62,7 @@ class ap_payment_trnx_v extends dbObject {
   'supplier_id',
   'supplier_site_id',
   'exchange_rate',
-  'document_owner',
+  'hr_employee_id',
   'currency',
   'header_amount',
   'ledger_id',
@@ -108,7 +108,7 @@ class ap_payment_trnx_v extends dbObject {
   'bu_org_id',
   'transaction_type',
   'transaction_number',
-  'document_owner',
+  'hr_employee_id',
   'currency',
   'header_amount',
   'transaction_status',
@@ -170,7 +170,7 @@ class ap_payment_trnx_v extends dbObject {
  public $supplier_id;
  public $supplier_site_id;
  public $exchange_rate;
- public $document_owner;
+ public $hr_employee_id;
  public $currency;
  public $header_amount;
  public $transaction_status;
@@ -215,7 +215,7 @@ CREATE OR REPLACE VIEW ap_payment_trnx_v
 (
 ap_transaction_header_id, bu_org_id, transaction_type, transaction_number,
 supplier_id, 
-supplier_site_id, exchange_rate, document_owner, currency, header_amount, transaction_status,
+supplier_site_id, exchange_rate, hr_employee_id, currency, header_amount, transaction_status,
 payment_term_id, paid_amount, payment_status,
 ledger_id,period_id,
 supplier_name, supplier_number,
@@ -233,7 +233,7 @@ AS
 SELECT 
 ap_transaction_header.ap_transaction_header_id, ap_transaction_header.bu_org_id, ap_transaction_header.transaction_type, ap_transaction_header.transaction_number,
 ap_transaction_header.supplier_id, 
-ap_transaction_header.supplier_site_id, ap_transaction_header.exchange_rate, ap_transaction_header.document_owner, ap_transaction_header.currency, ap_transaction_header.header_amount, ap_transaction_header.transaction_status,
+ap_transaction_header.supplier_site_id, ap_transaction_header.exchange_rate, ap_transaction_header.hr_employee_id, ap_transaction_header.currency, ap_transaction_header.header_amount, ap_transaction_header.transaction_status,
 ap_transaction_header.payment_term_id, ap_transaction_header.paid_amount, ap_transaction_header.payment_status,
 ap_transaction_header.ledger_id,ap_transaction_header.period_id,
 supplier.supplier_name, supplier.supplier_number,
