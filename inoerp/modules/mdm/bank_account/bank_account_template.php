@@ -18,37 +18,37 @@
         <i class="fa fa-refresh"></i></a> 
       </li>
       <li><label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="mdm_bank_header_id select_popup clickable">
-        Bank Name :</label><?php echo $f->hidden_field_withId('mdm_bank_header_id', $$class->mdm_bank_header_id); ?>
+        Bank Name</label><?php echo $f->hidden_field_withId('mdm_bank_header_id', $$class->mdm_bank_header_id); ?>
        <?php $f->text_field_d('bank_name') ?>	</li>
       <li><label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="mdm_bank_site_id select_popup clickable">
-        Branch Name : </label><?php echo $f->hidden_field_withId('mdm_bank_site_id', $$class->mdm_bank_site_id); ?>
+        Branch Name</label><?php echo $f->hidden_field_withId('mdm_bank_site_id', $$class->mdm_bank_site_id); ?>
        <?php $f->text_field_d('branch_name') ?>	</li>
-      <li><label>Account Number : </label> <?php $f->text_field_d('account_number') ?>	</li>
-      <li><label>Usage : </label> 
+      <li><label>Account Number</label> <?php $f->text_field_d('account_number') ?>	</li>
+      <li><label>Usage</label> 
        <?php echo $f->select_field_from_array('account_usage', mdm_bank_account::$account_usage_a, $$class->account_usage, 'account_usage', '', 1, $readonly1) ?>	</li>
-      <li><label>Type : </label> 
+      <li><label>Type</label> 
        <?php echo $f->select_field_from_object('account_type', mdm_bank_account::bank_account_type(), 'option_line_code', 'option_line_value', $$class->account_type, 'account_type', '', 1, $readonly1) ?>	</li>
-      <li><label>Description : </label> <?php $f->text_field_d('description') ?>	</li>
+      <li><label>Description</label> <?php $f->text_field_d('description') ?>	</li>
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div> 
       <ul class="column header_field">
-       <li><label>Bank Number : </label><?php $f->text_field_dr('bank_number'); ?></li> 
-       <li><label>Branch Number : </label><?php $f->text_field_dr('branch_number'); ?></li> 
-       <li><label>Short Name: </label><?php $f->text_field_dr('bank_name_short'); ?></li> 
-       <li><label>Alt Name : </label><?php $f->text_field_dr('bank_name_alt'); ?></li> 
-       <li><label>IFSC : </label><?php $f->text_field_dr('ifsc_code'); ?></li> 
-       <li><label>SWIFT : </label><?php $f->text_field_dr('swift_code'); ?></li> 
-       <li><label>Routing : </label><?php $f->text_field_dr('routing_number'); ?></li> 
-       <li><label>IBAN: </label><?php $f->text_field_dr('iban_code'); ?></li> 
+       <li><label>Bank Number</label><?php $f->text_field_dr('bank_number'); ?></li> 
+       <li><label>Branch Number</label><?php $f->text_field_dr('branch_number'); ?></li> 
+       <li><label>Short Name</label><?php $f->text_field_dr('bank_name_short'); ?></li> 
+       <li><label>Alt Name</label><?php $f->text_field_dr('bank_name_alt'); ?></li> 
+       <li><label>IFSC</label><?php $f->text_field_dr('ifsc_code'); ?></li> 
+       <li><label>SWIFT</label><?php $f->text_field_dr('swift_code'); ?></li> 
+       <li><label>Routing</label><?php $f->text_field_dr('routing_number'); ?></li> 
+       <li><label>IBAN</label><?php $f->text_field_dr('iban_code'); ?></li> 
       </ul>
      </div>
     </div>
     <div id="tabsHeader-3" class="tabContent">
      <div> 
       <ul class="column four_column">
-       <li><label>BU Name(1) : </label>
+       <li><label>BU Name(1)</label>
         <?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', '', $readonly1); ?>
        </li>
       </ul>
@@ -59,9 +59,9 @@
       <ul class="column header_field">
        <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
         <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup clickable">
-         Customer Name : </label> <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
+         Customer Name</label> <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
        <li><label class="auto_complete">Customer Number : </label><?php $f->text_field_d('customer_number'); ?></li>
-       <li><label>Customer Site : </label>
+       <li><label>Customer Site</label>
         <?php echo $f->select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
       </ul>
      </div>
@@ -71,10 +71,10 @@
       <ul class="column header_field">
        <li><?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
         <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supplier_id select_popup clickable">
-         Supplier Name : </label> <?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', '', $readonly1); ?></li>
+         Supplier Name</label> <?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', '', $readonly1); ?></li>
        <li><label class="auto_complete">Supplier Number : </label>
         <?php $f->text_field_d('supplier_number'); ?></li>
-       <li><label>Supplier Site : </label>
+       <li><label>Supplier Site</label>
         <?php echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1); ?> </li>
       </ul>
      </div>
@@ -111,10 +111,10 @@
     <div id="tabsLine-1" class="tabContent">
      <div> 
       <ul class="column header_field"> 
-       <li><label>Cash Ac: </label><?php $f->ac_field_d('cash_ac_id'); ?></li>
-       <li><label>Clearing Ac: </label><?php $f->ac_field_d('cash_clearing_ac_id'); ?></li>
-       <li><label>Bank Charge Ac: </label><?php $f->ac_field_d('bank_charge_ac_id'); ?></li>
-       <li><label>Exhcnage G/L Ac: </label><?php $f->ac_field_d('exchange_gl_ac_id'); ?></li>
+       <li><label>Cash Ac</label><?php $f->ac_field_d('cash_ac_id'); ?></li>
+       <li><label>Clearing Ac</label><?php $f->ac_field_d('cash_clearing_ac_id'); ?></li>
+       <li><label>Bank Charge Ac</label><?php $f->ac_field_d('bank_charge_ac_id'); ?></li>
+       <li><label>Exhcnage G/L Ac</label><?php $f->ac_field_d('exchange_gl_ac_id'); ?></li>
       </ul> 
      </div> 
      <!--end of tab1 div three_column-->
@@ -122,19 +122,19 @@
     <div id="tabsLine-2"  class="tabContent">
      <div> 
       <ul class="column header_field"> 
-       <li><label>Allow Netting  : </label><?php echo $f->checkBox_field_d('netting_ac_cb'); ?></li> 
-       <li><label>Minimum Payment : </label><?php echo $f->text_field_d('minimum_payment'); ?></li>
-       <li><label>Maximum Payment : </label><?php echo $f->text_field_d('maximum_payment'); ?></li>
+       <li><label>Allow Netting</label><?php echo $f->checkBox_field_d('netting_ac_cb'); ?></li> 
+       <li><label>Minimum Payment</label><?php echo $f->text_field_d('minimum_payment'); ?></li>
+       <li><label>Maximum Payment</label><?php echo $f->text_field_d('maximum_payment'); ?></li>
       </ul>
      </div> 
     </div>
     <div id="tabsLine-3" class="tabContent">
      <div> 
       <ul class="column header_field"> 
-       <li><label>Cash Ac: </label><?php $f->ac_field_d('hr_cash_ac_id'); ?></li>
-       <li><label>Clearing Ac: </label><?php $f->ac_field_d('hr_cash_clearing_ac_id'); ?></li>
-       <li><label>Bank Charge Ac: </label><?php $f->ac_field_d('hr_bank_charge_ac_id'); ?></li>
-       <li><label>Exhcnage G/L Ac: </label><?php $f->ac_field_d('hr_exchange_gl_ac_id'); ?></li>
+       <li><label>Cash Ac</label><?php $f->ac_field_d('hr_cash_ac_id'); ?></li>
+       <li><label>Clearing Ac</label><?php $f->ac_field_d('hr_cash_clearing_ac_id'); ?></li>
+       <li><label>Bank Charge Ac</label><?php $f->ac_field_d('hr_bank_charge_ac_id'); ?></li>
+       <li><label>Exhcnage G/L Ac</label><?php $f->ac_field_d('hr_exchange_gl_ac_id'); ?></li>
       </ul> 
      </div> 
      <div id="tabsLine-4" class="tabContent">

@@ -12,7 +12,7 @@ inoERP
   <div class="tabContainer">
    <ul class="column header_field"><?php $f = new inoform(); ?>
     <?php echo form::hidden_field('po_purchasing_control_id', $$class->po_purchasing_control_id); ?>
-    <li><?php $f->l_select_field_from_object('org_id', org::find_all_business(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>
+    <li><?php $f->l_select_field_from_object('org_id', org::find_all_business(), 'org_id', 'org', $$class->org_id, 'org_id', 'action', 1, $readonly1); ?>
      <a name="show" href="form.php?class_name=po_purchasing_control&<?php echo "mode=$mode"; ?>" class="show org_id"><i class="fa fa-refresh"></i></a> 
     </li>
     <li><?php $f->l_checkBox_field_d('rev_enabled'); ?></li>
@@ -28,10 +28,10 @@ inoERP
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <div> 
-       <ul class="column five_column"> 
+       <ul class="column header_field"> 
         <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'medium', 1, $readonly); ?>        </li>
-        <li><?php $f->address_field_wid('ship_to_id') ?> 							</li>
-        <li><?php $f->address_field_wid('bill_to_id') ?> 							</li>
+        <li><?php $f->l_address_field_d('ship_to_id') ?> 							</li>
+        <li><?php $f->l_address_field_d('bill_to_id') ?> 							</li>
         <li><?php $f->l_select_field_from_array('po_approval_hierarchy', po_purchasing_control::$approval_hierarchy_a, $$class->po_approval_hierarchy) ?> 						</li>
         <li><?php $f->l_select_field_from_array('req_approval_hierarchy', po_purchasing_control::$approval_hierarchy_a, $$class->req_approval_hierarchy) ?> 						</li>
         <li><?php $f->l_ac_field_d('tax_ac_id'); ?></li> 

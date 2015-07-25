@@ -39,6 +39,8 @@ class gl_journal_line_v extends dbObject {
   'creation_date',
   'last_update_by',
   'last_update_date',
+  'reference_key_value_h',
+  'reference_key_name_h'
  ];
  public $initial_search = [
   'combination',
@@ -91,6 +93,8 @@ class gl_journal_line_v extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
+ public $reference_key_value_h;
+ public $reference_key_name_h;
 
  public function create_gl_journal_line_v() {
   $SQL = "SELECT  cc.combination, gjl.code_combination_id,
@@ -120,19 +124,21 @@ reference_type, reference_key_name, reference_key_value ,
 coa_structure_id, field1, field2, field3,
 field4, field5, field6, field7, field8,
  balance_type, post_date,gl_period_id, 
- created_by, creation_date, last_update_by, last_update_date
+ created_by, creation_date, last_update_by, last_update_date,
+ reference_key_name_h, reference_key_value_h
 )
 AS
 SELECT  cc.combination, gjl.code_combination_id, gp.period_name,
 cc.coa_id, sum(gjl.total_cr), sum(gjl.total_dr),
 sum(gjl.total_ac_dr), sum(gjl.total_ac_cr) ,gjh.ledger_id,
-cc.description, gjl.gl_journal_line_id, gjl.gjl,
+cc.description, gjl.gl_journal_line_id, gjl.status,
 gjl.gl_journal_header_id, gjl.line_num, gjl.line_type, gjl.description,
 gjl.reference_type, gjl.reference_key_name, gjl.reference_key_value , 
 cc.coa_structure_id, cc.field1, cc.field2, cc.field3,
 cc.field4, cc.field5, cc.field6, cc.field7, cc.field8,
 gjh.balance_type, gjh.post_date, gp.gl_period_id,
-gjl.created_by, gjl.creation_date, gjl.last_update_by, gjl.last_update_date
+gjl.created_by, gjl.creation_date, gjl.last_update_by, gjl.last_update_date,
+gjh.reference_key_name as reference_key_name_h, gjh.reference_key_value as reference_key_value_h
 
 FROM gl_journal_line gjl 
 LEFT JOIN gl_journal_header gjh ON gjl.gl_journal_header_id = gjh.gl_journal_header_id
@@ -152,7 +158,8 @@ reference_type, reference_key_name, reference_key_value ,
 coa_structure_id, field1, field2, field3,
 field4, field5, field6, field7, field8,
  balance_type, post_date,gl_period_id,
- created_by, creation_date, last_update_by, last_update_date
+ created_by, creation_date, last_update_by, last_update_date,
+ reference_key_name_h, reference_key_value_h
 )
 AS
 SELECT  cc.combination, gjl.code_combination_id, gp.period_name,
@@ -163,7 +170,8 @@ gjl.reference_type, gjl.reference_key_name, gjl.reference_key_value ,
 cc.coa_structure_id, cc.field1, cc.field2, cc.field3,
 cc.field4, cc.field5, cc.field6, cc.field7, cc.field8,
 gjh.balance_type, gjh.post_date, gp.gl_period_id,
-gjl.created_by, gjl.creation_date, gjl.last_update_by, gjl.last_update_date
+gjl.created_by, gjl.creation_date, gjl.last_update_by, gjl.last_update_date,
+gjh.reference_key_name as reference_key_name_h, gjh.reference_key_value as reference_key_value_h
 
 FROM gl_journal_line gjl 
 LEFT JOIN gl_journal_header gjh ON gjl.gl_journal_header_id = gjh.gl_journal_header_id
@@ -171,6 +179,22 @@ LEFT JOIN gl_period gp ON gp.gl_period_id = gjh.period_id
 LEFT JOIN coa_combination cc ON gjl.code_combination_id=cc.coa_combination_id
 ORDER BY gp.gl_period_id DESC, cc.combination DESC
 ";
+ }
+
+ public static function find_by_referenceDetails($ref_key_name, $ref_key_value, $account_type = 'all') {
+
+  $sql = " SELECT * FROM gl_journal_line_v ";
+  $sql .= " WHERE  reference_key_name_h = '{$ref_key_name}' AND reference_key_value_h = '{$ref_key_value}' ";
+  if ($account_type == 'dr') {
+   $sql .= " AND  total_ac_dr IS NOT NULL ";
+  } else if ($account_type == 'cr') {
+   $sql .= " AND  total_ac_cr IS NOT NULL ";
+  }
+
+  echo $sql;
+  
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
  }
 
 }

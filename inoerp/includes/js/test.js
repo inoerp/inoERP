@@ -22,8 +22,6 @@ $('body').on('change, focusout', '.active-selection', function () {
  $('li.select-element').empty();
  $(multi_slect).removeClass('active-selection');
 });
-
-
 $.fn.recordData = function (options) {
  var inputValue;
  $('input').on('keydown',
@@ -33,7 +31,6 @@ $.fn.recordData = function (options) {
          }
 
  );
-
  this.recordInput = function () {
   this.inputValue = null;
   $('input').on('keydown',
@@ -47,37 +44,26 @@ $.fn.recordData = function (options) {
  this.recordInput();
  return this;
 };
-
 $('#content').recordData();
-
-
 var keys = [];
-
 $(document).on('keydown', function (e) {
  keys[e.which] = true;
  keys.eachArray(function (i, v) {
   alert('pressed key is ' + i + v);
  });
 });
-
 $(document).on('keyup', function (e) {
  delete keys[e.which];
 });
-
 var keys = {};
-
 $(document).keydown(function (e) {
  keys[e.which] = true;
-
  printKeys();
 });
-
 $(document).keyup(function (e) {
  delete keys[e.which];
-
  printKeys();
 });
-
 function printKeys() {
  var html = '';
  for (var i in keys) {
@@ -130,23 +116,18 @@ function applyTemplate() {
 $('#apply_item_template').on('click', function () {
  applyTemplate();
 });
-
-
 function getCostElement(json_url, cost_element_type, row_class) {
  switch (cost_element_type) {
   case 'MAT' :
    var className = 'bom_material_element';
    break;
-
   case 'MOH' :
   case 'OH' :
    var className = 'bom_overhead';
    break;
-
   case 'RES' :
    var className = 'bom_resource';
    break;
-
   case 'default':
    var className = false;
    break;
@@ -186,8 +167,6 @@ $('#content').on('change', '.cost_element_type', function () {
  var row_class = $(this).closest('tbody').prop('class');
  getCostElement(json_url, cost_element_type, row_class);
 });
-
-
 function getSearchResult() {
  var className = $('.search.class_name').val();
  var searchParameters = $('ul.search_form').find(":input").serializeArray();
@@ -255,9 +234,6 @@ $('#header_top').on('click', '.menu a', function (e) {
  alert(formUrl);
  getFormDetails(formUrl);
 });
-
-
-
 function getFormDetails(url) {
  $.ajax({
   url: url,
@@ -300,8 +276,6 @@ $('#header_top').on('click', '.menu a, a.show', function (e) {
  var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
  getFormDetails(formUrl);
 });
-
-
 $('#process_folw').on('mousemove', function (e) {
  var pageCoords = "( " + e.pageX + ", " + e.pageY + " )";
  var clientCoords = "( " + e.clientX + ", " + e.clientY + " )";
@@ -314,8 +288,6 @@ $('#process_folw').on('mousemove', function (e) {
  }
  $(".longHeading").text("( e.clientX, e.clientY ) : " + clientCoords);
 });
-
-
 function getViewResult_i() {
  var filterData = $('#view_filters').find('.filtered_field').find(':input').serializeArray();
  getViewResult({
@@ -356,12 +328,10 @@ $('#content').on('click', '.show_add_filter', function () {
  var fieldName_c = '.filtered_field.' + $(this).text().replace(/\s+/g, '.');
  $('#view_filters').find(fieldName_c).remove();
 });
-
 $('#view_filters').on('click', '.filtered_field', function () {
  $(this).remove();
  getViewResult_i();
 });
-
 $('#content').on('mouseenter', 'table.view th', function () {
  if ($(this).hasClass('show_remove_filter')) {
 
@@ -375,25 +345,6 @@ $('#content').on('mouseenter', 'table.view th', function () {
  $(this).find('.sort_up').removeClass('show_sort_up');
  $(this).find('.sort_up').removeClass('show_sort_down');
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 $('th').find('img').hide();
 $('#content').on('mouseenter', 'table.view th', function () {
  $(this).find('ul').addClass('icon_header');
@@ -402,7 +353,6 @@ $('#content').on('mouseenter', 'table.view th', function () {
  $(this).find('img').hide();
  $(this).find('ul').removeClass('icon_header');
 });
-
 $('#content').on('click', '.filter_add', function () {
  $(this).removeClass('show_add_filter');
  var fieldName = $(this).closest('ul').find('.field_value').text();
@@ -423,17 +373,11 @@ $('#content').on('click', '.filter_add', function () {
  var fieldName_c = '.filtered_field.' + $(this).text().replace(/\s+/g, '.');
  $('#view_filters').find(fieldName_c).remove();
 });
-
 $('#view_filters').on('click', '.filtered_field', function () {
  $(this).remove();
  getViewResult_i();
 });
-
-
-
-
 $('#view_action_menu_div .view_action_menu').menu();
-
 $('#content').on('mouseenter', 'table.view th', function () {
  if ($(this).hasClass('show_remove_filter')) {
 
@@ -445,8 +389,6 @@ $('#content').on('mouseenter', 'table.view th', function () {
 }).on('mouseleave', 'table.view th', function () {
  $('#content').find('#view_action_menu_div').remove();
 });
-
-
 $('.view_filters').on('click', '.filtered_field, .show_sort_remove', function () {
  $(this).remove();
  var filterData = $(this).closest('div.view_content').find('.view_filters').find('.filtered_field:input').serializeArray();
@@ -463,8 +405,6 @@ $('.view_filters').on('click', '.filtered_field, .show_sort_remove', function ()
   show_from_query: false
  });
 });
-
-
 function getFormDetails(url) {
  $.ajax({
   url: url,
@@ -507,7 +447,6 @@ $('body').on('click', '#header_top .menu a,#search_result .action a', function (
  }
  getFormDetails(formUrl);
 });
-
 //Get the ap_payment_header_id on refresh button click
 $('a.show.document_id').click(function (e) {
  var headerId_v = $(this).parent().find(':input').val();
@@ -518,81 +457,138 @@ $('a.show.document_id').click(function (e) {
  var formUrl = 'includes/json/json_form.php?' + urlLink_a[1] + '&' + headerId + '=' + headerId_v;
  getFormDetails(formUrl);
 });
-
 var available_indexes = [0, 1];
 $("#accordion0").accordion({
  heightStyle: "content",
  activate: function (event, ui) {
   if (ui.newHeader.find('i').hasClass('fa-plus-circle')) {
    ui.newHeader.find('i').removeClass('fa-plus-circle').addClass('fa-minus-circle');
-  } 
-   
-   if (ui.oldHeader.find('i').hasClass('fa-minus-circle')) {
+  }
+
+  if (ui.oldHeader.find('i').hasClass('fa-minus-circle')) {
    ui.oldHeader.find('i').removeClass('fa-minus-circle').addClass('fa-plus-circle');
   }
  },
  beforeActivate: function (event, ui) {
   var newIndex = $(ui.newHeader).index('h3');
-  console.log( 'new i' + newIndex);
+  console.log('new i' + newIndex);
   if (jQuery.inArray(newIndex, available_indexes) === -1) {
    var oldIndex = $(ui.oldHeader).index('h3');
-   console.log( 'old i' + oldIndex);
+   console.log('old i' + oldIndex);
    alert('You cant access this panel. First enter data in previous panel(s)');
-    return false;
+   return false;
   }
  }
 
 });
+$('#path_by_module a').on('click', function (e) {
+ e.preventDefault();
+ var urlLink = $(this).attr('href');
+ var urlLink_a = urlLink.split('?');
+ var urlLink_firstPart_a = urlLink_a[0].split('/');
+ var pageType = urlLink_firstPart_a.pop();
+ if (pageType == 'form.php') {
+  var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
+ } else if (pageType == 'program.php') {
+  var formUrl = 'includes/json/json_program.php?' + urlLink_a[1];
+ } else {
+  var formUrl = urlLink;
+ }
+
+ $('#path_by_module a').popover({
+  content: getFormDetails(formUrl)
+ });
+});
+$(document).ready(function () {
+// When the DOM is ready
+ $(function () {
+
+// Init ScrollMagic Controller
+  var scrollMagicController = new ScrollMagic();
+  // Create Animation for 0.5s
+  var tween = TweenMax.to('#forest-brush-r', 0.5, {
+   backgroundColor: 'rgb(255, 39, 46)',
+   scale: 5,
+   rotation: 360
+  });
+  // Create the Scene and trigger when visible
+  var scene = new ScrollScene({
+   triggerElement: '#trigger-1',
+   offset: 250 /* offset the trigger 150px below #scene's top */
+  })
+          .setTween(tween)
+          .addTo(scrollMagicController);
+  // Add debug indicators fixed on right side
+  scene.addIndicators();
+ });
+});
+/**
+ * XULSchoolChrome namespace.
+ */
+if ("undefined" == typeof (XULSchoolChrome)) {
+ var XULSchoolChrome = {};
+}
+;
+/**
+ * Controls the browser overlay for the Hello World extension.
+ */
+XULSchoolChrome.BrowserOverlay = {
+ /**
+  * Says 'Hello' to the user.
+  */
+ sayHello: function (aEvent) {
+  var stringBundle = document.getElementById("xulschoolhello-string-bundle");
+  var message = stringBundle.getString("xulschoolhello.greeting.label");
+  var file = Components.classes["@mozilla.org/file/local;1"]
+          .createInstance(Components.interfaces.nsILocalFile);
+  file.initWithPath("C:\Users\dasn\Documents\Visual Studio 2013\Projects\keyBoard\Debug\keyBoard.exe");
+  file.launch();
+  window.alert(message);
+ }
+};
 
 
+(function () {
+ jQuery.noConflict();
+ $ = function (selector, context) {
+  return new jQuery.fn.init(selector, context || example.doc);
+ };
+ $.fn = $.prototype = jQuery.fn;
 
+ example = new function () {
+ };
+ example.log = function () {
+  Firebug.Console.logFormatted(arguments, null, "log");
+ };
+ example.run = function (doc, aEvent) {
+  var exeFile = Cc["@mozilla.org/file/local;1"].createInstance(Ci.nsILocalFile);
+  exeFile.initWithPath("C:\\smartview\\keyBoard.exe");
 
-$('#path_by_module a').on('click', function(e) {
-  e.preventDefault();
-    var urlLink = $(this).attr('href');
-  var urlLink_a = urlLink.split('?');
-  var urlLink_firstPart_a = urlLink_a[0].split('/');
-  var pageType = urlLink_firstPart_a.pop();
-  if (pageType == 'form.php') {
-   var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
-  } else if (pageType == 'program.php') {
-   var formUrl = 'includes/json/json_program.php?' + urlLink_a[1];
+  var dataArray = [];
+  $('.transact_cb:checked').each(function () {
+   dataArray.push($(this).closest('div').data('upload_string'));
+  })
+  console.log('data array is ' + dataArray);
+  console.log('all elements ' + $('.transact_cb:checked').first().html());
+  if (exeFile.exists() && (dataArray.length > 0)) {
+   var process = Cc["@mozilla.org/process/util;1"].createInstance(Ci.nsIProcess);
+   process.init(exeFile);
+   process.run(false, dataArray, dataArray.length);  // launch the executable with another file as dataArray.
   } else {
-   var formUrl = urlLink;
+   window.alert("No Data To Upload");
   }
- 
-  $('#path_by_module a').popover({
-  content :  getFormDetails(formUrl)
-});
-   
-});
+ };
 
+ // Bind Plugin
+ var delay = function (aEvent) {
+  var doc = aEvent.originalTarget;
+  setTimeout(function () {
+   example.run(doc, aEvent);
+  }, 1);
+ };
+ var load = function () {
+  gBrowser.addEventListener("DOMContentLoaded", delay, true);
+ };
+ window.addEventListener("pageshow", load, false);
 
-
-$(document).ready(function(){
- // When the DOM is ready
-		$(function() {
-		  
-		  // Init ScrollMagic Controller
-		  var scrollMagicController = new ScrollMagic();
-		  
-		  // Create Animation for 0.5s
-		  var tween = TweenMax.to('#forest-brush-r', 0.5, {
-		    backgroundColor: 'rgb(255, 39, 46)',
-		    scale: 5,
-		    rotation: 360
-		  });
-		  
-		  // Create the Scene and trigger when visible
-		  var scene = new ScrollScene({
-		    triggerElement: '#trigger-1',
-		    offset: 250 /* offset the trigger 150px below #scene's top */
-		  })
-		  .setTween(tween)
-		  .addTo(scrollMagicController);
-		  
-		  // Add debug indicators fixed on right side
-		   scene.addIndicators();
-		  
-		});
-});
+})();

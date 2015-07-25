@@ -17,14 +17,6 @@
       </li>
       <li><?php $f->l_text_field_d('payment_number', 'primary_column2'); ?> </li>
       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>       </li>
-      <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', '', 1, $readonly1); ?>       </li>
-      <li><label><?php echo gettext('Period Name') ?></label><?php
-       if (!empty($period_name_stmt)) {
-        echo $period_name_stmt;
-       } else {
-        $f->text_field_d('period_id');
-       }
-       ?></li>
       <li><?php echo $f->l_select_field_from_object('payment_type', ap_payment_header::payment_types(), 'option_line_code', 'option_line_value', $ap_payment_header->payment_type, 'payment_type', '', 1, $readonly1); ?> </li>
       <li><?php $f->l_date_fieldFromToday_d('document_date', $$class->document_date) ?>              </li>
       <li><?php $f->l_text_field_d('document_number') ?>      </li>
@@ -37,21 +29,28 @@
        echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
        ?> </li>
       <li><?php echo $f->l_select_field_from_array('payment_status', ap_payment_header::$payment_status_a, $$class->payment_status, '', '', '', '', $readonly); ?>     </li> 
-      <li><?php $f->l_text_field_d('processing_method'); ?>       </li> 
+      <li><?php $f->l_select_field_from_object('processing_method', ap_payment_process::find_all(), 'ap_payment_process_id', 'payment_process', $$class->processing_method, 'ap_payment_process_id'); ?>       </li> 
       <li><?php $f->l_text_field_d('description'); ?>       </li> 
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div> 
       <ul class="column header_field ">
-       <li><?php $f->l_select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', '', 1, $readonly); ?></li>
-       <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, 1); ?></li>
-       <li><?php $f->l_select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
-       <li><?php $f->l_number_field('exchange_rate', $$class->exchange_rate, '', 'exchange_rate'); ?> </li>
+       <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', '', 1, $readonly1); ?>       </li>
+       <li><label><?php echo gettext('Period Name') ?></label><?php
+        if (!empty($period_name_stmt)) {
+         echo $period_name_stmt;
+        } else {
+         $f->text_field_d('period_id');
+        }
+        ?></li>
+       <li><?php $f->l_select_field_from_object('ledger_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, 1); ?></li>
        <li><?php $f->l_text_field_d('pay_group') ?>  
        <li><?php $f->l_number_field('header_amount', $$class->header_amount, '15', 'header_amount'); ?></li>
        <li><?php $f->l_text_field_dr('gl_journal_header_id', 'dont_copy'); ?> </li>
-
+       <li><?php echo $f->hidden_field_withCLass('doc_currency', $$class->doc_currency, 'doc_currency always_readonly'); ?></li>
+       <li><?php // $f->l_select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly);   ?></li>
+       <li><?php // $f->l_number_field('exchange_rate', $$class->exchange_rate, '', 'exchange_rate');   ?> </li>
       </ul>
      </div>
     </div>
@@ -108,7 +107,6 @@
         <th><?php echo gettext('Seq') ?>#</th>
         <th><?php echo gettext('Line Id') ?></th>
         <th><?php echo gettext('Line') ?>#</th>
-        <th><?php echo gettext('Trnx Id') ?></th>
         <th><?php echo gettext('Trnx Number') ?></th>
         <th><?php echo gettext('Payment Amount') ?></th>
         <th><?php echo gettext('Rate') ?></th>
@@ -134,15 +132,18 @@
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('ap_payment_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
-         <td><?php $f->text_field_wid2sr('ap_transaction_header_id'); ?></td>
-         <td><?php $f->text_field_wid2('transaction_number', 'select_transaction_number'); ?>
-          <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_ap_transaction_number select_popup"></td>
+         <td><?php
+          $f->val_field_wid2('transaction_number', 'ap_transaction_header', 'transaction_number', 'supplier_id');
+          echo $f->hidden_field_withCLass('ap_transaction_header_id', $$class_second->ap_transaction_header_id, 'dont_copy_r');
+          echo $f->hidden_field_withCLass('supplier_id', $$class->supplier_id, 'popup_value supplier_id');
+          ?>
+          <i class="generic g_select_ap_transaction_number select_popup clickable fa fa-search" data-class_name="ap_transaction_header"></i></td>
          <td><?php !empty($$class_second->ap_payment_line_id) ? form::number_field_wid2sr('amount') : form::number_field_wid2s('amount'); ?></td>
          <td><?php !empty($$class_second->ap_payment_line_id) ? form::number_field_wid2sr('exchange_rate') : form::number_field_wid2s('exchange_rate'); ?></td>
          <td><?php !empty($$class_second->ap_payment_line_id) ? form::number_field_wid2sr('gl_amount') : form::number_field_wid2s('gl_amount'); ?></td>
-         <td><?php $f->text_field_wid2r('invoice_amount'); ?></td>
-         <td><?php $f->text_field_wid2sr('paid_amount'); ?></td>
-         <td><?php $f->text_field_wid2sr('remaining_amount'); ?></td>
+         <td><?php $f->text_field_wid2r('invoice_amount', 'header_amount dont_copy_r'); ?></td>
+         <td><?php $f->text_field_wid2sr('paid_amount', 'dont_copy_r'); ?></td>
+         <td><?php $f->text_field_wid2sr('remaining_amount', 'dont_copy_r'); ?></td>
         </tr>
         <?php
         $count = $count + 1;

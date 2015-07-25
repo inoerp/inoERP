@@ -67,6 +67,20 @@ class ap_transaction_all_v extends dbObject {
   'need_by_date',
   'promise_date'
  ];
+ public static $json_label_fields = [
+  'ap_transaction_header_id',
+  'transaction_type',
+  'transaction_number',
+  'line_number',
+  'header_amount',
+  'supplier_name',
+  'supplier_number',
+  'supplier_site_name',
+  'item_description',
+  'inv_line_quantity',
+  'item_number',
+  'account_type'
+ ];
  public $search = [
   '_update_path' => 'form.php?class_name=ap_transaction_header',
   '_show_update_path' => 1,

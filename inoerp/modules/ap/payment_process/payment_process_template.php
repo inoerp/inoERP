@@ -1,21 +1,21 @@
 <div id ="form_header">
- <form action=""  method="post" id="ar_receipt_source"  name="ar_receipt_source">
-  <span class="heading"><?php echo gettext('Receipt Source') ?></span>
+ <form action=""  method="post" id="ap_payment_process"  name="ap_payment_process">
+  <span class="heading"><?php echo gettext('Payment Process') ?></span>
   <div class="tabContainer"><?php $f = new inoform(); ?>
    <ul class="column header_field"> 
-    <li><?php $f->l_text_field_dr_withSearch('ar_receipt_source_id') ?>
-     <a name="show" href="form.php?class_name=ar_receipt_source&<?php echo "mode=$mode"; ?>" class="show document_id ar_receipt_source_id">
+    <li><?php $f->l_text_field_dr_withSearch('ap_payment_process_id') ?>
+     <a name="show" href="form.php?class_name=ap_payment_process&<?php echo "mode=$mode"; ?>" class="show document_id ap_payment_process_id">
       <i class='fa fa-refresh'></i></a> 
     </li>
-    <li><?php $f->l_text_field_d('receipt_source'); ?></li>
+    <li><?php $f->l_text_field_dm('payment_process'); ?></li>
     <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>    </li>
-    <li><?php $f->l_select_field_from_object('receipt_type', ar_receipt_header::receipt_types(), 'option_line_code', 'option_line_value', $$class->receipt_type, 'receipt_type', '', 1, $readonly1); ?>    </li>
+    <li><?php $f->l_select_field_from_object('payment_type', ar_receipt_header::receipt_types(), 'option_line_code', 'option_line_value', $$class->payment_type, 'receipt_type', '', 1, $readonly1); ?>    </li>
     <li><?php $f->l_status_field_d('status'); ?></li>
     <li><?php $f->l_text_field_d('description'); ?> 					</li>
 
    </ul>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading">Receipt Source Details </span>
+  <div id ="form_line" class="form_line"><span class="heading">Payment Source Details </span>
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -25,10 +25,10 @@
      <div id="tabsLine-1" class="tabContent">
       <div> 
        <ul class="column header_field"> 
-        <li><?php $f->l_select_field_from_array('creation_method', ar_receipt_source::$creation_method_a, $$class->creation_method, 'creation_method', '', 1, $readonly1); ?>        </li>
-        <li><?php $f->l_select_field_from_array('remittance', ar_receipt_source::$remittance_method_a, $$class->remittance, 'remittance', '', 1, $readonly1); ?>        </li>
-        <li><?php $f->l_select_field_from_array('clearance', ar_receipt_source::$clearance_method_a, $$class->clearance, 'clearance', '', 1, $readonly1); ?>        </li>
-        <li><?php $f->l_checkBox_field_d('sync_receipt_number_cb'); ?></li>
+        <li><?php $f->l_text_field_d('format_class_name'); ?>        </li>
+        <li><?php $f->l_text_field_d('format_method_name'); ?>        </li>
+        <li><?php $f->l_ac_field_dm('cash_ac_id'); ?>        </li>
+        <li><?php $f->l_checkBox_field_d('sync_payment_number_cb'); ?></li>
        </ul> 
       </div> 
      </div> 
@@ -57,13 +57,13 @@
 </div>
 <div id="js_data">
  <ul id="js_saving_data">
-  <li class="headerClassName" data-headerClassName="ar_receipt_source" ></li>
+  <li class="headerClassName" data-headerClassName="ap_payment_process" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="true" ></li>
-  <li class="primary_column_id" data-primary_column_id="ar_receipt_source_id" ></li>
-  <li class="form_header_id" data-form_header_id="ar_receipt_source" ></li>
+  <li class="primary_column_id" data-primary_column_id="ap_payment_process_id" ></li>
+  <li class="form_header_id" data-form_header_id="ap_payment_process" ></li>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedaderId" data-docHedaderId="ar_receipt_source_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="ar_receipt_source_id" ></li>
+  <li class="docHedaderId" data-docHedaderId="ap_payment_process_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="ap_payment_process_id" ></li>
  </ul>
 </div>

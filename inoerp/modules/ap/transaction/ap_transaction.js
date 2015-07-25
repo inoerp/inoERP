@@ -238,7 +238,7 @@ $(document).ready(function () {
 
  //calculate the tax amount
  $('body').off('inv_calculateTax').on('inv_calculateTax', function (e, trClass) {
-  var linePrice = +$('#content').find(trClass).find('.inv_line_price').val();
+  var linePrice = +$('#content').find(trClass).find('.inv_line_price').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1");
   var taxAmount = 0;
   var taxPercentage = 0;
   var taxValue = 0;

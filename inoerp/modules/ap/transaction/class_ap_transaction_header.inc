@@ -116,7 +116,6 @@ class ap_transaction_header extends dbObject {
   'transaction_type',
   'supplier_id',
   'supplier_site_id',
-  'currency',
   'payment_term_id',
   'document_date',
   'ledger_id',
@@ -133,11 +132,18 @@ class ap_transaction_header extends dbObject {
   'transaction_action',
   'document_owner'
  ];
- 
-  public $fields_inDataBase_notInForm = [
+ public static $json_label_fields = [
+  'transaction_number',
+  'supplier_id',
+  'supplier_site_id',
+  'description',
+  'header_amount',
+  'paid_amount',
+  'exchange_rate',
+ ];
+ public $fields_inDataBase_notInForm = [
   'currency'
  ];
-  
 //  public $profile_default = [
 //   'exchange_rate_type' => 'gl_currency_conversion_type',
 //   'bu_org_id' => 'org_bu_name_default',
@@ -259,7 +265,7 @@ class ap_transaction_header extends dbObject {
    $this->_cancel_transaction();
    return 10;
   }
-  if (empty($this->po_header_id) && !empty($this->bu_org_id)) {
+  if (empty($this->ap_transaction_header_id) && !empty($this->bu_org_id)) {
    $this->_do_initial_defaults();
   }
  }
@@ -331,10 +337,10 @@ class ap_transaction_header extends dbObject {
     $new_gjl->code_combination_id = $deatils->detail_ac_id;
     if (in_array($this->transaction_type, array('CREDIT_MEMO', 'DEBIT_MEMO'))) {
      $new_gjl->total_cr = abs($deatils->amount);
-     $new_gjl->total_ac_cr = abs($deatils->amount);
+     $new_gjl->total_ac_cr = abs($deatils->gl_amount);
     } else {
      $new_gjl->total_dr = abs($deatils->amount);
-     $new_gjl->total_ac_dr = abs($deatils->amount);
+     $new_gjl->total_ac_dr = abs($deatils->gl_amount);
     }
     $new_gjl->description = 'AP Trnx detail #' . $deatils->detail_number . ' of trxn# ' . $this->transaction_number;
     $new_gjl->reference_type = 'table';
@@ -348,13 +354,17 @@ class ap_transaction_header extends dbObject {
 
 //	save the Liability Account
   $sbu = new supplier_bu();
+  $appc = new ap_payable_control();
+  $appc->findBy_orgId($this->bu_org_id);
+
   $sbu_i = $sbu->findBy_orgId_supplierId($this->bu_org_id, $this->supplier_id);
   if ($sbu_i->liability_account_id) {
    $liability_account_id = $sbu_i->liability_account_id;
   } else {
    echo "Supplier liability ac doesnot exist.Using BU level default account";
-   $liability_account_id = 300;
+   $liability_account_id = $appc->liability_ac_id;
   }
+
   $liability_gjl = new gl_journal_line();
   $liability_gjl->gl_journal_header_id = $this->gl_journal_header_id;
   $liability_gjl->reference_key_name = 'ap_transaction_header';
@@ -373,10 +383,18 @@ class ap_transaction_header extends dbObject {
   $liability_gjl->code_combination_id = $liability_account_id;
   if (in_array($this->transaction_type, array('CREDIT_MEMO', 'DEBIT_MEMO'))) {
    $liability_gjl->total_dr = abs($this->header_amount) + abs($this->tax_amount);
-   $liability_gjl->total_ac_dr = abs($this->header_amount) + abs($this->tax_amount);
+   if (!empty($this->exchange_rate)) {
+    $liability_gjl->total_ac_dr = $liability_gjl->total_dr * $this->exchange_rate;
+   } else {
+    $liability_gjl->total_ac_dr = 1;
+   }
   } else {
    $liability_gjl->total_cr = abs($this->header_amount) + abs($this->tax_amount);
-   $liability_gjl->total_ac_cr = abs($this->header_amount) + abs($this->tax_amount);
+   if (!empty($this->exchange_rate)) {
+    $liability_gjl->total_ac_cr = $liability_gjl->total_cr * $this->exchange_rate;
+   } else {
+    $liability_gjl->total_ac_cr = 1;
+   }
   }
   $liability_gjl->description = 'AP Trnx liability of ' . $this->transaction_number;
   $liability_gjl->reference_type = 'table';
@@ -413,6 +431,12 @@ class ap_transaction_header extends dbObject {
 
  Public static function transaction_types() {
   $option_header = option_header::find_by_name('AP_TRANSACTION_TYPE');
+  $transaction_types = option_line::find_by_option_id($option_header->option_header_id);
+  return $transaction_types;
+ }
+
+ Public static function pay_group() {
+  $option_header = option_header::find_by_name('AP_PAY_GROUP');
   $transaction_types = option_line::find_by_option_id($option_header->option_header_id);
   return $transaction_types;
  }

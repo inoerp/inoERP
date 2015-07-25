@@ -269,7 +269,7 @@ class ar_transaction_header extends dbObject {
   }
  }
 
- private function _do_initial_defaults() {
+ protected function _do_initial_defaults() {
   global $dbc;
   $fin_details = org::find_financial_details_from_orgId($this->bu_org_id);
   if ($fin_details) {
