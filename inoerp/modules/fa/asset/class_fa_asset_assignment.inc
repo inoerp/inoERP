@@ -11,7 +11,7 @@ class fa_asset_assignment extends dbObject {
   'fa_asset_assignment_id',
   'fa_asset_id',
   'units',
-  'hr_employe_id',
+  'hr_employee_id',
   'address_id',
   'expense_ac_id',
   'description',
@@ -26,7 +26,7 @@ class fa_asset_assignment extends dbObject {
  public $requiredField = [
   'fa_asset_id',
   'units',
-  'hr_employe_id',
+  'hr_employee_id',
 //  'address_id',
   'expense_ac_id',
  ];
@@ -36,14 +36,15 @@ class fa_asset_assignment extends dbObject {
  
   public $fields_inForm_notInDataBase = [
   "employee_name",
-  'identification_id'
+  'identification_id',
+   'address_name'
  ];
   
  public $pageTitle = " Asset Assignment "; //page Title
  public $fa_asset_assignment_id;
  public $fa_asset_id;
  public $units;
- public $hr_employe_id;
+ public $hr_employee_id;
  public $address_id;
  public $expense_ac_id;
  public $description;
@@ -52,6 +53,7 @@ class fa_asset_assignment extends dbObject {
  public $last_update_by;
  public $last_update_date;
  public $member_employee_name;
+ public $address_name;
 
  public function priceBy_headerId_orgId_ItemId($price_date) {
   $sql = " SELECT * FROM ";

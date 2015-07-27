@@ -2315,3 +2315,7 @@ a.btn-info{
 #form_line .small{
     width: 80px !important;
 }
+
+.fa.white-font-link{
+        color : white !important;
+}

@@ -17,12 +17,15 @@
         <a name="show" href="form.php?class_name=fa_asset_book_info&<?php echo "mode=$mode"; ?>" class="show document_id fa_asset_book_info_id">
          <i class="fa fa-refresh"></i></a> 
        </li>
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="fa_asset_book_id select_popup clickable">
-         <?php echo gettext('Book Name') ?></label><?php echo $f->text_field_dm('asset_book_name'); ?>
-        <?php echo $f->hidden_field_withId('fa_asset_book_id', $$class->fa_asset_book_id) ?></li>
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="fa_asset_id select_popup clickable">
-         <?php echo gettext('Asset Number') ?></label><?php $f->text_field_dm('asset_number'); ?>
-        <?php echo $f->hidden_field_withId('fa_asset_id', $$class->fa_asset_id) ?>
+       <li><?php
+        echo $f->l_val_field_dm('asset_book_name', 'fa_asset_book', 'asset_book_name', '', 'asset_book_name', 'vf_select_asset_book_name');
+        echo $f->hidden_field_withId('fa_asset_book_id', $$class->fa_asset_book_id);
+        ?><i class="generic g_select_asset_book_name select_popup clickable fa fa-search" data-class_name="fa_asset_book"></i>
+       </li>
+       <li><?php
+        echo $f->l_val_field_dm('asset_number', 'fa_asset', 'asset_number', '', 'asset_number', 'vf_select_asset_number');
+        echo $f->hidden_field_withId('fa_asset_id', $$class->fa_asset_id);
+        ?><i class="generic g_select_asset_number select_popup clickable fa fa-search" data-class_name="fa_asset"></i>
        </li>
        <li><?php $f->l_text_field_d('description'); ?></li>
        <li><?php $f->l_text_field_d('referece') ?>        </li> 

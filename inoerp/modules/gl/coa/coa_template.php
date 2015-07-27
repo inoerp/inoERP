@@ -13,7 +13,7 @@
        <li><?php $f->l_text_field_dr_withSearch('coa_id'); ?><a name="show" href="form.php?class_name=coa&<?php echo "mode=$mode"; ?>" class="show document_id coa_id">
          <i class='fa fa-refresh'></i></a> 
        </li>
-       <li><?php $f->l_select_field_from_object('coa_structure_id', coa::coa_structures(), 'option_header_id', 'option_type', $$class->coa_structure_id, 'coa_structure_id', '', '', $readonly1); ?>
+       <li><?php $f->l_select_field_from_object('coa_structure_id', coa::coa_structures(), 'option_header_id', 'option_type', $$class->coa_structure_id, 'coa_structure_id', 'action', '', $readonly1); ?>
         <i class='fa fa-refresh'></i></a> 
        </li>
        <li><?php $f->l_text_field_d('coa_name'); ?></li>

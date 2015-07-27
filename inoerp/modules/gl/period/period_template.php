@@ -11,8 +11,8 @@
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
        <ul class="column header_field">
-        <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $gl_period_object[0]->ledger_id, 'gl_ledger_id'); ?>
-         <a name="show" href="form.php?class_name=gl_period&<?php echo "mode=$mode"; ?>" class="show document_id gl_ledger_id">
+        <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $gl_period_object[0]->ledger_id, 'gl_ledger_id','action'); ?>
+         <a name="show" href="form.php?class_name=gl_period&<?php echo "mode=$mode"; ?>" class="show document_id gl_ledger_id ">
           <i class="fa fa-refresh"></i></a> 
         </li>
         <li><label><?php echo gettext('Current Open Period') ?></label><?php echo $cop_stmt; ?></li>

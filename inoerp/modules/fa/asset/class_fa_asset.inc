@@ -39,13 +39,11 @@ class fa_asset extends dbObject {
   'RETIRED' => 'Retired',
   'HOLD_DEPRECIATION' => 'Hold Depreciation',
  ];
- 
  public static $type_a = [
   'CIP' => 'In Progress',
   'CAPITALIZED' => 'Capitalized',
   'EXPENSED' => 'Expensed',
  ];
- 
  public $checkbox = [
   "physical_inventory_cb"
  ];
@@ -82,6 +80,14 @@ class fa_asset extends dbObject {
   'asset_number',
   'fa_asset_category_id',
   'units',
+ ];
+ public static $json_label_fields = [
+  'asset_number',
+  'asset_type',
+  'asset_tag_number',
+  'asset_serial_number',
+  'asset_key_number',
+  'asset_description',
  ];
  public $fields_inForm_notInDataBase = [
  ];
@@ -133,6 +139,32 @@ class fa_asset extends dbObject {
   $result = $db->find_by_sql($sql);
   return $result;
  }
+ 
+ public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
+  $sql = " SELECT   asset_number,
+         type as asset_type, tag_number as asset_tag_number , serial_number as asset_serial_number,
+         key_number as asset_key_number , description as asset_description
+            FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
+  if (!empty($dependent_fields)) {
+   foreach ($dependent_fields as $k => $v) {
+    if (!empty($k) && !empty($v)) {
+     $sql .= " AND $k = '{$v}' ";
+    }
+   }
+  }
+
+  if (!empty($hidden_fields)) {
+   foreach ($hidden_fields as $k1 => $v1) {
+    if (!empty($k1) && !empty($v1)) {
+     $sql .= " AND $k1 = '{$v1}' ";
+    }
+   }
+  }
+//  echo $sql;
+  $result_array = static::find_by_sql($sql);
+  return !empty($result_array) ? ($result_array) : false;
+ }
+
 
 }
 

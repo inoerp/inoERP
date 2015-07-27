@@ -80,6 +80,12 @@ class fa_asset_book extends dbObject {
   'last_update_by',
   'last_update_date'
  ];
+ public static $json_label_fields = [
+  'asset_book_name',
+  'asset_book_type',
+  'primary_fa_asset_book_id',
+  'asset_book_description',
+ ];
  public $initial_search = [
   'fa_asset_book_id',
  ];
@@ -158,6 +164,30 @@ class fa_asset_book extends dbObject {
    " where fa_asset_book_number= '{$fa_asset_book_number}' ";
   $result = $db->find_by_sql($sql);
   return $result;
+ }
+
+ public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
+  $sql = "SELECT   asset_book_name,   type as asset_book_type ,  primary_fa_asset_book_id,   
+            description as asset_book_description
+            FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
+  if (!empty($dependent_fields)) {
+   foreach ($dependent_fields as $k => $v) {
+    if (!empty($k) && !empty($v)) {
+     $sql .= " AND $k = '{$v}' ";
+    }
+   }
+  }
+
+  if (!empty($hidden_fields)) {
+   foreach ($hidden_fields as $k1 => $v1) {
+    if (!empty($k1) && !empty($v1)) {
+     $sql .= " AND $k1 = '{$v1}' ";
+    }
+   }
+  }
+//  echo $sql;
+  $result_array = static::find_by_sql($sql);
+  return !empty($result_array) ? ($result_array) : false;
  }
 
 }

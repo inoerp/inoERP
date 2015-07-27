@@ -53,6 +53,8 @@ class pos_transaction_line extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
+ public $quantity;
+ public $amount_after_discount;
 
  public static function priceBy_headerId_ItemId($item_id_m, $price_date, $pos_transaction_header_id = '1') {
   $sql = " 

@@ -67,7 +67,7 @@ class inosave extends dbObject {
 
    foreach ($$class->field_a as $key => $value) {
     if (isset($_POST[$value][$i])) {
-     if (substr($_POST[$value][$i], -3) == '_id') {
+     if (substr($value, -3) == '_id') {
       $$class->$value = str_replace(array(',', '.'), '', $_POST[$value][$i]);
      } else {
       $$class->$value = $_POST[$value][$i];
