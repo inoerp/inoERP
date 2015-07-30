@@ -1297,7 +1297,7 @@ function getSubInventory(options) {
 }
 
 //get locator name
-function getLocator(json_url, subinventory_id, subinventory_type, trClass) {
+function getLocator(json_url, subinventory_id, subinventory_type, divClass) {
  $('#loading').show();
  $.ajax({
   url: json_url,
@@ -1314,21 +1314,26 @@ function getLocator(json_url, subinventory_id, subinventory_type, trClass) {
 //   var div = $('#json_locator', $(data)).html();
   var div = $(result).filter('div#json_locator_find_all').html();
   if (subinventory_type == "from_subinventory_id") {
-   $(trClass + " .from_locator_id").find('option').remove();
-   $(trClass + " .from_locator_id").empty().append(div);
+   $(divClass + " .from_locator_id").find('option').remove();
+   $(divClass + " .from_locator_id").empty().append(div);
   }
   if (subinventory_type == "to_subinventory_id") {
-   $(trClass + " .to_locator_id").find('option').remove();
-   $(trClass + " .to_locator_id").empty().append(div);
+   $(divClass + " .to_locator_id").find('option').remove();
+   $(divClass + " .to_locator_id").empty().append(div);
   }
   if (subinventory_type == "subinventory") {
-   $(trClass).find(".locator_id").find('option').remove();
-   $(trClass).find(".locator_id").empty().append(div);
+   $(divClass).find(".locator_id").find('option').remove();
+   $(divClass).find(".locator_id").empty().append(div);
   }
 
   if (subinventory_type == "oneSubinventory") {
    $('#content').find(".locator_id").find('option').remove();
    $('#content').find(".locator_id").empty().append(div);
+  }
+  
+    if (subinventory_type == "oneToOneSubinventory") {
+   $('#content').find(divClass).find('option').remove();
+   $('#content').find(divClass).empty().append(div);
   }
 
   $('#loading').hide();

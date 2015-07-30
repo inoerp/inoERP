@@ -4,7 +4,7 @@
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
   <div id ="searchResult">
    <form  method="post" id="prj_burden_costcode"  name="prj_burden_costcode">
-    <div id ="form_line" class="form_line"><span class="heading">Expenditure Type </span>
+    <div id ="form_line" class="form_line"><span class="heading">Burden Cost Code </span>
      <div id="tabsLine">
       <ul class="tabMain">
        <li><a href="#tabsLine-1">Basics</a></li>
@@ -38,11 +38,11 @@
               </ul>
              </td>
              <td><?php form::text_field_widsr('prj_burden_costcode_id'); ?></td>
-             <td><?php $f->l_text_field_d('costcode'); ?></td>
-             <td><?php $f->l_text_field_d('description'); ?></td>
-             <td><?php $f->l_date_fieldAnyDay('effective_from', $$class->effective_from); ?></td>
-             <td><?php $f->l_date_fieldAnyDay('effective_to', $$class->effective_to); ?></td>
-             <td><?php $f->l_text_field_d('prj_exependiture_type_id'); ?></td>
+             <td><?php $f->text_field_d('costcode'); ?></td>
+             <td><?php $f->text_field_d('description'); ?></td>
+             <td><?php echo $f->date_fieldAnyDay('effective_from', $$class->effective_from); ?></td>
+             <td><?php echo $f->date_fieldAnyDay('effective_to', $$class->effective_to); ?></td>
+             <td><?php $f->text_field_d('prj_exependiture_type_id'); ?></td>
             </tr>
             <?php
             $count = $count + 1;
