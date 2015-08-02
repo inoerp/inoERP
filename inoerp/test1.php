@@ -1,103 +1,181 @@
-<?php
-class JaxWsSoapClient extends SoapClient {
+<?xml version="1.0"?>
 
- public function __call($method, $arguments) {
-  $response = parent::__call($method, $arguments);
-  return $response->return;
- }
+<?xml-stylesheet type="text/css" href="chrome://global/skin/" ?>
+<?xml-stylesheet type="text/css"
+href="chrome://xulschoolhello/skin/browserOverlay.css" ?>
 
-}
+<window
+ id="dataEntryForm-window"
+ title="Data Entry Form"
+ flex = "1"
+ resizable ="yes"
+ orient="vertical"
+ sizemode="normal"
+ xmlns:html="http://www.w3.org/1999/xhtml"
+ xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
+ <!-- Other elements go here --> 
+ <script type="application/x-javascript"
+         src="chrome://xulschoolhello/content/jquery-2.0.3.min.js" />
 
-ini_set('soap.wsdl_cache_enabled', 0);
-ini_set('soap.wsdl_cache_ttl', 0);
-try {
- $client = new SoapClient("http://116.66.198.19:80/us/UnitedSolutions?wsdl", array("trace" => 1,
-  "location" => "http://116.66.198.19:80/us/UnitedSolutions",
-  "uri" => "http://booking.us.org/"));
- $addRequest = new stdClass();
- $addRequest->strUserId = "NEPTRI";
- $addRequest->strAirlineId = "RMK";
- $addRequest->strPassword = "PASSWORD";
- $addRequest->strAgencyId = "PLZ029";
- $addRequest->strSectorFrom = "KTM";
- $addRequest->strSectorTo = "PKR";
- $addRequest->strFlightDate = "17-JUL-2015";
- $addRequest->strReturnDate = "";
- $addRequest->strTripType = "O";
- $addRequest->strNationality = "US";
- $addRequest->intAdult = "1";
- $addRequest->intChild = "0";
- $addRequest->strPnoNo = "ZSPW2A";
- $addRequest->strTicketNo = "195329";
- $addRequest->strFromDate = "15-JUL-2015";
- $addRequest->strToDate = "25-JUL-2015";
-//$addRequest->strFlightId = "0d1579f3-3840-41b1-a61d-68b3e5adc386";
+ <script type="application/x-javascript"
+         src="chrome://xulschoolhello/content/jquery-ui.min.js" />
 
- $client->FlightAvailability($addRequest);
+ <script type="application/x-javascript"
+         src="chrome://xulschoolhello/content/browserOverlay.js" />
+ <vbox>
+  <vbox flex="1">
+   <hbox  min-width = "1000" align="start" flex="1">
+    <toolbox>
+     <toolbar id="findfiles-toolbar">
+      <toolbarbutton id="newload"     class="tool-btn newload"     label="New"    accesskey="n" oncommand="XULSchoolChrome.BrowserOverlay.newLoad(event);"/>
+      <toolbarbutton id="savfile"     class="tool-btn savefile"     label="Save"    accesskey="s" oncommand="XULSchoolChrome.BrowserOverlay.saveDataFile();"/>
+      <toolbarbutton id="close"     class="tool-btn close"     label="Close"    accesskey="c" oncommand="window.close();"/>
+     </toolbar>
+    </toolbox>
+   </hbox>
+  </vbox>
+
+  <vbox>
+   <tabbox>
+    <tabs>
+     <tab label="Data Loader"/>
+     <tab label="Commands"/>
+     <tab label="Java Srcipt"/>
+    </tabs>
+    <tabpanels>
+     <tabpanel id="data_loader">
+      <vbox>
+       <toolbox>
+        <textbox multiline="true"  id="datatoupload" rows="30" cols="130" value="Enter | separated data here"/>
+       </toolbox>
+      </vbox>
+      <vbox>
+       <!--   <menulist label="Select Window" id="slect-window">
+           <menupopup>
+            <menuitem label="Dev" />
+            <menuitem label="Production" />
+           </menupopup>
+          </menulist>-->
+       <button id="start-load" label="Start Loading" accesskey="l" oncommand="XULSchoolChrome.BrowserOverlay.startDataLoading(event);"/>
+      </vbox>
+     </tabpanel>
+     <tabpanel id="commands" style="overflow:scroll;">
+      <grid flex="1">
+       <columns>
+        <column flex="1"/>
+        <column flex="1"/>
+        <column flex="2"/>
+       </columns>
+       <rows >
+        <row class="heading">
+         <description>String</description>
+         <description>Command</description>
+         <description>Example</description>
+        </row>
+        <row class="data-row">
+         <description>TAB</description>
+         <description>|</description>
+         <description>111|ABC</description>
+        </row>
+        <row class="data-row">
+         <description>Any Character</description>
+         <description>The Character</description>
+         <description>A B C</description>
+        </row>
+        <row class="data-row">
+         <description>Shift + Character</description>
+         <description>*S(Character)</description>
+         <description>Shift + A  = *SA</description>
+        </row>
+        <row class="data-row">
+         <description>Alt + Character</description>
+         <description>*A(Character)</description>
+         <description>Alt + A  = *AA</description>
+        </row>
+        <row class="data-row">
+         <description>Shift + Character</description>
+         <description>*S(Character)</description>
+         <description>Shift + A  = *SA</description>
+        </row>
+        <row class="data-row">
+         <description>Shift Ctrl + Character</description>
+         <description>**SC(Character)</description>
+         <description>Shift Ctrl + A  = **SCA</description>
+        </row>
+        <row class="data-row">
+         <description>Alt Ctrl + Character</description>
+         <description>**AC(Character)</description>
+         <description>Alt Ctrl + A  = **ACA</description>
+        </row>
+        <row class="data-row">
+         <description>Alt Shift + Character</description>
+         <description>**AS(Character)</description>
+         <description>Alt Shift + A  = **ASA</description>
+        </row>
+        <row class="data-row">
+         <description>Up Arrow</description>
+         <description>**UP</description>
+         <description>**UP</description>
+        </row>
+        <row class="data-row">
+         <description>Down Arrow</description>
+         <description>**DOWN</description>
+         <description>**DOWN</description>
+        </row>
+        <row class="data-row">
+         <description>Left Arrow</description>
+         <description>**LEFT</description>
+         <description>**LEFT</description>
+        </row>
+        <row class="data-row">
+         <description>Right Arrow</description>
+         <description>**RIGHT</description>
+         <description>**RIGHT</description>
+        </row>
+        <row class="data-row">
+         <description>Enter/Return</description>
+         <description>**ENTER</description>
+         <description>**ENTER</description>
+        </row>
+        <row class="data-row">
+         <description>Down Arrow</description>
+         <description>**DOWN</description>
+         <description>**DOWN*</description>
+        </row>
+        <row class="data-row">
+         <description>Space Bar</description>
+         <description>**SPACE</description>
+         <description>**SPACE</description>
+        </row>
+        <row class="data-row">
+         <description>Delete</description>
+         <description>**DEL</description>
+         <description>**DEL</description>
+        </row>
+        <row class="data-row">
+         <description>Page Up Bar</description>
+         <description>**PAGEUP</description>
+         <description>**PAGEUP</description>
+        </row>
+        <row class="data-row">
+         <description>Page Down</description>
+         <description>**PAGEDOWN</description>
+         <description>**PAGEDOWN</description>
+        </row>
+       </rows>
+      </grid>
+     </tabpanel>
+     <tabpanel id="javascript">
+      <toolbox>
+       <textbox multiline="true"  id="user_javascript" rows="30" cols="150" value="Enter custom java script here"/>
+      </toolbox>
+     </tabpanel>
+    </tabpanels>
+   </tabbox>
 
 
- $xmlstr = $client->__getLastResponse();
-  $doc = new DOMDocument();
- $doc->loadXML($xmlstr);
- echo '<pre>';
- echo $xmlstr;
- print_r($doc);
- 
- function xml_to_array($root) {
-    $result = array();
-
-    if ($root->hasAttributes()) {
-        $attrs = $root->attributes;
-        foreach ($attrs as $attr) {
-            $result['@attributes'][$attr->name] = $attr->value;
-        }
-    }
-
-    if ($root->hasChildNodes()) {
-        $children = $root->childNodes;
-        if ($children->length == 1) {
-            $child = $children->item(0);
-            if ($child->nodeType == XML_TEXT_NODE) {
-                $result['_value'] = $child->nodeValue;
-                return count($result) == 1
-                    ? $result['_value']
-                    : $result;
-            }
-        }
-        $groups = array();
-        foreach ($children as $child) {
-            if (!isset($result[$child->nodeName])) {
-                $result[$child->nodeName] = xml_to_array($child);
-            } else {
-                if (!isset($groups[$child->nodeName])) {
-                    $result[$child->nodeName] = array($result[$child->nodeName]);
-                    $groups[$child->nodeName] = 1;
-                }
-                $result[$child->nodeName][] = xml_to_array($child);
-            }
-        }
-    }
-
-    return $result;
-}
+  </vbox>
+ </vbox>
 
 
-$doc_a = xml_to_array($doc);
- print_r($doc_a);
-// print_r($xml);
-//// print_r($doc);
-////$arrFeeds = array();
- foreach ($doc_a as $node) {
-  $Airline = $node->getElementsByTagName('Airline')->item(0)->nodeValue;
-  $FlightNo = $node->getElementsByTagName('FlightNo')->item(0)->nodeValue;
-  $Departure = $node->getElementsByTagName('Departure')->item(0)->nodeValue;
-  $Arrival = $node->getElementsByTagName('Arrival')->item(0)->nodeValue;
-  $Class = $node->getElementsByTagName('FlightClassCode')->item(0)->nodeValue;
-  $Currency = $node->getElementsByTagName('Currency')->item(0)->nodeValue;
-  echo $Fare = $node->getElementsByTagName('ResFare')->item(0)->nodeValue;
- }
-} catch (SoapFault $exception) {
- print_r("We Have Some Issue/Error:<br/>");
- print_r($exception->getMessage());
-}
-?>
+</window>
