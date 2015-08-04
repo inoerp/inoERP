@@ -18,7 +18,7 @@
    }
    ?></ul>
  <div id="searchResult">
-
+ <div id="multi_<?php echo $class ?>">
       <?php
       if (!empty($multi_select_actions)) {
        echo '<div class="well well-sm">' . $multi_select_actions . '</div>';
@@ -176,3 +176,4 @@
     </div>
      </div> 
 </div>
+ </div>

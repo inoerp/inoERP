@@ -36,7 +36,11 @@ class fp_kanban_header extends dbObject {
  ];
  public $action_a = [
   'CREATE_CARD' => 'Create Card',
-  'CALCULATE' => 'Calculate Size/Card',
+  'UPDATE_CARD' => 'Create/Update Card',
+ ];
+ public static $card_generate_mode_a = [
+  'CREATE_NEW_CARD' => 'Create New Card',
+  'UPDATE_CARD' => 'Update Existing Card'
  ];
  public static $source_type_a = [
   'SUPPLIER' => 'Supplier',
@@ -45,12 +49,10 @@ class fp_kanban_header extends dbObject {
   'ORG' => 'Organization',
   'LOGICAL' => 'Logical'
  ];
- 
-  public static $calculate_a = [
+ public static $calculate_a = [
   'CARD' => 'Number of Cards',
   'CARD_SIZE' => 'Card Size'
  ];
-  
  public $field_a = [
   'fp_kanban_header_id',
   'org_id',
@@ -102,6 +104,12 @@ class fp_kanban_header extends dbObject {
   "supplier_name",
   "supplier_number",
   "supplier_site_name",
+  'multibin_kanban_quantity',
+  'overwrite_kanban_multibin_number',
+  'overwrite_kanban_multibin_size',
+  'kanban_multibin_number',
+  'kanban_multibin_size',
+  'action',
  ];
  public $search = [
   '_show_update_path' => 1,
@@ -141,10 +149,78 @@ class fp_kanban_header extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
+ public $action;
  public $item_number;
  public $item_description;
  public $supplier_name;
  public $supplier_site_name;
+ public $multibin_kanban_quantity;
+ public $overwrite_kanban_multibin_number;
+ public $overwrite_kanban_multibin_size;
+ public $kanban_multibin_number;
+ public $kanban_multibin_size;
+ 
+ public $prg_generate_card_parameters = [
+  'Organization' => 'search_org_name',
+  'Item Number From' => 'search_item_number_from',
+  'Item Number To' => 'search_item_number_to',
+  'Item Id From' => 'search_item_id_from',
+  'Item Id To' => 'search_item_id_to',
+  'Mode' => 'search_kanban_card_generate_mode',
+ ];
+ public $prg_generate_card_details = [
+  'name' => 'Min Max Attribute Update ',
+  'description' => 'Update Item Attributes related to Min Max ',
+ ];
+
+ public function _before_save() {
+  if (!empty($this->action)) {
+   if ($this->action == 'update_kanban') {
+    $this->_update_kanban();
+    return 10;
+   }
+  }
+ }
+
+ private function _update_kanban() {
+  $kh = new fp_kanban_header();
+  $kh->findBy_id($this->fp_kanban_header_id);
+
+  if (!empty(trim($this->overwrite_kanban_multibin_number))) {
+   $kh->noof_card = $this->overwrite_kanban_multibin_number;
+  } else if (!empty(trim($this->kanban_multibin_number))) {
+   $kh->noof_card = $this->kanban_multibin_number;
+  }
+
+  if (!empty(trim($this->overwrite_kanban_multibin_size))) {
+   $kh->card_size = $this->overwrite_kanban_multibin_size;
+  } else if (!empty(trim($this->kanban_multibin_size))) {
+   $kh->card_size = $this->kanban_multibin_size;
+  }
+//  pa($this);
+//  pa($kh);
+  $kh->save();
+ }
+
+ public function multi_select_input_fields() {
+  $multi_select_input = [
+
+   'overwrite_kanban_multibin_number',
+   'overwrite_kanban_multibin_size'
+  ];
+  return $multi_select_input;
+ }
+
+ public function multi_select_hidden_fields() {
+  $multi_select_hidden = [
+   'action_class_name',
+   'mode',
+   'action',
+   'show_block',
+  ];
+
+  return $multi_select_hidden;
+ }
 
 }
 

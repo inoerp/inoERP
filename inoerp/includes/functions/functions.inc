@@ -1137,7 +1137,7 @@ function search_mrp_name() {
 }
 
 function search_mrp_name_onevalue() {
- $f = new inoform();
+ global $f;
  return $f->select_field_from_object('fp_mrp_header_id', fp_mrp_header::find_all(), 'fp_mrp_header_id', 'mrp_name', '', 'fp_mrp_header_id', '', 1, '', '', 1);
 }
 
@@ -1146,9 +1146,20 @@ function search_minmax_planner() {
  return $f->select_field_from_object('fp_minmax_header_id', fp_minmax_header::find_all(), 'fp_minmax_header_id', 'plan_name', '', 'fp_minmax_header_id', '', 1);
 }
 
+function search_kanban_planner() {
+ global $f;
+ return $f->select_field_from_object('fp_kanban_planner_header_id', fp_kanban_planner_header::find_all(), 'fp_kanban_planner_header_id', 'plan_name', '', 'fp_kanban_planner_header_id', '', 1);
+}
+
 function search_org_name() {
  global $f;
  $stmt = $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', '', 'org_id', '', '', '', '', 1);
+ return $stmt;
+}
+
+function search_kanban_card_generate_mode() {
+ global $f;
+ $stmt = $f->select_field_from_array('card_generate_mode', fp_kanban_header::$card_generate_mode_a,  '', 'card_generate_mode','',1);
  return $stmt;
 }
 

@@ -4973,6 +4973,22 @@ $(document).ready(function () {
   }
  });
 
+$('body').on('click', '#multi_fp_kanban_suggestion_v .line_id_cb' , function(){
+    if(!$(this).closest('tr').find('.fp_kanban_header_id').val()){
+        $(this).attr('checked', false);
+      alert('No Kaban Found!\nFirst create a kanban card');
+      var trClass =  '.' + $(this).closest('tr').attr('class').replace(/\s+/g,'.');
+      $('#multi_fp_kanban_suggestion_v').find(trClass).find(':input').prop('disabled', true);
+    }
+});
+$('body').on('change', '#multi_fp_kanban_suggestion_v .overwrite_kanban_multibin_number, #multi_fp_kanban_suggestion_v .overwrite_kanban_multibin_size' , function(){
+    if(!$(this).closest('tr').find('.fp_kanban_header_id').val()){
+        $(this).attr('checked', false);
+      alert('No Kaban Found!\nFirst create a kanban card');
+      var trClass =  '.' + $(this).closest('tr').attr('class').replace(/\s+/g,'.');
+      $('#multi_fp_kanban_suggestion_v').find(trClass).find(':input').prop('disabled', true);
+    }
+});
 });
 
 function remove_unsaved_msg() {
