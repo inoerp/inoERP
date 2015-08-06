@@ -88,7 +88,20 @@ class fp_kanban_line extends dbObject {
  Public static function highest_card_number() {
   $sql = " SELECT MAX(card_number) as max_number from fp_kanban_line ";
   $result = self::find_by_sql($sql);
-  return !empty($result) ? $result[0]->card_number : 0;
+  return !empty($result) ? $result[0]->max_number : 0;
+ }
+ 
+  Public static function noof_active_cards($fp_kanban_header_id) {
+  $sql = " SELECT COUNT(card_number) as card_count from fp_kanban_line  WHERE fp_kanban_header_id = '{$fp_kanban_header_id}' ";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result[0]->card_count : 0;
+ }
+ 
+ public function _after_save(){
+  if(!empty($this->fp_kanban_line_id) && empty($this->card_number)){
+   $this->card_number = $this->fp_kanban_line_id;
+   $this->save();
+  }
  }
 
 }

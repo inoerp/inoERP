@@ -1330,8 +1330,8 @@ function getLocator(json_url, subinventory_id, subinventory_type, divClass) {
    $('#content').find(".locator_id").find('option').remove();
    $('#content').find(".locator_id").empty().append(div);
   }
-  
-    if (subinventory_type == "oneToOneSubinventory") {
+
+  if (subinventory_type == "oneToOneSubinventory") {
    $('#content').find(divClass).find('option').remove();
    $('#content').find(divClass).empty().append(div);
   }
@@ -2332,6 +2332,7 @@ function getSearchResult(options) {
  }).done(function (result) {
   var newContent = $(result).find('div#searchResult').html();
   $('#searchResult').empty().append(newContent);
+
   $.getScript("includes/js/reload.js").done(function () {
    $('#overlay').css('display', 'none');
    $('.show_loading_small').hide();
@@ -2455,6 +2456,10 @@ function getMultiSelectResult(options) {
    $('#header_top_container').replaceWith('<div id="header_top_container">' + allButton + '</div>');
   }
   $('#searchResult').empty().append(newContent);
+  var pagination = $(result).find('div#pagination').html();
+  if(pagination){
+  $('#pagination').empty().append(pagination);
+  }
   $.getScript("includes/js/reload.js");
   $.getScript("includes/js/multi_select.js");
   $(result).find('#js_files').find('li').each(function () {
@@ -4238,7 +4243,7 @@ $(document).ready(function () {
   getMultiSelectResult();
  });
 
- $('body').on('click', '#multi_select .page_nos a', function (e) {
+ $('body').on('click', '#multi_select .page_nos a, .multi_select_page .page_nos a', function (e) {
   e.preventDefault();
   $('.hideDiv_input').trigger('click');
   var page_no = getUrlValues('pageno', $(this).prop('href'));
@@ -4266,8 +4271,8 @@ $(document).ready(function () {
 
  getBlocks();
 
-//#path_by_module a,
- $('body').on('click', '#top-path-menu-ul a, #path_by_module a, .search_result a,#erp_form_area a.ajax-link , #header_top .menu a, #sys_menu_left_vertical .menu a,#search_result .action a, #pagination .page_nos a, #new_page_button', function (e) {
+//#path_by_module a, #pagination .page_nos a, .pagination_page .page_nos a
+ $('body').on('click', '#top-path-menu-ul a, #path_by_module a, .search_result a,#erp_form_area a.ajax-link , .pagination_page .page_nos a, #header_top .menu a, #sys_menu_left_vertical .menu a,#search_result .action a,  #new_page_button', function (e) {
   e.preventDefault();
   var urlLink = $(this).attr('href');
   var urlLink_a = urlLink.split('?');
@@ -4946,7 +4951,7 @@ $(document).ready(function () {
 
 //tracking unsaved changes
  $('#erp_form_area').on('change', 'form[method="post"] :input', function (e) {
-  if($(this).hasClass('action')){
+  if ($(this).hasClass('action')) {
    return true;
   }
   var noof_field_changes = $('#unsaved_fields').data('no_of_fields');
@@ -4973,22 +4978,22 @@ $(document).ready(function () {
   }
  });
 
-$('body').on('click', '#multi_fp_kanban_suggestion_v .line_id_cb' , function(){
-    if(!$(this).closest('tr').find('.fp_kanban_header_id').val()){
-        $(this).attr('checked', false);
-      alert('No Kaban Found!\nFirst create a kanban card');
-      var trClass =  '.' + $(this).closest('tr').attr('class').replace(/\s+/g,'.');
-      $('#multi_fp_kanban_suggestion_v').find(trClass).find(':input').prop('disabled', true);
-    }
-});
-$('body').on('change', '#multi_fp_kanban_suggestion_v .overwrite_kanban_multibin_number, #multi_fp_kanban_suggestion_v .overwrite_kanban_multibin_size' , function(){
-    if(!$(this).closest('tr').find('.fp_kanban_header_id').val()){
-        $(this).attr('checked', false);
-      alert('No Kaban Found!\nFirst create a kanban card');
-      var trClass =  '.' + $(this).closest('tr').attr('class').replace(/\s+/g,'.');
-      $('#multi_fp_kanban_suggestion_v').find(trClass).find(':input').prop('disabled', true);
-    }
-});
+ $('body').on('click', '#multi_fp_kanban_suggestion_v .line_id_cb', function () {
+  if (!$(this).closest('tr').find('.fp_kanban_header_id').val()) {
+   $(this).attr('checked', false);
+   alert('No Kaban Found!\nFirst create a kanban card');
+   var trClass = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
+   $('#multi_fp_kanban_suggestion_v').find(trClass).find(':input').prop('disabled', true);
+  }
+ });
+ $('body').on('change', '#multi_fp_kanban_suggestion_v .overwrite_kanban_multibin_number, #multi_fp_kanban_suggestion_v .overwrite_kanban_multibin_size', function () {
+  if (!$(this).closest('tr').find('.fp_kanban_header_id').val()) {
+   $(this).attr('checked', false);
+   alert('No Kaban Found!\nFirst create a kanban card');
+   var trClass = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
+   $('#multi_fp_kanban_suggestion_v').find(trClass).find(':input').prop('disabled', true);
+  }
+ });
 });
 
 function remove_unsaved_msg() {

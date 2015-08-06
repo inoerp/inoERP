@@ -1,4 +1,4 @@
-<div id="locator_divId">
+<div id="locator_divId" class="multi_select_page">
  <div class="row small-top-margin" id="multi_select">
   <div id="searchForm" ><div class='hideDiv_input'></div>
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
@@ -39,12 +39,18 @@
    </form>
   </div>
   <!--END OF FORM HEADER-->
+
+  </div>
+ 
+  <div class="row small-top-margin">
   <div id="pagination" style="clear: both;">
    <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
    ?>
   </div>
  </div>
-</div>
+ 
+ </div>
+
 
 
 <div id="js_data">

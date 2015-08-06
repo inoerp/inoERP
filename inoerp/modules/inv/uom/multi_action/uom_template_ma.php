@@ -1,4 +1,4 @@
-<div id="uom_divId">
+<div id="uom_divId" class="multi_select_page">
  <div class="row small-top-margin" id="multi_select">
   <div id="searchForm" ><div class='hideDiv_input'></div>
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
@@ -73,7 +73,7 @@
             if (!empty($uom->primary_uom_id)) {
              $primar_uom_i = uom::find_by_id($uom->primary_uom_id);
              $uom->primary_uom = $primar_uom_i->uom_name;
-            }else{
+            } else {
              $uom->primary_uom = null;
             }
             ?>         
@@ -102,11 +102,15 @@
    </form>
   </div>
   <!--END OF FORM HEADER-->
+ </div>
+
+ <div class="row small-top-margin">
   <div id="pagination" style="clear: both;">
    <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
    ?>
   </div>
  </div>
+
 </div>
 <script type=text/javascript>
  function setValFromSelectPage(uom_id, uom_name) {
@@ -129,15 +133,15 @@
   }
  };
 
- $(document).ready(function() {
- //selecting primary UOM Id on multi action
- $('body').on("click", '.primary_uom_id.select_popup', function() {
- var primaryUom_fieldClass = $(this).closest('tr').prop('class');
-         localStorage.setItem("primaryUom_fieldClass", primaryUom_fieldClass);
-         void window.open('select.php?class_name=uom', '_blank',
-                 'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
-         //add new row in multi action template
+ $(document).ready(function () {
+  //selecting primary UOM Id on multi action
+  $('body').on("click", '.primary_uom_id.select_popup', function () {
+   var primaryUom_fieldClass = $(this).closest('tr').prop('class');
+   localStorage.setItem("primaryUom_fieldClass", primaryUom_fieldClass);
+   void window.open('select.php?class_name=uom', '_blank',
+           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+  });
+  //add new row in multi action template
 
  });
 </script>
