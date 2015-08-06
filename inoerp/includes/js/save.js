@@ -227,7 +227,6 @@ function saveMainClass(json_url, form_header_id, primary_column_id, single_line,
 
 saveMainClass.prototype.saveMain = function (beforeSave)
 {
-
  var form_header_id_h = '#' + this.form_header_id;
  if (this.form_line_id) {
   var form_line_id = this.form_line_id;
@@ -256,7 +255,8 @@ saveMainClass.prototype.saveMain = function (beforeSave)
  var onlyHeaderOverLay = this.onlyHeaderOverLay;
  var saveVerticalTab = this.saveVerticalTab;
  var line_key_field_d = '.' + line_key_field;
- $('#save').on('click', function (e) {
+ $('body').off('click', '#save').on('click', '#save', function (e) {
+  json_url = 'form.php?class_name=' + $('ul#js_saving_data').find('.headerClassName').data('headerclassname');
   remove_unsaved_msg();
   if ($.isFunction(window.beforeSave)) {
    var beforeSaveResult = window.beforeSave();
@@ -347,7 +347,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
   }
 
   if (lineClassName === undefined) {
-   lineClassName = form_line_id;
+   lineClassName = $('ul#js_saving_data').find('.lineClassName').data('lineclassname');
   }
 
   if ((typeof headerData !== undefined) && (headerData.length > 0)) {
@@ -429,7 +429,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
        detailData = "";
       }
       count++;
-//      alert('340');
+//      console.log('433');
       saveLine(json_url, lineData, trclass, detailData, primary_column_id_h, lineClassName, detailClassName);
      });
 //     alert('Saving ' + count + ' Record(s)');
@@ -443,7 +443,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
       } else {
        detailData = "";
       }
-//      alert('354');
+//      console.log('446');
       saveLine(json_url, lineData, trclass, detailData, primary_column_id_h, lineClassName, detailClassName);
      });
     }
@@ -706,15 +706,15 @@ add_new_rowMain.prototype.add_new_row = function (afterAddNewRow) {
  } else {
   $(newtrClass).clone().attr("class", "new_object" + objectCount).appendTo($(tbodyClass));
  }
- 
- $("tr.new_object" + objectCount).find('.'+this.divClassNotToBeCopied).each(function () {
+
+ $("tr.new_object" + objectCount).find('.' + this.divClassNotToBeCopied).each(function () {
   $(this).attr('value', '').prop('value', '').val('');
  });
- 
-  $("tr.new_object" + objectCount).find('.dont_copy_r').each(function () {
+
+ $("tr.new_object" + objectCount).find('.dont_copy_r').each(function () {
   $(this).attr('value', '').prop('value', '').val('');
  });
- 
+
  if (this.removeDefault === true) {
   $("tr.new_object" + objectCount).find("td input[type=text],td input[type=number], td input[type=select]").not(divClassToBeCopied_c).each(function () {
    $(this).val('');

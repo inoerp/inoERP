@@ -40,7 +40,8 @@ class fp_kanban_header extends dbObject {
  ];
  public static $card_generate_mode_a = [
   'CREATE_NEW_CARD' => 'Create New Card',
-  'UPDATE_CARD' => 'Update Existing Card'
+  'UPDATE_CARD' => 'Update Existing Card',
+  'CREATE_UPDATE' => 'Create & Update'
  ];
  public static $source_type_a = [
   'SUPPLIER' => 'Supplier',
@@ -78,6 +79,7 @@ class fp_kanban_header extends dbObject {
   'allocation_per',
   'flm',
   'ssd',
+  'rfid_reference',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -143,6 +145,7 @@ class fp_kanban_header extends dbObject {
  public $allocation_per;
  public $flm;
  public $ssd;
+ public $rfid_reference;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -159,18 +162,17 @@ class fp_kanban_header extends dbObject {
  public $overwrite_kanban_multibin_size;
  public $kanban_multibin_number;
  public $kanban_multibin_size;
- 
  public $prg_generate_card_parameters = [
   'Organization' => 'search_org_name',
   'Item Number From' => 'search_item_number_from',
   'Item Number To' => 'search_item_number_to',
-  'Item Id From' => 'search_item_id_from',
-  'Item Id To' => 'search_item_id_to',
+  'Item Id From' => 'search_item_id_m_from',
+  'Item Id To' => 'search_item_id_m_to',
   'Mode' => 'search_kanban_card_generate_mode',
  ];
  public $prg_generate_card_details = [
-  'name' => 'Min Max Attribute Update ',
-  'description' => 'Update Item Attributes related to Min Max ',
+  'name' => 'Kanban Card Update ',
+  'description' => 'Update Kanban Card Details ',
  ];
 
  public function _before_save() {
@@ -200,6 +202,135 @@ class fp_kanban_header extends dbObject {
 //  pa($this);
 //  pa($kh);
   $kh->save();
+ }
+
+ public function create_new_card($kanban_header_id) {
+  $kbh = new fp_kanban_header();
+  $kbh->findBy_id($kanban_header_id);
+  $no_of_cards = !empty($kbh->noof_card) ? $kbh->noof_card : 2;
+  $max_card_number = fp_kanban_line::highest_card_number();
+  for ($i = 0; $i < $no_of_cards; $i++) {
+   $max_card_number++;
+   $kbl = new fp_kanban_line();
+   $kbl->fp_kanban_header_id = $kbh->fp_kanban_header_id;
+   $kbl->card_number = $max_card_number;
+   $kbl->description = "Auto Generated Card";
+   $kbl->card_status = "ACTIVE";
+   $kbl->supply_status = "NEW";
+   $kbl->kanban_size = $kbh->card_size;
+   $kbl->card_type = $kbh->source_type;
+   $kbl->save();
+  }
+ }
+
+ public function update_card($fp_kanban_line_id) {
+  $kbl = new fp_kanban_line();
+  $kbl->findBy_id($fp_kanban_line_id);
+  $kbh = new fp_kanban_header();
+  $kbh->findBy_id($kbl->fp_kanban_header_id);
+  $kbl->kanban_size = $kbh->card_size;
+  $kbl->card_type = $kbh->source_type;
+  $kbl->save();
+ }
+
+ Public static function all_kanbans_for_itemOrg($item_id_m, $org_id) {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE item_id_m = '{$item_id_m}' AND org_id='{$org_id}' ";
+
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : null;
+ }
+
+ private function _verify_create_update_card($fp_kanban_header_id, $card_gen_mode) {
+  
+ }
+
+ public function prg_generate_card($seralized_parameters) {
+  $parameters = unserialize($seralized_parameters);
+  $this->message = '<br> Starting Kanban Card Generation Program....<br>';
+  pa($parameters);
+  
+  $card_gen_mode = !empty($parameters['from_item_id_m'][0]) ? $parameters['from_item_id_m'][0] : 'CREATE_UPDATE';
+  $this->message = '<br> Using card generation mode ' . $card_gen_mode;
+  
+  if (!empty($parameters['org_id'][0])) {
+   $org_id = $parameters['org_id'][0];
+   $this->message .= '<br> Entered Org Id is : ' . $org_id;
+  } else {
+   $this->message .= '<br> Error! : No org id found @ item ' . __LINE__;
+   return $this->message;
+  }
+
+  if (!empty($parameters['from_item_id_m'][0])) {
+   $this->message .= "<br/>Using  Kanban Card Generation Program for Item Id Range ";
+   $from_item_id = $parameters['from_item_id_m'][0];
+   if (!empty($parameters['to_item_id_m'][0])) {
+    $to_item_id = $parameters['to_item_id_m'][0];
+   } else {
+    $to_item_id = $from_item_id;
+   }
+   $item = new item();
+   $item_range = $item->findBy_itemIdRange($from_item_id, $to_item_id);
+   foreach ($item_range as $item_record) {
+    $all_kanbans_for_item = self::all_kanbans_for_itemOrg($item_record->item_id_m, $org_id);
+    foreach ($all_kanbans_for_item as $kanban) {
+       $this->_verify_create_update_card($kanban->fp_kanban_header_id, $card_gen_mode);
+    }
+   }
+   return $this->message;
+  }
+
+  if (!empty($parameters['from_item_number'][0])) {
+   $this->message .= "<br/>Using  Min Max Planner by Item Number Range ";
+   $from_item_number = $parameters['from_item_number'][0];
+   if (!empty($parameters['to_item_number'][0])) {
+    $to_item_number = $parameters['to_item_number'][0];
+   } else {
+    $to_item_number = $from_item_number;
+   }
+   $item = new item();
+   $item_range = $item->findBy_itemNumberRange_OrgId($from_item_number, $to_item_number, $org_id);
+   foreach ($item_range as $item_record) {
+    $mms->item_id = $item_record->item_id;
+    $mms_i = $mms->findBy_planId_itemId();
+    $mm_item = new item();
+    foreach ($mms->field_a as $key => $value) {
+     if (property_exists($mm_item, $value)) {
+      $mm_item->$value = $mms_i->$value;
+     }
+    }
+    try {
+     $mm_item->_update_item_minmax();
+     $this->message .= "<br>Min Max Item Attributes is Successfullyupdated for item_id - " . $mms->plan_id .
+      ' fp_minmax_header_id : ' . $fp_minmax_header_id;
+    } catch (Exception $e) {
+     $this->message .= "<br>Min Max Plannerp failed for Item id " . $mms_records->item_id . $e->getMessage();
+    }
+   }
+   return $this->message;
+  }
+
+  //if no item id/number is given
+  $this->message .= "<br/>Updating Min Max Attributes for all Items ";
+  $mms_all = $mms->findBy_planId();
+  foreach ($mms_all as $mms_records) {
+   $mm_item = new item();
+   foreach ($mms->field_a as $key => $value) {
+    if (property_exists($mm_item, $value)) {
+     $mm_item->$value = $mms_records->$value;
+    }
+   }
+   try {
+    $mm_item->_update_item_minmax();
+    $this->message .= "<br>Min Max Item Attributes is Successfullyupdated for item_id - " . $mms_records->item_id .
+     ' fp_minmax_header_id : ' . $mms->plan_id;
+   } catch (Exception $e) {
+    $this->message .= "<br>Min Max Plannerp failed for Item id " . $mms_records->item_id . $e->getMessage();
+   }
+  }
+  
+  return $this->message;
  }
 
  public function multi_select_input_fields() {

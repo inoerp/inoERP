@@ -389,6 +389,7 @@ $(document).ready(function () {
   } else {
    classSave.detailClassName = null;
   }
+//  console.log(classSave.json_url);
   classSave.saveMain(before_save_function);
   deleteData(deleteLink);
  }

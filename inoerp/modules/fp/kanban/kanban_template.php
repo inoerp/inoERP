@@ -68,6 +68,7 @@ inoERP
        $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
        echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
        ?> </li>
+      <li><?php $f->l_text_field_d('rfid_reference'); ?></li>
      </ul>
     </div>
     <div id="tabsHeader-4" class="tabContent">

@@ -30,6 +30,10 @@
       <li><?php $f->l_text_field_dr('job_name'); ?>  </li>
       <li><?php $f->l_text_field_dr('position_name'); ?>  </li>
       <li><?php $f->l_text_field_dr('status'); ?>  </li>
+<!--      <li><a  role="button" class="quick_select button btn btn-info" target="_blank" 
+                               href="<?php // echo HOME_URL ?>form.php?class_name=hr_payslip_header&amp;router=pdf_print&amp;hr_payslip_header_id=<?php echo!(empty($$class->hr_payslip_header_id)) ? $$class->hr_payslip_header_id : ""; ?>" >
+         <?php // echo gettext('Print') ?></a></li>-->
+
      </ul>
     </div>
    </form>

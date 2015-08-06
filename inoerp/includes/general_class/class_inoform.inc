@@ -473,6 +473,11 @@ EOD;
   echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->number_field($name, $value, $size, $id, $div_class, $required, $readonly, $place_holder, $title, $min, $max);
  }
+ 
+  public function number_field_d($field_name, $div_class = "") {
+  global $class, $$class;
+    echo $this->number_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
+ }
 
  public function l_number_field_d($field_name, $div_class = "") {
   global $class, $$class;

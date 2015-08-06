@@ -85,6 +85,12 @@ class fp_kanban_line extends dbObject {
   return $lines;
  }
 
+ Public static function highest_card_number() {
+  $sql = " SELECT MAX(card_number) as max_number from fp_kanban_line ";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result[0]->card_number : 0;
+ }
+
 }
 
 //end of path class

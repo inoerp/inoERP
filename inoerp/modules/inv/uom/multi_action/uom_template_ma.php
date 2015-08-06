@@ -144,6 +144,7 @@
 
 <div id="js_data">
  <ul id="js_saving_data">
+  <li class="headerClassName" data-headerClassName="uom" ></li>
   <li class="lineClassName" data-lineClassName="uom" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
   <li class="form_header_id" data-form_header_id="uom" ></li>
