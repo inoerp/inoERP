@@ -156,7 +156,7 @@
          </ul>
         </div>
        </li>
-       <li> <button type="button" class="btn btn-primary btn-lg "> <i class="fa fa-reorder white-font-link"></i> Source Lines </button>  </li>
+       <li><a target="_blank" role="button"  class="btn btn-primary btn-lg white-font-link" href="form.php?mode=9&class_name=fa_asset_source&fa_asset_id=<?php echo $$class->fa_asset_id ?>"> <i class="fa fa-reorder white-font-link"></i> Source Lines </a>  </li>
        <li> <button type="button" class="btn btn-primary btn-lg "> <i class="fa fa-list-ul white-font-link"></i> Components </button>  </li>
        <li> <button type="button" class="btn btn-primary btn-lg "> <i class="fa fa-bolt white-font-link"></i> Retirements </button>  </li>
        <li> <button type="button" class="btn btn-primary btn-lg "> <i class="fa fa-money white-font-link"></i> Financial Inquiry </button>  </li>

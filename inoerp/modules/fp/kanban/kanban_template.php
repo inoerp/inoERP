@@ -124,14 +124,15 @@ inoERP
         <th><?php echo gettext('Card Status') ?></th>
         <th><?php echo gettext('Supply Status') ?></th>
         <th><?php echo gettext('Kanban Size') ?></th>
-        <th><?php echo gettext('Replenish') ?></th>        
+        <th><?php echo gettext('Action') ?></th>        
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
        $count = 0;
+       $line_action_a = [ 'REPLENISH' => 'Replenish', 'SET_FULL' => 'Full', 'ON_HOLD' => 'On Hold', 'CANCEL' => 'Cancelled'];
        foreach ($fp_kanban_line_object as $fp_kanban_line) {
-        $readonly_ss = $$class_second->supply_status == 'FULL' ?  '' : true;
+        $readonly_ss = $$class_second->supply_status == 'FULL' ? '' : true;
         ?>         
         <tr class="fp_kanban_line<?php echo $count ?>">
          <td>
@@ -144,9 +145,9 @@ inoERP
          <td><?php echo $f->select_field_from_array('card_type', fp_kanban_line::$card_type_a, $$class_second->card_type, '', 'medium'); ?></td>
          <td><?php $f->text_field_d2('description'); ?></td>
          <td><?php echo $f->select_field_from_array('card_status', fp_kanban_line::$card_status_a, $$class_second->card_status, '', 'medium'); ?></td>
-         <td><?php echo $f->select_field_from_array('supply_status', fp_kanban_line::$supply_status_a, $$class_second->supply_status, '', 'medium' ,'',$readonly_ss,$readonly_ss); ?></td>
+         <td><?php echo $f->select_field_from_array('supply_status', fp_kanban_line::$supply_status_a, $$class_second->supply_status, '', 'medium', '', $readonly_ss, $readonly_ss); ?></td>
          <td><?php $f->text_field_d2('kanban_size'); ?></td>
-         <td><?php $f->checkBox_field_wid2('replenish_cb'); ?></td>
+         <td><?php echo $f->select_field_from_array('action', $line_action_a, '', '', 'medium'); ?></td>
         </tr>
         <?php
         $count = $count + 1;

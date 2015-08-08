@@ -559,7 +559,7 @@ class search extends dbObject {
   $program_form_statement .= '<ul>';
   if (!empty($this->_search_functions)) {
    foreach ($this->_search_functions as $key => $value) {
-    $program_form_statement .= "<li id='" . $value . "' ><label class=\"label_$key\"> $key</label>";
+    $program_form_statement .= "<li class='prg tabContent' id='" . $value . "' ><label class=\"label_$key\"> $key</label>";
     if (method_exists($class_obj, $value)) {
      $program_form_statement .= call_user_func(array($class_obj, $value));
     } else if (function_exists($value)) {

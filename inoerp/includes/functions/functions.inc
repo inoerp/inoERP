@@ -1159,7 +1159,7 @@ function search_org_name() {
 
 function search_kanban_card_generate_mode() {
  global $f;
- $stmt = $f->select_field_from_array('card_generate_mode', fp_kanban_header::$card_generate_mode_a,  '', 'card_generate_mode','',1);
+ $stmt = $f->select_field_from_array('card_generate_mode', fp_kanban_header::$card_generate_mode_a, '', 'card_generate_mode', '', 1);
  return $stmt;
 }
 
@@ -1331,17 +1331,21 @@ function search_item_id_from() {
 }
 
 function search_item_id_m_from() {
- $stmt = '<input id="item_id_from" class="textfield select_item_id item_id_from" '
-  . 'type="text" title="" placeholder="From Item Id" size="20" maxlength="256" value="" '
-  . 'name="from_item_id_m" >';
+  $stmt = '<input id="item_id_m_from" class="val_field textfield vf_select_item_number to_item_id_m item_id_m_from" 
+  type="text" data-toggle="tooltip" title="Select Item Id From" data-val_field="item" data-val_value="item_id_m" 
+  size="20" value="" name="item_id_m_from">
+   <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item" style="display: inline-block;"></i>';
+
  return $stmt;
 }
 
 function adjustment_ac_id() {
- $stmt = "<input id='adjustment_ac_id' class='textfield select_account adjustment_ac_id' 
-type='text' title='' placeholder='Adjustment Ac' size='28' maxlength='256' 
-name='adjustment_ac_id'>
-<img class='account_popup' src=" . HOME_URL . "themes/images/serach.png>";
+ $stmt = '<input class="hidden coa_combination_id account_id adjustment_ac_id required" type="hidden" value="" 
+  name="adjustment_ac_id" required="" style="background-color: rgba(233, 209, 234, 0.61);">
+<input class="combination account_id adjustment_ac_id textfield select_account account_combination required" type="text" 
+data-toggle="tooltip" title="" required="" placeholder="" size="28" maxlength="256" value="" 
+name="ac_combinations" style="background-color: rgba(233, 209, 234, 0.61);">
+<i class="select_account select_popup clickable fa fa-search" style="display: inline-block;"></i>';
  return $stmt;
 }
 
@@ -1353,26 +1357,29 @@ function search_item_id_to() {
 }
 
 function search_item_id_m_to() {
- $stmt = '<input id="item_id_to" class="textfield select_item_id item_id_to" '
-  . 'type="text" title="" placeholder="To Item Id" size="20" maxlength="256" value="" '
-  . 'name="to_item_id_m" >';
+ $stmt = '<input id="to_item_id_m" class="val_field textfield vf_select_item_number to_item_id_m item_id_m_to" 
+  type="text" data-toggle="tooltip" title="Select To Item Id" data-val_field="item" data-val_value="item_id_m" 
+  size="20" value="" name="to_item_id_m">
+   <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item" style="display: inline-block;"></i>';
+
  return $stmt;
 }
 
 function search_item_number_from() {
-
- $stmt = '<input id="item_number_from" class="textfield select_item_number item_number item_number_from" '
-  . 'type="text" title="" placeholder="From Item" size="20" maxlength="256" value="" '
-  . 'name="from_item_number" >';
- $stmt .= '<i class="select_item_number select_popup clickable fa fa-search"></i>';
+ $stmt = '<input id="item_number_from" class="val_field textfield vf_select_item_number item_number item_number_from" 
+  type="text" data-toggle="tooltip" title="Select From Item Number" data-val_field="item" data-val_value="item_number" 
+  size="20" value="" name="item_number_from">
+   <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item" style="display: inline-block;"></i>';
+//<input class="hidden popup_value item_id_m" type="hidden" name="item_id_m_from"> 
  return $stmt;
 }
 
 function search_item_number_to() {
- $stmt = '<input id="item_number_to" class="textfield select_item_number item_number item_number_to" '
-  . 'type="text" title="" placeholder="To Item" size="20" maxlength="256" value="" '
-  . 'name="to_item_number" >';
- $stmt .= '<i class="select_item_number select_popup clickable fa fa-search"></i>';
+ $stmt = '<input id="item_number_to" class="val_field textfield vf_select_item_number item_number item_number_to" 
+  type="text" data-toggle="tooltip" title="Select Item Number To" data-val_field="item" data-val_value="item_number" 
+  size="20" value="" name="item_number_to">
+  <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item" style="display: inline-block;"></i>';
+// <input class="hidden popup_value item_id_m" type="hidden" name="item_id_m_from"> 
  return $stmt;
 }
 
@@ -1874,10 +1881,10 @@ function ino_noOfItems_inCart() {
 }
 
 function ino_showWarning_message($msg) {
- 
+
  echo '<div class="alert alert-danger alert-dismissible" role="alert">
        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
- echo gettext($msg) ;
+ echo gettext($msg);
  echo '</div>';
 }
 
