@@ -67,17 +67,16 @@ class fa_asset_book_info extends dbObject {
  public $initial_search = [
   'fa_asset_book_info_id',
  ];
-  public $number_fields = [
+ public $number_fields = [
   'depriciation_limit_amount',
   'depriciation_limit_percentage',
-     'salvage_value_amount',
+  'salvage_value_amount',
   'salvage_value_percentage',
-     'original_cost',
+  'original_cost',
   'current_cost',
   'ytd_depreciation',
   'accumulated_depreciation',
  ];
-  
  public $requiredField = [
   'fa_asset_book_id',
   'fa_asset_id',
@@ -135,18 +134,9 @@ class fa_asset_book_info extends dbObject {
   $sql .= self::$table_name;
   $sql .= " WHERE fa_asset_id = :fa_asset_id ";
   $sql .= " AND fa_asset_book_id = :fa_asset_book_id ";
-  $value_a = ['fa_asset_id' => $this->fa_asset_id, 'fa_asset_book_id' => $this->fa_asset_book_id ];
+  $value_a = ['fa_asset_id' => $this->fa_asset_id, 'fa_asset_book_id' => $this->fa_asset_book_id];
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
- }
- 
-  public function findBy_bookId() {
-  $sql = " SELECT * FROM ";
-  $sql .= self::$table_name;
-  $sql .= " WHERE fa_asset_book_id = :fa_asset_book_id ";
-  $value_a = [ 'fa_asset_book_id' => $this->fa_asset_book_id ];
-  $result = $this->findBySql($sql, $value_a);
-  return !empty($result) ? ($result) : false;
  }
 
  public static function find_by_assetId_bookId($fa_asset_book_id, $fa_asset_id) {
@@ -157,15 +147,23 @@ class fa_asset_book_info extends dbObject {
   return !empty($result) ? array_pop($result) : false;
  }
 
- 
-  public static function find_by_bookId($fa_asset_book_id) {
+ public function findBy_bookId() {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE fa_asset_book_id = :fa_asset_book_id ";
+  $value_a = [ 'fa_asset_book_id' => $this->fa_asset_book_id];
+  $result = $this->findBySql($sql, $value_a);
+  return !empty($result) ? ($result) : false;
+ }
+
+ public static function find_by_bookId($fa_asset_book_id) {
   $sql = "SELECT * FROM " .
    self::$table_name .
    " where fa_asset_book_id= '{$fa_asset_book_id}'  ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? ($result) : false;
  }
- 
+
 }
 
 //end of fa_asset_book_info class

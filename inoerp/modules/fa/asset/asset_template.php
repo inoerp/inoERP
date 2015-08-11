@@ -136,7 +136,7 @@
       <!--end of tab1 div three_column-->
      </div> 
      <div id="tabsLine-2" class="tabContent">
-      <ul class='column four_column'>
+      <ul class='column header_field'>
        <li>
         <div class="btn-group row">
          <button type="button" class="btn btn-primary btn-lg">

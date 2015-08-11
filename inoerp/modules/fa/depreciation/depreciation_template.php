@@ -16,10 +16,11 @@
          <a name="show" href="form.php?class_name=fa_depreciation_header&<?php echo "mode=$mode"; ?>" class="show document_id fa_depreciation_header_id">
           <i class='fa fa-refresh'></i></a> 
         </li>
-        <li><?php $f->l_select_field_from_object('fa_asset_book_id', fa_asset_book::find_all(), 'fa_asset_book_id', 'asset_book_name', $$class->fa_asset_book_id, 'fa_asset_book_id', '', 1, $readonly1, '', '', '', 'ledger_id'); ?></li>
+        <li><?php $f->l_select_field_from_object('fa_asset_book_id', fa_asset_book::find_all_withFinanceDetails(), 'fa_asset_book_id', 'asset_book_name', $$class->fa_asset_book_id, 'fa_asset_book_id', '', 1, $readonly1, '', '', '', 'ledger_id'); ?></li>
         <li><label><?php echo gettext('Period') ?></label><?php echo $period_stmt; ?> </li>
         <li><?php $f->l_text_field_dm('description'); ?></li>
         <li><?php $f->l_select_field_from_array('status', fa_depreciation_header::$status_a, $$class->status, 'status', '', 1, 1, 1); ?> </li>
+        <li><?php $f->l_text_field_dr('gl_journal_header_id' , 'always_readonly'); ?></li>
         <li class="action_btn"><label></label>
          <div class="btn-group row">
           <button type="button" class="btn btn-primary">
@@ -31,8 +32,9 @@
           <ul class="dropdown-menu" role="menu">
            <li><a href="<?php echo HOME_URL; ?>program.php?class_name=fa_depreciation_header&program_name=prg_run_depreciation">
              <?php echo gettext('Run Depreciation') ?></a></li>
-           <li><a href="#"><?php echo gettext('Confirm Depreciation')?></a></li>
-           <li><a href="#"><?php echo gettext('Post Depreciation')?></a></li>
+           <!--<li><a href="#"><?php // echo gettext('Confirm Depreciation')?></a></li>-->
+           <li><a id="post_depreciation" href="#"><?php echo gettext('Post Depreciation')?></a></li>
+           <li><?php echo $f->hidden_field_withId('action', '') ?></li>
           </ul>
          </div>
         </li>

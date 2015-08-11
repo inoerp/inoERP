@@ -51,8 +51,8 @@ class fa_asset_book extends dbObject {
   'primary_fa_asset_book_id',
   'description',
   'inactive_on',
-  'ledger_id',
-  'gl_calendar_id',
+//  'ledger_id',
+//  'gl_calendar_id',
   'allow_gl_posting_cb',
   'fa_calendar_code',
   'revalue_accum_depriciation_cb',
@@ -93,7 +93,6 @@ class fa_asset_book extends dbObject {
   'bu_org_id',
   'asset_book_name',
   'type',
-  'ledger_id'
  ];
  public $fields_inForm_notInDataBase = [
  ];
@@ -164,6 +163,27 @@ class fa_asset_book extends dbObject {
    " where fa_asset_book_number= '{$fa_asset_book_number}' ";
   $result = $db->find_by_sql($sql);
   return $result;
+ }
+
+ public static function find_all_withFinanceDetails() {
+  $sql = " SELECT   fab.asset_book_name,   fab.type as asset_book_type ,  fab.primary_fa_asset_book_id,   
+fab.description as asset_book_description, fab.bu_org_id, fab.fa_asset_book_id,
+org.org_id, org.legal_org_id, legal.ledger_id,
+gl.ledger, gl.description as ledger_description, gl.coa_id, gl.calendar_option_line_code, gl.currency_code, legal.balancing_segments,
+org.org, org.code,org.type, org.description as org_description
+
+FROM
+fa_asset_book fab,
+org,
+legal,
+gl_ledger gl
+
+WHERE fab.bu_org_id = org.org_id
+AND org.legal_org_id = legal.org_id 
+AND gl.gl_ledger_id = legal.ledger_id
+ " ;
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
  }
 
  public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {

@@ -98,13 +98,31 @@ class fa_book_category_association extends dbObject {
   return !empty($result_array) ? array_pop($result_array) : false;
  }
 
- public static function find_all_sitesOfSupplier($supplier_id = "") {
-  $sql = " SELECT * FROM ";
-  $sql .= self::$table_name;
-  $sql .= " WHERE supplier_id = '{$supplier_id}' ";
+ public static function find_all_accounts_byAssetBookId($fa_asset_id, $fa_asset_book_id) {
+  $sql = " SELECT
+ast.asset_number, ast.fa_asset_id, fac.asset_category,
+bca.fa_book_category_association_id,bca.fa_asset_category_id, bca.fa_asset_book_id,
+bca.asset_cost_ac_id, bca.asset_clearing_ac_id, bca.depreciation_expense_ac_id,
+bca.accumulated_depreciation_ac_id, bca.description, bca.bonus_expense_ac_id,
+bca.bonus_reserve_ac_id, bca.revalue_reserve_ac_id, bca.cip_cost_ac_id,
+bca.cip_clearing_ac_id, bca.unplanned_depreciation_expense_ac_id
+
+FROM fa_book_category_association bca,
+fa_asset ast,
+fa_asset_category fac
+
+WHERE ast.fa_asset_category_id = fac.fa_asset_category_id
+AND fac.fa_asset_category_id = bca.fa_asset_category_id
+AND ast.fa_asset_id = '{$fa_asset_id}'
+AND bca.fa_asset_book_id = '{$fa_asset_book_id}'
+
+LIMIT 1
+ ";
+
+//echo $sql;
 
   $result = self::find_by_sql($sql);
-  return $result;
+  return !empty($result) ? array_pop($result) : false;
  }
 
 }

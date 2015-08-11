@@ -397,6 +397,7 @@ trait dbObject_t {
    $sql.= " {$order_by_seq} ";
   }
   $result = self::find_by_sql($sql);
+//  echo $sql;
   return !empty($result) ? $result : false;
  }
 

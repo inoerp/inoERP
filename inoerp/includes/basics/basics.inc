@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/../functions/functions.inc";
 require_once (dirname(__FILE__) . '/../../define_const.inc');
-const DS = DIRECTORY_SEPARATOR;
+ const DS = DIRECTORY_SEPARATOR;
 
 /* ---------------------Dont Update anything Below-------------------------------------- */
 //Basic Paths 
@@ -26,7 +26,7 @@ defined('INC_INV') ? null : define('INC_INV', HOME_DIR . DS . 'modules' . DS . '
 
 
 //load core objects
-require_once(INC_BASICS . DS .  'settings'. DS. "dbsettings.inc");
+require_once(INC_BASICS . DS . 'settings' . DS . "dbsettings.inc");
 defined('DB_SERVER') ? null : define("DB_SERVER", "");
 defined('DB_USER') ? null : define("DB_USER", "");
 defined('DB_PASS') ? null : define("DB_PASS", "");
@@ -37,6 +37,8 @@ require_once(INC_CLASS . DS . "class.session.inc");
 require_once(INC_CLASS . DS . "class_dbc.inc");
 require_once(INC_CLASS . DS . "trait_dbObject_t.inc");
 require_once(INC_CLASS . DS . "class_dbObject.inc");
+require_once(INC_PATH . DS . 'interface' . DS . "gl_journal_int.inc");
+
 //require_once(INC_CLASS . DS . "class_dbc2.inc");
 //require_once(INC_CLASS . DS . "class_dbObject2.inc");
 require_once(INC_EXTENSIONS . DS . "site_info" . DS . "class_site_info.inc");
