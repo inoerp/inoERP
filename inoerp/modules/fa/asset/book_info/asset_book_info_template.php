@@ -78,9 +78,9 @@
      <div class="first_rowset"> 
       <ul class="column header_field"> 
        <li><?php $f->l_number_field_d('current_cost'); ?></li>
-       <li><?php $f->l_number_field_d('original_cost'); ?></li>
-       <li><?php $f->l_text_field_d('ytd_depreciation', $$class->ytd_depreciation, '', '', 'large', '', 1); ?></li>
-       <li><?php $f->l_number_field_d('accumulated_depreciation'); ?></li>
+       <li><?php $f->l_number_field_dr('original_cost' , 'always_readonly'); ?></li>
+       <li><?php $f->l_number_field_dr('ytd_depreciation' ,'always_readonly'); ?></li>
+       <li><?php $f->l_number_field_dr('accumulated_depreciation' ,'always_readonly'); ?></li>
        <li><?php $f->l_number_field_d('salvage_value_percentage'); ?></li>
        <li><?php $f->l_number_field_d('salvage_value_amount'); ?></li>
        <li><?php $f->l_number_field_d('recoverable_amount'); ?></li>

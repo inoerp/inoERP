@@ -67,7 +67,7 @@ class fa_asset_book_info extends dbObject {
  public $initial_search = [
   'fa_asset_book_info_id',
  ];
- public $number_fields = [
+ public $numberField = [
   'depriciation_limit_amount',
   'depriciation_limit_percentage',
   'salvage_value_amount',

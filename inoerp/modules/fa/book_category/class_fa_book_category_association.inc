@@ -22,6 +22,7 @@ class fa_book_category_association extends dbObject {
   'cip_cost_ac_id',
   'cip_clearing_ac_id',
   'unplanned_depreciation_expense_ac_id',
+  'retirement_gl_ac_id',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -84,6 +85,7 @@ class fa_book_category_association extends dbObject {
  public $cip_cost_ac_id;
  public $cip_clearing_ac_id;
  public $unplanned_depreciation_expense_ac_id;
+ public $retirement_gl_ac_id;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -105,7 +107,8 @@ bca.fa_book_category_association_id,bca.fa_asset_category_id, bca.fa_asset_book_
 bca.asset_cost_ac_id, bca.asset_clearing_ac_id, bca.depreciation_expense_ac_id,
 bca.accumulated_depreciation_ac_id, bca.description, bca.bonus_expense_ac_id,
 bca.bonus_reserve_ac_id, bca.revalue_reserve_ac_id, bca.cip_cost_ac_id,
-bca.cip_clearing_ac_id, bca.unplanned_depreciation_expense_ac_id
+bca.cip_clearing_ac_id, bca.unplanned_depreciation_expense_ac_id,
+bca.retirement_gl_ac_id
 
 FROM fa_book_category_association bca,
 fa_asset ast,

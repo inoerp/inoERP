@@ -6,6 +6,7 @@
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>
     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
     <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Action') ?></a></li>
 
    </ul>
    <div class="tabContainer"> 
@@ -27,8 +28,8 @@
         ?><i class="generic g_select_asset_number select_popup clickable fa fa-search" data-class_name="fa_asset"></i>
         <a name="show" href="form.php?class_name=fa_asset_retirement&<?php echo "mode=$mode"; ?>" class="show2 action document_id fa_asset_retirement_with_asset_book"><i class="fa fa-refresh"></i></a> 
        </li>
-       <li><?php $f->l_text_field_dr('asset_description' , 'description'); ?></li>
-       <li><?php $f->l_text_field_dr('status' ,'always_readonly'); ?></li>
+       <li><?php $f->l_text_field_dr('asset_description', 'description'); ?></li>
+       <li><?php $f->l_text_field_dr('status', 'always_readonly'); ?></li>
        <li><?php $f->l_text_field_d('description'); ?></li>
       </ul>
      </div>
@@ -53,6 +54,19 @@
      <div> 
      </div>
     </div>
+    <div id="tabsHeader-4" class="tabContent">
+     <div> 
+      <ul class="column header_field">
+       <li><?php $f->l_text_field_dr('gl_journal_header_id', 'always_readonly'); ?></li>
+       <li><label>Action</label>
+        <?php
+        echo $f->select_field_from_array('action', fa_asset_retirement::$action_a, '', 'action')
+        ?>
+       </li>
+      </ul>
+     </div>
+    </div>
+
    </div>
   </div>
  </div>
@@ -78,6 +92,7 @@
        <li><?php $f->l_number_field_dm('retired_cost'); ?></li>
        <li><?php $f->l_number_field_d('proceed_of_sales'); ?></li>
        <li><?php $f->l_number_field_d('cost_of_removals'); ?></li>
+       <li><?php $f->l_number_field_dr('adjustment_amount' ,'always_readonly'); ?></li>
       </ul>
      </div>
     </div> 

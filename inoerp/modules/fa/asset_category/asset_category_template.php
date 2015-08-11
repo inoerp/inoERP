@@ -54,7 +54,7 @@
  <form action=""  method="post" id="fa_book_category_association"  name="fa_book_category_association">
   <div class="line_before_tab"> 
    <ul class="column five_column inline_list"> 
-    <li><?php $f->l_select_field_from_object('fa_asset_book_id', fa_asset_book::find_all(), 'fa_asset_book_id', 'asset_book_name', $$class_second->fa_asset_book_id, 'fa_asset_book_id'); ?>
+    <li><?php $f->l_select_field_from_object('fa_asset_book_id', fa_asset_book::find_all(), 'fa_asset_book_id', 'asset_book_name', $$class_second->fa_asset_book_id, 'fa_asset_book_id' ,'action'); ?>
      <a name="show2" href="form.php?class_name=fa_asset_category&<?php echo "mode=$mode"; ?>" class="show2 document_id fa_book_category_association_id">
       <i class="fa fa-refresh"></i></a> 
     </li> 
@@ -85,6 +85,7 @@
       <li><label><?php echo gettext('Bonus Expense') ?></label><?php $f->ac_field_d2('bonus_expense_ac_id'); ?></li>
       <li><label><?php echo gettext('Bonus Reserve') ?></label><?php $f->ac_field_d2('bonus_reserve_ac_id'); ?></li>
       <li><label><?php echo gettext('Revalue Reserve') ?></label><?php $f->ac_field_d2m('revalue_reserve_ac_id'); ?></li>
+      <li><label><?php echo gettext('Retirement Gain/Loss') ?></label><?php $f->ac_field_d2('retirement_gl_ac_id'); ?></li>
       <li><label><?php echo gettext('Unplanned Depreciation') ?></label><?php $f->ac_field_d2m('unplanned_depreciation_expense_ac_id'); ?></li>
      </ul>
      <!--end of tab1 div three_column-->

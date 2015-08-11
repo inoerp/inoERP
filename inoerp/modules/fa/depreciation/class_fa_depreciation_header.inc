@@ -243,6 +243,7 @@ class fa_depreciation_header extends dbObject implements gl_journal_int {
  }
 
  private function _calculate_depreciation_amount($asset_r) {
+  /* This method calucates the depriciation amount as per month */
   //$asset_r is aset_book_info
   if (empty($asset_r->depriciation_start_date) || empty($asset_r->life_months)) {
    return false;
@@ -268,6 +269,7 @@ class fa_depreciation_header extends dbObject implements gl_journal_int {
   switch ($dprn_method->method_type) {
    case 'SLD' :
     $dprn_amount = $amount_availabe_for_dprn / $months_to_depriciate;
+//    echo "$dprn_amount = $amount_availabe_for_dprn / $months_to_depriciate";
     break;
 
    case 'RBD' :
@@ -296,6 +298,10 @@ class fa_depreciation_header extends dbObject implements gl_journal_int {
   }
 
   return $dprn_amount;
+ }
+
+ public function calucate_depriciation_amount(stdClass $fa_ab_i) {
+  return $this->_calculate_depreciation_amount($fa_ab_i);
  }
 
  private function _create_depreciation_lines() {
@@ -328,6 +334,14 @@ class fa_depreciation_header extends dbObject implements gl_journal_int {
    $fa_dprn_line->cost_before_depreciation = $asset_r->current_cost;
    $fa_dprn_line->nbv_before_depreciation = $asset_r->current_cost - $asset_r->accumulated_depreciation;
    $fa_dprn_line->salvage_value_bd = $asset_r->salvage_value_amount;
+
+   //update the accumulated_depreciation amount
+   $fa_ab_info = new fa_asset_book_info();
+   $fa_asset_book_info_i = fa_asset_book_info::find_by_assetId_bookId($asset_r->fa_asset_book_id, $asset_r->fa_asset_id);
+   $fa_ab_info->fa_asset_book_info_id = $fa_asset_book_info_i->fa_asset_book_info_id;
+   $fa_ab_info->accumulated_depreciation += $dprn_amount;
+   $fa_ab_info->save();
+
    try {
     $fa_dprn_line->save();
    } catch (Exception $e) {
