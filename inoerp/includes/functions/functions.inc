@@ -78,7 +78,9 @@ function extension_auto_load(&$paths, $className) {
  if (!is_readable($filename)) {
   $filename = HOME_DIR . DS . 'extensions' . DS . $paths[1] . '_' . $paths[2] . DS . 'class_' . $className . ".inc";
  }
-// echo $filename;
+
+// echo '<br>' . $className;
+// echo '<br>' . $filename;
  if (!empty($filename) && is_readable($filename)) {
   require $filename;
  }
@@ -292,6 +294,9 @@ function get_class_name_from_path($path) {
   $arr = explode('\\', $path);
  }
  $last_el = array_pop($arr);
+ if(strpos($last_el, 'class') === false ){
+  return false;
+ }
  $class = str_replace('class_', '', $last_el);
  $class1 = str_replace('class.', '', $class);
  $data['class_name'] = str_replace('.inc', '', $class1);
@@ -618,6 +623,8 @@ function select_per_page($per_page = '10') {
  $content_string .= ( $per_page == 20) ? ' selected > 20 </option>' : '> 20 </option>';
  $content_string .= '<option value="50" ';
  $content_string .= ( $per_page == 50) ? ' selected > 50 </option>' : '> 50 </option>';
+ $content_string .= '<option value="200" ';
+ $content_string .= ( $per_page == 200) ? ' selected > 200 </option>' : '> 200 </option>';
  $content_string .= '</select>';
  $content_string .= '<a name="content_per_page" '
   . 'href="' . $link . '" class="content_per_page button">Per Page</a>';
@@ -1331,7 +1338,7 @@ function search_item_id_from() {
 }
 
 function search_item_id_m_from() {
-  $stmt = '<input id="item_id_m_from" class="val_field textfield vf_select_item_number to_item_id_m item_id_m_from" 
+ $stmt = '<input id="item_id_m_from" class="val_field textfield vf_select_item_number to_item_id_m item_id_m_from" 
   type="text" data-toggle="tooltip" title="Select Item Id From" data-val_field="item" data-val_value="item_id_m" 
   size="20" value="" name="item_id_m_from">
    <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item" style="display: inline-block;"></i>';

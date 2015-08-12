@@ -24,7 +24,7 @@ class prj_role extends dbObject {
 //  data base variables as stored database column name
  public static $system_info = [
   'name' => 'Role',
-  'number' => '2117',
+  'number' => '6018',
   'description' => 'Project Role',
   'version' => '0.1.1',
   'db_version' => '1001',

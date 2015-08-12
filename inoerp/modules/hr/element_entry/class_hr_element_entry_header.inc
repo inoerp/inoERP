@@ -24,7 +24,7 @@ class hr_element_entry_header extends dbObject {
  public static $js_fileName = 'modules/hr/element_entry/js/multi_select.js';
  public static $system_info = [
   'name' => 'Element Entry',
-  'number' => '3106',
+  'number' => '3120',
   'description' => 'Compensation Element Entry',
   'version' => '0.1.1',
   'db_version' => '1001',

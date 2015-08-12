@@ -23,7 +23,7 @@ class prj_burden_structure_header extends dbObject {
  public static $module = "prj";
  public static $system_info = [
   'name' => 'Burden Structure',
-  'number' => '2301',
+  'number' => '6007',
   'description' => 'Create & Mainten Burden Structure',
   'version' => '0.1.1',
   'db_version' => '1001',

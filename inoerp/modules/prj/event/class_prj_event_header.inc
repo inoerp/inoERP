@@ -22,7 +22,7 @@ class prj_event_header extends dbObject {
  public static $module = "prj";
  public static $system_info = [
   'name' => 'Project event',
-  'number' => '9118',
+  'number' => '6009',
   'description' => 'Project event',
   'version' => '0.1.1',
   'db_version' => '1001',

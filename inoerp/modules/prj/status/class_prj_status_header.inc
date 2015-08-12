@@ -23,7 +23,7 @@ class prj_status_header extends dbObject {
  public static $module = "prj";
  public static $system_info = [
   'name' => 'Project',
-  'number' => '3001',
+  'number' => '6019',
   'description' => 'Create & Mainten Project Status',
   'version' => '0.1.1',
   'db_version' => '1001',

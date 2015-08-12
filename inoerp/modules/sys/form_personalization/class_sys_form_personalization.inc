@@ -19,7 +19,7 @@ class sys_form_personalization extends dbObject {
  //  data base variables as stored database column name
  public static $system_info = [
   'name' => 'sys_form_personalization',
-  'number' => '10023',
+  'number' => '9501',
   'description' => 'Create & Update sys_form_personalization',
   'version' => '0.1.1',
   'db_version' => '1001',

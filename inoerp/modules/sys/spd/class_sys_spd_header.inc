@@ -23,8 +23,8 @@ class sys_spd_header extends dbObject {
  public static $key_column = 'document_number';
  public static $module = "da";
  public static $system_info = [
-  'name' => 'sys_spd',
-  'number' => '9301',
+  'name' => 'System Process Document',
+  'number' => '9443',
   'description' => 'System Process Document',
   'version' => '0.1.1',
   'db_version' => '1001',

@@ -22,7 +22,7 @@ class fp_kanban_planner_header extends dbObject {
  public static $module = "fp";
   public static $system_info = [
   'name' => 'Min Max',
-  'number' => '2505',
+  'number' => '2512',
   'description' => 'Min Max Planning & Size calculation',
   'version' => '0.1.1',
   'db_version' => '1001',

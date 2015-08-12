@@ -24,7 +24,7 @@ class sys_pd_header extends dbObject {
  public static $module = "cc";
  public static $system_info = [
   'name' => 'Change Control',
-  'number' => '9301',
+  'number' => '9441',
   'description' => 'Change Control',
   'version' => '0.1.1',
   'db_version' => '1001',

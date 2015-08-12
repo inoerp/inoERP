@@ -6,15 +6,16 @@ class inv_interorg_transfer_v extends dbObject {
  public static $primary_column = "inv_interorg_transfer_line_id";
  public static $form_class_name = "inv_interorg_transfer";
  public static $system_info = [
-  'name' => 'Inter Org Transfers',
-  'number' => '2220',
-  'description' => 'Inter Org Transfers',
+  'name' => 'Move Order Transaction View',
+  'number' => '2138',
+  'description' => 'Move Order Transaction View',
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',
+  'dependent_class' => array('inv_moveorder_line'),
   'primary_entity_cb' => '',
   'module_name' => 'inv',
-  'weight' => 1
+  'weight' => 6
  ];
  public $field_a = [
   'inv_interorg_transfer_header_id',

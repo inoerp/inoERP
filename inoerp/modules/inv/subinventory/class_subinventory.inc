@@ -23,7 +23,7 @@ class subinventory extends dbObject {
 //  data base variables as stored database column name
  public static $system_info = [
   'name' => 'Subinventory',
-  'number' => '2117',
+  'number' => '2121',
   'description' => 'Subinventory',
   'version' => '0.1.1',
   'db_version' => '1001',

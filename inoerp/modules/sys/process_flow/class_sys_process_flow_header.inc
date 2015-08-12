@@ -22,7 +22,7 @@ class sys_process_flow_header extends dbObject {
  public static $module = "sys";
  public static $system_info = [
   'name' => 'Process Flow',
-  'number' => '9107',
+  'number' => '9445',
   'description' => 'Create & Mainten Process Flow',
   'version' => '0.1.1',
   'db_version' => '1001',

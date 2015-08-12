@@ -22,7 +22,7 @@ class ap_payment_process extends dbObject {
  public static $module = "ap";
  public static $system_info = [
   'name' => 'AR Payment Process',
-  'number' => '1305',
+  'number' => '1311',
   'description' => 'Payment Process',
   'version' => '0.1.1',
   'db_version' => '1001',

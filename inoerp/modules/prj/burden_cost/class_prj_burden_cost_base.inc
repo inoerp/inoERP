@@ -24,7 +24,7 @@ class prj_burden_cost_base extends dbObject {
 //  data base variables as stored database column name
  public static $system_info = [
   'name' => 'Expenditure Type',
-  'number' => '2117',
+  'number' => '6004',
   'description' => 'prj_burden_cost_base',
   'version' => '0.1.1',
   'db_version' => '1001',

@@ -14,7 +14,7 @@
  class extn_report_result extends extn_report {
      public static $system_info = [
   'name' => 'Report  Result',
-  'number' => '10025',
+  'number' => '10037',
   'description' => 'Report Result',
   'version' => '0.1.1',
   'db_version' => '1001',

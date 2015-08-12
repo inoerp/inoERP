@@ -22,8 +22,8 @@ class prj_burden_list_header extends dbObject {
  public static $key_column = "burden_list";
  public static $module = "prj";
  public static $system_info = [
-  'name' => 'Price List',
-  'number' => '9402',
+  'name' => 'Burden List',
+  'number' => '6006',
   'description' => 'Define and Mainten Burden List',
   'version' => '0.1.1',
   'db_version' => '1001',

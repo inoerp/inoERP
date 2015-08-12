@@ -2,6 +2,19 @@
 
  class inv_lot_transaction_v extends inv_lot_transaction {
   
+   public static $system_info = [
+  'name' => 'Lot Transaction View',
+  'number' => '2133',
+  'description' => 'Item Lot Transaction View',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'inv',
+  'weight' => 9
+ ];
+   
+  
   public static $form_class_name = "inv_lot_transaction";
 
   public static $table_name = "inv_lot_transaction_v";

@@ -24,7 +24,7 @@ class prj_work_type extends dbObject {
 //  data base variables as stored database column name
  public static $system_info = [
   'name' => 'Work Type',
-  'number' => '2117',
+  'number' => '6020',
   'description' => 'Project Work Type',
   'version' => '0.1.1',
   'db_version' => '1001',
@@ -101,12 +101,12 @@ class prj_work_type extends dbObject {
  public $time;
  public $msg;
 
-  Public static function prj_work_utilization_type() {
+ Public static function prj_work_utilization_type() {
   $option_header = option_header::find_by_exact_name('PRJ_WORK_UTILIZATION_TYPE');
   $ol = option_line::find_by_option_id($option_header->option_header_id);
   return $ol;
  }
- 
+
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [
    'mode',

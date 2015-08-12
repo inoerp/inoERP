@@ -25,7 +25,7 @@ class prj_expenditure_type_header extends dbObject {
 //  data base variables as stored database column name
  public static $system_info = [
   'name' => 'Expenditure Type',
-  'number' => '2117',
+  'number' => '6012',
   'description' => 'prj_expenditure_type_header',
   'version' => '0.1.1',
   'db_version' => '1001',

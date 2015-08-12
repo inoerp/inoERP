@@ -22,7 +22,7 @@ class prj_rate_schedule_header extends dbObject {
  public static $module = "prj";
  public static $system_info = [
   'name' => 'Rate Schedule',
-  'number' => '9118',
+  'number' => '6016',
   'description' => 'Rate Schedule',
   'version' => '0.1.1',
   'db_version' => '1001',

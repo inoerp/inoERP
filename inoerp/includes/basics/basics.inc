@@ -85,8 +85,8 @@ require_once(INC_EXTENSIONS . DS . "page" . DS . "class_page.inc");
 require_once(INC_EXTENSIONS . DS . "social_login" . DS . "class_extn_social_login.inc");
 require_once(INC_EXTENSIONS . DS . "theme" . DS . "class_extn_theme.inc");
 require_once(INC_EXTENSIONS . DS . "comment" . DS . "class.comment.inc");
-require_once(INC_EXTENSIONS . DS . "block" . DS . "class.block.inc");
-require_once(INC_EXTENSIONS . DS . "block" . DS . "class.block_content.inc");
+require_once(INC_EXTENSIONS . DS . "block" . DS . "class_block.inc");
+require_once(INC_EXTENSIONS . DS . "block" . DS . "class_block_content.inc");
 require_once(INC_EXTENSIONS . DS . "block" . DS . "class_block_cache.inc");
 
 //require_once(INC_BASICS.DS."class.dbObject.inc"); 

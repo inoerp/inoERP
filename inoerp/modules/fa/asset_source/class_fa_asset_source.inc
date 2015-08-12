@@ -22,7 +22,7 @@ class fa_asset_source extends dbObject {
  public static $module = "fa";
  public static $system_info = [
   'name' => 'Asset Source',
-  'number' => '2605',
+  'number' => '1412',
   'description' => 'Asset Source',
   'version' => '0.1.1',
   'db_version' => '1001',

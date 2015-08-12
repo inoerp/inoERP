@@ -24,7 +24,7 @@ class sys_pd_process_flow_action extends dbObject {
  public static $module = "sys";
  public static $system_info = [
   'name' => 'CC Action',
-  'number' => '9302',
+  'number' => '9442',
   'description' => 'Change Control Process Flow Actions',
   'version' => '0.1.1',
   'db_version' => '1001',

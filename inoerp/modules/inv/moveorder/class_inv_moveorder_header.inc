@@ -24,9 +24,9 @@ class inv_moveorder_header extends dbObject {
  public static $module = "inv"; //same as gl_journal_source
  public static $gl_journal_category = "INV_RECEIVING";
  public static $system_info = [
-  'name' => 'Sub Inventory Transfer',
-  'number' => '2106',
-  'description' => 'Sub Inventory Transfer',
+  'name' => 'Move Order Transaction',
+  'number' => '2139',
+  'description' => 'Move Order Transaction',
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',

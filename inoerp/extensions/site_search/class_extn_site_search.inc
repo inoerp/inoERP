@@ -22,7 +22,7 @@ class extn_site_search extends dbObject {
  public static $module = "org";
  public static $system_info = [
   'name' => 'Site Search',
-  'number' => '2006',
+  'number' => '10038',
   'description' => 'Define and mainten site_search_formes',
   'version' => '0.1.1',
   'db_version' => '1001',

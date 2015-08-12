@@ -22,7 +22,7 @@ class fa_asset_component extends dbObject {
  public static $module = "fa";
  public static $system_info = [
   'name' => 'Asset component',
-  'number' => '2605',
+  'number' => '1410',
   'description' => 'Asset component',
   'version' => '0.1.1',
   'db_version' => '1001',

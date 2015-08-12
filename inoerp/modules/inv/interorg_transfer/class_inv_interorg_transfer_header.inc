@@ -25,7 +25,7 @@ class inv_interorg_transfer_header extends dbObject {
  public static $gl_journal_category = "INV_RECEIVING";
  public static $system_info = [
   'name' => 'InterOrg Transfer',
-  'number' => '2106',
+  'number' => '2134',
   'description' => 'Inventory InterOrg Transfer',
   'version' => '0.1.1',
   'db_version' => '1001',

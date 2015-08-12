@@ -1,7 +1,19 @@
 <?php
 
  class sys_process_flow_action_value extends dbObject {
-
+ public static $system_info = [
+  'name' => 'Process Flow Action Value',
+  'number' => '9446',
+  'description' => 'Process Flow Action Value',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'dependent_class' => array('sys_process_flow_line', 'sys_process_flow_action'),
+  'primary_entity_cb' => '',
+  'module_name' => 'sys',
+  'weight' => 7
+ ];
+ 
   public static $table_name = "sys_process_flow_action_value";
   public static $primary_column = "sys_process_flow_action_value_id";
   public static $parent_primary_column = "sys_process_flow_line_id";

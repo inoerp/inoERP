@@ -20,7 +20,7 @@ class ap_payable_control extends dbObject {
  public static $module = "ap";
  public static $system_info = [
   'name' => 'Payable Control',
-  'number' => '2201',
+  'number' => '1312',
   'description' => 'Create & Mainten Payable Controls',
   'version' => '0.1.1',
   'db_version' => '1001',

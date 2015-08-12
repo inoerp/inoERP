@@ -22,7 +22,7 @@ class prj_resource_list_header extends dbObject {
  public static $module = "prj";
  public static $system_info = [
   'name' => 'Resource List',
-  'number' => '9118',
+  'number' => '6017',
   'description' => 'Resource List',
   'version' => '0.1.1',
   'db_version' => '1001',

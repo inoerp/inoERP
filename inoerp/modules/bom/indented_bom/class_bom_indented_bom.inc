@@ -21,7 +21,7 @@ class bom_indented_bom extends bom_header {
 
  public static $system_info = [
   'name' => 'Indented BOM',
-  'number' => '2409',
+  'number' => '2429',
   'description' => 'Define and mainten bill of materials',
   'version' => '0.1.1',
   'db_version' => '1001',

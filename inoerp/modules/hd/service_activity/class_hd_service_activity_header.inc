@@ -23,7 +23,7 @@ class hd_service_activity_header extends dbObject {
  public static $module = "hd";
  public static $system_info = [
   'name' => 'Service Activity',
-  'number' => '5102',
+  'number' => '5108',
   'description' => 'Create & Mainten Service Activity',
   'version' => '0.1.1',
   'db_version' => '1001',

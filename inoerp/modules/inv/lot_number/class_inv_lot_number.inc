@@ -22,7 +22,7 @@ class inv_lot_number extends dbObject {
  public static $module = "inv";
  public static $system_info = [
   'name' => 'Lot Number',
-  'number' => '2109',
+  'number' => '2122',
   'description' => 'Item Lot Number',
   'version' => '0.1.1',
   'db_version' => '1001',

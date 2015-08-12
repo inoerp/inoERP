@@ -23,7 +23,7 @@ class fa_asset_retirement extends dbObject implements gl_journal_int {
  public static $gl_journal_category = "FA_RETIREMENT";
  public static $system_info = [
   'name' => 'Asset Retirement',
-  'number' => '2605',
+  'number' => '1411',
   'description' => 'Asset Retirement',
   'version' => '0.1.1',
   'db_version' => '1001',

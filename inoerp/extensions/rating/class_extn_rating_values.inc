@@ -22,7 +22,7 @@ class extn_rating_values extends dbObject {
 //  data base variables as stored database column name
  public static $system_info = [
   'name' => 'extn_rating_values',
-  'number' => '10011',
+  'number' => '10035',
   'description' => 'View & Update Rating',
   'version' => '0.1.1',
   'db_version' => '1001',

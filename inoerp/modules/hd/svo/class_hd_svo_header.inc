@@ -24,7 +24,7 @@ class hd_svo_header extends dbObject {
  public static $module = "hd";
  public static $system_info = [
   'name' => 'Service Order',
-  'number' => '2301',
+  'number' => '5111',
   'description' => 'Create & Mainten Service Order',
   'version' => '0.1.1',
   'db_version' => '1001',

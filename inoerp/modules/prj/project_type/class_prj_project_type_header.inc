@@ -23,7 +23,7 @@ class prj_project_type_header extends dbObject {
  public static $module = "prj";
  public static $system_info = [
   'name' => 'Project Type',
-  'number' => '2301',
+  'number' => '6015',
   'description' => 'Create & Mainten Project Type',
   'version' => '0.1.1',
   'db_version' => '1001',

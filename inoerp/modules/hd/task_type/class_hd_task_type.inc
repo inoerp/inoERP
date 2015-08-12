@@ -23,7 +23,7 @@ class hd_task_type extends dbObject {
 //  data base variables as stored database column name
  public static $system_info = [
   'name' => 'hd_task_type',
-  'number' => '2117',
+  'number' => '5110',
   'description' => 'hd_task_type',
   'version' => '0.1.1',
   'db_version' => '1001',

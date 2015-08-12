@@ -18,7 +18,7 @@ class extn_image extends file {
  public static $table_name = "extn_image";
  public static $system_info = [
   'name' => 'image',
-  'number' => '10016',
+  'number' => '10034',
   'description' => 'Image System',
   'version' => '0.1.1',
   'db_version' => '1001',

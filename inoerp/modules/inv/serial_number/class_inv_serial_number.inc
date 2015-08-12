@@ -22,7 +22,7 @@ class inv_serial_number extends dbObject {
  public static $module = "inv";
  public static $system_info = [
   'name' => 'Serial Number',
-  'number' => '2113',
+  'number' => '2123',
   'description' => 'Inventory Serial Number',
   'version' => '0.1.1',
   'db_version' => '1001',

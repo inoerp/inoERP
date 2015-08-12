@@ -29,7 +29,7 @@ class hd_service_contract_header extends dbObject {
 // public static $js_fileName = 'modules/ar/transaction/hd_service_contract.js';
  public static $system_info = [
   'name' => 'Service COntracts',
-  'number' => '1303',
+  'number' => '5106',
   'description' => 'Create & Mainten Service Contracts',
   'version' => '0.1.1',
   'db_version' => '1001',

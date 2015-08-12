@@ -22,7 +22,7 @@ class prj_category_header extends dbObject {
  public static $module = "prj";
  public static $system_info = [
   'name' => 'Category',
-  'number' => '9118',
+  'number' => '6008',
   'description' => 'Project Category',
   'version' => '0.1.1',
   'db_version' => '1001',

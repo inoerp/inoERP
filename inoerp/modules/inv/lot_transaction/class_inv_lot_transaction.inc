@@ -1,7 +1,18 @@
 <?php
 
 class inv_lot_transaction extends inv_lot_number {
-
+ public static $system_info = [
+  'name' => 'Lot Transaction',
+  'number' => '2132',
+  'description' => 'Item Lot Transaction',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'inv',
+  'weight' => 9
+ ];
+ 
  public static $table_name = "inv_lot_transaction";
  public static $primary_column = "inv_lot_transaction_id";
  public static $parent_primary_column = "inv_lot_number_id";

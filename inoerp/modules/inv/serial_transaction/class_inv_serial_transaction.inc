@@ -1,7 +1,19 @@
 <?php
 
  class inv_serial_transaction extends inv_serial_number {
-
+  public static $system_info = [
+  'name' => 'Serial Transaction',
+  'number' => '2136',
+  'description' => 'Inventory Serial Transaction',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'dependent_class' => array('inv_interorg_transfer_line'),
+  'primary_entity_cb' => '',
+  'module_name' => 'inv',
+  'weight' => 6
+ ];
+  
   public static $table_name = "inv_serial_transaction";
   public static $primary_column = "inv_serial_transaction_id";
   public static $parent_primary_column = "inv_serial_number_id";

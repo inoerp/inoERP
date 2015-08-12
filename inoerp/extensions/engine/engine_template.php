@@ -1,4 +1,5 @@
 <?php
+$stmt = '';
 echo (!empty($show_message)) ? $show_message : "";
 $all_data_ai = new ArrayIterator($all_data);
 $all_data_ai->seek($position);
@@ -52,6 +53,7 @@ $all_data_ai->seek($position);
         } else {
          $installed_cb_v = $enabled_cb_v = $engine_id_v = $db_version_v = false;
         }
+//        $stmt .= "<br> $count|".$modules['name'].'|'.$modules['number'].'|'.$modules['description'] .'|' .$enabled_cb_v ;
         ?>         
         <tr class="engine_line line_no<?php echo $count ?>">
          <td>    
@@ -158,7 +160,7 @@ $all_data_ai->seek($position);
 </form>
 
 <div id="pagination" style="clear: both;">
- <?php echo $pagination->show_pagination(); ?>
+ <?php echo $stmt;  echo $pagination->show_pagination(); ?>
 </div>
 <div id="js_data">
  <ul id="js_saving_data">
