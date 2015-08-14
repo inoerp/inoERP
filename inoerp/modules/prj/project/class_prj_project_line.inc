@@ -74,6 +74,7 @@ class prj_project_line extends dbObject {
  public $work_type;
  public $allow_charges_cb;
  public $capitalizable_cb;
+ public $cip_asset_id;
  public $currency;
  public $rate_type;
  public $cip_asset_it;

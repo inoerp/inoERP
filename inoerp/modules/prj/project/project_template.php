@@ -309,7 +309,7 @@ inoERP
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Control Id') ?></th>
         <th><?php echo gettext('Expenditure Type') ?></th>
-        <th><?php echo gettext('Category Category') ?></th>
+        <th><?php echo gettext('Expenditure Category') ?></th>
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('Job') ?></th>
         <th><?php echo gettext('Start Date') ?></th>

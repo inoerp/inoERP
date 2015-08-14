@@ -1,25 +1,116 @@
--Process Document(PD)
-
--Process Folw
- Changed template and added flow diagram
- New field added for path
-
-
--Help Desk Module
-   Service Request
-   Support Request
-   Change Request
-
-   Setup
-   Service Activity
-   
-   Task Management
-   Task Type
+inoERP 0.4.1 High Level Plan
+-------------------------------
+FA	20-Aug
+CRM	1-Sep
+Projects	10-Sep
+AM	15-Sep
+Release 0.4.1	15-Oct-2015
 
 
-inoERP 0.2.1 12-April-2015
-------------------------
-- 
+inoERP 0.3.1  | 12-April-2015
+-----------------------------
+- Fixed Asset Enhancements
+	Asset Component
+	Asset Retirement
+	Depreciation with new methods
+
+- Inventory Enhancements
+	
+
+- Forecast & Planning Enhancements
+	Kanban Strategy
+	Kanban Demand
+	Kanban Size Calculator
+	Kanban Supply
+	
+- Document & Analysis Enhancements
+	 Process Document(PD)
+	 Process Folw
+	  Changed template and added flow diagram
+	  New field added for path
+
+- A new project module with below features are added
+Projects
+    Project
+           Search Project
+           Search Agreement
+           Project Expenditure
+               Search Expenditure
+    Budgeting & Billing
+           Agreement
+           Search Budget
+           Project Budgeting
+           Project Event
+               Search Event
+    Costing Setup
+           Expenditure Type
+               Multi Expenditure Type
+               Search Expenditure Type
+           Non-Labor Resource
+               Search Non-Labor Resource
+    Project Setup
+           Project Category
+               Search Category
+           Work Type
+               Search Work Type
+           Project Type
+               Search Project Type
+    Budgeting Setup
+           Resource List
+               Search Resource List
+           Budget Entry Method
+               Search BEM
+    Billing Setup
+           Event Class
+           Event Type
+               Search Event Type
+    Setup
+           Customer Relationship
+           Expenditure Category
+           Revenue Category
+           Project Customer Relation
+           Resource Class
+           Service Type
+           Project Role
+               Search Role
+           Budget Type
+    Rate Schedule
+           Search Rate Schedule
+           Burden Cost Base
+               Multi Action Burden Cost
+           Burden Cost Code
+               Multi Axtion Cost Code
+           Burden Structure
+               Search Burden Structure
+           Burden List
+               Search Burden List
+
+- A new Help Desk module with below features are added
+Service Help Desk
+    Change Request
+           Search Change Request
+    Service Request
+           Search Service Request
+    Service Order
+           Search SVO
+    Svc Business Process
+           Search Business Process
+    Service Contract
+           Search Contract
+    Support Request
+           Search Support Request
+    Setup
+           Service Activity
+               Search Service Activity
+           Task Type
+           Task Status
+           Service Type
+               Search Service Type
+			   
+			   
+			   
+inoERP 0.2.1  | 12-April-2015
+----------------------------- 
 - A new module on Point of Sales is added
     POS Transaction
         Search POS Trnx
@@ -91,9 +182,8 @@ Asset Maintenance
 
 
 
-inoERP 0.1.2 31-Dec-2014
+inoERP 0.1.2  | 31-Dec-2014
 ------------------------
-- 
 First release for production usage
 Modules / Extensions included in this versions are :
 * Organization Structure : Flexible enterprise, business unit & inventory presentation.
@@ -655,7 +745,6 @@ Detailed Feature List
         Search Paths
         collections
 
-inoERP 0.1.0 07-Dec-2012
-------------------------
-- 
+inoERP 0.1.0 | 07-Dec-2012
+------------------------- 
 First release
