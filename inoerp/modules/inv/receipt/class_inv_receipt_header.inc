@@ -48,7 +48,7 @@ public static $transaction_type_id_a = [
   "receipt_date",
   "received_by",
   "carrier",
-  "vehicle_number",
+  "vechile_number",
   "comment",
   "ef_id",
   "created_by",
