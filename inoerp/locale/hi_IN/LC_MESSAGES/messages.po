@@ -15,6 +15,9 @@ msgstr ""
 msgid "HELLO_WORLD"
 msgstr "हैलो वर्ल्ड"
 
+msgid "This is how the story goes"
+msgstr "Und so geht die Geschichte."
+
 msgid "Address Id"
 msgstr "पता Id"
 
