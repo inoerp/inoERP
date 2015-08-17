@@ -58,7 +58,7 @@ inoERP
        <div id="comment_list">
         <?php echo!(empty($comments)) ? $comments : ""; ?>
        </div>
-       <div id ="display_comment_form">
+       <div id ="display_comment_form comment">
         <?php
         $reference_table = 'prj_expenditure_type_header';
         $reference_id = $$class->prj_expenditure_type_header_id;
