@@ -43,4 +43,9 @@ $(document).ready(function () {
   var trClass = '.' + $(this).prop('class').replace(/\s+/g, '.');
   endeField_asPerResourceType($(this).find('.resource_type').val(), trClass);
  });
+ 
+  $('body').off('change', '#project_number').on('change', '#project_number', function () {
+  $('#form_line').find('.prj_project_header_id').val($('#prj_project_header_id').val());
+ });
+
 });

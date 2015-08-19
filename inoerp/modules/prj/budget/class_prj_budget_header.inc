@@ -52,7 +52,7 @@ class prj_budget_header extends dbObject {
   'labor_effort',
   'nlr_effort',
   'revenue',
-  'curent_cb',
+  'current_cb',
   'original_cb',
   'baselined_by',
   'baselined_cb',
@@ -97,7 +97,7 @@ class prj_budget_header extends dbObject {
  public $nlr_effort;
  public $revenue;
  
- public $curent_cb;
+ public $current_cb;
  public $original_cb;
  public $baselined_by;
  public $baselined_cb;

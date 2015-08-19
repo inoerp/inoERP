@@ -85,7 +85,7 @@ if (!empty($_GET['class_name'])) {
      if ($entered_search_criteria == 'null') {
       $whereFields[] = " $value IS NULL ";
      } else {
-      $whereFields[] = sprintf("%s = %s ", $value, trim($entered_search_criteria));
+      $whereFields[] = sprintf("%s = %s ", $value, trim(str_replace('=', '', $entered_search_criteria)));
      }
     } else if (substr($entered_search_criteria, 0, 1) == '=') {
      if ($entered_search_criteria == 'null') {

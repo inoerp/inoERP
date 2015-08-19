@@ -53,7 +53,7 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Org Values') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Org Cost Values') ?></span>
  <form action=""  method="post" id="prj_nlr_line"  name="prj_nlr_line">
   <div id="tabsLine">
    <ul class="tabMain">

@@ -18,7 +18,7 @@ class prj_nlr_header extends dbObject {
  public static $table_name = "prj_nlr_header";
  public static $primary_column = "prj_nlr_header_id";
  public static $dependent_classes = ['prj_nlr_line'];
- public static $key_column = "nlr";
+ public static $key_column = "resource_name";
  public static $module = "prj";
  public static $system_info = [
   'name' => 'nlr',

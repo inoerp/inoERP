@@ -24,13 +24,13 @@ inoERP
       </li>
       <li><?php $f->l_select_field_from_object('budget_type', option_header::find_options_byName('PRJ_BUDGET_TYPE'), 'option_line_code', 'option_line_value', $$class->budget_type, 'budget_type'); ?></li>
       <li><?php
-       $f->l_text_field_d('project_number', 'select project_number');
+       echo $f->l_val_field_dm('project_number', 'prj_project_header', 'project_number', '', 'project_number', 'vf_select_project_number');
        echo $f->hidden_field_withId('prj_project_header_id', $$class->prj_project_header_id);
-       ?><i class="select_project_number select_popup clickable fa fa-search"></i></li>
+       ?><i class="generic g_select_project_number select_popup clickable fa fa-search" data-class_name="prj_project_header"></i></li>
       <li><?php $f->l_text_field_d('version_number'); ?></li>
       <li><?php $f->l_text_field_d('version_name'); ?></li>
       <li><?php $f->l_text_field_d('description'); ?></li> 
-      <li><?php $f->l_checkBox_field_dr('curent_cb'); ?></li> 
+      <li><?php $f->l_checkBox_field_dr('current_cb'); ?></li> 
       <li><?php $f->l_checkBox_field_dr('original_cb'); ?></li> 
       <li><?php $f->l_checkBox_field_dr('baselined_cb'); ?></li> 
      </ul>
@@ -42,8 +42,8 @@ inoERP
       <li><?php $f->l_text_field_d('labor_effort'); ?></li> 
       <li><?php $f->l_text_field_d('nlr_effort'); ?></li> 
       <li><?php $f->l_text_field_d('revenue'); ?></li> 
-      <li><?php $f->l_checkBox_field_dr('baselined_by'); ?></li> 
-      <li><?php $f->l_date_fieldAnyDay('baselined_date', $$class->baselined_date); ?></li> 
+      <li><?php $f->l_text_field_dr('baselined_by'); ?></li> 
+      <li><?php $f->l_date_fieldAnyDay('baselined_date', $$class->baselined_date ,'always_readonly'); ?></li> 
      </ul>
     </div>
     <div id="tabsHeader-3" class="tabContent">
@@ -115,14 +115,16 @@ inoERP
         ?>         
         <tr class="prj_budget_line<?php echo $count ?>">
          <td>
-          <?php
+          <?php $f = new inoform();
           echo ino_inline_action($prj_budget_line->prj_budget_line_id, array('prj_budget_header_id' => $prj_budget_header->prj_budget_header_id));
           ?>
          </td>
          <td><?php $f->seq_field_d($count); ?></td>
-         <td><?php $f->text_field_wid2sr('prj_budget_line_id', 'always_readonly'); ?></td>
-         <td><?php $f->val_field_wid2m('task_number', 'prj_project_all_v' , 'task_number', '', 'select project_task_number');
-          echo $f->hidden_field('prj_project_line_id', $$class_second->prj_project_line_id);
+         <td><?php $f->text_field_wid2sr('prj_budget_line_id', 'always_readonly dontCopy'); ?></td>
+         <td><?php
+          $f->val_field_wid2m('task_number', 'prj_project_all_v', 'task_number', '', 'select project_task_number');
+          echo $f->hidden_field_withCLass('prj_project_line_id', $$class_second->prj_project_line_id ,'dontCopy');
+          echo $f->hidden_field_withCLass('prj_project_header_id', $$class->prj_project_header_id,'prj_project_header_id popup_value');
           ?><i class="select_project_task_number select_popup clickable fa fa-search"></i></td>
          <td><?php $f->text_field_d2('prj_resource_line_id'); ?></td>
          <td><?php $f->text_field_d2('description'); ?></td>

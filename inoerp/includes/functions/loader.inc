@@ -377,7 +377,7 @@ if (($continue) && (!empty($class_names))) {
       $entered_search_criteria = str_replace(' ', '%', trim($_GET[$value][0]));
       array_push($existing_search, $value);
       if (strpos($value, '_ID') !== false) {
-       $whereFields[] = sprintf("%s = %s ", $value, trim($entered_search_criteria));
+       $whereFields[] = sprintf("%s = %s ", $value, trim(str_replace('=', '', $entered_search_criteria)));
       } else if (substr($entered_search_criteria, 0, 1) == '=') {
        $whereFields[] = sprintf("%s = '%s' ", $value, trim(substr($entered_search_criteria, 1)));
       } else if (substr($entered_search_criteria, 0, 2) == '!=') {

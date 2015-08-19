@@ -18,7 +18,7 @@ class prj_nlr_line extends dbObject {
  public static $table_name = "prj_nlr_line";
  public static $primary_column = "prj_nlr_line_id";
  public static $parent_primary_column = "prj_nlr_header_id";
- public static $key_column = "nlr_code";
+ public static $key_column = "bu_org_id";
  public static $module = "prj";
  public $field_a = [
   'prj_nlr_line_id',
