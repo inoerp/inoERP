@@ -5,8 +5,8 @@
    <span class="heading"><?php echo gettext('Tax Codes') ?></span>
    <div id="form_serach_header" class="tabContainer">
     <label><?php echo gettext('Business Org') ?></label></label>
-    <?php echo $f->select_field_from_object('org_id', org::find_all_business(), 'org_id', 'org', $org_id_h, 'org_id', $readonly1); ?>
-    <a name="show" href="form.php?class_name=mdm_tax_code&<?php echo "mode=$mode"; ?>" class="show document_id mdm_tax_code_id">
+    <?php echo $f->select_field_from_object('org_id', org::find_all_business(), 'org_id', 'org', $org_id_h, 'org_id', 'action'); ?>
+    <a name="show" href="form.php?class_name=mdm_tax_code&<?php echo "mode=$mode"; ?>" class="show document_id mdm_tax_code_id action">
      <i class="fa fa-refresh"></i></a> 
    </div>
    <div id ="form_line" class="mdm_tax_code"><span class="heading">Tax Details </span>
