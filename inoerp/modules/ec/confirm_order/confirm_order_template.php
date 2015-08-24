@@ -1,7 +1,7 @@
 <div class="row small-left-padding">
  <div id="form_all">
   <div id="form_header">
-   <h2 class="bgc"><?php $f = new inoform(); ?>Final Confirmation & Payment</h2>
+   <h2 class="bgc">Final Confirmation & Payment</h2>
 
    <div id="accordion0" class="accordion">
     <h3><i class="fa fa-minus-circle"></i> Customer Information</h3>

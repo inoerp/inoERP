@@ -29,7 +29,7 @@
           </tr>
          </thead>
          <tbody class="form_data_line_tbody default_account_values" >
-          <?php 
+          <?php
           $count = 0;
           $default_account_object_ai = new ArrayIterator($default_account_object);
           $default_account_object_ai->seek($position);
@@ -41,8 +41,8 @@
              echo ino_inline_action($$class->prj_default_account_id, array('prj_project_type_header_id' => $prj_project_type_header_id_h));
              ?>    
             </td>
-             <td><?php form::number_field_drs('prj_default_account_id') ?></td>
-             <td><?php echo $f->select_field_from_object('document_type', option_header::find_options_byName('PRJ_DOCUMENT_TYPE'), 'option_line_code', 'option_line_value', $$class->document_type, '', 'medium', '', $readonly); ?>        </td>
+            <td><?php form::number_field_drs('prj_default_account_id') ?></td>
+            <td><?php echo $f->select_field_from_object('document_type', option_header::find_options_byName('PRJ_DOCUMENT_TYPE'), 'option_line_code', 'option_line_value', $$class->document_type, '', 'medium', '', $readonly); ?>        </td>
             <td><?php $f->ac_field_dm('ac_id'); ?></td>
             <td><?php form::text_field_wid('description'); ?></td>
             <td><?php $f->status_field_d('status'); ?></td>

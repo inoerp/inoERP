@@ -81,12 +81,11 @@ class prj_default_account extends dbObject {
   return $result;
  }
 
- public static function find_all_inTax_by_bu_org_id($org_id) {
+ public static function find_all_by_projectTypeHeaderId($prj_project_type_header_id) {
   $sql = " 
 	 SELECT *
 	 FROM prj_default_account
-	 WHERE org_id = '{$org_id}'
-	 AND in_out = 'IN'
+	 WHERE prj_project_type_header_id = '{$prj_project_type_header_id}'
 	";
   $result = self::find_by_sql($sql);
   return $result;

@@ -1,7 +1,7 @@
 <div id ="form_header">
  <form action=""  method="post" id="hr_leave_transaction"  name="hr_leave_transaction">
   <span class="heading"><?php echo gettext('Leave Application') ?></span>
-  <div id ="form_header"><?php $f = new inoform() ?>
+  <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -15,10 +15,10 @@
         <a name="show" href="form.php?class_name=hr_leave_transaction&<?php echo "mode=$mode"; ?>" class="show document_id hr_leave_transaction_id">
          <i class="fa fa-refresh"></i></a> 
        </li>
-       <li data-employee_type="employee"><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
-         <?php echo gettext('Employee Name') ?></label><?php $f->text_field_d('employee_name'); ?>
-        <?php echo $f->hidden_field_withId('employee_id', $$class->employee_id); ?>
-       </li>
+       <li><?php
+        echo $f->l_val_field_d('employee_name', 'hr_employee_v', 'employee_name', '', 'vf_select_employee_name employee_name');
+        echo $f->hidden_field_withId('employee_id', $$class->employee_id);
+        ?><i class="generic g_select_employee_name select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
        <li><?php $f->l_text_field_dr('identification_id'); ?>  </li>
        <li><?php $f->l_date_fieldFromToday('requsted_date', $$class->requsted_date); ?>  </li>
        <li><?php $f->l_date_fieldFromToday('approved_date', $$class->approved_date); ?>  </li>

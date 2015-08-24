@@ -2,199 +2,102 @@
 
 class hr_expense_line extends dbObject {
 
- public static $table_name = "sd_so_line";
- public static $primary_column = "sd_so_line_id";
- public static $parent_primary_column = "sd_so_header_id";
- public static $key_column = 'line_number';
- public static $module = "sd";
- public $checkbox = [
-		 "rev_enabled_cb"
- ];
+ public static $table_name = "hr_expense_line";
+ public static $primary_column = "hr_expense_line_id";
+ public static $parent_primary_column = "hr_expense_header_id";
+ public static $key_column = 'expense_type';
+ public static $module = "hr";
  public $field_a = [
-		 'sd_so_line_id',
-		 'sd_so_header_id',
-		 'line_type',
-		 'line_number',
-		 'item_id_m',
-		 'shipping_org_id',
-		 'line_status',
-		 'requested_date',
-		 'promise_date',
-		 'schedule_ship_date',
-		 'actual_ship_date',
-		 'item_description',
-		 'line_description',
-		 'uom_id',
-		 'line_quantity',
-		 'picked_quantity',
-		 'shipped_quantity',
-		 'invoiced_quantity',
-		 'price_list_header_id',
-		 'price_date',
-		 'unit_price',
-		 'line_price',
-		 'reference_doc_type',
-		 'supply_source',
-		 'destination_type',
-		 'tax_code_id',
-		 'tax_amount',
-		 'reference_doc_number',
-		 'ar_transaction_header_id',
-		 'ar_transaction_line_id',
-		 "ef_id",
-		 "created_by",
-		 "creation_date",
-		 "last_update_by",
-		 "last_update_date"
+  'hr_expense_line_id',
+  'hr_expense_header_id',
+  'line_number',
+  'expense_date',
+  'receipt_amount',
+  'receipt_currency',
+  'expense_type',
+  'status',
+  'purpose',
+  'start_date',
+  'daily_rate',
+  'no_of_days',
+  'expense_location',
+  'vendor_name',
+  'vendor_details',
+  'original_receipt_missing_cb',
+  'exchange_rate',
+  'per_diem_rate',
+  'per_diem_days',
+  'mileage_uom_id',
+  'mileage_distace',
+  'mileage_rate',
+  'cc_transaction_id',
+  'cc_transaction_date',
+  'cc_age',
+  'cc_transaction_amount',
+  'created_by',
+  'creation_date',
+  'last_update_by',
+  'last_update_date',
  ];
  public $initial_search = [
-		 "sd_so_header_id",
-		 "so_number",
-		 "item_id_m",
-		 "item_number",
-		 "item_description"
- ];
- public $column = [
-		 "sd_so_header_id",
-		 "so_number",
-		 "item_id_m",
-		 "item_number",
-		 "item_description"
+  'hr_expense_header_id',
+  'expense_date',
+  'receipt_amount'
  ];
  public $requiredField = [
-		 'sd_so_header_id',
-		 'line_number',
-		 'item_description'
+  'hr_expense_header_id',
+  'expense_date',
+  'receipt_amount',
+  'receipt_currency',
+  'expense_type',
  ];
  public $fields_inForm_notInDataBase = [
-		 "so_number",
-		 "item_number",
-		 'tax_code_value',
-		 'ar_transaction_number'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-		 "sd_so_header_id"
+  "hr_expense_header_id"
  ];
- 
- public $notUpdatedFromWebForm = [
-		 'actual_ship_date',
- ];
- 
- public $sd_so_line_id;
- public $sd_so_header_id;
- public $line_type;
+ public $hr_expense_line_id;
+ public $hr_expense_header_id;
+ public $expense_date;
+ public $receipt_amount;
+ public $receipt_currency;
+ public $expense_type;
+ public $status;
+ public $purpose;
+ public $start_date;
+ public $daily_rate;
+ public $no_of_days;
+ public $expense_location;
+ public $vendor_name;
+ public $vendor_details;
+ public $original_receipt_missing_cb;
+ public $exchange_rate;
  public $line_number;
- public $item_id_m;
- public $item_description;
- public $line_description;
- public $uom_id;
- public $line_quantity;
- public $picked_quantity;
- public $shipped_quantity;
- public $invoiced_quantity;
- public $price_list_header_id;
- public $price_date;
- public $unit_price;
- public $line_price;
- public $tax_code_id;
- public $tax_amount;
- public $reference_doc_type;
- public $reference_doc_number;
- public $ar_transaction_header_id;
- public $ar_transaction_line_id;
- public $supply_source;
- public $destination_type;
- public $ef_id;
- public $po_status;
- public $rev_enabled_cb;
- public $rev_number;
+ public $per_diem_rate;
+ public $per_diem_days;
+ public $mileage_uom_id;
+ public $mileage_distace;
+ public $mileage_rate;
+ public $cc_transaction_id;
+ public $cc_transaction_date;
+ public $cc_age;
+ public $cc_transaction_amount;
  public $created_by;
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
- public $shipping_org_id;
- public $line_status;
- public $requested_date;
- public $promise_date;
- public $schedule_ship_date;
- public $actual_ship_date;
- public $time;
- public $msg;
- public $item_number;
- public $tax_code_value;
- public $ar_transaction_number;
 
  public function _before_save() {
-	if (!(empty($this->shipping_org_id))) {
-	 if (!(empty($this->item_number))) {
-		$item_s = item::find_by_itemNumber_orgId($this->item_number, $this->shipping_org_id);
-		$this->item_id_m = $item_s->item_id_m;
-	 }
-	} else {
-	 echo "<br> Saving line data failed!. No shipping organization. Error @ po_line @" . __LINE__;
-	 return -99;
-	}
-
-	if ((empty($this->line_status)) && (!empty($this->schedule_ship_date))) {
-	 $this->line_status = 'AWAITING_PICKING';
-	} else if (($this->line_status = 'ENTERED') && (!empty($this->schedule_ship_date))) {
-	 $this->line_status = 'AWAITING_PICKING';
-	} else if ((empty($this->line_status)) && (empty($this->schedule_ship_date))) {
-	 $this->line_status = 'ENTERED';
-	}
+  pa($this);
  }
 
- public function _after_save() {
-	
- }
-
- public function findAll_ByOrgId($org_id, $status = '') {
-	$sql = " SELECT * FROM " .
-					self::$table_name .
-					" WHERE shipping_org_id= :shipping_org_id  ";
-	if (!empty($status)) {
-	 $sql .= " AND line_status = :line_status ";
-	 $value_a = ['shipping_org_id' => $org_id, 'line_status' => $status];
-	} else {
-	 $value_a = ['shipping_org_id' => $org_id];
-	}
-	$result_array = $this->findBySql($sql, $value_a);
-	return !empty($result_array) ? $result_array : false;
- }
-
- Public static function sd_so_line_types() {
-	$option_header = option_header::find_by_name('PO_LINE_TYPE');
-	$po_types = option_line::find_by_option_id($option_header->option_header_id);
-	return $po_types;
- }
-
- public static function find_by_sd_so_headerId($sd_so_header_id) {
-	$sql = "SELECT * FROM " . self::$table_name . " where sd_so_header_id = '{$sd_so_header_id}'";
-	$result_array = self::find_by_sql($sql);
-	return $result_array;
- }
-
- public function copy($sd_so_line_id) {
-	global $db;
-	$sql1 = " CREATE TEMPORARY TABLE tmptable SELECT * FROM sd_so_line WHERE `sd_so_line_id` = '{$sd_so_line_id}' ";
-	if ($db->query($sql1)) {
-	 $sql2 = "  UPDATE tmptable SET `sd_so_line_id` = '' ,
-           `org_id` = '{$this->org_id}' 
-          WHERE `sd_so_line_id` = '{$sd_so_line_id}' ";
-	 if ($db->query($sql2)) {
-		$sql3 = " INSERT INTO `sd_so_line` SELECT * FROM tmptable WHERE `sd_so_line_id` = '' ";
-		if ($db->query($sql3)) {
-		 $this->sd_so_line_id = $db->insert_id();
-		 $this->msg = 1;
-		} else {
-		 $this->msg = 0;
-		}
-	 }
-	}
-	return $this->msg;
+ Public static function hr_expense_line_types() {
+  $option_header = option_header::find_by_name('PO_LINE_TYPE');
+  $po_types = option_line::find_by_option_id($option_header->option_header_id);
+  return $po_types;
  }
 
 }
 
-//end of sd_so_line class
+//end of hr_expense_line class
 ?>
