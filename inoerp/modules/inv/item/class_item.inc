@@ -226,20 +226,8 @@ class item extends dbObject {
   'am_asset_type',
   'transactable_cb'
  ];
-// public $column = [
-//  'item_id',
-//  'item_id_m',
-//  "org_id",
-//  "item_number",
-//  "item_description",
-//  "item_type",
-//  "serial_generation",
-//  "lot_generation",
-//  "uom_id",
-//  "item_status",
-//  'processing_lt',
-//  'kit_cb'
-// ];
+ 
+
  public $requiredField = [
   "item_number",
   "uom_id",
