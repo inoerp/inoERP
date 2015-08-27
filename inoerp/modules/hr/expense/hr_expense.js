@@ -3,4 +3,63 @@ $(document).ready(function () {
  if (!($('.lines_number:first').val())) {
   $('.lines_number:first').val('1');
  }
+
+ $('body').off('change', '#bu_org_id').on('change', '#bu_org_id', function () {
+  getBUDetails($(this).val());
+ });
+
+ if ($('#bu_org_id').val() && (!$('#po_header_id').val()) && ($('#bu_org_id').attr('disabled') !== 'disabled')) {
+  getBUDetails($('#bu_org_id').val());
+ }
+
+ //exhhnge rate
+ $('body').on('change', '#doc_currency', function () {
+  if ($(this).val() !== $('#currency').val()) {
+   $('#exchange_rate').prop('required', true).css('background', 'rgba(233, 209, 234, 0.61)');
+  }
+ });
+
+ if ($('#currency').val() == $('#doc_currency').val()) {
+  $('#exchange_rate').val('1');
+ } else if ((!$('#exchange_rate').val()) && $('#currency').val() != $('#doc_currency').val()) {
+  getExchangeRate();
+ }
+
+ $('body').off('change', '#currency, #doc_currency, #exchange_rate_type')
+         .on('change', '#currency, #doc_currency, #exchange_rate_type', function () {
+          getExchangeRate();
+         });
+
+ $('body').off('change', '#expense_template_id').on('change', '#expense_template_id', function () {
+  getSelectOptionsForExpense();
+ });
+
+ $('body').off('change', '.expense_type').on('change', '.expense_type', function () {
+  var trClass = '.' + $(this).closest('tr').prop('class').replace(/\s+/g, '.');
+  var expense_category = $(this).find('option:selected').data('expense_category');
+
+  switch (expense_category) {
+   case 'PER_DIEM':
+    $(trClass).find('.mileage_uom_id, .mileage_distace, .mileage_rate').val('').prop('readonly', true).addClass('always_readonly');
+    $(trClass).find('.per_diem_rate, .per_diem_days').prop('readonly', false).removeClass('always_readonly');
+    break;
+   case 'MILEAGE':
+    $(trClass).find('.per_diem_rate, .per_diem_days').val('').prop('readonly', true).addClass('always_readonly');
+    $(trClass).find('.mileage_uom_id, .mileage_distace, .mileage_rate').prop('readonly', false).removeClass('always_readonly');
+    
+    break;
+   default:
+    break;
+  }
+ });
+ 
+ $('body').off('change', '.expense_location').on('change', '.expense_location', function () {
+  var trClass = '.' + $(this).closest('tr').prop('class').replace(/\s+/g, '.');
+  getPerDiemRate({
+   hr_location_id : $(this).val(),
+   rowClass : trClass,
+   hr_employee_id : $('.claim_emplyee_id').val()
+  });
+ });
+ 
 });

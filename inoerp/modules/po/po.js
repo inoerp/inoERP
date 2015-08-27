@@ -192,7 +192,9 @@ $(document).ready(function () {
   }
  });
 
- if ((!$('#exchange_rate').val()) &&  $('#currency').val() != $('#doc_currency').val()) {
+ if ($('#currency').val() == $('#doc_currency').val()) {
+  $('#exchange_rate').val('1');
+ } else if ((!$('#exchange_rate').val()) && $('#currency').val() != $('#doc_currency').val()) {
   getExchangeRate();
  }
 

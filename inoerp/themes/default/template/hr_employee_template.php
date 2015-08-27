@@ -12,47 +12,47 @@
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-       <ul class="column header_field"> 
-        <li><?php $f->l_text_field_dr_withSearch('hr_employee_id') ?>
-         <a name="show" href="form.php?class_name=hr_employee&<?php echo "mode=$mode"; ?>" class="show document_id hr_employee_id">
-          <i class="fa fa-refresh"></i></a> 
-        </li>
-        <li><?php $f->l_text_field_d('first_name'); ?> 					</li>
-        <li><?php $f->l_text_field_d('last_name'); ?> 					</li>
-        <li><?php $f->l_text_field_d('title'); ?> 					</li>
-        <li><?php $f->l_select_field_from_object('gender', hr_employee::gender(), 'option_line_code', 'option_line_value', $$class->gender, '', 'gender', '', $readonly); ?>              </li>
-        <li><?php $f->l_select_field_from_object('person_type', hr_employee::person_type(), 'option_line_code', 'option_line_value', $$class->person_type, '', 'person_type', '', $readonly); ?>              </li>
-        <li><?php $f->l_select_field_from_object('identification_type', hr_employee::identification_type(), 'option_line_code', 'option_line_value', $$class->identification_type, '', 'identification_type', '', $readonly); ?>              </li>
-        <li><?php $f->l_text_field_d('identification_id'); ?> 					</li>
-        <li><?php $f->l_text_field_d('citizen_number'); ?> 					</li>
-        <li><?php $f->l_select_field_from_object('org_id', org::find_all_enterprise(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>             </li>
-        <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', $readonly, '', '', 1); ?>        </li>
-        <li><?php $f->l_status_field_d('status'); ?></li>
-       </ul>
+      <ul class="column header_field"> 
+       <li><?php $f->l_text_field_dr_withSearch('hr_employee_id') ?>
+        <a name="show" href="form.php?class_name=hr_employee&<?php echo "mode=$mode"; ?>" class="show document_id hr_employee_id">
+         <i class="fa fa-refresh"></i></a> 
+       </li>
+       <li><?php $f->l_text_field_d('first_name'); ?> 					</li>
+       <li><?php $f->l_text_field_d('last_name'); ?> 					</li>
+       <li><?php $f->l_text_field_d('title'); ?> 					</li>
+       <li><?php $f->l_select_field_from_object('gender', hr_employee::gender(), 'option_line_code', 'option_line_value', $$class->gender, '', 'gender', '', $readonly); ?>              </li>
+       <li><?php $f->l_select_field_from_object('person_type', hr_employee::person_type(), 'option_line_code', 'option_line_value', $$class->person_type, '', 'person_type', '', $readonly); ?>              </li>
+       <li><?php $f->l_select_field_from_object('identification_type', hr_employee::identification_type(), 'option_line_code', 'option_line_value', $$class->identification_type, '', 'identification_type', '', $readonly); ?>              </li>
+       <li><?php $f->l_text_field_d('identification_id'); ?> 					</li>
+       <li><?php $f->l_text_field_d('citizen_number'); ?> 					</li>
+       <li><?php $f->l_select_field_from_object('org_id', org::find_all_enterprise(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>             </li>
+       <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', $readonly, '', '', 1); ?>        </li>
+       <li><?php $f->l_status_field_d('status'); ?></li>
+      </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
-       <ul class="column header_field"> 
-        <li><?php $f->l_date_fieldFromToday('date_of_birth', $$class->date_of_birth); ?> </li>
-        <li><?php $f->l_select_field_from_object('country_of_birth', mdm_tax_region::country(), 'option_line_code', 'option_line_value', $$class->country_of_birth, '', 'country_code', '', $readonly); ?>              </li>
-        <li><?php $f->l_text_field_d('city_of_birth'); ?> 					</li>
-        <li><?php $f->l_text_field_d('nationality'); ?> 					</li>
-        <li><?php $f->l_text_field_d('disability_code'); ?> 					</li>
-        <li><?php $f->l_select_field_from_object('marital_status', hr_employee::marital_status(), 'option_line_code', 'option_line_value', $$class->marital_status, '', 'marital_status', '', $readonly); ?>              </li>
-        <li><?php $f->l_text_field_d('no_of_children'); ?> 					</li>
-        <li><?php $f->l_text_field_d('passport_number'); ?> 					</li>
-       </ul>
+      <ul class="column header_field"> 
+       <li><?php $f->l_date_fieldFromToday('date_of_birth', $$class->date_of_birth); ?> </li>
+       <li><?php $f->l_select_field_from_object('country_of_birth', mdm_tax_region::country(), 'option_line_code', 'option_line_value', $$class->country_of_birth, '', 'country_code', '', $readonly); ?>              </li>
+       <li><?php $f->l_text_field_d('city_of_birth'); ?> 					</li>
+       <li><?php $f->l_text_field_d('nationality'); ?> 					</li>
+       <li><?php $f->l_text_field_d('disability_code'); ?> 					</li>
+       <li><?php $f->l_select_field_from_object('marital_status', hr_employee::marital_status(), 'option_line_code', 'option_line_value', $$class->marital_status, '', 'marital_status', '', $readonly); ?>              </li>
+       <li><?php $f->l_text_field_d('no_of_children'); ?> 					</li>
+       <li><?php $f->l_text_field_d('passport_number'); ?> 					</li>
+      </ul>
      </div>
      <div id="tabsHeader-3" class="tabContent">
-       <ul class="column header_field">
-        <li><?php $f->l_text_field_d('home_phone_number'); ?> 					</li>
-        <li><?php $f->l_text_field_d('phone'); ?> 					</li>
-        <li><?php $f->l_text_field_d('mobile_number'); ?> 					</li>
-        <li><?php $f->l_text_field_d('email'); ?> 					</li>
-        <li><?php $f->l_text_field_d('other_email'); ?> 					</li>
-        <li><?php $f->l_text_field_d('home_address'); ?> 					</li>
-        <li><?php $f->l_text_field_d('permanent_address'); ?> 					</li>
-        <li><?php $f->l_text_field_d('location_id'); ?> 					</li>
-       </ul>
+      <ul class="column header_field">
+       <li><?php $f->l_text_field_d('home_phone_number'); ?> 					</li>
+       <li><?php $f->l_text_field_d('phone'); ?> 					</li>
+       <li><?php $f->l_text_field_d('mobile_number'); ?> 					</li>
+       <li><?php $f->l_text_field_d('email'); ?> 					</li>
+       <li><?php $f->l_text_field_d('other_email'); ?> 					</li>
+       <li><?php $f->l_text_field_d('home_address'); ?> 					</li>
+       <li><?php $f->l_text_field_d('permanent_address'); ?> 					</li>
+       <li><?php $f->l_text_field_d('location_id'); ?> 					</li>
+      </ul>
      </div>
      <div id="tabsHeader-4" class="tabContent">
       <div> <?php echo ino_attachement($file) ?> </div>
@@ -94,6 +94,7 @@
        <ul class="column header_field"> 
         <li><?php $f->l_select_field_from_object('job_id', hr_job::find_all(), 'hr_job_id', 'job_name', $$class->job_id, 'job_id'); ?> 	</li>
         <li><?php $f->l_select_field_from_object('position_id', hr_position::find_all(), 'hr_position_id', 'position_name', $$class->position_id, 'position_id'); ?>  </li>
+        <li><?php $f->l_select_field_from_object('grade_id', hr_grade::find_all(), 'hr_grade_id', 'grade', $$class->grade_id, 'grade_id'); ?></li>
         <li><?php $f->l_select_field_from_object('payroll_id', hr_payroll::find_all(), 'hr_payroll_id', 'payroll', $$class->payroll_id, 'payroll_id'); ?>  </li>
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supervisor_employee_id select_popup clickable">
           <?php echo gettext('Supervisor') ?></label><?php
@@ -164,6 +165,7 @@
              <td><?php $f->text_field_wid2('mode_of_education'); ?></td>
              <td><?php $f->text_field_wid2s('marks_percentage'); ?></td>
              <td><?php $f->text_field_wid2s('grade'); ?></td>
+
             </tr>
             <?php
             $count = $count + 1;
@@ -314,7 +316,7 @@
       <div> 
        <ul class="column four_column"> 
         <li><?php $f->l_date_fieldAnyDay('date_of_notification', $$class_fourth->date_of_notification); ?></li>
-        <li><?php $f->l_text_field('reason',$$class_fourth->projected_last_date); ?></li>
+        <li><?php $f->l_text_field('reason', $$class_fourth->projected_last_date); ?></li>
         <li><?php $f->l_date_fieldAnyDay('projected_last_date', $$class_fourth->projected_last_date); ?></li>
         <li><?php $f->l_date_fieldAnyDay('accpeted_date', $$class_fourth->accpeted_date); ?></li>
         <li><?php $f->l_date_fieldAnyDay('actual_last_date', $$class_fourth->actual_last_date); ?></li>

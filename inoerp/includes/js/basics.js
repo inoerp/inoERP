@@ -1002,6 +1002,11 @@ function getExchangeRate(options) {
  };
  var settings = $.extend({}, defaults, options);
 
+ if (settings.from_currency == settings.to_currency) {
+  $('#exchange_rate').val('1');
+  return true;
+ }
+
  return $.ajax({
   url: settings.json_url,
   type: 'get',
@@ -2457,8 +2462,8 @@ function getMultiSelectResult(options) {
   }
   $('#searchResult').empty().append(newContent);
   var pagination = $(result).find('div#pagination').html();
-  if(pagination){
-  $('#pagination').empty().append(pagination);
+  if (pagination) {
+   $('#pagination').empty().append(pagination);
   }
   $.getScript("includes/js/reload.js");
   $.getScript("includes/js/multi_select.js");
@@ -2947,6 +2952,88 @@ function save_dataInSession(options) {
     void window.open(openUrl, '_blank',
             'width=1200,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
    }
+  },
+  complete: function () {
+   $('.show_loading_small').hide();
+  },
+  beforeSend: function () {
+   $('.show_loading_small').show();
+  },
+  error: function (request, errorType, errorMessage) {
+   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+  }
+ });
+}
+
+
+//get SelectOptionsForExpense
+function getSelectOptionsForExpense(options) {
+ var defaults = {
+  json_url: 'modules/hr/expense/json_expense.php',
+  expense_template_id: $('#expense_template_id').val()
+ };
+ var settings = $.extend({}, defaults, options);
+ $('#loading').show();
+ return $.ajax({
+  url: settings.json_url,
+  data: {
+   expense_template_id: settings.expense_template_id,
+   find_expense_details: 1
+  },
+  type: 'get',
+  beforeSend: function () {
+   $('.show_loading_small').show();
+  },
+  complete: function () {
+   $('.show_loading_small').hide();
+  }
+ }).done(function (result) {
+  var div = $(result).filter('div#expense_template_details').html();
+  $('#content').find('.expense_type').empty().append(div);
+//  console.log(div);
+ }).fail(function () {
+//  alert("org name loading failed");
+ }).always(function () {
+  $('#loading').hide();
+ });
+}
+
+//get expense perdiem rate
+function getPerDiemRate(options) {
+ var d = new Date();
+ var month = d.getMonth() + 1;
+ var day = d.getDate();
+ var curernt_date = d.getFullYear() + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+ var defaults = {
+  json_url: 'modules/hr/perdiem_rate/json_perdiem_rate.php',
+  hr_employee_id : $('#hr_employee_id').val(),
+  price_date: curernt_date
+ };
+ var settings = $.extend({}, defaults, options);
+ return $.ajax({
+  url: settings.json_url,
+  type: 'get',
+  dataType: 'json',
+  data: {
+   hr_location_id: settings.hr_location_id,
+   find_perdiem_rate: 1,
+   price_date: settings.price_date,
+   hr_employee_id: settings.hr_employee_id
+  },
+  success: function (result) {
+   if (result) {
+    $.each(result, function (key, value) {
+     switch (key) {
+      case 'rate':
+       var className = '.' + key;
+       $('#content').find(settings.rowClass).find(className).val(value);
+       break;
+     }
+    });
+   } else {
+    $('#content').find(settings.rowClass).find('.per_diem_rate').val('');
+   }
+
   },
   complete: function () {
    $('.show_loading_small').hide();
@@ -4686,7 +4773,7 @@ $(document).ready(function () {
   collapsible: true
  });
 
- $("#accordion0").accordion({
+ $("#accordion0,#accordion1").accordion({
   heightStyle: "content",
   activate: function (event, ui) {
    if (ui.newHeader.find('i').hasClass('fa-plus-circle')) {

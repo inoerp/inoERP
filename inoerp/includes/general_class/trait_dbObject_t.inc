@@ -609,7 +609,7 @@ trait dbObject_t {
    }
    $this->msg = 1;
   } catch (PDOException $e) {
-   pa($stmt);
+//   pa($stmt);
    $this->msg = 0;
    $dbc->rollback = 1;
    echo "<br>Record couldnt be saved!!: Error Code : DBO01 . Error @dbObject @@ Line " . __LINE__ . '<br>' . $e->getMessage() . "<br>";

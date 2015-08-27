@@ -364,6 +364,10 @@ table.ui-datepicker-calendar tr th{
  font-weight: bold;
  cursor :pointer;        
 }
+
+.accordion .ui-accordion-header .fa{
+ color: #fff; 
+}
 .accordion .ui-accordion-header:first-of-type a {
  box-shadow: 0px -1px 0px 0px #b85c0f;
 }

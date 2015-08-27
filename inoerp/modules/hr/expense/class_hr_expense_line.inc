@@ -13,7 +13,7 @@ class hr_expense_line extends dbObject {
   'line_number',
   'expense_date',
   'receipt_amount',
-  'receipt_currency',
+//  'receipt_currency',
   'expense_type',
   'status',
   'purpose',

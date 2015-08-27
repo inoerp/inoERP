@@ -1,181 +1,190 @@
-<?xml version="1.0"?>
+<!-- * 
+inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+-->
 
-<?xml-stylesheet type="text/css" href="chrome://global/skin/" ?>
-<?xml-stylesheet type="text/css"
-href="chrome://xulschoolhello/skin/browserOverlay.css" ?>
+<div id ="form_header"><span class="heading"><?php echo gettext('Expense Claim') ?></span>
+ <form action=""  method="post" id="so_header"  name="so_header">
+  <div id="tabsHeader">
+   <ul class="tabMain">
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Approval') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Notes') ?></a></li>
+   </ul>
+   <div class="tabContainer">
+    <div id="tabsHeader-1" class="tabContent">
+     <div class="large_shadow_box"> 
+      <ul class="column header_field">
+       <li><?php $f->l_text_field_dr_withSearch('hr_expense_header_id') ?>
+        <a name="show" href="form.php?class_name=hr_expense_header&<?php echo "mode=$mode"; ?>" class="show document_id hr_expense_header_id">
+         <i class="fa fa-refresh"></i></a> 
+       </li>
+       <li><?php
+        echo $f->l_val_field_d('employee_name', 'hr_employee_v', 'employee_name', '', 'vf_select_employee_name employee_name');
+        echo $f->hidden_field_withId('employee_id', $$class->employee_id);
+        ?><i class="generic g_select_employee_name select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
+       <li><?php $f->l_text_field_dr('identification_id'); ?>  </li>						 
+       <li><?php $f->l_date_fieldAnyDay_m('claim_date', $$class->claim_date); ?>             </li>
+       <li><?php echo $f->text_field_d('expense_template_id'); ?>             </li>
+       <li><?php $f->l_select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', '', 1, $readonly); ?></li>
+       <li><?php $f->l_select_field_from_object('department_id', sys_value_group_line::find_by_parent_id('3'), 'sys_value_group_line_id', array('code', 'description'), $$class->department_id, 'department_id', 'medium'); ?> </li>
+       <li><?php echo $f->text_field_dr('status'); ?>             </li>
+      </ul>
+     </div>
+    </div>
+    <div id="tabsHeader-2" class="tabContent">
+     <div> 
+      <ul class="column header_field">
+       <li><?php
+        echo $f->l_val_field_d('employee_name', 'hr_employee_v', 'employee_name', '', 'vf_select_employee_name employee_name');
+        echo $f->hidden_field_withCLass('approved_by_employee_id', $$class->approved_by_employee_id, 'employee_id');
+        ?><i class="generic g_select_employee_name select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
+       <li><?php echo $f->text_field_d('purpose'); ?>             </li>
+       <li><?php echo $f->text_field_d('reason'); ?>             </li>
+       <li><?php $f->l_date_fieldAnyDay_m('approved_date', $$class->approved_date, 'always_readonly'); ?>             </li>
+      </ul>
+     </div>
+    </div>
+    <div id="tabsHeader-3" class="tabContent">
+     <div> 
+      <div id="comments">
+       <div id="comment_list">
+        <?php echo!(empty($comments)) ? $comments : ""; ?>
+       </div>
+       <div id ="display_comment_form">
+        <?php
+        $reference_table = 'hr_expense_header';
+        $reference_id = $$class->hr_expense_header_id;
+        ?>
+       </div>
+       <div id="new_comment">
+       </div>
+      </div>
+     </div>
+    </div>
+    <div id="tabsHeader-4" class="tabContent">
+     <div> <?php echo ino_attachement($file) ?> </div>
+    </div>
+   </div>
+  </div>
+ </form>
+</div>
 
-<window
- id="dataEntryForm-window"
- title="Data Entry Form"
- flex = "1"
- resizable ="yes"
- orient="vertical"
- sizemode="normal"
- xmlns:html="http://www.w3.org/1999/xhtml"
- xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
- <!-- Other elements go here --> 
- <script type="application/x-javascript"
-         src="chrome://xulschoolhello/content/jquery-2.0.3.min.js" />
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Expense Lines') ?></span>
+ <form method="post" id="hr_expense_line"  name="hr_expense_line">
+  <div id="accordion0" class="accordion">
+   <h3><i class="fa fa-minus-circle"></i> <?php echo gettext('Receipt Expense') ?></h3>
+   <div>
+    <table class="form_line_data_table">
+     <thead> 
+      <tr>
+       <th><?php echo gettext('Action') ?></th>
+       <th><?php echo gettext('Line') ?>#</th>
+       <th><?php echo gettext('Expense Type') ?></th>
+       <th><?php echo gettext('Date') ?></th>
+       <th><?php echo gettext('Amount') ?></th>
+       <th><?php echo gettext('Purpose') ?></th>
+       <th><?php echo gettext('Exchange') ?></th>
+       <th><?php echo gettext('Vendor') ?></th>
+       <th><?php echo gettext('Vendor Details') ?></th>
+      </tr>
+     </thead>
+     <tbody class="form_data_line_tbody">
+      <?php
+      $count = 0;
+      foreach ($hr_expense_line_object as $hr_expense_line) {
+       ?>         
+       <tr class="hr_expense_line<?php echo $count ?>">
+        <td>
+         <?php
+         echo ino_inline_action($$class_second->hr_expense_line_id, array('hr_expense_header_id' => $$class->hr_expense_header_id));
+         ?>
+        </td>
+        <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
+        <td><?php form::text_field_wid2s('expense_type'); ?></td>
+        <td><?php echo $f->date_fieldAnyDay('expense_date', $$class_second->expense_date); ?></td>
+        <td><?php form::number_field_wid2s('receipt_amount'); ?></td>
+        <td><?php $f->text_field_wid2('purpose'); ?></td>
+        <td><?php form::number_field_wid2s('exchange_rate'); ?></td>
+        <td><?php form::text_field_wid2('vendor_name'); ?></td>
+        <td><?php form::text_field_wid2('vendor_details'); ?></td>
+       </tr>
+       <?php
+       $count = $count + 1;
+      }
+      ?>
+     </tbody>
+    </table>
+   </div>
 
- <script type="application/x-javascript"
-         src="chrome://xulschoolhello/content/jquery-ui.min.js" />
+   <h3><i class="fa fa-minus-circle"></i> <?php echo gettext('Per Diem') ?></h3>
+   <div>
+    <table class="form_line_data_table">
+     <thead> 
+      <tr>
+       <th><?php echo gettext('Action') ?></th>
+       <th><?php echo gettext('Line') ?>#</th>
+       <th><?php echo gettext('Expense Type') ?></th>
+       <th><?php echo gettext('Date') ?></th>
+       <th><?php echo gettext('Receipt Amount') ?></th>
+       <th><?php echo gettext('Purpose') ?></th>
+       <th><?php echo gettext('Exchange') ?></th>
+       <th><?php echo gettext('Vendor') ?></th>
+       <th><?php echo gettext('Vendor Details') ?></th>
+      </tr>
+     </thead>
+     <tbody class="form_data_line_tbody2">
+      <?php
+      foreach ($hr_expense_line_object as $hr_expense_line) {
+       ?>         
+       <tr class="hr_expense_line<?php echo $count ?>">
+        <td>
+         <?php
+         echo ino_inline_action($$class_second->hr_expense_line_id, array('hr_expense_header_id' => $$class->hr_expense_header_id));
+         ?>
+        </td>
+        <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
+        <td><?php form::text_field_wid2('expense_type'); ?></td>
+        <td><?php echo $f->date_fieldAnyDay('expense_date', $$class_second->expense_date); ?></td>
+        <td><?php form::number_field_wid2('receipt_amount'); ?></td>
+        <td><?php $f->text_field_wid2('purpose'); ?></td>
+        <td><?php form::number_field_wid2('exchange_rate'); ?></td>
+        <td><?php form::text_field_wid2('vendor_name'); ?></td>
+        <td><?php form::text_field_wid2('vendor_details'); ?></td>
+       </tr>
+       <?php
+       $count = $count + 1;
+      }
+      ?>
+     </tbody>
+    </table>
+   </div>
+  </div>
 
- <script type="application/x-javascript"
-         src="chrome://xulschoolhello/content/browserOverlay.js" />
- <vbox>
-  <vbox flex="1">
-   <hbox  min-width = "1000" align="start" flex="1">
-    <toolbox>
-     <toolbar id="findfiles-toolbar">
-      <toolbarbutton id="newload"     class="tool-btn newload"     label="New"    accesskey="n" oncommand="XULSchoolChrome.BrowserOverlay.newLoad(event);"/>
-      <toolbarbutton id="savfile"     class="tool-btn savefile"     label="Save"    accesskey="s" oncommand="XULSchoolChrome.BrowserOverlay.saveDataFile();"/>
-      <toolbarbutton id="close"     class="tool-btn close"     label="Close"    accesskey="c" oncommand="window.close();"/>
-     </toolbar>
-    </toolbox>
-   </hbox>
-  </vbox>
-
-  <vbox>
-   <tabbox>
-    <tabs>
-     <tab label="Data Loader"/>
-     <tab label="Commands"/>
-     <tab label="Java Srcipt"/>
-    </tabs>
-    <tabpanels>
-     <tabpanel id="data_loader">
-      <vbox>
-       <toolbox>
-        <textbox multiline="true"  id="datatoupload" rows="30" cols="130" value="Enter | separated data here"/>
-       </toolbox>
-      </vbox>
-      <vbox>
-       <!--   <menulist label="Select Window" id="slect-window">
-           <menupopup>
-            <menuitem label="Dev" />
-            <menuitem label="Production" />
-           </menupopup>
-          </menulist>-->
-       <button id="start-load" label="Start Loading" accesskey="l" oncommand="XULSchoolChrome.BrowserOverlay.startDataLoading(event);"/>
-      </vbox>
-     </tabpanel>
-     <tabpanel id="commands" style="overflow:scroll;">
-      <grid flex="1">
-       <columns>
-        <column flex="1"/>
-        <column flex="1"/>
-        <column flex="2"/>
-       </columns>
-       <rows >
-        <row class="heading">
-         <description>String</description>
-         <description>Command</description>
-         <description>Example</description>
-        </row>
-        <row class="data-row">
-         <description>TAB</description>
-         <description>|</description>
-         <description>111|ABC</description>
-        </row>
-        <row class="data-row">
-         <description>Any Character</description>
-         <description>The Character</description>
-         <description>A B C</description>
-        </row>
-        <row class="data-row">
-         <description>Shift + Character</description>
-         <description>*S(Character)</description>
-         <description>Shift + A  = *SA</description>
-        </row>
-        <row class="data-row">
-         <description>Alt + Character</description>
-         <description>*A(Character)</description>
-         <description>Alt + A  = *AA</description>
-        </row>
-        <row class="data-row">
-         <description>Shift + Character</description>
-         <description>*S(Character)</description>
-         <description>Shift + A  = *SA</description>
-        </row>
-        <row class="data-row">
-         <description>Shift Ctrl + Character</description>
-         <description>**SC(Character)</description>
-         <description>Shift Ctrl + A  = **SCA</description>
-        </row>
-        <row class="data-row">
-         <description>Alt Ctrl + Character</description>
-         <description>**AC(Character)</description>
-         <description>Alt Ctrl + A  = **ACA</description>
-        </row>
-        <row class="data-row">
-         <description>Alt Shift + Character</description>
-         <description>**AS(Character)</description>
-         <description>Alt Shift + A  = **ASA</description>
-        </row>
-        <row class="data-row">
-         <description>Up Arrow</description>
-         <description>**UP</description>
-         <description>**UP</description>
-        </row>
-        <row class="data-row">
-         <description>Down Arrow</description>
-         <description>**DOWN</description>
-         <description>**DOWN</description>
-        </row>
-        <row class="data-row">
-         <description>Left Arrow</description>
-         <description>**LEFT</description>
-         <description>**LEFT</description>
-        </row>
-        <row class="data-row">
-         <description>Right Arrow</description>
-         <description>**RIGHT</description>
-         <description>**RIGHT</description>
-        </row>
-        <row class="data-row">
-         <description>Enter/Return</description>
-         <description>**ENTER</description>
-         <description>**ENTER</description>
-        </row>
-        <row class="data-row">
-         <description>Down Arrow</description>
-         <description>**DOWN</description>
-         <description>**DOWN*</description>
-        </row>
-        <row class="data-row">
-         <description>Space Bar</description>
-         <description>**SPACE</description>
-         <description>**SPACE</description>
-        </row>
-        <row class="data-row">
-         <description>Delete</description>
-         <description>**DEL</description>
-         <description>**DEL</description>
-        </row>
-        <row class="data-row">
-         <description>Page Up Bar</description>
-         <description>**PAGEUP</description>
-         <description>**PAGEUP</description>
-        </row>
-        <row class="data-row">
-         <description>Page Down</description>
-         <description>**PAGEDOWN</description>
-         <description>**PAGEDOWN</description>
-        </row>
-       </rows>
-      </grid>
-     </tabpanel>
-     <tabpanel id="javascript">
-      <toolbox>
-       <textbox multiline="true"  id="user_javascript" rows="30" cols="150" value="Enter custom java script here"/>
-      </toolbox>
-     </tabpanel>
-    </tabpanels>
-   </tabbox>
-
-
-  </vbox>
- </vbox>
-
-
-</window>
+ </form>
+</div>
+<div id="js_data">
+ <ul id="js_saving_data">
+  <li class="headerClassName" data-headerClassName="hr_expense_header" ></li>
+  <li class="lineClassName" data-lineClassName="hr_expense_line" ></li>
+  <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
+  <li class="primary_column_id" data-primary_column_id="hr_expense_header_id" ></li>
+  <li class="form_header_id" data-form_header_id="hr_expense_header" ></li>
+  <li class="line_key_field" data-line_key_field="line_number" ></li>
+  <li class="single_line" data-single_line="true" ></li>
+  <li class="form_line_id" data-form_line_id="hr_expense_line" ></li>
+ </ul>
+ <ul id="js_contextMenu_data">
+  <li class="docHedaderId" data-docHedaderId="hr_expense_header_id" ></li>
+  <li class="docLineId" data-docLineId="hr_expense_line_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="hr_expense_header" ></li>
+  <li class="btn2DivId" data-btn2DivId="form_line" ></li>
+  <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>
+  <li class="noOfTabbs" data-noOfTabbs="1" ></li>
+ </ul>
+</div>
