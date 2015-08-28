@@ -50,7 +50,7 @@
    <ul class="column five_column inline_list"> 
     <li>
      <?php // echo form::text_field('supplier_site_id', $supplier_site->supplier_site_id, '15', '25', '', 'System Number', 'supplier_site_id', $readonly) ?>
-     <?php echo $f->l_select_field_from_array('supplier_site_id', supplier_site::find_all_sitesOfSupplier_array($supplier->supplier_id), $supplier_site->supplier_site_id, 'supplier_site_id'); ?>
+     <?php echo $f->l_select_field_from_array('supplier_site_id', supplier_site::find_all_sitesOfSupplier_array($supplier->supplier_id), $supplier_site->supplier_site_id, 'supplier_site_id' ,'action'); ?>
      <a name="show" href="form.php?class_name=supplier&<?php echo "mode=$mode"; ?>" class="show document_id supplier_site_id" data-search_field='supplier_site_id'>
       <i class="fa fa-refresh"></i> </a> 
     </li> 
@@ -81,6 +81,7 @@
        <li><?php $f->l_text_field('site_tax_reg_no', $$class_second->site_tax_reg_no); ?></li>
        <li><?php $f->l_text_field('bank_id', $$class_second->bank_id); ?></li>
        <li><?php $f->l_text_field('bank_account_id', $$class_second->bank_account_id); ?></li>
+       <li><?php $f->l_checkBox_field('primary_cb', $$class_second->primary_cb); ?></li>
       </ul>
      </div>
      <div class="second_rowset">

@@ -28,27 +28,28 @@
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
-      <ul class="column header_field">
-       <li><?php $f->l_select_field_from_object('user_language', user::all_languages(), 'option_line_code', 'description', $$class->user_language, 'user_language'); ?>  </li>
-       <li><?php $f->l_select_field_from_object('default_theme', extn_theme::find_all_enabled_theme(), 'theme_name', 'theme_name', $$class->default_theme, 'default_theme'); ?>  </li>
-       <li><?php $f->l_select_field_from_array('block_notif_count', dbObject::$position_array, $$class->block_notif_count); ?>  </li>
-      </ul>
+     <ul class="column header_field">
+      <li><?php $f->l_select_field_from_object('user_language', user::all_languages(), 'option_line_code', 'description', $$class->user_language, 'user_language'); ?>  </li>
+      <li><?php $f->l_select_field_from_object('default_theme', extn_theme::find_all_enabled_theme(), 'theme_name', 'theme_name', $$class->default_theme, 'default_theme'); ?>  </li>
+      <li><?php $f->l_select_field_from_array('block_notif_count', dbObject::$position_array, $$class->block_notif_count); ?>  </li>
+     </ul>
     </div>
     <div id="tabsHeader-3" class="tabContent">
-      <ul class="column header_field">
-       <li><label><?php echo gettext('Employee Name') ?></label><?php $f->text_field_d('employee_name'); ?>
-        <?php echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id); ?>
-        <i class="fa fa-search hr_employee_id select_popup clickable"></i>
-       </li>
-       <li><label><?php echo gettext('Supplier Name') ?></label><?php $f->text_field_d('supplier_name'); ?>
-        <?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
-        <i class="fa fa-search supplier_id select_popup clickable"></i>
-       </li>
-       <li><label><?php echo gettext('Customer Name') ?></label><?php $f->text_field_d('customer_name'); ?>
-        <?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
-        <i class="fa fa-search ar_customer_id select_popup clickable"></i>
-       </li>
-      </ul>
+     <ul class="column header_field">
+      <li><?php
+       echo $f->l_val_field_d('employee_name', 'hr_employee_v', 'employee_name', '', 'vf_select_employee_name employee_name');
+       echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id);
+       ?><i class="generic g_select_employee_name select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
+
+      <li><label><?php echo gettext('Supplier Name') ?></label><?php $f->text_field_d('supplier_name'); ?>
+       <?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
+       <i class="fa fa-search supplier_id select_popup clickable"></i>
+      </li>
+      <li><label><?php echo gettext('Customer Name') ?></label><?php $f->text_field_d('customer_name'); ?>
+       <?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
+       <i class="fa fa-search ar_customer_id select_popup clickable"></i>
+      </li>
+     </ul>
     </div>
     <div id="tabsHeader-4" class="tabContent">
 
@@ -85,7 +86,8 @@
      </div>
      <div class="new-address col-md-6"><label><?php echo gettext('Add New Address'); ?></label>
       <?php $existing_address_c = !empty($existing_address_arr) ? count($existing_address_arr) : 0;
-      echo $f->add_new_address(); ?>
+      echo $f->add_new_address();
+      ?>
      </div>
      <!--end of tab1 div three_column-->
     </div> 

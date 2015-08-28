@@ -36,9 +36,11 @@ if (!empty($_GET['class_name'])) {
  if (method_exists($$class, 'search_pre_populate')) {
   $ppl = call_user_func(array($$class, 'search_pre_populate'));
   if (!empty($ppl)) {
+   $search_pre_populate_a = [];
    foreach ($ppl as $search_key => $search_val) {
-    $_GET[$search_key] = $search_val;
+    array_push($search_pre_populate_a, $search_val);
    }
+   $_GET[$search_key] = $search_pre_populate_a;
   }
  }
 

@@ -13,8 +13,8 @@ inoERP
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
     <li><a href="#tabsHeader-2"><?php echo gettext('Finance') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
     <li><a href="#tabsHeader-5"><?php echo gettext('Action') ?></a></li>
    </ul>
    <div class="tabContainer">
@@ -48,6 +48,7 @@ inoERP
        <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', 'currency', 1, 1); ?></li>
        <li><?php $f->l_select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
        <li><?php $f->l_number_field('exchange_rate', $$class->exchange_rate, '', 'exchange_rate', '', 1, $readonly); ?> </li>
+       <li><?php $f->l_number_field_dr('header_amount', 'always_readonly'); ?></li>
        <li><?php
         echo $f->l_val_field_d('approver_employee_name', 'hr_employee_v', 'employee_name', '', 'vf_select_employee_name employee_name');
         echo $f->hidden_field_withCLass('approved_by_employee_id', $$class->approved_by_employee_id, 'hr_employee_id');
@@ -111,6 +112,7 @@ inoERP
         <th><?php echo gettext('Line') ?>#</th>
         <th><?php echo gettext('Expense Type') ?></th>
         <th><?php echo gettext('Date') ?></th>
+        <th><?php echo gettext('Currency') ?></th>
         <th><?php echo gettext('Receipt Amount') ?></th>
         <th><?php echo gettext('Purpose') ?></th>
         <th><?php echo gettext('Exchange') ?></th>
@@ -127,16 +129,18 @@ inoERP
         <tr class="hr_expense_line<?php echo $count ?>">
          <td>
           <?php
-          echo ino_inline_action($$class_second->hr_expense_line_id, array('hr_expense_header_id' => $$class->hr_expense_header_id));
+          echo ino_inline_action($$class_second->hr_expense_line_id, array('hr_expense_header_id' => $$class->hr_expense_header_id,
+           'hr_expense_line_id' => $$class_second->hr_expense_line_id ));
           ?>
          </td>
          <td><?php $f->seq_field_d($count); ?></td>
          <td><?php $f->text_field_wid2s('line_number', 'lines_number'); ?></td>
          <td><?php echo $f->select_field_from_object('expense_type', hr_expense_tpl_line::find_by_parent_id($$class->expense_template_id), 'hr_expense_tpl_line_id', 'expense_item', $$class_second->expense_type, '', '', 1, '', '', '', '', 'expense_category'); ?></td>
-         <td><?php echo $f->date_fieldAnyDay('expense_date', $$class_second->expense_date); ?></td>
-         <td><?php form::number_field_wid2('receipt_amount'); ?></td>
+         <td><?php echo $f->date_fieldAnyDay('claim_date', $$class_second->claim_date); ?></td>
+         <td><?php echo $f->select_field_from_object('receipt_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency); ?></td>
+         <td><?php form::number_field_wid2s('receipt_amount'); ?></td>
          <td><?php $f->text_field_wid2('purpose'); ?></td>
-         <td><?php form::number_field_wid2('exchange_rate'); ?></td>
+         <td><?php form::number_field_wid2s('exchange_rate'); ?></td>
          <td><?php form::text_field_wid2('vendor_name'); ?></td>
          <td><?php form::text_field_wid2('vendor_details'); ?></td>
 
@@ -160,6 +164,7 @@ inoERP
         <th><?php echo gettext('Distance') ?></th>
         <th><?php echo gettext('Mileage Rate') ?></th>
         <th><?php echo gettext('Receipt Missing') ?></th>
+        <th><?php echo gettext('Status') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -176,6 +181,7 @@ inoERP
          <td><?php echo $f->number_field('mileage_distace', $$class_second->mileage_distace); ?></td>
          <td><?php echo $f->number_field('mileage_rate', $$class_second->mileage_rate); ?></td>
          <td><?php $f->checkBox_field_wid2('original_receipt_missing_cb'); ?></td>
+         <td><?php $f->text_field_wid2r('status','always_readonly'); ?></td>
         </tr>
         <?php
         $count = $count + 1;

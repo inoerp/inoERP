@@ -15,7 +15,7 @@ class ar_customer_site extends dbObject {
   'site_tax_country',
   'site_tax_reg_no',
   'site_tax_payer_id',
-//		 'site_tax_code',
+		 'primary_cb',
 //		 'customer_site_ref',
   'customer_site_type',
   'status',

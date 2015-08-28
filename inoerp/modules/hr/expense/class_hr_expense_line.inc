@@ -7,13 +7,18 @@ class hr_expense_line extends dbObject {
  public static $parent_primary_column = "hr_expense_header_id";
  public static $key_column = 'expense_type';
  public static $module = "hr";
+ public static $status_a = [
+  'ENTERED' => 'Entered',
+  'VERIFIED' => 'Verified',
+  'INVOICES' => 'Invoiced'
+ ];
  public $field_a = [
   'hr_expense_line_id',
   'hr_expense_header_id',
   'line_number',
-  'expense_date',
+  'claim_date',
   'receipt_amount',
-//  'receipt_currency',
+  'receipt_currency',
   'expense_type',
   'status',
   'purpose',
@@ -41,14 +46,14 @@ class hr_expense_line extends dbObject {
  ];
  public $initial_search = [
   'hr_expense_header_id',
-  'expense_date',
+  'claim_date',
   'receipt_amount'
  ];
  public $requiredField = [
   'hr_expense_header_id',
-  'expense_date',
+  'claim_date',
   'receipt_amount',
-  'receipt_currency',
+//  'receipt_currency',
   'expense_type',
  ];
  public $fields_inForm_notInDataBase = [
@@ -58,7 +63,7 @@ class hr_expense_line extends dbObject {
  ];
  public $hr_expense_line_id;
  public $hr_expense_header_id;
- public $expense_date;
+ public $claim_date;
  public $receipt_amount;
  public $receipt_currency;
  public $expense_type;
@@ -88,7 +93,10 @@ class hr_expense_line extends dbObject {
  public $last_update_date;
 
  public function _before_save() {
-  pa($this);
+  if (empty($this->hr_expense_line_id) && empty($this->status)) {
+   $this->status = 'ENTERED';
+  }
+  
  }
 
  Public static function hr_expense_line_types() {

@@ -242,7 +242,7 @@ $(document).ready(function () {
          });
 
  //calculate the tax amount
- $('body').on('blur', '.line_quantity, .unit_price, .line_price, .tax_amount, .tax_code_id')
+ $('body').off('blur', '.line_quantity, .unit_price, .line_price, .tax_amount, .tax_code_id')
          .on('blur, change', '.line_quantity, .unit_price, .line_price, .tax_amount, .tax_code_id', function () {
           var trClass = '.' + $(this).closest('tr').prop('class');
           $('body').trigger('calculateTax', [trClass]);

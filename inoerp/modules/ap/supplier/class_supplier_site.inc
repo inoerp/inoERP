@@ -41,7 +41,7 @@ class supplier_site extends dbObject {
 		 "receipt_days_variance",
 		 "bank_id",
 		 "bank_account_id",
-		 "ef_id",
+		 "primary_cb",
 		 "status",
 		 "rev_enabled_cb",
 		 "rev_number",
@@ -129,7 +129,7 @@ class supplier_site extends dbObject {
  public $bank_account_id;
  public $currency;
  public $payment_term_id;
- public $ef_id;
+ public $primary_cb;
  public $status;
  public $rev_enabled_cb;
  public $rev_number;

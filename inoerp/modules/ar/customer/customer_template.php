@@ -1,5 +1,4 @@
 <div id ="form_header"><span class="heading"><?php
-  $f = new inoform();
   echo gettext('Customer Information')
   ?></span>
 
@@ -113,6 +112,7 @@
        <li><?php $f->l_text_field('site_tax_reg_no', $$class_second->site_tax_reg_no); ?></li>
        <li><?php $f->l_text_field('site_tax_payer_id', $$class_second->site_tax_payer_id); ?></li>
        <li><?php $f->l_text_field('site_tax_code', $$class_second->site_tax_code); ?></li>
+       <li><?php $f->l_checkBox_field('primary_cb', $$class_second->primary_cb); ?></li>
       </ul>
      </div>
      <div class="second_rowset">

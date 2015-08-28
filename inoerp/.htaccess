@@ -2,7 +2,7 @@
 Options -Indexes
 
 #Make index.php as home page
-DirectoryIndex index.php index.html index.htm
+DirectoryIndex index.php index1.php index.html index.htm
 
 # Protect files and directories.
 <FilesMatch "\.(engine|includes|modules|extensions|themes|custom|tparty|inc|.*sql|.*inc|template(\.php)?|xtmpl)(~|\.sw[op]|\.bak|\.orig|\.save)?$|^(\..*|Entries.*|Repository|Root|Tag|Template)$|^#.*#$|\.php(~|\.sw[op]|\.bak|\.orig\.save)$">

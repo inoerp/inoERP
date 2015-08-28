@@ -16,7 +16,7 @@ class hr_control extends dbObject {
 
  public static $table_name = "hr_control";
  public static $primary_column = "hr_control_id";
- public static $key_column = 'org_id';
+ public static $key_column = 'bu_org_id';
  public static $module = "hr";
  public static $system_info = [
   'name' => 'HR Control',
@@ -32,17 +32,19 @@ class hr_control extends dbObject {
  ];
  public static $expense_claim_approval_a = [
   'SUPERVISOR' => 'Next Supervisor',
-  'BY_AMOUNT_LIMIT' => 'BY Amount Limit'
+  'AMOUNT_LIMIT' => 'BY Amount Limit'
  ];
  public $field_a = [
   'hr_control_id',
-  'org_id',
+  'bu_org_id',
   'default_job_id',
   'default_grade_id',
   'expense_claim_approval',
   'salary_cash_ac_id',
   'expense_claim_ac_id',
   'salary_exp_ac_id',
+  'supplier_id',
+  'supplier_site_id',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -52,13 +54,18 @@ class hr_control extends dbObject {
   'default_job_id',
  ];
  public $requiredField = [
-  'org_id'
+  'bu_org_id'
  ];
  public $account = [
   'salary_cash_ac_id',
   'expense_claim_ac_id',
   'salary_exp_ac_id',
  ];
+ 
+ public $fields_inForm_notInDataBase = [
+  "expense_claim_supplier"
+ ];
+ 
  public $search = [
   '_show_update_path' => 1,
   '_show_view_path' => 1,
@@ -68,30 +75,31 @@ class hr_control extends dbObject {
   'Business Org' => 'search_business_org',
  ];
 public $hr_control_id;
-public $org_id;
+public $bu_org_id;
 public $default_job_id;
 public $default_grade_id;
 public $salary_cash_ac_id;
 public $expense_claim_approval;
 public $expense_claim_ac_id;
 public $salary_exp_ac_id;
+public $supplier_id;
+public $supplier_site_id;
 public $created_by;
 public $creation_date;
 public $last_update_by;
 public $last_update_date;
+public $expense_claim_supplier;
 
-
-public function findBy_orgId($org_id) {
+public function findBy_orgId($bu_org_id) {
   global $db;
-  $sql = "SELECT * FROM hr_control where org_id=:org_id LIMIT 1";
-  $param_a = ['org_id'];
-  $value_a = ['org_id' => $org_id];
-  $result = $db->findBy_sql($sql, $param_a, $value_a);
+  $sql = "SELECT * FROM hr_control where bu_org_id=:bu_org_id LIMIT 1";
+  $value_a = ['bu_org_id' => $bu_org_id];
+  $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 
  public static function find_by_org_id($org_id) {
-  $sql = "SELECT * FROM hr_control where org_id='{$org_id}' LIMIT 1";
+  $sql = "SELECT * FROM hr_control where bu_org_id='{$org_id}' LIMIT 1";
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }

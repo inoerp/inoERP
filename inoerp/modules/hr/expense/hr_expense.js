@@ -46,20 +46,36 @@ $(document).ready(function () {
    case 'MILEAGE':
     $(trClass).find('.per_diem_rate, .per_diem_days').val('').prop('readonly', true).addClass('always_readonly');
     $(trClass).find('.mileage_uom_id, .mileage_distace, .mileage_rate').prop('readonly', false).removeClass('always_readonly');
-    
+
     break;
    default:
     break;
   }
  });
- 
+
  $('body').off('change', '.expense_location').on('change', '.expense_location', function () {
   var trClass = '.' + $(this).closest('tr').prop('class').replace(/\s+/g, '.');
   getPerDiemRate({
-   hr_location_id : $(this).val(),
-   rowClass : trClass,
-   hr_employee_id : $('.claim_emplyee_id').val()
+   hr_location_id: $(this).val(),
+   rowClass: trClass,
+   hr_employee_id: $('.claim_emplyee_id').val()
   });
  });
- 
+
+ //calculate header amount
+//calculate header amount
+ $('body').off('blur', '.receipt_amount, .header_amount, .exchange_rate')
+         .on('blur', '.receipt_amount, .header_amount, .exchange_rate', function () {
+          $('body').trigger('calculateHeaderAmount');
+         });
+//total header & tax amount
+ $('body').on('calculateHeaderAmount', function () {
+  var header_amount = 0;
+  $('#form_line').find('.receipt_amount').each(function () {
+   header_amount += (+$(this).val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
+  });
+  $('#header_amount').val(header_amount);
+ });
+
+
 });

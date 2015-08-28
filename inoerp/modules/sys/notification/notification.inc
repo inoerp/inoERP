@@ -10,4 +10,9 @@
   return;
  }
 
+ if($$class->status == 'CLOSED'){
+  $readonly = 1; $mode = 2;
+ }
+ 
+ 
  ?>
