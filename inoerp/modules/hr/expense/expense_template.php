@@ -22,13 +22,13 @@ inoERP
      <div class="large_shadow_box"> 
       <ul class="column header_field">
        <li><?php
-        $f = new inoform();
         $f->l_text_field_dr_withSearch('hr_expense_header_id')
         ?>
         <a name="show" href="form.php?class_name=hr_expense_header&<?php echo "mode=$mode"; ?>" class="show document_id hr_expense_header_id">
          <i class="fa fa-refresh"></i></a> 
        </li>
        <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>        </li>
+       <li><?php $f->l_text_field_d('claim_number'); ?>             </li>
        <li><?php
         echo $f->l_val_field_d('employee_name', 'hr_employee_v', 'employee_name', '', 'vf_select_employee_name employee_name');
         echo $f->hidden_field_withCLass('hr_employee_id', $$class->hr_employee_id, 'hr_employee_id claim_emplyee_id');
@@ -117,7 +117,7 @@ inoERP
         <th><?php echo gettext('Purpose') ?></th>
         <th><?php echo gettext('Exchange') ?></th>
         <th><?php echo gettext('Vendor') ?></th>
-        <th><?php echo gettext('Vendor Details') ?></th>
+        <!--<th><?php // echo gettext('Vendor Details') ?></th>-->
 
        </tr>
       </thead>
@@ -142,7 +142,7 @@ inoERP
          <td><?php $f->text_field_wid2('purpose'); ?></td>
          <td><?php form::number_field_wid2s('exchange_rate'); ?></td>
          <td><?php form::text_field_wid2('vendor_name'); ?></td>
-         <td><?php form::text_field_wid2('vendor_details'); ?></td>
+         <!--<td><?php // form::text_field_wid2('vendor_details'); ?></td>-->
 
         </tr>
         <?php
@@ -212,5 +212,6 @@ inoERP
   <li class="btn2DivId" data-btn2DivId="form_line" ></li>
   <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>
   <li class="noOfTabbs" data-noOfTabbs="2" ></li>
+  <li class="beforeCopy" data-beforeCopy="beforeCopyFun" ></li>
  </ul>
 </div>

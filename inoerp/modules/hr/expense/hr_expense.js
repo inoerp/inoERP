@@ -1,3 +1,11 @@
+function   beforeCopyFun() {
+ var newLink = $('a.show.document_id').prop('href') + '&copydoc=1';
+ $('a.show.document_id').prop('href', newLink);
+ $('a.show.document_id').trigger('click');
+ return false;
+}
+
+
 $(document).ready(function () {
 //setting the first line & shipment number
  if (!($('.lines_number:first').val())) {
@@ -77,5 +85,11 @@ $(document).ready(function () {
   $('#header_amount').val(header_amount);
  });
 
+// $("body").off('click', '#menu_button4_2, #menu_button4_2, #menu_button4')
+//         .on('click', '#menu_button4_2, #menu_button4_2, #menu_button4', function () {
+//          var newLink = $('a.show.document_id').prop('href') + '&copydoc=1';
+//          $('a.show.document_id').prop('href', newLink);
+//          $('a.show.document_id').trigger('click');
+//         });
 
 });

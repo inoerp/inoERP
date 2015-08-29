@@ -4155,6 +4155,8 @@ $(document).ready(function () {
   var trClass = $('ul#js_contextMenu_data').find('.trClass').data('trclass');
   var tbodyClass = $('ul#js_contextMenu_data').find('.tbodyClass').data('tbodyclass');
   var noOfTabbs = $('ul#js_contextMenu_data').find('.noOfTabbs').data('nooftabbs');
+  var beforeCopy = $('ul#js_contextMenu_data').find('.beforeCopy').data('beforecopy');
+  var afterCopy = $('ul#js_contextMenu_data').find('.afterCopy').data('aftercopy');
 
   classContextMenu.docHedaderId = (typeof docHedaderId !== 'undefined') ? docHedaderId : null;
   classContextMenu.docLineId = (typeof docLineId !== 'undefined') ? docLineId : null;
@@ -4164,6 +4166,8 @@ $(document).ready(function () {
   classContextMenu.trClass = (typeof trClass !== 'undefined') ? trClass : null;
   classContextMenu.tbodyClass = (typeof tbodyClass !== 'undefined') ? tbodyClass : null;
   classContextMenu.noOfTabbs = (typeof noOfTabbs !== 'undefined') ? noOfTabbs : null;
+  classContextMenu.beforeCopy = (typeof beforeCopy !== 'undefined') ? beforeCopy : null;
+  classContextMenu.afterCopy = (typeof afterCopy !== 'undefined') ? afterCopy : null;
   classContextMenu.contextMenu();
 
  }

@@ -9,6 +9,7 @@ class hr_expense_header extends dbObject implements hr_approval_int {
  public static $module = "hr";
  public $field_a = [
   'hr_expense_header_id',
+  'claim_number',
   'bu_org_id',
   'hr_employee_id',
   'claim_date',
@@ -83,6 +84,7 @@ class hr_expense_header extends dbObject implements hr_approval_int {
  ];
  public $hr_expense_header_id;
  public $bu_org_id;
+ public $claim_number;
  public $hr_employee_id;
  public $claim_date;
  public $approved_date;
@@ -118,6 +120,15 @@ class hr_expense_header extends dbObject implements hr_approval_int {
     return -90;
    }
   }
+  if(empty($this->claim_number) && !empty($this->hr_expense_header_id)){
+   $this->_set_claim_number();
+  }
+  
+ }
+ 
+ private function _set_claim_number(){
+  $this->claim_number =  $this->bu_org_id . '-'. $this->hr_expense_header_id;
+  $this->save();
  }
 
  public function approve_document() {

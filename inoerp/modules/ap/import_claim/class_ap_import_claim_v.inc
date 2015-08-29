@@ -3,14 +3,14 @@
 class ap_import_claim_v extends dbObject {
 
  public static $table_name = "ap_import_claim_v";
- public static $primary_column = "ap_import_claim_v_id";
+ public static $primary_column = "hr_expense_line_id";
  public static $multi_search_primary_column = "ar_transaction_header_id"; //this value is used in multi search hidden value
- public static $js_fileName = 'modules/ar/transaction/js/multi_select_ar.js';
- public static $key_column = 'item_description';
+// public static $js_fileName = 'modules/ar/transaction/js/multi_select_ar.js';
+ public static $key_column = 'hr_expense_line_id';
  public static $system_info = [
   'name' => 'Transaction Interface',
   'number' => '1306',
-  'description' => 'AR Transaction Interface',
+  'description' => 'AP Import Claim',
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',
@@ -19,142 +19,77 @@ class ap_import_claim_v extends dbObject {
   'weight' => 6
  ];
  public $field_a = [
-  'ap_import_claim_v_id',
-  'ar_transaction_header_id',
+  'hr_expense_header_id',
   'bu_org_id',
-  'transaction_type',
-  'ar_customer_id',
-  'ar_customer_site_id',
-  'currency',
-  'payment_term_id',
-  'payment_term_date',
-  'document_date',
-  'ledger_id',
-  'receivable_ac_id',
-  'revenue_ac_id',
-  'line_number',
-  'item_id_m',
-  'item_description',
-  'inv_line_quantity',
-  'inv_unit_price',
-  'inv_line_price',
-  'gl_inv_line_price',
-  'gl_tax_amount',
-  'tax_code_id',
-  'tax_amount',
-  'line_type',
-  'line_description',
-  'asset_cb',
-  'fa_asset_category_id',
-  'prj_project_header_id',
-  'prj_project_line_id',
-  'uom_id',
-  'ef_id',
+  'hr_employee_id',
+  'claim_date',
   'status',
-  'line_source',
-  'reference_type',
-  'reference_key_name',
-  'reference_key_value',
-  'sd_so_header_id',
-  'sd_so_line_id',
-  'sd_so_detail_id',
-  'period_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+  'purpose',
+  'doc_currency',
+  'department_id',
+  'reason',
+  'currency',
+  'exchange_rate_type',
+  'exchange_rate',
+  'header_amount',
+  'hr_expense_line_id',
+  'line_number',
+  'line_claim_date',
+  'receipt_amount',
+  'receipt_currency',
+  'expense_type',
+  'line_status',
+  'line_purpose',
+  'start_date',
+  'line_exchange_rate',
+  'supplier_id',
  ];
  public $initial_search = [
+  'hr_expense_header_id',
   'bu_org_id',
-  'transaction_type',
-  'ar_customer_id',
-  'item_description',
+  'hr_employee_id',
  ];
  public $dateField = [
   'document_date'
  ];
- public $requiredField = [
-  'bu_org_id',
-  'transaction_type',
-  'ar_customer_id',
-  'ar_customer_site_id',
-  'currency',
-  'payment_term_id',
-  'item_description',
-  'inv_line_quantity',
-  'inv_unit_price',
-  'tax_code_id',
-  'line_type',
-  'uom_id'
+ 
+  public $fields_inForm_notInDataBase = [
+  'action'
  ];
- public $fields_inForm_notInDataBase = [
-  'action',
- ];
- public $search = [
-  '_update_path' => 'form.php?class_name=ap_import_claim_v',
-  '_show_update_path' => 1,
-  '_view_path' => 'form.php?class_name=ap_import_claim_v',
-  '_show_view_path' => 1,
-  '_extra_path' => array('form.php?class_name=ap_import_claim_v' => 'Import')
- ];
- public $prg_import_ar_transaction_parameters = [
+  
+ public $prg_import_expense_claim_parameters = [
   'Business Org' => 'search_business_org',
  ];
- public $prg_import_ar_transaction_details = [
-  'name' => 'Import AR Transaction ',
-  'description' => 'Import AR Transactions from Interface ',
+ public $prg_import_expense_claim_details = [
+  'name' => 'Import Expense Claim',
+  'description' => 'Import Expense Claim',
  ];
- public $pageTitle = " Import AR Transactions "; //page Title
- public $ap_import_claim_v_id;
- public $ar_transaction_header_id;
+ public $pageTitle = " Import Expense Claim "; //page Title
+ public $hr_expense_header_id;
  public $bu_org_id;
- public $transaction_type;
- public $ar_customer_id;
- public $ar_customer_site_id;
- public $currency;
- public $payment_term_id;
- public $payment_term_date;
- public $document_date;
- public $ledger_id;
- public $receivable_ac_id;
- public $revenue_ac_id;
- public $line_number;
- public $item_id_m;
- public $item_description;
- public $inv_line_quantity;
- public $inv_unit_price;
- public $inv_line_price;
- public $gl_inv_line_price;
- public $tax_code_id;
- public $tax_amount;
- public $gl_tax_amount;
- public $line_type;
- public $line_description;
- public $asset_cb;
- public $fa_asset_category_id;
- public $prj_project_header_id;
- public $prj_project_line_id;
- public $uom_id;
- public $ef_id;
+ public $hr_employee_id;
+ public $claim_date;
  public $status;
- public $line_source;
- public $reference_type;
- public $reference_key_name;
- public $reference_key_value;
- public $sd_so_header_id;
- public $sd_so_line_id;
- public $sd_so_detail_id;
- public $period_id;
- public $created_by;
- public $creation_date;
- public $last_update_by;
- public $last_update_date;
+ public $purpose;
+ public $doc_currency;
+ public $department_id;
+ public $reason;
+ public $currency;
+ public $exchange_rate_type;
+ public $exchange_rate;
+ public $header_amount;
+ public $hr_expense_line_id;
+ public $line_number;
+ public $line_claim_date;
+ public $receipt_amount;
+ public $receipt_currency;
+ public $expense_type;
+ public $line_status;
+ public $line_purpose;
+ public $start_date;
+ public $line_exchange_rate;
+ public $supplier_id;
  public $action;
- public $action_class_name;
- public $mode;
- public $multi_action_class_pc;
- public $multi_action_class_pc_value;
- private $_ar_transaction_header_id;
 
  public function distinct_customer_sites() {
   $sql = " SELECT DISTINCT(ar_customer_site_id) FROM ";
@@ -163,36 +98,27 @@ class ap_import_claim_v extends dbObject {
   return !empty($result) ? array_pop($result) : false;
  }
 
- private function create_ap_payment_all_v() {
+ private function create_ap_import_claim_v() {
   $sql = "
-CREATE OR REPLACE VIEW ap_payment_all_v
+CREATE OR REPLACE VIEW ap_import_claim_v
 (
-ap_payment_header_id, bu_org_id, payment_type,
-payment_number, supplier_id, supplier_site_id, from_bank_header_id,
-header_amount,  currency, document_number, payment_status, gl_journal_header_id,
-ap_payment_line_id, line_number, amount, line_description,
-ap_transaction_header_id, transaction_type, transaction_number,
-hr_employee_id, apth_currency, apth_header_amount, transaction_status,
-paid_amount,apth_payment_status,
-supplier_name, supplier_number,
-supplier_site_name, supplier_site_number
+hr_expense_header_id,   bu_org_id,   hr_employee_id,   claim_date,    status,   purpose,   
+doc_currency,   department_id,   reason,   currency,   exchange_rate_type,   exchange_rate,   header_amount,
+supplier_id
 )
 AS
 SELECT 
-  eh.hr_expense_header_id,   eh.bu_org_id,   eh.hr_employee_id,   eh.claim_date,    eh.status,   eh.purpose,   
-   eh.doc_currency,   eh.department_id,   eh.reason,   eh.currency,   eh.exchange_rate_type,   eh.exchange_rate,   eh.header_amount,
-   el.hr_expense_line_id,  el.line_number,   el.claim_date,   el.receipt_amount,   el.receipt_currency,   el.expense_type,
-  el.status,   el.purpose,   el.start_date,   el.exchange_rate, user.supplier_id
+eh.hr_expense_header_id,   eh.bu_org_id,   eh.hr_employee_id,   eh.claim_date,    eh.status,   eh.purpose,   
+eh.doc_currency,   eh.department_id,   eh.reason,   eh.currency,   eh.exchange_rate_type,   eh.exchange_rate,   eh.header_amount,
+user.supplier_id , he.first_name, he.last_name, he.identification_id
 
-  FROM hr_expense_header eh,
-       hr_expense_line el,
-	   user
+FROM hr_expense_header eh,
+user,
+hr_employee he
   
-  WHERE eh.status = 'APPROVED'
-  AND el.hr_expense_header_id = eh.hr_expense_header_id
-  AND user.hr_employee_id = eh.hr_employee_id  
-
-
+WHERE eh.status = 'APPROVED'
+AND user.hr_employee_id = eh.hr_employee_id  
+AND he.hr_employee_id = eh.hr_employee_id  
 ";
  }
 
@@ -397,63 +323,15 @@ SELECT
 
  public function _before_save() {
 
-  if (($this->action == 'import_ar_transaction')) {
+  if (($this->action == 'import_expense_claim')) {
    echo "<br> Starting to Import Transactions";
-   $this->_create_transaction_from_post();
+   pa($this);
+//   $this->_create_transaction_from_post();
   }
   return 10;
  }
 
- private function create_ap_import_claim_v() {
-  $sql = "
-CREATE OR REPLACE VIEW ap_import_claim_v
-(
-po_requisition_header_id, bu_org_id, po_requisition_type, po_requisition_number, supplier_id, supplier_site_id, buyer, currency, header_amount, po_requisition_status,
-payment_term_id,
-supplier_name, supplier_number,
-supplier_site_name, supplier_site_number,
-payment_term, payment_term_description,
-po_requisition_line_id, line_type, po_requisition_line_number,	item_id_m, item_description, 
-line_description, line_quantity, unit_price, line_price,  receving_org_id,
-item_number, uom_id, item_status,
-po_requisition_detail_id, shipment_number, sub_inventory_id, locator_id, requestor, quantity,
-need_by_date, promise_date,
-received_quantity, accepted_quantity, delivered_quantity, invoiced_quantity, paid_quantity,	order_number,
-ship_to_org, created_by, creation_date, last_update_by, last_update_date
-)
-AS
-SELECT 
-po_requisition_header.po_requisition_header_id, po_requisition_header.bu_org_id, po_requisition_header.po_requisition_type, po_requisition_header.po_requisition_number, po_requisition_header.supplier_id, 
-po_requisition_header.supplier_site_id, po_requisition_header.buyer, po_requisition_header.currency, po_requisition_header.header_amount, po_requisition_header.requisition_status,
-IFNULL(po_requisition_header.payment_term_id, supplier_site.payment_term_id),
-supplier.supplier_name, supplier.supplier_number,
-supplier_site.supplier_site_name, supplier_site.supplier_site_number,
-payment_term.payment_term, payment_term.description,
-po_requisition_line.po_requisition_line_id, po_requisition_line.line_type, po_requisition_line.line_number,	po_requisition_line.item_id_m, po_requisition_line.item_description, po_requisition_line.line_description, 
-po_requisition_line.line_quantity, po_requisition_line.unit_price, po_requisition_line.line_price,po_requisition_line.receving_org_id,
-item.item_number, item.uom_id, item.item_status,
-po_requisition_detail.po_requisition_detail_id, po_requisition_detail.shipment_number,  po_requisition_detail.sub_inventory_id, 
-po_requisition_detail.locator_id, po_requisition_detail.requestor, po_requisition_detail.quantity, po_requisition_detail.need_by_date, po_requisition_detail.promise_date,
-po_requisition_detail.received_quantity, po_requisition_detail.accepted_quantity, po_requisition_detail.delivered_quantity, 
-po_requisition_detail.invoiced_quantity, po_requisition_detail.paid_quantity,	po_requisition_detail.order_number,
-org.org,
-po_requisition_header.created_by, po_requisition_header.creation_date, po_requisition_header.last_update_by, po_requisition_header.last_update_date
-
-FROM po_requisition_header 
-LEFT JOIN supplier ON po_requisition_header.supplier_id = supplier.supplier_id
-LEFT JOIN supplier_site ON po_requisition_header.supplier_site_id = supplier_site.supplier_site_id
-LEFT JOIN payment_term ON po_requisition_header.payment_term_id = payment_term.payment_term_id
-LEFT JOIN po_requisition_line ON po_requisition_header.po_requisition_header_id = po_requisition_line.po_requisition_header_id
-LEFT JOIN item ON po_requisition_line.item_id_m = item.item_id_m
-LEFT JOIN po_requisition_detail ON po_requisition_line.po_requisition_line_id = po_requisition_detail.po_requisition_line_id
-LEFT JOIN org ON po_requisition_line.receving_org_id = org.org_id
-WHERE  po_requisition_header.requisition_status = 'APPROVED'
-AND (po_requisition_detail.order_number IS NULL OR po_requisition_detail.order_number = '')
-
-";
- }
-
- public function prg_import_ar_transaction($seralized_parameters) {
+ public function prg_ap_import_claim($seralized_parameters) {
   /*
    *  1. First Import all lines with the same customer site id
    */
