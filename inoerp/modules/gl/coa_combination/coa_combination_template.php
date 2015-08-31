@@ -48,7 +48,7 @@
            <td><?php form::number_field_widsr('coa_combination_id'); ?></td>
            <td><?php echo form::text_field('combination', $$class->combination, 30, '', 1, '', 'Non editable - Enter segment/field values', 1); ?></td>
            <td><?php echo form::text_field('description', $$class->description, 60, '', 1, '', 'Non editable - Enter segment/field values', 1) ?></td>
-           <td><?php echo $f->select_field_from_object('ac_type', coa::coa_account_types(), 'option_line_code', 'option_line_value', $$class->ac_type, '', '', 1, $readonly1); ?></td>
+           <td><?php echo $f->select_field_from_object('ac_type', coa::coa_account_types(), 'option_line_code', 'option_line_value', $$class->ac_type, '', 'dontCopy dont_copy', 1, $readonly); ?></td>
           </tr>
           <?php
           $coa_combination_object_ai->next();

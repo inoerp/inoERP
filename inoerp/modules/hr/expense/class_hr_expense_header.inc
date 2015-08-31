@@ -120,15 +120,25 @@ class hr_expense_header extends dbObject implements hr_approval_int {
     return -90;
    }
   }
-  if(empty($this->claim_number) && !empty($this->hr_expense_header_id)){
+  if (empty($this->claim_number) && !empty($this->hr_expense_header_id)) {
    $this->_set_claim_number();
   }
-  
  }
- 
- private function _set_claim_number(){
-  $this->claim_number =  $this->bu_org_id . '-'. $this->hr_expense_header_id;
+
+ private function _set_claim_number() {
+  $this->claim_number = $this->bu_org_id . '-' . $this->hr_expense_header_id;
   $this->save();
+ }
+
+ public static function find_by_buOrgId_status($bu_org_id, $status = "") {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE bu_org_id = '{$bu_org_id}' ";
+  if (!empty($status)) {
+   $sql .= " AND status = '{$status}' ";
+  }
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? ($result) : false;
  }
 
  public function approve_document() {

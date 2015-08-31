@@ -7,7 +7,7 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 
-<div id ="form_header"><span class="heading"><?php echo gettext('Expense Claim') ?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Expense Claim - Self Service') ?></span>
  <form method="post" id="hr_expense_header"  name="hr_expense_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -21,7 +21,7 @@ inoERP
     <div id="tabsHeader-1" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column header_field">
-       <li><?php
+       <li><?php $f = new inoform();
         $f->l_text_field_dr_withSearch('hr_expense_header_id')
         ?>
         <a name="show" href="form.php?class_name=hr_expense_header&<?php echo "mode=$mode"; ?>" class="show document_id hr_expense_header_id">
@@ -30,9 +30,9 @@ inoERP
        <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>        </li>
        <li><?php $f->l_text_field_d('claim_number'); ?>             </li>
        <li><?php
-        echo $f->l_val_field_d('employee_name', 'hr_employee_v', 'employee_name', '', 'vf_select_employee_name employee_name');
+        echo $f->l_text_field_dr('employee_name');
         echo $f->hidden_field_withCLass('hr_employee_id', $$class->hr_employee_id, 'hr_employee_id claim_emplyee_id');
-        ?><i class="generic g_select_employee_name select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
+        ?></li>
        <li><?php $f->l_text_field_dr('identification_id'); ?>  </li>						 
        <li><?php $f->l_date_fieldAnyDay_m('claim_date', $$class->claim_date); ?>             </li>
        <li><?php $f->l_select_field_from_object('expense_template_id', hr_expense_tpl_header::find_all(), 'hr_expense_tpl_header_id', 'template_name', $$class->expense_template_id, 'expense_template_id', '', 1); ?>             </li>

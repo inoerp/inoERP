@@ -613,6 +613,86 @@ AND cc.coa_combination_id = '{$cc_id}'
   return $ret_a;
  }
 
+ public static function find_new_combination($combination_id, $segment_vals) {
+  /* $segment_vals parameter examples ['cost_center' => '123', 'natural_account' => '465']
+   */
+
+  $cc_details = self::find_by_id($combination_id);
+  $field_mapping_a = coa::find_account_qualifers_byCoaId($cc_details->coa_id);
+  $field_name = $field_val = "";
+//  pa($segment_vals);
+//  pa($field_mapping_a);
+  foreach ($segment_vals as $k => $v) {
+   $field_name = $field_mapping_a[$k];
+   $field_val = $v;
+  }
+//  echo "<br>field_name is $field_name and field_val is $field_val ";
+  $sql = " SELECT comb2.coa_combination_id, comb2.combination, comb2.description, comb2.ac_type ,
+   comb2.effective_start_date, comb2.effective_end_date  
+   FROM  
+   coa_combination comb1,
+   coa_combination comb2
+   WHERE comb1.coa_combination_id = '{$combination_id}'
+   AND comb1.coa_id = comb2.coa_id
+   ";
+
+  if ($field_name == 'field1') {
+   $sql .= " AND comb2.field1 = '{$field_val}' ";
+  } else {
+   $sql .= " AND (comb1.field1 = comb2.field1 || comb1.field1 IS NULL) ";
+  }
+
+
+  if ($field_name == 'field2') {
+   $sql .= " AND comb2.field2 = '{$field_val}' ";
+  } else {
+   $sql .= " AND (comb1.field2 = comb2.field2 || comb1.field2 IS NULL) ";
+  }
+
+
+  if ($field_name == 'field3') {
+   $sql .= " AND comb2.field3 = '{$field_val}' ";
+  } else {
+   $sql .= " AND (comb1.field3 = comb2.field3 || comb1.field3 IS NULL) ";
+  }
+
+
+  if ($field_name == 'field4') {
+   $sql .= " AND comb2.field4 = '{$field_val}' ";
+  } else {
+   $sql .= " AND (comb1.field4 = comb2.field4 || comb1.field4 IS NULL) ";
+  }
+
+  if ($field_name == 'field5') {
+   $sql .= " AND comb2.field5 = '{$field_val}' ";
+  } else {
+   $sql .= " AND (comb1.field5 = comb2.field5 || comb1.field5 IS NULL) ";
+  }
+
+  if ($field_name == 'field6') {
+   $sql .= " AND comb2.field6 = '{$field_val}' ";
+  } else {
+   $sql .= " AND (comb1.field6 = comb2.field6 || comb1.field6 IS NULL) ";
+  }
+
+  if ($field_name == 'field7') {
+   $sql .= " AND comb2.field7 = '{$field_val}' ";
+  } else {
+   $sql .= " AND (comb1.field7 = comb2.field7 || comb1.field7 IS NULL) ";
+  }
+
+  if ($field_name == 'field8') {
+   $sql .= " AND comb2.field8 = '{$field_val}' ";
+  } else {
+   $sql .= " AND (comb1.field8 = comb2.field8 || comb1.field8 IS NULL) ";
+  }
+
+//  echo $sql;
+  $result = self::find_by_sql($sql);
+
+  return !empty($result) ? array_pop($result) : null;
+ }
+
 }
 
 //end of coa_combination class

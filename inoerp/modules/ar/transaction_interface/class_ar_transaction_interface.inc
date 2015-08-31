@@ -424,7 +424,7 @@ AND (po_requisition_detail.order_number IS NULL OR po_requisition_detail.order_n
   /*
    *  1. First Import all lines with the same customer site id
    */
-  $output_a = [];
+  
   $parameters = unserialize($seralized_parameters);
   $this->message = '<br> Starting to Import AR Transactions....<br>';
   if (!empty($parameters['bu_org_id'][0])) {

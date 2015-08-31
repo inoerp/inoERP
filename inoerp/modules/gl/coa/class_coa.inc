@@ -13,6 +13,7 @@
  * coa
  * coa is used for mapping different  business segments that needs financial account mapping
  * Contains all the gl_calendar information, such as - name, description , balancing, natural_account, etc
+ * coa_structure_id is the option header id
  * 
  */
 class coa extends dbObject {
@@ -112,15 +113,16 @@ class coa extends dbObject {
  public $last_update_date;
  public $only_parent;
  public $account_qualifier;
-public $field4_low;
-public $field4_high;
+ public $field4_low;
+ public $field4_high;
+
 // public function _before_save() {
 //  if (empty($this->coa_sequence)) {
 //   
 //  }
 // }
 
-  public static function find_all_accounts_from_coaId($coa_id = '1', $only_parent = false, $account_qualifier = '') {
+ public static function find_all_accounts_from_coaId($coa_id = '1', $only_parent = false, $account_qualifier = '') {
   $sql = "
   SELECT coa.coa_id, coa.coa_structure_id, coa.natural_account, ol.value_group_id, vgl.code, vgl.description, 
   vgl.account_qualifier, vgl.parent_cb
@@ -145,7 +147,7 @@ AND coa.coa_id = '{$coa_id}'
   if (!empty($account_qualifier)) {
    $sql .= " AND vgl.account_qualifier = '{$account_qualifier}'";
   }
-  
+
   $sql .= " ORDER BY vgl.code asc";
 
 
@@ -171,12 +173,12 @@ AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND coa.coa_id = :coa_id
 ";
-  
-    if (!empty($this->field4_low)) {
+
+  if (!empty($this->field4_low)) {
    $sql .= " AND vgl.code >= '{$this->field4_low}' ";
   }
-  
-      if (!empty($this->field4_high)) {
+
+  if (!empty($this->field4_high)) {
    $sql .= " AND vgl.code <= '{$this->field4_high}' ";
   }
 
@@ -190,7 +192,7 @@ AND coa.coa_id = :coa_id
    $sql .= " AND vgl.account_qualifier = :account_qualifier ";
    $param_a['account_qualifier'] = $this->account_qualifier;
   }
-  
+
   $sql .= " ORDER BY vgl.code asc";
 
 
@@ -277,8 +279,8 @@ AND coa.coa_id = :coa_id
   $row = mysql_fetch_row($result_set);
   return $row;
  }
- 
-  public static function find_coa_from_orgId($org_id) {
+
+ public static function find_coa_from_orgId($org_id) {
   global $db;
   $sql = "SELECT balancing, cost_center, 	natural_account, inter_company,
       segment1, segment2, segment3, segment4 FROM "
@@ -286,6 +288,25 @@ AND coa.coa_id = :coa_id
   $result_set = $db->query($sql);
   $row = mysql_fetch_row($result_set);
   return $row;
+ }
+
+ public static function find_account_qualifers_byCoaId($coa_id) {
+  $coa_details = self::find_by_id($coa_id);
+  $ret_arr = [];
+
+  for ($i = 1; $i <= 8; $i++) {
+   $field = 'field' . $i;
+   if ($coa_details->$field == $coa_details->balancing) {
+    $ret_arr['balancing'] = $field;
+   } else if ($coa_details->$field == $coa_details->cost_center) {
+    $ret_arr['cost_center'] = $field;
+   } else if ($coa_details->$field == $coa_details->natural_account) {
+    $ret_arr['natural_account'] = $field;
+   } else if ($coa_details->$field == $coa_details->inter_company) {
+    $ret_arr['inter_company'] = $field;
+   }
+  }
+  return $ret_arr;
  }
 
 }

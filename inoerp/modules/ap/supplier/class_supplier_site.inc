@@ -190,6 +190,15 @@ class supplier_site extends dbObject {
 	$result = self::find_by_sql($sql);
 	return $result;
  }
+ 
+  public static function find_primary_supplierSite($supplier_id) {
+	$sql = " SELECT * FROM ";
+	$sql .= self::$table_name;
+	$sql .= " WHERE supplier_id = '{$supplier_id}' AND primary_cb = '1' LIMIT 1";
+
+	$result = self::find_by_sql($sql);
+	return !empty($result) ? array_pop($result) : false;
+ }
 
  public function _before_showing() {
 	$address = new address();

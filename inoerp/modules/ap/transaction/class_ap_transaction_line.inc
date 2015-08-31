@@ -179,7 +179,7 @@ class ap_transaction_line extends dbObject {
    $po_d_i = $po_d->findBy_id($this->po_detail_id);
    $ap_td = new ap_transaction_detail();
    $ap_td->ap_transaction_line_id = $this->ap_transaction_line_id;
-   $ap_td->ap_transaction_header_id = $this->ap_transaction_line_id;
+   $ap_td->ap_transaction_header_id = $this->ap_transaction_header_id;
    $ap_td->detail_number = 1;
    $ap_td->account_type = 'ACCRUAL';
    $ap_td->description = '';
