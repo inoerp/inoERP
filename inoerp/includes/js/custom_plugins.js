@@ -420,7 +420,7 @@
      },
      success: function (result) {
       if (result) {
-       var select_class_d = '.' + $(thisElement).attr('class').replace(/\s+/g, '.');
+       var select_class_d =  $(thisElement).attr('class').replace(/\s+/g, '.');
        if (settings.trDivId) {
         var select_stmt = '<select id="hr_element_entry_tpl_header_id" class="select hr_element_entry_tpl_header_id" name="hr_element_entry_tpl_header_id[]" style="max-width:95%;">';
        } else {
@@ -452,8 +452,8 @@
   };
 
   if ($(thisElement).length > 2) {
-   var select_class_d = '.' + $(this).attr('class').replace(/\s+/g, '.');
-   $('body').on("blur", select_class_d, methods.jsonValue).one();
+   var select_class_d =  $(this).attr('class').replace(/\s+/g, '.');
+   $('body').on("focusin", select_class_d, methods.jsonValue).one();
   }
 //  return this;
   return $(this);

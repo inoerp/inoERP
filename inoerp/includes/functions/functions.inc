@@ -294,7 +294,7 @@ function get_class_name_from_path($path) {
   $arr = explode('\\', $path);
  }
  $last_el = array_pop($arr);
- if(strpos($last_el, 'class') === false ){
+ if (strpos($last_el, 'class') === false) {
   return false;
  }
  $class = str_replace('class_', '', $last_el);
@@ -1311,6 +1311,18 @@ function search_org_name_onevalue() {
 function search_business_org() {
  global $f;
  $stmt = $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', '', 'bu_org_id', '', 1, '', '', 1);
+ return $stmt;
+}
+
+function search_enterprise_org() {
+ global $f;
+ $stmt = $f->select_field_from_object('org_id', org::find_all_enterprise(), 'org_id', 'org', '', 'org_id', '', 1, '', '', 1);
+ return $stmt;
+}
+
+function search_grade() {
+ global $f;
+ $stmt = $f->select_field_from_object('hr_grade_id', hr_grade::find_all(), 'hr_grade_id', 'grade', '', 'hr_grade_id', '');
  return $stmt;
 }
 

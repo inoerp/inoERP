@@ -21,6 +21,7 @@
            <th><?php echo gettext('Rank') ?></th>
            <th><?php echo gettext('Alt Name') ?></th>
            <th><?php echo gettext('Alt Description') ?></th>
+           <th><?php echo gettext('Grade') ?></th>
            <th><?php echo gettext('Inactive Date') ?></th>
           </tr>
          </thead>
@@ -41,10 +42,11 @@
              <td><?php $f->text_field_dr('hr_grade_id', 'always_readonly'); ?></td>
              <td><?php $f->text_field_d('grade'); ?></td>
              <td><?php $f->text_field_d('description'); ?></td>
-             <td><?php $f->text_field_d('rank'); ?></td>
+             <td><?php $f->text_field_ds('rank'); ?></td>
              <td><?php $f->text_field_d('alt_name'); ?></td>
              <td><?php $f->text_field_d('alt_description'); ?></td>
-             <td><?php $f->date_fieldAnyDay('inactive_date', $$class->inactive_date); ?></td>
+             <td><?php echo $f->select_field_from_object('hr_element_entry_tpl_header_id', hr_element_entry_tpl_header::find_all(),'hr_element_entry_tpl_header_id' ,'template_name',$$class->hr_element_entry_tpl_header_id,'hr_element_entry_tpl_header_id','medium' , 1); ?></td>
+             <td><?php echo $f->date_fieldAnyDay('inactive_date', $$class->inactive_date); ?></td>
             </tr>
             <?php
             $count = $count + 1;

@@ -321,6 +321,38 @@ trait dbObject_t {
   return $result;
  }
 
+ public static function find_by_fieldVal(array $dieldVal_a) {
+  global $ie;
+  global $dbc;
+  $sql = " SELECT * FROM ";
+  $sql.= static::$table_name;
+  if (count($dieldVal_a) == 1) {
+   foreach ($dieldVal_a as $k => $v) {
+    $sql.= " WHERE " . $k . "= '{$v}' ";
+   }
+  } else if (count($dieldVal_a) > 1) {
+   $k_count = 1;
+   foreach ($dieldVal_a as $k => $v) {
+    if ($k_count == 1) {
+     $sql.= " WHERE " . $k . "= '{$v}' ";
+    } else {
+     $sql.= " AND " . $k . "= '{$v}' ";
+    }
+    $k_count++;
+   }
+  }
+
+  $stmt = $dbc->connection->prepare(" $sql ");
+  try {
+   $stmt->execute();
+   $result = $stmt->fetchAll(PDO::FETCH_CLASS);
+  } catch (PDOException $e) {
+   $ie->page_exception = ['dbObject findBy id Error : ' => $e->getMessage()];
+   echo "Record couldnt be saved!!: " . $e->getMessage();
+  }
+  return $result;
+ }
+
  public function findAll() {
   global $ie;
   global $dbc;

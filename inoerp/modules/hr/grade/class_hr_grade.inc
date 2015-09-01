@@ -36,6 +36,7 @@ class hr_grade extends dbObject {
  public $field_a = [
   'hr_grade_id',
   'grade',
+  'hr_element_entry_tpl_header_id',
   'description',
   'rank',
   'inactive_date',
@@ -53,6 +54,7 @@ class hr_grade extends dbObject {
  ];
  public $requiredField = [
   "grade",
+  'hr_element_entry_tpl_header_id',
  ];
  public $search = [
   '_show_update_path' => 1,
@@ -60,12 +62,13 @@ class hr_grade extends dbObject {
  ];
  public $pageTitle = "HR Grade"; //page Title
  public $hr_grade_id;
- public $cost_base;
+ public $grade;
+ public $hr_element_entry_tpl_header_id;
  public $description;
- public $cost_base_type;
- public $effective_from;
- public $effective_to;
- public $priority;
+ public $rank;
+ public $inactive_date;
+ public $alt_name;
+ public $alt_description;
  public $created_by;
  public $creation_date;
  public $last_update_by;

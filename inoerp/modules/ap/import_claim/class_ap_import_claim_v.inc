@@ -83,13 +83,6 @@ class ap_import_claim_v extends dbObject {
  private $_cost_center_val;
  public $action;
 
- public function distinct_customer_sites() {
-  $sql = " SELECT DISTINCT(ar_customer_site_id) FROM ";
-  $sql .= self::$table_name;
-  $result = $this->findBySql($sql);
-  return !empty($result) ? array_pop($result) : false;
- }
-
  public static function find_by_buOrgId($bu_org_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;

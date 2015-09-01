@@ -10,12 +10,13 @@
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
       <ul class="column header_field"> 
-       <li><?php $f->l_text_field_dr_withSearch('hr_grade_id') ?>
+       <li><?php $f->l_text_field_dr_withSearch('hr_grade_id'); $f = new inoform(); ?>
         <a name="show" href="form.php?class_name=hr_grade&<?php echo "mode=$mode"; ?>" class="show document_id hr_grade_id"><i class='fa fa-refresh'></i></a> 
        </li>
        <li><?php $f->l_text_field_d('grade'); ?></li>
        <li><?php $f->l_text_field_d('description'); ?></li>
        <li><?php $f->l_text_field_d('rank'); ?></li>
+       <li><?php $f->l_select_field_from_object('hr_element_entry_tpl_header_id', hr_element_entry_tpl_header::find_all(),'hr_element_entry_tpl_header_id' ,'template_name',$$class->hr_element_entry_tpl_header_id,'hr_element_entry_tpl_header_id','medium' , 1); ?></li>
        <li><?php $f->l_text_field_d('alt_name'); ?></li>
        <li><?php $f->l_text_field_d('alt_description'); ?></li>
        <li><?php $f->l_date_fieldAnyDay('inactive_date', $$class->inactive_date); ?></li>

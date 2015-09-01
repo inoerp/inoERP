@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP - Version 0.1.1
  *
@@ -15,12 +16,13 @@
  * 
  */
 class hr_employee extends dbObject {
+
  public static $table_name = "hr_employee";
  public static $primary_column = "hr_employee_id";
  public static $key_column = 'last_name';
  public static $dependent_classes = ['hr_employee_education', 'hr_employee_experience', 'hr_employee_termination'];
  public static $module = "hr";
-  public static $system_info = [
+ public static $system_info = [
   'name' => 'Employee',
   'number' => '3107',
   'description' => 'HR Employee',
@@ -107,14 +109,7 @@ class hr_employee extends dbObject {
   'first_name',
   'last_name',
  ];
- public $column = [
-  'hr_employee_id',
-  'identification_id',
-  'identification_type',
-  'citizen_number',
-  'first_name',
-  'last_name',
- ];
+
  public $fields_inForm_notInDataBase = [
   "supervisor_employee_name"
  ];
@@ -264,6 +259,14 @@ class hr_employee extends dbObject {
             AND user.user_id = '{$user_id}' LIMIT 1";
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
+ }
+
+ public static function find_by_orgId($org_id) {
+  $sql = " SELECT * 
+            FROM hr_employee
+            WHERE org_id = '{$org_id}' ";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
  }
 
  public function _before_showing() {
