@@ -96,6 +96,19 @@ function applyFilter() {
 
 }
 
+function get_formTopImage(){
+ var stmt = '<ul id="form_top_image" class="draggable">';
+ stmt += '<li id="refresh_button" class="fa fa-refresh clickable" title="Refresh"></li>';
+ stmt += '<li><a id="new_page_button" class="fa fa-file-text-o clickable" href="form.php?mode=9&class_name=hr_timesheet_header" title="New Document"></a></li>';
+ stmt += '<li id="save" class="fa fa-save clickable" title="Save"></li>';
+ stmt += '<li><a id="new_object_button" class="fa fa-eraser clickable" href="form.php?mode=9&class_name=hr_timesheet_header" title="Clear All, Quick Entry"></a></li>';
+ stmt += '<li id="delete_button" class="fa fa-trash-o clickable" title="Delete"></li>';
+ stmt += '<li id="remove_row_button" class="fa fa-remove clickable" title="Remove"></li>';
+ stmt += '<li id="print_searchResult" class="fa fa-print clickable print" title="Print"></li>';
+ stmt += '</ul>';
+ return stmt;
+}
+
 function arrow_menu() {
  //menu arrow
  $("#header_top .menu li > ul").each(function () {

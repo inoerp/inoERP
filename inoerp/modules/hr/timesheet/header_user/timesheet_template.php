@@ -42,9 +42,9 @@ inoERP
      <div> 
       <ul class="column header_field">
        <li><?php
-        echo $f->l_text_field_dr('approver_employee_name');
-        echo $f->hidden_field_withCLass('approved_by_employee_id', $$class->approved_by_employee_id, 'hr_employee_id');
-        ?></li>
+        echo $f->l_val_field_d('approver_employee_name', 'hr_employee_v', 'employee_name', '', 'vf_select_employee_name employee_name');
+        echo $f->hidden_field_withCLass('approver_employee_id', $$class->approver_employee_id, 'hr_employee_id');
+        ?><i class="generic g_select_employee_name select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
        <li><?php $f->l_date_fieldAnyDay_r('approved_date', $$class->approved_date, 'always_readonly'); ?>             </li>
       </ul>
      </div>
@@ -115,11 +115,12 @@ inoERP
       <tbody class="form_data_line_tbody">
        <?php
        $count = 0;
-       $f = new inoform();
        foreach ($hr_timesheet_line_object as $hr_timesheet_line) {
         if (!empty($_GET['copydoc']) && $_GET['copydoc'] == 1) {
          $hr_timesheet_line->hr_timesheet_line_id = null;
         }
+        $$class_second->project_number = !empty($$class_second->prj_project_header_id) ? prj_project_header::find_by_id($$class_second->prj_project_header_id)->project_number : '';
+        $$class_second->task_number = !empty($$class_second->prj_project_line_id) ? prj_project_line::find_by_id($$class_second->prj_project_line_id)->task_number : '';
         ?>         
         <tr class="hr_timesheet_line<?php echo $count ?>">
          <td>
@@ -130,21 +131,20 @@ inoERP
          <td><?php $f->seq_field_d($count); ?></td>
          <td><?php $f->text_field_wid2s('hr_timesheet_line_id', 'always_readonly dontCopy'); ?></td>
          <td><?php
-          $f->val_field_wid2m('project_number', 'prj_project_header', 'project_number', '', 'select project_number');
-          echo $f->hidden_field('prj_project_header_id', $$class_second->prj_project_header_id);
+         $f->val_field_wid2m('project_number', 'prj_project_header', 'project_number', '', 'select project_number');
+         echo $f->hidden_field('prj_project_header_id', $$class_second->prj_project_header_id);
           ?><i class="select_project_number select_popup clickable fa fa-search"></i></td>
          <td><?php
-          $f->val_field_wid2('task_number', 'prj_project_all_lowesttask_v', 'task_number', 'prj_project_header_id', 'select project_task_number');
-          echo $f->hidden_field('prj_project_line_id', $$class_second->prj_project_line_id);
+         $f->val_field_wid2('task_number', 'prj_project_all_lowesttask_v', 'task_number', 'prj_project_header_id', 'select project_task_number');
+         echo $f->hidden_field('prj_project_line_id', $$class_second->prj_project_line_id);
           ?><i class="select_project_task_number select_popup clickable fa fa-search" data-class_name="prj_project_all_lowesttask_v"></i></td>
-         <td><?php echo $f->number_field('no_of_hrs', $$class_second->no_of_hrs, '', '', 'small'); ?></td>
-         <td><?php echo $f->number_field('no_of_hrs', $$class_second->no_of_hrs, '', '', 'small'); ?></td>
-         <td><?php echo $f->number_field('no_of_hrs', $$class_second->no_of_hrs, '', '', 'small'); ?></td>
-         <td><?php echo $f->number_field('no_of_hrs', $$class_second->no_of_hrs, '', '', 'small'); ?></td>
-         <td><?php echo $f->number_field('no_of_hrs', $$class_second->no_of_hrs, '', '', 'small'); ?></td>
-         <td><?php echo $f->number_field('no_of_hrs', $$class_second->no_of_hrs, '', '', 'small'); ?></td>
-         <td><?php echo $f->number_field('no_of_hrs', $$class_second->no_of_hrs, '', '', 'small'); ?></td>
-
+         <td><?php echo $f->number_field('day1', $$class_second->day1, '', '', 'small'); ?></td>
+         <td><?php echo $f->number_field('day2', $$class_second->day2, '', '', 'small'); ?></td>
+         <td><?php echo $f->number_field('day3', $$class_second->day3, '', '', 'small'); ?></td>
+         <td><?php echo $f->number_field('day4', $$class_second->day4, '', '', 'small'); ?></td>
+         <td><?php echo $f->number_field('day5', $$class_second->day5, '', '', 'small'); ?></td>
+         <td><?php echo $f->number_field('day6', $$class_second->day6, '', '', 'small'); ?></td>
+         <td><?php echo $f->number_field('day7', $$class_second->day7, '', '', 'small'); ?></td>
         </tr>
         <?php
         $count = $count + 1;

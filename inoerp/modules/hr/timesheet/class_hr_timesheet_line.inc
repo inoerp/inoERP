@@ -5,16 +5,21 @@ class hr_timesheet_line extends dbObject {
  public static $table_name = "hr_timesheet_line";
  public static $primary_column = "hr_timesheet_line_id";
  public static $parent_primary_column = "hr_timesheet_header_id";
- public static $key_column = 'timesheet_type';
+ public static $key_column = 'prj_project_header_id';
  public static $module = "hr";
  public $field_a = [
   'hr_timesheet_line_id',
   'hr_timesheet_header_id',
-  'work_date',
   'prj_project_header_id',
   'prj_project_line_id',
   'prj_work_type_id',
-  'no_of_hrs',
+  'day1',
+  'day2',
+  'day3',
+  'day4',
+  'day5',
+  'day6',
+  'day7',
   'status',
   'purpose',
   'description',
@@ -30,10 +35,7 @@ class hr_timesheet_line extends dbObject {
  ];
  public $requiredField = [
   'hr_timesheet_header_id',
-  'claim_date',
-  'receipt_amount',
-//  'receipt_currency',
-  'timesheet_type',
+  'prj_project_header_id',
  ];
  public $fields_inForm_notInDataBase = [
   'project_number',
@@ -44,10 +46,16 @@ class hr_timesheet_line extends dbObject {
  ];
  public $hr_timesheet_line_id;
  public $hr_timesheet_header_id;
- public $work_date;
  public $prj_project_header_id;
  public $prj_project_line_id;
  public $prj_work_type_id;
+ public $day1;
+ public $day2;
+ public $day3;
+ public $day4;
+ public $day5;
+ public $day6;
+ public $day7;
  public $status;
  public $purpose;
  public $no_of_hrs;
@@ -59,17 +67,13 @@ class hr_timesheet_line extends dbObject {
  public $project_number;
  public $task_number;
 
- public function _before_save() {
-  if (empty($this->hr_timesheet_line_id) && empty($this->status)) {
-   $this->status = 'ENTERED';
-  }
- }
+// public function _before_save() {
+////  pa($_POST);
+//  pa($this);
+////  return 10;
+// }
 
- Public static function hr_timesheet_line_types() {
-  $option_header = option_header::find_by_name('PO_LINE_TYPE');
-  $po_types = option_line::find_by_option_id($option_header->option_header_id);
-  return $po_types;
- }
+
 
 }
 

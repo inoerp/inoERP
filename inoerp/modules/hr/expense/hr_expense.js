@@ -1,4 +1,4 @@
-function   beforeCopyFun() {
+function   beforeCopy() {
  var newLink = $('a.show.document_id').prop('href') + '&copydoc=1';
  $('a.show.document_id').prop('href', newLink);
  $('a.show.document_id').trigger('click');
@@ -85,11 +85,11 @@ $(document).ready(function () {
   $('#header_amount').val(header_amount);
  });
 
-// $("body").off('click', '#menu_button4_2, #menu_button4_2, #menu_button4')
-//         .on('click', '#menu_button4_2, #menu_button4_2, #menu_button4', function () {
-//          var newLink = $('a.show.document_id').prop('href') + '&copydoc=1';
-//          $('a.show.document_id').prop('href', newLink);
-//          $('a.show.document_id').trigger('click');
-//         });
+ $("body").off('click', '#menu_button4_2, #menu_button4_2, #menu_button4')
+         .on('click', '#menu_button4_2, #menu_button4_2, #menu_button4', function () {
+          $('#status').val('ENTERED');
+          $('#claim_number,.approved_date').val('');
+          $('#header_top_container').append(get_formTopImage());
+         });
 
 });

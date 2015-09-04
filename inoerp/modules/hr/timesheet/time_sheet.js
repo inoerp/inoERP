@@ -9,4 +9,11 @@ $(document).ready(function () {
   $('a.hr_timesheet_header_id').prop('href', link);
   $('a.hr_timesheet_header_id').trigger('click');
  });
+ 
+  $("body").off('click', '#menu_button4_2, #menu_button4_2, #menu_button4')
+         .on('click', '#menu_button4_2, #menu_button4_2, #menu_button4', function () {
+          $('#status').val('ENTERED');
+          $('#claim_number,.approved_date').val('');
+          $('#header_top_container').append(get_formTopImage());
+         });
 });

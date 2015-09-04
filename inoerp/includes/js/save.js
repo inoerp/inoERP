@@ -871,7 +871,7 @@ contextMenuMain.prototype.contextMenu = function ()
  var afterCopy = this.afterCopy;
  var methods = {
   beforeCopyActions: function () {
-   if (typeof beforeCopy === 'string') {
+   if (typeof beforeCopy === 'function') {
     var beforeResult = window[beforeCopy]();
     if (!beforeResult) {
      return;
@@ -879,7 +879,7 @@ contextMenuMain.prototype.contextMenu = function ()
    }
   },
   afterCopyActions: function () {
-   if (typeof afterCopy === 'string') {
+   if (typeof afterCopy === 'function') {
     var afterResult = window[afterCopy]();
     if (!afterResult) {
      return;
