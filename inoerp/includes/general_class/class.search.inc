@@ -105,6 +105,12 @@ class search extends dbObject {
    $window_type = '';
   }
   echo $window_type;
+  
+  if(!empty($this->_show_update_path) || !empty($this->_show_view_path) ||  !empty($this->_extra_path)){
+   $show_action_msg = true;
+  }else{
+   $show_action_msg = false;
+  }
   if (empty($this->_view_path)) {
    $this->_view_path = 'form.php?class_name=' . $this->_searching_class;
   }
@@ -127,7 +133,7 @@ class search extends dbObject {
    $search_result .= "<div id=\"tabsLine-$i\" class='tabContent'>";
    $search_result .= "<table class=\"normal\"><thead><tr>";
    $search_result .= '<th>'.gettext(ucwords(str_replace('_', ' ', $this->primary_column_s))).'</th>';
-   if ($i == 0) {
+   if ($i == 0 && $show_action_msg) {
     $search_result .= "<th>Action<span id='copy_clipboard'>&nbsp;&nbsp;&nbsp;<i class='fa fa-clipboard clickable'></i></span></th>";
    }
    $new_start = ($i * ($no_of_columns_per_tab - 1)) + $i;
@@ -146,8 +152,9 @@ class search extends dbObject {
      $count++;
      $tr_class = 'rowno_' . $count;
      $search_result .="<tr class='{$tr_class}'>";
-     $search_result .= '<td>'.$record->{$this->primary_column_s}.'</td>';
-     if ($i == 0) {
+     $primary_col_val = (!empty($record->{$this->primary_column_s})) ?  $record->{$this->primary_column_s} : $count;
+     $search_result .= '<td>'.$primary_col_val.'</td>';
+     if ($i == 0 && $show_action_msg) {
       $search_result .= '<td class="search_result action">';
       if ($this->_show_view_path) {
        if ($this->_searching_class == 'comment') {

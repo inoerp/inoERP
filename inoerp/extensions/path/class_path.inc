@@ -486,7 +486,7 @@ class path extends dbObject {
   }
 
 
-  if (!empty($allowed_path_ids) && is_array($allowed_path_ids) && !empty($allowed_path_ids['1']) && $allowed_path_ids[0] != '11') {
+  if (!empty($allowed_path_ids) && is_array($allowed_path_ids) && !empty($allowed_path_ids['1'])  && !empty($allowed_path_ids[0]) && $allowed_path_ids[0] != '11') {
    if (!empty($allowed_path_ids) && is_array($allowed_path_ids) && ($this->_show_misc_paths)) {
     $allPaths .= '<ul>';
     $allPaths .= '<li class="parent_menu expandable misc">' . '<a href="' . HOME_URL . '">MISC</a>';

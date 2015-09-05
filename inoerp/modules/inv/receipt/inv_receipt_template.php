@@ -1,5 +1,5 @@
 <div id ="form_header"><span class="heading"><?php
-  echo gettext('Receipt Header')
+  echo gettext('Purchasing Transaction - Receipt/Return')
   ?> </span>
 
  <div id="tabsHeader">
