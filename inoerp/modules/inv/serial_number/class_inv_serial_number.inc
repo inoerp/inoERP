@@ -81,6 +81,9 @@ class inv_serial_number extends dbObject {
  ];
  public $initial_search = [
   'item_id_m',
+  'current_org_id',
+  'current_subinventory_id',
+  'current_locator_id'
  ];
  public $fields_inForm_notInDataBase = [
   'org',
@@ -100,6 +103,11 @@ class inv_serial_number extends dbObject {
  public $profile_default = [
   'org_id' => 'org_inv_name_default',
  ];
+ 
+  public $search_functions = [
+  'Organization' => 'search_org_name',
+ ];
+  
  public $prg_create_serial_number_parameters = [
   'Organization' => 'search_org_name',
   'Item Number From' => 'search_item_number_from',

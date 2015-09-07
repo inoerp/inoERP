@@ -79,7 +79,8 @@ class sd_so_line extends dbObject {
   "so_number",
   "item_id_m",
   "item_number",
-  "item_description"
+  "item_description",
+  'shipping_org_id'
  ];
  public $requiredField = [
   'sd_so_header_id',

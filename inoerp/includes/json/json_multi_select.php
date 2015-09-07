@@ -221,7 +221,7 @@ if (!empty($_GET['search_class_name'])) {
    $noof_criteria++;
   }
  }
- pa($whereFields);
+// pa($whereFields);
  if (count($whereFields) > 0) {
   $whereClause = " WHERE " . implode(" AND ", $whereFields);
   // And then create the SQL query itself.
@@ -306,7 +306,7 @@ if (!empty($_GET['search_class_name'])) {
   $pagination_statement = $pagination->show_pagination();
  }
 
- echo '<div id="json_search_result">';
+// echo '<div id="json_search_result">';
  if (!empty($$class) && property_exists($$class, 'multi_select_template_path')) {
   if (empty($readonly)) {
    $s->setProperty('_form_post_link', 'multi_select');

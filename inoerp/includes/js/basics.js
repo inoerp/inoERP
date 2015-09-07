@@ -96,7 +96,7 @@ function applyFilter() {
 
 }
 
-function get_formTopImage(){
+function get_formTopImage() {
  var stmt = '<ul id="form_top_image" class="draggable">';
  stmt += '<li id="refresh_button" class="fa fa-refresh clickable" title="Refresh"></li>';
  stmt += '<li><a id="new_page_button" class="fa fa-file-text-o clickable" href="form.php?mode=9&class_name=hr_timesheet_header" title="New Document"></a></li>';
@@ -1300,7 +1300,7 @@ function getSubInventory(options) {
   }
  }).done(function (result) {
   var div = $(result).filter('div#json_subinventory_find_all').html();
-  if (settings.rowClass) {
+  if (settings.rowClass_d) {
    $('#content').find(settings.rowClass_d).find(settings.subinventory_class).empty().append(div);
   } else {
    $('#content').find(settings.subinventory_class).empty().append(div);
@@ -1712,12 +1712,19 @@ function getOnhandDetails(options) {
     $.each(result, function (key, value) {
      switch (key) {
       case 'onhand':
+      case 'onhand_id':
+      case 'reservable_onhand':
        var className = '.' + key;
-       var trClass = settings.trClass;
-       if (settings.fieldClass) {
-        className += '.' + settings.fieldClass;
+       if (settings.trClass) {
+        var trClass = settings.trClass;
+        if (settings.fieldClass) {
+         className += '.' + settings.fieldClass;
+        }
+        $('#content').find(trClass).find(className).val(value);
+       } else {
+        $('#content').find(className).val(value);
        }
-       $('#content').find(trClass).find(className).val(value);
+
        break;
      }
     });
@@ -3019,7 +3026,7 @@ function getPerDiemRate(options) {
  var curernt_date = d.getFullYear() + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
  var defaults = {
   json_url: 'modules/hr/perdiem_rate/json_perdiem_rate.php',
-  hr_employee_id : $('#hr_employee_id').val(),
+  hr_employee_id: $('#hr_employee_id').val(),
   price_date: curernt_date
  };
  var settings = $.extend({}, defaults, options);

@@ -5,9 +5,9 @@
    <?php echo gettext('Item Transaction Location Default') ?></span>
    <div class="tabContainer">
     <label><?php echo gettext('Inventory Org') ?> </label>
-    <?php echo $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $org_id_h, 'org_id'); ?>
+    <?php echo $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $org_id_h, 'org_id' , 'action'); ?>
     <a name="show" href="form.php?class_name=inv_location_default&<?php echo "mode=$mode"; ?>" class="show document_id inv_location_default_id">
-     <i class='fa fa-refresh'></i></a> 
+     <i class='fa fa-refresh '></i></a> 
    </div>
    <div id ="form_line" class="inv_location_default"><span class="heading"><?php echo gettext('Location Defaults') ?></span>
     <div id="tabsLine">
@@ -123,6 +123,7 @@
 </div>
 <div id="js_data">
  <ul id="js_saving_data">
+  <li class="primary_column_id" data-primary_column_id="org_id" ></li>
   <li class="lineClassName" data-lineClassName="inv_location_default" ></li>
   <li class="line_key_field" data-line_key_field="location_default" ></li>
   <li class="single_line" data-single_line="false" ></li>

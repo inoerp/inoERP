@@ -88,6 +88,7 @@ class inv_lot_number extends dbObject {
  ];
  public $initial_search = [
   'item_id_m',
+   'org_id'
  ];
  public $fields_inForm_notInDataBase = [
   'org',

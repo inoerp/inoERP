@@ -58,6 +58,8 @@ class sd_so_all_v extends dbObject {
 		 'line_status',
 		 'schedule_ship_date',
   'shipping_org_id',
+  'item_id_m',
+  'sd_so_header_id'
  ];
 
  public $multi_select_column = [
@@ -247,6 +249,14 @@ AND ssc.org_id = sdsl.shipping_org_id
 	$sql .= " LIMIT 1 ";
 	$value_a = ['sd_so_line_id' => $line_id];
 	$result = $this->findBySql($sql, $value_a);
+	return !empty($result) ? array_pop($result) : false;
+ }
+ 
+  public static function find_by_soLineId($line_id) {
+	$sql = " SELECT * FROM ";
+	$sql .= self::$table_name;
+	$sql .= " WHERE sd_so_line_id = '{$line_id}' ";
+	$result = self::find_by_sql($sql);
 	return !empty($result) ? array_pop($result) : false;
  }
 
