@@ -14,6 +14,8 @@ class onhand_v extends dbObject {
   'locator',
   'uom_id',
   'onhand',
+  'reservable_onhand',
+  'reserved_quantity',
   'item_id_m',
   'revision_name',
   'org_id',
@@ -21,7 +23,6 @@ class onhand_v extends dbObject {
   'locator_id',
   'lot_id',
   'serial_id',
-  'reservable_onhand',
   'transactable_onhand',
   'lot_status',
   'serial_status',
@@ -47,22 +48,7 @@ class onhand_v extends dbObject {
   'subinventory_id',
   'locator_id',
  ];
- public $column = [
-  'onhand_id',
-  'item_number',
-  'revision_name',
-  'item_description',
-  'org_name',
-  'subinventory',
-  'locator',
-  'onhand',
-  'sum_onhand',
-  'uom_id',
-  'item_id_m',
-  'org_id',
-  'subinventory_id',
-  'locator_id',
- ];
+
  public $dateField = [
  ];
  public $pageTitle = " Onhand - Find Inventory Onhand "; //page Title
@@ -141,6 +127,7 @@ class onhand_v extends dbObject {
  public $lot_id;
  public $serial_id;
  public $reservable_onhand;
+ public $reserved_quantity;
  public $transactable_onhand;
  public $lot_status;
  public $serial_status;
@@ -154,11 +141,11 @@ class onhand_v extends dbObject {
 
  private function create_onhand_v() {
   $sql = "
-	 CREATE OR REPLACE VIEW onhand_v
+		 CREATE OR REPLACE VIEW onhand_v
 (onhand_id, item_number, item_description, product_line, org_name, subinventory, locator,
-uom_id,onhand, standard_cost, onhand_value,
+uom_id,onhand, reservable_onhand,  reserved_quantity, standard_cost, onhand_value,
 item_id_m, revision_name, org_id, subinventory_id, subinventory_type,
-locator_id, lot_id, serial_id, reservable_onhand, 
+locator_id, lot_id, serial_id, 
 transactable_onhand, lot_status, serial_status,  
 secondary_uom_id, onhand_status, ef_id, created_by, 
 creation_date, last_update_by, last_update_date)
@@ -166,10 +153,11 @@ AS
 SELECT onhand.onhand_id, 
 item.item_number, item.item_description, item.product_line,
 org.org, subinventory.subinventory, locator.locator,
-onhand.uom_id,onhand.onhand,
+onhand.uom_id,onhand.onhand, onhand.onhand - IFNULL(SUM(ir.demand_quantity) , 0) as  reservable_onhand,
+SUM(ir.demand_quantity) as reserved_quantity,
 cic.standard_cost, (onhand.onhand * cic.standard_cost) as onhand_value,
 onhand.item_id_m, onhand.revision_name, onhand.org_id, onhand.subinventory_id, subinventory.type,
-onhand.locator_id, onhand.lot_id, onhand.serial_id, onhand.reservable_onhand, 
+onhand.locator_id, onhand.lot_id, onhand.serial_id,
 onhand.transactable_onhand, onhand.lot_status, onhand.serial_status,  
 onhand.secondary_uom_id, onhand.onhand_status, onhand.ef_id, onhand.created_by, 
 onhand.creation_date, onhand.last_update_by, onhand.last_update_date
@@ -180,6 +168,10 @@ LEFT JOIN org ON onhand.org_id = org.org_id
 LEFT JOIN subinventory ON onhand.subinventory_id = subinventory.subinventory_id
 LEFT JOIN locator ON onhand.locator_id = locator.locator_id
 LEFT JOIN cst_item_cost_v cic ON cic.item_id_m = onhand.item_id_m AND cic.bom_cost_type='FROZEN' AND cic.org_id = onhand.org_id
+LEFT JOIN inv_reservation ir ON ir.item_id_m = onhand.item_id_m AND ir.org_id = onhand.org_id
+AND ir.subinventory_id = onhand.subinventory_id AND (ir.locator_id = onhand.locator_id || onhand.locator_id IS NULL )
+
+GROUP BY onhand.item_id_m, onhand.org_id, onhand.subinventory_id, onhand.locator_id
 ";
  }
 

@@ -156,6 +156,10 @@ class po_header extends dbObject {
   'currency'
  ];
  
+  public $search_functions = [
+  'Business Org' => 'search_business_org',
+ ];
+  
  public $search = [
   '_show_update_path' => 1,
   '_update_action_meassge' => 'Update PO',

@@ -109,7 +109,6 @@ class hr_employee extends dbObject {
   'first_name',
   'last_name',
  ];
-
  public $fields_inForm_notInDataBase = [
   "supervisor_employee_name"
  ];
@@ -279,34 +278,52 @@ class hr_employee extends dbObject {
  public function _after_save() {
 //   pa($this);
 //   pa($_POST);
-  if (!empty($this->hr_employee_id) && !empty($_POST['degree_name']) && !empty($_POST['education_line_id_cb'])) {
-   $eedu = new hr_employee_education();
-   foreach ($_POST['education_line_id_cb'] as $key => $val) {
-    if (empty($val)) {
-     continue;
-    }
-    foreach ($eedu->field_a as $field_k => $field_v) {
-     $eedu->$field_v = isset($_POST[$field_v][$key]) ? $_POST[$field_v][$key] : null;
-    }
-    $eedu->audit_trial();
-    $eedu->save();
-    unset($eedu);
+  if (!empty($this->hr_employee_id) && !empty($_POST['degree_name']) && !empty($_POST['degree_name'])) {
+   try {
+    $this->_save_education();
+    echo "<br>Education details are sucessfully saved.";
+   } Catch (Exception $e) {
+    echo "<br>Failed to save education details. Error @ " . __FILE__ . ' @@ ' . __LINE__ . '<br>' . $e->getMessage();
    }
   }
 
-  if (!empty($this->hr_employee_id) && !empty($_POST['organization_name']) && !empty($_POST['experience_line_id_cb'])) {
-   $emp_exp = new hr_employee_experience();
-   foreach ($_POST['experience_line_id_cb'] as $key => $val) {
-    if (empty($val)) {
-     continue;
-    }
-    foreach ($emp_exp->field_a as $field_k => $field_v) {
-     $emp_exp->$field_v = isset($_POST[$field_v][$key]) ? $_POST[$field_v][$key] : null;
-    }
-    $emp_exp->audit_trial();
-    $emp_exp->save();
-    unset($emp_exp);
+  if (!empty($this->hr_employee_id) && !empty($_POST['organization_name']) && !empty($_POST['work_start_date'])) {
+   try {
+    $this->_save_workEx();
+    echo "<br>Work Ex details are sucessfully saved.";
+   } Catch (Exception $e) {
+    echo "<br>Failed to save Work Ex details. Error @ " . __FILE__ . ' @@ ' . __LINE__ . '<br>' . $e->getMessage();
    }
+  }
+ }
+
+ private function _save_education() {
+  $eedu = new hr_employee_education();
+  foreach ($_POST['education_line_id_cb'] as $key => $val) {
+   if (empty($val)) {
+    continue;
+   }
+   foreach ($eedu->field_a as $field_k => $field_v) {
+    $eedu->$field_v = isset($_POST[$field_v][$key]) ? $_POST[$field_v][$key] : null;
+   }
+   $eedu->employee_id = $this->hr_employee_id;
+   $eedu->save();
+   unset($eedu);
+  }
+ }
+
+ private function _save_workEx() {
+  $emp_exp = new hr_employee_experience();
+  foreach ($_POST['experience_line_id_cb'] as $key => $val) {
+   if (empty($val)) {
+    continue;
+   }
+   foreach ($emp_exp->field_a as $field_k => $field_v) {
+    $emp_exp->$field_v = isset($_POST[$field_v][$key]) ? $_POST[$field_v][$key] : null;
+   }
+   $emp_exp->employee_id = $this->hr_employee_id;
+   $emp_exp->save();
+   unset($emp_exp);
   }
  }
 

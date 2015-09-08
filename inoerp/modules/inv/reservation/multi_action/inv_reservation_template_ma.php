@@ -107,7 +107,7 @@ if(empty($search_result) && !empty($_GET['search_class_name'])){
              <td><?php echo $f->select_field_from_array('demand_type', inv_reservation::$demand_type_a, $$class->demand_type); ?></td>
              <td><?php
               echo $f->val_field_wid('so_number', 'sd_so_all_v', 'so_number', '', 'select so_number');
-              echo $f->hidden_field('sd_so_header_id', $$class->sd_so_header_id);
+              echo $f->hidden_field_withCLass('sd_so_header_id', $$class->sd_so_header_id ,'dontCopy');
               echo $f->hidden_field_withCLass('shipping_org_id', '', 'popup_value org_id');
               echo $f->hidden_field_withCLass('sd_so_header_id', '', 'popup_value sd_so_header_id_popup dontCopy');
               echo $f->hidden_field_withCLass('item_id_m', '', 'popup_value item_id_m');
@@ -170,8 +170,8 @@ if(empty($search_result) && !empty($_GET['search_class_name'])){
             <tr class="inv_reservation_line<?php echo $count ?>">
              <td><?php $f->seq_field_d($count); ?></td>
              <td><?php echo $f->select_field_from_array('supply_type', inv_reservation::$supply_type_a, $$class->supply_type); ?></td>
-             <td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory', 'subinventory_id' ,$$class->subinventory_id,  '' , 'subinventory_id subinventory'); ?>         </td>
-             <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class->subinventory_id), 'locator', 'locator_id' , $$class->locator_id, '', 'locator_id locator'); ?>         </td>
+             <td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory' ,$$class->subinventory_id,  '' , 'subinventory_id subinventory'); ?>         </td>
+             <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class->subinventory_id), 'locator_id', 'locator' , $$class->locator_id, '', 'locator_id locator'); ?>         </td>
              <td><?php
               echo $f->val_field_wid('serial_number', 'inv_serial_number', 'serial_number', 'item_id_m');
               echo $f->hidden_field('inv_serial_number_id', $$class->inv_serial_number_id);

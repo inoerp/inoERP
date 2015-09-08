@@ -20,7 +20,7 @@ if ((!empty($_GET['item_id_m'])) && (!empty($_GET['find_onhand_details'])) && (!
  }
  $onhand_a['onhand'] = $onhand_sum;
  $onhand_a['reservable_onhand'] = $reservable_onhand_sum;
- if (!empty($onhand->locator_id) && !empty($onhand_i) && count($onhand_i) == 1) {
+ if (!empty($onhand_i) && count($onhand_i) == 1) {
   $onhand_a['onhand_id'] = $onhand_i[0]->onhand_id;
  }
  echo json_encode(($onhand_a));

@@ -119,12 +119,12 @@ class sd_so_header extends dbObject {
   'bill_to_postal_code',
   'sales_person'
  ];
- 
-  public $fields_inDataBase_notInForm = [
+ public $fields_inDataBase_notInForm = [
   'currency'
  ];
- 
-  
+ public $search_functions = [
+  'BU Org' => 'search_business_org',
+ ];
  public $profile_default = [
   'exchange_rate_type' => 'gl_currency_conversion_type',
   'bu_org_id' => 'org_bu_name_default',
@@ -244,8 +244,6 @@ class sd_so_header extends dbObject {
    $this->_do_initial_defaults();
   }
  }
-
-
 
  public function _after_save() {
   if ((!empty($this->sd_so_header_id)) && empty($this->so_number)) {
