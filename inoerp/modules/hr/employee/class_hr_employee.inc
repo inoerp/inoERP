@@ -308,7 +308,6 @@ class hr_employee extends dbObject {
    }
    $eedu->employee_id = $this->hr_employee_id;
    $eedu->save();
-   unset($eedu);
   }
  }
 
@@ -323,7 +322,6 @@ class hr_employee extends dbObject {
    }
    $emp_exp->employee_id = $this->hr_employee_id;
    $emp_exp->save();
-   unset($emp_exp);
   }
  }
 
