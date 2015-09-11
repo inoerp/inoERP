@@ -341,6 +341,7 @@ inoERP
         <th>Process Id </th>
         <th>View Process</th>
         <th>Action</th>
+        <th>Reservation</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -358,6 +359,7 @@ inoERP
          <td><?php $f->text_field_wid2r('sys_spd_header_id', 'dont_copy'); ?></td>
          <td><a role="button" target="_blank" class="btn btn-sm btn-default dont_copy" href="form.php?class_name=sys_spd_header&sys_spd_header_id=<?php echo $$class_second->sys_spd_header_id; ?>"><?php echo $$class_second->sys_spd_header_id; ?></a></td>
          <td><?php echo $f->select_field_from_array('line_action', sd_so_line::$line_action_a, ''); ?></td>
+         <td><a role="button" target="_blank" class="btn btn-sm btn-default dont_copy" href="multi_select.php?search_class_name=inv_reservation&amp;class_name=inv_reservation&amp;mode=9&amp;show_block=1&amp;sd_so_line_id=<?php echo $$class_second->sd_so_line_id; ?>"><?php echo gettext('View / Update') ?></a></td>
         </tr>
         <?php
         $count = $count + 1;

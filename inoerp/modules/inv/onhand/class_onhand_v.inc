@@ -36,19 +36,23 @@ class onhand_v extends dbObject {
  ];
  public $initial_search = [
   'onhand_id',
-  'item_number',
+//  'item_number',
   'item_description',
-  'org_name',
   'subinventory',
   'locator',
-  'uom_id',
+//  'uom_id',
   'onhand',
-  'item_id_m',
-  'org_id',
+//  'item_id_m',
+//  'org_id',
   'subinventory_id',
   'locator_id',
  ];
 
+  public $search_functions = [
+  'Item' => 'search_item_number',
+  'Organization' => 'search_org_name',
+ ];
+  
  public $dateField = [
  ];
  public $pageTitle = " Onhand - Find Inventory Onhand "; //page Title
@@ -277,6 +281,8 @@ GROUP BY onhand.item_id_m, onhand.org_id, onhand.subinventory_id, onhand.locator
   return !empty($result_f) ? $result_f : false;
  }
 
+ 
+ 
 }
 
 //end of po_detail class

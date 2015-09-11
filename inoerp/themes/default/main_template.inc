@@ -288,7 +288,9 @@
    <?php
    echo searching_tips();
    echo ino_filter_form();
+   echo '<div id="shortcut_keys_divId" class="hidden shortcut_keys">'.ino_shortcut_keys().'</div>';
    ?>
+   
   </div>
 <!--  Load JavaScrips-->
   <script src="includes/js/jquery-2.0.3.min.js"></script>

@@ -46,7 +46,6 @@
        <tr class="inv_transaction_line0" id="tab1_1">
         <td>
          <?php
-         $f = new inoform();
          echo ino_inline_action($$class->inv_transaction_id, array('org_id' => $$class->org_id,
           'transaction_type_id' => $$class->transaction_type_id));
          ?>
@@ -82,6 +81,9 @@
       <th><?php echo gettext('To Locator') ?></th>
       <th><?php echo gettext('Description') ?></th>
       <th><?php echo gettext('Reason') ?></th>
+      <th><?php echo gettext('Onhand') ?></th>
+      <th><?php echo gettext('Res. Onhand') ?></th
+
       </thead>
       <tbody class="form_data_line_tbody">
        <tr class="inv_transaction_line0" id="tab2_1">
@@ -99,6 +101,8 @@
         </td>
         <td><?php form::text_field_wid('description'); ?>							</td>
         <td><?php form::text_field_wid('reason'); ?>							</td>
+        <td><?php echo $f->text_field_widr('onhand', 'always_readonly'); ?></td>
+        <td><?php echo $f->text_field_widr('reservable_onhand', 'always_readonly'); ?></td>
        </tr>
       </tbody>
      </table>

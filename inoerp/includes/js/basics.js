@@ -5105,6 +5105,75 @@ $(document).ready(function () {
    $('#multi_fp_kanban_suggestion_v').find(trClass).find(':input').prop('disabled', true);
   }
  });
+
+//short cut keys ctrl+c to copy value for one field
+ $('body').on('keypress', '#form_line :input', function (e) {
+  if (!e.ctrlKey) {
+   return;
+  }
+  switch (e.which) {
+   case 97 : //copy all data from top row Ctrl + C
+    var prevRow = $(this).closest('tr').prev();
+    var this_e = $(this);
+    $(prevRow).find(':input').each(function (i, v) {
+     if ($(this).hasClass('readonly') || $(this).hasClass('always_readonly') || $(this).hasClass('dontCopy') || $(this).hasClass('dont_copy')) {
+      return;
+     }
+     if (!$(this_e).closest('tr').find(':input:eq(' + i + ')').val()) {
+      $(this_e).closest('tr').find(':input:eq(' + i + ')').val($(v).val());
+     }
+    });
+    break;
+
+   case 99 : //copy field value from top row Ctrl + A
+    var parent_td = $(this).closest('td');
+    var parent_tr = $(this).closest('tr');
+    var ind = $(parent_tr).find('td').index(parent_td);
+    $(this).val($(this).closest('tr').prev().find('td:eq(' + ind + ')').find(':input').val());
+    break;
+
+   case 120 : //remove line in form line Ctrl + X
+    var trClass = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
+    $(trClass).find('.remove_row_img').first().trigger('click');
+    break;
+  }
+ });
+
+ //short cut keys 
+ $('body').on('keydown', '#form_line :input', function (e) {
+  switch (e.which) {
+   case 40 ://add a new row with down arrow
+    $('#form_line').find('.add_row_img').first().trigger('click');
+    break;
+  }
+ });
+
+ //save
+ $('body').on('keypress', '#content :input', function (e) {
+  if (!e.ctrlKey) {
+   return;
+  }
+  switch (e.which) {
+   case 100 ://delete data Ctl + D
+    e.preventDefault();
+    $('#delete_button').trigger('click');
+    break;
+
+   case 114 : //referesh data Ctrl + R
+    e.preventDefault();
+    $('a.show.document_id').trigger('click');
+    break;
+
+   case 115 ://save data Ctrl + S
+    e.preventDefault();
+    $('#save').trigger('click');
+    break;
+
+  }
+  $(this).unbind('keypress');
+ });
+
+
 });
 
 function remove_unsaved_msg() {

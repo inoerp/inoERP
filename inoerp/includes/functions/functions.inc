@@ -1,4 +1,5 @@
 <?php
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -1163,269 +1164,289 @@ function search_org_name() {
  return $stmt;
 }
 
+function search_shipping_org() {
+ global $f;
+ $stmt = $f->select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', '', 'shipping_org_id', '', '', '', '', 1);
+ return $stmt;
+}
+
 function search_customer_name() {
- global $f; 
- $stmt = $f->val_field('customer_name', '', '' ,  '','vf_select_customer_name', '',  '', 'ar_customer', 'customer_name');
+ global $f;
+ $stmt = $f->val_field('customer_name', '', '', '', 'vf_select_customer_name', '', '', 'ar_customer', 'customer_name');
  $stmt .= $f->hidden_field_withId('ar_customer_id', '');
  $stmt .= '<i class="generic g_select_customer_name select_popup clickable fa fa-search" data-class_name="ar_customer"></i>';
-return $stmt;
+ return $stmt;
 }
 
 function search_kanban_card_generate_mode() {
-global $f;
-$stmt = $f->select_field_from_array('card_generate_mode', fp_kanban_header::$card_generate_mode_a, '', 'card_generate_mode', '', 1);
-return $stmt;
+ global $f;
+ $stmt = $f->select_field_from_array('card_generate_mode', fp_kanban_header::$card_generate_mode_a, '', 'card_generate_mode', '', 1);
+ return $stmt;
 }
 
 function search_cut_off_date() {
-global $f;
-$stmt = $f->date_fieldFromToday('date', '');
-return $stmt;
+ global $f;
+ $stmt = $f->date_fieldFromToday('date', '');
+ return $stmt;
 }
 
 function search_asset_number() {
-global $f;
-$stmt = $f->text_field('am_asset_number', '');
-$stmt .= $f->hidden_field_withId('am_asset_id', '');
-$stmt .= '<i class="select_am_asset_number select_popup clickable fa fa-search"></i>';
-return $stmt;
+ global $f;
+ $stmt = $f->text_field('am_asset_number', '');
+ $stmt .= $f->hidden_field_withId('am_asset_id', '');
+ $stmt .= '<i class="select_am_asset_number select_popup clickable fa fa-search"></i>';
+ return $stmt;
 }
 
 function search_sd_store() {
-global $f;
-$stmt = $f->select_field_from_object('sd_store_id', sd_store::find_all(), 'sd_store_id', 'store_name', '', 'sd_store_id');
-return $stmt;
+ global $f;
+ $stmt = $f->select_field_from_object('sd_store_id', sd_store::find_all(), 'sd_store_id', 'store_name', '', 'sd_store_id');
+ return $stmt;
 }
 
 function search_legal_org_name() {
-global $f;
-$stmt = $f->select_field_from_object('org_id', org::find_all_legal(), 'org_id', 'org', '', 'org_id');
-return $stmt;
+ global $f;
+ $stmt = $f->select_field_from_object('org_id', org::find_all_legal(), 'org_id', 'org', '', 'org_id');
+ return $stmt;
 }
 
 function search_legal_org_name_m() {
-global $f;
-$stmt = $f->select_field_from_object('org_id', org::find_all_legal(), 'org_id', 'org', '', 'org_id', '', 1);
-return $stmt;
+ global $f;
+ $stmt = $f->select_field_from_object('org_id', org::find_all_legal(), 'org_id', 'org', '', 'org_id', '', 1);
+ return $stmt;
 }
 
 function search_co_number() {
-global $f;
-return $f->text_field('co_number', '');
+ global $f;
+ return $f->text_field('co_number', '');
 }
 
 function search_implement_all_cb() {
-$f = new inoform();
-return $f->checkBox_field('implement_all_cb', '');
+ $f = new inoform();
+ return $f->checkBox_field('implement_all_cb', '');
 }
 
 function search_program_mode() {
-global $f;
-$stmt = $f->select_field_from_array('program_mode', array('TEST' => 'Test', 'FINAL' => 'Final'), '', 'program_mode');
-return $stmt;
+ global $f;
+ $stmt = $f->select_field_from_array('program_mode', array('TEST' => 'Test', 'FINAL' => 'Final'), '', 'program_mode');
+ return $stmt;
 }
 
 function search_db_name_old() {
-global $f;
-$stmt = $f->text_field_ap(array('name' => 'db_name', 'value' => DB_NAME2, 'readonly' => true));
-return $stmt;
+ global $f;
+ $stmt = $f->text_field_ap(array('name' => 'db_name', 'value' => DB_NAME2, 'readonly' => true));
+ return $stmt;
 }
 
 function search_convert_to_prod_mode() {
-global $f;
-$stmt = $f->select_field_from_array('convert_to_prod_mode', array('TEST' => 'Test', 'FINAL' => 'Final'), '', 'convert_to_prod_mode');
-return $stmt;
+ global $f;
+ $stmt = $f->select_field_from_array('convert_to_prod_mode', array('TEST' => 'Test', 'FINAL' => 'Final'), '', 'convert_to_prod_mode');
+ return $stmt;
 }
 
 function search_exclusion_mode() {
-global $f;
-$stmt = $f->select_field_from_array('exclusion_mode', array('ALL_SETUP' => 'Keep All Setups - Remove Transaction Data', 'LIMITED_SETUP' => 'Keep Important Setups - Remove Transaction & Some Setups ',
-'ONLY_SETUP' => 'Remove All - I Know What I\'m Doing '), '', 'exclusion_mode');
-return $stmt;
+ global $f;
+ $stmt = $f->select_field_from_array('exclusion_mode', array('ALL_SETUP' => 'Keep All Setups - Remove Transaction Data', 'LIMITED_SETUP' => 'Keep Important Setups - Remove Transaction & Some Setups ',
+  'ONLY_SETUP' => 'Remove All - I Know What I\'m Doing '), '', 'exclusion_mode');
+ return $stmt;
 }
 
 function search_db_name() {
-global $f;
-$stmt = $f->text_field_ap(array('name' => 'db_name', 'value' => DB_NAME, 'readonly' => true));
-return $stmt;
+ global $f;
+ $stmt = $f->text_field_ap(array('name' => 'db_name', 'value' => DB_NAME, 'readonly' => true));
+ return $stmt;
 }
 
 function search_payroll_schedule() {
-global $f;
-$stmt = $f->text_field('hr_payroll_schedule_id', '', '25', 'hr_payroll_schedule_id');
-return $stmt;
+ global $f;
+ $stmt = $f->text_field('hr_payroll_schedule_id', '', '25', 'hr_payroll_schedule_id');
+ return $stmt;
 }
 
 function search_payroll_process() {
-global $f;
-$stmt = $f->select_field_from_object('hr_payroll_process_id', hr_payroll_process::find_payroll_available_for_cancelAndConfirmation(), 'hr_payroll_process_id', array('proces_name', 'hr_payroll_process_id'), '', 'hr_payroll_process_id');
-return $stmt;
+ global $f;
+ $stmt = $f->select_field_from_object('hr_payroll_process_id', hr_payroll_process::find_payroll_available_for_cancelAndConfirmation(), 'hr_payroll_process_id', array('proces_name', 'hr_payroll_process_id'), '', 'hr_payroll_process_id');
+ return $stmt;
 }
 
 function search_forecast_group() {
-global $f;
-$stmt = $f->select_field_from_object('fp_forecast_group_id', fp_forecast_group::find_all(), 'fp_forecast_group_id', 'forecast_group', '', 'fp_forecast_group_id');
-return $stmt;
+ global $f;
+ $stmt = $f->select_field_from_object('fp_forecast_group_id', fp_forecast_group::find_all(), 'fp_forecast_group_id', 'forecast_group', '', 'fp_forecast_group_id');
+ return $stmt;
 }
 
 function search_forecast_name() {
-global $f;
-$stmt = $f->select_field_from_object('fp_forecast_header_id', fp_forecast_header::find_all(), 'fp_forecast_header_id', 'forecast', '', 'fp_forecast_group_id');
-return $stmt;
+ global $f;
+ $stmt = $f->select_field_from_object('fp_forecast_header_id', fp_forecast_header::find_all(), 'fp_forecast_header_id', 'forecast', '', 'fp_forecast_group_id');
+ return $stmt;
 }
 
 function search_consume_orders() {
-global $f;
-$stmt = $f->select_field_from_array('consume_orders', fp_forecast_consumption::$consume_orders_a, '', 'consume_orders');
-return $stmt;
+ global $f;
+ $stmt = $f->select_field_from_array('consume_orders', fp_forecast_consumption::$consume_orders_a, '', 'consume_orders');
+ return $stmt;
 }
 
 function search_offset_days() {
-global $f;
-$f = new inoform();
-$stmt = $f->number_field('offset_days', '');
-return $stmt;
+ global $f;
+ $f = new inoform();
+ $stmt = $f->number_field('offset_days', '');
+ return $stmt;
 }
 
 function search_date() {
-global $f;
+ global $f;
 
-$stmt = $f->date_fieldAnyDay('user_entered_date', '');
-$stmt .= '&nbsp;&nbsp; <label> Use System Date </label>';
-$stmt .= $f->checkBox_field('use_sys_date_cb', '');
-return $stmt;
+ $stmt = $f->date_fieldAnyDay('user_entered_date', '');
+ $stmt .= '&nbsp;&nbsp; <label> Use System Date </label>';
+ $stmt .= $f->checkBox_field('use_sys_date_cb', '');
+ return $stmt;
 }
 
 function search_abc_valuation_name() {
-global $f;
-$f = new inoform();
-$stmt = "<span class='abcValuation_withSearchImage'>";
+ global $f;
+ $f = new inoform();
+ $stmt = "<span class='abcValuation_withSearchImage'>";
  $stmt .= $f->hidden_field_withId('inv_abc_valuation_id', '');
  $stmt .= "<input type=\"text\" name=\"valuation_name\" value=\" \" 
                   size=\"60\" class=\"textfield abc valuation_name \" "
-                  . "placeholder=\"Enter the ABC Valuation Name\"  required id=\"valuation_name\" >";
-                  $stmt .= "<img src=\"" . HOME_URL . "/themes/images/serach.png\" class=\"valuation_name select_popup clickable\" >";
-                  $stmt .= "</span>";
-return $stmt;
+  . "placeholder=\"Enter the ABC Valuation Name\"  required id=\"valuation_name\" >";
+ $stmt .= "<img src=\"" . HOME_URL . "/themes/images/serach.png\" class=\"valuation_name select_popup clickable\" >";
+ $stmt .= "</span>";
+ return $stmt;
 }
 
 function search_org_name_onevalue() {
-global $f;
-$stmt = $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', '', 'org_id', '', '', '', '', 1, '', 1);
-return $stmt;
+ global $f;
+ $stmt = $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', '', 'org_id', '', '', '', '', 1, '', 1);
+ return $stmt;
 }
 
 function search_business_org() {
-global $f;
-$stmt = $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', '', 'bu_org_id', '', 1, '', '', 1);
-return $stmt;
+ global $f;
+ $stmt = $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', '', 'bu_org_id', '', 1, '', '', 1);
+ return $stmt;
+}
+
+function search_business_org_nm() {
+ global $f;
+ $stmt = $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', '', 'bu_org_id');
+ return $stmt;
 }
 
 function search_enterprise_org() {
-global $f;
-$stmt = $f->select_field_from_object('org_id', org::find_all_enterprise(), 'org_id', 'org', '', 'org_id', '', 1, '', '', 1);
-return $stmt;
+ global $f;
+ $stmt = $f->select_field_from_object('org_id', org::find_all_enterprise(), 'org_id', 'org', '', 'org_id', '', 1, '', '', 1);
+ return $stmt;
 }
 
 function search_grade() {
-global $f;
-$stmt = $f->select_field_from_object('hr_grade_id', hr_grade::find_all(), 'hr_grade_id', 'grade', '', 'hr_grade_id', '');
-return $stmt;
+ global $f;
+ $stmt = $f->select_field_from_object('hr_grade_id', hr_grade::find_all(), 'hr_grade_id', 'grade', '', 'hr_grade_id', '');
+ return $stmt;
 }
 
 function search_minmax_type() {
-$stmt = '<select class="select planning_method" name="planning_method[]">
+ $stmt = '<select class="select planning_method" name="planning_method[]">
  <option value=""></option>
  <option value="MINMAX">Min Max</option>
  <option selected="" value="MULTI_MINMAX">Multi Bin Min Max</option>
 </select>';
-return $stmt;
+ return $stmt;
 }
 
 function search_quantity() {
-$stmt = '<input id="quantity" class="textfield number quantity" '
-                . 'type="number" title="" placeholder="Number" size="20" maxlength="256" value="" '
-                . 'name="quantity" >';
-return $stmt;
+ $stmt = '<input id="quantity" class="textfield number quantity" '
+  . 'type="number" title="" placeholder="Number" size="20" maxlength="256" value="" '
+  . 'name="quantity" >';
+ return $stmt;
 }
 
 function search_item_id_from() {
-$stmt = '<input id="item_id_from" class="textfield select_item_id item_id_from" '
-                . 'type="text" title="" placeholder="From Item Id" size="20" maxlength="256" value="" '
-                . 'name="from_item_id" >';
-return $stmt;
+ $stmt = '<input id="item_id_from" class="textfield select_item_id item_id_from" '
+  . 'type="text" title="" placeholder="From Item Id" size="20" maxlength="256" value="" '
+  . 'name="from_item_id" >';
+ return $stmt;
 }
 
 function search_item_id_m_from() {
-$stmt = '<input id="item_id_m_from" class="val_field textfield vf_select_item_number to_item_id_m item_id_m_from" 
+ $stmt = '<input id="item_id_m_from" class="val_field textfield vf_select_item_number to_item_id_m item_id_m_from" 
                 type="text" data-toggle="tooltip" title="Select Item Id From" data-val_field="item" data-val_value="item_id_m" 
                 size="20" value="" name="item_id_m_from">
 <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item" style="display: inline-block;"></i>';
 
-return $stmt;
+ return $stmt;
 }
 
 function adjustment_ac_id() {
-$stmt = '<input class="hidden coa_combination_id account_id adjustment_ac_id required" type="hidden" value="" 
+ $stmt = '<input class="hidden coa_combination_id account_id adjustment_ac_id required" type="hidden" value="" 
                 name="adjustment_ac_id" required="" style="background-color: rgba(233, 209, 234, 0.61);">
 <input class="combination account_id adjustment_ac_id textfield select_account account_combination required" type="text" 
        data-toggle="tooltip" title="" required="" placeholder="" size="28" maxlength="256" value="" 
        name="ac_combinations" style="background-color: rgba(233, 209, 234, 0.61);">
 <i class="select_account select_popup clickable fa fa-search" style="display: inline-block;"></i>';
-return $stmt;
+ return $stmt;
 }
 
 function search_item_id_to() {
-$stmt = '<input id="item_id_to" class="textfield select_item_id item_id_to" '
-                . 'type="text" title="" placeholder="To Item Id" size="20" maxlength="256" value="" '
-                . 'name="to_item_id" >';
-return $stmt;
+ $stmt = '<input id="item_id_to" class="textfield select_item_id item_id_to" '
+  . 'type="text" title="" placeholder="To Item Id" size="20" maxlength="256" value="" '
+  . 'name="to_item_id" >';
+ return $stmt;
 }
 
 function search_item_id_m_to() {
-$stmt = '<input id="to_item_id_m" class="val_field textfield vf_select_item_number to_item_id_m item_id_m_to" 
+ $stmt = '<input id="to_item_id_m" class="val_field textfield vf_select_item_number to_item_id_m item_id_m_to" 
                 type="text" data-toggle="tooltip" title="Select To Item Id" data-val_field="item" data-val_value="item_id_m" 
                 size="20" value="" name="to_item_id_m">
 <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item" style="display: inline-block;"></i>';
 
-return $stmt;
+ return $stmt;
 }
 
 function search_item_number_from() {
-$stmt = '<input id="item_number_from" class="val_field textfield vf_select_item_number item_number item_number_from" 
+ $stmt = '<input id="item_number_from" class="val_field textfield vf_select_item_number item_number item_number_from" 
                 type="text" data-toggle="tooltip" title="Select From Item Number" data-val_field="item" data-val_value="item_number" 
                 size="20" value="" name="item_number_from">
 <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item" style="display: inline-block;"></i>';
 //<input class="hidden popup_value item_id_m" type="hidden" name="item_id_m_from"> 
-return $stmt;
+ return $stmt;
+}
+
+function search_item_number() {
+ $stmt = '<input id="item_number" class="val_field textfield vf_select_item_number item_number" 
+                type="text" data-toggle="tooltip" title="Select From Item Number" data-val_field="item" data-val_value="item_number" 
+                size="20" value="" name="item_number">
+<i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item" style="display: inline-block;"></i>';
+ return $stmt;
 }
 
 function search_item_number_to() {
-$stmt = '<input id="item_number_to" class="val_field textfield vf_select_item_number item_number item_number_to" 
+ $stmt = '<input id="item_number_to" class="val_field textfield vf_select_item_number item_number item_number_to" 
                 type="text" data-toggle="tooltip" title="Select Item Number To" data-val_field="item" data-val_value="item_number" 
                 size="20" value="" name="item_number_to">
 <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item" style="display: inline-block;"></i>';
 // <input class="hidden popup_value item_id_m" type="hidden" name="item_id_m_from"> 
-return $stmt;
+ return $stmt;
 }
 
 function search_payroll() {
-global $f;
-$stmt = $f->select_field_from_object('hr_payroll_id', hr_payroll::find_all(), 'hr_payroll_id', 'payroll', '', 'hr_payroll_id', '', 1);
-return $stmt;
+ global $f;
+ $stmt = $f->select_field_from_object('hr_payroll_id', hr_payroll::find_all(), 'hr_payroll_id', 'payroll', '', 'hr_payroll_id', '', 1);
+ return $stmt;
 }
 
 function add_new_search_criteria() {
-if (!empty($_GET["new_search_criteria"])) {
-$new_search_criteria = $_GET["new_search_criteria"];
-$new_search_criteria_statment = "<li><label> $new_search_criteria  : </label>";
- $new_search_criteria_statment .= "<input type=\"search\" name=\"$new_search_criteria\" id=\"$new_search_criteria\" 
+ if (!empty($_GET["new_search_criteria"])) {
+  $new_search_criteria = $_GET["new_search_criteria"];
+  $new_search_criteria_statment = "<li><label> $new_search_criteria  : </label>";
+  $new_search_criteria_statment .= "<input type=\"search\" name=\"$new_search_criteria\" id=\"$new_search_criteria\" 
                                           value=\"\"  maxlength=\"50\" >";
- echo "$new_search_criteria_statment";
+  echo "$new_search_criteria_statment";
  }
- }
+}
 
- function ino_attachement($file, $file_name = 'attachments') {
+function ino_attachement($file, $file_name = 'attachments') {
  $stmt = '<div id="show_attachment" class="show_attachment">
   <div id="file_upload_form" class="form-group">
    <ul class="inRow asperWidth">
@@ -1433,211 +1454,211 @@ $new_search_criteria_statment = "<li><label> $new_search_criteria  : </label>";
      <input id="attachments" class="input_file_btn clickable" type="file" multiple="" name="' . $file_name . '[]"></input>
      <i class="fa fa-paperclip clickable"> &nbsp;&nbsp;&nbsp;</i>Select File </li>
     <li> <button  form="file_upload" name="attach_submit" id="attach_submit" class="btn btn-info active submit button">Attach</button></li>';
-    $stmt.='<li class="show_loading_small"><img alt="Loading..." src="' . HOME_URL . 'themes/images/small_loading.gif"/></li>
+ $stmt.='<li class="show_loading_small"><img alt="Loading..." src="' . HOME_URL . 'themes/images/small_loading.gif"/></li>
    </ul>
    <div class="uploaded_file_details"></div>
   </div>';
 
-  $stmt .= file::attachment_statement($file);
-  $stmt .= '</div>';
+ $stmt .= file::attachment_statement($file);
+ $stmt .= '</div>';
  return $stmt;
- }
+}
 
- function execution_time($only_value = false) {
+function execution_time($only_value = false) {
  $start_time = $_SERVER["REQUEST_TIME"];
  if ($only_value) {
- return (microtime(true) - $start_time);
+  return (microtime(true) - $start_time);
  } else {
- echo "<br />Execution time :" . (microtime(true) - $start_time) . "</br>";
+  echo "<br />Execution time :" . (microtime(true) - $start_time) . "</br>";
  }
- }
+}
 
- function show_download_button($result_data) {
+function show_download_button($result_data) {
  $return_stmt = '<div id="searchResultMessages">';
-  $return_stmt .='<ul class="inline_list"><li>';
-    $return_stmt .='<h3>Total records : ' . count($result_data) . '</h3></li>';
-   $return_stmt .= '<li>';
-    $result_data_all = json_decode(json_encode($result_data), true);
-    $return_stmt .= '<form action="' . HOME_URL . 'download.php"  method="POST" name="download_all" id="download_all" target="_blank">';
-     $return_stmt .= '<input type="hidden"  name="data" value="' . base64_encode(serialize($result_data_all)) . '" >';
-     $return_stmt .= '<input type="radio" name="download_format" checked="checked" value="excel_format">Excel 
+ $return_stmt .='<ul class="inline_list"><li>';
+ $return_stmt .='<h3>Total records : ' . count($result_data) . '</h3></li>';
+ $return_stmt .= '<li>';
+ $result_data_all = json_decode(json_encode($result_data), true);
+ $return_stmt .= '<form action="' . HOME_URL . 'download.php"  method="POST" name="download_all" id="download_all" target="_blank">';
+ $return_stmt .= '<input type="hidden"  name="data" value="' . base64_encode(serialize($result_data_all)) . '" >';
+ $return_stmt .= '<input type="radio" name="download_format" checked="checked" value="excel_format">Excel 
      <input type="radio" name="download_format" value="text_format">Text
      <input type="radio" name="download_format" value="pdf_format">Pdf
      <input type="radio" name="download_format" value="xml_format">XML
      <input type="radio" name="download_format" value="worddoc_format">Word Doc
      <input type="submit"  name="export_allResult" value="Download" id="export_excel_allResult" class="clickable button"  >
     </form></li>';
-   $return_stmt .= '<li id="export_excel_searchResult" class="clickable"><i class="fa fa-file-excel-o"></i></li>
+ $return_stmt .= '<li id="export_excel_searchResult" class="clickable"><i class="fa fa-file-excel-o"></i></li>
    <li id="print_searchResult" class="print clickable" title="Print"><i class="fa fa-print"></i></li>
   </ul>
  </div>';
  return $return_stmt;
- }
+}
 
- function show_download_button_inSelectFormat($result_data_query, $total_count = 0, $total_count_all = 0, $data_type = null) {
+function show_download_button_inSelectFormat($result_data_query, $total_count = 0, $total_count_all = 0, $data_type = null) {
  global $f;
  $return_stmt = '<div id="searchResultMessages">';
-  $return_stmt .='<ul class="inline_list">';
-   $return_stmt .= '<li>';
-    $result_data_all = json_decode(json_encode($result_data_query), true);
-    $return_stmt .= '<form action="' . HOME_URL . 'download.php"  method="POST" name="download_all" id="download_all" target="_blank">';
-     if (!empty($data_type)) {
-     $return_stmt .= '<input type="hidden"  name="data" value="' . base64_encode(serialize($result_data_all)) . '" >';
-     $return_stmt .= '<input type="hidden"  name="data_type" value="' . $data_type . '" >';
-     } else {
-     $return_stmt .= '<input type="hidden"  name="data" value="' . base64_encode(serialize($result_data_all)) . '" >';
-     }
-
-     $return_stmt .= $f->select_field_from_array('download_format', dbObject::$download_format, 'excel_format');
-     $return_stmt .= '<input type="submit"  role="button" name="export_allResult" value="Download" id="export_excel_allResult" class="clickable btn btn-sm btn-default"  >';
-     $return_stmt .= '</form></li>';
-   $return_stmt .= '<li id="export_excel_searchResult" class="clickable"><i class="fa fa-file-excel-o"></i></li>
-   <li id="print_searchResult" class="print clickable" title="Print"><i class="fa fa-print"></i></li>';
-   if (!empty($total_count)) {
-   $return_stmt .= '  <li><button class="btn btn-primary" type="button">Accessible Records<span class="badge">' . $total_count . '</span></button></li>
-   <li><button class="btn btn-warning" type="button">Total Records <span class="badge">' . $total_count_all . '</span></button></li>';
-   }
-
-   $return_stmt .='</ul>
- </div>';
- return $return_stmt;
+ $return_stmt .='<ul class="inline_list">';
+ $return_stmt .= '<li>';
+ $result_data_all = json_decode(json_encode($result_data_query), true);
+ $return_stmt .= '<form action="' . HOME_URL . 'download.php"  method="POST" name="download_all" id="download_all" target="_blank">';
+ if (!empty($data_type)) {
+  $return_stmt .= '<input type="hidden"  name="data" value="' . base64_encode(serialize($result_data_all)) . '" >';
+  $return_stmt .= '<input type="hidden"  name="data_type" value="' . $data_type . '" >';
+ } else {
+  $return_stmt .= '<input type="hidden"  name="data" value="' . base64_encode(serialize($result_data_all)) . '" >';
  }
 
- function xxshow_download_button_inSelectFormat($result_data, $total_count = 0, $total_count_all = 0) {
+ $return_stmt .= $f->select_field_from_array('download_format', dbObject::$download_format, 'excel_format');
+ $return_stmt .= '<input type="submit"  role="button" name="export_allResult" value="Download" id="export_excel_allResult" class="clickable btn btn-sm btn-default"  >';
+ $return_stmt .= '</form></li>';
+ $return_stmt .= '<li id="export_excel_searchResult" class="clickable"><i class="fa fa-file-excel-o"></i></li>
+   <li id="print_searchResult" class="print clickable" title="Print"><i class="fa fa-print"></i></li>';
+ if (!empty($total_count)) {
+  $return_stmt .= '  <li><button class="btn btn-primary" type="button">Accessible Records<span class="badge">' . $total_count . '</span></button></li>
+   <li><button class="btn btn-warning" type="button">Total Records <span class="badge">' . $total_count_all . '</span></button></li>';
+ }
+
+ $return_stmt .='</ul>
+ </div>';
+ return $return_stmt;
+}
+
+function xxshow_download_button_inSelectFormat($result_data, $total_count = 0, $total_count_all = 0) {
  global $f;
  $return_stmt = '<div id="searchResultMessages">';
-  $return_stmt .='<ul class="inline_list">';
-   $return_stmt .= '<li>';
-    $result_data_all = json_decode(json_encode($result_data), true);
-    $return_stmt .= '<form action="' . HOME_URL . 'download.php"  method="POST" name="download_all" id="download_all" target="_blank">';
-     $return_stmt .= '<input type="hidden"  name="data" value="' . base64_encode(serialize($result_data_all)) . '" >';
-     $return_stmt .= $f->select_field_from_array('download_format', dbObject::$download_format, 'excel_format');
-     $return_stmt .= '<input type="submit"  role="button" name="export_allResult" value="Download" id="export_excel_allResult" class="clickable btn btn-sm btn-default"  >';
-     $return_stmt .= '</form></li>';
-   $return_stmt .= '<li id="export_excel_searchResult" class="clickable"><i class="fa fa-file-excel-o"></i></li>
+ $return_stmt .='<ul class="inline_list">';
+ $return_stmt .= '<li>';
+ $result_data_all = json_decode(json_encode($result_data), true);
+ $return_stmt .= '<form action="' . HOME_URL . 'download.php"  method="POST" name="download_all" id="download_all" target="_blank">';
+ $return_stmt .= '<input type="hidden"  name="data" value="' . base64_encode(serialize($result_data_all)) . '" >';
+ $return_stmt .= $f->select_field_from_array('download_format', dbObject::$download_format, 'excel_format');
+ $return_stmt .= '<input type="submit"  role="button" name="export_allResult" value="Download" id="export_excel_allResult" class="clickable btn btn-sm btn-default"  >';
+ $return_stmt .= '</form></li>';
+ $return_stmt .= '<li id="export_excel_searchResult" class="clickable"><i class="fa fa-file-excel-o"></i></li>
    <li id="print_searchResult" class="print clickable" title="Print"><i class="fa fa-print"></i></li>';
-   if (!empty($total_count)) {
-   $return_stmt .= '  <li><button class="btn btn-primary" type="button">Accessible Records<span class="badge">' . $total_count . '</span></button></li>
+ if (!empty($total_count)) {
+  $return_stmt .= '  <li><button class="btn btn-primary" type="button">Accessible Records<span class="badge">' . $total_count . '</span></button></li>
    <li><button class="btn btn-warning" type="button">Total Records <span class="badge">' . $total_count_all . '</span></button></li>';
-   }
-
-   $return_stmt .='</ul>
- </div>';
- return $return_stmt;
  }
 
- function is_array_key_numberic($array) {
+ $return_stmt .='</ul>
+ </div>';
+ return $return_stmt;
+}
+
+function is_array_key_numberic($array) {
  return (bool) count(array_filter(array_keys($array), 'is_numeric'));
- }
+}
 
- function array2csv(array &$array) {
+function array2csv(array &$array) {
  if (count($array) == 0) {
- return null;
+  return null;
  }
 
  ob_start();
  $df = fopen("php://output", 'w');
  if (!is_array_key_numberic($array[0])) {
- fputcsv($df, array_keys(reset($array)));
+  fputcsv($df, array_keys(reset($array)));
  }
 
  foreach ($array as $row) {
- fputcsv($df, $row);
+  fputcsv($df, $row);
  }
  fclose($df);
  return ob_get_clean();
- }
+}
 
- function array2text(array &$array) {
+function array2text(array &$array) {
  if (count($array) == 0) {
- return null;
+  return null;
  }
  ob_start();
  $df = fopen("php://output", 'w');
  if (!is_array_key_numberic($array[0])) {
- fwrite($df, implode('|', array_keys(reset($array))));
+  fwrite($df, implode('|', array_keys(reset($array))));
  }
 
  foreach ($array as $row) {
- fwrite($df, PHP_EOL);
- fwrite($df, trim(preg_replace('/\s+/', ' ', implode('|', $row))));
+  fwrite($df, PHP_EOL);
+  fwrite($df, trim(preg_replace('/\s+/', ' ', implode('|', $row))));
  }
  fclose($df);
  return ob_get_clean();
- }
+}
 
- function array2pdf(array &$array, $print_in_browser = true) {
+function array2pdf(array &$array, $print_in_browser = true) {
  if (count($array) == 0) {
- return null;
+  return null;
  }
  include(dirname(__FILE__) . "/../../tparty/mpdf/mpdf.php");
  $mpdf = new mPDF('c');
 
  $html = '';
  foreach ($array as $data) {
- foreach ($data as $key => $value) {
- $html .= "<br> $key : $value";
- }
- $html .= '<br><br>';
+  foreach ($data as $key => $value) {
+   $html .= "<br> $key : $value";
+  }
+  $html .= '<br><br>';
  }
 
  ob_start();
  // send the captured HTML from the output buffer to the mPDF class for processing
  $mpdf->WriteHTML($html);
  if ($print_in_browser) {
- download_send_headers("search_record" . date("Y-m-d") . ".pdf", 'pdf_format');
+  download_send_headers("search_record" . date("Y-m-d") . ".pdf", 'pdf_format');
  }
  echo $mpdf->Output();
  return ob_get_clean();
- }
+}
 
- function array2worddoc(array &$array) {
+function array2worddoc(array &$array) {
  if (count($array) == 0) {
- return null;
+  return null;
  }
  include(dirname(__FILE__) . "/../../tparty/inodoc/class_ino_doc.inc");
  $ino_doc = new ino_doc();
 
  $ino_data_a = [];
  foreach ($array as $data) {
- $each_para = '';
- foreach ($data as $key => $value) {
- $each_para .= "<br> $key : $value";
- }
- $each_para .='<br><br>';
- array_push($ino_data_a, $each_para);
+  $each_para = '';
+  foreach ($data as $key => $value) {
+   $each_para .= "<br> $key : $value";
+  }
+  $each_para .='<br><br>';
+  array_push($ino_data_a, $each_para);
  }
  ob_start();
  echo $ino_doc->get_document($array);
  return ob_get_clean();
- }
+}
 
- function array2xml(array &$array) {
+function array2xml(array &$array) {
  if (count($array) == 0) {
- return null;
+  return null;
  }
 
  function createXml($array, $level = 0) {
- $xml = ($level == 0) ? '<?xml version="1.0" encoding="ISO-8859-1"?>' . PHP_EOL : '';
- $tab = str_pad('', $level, '  ', STR_PAD_LEFT);
- foreach ($array as $node => $value) {
- $xml .= "{$tab}<{$node}>";
- if (!is_array($value)) {
- $xml .= $value;
- } else {
- $xml .= PHP_EOL . createXml($value, $level + 1) . $tab;
- }
- $xml .= "</{$node}>" . PHP_EOL;
- }
- return $xml;
+  $xml = ($level == 0) ? '<?xml version="1.0" encoding="ISO-8859-1"?>' . PHP_EOL : '';
+  $tab = str_pad('', $level, '  ', STR_PAD_LEFT);
+  foreach ($array as $node => $value) {
+   $xml .= "{$tab}<{$node}>";
+   if (!is_array($value)) {
+    $xml .= $value;
+   } else {
+    $xml .= PHP_EOL . createXml($value, $level + 1) . $tab;
+   }
+   $xml .= "</{$node}>" . PHP_EOL;
+  }
+  return $xml;
  }
 
  ob_start();
  echo createXml($array, 0);
  return ob_get_clean();
- }
+}
 
- function download_send_headers($filename, $download_format = 'text_format') {
+function download_send_headers($filename, $download_format = 'text_format') {
  header("Pragma: public");
  header("Expires: 0");
  header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
@@ -1645,75 +1666,97 @@ $new_search_criteria_statment = "<li><label> $new_search_criteria  : </label>";
  header("Content-Type: application/octet-stream");
 
  switch ($download_format) {
- case 'excel_format':
- header("Content-Type: text/csv;charset=utf-8");
- break;
+  case 'excel_format':
+   header("Content-Type: text/csv;charset=utf-8");
+   break;
 
- case 'pdf_format':
- header("Content-type:application/pdf");
- break;
+  case 'pdf_format':
+   header("Content-type:application/pdf");
+   break;
 
- case 'xml_format':
- header("Content-Type: text;charset=utf-8");
- break;
+  case 'xml_format':
+   header("Content-Type: text;charset=utf-8");
+   break;
 
- case 'worddoc_format':
- header("Content-Type: text/doc;charset=utf-8");
- break;
+  case 'worddoc_format':
+   header("Content-Type: text/doc;charset=utf-8");
+   break;
 
- case 'text_format':
- case 'default' :
- header("Content-Type: text;charset=utf-8");
- break;
+  case 'text_format':
+  case 'default' :
+   header("Content-Type: text;charset=utf-8");
+   break;
  }
 
  // header("Content-Type: application/vnd.ms-excel");
  header("Content-Disposition: attachment;filename={$filename}");
  header("Content-Transfer-Encoding: binary");
- }
+}
 
- function translation($string, $namespace = null, array $values = null) {
+function translation($string, $namespace = null, array $values = null) {
  // Redefine arguments
  $string = (string) $string;
 
  // Find translation
  // Return string
  return empty($values) ? $string : strtr($string, $values);
- }
+}
 
- function next_monday($date_p) {
+function next_monday($date_p) {
  $date = new DateTime($date_p);
  if ($date->format('D') == 'Mon') {
- return $date->format('Y-m-d');
+  return $date->format('Y-m-d');
  } else {
- $date = new DateTime("next monday $date_p");
- return $date->format('Y-m-d');
+  $date = new DateTime("next monday $date_p");
+  return $date->format('Y-m-d');
  }
- }
+}
 
- function convert_to_url($str) {
+function convert_to_url($str) {
  $string = str_replace(' ', '-', trim($str));
  $string_1 = preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
 
  return preg_replace('/-+/', '-', $string_1); // Replaces multiple hyphens with single one.
- }
+}
 
- function searching_tips() {
+function searching_tips() {
  $stmt = '';
  $stmt .= '<div><ul id="search_message">';
-   $stmt .= '<li>1. Use = for exact such.';
-    $stmt .= '<br>Ex : Supplier name inoerp in supplier field \'ll show all results such as ainoerp, aainoerp, inoerpa, etc';
-    $stmt .= '<br>=inoerp in supplier field \'ll show only inoerp </li>';
-   $stmt .= '<li>2. Use > for searching values greater than entered value. </li>';
-   $stmt .='<li>3. Use < for searching values less than entered value. </li>';
-   $stmt .= '<li>4. Use != for searching all values not equal to entered value. </li>';
-   $stmt .= '<li>5. Use comma(, ) for searching multiple values. </li>';
-   $stmt .= '<li>5. Use one < field & one > field for searching all values in between two values. </li>';
-   $stmt .= '</ul></div>';
+ $stmt .= '<li>1. Use = for exact such.';
+ $stmt .= '<br>Ex : Supplier name inoerp in supplier field \'ll show all results such as ainoerp, aainoerp, inoerpa, etc';
+ $stmt .= '<br>=inoerp in supplier field \'ll show only inoerp </li>';
+ $stmt .= '<li>2. Use > for searching values greater than entered value. </li>';
+ $stmt .='<li>3. Use < for searching values less than entered value. </li>';
+ $stmt .= '<li>4. Use != for searching all values not equal to entered value. </li>';
+ $stmt .= '<li>5. Use comma(, ) for searching multiple values. </li>';
+ $stmt .= '<li>5. Use one < field & one > field for searching all values in between two values. </li>';
+ $stmt .= '</ul></div>';
  return $stmt;
- }
+}
 
- function ino_strip_html($text, $max_length) {
+function ino_shortcut_keys() {
+ $stmt = '';
+ $stmt .= '<div class="hidden" id="shortcut_keys"><table>';
+ $stmt .= '<thead>
+             <tr>
+          <th>Function</th>
+          <th>Key</th>
+          </tr></thead>';
+ $stmt .= '
+          <tbody>
+          <tr><td>Save Record</td><td>Ctrl + S</td></tr>
+          <tr><td>Delete Record</td><td>Ctrl + D</td></tr>
+          <tr><td>Refresh Record</td><td>Ctrl + R</td></tr>
+          <tr><td>New Line</td><td>Down Arrow</td></tr>
+          <tr><td>Copy Field Above</td><td>Ctrl + C</td></tr>
+          <tr><td>Copy Row Above</td><td>Ctrl + A</td></tr>
+         </tbody>
+';
+ $stmt .= '</table></div>';
+ return $stmt;
+}
+
+function ino_strip_html($text, $max_length) {
  $tags = array();
  $result = "";
 
@@ -1730,80 +1773,80 @@ $new_search_criteria_statment = "<li><label> $new_search_criteria  : </label>";
  $stripped_text = strip_tags($text);
 
  while ($i < strlen($text) && $stripped < strlen($stripped_text) && $stripped < $max_length) {
- $symbol = $text{$i};
- $result .= $symbol;
+  $symbol = $text{$i};
+  $result .= $symbol;
 
- switch ($symbol) {
- case '<':
- $is_open = true;
- $grab_open = true;
- break;
+  switch ($symbol) {
+   case '<':
+    $is_open = true;
+    $grab_open = true;
+    break;
 
- case '"':
- if ($in_double_quotes)
- $in_double_quotes = false;
- else
- $in_double_quotes = true;
+   case '"':
+    if ($in_double_quotes)
+     $in_double_quotes = false;
+    else
+     $in_double_quotes = true;
 
- break;
+    break;
 
- case "'":
- if ($in_single_quotes)
- $in_single_quotes = false;
- else
- $in_single_quotes = true;
+   case "'":
+    if ($in_single_quotes)
+     $in_single_quotes = false;
+    else
+     $in_single_quotes = true;
 
- break;
+    break;
 
- case '/':
- if ($is_open && !$in_double_quotes && !$in_single_quotes) {
- $is_close = true;
- $is_open = false;
- $grab_open = false;
- }
+   case '/':
+    if ($is_open && !$in_double_quotes && !$in_single_quotes) {
+     $is_close = true;
+     $is_open = false;
+     $grab_open = false;
+    }
 
- break;
+    break;
 
- case ' ':
- if ($is_open)
- $grab_open = false;
- else
- $stripped++;
+   case ' ':
+    if ($is_open)
+     $grab_open = false;
+    else
+     $stripped++;
 
- break;
+    break;
 
- case '>':
- if ($is_open) {
- $is_open = false;
- $grab_open = false;
- array_push($tags, $tag);
- $tag = "";
- } else if ($is_close) {
- $is_close = false;
- array_pop($tags);
- $tag = "";
- }
+   case '>':
+    if ($is_open) {
+     $is_open = false;
+     $grab_open = false;
+     array_push($tags, $tag);
+     $tag = "";
+    } else if ($is_close) {
+     $is_close = false;
+     array_pop($tags);
+     $tag = "";
+    }
 
- break;
+    break;
 
- default:
- if ($grab_open || $is_close)
- $tag .= $symbol;
+   default:
+    if ($grab_open || $is_close)
+     $tag .= $symbol;
 
- if (!$is_open && !$is_close)
- $stripped++;
- }
+    if (!$is_open && !$is_close)
+     $stripped++;
+  }
 
- $i++;
+  $i++;
  }
 
  while ($tags)
- $result .= "</" . array_pop($tags) . ">";
+  $result .= "</" . array_pop($tags) . ">";
 
  return $result;
- }
+}
 
- function ino_search_dropDownSettings() {
+function ino_search_dropDownSettings() {
  $drop_down_icon = '     <div class="dropdown ino_serch_setting">
   <button class="btn btn-default dropdown-toggle btn-group-xs" type="button"  data-toggle="dropdown" aria-expanded="true">
    <i class="glyphicon glyphicon-cog"></i>
@@ -1816,9 +1859,9 @@ $new_search_criteria_statment = "<li><label> $new_search_criteria  : </label>";
   </ul>
  </div>';
  return $drop_down_icon;
- }
+}
 
- function ino_filter_form() {
+function ino_filter_form() {
  $ino_filter_form = '<div class="filter_area" id="filter_area">
   <div class="well">
    <div class="list_filter row">  
@@ -1854,35 +1897,35 @@ $new_search_criteria_statment = "<li><label> $new_search_criteria  : </label>";
  ';
  // <button class="button btn btn-warning remove-filter" type="submit"  name="removeFilter">Remove</button>  
  return $ino_filter_form;
- }
+}
 
- function ino_recent_visits() {
+function ino_recent_visits() {
  if (isset($_SESSION['recent_visit'])) {
- $recent_visit = '<ul id="recent_visit">';
+  $recent_visit = '<ul id="recent_visit">';
   $rev_a = array_reverse($_SESSION['recent_visit']);
   $count = 0;
   foreach ($rev_a as $k => $v) {
-  $count++;
-  if ($count >= 15) {
-  break;
-  }
-  if (!is_numeric($k)) {
-  $recent_visit .= '<li><a href="' . htmlspecialchars($v) . '">' . str_replace('_', ' ', substr($k, 0, 30)) . '</a>';
+   $count++;
+   if ($count >= 15) {
+    break;
+   }
+   if (!is_numeric($k)) {
+    $recent_visit .= '<li><a href="' . htmlspecialchars($v) . '">' . str_replace('_', ' ', substr($k, 0, 30)) . '</a>';
    } else {
-   $recent_visit .= '<li><a href="' . htmlspecialchars($v) . '"> Vsiti ' . $k . '</a>';
+    $recent_visit .= '<li><a href="' . htmlspecialchars($v) . '"> Vsiti ' . $k . '</a>';
    }
-   }
-   $recent_visit .= '<li class="view_all"><a href="' . HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2"> View More ...</a>';
-   $recent_visit .= '</ul>';
+  }
+  $recent_visit .= '<li class="view_all"><a href="' . HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2"> View More ...</a>';
+  $recent_visit .= '</ul>';
  }
  return $recent_visit;
- }
+}
 
- function ino_show_collapse_content($content, $length = '350', $divid = 'collapse', $readmore = 'Read More..') {
+function ino_show_collapse_content($content, $length = '350', $divid = 'collapse', $readmore = 'Read More..') {
  if (strlen($content) <= $length) {
- return $content;
+  return $content;
  } else {
- $content_small = substr($content, 0, $length);
+  $content_small = substr($content, 0, $length);
  }
  $stmt = '<div class="small-content">' . $content_small . '</div>';
  $content_full = substr($content, $length);
@@ -1896,53 +1939,53 @@ $new_search_criteria_statment = "<li><label> $new_search_criteria  : </label>";
   </div>
  </div>';
  return $stmt;
- }
+}
 
- function ino_noOfItems_inCart() {
+function ino_noOfItems_inCart() {
  if (!empty($_SESSION['ec_product_id'])) {
- return count($_SESSION['ec_product_id']);
+  return count($_SESSION['ec_product_id']);
  } else {
- return 0;
+  return 0;
  }
- }
+}
 
- function ino_showWarning_message($msg) {
+function ino_showWarning_message($msg) {
 
  echo '<div class="alert alert-danger alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-  echo gettext($msg);
-  echo '</div>';
- }
+ echo gettext($msg);
+ echo '</div>';
+}
 
- function update_htaccessFile() {
+function update_htaccessFile() {
  $return = false;
  $file_link = HOME_DIR . DS . 'engine/install/.htaccess';
  if (is_readable($file_link)) {
- $hta_file = fopen($file_link, 'rb');
- $file_content = fread($hta_file, filesize($file_link));
+  $hta_file = fopen($file_link, 'rb');
+  $file_content = fread($hta_file, filesize($file_link));
  } else {
- echo "<h2>.htaccess file is missing in engine/install/ </h2>";
+  echo "<h2>.htaccess file is missing in engine/install/ </h2>";
  }
 
  $write_file_link = HOME_DIR . DS . '.htaccess';
 
  if (is_writable($write_file_link)) {
- $write_file = fopen($write_file_link, 'wb');
- try {
- if (fwrite($write_file, $file_content) === FALSE) {
- echo "<br>Unable to update the .htaccess file. Make sure the file has 777 mode";
+  $write_file = fopen($write_file_link, 'wb');
+  try {
+   if (fwrite($write_file, $file_content) === FALSE) {
+    echo "<br>Unable to update the .htaccess file. Make sure the file has 777 mode";
+   } else {
+    $return = true;
+   }
+  } catch (Exception $e) {
+   echo "<br>Unable to update the .htaccess file. Make sure the file has 777 mode";
+  }
  } else {
- $return = true;
- }
- } catch (Exception $e) {
- echo "<br>Unable to update the .htaccess file. Make sure the file has 777 mode";
- }
- } else {
- echo "<h2>.htaccess file is missing in home directtory </h2>";
+  echo "<h2>.htaccess file is missing in home directtory </h2>";
  }
  fclose($hta_file);
  fclose($write_file);
  return $return;
- }
+}
 
- ?>
+?>

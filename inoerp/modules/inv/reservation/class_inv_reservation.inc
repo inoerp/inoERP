@@ -76,6 +76,7 @@ class inv_reservation extends dbObject {
  public $initial_search = [
   'item_id_m',
   'description',
+  'sd_so_line_id'
  ];
  public $search_functions = [
   'Item From' => 'search_item_number_from',
@@ -151,11 +152,11 @@ class inv_reservation extends dbObject {
  public $reservable_onhand;
 
  public function _before_save() {
-  if(empty($this->reservable_onhand) || $this->reservable_onhand < $this->demand_quantity){
+  if (empty($this->reservable_onhand) || $this->reservable_onhand < $this->demand_quantity) {
    echo "<div class='alert alert-danger'>Error - Reservable Onhand is less than demand onhand </div>";
    return -90;
   }
-  
+
   if (empty($this->inv_reservation_id)) {
    $this->_set_defult_values();
   }
@@ -163,7 +164,7 @@ class inv_reservation extends dbObject {
 
  private function _set_defult_values() {
   if (!empty($this->sd_so_line_id)) {
-   $this->d_reference_key_name = 'sd_so_line_id';
+   $this->d_reference_key_name = 'sd_so_line';
    $this->d_reference_key_value = $this->sd_so_line_id;
   }
 
@@ -171,6 +172,57 @@ class inv_reservation extends dbObject {
    $this->s_reference_key_name = 'onhand';
    $this->s_reference_key_value = $this->onhand_id;
   }
+
+  if (!empty($this->inv_serial_number_id)) {
+   $this->demand_quantity = 1;
+  }
+ }
+
+ public function remove_reservation(array $reservationid_qty_a) {
+  foreach ($reservationid_qty_a as $res_id => $qty) {
+   $res = new inv_reservation();
+   $res->findBy_id($res_id);
+
+   if ($qty >= $res->demand_quantity) {
+    $res->delete();
+   } else {
+    $res->demand_quantity = $res->demand_quantity - $qty;
+    $res->save();
+   }
+  }
+ }
+
+ public static function find_by_demandReference($d_reference_key_n, $d_reference_key_v) {
+  $sql = " SELECT * FROM  ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE d_reference_key_name = '{$d_reference_key_n}' ";
+  $sql .= " AND d_reference_key_value = '{$d_reference_key_v}' ";
+
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
+
+ public static function find_by_serialNumberId($inv_serial_number_id) {
+  $sql = " SELECT * FROM  ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE inv_serial_number_id = '{$inv_serial_number_id}' LIMIT 1";
+
+
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? array_pop($result) : false;
+ }
+
+ public static function find_by_demandReference_onhandReference($d_reference_key_n, $d_reference_key_v, $onhand_id) {
+  $sql = " SELECT * FROM  ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE d_reference_key_name = '{$d_reference_key_n}' ";
+  $sql .= " AND d_reference_key_value = '{$d_reference_key_v}' ";
+  $sql .= " AND s_reference_key_name = 'onhand' ";
+  $sql .= " AND s_reference_key_value = '{$onhand_id}' ";
+//  echo $sql;
+
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
  }
 
  public function multi_select_hidden_fields() {

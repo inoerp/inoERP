@@ -103,11 +103,9 @@ class inv_serial_number extends dbObject {
  public $profile_default = [
   'org_id' => 'org_inv_name_default',
  ];
- 
-  public $search_functions = [
+ public $search_functions = [
   'Organization' => 'search_org_name',
  ];
-  
  public $prg_create_serial_number_parameters = [
   'Organization' => 'search_org_name',
   'Item Number From' => 'search_item_number_from',
@@ -188,6 +186,7 @@ class inv_serial_number extends dbObject {
  public $to_locator_id;
  public $serial_generation;
  public $serial_number_id;
+ public $find_nonres_serial = false;
 
  Public static function serail_status() {
   $option_header = option_header::find_by_name('INV_SEARIAL_STATUS');
@@ -248,25 +247,30 @@ class inv_serial_number extends dbObject {
  }
 
  public function findBasic_SerialInfo() {
-  $sql = " SELECT inv_serial_number_id,    serial_number,    item_id_m,    generation, org_id, current_org_id, "
-   . " current_subinventory_id,current_locator_id, status FROM ";
-  $sql .= self::$table_name;
-  $sql .= " WHERE item_id_m = :item_id_m  ";
-  $sql .= " AND status = :status  ";
+  $sql = " SELECT ins.inv_serial_number_id,    ins.serial_number,    ins.item_id_m,    ins.generation,  ins.org_id, ins.current_org_id, "
+   . " ins.current_subinventory_id, ins.current_locator_id, ins.status  ";
+  $sql .= " FROM  inv_serial_number ins ";
+  $sql .= " WHERE ins.item_id_m = :item_id_m  ";
+  $sql .= " AND ins.status = :status  ";
   $value_a = ['item_id_m' => $this->item_id_m, 'status' => $this->status];
 
   if (!empty($this->current_org_id)) {
-   $sql .= " AND current_org_id = :current_org_id  ";
+   $sql .= " AND ins.current_org_id = :current_org_id  ";
    $value_a['current_org_id'] = $this->current_org_id;
   }
 
   if (!empty($this->current_subinventory_id)) {
-   $sql .= " AND current_subinventory_id = :current_subinventory_id  ";
+   $sql .= " AND ins.current_subinventory_id = :current_subinventory_id  ";
    $value_a['current_subinventory_id'] = $this->current_subinventory_id;
   }
   if (!empty($this->current_locator_id)) {
-   $sql .= " AND current_locator_id = :current_locator_id  ";
+   $sql .= " AND ins.current_locator_id = :current_locator_id  ";
    $value_a['current_locator_id'] = $this->current_locator_id;
+  }
+
+  if (!empty($this->find_nonres_serial)) {
+   $sql .= " AND ins.inv_serial_number_id NOT IN";
+   $sql .= " (SELECT DISTINCT(inv_serial_number_id) FROM inv_reservation ) ";
   }
 //   echo "<br> sql is $sql, $this->item_id_m, $this->current_org_id, $this->status";
   $result = $this->findBySql($sql, $value_a);
@@ -342,6 +346,25 @@ class inv_serial_number extends dbObject {
   $sql .= self::$table_name;
   $sql .= " WHERE status = 'IN_WIP' ";
   $sql .= " AND  current_wip_wo_header_id = '{$wo_header_id}' ";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
+
+ public static function find_by_currentLocation($item_id_m, $current_org_id, $current_subinventory_id, $current_locator_id = '', $non_reserved = '') {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE status = 'IN_STORE' ";
+  $sql .= " AND  item_id_m = '{$item_id_m}' ";
+  $sql .= " AND  current_subinventory_id = '{$current_subinventory_id}' ";
+  $sql .= " AND  current_org_id = '{$current_org_id}' ";
+  if (!empty($current_locator_id)) {
+   $sql .= " AND  current_locator_id = '{$current_locator_id}' ";
+  }
+  if (!empty($non_reserved)) {
+   $sql .= " AND inv_serial_number_id NOT IN";
+   $sql .= " (SELECT DISTINCT(inv_serial_number_id) FROM inv_reservation ) ";
+  }
+
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
  }

@@ -202,7 +202,7 @@ $('#currency').val()
          });
 
 //price from price list
- $('#content').off('change', '.item_id_m, .item_number, .price_list_header_id, .price_date')
+ $('#form_line').off('change', '.item_id_m, .item_number, .price_list_header_id, .price_date')
          .on('change', '.item_id_m, .item_number, .price_list_header_id, .price_date', function () {
           var rowClass = '.' + $(this).closest('tr').prop('class');
           var item_id_m = $(this).closest('.tabContainer').find(rowClass).find('.item_id_m').val();
@@ -323,7 +323,7 @@ $('#currency').val()
  });
 
  $('body').off('click', '#menu_button4_2, #menu_button4_2_1').on('click', '#menu_button4_2, #menu_button4_2_1', function () {
-  $('.line_status').val('ENTERED');
+  $('.line_status, #so_status').val('ENTERED');
   $('.picked_quantity, .shipped_quantity, .schedule_ship_date, .invoiced_quantity, .ar_transaction_header_id, .ar_transaction_line_id, .ar_transaction_number').val('');
  });
 

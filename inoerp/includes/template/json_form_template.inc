@@ -65,6 +65,8 @@
 //  echo "<h1>Time </h1>" . execution_time(true);
   echo '</div>';
  }
+ 
+ 
 
  if (property_exists($$class, 'primary_column')) {
   $primary_column_h = $class::$primary_column;

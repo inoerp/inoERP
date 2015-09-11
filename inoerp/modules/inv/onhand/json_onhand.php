@@ -2,7 +2,7 @@
 <?php
 
 if ((!empty($_GET['item_id_m'])) && (!empty($_GET['find_onhand_details'])) && (!empty($_GET['org_id'])) && (!empty($_GET['subinventory_id']))) {
- $onhand = new onhand();
+ $onhand = new onhand_v();
  $onhand->item_id_m = ($_GET['item_id_m']);
  $onhand->org_id = ($_GET['org_id']);
  $onhand->subinventory_id = ($_GET['subinventory_id']);
@@ -18,6 +18,7 @@ if ((!empty($_GET['item_id_m'])) && (!empty($_GET['find_onhand_details'])) && (!
    $reservable_onhand_sum += $onhand_obj->reservable_onhand;
   }
  }
+// pa($onhand_i);
  $onhand_a['onhand'] = $onhand_sum;
  $onhand_a['reservable_onhand'] = $reservable_onhand_sum;
  if (!empty($onhand_i) && count($onhand_i) == 1) {

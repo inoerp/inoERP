@@ -88,6 +88,7 @@ $(document).ready(function () {
   var idValue = "tr#" + rowIdValue;
   var subinventory_id = $(this).val();
   callGetLocatorForFrom(subinventory_id, idValue);
+  $('.org_id').val($('#org_id').val());
  });
 
  $('body').off('blur', '.to_subinventory_id').on("change", ".to_subinventory_id", function () {
@@ -96,6 +97,23 @@ $(document).ready(function () {
   var subinventory_id = $(this).val();
   callGetLocatorForTo(subinventory_id, idValue);
  });
+ 
+  $('body').off('blur', '.item_number').on("change", ".item_number", function () {
+  $('.org_id').val($('#org_id').val());
+ });
+ 
+ //get onhand
+ $('body').off('change', '.subinventory_id, .locator_id')
+         .on('change', '.subinventory_id, .locator_id', function () {
+          rowClass_d = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
+          getOnhandDetails({
+           item_id_m: $(rowClass_d).find('.item_id_m').val(),
+           org_id: $(rowClass_d).find('.org_id').val(),
+           subinventory_id: $(rowClass_d).find('.subinventory_id').val(),
+           locator_id: $(rowClass_d).find('.locator_id').val(),
+           trClass: rowClass_d
+          });
+         });
 
 
  onClick_addDetailLine(1, '.add_row_detail_img1');
@@ -146,8 +164,8 @@ $(document).ready(function () {
              'status': 'IN_STORE',
              'item_id_m': itemIdM,
              'trclass': trClass,
-             'current_subinventory_id': $('#content').find(trClass_d).find('.from_subinventory_id').val(),
-             'current_locator_id': $('#content').find(trClass_d).find('.from_locator_id').val(),
+             'subinventory_id': $('#content').find(trClass_d).find('.from_subinventory_id').val(),
+             'locator_id': $('#content').find(trClass_d).find('.from_locator_id').val()
             })).then(function (data, textStatus, jqXHR) {
              if ($.trim(data) == 'false' || $.trim(data) == 'undefined') {
               alert('No Serial Number Found!\nCheck the subinventory, locator and item number');

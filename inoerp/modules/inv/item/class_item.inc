@@ -265,6 +265,7 @@ class item extends dbObject {
  ];
  public static $json_label_fields = [
   'item_id_m',
+  'org_id',
   "item_number",
   "item_description",
   'product_line',

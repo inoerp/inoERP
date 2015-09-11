@@ -43,7 +43,7 @@ class onhand extends dbObject {
   'lot_id',
   'serial_id',
   'onhand',
-  'reservable_onhand',
+//  'reservable_onhand',
   'transactable_onhand',
   'lot_status',
   'serial_status',
@@ -120,6 +120,12 @@ class onhand extends dbObject {
  private $_to_subinventory_id;
  private $_to_locator_id;
  private $_transaction_quantity;
+ public $d_reference_key_name;
+ public $d_reference_key_value;
+ public $s_reference_key_name;
+ public $s_reference_key_value;
+ private $_reserved_quantity = 0;
+ public $not_subinventory_id;
 
  public function setProperty($property, $value) {
   if (property_exists($this, $property)) {
@@ -229,7 +235,8 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
 
  private function _update_from_onhand() {
   global $dbc;
-  $from_onhand_sql = " SELECT * FROM onhand";
+  $oh_v = new onhand_v();
+  $from_onhand_sql = " SELECT * FROM onhand_v ";
   $from_onhand_sql .= " WHERE item_id_m = '{$this->item_id_m}' ";
   if (!empty($this->revision_name)) {
    $from_onhand_sql .= " AND revision_name = '{$this->revision_name}' ";
@@ -244,11 +251,13 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
   }
   $from_onhand_sql .= " LIMIT 1 ";
 
-  $from_onhand_result_a = $this->findBy_sql($from_onhand_sql);
+  $from_onhand_result_a = $oh_v->findBy_sql($from_onhand_sql);
   $from_onhand_result = !empty($from_onhand_result_a) ? array_pop($from_onhand_result_a) : false;
+//  pa($from_onhand_result);
   if ($from_onhand_result) {
+   $this->_verify_reservation($from_onhand_result->onhand_id);
    $this->onhand = $from_onhand_result->onhand - $this->_transaction_quantity;
-   $this->reservable_onhand = $from_onhand_result->reservable_onhand - $this->_transaction_quantity;
+   $this->reservable_onhand = $from_onhand_result->reservable_onhand + $this->_reserved_quantity - $this->_transaction_quantity;
    $this->transactable_onhand = $from_onhand_result->transactable_onhand - $this->_transaction_quantity;
    $this->onhand_id = $from_onhand_result->onhand_id;
   } else {
@@ -258,7 +267,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
    $this->onhand_id = null;
   }
 
-  if ($this->onhand < 0) {
+  if ($this->onhand < 0 || $this->reservable_onhand < 0) {
    $item_i = item::find_by_orgId_item_id_m($this->item_id_m, $this->_from_org_id);
    if (empty($item_i->allow_negative_balance_cb)) {
 //    pa($item_i);
@@ -279,7 +288,6 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
   $this->locator_id = $this->_from_locator_id;
 
   try {
-   $this->audit_trial();
    $this->save();
    $this->onhand_id_from = $this->onhand_id;
    echo "<br>Onhand is SuccessfullyUpdated. The onhand Id is " . $this->onhand_id . ' & Onhand Value is ' . $this->onhand;
@@ -290,6 +298,27 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
    return -99;
   }
  }
+
+ private function _verify_reservation($onhand_id) {
+  switch ($this->d_reference_key_name) {
+   case 'sd_so_line':
+    $res = inv_reservation::find_by_demandReference_onhandReference($this->d_reference_key_name, $this->d_reference_key_value, $onhand_id);
+    if ($res) {
+     $this->_reserved_quantity = $res[0]->demand_quantity;
+    }
+    break;
+
+   default:
+    break;
+  }
+ }
+
+// private function _remove_reservation($onhand_id) {
+//  $res = new inv_reservation();
+//  $res_i = inv_reservation::find_by_demandReference_onhandReference($this->d_reference_key_name, $this->d_reference_key_value, $onhand_id);
+//  $res->inv_reservation_id = $res_i->inv_reservation_id;
+//  $res->delete();
+// }
 
  private function _update_to_onhand() {
   global $dbc;
@@ -347,11 +376,13 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
 //verify all the mandatory fields exists
   $mandatory_fields = $this->_validate_mandatory_fields();
   if ($mandatory_fields < 0) {
-   echo "<br>Mandatort fields are missing <br> Line # : " . __LINE__;
+   echo "<br>Mandatory fields are missing <br> Line # : " . __LINE__;
    $dbc->rollback = true;
    return -99;
   }
 
+  //verify reservation
+//  $this->_verify_reservation();
   //from org transaction update
   if (!empty($this->_from_org_id)) {
    try {
@@ -412,6 +443,10 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
   $sql .= " WHERE item_id_m = '{$this->item_id_m}' ";
   if (!empty($this->revision_name)) {
    $sql .= " AND revision_name = '{$this->revision_name}' ";
+  }
+
+  if (!empty($this->not_subinventory_id)) {
+   $sql .= " AND subinventory_id != '{$this->not_subinventory_id}' ";
   }
 
   $result = $this->findBy_sql($sql);

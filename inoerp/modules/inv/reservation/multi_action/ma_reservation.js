@@ -54,6 +54,15 @@ $(document).ready(function () {
   }
  });
 
+//reservation
+$('#form_line').off("blur", '.serial_number').on("blur", '.serial_number', function () {
+  if($(this).val()){
+       rowClass_d = '.' + $(this).closest('tr').attr('class').replace(/\s+/g,'.');
+       $(rowClass_d).find('.demand_quantity').val(1);
+     
+  }
+});
+
 
 //get onhand
  $('body').off('change', '.subinventory_id, .locator_id')

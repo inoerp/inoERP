@@ -32,7 +32,7 @@ inoERP
        <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>        </li>
        <li><?php $f->l_select_field_from_array('po_type', po_header::$po_type_a, $$class->po_type, 'po_type', '', 1, $readonly1, $readonly1); ?>        </li>
        <li><?php $f->l_text_field_d('po_number', 'primary_column2'); ?> </li>
-       <li><?php $f->l_text_field_d('release_number'); ?>
+       <li><?php $f->l_text_field_dd('release_number'); ?>
         <?php echo $f->hidden_field_withId('ref_po_header_id', $$class->ref_po_header_id); ?>
        </li>
        <li><?php $f->l_select_field_from_object('status', po_header::po_status(), 'option_line_code', 'option_line_value', $$class->po_status, 'po_status', 'dont_copy', '', 1); ?></li>
@@ -355,3 +355,4 @@ inoERP
   <li class="noOfTabbs" data-noOfTabbs="4" ></li>
  </ul>
 </div>
+

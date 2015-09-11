@@ -1,8 +1,4 @@
-<?php
-if(empty($search_result) && !empty($_GET['search_class_name'])){
- $search_result = [new inv_reservation()];
-}
-?>
+<?php include_once __DIR__. DS.'inv_reservation_ma.inc';?>
 <ul id="js_files" class="none">
  <li class="hidden">modules/inv/reservation/multi_action/ma_reservation.js</li>
 </ul>
@@ -108,9 +104,9 @@ if(empty($search_result) && !empty($_GET['search_class_name'])){
              <td><?php
               echo $f->val_field_wid('so_number', 'sd_so_all_v', 'so_number', '', 'select so_number');
               echo $f->hidden_field_withCLass('sd_so_header_id', $$class->sd_so_header_id ,'dontCopy');
-              echo $f->hidden_field_withCLass('shipping_org_id', '', 'popup_value org_id');
-              echo $f->hidden_field_withCLass('sd_so_header_id', '', 'popup_value sd_so_header_id_popup dontCopy');
-              echo $f->hidden_field_withCLass('item_id_m', '', 'popup_value item_id_m');
+              echo $f->hidden_field_withCLass('shipping_org_id',  $$class->org_id, 'popup_value org_id');
+              echo $f->hidden_field_withCLass('sd_so_header_id',  $$class->sd_so_header_id, 'popup_value sd_so_header_id_popup dontCopy');
+              echo $f->hidden_field_withCLass('item_id_m', $$class->item_id_m, 'popup_value item_id_m');
               ?><i class="select_so_number generic select_popup clickable fa fa-search" data-class_name="sd_so_all_v"></i></td>
              <td><?php
               echo $f->val_field_wid('so_line_number', 'sd_so_all_v', 'line_number', 'sd_so_line_id', 'select so_line_number line_number');
@@ -174,9 +170,9 @@ if(empty($search_result) && !empty($_GET['search_class_name'])){
              <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class->subinventory_id), 'locator_id', 'locator' , $$class->locator_id, '', 'locator_id locator'); ?>         </td>
              <td><?php
               echo $f->val_field_wid('serial_number', 'inv_serial_number', 'serial_number', 'item_id_m');
-              echo $f->hidden_field('inv_serial_number_id', $$class->inv_serial_number_id);
-              echo $f->hidden_field_withCLass('org_id', '', 'popup_value');
-              echo $f->hidden_field_withCLass('item_id_m', '', 'popup_value item_id_m');
+              echo $f->hidden_field_withCLass('inv_serial_number_id', $$class->inv_serial_number_id, 'dontCopy');
+              echo $f->hidden_field_withCLass('org_id', $$class->org_id, 'popup_value');
+              echo $f->hidden_field_withCLass('item_id_m', $$class->item_id_m, 'popup_value item_id_m');
               echo $f->hidden_field_withCLass('current_subinventory_id', '', 'popup_value current_subinventory_id');
               echo $f->hidden_field_withCLass('current_locator_id', '', 'popup_value current_locator_id');
               ?><i class="select_serial_number_id generic select_popup clickable fa fa-search" data-class_name="inv_serial_number"></i></td> 

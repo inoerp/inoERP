@@ -113,6 +113,8 @@ class inv_transaction extends dbObject {
   'lot_number',
   'lot_quantity',
   'kit_cb',
+  'onhand',
+  'reservable_onhand'
  ];
  public $profile_default = [
   'org_id' => 'org_inv_name_default',
@@ -216,6 +218,13 @@ class inv_transaction extends dbObject {
  public $exchange_rate = null;
  public $currency;
  public $doc_currency;
+ public $d_reference_key_name = null;
+ public $d_reference_key_value = null;
+ public $s_reference_key_name = null;
+ public $s_reference_key_value = null;
+ public $serial_number_ids = [];
+ public $reservable_onhand;
+ public $onhand;
 
  public function setProperty($property, $value) {
   if (property_exists($this, $property)) {
@@ -462,13 +471,24 @@ class inv_transaction extends dbObject {
   for ($i = 0; $i < $this->quantity; $i++) {
    $ist = new inv_serial_transaction();
    if ($this->_serial_type == 'ID') {
-    $existing_serial_details = inv_serial_number::find_by_id($_POST['inv_serial_number_id'][$i]);
+    if (!empty($this->serial_number_ids)) {
+     $sn_ids = $this->serial_number_ids;
+     $existing_serial_details = inv_serial_number::find_by_id($sn_ids[$i]);
+    } else {
+     $existing_serial_details = inv_serial_number::find_by_id($_POST['inv_serial_number_id'][$i]);
+    }
     if (!in_array($existing_serial_details->status, array('DEFINED', 'OUT_STORE', 'INTRANSIT', 'IN_RECEIVING', 'IN_WIP'))) {
      echo "<br>Entered SN is not available for transaction . Issue @ inv_transaction @@ Line " . __LINE__;
      $dbc->rollback = 1;
      return -90;
     }
-    $ist->inv_serial_number_id = $_POST['inv_serial_number_id'][$i];
+
+    if (!empty($this->serial_number_ids)) {
+     $ist->inv_serial_number_id = $this->serial_number_ids[$i];
+    } else {
+     $ist->inv_serial_number_id = $_POST['inv_serial_number_id'][$i];
+    }
+
     try {
      $this->_update_serial_number_receipt($ist->inv_serial_number_id);
     } catch (Exception $e) {
@@ -498,13 +518,35 @@ class inv_transaction extends dbObject {
   global $dbc;
   for ($i = 0; $i < $this->quantity; $i++) {
    $ist = new inv_serial_transaction();
-   $existing_serial_details = inv_serial_number::find_by_id($_POST['inv_serial_number_id'][$i]);
+   if (!empty($this->serial_number_ids)) {
+    $sn_ids = $this->serial_number_ids;
+    $existing_serial_details = inv_serial_number::find_by_id($sn_ids[$i]);
+    if (count($sn_ids) < $this->quantity) {
+     throw new Exception('No of available serial numbers are less than the transaction quantity. <br>Error @ ' . __FILE__ . ' @@ ' . __LINE__);
+    }
+   } else {
+    $existing_serial_details = inv_serial_number::find_by_id($_POST['inv_serial_number_id'][$i]);
+   }
+
    if ($existing_serial_details->status != 'IN_STORE') {
     echo "<br>Entered SN is not available for transaction . Issue @ inv_transaction @@ Line " . __LINE__;
     $dbc->rollback = 1;
     return -90;
    }
-   $ist->inv_serial_number_id = $_POST['inv_serial_number_id'][$i];
+   if (!empty($this->serial_number_ids)) {
+    $ist->inv_serial_number_id = $this->serial_number_ids[$i];
+   } else {
+    $ist->inv_serial_number_id = $_POST['inv_serial_number_id'][$i];
+   }
+
+   //verfiy serial reservation - Serial reservation should be done in the source
+   $sl_reservation = inv_reservation::find_by_serialNumberId($ist->inv_serial_number_id);
+   if ($sl_reservation && ($sl_reservation->d_reference_key_name != $this->d_reference_key_name || $sl_reservation->d_reference_key_value != $this->d_reference_key_value)) {
+    $exp_msg = "<br>Entered SN is not available for transaction . Issue @ inv_transaction @@ Line " . __LINE__;
+    $dbc->rollback = 1;
+    throw new Exception($exp_msg);
+   }
+
    try {
     $this->_update_serial_number_issue($ist->inv_serial_number_id);
    } catch (Exception $e) {
@@ -536,7 +578,11 @@ class inv_transaction extends dbObject {
   }
 
   if ($this->transaction_type_id == 1) {
-   $return_val = $this->_transact_serial_issue();
+   try {
+    $return_val = $this->_transact_serial_issue();
+   } catch (Exception $e) {
+    echo "<br>Failed to complete _transact_serial_issue " . $e->getMessage();
+   }
   }
 
   if ($this->transaction_type_id == 2) {
@@ -544,17 +590,25 @@ class inv_transaction extends dbObject {
   }
 
   if ($this->transaction_type_id == 3) {
-   $return_val1 = $this->_transact_serial_issue();
+   try {
+    $return_val1 = $this->_transact_serial_issue();
+   } catch (Exception $e) {
+    echo "<br>Failed to complete _transact_serial_issue " . $e->getMessage();
+   }
    $return_val2 = $this->_transact_serial_receipt();
    $return_val = $return_val1 && $return_val2;
   }
 
-  if (in_array($this->transaction_type_id, array(6, 18, 19, 13, 21, 24))) {
-   $return_val = $this->_transact_serial_issue();
+  if (in_array($this->transaction_type_id, array(6, 18, 19, 13, 14, 21, 24))) {
+   try {
+    $return_val = $this->_transact_serial_issue();
+   } catch (Exception $e) {
+    echo "<br>Failed to complete _transact_serial_issue " . $e->getMessage();
+   }
   }
 
 
-  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 23, 25))) {
+  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 14, 23, 25))) {
    $return_val = $this->_transact_serial_receipt();
   }
 
@@ -908,8 +962,8 @@ class inv_transaction extends dbObject {
   $gled = new gl_ledger();
   $gled->findBy_id($this->_ledger_id);
   $gp = new gl_period();
-    $current_open_period = $gp->current_open_period($this->_ledger_id);
-    $gjh = new gl_journal_header;
+  $current_open_period = $gp->current_open_period($this->_ledger_id);
+  $gjh = new gl_journal_header;
   $gjh->ledger_id = $this->_ledger_id;
   $gjh->status = 'ENTERED';
   $gjh->currency = $gled->currency_code;
@@ -1062,35 +1116,38 @@ class inv_transaction extends dbObject {
   global $dbc;
 
   $onhand = new onhand();
-  $journal_line_a = [];
-  $element_array = ['mat', 'moh', 'oh', 'res', 'osp'];
-  foreach ($element_array as $key => $value) {
-   $$value = 0;
-  }
 
-  $ich = new cst_item_cost_header();
-  $ich->item_id_m = $this->item_id_m;
-  $ich->bom_cost_type = 'FROZEN';
-  $ich->org_id = $this->org_id;
-  $ich_i = $ich->findBy_ItemId_orgId_CostType();
-  $icl = new cst_item_cost_line();
-  if (!empty($ich_i)) {
-   $icl_i = $icl->findBy_parentId($ich_i->cst_item_cost_header_id);
-  } else {
-   echo "<div class='message'>Frozen cost is not available for the entered item id $ich->item_id_m</div>";
-   $dbc->rollback = true;
-   return;
-  }
-  if (!empty($icl_i)) {
-   foreach ($icl_i as $cost_lines) {
-    $mat += array_search('MAT', ((array) $cost_lines)) ? $cost_lines->amount : 0;
-    $moh += array_search('MOH', ((array) $cost_lines)) ? $cost_lines->amount : 0;
-    $oh += array_search('OH', ((array) $cost_lines)) ? $cost_lines->amount : 0;
-    $res += array_search('RES', ((array) $cost_lines)) ? $cost_lines->amount : 0;
-    $osp += array_search('OSP', ((array) $cost_lines)) ? $cost_lines->amount : 0;
+  if ($this->_asset_create_journal) {
+   $journal_line_a = [];
+   $element_array = ['mat', 'moh', 'oh', 'res', 'osp'];
+   foreach ($element_array as $key => $value) {
+    $$value = 0;
    }
+
+   $ich = new cst_item_cost_header();
+   $ich->item_id_m = $this->item_id_m;
+   $ich->bom_cost_type = 'FROZEN';
+   $ich->org_id = $this->org_id;
+   $ich_i = $ich->findBy_ItemId_orgId_CostType();
+   $icl = new cst_item_cost_line();
+   if (!empty($ich_i)) {
+    $icl_i = $icl->findBy_parentId($ich_i->cst_item_cost_header_id);
+   } else {
+    echo "<div class='message'>Frozen cost is not available for the entered item id $ich->item_id_m</div>";
+    $dbc->rollback = true;
+    return;
+   }
+   if (!empty($icl_i)) {
+    foreach ($icl_i as $cost_lines) {
+     $mat += array_search('MAT', ((array) $cost_lines)) ? $cost_lines->amount : 0;
+     $moh += array_search('MOH', ((array) $cost_lines)) ? $cost_lines->amount : 0;
+     $oh += array_search('OH', ((array) $cost_lines)) ? $cost_lines->amount : 0;
+     $res += array_search('RES', ((array) $cost_lines)) ? $cost_lines->amount : 0;
+     $osp += array_search('OSP', ((array) $cost_lines)) ? $cost_lines->amount : 0;
+    }
+   }
+   $element_value_a = ['mat' => $mat, 'moh' => $moh, 'oh' => $oh, 'res' => $res, 'osp' => $osp];
   }
-  $element_value_a = ['mat' => $mat, 'moh' => $moh, 'oh' => $oh, 'res' => $res, 'osp' => $osp];
 
   switch ($this->transaction_type_id) {
    case 1 :
@@ -1110,6 +1167,10 @@ class inv_transaction extends dbObject {
     $onhand->setProperty('_transaction_quantity', $this->quantity);
     $onhand->item_id_m = $this->item_id_m;
     $onhand->revision_name = $this->revision_name;
+    $onhand->d_reference_key_name = $this->d_reference_key_name;
+    $onhand->d_reference_key_value = $this->d_reference_key_value;
+    $onhand->s_reference_key_name = $this->s_reference_key_name;
+    $onhand->s_reference_key_value = $this->s_reference_key_value;
     $update_result = $onhand->updateOnhand();
     $this->_onhand_id_from = $onhand->onhand_id;
     if (!$this->_asset_create_journal) {
@@ -1199,6 +1260,10 @@ class inv_transaction extends dbObject {
     $onhand->setProperty('_transaction_quantity', $this->quantity);
     $onhand->item_id_m = $this->item_id_m;
     $onhand->revision_name = $this->revision_name;
+    $onhand->d_reference_key_name = $this->d_reference_key_name;
+    $onhand->d_reference_key_value = $this->d_reference_key_value;
+    $onhand->s_reference_key_name = $this->s_reference_key_name;
+    $onhand->s_reference_key_value = $this->s_reference_key_value;
     $update_result = $onhand->updateOnhand();
     $this->_onhand_id_to = $onhand->onhand_id;
     if (!$this->_asset_create_journal) {
@@ -1326,6 +1391,10 @@ class inv_transaction extends dbObject {
     $onhand->item_id_m = $this->item_id_m;
     $onhand->revision_name = $this->revision_name;
     $onhand->org_id = $this->org_id;
+    $onhand->d_reference_key_name = $this->d_reference_key_name;
+    $onhand->d_reference_key_value = $this->d_reference_key_value;
+    $onhand->s_reference_key_name = $this->s_reference_key_name;
+    $onhand->s_reference_key_value = $this->s_reference_key_value;
     $update_result = $onhand->updateOnhand();
     if (!$this->_asset_create_journal) {
      break;
@@ -1604,6 +1673,14 @@ class inv_transaction extends dbObject {
    array_push($journal_line_a, $journal_line);
   }
  }
+
+//  private function _verify_serial_reservation($inv_serial_number_id) {
+//  $sql = "SELECT * FROM ";
+//  $sql .= self::$table_name;
+//  $sql .= " WHERE   reference_key_name = '{$refname}' AND  reference_key_value ='{$refvalue}' LIMIT 1";
+//  $result = self::find_by_sql($sql);
+//  return !empty($result) ? ($result) : false;
+// }
 
  public static function find_by_refName_refValue($refname, $refvalue) {
   $sql = "SELECT * FROM ";

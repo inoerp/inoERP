@@ -2323,3 +2323,7 @@ a.btn-info{
 .inline_action li.add_row_img, .inline_action li.add_row_img1, .inline_action li.remove_row_img{
  vertical-align: top !important;
 }
+
+.btn-sm, .btn-group-sm > .btn {
+    padding: 2px 5px !important;
+}

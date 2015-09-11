@@ -368,19 +368,13 @@ EOD;
   return $element_text_field;
  }
 
- public function text_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $maxlength = "256") {
+ public function text_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $maxlength = "256", $disabled='') {
   $bracketName = $name . '[]';
   $value = htmlentities($value);
-  if ($readonly == 1) {
-   $readonly = 'readonly';
-  } else {
-   $readonly = '';
-  }
-  if ($required == 1) {
-   $required = 'required';
-  } else {
-   $required = '';
-  }
+  $readonly_v = ($readonly == 1) ? ' readonly ' : '';
+  $required_v = ($required == 1) ? ' required ' : '';
+  $disabled_v = ($disabled == 1) ? ' disabled ' : '';
+  
   if (!empty($id)) {
    $idvalue = 'id="' . $id . '"';
   } else {
@@ -388,7 +382,7 @@ EOD;
   }
   $element_text_field = "<input type=\"text\" name=\"$bracketName\" value=\"$value\" 
 	 maxlength=\"$maxlength\" size=\"$size\" class=\"textfield $div_class $name\" "
-   . "placeholder=\"$place_holder\"  $required $idvalue $readonly title=\"$title\"  data-toggle=\"tooltip\">";
+   . "placeholder=\"$place_holder\"  $required_v $idvalue $readonly_v $disabled_v title=\"$title\"  data-toggle=\"tooltip\">";
   return $element_text_field;
  }
 
@@ -647,6 +641,11 @@ EOD;
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
  }
 
+  public function text_field_dd($field_name, $div_class = "") {
+  global  $class, $$class;
+  echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', '' ,'' ,'' ,'',1);
+ }
+ 
  public function val_field_d($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
   global $class, $$class;
   echo $this->val_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
@@ -727,6 +726,12 @@ EOD;
   global $readonly, $class, $$class;
   echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
+ }
+ 
+  public function l_text_field_dd($field_name, $div_class = "") {
+  global $readonly, $class, $$class;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', '','','','',1);
  }
 
  public function l_text_field_ds($field_name, $div_class = "") {
