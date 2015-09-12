@@ -34,7 +34,8 @@ class inv_reservation extends dbObject {
   'weight' => 17
  ];
  public static $demand_type_a = [
-  'SALES_ORDER' => 'Sales Order'
+  'SALES_ORDER' => 'Sales Order',
+  'DELIVERY_LINE' => 'Delivery Line',
  ];
  public static $supply_type_a = [
   'ONHAND' => 'Onhand Quantity'

@@ -70,6 +70,7 @@ class inv_serial_number extends dbObject {
   'fixed_asset_cb',
   'description',
   'ar_customer_site_id',
+  'sd_so_line_id',
   'fa_asset_id',
   'created_by',
   'creation_date',
@@ -151,6 +152,7 @@ class inv_serial_number extends dbObject {
  public $fixed_asset_cb;
  public $description;
  public $ar_customer_site_id;
+ public $sd_so_line_id;
  public $fa_asset_id;
  public $created_by;
  public $creation_date;
@@ -176,7 +178,6 @@ class inv_serial_number extends dbObject {
  public $document_number;
  public $document_id;
  public $inv_transaction_id;
- public $sd_so_line_id;
  public $reason;
  public $from_org_id;
  public $from_subinventory_id;
@@ -362,9 +363,9 @@ class inv_serial_number extends dbObject {
   }
   if (!empty($non_reserved)) {
    $sql .= " AND inv_serial_number_id NOT IN";
-   $sql .= " (SELECT DISTINCT(inv_serial_number_id) FROM inv_reservation ) ";
+   $sql .= " (SELECT DISTINCT(inv_serial_number_id) FROM inv_reservation  WHERE inv_serial_number_id IS NOT NULL ) ";
   }
-
+//   echo $sql;
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
  }

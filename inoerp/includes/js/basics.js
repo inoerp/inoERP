@@ -5112,7 +5112,7 @@ $(document).ready(function () {
    return;
   }
   switch (e.which) {
-   case 97 : //copy all data from top row Ctrl + C
+   case 97 : //copy all data from top row Ctrl + A
     var prevRow = $(this).closest('tr').prev();
     var this_e = $(this);
     $(prevRow).find(':input').each(function (i, v) {
@@ -5125,7 +5125,7 @@ $(document).ready(function () {
     });
     break;
 
-   case 99 : //copy field value from top row Ctrl + A
+   case 98 : //copy field value from top row Ctrl + B
     var parent_td = $(this).closest('td');
     var parent_tr = $(this).closest('tr');
     var ind = $(parent_tr).find('td').index(parent_td);

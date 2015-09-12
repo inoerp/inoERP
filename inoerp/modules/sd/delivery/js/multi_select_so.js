@@ -38,11 +38,13 @@ $(document).ready(function () {
    var kitItem = true;
   }
 
-  if (Onhand < lineQuantity && !kitItem) {
+  if (lineQuantity > Onhand + pickedQuantity && !kitItem) {
    $(this).closest('tr').find('input').each(function () {
     $(this).css('background', 'rgba(255,40,0,0.5)');
    });
-   $(this).closest('tr').find('.line_id_cb').prop('disabled', true);
+   if(Onhand == 0){
+   $(this).closest('tr').find('.line_id_cb').prop('disabled', true); 
+   }
   } else {
    $(this).closest('tr').find('input').each(function () {
     $(this).css('background', 'rgba(204,255,153,0.8)');
@@ -54,6 +56,19 @@ $(document).ready(function () {
   }
 
  });
+
+//quantity validation
+$('body').off('blur','.pick_quantity').on('blur','.pick_quantity', function(){
+  if(+$(this).val() > +$(this).closest('tr').find('.onhand').val()){
+  alert('Picked quantity is more than available quantity');
+  }
+  
+  if(+$(this).val() > +$(this).closest('tr').find('.line_quantity').val()){
+  alert('Picked quantity is more than line quantity');
+  }
+  
+});
+
 
  //context menu
  var classContextMenu = new contextMenuMain();

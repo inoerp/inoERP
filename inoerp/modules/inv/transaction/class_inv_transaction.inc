@@ -225,6 +225,7 @@ class inv_transaction extends dbObject {
  public $serial_number_ids = [];
  public $reservable_onhand;
  public $onhand;
+ public $ar_customer_site_id;
 
  public function setProperty($property, $value) {
   if (property_exists($this, $property)) {
@@ -520,6 +521,7 @@ class inv_transaction extends dbObject {
    $ist = new inv_serial_transaction();
    if (!empty($this->serial_number_ids)) {
     $sn_ids = $this->serial_number_ids;
+//    pa($sn_ids);
     $existing_serial_details = inv_serial_number::find_by_id($sn_ids[$i]);
     if (count($sn_ids) < $this->quantity) {
      throw new Exception('No of available serial numbers are less than the transaction quantity. <br>Error @ ' . __FILE__ . ' @@ ' . __LINE__);
@@ -555,7 +557,6 @@ class inv_transaction extends dbObject {
     return -90;
    }
    $ist->inv_transaction_id = $this->inv_transaction_id;
-   $ist->audit_trial();
    $ist->save();
   }
   return 1;
@@ -599,7 +600,7 @@ class inv_transaction extends dbObject {
    $return_val = $return_val1 && $return_val2;
   }
 
-  if (in_array($this->transaction_type_id, array(6, 18, 19, 13, 14, 21, 24))) {
+  if (in_array($this->transaction_type_id, array(6, 18, 19, 13, 14, 15, 21, 24))) {
    try {
     $return_val = $this->_transact_serial_issue();
    } catch (Exception $e) {
@@ -709,11 +710,14 @@ class inv_transaction extends dbObject {
   } else {
    $snu->current_org_id = '';
   }
+  if ($this->transaction_type_id == 15) {
+   $snu->ar_customer_site_id = $this->ar_customer_site_id;
+   $snu->sd_so_line_id = $this->sd_so_line_id;
+  }
   $snu->current_subinventory_id = '';
   $snu->current_locator_id = '';
   $snu->last_inv_transaction_id = $this->inv_transaction_id;
   try {
-   $snu->audit_trial();
    $snu->save();
   } catch (Excetion $e) {
    $dbc->rollback = 1;

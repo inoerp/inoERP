@@ -161,24 +161,35 @@ class sd_so_line extends dbObject {
 
  private function _validate_before_save() {
   $ret = 1;
-  $item = item::find_by_orgId_item_id_m($this->item_id_m, $this->shipping_org_id);
-  if ($item) {
-   if (empty($item->customer_ordered_cb)) {
-    $ret = -90;
-    echo "<br> The item is not enabled for Sales ";
-   }
-  } else {
+  if ($this->line_status == 'SHIPPED') {
    $ret = -90;
-   echo "<br> The item is not assigned to the organization";
+   echo "<br> You cant modify any shipped sales order line ";
   }
 
-  if (!empty($this->kit_cb) && empty($this->bom_config_header_id)) {
-   $ret = -90;
-   echo "<br><div class='message'><div class='alert alert-danger'>Sales line is not saved as selected <strong>configured item has no configuration.</strong></div> "
-   . "<br>Select configuration & save again.</div>";
-  } else if (empty($this->bom_config_header_id) && !empty($this->kit_cb) && !empty($this->bom_config_header_id)) {
-   $this->bom_config_header_id = 1;
+  if ($ret > 0) {
+   $item = item::find_by_orgId_item_id_m($this->item_id_m, $this->shipping_org_id);
+   if ($item) {
+    if (empty($item->customer_ordered_cb)) {
+     $ret = -90;
+     echo "<br> The item is not enabled for Sales ";
+    }
+   } else {
+    $ret = -90;
+    echo "<br> The item is not assigned to the organization";
+   }
   }
+
+  if ($ret > 0) {
+   if (!empty($this->kit_cb) && empty($this->bom_config_header_id)) {
+    $ret = -90;
+    echo "<br><div class='message'><div class='alert alert-danger'>Sales line is not saved as selected <strong>configured item has no configuration.</strong></div> "
+    . "<br>Select configuration & save again.</div>";
+   } else if (empty($this->bom_config_header_id) && !empty($this->kit_cb) && !empty($this->bom_config_header_id)) {
+    $this->bom_config_header_id = 1;
+   }
+  }
+
+
   return $ret;
  }
 
@@ -223,7 +234,7 @@ class sd_so_line extends dbObject {
    }
 
    return 10;
-  } 
+  }
 
   if ($this->_validate_before_save() < 0) {
    return -90;

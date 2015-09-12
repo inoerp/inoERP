@@ -49,7 +49,9 @@ inoERP
        <li><label><?php echo gettext('Action') ?></label>
         <?php
         if ($$class->status == 'SHIPPED') {
-         $$class->action_a = ['REMOVE_LINE' => 'Remove Line'];
+         $$class->action_a = [];
+         $$class->action_a['REMOVE_LINE'] = 'Remove Line';
+         $$class->action_a['STATUS_AWAITING_SHIPPING'] = 'Reverse Status';
         }
         echo $f->select_field_from_array('action', $$class->action_a, '', 'action')
         ?>
@@ -110,7 +112,7 @@ inoERP
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
-       $count = 0;
+       $count = 0; $f = new inoform();
        foreach ($sd_delivery_line_object as $sd_delivery_line) {
         $f->readonly2 = !empty($sd_delivery_line->sd_delivery_line_id) ? true : false;
         ?>         
@@ -121,16 +123,16 @@ inoERP
           ?>
          </td>
          <td><?php form::text_field_wid2sr('sd_delivery_line_id'); ?>
-          <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_delivery_line select_popup clickable"></td>
-         <td><?php $f->text_field_wid2sr('sd_so_header_id'); ?></td>
-         <td><?php $f->text_field_wid2sr('sd_so_line_id'); ?></td>
-         <td><?php $f->text_field_wid2sr('so_number', 'select_so_number'); ?></td>
-         <td><?php $f->text_field_wid2sr('so_line_number'); ?></td>
-         <td><?php echo $f->number_field('quantity', $sd_delivery_line->quantity, '8', '', '', '', 1); ?></td>
-         <td><?php echo $f->number_field('shipped_quantity', $sd_delivery_line->shipped_quantity, '8', '', '', '', 1); ?></td>
+          <i class="select_delivery_line select_popup clickable fa fa-search"></i></td>
+         <td><?php $f->text_field_wid2sr('sd_so_header_id' , 'always_readonly'); ?></td>
+         <td><?php $f->text_field_wid2sr('sd_so_line_id' , 'always_readonly'); ?></td>
+         <td><?php $f->text_field_wid2sr('so_number', 'always_readonly'); ?></td>
+         <td><?php $f->text_field_wid2sr('so_line_number' , 'always_readonly'); ?></td>
+         <td><?php echo $f->number_field('quantity', $sd_delivery_line->quantity); ?></td>
+         <td><?php echo $f->number_field('shipped_quantity', $sd_delivery_line->shipped_quantity, '8', '', 'always_readonly', '', 1); ?></td>
          <td><?php echo $f->number_field('so_qty_change', '', '', '', 'small', '', 1); ?></td>
-         <td><?php $f->text_field_wid2r('delivery_status'); ?></td>
-         <td><?php $f->text_field_wid2r('action'); ?></td>
+         <td><?php $f->text_field_wid2r('delivery_status' ,'always_readonly'); ?></td>
+         <td><?php $f->text_field_wid2r('action' ,'always_readonly'); ?></td>
         </tr>
         <?php
         $count = $count + 1;
@@ -157,9 +159,9 @@ inoERP
        foreach ($sd_delivery_line_object as $sd_delivery_line) {
         ?>         
         <tr class="sd_delivery_line<?php echo $count ?>">
-         <td><?php $f->text_field_wid2sr('item_id_m'); ?></td>
-         <td><?php $f->text_field_d2s('item_number'); ?></td>
-         <td><?php $f->text_field_d2('item_description'); ?></td>
+         <td><?php $f->text_field_wid2sr('item_id_m' ,'always_readonly'); ?></td>
+         <td><?php $f->text_field_d2s('item_number' ,'always_readonly'); ?></td>
+         <td><?php $f->text_field_d2('item_description' ,'always_readonly'); ?></td>
          <td><?php echo $f->select_field_from_object('line_uom_id', uom::find_all(), 'uom_id', 'uom_name', $sd_delivery_line->line_uom_id, '', '', '', $readonly1); ?></td>
          <td><?php echo $f->select_field_from_object('staging_subinventory_id', subinventory::find_all_of_org_id($$class->shipping_org_id), 'subinventory_id', 'subinventory', $$class_second->staging_subinventory_id, '', 'subinventory_id', '', $readonly1); ?></td>
          <td><?php echo $f->select_field_from_object('staging_locator_id', locator::find_all_of_subinventory($$class_second->staging_subinventory_id), 'locator_id', 'locator', $$class_second->staging_locator_id, '', 'locator_id', '', $readonly1); ?></td>

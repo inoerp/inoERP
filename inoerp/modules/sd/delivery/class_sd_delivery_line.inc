@@ -9,6 +9,10 @@ class sd_delivery_line extends dbObject {
  public static $multi_search_primary_column = "sd_delivery_header_id"; //this value is used in multi search hidden value
  public static $key_column = 'sd_so_line_id';
  public static $module = "inv";
+ public static $delivery_status_a = [
+  'AWAITING_SHIPPING' => 'Awaiting Shipping',
+  'SHIPPED' => 'Shipped'
+ ];
  public $field_a = [
   'sd_delivery_line_id',
   'sd_delivery_header_id',
@@ -109,7 +113,7 @@ class sd_delivery_line extends dbObject {
  public $item_id_m;
  public $quantity;
  public $staging_subinventory_id;
- public $staging_locator_id;
+ public $staging_locator_id = '';
  public $delivery_status;
  public $picking_date;
  public $actual_ship_date;
@@ -140,6 +144,8 @@ class sd_delivery_line extends dbObject {
  public $item_description;
  public $action;
  public $so_qty_change;
+ public $sn_ids_a;
+ public $res_oh_id;
 
  public function _before_save() {
   if (($this->action == 'REVERSE_PICKING')) {
@@ -168,11 +174,98 @@ class sd_delivery_line extends dbObject {
   }
  }
 
+ private function _validate_delete() {
+  if (!empty($this->quantity)) {
+   echo "<div class='alert alert-danger '>You can n't delete this delivery line. You can remove the line or do a reverse picking </div>";
+   return -99;
+  } else {
+   return 1;
+  }
+ }
+
+ public function _before_delete() {
+  return $this->_validate_delete();
+ }
+
+ public function _after_save() {
+  
+ }
+
+ public function create_reservation() {
+  $this->_create_reservation();
+ }
+
+ private function _create_reservation() {
+  if (!empty($this->sn_ids_a)) {
+   $this->_create_reservation_serialItems();
+  } else {
+   $this->_create_reservation_forItems();
+  }
+ }
+
+ private function _create_reservation_serialItems() {
+  global $dbc;
+  foreach ($this->sn_ids_a as $k => $sn_id) {
+   if($k >= $this->quantity){
+    break;
+   }
+   $irs = new inv_reservation();
+   $irs->item_id_m = $this->item_id_m;
+   $irs->org_id = $this->shipping_org_id;
+   $irs->demand_type = 'DELIVERY_LINE';
+   $irs->supply_type = 'ONHAND';
+   $irs->d_reference_key_name = 'sd_delivery_line';
+   $irs->d_reference_key_value = $this->sd_delivery_line_id;
+   $irs->s_reference_key_name = 'onhand';
+   $onhand_i = onhand::find_by_itemIdm_location_sv($this->item_id_m, $this->shipping_org_id, $this->staging_subinventory_id, $this->staging_locator_id);
+   if ($onhand_i) {
+    $irs->onhand_id = $irs->s_reference_key_value = $onhand_i->onhand_id;
+   } else {
+    $dbc->rollback = true;
+    throw new Exception('No onhand found @ staging. Error @' . __FILE__ . ' @@ ' . __LINE__);
+   }
+
+   $irs->need_by_date = $this->picking_date;
+   $irs->uom_id = $this->line_uom_id;
+   $irs->demand_quantity = 1;
+   $irs->subinventory_id = $this->staging_subinventory_id;
+   $irs->locator_id = $this->staging_locator_id;
+   $irs->inv_serial_number_id = $sn_id;
+   $irs->save();
+  }
+ }
+
+ private function _create_reservation_forItems() {
+  global $dbc;
+  $irs = new inv_reservation();
+  $irs->item_id_m = $this->item_id_m;
+  $irs->org_id = $this->shipping_org_id;
+  $irs->demand_type = 'DELIVERY_LINE';
+  $irs->supply_type = 'ONHAND';
+  $irs->d_reference_key_name = 'sd_delivery_line';
+  $irs->d_reference_key_value = $this->sd_delivery_line_id;
+  $irs->s_reference_key_name = 'onhand';
+  $onhand_i = onhand::find_by_itemIdm_location_sv($this->item_id_m, $this->shipping_org_id, $this->staging_subinventory_id, $this->staging_locator_id);
+  if ($onhand_i) {
+   $irs->onhand_id = $irs->s_reference_key_value = $onhand_i->onhand_id;
+  } else {
+   $dbc->rollback = true;
+   throw new Exception('No onhand found @ staging. Error @' . __FILE__ . ' @@ ' . __LINE__);
+  }
+  $irs->need_by_date = $this->picking_date;
+  $irs->uom_id = $this->line_uom_id;
+  $irs->demand_quantity = $this->quantity;
+  $irs->subinventory_id = $this->staging_subinventory_id;
+  $irs->locator_id = $this->staging_locator_id;
+  $irs->save();
+ }
+
  private function _reverse_picking() {
   /*
    * 1. Update SO Line status & picked quantity to Make it available for next picking
    * 2. Delete the delivery line
-   * 3. No material / finance transaction - Onhand 'll remain in staging location and 
+   * 3. Delete all reservation lines
+   * 4. No material / finance transaction - Onhand 'll remain in staging location and 
    * needs to be manually moved back to stock through sub inventory transfer/move order
    */
   $sol = new sd_so_line();
@@ -181,9 +274,19 @@ class sd_delivery_line extends dbObject {
   $sol->picked_quantity -= $this->quantity;
   try {
    $sol->save();
-   echo "<br>Sales Order Line Status is SuccessfullyUpdated";
+   echo "<br>Sales Order Line Status is Successfully Updated";
+   $res_i = inv_reservation::find_by_demandReference('sd_delivery_line', $this->sd_delivery_line);
+   if ($res_i) {
+    foreach ($res_i as $k => $res) {
+     $ir = new inv_reservation();
+     $ir->inv_reservation_id = $res->inv_reservation_id;
+     $ir->delete();
+    }
+    echo "<br>Reservation Line is Successfully Deleted";
+   }
+
    $this->delete();
-   echo "<br>Delivery Line is SuccessfullyDeleted";
+   echo "<br>Delivery Line is Successfully Deleted";
   } catch (Exception $e) {
    echo "<br>Upate Failed. Error @sd_delivery_line @@ " . __LINE__ . $e->getMessage();
   }
@@ -215,12 +318,12 @@ class sd_delivery_line extends dbObject {
   $sol->findBy_id($this->sd_so_line_id);
   $ar_ti->inv_unit_price = $sol->unit_price;
   $ar_ti->inv_line_price = $ar_ti->inv_line_quantity * $ar_ti->inv_unit_price;
-  if(!empty($soh->exchange_rate)){
+  if (!empty($soh->exchange_rate)) {
    $ar_ti->gl_inv_line_price = $ar_ti->inv_line_price * $soh->exchange_rate;
-  }else{
+  } else {
    $ar_ti->gl_inv_line_price = $ar_ti->inv_line_price;
   }
-  
+
   $ar_ti->tax_code_id = $sol->tax_code_id;
   $ar_ti->item_description = $sol->item_description;
   $mm_tax = new mdm_tax_code();
@@ -253,7 +356,8 @@ class sd_delivery_line extends dbObject {
    * 2. Inventory Trandsaction
    * 3. Update the delivery line to SHIPPED
    * needs to be manually moved back to stock through sub inventory transfer/move order
-   * 4. Insert the data in ar_transaction_interface
+   * 4. Remove rservation from staging
+   * 5. Insert the data in ar_transaction_interface
    */
   global $dbc;
   $sol = new sd_so_line();
@@ -282,7 +386,7 @@ class sd_delivery_line extends dbObject {
    try {
     $this->_create_inv_transaction($this->item_id_m, $this->shipped_quantity);
    } catch (Exception $e) {
-    echo "<br>Failed to complete the inventory transaction. Error @ sd_delivery_leader @@ line " . __LINE__;
+    echo '<br>Failed to complete the inventory transaction. Error @ ' . __FILE__ . '  @@ line ' . __LINE__ . '<br>' . $e->getMessage();
     $dbc->rollback = true;
     return;
    }
@@ -339,6 +443,8 @@ class sd_delivery_line extends dbObject {
   }
  }
 
+ public $delivery_line_sn_ids_a = [];
+
  private function _create_inv_transaction($item_id_m, $qty) {
   global $dbc;
   $invt = new inv_transaction();
@@ -354,6 +460,25 @@ class sd_delivery_line extends dbObject {
   $invt->reference_key_value = $this->sd_delivery_header_id;
   $invt->reason = 'SO Shipping';
   $invt->sd_so_line_id = $this->sd_so_line_id;
+  $invt->d_reference_key_name = 'sd_delivery_line';
+  $invt->d_reference_key_value = $this->sd_delivery_line_id;
+
+  //reservation details
+  $line_reservation_details = inv_reservation::find_by_demandReference('sd_delivery_line', $this->sd_delivery_line_id);
+  if (empty($line_reservation_details)) {
+   throw new Exception('No reservation found for the delivery line ' . $this->sd_delivery_line_id . ' Error @ ' . __LINE__ . ' @@ ' . __FILE__);
+  }
+
+  foreach ($line_reservation_details as $s_obj) {
+   if (property_exists($s_obj, 'inv_serial_number_id')) {
+    array_push($this->delivery_line_sn_ids_a, $s_obj->inv_serial_number_id);
+   }
+  }
+
+//  pa($this->delivery_line_sn_ids_a);
+//  pa($line_reservation_details);
+  $invt->serial_number_ids = $this->delivery_line_sn_ids_a;
+
   try {
    $invt->_before_save();
    $invt->save();
@@ -362,6 +487,30 @@ class sd_delivery_line extends dbObject {
    echo "<br>Failed to complete the inventory transaction. Error @ sd_delivery_line @@ line " . __LINE__;
    $dbc->rollback = true;
    return;
+  }
+//  pa($invt->serial_number_ids);
+  //remove reservation
+  try {
+   $reservationid_qty_a = [];
+   if (!empty($invt->serial_number_ids[0])) {
+    foreach ($line_reservation_details as $k => $v) {
+     if ($k >= $invt->quantity) {
+      break;
+     }
+     $reservationid_qty_a[$v->inv_reservation_id] = 1;
+    }
+   } else {
+    foreach ($line_reservation_details as $k => $v) {
+     $reservationid_qty_a[$v->inv_reservation_id] = $invt->quantity;
+    }
+   }
+   $res = new inv_reservation();
+//   pa($reservationid_qty_a);
+   $res->remove_reservation($reservationid_qty_a);
+   echo "<br> Reservation is removed ";
+  } catch (Exception $e) {
+   $dbc->rollback = true;
+   echo "<br>Failed to remove the reservation. Error @ " . __FILE__ . ' @@ ' . __LINE__ . $e->getMessage();
   }
  }
 

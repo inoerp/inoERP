@@ -126,6 +126,7 @@ class onhand extends dbObject {
  public $s_reference_key_value;
  private $_reserved_quantity = 0;
  public $not_subinventory_id;
+ private $_trnx_type = null;
 
  public function setProperty($property, $value) {
   if (property_exists($this, $property)) {
@@ -195,6 +196,36 @@ VAR;
   return !empty($result) ? $result : false;
  }
 
+ public static function find_by_itemIdm_location_sv($item_id_m, $org_id, $subinventory_id, $locator_id = '') {
+  $sql = "SELECT * FROM " . self::$table_name;
+  $sql .= " WHERE item_id_m = '{$item_id_m}' ";
+  $sql .= " AND org_id = '{$org_id}' ";
+  $sql .= " AND subinventory_id = '{$subinventory_id}' ";
+
+
+  if (!empty($locator_id)) {
+   $sql .= " AND locator_id = '{$locator_id}' ";
+  }
+
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? array_pop($result) : false;
+ }
+ 
+  public static function find_by_itemIdm_location($item_id_m, $org_id, $subinventory_id, $locator_id = '') {
+  $sql = "SELECT * FROM " . self::$table_name;
+  $sql .= " WHERE item_id_m = '{$item_id_m}' ";
+  $sql .= " AND org_id = '{$org_id}' ";
+  $sql .= " AND subinventory_id = '{$subinventory_id}' ";
+
+
+  if (!empty($locator_id)) {
+   $sql .= " AND locator_id = '{$locator_id}' ";
+  }
+
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
+
  private function create_onhand_v() {
   $sql = "CREATE OR REPLACE VIEW onhand_v
 (onhand_id, item_number, item_description, org_name, subinventory, locator,
@@ -253,6 +284,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
 
   $from_onhand_result_a = $oh_v->findBy_sql($from_onhand_sql);
   $from_onhand_result = !empty($from_onhand_result_a) ? array_pop($from_onhand_result_a) : false;
+//  pa($this);
 //  pa($from_onhand_result);
   if ($from_onhand_result) {
    $this->_verify_reservation($from_onhand_result->onhand_id);
@@ -266,7 +298,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
    $this->transactable_onhand = -($this->_transaction_quantity);
    $this->onhand_id = null;
   }
-
+//pa($this);
   if ($this->onhand < 0 || $this->reservable_onhand < 0) {
    $item_i = item::find_by_orgId_item_id_m($this->item_id_m, $this->_from_org_id);
    if (empty($item_i->allow_negative_balance_cb)) {
@@ -302,9 +334,12 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
  private function _verify_reservation($onhand_id) {
   switch ($this->d_reference_key_name) {
    case 'sd_so_line':
+   case 'sd_delivery_line':
     $res = inv_reservation::find_by_demandReference_onhandReference($this->d_reference_key_name, $this->d_reference_key_value, $onhand_id);
     if ($res) {
-     $this->_reserved_quantity = $res[0]->demand_quantity;
+     foreach($res as $k => $res_i){
+      $this->_reserved_quantity += $res_i->demand_quantity;
+     }
     }
     break;
 

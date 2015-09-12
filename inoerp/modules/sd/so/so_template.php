@@ -233,7 +233,7 @@ inoERP
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
-       <?php
+       <?php $f = new inoform();
        $count = 0;
        foreach ($sd_so_line_object as $sd_so_line) {
         ?>         
@@ -242,7 +242,7 @@ inoERP
          <td><?php echo $f->date_field('requested_date', ($$class_second->requested_date), '', '', 'dateFromToday copyValue'); ?></td>
          <td><?php echo $f->date_fieldFromToday('promise_date', $$class_second->promise_date) ?></td>
          <td><?php echo $f->date_field('schedule_ship_date', ($$class_second->schedule_ship_date), '', '', 'dateFromToday copyValue'); ?></td>
-         <td><?php echo $f->date_fieldFromToday_r('actual_ship_date', $$class_second->actual_ship_date, 1) ?></td>
+         <td><?php echo $f->date_fieldFromToday('actual_ship_date', $$class_second->actual_ship_date, 'always_readonly') ?></td>
         </tr>
         <?php
         $count = $count + 1;

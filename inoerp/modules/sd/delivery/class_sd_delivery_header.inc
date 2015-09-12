@@ -148,6 +148,9 @@ class sd_delivery_header extends dbObject {
   } else if (($this->action == 'COMPLETE_SHIPMENT')) {
    $this->status = 'SHIPPED';
    return;
+  } else if (($this->action == 'STATUS_AWAITING_SHIPPING')) {
+   $this->status = 'AWAITING_SHIPPING';
+   return;
   } else if (!empty($this->sd_delivery_header_id)) {
    echo "<br>No header update";
    return 10;
@@ -168,6 +171,16 @@ class sd_delivery_header extends dbObject {
  }
 
  private function _create_delivery() {
+  /*
+   * 1. If empty delivery header then create delivery header
+   * 2. Create delivery line
+   * 3. Update sales order line
+   * 4. Create iventory transaction 
+   *    4.1. Updates Onhands
+   *    4.2. verify reservation against so line and remove if exists
+   * 5. Create reservation against the the deliver line
+   * 
+   */
   global $dbc;
   if (empty($_POST)) {
    return;
@@ -216,6 +229,7 @@ class sd_delivery_header extends dbObject {
     $del_line->item_id_m = $_POST['item_id_m'][$i];
     $del_line->quantity = $picked_qty;
     $del_line->save();
+    
 
 
     //update the inv transaction & onhand
@@ -239,7 +253,7 @@ class sd_delivery_header extends dbObject {
      try {
       $this->_create_inv_transaction($del_line->quantity, $i, $del_line->item_id_m);
      } catch (Exception $e) {
-      echo "<br>Failed to complete the inventory transaction. Error @ sd_Delivery_header @@ line " . __LINE__;
+      echo "<br>Failed to complete the inventory transaction. Error @ sd_Delivery_header @@ line " . __LINE__ . $e->getMessage() . ' code '. $e->getCode();
       $dbc->rollback = true;
       return;
      }
@@ -254,11 +268,24 @@ class sd_delivery_header extends dbObject {
 
     $sol->save();
     echo "<br> Delivery Line is succefully created. Line Id - " . $del_line->sd_delivery_line_id;
+    
+    //create reservation
+    $del_line->sn_ids_a = $this->delivery_line_sn_ids_a;
+    $del_line->res_oh_id = $this->delivery_line_res_oh_id;
+    $del_line->create_reservation();
    }
   }
  }
 
+ public $delivery_line_sn_ids_a = [];
+ public $delivery_line_res_oh_id;
+
  private function _create_inv_transaction($del_quantity, $i, $item_id_m) {
+  /*
+   * 1. Check overall onhand and return if does not have enough onhand
+   * 2. Verify reservation for serial, lot and item.
+   * 
+   */
   global $dbc;
   $onhand = new onhand();
   $onhand->item_id_m = $item_id_m;
@@ -286,6 +313,7 @@ class sd_delivery_header extends dbObject {
     $transaction_quantity = $oh_data->onhand;
     $del_quantity = $del_quantity - $oh_data->onhand;
    }
+   $this->delivery_line_res_oh_id = $oh_data->onhand_id;
    $invt = new inv_transaction();
    $invt->transaction_type_id = 14;
    $invt->to_subinventory_id = $_POST['staging_subinventory_id'][$i];
@@ -306,16 +334,19 @@ class sd_delivery_header extends dbObject {
    if (!empty($_POST['serial_generation'][$i])) {
     //check for reservation for serial controlled items
     $serial_number_ids_obj = inv_reservation::find_by_demandReference_onhandReference('sd_so_line', $invt->sd_so_line_id, $oh_data->onhand_id);
-    if (empty($serial_number_ids_obj)) {
+    if (empty($serial_number_ids_obj) || empty($serial_number_ids_obj[0])) {
      $serial_number_ids_obj = inv_serial_number::find_by_currentLocation($invt->item_id_m, $invt->org_id, $invt->from_subinventory_id, $invt->from_locator_id, 1);
     } else {
      $reservation_exists = true;
     }
-    $serial_number_ids_a = [];
-    foreach ($serial_number_ids_obj as $s_obj) {
-     array_push($serial_number_ids_a, $s_obj->inv_serial_number_id);
+//    $serial_number_ids_a = [];
+    if(empty($serial_number_ids_obj)){
+     throw new Exception('No Serial Number Found for Serial conrolled Item error @ '.__FILE__. ' @@ ' .__LINE__, '1');
     }
-    $invt->serial_number_ids = $serial_number_ids_a;
+    foreach ($serial_number_ids_obj as $s_obj) {
+     array_push($this->delivery_line_sn_ids_a, $s_obj->inv_serial_number_id);
+    }
+    $invt->serial_number_ids = $this->delivery_line_sn_ids_a;
    } else {
     //check reservation for non serial items
     $line_reservation_details = inv_reservation::find_by_demandReference_onhandReference('sd_so_line', $invt->sd_so_line_id, $oh_data->onhand_id);
