@@ -17,10 +17,10 @@
 class hd_subscription_header extends dbObject {
 
  public static $table_name = "hd_subscription_header";
- public static $dependent_classes = ['hd_subscription_line'];
+ public static $dependent_classes = ['hd_subscription_line' ,'hd_subscription_detail'];
  public static $primary_column = "hd_subscription_header_id";
- public static $primary_column2 = "so_number";
- public static $key_column = 'ar_customer_id';
+ public static $primary_column2 = "number";
+ public static $key_column = 'subscription_type';
  public static $module = "hd";
  public static $subscription_type_a = [
   'NEW' => 'New',
@@ -39,7 +39,7 @@ class hd_subscription_header extends dbObject {
   'weight' => 1
  ];
  public $field_a = [
-  'hd_subscription_header_ids',
+  'hd_subscription_header_id',
   'org_id',
   'subscription_type',
   'document_type',
@@ -48,8 +48,6 @@ class hd_subscription_header extends dbObject {
   'ar_customer_site_id',
   'hr_employee_id',
   'description',
-  'ship_to_id',
-  'bill_to_id',
   'first_name',
   'last_name',
   'full_name',
@@ -115,7 +113,6 @@ class hd_subscription_header extends dbObject {
   'bill_to_postal_code',
   'sales_person'
  ];
-
  public $search = [
   '_show_update_path' => 1,
   '_show_view_path' => 1,
@@ -127,7 +124,6 @@ class hd_subscription_header extends dbObject {
  public $option_lists = [
   'subscription_type' => 'HD_SUBSCR_DOC_TYPE',
  ];
- 
  public $hd_subscription_header_id;
  public $org_id;
  public $document_type;
@@ -202,8 +198,8 @@ class hd_subscription_header extends dbObject {
    $this->_do_action();
   }
 
-  if (empty($this->so_status)) {
-   $this->so_status = 'ENTERED';
+  if (empty($this->status)) {
+   $this->status = 'ENTERED';
   }
 
   if (empty($this->hd_subscription_header_id) && !empty($this->bu_org_id)) {
@@ -212,24 +208,19 @@ class hd_subscription_header extends dbObject {
  }
 
  public function _after_save() {
-  if ((!empty($this->hd_subscription_header_id)) && empty($this->so_number)) {
-   $hd_subscription_header_id = $this->hd_subscription_header_id;
-   $bu_org_id = $this->bu_org_id;
-   $so_number = $bu_org_id . '-' . $hd_subscription_header_id;
-   $this->so_number = $so_number;
-   echo '<br/> New SO number is ' . $so_number;
-   $this->update_soNumber();
+  if ((!empty($this->hd_subscription_header_id)) && empty($this->number)) {
+   $this->_update_number();
   }
  }
 
- private function update_soNumber() {
-  $sql = " UPDATE " . self::$table_name;
-  $sql .= " SET so_number = '{$this->so_number}'  ";
-  $sql .= " WHERE hd_subscription_header_id = '{$this->hd_subscription_header_id}'  ";
+ private function _update_number() {
+  global $prl;
+  $this->number = $prl->find_default_profile('hd_subscription_number_prefix')->level_value .  $this->hd_subscription_header_id;
   try {
-   $this->runSQL($sql);
+   $this->save();
+   echo '<br/> New Subscription number is ' . $this->number;
   } catch (Exception $e) {
-   echo "<br>SO Number update failed!" . $e->getMessage();
+   echo '<br/> Failed to update the Subscription. Error @ ' . __FILE__ . ' @@ ' . __LINE__;
   }
  }
 

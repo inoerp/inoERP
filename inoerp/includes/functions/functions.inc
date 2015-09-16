@@ -388,6 +388,10 @@ function access_denied($msg = '') {
  return $stmt;
 }
 
+function access_denied_redirection($url = 'access_denied.php') {
+ redirect_to(HOME_URL . $url);
+}
+
 function ino_access_denied_organizationAcess($msg = '') {
  $stmt = ' <div class="alert alert-danger">
         <div class="jumbotron">

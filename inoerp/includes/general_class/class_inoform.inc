@@ -1460,7 +1460,7 @@ EOD;
    $idvalue = "";
   }
   $element_date_field = "<input type=\"text\" name=\"$bracketName\" value=\"$value\" 	size=\"$size\" "
-   . "class=\"date $div_class $readonly $name\"  $required $readonly $idvalue>";
+   . "class=\"date $div_class $readonly $name copy copyValue\"  $required $readonly $idvalue>";
   return $element_date_field;
  }
 

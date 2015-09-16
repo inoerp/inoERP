@@ -1518,7 +1518,9 @@ function getPriceDetails(options) {
    price_list_header_id: settings.price_list_header_id,
    find_price: 1,
    price_date: settings.price_date,
-   item_id_m: settings.item_id_m
+   item_id_m: settings.item_id_m,
+   uom_id: settings.uom_id,
+   quantity: settings.quantity
   },
   success: function (result) {
    if (result) {
@@ -3866,7 +3868,6 @@ $(document).ready(function () {
 
  });
 
-
  $('body').on('focus', ".dateFromToday", function () {
   if ($(this).hasClass('readonly')) {
    $(this).prop('disabled', true);
@@ -4383,7 +4384,8 @@ $(document).ready(function () {
  getBlocks();
 
 //#path_by_module a, #pagination .page_nos a, .pagination_page .page_nos a
- $('body').on('click', '#top-path-menu-ul a, #path_by_module a, .search_result a,#erp_form_area a.ajax-link , .pagination_page .page_nos a, #header_top .menu a, #sys_menu_left_vertical .menu a,#search_result .action a,  #new_page_button', function (e) {
+//#pagination .page_nos a added for price list
+ $('body').on('click', '#top-path-menu-ul a, #path_by_module a, .search_result a,#erp_form_area a.ajax-link , #pagination .page_nos a, .pagination_page .page_nos a, #header_top .menu a, #sys_menu_left_vertical .menu a,#search_result .action a,  #new_page_button', function (e) {
   e.preventDefault();
   var urlLink = $(this).attr('href');
   var urlLink_a = urlLink.split('?');
@@ -5111,8 +5113,10 @@ $(document).ready(function () {
   if (!e.ctrlKey) {
    return;
   }
+
   switch (e.which) {
    case 97 : //copy all data from top row Ctrl + A
+    e.preventDefault();
     var prevRow = $(this).closest('tr').prev();
     var this_e = $(this);
     $(prevRow).find(':input').each(function (i, v) {
@@ -5126,6 +5130,7 @@ $(document).ready(function () {
     break;
 
    case 98 : //copy field value from top row Ctrl + B
+    e.preventDefault();
     var parent_td = $(this).closest('td');
     var parent_tr = $(this).closest('tr');
     var ind = $(parent_tr).find('td').index(parent_td);
@@ -5133,14 +5138,16 @@ $(document).ready(function () {
     break;
 
    case 120 : //remove line in form line Ctrl + X
+    e.preventDefault();
     var trClass = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
     $(trClass).find('.remove_row_img').first().trigger('click');
     break;
   }
+  $(this).unbind('keypress');
  });
 
  //short cut keys 
- $('body').on('keydown', '#form_line :input', function (e) {
+ $('body').on('keydown', '#form_line input', function (e) {
   switch (e.which) {
    case 40 ://add a new row with down arrow
     $('#form_line').find('.add_row_img').first().trigger('click');

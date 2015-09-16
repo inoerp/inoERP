@@ -1,6 +1,7 @@
 <?php
 
 $form_page = true;
+$dont_check_login = true;
 if (!empty($_GET['router'])) {
  $router = $_GET['router'];
  $router_file = __DIR__ . "/includes/router/$router.php";
@@ -11,29 +12,13 @@ if (!empty($_GET['router'])) {
  }
 } else if (!empty($_GET['class_name'])) {
  $class_names = $_GET['class_name'];
-} else if (!empty($_GET['module_code'])) {
- $class_names = 'ino_generic';
- $type = !empty($_GET['type']) ? $_GET['type'] : null;
- include_once('includes/basics/basics.inc');
- $path = new path();
- if (!empty($_GET['path_id'])) {
-  $ino_generic_html = $path->findBy_moduleCode($_GET['module_code'], $type, array($_GET['path_id']));
- } else {
-  $ino_generic_html = $path->findBy_moduleCode($_GET['module_code'], $type, null);
- }
- include_once('includes/functions/loader.inc');
- if (!empty($_GET['window_type']) && $_GET['window_type'] == 'popup') {
-  include_once(THEME_DIR . '/popup_main_template.inc');
- } else {
-  include_once(THEME_DIR . '/main_template.inc');
- }
- return;
+} else if (!empty($_GET['cname'])) {
+ $class_names = $_GET['cname'];
 } else {
  die('No class found!. Error @ form.php @@ line 15');
 }
 ?>
 <?php
-$dont_check_login = true;
 include_once('includes/functions/loader.inc');
 
 //exit script in case of delete statement
@@ -61,17 +46,12 @@ if (empty($_POST)) {
       include_once(THEME_DIR . '/popup_main_template.inc');
       break;
 
-     case 'pub':
-      
+     default :
       include_once(THEME_DIR . '/public_template.inc');
       break;
-
-     default :
-      include_once(THEME_DIR . '/main_template.inc');
-      break;
     }
-   }else{
-    include_once(THEME_DIR . '/main_template.inc');
+   } else {
+    include_once(THEME_DIR . '/public_template.inc');
    }
   } else {
    $continue = false;

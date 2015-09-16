@@ -18,7 +18,7 @@ class mdm_price_list_header extends dbObject {
 
  public static $table_name = "mdm_price_list_header";
  public static $primary_column = "mdm_price_list_header_id";
- public static $dependent_classes = ['mdm_price_list_line'];
+ public static $dependent_classes = ['mdm_price_list_line' ,'mdm_price_list_detail'];
  public static $key_column = "price_list";
  public static $module = "mdm";
  public static $system_info = [
@@ -73,7 +73,7 @@ class mdm_price_list_header extends dbObject {
   'price_list',
   'module_name',
   'currency_code',
-  'status',
+//  'status',
  ];
  public $search = [
   '_show_update_path' => 1,

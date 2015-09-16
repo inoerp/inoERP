@@ -1,0 +1,16 @@
+#mdm_price_list_line_line .class_detail_form{
+margin-left: -788px;
+}
+
+#mdm_price_list_line_line .form_detail_data_fs{
+  width: 788px;
+}
+
+#mdm_price_list_line_line .class_detail_form{
+margin-top: 24px;
+}
+
+ 
+#mdm_price_list_line_line .class_detail_form .inline_action li.remove_row_img{
+ vertical-align: unset !important;
+}

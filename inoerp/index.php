@@ -43,7 +43,7 @@ if (empty($_GET['doc_type']) && empty($_GET['dtype'])) {
  $doc_type = $_GET['dtype'];
 }
 
-include_once("includes/functions/loader.inc");
+
 
 switch ($doc_type) {
  case 'content' :
@@ -68,6 +68,10 @@ switch ($doc_type) {
   include_once 'form.php';
   break;
 
+  case 'pform' :
+  include_once __DIR__.'/public/public_form.php';
+  break;
+ 
  default :
   include_once 'content.php';
   break;
