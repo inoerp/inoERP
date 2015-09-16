@@ -47,6 +47,7 @@ if (empty($_GET['doc_type']) && empty($_GET['dtype'])) {
 
 switch ($doc_type) {
  case 'content' :
+  include_once('includes/functions/loader.inc');
   if ($class == 'index') {
    if (!empty($si) && ($si->default_home_page == 'content')) {
     include_once THEME_DIR . '/home_page_template.php';
