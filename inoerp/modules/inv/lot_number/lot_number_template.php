@@ -14,9 +14,8 @@
     <div id="tabsHeader-1" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column header_field"> 
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_lot_number_id select_popup clickable">
-         <?php echo gettext('Lot Id') ?></label><?php $f->text_field_dsr('inv_lot_number_id') ?>
-        <a name="show" href="form.php?class_name=inv_lot_number&<?php echo "mode=$mode"; ?>" class="show document_id inv_lot_number_id"><i class="fa fa-refresh"></i></a> 
+       <li><?php $f->l_text_field_dr_withSearch('inv_lot_number_id'); ?>
+        <a name="show" href="form.php?class_name=inv_lot_number&<?php echo "mode=$mode"; ?>" class="show document_id inv_lot_number_id"><i class='fa fa-refresh'></i></a> 
        </li>
        <li><?php echo $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>       </li>
        <li><label> <?php

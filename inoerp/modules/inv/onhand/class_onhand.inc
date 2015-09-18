@@ -127,6 +127,7 @@ class onhand extends dbObject {
  private $_reserved_quantity = 0;
  public $not_subinventory_id;
  private $_trnx_type = null;
+ public $update_status = null;
 
  public function setProperty($property, $value) {
   if (property_exists($this, $property)) {
@@ -408,6 +409,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
 
  public function updateOnhand() {
   global $dbc;
+  
 //verify all the mandatory fields exists
   $mandatory_fields = $this->_validate_mandatory_fields();
   if ($mandatory_fields < 0) {
@@ -463,7 +465,8 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
     }
    }
   }
-  return 1;
+  $this->update_status = 1;
+  return $this;
  }
 
  public function findOnhand_byItemId($item_id_m = '', $revision_name = '') {

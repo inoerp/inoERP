@@ -104,6 +104,14 @@
          echo $f->hidden_field_withCLass('current_subinventory_id', '', 'popup_value current_subinventory_id');
          echo $f->hidden_field_withCLass('current_locator_id', '', 'popup_value current_locator_id');
          ?><i class="select_serial_number_id generic select_popup clickable fa fa-search" data-class_name="inv_serial_number"></i></li> 
+        <li><?php
+         $f->l_val_field_d('lot_number', 'inv_lot_onhand_v', 'lot_number', 'item_id_m');
+         echo $f->hidden_field_withId('inv_lot_number_id', $$class->inv_lot_number_id);
+         echo $f->hidden_field_withCLass('org_id', '', 'popup_value');
+         echo $f->hidden_field_withCLass('item_id_m', '', 'popup_value item_id_m');
+         echo $f->hidden_field_withCLass('subinventory_id', '', 'popup_value current_subinventory_id');
+         echo $f->hidden_field_withCLass('locator_id', '', 'popup_value current_locator_id');
+         ?><i class="select_lot_number_id generic select_popup clickable fa fa-search" data-class_name="inv_lot_onhand_v"></i></li> 
         <li><?php $f->l_text_field_dr('onhand'); ?></li>
         <li><?php $f->l_text_field_dr('reservable_onhand'); ?></li>
         <li><?php $f->l_text_field_dr('onhand_id'); ?></li>

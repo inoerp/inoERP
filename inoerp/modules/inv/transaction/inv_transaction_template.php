@@ -50,9 +50,7 @@
           'transaction_type_id' => $$class->transaction_type_id));
          ?>
         </td>
-        <td>
-         <?php echo $f->text_field_dsr('inv_transaction_id', 'lineId'); ?>
-        </td>
+        <td><?php echo $f->text_field_widsr('inv_transaction_id', 'lineId line_id'); ?></td>
         <td><?php $f->text_field_widsr('item_id_m'); ?></td>
         <td><?php
          $f->val_field_widm('item_number', 'item', 'item_number', '', 'vf_select_item_number');

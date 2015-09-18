@@ -1747,8 +1747,6 @@ function getOnhandDetails(options) {
        break;
      }
     });
-   } else {
-
    }
   },
   complete: function () {
@@ -1758,7 +1756,7 @@ function getOnhandDetails(options) {
    $('.show_loading_small').show();
   },
   error: function (request, errorType, errorMessage) {
-   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+   $(".error").prepend('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   }
  });
 }
@@ -2070,7 +2068,7 @@ function getCoaStructure(options) {
 
 function getlotNumber(options) {
  var defaults = {
-  json_url: 'modules/inv/lot/json_lot_number.php',
+  json_url: 'modules/inv/lot_number/json_lot_number.php',
   org_id: $('#org_id').val(),
   trclass: false
  };
@@ -2114,7 +2112,8 @@ function getlotNumber(options) {
    $('.show_loading_small').show();
   },
   error: function (request, errorType, errorMessage) {
-   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+   $(".error").prepend('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+   $("#accordion").accordion({active: 0});
   }
  });
 }
@@ -5039,7 +5038,7 @@ $(document).ready(function () {
    var no_of_item = +$('#no-of-cart-items').html();
    no_of_item++;
    +$('#no-of-cart-items').html(' ' + no_of_item + ' ');
-carTupdateAnimation();
+   carTupdateAnimation();
   });
  });
 
@@ -5057,7 +5056,7 @@ carTupdateAnimation();
    var no_of_item = +$('#no-of-cart-items').html();
    no_of_item--;
    +$('#no-of-cart-items').html(' ' + no_of_item + ' ');
-carTupdateAnimation();
+   carTupdateAnimation();
   });
  });
 

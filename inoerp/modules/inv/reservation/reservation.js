@@ -1,9 +1,9 @@
 function beforeSave() {
- if ($('#reservable_onhand').val() > $('demand_quantity').val()) {
+ if ($('#reservable_onhand').val() > $('#demand_quantity').val()) {
   return 1;
  } else {
   alert('Noe enough onhand available for reservation');
-  returrn -90;
+  return -90;
  }
 }
 

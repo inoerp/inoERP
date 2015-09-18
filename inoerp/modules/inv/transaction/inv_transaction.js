@@ -21,7 +21,8 @@ function setSubinventory(transaction_type_id) {
 
   case "3":
    $(".to_subinventory_id, .to_locator_id, .from_subinventory_id, .from_locator_id").removeAttr("disabled");
-   $(".to_subinventory_id, .from_subinventory_id").prop("required", true).css('backgroundColor', mandatory_field_color);;
+   $(".to_subinventory_id, .from_subinventory_id").prop("required", true).css('backgroundColor', mandatory_field_color);
+   ;
    $(".account_id").removeAttr("required disabled").css('backgroundColor', '#fff');
    break;
 
@@ -97,15 +98,18 @@ $(document).ready(function () {
   var subinventory_id = $(this).val();
   callGetLocatorForTo(subinventory_id, idValue);
  });
- 
-  $('body').off('blur', '.item_number').on("change", ".item_number", function () {
+
+ $('body').off('blur', '.item_number').on("change", ".item_number", function () {
   $('.org_id').val($('#org_id').val());
  });
- 
+
  //get onhand
  $('body').off('change', '.subinventory_id, .locator_id')
          .on('change', '.subinventory_id, .locator_id', function () {
           rowClass_d = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
+          if (!$(rowClass_d).find('.subinventory_id').val()) {
+           return false;
+          }
           getOnhandDetails({
            item_id_m: $(rowClass_d).find('.item_id_m').val(),
            org_id: $(rowClass_d).find('.org_id').val(),
@@ -215,7 +219,8 @@ $(document).ready(function () {
               'trclass': trClass
              })).then(function (data, textStatus, jqXHR) {
               if ($.trim(data) == 'false' || $.trim(data) == 'undefined') {
-               alert('No lot Number Found!\nCheck the subinventory, locator and item number');
+               $(".error").prepend('No Lot Number Found!\nCheck the subinventory, locator and item number');
+               $("#accordion").accordion({active: 0});
               }
              });
             }
@@ -237,7 +242,8 @@ $(document).ready(function () {
              'locator_id': $('#content').find(trClass_d).find('.from_locator_id').val(),
             })).then(function (data, textStatus, jqXHR) {
              if ($.trim(data) == 'false' || $.trim(data) == 'undefined') {
-              alert('No lot Number Found!\nCheck the subinventory, locator and item number');
+               $(".error").prepend('No Lot Number Found!\nCheck the subinventory, locator and item number');
+               $("#accordion").accordion({active: 0});
              }
             });
             break;

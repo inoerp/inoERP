@@ -36,6 +36,7 @@ class inv_reservation extends dbObject {
  public static $demand_type_a = [
   'SALES_ORDER' => 'Sales Order',
   'DELIVERY_LINE' => 'Delivery Line',
+  'MISC' => 'Miscellaneous',
  ];
  public static $supply_type_a = [
   'ONHAND' => 'Onhand Quantity'
@@ -103,6 +104,7 @@ class inv_reservation extends dbObject {
   'so_number',
   'so_line_number',
   'serial_number',
+  'lot_number',
   'onhand',
   'reservable_onhand'
  ];
@@ -149,6 +151,7 @@ class inv_reservation extends dbObject {
  public $so_number;
  public $so_line_number;
  public $serial_number;
+ public $lot_number;
  public $onhand;
  public $reservable_onhand;
 
@@ -167,6 +170,9 @@ class inv_reservation extends dbObject {
   if (!empty($this->sd_so_line_id)) {
    $this->d_reference_key_name = 'sd_so_line';
    $this->d_reference_key_value = $this->sd_so_line_id;
+  } else if ($this->demand_type == 'MISC') {
+   $this->d_reference_key_name = 'MISC';
+   $this->d_reference_key_value = '-1';
   }
 
   if (!empty($this->onhand_id)) {
@@ -211,6 +217,16 @@ class inv_reservation extends dbObject {
 
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
+ }
+
+ public static function find_by_lotNumberId($inv_lot_number_id) {
+  $sql = " SELECT * FROM  ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE inv_lot_number_id = '{$inv_lot_number_id}' ";
+
+
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
  }
 
  public static function find_by_demandReference_onhandReference($d_reference_key_n, $d_reference_key_v, $onhand_id) {

@@ -343,7 +343,6 @@ class inv_transaction extends dbObject {
      $loh->$key = $val;
     }
     $loh->lot_quantity -= $this->quantity;
-    $loh->audit_trial();
     try {
      $loh->save();
     } catch (Exception $e) {
@@ -351,6 +350,7 @@ class inv_transaction extends dbObject {
      echo "<br> Failed to update lot onhand. Issue @ inv_transaction @@ Line " . __LINE__;
     }
    } else {
+    echo "<br> in " . __LINE__;
     $dbc->rollback = 1;
     echo "<br> Cant complete the transaction as no lot details found. Issue @ inv_transaction @@ Line " . __LINE__;
    }
@@ -424,7 +424,6 @@ class inv_transaction extends dbObject {
 
  private function _transact_lot_issue() {
   global $dbc;
-
   for ($i = 0; $i < count($_POST['lot_quantity']); $i++) {
    $ist = new inv_lot_transaction();
    $existing_lot_details = inv_lot_number::find_by_id($_POST['inv_lot_number_id'][$i]);
@@ -438,14 +437,13 @@ class inv_transaction extends dbObject {
    $ist->lot_quantity = $_POST['lot_quantity'][$i];
    try {
     $this->_update_lot_onhand($ist->inv_lot_number_id, 'from');
+    $ist->inv_transaction_id = $this->inv_transaction_id;
+    $ist->save();
    } catch (Exception $e) {
     echo "<br> Failed to update lot number. Issue @ inv_transaction @@ Line " . __LINE__;
     $dbc->rollback = 1;
     return -90;
    }
-   $ist->inv_transaction_id = $this->inv_transaction_id;
-   $ist->audit_trial();
-   $ist->save();
   }
   return 1;
  }
@@ -541,7 +539,7 @@ class inv_transaction extends dbObject {
     $ist->inv_serial_number_id = $_POST['inv_serial_number_id'][$i];
    }
 
-   //verfiy serial reservation - Serial reservation should be done in the source
+   //verfiy serial reservation - Serial reservation should also be done in the source
    $sl_reservation = inv_reservation::find_by_serialNumberId($ist->inv_serial_number_id);
    if ($sl_reservation && ($sl_reservation->d_reference_key_name != $this->d_reference_key_name || $sl_reservation->d_reference_key_value != $this->d_reference_key_value)) {
     $exp_msg = "<br>Entered SN is not available for transaction . Issue @ inv_transaction @@ Line " . __LINE__;
@@ -727,6 +725,10 @@ class inv_transaction extends dbObject {
 
  private function _validate_before_save() {
   $ret = 1;
+  if (!empty($this->inv_transaction_id)) {
+   $ret = -90;
+   throw new Exception('You cant update any inventory transaction. Try a reverse transaction. <br>Transaction id ' . $this->inv_transaction_id);
+  }
   $item = item::find_by_orgId_item_id_m($this->item_id_m, $this->org_id);
   if ($item) {
    if (empty($item->inventory_item_cb) || empty($item->transactable_cb)) {
@@ -762,7 +764,13 @@ class inv_transaction extends dbObject {
 
  public function _before_save() {
 
-  $validate_before_save_r = $this->_validate_before_save();
+  try {
+   $validate_before_save_r = $this->_validate_before_save();
+  } catch (Exception $e) {
+   echo "<br>Failed _before_save. Error @ " . __FILE__ . ' @@ ' . __LINE__ . '<br>' . $e->getMessage();
+   return -90;
+  }
+
   if ($validate_before_save_r < 0) {
    return $validate_before_save_r;
   }
@@ -1176,7 +1184,7 @@ class inv_transaction extends dbObject {
     $onhand->s_reference_key_name = $this->s_reference_key_name;
     $onhand->s_reference_key_value = $this->s_reference_key_value;
     $update_result = $onhand->updateOnhand();
-    $this->_onhand_id_from = $onhand->onhand_id;
+    $this->_onhand_id_from = $update_result->onhand_id;
     if (!$this->_asset_create_journal) {
      break;
     }
@@ -1269,7 +1277,7 @@ class inv_transaction extends dbObject {
     $onhand->s_reference_key_name = $this->s_reference_key_name;
     $onhand->s_reference_key_value = $this->s_reference_key_value;
     $update_result = $onhand->updateOnhand();
-    $this->_onhand_id_to = $onhand->onhand_id;
+    $this->_onhand_id_to = $update_result->onhand_id;
     if (!$this->_asset_create_journal) {
      break;
     }
@@ -1400,11 +1408,11 @@ class inv_transaction extends dbObject {
     $onhand->s_reference_key_name = $this->s_reference_key_name;
     $onhand->s_reference_key_value = $this->s_reference_key_value;
     $update_result = $onhand->updateOnhand();
+    $this->_onhand_id_from = $update_result->onhand_id_from;
+    $this->_onhand_id_to = $update_result->onhand_id_to;
     if (!$this->_asset_create_journal) {
      break;
     }
-    $this->_onhand_id_from = $onhand->onhand_id_from;
-    $this->_onhand_id_to = $onhand->onhand_id_to;
     $journal_line_from_a = $this->_cretae_journal_line_array($element_value_a, $this->from_subinventory_id, 'cr', 1);
     $line_number = 1;
     foreach ($journal_line_from_a as $journal_line) {
@@ -1421,7 +1429,7 @@ class inv_transaction extends dbObject {
     break;
   }
 
-  if ($update_result > 0) {
+  if ($update_result->update_status > 0) {
    $this->status = 'Success';
   }
 

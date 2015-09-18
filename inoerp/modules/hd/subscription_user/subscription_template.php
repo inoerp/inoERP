@@ -29,7 +29,7 @@ inoERP
        <li><?php $f->l_text_field_d('full_name'); ?></li>
        <li><?php $f->l_text_field_dm('passport_number'); ?></li>
        <li><?php $f->l_select_field_from_object('gender', hr_employee::gender(), 'option_line_code', 'option_line_value', $$class->gender, '', 'gender', '', $readonly); ?>              </li>
-        <!--<li><?php // $f->l_radio_field_from_object('gender', hr_employee::gender(), 'option_line_code', 'option_line_value', $$class->gender, 'gender', '', $readonly);       ?>              </li>-->
+        <!--<li><?php // $f->l_radio_field_from_object('gender', hr_employee::gender(), 'option_line_code', 'option_line_value', $$class->gender, 'gender', '', $readonly);        ?>              </li>-->
        <li><?php $f->l_select_field_from_object('marital_status', hr_employee::marital_status(), 'option_line_code', 'option_line_value', $$class->marital_status, '', 'marital_status', '', $readonly); ?>              </li>
        <li><?php $f->l_text_field_d('nationality'); ?></li>
        <li><?php $f->l_text_field_d('occupation'); ?></li>
@@ -121,14 +121,16 @@ inoERP
          $category = category::find_by_reference_table_and_id('ec_product', $ec_user_cart->ec_product_id);
          ?>         
          <tr class="ec_cart<?php echo $count ?>">
-          <td><?php echo $count; ?>
-           <?php echo form::hidden_field('ec_cart_id', $ec_user_cart->ec_cart_id); ?>
-           <?php echo form::hidden_field('user_id', $user_id_h); ?>
-           <?php echo form::hidden_field('ec_product_id', $ec_user_cart->ec_product_id); ?>
-           <?php echo $f->hidden_field('currency', $curr) ?>
-           <?php echo $f->hidden_field('tax_code', $tax_code) ?>
-           <?php echo $f->hidden_field('sales_price', $ec_user_cart->sales_price) ?>
-           <?php echo $f->hidden_field('product_name', $product_name) ?>
+          <td><?php
+           echo $count;
+           echo form::hidden_field('ec_cart_id', $ec_user_cart->ec_cart_id);
+           echo form::hidden_field('user_id', $user_id_h);
+           echo form::hidden_field('ec_product_id', $ec_user_cart->ec_product_id);
+           echo $f->hidden_field('currency', $curr);
+           echo $f->hidden_field('tax_code', $tax_code);
+           echo $f->hidden_field('sales_price', $ec_user_cart->sales_price);
+           echo $f->hidden_field('product_name', $product_name)
+           ?>
           </td>
           <td><?php echo $product_name; ?></td>
           <td class="long-td"><?php echo ('<a href="' . HOME_URL . 'product.php?ec_product_id=' . $ec_user_cart->ec_product_id . '" title="' . $product_description . '">' . substr($product_description, 0, 100) . '</a>'); ?></td>
