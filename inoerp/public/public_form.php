@@ -26,7 +26,7 @@ if ((!empty($_GET['delete'])) && ($_GET['delete'] == 1)) {
  return;
 }
 
-if (empty($_POST)) {
+
  try {
 
 //     if(in_array($class, inoform::$docs_notAllowd_inDirectWebForm) && ($verify_web_form_allowed)){
@@ -74,5 +74,5 @@ if (empty($_POST)) {
  } catch (Exception $e) {
   echo $e->getMessage();
  }
-}
+
 ?>

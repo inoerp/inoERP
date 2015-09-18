@@ -1629,6 +1629,56 @@ EOD;
   return $element_select_field;
  }
 
+  public function radio_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "",  $divClass = "", $required = "", $readonly = "", $nonArrayName = "", $disabled = "") {
+  if ($nonArrayName == 1) {
+   $bracketName = $name;
+  } else {
+   $bracketName = $name . '[]';
+  }
+  
+  if ($readonly == 1) {
+   $readonly = 'disabled';
+  } else {
+   $readonly = '';
+  }
+
+  if ($required == 1) {
+   $required = 'required';
+  } else {
+   $required = '';
+  }
+
+  if ($disabled == 1) {
+   $disabled = 'disbaled';
+  } else {
+   $disabled = '';
+  }
+ 
+  $element_radio_field = '<div id="radio-group">';
+  if ((is_array($object)) && (count($object) > 0 )) {
+   foreach ($object as $k => $record) {
+     $ele_val = $record->$objectValueKey;
+     $ele_label = $record->$objectDescriptionKey;
+    if ((!empty($value)) && ($record->$objectValueKey == $value)) {
+     $selected = ' checked ';
+    } else {
+     $selected = '';
+    }
+    $idvalue = "radio_{$name}_".$k+1;
+    $element_radio_field .= "<input type='radio'  value=\"$ele_val\" name=\"$bracketName\" class=\"radio $divClass $name\"  ";
+    $element_radio_field .= " id=\"$idvalue\" $readonly $required $disabled $selected >";
+    $element_radio_field .= " <label for  id=\"$idvalue\"> $ele_label </label>";
+   }
+  }
+  $element_radio_field .= '</div>';
+  return $element_radio_field;
+ }
+ 
+  public function l_radio_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "",  $divClass = "", $required = "", $readonly = "", $nonArrayName = "", $disabled = "") {
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo $this->radio_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value, $divClass, $required, $readonly, $nonArrayName, $disabled);
+ }
+ 
  public function select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $id = "", $divClass = "", $required = "", $readonly = "", $convertToText = "", $nonArrayName = "", $disabled = "", $dataname = '') {
   if ($nonArrayName == 1) {
    $bracketName = $name;

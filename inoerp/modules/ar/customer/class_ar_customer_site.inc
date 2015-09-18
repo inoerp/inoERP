@@ -83,6 +83,7 @@ class ar_customer_site extends dbObject {
  public $internal_org_id;
  public $fob;
  public $freight_terms;
+ public $primary_cb;
  public $transportation;
  public $country_of_origin;
  public $bill_to_id;

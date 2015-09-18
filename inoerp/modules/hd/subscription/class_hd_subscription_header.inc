@@ -67,7 +67,8 @@ class hd_subscription_header extends dbObject {
   'mobile_phone2',
   'fax_no',
   'email',
-  'address_id',
+  'ship_to_address_id',
+  'bill_to_address_id',
   'reference_type',
   'reference_key_name',
   'reference_key_value',
@@ -132,8 +133,8 @@ class hd_subscription_header extends dbObject {
  public $ar_customer_site_id;
  public $hr_employee_id;
  public $description;
- public $ship_to_id;
- public $bill_to_id;
+ public $ship_to_address_id;
+ public $bill_to_address_id;
  public $first_name;
  public $last_name;
  public $full_name;

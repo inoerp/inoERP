@@ -3,11 +3,17 @@
 
 if ((!empty($_POST['save_dataInSession'])) && (!empty($_POST['data_name']))) {
  $data_name = $_POST['data_name'];
+ $session_data_name_a = $_SESSION[$data_name];
  $data_val = !empty($_POST['data_value']) ? $_POST['data_value'] : false;
-
- if (!empty($_GET['over_write']) && ($_GET['over_write'] = true)) {
+ $remove_data = !empty($_POST['remove_data']) ? true : false;
+ if (!empty($_POST['over_write']) && ($_POST['over_write'] == 1)) {
   if (!empty($_POST['data_value'])) {
-   $_SESSION[$data_name] = $data_val;
+   if ($remove_data && is_array($session_data_name_a)) {
+    $ar_k = array_pop(array_keys($session_data_name_a, $data_val));
+    unset($_SESSION[$data_name][$ar_k]);
+   } else {
+    $_SESSION[$data_name] = array($data_val);
+   }
   } else {
    $_SESSION[$data_name] = false;
   }

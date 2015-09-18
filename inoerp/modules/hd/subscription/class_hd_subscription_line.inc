@@ -113,35 +113,14 @@ class hd_subscription_line extends dbObject {
  }
 
  public function _before_save() {
-  global $dbc;
+  pa($this);
   if ($this->_validate_before_save() < 0) {
    return -90;
   }
  }
 
  public function _after_save() {
-  if ((!empty($this->line_type)) && empty($this->sys_spd_header_id) && (!empty($this->hd_subscription_line_id))) {
-   $line_type_details = sd_document_type::find_by_id($this->line_type);
-   if ($line_type_details && $line_type_details->process_flow_id) {
-    $sys_spd = new sys_spd_header();
-    $sys_spd->process_flow_header_id = $line_type_details->process_flow_id;
-    $sys_spd->primary_document = 'hd_subscription_line';
-    $sys_spd->primary_document_id = $this->hd_subscription_line_id;
-    $sys_spd->org_id = $this->shipping_org_id;
-    $sys_spd->status = 'Start';
-    $sys_spd->originator = $_SESSION['username'];
-    $sys_spd->owner_user_id = $_SESSION['user_id'];
-    try {
-     $sys_spd->save();
-     $this->sys_spd_header_id = $sys_spd->sys_spd_header_id;
-     $this->save();
-    } catch (Exception $e) {
-     echo "<br>Not able to save sys process document.Error @ line " . __LINE__ . ' of file ' . __FILE__ . '<br>' . $e->getMessage();
-    }
-   } else {
-    $this->sys_spd_header_id = -1;
-   }
-  }
+
  }
 
  public static function pf_invoice_only($obj) {

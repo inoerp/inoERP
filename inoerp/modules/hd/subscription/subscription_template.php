@@ -6,7 +6,7 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php echo gettext('Membership Application') ?></span>
+<div id ="form_header" class="erp-form"><span class="heading"><?php echo gettext('Membership Application') ?></span>
  <form  method="post" id="hd_subscription_header"  name="hd_subscription_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -205,7 +205,7 @@ inoERP
                     ?>
                    </td>
                    <td><?php $f->text_field_wid3sr('hd_subscription_detail_id'); ?></td>
-                   <td><?php $f->text_field_wid3rm('line_type','copyValue always_readonly'); ?></td>
+                   <td><?php $f->text_field_wid3r('line_type','copyValue always_readonly'); ?></td>
                    <td><?php $f->text_field_wid3('member_name'); ?></td>
                    <td><?php echo $f->date_fieldAnyDay('member_dob', $$class_third->member_dob); ?></td>
                    <td><?php $f->text_field_wid3('vehcile_no'); ?></td>

@@ -143,6 +143,7 @@
   </style>
  </head>
  <body>
+  <div id="product-page" class="public-page">
   <div id="topbar" class="product-topbar clearfix">
    <div class="container">
     <?php
@@ -360,6 +361,7 @@
 
    });
   </script>
+  </div>
  </body>
 </html>
 <?php

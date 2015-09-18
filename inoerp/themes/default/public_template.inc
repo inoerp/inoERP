@@ -143,6 +143,7 @@
   </style>
  </head>
  <body>
+  <div class="public-page">
   <div id="topbar" class="product-topbar clearfix">
    <div class="container">
     <div class="col-md-8">
@@ -355,7 +356,8 @@
 
    });
   </script>
- </body>
+ </div>
+  </body>
 </html>
 <?php
 // 5. Close connection

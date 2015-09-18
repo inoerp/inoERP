@@ -68,6 +68,13 @@ class user extends dbObject {
   "last_name",
   "email",
   "phone",
+   'hr_employee_id',
+  'ar_customer_id',
+  'supplier_id',
+  'block_notif_count',
+  'image_file_id',
+  'default_theme',
+  'default_theme',
  ];
  public $requiredField = [
   "username",

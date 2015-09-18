@@ -1925,7 +1925,7 @@ function ino_recent_visits() {
  return $recent_visit;
 }
 
-function ino_show_collapse_content($content, $length = '350', $divid = 'collapse', $readmore = 'Read More..') {
+function ino_show_collapse_content($content, $length = '250', $divid = 'collapse', $readmore = 'Read More..') {
  if (strlen($content) <= $length) {
   return $content;
  } else {

@@ -1,5 +1,5 @@
 <?php
-
+//pa($_SESSION['ec_product_id']);
 if (!empty($_GET['ec_product_id'])) {
  $data_val = $_GET['ec_product_id'];
  if (!empty($_SESSION['ec_product_id'])) {
@@ -11,7 +11,7 @@ if (!empty($_GET['ec_product_id'])) {
  }
 }
 
-if (!empty($_SESSION['ec_product_id'])) {
+if (!empty($_SESSION['ec_product_id']) && is_array($_SESSION['ec_product_id'])) {
  $cart_object = [];
  foreach ($_SESSION['ec_product_id'] as $key => $ec_prd_id) {
   $ec_prd_details = ec_product::find_by_id($ec_prd_id);
@@ -22,10 +22,14 @@ if (!empty($_SESSION['ec_product_id'])) {
     $ec_user_cart->$file_k = $field_v;
    }
   }
+  }else{
+   unset($_SESSION['ec_product_id'][$key]);
   }
 
   array_push($cart_object, $ec_user_cart);
  }
+}else{
+// unset($_SESSION['ec_product_id']);
 }
 
 
@@ -49,4 +53,7 @@ $total_count = count($cart_object);
 $pagination = new pagination($pageno, $per_page, $total_count);
 $pagination->setProperty('_path', 'form');
 $position = ($pageno - 1) * $per_page;
+
+$post_link_val = $prl->find_default_profile('hd_subscription_number_prefix')->level_value ;
+$post_link = !empty($post_link_val) ? $post_link_val : '?dtype=product&class_name=ec_confirm_order';
 ?>

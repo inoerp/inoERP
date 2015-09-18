@@ -4478,7 +4478,7 @@ table.document_table input{
 
 #erp_form_area input[type=text],#erp_form_area input[type=password], #erp_form_area input[type=date], #erp_form_area input[type=textarea],
 #erp_form_area input[type=number], #erp_form_area input[type=search], #erp_form_area checkbox, #erp_form_area radio button,
-#form-modal input
+#form-modal input, .erp-form input
 {
  height: 24px;
  /*padding: 3px 2px;*/
@@ -4493,7 +4493,7 @@ table.document_table input{
  border-radius: 3px;
 }
 
-#erp_form_area select, #form-modal select{
+#erp_form_area select, #form-modal select, .erp-form select, .form_line select{
  height: 24px;
  border: 1px solid #e6e8ea;
  border-radius: 3px;

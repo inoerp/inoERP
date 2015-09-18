@@ -1541,8 +1541,12 @@ ul.column.two_column_form input, ul.column.two_column_form select{
 }
 
 ul.column.two_column_form li {
- margin-bottom: 20px;
+ margin-bottom: 10px;
  width: 45% !important;
+}
+
+ul.column.two_column_form li label {
+font-size: 12px !important;
 }
 
 /*#content_data div{
@@ -2326,4 +2330,12 @@ a.btn-info{
 
 .btn-sm, .btn-group-sm > .btn {
     padding: 2px 5px !important;
+}
+
+.public-page #header_bottom{
+ margin-bottom: 10px !important;
+}
+
+.min-width-100{
+ min-width: 100px;
 }

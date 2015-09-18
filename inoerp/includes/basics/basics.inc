@@ -428,6 +428,7 @@ require_once(INC_EXTENSIONS . DS . "content_type" . DS . "class_new_content_type
 require_once(INC_EXTENSIONS . DS . "content_type" . DS . "class_content_type_reference.inc");
 require_once(INC_EXTENSIONS . DS . "content" . DS . "class.content.inc");
 require_once(INC_EXTENSIONS . DS . "category" . DS . "class_category.inc");
+require_once(INC_EXTENSIONS . DS . "category_relation" . DS . "class_category_relation.inc");
 require_once(INC_EXTENSIONS . DS . "category" . DS . "class_category_reference.inc");
 require_once(INC_EXTENSIONS . DS . "view" . DS . "class.view.inc");
 require_once(INC_EXTENSIONS . DS . "view" . DS . "result" . DS . "class_view_result.inc");

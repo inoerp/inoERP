@@ -19,10 +19,10 @@
   <div class="col-md-6 right">
    <div class="row product-top">
     <div class="col-md-12">
-     <h2><?php   echo $$class->product_name; ?> 
-     <?php
+     <h2><?php echo $$class->product_name; ?> 
+      <?php
       if ($allow_content_update) {
-       echo '<a href="'.HOME_URL.'form.php?mode=9&amp;class_name=ec_product&amp;ec_product_id='.$$class->ec_product_id.'"><i class="fa fa-edit"></i></a>';
+       echo '<a href="' . HOME_URL . 'form.php?mode=9&amp;class_name=ec_product&amp;ec_product_id=' . $$class->ec_product_id . '"><i class="fa fa-edit"></i></a>';
       }
       ?></h2>
     </div>
@@ -59,11 +59,11 @@
     <ul class="button-lists inline">
      <li><a href="#" role="button" class="btn btn-lg btn-default add-to-cart" role="button">Add To Cart </a></li>
      <li><a href="#" role="button" class="btn btn-lg btn-default add-to-wl"  role="button">Add To Wish List</a></li>
-     <li><a href="<?php echo HOME_URL?>?dtype=product&class_name=ec_user_cart&ec_product_id=<?php echo $$class->ec_product_id ?>" role="button" class="btn btn-lg  btn-success buy-now" role="button">Buy Now </a></li>
+     <li><a href="<?php echo HOME_URL ?>?dtype=product&class_name=ec_user_cart&ec_product_id=<?php echo $$class->ec_product_id ?>" role="button" class="btn btn-lg  btn-success buy-now" role="button">Buy Now </a></li>
     </ul>
    </div>
    <div class="row product-description">
-    <p><?php echo ino_show_collapse_content(nl2br($$class->product_description)); ?></p>
+    <p><a href="#product-description-details"><?php echo ino_show_collapse_content(nl2br($$class->product_description)); ?></a></p>
    </div>
 
   </div>
@@ -99,6 +99,16 @@
     </div> 
    </div>
   </div>
+ </div>
+
+ <div class="row featurette product level-3">
+  <h2 class="featurette-heading bgc">Product Description</h2>
+  <div id="product-description-details" class="product-summary">
+   <?php
+   echo nl2br($$class->product_description);
+   ?>
+  </div>
+
  </div>
 
  <div class="row featurette product level-3">
