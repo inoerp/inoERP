@@ -1,32 +1,32 @@
-function setValFromSelectPage(cst_item_cost_header_id, item_id_m, item_number, item_description,
-        uom_id) {
- this.cst_item_cost_header_id = cst_item_cost_header_id;
- this.item_id_m = item_id_m;
- this.item_number = item_number;
- this.item_description = item_description;
- this.uom_id = uom_id;
-}
-
-setValFromSelectPage.prototype.setVal = function () {
- var cst_item_cost_header_id = this.cst_item_cost_header_id;
- var item_obj = [{id: 'item_id_m', data: this.item_id_m},
-  {id: 'item_number', data: this.item_number},
-  {id: 'item_description', data: this.item_description},
-  {id: 'uom_id', data: this.uom_id}
- ];
- if (cst_item_cost_header_id) {
-  $("#cst_item_cost_header_id").val(cst_item_cost_header_id);
- }
- $(item_obj).each(function (i, value) {
-  if (value.data) {
-   var fieldId = '#' + value.id;
-   $('#content').find(fieldId).val(value.data);
-  }
- });
-   if (this.cst_item_cost_header_id) {
-  $('a.show.cst_item_cost_header_id').trigger('click');
- }
-};
+//function setValFromSelectPage(cst_item_cost_header_id, item_id_m, item_number, item_description,
+//        uom_id) {
+// this.cst_item_cost_header_id = cst_item_cost_header_id;
+// this.item_id_m = item_id_m;
+// this.item_number = item_number;
+// this.item_description = item_description;
+// this.uom_id = uom_id;
+//}
+//
+//setValFromSelectPage.prototype.setVal = function () {
+// var cst_item_cost_header_id = this.cst_item_cost_header_id;
+// var item_obj = [{id: 'item_id_m', data: this.item_id_m},
+//  {id: 'item_number', data: this.item_number},
+//  {id: 'item_description', data: this.item_description},
+//  {id: 'uom_id', data: this.uom_id}
+// ];
+// if (cst_item_cost_header_id) {
+//  $("#cst_item_cost_header_id").val(cst_item_cost_header_id);
+// }
+// $(item_obj).each(function (i, value) {
+//  if (value.data) {
+//   var fieldId = '#' + value.id;
+//   $('#content').find(fieldId).val(value.data);
+//  }
+// });
+//   if (this.cst_item_cost_header_id) {
+//  $('a.show.cst_item_cost_header_id').trigger('click');
+// }
+//};
 
 function getCostElement(json_url, cost_element_type, row_class) {
  switch (cost_element_type) {
@@ -78,12 +78,12 @@ function getCostElement(json_url, cost_element_type, row_class) {
 
 $(document).ready(function () {
 //mandatory and field sequence
- var mandatoryCheck = new mandatoryFieldMain();
- mandatoryCheck.header_id = 'item_cost_header_id';
- mandatoryCheck.mandatoryHeader();
- mandatoryCheck.form_area = 'form_header';
- mandatoryCheck.mandatory_fields = ["bu_org_id", "ledger_id"];
- mandatoryCheck.mandatory_messages = ["First Select BU Org", "No Ledger Id"];
+// var mandatoryCheck = new mandatoryFieldMain();
+// mandatoryCheck.header_id = 'item_cost_header_id';
+// mandatoryCheck.mandatoryHeader();
+// mandatoryCheck.form_area = 'form_header';
+// mandatoryCheck.mandatory_fields = ["bu_org_id", "ledger_id"];
+// mandatoryCheck.mandatory_messages = ["First Select BU Org", "No Ledger Id"];
 // mandatoryCheck.mandatoryField();
 
 //setting the first line & shipment number
@@ -112,5 +112,9 @@ $(document).ready(function () {
   var cost_element_type = $(this).val();
   var row_class = $(this).closest('tr').prop('class');
   getCostElement(json_url, cost_element_type, row_class);
+ });
+ 
+  $('body').off('click', '#menu_button4_2, #menu_button4_2_1').on('click', '#menu_button4_2, #menu_button4_2_1', function () {
+  $('#item_number, #item_id_m, #item_description').val('');
  });
 });

@@ -12,7 +12,8 @@
 /**
  * sd_delivery_header
  * Contains all the sd_delivery_header information, such as - sd_delivery_header_id, shipping_org_id,  etc
- *
+ * delivery_line_ln_ids_a contains lot number in key and qty in value
+ * delivery_line_sn_ids_a contain sn in value
  */
 class sd_delivery_header extends dbObject {
 
@@ -95,7 +96,10 @@ class sd_delivery_header extends dbObject {
   'multi_action_class_pc',
   'multi_action_class_pc_value',
   'action',
-  'pick_quantity'
+  'pick_quantity',
+  'lot_number',
+  'from_subiventory',
+  'from_locator',
  ];
  public $requiredField = [
   "shipping_org_id",
@@ -138,6 +142,9 @@ class sd_delivery_header extends dbObject {
  public $delivery_status;
  public $picking_date;
  public $pick_quantity;
+ public $lot_number;
+ public $from_subiventory;
+ public $from_locator;
 
  public function _before_save() {
 //  pa($this);
@@ -229,7 +236,7 @@ class sd_delivery_header extends dbObject {
     $del_line->item_id_m = $_POST['item_id_m'][$i];
     $del_line->quantity = $picked_qty;
     $del_line->save();
-    
+
 
 
     //update the inv transaction & onhand
@@ -253,7 +260,7 @@ class sd_delivery_header extends dbObject {
      try {
       $this->_create_inv_transaction($del_line->quantity, $i, $del_line->item_id_m);
      } catch (Exception $e) {
-      echo "<br>Failed to complete the inventory transaction. Error @ sd_Delivery_header @@ line " . __LINE__ . $e->getMessage() . ' code '. $e->getCode();
+      echo "<br>Failed to complete the inventory transaction. Error @ sd_Delivery_header @@ line " . __LINE__ . $e->getMessage() . ' code ' . $e->getCode();
       $dbc->rollback = true;
       return;
      }
@@ -268,9 +275,10 @@ class sd_delivery_header extends dbObject {
 
     $sol->save();
     echo "<br> Delivery Line is succefully created. Line Id - " . $del_line->sd_delivery_line_id;
-    
+
     //create reservation
     $del_line->sn_ids_a = $this->delivery_line_sn_ids_a;
+    $del_line->ln_ids_a = $this->delivery_line_ln_ids_a;
     $del_line->res_oh_id = $this->delivery_line_res_oh_id;
     $del_line->create_reservation();
    }
@@ -278,6 +286,7 @@ class sd_delivery_header extends dbObject {
  }
 
  public $delivery_line_sn_ids_a = [];
+ public $delivery_line_ln_ids_a = [];
  public $delivery_line_res_oh_id;
 
  private function _create_inv_transaction($del_quantity, $i, $item_id_m) {
@@ -290,6 +299,8 @@ class sd_delivery_header extends dbObject {
   $onhand = new onhand();
   $onhand->item_id_m = $item_id_m;
   $onhand->not_subinventory_id = $_POST['staging_subinventory_id'][$i];
+  $onhand->subinventory_id = !empty($_POST['from_subiventory'][$i]) ? $_POST['from_subiventory'][$i] : null;
+  $onhand->locator_id = !empty($_POST['from_locator'][$i]) ? $_POST['from_locator'][$i] : null;
   $onhand_i = $onhand->findOnhand_byItemId();
   if (empty($onhand_i)) {
    echo "<br>Failed to complete the inventory transaction as there is not enough onhand. Error @ sd_Delivery_header @@ line " . __LINE__;
@@ -331,6 +342,10 @@ class sd_delivery_header extends dbObject {
    $invt->sd_so_line_id = $_POST['sd_so_line_id'][$i];
    $invt->d_reference_key_name = 'sd_so_line';
    $invt->d_reference_key_value = $invt->sd_so_line_id;
+
+   $serial_reservation_exists = false;
+
+//serial reservation details   
    if (!empty($_POST['serial_generation'][$i])) {
     //check for reservation for serial controlled items
     $serial_number_ids_obj = inv_reservation::find_by_demandReference_onhandReference('sd_so_line', $invt->sd_so_line_id, $oh_data->onhand_id);
@@ -338,42 +353,95 @@ class sd_delivery_header extends dbObject {
      $serial_number_ids_obj = inv_serial_number::find_by_currentLocation($invt->item_id_m, $invt->org_id, $invt->from_subinventory_id, $invt->from_locator_id, 1);
     } else {
      $reservation_exists = true;
+     $serial_reservation_exists = true;
     }
 //    $serial_number_ids_a = [];
-    if(empty($serial_number_ids_obj)){
-     throw new Exception('No Serial Number Found for Serial conrolled Item error @ '.__FILE__. ' @@ ' .__LINE__, '1');
+    if (empty($serial_number_ids_obj)) {
+     throw new Exception('No Serial Number Found for Serial conrolled Item error @ ' . __FILE__ . ' @@ ' . __LINE__, '1');
     }
     foreach ($serial_number_ids_obj as $s_obj) {
      array_push($this->delivery_line_sn_ids_a, $s_obj->inv_serial_number_id);
     }
     $invt->serial_number_ids = $this->delivery_line_sn_ids_a;
-   } else {
-    //check reservation for non serial items
+   }
+
+//lot reservation
+   $lot_reservation_exists = false;
+   if (!empty($_POST['lot_generation'][$i])) {
+    //check for reservation for lot controlled items
+    $lot_number_ids_obj = inv_reservation::find_by_demandReference_onhandReference('sd_so_line', $invt->sd_so_line_id, $oh_data->onhand_id);
+    if (empty($lot_number_ids_obj) || empty($lot_number_ids_obj[0])) {
+     $lot_number_ids_obj = inv_lot_onhand_v::find_by_fieldVal([
+       'item_id_m' => $invt->item_id_m,
+       'org_id' => $invt->org_id,
+       'subinventory_id' => $invt->from_subinventory_id,
+       'locator_id' => $invt->from_locator_id]);
+    } else {
+     $reservation_exists = true;
+     $lot_reservation_exists = true;
+    }
+    if (empty($lot_number_ids_obj)) {
+     throw new Exception('No Lot Number Found For Lot Conrolled Item error @ ' . __FILE__ . ' @@ ' . __LINE__, '1');
+    }
+    $lot_no_ids_awv = [];
+    foreach ($lot_number_ids_obj as $s_obj) {
+     if ($lot_reservation_exists) {
+      $lot_no_ids_awv[$s_obj->inv_lot_number_id] = $s_obj->demand_quantity < $transaction_quantity ? $s_obj->demand_quantity : $transaction_quantity;
+     } else {
+      $lot_no_ids_awv[$s_obj->inv_lot_number_id] = $s_obj->lot_quantity < $transaction_quantity ? $s_obj->lot_quantity : $transaction_quantity;
+     }
+    }
+    $invt->lot_number_ids = $this->delivery_line_ln_ids_a = $lot_no_ids_awv;
+//    $invt->lot_number_ids = array_keys($lot_no_ids_awv);
+   }
+
+//item reservation   
+   if (!$reservation_exists) {
     $line_reservation_details = inv_reservation::find_by_demandReference_onhandReference('sd_so_line', $invt->sd_so_line_id, $oh_data->onhand_id);
     if ($line_reservation_details) {
      $reservation_exists = true;
     }
    }
+
    $invt->_before_save();
    $invt->save();
    $invt->_after_save();
    if ($reservation_exists) {
     try {
      $reservationid_qty_a = [];
-     if (!empty($serial_number_ids_obj)) {
+     $lot_reservationid_qty_a = [];
+     if (!empty($lot_number_ids_obj) && ($lot_reservation_exists)) {
+      $total_lot_qty = 0;
+      foreach ($lot_number_ids_obj as $k => $v) {
+       if ($total_lot_qty >= $transaction_quantity) {
+        break;
+       }
+       $total_lot_qty += $v->demand_quantity;
+       $lot_reservationid_qty_a[$v->inv_reservation_id] = $v->demand_quantity;
+      }
+     }
+
+
+     if (!empty($serial_number_ids_obj) && ($serial_reservation_exists)) {
       foreach ($serial_number_ids_obj as $k => $v) {
        if ($k >= $transaction_quantity) {
         break;
        }
        $reservationid_qty_a[$v->inv_reservation_id] = 1;
       }
-     } else {
+     } else if (!empty($line_reservation_details)) {
       foreach ($line_reservation_details as $k => $v) {
        $reservationid_qty_a[$v->inv_reservation_id] = $invt->quantity;
       }
      }
      $res = new inv_reservation();
-     $res->remove_reservation($reservationid_qty_a);
+
+     if (!empty($lot_reservationid_qty_a)) {
+      $res->remove_reservation($lot_reservationid_qty_a);
+     }
+     if (!empty($reservationid_qty_a)) {
+      $res->remove_reservation($reservationid_qty_a);
+     }
      echo "<br> Reservation is removed ";
     } catch (Exception $e) {
      $dbc->rollback = true;
@@ -405,7 +473,10 @@ class sd_delivery_header extends dbObject {
 
  public function multi_select_input_fields() {
   $multi_select_input = [
-   'pick_quantity'
+   'from_subiventory',
+   'from_locator',
+   'pick_quantity',
+//   'lot_number',
   ];
   return $multi_select_input;
  }

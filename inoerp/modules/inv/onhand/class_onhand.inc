@@ -486,6 +486,14 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
   if (!empty($this->not_subinventory_id)) {
    $sql .= " AND subinventory_id != '{$this->not_subinventory_id}' ";
   }
+  
+  if (!empty($this->subinventory_id)) {
+   $sql .= " AND subinventory_id = '{$this->subinventory_id}' ";
+  }
+  
+    if (!empty($this->locator_id)) {
+   $sql .= " AND locator_id = '{$this->locator_id}' ";
+  }
 
   $result = $this->findBy_sql($sql);
   return !empty($result) ? $result : false;

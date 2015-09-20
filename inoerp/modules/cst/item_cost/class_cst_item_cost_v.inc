@@ -34,7 +34,7 @@ public static $form_class_name = "cst_item_cost_header";
    'cst_item_cost_header_id',
  ];
  public $search_functions = [
-   'Cost Type' => 'search_bom_cost_type',
+   'Cost Type' => 'search_bom_cost_type_nm',
    'Item From' => 'search_item_number_from',
    'Item To' => 'search_item_number_to',
    'Organization' => 'search_org_name',

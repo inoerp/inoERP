@@ -61,7 +61,7 @@ function applyTemplate() {
    class_name: 'item',
    mode: '9',
    item_number: itemNumber,
-   item_id :  $('#template_item_id').val(),
+   item_id: $('#template_item_id').val(),
    org_id: orgId
   },
   beforeSend: function () {
@@ -201,9 +201,15 @@ $(document).ready(function () {
   applyTemplate();
  });
  onClick_add_new_row('tr.inv_item_revision0', 'tbody.form_data_line_tbody', 1);
- 
-  $('body').off('click', '#menu_button4_2, #menu_button4_2_1').on('click', '#menu_button4_2, #menu_button4_2_1', function () {
+
+ $('body').off('click', '#menu_button4_2, #menu_button4_2_1').on('click', '#menu_button4_2, #menu_button4_2_1', function () {
   $('#org_id, #item_id_m').val('');
+  $('.disable_autocomplete').trigger('click');
+  $('#org_id').find('option').each(function () {
+   if ($(this).data('item_master_cb') != 1) {
+    $(this).remove();
+   }
+  });
  });
 
 });

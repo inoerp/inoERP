@@ -145,6 +145,7 @@ class sd_delivery_line extends dbObject {
  public $action;
  public $so_qty_change;
  public $sn_ids_a;
+ public $ln_ids_a;
  public $res_oh_id;
 
  public function _before_save() {
@@ -192,21 +193,61 @@ class sd_delivery_line extends dbObject {
  }
 
  public function create_reservation() {
+  global $dbc;
+  $dbc->confirm();
   $this->_create_reservation();
  }
 
  private function _create_reservation() {
   if (!empty($this->sn_ids_a)) {
    $this->_create_reservation_serialItems();
+  } else if (!empty($this->ln_ids_a)) {
+   try {
+    $this->_create_reservation_lotItems();
+   } catch (Exception $e) {
+    echo "<br>Failed to create reservation for lot at staging. Error @ " . __FILE__ . ' @@ ' . __LINE__ . $e->getMessage();
+   }
   } else {
    $this->_create_reservation_forItems();
+  }
+ }
+
+ private function _create_reservation_lotItems() {
+  global $dbc;
+  foreach ($this->ln_ids_a as $ln_id => $q) {
+   $irs = new inv_reservation();
+   $irs->item_id_m = $this->item_id_m;
+   $irs->org_id = $this->shipping_org_id;
+   $irs->demand_type = 'DELIVERY_LINE';
+   $irs->supply_type = 'ONHAND';
+   $irs->d_reference_key_name = 'sd_delivery_line';
+   $irs->d_reference_key_value = $this->sd_delivery_line_id;
+   $irs->s_reference_key_name = 'onhand';
+   $onhand_all = onhand::find_by_itemIdm_location_sv($this->item_id_m, $this->shipping_org_id, $this->staging_subinventory_id, $this->staging_locator_id);
+   $onhand_i = inv_lot_onhand::find_by_fieldVal([
+     'onhand_id' => $onhand_all->onhand_id,
+     'inv_lot_number_id' => $ln_id]);
+   if ($onhand_i) {
+        $irs->onhand_id = $irs->s_reference_key_value = $onhand_i[0]->onhand_id;
+   } else {
+    $dbc->rollback = true;
+    throw new Exception('No onhand found @ staging. Error @' . __FILE__ . ' @@ ' . __LINE__);
+   }
+
+   $irs->need_by_date = $this->picking_date;
+   $irs->uom_id = $this->line_uom_id;
+   $irs->demand_quantity = $q;
+   $irs->subinventory_id = $this->staging_subinventory_id;
+   $irs->locator_id = $this->staging_locator_id;
+   $irs->inv_lot_number_id = $ln_id;
+   $irs->save();
   }
  }
 
  private function _create_reservation_serialItems() {
   global $dbc;
   foreach ($this->sn_ids_a as $k => $sn_id) {
-   if($k >= $this->quantity){
+   if ($k >= $this->quantity) {
     break;
    }
    $irs = new inv_reservation();

@@ -1,15 +1,43 @@
-$(document).ready(function () {
  function beforeSave() {
   if (($('.action').first().val() === 'confirm_payment') || ($('.action').first().val() === 'confirm_receipt')) {
    $('.line_id_cb').first().prop('checked', true);
   }
  }
+ 
+$(document).ready(function () {
+ $('.select_popup').hide();
+
  $('#multi_select').on('click', '#search_reset_btn', function (e) {
   e.preventDefault();
   $(this).closest('#searchForm').find('.search_form').find('input:text, select').each(function () {
    $(this).val('');
   });
- })
+ });
+ 
+ $('#form_line').off('change', '.subinventory_id').on('change', '.subinventory_id', function () {
+ var subInventoryId = $(this).val();
+ if (subInventoryId > 0) {
+  rowClass_d = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
+  getLocator('modules/inv/locator/json_locator.php', subInventoryId, 'subinventory', rowClass_d);
+ }
+});
+
+ $('#form_line').off('blur', '.subinventory_id').on('blur', '.subinventory_id', function () {
+ var subInventoryId = $(this).val();
+ if (subInventoryId > 0) {
+  rowClass_d = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
+  $(rowClass_d).find('.hidden.subinventory_id').val(subInventoryId);
+ }
+});
+
+ $('#form_line').off('blur', '.locator_id').on('blur', '.locator_id', function () {
+ var locator_id = $(this).val();
+ if (locator_id > 0) {
+  rowClass_d = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
+  $(rowClass_d).find('.hidden.locator_id').val(locator_id);
+ }
+});
+
  //multi select save
  var line_key_field = $('input[type="checkbox"]').first().prop('name');
  if (line_key_field) {

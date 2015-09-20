@@ -80,24 +80,27 @@ if (!empty($_GET['class_name'])) {
     $whereFields[] = sprintf("%s IN %s ", $value, $comma_sep_search_parameters_in_str);
    } else {
     $entered_search_criteria = str_replace(' ', '%', trim($_GET[$value][0]));
+    $entered_search_criteria_1s = substr($entered_search_criteria, 0, 1);
+    $entered_search_criteria_2s = substr($entered_search_criteria, 0, 2);
+    $is_id_eq_search = !(in_array($entered_search_criteria_1s, ['=', '>', '<']) || in_array($entered_search_criteria_2s, ['!=', '>=', '<=']));
 
-    if (strpos($value, '_ID') !== false || strpos($value, '_id') !== false) {
+    if (($is_id_eq_search) && (strpos($value, '_ID') !== false || strpos($value, '_id') !== false)) {
      if ($entered_search_criteria == 'null') {
       $whereFields[] = " $value IS NULL ";
      } else {
       $whereFields[] = sprintf("%s = %s ", $value, trim(str_replace('=', '', $entered_search_criteria)));
      }
-    } else if (substr($entered_search_criteria, 0, 1) == '=') {
+    } else if ($entered_search_criteria_1s == '=') {
      if ($entered_search_criteria == 'null') {
       $whereFields[] = " $value IS NULL ";
      } else {
       $whereFields[] = sprintf("%s = '%s' ", $value, trim(substr($entered_search_criteria, 1)));
      }
-    } else if (substr($entered_search_criteria, 0, 2) == '!=') {
+    } else if ($entered_search_criteria_2s == '!=') {
      $whereFields[] = sprintf("%s != '%s' ", $value, trim(substr($entered_search_criteria, 2)));
-    } else if (substr($entered_search_criteria, 0, 1) == '>') {
+    } else if ($entered_search_criteria_1s == '>') {
      $whereFields[] = sprintf("%s > '%s' ", $value, trim(substr($entered_search_criteria, 1)));
-    } else if (substr($entered_search_criteria, 0, 1) == '<') {
+    } else if ($entered_search_criteria_1s == '<') {
      $whereFields[] = sprintf("%s < '%s' ", $value, trim(substr($entered_search_criteria, 1)));
     } else {
      $whereFields[] = sprintf("%s LIKE '%%%s%%'", $value, trim(mysql_prep($entered_search_criteria)));

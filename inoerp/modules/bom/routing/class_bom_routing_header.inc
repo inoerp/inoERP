@@ -128,10 +128,14 @@ class bom_routing_header extends dbObject {
  public function findBy_itemId() {
   $sql = "SELECT * FROM " .
    self::$table_name .
-   " where item_id_m= :item_id_m LIMIT 1 ";
-  $param_a = ['item_id_m'];
-  $value_a = ['item_id_m' => $this->item_id_m];
-  $result_array = $this->findBy_sql($sql, $param_a, $value_a);
+   " where item_id_m= :item_id_m  ";
+  $value_a['item_id_m'] = $this->item_id_m;
+  if (!empty($this->org_id)) {
+   $sql .= " AND org_id= :org_id  ";
+   $value_a['org_id'] = $this->org_id;
+  }
+  $sql .= " LIMIT 1 ";
+  $result_array = $this->findBySql($sql, $value_a);
   return !empty($result_array) ? array_shift($result_array) : false;
  }
 

@@ -18,7 +18,7 @@ class sd_pick_list_v extends dbObject {
 
  public static $form_class_name = "sd_so_header";
  public static $table_name = "sd_pick_list_v";
- public static $primary_column = "sd_so_header_id";
+ public static $primary_column = "so_number";
  public $field_a = [
   'sd_so_header_id',
   'bu_org_id',
@@ -71,7 +71,6 @@ class sd_pick_list_v extends dbObject {
   'shipping_org_id',
  ];
  public $multi_select_column = [
-  'so_number',
   'line_number',
   'org',
   'customer_name',
@@ -83,6 +82,7 @@ class sd_pick_list_v extends dbObject {
   'staging_subinventory',
   'staging_locator',
   'document_type',
+  'so_number',
   'sd_so_header_id',
   'bu_org_id',
   'shipping_org_id',
@@ -259,6 +259,31 @@ AND sdsl.line_status IN ('AWAITING_PICKING', 'PARTIAL_PICKED','PARTIAL_SHIPPED')
   $value_a = ['sd_so_line_id' => $line_id];
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
+ }
+
+ public static function multi_select_field_from_subiventory($data) {
+//  pa($data);
+  global $f;
+  $stmt = $f->select_field_from_object('from_subiventory', subinventory::find_all_of_org_id($data->shipping_org_id), 'subinventory_id', 'subinventory', '', '', 'medium subinventory_id');
+  return $stmt;
+ }
+
+ public static function multi_select_field_from_locator($data) {
+  global $f;
+  $stmt = $f->select_field_from_object('from_locator', locator::find_all_of_subinventory(), 'locator_id', 'locator', '', '', 'medium locator_id');
+  return $stmt;
+ }
+
+ public static function multi_select_field_lot_number($data) {
+   $f = new inoform();
+  $stmt = $f->val_field('lot_numer', '','','','','','', 'inv_lot_onhand_v', 'lot_numer', 'item_id_m');
+  $stmt .= $f->hidden_field_withCLass('inv_lot_numer_id', '', 'dontCopy');
+  $stmt .= $f->hidden_field_withCLass('org_id', $data->shipping_org_id, 'popup_value');
+  $stmt .= $f->hidden_field_withCLass('item_id_m', $data->item_id_m, 'popup_value item_id_m');
+  $stmt .= $f->hidden_field_withCLass('subinventory_id', '', 'popup_value subinventory_id');
+  $stmt .= $f->hidden_field_withCLass('locator_id', '', 'popup_value locator_id');
+  $stmt .= '<i class="select_lot_number_id generic select_popup clickable fa fa-search" data-class_name="inv_lot_onhand_v"></i>';
+  return $stmt;
  }
 
 }

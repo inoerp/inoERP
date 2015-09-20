@@ -154,7 +154,7 @@ inoERP
           ?>
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
-         <td><?php form::text_field_wid2sr('sd_so_line_id', 'line_id'); ?></td>
+         <td><?php form::text_field_wid2sr('sd_so_line_id', 'line_id always_readonly'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
          <td><?php echo $f->select_field_from_object('line_type', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class_second->line_type, '', 'medium', 1, $readonly, '', '', '', 'process_flow_id'); ?></td>
          <td><?php echo $f->select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->shipping_org_id, '', '', 1, $readonly); ?></td>

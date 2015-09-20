@@ -341,7 +341,7 @@ trait dbObject_t {
     $k_count++;
    }
   }
-
+ 
   $stmt = $dbc->connection->prepare(" $sql ");
   try {
    $stmt->execute();
@@ -350,7 +350,7 @@ trait dbObject_t {
    $ie->page_exception = ['dbObject findBy id Error : ' => $e->getMessage()];
    echo "Record couldnt be saved!!: " . $e->getMessage();
   }
-  return $result;
+  return !empty($result) ? $result : false;
  }
 
  public function findAll() {

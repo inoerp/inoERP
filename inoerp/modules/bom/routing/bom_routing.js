@@ -39,11 +39,11 @@ function disableField_forCommonRouting() {
 
 $(document).ready(function() {
 //mandatory and field sequence
- var mandatoryCheck = new mandatoryFieldMain();
- mandatoryCheck.mandatoryHeader();
- mandatoryCheck.form_area = 'form_header';
- mandatoryCheck.mandatory_fields = ["org_id", "item_number"];
- mandatoryCheck.mandatory_messages = ["First Select Org", "No Item Number"];
+// var mandatoryCheck = new mandatoryFieldMain();
+// mandatoryCheck.mandatoryHeader();
+// mandatoryCheck.form_area = 'form_header';
+// mandatoryCheck.mandatory_fields = ["org_id", "item_number"];
+// mandatoryCheck.mandatory_messages = ["First Select Org", "No Item Number"];
 // mandatoryCheck.mandatoryField();
 
 //setting the first line & shipment number

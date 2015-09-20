@@ -1098,6 +1098,12 @@ function search_bom_cost_type() {
  return $stmt;
 }
 
+function search_bom_cost_type_nm() {
+ global $f;
+ $stmt = $f->select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'bom_cost_type_id', 'cost_type', '', 'bom_cost_type');
+ return $stmt;
+}
+
 function search_inv_count_entry_status() {
  global $f;
  return $f->select_field_from_array('status', inv_count_schedule::$status_a, '');

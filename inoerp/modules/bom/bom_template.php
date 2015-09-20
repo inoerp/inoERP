@@ -9,9 +9,9 @@ inoERP
 
 
 <div id ="form_header">
- <form action=""  method="post" id="bom_header"  name="bom_header">
+ <form method="post" id="bom_header"  name="bom_header">
   <span class="heading"><?php
-   echo gettext('BOM Header');
+   echo gettext('Bill Of Materials');
    echo!empty($form_name_header) ? ' - ' . gettext($form_name_header) : ' ';
    ?></span>
   <div id="tabsHeader">
@@ -128,7 +128,7 @@ inoERP
            'bom_commonbom_line_id' => $$class_second->bom_commonbom_line_id));
           ?>
          </td>
-         <td><?php form::text_field_wid2sr('bom_line_id'); ?></td>
+         <td><?php form::text_field_wid2sr('bom_line_id','line_id always_readonly'); ?></td>
          <td><?php $f->text_field_d2s('bom_sequence', 'lines_number'); ?></td>
          <td><?php echo!empty($routing_line_details) ? form::select_field_from_object('routing_sequence', $routing_line_details, 'bom_routing_line_id', 'routing_sequence', $$class_second->routing_sequence, '', $readonly, 'usage_basis', '', 1) : form::text_field_wid2sm('routing_sequence'); ?></td>
          <td><?php
