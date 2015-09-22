@@ -198,7 +198,7 @@ AND pt.pos_terminal_id = '{$terminal_id}'
     $invt->save();
     $invt->_after_save();
 //    pa($invt);
-    $this->msg .= "<br>Inventory Transaction is Successfullycreated for POS transaction id " . $tl_record->pos_transaction_header_id;
+    $this->msg .= "<br>Inventory Transaction is Successfully Created for POS transaction id " . $tl_record->pos_transaction_header_id;
    } catch (Exception $e) {
     $this->msg .= "<br>Failed to Complete the inventory transaction. Error @ pos transaction_header @@ " . __LINE__ . $e->getMessage();
     $dbc->rollback = true;

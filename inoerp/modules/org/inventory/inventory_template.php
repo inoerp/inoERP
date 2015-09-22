@@ -118,6 +118,7 @@
         <li><?php $f->l_ac_field_d('overhead_ac_id', 'A'); ?></li>
         <li><?php $f->l_ac_field_d('resource_ac_id', 'A'); ?></li>
         <li><?php $f->l_ac_field_d('expense_ac_id', 'X'); ?></li> 
+        <li><?php $f->l_ac_field_d('costupdate_ac_id', 'X'); ?></li> 
        </ul>
       </div> 
       <!--                end of tab2 div three_column-->
@@ -129,6 +130,7 @@
        <ul class="column four_column">
         <li><?php $f->l_ac_field_d('inter_org_receivable_ac_id', 'A'); ?></li>  
         <li><?php $f->l_ac_field_d('inter_org_ppv_ac_id', 'X'); ?></li> 
+        
         <li><?php $f->l_ac_field_d('inter_org_payable_ac_id', 'L'); ?></li>  
         <li><?php $f->l_ac_field_d('inter_org_intransit_ac_id', 'A'); ?></li>  
         <li><?php $f->l_ac_field_d('inv_ap_accrual_ac_id', 'L'); ?></li>  

@@ -438,7 +438,7 @@ class am_wo_header extends dbObject {
     $this->message .= '<br> Trying to cerate WO for am_asset_id : ' . $asset->am_asset_id;
     try {
      $this->_create_WO_from_assetId($asset->am_asset_id);
-     $this->message .= "<br/>WO is Successfullycreated for am_asset_id id " . $asset->am_asset_id;
+     $this->message .= "<br/>WO is Successfully Created for am_asset_id id " . $asset->am_asset_id;
     } catch (Exception $e) {
      $this->message .= "<br/>WO creation program failed  for for am_asset_id id " . $asset->am_asset_id . $e->getMessage();
     }

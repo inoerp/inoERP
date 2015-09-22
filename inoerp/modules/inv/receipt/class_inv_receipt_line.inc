@@ -198,7 +198,7 @@ class inv_receipt_line extends dbObject {
     if (!empty($this->item_id_m) && empty($this->kit_cb)) {
      try {
       $this->_create_inv_transactions();
-      echo "<br>INV Transaction Lines are SuccessfullyCreated ";
+      echo "<br>INV Transaction Lines are Successfully Created ";
      } catch (Exception $e) {
       $update_satus = -99;
       $dbc->rollback = true;

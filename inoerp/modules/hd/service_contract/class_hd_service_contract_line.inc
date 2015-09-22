@@ -132,7 +132,7 @@ class hd_service_contract_line extends dbObject {
 //    $trnx_details->gl_amount = $this->gl_inv_line_price;
 //    $trnx_details->audit_trial();
 //    $trnx_details->save();
-//    echo "<br> Transaction detail line for revenue is Successfullycreated!";
+//    echo "<br> Transaction detail line for revenue is Successfully Created!";
 //    if (!empty($this->tax_amount)) {
 //     $trnx_details->hd_service_detail_id = null;
 //     $trnx_details->detail_number = $detail_num;
@@ -144,7 +144,7 @@ class hd_service_contract_line extends dbObject {
 //     $trnx_details->gl_amount = $this->gl_tax_amount;
 //     $trnx_details->audit_trial();
 //     $trnx_details->save();
-//     echo "<br> Transaction detail line for tax is Successfullycreated!";
+//     echo "<br> Transaction detail line for tax is Successfully Created!";
 //    }
 //   }
 //  }

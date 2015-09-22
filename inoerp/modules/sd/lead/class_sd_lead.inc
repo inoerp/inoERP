@@ -187,7 +187,7 @@ class sd_lead extends dbObject {
   try {
 //   pa($oppr);
    $oppr->save();
-   echo "Opportunity is Successfullycreated. New Opportunity id is " . $oppr->sd_opportunity_id;
+   echo "Opportunity is Successfully Created. New Opportunity id is " . $oppr->sd_opportunity_id;
   } catch (Exception $e) {
    echo "Failed to convert the lead to opportunity. Error @ sd_lead @@ line " . __LINE__ . $e->getMessage();
   }

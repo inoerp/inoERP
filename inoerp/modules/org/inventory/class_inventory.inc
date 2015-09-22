@@ -74,8 +74,8 @@
    "inv_ipv_ac_id",
    "sales_ac_id",
    "cogs_ac_id",
+   'costupdate_ac_id',
    "deferred_cogs_ac_id",
-   "ef_id",
    "status",
    "rev_enabled",
    "rev_number",
@@ -123,6 +123,7 @@
    "sales_ac_id",
    "cogs_ac_id",
    "deferred_cogs_ac_id",
+   'costupdate_ac_id'
   ];
   public $requiredField = [
    "org_id",
@@ -182,6 +183,7 @@
   public $sales_ac_id;
   public $cogs_ac_id;
   public $deferred_cogs_ac_id;
+  public $costupdate_ac_id;
   public $ef_id;
   public $created_by;
   public $creation_date;

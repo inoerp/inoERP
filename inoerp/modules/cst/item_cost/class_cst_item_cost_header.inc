@@ -184,11 +184,23 @@ class cst_item_cost_header extends dbObject {
  public function _before_save() {
   /* Check the cost type - If its FROZEN then show error message */
   if ((isset($this->bom_cost_type)) && ($this->bom_cost_type == 'FROZEN')) {
-   echo " You can't create/update item cost for frozen cost type. <br> Create Item cost in pending(or any user defined cost type)and then run standard cost update. ";
+   echo " <br>You can't create/update item cost for frozen cost type. <br> Create Item cost in pending(or any user defined cost type)and then run standard cost update. ";
    return -99;
   }
   if ((!empty($this->cst_item_cost_header_id)) && ($this->action == 'COST_UPDATE') && (($this->bom_cost_type != 'FROZEN'))) {
-   $this->_update_standard_cost();
+   $cost_update_params = [];
+   $cost_update_params['org_id'] = [$this->org_id];
+   $cost_update_params['item_id_m'] = [$this->item_id_m];
+   $cost_update_params['bom_cost_type'] = [$this->bom_cost_type];
+   $inv_i = inventory::find_by_org_id($this->org_id);
+   if ($inv_i && !empty($inv_i->costupdate_ac_id)) {
+    $cost_update_params['adjustment_ac_id]'] = [$inv_i->costupdate_ac_id];
+    $this->_update_standard_cost($cost_update_params);
+    echo " <br>Cost Update program is sucessfully completed ";
+   } else {
+    echo " <br>Cost Update program failed as no adjustment account found.. <br> Enter costupdate account in inventory setup ";
+   }
+
    return 10;
   }
   if ((!empty($this->cst_item_cost_header_id)) && ($this->action == 'COST_ROLLUP') && (($this->bom_cost_type != 'FROZEN'))) {
@@ -206,7 +218,7 @@ class cst_item_cost_header extends dbObject {
     try {
      $this->_save_journal_header();
      try {
-      echo "<br>Accounting records are Successfullycreated " . $this->gl_journal_header_id;
+      echo "<br>Accounting records are Successfully Created " . $this->gl_journal_header_id;
       $this->_update_journalHeaderId();
      } catch (Exception $e) {
       echo "<br>Updating gl journal header id failed" . $e->getMessage();
@@ -250,7 +262,7 @@ class cst_item_cost_header extends dbObject {
    * $this has 	 item_id_m & bom_cost_type (Pending), adjustment_Ac as entered parameters & cst_item_cost_header_id if exists
    */
   $old_records_a = [];
-  $message = "<br><br>Starting to update standard header";
+  $message = "<br>Starting to update standard header";
   $this->findBy_id($this->cst_item_cost_header_id);
   $ich_f = new cst_item_cost_header();
   foreach ($this->field_a as $key => $value) {
@@ -280,11 +292,10 @@ class cst_item_cost_header extends dbObject {
    $ich_f->cst_item_cost_header_id = null;
   }
   $ich_f->bom_cost_type = 'FROZEN';
-  $ich_f->audit_trial();
   try {
    $ich_f->save();
    if (!empty($ich_f->cst_item_cost_header_id)) {
-    $message .=" <br>Item cost head is Successfullyupdated for cst_item_cost_header_id " . $ich_f->cst_item_cost_header_id;
+    $message .=" <br>Item cost head is Successfully Updated for cst_item_cost_header_id " . $ich_f->cst_item_cost_header_id;
     //save cost line
     $message .= $this->_update_standard_cost_lines($ich_f, $old_records_a, $parameters);
     //update the WIP & Onhand Value Balances
@@ -300,11 +311,13 @@ class cst_item_cost_header extends dbObject {
   $new_records_a = [];
   $icl = new cst_item_cost_line();
   $all_cost_lines = $icl->findBy_parentId($this->cst_item_cost_header_id);
+  
   if (empty($all_cost_lines)) {
    $message = "<br/>Leaving Standard cost update as no cost line exists";
    return;
   }
   $message = "<br/>Starting to update standard cost lines";
+
   foreach ($all_cost_lines as $cost_line) {
    foreach ($icl->field_a as $key => $value) {
     $icl->$value = $cost_line->$value;
@@ -313,14 +326,13 @@ class cst_item_cost_header extends dbObject {
    $icl->cst_item_cost_header_id = $header_obj->cst_item_cost_header_id;
    $icl->cost_element_id = $cost_line->cost_element_id;
    $icl->cost_element_type = $cost_line->cost_element_type;
-   $existing_line = $icl->findBy_headerId_elementId();
+   $existing_line = $icl->findBy_headerId_elementId(1);
    if (!empty($existing_line)) {
     $icl->cst_item_cost_line_id = $existing_line->cst_item_cost_line_id;
    } else {
     $icl->cst_item_cost_line_id = null;
    }
    try {
-    $icl->audit_trial();
     array_push($new_records_a, $cost_line);
     $icl->save();
     $message .= "<br>Frozen cost line is Successfullysaved!";
@@ -585,16 +597,18 @@ class cst_item_cost_header extends dbObject {
     $icl->amount = $new_lines->amount;
     $icl->cost_basis = $new_lines->cost_basis;
     $icl->cst_item_cost_line_id = null;
+    $this_level_cost = !empty($new_lines->cst_item_cost_header_id) ? 1 : '';
+    $icl->this_level_cb = $this_level_cost;
     $icl->save();
    }
   } else {
-   foreach ($cost_lines as $new_lines) {
+   foreach ($cost_lines as $k_nl => $new_lines) {
     $icl->cst_item_cost_header_id = $header_obj->cst_item_cost_header_id;
     $icl->cost_element_type = $new_lines->cost_element_type;
     $icl->cost_element_id = $new_lines->cost_element_id;
     $icl->amount = $new_lines->amount;
     $icl->cost_basis = $new_lines->cost_basis;
-    $existing_line = $icl->findBy_headerId_elementId();
+    $existing_line = $icl->findBy_headerId_elementId(1);
     if (!empty($existing_line)) {
      $icl->cst_item_cost_line_id = $existing_line->cst_item_cost_line_id;
     }
@@ -646,13 +660,14 @@ class cst_item_cost_header extends dbObject {
   $line_sums = [];
   $boh = new bom_header();
   $boh->item_id_m = $header_obj->item_id_m;
-  $boh->item_id_m = $header_obj->org_id;
+  $boh->org_id = $header_obj->org_id;
   $boh_i = $boh->findBy_itemId();
   if (empty($boh_i)) {
    return;
   }
   $roh = new bom_routing_header();
   $roh->item_id_m = $header_obj->item_id_m;
+  $roh->org_id = $header_obj->org_id;
   $roh_i = $roh->findBy_itemId();
   $rol = new bom_routing_line();
   $rol_i = $rol->findBy_parentId($roh_i->bom_routing_header_id);
@@ -696,8 +711,8 @@ class cst_item_cost_header extends dbObject {
     }
    }
   }
+
   $this->_update_linesum_by_resource_overhead($line_sums, $rol_i, $header_obj->bom_cost_type);
-//	pa($line_sums);
   $this->_add_update_cost_lines($header_obj, $line_sums);
  }
 
@@ -713,6 +728,7 @@ class cst_item_cost_header extends dbObject {
    $ich->cst_item_cost_header_id = null;
    $ich->save();
   }
+
   try {
    if (!empty($ich->cst_item_cost_header_id)) {
     $this->message .=" <br>Item cost head is successfully created for cst_item_cost_header_id " . $ich->cst_item_cost_header_id;
@@ -727,7 +743,7 @@ class cst_item_cost_header extends dbObject {
  public function cost_rollup($item_id_m, $cost_type, $org_id = '') {
   global $dbc;
   /*
-   * 1. First explode the bom and add low level code 
+   * 1. Find the BOM lines
    * 2. Roll up the cost from the lowest level - 
    * 2.1 _cost_rollup_forItem - Cost Roll up for each Item
    *    2.2 _cost_rollup_cost_lines - Cost roll up for each line
@@ -737,13 +753,13 @@ class cst_item_cost_header extends dbObject {
   $exploded_bom = $boh->BOM_Explosion($item_id_m, $org_id);
   $exploded_bom_rev = array_reverse($exploded_bom, true);
   $item = new item();
-//pa($exploded_bom);
+
   foreach ($exploded_bom_rev as $level_items) {
-   foreach ($level_items as $item_key => $item_id_m) {
-    $item->findBy_id($item_id_m);
+   foreach ($level_items as $item_key => $level_items_item_id_m) {
+    $item->findBy_id($level_items_item_id_m);
     if ($item->make_buy == 'MAKE') {
      try {
-      $this->_cost_rollup_forItem($item->item_id_m, $cost_type, $org_id);
+      $this->_cost_rollup_forItem($level_items_item_id_m, $cost_type, $org_id);
       $this->message .= "<br>Cost roll up is Successfullycompleted for Item Number : $item->item_number & Cost Type : $cost_type";
      } catch (Exception $e) {
       $this->message .= "<br>Cost roll up failed for Item Number : $item->item_number & Cost Type : $cost_type. Error @ " . __LINE__
@@ -753,6 +769,8 @@ class cst_item_cost_header extends dbObject {
    }
   }
  }
+
+ private $_rolling_up_item_id_m;
 
  public function prg_cost_rollup($seralized_parameters) {
   $parameters = unserialize($seralized_parameters);
@@ -776,7 +794,7 @@ class cst_item_cost_header extends dbObject {
 
   if (isset($parameters['item_id_m'][0])) {
    $this->message .= "<br/>Using Cost Roll Up by Item Id ";
-   $item_id_m = $parameters['item_id_m'][0];
+   $this->_rolling_up_item_id_m = $item_id_m = $parameters['item_id_m'][0];
    try {
     $this->cost_rollup($item_id_m, $bom_cost_type, $org_id);
     $this->message .= "<br/>Cost Roll Up is Successfully updated for item_id_m - " . $item_id_m .
@@ -800,6 +818,7 @@ class cst_item_cost_header extends dbObject {
    $item_range = $item->findBy_itemIdRange($from_item_id_m, $to_item_id_m);
    foreach ($item_range as $items) {
     try {
+     $this->_rolling_up_item_id_m = $items->item_id_m;
      $this->cost_rollup($items->item_id_m, $bom_cost_type, $org_id);
      $this->message .= "<br/>Cost Roll Up is Successfullyupdated for item_id_m - " . $items->item_id_m .
       ' bom_cost_type : ' . $bom_cost_type;
@@ -822,6 +841,7 @@ class cst_item_cost_header extends dbObject {
 
    foreach ($item_range as $items) {
     try {
+     $this->_rolling_up_item_id_m = $items->item_id_m;
      $this->cost_rollup($items->item_id_m, $bom_cost_type, $org_id);
      $this->message .= "<br/>Cost Roll Up is Successfullyupdated for item_id_m - " . $items->item_id_m .
       ' bom_cost_type : ' . $bom_cost_type;

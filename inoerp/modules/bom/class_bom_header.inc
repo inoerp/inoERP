@@ -235,6 +235,7 @@ class bom_header extends dbObject {
   $boh = new bom_header();
   $boh->item_id_m = $item_id_m;
   $boh->org_id = $org_id;
+//  pa($boh);
   $boh_i = $boh->findBy_itemId();
   if (empty($boh_i)) {
    return;
@@ -265,7 +266,7 @@ class bom_header extends dbObject {
    $boh->item_id_m = $items->component_item_id_m;
    $boh_i = $boh->findBy_itemId();
    if (!empty($boh_i)) {
-    $this->_explosion($items->component_item_id_m, $level_array, $level);
+    $this->_explosion($items->component_item_id_m, $org_id, $level_array, $level);
    }
   }
  }

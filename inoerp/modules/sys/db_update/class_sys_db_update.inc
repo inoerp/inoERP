@@ -183,7 +183,7 @@ class sys_db_update extends dbObject {
   $sql = " CREATE TABLE $old_db_table LIKE $new_db_table ";
   $dbc2->ddlexecute($sql);
   $dbc2->confirm();
-  echo "<div class='alert alert-sucess'>$old_db_table is Successfullycreated</div>";
+  echo "<div class='alert alert-sucess'>$old_db_table is Successfully Created</div>";
  }
 
  private function _ino_create_views_in_oldDB($mode = 'TEST') {

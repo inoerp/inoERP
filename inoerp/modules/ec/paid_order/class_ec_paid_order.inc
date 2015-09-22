@@ -163,7 +163,7 @@ class ec_paid_order extends dbObject {
     $this->message .= '<br> Trying to cerate SO for ec_paid_order_id : ' . $ecp_order->ec_paid_order_id;
     try {
      $so_header_id = $this->_create_sales_order($ecp_order, $ec_con_details);
-     $this->message .= '<br> SO is Successfullycreated. so_header_id is : ' . $so_header_id;
+     $this->message .= '<br> SO is Successfully Created. so_header_id is : ' . $so_header_id;
      //update ec_paid_order status
      $ec_paid_order_su = new ec_paid_order();
      $ec_paid_order_su->ec_paid_order_id = $ecp_order->ec_paid_order_id;

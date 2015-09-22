@@ -121,6 +121,7 @@ inoERP
         <th><?php echo gettext('Element Id') ?></th>
         <th><?php echo gettext('Basis') ?></th>
         <th><?php echo gettext('Amount') ?></th>
+        <th><?php echo gettext('This Level Cost ?') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -172,6 +173,7 @@ inoERP
          <td><?php echo $element_id_stmt; ?>	</td>
          <td><?php echo $f->select_field_from_object('cost_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_second->cost_basis, '', '', 1, $readonly); ?></td>
          <td><?php form::number_field_wid2sm('amount'); ?></td>
+         <td><?php $f->checkBox_field_wid2('this_level_cb'); ?></td>
         </tr>
         <?php
         $count = $count + 1;

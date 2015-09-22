@@ -339,7 +339,7 @@ class ar_transaction_interface extends dbObject {
    $ar_tl->reference_key_value = $ar_tl->sd_so_line_id = $obj->sd_so_line_id;
    $ar_tl->audit_trial();
    $ar_tl->save();
-   $msg .= "<br> Line is Successfullycreated. Line id id " . $ar_tl->ar_transaction_line_id;
+   $msg .= "<br> Line is Successfully Created. Line id id " . $ar_tl->ar_transaction_line_id;
 
    //update so line details
    $sol->invoiced_quantity = $ar_tl->inv_line_quantity;

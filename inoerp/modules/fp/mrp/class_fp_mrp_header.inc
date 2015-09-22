@@ -181,7 +181,7 @@ class fp_mrp_header extends dbObject {
   $po_req_interface->need_by_date = date('Y-m-d', strtotime("$leadtime days"));
   $po_req_interface->audit_trial();
   $po_req_interface->save();
-  echo "<br>Requistion is Successfullycreated in interafce. po_requisition_interface_id is " . $po_req_interface->po_requisition_interface_id;
+  echo "<br>Requistion is Successfully Created in interafce. po_requisition_interface_id is " . $po_req_interface->po_requisition_interface_id;
  }
 
  private function _cretae_wo($obj) {
@@ -201,7 +201,7 @@ class fp_mrp_header extends dbObject {
   $woh->audit_trial();
   $woh->save();
   $woh->_after_save();
-  echo "<br>WO is Successfullycreated in interafce. wip_wo_header_id is " . $woh->wip_wo_header_id;
+  echo "<br>WO is Successfully Created in interafce. wip_wo_header_id is " . $woh->wip_wo_header_id;
  }
 
  public function multi_select_input_fields() {

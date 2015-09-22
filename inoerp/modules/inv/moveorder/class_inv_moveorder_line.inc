@@ -122,7 +122,7 @@ class inv_moveorder_line extends dbObject {
      if (!empty($this->item_id_m)) {
       try {
        $ret_val = $this->_create_inv_transactions_directTransfer();
-       echo "<br>INV Transaction Lines are SuccessfullyCreated ";
+       echo "<br>INV Transaction Lines are Successfully Created ";
       } catch (Exception $e) {
        $update_satus = -99;
        echo "<br>Creating the transaction lines failed @ inv_moveorder_line after save" . $e->getMessage();
@@ -171,7 +171,7 @@ class inv_moveorder_line extends dbObject {
     try {
      $this->_create_inv_transactions_indirectTransfer();
      $this->status = 'SHIPPED';
-     echo "<br>INV Transaction lines are Successfullycreated for Inter Org shipment ";
+     echo "<br>INV Transaction lines are Successfully Created for Inter Org shipment ";
     } catch (Exception $e) {
      $this->status = 'ERROR';
      echo "<br>Creating the transaction lines failed @ " . __FILE__ . ' line ' . __LINE__ . '<br>' . $e->getMessage();
