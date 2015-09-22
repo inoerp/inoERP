@@ -33,7 +33,7 @@ if (!empty($_GET['router'])) {
 }
 ?>
 <?php
-$dont_check_login = true;
+//$dont_check_login = true;
 include_once('includes/functions/loader.inc');
 
 //exit script in case of delete statement
