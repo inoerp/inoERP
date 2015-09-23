@@ -34,7 +34,7 @@ inoERP
       <li><?php
        echo $f->l_val_field_d('customer_number', 'ar_customer', 'customer_number', '', '', 'vf_select_customer_number');
        ?><i class="generic g_select_customer_number select_popup clickable fa fa-search" data-class_name="ar_customer"></i></li>
-      <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
+      <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id'); ?> </li>
       <li><?php $f->l_text_field_dr('so_status') ?></li>
       <li><?php $f->l_select_field_from_array('order_source_type', sd_so_header::$order_source_type_a, $$class->order_source_type, 'order_source_type', '', 1, 1); ?> </li> 
      </ul>
