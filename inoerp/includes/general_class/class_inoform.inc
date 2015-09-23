@@ -1484,16 +1484,23 @@ EOD;
   echo $this->date_field($name, $value, '20', '', $divClass);
  }
 
+ 
  public function l_date_fieldFromToday_m($name, $value, $divClass = '') {
   $divClass = "dateFromToday $divClass ";
   echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->date_field($name, $value, '20', '', $divClass, 1);
  }
 
- public function l_date_fieldFromToday_d($name, $value, $divClass = '') {
-  $divClass = "dateFromToday $divClass default_date";
+  public function l_date_fieldFromToday_dm($name, $value,  $id= '', $divClass = '') {
+  $divClass = "dateFromToday $divClass ";
   echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
-  echo $this->date_field($name, $value, '20', '', $divClass, 1);
+  echo $this->date_field($name, $value, '20', $id, $divClass, 1);
+ }
+ 
+ public function l_date_fieldFromToday_d($name, $value, $id = '', $divClass = '') {
+  $divClass = "dateFromToday $divClass ";
+  echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo $this->date_field($name, $value, '20', $id, $divClass);
  }
 
  public function date_field_MondayFromToday($name, $value) {

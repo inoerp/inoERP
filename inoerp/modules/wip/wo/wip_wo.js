@@ -87,20 +87,10 @@ $(document).ready(function () {
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
-// //popu for selecting header item
-// $('#content').on('click', '.select_item_number.select_popup_header', function() {
-//	localStorage.setItem("itemType", 'header');
-//	var openUrl = 'select.php?class_name=item';
-//	if ($(this).siblings('.item_number').val()) {
-//	 openUrl += '&item_number=' + $(this).siblings('.item_number').val();
-//	}
-//	void window.open(openUrl, '_blank',
-//					'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-// });
 
 //start date & completion date calculation
- $('#content').off('change', '.start_date').on('change', '.start_date', function () {
-  var startDate = $('.start_date').first().val();
+ $('#content').off('blur', '#start_date').on('blur', '#start_date', function () {
+  var startDate = $('#start_date').val();
   var str = startDate.split(/-/);
   if ($('#processing_lt').val()) {
    var processing_lt = +$('#processing_lt').val();
@@ -111,11 +101,11 @@ $(document).ready(function () {
   var cd = new Date(str[0], str[1], newDate);
   var foramtedDate = cd.getFullYear() + '-' + cd.getMonth() + '-' + cd.getDate();
 //  alert(processing_lt + '' + foramtedDate);
-  $('.completion_date').first().val(foramtedDate);
+  $('#completion_date').val(foramtedDate);
  });
 
- $('#content').off('change', '.completion_date').on('change', '.completion_date', function () {
-  var completionDate = $('.completion_date').first().val();
+ $('#content').off('blur', '#completion_date').on('blur', '#completion_date', function () {
+  var completionDate = $('#completion_date').val();
   var str = completionDate.split(/-/);
   if ($('#processing_lt').val()) {
    var processing_lt = +$('#processing_lt').val();
@@ -125,7 +115,7 @@ $(document).ready(function () {
   var newDate = (parseInt(str[2]) + (processing_lt));
   var cd = new Date(str[0], str[1], newDate);
   var foramtedDate = cd.getFullYear() + '-' + cd.getMonth() + '-' + cd.getDate();
-  $('.start_date').first().val(foramtedDate);
+  $('#start_date').val(foramtedDate);
  });
 
 //Required Resource Quantity

@@ -67,7 +67,6 @@ class wip_wo_completion extends inv_transaction {
   'unit_cost',
   'costed_amount',
   'gl_journal_header_id',
-  'ef_id',
   'transaction_rev_enabled_cb',
   'rev_start_number',
   'created_by',

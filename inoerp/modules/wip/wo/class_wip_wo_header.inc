@@ -63,7 +63,6 @@ class wip_wo_header extends dbObject {
   'line',
   'scheduling_priority',
   'closed_date',
-  'ef_id',
   'created_by',
   'creation_date',
   'last_update_by',

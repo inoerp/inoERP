@@ -225,8 +225,9 @@ trait dbObject_t {
 
  public static function find_by_sql($sql = "") {
   global $dbc;
-  $prepare = $dbc->connection->prepare($sql);
+ 
   try {
+   $prepare = $dbc->connection->prepare($sql);
    $prepare->execute();
    $result_fetchAll = $prepare->fetchAll(PDO::FETCH_CLASS);
    return $result_fetchAll;

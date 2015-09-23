@@ -48,9 +48,9 @@ inoERP
       <div id="tabsHeader-2" class="tabContent">
        <div> 
         <ul class="column header_field">
-         <li id="document_status"><?php $f->l_select_field_from_object('wo_status', wip_wo_header::wip_wo_status(), 'option_line_code', 'option_line_value', $$class->wo_status, 'set_wo_status', '', '', $readonly); ?>         </li>
-         <li><?php $f->l_date_fieldFromToday('start_date', $$class->start_date, 1) ?></li>
-         <li><?php $f->l_date_fieldFromToday('completion_date', $$class->completion_date) ?></li>
+         <li id="document_status"><?php $f = new inoform(); $f->l_select_field_from_object('wo_status', wip_wo_header::wip_wo_status(), 'option_line_code', 'option_line_value', $$class->wo_status, 'set_wo_status', '', '', $readonly); ?>         </li>
+         <li><?php $f->l_date_fieldFromToday_dm('start_date', $$class->start_date , 'start_date', 'default_date') ?></li>
+         <li><?php $f->l_date_fieldFromToday_d('completion_date', $$class->completion_date ,'completion_date') ?></li>
          <li><?php $f->l_number_field_d('quantity'); ?> </li>
          <li><?php $f->l_number_field_d('nettable_quantity'); ?> </li>
          <li><?php $f->l_text_field_d('schedule_group'); ?> </li>
@@ -77,8 +77,8 @@ inoERP
         <ul class="column header_field">
          <li><?php $f->l_text_field_d('reference_bom_item_id_m'); ?> </li>
          <li><?php $f->l_text_field_d('reference_routing_item_id_m'); ?> </li>
-         <li><?php $f->l_checkBox_field_d('bom_exploded_cb'); ?> </li>
-         <li><?php $f->l_checkBox_field_d('routing_exploded_cb'); ?> </li>
+         <li><?php $f->l_checkBox_field_dr('bom_exploded_cb'); ?> </li>
+         <li><?php $f->l_checkBox_field_dr('routing_exploded_cb'); ?> </li>
          <li><?php $f->l_select_field_from_object('completion_sub_inventory', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->completion_sub_inventory, 'completion_sub_inventory', 'subinventory_id', '', $readonly); ?>         </li>
          <li><?php $f->l_select_field_from_object('completion_locator', locator::find_all_of_subinventory($$class->completion_sub_inventory), 'locator_id', 'locator', $$class->completion_locator, 'completion_locator', 'locator_id', '', $readonly); ?>         </li>
         </ul>
