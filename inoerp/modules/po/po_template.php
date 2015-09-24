@@ -36,7 +36,7 @@ inoERP
         <?php echo $f->hidden_field_withId('ref_po_header_id', $$class->ref_po_header_id); ?>
        </li>
        <li><?php $f->l_select_field_from_object('status', po_header::po_status(), 'option_line_code', 'option_line_value', $$class->po_status, 'po_status', 'dont_copy', '', 1); ?></li>
-       <li><?php
+       <li><?php 
         echo $f->l_val_field_dm('supplier_name', 'supplier', 'supplier_name', '', 'supplier_name', 'vf_select_supplier_name');
         echo $f->hidden_field_withId('supplier_id', $$class->supplier_id);
         ?><i class="generic g_select_supplier_name select_popup clickable fa fa-search" data-class_name="supplier"></i></li>

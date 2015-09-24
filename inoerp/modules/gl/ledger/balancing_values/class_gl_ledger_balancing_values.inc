@@ -10,9 +10,7 @@ class gl_ledger_balancing_values extends dbObject {
 //public static varibales - required to be accessed with out intantiating the class
  public static $primary_column = "gl_ledger_balancing_values_id";
  public static $key_column = "gl_ledger_id";
- public $description;
- public $column;
- public $requiredField = [
+  public $requiredField = [
 		 'balancing_values'
  ];
  public $field_a = [
@@ -25,10 +23,18 @@ class gl_ledger_balancing_values extends dbObject {
 		 'last_update_date',
  ];
 
+ 
+ public $description;
+ public $column;
+ public $gl_ledger_balancing_values_id;
+ public $gl_ledger_id;
+ public $balancing_values;
+  public $created_by;
+ public $creation_date;
+ public $last_update_by;
+ public $last_update_date;
+
 //public attributes used with the class
- public function __set($name, $value) {
-	$this->$name = $value;
- }
 
  public function findBy_ledgerId($ledgerId) {
 	$dbc = new dbc();

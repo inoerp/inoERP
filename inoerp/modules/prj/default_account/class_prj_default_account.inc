@@ -21,6 +21,7 @@ class prj_default_account extends dbObject {
  public $field_a = [
   'prj_default_account_id',
   'prj_project_type_header_id',
+  'accounting_group',
   'ac_id',
   'document_type',
   'description',
@@ -54,6 +55,7 @@ class prj_default_account extends dbObject {
  public $prj_default_account_id;
  public $prj_project_type_header_id;
  public $ac_id;
+ public $accounting_group;
  public $document_type;
  public $description;
  public $status;

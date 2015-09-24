@@ -208,7 +208,6 @@ class ec_paid_order extends dbObject {
   $sd_so->document_type = $ec_con_details->sales_document_type;
   $sd_so->ar_customer_id = $ar_customer_id;
   $sd_so->doc_currency = $confirm_order_details->sp_currency_code;
-
   $sd_so->bill_to_id = $confirm_order_details->bill_to_id;
   $sd_so->ship_to_id = $confirm_order_details->ship_to_id;
   $sd_so->header_amount = $confirm_order_details->total_amount[0];

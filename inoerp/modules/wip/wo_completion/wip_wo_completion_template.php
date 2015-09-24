@@ -8,16 +8,17 @@ inoERP
 -->
 <!--create empty form or a single id when search is not clicked and the id is referred from other page -->
 <div id ="form_all"> 
- <form action=""  method="post" id="wip_wo_completion"  name="wip_wo_completion"><?php $f = new inoform(); ?>
+ <form  method="post" id="wip_wo_completion"  name="wip_wo_completion"><?php $f = new inoform(); ?>
   <span class="heading"><?php echo gettext('Work Order Completion/Return') ?></span> 
   <div id ="form_header"> 
    <div id="form_serach_header" class="tabContainer">
-    <ul class="column header_field">
-     <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>    </li>
-     <li><label><i class="wip_wo_header_id select_popup clickable fa fa-search"></i>
-       <?php echo gettext('WO Header Id') ?></label> <?php $f->text_field_drm('wip_wo_header_id'); ?>
-     </li>
-     <li><?php $f->l_text_field_d('wo_number'); ?> </li>
+    <ul class="column header_field tabContent">
+     <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', 'popup_value', 1, $readonly1); ?>    </li>
+     <li><?php
+      echo $f->l_val_field_dm('wo_number', 'wip_wo_header', 'wo_number', 'org_id', 'vf_select_wo_number');
+      echo $f->hidden_field_withId('wip_wo_header_id', $$class->wip_wo_header_id);
+      echo $f->hidden_field_withIdClass('wo_status', 'RELEASED', 'popup_value');
+      ?><i class="generic g_select_wo_number select_popup clickable fa fa-search" data-class_name="wip_wo_header"></i></li>
      <li><?php $f->l_select_field_from_array('transaction_type_id', wip_wo_completion::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1); ?>
       <a name="show" href="form.php?class_name=wip_wo_completion&<?php echo "mode=$mode"; ?>" class="show2 document_id wip_wo_completion_id">          
        <i class="fa fa-refresh"></i></a> 
@@ -94,16 +95,16 @@ inoERP
        <tbody class="inv_transaction_values">
         <tr class="inv_transaction_row0" id="tab2_1">
          <td>
-          <?php echo form::select_field_from_object('from_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->from_subinventory_id, '', $readonly, 'subinventory_id'); ?>
+          <?php echo $f->select_field_from_object('from_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->from_subinventory_id, '', 'subinventory_id', '', $readonly); ?>
          </td>
          <td>
-          <?php echo form::select_field_from_object('from_locator_id', locator::find_all_of_subinventory($$class->from_subinventory_id), 'locator_id', 'locator', $$class->from_locator_id, '', $readonly, 'locator_id'); ?>
+          <?php echo $f->select_field_from_object('from_locator_id', locator::find_all_of_subinventory($$class->from_subinventory_id), 'locator_id', 'locator', $$class->from_locator_id, '', 'locator_id', '', $readonly); ?>
          </td>
          <td>
-          <?php echo form::select_field_from_object('to_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->to_subinventory_id, '', $readonly, 'subinventory_id'); ?>
+          <?php echo $f->select_field_from_object('to_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->to_subinventory_id, '', 'subinventory_id', '', $readonly); ?>
          </td>
          <td>
-          <?php echo form::select_field_from_object('to_locator_id', locator::find_all_of_subinventory($$class->to_subinventory_id), 'locator_id', 'locator', $$class->to_locator_id, '', $readonly, 'locator_id'); ?>
+          <?php echo $f->select_field_from_object('to_locator_id', locator::find_all_of_subinventory($$class->to_subinventory_id), 'locator_id', 'locator', $$class->to_locator_id, '', 'locator_id', '', $readonly); ?>
          </td>
         </tr>
        </tbody>

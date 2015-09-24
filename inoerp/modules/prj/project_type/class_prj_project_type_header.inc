@@ -67,7 +67,7 @@ class prj_project_type_header extends dbObject {
   'sponsored_cb',
   'organization_planning_cb',
   'intercompany_billing_cb',
-  'cost_burden_schedule_id',
+  'prj_burden_list_header_id',
   'cost_burdened_cb',
   'account_burdened_cost_cb',
   'cost_budget_method',
@@ -136,7 +136,7 @@ class prj_project_type_header extends dbObject {
  public $sponsored_cb;
  public $organization_planning_cb;
  public $intercompany_billing_cb;
- public $cost_burden_schedule_id;
+ public $prj_burden_list_header_id;
  public $cost_burdened_cb;
  public $account_burdened_cost_cb;
  public $cost_budget_method;

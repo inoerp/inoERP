@@ -212,6 +212,7 @@ class item extends dbObject {
  ];
  public $initial_search = [
   'item_id',
+  'org_id',
   "customer_ordered_cb",
   "internal_ordered_cb",
   "shippable_cb",

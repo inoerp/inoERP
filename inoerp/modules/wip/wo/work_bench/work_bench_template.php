@@ -16,27 +16,27 @@ inoERP
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
-      <ul class="column header_field">
-       <li><label><i class="wo_number select_popup clickable fa fa-search"></i>
-         <?php echo gettext('WO Number') ?></label><?php
-        $f->text_field_d('wo_number');
-        echo $f->hidden_field_withId('wip_wo_header_id', $$class->wip_wo_header_id);
-        echo $f->hidden_field_withCLass('wo_status', 'RELEASED', 'popup_value');
-        ?>
-        <a name="show2" href="form.php?class_name=wip_wo_work_bench&<?php echo "mode=$mode"; ?>" class="show2 document_id wip_wo_header_id">
-         <i class="fa fa-refresh"></i></a> 
-       </li>
-       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>       </li>
-       <li><?php $f->l_date_fieldFromToday_m('transaction_date', ($$class->transaction_date)); ?>       </li>
-       <li><?php $f->l_select_field_from_object('transaction_type', wip_move_transaction::wip_transactions(), 'option_line_code', 'option_line_value', $$class->transaction_type, 'transaction_type', '', 1, $readonly1); ?>       </li> 
-       <li><?php $f->l_text_field_dr('wip_move_transaction_id'); ?></li>
-      </ul>
+     <ul class="column header_field">
+      <li><label><i class="wo_number select_popup clickable fa fa-search"></i>
+        <?php echo gettext('WO Number') ?></label><?php
+       $f->text_field_d('wo_number');
+       echo $f->hidden_field_withId('wip_wo_header_id', $$class->wip_wo_header_id);
+       echo $f->hidden_field_withCLass('wo_status', 'RELEASED', 'popup_value');
+       ?>
+       <a name="show2" href="form.php?class_name=wip_wo_work_bench&<?php echo "mode=$mode"; ?>" class="show2 document_id wip_wo_header_id">
+        <i class="fa fa-refresh"></i></a> 
+      </li>
+      <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>       </li>
+      <li><?php $f->l_date_fieldFromToday_m('transaction_date', ($$class->transaction_date)); ?>       </li>
+      <li><?php $f->l_select_field_from_object('transaction_type', wip_move_transaction::wip_transactions(), 'option_line_code', 'option_line_value', $$class->transaction_type, 'transaction_type', '', 1, $readonly1); ?>       </li> 
+      <li><?php $f->l_text_field_dr('wip_move_transaction_id'); ?></li>
+     </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
-      <ul class="column header_field">
-       <li><?php $f->l_text_field_d('sales_order_header_id'); ?></li>               
-       <li><?php $f->l_text_field_d('sales_order_line_id'); ?></li>
-      </ul>
+     <ul class="column header_field">
+      <li><?php $f->l_text_field_d('sales_order_header_id'); ?></li>               
+      <li><?php $f->l_text_field_d('sales_order_line_id'); ?></li>
+     </ul>
     </div>
    </div>
   </div>
@@ -107,25 +107,24 @@ inoERP
        <div class="panel-body">
         <ul class="column header_field"> 
          <li><label><?php echo gettext('From Seq') ?></label>
-          <?php echo!empty($routing_line_details) ? form::select_field_from_object('from_routing_sequence', $routing_line_details, 'routing_sequence', 'routing_sequence', $$class->from_routing_sequence, 'from_routing_sequence', $readonly, '', '', 1) : form::text_field_ds('from_routing_sequence'); ?>
+          <?php echo!empty($routing_line_details) ? $f->select_field_from_object('from_routing_sequence', $routing_line_details, 'routing_sequence', 'routing_sequence', $$class->from_routing_sequence, 'from_routing_sequence', 'medium', 1, $readonly1) : form::text_field_d('from_routing_sequence'); ?>
          </li>
          <li><label><?php echo gettext('To Seq') ?></label>
-          <?php echo!empty($routing_line_details) ? form::select_field_from_object('to_routing_sequence', $routing_line_details, 'routing_sequence', 'routing_sequence', $$class->to_routing_sequence, 'to_routing_sequence', $readonly, '', '', 1) : form::text_field_ds('from_routing_sequence'); ?>
+          <?php echo!empty($routing_line_details) ? $f->select_field_from_object('to_routing_sequence', $routing_line_details, 'routing_sequence', 'routing_sequence', $$class->to_routing_sequence, 'to_routing_sequence', 'medium', 1, $readonly1) : form::text_field_d('to_routing_sequence'); ?>
          </li>
          <li><label><?php echo gettext('Available Qty') ?></label>
           <?php form::number_field_drs('available_quantity'); ?>
          </li>
          <li><label><?php echo gettext('From Step') ?> </label>
-          <?php echo form::select_field_from_object('from_operation_step', bom_routing_header::wip_move_step(), 'option_line_code', 'option_line_value', $$class->from_operation_step, 'from_operation_step', $readonly, '', '', 1); ?>
+          <?php echo $f->select_field_from_object('from_operation_step', bom_routing_header::wip_move_step(), 'option_line_code', 'option_line_value', $$class->from_operation_step, 'from_operation_step', 'medium', 1, $readonly1); ?>
          </li>
          <li><label><?php echo gettext('To Step') ?></label>
-          <?php echo form::select_field_from_object('to_operation_step', bom_routing_header::wip_move_step(), 'option_line_code', 'option_line_value', $$class->to_operation_step, 'to_operation_step', $readonly, '', '', 1); ?>
+          <?php echo $f->select_field_from_object('to_operation_step', bom_routing_header::wip_move_step(), 'option_line_code', 'option_line_value', $$class->to_operation_step, 'to_operation_step', 'medium', 1, $readonly1); ?>
          </li>
 
          <li><label><?php echo gettext('Move Qty') ?></label>
           <?php form::number_field_dm('move_quantity'); ?>
          </li>
-
 
         </ul>
        </div>

@@ -22,35 +22,38 @@ inoERP
      </ul>
      <div class="tabContainer">
       <div id="tabsHeader-1" class="tabContent">
-        <ul class="column header_field">
-         <li><?php $f->l_text_field_dr_withSearch('wip_wo_header_id'); ?>
-          <a name="show" href="form.php?class_name=wip_wo_header&<?php echo "mode=$mode"; ?>" class="show document_id wip_wo_header_id">
-           <i class="fa fa-refresh"></i></a> 
-         </li>
-         <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', '', $readonly); ?>         </li>
-         <li><?php $f->l_text_field_d('wo_number', 'primary_column2'); ?> </li>
-         <li><?php $f->l_select_field_from_object('wo_type', wip_wo_header::wip_wo_type(), 'option_line_code', 'option_line_value', $$class->wo_type, 'wo_type', '', '', $readonly); ?>         </li>
-         <li><?php $f->l_select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_orgId($$class->org_id), 'wip_accounting_group_id', 'wip_accounting_group', $$class->wip_accounting_group_id, 'wip_accounting_group_id', '', 1, 'readonly1'); ?>         </li>
-         <li><label><?php echo gettext('Item Number') ?></label> 
-          <?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
-          <?php echo $f->hidden_field_withId('processing_lt', $$class->processing_lt); ?>
-          <?php $f->text_field_dm('item_number', 'select_item_number'); ?>
-          <i class="select_item_number select_popup clickable fa fa-search"></i>
-         </li>
-         <li><?php $f->l_text_field_d('item_description'); ?></li>
-         <li><?php $f->l_select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom_id', 'uom_id', '', $readonly1); ?>         </li>
-         <li><?php $f->l_select_field_from_object('revision_name', $revision_name_a, 'revision_name', 'revision_name', $$class->revision_name, 'revision_name', ''); ?> </li>
-         <li><label><?php echo gettext('Status') ?></label>                      
-          <?php echo !empty($$class->wo_status) ? $$class->wo_status : ""; ?>
-         </li>
-        </ul>
+       <ul class="column header_field">
+        <li><?php $f->l_text_field_dr_withSearch('wip_wo_header_id'); ?>
+         <a name="show" href="form.php?class_name=wip_wo_header&<?php echo "mode=$mode"; ?>" class="show document_id wip_wo_header_id">
+          <i class="fa fa-refresh"></i></a> 
+        </li>
+        <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', 'popup_value', '', $readonly); ?>         </li>
+        <li><?php $f->l_text_field_d('wo_number', 'primary_column2'); ?> </li>
+        <li><?php $f->l_select_field_from_object('wo_type', wip_wo_header::wip_wo_type(), 'option_line_code', 'option_line_value', $$class->wo_type, 'wo_type', '', '', $readonly); ?>         </li>
+        <li><?php $f->l_select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_orgId($$class->org_id), 'wip_accounting_group_id', 'wip_accounting_group', $$class->wip_accounting_group_id, 'wip_accounting_group_id', '', 1, 'readonly1'); ?>         </li>
+        <li><?php
+         echo $f->hidden_field_withId('item_id_m', $$class->item_id_m);
+         echo $f->hidden_field_withId('processing_lt', $$class->processing_lt);
+         echo $f->hidden_field_withCLass('build_in_wip_cb', '1', 'popup_value');
+         echo $f->l_val_field_dm('item_number', 'item', 'item_number', 'org_id', 'vf_select_item_number');
+         ?>
+         <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i>
+        </li>
+        <li><?php $f->l_text_field_d('item_description'); ?></li>
+        <li><?php $f->l_select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom_id', 'uom_id', '', $readonly1); ?>         </li>
+        <li><?php $f->l_select_field_from_object('revision_name', $revision_name_a, 'revision_name', 'revision_name', $$class->revision_name, 'revision_name', ''); ?> </li>
+        <li><label><?php echo gettext('Status') ?></label>                      
+         <?php echo!empty($$class->wo_status) ? $$class->wo_status : ""; ?>
+        </li>
+       </ul>
       </div>
       <div id="tabsHeader-2" class="tabContent">
        <div> 
         <ul class="column header_field">
-         <li id="document_status"><?php $f = new inoform(); $f->l_select_field_from_object('wo_status', wip_wo_header::wip_wo_status(), 'option_line_code', 'option_line_value', $$class->wo_status, 'set_wo_status', '', '', $readonly); ?>         </li>
-         <li><?php $f->l_date_fieldFromToday_dm('start_date', $$class->start_date , 'start_date', 'default_date') ?></li>
-         <li><?php $f->l_date_fieldFromToday_d('completion_date', $$class->completion_date ,'completion_date') ?></li>
+         <li id="document_status"><?php $f = new inoform();
+         $f->l_select_field_from_object('wo_status', wip_wo_header::wip_wo_status(), 'option_line_code', 'option_line_value', $$class->wo_status, 'set_wo_status', '', '', $readonly); ?>         </li>
+         <li><?php $f->l_date_fieldFromToday_dm('start_date', $$class->start_date, 'start_date', 'default_date') ?></li>
+         <li><?php $f->l_date_fieldFromToday_d('completion_date', $$class->completion_date, 'completion_date') ?></li>
          <li><?php $f->l_number_field_d('quantity'); ?> </li>
          <li><?php $f->l_number_field_d('nettable_quantity'); ?> </li>
          <li><?php $f->l_text_field_d('schedule_group'); ?> </li>
@@ -87,7 +90,7 @@ inoERP
       <div id="tabsHeader-5" class="tabContent">
        <div id="comments">
         <div id="comment_list">
-         <?php echo!(empty($comments)) ? $comments : ""; ?>
+<?php echo!(empty($comments)) ? $comments : ""; ?>
         </div>
         <div id ="display_comment_form">
          <?php

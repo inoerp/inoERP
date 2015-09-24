@@ -42,7 +42,7 @@ inoERP
      <ul class="column header_field">
       <li><?php $f->l_checkBox_field_d('sponsored_cb'); ?></li>
       <li><?php $f->l_checkBox_field_d('cost_burdened_cb'); ?></li>
-      <li><?php $f->l_select_field_from_object('cost_burden_schedule_id',  prj_burden_list_header::find_all(),'prj_burden_list_header_id','burden_list', $$class->cost_burden_schedule_id,'cost_burden_schedule_id'); ?></li> 
+      <li><?php $f->l_select_field_from_object('prj_burden_list_header_id',  prj_burden_list_header::find_all(),'prj_burden_list_header_id','burden_list', $$class->prj_burden_list_header_id,'prj_burden_list_header_id'); ?></li> 
       <li><?php $f->l_checkBox_field_d('account_burdened_cost_cb'); ?></li> 
       <li><?php $f->l_text_field_d('cip_cost_type'); ?></li> 
       <li><?php $f->l_text_field_d('asset_cost_allocation_method'); ?></li> 

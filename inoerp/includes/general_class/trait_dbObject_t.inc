@@ -335,14 +335,16 @@ trait dbObject_t {
    $k_count = 1;
    foreach ($dieldVal_a as $k => $v) {
     if ($k_count == 1) {
-     $sql.= " WHERE " . $k . "= '{$v}' ";
-    } else {
+     if(!empty($v)){
+      $sql.= " WHERE " . $k . "= '{$v}' ";
+     }
+    } else if(!empty($v)) {
      $sql.= " AND " . $k . "= '{$v}' ";
     }
     $k_count++;
    }
   }
- 
+// echo $sql;
   $stmt = $dbc->connection->prepare(" $sql ");
   try {
    $stmt->execute();

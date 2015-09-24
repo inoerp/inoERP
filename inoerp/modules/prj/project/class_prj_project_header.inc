@@ -87,7 +87,7 @@ class prj_project_header extends dbObject {
   'revenue_accrual_method',
   'invoice_accrual_method',
   'billing_cycle',
-  'cost_burden_schedule_id',
+  'prj_burden_list_header_id',
   'account_burdened_cost_cb',
   'labor_billing_type',
   'nlr_billing_type',
@@ -177,7 +177,7 @@ class prj_project_header extends dbObject {
  public $revenue_accrual_method;
  public $invoice_accrual_method;
  public $billing_cycle;
- public $cost_burden_schedule_id;
+ public $prj_burden_list_header_id;
  public $account_burdened_cost_cb;
  public $labor_billing_type;
  public $nlr_billing_type;

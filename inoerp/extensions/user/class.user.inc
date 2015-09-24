@@ -68,7 +68,7 @@ class user extends dbObject {
   "last_name",
   "email",
   "phone",
-   'hr_employee_id',
+  'hr_employee_id',
   'ar_customer_id',
   'supplier_id',
   'block_notif_count',
@@ -211,21 +211,25 @@ class user extends dbObject {
  }
 
  private function _codeThePassword($password) {
-  return hash('sha256', crypt($password, 'xjkhrwq$@323sqjheq51234$$'));
+//  return hash('sha256', crypt($password, 'xjkhrwq$@323sqjheq51234$$'));
+  return password_hash($password, PASSWORD_BCRYPT);
  }
 
  public function authenticate($username = "", $password = "") {
-  global $db;
-//	$username = $db->escape_value($username);
-//	$password = $db->escape_value($password);
-////	$password_final = hash("sha256", $password);
-  $password_final = $this->_codeThePassword($password);
+//  $password_final = $this->_codeThePassword($password);
 
   $sql = "SELECT * from user 
-            WHERE username='{$username}' and password= '{$password_final}' LIMIT 1";
+            WHERE username='{$username}'  LIMIT 1";
   $result_array = self::find_by_sql($sql);
+  if ($result_array) {
+   if (password_verify($password, $result_array[0]->password)) {
+    $ret = $result_array[0];
+   } else {
+    $ret = false;
+   }
+  }
 
-  return !empty($result_array) ? array_pop($result_array) : false;
+  return $ret;
  }
 
  public function full_name() {
@@ -274,7 +278,7 @@ class user extends dbObject {
   }
  }
 
- public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields='', $hidden_fields='') {
+ public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
   $sql = "SELECT user_id, username, first_name, last_name, email,  phone, hr_employee_id, user_language,
            default_theme, block_notif_count,  ar_customer_id, supplier_id,  created_by,    creation_date, 
             last_update_by,    last_update_date , image_file_id  FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";

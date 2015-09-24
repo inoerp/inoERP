@@ -34,7 +34,7 @@ $(document).ready(function() {
  $('#coa_id').on('change', function(){
   var coa_structure_id = $(this).find('option:selected').data('coa_structure_id');
   $('#coa_structure_id').val(coa_structure_id);
-})
+});
 
  //enable disbale parent & group
  $('.parent_cb').each(function(){

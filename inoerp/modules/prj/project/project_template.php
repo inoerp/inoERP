@@ -69,7 +69,7 @@ inoERP
       <li><?php $f->l_select_field_from_array('revenue_accrual_method', prj_project_header::$accrual_method_a, $$class->revenue_accrual_method, 'revenue_accrual_method');  ?></li>
       <li><?php $f->l_select_field_from_array('invoice_accrual_method', prj_project_header::$accrual_method_a, $$class->invoice_accrual_method, 'invoice_accrual_method');  ?></li>
       <li><?php $f->l_text_field_d('billing_cycle'); ?></li>
-      <li><?php $f->l_select_field_from_object('cost_burden_schedule_id', prj_burden_list_header::find_all(), 'prj_burden_list_header_id', 'burden_list', $$class->cost_burden_schedule_id, 'cost_burden_schedule_id'); ?></li> 
+      <li><?php $f->l_select_field_from_object('prj_burden_list_header_id', prj_burden_list_header::find_all(), 'prj_burden_list_header_id', 'burden_list', $$class->prj_burden_list_header_id, 'prj_burden_list_header_id'); ?></li> 
       <li><?php $f->l_checkBox_field_d('account_burdened_cost_cb'); ?></li> 
       <li><?php $f->l_select_field_from_array('labor_billing_type', prj_project_type_header::$schedule_type_a, $$class->labor_billing_type, 'labor_billing_type'); ?></li> 
       <li class='labor-rate'><?php $f->l_select_field_from_object('employee_schedule_id', prj_rate_schedule_header::find_all_by_rateType(), 'prj_rate_schedule_header_id', 'schedule_name', $$class->employee_schedule_id, 'employee_schedule_id'); ?></li> 
