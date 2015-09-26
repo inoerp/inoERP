@@ -131,7 +131,7 @@ class search extends dbObject {
 
   for ($i = 0; $i < $no_of_tabs; $i++) {
    $search_result .= "<div id=\"tabsLine-$i\" class='tabContent'>";
-   $search_result .= "<table class=\"normal\"><thead><tr>";
+   $search_result .= "<table class=\"normal\"><thead ><tr class='ino-sort'>";
    $search_result .= '<th>'.gettext(ucwords(str_replace('_', ' ', $this->primary_column_s))).'</th>';
    if ($i == 0 && $show_action_msg) {
     $search_result .= "<th>Action<span id='copy_clipboard'>&nbsp;&nbsp;&nbsp;<i class='fa fa-clipboard clickable'></i></span></th>";
@@ -142,7 +142,7 @@ class search extends dbObject {
     if ($j > $total_columns - 2) {
      break;
     }
-    $search_result .= '<th data-field_name="' . $this->column_array_s[$j] . '">' . $drop_down_icon . gettext(ucwords(str_replace('_', ' ', $this->column_array_s[$j]))) . '</th>';
+    $search_result .= '<th class="ino-sort-element" data-field_name="' . $this->column_array_s[$j] . '">' . $drop_down_icon . gettext(ucwords(str_replace('_', ' ', $this->column_array_s[$j]))) . '</th>';
    }
    $search_result .='</tr></thead>';
    If (!empty($this->result)) {

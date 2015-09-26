@@ -3352,29 +3352,6 @@ $(document).ready(function () {
  });
 
 
- //popu for selecting project
- $('#content').on('click', '.select_project_number.select_popup', function () {
-  var elemenType = $(this).parent().prop('tagName');
-  if (elemenType === 'TD') {
-   var rowClass = $(this).closest('tr').prop('class');
-   var fieldClass = $(this).closest('td').find('.select_project_number').prop('class');
-   localStorage.setItem("row_class", rowClass);
-   localStorage.removeItem("li_divId", liId);
-  } else {
-   var liId = $(this).closest('li').find('.username').prop('id');
-   localStorage.setItem("li_divId", liId);
-   localStorage.removeItem("row_class");
-  }
-
-  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
-  localStorage.setItem("close_field_class", close_field_class);
-  var openUrl = 'select.php?class_name=prj_project_header';
-
-  void window.open(openUrl, '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
-
-
  //popu for selecting project project_task_number
  $('#content').on('click', '.select_project_task_number.select_popup', function () {
   if ($(this).data('class_name')) {

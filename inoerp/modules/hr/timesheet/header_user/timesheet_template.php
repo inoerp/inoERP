@@ -133,11 +133,11 @@ inoERP
          <td><?php
          $f->val_field_wid2m('project_number', 'prj_project_header', 'project_number', '', 'select project_number');
          echo $f->hidden_field('prj_project_header_id', $$class_second->prj_project_header_id);
-          ?><i class="select_project_number select_popup clickable fa fa-search"></i></td>
+          ?><i class="generic select_project_number select_popup clickable fa fa-search" data-class_name="prj_project_header"></i></td>
          <td><?php
-         $f->val_field_wid2('task_number', 'prj_project_all_lowesttask_v', 'task_number', 'prj_project_header_id', 'select project_task_number');
+         $f->val_field_wid2('task_number', 'prj_project_all_v', 'task_number', 'prj_project_header_id', 'select project_task_number');
          echo $f->hidden_field('prj_project_line_id', $$class_second->prj_project_line_id);
-          ?><i class="select_project_task_number select_popup clickable fa fa-search" data-class_name="prj_project_all_lowesttask_v"></i></td>
+          ?><i class="generic select_project_task_number select_popup clickable fa fa-search" data-class_name="prj_project_all_v"></i></td>
          <td><?php echo $f->number_field('day1', $$class_second->day1, '', '', 'small'); ?></td>
          <td><?php echo $f->number_field('day2', $$class_second->day2, '', '', 'small'); ?></td>
          <td><?php echo $f->number_field('day3', $$class_second->day3, '', '', 'small'); ?></td>

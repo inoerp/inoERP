@@ -173,7 +173,7 @@ inoERP
           echo ino_inline_action($prj_project_line->prj_project_line_id, array('prj_project_header_id' => $prj_project_header->prj_project_header_id));
           ?>
          </td>
-         <td><?php $f->text_field_wid2sr('prj_project_line_id'); ?></td>
+         <td><?php $f->text_field_wid2sr('prj_project_line_id' , 'line_id'); ?></td>
          <td><?php $f->seq_field_d($count) ?></td>
          <!--<td><?php // $f->text_field_wid2r('task_seq_number','medium');      ?></td>-->
          <td><?php $f->text_field_wid2('task_number', 'lines_number'); ?></td>

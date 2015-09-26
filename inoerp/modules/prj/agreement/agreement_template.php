@@ -117,7 +117,7 @@ inoERP
          <td><?php
           $f->val_field_wid2m('project_number', 'prj_project_header' , 'project_number' ,  '','select project_number');
           echo $f->hidden_field('prj_project_header_id', $$class_second->prj_project_header_id);
-          ?><i class="select_project_number select_popup clickable fa fa-search"></i></td>
+          ?><i class="generic select_project_number select_popup clickable fa fa-search" data-class_name="prj_project_header"></i></td>
 <!--         <td><?php
 //          $f->text_field_wid2('task_number', 'select project_number');
 //          echo $f->hidden_field('prj_project_line_id', $$class_second->prj_project_line_id);

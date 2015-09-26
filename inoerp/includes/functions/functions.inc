@@ -1440,6 +1440,32 @@ function search_item_number_to() {
  return $stmt;
 }
 
+function search_project_number_from() {
+ $stmt = '<input id="project_number_from" class="val_field textfield vf_select_project_number_from project_number project_number_from" 
+                type="text" data-toggle="tooltip" title="Select From Project Number" data-val_field="prj_project_header" data-val_value="project_number" 
+                size="20" value="" name="project_number_from">
+                <input class="hidden popup_value prj_project_header_id prj_project_header_id_from" type="hidden" value="" name="prj_project_header_id_from[]">
+                <input class="hidden popup_value approval_status" type="hidden" value="APPROVED" name="approval_status[]">
+<i class="generic g_select_project_number select_popup clickable fa fa-search set_value_for_one_field" data-class_name="prj_project_header" style="display: inline-block;"></i>';
+ return $stmt;
+}
+
+function search_project_number_to() {
+ $stmt = '<input id="project_number_to" class="val_field textfield vf_select_project_number_to project_number project_number_to" 
+                type="text" data-toggle="tooltip" title="Select To Project Number" data-val_field="prj_project_header" data-val_value="project_number" 
+                size="20" value="" name="project_number_to">
+                <input class="hidden popup_value prj_project_header_id prj_project_header_id_to" type="hidden" value="" name="prj_project_header_id_to[]">
+                <input class="hidden popup_value approval_status" type="hidden" value="APPROVED" name="approval_status[]">
+<i class="generic g_select_project_number select_popup clickable fa fa-search set_value_for_one_field" data-class_name="prj_project_header" style="display: inline-block;"></i>';
+ return $stmt;
+}
+
+function search_prj_cost_type_for_distribution() {
+ global $f; $f = new inoform();
+ $stmt = $f->select_field_from_array('cost_type_for_distribution', prj_expenditure_header::$distribute_cost_type_a, '', 'cost_type_for_distribution');
+ return $stmt;
+}
+
 function search_payroll() {
  global $f;
  $stmt = $f->select_field_from_object('hr_payroll_id', hr_payroll::find_all(), 'hr_payroll_id', 'payroll', '', 'hr_payroll_id', '', 1);

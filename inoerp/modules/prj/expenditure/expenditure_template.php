@@ -25,7 +25,7 @@ inoERP
       </li>
       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>        </li>
       <li><?php $f->l_text_field_d('batch_name'); ?></li>
-      <li><?php $f->l_select_field_from_array('expenditure_class', prj_expenditure_header::$expenditure_class_a, $$class->expenditure_class, 'expenditure_class', '', '', $readonly1,$readonly1); ?>    </li>
+      <li><?php $f->l_select_field_from_array('expenditure_class', prj_expenditure_header::$expenditure_class_a, $$class->expenditure_class, 'expenditure_class', '', 1,$readonly1); ?>    </li>
       <li><?php $f->l_text_field_d('description'); ?></li>
       <li><?php $f->l_date_fieldAnyDay('effective_to', $$class->effective_to); ?></li>
       <li><?php $f->l_text_field_dr('status'); ?></li>
@@ -112,8 +112,8 @@ inoERP
           echo ino_inline_action($prj_expenditure_line->prj_expenditure_line_id, array('prj_expenditure_header_id' => $prj_expenditure_header->prj_expenditure_header_id));
           ?>
          </td>
-         <td><?php $f->text_field_d2sr('prj_expenditure_line_id'); ?></td>
-         <td><?php echo $f->select_field_from_object('prj_exepnditure_type_header_id', prj_expenditure_type_header::find_all(), 'prj_expenditure_type_header_id', 'expenditure_type', $$class_second->prj_exepnditure_type_header_id); ?>						 </td>
+         <td><?php $f->text_field_d2sr('prj_expenditure_line_id' ,'line_id'); ?></td>
+         <td><?php echo $f->select_field_from_object('prj_exepnditure_type_header_id', prj_expenditure_type_header::find_all(), 'prj_expenditure_type_header_id', 'expenditure_type', $$class_second->prj_exepnditure_type_header_id , '' , '' , 1); ?>						 </td>
          <td><?php echo $f->select_field_from_object('org_id', org::find_all(), 'org_id', 'org', $$class_second->org_id); ?>						 </td>
          <td><?php
           $f->val_field_wid2('employee_name', 'hr_employee_v', 'employee_name', '' ,'select employee resource_type_control');
@@ -122,14 +122,16 @@ inoERP
          <td><?php echo $f->select_field_from_object('job_id', hr_job::find_all(), 'hr_job_id', 'job_name', $$class_second->job_id); ?></td>
          <td><?php $f->text_field_d2('description'); ?></td>
          <td><?php echo $f->date_fieldAnyDay('expenditure_date', $$class_second->expenditure_date); ?></td>
-         <td><?php
+         <td><?php 
           $f->val_field_wid2m('project_number', 'prj_project_header', 'project_number', '', 'select project_number');
-          echo $f->hidden_field('prj_project_header_id', $$class_second->prj_project_header_id);
-          ?><i class="select_project_number select_popup clickable fa fa-search"></i></td>
+          echo $f->hidden_field_withCLass('prj_project_header_id', $$class_second->prj_project_header_id ,'popup_value');
+          echo $f->hidden_field_withCLass('approval_status', 'APPROVED', 'popup_value');
+          ?><i class="generic select_project_number select_popup clickable fa fa-search" data-class_name="prj_project_header"></i></td>
          <td><?php
           $f->val_field_wid2m('task_number', 'prj_project_all_lowesttask_v', 'task_number', 'prj_project_header_id', 'select project_task_number');
           echo $f->hidden_field('prj_project_line_id', $$class_second->prj_project_line_id);
-          ?><i class="select_project_task_number select_popup clickable fa fa-search" data-class_name="prj_project_all_lowesttask_v"></i></td>
+          echo $f->hidden_field_withCLass('approval_status', 'APPROVED', 'popup_value');
+          ?><i class="generic select_project_task_number select_popup clickable fa fa-search" data-class_name="prj_project_all_lowesttask_v"></i></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small'); ?></td>
          <td><?php $f->text_field_d2s('quantity'); ?></td>
          <td><?php $f->text_field_d2s('rate'); ?></td>

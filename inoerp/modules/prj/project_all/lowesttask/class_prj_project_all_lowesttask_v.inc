@@ -39,7 +39,8 @@ class prj_project_all_lowesttask_v extends dbObject {
  public $initial_search = [
   'prj_project_header_id',
   'project_number',
-  'prj_project_line_id'
+  'prj_project_line_id',
+  'approval_status',
  ];
  public static $json_label_fields = [
   'org',

@@ -117,10 +117,21 @@ if (!empty($_GET['search_class_name'])) {
 
  $table_name = empty($table_name) ? $class::$table_name : $table_name;
  $primary_column = property_exists($$class, 'primary_column') ? $class::$primary_column : $table_name . '_id';
- $pageno = !(empty($_GET['pageno'])) ? (int) $_GET['pageno'] : 1;
- $per_page = !(empty($_GET['per_page'])) ? (int) $_GET['per_page'] : 0;
 
  $_GET = $search_param_values;
+ 
+  if (!(empty($_GET['pageno']))) {
+  $pageno = is_array($_GET['pageno']) ? (int) $_GET['pageno'][0] : (int) $_GET['pageno'];
+ } else {
+  $pageno = 1;
+ }
+ 
+  if (!(empty($_GET['per_page']))) {
+  $per_page = is_array($_GET['per_page']) ? (int) $_GET['per_page'][0] : (int) $_GET['per_page'];
+ } else {
+  $per_page = 10;
+ }
+ 
  $_GET['pageno'] = $pageno;
  $_GET['class_name'] = $class;
  $_GET['per_page'] = $per_page;

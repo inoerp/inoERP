@@ -23,7 +23,7 @@ inoERP
       <li><?php
        $f->l_text_field_d('project_number', 'select project_number');
        echo $f->hidden_field_withId('prj_project_header_id', $$class->prj_project_header_id);
-       ?><i class="select_project_number select_popup clickable fa fa-search"></i></li>
+       ?><i class="generic select_project_number select_popup clickable fa fa-search" data-class_name="prj_project_header"></i></li>
       <li><?php $f->l_text_field_d('event_name'); ?></li>
       <li><?php $f->l_text_field_d('event_number'); ?></li>
       <li><?php $f->l_text_field_d('description'); ?></li> 
@@ -98,7 +98,7 @@ inoERP
          <td><?php
           $f->val_field_wid2m('task_number', 'prj_project_all_v', 'task_number', '', 'select project_task_number');
           echo $f->hidden_field('prj_project_line_id', $$class_second->prj_project_line_id);
-          ?><i class="select_project_task_number select_popup clickable fa fa-search"></i></td>
+          ?><i class="generic select_project_task_number select_popup clickable fa fa-search" data-class_name="prj_project_all_v"></i></td>
          <td><?php echo $f->select_field_from_object('event_type_id', prj_event_type::find_all(), 'event_type', 'prj_event_type_id', $$class_second->event_type_id, '', '', 1); ?></td>
          <td><?php echo $f->date_fieldAnyDay('event_date', $$class_second->event_date); ?></td>
          <td><?php echo $f->select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class_second->currency, '', '', 1); ?></td>

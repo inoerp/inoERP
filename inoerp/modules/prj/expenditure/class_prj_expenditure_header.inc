@@ -52,7 +52,11 @@ class prj_expenditure_header extends dbObject {
   'BURDEN' => 'Burden',
   'USAGE' => 'Usage',
   'MISC' => 'Miscellaneous',
-  'BURDEN' => 'Burden',
+ ];
+ public static $distribute_cost_type_a = [
+  'TIMESHEET' => 'Time Sheet',
+  'USAGE' => 'Usage',
+  'MISC' => 'Miscellaneous'
  ];
  public $field_a = [
   'prj_expenditure_header_id',
@@ -81,11 +85,9 @@ class prj_expenditure_header extends dbObject {
   'bu_org_id',
   'expenditure_class',
  ];
- 
-  public $fields_inForm_notInDataBase = [
+ public $fields_inForm_notInDataBase = [
   'action',
  ];
-  
  public $search = [
   '_show_update_path' => 1,
   '_show_view_path' => 1,
@@ -95,6 +97,16 @@ class prj_expenditure_header extends dbObject {
  ];
  public $profile_default = [
   'bu_org_id' => 'org_bu_name_default',
+ ];
+ public $prg_distribute_cost_parameters = [
+  'Organization' => 'search_business_org_nm',
+  'Project From' => 'search_project_number_from',
+  'Project To' => 'search_project_number_to',
+  'Cost Type' => 'search_prj_cost_type_for_distribution',
+ ];
+ public $prg_distribute_cost_details = [
+  'name' => 'Distribute Expenditure',
+  'description' => 'Distribute Project Expenditure',
  ];
  public $pageTitle = " Expenditure Type"; //page Title
  public $prj_expenditure_header_id;
@@ -146,7 +158,6 @@ class prj_expenditure_header extends dbObject {
    default:
     break;
   }
-  
  }
 
  private function _verify_status() {
@@ -169,6 +180,51 @@ class prj_expenditure_header extends dbObject {
     break;
   }
   return $return;
+ }
+
+ private $_cost_type_for_distribution;
+ private $_prj_project_header_id_to;
+ private $_prj_project_header_id_from;
+
+ public function prg_distribute_cost($seralized_parameters) {
+  $parameters = unserialize($seralized_parameters);
+  $this->message = '<br> Start of Distribute Cost Program ';
+
+  if (!empty($parameters['bu_org_id'][0])) {
+   $this->bu_org_id = $parameters['bu_org_id'][0];
+   $this->message .= '<br> Entered Org Id is : ' . $this->bu_org_id;
+  } else {
+   $this->message .= '<br> Error! : No org id found @  ' . __FILE__ . ' @@ ' . __LINE__;
+   return $this->message;
+  }
+
+  if (isset($parameters['prj_project_header_id_from'][0])) {
+   $this->_prj_project_header_id_from = $parameters['prj_project_header_id_from'][0];
+   $this->message .= "<br>Using from project header id " . $this->_prj_project_header_id_from;
+  }
+  
+    if (isset($parameters['prj_project_header_id_to'][0])) {
+   $this->_prj_project_header_id_to = $parameters['prj_project_header_id_to'][0];
+   $this->message .= "<br>Using to project header id " . $this->_prj_project_header_id_to;
+  }
+
+  if (isset($parameters['cost_type_for_distribution'][0])) {
+   $this->_cost_type_for_distribution = $parameters['cost_type_for_distribution'][0];
+   $this->message .= "<br>Using distribution type " . $this->_cost_type_for_distribution;
+  }
+
+  try {
+   $this->_distribute_cost();
+  } catch (Exception $e) {
+   $this->message .= "<br>Failed to complete distribute cost program " . $e->getMessage();
+  }
+
+
+  return $this->message;
+ }
+
+ private function _distribute_cost() {
+  pa($this);
  }
 
  public function multi_select_hidden_fields() {

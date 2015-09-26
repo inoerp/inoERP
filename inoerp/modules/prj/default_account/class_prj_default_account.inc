@@ -83,14 +83,14 @@ class prj_default_account extends dbObject {
   return $result;
  }
 
- public static function find_all_by_projectTypeHeaderId($prj_project_type_header_id) {
+ public static function find_all_by_projectTypeHeaderId($prj_project_type_header_id, $accounting_group) {
   $sql = " 
 	 SELECT *
 	 FROM prj_default_account
-	 WHERE prj_project_type_header_id = '{$prj_project_type_header_id}'
-	";
+	 WHERE prj_project_type_header_id = '{$prj_project_type_header_id}' AND accounting_group = '{$accounting_group}'	";
+//   echo $sql;
   $result = self::find_by_sql($sql);
-  return $result;
+  return !empty($result) ? $result : false;
  }
 
 }

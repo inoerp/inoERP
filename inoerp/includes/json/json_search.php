@@ -7,10 +7,18 @@ if (!empty($_GET['class_name'])) {
  $$class = new $class;
  $table_name = empty($table_name) ? $class::$table_name : $table_name;
  $primary_column = property_exists($$class, 'primary_column') ? $class::$primary_column : $table_name . '_id';
- $pageno = !(empty($_GET['pageno'])) ? (int) $_GET['pageno'] : 1;
- $per_page = !(empty($_GET['per_page'])) ? (int) $_GET['per_page'] : 0;
-
  $_GET = get_postArray_From_jqSearializedArray($_GET['search_parameters']);
+ if (!(empty($_GET['pageno']))) {
+  $pageno = is_array($_GET['pageno']) ? (int) $_GET['pageno'][0] : (int) $_GET['pageno'];
+ } else {
+  $pageno = 1;
+ }
+ 
+  if (!(empty($_GET['per_page']))) {
+  $per_page = is_array($_GET['per_page']) ? (int) $_GET['per_page'][0] : (int) $_GET['per_page'];
+ } else {
+  $per_page = 10;
+ }
  $_GET['pageno'] = $pageno;
  $_GET['class_name'] = $class;
  $_GET['per_page'] = $per_page;
@@ -82,12 +90,12 @@ if (!empty($_GET['class_name'])) {
     $entered_search_criteria = str_replace(' ', '%', trim($_GET[$value][0]));
     $entered_search_criteria_1s = substr($entered_search_criteria, 0, 1);
     $entered_search_criteria_2s = substr($entered_search_criteria, 0, 2);
-    $is_id_eq_search = !(in_array($entered_search_criteria_1s, ['=','>','<']) || in_array($entered_search_criteria_2s, ['!=','>=','<=']));
-    
+    $is_id_eq_search = !(in_array($entered_search_criteria_1s, ['=', '>', '<']) || in_array($entered_search_criteria_2s, ['!=', '>=', '<=']));
+
     if (($is_id_eq_search) && (strpos($value, '_ID') !== false || strpos($value, '_id') !== false)) {
      if ($entered_search_criteria == 'null') {
       $whereFields[] = " $value IS NULL ";
-     } else  {
+     } else {
       $whereFields[] = sprintf("%s = %s ", $value, trim(str_replace('=', '', $entered_search_criteria)));
      }
     } else if ($entered_search_criteria_1s == '=') {

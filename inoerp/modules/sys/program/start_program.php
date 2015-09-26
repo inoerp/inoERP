@@ -123,5 +123,5 @@ function start_next_program() {
 
 do {
  start_next_program();
-} while (execution_time(true) < 5);
+} while (execution_time(true) < 55);
 ?>

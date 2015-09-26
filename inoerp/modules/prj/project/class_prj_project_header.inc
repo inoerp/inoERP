@@ -117,6 +117,7 @@ class prj_project_header extends dbObject {
  public $initial_search = [
   'prj_project_type_id',
   'project_number',
+  'approval_status'
  ];
  public $requiredField = [
   'doc_currency',
@@ -230,6 +231,7 @@ class prj_project_header extends dbObject {
  }
 
  private function _do_action() {
+
   switch ($this->action) {
    case 'COPY_ESTIMATES':
     $this->copy_estimates();
@@ -243,7 +245,12 @@ class prj_project_header extends dbObject {
     $this->_process_logistics();
     break;
 
+   case 'APPROVE':
+    $this->approval_status  = 'APPROVED';
+    break;
+
    default :
+    echo $this->action;
     break;
   }
  }
@@ -253,8 +260,8 @@ class prj_project_header extends dbObject {
    $this->_do_action();
   }
 
-  if (empty($this->so_status)) {
-   $this->so_status = 'ENTERED';
+  if (empty($this->approval_status)) {
+   $this->approval_status = 'ENTERED';
   }
  }
 

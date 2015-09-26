@@ -125,7 +125,7 @@ inoERP
           $f->val_field_wid2m('task_number', 'prj_project_all_v', 'task_number', '', 'select project_task_number');
           echo $f->hidden_field_withCLass('prj_project_line_id', $$class_second->prj_project_line_id ,'dontCopy');
           echo $f->hidden_field_withCLass('prj_project_header_id', $$class->prj_project_header_id,'prj_project_header_id popup_value');
-          ?><i class="select_project_task_number select_popup clickable fa fa-search"></i></td>
+          ?><i class="generic select_project_task_number select_popup clickable fa fa-search" data-class_name="prj_project_all_v"></i></td>
          <td><?php $f->text_field_d2('prj_resource_line_id'); ?></td>
          <td><?php $f->text_field_d2('description'); ?></td>
          <td><?php $f->text_field_d2('quantity'); ?></td>
