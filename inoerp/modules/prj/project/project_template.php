@@ -47,6 +47,7 @@ inoERP
       <li><?php $f->l_date_fieldAnyDay('completion_date', $$class->completion_date) ?></li>
       <li><?php $f->l_text_field_d('life_cycle') ?></li>
       <li><?php $f->l_select_field_from_object('current_phase', option_header::find_options_byName('PRJ_PROJECT_PHASE'), 'option_line_code','option_line_value', $$class->current_phase) ?></li>
+      <li><?php $f->l_select_field_from_object('accounting_group', option_header::find_options_byName('PRJ_ACCOUNTING_GRP'), 'option_line_code', 'option_line_value', $$class->accounting_group, 'accounting_group', 'action'); ?>   </li>
      </ul> 
     </div>
     <div id="tabsHeader-2" class="tabContent">

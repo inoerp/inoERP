@@ -77,6 +77,7 @@ inoERP
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Basic-2') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
@@ -112,8 +113,8 @@ inoERP
           echo ino_inline_action($prj_expenditure_line->prj_expenditure_line_id, array('prj_expenditure_header_id' => $prj_expenditure_header->prj_expenditure_header_id));
           ?>
          </td>
-         <td><?php $f->text_field_d2sr('prj_expenditure_line_id' ,'line_id'); ?></td>
-         <td><?php echo $f->select_field_from_object('prj_exepnditure_type_header_id', prj_expenditure_type_header::find_all(), 'prj_expenditure_type_header_id', 'expenditure_type', $$class_second->prj_exepnditure_type_header_id , '' , '' , 1); ?>						 </td>
+         <td><?php $f->text_field_d2sr('prj_expenditure_line_id' ,'line_id always_readonly'); ?></td>
+         <td><?php echo $f->select_field_from_object('prj_expenditure_type_header_id', prj_expenditure_type_header::find_all(), 'prj_expenditure_type_header_id', 'expenditure_type', $$class_second->prj_expenditure_type_header_id , '' , '' , 1); ?>						 </td>
          <td><?php echo $f->select_field_from_object('org_id', org::find_all(), 'org_id', 'org', $$class_second->org_id); ?>						 </td>
          <td><?php
           $f->val_field_wid2('employee_name', 'hr_employee_v', 'employee_name', '' ,'select employee resource_type_control');
@@ -135,6 +136,40 @@ inoERP
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small'); ?></td>
          <td><?php $f->text_field_d2s('quantity'); ?></td>
          <td><?php $f->text_field_d2s('rate'); ?></td>
+        </tr>
+        <?php
+        $count = $count + 1;
+       }
+       ?>
+      </tbody>
+     </table>
+    </div>
+    <div id="tabsLine-2" class="tabContent">
+     <table class="form_line_data_table">
+      <thead> 
+       <tr>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Status') ?></th>
+        <th><?php echo gettext('Debit Account') ?></th>
+        <th><?php echo gettext('Credit Account') ?></th>
+        <th><?php echo gettext('Journal Header Id') ?></th>
+        <th><?php echo gettext('Burden Amount') ?></th>
+        <th><?php echo gettext('Burden Details') ?></th>
+       </tr>
+      </thead>
+      <tbody class="form_data_line_tbody">
+       <?php
+       $count = 0; $f = new inoform();
+       foreach ($prj_expenditure_line_object as $prj_expenditure_line) {
+        ?>         
+        <tr class="prj_expenditure_line<?php echo $count ?>">
+         <td><?php echo $$class_second->prj_expenditure_line_id ?></td>
+         <td><?php echo $f->select_field_from_array('status2', prj_expenditure_line::$status_a, $$class_second->status, '', 'medium', '', 1, 1); ?>						 </td>
+         <td><?php $f->ac_field_wid2('debit_ac_id'); ?></td>
+         <td><?php $f->ac_field_wid2('credit_ac_id'); ?></td>
+         <td><?php $f->text_field_d2r('gl_journal_header_id'); ?></td>
+         <td><?php $f->text_field_d2r('burden_amount'); ?></td>
+         <td><a role="button" target="_blank" class="btn btn-sm btn-default dont_copy" href="search.php?class_name=prj_burden_expenditure_v&amp;show_block=1&amp;prj_expenditure_line_id=<?php echo $$class_second->prj_expenditure_line_id; ?>"><?php echo gettext('View') ?></a></td>
         </tr>
         <?php
         $count = $count + 1;
@@ -166,6 +201,6 @@ inoERP
   <li class="btn1DivId" data-btn1DivId="prj_expenditure_header" ></li>
   <li class="btn2DivId" data-btn2DivId="form_line" ></li>
   <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>
-  <li class="noOfTabbs" data-noOfTabbs="1" ></li>
+  <li class="noOfTabbs" data-noOfTabbs="2" ></li>
  </ul>
 </div>

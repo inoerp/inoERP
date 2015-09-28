@@ -107,6 +107,7 @@ class prj_project_header extends dbObject {
   'is_template_cb',
   'project_status',
   'approval_status',
+  'accounting_group',
   'rev_enabled_cb',
   'rev_number',
   'created_by',
@@ -124,6 +125,7 @@ class prj_project_header extends dbObject {
   'bu_org_id',
   'prj_project_type_id',
   'prj_work_type',
+  'accounting_group'
  ];
  public $addressField = [
   'ship_to_id',
@@ -198,6 +200,7 @@ class prj_project_header extends dbObject {
  public $is_template_cb;
  public $project_status;
  public $approval_status;
+ public $accounting_group;
  public $rev_enabled_cb;
  public $rev_number;
  public $created_by;

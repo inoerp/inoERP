@@ -74,6 +74,8 @@
           <th><?php echo gettext('Value') ?></th>
           <th><?php echo gettext('Description') ?></th>
           <th><?php echo gettext('Priority') ?></th>
+                    <th><?php echo gettext('Mapper 1') ?></th>
+          <th><?php echo gettext('Mapper 2') ?></th>
           <th><?php echo gettext('Value Group') ?></th>
           <th class="add_detail_values_header"><?php echo gettext('Details') ?></th>
          </tr>
@@ -97,6 +99,8 @@
            <td><?php form::text_field_d2m('option_line_value'); ?></td>
            <td><?php form::text_field_d2('description'); ?></td>
            <td><?php form::text_field_d2('priority'); ?></td>
+                      <td><?php form::text_field_d2('mapper1'); ?></td>
+           <td><?php form::text_field_d2('mapper2'); ?></td>
            <td><?php echo form::select_field_from_object('value_group_id', sys_value_group_header::find_all(), 'sys_value_group_header_id', 'value_group', $$class_second->value_group_id, '', $readonly, '', ''); ?></td>
            <td class="add_detail_values">
             <i class="fa fa-arrow-circle-down add_detail_values_img"></i>
@@ -180,6 +184,7 @@
         <thead> 
          <tr>
           <th><?php echo gettext('Seq') ?>#</th>
+
           <th><?php echo gettext('Status') ?></th>
           <th><?php echo gettext('Start Date') ?></th>
           <th><?php echo gettext('End Date') ?></th>

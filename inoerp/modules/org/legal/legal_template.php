@@ -68,15 +68,13 @@
      </div> 
      <!--              end of tab1-->
 
-     <div id="tabsLine-2">
-      <div class="column header_field" class="tabContent"> 
-       <ul>
+     <div id="tabsLine-2" class="tabContent">
+      <ul class="column header_field" > 
         <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', '' , '' , $readonly) ?>        </li> 
         <li><label><?php echo gettext('Balancing Segments') ?></label> 
          <?php echo form::text_field('balancing_segments', $$class->balancing_segments, 90, '', '', '', '', 1); ?>
         </li> 
        </ul>
-      </div> 
       <!--                end of tab2 div three_column-->
      </div>
      <!--end of tab2-->	 

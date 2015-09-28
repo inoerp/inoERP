@@ -16,6 +16,8 @@ class option_line extends dbObject {
   'value_group_id',
   "priority",
   "status",
+  'mapper1',
+  'mapper2',
   "rev_enabled",
   "rev_number",
   "effective_start_date",
@@ -65,6 +67,8 @@ class option_line extends dbObject {
  public $rev_number;
  public $effective_start_date;
  public $effective_end_date;
+ public $mapper1;
+ public $mapper2;
  public $created_by;
  public $creation_date;
  public $last_update_by;

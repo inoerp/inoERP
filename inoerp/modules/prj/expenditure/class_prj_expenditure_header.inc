@@ -202,30 +202,157 @@ class prj_expenditure_header extends dbObject {
    $this->_prj_project_header_id_from = $parameters['prj_project_header_id_from'][0];
    $this->message .= "<br>Using from project header id " . $this->_prj_project_header_id_from;
   }
-  
-    if (isset($parameters['prj_project_header_id_to'][0])) {
-   $this->_prj_project_header_id_to = $parameters['prj_project_header_id_to'][0];
-   $this->message .= "<br>Using to project header id " . $this->_prj_project_header_id_to;
-  }
 
   if (isset($parameters['cost_type_for_distribution'][0])) {
    $this->_cost_type_for_distribution = $parameters['cost_type_for_distribution'][0];
    $this->message .= "<br>Using distribution type " . $this->_cost_type_for_distribution;
   }
 
-  try {
-   $this->_distribute_cost();
-  } catch (Exception $e) {
-   $this->message .= "<br>Failed to complete distribute cost program " . $e->getMessage();
+  if (isset($parameters['prj_project_header_id_to'][0])) {
+   $this->_prj_project_header_id_to = $parameters['prj_project_header_id_to'][0];
+   $this->message .= "<br>Using to project header id " . $this->_prj_project_header_id_to;
+   for ($i = $this->_prj_project_header_id_from; $i <= $this->_prj_project_header_id_to; $i++) {
+    try {
+     $this->_distribute_cost($i);
+    } catch (Exception $e) {
+     $this->message .= "<br>Failed to complete distribute cost program " . $e->getMessage();
+    }
+   }
+  } else {
+   try {
+    $this->_distribute_cost($this->_prj_project_header_id_from);
+   } catch (Exception $e) {
+    $this->message .= "<br>Failed to complete distribute cost program " . $e->getMessage();
+   }
   }
+
+
+
 
 
   return $this->message;
  }
 
- private function _distribute_cost() {
-  pa($this);
+ private function _distribute_cost($prj_project_header_id) {
+  /*
+   * 1. Find the project id and get the burden list of the project
+   * 2. Find all expenditure lines where status is null or Entered
+   * 3. For each expenditure line find corresponding burden cost using find_burdenDetails_fromExpenditureLine
+   *    3.1 Find the expenditure type
+   *    3.2 Get the burden structure from the burden list
+   *    3.3 Check if the expenditure type has a burden cost base in the burden structure
+   *    3.4.Find the burden cost code of the burden cost base
+   *    3.5 Get the burden rate from the burden structure
+   * 4. Create burden expenditure
+   * 5. Find all expenditure debit and credit accounts
+   */
+  global $dbc;
+
+  $all_exp_lines = prj_expenditure_line::find_by_headerId_Status($prj_project_header_id);
+  if (empty($all_exp_lines)) {
+   $this->message .= "<br>No elligible lines for  prj_project_header_id $prj_project_header_id ";
+   return true;
+  }
+
+
+  foreach ($all_exp_lines as $k => $exp_lines) {
+   //create the burden details
+//   echo '<br> prj_expenditure_line_id :' . $exp_lines->prj_expenditure_line_id;
+   $burden_lines = prj_expenditure_line::find_burdenDetails_fromExpenditureLine($exp_lines->prj_expenditure_line_id);
+   $burden_line_amount = 0;
+   
+   if ($burden_lines) {
+    //create burden lines
+    foreach ($burden_lines as $burden_line) {
+     $buredn_l = new prj_burden_expenditure();
+     $buredn_l->prj_expenditure_line_id = $burden_line->prj_expenditure_line_id;
+     if (!empty($burden_line->burden_value)) {
+      $buredn_l->burden_amount = $burden_line->burden_value;
+     } else if (!empty($burden_line->multiplier)) {
+      $buredn_l->burden_amount = $burden_line->multiplier * $exp_lines->quantity;
+     }
+     $burden_line_amount += $buredn_l->burden_amount;
+     $buredn_l->prj_burden_cost_base_id = $burden_line->burden_cost_base_id;
+     $buredn_l->prj_expenditure_type_header_id = $burden_line->prj_expenditure_type_header_id;
+     $buredn_l->prj_project_header_id = $burden_line->prj_project_header_id;
+     $buredn_l->prj_project_line_id = $burden_line->prj_project_line_id;
+     $buredn_l->prj_burden_list_header_id = $burden_line->prj_burden_list_header_id;
+     $buredn_l->prj_burden_structure_header_id = $burden_line->prj_burden_structure_header_id;
+     $buredn_l->prj_burden_costcode_id = $burden_line->burden_cost_code_id;
+     $buredn_l->multiplier = $burden_line->multiplier;
+     $buredn_l->burden_value = $burden_line->burden_value;
+     try {
+//      pa($buredn_l);
+      $buredn_l->save();
+     } catch (Exception $e) {
+      $dbc->rollback = true;
+     }
+    }
+   }
+
+   //get the accounts
+   $prj_el = new prj_expenditure_line();
+   $prj_el->findBy_id($exp_lines->prj_expenditure_line_id);
+   $prj_eh = prj_expenditure_header::find_by_id($prj_el->prj_expenditure_header_id);
+   $el_accounts = prj_expenditure_line::find_accountDetails_fromExpenditureLine($exp_lines->prj_expenditure_line_id);
+   $expn_document_type = $prj_eh->expenditure_class . '_EXPEN';
+   $clear_document_type = $prj_eh->expenditure_class . '_CLEAR';
+   $default_exp_ac_id = $default_exp_clr_ac_id = null;
+   if (!$el_accounts) {
+    return;
+   }
+
+   foreach ($el_accounts as $el_acc) {
+    switch ($el_acc->document_type) {
+     case $expn_document_type:
+      $prj_el->debit_ac_id = $el_acc->ac_id;
+      break;
+
+     case $clear_document_type:
+      $prj_el->credit_ac_id = $el_acc->ac_id;
+      break;
+
+     default:
+      if ($el_acc->document_type == 'DEFAULT_EXPEN') {
+       $default_exp_ac_id = $el_acc->ac_id;
+      } else if ($el_acc->document_type == 'DEFAULT_EXPEN_CLEAR') {
+       $default_exp_clr_ac_id = $el_acc->ac_id;
+      }
+      break;
+    }
+   }
+
+   if (empty($prj_el->debit_ac_id) && !empty($default_exp_ac_id)) {
+    $prj_el->debit_ac_id = $default_exp_ac_id;
+    echo "<br>Using default debit account id ";
+   } else if (empty($prj_el->debit_ac_id) && empty($default_exp_ac_id)) {
+    echo "<br>No debit account found. Complete the default account setup";
+   }
+
+   if (empty($prj_el->credit_ac_id) && !empty($default_exp_clr_ac_id)) {
+    $prj_el->credit_ac_id = $default_exp_clr_ac_id;
+    echo "<br>Using default credit account id ";
+   } else if (empty($prj_el->credit_ac_id) && empty($default_exp_clr_ac_id)) {
+    echo "<br>No credit account found. Complete the default account setup";
+   }
+   $prj_el->burden_amount = $burden_line_amount;
+   $prj_el->status = 'DISTRIBUTED';
+
+
+   try {
+    pa($prj_el);
+    $prj_el->save();
+   } catch (Exception $e) {
+    $dbc->rollback = true;
+   }
+  }
  }
+
+ private function _create_burenlines() {
+  
+ }
+
+// public $expclass_
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [

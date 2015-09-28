@@ -43,7 +43,6 @@ class prj_burden_expenditure extends dbObject {
   'prj_project_header_id',
   'prj_project_line_id',
   'prj_burden_structure_header_id',
-  'prj_exepnditure_type_header_id',
   'prj_burden_costcode_id',
   'multiplier',
   'burden_value',
@@ -57,9 +56,11 @@ class prj_burden_expenditure extends dbObject {
  public $initial_search = [
   'expenditure',
   'description',
+  'prj_expenditure_line_id'
  ];
  public $requiredField = [
-  "expenditure",
+  "prj_expenditure_line_id",
+  'final_amount'
  ];
  public $search = [
   '_show_update_path' => 1,
@@ -76,10 +77,11 @@ class prj_burden_expenditure extends dbObject {
  public $prj_project_header_id;
  public $prj_project_line_id;
  public $prj_burden_structure_header_id;
- public $prj_exepnditure_type_header_id;
+ public $prj_burden_costcode_id;
  public $multiplier;
  public $burden_value;
  public $burden_amount;
+ public $final_amount;
  public $created_by;
  public $creation_date;
  public $last_update_by;

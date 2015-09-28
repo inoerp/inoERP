@@ -1,5 +1,5 @@
 <div id ="form_all"><span class="heading"><?php 
-$mode = 2; $readonly = 1;
+
 echo gettext('Burden Expenditure') ?></span>
  <form  method="post" id="prj_burden_expenditure"  name="prj_burden_expenditure">
   <div id ="form_header">
@@ -59,6 +59,9 @@ echo gettext('Burden Expenditure') ?></span>
 
 
 <div id="js_data">
+  <ul id="js_saving_data">
+  <li class="headerClassName" data-headerClassName="prj_burden_expenditure" ></li>
+ </ul>
  <ul id="js_contextMenu_data">
   <li class="docHedaderId" data-docHedaderId="prj_burden_expenditure_id" ></li>
   <li class="btn1DivId" data-btn1DivId="prj_burden_expenditure"></li>
