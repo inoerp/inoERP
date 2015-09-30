@@ -68,7 +68,6 @@ class gl_journal_header extends dbObject {
   'reference_type',
   'reference_key_name',
   'reference_key_value',
-  
   'status',
   'rev_enabled_cb',
   'rev_number',
@@ -85,14 +84,6 @@ class gl_journal_header extends dbObject {
   'journal_name',
   'description',
  ];
- public $column = [
-  'gl_journal_header_id',
-  'ledger_id',
-  'currency',
-  'period_id',
-  'journal_name',
-  'description',
- ];
  public $requiredField = [
   'ledger_id',
   'currency',
@@ -100,7 +91,7 @@ class gl_journal_header extends dbObject {
   'journal_source',
   'journal_category',
   'journal_name',
-   ];
+ ];
  public $numberField = [
   'header_amount',
   'exchange_rate',
@@ -122,6 +113,9 @@ class gl_journal_header extends dbObject {
   '_show_update_path' => 1,
   '_update_action_meassge' => 'Update',
   '_show_view_path' => 1,
+ ];
+ public $search_functions = [
+  'Ledger' => 'search_ledger',
  ];
  public $pageTitle = " GL Journal Entry "; //page Title
  public $option_lists = [

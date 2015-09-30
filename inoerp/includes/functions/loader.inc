@@ -10,6 +10,7 @@ $no_organization_access = false;
 $access_denied_msg = null;
 $verify_web_form_allowed = true;
 $catalog_stmt = '';
+//$_SESSION['debug'] = empty($_SESSION['debug']) ? true : $_SESSION['debug'];
 
 if (empty($mode)) {
  if (!empty($_GET['mode'])) {

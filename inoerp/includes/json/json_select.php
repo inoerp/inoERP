@@ -91,8 +91,9 @@ if (!empty($_GET['class_name'])) {
     $whereFields[] = sprintf("%s IN %s ", $value, $comma_sep_search_parameters_in_str);
    } else {
     $entered_search_criteria = str_replace(' ', '%', trim($_GET[$value][0]));
-    $entered_search_criteria_1s = substr($entered_search_criteria, 0, 1);
-    $entered_search_criteria_2s = substr($entered_search_criteria, 0, 2);
+    $entered_search_criteria_1s = substr($entered_search_criteria, 0, 1); //1 character
+    $entered_search_criteria_2s = substr($entered_search_criteria, 0, 2); //2 characters
+    $entered_search_criteria_m1s = substr($entered_search_criteria, 1); //minus 1 string
     $is_id_eq_search = !(in_array($entered_search_criteria_1s, ['=', '>', '<']) || in_array($entered_search_criteria_2s, ['!=', '>=', '<=']));
 
     if (($is_id_eq_search) && (strpos($value, '_ID') !== false || strpos($value, '_id') !== false)) {
@@ -102,7 +103,7 @@ if (!empty($_GET['class_name'])) {
       $whereFields[] = sprintf("%s = %s ", $value, trim(str_replace('=', '', $entered_search_criteria)));
      }
     } else if ($entered_search_criteria_1s == '=') {
-     if ($entered_search_criteria == 'null') {
+     if ($entered_search_criteria_m1s == 'null') {
       $whereFields[] = " $value IS NULL ";
      } else {
       $whereFields[] = sprintf("%s = '%s' ", $value, trim(substr($entered_search_criteria, 1)));

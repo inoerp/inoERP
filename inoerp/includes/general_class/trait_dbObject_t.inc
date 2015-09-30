@@ -647,7 +647,10 @@ trait dbObject_t {
 //   pa($stmt);
    $this->msg = 0;
    $dbc->rollback = 1;
-   echo "<br>Record couldnt be saved!!: Error Code : DBO01 . Error @dbObject @@ Line " . __LINE__ . '<br>' . $e->getMessage() . "<br>";
+   echo "<br>Record couldnt be saved. Error @ ".__FILE__. ' @@line' . __LINE__ . '<br>' . $e->getMessage() . "<br>";
+//   if(isset($_SESSION['debug'])){
+//    echo "<br>The statement is <br>" . $stmt;
+//   }
   }
   return $this->msg;
  }

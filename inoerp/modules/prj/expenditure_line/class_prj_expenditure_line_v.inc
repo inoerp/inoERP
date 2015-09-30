@@ -16,6 +16,7 @@ class prj_expenditure_line_v extends dbObject {
   'credit_ac_id',
   'burden_amount',
   'gl_journal_header_id',
+  'gl_journal_interface_cb',
   'org_id',
   'hr_employee_id',
   'description',
@@ -33,7 +34,7 @@ class prj_expenditure_line_v extends dbObject {
   'project_number',
    'task_number',
   'prj_expenditure_line_id',
-  'gl_journal_header_id',
+  'gl_journal_interface_cb',
   'status',
  ];
  public $search = [
@@ -62,6 +63,7 @@ class prj_expenditure_line_v extends dbObject {
  public $credit_ac_id;
  public $burden_amount;
  public $gl_journal_header_id;
+ public $gl_journal_interface_cb;
  public $status;
  public $project_number;
  public $bu_org_id;
@@ -75,7 +77,7 @@ prj_expenditure_line_id, prj_expenditure_header_id,  org_id,
 hr_employee_id, description, job_id, expenditure_date,
 prj_project_header_id, prj_project_line_id, prj_nlr_header_id,
 prj_expenditure_type_header_id, uom_id, quantity, rate,
-debit_ac_id, credit_ac_id, burden_amount, gl_journal_header_id,
+debit_ac_id, credit_ac_id, burden_amount, gl_journal_header_id, gl_journal_interface_cb,
 status, project_number, bu_org_id, task_number
 )
 AS
@@ -84,7 +86,7 @@ pel.prj_expenditure_line_id, pel.prj_expenditure_header_id,  pel.org_id,
 pel.hr_employee_id, pel.description, pel.job_id, pel.expenditure_date,
 pel.prj_project_header_id, pel.prj_project_line_id, pel.prj_nlr_header_id,
 pel.prj_expenditure_type_header_id, pel.uom_id, pel.quantity, pel.rate,
-pel.debit_ac_id, pel.credit_ac_id, pel.burden_amount, pel.gl_journal_header_id,
+pel.debit_ac_id, pel.credit_ac_id, pel.burden_amount, pel.gl_journal_header_id, pel.gl_journal_interface_cb,
 pel.status, pph.project_number, pph.bu_org_id, ppl.task_number
 
 FROM prj_expenditure_line pel,

@@ -108,7 +108,7 @@ class prj_expenditure_header extends dbObject {
   'name' => 'Distribute Expenditure',
   'description' => 'Distribute Project Expenditure',
  ];
- public $pageTitle = " Expenditure Type"; //page Title
+ public $pageTitle = " Expenditure"; //page Title
  public $prj_expenditure_header_id;
  public $bu_org_id;
  public $batch_name;
@@ -198,7 +198,7 @@ class prj_expenditure_header extends dbObject {
    return $this->message;
   }
 
-  if (isset($parameters['prj_project_header_id_from'][0])) {
+  if (!empty($parameters['prj_project_header_id_from'][0])) {
    $this->_prj_project_header_id_from = $parameters['prj_project_header_id_from'][0];
    $this->message .= "<br>Using from project header id " . $this->_prj_project_header_id_from;
   }
@@ -208,7 +208,7 @@ class prj_expenditure_header extends dbObject {
    $this->message .= "<br>Using distribution type " . $this->_cost_type_for_distribution;
   }
 
-  if (isset($parameters['prj_project_header_id_to'][0])) {
+  if (!empty($parameters['prj_project_header_id_to'][0])) {
    $this->_prj_project_header_id_to = $parameters['prj_project_header_id_to'][0];
    $this->message .= "<br>Using to project header id " . $this->_prj_project_header_id_to;
    for ($i = $this->_prj_project_header_id_from; $i <= $this->_prj_project_header_id_to; $i++) {
@@ -218,11 +218,20 @@ class prj_expenditure_header extends dbObject {
      $this->message .= "<br>Failed to complete distribute cost program " . $e->getMessage();
     }
    }
-  } else {
+  } else if (!empty($this->_prj_project_header_id_from)) {
    try {
     $this->_distribute_cost($this->_prj_project_header_id_from);
    } catch (Exception $e) {
     $this->message .= "<br>Failed to complete distribute cost program " . $e->getMessage();
+   }
+  } else {
+   //find all projects with line in NULL or ENTERED status and distribute them
+   $this->message .= '<br>Running program for all available projects ';
+   $all_lines_a = prj_expenditure_line::find_distinctProject_byStatus();
+   if ($all_lines_a) {
+    foreach ($all_lines_a as $el_obj) {
+     $this->_distribute_cost($el_obj->prj_project_header_id);
+    }
    }
   }
 
@@ -260,7 +269,7 @@ class prj_expenditure_header extends dbObject {
 //   echo '<br> prj_expenditure_line_id :' . $exp_lines->prj_expenditure_line_id;
    $burden_lines = prj_expenditure_line::find_burdenDetails_fromExpenditureLine($exp_lines->prj_expenditure_line_id);
    $burden_line_amount = 0;
-   
+
    if ($burden_lines) {
     //create burden lines
     foreach ($burden_lines as $burden_line) {
@@ -340,7 +349,7 @@ class prj_expenditure_header extends dbObject {
 
 
    try {
-    pa($prj_el);
+//    pa($prj_el);
     $prj_el->save();
    } catch (Exception $e) {
     $dbc->rollback = true;

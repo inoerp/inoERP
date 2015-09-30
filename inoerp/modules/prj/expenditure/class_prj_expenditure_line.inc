@@ -20,6 +20,7 @@ class prj_expenditure_line extends dbObject {
  public static $parent_primary_column = "prj_expenditure_header_id";
  public static $key_column = "prj_expenditure_type_header_id";
  public static $module = "prj";
+ public static $gl_journal_category = "PRJ_EXPENDITURE";
  public static $status_a = [
   'ENTERED' => 'Entered',
   'DISTRIBUTED' => 'Distributed',
@@ -39,10 +40,12 @@ class prj_expenditure_line extends dbObject {
   'uom_id',
   'quantity',
   'rate',
+  'line_amount',
   'debit_ac_id',
   'credit_ac_id',
   'burden_amount',
   'gl_journal_header_id',
+  'gl_journal_interface_cb',
   'status',
   'created_by',
   'creation_date',
@@ -63,6 +66,7 @@ class prj_expenditure_line extends dbObject {
   "employee_name",
   'project_number',
   "task_number",
+  'action'
  ];
  public $search = [
   '_show_update_path' => 1,
@@ -87,6 +91,8 @@ class prj_expenditure_line extends dbObject {
  public $debit_ac_id;
  public $credit_ac_id;
  public $gl_journal_header_id;
+ public $gl_journal_interface_cb;
+ public $line_amount;
  public $burden_amount;
  public $created_by;
  public $creation_date;
@@ -99,102 +105,66 @@ class prj_expenditure_line extends dbObject {
  public $action;
 
  public function _before_save() {
-  if (empty($this->prj_project_line_id)) {
+  if (empty($this->prj_project_line_id) || empty($this->status)) {
    $this->status = 'ENTERED';
   }
-  if (empty($this->action == 'create_accounting')) {
-   pa($this);
-   $this->_create_accounting();
+  if (empty($this->line_amount)) {
+   $this->line_amount = empty($this->rate) ? $this->quantity : $this->quantity * $this->rate;
+  }
+  if ($this->action == 'create_accounting') {
+//   pa($this);
+   $this->_insert_gl_interface();
    return 10;
   }
  }
 
-// private function _save_journal_header($hr_payroll_id) {
-//  global $dbc;
-//  $hr_pr = hr_payroll::find_by_id($hr_payroll_id);
-//  $hr_pm = new hr_payroll_payment_method();
-//  $hr_pm->findBy_id($hr_pr->payment_method_id);
-//  $gjh = new gl_journal_header;
-//  $gjh->ledger_id = $hr_pm->ledger_id;
-//  $gjh->status = 'ENTERED';
-//  $gjh->currency = $hr_pm->currency;
-//  $gp = new gl_period();
-//  $gjh->period_id = $gp->current_open_period($hr_pm->ledger_id, 'OPEN')->gl_period_id;
-//  $gjh->journal_source = self::$module;
-//  $gjh->journal_category = 'HR_PAYROLL';
-//  $gjh->reference_type = 'table';
-//  $gjh->reference_key_name = self::$table_name;
-//  $gjh->reference_key_value = $this->hr_payroll_process_id;
-//  $gjh->journal_name = $gjh->journal_category . '-' . $gjh->reference_key_value;
-//  $gjh->description = $gjh->journal_name . '-' . current_time();
-//  $gjh->balance_type = 'A';
-//  try {
-//   $gjh->save();
-//   $this->gl_journal_header_id = $gjh->gl_journal_header_id;
-//   echo "<br> Jounral Header Id #" . $this->gl_journal_header_id . ' is created';
-//   $this->_save_journal_lines($hr_pm);
-//  } catch (Exception $e) {
-//   echo "<br> Failed Saving Journal Header" . $e->getMessage();
-//   $dbc->rollback = true;
-//  }
-// }
-//
-// private function _save_journal_lines($hr_pm) {
-//  global $dbc;
-//  $total_dr_amount = 0;
-//  $all_ps_header = hr_payslip_header::find_by_payrollProcessId($this->hr_payroll_process_id);
-//  $this->_max_line_num = 1;
-//  foreach ($all_ps_header as $ps_header) {
-//   $new_gjl = new gl_journal_line();
-//   $new_gjl->gl_journal_header_id = $this->gl_journal_header_id;
-//   $new_gjl->reference_key_name = 'hr_payslip_header';
-//   $new_gjl->reference_key_value = $ps_header->hr_payslip_header_id;
-//   //check if line lready exists
-//   $jl_exists = $new_gjl->findBy_reference_keyName_keyValue();
-//   if ($jl_exists) {
-//    echo "<br> Failed Saving Journal Line. Payslip header reference exists in GL. Error @ payroll_process @@ line " . __LINE__;
-//    $dbc->rollback = true;
-//   } else {
-//    $new_gjl->gl_journal_line_id = null;
-//    $new_gjl->line_num = $this->_max_line_num;
-//    $new_gjl->status = 'U';
-//    $this->_max_line_num++;
-//   }
-//   $new_gjl->code_combination_id = hr_employee::find_by_id($ps_header->employee_id)->salary_ac_id;
-//   $payslip_header_amt = hr_payslip_header::find_headerAmount_by_headerId($ps_header->hr_payslip_header_id);
-//   $new_gjl->total_dr = $payslip_header_amt;
-//   $new_gjl->total_ac_dr = $payslip_header_amt;
-//   $total_dr_amount += $payslip_header_amt;
-//
-//   $new_gjl->description = 'HR Payroll Header Id #' . $ps_header->hr_payslip_header_id;
-//   $new_gjl->reference_type = 'table';
-//   $new_gjl->save();
-//  }
-//
-////	save the Accrual Account
-//  $payroll_accrual = new gl_journal_line();
-//  $payroll_accrual->gl_journal_header_id = $this->gl_journal_header_id;
-//  $payroll_accrual->reference_key_name = 'hr_payroll_process';
-//  $payroll_accrual->reference_key_value = $this->hr_payroll_process_id;
-//  //check if line lready exists
-//  $jl_exists_liability = $payroll_accrual->findBy_reference_keyName_keyValue();
-//  if ($jl_exists_liability) {
-//   echo "<br> Failed Saving Journal Line. Payslip header reference exists in GL. Error @ payroll_process @@ line " . __LINE__;
-//   $dbc->rollback = true;
-//  } else {
-//   $payroll_accrual->gl_journal_line_id = null;
-//   $payroll_accrual->line_num = $this->_max_line_num;
-//   $this->_max_line_num++;
-//  }
-//  $payroll_accrual->status = 'U';
-//  $payroll_accrual->code_combination_id = $hr_pm->salary_payable_ac_id;
-//  $payroll_accrual->total_cr = $total_dr_amount;
-//  $payroll_accrual->total_ac_cr = $total_dr_amount;
-//
-//  $new_gjl->description = 'HR Payroll Header Id #' . $ps_header->hr_payslip_header_id;
-//  $payroll_accrual->reference_type = 'table';
-//  $payroll_accrual->save();
-// }
+ private function _insert_gl_interface() {
+  global $dbc;
+  $fin_details = prj_project_header::find_financial_details_from_projectHeaderId($this->prj_project_header_id);
+  if (!$fin_details) {
+   echo "<br>Finance details not found";
+   if (!empty($debug)) {
+    echo "<br> Error @ " . __FILE__ . ' @@ line ' . __LINE__ . $e->getMessage();
+   }
+  }
+  $gl_int = new gl_journal_interface();
+  $gl_int->ledger_id = $fin_details->ledger_id;
+  $gl_int->status = 'ENTERED';
+  $gl_int->currency = $fin_details->currency_code;
+  $gp = new gl_period();
+  $gl_int->period_id = $gp->current_open_period($fin_details->ledger_id, 'OPEN')->gl_period_id;
+  $gl_int->journal_source = self::$module;
+  $gl_int->journal_category = self::$gl_journal_category;
+  $gl_int->reference_type = 'table';
+  $gl_int->reference_key_name = self::$table_name;
+  $gl_int->reference_key_value = '-1';
+  $gl_int->journal_name = $gl_int->journal_category . '-' . $gl_int->reference_key_value;
+  $gl_int->description = $gl_int->journal_name . '-' . current_time();
+  $gl_int->balance_type = 'A';
+  $gl_int->reference_type = 'table';
+  $gl_int->reference_key_name = 'prj_expenditure_line';
+  $gl_int->reference_key_value = $this->prj_expenditure_line_id;
+  $gl_int->gl_journal_interface_id = null;
+  $gl_int->code_combination_id = $this->debit_ac_id;
+  $gl_int->total_dr = $gl_int->total_ac_dr = $this->burden_amount + $this->line_amount;
+  $gl_int->line_reference_key_name = 'prj_expenditure_line';
+  $gl_int->line_reference_key_value = $this->prj_expenditure_line_id;
+  $gl_int->line_status = 'N';
+  try {
+   $gl_int->save();
+   $gl_int->gl_journal_interface_id = null;
+   $gl_int->code_combination_id = $this->credit_ac_id;
+   $gl_int->total_cr = $gl_int->total_ac_cr = $this->burden_amount + $this->line_amount;
+   $gl_int->save();
+   $pel = new prj_expenditure_line();
+   $pel->findBy_id($this->prj_expenditure_line_id);
+   $pel->gl_journal_interface_cb = true;
+   $pel->save();
+  } catch (Exception $e) {
+   echo "<br>Unable to insert interface lines. Error @ " . __FILE__ . ' @@ line ' . __LINE__ . $e->getMessage();
+   $dbc->rollback = true;
+  }
+ }
 
  public static function find_burdenDetails_fromExpenditureLine($prj_expenditure_line_id) {
   $sql = " SELECT pel.prj_expenditure_line_id,   pel.prj_expenditure_header_id,   pel.org_id,
@@ -286,6 +256,31 @@ AND pel.prj_expenditure_line_id = '{$prj_expenditure_line_id}' ";
 
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
+ }
+ 
+  public static function find_distinctProject_byStatus($status = '') {
+  $sql = " SELECT DISTINCT(prj_project_header_id) FROM ";
+  $sql .= self::$table_name;
+  if (!empty($status)) {
+   $sql .= " WHERE  status = '{$status}' ";
+  } else {
+   $sql .= " WHERE ( status IS NULL || status = 'ENTERED' ) ";
+  }
+
+//  echo $sql;
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
+
+ public function multi_select_hidden_fields() {
+  $multi_select_hidden = [
+   'action_class_name',
+   'mode',
+   'action',
+   'show_block'
+  ];
+
+  return $multi_select_hidden;
  }
 
 }

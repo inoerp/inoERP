@@ -134,8 +134,8 @@ inoERP
           echo $f->hidden_field_withCLass('approval_status', 'APPROVED', 'popup_value');
           ?><i class="generic select_project_task_number select_popup clickable fa fa-search" data-class_name="prj_project_all_lowesttask_v"></i></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small'); ?></td>
-         <td><?php $f->text_field_d2s('quantity'); ?></td>
-         <td><?php $f->text_field_d2s('rate'); ?></td>
+         <td><?php $f->text_field_wid2s('quantity'); ?></td>
+         <td><?php $f->text_field_wid2s('rate'); ?></td>
         </tr>
         <?php
         $count = $count + 1;
@@ -149,26 +149,30 @@ inoERP
       <thead> 
        <tr>
         <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Line Amount') ?></th>
         <th><?php echo gettext('Status') ?></th>
         <th><?php echo gettext('Debit Account') ?></th>
         <th><?php echo gettext('Credit Account') ?></th>
         <th><?php echo gettext('Journal Header Id') ?></th>
+        <th><?php echo gettext('Journal Interface Id') ?></th>
         <th><?php echo gettext('Burden Amount') ?></th>
         <th><?php echo gettext('Burden Details') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
-       $count = 0; $f = new inoform();
+       $count = 0; 
        foreach ($prj_expenditure_line_object as $prj_expenditure_line) {
         ?>         
         <tr class="prj_expenditure_line<?php echo $count ?>">
          <td><?php echo $$class_second->prj_expenditure_line_id ?></td>
+         <td><?php $f->text_field_wid2sr('line_amount'); ?></td>
          <td><?php echo $f->select_field_from_array('status2', prj_expenditure_line::$status_a, $$class_second->status, '', 'medium', '', 1, 1); ?>						 </td>
          <td><?php $f->ac_field_wid2('debit_ac_id'); ?></td>
          <td><?php $f->ac_field_wid2('credit_ac_id'); ?></td>
-         <td><?php $f->text_field_d2r('gl_journal_header_id'); ?></td>
-         <td><?php $f->text_field_d2r('burden_amount'); ?></td>
+         <td><?php $f->text_field_wid2r('gl_journal_header_id'); ?></td>
+         <td><?php echo $f->checkBox_field('gl_journal_interface_cb', $$class_second->gl_journal_interface_cb, '' ,'always_readonly' , 1); ?></td>
+         <td><?php $f->text_field_wid2r('burden_amount'); ?></td>
          <td><a role="button" target="_blank" class="btn btn-sm btn-default dont_copy" href="search.php?class_name=prj_burden_expenditure_v&amp;show_block=1&amp;prj_expenditure_line_id=<?php echo $$class_second->prj_expenditure_line_id; ?>"><?php echo gettext('View') ?></a></td>
         </tr>
         <?php

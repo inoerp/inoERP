@@ -1226,6 +1226,18 @@ function search_legal_org_name_m() {
  return $stmt;
 }
 
+function search_ledger() {
+ global $f;
+ $stmt = $f->select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', '', 'gl_ledger_id');
+ return $stmt;
+}
+
+function search_ledger_m() {
+ global $f;
+ $stmt = $f->select_field_from_object('ledger_id', org::find_all_legal(), 'gl_ledger_id', 'ledger', '', 'gl_ledger_id', '', 1);
+ return $stmt;
+}
+
 function search_co_number() {
  global $f;
  return $f->text_field('co_number', '');

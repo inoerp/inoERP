@@ -249,7 +249,7 @@ class prj_project_header extends dbObject {
     break;
 
    case 'APPROVE':
-    $this->approval_status  = 'APPROVED';
+    $this->approval_status = 'APPROVED';
     break;
 
    default :
@@ -420,8 +420,26 @@ class prj_project_header extends dbObject {
   }
  }
 
- private function _pick_sales_order() {
-  
+ public static function find_financial_details_from_projectHeaderId($prj_project_header_id) {
+  $sql = " 
+         SELECT org.org_id, org.legal_org_id, legal.ledger_id,
+            gl.ledger, gl.description as ledger_description, gl.coa_id, gl.calendar_option_line_code, gl.currency_code, legal.balancing_segments,
+            org.org, org.code,org.type, org.description as org_description, pph.prj_project_header_id, pph.project_number
+            FROM org,
+            legal,
+            gl_ledger gl,
+            prj_project_header pph
+            WHERE org.legal_org_id = legal.org_id 
+            AND gl.gl_ledger_id = legal.ledger_id
+            AND org.org_id = pph.bu_org_id
+            AND pph.prj_project_header_id = '{$prj_project_header_id}'
+           LIMIT 1
+ "
+  ;
+
+  $result = self::find_by_sql($sql);
+
+  return !empty($result) ? array_pop($result) : false;
  }
 
 // public function save() {

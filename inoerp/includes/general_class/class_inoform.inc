@@ -1045,7 +1045,8 @@ EOD;
 
  public function text_field_wid2r($field_name, $div_class = "") {
   global $class_second, $$class_second;
-  echo $this->text_field($field_name, $$class_second->$field_name, '20', '', $div_class, '', 1);
+  $field_v = property_exists($$class_second, $field_name) ? $$class_second->$field_name :  null;
+  echo $this->text_field($field_name, $field_v, '20', '', $div_class, '', 1);
  }
 
  public function text_field_wid2rm($field_name, $div_class = "") {

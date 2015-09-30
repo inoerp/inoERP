@@ -24,7 +24,7 @@ class dbObject extends dbc {
   $this->$name = $value;
  }
 
- public function get($var) {
+ public function __get($var) {
   if (property_exists(get_called_class(), $var)) {
    return $this->$var;
   } else {

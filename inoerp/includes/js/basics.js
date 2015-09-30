@@ -5091,6 +5091,14 @@ $(document).ready(function () {
   }
  });
 
+$('body').on(  'click', '.select_all', function(){
+  $('#form_line').find('input[name="line_id_cb"]').prop('checked', true);
+});
+
+$('body').on( 'click', '.deselect_all', function(){
+  $('#form_line').find('input[name="line_id_cb"]').prop('checked', false);
+});
+
 //short cut keys ctrl+c to copy value for one field
  $('body').on('keypress', '#form_line :input', function (e) {
   if (!e.ctrlKey) {
