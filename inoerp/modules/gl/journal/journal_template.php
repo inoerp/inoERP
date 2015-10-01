@@ -1,4 +1,4 @@
-<?php $f = new inoform();
+<?php 
 if (!isset($readonly1)) {
  $readonly1 = $readonly;
 }
@@ -54,7 +54,7 @@ if (!isset($readonly1)) {
        <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('References') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
-         <li><?php $f->l_text_field_d('journal_source'); ?></li>
+         <li><?php $f->l_select_field_from_object('journal_source', option_header::find_options_byName('GL_JOURNAL_SOURCE'), 'option_line_code', 'option_line_value', $$class->journal_source, 'journal_source', '', 1) ?>				</li>
          <li><?php $f->l_select_field_from_object('journal_category', $$class->gl_journal_category(), 'option_line_code', 'option_line_value', $$class->journal_category, 'journal_category', '', '', 1, $readonly1); ?></li>
          <li><?php $f->l_text_field_d('reference_type'); ?></li>
          <li><?php $f->l_text_field_d('reference_key_name'); ?></li>

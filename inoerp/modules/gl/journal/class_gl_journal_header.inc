@@ -125,7 +125,7 @@ class gl_journal_header extends dbObject {
  ];
  public $module_defaults = [
   'journal_category' => 'GL_MISCELLANEOUS',
-  'journal_source' => 'Manual',
+  'journal_source' => 'man',
   'balance_type' => 'A',
  ];
  public $gl_journal_header_id;

@@ -17,7 +17,6 @@ class gl_journal_interface extends dbObject {
   'module_name' => 'gl',
   'weight' => 6
  ];
- 
  public static $line_status_a = [
   'N' => 'New not imported',
   'E' => 'Error',
@@ -80,11 +79,15 @@ class gl_journal_interface extends dbObject {
  ];
  public $requiredField = [
   'ledger_id',
-  'currency',
-  'period_id',
   'journal_source',
   'journal_category',
-  'code_combination_id'
+  'period_id',
+  'balance_type',
+  'currency',
+  'doc_currency',
+  'exchange_type',
+  'exchange_rate',
+  'code_combination_id',
  ];
  public $fields_inForm_notInDataBase = [
   'action',
@@ -110,6 +113,9 @@ class gl_journal_interface extends dbObject {
  ];
  public $prg_import_gl_journal_parameters = [
   'Ledger' => 'search_ledger',
+  'Source' => 'search_journal_source',
+  'Ledger' => 'search_journal_category',
+  'Period' => 'search_gl_period',
  ];
  public $prg_import_gl_journal_details = [
   'name' => 'Import GL Journal ',
@@ -168,38 +174,27 @@ class gl_journal_interface extends dbObject {
  public $multi_action_class_pc_value;
  private $_gl_journal_header_id;
 
- public function distinct_customer_sites() {
-  $sql = " SELECT DISTINCT(ar_customer_site_id) FROM ";
-  $sql .= self::$table_name;
+ /*
+  * Elements need to be same for journal lines to be in same journal header are
+  * 1. Ledger Id
+  * 2. Currency and Doc Currency
+  * 3. Period
+  * 4. Balance Type
+  * 5. Journal Source
+  * 6. Journal Category
+  * 7. Exchange Type & Exchange Rate
+  */
+
+ private function _distinct_lines() {
+  $sql = " SELECT DISTINCT  CONCAT(ledger_id, '|' ,currency, '|' ,doc_currency, '|' , period_id, '|' ,balance_type, '|' ,journal_source, '|' ,
+journal_category,'|' , '|' ,exchange_type, '|' , exchange_rate)
+
+FROM gl_journal_interface ";
   $result = $this->findBySql($sql);
-  return !empty($result) ? array_pop($result) : false;
+  return !empty($result) ? $result : false;
  }
 
- public function findBy_customerSiteId_buOrgId($customer_site_id, $bu_org_id) {
-  $sql = " SELECT * FROM ";
-  $sql .= self::$table_name;
-  $sql .= " WHERE ar_customer_site_id = '{$customer_site_id}' AND bu_org_id = '{$bu_org_id}' ";
-  $result = $this->findBySql($sql);
-  return !empty($result) ? ($result) : false;
- }
-
- private function _create_transaction_from_post() {
-  if (empty($_POST)) {
-   return;
-  }
-
-//	pa($this);
-//	pa($_POST);
-//  pa($this->findAll());
-
-  $create_trnx_h = $this->_create_transaction_header();
-  if ($create_trnx_h < 0) {
-   return;
-  }
-  $this->_create_transaction_line_from_post();
- }
-
- private function _create_transaction_header() {
+ private function _create_journal_header() {
   $sd_so_header_id = $this->sd_so_header_id;
   $sd_so = new sd_so_header();
   $sd_so->findBy_id($sd_so_header_id);
@@ -248,188 +243,8 @@ class gl_journal_interface extends dbObject {
   return $ar_th->gl_journal_header_id;
  }
 
- private function _create_transaction_line_from_post() {
-  global $dbc;
-  $line_number = 0;
-
-  for ($i = 0; $i < count($_POST['item_description']); $i++) {
-   $line_number ++;
-   if (empty($this->_gl_journal_header_id)) {
-    return;
-   }
-
-   //update the sales order line 
-   $sol = new sd_so_line();
-   $sol->findBy_id($_POST['sd_so_line_id'][$i]);
-   $qty_available_for_inv = $sol->shipped_quantity - $sol->invoiced_quantity;
-   if ($qty_available_for_inv <= 0) {
-    echo "<br> Line is not available for invoicing . Qty available for invoicing is " . $qty_available_for_inv;
-    $dbc->rollback = true;
-    return -99;
-   }
-
-   $ar_tl = new gl_journal_line();
-   $ar_tl->gl_journal_line_id = null;
-   $ar_tl->line_number = $line_number;
-   $ar_tl->gl_journal_header_id = $this->_gl_journal_header_id;
-   $ar_tl->item_id_m = $_POST['item_id_m'][$i];
-   $ar_tl->item_description = $_POST['item_description'][$i];
-   $ar_tl->inv_line_quantity = $_POST['inv_line_quantity'][$i];
-   $ar_tl->inv_unit_price = $_POST['inv_unit_price'][$i];
-   $ar_tl->gl_inv_line_price = $_POST['gl_inv_line_price'][$i];
-   $ar_tl->inv_line_price = $_POST['inv_line_price'][$i];
-   $ar_tl->tax_code_id = $_POST['tax_code_id'][$i];
-   $ar_tl->tax_amount = $_POST['tax_amount'][$i];
-   $ar_tl->gl_tax_amount = $_POST['gl_tax_amount'][$i];
-   $ar_tl->line_type = $_POST['line_type'][$i];
-   $ar_tl->uom_id = $_POST['uom_id'][$i];
-   $ar_tl->sd_so_header_id = $_POST['sd_so_header_id'][$i];
-   $ar_tl->reference_type = 'table';
-   $ar_tl->reference_key_name = 'sd_so_line_id';
-   $ar_tl->reference_key_value = $ar_tl->sd_so_line_id = $_POST['sd_so_line_id'][$i];
-   $ar_tl->audit_trial();
-   $ar_tl->save();
-
-   //update transaction header amount
-   $ar_th = new gl_journal_header();
-   $ar_th->findBy_id($ar_tl->gl_journal_header_id);
-   $ar_th->header_amount += $ar_tl->inv_line_price;
-   $ar_th->tax_amount += $ar_tl->tax_amount;
-   $ar_th->save();
-
-   //update so line details
-   $sol->invoiced_quantity = $ar_tl->inv_line_quantity;
-   $sol->gl_journal_header_id = $ar_tl->gl_journal_header_id;
-   $sol->gl_journal_line_id = $ar_tl->gl_journal_line_id;
-   $sol->line_status = 'CLOSED';
-   $sol->audit_trial();
-   $sol->save();
-
-   //delete interface line
-   $this->gl_journal_interface_id = $_POST['gl_journal_interface_id'][$i];
-   $this->delete();
-
-   //unset all objects
-   unset($ar_tl);
-   unset($sol);
-   unset($this->gl_journal_interface_id);
-  }
- }
-
- private function _create_transaction_line_prg($all_lines, $gl_journal_header_id) {
-  $line_number = 0;
-  $msg = '<br>Starting to create transaction lines..';
-  foreach ($all_lines as $obj) {
-   $line_number ++;
-
-   //update the sales order line 
-   $sol = new sd_so_line();
-   $sol->findBy_id($obj->sd_so_line_id);
-   if (in_array($sol->line_status, array('SHIPPED', 'AWAITING_INVOICING'))) {
-    $msg .= "<br> Line is not available for invoicing. Line Id is " . $obj->sd_so_line_id;
-    continue;
-   }
-
-   $ar_tl = new gl_journal_line();
-   $ar_tl->gl_journal_line_id = null;
-   $ar_tl->line_number = $line_number;
-   $ar_tl->gl_journal_header_id = $gl_journal_header_id;
-   $ar_tl->item_id_m = $obj->item_id_m;
-   $ar_tl->item_description = $obj->item_description;
-   $ar_tl->inv_line_quantity = $obj->inv_line_quantity;
-   $ar_tl->inv_unit_price = $obj->inv_unit_price;
-   $ar_tl->inv_line_price = $obj->inv_line_price;
-   $ar_tl->gl_inv_line_price = $obj->gl_inv_line_price;
-   $ar_tl->tax_code_id = $obj->tax_code_id;
-   $ar_tl->tax_amount = $obj->tax_amount;
-   $ar_tl->gl_tax_amount = $obj->gl_tax_amount;
-   $ar_tl->line_type = $obj->line_type;
-   $ar_tl->uom_id = $obj->uom_id;
-   $ar_tl->sd_so_header_id = $obj->sd_so_header_id;
-   $ar_tl->reference_type = 'table';
-   $ar_tl->reference_key_name = 'sd_so_line_id';
-   $ar_tl->reference_key_value = $ar_tl->sd_so_line_id = $obj->sd_so_line_id;
-   $ar_tl->audit_trial();
-   $ar_tl->save();
-   $msg .= "<br> Line is Successfully Created. Line id id " . $ar_tl->gl_journal_line_id;
-
-   //update so line details
-   $sol->invoiced_quantity = $ar_tl->inv_line_quantity;
-   $sol->gl_journal_header_id = $ar_tl->gl_journal_header_id;
-   $sol->gl_journal_line_id = $ar_tl->gl_journal_line_id;
-   $sol->line_status = 'CLOSED';
-   $sol->audit_trial();
-   $sol->save();
-   $msg .= "<br> SO Line is Successfullyupdated. Line id id " . $sol->sd_so_line_id;
-
-   //delete interface line
-   $this->gl_journal_interface_id = $obj->gl_journal_interface_id;
-   $this->delete();
-
-   //unset all objects
-   unset($ar_tl);
-   unset($sol);
-   unset($this->gl_journal_interface_id);
-  }
-  return $msg;
- }
-
  public function _before_save() {
-
-  if (($this->action == 'import_gl_journal')) {
-   echo "<br> Starting to Import Transactions";
-   $this->_create_transaction_from_post();
-  }
-  return 10;
- }
-
- private function create_gl_journal_interface() {
-  $sql = "
-CREATE OR REPLACE VIEW gl_journal_interface
-(
-po_requisition_header_id, bu_org_id, po_requisition_type, po_requisition_number, supplier_id, supplier_site_id, buyer, currency, header_amount, po_requisition_status,
-payment_term_id,
-supplier_name, supplier_number,
-supplier_site_name, supplier_site_number,
-payment_term, payment_term_description,
-po_requisition_line_id, line_type, po_requisition_line_number,	item_id_m, item_description, 
-line_description, line_quantity, unit_price, line_price,  receving_org_id,
-item_number, uom_id, item_status,
-po_requisition_detail_id, shipment_number, sub_inventory_id, locator_id, requestor, quantity,
-need_by_date, promise_date,
-received_quantity, accepted_quantity, delivered_quantity, invoiced_quantity, paid_quantity,	order_number,
-ship_to_org, created_by, creation_date, last_update_by, last_update_date
-)
-AS
-SELECT 
-po_requisition_header.po_requisition_header_id, po_requisition_header.bu_org_id, po_requisition_header.po_requisition_type, po_requisition_header.po_requisition_number, po_requisition_header.supplier_id, 
-po_requisition_header.supplier_site_id, po_requisition_header.buyer, po_requisition_header.currency, po_requisition_header.header_amount, po_requisition_header.requisition_status,
-IFNULL(po_requisition_header.payment_term_id, supplier_site.payment_term_id),
-supplier.supplier_name, supplier.supplier_number,
-supplier_site.supplier_site_name, supplier_site.supplier_site_number,
-payment_term.payment_term, payment_term.description,
-po_requisition_line.po_requisition_line_id, po_requisition_line.line_type, po_requisition_line.line_number,	po_requisition_line.item_id_m, po_requisition_line.item_description, po_requisition_line.line_description, 
-po_requisition_line.line_quantity, po_requisition_line.unit_price, po_requisition_line.line_price,po_requisition_line.receving_org_id,
-item.item_number, item.uom_id, item.item_status,
-po_requisition_detail.po_requisition_detail_id, po_requisition_detail.shipment_number,  po_requisition_detail.sub_inventory_id, 
-po_requisition_detail.locator_id, po_requisition_detail.requestor, po_requisition_detail.quantity, po_requisition_detail.need_by_date, po_requisition_detail.promise_date,
-po_requisition_detail.received_quantity, po_requisition_detail.accepted_quantity, po_requisition_detail.delivered_quantity, 
-po_requisition_detail.invoiced_quantity, po_requisition_detail.paid_quantity,	po_requisition_detail.order_number,
-org.org,
-po_requisition_header.created_by, po_requisition_header.creation_date, po_requisition_header.last_update_by, po_requisition_header.last_update_date
-
-FROM po_requisition_header 
-LEFT JOIN supplier ON po_requisition_header.supplier_id = supplier.supplier_id
-LEFT JOIN supplier_site ON po_requisition_header.supplier_site_id = supplier_site.supplier_site_id
-LEFT JOIN payment_term ON po_requisition_header.payment_term_id = payment_term.payment_term_id
-LEFT JOIN po_requisition_line ON po_requisition_header.po_requisition_header_id = po_requisition_line.po_requisition_header_id
-LEFT JOIN item ON po_requisition_line.item_id_m = item.item_id_m
-LEFT JOIN po_requisition_detail ON po_requisition_line.po_requisition_line_id = po_requisition_detail.po_requisition_line_id
-LEFT JOIN org ON po_requisition_line.receving_org_id = org.org_id
-WHERE  po_requisition_header.requisition_status = 'APPROVED'
-AND (po_requisition_detail.order_number IS NULL OR po_requisition_detail.order_number = '')
-
-";
+  return -90;
  }
 
  public function prg_import_gl_journal($seralized_parameters) {
@@ -438,7 +253,7 @@ AND (po_requisition_detail.order_number IS NULL OR po_requisition_detail.order_n
    */
 
   $parameters = unserialize($seralized_parameters);
-  $this->message = '<br> Starting to Import AR Transactions....<br>';
+  $this->message = '<br> Starting to Import GL Journals....<br>';
   if (!empty($parameters['bu_org_id'][0])) {
    $bu_org_id = $parameters['bu_org_id'][0];
    $this->message .= '<br> Entered Bu org Id is : ' . $bu_org_id;
@@ -469,23 +284,6 @@ AND (po_requisition_detail.order_number IS NULL OR po_requisition_detail.order_n
   }
 
   return $this->message;
- }
-
- public function multi_select_input_fields() {
-  $multi_select_input = [
-  ];
-  return $multi_select_input;
- }
-
- public function multi_select_hidden_fields() {
-  $multi_select_hidden = [
-   'action_class_name',
-   'mode',
-   'action',
-   'show_block'
-  ];
-
-  return $multi_select_hidden;
  }
 
 }

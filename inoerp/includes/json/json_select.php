@@ -8,10 +8,6 @@ if (!empty($_GET['class_name'])) {
  $primary_column = property_exists($$class, 'primary_column') ? $class::$primary_column : $table_name . '_id';
 
 
- if (!empty($_GET['search_parameters'])) {
-  $_GET = get_postArray_From_jqSearializedArray($_GET['search_parameters']);
- }
-
  if (!(empty($_GET['pageno']))) {
   $pageno = is_array($_GET['pageno']) ? (int) $_GET['pageno'][0] : (int) $_GET['pageno'];
  } else {
@@ -21,14 +17,18 @@ if (!empty($_GET['class_name'])) {
  if (!(empty($_GET['per_page']))) {
   $per_page = is_array($_GET['per_page']) ? (int) $_GET['per_page'][0] : (int) $_GET['per_page'];
  } else {
-  $per_page = 10;
+  $per_page = null;
+ }
+
+ if (!empty($_GET['search_parameters'])) {
+  $_GET = get_postArray_From_jqSearializedArray($_GET['search_parameters']);
  }
 
  $_GET['pageno'] = $pageno;
  $_GET['class_name'] = $class;
- $_GET['per_page'] = $per_page;
+ $_GET['per_page'] = !empty($per_page) ? $per_page : $_GET['per_page'];
 
- if (empty($_GET['per_page'])) {
+ if (!empty($_GET['per_page'])) {
   if (!empty($_GET['per_page']) && ($_GET['per_page'] == "all" || $_GET['per_page'][0] == "all")) {
    $per_page = 50000;
   } else if (!empty($_GET['per_page'])) {
@@ -36,6 +36,7 @@ if (!empty($_GET['class_name'])) {
   }
   $per_page = empty($per_page) ? 10 : $per_page;
  }
+ 
  $search_order_by = !(empty($_GET['search_order_by'])) ? $_GET['search_order_by'][0] : '';
  $search_asc_desc = !(empty($_GET['search_asc_desc'])) ? $_GET['search_asc_desc'][0] : '';
  echo '<div id="json_search_result">';

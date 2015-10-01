@@ -118,6 +118,10 @@ class prj_expenditure_line extends dbObject {
   }
  }
 
+ public $doc_currency;
+ public $exchange_type;
+ public $exchange_rate;
+
  private function _insert_gl_interface() {
   global $dbc;
   $fin_details = prj_project_header::find_financial_details_from_projectHeaderId($this->prj_project_header_id);
@@ -131,6 +135,16 @@ class prj_expenditure_line extends dbObject {
   $gl_int->ledger_id = $fin_details->ledger_id;
   $gl_int->status = 'ENTERED';
   $gl_int->currency = $fin_details->currency_code;
+
+  if (!empty($this->doc_currency)) {
+   $gl_int->doc_currency = $this->doc_currency;
+   $gl_int->exchange_type = $this->exchange_type;
+   $gl_int->exchange_rate = $this->$exchange_rate;
+  } else {
+   $gl_int->doc_currency = $fin_details->currency_code;
+   $gl_int->exchange_type = 'NA';
+   $gl_int->exchange_rate = 1;
+  }
   $gp = new gl_period();
   $gl_int->period_id = $gp->current_open_period($fin_details->ledger_id, 'OPEN')->gl_period_id;
   $gl_int->journal_source = self::$module;
@@ -257,8 +271,8 @@ AND pel.prj_expenditure_line_id = '{$prj_expenditure_line_id}' ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
  }
- 
-  public static function find_distinctProject_byStatus($status = '') {
+
+ public static function find_distinctProject_byStatus($status = '') {
   $sql = " SELECT DISTINCT(prj_project_header_id) FROM ";
   $sql .= self::$table_name;
   if (!empty($status)) {
