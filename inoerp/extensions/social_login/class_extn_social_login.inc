@@ -59,8 +59,8 @@ class extn_social_login extends dbObject {
  public $number_fields = ['display_weight'];
  public $pageTitle = " Social Login"; //page Title
  public $search = [
-  '_show_update_extn_social_login' => 1,
-  '_show_view_extn_social_login' => 1
+  '_show_update_path' => 1,
+  '_show_view_path' => 1
  ];
  public $extn_social_login_id;
  public $provider_name;

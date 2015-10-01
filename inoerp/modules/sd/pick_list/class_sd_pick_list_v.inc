@@ -16,7 +16,7 @@
  */
 class sd_pick_list_v extends dbObject {
 
- public static $form_class_name = "sd_so_header";
+// public static $form_class_name = "sd_so_header";
  public static $table_name = "sd_pick_list_v";
  public static $primary_column = "so_number";
  public $field_a = [
@@ -135,7 +135,7 @@ class sd_pick_list_v extends dbObject {
   '_extra_path' => array('form.php?class_name=ar_transaction_header&mode=9' => 'Invoice',
    'form.php?class_name=sd_delivery_header&mode=9' => 'Ship')
  ];
- public $pageTitle = " SO - Sales Orders "; //page Title
+ public $pageTitle = " Pick Sales Orders "; //page Title
  public $option_lists = [
   'approval_status' => 'APPROVAL_STATUS',
  ];
