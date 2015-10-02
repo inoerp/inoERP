@@ -343,10 +343,10 @@ class user extends dbObject {
   global $si;
   if ($this->user_id) {
    $msg = "New user registration is sucessful!";
-   $subject = "User Registrtion @ " . $si->site_name;
-   $message = "Dear " . $this->username . '<br> your regitraton is sucessful';
+//   $subject = "User Registrtion @ " . $si->site_name;
+//   $message = "Dear " . $this->username . '<br> your regitraton is sucessful';
 //    $replyto = "From : admin@site.com";
-   $subject = "User Reginstration @" . $si->site_name;
+   $subject = "User Registration @" . $si->site_name;
    $message = "<html> <body>Dear " . $this->username . ',<br><br>';
    $message .= "<p>Welcome to " . $si->site_name . ' <br>You can now access the site with your registered user '
     . ' name & password ';

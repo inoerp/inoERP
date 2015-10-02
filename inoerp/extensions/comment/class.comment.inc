@@ -81,7 +81,8 @@ class comment extends dbObject {
   'multi_action_class_pc',
   'multi_action_class_pc_value',
   'action',
-  'comment_user_name'
+  'comment_user_name',
+  'subscribe_cb'
  ];
  public $pageTitle = " Comment - Create & View differnt Comments ";
  public $search = [
@@ -113,11 +114,35 @@ class comment extends dbObject {
  public $action;
  public $description = "User Comments";
  public $subject_noof_char = 80;
+ public $subscribe_cb;
 
  public function _before_save() {
   if (empty($this->subject)) {
    $this->subject = substr($this->comment, 0, 50);
   }
+ }
+
+ public function _after_save() {
+  //subscribe
+  if (!empty($this->subscribe_cb)) {
+   $this->_create_subscription();
+  }
+
+  $this->_send_subsctiber_msg();
+ }
+
+ private function _send_subsctiber_msg() {
+  $es = new extn_subscribe();
+  $es->reference_key_name = $this->reference_table;
+  $es->reference_key_value = $this->reference_id;
+  $topic_link = HOME_URL;
+
+  switch ($this->reference_table) {
+   default:
+    $topic_link .= 'content.php?content_id=' . $this->reference_id;
+    break;
+  }
+  $es->send_message($topic_link);
  }
 
  private function _enable_block($block_name, $block_title) {
@@ -158,6 +183,21 @@ class comment extends dbObject {
   $this->_disable_block('comment_recent_comments');
  }
 
+ private function _create_subscription() {
+  global $ino_user;
+  $sub_i = new extn_subscribe();
+  $sub_i->reference_key_name = $this->reference_table;
+  $sub_i->reference_key_value = $this->reference_id;
+  $sub_i->user_id = $ino_user->user_id;
+  $sub_i->username = $ino_user->username;
+  $sub_i->user_email = $ino_user->email;
+  try {
+   $sub_i->save();
+  } catch (Exception $e) {
+//   echo $e->getMessage();
+  }
+ }
+
  public function content_comment_with_reference($numbers = 10, $start_from = '') {
   $sql = " SELECT comment.comment_id, comment.subject,
 	         content.content_id, content.content_type_id,
@@ -192,11 +232,11 @@ class comment extends dbObject {
    $comment_string .= '<ul class="documentation_list comment">';
    $comment_string .= '<li class="all_comments"><span class="badge"><a href="' . HOME_URL . 'content.php?content_type=comment">'
     . 'All Comments <i class="fa fa-comments-o"></i></a></span></li>';
-   if(empty($result)){
+   if (empty($result)) {
     return;
    }
    foreach ($result as $records_c => $records) {
-    if($records_c >= $numbers){
+    if ($records_c >= $numbers) {
      break;
     }
     $comment_string .= '<li class="comment_subject">';

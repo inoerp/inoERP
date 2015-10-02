@@ -1135,8 +1135,24 @@ function search_depreciation_period() {
 
 function search_gl_period_name() {
  global $f;
+ return $f->select_field_from_object('gl_period_id', gl_period::find_all(), 'gl_period_id', array('period_name', 'ledger_id'), '', 'gl_period_id');
+}
+
+function search_gl_period_name_m() {
+ global $f;
  return $f->select_field_from_object('gl_period_id', gl_period::find_all(), 'gl_period_id', array('period_name', 'ledger_id'), '', 'gl_period_id', '', 1);
 }
+
+function search_journal_source() {
+ global $f;
+ return $f->select_field_from_object('journal_source', option_header::find_options_byName('GL_JOURNAL_SOURCE'), 'option_line_code', 'option_line_value', '', 'journal_source');
+}
+
+function search_journal_category() {
+ global $f;
+ return $f->select_field_from_object('journal_category', option_header::find_options_byName('GL_JOURNAL_CATEGORY'), 'option_line_code', 'option_line_value', '', 'journal_category');
+}
+
 
 function search_show_details_cb() {
  global $f;
@@ -1228,13 +1244,12 @@ function search_legal_org_name_m() {
 
 function search_ledger() {
  global $f;
- $stmt = $f->select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', '', 'gl_ledger_id');
- return $stmt;
+ return $f->select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', '', 'gl_ledger_id');
 }
 
 function search_ledger_m() {
  global $f;
- $stmt = $f->select_field_from_object('ledger_id', org::find_all_legal(), 'gl_ledger_id', 'ledger', '', 'gl_ledger_id', '', 1);
+ $stmt = $f->select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', '', 'gl_ledger_id', '', 1);
  return $stmt;
 }
 

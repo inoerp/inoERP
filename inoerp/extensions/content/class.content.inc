@@ -65,16 +65,6 @@ class content extends dbObject {
   "terms",
   "created_by"
  ];
- public $column = [
-  "content_type_id",
-  "content_id",
-  "subject",
-  "terms",
-  "published_cb",
-  "created_by"
- ];
- public $account = [
- ];
  public $checkbox = ["published_cb",
   "rev_enabled_cb",
   'show_in_fp_cb'
@@ -82,7 +72,8 @@ class content extends dbObject {
  public $fields_inForm_notInDataBase = [
   'url_alias',
   'ext_url_alias_id',
-  'non_db_content_type'
+  'non_db_content_type',
+  'subscribe_cb'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
  ];
@@ -127,6 +118,7 @@ class content extends dbObject {
  private $_subject_noof_char = '60';
  private $_pagination;
  public $non_db_content_type;
+ public $subscribe_cb;
 
  public function setProperty($property, $value) {
   if (property_exists($this, $property)) {
@@ -271,6 +263,26 @@ class content extends dbObject {
    $url_alias->ext_url_alias_id = !empty($this->ext_url_alias_id) ? $this->ext_url_alias_id : null;
    $url_alias->audit_trial();
    $url_alias->save();
+  }
+
+  //subscribe
+  if (!empty($this->subscribe_cb)) {
+   $this->_create_subscription();
+  }
+ }
+
+ private function _create_subscription() {
+  global $ino_user;
+  $sub_i = new extn_subscribe();
+  $sub_i->reference_key_name = 'content';
+  $sub_i->reference_key_value = $this->content_id;
+  $sub_i->user_id = $ino_user->user_id;
+  $sub_i->username = $ino_user->username;
+  $sub_i->user_email = $ino_user->email;
+  try{
+   $sub_i->save();
+  }catch(Exception $e){
+//   echo $e->getMessage();
   }
  }
 
@@ -902,16 +914,16 @@ AND content.content_id = category_reference.reference_id  ";
   return $content_statemnt;
  }
 
- public static function content_count_by_categoryId_contentType($category_id, $content_type_name='documentation') {
+ public static function content_count_by_categoryId_contentType($category_id, $content_type_name = 'documentation') {
   $count_sql = " SELECT COUNT(content.content_id) ";
   $count_sql .= ' FROM content, category_reference , content_type  ';
   $count_sql .= " WHERE content.content_type_id =  content_type.content_type_id ";
   $count_sql .= " AND category_reference.category_id = '{$category_id}' ";
   $count_sql .= " AND category_reference.reference_table = 'content' ";
-  $count_sql .=  " AND content.content_id = category_reference.reference_id";
-  $count_sql .=  " AND content_type.content_type = '{$content_type_name}' ";
+  $count_sql .= " AND content.content_id = category_reference.reference_id";
+  $count_sql .= " AND content_type.content_type = '{$content_type_name}' ";
 
-    $total_count = self::count_all_by_sql($count_sql);
+  $total_count = self::count_all_by_sql($count_sql);
   return $total_count;
  }
 

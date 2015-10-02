@@ -3477,9 +3477,9 @@ acronym {
  .menu,
  .callus {
   border:none;
-  float:none !important;
-  clear:both !important;
-  text-align:center !important;
+/*  float:none !important;
+  clear:both !important;*/
+  /*text-align:center !important;*/
   margin:auto;
  } 
 }

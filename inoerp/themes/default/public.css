@@ -150,7 +150,7 @@ ul.inline.download_action{
 
 ul.inRow.asperWidth li{
  display: inline-block;
- margin-right : 30px;
+ margin-right : 20px;
 }
 
 ul.inline.download_action li{
@@ -701,9 +701,9 @@ span.heading-right{
 }
 
 ul.inline-list.ino-breadcrumb-simple {
-float: right;
-margin: 0px;
-padding: 0px;  
+ float: right;
+ margin: 0px;
+ padding: 0px;  
 }
 .heading1 {
  border-bottom: 2px dotted rgb(51, 153, 204);
@@ -713,15 +713,15 @@ padding: 0px;
 }
 
 .ino-breadcrumb-simple li a{
-padding: 2px 10px;
-background-color: rgba(242, 242, 242, 0.94);
-border: 1px solid rgba(206, 198, 198, 0.9);
+ padding: 2px 10px;
+ background-color: rgba(242, 242, 242, 0.94);
+ border: 1px solid rgba(206, 198, 198, 0.9);
 }
 
 #structure ul.ino-breadcrumb-simple{
  position: absolute;
-right: 0px;
-top: 0px;
+ right: 0px;
+ top: 0px;
 }
 
 .heading1 .more_page a{
@@ -1178,24 +1178,24 @@ ul.program_form li label{
 }
 
 .ino-btn2{
-font-size: 0.9em !important;
-padding: 0px 5px;
-background-color: rgba(40, 142, 194, 0.86);
-color: #FFF !important;
-font-weight: bold;
-border-radius: 2px;
-box-shadow: 1px 1px 1px 1px rgba(137, 124, 34, 0.52);
-display: inline-block;
+ font-size: 0.9em !important;
+ padding: 0px 5px;
+ background-color: rgba(40, 142, 194, 0.86);
+ color: #FFF !important;
+ font-weight: bold;
+ border-radius: 2px;
+ box-shadow: 1px 1px 1px 1px rgba(137, 124, 34, 0.52);
+ display: inline-block;
 }
 
 .ino-btn2:hover{
-  background-color: #1C8316;
+ background-color: #1C8316;
 }
 
 .ino-alert-info {
-    color: #31708F;
-    background-color: rgba(243, 246, 232, 0.38);
-    border-color: rgb(230, 233, 219);
+ color: #31708F;
+ background-color: rgba(243, 246, 232, 0.38);
+ border-color: rgb(230, 233, 219);
 }
 
 #searchResultMessages [class^="flaticon-"]:before, 
@@ -1528,7 +1528,7 @@ ul.header_li li{
 input.extra_large{
  width: 100% !important;
  text-align: left;  
- min-width: 600px;
+ min-width: 500px;
 }
 
 #myModal .modal-dialog{
@@ -1540,13 +1540,43 @@ ul.column.two_column_form input, ul.column.two_column_form select{
  max-width: 250px;
 }
 
+.ino-20{
+ width: 20px !important;
+}
+
+.ino-10{
+ width: 10px !important;
+}
+
+.ino-50{
+ width: 50px !important;
+}
+
+.ino-60{
+ width: 60px !important;
+}
+
+.ino-70{
+ width: 70px !important;
+}
+
+
+.ino-80{
+ width: 80px !important;
+}
+
+.ino-100{
+ width: 100px !important;
+}
+
+
 ul.column.two_column_form li {
  margin-bottom: 10px;
  width: 45% !important;
 }
 
 ul.column.two_column_form li label {
-font-size: 12px !important;
+ font-size: 12px !important;
 }
 
 /*#content_data div{
@@ -2041,7 +2071,7 @@ ul.inline-list li{
 }
 
 .imp-link a:hover{
-  color : green !important;
+ color : green !important;
 }
 
 .search_document_list, #site_search .form-control{
@@ -2083,7 +2113,17 @@ ul.single-column li{
 }
 
 .grey-wrapper.first_content,.first_content{
- padding: 60px 0 30px 0 !important;
+ /*padding: 60px 0 30px 0 !important;*/
+ margin-top: 120px;
+
+}
+
+
+@media (max-width: 770px) {
+ #all_contents{
+  margin-top: 100px;
+
+ }
 }
 
 .content-top-padding{
@@ -2302,14 +2342,14 @@ ul.single-column li{
 
 .btn.unsaved-msg{
  font-size: 9px !important;
-font-weight: bold;
+ font-weight: bold;
 }
 
 a.btn-info{
  color: #fff !important;
 }
 #form_header [name="line_id_cb"]{
-        width : 10px !important;
+ width : 10px !important;
 }
 
 #popup-window #structure{
@@ -2317,11 +2357,11 @@ a.btn-info{
 }
 
 #form_line .small{
-    width: 80px !important;
+ width: 80px !important;
 }
 
 .white-font-link{
-        color : white !important;
+ color : white !important;
 }
 
 .inline_action li.add_row_img, .inline_action li.add_row_img1, .inline_action li.remove_row_img{
@@ -2329,7 +2369,7 @@ a.btn-info{
 }
 
 .btn-sm, .btn-group-sm > .btn {
-    padding: 2px 5px !important;
+ padding: 2px 5px !important;
 }
 
 .public-page #header_bottom{

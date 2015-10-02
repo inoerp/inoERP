@@ -105,8 +105,7 @@ class gl_journal_interface extends dbObject {
   '_update_path' => 'form.php?class_name=gl_journal_interface',
   '_show_update_path' => 1,
   '_view_path' => 'form.php?class_name=gl_journal_interface',
-  '_show_view_path' => 1,
-  '_extra_path' => array('form.php?class_name=gl_journal_interface' => 'Import')
+  '_show_view_path' => 1
  ];
  public $search_functions = [
   'Ledger' => 'search_ledger',
@@ -114,8 +113,8 @@ class gl_journal_interface extends dbObject {
  public $prg_import_gl_journal_parameters = [
   'Ledger' => 'search_ledger',
   'Source' => 'search_journal_source',
-  'Ledger' => 'search_journal_category',
-  'Period' => 'search_gl_period',
+  'Category' => 'search_journal_category',
+  'Period' => 'search_gl_period_name',
  ];
  public $prg_import_gl_journal_details = [
   'name' => 'Import GL Journal ',
@@ -173,6 +172,7 @@ class gl_journal_interface extends dbObject {
  public $multi_action_class_pc;
  public $multi_action_class_pc_value;
  private $_gl_journal_header_id;
+ public $message;
 
  /*
   * Elements need to be same for journal lines to be in same journal header are
@@ -187,60 +187,124 @@ class gl_journal_interface extends dbObject {
 
  private function _distinct_lines() {
   $sql = " SELECT DISTINCT  CONCAT(ledger_id, '|' ,currency, '|' ,doc_currency, '|' , period_id, '|' ,balance_type, '|' ,journal_source, '|' ,
-journal_category,'|' , '|' ,exchange_type, '|' , exchange_rate)
+journal_category,'|' , '|' ,exchange_type, '|' , exchange_rate) as line_combination
 
 FROM gl_journal_interface ";
+
+  $sql .= " WHERE (line_status IN ( 'N' , 'E' ) || line_status IS NULL) ";
+
+  if (!empty($this->ledegr_id)) {
+   $sql .= " AND ledegr_id = '{$this->ledegr_id}' ";
+  }
+  
+    if (!empty($this->journal_source)) {
+   $sql .= " AND journal_source = '{$this->journal_source}' ";
+  }
+
+
+  if (!empty($this->journal_category)) {
+   $sql .= " AND journal_category = '{$this->journal_category}' ";
+  }
+
+  if (!empty($this->period_id)) {
+   $sql .= " AND period_id = '{$this->period_id}' ";
+  }
+
   $result = $this->findBySql($sql);
   return !empty($result) ? $result : false;
  }
 
- private function _create_journal_header() {
-  $sd_so_header_id = $this->sd_so_header_id;
-  $sd_so = new sd_so_header();
-  $sd_so->findBy_id($sd_so_header_id);
+ private function _create_journal($iline) {
+  $sql = " SELECT * 
+FROM gl_journal_interface 
+WHERE CONCAT(ledger_id, '|' ,currency, '|' ,doc_currency, '|' , period_id, '|' ,balance_type, '|' ,journal_source, '|' ,
+journal_category,'|' , '|' ,exchange_type, '|' , exchange_rate) = '{$iline->line_combination}' ";
 
-  $ar_th = new gl_journal_header();
-  $ar_th->bu_org_id = $this->bu_org_id;
-  $ar_th->ledger_id = $this->ledger_id;
-  $ledger = new gl_ledger();
-  $ledger->findBy_id($ar_th->ledger_id);
+  $all_lines = $this->find_by_sql($sql);
+  if ($all_lines) {
+   $gl_journal_header_id = $this->_create_journal_header($all_lines[0]);
 
-  $ar_th->transaction_type = $this->transaction_type;
-  $ar_th->ar_customer_id = $this->ar_customer_id;
-  $ar_th->ar_customer_site_id = $this->ar_customer_site_id;
-  $ar_th->ship_to_id = $sd_so->ship_to_id;
-  $ar_th->bill_to_id = $sd_so->bill_to_id;
-  $ar_th->doc_currency = $sd_so->doc_currency;
-  $ar_th->currency = $ledger->currency_code;
-  $ar_th->bill_to_id = $sd_so->bill_to_id;
-  $gp = new gl_period();
-  $ar_th->period_id = $gp->current_open_period($ar_th->ledger_id, 'OPEN')->gl_period_id;
-  $ar_tt = new gl_journal_type();
-  $ar_tt->findBy_id($ar_th->transaction_type);
-  $ar_th->receivable_ac_id = $ar_tt->receivable_ac_id;
-  $ar_th->transaction_class = $ar_tt->transaction_class;
-  $ar_th->payment_term_id = $sd_so->payment_term_id;
-  $ar_th->payment_term_date = $sd_so->payment_term_date;
-  $ar_th->document_date = current_time(1);
-  $ar_th->reference_type = 'table';
-  $ar_th->reference_key_name = 'sd_so_header_id';
-  $ar_th->reference_key_value = $ar_th->sd_so_header_id = $sd_so_header_id;
-  $ar_th->sd_so_number = $sd_so->so_number;
-  $ar_th->audit_trial();
-  try {
-   $ar_th->save();
-  } catch (Exception $e) {
-
-   echo "<br>Failed to create the transaction header. Error @gl_journal_interface "
-   . "@@ Line" . __LINE__ . '<br>' . $e->getMessage();
-   $this->rollback = true;
-   return -99;
+   if ($gl_journal_header_id) {
+    $this->_max_line_num = 1;
+    $header_amount = 0;
+    foreach ($all_lines as $journal_line) {
+     $journal_line_id = $this->_create_journal_line($journal_line, $gl_journal_header_id);
+     $this->_max_line_num++;
+     $header_amount += $journal_line->total_dr;
+     $gl_ji = new gl_journal_interface();
+     $gl_ji->findBy_id($journal_line->gl_journal_interface_id);
+     if ($journal_line_id) {
+      $gl_ji->line_status = 'S';
+     }else{
+      $gl_ji->line_status = 'E';
+     }
+     $gl_ji->save();
+    }
+    $gjh_i = new gl_journal_header;
+    $gjh_i->findBy_id($gl_journal_header_id);
+    $gjh_i->header_amount = $header_amount;
+    $gjh_i->save();
+   }
   }
-  echo "<br> Transaction header is succefully created. Header Id/ Number - " . $ar_th->gl_journal_header_id;
-  $ar_th->transaction_number = $ar_th->bu_org_id . '-' . $ar_th->gl_journal_header_id;
-  $ar_th->save();
-  $this->_gl_journal_header_id = $ar_th->gl_journal_header_id;
-  return $ar_th->gl_journal_header_id;
+ }
+
+ private function _create_journal_header($one_line) {
+  global $dbc;
+  $gjh = new gl_journal_header;
+  $gjh->ledger_id = $one_line->ledger_id;
+  $gjh->status = 'ENTERED';
+  $gjh->currency = $one_line->currency;
+  $gjh->doc_currency = $one_line->doc_currency;
+  $gjh->exchange_type = $one_line->exchange_type;
+  $gjh->exchange_rate = $one_line->exchange_rate;
+  $gjh->period_id = $one_line->period_id;
+  $gjh->journal_source = $one_line->journal_source;
+  $gjh->journal_category = $one_line->journal_category;
+  $gjh->reference_type = 'table';
+  $gjh->reference_key_name = self::$table_name;
+  $gjh->reference_key_value = $one_line->gl_journal_interface_id;
+  $gjh->journal_name = $gjh->journal_category . '-' . $gjh->reference_key_value;
+  $gjh->description = $gjh->journal_name . '-' . current_time();
+  $gjh->balance_type = $one_line->balance_type;
+  try {
+   $gjh->save();
+   $this->_gl_journal_header_id = $gjh->gl_journal_header_id;
+   $this->message .= '<br> ' . $this->gl_journal_header_id . ' is created';
+  } catch (Exception $e) {
+   $dbc->rollback = true;
+   $gjh->gl_journal_header_id = null;
+   echo "<br> Failed Saving Jounral Header" . $e->getMessage();
+  }
+  return $gjh->gl_journal_header_id;
+ }
+
+ private $_max_line_num;
+
+ private function _create_journal_line($journal_line_o, $gl_journal_header_id) {
+  global $dbc;
+  $new_gjl = new gl_journal_line();
+  $new_gjl->gl_journal_header_id = $gl_journal_header_id;
+  $new_gjl->reference_type = $journal_line_o->line_reference_type;
+  $new_gjl->reference_key_name = $journal_line_o->line_reference_key_name;
+  $new_gjl->reference_key_value = $journal_line_o->line_reference_key_value;
+  $new_gjl->gl_journal_line_id = null;
+  $new_gjl->line_num = $this->_max_line_num;
+  $new_gjl->status = 'U';
+  $new_gjl->code_combination_id = $journal_line_o->code_combination_id;
+  $new_gjl->total_dr = $journal_line_o->total_dr;
+  $new_gjl->total_ac_dr = $journal_line_o->total_ac_dr;
+  $new_gjl->total_cr = $journal_line_o->total_cr;
+  $new_gjl->total_ac_cr = $journal_line_o->total_ac_cr;
+  $new_gjl->description = $journal_line_o->line_description;
+  try {
+   $new_gjl->save();
+   $this->message .= '<br> ' . $this->gl_journal_line_id . ' is created';
+  } catch (Exception $e) {
+   $new_gjl->gl_journal_line_id = null;
+   $this->message .= '<br> Failed to create journal line for gl_kournal_interface_id ' . $journal_line_o->gl_kournal_interface_id;
+  }
+
+  return $new_gjl->gl_journal_line_id;
  }
 
  public function _before_save() {
@@ -254,33 +318,33 @@ FROM gl_journal_interface ";
 
   $parameters = unserialize($seralized_parameters);
   $this->message = '<br> Starting to Import GL Journals....<br>';
-  if (!empty($parameters['bu_org_id'][0])) {
-   $bu_org_id = $parameters['bu_org_id'][0];
-   $this->message .= '<br> Entered Bu org Id is : ' . $bu_org_id;
-  } else {
-   $this->message .= '<br> Error! : No BU org id found @ po_requisition_interface ' . __LINE__;
-   return $this->message;
+  if (!empty($parameters['ledger_id'][0])) {
+   $this->ledger_id = $parameters['ledger_id'][0];
+   $this->message .= '<br> Entered Ledger Id is : ' . $this->ledger_id;
+  } 
+
+  if (!empty($parameters['journal_category'][0])) {
+   $this->journal_category = $parameters['journal_category'][0];
+   $this->message .= '<br> Entered journal_category is : ' . $this->journal_category;
   }
 
-//	1. Lines with same customer site id
-  $all_customer_sites = $this->distinct_customer_sites();
-  foreach ($all_customer_sites as $cst_site_id) {
-   $all_lines = $this->findBy_customerSiteId_buOrgId($cst_site_id, $bu_org_id);
-   if (empty($all_lines)) {
-    return;
-   }
-   //create header on basis of first object
-   $ar_ti_prg = new gl_journal_interface();
-   foreach ($all_lines[0] as $key => $value) {
-    if (property_exists($ar_ti_prg, $key)) {
-     $ar_ti_prg->$key = $value;
-    }
-   }
-   $ar_ti_prg->_create_transaction_header();
-   $this->message .= "<br> Transaction header is succefully created. Header Id/ Number - " . $ar_ti_prg->_gl_journal_header_id;
+  if (!empty($parameters['journal_source'][0])) {
+   $this->journal_source = $parameters['journal_source'][0];
+   $this->message .= '<br> Entered journal_source is : ' . $this->journal_source;
+  }
 
-   //create lines for each object
-   $this->message .=$this->_create_transaction_line_prg($all_lines, $ar_ti_prg->_gl_journal_header_id);
+  if (!empty($parameters['period_id'][0])) {
+   $this->period_id = $parameters['period_id'][0];
+   $this->message .= '<br> Entered period_id is : ' . $this->period_id;
+  }
+
+  $all_distinct_lines = $this->_distinct_lines();
+  if ($all_distinct_lines) {
+   foreach ($all_distinct_lines as $iline) {
+    $this->_create_journal($iline);
+   }
+  } else {
+   $this->message .= '<br> No elligible lines found for import. Check entered parameters for the program';
   }
 
   return $this->message;

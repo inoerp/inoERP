@@ -268,6 +268,32 @@ EOD;
 </ul>
 EOD;
  }
+ 
+  public static function form_button_withImage_less($current_page_path = "", $homeUrl = '') {
+  global $class;
+  $current_page_path = 'form.php?mode=9&amp;class_name=' . $class;
+  echo <<<EOD
+			 <ul id="form_top_image" class="draggable">
+        <li class='fa fa-refresh clickable' id='refresh_button' title='Refresh'></li>
+        <li><a class='fa fa-file-text-o clickable' Title="New Document" id="new_page_button" href="$current_page_path"></a></li>
+    		<li class='fa fa-save clickable' id='save' title='Save'></li>
+        <li><a class='fa fa-eraser clickable' Title="Clear All, Quick Entry" id="new_object_button" href="$current_page_path"></a></li>
+        <li class='fa fa-trash-o clickable' id='delete_button' title='Delete'></li>
+</ul>
+EOD;
+ }
+ 
+   public static function form_button_withImage_minimum($current_page_path = "", $homeUrl = '') {
+  global $class;
+  $current_page_path = 'form.php?mode=9&amp;class_name=' . $class;
+  echo <<<EOD
+			 <ul id="form_top_image" class="draggable">
+        <li><a class='fa fa-file-text-o clickable' Title="New Document" id="new_page_button" href="$current_page_path"></a></li>
+    		<li class='fa fa-save clickable' id='save' title='Save'></li>
+        <li class='fa fa-trash-o clickable' id='delete_button' title='Delete'></li>
+</ul>
+EOD;
+ }
 
  private function _convert_id($id = "") {
   if (!empty($id)) {

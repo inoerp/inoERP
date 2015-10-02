@@ -139,7 +139,7 @@ class prj_expenditure_line extends dbObject {
   if (!empty($this->doc_currency)) {
    $gl_int->doc_currency = $this->doc_currency;
    $gl_int->exchange_type = $this->exchange_type;
-   $gl_int->exchange_rate = $this->$exchange_rate;
+   $gl_int->exchange_rate = $this->exchange_rate;
   } else {
    $gl_int->doc_currency = $fin_details->currency_code;
    $gl_int->exchange_type = 'NA';
@@ -169,6 +169,7 @@ class prj_expenditure_line extends dbObject {
    $gl_int->gl_journal_interface_id = null;
    $gl_int->code_combination_id = $this->credit_ac_id;
    $gl_int->total_cr = $gl_int->total_ac_cr = $this->burden_amount + $this->line_amount;
+   $gl_int->total_dr = $gl_int->total_ac_dr = null;
    $gl_int->save();
    $pel = new prj_expenditure_line();
    $pel->findBy_id($this->prj_expenditure_line_id);

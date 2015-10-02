@@ -5099,6 +5099,13 @@ $('body').on( 'click', '.deselect_all', function(){
   $('#form_line').find('input[name="line_id_cb"]').prop('checked', false);
 });
 
+$('body').on('click', '#subscribe_cb' , function(){
+  if(!$('#user_id').val()){
+  alert('Please login to subscribe');
+    $(this).prop('checked', false);
+    }
+});
+
 //short cut keys ctrl+c to copy value for one field
  $('body').on('keypress', '#form_line :input', function (e) {
   if (!e.ctrlKey) {

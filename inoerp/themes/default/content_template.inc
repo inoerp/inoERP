@@ -10,7 +10,7 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
 ?>
 <div class="container">
  <div class="row">
-  <div class="col-sm-8 blog-main">
+  <div class="col-md-8 col-xs-12 blog-main">
    <div id="all_contents">
     <div id="content_top"></div>
     <div id="content">
@@ -30,7 +30,7 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
          <div id="form_all">
           <div id ="form_header">
            <div class='heading'> <?php echo $content_type->description; ?></div>
-           <form action=""  method="post" id="content_data"  name="content_data">
+           <form method="post" id="content_data"  name="content_data">
             <!--create empty form or a single id when search is not clicked and the id is referred from other content -->
             <?php echo $f->hidden_field_withId('content_id', $$class->content_id); ?>
             <?php echo $f->hidden_field_withId('content_type_id', $content_type->content_type_id); ?>
@@ -46,7 +46,7 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
              <?php echo!empty($form_element) ? $form_element : "" ?>
             </div>
             <!--End of Content-->
-            <div id="content_element" >
+            <div id="content_element_divId" class="col-md-12" >
              <div class="hideDiv_input"></div>
              <div class="hideDiv_input_element">
               <legend class="collapsible major">
@@ -82,26 +82,28 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
              </div>
             </div>
 
-            <div id="show_attachment" class="show_attachment">
-             <div id="file_upload_form" class="row small-top-margin">
+            <div id="show_attachment" class="show_attachment row">
+             <div id="file_upload_form" class=" small-top-margin">
               <ul class="inRow asperWidth">
-               <li class="btn btn-info active inline input_file clickable"  role="button"><input type="file" id="comment_attachments"  class="input_file_btn" name="attachments[]" multiple/>
-                <i class="fa fa-paperclip clickable"></i>&nbsp;&nbsp;Select File</li>
-               <li><input type="button"  role="button" value="Attach"  name="attach_submit" id="comment_attach_submit" class="btn btn-info active comment_attach_submit"></li>
+               <li class="btn btn-info active inline input_file clickable ino-100"  role="button"><input type="file" id="comment_attachments"  class="input_file_btn" name="attachments[]" multiple/>
+                <i class="fa fa-paperclip clickable"></i>&nbsp;&nbspSelect File</li>
+               <li><input type="button"  role="button" value="Attach"  name="attach_submit" id="comment_attach_submit" class="btn btn-info active ino-80 comment_attach_submit"></li>
                <?php $user_name = isset($_SESSION['username']) ? $_SESSION['username'] : 'Anonymous'; ?>
                <li><div class="input-group">
                  <span class="input-group-addon" id="basic-addon1">Post As </span>
-                 <input type="text" name="content_by" class="form-control content_by height-unset" placeholder="<?php echo $user_name ?>" aria-describedby="basic-addon1" >
+                 <input type="text" name="content_by" class="form-control content_by height-unset ino-100" placeholder="<?php echo $user_name ?>" aria-describedby="basic-addon1" >
                 </div></li>
+                <li class="ino-70"><input name="subscribe_cb[]" class="checkBox subscribe_cb ino-10" id="subscribe_cb" value="1" type="checkbox">&nbsp; Subscribe</li>
                <?php
                if ($mode == 9) {
-                echo '<li><input type="button" id="save_content" role="button" name="submit_content" class="btn btn-warning ino-btn save_content submit_content" Value="Post"></li>';
+                echo '<li><input type="button" id="save_content" role="button" name="submit_content" class="btn btn-warning ino-btn save_content submit_content ino-80" Value="Post"></li>';
                }
                ?>
 
                <?php
                echo form::hidden_field('class_name', $class);
                echo $f->hidden_field_withId('upload_type', 'only_server');
+               echo $f->hidden_field_withId('user_id', $ino_user->user_id);
                ?>
 
               </ul>
@@ -124,7 +126,7 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
     <div id="content_bottom"></div>
    </div>
   </div>
-  <div class="col-sm-4 blog-sidebar">
+  <div class="col-md-4 col-sm-4 col-xs-4 blog-sidebar">
    <div class="sidebar-module sidebar-module-inset">
     <div id="content_left"></div>
    </div>

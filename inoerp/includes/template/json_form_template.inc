@@ -79,7 +79,7 @@
     echo '<li id="created_by">Created By : ' . $user_creationBy->username . '</li>';
     echo '<li id="creation_date">Creation Date : ' . $$class->creation_date . '</li>';
    }
-   if (!empty($user_creationBy)) {
+   if (!empty($user_lastUpdateBy)) {
     echo '<li id="last_update_by">Last Update By : ' . $user_lastUpdateBy->username . '</li>';
     echo '<li id="last_update_date">Last Update Date : ' . $$class->last_update_date . '</li>';
    }

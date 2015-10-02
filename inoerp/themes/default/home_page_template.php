@@ -103,7 +103,7 @@ include_once("includes/functions/loader.inc");
        echo '<div id = "header_top" class = "clear"></div>';
       }
       ?>
-      <div class="col-lg-4 col-md-4 col-sm-4">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-2">
        <?php
        $show_header_links = true;
        if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
@@ -247,7 +247,7 @@ include_once("includes/functions/loader.inc");
        } else {
         $count_class_val = '';
        }
-       echo '<div class="col-lg-4' . $count_class_val . ' ">
+       echo '<div class="col-lg-4 col-md-4' . $count_class_val . ' ">
               <div class="panel panel-success">
                 <div class="panel-heading">';
        echo "<h3 class='panel-title'>";
@@ -266,6 +266,7 @@ include_once("includes/functions/loader.inc");
       }
       ?>
      </div>
+
     </div>
    </div>
   </div>
@@ -314,92 +315,92 @@ include_once("includes/functions/loader.inc");
   echo $si->analytics_code;
   ?>
   <script>
-           $(document).ready(function () {
-   dialog = $("#form-modal").dialog({
-   autoOpen: false,
-           height: 500,
-           width: 900,
-           modal: true,
-           buttons: {
-                   Cancel: function () {
-                   dialog.dialog("close");
-                   }
-           },
-           close: function () {
-           form[ 0 ].reset();
-                   allFields.removeClass("ui-state-error");
-           }
+   $(document).ready(function () {
+    dialog = $("#form-modal").dialog({
+     autoOpen: false,
+     height: 500,
+     width: 900,
+     modal: true,
+     buttons: {
+      Cancel: function () {
+       dialog.dialog("close");
+      }
+     },
+     close: function () {
+      form[ 0 ].reset();
+      allFields.removeClass("ui-state-error");
+     }
+    });
+    $("#structure a.list-header").on("click", function (e) {
+     e.preventDefault();
+     var urlLink = $(this).attr('href');
+     var urlLink_a = urlLink.split('?');
+     var urlLink_firstPart_a = urlLink_a[0].split('/');
+     var pageType = urlLink_firstPart_a.pop();
+     if (pageType == 'form.php') {
+      var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
+     } else if (pageType == 'program.php') {
+      var formUrl = 'includes/json/json_program.php?' + urlLink_a[1];
+     } else {
+      var formUrl = urlLink;
+     }
+
+     $.when(getModalFormDetails(formUrl)).then(
+             dialog.dialog("open"));
+
+    });
    });
-           $("#structure a.list-header").on("click", function(e) {
-   e.preventDefault();
-           var urlLink = $(this).attr('href');
-           var urlLink_a = urlLink.split('?');
-           var urlLink_firstPart_a = urlLink_a[0].split('/');
-           var pageType = urlLink_firstPart_a.pop();
-           if (pageType == 'form.php') {
-   var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
-   } else if (pageType == 'program.php') {
-   var formUrl = 'includes/json/json_program.php?' + urlLink_a[1];
-   } else {
-   var formUrl = urlLink;
-   }
-   
-   $.when(getModalFormDetails(formUrl)).then(
-    dialog.dialog("open"));
-           
-   });
-   });
-   
-   
+
+
    function getModalFormDetails(url) {
- return $.ajax({
-  url: url,
-  type: 'get',
-  data: {
-  },
-  beforeSend: function () {
-   $('#overlay').css('display', 'block');
-  },
-  complete: function () {
+    return $.ajax({
+     url: url,
+     type: 'get',
+     data: {
+     },
+     beforeSend: function () {
+      $('#overlay').css('display', 'block');
+     },
+     complete: function () {
 
-  }
- }).done(function (result) {
-  var newContent = $(result).find('div#structure').html();
-  var allButton = $(result).find('div#header_top_container #form_top_image').html();
-  if (typeof allButton === 'undefined') {
-   allButton = '';
-  }
-  var commentForm = $(result).find('div#comment_form').html();
-  if (newContent) {
-   $('#mod-structure').replaceWith('<div id="mod-structure">' + newContent + '</div>');
-   $('#mod-header_top_container').replaceWith('<div id="mod-header_top_container"> <ul id="form_top_image" class="draggable">' + allButton + '</ul></div>');
-   $('#display_comment_form').append(commentForm);
-   if ($(result).find('div#document_history').html()) {
-    $('#document_history').replaceWith('<div id="document_history">' + $(result).find('div#document_history').html() + '</div>');
+     }
+    }).done(function (result) {
+     var newContent = $(result).find('div#structure').html();
+     var allButton = $(result).find('div#header_top_container #form_top_image').html();
+     if (typeof allButton === 'undefined') {
+      allButton = '';
+     }
+     var commentForm = $(result).find('div#comment_form').html();
+     if (newContent) {
+      $('#mod-structure').replaceWith('<div id="mod-structure">' + newContent + '</div>');
+      $('#mod-header_top_container').replaceWith('<div id="mod-header_top_container"> <ul id="form_top_image" class="draggable">' + allButton + '</ul></div>');
+      $('#display_comment_form').append(commentForm);
+      if ($(result).find('div#document_history').html()) {
+       $('#document_history').replaceWith('<div id="document_history">' + $(result).find('div#document_history').html() + '</div>');
+      }
+      var homeUrl = $('#home_url').val();
+
+      $(result).find('#js_files').find('li').each(function () {
+       $.getScript($(this).html());
+      });
+      $(result).find('ul#css_files').find('li').each(function () {
+       var filePath = $(this).html();
+       if (!$("link[href='" + filePath + "']").length) {
+        $('<link href="' + filePath + '" rel="stylesheet">').appendTo("head");
+       }
+      });
+      $.getScript(homeUrl + "includes/js/reload.js").done(function () {
+       $('#overlay').css('display', 'none');
+      });
+     } else {
+      $('#overlay').css('display', 'none');
+     }
+
+    }).fail(function () {
+     alert("Form loading failed!");
+     $('#overlay').css('display', 'none');
+    });
    }
-   var homeUrl = $('#home_url').val();
-
-   $(result).find('#js_files').find('li').each(function () {
-    $.getScript($(this).html());
-   });
-   $(result).find('ul#css_files').find('li').each(function () {
-    var filePath = $(this).html();
-    if (!$("link[href='" + filePath + "']").length) {
-     $('<link href="' + filePath + '" rel="stylesheet">').appendTo("head");
-    }
-   });
-   $.getScript(homeUrl + "includes/js/reload.js").done(function () {
-    $('#overlay').css('display', 'none');
-   });
-  } else {
-   $('#overlay').css('display', 'none');
-  }
-
- }).fail(function () {
-  alert("Form loading failed!");
-  $('#overlay').css('display', 'none');
- });
-}
 
 
   </script>
