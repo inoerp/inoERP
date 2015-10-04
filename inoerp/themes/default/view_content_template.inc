@@ -37,7 +37,7 @@
           $cont_html = content::content_by_id($content_type_name, $$class->content_id);
 //          $regex = '#<code>(.*?)</code>#';
 //          preg_match($regex, $cont_html, $matches);
-          echo ($cont_html);
+          echo nl2br($cont_html);
           ?></div>
         <div id="after_content_extra">
          <div id='content_info'>

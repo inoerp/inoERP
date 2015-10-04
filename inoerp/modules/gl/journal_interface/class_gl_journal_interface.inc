@@ -120,6 +120,18 @@ class gl_journal_interface extends dbObject {
   'name' => 'Import GL Journal ',
   'description' => 'Import GL Journal from Interface ',
  ];
+ 
+  public $prg_delete_gl_journal_parameters = [
+  'Ledger' => 'search_ledger',
+  'Source' => 'search_journal_source',
+  'Category' => 'search_journal_category',
+  'Period' => 'search_gl_period_name',
+ ];
+ public $prg_delete_gl_journal_details = [
+  'name' => 'Delete Journal Interface Lines',
+  'description' => 'Delete Journal Interface Lines',
+ ];
+ 
  public $pageTitle = " Import GL Journals "; //page Title
  public $gl_journal_interface_id;
  public $gl_journal_header_id;
@@ -214,6 +226,33 @@ FROM gl_journal_interface ";
   return !empty($result) ? $result : false;
  }
 
+ 
+  private function _lines_for_delete() {
+  $sql = " SELECT *
+          FROM gl_journal_interface 
+          WHERE line_status = 'S' ";
+
+  if (!empty($this->ledegr_id)) {
+   $sql .= " AND ledegr_id = '{$this->ledegr_id}' ";
+  }
+  
+    if (!empty($this->journal_source)) {
+   $sql .= " AND journal_source = '{$this->journal_source}' ";
+  }
+
+
+  if (!empty($this->journal_category)) {
+   $sql .= " AND journal_category = '{$this->journal_category}' ";
+  }
+
+  if (!empty($this->period_id)) {
+   $sql .= " AND period_id = '{$this->period_id}' ";
+  }
+
+  $result = $this->findBySql($sql);
+  return !empty($result) ? $result : false;
+ }
+ 
  private function _create_journal($iline) {
   $sql = " SELECT * 
 FROM gl_journal_interface 
@@ -345,6 +384,46 @@ journal_category,'|' , '|' ,exchange_type, '|' , exchange_rate) = '{$iline->line
    }
   } else {
    $this->message .= '<br> No elligible lines found for import. Check entered parameters for the program';
+  }
+
+  return $this->message;
+ }
+ 
+ public function prg_delete_gl_journal($seralized_parameters) {
+  $parameters = unserialize($seralized_parameters);
+  $this->message = '<br> Starting to Delete GL Journal Interface Lines....<br>';
+  if (!empty($parameters['ledger_id'][0])) {
+   $this->ledger_id = $parameters['ledger_id'][0];
+   $this->message .= '<br> Entered Ledger Id is : ' . $this->ledger_id;
+  } 
+
+  if (!empty($parameters['journal_category'][0])) {
+   $this->journal_category = $parameters['journal_category'][0];
+   $this->message .= '<br> Entered journal_category is : ' . $this->journal_category;
+  }
+
+  if (!empty($parameters['journal_source'][0])) {
+   $this->journal_source = $parameters['journal_source'][0];
+   $this->message .= '<br> Entered journal_source is : ' . $this->journal_source;
+  }
+
+  if (!empty($parameters['period_id'][0])) {
+   $this->period_id = $parameters['period_id'][0];
+   $this->message .= '<br> Entered period_id is : ' . $this->period_id;
+  }
+
+  $all_lines = $this->_lines_for_delete();
+  if ($all_lines) {
+   $lines_deleted = 0;
+   foreach ($all_lines as $iline) {
+    $gl_int = new gl_journal_interface();
+    $gl_int->gl_journal_interface_id = $iline->gl_journal_interface_id;
+    $gl_int->delete();
+    $lines_deleted++;
+   }
+   $this->message .= "<br> $lines_deleted lines are sucessfully deleted";
+  } else {
+   $this->message .= '<br> No elligible lines found for deletion. Check entered parameters for the program';
   }
 
   return $this->message;

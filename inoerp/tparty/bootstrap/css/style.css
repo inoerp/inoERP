@@ -3902,7 +3902,7 @@ mark,
 
 
 .content_summary .panel-body {
- height: 280px;
+ /*height: 280px;*/
  display: block;
 
 }

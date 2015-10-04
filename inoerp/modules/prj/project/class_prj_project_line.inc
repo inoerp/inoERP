@@ -52,6 +52,7 @@ class prj_project_line extends dbObject {
   'task_level_weight',
   'task_number',
   'task_name',
+  'work_type',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
   "prj_project_header_id"

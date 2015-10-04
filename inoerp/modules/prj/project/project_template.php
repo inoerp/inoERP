@@ -230,7 +230,7 @@ inoERP
          <td><?php echo $f->text_field('task_number2', $$class_second->task_number, '', '', 'task_number'); ?></td>
          <td><?php $f->text_field_wid2s('task_level_weight'); ?></td>
          <td><?php $f->text_field_wid2s('service_type'); ?></td>
-         <td><?php echo $f->select_field_from_object('work_type', prj_work_type::find_all(), 'prj_work_type_id', 'work_type', $$class_second->work_type); ?></td>
+         <td><?php echo $f->select_field_from_object('work_type', prj_work_type::find_all(), 'prj_work_type_id', 'work_type', $$class_second->work_type, '' ,'', 1); ?></td>
          <td><?php $f->checkBox_field_wid2('allow_charges_cb'); ?></td>    
          <td><?php $f->checkBox_field_wid2('capitalizable_cb'); ?></td>   
          <td><?php $f->text_field_wid2('task_status'); ?></td>
