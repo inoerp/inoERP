@@ -389,7 +389,7 @@ function access_denied($msg = '') {
 }
 
 function access_denied_redirection($url = 'access_denied.php') {
- redirect_to(HOME_URL . $url);
+// redirect_to(HOME_URL . $url);
 }
 
 function ino_access_denied_organizationAcess($msg = '') {

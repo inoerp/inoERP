@@ -138,6 +138,13 @@ class prj_project_header extends dbObject {
   "customer_site_name",
   'pm_employee_name'
  ];
+ public static $json_label_fields = [
+  'bu_org_id',
+  'project_number',
+  'description',
+  'manager_user_id',
+  'start_date',
+ ];
  public $profile_default = [
   'exchange_rate_type' => 'gl_currency_conversion_type',
   'bu_org_id' => 'org_bu_name_default',

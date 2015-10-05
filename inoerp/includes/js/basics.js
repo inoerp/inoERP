@@ -3478,10 +3478,16 @@ $(document).ready(function () {
   }
   var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
-  if($(this).hasClass('set_value_for_one_field')){
+  if ($(this).hasClass('set_value_for_one_field')) {
    localStorage.setItem("set_value_for_one_field", true);
   }
   
+  if($(this).hasClass('getform')){
+   localStorage.setItem("auto_refresh_class", 'a.show');
+  }else{
+   localStorage.setItem("getform", null);
+  }
+
   var select_class_name = $(this).data('class_name');
   var openUrl = 'select.php?class_name=' + select_class_name;
   $(this).parent().parent().find('.popup_value').each(function () {
@@ -4406,12 +4412,19 @@ $(document).ready(function () {
 
  $('body').on('click', '#content a.show', function (e) {
   e.preventDefault();
-  var primary_column_id = $('ul#js_saving_data').find('.primary_column_id').data('primary_column_id');
-  var header_id_h = '#' + primary_column_id;
-  var primary_column_id_v = $(header_id_h).val();
+//  var primary_column_id = $('ul#js_saving_data').find('.primary_column_id').data('primary_column_id');
+//  var header_id_h = '#' + primary_column_id;
+//  var primary_column_id_v = $(header_id_h).val();
+  var link = '';
+  $(this).parent().children(':input').each(function () {
+   var field_name = $(this).prop('name').replace(/\[]+/g, '');
+   var field_val = $(this).val();
+   link += '&' + field_name + '=' + field_val;
+  });
   var urlLink = $(this).attr('href');
   var urlLink_a = urlLink.split('?');
-  var formUrl = 'includes/json/json_form.php?' + urlLink_a[1] + '&' + primary_column_id + '=' + primary_column_id_v;
+  var formUrl = 'includes/json/json_form.php?' + urlLink_a[1]  + link;
+//  console.log(link +  ' : ' + formUrl );
   if ($(this).data('search_field')) {
    var search_field = $(this).data('search_field');
    var search_field_h = '#' + search_field;
@@ -5091,20 +5104,20 @@ $(document).ready(function () {
   }
  });
 
-$('body').on(  'click', '.select_all', function(){
+ $('body').on('click', '.select_all', function () {
   $('#form_line').find('input[name="line_id_cb"]').prop('checked', true);
-});
+ });
 
-$('body').on( 'click', '.deselect_all', function(){
+ $('body').on('click', '.deselect_all', function () {
   $('#form_line').find('input[name="line_id_cb"]').prop('checked', false);
-});
+ });
 
-$('body').on('click', '#subscribe_cb' , function(){
-  if(!$('#user_id').val()){
-  alert('Please login to subscribe');
-    $(this).prop('checked', false);
-    }
-});
+ $('body').on('click', '#subscribe_cb', function () {
+  if (!$('#user_id').val()) {
+   alert('Please login to subscribe');
+   $(this).prop('checked', false);
+  }
+ });
 
 //short cut keys ctrl+c to copy value for one field
  $('body').on('keypress', '#form_line :input', function (e) {
