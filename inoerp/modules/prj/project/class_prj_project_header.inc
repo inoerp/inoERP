@@ -51,10 +51,14 @@ class prj_project_header extends dbObject {
   'REQ_APPROVAL' => 'Requires Re-Aproval',
   'REJECTED' => 'Rejected',
  ];
- public static $accrual_method_a = [
-  'WORK' => 'Work',
-  'COST' => 'Cost',
-  'EVENT' => 'Event',
+ public $billing_method_a = [
+  'CC' => 'Cost-Cost',
+  'CW' => 'Cost-Work',
+  'CE' => 'Cost-Event',
+  'EC' => 'Event-Cost',
+  'EW' => 'Event-Work',
+  'WC' => 'Work-Cost',
+  'WE' => 'Work-Event'
  ];
  public $field_a = [
   'prj_project_header_id',
@@ -84,8 +88,7 @@ class prj_project_header extends dbObject {
   'exchange_rate_type',
   'exchange_rate',
   'expected_approval_date',
-  'revenue_accrual_method',
-  'invoice_accrual_method',
+  'billing_method',
   'billing_cycle',
   'prj_burden_list_header_id',
   'account_burdened_cost_cb',
@@ -156,6 +159,16 @@ class prj_project_header extends dbObject {
 //  '_extra_path' => array('form.php?class_name=ar_transaction_header&mode=9' => 'Invoice',
 //   'form.php?class_name=sd_delivery_header&mode=9' => 'Ship')
  ];
+ public $prg_generate_draft_revenue_parameters = [
+  'Organization' => 'search_business_org_nm',
+  'Project From' => 'search_project_number_from',
+  'Project To' => 'search_project_number_to',
+  'Cost Type' => 'search_prj_cost_type_for_distribution',
+ ];
+ public $prg_generate_draft_revenue_details = [
+  'name' => 'Distribute Expenditure',
+  'description' => 'Distribute Project Expenditure',
+ ];
  public $pageTitle = " Project "; //page Title
  public $prj_project_header_id;
  public $bu_org_id;
@@ -184,8 +197,8 @@ class prj_project_header extends dbObject {
  public $probability;
  public $opportunity_value;
  public $expected_approval_date;
- public $revenue_accrual_method;
- public $invoice_accrual_method;
+ public $billing_method;
+// public $invoice_accrual_method;
  public $billing_cycle;
  public $prj_burden_list_header_id;
  public $account_burdened_cost_cb;
@@ -243,18 +256,6 @@ class prj_project_header extends dbObject {
  private function _do_action() {
 
   switch ($this->action) {
-   case 'COPY_ESTIMATES':
-    $this->copy_estimates();
-    break;
-
-   case 'PROCESS_ACTUALS':
-    $this->copy_estimates();
-    break;
-
-   case 'PROCESS_LOGISTICS':
-    $this->_process_logistics();
-    break;
-
    case 'APPROVE':
     $this->approval_status = 'APPROVED';
     break;
@@ -272,102 +273,6 @@ class prj_project_header extends dbObject {
 
   if (empty($this->approval_status)) {
    $this->approval_status = 'ENTERED';
-  }
- }
-
- public function copy_estimates() {
-  /* 1. Find all lines not copied - status PENDING_IMPORT.
-   * 2. Copy all estimates to actuals
-   * 3. Change all the estimate line status to IMPORTED.
-   */
-  if (empty($this->prj_project_header_id)) {
-   return -1;
-  }
-  $all_estimates_lines = prj_project_estimates::find_by_headerId_and_status($this->prj_project_header_id);
-  if ($all_estimates_lines) {
-   foreach ($all_estimates_lines as $k => $estimates_line) {
-    $new_actuals = new prj_project_actuals();
-    foreach ($new_actuals->field_a as $k_a => $v_a) {
-     if ((property_exists($estimates_line, $v_a)) && !empty($estimates_line->$v_a)) {
-      $new_actuals->$v_a = $estimates_line->$v_a;
-     }
-    }
-    $new_actuals->created_by = $new_actuals->creation_date = null;
-    $new_actuals->source = 'ESTIMATES';
-    $new_actuals->line_status = 'PENDING_IMPORT';
-    try {
-     $new_actuals->save();
-     $estimate = new prj_project_estimates();
-     $estimate->findBy_id($estimates_line->prj_project_estimates_id);
-     $estimate->line_status = 'IMPORTED';
-     $estimate->save();
-    } catch (Exception $e) {
-     echo "<br>Unable to import estimates to actuals. Error @ line " . __LINE__ . ' of file ' . __FILE__ . '<br>' . $e->getMessage();
-    }
-   }
-  }
- }
-
- private function _process_logistics() {
-  /* 1. Check if primary_Sd_so_header exists ? if not create a new sales order header
-   * 2. Find all lines not imported - status PENDING_IMPORT & empty sd_so_line.
-   * 2. Add all the lines to the sales order header
-   * 3. Update the line status, sd_so_header_id and sd_so_line_id status 
-   */
-
-  $all_logistics_lines = prj_project_line::find_by_headerId_and_status($this->prj_project_header_id);
-  if ($all_logistics_lines) {
-   $ser_act_lines = hd_service_activity_line::find_by_headerId_and_buOrgId($all_logistics_lines[0]->service_activity_header_id, $this->bu_org_id);
-   if ($ser_act_lines) {
-    $this->_so_header_document_type = $ser_act_lines->header_type_id;
-   }
-  }
-
-  if (empty($this->primary_sd_so_header_id) && !empty($this->_so_header_document_type)) {
-   $this->_create_so_header();
-  }
-  if (empty($this->primary_sd_so_header_id)) {
-   return false;
-  }
-  if ($all_logistics_lines) {
-   $so_line_num = 0;
-   foreach ($all_logistics_lines as $k => $logistics_line) {
-    $so_line_num++;
-    if (!empty($logistics_line->sd_so_line_id)) {
-     continue;
-    }
-    $ser_act_line = hd_service_activity_line::find_by_headerId_and_buOrgId($logistics_line->service_activity_header_id, $this->bu_org_id);
-    $so_line = new sd_so_line();
-    foreach ($so_line->field_a as $k_a => $v_a) {
-     if ((property_exists($logistics_line, $v_a)) && !empty($logistics_line->$v_a)) {
-      $so_line->$v_a = $logistics_line->$v_a;
-     }
-    }
-    $so_line->sd_so_header_id = $this->primary_sd_so_header_id;
-    $so_line->line_status = 'ENTERED';
-    $so_line->line_type = $ser_act_line->line_type_id;
-    $so_line->shipping_org_id = $logistics_line->inv_org_id;
-    $so_line->item_description = item::find_by_item_id_m($so_line->item_id_m)->item_description;
-    try {
-     if (method_exists($so_line, '_before_save')) {
-      $so_line->_before_save();
-     }
-     $so_line->save();
-     if (method_exists($so_line, '_after_save')) {
-      $so_line->_after_save();
-     }
-     $sv_line = new prj_project_line();
-     $sv_line->findBy_id($logistics_line->prj_project_line_id);
-     $sv_line->sd_so_header_id = $so_line->sd_so_header_id;
-     $sv_line->sd_so_line_id = $so_line->sd_so_line_id;
-     $sv_line->line_status = 'IMPORTED';
-     $sv_line->save();
-//     pa($so_line);
-//     pa($sv_line);
-    } catch (Exception $e) {
-     echo "<br>Unable to import estimates to logistic lines. Error @ line " . __LINE__ . ' of file ' . __FILE__ . '<br>' . $e->getMessage();
-    }
-   }
   }
  }
 
@@ -393,40 +298,6 @@ class prj_project_header extends dbObject {
   }
  }
 
- private function _create_so_header() {
-  global $dbc;
-  $sd_so_h = new sd_so_header();
-  $sd_so_h->bu_org_id = $this->bu_org_id;
-  $sd_so_h->order_source_type = 'SERVICE';
-  $sd_so_h->document_type = $this->_so_header_document_type;
-  $sd_so_h->doc_currency = $this->doc_currency;
-  $sd_so_h->currency = $this->currency;
-  $sd_so_h->exchange_rate_type = $this->exchange_rate_type;
-  $sd_so_h->exchange_rate = $this->exchange_rate;
-  $sd_so_h->ar_customer_id = $this->ar_customer_id;
-  $sd_so_h->bill_to_id = $this->bill_to_id;
-  $sd_so_h->ship_to_id = $this->ship_to_id;
-  $sd_so_h->ar_customer_site_id = $this->ar_customer_site_id;
-  $sd_so_h->payment_term_id = $this->payment_term_id;
-  $sd_so_h->payment_term_date = $this->payment_term_date;
-  $sd_so_h->order_reference_table = 'hd_sv_header';
-  $sd_so_h->order_reference_id = $this->prj_project_header_id;
-  try {
-   if (method_exists($sd_so_h, '_before_save')) {
-    $sd_so_h->_before_save();
-   }
-   $sd_so_h->save();
-   if (method_exists($sd_so_h, '_after_save')) {
-    $sd_so_h->_after_save();
-   }
-   $this->primary_sd_so_header_id = $sd_so_h->sd_so_header_id;
-   $this->save();
-  } catch (Exception $e) {
-   echo "<br>Unable to create SO Header. Error @ line " . __LINE__ . " in file " . __FILE__ . '<br>' . $e->getMessage();
-   $dbc->rollback = true;
-  }
- }
-
  public static function find_financial_details_from_projectHeaderId($prj_project_header_id) {
   $sql = " 
          SELECT org.org_id, org.legal_org_id, legal.ledger_id,
@@ -449,16 +320,62 @@ class prj_project_header extends dbObject {
   return !empty($result) ? array_pop($result) : false;
  }
 
-// public function save() {
-//	$primary_column = static::$primary_column;
-//	if (empty($this->$primary_column)) {
-//	 $this->approval_status = 'Entered';
-//	 $this->create();
-//	} else {
-//	 $this->update($this->$primary_column);
-//	}
-//	return $this->msg;
-// }
+ public function prg_generate_draft_revenue($seralized_parameters) {
+  $parameters = unserialize($seralized_parameters);
+  $this->message = '<br> Start of Distribute Cost Program ';
+
+  if (!empty($parameters['bu_org_id'][0])) {
+   $this->bu_org_id = $parameters['bu_org_id'][0];
+   $this->message .= '<br> Entered Org Id is : ' . $this->bu_org_id;
+  } else {
+   $this->message .= '<br> Error! : No org id found @  ' . __FILE__ . ' @@ ' . __LINE__;
+   return $this->message;
+  }
+
+  if (!empty($parameters['prj_project_header_id_from'][0])) {
+   $this->_prj_project_header_id_from = $parameters['prj_project_header_id_from'][0];
+   $this->message .= "<br>Using from project header id " . $this->_prj_project_header_id_from;
+  }
+
+  if (isset($parameters['cost_type_for_distribution'][0])) {
+   $this->_cost_type_for_distribution = $parameters['cost_type_for_distribution'][0];
+   $this->message .= "<br>Using distribution type " . $this->_cost_type_for_distribution;
+  }
+
+  if (!empty($parameters['prj_project_header_id_to'][0])) {
+   $this->_prj_project_header_id_to = $parameters['prj_project_header_id_to'][0];
+   $this->message .= "<br>Using to project header id " . $this->_prj_project_header_id_to;
+   for ($i = $this->_prj_project_header_id_from; $i <= $this->_prj_project_header_id_to; $i++) {
+    try {
+     $this->_distribute_cost($i);
+    } catch (Exception $e) {
+     $this->message .= "<br>Failed to complete distribute cost program " . $e->getMessage();
+    }
+   }
+  } else if (!empty($this->_prj_project_header_id_from)) {
+   try {
+    $this->_distribute_cost($this->_prj_project_header_id_from);
+   } catch (Exception $e) {
+    $this->message .= "<br>Failed to complete distribute cost program " . $e->getMessage();
+   }
+  } else {
+   //find all projects with line in NULL or ENTERED status and distribute them
+   $this->message .= '<br>Running program for all available projects ';
+   $all_lines_a = prj_expenditure_line::find_distinctProject_byStatus();
+   if ($all_lines_a) {
+    foreach ($all_lines_a as $el_obj) {
+     $this->_distribute_cost($el_obj->prj_project_header_id);
+    }
+   }
+  }
+
+
+
+
+
+  return $this->message;
+ }
+
 }
 
 //end of prj_project_header class

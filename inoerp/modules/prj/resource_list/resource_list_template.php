@@ -126,8 +126,8 @@ inoERP
          <td><?php $f->text_field_d2sr('prj_resource_list_line_id'); ?></td>
          <td><?php echo $f->select_field_from_object('job_id', hr_job::find_all(), 'hr_job_id', 'job_name', $$class_second->hr_job_id ,'' ,'resource_type_control'); ?>						 </td>
          <td><?php echo $f->select_field_from_object('prj_expenditure_type_id', prj_expenditure_type_header::find_all(), 'prj_expenditure_type_header_id', 'expenditure_type', $$class_second->prj_expenditure_type_id, '' ,'resource_type_control'); ?>						 </td>
-         <td><?php echo $f->select_field_from_object('expenditure_category', prj_expenditure_type::prj_expenditure_category(), 'option_line_code', 'option_line_value', $$class_second->expenditure_category, '', 'resource_type_control'); ?>    </td>
-         <td><?php echo $f->select_field_from_object('revenue_category', prj_expenditure_type::prj_revenue_category(), 'option_line_code', 'option_line_value', $$class_second->revenue_category, '', 'resource_type_control'); ?>    </td>
+         <td><?php echo $f->select_field_from_object('expenditure_category', prj_expenditure_type_header::prj_expenditure_category(), 'option_line_code', 'option_line_value', $$class_second->expenditure_category, '', 'resource_type_control'); ?>    </td>
+         <td><?php echo $f->select_field_from_object('revenue_category', prj_expenditure_type_header::prj_revenue_category(), 'option_line_code', 'option_line_value', $$class_second->revenue_category, '', 'resource_type_control'); ?>    </td>
         </tr>
         <?php
         $count = $count + 1;

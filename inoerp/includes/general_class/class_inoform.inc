@@ -1589,7 +1589,7 @@ EOD;
   }
 
   if ($disabled == 1) {
-   $disabled = 'disabled';
+   $disabled = ' disabled ';
   } else {
    $disabled = '';
   }

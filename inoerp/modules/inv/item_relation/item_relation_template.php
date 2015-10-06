@@ -1,9 +1,8 @@
 <div class="row small-left-padding">
  <div id="form_all">
   <div id="form_headerDiv">
-   <form action=""  method="post" id="inv_item_relation_line"  name="item_relation_line">
+   <form method="post" id="inv_item_relation_line"  name="item_relation_line">
     <span class="heading"><?php
-     $f = new inoform();
      echo gettext('Item Relationships')
      ?></span>
     <div id="form_serach_header" class="tabContainer">

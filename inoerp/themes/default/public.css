@@ -2198,7 +2198,7 @@ ul.single-column li{
  margin: 20px 20px 0px 0px;
  vertical-align: top;
  border: 2px solid #3E9CCA;
- width: 340px; 
+ width: 300px; 
 }
 
 
@@ -2218,7 +2218,7 @@ ul.single-column li{
   overflow: hidden;
   display: inline-block;
   margin: 10px;
-  background-color: rgba(42, 147, 177, 0.89);
+  background-color: rgba(60, 171, 147, 0.85);
   padding: 8px 20px;
   font-size: 1.1em;
   font-weight: bold;

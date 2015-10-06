@@ -67,8 +67,7 @@ inoERP
     </div>
     <div id="tabsHeader-3" class="tabContent">
      <ul class="column header_field">
-      <li><?php $f->l_select_field_from_array('revenue_accrual_method', prj_project_header::$accrual_method_a, $$class->revenue_accrual_method, 'revenue_accrual_method');  ?></li>
-      <li><?php $f->l_select_field_from_array('invoice_accrual_method', prj_project_header::$accrual_method_a, $$class->invoice_accrual_method, 'invoice_accrual_method');  ?></li>
+      <li><?php $f->l_select_field_from_array('billing_method', $$class->billing_method_a, $$class->billing_method, 'billing_method',  1 ,$readonly1 ,$readonly1);  ?></li>
       <li><?php $f->l_text_field_d('billing_cycle'); ?></li>
       <li><?php $f->l_select_field_from_object('prj_burden_list_header_id', prj_burden_list_header::find_all(), 'prj_burden_list_header_id', 'burden_list', $$class->prj_burden_list_header_id, 'prj_burden_list_header_id'); ?></li> 
       <li><?php $f->l_checkBox_field_d('account_burdened_cost_cb'); ?></li> 
@@ -213,6 +212,7 @@ inoERP
         <th><?php echo gettext('Work Type') ?></th>
         <th><?php echo gettext('Allow Charges') ?></th>
         <th><?php echo gettext('Capitalizable') ?></th>
+        <th><?php echo gettext('Milestone ?') ?></th>
         <th><?php echo gettext('Task Status') ?></th>
         <th><?php echo gettext('CIP Asset') ?></th>
        </tr>
@@ -233,6 +233,7 @@ inoERP
          <td><?php echo $f->select_field_from_object('work_type', prj_work_type::find_all(), 'prj_work_type_id', 'work_type', $$class_second->work_type, '' ,'', 1); ?></td>
          <td><?php $f->checkBox_field_wid2('allow_charges_cb'); ?></td>    
          <td><?php $f->checkBox_field_wid2('capitalizable_cb'); ?></td>   
+         <td><?php $f->checkBox_field_wid2('milestone_cb'); ?></td>   
          <td><?php $f->text_field_wid2('task_status'); ?></td>
          <td><?php $f->text_field_wid2('cip_asset_id'); ?></td>
         </tr>

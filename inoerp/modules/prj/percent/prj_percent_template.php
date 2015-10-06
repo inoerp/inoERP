@@ -11,10 +11,10 @@
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
-      <li><?php
-       echo $f->l_val_field_dm('project_number', 'prj_project_header', 'project_number', '', 'project_number', 'vf_select_project_number');
-echo $f->hidden_field_withId('prj_percent_header_id', $$class->prj_percent_header_id);
-       echo $f->hidden_field_withId('prj_project_header_id', $$class->prj_project_header_id);
+      <li><?php $f = new inoform();
+       echo $f->l_val_field_dm('project_number', 'prj_project_header', 'project_number', '', 'project_number', 'vf_select_project_number action');
+       echo $f->hidden_field_withIdClass('prj_percent_header_id', $$class->prj_percent_header_id ,'action');
+       echo $f->hidden_field_withIdClass('prj_project_header_id', $$class->prj_project_header_id , 'action');
        ?><i class="generic g_select_project_number select_popup getform clickable fa fa-search" data-class_name="prj_percent_all_v"></i>
        <a name="show" href="form.php?class_name=prj_percent_header&<?php echo "mode=$mode"; ?>" class="show document_id prj_percent_header_id">
         <i class="fa fa-refresh"></i></a> 
@@ -68,12 +68,13 @@ echo $f->hidden_field_withId('prj_percent_header_id', $$class->prj_percent_heade
        <tr>
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Task Id') ?></th>
         <th><?php echo gettext('Task') ?></th>
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('Date') ?></th>
         <th><?php echo gettext('Completion') ?> %</th>
         <th><?php echo gettext('Comment') ?></th>
-        <th><?php echo gettext('Task Id') ?></th>
+
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -90,12 +91,13 @@ echo $f->hidden_field_withId('prj_percent_header_id', $$class->prj_percent_heade
           ?>
          </td>
          <td><?php $f->text_field_wid2sr('prj_percent_line_id', 'always_readonly line_id'); ?></td>
+         <td><?php $f->text_field_wid2sr('prj_project_line_id', 'always_readonly'); ?></td>
          <td><?php $f->text_field_wid2r('task_number', 'always_readonly'); ?></td>
          <td><?php $f->text_field_wid2r('task_description', 'always_readonly'); ?></td>
          <td><?php echo $f->date_fieldAnyDay('as_of_date', $$class_second->as_of_date); ?></td>
          <td><?php $f->text_field_wid2('percent'); ?></td>
          <td><?php $f->text_field_wid2l('comment'); ?></td>
-         <td><?php $f->text_field_wid2sr('prj_project_line_id','always_readonly'); ?></td>
+
          <td></td>
 
         </tr>

@@ -37,6 +37,7 @@ class prj_project_line extends dbObject {
   'work_type',
   'allow_charges_cb',
   'capitalizable_cb',
+  'milestone_cb',
   'currency',
   'rate_type',
   'cip_asset_id',
@@ -75,6 +76,7 @@ class prj_project_line extends dbObject {
  public $work_type;
  public $allow_charges_cb;
  public $capitalizable_cb;
+ public $milestone_cb;
  public $cip_asset_id;
  public $currency;
  public $rate_type;

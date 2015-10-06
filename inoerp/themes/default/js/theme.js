@@ -55,8 +55,13 @@ $(document).ready(function () {
   });
   var bgColor = $(this).closest('li').css('background-color');
   var faClass = $(this).closest('li').find('i').attr('class');
-  $('#overlay').css('background-color', bgColor);
-    $('#overlay').attr('data-actionmsg' , 'Loading...');
+  $('#overlay ').css({
+   backgroundColor : bgColor
+  });
+  $('#overlay a').css({
+   fontFamily: "Lato"
+  });
+  $('#overlay').attr('data-actionmsg' , 'Loading...');
   $('#overlay').removeClass();
   $('#overlay').addClass(faClass);
   var newStyle = $('<style>#path_by_module ul.child_menu > li > a { background-color: ' + bgColor + '; } #path_by_module ul.child_menu > li { border-color: ' + bgColor + '; }</style>');
