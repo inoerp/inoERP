@@ -1,6 +1,6 @@
 <div id="po_requisition_divId"><span class="heading"><?php echo gettext('Requisition Header') ?></span>
  <div id ="form_header">
-  <form action=""  method="post" id="po_requisition_header"  name="po_requisition_header">
+  <form method="post" id="po_requisition_header"  name="po_requisition_header">
    <div id="tabsHeader">
     <ul class="tabMain">
      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -93,7 +93,7 @@
   </form>
  </div>
  <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Requisition Lines & Shipments') ?></span>
-  <form action=""  method="po_requisitionst" id="po_requisition_site"  name="po_requisition_line">
+  <form method="po_requisitionst" id="po_requisition_site"  name="po_requisition_line">
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
@@ -128,8 +128,8 @@
            echo ino_inline_action($$class_second->po_requisition_line_id, array('po_requisition_header_id' => $$class->po_requisition_header_id));
            ?>
           </td>
-          <td><?php form::text_field_wid2sr('po_requisition_line_id'); ?></td>
-          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
+          <td><?php $f->text_field_wid2sr('po_requisition_line_id','always_readonly line_id'); ?></td>
+          <td><?php $f->text_field_wid2s('line_number' , 'lines_number'); ?></td>
           <td><?php echo $f->select_field_from_object('receving_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->receving_org_id, '', '', 1, $readonly); ?></td>
           <td><?php echo form::select_field_from_object('line_type', po_requisition_line::po_requisition_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, 'line_type', $readonly); ?></td>
           <td><?php

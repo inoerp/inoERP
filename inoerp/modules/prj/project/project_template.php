@@ -149,7 +149,7 @@ inoERP
        <tr>
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Task Seq') ?>#</th>
+        <th><?php echo gettext('Seq') ?>#</th>
         <th><?php echo gettext('Task') ?>#</th>
         <th><?php echo gettext('Add Child') ?></th>
         <th><?php echo gettext('Parent') ?></th>
@@ -176,7 +176,7 @@ inoERP
          <td><?php $f->text_field_wid2sr('prj_project_line_id' , 'line_id'); ?></td>
          <td><?php $f->seq_field_d($count) ?></td>
          <!--<td><?php // $f->text_field_wid2r('task_seq_number','medium');      ?></td>-->
-         <td><?php $f->text_field_wid2('task_number', 'lines_number'); ?></td>
+         <td><?php $f->text_field_wid2s('task_number', 'lines_number'); ?></td>
          <td>
           <ul class="extra_inline_action">
            <li class="add_child clickable text-center" data-heighest_child="0"><i class="fa fa-plus-square-o"></i></li>
