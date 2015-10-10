@@ -1,2 +1,4 @@
-User-agent: *
-Disallow: /
+# Directories
+Disallow: /includes/
+Disallow: /modules/
+Disallow: /extensions/

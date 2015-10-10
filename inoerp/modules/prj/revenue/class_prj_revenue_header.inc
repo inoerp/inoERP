@@ -18,7 +18,8 @@ class prj_revenue_header extends dbObject {
 
  public static $table_name = "prj_revenue_header";
  public static $primary_column = "prj_revenue_header_id";
- public static $key_column = 'revenue_class';
+ public static $primary_column2 = "revenue_number";
+ public static $key_column = 'prj_project_header_id';
  public static $dependent_classes = ['prj_revenue_line'];
  public static $module = "prj";
 //  data base variables as stored database column name
@@ -95,6 +96,9 @@ class prj_revenue_header extends dbObject {
  public $fields_inForm_notInDataBase = [
   'action',
  ];
+  public $fields_inDataBase_notInForm = [
+  'currency'
+ ];
  public $search = [
   '_show_update_path' => 1,
   '_show_view_path' => 1,
@@ -103,6 +107,7 @@ class prj_revenue_header extends dbObject {
   'Organization' => 'search_org_name'
  ];
  public $profile_default = [
+  'exchange_rate_type' => 'gl_currency_conversion_type',
   'bu_org_id' => 'org_bu_name_default',
  ];
  public $prg_distribute_cost_parameters = [
