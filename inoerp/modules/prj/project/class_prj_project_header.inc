@@ -51,13 +51,22 @@ class prj_project_header extends dbObject {
   'REQ_APPROVAL' => 'Requires Re-Aproval',
   'REJECTED' => 'Rejected',
  ];
+ public static $status_a = [
+  'ENTERED' => 'Entered',
+  'ACTIVE' => 'Active',
+  'HOLD' => 'On Hold',
+  'INVOICE_HOLD' => 'On Invoice Hold',
+  'REVENUE_HOLD' => 'On Revenue Hold',
+  'PENDING_CLOSURE' => 'Pending Closure',
+  'CLOSED' => 'Closed',
+ ];
  public $billing_method_a = [
   'CC' => 'Cost-Cost',
   'CW' => 'Cost-Work',
   'CE' => 'Cost-Event',
-  'EC' => 'Event-Cost',
+  'EE' => 'Event-Event',
   'EW' => 'Event-Work',
-  'WC' => 'Work-Cost',
+  'WW' => 'Work-Work',
   'WE' => 'Work-Event'
  ];
  public $field_a = [
@@ -158,16 +167,6 @@ class prj_project_header extends dbObject {
 //		 '_view_action_meassge' => 'View',
 //  '_extra_path' => array('form.php?class_name=ar_transaction_header&mode=9' => 'Invoice',
 //   'form.php?class_name=sd_delivery_header&mode=9' => 'Ship')
- ];
- public $prg_generate_draft_revenue_parameters = [
-  'Organization' => 'search_business_org_nm',
-  'Project From' => 'search_project_number_from',
-  'Project To' => 'search_project_number_to',
-  'Cost Type' => 'search_prj_cost_type_for_distribution',
- ];
- public $prg_generate_draft_revenue_details = [
-  'name' => 'Distribute Expenditure',
-  'description' => 'Distribute Project Expenditure',
  ];
  public $pageTitle = " Project "; //page Title
  public $prj_project_header_id;
@@ -318,62 +317,6 @@ class prj_project_header extends dbObject {
   $result = self::find_by_sql($sql);
 
   return !empty($result) ? array_pop($result) : false;
- }
-
- public function prg_generate_draft_revenue($seralized_parameters) {
-  $parameters = unserialize($seralized_parameters);
-  $this->message = '<br> Start of Distribute Cost Program ';
-
-  if (!empty($parameters['bu_org_id'][0])) {
-   $this->bu_org_id = $parameters['bu_org_id'][0];
-   $this->message .= '<br> Entered Org Id is : ' . $this->bu_org_id;
-  } else {
-   $this->message .= '<br> Error! : No org id found @  ' . __FILE__ . ' @@ ' . __LINE__;
-   return $this->message;
-  }
-
-  if (!empty($parameters['prj_project_header_id_from'][0])) {
-   $this->_prj_project_header_id_from = $parameters['prj_project_header_id_from'][0];
-   $this->message .= "<br>Using from project header id " . $this->_prj_project_header_id_from;
-  }
-
-  if (isset($parameters['cost_type_for_distribution'][0])) {
-   $this->_cost_type_for_distribution = $parameters['cost_type_for_distribution'][0];
-   $this->message .= "<br>Using distribution type " . $this->_cost_type_for_distribution;
-  }
-
-  if (!empty($parameters['prj_project_header_id_to'][0])) {
-   $this->_prj_project_header_id_to = $parameters['prj_project_header_id_to'][0];
-   $this->message .= "<br>Using to project header id " . $this->_prj_project_header_id_to;
-   for ($i = $this->_prj_project_header_id_from; $i <= $this->_prj_project_header_id_to; $i++) {
-    try {
-     $this->_distribute_cost($i);
-    } catch (Exception $e) {
-     $this->message .= "<br>Failed to complete distribute cost program " . $e->getMessage();
-    }
-   }
-  } else if (!empty($this->_prj_project_header_id_from)) {
-   try {
-    $this->_distribute_cost($this->_prj_project_header_id_from);
-   } catch (Exception $e) {
-    $this->message .= "<br>Failed to complete distribute cost program " . $e->getMessage();
-   }
-  } else {
-   //find all projects with line in NULL or ENTERED status and distribute them
-   $this->message .= '<br>Running program for all available projects ';
-   $all_lines_a = prj_expenditure_line::find_distinctProject_byStatus();
-   if ($all_lines_a) {
-    foreach ($all_lines_a as $el_obj) {
-     $this->_distribute_cost($el_obj->prj_project_header_id);
-    }
-   }
-  }
-
-
-
-
-
-  return $this->message;
  }
 
 }

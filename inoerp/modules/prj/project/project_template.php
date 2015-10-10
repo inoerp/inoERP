@@ -52,7 +52,7 @@ inoERP
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <ul class="column header_field">
-      <li><?php $f->l_text_field_d('project_status'); ?></li>
+      <li><?php $f->l_select_field_from_array('project_status' , prj_project_header::$status_a, $$class->project_status,'project_status','medium'); ?></li>
       <li><?php $f->l_text_field_dr('approval_status'); ?></li>
       <li><?php $f->l_text_field_d('role_list_id'); ?></li> 
       <li><?php $f->l_select_field_from_object('prj_work_type', prj_work_type::find_all(), 'prj_work_type_id', 'work_type', $$class->prj_work_type, 'prj_work_type'); ?></li> 

@@ -3287,6 +3287,7 @@ $(document).ready(function () {
   if (localStorage.getItem("auto_refresh_class") !== null) {
    window.opener.$(localStorage.getItem("auto_refresh_class")).trigger('click');
   }
+  window.opener.$('#content').trigger('setInoVal');
  });
 
  $('body').on('click', '#selectResult_page .popover_quick_select', function (e) {
@@ -3485,7 +3486,7 @@ $(document).ready(function () {
   if($(this).hasClass('getform')){
    localStorage.setItem("auto_refresh_class", 'a.show');
   }else{
-   localStorage.setItem("getform", null);
+   localStorage.setItem("auto_refresh_class", null);
   }
 
   var select_class_name = $(this).data('class_name');

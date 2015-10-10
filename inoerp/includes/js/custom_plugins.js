@@ -390,7 +390,7 @@
       minLength: settings.min_length
      });
     }
-
+   $('#content').trigger('setInoVal');
    }
   };
 

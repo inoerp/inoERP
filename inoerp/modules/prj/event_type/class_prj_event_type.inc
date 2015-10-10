@@ -74,6 +74,8 @@ class prj_event_type extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
+ 
+
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [

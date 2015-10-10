@@ -1139,6 +1139,7 @@ autoCompleteMain.prototype.autoComplete = function ()
     },
     minLength: min_length
    });
+   $('#content').trigger('setInoVal');
   }
  });
 };

@@ -20,8 +20,8 @@ inoERP
       <li><?php $f->l_text_field_dr_withSearch('prj_event_header_id') ?>
        <a name="show" href="form.php?class_name=prj_event_header&<?php echo "mode=$mode"; ?>" class="show document_id prj_event_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
-      <li><?php
-       $f->l_text_field_d('project_number', 'select project_number');
+      <li><?php $f = new inoform();
+       $f->l_val_field_d('project_number', 'prj_project_header', 'project_number', '' ,'select project_number');
        echo $f->hidden_field_withId('prj_project_header_id', $$class->prj_project_header_id);
        ?><i class="generic select_project_number select_popup clickable fa fa-search" data-class_name="prj_project_header"></i></li>
       <li><?php $f->l_text_field_d('event_name'); ?></li>
@@ -98,8 +98,10 @@ inoERP
          <td><?php
           $f->val_field_wid2m('task_number', 'prj_project_all_v', 'task_number', '', 'select project_task_number');
           echo $f->hidden_field('prj_project_line_id', $$class_second->prj_project_line_id);
+          echo $f->hidden_field_withCLass('prj_project_header_id', $$class_second->prj_project_header_id , 'popup_value');
+          
           ?><i class="generic select_project_task_number select_popup clickable fa fa-search" data-class_name="prj_project_all_v"></i></td>
-         <td><?php echo $f->select_field_from_object('event_type_id', prj_event_type::find_all(), 'event_type', 'prj_event_type_id', $$class_second->event_type_id, '', '', 1); ?></td>
+         <td><?php echo $f->select_field_from_object('event_type_id', prj_event_type::find_all(), 'prj_event_type_id', 'event_type', $$class_second->event_type_id, '', '', 1); ?></td>
          <td><?php echo $f->date_fieldAnyDay('event_date', $$class_second->event_date); ?></td>
          <td><?php echo $f->select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class_second->currency, '', '', 1); ?></td>
          <td><?php $f->text_field_d2('billing_amount'); ?></td>
@@ -119,7 +121,7 @@ inoERP
         <th><?php echo gettext('Seq') ?>#</th>
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('Is Billed ?')  ?></th>
-        <th><?php echo gettext('Is Revenue Distributed?') ?>#</th>
+        <th><?php echo gettext('Revenue Distributed ?') ?></th>
         <th><?php echo gettext('Reference Name') ?></th>
         <th><?php echo gettext('Reference Value') ?></th>
        </tr>
