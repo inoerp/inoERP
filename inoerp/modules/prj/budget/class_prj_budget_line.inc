@@ -81,6 +81,19 @@ class prj_budget_line extends dbObject {
   return $lines;
  }
 
+ public static function find_budgetAmount_byProjectHeaderId($prj_project_header_id) {
+  $sql = " SELECT SUM(revenue_amount) as revenue_amount
+FROM prj_budget_line pbl,
+prj_budget_header pbh
+WHERE pbh.prj_project_header_id = '{$prj_project_header_id}'
+AND pbh.prj_budget_header_id = pbl.prj_budget_header_id
+";
+
+  $result = self::find_by_sql($sql);
+
+  return !empty($result) ? $result[0]->revenue_amount : false;
+ }
+
 }
 
 //end of path class

@@ -217,13 +217,25 @@ class prj_revenue_header extends dbObject {
  private $_cost_type_for_distribution;
  private $_prj_project_header_id_to;
 
+ public static function find_byProjectHeaderId($prj_project_header_id) {
+  $sql = " SELECT *
+FROM prj_revenue_header 
+WHERE prj_project_header_id = '{$prj_project_header_id}'
+LIMIT 1 
+";
+
+  $result = self::find_by_sql($sql);
+
+  return !empty($result) ? array_pop($result) : false;
+ }
+
  private function _create_draft_revenue($prj_project_header_id) {
   /*
    * 1. Find the revenue method for the project
    * 2. Verify the project status is in ('ACTIVE' , 'PENDING_CLOSURE' , 'INVOICE_HOLD')
    * 3. Find the billing method
    *    3.1 Event - Find all events with out full revenue and generate the corresponding revenue
-   *    3.2 Work - Find the % Completion of the project and multiply be approved revenue budget to get total revenue.
+   *    3.2 Work  - Find the % Completion of the project and multiply be approved revenue budget to get total revenue.
    *               Substract all the existing revenue to get the latest revenue amount.
    *    3.3 Cost - Find Actual Cost to Budgeted Cost to find cost ratio. Multiply cost ratio with Revenue budget to get the total revenue amount.
    *               Substract all the existing revenue to get the latest revenue amount.
@@ -239,7 +251,7 @@ class prj_revenue_header extends dbObject {
   if ($prj_i && !(in_array($prj_i->project_status, ['ACTIVE', 'PENDING_CLOSURE', 'INVOICE_HOLD']))) {
    throw new Exception('Project status doesnt allow revenue creation');
   }
-
+//  pa($prj_i);
   switch ($prj_i->billing_method) {
    case 'WW':
    case 'WE':
@@ -252,109 +264,174 @@ class prj_revenue_header extends dbObject {
 
    case 'EE':
    case 'EW':
+    try {
+     $this->_create_revenueByPercentComplete($prj_i);
+    } catch (Exception $e) {
+     $this->message .= "<br>Unable to save revenue by percent line " . $e->getMessage();
+    }
     break;
 
    default:
     break;
   }
+ }
 
-  $all_exp_lines = prj_expenditure_line::find_by_headerId_Status($prj_project_header_id);
-  if (empty($all_exp_lines)) {
-   $this->message .= "<br>No elligible lines for  prj_project_header_id $prj_project_header_id ";
-   return true;
+ private function _create_revenueByPercentComplete($prj_i) {
+  //check if project revenue exists
+  $prj_revenue_i = self::find_byProjectHeaderId($prj_i->prj_project_header_id);
+  if ($prj_revenue_i) {
+   $prj_revenue_lines_i = prj_revenue_line::find_by_parent_id($prj_revenue_i->prj_revenue_header_id);
+  } else {
+   //create revenue header
+   $prj_revenue_i = $this->_create_revenueHeader($prj_i);
   }
 
 
-  foreach ($all_exp_lines as $k => $exp_lines) {
-   //create the burden details
-//   echo '<br> prj_expenditure_line_id :' . $exp_lines->prj_expenditure_line_id;
-   $burden_lines = prj_expenditure_line::find_burdenDetails_fromExpenditureLine($exp_lines->prj_expenditure_line_id);
-   $burden_line_amount = 0;
+  /*
+   * 1. Find the total budgeted revenue and mulitply with % completion to get total revenue
+   * 2. Find the total created revenue
+   * 3. New revenue = 1 - 2 and create a new line for the revenue header
+   */
+  if (empty($prj_revenue_i)) {
+   $this->message .= "<br>Uanble to create/find project revenue details ";
+   throw new Exception("NO_PROJECT_HEADER_FOUND");
+  } else {
+   $this->message .= '<br>Using project revenue header id ' . $prj_revenue_i->prj_revenue_header_id;
+  }
 
-   if ($burden_lines) {
-    //create burden lines
-    foreach ($burden_lines as $burden_line) {
-     $buredn_l = new prj_burden_expenditure();
-     $buredn_l->prj_expenditure_line_id = $burden_line->prj_expenditure_line_id;
-     if (!empty($burden_line->burden_value)) {
-      $buredn_l->burden_amount = $burden_line->burden_value;
-     } else if (!empty($burden_line->multiplier)) {
-      $buredn_l->burden_amount = $burden_line->multiplier * $exp_lines->quantity;
-     }
-     $burden_line_amount += $buredn_l->burden_amount;
-     $buredn_l->prj_burden_cost_base_id = $burden_line->burden_cost_base_id;
-     $buredn_l->prj_expenditure_type_header_id = $burden_line->prj_expenditure_type_header_id;
-     $buredn_l->prj_project_header_id = $burden_line->prj_project_header_id;
-     $buredn_l->prj_project_line_id = $burden_line->prj_project_line_id;
-     $buredn_l->prj_burden_list_header_id = $burden_line->prj_burden_list_header_id;
-     $buredn_l->prj_burden_structure_header_id = $burden_line->prj_burden_structure_header_id;
-     $buredn_l->prj_burden_costcode_id = $burden_line->burden_cost_code_id;
-     $buredn_l->multiplier = $burden_line->multiplier;
-     $buredn_l->burden_value = $burden_line->burden_value;
-     try {
-//      pa($buredn_l);
-      $buredn_l->save();
-     } catch (Exception $e) {
-      $dbc->rollback = true;
-     }
-    }
-   }
+  $total_budget_amount = prj_budget_line::find_budgetAmount_byProjectHeaderId($prj_i->prj_project_header_id);
+  $percent_comp = prj_percent_header::find_by_ColumnNameVal('prj_project_header_id', $prj_i->prj_project_header_id);
+  if ($percent_comp) {
+   $percent_val = $percent_comp[0]->percent;
+  } else {
+   $this->message .= "<br>Project completion % is 0 ";
+   throw new Exception("ZERO_PROJECT_COMPLETION");
+  }
+  $rev_amount = ($percent_val * $total_budget_amount) / 100;
+  $existing_rev_amount = prj_revenue_line::find_totalRevenue_projectHeaderId($prj_i->prj_project_header_id);
+  $new_rev_amount = $rev_amount - $existing_rev_amount;
+  if ($new_rev_amount > 0) {
+   $line_description = "percent_val is $percent_val, total_budget_amount is $total_budget_amount and existing rev amount is $existing_rev_amount ";
+   $this->_create_revenueLines($prj_revenue_i, $new_rev_amount, $line_description);
+  } else {
+   $this->message .= "<br>New revenue amount is less than equal to zero as project percent completion status ";
+   throw new Exception("ZERO_REVENUE_AMOUNT");
+  }
+ }
 
-   //get the accounts
-   $prj_el = new prj_expenditure_line();
-   $prj_el->findBy_id($exp_lines->prj_expenditure_line_id);
-   $prj_eh = prj_expenditure_header::find_by_id($prj_el->prj_expenditure_header_id);
-   $el_accounts = prj_expenditure_line::find_accountDetails_fromExpenditureLine($exp_lines->prj_expenditure_line_id);
-   $expn_document_type = $prj_eh->expenditure_class . '_EXPEN';
-   $clear_document_type = $prj_eh->expenditure_class . '_CLEAR';
-   $default_exp_ac_id = $default_exp_clr_ac_id = null;
-   if (!$el_accounts) {
-    return;
-   }
-
-   foreach ($el_accounts as $el_acc) {
-    switch ($el_acc->document_type) {
-     case $expn_document_type:
-      $prj_el->debit_ac_id = $el_acc->ac_id;
-      break;
-
-     case $clear_document_type:
-      $prj_el->credit_ac_id = $el_acc->ac_id;
-      break;
-
-     default:
-      if ($el_acc->document_type == 'DEFAULT_EXPEN') {
-       $default_exp_ac_id = $el_acc->ac_id;
-      } else if ($el_acc->document_type == 'DEFAULT_EXPEN_CLEAR') {
-       $default_exp_clr_ac_id = $el_acc->ac_id;
-      }
-      break;
-    }
-   }
-
-   if (empty($prj_el->debit_ac_id) && !empty($default_exp_ac_id)) {
-    $prj_el->debit_ac_id = $default_exp_ac_id;
-    echo "<br>Using default debit account id ";
-   } else if (empty($prj_el->debit_ac_id) && empty($default_exp_ac_id)) {
-    echo "<br>No debit account found. Complete the default account setup";
-   }
-
-   if (empty($prj_el->credit_ac_id) && !empty($default_exp_clr_ac_id)) {
-    $prj_el->credit_ac_id = $default_exp_clr_ac_id;
-    echo "<br>Using default credit account id ";
-   } else if (empty($prj_el->credit_ac_id) && empty($default_exp_clr_ac_id)) {
-    echo "<br>No credit account found. Complete the default account setup";
-   }
-   $prj_el->burden_amount = $burden_line_amount;
-   $prj_el->status = 'DISTRIBUTED';
+ private function _create_revenueByEvent($prj_i) {
+  $all_lines = prj_event_line::find_allNonRevenueLines_byProjectHeaderId($prj_i->prj_project_header_id);
+  if (empty($all_lines)) {
+   $this->message .= "<br>No elligible lines found for  prj_project_header_id {$prj_i->prj_project_header_id} ";
+   throw new Exception("NO_ELLIGIBLE_LINES");
+  }
+  //check if project revenue exists
+  $prj_revenue_i = self::find_byProjectHeaderId($prj_i->prj_project_header_id);
+  if ($prj_revenue_i) {
+   $prj_revenue_lines_i = prj_revenue_line::find_by_parent_id($prj_revenue_i->prj_revenue_header_id);
+  } else {
+   //create revenue header
+   $prj_revenue_i = $this->_create_revenueHeader($prj_i);
+  }
 
 
-   try {
-//    pa($prj_el);
-    $prj_el->save();
-   } catch (Exception $e) {
-    $dbc->rollback = true;
-   }
+  /*
+   * 1. Find the total budgeted revenue and mulitply with % completion to get total revenue
+   * 2. Find the total created revenue
+   * 3. New revenue = 1 - 2 and create a new line for the revenue header
+   */
+  if (empty($prj_revenue_i)) {
+   $this->message .= "<br>Uanble to create/find project revenue details ";
+   throw new Exception("NO_PROJECT_HEADER_FOUND");
+  }
+
+  $total_budget_amount = prj_budget_line::find_budgetAmount_byProjectHeaderId($prj_i->prj_project_header_id);
+  $percent_comp = prj_percent_header::find_by_ColumnNameVal('prj_project_header_id', $prj_i->prj_project_header_id);
+  if ($percent_comp) {
+   $percent_val = $percent_comp->percent;
+  } else {
+   $this->message .= "<br>Project completion % is 0 ";
+   throw new Exception("ZERO_PROJECT_COMPLETION");
+  }
+  $rev_amount = ($percent_val * $total_budget_amount) / 100;
+  $existing_rev_amount = prj_revenue_line::find_totalRevenue_projectHeaderId($prj_i->prj_project_header_id);
+  $new_rev_amount = $rev_amount - $existing_rev_amount;
+  if ($new_rev_amount > 0) {
+   $this->_create_revenueLines($prj_revenue_i, $new_rev_amount);
+  } else {
+   $this->message .= "<br>New revenue amount is less than equal to zero as project percent completion status ";
+   throw new Exception("ZERO_REVENUE_AMOUNT");
+  }
+ }
+
+ private function _create_revenueHeader($prj_i) {
+  $prj_revenue_header_h = new prj_revenue_header();
+  $prj_revenue_header_h->prj_project_header_id = $prj_i->prj_project_header_id;
+  $prj_revenue_header_h->bu_org_id = $prj_i->bu_org_id;
+  $prj_revenue_header_h->revenue_status = 'ENTERED';
+  $org_fin_details = org::find_financial_details_from_orgId($prj_i->bu_org_id);
+  $prj_revenue_header_h->ledger_id = $org_fin_details->ledger_id;
+  $prj_revenue_header_h->currency = $org_fin_details->currency_code;
+  $prj_revenue_header_h->doc_currency = $prj_i->doc_currency;
+  $prj_revenue_header_h->exchange_rate_type = 'CORP';
+
+  $gp = new gl_period();
+  $gl_period_id = $gp->current_open_period($org_fin_details->ledger_id);
+  if (!empty($gl_period_id)) {
+   $prj_revenue_header_h->period_id = $gl_period_id->gl_period_id;
+  } else {
+   $this->message .= "<br>No open GL period found ";
+   throw new Exception("NO_OPEN_GL_PERIOD");
+  }
+
+  if ($prj_revenue_header_h->currency == $prj_revenue_header_h->doc_currency) {
+   $prj_revenue_header_h->exchange_rate = 1;
+  } else {
+   gl_currency_conversion::find_rate($from_currency, $to_currency, $currency_conversion_type);
+  }
+  $defalt_act_revenue = prj_default_account::find_default_account('REVENUE', $prj_i->prj_project_type_id, $prj_i->accounting_group);
+  if ($defalt_act_revenue) {
+   $prj_revenue_header_h->revenue_coa_id = $defalt_act_revenue->ac_id;
+  } else {
+   $this->message .= "<br>No revenue account found. Complete the project default account setup ";
+   throw new Exception("NO_REVENUE_ACCOUNT");
+  }
+
+  $defalt_act_urevenue = prj_default_account::find_default_account('UNEARNED_REVENUE', $prj_i->prj_project_type_id, $prj_i->accounting_group);
+  if ($defalt_act_urevenue) {
+   $prj_revenue_header_h->unearned_coa_id = $defalt_act_urevenue->ac_id;
+  } else {
+   $this->message .= "<br>No Unearned revenue account found. Complete the project default account setup ";
+   throw new Exception("NO_UNEARNED_REVENUE_ACCOUNT");
+  }
+
+  $defalt_act_ureceivable = prj_default_account::find_default_account('UNBILL_RECE', $prj_i->prj_project_type_id, $prj_i->accounting_group);
+  if ($defalt_act_ureceivable) {
+   $prj_revenue_header_h->unbilled_coa_id = $defalt_act_ureceivable->ac_id;
+  } else {
+   $this->message .= "<br>No unbilled Receivables account found. Complete the project default account setup ";
+   throw new Exception("NO_UNBILLED_RECEIVABLES_ACCOUNT");
+  }
+
+//  pa($prj_revenue_header_h);
+  $prj_revenue_header_h->save();
+  return $prj_revenue_header_h;
+ }
+
+ private function _create_revenueLines($prj_revenue_i, $new_rev_amount,$line_description) {
+  $prj_revenue_line_l = new prj_revenue_line();
+  $prj_revenue_line_l->prj_revenue_header_id = $prj_revenue_i->prj_revenue_header_id;
+  $prj_revenue_line_l->revenue_source = 'PERCENT_COMPLETE';
+  $prj_revenue_line_l->revenue_category = 'EVENT';
+  $prj_revenue_line_l->amount = $new_rev_amount;
+  $prj_revenue_line_l->description = $line_description;
+  $max_line_num = prj_revenue_line::find_highest_line_num($prj_revenue_i->prj_revenue_header_id);
+  $prj_revenue_line_l->line_number = !empty($max_line_num) ? $max_line_num + 1 : 1;
+  try {
+   $prj_revenue_line_l->save();
+   $this->message .= "<br>Project revenue line is successfully created";
+  } catch (Exception $e) {
+   $this->message .= "<br>Unable to save revenue lines";
   }
  }
 

@@ -52,6 +52,7 @@ inoERP
       <li><?php $f->l_text_field_dr('unearned_amount'); ?></li>
       <li><?php $f->l_text_field_dr('unbilled_amount'); ?></li>
       <li><?php $f->l_text_field_dr('revenue_amount'); ?></li>
+      <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', '', 1, $readonly1); ?></li>
      </ul>
     </div>
     <div id="tabsHeader-3" class="tabContent">
@@ -158,7 +159,6 @@ inoERP
       <thead> 
        <tr>
         <th><?php echo gettext('Seq') ?>#</th>
-        <th><?php echo gettext('Line Id') ?></th>
         <th><?php echo gettext('Reject Reason') ?></th>
         <th><?php echo gettext('Document Number') ?></th>
         <th><?php echo gettext('Reference Type') ?></th>

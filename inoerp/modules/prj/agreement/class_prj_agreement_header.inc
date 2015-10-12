@@ -70,6 +70,9 @@ class prj_agreement_header extends dbObject {
   'bu_org_id',
   'ar_customer_id',
  ];
+ public $number_fields = [
+  'header_amount'
+ ];
  public $search = [
   '_show_update_path' => 1,
   '_show_view_path' => 1,

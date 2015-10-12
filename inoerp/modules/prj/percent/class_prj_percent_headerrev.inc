@@ -16,14 +16,12 @@
  * Transaction line contains invoices details
  *
  */
-class prj_percent_headerev extends dbObject {
+class prj_percent_headerrev extends dbObject {
 
- public static $table_name = "prj_percent_header";
- public static $dependent_classes = ['prj_percent_line', 'prj_percent_detail'];
- public static $primary_column = "prj_percent_headerev_id";
+ public static $table_name = "prj_percent_headerrev";
+ public static $primary_column = "prj_percent_headerrev_id";
  public static $key_column = 'prj_project_header_id';
  public static $module = "prj"; //same as gl_journal_source
- 
  public static $system_info = [
   'name' => 'Project Percent ',
   'number' => '1203',
@@ -37,7 +35,7 @@ class prj_percent_headerev extends dbObject {
   'weight' => 3
  ];
  public $field_a = [
-  'prj_percent_headerev_id',
+  'prj_percent_headerrev_id',
   'prj_percent_header_id',
   'prj_project_header_id',
   'percent',
@@ -64,8 +62,8 @@ class prj_percent_headerev extends dbObject {
   '_update_action_meassge' => 'Update',
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Project Completion Status  "; //page Title
- public $prj_percent_headerev_id;
+ public $pageTitle = " Project Completion Revision  "; //page Title
+ public $prj_percent_headerrev_id;
  public $prj_percent_header_id;
  public $prj_project_header_id;
  public $percent;
@@ -77,6 +75,15 @@ class prj_percent_headerev extends dbObject {
  public $last_update_by;
  public $last_update_date;
 
+ public static function find_by_projectHeaderId($project_header_id) {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE prj_project_header_id= '{$project_header_id}'  ORDER BY prj_percent_headerrev_id DESC ";
+// echo $sql;
+  $result = self::find_by_sql($sql);
+
+  return !empty($result) ? ($result) : [new prj_percent_headerrev()];
+ }
 
 }
 

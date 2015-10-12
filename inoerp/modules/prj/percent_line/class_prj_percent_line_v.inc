@@ -5,7 +5,7 @@ class prj_percent_line_v extends dbObject {
  public static $form_class_name = "prj_percent_header";
  public static $table_name = "prj_percent_line_v";
  public static $primary_column = "prj_percent_header_id";
- public static $parent_primary_column = "prj_project_header_id";
+ public static $parent_primary_column = "prj_percent_header_id";
  public static $key_column = 'prj_project_line_id';
  public $field_a = [
   'prj_percent_line_id',
@@ -106,7 +106,7 @@ SELECT DISTINCT(prj_project_line_id) FROM prj_percent_line
 // echo $sql;
   $result = self::find_by_sql($sql);
 
-  return !empty($result) ? ($result) : new prj_percent_line_v();
+  return !empty($result) ? ($result) : [new prj_percent_line_v()];
  }
  
   public static function find_by_projectHeaderId($project_header_id) {
@@ -116,7 +116,7 @@ SELECT DISTINCT(prj_project_line_id) FROM prj_percent_line
 // echo $sql;
   $result = self::find_by_sql($sql);
 
-  return !empty($result) ? ($result) : new prj_percent_line_v();
+  return !empty($result) ? ($result) :  [new prj_percent_line_v()];
  }
 
 }

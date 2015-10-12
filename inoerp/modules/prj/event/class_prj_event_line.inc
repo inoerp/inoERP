@@ -86,6 +86,47 @@ class prj_event_line extends dbObject {
   return $lines;
  }
 
+ public static function find_allNonInvoicedLines_byProjectHeaderId($prj_project_header_id) {
+  $sql = " SELECT pel.prj_event_line_id, pel.prj_event_header_id, pel.event_type_id, pel.event_date,
+pel.org_id, pel.event_number,  pel.prj_project_line_id,  pel.description, pel.currency,
+pel.billing_amount, pel.revenue_amount, 
+peh.event_name, peh.description, peh.prj_project_header_id, peh.billing_amount,
+peh.revenue_amount, peh.event_number 
+
+FROM prj_event_line pel,
+prj_event_header peh
+
+WHERE peh.prj_event_header_id = pel.prj_event_header_id
+AND peh.prj_project_header_id = '{$prj_project_header_id}'
+ AND pel.billed_cb = NULL
+LIMIT 1 
+";
+
+  $result = self::find_by_sql($sql);
+
+  return !empty($result) ? array_pop($result) : false;
+ }
+
+  public static function find_allNonRevenueLines_byProjectHeaderId($prj_project_header_id) {
+  $sql = " SELECT pel.prj_event_line_id, pel.prj_event_header_id, pel.event_type_id, pel.event_date,
+pel.org_id, pel.event_number,  pel.prj_project_line_id,  pel.description, pel.currency,
+pel.billing_amount, pel.revenue_amount, 
+peh.event_name, peh.description, peh.prj_project_header_id, peh.billing_amount,
+peh.revenue_amount, peh.event_number 
+
+FROM prj_event_line pel,
+prj_event_header peh
+
+WHERE peh.prj_event_header_id = pel.prj_event_header_id
+AND peh.prj_project_header_id = '{$prj_project_header_id}'
+ AND pel.revenue_distributed_cb = NULL
+LIMIT 1 
+";
+
+  $result = self::find_by_sql($sql);
+
+  return !empty($result) ? array_pop($result) : false;
+ }
 }
 
 //end of path class

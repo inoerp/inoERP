@@ -66,23 +66,6 @@ class prj_default_account extends dbObject {
  public $last_update_by;
  public $last_update_date;
 
- Public static function tax_type() {
-  $option_header = option_header::find_by_name('MDM_TAX_TYPE');
-  $ol = new option_line();
-  $option_lines = $ol->findBy_parentId($option_header->option_header_id);
-  return $option_lines;
- }
-
- public function find_all_ofyear($year) {
-  global $db;
-  $sql = " SELECT * FROM " . self::$table_name;
-  $sql .= " WHERE year= :year ";
-  $param_a = ['year'];
-  $value_a = ['year' => $year];
-  $result = $db->findBy_sql($sql, $param_a, $value_a);
-  return $result;
- }
-
  public static function find_all_by_projectTypeHeaderId($prj_project_type_header_id, $accounting_group) {
   $sql = " 
 	 SELECT *
@@ -92,6 +75,25 @@ class prj_default_account extends dbObject {
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
  }
+
+ public static function find_default_account($account_type, $prj_project_type_header_id, $accounting_group = '') {
+  $sql = " 
+	 SELECT *
+	 FROM prj_default_account
+	 WHERE prj_project_type_header_id = '{$prj_project_type_header_id}' AND document_type = '{$account_type}'	";
+  if (!empty($accounting_group)) {
+   $sql .= " AND accounting_group = '{$accounting_group}'	";
+  }
+  
+  $sql .= " LIMIT 1	";
+  $result = self::find_by_sql($sql);
+//   echo $sql;
+//   pa($result);
+   
+  return !empty($result) ? array_pop($result) : false;
+ 
+  
+   }
 
 }
 

@@ -11,25 +11,63 @@
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
-      <li><?php $f = new inoform();
+      <li><?php
+       $f = new inoform();
        echo $f->l_val_field_dm('project_number', 'prj_project_header', 'project_number', '', 'project_number', 'vf_select_project_number action');
-       echo $f->hidden_field_withIdClass('prj_percent_header_id', $$class->prj_percent_header_id ,'action');
-       echo $f->hidden_field_withIdClass('prj_project_header_id', $$class->prj_project_header_id , 'action');
+       echo $f->hidden_field_withIdClass('prj_percent_header_id', $$class->prj_percent_header_id, 'action');
+       echo $f->hidden_field_withIdClass('prj_project_header_id', $$class->prj_project_header_id, 'action');
        ?><i class="generic g_select_project_number select_popup getform clickable fa fa-search" data-class_name="prj_percent_all_v"></i>
        <a name="show" href="form.php?class_name=prj_percent_header&<?php echo "mode=$mode"; ?>" class="show document_id prj_percent_header_id">
         <i class="fa fa-refresh"></i></a> 
       </li>
       <li><?php $f->l_text_field_dr('project_description'); ?> </li>
-      <li><?php $f->l_date_fieldAnyDay('as_of_date', $$class->as_of_date); ?> </li>
-      <li><?php $f->l_text_field_d('percent'); ?> </li>
+      <li><?php
+       $f->l_date_fieldAnyDay('as_of_date', $$class->as_of_date);
+       echo $f->hidden_field_withId('as_of_date_old', $$class->as_of_date);
+       ?> </li>
+      <li><?php
+       $f->l_text_field_d('percent');
+       echo $f->hidden_field_withId('percent_old', $$class->percent);
+       ?> </li>
       <li><?php $f->l_text_field_d('description'); ?> </li>
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div> 
-      <ul class="column header_field">
-
-      </ul>
+      
+      <table class="table  table-bordered form_line_data_table text-center">
+       <thead> 
+        <tr>
+         <th class='col-md-2 text-center'><?php echo gettext('Revision Id') ?></th>
+         <th class='col-md-2 text-center'><?php echo gettext('Percent Header Id') ?></th>
+         <th class='col-md-2 text-center'><?php echo gettext('Project Header Id') ?></th>
+         <th class='col-md-1 text-center'><?php echo gettext('Percent') ?></th>
+         <th class='col-md-2 text-center'><?php echo gettext('Description') ?></th>
+         <th class='col-md-1 text-center'><?php echo gettext('Date') ?></th>
+         <th class='col-md-1 text-center'><?php echo gettext('Status') ?></th>
+        </tr>
+       </thead>
+       <tbody class="form_data_line_tbody">
+        <?php
+        $count = 0;
+//       pa($prj_percent_line_v_object);
+        foreach ($revision_obj as $revision_i) {
+         ?>         
+         <tr class="prj_percent_line<?php echo $count ?>">
+          <td><?php echo $revision_i->prj_percent_headerrev_id ?></td>
+          <td><?php echo $revision_i->prj_percent_header_id ?></td>
+          <td><?php echo $revision_i->prj_project_header_id ?></td>
+          <td><?php echo $revision_i->percent ?></td>
+          <td><?php echo $revision_i->description ?></td>
+          <td><?php echo $revision_i->as_of_date ?></td>
+          <td><?php echo $revision_i->status ?></td>
+         </tr>
+         <?php
+         $count = $count + 1;
+        }
+        ?>
+       </tbody>
+      </table>
      </div>
     </div>
     <div id="tabsHeader-3" class="tabContent">

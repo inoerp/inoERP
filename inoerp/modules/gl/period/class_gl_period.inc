@@ -146,16 +146,14 @@ class gl_period extends dbObject {
  }
 
  public function current_open_period($ledger_id, $status = 'OPEN') {
-  global $db;
   $sql = " SELECT * FROM " . self::$table_name;
   $sql .= " WHERE ledger_id= :ledger_id  AND status = :status";
   $sql .= " ORDER BY gl_period_id DESC ";
   $sql .= " LIMIT 1 ";
-  $param_a = ['ledger_id', 'status'];
   $value_a = [
    'ledger_id' => $ledger_id,
    'status' => $status];
-  $result = $db->findBy_sql($sql, $param_a, $value_a);
+  $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 

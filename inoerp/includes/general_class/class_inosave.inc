@@ -219,16 +219,17 @@ class inosave extends dbObject {
    if (method_exists($$class, '_before_save')) {
     $before_save_result = $$class->_before_save();
     if ($before_save_result < 0) {
-     if ($before_save_result == -99) {
+     if ($before_save_result === -99) {
       echo '<br>' . gettext("This action is not allowed") . ' ' . $class . ' : _before_save() ';
      }
      return $before_save_result;
-    } else if ($before_save_result == 10) {
+    } else if ($before_save_result === 10) {
 //     echo "<br> All data are Successfully saved @ before save "; //before save completed all activities
      return $$class;
     }
    }
 
+   
 
    $required_field_flag = true;
    foreach ($$class->requiredField as $key => $value) {

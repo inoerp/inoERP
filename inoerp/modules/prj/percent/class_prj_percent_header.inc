@@ -23,7 +23,6 @@ class prj_percent_header extends dbObject {
  public static $primary_column = "prj_percent_header_id";
  public static $key_column = 'prj_project_header_id';
  public static $module = "prj"; //same as gl_journal_source
- 
  public static $system_info = [
   'name' => 'Project Percent ',
   'number' => '1203',
@@ -59,13 +58,14 @@ class prj_percent_header extends dbObject {
  public $fields_inForm_notInDataBase = [
   'project_number',
   'project_description',
+  'percent_old',
+  'as_of_date_old'
  ];
  public $search = [
   '_show_update_path' => 1,
   '_update_action_meassge' => 'Update',
   '_show_view_path' => 1,
  ];
- 
  public $pageTitle = " Project Completion Status  "; //page Title
  public $prj_percent_header_id;
  public $prj_project_header_id;
@@ -77,8 +77,43 @@ class prj_percent_header extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
-public $project_number;
+ public $project_number;
  public $project_description;
+ public $percent_old;
+ public $as_of_date_old;
+
+ public function _before_save() {
+  if ($this->percent != $this->percent_old) {
+   return $this->_percent_action();;
+  }
+ }
+
+ private function _percent_action() {
+  if ($this->percent < $this->percent_old) {
+   echo "<br>You can't reduce the percenatage ";
+   return -90;
+  } else if ($this->percent > $this->percent_old) {
+   $new_date = new DateTime($this->as_of_date);
+   $old_date = new DateTime($this->as_of_date);
+   if ($new_date < $old_date) {
+    echo "<br>You can't enter an old as of date ";
+    return -90;
+   }
+   $pph = new prj_percent_headerrev();
+   foreach ($pph->field_a as $k => $v) {
+    if (property_exists($this, $v)) {
+     $pph->$v = $this->$v;
+    }
+   }
+   $pph->prj_percent_headerrev_id = null;
+   $pph->save();
+   return true;
+  }
+ }
+ 
+ public function __after_save(){
+  pa($this);
+ }
 
 }
 
