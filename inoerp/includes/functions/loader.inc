@@ -534,8 +534,10 @@ if (property_exists($class, 'primary_column')) {
 }
 if (!empty($$class->$primary_column)) {
  $readonly1 = true;
+ $readonly1_class = ' always_readonly ';
 } else {
  $readonly1 = false;
+ $readonly1_class = '  ';
 }
 
 if ($readonly) {

@@ -31,13 +31,12 @@ class prj_budget_header extends dbObject {
   'module_name' => 'prj',
   'weight' => 11
  ];
- 
  public $action_a = [
   'BASELINE' => 'Base Line',
   'MAKE_ORIGINAL' => 'Make Original',
   'MAKE_CURRENT' => 'Make Current',
+  'NEW_REVISION' => 'New Revision',
  ];
- 
  public $field_a = [
   'prj_budget_header_id',
   'budget_type',
@@ -71,11 +70,11 @@ class prj_budget_header extends dbObject {
   'prj_project_header_id',
   'version_name',
  ];
-   public $fields_inForm_notInDataBase = [
+ public $fields_inForm_notInDataBase = [
   "project_number",
   "task_number",
+  'action'
  ];
-   
  public $search = [
   '_show_update_path' => 1,
   '_show_view_path' => 1,
@@ -89,14 +88,11 @@ class prj_budget_header extends dbObject {
  public $version_name;
  public $description;
  public $status;
- 
- 
  public $raw_cost;
  public $burdened_cost;
  public $labor_effort;
  public $nlr_effort;
  public $revenue;
- 
  public $current_cb;
  public $original_cb;
  public $baselined_by;
@@ -107,13 +103,28 @@ class prj_budget_header extends dbObject {
  public $last_update_by;
  public $last_update_date;
  public $msg;
-public $project_number;
+ public $project_number;
+ public $action;
+
 // Public static function validation_types() {
 //  $header = option_header::find_by_keyColumn('SYS_VALIDATION_TYPE');
 //  $option_line = new option_line();
 //  $lines = $option_line->findBy_parentId($header->option_header_id);
 //  return $lines;
 // }
+
+ public function _before_save() {
+
+  if (!empty($this->action)) {
+   $this->_do_action();
+  }
+ }
+
+ private function _do_action() {
+  switch ($this->action) {
+   
+  }
+ }
 
 }
 

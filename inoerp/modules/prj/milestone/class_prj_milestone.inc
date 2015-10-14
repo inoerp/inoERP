@@ -19,6 +19,8 @@ class prj_milestone extends dbObject {
   'status',
   'comment',
   'signoff_cb',
+  'revenue_amount',
+  'invoice_amount',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -42,6 +44,8 @@ class prj_milestone extends dbObject {
  public $status;
  public $comment;
  public $signoff_cb;
+ public $revenue_amount;
+ public $invoice_amount;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -51,7 +55,7 @@ class prj_milestone extends dbObject {
 
  public static function find_by_projectHeaderId($project_header_id) {
   $sql = " SELECT   pm.prj_milestone_id,   pm.prj_project_header_id,   pm.prj_project_line_id,
-		  pm.status,   pm.comment,   pm.signoff_cb,   pm.created_by,   pm.creation_date,
+		  pm.status,   pm.comment,   pm.signoff_cb,   pm.created_by,   pm.creation_date, pm.revenue_amount, pm.invoice_amount,
 		  pm.last_update_by,   pm.last_update_date,
       ppl.task_number, ppl.description as task_description
       FROM prj_milestone pm,
@@ -60,9 +64,9 @@ class prj_milestone extends dbObject {
        AND  pm.prj_project_line_id = ppl.prj_project_line_id
          
 		  UNION
-		  SELECT NULL as prj_milestone_id, ppl.prj_project_header_id, ppl.prj_project_line_id,
-		  NULL as status,  NULL as comment, 	NULL as signoff_cb,  NULL as created_by,
-		  NULL as creation_date, 		  NULL as last_update_by, 		  NULL as last_update_date,
+		  SELECT NULL as prj_milestone_id, ppl.prj_project_header_id, ppl.prj_project_line_id,  NULL as status,  NULL as comment, 	
+      NULL as signoff_cb,  NULL as created_by,  NULL as creation_date, NULL as revenue_amount, NULL as invoice_amount,		 
+      NULL as last_update_by, NULL as last_update_date,
       ppl.task_number, ppl.description as task_description
 		  FROM 
           prj_project_line ppl
@@ -77,6 +81,7 @@ class prj_milestone extends dbObject {
 		  ";
       
   $result = self::find_by_sql($sql);
+//  echo $sql;
 
 
   return !empty($result) ? $result : false;

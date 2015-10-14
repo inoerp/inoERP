@@ -33,6 +33,16 @@ function endeField_asPerResourceType(resourceType, trClass) {
  }
 }
 
+function prj_budget_enableDisbale_fields(type) {
+ if (type === 'C') {
+  $('.revenue_quantity,.revenue_amount').addClass('always_readonly');
+  $('.quantity,.raw_cost,.burden_cost').removeClass('always_readonly').removeAttr('readonly');
+ } else if (type === 'R') {
+  $('.quantity,.raw_cost,.burden_cost').addClass('always_readonly');
+  $('.revenue_quantity,.revenue_amount').removeClass('always_readonly').removeAttr('readonly');
+ }
+}
+
 $(document).ready(function () {
  $('body').off('change', '.resource_type').on('change', '.resource_type', function () {
   var trClass = '.' + $(this).closest('tr').prop('class').replace(/\s+/g, '.');
@@ -43,9 +53,18 @@ $(document).ready(function () {
   var trClass = '.' + $(this).prop('class').replace(/\s+/g, '.');
   endeField_asPerResourceType($(this).find('.resource_type').val(), trClass);
  });
- 
-  $('body').off('change', '#project_number').on('change', '#project_number', function () {
+
+ $('body').off('change', '#project_number').on('change', '#project_number', function () {
   $('#form_line').find('.prj_project_header_id').val($('#prj_project_header_id').val());
  });
+
+
+ $('body').off('change', '#budget_type').on('change', '#budget_type', function () {
+  var type = $(this).find('option:selected').data('mapper1');
+  prj_budget_enableDisbale_fields(type);
+ });
+
+ var type_ori = $('#budget_type').find('option:selected').data('mapper1');
+ prj_budget_enableDisbale_fields(type_ori);
 
 });

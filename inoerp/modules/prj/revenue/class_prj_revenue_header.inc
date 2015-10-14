@@ -312,7 +312,66 @@ LIMIT 1
   $new_rev_amount = $rev_amount - $existing_rev_amount;
   if ($new_rev_amount > 0) {
    $line_description = "percent_val is $percent_val, total_budget_amount is $total_budget_amount and existing rev amount is $existing_rev_amount ";
-   $this->_create_revenueLines($prj_revenue_i, $new_rev_amount, $line_description);
+   $rev_line_params_a = [
+    'new_rev_amount' => $new_rev_amount,
+    'line_description' => $line_description,
+    'revenue_source' => 'PERCENT_COMPLETE',
+    'revenue_category' => 'EVENT',
+    'reference_key_name' => 'prj_percent_headerrev|prj_percent_header_id',
+    'reference_key_value' => $percent_comp[0]->prj_percent_header_id,
+   ];
+   $this->_create_revenueLines($prj_revenue_i, $rev_line_params_a);
+  } else {
+   $this->message .= "<br>New revenue amount is less than equal to zero as project percent completion status ";
+   throw new Exception("ZERO_REVENUE_AMOUNT");
+  }
+ }
+
+ private function _create_revenueByCostToCost($prj_i) {
+  //check if project revenue exists
+  $prj_revenue_i = self::find_byProjectHeaderId($prj_i->prj_project_header_id);
+  if ($prj_revenue_i) {
+   $prj_revenue_lines_i = prj_revenue_line::find_by_parent_id($prj_revenue_i->prj_revenue_header_id);
+  } else {
+   //create revenue header
+   $prj_revenue_i = $this->_create_revenueHeader($prj_i);
+  }
+
+
+  /*
+   * 1. Find the total budgeted revenue and mulitply with % completion to get total revenue
+   * 2. Find the total created revenue
+   * 3. New revenue = 1 - 2 and create a new line for the revenue header
+   */
+  if (empty($prj_revenue_i)) {
+   $this->message .= "<br>Uanble to create/find project revenue details ";
+   throw new Exception("NO_PROJECT_HEADER_FOUND");
+  } else {
+   $this->message .= '<br>Using project revenue header id ' . $prj_revenue_i->prj_revenue_header_id;
+  }
+
+  $total_budget_amount = prj_budget_line::find_budgetAmount_byProjectHeaderId($prj_i->prj_project_header_id);
+  $percent_comp = prj_percent_header::find_by_ColumnNameVal('prj_project_header_id', $prj_i->prj_project_header_id);
+  if ($percent_comp) {
+   $percent_val = $percent_comp[0]->percent;
+  } else {
+   $this->message .= "<br>Project completion % is 0 ";
+   throw new Exception("ZERO_PROJECT_COMPLETION");
+  }
+  $rev_amount = ($percent_val * $total_budget_amount) / 100;
+  $existing_rev_amount = prj_revenue_line::find_totalRevenue_projectHeaderId($prj_i->prj_project_header_id);
+  $new_rev_amount = $rev_amount - $existing_rev_amount;
+  if ($new_rev_amount > 0) {
+   $line_description = "percent_val is $percent_val, total_budget_amount is $total_budget_amount and existing rev amount is $existing_rev_amount ";
+   $rev_line_params_a = [
+    'new_rev_amount' => $new_rev_amount,
+    'line_description' => $line_description,
+    'revenue_source' => 'PERCENT_COMPLETE',
+    'revenue_category' => 'EVENT',
+    'reference_key_name' => 'prj_percent_headerrev|prj_percent_header_id',
+    'reference_key_value' => $percent_comp[0]->prj_percent_header_id,
+   ];
+   $this->_create_revenueLines($prj_revenue_i, $rev_line_params_a);
   } else {
    $this->message .= "<br>New revenue amount is less than equal to zero as project percent completion status ";
    throw new Exception("ZERO_REVENUE_AMOUNT");
@@ -418,13 +477,16 @@ LIMIT 1
   return $prj_revenue_header_h;
  }
 
- private function _create_revenueLines($prj_revenue_i, $new_rev_amount,$line_description) {
+ private function _create_revenueLines($prj_revenue_i, array $rev_line_params_a) {
   $prj_revenue_line_l = new prj_revenue_line();
   $prj_revenue_line_l->prj_revenue_header_id = $prj_revenue_i->prj_revenue_header_id;
-  $prj_revenue_line_l->revenue_source = 'PERCENT_COMPLETE';
-  $prj_revenue_line_l->revenue_category = 'EVENT';
-  $prj_revenue_line_l->amount = $new_rev_amount;
-  $prj_revenue_line_l->description = $line_description;
+  $prj_revenue_line_l->revenue_source = $rev_line_params_a['revenue_source'];
+  $prj_revenue_line_l->revenue_category = $rev_line_params_a['revenue_category'];
+  $prj_revenue_line_l->amount = $rev_line_params_a['new_rev_amount'];
+  $prj_revenue_line_l->description = $rev_line_params_a['line_description'];
+  $prj_revenue_line_l->reference_key_name = $rev_line_params_a['reference_key_name'];
+  $prj_revenue_line_l->reference_key_value = $rev_line_params_a['reference_key_value'];
+
   $max_line_num = prj_revenue_line::find_highest_line_num($prj_revenue_i->prj_revenue_header_id);
   $prj_revenue_line_l->line_number = !empty($max_line_num) ? $max_line_num + 1 : 1;
   try {

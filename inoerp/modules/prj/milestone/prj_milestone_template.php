@@ -7,8 +7,8 @@
    <div id="tabsHeader-1" class="tabContent">
     <ul class="column header_field">
      <li><?php
-      echo $f->l_val_field_dm('project_number', 'prj_project_header', 'project_number', '', 'project_number', 'vf_select_project_number action' );
-      echo $f->hidden_field_withIdClass('prj_project_header_id', $prj_project_header_id_h,'action');
+      echo $f->l_val_field_dm('project_number', 'prj_project_header', 'project_number', '', 'project_number', 'vf_select_project_number action');
+      echo $f->hidden_field_withIdClass('prj_project_header_id', $prj_project_header_id_h, 'action');
       ?><i class="generic g_select_project_number select_popup getform clickable fa fa-search" data-class_name="prj_project_header"></i>
       <a name="show" href="form.php?class_name=prj_milestone&<?php echo "mode=$mode"; ?>" class="show document_id prj_project_header_id">
        <i class="fa fa-refresh"></i></a> 
@@ -36,6 +36,8 @@
         <th><?php echo gettext('Task Id') ?></th>
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('Status') ?></th>
+        <th><?php echo gettext('Revenue Amount') ?></th>
+        <th><?php echo gettext('Invoice Amount') ?></th>
         <th><?php echo gettext('Sign-Off') ?></th>
         <th><?php echo gettext('Comment') ?></th>
        </tr>
@@ -43,9 +45,17 @@
       <tbody class="form_data_line_tbody">
        <?php
        $count = 0;
-//       pa($prj_milestone_v_object);
+//       pa($prj_milestone_object);
        foreach ($prj_milestone_object as $prj_milestone) {
-        $billed_readoly = ( $prj_milestone->status == 'BILLED') ? true : false;
+        if ($prj_milestone->status == 'BILLED') {
+         $billed_readoly = true;
+         $status_a = prj_milestone::$status_a;
+        } else {
+         $billed_readoly = false;
+         $status_a = [ 'ENTERED' => 'Entered',    'APPROVED' => 'Approved'];
+        }
+
+        
         ?>         
         <tr class="prj_milestone<?php echo $count ?>">
          <td>
@@ -56,10 +66,12 @@
          <td><?php $f->text_field_widsr('prj_milestone_id', 'always_readonly line_id'); ?></td>
          <td><?php $f->text_field_widr('task_number', 'always_readonly'); ?></td>
          <td><?php $f->text_field_widsr('prj_project_line_id', 'always_readonly'); ?></td>
-         <td><?php $f->text_field_widlr('task_description', 'always_readonly'); ?></td>
-         <td><?php echo $f->select_field_from_array('status', prj_milestone::$status_a, $$class->status , '', 'medium' , '' , $billed_readoly, $billed_readoly ); ?></td>
-         <td><?php echo $f->checkBox_field('signoff_cb' , $$class->signoff_cb, '' ,'' , $billed_readoly); ?></td>
-         <td><?php $f->text_field_widl('comment'); ?></td>
+         <td><?php $f->text_field_widr('task_description', 'always_readonly'); ?></td>
+         <td><?php echo $f->select_field_from_array('status', $status_a, $$class->status, '', 'medium', '', $billed_readoly, $billed_readoly); ?></td>
+         <td><?php $f->text_field_wid('revenue_amount'); ?></td>
+         <td><?php $f->text_field_wid('invoice_amount'); ?></td>
+         <td><?php echo $f->checkBox_field('signoff_cb', $$class->signoff_cb, '', '', $billed_readoly); ?></td>
+         <td><?php $f->text_field_wid('comment'); ?></td>
 
          <td></td>
 

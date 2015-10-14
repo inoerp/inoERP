@@ -176,9 +176,9 @@ inoERP
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php $f->text_field_d2('rejection_reason'); ?></td>
          <td><?php $f->text_field_d2('document_number'); ?></td>
-         <td><?php $f->text_field_d2('reference_type'); ?></td>
-         <td><?php $f->text_field_d2('reference_key_name'); ?></td>
-         <td><?php $f->text_field_d2('reference_key_value'); ?></td>
+         <td><?php $f->text_field_d2r('reference_type' ,'always_readonly'); ?></td>
+         <td><?php $f->text_field_d2l('reference_key_name' ,'always_readonly'); ?></td>
+         <td><?php $f->text_field_d2r('reference_key_value' ,'always_readonly'); ?></td>
          <td><?php $f->text_field_d2('gl_journal_header_id'); ?></td>        </tr>
         <?php
         $count = $count + 1;
