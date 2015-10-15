@@ -1,9 +1,9 @@
 <?php
 
-include_once __DIR__.'/../../tparty/PHPMailer/class.phpmailer.php';
-include_once __DIR__.'/../../tparty/PHPMailer/class.smtp.php';
-include_once __DIR__.'/../../tparty/PHPMailer/class.pop3.php';
-include_once __DIR__.'/../basics/settings/mailsettings.inc';
+include_once __DIR__ . '/../../tparty/PHPMailer/class.phpmailer.php';
+include_once __DIR__ . '/../../tparty/PHPMailer/class.smtp.php';
+include_once __DIR__ . '/../../tparty/PHPMailer/class.pop3.php';
+include_once __DIR__ . '/../basics/settings/mailsettings.inc';
 
 class inomail extends PHPMailer {
 
@@ -28,8 +28,10 @@ class inomail extends PHPMailer {
   }
 
   if (!$this->send()) {
-   echo 'Message could not be sent.';
-   echo 'Mailer Error: ' . $this->ErrorInfo;
+   echo '<div role="alert" class="alert alert-warning error alert-dismissible">'
+   . '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
+   . 'Message could not be sent.';
+   echo 'Mailer Error: ' . $this->ErrorInfo . '</div>';
   } else {
    $this->SmtpClose();
   }

@@ -137,9 +137,12 @@ class user extends dbObject {
  }
 
  public function _before_save() {
-  if ($this->verify_user()) {
+  try{
+   $this->verify_user();
    return 1;
-  } else {
+  }catch(Exception $e){
+   echo '<div role="alert" class="alert alert-warning error alert-dismissible">'
+   . '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' . $e->getMessage().'</div>';
    return -99;
   }
  }
@@ -217,7 +220,7 @@ class user extends dbObject {
 
  public function authenticate($username = "", $password = "") {
 //  $password_final = $this->_codeThePassword($password);
-
+$ret = false;
   $sql = "SELECT * from user 
             WHERE username='{$username}'  LIMIT 1";
   $result_array = self::find_by_sql($sql);
@@ -312,13 +315,12 @@ class user extends dbObject {
   //first check existing or new user 
   if (empty($this->user_id)) {
    If ($this->_check_email()) {
-    echo '<div class="message error">E-mail id is already associated with an user id<br/>
-     <a href="' . $_SERVER['PHP_SELF'] . '#tabsLine-3">Reset your password</a></div>';
     $returnedData = false;
+    throw new Exception('E-mail id is already associated with an user id<br/>
+     <a href="' . $_SERVER['PHP_SELF'] . '#tabsHeader-3">Reset your password</a>');
    } else If ($this->_check_userName()) {
-    echo '<div class="message error">Sorry, username is not available.<br/>
-     Please try a differnt user name</div>';
     $returnedData = false;
+    throw new Exception('Sorry, username is not available.<br/>Please try a differnt user name');
    } elseif ($this->enteredPassword == $this->enteredRePassword) {
     $this->password = $this->_codeThePassword($this->enteredPassword);
     $returnedData = true;

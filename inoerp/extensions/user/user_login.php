@@ -19,8 +19,8 @@ $$class_third = new $class_third;
 if (!empty($_POST['submitLogin'])) { //form is submitted for login
  //check use credentials if username & provided 
  if (!empty($_POST['username']) && !empty($_POST['password'])) {
-  $username = trim(mysql_prep($_POST['username']));
-  $password = trim(mysql_prep($_POST['password']));
+  $username = is_array($_POST['username']) ? trim(mysql_prep($_POST['username'][0])) : trim(mysql_prep($_POST['username']));
+  $password = is_array($_POST['password']) ? trim(mysql_prep($_POST['password'][0])) : trim(mysql_prep($_POST['password']));
 
   $loggedin_user = $$class->authenticate($username, $password);
 
@@ -118,7 +118,9 @@ If (isset($_REQUEST["provider"])) {
  //Social login
 }//end of if post submit
 ?>
-<?php include_once('../../includes/basics/header_public.inc'); ?>
+<?php  include_once('../../includes/basics/header_public.inc');
+//include_once(THEME_DIR . DS. 'header.inc');
+?>
 <script type='text/javascript' src="user.js" ></script>
 <?php
 
