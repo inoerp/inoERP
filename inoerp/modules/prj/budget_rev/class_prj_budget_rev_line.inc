@@ -13,14 +13,16 @@
  * prj_budget_line
  *
  */
-class prj_budget_line extends dbObject {
+class prj_budget_rev_line extends dbObject {
 
- public static $table_name = "prj_budget_line";
- public static $primary_column = "prj_budget_line_id";
- public static $parent_primary_column = "prj_budget_header_id";
+ public static $table_name = "prj_budget_rev_line";
+ public static $primary_column = "prj_budget_rev_line_id";
+ public static $parent_primary_column = "prj_budget_rev_header_id";
  public static $key_column = "prj_project_line_id";
  public static $module = "prj";
  public $field_a = [
+  'prj_budget_rev_line_id',
+  'prj_budget_rev_header_id',
   'prj_budget_line_id',
   'prj_budget_header_id',
 //  'prj_project_header_id',
@@ -53,7 +55,9 @@ class prj_budget_line extends dbObject {
   "employee_name",
   'task_number'
  ];
- public $pageTitle = " Budget Line"; //page Title
+ public $pageTitle = " Budget Rev Line"; //page Title
+ public $prj_budget_rev_line_id;
+ public $prj_budget_rev_header_id;
  public $prj_budget_line_id;
  public $prj_budget_header_id;
  public $prj_project_header_id;
@@ -100,7 +104,7 @@ GROUP BY pbh.prj_project_header_id
  
   public static function find_revBudgetAmount_byProjectHeaderId($prj_project_header_id) {
   $result = self::find_budget_by_ProjectHeaderIdBudgetType($prj_project_header_id,'APPR_REV');
-  return !empty($result) ? $result->revenue_amount : false;
+  return !empty($result) ? $result[0]->revenue_amount : false;
  }
 
 }

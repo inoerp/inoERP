@@ -6,22 +6,22 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php echo gettext('Project Budget') ?></span>
- <form action=""  method="post" id="prj_budget_header"  name="prj_budget_header">
+<div id ="form_header"><span class="heading"><?php echo gettext('Project Budget Revision') ?></span>
+ <form action=""  method="post" id="prj_budget_rev_header"  name="prj_budget_rev_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
     <li><a href="#tabsHeader-2"><?php echo gettext('Basic-2') ?></a></li>
     <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
     <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
-      <li><?php $f->l_text_field_dr_withSearch('prj_budget_header_id') ?>
-       <a name="show" href="form.php?class_name=prj_budget_header&<?php echo "mode=$mode"; ?>" class="show document_id prj_budget_header_id"><i class="fa fa-refresh"></i></a> 
+      <li><?php $f->l_text_field_dr_withSearch('prj_budget_rev_header_id') ?>
+       <a name="show" href="form.php?class_name=prj_budget_rev_header&<?php echo "mode=$mode"; ?>" class="show document_id prj_budget_rev_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
+      <li><?php $f->l_text_field_dr('prj_budget_header_id') ?> </li>
       <li><?php $f->l_select_field_from_object('budget_type', option_header::find_options_byName('PRJ_BUDGET_TYPE'), 'option_line_code', 'option_line_value', $$class->budget_type, 'budget_type', '', 1, $readonly1, '', '', '', 'mapper1'); ?></li>
       <li><?php
        echo $f->l_val_field_dm('project_number', 'prj_project_header', 'project_number', '', 'project_number', 'vf_select_project_number');
@@ -54,8 +54,8 @@ inoERP
        </div>
        <div id ="display_comment_form">
         <?php
-        $reference_table = 'prj_budget_header';
-        $reference_id = $$class->prj_budget_header_id;
+        $reference_table = 'prj_budget_rev_header';
+        $reference_id = $$class->prj_budget_rev_header_id;
         ?>
        </div>
        <div id="new_comment">
@@ -66,26 +66,13 @@ inoERP
     <div id="tabsHeader-4" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
     </div>
-    <div id="tabsHeader-5" class="tabContent">
-     <div> 
-      <ul class="column header_field">
-       <li><label>Action</label>
-        <?php
-        echo $f->select_field_from_array('action', $$class->action_a, '', 'action', '', '', $readonly, $action_readonly)
-        ?>
-       </li>
-       <li> <a type="button" class="btn btn-info" role='button' 
-               href='search.php?class_name=prj_budget_rev_header&prj_budget_header_id=<?php echo $$class->prj_budget_header_id ?>'> <i class="fa fa-history white-font-link"></i> Revisions </a>  </li>
-      </ul>
-     </div>
-    </div>
    </div>
   </div>
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Budget Lines') ?></span>
- <form action=""  method="post" id="prj_budget_line"  name="prj_budget_line">
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Budget Revision Lines') ?></span>
+ <form action=""  method="post" id="prj_budget_rev_line"  name="prj_budget_rev_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Amounts') ?></a></li>
@@ -112,17 +99,15 @@ inoERP
       <tbody class="form_data_line_tbody">
        <?php
        $count = 0;
-       foreach ($prj_budget_line_object as $prj_budget_line) {
+       foreach ($prj_budget_rev_line_object as $prj_budget_rev_line) {
         $$class_second->task_number = !empty($$class_second->prj_project_line_id) ? prj_project_line::find_by_id($$class_second->prj_project_line_id)->task_number : '';
         ?>         
-        <tr class="prj_budget_line<?php echo $count ?>">
+        <tr class="prj_budget_rev_line<?php echo $count ?>">
          <td>
-          <?php
-          echo ino_inline_action($prj_budget_line->prj_budget_line_id, array('prj_budget_header_id' => $prj_budget_header->prj_budget_header_id));
-          ?>
+          <?php echo ino_inline_action($prj_budget_rev_line->prj_budget_rev_line_id, array('prj_budget_rev_header_id' => $$class->prj_budget_rev_header_id));          ?>
          </td>
          <td><?php $f->seq_field_d($count); ?></td>
-         <td><?php $f->text_field_wid2sr('prj_budget_line_id', 'always_readonly dontCopy line_id'); ?></td>
+         <td><?php $f->text_field_wid2sr('prj_budget_rev_line_id', 'always_readonly dontCopy'); ?></td>
          <td><?php
           $f->val_field_wid2m('task_number', 'prj_project_all_v', 'task_number', '', 'select project_task_number');
           echo $f->hidden_field_withCLass('prj_project_line_id', $$class_second->prj_project_line_id, 'dontCopy');
@@ -152,20 +137,20 @@ inoERP
 </div>
 
 <div id="js_data">
- <ul id="js_saving_data">
-  <li class="headerClassName" data-headerClassName="prj_budget_header" ></li>
-  <li class="lineClassName" data-lineClassName="prj_budget_line" ></li>
+  <ul id="js_saving_data">
+  <li class="headerClassName" data-headerClassName="prj_budget_rev_header" ></li>
+  <li class="lineClassName" data-lineClassName="prj_budget_rev_line" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
-  <li class="primary_column_id" data-primary_column_id="prj_budget_header_id" ></li>
-  <li class="form_header_id" data-form_header_id="prj_budget_header" ></li>
+  <li class="primary_column_id" data-primary_column_id="prj_budget_rev_header_id" ></li>
+  <li class="form_header_id" data-form_header_id="prj_budget_rev_header" ></li>
   <li class="line_key_field" data-line_key_field="line_name" ></li>
   <li class="single_line" data-single_line="false" ></li>
-  <li class="form_line_id" data-form_line_id="prj_budget_line" ></li>
+  <li class="form_line_id" data-form_line_id="prj_budget_rev_line" ></li>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedaderId" data-docHedaderId="prj_budget_header_id" ></li>
-  <li class="docLineId" data-docLineId="prj_budget_line_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="prj_budget_header" ></li>
+  <li class="docHedaderId" data-docHedaderId="prj_budget_rev_header_id" ></li>
+  <li class="docLineId" data-docLineId="prj_budget_rev_line_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="prj_budget_rev_header" ></li>
   <li class="btn2DivId" data-btn2DivId="form_line" ></li>
   <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>
   <li class="noOfTabbs" data-noOfTabbs="2" ></li>

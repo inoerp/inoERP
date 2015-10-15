@@ -35,10 +35,10 @@ function endeField_asPerResourceType(resourceType, trClass) {
 
 function prj_budget_enableDisbale_fields(type) {
  if (type === 'C') {
-  $('.revenue_quantity,.revenue_amount').addClass('always_readonly');
+  $('.revenue_quantity,.revenue_amount').addClass('always_readonly').val('');
   $('.quantity,.raw_cost,.burden_cost').removeClass('always_readonly').removeAttr('readonly');
  } else if (type === 'R') {
-  $('.quantity,.raw_cost,.burden_cost').addClass('always_readonly');
+  $('.quantity,.raw_cost,.burden_cost').addClass('always_readonly').val('');
   $('.revenue_quantity,.revenue_amount').removeClass('always_readonly').removeAttr('readonly');
  }
 }

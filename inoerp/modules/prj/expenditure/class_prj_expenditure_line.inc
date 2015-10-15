@@ -273,6 +273,17 @@ AND pel.prj_expenditure_line_id = '{$prj_expenditure_line_id}' ";
   return !empty($result) ? $result : false;
  }
 
+ public static function find_totalExpenditure_by_projectHeaderId($project_header_id) {
+  $sql = " SELECT SUM(line_amount) as line_amount, SUM(burden_amount) as burden_amount, prj_project_header_id FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE  prj_project_header_id = '{$project_header_id}' ";
+  $sql .= " AND  status = 'DISTRIBUTED' ";
+  $sql .= " GROUP BY prj_project_header_id ";
+
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? array_pop($result) : false;
+ }
+
  public static function find_distinctProject_byStatus($status = '') {
   $sql = " SELECT DISTINCT(prj_project_header_id) FROM ";
   $sql .= self::$table_name;

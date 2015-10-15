@@ -161,8 +161,8 @@ class prj_revenue_header extends dbObject {
   'Cost Type' => 'search_prj_cost_type_for_distribution',
  ];
  public $prg_generate_draft_revenue_details = [
-  'name' => 'Distribute Expenditure',
-  'description' => 'Distribute Project Expenditure',
+  'name' => 'Generate Draft Revenue',
+  'description' => 'Generate Draft Revenue',
  ];
 
  public function _before_save() {
@@ -260,6 +260,11 @@ LIMIT 1
    case 'CC':
    case 'CE':
    case 'CW':
+    try {
+     $this->_create_revenueByCostToCost($prj_i);
+    } catch (Exception $e) {
+     $this->message .= "<br>Unable to save revenue by COST-TO-COST " . $e->getMessage();
+    }
     break;
 
    case 'EE':
@@ -286,12 +291,12 @@ LIMIT 1
    $prj_revenue_i = $this->_create_revenueHeader($prj_i);
   }
 
-
   /*
    * 1. Find the total budgeted revenue and mulitply with % completion to get total revenue
    * 2. Find the total created revenue
    * 3. New revenue = 1 - 2 and create a new line for the revenue header
    */
+
   if (empty($prj_revenue_i)) {
    $this->message .= "<br>Uanble to create/find project revenue details ";
    throw new Exception("NO_PROJECT_HEADER_FOUND");
@@ -299,7 +304,7 @@ LIMIT 1
    $this->message .= '<br>Using project revenue header id ' . $prj_revenue_i->prj_revenue_header_id;
   }
 
-  $total_budget_amount = prj_budget_line::find_budgetAmount_byProjectHeaderId($prj_i->prj_project_header_id);
+  $total_budget_amount = prj_budget_line::find_revBudgetAmount_byProjectHeaderId($prj_i->prj_project_header_id);
   $percent_comp = prj_percent_header::find_by_ColumnNameVal('prj_project_header_id', $prj_i->prj_project_header_id);
   if ($percent_comp) {
    $percent_val = $percent_comp[0]->percent;
@@ -337,12 +342,6 @@ LIMIT 1
    $prj_revenue_i = $this->_create_revenueHeader($prj_i);
   }
 
-
-  /*
-   * 1. Find the total budgeted revenue and mulitply with % completion to get total revenue
-   * 2. Find the total created revenue
-   * 3. New revenue = 1 - 2 and create a new line for the revenue header
-   */
   if (empty($prj_revenue_i)) {
    $this->message .= "<br>Uanble to create/find project revenue details ";
    throw new Exception("NO_PROJECT_HEADER_FOUND");
@@ -350,30 +349,51 @@ LIMIT 1
    $this->message .= '<br>Using project revenue header id ' . $prj_revenue_i->prj_revenue_header_id;
   }
 
-  $total_budget_amount = prj_budget_line::find_budgetAmount_byProjectHeaderId($prj_i->prj_project_header_id);
-  $percent_comp = prj_percent_header::find_by_ColumnNameVal('prj_project_header_id', $prj_i->prj_project_header_id);
-  if ($percent_comp) {
-   $percent_val = $percent_comp[0]->percent;
-  } else {
-   $this->message .= "<br>Project completion % is 0 ";
-   throw new Exception("ZERO_PROJECT_COMPLETION");
+  /*
+   * 1. Find the ratio of actual cost to the approved budgeted cost 
+   * 2. Find the total budgeted revenue and mulitply  cost ratio to get total revenue
+   * 3. Find the total created revenue
+   * 4. New revenue = 1 - 2 and create a new line for the revenue header
+   */
+
+  $budgeted_cost = prj_budget_line::find_budget_by_ProjectHeaderIdBudgetType($prj_i->prj_project_header_id, 'APPR_COST');
+  if (empty($budgeted_cost)) {
+   $this->msg .= '<br>No approved cost budget found';
+   throw new Exception('NO_COST_BUDGET');
   }
-  $rev_amount = ($percent_val * $total_budget_amount) / 100;
+  $toal_budgeted_cost = $budgeted_cost->raw_cost + $budgeted_cost->burden_cost;
+  $actual_cost = prj_expenditure_line::find_totalExpenditure_by_projectHeaderId($prj_i->prj_project_header_id);
+  if (empty($actual_cost)) {
+   $this->msg .= '<br>No expenditure found';
+   throw new Exception('NO_EXPENDITURE');
+  }
+  $toal_actual_cost = $actual_cost->line_amount + $actual_cost->burden_amount;
+
+  $cost_ratio = $toal_actual_cost / $toal_budgeted_cost;
+
+  $total_budget_amount = prj_budget_line::find_revBudgetAmount_byProjectHeaderId($prj_i->prj_project_header_id);
+  if (empty($total_budget_amount)) {
+   $this->msg .= '<br>No approved revenue found';
+   throw new Exception('NO_APPROVED_REVENUE_BUDGET');
+  }
+
+  $rev_amount = ($cost_ratio * $total_budget_amount) / 100;
   $existing_rev_amount = prj_revenue_line::find_totalRevenue_projectHeaderId($prj_i->prj_project_header_id);
   $new_rev_amount = $rev_amount - $existing_rev_amount;
+
   if ($new_rev_amount > 0) {
-   $line_description = "percent_val is $percent_val, total_budget_amount is $total_budget_amount and existing rev amount is $existing_rev_amount ";
+   $line_description = "cost_ratio is $cost_ratio, total_budget_amount is $total_budget_amount and existing rev amount is $existing_rev_amount ";
    $rev_line_params_a = [
     'new_rev_amount' => $new_rev_amount,
     'line_description' => $line_description,
-    'revenue_source' => 'PERCENT_COMPLETE',
-    'revenue_category' => 'EVENT',
-    'reference_key_name' => 'prj_percent_headerrev|prj_percent_header_id',
-    'reference_key_value' => $percent_comp[0]->prj_percent_header_id,
+    'revenue_source' => 'ACTUAL_COST',
+    'revenue_category' => 'COST_TO_COST',
+    'reference_key_name' => '',
+    'reference_key_value' => '',
    ];
    $this->_create_revenueLines($prj_revenue_i, $rev_line_params_a);
   } else {
-   $this->message .= "<br>New revenue amount is less than equal to zero as project percent completion status ";
+   $this->message .= "<br>New revenue amount is less than equal to zero as per expenditure";
    throw new Exception("ZERO_REVENUE_AMOUNT");
   }
  }
@@ -404,7 +424,7 @@ LIMIT 1
    throw new Exception("NO_PROJECT_HEADER_FOUND");
   }
 
-  $total_budget_amount = prj_budget_line::find_budgetAmount_byProjectHeaderId($prj_i->prj_project_header_id);
+  $total_budget_amount = prj_budget_line::find_revBudgetAmount_byProjectHeaderId($prj_i->prj_project_header_id);
   $percent_comp = prj_percent_header::find_by_ColumnNameVal('prj_project_header_id', $prj_i->prj_project_header_id);
   if ($percent_comp) {
    $percent_val = $percent_comp->percent;
