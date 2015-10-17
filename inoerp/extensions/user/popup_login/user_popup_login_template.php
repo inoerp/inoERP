@@ -53,14 +53,14 @@ $f = new inoform();
            <li><?php $f->l_text_field_dm('first_name'); ?></li>
            <li><?php $f->l_text_field_dm('last_name'); ?></li>
            <li><?php $f->l_text_field_dm('username'); ?></li>
-           <li><?php $f->l_text_field_dm('email'); ?></li>
+           <li><?php $f->l_email_field_dm('email'); ?></li>
            <li><label>Password</label><input type="password" name="enteredPassword[]" maxlength="50" id="enteredPassword" size="30" >
             <!--<span class="hint">(Min 8 letter, 1 small, 1 CAP, 1 <i>Special</i>)</span>
             pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" 
             -->
            </li>
            <li><label>Confirm Password</label><input type="password" name="enteredRePassword[]" maxlength="50" id="enteredRePassword" size="30" ></li>
-           <li><?php $f->l_text_field_d('phone'); ?></li>
+          <li><?php $f->l_phone_field_d('phone'); ?></li>
            <li><label></label><input type="submit" name="newUser" class="button btn btn-success" value="Create Account"></li>
           </ul>
           <!--<input type="hidden" class="hidden" name='submit_user' value='1'>-->

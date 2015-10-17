@@ -279,9 +279,9 @@ class content extends dbObject {
   $sub_i->user_id = $ino_user->user_id;
   $sub_i->username = $ino_user->username;
   $sub_i->user_email = $ino_user->email;
-  try{
+  try {
    $sub_i->save();
-  }catch(Exception $e){
+  } catch (Exception $e) {
 //   echo $e->getMessage();
   }
  }
@@ -751,13 +751,17 @@ AND content.content_id = category_reference.reference_id  ";
  }
 
  public static function content_find_by_id($content_type_name, $content_id) {
-  global $dbc;
   $table_name = 'c_' . $content_type_name;
-  $sql = "SELECT * FROM " . $table_name . " where content_id={$content_id} LIMIT 1";
-  $prepare = $dbc->connection->prepare($sql);
-  $prepare->execute();
-  $result_array = $prepare->fetchAll(PDO::FETCH_CLASS);
-  return !empty($result_array) ? array_shift($result_array) : false;
+  $sql = " SELECT * FROM " . $table_name . " where content_id={$content_id} LIMIT 1";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? array_pop($result) : false;
+ }
+ 
+  public static function content_find_by_contentTypeConentId($content_type_name, $content_id) {
+  $table_name = 'c_' . $content_type_name;
+  $sql = " SELECT * FROM " . $table_name . " where content_id={$content_id} LIMIT 1";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? array_pop($result) : false;
  }
 
  public static function content_summary_by_content_id($content_type_name, $content_id) {
@@ -902,7 +906,7 @@ AND content.content_id = category_reference.reference_id  ";
   foreach ($extra_fields as $records) {
    $content_field_array[] = $records->Field;
   }
-  $extra_content = self::content_find_by_id($content_type_name, $content_id);
+  $extra_content= self::content_find_by_contentTypeConentId($content_type_name, $content_id);
   if ($extra_content) {
    foreach ($content_field_array as $key => $value) {
     if ($value != 'content_id') {

@@ -398,6 +398,72 @@ LIMIT 1
   }
  }
 
+  private function _create_revenueByWork($prj_i) {
+  //check if project revenue exists
+  $prj_revenue_i = self::find_byProjectHeaderId($prj_i->prj_project_header_id);
+  if ($prj_revenue_i) {
+   $prj_revenue_lines_i = prj_revenue_line::find_by_parent_id($prj_revenue_i->prj_revenue_header_id);
+  } else {
+   //create revenue header
+   $prj_revenue_i = $this->_create_revenueHeader($prj_i);
+  }
+
+  if (empty($prj_revenue_i)) {
+   $this->message .= "<br>Uanble to create/find project revenue details ";
+   throw new Exception("NO_PROJECT_HEADER_FOUND");
+  } else {
+   $this->message .= '<br>Using project revenue header id ' . $prj_revenue_i->prj_revenue_header_id;
+  }
+
+  /*
+   * 1. Find the ratio of actual cost to the approved budgeted cost 
+   * 2. Find the total budgeted revenue and mulitply  cost ratio to get total revenue
+   * 3. Find the total created revenue
+   * 4. New revenue = 1 - 2 and create a new line for the revenue header
+   */
+
+  $budgeted_cost = prj_budget_line::find_budget_by_ProjectHeaderIdBudgetType($prj_i->prj_project_header_id, 'APPR_COST');
+  if (empty($budgeted_cost)) {
+   $this->msg .= '<br>No approved cost budget found';
+   throw new Exception('NO_COST_BUDGET');
+  }
+  $toal_budgeted_cost = $budgeted_cost->raw_cost + $budgeted_cost->burden_cost;
+  $actual_cost = prj_expenditure_line::find_totalExpenditure_by_projectHeaderId($prj_i->prj_project_header_id);
+  if (empty($actual_cost)) {
+   $this->msg .= '<br>No expenditure found';
+   throw new Exception('NO_EXPENDITURE');
+  }
+  $toal_actual_cost = $actual_cost->line_amount + $actual_cost->burden_amount;
+
+  $cost_ratio = $toal_actual_cost / $toal_budgeted_cost;
+
+  $total_budget_amount = prj_budget_line::find_revBudgetAmount_byProjectHeaderId($prj_i->prj_project_header_id);
+  if (empty($total_budget_amount)) {
+   $this->msg .= '<br>No approved revenue found';
+   throw new Exception('NO_APPROVED_REVENUE_BUDGET');
+  }
+
+  $rev_amount = ($cost_ratio * $total_budget_amount) / 100;
+  $existing_rev_amount = prj_revenue_line::find_totalRevenue_projectHeaderId($prj_i->prj_project_header_id);
+  $new_rev_amount = $rev_amount - $existing_rev_amount;
+
+  if ($new_rev_amount > 0) {
+   $line_description = "cost_ratio is $cost_ratio, total_budget_amount is $total_budget_amount and existing rev amount is $existing_rev_amount ";
+   $rev_line_params_a = [
+    'new_rev_amount' => $new_rev_amount,
+    'line_description' => $line_description,
+    'revenue_source' => 'ACTUAL_COST',
+    'revenue_category' => 'COST_TO_COST',
+    'reference_key_name' => '',
+    'reference_key_value' => '',
+   ];
+   $this->_create_revenueLines($prj_revenue_i, $rev_line_params_a);
+  } else {
+   $this->message .= "<br>New revenue amount is less than equal to zero as per expenditure";
+   throw new Exception("ZERO_REVENUE_AMOUNT");
+  }
+ }
+ 
  private function _create_revenueByEvent($prj_i) {
   $all_lines = prj_event_line::find_allNonRevenueLines_byProjectHeaderId($prj_i->prj_project_header_id);
   if (empty($all_lines)) {

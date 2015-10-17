@@ -39,6 +39,7 @@ class prj_rate_schedule_line extends dbObject {
   'uom_id',
   'rate',
   'mark_up_percentage',
+  'resource_name',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -52,7 +53,6 @@ class prj_rate_schedule_line extends dbObject {
   'reference_key_name',
   'reference_key_value',
   'uom_id',
-  'rate',
  ];
  public $search = [
   '_show_update_path' => 1,
@@ -72,6 +72,7 @@ class prj_rate_schedule_line extends dbObject {
  public $reference_key_value;
  public $uom_id;
  public $rate;
+ public $resource_name;
  public $mark_up_percentage;
  public $created_by;
  public $creation_date;

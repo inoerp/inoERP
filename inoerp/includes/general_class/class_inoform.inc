@@ -268,8 +268,8 @@ EOD;
 </ul>
 EOD;
  }
- 
-  public static function form_button_withImage_less($current_page_path = "", $homeUrl = '') {
+
+ public static function form_button_withImage_less($current_page_path = "", $homeUrl = '') {
   global $class;
   $current_page_path = 'form.php?mode=9&amp;class_name=' . $class;
   echo <<<EOD
@@ -282,8 +282,8 @@ EOD;
 </ul>
 EOD;
  }
- 
-   public static function form_button_withImage_minimum($current_page_path = "", $homeUrl = '') {
+
+ public static function form_button_withImage_minimum($current_page_path = "", $homeUrl = '') {
   global $class;
   $current_page_path = 'form.php?mode=9&amp;class_name=' . $class;
   echo <<<EOD
@@ -370,7 +370,7 @@ EOD;
   return $attachment_statement;
  }
 
- public function val_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $val_field_class_n='', $val_field_v='', $dependent_field='' , $title='') {
+ public function val_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $val_field_class_n = '', $val_field_v = '', $dependent_field = '', $title = '') {
   $bracketName = $name . '[]';
   $value = htmlentities($value);
   if ($readonly == 1) {
@@ -394,13 +394,13 @@ EOD;
   return $element_text_field;
  }
 
- public function text_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $maxlength = "256", $disabled='') {
+ public function text_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $maxlength = "256", $disabled = '') {
   $bracketName = $name . '[]';
   $value = htmlentities($value);
   $readonly_v = ($readonly == 1) ? ' readonly ' : '';
   $required_v = ($required == 1) ? ' required ' : '';
   $disabled_v = ($disabled == 1) ? ' disabled ' : '';
-  
+
   if (!empty($id)) {
    $idvalue = 'id="' . $id . '"';
   } else {
@@ -408,6 +408,42 @@ EOD;
   }
   $element_text_field = "<input type=\"text\" name=\"$bracketName\" value=\"$value\" 
 	 maxlength=\"$maxlength\" size=\"$size\" class=\"textfield $div_class $name\" "
+   . "placeholder=\"$place_holder\"  $required_v $idvalue $readonly_v $disabled_v title=\"$title\"  data-toggle=\"tooltip\">";
+  return $element_text_field;
+ }
+
+ public function email_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $maxlength = "256", $disabled = '') {
+  $bracketName = $name . '[]';
+  $value = htmlentities($value);
+  $readonly_v = ($readonly == 1) ? ' readonly ' : '';
+  $required_v = ($required == 1) ? ' required ' : '';
+  $disabled_v = ($disabled == 1) ? ' disabled ' : '';
+
+  if (!empty($id)) {
+   $idvalue = 'id="' . $id . '"';
+  } else {
+   $idvalue = "";
+  }
+  $element_text_field = "<input type=\"email\" name=\"$bracketName\" value=\"$value\" 
+	 maxlength=\"$maxlength\" size=\"$size\" class=\"textfield emailfield $div_class $name\" "
+   . "placeholder=\"$place_holder\"  $required_v $idvalue $readonly_v $disabled_v title=\"$title\"  data-toggle=\"tooltip\">";
+  return $element_text_field;
+ }
+
+ public function phone_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $maxlength = "256", $disabled = '') {
+  $bracketName = $name . '[]';
+  $value = htmlentities($value);
+  $readonly_v = ($readonly == 1) ? ' readonly ' : '';
+  $required_v = ($required == 1) ? ' required ' : '';
+  $disabled_v = ($disabled == 1) ? ' disabled ' : '';
+
+  if (!empty($id)) {
+   $idvalue = 'id="' . $id . '"';
+  } else {
+   $idvalue = "";
+  }
+  $element_text_field = "<input type=\"tel\" name=\"$bracketName\" value=\"$value\" 
+	 maxlength=\"$maxlength\" size=\"$size\" class=\"textfield phonefield $div_class $name\" "
    . "placeholder=\"$place_holder\"  $required_v $idvalue $readonly_v $disabled_v title=\"$title\"  data-toggle=\"tooltip\">";
   return $element_text_field;
  }
@@ -493,10 +529,10 @@ EOD;
   echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->number_field($name, $value, $size, $id, $div_class, $required, $readonly, $place_holder, $title, $min, $max);
  }
- 
-  public function number_field_d($field_name, $div_class = "") {
+
+ public function number_field_d($field_name, $div_class = "") {
   global $class, $$class;
-    echo $this->number_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
+  echo $this->number_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
  }
 
  public function l_number_field_d($field_name, $div_class = "") {
@@ -667,11 +703,11 @@ EOD;
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
  }
 
-  public function text_field_dd($field_name, $div_class = "") {
-  global  $class, $$class;
-  echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', '' ,'' ,'' ,'',1);
+ public function text_field_dd($field_name, $div_class = "") {
+  global $class, $$class;
+  echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', '', '', '', '', 1);
  }
- 
+
  public function val_field_d($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
   global $class, $$class;
   echo $this->val_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
@@ -682,7 +718,7 @@ EOD;
   echo $this->val_field($field_name, $$class->$field_name, '20', $field_name, $div_class, 1, $this->readonly, $val_field_n, $val_field_v, $dependent_field);
  }
 
- public function l_val_field_d($field_name, $val_field_n, $val_field_v, $dependent_field , $div_class = "") {
+ public function l_val_field_d($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
   global $class, $$class;
   echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->val_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
@@ -719,12 +755,12 @@ EOD;
  }
 
  public function val_field_wid($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
-  global  $class, $$class;
+  global $class, $$class;
   echo $this->val_field($field_name, $$class->$field_name, '20', '', $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
  }
 
  public function val_field_widm($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
-  global  $class, $$class;
+  global $class, $$class;
   echo $this->val_field($field_name, $$class->$field_name, '20', 1, $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
  }
 
@@ -753,11 +789,11 @@ EOD;
   echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
  }
- 
-  public function l_text_field_dd($field_name, $div_class = "") {
+
+ public function l_text_field_dd($field_name, $div_class = "") {
   global $readonly, $class, $$class;
   echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
-  echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', '','','','',1);
+  echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', '', '', '', '', 1);
  }
 
  public function l_text_field_ds($field_name, $div_class = "") {
@@ -1071,7 +1107,7 @@ EOD;
 
  public function text_field_wid2r($field_name, $div_class = "") {
   global $class_second, $$class_second;
-  $field_v = property_exists($$class_second, $field_name) ? $$class_second->$field_name :  null;
+  $field_v = property_exists($$class_second, $field_name) ? $$class_second->$field_name : null;
   echo $this->text_field($field_name, $field_v, '20', '', $div_class, '', 1);
  }
 
@@ -1190,6 +1226,29 @@ EOD;
   * numberfields
   */
 
+ public function l_email_field_d($field_name, $div_class = "") {
+  global $readonly, $class, $$class;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->email_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
+ }
+
+ public function l_email_field_dm($field_name, $div_class = "") {
+  global $readonly, $class, $$class;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->email_field($field_name, $$class->$field_name, '20', $field_name, $div_class, 1, $this->readonly);
+ }
+
+ public function l_phone_field_d($field_name, $div_class = "") {
+  global $readonly, $class, $$class;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->phone_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
+ }
+
+ public function l_phone_field_dm($field_name, $div_class = "") {
+  global $readonly, $class, $$class;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->phone_field($field_name, $$class->$field_name, '20', $field_name, $div_class, 1, $this->readonly);
+ }
 
  /* --------------------End of default number fields and begining of accoun fields-------------
   * accounfields
@@ -1511,19 +1570,18 @@ EOD;
   echo $this->date_field($name, $value, '20', '', $divClass);
  }
 
- 
  public function l_date_fieldFromToday_m($name, $value, $divClass = '') {
   $divClass = "dateFromToday $divClass ";
   echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->date_field($name, $value, '20', '', $divClass, 1);
  }
 
-  public function l_date_fieldFromToday_dm($name, $value,  $id= '', $divClass = '') {
+ public function l_date_fieldFromToday_dm($name, $value, $id = '', $divClass = '') {
   $divClass = "dateFromToday $divClass ";
   echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->date_field($name, $value, '20', $id, $divClass, 1);
  }
- 
+
  public function l_date_fieldFromToday_d($name, $value, $id = '', $divClass = '') {
   $divClass = "dateFromToday $divClass ";
   echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
@@ -1663,13 +1721,13 @@ EOD;
   return $element_select_field;
  }
 
-  public function radio_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "",  $divClass = "", $required = "", $readonly = "", $nonArrayName = "", $disabled = "") {
+ public function radio_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $divClass = "", $required = "", $readonly = "", $nonArrayName = "", $disabled = "") {
   if ($nonArrayName == 1) {
    $bracketName = $name;
   } else {
    $bracketName = $name . '[]';
   }
-  
+
   if ($readonly == 1) {
    $readonly = 'disabled';
   } else {
@@ -1687,18 +1745,18 @@ EOD;
   } else {
    $disabled = '';
   }
- 
+
   $element_radio_field = '<div id="radio-group">';
   if ((is_array($object)) && (count($object) > 0 )) {
    foreach ($object as $k => $record) {
-     $ele_val = $record->$objectValueKey;
-     $ele_label = $record->$objectDescriptionKey;
+    $ele_val = $record->$objectValueKey;
+    $ele_label = $record->$objectDescriptionKey;
     if ((!empty($value)) && ($record->$objectValueKey == $value)) {
      $selected = ' checked ';
     } else {
      $selected = '';
     }
-    $idvalue = "radio_{$name}_".$k+1;
+    $idvalue = "radio_{$name}_" . $k + 1;
     $element_radio_field .= "<input type='radio'  value=\"$ele_val\" name=\"$bracketName\" class=\"radio $divClass $name\"  ";
     $element_radio_field .= " id=\"$idvalue\" $readonly $required $disabled $selected >";
     $element_radio_field .= " <label for  id=\"$idvalue\"> $ele_label </label>";
@@ -1707,12 +1765,12 @@ EOD;
   $element_radio_field .= '</div>';
   return $element_radio_field;
  }
- 
-  public function l_radio_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "",  $divClass = "", $required = "", $readonly = "", $nonArrayName = "", $disabled = "") {
+
+ public function l_radio_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $divClass = "", $required = "", $readonly = "", $nonArrayName = "", $disabled = "") {
   echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->radio_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value, $divClass, $required, $readonly, $nonArrayName, $disabled);
  }
- 
+
  public function select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $id = "", $divClass = "", $required = "", $readonly = "", $convertToText = "", $nonArrayName = "", $disabled = "", $dataname = '') {
   if ($nonArrayName == 1) {
    $bracketName = $name;

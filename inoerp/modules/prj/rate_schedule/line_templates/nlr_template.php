@@ -3,11 +3,12 @@
        <tr>
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Expenditure Type') ?></th>
         <th><?php echo gettext('Resource') ?></th>
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('Rate') ?></th>
-        <th><?php echo gettext('Markup') ?></th>
+        <th><?php echo gettext('Markup %') ?></th>
         <th><?php echo gettext('From Date') ?></th>
         <th><?php echo gettext('To Date') ?></th>
 
@@ -25,10 +26,11 @@
            'reference_key_name' => $$class->rate_type));
           ?>
          </td>
-         <td><?php $f->text_field_wid2sr('prj_rate_schedule_line_id', 'always_readonly'); ?></td>
-         <td><?php echo $f->select_field_from_object('reference_key_value', prj_nlr_header::find_all(), 'prj_nlr_header_id', 'resource_name', $$class_second->reference_key_value, '', 'reference_key_value'); ?></td>
+         <td><?php $f->text_field_wid2sr('prj_rate_schedule_line_id', 'always_readonly line_id'); ?></td>
+         <td><?php echo $f->select_field_from_object('reference_key_value', prj_expenditure_type_header::find_all(), 'prj_expenditure_type_header_id', 'expenditure_type', $$class_second->reference_key_value , '' , 'medium prj_expenditure_type_header_id' , 1 ,'' ,'','','','uom_id'); ?>						 </td>
+         <td><?php echo $f->select_field_from_object('resource_name', prj_nlr_header::find_all(), 'prj_nlr_header_id', 'resource_name', $$class_second->resource_name); ?></td>
          <td><?php $f->text_field_d2('description'); ?></td>
-         <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id); ?></td>
+         <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '' ,'always_readonly'); ?></td>
          <td><?php $f->text_field_d2('rate'); ?></td>
          <td><?php $f->text_field_d2('mark_up_percentage'); ?></td>
          <td><?php echo $f->date_fieldAnyDay('effective_from', $$class_second->effective_from); ?></td>

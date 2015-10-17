@@ -43,4 +43,11 @@ $(document).ready(function () {
   var trClass = '.' + $(this).prop('class').replace(/\s+/g, '.');
   endeField_asPerResourceType($(this).find('.resource_type').val(), trClass);
  });
+ 
+ $('body').off('change' , '.prj_expenditure_type_header_id') .on('change' , '.prj_expenditure_type_header_id' , function(){
+  var uom = $(this).find('option:selected').data('uom_id');
+  var trClass = '.' + $(this).closest('tr').attr('class').replace('/\s+/g','.');
+  $(trClass).find('.uom_id').val(uom);
+  console.log(uom +  ':' + trClass )
+});
 });

@@ -93,6 +93,11 @@ input.search-text-field{
  cursor: hand; 
 }
 
+.login-form{
+ width: 70%;
+ margin:0 12%;
+}
+
 tr.major_row{
  background-color:#fff !important;
 }
@@ -2378,4 +2383,9 @@ a.btn-info{
 
 .min-width-100{
  min-width: 100px;
+}
+
+.parent-child-nav{
+ background-color: rgb(240, 240, 220);
+padding: 15px 50px 5px;
 }

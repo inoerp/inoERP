@@ -46,6 +46,8 @@ class prj_expenditure_line extends dbObject {
   'burden_amount',
   'gl_journal_header_id',
   'gl_journal_interface_cb',
+  'invoiced_cb',
+  'revene_calculated_cb',
   'status',
   'created_by',
   'creation_date',
@@ -94,6 +96,8 @@ class prj_expenditure_line extends dbObject {
  public $gl_journal_interface_cb;
  public $line_amount;
  public $burden_amount;
+ public $invoiced_cb;
+ public $revene_calculated_cb;
  public $created_by;
  public $creation_date;
  public $last_update_by;

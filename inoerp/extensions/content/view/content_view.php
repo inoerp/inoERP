@@ -8,7 +8,7 @@ which contains all the categories of the opened content / document. Where as cat
 of categories ) is used show all the releant contents */
 
 //$content_type = content_type::find_by_content_type($content_type_name);
-$childs_of_parent_id_array = content::find_childs_of_parent_id($$class->content_id);
+$childs_of_parent_id_array = content::find_childs_of_parent_id($content->content_id);
 if ($childs_of_parent_id_array && (count($childs_of_parent_id_array) > 0)) {
  $childs_of_parent_id = "<ul>";
  foreach ($childs_of_parent_id_array as $child_content) {

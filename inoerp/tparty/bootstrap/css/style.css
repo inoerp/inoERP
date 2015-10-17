@@ -3027,7 +3027,7 @@ acronym {
 #comments_form .form-control{
  margin-bottom:10px;
 }
-#comments {padding:20px;}
+/*#comments {padding:20px;}*/
 .comment-list {
  margin: 60px 0;
  list-style:none;
