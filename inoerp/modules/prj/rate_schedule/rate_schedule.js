@@ -48,6 +48,5 @@ $(document).ready(function () {
   var uom = $(this).find('option:selected').data('uom_id');
   var trClass = '.' + $(this).closest('tr').attr('class').replace('/\s+/g','.');
   $(trClass).find('.uom_id').val(uom);
-  console.log(uom +  ':' + trClass )
-});
+ });
 });
