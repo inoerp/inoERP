@@ -11,7 +11,7 @@
 
 /**
  * ap_transaction_header
- * A sigle transaction document(invoice, etc) can be created against multiple purchase orders
+ * A sigle transaction document(invoice, debit memo, credit memo, expense claim etc) can be created against multiple purchase orders
  * Transaction header contains all the header level informations such as supplier site, document_type, currency, header amount,  paying entity
  * Transaction line contains invoices details
  *
