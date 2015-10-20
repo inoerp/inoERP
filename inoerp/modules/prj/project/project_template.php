@@ -77,7 +77,7 @@ inoERP
       <li class='burden-rate'><?php $f->l_select_field_from_object('l_revenue_burden_id', prj_burden_list_header::find_all(), 'prj_burden_list_header_id', 'burden_list', $$class->l_revenue_burden_id, 'l_revenue_burden_id', 'l_revenue_burden_id'); ?></li> 
       <li class='burden-rate'><?php $f->l_select_field_from_object('l_invoice_burdern_id', prj_burden_list_header::find_all(), 'prj_burden_list_header_id', 'burden_list', $$class->l_invoice_burdern_id, 'l_invoice_burdern_id', 'l_invoice_burdern_id'); ?></li> 
       <li><?php $f->l_select_field_from_array('nlr_billing_type', prj_project_type_header::$schedule_type_a, $$class->nlr_billing_type, 'nlr_billing_type'); ?></li> 
-      <li><?php $f->l_text_field_d('nlr_schedule_id'); ?></li> 
+      <li class='labor-rate'><?php $f->l_select_field_from_object('nlr_schedule_id', prj_rate_schedule_header::find_all_by_rateType('NON_LABOR'), 'prj_rate_schedule_header_id', 'schedule_name', $$class->nlr_schedule_id, 'nlr_schedule_id'); ?></li> 
       <li><?php $f->l_select_field_from_object('nrl_revenue_burden_id', prj_burden_list_header::find_all(), 'prj_burden_list_header_id', 'burden_list', $$class->nrl_revenue_burden_id, 'nrl_revenue_burden_id'); ?></li> 
       <li><?php $f->l_select_field_from_object('nlr_invoice_burdern_id', prj_burden_list_header::find_all(), 'prj_burden_list_header_id', 'burden_list', $$class->nlr_invoice_burdern_id, 'nlr_invoice_burdern_id'); ?></li> 
       <li><?php $f->l_text_field_d('billing_cycle_id'); ?></li> 

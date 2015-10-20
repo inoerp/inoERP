@@ -103,7 +103,7 @@ inoERP
        <?php
        $count = 0;
        foreach ($prj_expenditure_line_object as $prj_expenditure_line) {
-        $$class_second->employee_name = !empty($$class_second->hr_employee_id) ? hr_employee_v::find_by_id($$class_second->hr_employee_id)->position_name : '';
+        $$class_second->employee_name = !empty($$class_second->hr_employee_id) ? hr_employee_v::find_by_id($$class_second->hr_employee_id)->employee_name : '';
         $$class_second->project_number = !empty($$class_second->prj_project_header_id) ? prj_project_header::find_by_id($$class_second->prj_project_header_id)->project_number : '';
         $$class_second->task_number = !empty($$class_second->prj_project_line_id) ? prj_project_line::find_by_id($$class_second->prj_project_line_id)->task_number : '';
         ?>         
@@ -133,7 +133,7 @@ inoERP
           echo $f->hidden_field('prj_project_line_id', $$class_second->prj_project_line_id);
           echo $f->hidden_field_withCLass('approval_status', 'APPROVED', 'popup_value');
           ?><i class="generic select_project_task_number select_popup clickable fa fa-search" data-class_name="prj_project_all_lowesttask_v"></i></td>
-         <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small'); ?></td>
+         <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small' , 1); ?></td>
          <td><?php $f->text_field_wid2s('quantity'); ?></td>
          <td><?php $f->text_field_wid2s('rate'); ?></td>
         </tr>

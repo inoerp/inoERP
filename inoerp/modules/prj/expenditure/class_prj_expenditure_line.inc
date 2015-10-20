@@ -277,6 +277,16 @@ AND pel.prj_expenditure_line_id = '{$prj_expenditure_line_id}' ";
   return !empty($result) ? $result : false;
  }
 
+ public static function find_lines_forRevenueGeneration($project_header_id) {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE  prj_project_header_id = '{$project_header_id}' ";
+  $sql .= " AND  status = 'DISTRIBUTED' ";
+  $sql .= " AND  revene_calculated_cb IS NULL ";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
+
  public static function find_totalExpenditure_by_projectHeaderId($project_header_id) {
   $sql = " SELECT SUM(line_amount) as line_amount, SUM(burden_amount) as burden_amount, prj_project_header_id FROM ";
   $sql .= self::$table_name;
@@ -285,6 +295,65 @@ AND pel.prj_expenditure_line_id = '{$prj_expenditure_line_id}' ";
   $sql .= " GROUP BY prj_project_header_id ";
 
   $result = self::find_by_sql($sql);
+  return !empty($result) ? array_pop($result) : false;
+ }
+
+ public static function find_billRates_fromLineIdSchedule($prj_expenditure_line_id, $emp_schedule_id, $job_schedule_id,$nlr_schedule_id) {
+  $sql = " SELECT 
+pel.prj_expenditure_line_id,pel.line_amount,pel.burden_amount, pel.quantity,
+pel.line_amount,(IFNULL(pel.burden_amount,0) + pel.line_amount) as total_expn_amount,
+(
+    CASE 
+    WHEN pel.hr_employee_id IS NOT NULL 
+	THEN 	(SELECT rate
+    FROM prj_rate_schedule_line prsl
+    WHERE prsl.prj_rate_schedule_header_id = '{$emp_schedule_id}'
+    AND reference_key_name = 'EMPLOYEE')
+    
+	WHEN pel.job_id IS NOT NULL &&  pel.hr_employee_id IS NULL 
+    THEN 	(SELECT rate
+    FROM prj_rate_schedule_line prsl
+    WHERE prsl.prj_rate_schedule_header_id = '{$job_schedule_id}'
+    AND reference_key_name = 'JOB')
+	
+    ELSE ( 
+	SELECT rate
+    FROM prj_rate_schedule_line prsl
+    WHERE prsl.prj_rate_schedule_header_id = '{$nlr_schedule_id}'
+    AND reference_key_name = 'NON_LABOR'
+	)
+    END
+ ) as rate,
+ (
+    CASE 
+    WHEN pel.hr_employee_id IS NOT NULL 
+    THEN 	(SELECT mark_up_percentage
+    FROM prj_rate_schedule_line prsl
+    WHERE prsl.prj_rate_schedule_header_id = '{$emp_schedule_id}'
+    AND reference_key_name = 'EMPLOYEE')
+	
+	WHEN pel.job_id IS NOT NULL &&  pel.hr_employee_id IS NULL 
+    THEN 	(SELECT mark_up_percentage
+    FROM prj_rate_schedule_line prsl
+    WHERE prsl.prj_rate_schedule_header_id = '{$job_schedule_id}'
+    AND reference_key_name = 'JOB')
+	
+    ELSE ( 
+	SELECT mark_up_percentage
+    FROM prj_rate_schedule_line prsl
+    WHERE prsl.prj_rate_schedule_header_id = '{$nlr_schedule_id}'
+    AND reference_key_name = 'NON_LABOR'
+	)
+    END
+ ) as mark_up_percentage
+
+FROM 
+prj_expenditure_line pel
+WHERE pel.prj_expenditure_line_id = '{$prj_expenditure_line_id}' 
+ LIMIT 1";
+
+  $result = self::find_by_sql($sql);
+
   return !empty($result) ? array_pop($result) : false;
  }
 

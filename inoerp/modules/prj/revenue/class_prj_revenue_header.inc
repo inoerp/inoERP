@@ -154,6 +154,7 @@ class prj_revenue_header extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
+ public $message;
  public $prg_generate_draft_revenue_parameters = [
   'Organization' => 'search_business_org_nm',
   'Project From' => 'search_project_number_from',
@@ -255,6 +256,11 @@ LIMIT 1
   switch ($prj_i->billing_method) {
    case 'WW':
    case 'WE':
+    try {
+     $this->_create_revenueByWork($prj_i);
+    } catch (Exception $e) {
+     $this->message .= "<br>Unable to save revenue by WORK " . $e->getMessage();
+    }
     break;
 
    case 'CC':
@@ -398,7 +404,7 @@ LIMIT 1
   }
  }
 
-  private function _create_revenueByWork($prj_i) {
+ private function _create_revenueByWork($prj_i) {
   //check if project revenue exists
   $prj_revenue_i = self::find_byProjectHeaderId($prj_i->prj_project_header_id);
   if ($prj_revenue_i) {
@@ -416,26 +422,17 @@ LIMIT 1
   }
 
   /*
-   * 1. Find the ratio of actual cost to the approved budgeted cost 
-   * 2. Find the total budgeted revenue and mulitply  cost ratio to get total revenue
-   * 3. Find the total created revenue
-   * 4. New revenue = 1 - 2 and create a new line for the revenue header
+   * 1. Find all the expenditure lines with revene_calculated_cb is NULL and their expenditure type
+   * 2. Find the rates for each of the expenditures to determine the revenue line amount
+   * 3. Compare the sum of the revnue amounts against the budegted revenue.
+   * 4. If revenue amount is less than budgeted revenue then save the record else exit the loop.
    */
 
-  $budgeted_cost = prj_budget_line::find_budget_by_ProjectHeaderIdBudgetType($prj_i->prj_project_header_id, 'APPR_COST');
-  if (empty($budgeted_cost)) {
-   $this->msg .= '<br>No approved cost budget found';
-   throw new Exception('NO_COST_BUDGET');
-  }
-  $toal_budgeted_cost = $budgeted_cost->raw_cost + $budgeted_cost->burden_cost;
-  $actual_cost = prj_expenditure_line::find_totalExpenditure_by_projectHeaderId($prj_i->prj_project_header_id);
-  if (empty($actual_cost)) {
-   $this->msg .= '<br>No expenditure found';
+  $expenditure_lines = prj_expenditure_line::find_lines_forRevenueGeneration($prj_i->prj_project_header_id);
+  if (empty($expenditure_lines)) {
+   $this->msg .= '<br>No expenditure lines found';
    throw new Exception('NO_EXPENDITURE');
   }
-  $toal_actual_cost = $actual_cost->line_amount + $actual_cost->burden_amount;
-
-  $cost_ratio = $toal_actual_cost / $toal_budgeted_cost;
 
   $total_budget_amount = prj_budget_line::find_revBudgetAmount_byProjectHeaderId($prj_i->prj_project_header_id);
   if (empty($total_budget_amount)) {
@@ -443,27 +440,48 @@ LIMIT 1
    throw new Exception('NO_APPROVED_REVENUE_BUDGET');
   }
 
-  $rev_amount = ($cost_ratio * $total_budget_amount) / 100;
+  //find revenue amount for each of the expenditure lines as per the project header rate schedule
   $existing_rev_amount = prj_revenue_line::find_totalRevenue_projectHeaderId($prj_i->prj_project_header_id);
-  $new_rev_amount = $rev_amount - $existing_rev_amount;
-
-  if ($new_rev_amount > 0) {
-   $line_description = "cost_ratio is $cost_ratio, total_budget_amount is $total_budget_amount and existing rev amount is $existing_rev_amount ";
-   $rev_line_params_a = [
-    'new_rev_amount' => $new_rev_amount,
-    'line_description' => $line_description,
-    'revenue_source' => 'ACTUAL_COST',
-    'revenue_category' => 'COST_TO_COST',
-    'reference_key_name' => '',
-    'reference_key_value' => '',
-   ];
-   $this->_create_revenueLines($prj_revenue_i, $rev_line_params_a);
-  } else {
-   $this->message .= "<br>New revenue amount is less than equal to zero as per expenditure";
-   throw new Exception("ZERO_REVENUE_AMOUNT");
+  $new_rev_amount_cum = $existing_rev_amount;
+  foreach ($expenditure_lines as $expenditure_line) {
+   $rev_amount = null;
+   $rates = prj_expenditure_line::find_billRates_fromLineIdSchedule($expenditure_line->prj_expenditure_line_id, $prj_i->employee_schedule_id, $prj_i->job_schedule_id, $prj_i->nlr_schedule_id);
+   if ($rates) {
+    if (!empty($rates->rate)) {
+     $rev_amount = ($rates->quantity * $rates->rate);
+    } else if (!empty($rates->mark_up_percentage)) {
+     $rev_amount = ($rates->line_amount * mark_up_percentage) / 100 + $rates->line_amount;
+    } else {
+     $this->msg .= '<br>No rates found for expenditure id ' . $expenditure_line->prj_expenditure_line_id;
+     throw new Exception('NO_RATE_FOUND_FOR_EXPENDITURE');
+    }
+   } else {
+    $this->msg .= '<br>No rates found for expenditure id ' . $expenditure_line->prj_expenditure_line_id;
+    throw new Exception('NO_RATE_FOUND_FOR_EXPENDITURE');
+   }
+   $new_rev_amount_cum += $rev_amount;
+   if ($new_rev_amount_cum > $total_budget_amount) {
+    $this->message .= "<br>Revenue amount is more than budgeted amount ";
+    throw new Exception("REVENUE_AMOUNT_MORE_THAN_BUDGET");
+   }
+   if ($rev_amount > 0) {
+    $line_description = "Revenue amount is $rev_amount";
+    $rev_line_params_a = [
+     'new_rev_amount' => $rev_amount,
+     'line_description' => $line_description,
+     'revenue_source' => 'ACTUAL_COST',
+     'revenue_category' => 'WORK',
+     'reference_key_name' => '',
+     'reference_key_value' => '',
+    ];
+    $this->_create_revenueLines($prj_revenue_i, $rev_line_params_a);
+   } else {
+    $this->message .= "<br>New revenue amount is less than equal to zero as per expenditure";
+    throw new Exception("ZERO_REVENUE_AMOUNT");
+   }
   }
  }
- 
+
  private function _create_revenueByEvent($prj_i) {
   $all_lines = prj_event_line::find_allNonRevenueLines_byProjectHeaderId($prj_i->prj_project_header_id);
   if (empty($all_lines)) {
