@@ -48,7 +48,7 @@ $f = new inoform();
 
        <div id="tabsLine-2" class="tabContent">
         <div id="create_new_user" class="col-md-8">
-         <form action="<?php HOME_URL ?>extensions/user/user_login.php" method="post" id="user_header" name="user_header">
+         <form action="<?php echo HOME_URL ?>extensions/user/user_login.php" method="post" id="user_header" name="user_header">
           <ul class="single-column">
            <li><?php $f->l_text_field_dm('first_name'); ?></li>
            <li><?php $f->l_text_field_dm('last_name'); ?></li>
