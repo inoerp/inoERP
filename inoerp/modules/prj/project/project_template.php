@@ -47,7 +47,7 @@ inoERP
       <li><?php $f->l_date_fieldAnyDay('completion_date', $$class->completion_date) ?></li>
       <li><?php $f->l_text_field_d('life_cycle') ?></li>
       <li><?php $f->l_select_field_from_object('current_phase', option_header::find_options_byName('PRJ_PROJECT_PHASE'), 'option_line_code','option_line_value', $$class->current_phase) ?></li>
-      <li><?php $f->l_select_field_from_object('accounting_group', option_header::find_options_byName('PRJ_ACCOUNTING_GRP'), 'option_line_code', 'option_line_value', $$class->accounting_group, 'accounting_group', 'action'); ?>   </li>
+      <li><?php $f->l_select_field_from_object('accounting_group', option_header::find_options_byName('PRJ_ACCOUNTING_GRP'), 'option_line_code', 'option_line_value', $$class->accounting_group, 'accounting_group', 'action' , 1); ?>   </li>
      </ul> 
     </div>
     <div id="tabsHeader-2" class="tabContent">
@@ -55,7 +55,7 @@ inoERP
       <li><?php $f->l_select_field_from_array('project_status' , prj_project_header::$status_a, $$class->project_status,'project_status','medium'); ?></li>
       <li><?php $f->l_text_field_dr('approval_status'); ?></li>
       <li><?php $f->l_text_field_d('role_list_id'); ?></li> 
-      <li><?php $f->l_select_field_from_object('prj_work_type', prj_work_type::find_all(), 'prj_work_type_id', 'work_type', $$class->prj_work_type, 'prj_work_type'); ?></li> 
+      <li><?php $f->l_select_field_from_object('prj_work_type', prj_work_type::find_all(), 'prj_work_type_id', 'work_type', $$class->prj_work_type, 'prj_work_type','',1); ?></li> 
       <li><?php $f->l_text_field_d('probability'); ?></li> 
       <li><?php $f->l_text_field_d('opportunity_value'); ?></li> 
       <li><?php $f->l_date_fieldAnyDay('expected_approval_date', $$class->expected_approval_date) ?></li>
@@ -119,9 +119,6 @@ inoERP
      <ul class="column header_field">
       <li id="document_status"><label><?php echo gettext('Action') ?></label>
        <?php echo $f->select_field_from_array('action', $$class->action_a, '', 'action'); ?>
-      </li>
-      <li><label><?php echo gettext('Add To Order') ?></label>
-       <?php echo $f->select_field_from_array('add_to_order', $add_to_order_a, '', 'add_to_order', '', '', '', 1); ?>
       </li>
      </ul>
     </div>

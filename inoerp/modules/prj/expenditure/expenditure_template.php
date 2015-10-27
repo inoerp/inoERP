@@ -77,7 +77,8 @@ inoERP
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Basic-2') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Finance') ?></a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Finance-2') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
@@ -153,8 +154,6 @@ inoERP
         <th><?php echo gettext('Status') ?></th>
         <th><?php echo gettext('Debit Account') ?></th>
         <th><?php echo gettext('Credit Account') ?></th>
-        <th><?php echo gettext('Journal Header Id') ?></th>
-        <th><?php echo gettext('Journal Interface Id') ?></th>
         <th><?php echo gettext('Burden Amount') ?></th>
         <th><?php echo gettext('Burden Details') ?></th>
        </tr>
@@ -170,10 +169,38 @@ inoERP
          <td><?php echo $f->select_field_from_array('status2', prj_expenditure_line::$status_a, $$class_second->status, '', 'medium', '', 1, 1); ?>						 </td>
          <td><?php $f->ac_field_wid2('debit_ac_id'); ?></td>
          <td><?php $f->ac_field_wid2('credit_ac_id'); ?></td>
-         <td><?php $f->text_field_wid2r('gl_journal_header_id'); ?></td>
-         <td><?php echo $f->checkBox_field('gl_journal_interface_cb', $$class_second->gl_journal_interface_cb, '' ,'always_readonly' , 1); ?></td>
          <td><?php $f->text_field_wid2r('burden_amount'); ?></td>
          <td><a role="button" target="_blank" class="btn btn-sm btn-default dont_copy" href="search.php?class_name=prj_burden_expenditure_v&amp;show_block=1&amp;prj_expenditure_line_id=<?php echo $$class_second->prj_expenditure_line_id; ?>"><?php echo gettext('View') ?></a></td>
+        </tr>
+        <?php
+        $count = $count + 1;
+       }
+       ?>
+      </tbody>
+     </table>
+    </div>
+    <div id="tabsLine-3" class="tabContent">
+     <table class="form_line_data_table">
+      <thead> 
+       <tr>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Journal Header Id') ?></th>
+        <th><?php echo gettext('Journal Interface Id') ?></th>
+        <th><?php echo gettext('Revene Calculated') ?></th>
+        <th><?php echo gettext('Invoiced') ?></th>
+       </tr>
+      </thead>
+      <tbody class="form_data_line_tbody">
+       <?php
+       $count = 0; 
+       foreach ($prj_expenditure_line_object as $prj_expenditure_line) {
+        ?>         
+        <tr class="prj_expenditure_line<?php echo $count ?>">
+         <td><?php echo $$class_second->prj_expenditure_line_id ?></td>
+         <td><?php $f->text_field_wid2r('gl_journal_header_id'); ?></td>
+         <td><?php echo $f->checkBox_field('gl_journal_interface_cb', $$class_second->gl_journal_interface_cb, '' ,'always_readonly' , 1); ?></td>
+         <td><?php echo $f->checkBox_field('revene_calculated_cb', $$class_second->revene_calculated_cb, '' ,'always_readonly' , 1); ?></td>
+         <td><?php echo $f->checkBox_field('invoiced_cb', $$class_second->invoiced_cb, '' ,'always_readonly' , 1); ?></td>
         </tr>
         <?php
         $count = $count + 1;

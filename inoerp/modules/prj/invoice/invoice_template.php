@@ -30,7 +30,7 @@ inoERP
       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>        </li>
       <li><?php
        $f->l_val_field_d('project_number', 'prj_project_header', 'project_number', '', 'select project_number');
-       echo $f->hidden_field_withCLass('prj_project_header_id', $$class_second->prj_project_header_id, 'popup_value');
+       echo $f->hidden_field_withCLass('prj_project_header_id', $$class->prj_project_header_id, 'popup_value');
        echo $f->hidden_field_withCLass('approval_status', 'APPROVED', 'popup_value');
        ?><i class="generic select_project_number select_popup clickable fa fa-search" data-class_name="prj_project_header"></i></li>
       <li><?php $f->l_text_field_d('invoice_class'); ?></li>

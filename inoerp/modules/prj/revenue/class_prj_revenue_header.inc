@@ -405,6 +405,7 @@ LIMIT 1
  }
 
  private function _create_revenueByWork($prj_i) {
+  global $dbc;
   //check if project revenue exists
   $prj_revenue_i = self::find_byProjectHeaderId($prj_i->prj_project_header_id);
   if ($prj_revenue_i) {
@@ -471,10 +472,20 @@ LIMIT 1
      'line_description' => $line_description,
      'revenue_source' => 'ACTUAL_COST',
      'revenue_category' => 'WORK',
-     'reference_key_name' => '',
-     'reference_key_value' => '',
+     'reference_key_name' => 'prj_expenditure_line',
+     'reference_key_value' => $expenditure_line->prj_expenditure_line_id,
     ];
-    $this->_create_revenueLines($prj_revenue_i, $rev_line_params_a);
+    try{
+     $this->_create_revenueLines($prj_revenue_i, $rev_line_params_a);
+     //update expenditure 
+     $prj_exl_j = new prj_expenditure_line();
+     $prj_exl_j->findBy_id($expenditure_line->prj_expenditure_line_id);
+     $prj_exl_j->revene_calculated_cb = 1;
+     $prj_exl_j->save();
+    }catch (Exception $e){
+     $dbc->rollback = true;
+    }
+    
    } else {
     $this->message .= "<br>New revenue amount is less than equal to zero as per expenditure";
     throw new Exception("ZERO_REVENUE_AMOUNT");
@@ -547,10 +558,12 @@ LIMIT 1
    throw new Exception("NO_OPEN_GL_PERIOD");
   }
 
+//  pa($prj_revenue_header_h);
   if ($prj_revenue_header_h->currency == $prj_revenue_header_h->doc_currency) {
    $prj_revenue_header_h->exchange_rate = 1;
   } else {
-   gl_currency_conversion::find_rate($from_currency, $to_currency, $currency_conversion_type);
+   $rate = gl_currency_conversion::find_rate($prj_revenue_header_h->doc_currency, $prj_revenue_header_h->currency , 'CORP');
+   $prj_revenue_header_h->exchange_rate = $rate;
   }
   $defalt_act_revenue = prj_default_account::find_default_account('REVENUE', $prj_i->prj_project_type_id, $prj_i->accounting_group);
   if ($defalt_act_revenue) {
@@ -602,6 +615,63 @@ LIMIT 1
  }
 
  public function prg_generate_draft_revenue($seralized_parameters) {
+  $parameters = unserialize($seralized_parameters);
+  $this->message = '<br> Start of Distribute Cost Program ';
+
+  if (!empty($parameters['bu_org_id'][0])) {
+   $this->bu_org_id = $parameters['bu_org_id'][0];
+   $this->message .= '<br> Entered Org Id is : ' . $this->bu_org_id;
+  } else {
+   $this->message .= '<br> Error! : No org id found @  ' . __FILE__ . ' @@ ' . __LINE__;
+   return $this->message;
+  }
+
+  if (!empty($parameters['prj_project_header_id_from'][0])) {
+   $this->_prj_project_header_id_from = $parameters['prj_project_header_id_from'][0];
+   $this->message .= "<br>Using from project header id " . $this->_prj_project_header_id_from;
+  }
+
+  if (isset($parameters['cost_type_for_distribution'][0])) {
+   $this->_cost_type_for_distribution = $parameters['cost_type_for_distribution'][0];
+   $this->message .= "<br>Using distribution type " . $this->_cost_type_for_distribution;
+  }
+
+  if (!empty($parameters['prj_project_header_id_to'][0])) {
+   $this->_prj_project_header_id_to = $parameters['prj_project_header_id_to'][0];
+   $this->message .= "<br>Using to project header id " . $this->_prj_project_header_id_to;
+   for ($i = $this->_prj_project_header_id_from; $i <= $this->_prj_project_header_id_to; $i++) {
+    try {
+     $this->_create_draft_revenue($i);
+    } catch (Exception $e) {
+     $this->message .= "<br>Failed to complete create draft revenue program " . $e->getMessage();
+    }
+   }
+  } else if (!empty($this->_prj_project_header_id_from)) {
+   try {
+    $this->_create_draft_revenue($this->_prj_project_header_id_from);
+   } catch (Exception $e) {
+    $this->message .= "<br>Failed to complete create draft revenue program " . $e->getMessage();
+   }
+  } else {
+   //find all projects with line in NULL or ENTERED status and generate draft revenue for them
+   $this->message .= '<br>Running program for all available projects ';
+   $all_lines_a = prj_expenditure_line::find_distinctProject_byStatus();
+   if ($all_lines_a) {
+    foreach ($all_lines_a as $el_obj) {
+     $this->_create_draft_revenue($el_obj->prj_project_header_id);
+    }
+   }
+  }
+
+
+
+
+
+  return $this->message;
+ }
+ 
+ 
+ public function prg_create_revenue_account($seralized_parameters) {
   $parameters = unserialize($seralized_parameters);
   $this->message = '<br> Start of Distribute Cost Program ';
 
