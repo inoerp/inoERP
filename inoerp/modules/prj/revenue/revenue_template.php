@@ -34,7 +34,7 @@ inoERP
        echo $f->hidden_field_withCLass('prj_project_header_id', $$class->prj_project_header_id, 'popup_value');
        ?></li>
       <li><?php $f->l_text_field_d('revenue_class'); ?></li>
-      <li><?php $f->l_text_field_dr('revenue_status'); ?></li>
+      <li><?php $f->l_select_field_from_array('revenue_status', prj_revenue_header::$status_a, $$class->revenue_status ,'revenue_status','always_readonly'); ?></li>
       <li><?php $f->l_text_field_dr('transfer_status'); ?></li>
 
      </ul>
@@ -133,13 +133,13 @@ inoERP
           echo ino_inline_action($prj_revenue_line->prj_revenue_line_id, array('prj_revenue_header_id' => $prj_revenue_header->prj_revenue_header_id));
           ?>
          </td>
-         <td><?php $f->text_field_d2sr('prj_revenue_line_id', 'line_id always_readonly'); ?></td>
-         <td><?php $f->text_field_d2sr('line_number', 'lines_number always_readonly'); ?></td>
+         <td><?php $f->text_field_wid2sr('prj_revenue_line_id', 'line_id always_readonly'); ?></td>
+         <td><?php $f->text_field_wid2sr('line_number', 'lines_number always_readonly'); ?></td>
          <td><?php $f->seq_field_d($count) ?></td>
-         <td><?php $f->text_field_d2('revenue_category'); ?></td>
-         <td><?php $f->text_field_d2('revenue_source'); ?></td>
-         <td><?php $f->text_field_d2('description'); ?></td>
-         <td><?php $f->text_field_d2('amount'); ?></td>
+         <td><?php $f->text_field_wid2('revenue_category'); ?></td>
+         <td><?php $f->text_field_wid2('revenue_source'); ?></td>
+         <td><?php $f->text_field_wid2('description'); ?></td>
+         <td><?php $f->text_field_wid2('amount'); ?></td>
          <td><?php echo $f->date_fieldAnyDay('release_date', $$class_second->release_date); ?></td>
          <td><?php echo $f->date_fieldAnyDay('transfer_date', $$class_second->transfer_date); ?></td>
 
@@ -162,6 +162,7 @@ inoERP
         <th><?php echo gettext('Reference Key') ?></th>
         <th><?php echo gettext('Reference Value') ?></th>
         <th><?php echo gettext('Journal Header Id') ?></th>
+        <th><?php echo gettext('Transferred') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -171,13 +172,13 @@ inoERP
         ?>         
         <tr class="prj_revenue_line<?php echo $count ?>">
          <td><?php $f->seq_field_d($count) ?></td>
-         <td><?php $f->text_field_d2('rejection_reason'); ?></td>
-         <td><?php $f->text_field_d2('document_number'); ?></td>
-         <td><?php $f->text_field_d2r('reference_type', 'always_readonly'); ?></td>
-         <td><?php $f->text_field_d2l('reference_key_name', 'always_readonly'); ?></td>
-         <td><?php $f->text_field_d2r('reference_key_value', 'always_readonly'); ?></td>
-         <td><?php $f->text_field_d2('gl_journal_header_id'); ?></td>        
- 
+         <td><?php $f->text_field_wid2('rejection_reason'); ?></td>
+         <td><?php $f->text_field_wid2('document_number'); ?></td>
+         <td><?php $f->text_field_wid2r('reference_type', 'always_readonly'); ?></td>
+         <td><?php $f->text_field_wid2l('reference_key_name', 'always_readonly'); ?></td>
+         <td><?php $f->text_field_wid2l('reference_key_value', 'always_readonly'); ?></td>
+         <td><?php $f->text_field_wid2r('gl_journal_header_id'); ?></td>        
+         <td><?php echo $f->checkBox_field('gl_journal_interface_cb', $$class_second->gl_journal_interface_cb,'','always_readonly'); ?></td>        
         </tr>
         <?php
         $count = $count + 1;

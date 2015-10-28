@@ -42,6 +42,7 @@ class prj_revenue_line extends dbObject {
   'reference_key_name',
   'reference_key_value',
   'gl_journal_header_id',
+  'gl_journal_interface_cb',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -84,6 +85,7 @@ class prj_revenue_line extends dbObject {
  public $reference_key_name;
  public $reference_key_value;
  public $gl_journal_header_id;
+ public $gl_journal_interface_cb;
  public $created_by;
  public $creation_date;
  public $last_update_by;

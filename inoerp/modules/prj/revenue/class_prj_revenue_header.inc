@@ -22,6 +22,7 @@ class prj_revenue_header extends dbObject {
  public static $key_column = 'prj_project_header_id';
  public static $dependent_classes = ['prj_revenue_line'];
  public static $module = "prj";
+ public static $gl_journal_category = "PRJ_REVENUE";
 //  data base variables as stored database column name
  public static $system_info = [
   'name' => 'Project Revenue',
@@ -40,10 +41,10 @@ class prj_revenue_header extends dbObject {
   'TRANSFER' => 'Trasnfer',
  ];
  public static $status_a = [
-  'WORKING' => 'Working',
-  'RELEASED' => 'Released',
-  'APPROVED' => 'Approved',
-  'TRANSFERRED' => 'Transferred',
+  '1' => 'Working',
+  '2' => 'Approved',
+  '3' => 'Released',
+  '4' => 'Transferred',
  ];
  public $field_a = [
   'prj_revenue_header_id',
@@ -90,7 +91,7 @@ class prj_revenue_header extends dbObject {
   'unearned_coa_id',
   'unbilled_coa_id',
   'revenue_coa_id',
-  'prj_agreement_header_id',
+//  'prj_agreement_header_id',
   'prj_project_header_id',
  ];
  public $fields_inForm_notInDataBase = [
@@ -165,26 +166,45 @@ class prj_revenue_header extends dbObject {
   'name' => 'Generate Draft Revenue',
   'description' => 'Generate Draft Revenue',
  ];
+ public $prg_create_revenue_account_parameters = [
+  'Organization' => 'search_business_org_nm',
+  'Project From' => 'search_project_number_from',
+  'Project To' => 'search_project_number_to',
+  'Cost Type' => 'search_prj_cost_type_for_distribution',
+ ];
+ public $prg_create_revenue_account_details = [
+  'name' => 'Create Revenue Accounting',
+  'description' => 'Create Revenue Accounting',
+ ];
 
  public function _before_save() {
-  if (!empty($this->status) && $this->status != 'WORKING') {
-   if ($this->_verify_status() < 0) {
-    return -90;
-   }
-  }
+//  if (!empty($this->revenue_status) && $this->revenue_status != 'WORKING') {
+//   if ($this->_verify_status() < 0) {
+//    return -90;
+//   }
+//  }
   if (!empty($this->action)) {
    $this->_do_action();
   }
 
-  if (empty($this->status)) {
-   $this->status = 'WORKING';
+  if (empty($this->revenue_status)) {
+   $this->revenue_status = 'WORKING';
   }
  }
 
  private function _do_action() {
   switch ($this->action) {
    case 'RELEASE' :
-    $this->status = 'RELEASED';
+    $this->revenue_status = '3';
+    break;
+
+   case 'APPROVE' :
+    $this->revenue_status = '2';
+    break;
+
+   case 'TRANSFER' :
+    $this->revenue_status = '4';
+    $this->_create_gl_interface_lines($this->prj_project_header_id);
     break;
 
    default:
@@ -194,22 +214,9 @@ class prj_revenue_header extends dbObject {
 
  private function _verify_status() {
   $return = 1;
-  switch ($this->status) {
-   case 'RELEASED' :
-    if ($this->action_a != 'REVERSE') {
-     echo "<br>You can only reverse a released revenue";
-     $return = -1;
-    }
-    break;
-
-   case 'REVERSED' :
-   case 'COSTED':
-    echo "<br>You can't modify any revenue in" . $this->status . " status";
-    $return = -1;
-    break;
-
-   default:
-    break;
+  if ($this->revenue_status > 2) {
+   echo "<br>You can't modify any revenue in" . $this->status . " status";
+   $return = -1;
   }
   return $return;
  }
@@ -475,17 +482,16 @@ LIMIT 1
      'reference_key_name' => 'prj_expenditure_line',
      'reference_key_value' => $expenditure_line->prj_expenditure_line_id,
     ];
-    try{
+    try {
      $this->_create_revenueLines($prj_revenue_i, $rev_line_params_a);
      //update expenditure 
      $prj_exl_j = new prj_expenditure_line();
      $prj_exl_j->findBy_id($expenditure_line->prj_expenditure_line_id);
      $prj_exl_j->revene_calculated_cb = 1;
      $prj_exl_j->save();
-    }catch (Exception $e){
+    } catch (Exception $e) {
      $dbc->rollback = true;
     }
-    
    } else {
     $this->message .= "<br>New revenue amount is less than equal to zero as per expenditure";
     throw new Exception("ZERO_REVENUE_AMOUNT");
@@ -562,7 +568,7 @@ LIMIT 1
   if ($prj_revenue_header_h->currency == $prj_revenue_header_h->doc_currency) {
    $prj_revenue_header_h->exchange_rate = 1;
   } else {
-   $rate = gl_currency_conversion::find_rate($prj_revenue_header_h->doc_currency, $prj_revenue_header_h->currency , 'CORP');
+   $rate = gl_currency_conversion::find_rate($prj_revenue_header_h->doc_currency, $prj_revenue_header_h->currency, 'CORP');
    $prj_revenue_header_h->exchange_rate = $rate;
   }
   $defalt_act_revenue = prj_default_account::find_default_account('REVENUE', $prj_i->prj_project_type_id, $prj_i->accounting_group);
@@ -628,17 +634,15 @@ LIMIT 1
 
   if (!empty($parameters['prj_project_header_id_from'][0])) {
    $this->_prj_project_header_id_from = $parameters['prj_project_header_id_from'][0];
-   $this->message .= "<br>Using from project header id " . $this->_prj_project_header_id_from;
-  }
-
-  if (isset($parameters['cost_type_for_distribution'][0])) {
-   $this->_cost_type_for_distribution = $parameters['cost_type_for_distribution'][0];
-   $this->message .= "<br>Using distribution type " . $this->_cost_type_for_distribution;
+   $this->message .= "<br>Using to project header id from " . $this->_prj_project_header_id_from;
   }
 
   if (!empty($parameters['prj_project_header_id_to'][0])) {
    $this->_prj_project_header_id_to = $parameters['prj_project_header_id_to'][0];
-   $this->message .= "<br>Using to project header id " . $this->_prj_project_header_id_to;
+   $this->message .= "<br>Using from project header id to " . $this->_prj_project_header_id_to;
+  }
+
+  if (!empty($this->_prj_project_header_id_from) && !empty($this->_prj_project_header_id_to)) {
    for ($i = $this->_prj_project_header_id_from; $i <= $this->_prj_project_header_id_to; $i++) {
     try {
      $this->_create_draft_revenue($i);
@@ -647,10 +651,26 @@ LIMIT 1
     }
    }
   } else if (!empty($this->_prj_project_header_id_from)) {
-   try {
-    $this->_create_draft_revenue($this->_prj_project_header_id_from);
-   } catch (Exception $e) {
-    $this->message .= "<br>Failed to complete create draft revenue program " . $e->getMessage();
+   $all_projects = prj_project_header::find_by_id_gl($this->_prj_project_header_id_from, '>=');
+   if ($all_projects) {
+    foreach ($all_projects as $project) {
+     try {
+      $this->_create_draft_revenue($project->prj_project_header_id);
+     } catch (Exception $e) {
+      $this->message .= "<br>Failed to complete create draft revenue program " . $e->getMessage();
+     }
+    }
+   }
+  } else if (!empty($this->_prj_project_header_id_to)) {
+   $all_projects = prj_project_header::find_by_id_gl($this->_prj_project_header_id_to, '<=');
+   if ($all_projects) {
+    foreach ($all_projects as $project) {
+     try {
+      $this->_create_draft_revenue($project->prj_project_header_id);
+     } catch (Exception $e) {
+      $this->message .= "<br>Failed to complete create draft revenue program " . $e->getMessage();
+     }
+    }
    }
   } else {
    //find all projects with line in NULL or ENTERED status and generate draft revenue for them
@@ -662,18 +682,12 @@ LIMIT 1
     }
    }
   }
-
-
-
-
-
   return $this->message;
  }
- 
- 
+
  public function prg_create_revenue_account($seralized_parameters) {
   $parameters = unserialize($seralized_parameters);
-  $this->message = '<br> Start of Distribute Cost Program ';
+  $this->message = '<br> Start revenue accounting Program ';
 
   if (!empty($parameters['bu_org_id'][0])) {
    $this->bu_org_id = $parameters['bu_org_id'][0];
@@ -685,32 +699,46 @@ LIMIT 1
 
   if (!empty($parameters['prj_project_header_id_from'][0])) {
    $this->_prj_project_header_id_from = $parameters['prj_project_header_id_from'][0];
-   $this->message .= "<br>Using from project header id " . $this->_prj_project_header_id_from;
-  }
-
-  if (isset($parameters['cost_type_for_distribution'][0])) {
-   $this->_cost_type_for_distribution = $parameters['cost_type_for_distribution'][0];
-   $this->message .= "<br>Using distribution type " . $this->_cost_type_for_distribution;
+   $this->message .= "<br>Using to project header id from " . $this->_prj_project_header_id_from;
   }
 
   if (!empty($parameters['prj_project_header_id_to'][0])) {
    $this->_prj_project_header_id_to = $parameters['prj_project_header_id_to'][0];
-   $this->message .= "<br>Using to project header id " . $this->_prj_project_header_id_to;
+   $this->message .= "<br>Using from project header id to " . $this->_prj_project_header_id_to;
+  }
+
+  if (!empty($this->_prj_project_header_id_from) && !empty($this->_prj_project_header_id_to)) {
    for ($i = $this->_prj_project_header_id_from; $i <= $this->_prj_project_header_id_to; $i++) {
     try {
-     $this->_create_draft_revenue($i);
+     $this->_create_gl_interface_lines($i);
     } catch (Exception $e) {
      $this->message .= "<br>Failed to complete create draft revenue program " . $e->getMessage();
     }
    }
   } else if (!empty($this->_prj_project_header_id_from)) {
-   try {
-    $this->_create_draft_revenue($this->_prj_project_header_id_from);
-   } catch (Exception $e) {
-    $this->message .= "<br>Failed to complete create draft revenue program " . $e->getMessage();
+   $all_projects = prj_project_header::find_by_id_gl($this->_prj_project_header_id_from, '>=');
+   if ($all_projects) {
+    foreach ($all_projects as $project) {
+     try {
+      $this->_create_gl_interface_lines($project->prj_project_header_id);
+     } catch (Exception $e) {
+      $this->message .= "<br>Failed to complete create draft revenue program " . $e->getMessage();
+     }
+    }
+   }
+  } else if (!empty($this->_prj_project_header_id_to)) {
+   $all_projects = prj_project_header::find_by_id_gl($this->_prj_project_header_id_to, '<=');
+   if ($all_projects) {
+    foreach ($all_projects as $project) {
+     try {
+      $this->_create_gl_interface_lines($project->prj_project_header_id);
+     } catch (Exception $e) {
+      $this->message .= "<br>Failed to complete create draft revenue program " . $e->getMessage();
+     }
+    }
    }
   } else {
-   //find all projects with line in NULL or ENTERED status and generate draft revenue for them
+   //find all projects revenue lines where journal header id is null
    $this->message .= '<br>Running program for all available projects ';
    $all_lines_a = prj_expenditure_line::find_distinctProject_byStatus();
    if ($all_lines_a) {
@@ -720,14 +748,94 @@ LIMIT 1
    }
   }
 
-
-
-
-
   return $this->message;
  }
 
 // public $expclass_
+
+ private function _create_gl_interface_lines($prj_project_header_id) {
+  $prj_rev_h_a = prj_revenue_header::find_by_fieldVal(['prj_project_header_id' => $prj_project_header_id]);
+  if ($prj_rev_h_a) {
+   $prj_rev_h = $prj_rev_h_a[0];
+  } else {
+   return false;
+  }
+
+  if ($prj_rev_h->revenue_status < 3) {
+   $this->message .= '<br>Revenue status does not allow interface to GL ';
+  }
+  $sql = " SELECT * FROM prj_revenue_line ";
+  $sql .= " WHERE prj_revenue_header_id = '{$prj_rev_h->prj_revenue_header_id}' ";
+  $sql .= " AND gl_journal_interface_cb IS NULL ";
+  $all_rev_lines = self::find_by_sql($sql);
+
+  if ($all_rev_lines) {
+   foreach ($all_rev_lines as $rev_line) {
+    $this->_insert_gl_interface($rev_line, $prj_rev_h);
+   }
+  }
+ }
+
+ private function _insert_gl_interface($rev_line, $rev_header) {
+  global $dbc, $debug;
+  $project = prj_project_header::find_by_id($rev_header->prj_project_header_id);
+  $fin_details = prj_project_header::find_financial_details_from_projectHeaderId($project->prj_project_header_id);
+  if (!$fin_details) {
+   $msg = "<br>Finance details not found";
+   if (!empty($debug)) {
+    $msg .= "<br> Error @ " . __FILE__ . ' @@ line ' . __LINE__;
+   }
+   throw new Exception($msg);
+  }
+  $gl_int = new gl_journal_interface();
+  $gl_int->ledger_id = $fin_details->ledger_id;
+  $gl_int->status = 'ENTERED';
+  $gl_int->currency = $fin_details->currency_code;
+
+  if (!empty($project->doc_currency)) {
+   $gl_int->doc_currency = $project->doc_currency;
+   $gl_int->exchange_type = $project->exchange_rate_type;
+   $gl_int->exchange_rate = $project->exchange_rate;
+  } else {
+   $gl_int->doc_currency = $fin_details->currency_code;
+   $gl_int->exchange_type = 'NA';
+   $gl_int->exchange_rate = 1;
+  }
+  $gp = new gl_period();
+  $gl_int->period_id = $gp->current_open_period($fin_details->ledger_id, 'OPEN')->gl_period_id;
+  $gl_int->journal_source = self::$module;
+  $gl_int->journal_category = self::$gl_journal_category;
+  $gl_int->reference_type = 'table';
+  $gl_int->reference_key_name = self::$table_name;
+  $gl_int->reference_key_value = '-1';
+  $gl_int->journal_name = $gl_int->journal_category . '-' . $gl_int->reference_key_value;
+  $gl_int->description = $gl_int->journal_name . '-' . current_time();
+  $gl_int->balance_type = 'A';
+  $gl_int->reference_type = 'table';
+  $gl_int->reference_key_name = 'prj_revenue_line';
+  $gl_int->reference_key_value = $rev_line->prj_revenue_line_id;
+  $gl_int->gl_journal_interface_id = null;
+  $gl_int->code_combination_id = $rev_header->revenue_coa_id;
+  $gl_int->total_cr = $gl_int->total_ac_cr = $rev_line->amount;
+  $gl_int->line_reference_key_name = 'prj_revenue_line';
+  $gl_int->line_reference_key_value = $rev_line->prj_revenue_line_id;
+  $gl_int->line_status = 'N';
+  try {
+   $gl_int->save();
+   $gl_int->gl_journal_interface_id = null;
+   $gl_int->code_combination_id = $rev_header->unbilled_coa_id;
+   $gl_int->total_dr = $gl_int->total_ac_dr = $rev_line->amount;
+   $gl_int->total_cr = $gl_int->total_cr = null;
+   $gl_int->save();
+   $prl = new prj_revenue_line();
+   $prl->findBy_id($rev_line->prj_revenue_line_id);
+   $prl->gl_journal_interface_cb = true;
+   $prl->save();
+  } catch (Exception $e) {
+   echo "<br>Unable to insert interface lines. Error @ " . __FILE__ . ' @@ line ' . __LINE__ . $e->getMessage();
+   $dbc->rollback = true;
+  }
+ }
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [
