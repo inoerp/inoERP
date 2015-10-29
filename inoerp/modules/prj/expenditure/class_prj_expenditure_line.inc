@@ -286,6 +286,16 @@ AND pel.prj_expenditure_line_id = '{$prj_expenditure_line_id}' ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
  }
+ 
+  public static function find_lines_forInvoiceGeneration($project_header_id) {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE  prj_project_header_id = '{$project_header_id}' ";
+  $sql .= " AND  status = 'DISTRIBUTED' ";
+  $sql .= " AND  invoiced_cb IS NULL ";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
 
  public static function find_totalExpenditure_by_projectHeaderId($project_header_id) {
   $sql = " SELECT SUM(line_amount) as line_amount, SUM(burden_amount) as burden_amount, prj_project_header_id FROM ";

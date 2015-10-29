@@ -40,10 +40,10 @@ class prj_invoice_header extends dbObject {
   'TRANSFER' => 'Trasnfer',
  ];
  public static $status_a = [
-  'WORKING' => 'Working',
-  'RELEASED' => 'Released',
-  'APPROVED' => 'Approved',
-  'TRANSFERRED' => 'Transferred',
+  '1' => 'Working',
+  '2' => 'Approved',
+  '3' => 'Released',
+  '4' => 'Transferred',
  ];
  public $field_a = [
   'prj_invoice_header_id',
@@ -51,7 +51,7 @@ class prj_invoice_header extends dbObject {
   'invoice_status',
   'unearned_coa_id',
   'unbilled_coa_id',
-  'receivables_ac_id',
+//  'receivables_ac_id',
   'ar_customer_id',
   'ar_customer_site_id',
   'prj_agreement_header_id',
@@ -111,16 +111,6 @@ class prj_invoice_header extends dbObject {
   'exchange_rate_type' => 'gl_currency_conversion_type',
   'bu_org_id' => 'org_bu_name_default',
  ];
- public $prg_distribute_cost_parameters = [
-  'Organization' => 'search_business_org_nm',
-  'Project From' => 'search_project_number_from',
-  'Project To' => 'search_project_number_to',
-  'Cost Type' => 'search_prj_cost_type_for_distribution',
- ];
- public $prg_distribute_cost_details = [
-  'name' => 'Distribute invoice',
-  'description' => 'Distribute Project invoice',
- ];
  public $pageTitle = " Project Invoice"; //page Title
  public $prj_invoice_header_id;
  public $bu_org_id;
@@ -156,24 +146,23 @@ class prj_invoice_header extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
-
-public $prg_generate_draft_revenue_parameters = [
+ public $prg_generate_draft_invoice_parameters = [
   'Organization' => 'search_business_org_nm',
   'Project From' => 'search_project_number_from',
   'Project To' => 'search_project_number_to',
   'Cost Type' => 'search_prj_cost_type_for_distribution',
  ];
- public $prg_generate_draft_revenue_details = [
+ public $prg_generate_draft_invoice_details = [
   'name' => 'Generate Draft Revenue',
   'description' => 'Generate Draft Revenue',
  ];
- public $prg_create_revenue_account_parameters = [
+ public $prg_create_invoice_account_parameters = [
   'Organization' => 'search_business_org_nm',
   'Project From' => 'search_project_number_from',
   'Project To' => 'search_project_number_to',
   'Cost Type' => 'search_prj_cost_type_for_distribution',
  ];
- public $prg_create_revenue_account_details = [
+ public $prg_create_invoice_account_details = [
   'name' => 'Create Revenue Accounting',
   'description' => 'Create Revenue Accounting',
  ];
@@ -188,7 +177,7 @@ public $prg_generate_draft_revenue_parameters = [
    $this->_do_action();
   }
 
-  if (empty($this->revenue_status)) {
+  if (empty($this->invoice_status)) {
    $this->revenue_status = 'WORKING';
   }
  }
@@ -196,15 +185,15 @@ public $prg_generate_draft_revenue_parameters = [
  private function _do_action() {
   switch ($this->action) {
    case 'RELEASE' :
-    $this->revenue_status = '3';
+    $this->invoice_status = '3';
     break;
 
    case 'APPROVE' :
-    $this->revenue_status = '2';
+    $this->invoice_status = '2';
     break;
 
    case 'TRANSFER' :
-    $this->revenue_status = '4';
+    $this->invoice_status = '4';
     $this->_create_gl_interface_lines($this->prj_project_header_id);
     break;
 
@@ -216,7 +205,7 @@ public $prg_generate_draft_revenue_parameters = [
  private function _verify_status() {
   $return = 1;
   if ($this->revenue_status > 2) {
-   echo "<br>You can't modify any revenue in" . $this->status . " status";
+   echo "<br>You can't modify any invoice header in" . $this->status . " status";
    $return = -1;
   }
   return $return;
@@ -228,7 +217,7 @@ public $prg_generate_draft_revenue_parameters = [
 
  public static function find_byProjectHeaderId($prj_project_header_id) {
   $sql = " SELECT *
-FROM prj_revenue_header 
+FROM prj_invoice_header 
 WHERE prj_project_header_id = '{$prj_project_header_id}'
 LIMIT 1 
 ";
@@ -238,18 +227,18 @@ LIMIT 1
   return !empty($result) ? array_pop($result) : false;
  }
 
- private function _create_draft_revenue($prj_project_header_id) {
+ private function _create_draft_invoice($prj_project_header_id) {
   /*
    * 1. Find the revenue method for the project
    * 2. Verify the project status is in ('ACTIVE' , 'PENDING_CLOSURE' , 'INVOICE_HOLD')
    * 3. Find the billing method
-   *    3.1 Event - Find all events with out full revenue and generate the corresponding revenue
-   *    3.2 Work  - Find the % Completion of the project and multiply be approved revenue budget to get total revenue.
-   *               Substract all the existing revenue to get the latest revenue amount.
-   *    3.3 Cost - Find Actual Cost to Budgeted Cost to find cost ratio. Multiply cost ratio with Revenue budget to get the total revenue amount.
-   *               Substract all the existing revenue to get the latest revenue amount.
-   * 4. Find all billable lines/amounts and corresponding revenue amount.
-   * 5. Verify that the total revenue amount is less than the funded amount
+   *    3.1 Event - Find all events with out full invoice and generate the corresponding invoice
+   *    3.2 Work  - Find the % Completion of the project and multiply be approved revenue budget to get total invoice.
+   *                Substract all the existing revenue to get the latest invoice amount.
+   *    3.3 Cost - Find Actual Cost to Budgeted Cost to find cost ratio. Multiply cost ratio with invoice budget to get the total invoice amount.
+   *               Substract all the existing invoice to get the latest invoice amount.
+   * 4. Find all billable lines/amounts and corresponding invoice amount.
+   * 5. Verify that the total invoice amount is less than the funded amount
 
    */
   global $dbc;
@@ -258,35 +247,35 @@ LIMIT 1
   $prj_i->findBy_id($prj_project_header_id);
 
   if ($prj_i && !(in_array($prj_i->project_status, ['ACTIVE', 'PENDING_CLOSURE', 'INVOICE_HOLD']))) {
-   throw new Exception('Project status doesnt allow revenue creation');
+   throw new Exception('Project status doesnt allow invoice creation');
   }
 //  pa($prj_i);
   switch ($prj_i->billing_method) {
    case 'WW':
-   case 'WE':
+   case 'EW':
+   case 'CW':
     try {
-     $this->_create_revenueByWork($prj_i);
+     $this->_create_invoiceByWork($prj_i);
     } catch (Exception $e) {
-     $this->message .= "<br>Unable to save revenue by WORK " . $e->getMessage();
+     $this->message .= "<br>Unable to save invoice by WORK " . $e->getMessage();
     }
     break;
 
    case 'CC':
-   case 'CE':
-   case 'CW':
     try {
-     $this->_create_revenueByCostToCost($prj_i);
+     $this->_create_invoiceByCostToCost($prj_i);
     } catch (Exception $e) {
-     $this->message .= "<br>Unable to save revenue by COST-TO-COST " . $e->getMessage();
+     $this->message .= "<br>Unable to save invoice by COST-TO-COST " . $e->getMessage();
     }
     break;
 
    case 'EE':
-   case 'EW':
+   case 'CE':
+   case 'WE':
     try {
-     $this->_create_revenueByPercentComplete($prj_i);
+     $this->_create_invoiceByPercentComplete($prj_i);
     } catch (Exception $e) {
-     $this->message .= "<br>Unable to save revenue by percent line " . $e->getMessage();
+     $this->message .= "<br>Unable to save invoice by percent line " . $e->getMessage();
     }
     break;
 
@@ -295,27 +284,27 @@ LIMIT 1
   }
  }
 
- private function _create_revenueByPercentComplete($prj_i) {
-  //check if project revenue exists
-  $prj_revenue_i = self::find_byProjectHeaderId($prj_i->prj_project_header_id);
-  if ($prj_revenue_i) {
-   $prj_revenue_lines_i = prj_revenue_line::find_by_parent_id($prj_revenue_i->prj_revenue_header_id);
+ private function _create_invoiceByPercentComplete($prj_i) {
+  //check if project invoice exists
+  $prj_invoice_i = self::find_byProjectHeaderId($prj_i->prj_project_header_id);
+  if ($prj_invoice_i) {
+   $prj_invoice_lines_i = prj_invoice_line::find_by_parent_id($prj_invoice_i->prj_invoice_header_id);
   } else {
-   //create revenue header
-   $prj_revenue_i = $this->_create_revenueHeader($prj_i);
+   //create invoice header
+   $prj_invoice_i = $this->_create_invoiceHeader($prj_i);
   }
 
   /*
-   * 1. Find the total budgeted revenue and mulitply with % completion to get total revenue
-   * 2. Find the total created revenue
-   * 3. New revenue = 1 - 2 and create a new line for the revenue header
+   * 1. Find the total budgeted invoice and mulitply with % completion to get total invoice
+   * 2. Find the total created invoice
+   * 3. New invoice = 1 - 2 and create a new line for the invoice header
    */
 
-  if (empty($prj_revenue_i)) {
-   $this->message .= "<br>Uanble to create/find project revenue details ";
+  if (empty($prj_invoice_i)) {
+   $this->message .= "<br>Uanble to create/find project invoice details ";
    throw new Exception("NO_PROJECT_HEADER_FOUND");
   } else {
-   $this->message .= '<br>Using project revenue header id ' . $prj_revenue_i->prj_revenue_header_id;
+   $this->message .= '<br>Using project invoice header id ' . $prj_invoice_i->prj_invoice_header_id;
   }
 
   $total_budget_amount = prj_budget_line::find_revBudgetAmount_byProjectHeaderId($prj_i->prj_project_header_id);
@@ -326,48 +315,48 @@ LIMIT 1
    $this->message .= "<br>Project completion % is 0 ";
    throw new Exception("ZERO_PROJECT_COMPLETION");
   }
-  $rev_amount = ($percent_val * $total_budget_amount) / 100;
-  $existing_rev_amount = prj_revenue_line::find_totalRevenue_projectHeaderId($prj_i->prj_project_header_id);
-  $new_rev_amount = $rev_amount - $existing_rev_amount;
-  if ($new_rev_amount > 0) {
-   $line_description = "percent_val is $percent_val, total_budget_amount is $total_budget_amount and existing rev amount is $existing_rev_amount ";
-   $rev_line_params_a = [
-    'new_rev_amount' => $new_rev_amount,
+  $invoice_amount = ($percent_val * $total_budget_amount) / 100;
+  $existing_invoice_amount = prj_invoice_line::find_totalinvoice_projectHeaderId($prj_i->prj_project_header_id);
+  $new_invoice_amount = $invoice_amount - $existing_invoice_amount;
+  if ($new_invoice_amount > 0) {
+   $line_description = "percent_val is $percent_val, total_budget_amount is $total_budget_amount and existing rev amount is $existing_invoice_amount ";
+   $inv_line_params_a = [
+    'new_inv_amount' => $new_invoice_amount,
     'line_description' => $line_description,
     'revenue_source' => 'PERCENT_COMPLETE',
     'revenue_category' => 'EVENT',
     'reference_key_name' => 'prj_percent_headerrev|prj_percent_header_id',
     'reference_key_value' => $percent_comp[0]->prj_percent_header_id,
    ];
-   $this->_create_revenueLines($prj_revenue_i, $rev_line_params_a);
+   $this->_create_invoiceLines($prj_invoice_i, $inv_line_params_a);
   } else {
-   $this->message .= "<br>New revenue amount is less than equal to zero as project percent completion status ";
-   throw new Exception("ZERO_REVENUE_AMOUNT");
+   $this->message .= "<br>New invoice amount is less than equal to zero as project percent completion status ";
+   throw new Exception("ZERO_invoice_AMOUNT");
   }
  }
 
- private function _create_revenueByCostToCost($prj_i) {
-  //check if project revenue exists
-  $prj_revenue_i = self::find_byProjectHeaderId($prj_i->prj_project_header_id);
-  if ($prj_revenue_i) {
-   $prj_revenue_lines_i = prj_revenue_line::find_by_parent_id($prj_revenue_i->prj_revenue_header_id);
+ private function _create_invoiceByCostToCost($prj_i) {
+  //check if project invoice exists
+  $prj_invoice_i = self::find_byProjectHeaderId($prj_i->prj_project_header_id);
+  if ($prj_invoice_i) {
+   $prj_invoice_lines_i = prj_invoice_line::find_by_parent_id($prj_invoice_i->prj_invoice_header_id);
   } else {
-   //create revenue header
-   $prj_revenue_i = $this->_create_revenueHeader($prj_i);
+   //create invoice header
+   $prj_invoice_i = $this->_create_invoiceHeader($prj_i);
   }
 
-  if (empty($prj_revenue_i)) {
-   $this->message .= "<br>Uanble to create/find project revenue details ";
+  if (empty($prj_invoice_i)) {
+   $this->message .= "<br>Uanble to create/find project invoice details ";
    throw new Exception("NO_PROJECT_HEADER_FOUND");
   } else {
-   $this->message .= '<br>Using project revenue header id ' . $prj_revenue_i->prj_revenue_header_id;
+   $this->message .= '<br>Using project invoice header id ' . $prj_invoice_i->prj_invoice_header_id;
   }
 
   /*
    * 1. Find the ratio of actual cost to the approved budgeted cost 
-   * 2. Find the total budgeted revenue and mulitply  cost ratio to get total revenue
-   * 3. Find the total created revenue
-   * 4. New revenue = 1 - 2 and create a new line for the revenue header
+   * 2. Find the total budgeted invoice and mulitply  cost ratio to get total invoice
+   * 3. Find the total created invoice
+   * 4. New invoice = 1 - 2 and create a new line for the invoice header
    */
 
   $budgeted_cost = prj_budget_line::find_budget_by_ProjectHeaderIdBudgetType($prj_i->prj_project_header_id, 'APPR_COST');
@@ -391,53 +380,54 @@ LIMIT 1
    throw new Exception('NO_APPROVED_REVENUE_BUDGET');
   }
 
-  $rev_amount = ($cost_ratio * $total_budget_amount) / 100;
-  $existing_rev_amount = prj_revenue_line::find_totalRevenue_projectHeaderId($prj_i->prj_project_header_id);
-  $new_rev_amount = $rev_amount - $existing_rev_amount;
+  $inv_amount = ($cost_ratio * $total_budget_amount) / 100;
+  $existing_inv_amount = prj_invoice_line::find_totalinvoice_projectHeaderId($prj_i->prj_project_header_id);
+  $new_inv_amount = $inv_amount - $existing_inv_amount;
 
-  if ($new_rev_amount > 0) {
-   $line_description = "cost_ratio is $cost_ratio, total_budget_amount is $total_budget_amount and existing rev amount is $existing_rev_amount ";
-   $rev_line_params_a = [
-    'new_rev_amount' => $new_rev_amount,
+  if ($new_inv_amount > 0) {
+   $line_description = "cost_ratio is $cost_ratio, total_budget_amount is $total_budget_amount and existing inv amount is $existing_inv_amount ";
+   $inv_line_params_a = [
+    'new_inv_amount' => $new_inv_amount,
     'line_description' => $line_description,
     'revenue_source' => 'ACTUAL_COST',
     'revenue_category' => 'COST_TO_COST',
     'reference_key_name' => '',
     'reference_key_value' => '',
    ];
-   $this->_create_revenueLines($prj_revenue_i, $rev_line_params_a);
+
+   $this->_create_invoiceLines($prj_invoice_i, $inv_line_params_a);
   } else {
-   $this->message .= "<br>New revenue amount is less than equal to zero as per expenditure";
-   throw new Exception("ZERO_REVENUE_AMOUNT");
+   $this->message .= "<br>New invoice amount is less than equal to zero as per expenditure";
+   throw new Exception("ZERO_invoice_AMOUNT");
   }
  }
 
- private function _create_revenueByWork($prj_i) {
+ private function _create_invoiceByWork($prj_i) {
   global $dbc;
-  //check if project revenue exists
-  $prj_revenue_i = self::find_byProjectHeaderId($prj_i->prj_project_header_id);
-  if ($prj_revenue_i) {
-   $prj_revenue_lines_i = prj_revenue_line::find_by_parent_id($prj_revenue_i->prj_revenue_header_id);
+  //check if project invoice exists
+  $prj_invoice_i = self::find_byProjectHeaderId($prj_i->prj_project_header_id);
+  if ($prj_invoice_i) {
+   $prj_invoice_lines_i = prj_invoice_line::find_by_parent_id($prj_invoice_i->prj_invoice_header_id);
   } else {
-   //create revenue header
-   $prj_revenue_i = $this->_create_revenueHeader($prj_i);
+   //create invoice header
+   $prj_invoice_i = $this->_create_invoiceHeader($prj_i);
   }
 
-  if (empty($prj_revenue_i)) {
-   $this->message .= "<br>Uanble to create/find project revenue details ";
+  if (empty($prj_invoice_i)) {
+   $this->message .= "<br>Uanble to create/find project invoice details ";
    throw new Exception("NO_PROJECT_HEADER_FOUND");
   } else {
-   $this->message .= '<br>Using project revenue header id ' . $prj_revenue_i->prj_revenue_header_id;
+   $this->message .= '<br>Using project invoice header id ' . $prj_invoice_i->prj_invoice_header_id;
   }
 
   /*
    * 1. Find all the expenditure lines with revene_calculated_cb is NULL and their expenditure type
-   * 2. Find the rates for each of the expenditures to determine the revenue line amount
-   * 3. Compare the sum of the revnue amounts against the budegted revenue.
-   * 4. If revenue amount is less than budgeted revenue then save the record else exit the loop.
+   * 2. Find the rates for each of the expenditures to determine the invoice line amount
+   * 3. Compare the sum of the revnue amounts against the budegted invoice.
+   * 4. If invoice amount is less than budgeted invoice then save the record else exit the loop.
    */
 
-  $expenditure_lines = prj_expenditure_line::find_lines_forRevenueGeneration($prj_i->prj_project_header_id);
+  $expenditure_lines = prj_expenditure_line::find_lines_forInvoiceGeneration($prj_i->prj_project_header_id);
   if (empty($expenditure_lines)) {
    $this->msg .= '<br>No expenditure lines found';
    throw new Exception('NO_EXPENDITURE');
@@ -445,21 +435,21 @@ LIMIT 1
 
   $total_budget_amount = prj_budget_line::find_revBudgetAmount_byProjectHeaderId($prj_i->prj_project_header_id);
   if (empty($total_budget_amount)) {
-   $this->msg .= '<br>No approved revenue found';
+   $this->msg .= '<br>No approved revenue budget found';
    throw new Exception('NO_APPROVED_REVENUE_BUDGET');
   }
 
-  //find revenue amount for each of the expenditure lines as per the project header rate schedule
-  $existing_rev_amount = prj_revenue_line::find_totalRevenue_projectHeaderId($prj_i->prj_project_header_id);
-  $new_rev_amount_cum = $existing_rev_amount;
+  //find invoice amount for each of the expenditure lines as per the project header rate schedule
+  $existing_inv_amount = prj_invoice_line::find_totalinvoice_projectHeaderId($prj_i->prj_project_header_id);
+  $new_inv_amount_cum = $existing_inv_amount;
   foreach ($expenditure_lines as $expenditure_line) {
-   $rev_amount = null;
+   $inv_amount = null;
    $rates = prj_expenditure_line::find_billRates_fromLineIdSchedule($expenditure_line->prj_expenditure_line_id, $prj_i->employee_schedule_id, $prj_i->job_schedule_id, $prj_i->nlr_schedule_id);
    if ($rates) {
     if (!empty($rates->rate)) {
-     $rev_amount = ($rates->quantity * $rates->rate);
+     $inv_amount = ($rates->quantity * $rates->rate);
     } else if (!empty($rates->mark_up_percentage)) {
-     $rev_amount = ($rates->line_amount * mark_up_percentage) / 100 + $rates->line_amount;
+     $inv_amount = ($rates->line_amount * mark_up_percentage) / 100 + $rates->line_amount;
     } else {
      $this->msg .= '<br>No rates found for expenditure id ' . $expenditure_line->prj_expenditure_line_id;
      throw new Exception('NO_RATE_FOUND_FOR_EXPENDITURE');
@@ -468,15 +458,15 @@ LIMIT 1
     $this->msg .= '<br>No rates found for expenditure id ' . $expenditure_line->prj_expenditure_line_id;
     throw new Exception('NO_RATE_FOUND_FOR_EXPENDITURE');
    }
-   $new_rev_amount_cum += $rev_amount;
-   if ($new_rev_amount_cum > $total_budget_amount) {
-    $this->message .= "<br>Revenue amount is more than budgeted amount ";
-    throw new Exception("REVENUE_AMOUNT_MORE_THAN_BUDGET");
+   $new_inv_amount_cum += $inv_amount;
+   if ($new_inv_amount_cum > $total_budget_amount) {
+    $this->message .= "<br>invoice amount is more than budgeted amount ";
+    throw new Exception("invoice_AMOUNT_MORE_THAN_BUDGET");
    }
-   if ($rev_amount > 0) {
-    $line_description = "Revenue amount is $rev_amount";
-    $rev_line_params_a = [
-     'new_rev_amount' => $rev_amount,
+   if ($inv_amount > 0) {
+    $line_description = "invoice amount is $inv_amount";
+    $inv_line_params_a = [
+     'new_inv_amount' => $inv_amount,
      'line_description' => $line_description,
      'revenue_source' => 'ACTUAL_COST',
      'revenue_category' => 'WORK',
@@ -484,7 +474,7 @@ LIMIT 1
      'reference_key_value' => $expenditure_line->prj_expenditure_line_id,
     ];
     try {
-     $this->_create_revenueLines($prj_revenue_i, $rev_line_params_a);
+     $this->_create_invoiceLines($prj_invoice_i, $inv_line_params_a);
      //update expenditure 
      $prj_exl_j = new prj_expenditure_line();
      $prj_exl_j->findBy_id($expenditure_line->prj_expenditure_line_id);
@@ -494,35 +484,35 @@ LIMIT 1
      $dbc->rollback = true;
     }
    } else {
-    $this->message .= "<br>New revenue amount is less than equal to zero as per expenditure";
-    throw new Exception("ZERO_REVENUE_AMOUNT");
+    $this->message .= "<br>New invoice amount is less than equal to zero as per expenditure";
+    throw new Exception("ZERO_INVOICE_AMOUNT");
    }
   }
  }
 
- private function _create_revenueByEvent($prj_i) {
-  $all_lines = prj_event_line::find_allNonRevenueLines_byProjectHeaderId($prj_i->prj_project_header_id);
+ private function _create_invoiceByEvent($prj_i) {
+  $all_lines = prj_event_line::find_allNoninvoiceLines_byProjectHeaderId($prj_i->prj_project_header_id);
   if (empty($all_lines)) {
    $this->message .= "<br>No elligible lines found for  prj_project_header_id {$prj_i->prj_project_header_id} ";
    throw new Exception("NO_ELLIGIBLE_LINES");
   }
-  //check if project revenue exists
-  $prj_revenue_i = self::find_byProjectHeaderId($prj_i->prj_project_header_id);
-  if ($prj_revenue_i) {
-   $prj_revenue_lines_i = prj_revenue_line::find_by_parent_id($prj_revenue_i->prj_revenue_header_id);
+  //check if project invoice exists
+  $prj_invoice_i = self::find_byProjectHeaderId($prj_i->prj_project_header_id);
+  if ($prj_invoice_i) {
+   $prj_invoice_lines_i = prj_invoice_line::find_by_parent_id($prj_invoice_i->prj_invoice_header_id);
   } else {
-   //create revenue header
-   $prj_revenue_i = $this->_create_revenueHeader($prj_i);
+   //create invoice header
+   $prj_invoice_i = $this->_create_invoiceHeader($prj_i);
   }
 
 
   /*
-   * 1. Find the total budgeted revenue and mulitply with % completion to get total revenue
-   * 2. Find the total created revenue
-   * 3. New revenue = 1 - 2 and create a new line for the revenue header
+   * 1. Find the total budgeted invoice and mulitply with % completion to get total invoice
+   * 2. Find the total created invoice
+   * 3. New invoice = 1 - 2 and create a new line for the invoice header
    */
-  if (empty($prj_revenue_i)) {
-   $this->message .= "<br>Uanble to create/find project revenue details ";
+  if (empty($prj_invoice_i)) {
+   $this->message .= "<br>Uanble to create/find project invoice details ";
    throw new Exception("NO_PROJECT_HEADER_FOUND");
   }
 
@@ -535,93 +525,88 @@ LIMIT 1
    throw new Exception("ZERO_PROJECT_COMPLETION");
   }
   $rev_amount = ($percent_val * $total_budget_amount) / 100;
-  $existing_rev_amount = prj_revenue_line::find_totalRevenue_projectHeaderId($prj_i->prj_project_header_id);
+  $existing_rev_amount = prj_invoice_line::find_totalinvoice_projectHeaderId($prj_i->prj_project_header_id);
   $new_rev_amount = $rev_amount - $existing_rev_amount;
   if ($new_rev_amount > 0) {
-   $this->_create_revenueLines($prj_revenue_i, $new_rev_amount);
+   $this->_create_invoiceLines($prj_invoice_i, $new_rev_amount);
   } else {
-   $this->message .= "<br>New revenue amount is less than equal to zero as project percent completion status ";
-   throw new Exception("ZERO_REVENUE_AMOUNT");
+   $this->message .= "<br>New invoice amount is less than equal to zero as project percent completion status ";
+   throw new Exception("ZERO_invoice_AMOUNT");
   }
  }
 
- private function _create_revenueHeader($prj_i) {
-  $prj_revenue_header_h = new prj_revenue_header();
-  $prj_revenue_header_h->prj_project_header_id = $prj_i->prj_project_header_id;
-  $prj_revenue_header_h->bu_org_id = $prj_i->bu_org_id;
-  $prj_revenue_header_h->revenue_status = 'ENTERED';
+ private function _create_invoiceHeader($prj_i) {
+  $prj_invoice_header_h = new prj_invoice_header();
+  $prj_invoice_header_h->prj_project_header_id = $prj_i->prj_project_header_id;
+  $prj_invoice_header_h->bu_org_id = $prj_i->bu_org_id;
+  $prj_invoice_header_h->invoice_status = 'ENTERED';
   $org_fin_details = org::find_financial_details_from_orgId($prj_i->bu_org_id);
-  $prj_revenue_header_h->ledger_id = $org_fin_details->ledger_id;
-  $prj_revenue_header_h->currency = $org_fin_details->currency_code;
-  $prj_revenue_header_h->doc_currency = $prj_i->doc_currency;
-  $prj_revenue_header_h->exchange_rate_type = 'CORP';
+  $prj_invoice_header_h->ledger_id = $org_fin_details->ledger_id;
+  $prj_invoice_header_h->currency = $org_fin_details->currency_code;
+  $prj_invoice_header_h->doc_currency = $prj_i->doc_currency;
+  $prj_invoice_header_h->exchange_rate_type = 'CORP';
 
   $gp = new gl_period();
   $gl_period_id = $gp->current_open_period($org_fin_details->ledger_id);
   if (!empty($gl_period_id)) {
-   $prj_revenue_header_h->period_id = $gl_period_id->gl_period_id;
+   $prj_invoice_header_h->period_id = $gl_period_id->gl_period_id;
   } else {
    $this->message .= "<br>No open GL period found ";
    throw new Exception("NO_OPEN_GL_PERIOD");
   }
 
-//  pa($prj_revenue_header_h);
-  if ($prj_revenue_header_h->currency == $prj_revenue_header_h->doc_currency) {
-   $prj_revenue_header_h->exchange_rate = 1;
+//  pa($prj_invoice_header_h);
+  if ($prj_invoice_header_h->currency == $prj_invoice_header_h->doc_currency) {
+   $prj_invoice_header_h->exchange_rate = 1;
   } else {
-   $rate = gl_currency_conversion::find_rate($prj_revenue_header_h->doc_currency, $prj_revenue_header_h->currency, 'CORP');
-   $prj_revenue_header_h->exchange_rate = $rate;
-  }
-  $defalt_act_revenue = prj_default_account::find_default_account('REVENUE', $prj_i->prj_project_type_id, $prj_i->accounting_group);
-  if ($defalt_act_revenue) {
-   $prj_revenue_header_h->revenue_coa_id = $defalt_act_revenue->ac_id;
-  } else {
-   $this->message .= "<br>No revenue account found. Complete the project default account setup ";
-   throw new Exception("NO_REVENUE_ACCOUNT");
+   $rate = gl_currency_conversion::find_rate($prj_invoice_header_h->doc_currency, $prj_invoice_header_h->currency, 'CORP');
+   $prj_invoice_header_h->exchange_rate = $rate;
   }
 
+  //unearned revenue
   $defalt_act_urevenue = prj_default_account::find_default_account('UNEARNED_REVENUE', $prj_i->prj_project_type_id, $prj_i->accounting_group);
   if ($defalt_act_urevenue) {
-   $prj_revenue_header_h->unearned_coa_id = $defalt_act_urevenue->ac_id;
+   $prj_invoice_header_h->unearned_coa_id = $defalt_act_urevenue->ac_id;
   } else {
    $this->message .= "<br>No Unearned revenue account found. Complete the project default account setup ";
    throw new Exception("NO_UNEARNED_REVENUE_ACCOUNT");
   }
 
+  //unbilled receviable
   $defalt_act_ureceivable = prj_default_account::find_default_account('UNBILL_RECE', $prj_i->prj_project_type_id, $prj_i->accounting_group);
   if ($defalt_act_ureceivable) {
-   $prj_revenue_header_h->unbilled_coa_id = $defalt_act_ureceivable->ac_id;
+   $prj_invoice_header_h->unbilled_coa_id = $defalt_act_ureceivable->ac_id;
   } else {
    $this->message .= "<br>No unbilled Receivables account found. Complete the project default account setup ";
    throw new Exception("NO_UNBILLED_RECEIVABLES_ACCOUNT");
   }
 
-//  pa($prj_revenue_header_h);
-  $prj_revenue_header_h->save();
-  return $prj_revenue_header_h;
+//  pa($prj_invoice_header_h);
+  $prj_invoice_header_h->save();
+  return $prj_invoice_header_h;
  }
 
- private function _create_revenueLines($prj_revenue_i, array $rev_line_params_a) {
-  $prj_revenue_line_l = new prj_revenue_line();
-  $prj_revenue_line_l->prj_revenue_header_id = $prj_revenue_i->prj_revenue_header_id;
-  $prj_revenue_line_l->revenue_source = $rev_line_params_a['revenue_source'];
-  $prj_revenue_line_l->revenue_category = $rev_line_params_a['revenue_category'];
-  $prj_revenue_line_l->amount = $rev_line_params_a['new_rev_amount'];
-  $prj_revenue_line_l->description = $rev_line_params_a['line_description'];
-  $prj_revenue_line_l->reference_key_name = $rev_line_params_a['reference_key_name'];
-  $prj_revenue_line_l->reference_key_value = $rev_line_params_a['reference_key_value'];
+ private function _create_invoiceLines($prj_invoice_i, array $rev_line_params_a) {
+  $prj_invoice_line_l = new prj_invoice_line();
+  $prj_invoice_line_l->prj_invoice_header_id = $prj_invoice_i->prj_invoice_header_id;
+  $prj_invoice_line_l->revenue_source = $rev_line_params_a['revenue_source'];
+  $prj_invoice_line_l->revenue_category = $rev_line_params_a['revenue_category'];
+  $prj_invoice_line_l->amount = $rev_line_params_a['new_rev_amount'];
+  $prj_invoice_line_l->description = $rev_line_params_a['line_description'];
+  $prj_invoice_line_l->reference_key_name = $rev_line_params_a['reference_key_name'];
+  $prj_invoice_line_l->reference_key_value = $rev_line_params_a['reference_key_value'];
 
-  $max_line_num = prj_revenue_line::find_highest_line_num($prj_revenue_i->prj_revenue_header_id);
-  $prj_revenue_line_l->line_number = !empty($max_line_num) ? $max_line_num + 1 : 1;
+  $max_line_num = prj_invoice_line::find_highest_line_num($prj_invoice_i->prj_invoice_header_id);
+  $prj_invoice_line_l->line_number = !empty($max_line_num) ? $max_line_num + 1 : 1;
   try {
-   $prj_revenue_line_l->save();
-   $this->message .= "<br>Project revenue line is successfully created";
+   $prj_invoice_line_l->save();
+   $this->message .= "<br>Project invoice line is successfully created";
   } catch (Exception $e) {
-   $this->message .= "<br>Unable to save revenue lines";
+   $this->message .= "<br>Unable to save invoice lines";
   }
  }
 
- public function prg_generate_draft_revenue($seralized_parameters) {
+ public function prg_generate_draft_invoice($seralized_parameters) {
   $parameters = unserialize($seralized_parameters);
   $this->message = '<br> Start of Distribute Cost Program ';
 
@@ -646,9 +631,9 @@ LIMIT 1
   if (!empty($this->_prj_project_header_id_from) && !empty($this->_prj_project_header_id_to)) {
    for ($i = $this->_prj_project_header_id_from; $i <= $this->_prj_project_header_id_to; $i++) {
     try {
-     $this->_create_draft_revenue($i);
+     $this->_create_draft_invoice($i);
     } catch (Exception $e) {
-     $this->message .= "<br>Failed to complete create draft revenue program " . $e->getMessage();
+     $this->message .= "<br>Failed to complete create draft invoice program " . $e->getMessage();
     }
    }
   } else if (!empty($this->_prj_project_header_id_from)) {
@@ -656,9 +641,9 @@ LIMIT 1
    if ($all_projects) {
     foreach ($all_projects as $project) {
      try {
-      $this->_create_draft_revenue($project->prj_project_header_id);
+      $this->_create_draft_invoice($project->prj_project_header_id);
      } catch (Exception $e) {
-      $this->message .= "<br>Failed to complete create draft revenue program " . $e->getMessage();
+      $this->message .= "<br>Failed to complete create draft invoice program " . $e->getMessage();
      }
     }
    }
@@ -667,28 +652,28 @@ LIMIT 1
    if ($all_projects) {
     foreach ($all_projects as $project) {
      try {
-      $this->_create_draft_revenue($project->prj_project_header_id);
+      $this->_create_draft_invoice($project->prj_project_header_id);
      } catch (Exception $e) {
-      $this->message .= "<br>Failed to complete create draft revenue program " . $e->getMessage();
+      $this->message .= "<br>Failed to complete create draft invoice program " . $e->getMessage();
      }
     }
    }
   } else {
-   //find all projects with line in NULL or ENTERED status and generate draft revenue for them
+   //find all projects with line in NULL or ENTERED status and generate draft invoice for them
    $this->message .= '<br>Running program for all available projects ';
    $all_lines_a = prj_expenditure_line::find_distinctProject_byStatus();
    if ($all_lines_a) {
     foreach ($all_lines_a as $el_obj) {
-     $this->_create_draft_revenue($el_obj->prj_project_header_id);
+     $this->_create_draft_invoice($el_obj->prj_project_header_id);
     }
    }
   }
   return $this->message;
  }
 
- public function prg_create_revenue_account($seralized_parameters) {
+ public function prg_create_invoice_account($seralized_parameters) {
   $parameters = unserialize($seralized_parameters);
-  $this->message = '<br> Start revenue accounting Program ';
+  $this->message = '<br> Start invoice accounting Program ';
 
   if (!empty($parameters['bu_org_id'][0])) {
    $this->bu_org_id = $parameters['bu_org_id'][0];
@@ -713,7 +698,7 @@ LIMIT 1
     try {
      $this->_create_gl_interface_lines($i);
     } catch (Exception $e) {
-     $this->message .= "<br>Failed to complete create draft revenue program " . $e->getMessage();
+     $this->message .= "<br>Failed to complete create draft invoice program " . $e->getMessage();
     }
    }
   } else if (!empty($this->_prj_project_header_id_from)) {
@@ -723,7 +708,7 @@ LIMIT 1
      try {
       $this->_create_gl_interface_lines($project->prj_project_header_id);
      } catch (Exception $e) {
-      $this->message .= "<br>Failed to complete create draft revenue program " . $e->getMessage();
+      $this->message .= "<br>Failed to complete create draft invoice program " . $e->getMessage();
      }
     }
    }
@@ -734,17 +719,17 @@ LIMIT 1
      try {
       $this->_create_gl_interface_lines($project->prj_project_header_id);
      } catch (Exception $e) {
-      $this->message .= "<br>Failed to complete create draft revenue program " . $e->getMessage();
+      $this->message .= "<br>Failed to complete create draft invoice program " . $e->getMessage();
      }
     }
    }
   } else {
-   //find all projects revenue lines where journal header id is null
+   //find all projects invoice lines where journal header id is null
    $this->message .= '<br>Running program for all available projects ';
    $all_lines_a = prj_expenditure_line::find_distinctProject_byStatus();
    if ($all_lines_a) {
     foreach ($all_lines_a as $el_obj) {
-     $this->_create_draft_revenue($el_obj->prj_project_header_id);
+     $this->_create_draft_invoice($el_obj->prj_project_header_id);
     }
    }
   }
@@ -755,18 +740,18 @@ LIMIT 1
 // public $expclass_
 
  private function _create_gl_interface_lines($prj_project_header_id) {
-  $prj_rev_h_a = prj_revenue_header::find_by_fieldVal(['prj_project_header_id' => $prj_project_header_id]);
+  $prj_rev_h_a = prj_invoice_header::find_by_fieldVal(['prj_project_header_id' => $prj_project_header_id]);
   if ($prj_rev_h_a) {
    $prj_rev_h = $prj_rev_h_a[0];
   } else {
    return false;
   }
 
-  if ($prj_rev_h->revenue_status < 3) {
-   $this->message .= '<br>Revenue status does not allow interface to GL ';
+  if ($prj_rev_h->invoice_status < 3) {
+   $this->message .= '<br>invoice status does not allow interface to GL ';
   }
-  $sql = " SELECT * FROM prj_revenue_line ";
-  $sql .= " WHERE prj_revenue_header_id = '{$prj_rev_h->prj_revenue_header_id}' ";
+  $sql = " SELECT * FROM prj_invoice_line ";
+  $sql .= " WHERE prj_invoice_header_id = '{$prj_rev_h->prj_invoice_header_id}' ";
   $sql .= " AND gl_journal_interface_cb IS NULL ";
   $all_rev_lines = self::find_by_sql($sql);
 
@@ -813,13 +798,13 @@ LIMIT 1
   $gl_int->description = $gl_int->journal_name . '-' . current_time();
   $gl_int->balance_type = 'A';
   $gl_int->reference_type = 'table';
-  $gl_int->reference_key_name = 'prj_revenue_line';
-  $gl_int->reference_key_value = $rev_line->prj_revenue_line_id;
+  $gl_int->reference_key_name = 'prj_invoice_line';
+  $gl_int->reference_key_value = $rev_line->prj_invoice_line_id;
   $gl_int->gl_journal_interface_id = null;
-  $gl_int->code_combination_id = $rev_header->revenue_coa_id;
+  $gl_int->code_combination_id = $rev_header->invoice_coa_id;
   $gl_int->total_cr = $gl_int->total_ac_cr = $rev_line->amount;
-  $gl_int->line_reference_key_name = 'prj_revenue_line';
-  $gl_int->line_reference_key_value = $rev_line->prj_revenue_line_id;
+  $gl_int->line_reference_key_name = 'prj_invoice_line';
+  $gl_int->line_reference_key_value = $rev_line->prj_invoice_line_id;
   $gl_int->line_status = 'N';
   try {
    $gl_int->save();
@@ -828,8 +813,8 @@ LIMIT 1
    $gl_int->total_dr = $gl_int->total_ac_dr = $rev_line->amount;
    $gl_int->total_cr = $gl_int->total_cr = null;
    $gl_int->save();
-   $prl = new prj_revenue_line();
-   $prl->findBy_id($rev_line->prj_revenue_line_id);
+   $prl = new prj_invoice_line();
+   $prl->findBy_id($rev_line->prj_invoice_line_id);
    $prl->gl_journal_interface_cb = true;
    $prl->save();
   } catch (Exception $e) {
