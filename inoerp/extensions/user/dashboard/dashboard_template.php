@@ -1,18 +1,18 @@
 <link href="<?php echo HOME_URL; ?>includes/ecss/getsvgimage.css" media="all" rel="stylesheet" type="text/css" />
 <div id ="user_dashboard_divId">
  <div id="tabsHeader">
-  <form action="" method="post" id="user_header" name="user_header"><span class="heading">User Dashboard 
+  <form method="post" id="user_header" name="user_header"><span class="heading"><?php echo  gettext('User Dashboard ') ?>
     <a href="<?php echo HOME_URL ?>form.php?class_name=user_dashboard_config&mode=9&user_id=<?php echo $user_id ?>" 
        class='fa fa-cog'></a>
    </span>
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Navigation</a></li>
-     <li><a href="#tabsHeader-2">Quick Info</a></li>
-     <li><a href="#tabsHeader-3" class="get-view-content" data-view_id="11">On hand</a></li>
-     <li><a href="#tabsHeader-4" class="get-view-content" data-view_id="12">Sales Funnel</a></li>
-     <li><a href="#tabsHeader-5" class="get-view-content" data-view_id="13">Purchasing</a></li>
-     <li><a href="#tabsHeader-6">WIP Value</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Navigation') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Quick Info ') ?></a></li>
+     <li><a href="#tabsHeader-3" class="get-view-content" data-view_id="11"><?php echo gettext('On hand') ?></a></li>
+     <li><a href="#tabsHeader-4" class="get-view-content" data-view_id="12"><?php echo gettext('Purchasing') ?></a></li>
+     <li><a href="#tabsHeader-5" class="get-view-content" data-view_id="13"><?php echo gettext('Sales Funnel') ?></a></li>
+     <li><a href="#tabsHeader-6"><?php echo gettext('WIP Value') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
