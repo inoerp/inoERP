@@ -18,14 +18,14 @@
    }
    ?>
    <div id="tabsDetailA-2" class="tabContent">
-     <?php echo $f->hidden_field('extn_report_id', $$class->extn_report_id); ?>
+    <?php echo $f->hidden_field('extn_report_id', $$class->extn_report_id); ?>
     <div class="extn_report_filters">
     </div>
     <div class ="live_display_data scrollElement" >
-<?php
-echo $f->hidden_field_withId('extn_report_id', $$class->extn_report_id);
-echo!empty($$class->extn_report_id) ? $$class->show_extn_reportResult($$class->extn_report_id) : "";
-?>
+     <?php
+     echo $f->hidden_field_withId('extn_report_id', $$class->extn_report_id);
+     echo!empty($$class->extn_report_id) ? $$class->show_reportResult($$class->extn_report_id) : "";
+     ?>
     </div>
    </div>
   </div>

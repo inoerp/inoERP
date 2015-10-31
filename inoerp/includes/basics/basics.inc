@@ -1,8 +1,8 @@
 <?php
 
 require_once __DIR__ . "/../functions/functions.inc";
-require_once (dirname(__FILE__) . '/../../define_const.inc');
- const DS = DIRECTORY_SEPARATOR;
+require_once __DIR__ . '/../../define_const.inc';
+const DS = DIRECTORY_SEPARATOR;
 
 /* ---------------------Dont Update anything Below-------------------------------------- */
 //Basic Paths 

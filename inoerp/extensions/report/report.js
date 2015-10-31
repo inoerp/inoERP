@@ -1,6 +1,6 @@
 $(document).ready(function(){
-  $('body').off('click', '#display_result').on('click', '#display_result', function () {
-  getViewResult();
+  $('body').off('click', '#display_report_result').on('click', '#display_report_result', function () {
+  getReportResult();
  });
  
   $('#page_nos').on('click', 'a', function (e) {

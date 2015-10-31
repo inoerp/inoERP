@@ -225,7 +225,7 @@ trait dbObject_t {
 
  public static function find_by_sql($sql = "") {
   global $dbc;
- 
+
   try {
    $prepare = $dbc->connection->prepare($sql);
    $prepare->execute();
@@ -322,6 +322,24 @@ trait dbObject_t {
   return $result;
  }
 
+ public static function find_by_id_gl($id, $gl = '>=') {
+  global $ie;
+  global $dbc;
+  $sql = " SELECT * FROM ";
+  $sql.= static::$table_name;
+  $sql.= " WHERE " . static::$primary_column .  ' '. $gl .  " :primary_id ";
+  $stmt = $dbc->connection->prepare(" $sql ");
+  $stmt->bindParam(':primary_id', $id);
+  try {
+   $stmt->execute();
+   $result = $stmt->fetchAll(PDO::FETCH_CLASS);
+  } catch (PDOException $e) {
+   $ie->page_exception = ['dbObject findBy id Error : ' => $e->getMessage()];
+   echo "Record couldnt be saved!!: " . $e->getMessage();
+  }
+  return !empty($result) ? $result : false;
+ }
+
  public static function find_by_fieldVal(array $dieldVal_a) {
   global $ie;
   global $dbc;
@@ -335,10 +353,10 @@ trait dbObject_t {
    $k_count = 1;
    foreach ($dieldVal_a as $k => $v) {
     if ($k_count == 1) {
-     if(!empty($v)){
+     if (!empty($v)) {
       $sql.= " WHERE " . $k . "= '{$v}' ";
      }
-    } else if(!empty($v)) {
+    } else if (!empty($v)) {
      $sql.= " AND " . $k . "= '{$v}' ";
     }
     $k_count++;
@@ -647,7 +665,7 @@ trait dbObject_t {
 //   pa($stmt);
    $this->msg = 0;
    $dbc->rollback = 1;
-   echo "<br>Record couldnt be saved. Error @ ".__FILE__. ' @@line' . __LINE__ . '<br>' . $e->getMessage() . "<br>";
+   echo "<br>Record couldnt be saved. Error @ " . __FILE__ . ' @@line' . __LINE__ . '<br>' . $e->getMessage() . "<br>";
 //   if(isset($_SESSION['debug'])){
 //    echo "<br>The statement is <br>" . $stmt;
 //   }

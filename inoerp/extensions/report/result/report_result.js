@@ -87,7 +87,7 @@ $(document).ready(function() {
  });
 
 
- $('body').on('click', '.draw_svg_image', function() {
+ $('body').off('click', '.draw_svg_image').on('click', '.draw_svg_image', function() {
   var thisElement = $(this);
   var filterData = $(this).closest('div.extn_report_content').find('.extn_report_filters').find('.filtered_field:input').serializeArray();
   var sortData = $(this).closest('div.extn_report_content').find('.extn_report_filters').find('.sorted_field:input').serializeArray();

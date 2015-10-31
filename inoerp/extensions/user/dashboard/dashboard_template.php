@@ -9,7 +9,7 @@
     <ul class="tabMain">
      <li><a href="#tabsHeader-1"><?php echo gettext('Navigation') ?></a></li>
      <li><a href="#tabsHeader-2"><?php echo gettext('Quick Info ') ?></a></li>
-     <li><a href="#tabsHeader-3" class="get-view-content" data-view_id="11"><?php echo gettext('On hand') ?></a></li>
+     <li><a href="#tabsHeader-3" class="get-report-content" data-report_id="3"><?php echo gettext('On hand') ?></a></li>
      <li><a href="#tabsHeader-4" class="get-view-content" data-view_id="12"><?php echo gettext('Purchasing') ?></a></li>
      <li><a href="#tabsHeader-5" class="get-view-content" data-view_id="13"><?php echo gettext('Sales Funnel') ?></a></li>
      <li><a href="#tabsHeader-6"><?php echo gettext('WIP Value') ?></a></li>

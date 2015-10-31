@@ -9,6 +9,11 @@
  * @source code https://github.com/inoerp/inoERP
  */
 
+/**
+ * business
+ * Contains all the business information, such as - org_id, type, description,  code, etc.
+ * 
+ */
 class theme_darkgrey extends extn_theme {
 
  public static $theme_info = [

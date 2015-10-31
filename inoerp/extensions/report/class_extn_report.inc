@@ -231,7 +231,7 @@ class extn_report extends dbObject {
    ob_end_clean();
   } else {
    ob_start();
-   $extn_report_i->extn_reportResultById();
+   $extn_report_i->reportResultById();
    $content = ob_get_contents();
    ob_end_clean();
   }
@@ -592,7 +592,7 @@ class extn_report extends dbObject {
   $this->no_of_grid_columns = $extn_report_i->no_of_grid_columns;
  }
 
- public function show_extn_reportResult($extn_report_id = '') {
+ public function show_reportResult($extn_report_id = '') {
   $return_stmt = '';
   $this->extn_report_id = !empty($extn_report_id) ? $extn_report_id : $this->extn_report_id;
   if (!empty($this->extn_report_id)) {
@@ -641,7 +641,7 @@ class extn_report extends dbObject {
   return $return_stmt;
  }
 
- public function extn_reportResultById($extn_report_id = '') {
+ public function reportResultById($extn_report_id = '') {
   $this->extn_report_id = !empty($extn_report_id) ? $extn_report_id : $this->extn_report_id;
   $this->findBy_id($this->extn_report_id);
 //   echo '<link href="' . HOME_URL . 'includes/ecss/getsvgimage.css" media="all" rel="stylesheet" type="text/css" />';
@@ -659,7 +659,7 @@ class extn_report extends dbObject {
    $svgimg->legend_name = str_replace('.', '__', $this->chart_legend);
    $svgimg->chart_label = str_replace('.', '__', $this->chart_label);
    $svgimg->chart_value = str_replace('.', '__', $this->chart_value);
-   $svg_chart = $svgimg->getSvgChart_forextn_report();
+   $svg_chart = $svgimg->getSvgChart_forView();
   }
 
   if (!empty($this->extn_report_id)) {
@@ -681,7 +681,7 @@ class extn_report extends dbObject {
   $class = 'extn_report_result';
   $$class = $this;
   global $f;
-  include 'result/display/display_template.php';
+  include __DIR__.DS.'result/display/display_template.php';
   return;
  }
 

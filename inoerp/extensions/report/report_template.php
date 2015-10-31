@@ -80,7 +80,7 @@
        </div> 
       </div>
       <div id="tabsLine-2" class="tabContent">
-       <div id="basic_settings"><span class="heading"><input type="button" value="Display Result" class="button display_result" id="display_result"></span>
+       <div id="basic_settings"><span class="heading"><input type="button" value="Display Result" class="button display_result" id="display_report_result"></span>
         <div id="live_display"><label>Live Display</label>
          <div class="live_display_data scrollElement" >
           <?php echo!empty($extn_report_result) ? $extn_report_result : ""; ?>

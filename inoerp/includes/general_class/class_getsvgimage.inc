@@ -749,7 +749,7 @@ class getsvgimage extends dbObject {
   $this->_prepare_column();
   $no_of_elements = count($this->_data);
   $data_range = $this->_max_val - $this->_min_val;
-  $unit_height = ($this->_chart_height) / $data_range;
+  $unit_height = !empty($data_range) ? ($this->_chart_height) / $data_range : 0;
   $total_no_of_elemsts_with_gap = 2 * $no_of_elements;
   $bar_width = $bar_gap = ($this->_chart_width / ($total_no_of_elemsts_with_gap));
   $title_xaxis = $this->_chart_width / 2;
