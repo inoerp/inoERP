@@ -49,6 +49,7 @@ class inv_abc_assignment_header extends dbObject {
  public $initial_search = [
   'inv_abc_assignment_header_id',
   'abc_assignment_name',
+  'org_id',
  ];
  public $column = [
   'inv_abc_assignment_header_id',

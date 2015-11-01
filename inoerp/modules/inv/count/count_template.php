@@ -10,21 +10,21 @@
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
-       <ul class="column header_field">
-        <li><?php $f->l_text_field_dr_withSearch('inv_count_header_id') ?>
-         <a name="show" href="form.php?class_name=inv_count_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_count_header_id"><i class="fa fa-refresh"></i></a> 
-        </li>
-        <li><?php $f->l_text_field_d('count_name'); ?></li>
-        <li><?php $f->l_select_field_from_array('count_type', inv_count_header::$count_type_a, $$class->count_type, 'count_type', '', 1, $readonly1); ?>       </li>
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_abc_assignment_header_id select_popup clickable"><?php 
-        echo gettext('ABC Assignment') ?></label> <?php
-         echo $f->hidden_field_withId('inv_abc_assignment_header_id', $$class->inv_abc_assignment_header_id);
-         $f->text_field_dm('abc_assignment_name');
-         ?> </li>
-        <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>       </li>
-        <li><?php $f->l_ac_field_dm('adjustment_ac_id'); ?></li>
-        <li><?php $f->l_text_field_d('description'); ?></li>
-       </ul>
+      <ul class="column header_field">
+       <li><?php $f->l_text_field_dr_withSearch('inv_count_header_id') ?>
+        <a name="show" href="form.php?class_name=inv_count_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_count_header_id"><i class="fa fa-refresh"></i></a> 
+       </li>
+       <li><?php $f->l_text_field_d('count_name'); ?></li>
+       <li><?php $f->l_select_field_from_array('count_type', inv_count_header::$count_type_a, $$class->count_type, 'count_type', '', 1, $readonly1); ?>       </li>
+       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>       </li>
+       <li><?php $f = new inoform();
+        echo $f->l_val_field_dm('abc_assignment_name', 'inv_abc_assignment_header', 'abc_assignment_name', 'org_id');
+        echo $f->hidden_field_withId('inv_abc_assignment_header_id', $$class->inv_abc_assignment_header_id);
+        echo $f->hidden_field_withCLass('org_id', $$class->org_id, 'popup_value');
+        ?><i class="generic g_select_abc_assignment_name select_popup clickable fa fa-search" data-class_name="inv_abc_assignment_header"></i></li>
+       <li><?php $f->l_ac_field_dm('adjustment_ac_id'); ?></li>
+       <li><?php $f->l_text_field_d('description'); ?></li>
+      </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <ul class="column header_field">

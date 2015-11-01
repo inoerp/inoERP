@@ -152,7 +152,8 @@ class inv_count_header extends dbObject {
  public $action_class_name;
 
  public function _after_save() {
-  if (!empty($this->inv_count_header_id) && !empty($_POST['assign_abc_class_value'])) {
+   
+  if (!empty($this->inv_count_header_id) && !empty($_POST['count_per_year'][0])) {
    $abc_ref = new inv_count_abc_ref();
 
    for ($i = 0; $i < count($_POST['assign_abc_class_value']); $i++) {
@@ -249,15 +250,15 @@ class inv_count_header extends dbObject {
     $count_schedule->item_id_m = $new_schedule->item_id_m;
     $count_schedule->schedule_date = $count_start_date->format(INO_DATE_FORMAT);
     $onhand = onhand_v::find_by_itemId_orgId($count_schedule->item_id_m, $this->org_id);
-
     if ($onhand) {
      foreach ($onhand as $onhand_o) {
       $count_schedule->inv_count_schedule_id = null;
       $count_schedule->subinventory_id = $onhand_o->subinventory_id;
       if (!empty($onhand_o->locator_id)) {
        $count_schedule->locator_id = $onhand_o->locator_id;
+      }else{
+       $count_schedule->locator_id = null;
       }
-      $count_schedule->audit_trial();
       $count_schedule->save();
      }
     } else {
