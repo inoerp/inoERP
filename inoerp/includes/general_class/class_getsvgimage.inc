@@ -52,7 +52,7 @@ class getsvgimage extends dbObject {
  private $_draw_minor_grid_x = true;
  private $_draw_major_grid_y = true;
  private $_draw_minor_grid_y = true;
- private $_show_elemnt_value;
+ private $_show_elemnt_value = false;
  private $_left_margin = 30;
  private $_right_margin = 0;
  private $_top_margin = 10;
@@ -617,9 +617,10 @@ class getsvgimage extends dbObject {
     $xaxis += $point_gap;
     $x2 = $xaxis;
     $y2 = $yaxis = $this->_chart_height - ($unit_height * $value);
-    $chart .= "<rect x=\"$xaxis\" y=\"$yaxis\" width=\"5\" height=\"5\" class=\" $key $line_class line_chart  \"/>";
+    $element_title =  $value. ' ( ' . $label . ')';
+    $chart .= "<rect x=\"$xaxis\" y=\"$yaxis\" width=\"5\" height=\"5\" class=\" $key $line_class line_chart  \"    title=\"$element_title\"  />";
     if ($data_count > 0) {
-     $chart .= "<line x1=\"$x1\" y1=\"$y1\" x2=\"$x2\" y2=\"$y2\"  class=\"$line_class line_chart line\"  />";
+     $chart .= "<line x1=\"$x1\" y1=\"$y1\" x2=\"$x2\" y2=\"$y2\"  class=\"$line_class line_chart line\" title=\"$element_title\"  />";
     }
     $x1 = $x2;
     $y1 = $y2;
@@ -688,7 +689,7 @@ class getsvgimage extends dbObject {
   $this->_chart_width = $this->_chart_width - $this->_left_margin - $this->_right_margin;
   $this->_chart_width = $this->_chart_width - $legne_l_value;
 
-  $this->_height_for_xaxis_chart_label = 0;
+  $this->_height_for_xaxis_chart_label = 60;
   foreach ($this->_data as $data) {
    $value = $data['label'];
    $height_for_xaxis_chart_label_n = strlen(strval($value)) * 6;
@@ -750,7 +751,7 @@ class getsvgimage extends dbObject {
   $no_of_elements = count($this->_data);
   $data_range = $this->_max_val - $this->_min_val;
   $unit_height = !empty($data_range) ? ($this->_chart_height) / $data_range : 0;
-  $total_no_of_elemsts_with_gap = 2 * $no_of_elements;
+  $total_no_of_elemsts_with_gap = ($no_of_elements > 4 ) ? 2 * $no_of_elements : 8;
   $bar_width = $bar_gap = ($this->_chart_width / ($total_no_of_elemsts_with_gap));
   $title_xaxis = $this->_chart_width / 2;
   $title_yaxis = $this->_chart_height + $this->_bottom_margin;
@@ -770,6 +771,7 @@ class getsvgimage extends dbObject {
 
   $x_cordinate = $this->_left_margin + ($bar_gap / 2);
   $data_count = 0;
+  $bar_width_15 = 0.75 * $bar_width;
   foreach ($this->_data as $data) {
    $no_of_elements++;
    $data_class = 'data_class_' . $data_count;
@@ -778,12 +780,15 @@ class getsvgimage extends dbObject {
    $bar_height = $unit_height * $value;
    $y_cordinate = $this->_chart_height - $bar_height;
    $bar .= "<g transform=\"translate($x_cordinate,$y_cordinate)\">";
-   $bar .= "<rect width=\"$bar_width\" height=\"$bar_height\" class=\"$data_class $label \"></rect>";
-   $bar .= '<text x="0"  dx="' . $bar_width . '" y="' . $bar_height . '" dy="12" '
-    . "transform=\"rotate(45 $bar_width,$bar_height)\"" . 'class="chart_label_text x_axis" >' . $label . '</text>';
-
+   $bar .= "<rect width=\"$bar_width\" height=\"$bar_height\"  label=\"$label &nbsp; $value \" class=\"chart_value $data_class $label \">";
+   $bar .= '<title>' . $value . '&nbsp; <br>(' . $label . ')</title>';
+   $bar .= '</rect>';
+   $bar .= '<text x="0"  dx="' . $bar_width_15 . '" y="' . $bar_height . '" dy="12" data-label="' . $label . '" data-value="' . $value . '" '
+    . "transform=\"rotate(45 $bar_width_15,$bar_height)\"" . 'class="chart_label_text x_axis" >';
+   $bar .= '<title>' . $label . '</title>';
+   $bar .= $label . '</text>';
    if ($this->_show_elemnt_value) {
-    $bar .= '<text x="' . $bar_width . '" y="0"  dy="-4" class="chart_value_text" >' . $value . '</text>';
+    $bar .= '<text x="' . $bar_width_15 . '" y="0"  dy="-4" class="chart_value_text" >' . $value . '</text>';
    }
    $bar .= '</g>';
 
@@ -840,10 +845,14 @@ class getsvgimage extends dbObject {
     $y_cordinate = $this->_chart_height - $bar_height;
     $xaxis_data = $bar_width + strlen(strval($value)) * 7;
     $bar .= "<g transform=\"translate($x_cordinate,$y_cordinate)\">";
-    $bar .= "<rect width=\"$bar_width\" height=\"$bar_height\" class=\"$data_class $label $cluster_class\"></rect>";
+    $bar .= "<rect width=\"$bar_width\" height=\"$bar_height\" class=\"$data_class $label $cluster_class\">";
+    $bar .= '<title>' . $value . '&nbsp; <br>(' . $label . ')</title>';
+    $bar .= '</rect>';
     if ($xaxis_label_count == 1) {
      $bar .= '<text x="0"  dx="' . $bar_width . '" y="' . $bar_height . '" dy="12" '
-      . "transform=\"rotate(45 $bar_width,$bar_height)\"" . 'class="chart_label_text x_axis" >' . $label . '</text>';
+      . "transform=\"rotate(45 $bar_width,$bar_height)\"" . 'class="chart_label_text x_axis" >';
+     $bar .= '<title>' . $label . '</title>';
+     $bar .= $label . '</text>';
     }
     if ($this->_show_elemnt_value) {
      $bar .= '<text x="' . $bar_width . '" y="0"  dy="-4" class="chart_value_text" >' . $value . '</text>';
@@ -919,10 +928,14 @@ class getsvgimage extends dbObject {
     $label_xaxis_dx = $bar_gap / $no_of_elements;
 
     $bar .= "<g transform=\"translate($x_cordinate,$y_cordinate)\">";
-    $bar .= "<rect width=\"$bar_width\" height=\"$bar_height\" class=\"$data_class $label $cluster_class\"></rect>";
+    $bar .= "<rect width=\"$bar_width\" height=\"$bar_height\" class=\"$data_class $label $cluster_class\">";
+    $bar .= '<title>' . $value . '&nbsp; <br>(' . $label . ')</title>';
+    $bar .= '</rect>';
     if ($xaxis_label_count == 1) {
      $bar .= '<text x="0"  dx="' . $bar_width . '" y="' . $bar_height . '" dy="12" '
-      . "transform=\"rotate(45 $bar_width,$bar_height)\"" . 'class="chart_label_text x_axis" >' . $label . '</text>';
+      . "transform=\"rotate(45 $bar_width,$bar_height)\"" . 'class="chart_label_text x_axis" >';
+     $bar .= '<title>' . $label . '</title>';
+     $bar .= $label . '</text>';
     }
     if ($this->_show_elemnt_value) {
      $bar .= '<text x="' . $bar_width . '" y="0"  dy="-4" class="chart_value_text" >' . $value . '</text>';
@@ -961,7 +974,8 @@ class getsvgimage extends dbObject {
    return;
   }
   $unit_height = ($this->_chart_height) / $data_range;
-  $total_no_of_elemsts_with_gap = 2 * $no_of_elements;
+//  $total_no_of_elemsts_with_gap = 2 * $no_of_elements;
+  $total_no_of_elemsts_with_gap = ($no_of_elements > 4 ) ? 2 * $no_of_elements : 8;
   $bar_height = $bar_gap = ($this->_chart_height / ($total_no_of_elemsts_with_gap));
   $title_xaxis = $this->_chart_width - (strlen($this->_x_axis_text) * 2);
   $title_yaxis = $this->_chart_height + $this->_bottom_margin;
@@ -996,8 +1010,12 @@ class getsvgimage extends dbObject {
    $xaxis_label = 0;
    $xaxis_data = $bar_width + strlen(strval($value)) * 7;
    $bar .= "<g transform=\"translate($x_cordinate,$y_cordinate)\">";
-   $bar .= "<rect width=\"$bar_width\" height=\"$bar_height\" class=\"$data_class $label\"></rect>";
-   $bar .= '<text x="' . $xaxis_label . '" dx="-5" y="' . $yaxis_data . '"   class="chart_label_text" >' . $label . '</text>';
+   $bar .= "<rect width=\"$bar_width\" height=\"$bar_height\" class=\"$data_class $label\">";
+   $bar .= '<title>' . $value . '&nbsp; <br>(' . $label . ')</title>';
+   $bar .= '</rect>';
+   $bar .= '<text x="' . $xaxis_label . '" dx="-5" y="' . $yaxis_data . '"   class="chart_label_text" >';
+   $bar .= '<title>' . $label . '</title>';
+   $bar .= $label . '</text>';
    $bar .= '<text x="' . $xaxis_data . '" y="' . $yaxis_data . '"   class="chart_value_text" >' . $value . '</text>';
    $bar .= '</g>';
 
@@ -1056,9 +1074,13 @@ class getsvgimage extends dbObject {
     $xaxis_label = 0;
     $xaxis_data = $bar_width + strlen(strval($value)) * 7;
     $bar .= "<g transform=\"translate($x_cordinate,$y_cordinate)\">";
-    $bar .= "<rect width=\"$bar_width\" height=\"$bar_height\" class=\"$data_class $label $cluster_class \"></rect>";
+    $bar .= "<rect width=\"$bar_width\" height=\"$bar_height\" class=\"$data_class $label $cluster_class \">";
+    $bar .= '<title>' . $value . '&nbsp; <br>(' . $label . ')</title>';
+    $bar .= '</rect>';
     if ($xaxis_label_count == 1) {
-     $bar .= '<text x="' . $xaxis_label . '" dx="-5" y="' . $yaxis_data . '"   class="chart_label_text" >' . $label . '</text>';
+     $bar .= '<text x="' . $xaxis_label . '" dx="-5" y="' . $yaxis_data . '"   class="chart_label_text" >';
+     $bar .= '<title>' . $label . '</title>';
+     $bar .= $label . '</text>';
     }
     if ($this->_show_elemnt_value) {
      $bar .= '<text x="' . $xaxis_data . '" y="' . $yaxis_data . '"   class="chart_value_text" >' . $value . '</text>';
@@ -1150,9 +1172,13 @@ class getsvgimage extends dbObject {
     $xaxis_label = 0;
     $xaxis_data = $bar_width + strlen(strval($value)) * 7;
     $bar .= "<g transform=\"translate($x_cordinate,$y_cordinate)\">";
-    $bar .= "<rect width=\"$bar_width\" height=\"$bar_height\" class=\"$data_class $label $cluster_class \"></rect>";
+    $bar .= "<rect width=\"$bar_width\" height=\"$bar_height\" class=\"$data_class $label $cluster_class \">";
+    $bar .= '<title>' . $value . '&nbsp; <br>(' . $label . ')</title>';
+    $bar .= '</rect>';
     if ($xaxis_label_count == 1) {
-     $bar .= '<text x="' . $xaxis_label . '" dx="-5" y="' . $yaxis_data . '"   class="chart_label_text" >' . $label . '</text>';
+     $bar .= '<text x="' . $xaxis_label . '" dx="-5" y="' . $yaxis_data . '"   class="chart_label_text" >';
+     $bar .= '<title>' . $label . '</title>';
+     $bar .= $label . '</text>';
     }
     if ($this->_show_elemnt_value) {
      $bar .= '<text x="' . $xaxis_data . '" y="' . $yaxis_data . '"   class="chart_value_text" >' . $value . '</text>';
@@ -1264,6 +1290,7 @@ class getsvgimage extends dbObject {
    } else {
     $large_arc = 0;
    }
+   $element_title =  $value. ' ( ' .round($value / $sum_of_elements * 100, 1) . '% | '. $key . ')';
    $cum_segment += ($value / $sum_of_elements) * 360;
    $last_y_m = -($last_y);
    $next_x = $radius * cos(deg2rad($cum_segment));
@@ -1273,7 +1300,7 @@ class getsvgimage extends dbObject {
    $chart .= "<path id=\"pie_path_$count\" d=\"M$cx,$cy
 	            l$last_x, $last_y_m
               a$radius,$radius 0 $large_arc,0 $end_point_x,$end_point_y z \"
-          style=\"stroke:#660000; \" class=\"$div_class\"/>";
+          style=\"stroke:#660000; \" class=\"$div_class\"      title=\"$element_title\"       />";
    $last_x = $next_x;
    $last_y = $next_y;
    $count++;
@@ -1383,21 +1410,22 @@ class getsvgimage extends dbObject {
    $x2 = empty($x2_cordinate) ? $this->_chart_width - $cum_segment : $x2_cordinate;
    $y2 = $y1;
    $cum_segment = (($value) * $unit_width_for_funnel) / $cum_segment_divisor;
+   $element_title =  $value. ' ( ' .round($value / $sum_of_elements * 100, 1) . '% | '. $key . ')';
 
    if ($this->_show_staight_end) {
-    $x3 = (($count == $num_of_elements)  && ($value < 0.25* $sum_of_elements)) ? $x2 : $x2 - $cum_segment;
+    $x3 = (($count == $num_of_elements) && ($value < 0.25 * $sum_of_elements)) ? $x2 : $x2 - $cum_segment;
    }
    $y3 = $y2 + $height_of_this_element;
-   if ($this->_show_staight_end ) {
-    $x4 = (($count == $num_of_elements)  && ($value < 0.25* $sum_of_elements)) ? $x1 : $x1 + $cum_segment;
+   if ($this->_show_staight_end) {
+    $x4 = (($count == $num_of_elements) && ($value < 0.25 * $sum_of_elements)) ? $x1 : $x1 + $cum_segment;
    }
 
    $y4 = $y3;
 
 
 
-   $chart .= "<polygon  class='$div_class' stroke=\"black\" stroke-width=\"1\" id=\"funnel_path_$count\"  points=\"$x1 $y1 $x2 $y2 $x3 $y3 $x4 $y4\" transform=\"\"></polygon>";
-   $chart .= "<polygon class='c_$div_class' stroke=\"black\" stroke-width=\"1\" id=\"funnel_path_$count\" style=\"fill: none;\" points=\"$x1 $y1 $x2 $y2 $x3 $y3 $x4 $y4\" transform=\"\"></polygon>";
+   $chart .= "<polygon  class='$div_class' stroke=\"black\" stroke-width=\"1\" id=\"funnel_path_$count\"  points=\"$x1 $y1 $x2 $y2 $x3 $y3 $x4 $y4\" transform=\"\" title=\"$element_title\"  ></polygon>";
+   $chart .= "<polygon class='c_$div_class' stroke=\"black\" stroke-width=\"1\" id=\"funnel_path_$count\" style=\"fill: none;\" points=\"$x1 $y1 $x2 $y2 $x3 $y3 $x4 $y4\" transform=\"\" title=\"$element_title\"></polygon>";
    $x1_cordinate = $x4;
    $y1_cordinate = $y4;
    $x2_cordinate = $x3;

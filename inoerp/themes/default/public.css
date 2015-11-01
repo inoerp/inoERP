@@ -2389,3 +2389,12 @@ a.btn-info{
  background-color: rgb(240, 240, 220);
 padding: 15px 50px 5px;
 }
+
+.ino-tooltip{
+	margin:8px;
+	padding:8px;
+	border:1px solid blue;
+	background-color:yellow;
+	position: absolute;
+	z-index: 99999;
+}
