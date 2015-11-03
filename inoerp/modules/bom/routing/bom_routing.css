@@ -9,3 +9,8 @@ margin-left: -858px;
 #bom_routing_divId .class_detail_form{
 margin-top: 23px;
 }
+
+#bom_routing_line table.extra_field .class_detail_form{
+  margin-left: 0px !important;
+  margin-top: 0px;
+}

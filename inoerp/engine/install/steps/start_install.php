@@ -26,7 +26,7 @@ if (!update_htaccessFile()) {
 } else {
  $write_file_link = HOME_DIR . DS . '.htaccess';
  if (!chmod($write_file_link, 0644)) {
-  echo "<br>Failed to change the access level of .htacess file. Chage the .htaccess file to 06444 mode after installtion";
+  echo "<br>Failed to change the access level of the .htacess file. Change the .htaccess file to 06444 mode after installation";
  }
 }
 
@@ -42,9 +42,9 @@ if ($proceed) {
   $result = fwrite($db_setting_file, $dbsetting_file);
   if ($result > 0) {
    if (!chmod($db_setting_file_path, 0644)) {
-    echo "<br>Failed to change the access level of .dbsettings file. Chage the .dbsettings file to 06444 mode after installtion";
+    echo "<br>Failed to change the access level of .dbsettings file. Change the .dbsettings file to 06444 mode after installtion";
    }
-   echo "<br>Make sure that the write access from inlcudes directory, basics directory , .htaccess file and dbsettings are removed<br><br>";
+   echo "<br>Make sure that the write access from inlcudes directory, basics directory, .htaccess file and dbsettings are removed<br><br>";
   } else {
    echo "<br>Database settings file creation failed!. Verify the wrtite access to inlcudes directory, basics directory and dbsettings file<br><br>";
    $proceed = false;

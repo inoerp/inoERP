@@ -1,4 +1,4 @@
-<table class="form_line_data_table">
+<table class="form_line_data_table extra_field">
  <thead> 
   <tr>
    <th>Seq #</th>
@@ -16,7 +16,7 @@
      <td class="add_detail_values1">
       <i class="fa fa-arrow-circle-down add_detail_values_img"></i>
       <div class="class_detail_form">
-       <fieldset class="form_detail_data_fs"><legend>Extra Fields</legend>
+       <fieldset class="form_detail_data_fs">
         <div class="tabsDetailC">
          <ul class="tabMain">
           <li class="tabLink"><a href="#tabsDetailC-3-<?php echo $count ?>"> Basic Info</a></li>
