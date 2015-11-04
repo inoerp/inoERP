@@ -6,15 +6,16 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php echo gettext('Specification') ?></span>
+<div id ="form_header"><span class="heading"><?php
+  $f = new inoform();
+  echo gettext('Specification')
+  ?></span>
  <form method="post" id="qa_specification_header"  name="qa_specification_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Basic-2') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo gettext('Actions') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -22,31 +23,28 @@ inoERP
       <li><?php $f->l_text_field_dr_withSearch('qa_specification_header_id') ?>
        <a name="show" href="form.php?class_name=qa_specification_header&<?php echo "mode=$mode"; ?>" class="show document_id qa_specification_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
-      <li><?php $f->l_select_field_from_object('budget_type', option_header::find_options_byName('qa_specification_TYPE'), 'option_line_code', 'option_line_value', $$class->budget_type, 'budget_type', '', 1, $readonly1, '', '', '', 'mapper1'); ?></li>
-      <li><?php
-       echo $f->l_val_field_dm('project_number', 'prj_project_header', 'project_number', '', 'project_number', 'vf_select_project_number');
-       echo $f->hidden_field_withId('prj_project_header_id', $$class->prj_project_header_id);
-       ?><i class="generic g_select_project_number select_popup clickable fa fa-search" data-class_name="prj_project_header"></i></li>
-      <li><?php $f->l_text_field_dr('version_number'); ?></li>
-      <li><?php $f->l_text_field_d('version_name'); ?></li>
+      <li><?php $f->l_text_field_dr('specification_name'); ?></li>
       <li><?php $f->l_text_field_d('description'); ?></li> 
-      <li><?php $f->l_checkBox_field_dr('current_cb'); ?></li> 
-      <li><?php $f->l_checkBox_field_dr('original_cb'); ?></li> 
-      <li><?php $f->l_checkBox_field_dr('baselined_cb'); ?></li> 
+      <li><?php $f->l_date_fieldAnyDay('effective_from', $$class->effective_from); ?></li> 
+      <li><?php $f->l_date_fieldAnyDay('effective_to', $$class->effective_to); ?></li> 
+      <li><?php
+       echo $f->hidden_field_withId('item_id_m', $$class->item_id_m);
+       echo $f->l_val_field_d('item_number', 'item', 'item_number', 'org_id', 'vf_select_item_number');
+       ?>
+       <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i>
+      </li>
+      <li><?php
+       echo $f->l_val_field_dm('customer_name', 'ar_customer', 'customer_name', '', 'customer_name', 'vf_select_customer_name');
+       echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id);
+       ?><i class="generic g_select_customer_name select_popup clickable fa fa-search" data-class_name="ar_customer"></i></li>
+      <li><?php
+       echo $f->l_val_field_dm('supplier_name', 'supplier', 'supplier_name', '', 'supplier_name', 'vf_select_supplier_name');
+       echo $f->hidden_field_withId('supplier_id', $$class->supplier_id);
+       ?><i class="generic g_select_supplier_name select_popup clickable fa fa-search" data-class_name="supplier"></i></li>
+      <li><?php $f->l_status_field_d('status'); ?></li> 
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
-     <ul class="column header_field">
-      <li><?php $f->l_text_field_d('raw_cost'); ?></li>
-      <li><?php $f->l_text_field_d('burdened_cost'); ?></li>
-      <li><?php $f->l_text_field_d('labor_effort'); ?></li> 
-      <li><?php $f->l_text_field_d('nlr_effort'); ?></li> 
-      <li><?php $f->l_text_field_d('revenue'); ?></li> 
-      <li><?php $f->l_text_field_dr('baselined_by'); ?></li> 
-      <li><?php $f->l_date_fieldAnyDay('baselined_date', $$class->baselined_date, 'always_readonly'); ?></li> 
-     </ul>
-    </div>
-    <div id="tabsHeader-3" class="tabContent">
      <div> 
       <div id="comments">
        <div id="comment_list">
@@ -63,33 +61,20 @@ inoERP
       </div>
      </div>
     </div>
-    <div id="tabsHeader-4" class="tabContent">
+    <div id="tabsHeader-3" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
-    </div>
-    <div id="tabsHeader-5" class="tabContent">
-     <div> 
-      <ul class="column header_field">
-       <li><label>Action</label>
-        <?php
-        echo $f->select_field_from_array('action', $$class->action_a, '', 'action', '', '', $readonly, $action_readonly)
-        ?>
-       </li>
-       <li> <a type="button" class="btn btn-info" role='button' 
-               href='search.php?class_name=qa_specification_rev_header&qa_specification_header_id=<?php echo $$class->qa_specification_header_id ?>'> <i class="fa fa-history white-font-link"></i> Revisions </a>  </li>
-      </ul>
-     </div>
     </div>
    </div>
   </div>
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Budget Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Specification Lines') ?></span>
  <form action=""  method="post" id="qa_specification_line"  name="qa_specification_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Amounts') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Future') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Targets') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
@@ -99,14 +84,14 @@ inoERP
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Sequence') ?></th>
         <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Task') ?>#</th>
-        <th><?php echo gettext('Resource') ?></th>
-        <th><?php echo gettext('Description') ?></th>
-        <th><?php echo gettext('Cost Qty') ?></th>
-        <th><?php echo gettext('Raw Amount') ?></th>
-        <th><?php echo gettext('Burden') ?></th>
-        <th><?php echo gettext('Rev Qty') ?></th>
-        <th><?php echo gettext('Rev Amount') ?></th>
+        <th><?php echo gettext('uom_id') ?></th>
+        <th><?php echo gettext('User Low') ?>#</th>
+        <th><?php echo gettext('User High') ?></th>
+        <th><?php echo gettext('Spec Low') ?></th>
+        <th><?php echo gettext('Spec High') ?></th>
+        <th><?php echo gettext('Reasonable Low') ?></th>
+        <th><?php echo gettext('Reasonable High') ?></th>
+
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -123,18 +108,13 @@ inoERP
          </td>
          <td><?php $f->seq_field_d($count); ?></td>
          <td><?php $f->text_field_wid2sr('qa_specification_line_id', 'always_readonly dontCopy line_id'); ?></td>
-         <td><?php
-          $f->val_field_wid2m('task_number', 'prj_project_all_v', 'task_number', '', 'select project_task_number');
-          echo $f->hidden_field_withCLass('prj_project_line_id', $$class_second->prj_project_line_id, 'dontCopy');
-          echo $f->hidden_field_withCLass('prj_project_header_id', $$class->prj_project_header_id, 'prj_project_header_id popup_value');
-          ?><i class="generic select_project_task_number select_popup clickable fa fa-search" data-class_name="prj_project_all_v"></i></td>
-         <td><?php $f->text_field_wid2('prj_resource_line_id'); ?></td>
-         <td><?php $f->text_field_wid2('description'); ?></td>
-         <td><?php $f->text_field_wid2('quantity'); ?></td>
-         <td><?php $f->text_field_wid2('raw_cost'); ?></td>
-         <td><?php $f->text_field_wid2('burden_cost'); ?></td>
-         <td><?php $f->text_field_wid2('revenue_quantity'); ?></td>
-         <td><?php $f->text_field_wid2('revenue_amount'); ?></td>
+         <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small'); ?></td>
+         <td><?php $f->text_field_wid2('user_range_low'); ?></td>
+         <td><?php $f->text_field_wid2('user_range_high'); ?></td>
+         <td><?php $f->text_field_wid2('specification_range_low'); ?></td>
+         <td><?php $f->text_field_wid2('specification_range_high'); ?></td>
+         <td><?php $f->text_field_wid2('reasonable_range_low'); ?></td>
+         <td><?php $f->text_field_wid2('reasonable_range_high'); ?></td>
         </tr>
         <?php
         $count = $count + 1;
@@ -144,7 +124,33 @@ inoERP
      </table>
     </div>
     <div id="tabsLine-2" class="tabContent">
-
+     <table class="form_line_data_table">
+      <thead> 
+       <tr>
+        <th><?php echo gettext('Sequence') ?></th>
+        <th><?php echo gettext('user_target_value') ?></th>
+        <th><?php echo gettext('specification_target_value') ?>#</th>
+        <th><?php echo gettext('reasonable_target_value') ?></th>
+       </tr>
+      </thead>
+      <tbody class="form_data_line_tbody">
+       <?php
+       $count = 0;
+       foreach ($qa_specification_line_object as $qa_specification_line) {
+        $$class_second->task_number = !empty($$class_second->prj_project_line_id) ? prj_project_line::find_by_id($$class_second->prj_project_line_id)->task_number : '';
+        ?>         
+        <tr class="qa_specification_line<?php echo $count ?>">
+         <td><?php $f->seq_field_d($count); ?></td>
+         <td><?php $f->text_field_wid2('user_target_value'); ?></td>
+         <td><?php $f->text_field_wid2('specification_target_value'); ?></td>
+         <td><?php $f->text_field_wid2('reasonable_target_value'); ?></td>
+        </tr>
+        <?php
+        $count = $count + 1;
+       }
+       ?>
+      </tbody>
+     </table>
     </div>
    </div>
   </div>

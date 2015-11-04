@@ -1,8 +1,24 @@
-#wip_wo_divId #tabsLine-1 .class_detail_form{
-margin-left: -795px;
-  margin-top: 15px;
+#wip_wo_routing_line .class_detail_form{
+margin-left: -682px;
 }
 
-#wip_wo_divId .form_detail_data_fs{
-  width: 900px;
+#wip_wo_routing_line .form_detail_data_fs{
+  width: 682px;
+}
+
+#wip_wo_divId .class_detail_form{
+margin-top: 22px;
+}
+
+
+#tabsLine-3 .class_detail_form{
+margin-left: 0px;
+}
+
+#tabsLine-3 .form_detail_data_fs{
+  width: 912px;
+}
+
+#wip_wo_routing_line{
+ margin-top: -25px;
 }

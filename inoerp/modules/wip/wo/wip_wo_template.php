@@ -121,7 +121,7 @@ inoERP
     <li><a href="#tabsLine-5"><?php echo gettext('BOM-2') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
-    <form action=""  method="post" id="wip_wo_routing_line"  name="wip_wo_routing_line">
+    <form  method="post" id="wip_wo_routing_line"  name="wip_wo_routing_line">
      <div id ="form_line" class="form_line">
       <div id="tabsLine-1" class="tabContent">
        <table class="form_line_data_table">
@@ -174,7 +174,7 @@ inoERP
             }
             ?>
             <div class="class_detail_form">
-             <fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
+             <fieldset class="form_detail_data_fs">
               <div class="tabsDetail">
                <ul class="tabMain">
                 <li class="tabLink"><a href="#tabsDetail-1-1">Resource</a></li>
