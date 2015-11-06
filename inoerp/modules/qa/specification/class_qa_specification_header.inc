@@ -31,6 +31,12 @@ class qa_specification_header extends dbObject {
   'module_name' => 'qa',
   'weight' => 11
  ];
+ public static $specification_type_a = [
+  'ITEM_SPEC' => 'Item Specifications',
+  'SUPP_SPEC' => 'Supplier Specifications',
+  'CUST_SPEC' => 'Customer Specifications',
+  'NO_SPEC' => 'No Specifications',
+ ];
  public $field_a = [
   'qa_specification_header_id',
   'specification_name',
@@ -104,8 +110,6 @@ class qa_specification_header extends dbObject {
 //  $lines = $option_line->findBy_parentId($header->option_header_id);
 //  return $lines;
 // }
-
-
 }
 
 //end of path class
