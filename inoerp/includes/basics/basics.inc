@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/../functions/functions.inc";
 require_once __DIR__ . '/../../define_const.inc';
-const DS = DIRECTORY_SEPARATOR;
+ const DS = DIRECTORY_SEPARATOR;
 
 /* ---------------------Dont Update anything Below-------------------------------------- */
 //Basic Paths 
@@ -87,6 +87,7 @@ require_once(INC_EXTENSIONS . DS . "social_login" . DS . "class_extn_social_logi
 require_once(INC_EXTENSIONS . DS . "theme" . DS . "class_extn_theme.inc");
 require_once(INC_EXTENSIONS . DS . "comment" . DS . "class.comment.inc");
 require_once(INC_EXTENSIONS . DS . "block" . DS . "class_block.inc");
+require_once(INC_EXTENSIONS . DS . "block" . DS . "list" . DS . "class_block_list.inc");
 require_once(INC_EXTENSIONS . DS . "block" . DS . "class_block_content.inc");
 require_once(INC_EXTENSIONS . DS . "block" . DS . "class_block_cache.inc");
 
