@@ -7,7 +7,6 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id ="form_header"><span class="heading"><?php
-  $f = new inoform();
   echo gettext('Collection Plan')
   ?></span>
  <form method="post" id="qa_cp_header"  name="qa_cp_header">
@@ -23,7 +22,7 @@ inoERP
       <li><?php $f->l_text_field_dr_withSearch('qa_cp_header_id') ?>
        <a name="show" href="form.php?class_name=qa_cp_header&<?php echo "mode=$mode"; ?>" class="show document_id qa_cp_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
-      <li><?php $f->l_text_field_dr('plan_name'); ?></li>
+      <li><?php $f->l_text_field_dm('plan_name'); ?></li>
       <li><?php $f->l_text_field_d('description'); ?></li> 
       <li><?php $f->l_date_fieldAnyDay('effective_from', $$class->effective_from); ?></li> 
       <li><?php $f->l_date_fieldAnyDay('effective_to', $$class->effective_to); ?></li> 
@@ -132,6 +131,6 @@ inoERP
   <li class="btn1DivId" data-btn1DivId="qa_cp_header" ></li>
   <li class="btn2DivId" data-btn2DivId="form_line" ></li>
   <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>
-  <li class="noOfTabbs" data-noOfTabbs="2" ></li>
+  <li class="noOfTabbs" data-noOfTabbs="1" ></li>
  </ul>
 </div>

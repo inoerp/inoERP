@@ -20,7 +20,7 @@ class qa_collection_element_line extends dbObject {
  ];
  public $requiredField = [
   'qa_collection_element_header_id',
-  'value',
+  'element_value',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
   "qa_collection_element_header_id"

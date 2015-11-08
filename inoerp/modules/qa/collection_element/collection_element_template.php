@@ -25,7 +25,7 @@ inoERP
        <a name="show" href="form.php?class_name=qa_collection_element_header&<?php echo "mode=$mode"; ?>" class="show document_id qa_collection_element_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
       <li><?php $f->l_text_field_dm('element_name'); ?> </li>
-      <li><?php $f->l_text_field_dr('sys_name'); ?></li>
+      <li><?php $f->l_text_field_dr('sys_element_name'); ?></li>
       <li><?php $f->l_select_field_from_object('element_type', option_header::find_options_byName('QA_ELEMENT_TYPE'), 'option_line_code', 'option_line_value', $$class->element_type, 'element_type', '', 1, $readonly1); ?>        </li>
       <li><?php $f->l_select_field_from_object('data_type', option_header::find_options_byName('SYS_EXTRA_FIELD_TYPE'), 'option_line_code', 'option_line_value', $$class->data_type, 'data_type', '', 1, $readonly1); ?>        </li>
       <li><?php $f->l_number_field('data_length', $$class->data_length, '', 'data_length'); ?>          </li>
@@ -36,11 +36,12 @@ inoERP
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <ul class="column header_field">
-      <li><?php $f->l_text_field_d('label'); ?> </li>
+      <li><?php $f->l_text_field_d('element_label'); ?> </li>
       <li><?php $f->l_text_field_d('hint'); ?></li>
-      <li><?php $f->l_number_field('decimal', $$class->decimal, '', 'decimal'); ?>          </li>
+      <li><?php $f->l_number_field('decimal_position', $$class->decimal_position, '', 'decimal_position'); ?>          </li>
       <li><?php $f->l_text_field_d('default_value'); ?></li>
       <li><?php $f->l_text_field_d('target_value'); ?></li>
+      <li><?php $f->l_select_field_from_object('option_header_id', option_header::find_all(), 'option_header_id', 'option_type', $$class->option_header_id, 'option_header_id', '', '', $readonly1); ?>        </li>
       <div class="panel panel-collapse panel-ino-classy extra_large_box">
        <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Specification Limits') ?></div></div>
        <div class="panel-body">
@@ -118,10 +119,10 @@ inoERP
           ?>
          </td>
 
-         <td><?php form::text_field_wid2sr('qa_collection_element_line_id'); ?></td>
-         <td><?php $f->text_field_wid2r('element_value'); ?></td>
+         <td><?php echo form::text_field_wid2sr('qa_collection_element_line_id'); ?></td>
+         <td><?php $f->text_field_wid2('element_value'); ?></td>
          <td><?php $f->text_field_wid2('description'); ?></td>
-         <td><?php $f->date_field('end_date', $$class_second->end_date); ?></td>
+         <td><?php echo $f->date_field('end_date', $$class_second->end_date); ?></td>
         </tr>
         <?php
         $count = $count + 1;
@@ -144,7 +145,7 @@ inoERP
         <th><?php echo gettext('Comparison') ?></th>
         <th><?php echo gettext('Value From') ?></th>
         <th><?php echo gettext('Value To') ?></th>
-        <th><?php echo gettext('Exact Value') ?></th>
+        <th><?php echo gettext('Spec Value') ?></th>
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Description') ?></th>
        </tr>
@@ -164,12 +165,12 @@ inoERP
           </ul>
          </td>
          <td><?php form::text_field_wid3sr('qa_collection_element_action_id'); ?></td>
-         <td><?php echo $f->select_field_from_array('condition' , dbObject::$control_type_a, $$class_third->condition ,'' ,'medium'); ?></td>
-         <td><?php echo $f->text_field_wid3('comparison' ); ?></td>
+         <td><?php echo $f->select_field_from_array('action_condition' , dbObject::$control_type_a, $$class_third->action_condition ,'' ,'medium'); ?></td>
+         <td><?php echo $f->select_field_from_array('comparison' , qa_collection_element_action::$comparison_a, $$class_third->comparison ,'' ,'medium'); ?></td>
          <td><?php echo $f->text_field_wid3('value_from'); ?></td>
          <td><?php echo $f->text_field_wid3('value_to'); ?></td>
-         <td><?php echo $f->text_field_wid3('exact_value'); ?></td>
-         <td><?php echo $f->text_field_wid3('action_id'); ?></td>
+         <td><?php echo $f->select_field_from_array('spec_value' , qa_collection_element_action::$spec_value_a, $$class_third->spec_value ,'' ,'medium'); ?></td>
+         <td><?php echo $f->select_field_from_object('quality_action', option_header::find_options_byName('QA_QUALITY_ACTION'), 'option_line_code', 'option_line_value', $$class_third->quality_action) ;  ?></td>
          <td><?php echo $f->text_field_wid3('description'); ?></td>
           </tr>
         <?php

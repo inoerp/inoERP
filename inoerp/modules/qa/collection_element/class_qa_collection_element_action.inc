@@ -5,18 +5,30 @@ class qa_collection_element_action extends dbObject {
  public static $table_name = "qa_collection_element_action";
  public static $primary_column = "qa_collection_element_action_id";
  public static $parent_primary_column = "qa_collection_element_header_id";
- public static $key_column = 'condition';
+ public static $key_column = 'action_condition';
  public static $module = "qa";
+ public static $comparison_a = [
+  'VALUE' => 'Value',
+  'SPEC_LIMIT' => 'Specification Limit'
+ ];
+ public static $spec_value_a = [
+  'UR_L' => 'User Range Low',
+  'UR_H' => 'User Range High',
+  'SR_L' => 'Specification Range Low',
+  'SR_H' => 'Specification Range High',
+  'RR_L' => 'Resonable Range Low',
+  'RR_L' => 'Resonable Range High',
+ ];
 //  data base variables as stored database column name
  public $field_a = [
   'qa_collection_element_action_id',
   'qa_collection_element_header_id',
-  'condition',
+  'action_condition',
   'comparison',
   'value_from',
   'value_to',
-  'exact_value',
-  'action_id',
+  'spec_value',
+  'quality_action',
   'description',
   'end_date',
   'created_by',
@@ -29,17 +41,17 @@ class qa_collection_element_action extends dbObject {
  ];
  public $requiredField = [
   'qa_collection_element_header_id',
-  'condition',
+  'action_condition',
   'comparison',
  ];
  public $qa_collection_element_action_id;
  public $qa_collection_element_header_id;
- public $condition;
+ public $action_condition;
  public $comparison;
  public $value_from;
  public $value_to;
- public $exact_value;
- public $action_id;
+ public $spec_value;
+ public $quality_action;
  public $description;
  public $end_date;
  public $created_by;

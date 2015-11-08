@@ -41,6 +41,7 @@ class qa_collection_element_header extends dbObject {
   'CHECK_BOX' => 'Check Box',
   'IMAGE' => 'Image'
  ];
+ 
  public $field_a = [
   'qa_collection_element_header_id',
   'element_name',
@@ -50,9 +51,10 @@ class qa_collection_element_header extends dbObject {
   'data_length',
   'display_type',
   'element_type',
-  'label',
+  'element_label',
   'hint',
-  'decimal',
+  'option_header_id',
+  'decimal_position',
   'uom_id',
   'default_value',
   'target_value',
@@ -92,10 +94,11 @@ class qa_collection_element_header extends dbObject {
  public $data_length;
  public $display_type;
  public $element_type;
- public $label;
+ public $element_label;
  public $hint;
- public $decimal;
+ public $decimal_position;
  public $uom_id;
+ public $option_header_id;
  public $default_value;
  public $target_value;
  public $user_range_low;
@@ -169,15 +172,16 @@ class qa_collection_element_header extends dbObject {
   $sql .="  reference_entity varchar(50) DEFAULT NULL , ";
   $sql .="  reference_key_name varchar(50) DEFAULT NULL , ";
   $sql .="  reference_key_value int(12) DEFAULT NULL , ";
+  $sql .="  qa_cp_header_id int(12) DEFAULT NULL , ";
   $sql .="  created_by varchar(256) NOT NULL , ";
   $sql .="  creation_date date NOT NULL , ";
   $sql .="  last_update_by varchar(256) NOT NULL , ";
   $sql .="  last_update_date date NOT NULL , ";
   $sql .="  $value_column $field_type ";
   if (in_array($field_type, array('VARCHAR', 'INT'))) {
-   $sql .="(" . $this->field_length . ")";
+   $sql .="(" . $this->data_length . ")";
   } else if (($field_type == 'DECIMAL')) {
-   $sql .=" (20,$this->field_length) ";
+   $sql .=" (20,$this->data_length) ";
   }
   $sql .=" DEFAULT NULL ";
   $sql .=" , ";
@@ -208,11 +212,11 @@ class qa_collection_element_header extends dbObject {
  }
 
  public function _after_save() {
-  if (!empty($this->qa_colletion_element_id)) {
+  if (!empty($this->qa_collection_element_header_id)) {
    /* verify that table exists 
      -If not create the table
     */
-   $table_name = 'qa_e_' . $this->sys_element_name;
+   $table_name = 'qa_ce_' . $this->sys_element_name;
    $existing_table_info = $this->_verify_table_exists($table_name);
 
    if (empty($existing_table_info)) {

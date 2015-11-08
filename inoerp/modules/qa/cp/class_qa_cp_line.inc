@@ -69,6 +69,21 @@ class qa_cp_line extends dbObject {
  public $last_update_by;
  public $last_update_date;
 
+ public static function find_by_parent_id($qa_cp_header_id , $order_by_field ='', $order_by_seq='') {
+  $sql = "  SELECT qcl.qa_cp_line_id , qcl.qa_cp_header_id , qcl.qa_collection_element_header_id,
+qceh.element_name, qceh.sys_element_name, qceh.data_type, qceh.data_length, qceh.display_type, qceh.element_type,
+qceh.element_label, qceh.option_header_id
+FROM  qa_cp_line qcl,
+qa_collection_element_header qceh
+WHERE qceh.qa_collection_element_header_id = qcl.qa_collection_element_header_id
+AND qcl.qa_cp_header_id = '{$qa_cp_header_id}' ";
+
+ $result = self::find_by_sql($sql);
+ 
+ return !empty($result) ? $result : false;
+ 
+ }
+
 }
 
 //end of path class
