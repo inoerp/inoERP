@@ -55,6 +55,7 @@ class qa_cp_header extends dbObject {
  public $search = [
   '_show_update_path' => 1,
   '_show_view_path' => 1,
+ 
  ];
  public $pageTitle = " Collection Plan "; //page Title
  public $qa_cp_header_id;

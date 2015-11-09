@@ -41,7 +41,6 @@ class qa_collection_element_header extends dbObject {
   'CHECK_BOX' => 'Check Box',
   'IMAGE' => 'Image'
  ];
- 
  public $field_a = [
   'qa_collection_element_header_id',
   'element_name',
@@ -205,6 +204,10 @@ class qa_collection_element_header extends dbObject {
   return strtolower(str_replace(' ', '_', trim($field_name)));
  }
 
+ public static function tableName_from_elementName($field_name) {
+  return 'qa_ce_' . $field_name;
+ }
+
  public function _before_save() {
   if (empty($this->sys_element_name)) {
    $this->sys_element_name = self::sysElementName_from_elementName($this->element_name);
@@ -216,7 +219,8 @@ class qa_collection_element_header extends dbObject {
    /* verify that table exists 
      -If not create the table
     */
-   $table_name = 'qa_ce_' . $this->sys_element_name;
+//   $table_name = 'qa_ce_' . $this->sys_element_name;
+   $table_name = self::tableName_from_elementName($this->sys_element_name);
    $existing_table_info = $this->_verify_table_exists($table_name);
 
    if (empty($existing_table_info)) {
