@@ -82,6 +82,7 @@ class user_dashboard_v extends dbObject {
   'wip' => ['div_class' => 'fa-tasks', 'description' => 'WIP & MES'],
   'fp' => ['div_class' => 'fa-th-large', 'description' => 'Forecast & Planning'],
   'am' => ['div_class' => 'fa-wrench', 'description' => 'Asset Maintenance'],
+  'qa' => ['div_class' => 'fa-flask', 'description' => 'Quality'],
   'pos' => ['div_class' => 'fa-shopping-cart', 'description' => 'Point Of Sale'],
   'ec' => ['div_class' => 'fa-globe', 'description' => 'eCommerce'],
   'gl' => ['div_class' => 'fa-money', 'description' => 'General Ledger'],
@@ -95,6 +96,7 @@ class user_dashboard_v extends dbObject {
   'adm' => ['div_class' => 'fa-database', 'description' => 'Admin'],
   'sys' => ['div_class' => 'fa-cogs', 'description' => 'Global Setup'],
   'ext' => ['div_class' => 'fa-sliders', 'description' => 'Extensions'],
+  
  ];
 
  public function user_contents() {
