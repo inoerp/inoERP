@@ -2,9 +2,9 @@
  <div class='row small-left-padding'>
   <div id="form_all">
    <div id="form_headerDiv"><span class="heading"><?php echo gettext('Financial Calendars') ?></span>
-    <form action=""  method="post" id="gl_calendar_line"  name="calendar_line">
+    <form  method="post" id="gl_calendar_line"  name="calendar_line">
      <div class='tabContainer'>
-      <?php $f->l_select_field_from_object('option_line_code', gl_calendar::gl_calendar_names(), 'option_line_code', 'option_line_value', $option_line_code_h, 'option_line_code', '', 1, $readonly); ?>
+      <?php $f->l_select_field_from_object('option_line_code', gl_calendar::gl_calendar_names(), 'option_line_code', 'option_line_value', $option_line_code_h, 'option_line_code', 'action', 1, $readonly); ?>
       <a name="show" href="form.php?class_name=gl_calendar&<?php echo "mode=$mode"; ?>" class="show document_id gl_calendar_id">
        <i class='fa fa-refresh'></i></a> 
      </div>
@@ -34,7 +34,7 @@
           </thead>
           <tbody class="form_data_line_tbody calendar_values" >
            <?php
-           $count = 0;
+           $count = 0; $f = new inoform();
            $calendar_object_ai = new ArrayIterator($calendar_object);
            $calendar_object_ai->seek($position);
            while ($calendar_object_ai->valid()) {
@@ -43,18 +43,18 @@
             <tr class="gl_calendar<?php echo $count ?>">
              <td>
               <?php
-              echo ino_inline_action($$class->gl_calendar_id, array('option_line_code' => $$class->option_line_code));
+              echo ino_inline_action($$class->gl_calendar_id, array('option_line_code' => $option_line_code_h));
               ?>
              </td>
              <td><?php form::number_field_drs('gl_calendar_id') ?></td>
              <td><?php echo form::select_field_from_object('calendar_type', gl_calendar::period_types(), 'option_line_code', 'option_line_value', $$class->calendar_type, '', $readonly); ?></td>
-             <td><?php form::text_field_widsm('name_prefix'); ?></td>
-             <td class="yearPicker"><?php form::number_field_widsm('year'); ?></td>
-             <td><?php form::number_field_widsm('quarter'); ?></td>
-             <td><?php form::number_field_widsm('number'); ?></td>
-             <td><?php echo form::date_fieldAnyDay_m('from_date', $$class->from_date, 1, 'date'); ?></td>
-             <td><?php echo form::date_fieldAnyDay_m('to_date', $$class->to_date, 1, 'date'); ?></td>
-             <td><?php form::text_field_widsrm('name'); ?></td>
+             <td><?php form::text_field_widm('name_prefix'); ?></td>
+             <td class="yearPicker"><?php form::number_field_wid('year'); ?></td>
+             <td><?php form::number_field_wids('quarter'); ?></td>
+             <td><?php form::number_field_wids('number'); ?></td>
+             <td><?php echo $f->date_fieldAnyDay_m('from_date', $$class->from_date, ''); ?></td>
+             <td><?php echo $f->date_fieldAnyDay_m('to_date', $$class->to_date, ''); ?></td>
+             <td><?php $f->text_field_widr('name','always_readonly'); ?></td>
             </tr>
             <?php
             $calendar_object_ai->next();
