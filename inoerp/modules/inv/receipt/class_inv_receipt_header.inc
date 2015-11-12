@@ -36,6 +36,7 @@ class inv_receipt_header extends dbObject {
   'weight' => 12
  ];
 public static $transaction_type_id_a = [
+ '4' => 'PO Receipt',
  '5' => 'PO Delivery',
  '21' => 'PO Return'
 ];
@@ -84,7 +85,7 @@ public static $transaction_type_id_a = [
  public $search = [
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Receipt - Create & View Receipts"; //page Title
+ public $pageTitle = "Inventory Receipt"; //page Title
  public $option_lists = [
   'inv_transaction_class' => 'TRANSACTION_TYPE_CLASS'
  ];

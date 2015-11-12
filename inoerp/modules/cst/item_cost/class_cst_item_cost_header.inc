@@ -335,7 +335,7 @@ class cst_item_cost_header extends dbObject {
    try {
     array_push($new_records_a, $cost_line);
     $icl->save();
-    $message .= "<br>Frozen cost line is Successfullysaved!";
+    $message .= "<br>Frozen cost line is Successfully Saved!";
    } catch (Exception $e) {
     $message .= "<br>Saving frozen cost line failed!" . $e->getMessage();
    }

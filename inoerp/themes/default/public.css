@@ -1459,7 +1459,7 @@ ul.inline-block {
  margin-left: 5px !important;
 }
 
-.popup.popup-form {
+a.popup {
  font-size: 1.2em;
  margin-left: 1.5em;
  color: green;
@@ -2397,4 +2397,8 @@ padding: 15px 50px 5px;
 	background-color:yellow;
 	position: absolute;
 	z-index: 99999;
+}
+
+.ino-left-30-n{
+        margin-left: -30px;
 }

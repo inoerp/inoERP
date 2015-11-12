@@ -79,14 +79,15 @@ class inv_receipt_line extends dbObject {
   'so_number',
   'so_line_number',
   'io_order_number',
-  'io_line_number;'
+  'io_line_number',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
   "inv_receipt_header_id",
   'org_id',
   'received_quantity',
-  'quantity'
+  'quantity',
  ];
+
  public $requiredField = [
   'inv_receipt_header_id',
   'subinventory_id',
@@ -168,6 +169,7 @@ class inv_receipt_line extends dbObject {
  private $_po_line_id;
  private $_gl_journal_header_id;
  private $_ppv_ac_id;
+ 
 
  Public static function inv_transaction_class() {
   $option_header = option_header::find_by_name('TRANSACTION_TYPE_CLASS');
@@ -176,6 +178,13 @@ class inv_receipt_line extends dbObject {
  }
 
  public function _after_save() {
+//  pa($this);
+  if (!empty($this->transaction_type_id) && ($this->transaction_type_id != '4')) {
+   $this->_after_save_transactions();
+  }
+ }
+
+ private function _after_save_transactions() {
   global $dbc;
   if (!empty($this->inv_receipt_line_id) && !empty($this->po_detail_id)) {
    $update_satus = 0;
@@ -228,14 +237,13 @@ class inv_receipt_line extends dbObject {
    $this->_after_save_rmaReceipt();
   } else if (!empty($this->inv_receipt_line_id) && !empty($this->inv_interorg_transfer_line_id)) {
    if (!empty($this->item_id_m)) {
-    try{
+    try {
      $this->_create_inv_transactions();
      $this->_after_save_interOrgReceipt();
-    }catch(Exception $e){
+    } catch (Exception $e) {
      echo "<br> Not able to complete inventory transaction. Error @ inv_transaction " . __LINE__ . '<br>' . $e->getMessage();
      $dbc->rollback = true;
     }
-    
    }
   }
  }

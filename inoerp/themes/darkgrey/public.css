@@ -362,12 +362,7 @@ ul.pages { padding-left: 2em; list-style: square; }
 
 #searchForm{
  display: block;
- float: left;
- position: realtive;
 }
-
-
-
 
 #searchResultMessages ul.inline_list img{
  width: 25px;
@@ -701,9 +696,9 @@ span.heading-right{
 }
 
 ul.inline-list.ino-breadcrumb-simple {
-float: right;
-margin: 0px;
-padding: 0px;  
+ float: right;
+ margin: 0px;
+ padding: 0px;  
 }
 .heading1 {
  border-bottom: 2px dotted rgb(51, 153, 204);
@@ -713,15 +708,15 @@ padding: 0px;
 }
 
 .ino-breadcrumb-simple li a{
-padding: 2px 10px;
-background-color: rgba(242, 242, 242, 0.94);
-border: 1px solid rgba(206, 198, 198, 0.9);
+ padding: 2px 10px;
+ background-color: rgba(242, 242, 242, 0.94);
+ border: 1px solid rgba(206, 198, 198, 0.9);
 }
 
 #structure ul.ino-breadcrumb-simple{
  position: absolute;
-right: 0px;
-top: 0px;
+ right: 0px;
+ top: 0px;
 }
 
 .heading1 .more_page a{
@@ -1178,24 +1173,24 @@ ul.program_form li label{
 }
 
 .ino-btn2{
-font-size: 0.9em !important;
-padding: 0px 5px;
-background-color: rgba(40, 142, 194, 0.86);
-color: #FFF !important;
-font-weight: bold;
-border-radius: 2px;
-box-shadow: 1px 1px 1px 1px rgba(137, 124, 34, 0.52);
-display: inline-block;
+ font-size: 0.9em !important;
+ padding: 0px 5px;
+ background-color: rgba(40, 142, 194, 0.86);
+ color: #FFF !important;
+ font-weight: bold;
+ border-radius: 2px;
+ box-shadow: 1px 1px 1px 1px rgba(137, 124, 34, 0.52);
+ display: inline-block;
 }
 
 .ino-btn2:hover{
-  background-color: #1C8316;
+ background-color: #1C8316;
 }
 
 .ino-alert-info {
-    color: #31708F;
-    background-color: rgba(243, 246, 232, 0.38);
-    border-color: rgb(230, 233, 219);
+ color: #31708F;
+ background-color: rgba(243, 246, 232, 0.38);
+ border-color: rgb(230, 233, 219);
 }
 
 #searchResultMessages [class^="flaticon-"]:before, 
@@ -2037,7 +2032,7 @@ ul.inline-list li{
 }
 
 .imp-link a:hover{
-  color : green !important;
+ color : green !important;
 }
 
 .search_document_list, #site_search .form-control{
@@ -2298,7 +2293,7 @@ ul.single-column li{
 
 .btn.unsaved-msg{
  font-size: 9px !important;
-font-weight: bold;
+ font-weight: bold;
 }
 
 
@@ -2317,10 +2312,10 @@ h3.nav-panel, .panel-success > .panel-heading{
 }
 
 .panel-success > .panel-heading {
-    color: #fff;
-    border-color: #333  !important;
+ color: #fff;
+ border-color: #333  !important;
 }
 
 .panel-success {
-    border-color: #333  !important;
+ border-color: #333  !important;
 }

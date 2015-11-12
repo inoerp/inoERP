@@ -275,7 +275,7 @@ inoERP
          <td><?php echo $f->checkBox_field('kit_configured_cb', $$class_second->kit_configured_cb, '', 'dontCopy'); ?></td>
          <td><?php $f->text_field_wid2r('bom_config_header_id'); ?></td>
          <td><?php $f->text_field_wid2r('wip_wo_header_id'); ?></td>
-         <td> <a class="popup popup-form view-item-config medium" href="form.php?class_name=bom_config_header&mode=9&window_type=popup"> <i class="fa fa-edit"></i></a></td>
+         <td> <a class="popup popup-form-i view-item-config medium" href="form.php?class_name=bom_config_header&mode=9&window_type=popup"> <i class="fa fa-edit"></i></a></td>
         </tr>
         <?php
         $count = $count + 1;

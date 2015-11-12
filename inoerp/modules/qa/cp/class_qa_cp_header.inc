@@ -34,6 +34,7 @@ class qa_cp_header extends dbObject {
  public $field_a = [
   'qa_cp_header_id',
   'plan_name',
+//  'org_id',
   'effective_from',
   'description',
   'effective_to',
@@ -57,9 +58,14 @@ class qa_cp_header extends dbObject {
   '_show_view_path' => 1,
  
  ];
+ 
+  public $profile_default = [
+  'org_id' => 'org_inv_name_default',
+ ];
  public $pageTitle = " Collection Plan "; //page Title
  public $qa_cp_header_id;
  public $plan_name;
+ public $org_id;
  public $effective_from;
  public $description;
  public $effective_to;

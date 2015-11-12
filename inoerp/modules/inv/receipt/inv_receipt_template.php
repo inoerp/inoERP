@@ -59,7 +59,7 @@
 
 </div>
 <div id="form_line" class="form_line"><span class="heading">Receipt Lines</span>
- <form action=""  method="post" id="inv_receipt_line"  name="inv_receipt_line">
+ <form method="post" id="inv_receipt_line"  name="inv_receipt_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('PO Info') ?></a></li>
@@ -139,12 +139,15 @@
         <th><?php echo gettext('Sub inventory') ?></th>
         <th><?php echo gettext('Locator') ?></th>
         <th><?php echo gettext('Kit Config') ?></th>
+        <th><?php echo gettext('Quality Details') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
-       <?php
+              <?php
        $count = 0;
        foreach ($inv_receipt_line_object as $inv_receipt_line) {
+        $qa_link = 'form.php?class_name=qa_quality_result&reference_key_name=inv_receipt_line_id&mode=9&window_type=popup&inv_receipt_line_id=' .
+         $$class_second->inv_receipt_line_id . '&qa_cp_header_id=1';
         ?>         
         <tr class="inv_receipt_line<?php echo $count ?>">
          <td><?php $f->seq_field_d($count) ?></td>
@@ -157,8 +160,8 @@
          <td><?php echo $f->number_field('transaction_quantity', $$class_second->transaction_quantity, '8', '', '', 1, $readonly1); ?></td>
          <td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_second->subinventory_id, '', 'subinventory_id', 1, $readonly); ?></td>
          <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_second->subinventory_id), 'locator_id', 'locator', $$class_second->locator_id, '', 'locator_id', '', $readonly); ?></td>
-         <td><button type="button" class="popup btn  btn-default view-item-config medium">
-           <a href="form.php?class_name=bom_config_header&mode=9&window_type=popup"> View Configuration</a></button></td>
+         <td><a class="popup popup-form view-item-config medium" href="form.php?class_name=bom_config_header&mode=9&window_type=popup"> <i class="fa fa-edit"></i></a></td>
+         <td><a class="popup popup-form view-quality-form medium" href="<?php echo $qa_link ?>"><i class="fa fa-edit"></i></a></td>
         </tr>
         <?php
         $count = $count + 1;

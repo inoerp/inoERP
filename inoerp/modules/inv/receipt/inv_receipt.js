@@ -64,6 +64,11 @@ $(document).ready(function () {
  });
 
 
+ $('body').off('blur', '#transaction_type_id').on('blur', '#transaction_type_id', function () {
+  $('.transaction_type_id').val($('#transaction_type_id').val());
+ });
+
+
  //get Subinventory Name
  $('body').off('change', '#org_id').on("change", '#org_id', function () {
   getSubInventory({

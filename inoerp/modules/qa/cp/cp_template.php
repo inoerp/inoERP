@@ -22,13 +22,14 @@ inoERP
       <li><?php $f->l_text_field_dr_withSearch('qa_cp_header_id') ?>
        <a name="show" href="form.php?class_name=qa_cp_header&<?php echo "mode=$mode"; ?>" class="show document_id qa_cp_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
+      <li> <?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>  </li>
       <li><?php $f->l_text_field_dm('plan_name'); ?></li>
       <li><?php $f->l_text_field_d('description'); ?></li> 
       <li><?php $f->l_date_fieldAnyDay('effective_from', $$class->effective_from); ?></li> 
       <li><?php $f->l_date_fieldAnyDay('effective_to', $$class->effective_to); ?></li> 
-      <li><?php $f->l_select_field_from_object('plan_type', option_header::find_options_byName('QA_COLLECTION_PLAN_TYPE'),'option_line_code','option_line_value', $$class->plan_type, 'plan_type'); ?></li> 
-      <li><?php $f->l_select_field_from_object('qa_specification_header_id', qa_specification_header::find_all(),'qa_specification_header_id','specification_name', $$class->plan_type, 'qa_specification_header_id'); ?></li> 
-      <li><?php $f->l_select_field_from_array('specification_type', qa_specification_header::$specification_type_a, $$class->specification_type,'specification_type'); ?></li> 
+      <li><?php $f->l_select_field_from_object('plan_type', option_header::find_options_byName('QA_COLLECTION_PLAN_TYPE'), 'option_line_code', 'option_line_value', $$class->plan_type, 'plan_type'); ?></li> 
+      <li><?php $f->l_select_field_from_object('qa_specification_header_id', qa_specification_header::find_all(), 'qa_specification_header_id', 'specification_name', $$class->plan_type, 'qa_specification_header_id'); ?></li> 
+      <li><?php $f->l_select_field_from_array('specification_type', qa_specification_header::$specification_type_a, $$class->specification_type, 'specification_type'); ?></li> 
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
