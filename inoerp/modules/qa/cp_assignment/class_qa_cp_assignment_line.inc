@@ -23,11 +23,12 @@ class qa_cp_assignment_line extends dbObject {
  public $field_a = [
   'qa_cp_assignment_line_id',
   'qa_cp_assignment_header_id',
+  'qa_cp_header_id',
   'trigger_name',
   'description',
   'value_from',
   'value_to',
-  'condition',
+  'trigger_condition',
   'enabled_cb',
   'created_by',
   'creation_date',
@@ -41,8 +42,6 @@ class qa_cp_assignment_line extends dbObject {
  ];
  public $requiredField = [
   'qa_cp_assignment_header_id',
-  'qa_collection_element_header_id',
-  'sequence',
  ];
  public $search = [
   '_show_update_path' => 1,
@@ -51,16 +50,211 @@ class qa_cp_assignment_line extends dbObject {
  public $pageTitle = " Collection Plan Line"; //page Title
  public $qa_cp_assignment_line_id;
  public $qa_cp_assignment_header_id;
+ public $qa_cp_header_id;
  public $trigger_name;
  public $description;
  public $value_from;
  public $value_to;
- public $condition;
+ public $trigger_condition;
  public $enabled_cb;
  public $created_by;
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
+ public $element_value;
+ public $element_trigger_name;
+ public $category = '';
+ public $supplier_name = '';
+ public $org_code = '';
+ public $org_id = '';
+ public $item_number = '';
+
+ public function findAssignments() {
+
+  $sql = " SELECT * from qa_cp_assignment_line ";
+  $sql .= " WHERE trigger_name = '{$this->element_trigger_name}' ";
+
+  switch ($this->trigger_condition) {
+   case 'EQUAL':
+    $sql .= ' AND value_from = ' . $this->element_value;
+    break;
+
+   case 'NE':
+    $sql .= ' AND value_from != ' . $this->element_value;
+    break;
+
+   case 'GT':
+    $sql .= ' AND value_from > ' . $this->element_value;
+    break;
+
+   case 'GTE':
+    $sql .= ' AND value_from >= ' . $this->element_value;
+    break;
+
+   case 'LT':
+    $sql .= ' AND value_from < ' . $this->element_value;
+    break;
+
+   case 'LTE':
+    $sql .= ' AND value_from <= ' . $this->element_value;
+    break;
+  }
+
+  $result = $this->findBySql($sql);
+
+  return $result;
+ }
+
+ public $item_id_m;
+
+ private function findAssignments_byTrigger() {
+  $sql = " SELECT * from qa_cp_assignment_line ";
+  if (!empty($this->org_id)) {
+   $sql .= " WHERE trigger_name = 'org.org_id' ";
+   $selecting_date = 'org_id';
+  } else if (!empty($this->org_code)) {
+   $sql .= " WHERE trigger_name = 'org.org_code' ";
+   $selecting_date = 'org_code';
+  } else if (!empty($this->category)) {
+   $sql .= " WHERE trigger_name = 'category.category' ";
+   $selecting_date = 'category';
+  } else if (!empty($this->supplier_name)) {
+   $sql .= " WHERE trigger_name = 'supplier.supplier_name' ";
+   $selecting_date = 'supplier_name';
+  } else if (!empty($this->supplier_id)) {
+   $sql .= " WHERE trigger_name = 'supplier.supplier_id' ";
+   $selecting_date = 'supplier_id';
+  } else if (!empty($this->item_number)) {
+   $sql .= " WHERE trigger_name = 'item.item_number' ";
+   $selecting_date = 'item_number';
+  } else if (!empty($this->item_id_m)) {
+   $sql .= " WHERE trigger_name = 'item.item_id_m' ";
+   $selecting_date = 'item_id_m';
+  }
+
+  $result = $this->findBySql($sql);
+
+  if (!empty($result)) {
+   return false;
+  }
+
+  $qa_cp_header_ids = [];
+  foreach ($result as $data) {
+   switch ($data->trigger_condition) {
+    case '=' :
+     if (($selecting_date == 'item_number') && ($data->value_from == $this->item_number)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'item_id_m') && ($data->value_from == $this->item_id_m)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'supplier_id') && ($data->value_from == $this->supplier_id)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'supplier_name') && ($data->value_from == $this->supplier_name)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'category') && ($data->value_from == $this->category)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'org_code') && ($data->value_from == $this->org_code)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'org_id') && ($data->value_from == $this->org_id)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     }
+     break;
+
+    case '!=' :
+     if (($selecting_date == 'item_number') && ($data->value_from != $this->item_number)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'item_id_m') && ($data->value_from != $this->item_id_m)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'supplier_id') && ($data->value_from != $this->supplier_id)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'supplier_name') && ($data->value_from != $this->supplier_name)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'category') && ($data->value_from != $this->category)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'org_code') && ($data->value_from != $this->org_code)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'org_id') && ($data->value_from != $this->org_id)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     }
+     break;
+
+
+    case '>' :
+     if (($selecting_date == 'item_number') && ($data->value_from > $this->item_number)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'item_id_m') && ($data->value_from > $this->item_id_m)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'supplier_id') && ($data->value_from > $this->supplier_id)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'supplier_name') && ($data->value_from > $this->supplier_name)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'category') && ($data->value_from > $this->category)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'org_code') && ($data->value_from > $this->org_code)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'org_id') && ($data->value_from > $this->org_id)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     }
+     break;
+
+
+    case '>=' :
+     if (($selecting_date == 'item_number') && ($data->value_from >= $this->item_number)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'item_id_m') && ($data->value_from >= $this->item_id_m)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'supplier_id') && ($data->value_from >= $this->supplier_id)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'supplier_name') && ($data->value_from >= $this->supplier_name)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'category') && ($data->value_from >= $this->category)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'org_code') && ($data->value_from >= $this->org_code)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'org_id') && ($data->value_from >= $this->org_id)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     }
+     break;
+
+    case '<=' :
+     if (($selecting_date == 'item_number') && ($data->value_from <= $this->item_number)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'item_id_m') && ($data->value_from <= $this->item_id_m)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'supplier_id') && ($data->value_from <= $this->supplier_id)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'supplier_name') && ($data->value_from <= $this->supplier_name)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'category') && ($data->value_from <= $this->category)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'org_code') && ($data->value_from <= $this->org_code)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'org_id') && ($data->value_from <= $this->org_id)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     }
+     break;
+
+    case '<' :
+     if (($selecting_date == 'item_number') && ($data->value_from < $this->item_number)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'item_id_m') && ($data->value_from < $this->item_id_m)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'supplier_id') && ($data->value_from < $this->supplier_id)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'supplier_name') && ($data->value_from < $this->supplier_name)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'category') && ($data->value_from < $this->category)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'org_code') && ($data->value_from < $this->org_code)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     } else if (($selecting_date == 'org_id') && ($data->value_from < $this->org_id)) {
+      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+     }
+     break;
+   }
+  }
+
+  return $qa_cp_header_ids;
+ }
 
 }
 

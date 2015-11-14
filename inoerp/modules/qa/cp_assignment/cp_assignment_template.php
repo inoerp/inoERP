@@ -6,9 +6,10 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php $f = new inoform();
-echo gettext('Collection Plan Assignment')
-?></span>
+<div id ="form_header"><span class="heading"><?php
+  $f = new inoform();
+  echo gettext('Collection Plan Assignment')
+  ?></span>
  <form method="post" id="qa_cp_assignment_header"  name="qa_cp_assignment_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -70,7 +71,7 @@ echo gettext('Collection Plan Assignment')
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Line Id') ?></th>
         <th><?php echo gettext('Trigger Name') ?></th>
-        <th><?php echo gettext('Condition') ?>#</th>
+        <th><?php echo gettext('Condition') ?></th>
         <th><?php echo gettext('From') ?></th>
         <th><?php echo gettext('To') ?></th>
        </tr>
@@ -83,14 +84,16 @@ echo gettext('Collection Plan Assignment')
         <tr class="qa_cp_assignment_line<?php echo $count ?>">
          <td>
           <?php
-          echo ino_inline_action($qa_cp_assignment_line->qa_cp_assignment_line_id, array('qa_cp_assignment_header_id' => $qa_cp_assignment_header->qa_cp_assignment_header_id));
+          echo ino_inline_action($qa_cp_assignment_line->qa_cp_assignment_line_id, array('qa_cp_assignment_header_id' => $qa_cp_assignment_header->qa_cp_assignment_header_id,
+           'qa_cp_header_id' => $qa_cp_assignment_header->qa_cp_header_id));
           ?>
          </td>
          <td><?php $f->text_field_wid2sr('qa_cp_assignment_line_id', 'always_readonly dontCopy line_id'); ?></td>
-         <td><?php echo $f->select_field_from_object('trigger_name', option_header::find_options_byName('QA_COLLECTION_TRIGGER'), 'option_line_code', 'option_line_value', $$class_second->trigger_name); ?></td> 
-         <td><?php echo $f->select_field_from_array('condition', dbObject::$control_type_a, $$class_second->condition); ?></td>
+         <td><?php echo $f->select_field_from_object('trigger_name', option_header::find_options_byName('QA_COLLECTION_TRIGGER'), 'option_line_code', 'option_line_value', $$class_second->trigger_name, '', '', 1); ?></td> 
+         <td><?php echo $f->select_field_from_array('trigger_condition', dbObject::$control_type_a, $$class_second->trigger_condition, 1); ?></td>
          <td><?php $f->text_field_wid2('value_from'); ?></td>
          <td><?php $f->text_field_wid2('value_to'); ?></td>
+
         </tr>
         <?php
         $count = $count + 1;

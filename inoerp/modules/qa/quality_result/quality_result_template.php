@@ -10,13 +10,13 @@
      <div class="large_shadow_box"> 
       <ul class="column header_field">
        <li><?php
-        echo $f->l_select_field_from_object('qa_cp_header_id', qa_cp_header::find_all(), 'qa_cp_header_id', 'plan_name', $$class->qa_cp_header_id, 'qa_cp_header_id', 'action', 1);
+        echo $f->l_select_field_from_object('qa_cp_header_id', $qa_cp_header_obj, 'qa_cp_header_id', 'plan_name', $$class->qa_cp_header_id, 'qa_cp_header_id', 'action', 1);
         ?>
        </li>
        <li><?php $f->l_text_field('reference_type', $reference_type); ?></li>
        <li><?php $f->l_text_field('reference_entity', $reference_entity); ?></li>
-       <li><?php $f->l_text_field('reference_key_name', $ref_key_name); ?></li>
-       <li><?php $f->l_text_field('reference_key_value', $ref_key_value); ?></li>
+       <li><?php $f->l_text_field('reference_key_name', $ref_key_name, '' ,'' ,$always_readonly2, '' , $readonly2); ?></li>
+       <li><?php $f->l_text_field('reference_key_value', $ref_key_value, '' ,'' ,$always_readonly2, '' , $readonly2); ?></li>
        <a name="show" href="form.php?class_name=qa_quality_result&<?php echo "mode=$mode"; ?>" class="show action document_id qa_quality_result ino-left-30-n"><i class="fa fa-refresh"></i></a>
       </ul>
      </div>

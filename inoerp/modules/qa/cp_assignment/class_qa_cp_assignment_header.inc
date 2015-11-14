@@ -18,7 +18,7 @@ class qa_cp_assignment_header extends dbObject {
  public static $table_name = "qa_cp_assignment_header";
  public static $primary_column = "qa_cp_assignment_header_id";
  public static $dependent_classes = ['qa_cp_assignment_line'];
- public static $key_column = "plan_name";
+ public static $key_column = "qa_cp_header_id";
  public static $module = "qa";
  public static $system_info = [
   'name' => 'Collection Plan Assignment',
