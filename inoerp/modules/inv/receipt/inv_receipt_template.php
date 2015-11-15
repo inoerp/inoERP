@@ -32,6 +32,7 @@
       </div>
       <div id ="display_comment_form">
        <?php
+       $f = new inoform();
        $reference_table = 'inv_receipt_header';
        $reference_id = $$class->inv_receipt_header_id;
        ?>
@@ -41,14 +42,7 @@
     <div id="tabsHeader-4" class="tabContent">
      <div> 
       <ul class="column five_column">
-       <li><label><?php echo gettext('Action') ?></label>
-        <select name="transaction_action[]" class=" select  transaction_action" id="transaction_action" >
-         <option value="" ></option>
-         <option value="CREATE_ACCOUNT" >Create Accounting</option>
-         <option value="ADD_LINES" >Add Receipt Lines</option>
-         <option value="PRINT_TRAVELLER" >Receipt Traveller</option>
-        </select>
-       </li>
+       <li><?php echo $f->l_select_field_from_array('action', $$class->action_a, '', 'action') ?></li>
       </ul>
      </div>
     </div>
@@ -143,11 +137,35 @@
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
-              <?php
+       <?php
        $count = 0;
        foreach ($inv_receipt_line_object as $inv_receipt_line) {
-        $qa_link = 'form.php?class_name=qa_quality_result&reference_key_name=inv_receipt_line_id&mode=9&window_type=popup&inv_receipt_line_id=' .
-         $$class_second->inv_receipt_line_id . '&qa_cp_header_id=1';
+        $qa_cp_header_id_stmt = null;
+        if (!empty($$class->inv_receipt_header_id) && ($$class->transaction_type_id == 4)) {
+         $qa_cp_header_ids_a = [];
+         $item_categories = item::find_itemCategory_byItemIdm_and_orgId($$class_second->item_id_m, $$class->org_id);
+         if ($item_categories) {
+          foreach ($item_categories as $item_category) {
+           $cp_al = new qa_cp_assignment_line();
+           $cp_al->category = $item_category->category;
+           $qa_cp_header_ids = $cp_al->findAssignments_byTrigger();
+           if ($qa_cp_header_ids) {
+            foreach ($qa_cp_header_ids as $obj_k => $obj_v) {
+             if (!in_array($obj_v, $qa_cp_header_ids_a)) {
+              array_push($qa_cp_header_ids_a, $obj_v);
+             }
+            }
+           }
+          }
+         }
+         if (!empty($qa_cp_header_ids_a)) {
+          foreach ($qa_cp_header_ids_a as $k => $v) {
+           $qa_cp_header_id_stmt .= '&qa_cp_header_ids[]=' . $v;
+          }
+         }
+        }
+        $qa_link = 'form.php?class_name=qa_quality_result&reference_key_name=inv_receipt_line_id&mode=9&window_type=popup&reference_key_value=' .
+         $$class_second->inv_receipt_line_id . $qa_cp_header_id_stmt;
         ?>         
         <tr class="inv_receipt_line<?php echo $count ?>">
          <td><?php $f->seq_field_d($count) ?></td>

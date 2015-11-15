@@ -40,6 +40,12 @@ public static $transaction_type_id_a = [
  '5' => 'PO Delivery',
  '21' => 'PO Return'
 ];
+
+public $action_a = [
+ 'CREATE_ACCOUNT' => 'Create Accounting',
+ 'ADD_LINES' => 'Add Lines',
+ 'PRINT_TRAVELLER' => 'Print Traveller'
+];
   
  public $field_a = [
   "inv_receipt_header_id",

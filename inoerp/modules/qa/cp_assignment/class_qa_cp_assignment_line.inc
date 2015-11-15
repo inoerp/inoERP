@@ -107,7 +107,7 @@ class qa_cp_assignment_line extends dbObject {
 
  public $item_id_m;
 
- private function findAssignments_byTrigger() {
+ public function findAssignments_byTrigger() {
   $sql = " SELECT * from qa_cp_assignment_line ";
   if (!empty($this->org_id)) {
    $sql .= " WHERE trigger_name = 'org.org_id' ";
@@ -133,127 +133,127 @@ class qa_cp_assignment_line extends dbObject {
   }
 
   $result = $this->findBySql($sql);
+//  pa($result);
 
-  if (!empty($result)) {
+  if (empty($result)) {
    return false;
   }
 
   $qa_cp_header_ids = [];
   foreach ($result as $data) {
    switch ($data->trigger_condition) {
-    case '=' :
+    case 'EQUAL' :
      if (($selecting_date == 'item_number') && ($data->value_from == $this->item_number)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'item_id_m') && ($data->value_from == $this->item_id_m)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'supplier_id') && ($data->value_from == $this->supplier_id)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'supplier_name') && ($data->value_from == $this->supplier_name)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
-     } else if (($selecting_date == 'category') && ($data->value_from == $this->category)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
+     } else if (($selecting_date == 'category') && ( trim($data->value_from) == trim($this->category))) {
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'org_code') && ($data->value_from == $this->org_code)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'org_id') && ($data->value_from == $this->org_id)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      }
      break;
 
-    case '!=' :
+    case 'NE' :
      if (($selecting_date == 'item_number') && ($data->value_from != $this->item_number)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'item_id_m') && ($data->value_from != $this->item_id_m)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'supplier_id') && ($data->value_from != $this->supplier_id)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'supplier_name') && ($data->value_from != $this->supplier_name)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'category') && ($data->value_from != $this->category)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'org_code') && ($data->value_from != $this->org_code)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'org_id') && ($data->value_from != $this->org_id)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      }
      break;
 
 
-    case '>' :
+    case 'GT' :
      if (($selecting_date == 'item_number') && ($data->value_from > $this->item_number)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'item_id_m') && ($data->value_from > $this->item_id_m)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'supplier_id') && ($data->value_from > $this->supplier_id)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'supplier_name') && ($data->value_from > $this->supplier_name)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'category') && ($data->value_from > $this->category)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'org_code') && ($data->value_from > $this->org_code)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'org_id') && ($data->value_from > $this->org_id)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      }
      break;
 
 
-    case '>=' :
+    case 'GTE' :
      if (($selecting_date == 'item_number') && ($data->value_from >= $this->item_number)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'item_id_m') && ($data->value_from >= $this->item_id_m)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'supplier_id') && ($data->value_from >= $this->supplier_id)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'supplier_name') && ($data->value_from >= $this->supplier_name)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'category') && ($data->value_from >= $this->category)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'org_code') && ($data->value_from >= $this->org_code)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'org_id') && ($data->value_from >= $this->org_id)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      }
      break;
 
-    case '<=' :
+    case 'LTE' :
      if (($selecting_date == 'item_number') && ($data->value_from <= $this->item_number)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'item_id_m') && ($data->value_from <= $this->item_id_m)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'supplier_id') && ($data->value_from <= $this->supplier_id)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'supplier_name') && ($data->value_from <= $this->supplier_name)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'category') && ($data->value_from <= $this->category)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'org_code') && ($data->value_from <= $this->org_code)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'org_id') && ($data->value_from <= $this->org_id)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      }
      break;
 
-    case '<' :
+    case 'LT' :
      if (($selecting_date == 'item_number') && ($data->value_from < $this->item_number)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'item_id_m') && ($data->value_from < $this->item_id_m)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'supplier_id') && ($data->value_from < $this->supplier_id)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'supplier_name') && ($data->value_from < $this->supplier_name)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'category') && ($data->value_from < $this->category)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'org_code') && ($data->value_from < $this->org_code)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      } else if (($selecting_date == 'org_id') && ($data->value_from < $this->org_id)) {
-      array_push($qa_cp_header_ids, $this->qa_cp_header_id);
+      array_push($qa_cp_header_ids, $data->qa_cp_header_id);
      }
      break;
    }
   }
-
-  return $qa_cp_header_ids;
+    return $qa_cp_header_ids;
  }
 
 }

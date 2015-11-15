@@ -1056,10 +1056,51 @@ class item extends dbObject {
   return $this->msg;
  }
 
+ public static function find_itemCategory_byItemId($item_id) {
+
+  $sql = "SELECT category.category_id as category_id,
+              category.major_category_id as major_category_id,
+               category.category as category, 
+               category.parent_id as parent_id, 
+               category.description as description,
+               category.primary_cb as primary_cb,
+               category_reference.category_reference_id as category_reference_id
+       FROM 
+       category , category_reference
+       WHERE category_reference.reference_table = 'item'
+       AND category_reference.reference_id = '{$item_id}'
+       AND category.category_id = category_reference.category_id";
+
+  $result = self::find_by_sql($sql);
+  return $result;
+ }
+
+ 
+ public static function find_itemCategory_byItemIdm_and_orgId($item_id_m, $org_id) {
+
+  $sql = "SELECT category.category_id as category_id,
+              category.major_category_id as major_category_id,
+               category.category as category, 
+               category.parent_id as parent_id, 
+               category.description as description,
+               category.primary_cb as primary_cb,
+               category_reference.category_reference_id as category_reference_id
+       FROM 
+       category , category_reference, item
+       WHERE category_reference.reference_table = 'item'
+       AND category_reference.reference_id = item.item_id
+       AND category.category_id = category_reference.category_id 
+       AND item.item_id_m = '{$item_id_m}'
+       AND item.org_id = '{$org_id}' ";
+
+  $result = self::find_by_sql($sql);
+  return $result;
+ }
+ 
  public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
   $sql = "SELECT * FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
-  $show_only_master_items = true; 
-  
+  $show_only_master_items = true;
+
   if (!empty($hidden_fields)) {
    foreach ($hidden_fields as $k => $v) {
     if (!empty($k) && !empty($v)) {
@@ -1085,11 +1126,11 @@ class item extends dbObject {
     }
    }
   }
-  
-  if($show_only_master_items){
+
+  if ($show_only_master_items) {
    $sql .= " AND item_id = item_id_m ";
   }
-  
+
   $result_array = static::find_by_sql($sql);
   return !empty($result_array) ? ($result_array) : false;
  }
