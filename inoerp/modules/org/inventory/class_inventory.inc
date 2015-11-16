@@ -285,8 +285,8 @@ LIMIT 1
    }
    foreach ($arr as &$obj) {
     $primary_column = parent::$primary_column;
-    if (!empty($obj->$primary_column)) {
-     $org_i = $org->findBy_id($obj->$primary_column);
+    if (!empty($obj->org_id)) {
+     $org_i = $org->findBy_id($obj->org_id);
      $obj->org = $org_i->org;
      $obj->description = $org_i->description;
     }

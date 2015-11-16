@@ -162,8 +162,8 @@ class legal extends dbObject {
 	}
 	foreach ($arr as &$obj) {
 	 $primary_column = self::$primary_column;
-	 if (!empty($obj->$primary_column)) {
-		$org_i = $org->findBy_id($obj->$primary_column);
+	 if (!empty($obj->org_id)) {
+		$org_i = $org->findBy_id($obj->org_id);
     if($org_i){
      		$obj->org = $org_i->org;
 		$obj->description = $org_i->description;
