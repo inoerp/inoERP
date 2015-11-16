@@ -271,7 +271,7 @@ if (($continue) && (!empty($class_names))) {
     }
 
 //validate organization access where applicable
-    if (property_exists($$class, 'org_id') && (!in_array($class, array('org', 'ec_product_view')))) {
+    if (property_exists($$class, 'org_id') && (!in_array($class, array('org', 'legal' , 'ec_product_view')))) {
      if (empty($_SESSION['user_org_access'])) {
       $no_organization_access = true;
       return;
