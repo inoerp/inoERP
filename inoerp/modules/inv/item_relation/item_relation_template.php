@@ -70,7 +70,7 @@
              echo ino_inline_action($$class->inv_item_relation_id, array('relation_type_h' => $relation_type_h));
              ?>    
             </td>
-            <td><?php form::number_field_drs('inv_item_relation_id') ?></td>
+            <td><?php form::number_field_drs('inv_item_relation_id' , 'always_readonly') ?></td>
             <td><?php
              echo $f->hidden_field('from_item_id_m', $$class->from_item_id_m);
              $f->text_field_dm('from_item_number', 'select_item_number item_number');

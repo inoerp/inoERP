@@ -1,6 +1,6 @@
 <div class="row small-left-padding">
  <div id ="form_header">
-  <form action=""  method="post" id="inv_count_header"  name="inv_count_header">
+  <form  method="post" id="inv_count_header"  name="inv_count_header">
    <span class="heading"><?php echo gettext('Count Header') ?></span>
    <div id="tabsHeader">
     <ul class="tabMain">
@@ -113,7 +113,7 @@
            echo ino_inline_action($$class_second->inv_count_schedule_id, array('inv_count_header_id' => $$class->inv_count_header_id));
            ?>
           </td>
-          <td><?php form::number_field_wid2sr('inv_count_schedule_id'); ?></td>
+          <td><?php form::number_field_wid2sr('inv_count_schedule_id' , 'always_readonly'); ?></td>
           <td><?php $f->text_field_d2sr('item_id_m'); ?></td>
           <td><?php $f->text_field_wid2('item_number', 'select_item_number'); ?><i class="select_item_number select_popup clickable fa fa-search"></i></td>
           <td><?php $f->text_field_wid2('item_description'); ?></td>

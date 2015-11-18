@@ -1,4 +1,4 @@
-<form action=""  method="post" id="inv_transaction"  name="inv_transaction">
+<form method="post" id="inv_transaction"  name="inv_transaction">
  <?php echo (!empty($hidden_stmt)) ? $hidden_stmt : ""; ?> 
  <!--create empty form or a single id when search is not clicked and the id is referred from other page -->
  <span class="heading"><?php echo gettext('Inventory Transaction ') ?></span> 
@@ -80,14 +80,12 @@
       <th><?php echo gettext('Description') ?></th>
       <th><?php echo gettext('Reason') ?></th>
       <th><?php echo gettext('Onhand') ?></th>
-      <th><?php echo gettext('Res. Onhand') ?></th
-
+      <th><?php echo gettext('Res. Onhand') ?></th>
+      
       </thead>
       <tbody class="form_data_line_tbody">
        <tr class="inv_transaction_line0" id="tab2_1">
-        <td>
-         <?php echo $f->select_field_from_object('from_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->from_subinventory_id, '', 'subinventory_id', '', $readonly); ?>
-        </td>
+        <td><?php echo $f->select_field_from_object('from_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->from_subinventory_id, '', 'subinventory_id', '', $readonly); ?>  </td>
         <td>
          <?php echo $f->select_field_from_object('from_locator_id', locator::find_all_of_subinventory($$class->from_subinventory_id), 'locator_id', 'locator', $$class->from_locator_id, '', 'from_locator_id', '', $readonly); ?>
         </td>
@@ -101,6 +99,7 @@
         <td><?php form::text_field_wid('reason'); ?>							</td>
         <td><?php echo $f->text_field_widr('onhand', 'always_readonly'); ?></td>
         <td><?php echo $f->text_field_widr('reservable_onhand', 'always_readonly'); ?></td>
+        
        </tr>
       </tbody>
      </table>

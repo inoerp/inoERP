@@ -1,7 +1,7 @@
 <div class="row small-left-padding">
  <div id="form_all">
  <div id="form_headerDiv">
-  <form action=""  method="post" id="inv_location_default_line"  name="location_default_line"><span class="heading">
+  <form  method="post" id="inv_location_default_line"  name="location_default_line"><span class="heading">
    <?php echo gettext('Item Transaction Location Default') ?></span>
    <div class="tabContainer">
     <label><?php echo gettext('Inventory Org') ?> </label>
@@ -31,7 +31,6 @@
         </thead>
         <tbody class="form_data_line_tbody location_default_values" >
          <?php
-         $f = new inoform();
          $count = 0;
          $location_default_object_ai = new ArrayIterator($location_default_object);
          $location_default_object_ai->seek($position);
@@ -50,7 +49,7 @@
             ?>
            </td>
            <td><?php $f->seq_field_d($count) ?></td>
-           <td><?php form::number_field_drs('inv_location_default_id') ?></td>
+           <td><?php form::number_field_drs('inv_location_default_id' , 'always_readonly') ?></td>
            <td><?php
             echo $f->hidden_field('item_id_m', $$class->item_id_m);
             $f->text_field_wid('item_number', 'select_item_number');
@@ -82,7 +81,6 @@
         </thead>
         <tbody class="form_data_line_tbody location_default_values" >
          <?php
-         $f = new inoform();
          $count = 0;
          $location_default_object_ai = new ArrayIterator($location_default_object);
          $location_default_object_ai->seek($position);

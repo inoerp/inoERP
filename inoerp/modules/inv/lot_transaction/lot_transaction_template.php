@@ -1,5 +1,5 @@
 <div id ="form_header">
- <span class="heading">Lot Number Details </span>
+ <span class="heading"><?php echo gettext("Lot Number Details"); ?></span>
  <div id="tabsHeader">
   <ul class="tabMain">
    <li><a href="#tabsHeader-1">Basic Info</a></li>
