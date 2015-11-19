@@ -55,10 +55,10 @@
     <div id="tabsLine-1" class="tabContent">
      <div class="first_rowset"> 
       <ul class="column header_field"> 
-       <li><?php $f->l_select_field_from_object('balancing', coa::coa_segments_by_optionHeaderId($$class->coa_structure_id), 'option_line_code', 'option_line_value', $$class->balancing, 'balancing', 'coa_qualifier', 1, $readonly1); ?>       </li>
-       <li><?php $f->l_select_field_from_object('cost_center', coa::coa_segments_by_optionHeaderId($$class->coa_structure_id), 'option_line_code', 'option_line_value', $$class->cost_center, 'cost_center', 'coa_qualifier', 1, $readonly1); ?>       </li>
-       <li><?php $f->l_select_field_from_object('natural_account', coa::coa_segments_by_optionHeaderId($$class->coa_structure_id), 'option_line_code', 'option_line_value', $$class->natural_account, 'natural_account', 'coa_qualifier', 1, $readonly1); ?>       </li>
-       <li><?php $f->l_select_field_from_object('inter_company', coa::coa_segments_by_optionHeaderId($$class->coa_structure_id), 'option_line_code', 'option_line_value', $$class->inter_company, 'inter_company', 'coa_qualifier', 1, $readonly1); ?>       </li>
+       <li><?php $f->l_select_field_from_object('balancing', coa::coa_segments_by_optionHeaderId($$class->coa_structure_id), 'option_line_code', 'option_line_value', $$class->balancing, 'balancing', 'coa_qualifier medium', 1, $readonly1); ?>       </li>
+       <li><?php $f->l_select_field_from_object('cost_center', coa::coa_segments_by_optionHeaderId($$class->coa_structure_id), 'option_line_code', 'option_line_value', $$class->cost_center, 'cost_center', 'coa_qualifier medium', 1, $readonly1); ?>       </li>
+       <li><?php $f->l_select_field_from_object('natural_account', coa::coa_segments_by_optionHeaderId($$class->coa_structure_id), 'option_line_code', 'option_line_value', $$class->natural_account, 'natural_account', 'coa_qualifier medium', 1, $readonly1); ?>       </li>
+       <li><?php $f->l_select_field_from_object('inter_company', coa::coa_segments_by_optionHeaderId($$class->coa_structure_id), 'option_line_code', 'option_line_value', $$class->inter_company, 'inter_company', 'coa_qualifier medium', 1, $readonly1); ?>       </li>
       </ul>
      </div>
      <!--end of tab1 div three_column-->
