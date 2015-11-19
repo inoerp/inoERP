@@ -1,4 +1,4 @@
-<form action=""  method="post" id="coa"  name="coa"><?php $f = new inoform(); ?>
+<form method="post" id="coa"  name="coa"><?php $f = new inoform(); ?>
  <span class="heading"><?php echo gettext('Chart Of Account') ?></span>
  <div id ="form_header">
   <div id="tabsHeader">

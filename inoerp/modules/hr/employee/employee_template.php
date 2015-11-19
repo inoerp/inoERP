@@ -13,7 +13,7 @@
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
       <ul class="column header_field"> 
-       <li><?php $f->l_text_field_dr_withSearch('hr_employee_id') ?>
+       <li><?php  $f->l_text_field_dr_withSearch('hr_employee_id') ?>
         <a name="show" href="form.php?class_name=hr_employee&<?php echo "mode=$mode"; ?>" class="show document_id hr_employee_id">
          <i class="fa fa-refresh"></i></a> 
        </li>
@@ -32,7 +32,7 @@
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <ul class="column header_field"> 
-       <li><?php $f->l_date_fieldFromToday('date_of_birth', $$class->date_of_birth); ?> </li>
+       <li><?php $f->l_date_fieldAnyDay('date_of_birth', $$class->date_of_birth); ?> </li>
        <li><?php $f->l_select_field_from_object('country_of_birth', mdm_tax_region::country(), 'option_line_code', 'option_line_value', $$class->country_of_birth, '', 'country_code', '', $readonly); ?>              </li>
        <li><?php $f->l_text_field_d('city_of_birth'); ?> 					</li>
        <li><?php $f->l_text_field_d('nationality'); ?> 					</li>
