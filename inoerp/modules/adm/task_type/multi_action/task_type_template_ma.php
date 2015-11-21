@@ -4,26 +4,26 @@
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
 
   <div id="searchResult">
-   <form action=""  method="post" id="adm_task_type"  name="adm_task_type">
-    <div id ="form_line" class="form_line"><span class="heading">Task Type</span>
+   <form  method="post" id="adm_task_type"  name="adm_task_type">
+    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Task Type') ?></span>
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1">Basic</a></li>
-       <li><a href="#tabsLine-2">Details</a></li>
+       <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+       <li><a href="#tabsLine-2"><?php echo gettext('Details') ?></a></li>
       </ul>
       <div class="tabContainer">
        <div id="tabsLine-1" class="tabContent">
         <table class="form_table">
          <thead> 
           <tr>
-           <th>Action</th>
-           <th>Task Type Id</th>
-           <th>Task Type</th>
-           <th>Description</th>
-           <th>Access Level</th>
-           <th>From Date</th>
-           <th>To Date</th>
-           <th>Process Flow</th>
+           <th><?php echo gettext('Action') ?></th>
+           <th><?php echo gettext('Task Type Id') ?></th>
+           <th><?php echo gettext('Task Type') ?></th>
+           <th><?php echo gettext('Description') ?></th>
+           <th><?php echo gettext('Access Level') ?></th>
+           <th><?php echo gettext('From Date') ?></th>
+           <th><?php echo gettext('To Date') ?></th>
+           <th><?php echo gettext('Process Flow') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">
@@ -60,11 +60,11 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th>Task Type Id</th>
-           <th>Auto Notification</th>
-           <th>Schedule</th>
-           <th>Effort UOM</th>
-           <th>Effort Value</th>
+           <th><?php echo gettext('Details') ?>Task Type Id</th>
+           <th><?php echo gettext('Details') ?>Auto Notification</th>
+           <th><?php echo gettext('Details') ?>Schedule</th>
+           <th><?php echo gettext('Details') ?>Effort UOM</th>
+           <th><?php echo gettext('Details') ?>Effort Value</th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">

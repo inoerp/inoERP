@@ -1,5 +1,5 @@
-<div id ="form_all"><span class="heading"><?php $f = new inoform(); echo gettext('Task status') ?></span>
- <form action=""  method="post" id="adm_task_status"  name="adm_task_status">
+<div id ="form_all"><span class="heading"><?php echo gettext('Task status') ?></span>
+ <form method="post" id="adm_task_status"  name="adm_task_status">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
