@@ -1,4 +1,4 @@
-<form action=""  method="post" id="item"  name="item">
+<form  method="post" id="item"  name="item">
  <span class="heading"><?php echo gettext('View Maintenance Activity')?> </span>
  <div id ="form_header">
   <div id="tabsHeader">

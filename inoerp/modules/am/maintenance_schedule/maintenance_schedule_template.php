@@ -1,5 +1,5 @@
-<div id="form_all"> <?php $f = new inoform() ?>
- <form action=""  method="post" id="am_maintenance_schedule"  name="am_maintenance_schedule">
+<div id="form_all">
+ <form method="post" id="am_maintenance_schedule"  name="am_maintenance_schedule">
   <span class="heading"><?php echo gettext('Maintenance Schedule') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">

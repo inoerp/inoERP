@@ -1,5 +1,5 @@
 <div id="form_all">
- <form action=""  method="post" id="am_asset"  name="am_asset">
+ <form method="post" id="am_asset"  name="am_asset">
   <span class="heading"><?php echo gettext('Asset Numbers') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">

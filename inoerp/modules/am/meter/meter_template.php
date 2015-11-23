@@ -1,6 +1,4 @@
-<div id ="form_all"><span class="heading"><?php $f = new inoform();
-echo gettext('Meter')
-?></span>
+<div id ="form_all"><span class="heading"><?php echo gettext('Meter') ?></span>
  <form action=""  method="post" id="am_meter"  name="am_meter">
   <div id ="form_header">
    <div id="tabsHeader">
