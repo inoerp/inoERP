@@ -1,5 +1,5 @@
 <div id ="form_header"><span class="heading"><?php echo gettext('Payment Header') ?></span>
- <form action=""  method="post" id="ap_payment_header"  name="ap_payment_header">
+ <form  method="post" id="ap_payment_header"  name="ap_payment_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>

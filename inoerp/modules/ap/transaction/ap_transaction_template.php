@@ -1,6 +1,6 @@
 
 <div id ="form_header"><span class="heading"><?php echo gettext('AP Transaction Header') ?></span>
- <form action=""  method="post" id="ap_transaction_header"  name="ap_transaction_header">
+ <form  method="post" id="ap_transaction_header"  name="ap_transaction_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -116,7 +116,7 @@
  </form>
 </div>
 <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Transaction Lines & Details') ?></span>
- <form action=""  method="post" id="ap_transaction_line"  name="ap_transaction_line">
+ <form  method="post" id="ap_transaction_line"  name="ap_transaction_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>

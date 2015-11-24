@@ -1,6 +1,6 @@
-<form action=""  method="post" id="supplier_bu"  name="supplier_bu">
+<form  method="post" id="supplier_bu"  name="supplier_bu">
  <div id ="form_header"><span class="heading"><?php echo gettext('Supplier Business Unit Association') ?></span>
-  <div class="tabContainer no_tab"><?php $f = new inoform(); ?>
+  <div class="tabContainer no_tab">
    <ul class="column header_field">
     <li><?php $f->l_text_field_dr_withSearch('supplier_bu_id') ?>
      <a name="show" href="form.php?class_name=supplier_bu&<?php echo "mode=$mode"; ?>" class="show document_id supplier_bu_id">

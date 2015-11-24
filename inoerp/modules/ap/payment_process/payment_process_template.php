@@ -1,7 +1,7 @@
 <div id ="form_header">
- <form action=""  method="post" id="ap_payment_process"  name="ap_payment_process">
+ <form  method="post" id="ap_payment_process"  name="ap_payment_process">
   <span class="heading"><?php echo gettext('Payment Process') ?></span>
-  <div class="tabContainer"><?php $f = new inoform(); ?>
+  <div class="tabContainer">
    <ul class="column header_field"> 
     <li><?php $f->l_text_field_dr_withSearch('ap_payment_process_id') ?>
      <a name="show" href="form.php?class_name=ap_payment_process&<?php echo "mode=$mode"; ?>" class="show document_id ap_payment_process_id">
@@ -15,7 +15,7 @@
 
    </ul>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading">Payment Source Details </span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Payment Source Details') ?> </span>
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>

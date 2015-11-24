@@ -8,7 +8,7 @@ inoERP
 -->
 
 <div id ="form_header"><span class="heading"><?php echo gettext('Payable Control') ?></span>
- <form action=""  method="post" id="ap_payable_control"  name="ap_payable_control">
+ <form method="post" id="ap_payable_control"  name="ap_payable_control">
   <div class="tabContainer">
    <ul class="column header_field"><?php $f = new inoform(); ?>
     <?php echo form::hidden_field('ap_payable_control_id', $$class->ap_payable_control_id); ?>
