@@ -11,7 +11,7 @@
    <li><a href="#tabsHeader-5"><?php echo gettext('Notes') ?></a></li>
    <li><a href="#tabsHeader-6"><?php echo gettext('Relationship') ?></a></li>
   </ul>
-  <form action=""  method="post" id="customer_header"  name="customer_header">
+  <form  method="post" id="customer_header"  name="customer_header">
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
@@ -79,10 +79,10 @@
 
 </div>
 <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Customer Site Details') ?></span>
- <form action=""  method="post" id="customer_site"  name="customer_site">
+ <form  method="post" id="customer_site"  name="customer_site">
   <div class="line_before_tab"> 
    <ul class="column five_column inline_list"> 
-    <li><?php $f->l_select_field_from_array('ar_customer_site_id', ar_customer_site::find_all_sitesOfCustomer_array($$class->ar_customer_id), $$class_second->ar_customer_site_id, 'ar_customer_site_id'); ?>
+    <li><?php $f->l_select_field_from_array('ar_customer_site_id', ar_customer_site::find_all_sitesOfCustomer_array($$class->ar_customer_id), $$class_second->ar_customer_site_id, 'ar_customer_site_id' , 'action medium'); ?>
      <a name="show" href="form.php?class_name=ar_customer&<?php echo "mode=$mode"; ?>" class="show document_id ar_customer_site_id" data-search_field='ar_customer_site_id'>
       <i class="fa fa-refresh"></i></a>      
     </li> 

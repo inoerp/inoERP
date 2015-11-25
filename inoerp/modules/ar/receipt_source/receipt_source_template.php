@@ -1,7 +1,7 @@
 <div id ="form_header">
- <form action=""  method="post" id="ar_receipt_source"  name="ar_receipt_source">
+ <form  method="post" id="ar_receipt_source"  name="ar_receipt_source">
   <span class="heading"><?php echo gettext('Receipt Source') ?></span>
-  <div class="tabContainer"><?php $f = new inoform(); ?>
+  <div class="tabContainer">
    <ul class="column header_field"> 
     <li><?php $f->l_text_field_dr_withSearch('ar_receipt_source_id') ?>
      <a name="show" href="form.php?class_name=ar_receipt_source&<?php echo "mode=$mode"; ?>" class="show document_id ar_receipt_source_id">

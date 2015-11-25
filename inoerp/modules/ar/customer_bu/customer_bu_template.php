@@ -1,11 +1,11 @@
-<form action=""  method="post" id="customer_bu"  name="customer_bu">
+<form  method="post" id="customer_bu"  name="customer_bu">
  <div id ="form_header"><span class="heading"><?php echo gettext('Customer BU Assignment') ?></span>
   <div class="tabContainer">
    <ul class="column header_field">
     <li><?php $f->l_text_field_dr_withSearch('ar_customer_bu_id') ?><a name="show" href="?ar_customer_bu_id=" class="show ar_customer_bu_id">
       <i class='fa fa-refresh'></i></a> 
     </li>
-    <li><label>Customer Id</label><a class='ajax-link' href="form.php?class_name=ar_customer&mode=<?php echo $mode; ?>&ar_customer_id=
+    <li><label><?php echo gettext('Customer Id') ?></label><a class='ajax-link' href="form.php?class_name=ar_customer&mode=<?php echo $mode; ?>&ar_customer_id=
                                      <?php echo $$class->ar_customer_id; ?>"><?php echo $$class->ar_customer_id; ?></a>
                                      <?php echo form::hidden_field('ar_customer_id', $$class->ar_customer_id); ?>
     </li>

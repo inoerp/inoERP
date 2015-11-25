@@ -1,5 +1,5 @@
 <div id ="form_header">
- <form action=""  method="post" id="ar_transaction_source"  name="ar_transaction_source">
+ <form method="post" id="ar_transaction_source"  name="ar_transaction_source">
   <span class="heading"><?php echo gettext('Receivable Transaction Source') ?></span>
   <div class="tabContainer">
    <ul class="column header_field"> 
