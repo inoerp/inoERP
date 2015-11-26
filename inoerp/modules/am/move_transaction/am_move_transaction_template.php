@@ -6,7 +6,7 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<form action=""  method="post" id="am_move_transaction"  name="am_move_transaction">
+<form  method="post" id="am_move_transaction"  name="am_move_transaction">
  <span class="heading"><?php echo gettext('Maintenance Move Transaction') ?></span>
  <div id ="form_header">
   <div id="tabsHeader">

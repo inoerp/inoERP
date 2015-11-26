@@ -10,10 +10,9 @@ inoERP
 <div id="am_wo_divId">
  <div id="form_all">
   <div id ="form_header"><span class="heading"><?php
-    $f = new inoform();
-    echo gettext('Maintenance Work Order')
+       echo gettext('Maintenance Work Order')
     ?></span>
-   <form action=""  method="post" id="am_wo_header"  name="am_wo_header">
+   <form  method="post" id="am_wo_header"  name="am_wo_header">
     <div id="tabsHeader">
      <ul class="tabMain">
       <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>

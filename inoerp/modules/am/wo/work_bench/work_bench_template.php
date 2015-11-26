@@ -6,7 +6,7 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<form action=""  method="post" id="am_wo_work_bench"  name="am_wo_work_bench">
+<form method="post" id="am_wo_work_bench"  name="am_wo_work_bench">
  <span class="heading"><?php echo gettext('Work Order Work Bench') ?></span>
  <div id ="form_header">
   <div id="tabsHeader">

@@ -4,27 +4,27 @@
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
 
   <div id="searchResult">
-   <form action=""  method="post" id="adm_task_status"  name="adm_task_status">
+   <form  method="post" id="adm_task_status"  name="adm_task_status">
     <div id ="form_line" class="form_line"><span class="heading">Task status</span>
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1">Basic</a></li>
-       <li><a href="#tabsLine-2">Details</a></li>
+       <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
+       <li><a href="#tabsLine-2"><?php echo gettext('Details') ?></a></li>
       </ul>
       <div class="tabContainer">
        <div id="tabsLine-1" class="tabContent">
         <table class="form_table">
          <thead> 
           <tr>
-           <th>Action</th>
-           <th>Task status Id</th>
-           <th>Task status</th>
-           <th>Description</th>
-           <th>Access Level</th>
-           <th>From Date</th>
-           <th>To Date</th>
-           <th>Start By</th>
-           <th>Due Date</th>
+           <th><?php echo gettext('Action') ?></th>
+           <th><?php echo gettext('Task Status Id') ?></th>
+           <th><?php echo gettext('Task Status') ?></th>
+           <th><?php echo gettext('Description') ?></th>
+           <th><?php echo gettext('Access Level') ?></th>
+           <th><?php echo gettext('From Date') ?></th>
+           <th><?php echo gettext('To Date') ?></th>
+           <th><?php echo gettext('Start By') ?></th>
+           <th><?php echo gettext('Due Date') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">
@@ -47,8 +47,8 @@
              <td><?php echo $f->select_field_from_array('access_level', option_header::$access_level_a, $$class->access_level, 'access_level', '', '', $readonly); ?></td>
              <td><?php echo $f->date_fieldAnyDay('from_date', $$class->from_date); ?></td>
              <td><?php echo $f->date_fieldAnyDay('to_date', $$class->to_date); ?></td>
-             <td><?php echo $f->select_field_from_array('start_by', adm_task_status::$start_by_a ,$$class->start_by,'start_by'); ?></td>
-             <td><?php echo $f->l_select_field_from_array('due_date', adm_task_status::$due_date_a ,$$class->due_date,'due_date'); ?></td>
+             <td><?php echo $f->select_field_from_array('start_by', adm_task_status::$start_by_a, $$class->start_by, 'start_by'); ?></td>
+             <td><?php echo $f->l_select_field_from_array('due_date', adm_task_status::$due_date_a, $$class->due_date, 'due_date'); ?></td>
             </tr>
             <?php
             $count = $count + 1;
@@ -79,7 +79,7 @@
              <td><?php echo $$class->adm_task_status_id; ?></td>
              <td><?php $f->checkBox_field_d('send_notification_cb'); ?></td>
              <td><?php $f->checkBox_field_d('schedule_cb'); ?></td>
-             <td><?php $f->l_select_field_from_object('primary_task_type',  adm_task_status::primary_task_status(),'option_line_code','option_line_value', $$class->primary_task_type,'primary_task_type'); ?></td>
+             <td><?php $f->l_select_field_from_object('primary_task_type', adm_task_status::primary_task_status(), 'option_line_code', 'option_line_value', $$class->primary_task_type, 'primary_task_type'); ?></td>
              <td><?php $f->l_text_field_d('usage'); ?></td>
             </tr>
             <?php

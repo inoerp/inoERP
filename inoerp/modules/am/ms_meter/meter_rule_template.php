@@ -1,6 +1,6 @@
 <div id ="form_header">
  <span class="heading"><?php echo gettext('Meter Rules [For Maintenace Schedule]') ?></span>
- <div id="tabsHeader"><?php $f = new inoform(); ?> 
+ <div id="tabsHeader">
   <ul class="tabMain">
    <li><a href="#tabsHeader-1"><?php echo gettext('Schedule Info') ?></a></li>
    <li><a href="#tabsHeader-2"><?php echo gettext('Future') ?></a></li>
