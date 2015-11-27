@@ -1,6 +1,4 @@
-<div id ="form_header"><span class="heading"><?php
-  echo gettext('Customer Information')
-  ?></span>
+<div id ="form_header"><span class="heading"><?php   echo gettext('Customer Information') ?></span>
 
  <div id="tabsHeader">
   <ul class="tabMain">
@@ -82,7 +80,7 @@
  <form  method="post" id="customer_site"  name="customer_site">
   <div class="line_before_tab"> 
    <ul class="column five_column inline_list"> 
-    <li><?php $f->l_select_field_from_array('ar_customer_site_id', ar_customer_site::find_all_sitesOfCustomer_array($$class->ar_customer_id), $$class_second->ar_customer_site_id, 'ar_customer_site_id' , 'action medium'); ?>
+    <li><?php $f->l_select_field_from_array('ar_customer_site_id', ar_customer_site::find_all_sitesOfCustomer_array($$class->ar_customer_id), $$class_second->ar_customer_site_id, 'ar_customer_site_id', 'action medium'); ?>
      <a name="show" href="form.php?class_name=ar_customer&<?php echo "mode=$mode"; ?>" class="show document_id ar_customer_site_id" data-search_field='ar_customer_site_id'>
       <i class="fa fa-refresh"></i></a>      
     </li> 
@@ -139,12 +137,8 @@
     <div id="tabsLine-3" class="tabContent">
      <div class="first_rowset"> 
       <ul class="column five_column"> 
-       <li><label>Status : </label>                      
-        <?php echo form::status_field($$class_second->status); ?>
-       </li>
-       <li><label>Profile : </label> 
-        <?php echo form::text_field_d2('profile_id'); ?>
-       </li> 
+       <li><label><?php echo gettext('Status') ?></label><?php echo form::status_field($$class_second->status); ?></li>
+       <li><label><?php echo gettext('Profile') ?></label><?php echo form::text_field_d2('profile_id'); ?></li> 
       </ul>
      </div>
     </div>

@@ -1,5 +1,5 @@
 <div id ="form_header">
- <form action=""  method="post" id="bc_label_request"  name="bc_label_request">
+ <form  method="post" id="bc_label_request"  name="bc_label_request">
   <span class="heading"><?php echo gettext('Label Request') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">

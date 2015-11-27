@@ -1,5 +1,5 @@
 <div id ="form_header">
- <form action=""  method="post" id="bc_static_label"  name="bc_static_label">
+ <form method="post" id="bc_static_label"  name="bc_static_label">
   <span class="heading"><?php echo gettext('Static Labels') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">

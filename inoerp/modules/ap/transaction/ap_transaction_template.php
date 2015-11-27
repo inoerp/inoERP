@@ -1,4 +1,3 @@
-
 <div id ="form_header"><span class="heading"><?php echo gettext('AP Transaction Header') ?></span>
  <form  method="post" id="ap_transaction_header"  name="ap_transaction_header">
   <div id="tabsHeader">

@@ -16,7 +16,6 @@
        <li><a href="#tabsLine-2"><?php echo gettext('Reporting') ?></a></li>
       </ul>
       <div class="tabContainer"> 
-
        <div id="tabsLine-1" class="tabContent">
         <table class="form_table">
          <thead> 
@@ -29,7 +28,6 @@
            <th><?php echo gettext('City') ?></th>
            <th><?php echo gettext('Street') ?></th>
            <th><?php echo gettext('Region Name') ?></th>
-           
           </tr>
          </thead>
          <tbody class="form_data_line_tbody sales_region_values" >
@@ -77,7 +75,6 @@
            <th><?php echo gettext('Description') ?></th>
            <th><?php echo gettext('Status') ?></th>
            <th><?php echo gettext('Tax Region') ?></th>
-           
           </tr>
          </thead>
          <tbody class="form_data_line_tbody sales_region_values" >
