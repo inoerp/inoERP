@@ -11,7 +11,7 @@
 			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 			<!--    End of place for showing error messages-->
 			<div id ="form_header"><span class="heading">Shipping Control </span>
-			 <form action=""  method="post" id="sd_shipping_control"  name="sd_shipping_control">
+			 <form method="post" id="sd_shipping_control"  name="sd_shipping_control">
 				<div class="large_shadow_box">
 				 <ul class="column five_column"> 
 					<?php echo form::hidden_field('sd_shipping_control_id', $$class->sd_shipping_control_id); ?>

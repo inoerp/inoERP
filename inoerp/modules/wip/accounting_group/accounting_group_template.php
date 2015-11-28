@@ -7,7 +7,7 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id ="form_header"><span class="heading"><?php echo gettext('WIP Accounting Group') ?></span>
- <form action=""  method="post" id="wip_accounting_group"  name="wip_accounting_group"><?php  $f = new inoform(); ?>
+ <form method="post" id="wip_accounting_group"  name="wip_accounting_group"><?php  $f = new inoform(); ?>
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
