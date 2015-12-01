@@ -8,13 +8,13 @@ inoERP
 -->
 
 <div id="wip_wol_transaction_divId">
- <?php echo (!empty($hidden_stmt)) ? $hidden_stmt : ""; ?>  <?php $f = new inoform(); ?>
+ <?php echo (!empty($hidden_stmt)) ? $hidden_stmt : ""; ?>
  <!--    End of place for showing error messages-->
 
 
  <!--create empty form or a single id when search is not clicked and the id is referred from other page -->
  <div id ="form_header"> <span class="heading"><?php echo gettext('Work Order Less Transaction') ?></span> 
-  <form action=""  method="post" id="wip_wol_transaction"  name="wip_wol_transaction">
+  <form method="post" id="wip_wol_transaction"  name="wip_wol_transaction">
    <div id="tabsHeader">
     <ul class="tabMain">
      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>

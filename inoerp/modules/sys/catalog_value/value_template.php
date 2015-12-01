@@ -1,6 +1,6 @@
 <div id ="form_header">
  <span class="heading"><?php echo gettext('Catalog Value') ?></span>
- <div id="tabsHeader"><?php $f = new inoform(); ?> 
+ <div id="tabsHeader">
   <ul class="tabMain">
    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
   </ul>
@@ -23,7 +23,7 @@
    <li><a href="#tabsLine-1"><?php echo gettext('Name & Values') ?></a></li>
   </ul>
   <div class="tabContainer"> 
-   <form action=""  method="post" id="sys_catalog_value"  name="sys_catalog_value">
+   <form method="post" id="sys_catalog_value"  name="sys_catalog_value">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_table">
       <thead> 

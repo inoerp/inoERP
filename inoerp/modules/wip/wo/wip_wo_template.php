@@ -10,7 +10,7 @@ inoERP
 <div id="wip_wo_divId">
  <div id="form_all">
   <div id ="form_header">	 <span class="heading"><?php echo gettext('Work Order Header') ?></span>
-   <form action=""  method="post" id="wip_wo_header"  name="wip_wo_header">
+   <form method="post" id="wip_wo_header"  name="wip_wo_header">
     <div id="tabsHeader">
      <ul class="tabMain">
       <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -111,7 +111,7 @@ inoERP
     </div>
    </form>
   </div>
-  <span class="heading"> Work Order Details </span>
+  <span class="heading"><?php echo gettext('Work Order Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Routing') ?></a></li>

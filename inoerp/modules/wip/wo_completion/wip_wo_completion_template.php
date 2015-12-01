@@ -8,7 +8,7 @@ inoERP
 -->
 <!--create empty form or a single id when search is not clicked and the id is referred from other page -->
 <div id ="form_all"> 
- <form  method="post" id="wip_wo_completion"  name="wip_wo_completion"><?php $f = new inoform(); ?>
+ <form  method="post" id="wip_wo_completion"  name="wip_wo_completion">
   <span class="heading"><?php echo gettext('Work Order Completion/Return') ?></span> 
   <div id ="form_header"> 
    <div id="form_serach_header" class="tabContainer">

@@ -7,7 +7,7 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id ="form_header"><span class="heading"><?php   echo gettext('Catalog')   ?></span>
- <form action=""  method="post" id="sys_catalog_header"  name="sys_catalog_header">
+ <form method="post" id="sys_catalog_header"  name="sys_catalog_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -52,7 +52,7 @@ inoERP
 </div>
 
 <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Catalog Lines') ?></span>
- <form action=""  method="post" id="sys_catalog_line"  name="sys_catalog_line">
+ <form method="post" id="sys_catalog_line"  name="sys_catalog_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
