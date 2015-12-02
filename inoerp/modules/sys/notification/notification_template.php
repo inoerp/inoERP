@@ -1,5 +1,5 @@
 <div id ="form_header">
- <form action=""  method="post" id="sys_notification"  name="sys_notification">
+ <form method="post" id="sys_notification"  name="sys_notification">
   <span class="heading"><?php echo gettext('Notification') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">

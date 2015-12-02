@@ -1,5 +1,5 @@
 <div id ="form_header">
- <form action=""  method="post" id="sys_extra_field_form"  name="sys_extra_field_form">
+ <form method="post" id="sys_extra_field_form"  name="sys_extra_field_form">
   <span class="heading"><?php echo gettext('Extra Fields') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">

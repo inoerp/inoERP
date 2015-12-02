@@ -1,7 +1,7 @@
 <div id ="form_header">
- <form action=""  method="post" id="sys_hold"  name="sys_hold">
+ <form method="post" id="sys_hold"  name="sys_hold">
   <span class="heading"><?php echo gettext('System Hold') ?></span>
-  <div id ="form_header"><?php $f = NEW INOFORM() ?>
+  <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>

@@ -1,11 +1,8 @@
-<form action=""  method="post" id="sys_message_format"  name="sys_message_format"><span class="heading">Message Format </span>
+<form   method="post" id="sys_message_format"  name="sys_message_format"><span class="heading">Message Format </span>
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php
-      $f = new inoform();
-      echo gettext('Basic Info')
-      ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
     <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
    </ul>
@@ -51,7 +48,7 @@
    </div>
   </div>
  </div>
- <div id ="form_line" class="form_line"><span class="heading"> Message Details </span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Message Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Body') ?></a></li>
@@ -67,12 +64,12 @@
     </div>
     <div id="tabsLine-3" class="tabContent">
      <ul class='column two_column'>
-      <li><label>Any Data: </label> {{table_name.field_name}}</li>
-      <li><label>User Name : </label> {{user.username}}</li>
-      <li><label>User Id : </label> {{user.user_id}}</li>
-      <li><label>User eMail : </label> {{user.email}}</li>
-      <li><label>Site Name : </label> {{site_info.site_name}}</li>
-      <li><label>Site eMail : </label> {{site_info.email}}</li>
+      <li><label><?php echo gettext('Any Data') ?>: </label> {{table_name.field_name}}</li>
+      <li><label><?php echo gettext('User Name') ?> : </label> {{user.username}}</li>
+      <li><label><?php echo gettext('User Id') ?> : </label> {{user.user_id}}</li>
+      <li><label><?php echo gettext('User eMail') ?> : </label> {{user.email}}</li>
+      <li><label><?php echo gettext('Site Name') ?> : </label> {{site_info.site_name}}</li>
+      <li><label><?php echo gettext('Site eMail') ?> : </label> {{site_info.email}}</li>
      </ul>
     </div> 
    </div>
