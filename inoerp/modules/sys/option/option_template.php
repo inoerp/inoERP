@@ -55,8 +55,8 @@
    </div>
   </form>
   <!--END OF FORM HEADER-->
-  <div id ="form_line" class="form_line"><span class="heading">Option Line </span>
-   <form action=""  method="post" id="option_line"  name="option_line">
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Option Line') ?></span>
+   <form  method="post" id="option_line"  name="option_line">
     <div id="tabsLine">
      <ul class="tabMain">
       <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
@@ -118,7 +118,7 @@
             }
             ?>
             <div class="class_detail_form">
-             <fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
+             <fieldset class="form_detail_data_fs"><legend><?php echo gettext('Detail Data') ?></legend>
               <table class="form form_detail_data_table detail">
                <thead>
                 <tr>
@@ -184,7 +184,6 @@
         <thead> 
          <tr>
           <th><?php echo gettext('Seq') ?>#</th>
-
           <th><?php echo gettext('Status') ?></th>
           <th><?php echo gettext('Start Date') ?></th>
           <th><?php echo gettext('End Date') ?></th>
