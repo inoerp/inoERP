@@ -1,5 +1,5 @@
 <div id ="form_header">
- <form action=""  method="post" id="sys_printer"  name="sys_printer">
+ <form  method="post" id="sys_printer"  name="sys_printer">
   <span class="heading"><?php echo gettext('Printer') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">

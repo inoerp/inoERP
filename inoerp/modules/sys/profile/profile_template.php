@@ -1,6 +1,6 @@
 <div id="form_all">
  <span class="heading"><?php echo gettext('Profile Header') ?></span>
- <form action=""  method="post" id="sys_profile_header"  name="sys_profile_header">
+ <form method="post" id="sys_profile_header"  name="sys_profile_header">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
@@ -36,8 +36,8 @@
       <table class="form_table">
        <thead> 
         <tr>
-         <th>Action</th>
-         <th>Line Id</th> 
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Line Id') ?></th> 
          <?php
          switch ($profile_level) {
           case 'SITE' :

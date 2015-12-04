@@ -1,7 +1,7 @@
 <div id ="form_header">
  <span class="heading"><?php echo gettext('Process Flow Header') ?></span>
  <form action=""  method="post" id="process_flow_header"  name="process_flow_header">
-  <div id="tabsHeader"><?php $f = new inoform(); ?>
+  <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
     <li><a href="#tabsHeader-2"><?php echo gettext('Notes') ?></a></li>

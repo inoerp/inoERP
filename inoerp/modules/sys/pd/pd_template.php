@@ -3,7 +3,7 @@
  $template_lines_ia = new ArrayIterator($template_lines);
  ?> 
  <div id ="form_header">
-  <form action=""  method="post" id="sys_pd_header"  name="sys_pd_header">
+  <form  method="post" id="sys_pd_header"  name="sys_pd_header">
    <div id="tabsHeader">
     <ul class="tabMain">
      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -79,7 +79,7 @@
   </form>
  </div>
 
- <span class="heading"> Document Details </span>
+ <span class="heading"><?php echo gettext('Document Details') ?></span>
  <div id="tabsLine">
   <ul class="tabMain">
    <li><a href="#tabsLine-1"><?php echo gettext('Flow Diagram') ?></a></li>
