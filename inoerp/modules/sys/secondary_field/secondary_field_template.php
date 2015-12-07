@@ -1,5 +1,5 @@
-<div id ="form_header"><?php $f = new inoform() ?>
- <form action=""  method="post" id="sys_secondary_field_form"  name="sys_secondary_field_form">
+<div id ="form_header">
+ <form method="post" id="sys_secondary_field_form"  name="sys_secondary_field_form">
   <span class="heading"><?php echo gettext('Secondary Fields') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">

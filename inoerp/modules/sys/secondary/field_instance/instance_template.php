@@ -9,30 +9,30 @@
      <i class="fa fa-refresh"></i></a> 
    </div>
  </div>
- <form action=""  method="post" id="secondary_field"  name="secondary_field">
+ <form  method="post" id="secondary_field"  name="secondary_field">
   <!--END OF FORM HEADER-->
   <div id ="form_line" class="secondary_field"><span class="heading">Field Details </span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1">Basic Info </a></li>
-     <li><a href="#tabsLine-2">List Values </a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?> </a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('List Values') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <table class="form form_line_data_table line">
        <thead>
         <tr>
-         <th>Action</th>
-         <th>Seq#</th>
-         <th>Instance Id</th>
-         <th>Field Name</th>
-         <th>Label</th>
-         <th>Type</th>
-         <th>Control Type</th>
-         <th>Control Value</th>
-         <th>Control UOM</th>
-         <th>Display Weight</th>
-         <th>Active</th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Seq') ?>#</th>
+         <th><?php echo gettext('Instance Id') ?></th>
+         <th><?php echo gettext('Field Name') ?></th>
+         <th><?php echo gettext('Label') ?></th>
+         <th><?php echo gettext('Type') ?></th>
+         <th><?php echo gettext('Control Type') ?></th>
+         <th><?php echo gettext('Control Value') ?></th>
+         <th><?php echo gettext('Control UOM') ?></th>
+         <th><?php echo gettext('Display Weight') ?></th>
+         <th><?php echo gettext('Active') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -72,11 +72,11 @@
       <table class="form form_line_data_table line">
        <thead>
         <tr>
-         <th>Seq#</th>
-         <th>Lower Limit</th>
-         <th>Upper Limit</th>
-         <th>List Option Type</th>
-         <th>Field Name</th>
+         <th><?php echo gettext('Seq') ?>#</th>
+         <th><?php echo gettext('Lower Limit') ?></th>
+         <th><?php echo gettext('Upper Limit') ?></th>
+         <th><?php echo gettext('List Option Type') ?></th>
+         <th><?php echo gettext('Field Name') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">

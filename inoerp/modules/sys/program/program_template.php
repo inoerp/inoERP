@@ -20,9 +20,6 @@
   </div>
  </form>
 </div>
-
-<!--END OF FORM HEADER-->
-
 <div id ="form_line">
  <div id="tabsLine">
   <ul class="tabMain">

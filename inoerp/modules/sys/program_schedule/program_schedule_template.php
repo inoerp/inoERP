@@ -1,13 +1,10 @@
 <div id ="form_header">
- <form action=""  method="post" id="sys_program_schedule"  name="sys_program_schedule">
-  <span class="heading">Program / Report Scheduler </span>
+ <form method="post" id="sys_program_schedule"  name="sys_program_schedule">
+  <span class="heading"><?php echo gettext('Program / Report Scheduler') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php
-       $f = new inoform();
-       echo gettext('Basic Info')
-       ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
      <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
      <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
@@ -73,7 +70,7 @@
       <?php echo form::text_area('parameter', base64_decode($$class->report_query), '10', '150', '', '', '', 1); ?>
      </div>
      <div id="tabsLine-3" class="tabContent">
-      <?php echo form::text_area('email_addresses', $$class->op_email_address, '3', '120', '', 'Separate each email address by comma(,) or a new line','',1) ?>
+      <?php echo form::text_area('email_addresses', $$class->op_email_address, '3', '120', '', 'Separate each email address by comma(,) or a new line', '', 1) ?>
      </div>
     </div>
    </div>
