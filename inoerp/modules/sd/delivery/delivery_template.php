@@ -16,7 +16,7 @@ inoERP
    <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
   </ul>
   <div class="tabContainer">
-   <form action=""  method="post" id="sd_delivery_header"  name="sd_delivery_header">
+   <form method="post" id="sd_delivery_header"  name="sd_delivery_header">
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
       <li><?php $f->l_text_field_dr_withSearch('sd_delivery_header_id'); ?>
@@ -83,8 +83,8 @@ inoERP
  </div>
 
 </div>
-<div id="form_line" class="form_line"><span class="heading">Delivery Lines</span>
- <form action=""  method="post" id="po_site"  name="sd_delivery_line">
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Delivery Lines') ?></span>
+ <form  method="post" id="sd_delivery_line"  name="sd_delivery_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('SO Info') ?></a></li>

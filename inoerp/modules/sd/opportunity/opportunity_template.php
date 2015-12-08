@@ -8,7 +8,7 @@ inoERP
 -->
 <span class="heading"><?php echo gettext('Sales Opportunity') ?></span>
 <div id ="form_header">
- <form action=""  method="post" id="sd_opportunity"  name="sd_opportunity">
+ <form  method="post" id="sd_opportunity"  name="sd_opportunity">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">

@@ -8,7 +8,7 @@ inoERP
 -->
 
 <div id ="form_header">
- <form action=""  method="post" id="sd_lead"  name="sd_lead">
+ <form method="post" id="sd_lead"  name="sd_lead">
   <span class="heading"><?php echo gettext('Sales Lead') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
@@ -91,7 +91,7 @@ inoERP
    </div>
   </div>
 
-  <div id ="form_line"><span class="heading">Other Details </span>
+  <div id ="form_line"><span class="heading"><?php echo gettext('Other Details') ?> </span>
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Existing Info') ?></a></li>
