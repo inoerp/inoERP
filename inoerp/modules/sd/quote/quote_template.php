@@ -8,7 +8,7 @@ inoERP
 -->
 <div id ="form_header">
  <span class="heading"><?php echo gettext('Sales Quote Header') ?></span>
- <form action=""  method="post" id="sd_quote_header"  name="sd_quote_header">
+ <form  method="post" id="sd_quote_header"  name="sd_quote_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -82,7 +82,7 @@ inoERP
     <div id="tabsHeader-6" class="tabContent">
      <div> 
       <ul class="column five_column">
-       <li id="document_print"><label>Document Print : </label>
+       <li id="document_print"><label><?php echo gettext('Document Print') ?></label>
         <a class="button" target="_blank"
            href="<?php echo HOME_URL ?>modules/sd/quote/quote_print.php?sd_quote_header_id=<?php echo!(empty($$class->sd_quote_header_id)) ? $$class->sd_quote_header_id : ""; ?>" >Print Quote</a>
        </li>
@@ -98,7 +98,7 @@ inoERP
   </div>
  </form>
 </div>
-<div id="form_line" class="form_line"><span class="heading">Quote Lines & Shipments </span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Quote Lines & Shipments') ?></span>
  <form action=""  method="post" id="quote_site"  name="sd_quote_line">
   <div id="tabsLine">
    <ul class="tabMain">

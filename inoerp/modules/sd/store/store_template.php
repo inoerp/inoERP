@@ -1,7 +1,6 @@
-
 <div class="row small-left-padding">
 <div id="form_all">
- <form action=""  method="post" id="sd_store"  name="sd_store">
+ <form  method="post" id="sd_store"  name="sd_store">
   <span class="heading"><?php echo gettext('Physical Store') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">

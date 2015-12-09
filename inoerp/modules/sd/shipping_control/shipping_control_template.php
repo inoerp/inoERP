@@ -8,7 +8,7 @@ inoERP
 -->
 
 <div id ="form_header"><span class="heading"><?php echo gettext('Shipping Control') ?></span>
- <form action=""  method="post" id="sd_shipping_control"  name="sd_shipping_control">
+ <form method="post" id="sd_shipping_control"  name="sd_shipping_control">
   <div class="tabContainer">
    <ul class="column header_field"><?php $f = new inoform(); ?>  
     <?php echo form::hidden_field('sd_shipping_control_id', $$class->sd_shipping_control_id); ?>
@@ -20,7 +20,7 @@ inoERP
     <li><?php $f->l_text_field_d('rev_number'); ?> </li>
    </ul>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading">Details </span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Details') ?> </span>
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Shipping Info') ?></a></li>

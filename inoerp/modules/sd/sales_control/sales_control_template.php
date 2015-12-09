@@ -7,7 +7,7 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id ="form_header"><span class="heading"><?php echo gettext('Sales Control') ?></span>
- <form action=""  method="post" id="sd_sales_control"  name="sd_sales_control">
+ <form method="post" id="sd_sales_control"  name="sd_sales_control">
   <div class="tabContainer">
    <ul class="column header_field">
     <?php echo form::hidden_field('sd_sales_control_id', $$class->sd_sales_control_id); ?>

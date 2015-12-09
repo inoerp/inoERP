@@ -7,7 +7,7 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id ="form_header"><span class="heading"><?php echo gettext('Sales Order / RMA Header') ?></span>
- <form action=""  method="post" id="sd_so_header"  name="sd_so_header">
+ <form method="post" id="sd_so_header"  name="sd_so_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
