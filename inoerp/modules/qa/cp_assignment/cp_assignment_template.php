@@ -6,10 +6,7 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php
-  $f = new inoform();
-  echo gettext('Collection Plan Assignment')
-  ?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Collection Plan Assignment') ?></span>
  <form method="post" id="qa_cp_assignment_header"  name="qa_cp_assignment_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -36,7 +33,7 @@ inoERP
      <div> 
       <div id="comments">
        <div id="comment_list">
-<?php echo!(empty($comments)) ? $comments : ""; ?>
+        <?php echo!(empty($comments)) ? $comments : ""; ?>
        </div>
        <div id ="display_comment_form">
         <?php

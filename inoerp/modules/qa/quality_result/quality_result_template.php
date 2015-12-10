@@ -1,6 +1,6 @@
 <form  method="post" id="qa_quality_result"  name="qa_quality_result">
  <span class="heading"><?php echo gettext('Quality Results') ?></span>
- <div id ="form_header"><?php $f = new inoform() ?>
+ <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>
