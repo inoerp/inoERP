@@ -1,5 +1,5 @@
 <div id ="form_all"><span class="heading"><?php echo gettext('Budget Entry Method') ?></span>
- <form action=""  method="post" id="prj_bem"  name="prj_bem">
+ <form  method="post" id="prj_bem"  name="prj_bem">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
