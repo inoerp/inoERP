@@ -1,6 +1,6 @@
 <div class="row small-left-padding">
  <div id="form_all">
-  <form action=""  method="post" id="prj_burden_list_header"  name="prj_burden_list_header">
+  <form method="post" id="prj_burden_list_header"  name="prj_burden_list_header">
    <span class="heading"><?php echo gettext('Burden  List') ?></span>
    <div id ="form_header">
     <div id="tabsHeader">
@@ -47,7 +47,7 @@
     </div>
    </div>
   </form>
-  <div id ="form_line" class="form_line"><span class="heading">Burden List Lines </span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Burden List Lines') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Values') ?></a></li>
