@@ -7,10 +7,9 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id ="form_header"><span class="heading"><?php
-  $f = new inoform();
   echo gettext('Service Order')
   ?></span>
- <form action=""  method="post" id="prj_status_header"  name="prj_status_header">
+ <form method="post" id="prj_status_header"  name="prj_status_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -233,7 +232,7 @@ inoERP
    </div>
   </form>
   <div id ="form_line2" class="form_line2">
-   <form action=""  method="post" id="prj_status_next"  name="prj_status_next">
+   <form method="post" id="prj_status_next"  name="prj_status_next">
     <div id="tabsLine-3" class="tabContent">
      <table class="form_line_data_table">
       <thead> 

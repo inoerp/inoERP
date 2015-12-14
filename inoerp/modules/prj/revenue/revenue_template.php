@@ -8,7 +8,6 @@ inoERP
 -->
 
 <div id ="form_header"><span class="heading"><?php
-  $f = new inoform();
   echo gettext('Project Revenue')
   ?></span>
  <form  method="post" id="prj_revenue_header"  name="prj_revenue_header">
@@ -98,7 +97,7 @@ inoERP
 </div>
 
 <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Revenue Lines') ?></span>
- <form action=""  method="post" id="prj_revenue_line"  name="prj_revenue_line">
+ <form  method="post" id="prj_revenue_line"  name="prj_revenue_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
