@@ -2,8 +2,7 @@
 
  <div class="row">
   <?php
-  $f = new inoform();
-  category::breadCrum_by_category($priority_category);
+   category::breadCrum_by_category($priority_category);
   ?>
  </div>
  <div class="row product level-1">

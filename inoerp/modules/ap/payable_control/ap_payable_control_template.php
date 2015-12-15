@@ -10,7 +10,7 @@ inoERP
 <div id ="form_header"><span class="heading"><?php echo gettext('Payable Control') ?></span>
  <form method="post" id="ap_payable_control"  name="ap_payable_control">
   <div class="tabContainer">
-   <ul class="column header_field"><?php $f = new inoform(); ?>
+   <ul class="column header_field">
     <?php echo form::hidden_field('ap_payable_control_id', $$class->ap_payable_control_id); ?>
     <li><?php $f->l_select_field_from_object('org_id', org::find_all_business(), 'org_id', 'org', $$class->org_id, 'org_id', 'action', 1, $readonly1); ?>
      <a name="show" href="form.php?class_name=ap_payable_control&<?php echo "mode=$mode"; ?>" class="show org_id"><i class="fa fa-refresh"></i></a> 

@@ -89,7 +89,6 @@ inoERP
       <tbody class="form_data_line_tbody">
        <?php
        $count = 0;
-       $f = new inoform();
        foreach ($bom_config_line_object as $bom_config_line) {
         if (empty($$class_second->line_quantity) && !empty($quantity)) {
          $$class_second->line_quantity = $$class_second->usage_quantity * $quantity;

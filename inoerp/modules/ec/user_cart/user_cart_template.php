@@ -2,14 +2,14 @@
  <div id="form_all">
   <div id="form_headerDiv">
    <form action="<?php echo $post_link ?>"  method="post" id="ec_cart_line"  name="ec_cart_line">
-    <span class="heading"><?php $f = new inoform(); ?></span>
+    <span class="heading"></span>
     <div id ="form_line" class="ec_cart">
      <div class="panel panel-info">
       <div class="panel-heading">
-       <h3>Cart Details - Verify & Confirm Order</h3>
+       <h3><?php echo gettext('Cart Details - Verify & Confirm Order') ?></h3>
       </div>
       <div class="panel-body">
-       <p>Free Standard Delivery if total order amount is $50 or above.  </p>
+       <p><?php echo gettext('Free Standard Delivery if total order amount is $50 or above.') ?></p>
       </div>
       <table class="table table-bordered table-large cart ">
        <thead> 
@@ -94,7 +94,7 @@
       </table>
       <div class="panel-footer">
        <div class="row">
-        <div class="col-md-5"><label>Discount Code </label>
+        <div class="col-md-5"><label><?php echo gettext('Discount Code') ?> </label>
          <?php echo $f->text_field('discount_code', '', '', 'discount_code', 'big-input') ?>
          <button class="btn btn-default continue-shopping" role="button">Apply Discount</button></div>
         <div class="col-md-5"><label>Pin Code </label>
@@ -115,10 +115,10 @@
    </form>
    <div class="panel-footer">
     <div class="row">
-     <div class="col-md-4"><a class="btn btn-lg btn-default continue-shopping" role="button" href="product.php">Continue Shopping</a></div>
-     <div class="col-md-3"><button class="btn btn-lg btn-default save-cart" role="button">Save Cart</button></div>
+     <div class="col-md-4"><a class="btn btn-lg btn-default continue-shopping" role="button" href="product.php"><?php echo gettext('Continue Shopping') ?></a></div>
+     <div class="col-md-3"><button class="btn btn-lg btn-default save-cart" role="button"><?php echo gettext('Save Cart') ?></button></div>
      <div class="col-md-3"><input type="submit" role="button" class="btn btn-lg btn-primary place-order" value="Place Order" form="ec_cart_line"></div>
-     <div class="col-md-2"><span class="btn btn-lg"> Total Amount : <?php echo $curr;
+     <div class="col-md-2"><span class="btn btn-lg"><?php echo gettext('Total Amount') ?> : <?php echo $curr;
         echo '<span class="total-amount">' . $total . '</span>'; ?></span></div>
     </div>
    </div>

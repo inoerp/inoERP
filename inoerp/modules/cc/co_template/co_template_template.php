@@ -1,7 +1,7 @@
 <div id ="form_header">
- <form action=""  method="post" id="cc_co_template_header"  name="cc_co_template_header">
+ <form method="post" id="cc_co_template_header"  name="cc_co_template_header">
   <span class="heading"><?php echo gettext('Change Control Template') ?></span>
-  <div id="tabsHeader"><?php $f = new inoform(); ?>
+  <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
    </ul>
@@ -25,7 +25,7 @@
 
 <div id="form_line" class="form_line">
  <span class="heading"><?php echo gettext('Template Fields') ?></span>
- <form action=""  method="post" id="cc_co_template_line"  name="cc_co_template_line">
+ <form method="post" id="cc_co_template_line"  name="cc_co_template_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>

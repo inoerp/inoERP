@@ -8,7 +8,7 @@ inoERP
 -->
 
 <div id ="form_header"><span class="heading"><?php echo gettext('Item Cost Header') ?></span>
- <form action=""  method="post" id="cst_item_cost_header"  name="cst_item_cost_header"><?php $f = new inoform(); ?>
+ <form method="post" id="cst_item_cost_header"  name="cst_item_cost_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -102,8 +102,8 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading">Cost Lines</span>
- <form action=""  method="post" id="cst_item_cost_line"  name="cst_item_cost_line">
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Cost Lines') ?></span>
+ <form method="post" id="cst_item_cost_line"  name="cst_item_cost_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>

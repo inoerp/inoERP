@@ -6,7 +6,6 @@
   <div class="col-md-6 left">
    <div>
     <?php
-    $f = new inoform();
     echo $f->hidden_field_withId('ec_product_id', $$class->ec_product_id);
     echo $f->hidden_field_withId('class_name', 'ec_product');
     $extn_img = new extn_image();

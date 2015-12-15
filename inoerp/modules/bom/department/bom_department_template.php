@@ -7,7 +7,7 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 
-<div id="form_all"><?php $f = new inoform() ?>
+<div id="form_all">
  <span class="heading"><?php echo gettext('Department') ?></span>
  <form action=""  method="post" id="bom_department"  name="bom_department" class="bom_department">
   <div id ="form_header">
@@ -55,7 +55,7 @@ inoERP
    </div>
   </div>
  </form>
- <div id ="form_line" class="form_line"><span class="heading"> Department Details </span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Department Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Resource Assignment') ?></a></li>

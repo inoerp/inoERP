@@ -389,11 +389,7 @@
     <div id="tabsLine-7" class="tabContent">
      <div class="first_rowset"> 
       <ul class="column header_field"> 
-       <li><?php
-        $f = new inoform();
-        echo $f->l_select_field_from_array('am_asset_type', item::$am_asset_type_a, $$class->am_asset_type, 'am_asset_type');
-        ?>
-       </li> 
+       <li><?php   echo $f->l_select_field_from_array('am_asset_type', item::$am_asset_type_a, $$class->am_asset_type, 'am_asset_type');     ?>    </li> 
       </ul>
      </div>
      <div class="panel panel-collapse panel-ino-classy medium_box">

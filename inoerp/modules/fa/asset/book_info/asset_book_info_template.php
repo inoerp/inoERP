@@ -1,6 +1,6 @@
-<form action=""  method="post" id="fa_asset_book_info"  name="fa_asset_book_info">
+<form  method="post" id="fa_asset_book_info"  name="fa_asset_book_info">
  <span class="heading"><?php echo gettext('Asset Book Information') ?></span>
- <div id ="form_header"><?php $f = new inoform() ?>
+ <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>

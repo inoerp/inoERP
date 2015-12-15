@@ -1,7 +1,7 @@
 <div id ="form_header">
  <form method="post" id="bc_label_format_header"  name="bc_label_format_header">
   <span class="heading"><?php echo gettext('Barcode Label Format') ?></span>
-  <div id="tabsHeader"><?php $f = new inoform(); ?>
+  <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
     <li><a href="#tabsHeader-2"><?php echo gettext('Data Object') ?></a></li>
@@ -33,7 +33,7 @@
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading">Template Fields </span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Template Fields') ?></span>
  <form method="post" id="bc_label_format_line"  name="bc_label_format_line">
   <div id="tabsLine">
    <ul class="tabMain">

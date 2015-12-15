@@ -1,5 +1,5 @@
-<div id ="form_header"> <?php $f = new inoform(); ?>
- <form action=""  method="post" id="fa_asset_category"  name="fa_asset_category">
+<div id ="form_header">
+ <form method="post" id="fa_asset_category"  name="fa_asset_category">
   <span class="heading"><?php echo gettext('Asset Category') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">

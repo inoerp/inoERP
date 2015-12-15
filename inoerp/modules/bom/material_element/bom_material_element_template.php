@@ -8,8 +8,8 @@ inoERP
 -->
 
 
-<div id="form_all"><span class="heading"><?php echo gettext('Material Element') ?></span><?php $f = new inoform() ?>
- <form action=""  method="post" id="bom_material_element"  name="bom_material_element">
+<div id="form_all"><span class="heading"><?php echo gettext('Material Element') ?></span>
+ <form method="post" id="bom_material_element"  name="bom_material_element">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">

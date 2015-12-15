@@ -1,5 +1,5 @@
-<form action=""  method="post" id="ec_product"  name="ec_product"><span class="heading">eCommerce Product </span>
- <div id ="form_header"><?php $f = new inoform() ?>
+<form method="post" id="ec_product"  name="ec_product"><span class="heading">eCommerce Product </span>
+ <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
