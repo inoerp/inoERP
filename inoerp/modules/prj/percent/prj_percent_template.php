@@ -12,7 +12,6 @@
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
       <li><?php
-       $f = new inoform();
        echo $f->l_val_field_dm('project_number', 'prj_project_header', 'project_number', '', 'project_number', 'vf_select_project_number action');
        echo $f->hidden_field_withIdClass('prj_percent_header_id', $$class->prj_percent_header_id, 'action');
        echo $f->hidden_field_withIdClass('prj_project_header_id', $$class->prj_project_header_id, 'action');

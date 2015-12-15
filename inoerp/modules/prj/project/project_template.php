@@ -7,10 +7,9 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id ="form_header"><span class="heading"><?php
-  $f = new inoform();
   echo gettext('Project & Templates')
   ?></span>
- <form action=""  method="post" id="prj_project_header"  name="prj_project_header">
+ <form method="post" id="prj_project_header"  name="prj_project_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -138,7 +137,7 @@ inoERP
   <li><a href="#tabsLine-4"><?php echo gettext('Controls') ?> </a></li>
  </ul>
  <div class="tabContainer">
-  <form action=""  method="post" id="prj_project_line"  name="prj_project_line" class="m-margin-top-20">
+  <form method="post" id="prj_project_line"  name="prj_project_line" class="m-margin-top-20">
    <div id="form_line" class="form_line">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
