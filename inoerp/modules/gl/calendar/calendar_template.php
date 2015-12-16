@@ -34,7 +34,7 @@
           </thead>
           <tbody class="form_data_line_tbody calendar_values" >
            <?php
-           $count = 0; $f = new inoform();
+           $count = 0; 
            $calendar_object_ai = new ArrayIterator($calendar_object);
            $calendar_object_ai->seek($position);
            while ($calendar_object_ai->valid()) {

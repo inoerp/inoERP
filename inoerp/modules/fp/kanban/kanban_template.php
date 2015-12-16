@@ -8,10 +8,9 @@ inoERP
 -->
 
 <div id ="form_header"><span class="heading"><?php
-  $f = new inoform();
-  echo gettext('Kanban Replenishment Strategy')
+    echo gettext('Kanban Replenishment Strategy')
   ?></span>
- <form action=""  method="post" id="fp_kanban_header"  name="fp_kanban_header">
+ <form method="post" id="fp_kanban_header"  name="fp_kanban_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -106,7 +105,7 @@ inoERP
 </div>
 
 <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Kanban Cards') ?></span>
- <form action=""  method="post" id="fp_kanban_line"  name="fp_kanban_line">
+ <form method="post" id="fp_kanban_line"  name="fp_kanban_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>

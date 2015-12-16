@@ -1,6 +1,6 @@
-<form action=""  method="post" id="fa_asset_retirement"  name="fa_asset_retirement">
+<form  method="post" id="fa_asset_retirement"  name="fa_asset_retirement">
  <span class="heading"><?php echo gettext('Asset Retirement') ?></span>
- <div id ="form_header"><?php $f = new inoform() ?>
+ <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>

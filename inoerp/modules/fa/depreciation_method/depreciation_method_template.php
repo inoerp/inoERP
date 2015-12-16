@@ -1,9 +1,9 @@
 
 <div class="row small-left-padding">
 <div id="form_all">
- <form action=""  method="post" id="fa_depreciation_method"  name="fa_depreciation_method">
+ <form  method="post" id="fa_depreciation_method"  name="fa_depreciation_method">
   <span class="heading"><?php echo gettext('Depreciation Method') ?></span>
-  <div id ="form_header"><?php $f = new inoform(); ?>
+  <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
      <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>

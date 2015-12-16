@@ -4,35 +4,34 @@
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
   <div id ="searchResult">
    <form  method="post" id="fp_kanban_header"  name="fp_kanban_header">
-    <div id ="form_line" class="form_line"><span class="heading">Kanban Strategy </span>
+    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Basic Info') ?><?php echo gettext('Kanban Strategy') ?></span>
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1">Basics</a></li>
-       <li><a href="#tabsLine-2">Planning</a></li>
-       <li><a href="#tabsLine-3">Supply</a></li>
+       <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
+       <li><a href="#tabsLine-2"><?php echo gettext('Planning') ?></a></li>
+       <li><a href="#tabsLine-3"><?php echo gettext('Supply') ?></a></li>
       </ul>
       <div class="tabContainer">
        <div id="tabsLine-1" class="tabContent">
         <table class="form_table">
          <thead> 
           <tr>
-           <th>Action</th>
-           <th>Seq</th>
-           <th>Kanban Id</th>
-           <th>Org Id</th>
-           <th>Item Number</th>
-           <th>Item Description</th>
-           <th>Description</th>
-           <th>Subinventory</th>
-           <th>Locator</th>
-           <th>Source Type</th>
-           <th>Calculate</th>
+           <th><?php echo gettext('Action') ?></th>
+           <th><?php echo gettext('Seq') ?></th>
+           <th><?php echo gettext('Kanban Id') ?></th>
+           <th><?php echo gettext('Org Id') ?></th>
+           <th><?php echo gettext('Item Number') ?></th>
+           <th><?php echo gettext('Item Description') ?></th>
+           <th><?php echo gettext('Description') ?></th>
+           <th><?php echo gettext('Subinventory') ?></th>
+           <th><?php echo gettext('Locator') ?></th>
+           <th><?php echo gettext('Source Type') ?></th>
+           <th><?php echo gettext('Calculate') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">
           <?php
           $count = 0;
-          $f = new inoform();
           if (!empty($search_result)) {
            foreach ($search_result as $fp_kanban_header) {
             if (!empty($$class->item_id_m)) {
@@ -79,18 +78,16 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th>Seq</th>
-           
-           <th>Card Size</th>
-           <th># of Cards</th>
-           <th>MOQ</th>
-           <th>Lead Time</th>
-           <th>Allocation %</th>
-           <th>FLM</th>
-           <th>SSD</th>
-           <th>Planning Only</th>
-           <th>Auto Request</th>
-           
+           <th><?php echo gettext('Seq') ?></th>
+           <th><?php echo gettext('Card Size') ?></th>
+           <th><?php echo gettext('# of Cards') ?></th>
+           <th><?php echo gettext('MOQ') ?></th>
+           <th><?php echo gettext('Lead Time') ?></th>
+           <th><?php echo gettext('Allocation') ?>%</th>
+           <th><?php echo gettext('FLM') ?></th>
+           <th><?php echo gettext('SSD') ?></th>
+           <th><?php echo gettext('Planning Only') ?></th>
+           <th><?php echo gettext('Auto Request') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">
@@ -101,7 +98,7 @@
             ?>         
             <tr class="fp_kanban_header_line<?php echo $count ?>">
              <td><?php $f->seq_field_d($count); ?></td>
-             
+
              <td><?php $f->number_field_d('card_size'); ?></td> 
              <td><?php $f->number_field_d('noof_card'); ?></td> 
              <td><?php $f->number_field_d('moq'); ?></td> 
@@ -111,7 +108,7 @@
              <td><?php $f->number_field_d('ssd'); ?></td> 
              <td><?php $f->checkBox_field_d('planning_only_cb'); ?></td> 
              <td><?php $f->checkBox_field_d('auto_request_cb'); ?></td> 
-             
+
             </tr>
             <?php
             $count = $count + 1;
@@ -127,13 +124,13 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th>Seq</th>
-           <th>From Org</th>
-           <th>From SubInv</th>
-           <th>From Locator</th>
-           <th>Supplier</th>
-           <th>Supplier Site</th>
-           <th>RFID Reference</th>
+           <th><?php echo gettext('Seq') ?></th>
+           <th><?php echo gettext('From Org') ?></th>
+           <th><?php echo gettext('From SubInv') ?></th>
+           <th><?php echo gettext('From Locator') ?></th>
+           <th><?php echo gettext('Supplier') ?></th>
+           <th><?php echo gettext('Supplier Site') ?></th>
+           <th><?php echo gettext('RFID Reference') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">
@@ -141,12 +138,12 @@
           $count = 0;
           if (!empty($search_result)) {
            foreach ($search_result as $fp_kanban_header) {
-                       if (!empty($$class->supplier_id)) {
-            $supplier_i = supplier::find_by_id($$class->supplier_id);
-            $$class->supplier_name = $supplier_i->supplier_name;
-           } else {
-            $$class->supplier_name = null;
-           }
+            if (!empty($$class->supplier_id)) {
+             $supplier_i = supplier::find_by_id($$class->supplier_id);
+             $$class->supplier_name = $supplier_i->supplier_name;
+            } else {
+             $$class->supplier_name = null;
+            }
             ?>         
             <tr class="fp_kanban_header_line<?php echo $count ?>">
              <td><?php $f->seq_field_d($count); ?></td>

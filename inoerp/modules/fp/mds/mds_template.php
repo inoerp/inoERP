@@ -2,7 +2,7 @@
 <div id='fp_mds_header_divId'>
  <div id ="form_header"><span class="heading"><?php echo gettext('MDS Header') ?> </span>
   <form action=""  method="post" id="fp_mds_header"  name="fp_mds_header">
-   <div id="tabsHeader"><?php $f = new inoform(); ?>
+   <div id="tabsHeader">
     <ul class="tabMain">
      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
      <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>

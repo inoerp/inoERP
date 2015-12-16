@@ -1,6 +1,6 @@
 <div id="form_all">
- <form action=""  method="post" id="fa_depreciation_header"  name="fa_depreciation_header">
-  <span class="heading"><?php echo gettext('Depreciation Header') ?></span><?php  $f = new inoform(); ?>
+ <form  method="post" id="fa_depreciation_header"  name="fa_depreciation_header">
+  <span class="heading"><?php echo gettext('Depreciation Header') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">

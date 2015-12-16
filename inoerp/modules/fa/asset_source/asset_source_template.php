@@ -7,7 +7,7 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 
-<div id ="form_header"><span class="heading"><?php echo gettext('Asset Source Lines') ?></span><?php $f = new inoform(); ?>
+<div id ="form_header"><span class="heading"><?php echo gettext('Asset Source Lines') ?></span>
  <div id="tabsHeader">
   <ul class="tabMain">
    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -17,7 +17,7 @@ inoERP
   <div class="tabContainer"> 
    <div id="tabsHeader-1" class="tabContent">
     <ul class="column header_field">
-     <li><label>Asset Number</label>
+     <li><label><?php echo gettext('Asset Number') ?></label>
       <?php
       echo $f->val_field('asset_number', $fa_asset->asset_number, '', 'asset_number', '', '', '', 'fa_asset', 'asset_number');
       echo $f->hidden_field_withIdClass('fa_asset_id', $fa_asset->fa_asset_id, 'fa_asset_id');
@@ -26,9 +26,9 @@ inoERP
       <a name="show" href="form.php?class_name=fa_asset_source&<?php echo "mode=$mode"; ?>" class="show document_id fa_asset_id">
        <i class="fa fa-refresh"></i></a> 
      </li>
-     <li><label>Asset Type</label><?php echo $f->text_field('type', $fa_asset->type, '', 'type', '', '', 1); ?></li>
-     <li><label>Description</label><?php echo $f->text_field('description', $fa_asset->description, '', 'description', '', '', 1); ?></li>
-     <li><label>Status</label><?php echo $f->text_field('status', $fa_asset->status, '', 'status', '', '', 1); ?></li>
+     <li><?php $f->l_text_field_d('type'); ?></li>
+     <li><?php $f->l_text_field_D('description'); ?></li>
+     <li><?php $f->l_text_field_d('status'); ?></li>
     </ul>
    </div>
    <div id="tabsHeader-2" class="tabContent">
@@ -54,11 +54,11 @@ inoERP
   </div>
  </div>
 </div>
-<div id ="form_line" class="form_line"><span class="heading"> Source Line Details </span>
+<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Source Line Details') ?></span>
  <div id="tabsLine">
   <ul class="tabMain">
-   <li><a href="#tabsLine-1">Operation</a></li>
-   <li><a href="#tabsLine-2">Future</a></li>
+   <li><a href="#tabsLine-1"><?php echo gettext('Operation') ?></a></li>
+   <li><a href="#tabsLine-2"><?php echo gettext('Future') ?></a></li>
   </ul>
   <div class="tabContainer"> 
    <form action=""  method="post" id="fa_asset_source"  name="fa_asset_source">
