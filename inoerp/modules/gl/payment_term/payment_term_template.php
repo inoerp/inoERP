@@ -1,5 +1,5 @@
 <div id ="form_header"><span class="heading"><?php echo gettext('Payment Term') ?></span>
- <form action=""  method="post" id="payment_term"  name="payment_term"><?php $f = new inoform(); ?>
+ <form  method="post" id="payment_term"  name="payment_term">
   <div class="tabContainer">
    <ul class="column header_field">
     <li><?php $f->l_text_field_dr_withSearch('payment_term_id'); ?>

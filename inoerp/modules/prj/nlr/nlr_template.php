@@ -7,7 +7,7 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id ="form_header"><span class="heading"><?php echo gettext('Non-Labor Resource') ?></span>
- <form action=""  method="post" id="prj_nlr_header"  name="prj_nlr_header">
+ <form  method="post" id="prj_nlr_header"  name="prj_nlr_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -54,7 +54,7 @@ inoERP
 </div>
 
 <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Org Cost Values') ?></span>
- <form action=""  method="post" id="prj_nlr_line"  name="prj_nlr_line">
+ <form  method="post" id="prj_nlr_line"  name="prj_nlr_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>

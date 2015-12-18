@@ -3,27 +3,27 @@
   <div id="searchForm" ><div class='hideDiv_input'></div>
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
   <div id ="searchResult">
-   <form action=""  method="post" id="prj_expenditure_type_header"  name="prj_expenditure_type_header">
-    <div id ="form_line" class="form_line"><span class="heading">Expenditure Type </span>
+   <form  method="post" id="prj_expenditure_type_header"  name="prj_expenditure_type_header">
+    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Expenditure Type') ?> </span>
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1">Basics</a></li>
-       <li><a href="#tabsLine-2">Controls</a></li>
+       <li><a href="#tabsLine-1"><?php echo gettext('Basics') ?></a></li>
+       <li><a href="#tabsLine-2"><?php echo gettext('Controls') ?></a></li>
       </ul>
       <div class="tabContainer">
        <div id="tabsLine-1" class="tabContent">
         <table class="form_table">
          <thead> 
           <tr>
-           <th>Action</th>
-           <th>Expn Type Id</th>
-           <th>Expenditure Type</th>
-           <th>Expn Category</th>
-           <th>Revenue Category</th>
-           <th>Description</th>
-           <th>Eff. From</th>
-           <th>Eff. To</th>
-           <th>UOM</th>
+           <th><?php echo gettext('Action') ?></th>
+           <th><?php echo gettext('Expn Type Id') ?></th>
+           <th><?php echo gettext('Expenditure Type') ?></th>
+           <th><?php echo gettext('Expn Category') ?></th>
+           <th><?php echo gettext('Revenue Category') ?></th>
+           <th><?php echo gettext('Description') ?></th>
+           <th><?php echo gettext('Eff. From') ?></th>
+           <th><?php echo gettext('Eff. To') ?></th>
+           <th><?php echo gettext('UOM') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">
@@ -61,14 +61,14 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th>Inventory</th>
-           <th>Burden</th>
-           <th>Expense Reports</th>
-           <th>Misc. Transaction</th>
-           <th>Overtime</th>
-           <th>Invoice</th>
-           <th>Usage</th>
-           <th>Work In Process</th>
+           <th><?php echo gettext('Inventory') ?></th>
+           <th><?php echo gettext('Burden') ?></th>
+           <th><?php echo gettext('Expense Reports') ?></th>
+           <th><?php echo gettext('Misc. Transaction') ?></th>
+           <th><?php echo gettext('Overtime') ?></th>
+           <th><?php echo gettext('Invoice') ?></th>
+           <th><?php echo gettext('Usage') ?></th>
+           <th><?php echo gettext('Work In Process') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">

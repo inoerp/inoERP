@@ -5,7 +5,7 @@ if (!isset($readonly1)) {
 ?>
 <span class="heading-right"><?php echo gettext('Journal Header') ?></span>
 <div id ="form_header">
- <form action=""  method="post" id="gl_journal_header"  name="gl_journal_header">
+ <form method="post" id="gl_journal_header"  name="gl_journal_header">
   
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -92,11 +92,11 @@ if (!isset($readonly1)) {
 <div id ="form_line" class="gl_journal_line"><span class="heading"><?php echo gettext('Journal Lines') ?></span>
  <div id="tabsLine">
   <ul class="tabMain">
-   <li><a href="#tabsLine-1">Basic </a></li>
-   <li><a href="#tabsLine-2">Other Info </a></li>
+   <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+   <li><a href="#tabsLine-2"><?php echo gettext('Other Info') ?></a></li>
   </ul>
   <div class="tabContainer"> 
-   <form action=""  method="post" id="gl_journal_line"  name="gl_journal_line">
+   <form  method="post" id="gl_journal_line"  name="gl_journal_line">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_table">
       <thead> 
@@ -116,7 +116,6 @@ if (!isset($readonly1)) {
       <tbody class="form_data_line_tbody gl_journal_line_values" >
        <?php
        $count = 0;
-//       $f = new inoform();
        foreach ($gl_journal_line_object as $gl_journal_line) {
         ?>         
         <tr class="gl_journal_line<?php echo $count ?>">

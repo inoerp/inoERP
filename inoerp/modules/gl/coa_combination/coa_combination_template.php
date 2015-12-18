@@ -124,7 +124,7 @@
         <tbody class="form_data_line_tbody coa_combination_values" >
          <?php
          $count = 0;
-         $f = new inoform();
+         
 //       $coa_combination_object_ai = new ArrayIterator($coa_combination_object);
          $coa_combination_object_ai->seek($position);
          while ($coa_combination_object_ai->valid()) {

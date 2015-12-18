@@ -1,7 +1,7 @@
 <div id="form_all">
  <span class="heading"><?php echo gettext('Ledger Header') ?></span>
- <form action=""  method="post" id="gl_ledger"  name="gl_ledger">
-  <div id ="form_header"><?php $f = new inoform(); ?>
+ <form method="post" id="gl_ledger"  name="gl_ledger">
+  <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -45,7 +45,7 @@
     <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
-    <form action=""  method="post" id="gl_ledger_balancing_values_line"  name="gl_ledger_balancing_values_line">
+    <form  method="post" id="gl_ledger_balancing_values_line"  name="gl_ledger_balancing_values_line">
      <div id="tabsLine-1" class="tabContent">
       <table class="form_table">
        <thead> 

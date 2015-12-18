@@ -1,6 +1,6 @@
 <div class="row small-left-padding">
- <form action=""  method="post" id="gl_currency_conversion_line"  name="currency_conversion_line">
-  <span class="heading"><?php echo gettext('Currency Conversions') ?></span><?php $f = new inoform(); ?>
+ <form  method="post" id="gl_currency_conversion_line"  name="currency_conversion_line">
+  <span class="heading"><?php echo gettext('Currency Conversions') ?></span>
   <div id="form_serach_header" class="tabContainer">
    <?php $f->l_select_field_from_object('currency_conversion_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_value', $currency_conversion_type_h, 'currency_conversion_type', '', 1); ?>
    <a name="show" href="form.php?class_name=gl_currency_conversion&<?php echo "mode=$mode"; ?>" class="show document_id gl_currency_conversion_id">
@@ -10,8 +10,7 @@
     <?php echo gettext('Conversion Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1">Rates </a></li>
-     <li><a href="#tabsLine-2">Future </a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Rates') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
@@ -65,9 +64,6 @@
         ?>
        </tbody>
       </table>
-     </div>
-     <div id="tabsLine-2" class="tabContent">
-
      </div>
     </div>
 
