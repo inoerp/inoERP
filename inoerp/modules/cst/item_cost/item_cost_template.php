@@ -82,12 +82,12 @@ inoERP
         <?php echo $f->select_field_from_object('cost_action', cst_item_cost_header::transaction_action(), 'option_line_code', 'option_line_value', '', 'cost_action', '', '', $readonly); ?>
        </li>
        <li id="document_print"><label>Document Print : </label>
-        <a class="button" target="_blank"
-           href="po_print.php?cst_item_cost_header_id=<?php echo!(empty($$class->cst_item_cost_header_id)) ? $$class->cst_item_cost_header_id : ""; ?>" >Indented BOM</a>
+        <a class="button disabled" target="_blank"
+           disabled href="po_print.php?cst_item_cost_header_id=<?php echo!(empty($$class->cst_item_cost_header_id)) ? $$class->cst_item_cost_header_id : ""; ?>" >Indented BOM</a>
        </li>
        <li id="document_print"><label>Document Print : </label>
-        <a class="button" target="_blank"
-           href="po_print.php?cst_item_cost_header_id=<?php echo!(empty($$class->cst_item_cost_header_id)) ? $$class->cst_item_cost_header_id : ""; ?>" >BOM Cost</a>
+        <a class="button disabled" target="_blank"
+          disabled href="po_print.php?cst_item_cost_header_id=<?php echo!(empty($$class->cst_item_cost_header_id)) ? $$class->cst_item_cost_header_id : ""; ?>" >BOM Cost</a>
        </li>
       </ul>
 
