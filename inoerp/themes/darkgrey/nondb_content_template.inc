@@ -9,10 +9,7 @@
        <div id="content_divId">
         <!--    START OF FORM HEADER-->
         <div class="error"></div><div id="loading"></div>
-        <?php
-        echo (!empty($show_message)) ? $show_message : "";
-        $f = new inoform();
-        ?> 
+        <?php         echo (!empty($show_message)) ? $show_message : "";         ?> 
         <!--    End of place for showing error messages-->
         <div id="form_all">
          <div id ="form_header">
