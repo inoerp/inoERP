@@ -1,4 +1,4 @@
-<div id ="form_header"><?php $f = new inoform(); ?>
+<div id ="form_header">
  <span class="heading"><?php echo gettext('Inventory Org Header') ?></span>
  <form action=""  method="post" id="inventory"  name="inventory">
   <div id="tabsHeader">

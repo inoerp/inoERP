@@ -1,5 +1,5 @@
-<form action=""  method="post" id="ec_payment_method"  name="ec_payment_method"><span class="heading">eCommerce Payment Method </span>
- <div id ="form_header"><?php $f = new inoform() ?>
+<form method="post" id="ec_payment_method"  name="ec_payment_method"><span class="heading">eCommerce Payment Method </span>
+ <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -51,7 +51,7 @@
    </div>
   </div>
  </div>
- <div id ="form_line" class="form_line"><span class="heading"> Payment Method Details </span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Payment Method Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('URLs') ?></a></li>

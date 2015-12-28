@@ -7,12 +7,12 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id ="form_header"><span class="heading"><?php echo gettext('Approved Supplier List') ?></span>
- <form action=""  method="post" id="asl_header"  name="asl_header">
+ <form method="post" id="asl_header"  name="asl_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
    </ul>
-   <div class="tabContainer"> <?php $f = new inoform(); ?>
+   <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
       <li><?php $f->l_text_field_dr_withSearch('po_asl_header_id') ?>
@@ -35,8 +35,8 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading">ASL Lines </span>
- <form action=""  method="post" id="asl_line"  name="asl_line">
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('ASL Lines') ?></span>
+ <form method="post" id="asl_line"  name="asl_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>

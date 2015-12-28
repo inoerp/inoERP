@@ -35,7 +35,6 @@
          <tbody class="form_data_line_tbody">
           <?php
           $count = 0;
-          $f = new inoform();
           if (!empty($search_result)) {
            foreach ($search_result as $inv_reservation) {
             if (!empty($$class->item_id_m)) {
@@ -90,7 +89,6 @@
          <tbody class="form_data_line_tbody">
           <?php
           $count = 0;
-          $f = new inoform();
           if (!empty($search_result)) {
            foreach ($search_result as $inv_reservation) {
             if (!empty($$class->sd_so_line_id)) {

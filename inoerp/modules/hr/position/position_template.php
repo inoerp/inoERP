@@ -1,7 +1,7 @@
 <div id ="form_header">
- <form action=""  method="post" id="hr_position"  name="hr_position">
+ <form  method="post" id="hr_position"  name="hr_position">
   <span class="heading"><?php echo gettext('Position Header') ?></span>
-  <div id ="form_header"><?php $f = new inoform(); ?>
+  <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>

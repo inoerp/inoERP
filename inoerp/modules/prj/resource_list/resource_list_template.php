@@ -76,7 +76,7 @@ inoERP
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
-       $count = 0; $f = new inoform();
+       $count = 0; 
        foreach ($prj_resource_list_line_object as $prj_resource_list_line) {
         ?>         
         <tr class="prj_resource_list_line<?php echo $count ?>">

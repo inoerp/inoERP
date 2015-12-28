@@ -1,6 +1,5 @@
-<form action=""  method="post" id="inv_lot_number"  name="inv_lot_number">
+<form method="post" id="inv_lot_number"  name="inv_lot_number">
  <span class="heading"><?php
-  $f = new inoform();
   echo gettext('Lot Number')
   ?></span>
  <div id ="form_header">
@@ -65,7 +64,7 @@
 
   </div>
  </div>
- <div id ="form_line" class="form_line"><span class="heading">lot Number Details </span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Lot Number Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Current') ?></a></li>
@@ -106,8 +105,8 @@
       <div id ="form_line" class="form_line">
        <div id="tabsDetail">
         <ul class="tabMain">
-         <li><a href="#tabsDetail-1">Info-1 </a></li>
-         <li><a href="#tabsDetail-2">Info-2 </a></li>
+         <li><a href="#tabsDetail-1"><?php echo gettext('Info-1') ?></a></li>
+         <li><a href="#tabsDetail-2"><?php echo gettext('Info-2') ?></a></li>
         </ul>
         <div class="tabContainer"> 
          <div id="tabsDetail-1" class="tabContent">

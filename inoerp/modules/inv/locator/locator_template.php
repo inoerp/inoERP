@@ -1,5 +1,5 @@
-<form action=""  method="post" id="locator"  name="locator"><span class="heading"><?php echo gettext('Storage Locator') ?></span>
- <div id ="form_header"><?php  $f = new inoform(); ?>
+<form method="post" id="locator"  name="locator"><span class="heading"><?php echo gettext('Storage Locator') ?></span>
+ <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -47,7 +47,7 @@
   </div>
  </div>
 
- <div id ="form_line" class="form_line"><span class="heading">Locator Details </span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Locator Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Dimensions') ?></a></li>

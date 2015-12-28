@@ -1,11 +1,8 @@
 <div class="row small-left-padding">
  <div id="option">
   <!--    START OF FORM HEADER-->
-  <form action=""  method="post" id="option_header"  name="option_header">
-   <span class="heading"><?php
-    $f = new inoform();
-    echo gettext('Option Header')
-    ?></span>
+  <form method="post" id="option_header"  name="option_header">
+   <span class="heading"><?php     echo gettext('Option Header')     ?></span>
    <div id ="form_header">
     <div id="tabsHeader">
      <ul class="tabMain">

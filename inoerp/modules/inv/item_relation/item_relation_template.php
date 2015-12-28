@@ -66,7 +66,7 @@
            }
            ?>         
            <tr class="inv_item_relation<?php echo $count ?>">
-            <td><?php $f = new inoform();
+            <td><?php 
              echo ino_inline_action($$class->inv_item_relation_id, array('relation_type_h' => $relation_type_h));
              ?>    
             </td>

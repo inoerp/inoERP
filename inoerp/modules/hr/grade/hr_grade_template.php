@@ -10,7 +10,7 @@
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
       <ul class="column header_field"> 
-       <li><?php $f->l_text_field_dr_withSearch('hr_grade_id'); $f = new inoform(); ?>
+       <li><?php $f->l_text_field_dr_withSearch('hr_grade_id'); ?>
         <a name="show" href="form.php?class_name=hr_grade&<?php echo "mode=$mode"; ?>" class="show document_id hr_grade_id"><i class='fa fa-refresh'></i></a> 
        </li>
        <li><?php $f->l_text_field_d('grade'); ?></li>

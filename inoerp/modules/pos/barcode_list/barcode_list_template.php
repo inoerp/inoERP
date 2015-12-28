@@ -3,7 +3,7 @@
  <div id="form_all">
   <form action=""  method="post" id="pos_barcode_list_header"  name="pos_barcode_list_header">
    <span class="heading"><?php echo gettext('POS Barcode List') ?></span>
-   <div id ="form_header"><?php $f = new inoform(); ?>
+   <div id ="form_header">
     <div id="tabsHeader">
      <ul class="tabMain">
       <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -54,7 +54,7 @@
      <li><a href="#tabsLine-1"><?php echo gettext('Values') ?></a></li>
     </ul>
     <div class="tabContainer"> 
-     <form action=""  method="post" id="pos_barcode_list_line_line"  name="pos_barcode_list_line_line">
+     <form  method="post" id="pos_barcode_list_line_line"  name="pos_barcode_list_line_line">
       <div id="tabsLine-1" class="tabContent">
        <table class="form_table">
         <thead> 

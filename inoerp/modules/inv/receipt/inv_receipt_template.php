@@ -32,7 +32,6 @@
       </div>
       <div id ="display_comment_form">
        <?php
-       $f = new inoform();
        $reference_table = 'inv_receipt_header';
        $reference_id = $$class->inv_receipt_header_id;
        ?>

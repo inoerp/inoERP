@@ -1,6 +1,6 @@
 <div id ="form_header">
  <span class="heading"><?php echo gettext('Catalog Value') ?></span>
- <div id="tabsHeader"><?php $f = new inoform(); ?> 
+ <div id="tabsHeader">
   <ul class="tabMain">
    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
   </ul>

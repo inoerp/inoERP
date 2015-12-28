@@ -1,8 +1,5 @@
-<div id ="form_all"><span class="heading"><?php
-  $f = new inoform();
-  echo gettext('Service Request')
-  ?></span>
- <form action=""  method="post" id="hd_service_request"  name="hd_service_request">
+<div id ="form_all"><span class="heading"><?php   echo gettext('Service Request')  ?></span>
+ <form method="post" id="hd_service_request"  name="hd_service_request">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">

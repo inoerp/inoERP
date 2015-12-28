@@ -9,7 +9,7 @@
       <!--    START OF FORM HEADER-->
       <div class="error"></div><div id="loading"></div>
       <div class="show_loading_small"></div>
-      <?php echo (!empty($show_message)) ? $show_message : ""; $f = new inoform(); ?> 
+      <?php echo (!empty($show_message)) ? $show_message : "" ?> 
       <!--    End of place for showing error messages-->
 
       <form action=""  method="post" id="inv_lot_number"  name="inv_lot_number"><span class="heading">Lot Number </span>
@@ -121,7 +121,6 @@
             <ul class="column four_column"> 
              <li><label>Supplier Site Id : </label> <?php $f->text_field_dr('supplier_site_id'); ?>             </li>
              <li><label>PO Header Id : </label> <?php $f->text_field_dr('po_header_id'); ?>             </li>
-
              <li><label>Supplier L/N : </label> <?php $f->text_field_dr('supplier_ln'); ?>             </li>
              <li><label>First Tnx Id : </label> <?php $f->text_field_dr('first_inv_transaction_id'); ?>             </li>
              <li><label>Last Trnx Id : </label> <?php $f->text_field_dr('last_inv_transaction_id'); ?>             </li>

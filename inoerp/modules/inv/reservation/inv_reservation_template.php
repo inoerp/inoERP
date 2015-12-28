@@ -1,5 +1,4 @@
 <div id ="form_all"><span class="heading"><?php
-  $f = new inoform();
   echo gettext('Onhand Reservation')
   ?></span>
  <form  method="post" id="inv_reservation"  name="inv_reservation">

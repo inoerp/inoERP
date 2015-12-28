@@ -1,5 +1,5 @@
 <div id ="form_header">
- <form action=""  method="post" id="hr_team_header"  name="hr_team_header">
+ <form   method="post" id="hr_team_header"  name="hr_team_header">
   <span class="heading"><?php echo gettext('HR Team') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -60,7 +60,7 @@
 </div>
 
 <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Team Members') ?></span>
- <form action=""  method="post" id="hr_team_line"  name="hr_team_line">
+ <form method="post" id="hr_team_line"  name="hr_team_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
@@ -84,7 +84,6 @@
       <tbody class="form_data_line_tbody">
        <?php
        $count = 0;
-       $f = new inoform();
        foreach ($hr_team_line_object as $hr_team_line) {
         if (!empty($hr_team_line->member_employee_id)) {
          $emp_details_l = hr_employee::find_by_id($hr_team_line->member_employee_id);

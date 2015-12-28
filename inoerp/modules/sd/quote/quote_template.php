@@ -132,7 +132,6 @@ inoERP
         ?>         
         <tr class="sd_quote_line<?php echo $count ?>">
          <td><?php
-          $f = new inoform();
           echo ino_inline_action($$class_second->sd_quote_line_id, array('sd_quote_header_id' => $$class->sd_quote_header_id,
            'tax_code_value' => $$class_second->tax_code_value));
           ?>    

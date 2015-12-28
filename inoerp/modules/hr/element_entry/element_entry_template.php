@@ -14,7 +14,7 @@
         <a name="show" href="form.php?class_name=hr_element_entry_header&<?php echo "mode=$mode"; ?>" class="show document_id hr_element_entry_header_id">
          <i class="fa fa-refresh"></i></a> 
        </li>
-       <li><?php $f = new inoform();
+       <li><?php 
 //       $reado_c = !empty($$class->hr_element_entry_header_id) ? ' always_readonly ' : ' ' ;
 //       $div_Class = 'vf_select_employee_name employee_name '. $reado_c;
         echo $f->l_val_field_d('employee_name', 'hr_employee_v', 'employee_name', '','vf_select_employee_name employee_name ' );

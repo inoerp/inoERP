@@ -7,7 +7,7 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 
-<div id ="form_header"><span class="heading"><?php echo gettext('Resource Transaction') ?></span><?php $f = new inoform(); ?>
+<div id ="form_header"><span class="heading"><?php echo gettext('Resource Transaction') ?></span>
  <div id="tabsHeader">
   <ul class="tabMain">
    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -48,11 +48,11 @@ inoERP
   </div>
  </div>
 </div>
-<div id ="form_line" class="form_line"><span class="heading"> Operation Details </span>
+<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Operation Details') ?></span>
  <div id="tabsLine">
   <ul class="tabMain">
-   <li><a href="#tabsLine-1">Operation</a></li>
-   <li><a href="#tabsLine-2">Future</a></li>
+   <li><a href="#tabsLine-1"><?php echo gettext('Operation') ?></a></li>
+   <li><a href="#tabsLine-2"><?php echo gettext('Future') ?></a></li>
   </ul>
   <div class="tabContainer"> 
    <form action=""  method="post" id="wip_resource_transaction"  name="wip_resource_transaction">

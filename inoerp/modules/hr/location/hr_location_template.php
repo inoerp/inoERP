@@ -9,7 +9,7 @@
      <li><a href="#tabsLine-1"><?php echo gettext('Location Details') ?></a></li>
     </ul>
     <div class="tabContainer"> 
-     <form action=""  method="post" id="hr_location_line"  name="hr_location_line">
+     <form method="post" id="hr_location_line"  name="hr_location_line">
       <div id="tabsLine-1" class="tabContent">
        <table class="form_table">
         <thead> 
@@ -25,7 +25,7 @@
         </thead>
         <tbody class="form_data_line_tbody hr_location_values" >
          <?php
-         $count = 0; $f = new inoform();
+         $count = 0; 
          $hr_location_object_ai = new ArrayIterator($hr_location_object);
          $hr_location_object_ai->seek($position);
          while ($hr_location_object_ai->valid()) {

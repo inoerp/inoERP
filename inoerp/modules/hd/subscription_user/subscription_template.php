@@ -19,7 +19,7 @@ inoERP
      <div id="tabsHeader-1" class="tabContent">
       <ul class="column header_field two_column_form ">
        <li><?php
-        $f = new inoform();
+        
         echo $f->hidden_field_withIdClass('hd_subscription_header_id', $$class->hd_subscription_header_id, 'hd_subscription_header_id');
         $f->l_select_field_from_array('subscription_type', hd_subscription_header::$subscription_type_a, $$class->subscription_type, 'subscription_type', '', 1);
         ?></li>

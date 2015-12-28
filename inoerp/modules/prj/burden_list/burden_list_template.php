@@ -70,7 +70,7 @@
          </tr>
         </thead>
         <tbody class="form_data_line_tbody prj_burden_list_line_values" >
-         <?php $f = new inoform();
+         <?php 
          $count = 0;
          $prj_burden_list_line_object_ai = new ArrayIterator($prj_burden_list_line_object);
          $prj_burden_list_line_object_ai->seek($position);

@@ -8,7 +8,7 @@ inoERP
  -->
  <div id ="form_header"><span class="heading"><?php echo gettext('Sourcing Rule Header') ?></span>
  <form action=""  method="post" id="po_sourcing_rule_header"  name="po_sourcing_rule_header">
-  <div id="tabsHeader"><?php $f = new inoform(); ?>
+  <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>

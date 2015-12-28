@@ -1,7 +1,7 @@
 <div id ="form_header">
- <form action=""  method="post" id="hr_element_entry_tpl_header"  name="hr_element_entry_tpl_header">
+ <form method="post" id="hr_element_entry_tpl_header"  name="hr_element_entry_tpl_header">
   <span class="heading"><?php echo gettext('Compensation Element Entry Template') ?></span>
-  <div id="tabsHeader"><?php $f = new inoform(); ?>
+  <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
    </ul>
@@ -25,7 +25,7 @@
 
 <div id="form_line" class="form_line">
  <span class="heading"><?php echo gettext('Element Entry Lines') ?></span>
- <form action=""  method="post" id="hr_element_entry_tpl_line"  name="hr_element_entry_tpl_line">
+ <form  method="post" id="hr_element_entry_tpl_line"  name="hr_element_entry_tpl_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>

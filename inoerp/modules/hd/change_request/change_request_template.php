@@ -1,5 +1,17 @@
-<div id ="form_all"><span class="heading"><?php echo gettext('Change Request') ?></span>
- <form action=""  method="post" id="hd_change_request"  name="hd_change_request">
+ <!-- 
+ inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ 
+ This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. 
+ -->
+ <div id ="form_all"><span class="heading"><?php echo gettext('Change Request') ?></span>
+ <form method="post" id="hd_change_request"  name="hd_change_request">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">

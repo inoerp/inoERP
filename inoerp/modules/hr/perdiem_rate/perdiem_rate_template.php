@@ -30,7 +30,6 @@
          </thead>
          <tbody class="form_data_line_tbody perdiem_rate_values" >
           <?php
-          $f = new inoform();
           $count = 0;
           $perdiem_rate_object_ai = new ArrayIterator($perdiem_rate_object);
           $perdiem_rate_object_ai->seek($position);

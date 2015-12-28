@@ -7,7 +7,7 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id ="form_header"><span class="heading"><?php echo gettext('Service Business Process') ?></span>
- <form action=""  method="post" id="hd_sbp_header"  name="hd_sbp_header">
+ <form  method="post" id="hd_sbp_header"  name="hd_sbp_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -78,11 +78,7 @@ inoERP
        foreach ($hd_sbp_line_object as $hd_sbp_line) {
         ?>         
         <tr class="hd_sbp_line<?php echo $count ?>">
-         <td>
-          <?php $f =  new inoform();
-          echo ino_inline_action($hd_sbp_line->hd_sbp_line_id, array('hd_sbp_header_id' => $$class->hd_sbp_header_id));
-          ?>
-         </td>
+         <td><?php  echo ino_inline_action($hd_sbp_line->hd_sbp_line_id, array('hd_sbp_header_id' => $$class->hd_sbp_header_id));    ?></td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('hd_sbp_line_id'); ?></td>
          <td><?php echo $f->select_field_from_object('hd_service_activity_header_id', hd_service_activity_header::find_all(), 'hd_service_activity_header_id', 'activity_name', $$class_second->hd_service_activity_header_id); ?></td>

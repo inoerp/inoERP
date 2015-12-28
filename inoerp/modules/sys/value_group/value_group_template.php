@@ -95,7 +95,6 @@
        </thead>
        <tbody class="form_data_line_tbody sys_value_group_line_values" >
         <?php
-        $f = new inoform();
         $count = 0;
         $sys_value_group_line_object_ai = new ArrayIterator($sys_value_group_line_object);
         $sys_value_group_line_object_ai->seek($position);

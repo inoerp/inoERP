@@ -168,7 +168,6 @@
              <tbody class="form_data_line_tbody">
               <tr class="inv_transaction_line0" id="tab4_1">
                <td>	<?php
-                 $f = new inoform();
                  $f->text_field_wid('lot_number');
                  echo $f->hidden_field('lot_number_id', $$class->lot_number_id);
                  echo $f->hidden_field('lot_generation', $$class->lot_generation);

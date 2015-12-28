@@ -233,7 +233,7 @@ inoERP
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
-       <?php $f = new inoform();
+       <?php 
        $count = 0;
        foreach ($sd_so_line_object as $sd_so_line) {
         ?>         

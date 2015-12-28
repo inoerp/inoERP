@@ -112,7 +112,7 @@ inoERP
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
-       $count = 0; $f = new inoform();
+       $count = 0;  
        foreach ($sd_delivery_line_object as $sd_delivery_line) {
         $f->readonly2 = !empty($sd_delivery_line->sd_delivery_line_id) ? true : false;
         ?>         

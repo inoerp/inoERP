@@ -1,10 +1,7 @@
 <div id="pd_divId"><span class='heading'><?php echo gettext('System Process Document') ?></span>
- <?php
- $f = new inoform();
- $template_lines_ia = new ArrayIterator($template_lines);
- ?> 
+ <?php  $template_lines_ia = new ArrayIterator($template_lines);  ?> 
  <div id ="form_header">
-  <form action=""  method="post" id="sys_spd_header"  name="sys_spd_header">
+  <form  method="post" id="sys_spd_header"  name="sys_spd_header">
    <div id="tabsHeader">
     <ul class="tabMain">
      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>

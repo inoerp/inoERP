@@ -1,6 +1,6 @@
 <div class="row small-left-padding">
  <div id ="form_header">
-  <form action=""  method="post" id="gl_period"  name="gl_period">
+  <form method="post" id="gl_period"  name="gl_period">
    <span class="heading"><?php echo gettext('GL Periods') ?></span>
    <div id="tabsHeader">
     <ul class="tabMain">
@@ -46,11 +46,11 @@
   </form>
  </div>
 
- <div id="form_line" class="form_line"><span class="heading">Existing & Available Periods </span>
-  <form action=""  method="post" id="gl_period_line"  name="gl_period_line">
+ <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Existing & Available Periods') ?></span>
+  <form  method="post" id="gl_period_line"  name="gl_period_line">
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1">Calendar View  </a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Calendar View') ?></a></li>
      <li><a href="#tabsLine-2">Future </a></li>
     </ul>
     <div class="tabContainer"> 
@@ -91,10 +91,7 @@
            echo ino_inline_action($$class->gl_period_id, array('ledger_id' => $gl_period->ledger_id));
            ?>
           </td>
-          <td><?php
-           $f->text_field_dsr('gl_period_id');
-           $f = new inoform();
-           ?></td>
+          <td><?php            $f->text_field_dsr('gl_period_id');  ?></td>
           <td><?php $f->text_field_d('period_name') ?></td>
           <td><?php
            echo form::select_field_from_object_ap(array('name' => 'status', 'ob' => gl_period::gl_period_status(),

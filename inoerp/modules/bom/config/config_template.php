@@ -7,7 +7,7 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id ="form_header">
- <form action=""  method="post" id="bom_config_header"  name="bom_config_header"><?php $f = new inoform(); ?>
+ <form method="post" id="bom_config_header"  name="bom_config_header">
   <span class="heading"><?php echo gettext('Configured BOM Header') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -59,8 +59,8 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading">Configured BOM Lines </span>
- <form action=""  method="post" id="bom_config_line"  name="bom_config_line">
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Configured BOM Lines') ?></span>
+ <form  method="post" id="bom_config_line"  name="bom_config_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>

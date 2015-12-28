@@ -1,4 +1,4 @@
-<div id ="form_header"><span class="heading"><?php $f = new inoform(); echo gettext('Inter-Org Transfer Header') ?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Inter-Org Transfer Header') ?></span>
  <div id="tabsHeader">
   <ul class="tabMain">
    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>

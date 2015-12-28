@@ -20,7 +20,7 @@ inoERP
       <li><?php $f->l_text_field_dr_withSearch('prj_event_header_id') ?>
        <a name="show" href="form.php?class_name=prj_event_header&<?php echo "mode=$mode"; ?>" class="show document_id prj_event_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
-      <li><?php $f = new inoform();
+      <li><?php 
        $f->l_val_field_d('project_number', 'prj_project_header', 'project_number', '' ,'select project_number');
        echo $f->hidden_field_withId('prj_project_header_id', $$class->prj_project_header_id);
        ?><i class="generic select_project_number select_popup clickable fa fa-search" data-class_name="prj_project_header"></i></li>
@@ -127,7 +127,7 @@ inoERP
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
-       <?php $f = new inoform();
+       <?php 
        $count = 0;
        foreach ($prj_event_line_object as $prj_event_line) {
         $$class_second->task_number = !empty($$class_second->prj_project_line_id) ? prj_project_line::find_by_id($$class_second->prj_project_line_id)->task_number : '';

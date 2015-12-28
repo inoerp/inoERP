@@ -1,6 +1,6 @@
 <div id="form_all">
  <div id="form_headerDiv">
-  <form action=""  method="post" id="hr_employee_experience_line"  name="employee_experience_line">
+  <form method="post" id="hr_employee_experience_line"  name="employee_experience_line">
    <span class="heading"><?php echo gettext('Employee Experience') ?></span>
    <div id="tabsLine">
     <div id="form_serach_header" class="tabContainer">
@@ -9,7 +9,7 @@
       <i class="fa fa-refresh"></i></a> 
     </div>
     <div id ="form_line" class="hr_employee_experience">
-     <ul class="tabMain"> <?php $f = new inoform() ?>
+     <ul class="tabMain">
       <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
       <li><a href="#tabsLine-2"><?php echo gettext('Details Info') ?></a></li>
      </ul>

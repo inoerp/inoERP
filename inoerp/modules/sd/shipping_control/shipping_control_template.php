@@ -10,7 +10,7 @@ inoERP
 <div id ="form_header"><span class="heading"><?php echo gettext('Shipping Control') ?></span>
  <form method="post" id="sd_shipping_control"  name="sd_shipping_control">
   <div class="tabContainer">
-   <ul class="column header_field"><?php $f = new inoform(); ?>  
+   <ul class="column header_field">
     <?php echo form::hidden_field('sd_shipping_control_id', $$class->sd_shipping_control_id); ?>
     <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>
      <a name="show" href="form.php?class_name=sd_shipping_control&<?php echo "mode=$mode"; ?>" class="show document_id sd_shipping_control_id">

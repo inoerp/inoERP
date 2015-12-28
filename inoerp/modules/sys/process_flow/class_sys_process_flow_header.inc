@@ -81,10 +81,6 @@ class sys_process_flow_header extends dbObject {
   return $lines;
  }
 
-//  Public static function processFlowActions_by_headerId($header_id) {
-//  return self::find_by_parent_id($header_id, 'seq_number');
-//  }
-
  Public static function find_by_type($type='SYS_DOCUMENT') {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;

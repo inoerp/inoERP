@@ -1,8 +1,8 @@
 <div id="po_rfq_divId">
 
  <div id ="form_header"><span class="heading"><?php echo gettext('Request For Quotation') ?></span>
-  <form action=""  method="post" id="po_rfq_header"  name="po_rfq_header">
-   <div id="tabsHeader"><?php $f = new inoform(); ?>
+  <form  method="post" id="po_rfq_header"  name="po_rfq_header">
+   <div id="tabsHeader">
     <ul class="tabMain">
      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
      <li><a href="#tabsHeader-2"><?php echo gettext('Description') ?></a></li>
@@ -85,7 +85,7 @@
  </div>
 
  <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('RFQ Lines & Details') ?></span>
-  <form action=""  method="post" id="po_rfq_line"  name="po_rfq_line">
+  <form  method="post" id="po_rfq_line"  name="po_rfq_line">
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>

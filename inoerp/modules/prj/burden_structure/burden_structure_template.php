@@ -6,10 +6,7 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php
-  $f = new inoform();
-  echo gettext('Burden Structure')
-  ?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Burden Structure')   ?></span>
  <form  method="post" id="prj_burden_structure_header"  name="prj_burden_structure_header">
   <div id="tabsHeader">
    <ul class="tabMain">

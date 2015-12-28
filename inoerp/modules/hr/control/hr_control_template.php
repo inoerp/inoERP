@@ -33,7 +33,7 @@ inoERP
         <li><?php $f->l_ac_field_d('salary_cash_ac_id'); ?></li> 
         <li><?php $f->l_ac_field_d('expense_claim_ac_id'); ?></li> 
         <li><?php $f->l_ac_field_d('salary_exp_ac_id'); ?></li> 
-        <li><?php $f = new inoform();
+        <li><?php 
          echo $f->l_val_field_dm('expense_claim_supplier', 'supplier', 'supplier_name', '', 'expense_claim_supplier', 'vf_select_supplier_name');
          echo $f->hidden_field_withId('supplier_id', $$class->supplier_id);
          ?><i class="generic g_select_supplier_name select_popup clickable fa fa-search" data-class_name="supplier"></i></li>
