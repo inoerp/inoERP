@@ -46,8 +46,8 @@
 
 <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Supplier Site Details') ?></span>
  <form  method="post" id="supplier_site"  name="supplier_site">
-  <div id='line_before_tab' class="line_before_tab"> 
-   <ul class="column five_column inline_list"> 
+  <div id='line_before_tab' class="ino-well"> 
+   <ul class="column header_field "> 
     <li>
      <?php // echo form::text_field('supplier_site_id', $supplier_site->supplier_site_id, '15', '25', '', 'System Number', 'supplier_site_id', $readonly) ?>
      <?php echo $f->l_select_field_from_array('supplier_site_id', supplier_site::find_all_sitesOfSupplier_array($supplier->supplier_id), $supplier_site->supplier_site_id, 'supplier_site_id' ,'action medium'); ?>

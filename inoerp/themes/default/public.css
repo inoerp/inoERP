@@ -2402,3 +2402,16 @@ padding: 15px 50px 5px;
 .ino-left-30-n{
         margin-left: -30px;
 }
+
+.ino-well {
+     min-height: 20px;
+    padding: 5px;
+    background-color: #F5F5F5;
+    border: 1px solid #E3E3E3;
+    width: 98%;
+    margin-bottom: 20px;
+}
+
+.ino-well ul {
+margin-top: 10px !important;
+}

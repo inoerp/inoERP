@@ -78,8 +78,8 @@
 </div>
 <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Customer Site Details') ?></span>
  <form  method="post" id="customer_site"  name="customer_site">
-  <div class="line_before_tab"> 
-   <ul class="column five_column inline_list"> 
+   <div id='line_before_tab' class="ino-well"> 
+   <ul class="column header_field "> 
     <li><?php $f->l_select_field_from_array('ar_customer_site_id', ar_customer_site::find_all_sitesOfCustomer_array($$class->ar_customer_id), $$class_second->ar_customer_site_id, 'ar_customer_site_id', 'action medium'); ?>
      <a name="show" href="form.php?class_name=ar_customer&<?php echo "mode=$mode"; ?>" class="show document_id ar_customer_site_id" data-search_field='ar_customer_site_id'>
       <i class="fa fa-refresh"></i></a>      

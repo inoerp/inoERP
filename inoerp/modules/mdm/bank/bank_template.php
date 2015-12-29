@@ -51,9 +51,9 @@
 
 <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext("Bank Branches") ?></span>
  <form method="post" id="mdm_bank_site"  name="mdm_bank_site">
-  <div class="line_before_tab"> 
-   <ul class="column five_column inline_list"> 
-    <li><?php $f->l_select_field_from_array('mdm_bank_site_id', mdm_bank_site::find_all_sitesOfHeader_array($$class->mdm_bank_header_id), $$class_second->mdm_bank_site_id, 'mdm_bank_site_id' , ' medium'); ?>
+  <div id='line_before_tab' class="ino-well"> 
+   <ul class="column header_field "> 
+    <li><?php $f->l_select_field_from_array('mdm_bank_site_id', mdm_bank_site::find_all_sitesOfHeader_array($$class->mdm_bank_header_id), $$class_second->mdm_bank_site_id, 'mdm_bank_site_id', ' medium'); ?>
      <a name="show" href="form.php?class_name=mdm_bank_header&<?php echo "mode=$mode"; ?>" class="show document_id mdm_bank_site_id" data-search_field='mdm_bank_site_id'>
       <i class='fa fa-refresh'></i></a> 
     </li> 
