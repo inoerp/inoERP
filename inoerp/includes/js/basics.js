@@ -3283,17 +3283,23 @@ $(document).ready(function () {
    });
   }
 
-  if (localStorage.getItem("close_field_class") !== null) {
+  if (localStorage.getItem("close_field_class") !== null ) {
    var close_field_class = localStorage.getItem("close_field_class");
+   if (localStorage.getItem("close_div_class") !== null){
+    var close_div_class = localStorage.getItem("close_div_class");
+   }
    var opener_elemenType = window.opener.$(close_field_class).parent().prop('tagName');
    if (opener_elemenType === 'LI') {
     $(selectedData).each(function (i, currentData) {
      $(currentData).each(function (k, v) {
       if (v.field_name !== 'undefined') {
        var field_d = '.' + v.field_name;
-//       console.log(field_d + ' : ' +  close_field_class + ' :: ' +  localStorage.getItem("set_value_for_one_field"));
        if (localStorage.getItem("set_value_for_one_field") !== null) {
         window.opener.$(close_field_class).parent().find(field_d).val(v.field_value);
+//        console.log(field_d + ' : ' +  close_field_class + ' :: ' +  v.field_value);
+       } else if (localStorage.getItem("set_value_for_one_div") !== null) {
+        window.opener.$(close_div_class).find(field_d).val(v.field_value);
+//        console.log(field_d + ' : ' +  close_field_class + ' :: ' +  v.field_value);
        } else {
         window.opener.$(close_field_class).closest('.tabContent').find(field_d).val(v.field_value);
        }
@@ -3312,7 +3318,6 @@ $(document).ready(function () {
        } else {
         window.opener.$(rowClass).find(field_d).val(v.field_value);
        }
-
       }
      });
     });
@@ -3327,7 +3332,8 @@ $(document).ready(function () {
    }
   }
 
-  localStorage.removeItem("set_value_for_one_field")
+  localStorage.removeItem("set_value_for_one_field");
+  localStorage.removeItem("set_value_for_one_div");
   localStorage.removeItem("field_class");
   localStorage.removeItem("reset_link");
   window.close();
@@ -3689,8 +3695,10 @@ $(document).ready(function () {
  //Popup for selecting address address_id for normal popup & address_popup for popup where address can be created
  $('body').on('click', '.address_id.select_popup', function (e) {
   e.preventDefault();
-  localStorage.setItem("set_value_for_one_field", true);
-  var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("set_value_for_one_div", true);
+  var close_div_class = '.' + $(this).closest('ul').parent().prop('class').replace(/\s+/g, '.');
+  localStorage.setItem("close_div_class", close_div_class);
+   var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
 
   void window.open('select.php?class_name=address&mode=2', '_blank',
@@ -4465,7 +4473,7 @@ $(document).ready(function () {
 //  var header_id_h = '#' + primary_column_id;
 //  var primary_column_id_v = $(header_id_h).val();
   var link = '';
-  $(this).parent().children(':input').each(function () {
+  $(this).parent().find(':input').each(function () {
    var field_name = $(this).prop('name').replace(/\[]+/g, '');
    var field_val = $(this).val();
    link += '&' + field_name + '=' + field_val;
@@ -5025,7 +5033,7 @@ $(document).ready(function () {
   }
  });
 
- $('body').off('click', '.popup-form.view-catalog').on('click', '.popup-form.view-catalog', function (e) {
+ $('body').off('click', '.popup-form').on('click', '.popup-form', function (e) {
   e.preventDefault();
   var openUrl = $(this).prop('href');
   void window.open(openUrl, '_blank',
