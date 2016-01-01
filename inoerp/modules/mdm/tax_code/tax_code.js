@@ -13,8 +13,6 @@ setValFromSelectPage.prototype.setVal = function() {
 };
 
 $(document).ready(function() {
-// var Mandatory_Fields = ["#org_id", "First Select Calendar Name"];
-// select_mandatory_fields(Mandatory_Fields);
 
 //Name Value
  $('#form_line').on('focusout', '.year', function() {

@@ -1,7 +1,5 @@
 <?php
-
 class mdm_tax_code extends dbObject {
-
  public static $table_name = "mdm_tax_code";
  public static $module = "mdm";
  public static $primary_column = "mdm_tax_code_id";

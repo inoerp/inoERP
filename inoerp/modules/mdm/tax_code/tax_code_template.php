@@ -1,7 +1,7 @@
 <div class="row small-left-padding">
 <div id="form_all">
  <div id="form_headerDiv">
-  <form action=""  method="post" id="mdm_tax_code_line"  name="tax_code_line">
+  <form  method="post" id="mdm_tax_code_line"  name="tax_code_line">
    <span class="heading"><?php echo gettext('Tax Codes') ?></span>
    <div id="form_serach_header" class="tabContainer">
     <label><?php echo gettext('Business Org') ?></label></label>
@@ -17,7 +17,6 @@
       <li><a href="#tabsLine-3"><?php echo gettext('Reporting') ?></a></li>
      </ul>
      <div class="tabContainer"> 
-
       <div id="tabsLine-1" class="tabContent">
        <table class="form_table">
         <thead> 

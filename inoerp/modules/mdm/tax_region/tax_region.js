@@ -1,6 +1,4 @@
 $(document).ready(function() {
-// var Mandatory_Fields = ["#country_code", "First Select Calendar Name"];
-// select_mandatory_fields(Mandatory_Fields);
 
 //Name Value
  $('#form_line').on('focusout', '.country_code, .city, .state', function() {

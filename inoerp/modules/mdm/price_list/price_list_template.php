@@ -1,6 +1,6 @@
 <div class="row small-left-padding">
  <div id="form_all">
-  <form action=""  method="post" id="mdm_price_list_header"  name="mdm_price_list_header">
+  <form  method="post" id="mdm_price_list_header"  name="mdm_price_list_header">
    <span class="heading"><?php echo gettext('Price List') ?></span>
    <div id ="form_header">
     <div id="tabsHeader">
