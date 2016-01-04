@@ -83,7 +83,6 @@
    'line_price',
    'uom_id',
    'po_header_id',
-
    'item_status',
    'po_detail_id',
    'supplier_site_name',
@@ -154,7 +153,6 @@
    '_update_action_meassge' => 'Update',
    '_view_path' => 'form.php?class_name=po_release',
    '_show_view_path' => 1,
-//		 '_view_action_meassge' => 'View',
    '_extra_path' => array('form.php?class_name=ap_transaction_header&mode=9' => 'Invoice',
     'form.php?class_name=inv_receipt_header&mode=9' => 'Receive')
   ];
@@ -245,9 +243,6 @@
   public $budget_ac_id;
   public $ppv_ac_id;
 
-  public function __set($name, $value) {
-   $this->$name = $value;
-  }
 
   private function create_po_blanket_v() {
    $sql = "
@@ -382,6 +377,4 @@ WHERE po_header.po_type IN ( 'BLANKET', 'BLANKET_RELEASE')
   }
 
  }
-
-//end of po_detail class
 ?>
