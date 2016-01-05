@@ -119,7 +119,6 @@ inoERP
         <th><?php echo gettext('Shipping Org') ?></th>
         <th><?php echo gettext('Item Number') ?></th>
         <th><?php echo gettext('Item Description') ?></th>
-        <th><?php echo gettext('Quantity') ?></th>
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('Line Status') ?></th>
         <th><?php echo gettext('Quantity') ?></th>
@@ -127,7 +126,7 @@ inoERP
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
-       $count = 0;
+       $count = 0; 
        foreach ($sd_quote_line_object as $sd_quote_line) {
         ?>         
         <tr class="sd_quote_line<?php echo $count ?>">
@@ -137,7 +136,7 @@ inoERP
           ?>    
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
-         <td><?php form::text_field_wid2sr('sd_quote_line_id'); ?></td>
+         <td><?php $f->text_field_wid2sr('sd_quote_line_id' , 'always_readonly'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
          <td><?php echo $f->select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->shipping_org_id, '', 'medium', 1, $readonly); ?></td>
          <td><?php
@@ -147,10 +146,9 @@ inoERP
           ?>
           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
          <td><?php form::text_field_wid2('item_description'); ?></td>
-         <td><?php $f->number_field('line_quantity', $$class_second->line_quantity); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small'); ?></td>
-         <td><?php $f->text_field_wid2r('line_status'); ?></td>
-         <td><?php form::number_field_wid2s('line_quantity'); ?></td>
+         <td><?php $f->text_field_wid2r('line_status', 'always_readonly'); ?></td>
+         <td><?php echo $f->number_field('line_quantity', $$class_second->line_quantity); ?></td>
         </tr>
         <?php
         $count = $count + 1;
