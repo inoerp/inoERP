@@ -1048,12 +1048,15 @@ function ra_conevrt_data_bar_column($data_a, &$legend, $first_value_legend = tru
 }
 
 //bar & column
-function ra_conevrt_data_bar_column_wolegend($data_a) {
+function ra_conevrt_data_bar_column_wolegend($data_a, $ignore_empty_value) {
  $ra_data_a = [];
  foreach ($data_a as $data) {
   $ra_data_element = [];
   $count = 0;
   foreach ($data as $key => $val) {
+   if($ignore_empty_value && empty($val)){
+    continue;
+   }
    if ($count == 0) {
     $ra_data_element['label'] = $val;
    } else {

@@ -202,6 +202,7 @@ function _get_default_locale($locale) {
  */
 function _setlocale($category, $locale) {
     global $CURRENTLOCALE, $EMULATEGETTEXT;
+//    putenv("LC_ALL=ar_SA");
     if ($locale === 0) { // use === to differentiate between string "0"
         if ($CURRENTLOCALE != '')
             return $CURRENTLOCALE;

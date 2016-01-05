@@ -1,4 +1,4 @@
-<div id ="form_header"><?php $f = new inoform() ?>
+<div id ="form_header">
  <span class="heading"><?php echo gettext('Rating Values Header') ?></span>
  <div id="tabsHeader">
   <ul class="tabMain">

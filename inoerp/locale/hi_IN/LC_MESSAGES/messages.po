@@ -9870,7 +9870,7 @@ msgstr "अनिवार्य"
 msgid "Save failed!! error@inosavel line"
 msgstr "सहेजना विफल रहा!! error@inosavel रेखा"
 
-msgid "Data is Successfullysaved"
+msgid "Data is Successfully Saved"
 msgstr "डेटा सफलतापूर्वक सहेजा गया है"
 
 msgid "Action Completed"

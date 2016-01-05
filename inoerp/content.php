@@ -8,7 +8,6 @@ $class_names = [
 ];
 ?>
 <?php
-
 include_once("includes/functions/loader.inc");
 $read_access = true;
 //exit script in case of delete statement
@@ -20,7 +19,6 @@ if ((!empty($_POST))) {
 }
 ?>
 <?php
-
 $content_rp = getrwuPrivilage($content_type->read_role, $_SESSION['user_roles'][0]);
 $content_wp = getrwuPrivilage($content_type->write_role, $_SESSION['user_roles'][0]);
 $content_up = getrwuPrivilage($content_type->update_role, $_SESSION['user_roles'][0]);

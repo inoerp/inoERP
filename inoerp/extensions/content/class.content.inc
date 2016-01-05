@@ -294,7 +294,9 @@ class content extends dbObject {
           LEFT JOIN ext_url_alias eua ON eua.content_id=content.content_id 
 					WHERE 
 					content.published_cb = 1 
-					AND content.show_in_fp_cb = 1 ";
+					AND content.show_in_fp_cb = 1 
+   AND content.content_type_id != 1 ";
+    
   $sql .=" ORDER BY  creation_date DESC, weightage DESC";
   $sql .= " LIMIT {$no_of_articles} ";
   $result = $this->findBySql($sql);

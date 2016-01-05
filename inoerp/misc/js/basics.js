@@ -4852,7 +4852,7 @@ $(document).ready(function () {
   }
  });
 
- $('body').off('click', '.popup-form.view-catalog').on('click', '.popup-form.view-catalog', function (e) {
+ $('body').off('click', '.popup-form').on('click', '.popup-form', function (e) {
   e.preventDefault();
   var openUrl = $(this).prop('href');
   void window.open(openUrl, '_blank',

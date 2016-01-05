@@ -2,7 +2,7 @@
  <div id="form_all">
   <span class="heading"><?php echo gettext('Tax Regions') ?></span>
   <div id="form_headerDiv">
-   <form action=""  method="post" id="mdm_tax_region_line"  name="tax_region_line">
+   <form  method="post" id="mdm_tax_region_line"  name="tax_region_line">
     <div id="form_serach_header" class="tabContainer">
      <label><?php echo gettext('Country') ?></label>
      <?php $f->l_select_field_from_object('country_code', mdm_tax_region::country(), 'option_line_code', 'option_line_value', $country_code_h, 'country_code', ' ', '', $readonly1); ?>

@@ -1,5 +1,5 @@
-<form action=""  method="post" id="category"  name="category">
- <div id ="form_header"><?php $f = new inoform() ?>
+<form  method="post" id="category"  name="category">
+ <div id ="form_header">
   <span class="heading"><?php echo gettext('Category Header') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">

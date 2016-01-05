@@ -24,7 +24,6 @@
 							<li> <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sys_profile_header_id select_popup clickable">
 								Profile Id : </label>
 							 <?php
-							 $f = new inoform();
 							 echo form::number_field_drs('sys_profile_header_id');
 							 ?>
 							</li>

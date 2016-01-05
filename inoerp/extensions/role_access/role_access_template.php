@@ -1,5 +1,5 @@
 <div class="row small-left-padding">
- <div id ="form_header"><?php $f = new inoform(); ?>
+ <div id ="form_header">
   <span class="heading"><?php echo gettext('Role Details') ?></span>
   <div class="tabContainer">
    <ul class="column header_field">
@@ -12,7 +12,7 @@
    </ul>
   </div>
  </div>
- <form action=""  method="post" id="role_access"  name="role_access">
+ <form method="post" id="role_access"  name="role_access">
   <!--END OF FORM HEADER-->
   <div id ="form_line" class="role_access">
    <span class="heading"><?php echo gettext('Class & Access Details') ?></span>

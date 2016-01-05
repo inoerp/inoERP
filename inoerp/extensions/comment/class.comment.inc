@@ -452,14 +452,18 @@ class comment extends dbObject {
     $comment_string .= '</div>';
    }
   }
-
-
   $pagination = new pagination($pageno, $per_page, $total_count);
-  if (strpos($_SERVER['SCRIPT_NAME'], 'content.php') !== false) {
-   $pagination->setProperty('_path', 'content');
-  } else if (strpos($_SERVER['SCRIPT_NAME'], 'form.php') !== false) {
-   $pagination->setProperty('_path', 'form');
+  if (!empty($_GET['is_alias'])) {
+   $pagination->setProperty('_is_alias', true);
+   $pagination->setProperty('_path', thisPage_url());
+  } else {
+   if (strpos($_SERVER['SCRIPT_NAME'], 'content.php') !== false) {
+    $pagination->setProperty('_path', 'content');
+   } else if (strpos($_SERVER['SCRIPT_NAME'], 'form.php') !== false) {
+    $pagination->setProperty('_path', 'form');
+   }
   }
+
 
   $pagination->setProperty('_query_string', $query_string);
   $comment_string .= $pagination->show_pagination();

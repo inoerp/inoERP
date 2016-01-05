@@ -1,3 +1,12 @@
+<!-- * 
+inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+-->
+
 <div id ="form_header"><span class="heading"><?php echo gettext('Expense Claim') ?></span>
  <form action=""  method="post" id="so_header"  name="so_header">
   <div id="tabsHeader">

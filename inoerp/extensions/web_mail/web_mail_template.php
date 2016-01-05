@@ -7,9 +7,8 @@ $reference_table = !empty($_GET['reference_table']) ? $_GET['reference_table'] :
 $reference_id = !empty($_GET['reference_id']) ? $_GET['reference_id'] : '';
 ?>
 <div id ="web_mail_divId">
- <form action=""  method="post" id="web_mail"  name="web_mail">
-  <span class="heading"><?php $f = new inoform();
-echo gettext('Web eMail') ?></span>
+ <form  method="post" id="web_mail"  name="web_mail">
+  <span class="heading"><?php echo gettext('Web eMail') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
@@ -19,12 +18,12 @@ echo gettext('Web eMail') ?></span>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
       <ul class="column header_field"> 
-       <li><label>Email Id</label><?php echo $f->text_field('email_id', $$class->email_id, '', 'email_id', 'email_id', 1, ''); ?></li>
-       <li><label>CC Email</label><?php echo $f->text_field('cc_email', $$class->cc_email, '', 'cc_email', 'cc_email', '', ''); ?></li>
-       <li><label>BCC Email</label><?php echo $f->text_field('bcc_email', $$class->bcc_email, '', 'bcc_email', 'bcc_email', '', ''); ?></li>
-       <li><label>Subject</label><?php echo $f->text_field('subject', $$class->subject, '', 'subject', 'subject', 1, ''); ?></li>
-       <li><label>Copy Me</label><?php echo $f->checkBox_field_d('send_me_copy_cb'); ?></li>
-       <li><label>Create Note</label><?php echo $f->checkBox_field_d('create_comment_cb'); ?></li>
+       <li><label><?php echo gettext('Email Id') ?></label><?php echo $f->text_field('email_id', $$class->email_id, '', 'email_id', 'email_id', 1, ''); ?></li>
+       <li><label><?php echo gettext('CC Email') ?></label><?php echo $f->text_field('cc_email', $$class->cc_email, '', 'cc_email', 'cc_email', '', ''); ?></li>
+       <li><label><?php echo gettext('BCC Email') ?></label><?php echo $f->text_field('bcc_email', $$class->bcc_email, '', 'bcc_email', 'bcc_email', '', ''); ?></li>
+       <li><label><?php echo gettext('Subject') ?></label><?php echo $f->text_field('subject', $$class->subject, '', 'subject', 'subject', 1, ''); ?></li>
+       <li><label><?php echo gettext('Copy Me') ?></label><?php echo $f->checkBox_field_d('send_me_copy_cb'); ?></li>
+       <li><label><?php echo gettext('Create Note') ?></label><?php echo $f->checkBox_field_d('create_comment_cb'); ?></li>
        <?php echo $f->hidden_field_withId('reference_table', $reference_table); ?>
        <?php echo $f->hidden_field_withId('reference_id', $reference_id); ?>
       </ul>

@@ -61,14 +61,27 @@ if ($continue) {
   * Check if class is content. If yes, check if any url alias exists
   */
  if (!empty($class_names) && is_array($class_names) && (in_array('content', $class_names))) {
+  if (strpos($_SERVER['REQUEST_URI'], "?") !== false) {
+   $request_url_lo_a = explode('?', $_SERVER['REQUEST_URI'])[1];
+  }
   $alias = $_SERVER['QUERY_STRING'];
   $orginal_path_i = ext_url_alias::find_by_urlAlias($alias);
   if (!empty($orginal_path_i)) {
+   $_GET['is_alias'] = 1;
    $orginal_path = $orginal_path_i->original_url;
    $path_links = explode('&', $orginal_path);
    foreach ($path_links as $path_link) {
     $path_link_i = explode('=', $path_link);
     $_GET[$path_link_i[0]] = $path_link_i[1];
+   }
+  }
+  if (!empty($request_url_lo_a)) {
+   $request_url_lo = explode('&', $request_url_lo_a);
+   foreach ($request_url_lo as $request_url_lo_val) {
+    if (strpos($request_url_lo_val, "=") !== false) {
+     $request_url_lo_val_exp = explode('=', $request_url_lo_val);
+     $_GET[$request_url_lo_val_exp[0]] = $request_url_lo_val_exp[1];
+    }
    }
   }
  }
@@ -271,7 +284,7 @@ if (($continue) && (!empty($class_names))) {
     }
 
 //validate organization access where applicable
-    if (property_exists($$class, 'org_id') && (!in_array($class, array('org', 'legal' , 'ec_product_view')))) {
+    if (property_exists($$class, 'org_id') && (!in_array($class, array('org', 'legal', 'ec_product_view')))) {
      if (empty($_SESSION['user_org_access'])) {
       $no_organization_access = true;
       return;
@@ -514,7 +527,6 @@ if (isset($class_names[1])) {
   }
  }
 // echo($line_obj);
-
 }
 
 if (isset($class_names[2])) {

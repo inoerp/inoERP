@@ -16,9 +16,9 @@
 				 <div id ="form_header">
          <div id="tabsHeader">
           <ul class="tabMain">
-           <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info'); ?></a></li>
-           <li><a href="#tabsHeader-2"><?php echo gettext('Attachments'); ?></a></li>
-           <li><a href="#tabsHeader-3"><?php echo gettext('Notes'); ?></a></li>
+           <li><a href="#tabsHeader-1">Basic Info</a></li>
+           <li><a href="#tabsHeader-2">Attachments</a></li>
+           <li><a href="#tabsHeader-3">Notes</a></li>
           </ul>
           <div class="tabContainer"> 
            <div id="tabsHeader-1" class="tabContent">

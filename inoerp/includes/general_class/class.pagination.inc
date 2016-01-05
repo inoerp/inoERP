@@ -9,6 +9,7 @@ class pagination {
  private $_path = 'search';
  private $_query_string;
  private $_total_pages;
+ private $_is_alias = false;
  public static $noOfPages = <<<'VAR'
      <div id="noOfpages">
       <form action="" method="POST">
@@ -104,7 +105,9 @@ VAR;
   if ($this->_total_pages >= 1) {
    $pagination_statement .= "<div class='page_nos pagination'>";
    if ($this->current_page > 6) {
-    if (strpos($this->_path, '.php') !== false) {
+    if ($this->_is_alias) {
+     $pagination_statement .= " <a href=\"$this->_path&amp;pageno=1&amp;";
+    } else if (strpos($this->_path, '.php') !== false) {
      $pagination_statement .= " <a href=\"$this->_path&amp;pageno=1&amp;" . $this->_query_string;
     } else {
      $pagination_statement .= " <a href=\"$this->_path.php?pageno=1&amp;" . $this->_query_string;
@@ -113,7 +116,9 @@ VAR;
    }
 
    if ($this->has_previous_page()) {
-    if (strpos($this->_path, '.php') !== false) {
+    if ($this->_is_alias) {
+     $pagination_statement .= " <a href=\"$this->_path?pageno=";
+    } else if (strpos($this->_path, '.php') !== false) {
      $pagination_statement .= "<a href=\"$this->_path&pageno=";
     } else {
      $pagination_statement .= "<a href=\"$this->_path.php?pageno=";
@@ -134,7 +139,9 @@ VAR;
      if ($starting_page_no == $this->current_page) {
       $pagination_statement .= " <span class=\"selected\">{$starting_page_no}</span> ";
      } else {
-      if (strpos($this->_path, '.php') !== false) {
+      if ($this->_is_alias) {
+       $pagination_statement .= " <a href=\"$this->_path?pageno={$starting_page_no}";
+      } else if (strpos($this->_path, '.php') !== false) {
        $pagination_statement .= " <a href=\"$this->_path&amp;pageno={$starting_page_no}&amp;" . $this->_query_string;
       } else {
        $pagination_statement .= " <a href=\"$this->_path.php?pageno={$starting_page_no}&amp;" . $this->_query_string;
@@ -149,7 +156,9 @@ VAR;
    } while ($pagination_count < 10);
 
    if ($this->has_next_page()) {
-    if (strpos($this->_path, '.php') !== false) {
+    if ($this->_is_alias) {
+     $pagination_statement .= " <a href=\"$this->_path?pageno=";
+    } else if (strpos($this->_path, '.php') !== false) {
      $pagination_statement .= " <a href=\"$this->_path&amp;pageno=";
     } else {
      $pagination_statement .= " <a href=\"$this->_path.php?pageno=";
@@ -160,7 +169,9 @@ VAR;
    }
 
    if ($this->_total_pages >= $pagination_count) {
-    if (strpos($this->_path, '.php') !== false) {
+    if ($this->_is_alias) {
+     $pagination_statement .= " <a href=\"$this->_path?pageno=";
+    } else if (strpos($this->_path, '.php') !== false) {
      $pagination_statement .= " <a href=\"$this->_path&amp;pageno=";
     } else {
      $pagination_statement .= " <a href=\"$this->_path.php?pageno=";
@@ -169,7 +180,7 @@ VAR;
     $pagination_statement .= "\">Last</a> ";
    }
 //   $pagination_statement .= '<span class="show_loading_small"><img src="'.HOME_URL .'/themes/images/form/small_loading_bar.gif"></li>';
-$pagination_statement .= '</div>';
+   $pagination_statement .= '</div>';
    $pagination_statement .= select_per_page($this->per_page);
   }
 

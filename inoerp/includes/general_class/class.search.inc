@@ -11,6 +11,7 @@ class search extends dbObject {
 //private attrbiutes - to show result
  Private $_update_path;
  Private $_show_update_path;
+ Private $_show_multifield_path;
  Private $_update_action_meassge = 'Update';
  Private $_view_path;
  Private $_show_view_path;
@@ -104,11 +105,11 @@ class search extends dbObject {
   } else {
    $window_type = '';
   }
-  echo $window_type;
-  
-  if(!empty($this->_show_update_path) || !empty($this->_show_view_path) ||  !empty($this->_extra_path)){
+//  echo $window_type;
+
+  if (!empty($this->_show_update_path) || !empty($this->_show_view_path) || !empty($this->_extra_path)) {
    $show_action_msg = true;
-  }else{
+  } else {
    $show_action_msg = false;
   }
   if (empty($this->_view_path)) {
@@ -132,7 +133,7 @@ class search extends dbObject {
   for ($i = 0; $i < $no_of_tabs; $i++) {
    $search_result .= "<div id=\"tabsLine-$i\" class='tabContent'>";
    $search_result .= "<table class=\"normal\"><thead ><tr class='ino-sort'>";
-   $search_result .= '<th>'.gettext(ucwords(str_replace('_', ' ', $this->primary_column_s))).'</th>';
+   $search_result .= '<th>' . gettext(ucwords(str_replace('_', ' ', $this->primary_column_s))) . '</th>';
    if ($i == 0 && $show_action_msg) {
     $search_result .= "<th>Action<span id='copy_clipboard' title='Copy To Clipboard'>&nbsp;&nbsp;&nbsp;<i class='fa fa-clipboard clickable'></i></span></th>";
    }
@@ -152,8 +153,8 @@ class search extends dbObject {
      $count++;
      $tr_class = 'rowno_' . $count;
      $search_result .="<tr class='{$tr_class}'>";
-     $primary_col_val = (!empty($record->{$this->primary_column_s})) ?  $record->{$this->primary_column_s} : $count;
-     $search_result .= '<td>'.$primary_col_val.'</td>';
+     $primary_col_val = (!empty($record->{$this->primary_column_s})) ? $record->{$this->primary_column_s} : $count;
+     $search_result .= '<td>' . $primary_col_val . '</td>';
      if ($i == 0 && $show_action_msg) {
       $search_result .= '<td class="search_result action">';
       if ($this->_show_view_path) {
@@ -170,6 +171,15 @@ class search extends dbObject {
         $search_result .= "&nbsp;&nbsp;<a class=\"extra_path ino-btn2\" "
          . "href=\"$pathname&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $pathmsg . '</a>';
        }
+      }
+      if (!empty($this->_show_multifield_path)) {
+       $multifield_path_stmt = "&nbsp;&nbsp;<a class=\"multifield_path ino-btn2\" "
+        . "href=\"$this->_update_path";
+       foreach ($this->_show_multifield_path as $multifield_path_k => $multifield_path_v) {
+        $multifield_path_stmt .= "&$multifield_path_v=" . $record->$multifield_path_v;
+       }
+       $multifield_path_stmt .= '&mode=9"> Result Data </a>';
+       $search_result .= $multifield_path_stmt;
       }
       if ($this->_show_update_path) {
        if ($this->_searching_class == 'content') {
@@ -236,7 +246,7 @@ class search extends dbObject {
   for ($i = 0; $i < $no_of_tabs; $i++) {
    $search_result .= "<div id=\"tabsLine-$i\" class='tabContent'>";
    $search_result .= "<table class=\"normal\"><thead><tr>";
-   $search_result .= '<th>'.gettext(ucwords(str_replace('_', ' ', $primary_column))).'</th>';
+   $search_result .= '<th>' . gettext(ucwords(str_replace('_', ' ', $primary_column))) . '</th>';
    if ($i == 0) {
     $search_result .= "<th>Click Select</th>";
    }
@@ -256,7 +266,7 @@ class search extends dbObject {
      $count++;
      $tr_class = 'rowno_' . $count;
      $search_result .="<tr class='{$tr_class}'>";
-     $search_result .= '<td>'.$record->$primary_column.'</td>';
+     $search_result .= '<td>' . $record->$primary_column . '</td>';
      if ($i == 0) {
       $search_result .= '<td><a href="#" role="button" data-select_field="' . $primary_column . '"  data-select_field_value="' . $record->$primary_column . '"'
        . ' class=" btn btn-default ' . $primary_column . ' ' . $quick_select_class . '">' . $record->$primary_column . '</a></td>';
@@ -313,13 +323,13 @@ class search extends dbObject {
   } else {
    $window_type = '';
   }
-  if(is_array($window_type)){
+  if (is_array($window_type)) {
    $window_type = $window_type[0];
   }
-    if(is_array($function_name)){
+  if (is_array($function_name)) {
    $function_name = $function_name[0];
   }
-    if(is_array($report_name)){
+  if (is_array($report_name)) {
    $report_name = $report_name[0];
   }
   $class = is_array($this->_searching_class) ? $this->_searching_class[0] : $this->_searching_class;
@@ -330,7 +340,7 @@ class search extends dbObject {
   }
 
   if (empty($_GET['column_array'])) {
-   if (is_object($class_obj) &&  property_exists($class_obj, 'column')) {
+   if (is_object($class_obj) && property_exists($class_obj, 'column')) {
     $column_array = $class_obj->column;
    } else if (property_exists($class_obj, 'field_a')) {
     $column_array = $class_obj->field_a;
@@ -354,7 +364,7 @@ class search extends dbObject {
 //start of the srach statement
   $search_form_statement = "";
   $search_form_statement .= "<span id='search_tip' class='clickable ino-btn2'>Searching Tips</span>";
-  if ((isset($_GET['window_type']) && $_GET['window_type'] == 'popover') || $this->_window_type =='popover' ){
+  if ((isset($_GET['window_type']) && $_GET['window_type'] == 'popover') || $this->_window_type == 'popover') {
    $search_form_statement .= '<div class="tabContainer"> ';
   } else {
    $search_form_statement .= "<form action=\"$this->_form_post_link.php\" name=\"$this->_form_name\" method='GET' class=\"full-width search_box $this->_form_name\" id=\"$this->_form_name\">";
@@ -364,8 +374,8 @@ class search extends dbObject {
      <li><a href="#tabsHeader-2">' . gettext('eMail Details') . '</a></li>
      <li><a href="#tabsHeader-3">' . gettext('Scheduling') . '</a></li>
     </ul>';
-   $search_form_statement .= '<div class="tabContainer"> ';
-   $search_form_statement .='<div id="tabsHeader-1" class="tabContent">';
+   $search_form_statement .= '<div class="tabContainer row"> ';
+   $search_form_statement .='<div id="tabsHeader-1" class="tabContent col-md-12">';
   }
 
   //start of first ul
@@ -499,7 +509,7 @@ class search extends dbObject {
   $search_form_statement .= '<li><label> Per page</label>';
   $search_form_statement .= $f->select_field_from_array('per_page', $this->_per_page_a, $this->_per_page, 'per_page');
 
-    
+
   $reset_link = "$this->_form_post_link.php?class_name=$class&mode=$this->_search_mode&show_block=$this->_show_block";
   $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"window_type\" value=\"$window_type\" class=\"$srch_div_cls window_type\" ></li>";
   $search_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"reset_class_name\" value=\"Reset All\" class=\"$srch_div_cls reset button\" ></li>";
@@ -509,20 +519,20 @@ class search extends dbObject {
   $search_form_statement .="<li><input type=\"submit\" form=\"$this->_form_name\" name=\"submit_search\" class=\"$srch_div_cls button\" value=\"Search\" id=\"search_submit_btn\"></li>";
   $search_form_statement .="</ul>";
   $search_form_statement .="</div>";
-  if (isset($_GET['window_type']) && $_GET['window_type'] == 'popover'  || $this->_window_type =='popover' ) {
+  if (isset($_GET['window_type']) && $_GET['window_type'] == 'popover' || $this->_window_type == 'popover') {
    $search_form_statement .="</div> "; //end of tab1
   } else {
    $search_form_statement .="</div> "; //end of tab1
 
-   $search_form_statement .= '<div id="tabsHeader-2" class="tabContent">';
+   $search_form_statement .= '<div id="tabsHeader-2" class="tabContent col-md-12">';
    $search_form_statement .='<ul>';
    $search_form_statement .= '<li><label>Email Address</label> ' . form::text_area('email_addresses', '', '3', '120', '', 'Separate each email address by comma(,) or a new line') . ' </li>';
    $search_form_statement .='<li><label>Email Format</label> ' . $f->select_field_from_array('email_format', dbObject::$download_format, 'excel_format') . '</li>';
    $search_form_statement .='</ul>';
    $search_form_statement .="</div> "; //end of tabsHeader-2
 
-   $search_form_statement .= '<div id="tabsHeader-3" class="tabContent">';
-    $search_form_statement .= '<ul class="simple_column full-width">';
+   $search_form_statement .= '<div id="tabsHeader-3" class="tabContent col-md-12">';
+   $search_form_statement .= '<ul class="simple_column full-width">';
    $search_form_statement .= "<li><label>Frequency UOM </label>";
    $search_form_statement .= $f->select_field_from_array('frequency_uom', sys_program_schedule::$frequency_uom_a, '', 'frequency_uom');
    $search_form_statement .= '</li>';

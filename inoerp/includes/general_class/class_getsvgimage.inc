@@ -53,6 +53,7 @@ class getsvgimage extends dbObject {
  private $_draw_major_grid_y = true;
  private $_draw_minor_grid_y = true;
  private $_show_elemnt_value = false;
+ private $_ignore_empty_value = false;
  private $_left_margin = 30;
  private $_right_margin = 0;
  private $_top_margin = 10;
@@ -191,7 +192,7 @@ class getsvgimage extends dbObject {
   switch ($this->_chart_type) {
    case 'vertical_column':
    case 'horizonatl_bar':
-    $this->_data = ra_conevrt_data_bar_column_wolegend($data);
+    $this->_data = ra_conevrt_data_bar_column_wolegend($data, $this->_ignore_empty_value);
     break;
 
    case 'clustered_column':
@@ -329,6 +330,9 @@ class getsvgimage extends dbObject {
       $return_chart .= "<span class='{$this->_chart_type} view'>$val_2</span>";
       foreach ($this->result as $obj) {
        if ($obj->$legend_name == $val_2) {
+        if ($this->_ignore_empty_value && empty($obj->$chart_value)) {
+         continue;
+        }
         $row_data = [];
         $row_data['label'] = $obj->$chart_label;
         $row_data['value'] = $obj->$chart_value;
@@ -346,6 +350,9 @@ class getsvgimage extends dbObject {
     } else {
      $this->_data = [];
      foreach ($this->result as $obj) {
+      if ($this->_ignore_empty_value && empty($obj->$chart_value)) {
+       continue;
+      }
       $row_data = [];
       $row_data['label'] = $obj->$chart_label;
       $row_data['value'] = $obj->$chart_value;
@@ -617,7 +624,7 @@ class getsvgimage extends dbObject {
     $xaxis += $point_gap;
     $x2 = $xaxis;
     $y2 = $yaxis = $this->_chart_height - ($unit_height * $value);
-    $element_title =  $value. ' ( ' . $label . ')';
+    $element_title = $value . ' ( ' . $label . ')';
     $chart .= "<rect x=\"$xaxis\" y=\"$yaxis\" width=\"5\" height=\"5\" class=\" $key $line_class line_chart  \"    title=\"$element_title\"  />";
     if ($data_count > 0) {
      $chart .= "<line x1=\"$x1\" y1=\"$y1\" x2=\"$x2\" y2=\"$y2\"  class=\"$line_class line_chart line\" title=\"$element_title\"  />";
@@ -1290,7 +1297,7 @@ class getsvgimage extends dbObject {
    } else {
     $large_arc = 0;
    }
-   $element_title =  $value. ' ( ' .round($value / $sum_of_elements * 100, 1) . '% | '. $key . ')';
+   $element_title = $value . ' ( ' . round($value / $sum_of_elements * 100, 1) . '% | ' . $key . ')';
    $cum_segment += ($value / $sum_of_elements) * 360;
    $last_y_m = -($last_y);
    $next_x = $radius * cos(deg2rad($cum_segment));
@@ -1410,7 +1417,7 @@ class getsvgimage extends dbObject {
    $x2 = empty($x2_cordinate) ? $this->_chart_width - $cum_segment : $x2_cordinate;
    $y2 = $y1;
    $cum_segment = (($value) * $unit_width_for_funnel) / $cum_segment_divisor;
-   $element_title =  $value. ' ( ' .round($value / $sum_of_elements * 100, 1) . '% | '. $key . ')';
+   $element_title = $value . ' ( ' . round($value / $sum_of_elements * 100, 1) . '% | ' . $key . ')';
 
    if ($this->_show_staight_end) {
     $x3 = (($count == $num_of_elements) && ($value < 0.25 * $sum_of_elements)) ? $x2 : $x2 - $cum_segment;

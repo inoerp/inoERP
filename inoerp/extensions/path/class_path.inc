@@ -127,6 +127,21 @@ class path extends dbObject {
   return $this->findFirstColumn_BySql_array($sql);
  }
 
+// public function findAll_pathId() {
+//  $sql = "  SELECT path.path_id 
+//           from path,
+//           engine
+//           WHERE  engine.obj_class_name = path.obj_class_name
+//           AND engine.enabled_cb = 1
+//            ";
+//  $sql .= " UNION ";
+//  $sql .= "  SELECT path.path_id 
+//           from path
+//           WHERE  path.obj_class_name IS NULL ";
+////echo $sql;
+//  return $this->findFirstColumn_BySql_array($sql);
+// }
+
  public function findAll_parentPathId() {
   $sql = " SELECT path_id from path where parent_id IS NULL OR parent_id = 0 ORDER BY display_weight ASC ";
   return $this->findFirstColumn_BySql_array($sql);
@@ -138,12 +153,42 @@ class path extends dbObject {
   return $this->findBySql($sql, $value_a);
  }
 
+// public function findBy_pathIds($path_ids_array) {
+//  $path_ids_s = join(',', $path_ids_array);
+//  $sql = " SELECT * from path ";
+//  $sql .= " WHERE path_id IN ($path_ids_s)";
+//  return $this->findBySql(findBy_pathIds);
+// }
+ 
  public function findBy_pathIds($path_ids_array) {
   $path_ids_s = join(',', $path_ids_array);
-  $sql = " SELECT * from path ";
-  $sql .= " WHERE path_id IN ($path_ids_s)";
+  $sql = " SELECT * from path , engine ";
+  $sql .= " WHERE path.path_id IN ($path_ids_s)  
+            AND  engine.obj_class_name = path.obj_class_name
+           AND engine.enabled_cb = 1";
   return $this->findBySql(findBy_pathIds);
  }
+
+// public function findBy_pathIds($path_ids_array) {
+//  $path_ids_s = join(',', $path_ids_array);
+//  $sql = " SELECT path.path_id,   path.name,   path.parent_id,   path.path_link,   path.description,   path.module_code,   path.obj_class_name,
+//path.mode,   path.id_column_name,   path.path_type,   path.search_path_cb,   path.display_weight,   path.created_by,
+//path.creation_date,   path.last_update_by,   path.last_update_date  ";
+//
+//  $sql .= " from path , engine ";
+//  $sql .= " WHERE path.path_id IN ($path_ids_s)  
+//            AND  engine.obj_class_name = path.obj_class_name
+//           AND engine.enabled_cb = 1";
+//  $sql .= " UNION ";
+//  $sql .= " SELECT path.path_id,   path.name,   path.parent_id,   path.path_link,   path.description,   path.module_code,   path.obj_class_name,
+//path.mode,   path.id_column_name,   path.path_type,   path.search_path_cb,   path.display_weight,   path.created_by,
+//path.creation_date,   path.last_update_by,   path.last_update_date  ";
+//
+//  $sql .= " from path ";
+//  $sql .= " WHERE path.path_id IN ($path_ids_s)  
+//            AND  path.obj_class_name IS NULL ";
+//  return $this->findBySql(findBy_pathIds);
+// }
 
  public function findAll_PathsByString($string) {
   global $dbc;
@@ -486,7 +531,7 @@ class path extends dbObject {
   }
 
 
-  if (!empty($allowed_path_ids) && is_array($allowed_path_ids) && !empty($allowed_path_ids['1'])  && !empty($allowed_path_ids[0]) && $allowed_path_ids[0] != '11') {
+  if (!empty($allowed_path_ids) && is_array($allowed_path_ids) && !empty($allowed_path_ids['1']) && !empty($allowed_path_ids[0]) && $allowed_path_ids[0] != '11') {
    if (!empty($allowed_path_ids) && is_array($allowed_path_ids) && ($this->_show_misc_paths)) {
     $allPaths .= '<ul>';
     $allPaths .= '<li class="parent_menu expandable misc">' . '<a href="' . HOME_URL . '">MISC</a>';

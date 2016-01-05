@@ -10,7 +10,7 @@
       <div class="error"></div><div id="loading"></div>
       <div class="show_loading_small"></div>
       <?php
-       echo (!empty($show_message)) ? $show_message : ""; $f= new inoform();
+       echo (!empty($show_message)) ? $show_message : ""; 
       ?> 
       <span class="heading"> View - Dynamic Query Builder  </span>
       <!--    End of place for showing error messages-->
