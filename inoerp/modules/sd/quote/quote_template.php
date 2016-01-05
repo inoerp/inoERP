@@ -40,7 +40,7 @@ inoERP
     <div id="tabsHeader-2" class="tabContent">
      <ul class="column header_field">
       <li><?php $f->l_select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', 'currency', 1, $readonly); ?>						 </li>
-      <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly1); ?>						 </li>
+      <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly); ?>						 </li>
       <li><?php
        echo $f->l_val_field_d('sales_person', 'hr_employee_v', 'employee_name', '', 'vf_select_document_owner employee_name');
        echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id);
