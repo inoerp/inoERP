@@ -65,24 +65,24 @@ $(document).ready(function() {
 
  });
 
- onClick_add_new_row('tr.user_dashboard_config_line0', 'tbody.user_dashboard_config_values', '1', 'copyData');
-
-
- //context menu
- var classContextMenu = new contextMenuMain();
- classContextMenu.docLineId = 'user_dashboard_config_id';
- classContextMenu.btn2DivId = 'form_line';
- classContextMenu.trClass = 'user_dashboard_config_line';
- classContextMenu.tbodyClass = 'form_data_line_tbody';
- classContextMenu.noOfTabbs = 1;
-// classContextMenu.contextMenu();
-
- var user_dashboard_configSave = new saveMainClass();
- user_dashboard_configSave.json_url = 'form.php?class_name=user_dashboard_config';
- user_dashboard_configSave.single_line = false;
- user_dashboard_configSave.line_key_field = 'fav_name';
- user_dashboard_configSave.form_line_id = 'user_dashboard_config';
- user_dashboard_configSave.saveMain();
+// onClick_add_new_row('tr.user_dashboard_config_line0', 'tbody.user_dashboard_config_values', '1', 'copyData');
+//
+//
+// //context menu
+// var classContextMenu = new contextMenuMain();
+// classContextMenu.docLineId = 'user_dashboard_config_id';
+// classContextMenu.btn2DivId = 'form_line';
+// classContextMenu.trClass = 'user_dashboard_config_line';
+// classContextMenu.tbodyClass = 'form_data_line_tbody';
+// classContextMenu.noOfTabbs = 1;
+//// classContextMenu.contextMenu();
+//
+// var user_dashboard_configSave = new saveMainClass();
+// user_dashboard_configSave.json_url = 'form.php?class_name=user_dashboard_config';
+// user_dashboard_configSave.single_line = false;
+// user_dashboard_configSave.line_key_field = 'fav_name';
+// user_dashboard_configSave.form_line_id = 'user_dashboard_config';
+// user_dashboard_configSave.saveMain();
 
 });
 
