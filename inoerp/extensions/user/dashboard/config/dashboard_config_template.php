@@ -3,12 +3,14 @@
   <div id="user_dashboard_configId">
    <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
    <!--    End of place for showing error messages-->
-   <form action=""  method="post" id="user_dashboard_config"  name="user_dashboard_config"><span class="heading">Dashboard Configuration </span>
+   <form action=""  method="post" id="user_dashboard_config"  name="user_dashboard_config">
+    <span class="heading"><?php echo gettext('Dashboard Configuration') ?></span>
+    <span class="label label-primary"><?php echo gettext('(Enable User Personal Dashboard in My Preference to activate your customized dashboard)') ?></span>
     <!--END OF FORM HEADER-->
     <div id ="form_line" class="user_dashboard_config">
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1">Details </a></li>
+       <li><a href="#tabsLine-1"><?php echo gettext('Details') ?></a></li>
       </ul>
       <div class="tabContainer"> 
        <div id="tabsLine-1" class="tabContent">
@@ -23,6 +25,7 @@
            <th><?php echo gettext('Group') ?></th>
            <th><?php echo gettext('Report Type') ?></th>
            <th><?php echo gettext('Report Name') ?> </th>
+           <th><?php echo gettext('Report Label') ?></th>
            <th><?php echo gettext('Priority') ?></th>
           </tr>
          </thead>
@@ -48,6 +51,14 @@
                $report_a[$view_id] = $view_data->view_name;
               }
               break;
+
+             case 'extn_report' :
+              $view_i = extn_report::find_all();
+              foreach ($view_i as $view_data) {
+               $view_id = $view_data->extn_report_id;
+               $report_a[$view_id] = $view_data->report_name;
+              }
+              break;
             }
             if (!empty($user_dashboard_config->user_dashboard_config_id)) {
              if (empty($user_dashboard_config->user_id)) {
@@ -69,7 +80,7 @@
              if ($admin) {
               echo $f->select_field_from_array('config_level', user_dashboard_config::$config_level_a, $$class->config_level);
              } else {
-              echo $f->select_field_from_array('config_level', array('USER'), 'USER', '', '', 1, 1, 1);
+              echo $f->select_field_from_array('config_level', user_dashboard_config::$config_level_a, 'USER', '', 'always_readonly', 1, 1, 1);
              }
              ?></td>
             <td><?php
@@ -79,18 +90,26 @@
               echo 'No Access';
              }
              ?></td>
-
-            <td><?php
-             $$class->username = isset($$class->username) ? $$class->username : '';
-             echo $f->text_field_ap(array('name' => 'username', 'value' => $user->username));
-             echo $f->hidden_field_withCLass('user_id', $user->user_id, 'copyData');
+            <td>
+             <?php
+             if (!empty($$class->user_id)) {
+              $$class->username = user::find_by_id($$class->user_id)->username;
+             } else {
+              $$class->username = null;
+             }
              if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
-              echo '<img src="' . HOME_URL . 'themes/default/images/serach.png" class="user_id select_popup clickable">';
+              echo $f->val_field('username', $$class->username, '', '', 'vf_select_username username', '', '', 'user', 'username');
+              echo $f->hidden_field_withCLass('user_id', $$class->user_id, 'user_id');
+              echo '<i class="generic g_select_user select_popup clickable fa fa-search" data-class_name="user"></i>';
+             } else {
+              echo $$class->username;
+              echo $f->hidden_field('user_id', $$class->user_id);
              }
              ?></td>
             <td><?php echo $f->select_field_from_object('report_group', user_dashboard_config::report_group(), 'option_line_code', 'option_line_value', $$class->report_group); ?></td>
             <td><?php echo $f->select_field_from_array('report_type', user_dashboard_config::$report_type_a, $$class->report_type); ?></td>
             <td><?php echo $f->select_field_from_array('report_id', $report_a, $$class->report_id, '', 'medium') ?></td>
+            <td><?php echo $f->text_field_widm('report_label', 'medium') ?></td>
             <td><?php echo $f->select_field_from_array('priority', dbObject::$position_array, $$class->priority); ?></td>
            </tr>
            <?php

@@ -29,10 +29,9 @@
        <?php echo $f->select_field_from_array('quote_type', po_quote_header::$po_quote_type_a, $$class->quote_type, 'quote_type', '', 1); ?>
       </li>
       <li><?php $f->l_text_field_d('quote_number', 'primary_column2'); ?> </li>
-      <li><?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
-       <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supplier_id select_popup clickable">
-        <?php echo gettext('Supplier Name') ?></label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> </li>
-      <li><?php $f->l_text_field_d('supplier_number'); ?></li>
+      <li><?php
+       echo $f->l_val_field_d('supplier_number', 'supplier', 'supplier_number', '', '', 'vf_select_supplier_number');
+       ?><i class="generic g_select_supplier_number select_popup clickable fa fa-search" data-class_name="supplier"></i></li>
       <li><label><?php echo gettext('Supplier Site') ?></label><?php
        $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
        echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
@@ -101,7 +100,7 @@
 </div>
 
 <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Quote Lines') ?></span>
- <form action=""  method="post" id="po_quote_line"  name="po_quote_line">
+ <form method="post" id="po_quote_line"  name="po_quote_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>

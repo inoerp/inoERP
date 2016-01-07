@@ -1,3 +1,12 @@
+-- phpMyAdmin SQL Dump
+-- version 4.1.14
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jan 07, 2016 at 05:40 AM
+-- Server version: 5.6.17
+-- PHP Version: 5.5.12
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -8,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `inoerp_prod7`
+-- Database: `inoerp_prod11`
 --
 
 -- --------------------------------------------------------
@@ -213,6 +222,7 @@ CREATE TABLE IF NOT EXISTS `am_asset` (
   `tag_number` varchar(50) DEFAULT NULL,
   `serial_number` varchar(30) DEFAULT NULL,
   `owning_department_id` int(12) DEFAULT NULL,
+  `owning_employee_id` int(12) DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL,
   `status` varchar(25) DEFAULT NULL,
   `am_asset_category_id` int(12) NOT NULL,
@@ -615,6 +625,31 @@ CREATE TABLE IF NOT EXISTS `am_wo_routing_line` (
   UNIQUE KEY `bom_header_id` (`am_wo_header_id`,`routing_sequence`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `ap_import_claim_v`
+--
+CREATE TABLE IF NOT EXISTS `ap_import_claim_v` (
+`claim_number` varchar(25)
+,`hr_expense_header_id` int(12) unsigned
+,`bu_org_id` int(12)
+,`hr_employee_id` int(12)
+,`claim_date` date
+,`status` varchar(25)
+,`purpose` varchar(255)
+,`doc_currency` varchar(25)
+,`department_id` int(12)
+,`reason` varchar(256)
+,`currency` varchar(20)
+,`exchange_rate_type` varchar(25)
+,`exchange_rate` decimal(15,5)
+,`header_amount` decimal(20,5)
+,`supplier_id` int(12)
+,`first_name` varchar(50)
+,`last_name` varchar(50)
+,`identification_id` varchar(50)
+);
 -- --------------------------------------------------------
 
 --
@@ -1269,7 +1304,7 @@ CREATE TABLE IF NOT EXISTS `ar_customer_site` (
   `site_tax_country` varchar(256) DEFAULT NULL,
   `site_tax_reg_no` varchar(100) DEFAULT NULL,
   `site_tax_payer_id` varchar(100) DEFAULT NULL,
-  `site_tax_code` varchar(100) DEFAULT NULL,
+  `primary_cb` tinyint(1) DEFAULT NULL,
   `customer_site_ref` varchar(30) DEFAULT NULL,
   `customer_site_type` varchar(12) DEFAULT NULL,
   `status` varchar(12) DEFAULT NULL,
@@ -1930,6 +1965,7 @@ CREATE TABLE IF NOT EXISTS `ar_unpaid_transaction_v` (
 ,`customer_site_name` varchar(60)
 ,`customer_site_number` int(12)
 ,`so_number` varchar(50)
+,`org` varchar(50)
 );
 -- --------------------------------------------------------
 
@@ -2108,7 +2144,7 @@ INSERT INTO `bc_static_label` (`bc_static_label_id`, `label_type`, `bc_label_for
 (2, 'SUBINV', 2, NULL, NULL, 1, NULL, NULL, NULL, NULL, 1, '2014-12-05 02:56:26', 1, '2014-12-05 02:56:26'),
 (3, 'INV', 3, NULL, NULL, 3, NULL, NULL, NULL, NULL, 1, '2014-12-05 02:57:28', 34, '2015-03-08 11:57:19'),
 (4, 'ITEM', 4, NULL, NULL, 1, NULL, NULL, NULL, NULL, 1, '2014-12-05 08:31:44', 34, '2015-02-05 03:30:53'),
-(5, 'POS_LIST', 6, NULL, NULL, 1, 'pos_barcode_list_header', 'generate_label', NULL, NULL, 34, '2015-02-05 03:27:37', 34, '2015-02-05 06:24:44');
+(5, 'POS_LIST', 6, NULL, NULL, 1, 'pos_barcode_list_header', 'generate_label', NULL, NULL, 34, '2015-02-05 03:27:37', 34, '2016-01-01 17:05:41');
 
 -- --------------------------------------------------------
 
@@ -2622,8 +2658,9 @@ CREATE TABLE IF NOT EXISTS `bom_overhead_rate_assignment` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`bom_overhead_rate_assignment_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+  PRIMARY KEY (`bom_overhead_rate_assignment_id`),
+  UNIQUE KEY `bom_overhead_id` (`bom_overhead_id`,`bom_cost_type`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `bom_overhead_rate_assignment`
@@ -2632,11 +2669,9 @@ CREATE TABLE IF NOT EXISTS `bom_overhead_rate_assignment` (
 INSERT INTO `bom_overhead_rate_assignment` (`bom_overhead_rate_assignment_id`, `bom_overhead_id`, `bom_cost_type`, `default_basis`, `rate`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (1, 1, 'PENDING', 'ITEM', 22, 0, '2014-04-30 00:00:00', 0, '2030-04-14 00:00:00'),
 (2, 1, 'GLOBAL', 'ITEM', 22, 0, '2014-04-30 00:00:00', 0, '2030-04-14 00:00:00'),
-(3, 1, 'FROZEN', 'ITEM', 22, 0, '2014-04-30 00:00:00', 0, '2030-04-14 00:00:00'),
 (4, 3, 'PENDING', 'ITEM', 650, 0, '2014-09-26 00:00:00', 34, '2015-06-22 17:17:26'),
 (5, 3, 'FROZEN', 'ITEM', 650, 0, '2014-09-26 00:00:00', 0, '2026-09-14 00:00:00'),
-(6, 2, 'PENDING', 'ITEM', 300, 0, '2014-04-30 00:00:00', 0, '2014-04-30 00:00:00'),
-(7, 1, 'GLOBAL', 'ITEM', 10, 34, '2014-12-30 12:15:56', 34, '2014-12-30 12:15:56');
+(6, 2, 'PENDING', 'ITEM', 300, 0, '2014-04-30 00:00:00', 0, '2014-04-30 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -2653,7 +2688,8 @@ CREATE TABLE IF NOT EXISTS `bom_overhead_resource_assignment` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`bom_overhead_resource_assignment_id`)
+  PRIMARY KEY (`bom_overhead_resource_assignment_id`),
+  UNIQUE KEY `bom_overhead_id` (`bom_overhead_id`,`bom_cost_type`,`resource_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
@@ -2667,8 +2703,6 @@ INSERT INTO `bom_overhead_resource_assignment` (`bom_overhead_resource_assignmen
 (4, 1, 'PENDING', 3, 0, '2014-04-30 00:00:00', 0, '2030-04-14 00:00:00'),
 (5, 3, 'PENDING', 2, 0, '2014-09-26 00:00:00', 34, '2015-06-22 17:17:24'),
 (6, 3, 'FROZEN', 2, 0, '2014-09-26 00:00:00', 34, '2015-06-22 17:17:25'),
-(7, 3, 'PENDING', 2, 0, '2014-04-30 00:00:00', 34, '2015-02-28 10:11:10'),
-(8, 3, 'FROZEN', 2, 0, '2014-04-30 00:00:00', 34, '2015-02-28 10:11:10'),
 (9, 1, 'GLOBAL', 4, 34, '2014-12-30 12:15:54', 34, '2014-12-30 12:15:54');
 
 -- --------------------------------------------------------
@@ -3042,7 +3076,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`category_id`),
   UNIQUE KEY `parent_id` (`parent_id`,`category`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=68 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=77 ;
 
 --
 -- Dumping data for table `category`
@@ -3109,7 +3143,16 @@ INSERT INTO `category` (`category_id`, `major_category_id`, `parent_id`, `catego
 (64, NULL, 60, 'Boys', 'ITEM', NULL, NULL, 'Boys', NULL, NULL, NULL, NULL, NULL, 34, '2015-03-28 04:41:04', 34, '2015-03-28 04:41:04'),
 (65, NULL, 60, 'Luggage', 'ITEM', NULL, 5, 'Luggage', NULL, NULL, NULL, NULL, NULL, 34, '2015-03-28 04:41:18', 34, '2015-03-31 04:57:39'),
 (66, NULL, NULL, 'Item', 'ITEM', 'MULTIPLE', NULL, 'Item Category', NULL, NULL, NULL, NULL, 1, 34, '2015-03-28 09:20:43', 34, '2015-03-28 09:20:43'),
-(67, NULL, 58, 'Laptop', 'PRODUCT', 'ONLY_ONE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-08 12:54:49', 34, '2015-04-08 12:54:49');
+(67, NULL, 58, 'Laptop', 'PRODUCT', 'ONLY_ONE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-08 12:54:49', 34, '2015-04-08 12:54:49'),
+(68, NULL, 38, 'Hirearchy', 'ITEM', NULL, NULL, 'Product Hirearchy', 600, NULL, NULL, NULL, NULL, 34, '2015-09-17 11:06:39', 34, '2015-09-17 11:06:39'),
+(69, NULL, 68, 'Principal', 'ITEM', NULL, NULL, 'Principal', 600, NULL, NULL, NULL, NULL, 34, '2015-09-17 11:07:47', 34, '2015-09-17 11:09:11'),
+(70, NULL, 69, 'Secondary Child', 'ITEM', NULL, NULL, 'Secondary Child', 600, NULL, NULL, NULL, NULL, 34, '2015-09-17 11:09:31', 34, '2015-09-17 11:16:32'),
+(71, NULL, 69, 'Supplementary Child', 'ITEM', NULL, NULL, 'Supplementary Child', 600, NULL, NULL, NULL, NULL, 34, '2015-09-17 11:17:12', 34, '2015-09-17 11:17:12'),
+(72, NULL, 69, 'Supplementary Spouse', 'ITEM', NULL, NULL, 'Supplementary Spouse', 600, NULL, NULL, NULL, NULL, 34, '2015-09-17 11:17:48', 34, '2015-09-17 11:17:48'),
+(73, NULL, 69, 'Additional Car', 'ITEM', NULL, NULL, 'Additional Car', 600, NULL, NULL, NULL, NULL, 34, '2015-09-17 11:18:16', 34, '2015-09-17 11:18:16'),
+(74, NULL, 66, 'Receving Inspected', 'ITEM', NULL, NULL, 'Items need Inspection at receving', NULL, NULL, NULL, NULL, NULL, 34, '2015-11-12 05:11:29', 34, '2015-11-12 05:13:10'),
+(75, NULL, 66, 'Mfg Inspected', 'ITEM', NULL, NULL, 'Items need Inspection during manufacturing', NULL, NULL, NULL, NULL, NULL, 34, '2015-11-12 05:13:41', 34, '2015-11-12 05:13:41'),
+(76, NULL, 66, 'Export Approval', 'ITEM', NULL, NULL, 'Item need approval for export', NULL, NULL, NULL, NULL, NULL, 34, '2015-11-12 05:14:34', 34, '2015-11-12 05:14:34');
 
 -- --------------------------------------------------------
 
@@ -3130,7 +3173,7 @@ CREATE TABLE IF NOT EXISTS `category_reference` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`category_reference_id`),
   UNIQUE KEY `category_id` (`category_id`,`reference_type`,`reference_table`,`reference_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=221 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=237 ;
 
 --
 -- Dumping data for table `category_reference`
@@ -3152,9 +3195,9 @@ INSERT INTO `category_reference` (`category_reference_id`, `major_category_id`, 
 (84, 1, 1, '1', 'content_type', 29, 0, NULL, 0, NULL),
 (86, 21, 21, '1', 'content_type', 43, 0, NULL, 0, NULL),
 (92, 8, 8, '1', 'content_type', 43, 0, NULL, 0, NULL),
-(101, 1, 1, '1', 'content_type', 1, 0, NULL, 34, '2015-02-15 08:48:02'),
+(101, 1, 1, '1', 'content_type', 1, 0, NULL, 34, '2015-10-16 03:36:17'),
 (103, 21, 21, '1', 'content_type', 46, 0, NULL, 34, '2014-12-26 08:48:10'),
-(106, 30, 30, '1', 'content_type', 47, 0, NULL, 34, '2014-11-17 02:30:14'),
+(106, 30, 30, '1', 'content_type', 47, 0, NULL, 34, '2015-10-16 03:36:06'),
 (109, 30, 31, '2', 'content', 159, 0, NULL, 34, '2015-02-18 09:24:32'),
 (110, 30, 31, '2', 'content', 160, 0, NULL, 0, NULL),
 (113, 30, 35, '2', 'content', 165, 0, NULL, 0, '2013-06-14 02:42:55'),
@@ -3226,7 +3269,23 @@ INSERT INTO `category_reference` (`category_reference_id`, `major_category_id`, 
 (217, 1, 7, '2', 'content', 260, 34, '2015-05-02 13:35:54', 34, '2015-05-02 13:35:54'),
 (218, 1, 4, '2', 'content', 261, 34, '2015-05-02 13:39:22', 34, '2015-05-02 13:43:45'),
 (219, 1, 7, '2', 'content', 263, 34, '2015-08-05 16:41:48', 34, '2015-08-05 16:41:48'),
-(220, 1, 7, '2', 'content', 264, 34, '2015-08-05 17:31:40', 34, '2015-08-05 17:38:24');
+(220, 1, 7, '2', 'content', 264, 34, '2015-08-05 17:31:40', 34, '2015-08-05 17:38:24'),
+(221, 38, 67, '2', 'ec_product', 14, 34, '2015-09-16 04:13:05', 34, '2015-09-16 04:13:05'),
+(222, 38, 67, '2', 'ec_product', 16, 34, '2015-09-16 04:16:26', 34, '2015-09-16 04:16:26'),
+(223, 38, 58, '2', 'ec_product', 16, 34, '2015-09-16 04:18:20', 34, '2015-09-16 04:18:20'),
+(224, 38, 58, '2', 'ec_product', 17, 34, '2015-09-16 04:20:49', 34, '2015-09-16 04:20:49'),
+(225, 38, 58, '2', 'ec_product', 18, 34, '2015-09-17 10:43:10', 34, '2015-09-17 10:43:10'),
+(226, 38, 70, '2', 'ec_product', 18, 34, '2015-09-17 11:09:48', 34, '2015-09-17 11:09:48'),
+(227, 38, 69, '2', 'ec_product', 17, 34, '2015-09-17 11:10:08', 34, '2015-09-17 11:10:08'),
+(228, 38, 71, '2', 'ec_product', 17, 34, '2015-09-17 11:18:32', 34, '2015-09-17 11:18:32'),
+(229, 1, 7, '2', 'content', 265, 34, '2015-10-01 16:26:06', 34, '2015-10-01 16:39:11'),
+(230, 1, 7, '2', 'content', 266, -99, '2015-10-02 05:24:50', -99, '2015-10-02 05:24:50'),
+(231, 66, 74, '2', 'item', 10204, 34, '2015-11-12 05:12:16', 34, '2015-11-12 05:12:16'),
+(232, 66, 75, '2', 'item', 10204, 34, '2015-11-12 05:14:47', 34, '2015-11-12 05:14:47'),
+(233, 66, 75, '2', 'item', 10035, 34, '2015-11-15 02:23:02', 34, '2015-11-15 02:23:02'),
+(234, 66, 74, '2', 'item', 10035, 34, '2015-11-15 02:23:17', 34, '2015-11-15 02:23:17'),
+(235, 1, 4, '2', 'content', 267, 34, '2016-01-04 05:47:51', 34, '2016-01-04 05:57:24'),
+(236, 1, 1, '2', 'content', 268, 34, '2016-01-04 05:49:03', 34, '2016-01-04 05:49:03');
 
 -- --------------------------------------------------------
 
@@ -3672,10 +3731,10 @@ CREATE TABLE IF NOT EXISTS `content_type` (
 --
 
 INSERT INTO `content_type` (`content_type_id`, `allow_file_cb`, `allow_comment_cb`, `content_type`, `read_role`, `write_role`, `update_role`, `comment_read_role`, `comment_write_role`, `comment_update_role`, `comment_order_by`, `comments_perpage`, `description`, `has_subject_cb`, `subject_label`, `has_content_cb`, `content_label`, `summary_display_type`, `auto_url_alias_cb`, `show_category_onsummary_cb`, `rev_enabled_cb`, `rev_number`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
-(1, 1, 1, 'forum', NULL, 'ANONYMOUS', 'ADMIN', NULL, NULL, 'ADMIN', 'DATE_DESC', 10, 'Forum - A list of discussion topics', 1, 'Subject', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-18 09:48:21', 34, '2015-02-15 08:48:02'),
-(45, NULL, NULL, 'content', NULL, 'ADMIN', 'ADMIN', 'ADMIN', 'ADMIN', 'ADMIN', 'DATE_DESC', 10, 'Content', 1, 'Subject', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-12 16:11:08', 34, '2015-01-16 14:51:53'),
+(1, 1, 1, 'forum', 'ANONYMOUS', 'ANONYMOUS', 'ADMIN', NULL, NULL, 'ADMIN', 'DATE_DESC', 10, 'Forum - A list of discussion topics', 1, 'Subject', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-18 09:48:21', 34, '2015-10-16 03:36:17'),
+(45, NULL, NULL, 'content', 'ANONYMOUS', 'ADMIN', 'ADMIN', 'ADMIN', 'ADMIN', 'ADMIN', 'DATE_DESC', 10, 'Content', 1, 'Subject', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-12 16:11:08', 34, '2015-10-16 03:36:11'),
 (46, 1, 1, 'issue', NULL, NULL, NULL, NULL, NULL, 'ADMIN', NULL, NULL, 'Issue Log 01', 1, 'Summary', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-17 18:49:29', 34, '2014-12-26 08:48:10'),
-(47, 1, NULL, 'documentation', NULL, 'ADMIN', 'ADMIN', NULL, 'BASIC', 'ADMIN', 'DATE_DESC', 10, 'Documentation', 1, 'Subject', NULL, NULL, NULL, 1, 1, NULL, NULL, 0, '2014-07-02 07:30:36', 34, '2014-11-17 02:30:14'),
+(47, 1, NULL, 'documentation', 'ANONYMOUS', 'ADMIN', 'ADMIN', NULL, 'BASIC', 'ADMIN', 'DATE_DESC', 10, 'Documentation', 1, 'Subject', NULL, NULL, NULL, 1, 1, NULL, NULL, 0, '2014-07-02 07:30:36', 34, '2015-10-16 03:36:06'),
 (49, 1, 1, 'collections', 'BASIC', 'BASIC', 'BASIC', NULL, NULL, NULL, NULL, NULL, 'Data Collections', 1, 'Main Element', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-20 18:25:27', 34, '2015-02-20 18:25:27');
 
 -- --------------------------------------------------------
@@ -3711,19 +3770,19 @@ INSERT INTO `content_type_reference` (`content_type_reference_id`, `content_type
 (4, 43, 'ohhgodey', 'Field 4', 3, 1, '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (5, 43, 'lista', 'Field 5', 9, 0, '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (6, 43, 'content_id', 'Field 1', 7, 1, '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(7, 1, 'content_id', '', 0, 0, '', 0, '0000-00-00 00:00:00', 34, '2015-02-15 08:48:02'),
-(8, 1, 'content', 'Content', 0, 0, '', 0, '0000-00-00 00:00:00', 34, '2015-02-15 08:48:02'),
+(7, 1, 'content_id', '', 0, 0, '', 0, '0000-00-00 00:00:00', 34, '2015-10-16 03:36:17'),
+(8, 1, 'content', 'Content', 0, 0, '', 0, '0000-00-00 00:00:00', 34, '2015-10-16 03:36:17'),
 (9, 46, 'issue', 'Issue', 1, NULL, NULL, 0, NULL, 17, '0000-00-00 00:00:00'),
 (10, 46, 'content_id', 'Content Id', 0, 0, '', 0, '0000-00-00 00:00:00', 34, '2014-12-26 08:48:10'),
 (11, 46, 'priority', 'Priority', 2, 0, '118', 0, '0000-00-00 00:00:00', 34, '2014-12-26 08:48:10'),
 (12, 46, 'category', 'Category', 3, 0, '98', 0, '0000-00-00 00:00:00', 34, '2014-12-26 08:48:10'),
 (13, 46, 'component', 'Component', 4, 0, '117', 0, '0000-00-00 00:00:00', 34, '2014-12-26 08:48:10'),
 (14, 46, 'testabab', 'TESST', 1, 0, '', 0, '0000-00-00 00:00:00', 34, '2014-12-26 08:48:10'),
-(15, 47, 'content_id', '', 0, 0, '', 0, '0000-00-00 00:00:00', 34, '2014-11-17 02:30:14'),
-(16, 47, 'content', 'Content', 1, 0, '', 0, '0000-00-00 00:00:00', 34, '2014-11-17 02:30:14'),
-(17, 47, 'chapter', 'Chapter', 2, 0, '117', 0, '0000-00-00 00:00:00', 34, '2014-11-17 02:30:14'),
-(18, 45, 'content_id', '', 9, 0, '', 0, '0000-00-00 00:00:00', 34, '2015-01-16 14:51:53'),
-(19, 45, 'content', 'Content', 14, 0, '', 0, '0000-00-00 00:00:00', 34, '2015-01-16 14:51:53'),
+(15, 47, 'content_id', '', 0, 0, '', 0, '0000-00-00 00:00:00', 34, '2015-10-16 03:36:06'),
+(16, 47, 'content', 'Content', 1, 0, '', 0, '0000-00-00 00:00:00', 34, '2015-10-16 03:36:06'),
+(17, 47, 'chapter', 'Chapter', 2, 0, '117', 0, '0000-00-00 00:00:00', 34, '2015-10-16 03:36:06'),
+(18, 45, 'content_id', '', 9, 0, '', 0, '0000-00-00 00:00:00', 34, '2015-10-16 03:36:11'),
+(19, 45, 'content', 'Content', 14, 0, '', 0, '0000-00-00 00:00:00', 34, '2015-10-16 03:36:11'),
 (20, 48, 'testf', 'etstf', NULL, NULL, NULL, 0, NULL, 17, '0000-00-00 00:00:00'),
 (21, 48, 'dsfsd', 'sdfkjsdf', 19, NULL, NULL, 0, NULL, 17, '0000-00-00 00:00:00'),
 (22, 48, 'whjefheg', 'yeyeye', 5, NULL, NULL, 0, NULL, 0, NULL),
@@ -3743,6 +3802,65 @@ INSERT INTO `content_type_reference` (`content_type_reference_id`, `content_type
 (37, 49, 'length', 'length', NULL, NULL, NULL, 34, '2015-02-20 18:25:27', 34, '2015-02-20 18:25:27'),
 (38, 49, 'height', 'height', 1, NULL, NULL, 34, '2015-02-20 18:25:27', 34, '2015-02-20 18:25:27');
 
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `cst_gross_margin_v`
+--
+CREATE TABLE IF NOT EXISTS `cst_gross_margin_v` (
+`ar_transaction_header_id` int(12)
+,`bu_org_id` int(12)
+,`transaction_type` varchar(50)
+,`transaction_class` varchar(25)
+,`transaction_number` varchar(50)
+,`ar_customer_id` int(12)
+,`ar_customer_site_id` int(12)
+,`document_owner` varchar(256)
+,`description` varchar(256)
+,`ship_to_id` int(12)
+,`bill_to_id` int(12)
+,`header_amount` decimal(20,5)
+,`currency` varchar(256)
+,`exchange_rate` decimal(20,5)
+,`doc_currency` varchar(25)
+,`document_number` varchar(50)
+,`ledger_id` int(12)
+,`period_id` int(12)
+,`period_name` varchar(25)
+,`sales_person` varchar(50)
+,`reference_key_name_ath` varchar(25)
+,`reference_key_value_ath` varchar(25)
+,`sd_so_header_id_ath` int(12)
+,`ar_transaction_line_id` int(12)
+,`line_number` int(12)
+,`item_id_m` int(12)
+,`ar_transaction_header_id_atl` int(12)
+,`item_description` varchar(256)
+,`inv_line_quantity` decimal(20,5)
+,`inv_unit_price` decimal(20,5)
+,`line_type` varchar(50)
+,`line_description` varchar(256)
+,`sd_so_header_id` int(12)
+,`reference_key_name` varchar(25)
+,`reference_key_value` varchar(25)
+,`customer_name` varchar(60)
+,`customer_number` varchar(25)
+,`customer_site_name` varchar(60)
+,`customer_site_number` int(12)
+,`sd_so_line_id` int(12)
+,`line_type_so_line` varchar(25)
+,`unit_price` decimal(20,5)
+,`item_number` varchar(50)
+,`org` varchar(50)
+,`shipping_org_id` int(12)
+,`inv_unit_price_ledgc` decimal(40,10)
+,`address` text
+,`country` varchar(40)
+,`cst_item_cost_header_id` int(12)
+,`frozen_cost` decimal(42,5)
+,`gross_profit` decimal(48,10)
+,`gross_margin` decimal(57,5)
+);
 -- --------------------------------------------------------
 
 --
@@ -3779,14 +3897,14 @@ CREATE TABLE IF NOT EXISTS `cst_item_cost_line` (
   `cost_element_id` int(12) DEFAULT NULL,
   `amount` decimal(20,5) NOT NULL,
   `cost_basis` varchar(25) DEFAULT NULL,
-  `ef_id` int(12) DEFAULT NULL,
+  `this_level_cb` tinyint(1) DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL,
   `created_by` int(12) NOT NULL,
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`cst_item_cost_line_id`),
-  UNIQUE KEY `cst_item_cost_header_id` (`cst_item_cost_header_id`,`cost_element_type`,`cost_element_id`)
+  UNIQUE KEY `cst_item_cost_header_id_2` (`cst_item_cost_header_id`,`cost_element_type`,`cost_element_id`,`this_level_cb`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -4081,7 +4199,7 @@ CREATE TABLE IF NOT EXISTS `engine` (
   PRIMARY KEY (`engine_id`),
   UNIQUE KEY `reference_table` (`obj_class_name`,`type`),
   UNIQUE KEY `number` (`number`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=255 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=257 ;
 
 --
 -- Dumping data for table `engine`
@@ -4184,7 +4302,7 @@ INSERT INTO `engine` (`engine_id`, `obj_class_name`, `number`, `type`, `enabled_
 (100, 'po_release', 2213, 'modules', 1, '1001', NULL, 'po', NULL, NULL, NULL, 34, '2014-12-13 19:22:25', 34, '2014-12-13 19:22:25'),
 (101, 'po_requisition_header', 2211, 'modules', 1, '1001', NULL, 'po', NULL, NULL, NULL, 34, '2014-12-13 19:22:25', 34, '2014-12-13 19:22:25'),
 (102, 'po_rfq_header', 2215, 'modules', 1, '1001', NULL, 'po', NULL, NULL, NULL, 34, '2014-12-13 19:22:25', 34, '2014-12-13 19:22:25'),
-(103, 'po_sourcing_rule_header', 2202, 'modules', 1, '1001', NULL, 'po', NULL, NULL, NULL, 34, '2014-12-13 19:22:25', 34, '2014-12-13 19:22:25'),
+(103, 'po_sourcing_rule_header', 2202, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2014-12-13 19:22:25', 34, '2015-09-28 12:01:52'),
 (104, 'sd_delivery_header', 2307, 'modules', 1, '1001', NULL, 'sd', NULL, NULL, NULL, 34, '2014-12-13 19:22:26', 34, '2014-12-13 19:22:26'),
 (105, 'sd_document_type', 2306, 'modules', 1, '1001', NULL, 'sd', NULL, NULL, NULL, 34, '2014-12-13 19:22:26', 34, '2014-12-13 19:22:26'),
 (106, 'sd_lead', 2305, 'modules', 1, '1001', NULL, 'sd', NULL, NULL, NULL, 34, '2014-12-13 19:22:26', 34, '2014-12-13 19:22:26'),
@@ -4241,11 +4359,11 @@ INSERT INTO `engine` (`engine_id`, `obj_class_name`, `number`, `type`, `enabled_
 (166, 'po_all_v', 2220, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-02-22 13:55:34', 34, '2015-02-22 13:55:34'),
 (167, 'am_asset', 4101, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-06 11:58:19', 34, '2015-05-06 12:05:14'),
 (169, 'am_maintenance_schedule', 4104, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-06 11:58:21', 34, '2015-05-06 12:05:15'),
-(182, 'am_activity_reference', 4102, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-06 12:05:13', 34, '2015-05-06 12:05:13'),
+(182, 'am_activity_reference', 4102, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-06 12:05:13', 1, '2015-12-18 02:34:19'),
 (183, 'am_asset_activity', 4103, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-06 12:05:15', 34, '2015-05-06 12:05:15'),
 (184, 'am_ms_activity_reference', 1401, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-06 12:05:16', 34, '2015-05-06 12:05:16'),
 (185, 'am_material_transaction', 4105, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-06 12:05:16', 34, '2015-05-06 12:05:16'),
-(186, 'am_meter', 4106, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-06 12:05:17', 34, '2015-05-06 12:05:17'),
+(186, 'am_meter', 4106, 'modules', NULL, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-06 12:05:17', 1, '2015-12-18 02:34:18'),
 (187, 'am_move_transaction', 4107, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-06 12:05:17', 34, '2015-05-06 12:05:17'),
 (188, 'am_ms_calendar_date', 4108, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-06 12:05:18', 34, '2015-05-06 12:05:18'),
 (189, 'am_ms_date_rule', 4109, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-06 12:05:19', 34, '2015-05-06 12:05:19'),
@@ -4292,7 +4410,9 @@ INSERT INTO `engine` (`engine_id`, `obj_class_name`, `number`, `type`, `enabled_
 (249, 'sys_message_format', 8101, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-06 14:08:24', 34, '2015-05-06 14:08:24'),
 (251, 'sys_program_schedule', 8201, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-06 14:09:30', 34, '2015-05-06 14:09:30'),
 (252, 'wip_wol_transaction', 2609, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-06 14:10:11', 34, '2015-05-06 14:10:11'),
-(254, 'extn_social_login', 10033, 'extensions', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-22 07:03:42', 34, '2015-05-22 17:32:55');
+(254, 'extn_social_login', 10033, 'extensions', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 34, '2015-05-22 07:03:42', 34, '2015-05-22 17:32:55'),
+(255, 'adm_task_status', 8002, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 1, '2015-12-18 02:34:18', 1, '2015-12-18 02:34:18'),
+(256, 'adm_task_type', 8001, 'modules', 1, '1001', NULL, 'smartview', NULL, NULL, NULL, 1, '2015-12-18 02:34:18', 1, '2015-12-18 02:34:18');
 
 -- --------------------------------------------------------
 
@@ -4315,7 +4435,7 @@ CREATE TABLE IF NOT EXISTS `enterprise` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`enterprise_id`),
   UNIQUE KEY `org_id` (`org_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
 
 --
 -- Dumping data for table `enterprise`
@@ -4324,7 +4444,8 @@ CREATE TABLE IF NOT EXISTS `enterprise` (
 INSERT INTO `enterprise` (`enterprise_id`, `org_id`, `designation_option_header_id`, `type_option_header_id`, `efid`, `status`, `rev_enabled`, `rev_number`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (40, 1, 2, NULL, 1, NULL, NULL, 1, 0, '2014-03-27 04:35:32', 34, '2015-03-08 12:38:25'),
 (41, 2, NULL, NULL, 1, 'inactive', 'enabled', 1, 0, '2014-03-27 04:36:27', 0, '2027-03-14 04:36:27'),
-(42, 13, 0, NULL, NULL, NULL, NULL, 1, 34, '2014-11-17 17:02:41', 34, '2014-12-27 17:44:44');
+(42, 13, 0, NULL, NULL, NULL, NULL, 1, 34, '2014-11-17 17:02:41', 34, '2014-12-27 17:44:44'),
+(43, 20, NULL, NULL, NULL, 'active', NULL, NULL, 34, '2015-10-10 09:05:20', 34, '2015-10-10 09:05:20');
 
 -- --------------------------------------------------------
 
@@ -4567,6 +4688,29 @@ INSERT INTO `extn_social_login` (`extn_social_login_id`, `provider_name`, `enabl
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `extn_subscribe`
+--
+
+CREATE TABLE IF NOT EXISTS `extn_subscribe` (
+  `extn_subscribe_id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `reference_key_name` varchar(50) NOT NULL,
+  `reference_key_value` int(12) NOT NULL,
+  `user_email` varchar(50) NOT NULL,
+  `user_id` int(12) DEFAULT NULL,
+  `username` varchar(25) DEFAULT NULL,
+  `unsubscribe_reason` varchar(255) DEFAULT NULL,
+  `enabled_cb` tinyint(1) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`extn_subscribe_id`),
+  UNIQUE KEY `reference_key_name` (`reference_key_name`,`reference_key_value`,`user_email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `extn_theme`
 --
 
@@ -4795,7 +4939,7 @@ CREATE TABLE IF NOT EXISTS `ext_url_alias` (
   PRIMARY KEY (`ext_url_alias_id`),
   UNIQUE KEY `original_url` (`original_url`),
   UNIQUE KEY `alias` (`alias`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `ext_url_alias`
@@ -4812,7 +4956,8 @@ INSERT INTO `ext_url_alias` (`ext_url_alias_id`, `content_id`, `original_url`, `
 (8, 240, 'content_id=240&content_type=documentation', 'Item-Master', 34, '2015-01-05 06:28:34', 34, '2015-01-05 06:28:34'),
 (9, 241, 'content_id=241&content_type=content', 'demo', 34, '2015-01-16 14:39:33', 34, '2015-01-16 18:22:25'),
 (10, 159, 'content_id=159&content_type=documentation', 'Form-Type', 34, '2015-02-18 09:24:32', 34, '2015-02-18 09:24:32'),
-(11, 262, 'content_id=262&content_type=documentation', 'Welcome-to-inoERP', 34, '2015-05-21 16:46:23', 34, '2015-05-21 16:51:53');
+(11, 262, 'content_id=262&content_type=documentation', 'Welcome-to-inoERP', 34, '2015-05-21 16:46:23', 34, '2015-05-21 16:51:53'),
+(12, 267, 'content_id=267&content_type=forum', 'asds', 34, '2016-01-04 05:57:24', 34, '2016-01-04 05:57:24');
 
 -- --------------------------------------------------------
 
@@ -6227,7 +6372,7 @@ CREATE TABLE IF NOT EXISTS `gl_calendar` (
   PRIMARY KEY (`gl_calendar_id`),
   UNIQUE KEY `option_line_code` (`option_line_code`,`name`),
   UNIQUE KEY `option_line_code_2` (`option_line_code`,`year`,`number`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
 
 --
 -- Dumping data for table `gl_calendar`
@@ -6249,18 +6394,20 @@ INSERT INTO `gl_calendar` (`gl_calendar_id`, `option_line_code`, `adjustment_per
 (14, 'CORP_CALENDAR', NULL, 'OCT-2014', 'MONTH', 2014, 4, 10, '2014-10-01', '2014-10-31', 'OCT', NULL, 0, '2014-02-07 08:54:45', 0, '2014-02-07 08:54:45'),
 (21, 'IND_CALEDNAR', NULL, 'DEC-2015', 'MONTH', 2002, 1, 3, '2014-12-01', '2014-12-31', 'DEC', NULL, 0, '2014-02-14 13:44:20', 14, '0000-00-00 00:00:00'),
 (22, 'IND_CALEDNAR', NULL, 'FEB-2015', 'MONTH', 2002, 2, 5, '2015-02-01', '2015-02-28', 'FEB', NULL, 0, '2014-02-14 13:44:21', 14, '0000-00-00 00:00:00'),
-(23, 'IND_CALEDNAR', NULL, 'OCT-2015', 'MONTH', 2002, 1, 1, '1970-01-01', '2014-10-31', 'OCT', NULL, 0, '2014-02-14 13:44:19', 14, '0000-00-00 00:00:00'),
+(23, 'IND_CALEDNAR', NULL, 'OCT-2015', 'MONTH', 2002, 1, 1, '1970-01-01', '2014-10-31', 'OCT', NULL, 0, '2014-02-14 13:44:19', 34, '2015-11-11 18:20:14'),
 (24, 'IND_CALEDNAR', NULL, 'NOV-2015', 'MONTH', 2002, 1, 2, '2014-11-01', '2014-11-30', 'NOV', NULL, 0, '2014-02-14 13:44:22', 14, '0000-00-00 00:00:00'),
 (25, 'IND_CALEDNAR', NULL, 'JAN-2015', 'MONTH', 2002, 2, 4, '2015-01-01', '2015-01-30', 'JAN', NULL, 0, '2014-02-14 13:44:23', 14, '0000-00-00 00:00:00'),
 (26, 'IND_CALEDNAR', NULL, 'MAR-2015', 'MONTH', 2002, 2, 6, '2015-03-01', '2015-03-31', 'MAR', NULL, 0, '2014-02-14 13:44:25', 14, '0000-00-00 00:00:00'),
-(27, 'IND_CALEDNAR', NULL, 'APR-2015', 'MONTH', 2015, 2, 7, '2013-07-01', '2013-07-30', 'APR', NULL, 0, '2014-02-14 13:44:26', 0, '2014-02-14 13:44:26'),
+(27, 'IND_CALEDNAR', NULL, 'APR-2015', 'MONTH', 2015, 2, 7, '2013-07-01', '2013-07-30', 'APR', NULL, 0, '2014-02-14 13:44:26', 34, '2015-11-11 18:20:14'),
 (28, 'CORP_CALENDAR', NULL, 'JAN-2015', 'MONTH', 2015, 1, 1, '2015-01-01', '2015-01-31', 'JAN', NULL, 0, '2014-03-03 16:00:21', 0, '2014-03-03 16:00:21'),
 (29, 'CORP_CALENDAR', NULL, 'FEB-2015', 'MONTH', 2002, 1, 2, '2015-02-01', '2015-02-27', 'FEB', NULL, 0, '2014-03-04 09:44:46', 4, '0000-00-00 00:00:00'),
 (30, 'CORP_CALENDAR', NULL, 'MAR-2015', 'MONTH', 2002, 1, 3, '2015-03-01', '2015-03-31', 'MAR', NULL, 0, '2014-03-04 09:44:19', 34, '2014-12-18 07:39:43'),
 (31, 'CORP_CALENDAR', NULL, 'APR-2015', 'MONTH', 2015, 2, 4, '2015-04-01', '2015-04-30', 'APR', NULL, 0, '2014-03-26 16:55:10', 0, '2014-03-26 16:55:10'),
 (32, 'CORP_CALENDAR', NULL, 'MAY-2015', 'MONTH', 2002, 2, 5, '2015-05-01', '2015-05-31', 'MAY', NULL, 0, '2014-06-02 12:31:45', 34, '2014-12-18 07:39:43'),
 (33, 'IND_CALEDNAR', NULL, 'MAR-2014', 'MONTH', 2014, 1, 1, '2014-01-01', '2014-01-31', 'MAR', NULL, 34, '2014-12-18 05:46:15', 34, '2014-12-18 05:46:15'),
-(36, 'CORP_CALENDAR', NULL, 'Apr-20', 'MONTH', 2020, 2, 4, '2020-01-01', '2020-01-30', 'APR', NULL, 34, '2015-02-20 04:10:01', 34, '2015-03-06 17:50:54');
+(36, 'CORP_CALENDAR', NULL, 'Apr-20', 'MONTH', 2020, 2, 4, '2020-01-01', '2020-01-30', 'APR', NULL, 34, '2015-02-20 04:10:01', 34, '2015-03-06 17:50:54'),
+(37, 'IND_CALEDNAR', NULL, 'MAY-2015', 'MONTH', 2015, 1, 1, '2013-08-01', '2013-08-31', 'MAY', NULL, 34, '2015-11-11 18:20:14', 34, '2015-11-11 18:20:14'),
+(38, 'SPAIN_CALENDAR', NULL, 'JAN-2001', 'MONTH', 2001, 1, 1, '2005-11-01', '2015-11-26', 'JAN', NULL, 34, '2015-11-12 14:49:10', 34, '2015-11-12 14:49:10');
 
 -- --------------------------------------------------------
 
@@ -6331,6 +6478,61 @@ CREATE TABLE IF NOT EXISTS `gl_journal_header` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `gl_journal_interface`
+--
+
+CREATE TABLE IF NOT EXISTS `gl_journal_interface` (
+  `gl_journal_interface_id` int(12) NOT NULL AUTO_INCREMENT,
+  `ledger_id` int(12) NOT NULL,
+  `currency` varchar(25) NOT NULL,
+  `document_date` date DEFAULT NULL,
+  `period_id` int(12) NOT NULL,
+  `journal_source` varchar(30) NOT NULL,
+  `journal_category` varchar(30) NOT NULL,
+  `journal_name` varchar(64) DEFAULT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `balance_type` varchar(25) NOT NULL,
+  `post_date` date DEFAULT NULL,
+  `header_amount` decimal(20,5) DEFAULT NULL,
+  `doc_currency` varchar(10) NOT NULL,
+  `exchange_type` varchar(15) NOT NULL,
+  `exchange_date` date DEFAULT NULL,
+  `exchange_rate` decimal(20,5) NOT NULL,
+  `control_total` date DEFAULT NULL,
+  `running_total_dr` decimal(20,5) DEFAULT NULL,
+  `running_total_cr` decimal(20,5) DEFAULT NULL,
+  `running_toatl_ac_dr` decimal(20,5) DEFAULT NULL,
+  `running_toatl_ac_cr` decimal(20,5) DEFAULT NULL,
+  `reference_type` varchar(25) DEFAULT NULL,
+  `reference_key_name` varchar(25) DEFAULT NULL,
+  `reference_key_value` varchar(25) DEFAULT NULL,
+  `line_num` int(11) DEFAULT NULL,
+  `line_status` varchar(2) NOT NULL,
+  `line_type` varchar(25) DEFAULT NULL,
+  `line_description` varchar(255) DEFAULT NULL,
+  `code_combination_id` int(12) NOT NULL,
+  `total_dr` decimal(20,5) DEFAULT NULL,
+  `total_cr` decimal(20,5) DEFAULT NULL,
+  `total_ac_dr` decimal(20,5) DEFAULT NULL,
+  `total_ac_cr` decimal(20,5) DEFAULT NULL,
+  `line_reference_type` varchar(25) DEFAULT NULL,
+  `line_reference_key_name` varchar(50) DEFAULT NULL,
+  `line_reference_key_value` varchar(25) DEFAULT NULL,
+  `rev_enabled_cb` tinyint(1) DEFAULT NULL,
+  `rev_number` int(12) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  `gl_journal_header_id` int(12) DEFAULT NULL,
+  `gl_journal_line_id` int(12) DEFAULT NULL,
+  PRIMARY KEY (`gl_journal_interface_id`),
+  UNIQUE KEY `ledger_id` (`ledger_id`,`document_date`,`line_reference_key_name`,`line_reference_key_value`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `gl_journal_line`
 --
 
@@ -6347,7 +6549,7 @@ CREATE TABLE IF NOT EXISTS `gl_journal_line` (
   `total_ac_dr` decimal(20,5) DEFAULT NULL,
   `total_ac_cr` decimal(20,5) DEFAULT NULL,
   `reference_type` varchar(25) DEFAULT NULL,
-  `reference_key_name` varchar(25) DEFAULT NULL,
+  `reference_key_name` varchar(50) DEFAULT NULL,
   `reference_key_value` varchar(25) DEFAULT NULL,
   `ef_id` int(12) DEFAULT NULL,
   `created_by` int(12) NOT NULL,
@@ -6381,7 +6583,7 @@ CREATE TABLE IF NOT EXISTS `gl_journal_line_v` (
 ,`line_type` varchar(25)
 ,`line_description` varchar(256)
 ,`reference_type` varchar(25)
-,`reference_key_name` varchar(25)
+,`reference_key_name` varchar(50)
 ,`reference_key_value` varchar(25)
 ,`coa_structure_id` int(12)
 ,`field1` varchar(12)
@@ -6531,7 +6733,7 @@ CREATE TABLE IF NOT EXISTS `gl_unposted_balance_v` (
 ,`line_type` varchar(25)
 ,`line_description` varchar(256)
 ,`reference_type` varchar(25)
-,`reference_key_name` varchar(25)
+,`reference_key_name` varchar(50)
 ,`reference_key_value` varchar(25)
 ,`coa_structure_id` int(12)
 ,`field1` varchar(12)
@@ -6569,7 +6771,7 @@ CREATE TABLE IF NOT EXISTS `gl_unposted_journal_lines_v` (
 ,`line_type` varchar(25)
 ,`line_description` varchar(256)
 ,`reference_type` varchar(25)
-,`reference_key_name` varchar(25)
+,`reference_key_name` varchar(50)
 ,`reference_key_value` varchar(25)
 ,`coa_structure_id` int(12)
 ,`field1` varchar(12)
@@ -7014,6 +7216,117 @@ INSERT INTO `hd_service_type_line` (`hd_service_type_line_id`, `hd_service_type_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `hd_subscription_detail`
+--
+
+CREATE TABLE IF NOT EXISTS `hd_subscription_detail` (
+  `hd_subscription_detail_id` int(12) NOT NULL AUTO_INCREMENT,
+  `hd_subscription_header_id` int(12) NOT NULL,
+  `hd_subscription_line_id` int(12) NOT NULL,
+  `member_name` varchar(100) DEFAULT NULL,
+  `member_dob` date DEFAULT NULL,
+  `vehcile_no` varchar(100) DEFAULT NULL,
+  `vehcile_registration` varchar(100) DEFAULT NULL,
+  `road_tax_expiry_date` date DEFAULT NULL,
+  `vehcile_details` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `line_type` varchar(25) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`hd_subscription_detail_id`),
+  UNIQUE KEY `hd_subscription_line_id` (`hd_subscription_line_id`,`member_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hd_subscription_header`
+--
+
+CREATE TABLE IF NOT EXISTS `hd_subscription_header` (
+  `hd_subscription_header_id` int(12) NOT NULL AUTO_INCREMENT,
+  `org_id` int(12) DEFAULT NULL,
+  `document_type` int(12) NOT NULL,
+  `subscription_type` varchar(25) NOT NULL,
+  `number` varchar(50) DEFAULT NULL,
+  `ar_customer_id` int(12) DEFAULT NULL,
+  `ar_customer_site_id` int(12) DEFAULT NULL,
+  `hr_employee_id` int(12) DEFAULT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `ship_to_address_id` int(12) DEFAULT NULL,
+  `bill_to_address_id` int(12) DEFAULT NULL,
+  `first_name` varchar(25) DEFAULT NULL,
+  `last_name` varchar(25) DEFAULT NULL,
+  `full_name` varchar(25) DEFAULT NULL,
+  `passport_number` varchar(50) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `gender` varchar(25) DEFAULT NULL,
+  `marital_status` varchar(25) DEFAULT NULL,
+  `occupation` varchar(255) DEFAULT NULL,
+  `nationality` varchar(50) DEFAULT NULL,
+  `address_line1` varchar(255) DEFAULT NULL,
+  `address_line2` varchar(255) DEFAULT NULL,
+  `postal_code` varchar(20) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `house_phone` varchar(20) DEFAULT NULL,
+  `office_phone` varchar(20) DEFAULT NULL,
+  `mobile_phone1` varchar(20) DEFAULT NULL,
+  `mobile_phone2` varchar(20) DEFAULT NULL,
+  `fax_no` varchar(25) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `reference_type` varchar(25) DEFAULT NULL,
+  `reference_key_name` varchar(25) DEFAULT NULL,
+  `reference_key_value` int(12) DEFAULT NULL,
+  `status` varchar(25) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  `header_amount` decimal(15,5) DEFAULT NULL,
+  `tax_amount` decimal(15,5) DEFAULT NULL,
+  PRIMARY KEY (`hd_subscription_header_id`),
+  UNIQUE KEY `order_reference_table` (`mobile_phone2`,`fax_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hd_subscription_line`
+--
+
+CREATE TABLE IF NOT EXISTS `hd_subscription_line` (
+  `hd_subscription_line_id` int(12) NOT NULL AUTO_INCREMENT,
+  `hd_subscription_header_id` int(12) NOT NULL,
+  `line_number` int(12) NOT NULL,
+  `shipping_org_id` int(12) DEFAULT NULL,
+  `item_id_m` int(12) DEFAULT NULL,
+  `item_description` varchar(256) NOT NULL,
+  `line_quantity` decimal(20,5) DEFAULT NULL,
+  `invoiced_quantity` decimal(20,5) DEFAULT NULL,
+  `price_list_header_id` int(12) DEFAULT NULL,
+  `price_date` date DEFAULT NULL,
+  `unit_price` decimal(20,5) DEFAULT NULL,
+  `line_price` decimal(20,5) DEFAULT NULL,
+  `tax_amount` decimal(20,5) DEFAULT NULL,
+  `gl_line_price` decimal(15,5) DEFAULT NULL,
+  `gl_tax_amount` decimal(15,5) DEFAULT NULL,
+  `tax_code_id` int(12) DEFAULT NULL,
+  `line_status` varchar(25) DEFAULT NULL,
+  `line_type` varchar(25) NOT NULL,
+  `uom_id` int(12) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`hd_subscription_line_id`),
+  UNIQUE KEY `hd_subscription_header_id` (`hd_subscription_header_id`,`item_id_m`,`line_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `hd_support_request`
 --
 
@@ -7246,7 +7559,7 @@ CREATE TABLE IF NOT EXISTS `hr_approval_limit_assignment` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`hr_approval_limit_assignment_id`),
   UNIQUE KEY `hr_approval_limit_header_id` (`hr_approval_limit_header_id`,`bu_org_id`,`job_id`,`document_type`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `hr_approval_limit_assignment`
@@ -7269,7 +7582,8 @@ INSERT INTO `hr_approval_limit_assignment` (`hr_approval_limit_assignment_id`, `
 (16, 2, 5, NULL, 4, 'PUR_REQUISITION_EXTERN', '2014-08-14', NULL, 0, '2014-08-29 00:00:00', 0, '2014-08-29 00:00:00'),
 (17, 2, 5, NULL, 4, 'PUR_REQUISITION_INTERNAL', '2014-08-14', NULL, 0, '2014-08-29 00:00:00', 0, '2014-08-29 00:00:00'),
 (18, 1, NULL, NULL, 2, 'PUR_STANDRAD_PO', '2014-01-01', NULL, 34, '2014-12-25 12:20:48', 34, '2014-12-25 12:20:48'),
-(19, 1, NULL, NULL, 2, 'PUR_BLANKET_AGGREMENT', '2014-01-01', NULL, 34, '2014-12-25 12:20:48', 34, '2014-12-25 12:20:48');
+(19, 1, NULL, NULL, 2, 'PUR_BLANKET_AGGREMENT', '2014-01-01', NULL, 34, '2014-12-25 12:20:48', 34, '2014-12-25 12:20:48'),
+(21, 1, 5, NULL, 1, 'EXPENSE_CLAIM', '2005-01-01', NULL, 34, '2015-08-26 11:25:12', 34, '2015-08-26 11:25:12');
 
 -- --------------------------------------------------------
 
@@ -7368,6 +7682,29 @@ INSERT INTO `hr_approval_object` (`hr_approval_object_id`, `object_code`, `objec
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `hr_attendance`
+--
+
+CREATE TABLE IF NOT EXISTS `hr_attendance` (
+  `hr_attendance_id` int(12) NOT NULL AUTO_INCREMENT,
+  `hr_employee_id` int(12) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `punch_in` datetime DEFAULT NULL,
+  `punch_in_note` varchar(255) DEFAULT NULL,
+  `punch_out` datetime DEFAULT NULL,
+  `punch_out_note` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`hr_attendance_id`),
+  UNIQUE KEY `hr_employee_id` (`hr_employee_id`,`date`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `hr_compensation_element`
 --
 
@@ -7414,21 +7751,32 @@ INSERT INTO `hr_compensation_element` (`hr_compensation_element_id`, `element_ty
 --
 
 CREATE TABLE IF NOT EXISTS `hr_control` (
-  `po_purchasing_control_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
-  `org_id` int(12) NOT NULL,
-  `payment_term_id` int(12) DEFAULT NULL,
-  `ship_to_id` int(12) DEFAULT NULL,
-  `bill_to_id` int(12) DEFAULT NULL,
-  `ef_id` int(12) DEFAULT NULL,
-  `rev_enabled` varchar(50) DEFAULT NULL,
-  `rev_number` int(12) DEFAULT NULL,
+  `hr_control_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `bu_org_id` int(12) NOT NULL,
+  `default_job_id` int(12) DEFAULT NULL,
+  `default_grade_id` int(12) DEFAULT NULL,
+  `salary_cash_ac_id` int(12) DEFAULT NULL,
+  `expense_claim_approval` varchar(25) DEFAULT NULL,
+  `expense_claim_ac_id` int(12) DEFAULT NULL,
+  `salary_exp_ac_id` int(12) DEFAULT NULL,
+  `supplier_id` int(12) NOT NULL,
+  `supplier_site_id` int(12) NOT NULL,
   `created_by` int(12) NOT NULL,
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`po_purchasing_control_id`),
-  UNIQUE KEY `org` (`org_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`hr_control_id`),
+  UNIQUE KEY `org` (`bu_org_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `hr_control`
+--
+
+INSERT INTO `hr_control` (`hr_control_id`, `bu_org_id`, `default_job_id`, `default_grade_id`, `salary_cash_ac_id`, `expense_claim_approval`, `expense_claim_ac_id`, `salary_exp_ac_id`, `supplier_id`, `supplier_site_id`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+(1, 5, 1, 2, NULL, 'SUPERVISOR', 37, 37, 2, 19, 34, '2015-08-27 07:15:52', 34, '2015-08-31 10:28:09'),
+(2, 8, NULL, NULL, NULL, 'SUPERVISOR', NULL, NULL, 0, 0, 34, '2015-08-28 03:59:24', 34, '2015-08-28 03:59:24'),
+(3, 10, NULL, NULL, NULL, 'SUPERVISOR', NULL, NULL, 0, 0, 34, '2015-08-28 03:59:33', 34, '2015-08-28 03:59:33');
 
 -- --------------------------------------------------------
 
@@ -7455,7 +7803,7 @@ INSERT INTO `hr_element_entry_header` (`hr_element_entry_header_id`, `hr_employe
 (1, 4, 0, '2014-08-15 00:00:00', 34, '2014-12-24 13:13:25'),
 (10, 3, 34, '2014-11-22 09:31:56', 34, '2014-11-22 09:31:56'),
 (11, 2, 34, '2014-11-22 09:32:27', 34, '2015-03-06 04:55:12'),
-(12, 1, 34, '2014-11-28 09:23:41', 34, '2014-11-28 09:23:43');
+(12, 1, 34, '2014-11-28 09:23:41', 34, '2015-09-01 06:41:43');
 
 -- --------------------------------------------------------
 
@@ -7492,9 +7840,9 @@ INSERT INTO `hr_element_entry_line` (`hr_element_entry_line_id`, `hr_element_ent
 (16, 11, 1, '22000', NULL, NULL, 34, '2014-11-22 09:32:27', 34, '2015-03-06 04:55:12'),
 (17, 11, 2, '20', NULL, NULL, 34, '2014-11-22 09:32:27', 34, '2015-03-06 04:55:12'),
 (18, 11, 3, '10', NULL, NULL, 34, '2014-11-22 09:32:27', 34, '2015-03-06 04:55:12'),
-(19, 12, 1, '20000', NULL, NULL, 34, '2014-11-28 09:23:43', 34, '2014-11-28 09:23:43'),
-(20, 12, 3, '20', NULL, NULL, 34, '2014-11-28 09:23:43', 34, '2014-11-28 09:23:43'),
-(21, 12, 2, '30', NULL, NULL, 34, '2014-11-28 09:23:43', 34, '2014-11-28 09:23:43');
+(19, 12, 1, '20000', NULL, NULL, 34, '2014-11-28 09:23:43', 34, '2015-09-01 06:42:16'),
+(20, 12, 3, '20', NULL, NULL, 34, '2014-11-28 09:23:43', 34, '2015-09-01 06:42:16'),
+(21, 12, 2, '30', NULL, NULL, 34, '2014-11-28 09:23:43', 34, '2015-09-01 06:42:16');
 
 -- --------------------------------------------------------
 
@@ -7554,6 +7902,46 @@ INSERT INTO `hr_element_entry_tpl_line` (`hr_element_entry_tpl_line_id`, `hr_ele
 (7, 2, 1, '30000', NULL, NULL, 34, '2014-11-22 08:26:19', 34, '2015-06-23 08:55:25'),
 (8, 2, 2, '20', NULL, NULL, 34, '2014-11-22 08:26:19', 34, '2015-06-23 08:55:25'),
 (9, 2, 3, '10', NULL, NULL, 34, '2014-11-22 08:26:19', 34, '2015-06-23 08:55:25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hr_element_history_header`
+--
+
+CREATE TABLE IF NOT EXISTS `hr_element_history_header` (
+  `hr_element_history_header_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `hr_element_entry_header_id` int(12) NOT NULL,
+  `archive_date` datetime NOT NULL,
+  `hr_employee_id` int(12) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`hr_element_history_header_id`),
+  UNIQUE KEY `hr_element_entry_header_id` (`hr_element_entry_header_id`,`archive_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hr_element_history_line`
+--
+
+CREATE TABLE IF NOT EXISTS `hr_element_history_line` (
+  `hr_element_history_line_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `hr_element_history_header_id` int(12) NOT NULL,
+  `element_id` int(12) NOT NULL,
+  `element_value` varchar(25) NOT NULL,
+  `end_date` date DEFAULT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`hr_element_history_line_id`),
+  UNIQUE KEY `hr_element_entry_header_id` (`hr_element_history_header_id`,`element_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -7783,6 +8171,178 @@ CREATE TABLE IF NOT EXISTS `hr_employee_v` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `hr_expense_all_v`
+--
+CREATE TABLE IF NOT EXISTS `hr_expense_all_v` (
+`hr_expense_header_id` int(12) unsigned
+,`bu_org_id` int(12)
+,`hr_employee_id` int(12)
+,`claim_date` date
+,`status` varchar(25)
+,`purpose` varchar(255)
+,`doc_currency` varchar(25)
+,`department_id` int(12)
+,`reason` varchar(256)
+,`currency` varchar(20)
+,`exchange_rate_type` varchar(25)
+,`exchange_rate` decimal(15,5)
+,`header_amount` decimal(20,5)
+,`hr_expense_line_id` int(12) unsigned
+,`line_number` varchar(25)
+,`line_claim_date` date
+,`receipt_amount` decimal(15,5)
+,`receipt_currency` varchar(25)
+,`expense_type` varchar(25)
+,`line_status` varchar(25)
+,`line_purpose` varchar(255)
+,`start_date` date
+,`line_exchange_rate` decimal(15,5)
+,`supplier_id` int(12)
+);
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hr_expense_header`
+--
+
+CREATE TABLE IF NOT EXISTS `hr_expense_header` (
+  `hr_expense_header_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `bu_org_id` int(12) NOT NULL,
+  `claim_number` varchar(25) DEFAULT NULL,
+  `exchange_rate_type` varchar(25) DEFAULT NULL,
+  `exchange_rate` decimal(15,5) DEFAULT NULL,
+  `hr_employee_id` int(12) NOT NULL,
+  `claim_date` date DEFAULT NULL,
+  `approved_date` date DEFAULT NULL,
+  `approved_by` varchar(100) DEFAULT NULL,
+  `approved_by_employee_id` int(12) DEFAULT NULL,
+  `status` varchar(25) NOT NULL,
+  `purpose` varchar(255) DEFAULT NULL,
+  `expense_template_id` int(12) DEFAULT NULL,
+  `currency` varchar(20) DEFAULT NULL,
+  `doc_currency` varchar(25) DEFAULT NULL,
+  `header_amount` decimal(20,5) DEFAULT NULL,
+  `department_id` int(12) NOT NULL,
+  `reason` varchar(256) DEFAULT NULL,
+  `contact_details` varchar(256) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`hr_expense_header_id`),
+  UNIQUE KEY `bu_org_id` (`bu_org_id`,`claim_number`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hr_expense_line`
+--
+
+CREATE TABLE IF NOT EXISTS `hr_expense_line` (
+  `hr_expense_line_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `hr_expense_header_id` int(12) NOT NULL,
+  `claim_date` date DEFAULT NULL,
+  `receipt_amount` decimal(15,5) DEFAULT NULL,
+  `receipt_currency` varchar(25) DEFAULT NULL,
+  `expense_type` varchar(25) DEFAULT NULL,
+  `status` varchar(25) NOT NULL,
+  `purpose` varchar(255) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `daily_rate` decimal(15,5) DEFAULT NULL,
+  `no_of_days` int(5) DEFAULT NULL,
+  `expense_location` varchar(50) DEFAULT NULL,
+  `vendor_name` varchar(100) DEFAULT NULL,
+  `vendor_details` varchar(255) DEFAULT NULL,
+  `original_receipt_missing_cb` tinyint(1) DEFAULT NULL,
+  `exchange_rate` decimal(15,5) DEFAULT NULL,
+  `line_number` varchar(25) NOT NULL,
+  `per_diem_rate` decimal(20,5) DEFAULT NULL,
+  `per_diem_days` decimal(6,2) DEFAULT NULL,
+  `mileage_uom_id` int(12) DEFAULT NULL,
+  `mileage_distace` decimal(10,2) DEFAULT NULL,
+  `mileage_rate` decimal(8,3) DEFAULT NULL,
+  `cc_transaction_id` int(12) DEFAULT NULL,
+  `cc_transaction_date` date DEFAULT NULL,
+  `cc_age` int(5) DEFAULT NULL,
+  `cc_transaction_amount` decimal(15,5) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`hr_expense_line_id`),
+  UNIQUE KEY `hr_expense_header_id` (`hr_expense_header_id`,`line_number`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hr_expense_tpl_header`
+--
+
+CREATE TABLE IF NOT EXISTS `hr_expense_tpl_header` (
+  `hr_expense_tpl_header_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `bu_org_id` int(12) NOT NULL,
+  `inactive_date` date DEFAULT NULL,
+  `template_name` varchar(50) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`hr_expense_tpl_header_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hr_expense_tpl_line`
+--
+
+CREATE TABLE IF NOT EXISTS `hr_expense_tpl_line` (
+  `hr_expense_tpl_line_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `hr_expense_tpl_header_id` int(12) NOT NULL,
+  `expense_item` varchar(50) DEFAULT NULL,
+  `expense_category` varchar(25) DEFAULT NULL,
+  `tax_code_id` int(12) DEFAULT NULL,
+  `expense_ac_id` int(12) DEFAULT NULL,
+  `inactive_date` date DEFAULT NULL,
+  `prj_expenditure_type_header_id` int(12) DEFAULT NULL,
+  `policy_schedule_id` int(12) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`hr_expense_tpl_line_id`),
+  UNIQUE KEY `hr_expense_tpl_header_id` (`hr_expense_tpl_header_id`,`expense_item`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hr_grade`
+--
+
+CREATE TABLE IF NOT EXISTS `hr_grade` (
+  `hr_grade_id` int(12) NOT NULL AUTO_INCREMENT,
+  `grade` varchar(50) NOT NULL,
+  `hr_element_entry_tpl_header_id` int(12) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `rank` int(50) DEFAULT NULL,
+  `inactive_date` date DEFAULT NULL,
+  `alt_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `alt_description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`hr_grade_id`),
+  UNIQUE KEY `grade` (`grade`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `hr_job`
 --
 
@@ -7956,6 +8516,30 @@ INSERT INTO `hr_leave_type` (`hr_leave_type_id`, `leave_type`, `leave_category`,
 (1, 'Paid Leave', 'PAID', NULL, 1, '10.00000', '50.00000', 1, 1, 1, NULL, 'active', 0, '2014-08-17 00:00:00', 0, '2017-08-14 00:00:00'),
 (2, 'Medical Leave', 'PAID', NULL, NULL, '12.00000', '50.00000', NULL, 1, NULL, NULL, 'active', 0, '2014-08-17 00:00:00', 0, '2017-08-14 00:00:00'),
 (3, 'Legal Leave', 'LEGAL', 'TEST01', 1, '2.00000', '5.00000', 1, 1, 1, NULL, NULL, 0, '2014-08-17 00:00:00', 34, '2015-06-23 09:42:45');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hr_location`
+--
+
+CREATE TABLE IF NOT EXISTS `hr_location` (
+  `hr_location_id` int(12) NOT NULL AUTO_INCREMENT,
+  `country` varchar(50) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `combination` varchar(256) NOT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`hr_location_id`),
+  UNIQUE KEY `combination` (`combination`),
+  KEY `balancing` (`country`),
+  KEY `cost_center` (`state`),
+  KEY `natural_account` (`city`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -8242,6 +8826,29 @@ CREATE TABLE IF NOT EXISTS `hr_payslip_line` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `hr_perdiem_rate`
+--
+
+CREATE TABLE IF NOT EXISTS `hr_perdiem_rate` (
+  `hr_perdiem_rate_id` int(12) NOT NULL AUTO_INCREMENT,
+  `hr_location_id` varchar(50) NOT NULL,
+  `hr_grade_id` varchar(255) DEFAULT NULL,
+  `rate` decimal(15,5) NOT NULL,
+  `from_date` date NOT NULL,
+  `to_date` date DEFAULT NULL,
+  `currency` varchar(20) NOT NULL,
+  `description` varchar(50) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`hr_perdiem_rate_id`),
+  UNIQUE KEY `hr_location_id` (`hr_location_id`,`hr_grade_id`,`from_date`,`currency`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `hr_position`
 --
 
@@ -8392,6 +8999,87 @@ CREATE TABLE IF NOT EXISTS `hr_team_line` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `hr_timesheet_header`
+--
+
+CREATE TABLE IF NOT EXISTS `hr_timesheet_header` (
+  `hr_timesheet_header_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `hr_timesheet_period_id` int(12) NOT NULL,
+  `approver_employee_id` int(12) DEFAULT NULL,
+  `entered_on` date DEFAULT NULL,
+  `approved_on` date DEFAULT NULL,
+  `hr_employee_id` int(12) NOT NULL,
+  `approved_date` date DEFAULT NULL,
+  `approved_by_employee_id` int(12) DEFAULT NULL,
+  `status` varchar(25) NOT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`hr_timesheet_header_id`),
+  UNIQUE KEY `hr_timesheet_period_id` (`hr_timesheet_period_id`,`hr_employee_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hr_timesheet_line`
+--
+
+CREATE TABLE IF NOT EXISTS `hr_timesheet_line` (
+  `hr_timesheet_line_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `hr_timesheet_header_id` int(12) NOT NULL,
+  `work_date` date DEFAULT NULL,
+  `prj_project_header_id` int(12) DEFAULT NULL,
+  `prj_project_line_id` int(12) DEFAULT NULL,
+  `prj_work_type_id` int(12) DEFAULT NULL,
+  `day1` decimal(5,3) DEFAULT NULL,
+  `day2` decimal(5,3) DEFAULT NULL,
+  `day3` decimal(5,3) DEFAULT NULL,
+  `day4` decimal(5,3) DEFAULT NULL,
+  `day5` decimal(5,3) DEFAULT NULL,
+  `day6` decimal(5,3) DEFAULT NULL,
+  `day7` decimal(5,3) DEFAULT NULL,
+  `status` varchar(25) DEFAULT NULL,
+  `purpose` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime NOT NULL,
+  PRIMARY KEY (`hr_timesheet_line_id`),
+  UNIQUE KEY `hr_timesheet_header_id` (`hr_timesheet_header_id`,`prj_project_line_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hr_timesheet_period`
+--
+
+CREATE TABLE IF NOT EXISTS `hr_timesheet_period` (
+  `hr_timesheet_period_id` int(12) NOT NULL AUTO_INCREMENT,
+  `timesheet_period` varchar(50) DEFAULT NULL,
+  `from_date` date DEFAULT NULL,
+  `to_date` date DEFAULT NULL,
+  `max_work_hour` decimal(6,3) DEFAULT NULL,
+  `max_billable_hour` decimal(6,3) DEFAULT NULL,
+  `status` varchar(15) NOT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`hr_timesheet_period_id`),
+  UNIQUE KEY `combination` (`max_work_hour`),
+  KEY `balancing` (`timesheet_period`),
+  KEY `cost_center` (`from_date`),
+  KEY `natural_account` (`to_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `inventory`
 --
 
@@ -8437,7 +9125,7 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   `sales_ac_id` int(12) NOT NULL,
   `cogs_ac_id` int(12) NOT NULL,
   `deferred_cogs_ac_id` int(12) DEFAULT NULL,
-  `ef_id` int(12) DEFAULT NULL,
+  `costupdate_ac_id` int(12) DEFAULT NULL,
   `item_rev_enabled_cb` tinyint(1) DEFAULT NULL,
   `rev_start_number` varchar(25) DEFAULT NULL,
   `status` enum('enabled','disabled') DEFAULT NULL,
@@ -8454,9 +9142,9 @@ CREATE TABLE IF NOT EXISTS `inventory` (
 -- Dumping data for table `inventory`
 --
 
-INSERT INTO `inventory` (`inventory_id`, `org_id`, `type`, `code`, `item_master_cb`, `master_org_id`, `calendar`, `locator_control`, `allow_negative_balance_cb`, `costing_org`, `pos_price_list_header_id`, `costing_method`, `transfer_to_gl_cb`, `default_cost_group`, `material_ac_id`, `material_oh_ac_id`, `overhead_ac_id`, `resource_ac_id`, `expense_ac_id`, `lot_uniqueness`, `lot_generation`, `lot_prefix`, `lot_starting_number`, `serial_uniqueness`, `serial_generation`, `serial_prefix`, `serial_starting_number`, `atp`, `picking_rule`, `sourcing_rule`, `inter_org_ppv_ac_id`, `inter_org_receivable_ac_id`, `inter_org_payable_ac_id`, `inter_org_intransit_ac_id`, `inv_ap_accrual_ac_id`, `inv_ap_exp_accrual_ac_id`, `inv_ppv_ac_id`, `inv_ipv_ac_id`, `sales_ac_id`, `cogs_ac_id`, `deferred_cogs_ac_id`, `ef_id`, `item_rev_enabled_cb`, `rev_start_number`, `status`, `rev_enabled`, `rev_number`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+INSERT INTO `inventory` (`inventory_id`, `org_id`, `type`, `code`, `item_master_cb`, `master_org_id`, `calendar`, `locator_control`, `allow_negative_balance_cb`, `costing_org`, `pos_price_list_header_id`, `costing_method`, `transfer_to_gl_cb`, `default_cost_group`, `material_ac_id`, `material_oh_ac_id`, `overhead_ac_id`, `resource_ac_id`, `expense_ac_id`, `lot_uniqueness`, `lot_generation`, `lot_prefix`, `lot_starting_number`, `serial_uniqueness`, `serial_generation`, `serial_prefix`, `serial_starting_number`, `atp`, `picking_rule`, `sourcing_rule`, `inter_org_ppv_ac_id`, `inter_org_receivable_ac_id`, `inter_org_payable_ac_id`, `inter_org_intransit_ac_id`, `inv_ap_accrual_ac_id`, `inv_ap_exp_accrual_ac_id`, `inv_ppv_ac_id`, `inv_ipv_ac_id`, `sales_ac_id`, `cogs_ac_id`, `deferred_cogs_ac_id`, `costupdate_ac_id`, `item_rev_enabled_cb`, `rev_start_number`, `status`, `rev_enabled`, `rev_number`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (1, 7, 'MASTER', 'MAS', 1, 7, '										 										 			', '', 0, 'MAS', NULL, 'Standard', 0, '', 20, 0, 0, 0, 0, '', '', '										 										 										 										 						', '										 										 										 										 						', '', '', '										 										 										 										 						', '										 										 										 										 						', '', '', '', 0, 0, 0, 0, 21, 0, 0, 0, 22, 23, 24, 0, 1, '', '', 'enabled', 0, 0, '2013-09-28 17:08:02', 0, '2013-09-28 17:08:02'),
-(2, 6, 'MFG', 'MUM', NULL, 7, '										 										 			', NULL, 1, 'INO_IO01', 4, 'Standard', 1, NULL, 3790, 3806, 3805, 3807, 990, NULL, NULL, '										 										 										 										 						', '										 										 										 										 						', NULL, NULL, '										 										 										 										 						', '										 										 										 										 						', NULL, NULL, NULL, 1154, 220, 1208, 1202, 1208, 1208, 1154, NULL, 4966, 6194, 185, NULL, NULL, NULL, NULL, 'disabled', NULL, 0, '2014-08-01 13:30:14', 34, '2015-02-09 11:42:03'),
+(2, 6, 'MFG', 'MUM', NULL, 7, '										 										 			', NULL, 1, 'INO_IO01', 4, 'Standard', 1, NULL, 3790, 3806, 3805, 3807, 990, NULL, NULL, '										 										 										 										 						', '										 										 										 										 						', NULL, NULL, '										 										 										 										 						', '										 										 										 										 						', NULL, NULL, NULL, 1154, 220, 1208, 1202, 1208, 1208, 1154, NULL, 4966, 6194, 185, 3827, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-01 13:30:14', 34, '2015-09-21 09:49:52'),
 (3, 9, 'REPAIR', 'SPG', NULL, 7, '																									', NULL, NULL, 'Singapore', NULL, 'Standard', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '																																	                ', '																																	                ', NULL, NULL, '																																	                ', '																																	                ', NULL, NULL, NULL, 215, 125, 33, 195, 14, 14, 215, 1184, 61, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-02 06:35:36', 34, '2015-07-13 08:44:37'),
 (4, 11, 'MFG', 'SPG', NULL, 7, '																									', NULL, NULL, 'SPG IO', NULL, 'Standard', 1, NULL, 4413, 4429, 4428, 4430, 4796, NULL, NULL, '																																																		', '																																																		', NULL, NULL, '																																																		', '																																																		', NULL, NULL, NULL, 4844, 4844, 4844, 4844, 4512, 4512, 4752, 4844, 4967, 4886, 4455, NULL, 1, NULL, NULL, 'enabled', NULL, 0, '2014-08-02 18:31:29', 34, '2015-01-25 06:52:19'),
 (5, 16, 'MFG', 'SC001', NULL, 7, '											              ', NULL, 1, 'Singapore', NULL, 'Standard', NULL, NULL, 3790, 3806, 3805, 3807, 4174, NULL, NULL, '											                                ', '											                                ', NULL, NULL, '											                                ', '											                                ', NULL, NULL, NULL, 1154, 220, 1208, 1202, 1208, 1208, 1154, 1026, 4966, 1024, 185, NULL, 1, NULL, NULL, NULL, 111, 34, '2014-11-17 17:11:59', 34, '2015-01-25 05:26:24');
@@ -8954,6 +9642,29 @@ CREATE TABLE IF NOT EXISTS `inv_lot_onhand` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `inv_lot_onhand_v`
+--
+CREATE TABLE IF NOT EXISTS `inv_lot_onhand_v` (
+`inv_lot_onhand_id` int(12)
+,`onhand_id` int(12)
+,`lot_inv_lot_number_id` int(12)
+,`lot_quantity` decimal(20,5)
+,`lot_number` varchar(50)
+,`inv_lot_number_id` int(12)
+,`item_number` varchar(50)
+,`item_description` varchar(256)
+,`org_id` int(12)
+,`item_id_m` int(12)
+,`subinventory` varchar(25)
+,`locator` varchar(256)
+,`uom_id` int(12)
+,`onhand` float
+,`subinventory_id` int(12)
+,`locator_id` int(12)
+);
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `inv_lot_transaction`
 --
 
@@ -9144,6 +9855,49 @@ CREATE TABLE IF NOT EXISTS `inv_receipt_line` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `inv_reservation`
+--
+
+CREATE TABLE IF NOT EXISTS `inv_reservation` (
+  `inv_reservation_id` int(12) NOT NULL AUTO_INCREMENT,
+  `item_id_m` int(12) NOT NULL,
+  `org_id` int(12) NOT NULL,
+  `status` varchar(25) DEFAULT NULL,
+  `demand_type` varchar(25) DEFAULT NULL,
+  `sd_so_header_id` varchar(256) DEFAULT NULL,
+  `sd_so_line_id` varchar(10) DEFAULT NULL,
+  `d_reference_key_name` varchar(50) NOT NULL,
+  `d_reference_key_value` int(12) NOT NULL,
+  `demand_comment` varchar(255) DEFAULT NULL,
+  `need_by_date` datetime DEFAULT NULL,
+  `uom_id` int(12) DEFAULT NULL,
+  `demand_quantity` decimal(15,5) DEFAULT NULL,
+  `supply_type` varchar(25) DEFAULT NULL,
+  `subinventory_id` int(12) DEFAULT NULL,
+  `locator_id` int(12) DEFAULT NULL,
+  `s_reference_key_name` varchar(50) NOT NULL,
+  `s_reference_key_value` int(12) NOT NULL,
+  `onhand_id` int(12) DEFAULT NULL,
+  `supply_comment` varchar(255) DEFAULT NULL,
+  `inv_serial_number_id` int(12) DEFAULT NULL,
+  `inv_lot_number_id` int(12) DEFAULT NULL,
+  `reason` varchar(25) DEFAULT NULL,
+  `reservation_type` varchar(50) DEFAULT NULL,
+  `reference_key_name` varchar(50) DEFAULT NULL,
+  `reference_key_value` int(12) DEFAULT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_update_by` int(12) DEFAULT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`inv_reservation_id`),
+  UNIQUE KEY `d_reference_key_name` (`d_reference_key_name`,`d_reference_key_value`,`s_reference_key_name`,`s_reference_key_value`,`inv_serial_number_id`),
+  UNIQUE KEY `sd_so_line_id` (`sd_so_line_id`,`inv_serial_number_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `inv_serial_number`
 --
 
@@ -9178,6 +9932,7 @@ CREATE TABLE IF NOT EXISTS `inv_serial_number` (
   `fixed_asset_cb` tinyint(1) DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL,
   `ar_customer_site_id` int(12) DEFAULT NULL,
+  `sd_so_line_id` int(12) DEFAULT NULL,
   `fa_asset_id` int(11) DEFAULT NULL,
   `created_by` int(12) NOT NULL,
   `creation_date` datetime NOT NULL,
@@ -9764,6 +10519,34 @@ CREATE TABLE IF NOT EXISTS `mdm_bank_v` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `mdm_price_list_detail`
+--
+
+CREATE TABLE IF NOT EXISTS `mdm_price_list_detail` (
+  `mdm_price_list_detail_id` int(12) NOT NULL AUTO_INCREMENT,
+  `mdm_price_list_header_id` int(12) NOT NULL,
+  `mdm_price_list_line_id` int(12) NOT NULL,
+  `qty_from` decimal(20,5) DEFAULT NULL,
+  `qty_to` decimal(20,5) DEFAULT NULL,
+  `uom_id` int(12) DEFAULT NULL,
+  `unit_price` int(12) DEFAULT NULL,
+  `formula` text,
+  `effective_start_date` date DEFAULT NULL,
+  `effective_end_date` date DEFAULT NULL,
+  `q_reference_key_name` varchar(50) DEFAULT NULL,
+  `q_reference_key_value` int(12) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`mdm_price_list_detail_id`),
+  UNIQUE KEY `mdm_price_list_line_id` (`mdm_price_list_line_id`,`qty_from`,`effective_start_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `mdm_price_list_header`
 --
 
@@ -9801,6 +10584,7 @@ CREATE TABLE IF NOT EXISTS `mdm_price_list_line` (
   `formula` text,
   `effective_start_date` date NOT NULL,
   `effective_end_date` date DEFAULT NULL,
+  `use_price_break_cb` tinyint(1) DEFAULT NULL,
   `created_by` int(12) NOT NULL,
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
@@ -9854,7 +10638,7 @@ INSERT INTO `mdm_tax_code` (`mdm_tax_code_id`, `org_id`, `tax_code`, `tax_type`,
 (3, 5, 'O_US_STD_V10', 'VAT', 'CR', 'OUT', 'US Standard VAT 10.2', NULL, NULL, NULL, NULL, 1, 1, 'PERCENTAGE', '10.10000', NULL, 46, 'ACTIVE', '2001-01-01', NULL, 0, '2014-06-03 05:12:49', 34, '2015-06-23 04:15:20'),
 (5, 5, 'O_US_STD_V0', 'VAT', 'CR', 'OUT', 'US Standard VAT 0', NULL, NULL, NULL, NULL, 1, 1, 'PERCENTAGE', NULL, NULL, 46, '', '2014-01-01', NULL, 0, '2014-06-03 05:35:10', 34, '2015-06-23 04:15:19'),
 (6, 5, 'O_US_STD_V12P5', 'VAT', 'CR', 'OUT', 'US Standard VAT 10.5', NULL, NULL, NULL, NULL, 1, 1, 'PERCENTAGE', '11.50000', NULL, 52, 'ACTIVE', '2014-01-01', NULL, 34, '2014-12-26 17:55:31', 34, '2015-03-08 09:01:17'),
-(7, 5, 'O_US_STD_V12P10', 'VAT', 'CR', 'OUT', 'US Standard VAT 12.10', NULL, NULL, NULL, NULL, 1, 1, 'PERCENTAGE', '12.10000', NULL, 46, 'ACTIVE', '2015-01-10', NULL, 34, '2015-01-09 11:40:24', 34, '2015-06-23 04:15:19');
+(7, 5, 'O_US_STD_V12P10', 'VAT', 'CR', 'OUT', 'US Standard VAT 12.101', NULL, NULL, NULL, NULL, 1, 1, 'PERCENTAGE', '12.10000', NULL, 46, 'ACTIVE', '2015-01-10', NULL, 34, '2015-01-09 11:40:24', 34, '2015-08-25 15:20:59');
 
 -- --------------------------------------------------------
 
@@ -10020,6 +10804,8 @@ CREATE TABLE IF NOT EXISTS `onhand_v` (
 ,`locator` varchar(256)
 ,`uom_id` int(12)
 ,`onhand` float
+,`reservable_onhand` double
+,`reserved_quantity` decimal(37,5)
 ,`standard_cost` decimal(42,5)
 ,`onhand_value` double
 ,`item_id_m` int(12)
@@ -10030,7 +10816,6 @@ CREATE TABLE IF NOT EXISTS `onhand_v` (
 ,`locator_id` int(12)
 ,`lot_id` int(12)
 ,`serial_id` int(12)
-,`reservable_onhand` float
 ,`transactable_onhand` float
 ,`lot_status` varchar(25)
 ,`serial_status` varchar(25)
@@ -10128,7 +10913,7 @@ CREATE TABLE IF NOT EXISTS `option_header` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`option_header_id`),
   UNIQUE KEY `option_type` (`option_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=257 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=268 ;
 
 --
 -- Dumping data for table `option_header`
@@ -10167,7 +10952,7 @@ INSERT INTO `option_header` (`option_header_id`, `access_level`, `option_type`, 
 (130, 'SYSTEM', 'AP_PAY_ON', 'Auto Create AP Invoice', 'ap', NULL, 0, 'active', 'enabled', 0, 0, '2013-10-17 07:16:15', 0, '2013-10-17 07:16:15'),
 (131, 'SYSTEM', 'PO_TYPE', 'Purchase Order Types', 'pur', NULL, NULL, 'active', 'enabled', 2, 0, '2014-08-25 03:22:08', 0, '2025-08-14 03:22:08'),
 (132, 'SYSTEM', 'PO_STATUS', 'PO Status', 'pur', NULL, NULL, 'active', 'enabled', NULL, 0, '2014-02-22 07:36:20', 22, '0000-00-00 00:00:00'),
-(133, 'SYSTEM', 'PO_LINE_TYPE', 'PO Line Types', 'pur', NULL, NULL, 'active', 'enabled', NULL, 0, '2014-03-14 06:57:15', 0, '2014-03-14 06:57:15'),
+(133, 'SYSTEM', 'PO_LINE_TYPE', 'PO Line Types', 'pur', NULL, NULL, NULL, NULL, NULL, 0, '2014-03-14 06:57:15', 34, '2015-08-30 08:55:56'),
 (134, 'SYSTEM', 'CURRENCY', 'Currency Codes', 'gl', '', 0, 'active', 'enabled', 0, 0, '2014-08-02 13:40:29', 0, '2002-08-14 13:40:29'),
 (135, 'SYSTEM', 'WIP_SUPPLY_TYPE', 'WIP Supply Types', 'wip', NULL, NULL, 'active', 'enabled', NULL, 0, '2014-01-03 13:53:18', 0, '2014-01-03 13:53:18'),
 (136, 'SYSTEM', 'RESOURCE_TYPE', 'BOM Resource Types', 'bom', NULL, NULL, NULL, NULL, NULL, 0, '2013-12-16 01:48:31', 34, '2015-05-01 04:06:24'),
@@ -10185,7 +10970,7 @@ INSERT INTO `option_header` (`option_header_id`, `access_level`, `option_type`, 
 (148, 'SYSTEM', 'AR_CUSTOMER_CREDIT_CLASS', 'Customer Credit Class', 'ar', NULL, NULL, 'active', NULL, NULL, 0, '2014-01-18 07:19:56', 0, '2014-01-18 07:19:56'),
 (149, 'SYSTEM', 'EXT_SUMMARY_DISPLAY_TYPE', 'Extesnion content summary display type', 'ext', NULL, NULL, 'active', 'enabled', NULL, 0, '2014-01-26 06:10:44', 0, '2014-01-26 06:10:44'),
 (150, 'SYSTEM', 'EXT_CONTENT_FIELD_TYPE', 'Extension field type', 'ext', NULL, NULL, 'active', 'enabled', NULL, 0, '2014-01-27 15:02:12', 0, '2014-01-27 15:02:12'),
-(151, 'SYSTEM', 'OPTION_ASSIGNMENT', 'Option Assgnments', 'sys', NULL, NULL, 'active', 'enabled', NULL, 0, '2014-02-02 12:10:10', 0, '2014-02-02 12:10:10'),
+(151, 'SYSTEM', 'OPTION_ASSIGNMENT', 'Option Assgnments', 'sys', NULL, NULL, NULL, NULL, NULL, 0, '2014-02-02 12:10:10', 34, '2015-08-24 12:13:36'),
 (152, 'SYSTEM', 'SYS_VALIDATION_TYPE', 'Validation Type Used on Group Value', 'sys', NULL, NULL, 'active', NULL, NULL, 0, '2014-02-04 02:10:55', 0, '2014-02-04 02:10:55'),
 (153, 'BOTH', 'GL_PERIOD_TYPE', 'GL Period Types', 'gl', NULL, NULL, 'active', 'enabled', 1, 0, '2014-02-07 09:08:17', 0, '2014-02-07 09:08:17'),
 (154, 'BOTH', 'GL_CALENDAR_NAME', 'GL Calendar Name', 'gl', NULL, NULL, 'active', NULL, NULL, 0, '2014-02-06 12:37:13', 0, '2014-02-06 12:37:13'),
@@ -10216,7 +11001,7 @@ INSERT INTO `option_header` (`option_header_id`, `access_level`, `option_type`, 
 (179, 'SYSTEM', 'FP_MRP_EXCEPTION_TYPE', 'MRP Exceptions', 'fp', '', 0, '', '', 0, 0, '2014-05-21 09:32:10', 0, '2021-05-14 09:32:10'),
 (180, 'SYSTEM', 'MDM_TAX_TYPE', 'Tax Types', 'sys', '', 0, 'active', 'enabled', 2, 0, '2014-06-03 02:56:45', 0, '2003-06-14 02:56:45'),
 (181, 'BOTH', 'INV_ITEM_TAX_CLASS', 'Product Tax Classification', 'inv', '', 0, '', '', 0, 0, '2014-06-04 08:13:47', 0, '2004-06-14 08:13:47'),
-(182, 'SYSTEM', 'SYS_MODULE', 'Module Name', 'sys', NULL, NULL, NULL, NULL, NULL, 0, '2014-08-07 09:55:00', 34, '2015-06-08 04:44:39'),
+(182, 'SYSTEM', 'SYS_MODULE', 'Module Name', 'sys', NULL, NULL, NULL, NULL, NULL, 0, '2014-08-07 09:55:00', 34, '2015-11-02 03:29:06'),
 (183, 'SYSTEM', 'SD_SO_STATUS', 'Sales Order Header Status', 'sys', '', 0, 'active', 'enabled', 0, 0, '2014-06-29 11:56:44', 0, '2029-06-14 11:56:44'),
 (184, 'SYSTEM', 'EXT_PATH_TYPE', 'Extension Path Types', 'sys', NULL, NULL, NULL, NULL, NULL, 0, '2014-07-19 05:45:25', 34, '2015-05-25 04:13:48'),
 (185, 'BOTH', 'MDM_BANK_ACCOUNT_TYPE', 'Bank Account Types', 'gl', '', 0, 'active', 'enabled', 0, 0, '2014-07-15 12:15:20', 0, '2015-07-14 12:15:20'),
@@ -10236,10 +11021,10 @@ INSERT INTO `option_header` (`option_header_id`, `access_level`, `option_type`, 
 (199, 'BOTH', 'HR_PAYMENT_METHOD_TYPE', 'Payment  Method Type', 'sys', NULL, NULL, 'active', NULL, NULL, 0, '2014-08-15 11:13:49', 0, '2015-08-14 11:13:49'),
 (200, 'BOTH', 'SYS_PERIOD_TYPE', 'System Period Types', 'sys', NULL, NULL, 'active', NULL, NULL, 0, '2014-08-15 11:55:47', 0, '2015-08-14 11:55:47'),
 (201, 'BOTH', 'HR_LEAVE_CATEGORY', 'HR Leave Category', 'sys', NULL, NULL, 'active', NULL, NULL, 0, '2014-08-16 16:57:52', 0, '2016-08-14 16:57:52'),
-(202, 'SYSTEM', 'SYS_DOCUMENT_TYPE', 'Documents Types', 'sys', NULL, NULL, 'active', NULL, NULL, 0, '2014-08-26 11:04:16', 0, '2026-08-14 11:04:16'),
+(202, 'SYSTEM', 'SYS_DOCUMENT_TYPE', 'Documents Types', 'sys', NULL, NULL, NULL, NULL, NULL, 0, '2014-08-26 11:04:16', 34, '2015-08-26 11:20:56'),
 (203, 'SYSTEM', 'SYS_NOTIFICATION_NAME', 'System Notification Name', 'sys', NULL, NULL, 'active', 'enabled', NULL, 0, '2014-08-21 12:05:27', 0, '2021-08-14 12:05:27'),
 (204, 'SYSTEM', 'SYS_HOLD_TYPE', 'System Hold Type', 'sys', NULL, NULL, 'active', 'enabled', NULL, 0, '2014-09-01 11:19:32', 0, '2001-09-14 11:19:32'),
-(205, 'BOTH', 'INV_SEARIAL_STATUS', 'Serial Number Status', 'inv', NULL, NULL, 'active', 'enabled', NULL, 0, '2014-09-17 04:56:43', 0, '2017-09-14 04:56:43'),
+(205, 'SYSTEM', 'INV_SEARIAL_STATUS', 'Serial Number Status', 'inv', NULL, NULL, NULL, NULL, NULL, 0, '2014-09-17 04:56:43', 34, '2015-09-09 15:21:27'),
 (206, 'BOTH', 'SYS_EXTRA_FIELD_TYPE', 'Extra Field Type', 'sys', NULL, NULL, 'active', 'enabled', NULL, 0, '2014-10-08 05:22:53', 0, '2008-10-14 05:22:53'),
 (207, 'BOTH', 'USER_FAVOURITE_GROUP', 'User Favourite Group', 'sys', NULL, 1, 'active', 'enabled', 1, 34, '2014-10-22 07:40:39', 34, '2014-10-22 07:41:34'),
 (208, 'BOTH', 'EXT_VIEW_DISPLAY_TYPE', 'View Display Type', 'sys', NULL, NULL, 'active', 'enabled', NULL, 1, '2014-10-24 13:26:34', 1, '2014-10-24 16:11:04'),
@@ -10258,7 +11043,7 @@ INSERT INTO `option_header` (`option_header_id`, `access_level`, `option_type`, 
 (221, 'BOTH', 'EXTN_CATEGORY_TYPE', 'Category Types  - Extension', 'ext', NULL, NULL, NULL, NULL, NULL, 34, '2015-02-06 05:50:06', 34, '2015-03-28 09:19:03'),
 (222, 'SYSTEM', 'INV_ITEM_BOM_TYPE', 'Inventory Item BOM Type', 'inv', NULL, NULL, NULL, NULL, NULL, 34, '2015-02-07 14:17:00', 34, '2015-03-08 10:26:56'),
 (223, 'BOTH', 'USER_GROUPS', 'User Groups', 'sys', NULL, NULL, NULL, 'enabled', 1, 34, '2015-02-21 18:45:59', 34, '2015-02-21 18:48:16'),
-(224, 'BOTH', 'SYS_LANGUAGE', 'Language', 'sys', NULL, NULL, NULL, NULL, NULL, 34, '2015-02-24 09:15:50', 34, '2015-03-08 17:59:29'),
+(224, 'BOTH', 'SYS_LANGUAGE', 'Language', 'sys', NULL, NULL, NULL, NULL, NULL, 34, '2015-02-24 09:15:50', 34, '2015-11-11 03:47:03'),
 (225, 'BOTH', 'AM_ACTIVITY_TYPE', 'Activity Type', 'am', NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:26:43', 34, '2015-03-16 10:31:10'),
 (226, 'BOTH', 'AM_ACTIVITY_CAUSE', 'Activity Cause', 'am', NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:32:08', 34, '2015-03-16 10:34:32'),
 (227, 'BOTH', 'AM_ACTIVITY_SOURCE', 'Activity Source', 'am', NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:35:24', 34, '2015-03-16 10:36:52'),
@@ -10286,11 +11071,22 @@ INSERT INTO `option_header` (`option_header_id`, `access_level`, `option_type`, 
 (249, 'BOTH', 'PRJ_WORK_UTILIZATION_TYPE', 'Project Work Utilization Type', 'prj', NULL, NULL, NULL, NULL, NULL, 34, '2015-06-18 06:41:22', 34, '2015-06-18 06:41:22'),
 (250, 'BOTH', 'CE_SERVICE TYPE', 'Service Type - Common Entity', 'adm', NULL, NULL, NULL, NULL, NULL, 34, '2015-06-21 06:35:53', 34, '2015-06-21 06:37:59'),
 (251, 'SYSTEM', 'PRJ_BUDGET_ENTRY_METHOD', 'Project Budget Entry Method', 'prj', NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:20:27', 34, '2015-06-22 07:24:45'),
-(252, 'BOTH', 'PRJ_BUDGET_TYPE', 'Project Budget Type', 'prj', NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:08', 34, '2015-07-03 15:32:40'),
+(252, 'BOTH', 'PRJ_BUDGET_TYPE', 'Project Budget Type', 'prj', NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:08', 34, '2015-10-13 03:51:34'),
 (253, 'BOTH', 'PRJ_PROJECT_PHASE', 'Project Phases', 'prj', NULL, NULL, NULL, NULL, NULL, 34, '2015-07-08 03:35:43', 34, '2015-07-08 05:05:38'),
 (254, 'SYSTEM', 'PRJ_EVENT_CLASS', 'Project Event Type Class', 'prj', NULL, NULL, NULL, NULL, NULL, 34, '2015-07-10 06:04:23', 34, '2015-07-10 06:04:23'),
 (255, 'SYSTEM', 'AR_TRNX_APPROVAL_STATUS', 'AR Transacion Approval Status', 'sys', NULL, NULL, NULL, NULL, NULL, 34, '2015-07-17 15:06:54', 34, '2015-07-17 15:06:54'),
-(256, 'SYSTEM', 'AP_PAY_GROUP', 'AP Payment Group', 'ap', NULL, NULL, NULL, NULL, 2, 34, '2015-07-21 08:05:37', 34, '2015-07-21 08:16:52');
+(256, 'SYSTEM', 'AP_PAY_GROUP', 'AP Payment Group', 'ap', NULL, NULL, NULL, NULL, 2, 34, '2015-07-21 08:05:37', 34, '2015-07-21 08:16:52'),
+(257, 'SYSTEM', 'PRJ_DOCUMENT_TYPE', 'Project Document Type', 'prj', NULL, NULL, NULL, NULL, NULL, 34, '2015-08-21 11:42:41', 34, '2015-10-12 05:26:50'),
+(258, 'SYSTEM', 'HR_EXPENSE_CATEGORY', 'HR Expense Category', 'hr', NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 03:42:27', 34, '2015-08-24 03:42:27'),
+(259, 'SYSTEM', 'HR_LOCATION', 'HR Location Structure', 'hr', 'HR_LOCATION', NULL, NULL, NULL, NULL, 34, '2015-08-24 12:12:21', 34, '2015-08-24 12:19:31'),
+(260, 'BOTH', 'HD_SUBSCR_DOC_TYPE', 'Subscription Doument Type', 'hd', NULL, NULL, NULL, NULL, 1, 34, '2015-09-14 07:19:54', 34, '2015-09-14 07:19:54'),
+(261, 'BOTH', 'HD_SUBSCR_LINE_TYPE', 'Subscription Line Type', 'hd', NULL, NULL, NULL, NULL, 1, 34, '2015-09-14 13:53:29', 34, '2015-09-15 03:46:28'),
+(262, 'BOTH', 'PRJ_ACCOUNTING_GRP', 'Project Accounting Group', 'prj', NULL, NULL, NULL, NULL, NULL, 34, '2015-09-24 09:11:16', 34, '2015-09-24 12:49:29'),
+(263, 'BOTH', 'GL_JOURNAL_SOURCE', 'GL Journal Source', 'gl', NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:26', 34, '2015-10-01 12:50:00'),
+(264, 'BOTH', 'QA_ELEMENT_TYPE', 'Quality Element Type', 'qa', NULL, NULL, NULL, NULL, NULL, 34, '2015-11-02 03:30:23', 34, '2015-11-02 03:30:23'),
+(265, 'BOTH', 'QA_COLLECTION_PLAN_TYPE', 'Quality Collection Plan Types', 'qa', NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 03:27:01', 34, '2015-11-06 03:27:01'),
+(266, 'BOTH', 'QA_COLLECTION_TRIGGER', 'Quality Collection Plan Triggers', 'qa', NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 09:17:43', 34, '2015-11-12 05:40:27'),
+(267, 'BOTH', 'QA_QUALITY_ACTION', 'System Actions on Quality Results', 'qa', NULL, NULL, NULL, NULL, NULL, 34, '2015-11-07 11:28:19', 34, '2015-11-07 11:28:19');
 
 -- --------------------------------------------------------
 
@@ -10307,6 +11103,8 @@ CREATE TABLE IF NOT EXISTS `option_line` (
   `value_group_id` int(12) DEFAULT NULL,
   `priority` int(4) DEFAULT NULL,
   `status` enum('active','inactive') CHARACTER SET latin1 DEFAULT NULL,
+  `mapper1` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mapper2` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
   `rev_enabled` enum('enabled','disabled') CHARACTER SET latin1 DEFAULT NULL,
   `rev_number` int(12) DEFAULT NULL,
   `effective_start_date` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
@@ -10318,1095 +11116,1202 @@ CREATE TABLE IF NOT EXISTS `option_line` (
   PRIMARY KEY (`option_line_id`),
   UNIQUE KEY `option_header_id_2` (`option_header_id`,`option_line_code`),
   KEY `option_header_id` (`option_header_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1269 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1379 ;
 
 --
 -- Dumping data for table `option_line`
 --
 
-INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_code`, `option_line_value`, `description`, `value_group_id`, `priority`, `status`, `rev_enabled`, `rev_number`, `effective_start_date`, `effective_end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
-(71, 77, 'ENTERPRISE', 'Enterprise', 'Enterprise Org', NULL, 0, '', 'enabled', 1, '2000-01-01', '', 0, '2014-03-26 07:45:39', 0, '2026-03-14 07:45:39'),
-(72, 77, 'LEGAL_ORG', 'Legal', 'Legal Org', NULL, 0, '', 'enabled', 1, '2000-01-01', '', 0, '2014-03-26 07:45:40', 0, '2026-03-14 07:45:40'),
-(73, 77, 'BUSINESS_ORG', 'Business', 'Business Org', NULL, 0, '', 'enabled', 1, '2000-01-01', '', 0, '2014-03-26 07:45:38', 0, '2026-03-14 07:45:38'),
-(74, 77, 'INVENTORY_ORG', 'Inventory', 'Inventory Org', NULL, 0, '', 'enabled', 1, '2000-01-01', '', 0, '2014-03-26 07:45:39', 0, '2026-03-14 07:45:39'),
-(75, 79, 'INTERNATIONAL', 'INTERNATIONAL', 'Standard International Format', NULL, 1, '', '', 0, '2000-01-01', '2000-01-01', 0, '0000-00-00 00:00:00', 0, '2019-07-13 06:52:45'),
-(76, 79, 'US_STYLE', 'US_STYLE', 'US Format', NULL, 1, '', '', 0, '2000-01-01', '2000-01-01', 0, '0000-00-00 00:00:00', 0, '2019-07-13 06:52:45'),
-(77, 80, 'SEGMENT1', 'Legal Org', 'Legal Organization', 1, 1, 'active', 'enabled', 0, '2001-01-01', '', 0, '2014-02-06 07:26:29', 0, '2014-02-06 07:26:29'),
-(78, 80, 'SEGMENT2', 'Business Org', 'Business Organization', 2, 1, 'active', 'enabled', 0, '2001-01-01', '', 0, '2014-02-06 07:26:28', 0, '2014-02-06 07:26:28'),
-(79, 80, 'SEGMENT3', 'Cost Center', 'Cost center', 3, 1, 'active', 'enabled', 0, '2001-01-01', '', 0, '2014-02-06 07:26:29', 0, '2014-02-06 07:26:29'),
-(80, 80, 'SEGMENT4', 'Account', 'Natural account', 4, 1, 'active', 'enabled', 0, '2001-01-01', '', 0, '2014-02-06 07:26:28', 0, '2014-02-06 07:26:28'),
-(81, 80, 'SEGMENT5', 'Product', 'Product', 5, 1, 'active', 'enabled', 0, '2001-01-01', '', 0, '2014-02-06 07:26:28', 0, '2014-02-06 07:26:28'),
-(82, 80, 'SEGMENT6', 'Project', 'Project', 11, 1, NULL, NULL, NULL, '2001-01-01', NULL, 0, '2014-02-06 07:26:29', 34, '2015-07-25 17:06:25'),
-(83, 80, 'SEGMENT7', 'InterCompany', 'Inter-Company Segment', 1, 1, 'active', 'enabled', 0, '2001-01-01', '', 0, '2014-02-06 07:26:29', 0, '2014-02-06 07:26:29'),
-(84, 80, 'SEGMENT8', 'TBU', 'Feature Use', 12, 1, NULL, NULL, NULL, '2001-01-01', '1970-01-01', 0, '2014-02-06 07:26:29', 34, '2015-07-25 17:07:21'),
-(85, 81, 'OPEN', 'New & Open', 'New & Open', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-18 09:05:40', 18, '0000-00-00 00:00:00'),
-(86, 81, 'ASSIGNED', 'Assigned', 'Assigned', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-18 09:05:41', 18, '0000-00-00 00:00:00'),
-(87, 82, 'LEGAL_UNIT', 'Legal Unit', 'Represents Legal Unit', 1, 1, '', 'enabled', 0, '2000-01-01', '', 0, '2014-02-04 14:17:11', 0, '2014-02-04 14:17:11'),
-(88, 82, 'BUSINESS_UNIT', 'Business Unit', 'Represents Business Unit', 2, 1, '', 'enabled', 0, '2000-01-01', '', 0, '2014-02-04 14:17:10', 0, '2014-02-04 14:17:10'),
-(89, 82, 'COST_CENTER', 'Cost center', 'Represents Cost Center', 3, 1, '', 'enabled', 0, '2000-01-01', '', 0, '2014-02-04 14:17:10', 0, '2014-02-04 14:17:10'),
-(90, 82, 'PRODUCT_CODE', 'product code', 'Represents Product code', 5, 1, '', 'enabled', 0, '2000-01-01', '', 0, '2014-02-04 14:17:10', 0, '2014-02-04 14:17:10'),
-(91, 82, 'INTERCOMPANY', 'Intercompany', 'Intercompany', 1, 1, '', 'enabled', 0, '2000-01-01', '', 0, '2014-02-04 14:17:10', 0, '2014-02-04 14:17:10'),
-(92, 82, 'ACCOUNT', 'Natural account', 'Represents NA', 4, 1, '', 'enabled', 0, '2000-01-01', '', 0, '2014-02-04 14:17:15', 0, '2014-02-04 14:17:15'),
-(93, 83, 'A', 'Asset', 'Asset', NULL, 0, '', '', 0, '1950-01-01', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(94, 83, 'L', 'Liability', 'Liability', NULL, 0, '', '', 0, '1950-01-01', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(95, 83, 'E', 'Equity', 'Owners Equity', NULL, 0, '', '', 0, '1950-01-01', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(96, 83, 'X', 'Expense', 'Expense', NULL, 0, '', '', 0, '1950-01-01', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(97, 83, 'R', 'Revenue', 'Revenue', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-01-26 02:34:50'),
-(98, 83, 'BC', 'Budgetary Credit', 'Budgetary Credit', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-01-26 02:34:51'),
-(99, 84, 'PRODUCT', 'Product', 'Standard Product', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-02-09 11:54:16'),
-(100, 84, 'EXPENSE', 'Expense', 'Expense Items', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-02-09 08:03:49'),
-(101, 84, 'EXPENSE_QTY', 'Expense Qty', 'Expense Qty Tracked', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-02-09 08:03:48'),
-(102, 84, 'NON_PRODUCT', 'Non Product', 'Non product Items', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-02-09 08:03:50'),
-(103, 84, 'MRO', 'MRO', 'MRO Items', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(104, 84, 'FINISHED_GOOD', 'Finished Good', 'Finished Good Items', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-02-09 08:03:50'),
-(105, 84, 'SUB_ASSEMBLY', 'Sub Assembly', 'Sub Assemblies', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-02-09 08:03:51'),
-(106, 84, 'RAW', 'Raw', 'Raw Components', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-02-09 08:03:51'),
-(107, 84, 'EQUIPMENT', 'Equipment', 'Equipments', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-02-09 08:03:51'),
-(108, 84, 'SOFTWARE', 'Software', 'Softwares', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-02-09 08:03:52'),
-(109, 85, 'Area', 'Area', 'Area', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(110, 85, 'Document', 'Document', 'Document', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(111, 85, 'Length', 'Length', 'Length', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(112, 85, 'Volume', 'Volume', 'Volume', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(113, 85, 'Weight', 'Weight', 'Weight', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(114, 85, 'Quantity', 'Quantity', 'Quantity', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(115, 85, 'Period', 'Period', 'Period', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(116, 85, 'Money', 'Money', 'Money', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(117, 85, 'Time', 'Time', 'Time', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(118, 86, 'INVENTORY', 'INVENTORY', 'Inventory Transactions', NULL, 1, '', '', 1, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(119, 86, 'WIP', 'WIP', 'Work In Process', NULL, 1, '', '', 1, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(120, 86, 'OM', 'OM', 'Order Management', NULL, 1, '', '', 1, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(121, 86, 'PO', 'PO', 'Purchasing', NULL, 1, '', '', 1, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(122, 86, 'MISC', 'MISC', 'Misc', NULL, 1, '', '', 1, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(123, 87, '1', '1', 'Issue from stores', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(124, 87, '10', '10', 'Logical Intercompany Receipt', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(125, 87, '11', '11', 'Logical Delivery Adjustment', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(126, 87, '12', '12', 'Intransit receipt', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(127, 87, '13', '13', 'Logical Intercompany Receipt Return', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(128, 87, '14', '14', 'Logical Intercompany Sales Return', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(129, 87, '15', '15', 'Logical  Intransit Receipt', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(130, 87, '17', '17', 'Logical Expense Requisition Receipt', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(131, 87, '2', '2', 'Subinventory transfer', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(132, 87, '21', '21', 'Intransit shipment', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(133, 87, '22', '22', 'Logical  Intransit Shipment', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(134, 87, '24', '24', 'Cost update', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(135, 87, '25', '25', 'Retroactive Price Update', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(136, 87, '26', '26', 'Logical Receipt', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(137, 87, '27', '27', 'Receipt into stores', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(138, 87, '28', '28', 'Staging transfer', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(139, 87, '29', '29', 'Delivery adjustments', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(140, 87, '3', '3', 'Direct organization transfer', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(141, 87, '30', '30', 'WIP scrap transaction', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(142, 87, '31', '31', 'Assembly completion', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(143, 87, '32', '32', 'Assembly return', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(144, 87, '33', '33', 'Negative component issue', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(145, 87, '34', '34', 'Negative component return', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(146, 87, '35', '35', 'Container transaction', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(147, 87, '36', '36', 'COGS Recognition', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(148, 87, '4', '4', 'Cycle count adjustment', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(149, 87, '40', '40', 'Lot Split', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(150, 87, '41', '41', 'Lot Merge', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(151, 87, '42', '42', 'Lot Translate', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(152, 87, '43', '43', 'Lot Update Quantity', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(153, 87, '5', '5', 'Planning Transfer', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(154, 87, '50', '50', 'Container Pack', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(155, 87, '51', '51', 'Container Unpack', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(156, 87, '52', '52', 'Container Split', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(157, 87, '55', '55', 'Cost Group Transfer', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(158, 87, '56', '56', 'Residual Quantity Issue', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(159, 87, '57', '57', 'Residual Quantity Receipt', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(160, 87, '6', '6', 'Ownership Transfer', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(161, 87, '7', '7', 'Logical Issue', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(162, 87, '8', '8', 'Physical inventory adjustment', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(163, 87, '9', '9', 'Logical Intercompany Sales', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(164, 87, '99', '99', 'Misc', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(165, 88, 'STORAGE', 'Storage', 'Storage', 0, 0, '', 'enabled', 0, '', '', 0, '2014-05-28 16:52:56', 0, '2028-05-14 16:52:56'),
-(166, 88, 'RECEIVING', 'Receving', 'Receiving', 0, 0, '', 'enabled', 0, '', '', 0, '2014-05-28 16:52:56', 0, '2028-05-14 16:52:56'),
-(167, 79, 'INDIAN', 'INDIAN', 'Standard Indian Format', NULL, 1, '', '', 0, '2000-01-01', '2000-01-01', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(168, 90, 'NO_LOCATOR1', 'NO_LOCATOR1', 'Not locator Controlled', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '2019-07-13 07:03:34'),
-(169, 89, 'NO_LOCATOR', 'NO_LOCATOR', 'Not locator Controlled', NULL, 1, 'active', '', 0, '09/01/2013', '', 0, '0000-00-00 00:00:00', 0, '2017-09-13 15:40:14'),
-(170, 89, 'NEXT_LEVEL', 'NEXT_LEVEL', 'Determined at next level : Business Unit, Inventory, Zone, Subinventory', NULL, 1, 'active', '', 0, '09/01/2013', '', 0, '0000-00-00 00:00:00', 0, '2017-09-13 15:40:14'),
-(171, 89, 'PRE_SPECIFIED', 'PRE_SPECIFIED', 'Pre Specified Locators', NULL, 1, 'active', '', 0, '09/01/2013', '', 0, '0000-00-00 00:00:00', 0, '2017-09-13 15:40:14'),
-(172, 89, 'DYNAMIC_ENTRY', 'DYNAMIC_ENTRY', 'Dynamic entry', NULL, 1, 'active', '', 0, '09/01/2013', '', 0, '0000-00-00 00:00:00', 0, '2017-09-13 15:40:14'),
-(173, 91, 'Subinventory', 'Subinventory', 'Subinventory', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(174, 91, 'Row', 'Row', 'Row number', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(175, 91, 'Rack', 'Rack', 'Rack or Column', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(176, 91, 'Shelf', 'Shelf', 'Shelf', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(177, 91, 'Bin', 'Bin', 'Bin', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(178, 92, 'table', 'table', 'tabular display', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(179, 92, 'paragraph', 'paragraph', 'paragraph display', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(180, 92, 'list', 'list', 'list display', NULL, 0, '', '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(249, 117, 'CONTENT', 'Content', 'Content', NULL, 1, 'active', 'enabled', 1, '2013-09-30', '', 0, '2014-02-08 07:05:18', 0, '2014-02-08 07:05:18'),
-(250, 117, 'CONTENT_TYPE', 'Content Type', 'Content Type', NULL, 1, 'active', 'enabled', 1, '2013-09-17', '', 0, '2014-02-08 07:05:19', 0, '2014-02-08 07:05:19'),
-(251, 117, 'CATEGORY', 'Category', 'Category', NULL, NULL, 'active', 'enabled', NULL, '2013-09-18', NULL, 0, '2014-02-08 07:05:18', 0, '2014-02-08 07:05:18'),
-(252, 117, 'FILE', 'File', 'File', NULL, 1, 'active', 'enabled', 1, '2013-09-12', NULL, 0, '2014-02-08 07:05:19', 0, '2014-02-08 07:05:19'),
-(253, 117, 'USER', 'User', 'User', NULL, 1, 'active', 'enabled', NULL, NULL, NULL, 0, '2014-02-08 07:05:19', 0, '2014-02-08 07:05:19'),
-(258, 98, 'BUG_REPORT', 'Bug', 'Bug', NULL, 1, 'active', 'enabled', 0, '09/04/2013', '', 0, '2014-01-29 09:24:01', 0, '2014-01-29 09:24:01'),
-(261, 119, 'BASIC', 'Basic', 'Registed User with Basic Privillages', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-09 08:14:30', 0, '2009-06-14 08:14:30'),
-(262, 119, 'ADMIN', 'Administrator', 'Administrator with all acess', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-09 08:14:31', 0, '2009-06-14 08:14:31'),
-(263, 119, 'PLANNER', 'Planner', 'Planner', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-09 08:14:30', 0, '2009-06-14 08:14:30'),
-(264, 119, 'BUYER', 'Buyer', 'Buyer', 0, 1, 'active', 'enabled', 1, '', '', 0, '2014-06-09 08:14:28', 0, '2009-06-14 08:14:28'),
-(265, 120, 'SALES', '', 'Only Sales Site', NULL, 1, 'active', 'enabled', NULL, NULL, NULL, 0, '2013-09-28 14:40:39', 0, '2013-09-28 14:40:39'),
-(266, 120, 'MFG', '', 'Manufacturing', NULL, 1, 'active', 'enabled', NULL, NULL, NULL, 0, '2013-09-28 14:40:40', 0, '2013-09-28 14:40:40'),
-(267, 120, 'MASTER', '', 'Master Organization', NULL, 1, 'active', 'enabled', NULL, NULL, NULL, 0, '2013-09-28 14:40:40', 0, '2013-09-28 14:40:40'),
-(268, 120, 'DIST', '', 'Distribution', NULL, 1, 'active', 'enabled', NULL, NULL, NULL, 0, '2013-09-28 14:40:40', 0, '2013-09-28 14:40:40'),
-(269, 120, 'REPAIR', '', 'Only Repair Site', NULL, 1, 'active', 'enabled', NULL, NULL, NULL, 0, '2013-09-28 14:40:45', 0, '2013-09-28 14:40:45'),
-(270, 121, 'LIFO', '', 'Last In First Out', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2013-09-28 14:45:26', 0, '2013-09-28 14:45:26'),
-(271, 121, 'Average', '', 'Average Costing', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2013-09-28 14:45:26', 0, '2013-09-28 14:45:26'),
-(272, 121, 'Standard', '', 'Standard Costing', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2013-09-28 14:45:26', 0, '2013-09-28 14:45:26'),
-(273, 121, 'FIFO', '', 'First In First Out', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2013-09-28 14:45:27', 0, '2013-09-28 14:45:27'),
-(275, 122, 'BUY', 'Buy', 'Buy Item', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-10-05 10:34:52', 34, '2015-05-18 09:35:27'),
-(276, 122, 'MAKE', 'Make', 'Make Item', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-10-05 10:28:53', 34, '2015-05-18 09:35:28'),
-(277, 123, 'Active', '', 'Status', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2013-10-05 11:18:49', 0, '2013-10-05 11:18:49'),
-(278, 123, 'Inactive', '', 'Inactive', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2013-10-05 11:18:49', 0, '2013-10-05 11:18:49'),
-(279, 123, 'Engineering', '', 'Engineering', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2013-10-05 11:18:50', 0, '2013-10-05 11:18:50'),
-(280, 124, 'EXTN', 'External', 'External Suppliers', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-10-12 16:28:27', 34, '2015-05-08 03:42:54'),
-(281, 124, 'INTN', 'Internal', 'Internal Suppliers', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-10-12 16:29:23', 34, '2015-05-08 03:42:57'),
-(282, 124, 'EMPLOYEE', 'Employee', 'Employees', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-10-12 16:32:53', 34, '2015-05-08 03:42:56'),
-(283, 124, 'EXTN_INTL', 'External International', 'Externational International', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-10-12 16:32:54', 34, '2015-05-08 03:42:55'),
-(291, 125, 'AF', 'Afghanistan', 'Afghanistan', NULL, 0, 'active', 'enabled', 0, '2001-01-01', '', 0, '2014-01-18 07:25:43', 0, '2014-01-18 07:25:43'),
-(292, 125, 'IN', 'India', 'India', NULL, 0, 'active', 'enabled', 0, '2001-01-01', '', 0, '2014-01-18 07:25:43', 0, '2014-01-18 07:25:43'),
-(293, 125, 'GB', 'United Kingdom', 'UK', NULL, 0, 'active', 'enabled', 0, '2001-01-01', '', 0, '2014-01-18 07:25:44', 0, '2014-01-18 07:25:44'),
-(294, 125, 'US', 'United States', 'USA', NULL, 0, 'active', 'enabled', 0, '2001-01-01', '', 0, '2014-01-18 07:25:44', 0, '2014-01-18 07:25:44'),
-(295, 125, 'DE', 'Germany', 'Germany', NULL, 0, 'active', 'enabled', 0, '2001-01-01', '', 0, '2014-01-18 07:25:44', 0, '2014-01-18 07:25:44'),
-(296, 125, 'SG', 'Singapore', 'Singapore', NULL, 0, 'active', 'enabled', 0, '2001-01-01', '', 0, '2014-01-18 07:25:46', 0, '2014-01-18 07:25:46'),
-(297, 125, 'SK', 'Slovakia', 'Slovakia', NULL, NULL, 'active', 'enabled', NULL, '2001-01-01', NULL, 0, '2014-01-18 07:25:45', 0, '2014-01-18 07:25:45'),
-(298, 126, 'RECEVING', 'Receving', 'Two step receving - Receipt & Delivery', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:33:35', 22, '0000-00-00 00:00:00'),
-(299, 126, 'DELIVERY', 'Delivery', 'One step receving', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:33:35', 22, '0000-00-00 00:00:00'),
-(300, 126, 'INSPECTION', 'Inspection', 'Three step receving - Receipt, Inspection & Delivery', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:33:35', 22, '0000-00-00 00:00:00'),
-(301, 127, '4_Way', '', 'Four Way Matching', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2013-10-14 09:11:30', 0, '2013-10-14 09:11:30'),
-(302, 127, '3_WAY', '', 'Three Way Matching', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2013-10-14 09:11:30', 0, '2013-10-14 09:11:30'),
-(303, 127, '2_WAY', '', 'Two Way Matching', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2013-10-14 09:11:30', 0, '2013-10-14 09:11:30'),
-(304, 128, 'None', '', 'No Action', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2013-10-14 09:13:08', 0, '2013-10-14 09:13:08'),
-(305, 128, 'Reject', '', 'Reject Actvity', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2013-10-14 09:13:08', 0, '2013-10-14 09:13:08'),
-(306, 128, 'Warning', '', 'Show Warning Message ', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2013-10-14 09:13:09', 0, '2013-10-14 09:13:09'),
-(307, 81, 'WORKING', 'Working', 'Working', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-18 09:05:41', 18, '0000-00-00 00:00:00'),
-(308, 129, 'Purchase', '', 'Purchasing Site', NULL, 0, 'active', 'enabled', 0, '', '', 0, '2013-10-16 08:46:18', 0, '2016-10-13 10:55:41'),
-(309, 129, 'Pay', '', 'Invoice & Payment Site', NULL, 0, 'active', 'enabled', 0, '', '', 0, '2013-10-16 08:46:18', 0, '2016-10-13 10:55:41'),
-(310, 129, 'Multipurpose', '', 'Act as both Purchasing & Pay site', NULL, 0, 'active', 'enabled', 0, '', '', 0, '2013-10-16 08:51:25', 0, '2016-10-13 10:55:41'),
-(311, 117, 'BLOCK', 'Block', 'Block', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2014-02-08 07:05:24', 0, '2014-02-08 07:05:24'),
-(312, 118, 'FIRST', 'Severity I', 'Severity I', NULL, 0, '', 'enabled', 1, '2013-12-29', '', 0, '2014-01-29 09:30:48', 0, '2014-01-29 09:30:48'),
-(313, 81, 'FIXED', 'Fixed', 'Fixed', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-18 09:05:41', 18, '0000-00-00 00:00:00'),
-(314, 130, 'Receipt', '', 'Receipt', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2013-10-17 07:16:17', 0, '2013-10-17 07:16:17'),
-(315, 130, 'Use', '', 'Use', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2013-10-17 07:16:17', 0, '2013-10-17 07:16:17'),
-(316, 130, 'Receipt_Use', '', 'Receipt & Use', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2013-10-17 07:16:18', 0, '2013-10-17 07:16:18'),
-(317, 131, 'BLANKET', 'Blanket Agreement', 'Blanket Purchase Agreement', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-27 06:53:27', 27, '0000-00-00 00:00:00'),
-(318, 131, 'CONTRACT', 'Contract Order', 'Contract Purchase Order', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-27 06:53:27', 27, '0000-00-00 00:00:00'),
-(319, 131, 'STANDARD', 'Standard Order', 'Standard  Purchase Order', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-27 06:53:27', 27, '0000-00-00 00:00:00'),
-(320, 132, 'ENTERED', 'Entered', 'Entered', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:36:21', 22, '0000-00-00 00:00:00'),
-(321, 132, 'INCOMPLETE', 'Incomplete', 'Incomplete', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:36:21', 22, '0000-00-00 00:00:00'),
-(322, 132, 'CANCELLED', 'Cancelled', 'Cancelled', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:36:21', 22, '0000-00-00 00:00:00'),
-(323, 132, 'CLOSED', 'Closed', 'Closed', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:36:21', 22, '0000-00-00 00:00:00'),
-(324, 132, 'REAPPROVAL', 'Require ReApproval', 'Require ReApproval', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:36:22', 22, '0000-00-00 00:00:00'),
-(325, 132, 'FIN_CLOSED', 'Finally Closed', 'Finally Closed', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:36:26', 22, '0000-00-00 00:00:00'),
-(326, 132, 'APPROVED', 'Approved', 'Approved', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:36:27', 22, '0000-00-00 00:00:00'),
-(327, 132, 'INPROCESS', 'Inprocess', 'Inprocess', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:36:27', 22, '0000-00-00 00:00:00'),
-(328, 133, 'SERVICES', 'Services', 'Services', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-14 06:57:16', 0, '2014-03-14 06:57:16'),
-(329, 133, 'GOODS', 'Goods', 'Goods', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-14 06:57:16', 0, '2014-03-14 06:57:16'),
-(330, 134, 'SGD', 'Sing Dollar', 'Singapore Dollars', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-10 01:41:55', 10, '0000-00-00 00:00:00'),
-(331, 134, 'GBP', 'Britain Pound', 'Bretain Pound', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-10 01:41:55', 10, '0000-00-00 00:00:00'),
-(332, 134, 'INR', 'Indian Rupees', 'Indian Ruppes', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-10 01:41:55', 10, '0000-00-00 00:00:00'),
-(333, 134, 'USD', 'US Dollar', 'US Dollars', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-10 01:41:54', 10, '0000-00-00 00:00:00'),
-(334, 134, 'EUR', 'Euro', 'Euro', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 10:54:00', 0, '2002-08-14 10:54:00'),
-(335, 125, 'PK', 'Pakistan', 'Pakistan', NULL, NULL, 'active', 'enabled', NULL, '2001-01-01', NULL, 0, '2014-01-18 07:25:45', 0, '2014-01-18 07:25:45'),
-(336, 132, 'ONHOLD', 'On Hold', 'On Hold', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:36:27', 22, '0000-00-00 00:00:00'),
-(337, 135, 'PUSH', 'Push', 'Push - Manually transacted items', NULL, 0, 'active', 'enabled', 0, '2013-12-11', '2014-01-03', 0, '2014-01-03 13:53:19', 0, '2014-01-03 13:53:19'),
-(338, 135, 'ASSEMBLY_PULL', 'Assembly Pull', 'Back flashed at WIP completion', NULL, 0, 'active', 'enabled', 0, '2014-01-03', '2014-01-03', 0, '2014-01-03 13:53:20', 0, '2014-01-03 13:53:20'),
-(339, 135, 'OPERATION_PULL', 'Operation Pull', 'Back flashed at each operation', NULL, 0, 'active', 'enabled', 0, '2014-01-03', '2014-01-03', 0, '2014-01-03 13:53:20', 0, '2014-01-03 13:53:20'),
-(340, 135, 'BULK', 'Bulk', 'Not transacted items - expensed', NULL, 0, 'active', 'enabled', 0, '2014-01-03', '2014-01-03', 0, '2014-01-03 13:53:21', 0, '2014-01-03 13:53:21'),
-(341, 136, 'MACHINE', 'Machine', 'Machine', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-12-13 15:40:56', 34, '2015-05-01 04:06:26'),
-(342, 136, 'PERSON', 'Person', 'Person', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-12-16 01:46:03', 34, '2015-05-01 04:06:29'),
-(343, 137, 'MANUAL', 'Manual', 'Manually Charged', NULL, 0, 'active', 'enabled', 0, '2001-01-01', ' ', 0, '2014-01-03 14:06:20', 0, '2014-01-03 14:06:20'),
-(344, 137, 'OSP_RECEIPT', 'OSP Receipt', 'Charged on OSP PO receipt', NULL, 0, 'active', 'enabled', 0, '2001-01-01', ' ', 0, '2014-01-03 14:06:20', 0, '2014-01-03 14:06:20'),
-(345, 137, 'WIP_MOVE', 'WIP Move', 'Auto Charged on WIP Move', NULL, 0, 'active', 'enabled', 0, '2001-01-01', ' ', 0, '2014-01-03 14:06:21', 0, '2014-01-03 14:06:21'),
-(346, 137, 'OSP_MOVE', 'OSP Move', 'Charged on WIP move after OSP PO receipt', NULL, 0, 'active', 'enabled', 0, '2001-01-01', ' ', 0, '2014-01-03 14:06:20', 0, '2014-01-03 14:06:20'),
-(347, 136, 'AMOUNT', 'Amount', 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-12-16 01:48:33', 34, '2015-05-01 04:06:32'),
-(348, 136, 'MISC', 'Miscellaneous', 'Miscellaneous', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-12-16 01:48:37', 34, '2015-05-01 04:06:27'),
-(349, 136, 'CURRENCY', 'Currency', 'Currency', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-12-16 01:48:39', 34, '2015-05-01 04:06:26'),
-(350, 138, 'LOT', 'Lot', 'Per each lot', NULL, 0, 'active', 'enabled', 0, '2001-01-01', '2014-01-03', 0, '2014-01-03 13:57:48', 0, '2014-01-03 13:57:48'),
-(351, 138, 'ITEM', 'Item', 'Per each item', NULL, 0, 'active', 'enabled', 0, '2001-01-01', ' ', 0, '2014-01-03 13:57:48', 0, '2014-01-03 13:57:48'),
-(352, 138, 'RESOURCE_UNIT', 'Resource Unit', 'Per resource unit', NULL, NULL, 'active', 'enabled', NULL, '2001-01-01', ' ', 0, '2014-01-03 13:57:48', 0, '2014-01-03 13:57:48'),
-(353, 138, 'TOTAL_VALUE', 'Total Value', 'Per total value', NULL, NULL, 'active', 'enabled', NULL, '2001-01-01', ' ', 0, '2014-01-03 13:57:49', 0, '2014-01-03 13:57:49'),
-(354, 138, 'RESOURCE_VALUE', 'Resource Value', 'Per resource value', NULL, NULL, 'active', 'enabled', NULL, '2001-01-01', ' ', 0, '2014-01-03 13:57:48', 0, '2014-01-03 13:57:48'),
-(355, 139, 'OH', 'Resource', 'Resource Over Head', 0, 0, '', 'enabled', 0, '', '', 0, '2014-04-30 13:30:47', 0, '2030-04-14 13:30:47'),
-(356, 139, 'MOH', 'Material', 'Material Over Head', 0, 0, '', 'enabled', 0, '', '', 0, '2014-04-30 13:30:48', 0, '2030-04-14 13:30:48'),
-(357, 140, 'Cleaning', '', 'Cleaning Dept', NULL, 0, 'active', 'enabled', 0, '', '', 0, '2013-12-19 07:26:49', 0, '2019-12-13 07:28:47'),
-(358, 140, 'Testing', '', 'Testing & Final Testing', NULL, 0, 'active', 'enabled', 0, ' ', ' ', 0, '2013-12-19 07:26:50', 0, '2019-12-13 07:28:46'),
-(359, 140, 'Burn in', '', 'Burn in station', NULL, 0, 'active', 'enabled', 0, ' ', ' ', 0, '2013-12-19 07:26:51', 0, '2019-12-13 07:28:47'),
-(360, 140, 'Packaging', '', 'Packaging', NULL, 0, 'active', 'enabled', 0, ' ', ' ', 0, '2013-12-19 07:26:52', 0, '2019-12-13 07:28:46'),
-(361, 140, 'Assembly', '', 'Assembly Area', NULL, 0, 'active', 'enabled', 0, ' ', ' ', 0, '2013-12-19 07:26:52', 0, '2019-12-13 07:28:47'),
-(362, 141, 'YES', 'Yes', 'Yes, Scheduled', NULL, NULL, 'active', 'enabled', NULL, '2014-01-03', '2014-01-03', 0, '2014-01-03 14:02:31', 0, '2014-01-03 14:02:31'),
-(363, 141, 'PRIOR', 'Prior', 'Start with the prior operation', NULL, NULL, 'active', 'enabled', NULL, ' ', ' ', 0, '2014-01-03 14:02:31', 0, '2014-01-03 14:02:31'),
-(364, 141, 'NEXT', 'Next', 'Start with the next operation', NULL, NULL, 'active', 'enabled', NULL, ' ', ' ', 0, '2014-01-03 14:02:31', 0, '2014-01-03 14:02:31'),
-(365, 141, 'NO', 'No', 'Not Scheduled', NULL, NULL, 'active', 'enabled', NULL, ' ', ' ', 0, '2014-01-03 14:02:31', 0, '2014-01-03 14:02:31'),
-(366, 118, 'SECOND', 'Severity II', 'Severity II', NULL, 0, '', 'enabled', 1, '2013-12-29', '2014-01-29', 0, '2014-01-29 09:30:48', 0, '2014-01-29 09:30:48'),
-(367, 142, 'NON_STANDARD', 'Non-Standard', 'Non-Standard', NULL, 0, 'active', 'enabled', 0, '2013-12-30', ' ', 0, '2014-01-03 13:55:10', 0, '2014-01-03 13:55:10'),
-(368, 142, 'STANDARD', 'Standard', 'Standard Work Order', NULL, NULL, 'active', 'enabled', NULL, ' ', ' ', 0, '2014-01-03 13:55:10', 0, '2014-01-03 13:55:10'),
-(369, 143, 'UN_RELEASED', 'Un Released', 'Un Released Work Order', NULL, 0, 'active', 'enabled', 0, '2014-01-02', '2014-01-03', 0, '2014-01-03 14:11:49', 0, '2014-01-03 14:11:49'),
-(370, 143, 'RELEASED', 'Released', 'Released Work Order', NULL, NULL, 'active', 'enabled', NULL, '2014-01-03', '2014-01-03', 0, '2014-01-03 14:11:49', 0, '2014-01-03 14:11:49'),
-(371, 143, 'ON_HOLD', 'On Hold', 'OnHold Work Order', NULL, NULL, 'active', 'enabled', NULL, '2014-01-03', '2014-01-03', 0, '2014-01-03 14:11:48', 0, '2014-01-03 14:11:48'),
-(372, 143, 'WAIT_FOR_CLOSE', 'Waiting For Closing', 'WiatingForClosing Work Order', NULL, NULL, 'active', 'enabled', NULL, '2014-01-03', '2014-01-03', 0, '2014-01-03 14:11:48', 0, '2014-01-03 14:11:48'),
-(373, 143, 'COMPLETED', 'Completed', 'Completed Work Order', NULL, NULL, 'active', 'enabled', NULL, '2014-01-03', '2014-01-03', 0, '2014-01-03 14:11:49', 0, '2014-01-03 14:11:49'),
-(374, 143, 'CLOSED', 'Closed', 'Closed Work Order', NULL, NULL, 'active', 'enabled', NULL, '2014-01-03', '2014-01-03', 0, '2014-01-03 14:11:47', 0, '2014-01-03 14:11:47'),
-(375, 144, 'WIP_RETURN', 'Assembly Return', 'WIP Assembly Return Transaction', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2014-01-11 07:52:16', 0, '2014-01-11 07:52:16'),
-(376, 144, 'WIP_COMPLETION', 'Assembly Completion', 'WIP Aseembly Completion Transaction', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2014-01-11 07:52:16', 0, '2014-01-11 07:52:16'),
-(377, 144, 'WIP_MOVE', 'Work Order Move', 'WIP Move Transaction', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2014-01-11 07:52:16', 0, '2014-01-11 07:52:16'),
-(378, 145, 'running', 'Run', 'Actual Operation', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2014-01-07 09:18:28', 0, '2014-01-07 09:18:28'),
-(379, 145, 'rejected', 'Reject', 'Rejected Quantity', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2014-01-07 09:18:28', 0, '2014-01-07 09:18:28'),
-(380, 145, 'tomove', 'To Move', 'Running completed & ready to move', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2014-01-07 09:18:29', 0, '2014-01-07 09:18:29'),
-(381, 145, 'scrapped', 'Scrap', 'Scrapped Quantity', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2014-01-07 09:18:29', 0, '2014-01-07 09:18:29'),
-(382, 145, 'queue', 'Queue', 'Queue step is the sum of setup & queue tim', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2014-01-07 09:18:30', 0, '2014-01-07 09:18:30'),
-(383, 144, 'WIP_RESOURCE_TRANSACTION', 'Resource Transaction', 'Work Order Resource Transaction', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2014-01-11 07:52:16', 0, '2014-01-11 07:52:16'),
-(384, 146, 'ALL', 'All', 'Can be used for all purpose', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2014-01-18 06:49:28', 0, '2014-01-18 06:49:28'),
-(385, 146, 'BILL_TO', 'Bill to', 'Customer bill to site', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2014-01-18 06:49:28', 0, '2014-01-18 06:49:28'),
-(386, 146, 'SHIP_TO', 'Ship to', 'Customer ship to site', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2014-01-18 06:49:28', 0, '2014-01-18 06:49:28'),
-(387, 147, 'EXTERNAL_FORGEIN', 'External Forgein', 'External Forgein Customer', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2014-01-18 07:00:51', 0, '2014-01-18 07:00:51'),
-(388, 147, 'INTERNAL', 'Internal', 'Internal Customer', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2014-01-18 07:00:52', 0, '2014-01-18 07:00:52'),
-(389, 147, 'EXTERNAL', 'External', 'External Customer', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2014-01-18 07:00:52', 0, '2014-01-18 07:00:52'),
-(390, 148, '1', 'A++', 'Second Class Credit Rating', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2014-01-18 07:19:55', 0, '2014-01-18 07:19:55'),
-(391, 148, '2', 'A+', 'Best Credit Class', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2014-01-18 07:19:55', 0, '2014-01-18 07:19:55'),
-(392, 148, '3', 'A-', 'Third', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2014-01-18 07:19:56', 0, '2014-01-18 07:19:56'),
-(393, 148, '4', 'A--', 'Fourth', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2014-01-18 07:19:55', 0, '2014-01-18 07:19:55'),
-(394, 119, 'ENGINEER', 'ME', 'Engineer', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-09 08:14:28', 0, '2009-06-14 08:14:28'),
-(395, 149, 'FORUM', 'Forum', 'Forum type list in a table', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2014-01-26 06:10:44', 0, '2014-01-26 06:10:44'),
-(396, 149, 'NORMAL', 'Normal', 'Normal list with subject & summary', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-01-26 06:10:43', 0, '2014-01-26 06:10:43'),
-(397, 150, 'int', 'Integer', 'Intgere Values', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-27 15:02:11', 0, '2014-01-27 15:02:11'),
-(398, 150, 'enum', 'Enum List', 'Enum List', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-27 15:02:11', 0, '2014-01-27 15:02:11'),
-(399, 150, 'tinyint', 'Boolean', 'Check Box for Boolean ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-27 15:02:12', 0, '2014-01-27 15:02:12'),
-(400, 150, 'varchar', 'Small Text', 'Varchar for small text', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-01-27 15:02:12', 0, '2014-01-27 15:02:12'),
-(401, 150, 'text', 'Large Text', 'Text area for Large Text', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-27 15:02:13', 0, '2014-01-27 15:02:13'),
-(402, 150, 'date', 'Date', 'Date Field', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-27 15:02:17', 0, '2014-01-27 15:02:17'),
-(403, 150, 'float', 'Flolat', 'Float Number', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-27 15:02:17', 0, '2014-01-27 15:02:17'),
-(404, 150, 'option', 'Option List', 'Option List', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-27 15:02:18', 0, '2014-01-27 15:02:18'),
-(405, 81, 'CLOSED', 'Closed', 'Closed', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-18 09:05:41', 18, '0000-00-00 00:00:00'),
-(406, 98, 'SUPPORT', 'Support', 'Support Request', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2014-01-29 09:23:59', 0, '2014-01-29 09:23:59'),
-(407, 98, 'ENHANCE', 'Enhancement', 'Enhacemenet Request', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2014-01-29 09:24:00', 0, '2014-01-29 09:24:00'),
-(408, 118, 'FOURTH', 'Severity IV', 'Severity IV', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-29 09:30:47', 0, '2014-01-29 09:30:47'),
-(409, 118, 'THIRD', 'Severity III', 'Severity III', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-29 09:30:48', 0, '2014-01-29 09:30:48'),
-(410, 119, 'ANONYMOUS', 'Anonymous', 'Anonymous', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-09 08:14:28', 0, '2009-06-14 08:14:28'),
-(411, 151, 'GL_COA', 'Chart of Account', 'Chart of Account', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2014-02-02 12:10:10', 0, '2014-02-02 12:10:10'),
-(412, 151, 'INV_ITEM_CATALOG', 'Item Catalog', 'Item Catalog', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2014-02-02 12:10:11', 0, '2014-02-02 12:10:11'),
-(413, 151, 'INV_ITEM_CATEGORY', 'Item Categories', 'Item Categories', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2014-02-02 12:10:11', 0, '2014-02-02 12:10:11'),
-(414, 152, 'NONE', 'None', 'No Validation', NULL, NULL, 'active', 'enabled', NULL, NULL, NULL, 0, '2014-02-04 02:10:55', 0, '2014-02-04 02:10:55'),
-(415, 152, 'DEPENDENT', 'Dependent', 'Dependent values', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2014-02-04 02:10:55', 0, '2014-02-04 02:10:55'),
-(416, 152, 'INDEPENDENT', 'Independent', 'Independent Value', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2014-02-04 02:10:56', 0, '2014-02-04 02:10:56'),
-(417, 152, 'TABLE', 'Table', 'Validated with a table data', NULL, NULL, 'active', NULL, NULL, NULL, NULL, 0, '2014-02-04 02:10:56', 0, '2014-02-04 02:10:56'),
-(418, 153, 'YEAR', 'Year', '1 Year', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-07 09:08:18', 0, '2014-02-07 09:08:18'),
-(419, 153, 'WEEK', 'Year', '53 Weeks per year', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-07 09:08:17', 0, '2014-02-07 09:08:17'),
-(420, 153, 'QUARTER', 'Quarter', '4 Quarters per year', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-07 09:08:18', 0, '2014-02-07 09:08:18'),
-(421, 153, 'MONTH', 'Month', '12 Months Per year', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-07 09:08:17', 0, '2014-02-07 09:08:17'),
-(422, 154, 'IND_CALEDNAR', 'Indian Calendar', 'Indian Calendar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-06 12:37:12', 0, '2014-02-06 12:37:12'),
-(423, 154, 'SPAIN_CALENDAR', 'Spanish Calendar', 'Spanish Calendar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-06 12:37:13', 0, '2014-02-06 12:37:13'),
-(424, 154, 'CORP_CALENDAR', 'Corp. Calendar', 'Main Corporate Calendar', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-06 12:37:14', 0, '2014-02-06 12:37:14'),
-(425, 117, 'PHP', 'Php', 'Php', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-08 07:05:24', 0, '2014-02-08 07:05:24'),
-(426, 155, 'B', 'Budgeted', 'Budgeted Balance', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-27 07:07:15', 0, '2014-02-27 07:07:15'),
-(427, 155, 'E', 'Encumbrance', 'Encumbrance Balance', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-27 07:07:15', 0, '2014-02-27 07:07:15'),
-(428, 155, 'A', 'Actual', 'Actual Balance', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-27 07:07:23', 0, '2014-02-27 07:07:23'),
-(429, 156, 'ENTERED', 'Entered', 'Entered', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-02 12:03:19', 2, '0000-00-00 00:00:00'),
-(430, 156, 'ERROR', 'Error', 'Error', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-02 12:03:19', 2, '0000-00-00 00:00:00'),
-(431, 156, 'APPROVED', 'Approve', 'Approved', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-02 12:12:28', 2, '0000-00-00 00:00:00'),
-(432, 156, 'INPROCESS', 'In Process', 'In Approval Procecc', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-02 12:03:18', 2, '0000-00-00 00:00:00'),
-(433, 156, 'REVERSED', 'Reverse', 'Reversed', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-02 12:03:19', 2, '0000-00-00 00:00:00'),
-(434, 156, 'POSTED', 'Post', 'Posted', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-02 12:03:19', 2, '0000-00-00 00:00:00'),
-(435, 157, 'AP_TRANSACTIONS', 'AP Transactions', 'AP Transactions', NULL, NULL, NULL, 'enabled', NULL, '2000-01-01', NULL, 0, '2014-03-15 04:37:13', 0, '2015-03-14 04:37:13'),
-(436, 157, 'AP_BORROWED_AND_LENT', 'AP Borrowed and Lent', 'AP Borrowed and Lent', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
-(437, 157, 'AP_CLAIMS', 'AP Claims', 'AP Claims', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
-(438, 157, 'AP_PAYMENTS', 'AP Payments', 'AP Payments', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
-(439, 157, 'AR_BANK_CHARGES', 'AR Bank Charges', 'AR Bank Charges', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
-(440, 157, 'AR_BANK_RECEIPTS', 'AR Bank Receipts', 'AR Bank Receipts', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
-(441, 157, 'AR_BANK_STATEMENTS', 'AR Bank Statements', 'AR Bank Statements', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
-(442, 157, 'AR_BANK_TRANSFERS', 'AR Bank Transfers', 'AR Bank Transfers', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
-(443, 157, 'AR_CHARGE_BACK', 'AR Chargebacks', 'AR Chargebacks', 0, 0, '', 'enabled', 0, '', '', 0, '2014-07-08 09:15:56', 0, '2008-07-14 09:15:56'),
-(444, 157, 'AR_CREDIT_MEMO', 'AR Credit Memos', 'AR Credit Memos', 0, 0, '', 'enabled', 0, '', '', 0, '2014-07-08 09:15:56', 0, '2008-07-14 09:15:56'),
-(445, 157, 'AR_DEBIT_MEMO', 'AR Debit Memos', 'AR Debit Memos', 0, 0, '', 'enabled', 0, '', '', 0, '2014-07-08 09:15:56', 0, '2008-07-14 09:15:56'),
-(446, 157, 'AR_DEPOSIT', 'AR Deposits', 'AR Deposits', 0, 0, '', 'enabled', 0, '', '', 0, '2014-07-08 09:15:56', 0, '2008-07-14 09:15:56'),
-(447, 157, 'AR_GUARENTEE', 'AR Discounts', 'AR Discounts', 0, 0, '', 'enabled', 0, '', '', 0, '2014-07-08 09:15:56', 0, '2008-07-14 09:15:56'),
-(448, 157, 'AR_INVOICE', 'AR Sales Invoice', 'AR Sales Invoice', 0, 0, '', 'enabled', 0, '', '', 0, '2014-07-08 09:15:57', 0, '2008-07-14 09:15:57'),
-(449, 157, 'AR_MISC_RECEIPTS', 'AR Misc Receipts', 'AR Misc Receipts', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
-(450, 157, 'AR_RECEIPTS', 'AR Receipts', 'AR Receipts', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
-(451, 157, 'AR_PREPAYMENT', 'AR Pre Payment', 'AR Pre Payment', 0, 0, '', 'enabled', 0, '', '', 0, '2014-07-08 09:15:57', 0, '2008-07-14 09:15:57'),
-(452, 157, 'FA_ADDITION', 'FA Addition', 'FA Addition', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
-(453, 157, 'FA_AMORTIZATION', 'FA Amortization', 'FA Amortization', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
-(454, 157, 'FA_ASSET_DISPOSITION', 'FA Asset Disposition', 'FA Asset Disposition', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
-(455, 157, 'FA_CIP_ADDITION', 'FA CIP Addition', 'FA CIP Addition', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
-(456, 157, 'FA_CIP_ADJUSTMENT', 'FA CIP Adjustment', 'FA CIP Adjustment', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
-(457, 157, 'FA_CIP_RECLASSIFICATION', 'FA CIP Reclassification', 'FA CIP Reclassification', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(458, 157, 'FA_CIP_RETIREMENT', 'FA CIP Retirement', 'FA CIP Retirement', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(459, 157, 'FA_CIP_REVALUATION', 'FA CIP Revaluation', 'FA CIP Revaluation', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(460, 157, 'FA_CIP_TRANSFER', 'FA CIP Transfer', 'FA CIP Transfer', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(461, 157, 'FA_DEPRECIATION', 'FA Depreciation', 'FA Depreciation', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(462, 157, 'FA_DEPRECIATION_ADJUSTMENT', 'FA Depreciation Adjustment', 'FA Depreciation Adjustment', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(463, 157, 'FA_RECLASS', 'FA Reclass', 'FA Reclass', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(464, 157, 'GL_ADJUSTMENT', 'GL Adjustment', 'GL Adjustment', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(465, 157, 'GL_ALLOCATION', 'GL Allocation', 'GL Allocation', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(466, 157, 'GL_BALANCE_SHEET_CLOSE', 'GL Balance Sheet Close', 'GL Balance Sheet Close', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(467, 157, 'GL_BUDGET', 'GL Budget', 'GL Budget', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(468, 157, 'GL_CANCELLATION', 'GL Cancellation', 'GL Cancellation', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(469, 157, 'GL_INTERCOMPANY_TRANSFER', 'GL Intercompany Transfer', 'GL Intercompany Transfer', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(470, 157, 'GL_MISCELLANEOUS', 'GL Miscellaneous', 'GL Miscellaneous', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(471, 157, 'GL_WRITE_OFF', 'GL Write-off', 'GL Write-off', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(472, 157, 'HR_APPLICATION_FEE', 'HR Application Fee', 'HR Application Fee', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(473, 157, 'HR_PAYROLL', 'HR Payroll', 'HR Payroll', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(474, 157, 'INV_INVENTORY', 'INV Inventory', 'INV Inventory', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(475, 157, 'INV_MISCELLANEOUS_TRANSACTION', 'INV Miscellaneous Transaction', 'INV Miscellaneous Transaction', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(476, 157, 'INV_RECEIVING', 'INV Receiving', 'INV Receiving', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(477, 157, 'PA_BURDEN_COST', 'PA Burden Cost', 'PA Burden Cost', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(478, 157, 'PA_LABOR_COST', 'PA Labor Cost', 'PA Labor Cost', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(479, 157, 'PO_ACCRUAL', 'PO Accrual', 'PO Accrual', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(480, 157, 'PO_REQUISITIONS', 'PO Requisitions', 'PO Requisitions', NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
-(481, 158, 'PERM_CLOSED', 'Permanently Closed', 'Permanently Closed Period', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-28 01:56:35', 0, '2014-02-28 01:56:35'),
-(482, 158, 'CLOSED', 'Closed', 'Closed Period', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-28 01:56:36', 0, '2014-02-28 01:56:36'),
-(483, 158, 'OPEN', 'Open', 'Open Period', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-28 01:56:36', 0, '2014-02-28 01:56:36'),
-(484, 158, 'AVAILABLE', 'Available', 'Period Defined in Calendar', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-28 01:56:36', 0, '2014-02-28 01:56:36'),
-(485, 158, 'FUTURE', 'Future Enabled', 'Future Entry Enabled Period', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-28 01:56:36', 0, '2014-02-28 01:56:36'),
-(486, 156, 'UNPOSTED', 'Unposted', 'Unposted', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-02 12:03:19', 2, '0000-00-00 00:00:00'),
-(487, 157, 'GL_REVERSAL', 'GL Reversal', 'GL Reversal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-03-03 03:04:14', 0, '2014-03-03 03:04:14'),
-(488, 159, 'CANCELLED', 'Cancelled', 'Cancelled', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 07:38:04', 0, '2024-03-14 07:38:04');
-INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_code`, `option_line_value`, `description`, `value_group_id`, `priority`, `status`, `rev_enabled`, `rev_number`, `effective_start_date`, `effective_end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
-(489, 159, 'INCOMPLETE', 'Incomplete', 'Incomplete', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 07:38:01', 0, '2024-03-14 07:38:01'),
-(490, 159, 'APPROVED', 'Approved', 'Approved', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 07:38:04', 0, '2024-03-14 07:38:04'),
-(491, 159, 'REAPPROVAL', 'Require ReApproval', 'Require ReApproval', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 07:38:02', 0, '2024-03-14 07:38:02'),
-(492, 159, 'ENTERED', 'Entered', 'Entered', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 07:38:03', 0, '2024-03-14 07:38:03'),
-(493, 159, 'INPROCESS', 'Inprocess', 'Inprocess', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 07:38:02', 0, '2024-03-14 07:38:02'),
-(494, 159, 'ONHOLD', 'On Hold', 'On Hold', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 07:38:03', 0, '2024-03-14 07:38:03'),
-(495, 160, 'EXPENSE_REPORT', 'Expense Report', 'Expense Report', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-13 10:50:06', 0, '2013-03-14 10:50:06'),
-(496, 160, 'INVOICE', 'Invoice', 'Standard Invoice', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-13 10:50:06', 0, '2013-03-14 10:50:06'),
-(497, 160, 'CREDIT_MEMO', 'Credit Memo', 'Credit Memo', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-13 10:50:08', 0, '2013-03-14 10:50:08'),
-(498, 160, 'DEBIT_MEMO', 'Debit Memo', 'Debit Memo', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-13 10:50:05', 0, '2013-03-14 10:50:05'),
-(499, 160, 'PREPAYMENT', 'Pre Payment', 'Pre Payment', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-13 10:50:07', 0, '2013-03-14 10:50:07'),
-(501, 133, 'FREIGHT', 'Freight', 'Freight', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-14 06:57:16', 0, '2014-03-14 06:57:16'),
-(502, 160, 'PO_DEFAULT', 'PO Default', 'PO Default', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-03-13 10:50:07', 0, '2014-03-13 10:50:07'),
-(503, 133, 'MISC', 'Miscellaneous', 'Miscellaneous', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-03-14 06:57:15', 0, '2014-03-14 06:57:15'),
-(504, 161, 'ITEM', 'Item', 'Item', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-14 06:58:47', 0, '2014-03-14 06:58:47'),
-(505, 161, 'TAX', 'Tax', 'Tax', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-14 06:58:47', 0, '2014-03-14 06:58:47'),
-(506, 161, 'MISC', 'Miscellaneous', 'Miscellaneous', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-14 06:58:48', 0, '2014-03-14 06:58:48'),
-(507, 161, 'FREIGHT', 'Freight', 'Freight', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-14 06:58:48', 0, '2014-03-14 06:58:48'),
-(508, 162, 'REFUND', 'Refund', 'Refund to Supploier', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-17 03:57:13', 0, '2014-03-17 03:57:13'),
-(509, 162, 'MANUAL', 'Manual', 'Manually Entered', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-17 03:57:13', 0, '2014-03-17 03:57:13'),
-(510, 162, 'MULTI_SELECT', 'Multi Select', 'Created Using Multi Select', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-17 03:57:13', 0, '2014-03-17 03:57:13'),
-(511, 164, 'DEPOSIT', 'Desposit', 'Desposit Transaction', 0, 0, '', 'enabled', 0, '', '', 0, '2014-07-08 09:10:00', 0, '2008-07-14 09:10:00'),
-(512, 164, 'INVOICE', 'Invoice', 'Standard Invoice', 0, 0, '', 'enabled', 0, '', '', 0, '2014-07-08 09:10:00', 0, '2008-07-14 09:10:00'),
-(513, 164, 'CREDIT_MEMO', 'Credit Memo', 'Credit Memo', 0, 0, '', 'enabled', 0, '', '', 0, '2014-07-08 09:10:00', 0, '2008-07-14 09:10:00'),
-(514, 164, 'DEBIT_MEMO', 'Debit Memo', 'Debit Memo', 0, 0, '', 'enabled', 0, '', '', 0, '2014-07-08 09:09:59', 0, '2008-07-14 09:09:59'),
-(515, 164, 'PREPAYMENT', 'Pre Payment', 'Pre Payment Transaction', 0, 0, '', 'enabled', 0, '', '', 0, '2014-07-08 09:10:01', 0, '2008-07-14 09:10:01'),
-(516, 164, 'GUARENTEE', 'Guarentee', 'Guarentee', 0, 0, '', 'enabled', 0, '', '', 0, '2014-07-08 09:10:00', 0, '2008-07-14 09:10:00'),
-(517, 164, 'CHARGE_BACK', 'Charge Back', 'Charge Back', 0, 0, '', 'enabled', 0, '', '', 0, '2014-07-08 09:09:59', 0, '2008-07-14 09:09:59'),
-(518, 163, 'CREATE_ACCOUNT', 'Create Accounting', 'Create Accounting', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-22 10:25:59', 0, '2014-03-22 10:25:59'),
-(519, 163, 'VIEW_JOURNAL', 'View Journal', 'View Journal', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-22 10:25:59', 0, '2014-03-22 10:25:59'),
-(520, 163, 'CREDIT', 'Credit Transaction', 'Credit Transaction', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-22 10:25:59', 0, '2014-03-22 10:25:59'),
-(521, 163, 'CANCEL', 'Cancel Transaction', 'Cancel Transaction', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-22 10:25:59', 0, '2014-03-22 10:25:59'),
-(522, 163, 'RECEIPT', 'Create Receipt', 'Create Receipt', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-22 10:26:00', 0, '2014-03-22 10:26:00'),
-(523, 165, 'MISC', 'Miscellaneous', 'Miscellaneous', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 11:15:37', 0, '2024-03-14 11:15:37'),
-(524, 165, 'STANDARD', 'Standard', 'Standard', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 11:15:38', 0, '2024-03-14 11:15:38'),
-(529, 165, 'MULTI_SELECT', 'Multi Select', 'Multi Select', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-03-25 04:35:31', 0, '2014-03-25 04:35:31'),
-(530, 166, 'EXTERNAL', 'External Order', 'Standard  Purchase Order', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-25 08:40:23', 0, '2014-03-25 08:40:23'),
-(531, 166, 'BLANKET', 'Blanket Agreement', 'Blanket Purchase Agreement', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-25 08:40:23', 0, '2014-03-25 08:40:23'),
-(532, 166, 'INTERNAL', 'Internal Order', 'Contract Purchase Order', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-25 08:40:24', 0, '2014-03-25 08:40:24'),
-(533, 167, 'ENTERED', 'Entered', '2. Entered', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-02 02:49:38', 0, '2002-06-14 02:49:38'),
-(534, 167, 'SHIPPED', 'Shipped', '6. Shipped', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-02 02:49:36', 0, '2002-06-14 02:49:36'),
-(535, 167, 'BOOKED', 'Booked', '3. Booked', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-02 02:49:36', 0, '2002-06-14 02:49:36'),
-(536, 167, 'PICKED', 'Picked', '5. Picked', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-02 02:49:36', 0, '2002-06-14 02:49:36'),
-(537, 167, 'INCOMPLETE', 'Incomplete', '1. Incomplete', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-02 02:49:38', 0, '2002-06-14 02:49:38'),
-(538, 167, 'CLOSED', 'Closed', '8. Closed', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-02 02:49:36', 0, '2002-06-14 02:49:36'),
-(539, 167, 'PENDING_INVOICE', 'Pending Invoice', '7. Pending Invoice', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-02 02:49:37', 0, '2002-06-14 02:49:37'),
-(540, 167, 'INPROCESS', 'Inprocess', '20. Inprocess', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-02 02:49:37', 0, '2002-06-14 02:49:37'),
-(541, 167, 'ONHOLD', 'On Hold', '19. On Hold', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-02 02:49:37', 0, '2002-06-14 02:49:37'),
-(547, 168, 'RES', 'Resource', 'Resource Element', 0, 0, '', 'enabled', 0, '', '', 0, '2014-05-05 02:53:47', 0, '2005-05-14 02:53:47'),
-(548, 168, 'MAT', 'Material', 'Material Element', 0, 0, '', 'enabled', 0, '', '', 0, '2014-05-05 02:53:47', 0, '2005-05-14 02:53:47'),
-(549, 168, 'MOH', 'Material Over Head', 'Material Over Head Element', 0, 0, '', 'enabled', 0, '', '', 0, '2014-05-05 02:53:47', 0, '2005-05-14 02:53:47'),
-(550, 168, 'OH', 'Over Head', 'Over Head Element', 0, 0, '', 'enabled', 0, '', '', 0, '2014-05-05 02:53:47', 0, '2005-05-14 02:53:47'),
-(551, 168, 'OSP', 'Outside Processing', 'Outside Processing Element', 0, 0, '', 'enabled', 0, '', '', 0, '2014-05-05 02:53:47', 0, '2005-05-14 02:53:47'),
-(552, 169, 'CREATE_ACCOUNT', 'Create Accounting', 'Create Accounting', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-04-14 04:07:56', 0, '2014-04-14 04:07:56'),
-(553, 169, 'COST_ROLLUP', 'Cost Rollup', 'Cancel Transaction', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-04-14 04:07:56', 0, '2014-04-14 04:07:56'),
-(554, 169, 'COST_UPDATE', 'Cost Update', 'Standard Cost Update', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-04-14 04:07:56', 0, '2014-04-14 04:07:56'),
-(555, 169, 'VIEW_JOURNAL', 'View Journal', 'View Journal', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-04-14 04:07:56', 0, '2014-04-14 04:07:56'),
-(556, 170, 'MINMAX', 'Min Max', 'Min Max Planning', 0, 0, '', 'enabled', 0, '', '', 0, '2014-05-08 01:03:10', 0, '2008-05-14 01:03:10'),
-(557, 170, 'MPS', 'MPS', 'MPS Planning', 0, 0, '', 'enabled', 0, '', '', 0, '2014-05-08 01:03:10', 0, '2008-05-14 01:03:10'),
-(558, 170, 'KANBAN', 'Kanban', 'Kanban Planning', 0, 0, '', 'enabled', 0, '', '', 0, '2014-05-08 01:03:10', 0, '2008-05-14 01:03:10'),
-(559, 170, 'MRP', 'MRP', 'MRP Planning', 0, 0, '', 'enabled', 0, '', '', 0, '2014-05-08 01:03:10', 0, '2008-05-14 01:03:10'),
-(560, 157, 'CST_ADJUSTMENT', 'CST Cost Adjustment', 'CST Cost Adjustment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-04-26 05:09:42', 0, '2014-04-26 05:09:42'),
-(561, 157, 'WIP_RESOURCE', 'WIP Resource', 'WIP Resource Transaction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-04-28 11:43:44', 0, '2014-04-28 11:43:44'),
-(562, 171, 'INTERNAL', 'Internal', 'Internal Requisition', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-01 07:43:40', 0, '2014-05-01 07:43:40'),
-(563, 171, 'EXTERNAL', 'External', 'External Requisition', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-01 07:43:40', 0, '2014-05-01 07:43:40'),
-(564, 172, 'INTERNAL_BUY', 'Internal Buy', 'Buy from Internal Organization', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-02 14:06:54', 0, '2014-05-02 14:06:54'),
-(565, 172, 'INTERNAL_MAKE', 'Internal Make', 'Make In Internal Organization', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-02 14:06:54', 0, '2014-05-02 14:06:54'),
-(566, 172, 'EXTERNAL', 'External', 'External Purchase', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-02 14:06:54', 0, '2014-05-02 14:06:54'),
-(567, 173, 'DAILY', 'Daily', 'Daily Bucket', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-03 13:05:53', 0, '2014-05-03 13:05:53'),
-(568, 173, 'WEEKLY', 'Weekly', 'Weekly Bucket', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-03 13:05:53', 0, '2014-05-03 13:05:53'),
-(569, 173, 'PERIOD', 'Period', 'Periodic Bucket', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-03 13:05:53', 0, '2014-05-03 13:05:53'),
-(570, 174, 'SUPPLY_PLAN', 'Supply Plan', 'Supply Planning', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-05 02:53:20', 0, '2014-05-05 02:53:20'),
-(571, 174, 'MRP', 'MRP', 'MRP Planning', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-05 02:53:20', 0, '2014-05-05 02:53:20'),
-(572, 174, 'DEMAND_PLAN', 'Demand Plan', 'Demand Planning', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-05 02:53:20', 0, '2014-05-05 02:53:20'),
-(573, 174, 'FORECAST', 'Forecast', 'Forecast Source List', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-05 02:53:20', 0, '2014-05-05 02:53:20'),
-(574, 174, 'SOP', 'Sales & Operation', 'Sales & Operation Planning', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-05 02:53:20', 0, '2014-05-05 02:53:20'),
-(575, 175, 'SUPPLY_ENTRY', 'SP Entries', 'Supply Plan Entries', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-05 03:01:46', 0, '2014-05-05 03:01:46'),
-(576, 175, 'SOP_ENTRY', 'SOP Entries', 'Sales & Operation Plan Entries', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-05 03:01:46', 0, '2014-05-05 03:01:46'),
-(577, 175, 'FORECAST_ENTRY', 'Forecast Entries', 'Forecast Entries', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-05 03:01:46', 0, '2014-05-05 03:01:46'),
-(578, 175, 'DEMAND_ENTRY', 'DP Entries', 'Demand Plann Entries', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-05 03:01:46', 0, '2014-05-05 03:01:46'),
-(579, 176, 'SALES_ORDER', 'Sales Order', 'Sales Order', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-06 04:54:02', 0, '2014-05-06 04:54:02'),
-(580, 176, 'DEPENDENT', 'Dependent', 'Dependent Demand', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-06 04:54:03', 0, '2014-05-06 04:54:03'),
-(581, 176, 'FORECAST', 'Forecast', 'Forecast', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-06 04:54:03', 0, '2014-05-06 04:54:03'),
-(582, 170, 'MULTI_MINMAX', 'Multi Bin Min Max', 'Multi Bin Min Max', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-08 01:03:10', 0, '2014-05-08 01:03:10'),
-(583, 177, 'PC_A_100', 'PC A 100', 'PC A 100', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-08 01:56:24', 0, '2014-05-08 01:56:24'),
-(584, 177, 'NO_LINE', 'Not Assigned', 'Not Assigned', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-08 01:56:24', 0, '2014-05-08 01:56:24'),
-(585, 177, 'PC_A_150', 'PC A 150', 'PC A 150', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-08 01:56:24', 0, '2014-05-08 01:56:24'),
-(586, 177, 'MOBILE_X_07', 'Mobile X 7 Series', 'Mobile X 7 Series', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-08 01:56:24', 0, '2014-05-08 01:56:24'),
-(587, 177, 'MOBILE_L_15', 'Mobile L 15', 'Kanban Planning', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-08 01:56:24', 0, '2014-05-08 01:56:24'),
-(588, 177, 'TV_FLAT_X_100', 'TV Flat X 100', 'TV Flat X 100', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-08 01:56:25', 0, '2014-05-08 01:56:25'),
-(589, 177, 'MW_LETO_01', 'MW LETO 01', 'MW LETO 01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-08 01:56:25', 0, '2014-05-08 01:56:25'),
-(590, 177, 'TV_FLAT_X_101A', 'TV Flat X 100A', 'TV Flat X 100A', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-08 01:56:25', 0, '2014-05-08 01:56:25'),
-(591, 177, 'MW_LETO_02', 'MW LETO 02', 'MW LETO 02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-08 01:56:25', 0, '2014-05-08 01:56:25'),
-(592, 178, 'NO_ROUND', 'No Rounding', 'No Rounding', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-01 10:43:44', 0, '2001-09-14 10:43:44'),
-(593, 178, 'ROUND_UP', 'Round Up', 'Round Up', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-01 10:43:44', 0, '2001-09-14 10:43:44'),
-(594, 178, 'ROUND_DOWN', 'Round Down', 'Round Down', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-01 10:43:44', 0, '2001-09-14 10:43:44'),
-(595, 178, 'ROUND', 'Round', 'Round to Nearest', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-01 10:43:43', 0, '2001-09-14 10:43:43'),
-(596, 179, 'PAST_DUE', 'Past Due', 'Past Due', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-21 09:32:09', 0, '2014-05-21 09:32:09'),
-(597, 179, 'RESCHDULE_OUT', 'Reschdule OUT', 'Reschdule OUT', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-21 09:32:10', 0, '2014-05-21 09:32:10'),
-(598, 179, 'EXCESS', 'Excess', 'Excess', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-21 09:32:11', 0, '2014-05-21 09:32:11'),
-(599, 179, 'RESCHDULE_IN', 'Reschdule IN', 'Reschdule IN', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-21 09:32:11', 0, '2014-05-21 09:32:11'),
-(600, 179, 'COMPRESSED_LT', 'Compressed LT', 'Compressed LT', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-21 09:32:12', 0, '2014-05-21 09:32:12'),
-(601, 88, 'RAW', 'Raw', 'Raw', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-28 16:52:55', 0, '2014-05-28 16:52:55'),
-(602, 88, 'WIP', 'WIP', 'WIP', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-28 16:52:56', 0, '2014-05-28 16:52:56'),
-(603, 88, 'FGI', 'FGI', 'FGI', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-28 16:52:56', 0, '2014-05-28 16:52:56'),
-(604, 167, 'AWAITING_PICKING', 'Awaiting Picking', '4. Awaiting Picking', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 02:49:37', 0, '2014-06-02 02:49:37'),
-(605, 180, 'SALES_TAX', 'Sales Tax', 'Sales Tax', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-06-03 02:56:45', 0, '2014-06-03 02:56:45'),
-(606, 180, 'VAT', 'VAT', 'Value Added Tax', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-06-03 02:56:46', 0, '2014-06-03 02:56:46'),
-(607, 180, 'GST', 'GST', 'Goods and Services Tax', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 02:56:46', 0, '2014-06-03 02:56:46'),
-(608, 180, 'EXCISE', 'Excise', 'Excise', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-06-03 02:56:47', 0, '2014-06-03 02:56:47'),
-(609, 180, 'TARIFF', 'Tariff', 'Tariff - Export & Import', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 02:56:48', 0, '2014-06-03 02:56:48'),
-(610, 125, 'RU', 'Russia', 'Russia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 13:00:15', 0, '2014-06-03 13:00:15'),
-(611, 125, 'CA', 'Canada', 'Canada', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 13:00:18', 0, '2014-06-03 13:00:18'),
-(612, 125, 'IT', 'Italy', 'Italy', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 13:00:21', 0, '2014-06-03 13:00:21'),
-(613, 125, 'CN', 'China', 'China', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 13:00:23', 0, '2014-06-03 13:00:23'),
-(614, 125, 'FR', 'France', 'France', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 13:00:28', 0, '2014-06-03 13:00:28'),
-(615, 125, 'BR', 'Brazil', 'Brazil', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 13:00:31', 0, '2014-06-03 13:00:31'),
-(616, 125, 'ES', 'Spain', 'Spain', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 13:00:33', 0, '2014-06-03 13:00:33'),
-(617, 125, 'JP', 'Japan', 'Japan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 13:00:36', 0, '2014-06-03 13:00:36'),
-(618, 125, 'MX', 'Mexico', 'Mexico', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 13:00:39', 0, '2014-06-03 13:00:39'),
-(619, 125, 'KR', 'South Korea', 'South Korea', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 13:00:42', 0, '2014-06-03 13:00:42'),
-(620, 181, 'MILITARY_EQUIPMENT', 'Military Equipment', 'Military Equipment', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-04 08:13:49', 0, '2004-06-14 08:13:49'),
-(621, 181, 'STANDARD', 'Standard', 'Standard', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-04 08:13:48', 0, '2004-06-14 08:13:48'),
-(622, 181, 'EXEMPT', 'Exempt', 'Exempt', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-04 08:13:49', 0, '2004-06-14 08:13:49'),
-(623, 181, 'IND_RURAL_EDUCATION', 'Rural Education IND', 'Rural Education IND', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-04 08:13:49', 0, '2004-06-14 08:13:49'),
-(624, 181, 'EMISSION_INSPECTION', 'Emission Inspection', 'Emmision Inspection', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-04 08:13:50', 0, '2004-06-14 08:13:50'),
-(625, 182, 'ap', 'Accounts Payable', '101. Accounts Payable', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 11:25:48', 34, '2015-03-27 03:32:27'),
-(626, 182, 'gl', 'General Ledger', '100. General Ledger', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 11:25:48', 34, '2015-03-27 03:32:28'),
-(627, 182, 'ar', 'Accounts Receviable', '102. Accounts Receviable', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 11:25:48', 34, '2015-03-27 03:32:29'),
-(628, 182, 'fa', 'Fixed Asset', '103. Fixed Asset', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 11:25:47', 34, '2015-03-27 03:32:28'),
-(629, 182, 'cm', 'Cash Managment', '104. Cash Management', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 11:25:48', 34, '2015-03-27 03:32:29'),
-(630, 182, 'inv', 'Inventory', '200. Inventory', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 11:25:49', 34, '2015-03-27 03:32:30'),
-(631, 182, 'pur', 'Purchasing', '201. Purchasing', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 11:25:49', 34, '2015-03-27 03:32:30'),
-(632, 182, 'sd', 'Sales & Distribution', '202. Sales & Distribution', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 11:25:49', 34, '2015-03-27 03:32:31'),
-(633, 182, 'bom', 'Bills of Material', '203. Bills of Material', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 11:25:50', 34, '2015-03-27 03:32:32'),
-(634, 182, 'wip', 'Work In Process', '204. Work In Process', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 11:25:50', 34, '2015-03-27 03:32:32'),
-(635, 182, 'fp', 'Forecast & Planning', '205. Forecast & Planning', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-27 11:25:50', 0, '2027-06-14 11:25:50'),
-(636, 182, 'sys', 'System', '1. System', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-27 11:25:50', 0, '2027-06-14 11:25:50'),
-(637, 182, 'org', 'Organization', '2. Organization', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-27 11:25:50', 0, '2027-06-14 11:25:50'),
-(638, 182, 'ext', 'Extension', '900. Extension', 0, 0, '', 'enabled', 0, '', '', 0, '2014-06-27 11:25:51', 0, '2027-06-14 11:25:51'),
-(640, 183, 'CANCELLED', 'Cancelled', 'Cancelled', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-06-29 11:49:56', 0, '2014-06-29 11:49:56'),
-(641, 183, 'INCOMPLETE', 'Incomplete', 'Incomplete', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-06-29 11:49:56', 0, '2014-06-29 11:49:56'),
-(642, 183, 'REAPPROVAL', 'Require ReApproval', 'Require ReApproval', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-06-29 11:49:57', 0, '2014-06-29 11:49:57'),
-(643, 183, 'APPROVED', 'Approved', 'Approved', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-06-29 11:49:57', 0, '2014-06-29 11:49:57'),
-(644, 183, 'INPROCESS', 'Inprocess', 'Inprocess', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-06-29 11:49:57', 0, '2014-06-29 11:49:57'),
-(645, 183, 'ENTERED', 'Entered', 'Entered', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-06-29 11:49:58', 0, '2014-06-29 11:49:58'),
-(646, 183, 'ONHOLD', 'On Hold', 'On Hold', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-06-29 11:49:58', 0, '2014-06-29 11:49:58'),
-(647, 183, 'BOOKED', 'Booked', 'Booked', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-29 11:49:58', 0, '2014-06-29 11:49:58'),
-(648, 184, 'FORM', 'Form', 'Form', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-12 09:15:04', 0, '2014-07-12 09:15:04'),
-(649, 184, 'SEARCH', 'Search', 'Search', 0, 0, '', 'enabled', 0, '', '', 0, '2014-07-19 05:34:20', 0, '2019-07-14 05:34:20'),
-(650, 184, 'SETUP', 'Setup', 'Setup', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-12 09:15:06', 0, '2014-07-12 09:15:06'),
-(651, 184, 'PROGRAM', 'Program', 'Program', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-12 09:15:06', 0, '2014-07-12 09:15:06'),
-(652, 184, 'CONTENT', 'Content', 'Content', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-12 09:15:07', 0, '2014-07-12 09:15:07'),
-(653, 185, 'SAVINGS', 'Savings', 'Savings', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-07-15 12:15:21', 0, '2014-07-15 12:15:21'),
-(654, 185, 'CURRENT', 'Current', 'Current', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-07-15 12:15:21', 0, '2014-07-15 12:15:21'),
-(655, 185, 'DESPOSIT', 'Deposit', 'Deposit', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-07-15 12:15:22', 0, '2014-07-15 12:15:22'),
-(656, 186, 'A', 'Class A', 'Class A', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-07-18 14:47:04', 0, '2014-07-18 14:47:04'),
-(657, 186, 'B', 'Class B', 'Class B', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-07-18 14:47:04', 0, '2014-07-18 14:47:04'),
-(658, 186, 'C', 'Class C', 'Class C', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-07-18 14:47:07', 0, '2014-07-18 14:47:07'),
-(659, 184, 'DOCUMENT', 'Document', 'Document', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-19 05:45:25', 0, '2014-07-19 05:45:25'),
-(660, 184, 'TRANSACTION', 'Transaction', 'Transaction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-19 05:45:26', 0, '2014-07-19 05:45:26'),
-(661, 187, 'MRP_DEMAND_VALUE', 'MRP Demand Value', 'MRP Demand Value', 0, 0, '', 'enabled', 0, '', '', 0, '2014-07-22 07:28:09', 0, '2022-07-14 07:28:09'),
-(662, 187, 'ONHAND_VALUE', 'Onhand Value', 'Onhand Value', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-07-19 09:23:25', 0, '2014-07-19 09:23:25'),
-(663, 187, 'MRP_DEMAND_QTY', 'MRP Demand Quantity', 'MRP Demand Quantity', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-07-19 09:23:29', 0, '2014-07-19 09:23:29'),
-(664, 187, 'ONHAND_QTY', 'Onhand Quantity', 'Onhand Quantity', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-07-19 09:23:30', 0, '2014-07-19 09:23:30'),
-(665, 187, 'MBMM_MAX_QTY', 'Multi-Bin Min Max, Max Qty', 'Multi Bin Min Max , Maximum Quantity', 0, 0, '', 'enabled', 0, '', '', 0, '2014-07-22 07:36:49', 0, '2022-07-14 07:36:49'),
-(666, 187, 'MBMM_MAX_VALUE', 'Multi-Bin Min Max, Max Value', 'Multi Bin Min Max , Maximum Value', 0, 0, '', 'enabled', 0, '', '', 0, '2014-07-22 07:36:49', 0, '2022-07-14 07:36:49'),
-(667, 187, 'STD_COST', 'Standard Cost', 'Standard Cost', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-19 09:23:35', 0, '2014-07-19 09:23:35'),
-(684, 134, 'AED', 'UAE Dirham', 'United Arab Emirates', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:20:33', 0, '2014-08-02 11:20:33'),
-(685, 134, 'AFN', 'Afghani', 'Afghanistan', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:20:33', 0, '2014-08-02 11:20:33'),
-(686, 134, 'ALL', 'Lek', 'Albania', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:20:33', 0, '2014-08-02 11:20:33'),
-(687, 134, 'AMD', 'Armenian Dram', 'Armenia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:20:33', 0, '2014-08-02 11:20:33'),
-(688, 134, 'ANG', 'Antillian Guilder', 'Netherlands Antilles', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:31:44', 0, '2002-08-14 13:31:44'),
-(689, 134, 'AOA', 'Kwanza', 'Angola', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:29', 0, '2002-08-14 13:40:29'),
-(690, 134, 'ARS', 'Argentine Peso', 'Argentina', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:20:33', 0, '2014-08-02 11:20:33'),
-(691, 134, 'AUD', 'Australian Dollar', 'Australia, Australian Antarctic Territory, Christmas Island, Cocos (Keeling) Islands, Heard and McDonald Islands, Kiribati, Nauru, Norfolk Island, Tuvalu', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:20:33', 0, '2014-08-02 11:20:33'),
-(692, 134, 'AWG', 'Aruban Guilder', 'Aruba', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(693, 134, 'AZN', 'AZN', 'Azerbaijan', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:29', 0, '2002-08-14 13:40:29'),
-(694, 134, 'BAM', 'Convertible Marks', 'Bosnia and Herzegovina', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(695, 134, 'BBD', 'Barbados Dollar', 'Barbados', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(696, 134, 'BDT', 'Bangladeshi Taka', 'Bangladesh', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(697, 134, 'BGN', 'Bulgarian Lev', 'Bulgaria', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(698, 134, 'BHD', 'Bahraini Dinar', 'Bahrain', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(699, 134, 'BIF', 'Burundian Franc', 'Burundi', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(700, 134, 'BMD', 'Bermudian Dollar ', 'Bermuda', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(701, 134, 'BND', 'Brunei Dollar', 'Brunei', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(702, 134, 'BOB', 'Boliviano', 'Bolivia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(703, 134, 'BOV', 'Bolivian Mvdol', 'Bolivia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(704, 134, 'BRL', 'Brazilian Real', 'Brazil', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(705, 134, 'BSD', 'Bahamian Dollar', 'Bahamas', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(706, 134, 'BTN', 'Ngultrum', 'Bhutan', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(707, 134, 'BWP', 'Pula', 'Botswana', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(708, 134, 'BYR', 'Belarussian Ruble', 'Belarus', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(709, 134, 'BZD', 'Belize Dollar', 'Belize', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(710, 134, 'CAD', 'Canadian Dollar', 'Canada', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(711, 134, 'CDF', 'Franc Congolais', 'Democratic Republic of Congo', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(712, 134, 'CHE', 'WIR Euro', 'Switzerland', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(713, 134, 'CHF', 'Swiss Franc', 'Switzerland, Liechtenstein', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(714, 134, 'CHW', 'WIR Franc ', 'Switzerland', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(715, 134, 'CLF', 'CLF - Chile', 'Chile', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:30', 0, '2002-08-14 13:40:30'),
-(716, 134, 'CLP', 'Chilean Peso', 'Chile', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(717, 134, 'CNY', 'Yuan Renminbi', 'Mainland China', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(718, 134, 'COP', 'Colombian Peso', 'Colombia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(719, 134, 'COU', 'UVR - Colombia', 'Colombia', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:29', 0, '2002-08-14 13:40:29'),
-(720, 134, 'CRC', 'CRC - Costa Rica', 'Costa Rica', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:30', 0, '2002-08-14 13:40:30'),
-(721, 134, 'CUP', 'Cuban Peso', 'Cuba', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(722, 134, 'CVE', 'CVE - Cape Verde', 'Cape Verde', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:30', 0, '2002-08-14 13:40:30'),
-(723, 134, 'CYP', 'Cyprus Pound', 'Cyprus', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(724, 134, 'CZK', 'Czech Koruna', 'Czech Republic', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(725, 134, 'DJF', 'Djibouti Franc', 'Djibouti', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(726, 134, 'DKK', 'Danish Krone', 'Denmark, Faroe Islands, Greenland', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(727, 134, 'DOP', 'Dominican Peso', 'Dominican Republic', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(728, 134, 'DZD', 'Algerian Dinar', 'Algeria', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(729, 134, 'EEK', 'Kroon', 'Estonia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(730, 134, 'EGP', 'Egyptian Pound', 'Egypt', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(731, 134, 'ERN', 'Nakfa', 'Eritrea', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(732, 134, 'ETB', 'Ethiopian Birr', 'Ethiopia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(733, 134, 'FJD', 'Fiji Dollar', 'Fiji', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(734, 134, 'FKP', 'Falkland Pound', 'Falkland Islands', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:30', 0, '2002-08-14 13:40:30'),
-(735, 134, 'GEL', 'Lari', 'Georgia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(736, 134, 'GHS', 'Cedi', 'Ghana', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(737, 134, 'GIP', 'Gibraltar pound', 'Gibraltar', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(738, 134, 'GMD', 'Dalasi', 'Gambia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(739, 134, 'GNF', 'Guinea Franc', 'Guinea', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(740, 134, 'GTQ', 'Quetzal', 'Guatemala', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(741, 134, 'GYD', 'Guyana Dollar', 'Guyana', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(742, 134, 'HKD', 'Hong Kong Dollar', 'Hong Kong Special Administrative Region', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(743, 134, 'HNL', 'Lempira', 'Honduras', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(744, 134, 'HRK', 'Croatian Kuna', 'Croatia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(745, 134, 'HTG', 'Haiti Gourde', 'Haiti', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(746, 134, 'HUF', 'Forint', 'Hungary', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(747, 134, 'IDR', 'Rupiah', 'Indonesia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(748, 134, 'ILS', 'New Israeli Shekel', 'Israel', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(749, 134, 'IQD', 'Iraqi Dinar', 'Iraq', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(750, 134, 'IRR', 'Iranian Rial', 'Iran', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(751, 134, 'ISK', 'Iceland Krona', 'Iceland', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(752, 134, 'JMD', 'Jamaican Dollar', 'Jamaica', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(753, 134, 'JOD', 'Jordanian Dinar', 'Jordan', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(754, 134, 'JPY', 'Japanese yen', 'Japan', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(755, 134, 'KES', 'Kenyan Shilling', 'Kenya', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(756, 134, 'KGS', 'Som', 'Kyrgyzstan', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(757, 134, 'KHR', 'Riel', 'Cambodia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(758, 134, 'KMF', 'Comoro Franc', 'Comoros', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(759, 134, 'KPW', 'North Korean Won', 'North Korea', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(760, 134, 'KRW', 'South Korean Won', 'South Korea', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:30', 0, '2002-08-14 13:40:30'),
-(761, 134, 'KWD', 'Kuwaiti Dinar', 'Kuwait', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(762, 134, 'KYD', 'Cayman Dollar', 'Cayman Islands', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:31', 0, '2002-08-14 13:40:31'),
-(763, 134, 'KZT', 'Tenge', 'Kazakhstan', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(764, 134, 'LAK', 'Kip', 'Laos', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(765, 134, 'LBP', 'Lebanese Pound', 'Lebanon', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(766, 134, 'LKR', 'Sri Lanka Rupee', 'Sri Lanka', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(767, 134, 'LRD', 'Liberian Dollar', 'Liberia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(768, 134, 'LSL', 'Loti', 'Lesotho', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(769, 134, 'LTL', 'Lithuanian Litas', 'Lithuania', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(770, 134, 'LVL', 'Latvian Lats', 'Latvia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(771, 134, 'LYD', 'Libyan Dinar', 'Libya', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(772, 134, 'MAD', 'Moroccan Dirham', 'Morocco, Western Sahara', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(773, 134, 'MDL', 'Moldovan Leu', 'Moldova', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(774, 134, 'MGA', 'Malagasy Ariary', 'Madagascar', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(775, 134, 'MKD', 'Denar', 'Former Yugoslav Republic of Macedonia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(776, 134, 'MMK', 'Kyat', 'Myanmar', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(777, 134, 'MNT', 'Tugrik', 'Mongolia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(778, 134, 'MOP', 'Pataca', 'Macau Special Administrative Region', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(779, 134, 'MRO', 'Ouguiya', 'Mauritania', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(780, 134, 'MTL', 'Maltese Lira', 'Malta', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(781, 134, 'MUR', 'Mauritius Rupee', 'Mauritius', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(782, 134, 'MVR', 'Rufiyaa', 'Maldives', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(783, 134, 'MWK', 'Kwacha', 'Malawi', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(784, 134, 'MXN', 'Mexican Peso', 'Mexico', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(785, 134, 'MXV', 'UDI - Mexico', 'Mexico', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:31', 0, '2002-08-14 13:40:31'),
-(786, 134, 'MYR', 'Malaysian Ringgit', 'Malaysia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(787, 134, 'MZN', 'Metical', 'Mozambique', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(788, 134, 'NAD', 'Namibian Dollar', 'Namibia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(789, 134, 'NGN', 'Naira', 'Nigeria', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(790, 134, 'NIO', 'Cordoba Oro', 'Nicaragua', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(791, 134, 'NOK', 'Norwegian Krone', 'Norway', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(792, 134, 'NPR', 'Nepalese Rupee', 'Nepal', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(793, 134, 'NZD', 'NZD', 'Cook Islands, New Zealand, Niue, Pitcairn, Tokelau', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:31', 0, '2002-08-14 13:40:31'),
-(794, 134, 'OMR', 'Rial Omani', 'Oman', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(795, 134, 'PAB', 'Balboa', 'Panama', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(796, 134, 'PEN', 'Nuevo Sol', 'Peru', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(797, 134, 'PGK', 'Kina', 'Papua New Guinea', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(798, 134, 'PHP', 'Philippine Peso', 'Philippines', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(799, 134, 'PKR', 'Pakistan Rupee', 'Pakistan', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(800, 134, 'PLN', 'Zloty', 'Poland', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(801, 134, 'PYG', 'Guarani', 'Paraguay', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(802, 134, 'QAR', 'Qatari Rial', 'Qatar', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(803, 134, 'RON', 'New Leu', 'Romania', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:31', 0, '2002-08-14 13:40:31'),
-(804, 134, 'RSD', 'Serbian Dinar', 'Serbia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(805, 134, 'RUB', 'Russian Ruble', 'Russia, Abkhazia, South Ossetia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(806, 134, 'RWF', 'Rwanda Franc', 'Rwanda', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(807, 134, 'SAR', 'Saudi Riyal', 'Saudi Arabia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(808, 134, 'SBD', 'Solomon Dollar', 'Solomon Islands', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:32', 0, '2002-08-14 13:40:32'),
-(809, 134, 'SCR', 'Seychelles Rupee', 'Seychelles', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(810, 134, 'SDG', 'Sudanese Pound', 'Sudan', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(811, 134, 'SEK', 'Swedish Krona', 'Sweden', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(812, 134, 'SHP', 'SHP', 'Saint Helena', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:32', 0, '2002-08-14 13:40:32'),
-(813, 134, 'SKK', 'Slovak Koruna', 'Slovakia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(814, 134, 'SLL', 'Leone', 'Sierra Leone', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(815, 134, 'SOS', 'Somali Shilling', 'Somalia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(816, 134, 'SRD', 'Surinam Dollar', 'Suriname', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(817, 134, 'STD', 'Dobra', 'S?o Tom? and Pr?ncipe', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(818, 134, 'SYP', 'Syrian Pound', 'Syria', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(819, 134, 'SZL', 'Lilangeni', 'Swaziland', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(820, 134, 'THB', 'Baht', 'Thailand', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(821, 134, 'TJS', 'Somoni', 'Tajikistan', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(822, 134, 'TMM', 'Manat', 'Turkmenistan', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(823, 134, 'TND', 'Tunisian Dinar', 'Tunisia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(824, 134, 'TOP', 'Pa''anga', 'Tonga', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(825, 134, 'TRY', 'New Turkish Lira', 'Turkey', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(826, 134, 'TTD', 'T & T Dollar', 'Trinidad and Tobago', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:32', 0, '2002-08-14 13:40:32'),
-(827, 134, 'TWD', 'New Taiwan Dollar', 'Taiwan and other islands that are under the effective control of the Republic of China (ROC)', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(828, 134, 'TZS', 'Tanzanian Shilling', 'Tanzania', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(829, 134, 'UAH', 'Hryvnia', 'Ukraine', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(830, 134, 'UGX', 'Uganda Shilling', 'Uganda', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(831, 134, 'UYU', 'Peso Uruguayo', 'Uruguay', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(832, 134, 'UZS', 'Uzbekistan Som', 'Uzbekistan', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(833, 134, 'VEB', 'Venezuelan bolvar', 'Venezuela', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:31:44', 0, '2002-08-14 13:31:44'),
-(834, 134, 'VND', 'Vietnamese ng', 'Vietnam', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:31:45', 0, '2002-08-14 13:31:45'),
-(835, 134, 'VUV', 'Vatu', 'Vanuatu', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(836, 134, 'WST', 'Samoan Tala', 'Samoa', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(837, 134, 'XAF', 'CFA Franc BEAC', 'Cameroon, Central African Republic, Congo, Chad, Equatorial Guinea, Gabon', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(838, 134, 'XAG', 'Silver', 'one Troy ounce', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(839, 134, 'XAU', 'Gold ', 'one Troy ounce', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(840, 134, 'XBA', 'XBA', '(EURCO) (Bonds market unit)', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:32', 0, '2002-08-14 13:40:32'),
-(841, 134, 'XBB', 'XBB', '(E.M.U.-6) (Bonds market unit)', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:32', 0, '2002-08-14 13:40:32'),
-(842, 134, 'XBC', 'EU Account 9', ' (E.U.A.-9) (Bonds market unit)', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:33', 0, '2002-08-14 13:40:33'),
-(843, 134, 'XBD', 'EU Account 17 ', '(E.U.A.-17) (Bonds market unit)', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:33', 0, '2002-08-14 13:40:33'),
-(844, 134, 'XCD', 'XCD', 'Anguilla, Antigua and Barbuda, Dominica, Grenada, Montserrat, Saint Kitts and Nevis, Saint Lucia, Saint Vincent and the Grenadines', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:33', 0, '2002-08-14 13:40:33'),
-(845, 134, 'XDR', 'XDR', 'International Monetary Fund', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:33', 0, '2002-08-14 13:40:33'),
-(846, 134, 'XFO', 'Gold franc ', 'Bank for International Settlements', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(847, 134, 'XFU', 'UIC franc ', 'International Union of Railways', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(848, 134, 'XOF', 'XOF', 'Benin, Burkina Faso, C?te d''Ivoire, Guinea-Bissau, Mali, Niger, Senegal, Togo', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:34', 0, '2002-08-14 13:40:34'),
-(849, 134, 'XPT', 'Platinum', ' (one Troy ounce)', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(850, 134, 'XTS', 'Code ', 'reserved for testing purposes', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42');
-INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_code`, `option_line_value`, `description`, `value_group_id`, `priority`, `status`, `rev_enabled`, `rev_number`, `effective_start_date`, `effective_end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
-(851, 134, 'YER', 'Yemeni Rial', 'Yemen', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(852, 134, 'ZAR', 'South African Rand', 'South Africa', 0, 0, '', 'enabled', 0, '', '', 0, '2014-08-02 13:40:34', 0, '2002-08-14 13:40:34'),
-(853, 134, 'ZMK', 'Kwacha', 'Zambia', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(854, 134, 'ZWD', 'Zimbabwe Dollar', 'Zimbabwe', NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
-(855, 188, 'CORP', 'Corporate', 'Corporate', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-02 12:29:30', 0, '2014-08-02 12:29:30'),
-(856, 188, 'USER', 'User', 'User Rate', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-02 12:29:30', 0, '2014-08-02 12:29:30'),
-(857, 188, 'AVERAGE', 'Average', 'Average', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-02 12:29:31', 0, '2014-08-02 12:29:31'),
-(858, 188, 'REPORTING', 'Reporting', 'Reporting', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-02 12:29:31', 0, '2014-08-02 12:29:31'),
-(859, 182, 'hr', 'Human Resource', '300. HR', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-07 09:55:00', 0, '2014-08-07 09:55:00'),
-(860, 189, 'MARRIED', 'Married', 'Married', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-07 10:45:34', 0, '2014-08-07 10:45:34'),
-(861, 189, 'SINGLE', 'Single', 'Single', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-07 10:45:34', 0, '2014-08-07 10:45:34'),
-(862, 189, 'SEPARATED', 'Separated', 'Separated', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-07 10:45:34', 0, '2014-08-07 10:45:34'),
-(863, 190, 'PART_TIME_REGULAR', 'Part Time Regular', 'Part Time Regular', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-08 12:37:36', 0, '2014-08-08 12:37:36'),
-(864, 190, 'FULL_TIME_REGULAR', 'Full Time Regular', 'Full Time Regular', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-08 12:37:36', 0, '2014-08-08 12:37:36'),
-(865, 190, 'FULL_TIME_INTERN', 'Full Time Intenr', 'Full Time Intenr', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-08 12:37:36', 0, '2014-08-08 12:37:36'),
-(866, 190, 'FULL_TIME_TEMP', 'Full Time Temporary', 'Full Time Temporary', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-08 12:37:36', 0, '2014-08-08 12:37:36'),
-(867, 190, 'PART_TIME_TEMP', 'Part Time Temporary', 'Part Time Temporary', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-08 12:37:37', 0, '2014-08-08 12:37:37'),
-(868, 190, 'PART_TIME_INTERN', 'Part Time Intenr', 'Part Time Intenr', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-08 12:37:37', 0, '2014-08-08 12:37:37'),
-(869, 191, 'IT', 'Information Technology', 'Information Technology', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-08 12:44:32', 0, '2014-08-08 12:44:32'),
-(870, 191, 'HR', 'Human Resource', 'Human Resource', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-08 12:44:32', 0, '2014-08-08 12:44:32'),
-(871, 191, 'OPR', 'Operation', 'Operation', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-08 12:44:32', 0, '2014-08-08 12:44:32'),
-(872, 191, 'PMO', 'Program Management', 'Program Management', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-08 12:44:33', 0, '2014-08-08 12:44:33'),
-(873, 191, 'PUR', 'Purchasing', 'Purchasing', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-08 12:44:33', 0, '2014-08-08 12:44:33'),
-(874, 191, 'PLAN', 'Planning', 'Planning', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-08 12:44:33', 0, '2014-08-08 12:44:33'),
-(875, 191, 'ENGG', 'Engineering', 'Engineering', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-08 12:44:33', 0, '2014-08-08 12:44:33'),
-(876, 191, 'RND', 'Research & Development', 'Research & Development', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-08 12:44:33', 0, '2014-08-08 12:44:33'),
-(877, 191, 'INV', 'Inventory', 'Inventory', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-08 12:44:34', 0, '2014-08-08 12:44:34'),
-(878, 192, 'EARNINGS', 'Earnings', 'Earnings', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-11 12:39:21', 0, '2011-08-14 12:39:21'),
-(879, 192, 'DEDUCTIONS', 'Deductions', 'Deductions', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-11 12:39:21', 0, '2011-08-14 12:39:21'),
-(880, 193, 'VOL_DEDUCTION', 'Voluntary Deductions', 'Voluntary Deductions', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-11 12:50:31', 0, '2014-08-11 12:50:31'),
-(881, 193, 'INVOL_DEDUCTION', 'Involuntary Deductions', 'Involuntary Deductions', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-11 12:50:31', 0, '2014-08-11 12:50:31'),
-(882, 193, 'PRE_TAX_DEDUCTION', 'Pre Tax Deductions', 'Pre Tax Deductions', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-11 12:50:31', 0, '2014-08-11 12:50:31'),
-(883, 193, 'NON_TAX_EARNING', 'Non Taxable Earnings', 'Non Taxable Earnings', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-11 16:35:48', 0, '2011-08-14 16:35:48'),
-(884, 193, 'EARNINGS', 'Earnings', 'Earnings', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-11 12:50:32', 0, '2014-08-11 12:50:32'),
-(885, 194, 'E_REGULAR', 'Regual Earnings', 'Regual Earnings', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-11 13:10:18', 0, '2014-08-11 13:10:18'),
-(886, 194, 'E_PENSION', 'Pension Earnings', 'Penson Earnings', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-11 13:10:18', 0, '2014-08-11 13:10:18'),
-(887, 194, 'D_TAX', 'Tax Deduction', 'Tax Deduction', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-11 13:10:19', 0, '2014-08-11 13:10:19'),
-(888, 194, 'E_ALLOWANCE', 'Allowance', 'Allowance', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-11 16:14:57', 0, '2011-08-14 16:14:57'),
-(889, 194, 'E_OVERTIME', 'Overtime Earnings', 'Overtime Earnings', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-11 13:10:19', 0, '2014-08-11 13:10:19'),
-(890, 194, 'D_LOAN', 'Loan Deduction', 'Loan Deduction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-11 13:10:19', 0, '2014-08-11 13:10:19'),
-(891, 194, 'E_BASIC', 'Basic Salary', 'Basic Salary', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-11 16:25:40', 0, '2014-08-11 16:25:40'),
-(892, 195, 'OTHER', 'Other', 'Voluntary Deductions', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 04:54:20', 0, '2014-08-13 04:54:20'),
-(893, 195, 'PART_TIME_DISTANCE', 'Part Time - Distance', 'Part Time - Distance', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 04:54:21', 0, '2014-08-13 04:54:21'),
-(894, 195, 'PART_TIME_REGULAR', 'Part Time - Regular', 'Part Time - Regular', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 04:54:21', 0, '2014-08-13 04:54:21'),
-(895, 195, 'FULL_TIME_DISTANCE', 'Full Time - Distance', 'Full Time - Distance', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 04:54:21', 0, '2014-08-13 04:54:21'),
-(896, 195, 'FULL_TIME_REGULAR', 'Full Time - Regular', 'Full Time - Regular', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 04:54:21', 0, '2014-08-13 04:54:21'),
-(897, 196, 'MALE', 'Male', 'Male', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 05:45:34', 0, '2014-08-13 05:45:34'),
-(898, 196, 'UNKNOWN', 'Unknown', 'Unknown', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 05:45:34', 0, '2014-08-13 05:45:34'),
-(899, 196, 'FEMALE', 'Female', 'Female', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 05:45:34', 0, '2014-08-13 05:45:34'),
-(900, 197, 'EMPLOYEE_EX', 'Ex-Employee', 'Ex-Employee', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 06:01:41', 0, '2013-08-14 06:01:41'),
-(901, 197, 'APPLICANT', 'Applicant', 'Applicant', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 06:01:41', 0, '2013-08-14 06:01:41'),
-(902, 197, 'APPLICANT_EX', 'Ex-Applicant', 'Ex-Applicant', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 06:01:41', 0, '2013-08-14 06:01:41'),
-(903, 197, 'EMPLOYEE', 'Employee', 'Employee', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 06:01:42', 0, '2013-08-14 06:01:42'),
-(904, 197, 'OTHERS', 'Others', 'Others', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 06:01:42', 0, '2013-08-14 06:01:42'),
-(905, 197, 'INTERN', 'Intern', 'Intern', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 06:01:42', 0, '2013-08-14 06:01:42'),
-(906, 197, 'EMPLOYEE_EX_APPLICANT', 'Employee-Ex-Applicant', 'Employee-Ex-Applicant', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 06:01:42', 0, '2013-08-14 06:01:42'),
-(907, 197, 'EMPLOYEE_EX_INTERN', 'Employee-Ex-Intern', 'Employee-Ex-Intern', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-13 06:01:43', 0, '2014-08-13 06:01:43'),
-(908, 198, 'ADHAR', 'Adhar', 'Adhar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-13 06:05:49', 0, '2014-08-13 06:05:49'),
-(909, 198, 'FIN_NUMBER', 'FIN Number', 'FIN Number', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 06:05:49', 0, '2014-08-13 06:05:49'),
-(910, 198, 'PASSPORT', 'Passport', 'Passport', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 06:05:50', 0, '2014-08-13 06:05:50'),
-(911, 198, 'SSN', 'Social Security', 'Social Security', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-13 06:05:50', 0, '2014-08-13 06:05:50'),
-(912, 198, 'EMPLOYEE_NUMBER', 'Employee Number', 'Employee Number', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 06:05:50', 0, '2014-08-13 06:05:50'),
-(913, 199, 'WIRE', 'Wire', 'Wire', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-15 11:13:12', 0, '2014-08-15 11:13:12'),
-(914, 199, 'DIRECT', 'Direct Deposit', 'Direct Deposit', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-15 11:13:12', 0, '2014-08-15 11:13:12'),
-(915, 199, 'CHEQUE', 'Cheque', 'Cheque', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-15 11:13:13', 0, '2014-08-15 11:13:13'),
-(916, 199, 'EFT', 'EFT', 'EFT', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-15 11:13:13', 0, '2014-08-15 11:13:13'),
-(917, 199, 'CASH', 'Cash', 'Cash', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-15 11:13:13', 0, '2014-08-15 11:13:13'),
-(923, 200, 'WEEK', 'Week', 'Week', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-15 11:55:47', 0, '2014-08-15 11:55:47'),
-(924, 200, 'SEMI_MONTH', 'Semi-Month', 'Semi-Month', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-15 11:55:47', 0, '2014-08-15 11:55:47'),
-(925, 200, 'MONTH', 'Month', 'Month', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-15 11:55:47', 0, '2014-08-15 11:55:47'),
-(926, 200, 'ALERTNATE_MONTH', 'Alternate Month', 'Alternate Month', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-15 11:55:48', 0, '2014-08-15 11:55:48'),
-(927, 200, 'QUARTER', 'Quarter', 'Quarter', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-15 11:55:48', 0, '2014-08-15 11:55:48'),
-(928, 200, 'SEMI_YEAR', 'Semi Year', 'Semi Year', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-15 11:55:48', 0, '2014-08-15 11:55:48'),
-(929, 200, 'YEAR', 'Year', 'Year', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-15 11:55:48', 0, '2014-08-15 11:55:48'),
-(930, 201, 'UNPAID', 'Unpaid Leave', 'Unpaid Leave', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-16 16:57:51', 0, '2014-08-16 16:57:51'),
-(931, 201, 'MATERNITY', 'Maternity Leave', 'Maternity Leave', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-16 16:57:51', 0, '2014-08-16 16:57:51'),
-(932, 201, 'PATERNITY', 'Paternity Leave', 'Paternity Leave', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-16 16:57:52', 0, '2014-08-16 16:57:52'),
-(933, 201, 'PAID', 'Paid Leave', 'Paid Leave', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-16 16:57:52', 0, '2014-08-16 16:57:52'),
-(934, 201, 'PERSONAL', 'Personal Leave', 'Personal Leave', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-16 16:57:52', 0, '2014-08-16 16:57:52'),
-(935, 201, 'LEGAL', 'Legal Leave', 'Legal Leave', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-16 16:57:53', 0, '2014-08-16 16:57:53'),
-(936, 201, 'OTHERS', 'Others', 'Others', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-16 16:57:53', 0, '2014-08-16 16:57:53'),
-(937, 202, 'PUR_BLANKET_RELEASE', 'Blanket Release', 'Blanket Release', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-19 05:30:05', 0, '2014-08-19 05:30:05'),
-(938, 202, 'PUR_STANDRAD_PO', 'Standard PO', 'Standard PO', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-26 11:04:16', 0, '2026-08-14 11:04:16'),
-(939, 202, 'PUR_REQUISITION_INTERNAL', 'Internal Requisition', 'Internal Requisition', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-19 05:30:05', 0, '2014-08-19 05:30:05'),
-(940, 202, 'PUR_BLANKET_AGGREMENT', 'Blanket Agreement', 'Blanket Agreement', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-26 11:04:17', 0, '2026-08-14 11:04:17'),
-(941, 202, 'PUR_REQUISITION_EXTERN', 'External Requisition', 'External Requisition', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-19 05:30:06', 0, '2014-08-19 05:30:06'),
-(942, 202, 'AP_INVOICE', 'AP Invoice', 'AP Invoice', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-19 05:30:06', 0, '2014-08-19 05:30:06'),
-(943, 202, 'AP_PAYMENT', 'AP Payment', 'AP Payment', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-19 05:30:06', 0, '2014-08-19 05:30:06'),
-(944, 202, 'GL_JOURNAL', 'Journals', 'Journals', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-19 05:30:07', 0, '2014-08-19 05:30:07'),
-(945, 202, 'GL_BUDGET', 'GL Budget', 'GL Budget', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-19 05:30:07', 0, '2014-08-19 05:30:07'),
-(946, 202, 'WIP_WO', 'Work Order', 'Work Order', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-19 05:30:07', 0, '2014-08-19 05:30:07'),
-(947, 203, 'REQ_APPROVAL', 'Req Approval', 'Req Approval', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-21 12:05:26', 0, '2014-08-21 12:05:26'),
-(948, 203, 'JOURNAL_APPROVAL', 'Journal Approval', 'Journal Approval', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-21 12:05:26', 0, '2014-08-21 12:05:26'),
-(949, 203, 'PO_APPROVAL', 'PO Approval', 'PO Approval', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-21 12:05:26', 0, '2014-08-21 12:05:26'),
-(950, 203, 'LEAVE_APPLICATION', 'Leave Application', 'Leave Application', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-21 12:05:27', 0, '2014-08-21 12:05:27'),
-(951, 77, 'OTHER_ENTITY', 'Other Entity', 'Other Entity', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-22 07:20:27', 0, '2014-08-22 07:20:27'),
-(952, 131, 'BLANKET_RELEASE', 'Blanket Release', 'Blanket Release', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-25 03:22:08', 0, '2014-08-25 03:22:08'),
-(953, 202, 'PUR_CONTRACT_PO', 'Contract PO', 'Contract PO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-26 11:04:16', 0, '2014-08-26 11:04:16'),
-(954, 204, 'PO_LINE_HOLD', 'PO Line Hold', 'PO Line Hold', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-01 11:19:32', 0, '2014-09-01 11:19:32'),
-(955, 204, 'SO_HEADER_HOLD', 'SO Header Hold', 'SO Header Hold', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-01 11:19:32', 0, '2014-09-01 11:19:32'),
-(956, 204, 'PO_HEADER_HOLD', 'PO Header Hold', 'PO Header Hold', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-01 11:19:33', 0, '2014-09-01 11:19:33'),
-(957, 204, 'SO_LINE_HOLD', 'SO Line Hold', 'SO Line Hold', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-01 11:19:33', 0, '2014-09-01 11:19:33'),
-(958, 119, 'CUSTOMER', 'Customer', 'Customer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-05 03:32:31', 0, '2014-09-05 03:32:31'),
-(959, 119, 'SUPPLIER', 'Supplier', 'Supplier', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-05 03:32:31', 0, '2014-09-05 03:32:31'),
-(960, 161, 'ACCRUAL', 'Accrual', 'Accrual', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-08 17:16:04', 0, '2014-09-08 17:16:04'),
-(961, 205, 'DEFINED', 'Defined', 'Only defined but never used', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-14 08:00:30', 0, '2014-09-14 08:00:30'),
-(962, 205, 'INTRANSIT', 'Intransit', 'Intransit', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-14 08:00:31', 0, '2014-09-14 08:00:31'),
-(963, 205, 'OUT_STORE', 'Out Of Store', 'Out of Store', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-14 08:00:31', 0, '2014-09-14 08:00:31'),
-(964, 205, 'IN_STORE', 'In Store', 'In Store', NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-17 04:56:44', 0, '2017-09-14 04:56:44'),
-(965, 205, 'IN_WIP', 'In WIP', 'In WIP', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-17 04:56:44', 0, '2014-09-17 04:56:44'),
-(966, 205, 'IN_RECEIVING', 'In Receiving', 'In Receiving', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-17 04:56:44', 0, '2014-09-17 04:56:44'),
-(967, 206, 'INT', 'Integer', 'Integer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 12:54:36', 0, '2014-10-07 12:54:36'),
-(968, 206, 'DECIMAL', 'Float', 'Float', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 12:54:36', 0, '2014-10-07 12:54:36'),
-(969, 206, 'TEXT', 'Long Text', 'Long Text', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 12:54:37', 0, '2014-10-07 12:54:37'),
-(970, 206, 'BOOLEAN', 'Boolean', 'Boolean', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-08 05:22:54', 0, '2008-10-14 05:22:54'),
-(971, 206, 'VARCHAR', 'Characters', 'Characters', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 12:54:37', 0, '2014-10-07 12:54:37'),
-(972, 206, 'DATE', 'Date', 'Date', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 12:54:37', 0, '2014-10-07 12:54:37'),
-(973, 206, 'FILE', 'File', 'File', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 12:54:38', 0, '2014-10-07 12:54:38'),
-(974, 206, 'IMAGE', 'Image', 'Image', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 12:54:38', 0, '2014-10-07 12:54:38'),
-(975, 206, 'OPTION_LIST', 'Option List', 'Option List', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 12:54:38', 0, '2014-10-07 12:54:38'),
-(976, 206, 'LIST', 'List', 'List', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 12:54:38', 0, '2014-10-07 12:54:38'),
-(977, 206, 'MULTI_SELECT', 'Multi Select', 'Multi Select', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 12:54:39', 0, '2014-10-07 12:54:39'),
-(978, 206, 'DATETIME', 'Date & Time', 'Date & Time', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-08 05:22:53', 0, '2014-10-08 05:22:53'),
-(979, 207, 'EXTERNAL', 'External', 'External', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-10-22 07:41:33', 34, '2014-10-22 07:41:33'),
-(980, 207, 'INTERNAL', 'Internal', 'Internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-10-22 07:41:34', 34, '2014-10-22 07:41:34'),
-(981, 208, 'LIST', 'List', 'List', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-10-24 13:29:30', 1, '2014-10-24 16:11:06'),
-(982, 208, 'GRID', 'Grid', 'Grid', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-10-24 13:29:30', 1, '2014-10-24 16:11:05'),
-(983, 208, 'TABLE', 'Table', 'Table', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-10-24 13:29:31', 1, '2014-10-24 16:11:06'),
-(984, 208, 'PARAGRAPH', 'Paragraph', 'Paragraph', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-10-24 13:29:31', 1, '2014-10-24 16:11:05'),
-(985, 184, 'REPORT', 'Report', 'Report', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-10-25 10:43:25', 34, '2014-10-25 10:43:25'),
-(986, 209, 'ACCESS', 'Access', 'Access', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-02 05:01:23', 34, '2014-11-02 05:01:23'),
-(987, 209, 'SALES', 'Sales', 'Sales', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-02 05:01:23', 34, '2014-11-02 05:01:23'),
-(988, 209, 'PUR', 'Purchasing', 'Purchasing', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-02 05:01:23', 34, '2014-11-02 05:01:23'),
-(989, 209, 'FIN', 'Finance', 'Finance', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-02 05:01:24', 34, '2014-11-02 05:01:24'),
-(990, 209, 'INV', 'Inventory', 'Inventory', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-02 05:01:24', 34, '2014-11-02 05:01:24'),
-(991, 209, 'HR', 'HR', 'HR', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-02 05:01:24', 34, '2014-11-02 05:01:24'),
-(992, 210, 'CHEMICAL', 'Chemical', 'Chemical', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-07 05:52:35', 34, '2014-11-07 05:52:35'),
-(993, 210, 'MEDICAL', 'Medical', 'Medical', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-07 05:52:36', 34, '2014-11-07 05:52:36'),
-(994, 210, 'IT', 'IT', 'IT', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-07 05:52:36', 34, '2014-11-07 05:52:36'),
-(995, 210, 'LAB', 'Lab', 'Lab', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-07 05:52:36', 34, '2014-11-07 05:52:36'),
-(996, 210, 'DRUG', 'Drug', 'Drug', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-07 05:52:37', 34, '2014-11-07 05:52:37'),
-(997, 210, 'OFFICE', 'Office', 'Office', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-07 05:52:37', 34, '2014-11-07 05:52:37'),
-(998, 210, 'TRAVEL', 'Travel', 'Travel', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-07 05:52:37', 34, '2014-11-07 05:52:37'),
-(999, 210, 'METFAB', 'MetaFab', 'MetaFab', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-07 05:52:38', 34, '2014-11-07 05:52:38'),
-(1000, 210, 'DIODE', 'Diodes', 'Diodes', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-07 05:52:38', 34, '2014-11-07 05:52:38'),
-(1001, 210, 'CLUSTER', 'Cluster', 'Cluster', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-07 05:52:38', 34, '2014-11-07 05:52:38'),
-(1002, 182, 'cc', 'Change Control', '800. Change Control', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-11-07 07:50:59', 1, '2014-11-07 07:50:59'),
-(1003, 84, 'EXPENSE_RAW', 'Exepnse Raw', 'Exepnse Raw', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-11-15 14:04:36', 34, '2015-02-09 08:04:12'),
-(1004, 211, 'PRODUCTION', 'Production', 'Production', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-01 06:55:11', 34, '2014-12-01 06:55:11'),
-(1005, 211, 'SHIPPING', 'Shipping', 'Shipping', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-01 06:55:12', 34, '2014-12-01 06:55:12'),
-(1006, 211, 'RECEVING', 'Receving', 'Receving', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-01 06:55:12', 34, '2014-12-01 06:55:12'),
-(1007, 211, 'LOCATION', 'Location', 'Location', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-01 06:55:13', 34, '2014-12-01 06:55:13'),
-(1008, 211, 'INVENTORY', 'Inventory', 'Inventory', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-01 06:55:13', 34, '2014-12-01 06:55:13'),
-(1009, 211, 'MATERIAL', 'Material', 'Material', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-01 06:55:13', 34, '2014-12-01 06:55:13'),
-(1010, 212, 'HP_LJ', 'HP LaserJet', 'HP LaserJet', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-01 09:41:02', 34, '2014-12-01 09:41:02'),
-(1011, 212, 'ZEBRA_XML', 'Zebra XML', 'Zebra XML', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-01 09:41:02', 34, '2014-12-01 09:41:02'),
-(1012, 212, 'EPSON_IJ', 'EPSON InkJet', 'EPSON InkJet', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-01 09:41:02', 34, '2014-12-01 09:41:02'),
-(1013, 213, 'ALMUNI_VISIT', 'Almuni Visit', 'Almuni Visit', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-07 04:45:07', 34, '2014-12-07 04:45:07'),
-(1014, 213, 'MAIL', 'Mail', 'Mail', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-07 04:45:08', 34, '2014-12-07 04:45:08'),
-(1015, 213, 'CAMPUS_VISIT', 'Campus Visit', 'Campus Visit', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-07 04:45:08', 34, '2014-12-07 04:45:08'),
-(1016, 213, 'INDIRECT', 'In Direct', 'In Direct', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-07 04:45:08', 34, '2014-12-07 04:45:08'),
-(1017, 213, 'DIRECT', 'Direct', 'Direct', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-07 04:45:09', 34, '2014-12-07 04:45:09'),
-(1018, 213, 'WEB', 'Web', 'Web', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-07 04:45:09', 34, '2014-12-07 04:45:09'),
-(1019, 213, 'GOOGLE', 'Google', 'Google', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-07 04:45:09', 34, '2014-12-07 04:45:09'),
-(1020, 213, 'MOBILE', 'Mobile', 'Mobile', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-07 04:45:09', 34, '2014-12-07 04:45:09'),
-(1021, 214, 'ASIA', 'Asia', 'Asia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 06:05:26', 1, '2014-12-08 06:05:26'),
-(1022, 214, 'NORTH_AMERICA', 'North America', 'North America', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 06:05:26', 1, '2014-12-08 06:05:26'),
-(1023, 214, 'OTHERS', 'Others', 'Others', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 06:05:27', 1, '2014-12-08 06:05:27'),
-(1024, 214, 'GERMANY', 'Germany', 'Germany', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 06:05:27', 1, '2014-12-08 06:05:27'),
-(1025, 214, 'EUROPE', 'Eurpoe', 'Europe', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 06:05:28', 1, '2014-12-08 06:05:28'),
-(1026, 214, 'RUSSIA', 'Russia', 'Russia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 06:05:28', 1, '2014-12-08 06:05:28'),
-(1027, 214, 'CHINA', 'China', 'China', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 06:05:29', 1, '2014-12-08 06:05:29'),
-(1028, 214, 'INDIA', 'India', 'India', 6, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 06:05:29', 1, '2014-12-08 11:24:09'),
-(1029, 215, 'PROD_AGENT', 'Production Associate', 'Production Associate', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 11:53:52', 34, '2014-12-27 12:29:42'),
-(1030, 215, 'SALES_LEAD', 'Sales Lead', 'Sales Lead', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 11:53:53', 34, '2014-12-27 12:29:43'),
-(1031, 215, 'SALES_DIR', 'Sales Director', 'Sales Director', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 11:53:53', 34, '2014-12-27 12:29:42'),
-(1032, 215, 'SALES_AGENT', 'Sales Associate', 'Sales Agent', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 11:53:53', 34, '2014-12-27 12:29:41'),
-(1033, 215, 'SALES_MNGR', 'Sales Manager', 'Sales Manager', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 11:53:53', 34, '2014-12-27 12:29:43'),
-(1034, 215, 'PROD_MNGR', 'Production Manager', 'Production Manager', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 11:53:54', 34, '2014-12-27 12:29:43'),
-(1035, 215, 'PROD_DIR', 'Production Director', 'Production Director', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 11:53:54', 34, '2014-12-27 12:29:44'),
-(1036, 215, 'PROD_LEAD', 'Production Lead', 'Production Lead001', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 11:53:54', 34, '2014-12-27 12:29:44'),
-(1037, 216, 'HIGH_VOLUME', 'High Volume', 'High Volume', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-09 05:04:29', 34, '2014-12-27 12:37:45'),
-(1038, 216, 'NEW_CUSTOMER', 'New Customer', 'New Customer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-09 05:04:29', 34, '2014-12-27 12:37:46'),
-(1039, 216, 'STRATEGIC', 'Strategic Sales', 'Strategic Sales', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-09 05:04:30', 34, '2014-12-27 12:37:45'),
-(1040, 216, 'NEW_LOCATION', 'New Location', 'New Geographic Location', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-09 05:04:30', 34, '2014-12-27 12:37:45'),
-(1041, 216, 'NEW_PRODUCT', 'New Product', 'New Product', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-09 05:04:30', 34, '2014-12-27 12:37:44'),
-(1042, 216, 'CRITICAL_CUSTOMER', 'Critical Customer', 'Critical Customer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-09 05:04:31', 34, '2014-12-27 12:37:46'),
-(1043, 216, 'GOVERMENT', 'Goverment', 'Goverment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-09 05:04:31', 34, '2014-12-27 12:37:47'),
-(1044, 216, 'SOCIAL', 'Social Sector', 'Social Sector', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-09 05:04:31', 34, '2014-12-27 12:37:47'),
-(1045, 217, 'RFI', 'RFI', 'Request for Information', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-04 04:57:44', 34, '2015-01-04 04:57:44'),
-(1046, 217, 'GENERAL', 'General', 'General', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-04 04:57:44', 34, '2015-01-04 04:57:44'),
-(1047, 217, 'SALES', 'Sales', 'Sales Team', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-04 04:57:45', 34, '2015-01-04 04:57:45'),
-(1049, 218, 'BUDGET', 'Budget', 'Budget', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-12 14:01:02', 34, '2015-01-12 14:01:02'),
-(1050, 218, 'TAX', 'Tax', 'Tax', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-12 14:01:03', 34, '2015-01-12 14:01:03'),
-(1051, 218, 'CORP', 'CORP', 'Corporate', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-12 14:01:03', 34, '2015-01-12 14:01:03'),
-(1052, 219, 'OWN', 'Owned', 'Owned', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-12 16:42:29', 34, '2015-01-12 16:42:29'),
-(1053, 219, 'LEASE', 'Leased', 'Leased', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-12 16:42:29', 34, '2015-01-12 16:42:29'),
-(1054, 219, 'RENT', 'Rent', 'Rent', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-12 16:42:30', 34, '2015-01-12 16:42:30'),
-(1055, 182, 'da', 'Document & Analysis', '903. Document & Analysis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-19 16:10:32', 34, '2015-05-05 15:32:07'),
-(1056, 182, 'pos', 'Point Of Sale', '206. Point Of Sale', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-19 16:11:59', 34, '2015-01-19 16:13:30'),
-(1057, 184, 'UPLOAD', 'Mass Upload', 'Mass Upload', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-22 02:44:43', 34, '2015-01-22 02:44:43'),
-(1058, 83, 'BD', 'Budgetary Debit', 'Budgetary Debit', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-26 02:34:51', 34, '2015-01-26 02:34:51'),
-(1059, 86, 'POS', 'POS', 'Point Of Sale', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-02 02:31:18', 34, '2015-02-02 02:31:18'),
-(1060, 220, 'POS_RETURN', 'POS Return', 'POS Return', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-02 08:49:36', 34, '2015-02-02 08:49:36'),
-(1061, 220, 'SHIPPING', 'Shipping', 'Shipping', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-02 08:49:37', 34, '2015-02-02 08:49:37'),
-(1062, 220, 'RECEVING', 'Receiving', 'Receiving', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-02 08:49:39', 34, '2015-02-02 08:49:39'),
-(1063, 220, 'POS_TRANSACTION', 'POS Transaction', 'POS Transaction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-02 08:49:39', 34, '2015-02-02 08:49:39'),
-(1064, 220, 'MO_RECEVING', 'Move Order Receipt', 'Move Order Receipt', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-02 08:49:39', 34, '2015-02-02 08:49:39'),
-(1065, 157, 'POS_TRANSACTION', 'POS Transaction', 'POS Transaction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-04 06:43:40', 34, '2015-02-04 06:43:40'),
-(1066, 211, 'POS', 'POS Transaction', 'POS Transaction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-05 02:37:21', 34, '2015-02-05 02:37:21'),
-(1067, 217, 'SUPPORT', 'Support', 'Support', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-05 03:03:49', 34, '2015-02-05 03:03:49'),
-(1068, 221, 'FORUM', 'Forum', 'Forum', NULL, 1, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-06 05:51:23', 34, '2015-02-06 05:51:23'),
-(1069, 221, 'DOCUMENTATION', 'Documentation', 'Documentation', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-06 05:51:23', 34, '2015-02-06 05:51:23'),
-(1070, 221, 'SUPPORT_REQUEST', 'Support Request', 'Support Request', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-06 05:51:24', 34, '2015-02-06 05:51:24'),
-(1071, 221, 'CONTENT', 'Content', 'Content', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-06 05:51:24', 34, '2015-02-06 05:51:24'),
-(1072, 221, 'SERVICE_REQUEST', 'Service Request', 'Service Request', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-06 05:51:24', 34, '2015-02-06 05:51:24'),
-(1073, 222, 'PLANNING', 'Planning', 'Planning', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-07 14:59:42', 34, '2015-03-08 10:26:56'),
-(1074, 222, 'MODEL', 'Model', 'Model', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-07 14:59:43', 34, '2015-02-07 15:03:01'),
-(1075, 222, 'OPTION_CLASS', 'Option Class', 'Option Class', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-07 14:59:43', 34, '2015-02-07 15:03:02'),
-(1076, 222, 'PRODUCT_FAMILY', 'Product Family', 'Product Family', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-07 14:59:44', 34, '2015-02-07 15:03:02'),
-(1077, 222, 'STANDARD', 'Standard', 'Standard', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-07 14:59:44', 34, '2015-02-07 15:03:02'),
-(1078, 84, 'TEMPLATE', 'Template', 'Template', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 08:01:59', 34, '2015-02-09 08:04:11'),
-(1079, 182, 'am', 'Asset Maintenance', '210.Asset Maintenance', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-16 05:23:28', 34, '2015-02-16 05:24:12'),
-(1080, 182, 'adm', 'Admin', '911.Admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-17 13:17:52', 34, '2015-02-17 13:17:52'),
-(1081, 223, 'ALL_ORG_BOTH', 'All Org Both', 'All Org Both Access', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-21 18:48:14', 34, '2015-02-21 18:48:14'),
-(1082, 223, 'ALL_ORG_READ', 'All Org Read', 'All Org Read Acess', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-21 18:48:15', 34, '2015-02-21 18:48:15'),
-(1083, 223, 'ASIA_BOTH', 'Asia Both', 'Asia Both', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-21 18:48:15', 34, '2015-02-21 18:48:15'),
-(1084, 223, 'US_BOTH', 'US Both', 'US Both', NULL, 1, NULL, NULL, 1, NULL, NULL, 34, '2015-02-21 18:48:15', 34, '2015-02-21 18:48:15'),
-(1085, 223, 'US_READ', 'US Read', 'US Read', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-21 18:48:16', 34, '2015-02-21 18:48:16'),
-(1086, 223, 'ASIA_READ', 'Asia Read', 'Asia Read', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-21 18:48:16', 34, '2015-02-21 18:48:16'),
-(1087, 223, 'ROW_BOTH', 'ROW Both', 'ROW Both', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-21 18:48:16', 34, '2015-02-21 18:48:16'),
-(1088, 223, 'ROW_READ', 'ROW Read', 'ROW Read', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-21 18:48:17', 34, '2015-02-21 18:48:17'),
-(1089, 224, 'de_DE', 'Gerrman', 'Deutsch - Gerrman', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-24 09:18:27', 34, '2015-03-08 14:03:35'),
-(1090, 224, 'en_US', 'English', 'English', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-24 09:18:28', 34, '2015-02-24 09:25:01'),
-(1091, 224, 'fr_FR', 'French', 'français - French', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-24 09:18:28', 34, '2015-03-08 14:03:35'),
-(1092, 224, 'hi_IN', 'Hindi - India', 'हिंदी - Hindi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-24 09:18:29', 34, '2015-03-08 17:23:26'),
-(1093, 224, 'zh_CN', 'Chinese - Simplified', '中国 - Chinese - Simplified', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-08 17:20:54', 34, '2015-03-08 17:23:25'),
-(1094, 224, 'ar_SA', 'Arabic - Saudi Arabia', 'العربية - Arabic', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-08 17:59:29', 34, '2015-03-08 17:59:29'),
-(1095, 225, 'CALIBRATION', 'Calibration', 'Calibration', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:31:11', 34, '2015-03-16 10:31:11'),
-(1096, 225, 'MAINTENANCE', 'Maitenance', 'Maitenance', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:31:12', 34, '2015-03-16 10:31:12'),
-(1097, 225, 'LUBRICATION', 'Lubrication', 'Lubrication', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:31:13', 34, '2015-03-16 10:31:13'),
-(1098, 225, 'REMOVAL', 'Removal', 'Removal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:31:13', 34, '2015-03-16 10:31:13'),
-(1099, 225, 'PREVENTION', 'Prevention', 'Prevention', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:31:14', 34, '2015-03-16 10:31:14'),
-(1100, 225, 'INSPECTION', 'Inspection', 'Inspection', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:31:14', 34, '2015-03-16 10:31:14'),
-(1101, 226, 'REPAIR', 'Repair', 'Repair', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:34:28', 34, '2015-03-16 10:34:28'),
-(1102, 226, 'DAMAGE', 'Damage', 'Damage', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:34:30', 34, '2015-03-16 10:34:30'),
-(1103, 226, 'EXPANSION', 'Expansion', 'Expansion', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:34:30', 34, '2015-03-16 10:34:30'),
-(1104, 226, 'REWORK', 'Rework', 'Rework', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:34:31', 34, '2015-03-16 10:34:31'),
-(1105, 226, 'HEALTH_SAFTEY', 'Health & Safety', 'Health & Safety', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:34:32', 34, '2015-03-16 10:34:32'),
-(1106, 227, 'ROUTINE', 'Routine', 'Routine', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:36:52', 34, '2015-03-16 10:36:52'),
-(1107, 227, 'ACCIDENT', 'Accident', 'Accident', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:36:53', 34, '2015-03-16 10:36:53'),
-(1108, 227, 'INCIDENT', 'Incident', 'Incident', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:36:54', 34, '2015-03-16 10:36:54'),
-(1109, 227, 'WARRANTY', 'Warranty', 'Warranty', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:36:55', 34, '2015-03-16 10:36:55'),
-(1110, 228, 'ROUTINE', 'Routine', 'Routine', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-21 09:27:35', 34, '2015-03-21 09:27:35'),
-(1111, 228, 'PREVENTIVE', 'Preventive', 'Preventive', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-21 09:27:38', 34, '2015-03-21 09:27:38'),
-(1112, 228, 'REACTIVE', 'Reactive', 'Reactive', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-21 09:27:40', 34, '2015-03-21 09:27:40'),
-(1113, 228, 'FACILITIES', 'Facilities', 'Facilities', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-21 09:27:41', 34, '2015-03-21 09:27:41'),
-(1118, 228, 'PLANNED', 'Planned', 'Planned', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-21 09:28:43', 34, '2015-03-21 09:28:43'),
-(1119, 228, 'EMERGENCY', 'Emeregency', 'Emeregency', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-21 09:28:43', 34, '2015-03-21 09:28:43'),
-(1120, 86, 'AM', 'AM', 'Asset Maintenance', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-21 17:46:41', 34, '2015-03-21 17:46:41'),
-(1121, 182, 'ec', 'eCommerce', '210.eCommerce', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-27 03:32:17', 34, '2015-03-27 03:32:17'),
-(1122, 221, 'ITEM', 'Item', 'Item', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-28 04:19:00', 34, '2015-03-28 04:19:00'),
-(1123, 221, 'PRODUCT', 'Product', 'Product', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-28 09:19:03', 34, '2015-03-28 09:19:03'),
-(1124, 229, 'SUBSTITUTE', 'Substitute', 'Substitute', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-29 19:55:35', 34, '2015-03-29 19:55:35'),
-(1125, 229, 'CROSS_SELL', 'Cross Sell', 'Cross Sell', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-29 19:55:35', 34, '2015-03-29 19:55:35'),
-(1126, 229, 'UP_SELL', 'Up Sell', 'Up Sell', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-29 19:55:36', 34, '2015-03-29 19:55:36'),
-(1127, 229, 'COMPLIMENTARY', 'Complimentary', 'Complimentary', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-29 19:55:36', 34, '2015-03-29 19:55:36'),
-(1128, 229, 'NEW_VERSION', 'New Version', 'New Version', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-29 19:55:37', 34, '2015-03-29 19:55:37'),
-(1129, 229, 'SERVICE', 'Service', 'Service', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-29 19:55:37', 34, '2015-03-29 19:55:37'),
-(1130, 229, 'FREE_GIFT', 'Free Gift', 'Free Gift', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-29 19:55:38', 34, '2015-03-29 19:55:38'),
-(1131, 229, 'PREREQUISITE', 'Prerequisite', 'Prerequisite', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-29 19:55:38', 34, '2015-03-29 19:55:38'),
-(1132, 229, 'EQUIVALENT', 'Equivalent', 'Equivalent', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-29 20:38:49', 34, '2015-03-29 20:38:49'),
-(1133, 230, 'HOME', 'Home', 'Home', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-06 09:33:29', 34, '2015-04-06 09:33:29'),
-(1134, 230, 'OTHERS', 'Others', 'Others', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-06 09:33:34', 34, '2015-04-06 09:33:34'),
-(1135, 230, 'DELIVERY', 'Delivery', 'Delivery', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-06 09:33:35', 34, '2015-04-06 09:33:35'),
-(1136, 230, 'BILLING', 'Billing', 'Billing', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-06 09:33:36', 34, '2015-04-06 09:33:36'),
-(1137, 230, 'OFFICE', 'Office', 'Office', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-06 09:33:36', 34, '2015-04-06 09:33:36'),
-(1138, 182, 'hd', 'Help Desk', '911. Help Desk', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-15 17:29:10', 34, '2015-04-15 17:29:10'),
-(1139, 231, 'MEDIUM', 'Medium - Department', 'Medium - Department', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:00:49', 34, '2015-04-16 14:00:49'),
-(1140, 231, 'HIGH', 'High -  Organization/Entity', 'High - Organization/Entity', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:00:50', 34, '2015-04-16 14:00:50'),
-(1141, 231, 'CRITICAL', 'Enterprise Wide', 'Enterprise Wide', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:00:51', 34, '2015-04-16 14:00:51'),
-(1142, 231, 'LOW', 'Low Single User', 'Low Single User', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:00:52', 34, '2015-04-16 14:00:52'),
-(1143, 232, 'RESOLVED', 'Resolved', 'Resolved', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:13:24', 34, '2015-04-16 14:13:24'),
-(1144, 232, 'ACTIVE', 'Active', 'Active', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:13:25', 34, '2015-04-16 14:13:25'),
-(1145, 232, 'WAITING_INFO', 'Waiting User Info', 'Waiting User Info', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:13:25', 34, '2015-04-16 14:13:25'),
-(1146, 232, 'NEW', 'New', 'New', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:13:26', 34, '2015-04-16 14:13:26'),
-(1147, 232, 'CANCELLED', 'Cancelled', 'Cancelled', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:13:27', 34, '2015-04-16 14:13:27'),
-(1148, 232, 'CLOSED', 'Closed', 'Closed', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:13:29', 34, '2015-04-16 14:13:29'),
-(1149, 233, 'ADVICE', 'Advice', 'Advice', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:16:03', 34, '2015-04-16 14:16:03'),
-(1150, 233, 'REQUEST', 'Request', 'Request', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:16:04', 34, '2015-04-16 14:16:04'),
-(1151, 233, 'FAILURE', 'Failure', 'Failure', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:16:05', 34, '2015-04-16 14:16:05'),
-(1152, 234, 'FTP_ACCESS', 'FTP Access', 'FTP Access', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:26:50', 34, '2015-04-16 14:26:50'),
-(1153, 234, 'EMAIL_CLIENT', 'Email Client', 'Email Client', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:26:52', 34, '2015-04-16 14:26:52'),
-(1154, 234, 'EMAIL_CLIENT_WEB', 'Email Web Access', 'Email Web Access', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:26:53', 34, '2015-04-16 14:26:53'),
-(1155, 234, 'NEW_LAPTOP', 'New Laptop', 'New Laptop', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:26:53', 34, '2015-04-16 14:26:53'),
-(1156, 234, 'NEW_DESKTOP', 'New Desktop', 'New Desktop', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:26:54', 34, '2015-04-16 14:26:54'),
-(1157, 234, 'NEW_SOFTWARE', 'New Software', 'New Software', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:26:54', 34, '2015-04-16 14:26:54'),
-(1158, 235, 'NORMAL', 'Normal', 'Normal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 16:09:02', 34, '2015-04-16 16:09:02'),
-(1159, 235, 'HIERARCHICAL', 'Hierarchical', 'Hierarchical', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 16:09:03', 34, '2015-04-16 16:09:03'),
-(1160, 235, 'FUNCTIONAL', 'Functional', 'Functional', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 16:09:04', 34, '2015-04-16 16:09:04'),
-(1161, 236, 'CR_CREATED', 'Change Request Created', 'Change Request Created', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-18 15:22:15', 34, '2015-04-18 15:22:15'),
-(1162, 236, 'ISSUE_FIXED', 'Issue Fixed', 'Issue Fixed', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-18 15:22:15', 34, '2015-04-18 15:22:15'),
-(1163, 236, 'USER_TRAINING', 'User Training', 'User Training', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-18 15:22:16', 34, '2015-04-18 15:22:16'),
-(1164, 237, 'ENHANCEMENT', 'Enhancement', 'Enhancement', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-19 04:55:17', 34, '2015-04-19 04:55:17'),
-(1165, 237, 'BUG_FIX', 'Bug Fix', 'Bug Fix', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-19 04:55:18', 34, '2015-04-19 04:55:18'),
-(1166, 237, 'DATA_FIX', 'Data Fix', 'Data Fix', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-19 04:55:19', 34, '2015-04-19 04:55:19'),
-(1167, 237, 'CUSTOM_COMP', 'Custom Component', 'Custom Component', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-19 04:55:20', 34, '2015-04-19 04:55:20'),
-(1168, 182, 'cst', 'Costing', '212.Costing', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-05 14:44:44', 34, '2015-05-05 14:44:44'),
-(1169, 119, 'SALES', 'Sales', 'Sales', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-06 04:38:53', 34, '2015-05-06 04:38:53'),
-(1170, 119, 'LOCAL_ADMIN', 'Local Admin', 'Local Admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-06 04:38:54', 34, '2015-05-06 04:38:54'),
-(1171, 119, 'MANAGEMENT', 'Management', 'Management', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-06 04:38:55', 34, '2015-05-06 04:38:55'),
-(1172, 238, 'MANUFAC', 'Manufacturer', 'Manufacturer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-08 03:37:28', 34, '2015-05-08 03:37:28'),
-(1173, 238, 'PACKAG', 'Packager', 'Packager', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-08 03:37:30', 34, '2015-05-08 03:37:30'),
-(1174, 238, 'PROCESS', 'Processor', 'Processor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-08 03:37:30', 34, '2015-05-08 03:37:30'),
-(1175, 238, 'DIST', 'Distributor', 'Distributor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-08 03:37:31', 34, '2015-05-08 03:37:31'),
-(1176, 239, 'DISTRIBUTOR', 'Distributor', 'Distributor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-11 04:35:24', 34, '2015-05-11 04:35:24'),
-(1177, 239, 'END_CUST', 'End Customer', 'End Customer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-11 04:35:25', 34, '2015-05-11 04:35:25'),
-(1178, 239, 'BLANKET', 'Blanket Agreement', 'Blanket Agreement', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-11 04:35:26', 34, '2015-05-11 04:35:26'),
-(1179, 239, 'VMI', 'VMI', 'VMI', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-11 04:35:27', 34, '2015-05-11 04:35:27'),
-(1180, 239, 'TRADE_CUST', 'Trade Customer', 'Trade Customer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-11 04:35:27', 34, '2015-05-11 04:35:27'),
-(1181, 184, 'CONTAINER', 'Container', 'Container', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 04:13:49', 34, '2015-05-25 04:13:49'),
-(1182, 240, 'CLOSED', 'Closed', 'Closed', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:20:31', 34, '2015-05-25 20:23:00'),
-(1183, 240, 'CANCELLED', 'Cancelled', 'Cancelled', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:20:31', 34, '2015-05-25 20:23:03'),
-(1184, 240, 'COMPLETED', 'Completed', 'Completed', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:20:32', 34, '2015-05-25 20:23:01'),
-(1185, 240, 'APPROVED', 'Approved', 'Approved', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:20:33', 34, '2015-05-25 20:23:02'),
-(1186, 240, 'ON_HOLD', 'On Hold', 'On Hold', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:23:01', 34, '2015-05-25 20:23:01'),
-(1187, 240, 'REJECTED', 'Rejected', 'Rejected', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:23:04', 34, '2015-05-25 20:23:04'),
-(1188, 240, 'ACCEPTED', 'Accepted', 'Accepted', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:23:04', 34, '2015-05-25 20:23:04'),
-(1189, 241, 'EXCHANGE', 'Exchange', 'Exchange', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:47', 34, '2015-05-31 05:10:47'),
-(1190, 241, 'LOANER', 'Loaner', 'Loaner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:47', 34, '2015-05-31 05:10:47'),
-(1191, 241, 'LOANER_REPAIR_RETURN', 'Loaner, Repair and Return', 'Loaner, Repair and Return', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:48', 34, '2015-05-31 05:10:48'),
-(1192, 241, 'ADVANCE_EXCHANGE', 'Advance Exchange', 'Advance Exchange', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:48', 34, '2015-05-31 05:10:48'),
-(1193, 241, 'REPAIR_RETURN', 'Repair and Return', 'Repair and Return', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:49', 34, '2015-05-31 05:10:49'),
-(1194, 241, 'REPLACEMENT', 'Replacement', 'Replacement', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:49', 34, '2015-05-31 05:10:49'),
-(1195, 241, 'STANDARD', 'Standard', 'Standard', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:50', 34, '2015-05-31 05:10:50'),
-(1196, 242, 'MATERIAL', 'Material', 'Material', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 19:43:32', 34, '2015-05-31 19:43:32');
-INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_code`, `option_line_value`, `description`, `value_group_id`, `priority`, `status`, `rev_enabled`, `rev_number`, `effective_start_date`, `effective_end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
-(1197, 242, 'LABOR', 'Labor', 'Labor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 19:43:32', 34, '2015-05-31 19:43:32'),
-(1198, 242, 'EXPENSE', 'Expense', 'Expense', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 19:43:32', 34, '2015-05-31 19:43:32'),
-(1199, 243, 'CONTRACT', 'Contract', 'Contract', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-02 14:20:48', 34, '2015-06-02 14:20:48'),
-(1200, 243, 'PROJECT', 'Project', 'Project', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-02 14:20:49', 34, '2015-06-02 14:20:49'),
-(1201, 243, 'OTHER', 'Others', 'Others', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-02 14:20:49', 34, '2015-06-02 14:20:49'),
-(1202, 243, 'SERVICE', 'Service', 'Service', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-02 14:20:50', 34, '2015-06-02 14:20:50'),
-(1203, 243, 'SALES', 'Sales', 'Sales', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-02 14:20:50', 34, '2015-06-02 14:20:50'),
-(1204, 243, 'RUSSIA', 'Russia', 'Russia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-02 14:20:51', 34, '2015-06-02 14:20:51'),
-(1205, 182, 'prj', 'Projects', '400. Projects', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-08 04:44:40', 34, '2015-06-08 04:44:40'),
-(1206, 244, 'PRIMARY', 'Primary', 'Primary', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-09 16:34:29', 34, '2015-06-09 16:34:29'),
-(1207, 244, 'SECONDARY', 'Secondary', 'Secondary', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-09 16:34:30', 34, '2015-06-09 16:34:30'),
-(1208, 245, 'PRIMARY', 'Primary', 'Primary', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 08:12:34', 34, '2015-06-14 08:12:34'),
-(1209, 245, 'SECONDARY', 'Secondary', 'Secondary', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 08:12:35', 34, '2015-06-14 08:12:35'),
-(1210, 245, 'NON_PAYING', 'Non Paying', 'Non Paying', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 08:12:35', 34, '2015-06-14 08:12:35'),
-(1211, 246, 'LABOR', 'Labor', 'Labor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:19:57', 34, '2015-06-14 09:19:57'),
-(1212, 246, 'EQUIPMENT', 'Equipment', 'Equipment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:19:58', 34, '2015-06-14 09:19:58'),
-(1213, 246, 'CHARGEBACKS', 'Chargebacks', 'Chargebacks', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:19:58', 34, '2015-06-14 09:19:58'),
-(1214, 246, 'ACQUISITION_COSTS', 'Acquisition Costs', 'Acquisition Costs', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:19:58', 34, '2015-06-14 09:19:58'),
-(1215, 246, 'MATERIALS', 'Materials', 'Materials', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:19:59', 34, '2015-06-14 09:19:59'),
-(1216, 246, 'CONTRACTOR', 'Contractor', 'Contractor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:19:59', 34, '2015-06-14 09:19:59'),
-(1217, 247, 'DIRECT', 'Direct', 'Direct', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:25:13', 34, '2015-06-14 09:25:13'),
-(1218, 247, 'LABOR', 'Labor', 'Labor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:25:14', 34, '2015-06-14 09:25:14'),
-(1219, 247, 'CHARGEBACKS', 'Chargebacks', 'Chargebacks', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:25:15', 34, '2015-06-14 09:25:15'),
-(1220, 247, 'EQUIPMENT', 'Equipment', 'Equipment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:25:15', 34, '2015-06-14 09:25:15'),
-(1221, 247, 'INDIRECT', 'Indirect', 'Indirect', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:25:15', 34, '2015-06-14 09:25:15'),
-(1222, 247, 'SALES_REVENUE', 'Sales Revenue', 'Sales Revenue', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:25:16', 34, '2015-06-14 09:25:16'),
-(1223, 248, 'ITEM', 'Material Items', 'Material Items', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 15:22:16', 34, '2015-06-14 15:22:16'),
-(1224, 248, 'LABOR', 'Labor', 'Labor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 15:22:16', 34, '2015-06-14 15:22:16'),
-(1225, 248, 'FINANCE', 'Financial Elements', 'Financial Elements', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 15:22:17', 34, '2015-06-14 15:22:17'),
-(1226, 248, 'EQUIPMENT', 'Equipment', 'Equipment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 15:22:17', 34, '2015-06-14 15:22:17'),
-(1227, 250, 'BENEFITS', 'Benefits', 'Benefits', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-21 06:38:00', 34, '2015-06-21 06:38:00'),
-(1228, 250, 'CONTRACT_ADMINISTRATION', 'Contract Administration', 'Contract Administration', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-21 06:38:00', 34, '2015-06-21 06:38:00'),
-(1229, 250, 'BUDGET_CONTROL', 'Budget Control', 'Budget Control', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-21 06:38:01', 34, '2015-06-21 06:38:01'),
-(1230, 250, 'BUSINESS_DEVELOPMENT', 'Business Development', 'Business Development', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-21 06:38:01', 34, '2015-06-21 06:38:01'),
-(1231, 250, 'BUILD', 'Build', 'Build', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-21 06:38:02', 34, '2015-06-21 06:38:02'),
-(1232, 250, 'CONTRACT CHANGE MANAGEMENT', 'Contract Change Management', 'Contract Change Management', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-21 06:38:02', 34, '2015-06-21 06:38:02'),
-(1233, 251, 'LOWEST_TASK', 'Lowest Task', 'Lowest Task', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:45', 34, '2015-06-22 07:24:45'),
-(1234, 251, 'LOWEST_TASK_PERIOD', 'Lowest Task, Period', 'Lowest Task, Period', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:46', 34, '2015-06-22 07:24:46'),
-(1235, 251, 'TOP_TASK_DATE', 'Top Task, Date Range', 'Top Task, Date Range', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:46', 34, '2015-06-22 07:24:46'),
-(1236, 251, 'LOWEST_TASK_DATE', 'Lowest Task, Date Range', 'Lowest Task, Date Range', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:47', 34, '2015-06-22 07:24:47'),
-(1237, 251, 'TOP_TASK', 'Top Task', 'Equipment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:47', 34, '2015-06-22 07:24:47'),
-(1238, 251, 'TOP_TASK_PERIOD', 'Top Task, Period', 'Top Task, Period', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:48', 34, '2015-06-22 07:24:48'),
-(1239, 251, 'PROJECT_PERIOD', 'Project by Period', 'Project by Period', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:48', 34, '2015-06-22 07:24:48'),
-(1240, 251, 'WORK_ORDER', 'Work Order', 'Work Order', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:49', 34, '2015-06-22 07:24:49'),
-(1241, 252, 'APPR_COST', 'Approved Cost', 'Approved Cost', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:09', 34, '2015-07-03 15:32:41'),
-(1242, 252, 'APPR_REV', 'Approved Revenue', 'Approved Revenue', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:09', 34, '2015-07-03 15:32:40'),
-(1243, 252, 'COST_EST', 'Cost Estimate', 'Cost Estimate', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:09', 34, '2015-07-03 15:32:41'),
-(1244, 252, 'REV_EST', 'Revenue Estimate', 'Revenue Estimate', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:09', 34, '2015-07-03 15:32:40'),
-(1245, 252, 'COST_FORECAST', 'Cost Forecast', 'Cost Forecast', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:10', 34, '2015-07-03 15:32:40'),
-(1246, 252, 'REV_FORECAST', 'Revenue Forecast', 'Revenue Forecast', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:10', 34, '2015-07-03 15:32:41'),
-(1247, 253, 'IN', 'Initiation', 'Initiation', NULL, 1, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-08 03:35:44', 34, '2015-07-08 05:05:38'),
-(1248, 253, 'PL', 'Planning', 'Planning', NULL, 2, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-08 03:35:44', 34, '2015-07-08 05:05:38'),
-(1249, 253, 'EX', 'Execution', 'Execution', NULL, 3, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-08 03:35:44', 34, '2015-07-08 05:05:38'),
-(1250, 253, 'MC', 'Monitoring & Control', 'Monitoring & Control', NULL, 4, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-08 03:35:44', 34, '2015-07-08 05:05:38'),
-(1251, 253, 'CL', 'Closure', 'Closure', NULL, 5, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-08 03:35:44', 34, '2015-07-08 05:05:39'),
-(1252, 253, 'DE', 'Definition', 'Definition', NULL, 6, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-08 03:35:44', 34, '2015-07-08 05:05:39'),
-(1253, 254, 'REALIZED_GAIN', 'Realized Gain', 'Realized Gain', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-10 06:07:14', 34, '2015-07-10 06:07:14'),
-(1254, 254, 'WRITE_ON', 'Write On', 'Write On - Increase Revenue', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-10 06:07:14', 34, '2015-07-10 06:07:14'),
-(1255, 254, 'AUTO', 'Automatic', 'Revenue & Invoive amounts can be entred  automatically', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-10 06:07:14', 34, '2015-07-10 06:07:14'),
-(1256, 254, 'WRITE_OFF', 'Write Off', 'Write Off - Reduce Revenue', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-10 06:07:14', 34, '2015-07-10 06:07:14'),
-(1257, 254, 'MANUAL', 'Manual', 'Revenue & Invoive amounts can be entred  manually', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-10 06:07:14', 34, '2015-07-10 06:07:14'),
-(1258, 254, 'REALIZED_LOSS', 'Realized Loss', 'Realized Loss', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-10 06:07:14', 34, '2015-07-10 06:07:14'),
-(1259, 255, 'APPROVED', 'Approved', 'Approved', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-17 15:06:55', 34, '2015-07-17 15:06:55'),
-(1260, 255, 'INPROCESS', 'Inprocess', 'Inprocess', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-17 15:06:55', 34, '2015-07-17 15:06:55'),
-(1261, 255, 'ENTERED', 'Entered', 'Entered', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-17 15:06:56', 34, '2015-07-17 15:06:56'),
-(1262, 255, 'REAPPROVAL', 'Require ReApproval', 'Require ReApproval', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-17 15:06:56', 34, '2015-07-17 15:06:56'),
-(1263, 255, 'ONHOLD', 'On Hold', 'On Hold', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-17 15:06:56', 34, '2015-07-17 15:06:56'),
-(1264, 256, 'EMPLOYEE', 'Employee', 'Employee', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-21 08:05:38', 34, '2015-07-21 08:06:52'),
-(1265, 256, 'INTERNAL', 'Internal', 'Internal Supplier', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-21 08:05:38', 34, '2015-07-21 08:06:51'),
-(1266, 256, 'VMI', 'VMI', 'VMI', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-21 08:05:38', 34, '2015-07-21 08:06:51'),
-(1267, 256, 'FOREIGN', 'Foreign', 'Foreign', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-21 08:06:51', 34, '2015-07-21 08:06:51'),
-(1268, 256, 'EXTN_SUPPLIER', 'External Supplier', 'External Supplier', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-21 08:16:51', 34, '2015-07-21 08:16:51');
+INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_code`, `option_line_value`, `description`, `value_group_id`, `priority`, `status`, `mapper1`, `mapper2`, `rev_enabled`, `rev_number`, `effective_start_date`, `effective_end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+(71, 77, 'ENTERPRISE', 'Enterprise', 'Enterprise Org', NULL, 0, '', NULL, NULL, 'enabled', 1, '2000-01-01', '', 0, '2014-03-26 07:45:39', 0, '2026-03-14 07:45:39'),
+(72, 77, 'LEGAL_ORG', 'Legal', 'Legal Org', NULL, 0, '', NULL, NULL, 'enabled', 1, '2000-01-01', '', 0, '2014-03-26 07:45:40', 0, '2026-03-14 07:45:40'),
+(73, 77, 'BUSINESS_ORG', 'Business', 'Business Org', NULL, 0, '', NULL, NULL, 'enabled', 1, '2000-01-01', '', 0, '2014-03-26 07:45:38', 0, '2026-03-14 07:45:38'),
+(74, 77, 'INVENTORY_ORG', 'Inventory', 'Inventory Org', NULL, 0, '', NULL, NULL, 'enabled', 1, '2000-01-01', '', 0, '2014-03-26 07:45:39', 0, '2026-03-14 07:45:39'),
+(75, 79, 'INTERNATIONAL', 'INTERNATIONAL', 'Standard International Format', NULL, 1, '', NULL, NULL, '', 0, '2000-01-01', '2000-01-01', 0, '0000-00-00 00:00:00', 0, '2019-07-13 06:52:45'),
+(76, 79, 'US_STYLE', 'US_STYLE', 'US Format', NULL, 1, '', NULL, NULL, '', 0, '2000-01-01', '2000-01-01', 0, '0000-00-00 00:00:00', 0, '2019-07-13 06:52:45'),
+(77, 80, 'SEGMENT1', 'Legal Org', 'Legal Organization', 1, 1, 'active', NULL, NULL, 'enabled', 0, '2001-01-01', '', 0, '2014-02-06 07:26:29', 0, '2014-02-06 07:26:29'),
+(78, 80, 'SEGMENT2', 'Business Org', 'Business Organization', 2, 1, 'active', NULL, NULL, 'enabled', 0, '2001-01-01', '', 0, '2014-02-06 07:26:28', 0, '2014-02-06 07:26:28'),
+(79, 80, 'SEGMENT3', 'Cost Center', 'Cost center', 3, 1, 'active', NULL, NULL, 'enabled', 0, '2001-01-01', '', 0, '2014-02-06 07:26:29', 0, '2014-02-06 07:26:29'),
+(80, 80, 'SEGMENT4', 'Account', 'Natural account', 4, 1, 'active', NULL, NULL, 'enabled', 0, '2001-01-01', '', 0, '2014-02-06 07:26:28', 0, '2014-02-06 07:26:28'),
+(81, 80, 'SEGMENT5', 'Product', 'Product', 5, 1, 'active', NULL, NULL, 'enabled', 0, '2001-01-01', '', 0, '2014-02-06 07:26:28', 0, '2014-02-06 07:26:28'),
+(82, 80, 'SEGMENT6', 'Project', 'Project', 11, 1, NULL, NULL, NULL, NULL, NULL, '2001-01-01', NULL, 0, '2014-02-06 07:26:29', 34, '2015-07-25 17:06:25'),
+(83, 80, 'SEGMENT7', 'InterCompany', 'Inter-Company Segment', 1, 1, 'active', NULL, NULL, 'enabled', 0, '2001-01-01', '', 0, '2014-02-06 07:26:29', 0, '2014-02-06 07:26:29'),
+(84, 80, 'SEGMENT8', 'TBU', 'Feature Use', 12, 1, NULL, NULL, NULL, NULL, NULL, '2001-01-01', '1970-01-01', 0, '2014-02-06 07:26:29', 34, '2015-07-25 17:07:21'),
+(85, 81, 'OPEN', 'New & Open', 'New & Open', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-18 09:05:40', 18, '0000-00-00 00:00:00'),
+(86, 81, 'ASSIGNED', 'Assigned', 'Assigned', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-18 09:05:41', 18, '0000-00-00 00:00:00'),
+(87, 82, 'LEGAL_UNIT', 'Legal Unit', 'Represents Legal Unit', 1, 1, '', NULL, NULL, 'enabled', 0, '2000-01-01', '', 0, '2014-02-04 14:17:11', 0, '2014-02-04 14:17:11'),
+(88, 82, 'BUSINESS_UNIT', 'Business Unit', 'Represents Business Unit', 2, 1, '', NULL, NULL, 'enabled', 0, '2000-01-01', '', 0, '2014-02-04 14:17:10', 0, '2014-02-04 14:17:10'),
+(89, 82, 'COST_CENTER', 'Cost center', 'Represents Cost Center', 3, 1, '', NULL, NULL, 'enabled', 0, '2000-01-01', '', 0, '2014-02-04 14:17:10', 0, '2014-02-04 14:17:10'),
+(90, 82, 'PRODUCT_CODE', 'product code', 'Represents Product code', 5, 1, '', NULL, NULL, 'enabled', 0, '2000-01-01', '', 0, '2014-02-04 14:17:10', 0, '2014-02-04 14:17:10'),
+(91, 82, 'INTERCOMPANY', 'Intercompany', 'Intercompany', 1, 1, '', NULL, NULL, 'enabled', 0, '2000-01-01', '', 0, '2014-02-04 14:17:10', 0, '2014-02-04 14:17:10'),
+(92, 82, 'ACCOUNT', 'Natural account', 'Represents NA', 4, 1, '', NULL, NULL, 'enabled', 0, '2000-01-01', '', 0, '2014-02-04 14:17:15', 0, '2014-02-04 14:17:15'),
+(93, 83, 'A', 'Asset', 'Asset', NULL, 0, '', NULL, NULL, '', 0, '1950-01-01', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(94, 83, 'L', 'Liability', 'Liability', NULL, 0, '', NULL, NULL, '', 0, '1950-01-01', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(95, 83, 'E', 'Equity', 'Owners Equity', NULL, 0, '', NULL, NULL, '', 0, '1950-01-01', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(96, 83, 'X', 'Expense', 'Expense', NULL, 0, '', NULL, NULL, '', 0, '1950-01-01', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(97, 83, 'R', 'Revenue', 'Revenue', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-01-26 02:34:50'),
+(98, 83, 'BC', 'Budgetary Credit', 'Budgetary Credit', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-01-26 02:34:51'),
+(99, 84, 'PRODUCT', 'Product', 'Standard Product', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-02-09 11:54:16'),
+(100, 84, 'EXPENSE', 'Expense', 'Expense Items', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-02-09 08:03:49'),
+(101, 84, 'EXPENSE_QTY', 'Expense Qty', 'Expense Qty Tracked', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-02-09 08:03:48'),
+(102, 84, 'NON_PRODUCT', 'Non Product', 'Non product Items', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-02-09 08:03:50'),
+(103, 84, 'MRO', 'MRO', 'MRO Items', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(104, 84, 'FINISHED_GOOD', 'Finished Good', 'Finished Good Items', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-02-09 08:03:50'),
+(105, 84, 'SUB_ASSEMBLY', 'Sub Assembly', 'Sub Assemblies', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-02-09 08:03:51'),
+(106, 84, 'RAW', 'Raw', 'Raw Components', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-02-09 08:03:51'),
+(107, 84, 'EQUIPMENT', 'Equipment', 'Equipments', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-02-09 08:03:51'),
+(108, 84, 'SOFTWARE', 'Software', 'Softwares', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '0000-00-00 00:00:00', 34, '2015-02-09 08:03:52'),
+(109, 85, 'Area', 'Area', 'Area', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(110, 85, 'Document', 'Document', 'Document', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(111, 85, 'Length', 'Length', 'Length', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(112, 85, 'Volume', 'Volume', 'Volume', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(113, 85, 'Weight', 'Weight', 'Weight', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(114, 85, 'Quantity', 'Quantity', 'Quantity', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(115, 85, 'Period', 'Period', 'Period', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(116, 85, 'Money', 'Money', 'Money', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(117, 85, 'Time', 'Time', 'Time', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(118, 86, 'INVENTORY', 'INVENTORY', 'Inventory Transactions', NULL, 1, '', NULL, NULL, '', 1, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(119, 86, 'WIP', 'WIP', 'Work In Process', NULL, 1, '', NULL, NULL, '', 1, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(120, 86, 'OM', 'OM', 'Order Management', NULL, 1, '', NULL, NULL, '', 1, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(121, 86, 'PO', 'PO', 'Purchasing', NULL, 1, '', NULL, NULL, '', 1, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(122, 86, 'MISC', 'MISC', 'Misc', NULL, 1, '', NULL, NULL, '', 1, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(123, 87, '1', '1', 'Issue from stores', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(124, 87, '10', '10', 'Logical Intercompany Receipt', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(125, 87, '11', '11', 'Logical Delivery Adjustment', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(126, 87, '12', '12', 'Intransit receipt', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(127, 87, '13', '13', 'Logical Intercompany Receipt Return', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(128, 87, '14', '14', 'Logical Intercompany Sales Return', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(129, 87, '15', '15', 'Logical  Intransit Receipt', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(130, 87, '17', '17', 'Logical Expense Requisition Receipt', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(131, 87, '2', '2', 'Subinventory transfer', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(132, 87, '21', '21', 'Intransit shipment', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(133, 87, '22', '22', 'Logical  Intransit Shipment', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(134, 87, '24', '24', 'Cost update', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(135, 87, '25', '25', 'Retroactive Price Update', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(136, 87, '26', '26', 'Logical Receipt', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(137, 87, '27', '27', 'Receipt into stores', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(138, 87, '28', '28', 'Staging transfer', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(139, 87, '29', '29', 'Delivery adjustments', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(140, 87, '3', '3', 'Direct organization transfer', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(141, 87, '30', '30', 'WIP scrap transaction', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(142, 87, '31', '31', 'Assembly completion', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(143, 87, '32', '32', 'Assembly return', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(144, 87, '33', '33', 'Negative component issue', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(145, 87, '34', '34', 'Negative component return', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(146, 87, '35', '35', 'Container transaction', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(147, 87, '36', '36', 'COGS Recognition', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(148, 87, '4', '4', 'Cycle count adjustment', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(149, 87, '40', '40', 'Lot Split', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(150, 87, '41', '41', 'Lot Merge', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(151, 87, '42', '42', 'Lot Translate', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(152, 87, '43', '43', 'Lot Update Quantity', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(153, 87, '5', '5', 'Planning Transfer', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(154, 87, '50', '50', 'Container Pack', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(155, 87, '51', '51', 'Container Unpack', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(156, 87, '52', '52', 'Container Split', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(157, 87, '55', '55', 'Cost Group Transfer', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(158, 87, '56', '56', 'Residual Quantity Issue', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(159, 87, '57', '57', 'Residual Quantity Receipt', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(160, 87, '6', '6', 'Ownership Transfer', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(161, 87, '7', '7', 'Logical Issue', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(162, 87, '8', '8', 'Physical inventory adjustment', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(163, 87, '9', '9', 'Logical Intercompany Sales', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(164, 87, '99', '99', 'Misc', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(165, 88, 'STORAGE', 'Storage', 'Storage', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-05-28 16:52:56', 0, '2028-05-14 16:52:56'),
+(166, 88, 'RECEIVING', 'Receving', 'Receiving', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-05-28 16:52:56', 0, '2028-05-14 16:52:56'),
+(167, 79, 'INDIAN', 'INDIAN', 'Standard Indian Format', NULL, 1, '', NULL, NULL, '', 0, '2000-01-01', '2000-01-01', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(168, 90, 'NO_LOCATOR1', 'NO_LOCATOR1', 'Not locator Controlled', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '2019-07-13 07:03:34'),
+(169, 89, 'NO_LOCATOR', 'NO_LOCATOR', 'Not locator Controlled', NULL, 1, 'active', NULL, NULL, '', 0, '09/01/2013', '', 0, '0000-00-00 00:00:00', 0, '2017-09-13 15:40:14'),
+(170, 89, 'NEXT_LEVEL', 'NEXT_LEVEL', 'Determined at next level : Business Unit, Inventory, Zone, Subinventory', NULL, 1, 'active', NULL, NULL, '', 0, '09/01/2013', '', 0, '0000-00-00 00:00:00', 0, '2017-09-13 15:40:14'),
+(171, 89, 'PRE_SPECIFIED', 'PRE_SPECIFIED', 'Pre Specified Locators', NULL, 1, 'active', NULL, NULL, '', 0, '09/01/2013', '', 0, '0000-00-00 00:00:00', 0, '2017-09-13 15:40:14'),
+(172, 89, 'DYNAMIC_ENTRY', 'DYNAMIC_ENTRY', 'Dynamic entry', NULL, 1, 'active', NULL, NULL, '', 0, '09/01/2013', '', 0, '0000-00-00 00:00:00', 0, '2017-09-13 15:40:14'),
+(173, 91, 'Subinventory', 'Subinventory', 'Subinventory', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(174, 91, 'Row', 'Row', 'Row number', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(175, 91, 'Rack', 'Rack', 'Rack or Column', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(176, 91, 'Shelf', 'Shelf', 'Shelf', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(177, 91, 'Bin', 'Bin', 'Bin', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(178, 92, 'table', 'table', 'tabular display', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(179, 92, 'paragraph', 'paragraph', 'paragraph display', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(180, 92, 'list', 'list', 'list display', NULL, 0, '', NULL, NULL, '', 0, '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(249, 117, 'CONTENT', 'Content', 'Content', NULL, 1, 'active', NULL, NULL, 'enabled', 1, '2013-09-30', '', 0, '2014-02-08 07:05:18', 0, '2014-02-08 07:05:18'),
+(250, 117, 'CONTENT_TYPE', 'Content Type', 'Content Type', NULL, 1, 'active', NULL, NULL, 'enabled', 1, '2013-09-17', '', 0, '2014-02-08 07:05:19', 0, '2014-02-08 07:05:19'),
+(251, 117, 'CATEGORY', 'Category', 'Category', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, '2013-09-18', NULL, 0, '2014-02-08 07:05:18', 0, '2014-02-08 07:05:18'),
+(252, 117, 'FILE', 'File', 'File', NULL, 1, 'active', NULL, NULL, 'enabled', 1, '2013-09-12', NULL, 0, '2014-02-08 07:05:19', 0, '2014-02-08 07:05:19'),
+(253, 117, 'USER', 'User', 'User', NULL, 1, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-08 07:05:19', 0, '2014-02-08 07:05:19'),
+(258, 98, 'BUG_REPORT', 'Bug', 'Bug', NULL, 1, 'active', NULL, NULL, 'enabled', 0, '09/04/2013', '', 0, '2014-01-29 09:24:01', 0, '2014-01-29 09:24:01'),
+(261, 119, 'BASIC', 'Basic', 'Registed User with Basic Privillages', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-09 08:14:30', 0, '2009-06-14 08:14:30'),
+(262, 119, 'ADMIN', 'Administrator', 'Administrator with all acess', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-09 08:14:31', 0, '2009-06-14 08:14:31'),
+(263, 119, 'PLANNER', 'Planner', 'Planner', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-09 08:14:30', 0, '2009-06-14 08:14:30'),
+(264, 119, 'BUYER', 'Buyer', 'Buyer', 0, 1, 'active', NULL, NULL, 'enabled', 1, '', '', 0, '2014-06-09 08:14:28', 0, '2009-06-14 08:14:28'),
+(265, 120, 'SALES', '', 'Only Sales Site', NULL, 1, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2013-09-28 14:40:39', 0, '2013-09-28 14:40:39'),
+(266, 120, 'MFG', '', 'Manufacturing', NULL, 1, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2013-09-28 14:40:40', 0, '2013-09-28 14:40:40'),
+(267, 120, 'MASTER', '', 'Master Organization', NULL, 1, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2013-09-28 14:40:40', 0, '2013-09-28 14:40:40'),
+(268, 120, 'DIST', '', 'Distribution', NULL, 1, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2013-09-28 14:40:40', 0, '2013-09-28 14:40:40'),
+(269, 120, 'REPAIR', '', 'Only Repair Site', NULL, 1, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2013-09-28 14:40:45', 0, '2013-09-28 14:40:45'),
+(270, 121, 'LIFO', '', 'Last In First Out', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-09-28 14:45:26', 0, '2013-09-28 14:45:26'),
+(271, 121, 'Average', '', 'Average Costing', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-09-28 14:45:26', 0, '2013-09-28 14:45:26'),
+(272, 121, 'Standard', '', 'Standard Costing', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-09-28 14:45:26', 0, '2013-09-28 14:45:26'),
+(273, 121, 'FIFO', '', 'First In First Out', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-09-28 14:45:27', 0, '2013-09-28 14:45:27'),
+(275, 122, 'BUY', 'Buy', 'Buy Item', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-10-05 10:34:52', 34, '2015-05-18 09:35:27'),
+(276, 122, 'MAKE', 'Make', 'Make Item', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-10-05 10:28:53', 34, '2015-05-18 09:35:28'),
+(277, 123, 'Active', '', 'Status', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-10-05 11:18:49', 0, '2013-10-05 11:18:49'),
+(278, 123, 'Inactive', '', 'Inactive', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-10-05 11:18:49', 0, '2013-10-05 11:18:49'),
+(279, 123, 'Engineering', '', 'Engineering', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-10-05 11:18:50', 0, '2013-10-05 11:18:50'),
+(280, 124, 'EXTN', 'External', 'External Suppliers', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-10-12 16:28:27', 34, '2015-05-08 03:42:54'),
+(281, 124, 'INTN', 'Internal', 'Internal Suppliers', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-10-12 16:29:23', 34, '2015-05-08 03:42:57'),
+(282, 124, 'EMPLOYEE', 'Employee', 'Employees', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-10-12 16:32:53', 34, '2015-05-08 03:42:56'),
+(283, 124, 'EXTN_INTL', 'External International', 'Externational International', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-10-12 16:32:54', 34, '2015-05-08 03:42:55'),
+(291, 125, 'AF', 'Afghanistan', 'Afghanistan', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '2001-01-01', '', 0, '2014-01-18 07:25:43', 0, '2014-01-18 07:25:43'),
+(292, 125, 'IN', 'India', 'India', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '2001-01-01', '', 0, '2014-01-18 07:25:43', 0, '2014-01-18 07:25:43'),
+(293, 125, 'GB', 'United Kingdom', 'UK', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '2001-01-01', '', 0, '2014-01-18 07:25:44', 0, '2014-01-18 07:25:44'),
+(294, 125, 'US', 'United States', 'USA', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '2001-01-01', '', 0, '2014-01-18 07:25:44', 0, '2014-01-18 07:25:44'),
+(295, 125, 'DE', 'Germany', 'Germany', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '2001-01-01', '', 0, '2014-01-18 07:25:44', 0, '2014-01-18 07:25:44'),
+(296, 125, 'SG', 'Singapore', 'Singapore', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '2001-01-01', '', 0, '2014-01-18 07:25:46', 0, '2014-01-18 07:25:46'),
+(297, 125, 'SK', 'Slovakia', 'Slovakia', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, '2001-01-01', NULL, 0, '2014-01-18 07:25:45', 0, '2014-01-18 07:25:45'),
+(298, 126, 'RECEVING', 'Receving', 'Two step receving - Receipt & Delivery', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:33:35', 22, '0000-00-00 00:00:00'),
+(299, 126, 'DELIVERY', 'Delivery', 'One step receving', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:33:35', 22, '0000-00-00 00:00:00'),
+(300, 126, 'INSPECTION', 'Inspection', 'Three step receving - Receipt, Inspection & Delivery', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:33:35', 22, '0000-00-00 00:00:00'),
+(301, 127, '4_Way', '', 'Four Way Matching', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2013-10-14 09:11:30', 0, '2013-10-14 09:11:30'),
+(302, 127, '3_WAY', '', 'Three Way Matching', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2013-10-14 09:11:30', 0, '2013-10-14 09:11:30'),
+(303, 127, '2_WAY', '', 'Two Way Matching', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2013-10-14 09:11:30', 0, '2013-10-14 09:11:30'),
+(304, 128, 'None', '', 'No Action', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2013-10-14 09:13:08', 0, '2013-10-14 09:13:08'),
+(305, 128, 'Reject', '', 'Reject Actvity', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2013-10-14 09:13:08', 0, '2013-10-14 09:13:08'),
+(306, 128, 'Warning', '', 'Show Warning Message ', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2013-10-14 09:13:09', 0, '2013-10-14 09:13:09'),
+(307, 81, 'WORKING', 'Working', 'Working', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-18 09:05:41', 18, '0000-00-00 00:00:00'),
+(308, 129, 'Purchase', '', 'Purchasing Site', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '', '', 0, '2013-10-16 08:46:18', 0, '2016-10-13 10:55:41'),
+(309, 129, 'Pay', '', 'Invoice & Payment Site', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '', '', 0, '2013-10-16 08:46:18', 0, '2016-10-13 10:55:41'),
+(310, 129, 'Multipurpose', '', 'Act as both Purchasing & Pay site', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '', '', 0, '2013-10-16 08:51:25', 0, '2016-10-13 10:55:41'),
+(311, 117, 'BLOCK', 'Block', 'Block', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-08 07:05:24', 0, '2014-02-08 07:05:24'),
+(312, 118, 'FIRST', 'Severity I', 'Severity I', NULL, 0, '', NULL, NULL, 'enabled', 1, '2013-12-29', '', 0, '2014-01-29 09:30:48', 0, '2014-01-29 09:30:48'),
+(313, 81, 'FIXED', 'Fixed', 'Fixed', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-18 09:05:41', 18, '0000-00-00 00:00:00'),
+(314, 130, 'Receipt', '', 'Receipt', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2013-10-17 07:16:17', 0, '2013-10-17 07:16:17'),
+(315, 130, 'Use', '', 'Use', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2013-10-17 07:16:17', 0, '2013-10-17 07:16:17'),
+(316, 130, 'Receipt_Use', '', 'Receipt & Use', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2013-10-17 07:16:18', 0, '2013-10-17 07:16:18'),
+(317, 131, 'BLANKET', 'Blanket Agreement', 'Blanket Purchase Agreement', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-27 06:53:27', 27, '0000-00-00 00:00:00'),
+(318, 131, 'CONTRACT', 'Contract Order', 'Contract Purchase Order', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-27 06:53:27', 27, '0000-00-00 00:00:00'),
+(319, 131, 'STANDARD', 'Standard Order', 'Standard  Purchase Order', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-27 06:53:27', 27, '0000-00-00 00:00:00'),
+(320, 132, 'ENTERED', 'Entered', 'Entered', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:36:21', 22, '0000-00-00 00:00:00'),
+(321, 132, 'INCOMPLETE', 'Incomplete', 'Incomplete', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:36:21', 22, '0000-00-00 00:00:00'),
+(322, 132, 'CANCELLED', 'Cancelled', 'Cancelled', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:36:21', 22, '0000-00-00 00:00:00'),
+(323, 132, 'CLOSED', 'Closed', 'Closed', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:36:21', 22, '0000-00-00 00:00:00'),
+(324, 132, 'REAPPROVAL', 'Require ReApproval', 'Require ReApproval', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:36:22', 22, '0000-00-00 00:00:00'),
+(325, 132, 'FIN_CLOSED', 'Finally Closed', 'Finally Closed', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:36:26', 22, '0000-00-00 00:00:00'),
+(326, 132, 'APPROVED', 'Approved', 'Approved', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:36:27', 22, '0000-00-00 00:00:00'),
+(327, 132, 'INPROCESS', 'Inprocess', 'Inprocess', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:36:27', 22, '0000-00-00 00:00:00'),
+(328, 133, 'SERVICES', 'Services', 'Services', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-14 06:57:16', 0, '2014-03-14 06:57:16'),
+(329, 133, 'GOODS', 'Goods', 'Goods', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-14 06:57:16', 0, '2014-03-14 06:57:16'),
+(330, 134, 'SGD', 'Sing Dollar', 'Singapore Dollars', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-10 01:41:55', 10, '0000-00-00 00:00:00'),
+(331, 134, 'GBP', 'Britain Pound', 'Bretain Pound', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-10 01:41:55', 10, '0000-00-00 00:00:00'),
+(332, 134, 'INR', 'Indian Rupees', 'Indian Ruppes', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-10 01:41:55', 10, '0000-00-00 00:00:00'),
+(333, 134, 'USD', 'US Dollar', 'US Dollars', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-10 01:41:54', 10, '0000-00-00 00:00:00'),
+(334, 134, 'EUR', 'Euro', 'Euro', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 10:54:00', 0, '2002-08-14 10:54:00'),
+(335, 125, 'PK', 'Pakistan', 'Pakistan', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, '2001-01-01', NULL, 0, '2014-01-18 07:25:45', 0, '2014-01-18 07:25:45'),
+(336, 132, 'ONHOLD', 'On Hold', 'On Hold', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-22 07:36:27', 22, '0000-00-00 00:00:00'),
+(337, 135, 'PUSH', 'Push', 'Push - Manually transacted items', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '2013-12-11', '2014-01-03', 0, '2014-01-03 13:53:19', 0, '2014-01-03 13:53:19'),
+(338, 135, 'ASSEMBLY_PULL', 'Assembly Pull', 'Back flashed at WIP completion', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '2014-01-03', '2014-01-03', 0, '2014-01-03 13:53:20', 0, '2014-01-03 13:53:20'),
+(339, 135, 'OPERATION_PULL', 'Operation Pull', 'Back flashed at each operation', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '2014-01-03', '2014-01-03', 0, '2014-01-03 13:53:20', 0, '2014-01-03 13:53:20'),
+(340, 135, 'BULK', 'Bulk', 'Not transacted items - expensed', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '2014-01-03', '2014-01-03', 0, '2014-01-03 13:53:21', 0, '2014-01-03 13:53:21'),
+(341, 136, 'MACHINE', 'Machine', 'Machine', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-12-13 15:40:56', 34, '2015-05-01 04:06:26'),
+(342, 136, 'PERSON', 'Person', 'Person', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-12-16 01:46:03', 34, '2015-05-01 04:06:29'),
+(343, 137, 'MANUAL', 'Manual', 'Manually Charged', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '2001-01-01', ' ', 0, '2014-01-03 14:06:20', 0, '2014-01-03 14:06:20'),
+(344, 137, 'OSP_RECEIPT', 'OSP Receipt', 'Charged on OSP PO receipt', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '2001-01-01', ' ', 0, '2014-01-03 14:06:20', 0, '2014-01-03 14:06:20'),
+(345, 137, 'WIP_MOVE', 'WIP Move', 'Auto Charged on WIP Move', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '2001-01-01', ' ', 0, '2014-01-03 14:06:21', 0, '2014-01-03 14:06:21'),
+(346, 137, 'OSP_MOVE', 'OSP Move', 'Charged on WIP move after OSP PO receipt', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '2001-01-01', ' ', 0, '2014-01-03 14:06:20', 0, '2014-01-03 14:06:20'),
+(347, 136, 'AMOUNT', 'Amount', 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-12-16 01:48:33', 34, '2015-05-01 04:06:32'),
+(348, 136, 'MISC', 'Miscellaneous', 'Miscellaneous', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-12-16 01:48:37', 34, '2015-05-01 04:06:27'),
+(349, 136, 'CURRENCY', 'Currency', 'Currency', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2013-12-16 01:48:39', 34, '2015-05-01 04:06:26'),
+(350, 138, 'LOT', 'Lot', 'Per each lot', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '2001-01-01', '2014-01-03', 0, '2014-01-03 13:57:48', 0, '2014-01-03 13:57:48'),
+(351, 138, 'ITEM', 'Item', 'Per each item', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '2001-01-01', ' ', 0, '2014-01-03 13:57:48', 0, '2014-01-03 13:57:48'),
+(352, 138, 'RESOURCE_UNIT', 'Resource Unit', 'Per resource unit', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, '2001-01-01', ' ', 0, '2014-01-03 13:57:48', 0, '2014-01-03 13:57:48'),
+(353, 138, 'TOTAL_VALUE', 'Total Value', 'Per total value', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, '2001-01-01', ' ', 0, '2014-01-03 13:57:49', 0, '2014-01-03 13:57:49'),
+(354, 138, 'RESOURCE_VALUE', 'Resource Value', 'Per resource value', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, '2001-01-01', ' ', 0, '2014-01-03 13:57:48', 0, '2014-01-03 13:57:48'),
+(355, 139, 'OH', 'Resource', 'Resource Over Head', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-04-30 13:30:47', 0, '2030-04-14 13:30:47'),
+(356, 139, 'MOH', 'Material', 'Material Over Head', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-04-30 13:30:48', 0, '2030-04-14 13:30:48'),
+(357, 140, 'Cleaning', '', 'Cleaning Dept', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '', '', 0, '2013-12-19 07:26:49', 0, '2019-12-13 07:28:47'),
+(358, 140, 'Testing', '', 'Testing & Final Testing', NULL, 0, 'active', NULL, NULL, 'enabled', 0, ' ', ' ', 0, '2013-12-19 07:26:50', 0, '2019-12-13 07:28:46'),
+(359, 140, 'Burn in', '', 'Burn in station', NULL, 0, 'active', NULL, NULL, 'enabled', 0, ' ', ' ', 0, '2013-12-19 07:26:51', 0, '2019-12-13 07:28:47'),
+(360, 140, 'Packaging', '', 'Packaging', NULL, 0, 'active', NULL, NULL, 'enabled', 0, ' ', ' ', 0, '2013-12-19 07:26:52', 0, '2019-12-13 07:28:46'),
+(361, 140, 'Assembly', '', 'Assembly Area', NULL, 0, 'active', NULL, NULL, 'enabled', 0, ' ', ' ', 0, '2013-12-19 07:26:52', 0, '2019-12-13 07:28:47'),
+(362, 141, 'YES', 'Yes', 'Yes, Scheduled', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, '2014-01-03', '2014-01-03', 0, '2014-01-03 14:02:31', 0, '2014-01-03 14:02:31'),
+(363, 141, 'PRIOR', 'Prior', 'Start with the prior operation', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, ' ', ' ', 0, '2014-01-03 14:02:31', 0, '2014-01-03 14:02:31'),
+(364, 141, 'NEXT', 'Next', 'Start with the next operation', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, ' ', ' ', 0, '2014-01-03 14:02:31', 0, '2014-01-03 14:02:31'),
+(365, 141, 'NO', 'No', 'Not Scheduled', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, ' ', ' ', 0, '2014-01-03 14:02:31', 0, '2014-01-03 14:02:31'),
+(366, 118, 'SECOND', 'Severity II', 'Severity II', NULL, 0, '', NULL, NULL, 'enabled', 1, '2013-12-29', '2014-01-29', 0, '2014-01-29 09:30:48', 0, '2014-01-29 09:30:48'),
+(367, 142, 'NON_STANDARD', 'Non-Standard', 'Non-Standard', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '2013-12-30', ' ', 0, '2014-01-03 13:55:10', 0, '2014-01-03 13:55:10'),
+(368, 142, 'STANDARD', 'Standard', 'Standard Work Order', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, ' ', ' ', 0, '2014-01-03 13:55:10', 0, '2014-01-03 13:55:10'),
+(369, 143, 'UN_RELEASED', 'Un Released', 'Un Released Work Order', NULL, 0, 'active', NULL, NULL, 'enabled', 0, '2014-01-02', '2014-01-03', 0, '2014-01-03 14:11:49', 0, '2014-01-03 14:11:49'),
+(370, 143, 'RELEASED', 'Released', 'Released Work Order', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, '2014-01-03', '2014-01-03', 0, '2014-01-03 14:11:49', 0, '2014-01-03 14:11:49'),
+(371, 143, 'ON_HOLD', 'On Hold', 'OnHold Work Order', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, '2014-01-03', '2014-01-03', 0, '2014-01-03 14:11:48', 0, '2014-01-03 14:11:48'),
+(372, 143, 'WAIT_FOR_CLOSE', 'Waiting For Closing', 'WiatingForClosing Work Order', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, '2014-01-03', '2014-01-03', 0, '2014-01-03 14:11:48', 0, '2014-01-03 14:11:48'),
+(373, 143, 'COMPLETED', 'Completed', 'Completed Work Order', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, '2014-01-03', '2014-01-03', 0, '2014-01-03 14:11:49', 0, '2014-01-03 14:11:49'),
+(374, 143, 'CLOSED', 'Closed', 'Closed Work Order', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, '2014-01-03', '2014-01-03', 0, '2014-01-03 14:11:47', 0, '2014-01-03 14:11:47'),
+(375, 144, 'WIP_RETURN', 'Assembly Return', 'WIP Assembly Return Transaction', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-01-11 07:52:16', 0, '2014-01-11 07:52:16'),
+(376, 144, 'WIP_COMPLETION', 'Assembly Completion', 'WIP Aseembly Completion Transaction', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-01-11 07:52:16', 0, '2014-01-11 07:52:16'),
+(377, 144, 'WIP_MOVE', 'Work Order Move', 'WIP Move Transaction', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-01-11 07:52:16', 0, '2014-01-11 07:52:16'),
+(378, 145, 'running', 'Run', 'Actual Operation', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-07 09:18:28', 0, '2014-01-07 09:18:28'),
+(379, 145, 'rejected', 'Reject', 'Rejected Quantity', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-07 09:18:28', 0, '2014-01-07 09:18:28'),
+(380, 145, 'tomove', 'To Move', 'Running completed & ready to move', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-07 09:18:29', 0, '2014-01-07 09:18:29'),
+(381, 145, 'scrapped', 'Scrap', 'Scrapped Quantity', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-07 09:18:29', 0, '2014-01-07 09:18:29'),
+(382, 145, 'queue', 'Queue', 'Queue step is the sum of setup & queue tim', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-01-07 09:18:30', 0, '2014-01-07 09:18:30'),
+(383, 144, 'WIP_RESOURCE_TRANSACTION', 'Resource Transaction', 'Work Order Resource Transaction', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-11 07:52:16', 0, '2014-01-11 07:52:16'),
+(384, 146, 'ALL', 'All', 'Can be used for all purpose', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-18 06:49:28', 0, '2014-01-18 06:49:28'),
+(385, 146, 'BILL_TO', 'Bill to', 'Customer bill to site', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-18 06:49:28', 0, '2014-01-18 06:49:28'),
+(386, 146, 'SHIP_TO', 'Ship to', 'Customer ship to site', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-01-18 06:49:28', 0, '2014-01-18 06:49:28'),
+(387, 147, 'EXTERNAL_FORGEIN', 'External Forgein', 'External Forgein Customer', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-18 07:00:51', 0, '2014-01-18 07:00:51'),
+(388, 147, 'INTERNAL', 'Internal', 'Internal Customer', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-18 07:00:52', 0, '2014-01-18 07:00:52'),
+(389, 147, 'EXTERNAL', 'External', 'External Customer', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-01-18 07:00:52', 0, '2014-01-18 07:00:52'),
+(390, 148, '1', 'A++', 'Second Class Credit Rating', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-01-18 07:19:55', 0, '2014-01-18 07:19:55'),
+(391, 148, '2', 'A+', 'Best Credit Class', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-01-18 07:19:55', 0, '2014-01-18 07:19:55'),
+(392, 148, '3', 'A-', 'Third', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-01-18 07:19:56', 0, '2014-01-18 07:19:56'),
+(393, 148, '4', 'A--', 'Fourth', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-01-18 07:19:55', 0, '2014-01-18 07:19:55'),
+(394, 119, 'ENGINEER', 'ME', 'Engineer', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-09 08:14:28', 0, '2009-06-14 08:14:28'),
+(395, 149, 'FORUM', 'Forum', 'Forum type list in a table', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-01-26 06:10:44', 0, '2014-01-26 06:10:44'),
+(396, 149, 'NORMAL', 'Normal', 'Normal list with subject & summary', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-01-26 06:10:43', 0, '2014-01-26 06:10:43'),
+(397, 150, 'int', 'Integer', 'Intgere Values', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-27 15:02:11', 0, '2014-01-27 15:02:11'),
+(398, 150, 'enum', 'Enum List', 'Enum List', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-27 15:02:11', 0, '2014-01-27 15:02:11'),
+(399, 150, 'tinyint', 'Boolean', 'Check Box for Boolean ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-27 15:02:12', 0, '2014-01-27 15:02:12'),
+(400, 150, 'varchar', 'Small Text', 'Varchar for small text', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-01-27 15:02:12', 0, '2014-01-27 15:02:12'),
+(401, 150, 'text', 'Large Text', 'Text area for Large Text', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-27 15:02:13', 0, '2014-01-27 15:02:13'),
+(402, 150, 'date', 'Date', 'Date Field', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-27 15:02:17', 0, '2014-01-27 15:02:17'),
+(403, 150, 'float', 'Flolat', 'Float Number', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-27 15:02:17', 0, '2014-01-27 15:02:17'),
+(404, 150, 'option', 'Option List', 'Option List', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-27 15:02:18', 0, '2014-01-27 15:02:18'),
+(405, 81, 'CLOSED', 'Closed', 'Closed', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-18 09:05:41', 18, '0000-00-00 00:00:00'),
+(406, 98, 'SUPPORT', 'Support', 'Support Request', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-29 09:23:59', 0, '2014-01-29 09:23:59'),
+(407, 98, 'ENHANCE', 'Enhancement', 'Enhacemenet Request', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-29 09:24:00', 0, '2014-01-29 09:24:00'),
+(408, 118, 'FOURTH', 'Severity IV', 'Severity IV', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-29 09:30:47', 0, '2014-01-29 09:30:47'),
+(409, 118, 'THIRD', 'Severity III', 'Severity III', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-01-29 09:30:48', 0, '2014-01-29 09:30:48'),
+(410, 119, 'ANONYMOUS', 'Anonymous', 'Anonymous', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-09 08:14:28', 0, '2009-06-14 08:14:28'),
+(411, 151, 'GL_COA', 'Chart of Account', 'Chart of Account', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-02 12:10:10', 0, '2014-02-02 12:10:10'),
+(412, 151, 'INV_ITEM_CATALOG', 'Item Catalog', 'Item Catalog', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-02 12:10:11', 0, '2014-02-02 12:10:11'),
+(413, 151, 'INV_ITEM_CATEGORY', 'Item Categories', 'Item Categories', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-02 12:10:11', 0, '2014-02-02 12:10:11'),
+(414, 152, 'NONE', 'None', 'No Validation', NULL, NULL, 'active', NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-04 02:10:55', 0, '2014-02-04 02:10:55'),
+(415, 152, 'DEPENDENT', 'Dependent', 'Dependent values', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-04 02:10:55', 0, '2014-02-04 02:10:55'),
+(416, 152, 'INDEPENDENT', 'Independent', 'Independent Value', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-04 02:10:56', 0, '2014-02-04 02:10:56'),
+(417, 152, 'TABLE', 'Table', 'Validated with a table data', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-04 02:10:56', 0, '2014-02-04 02:10:56'),
+(418, 153, 'YEAR', 'Year', '1 Year', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-07 09:08:18', 0, '2014-02-07 09:08:18'),
+(419, 153, 'WEEK', 'Year', '53 Weeks per year', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-07 09:08:17', 0, '2014-02-07 09:08:17'),
+(420, 153, 'QUARTER', 'Quarter', '4 Quarters per year', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-07 09:08:18', 0, '2014-02-07 09:08:18'),
+(421, 153, 'MONTH', 'Month', '12 Months Per year', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-07 09:08:17', 0, '2014-02-07 09:08:17'),
+(422, 154, 'IND_CALEDNAR', 'Indian Calendar', 'Indian Calendar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-06 12:37:12', 0, '2014-02-06 12:37:12'),
+(423, 154, 'SPAIN_CALENDAR', 'Spanish Calendar', 'Spanish Calendar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-06 12:37:13', 0, '2014-02-06 12:37:13'),
+(424, 154, 'CORP_CALENDAR', 'Corp. Calendar', 'Main Corporate Calendar', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-06 12:37:14', 0, '2014-02-06 12:37:14'),
+(425, 117, 'PHP', 'Php', 'Php', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-08 07:05:24', 0, '2014-02-08 07:05:24'),
+(426, 155, 'B', 'Budgeted', 'Budgeted Balance', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-27 07:07:15', 0, '2014-02-27 07:07:15'),
+(427, 155, 'E', 'Encumbrance', 'Encumbrance Balance', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-27 07:07:15', 0, '2014-02-27 07:07:15'),
+(428, 155, 'A', 'Actual', 'Actual Balance', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-27 07:07:23', 0, '2014-02-27 07:07:23'),
+(429, 156, 'ENTERED', 'Entered', 'Entered', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-02 12:03:19', 2, '0000-00-00 00:00:00'),
+(430, 156, 'ERROR', 'Error', 'Error', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-02 12:03:19', 2, '0000-00-00 00:00:00'),
+(431, 156, 'APPROVED', 'Approve', 'Approved', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-02 12:12:28', 2, '0000-00-00 00:00:00'),
+(432, 156, 'INPROCESS', 'In Process', 'In Approval Procecc', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-02 12:03:18', 2, '0000-00-00 00:00:00'),
+(433, 156, 'REVERSED', 'Reverse', 'Reversed', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-02 12:03:19', 2, '0000-00-00 00:00:00'),
+(434, 156, 'POSTED', 'Post', 'Posted', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-02 12:03:19', 2, '0000-00-00 00:00:00'),
+(435, 157, 'AP_TRANSACTIONS', 'AP Transactions', 'AP Transactions', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, '2000-01-01', NULL, 0, '2014-03-15 04:37:13', 0, '2015-03-14 04:37:13'),
+(436, 157, 'AP_BORROWED_AND_LENT', 'AP Borrowed and Lent', 'AP Borrowed and Lent', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
+(437, 157, 'AP_CLAIMS', 'AP Claims', 'AP Claims', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
+(438, 157, 'AP_PAYMENTS', 'AP Payments', 'AP Payments', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
+(439, 157, 'AR_BANK_CHARGES', 'AR Bank Charges', 'AR Bank Charges', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
+(440, 157, 'AR_BANK_RECEIPTS', 'AR Bank Receipts', 'AR Bank Receipts', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
+(441, 157, 'AR_BANK_STATEMENTS', 'AR Bank Statements', 'AR Bank Statements', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
+(442, 157, 'AR_BANK_TRANSFERS', 'AR Bank Transfers', 'AR Bank Transfers', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
+(443, 157, 'AR_CHARGE_BACK', 'AR Chargebacks', 'AR Chargebacks', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-07-08 09:15:56', 0, '2008-07-14 09:15:56'),
+(444, 157, 'AR_CREDIT_MEMO', 'AR Credit Memos', 'AR Credit Memos', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-07-08 09:15:56', 0, '2008-07-14 09:15:56'),
+(445, 157, 'AR_DEBIT_MEMO', 'AR Debit Memos', 'AR Debit Memos', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-07-08 09:15:56', 0, '2008-07-14 09:15:56'),
+(446, 157, 'AR_DEPOSIT', 'AR Deposits', 'AR Deposits', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-07-08 09:15:56', 0, '2008-07-14 09:15:56'),
+(447, 157, 'AR_GUARENTEE', 'AR Discounts', 'AR Discounts', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-07-08 09:15:56', 0, '2008-07-14 09:15:56'),
+(448, 157, 'AR_INVOICE', 'AR Sales Invoice', 'AR Sales Invoice', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-07-08 09:15:57', 0, '2008-07-14 09:15:57'),
+(449, 157, 'AR_MISC_RECEIPTS', 'AR Misc Receipts', 'AR Misc Receipts', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
+(450, 157, 'AR_RECEIPTS', 'AR Receipts', 'AR Receipts', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
+(451, 157, 'AR_PREPAYMENT', 'AR Pre Payment', 'AR Pre Payment', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-07-08 09:15:57', 0, '2008-07-14 09:15:57'),
+(452, 157, 'FA_ADDITION', 'FA Addition', 'FA Addition', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
+(453, 157, 'FA_AMORTIZATION', 'FA Amortization', 'FA Amortization', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
+(454, 157, 'FA_ASSET_DISPOSITION', 'FA Asset Disposition', 'FA Asset Disposition', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
+(455, 157, 'FA_CIP_ADDITION', 'FA CIP Addition', 'FA CIP Addition', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
+(456, 157, 'FA_CIP_ADJUSTMENT', 'FA CIP Adjustment', 'FA CIP Adjustment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:00', 0, '2014-02-27 10:05:00'),
+(457, 157, 'FA_CIP_RECLASSIFICATION', 'FA CIP Reclassification', 'FA CIP Reclassification', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(458, 157, 'FA_CIP_RETIREMENT', 'FA CIP Retirement', 'FA CIP Retirement', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(459, 157, 'FA_CIP_REVALUATION', 'FA CIP Revaluation', 'FA CIP Revaluation', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(460, 157, 'FA_CIP_TRANSFER', 'FA CIP Transfer', 'FA CIP Transfer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(461, 157, 'FA_DEPRECIATION', 'FA Depreciation', 'FA Depreciation', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(462, 157, 'FA_DEPRECIATION_ADJUSTMENT', 'FA Depreciation Adjustment', 'FA Depreciation Adjustment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(463, 157, 'FA_RECLASS', 'FA Reclass', 'FA Reclass', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(464, 157, 'GL_ADJUSTMENT', 'GL Adjustment', 'GL Adjustment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(465, 157, 'GL_ALLOCATION', 'GL Allocation', 'GL Allocation', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01');
+INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_code`, `option_line_value`, `description`, `value_group_id`, `priority`, `status`, `mapper1`, `mapper2`, `rev_enabled`, `rev_number`, `effective_start_date`, `effective_end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+(466, 157, 'GL_BALANCE_SHEET_CLOSE', 'GL Balance Sheet Close', 'GL Balance Sheet Close', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(467, 157, 'GL_BUDGET', 'GL Budget', 'GL Budget', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(468, 157, 'GL_CANCELLATION', 'GL Cancellation', 'GL Cancellation', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(469, 157, 'GL_INTERCOMPANY_TRANSFER', 'GL Intercompany Transfer', 'GL Intercompany Transfer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(470, 157, 'GL_MISCELLANEOUS', 'GL Miscellaneous', 'GL Miscellaneous', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(471, 157, 'GL_WRITE_OFF', 'GL Write-off', 'GL Write-off', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(472, 157, 'HR_APPLICATION_FEE', 'HR Application Fee', 'HR Application Fee', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(473, 157, 'HR_PAYROLL', 'HR Payroll', 'HR Payroll', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(474, 157, 'INV_INVENTORY', 'INV Inventory', 'INV Inventory', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(475, 157, 'INV_MISCELLANEOUS_TRANSACTION', 'INV Miscellaneous Transaction', 'INV Miscellaneous Transaction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(476, 157, 'INV_RECEIVING', 'INV Receiving', 'INV Receiving', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(477, 157, 'PA_BURDEN_COST', 'PA Burden Cost', 'PA Burden Cost', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(478, 157, 'PA_LABOR_COST', 'PA Labor Cost', 'PA Labor Cost', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(479, 157, 'PO_ACCRUAL', 'PO Accrual', 'PO Accrual', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(480, 157, 'PO_REQUISITIONS', 'PO Requisitions', 'PO Requisitions', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2000-01-01', NULL, 0, '2014-02-27 10:05:01', 0, '2014-02-27 10:05:01'),
+(481, 158, 'PERM_CLOSED', 'Permanently Closed', 'Permanently Closed Period', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-28 01:56:35', 0, '2014-02-28 01:56:35'),
+(482, 158, 'CLOSED', 'Closed', 'Closed Period', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-28 01:56:36', 0, '2014-02-28 01:56:36'),
+(483, 158, 'OPEN', 'Open', 'Open Period', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-28 01:56:36', 0, '2014-02-28 01:56:36'),
+(484, 158, 'AVAILABLE', 'Available', 'Period Defined in Calendar', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-28 01:56:36', 0, '2014-02-28 01:56:36'),
+(485, 158, 'FUTURE', 'Future Enabled', 'Future Entry Enabled Period', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-02-28 01:56:36', 0, '2014-02-28 01:56:36'),
+(486, 156, 'UNPOSTED', 'Unposted', 'Unposted', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-02 12:03:19', 2, '0000-00-00 00:00:00'),
+(487, 157, 'GL_REVERSAL', 'GL Reversal', 'GL Reversal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-03-03 03:04:14', 0, '2014-03-03 03:04:14'),
+(488, 159, 'CANCELLED', 'Cancelled', 'Cancelled', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 07:38:04', 0, '2024-03-14 07:38:04'),
+(489, 159, 'INCOMPLETE', 'Incomplete', 'Incomplete', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 07:38:01', 0, '2024-03-14 07:38:01'),
+(490, 159, 'APPROVED', 'Approved', 'Approved', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 07:38:04', 0, '2024-03-14 07:38:04'),
+(491, 159, 'REAPPROVAL', 'Require ReApproval', 'Require ReApproval', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 07:38:02', 0, '2024-03-14 07:38:02'),
+(492, 159, 'ENTERED', 'Entered', 'Entered', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 07:38:03', 0, '2024-03-14 07:38:03'),
+(493, 159, 'INPROCESS', 'Inprocess', 'Inprocess', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 07:38:02', 0, '2024-03-14 07:38:02'),
+(494, 159, 'ONHOLD', 'On Hold', 'On Hold', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 07:38:03', 0, '2024-03-14 07:38:03'),
+(495, 160, 'EXPENSE_REPORT', 'Expense Report', 'Expense Report', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-13 10:50:06', 0, '2013-03-14 10:50:06'),
+(496, 160, 'INVOICE', 'Invoice', 'Standard Invoice', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-13 10:50:06', 0, '2013-03-14 10:50:06'),
+(497, 160, 'CREDIT_MEMO', 'Credit Memo', 'Credit Memo', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-13 10:50:08', 0, '2013-03-14 10:50:08'),
+(498, 160, 'DEBIT_MEMO', 'Debit Memo', 'Debit Memo', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-13 10:50:05', 0, '2013-03-14 10:50:05'),
+(499, 160, 'PREPAYMENT', 'Pre Payment', 'Pre Payment', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-13 10:50:07', 0, '2013-03-14 10:50:07'),
+(501, 133, 'FREIGHT', 'Freight', 'Freight', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-14 06:57:16', 0, '2014-03-14 06:57:16'),
+(502, 160, 'PO_DEFAULT', 'PO Default', 'PO Default', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-03-13 10:50:07', 0, '2014-03-13 10:50:07'),
+(503, 133, 'MISC', 'Miscellaneous', 'Miscellaneous', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-03-14 06:57:15', 0, '2014-03-14 06:57:15'),
+(504, 161, 'ITEM', 'Item', 'Item', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-14 06:58:47', 0, '2014-03-14 06:58:47'),
+(505, 161, 'TAX', 'Tax', 'Tax', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-14 06:58:47', 0, '2014-03-14 06:58:47'),
+(506, 161, 'MISC', 'Miscellaneous', 'Miscellaneous', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-14 06:58:48', 0, '2014-03-14 06:58:48'),
+(507, 161, 'FREIGHT', 'Freight', 'Freight', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-14 06:58:48', 0, '2014-03-14 06:58:48'),
+(508, 162, 'REFUND', 'Refund', 'Refund to Supploier', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-17 03:57:13', 0, '2014-03-17 03:57:13'),
+(509, 162, 'MANUAL', 'Manual', 'Manually Entered', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-17 03:57:13', 0, '2014-03-17 03:57:13'),
+(510, 162, 'MULTI_SELECT', 'Multi Select', 'Created Using Multi Select', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-17 03:57:13', 0, '2014-03-17 03:57:13'),
+(511, 164, 'DEPOSIT', 'Desposit', 'Desposit Transaction', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-07-08 09:10:00', 0, '2008-07-14 09:10:00'),
+(512, 164, 'INVOICE', 'Invoice', 'Standard Invoice', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-07-08 09:10:00', 0, '2008-07-14 09:10:00'),
+(513, 164, 'CREDIT_MEMO', 'Credit Memo', 'Credit Memo', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-07-08 09:10:00', 0, '2008-07-14 09:10:00'),
+(514, 164, 'DEBIT_MEMO', 'Debit Memo', 'Debit Memo', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-07-08 09:09:59', 0, '2008-07-14 09:09:59'),
+(515, 164, 'PREPAYMENT', 'Pre Payment', 'Pre Payment Transaction', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-07-08 09:10:01', 0, '2008-07-14 09:10:01'),
+(516, 164, 'GUARENTEE', 'Guarentee', 'Guarentee', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-07-08 09:10:00', 0, '2008-07-14 09:10:00'),
+(517, 164, 'CHARGE_BACK', 'Charge Back', 'Charge Back', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-07-08 09:09:59', 0, '2008-07-14 09:09:59'),
+(518, 163, 'CREATE_ACCOUNT', 'Create Accounting', 'Create Accounting', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-22 10:25:59', 0, '2014-03-22 10:25:59'),
+(519, 163, 'VIEW_JOURNAL', 'View Journal', 'View Journal', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-22 10:25:59', 0, '2014-03-22 10:25:59'),
+(520, 163, 'CREDIT', 'Credit Transaction', 'Credit Transaction', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-22 10:25:59', 0, '2014-03-22 10:25:59'),
+(521, 163, 'CANCEL', 'Cancel Transaction', 'Cancel Transaction', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-22 10:25:59', 0, '2014-03-22 10:25:59'),
+(522, 163, 'RECEIPT', 'Create Receipt', 'Create Receipt', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-22 10:26:00', 0, '2014-03-22 10:26:00'),
+(523, 165, 'MISC', 'Miscellaneous', 'Miscellaneous', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 11:15:37', 0, '2024-03-14 11:15:37'),
+(524, 165, 'STANDARD', 'Standard', 'Standard', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-24 11:15:38', 0, '2024-03-14 11:15:38'),
+(529, 165, 'MULTI_SELECT', 'Multi Select', 'Multi Select', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-03-25 04:35:31', 0, '2014-03-25 04:35:31'),
+(530, 166, 'EXTERNAL', 'External Order', 'Standard  Purchase Order', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-25 08:40:23', 0, '2014-03-25 08:40:23'),
+(531, 166, 'BLANKET', 'Blanket Agreement', 'Blanket Purchase Agreement', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-25 08:40:23', 0, '2014-03-25 08:40:23'),
+(532, 166, 'INTERNAL', 'Internal Order', 'Contract Purchase Order', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-03-25 08:40:24', 0, '2014-03-25 08:40:24'),
+(533, 167, 'ENTERED', 'Entered', '2. Entered', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-02 02:49:38', 0, '2002-06-14 02:49:38'),
+(534, 167, 'SHIPPED', 'Shipped', '6. Shipped', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-02 02:49:36', 0, '2002-06-14 02:49:36'),
+(535, 167, 'BOOKED', 'Booked', '3. Booked', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-02 02:49:36', 0, '2002-06-14 02:49:36'),
+(536, 167, 'PICKED', 'Picked', '5. Picked', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-02 02:49:36', 0, '2002-06-14 02:49:36'),
+(537, 167, 'INCOMPLETE', 'Incomplete', '1. Incomplete', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-02 02:49:38', 0, '2002-06-14 02:49:38'),
+(538, 167, 'CLOSED', 'Closed', '8. Closed', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-02 02:49:36', 0, '2002-06-14 02:49:36'),
+(539, 167, 'PENDING_INVOICE', 'Pending Invoice', '7. Pending Invoice', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-02 02:49:37', 0, '2002-06-14 02:49:37'),
+(540, 167, 'INPROCESS', 'Inprocess', '20. Inprocess', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-02 02:49:37', 0, '2002-06-14 02:49:37'),
+(541, 167, 'ONHOLD', 'On Hold', '19. On Hold', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-02 02:49:37', 0, '2002-06-14 02:49:37'),
+(547, 168, 'RES', 'Resource', 'Resource Element', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-05-05 02:53:47', 0, '2005-05-14 02:53:47'),
+(548, 168, 'MAT', 'Material', 'Material Element', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-05-05 02:53:47', 0, '2005-05-14 02:53:47'),
+(549, 168, 'MOH', 'Material Over Head', 'Material Over Head Element', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-05-05 02:53:47', 0, '2005-05-14 02:53:47'),
+(550, 168, 'OH', 'Over Head', 'Over Head Element', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-05-05 02:53:47', 0, '2005-05-14 02:53:47'),
+(551, 168, 'OSP', 'Outside Processing', 'Outside Processing Element', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-05-05 02:53:47', 0, '2005-05-14 02:53:47'),
+(552, 169, 'CREATE_ACCOUNT', 'Create Accounting', 'Create Accounting', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-04-14 04:07:56', 0, '2014-04-14 04:07:56'),
+(553, 169, 'COST_ROLLUP', 'Cost Rollup', 'Cancel Transaction', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-04-14 04:07:56', 0, '2014-04-14 04:07:56'),
+(554, 169, 'COST_UPDATE', 'Cost Update', 'Standard Cost Update', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-04-14 04:07:56', 0, '2014-04-14 04:07:56'),
+(555, 169, 'VIEW_JOURNAL', 'View Journal', 'View Journal', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-04-14 04:07:56', 0, '2014-04-14 04:07:56'),
+(556, 170, 'MINMAX', 'Min Max', 'Min Max Planning', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-05-08 01:03:10', 0, '2008-05-14 01:03:10'),
+(557, 170, 'MPS', 'MPS', 'MPS Planning', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-05-08 01:03:10', 0, '2008-05-14 01:03:10'),
+(558, 170, 'KANBAN', 'Kanban', 'Kanban Planning', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-05-08 01:03:10', 0, '2008-05-14 01:03:10'),
+(559, 170, 'MRP', 'MRP', 'MRP Planning', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-05-08 01:03:10', 0, '2008-05-14 01:03:10'),
+(560, 157, 'CST_ADJUSTMENT', 'CST Cost Adjustment', 'CST Cost Adjustment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-04-26 05:09:42', 0, '2014-04-26 05:09:42'),
+(561, 157, 'WIP_RESOURCE', 'WIP Resource', 'WIP Resource Transaction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-04-28 11:43:44', 0, '2014-04-28 11:43:44'),
+(562, 171, 'INTERNAL', 'Internal', 'Internal Requisition', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-01 07:43:40', 0, '2014-05-01 07:43:40'),
+(563, 171, 'EXTERNAL', 'External', 'External Requisition', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-01 07:43:40', 0, '2014-05-01 07:43:40'),
+(564, 172, 'INTERNAL_BUY', 'Internal Buy', 'Buy from Internal Organization', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-02 14:06:54', 0, '2014-05-02 14:06:54'),
+(565, 172, 'INTERNAL_MAKE', 'Internal Make', 'Make In Internal Organization', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-02 14:06:54', 0, '2014-05-02 14:06:54'),
+(566, 172, 'EXTERNAL', 'External', 'External Purchase', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-02 14:06:54', 0, '2014-05-02 14:06:54'),
+(567, 173, 'DAILY', 'Daily', 'Daily Bucket', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-03 13:05:53', 0, '2014-05-03 13:05:53'),
+(568, 173, 'WEEKLY', 'Weekly', 'Weekly Bucket', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-03 13:05:53', 0, '2014-05-03 13:05:53'),
+(569, 173, 'PERIOD', 'Period', 'Periodic Bucket', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-03 13:05:53', 0, '2014-05-03 13:05:53'),
+(570, 174, 'SUPPLY_PLAN', 'Supply Plan', 'Supply Planning', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-05 02:53:20', 0, '2014-05-05 02:53:20'),
+(571, 174, 'MRP', 'MRP', 'MRP Planning', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-05 02:53:20', 0, '2014-05-05 02:53:20'),
+(572, 174, 'DEMAND_PLAN', 'Demand Plan', 'Demand Planning', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-05 02:53:20', 0, '2014-05-05 02:53:20'),
+(573, 174, 'FORECAST', 'Forecast', 'Forecast Source List', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-05 02:53:20', 0, '2014-05-05 02:53:20'),
+(574, 174, 'SOP', 'Sales & Operation', 'Sales & Operation Planning', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-05 02:53:20', 0, '2014-05-05 02:53:20'),
+(575, 175, 'SUPPLY_ENTRY', 'SP Entries', 'Supply Plan Entries', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-05 03:01:46', 0, '2014-05-05 03:01:46'),
+(576, 175, 'SOP_ENTRY', 'SOP Entries', 'Sales & Operation Plan Entries', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-05 03:01:46', 0, '2014-05-05 03:01:46'),
+(577, 175, 'FORECAST_ENTRY', 'Forecast Entries', 'Forecast Entries', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-05 03:01:46', 0, '2014-05-05 03:01:46'),
+(578, 175, 'DEMAND_ENTRY', 'DP Entries', 'Demand Plann Entries', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-05 03:01:46', 0, '2014-05-05 03:01:46'),
+(579, 176, 'SALES_ORDER', 'Sales Order', 'Sales Order', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-06 04:54:02', 0, '2014-05-06 04:54:02'),
+(580, 176, 'DEPENDENT', 'Dependent', 'Dependent Demand', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-06 04:54:03', 0, '2014-05-06 04:54:03'),
+(581, 176, 'FORECAST', 'Forecast', 'Forecast', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-06 04:54:03', 0, '2014-05-06 04:54:03'),
+(582, 170, 'MULTI_MINMAX', 'Multi Bin Min Max', 'Multi Bin Min Max', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-08 01:03:10', 0, '2014-05-08 01:03:10'),
+(583, 177, 'PC_A_100', 'PC A 100', 'PC A 100', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-08 01:56:24', 0, '2014-05-08 01:56:24'),
+(584, 177, 'NO_LINE', 'Not Assigned', 'Not Assigned', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-08 01:56:24', 0, '2014-05-08 01:56:24'),
+(585, 177, 'PC_A_150', 'PC A 150', 'PC A 150', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-08 01:56:24', 0, '2014-05-08 01:56:24'),
+(586, 177, 'MOBILE_X_07', 'Mobile X 7 Series', 'Mobile X 7 Series', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-08 01:56:24', 0, '2014-05-08 01:56:24'),
+(587, 177, 'MOBILE_L_15', 'Mobile L 15', 'Kanban Planning', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-08 01:56:24', 0, '2014-05-08 01:56:24'),
+(588, 177, 'TV_FLAT_X_100', 'TV Flat X 100', 'TV Flat X 100', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-08 01:56:25', 0, '2014-05-08 01:56:25'),
+(589, 177, 'MW_LETO_01', 'MW LETO 01', 'MW LETO 01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-08 01:56:25', 0, '2014-05-08 01:56:25'),
+(590, 177, 'TV_FLAT_X_101A', 'TV Flat X 100A', 'TV Flat X 100A', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-08 01:56:25', 0, '2014-05-08 01:56:25'),
+(591, 177, 'MW_LETO_02', 'MW LETO 02', 'MW LETO 02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-08 01:56:25', 0, '2014-05-08 01:56:25'),
+(592, 178, 'NO_ROUND', 'No Rounding', 'No Rounding', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-01 10:43:44', 0, '2001-09-14 10:43:44'),
+(593, 178, 'ROUND_UP', 'Round Up', 'Round Up', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-01 10:43:44', 0, '2001-09-14 10:43:44'),
+(594, 178, 'ROUND_DOWN', 'Round Down', 'Round Down', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-01 10:43:44', 0, '2001-09-14 10:43:44'),
+(595, 178, 'ROUND', 'Round', 'Round to Nearest', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-01 10:43:43', 0, '2001-09-14 10:43:43'),
+(596, 179, 'PAST_DUE', 'Past Due', 'Past Due', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-21 09:32:09', 0, '2014-05-21 09:32:09'),
+(597, 179, 'RESCHDULE_OUT', 'Reschdule OUT', 'Reschdule OUT', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-21 09:32:10', 0, '2014-05-21 09:32:10'),
+(598, 179, 'EXCESS', 'Excess', 'Excess', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-05-21 09:32:11', 0, '2014-05-21 09:32:11'),
+(599, 179, 'RESCHDULE_IN', 'Reschdule IN', 'Reschdule IN', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-21 09:32:11', 0, '2014-05-21 09:32:11'),
+(600, 179, 'COMPRESSED_LT', 'Compressed LT', 'Compressed LT', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-21 09:32:12', 0, '2014-05-21 09:32:12'),
+(601, 88, 'RAW', 'Raw', 'Raw', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-28 16:52:55', 0, '2014-05-28 16:52:55'),
+(602, 88, 'WIP', 'WIP', 'WIP', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-28 16:52:56', 0, '2014-05-28 16:52:56'),
+(603, 88, 'FGI', 'FGI', 'FGI', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-05-28 16:52:56', 0, '2014-05-28 16:52:56'),
+(604, 167, 'AWAITING_PICKING', 'Awaiting Picking', '4. Awaiting Picking', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-02 02:49:37', 0, '2014-06-02 02:49:37'),
+(605, 180, 'SALES_TAX', 'Sales Tax', 'Sales Tax', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-06-03 02:56:45', 0, '2014-06-03 02:56:45'),
+(606, 180, 'VAT', 'VAT', 'Value Added Tax', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-06-03 02:56:46', 0, '2014-06-03 02:56:46'),
+(607, 180, 'GST', 'GST', 'Goods and Services Tax', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 02:56:46', 0, '2014-06-03 02:56:46'),
+(608, 180, 'EXCISE', 'Excise', 'Excise', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-06-03 02:56:47', 0, '2014-06-03 02:56:47'),
+(609, 180, 'TARIFF', 'Tariff', 'Tariff - Export & Import', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 02:56:48', 0, '2014-06-03 02:56:48'),
+(610, 125, 'RU', 'Russia', 'Russia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 13:00:15', 0, '2014-06-03 13:00:15'),
+(611, 125, 'CA', 'Canada', 'Canada', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 13:00:18', 0, '2014-06-03 13:00:18'),
+(612, 125, 'IT', 'Italy', 'Italy', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 13:00:21', 0, '2014-06-03 13:00:21'),
+(613, 125, 'CN', 'China', 'China', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 13:00:23', 0, '2014-06-03 13:00:23'),
+(614, 125, 'FR', 'France', 'France', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 13:00:28', 0, '2014-06-03 13:00:28'),
+(615, 125, 'BR', 'Brazil', 'Brazil', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 13:00:31', 0, '2014-06-03 13:00:31'),
+(616, 125, 'ES', 'Spain', 'Spain', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 13:00:33', 0, '2014-06-03 13:00:33'),
+(617, 125, 'JP', 'Japan', 'Japan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 13:00:36', 0, '2014-06-03 13:00:36'),
+(618, 125, 'MX', 'Mexico', 'Mexico', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 13:00:39', 0, '2014-06-03 13:00:39'),
+(619, 125, 'KR', 'South Korea', 'South Korea', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-03 13:00:42', 0, '2014-06-03 13:00:42'),
+(620, 181, 'MILITARY_EQUIPMENT', 'Military Equipment', 'Military Equipment', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-04 08:13:49', 0, '2004-06-14 08:13:49'),
+(621, 181, 'STANDARD', 'Standard', 'Standard', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-04 08:13:48', 0, '2004-06-14 08:13:48'),
+(622, 181, 'EXEMPT', 'Exempt', 'Exempt', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-04 08:13:49', 0, '2004-06-14 08:13:49'),
+(623, 181, 'IND_RURAL_EDUCATION', 'Rural Education IND', 'Rural Education IND', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-04 08:13:49', 0, '2004-06-14 08:13:49'),
+(624, 181, 'EMISSION_INSPECTION', 'Emission Inspection', 'Emmision Inspection', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-04 08:13:50', 0, '2004-06-14 08:13:50'),
+(625, 182, 'ap', 'Accounts Payable', '101. Accounts Payable', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 11:25:48', 34, '2015-11-02 03:27:42'),
+(626, 182, 'gl', 'General Ledger', '100. General Ledger', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 11:25:48', 34, '2015-11-02 03:27:43'),
+(627, 182, 'ar', 'Accounts Receviable', '102. Accounts Receviable', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 11:25:48', 34, '2015-11-02 03:27:42'),
+(628, 182, 'fa', 'Fixed Asset', '103. Fixed Asset', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 11:25:47', 34, '2015-11-02 03:27:43'),
+(629, 182, 'cm', 'Cash Managment', '104. Cash Management', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 11:25:48', 34, '2015-11-02 03:27:43'),
+(630, 182, 'inv', 'Inventory', '200. Inventory', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 11:25:49', 34, '2015-11-02 03:27:43'),
+(631, 182, 'pur', 'Purchasing', '201. Purchasing', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 11:25:49', 34, '2015-11-02 03:27:43'),
+(632, 182, 'sd', 'Sales & Distribution', '202. Sales & Distribution', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 11:25:49', 34, '2015-11-02 03:27:43'),
+(633, 182, 'bom', 'Bills of Material', '203. Bills of Material', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 11:25:50', 34, '2015-11-02 03:27:44'),
+(634, 182, 'wip', 'Work In Process', '204. Work In Process', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-27 11:25:50', 34, '2015-11-02 03:27:44'),
+(635, 182, 'fp', 'Forecast & Planning', '205. Forecast & Planning', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-27 11:25:50', 0, '2027-06-14 11:25:50'),
+(636, 182, 'sys', 'System', '1. System', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-27 11:25:50', 0, '2027-06-14 11:25:50'),
+(637, 182, 'org', 'Organization', '2. Organization', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-27 11:25:50', 0, '2027-06-14 11:25:50'),
+(638, 182, 'ext', 'Extension', '900. Extension', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-06-27 11:25:51', 0, '2027-06-14 11:25:51'),
+(640, 183, 'CANCELLED', 'Cancelled', 'Cancelled', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-06-29 11:49:56', 0, '2014-06-29 11:49:56'),
+(641, 183, 'INCOMPLETE', 'Incomplete', 'Incomplete', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-06-29 11:49:56', 0, '2014-06-29 11:49:56'),
+(642, 183, 'REAPPROVAL', 'Require ReApproval', 'Require ReApproval', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-06-29 11:49:57', 0, '2014-06-29 11:49:57'),
+(643, 183, 'APPROVED', 'Approved', 'Approved', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-06-29 11:49:57', 0, '2014-06-29 11:49:57'),
+(644, 183, 'INPROCESS', 'Inprocess', 'Inprocess', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-06-29 11:49:57', 0, '2014-06-29 11:49:57'),
+(645, 183, 'ENTERED', 'Entered', 'Entered', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-06-29 11:49:58', 0, '2014-06-29 11:49:58'),
+(646, 183, 'ONHOLD', 'On Hold', 'On Hold', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-06-29 11:49:58', 0, '2014-06-29 11:49:58'),
+(647, 183, 'BOOKED', 'Booked', 'Booked', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-29 11:49:58', 0, '2014-06-29 11:49:58'),
+(648, 184, 'FORM', 'Form', 'Form', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-12 09:15:04', 0, '2014-07-12 09:15:04'),
+(649, 184, 'SEARCH', 'Search', 'Search', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-07-19 05:34:20', 0, '2019-07-14 05:34:20'),
+(650, 184, 'SETUP', 'Setup', 'Setup', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-12 09:15:06', 0, '2014-07-12 09:15:06'),
+(651, 184, 'PROGRAM', 'Program', 'Program', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-12 09:15:06', 0, '2014-07-12 09:15:06'),
+(652, 184, 'CONTENT', 'Content', 'Content', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-12 09:15:07', 0, '2014-07-12 09:15:07'),
+(653, 185, 'SAVINGS', 'Savings', 'Savings', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-07-15 12:15:21', 0, '2014-07-15 12:15:21'),
+(654, 185, 'CURRENT', 'Current', 'Current', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-07-15 12:15:21', 0, '2014-07-15 12:15:21'),
+(655, 185, 'DESPOSIT', 'Deposit', 'Deposit', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-07-15 12:15:22', 0, '2014-07-15 12:15:22'),
+(656, 186, 'A', 'Class A', 'Class A', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-07-18 14:47:04', 0, '2014-07-18 14:47:04'),
+(657, 186, 'B', 'Class B', 'Class B', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-07-18 14:47:04', 0, '2014-07-18 14:47:04'),
+(658, 186, 'C', 'Class C', 'Class C', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-07-18 14:47:07', 0, '2014-07-18 14:47:07'),
+(659, 184, 'DOCUMENT', 'Document', 'Document', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-19 05:45:25', 0, '2014-07-19 05:45:25'),
+(660, 184, 'TRANSACTION', 'Transaction', 'Transaction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-19 05:45:26', 0, '2014-07-19 05:45:26'),
+(661, 187, 'MRP_DEMAND_VALUE', 'MRP Demand Value', 'MRP Demand Value', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-07-22 07:28:09', 0, '2022-07-14 07:28:09'),
+(662, 187, 'ONHAND_VALUE', 'Onhand Value', 'Onhand Value', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-07-19 09:23:25', 0, '2014-07-19 09:23:25'),
+(663, 187, 'MRP_DEMAND_QTY', 'MRP Demand Quantity', 'MRP Demand Quantity', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-07-19 09:23:29', 0, '2014-07-19 09:23:29'),
+(664, 187, 'ONHAND_QTY', 'Onhand Quantity', 'Onhand Quantity', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-07-19 09:23:30', 0, '2014-07-19 09:23:30'),
+(665, 187, 'MBMM_MAX_QTY', 'Multi-Bin Min Max, Max Qty', 'Multi Bin Min Max , Maximum Quantity', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-07-22 07:36:49', 0, '2022-07-14 07:36:49'),
+(666, 187, 'MBMM_MAX_VALUE', 'Multi-Bin Min Max, Max Value', 'Multi Bin Min Max , Maximum Value', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-07-22 07:36:49', 0, '2022-07-14 07:36:49'),
+(667, 187, 'STD_COST', 'Standard Cost', 'Standard Cost', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-07-19 09:23:35', 0, '2014-07-19 09:23:35'),
+(684, 134, 'AED', 'UAE Dirham', 'United Arab Emirates', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:20:33', 0, '2014-08-02 11:20:33'),
+(685, 134, 'AFN', 'Afghani', 'Afghanistan', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:20:33', 0, '2014-08-02 11:20:33'),
+(686, 134, 'ALL', 'Lek', 'Albania', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:20:33', 0, '2014-08-02 11:20:33'),
+(687, 134, 'AMD', 'Armenian Dram', 'Armenia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:20:33', 0, '2014-08-02 11:20:33'),
+(688, 134, 'ANG', 'Antillian Guilder', 'Netherlands Antilles', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:31:44', 0, '2002-08-14 13:31:44'),
+(689, 134, 'AOA', 'Kwanza', 'Angola', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:29', 0, '2002-08-14 13:40:29'),
+(690, 134, 'ARS', 'Argentine Peso', 'Argentina', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:20:33', 0, '2014-08-02 11:20:33'),
+(691, 134, 'AUD', 'Australian Dollar', 'Australia, Australian Antarctic Territory, Christmas Island, Cocos (Keeling) Islands, Heard and McDonald Islands, Kiribati, Nauru, Norfolk Island, Tuvalu', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:20:33', 0, '2014-08-02 11:20:33'),
+(692, 134, 'AWG', 'Aruban Guilder', 'Aruba', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(693, 134, 'AZN', 'AZN', 'Azerbaijan', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:29', 0, '2002-08-14 13:40:29'),
+(694, 134, 'BAM', 'Convertible Marks', 'Bosnia and Herzegovina', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(695, 134, 'BBD', 'Barbados Dollar', 'Barbados', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(696, 134, 'BDT', 'Bangladeshi Taka', 'Bangladesh', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(697, 134, 'BGN', 'Bulgarian Lev', 'Bulgaria', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(698, 134, 'BHD', 'Bahraini Dinar', 'Bahrain', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(699, 134, 'BIF', 'Burundian Franc', 'Burundi', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(700, 134, 'BMD', 'Bermudian Dollar ', 'Bermuda', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(701, 134, 'BND', 'Brunei Dollar', 'Brunei', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(702, 134, 'BOB', 'Boliviano', 'Bolivia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(703, 134, 'BOV', 'Bolivian Mvdol', 'Bolivia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(704, 134, 'BRL', 'Brazilian Real', 'Brazil', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(705, 134, 'BSD', 'Bahamian Dollar', 'Bahamas', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(706, 134, 'BTN', 'Ngultrum', 'Bhutan', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(707, 134, 'BWP', 'Pula', 'Botswana', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(708, 134, 'BYR', 'Belarussian Ruble', 'Belarus', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(709, 134, 'BZD', 'Belize Dollar', 'Belize', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(710, 134, 'CAD', 'Canadian Dollar', 'Canada', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(711, 134, 'CDF', 'Franc Congolais', 'Democratic Republic of Congo', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(712, 134, 'CHE', 'WIR Euro', 'Switzerland', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(713, 134, 'CHF', 'Swiss Franc', 'Switzerland, Liechtenstein', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(714, 134, 'CHW', 'WIR Franc ', 'Switzerland', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(715, 134, 'CLF', 'CLF - Chile', 'Chile', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:30', 0, '2002-08-14 13:40:30'),
+(716, 134, 'CLP', 'Chilean Peso', 'Chile', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(717, 134, 'CNY', 'Yuan Renminbi', 'Mainland China', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(718, 134, 'COP', 'Colombian Peso', 'Colombia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(719, 134, 'COU', 'UVR - Colombia', 'Colombia', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:29', 0, '2002-08-14 13:40:29'),
+(720, 134, 'CRC', 'CRC - Costa Rica', 'Costa Rica', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:30', 0, '2002-08-14 13:40:30'),
+(721, 134, 'CUP', 'Cuban Peso', 'Cuba', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(722, 134, 'CVE', 'CVE - Cape Verde', 'Cape Verde', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:30', 0, '2002-08-14 13:40:30'),
+(723, 134, 'CYP', 'Cyprus Pound', 'Cyprus', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(724, 134, 'CZK', 'Czech Koruna', 'Czech Republic', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(725, 134, 'DJF', 'Djibouti Franc', 'Djibouti', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(726, 134, 'DKK', 'Danish Krone', 'Denmark, Faroe Islands, Greenland', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(727, 134, 'DOP', 'Dominican Peso', 'Dominican Republic', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(728, 134, 'DZD', 'Algerian Dinar', 'Algeria', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(729, 134, 'EEK', 'Kroon', 'Estonia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(730, 134, 'EGP', 'Egyptian Pound', 'Egypt', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(731, 134, 'ERN', 'Nakfa', 'Eritrea', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(732, 134, 'ETB', 'Ethiopian Birr', 'Ethiopia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(733, 134, 'FJD', 'Fiji Dollar', 'Fiji', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(734, 134, 'FKP', 'Falkland Pound', 'Falkland Islands', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:30', 0, '2002-08-14 13:40:30'),
+(735, 134, 'GEL', 'Lari', 'Georgia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(736, 134, 'GHS', 'Cedi', 'Ghana', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(737, 134, 'GIP', 'Gibraltar pound', 'Gibraltar', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(738, 134, 'GMD', 'Dalasi', 'Gambia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(739, 134, 'GNF', 'Guinea Franc', 'Guinea', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(740, 134, 'GTQ', 'Quetzal', 'Guatemala', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(741, 134, 'GYD', 'Guyana Dollar', 'Guyana', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(742, 134, 'HKD', 'Hong Kong Dollar', 'Hong Kong Special Administrative Region', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(743, 134, 'HNL', 'Lempira', 'Honduras', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(744, 134, 'HRK', 'Croatian Kuna', 'Croatia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(745, 134, 'HTG', 'Haiti Gourde', 'Haiti', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(746, 134, 'HUF', 'Forint', 'Hungary', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(747, 134, 'IDR', 'Rupiah', 'Indonesia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(748, 134, 'ILS', 'New Israeli Shekel', 'Israel', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(749, 134, 'IQD', 'Iraqi Dinar', 'Iraq', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(750, 134, 'IRR', 'Iranian Rial', 'Iran', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(751, 134, 'ISK', 'Iceland Krona', 'Iceland', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(752, 134, 'JMD', 'Jamaican Dollar', 'Jamaica', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(753, 134, 'JOD', 'Jordanian Dinar', 'Jordan', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(754, 134, 'JPY', 'Japanese yen', 'Japan', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(755, 134, 'KES', 'Kenyan Shilling', 'Kenya', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(756, 134, 'KGS', 'Som', 'Kyrgyzstan', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(757, 134, 'KHR', 'Riel', 'Cambodia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(758, 134, 'KMF', 'Comoro Franc', 'Comoros', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(759, 134, 'KPW', 'North Korean Won', 'North Korea', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(760, 134, 'KRW', 'South Korean Won', 'South Korea', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:30', 0, '2002-08-14 13:40:30'),
+(761, 134, 'KWD', 'Kuwaiti Dinar', 'Kuwait', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(762, 134, 'KYD', 'Cayman Dollar', 'Cayman Islands', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:31', 0, '2002-08-14 13:40:31'),
+(763, 134, 'KZT', 'Tenge', 'Kazakhstan', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(764, 134, 'LAK', 'Kip', 'Laos', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(765, 134, 'LBP', 'Lebanese Pound', 'Lebanon', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(766, 134, 'LKR', 'Sri Lanka Rupee', 'Sri Lanka', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(767, 134, 'LRD', 'Liberian Dollar', 'Liberia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(768, 134, 'LSL', 'Loti', 'Lesotho', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(769, 134, 'LTL', 'Lithuanian Litas', 'Lithuania', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(770, 134, 'LVL', 'Latvian Lats', 'Latvia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(771, 134, 'LYD', 'Libyan Dinar', 'Libya', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(772, 134, 'MAD', 'Moroccan Dirham', 'Morocco, Western Sahara', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(773, 134, 'MDL', 'Moldovan Leu', 'Moldova', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(774, 134, 'MGA', 'Malagasy Ariary', 'Madagascar', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(775, 134, 'MKD', 'Denar', 'Former Yugoslav Republic of Macedonia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(776, 134, 'MMK', 'Kyat', 'Myanmar', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(777, 134, 'MNT', 'Tugrik', 'Mongolia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(778, 134, 'MOP', 'Pataca', 'Macau Special Administrative Region', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(779, 134, 'MRO', 'Ouguiya', 'Mauritania', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(780, 134, 'MTL', 'Maltese Lira', 'Malta', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(781, 134, 'MUR', 'Mauritius Rupee', 'Mauritius', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(782, 134, 'MVR', 'Rufiyaa', 'Maldives', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(783, 134, 'MWK', 'Kwacha', 'Malawi', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(784, 134, 'MXN', 'Mexican Peso', 'Mexico', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(785, 134, 'MXV', 'UDI - Mexico', 'Mexico', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:31', 0, '2002-08-14 13:40:31'),
+(786, 134, 'MYR', 'Malaysian Ringgit', 'Malaysia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(787, 134, 'MZN', 'Metical', 'Mozambique', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(788, 134, 'NAD', 'Namibian Dollar', 'Namibia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(789, 134, 'NGN', 'Naira', 'Nigeria', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(790, 134, 'NIO', 'Cordoba Oro', 'Nicaragua', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(791, 134, 'NOK', 'Norwegian Krone', 'Norway', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(792, 134, 'NPR', 'Nepalese Rupee', 'Nepal', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(793, 134, 'NZD', 'NZD', 'Cook Islands, New Zealand, Niue, Pitcairn, Tokelau', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:31', 0, '2002-08-14 13:40:31'),
+(794, 134, 'OMR', 'Rial Omani', 'Oman', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(795, 134, 'PAB', 'Balboa', 'Panama', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(796, 134, 'PEN', 'Nuevo Sol', 'Peru', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(797, 134, 'PGK', 'Kina', 'Papua New Guinea', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(798, 134, 'PHP', 'Philippine Peso', 'Philippines', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(799, 134, 'PKR', 'Pakistan Rupee', 'Pakistan', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(800, 134, 'PLN', 'Zloty', 'Poland', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(801, 134, 'PYG', 'Guarani', 'Paraguay', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42');
+INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_code`, `option_line_value`, `description`, `value_group_id`, `priority`, `status`, `mapper1`, `mapper2`, `rev_enabled`, `rev_number`, `effective_start_date`, `effective_end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+(802, 134, 'QAR', 'Qatari Rial', 'Qatar', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(803, 134, 'RON', 'New Leu', 'Romania', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:31', 0, '2002-08-14 13:40:31'),
+(804, 134, 'RSD', 'Serbian Dinar', 'Serbia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(805, 134, 'RUB', 'Russian Ruble', 'Russia, Abkhazia, South Ossetia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(806, 134, 'RWF', 'Rwanda Franc', 'Rwanda', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(807, 134, 'SAR', 'Saudi Riyal', 'Saudi Arabia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(808, 134, 'SBD', 'Solomon Dollar', 'Solomon Islands', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:32', 0, '2002-08-14 13:40:32'),
+(809, 134, 'SCR', 'Seychelles Rupee', 'Seychelles', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(810, 134, 'SDG', 'Sudanese Pound', 'Sudan', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(811, 134, 'SEK', 'Swedish Krona', 'Sweden', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(812, 134, 'SHP', 'SHP', 'Saint Helena', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:32', 0, '2002-08-14 13:40:32'),
+(813, 134, 'SKK', 'Slovak Koruna', 'Slovakia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(814, 134, 'SLL', 'Leone', 'Sierra Leone', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(815, 134, 'SOS', 'Somali Shilling', 'Somalia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(816, 134, 'SRD', 'Surinam Dollar', 'Suriname', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(817, 134, 'STD', 'Dobra', 'S?o Tom? and Pr?ncipe', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(818, 134, 'SYP', 'Syrian Pound', 'Syria', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(819, 134, 'SZL', 'Lilangeni', 'Swaziland', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(820, 134, 'THB', 'Baht', 'Thailand', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(821, 134, 'TJS', 'Somoni', 'Tajikistan', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(822, 134, 'TMM', 'Manat', 'Turkmenistan', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(823, 134, 'TND', 'Tunisian Dinar', 'Tunisia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(824, 134, 'TOP', 'Pa''anga', 'Tonga', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(825, 134, 'TRY', 'New Turkish Lira', 'Turkey', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(826, 134, 'TTD', 'T & T Dollar', 'Trinidad and Tobago', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:32', 0, '2002-08-14 13:40:32'),
+(827, 134, 'TWD', 'New Taiwan Dollar', 'Taiwan and other islands that are under the effective control of the Republic of China (ROC)', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(828, 134, 'TZS', 'Tanzanian Shilling', 'Tanzania', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(829, 134, 'UAH', 'Hryvnia', 'Ukraine', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(830, 134, 'UGX', 'Uganda Shilling', 'Uganda', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(831, 134, 'UYU', 'Peso Uruguayo', 'Uruguay', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(832, 134, 'UZS', 'Uzbekistan Som', 'Uzbekistan', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(833, 134, 'VEB', 'Venezuelan bolvar', 'Venezuela', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:31:44', 0, '2002-08-14 13:31:44'),
+(834, 134, 'VND', 'Vietnamese ng', 'Vietnam', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:31:45', 0, '2002-08-14 13:31:45'),
+(835, 134, 'VUV', 'Vatu', 'Vanuatu', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(836, 134, 'WST', 'Samoan Tala', 'Samoa', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(837, 134, 'XAF', 'CFA Franc BEAC', 'Cameroon, Central African Republic, Congo, Chad, Equatorial Guinea, Gabon', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(838, 134, 'XAG', 'Silver', 'one Troy ounce', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(839, 134, 'XAU', 'Gold ', 'one Troy ounce', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(840, 134, 'XBA', 'XBA', '(EURCO) (Bonds market unit)', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:32', 0, '2002-08-14 13:40:32'),
+(841, 134, 'XBB', 'XBB', '(E.M.U.-6) (Bonds market unit)', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:32', 0, '2002-08-14 13:40:32'),
+(842, 134, 'XBC', 'EU Account 9', ' (E.U.A.-9) (Bonds market unit)', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:33', 0, '2002-08-14 13:40:33'),
+(843, 134, 'XBD', 'EU Account 17 ', '(E.U.A.-17) (Bonds market unit)', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:33', 0, '2002-08-14 13:40:33'),
+(844, 134, 'XCD', 'XCD', 'Anguilla, Antigua and Barbuda, Dominica, Grenada, Montserrat, Saint Kitts and Nevis, Saint Lucia, Saint Vincent and the Grenadines', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:33', 0, '2002-08-14 13:40:33'),
+(845, 134, 'XDR', 'XDR', 'International Monetary Fund', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:33', 0, '2002-08-14 13:40:33'),
+(846, 134, 'XFO', 'Gold franc ', 'Bank for International Settlements', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(847, 134, 'XFU', 'UIC franc ', 'International Union of Railways', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(848, 134, 'XOF', 'XOF', 'Benin, Burkina Faso, C?te d''Ivoire, Guinea-Bissau, Mali, Niger, Senegal, Togo', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:34', 0, '2002-08-14 13:40:34'),
+(849, 134, 'XPT', 'Platinum', ' (one Troy ounce)', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(850, 134, 'XTS', 'Code ', 'reserved for testing purposes', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(851, 134, 'YER', 'Yemeni Rial', 'Yemen', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(852, 134, 'ZAR', 'South African Rand', 'South Africa', 0, 0, '', NULL, NULL, 'enabled', 0, '', '', 0, '2014-08-02 13:40:34', 0, '2002-08-14 13:40:34'),
+(853, 134, 'ZMK', 'Kwacha', 'Zambia', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(854, 134, 'ZWD', 'Zimbabwe Dollar', 'Zimbabwe', NULL, NULL, NULL, NULL, NULL, 'enabled', 1, '1/1/2000', NULL, 0, '2014-08-02 11:28:42', 0, '2014-08-02 11:28:42'),
+(855, 188, 'CORP', 'Corporate', 'Corporate', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-02 12:29:30', 0, '2014-08-02 12:29:30'),
+(856, 188, 'USER', 'User', 'User Rate', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-02 12:29:30', 0, '2014-08-02 12:29:30'),
+(857, 188, 'AVERAGE', 'Average', 'Average', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-02 12:29:31', 0, '2014-08-02 12:29:31'),
+(858, 188, 'REPORTING', 'Reporting', 'Reporting', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-02 12:29:31', 0, '2014-08-02 12:29:31'),
+(859, 182, 'hr', 'Human Resource', '300. HR', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-07 09:55:00', 0, '2014-08-07 09:55:00'),
+(860, 189, 'MARRIED', 'Married', 'Married', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-07 10:45:34', 0, '2014-08-07 10:45:34'),
+(861, 189, 'SINGLE', 'Single', 'Single', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-07 10:45:34', 0, '2014-08-07 10:45:34'),
+(862, 189, 'SEPARATED', 'Separated', 'Separated', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-07 10:45:34', 0, '2014-08-07 10:45:34'),
+(863, 190, 'PART_TIME_REGULAR', 'Part Time Regular', 'Part Time Regular', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-08 12:37:36', 0, '2014-08-08 12:37:36'),
+(864, 190, 'FULL_TIME_REGULAR', 'Full Time Regular', 'Full Time Regular', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-08 12:37:36', 0, '2014-08-08 12:37:36'),
+(865, 190, 'FULL_TIME_INTERN', 'Full Time Intenr', 'Full Time Intenr', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-08 12:37:36', 0, '2014-08-08 12:37:36'),
+(866, 190, 'FULL_TIME_TEMP', 'Full Time Temporary', 'Full Time Temporary', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-08 12:37:36', 0, '2014-08-08 12:37:36'),
+(867, 190, 'PART_TIME_TEMP', 'Part Time Temporary', 'Part Time Temporary', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-08 12:37:37', 0, '2014-08-08 12:37:37'),
+(868, 190, 'PART_TIME_INTERN', 'Part Time Intenr', 'Part Time Intenr', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-08 12:37:37', 0, '2014-08-08 12:37:37'),
+(869, 191, 'IT', 'Information Technology', 'Information Technology', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-08 12:44:32', 0, '2014-08-08 12:44:32'),
+(870, 191, 'HR', 'Human Resource', 'Human Resource', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-08 12:44:32', 0, '2014-08-08 12:44:32'),
+(871, 191, 'OPR', 'Operation', 'Operation', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-08 12:44:32', 0, '2014-08-08 12:44:32'),
+(872, 191, 'PMO', 'Program Management', 'Program Management', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-08 12:44:33', 0, '2014-08-08 12:44:33'),
+(873, 191, 'PUR', 'Purchasing', 'Purchasing', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-08 12:44:33', 0, '2014-08-08 12:44:33'),
+(874, 191, 'PLAN', 'Planning', 'Planning', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-08 12:44:33', 0, '2014-08-08 12:44:33'),
+(875, 191, 'ENGG', 'Engineering', 'Engineering', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-08 12:44:33', 0, '2014-08-08 12:44:33'),
+(876, 191, 'RND', 'Research & Development', 'Research & Development', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-08 12:44:33', 0, '2014-08-08 12:44:33'),
+(877, 191, 'INV', 'Inventory', 'Inventory', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-08 12:44:34', 0, '2014-08-08 12:44:34'),
+(878, 192, 'EARNINGS', 'Earnings', 'Earnings', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-11 12:39:21', 0, '2011-08-14 12:39:21'),
+(879, 192, 'DEDUCTIONS', 'Deductions', 'Deductions', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-11 12:39:21', 0, '2011-08-14 12:39:21'),
+(880, 193, 'VOL_DEDUCTION', 'Voluntary Deductions', 'Voluntary Deductions', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-11 12:50:31', 0, '2014-08-11 12:50:31'),
+(881, 193, 'INVOL_DEDUCTION', 'Involuntary Deductions', 'Involuntary Deductions', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-11 12:50:31', 0, '2014-08-11 12:50:31'),
+(882, 193, 'PRE_TAX_DEDUCTION', 'Pre Tax Deductions', 'Pre Tax Deductions', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-11 12:50:31', 0, '2014-08-11 12:50:31'),
+(883, 193, 'NON_TAX_EARNING', 'Non Taxable Earnings', 'Non Taxable Earnings', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-11 16:35:48', 0, '2011-08-14 16:35:48'),
+(884, 193, 'EARNINGS', 'Earnings', 'Earnings', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-11 12:50:32', 0, '2014-08-11 12:50:32'),
+(885, 194, 'E_REGULAR', 'Regual Earnings', 'Regual Earnings', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-11 13:10:18', 0, '2014-08-11 13:10:18'),
+(886, 194, 'E_PENSION', 'Pension Earnings', 'Penson Earnings', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-11 13:10:18', 0, '2014-08-11 13:10:18'),
+(887, 194, 'D_TAX', 'Tax Deduction', 'Tax Deduction', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-11 13:10:19', 0, '2014-08-11 13:10:19'),
+(888, 194, 'E_ALLOWANCE', 'Allowance', 'Allowance', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-11 16:14:57', 0, '2011-08-14 16:14:57'),
+(889, 194, 'E_OVERTIME', 'Overtime Earnings', 'Overtime Earnings', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-11 13:10:19', 0, '2014-08-11 13:10:19'),
+(890, 194, 'D_LOAN', 'Loan Deduction', 'Loan Deduction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-11 13:10:19', 0, '2014-08-11 13:10:19'),
+(891, 194, 'E_BASIC', 'Basic Salary', 'Basic Salary', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-11 16:25:40', 0, '2014-08-11 16:25:40'),
+(892, 195, 'OTHER', 'Other', 'Voluntary Deductions', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 04:54:20', 0, '2014-08-13 04:54:20'),
+(893, 195, 'PART_TIME_DISTANCE', 'Part Time - Distance', 'Part Time - Distance', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 04:54:21', 0, '2014-08-13 04:54:21'),
+(894, 195, 'PART_TIME_REGULAR', 'Part Time - Regular', 'Part Time - Regular', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 04:54:21', 0, '2014-08-13 04:54:21'),
+(895, 195, 'FULL_TIME_DISTANCE', 'Full Time - Distance', 'Full Time - Distance', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 04:54:21', 0, '2014-08-13 04:54:21'),
+(896, 195, 'FULL_TIME_REGULAR', 'Full Time - Regular', 'Full Time - Regular', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 04:54:21', 0, '2014-08-13 04:54:21'),
+(897, 196, 'MALE', 'Male', 'Male', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 05:45:34', 0, '2014-08-13 05:45:34'),
+(898, 196, 'UNKNOWN', 'Unknown', 'Unknown', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 05:45:34', 0, '2014-08-13 05:45:34'),
+(899, 196, 'FEMALE', 'Female', 'Female', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 05:45:34', 0, '2014-08-13 05:45:34'),
+(900, 197, 'EMPLOYEE_EX', 'Ex-Employee', 'Ex-Employee', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 06:01:41', 0, '2013-08-14 06:01:41'),
+(901, 197, 'APPLICANT', 'Applicant', 'Applicant', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 06:01:41', 0, '2013-08-14 06:01:41'),
+(902, 197, 'APPLICANT_EX', 'Ex-Applicant', 'Ex-Applicant', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 06:01:41', 0, '2013-08-14 06:01:41'),
+(903, 197, 'EMPLOYEE', 'Employee', 'Employee', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 06:01:42', 0, '2013-08-14 06:01:42'),
+(904, 197, 'OTHERS', 'Others', 'Others', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 06:01:42', 0, '2013-08-14 06:01:42'),
+(905, 197, 'INTERN', 'Intern', 'Intern', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 06:01:42', 0, '2013-08-14 06:01:42'),
+(906, 197, 'EMPLOYEE_EX_APPLICANT', 'Employee-Ex-Applicant', 'Employee-Ex-Applicant', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 06:01:42', 0, '2013-08-14 06:01:42'),
+(907, 197, 'EMPLOYEE_EX_INTERN', 'Employee-Ex-Intern', 'Employee-Ex-Intern', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-13 06:01:43', 0, '2014-08-13 06:01:43'),
+(908, 198, 'ADHAR', 'Adhar', 'Adhar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-13 06:05:49', 0, '2014-08-13 06:05:49'),
+(909, 198, 'FIN_NUMBER', 'FIN Number', 'FIN Number', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 06:05:49', 0, '2014-08-13 06:05:49'),
+(910, 198, 'PASSPORT', 'Passport', 'Passport', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 06:05:50', 0, '2014-08-13 06:05:50'),
+(911, 198, 'SSN', 'Social Security', 'Social Security', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-13 06:05:50', 0, '2014-08-13 06:05:50'),
+(912, 198, 'EMPLOYEE_NUMBER', 'Employee Number', 'Employee Number', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-13 06:05:50', 0, '2014-08-13 06:05:50'),
+(913, 199, 'WIRE', 'Wire', 'Wire', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-15 11:13:12', 0, '2014-08-15 11:13:12'),
+(914, 199, 'DIRECT', 'Direct Deposit', 'Direct Deposit', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-15 11:13:12', 0, '2014-08-15 11:13:12'),
+(915, 199, 'CHEQUE', 'Cheque', 'Cheque', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-15 11:13:13', 0, '2014-08-15 11:13:13'),
+(916, 199, 'EFT', 'EFT', 'EFT', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-15 11:13:13', 0, '2014-08-15 11:13:13'),
+(917, 199, 'CASH', 'Cash', 'Cash', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-15 11:13:13', 0, '2014-08-15 11:13:13'),
+(923, 200, 'WEEK', 'Week', 'Week', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-15 11:55:47', 0, '2014-08-15 11:55:47'),
+(924, 200, 'SEMI_MONTH', 'Semi-Month', 'Semi-Month', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-15 11:55:47', 0, '2014-08-15 11:55:47'),
+(925, 200, 'MONTH', 'Month', 'Month', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-15 11:55:47', 0, '2014-08-15 11:55:47'),
+(926, 200, 'ALERTNATE_MONTH', 'Alternate Month', 'Alternate Month', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-15 11:55:48', 0, '2014-08-15 11:55:48'),
+(927, 200, 'QUARTER', 'Quarter', 'Quarter', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-15 11:55:48', 0, '2014-08-15 11:55:48'),
+(928, 200, 'SEMI_YEAR', 'Semi Year', 'Semi Year', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-15 11:55:48', 0, '2014-08-15 11:55:48'),
+(929, 200, 'YEAR', 'Year', 'Year', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-15 11:55:48', 0, '2014-08-15 11:55:48'),
+(930, 201, 'UNPAID', 'Unpaid Leave', 'Unpaid Leave', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-16 16:57:51', 0, '2014-08-16 16:57:51'),
+(931, 201, 'MATERNITY', 'Maternity Leave', 'Maternity Leave', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-16 16:57:51', 0, '2014-08-16 16:57:51'),
+(932, 201, 'PATERNITY', 'Paternity Leave', 'Paternity Leave', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-16 16:57:52', 0, '2014-08-16 16:57:52'),
+(933, 201, 'PAID', 'Paid Leave', 'Paid Leave', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-16 16:57:52', 0, '2014-08-16 16:57:52'),
+(934, 201, 'PERSONAL', 'Personal Leave', 'Personal Leave', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-16 16:57:52', 0, '2014-08-16 16:57:52'),
+(935, 201, 'LEGAL', 'Legal Leave', 'Legal Leave', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-16 16:57:53', 0, '2014-08-16 16:57:53'),
+(936, 201, 'OTHERS', 'Others', 'Others', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-16 16:57:53', 0, '2014-08-16 16:57:53'),
+(937, 202, 'PUR_BLANKET_RELEASE', 'Blanket Release', 'Blanket Release', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-19 05:30:05', 0, '2014-08-19 05:30:05'),
+(938, 202, 'PUR_STANDRAD_PO', 'Standard PO', 'Standard PO', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-26 11:04:16', 0, '2026-08-14 11:04:16'),
+(939, 202, 'PUR_REQUISITION_INTERNAL', 'Internal Requisition', 'Internal Requisition', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-19 05:30:05', 0, '2014-08-19 05:30:05'),
+(940, 202, 'PUR_BLANKET_AGGREMENT', 'Blanket Agreement', 'Blanket Agreement', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-26 11:04:17', 0, '2026-08-14 11:04:17'),
+(941, 202, 'PUR_REQUISITION_EXTERN', 'External Requisition', 'External Requisition', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-19 05:30:06', 0, '2014-08-19 05:30:06'),
+(942, 202, 'AP_INVOICE', 'AP Invoice', 'AP Invoice', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-19 05:30:06', 0, '2014-08-19 05:30:06'),
+(943, 202, 'AP_PAYMENT', 'AP Payment', 'AP Payment', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-19 05:30:06', 0, '2014-08-19 05:30:06'),
+(944, 202, 'GL_JOURNAL', 'Journals', 'Journals', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-19 05:30:07', 0, '2014-08-19 05:30:07'),
+(945, 202, 'GL_BUDGET', 'GL Budget', 'GL Budget', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-19 05:30:07', 0, '2014-08-19 05:30:07'),
+(946, 202, 'WIP_WO', 'Work Order', 'Work Order', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-19 05:30:07', 0, '2014-08-19 05:30:07'),
+(947, 203, 'REQ_APPROVAL', 'Req Approval', 'Req Approval', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-21 12:05:26', 0, '2014-08-21 12:05:26'),
+(948, 203, 'JOURNAL_APPROVAL', 'Journal Approval', 'Journal Approval', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-21 12:05:26', 0, '2014-08-21 12:05:26'),
+(949, 203, 'PO_APPROVAL', 'PO Approval', 'PO Approval', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-21 12:05:26', 0, '2014-08-21 12:05:26'),
+(950, 203, 'LEAVE_APPLICATION', 'Leave Application', 'Leave Application', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-08-21 12:05:27', 0, '2014-08-21 12:05:27'),
+(951, 77, 'OTHER_ENTITY', 'Other Entity', 'Other Entity', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-22 07:20:27', 0, '2014-08-22 07:20:27'),
+(952, 131, 'BLANKET_RELEASE', 'Blanket Release', 'Blanket Release', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-25 03:22:08', 0, '2014-08-25 03:22:08'),
+(953, 202, 'PUR_CONTRACT_PO', 'Contract PO', 'Contract PO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-26 11:04:16', 0, '2014-08-26 11:04:16'),
+(954, 204, 'PO_LINE_HOLD', 'PO Line Hold', 'PO Line Hold', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-01 11:19:32', 0, '2014-09-01 11:19:32'),
+(955, 204, 'SO_HEADER_HOLD', 'SO Header Hold', 'SO Header Hold', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-01 11:19:32', 0, '2014-09-01 11:19:32'),
+(956, 204, 'PO_HEADER_HOLD', 'PO Header Hold', 'PO Header Hold', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-01 11:19:33', 0, '2014-09-01 11:19:33'),
+(957, 204, 'SO_LINE_HOLD', 'SO Line Hold', 'SO Line Hold', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-01 11:19:33', 0, '2014-09-01 11:19:33'),
+(958, 119, 'CUSTOMER', 'Customer', 'Customer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-05 03:32:31', 0, '2014-09-05 03:32:31'),
+(959, 119, 'SUPPLIER', 'Supplier', 'Supplier', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-05 03:32:31', 0, '2014-09-05 03:32:31'),
+(960, 161, 'ACCRUAL', 'Accrual', 'Accrual', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-08 17:16:04', 0, '2014-09-08 17:16:04'),
+(961, 205, 'DEFINED', 'Defined', 'Only defined but never used', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-14 08:00:30', 0, '2014-09-14 08:00:30'),
+(962, 205, 'INTRANSIT', 'Intransit', 'Intransit', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-14 08:00:31', 0, '2014-09-14 08:00:31'),
+(963, 205, 'OUT_STORE', 'Out Of Store', 'Out of Store', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-14 08:00:31', 0, '2014-09-14 08:00:31'),
+(964, 205, 'IN_STORE', 'In Store', 'In Store', NULL, NULL, NULL, NULL, NULL, 'enabled', NULL, NULL, NULL, 0, '2014-09-17 04:56:44', 0, '2017-09-14 04:56:44'),
+(965, 205, 'IN_WIP', 'In WIP', 'In WIP', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-17 04:56:44', 0, '2014-09-17 04:56:44'),
+(966, 205, 'IN_RECEIVING', 'In Receiving', 'In Receiving', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-09-17 04:56:44', 0, '2014-09-17 04:56:44'),
+(967, 206, 'INT', 'Integer', 'Integer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 12:54:36', 0, '2014-10-07 12:54:36'),
+(968, 206, 'DECIMAL', 'Float', 'Float', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 12:54:36', 0, '2014-10-07 12:54:36'),
+(969, 206, 'TEXT', 'Long Text', 'Long Text', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 12:54:37', 0, '2014-10-07 12:54:37'),
+(970, 206, 'BOOLEAN', 'Boolean', 'Boolean', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-08 05:22:54', 0, '2008-10-14 05:22:54'),
+(971, 206, 'VARCHAR', 'Characters', 'Characters', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 12:54:37', 0, '2014-10-07 12:54:37'),
+(972, 206, 'DATE', 'Date', 'Date', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 12:54:37', 0, '2014-10-07 12:54:37'),
+(973, 206, 'FILE', 'File', 'File', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 12:54:38', 0, '2014-10-07 12:54:38'),
+(974, 206, 'IMAGE', 'Image', 'Image', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 12:54:38', 0, '2014-10-07 12:54:38'),
+(975, 206, 'OPTION_LIST', 'Option List', 'Option List', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 12:54:38', 0, '2014-10-07 12:54:38'),
+(976, 206, 'LIST', 'List', 'List', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 12:54:38', 0, '2014-10-07 12:54:38'),
+(977, 206, 'MULTI_SELECT', 'Multi Select', 'Multi Select', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-07 12:54:39', 0, '2014-10-07 12:54:39'),
+(978, 206, 'DATETIME', 'Date & Time', 'Date & Time', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-10-08 05:22:53', 0, '2014-10-08 05:22:53'),
+(979, 207, 'EXTERNAL', 'External', 'External', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-10-22 07:41:33', 34, '2014-10-22 07:41:33'),
+(980, 207, 'INTERNAL', 'Internal', 'Internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-10-22 07:41:34', 34, '2014-10-22 07:41:34'),
+(981, 208, 'LIST', 'List', 'List', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-10-24 13:29:30', 1, '2014-10-24 16:11:06'),
+(982, 208, 'GRID', 'Grid', 'Grid', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-10-24 13:29:30', 1, '2014-10-24 16:11:05'),
+(983, 208, 'TABLE', 'Table', 'Table', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-10-24 13:29:31', 1, '2014-10-24 16:11:06'),
+(984, 208, 'PARAGRAPH', 'Paragraph', 'Paragraph', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-10-24 13:29:31', 1, '2014-10-24 16:11:05'),
+(985, 184, 'REPORT', 'Report', 'Report', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-10-25 10:43:25', 34, '2014-10-25 10:43:25'),
+(986, 209, 'ACCESS', 'Access', 'Access', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-02 05:01:23', 34, '2014-11-02 05:01:23'),
+(987, 209, 'SALES', 'Sales', 'Sales', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-02 05:01:23', 34, '2014-11-02 05:01:23'),
+(988, 209, 'PUR', 'Purchasing', 'Purchasing', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-02 05:01:23', 34, '2014-11-02 05:01:23'),
+(989, 209, 'FIN', 'Finance', 'Finance', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-02 05:01:24', 34, '2014-11-02 05:01:24'),
+(990, 209, 'INV', 'Inventory', 'Inventory', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-02 05:01:24', 34, '2014-11-02 05:01:24'),
+(991, 209, 'HR', 'HR', 'HR', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-02 05:01:24', 34, '2014-11-02 05:01:24'),
+(992, 210, 'CHEMICAL', 'Chemical', 'Chemical', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-07 05:52:35', 34, '2014-11-07 05:52:35'),
+(993, 210, 'MEDICAL', 'Medical', 'Medical', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-07 05:52:36', 34, '2014-11-07 05:52:36'),
+(994, 210, 'IT', 'IT', 'IT', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-07 05:52:36', 34, '2014-11-07 05:52:36'),
+(995, 210, 'LAB', 'Lab', 'Lab', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-07 05:52:36', 34, '2014-11-07 05:52:36'),
+(996, 210, 'DRUG', 'Drug', 'Drug', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-07 05:52:37', 34, '2014-11-07 05:52:37'),
+(997, 210, 'OFFICE', 'Office', 'Office', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-07 05:52:37', 34, '2014-11-07 05:52:37'),
+(998, 210, 'TRAVEL', 'Travel', 'Travel', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-07 05:52:37', 34, '2014-11-07 05:52:37'),
+(999, 210, 'METFAB', 'MetaFab', 'MetaFab', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-07 05:52:38', 34, '2014-11-07 05:52:38'),
+(1000, 210, 'DIODE', 'Diodes', 'Diodes', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-07 05:52:38', 34, '2014-11-07 05:52:38'),
+(1001, 210, 'CLUSTER', 'Cluster', 'Cluster', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-11-07 05:52:38', 34, '2014-11-07 05:52:38'),
+(1002, 182, 'cc', 'Change Control', '800. Change Control', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-11-07 07:50:59', 1, '2014-11-07 07:50:59'),
+(1003, 84, 'EXPENSE_RAW', 'Exepnse Raw', 'Exepnse Raw', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-11-15 14:04:36', 34, '2015-02-09 08:04:12'),
+(1004, 211, 'PRODUCTION', 'Production', 'Production', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-01 06:55:11', 34, '2014-12-01 06:55:11'),
+(1005, 211, 'SHIPPING', 'Shipping', 'Shipping', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-01 06:55:12', 34, '2014-12-01 06:55:12'),
+(1006, 211, 'RECEVING', 'Receving', 'Receving', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-01 06:55:12', 34, '2014-12-01 06:55:12'),
+(1007, 211, 'LOCATION', 'Location', 'Location', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-01 06:55:13', 34, '2014-12-01 06:55:13'),
+(1008, 211, 'INVENTORY', 'Inventory', 'Inventory', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-01 06:55:13', 34, '2014-12-01 06:55:13'),
+(1009, 211, 'MATERIAL', 'Material', 'Material', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-01 06:55:13', 34, '2014-12-01 06:55:13'),
+(1010, 212, 'HP_LJ', 'HP LaserJet', 'HP LaserJet', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-01 09:41:02', 34, '2014-12-01 09:41:02'),
+(1011, 212, 'ZEBRA_XML', 'Zebra XML', 'Zebra XML', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-01 09:41:02', 34, '2014-12-01 09:41:02'),
+(1012, 212, 'EPSON_IJ', 'EPSON InkJet', 'EPSON InkJet', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-01 09:41:02', 34, '2014-12-01 09:41:02'),
+(1013, 213, 'ALMUNI_VISIT', 'Almuni Visit', 'Almuni Visit', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-07 04:45:07', 34, '2014-12-07 04:45:07'),
+(1014, 213, 'MAIL', 'Mail', 'Mail', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-07 04:45:08', 34, '2014-12-07 04:45:08'),
+(1015, 213, 'CAMPUS_VISIT', 'Campus Visit', 'Campus Visit', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-07 04:45:08', 34, '2014-12-07 04:45:08'),
+(1016, 213, 'INDIRECT', 'In Direct', 'In Direct', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-07 04:45:08', 34, '2014-12-07 04:45:08'),
+(1017, 213, 'DIRECT', 'Direct', 'Direct', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-07 04:45:09', 34, '2014-12-07 04:45:09'),
+(1018, 213, 'WEB', 'Web', 'Web', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-07 04:45:09', 34, '2014-12-07 04:45:09'),
+(1019, 213, 'GOOGLE', 'Google', 'Google', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-07 04:45:09', 34, '2014-12-07 04:45:09'),
+(1020, 213, 'MOBILE', 'Mobile', 'Mobile', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-07 04:45:09', 34, '2014-12-07 04:45:09'),
+(1021, 214, 'ASIA', 'Asia', 'Asia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 06:05:26', 1, '2014-12-08 06:05:26'),
+(1022, 214, 'NORTH_AMERICA', 'North America', 'North America', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 06:05:26', 1, '2014-12-08 06:05:26'),
+(1023, 214, 'OTHERS', 'Others', 'Others', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 06:05:27', 1, '2014-12-08 06:05:27'),
+(1024, 214, 'GERMANY', 'Germany', 'Germany', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 06:05:27', 1, '2014-12-08 06:05:27'),
+(1025, 214, 'EUROPE', 'Eurpoe', 'Europe', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 06:05:28', 1, '2014-12-08 06:05:28'),
+(1026, 214, 'RUSSIA', 'Russia', 'Russia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 06:05:28', 1, '2014-12-08 06:05:28'),
+(1027, 214, 'CHINA', 'China', 'China', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 06:05:29', 1, '2014-12-08 06:05:29'),
+(1028, 214, 'INDIA', 'India', 'India', 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 06:05:29', 1, '2014-12-08 11:24:09'),
+(1029, 215, 'PROD_AGENT', 'Production Associate', 'Production Associate', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 11:53:52', 34, '2014-12-27 12:29:42'),
+(1030, 215, 'SALES_LEAD', 'Sales Lead', 'Sales Lead', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 11:53:53', 34, '2014-12-27 12:29:43'),
+(1031, 215, 'SALES_DIR', 'Sales Director', 'Sales Director', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 11:53:53', 34, '2014-12-27 12:29:42'),
+(1032, 215, 'SALES_AGENT', 'Sales Associate', 'Sales Agent', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 11:53:53', 34, '2014-12-27 12:29:41'),
+(1033, 215, 'SALES_MNGR', 'Sales Manager', 'Sales Manager', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 11:53:53', 34, '2014-12-27 12:29:43'),
+(1034, 215, 'PROD_MNGR', 'Production Manager', 'Production Manager', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 11:53:54', 34, '2014-12-27 12:29:43'),
+(1035, 215, 'PROD_DIR', 'Production Director', 'Production Director', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 11:53:54', 34, '2014-12-27 12:29:44'),
+(1036, 215, 'PROD_LEAD', 'Production Lead', 'Production Lead001', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-12-08 11:53:54', 34, '2014-12-27 12:29:44'),
+(1037, 216, 'HIGH_VOLUME', 'High Volume', 'High Volume', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-09 05:04:29', 34, '2014-12-27 12:37:45'),
+(1038, 216, 'NEW_CUSTOMER', 'New Customer', 'New Customer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-09 05:04:29', 34, '2014-12-27 12:37:46'),
+(1039, 216, 'STRATEGIC', 'Strategic Sales', 'Strategic Sales', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-09 05:04:30', 34, '2014-12-27 12:37:45'),
+(1040, 216, 'NEW_LOCATION', 'New Location', 'New Geographic Location', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-09 05:04:30', 34, '2014-12-27 12:37:45'),
+(1041, 216, 'NEW_PRODUCT', 'New Product', 'New Product', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-09 05:04:30', 34, '2014-12-27 12:37:44'),
+(1042, 216, 'CRITICAL_CUSTOMER', 'Critical Customer', 'Critical Customer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-09 05:04:31', 34, '2014-12-27 12:37:46'),
+(1043, 216, 'GOVERMENT', 'Goverment', 'Goverment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-09 05:04:31', 34, '2014-12-27 12:37:47'),
+(1044, 216, 'SOCIAL', 'Social Sector', 'Social Sector', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2014-12-09 05:04:31', 34, '2014-12-27 12:37:47'),
+(1045, 217, 'RFI', 'RFI', 'Request for Information', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-04 04:57:44', 34, '2015-01-04 04:57:44'),
+(1046, 217, 'GENERAL', 'General', 'General', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-04 04:57:44', 34, '2015-01-04 04:57:44'),
+(1047, 217, 'SALES', 'Sales', 'Sales Team', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-04 04:57:45', 34, '2015-01-04 04:57:45'),
+(1049, 218, 'BUDGET', 'Budget', 'Budget', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-12 14:01:02', 34, '2015-01-12 14:01:02'),
+(1050, 218, 'TAX', 'Tax', 'Tax', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-12 14:01:03', 34, '2015-01-12 14:01:03'),
+(1051, 218, 'CORP', 'CORP', 'Corporate', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-12 14:01:03', 34, '2015-01-12 14:01:03'),
+(1052, 219, 'OWN', 'Owned', 'Owned', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-12 16:42:29', 34, '2015-01-12 16:42:29'),
+(1053, 219, 'LEASE', 'Leased', 'Leased', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-12 16:42:29', 34, '2015-01-12 16:42:29'),
+(1054, 219, 'RENT', 'Rent', 'Rent', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-12 16:42:30', 34, '2015-01-12 16:42:30'),
+(1055, 182, 'da', 'Document & Analysis', '903. Document & Analysis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-19 16:10:32', 34, '2015-05-05 15:32:07'),
+(1056, 182, 'pos', 'Point Of Sale', '206. Point Of Sale', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-19 16:11:59', 34, '2015-01-19 16:13:30'),
+(1057, 184, 'UPLOAD', 'Mass Upload', 'Mass Upload', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-22 02:44:43', 34, '2015-01-22 02:44:43'),
+(1058, 83, 'BD', 'Budgetary Debit', 'Budgetary Debit', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-26 02:34:51', 34, '2015-01-26 02:34:51'),
+(1059, 86, 'POS', 'POS', 'Point Of Sale', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-02 02:31:18', 34, '2015-02-02 02:31:18'),
+(1060, 220, 'POS_RETURN', 'POS Return', 'POS Return', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-02 08:49:36', 34, '2015-02-02 08:49:36'),
+(1061, 220, 'SHIPPING', 'Shipping', 'Shipping', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-02 08:49:37', 34, '2015-02-02 08:49:37'),
+(1062, 220, 'RECEVING', 'Receiving', 'Receiving', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-02 08:49:39', 34, '2015-02-02 08:49:39'),
+(1063, 220, 'POS_TRANSACTION', 'POS Transaction', 'POS Transaction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-02 08:49:39', 34, '2015-02-02 08:49:39'),
+(1064, 220, 'MO_RECEVING', 'Move Order Receipt', 'Move Order Receipt', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-02 08:49:39', 34, '2015-02-02 08:49:39'),
+(1065, 157, 'POS_TRANSACTION', 'POS Transaction', 'POS Transaction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-04 06:43:40', 34, '2015-02-04 06:43:40'),
+(1066, 211, 'POS', 'POS Transaction', 'POS Transaction', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-05 02:37:21', 34, '2015-02-05 02:37:21'),
+(1067, 217, 'SUPPORT', 'Support', 'Support', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-05 03:03:49', 34, '2015-02-05 03:03:49'),
+(1068, 221, 'FORUM', 'Forum', 'Forum', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-06 05:51:23', 34, '2015-02-06 05:51:23'),
+(1069, 221, 'DOCUMENTATION', 'Documentation', 'Documentation', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-06 05:51:23', 34, '2015-02-06 05:51:23'),
+(1070, 221, 'SUPPORT_REQUEST', 'Support Request', 'Support Request', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-06 05:51:24', 34, '2015-02-06 05:51:24'),
+(1071, 221, 'CONTENT', 'Content', 'Content', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-06 05:51:24', 34, '2015-02-06 05:51:24'),
+(1072, 221, 'SERVICE_REQUEST', 'Service Request', 'Service Request', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-06 05:51:24', 34, '2015-02-06 05:51:24'),
+(1073, 222, 'PLANNING', 'Planning', 'Planning', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-07 14:59:42', 34, '2015-03-08 10:26:56'),
+(1074, 222, 'MODEL', 'Model', 'Model', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-07 14:59:43', 34, '2015-02-07 15:03:01'),
+(1075, 222, 'OPTION_CLASS', 'Option Class', 'Option Class', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-07 14:59:43', 34, '2015-02-07 15:03:02'),
+(1076, 222, 'PRODUCT_FAMILY', 'Product Family', 'Product Family', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-07 14:59:44', 34, '2015-02-07 15:03:02'),
+(1077, 222, 'STANDARD', 'Standard', 'Standard', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-07 14:59:44', 34, '2015-02-07 15:03:02'),
+(1078, 84, 'TEMPLATE', 'Template', 'Template', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-09 08:01:59', 34, '2015-02-09 08:04:11'),
+(1079, 182, 'am', 'Asset Maintenance', '210.Asset Maintenance', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-16 05:23:28', 34, '2015-02-16 05:24:12'),
+(1080, 182, 'adm', 'Admin', '911.Admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-17 13:17:52', 34, '2015-02-17 13:17:52'),
+(1081, 223, 'ALL_ORG_BOTH', 'All Org Both', 'All Org Both Access', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-21 18:48:14', 34, '2015-02-21 18:48:14'),
+(1082, 223, 'ALL_ORG_READ', 'All Org Read', 'All Org Read Acess', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-21 18:48:15', 34, '2015-02-21 18:48:15'),
+(1083, 223, 'ASIA_BOTH', 'Asia Both', 'Asia Both', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-21 18:48:15', 34, '2015-02-21 18:48:15'),
+(1084, 223, 'US_BOTH', 'US Both', 'US Both', NULL, 1, NULL, NULL, NULL, NULL, 1, NULL, NULL, 34, '2015-02-21 18:48:15', 34, '2015-02-21 18:48:15'),
+(1085, 223, 'US_READ', 'US Read', 'US Read', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-21 18:48:16', 34, '2015-02-21 18:48:16'),
+(1086, 223, 'ASIA_READ', 'Asia Read', 'Asia Read', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-21 18:48:16', 34, '2015-02-21 18:48:16'),
+(1087, 223, 'ROW_BOTH', 'ROW Both', 'ROW Both', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-21 18:48:16', 34, '2015-02-21 18:48:16'),
+(1088, 223, 'ROW_READ', 'ROW Read', 'ROW Read', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-21 18:48:17', 34, '2015-02-21 18:48:17'),
+(1089, 224, 'de_DE', 'Gerrman', 'Deutsch - Gerrman', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-24 09:18:27', 34, '2015-03-08 14:03:35'),
+(1090, 224, 'en_US', 'English', 'English', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-24 09:18:28', 34, '2015-02-24 09:25:01'),
+(1091, 224, 'fr_FR', 'French', 'français - French', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-24 09:18:28', 34, '2015-03-08 14:03:35'),
+(1092, 224, 'hi_IN', 'Hindi - India', 'हिंदी - Hindi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-02-24 09:18:29', 34, '2015-03-08 17:23:26'),
+(1093, 224, 'zh_CN', 'Chinese - Simplified', '中国 - Chinese - Simplified', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-08 17:20:54', 34, '2015-03-08 17:23:25'),
+(1094, 224, 'ar_SA', 'Arabic - Saudi Arabia', 'العربية - Arabic', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-08 17:59:29', 34, '2015-03-08 17:59:29'),
+(1095, 225, 'CALIBRATION', 'Calibration', 'Calibration', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:31:11', 34, '2015-03-16 10:31:11'),
+(1096, 225, 'MAINTENANCE', 'Maitenance', 'Maitenance', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:31:12', 34, '2015-03-16 10:31:12'),
+(1097, 225, 'LUBRICATION', 'Lubrication', 'Lubrication', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:31:13', 34, '2015-03-16 10:31:13'),
+(1098, 225, 'REMOVAL', 'Removal', 'Removal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:31:13', 34, '2015-03-16 10:31:13'),
+(1099, 225, 'PREVENTION', 'Prevention', 'Prevention', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:31:14', 34, '2015-03-16 10:31:14'),
+(1100, 225, 'INSPECTION', 'Inspection', 'Inspection', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:31:14', 34, '2015-03-16 10:31:14'),
+(1101, 226, 'REPAIR', 'Repair', 'Repair', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:34:28', 34, '2015-03-16 10:34:28'),
+(1102, 226, 'DAMAGE', 'Damage', 'Damage', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:34:30', 34, '2015-03-16 10:34:30'),
+(1103, 226, 'EXPANSION', 'Expansion', 'Expansion', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:34:30', 34, '2015-03-16 10:34:30'),
+(1104, 226, 'REWORK', 'Rework', 'Rework', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:34:31', 34, '2015-03-16 10:34:31'),
+(1105, 226, 'HEALTH_SAFTEY', 'Health & Safety', 'Health & Safety', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:34:32', 34, '2015-03-16 10:34:32'),
+(1106, 227, 'ROUTINE', 'Routine', 'Routine', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:36:52', 34, '2015-03-16 10:36:52'),
+(1107, 227, 'ACCIDENT', 'Accident', 'Accident', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:36:53', 34, '2015-03-16 10:36:53'),
+(1108, 227, 'INCIDENT', 'Incident', 'Incident', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:36:54', 34, '2015-03-16 10:36:54'),
+(1109, 227, 'WARRANTY', 'Warranty', 'Warranty', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-16 10:36:55', 34, '2015-03-16 10:36:55'),
+(1110, 228, 'ROUTINE', 'Routine', 'Routine', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-21 09:27:35', 34, '2015-03-21 09:27:35'),
+(1111, 228, 'PREVENTIVE', 'Preventive', 'Preventive', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-21 09:27:38', 34, '2015-03-21 09:27:38'),
+(1112, 228, 'REACTIVE', 'Reactive', 'Reactive', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-21 09:27:40', 34, '2015-03-21 09:27:40'),
+(1113, 228, 'FACILITIES', 'Facilities', 'Facilities', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-21 09:27:41', 34, '2015-03-21 09:27:41'),
+(1118, 228, 'PLANNED', 'Planned', 'Planned', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-21 09:28:43', 34, '2015-03-21 09:28:43'),
+(1119, 228, 'EMERGENCY', 'Emeregency', 'Emeregency', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-21 09:28:43', 34, '2015-03-21 09:28:43'),
+(1120, 86, 'AM', 'AM', 'Asset Maintenance', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-21 17:46:41', 34, '2015-03-21 17:46:41');
+INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_code`, `option_line_value`, `description`, `value_group_id`, `priority`, `status`, `mapper1`, `mapper2`, `rev_enabled`, `rev_number`, `effective_start_date`, `effective_end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+(1121, 182, 'ec', 'eCommerce', '210.eCommerce', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-27 03:32:17', 34, '2015-03-27 03:32:17'),
+(1122, 221, 'ITEM', 'Item', 'Item', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-28 04:19:00', 34, '2015-03-28 04:19:00'),
+(1123, 221, 'PRODUCT', 'Product', 'Product', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-28 09:19:03', 34, '2015-03-28 09:19:03'),
+(1124, 229, 'SUBSTITUTE', 'Substitute', 'Substitute', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-29 19:55:35', 34, '2015-03-29 19:55:35'),
+(1125, 229, 'CROSS_SELL', 'Cross Sell', 'Cross Sell', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-29 19:55:35', 34, '2015-03-29 19:55:35'),
+(1126, 229, 'UP_SELL', 'Up Sell', 'Up Sell', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-29 19:55:36', 34, '2015-03-29 19:55:36'),
+(1127, 229, 'COMPLIMENTARY', 'Complimentary', 'Complimentary', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-29 19:55:36', 34, '2015-03-29 19:55:36'),
+(1128, 229, 'NEW_VERSION', 'New Version', 'New Version', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-29 19:55:37', 34, '2015-03-29 19:55:37'),
+(1129, 229, 'SERVICE', 'Service', 'Service', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-29 19:55:37', 34, '2015-03-29 19:55:37'),
+(1130, 229, 'FREE_GIFT', 'Free Gift', 'Free Gift', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-29 19:55:38', 34, '2015-03-29 19:55:38'),
+(1131, 229, 'PREREQUISITE', 'Prerequisite', 'Prerequisite', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-29 19:55:38', 34, '2015-03-29 19:55:38'),
+(1132, 229, 'EQUIVALENT', 'Equivalent', 'Equivalent', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-03-29 20:38:49', 34, '2015-03-29 20:38:49'),
+(1133, 230, 'HOME', 'Home', 'Home', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-06 09:33:29', 34, '2015-04-06 09:33:29'),
+(1134, 230, 'OTHERS', 'Others', 'Others', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-06 09:33:34', 34, '2015-04-06 09:33:34'),
+(1135, 230, 'DELIVERY', 'Delivery', 'Delivery', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-06 09:33:35', 34, '2015-04-06 09:33:35'),
+(1136, 230, 'BILLING', 'Billing', 'Billing', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-06 09:33:36', 34, '2015-04-06 09:33:36'),
+(1137, 230, 'OFFICE', 'Office', 'Office', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-06 09:33:36', 34, '2015-04-06 09:33:36'),
+(1138, 182, 'hd', 'Help Desk', '911. Help Desk', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-15 17:29:10', 34, '2015-04-15 17:29:10'),
+(1139, 231, 'MEDIUM', 'Medium - Department', 'Medium - Department', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:00:49', 34, '2015-04-16 14:00:49'),
+(1140, 231, 'HIGH', 'High -  Organization/Entity', 'High - Organization/Entity', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:00:50', 34, '2015-04-16 14:00:50'),
+(1141, 231, 'CRITICAL', 'Enterprise Wide', 'Enterprise Wide', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:00:51', 34, '2015-04-16 14:00:51'),
+(1142, 231, 'LOW', 'Low Single User', 'Low Single User', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:00:52', 34, '2015-04-16 14:00:52'),
+(1143, 232, 'RESOLVED', 'Resolved', 'Resolved', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:13:24', 34, '2015-04-16 14:13:24'),
+(1144, 232, 'ACTIVE', 'Active', 'Active', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:13:25', 34, '2015-04-16 14:13:25'),
+(1145, 232, 'WAITING_INFO', 'Waiting User Info', 'Waiting User Info', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:13:25', 34, '2015-04-16 14:13:25'),
+(1146, 232, 'NEW', 'New', 'New', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:13:26', 34, '2015-04-16 14:13:26'),
+(1147, 232, 'CANCELLED', 'Cancelled', 'Cancelled', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:13:27', 34, '2015-04-16 14:13:27'),
+(1148, 232, 'CLOSED', 'Closed', 'Closed', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:13:29', 34, '2015-04-16 14:13:29'),
+(1149, 233, 'ADVICE', 'Advice', 'Advice', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:16:03', 34, '2015-04-16 14:16:03'),
+(1150, 233, 'REQUEST', 'Request', 'Request', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:16:04', 34, '2015-04-16 14:16:04'),
+(1151, 233, 'FAILURE', 'Failure', 'Failure', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:16:05', 34, '2015-04-16 14:16:05'),
+(1152, 234, 'FTP_ACCESS', 'FTP Access', 'FTP Access', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:26:50', 34, '2015-04-16 14:26:50'),
+(1153, 234, 'EMAIL_CLIENT', 'Email Client', 'Email Client', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:26:52', 34, '2015-04-16 14:26:52'),
+(1154, 234, 'EMAIL_CLIENT_WEB', 'Email Web Access', 'Email Web Access', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:26:53', 34, '2015-04-16 14:26:53'),
+(1155, 234, 'NEW_LAPTOP', 'New Laptop', 'New Laptop', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:26:53', 34, '2015-04-16 14:26:53'),
+(1156, 234, 'NEW_DESKTOP', 'New Desktop', 'New Desktop', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:26:54', 34, '2015-04-16 14:26:54'),
+(1157, 234, 'NEW_SOFTWARE', 'New Software', 'New Software', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 14:26:54', 34, '2015-04-16 14:26:54'),
+(1158, 235, 'NORMAL', 'Normal', 'Normal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 16:09:02', 34, '2015-04-16 16:09:02'),
+(1159, 235, 'HIERARCHICAL', 'Hierarchical', 'Hierarchical', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 16:09:03', 34, '2015-04-16 16:09:03'),
+(1160, 235, 'FUNCTIONAL', 'Functional', 'Functional', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-16 16:09:04', 34, '2015-04-16 16:09:04'),
+(1161, 236, 'CR_CREATED', 'Change Request Created', 'Change Request Created', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-18 15:22:15', 34, '2015-04-18 15:22:15'),
+(1162, 236, 'ISSUE_FIXED', 'Issue Fixed', 'Issue Fixed', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-18 15:22:15', 34, '2015-04-18 15:22:15'),
+(1163, 236, 'USER_TRAINING', 'User Training', 'User Training', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-18 15:22:16', 34, '2015-04-18 15:22:16'),
+(1164, 237, 'ENHANCEMENT', 'Enhancement', 'Enhancement', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-19 04:55:17', 34, '2015-04-19 04:55:17'),
+(1165, 237, 'BUG_FIX', 'Bug Fix', 'Bug Fix', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-19 04:55:18', 34, '2015-04-19 04:55:18'),
+(1166, 237, 'DATA_FIX', 'Data Fix', 'Data Fix', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-19 04:55:19', 34, '2015-04-19 04:55:19'),
+(1167, 237, 'CUSTOM_COMP', 'Custom Component', 'Custom Component', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-19 04:55:20', 34, '2015-04-19 04:55:20'),
+(1168, 182, 'cst', 'Costing', '212.Costing', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-05 14:44:44', 34, '2015-05-05 14:44:44'),
+(1169, 119, 'SALES', 'Sales', 'Sales', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-06 04:38:53', 34, '2015-05-06 04:38:53'),
+(1170, 119, 'LOCAL_ADMIN', 'Local Admin', 'Local Admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-06 04:38:54', 34, '2015-05-06 04:38:54'),
+(1171, 119, 'MANAGEMENT', 'Management', 'Management', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-06 04:38:55', 34, '2015-05-06 04:38:55'),
+(1172, 238, 'MANUFAC', 'Manufacturer', 'Manufacturer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-08 03:37:28', 34, '2015-05-08 03:37:28'),
+(1173, 238, 'PACKAG', 'Packager', 'Packager', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-08 03:37:30', 34, '2015-05-08 03:37:30'),
+(1174, 238, 'PROCESS', 'Processor', 'Processor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-08 03:37:30', 34, '2015-05-08 03:37:30'),
+(1175, 238, 'DIST', 'Distributor', 'Distributor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-08 03:37:31', 34, '2015-05-08 03:37:31'),
+(1176, 239, 'DISTRIBUTOR', 'Distributor', 'Distributor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-11 04:35:24', 34, '2015-05-11 04:35:24'),
+(1177, 239, 'END_CUST', 'End Customer', 'End Customer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-11 04:35:25', 34, '2015-05-11 04:35:25'),
+(1178, 239, 'BLANKET', 'Blanket Agreement', 'Blanket Agreement', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-11 04:35:26', 34, '2015-05-11 04:35:26'),
+(1179, 239, 'VMI', 'VMI', 'VMI', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-11 04:35:27', 34, '2015-05-11 04:35:27'),
+(1180, 239, 'TRADE_CUST', 'Trade Customer', 'Trade Customer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-11 04:35:27', 34, '2015-05-11 04:35:27'),
+(1181, 184, 'CONTAINER', 'Container', 'Container', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 04:13:49', 34, '2015-05-25 04:13:49'),
+(1182, 240, 'CLOSED', 'Closed', 'Closed', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:20:31', 34, '2015-05-25 20:23:00'),
+(1183, 240, 'CANCELLED', 'Cancelled', 'Cancelled', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:20:31', 34, '2015-05-25 20:23:03'),
+(1184, 240, 'COMPLETED', 'Completed', 'Completed', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:20:32', 34, '2015-05-25 20:23:01'),
+(1185, 240, 'APPROVED', 'Approved', 'Approved', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:20:33', 34, '2015-05-25 20:23:02'),
+(1186, 240, 'ON_HOLD', 'On Hold', 'On Hold', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:23:01', 34, '2015-05-25 20:23:01'),
+(1187, 240, 'REJECTED', 'Rejected', 'Rejected', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:23:04', 34, '2015-05-25 20:23:04'),
+(1188, 240, 'ACCEPTED', 'Accepted', 'Accepted', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-25 20:23:04', 34, '2015-05-25 20:23:04'),
+(1189, 241, 'EXCHANGE', 'Exchange', 'Exchange', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:47', 34, '2015-05-31 05:10:47'),
+(1190, 241, 'LOANER', 'Loaner', 'Loaner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:47', 34, '2015-05-31 05:10:47'),
+(1191, 241, 'LOANER_REPAIR_RETURN', 'Loaner, Repair and Return', 'Loaner, Repair and Return', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:48', 34, '2015-05-31 05:10:48'),
+(1192, 241, 'ADVANCE_EXCHANGE', 'Advance Exchange', 'Advance Exchange', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:48', 34, '2015-05-31 05:10:48'),
+(1193, 241, 'REPAIR_RETURN', 'Repair and Return', 'Repair and Return', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:49', 34, '2015-05-31 05:10:49'),
+(1194, 241, 'REPLACEMENT', 'Replacement', 'Replacement', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:49', 34, '2015-05-31 05:10:49'),
+(1195, 241, 'STANDARD', 'Standard', 'Standard', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 05:10:50', 34, '2015-05-31 05:10:50'),
+(1196, 242, 'MATERIAL', 'Material', 'Material', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 19:43:32', 34, '2015-05-31 19:43:32'),
+(1197, 242, 'LABOR', 'Labor', 'Labor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 19:43:32', 34, '2015-05-31 19:43:32'),
+(1198, 242, 'EXPENSE', 'Expense', 'Expense', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-31 19:43:32', 34, '2015-05-31 19:43:32'),
+(1199, 243, 'CONTRACT', 'Contract', 'Contract', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-02 14:20:48', 34, '2015-06-02 14:20:48'),
+(1200, 243, 'PROJECT', 'Project', 'Project', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-02 14:20:49', 34, '2015-06-02 14:20:49'),
+(1201, 243, 'OTHER', 'Others', 'Others', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-02 14:20:49', 34, '2015-06-02 14:20:49'),
+(1202, 243, 'SERVICE', 'Service', 'Service', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-02 14:20:50', 34, '2015-06-02 14:20:50'),
+(1203, 243, 'SALES', 'Sales', 'Sales', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-02 14:20:50', 34, '2015-06-02 14:20:50'),
+(1204, 243, 'RUSSIA', 'Russia', 'Russia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-02 14:20:51', 34, '2015-06-02 14:20:51'),
+(1205, 182, 'prj', 'Projects', '400. Projects', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-08 04:44:40', 34, '2015-06-08 04:44:40'),
+(1206, 244, 'PRIMARY', 'Primary', 'Primary', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-09 16:34:29', 34, '2015-06-09 16:34:29'),
+(1207, 244, 'SECONDARY', 'Secondary', 'Secondary', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-09 16:34:30', 34, '2015-06-09 16:34:30'),
+(1208, 245, 'PRIMARY', 'Primary', 'Primary', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 08:12:34', 34, '2015-06-14 08:12:34'),
+(1209, 245, 'SECONDARY', 'Secondary', 'Secondary', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 08:12:35', 34, '2015-06-14 08:12:35'),
+(1210, 245, 'NON_PAYING', 'Non Paying', 'Non Paying', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 08:12:35', 34, '2015-06-14 08:12:35'),
+(1211, 246, 'LABOR', 'Labor', 'Labor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:19:57', 34, '2015-06-14 09:19:57'),
+(1212, 246, 'EQUIPMENT', 'Equipment', 'Equipment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:19:58', 34, '2015-06-14 09:19:58'),
+(1213, 246, 'CHARGEBACKS', 'Chargebacks', 'Chargebacks', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:19:58', 34, '2015-06-14 09:19:58'),
+(1214, 246, 'ACQUISITION_COSTS', 'Acquisition Costs', 'Acquisition Costs', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:19:58', 34, '2015-06-14 09:19:58'),
+(1215, 246, 'MATERIALS', 'Materials', 'Materials', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:19:59', 34, '2015-06-14 09:19:59'),
+(1216, 246, 'CONTRACTOR', 'Contractor', 'Contractor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:19:59', 34, '2015-06-14 09:19:59'),
+(1217, 247, 'DIRECT', 'Direct', 'Direct', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:25:13', 34, '2015-06-14 09:25:13'),
+(1218, 247, 'LABOR', 'Labor', 'Labor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:25:14', 34, '2015-06-14 09:25:14'),
+(1219, 247, 'CHARGEBACKS', 'Chargebacks', 'Chargebacks', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:25:15', 34, '2015-06-14 09:25:15'),
+(1220, 247, 'EQUIPMENT', 'Equipment', 'Equipment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:25:15', 34, '2015-06-14 09:25:15'),
+(1221, 247, 'INDIRECT', 'Indirect', 'Indirect', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:25:15', 34, '2015-06-14 09:25:15'),
+(1222, 247, 'SALES_REVENUE', 'Sales Revenue', 'Sales Revenue', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 09:25:16', 34, '2015-06-14 09:25:16'),
+(1223, 248, 'ITEM', 'Material Items', 'Material Items', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 15:22:16', 34, '2015-06-14 15:22:16'),
+(1224, 248, 'LABOR', 'Labor', 'Labor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 15:22:16', 34, '2015-06-14 15:22:16'),
+(1225, 248, 'FINANCE', 'Financial Elements', 'Financial Elements', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 15:22:17', 34, '2015-06-14 15:22:17'),
+(1226, 248, 'EQUIPMENT', 'Equipment', 'Equipment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-14 15:22:17', 34, '2015-06-14 15:22:17'),
+(1227, 250, 'BENEFITS', 'Benefits', 'Benefits', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-21 06:38:00', 34, '2015-06-21 06:38:00'),
+(1228, 250, 'CONTRACT_ADMINISTRATION', 'Contract Administration', 'Contract Administration', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-21 06:38:00', 34, '2015-06-21 06:38:00'),
+(1229, 250, 'BUDGET_CONTROL', 'Budget Control', 'Budget Control', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-21 06:38:01', 34, '2015-06-21 06:38:01'),
+(1230, 250, 'BUSINESS_DEVELOPMENT', 'Business Development', 'Business Development', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-21 06:38:01', 34, '2015-06-21 06:38:01'),
+(1231, 250, 'BUILD', 'Build', 'Build', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-21 06:38:02', 34, '2015-06-21 06:38:02'),
+(1232, 250, 'CONTRACT CHANGE MANAGEMENT', 'Contract Change Management', 'Contract Change Management', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-21 06:38:02', 34, '2015-06-21 06:38:02'),
+(1233, 251, 'LOWEST_TASK', 'Lowest Task', 'Lowest Task', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:45', 34, '2015-06-22 07:24:45'),
+(1234, 251, 'LOWEST_TASK_PERIOD', 'Lowest Task, Period', 'Lowest Task, Period', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:46', 34, '2015-06-22 07:24:46'),
+(1235, 251, 'TOP_TASK_DATE', 'Top Task, Date Range', 'Top Task, Date Range', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:46', 34, '2015-06-22 07:24:46'),
+(1236, 251, 'LOWEST_TASK_DATE', 'Lowest Task, Date Range', 'Lowest Task, Date Range', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:47', 34, '2015-06-22 07:24:47'),
+(1237, 251, 'TOP_TASK', 'Top Task', 'Equipment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:47', 34, '2015-06-22 07:24:47'),
+(1238, 251, 'TOP_TASK_PERIOD', 'Top Task, Period', 'Top Task, Period', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:48', 34, '2015-06-22 07:24:48'),
+(1239, 251, 'PROJECT_PERIOD', 'Project by Period', 'Project by Period', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:48', 34, '2015-06-22 07:24:48'),
+(1240, 251, 'WORK_ORDER', 'Work Order', 'Work Order', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-22 07:24:49', 34, '2015-06-22 07:24:49'),
+(1241, 252, 'APPR_COST', 'Approved Cost', 'Approved Cost', NULL, NULL, NULL, 'C', NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:09', 34, '2015-10-13 03:51:36'),
+(1242, 252, 'APPR_REV', 'Approved Revenue', 'Approved Revenue', NULL, NULL, NULL, 'R', NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:09', 34, '2015-10-13 03:51:35'),
+(1243, 252, 'COST_EST', 'Cost Estimate', 'Cost Estimate', NULL, NULL, NULL, 'C', NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:09', 34, '2015-10-13 03:51:36'),
+(1244, 252, 'REV_EST', 'Revenue Estimate', 'Revenue Estimate', NULL, NULL, NULL, 'R', NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:09', 34, '2015-10-13 03:51:36'),
+(1245, 252, 'COST_FORECAST', 'Cost Forecast', 'Cost Forecast', NULL, NULL, NULL, 'C', NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:10', 34, '2015-10-13 03:51:36'),
+(1246, 252, 'REV_FORECAST', 'Revenue Forecast', 'Revenue Forecast', NULL, NULL, NULL, 'R', NULL, NULL, NULL, NULL, NULL, 34, '2015-07-03 15:29:10', 34, '2015-10-13 03:51:37'),
+(1247, 253, 'IN', 'Initiation', 'Initiation', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-08 03:35:44', 34, '2015-07-08 05:05:38'),
+(1248, 253, 'PL', 'Planning', 'Planning', NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-08 03:35:44', 34, '2015-07-08 05:05:38'),
+(1249, 253, 'EX', 'Execution', 'Execution', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-08 03:35:44', 34, '2015-07-08 05:05:38'),
+(1250, 253, 'MC', 'Monitoring & Control', 'Monitoring & Control', NULL, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-08 03:35:44', 34, '2015-07-08 05:05:38'),
+(1251, 253, 'CL', 'Closure', 'Closure', NULL, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-08 03:35:44', 34, '2015-07-08 05:05:39'),
+(1252, 253, 'DE', 'Definition', 'Definition', NULL, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-08 03:35:44', 34, '2015-07-08 05:05:39'),
+(1253, 254, 'REALIZED_GAIN', 'Realized Gain', 'Realized Gain', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-10 06:07:14', 34, '2015-07-10 06:07:14'),
+(1254, 254, 'WRITE_ON', 'Write On', 'Write On - Increase Revenue', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-10 06:07:14', 34, '2015-07-10 06:07:14'),
+(1255, 254, 'AUTO', 'Automatic', 'Revenue & Invoive amounts can be entred  automatically', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-10 06:07:14', 34, '2015-07-10 06:07:14'),
+(1256, 254, 'WRITE_OFF', 'Write Off', 'Write Off - Reduce Revenue', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-10 06:07:14', 34, '2015-07-10 06:07:14'),
+(1257, 254, 'MANUAL', 'Manual', 'Revenue & Invoive amounts can be entred  manually', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-10 06:07:14', 34, '2015-07-10 06:07:14'),
+(1258, 254, 'REALIZED_LOSS', 'Realized Loss', 'Realized Loss', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-10 06:07:14', 34, '2015-07-10 06:07:14'),
+(1259, 255, 'APPROVED', 'Approved', 'Approved', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-17 15:06:55', 34, '2015-07-17 15:06:55'),
+(1260, 255, 'INPROCESS', 'Inprocess', 'Inprocess', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-17 15:06:55', 34, '2015-07-17 15:06:55'),
+(1261, 255, 'ENTERED', 'Entered', 'Entered', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-17 15:06:56', 34, '2015-07-17 15:06:56'),
+(1262, 255, 'REAPPROVAL', 'Require ReApproval', 'Require ReApproval', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-17 15:06:56', 34, '2015-07-17 15:06:56'),
+(1263, 255, 'ONHOLD', 'On Hold', 'On Hold', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-17 15:06:56', 34, '2015-07-17 15:06:56'),
+(1264, 256, 'EMPLOYEE', 'Employee', 'Employee', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-21 08:05:38', 34, '2015-07-21 08:06:52'),
+(1265, 256, 'INTERNAL', 'Internal', 'Internal Supplier', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-21 08:05:38', 34, '2015-07-21 08:06:51'),
+(1266, 256, 'VMI', 'VMI', 'VMI', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-21 08:05:38', 34, '2015-07-21 08:06:51'),
+(1267, 256, 'FOREIGN', 'Foreign', 'Foreign', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-21 08:06:51', 34, '2015-07-21 08:06:51'),
+(1268, 256, 'EXTN_SUPPLIER', 'External Supplier', 'External Supplier', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-21 08:16:51', 34, '2015-07-21 08:16:51'),
+(1269, 257, 'TIMESHEET_REVENUE', 'Labor Revenue', 'Labor Revenue', NULL, NULL, NULL, 'TIMESHEET', NULL, NULL, NULL, NULL, NULL, 34, '2015-08-21 11:45:24', 34, '2015-09-27 09:33:05'),
+(1270, 257, 'INV_CLEAR', 'Inventory Expenditure Clearing', 'Inventory Expenditure Clearing', NULL, NULL, NULL, 'INV', NULL, NULL, NULL, NULL, NULL, 34, '2015-08-21 11:45:25', 34, '2015-09-27 09:34:44'),
+(1271, 257, 'INV_EXPEN', 'Inventory Expenditure', 'Inventory Expenditure', NULL, NULL, NULL, 'INV', NULL, NULL, NULL, NULL, NULL, 34, '2015-08-21 11:45:25', 34, '2015-09-27 09:15:25'),
+(1272, 257, 'INV_REVENUE', 'Inventory Revenue', 'Inventory Revenue', NULL, NULL, NULL, 'INV', NULL, NULL, NULL, NULL, NULL, 34, '2015-08-21 11:45:26', 34, '2015-09-27 09:15:24'),
+(1273, 257, 'TIMESHEET_CLEAR', 'Labor Expenditure Clearing', 'Labor Expenditure Clearing', NULL, NULL, NULL, 'TIMESHEET', NULL, NULL, NULL, NULL, NULL, 34, '2015-08-21 11:45:26', 34, '2015-09-27 09:34:44'),
+(1274, 257, 'TIMESHEET_EXPEN', 'Labor Expenditure ', 'Labor Expenditure ', NULL, NULL, NULL, 'TIMESHEET', NULL, NULL, NULL, NULL, NULL, 34, '2015-08-21 11:45:26', 34, '2015-09-27 09:33:05'),
+(1275, 258, 'ACCOMMODATION', 'Accommodation', 'Accommodation', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 03:45:21', 34, '2015-08-24 03:45:21'),
+(1276, 258, 'MEALS', 'Meals', 'Meals', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 03:45:22', 34, '2015-08-24 03:45:22'),
+(1277, 258, 'MILEAGE', 'Mileage', 'Mileage', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 03:45:22', 34, '2015-08-24 03:45:22'),
+(1278, 258, 'AIR_FARE', 'Air Fare', 'Air Fare', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 03:45:23', 34, '2015-08-24 03:45:23'),
+(1279, 258, 'CAR_RENTAL', 'Car Rental', 'Car Rental', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 03:45:23', 34, '2015-08-24 03:45:23'),
+(1280, 258, 'PER_DIEM', 'Per Diem', 'Per Diem', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 03:45:23', 34, '2015-08-24 03:45:23'),
+(1281, 258, 'TRANSPORT', 'Transport', 'Transport', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 03:45:24', 34, '2015-08-24 03:45:24'),
+(1282, 258, 'MISCELLANEOUS', 'Miscellaneous', 'Miscellaneous', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 03:45:24', 34, '2015-08-24 03:45:24'),
+(1283, 259, 'COUNTRY', 'Country', 'Country', 14, 1, NULL, NULL, NULL, NULL, NULL, '2001-01-01', NULL, 34, '2015-08-24 12:12:51', 34, '2015-08-24 12:17:28'),
+(1284, 259, 'CITY', 'City', 'City', 13, 1, NULL, NULL, NULL, NULL, NULL, '2001-01-01', NULL, 34, '2015-08-24 12:12:52', 34, '2015-08-24 12:17:27'),
+(1285, 259, 'STATE', 'State', 'State', 15, 1, NULL, NULL, NULL, NULL, NULL, '2001-01-01', NULL, 34, '2015-08-24 12:12:52', 34, '2015-08-24 12:19:31'),
+(1286, 151, 'HR_LOCATION', 'HR Location', 'HR Locations', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:13:37', 34, '2015-08-24 12:13:37'),
+(1287, 202, 'EXPENSE_CLAIM', 'Expense Claims', 'Expense Claims', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-26 11:20:56', 34, '2015-08-26 11:20:56'),
+(1288, 133, 'EXPENSE', 'Expense', 'Expense', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-30 08:55:29', 34, '2015-08-30 08:55:56'),
+(1289, 260, 'ELITE', 'Elite Femme', 'Elite Femme', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-09-14 07:21:28', 34, '2015-09-14 07:21:28'),
+(1290, 260, 'BASIC', 'Basic', 'Basic', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-09-14 07:21:28', 34, '2015-09-14 07:21:28'),
+(1291, 260, 'ORDINARY', 'Ordinary', 'Ordinary', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-09-14 07:21:28', 34, '2015-09-14 07:21:28'),
+(1292, 261, 'COMPULSORY', 'Compulsory', 'Compulsory', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-09-14 13:53:30', 34, '2015-09-14 13:54:59'),
+(1293, 261, 'SUPP_CHILD', 'Supplementary Child', 'Supplementary Child', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-09-14 13:53:30', 34, '2015-09-14 13:57:32'),
+(1294, 261, 'SUPP_DRIVER', 'Supplementary Driver', 'Supplementary Driver', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-09-14 13:53:31', 34, '2015-09-14 13:57:33'),
+(1296, 261, 'SUPP_CAR', 'Supplementary Car', 'Supplementary Car', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-09-14 14:00:18', 34, '2015-09-15 03:46:29'),
+(1297, 261, 'SUPP_SPOUSE', 'Supplementary Spouse', 'Supplementary Spouse', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-09-15 03:46:28', 34, '2015-09-15 03:46:28'),
+(1298, 262, 'IND_BNGLR_SVC', 'IN Bnglr Service', 'IN Bnglr Service', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-09-24 09:11:17', 34, '2015-09-24 12:49:30'),
+(1299, 262, 'IND_BNGLR_RD', 'IN Bnglr R&D', 'IN Bnglr R&D', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-09-24 09:11:17', 34, '2015-09-24 12:49:30'),
+(1300, 262, 'US_CA_SVC', 'US CA Service', 'US CA Service', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-09-24 12:46:54', 34, '2015-09-24 12:49:31'),
+(1301, 262, 'US_CA_RD', 'US CA R&D', 'US CA R&D', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-09-24 12:46:54', 34, '2015-09-24 12:49:31'),
+(1302, 257, 'UNBILL_RECE', 'Unbilled Receivable Account', 'Unbilled Receivable Account', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-09-24 14:30:58', 34, '2015-09-24 14:30:58'),
+(1303, 257, 'MISC_EXPEN', 'Miscellaneous Expenditure', 'Miscellaneous Expenditure', NULL, NULL, NULL, 'MISC', NULL, NULL, NULL, NULL, NULL, 34, '2015-09-27 08:31:47', 34, '2015-09-27 09:15:26'),
+(1304, 257, 'USAGE_EXPEN', 'Usage Expenditure', 'Usage Expenditure', NULL, NULL, NULL, 'USAGE', NULL, NULL, NULL, NULL, NULL, 34, '2015-09-27 08:31:47', 34, '2015-09-27 09:15:26'),
+(1305, 257, 'MISC_CLEAR', 'Miscellaneous Clear', 'Miscellaneous Clear', NULL, NULL, NULL, 'MISC', NULL, NULL, NULL, NULL, NULL, 34, '2015-09-27 08:31:47', 34, '2015-09-27 09:15:26'),
+(1306, 257, 'USAGE_CLEAR', 'Usage Clear', 'Usage Clear', NULL, NULL, NULL, 'USAGE', NULL, NULL, NULL, NULL, NULL, 34, '2015-09-27 08:31:48', 34, '2015-09-27 09:15:41'),
+(1307, 257, 'DEFAULT_EXPEN', 'Default Expenditure', 'Default Expenditure', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-09-27 08:31:48', 34, '2015-09-27 08:31:48'),
+(1308, 257, 'DEFAULT_EXPEN_CLEAR', 'Default Expenditure Clear', 'Default Expenditure Clear', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-09-27 08:31:48', 34, '2015-09-27 08:31:48'),
+(1309, 263, 'gl', 'General Ledger', 'General Ledger', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:26', 34, '2015-10-01 12:50:00'),
+(1310, 263, 'ap', 'Accounts Payable', 'Accounts Payable', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:26', 34, '2015-10-01 12:50:00'),
+(1311, 263, 'fa', 'Fixed Asset', 'Fixed Asset', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:27', 34, '2015-10-01 12:50:00'),
+(1312, 263, 'cm', 'Cash Managment', 'Cash Management', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:27', 34, '2015-10-01 12:50:00'),
+(1313, 263, 'ar', 'Accounts Receviable', 'Accounts Receviable', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:27', 34, '2015-10-01 12:50:00'),
+(1314, 263, 'inv', 'Inventory', 'Inventory', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:27', 34, '2015-10-01 12:50:01'),
+(1315, 263, 'pur', 'Purchasing', '201. Purchasing', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:27', 34, '2015-10-01 12:48:27'),
+(1316, 263, 'sd', 'Sales & Distribution', '202. Sales & Distribution', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:27', 34, '2015-10-01 12:48:27'),
+(1317, 263, 'bom', 'Bills of Material', '203. Bills of Material', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:28', 34, '2015-10-01 12:48:28'),
+(1318, 263, 'wip', 'Work In Process', '204. Work In Process', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:28', 34, '2015-10-01 12:48:28'),
+(1319, 263, 'fp', 'Forecast & Planning', '205. Forecast & Planning', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:28', 34, '2015-10-01 12:48:28'),
+(1320, 263, 'sys', 'System', '1. System', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:28', 34, '2015-10-01 12:48:28'),
+(1321, 263, 'org', 'Organization', '2. Organization', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:28', 34, '2015-10-01 12:48:28'),
+(1322, 263, 'ext', 'Extension', '900. Extension', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:29', 34, '2015-10-01 12:48:29'),
+(1323, 263, 'hr', 'Human Resource', '300. HR', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:29', 34, '2015-10-01 12:48:29'),
+(1324, 263, 'cc', 'Change Control', '800. Change Control', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:29', 34, '2015-10-01 12:48:29'),
+(1325, 263, 'da', 'Document & Analysis', '903. Document & Analysis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:29', 34, '2015-10-01 12:48:29'),
+(1326, 263, 'pos', 'Point Of Sale', '206. Point Of Sale', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:29', 34, '2015-10-01 12:48:29'),
+(1327, 263, 'am', 'Asset Maintenance', '210.Asset Maintenance', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:30', 34, '2015-10-01 12:48:30'),
+(1328, 263, 'adm', 'Admin', '911.Admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:30', 34, '2015-10-01 12:48:30'),
+(1329, 263, 'ec', 'eCommerce', '210.eCommerce', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:30', 34, '2015-10-01 12:48:30'),
+(1330, 263, 'hd', 'Help Desk', '911. Help Desk', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:30', 34, '2015-10-01 12:48:30'),
+(1331, 263, 'cst', 'Costing', '212.Costing', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:30', 34, '2015-10-01 12:48:30'),
+(1332, 263, 'prj', 'Projects', '400. Projects', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:48:30', 34, '2015-10-01 12:48:30'),
+(1333, 263, 'man', 'Manual', 'Manual', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-01 12:50:01', 34, '2015-10-01 12:50:01'),
+(1334, 257, 'UNEARNED_REVENUE', 'Unearned Revenue', 'Unearned Revenue', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-12 05:26:50', 34, '2015-10-12 05:26:50'),
+(1335, 257, 'REVENUE', 'Revenue', 'Revenue', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-10-12 05:26:51', 34, '2015-10-12 05:26:51'),
+(1336, 182, 'qa', 'Quality', '213.Quality', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-02 03:27:42', 34, '2015-11-02 03:29:06'),
+(1339, 264, 'CAUSE', 'Cause', 'Cause', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-02 03:31:59', 34, '2015-11-02 03:31:59'),
+(1340, 264, 'ACTION', 'Action', 'Action', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-02 03:31:59', 34, '2015-11-02 03:31:59'),
+(1341, 264, 'COMMENT', 'Comment', 'Comment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-02 03:31:59', 34, '2015-11-02 03:31:59'),
+(1342, 264, 'ATTRIBUTE', 'Attribute', 'Quality attribute', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-02 03:32:00', 34, '2015-11-02 03:32:00'),
+(1343, 264, 'VARIABLE', 'Variable', 'Variable', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-02 03:32:00', 34, '2015-11-02 03:32:00'),
+(1344, 264, 'REFERENCE', 'Reference Information', 'Reference Information', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-02 03:32:00', 34, '2015-11-02 03:32:00'),
+(1345, 265, 'EQUIP_MONITOR', 'Equipment Monitoring', 'Equipment Monitoring', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 03:30:39', 34, '2015-11-06 03:30:39'),
+(1346, 265, 'WIP_INSP', 'WIP Inspection', 'WIP Inspection', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 03:30:39', 34, '2015-11-06 03:30:39'),
+(1347, 265, 'SAFTEY_PLAN', 'Safety Plan', 'Safety Plan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 03:30:39', 34, '2015-11-06 03:30:39'),
+(1348, 265, 'RECEIVING_INSP', 'Receiving Inspection', 'Receiving Inspection', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 03:30:39', 34, '2015-11-06 03:30:39'),
+(1349, 265, 'WIP_WOLC', 'Work Order Completion', 'Work Order Completion', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 03:30:40', 34, '2015-11-06 03:30:40'),
+(1350, 265, 'EQUIP_ANALYSIS', 'Equipment Analysis', 'Equipment Analysis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 03:30:40', 34, '2015-11-06 03:30:40'),
+(1351, 265, 'FIELD_RETURN', 'Field Returns', 'Field Returns', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 03:30:40', 34, '2015-11-06 03:30:40'),
+(1352, 265, 'FAIL_ANALYSIS', 'Failure Analysis', 'Failure Analysis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 03:30:40', 34, '2015-11-06 03:30:40'),
+(1353, 265, 'EQUIP_MAINTENANCE', 'Maintenance Inspection', 'Maintenance Inspection', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 03:30:40', 34, '2015-11-06 03:30:40'),
+(1354, 265, 'INSP_CHECKLIST', 'Inspection Checklist', 'Inspection Checklist', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 03:30:40', 34, '2015-11-06 03:30:40'),
+(1355, 265, 'NON_CONFIRM', 'Nonconformance Plan', 'Nonconformance Plan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 03:30:41', 34, '2015-11-06 03:30:41'),
+(1356, 265, 'OTHERS', 'Others', 'Others', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 03:30:41', 34, '2015-11-06 03:30:41'),
+(1357, 266, 'org.org_code', 'Org Code', 'Org Code', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 09:21:13', 34, '2015-11-06 09:21:13'),
+(1358, 266, 'org.org_id', 'Org Id', 'Org Id', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 09:21:14', 34, '2015-11-06 09:21:14'),
+(1359, 266, 'po_header.po_number', 'PO Number', 'PO Number', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 09:21:14', 34, '2015-11-06 09:21:14'),
+(1360, 266, 'item.item_id_m', 'Master Item Id', 'Master Item Id', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 09:21:14', 34, '2015-11-06 09:21:14'),
+(1361, 266, 'supplier.supplier_id', 'Supplier Id', 'Supplier Id', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 09:21:14', 34, '2015-11-06 09:21:14'),
+(1362, 266, 'item.item_number', 'Item Number', 'Item Number', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 09:21:14', 34, '2015-11-06 09:21:14'),
+(1363, 266, 'subinventory.subinventory_id', 'Subinventory Id', 'Subinventory Id', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-06 09:21:14', 34, '2015-11-06 09:21:14'),
+(1364, 267, 'REJECT', 'Reject Shipment', 'Reject Shipment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-07 11:43:45', 34, '2015-11-07 11:43:45'),
+(1365, 267, 'ACCEPT', 'Accept Shipment', 'Accept Shipment', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-07 11:43:45', 34, '2015-11-07 11:43:45'),
+(1366, 267, 'PO_HOLD', 'Place PO On Hold', 'Place PO On Hold', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-07 11:43:45', 34, '2015-11-07 11:43:45'),
+(1367, 267, 'REJECT_NIPUT', 'Reject Input', 'Reject Input', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-07 11:43:45', 34, '2015-11-07 11:43:45'),
+(1368, 267, 'WO_HOLD', 'Place WO On Hold', 'Place WO On Hold', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-07 11:43:45', 34, '2015-11-07 11:43:45'),
+(1369, 267, 'SUPPLIER_HOLD', 'Place Supplier On Hold', 'Place Supplier On Hold', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-07 11:43:46', 34, '2015-11-07 11:43:46'),
+(1370, 267, 'CREATE_WO', 'Create WO', 'Create WO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-07 11:43:46', 34, '2015-11-07 11:43:46'),
+(1371, 267, 'DISPLAY_MESSAGE', 'Display a message', 'Display a message', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-07 11:43:46', 34, '2015-11-07 11:43:46'),
+(1372, 267, 'SEND_NOTIFICATION', 'Send Notification', 'Send Notification', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-07 11:43:46', 34, '2015-11-07 11:43:46'),
+(1373, 267, 'LOT_STATUS', 'Assign Lot Status', 'Assign Lot Status', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-07 11:43:47', 34, '2015-11-07 11:43:47'),
+(1374, 267, 'SN_STATUS', 'Assign Serial Status', 'Assign Serial Status', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-07 11:43:47', 34, '2015-11-07 11:43:47'),
+(1375, 267, 'RUN_PROGRAM', 'Run Program', 'Run Program', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-07 11:43:47', 34, '2015-11-07 11:43:47'),
+(1376, 224, 'it_IT', 'Italian', 'Italian-italiano', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-11 03:47:03', 34, '2015-11-11 03:47:03'),
+(1377, 266, 'category.category', 'Category', 'Category', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-12 05:23:06', 34, '2015-11-12 05:23:06'),
+(1378, 266, 'supplier.supplier_name', 'Supplier Name', 'Supplier Name', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-11-12 05:40:26', 34, '2015-11-12 05:40:26');
 
 -- --------------------------------------------------------
 
@@ -11439,7 +12344,7 @@ CREATE TABLE IF NOT EXISTS `org` (
   KEY `enterprise_id` (`enterprise_org_id`),
   KEY `legal_id` (`legal_org_id`),
   KEY `business_id` (`business_org_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `org`
@@ -11463,7 +12368,8 @@ INSERT INTO `org` (`org_id`, `org`, `code`, `type`, `description`, `enterprise_o
 (16, 'SantaClara', 'I001', 'INVENTORY_ORG', 'SantaClara', 13, 14, 15, 16, NULL, NULL, NULL, 1, 89, 34, '2014-11-17 17:01:06', 34, '2014-12-27 17:23:25'),
 (17, 'TEST Enterprise', 'TE01', 'ENTERPRISE', 'TEST Enterprise', 17, NULL, NULL, NULL, NULL, 'ACTIVE', NULL, NULL, NULL, 34, '2015-05-27 13:15:51', 34, '2015-05-27 13:15:51'),
 (18, 'Lgela T01', 'LT01', 'LEGAL_ORG', 'Lgela T01', 17, 18, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-05-27 16:31:29', 34, '2015-05-27 16:31:29'),
-(19, 'TEST Org 2', 'TO2', 'ENTERPRISE', 'TEST Org 2', 19, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-11 08:23:05', 34, '2015-06-11 08:23:05');
+(19, 'TEST Org 2', 'TO2', 'ENTERPRISE', 'TEST Org 2', 19, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-06-11 08:23:05', 34, '2015-06-11 08:23:05'),
+(20, 'ENT_05', 'EN5', 'ENTERPRISE', 'Entrprise Org', 20, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 84, 34, '2015-10-10 09:01:09', 34, '2015-10-10 09:02:06');
 
 -- --------------------------------------------------------
 
@@ -11539,7 +12445,7 @@ CREATE TABLE IF NOT EXISTS `path` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`path_id`),
   UNIQUE KEY `name` (`name`,`module_code`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=795 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=866 ;
 
 --
 -- Dumping data for table `path`
@@ -11557,10 +12463,10 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (24, 23, 'Enterprise', 'form.php?class_name=enterprise&mode=9', 'Create & Update Enterprise', 'org', 'enterprise', 9, NULL, NULL, NULL, NULL, NULL, 0, '2014-03-27 00:00:00', 0, '2010-06-14 00:00:00'),
 (26, 59, 'Path', 'form.php?class_name=path&mode=9', 'Path - creation, update & delete', 'adm', 'path', 9, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-26 00:00:00', 0, '2010-06-14 00:00:00'),
 (28, 23, 'Address', 'form.php?class_name=address&mode=9', 'Create & Update Address', 'org', 'address', 9, NULL, 'address_id', NULL, NULL, NULL, 0, '2014-03-11 00:00:00', 0, '2010-06-14 00:00:00'),
-(30, 150, 'Chart Of Accounts', 'form.php?class_name=coa&mode=9', 'Char of Account', 'gl', 'coa', 9, NULL, NULL, 'SETUP', NULL, NULL, 0, '2014-02-25 00:00:00', 0, '2010-06-14 00:00:00'),
-(31, 150, 'Calendar', 'form.php?class_name=gl_calendar&mode=9', 'GL Calendar', 'gl', 'gl_calendar', 9, NULL, 'gl_calendar_id', NULL, NULL, NULL, 0, '2014-02-25 00:00:00', 0, '2010-06-14 00:00:00'),
+(30, 150, 'Chart Of Accounts', 'form.php?class_name=coa&mode=9', 'Char of Account', 'gl', 'coa', 9, NULL, NULL, 'SETUP', NULL, 5, 0, '2014-02-25 00:00:00', 34, '2015-09-30 10:30:09'),
+(31, 150, 'Calendar', 'form.php?class_name=gl_calendar&mode=9', 'GL Calendar', 'gl', 'gl_calendar', 9, NULL, 'gl_calendar_id', NULL, NULL, 30, 0, '2014-02-25 00:00:00', 34, '2015-09-30 10:35:28'),
 (36, 37, 'Search Ac Combinations', 'search.php?class_name=coa_combination', 'All chart of accounts', 'gl', 'coa_combination', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-02-25 00:00:00', 0, '2010-06-14 00:00:00'),
-(37, 150, 'Account Combination', 'form.php?class_name=coa_combination&mode=9', 'Char of account combinations', 'gl', 'coa_combination', 9, NULL, 'coa_combination_id', NULL, NULL, NULL, 0, '2014-02-25 00:00:00', 0, '2010-06-14 00:00:00'),
+(37, 150, 'Account Combination', 'form.php?class_name=coa_combination&mode=9', 'Char of account combinations', 'gl', 'coa_combination', 9, NULL, 'coa_combination_id', NULL, NULL, 25, 0, '2014-02-25 00:00:00', 34, '2015-09-30 10:32:22'),
 (38, 23, 'Legal Org', 'form.php?class_name=legal&mode=9', 'Legal Organization', 'org', 'legal', 9, NULL, 'legal_id', NULL, NULL, NULL, 0, '2014-02-24 00:00:00', 0, '2010-06-14 00:00:00'),
 (39, 38, 'Legal Orgs', 'search.php?class_name=legal', 'List of all Legal Orgs', 'org', 'legal', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-02-24 00:00:00', 0, '2010-06-14 00:00:00'),
 (40, 23, 'Business Org', 'form.php?class_name=business&mode=9', 'Business Organization', 'org', 'business', 9, NULL, 'business_id', NULL, NULL, NULL, 0, '2014-03-26 00:00:00', 0, '2010-06-14 00:00:00'),
@@ -11606,7 +12512,7 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (97, 24, 'Serach Enterprises', 'search.php?class_name=enterprise', 'List of all enterprises', 'inv', 'enterprise', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-03-27 00:00:00', 0, '2010-06-14 00:00:00'),
 (98, 56, 'Search Transactions', 'search.php?class_name=inv_transaction', 'Search All Inventory Transactions', 'inv', 'inv_transaction', NULL, NULL, 'inv_transaction_id', NULL, 1, NULL, 0, '2014-03-31 00:00:00', 0, '2010-06-14 00:00:00'),
 (99, 344, 'Purchase Order', 'form.php?class_name=po_header&mode=9', 'Purchase Order', 'pur', 'po_header', 9, NULL, 'po_header_id', 'SETUP', 0, NULL, 0, '2014-08-02 00:00:00', 0, '2002-08-14 00:00:00'),
-(100, 150, 'Payment Term', 'form.php?class_name=payment_term&mode=9', 'Payment Term', 'gl', '', 0, NULL, '', NULL, NULL, NULL, 0, '2014-06-20 00:00:00', 0, '2020-06-14 00:00:00'),
+(100, 377, 'Payment Term', 'form.php?class_name=payment_term&mode=9', 'Payment Term', 'gl', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-20 00:00:00', 34, '2015-09-30 10:34:19'),
 (101, 100, 'Search Payment Term', 'search.php?class_name=payment_term', 'Payment Terms', 'gl', '', 0, NULL, '', NULL, 1, NULL, 0, '2014-06-20 00:00:00', 0, '2020-06-14 00:00:00'),
 (102, 104, 'Search PO Headers', 'search.php?class_name=po_header', 'All Purchased Orders', 'pur', 'po_header', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-03-08 00:00:00', 0, '2010-06-14 00:00:00'),
 (103, 104, 'Expected Receipts', 'modules/po/expected_receipts.php', 'All expected receipts', 'pur', NULL, NULL, NULL, '', NULL, NULL, NULL, 0, '2014-05-01 00:00:00', 0, '2010-06-14 00:00:00'),
@@ -11655,7 +12561,7 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (148, 147, 'Search Value Groups', 'search.php?class_name=sys_value_group_header', 'Create & Update Value Groups', 'sys', 'sys_value_group_header', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-02-18 00:00:00', 34, '2014-12-27 11:51:38'),
 (149, 31, 'Search Calendar', 'search.php?class_name=gl_calendar', 'All Calendars', 'gl', 'gl_calendar', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-02-25 00:00:00', 0, '2010-06-14 00:00:00'),
 (150, NULL, 'General Ledger', 'form.php?module_code=gl', 'General Ledger', 'gl', NULL, NULL, NULL, NULL, 'SETUP', NULL, 22, 0, '2014-07-23 00:00:00', 34, '2015-01-09 11:17:21'),
-(151, 150, 'Ledger', 'form.php?class_name=gl_ledger&mode=9', 'Create update & ledger', 'gl', 'gl_ledger', 9, NULL, 'gl_ledger_id', NULL, NULL, NULL, 0, '2014-02-25 00:00:00', 0, '2010-06-14 00:00:00'),
+(151, 150, 'Ledger', 'form.php?class_name=gl_ledger&mode=9', 'Create update & ledger', 'gl', 'gl_ledger', 9, NULL, 'gl_ledger_id', NULL, NULL, 15, 0, '2014-02-25 00:00:00', 34, '2015-09-30 10:31:22'),
 (152, 151, 'Search Ledgers', 'search.php?class_name=gl_ledger', 'Serach Ledgers', 'gl', 'gl_ledger', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-02-25 00:00:00', 0, '2010-06-14 00:00:00'),
 (153, 155, 'Search', 'search.php', 'All Search Links', 'adm', NULL, NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-02-10 00:00:00', 34, '2015-05-25 09:32:18'),
 (154, 147, 'View Value Group', 'form.php?class_name=sys_value_group_header&mode=2', 'View Value Group', 'sys', '', 2, NULL, '', NULL, NULL, NULL, 0, '2014-06-20 00:00:00', 0, '2020-06-14 00:00:00'),
@@ -11677,14 +12583,14 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (170, 37, 'Mass Upload COA Combination', 'massupload.php?class_name=coa_combination', 'Mass Upload COA Combination', 'gl', 'coa_combination', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-25 00:00:00', 0, '2010-06-14 00:00:00'),
 (171, 151, 'Mass Upload Ledger', 'massupload.php?class_name=gl_ledger', 'Mass Upload GL Ledger', 'gl', 'gl_ledger', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-25 00:00:00', 0, '2010-06-14 00:00:00'),
 (172, 151, 'View Ledger', 'form.php?class_name=gl_ledger&mode=2', 'View Ledger', 'gl', 'gl_ledger', 2, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-25 00:00:00', 34, '2014-12-23 04:21:22'),
-(173, 150, 'Journal', 'form.php?class_name=gl_journal_header&mode=9', 'Create & Review GL Journals', 'gl', 'gl_journal_header', 9, NULL, 'gl_journal_header_id', 'SETUP', NULL, NULL, 0, '2014-02-26 00:00:00', 0, '2010-06-14 00:00:00'),
-(174, 150, 'GL Period', 'form.php?class_name=gl_period&mode=9', 'Open and Close GL Periods', 'gl', 'gl_period', 9, NULL, 'gl_period_id', NULL, NULL, NULL, 0, '2014-03-01 00:00:00', 0, '2010-06-14 00:00:00'),
+(173, 150, 'Journal', 'form.php?class_name=gl_journal_header&mode=9', 'Create & Review GL Journals', 'gl', 'gl_journal_header', 9, NULL, 'gl_journal_header_id', 'SETUP', NULL, 35, 0, '2014-02-26 00:00:00', 34, '2015-09-30 10:32:26'),
+(174, 150, 'GL Period', 'form.php?class_name=gl_period&mode=9', 'Open and Close GL Periods', 'gl', 'gl_period', 9, NULL, 'gl_period_id', NULL, NULL, 10, 0, '2014-03-01 00:00:00', 34, '2015-09-30 10:30:14'),
 (175, 174, 'View Periods', 'form.php?class_name=gl_period&mode=2', 'View GL Period Statuses', 'gl', 'gl_period', 2, NULL, NULL, NULL, NULL, NULL, 0, '2014-03-01 00:00:00', 0, '2010-06-14 00:00:00'),
 (176, 174, 'Serach Periods', 'search.php?class_name=gl_period', 'Serach GL Periods', 'gl', 'gl_period', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-03-01 00:00:00', 0, '2010-06-14 00:00:00'),
 (177, 173, 'Search Journals', 'search.php?class_name=gl_journal_header', 'Search Journals', 'gl', 'gl_journal_header', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-03-01 00:00:00', 0, '2010-06-14 00:00:00'),
 (178, 173, 'Upload Journal Header', 'massupload.php?class_name=gl_journal_header', 'Mass Upload GL Journal Header', 'gl', 'gl_journal_header', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-03-01 00:00:00', 0, '2010-06-14 00:00:00'),
 (179, 173, 'Upload Journal Lines', 'massupload.php?class_name=gl_journal_line', 'Upload Mass Journal Lines', 'gl', 'gl_journal_line', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-03-01 00:00:00', 0, '2010-06-14 00:00:00'),
-(180, 150, 'GL Balance View', 'search.php?class_name=gl_balance_v', 'GL Balance View', 'gl', 'gl_balance_v', NULL, NULL, 'gl_balance_id', NULL, 1, NULL, 0, '2014-03-04 00:00:00', 0, '2010-06-14 00:00:00'),
+(180, 150, 'GL Balance View', 'search.php?class_name=gl_balance_v', 'GL Balance View', 'gl', 'gl_balance_v', NULL, NULL, 'gl_balance_id', NULL, 1, 20, 0, '2014-03-04 00:00:00', 34, '2015-09-30 10:31:26'),
 (181, 180, 'GL Balance', 'search.php?class_name=gl_balance', 'GL Balance From Base Table', 'gl', 'gl_balance', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-03-04 00:00:00', 0, '2010-06-14 00:00:00'),
 (182, 173, 'Search Journal Lines', 'search.php?class_name=gl_journal_line_v', 'Search Journal Lines', 'gl', 'gl_journal_line_v', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-03-04 00:00:00', 0, '2010-06-14 00:00:00'),
 (183, NULL, 'Accounts Payable', 'form.php?module_code=ap', 'Accounts Payable', 'ap', 'basic', 2, NULL, NULL, NULL, NULL, 20, 0, '2014-07-23 00:00:00', 34, '2015-01-09 11:17:17'),
@@ -11856,7 +12762,7 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (348, 134, 'Programs', 'form.php?module_code=ar&type=program', 'All AR Programs', 'ar', 'ar_transaction_header', 9, NULL, NULL, 'PROGRAM', NULL, NULL, 0, '2014-07-12 00:00:00', 0, '2014-07-12 00:00:00'),
 (349, 348, 'Import Transaction', 'program.php?class_name=ar_transaction_interface&program_name=prg_import_ar_transaction', 'Import Transaction', 'ar', 'ar_transaction_interface', 9, NULL, NULL, 'PROGRAM', NULL, NULL, 0, '2014-07-12 00:00:00', 34, '2014-12-16 06:22:07'),
 (350, 203, 'Unpaid Transactions', 'search.php?class_name=ar_unpaid_transaction_v', 'Unpaid Transactions', 'ar', 'ar_unpaid_transaction_v', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-07-13 00:00:00', 0, '2014-07-13 00:00:00'),
-(351, 150, 'Bank', 'form.php?class_name=mdm_bank_header&mode=9', 'Create & Update Bank', 'gl', 'mdm_bank_header', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-07-15 00:00:00', 0, '2014-07-15 00:00:00'),
+(351, 150, 'Bank', 'form.php?class_name=mdm_bank_header&mode=9', 'Create & Update Bank', 'gl', 'mdm_bank_header', 9, NULL, NULL, 'FORM', NULL, 40, 0, '2014-07-15 00:00:00', 34, '2015-09-30 10:35:23'),
 (352, 351, 'Search Banks', 'search.php?class_name=mdm_bank_header', 'Search Banks', 'gl', NULL, NULL, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-07-15 00:00:00', 0, '2014-07-15 00:00:00'),
 (353, 23, 'Generic Organization', 'form.php?class_name=org&mode=9', 'Generic Organization', 'sys', 'org', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-22 00:00:00', 34, '2015-05-05 14:12:23'),
 (354, 351, 'Bank Account', 'form.php?class_name=mdm_bank_account&mode=9', 'Bank Account', 'gl', 'mdm_bank_account', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-07-16 00:00:00', 0, '2014-07-16 00:00:00'),
@@ -11882,20 +12788,20 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (374, 370, 'Approve Count Entries', 'multi_select.php?action_class_name=inv_count_entries&action=approve_count_entries&mode=9&show_block=1&search_class_name=inv_count_entries_v&status[]=PENDING_APPROVAL', 'Approve Count Entries', 'inv', 'inv_count_entries', 9, NULL, '', 'FORM', 0, NULL, 0, '2014-07-29 00:00:00', 0, '2029-07-14 00:00:00'),
 (375, 56, 'Inter Org Transfer', 'form.php?class_name=inv_interorg_transfer_header&mode=9', 'Inter Org Transfer', 'inv', 'inv_interorg_transfer_header', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-07-31 00:00:00', 0, '2014-07-31 00:00:00'),
 (376, 375, 'Search Inter Org Transfer', 'search.php?class_name=inv_interorg_transfer_header', 'Search Inter Org Transfer', 'inv', 'inv_interorg_transfer_header', 2, NULL, NULL, 'TRANSACTION', NULL, NULL, 0, '2014-08-01 00:00:00', 0, '2014-08-01 00:00:00'),
-(377, 150, 'Setup', 'form.php?module_code=gl&type=setup', 'GL Setup', 'gl', 'gl', 9, NULL, NULL, 'SETUP', NULL, 190, 0, '2014-08-02 00:00:00', 0, '2014-08-02 00:00:00'),
+(377, 150, 'Setup', 'form.php?module_code=gl&type=setup', 'GL Setup', 'gl', 'gl', 9, NULL, NULL, 'SETUP', NULL, 90, 0, '2014-08-02 00:00:00', 34, '2015-09-30 10:36:37'),
 (378, 377, 'Currency Conversion', 'form.php?class_name=gl_currency_conversion&mode=9', 'Currency Conversion', 'gl', 'gl_currency_conversion', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-02 00:00:00', 0, '2014-08-02 00:00:00'),
 (379, 378, 'View Currency Conversion', 'form.php?class_name=gl_currency_conversion&mode=2', 'View Currency Conversion', 'gl', 'gl_currency_conversion', 2, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-02 00:00:00', 0, '2014-08-02 00:00:00'),
 (380, 378, 'Search Currency Conversion', 'search.php?class_name=gl_currency_conversion&mode=2', 'Search Currency Conversion', 'gl', 'gl_currency_conversion', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-08-02 00:00:00', 0, '2014-08-02 00:00:00'),
 (381, 344, 'Setup', 'form.php?module_code=pur&type=setup', 'Purchaing Setup', 'pur', 'pur', 9, NULL, NULL, 'FORM', NULL, 90, 0, '2014-08-25 00:00:00', 0, '2025-08-14 00:00:00'),
 (382, NULL, 'Human Resource', 'form.php?module_code=hr', 'Human Resource', 'hr', 'hr', 2, NULL, NULL, NULL, NULL, 25, 0, '2014-08-07 00:00:00', 34, '2015-01-09 11:29:37'),
-(383, 382, 'Employee', 'form.php?class_name=hr_employee&mode=9', 'Employee', 'hr', 'hr_employee', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-12 00:00:00', 34, '2015-04-29 12:31:57'),
-(384, 382, 'Job', 'form.php?class_name=hr_job&mode=9', 'Organization Jobs', 'hr', 'hr_job', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-08 00:00:00', 0, '2014-08-08 00:00:00'),
+(383, 382, 'Employee', 'form.php?class_name=hr_employee&mode=9', 'Employee', 'hr', 'hr_employee', 9, NULL, NULL, 'FORM', NULL, 4, 0, '2014-08-12 00:00:00', 34, '2015-08-25 11:39:16'),
+(384, 821, 'Job', 'form.php?class_name=hr_job&mode=9', 'Job', 'hr', 'hr_job', 9, NULL, NULL, 'FORM', NULL, 1, 0, '2014-08-08 00:00:00', 34, '2015-09-05 05:07:10'),
 (385, 384, 'Search Job', 'search.php?class_name=hr_job', 'Search Job', 'hr', 'hr_job', 2, NULL, NULL, 'SEARCH', NULL, NULL, 0, '2014-08-08 00:00:00', 0, '2014-08-08 00:00:00'),
-(386, 382, 'Position', 'form.php?class_name=hr_position&mode=9', 'HR Positions', 'hr', 'hr_position', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-08 00:00:00', 0, '2014-08-08 00:00:00'),
+(386, 821, 'Position', 'form.php?class_name=hr_position&mode=9', 'HR Positions', 'hr', 'hr_position', 9, NULL, NULL, 'FORM', NULL, 3, 0, '2014-08-08 00:00:00', 34, '2015-09-05 05:07:49'),
 (387, 386, 'Search Position', 'search.php?class_name=hr_position', 'Search Position', 'hr', 'hr_position', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-08-08 00:00:00', 0, '2014-08-08 00:00:00'),
 (388, 386, 'Hierarchy', 'form.php?class_name=hr_position_hierarchy_header&mode=9', 'Position Hierarchy', 'hr', 'hr_position_hierarchy_header', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-09 00:00:00', 0, '2014-08-09 00:00:00'),
 (389, 388, 'Search Hierarchy', 'search.php?class_name=hr_position_hierarchy_header', 'Search Hierarchy', 'hr', 'hr_position_hierarchy_header', 9, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-08-09 00:00:00', 0, '2014-08-09 00:00:00'),
-(390, 382, 'Compensation Element', 'form.php?class_name=hr_compensation_element&mode=9', 'Compensation Element', 'hr', 'hr_compensation_element', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-11 00:00:00', 0, '2014-08-11 00:00:00'),
+(390, 382, 'Compensation Element', 'form.php?class_name=hr_compensation_element&mode=9', 'Compensation Element', 'hr', 'hr_compensation_element', 9, NULL, NULL, 'FORM', NULL, 10, 0, '2014-08-11 00:00:00', 34, '2015-08-25 04:17:59'),
 (391, 390, 'Search Element', 'search.php?class_name=hr_compensation_element', 'Search Compensation Element', 'hr', 'hr_compensation_element', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-08-11 00:00:00', 0, '2014-08-11 00:00:00'),
 (392, 390, 'Element Entry / Assignment', 'form.php?class_name=hr_element_entry_header&mode=9', 'Employee Element Entry Assignment', 'hr', 'hr_element_entry_header', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-12 00:00:00', 96, '2014-11-20 03:12:53'),
 (393, 392, 'Search Element Entry', 'search.php?class_name=hr_element_entry_header', 'Search Element Entry', 'gl', 'hr_element_entry_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 0, '2014-08-12 00:00:00', 0, '2014-08-12 00:00:00'),
@@ -11907,12 +12813,12 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (399, 382, 'Setup', 'form.php?module_code=hr&type=setup', 'Payroll Setup', 'hr', 'hr', 9, NULL, NULL, 'SETUP', NULL, 90, 0, '2014-08-16 00:00:00', 0, '2016-08-14 00:00:00'),
 (400, 399, 'Payroll Payment Method', 'form.php?class_name=hr_payroll_payment_method&mode=9', 'Payroll Payment Method', 'hr', 'hr_payroll_payment_method', 9, NULL, NULL, 'SETUP', NULL, NULL, 0, '2014-08-15 00:00:00', 0, '2014-08-15 00:00:00'),
 (401, 400, 'Search Payroll Payment Methods', 'search.php?class_name=hr_payroll_payment_method&mode=2', 'Search Payroll Payment Methods', 'hr', 'hr_payroll_payment_method', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-08-15 00:00:00', 0, '2014-08-15 00:00:00'),
-(402, 382, 'Payroll', 'form.php?class_name=hr_payroll&mode=9', 'HR Payroll', 'hr', 'hr_payroll', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-16 00:00:00', 0, '2014-08-16 00:00:00'),
+(402, 382, 'Payroll', 'form.php?class_name=hr_payroll&mode=9', 'HR Payroll', 'hr', 'hr_payroll', 9, NULL, NULL, 'FORM', NULL, 7, 0, '2014-08-16 00:00:00', 34, '2015-08-25 04:16:30'),
 (403, 402, 'Search Payroll', 'search.php?class_name=hr_payroll&mode=2', 'Search Payroll', 'hr', 'hr_payroll', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-08-16 00:00:00', 0, '2014-08-16 00:00:00'),
 (404, 399, 'Leave Type', 'form.php?class_name=hr_leave_type&mode=9', 'Leave Types', 'hr', 'hr_leave_type', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-16 00:00:00', 0, '2016-08-14 00:00:00'),
 (405, 404, 'Search Leave Type', 'search.php?class_name=hr_leave_type', 'Search Leave Type', 'hr', 'hr_leave_type', 9, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-08-16 00:00:00', 0, '2014-08-16 00:00:00'),
 (406, 420, 'Leave Balance', 'form.php?class_name=hr_leave_balance&mode=9', 'Leave Balance', 'inv', 'hr_leave_balance', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-23 00:00:00', 34, '2014-11-28 09:48:04'),
-(407, 382, 'Approval Limit', 'form.php?class_name=hr_approval_limit_header&mode=9', 'Approval Limit', 'hr', 'hr_approval_limit_header', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-18 00:00:00', 0, '2014-08-18 00:00:00'),
+(407, 382, 'Approval Limit', 'form.php?class_name=hr_approval_limit_header&mode=9', 'Approval Limit', 'hr', 'hr_approval_limit_header', 9, NULL, NULL, 'FORM', NULL, 6, 0, '2014-08-18 00:00:00', 34, '2015-08-25 04:16:02'),
 (408, 407, 'Search Approval Limit', 'search.php?class_name=hr_approval_limit_header&mode=9', 'Search Approval Limit', 'hr', 'hr_approval_limit_header', 9, NULL, NULL, 'SEARCH', NULL, NULL, 0, '2014-08-18 00:00:00', 0, '2014-08-18 00:00:00'),
 (409, 407, 'Approval Object', 'form.php?class_name=hr_approval_object&mode=9', 'Approval Object', 'hr', 'hr_approval_object', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-18 00:00:00', 0, '2014-08-18 00:00:00'),
 (410, 409, 'Search Approval Object', 'search.php?class_name=hr_approval_object', 'Search Approval Object', 'hr', 'hr_approval_object', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-08-18 00:00:00', 0, '2014-08-18 00:00:00'),
@@ -11925,7 +12831,7 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (417, 505, 'My Notifications', 'search.php?class_name=sys_notification_user&mode=2', 'My Notifications', 'sys', 'sys_notification_user', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-08-22 00:00:00', 34, '2014-11-28 09:35:06'),
 (418, 414, 'Leave Blalance', 'form.php?class_name=hr_leave_balance_user', 'User Leave Blalance', 'hr', 'hr_leave_balance_user', 2, NULL, NULL, 'SEARCH', NULL, NULL, 0, '2014-08-22 00:00:00', 0, '2014-08-22 00:00:00'),
 (419, 406, 'Search All Leave', 'search.php?class_name=hr_leave_transaction&mode=2', 'Search All Leave', 'hr', 'hr_leave_transaction', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-08-22 00:00:00', 0, '2022-08-14 00:00:00'),
-(420, 382, 'Leave Entitlement', 'form.php?class_name=hr_leave_entitlement_header&mode=9', 'Leave Entitlement', 'hr', 'hr_leave_entitlement_header', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-23 00:00:00', 0, '2014-08-23 00:00:00'),
+(420, 382, 'Leave Entitlement', 'form.php?class_name=hr_leave_entitlement_header&mode=9', 'Leave Entitlement', 'hr', 'hr_leave_entitlement_header', 9, NULL, NULL, 'FORM', NULL, 2, 0, '2014-08-23 00:00:00', 34, '2015-09-05 05:13:06'),
 (421, 420, 'Search Leave Entitlement', 'search.php?class_name=hr_leave_entitlement_header&mode=9', 'Search Leave Entitlement', 'hr', 'hr_leave_entitlement_header', 9, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-08-23 00:00:00', 34, '2014-12-26 05:11:53'),
 (422, 386, 'User Position View', 'search.php?class_name=hr_employee_position_v', 'User Position View', 'hr', 'hr_employee_position_v', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-08-24 00:00:00', 0, '2014-08-24 00:00:00'),
 (423, 344, 'Blanket Release', 'form.php?class_name=po_release&mode=9', 'Blanket Release', 'pur', 'po_release', 9, NULL, NULL, 'FORM', NULL, 11, 0, '2014-08-25 00:00:00', 0, '2025-08-14 00:00:00'),
@@ -11999,12 +12905,12 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (497, 402, 'Payslip Header', 'form.php?class_name=hr_payslip_header&mode=9', 'Payslip Header', 'hr', 'hr_payslip_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-11-24 11:09:06', 34, '2014-11-24 11:15:12'),
 (498, 26, 'Search All Paths', 'search.php?class_name=path', 'Search All Paths', 'adm', 'path', 2, NULL, NULL, 'SEARCH', 1, NULL, 34, '2014-11-24 11:11:55', 34, '2014-11-24 11:11:55'),
 (499, 497, 'Search Payslip', 'search.php?class_name=hr_payslip_header', 'Search Payslip', 'hr', 'hr_payslip_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2014-11-24 11:17:12', 34, '2014-11-24 11:17:12'),
-(500, 382, 'Programs', 'form.php?module_code=hr&type=program', 'HR Programs', 'hr', 'hr', 9, NULL, NULL, 'PROGRAM', NULL, NULL, 34, '2014-11-25 09:46:32', 34, '2014-11-25 09:46:32'),
+(500, 382, 'Programs', 'form.php?module_code=hr&type=program', 'HR Programs', 'hr', 'hr', 9, NULL, NULL, 'PROGRAM', NULL, 10, 34, '2014-11-25 09:46:32', 34, '2015-08-25 11:41:34'),
 (501, 500, 'Generate Payroll Schedule', 'program.php?class_name=hr_payroll_schedule&program_name=prg_generate_payroll_schedule', 'Generate Payroll Schedule', 'hr', 'hr_payroll_schedule', 2, NULL, NULL, 'PROGRAM', NULL, NULL, 34, '2014-11-25 09:52:58', 34, '2014-11-25 12:09:25'),
 (502, 500, 'Process Payroll', 'program.php?class_name=hr_payroll_schedule&program_name=prg_process_payroll', 'Process Payroll Schedule', 'hr', 'hr_payroll_schedule', 9, NULL, NULL, 'PROGRAM', NULL, NULL, 34, '2014-11-25 17:27:35', 34, '2014-11-26 04:32:16'),
 (503, 402, 'Payroll Process', 'form.php?class_name=hr_payroll_process&mode=9', 'Payroll Process', 'hr', 'hr_payroll_process', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-11-26 08:30:47', 34, '2014-11-26 08:30:47'),
 (504, 503, 'Search Payroll Process', 'search.php?class_name=hr_payroll_process', 'Search Payroll Process', 'hr', 'hr_payroll_process', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2014-11-26 08:44:27', 34, '2014-11-26 08:45:29'),
-(505, 382, 'Self Service', 'form.php?module_code=hr&path_id=505', 'HR Self Service', 'hr', 'hr', 2, NULL, NULL, 'CONTAINER', NULL, NULL, 34, '2014-11-28 09:33:24', 34, '2015-05-25 04:57:15'),
+(505, 382, 'Self Service', 'form.php?module_code=hr&path_id=505', 'HR Self Service', 'hr', 'hr', 2, NULL, NULL, 'CONTAINER', NULL, 9, 34, '2014-11-28 09:33:24', 34, '2015-08-25 04:17:14'),
 (506, 420, 'Apply Leave', 'form.php?class_name=hr_leave_transaction&mode=9', 'Apply Leave', 'hr', 'hr_leave_transaction', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-11-28 09:41:36', 34, '2014-11-28 09:46:17'),
 (507, 505, 'Payslip', 'form.php?class_name=hr_payslip_user', 'User Payslip', 'hr', 'hr_payslip_user', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-11-28 12:02:40', 34, '2014-11-28 12:02:40'),
 (508, 500, 'Cancel Payroll Process', 'program.php?class_name=hr_payroll_process&program_name=prg_cancel_payroll_process', 'Cancel Payroll Process', 'hr', 'hr_payroll_process', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-11-29 13:40:08', 34, '2014-11-29 13:40:08'),
@@ -12028,7 +12934,7 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (525, 524, 'Search Lead', 'search.php?class_name=sd_lead&mode=9', 'Search Lead', 'sd', 'sd_lead', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2014-12-06 17:37:08', 34, '2014-12-06 17:37:08'),
 (526, 219, 'Setup', 'form.php?module_code=sd&type=setup', 'Sales & Distribution Setup', 'sd', 'sd', 2, NULL, NULL, 'FORM', NULL, 30, 34, '2014-12-07 04:08:42', 34, '2015-05-25 04:54:43'),
 (527, 526, 'Sales Channel', 'form.php?class_name=option_header&mode=9&option_header_id=213', 'Sales Channel', 'sd', 'option_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-12-07 04:46:10', 34, '2014-12-07 04:47:09'),
-(528, 382, 'HR Team', 'form.php?class_name=hr_team_header&mode=9', 'HR Team', 'hr', 'hr_team_header', 9, NULL, NULL, 'FORM', NULL, NULL, 1, '2014-12-08 05:49:30', 1, '2014-12-08 05:49:30'),
+(528, 399, 'HR Team', 'form.php?class_name=hr_team_header&mode=9', 'HR Team', 'hr', 'hr_team_header', 9, NULL, NULL, 'FORM', NULL, NULL, 1, '2014-12-08 05:49:30', 34, '2015-08-25 04:11:01'),
 (529, 528, 'Search Team', 'search.php?class_name=hr_team_header', 'Search Team', 'hr', 'hr_team_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 1, '2014-12-08 05:50:29', 1, '2014-12-08 05:50:29'),
 (530, 526, 'Sales Team', 'form.php?class_name=hr_team_header&mode=9&type=SALES', 'Create & View Sales Team', 'sd', 'hr_team_header', 9, NULL, NULL, 'FORM', NULL, NULL, 1, '2014-12-08 12:03:37', 1, '2014-12-08 12:05:23'),
 (531, 219, 'Opportunity', 'form.php?class_name=sd_opportunity&mode=9', 'Opportunity', 'sd', 'sd_opportunity', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-12-09 08:08:50', 34, '2014-12-09 08:41:03'),
@@ -12064,12 +12970,12 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (561, 159, 'Upload Value Group Line', 'massupload.php?class_name=sys_value_group_line', 'Upload Value Group Line', 'adm', 'sys_value_group_line', 2, NULL, NULL, 'UPLOAD', NULL, NULL, 34, '2015-01-22 02:43:47', 34, '2015-01-22 02:44:57'),
 (562, 147, 'Search Lines', 'search.php?class_name=sys_value_group_line', 'Search Lines', 'sys', 'sys_value_group_line', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-01-22 06:25:05', 34, '2015-01-22 06:25:05'),
 (563, 564, 'Update Description', 'program.php?class_name=coa_combination&program_name=prg_update_description', 'Update Description', 'gl', 'coa_combination', 9, NULL, NULL, 'PROGRAM', NULL, NULL, 34, '2015-01-22 10:18:49', 34, '2015-01-22 15:08:21'),
-(564, 150, 'Programs', 'form.php?module_code=gl&type=program', 'Geneledger Programs', 'gl', 'gl', 9, NULL, NULL, 'PROGRAM', NULL, NULL, 34, '2015-01-22 15:07:46', 34, '2015-01-22 15:07:46'),
+(564, 150, 'Programs', 'form.php?module_code=gl&type=program', 'Geneledger Programs', 'gl', 'gl', 9, NULL, NULL, 'PROGRAM', NULL, 80, 34, '2015-01-22 15:07:46', 34, '2015-09-30 10:33:56'),
 (565, 569, 'Balance Sheet - Summary', 'search.php?class_name=gl_balance_v&report_name=balance_sheet', 'Balance Sheet - Summary', 'gl', 'gl_balance_v', 2, NULL, NULL, NULL, NULL, NULL, 34, '2015-01-24 10:00:26', 34, '2015-01-27 13:26:38'),
 (566, 569, 'Balance Sheet Detailed', 'search.php?class_name=gl_balance_v&report_name=balance_sheet_detailed', 'Balance Sheet Detailed', 'gl', 'gl_balance_v', 2, NULL, NULL, 'REPORT', NULL, NULL, 34, '2015-01-24 13:16:21', 34, '2015-01-27 13:26:17'),
 (567, 569, 'Income Statement', 'search.php?class_name=gl_balance_v&report_name=income_statement', 'Income Statement', 'gl', 'gl_balance_v', 2, NULL, NULL, 'REPORT', NULL, NULL, 34, '2015-01-27 03:42:52', 34, '2015-01-27 13:25:37'),
 (568, 569, 'Income Statement - Detailed', 'search.php?class_name=gl_balance_v&report_name=income_statement_detailed', 'Income Statement - Detailed', 'gl', 'gl_balance_v', 2, NULL, NULL, 'REPORT', NULL, NULL, 34, '2015-01-27 03:44:17', 34, '2015-01-27 13:24:54'),
-(569, 150, 'Reports', 'form.php?module_code=gl&type=report&path_id=569', 'GL Reports', 'gl', 'gl', 2, NULL, NULL, 'REPORT', NULL, NULL, 34, '2015-01-27 13:23:01', 34, '2015-06-17 09:53:59'),
+(569, 150, 'Reports', 'form.php?module_code=gl&type=report&path_id=569', 'GL Reports', 'gl', 'gl', 2, NULL, NULL, 'REPORT', NULL, 95, 34, '2015-01-27 13:23:01', 34, '2015-09-30 10:33:45'),
 (570, 569, 'All Account Combinations', 'program.php?class_name=coa_combination&program_name=prg_all_combinations&program_type=download_report', 'All Account Combinations', 'gl', 'coa_combination', 2, NULL, NULL, 'REPORT', NULL, NULL, 34, '2015-01-27 13:24:05', 34, '2015-01-27 13:24:05'),
 (571, 569, 'Balance Sheet - MFR', 'program.php?class_name=gl_balance_v&program_name=prg_balance_sheet&program_type=download_report', 'Balance Sheet - Multi Format Reporting', 'gl', 'gl_balance_v', 2, NULL, NULL, 'REPORT', NULL, NULL, 34, '2015-01-28 16:21:48', 34, '2015-01-29 05:10:07'),
 (572, 569, 'Income Stmt - MFR', 'program.php?class_name=gl_balance_v&program_name=prg_income_statement&program_type=download_report', 'Income Statement - Multi Format Report', 'gl', 'gl_balance_v', 2, NULL, NULL, 'REPORT', NULL, NULL, 34, '2015-01-29 05:11:52', 34, '2015-01-29 05:11:52'),
@@ -12240,14 +13146,14 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (748, 747, 'Search Project', 'search.php?class_name=prj_project_header&mode=9', 'Search Project', 'prj', 'prj_project_header', 9, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-07-02 16:00:48', 34, '2015-07-02 17:07:06'),
 (749, 711, 'Budget Type', 'form.php?class_name=option_header&option_header_id=252&mode=9', 'Budget Type', 'prj', 'option_header', 9, NULL, NULL, 'SETUP', NULL, NULL, 34, '2015-07-03 15:36:57', 34, '2015-07-03 15:36:57'),
 (750, 757, 'Agreement', 'form.php?class_name=prj_agreement_header&mode=9', 'Project Agreement Header', 'prj', 'prj_agreement_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-07-04 14:06:15', 34, '2015-07-08 18:58:41'),
-(751, 747, 'Search Agreement', 'search.php?class_name=prj_agreement_header', 'Search Agreement', 'prj', 'prj_agreement_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-07-04 14:06:43', 34, '2015-07-04 14:06:43'),
+(751, 757, 'Search Agreement', 'search.php?class_name=prj_agreement_header', 'Search Agreement', 'prj', 'prj_agreement_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-07-04 14:06:43', 34, '2015-10-04 09:38:42'),
 (752, 756, 'Budget Entry Method', 'form.php?class_name=prj_bem&mode=9', 'Budget Entry Method', 'prj', 'prj_bem', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-07-04 17:49:16', 34, '2015-07-07 04:34:33'),
 (753, 752, 'Search BEM', 'search.php?class_name=prj_bem', 'Search Budget Entry Method', 'prj', 'prj_bem', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-07-04 17:50:12', 34, '2015-07-04 17:50:12'),
 (754, 708, 'Costing Setup', 'form.php?module_code=prj&path_id=754', 'Costing Setup', 'prj', 'prj', 2, NULL, NULL, 'SETUP', NULL, 86, 34, '2015-07-07 03:20:51', 34, '2015-07-07 03:21:09'),
 (755, 708, 'Project Setup', 'form.php?module_code=prj&path_id=755', 'Project Setup', 'prj', 'prj', 2, NULL, NULL, 'SETUP', NULL, 86, 34, '2015-07-07 04:25:51', 34, '2015-07-07 04:25:51'),
 (756, 708, 'Budgeting Setup', 'form.php?module_code=prj&path_id=756', 'Budgeting Setup', 'prj', 'prj', 2, NULL, NULL, 'SETUP', NULL, 86, 34, '2015-07-07 04:32:56', 34, '2015-07-07 04:32:56');
 INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, `module_code`, `obj_class_name`, `mode`, `status`, `id_column_name`, `path_type`, `search_path_cb`, `display_weight`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
-(757, 708, 'Budgeting & Billing', 'form.php?module_code=prj&path_id=757', 'Budgeting & Billing', 'prj', 'prj', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-07-07 09:16:14', 34, '2015-07-10 11:06:20'),
+(757, 708, 'Budgeting', 'form.php?module_code=prj&path_id=757', 'Budgeting', 'prj', 'prj', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-07-07 09:16:14', 34, '2015-10-15 11:25:17'),
 (758, 757, 'Search Budget', 'search.php?class_name=prj_budget_header', 'Search Budget Header', 'prj', 'prj_budget_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-07-07 09:19:09', 34, '2015-07-07 09:19:09'),
 (759, 747, 'Project Expenditure', 'form.php?class_name=prj_expenditure_header&mode=9', 'Project Expenditure', 'prj', 'prj_expenditure_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-07-08 18:48:43', 34, '2015-07-08 18:48:43'),
 (760, 759, 'Search Expenditure', 'search.php?class_name=prj_expenditure_header', 'Search Expenditure', 'prj', 'prj_expenditure_header', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-07-08 18:49:29', 34, '2015-07-08 18:49:29'),
@@ -12256,7 +13162,7 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (763, 762, 'Event Type', 'form.php?class_name=prj_event_type&mode=9', 'Event Type', 'prj', 'prj_event_type', 9, NULL, NULL, 'SETUP', NULL, 87, 34, '2015-07-10 09:38:31', 34, '2015-07-10 09:38:50'),
 (764, 763, 'Search Event Type', 'search.php?class_name=prj_event_type', 'Search Event Type', 'prj', 'prj_event_type', 2, NULL, NULL, 'SETUP', NULL, 87, 34, '2015-07-10 09:40:24', 34, '2015-07-10 09:40:24'),
 (765, 757, 'Project Budgeting', 'form.php?class_name=prj_budget_header&mode=9', 'Project Budgeting', 'prj', 'prj_budget_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-07-10 11:07:01', 34, '2015-07-10 12:08:37'),
-(766, 757, 'Project Event', 'form.php?class_name=prj_event_header&mode=9', 'Project Event', 'prj', 'prj_event_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-07-10 18:55:26', 34, '2015-07-10 18:55:26'),
+(766, 849, 'Project Event', 'form.php?class_name=prj_event_header&mode=9', 'Project Event', 'prj', 'prj_event_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-07-10 18:55:26', 34, '2015-10-15 11:28:18'),
 (767, 766, 'Search Event', 'search.php?class_name=prj_event_header', 'Search Event', 'prj', 'prj_event_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-07-10 18:56:06', 34, '2015-07-10 18:56:06'),
 (768, 106, 'Inter Org Receipt ', 'form.php?class_name=inv_interorg_receipt_header&mode=9', 'Inter Org Receipt ', 'inv', 'inv_interorg_receipt_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-07-13 05:48:58', 34, '2015-07-13 05:48:58'),
 (769, 183, 'Setup', 'form.php?module_code=ap&type=setup', 'Payable Setup', 'ap', 'ap', 2, NULL, NULL, 'SETUP', NULL, NULL, 34, '2015-07-21 08:13:35', 34, '2015-07-21 08:13:35'),
@@ -12284,7 +13190,75 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (791, 549, 'Search Asset Component', 'search.php?class_name=fa_asset_component', 'Search Asset Component', 'fa', 'Search Asset Component', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-08-08 08:05:43', 34, '2015-08-08 08:05:43'),
 (792, 542, 'Asset Retirement', 'form.php?class_name=fa_asset_retirement&mode=9', 'Asset Retirement', 'fa', 'fa_asset_retirement', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-08-10 05:12:54', 34, '2015-08-10 05:12:54'),
 (793, 792, 'Search Asset Retirement', 'search.php?class_name=fa_asset_retirement', 'Search Asset Retirement', 'fa', 'fa_asset_retirement', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-08-10 05:15:53', 34, '2015-08-10 05:15:53'),
-(794, 556, 'Confirm Retirement', 'program.php?class_name=fa_asset_retirement&program_name=prg_confirm_retirement', 'Confirm Retirement', 'fa', 'fa_asset_retirement', 9, NULL, NULL, 'PROGRAM', NULL, NULL, 34, '2015-08-11 12:05:16', 34, '2015-08-11 12:05:16');
+(794, 556, 'Confirm Retirement', 'program.php?class_name=fa_asset_retirement&program_name=prg_confirm_retirement', 'Confirm Retirement', 'fa', 'fa_asset_retirement', 9, NULL, NULL, 'PROGRAM', NULL, NULL, 34, '2015-08-11 12:05:16', 34, '2015-08-11 12:05:16'),
+(795, 711, 'Default Account', 'form.php?class_name=prj_default_account&mode=9', 'Default Account', 'prj', 'prj_default_account', 9, NULL, NULL, 'SETUP', NULL, NULL, 34, '2015-08-22 05:34:18', 34, '2015-08-22 05:34:18'),
+(796, 382, 'Expense Claims', 'form.php?class_name=hr_expense_header&mode=9', 'Employee Expense Claims', 'hr', 'hr_expense_header', 9, NULL, NULL, 'FORM', NULL, 5, 34, '2015-08-23 14:56:45', 34, '2015-08-25 11:40:19'),
+(797, 796, 'Search Expense Claims', 'search.php?class_name=hr_expense_header', 'Search Expense Claims', 'hr', 'hr_expense_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-08-23 14:57:35', 34, '2015-08-23 14:57:35'),
+(798, 796, 'Expense Template', 'form.php?class_name=hr_expense_tpl_header&mode=9', 'Expense Template', 'hr', 'hr_expense_tpl_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-08-24 07:01:47', 34, '2015-08-24 07:01:47'),
+(799, 796, 'Search Expense Template', 'search.php?class_name=hr_expense_tpl_header', 'Search Expense Template', 'hr', 'hr_expense_tpl_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-08-24 07:02:19', 34, '2015-08-24 07:02:19'),
+(800, 399, 'Location', 'form.php?class_name=hr_location&mode=9', 'Location', 'hr', 'hr_location', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-08-25 04:32:46', 34, '2015-08-25 04:32:46'),
+(801, 821, 'Grade', 'form.php?class_name=hr_grade&mode=9', 'Grade', 'hr', 'hr_grade', 9, NULL, NULL, 'FORM', NULL, 2, 34, '2015-08-25 07:38:59', 34, '2015-09-05 05:08:26'),
+(803, 801, 'Search Grade', 'search.php?class_name=hr_grade', 'Search Grade', 'hr', 'hr_grade', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-08-25 07:39:45', 34, '2015-08-25 07:39:45'),
+(804, 801, 'Grade Multi Action', 'multi_select.php?class_name=hr_grade&mode=9&show_block=1', 'Grade Multi Action', 'hr', 'hr_grade', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-08-25 07:45:31', 34, '2015-08-25 07:45:31'),
+(805, 796, 'Perdiem Rate', 'form.php?class_name=hr_perdiem_rate&mode=9', 'Perdiem Rate', 'hr', 'hr_perdiem_rate', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-08-25 15:31:04', 34, '2015-08-25 15:31:04'),
+(806, 399, 'HR Control', 'form.php?class_name=hr_control&mode=9', 'HR Control', 'hr', 'hr_control', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-08-27 07:18:18', 34, '2015-08-27 07:18:18'),
+(807, 183, 'Import Expense Claim', 'multi_select.php?class_name=ap_import_claim_v&action=import_expense_claim&mode=9&show_block=1', 'Import Expense Claim', 'ap', 'ap_import_claim_v', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-08-28 18:06:11', 34, '2015-08-28 18:06:11'),
+(808, 807, 'Import Claim Program', 'program.php?class_name=ap_import_claim_v&program_name=prg_import_expense_claim', 'Import Claim Program', 'ap', 'ap_import_claim_v', 9, NULL, NULL, 'PROGRAM', NULL, NULL, 34, '2015-08-31 03:42:36', 34, '2015-08-31 03:42:36'),
+(809, 505, 'Expense Claim', 'form.php?class_name=hr_expense_header_user&mode=9', 'Expense Claim', 'hr', 'hr_expense_header_user', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-08-31 04:37:11', 34, '2015-08-31 04:37:11'),
+(810, 390, 'Compensation History', 'form.php?class_name=hr_element_history_header&mode=9', 'Compensation History', 'hr', 'hr_element_history_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-09-01 04:33:29', 34, '2015-09-01 04:35:20'),
+(811, 810, 'Search Compensation History', 'search.php?class_name=hr_element_history_header', 'Search Compensation History', 'hr', 'hr_element_history_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-09-01 04:34:54', 34, '2015-09-01 04:34:54'),
+(812, 500, 'Update Compensation', 'program.php?class_name=hr_element_entry_header&program_name=prg_update_compensation', 'Update Compensation', 'hr', 'hr_element_entry_header', 2, NULL, NULL, 'PROGRAM', NULL, NULL, 34, '2015-09-01 11:11:16', 34, '2015-09-01 11:11:16'),
+(813, 399, 'Timesheet Period', 'form.php?class_name=hr_timesheet_period&mode=9', 'Timesheet Period', 'hr', 'hr_timesheet_period', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-09-02 09:20:51', 34, '2015-09-02 09:20:51'),
+(814, 813, 'Search Timesheet Period', 'search.php?class_name=hr_timesheet_period', 'Search Timesheet Period', 'hr', 'hr_timesheet_period', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-09-02 09:21:27', 34, '2015-09-02 09:21:27'),
+(815, 813, 'Timesheet Period Multi Action', 'multi_select.php?class_name=hr_timesheet_period&mode=9&show_block=1', 'Timesheet Period Multi Action', 'hr', 'hr_timesheet_period', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-09-02 09:22:02', 34, '2015-09-02 09:22:02'),
+(816, 382, 'Timesheet', 'form.php?class_name=hr_timesheet_header&mode=9', 'Timesheet Header', 'hr', 'hr_timesheet_header', 9, NULL, NULL, 'FORM', NULL, 1, 34, '2015-09-03 16:27:24', 34, '2015-09-05 05:13:00'),
+(817, 816, 'Timesheet Header', 'search.php?class_name=hr_timesheet_header', 'Timesheet Header', 'hr', 'hr_timesheet_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-09-03 16:30:27', 34, '2015-09-03 16:30:27'),
+(818, 505, 'User Timesheet', 'form.php?class_name=hr_timesheet_header_user&mode=9', 'User Timesheet', 'hr', 'hr_timesheet_header_user', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-09-03 16:55:34', 34, '2015-09-03 16:55:34'),
+(819, 816, 'Attendance', 'form.php?class_name=hr_attendance&mode=9', 'Attendance', 'hr', 'hr_attendance', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-09-04 16:35:34', 34, '2015-09-04 16:36:17'),
+(820, 819, 'Search Attendance', 'search.php?class_name=hr_attendance', 'Search Attendance', 'hr', 'hr_attendance', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-09-04 16:36:53', 34, '2015-09-04 16:37:28'),
+(821, 382, 'Work Structure', 'form.php?module_code=hr&path_id=821', 'Work Structure', 'hr', 'hr', 2, NULL, NULL, 'CONTAINER', NULL, 8, 34, '2015-09-05 05:06:06', 34, '2015-09-05 05:16:56'),
+(822, 257, 'Gross Margin', 'search.php?class_name=cst_gross_margin_v', 'Search Gross Margin', 'cst', 'cst_gross_margin_v', 2, NULL, NULL, 'SEARCH', NULL, 8, 34, '2015-09-05 17:22:20', 34, '2015-09-05 17:22:20'),
+(823, 55, 'Reservation', 'form.php?class_name=inv_reservation&mode=9', 'Reservation', 'inv', 'inv_reservation', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-09-07 07:18:20', 34, '2015-09-07 07:18:26'),
+(824, 823, 'Search Reservation', 'search.php?class_name=inv_reservation&mode=9', 'Search Reservation', 'inv', 'inv_reservation', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-09-07 07:19:03', 34, '2015-09-07 07:19:03'),
+(825, 823, 'Reservation Multi Action', 'multi_select.php?class_name=inv_reservation&mode=9&show_block=1', 'Reservation Multi Action', 'inv', 'inv_reservation', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-09-07 09:39:48', 34, '2015-09-07 09:39:48'),
+(826, 669, 'Subscription', 'form.php?class_name=hd_subscription_header&mode=9', 'Subscription Header', 'hd', 'hd_subscription_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-09-14 11:08:50', 34, '2015-09-14 11:08:50'),
+(827, 826, 'Search Subscription', 'search.php?class_name=hd_subscription_header&mode=9', 'Search Subscription', 'hd', 'hd_subscription_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-09-14 11:09:26', 34, '2015-09-14 11:09:26'),
+(829, 454, 'Search Lot View', 'search.php?class_name=inv_lot_number_v', 'Search Lot View', 'inv', 'inv_lot_number_v', 2, NULL, NULL, NULL, NULL, NULL, 34, '2015-09-18 10:53:24', 34, '2015-09-18 10:53:24'),
+(830, 711, 'Accounting Group', 'form.php?class_name=option_header&option_header_id=262&mode=9', 'Accounting Group', 'prj', 'option_header', 9, NULL, NULL, 'SETUP', NULL, NULL, 34, '2015-09-24 12:56:14', 34, '2015-09-24 12:56:14'),
+(831, 759, 'Burden Expenditure', 'search.php?class_name=prj_burden_expenditure', 'Burden Expenditure', 'prj', 'prj_burden_expenditure', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-09-25 04:11:39', 34, '2015-09-25 04:11:39'),
+(832, 708, 'Programs', 'form.php?module_code=prj&type=program', 'Programs', 'prj', 'prj', 2, NULL, NULL, 'PROGRAM', NULL, 95, 34, '2015-09-25 06:55:24', 34, '2015-09-26 08:51:56'),
+(833, 832, 'Distribute Expenditure ', 'program.php?class_name=prj_expenditure_header&program_name=prg_distribute_cost', 'Distribute Project Expenditures', 'prj', 'prj_expenditure_header', 2, NULL, NULL, 'PROGRAM', NULL, NULL, 34, '2015-09-25 06:57:10', 34, '2015-09-25 06:57:10'),
+(834, 832, 'Create Expenditure Accounting', 'multi_select.php?class_name=prj_expenditure_line_v&action=create_accounting&mode=9&action_class_name=prj_expenditure_line&show_block=1&gl_journal_interface_cb==null&status=DISTRIBUTED', 'Create Expenditure Accounting', 'prj', 'prj_expenditure_line_v', 9, NULL, NULL, 'PROGRAM', NULL, NULL, 34, '2015-09-28 12:28:12', 34, '2015-09-30 11:03:38'),
+(835, 173, 'Journal Interface', 'search.php?class_name=gl_journal_interface', 'Journal Interface', 'gl', 'gl_journal_interface', 2, NULL, NULL, 'SEARCH', 1, NULL, 34, '2015-09-29 07:41:49', 34, '2015-09-29 07:41:49'),
+(836, 564, 'Import Journal', 'program.php?class_name=gl_journal_interface&program_name=prg_import_gl_journal', 'Import Journal', 'gl', 'gl_journal_interface', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-09-29 07:43:59', 34, '2015-10-02 19:32:02'),
+(837, 92, 'Subscribe', 'form.php?class_name=extn_subscribe&mode=9', 'Subscribe', 'adm', 'extn_subscribe', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-10-01 15:01:18', 34, '2015-10-01 15:01:18'),
+(838, 837, 'Search Subscribe', 'search.php?class_name=extn_subscribe', 'Subscribe', 'adm', 'extn_subscribe', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-10-01 15:01:53', 34, '2015-10-01 15:01:53'),
+(839, 564, 'Delete Journal Interface', 'program.php?class_name=gl_journal_interface&program_name=prg_delete_gl_journal', 'Delete Journal Interface', 'gl', 'gl_journal_interface', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-10-02 19:54:09', 34, '2015-10-02 19:54:09'),
+(840, 747, 'Completion Status', 'form.php?class_name=prj_percent_header&mode=9', 'Completion Status', 'prj', 'prj_percent_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-10-04 09:37:59', 34, '2015-10-04 09:37:59'),
+(841, 747, 'Milestone', 'form.php?class_name=prj_milestone&mode=9', 'Milestone', 'prj', 'prj_milestone', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-10-06 07:16:21', 34, '2015-10-06 07:16:21'),
+(842, 832, 'Generate Draft Revenue', 'program.php?class_name=prj_revenue_header&program_name=prg_generate_draft_revenue', 'Generate Draft Revenue', 'prj', 'prj_revenue_header', 2, NULL, NULL, 'PROGRAM', NULL, NULL, 34, '2015-10-06 14:12:23', 34, '2015-10-20 01:43:53'),
+(843, 849, 'Project Revenue', 'form.php?class_name=prj_revenue_header&mode=9', 'Revenue', 'prj', 'prj_revenue_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-10-09 08:11:13', 34, '2015-10-15 11:26:26'),
+(844, 843, 'Search Revenue', 'search.php?class_name=prj_revenue_header', 'Search Revenue', 'prj', 'prj_revenue_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-10-09 08:14:02', 34, '2015-10-09 08:14:09'),
+(845, 849, 'Project Invoice', 'form.php?class_name=prj_invoice_header&mode=9', 'Project Invoice', 'prj', 'prj_invoice_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-10-10 04:55:47', 34, '2015-10-15 11:26:18'),
+(847, 845, 'Search Invoice', 'serach.php?class_name=prj_invoice_header', 'Search Invoice', 'prj', 'prj_invoice_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-10-10 04:58:58', 34, '2015-10-10 04:58:58'),
+(848, 757, 'Budget Revisions', 'search.php?class_name=prj_budget_rev_header', 'Budget Rev Header', 'prj', 'prj_budget_rev_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-10-15 08:18:55', 34, '2015-10-15 08:18:55'),
+(849, 708, 'Billing', 'form.php?module_code=prj&path_id=849', 'Billing', 'prj', 'prj', 2, NULL, NULL, 'FORM', NULL, 6, 34, '2015-10-15 11:25:29', 34, '2015-10-15 11:30:02'),
+(850, 832, 'Create Revenue Accounting', 'program.php?class_name=prj_revenue_header&program_name=prg_create_revenue_account', 'Create Revenue Accounting', 'prj', 'prj_revenue_header', 2, NULL, NULL, 'PROGRAM', NULL, NULL, 34, '2015-10-28 08:02:33', 34, '2015-10-28 08:02:33'),
+(851, 55, 'Onhand Summary', 'form.php?class_name=extn_report_result&mode=2&extn_report_id=3', 'Onhand Summary', 'inv', 'extn_report_result', 2, NULL, NULL, 'REPORT', NULL, NULL, 34, '2015-10-31 11:46:03', 34, '2015-10-31 11:46:03'),
+(852, NULL, 'Quality', 'form.php?module_code=qa', 'Quality', 'qa', 'qa', 2, NULL, NULL, NULL, NULL, 38, 34, '2015-11-02 04:24:12', 34, '2015-11-02 04:24:12'),
+(853, 858, 'Element Type', 'form.php?class_name=option_header&option_header_id=264&mode=9', 'Element Type', 'qa', 'option_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-11-02 04:26:18', 34, '2015-11-06 03:24:29'),
+(854, 852, 'Collection Element', 'form.php?class_name=qa_collection_element_header&mode=9', 'Collection Element', 'qa', 'qa_collection_element_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-11-02 10:25:15', 34, '2015-11-02 10:25:15'),
+(855, 854, 'Search Collection Element', 'search.php?class_name=qa_collection_element_header', 'Search Collection Element Header', 'qa', 'qa_collection_element_header', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-11-02 10:25:48', 34, '2015-11-02 10:25:48'),
+(856, 852, 'Specification', 'form.php?class_name=qa_specification_header&mode=9', 'Specification', 'qa', 'qa_specification_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-11-03 10:22:05', 34, '2015-11-03 10:22:05'),
+(857, 856, 'Search Specification', 'search.php?class_name=qa_specification_header&mode=9', 'Search Specification', 'qa', 'qa_specification_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-11-03 10:22:44', 34, '2015-11-03 10:22:44'),
+(858, 852, 'Setup', 'form.php?module_code=qa&type=setup', 'Quality Setup', 'qa', 'qa', 2, NULL, NULL, 'SETUP', NULL, 90, 34, '2015-11-06 03:24:00', 34, '2015-11-06 03:24:00'),
+(859, 858, 'Collection Plan Type', 'form.php?class_name=option_header&option_header_id=265&mode=9', 'Collection Plan Type', 'qa', 'option_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-11-06 03:31:13', 34, '2015-11-06 03:31:13'),
+(860, 852, 'Collection Plan', 'form.php?class_name=qa_cp_header&mode=9', 'Quality Collection Plan', 'qa', 'qa_cp_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-11-06 07:11:02', 34, '2015-11-06 07:11:02'),
+(861, 860, 'Serach Collection Plan', 'search.php?class_name=qa_cp_header', 'Serach Collection Plan', 'qa', 'qa_cp_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-11-06 07:11:44', 34, '2015-11-06 07:11:44'),
+(862, 860, 'Collection Plan Assignment', 'form.php?class_name=qa_cp_assignment_header&mode=9', 'Collection Plan Assignment', 'qa', 'qa_cp_assignment_header', 9, NULL, 'Collection Plan', 'SEARCH', NULL, NULL, 34, '2015-11-06 10:24:46', 34, '2015-11-06 10:24:46'),
+(863, 860, 'Search Assignment', 'search.php?class_name=qa_cp_assignment_header', 'Search Assignment', 'qa', 'qa_cp_assignment_header', 2, NULL, 'Collection Plan', 'SEARCH', NULL, NULL, 34, '2015-11-06 10:25:20', 34, '2015-11-06 10:25:20'),
+(864, 858, 'Quality Actions', 'form.php?class_name=option_header&option_header_id=267&mode=9', 'Quality Actions', 'qa', 'option_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-11-07 11:44:37', 34, '2015-11-07 11:44:37'),
+(865, 852, 'Quality Result', 'form.php?class_name=qa_quality_result&mode=9', 'Quality Result', 'qa', 'qa_quality_result', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-11-09 02:15:21', 34, '2015-11-09 02:15:21');
 
 -- --------------------------------------------------------
 
@@ -13587,7 +14561,7 @@ CREATE TABLE IF NOT EXISTS `prj_budget_header` (
   `labor_effort` decimal(15,5) DEFAULT NULL,
   `nlr_effort` decimal(15,5) DEFAULT NULL,
   `revenue` decimal(15,5) DEFAULT NULL,
-  `curent_cb` tinyint(1) DEFAULT NULL,
+  `current_cb` tinyint(1) DEFAULT NULL,
   `original_cb` tinyint(1) DEFAULT NULL,
   `baselined_by` varchar(25) DEFAULT NULL,
   `baselined_cb` tinyint(1) DEFAULT NULL,
@@ -13597,7 +14571,7 @@ CREATE TABLE IF NOT EXISTS `prj_budget_header` (
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`prj_budget_header_id`),
-  UNIQUE KEY `prj_project_header_id` (`prj_project_header_id`,`version_number`,`baselined_cb`)
+  UNIQUE KEY `budget_type` (`budget_type`,`prj_project_header_id`,`version_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -13623,8 +14597,70 @@ CREATE TABLE IF NOT EXISTS `prj_budget_line` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`prj_budget_line_id`),
-  UNIQUE KEY `value_group` (`prj_budget_header_id`)
+  PRIMARY KEY (`prj_budget_line_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_budget_rev_header`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_budget_rev_header` (
+  `prj_budget_rev_header_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `prj_budget_header_id` int(12) NOT NULL,
+  `budget_type` varchar(25) DEFAULT NULL,
+  `prj_project_header_id` int(12) NOT NULL,
+  `prj_project_line_id` int(12) DEFAULT NULL,
+  `version_number` int(3) NOT NULL,
+  `version_name` varchar(25) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `status` varchar(25) DEFAULT NULL,
+  `raw_cost` decimal(15,5) DEFAULT NULL,
+  `burdened_cost` decimal(15,5) DEFAULT NULL,
+  `labor_effort` decimal(15,5) DEFAULT NULL,
+  `nlr_effort` decimal(15,5) DEFAULT NULL,
+  `revenue` decimal(15,5) DEFAULT NULL,
+  `current_cb` tinyint(1) DEFAULT NULL,
+  `original_cb` tinyint(1) DEFAULT NULL,
+  `baselined_by` varchar(25) DEFAULT NULL,
+  `baselined_cb` tinyint(1) DEFAULT NULL,
+  `baselined_date` date DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_budget_rev_header_id`),
+  UNIQUE KEY `prj_project_header_id` (`prj_project_header_id`,`version_number`,`baselined_cb`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_budget_rev_line`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_budget_rev_line` (
+  `prj_budget_rev_line_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `prj_budget_rev_header_id` int(12) DEFAULT NULL,
+  `prj_budget_header_id` int(11) NOT NULL,
+  `prj_budget_line_id` int(11) NOT NULL,
+  `prj_project_header_id` int(12) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `prj_project_line_id` int(12) DEFAULT NULL,
+  `prj_resource_line_id` int(12) DEFAULT NULL,
+  `uom_id` int(12) DEFAULT NULL,
+  `quantity` decimal(15,5) DEFAULT NULL,
+  `raw_cost` decimal(15,5) DEFAULT NULL,
+  `revenue_quantity` decimal(15,5) DEFAULT NULL,
+  `revenue_amount` decimal(15,5) DEFAULT NULL,
+  `burden_cost` decimal(15,5) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_budget_rev_line_id`),
+  UNIQUE KEY `prj_budget_header_id` (`prj_budget_rev_header_id`,`prj_project_line_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -13690,6 +14726,66 @@ INSERT INTO `prj_burden_cost_base` (`prj_burden_cost_base_id`, `cost_base`, `des
 (3, 'Expenses', 'Expenses', NULL, NULL, NULL, NULL, 34, '2015-06-28 10:27:01', 34, '2015-06-28 10:27:02'),
 (4, 'Work Orders', 'Work Orders', NULL, NULL, NULL, NULL, 34, '2015-06-28 10:27:29', 34, '2015-06-28 10:27:29');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_burden_expenditure`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_burden_expenditure` (
+  `prj_burden_expenditure_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `prj_expenditure_line_id` int(12) NOT NULL,
+  `prj_burden_cost_base_id` int(12) DEFAULT NULL,
+  `prj_burden_costcode_id` int(12) NOT NULL,
+  `prj_expenditure_type_header_id` int(12) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `prj_burden_list_header_id` int(12) DEFAULT NULL,
+  `expenditure_date` date DEFAULT NULL,
+  `prj_project_header_id` int(12) DEFAULT NULL,
+  `prj_project_line_id` int(12) DEFAULT NULL,
+  `prj_burden_structure_header_id` int(12) DEFAULT NULL,
+  `multiplier` decimal(15,5) DEFAULT NULL,
+  `burden_value` decimal(15,5) DEFAULT NULL,
+  `burden_amount` decimal(15,5) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_burden_expenditure_id`),
+  UNIQUE KEY `prj_expenditure_line_id` (`prj_expenditure_line_id`,`prj_burden_costcode_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `prj_burden_expenditure_v`
+--
+CREATE TABLE IF NOT EXISTS `prj_burden_expenditure_v` (
+`prj_burden_expenditure_id` int(12) unsigned
+,`project_number` varchar(50)
+,`costcode` varchar(25)
+,`costcode_description` varchar(255)
+,`cost_base` varchar(25)
+,`cost_base_description` varchar(255)
+,`burden_list` varchar(25)
+,`prj_expenditure_line_id` int(12) unsigned
+,`prj_expenditure_header_id` int(12)
+,`org_id` int(12)
+,`prj_project_header_id` int(12)
+,`prj_project_line_id` int(12)
+,`prj_nlr_header_id` int(12)
+,`prj_expenditure_type_header_id` int(12)
+,`uom_id` int(12)
+,`quantity` decimal(15,5)
+,`description` varchar(255)
+,`prj_burden_list_header_id` int(12)
+,`expenditure_date` date
+,`prj_burden_structure_header_id` int(12)
+,`prj_burden_costcode_id` int(12)
+,`multiplier` decimal(15,5)
+,`burden_value` decimal(15,5)
+,`burden_amount` decimal(15,5)
+);
 -- --------------------------------------------------------
 
 --
@@ -13809,7 +14905,7 @@ CREATE TABLE IF NOT EXISTS `prj_burden_structure_expendituretype` (
 --
 
 INSERT INTO `prj_burden_structure_expendituretype` (`prj_burden_structure_expendituretype_id`, `prj_burden_structure_header_id`, `prj_expenditure_type_id`, `description`, `burden_cost_base_id`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
-(6, 2, 1, NULL, 2, 34, '2015-06-29 04:04:54', 34, '2015-06-29 04:21:44'),
+(6, 2, 1, NULL, 1, 34, '2015-06-29 04:04:54', 34, '2015-09-26 14:21:32'),
 (10, 2, 2, NULL, 2, 34, '2015-06-29 04:19:23', 34, '2015-06-29 04:21:44'),
 (11, 1, 1, NULL, 1, 34, '2015-06-29 04:24:01', 34, '2015-06-29 04:28:08'),
 (12, 1, 2, NULL, 3, 34, '2015-06-29 04:24:01', 34, '2015-06-29 04:24:47');
@@ -13842,7 +14938,7 @@ CREATE TABLE IF NOT EXISTS `prj_burden_structure_header` (
 
 INSERT INTO `prj_burden_structure_header` (`prj_burden_structure_header_id`, `structure`, `structure_type`, `description`, `allow_override_cb`, `effective_from`, `effective_to`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (1, 'CP Billing Structure', NULL, 'CP Buildup Billing Structure', NULL, NULL, NULL, 34, '2015-06-29 04:00:40', 34, '2015-06-29 04:28:09'),
-(2, 'Fringe Benefits', 'A', 'Fringe Benefits', NULL, NULL, NULL, 34, '2015-06-29 04:18:02', 34, '2015-06-29 04:21:44');
+(2, 'Fringe Benefits', 'A', 'Fringe Benefits', NULL, NULL, NULL, 34, '2015-06-29 04:18:02', 34, '2015-09-26 14:21:33');
 
 -- --------------------------------------------------------
 
@@ -13932,12 +15028,36 @@ CREATE TABLE IF NOT EXISTS `prj_category_value` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `prj_default_account`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_default_account` (
+  `prj_default_account_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `prj_project_type_header_id` int(12) NOT NULL,
+  `ac_id` int(12) DEFAULT NULL,
+  `document_type` varchar(25) DEFAULT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `status` varchar(25) NOT NULL,
+  `accounting_group` varchar(25) NOT NULL,
+  `effective_start_date` date DEFAULT NULL,
+  `effective_end_date` date DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_default_account_id`),
+  UNIQUE KEY `gl_calendar_id` (`description`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `prj_event_header`
 --
 
 CREATE TABLE IF NOT EXISTS `prj_event_header` (
   `prj_event_header_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
-  `event_name` int(12) NOT NULL,
+  `event_name` varchar(50) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `prj_project_header_id` int(12) DEFAULT NULL,
   `billing_amount` decimal(15,5) DEFAULT NULL,
@@ -13949,7 +15069,14 @@ CREATE TABLE IF NOT EXISTS `prj_event_header` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`prj_event_header_id`),
   UNIQUE KEY `prj_project_header_id` (`prj_project_header_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `prj_event_header`
+--
+
+INSERT INTO `prj_event_header` (`prj_event_header_id`, `event_name`, `description`, `prj_project_header_id`, `billing_amount`, `revenue_amount`, `event_number`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+(1, 'E01', NULL, 7, NULL, NULL, NULL, 34, '2015-10-10 17:00:23', 34, '2015-10-10 17:04:33');
 
 -- --------------------------------------------------------
 
@@ -13962,7 +15089,7 @@ CREATE TABLE IF NOT EXISTS `prj_event_line` (
   `prj_event_header_id` int(12) DEFAULT NULL,
   `event_type_id` int(12) NOT NULL,
   `event_date` date DEFAULT NULL,
-  `org_id` int(12) NOT NULL,
+  `org_id` int(12) DEFAULT NULL,
   `event_number` int(12) DEFAULT NULL,
   `prj_project_line_id` int(12) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
@@ -13971,15 +15098,22 @@ CREATE TABLE IF NOT EXISTS `prj_event_line` (
   `revenue_amount` decimal(15,5) DEFAULT NULL,
   `billed_cb` tinyint(1) DEFAULT NULL,
   `revenue_distributed_cb` tinyint(1) DEFAULT NULL,
-  `reference_key_name` varchar(50) NOT NULL,
-  `reference_key_value` varchar(50) NOT NULL,
+  `reference_key_name` varchar(50) DEFAULT NULL,
+  `reference_key_value` varchar(50) DEFAULT NULL,
   `created_by` int(12) NOT NULL,
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`prj_event_line_id`),
   UNIQUE KEY `value_group` (`event_type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `prj_event_line`
+--
+
+INSERT INTO `prj_event_line` (`prj_event_line_id`, `prj_event_header_id`, `event_type_id`, `event_date`, `org_id`, `event_number`, `prj_project_line_id`, `description`, `currency`, `billing_amount`, `revenue_amount`, `billed_cb`, `revenue_distributed_cb`, `reference_key_name`, `reference_key_value`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+(1, 1, 3, '2015-10-29', NULL, 1, 59, NULL, 'USD', '1000.00000', '1000.00000', NULL, NULL, NULL, NULL, 34, '2015-10-10 17:02:51', 34, '2015-10-10 17:04:33');
 
 -- --------------------------------------------------------
 
@@ -13988,7 +15122,7 @@ CREATE TABLE IF NOT EXISTS `prj_event_line` (
 --
 
 CREATE TABLE IF NOT EXISTS `prj_event_type` (
-  ` prj_event_type_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `prj_event_type_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `event_type` varchar(25) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `event_class` varchar(25) DEFAULT NULL,
@@ -13999,9 +15133,18 @@ CREATE TABLE IF NOT EXISTS `prj_event_type` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (` prj_event_type_id`),
+  PRIMARY KEY (`prj_event_type_id`),
   UNIQUE KEY `value_group` (`event_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `prj_event_type`
+--
+
+INSERT INTO `prj_event_type` (`prj_event_type_id`, `event_type`, `description`, `event_class`, `revenue_category`, `effective_from`, `effective_to`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+(1, 'Bonus', 'Performance Bonus', 'WRITE_ON', 'LABOR', NULL, NULL, 34, '2015-10-10 16:28:02', 34, '2015-10-10 16:28:02'),
+(2, 'Cash Discount', 'Cash Discount', 'MANUAL', 'INDIRECT', NULL, NULL, 34, '2015-10-10 16:28:47', 34, '2015-10-10 16:28:47'),
+(3, 'Cost to Cost Invoice', 'Cost to Cost Invoice', 'AUTO', 'LABOR', NULL, NULL, 34, '2015-10-10 16:29:49', 34, '2015-10-10 16:29:49');
 
 -- --------------------------------------------------------
 
@@ -14045,17 +15188,26 @@ CREATE TABLE IF NOT EXISTS `prj_expenditure_line` (
   `prj_expenditure_line_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `prj_expenditure_header_id` int(12) NOT NULL,
   `org_id` int(12) DEFAULT NULL,
-  `hr_employee_id` date DEFAULT NULL,
+  `hr_employee_id` int(12) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `job_id` int(12) DEFAULT NULL,
   `expenditure_date` date DEFAULT NULL,
   `prj_project_header_id` int(12) DEFAULT NULL,
   `prj_project_line_id` int(12) DEFAULT NULL,
   `prj_nlr_header_id` int(12) DEFAULT NULL,
-  `prj_exepnditure_type_header_id` int(12) NOT NULL,
+  `prj_expenditure_type_header_id` int(12) NOT NULL,
   `uom_id` int(12) NOT NULL,
   `quantity` decimal(15,5) NOT NULL,
   `rate` decimal(15,5) DEFAULT NULL,
+  `status` varchar(25) DEFAULT NULL,
+  `debit_ac_id` int(12) DEFAULT NULL,
+  `credit_ac_id` int(12) DEFAULT NULL,
+  `gl_journal_header_id` int(12) DEFAULT NULL,
+  `gl_journal_interface_cb` tinyint(1) DEFAULT NULL,
+  `invoiced_cb` tinyint(1) DEFAULT NULL,
+  `revene_calculated_cb` tinyint(1) DEFAULT NULL,
+  `line_amount` decimal(15,5) DEFAULT NULL,
+  `burden_amount` decimal(15,5) DEFAULT NULL,
   `created_by` int(12) NOT NULL,
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
@@ -14064,6 +15216,36 @@ CREATE TABLE IF NOT EXISTS `prj_expenditure_line` (
   UNIQUE KEY `sys_catalog_header_id` (`prj_expenditure_header_id`,`org_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `prj_expenditure_line_v`
+--
+CREATE TABLE IF NOT EXISTS `prj_expenditure_line_v` (
+`prj_expenditure_line_id` int(12) unsigned
+,`prj_expenditure_header_id` int(12)
+,`org_id` int(12)
+,`hr_employee_id` int(12)
+,`description` varchar(255)
+,`job_id` int(12)
+,`expenditure_date` date
+,`prj_project_header_id` int(12)
+,`prj_project_line_id` int(12)
+,`prj_nlr_header_id` int(12)
+,`prj_expenditure_type_header_id` int(12)
+,`uom_id` int(12)
+,`quantity` decimal(15,5)
+,`rate` decimal(15,5)
+,`debit_ac_id` int(12)
+,`credit_ac_id` int(12)
+,`burden_amount` decimal(15,5)
+,`gl_journal_header_id` int(12)
+,`gl_journal_interface_cb` tinyint(1)
+,`status` varchar(25)
+,`project_number` varchar(50)
+,`bu_org_id` int(12)
+,`task_number` varchar(25)
+);
 -- --------------------------------------------------------
 
 --
@@ -14094,7 +15276,7 @@ CREATE TABLE IF NOT EXISTS `prj_expenditure_type_header` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`prj_expenditure_type_header_id`),
   UNIQUE KEY `value_group` (`expenditure_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `prj_expenditure_type_header`
@@ -14102,7 +15284,8 @@ CREATE TABLE IF NOT EXISTS `prj_expenditure_type_header` (
 
 INSERT INTO `prj_expenditure_type_header` (`prj_expenditure_type_header_id`, `expenditure_type`, `description`, `expenditure_category`, `effective_from`, `effective_to`, `revenue_category`, `uom_id`, `direct_labor_cb`, `inventory_cb`, `burden_cb`, `expense_reports_cb`, `misc_transaction_cb`, `over_time_cb`, `invoice_cb`, `usages_cb`, `wip_cb`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (1, 'Equipment Maintenance ', 'Equipment Maintenance ', 'EQUIPMENT', NULL, NULL, 'INDIRECT', 43, NULL, 1, NULL, NULL, 1, 1, 1, 1, NULL, 34, '2015-06-16 10:35:07', 34, '2015-06-16 10:38:47'),
-(2, 'Telephone Charges', 'Telephone Charges', 'MATERIALS', NULL, NULL, 'INDIRECT', 45, 1, NULL, 1, 1, 1, 1, 1, 1, NULL, 34, '2015-06-16 10:36:31', 34, '2015-07-06 10:52:36');
+(2, 'Telephone Charges', 'Telephone Charges', 'MATERIALS', NULL, NULL, 'INDIRECT', 45, 1, NULL, 1, 1, 1, 1, 1, 1, NULL, 34, '2015-06-16 10:36:31', 34, '2015-08-17 11:22:40'),
+(3, 'Labor Operators', 'Labor Operators', 'LABOR', NULL, NULL, 'LABOR', 45, 1, NULL, 1, 1, 1, 1, 1, 1, NULL, 34, '2015-10-19 21:49:22', 34, '2015-10-19 21:49:22');
 
 -- --------------------------------------------------------
 
@@ -14126,14 +15309,119 @@ CREATE TABLE IF NOT EXISTS `prj_expenditure_type_line` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`prj_expenditure_type_line_id`),
   UNIQUE KEY `sys_catalog_header_id` (`prj_expenditure_type_header_id`,`bu_org_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `prj_expenditure_type_line`
 --
 
 INSERT INTO `prj_expenditure_type_line` (`prj_expenditure_type_line_id`, `prj_expenditure_type_header_id`, `bu_org_id`, `effective_from`, `description`, `effective_to`, `uom_id`, `currency`, `rate`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
-(1, 2, 5, '2015-07-30', NULL, NULL, NULL, 'USD', '100.00000', 34, '2015-07-06 10:52:36', 34, '2015-07-06 10:52:36');
+(1, 2, 5, '2015-07-30', NULL, NULL, NULL, 'USD', '100.00000', 34, '2015-07-06 10:52:36', 34, '2015-07-06 10:52:36'),
+(2, 2, 10, '2015-08-01', NULL, NULL, NULL, 'USD', '90.00000', 34, '2015-08-17 11:22:40', 34, '2015-08-17 11:22:40'),
+(3, 2, 8, '2015-08-27', NULL, NULL, NULL, 'USD', '120.00000', 34, '2015-08-17 11:22:41', 34, '2015-08-17 11:22:41'),
+(4, 3, 8, '2015-08-27', NULL, NULL, NULL, 'USD', '120.00000', 34, '2015-10-19 21:49:22', 34, '2015-10-19 21:49:22'),
+(5, 3, 5, '2015-07-30', NULL, NULL, NULL, 'USD', '100.00000', 34, '2015-10-19 21:49:22', 34, '2015-10-19 21:49:22'),
+(6, 3, 10, '2015-08-01', NULL, NULL, NULL, 'USD', '90.00000', 34, '2015-10-19 21:49:23', 34, '2015-10-19 21:49:23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_invoice_header`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_invoice_header` (
+  `prj_invoice_header_id` int(12) NOT NULL AUTO_INCREMENT,
+  `bu_org_id` int(12) NOT NULL,
+  `invoice_status` varchar(15) NOT NULL,
+  `unearned_coa_id` int(12) DEFAULT NULL,
+  `unbilled_coa_id` int(12) DEFAULT NULL,
+  `receivables_ac_id` int(12) DEFAULT NULL,
+  `ar_customer_id` int(12) NOT NULL,
+  `ar_customer_site_id` int(12) DEFAULT NULL,
+  `prj_agreement_header_id` int(12) DEFAULT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `prj_project_header_id` int(12) DEFAULT NULL,
+  `transfer_status` varchar(15) DEFAULT NULL,
+  `unearned_amount` decimal(20,5) DEFAULT NULL,
+  `unbilled_amount` decimal(20,5) DEFAULT NULL,
+  `receivables_amount` decimal(20,5) DEFAULT NULL,
+  `currency` varchar(256) NOT NULL,
+  `doc_currency` varchar(25) DEFAULT NULL,
+  `invoice_number` varchar(25) NOT NULL,
+  `exchange_rate_type` varchar(50) DEFAULT NULL,
+  `exchange_rate` decimal(20,5) DEFAULT NULL,
+  `release_date` date DEFAULT NULL,
+  `rejection_reason` varchar(255) DEFAULT NULL,
+  `transfer_date` date DEFAULT NULL,
+  `document_number` varchar(50) DEFAULT NULL,
+  `ledger_id` int(12) DEFAULT NULL,
+  `period_id` int(12) DEFAULT NULL,
+  `approval_status` varchar(25) DEFAULT NULL,
+  `reference_type` varchar(25) DEFAULT NULL,
+  `reference_key_name` varchar(25) DEFAULT NULL,
+  `reference_key_value` varchar(25) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_invoice_header_id`),
+  UNIQUE KEY `transaction_number` (`unbilled_coa_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_invoice_line`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_invoice_line` (
+  `prj_invoice_line_id` int(12) NOT NULL AUTO_INCREMENT,
+  `prj_invoice_header_id` int(12) NOT NULL,
+  `prj_project_line_id` int(12) DEFAULT NULL,
+  `revenue_category` varchar(25) DEFAULT NULL,
+  `expenditure_category` varchar(25) DEFAULT NULL,
+  `revenue_source` varchar(25) DEFAULT NULL,
+  `line_number` int(12) NOT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `amount` decimal(20,5) DEFAULT NULL,
+  `release_date` date DEFAULT NULL,
+  `rejection_reason` varchar(255) DEFAULT NULL,
+  `transfer_date` date DEFAULT NULL,
+  `document_number` varchar(50) DEFAULT NULL,
+  `reference_type` varchar(25) DEFAULT NULL,
+  `reference_key_name` varchar(25) DEFAULT NULL,
+  `reference_key_value` varchar(25) DEFAULT NULL,
+  `gl_journal_header_id` int(12) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_invoice_line_id`),
+  UNIQUE KEY `transaction_number` (`revenue_source`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_milestone`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_milestone` (
+  `prj_milestone_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `prj_project_header_id` int(12) NOT NULL,
+  `prj_project_line_id` int(12) NOT NULL,
+  `status` varchar(25) DEFAULT NULL,
+  `comment` varchar(255) DEFAULT NULL,
+  `signoff_cb` tinyint(1) DEFAULT NULL,
+  `revenue_amount` decimal(14,4) DEFAULT NULL,
+  `invoice_amount` date DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_milestone_id`),
+  UNIQUE KEY `prj_project_line_id` (`prj_project_line_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -14155,7 +15443,14 @@ CREATE TABLE IF NOT EXISTS `prj_nlr_header` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`prj_nlr_header_id`),
   UNIQUE KEY `value_group` (`resource_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Non Labor Resources For Projects' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Non Labor Resources For Projects' AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `prj_nlr_header`
+--
+
+INSERT INTO `prj_nlr_header` (`prj_nlr_header_id`, `resource_name`, `prj_expenditure_type_id`, `description`, `equipment_cb`, `effective_from`, `effective_to`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+(1, 'Lab Test Tab', 1, 'Lab Test Tab', NULL, NULL, NULL, 34, '2015-08-17 16:17:24', 34, '2015-08-17 16:18:04');
 
 -- --------------------------------------------------------
 
@@ -14179,8 +15474,123 @@ CREATE TABLE IF NOT EXISTS `prj_nlr_line` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`prj_nlr_line_id`),
   UNIQUE KEY `sys_catalog_header_id` (`prj_nlr_header_id`,`bu_org_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Non Labor Resources Lines For Projects' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Non Labor Resources Lines For Projects' AUTO_INCREMENT=2 ;
 
+--
+-- Dumping data for table `prj_nlr_line`
+--
+
+INSERT INTO `prj_nlr_line` (`prj_nlr_line_id`, `prj_nlr_header_id`, `bu_org_id`, `effective_from`, `description`, `effective_to`, `uom_id`, `currency`, `rate`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+(1, 1, 5, NULL, 'Lab Test @ BO01', NULL, 27, 'USD', '100.00000', 34, '2015-08-17 16:17:24', 34, '2015-08-17 16:18:04');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `prj_percent_all_v`
+--
+CREATE TABLE IF NOT EXISTS `prj_percent_all_v` (
+`prj_percent_header_id` int(12) unsigned
+,`percent` decimal(8,4)
+,`description` varchar(255)
+,`as_of_date` varchar(25)
+,`status` varchar(25)
+,`created_by` int(12)
+,`creation_date` datetime
+,`last_update_by` int(12)
+,`last_update_date` datetime
+,`project_number` varchar(50)
+,`project_description` varchar(256)
+,`prj_project_header_id` int(12)
+);
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_percent_header`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_percent_header` (
+  `prj_percent_header_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `prj_project_header_id` int(12) NOT NULL,
+  `percent` decimal(8,4) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `as_of_date` varchar(25) NOT NULL,
+  `status` varchar(25) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_percent_header_id`),
+  UNIQUE KEY `value_group` (`percent`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_percent_headerrev`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_percent_headerrev` (
+  `prj_percent_headerrev_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `prj_percent_header_id` int(12) NOT NULL,
+  `prj_project_header_id` int(12) NOT NULL,
+  `percent` decimal(8,4) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `as_of_date` varchar(25) NOT NULL,
+  `status` varchar(25) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_percent_headerrev_id`),
+  UNIQUE KEY `value_group` (`percent`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_percent_line`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_percent_line` (
+  `prj_percent_line_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `prj_percent_header_id` int(12) NOT NULL,
+  `prj_project_header_id` int(12) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `prj_project_line_id` int(12) NOT NULL,
+  `percent` decimal(8,4) DEFAULT NULL,
+  `comment` varchar(255) DEFAULT NULL,
+  `as_of_date` date DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_percent_line_id`),
+  UNIQUE KEY `value_group` (`prj_project_header_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `prj_percent_line_v`
+--
+CREATE TABLE IF NOT EXISTS `prj_percent_line_v` (
+`prj_percent_line_id` int(12) unsigned
+,`prj_percent_header_id` int(12)
+,`percent` decimal(8,4)
+,`comment` varchar(255)
+,`as_of_date` date
+,`created_by` int(12)
+,`creation_date` datetime
+,`last_update_by` int(12)
+,`last_update_date` datetime
+,`prj_project_line_id` int(12)
+,`prj_project_header_id` int(12)
+,`task_number` varchar(25)
+,`task_name` varchar(50)
+,`task_level_weight` int(12)
+,`parent_prj_task_num` varchar(25)
+,`description` varchar(256)
+);
 -- --------------------------------------------------------
 
 --
@@ -14313,10 +15723,9 @@ CREATE TABLE IF NOT EXISTS `prj_project_header` (
   `exchange_rate` decimal(15,5) DEFAULT NULL,
   `opportunity_value` decimal(15,3) DEFAULT NULL,
   `expected_approval_date` date DEFAULT NULL,
-  `revenue_accrual_method` varchar(20) DEFAULT NULL,
-  `invoice_accrual_method` varchar(20) DEFAULT NULL,
+  `billing_method` varchar(5) NOT NULL,
   `billing_cycle` varchar(20) DEFAULT NULL,
-  `cost_burden_schedule_id` int(12) DEFAULT NULL,
+  `prj_burden_list_header_id` int(12) DEFAULT NULL,
   `account_burdened_cost_cb` tinyint(1) DEFAULT NULL,
   `labor_billing_type` varchar(20) DEFAULT NULL,
   `nlr_billing_type` varchar(20) DEFAULT NULL,
@@ -14335,6 +15744,7 @@ CREATE TABLE IF NOT EXISTS `prj_project_header` (
   `direct_labor_cb` tinyint(1) DEFAULT NULL,
   `is_template_cb` tinyint(1) DEFAULT NULL,
   `project_status` varchar(25) DEFAULT NULL,
+  `accounting_group` varchar(25) NOT NULL,
   `approval_status` varchar(25) DEFAULT NULL,
   `rev_enabled_cb` tinyint(1) DEFAULT NULL,
   `rev_number` int(12) DEFAULT NULL,
@@ -14367,6 +15777,7 @@ CREATE TABLE IF NOT EXISTS `prj_project_line` (
   `work_type` varchar(25) DEFAULT NULL,
   `allow_charges_cb` tinyint(1) DEFAULT NULL,
   `capitalizable_cb` tinyint(1) DEFAULT NULL,
+  `milestone_cb` tinyint(1) DEFAULT NULL,
   `currency` varchar(10) DEFAULT NULL,
   `rate_type` varchar(25) DEFAULT NULL,
   `cip_asset_id` int(12) DEFAULT NULL,
@@ -14441,7 +15852,7 @@ CREATE TABLE IF NOT EXISTS `prj_project_type_header` (
   `sponsored_cb` tinyint(1) DEFAULT NULL,
   `organization_planning_cb` tinyint(1) DEFAULT NULL,
   `intercompany_billing_cb` tinyint(1) DEFAULT NULL,
-  `cost_burden_schedule_id` int(12) DEFAULT NULL,
+  `prj_burden_list_header_id` int(12) DEFAULT NULL,
   `cost_burdened_cb` tinyint(1) DEFAULT NULL,
   `account_burdened_cost_cb` tinyint(1) DEFAULT NULL,
   `cost_budget_method` varchar(12) DEFAULT NULL,
@@ -14534,6 +15945,7 @@ CREATE TABLE IF NOT EXISTS `prj_rate_schedule_line` (
   `uom_id` int(12) DEFAULT NULL,
   `rate` decimal(15,5) DEFAULT NULL,
   `mark_up_percentage` int(4) DEFAULT NULL,
+  `resource_name` varchar(25) DEFAULT NULL,
   `created_by` int(12) NOT NULL,
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
@@ -14587,6 +15999,81 @@ CREATE TABLE IF NOT EXISTS `prj_resource_list_line` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`prj_resource_list_line_id`),
   UNIQUE KEY `sys_catalog_header_id` (`prj_resource_list_header_id`,`resource_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_revenue_header`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_revenue_header` (
+  `prj_revenue_header_id` int(12) NOT NULL AUTO_INCREMENT,
+  `bu_org_id` int(12) NOT NULL,
+  `revenue_status` varchar(15) NOT NULL,
+  `unearned_coa_id` int(12) DEFAULT NULL,
+  `unbilled_coa_id` int(12) NOT NULL,
+  `revenue_coa_id` int(12) NOT NULL,
+  `prj_agreement_header_id` int(12) DEFAULT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `prj_project_header_id` int(12) NOT NULL,
+  `transfer_status` varchar(15) DEFAULT NULL,
+  `unearned_amount` decimal(20,5) DEFAULT NULL,
+  `unbilled_amount` decimal(20,5) DEFAULT NULL,
+  `revenue_amount` decimal(20,5) DEFAULT NULL,
+  `currency` varchar(256) NOT NULL,
+  `doc_currency` varchar(25) NOT NULL,
+  `revenue_number` varchar(25) DEFAULT NULL,
+  `exchange_rate_type` varchar(50) NOT NULL,
+  `exchange_rate` decimal(20,5) NOT NULL,
+  `release_date` date DEFAULT NULL,
+  `rejection_reason` varchar(255) DEFAULT NULL,
+  `transfer_date` date DEFAULT NULL,
+  `document_number` varchar(50) DEFAULT NULL,
+  `ledger_id` int(12) NOT NULL,
+  `period_id` int(12) NOT NULL,
+  `approval_status` varchar(25) DEFAULT NULL,
+  `reference_type` varchar(25) DEFAULT NULL,
+  `reference_key_name` varchar(25) DEFAULT NULL,
+  `reference_key_value` varchar(25) DEFAULT NULL,
+  `gl_journal_header_id` int(12) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_revenue_header_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prj_revenue_line`
+--
+
+CREATE TABLE IF NOT EXISTS `prj_revenue_line` (
+  `prj_revenue_line_id` int(12) NOT NULL AUTO_INCREMENT,
+  `prj_revenue_header_id` int(12) NOT NULL,
+  `prj_project_line_id` int(12) DEFAULT NULL,
+  `revenue_category` varchar(25) DEFAULT NULL,
+  `revenue_source` varchar(25) DEFAULT NULL,
+  `line_number` int(12) NOT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `amount` decimal(20,5) DEFAULT NULL,
+  `release_date` date DEFAULT NULL,
+  `rejection_reason` varchar(255) DEFAULT NULL,
+  `transfer_date` date DEFAULT NULL,
+  `document_number` varchar(50) DEFAULT NULL,
+  `reference_type` varchar(75) DEFAULT NULL,
+  `reference_key_name` varchar(75) DEFAULT NULL,
+  `reference_key_value` varchar(25) DEFAULT NULL,
+  `gl_journal_header_id` int(12) DEFAULT NULL,
+  `gl_journal_interface_cb` tinyint(1) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`prj_revenue_line_id`),
+  UNIQUE KEY `prj_revenue_header_id` (`prj_revenue_header_id`,`line_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -14744,6 +16231,432 @@ CREATE TABLE IF NOT EXISTS `product` (
   `field_description` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`content_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qa_ce_action_type`
+--
+
+CREATE TABLE IF NOT EXISTS `qa_ce_action_type` (
+  `qa_ce_action_type_id` int(12) NOT NULL AUTO_INCREMENT,
+  `reference_type` varchar(30) DEFAULT NULL,
+  `reference_entity` varchar(50) DEFAULT NULL,
+  `reference_key_name` varchar(50) DEFAULT NULL,
+  `reference_key_value` int(12) DEFAULT NULL,
+  `qa_cp_header_id` int(12) DEFAULT NULL,
+  `created_by` varchar(256) NOT NULL,
+  `creation_date` date NOT NULL,
+  `last_update_by` varchar(256) NOT NULL,
+  `last_update_date` date NOT NULL,
+  `qa_ce_action_type_value` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`qa_ce_action_type_id`),
+  UNIQUE KEY `colletion_element_value` (`qa_ce_action_type_value`,`reference_key_name`,`reference_key_value`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qa_ce_bgm_calibration_reading`
+--
+
+CREATE TABLE IF NOT EXISTS `qa_ce_bgm_calibration_reading` (
+  `qa_ce_bgm_calibration_reading_id` int(12) NOT NULL AUTO_INCREMENT,
+  `reference_type` varchar(30) DEFAULT NULL,
+  `reference_entity` varchar(50) DEFAULT NULL,
+  `reference_key_name` varchar(50) DEFAULT NULL,
+  `reference_key_value` int(12) DEFAULT NULL,
+  `qa_cp_header_id` int(12) DEFAULT NULL,
+  `created_by` varchar(256) NOT NULL,
+  `creation_date` date NOT NULL,
+  `last_update_by` varchar(256) NOT NULL,
+  `last_update_date` date NOT NULL,
+  `qa_ce_bgm_calibration_reading_value` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`qa_ce_bgm_calibration_reading_id`),
+  UNIQUE KEY `colletion_element_value` (`qa_ce_bgm_calibration_reading_value`,`reference_key_name`,`reference_key_value`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qa_ce_enc_rating`
+--
+
+CREATE TABLE IF NOT EXISTS `qa_ce_enc_rating` (
+  `qa_ce_enc_rating_id` int(12) NOT NULL AUTO_INCREMENT,
+  `reference_type` varchar(30) DEFAULT NULL,
+  `reference_entity` varchar(50) DEFAULT NULL,
+  `reference_key_name` varchar(50) DEFAULT NULL,
+  `reference_key_value` int(12) DEFAULT NULL,
+  `qa_cp_header_id` int(12) DEFAULT NULL,
+  `created_by` varchar(256) NOT NULL,
+  `creation_date` date NOT NULL,
+  `last_update_by` varchar(256) NOT NULL,
+  `last_update_date` date NOT NULL,
+  `qa_ce_enc_rating_value` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`qa_ce_enc_rating_id`),
+  UNIQUE KEY `colletion_element_value` (`qa_ce_enc_rating_value`,`reference_key_name`,`reference_key_value`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qa_ce_higher_bandwidth1`
+--
+
+CREATE TABLE IF NOT EXISTS `qa_ce_higher_bandwidth1` (
+  `qa_ce_higher_bandwidth1_id` int(12) NOT NULL AUTO_INCREMENT,
+  `reference_type` varchar(30) DEFAULT NULL,
+  `reference_entity` varchar(50) DEFAULT NULL,
+  `reference_key_name` varchar(50) DEFAULT NULL,
+  `reference_key_value` int(12) DEFAULT NULL,
+  `qa_cp_header_id` int(12) DEFAULT NULL,
+  `created_by` varchar(256) NOT NULL,
+  `creation_date` date NOT NULL,
+  `last_update_by` varchar(256) NOT NULL,
+  `last_update_date` date NOT NULL,
+  `qa_ce_higher_bandwidth1_value` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`qa_ce_higher_bandwidth1_id`),
+  UNIQUE KEY `colletion_element_value` (`qa_ce_higher_bandwidth1_value`,`reference_key_name`,`reference_key_value`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qa_ce_lower_bandwidth1`
+--
+
+CREATE TABLE IF NOT EXISTS `qa_ce_lower_bandwidth1` (
+  `qa_ce_lower_bandwidth1_id` int(12) NOT NULL AUTO_INCREMENT,
+  `reference_type` varchar(30) DEFAULT NULL,
+  `reference_entity` varchar(50) DEFAULT NULL,
+  `reference_key_name` varchar(50) DEFAULT NULL,
+  `reference_key_value` int(12) DEFAULT NULL,
+  `qa_cp_header_id` int(12) DEFAULT NULL,
+  `created_by` varchar(256) NOT NULL,
+  `creation_date` date NOT NULL,
+  `last_update_by` varchar(256) NOT NULL,
+  `last_update_date` date NOT NULL,
+  `qa_ce_lower_bandwidth1_value` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`qa_ce_lower_bandwidth1_id`),
+  UNIQUE KEY `colletion_element_value` (`qa_ce_lower_bandwidth1_value`,`reference_key_name`,`reference_key_value`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qa_ce_lower_bandwidth2`
+--
+
+CREATE TABLE IF NOT EXISTS `qa_ce_lower_bandwidth2` (
+  `qa_ce_lower_bandwidth2_id` int(12) NOT NULL AUTO_INCREMENT,
+  `reference_type` varchar(30) DEFAULT NULL,
+  `reference_entity` varchar(50) DEFAULT NULL,
+  `reference_key_name` varchar(50) DEFAULT NULL,
+  `reference_key_value` int(12) DEFAULT NULL,
+  `qa_cp_header_id` int(12) DEFAULT NULL,
+  `created_by` varchar(256) NOT NULL,
+  `creation_date` date NOT NULL,
+  `last_update_by` varchar(256) NOT NULL,
+  `last_update_date` date NOT NULL,
+  `qa_ce_lower_bandwidth2_value` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`qa_ce_lower_bandwidth2_id`),
+  UNIQUE KEY `colletion_element_value` (`qa_ce_lower_bandwidth2_value`,`reference_key_name`,`reference_key_value`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qa_ce_quality_rating`
+--
+
+CREATE TABLE IF NOT EXISTS `qa_ce_quality_rating` (
+  `qa_ce_quality_rating_id` int(12) NOT NULL AUTO_INCREMENT,
+  `reference_type` varchar(30) DEFAULT NULL,
+  `reference_entity` varchar(50) DEFAULT NULL,
+  `reference_key_name` varchar(50) DEFAULT NULL,
+  `reference_key_value` int(12) DEFAULT NULL,
+  `qa_cp_header_id` int(12) DEFAULT NULL,
+  `created_by` varchar(256) NOT NULL,
+  `creation_date` date NOT NULL,
+  `last_update_by` varchar(256) NOT NULL,
+  `last_update_date` date NOT NULL,
+  `qa_ce_quality_rating_value` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`qa_ce_quality_rating_id`),
+  UNIQUE KEY `colletion_element_value` (`qa_ce_quality_rating_value`,`reference_key_name`,`reference_key_value`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qa_ce_spectra_reading`
+--
+
+CREATE TABLE IF NOT EXISTS `qa_ce_spectra_reading` (
+  `qa_ce_spectra_reading_id` int(12) NOT NULL AUTO_INCREMENT,
+  `reference_type` varchar(30) DEFAULT NULL,
+  `reference_entity` varchar(50) DEFAULT NULL,
+  `reference_key_name` varchar(50) DEFAULT NULL,
+  `reference_key_value` int(12) DEFAULT NULL,
+  `qa_cp_header_id` int(12) DEFAULT NULL,
+  `created_by` varchar(256) NOT NULL,
+  `creation_date` date NOT NULL,
+  `last_update_by` varchar(256) NOT NULL,
+  `last_update_date` date NOT NULL,
+  `qa_ce_spectra_reading_value` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`qa_ce_spectra_reading_id`),
+  UNIQUE KEY `colletion_element_value` (`qa_ce_spectra_reading_value`,`reference_key_name`,`reference_key_value`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qa_ce_spectrum_range`
+--
+
+CREATE TABLE IF NOT EXISTS `qa_ce_spectrum_range` (
+  `qa_ce_spectrum_range_id` int(12) NOT NULL AUTO_INCREMENT,
+  `reference_type` varchar(30) DEFAULT NULL,
+  `reference_entity` varchar(50) DEFAULT NULL,
+  `reference_key_name` varchar(50) DEFAULT NULL,
+  `reference_key_value` int(12) DEFAULT NULL,
+  `qa_cp_header_id` int(12) DEFAULT NULL,
+  `created_by` varchar(256) NOT NULL,
+  `creation_date` date NOT NULL,
+  `last_update_by` varchar(256) NOT NULL,
+  `last_update_date` date NOT NULL,
+  `qa_ce_spectrum_range_value` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`qa_ce_spectrum_range_id`),
+  UNIQUE KEY `colletion_element_value` (`qa_ce_spectrum_range_value`,`reference_key_name`,`reference_key_value`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qa_collection_element_action`
+--
+
+CREATE TABLE IF NOT EXISTS `qa_collection_element_action` (
+  `qa_collection_element_action_id` int(12) NOT NULL AUTO_INCREMENT,
+  `qa_collection_element_header_id` int(12) NOT NULL,
+  `action_condition` varchar(5) NOT NULL,
+  `comparison` varchar(10) DEFAULT NULL,
+  `value_from` varchar(50) DEFAULT NULL,
+  `value_to` varchar(50) DEFAULT NULL,
+  `spec_value` varchar(20) DEFAULT NULL,
+  `quality_action` varchar(25) DEFAULT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`qa_collection_element_action_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qa_collection_element_header`
+--
+
+CREATE TABLE IF NOT EXISTS `qa_collection_element_header` (
+  `qa_collection_element_header_id` int(12) NOT NULL AUTO_INCREMENT,
+  `element_name` varchar(50) NOT NULL,
+  `sys_element_name` varchar(50) NOT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `data_type` varchar(50) DEFAULT NULL,
+  `data_length` int(12) DEFAULT NULL,
+  `display_type` varchar(20) DEFAULT NULL,
+  `element_type` varchar(10) NOT NULL,
+  `element_label` varchar(50) DEFAULT NULL,
+  `hint` varchar(255) DEFAULT NULL,
+  `decimal_position` int(2) DEFAULT NULL,
+  `uom_id` int(12) DEFAULT NULL,
+  `default_value` varchar(50) DEFAULT NULL,
+  `option_header_id` int(12) DEFAULT NULL,
+  `target_value` varchar(50) DEFAULT NULL,
+  `user_range_low` varchar(50) DEFAULT NULL,
+  `user_range_high` varchar(50) DEFAULT NULL,
+  `specification_range_high` varchar(50) DEFAULT NULL,
+  `specification_range_low` varchar(50) DEFAULT NULL,
+  `reasonable_range_high` varchar(50) DEFAULT NULL,
+  `reasonable_range_low` varchar(50) DEFAULT NULL,
+  `active_cb` tinyint(1) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`qa_collection_element_header_id`),
+  UNIQUE KEY `element_name` (`element_name`),
+  UNIQUE KEY `sys_element_name` (`sys_element_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qa_collection_element_line`
+--
+
+CREATE TABLE IF NOT EXISTS `qa_collection_element_line` (
+  `qa_collection_element_line_id` int(12) NOT NULL AUTO_INCREMENT,
+  `qa_collection_element_header_id` int(12) NOT NULL,
+  `element_value` varchar(50) NOT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`qa_collection_element_line_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qa_cp_assignment_header`
+--
+
+CREATE TABLE IF NOT EXISTS `qa_cp_assignment_header` (
+  `qa_cp_assignment_header_id` int(12) NOT NULL AUTO_INCREMENT,
+  `qa_cp_header_id` int(12) NOT NULL,
+  `inv_transaction_id` int(12) NOT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `effective_from` date NOT NULL,
+  `effective_to` date DEFAULT NULL,
+  `mandatory_cb` tinyint(1) DEFAULT NULL,
+  `enabled_cb` tinyint(1) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`qa_cp_assignment_header_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qa_cp_assignment_line`
+--
+
+CREATE TABLE IF NOT EXISTS `qa_cp_assignment_line` (
+  `qa_cp_assignment_line_id` int(12) NOT NULL AUTO_INCREMENT,
+  `qa_cp_assignment_header_id` int(12) NOT NULL,
+  `qa_cp_header_id` int(12) NOT NULL,
+  `trigger_name` varchar(25) NOT NULL,
+  `trigger_condition` varchar(10) NOT NULL,
+  `value_from` varchar(25) NOT NULL,
+  `value_to` varchar(25) DEFAULT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `enabled_cb` tinyint(1) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`qa_cp_assignment_line_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qa_cp_header`
+--
+
+CREATE TABLE IF NOT EXISTS `qa_cp_header` (
+  `qa_cp_header_id` int(12) NOT NULL AUTO_INCREMENT,
+  `org_id` int(12) NOT NULL,
+  `plan_name` varchar(50) NOT NULL,
+  `effective_from` date NOT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `effective_to` date DEFAULT NULL,
+  `plan_type` varchar(25) DEFAULT NULL,
+  `qa_specification_header_id` int(12) DEFAULT NULL,
+  `specification_type` int(12) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`qa_cp_header_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qa_cp_line`
+--
+
+CREATE TABLE IF NOT EXISTS `qa_cp_line` (
+  `qa_cp_line_id` int(12) NOT NULL AUTO_INCREMENT,
+  `qa_cp_header_id` int(12) NOT NULL,
+  `qa_collection_element_header_id` int(12) NOT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `sequence` int(4) DEFAULT NULL,
+  `prompt` varchar(25) DEFAULT NULL,
+  `mandatory_cb` tinyint(1) DEFAULT NULL,
+  `enabled_cb` tinyint(1) DEFAULT NULL,
+  `readonly_cb` tinyint(1) DEFAULT NULL,
+  `displayed_cb` tinyint(1) DEFAULT NULL,
+  `information_cb` tinyint(1) DEFAULT NULL,
+  `dafault_value` varchar(50) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`qa_cp_line_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qa_specification_header`
+--
+
+CREATE TABLE IF NOT EXISTS `qa_specification_header` (
+  `qa_specification_header_id` int(12) NOT NULL AUTO_INCREMENT,
+  `specification_name` varchar(50) NOT NULL,
+  `effective_from` date NOT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `effective_to` date DEFAULT NULL,
+  `item_id_m` int(12) DEFAULT NULL,
+  `item_revision` varchar(10) DEFAULT NULL,
+  `ap_supplier_id` int(12) DEFAULT NULL,
+  `ap_customer_id` int(12) DEFAULT NULL,
+  `status` varchar(25) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`qa_specification_header_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qa_specification_line`
+--
+
+CREATE TABLE IF NOT EXISTS `qa_specification_line` (
+  `qa_specification_line_id` int(12) NOT NULL AUTO_INCREMENT,
+  `qa_specification_header_id` int(12) NOT NULL,
+  `qa_collection_element_header_id` int(12) NOT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `uom_id` int(12) DEFAULT NULL,
+  `enabled_cb` tinyint(1) DEFAULT NULL,
+  `user_range_low` varchar(50) DEFAULT NULL,
+  `user_range_high` varchar(50) DEFAULT NULL,
+  `user_target_value` varchar(50) DEFAULT NULL,
+  `specification_range_high` varchar(50) DEFAULT NULL,
+  `specification_range_low` varchar(50) DEFAULT NULL,
+  `specification_target_value` varchar(50) DEFAULT NULL,
+  `reasonable_range_low` varchar(50) DEFAULT NULL,
+  `reasonable_range_high` varchar(50) DEFAULT NULL,
+  `reasonable_target_value` int(12) DEFAULT NULL,
+  `created_by` int(12) NOT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `last_update_by` int(12) NOT NULL,
+  `last_update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`qa_specification_line_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -15215,6 +17128,8 @@ CREATE TABLE IF NOT EXISTS `sd_pick_list_v` (
 ,`item_number` varchar(50)
 ,`uom_id` int(12)
 ,`item_status` varchar(15)
+,`serial_generation` varchar(25)
+,`lot_generation` varchar(25)
 ,`org` varchar(50)
 ,`shipping_org_id` int(12)
 ,`created_by` int(12)
@@ -15747,7 +17662,7 @@ CREATE TABLE IF NOT EXISTS `site_info` (
 --
 
 INSERT INTO `site_info` (`default_home_page`, `site_name`, `maintenance_cb`, `maintenance_msg`, `disabled_action`, `email`, `phone_no`, `logo_path`, `posts_in_fp`, `summary_char_fp`, `footer_message`, `anonymous_user`, `anonymous_user_role`, `access_denied`, `analytics_code`, `basic_user_role`, `move_line_wo_header`, `last_update_by`, `last_update_date`) VALUES
-('content', 'inoERP', NULL, ' <h1>Thanks for Visiting inoERP <br>\r\n Site in under maintenance & ''ll be back online shortly.     </h1>                     ', '', 'contact@inoideas.org', '1-205-419-5131', 'files/logo.png', 6, 60, '<span class="developed_by">Copyright @ 2014 inoERP - <a href=''http://inoideas.org''>Powered By inoCMS </a></span>                          ', '', '', NULL, ' <script>\r\n  (function(i,s,o,g,r,a,m){i[''GoogleAnalyticsObject'']=r;i[r]=i[r]||function(){\r\n  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\r\n  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\r\n  })(window,document,''script'',''//www.google-analytics.com/analytics.js'',''ga'');\r\n\r\n  ga(''create'', ''UA-48829329-1'', ''auto'');\r\n  ga(''send'', ''pageview'');\r\n\r\n</script>          ', NULL, 'SHOW_WARNING', 34, '2015-07-02 07:29:51');
+('content', 'inoERP', NULL, ' <h1>Thanks for Visiting inoERP <br>\r\n Site in under maintenance & ''ll be back online shortly.     </h1>                       ', '', 'contact@inoideas.org', '1-205-419-5131', 'files/logo.png', 6, 60, '<span class="developed_by">Copyright @ 2014 inoERP - <a href=''http://inoideas.org''>Powered By inoCMS </a></span>                            ', '', '', NULL, ' <script>\r\n  (function(i,s,o,g,r,a,m){i[''GoogleAnalyticsObject'']=r;i[r]=i[r]||function(){\r\n  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\r\n  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\r\n  })(window,document,''script'',''//www.google-analytics.com/analytics.js'',''ga'');\r\n\r\n  ga(''create'', ''UA-48829329-1'', ''auto'');\r\n  ga(''send'', ''pageview'');\r\n\r\n</script>            ', NULL, 'SHOW_WARNING', 34, '2015-08-29 14:48:11');
 
 -- --------------------------------------------------------
 
@@ -15940,7 +17855,7 @@ CREATE TABLE IF NOT EXISTS `supplier_site` (
   `site_address_id` int(12) DEFAULT NULL,
   `site_contact_id` int(12) DEFAULT NULL,
   `supplier_site_attachement_id` int(12) DEFAULT NULL,
-  `ef_id` int(12) DEFAULT NULL,
+  `primary_cb` tinyint(1) DEFAULT NULL,
   `bank_id` int(12) DEFAULT NULL,
   `bank_account_id` int(12) DEFAULT NULL,
   `created_by` int(12) NOT NULL,
@@ -16075,7 +17990,7 @@ CREATE TABLE IF NOT EXISTS `sys_catalog_value` (
   `reference_id` int(12) NOT NULL,
   PRIMARY KEY (`sys_catalog_value_id`),
   UNIQUE KEY `sys_catalog_line_id` (`sys_catalog_line_id`,`reference_table`,`reference_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=60 ;
 
 --
 -- Dumping data for table `sys_catalog_value`
@@ -16121,7 +18036,24 @@ INSERT INTO `sys_catalog_value` (`sys_catalog_value_id`, `sys_catalog_line_id`, 
 (39, 18, 3, 'WINDOWS7', 'ec_product', 12),
 (40, 14, 3, '14_TO_15', 'ec_product', 9),
 (41, 20, 3, '321_500GB', 'ec_product', 9),
-(42, 18, 3, 'WINDOWS8', 'ec_product', 9);
+(42, 18, 3, 'WINDOWS8', 'ec_product', 9),
+(43, 7, 2, 'ABC12121', 'ec_product', 14),
+(44, 8, 2, '1x3 cm', 'ec_product', 14),
+(45, 9, 2, '100gm', 'ec_product', 14),
+(46, 10, 2, 'Mal', 'ec_product', 14),
+(47, 10, 2, 'Mal', 'ec_product', 16),
+(48, 9, 2, '2Gm', 'ec_product', 16),
+(49, 8, 2, '2x3 cm', 'ec_product', 16),
+(50, 7, 2, 'ABS17171', 'ec_product', 16),
+(51, 8, 2, ' 7 x 10 x 12 cm', 'ec_product', 17),
+(52, 11, 2, 'NA', 'ec_product', 17),
+(53, 7, 2, 'ABAB121', 'ec_product', 17),
+(54, 9, 2, '10 gm', 'ec_product', 17),
+(55, 10, 2, 'Mal', 'ec_product', 17),
+(56, 8, 2, '7 x 10', 'ec_product', 18),
+(57, 9, 2, '100gm', 'ec_product', 18),
+(58, 10, 2, 'Mly', 'ec_product', 18),
+(59, 7, 2, 'ABC', 'ec_product', 18);
 
 -- --------------------------------------------------------
 
@@ -16811,7 +18743,7 @@ CREATE TABLE IF NOT EXISTS `sys_profile_header` (
   PRIMARY KEY (`sys_profile_header_id`),
   UNIQUE KEY `value_group` (`profile_name`),
   UNIQUE KEY `profile_name` (`profile_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `sys_profile_header`
@@ -16834,7 +18766,9 @@ INSERT INTO `sys_profile_header` (`sys_profile_header_id`, `access_level`, `prof
 (14, 'BOTH', 'hd_change_request_impact', 'hd_change_request', 'Change Request Impact', 34, '2015-04-19 06:23:55', 34, '2015-04-19 06:24:35'),
 (15, 'BOTH', 'hd_service_request_number_prefix', 'hd_service_request', 'Service Request Number Prefix', 34, '2015-05-21 15:46:22', 34, '2015-05-21 15:46:26'),
 (16, 'BOTH', 'hd_service_request_type', 'hd_service_request', 'Service Request Type', 34, '2015-05-21 15:47:14', 34, '2015-05-21 15:47:21'),
-(17, 'BOTH', 'hd_service_request_impact', 'hd_service_request', 'Service Request Impact', 34, '2015-05-21 15:47:51', 34, '2015-05-21 15:47:55');
+(17, 'BOTH', 'hd_service_request_impact', 'hd_service_request', 'Service Request Impact', 34, '2015-05-21 15:47:51', 34, '2015-05-21 15:47:55'),
+(18, 'BOTH', 'hd_subscription_number_prefix', 'hd_subscription_header', 'Subscription Number Prefix', 34, '2015-09-15 06:16:14', 34, '2015-09-16 09:49:24'),
+(19, 'BOTH', 'ec_cart_forward_page', 'ec_user_cart', 'eCommerce Cart Forward Page', 34, '2015-09-16 07:24:52', 34, '2015-09-23 05:09:20');
 
 -- --------------------------------------------------------
 
@@ -16854,7 +18788,7 @@ CREATE TABLE IF NOT EXISTS `sys_profile_line` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`sys_profile_line_id`),
   UNIQUE KEY `sys_profile_header_id_2` (`sys_profile_header_id`,`profile_level`,`level_name`,`level_value`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
 
 --
 -- Dumping data for table `sys_profile_line`
@@ -16886,7 +18820,8 @@ INSERT INTO `sys_profile_line` (`sys_profile_line_id`, `sys_profile_header_id`, 
 (26, 14, 'SITE', 'SITE', 'LOW', 34, '2015-04-19 06:24:36', 34, '2015-04-19 06:24:36'),
 (27, 15, 'SITE', 'SITE', 'SRVC', 34, '2015-05-21 15:46:25', 34, '2015-05-21 15:46:25'),
 (28, 16, 'SITE', 'SITE', 'REQUEST', 34, '2015-05-21 15:47:22', 34, '2015-05-21 15:47:22'),
-(29, 17, 'SITE', 'SITE', 'LOW', 34, '2015-05-21 15:47:56', 34, '2015-05-21 15:47:56');
+(29, 17, 'SITE', 'SITE', 'LOW', 34, '2015-05-21 15:47:56', 34, '2015-05-21 15:47:56'),
+(30, 18, 'SITE', 'SITE', '?dtype=pform&cname=hd_subscription_user&window_type=pub&mode=9', 34, '2015-09-15 06:16:14', 34, '2015-09-16 09:49:24');
 
 -- --------------------------------------------------------
 
@@ -17161,7 +19096,7 @@ CREATE TABLE IF NOT EXISTS `sys_value_group_header` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`sys_value_group_header_id`),
   UNIQUE KEY `value_group` (`value_group`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `sys_value_group_header`
@@ -17179,7 +19114,10 @@ INSERT INTO `sys_value_group_header` (`sys_value_group_header_id`, `access_level
 (9, 'both', 'Processor Type', 'Processor Type', 'ec', NULL, 'varchar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'active', NULL, NULL, 34, '2015-04-03 11:14:16', 34, '2015-04-03 11:16:11'),
 (10, 'both', 'Hard Drive Size', 'Hard Drive Size', 'ec', NULL, 'varchar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-04-03 11:32:08', 34, '2015-05-27 11:13:20'),
 (11, 'both', 'Project', 'Project', 'gl', 'NONE', 'int', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GL_COA', NULL, NULL, NULL, 34, '2015-07-25 17:06:06', 34, '2015-07-25 17:06:06'),
-(12, 'both', 'TBU', 'To Be Used', 'gl', 'NONE', 'int', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GL_COA', NULL, NULL, NULL, 34, '2015-07-25 17:07:08', 34, '2015-07-25 17:07:08');
+(12, 'both', 'TBU', 'To Be Used', 'gl', 'NONE', 'int', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'GL_COA', NULL, NULL, NULL, 34, '2015-07-25 17:07:08', 34, '2015-07-25 17:07:08'),
+(13, 'both', 'HR Location City', 'HR Location City', 'hr', 'NONE', 'varchar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'HR_LOCATION', NULL, NULL, NULL, 34, '2015-08-24 12:15:02', 34, '2015-08-24 12:15:02'),
+(14, 'both', 'HR Location Country', 'HR Location Country', 'hr', 'NONE', 'varchar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'HR_LOCATION', NULL, NULL, NULL, 34, '2015-08-24 12:16:58', 34, '2015-08-24 12:16:58'),
+(15, 'both', 'HR Location State', 'HR Location State', 'hr', 'NONE', 'varchar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'HR_LOCATION', NULL, NULL, NULL, 34, '2015-08-24 12:19:17', 34, '2015-08-24 12:19:17');
 
 -- --------------------------------------------------------
 
@@ -17208,7 +19146,7 @@ CREATE TABLE IF NOT EXISTS `sys_value_group_line` (
   PRIMARY KEY (`sys_value_group_line_id`),
   UNIQUE KEY `sys_value_group_header_id` (`sys_value_group_header_id`,`code`),
   KEY `option_header_id` (`sys_value_group_header_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1929 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1950 ;
 
 --
 -- Dumping data for table `sys_value_group_line`
@@ -18921,7 +20859,28 @@ INSERT INTO `sys_value_group_line` (`sys_value_group_line_id`, `sys_value_group_
 (1925, 11, '1000', '1000', 'Internal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-25 17:06:06', 34, '2015-07-25 17:06:06'),
 (1926, 11, '2000', '2000', 'Contract', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-25 17:06:07', 34, '2015-07-25 17:06:07'),
 (1927, 11, '3000', '3000', 'Capital', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-25 17:06:07', 34, '2015-07-25 17:06:07'),
-(1928, 12, '1000', '1000', 'Default', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-25 17:07:09', 34, '2015-07-25 17:07:09');
+(1928, 12, '1000', '1000', 'Default', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-07-25 17:07:09', 34, '2015-07-25 17:07:09'),
+(1929, 13, 'BNGLR', 'Bangaluru', 'Bangaluru', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:15:02', 34, '2015-08-24 12:15:02'),
+(1930, 13, 'CHENNAI', 'Chennai', 'Chennai', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:15:03', 34, '2015-08-24 12:15:03'),
+(1931, 13, 'MUMBAI', 'Mumbai', 'Mumbai', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:15:03', 34, '2015-08-24 12:15:03'),
+(1932, 13, 'REST_IN', 'Rest India', 'Rest India', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:15:04', 34, '2015-08-24 12:15:04'),
+(1933, 13, 'EAST_IN', 'East India', 'East India', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:15:04', 34, '2015-08-24 12:15:04'),
+(1934, 13, 'KOLKA', 'Kolkata', 'Kolkata', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:15:05', 34, '2015-08-24 12:15:05'),
+(1935, 13, 'SOUTH_IN', 'South India', 'South India', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:15:05', 34, '2015-08-24 12:15:05'),
+(1936, 14, 'IN', 'India', 'India', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:17:00', 34, '2015-08-24 12:17:00'),
+(1937, 14, 'US', 'USA', 'USA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:17:00', 34, '2015-08-24 12:17:00'),
+(1938, 14, 'UK', 'United Kingdom', 'United Kingdom', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:17:01', 34, '2015-08-24 12:17:01'),
+(1939, 14, 'DE', 'Germany', 'Germany', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:17:02', 34, '2015-08-24 12:17:02'),
+(1940, 14, 'SG', 'Singapore', 'Singapore', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:17:02', 34, '2015-08-24 12:17:02'),
+(1941, 14, 'FR', 'France', 'France', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:17:02', 34, '2015-08-24 12:17:02'),
+(1942, 14, 'IT', 'Italy', 'Italy', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:17:03', 34, '2015-08-24 12:17:03'),
+(1943, 15, 'ORISSA', 'Orissa', 'Orissa', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:19:18', 34, '2015-08-24 12:19:18'),
+(1944, 15, 'WB', 'West Bengal', 'West Bengal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:19:19', 34, '2015-08-24 12:19:19'),
+(1945, 15, 'JK', 'Jammu & Kashmir', 'Jammu & Kashmir', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:19:20', 34, '2015-08-24 12:19:20'),
+(1946, 15, 'MAHARASTRA', 'Maharastra', 'Maharastra', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:19:20', 34, '2015-08-24 12:19:20'),
+(1947, 15, 'PUNJAB', 'Punjab', 'Punjab', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:19:21', 34, '2015-08-24 12:19:21'),
+(1948, 15, 'OTH', 'Others', 'Others', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:19:21', 34, '2015-08-24 12:19:21'),
+(1949, 15, 'NA', 'Not Applicable', 'Not Applicable', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2015-08-24 12:19:22', 34, '2015-08-24 12:19:22');
 
 -- --------------------------------------------------------
 
@@ -19007,7 +20966,7 @@ CREATE TABLE IF NOT EXISTS `uom` (
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`uom_id`),
   UNIQUE KEY `name` (`uom_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
 
 --
 -- Dumping data for table `uom`
@@ -19032,7 +20991,8 @@ INSERT INTO `uom` (`uom_id`, `class`, `uom_name`, `description`, `primary_cb`, `
 (41, 'Weight', 'MG', 'Milligram', 1, 39, 0.000001, NULL, 'ACTIVE', NULL, 1, 34, '2015-02-10 06:22:11', 34, '2015-08-05 07:09:58'),
 (42, 'Time', 'Day', 'Day', 1, 29, 1440, NULL, NULL, NULL, NULL, 34, '2015-06-13 09:52:45', 34, '2015-08-05 07:09:58'),
 (43, 'Money', 'Currency', 'Currency', 1, NULL, NULL, NULL, 'ACTIVE', NULL, NULL, 34, '2015-06-16 10:33:32', 34, '2015-08-05 07:32:22'),
-(45, 'Money', 'Dollar', 'Dollar', 1, NULL, NULL, NULL, 'ACTIVE', NULL, NULL, 34, '2015-06-16 10:34:34', 34, '2015-08-05 07:34:38');
+(45, 'Money', 'Dollar', 'Dollar', 1, NULL, NULL, NULL, 'ACTIVE', NULL, NULL, 34, '2015-06-16 10:34:34', 34, '2015-08-05 07:34:38'),
+(46, 'Time', 'Year', 'Year', 1, 42, 365, NULL, 'ACTIVE', NULL, NULL, 34, '2015-09-14 11:27:31', 34, '2015-09-14 11:27:31');
 
 -- --------------------------------------------------------
 
@@ -19056,6 +21016,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `block_notif_count` int(5) DEFAULT NULL,
   `supplier_id` int(12) DEFAULT NULL,
   `default_theme` varchar(50) DEFAULT NULL,
+  `use_personal_db_cb` tinyint(1) DEFAULT NULL,
   `ar_customer_id` int(12) DEFAULT NULL,
   `prices_dec` smallint(6) NOT NULL DEFAULT '2',
   `qty_dec` smallint(6) NOT NULL DEFAULT '2',
@@ -19082,27 +21043,34 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `user_name` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=104 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=111 ;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `person_id`, `username`, `password`, `first_name`, `last_name`, `assigned_ip`, `phone`, `email`, `user_language`, `date_format`, `hr_employee_id`, `block_notif_count`, `supplier_id`, `default_theme`, `ar_customer_id`, `prices_dec`, `qty_dec`, `rates_dec`, `percent_dec`, `show_gl`, `show_codes`, `show_hints`, `last_visit_date`, `query_size`, `image_file_id`, `pos`, `print_profile`, `rep_popup`, `auth_provider_name`, `auth_provider_id`, `status`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`, `revision_enabled`, `revision_number`) VALUES
-(1, NULL, 'admin', '2c848e7e18ea0e55b413a6ac73ee276bafa479994213c32e3a4ce920efc37508', 'Admin', 'Admin', NULL, NULL, 'admin@thissite.com', NULL, 0, NULL, NULL, 0, 'default', 0, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 0, '2014-09-13 19:16:52', 34, '2015-02-25 03:09:17', 'N', NULL),
-(34, NULL, 'inoerp', 'f5b9ac93ee7df536f02b4e58ef702020470aa74fed06eb46475d8264f9fdc7f6', 'inoerp', 'inoerp', NULL, '34543543', 'inoerp@no-site.com', 'en_US', 0, 1, 3, NULL, 'default', 8, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 594, 1, '1', 1, '0', '', 0, 0, '2014-08-26 12:51:31', 34, '2015-07-04 11:46:09', 'N', NULL),
-(88, NULL, 'nishit50', 'fd2063e7246ed74534e2cec236276fe594c98a9f83ea4e4fa9caf46e26b7ccdb', 'Nishit', 'das11', NULL, NULL, 'nishitdas@outlook.com', NULL, 0, 4, 0, 0, 'default', 0, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 0, '2014-08-20 09:48:07', 0, '2020-08-14 09:48:07', 'N', NULL),
-(91, NULL, 'nishit', '4c2c32b3f9b6b9906305b5789b4cc42c15694ed6cd141f7fd3dbf35b223f58b3', 'Nishit', 'das', NULL, NULL, 'nishitdas@yahoo.co.in', NULL, 0, NULL, NULL, 0, 'default', 0, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 0, '2014-08-24 12:12:37', 34, '2014-10-21 06:31:52', 'N', NULL),
-(93, NULL, 'ino_supp', 'fd2063e7246ed74534e2cec236276fe594c98a9f83ea4e4fa9caf46e26b7ccdb', 'ino', 'supp', NULL, NULL, 'ino_supp@inoerp.com', NULL, 0, NULL, NULL, 0, 'default', 0, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 0, '2014-09-04 15:26:43', 0, '2004-09-14 15:26:43', 'N', NULL),
-(94, NULL, 'buyer', '917881e736258036a783bf47d6942b5e5c64635f64b7b0800d1512345e0bb473', 'buyer', 'test', NULL, NULL, 'buyer@inoerp.org', NULL, 0, NULL, NULL, 0, 'default', 0, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 0, '2014-09-11 07:43:16', 34, '2015-02-18 04:54:00', 'N', NULL),
-(95, NULL, 'testuser', 'daff5fd5c5b471e35c14e379c39a02f8737928659a70d174948756acda63abf5', 'test', 'user', NULL, NULL, 'testuser@rediff.com', NULL, 0, NULL, NULL, 0, 'default', 0, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, -99, '2014-11-09 05:05:47', -99, '2014-11-09 05:05:47', 'N', NULL),
-(96, NULL, 'demouser', '3316ded82ef3e6931516b56b2d0ba3da5b04cd30901a9edb4db0a609e73aa5fe', 'demo', 'user', NULL, NULL, 'demouser@inoideas.org', NULL, 0, NULL, NULL, 0, 'default', 0, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 34, '2014-11-19 18:51:02', 34, '2015-03-08 08:11:50', 'N', NULL),
-(97, NULL, 'anande23', '4ff9b53ce51baaf9d925877d359599b5e60f0dcfa75016c3c8922fe24659b284', 'anand23', 'das', NULL, NULL, 'anand23@gmail.com', NULL, 0, NULL, NULL, 0, 'default', 0, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, -99, '2015-01-07 16:17:02', 34, '2015-04-06 10:55:57', 'N', NULL),
-(99, NULL, 'Nishit Das', 'bd0d028a69ab6fed644369c3d3eb61d6fcddd45df2c2e0f3e9243f021e4051f3', 'Nishit', 'Das', NULL, NULL, 'inoerp1@gmail.com', NULL, 0, NULL, NULL, NULL, 'default', NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, 'google', '107555006955106696169', 1, -99, '2015-02-18 17:13:44', 34, '2015-05-09 14:44:30', 'N', NULL),
-(100, NULL, 'ladmin', 'b66e176542e726dcabab39ce24eec28631be061bd5e79b1fbde1aa1809f57fb1', 'Local', 'Admin', NULL, NULL, 'ladmin@localhsot', NULL, 0, NULL, NULL, NULL, 'default', NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, NULL, 1, '1', 1, NULL, NULL, 1, 34, '2015-05-06 04:40:14', 34, '2015-05-06 04:40:32', 'N', NULL),
-(101, NULL, 'sales', '4f38c2604934d71614ff342a467e4e666289016ede25d230151069fb30c39f1a', 'sales', 'contact', NULL, NULL, 'sales.contact@localhost', NULL, 0, NULL, NULL, NULL, 'default', NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, NULL, 1, '1', 1, NULL, NULL, 1, 34, '2015-05-06 07:21:53', 34, '2015-05-06 07:23:14', 'N', NULL),
-(102, NULL, 'management', '9658893f8d26db6d863ef60171b3551802bd4407d1676908d8141c2a95f78435', 'management', 'management', NULL, NULL, 'management@localhost', NULL, 0, NULL, NULL, NULL, 'default', NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, NULL, 1, '1', 1, NULL, NULL, 1, 34, '2015-05-06 07:25:28', 34, '2015-05-06 07:26:02', 'N', NULL),
-(103, NULL, 'Endy Sng', 'c873cd76ed13733d50e4600c41eab9d86149fcf000ac8b52080714bff3a6e783', 'Endy', 'Sng', NULL, NULL, 'endy.sng@gmail.com', NULL, 0, NULL, NULL, NULL, 'default', NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, NULL, 1, '1', 1, NULL, NULL, 1, -99, '2015-05-22 07:15:15', -99, '2015-05-22 07:15:15', 'N', NULL);
+INSERT INTO `user` (`user_id`, `person_id`, `username`, `password`, `first_name`, `last_name`, `assigned_ip`, `phone`, `email`, `user_language`, `date_format`, `hr_employee_id`, `block_notif_count`, `supplier_id`, `default_theme`, `use_personal_db_cb`, `ar_customer_id`, `prices_dec`, `qty_dec`, `rates_dec`, `percent_dec`, `show_gl`, `show_codes`, `show_hints`, `last_visit_date`, `query_size`, `image_file_id`, `pos`, `print_profile`, `rep_popup`, `auth_provider_name`, `auth_provider_id`, `status`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`, `revision_enabled`, `revision_number`) VALUES
+(1, NULL, 'admin', '$2y$10$/WO8Ymjdlqi9EkCwFsacTecUTcANOPmDJF4D6hQwxhnvWXIGNibUu', 'Admin', 'Admin', NULL, NULL, 'admin@thissite.com', NULL, 0, NULL, NULL, NULL, 'default', NULL, NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 0, '2014-09-13 19:16:52', 34, '2015-09-23 06:57:13', 'N', NULL),
+(34, NULL, 'inoerp', '$2y$10$3JUPAxEZlXCilIXNFYw8E.gpZo5DTBPANCDcJ8FchR2ua9DI/cFNq', 'inoerp', 'inoerp', NULL, '34543543', 'inoerp@no-site.com', 'en_US', 0, 1, 4, NULL, 'default', NULL, 8, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 594, 1, '1', 1, '0', '', 0, 0, '2014-08-26 12:51:31', 34, '2016-01-07 05:26:13', 'N', NULL),
+(88, NULL, 'nishit50', '4ff9b53ce51baaf9d925877d359599b5e60f0dcfa75016c3c8922fe24659b284', 'Nishit', 'das11', NULL, NULL, 'nishitdas@outlook.com', NULL, 0, 4, NULL, NULL, 'default', NULL, NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 0, '2014-08-20 09:48:07', 34, '2015-08-27 15:50:20', 'N', NULL),
+(91, NULL, 'nishit', '$2y$10$Inw8dAyU/3wxAUN1EqDE8ewhlQRASbIg/OBofgris1/KXH1eVJFMy', 'Nishit', 'das', NULL, NULL, 'nishitdas@yahoo.co.in', NULL, 0, NULL, NULL, NULL, 'default', NULL, NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 0, '2014-08-24 12:12:37', 34, '2015-10-19 14:16:25', 'N', NULL),
+(93, NULL, 'ino_supp', 'fd2063e7246ed74534e2cec236276fe594c98a9f83ea4e4fa9caf46e26b7ccdb', 'ino', 'supp', NULL, NULL, 'ino_supp@inoerp.com', NULL, 0, NULL, NULL, 0, 'default', NULL, 0, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 0, '2014-09-04 15:26:43', 0, '2004-09-14 15:26:43', 'N', NULL),
+(94, NULL, 'buyer', '917881e736258036a783bf47d6942b5e5c64635f64b7b0800d1512345e0bb473', 'buyer', 'test', NULL, NULL, 'buyer@inoerp.org', NULL, 0, NULL, NULL, 0, 'default', NULL, 0, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 0, '2014-09-11 07:43:16', 34, '2015-02-18 04:54:00', 'N', NULL),
+(95, NULL, 'testuser', 'daff5fd5c5b471e35c14e379c39a02f8737928659a70d174948756acda63abf5', 'test', 'user', NULL, NULL, 'testuser@rediff.com', NULL, 0, NULL, NULL, 0, 'default', NULL, 0, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, -99, '2014-11-09 05:05:47', -99, '2014-11-09 05:05:47', 'N', NULL),
+(96, NULL, 'demouser', '$2y$10$86J97QIcVafOSYnZFPaI0enzAdRGDGQeqGXPaNHmUklWPm0PFjeIq', 'demo', 'user', NULL, NULL, 'demouser@inoideas.org', NULL, 0, NULL, NULL, NULL, 'default', NULL, NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, 34, '2014-11-19 18:51:02', 34, '2015-09-23 06:55:15', 'N', NULL),
+(97, NULL, 'anande23', '4ff9b53ce51baaf9d925877d359599b5e60f0dcfa75016c3c8922fe24659b284', 'anand23', 'das', NULL, NULL, 'anand23@gmail.com', NULL, 0, NULL, NULL, 0, 'default', NULL, 0, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, '0', NULL, 1, -99, '2015-01-07 16:17:02', 34, '2015-04-06 10:55:57', 'N', NULL),
+(99, NULL, 'Nishit Das', 'bd0d028a69ab6fed644369c3d3eb61d6fcddd45df2c2e0f3e9243f021e4051f3', 'Nishit', 'Das', NULL, NULL, 'inoerp1@gmail.com', NULL, 0, NULL, NULL, NULL, 'default', NULL, NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, 1, 1, '1', 1, 'google', '107555006955106696169', 1, -99, '2015-02-18 17:13:44', 34, '2015-05-09 14:44:30', 'N', NULL),
+(100, NULL, 'ladmin', '$2y$10$IGPuWvc8UzbgZF.mlIrU1uLtkE/f1UZnT.F6Q1H3ab8z9RVF0CL22', 'Local', 'Admin', NULL, NULL, 'ladmin@localhsot', NULL, 0, NULL, NULL, NULL, 'default', NULL, NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, NULL, 1, '1', 1, NULL, NULL, 1, 34, '2015-05-06 04:40:14', 34, '2015-09-23 06:57:24', 'N', NULL),
+(101, NULL, 'sales', '4f38c2604934d71614ff342a467e4e666289016ede25d230151069fb30c39f1a', 'sales', 'contact', NULL, NULL, 'sales.contact@localhost', NULL, 0, NULL, NULL, NULL, 'default', NULL, NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, NULL, 1, '1', 1, NULL, NULL, 1, 34, '2015-05-06 07:21:53', 34, '2015-05-06 07:23:14', 'N', NULL),
+(102, NULL, 'management', '9658893f8d26db6d863ef60171b3551802bd4407d1676908d8141c2a95f78435', 'management', 'management', NULL, NULL, 'management@localhost', NULL, 0, NULL, NULL, NULL, 'default', NULL, NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, NULL, 1, '1', 1, NULL, NULL, 1, 34, '2015-05-06 07:25:28', 34, '2015-05-06 07:26:02', 'N', NULL),
+(103, NULL, 'Endy Sng', 'c873cd76ed13733d50e4600c41eab9d86149fcf000ac8b52080714bff3a6e783', 'Endy', 'Sng', NULL, NULL, 'endy.sng@gmail.com', NULL, 0, 4, NULL, NULL, 'default', NULL, NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, NULL, 1, '1', 1, NULL, NULL, 1, -99, '2015-05-22 07:15:15', 34, '2015-08-27 15:48:55', 'N', NULL),
+(104, NULL, 'Ani India', '$2y$10$clK13K.OCtL.W.YKN10px.LKhr2ro21ei3r9zUz1gR9E89JgQS3Ri', 'Ani', 'India', NULL, NULL, 'ani.india1978@gmail.com', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, NULL, 1, '1', 1, NULL, NULL, 1, -99, '2015-09-30 16:45:06', -99, '2015-09-30 16:45:06', 'N', NULL),
+(105, NULL, 'test1.test2', '$2y$10$OaNktOXwSydN7vD.QhAd5OuBpfYX4pkqWzEpiTb0V1E23vyD1DzmO', 'test1', 'test2', NULL, NULL, 'test1.test2@asdasd.com', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, NULL, 1, '1', 1, NULL, NULL, 1, -99, '2015-10-15 18:56:12', -99, '2015-10-15 18:56:12', 'N', NULL),
+(106, NULL, 'asdasd', '$2y$10$K4UMZYdMwctLDFZYq.p4yevxKTqCRThqOz0oRN8QkWjv0oqSjp0HW', 'asdasd', 'asdasda', NULL, NULL, 'asdasdas', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, NULL, 1, '1', 1, NULL, NULL, 1, -99, '2015-10-15 19:10:20', -99, '2015-10-15 19:10:20', 'N', NULL),
+(107, NULL, 'asd', '$2y$10$krFOkInMaARaZMFbJSRqVOmWId36PNPKFn28nnj2X3MjX0y7HRPFS', 'asdas', 'asd', NULL, NULL, 'asda', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, NULL, 1, '1', 1, NULL, NULL, 1, -99, '2015-10-15 19:13:14', -99, '2015-10-15 19:13:14', 'N', NULL),
+(108, NULL, 'sdfsdfsdfsd', '$2y$10$Nj9TnykeLOPjF/PyiKv0jekTA9WXkRTFxZVyH9ug/FA/krZasNxEq', 'xvxvds', 'dsfsdfsdf', NULL, NULL, 'sdfsdfsfsdf@sdff.com', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, NULL, 1, '1', 1, NULL, NULL, 1, -99, '2015-10-15 19:29:22', -99, '2015-10-15 19:29:22', 'N', NULL),
+(109, NULL, 'heklosdf', '$2y$10$xB70h9NYi9bzkIFHuOhkt.Lwu.Bq3.u.tu01wpnRh3NqEo1lwnGvG', 'heklosdf', 'heklosdf', NULL, NULL, 'heklosdf', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, NULL, 1, '1', 1, NULL, NULL, 1, -99, '2015-10-15 19:29:48', -99, '2015-10-15 19:29:48', 'N', NULL),
+(110, NULL, 'sdfsd', '$2y$10$6tqtEgN6.GwqahomUmONKeNppDuZ7PFlE1Q44hZWQj4MOCTYvQJ7a', 'sdfdsf', 'asdfsdf', NULL, NULL, 'asfas@asfas', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 2, 2, 4, 1, 1, 0, 0, NULL, 10, NULL, 1, '1', 1, NULL, NULL, 1, -99, '2015-10-16 04:31:00', -99, '2015-10-16 04:31:00', 'N', NULL);
 
 -- --------------------------------------------------------
 
@@ -19113,6 +21081,7 @@ INSERT INTO `user` (`user_id`, `person_id`, `username`, `password`, `first_name`
 CREATE TABLE IF NOT EXISTS `user_dashboard_config` (
   `user_dashboard_config_id` int(12) NOT NULL AUTO_INCREMENT,
   `config_level` varchar(25) DEFAULT NULL,
+  `report_label` varchar(40) NOT NULL,
   `user_role` varchar(50) DEFAULT NULL,
   `user_id` int(12) DEFAULT NULL,
   `report_group` varchar(50) NOT NULL,
@@ -19209,20 +21178,24 @@ CREATE TABLE IF NOT EXISTS `user_password_reset` (
   `code` varchar(256) NOT NULL,
   `status` float DEFAULT NULL,
   `creation_date` datetime NOT NULL,
+  `created_by` varchar(50) DEFAULT NULL,
+  `last_update_by` int(12) DEFAULT NULL,
+  `last_update_date` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`user_password_reset_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Dumping data for table `user_password_reset`
 --
 
-INSERT INTO `user_password_reset` (`user_password_reset_id`, `user_id`, `code`, `status`, `creation_date`) VALUES
-(3, 40, '4f4c49bc354e8187667ad6628853c10e60bdd1a3e1c1f128b38c6746ecffdd8a', 1, '2014-01-21 15:37:51'),
-(4, 40, '5df5a609c1eb91d1db1eba9987838b450441a8b86474a395ac3975ebfeac9166', 1, '2014-01-21 15:42:06'),
-(5, 40, 'fc8321b837a7d96c3278f7f2babfceadaa82969e17e41f914ea1178227edc270', 1, '2014-01-21 15:47:28'),
-(14, 0, '', NULL, '0000-00-00 00:00:00'),
-(15, 0, '', NULL, '0000-00-00 00:00:00'),
-(21, 86, 'a4732042ed233307969128758062d0930d0f0cce0fd9714ae294b82d49f20027', NULL, '2014-06-07 05:16:06');
+INSERT INTO `user_password_reset` (`user_password_reset_id`, `user_id`, `code`, `status`, `creation_date`, `created_by`, `last_update_by`, `last_update_date`) VALUES
+(3, 40, '4f4c49bc354e8187667ad6628853c10e60bdd1a3e1c1f128b38c6746ecffdd8a', 1, '2014-01-21 15:37:51', NULL, NULL, NULL),
+(4, 40, '5df5a609c1eb91d1db1eba9987838b450441a8b86474a395ac3975ebfeac9166', 1, '2014-01-21 15:42:06', NULL, NULL, NULL),
+(5, 40, 'fc8321b837a7d96c3278f7f2babfceadaa82969e17e41f914ea1178227edc270', 1, '2014-01-21 15:47:28', NULL, NULL, NULL),
+(14, 0, '', NULL, '0000-00-00 00:00:00', NULL, NULL, NULL),
+(15, 0, '', NULL, '0000-00-00 00:00:00', NULL, NULL, NULL),
+(21, 86, 'a4732042ed233307969128758062d0930d0f0cce0fd9714ae294b82d49f20027', NULL, '2014-06-07 05:16:06', NULL, NULL, NULL),
+(24, 34, '036483904d6b3610d16dade89687b67b382a9131953d220dc44365e91bbd9013', NULL, '2015-10-19 18:54:35', '-99', -99, '2015-10-19 18:54:35');
 
 -- --------------------------------------------------------
 
@@ -19239,7 +21212,7 @@ CREATE TABLE IF NOT EXISTS `user_role` (
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`user_role_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
 
 --
 -- Dumping data for table `user_role`
@@ -19284,7 +21257,14 @@ INSERT INTO `user_role` (`user_role_id`, `role_code`, `user_id`, `created_by`, `
 (39, 'LOCAL_ADMIN', 100, 34, '2015-05-06 04:40:31', 34, '2015-05-06 04:40:31'),
 (40, 'SALES', 101, 34, '2015-05-06 07:23:13', 34, '2015-05-06 07:23:13'),
 (42, 'MANAGEMENT', 102, 34, '2015-05-06 07:26:24', 34, '2015-05-06 07:26:24'),
-(43, 'BASIC', 103, -99, '2015-05-22 07:15:16', -99, '2015-05-22 07:15:16');
+(43, 'BASIC', 103, -99, '2015-05-22 07:15:16', -99, '2015-05-22 07:15:16'),
+(44, 'BASIC', 104, -99, '2015-09-30 16:45:07', -99, '2015-09-30 16:45:07'),
+(45, 'BASIC', 105, -99, '2015-10-15 18:56:13', -99, '2015-10-15 18:56:13'),
+(46, 'BASIC', 106, -99, '2015-10-15 19:10:20', -99, '2015-10-15 19:10:20'),
+(47, 'BASIC', 107, -99, '2015-10-15 19:13:14', -99, '2015-10-15 19:13:14'),
+(48, 'BASIC', 108, -99, '2015-10-15 19:29:23', -99, '2015-10-15 19:29:23'),
+(49, 'BASIC', 109, -99, '2015-10-15 19:29:48', -99, '2015-10-15 19:29:48'),
+(50, 'BASIC', 110, -99, '2015-10-16 04:31:01', -99, '2015-10-16 04:31:01');
 
 -- --------------------------------------------------------
 
@@ -19733,11 +21713,20 @@ CREATE TABLE IF NOT EXISTS `wip_wo_routing_v` (
 -- --------------------------------------------------------
 
 --
+-- Structure for view `ap_import_claim_v`
+--
+DROP TABLE IF EXISTS `ap_import_claim_v`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ap_import_claim_v` AS select `eh`.`claim_number` AS `claim_number`,`eh`.`hr_expense_header_id` AS `hr_expense_header_id`,`eh`.`bu_org_id` AS `bu_org_id`,`eh`.`hr_employee_id` AS `hr_employee_id`,`eh`.`claim_date` AS `claim_date`,`eh`.`status` AS `status`,`eh`.`purpose` AS `purpose`,`eh`.`doc_currency` AS `doc_currency`,`eh`.`department_id` AS `department_id`,`eh`.`reason` AS `reason`,`eh`.`currency` AS `currency`,`eh`.`exchange_rate_type` AS `exchange_rate_type`,`eh`.`exchange_rate` AS `exchange_rate`,`eh`.`header_amount` AS `header_amount`,`user`.`supplier_id` AS `supplier_id`,`he`.`first_name` AS `first_name`,`he`.`last_name` AS `last_name`,`he`.`identification_id` AS `identification_id` from ((`hr_expense_header` `eh` join `user`) join `hr_employee` `he`) where ((`eh`.`status` = 'APPROVED') and (`user`.`hr_employee_id` = `eh`.`hr_employee_id`) and (`he`.`hr_employee_id` = `eh`.`hr_employee_id`));
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `ap_payment_all_v`
 --
 DROP TABLE IF EXISTS `ap_payment_all_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ap_payment_all_v` AS select `apph`.`ap_payment_header_id` AS `ap_payment_header_id`,`apph`.`bu_org_id` AS `bu_org_id`,`apph`.`payment_type` AS `payment_type`,`apph`.`payment_number` AS `payment_number`,`apph`.`supplier_id` AS `supplier_id`,`apph`.`supplier_site_id` AS `supplier_site_id`,`apph`.`from_bank_header_id` AS `from_bank_header_id`,`apph`.`header_amount` AS `header_amount`,`apph`.`currency` AS `currency`,`apph`.`document_number` AS `document_number`,`apph`.`payment_status` AS `payment_status`,`apph`.`gl_journal_header_id` AS `gl_journal_header_id`,`appl`.`ap_payment_line_id` AS `ap_payment_line_id`,`appl`.`line_number` AS `line_number`,`appl`.`amount` AS `amount`,`appl`.`line_description` AS `line_description`,`apth`.`ap_transaction_header_id` AS `ap_transaction_header_id`,`apth`.`transaction_type` AS `transaction_type`,`apth`.`transaction_number` AS `transaction_number`,`apth`.`hr_employee_id` AS `hr_employee_id`,`apth`.`currency` AS `apth_currency`,`apth`.`header_amount` AS `apth_header_amount`,`apth`.`transaction_status` AS `transaction_status`,`apth`.`paid_amount` AS `paid_amount`,`apth`.`payment_status` AS `apth_payment_status`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number` from ((((`ap_payment_header` `apph` join `ap_payment_line` `appl`) join `ap_transaction_header` `apth`) join `supplier`) join `supplier_site`) where ((`apph`.`ap_payment_header_id` = `appl`.`ap_payment_header_id`) and (`appl`.`ap_transaction_header_id` = `apth`.`ap_transaction_header_id`) and (`apph`.`supplier_id` = `supplier`.`supplier_id`) and (`apph`.`supplier_site_id` = `supplier_site`.`supplier_site_id`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ap_payment_all_v` AS select `apph`.`ap_payment_header_id` AS `ap_payment_header_id`,`apph`.`bu_org_id` AS `bu_org_id`,`apph`.`payment_type` AS `payment_type`,`apph`.`payment_number` AS `payment_number`,`apph`.`supplier_id` AS `supplier_id`,`apph`.`supplier_site_id` AS `supplier_site_id`,`apph`.`from_bank_header_id` AS `from_bank_header_id`,`apph`.`header_amount` AS `header_amount`,`apph`.`currency` AS `currency`,`apph`.`document_number` AS `document_number`,`apph`.`payment_status` AS `payment_status`,`apph`.`gl_journal_header_id` AS `gl_journal_header_id`,`appl`.`ap_payment_line_id` AS `ap_payment_line_id`,`appl`.`line_number` AS `line_number`,`appl`.`amount` AS `amount`,`appl`.`line_description` AS `line_description`,`apth`.`ap_transaction_header_id` AS `ap_transaction_header_id`,`apth`.`transaction_type` AS `transaction_type`,`apth`.`transaction_number` AS `transaction_number`,`apth`.`hr_employee_id` AS `hr_employee_id`,`apth`.`currency` AS `apth_currency`,`apth`.`header_amount` AS `apth_header_amount`,`apth`.`transaction_status` AS `transaction_status`,`apth`.`paid_amount` AS `paid_amount`,`apth`.`payment_status` AS `apth_payment_status`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number` from ((((`ap_payment_header` `apph` join `ap_payment_line` `appl`) join `ap_transaction_header` `apth`) join `supplier`) join `supplier_site`) where ((`apph`.`ap_payment_header_id` = `appl`.`ap_payment_header_id`) and (`appl`.`ap_transaction_header_id` = `apth`.`ap_transaction_header_id`) and (`apph`.`supplier_id` = `supplier`.`supplier_id`) and (`apph`.`supplier_site_id` = `supplier_site`.`supplier_site_id`));
 
 -- --------------------------------------------------------
 
@@ -19746,7 +21735,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ap_payment_all_v` AS sele
 --
 DROP TABLE IF EXISTS `ap_payment_trnx_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ap_payment_trnx_v` AS select `ap_transaction_header`.`ap_transaction_header_id` AS `ap_transaction_header_id`,`ap_transaction_header`.`bu_org_id` AS `bu_org_id`,`ap_transaction_header`.`transaction_type` AS `transaction_type`,`ap_transaction_header`.`transaction_number` AS `transaction_number`,`ap_transaction_header`.`supplier_id` AS `supplier_id`,`ap_transaction_header`.`supplier_site_id` AS `supplier_site_id`,`ap_transaction_header`.`exchange_rate` AS `exchange_rate`,`ap_transaction_header`.`hr_employee_id` AS `hr_employee_id`,`ap_transaction_header`.`currency` AS `currency`,`ap_transaction_header`.`header_amount` AS `header_amount`,`ap_transaction_header`.`transaction_status` AS `transaction_status`,`ap_transaction_header`.`payment_term_id` AS `payment_term_id`,`ap_transaction_header`.`paid_amount` AS `paid_amount`,`ap_transaction_header`.`payment_status` AS `payment_status`,`ap_transaction_header`.`ledger_id` AS `ledger_id`,`ap_transaction_header`.`period_id` AS `period_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`ph`.`po_number` AS `po_number`,`ph`.`po_type` AS `po_type`,`ph`.`buyer` AS `buyer`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `description`,`ap_transaction_line`.`ap_transaction_line_id` AS `ap_transaction_line_id`,`ap_transaction_line`.`line_type` AS `line_type`,`ap_transaction_line`.`line_number` AS `line_number`,`ap_transaction_line`.`item_id_m` AS `item_id_m`,`ap_transaction_line`.`item_description` AS `item_description`,`ap_transaction_line`.`line_description` AS `line_description`,`ap_transaction_line`.`inv_line_quantity` AS `inv_line_quantity`,`ap_transaction_line`.`inv_unit_price` AS `inv_unit_price`,`ap_transaction_line`.`inv_line_price` AS `inv_line_price`,`ap_transaction_line`.`gl_inv_line_price` AS `gl_inv_line_price`,`ap_transaction_line`.`po_header_id` AS `po_header_id`,`ap_transaction_line`.`po_line_id` AS `po_line_id`,`ap_transaction_line`.`po_detail_id` AS `po_detail_id`,`ap_transaction_line`.`ref_transaction_header_id` AS `ref_transaction_header_id`,`ap_transaction_line`.`ref_transaction_line_id` AS `ref_transaction_line_id`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`ap_transaction_header`.`created_by` AS `created_by`,`ap_transaction_header`.`creation_date` AS `creation_date`,`ap_transaction_header`.`last_update_by` AS `last_update_by`,`ap_transaction_header`.`last_update_date` AS `last_update_date` from ((((((`ap_transaction_header` left join `supplier` on((`ap_transaction_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`ap_transaction_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`ap_transaction_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `ap_transaction_line` on((`ap_transaction_header`.`ap_transaction_header_id` = `ap_transaction_line`.`ap_transaction_header_id`))) left join `item` on(((`ap_transaction_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`item_id_m` = `item`.`item_id`)))) left join `po_header` `ph` on((`ph`.`po_header_id` = `ap_transaction_line`.`po_header_id`))) where ((ifnull(`ap_transaction_header`.`paid_amount`,0) < `ap_transaction_header`.`header_amount`) and (isnull(`ap_transaction_header`.`payment_status`) or (`ap_transaction_header`.`payment_status` <> 'FULLY_PAID')));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ap_payment_trnx_v` AS select `ap_transaction_header`.`ap_transaction_header_id` AS `ap_transaction_header_id`,`ap_transaction_header`.`bu_org_id` AS `bu_org_id`,`ap_transaction_header`.`transaction_type` AS `transaction_type`,`ap_transaction_header`.`transaction_number` AS `transaction_number`,`ap_transaction_header`.`supplier_id` AS `supplier_id`,`ap_transaction_header`.`supplier_site_id` AS `supplier_site_id`,`ap_transaction_header`.`exchange_rate` AS `exchange_rate`,`ap_transaction_header`.`hr_employee_id` AS `hr_employee_id`,`ap_transaction_header`.`currency` AS `currency`,`ap_transaction_header`.`header_amount` AS `header_amount`,`ap_transaction_header`.`transaction_status` AS `transaction_status`,`ap_transaction_header`.`payment_term_id` AS `payment_term_id`,`ap_transaction_header`.`paid_amount` AS `paid_amount`,`ap_transaction_header`.`payment_status` AS `payment_status`,`ap_transaction_header`.`ledger_id` AS `ledger_id`,`ap_transaction_header`.`period_id` AS `period_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`ph`.`po_number` AS `po_number`,`ph`.`po_type` AS `po_type`,`ph`.`buyer` AS `buyer`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `description`,`ap_transaction_line`.`ap_transaction_line_id` AS `ap_transaction_line_id`,`ap_transaction_line`.`line_type` AS `line_type`,`ap_transaction_line`.`line_number` AS `line_number`,`ap_transaction_line`.`item_id_m` AS `item_id_m`,`ap_transaction_line`.`item_description` AS `item_description`,`ap_transaction_line`.`line_description` AS `line_description`,`ap_transaction_line`.`inv_line_quantity` AS `inv_line_quantity`,`ap_transaction_line`.`inv_unit_price` AS `inv_unit_price`,`ap_transaction_line`.`inv_line_price` AS `inv_line_price`,`ap_transaction_line`.`gl_inv_line_price` AS `gl_inv_line_price`,`ap_transaction_line`.`po_header_id` AS `po_header_id`,`ap_transaction_line`.`po_line_id` AS `po_line_id`,`ap_transaction_line`.`po_detail_id` AS `po_detail_id`,`ap_transaction_line`.`ref_transaction_header_id` AS `ref_transaction_header_id`,`ap_transaction_line`.`ref_transaction_line_id` AS `ref_transaction_line_id`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`ap_transaction_header`.`created_by` AS `created_by`,`ap_transaction_header`.`creation_date` AS `creation_date`,`ap_transaction_header`.`last_update_by` AS `last_update_by`,`ap_transaction_header`.`last_update_date` AS `last_update_date` from ((((((`ap_transaction_header` left join `supplier` on((`ap_transaction_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`ap_transaction_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`ap_transaction_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `ap_transaction_line` on((`ap_transaction_header`.`ap_transaction_header_id` = `ap_transaction_line`.`ap_transaction_header_id`))) left join `item` on(((`ap_transaction_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`item_id_m` = `item`.`item_id`)))) left join `po_header` `ph` on((`ph`.`po_header_id` = `ap_transaction_line`.`po_header_id`))) where ((ifnull(`ap_transaction_header`.`paid_amount`,0) < `ap_transaction_header`.`header_amount`) and (isnull(`ap_transaction_header`.`payment_status`) or (`ap_transaction_header`.`payment_status` <> 'FULLY_PAID')));
 
 -- --------------------------------------------------------
 
@@ -19755,7 +21744,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ap_payment_trnx_v` AS sel
 --
 DROP TABLE IF EXISTS `ap_po_matching_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ap_po_matching_v` AS select `po_header`.`po_header_id` AS `po_header_id`,`po_header`.`bu_org_id` AS `bu_org_id`,`po_header`.`po_type` AS `po_type`,`po_header`.`po_number` AS `po_number`,`po_header`.`supplier_id` AS `supplier_id`,`po_header`.`supplier_site_id` AS `supplier_site_id`,`po_header`.`buyer` AS `buyer`,`po_header`.`currency` AS `currency`,`po_header`.`doc_currency` AS `doc_currency`,`po_header`.`header_amount` AS `header_amount`,`po_header`.`po_status` AS `po_status`,`po_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_line`.`po_line_id` AS `po_line_id`,`po_line`.`line_type` AS `line_type`,`po_line`.`line_number` AS `po_line_number`,`po_line`.`item_id_m` AS `item_id_m`,`po_line`.`item_description` AS `item_description`,`po_line`.`line_description` AS `line_description`,`po_line`.`line_quantity` AS `line_quantity`,`po_line`.`unit_price` AS `unit_price`,`po_line`.`line_price` AS `line_price`,`po_line`.`gl_line_price` AS `gl_line_price`,`po_line`.`gl_tax_amount` AS `gl_tax_amount`,`po_line`.`tax_amount` AS `tax_amount`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_detail`.`po_detail_id` AS `po_detail_id`,`po_detail`.`shipment_number` AS `shipment_number`,`po_line`.`receving_org_id` AS `receving_org_id`,`po_detail`.`subinventory_id` AS `subinventory_id`,`po_detail`.`locator_id` AS `locator_id`,`po_detail`.`requestor` AS `requestor`,`po_detail`.`quantity` AS `quantity`,ifnull(`po_detail`.`received_quantity`,0) AS `received_quantity`,(`po_detail`.`quantity` - ifnull(`po_detail`.`received_quantity`,0)) AS `receiving_open_quantity`,`po_detail`.`need_by_date` AS `need_by_date`,`po_detail`.`promise_date` AS `promise_date`,`po_detail`.`accepted_quantity` AS `accepted_quantity`,`po_detail`.`delivered_quantity` AS `delivered_quantity`,`po_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_detail`.`paid_quantity` AS `paid_quantity`,(case `po_detail`.`invoice_match_type` when 'THREE_WAY' then (ifnull(`po_detail`.`received_quantity`,0) - ifnull(`po_detail`.`invoiced_quantity`,0)) else (`po_detail`.`quantity` - ifnull(`po_detail`.`invoiced_quantity`,0)) end) AS `invoicing_open_quantity`,`po_detail`.`charge_ac_id` AS `charge_ac_id`,`po_detail`.`accrual_ac_id` AS `accrual_ac_id`,`po_detail`.`budget_ac_id` AS `budget_ac_id`,`po_detail`.`ppv_ac_id` AS `ppv_ac_id`,`org`.`org` AS `receving_org`,`po_header`.`created_by` AS `created_by`,`po_header`.`creation_date` AS `creation_date`,`po_header`.`last_update_by` AS `last_update_by`,`po_header`.`last_update_date` AS `last_update_date` from (((((((`po_header` left join `supplier` on((`po_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_line` on((`po_header`.`po_header_id` = `po_line`.`po_header_id`))) left join `item` on(((`po_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_line`.`receving_org_id`)))) left join `org` on((`po_line`.`receving_org_id` = `org`.`org_id`))) join `po_detail`) where ((`po_header`.`po_status` = 'APPROVED') and (`po_header`.`po_type` in ('BLANKET_RELEASE','STANDARD')) and (`po_line`.`po_line_id` = `po_detail`.`po_line_id`) and (((ifnull(`po_detail`.`invoiced_quantity`,0) < `po_detail`.`quantity`) and ((`po_detail`.`invoice_match_type` = 'TWO_WAY') or isnull(`po_detail`.`invoice_match_type`))) or ((ifnull(`po_detail`.`invoiced_quantity`,0) < ifnull(`po_detail`.`received_quantity`,0)) and (`po_detail`.`invoice_match_type` = 'THREE_WAY'))) and (`po_detail`.`po_detail_id` is not null));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ap_po_matching_v` AS select `po_header`.`po_header_id` AS `po_header_id`,`po_header`.`bu_org_id` AS `bu_org_id`,`po_header`.`po_type` AS `po_type`,`po_header`.`po_number` AS `po_number`,`po_header`.`supplier_id` AS `supplier_id`,`po_header`.`supplier_site_id` AS `supplier_site_id`,`po_header`.`buyer` AS `buyer`,`po_header`.`currency` AS `currency`,`po_header`.`doc_currency` AS `doc_currency`,`po_header`.`header_amount` AS `header_amount`,`po_header`.`po_status` AS `po_status`,`po_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_line`.`po_line_id` AS `po_line_id`,`po_line`.`line_type` AS `line_type`,`po_line`.`line_number` AS `po_line_number`,`po_line`.`item_id_m` AS `item_id_m`,`po_line`.`item_description` AS `item_description`,`po_line`.`line_description` AS `line_description`,`po_line`.`line_quantity` AS `line_quantity`,`po_line`.`unit_price` AS `unit_price`,`po_line`.`line_price` AS `line_price`,`po_line`.`gl_line_price` AS `gl_line_price`,`po_line`.`gl_tax_amount` AS `gl_tax_amount`,`po_line`.`tax_amount` AS `tax_amount`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_detail`.`po_detail_id` AS `po_detail_id`,`po_detail`.`shipment_number` AS `shipment_number`,`po_line`.`receving_org_id` AS `receving_org_id`,`po_detail`.`subinventory_id` AS `subinventory_id`,`po_detail`.`locator_id` AS `locator_id`,`po_detail`.`requestor` AS `requestor`,`po_detail`.`quantity` AS `quantity`,ifnull(`po_detail`.`received_quantity`,0) AS `received_quantity`,(`po_detail`.`quantity` - ifnull(`po_detail`.`received_quantity`,0)) AS `receiving_open_quantity`,`po_detail`.`need_by_date` AS `need_by_date`,`po_detail`.`promise_date` AS `promise_date`,`po_detail`.`accepted_quantity` AS `accepted_quantity`,`po_detail`.`delivered_quantity` AS `delivered_quantity`,`po_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_detail`.`paid_quantity` AS `paid_quantity`,(case `po_detail`.`invoice_match_type` when 'THREE_WAY' then (ifnull(`po_detail`.`received_quantity`,0) - ifnull(`po_detail`.`invoiced_quantity`,0)) else (`po_detail`.`quantity` - ifnull(`po_detail`.`invoiced_quantity`,0)) end) AS `invoicing_open_quantity`,`po_detail`.`charge_ac_id` AS `charge_ac_id`,`po_detail`.`accrual_ac_id` AS `accrual_ac_id`,`po_detail`.`budget_ac_id` AS `budget_ac_id`,`po_detail`.`ppv_ac_id` AS `ppv_ac_id`,`org`.`org` AS `receving_org`,`po_header`.`created_by` AS `created_by`,`po_header`.`creation_date` AS `creation_date`,`po_header`.`last_update_by` AS `last_update_by`,`po_header`.`last_update_date` AS `last_update_date` from (((((((`po_header` left join `supplier` on((`po_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_line` on((`po_header`.`po_header_id` = `po_line`.`po_header_id`))) left join `item` on(((`po_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_line`.`receving_org_id`)))) left join `org` on((`po_line`.`receving_org_id` = `org`.`org_id`))) join `po_detail`) where ((`po_header`.`po_status` = 'APPROVED') and (`po_header`.`po_type` in ('BLANKET_RELEASE','STANDARD')) and (`po_line`.`po_line_id` = `po_detail`.`po_line_id`) and (((ifnull(`po_detail`.`invoiced_quantity`,0) < `po_detail`.`quantity`) and ((`po_detail`.`invoice_match_type` = 'TWO_WAY') or isnull(`po_detail`.`invoice_match_type`))) or ((ifnull(`po_detail`.`invoiced_quantity`,0) < ifnull(`po_detail`.`received_quantity`,0)) and (`po_detail`.`invoice_match_type` = 'THREE_WAY'))) and (`po_detail`.`po_detail_id` is not null));
 
 -- --------------------------------------------------------
 
@@ -19764,7 +21753,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ap_po_matching_v` AS sele
 --
 DROP TABLE IF EXISTS `ap_transaction_all_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ap_transaction_all_v` AS select `ap_transaction_header`.`ap_transaction_header_id` AS `ap_transaction_header_id`,`ap_transaction_header`.`bu_org_id` AS `bu_org_id`,`ap_transaction_header`.`transaction_type` AS `transaction_type`,`ap_transaction_header`.`transaction_number` AS `transaction_number`,`ap_transaction_header`.`supplier_id` AS `supplier_id`,`ap_transaction_header`.`supplier_site_id` AS `supplier_site_id`,`ap_transaction_header`.`hr_employee_id` AS `hr_employee_id`,`ap_transaction_header`.`currency` AS `currency`,`ap_transaction_header`.`header_amount` AS `header_amount`,`ap_transaction_header`.`transaction_status` AS `transaction_status`,`ap_transaction_header`.`payment_term_id` AS `payment_term_id`,`ap_transaction_header`.`paid_amount` AS `paid_amount`,`ap_transaction_header`.`payment_status` AS `payment_status`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`ph`.`po_number` AS `po_number`,`ph`.`po_type` AS `po_type`,`ph`.`buyer` AS `buyer`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`ap_transaction_line`.`ap_transaction_line_id` AS `ap_transaction_line_id`,`ap_transaction_line`.`line_type` AS `line_type`,`ap_transaction_line`.`line_number` AS `line_number`,`ap_transaction_line`.`item_id_m` AS `item_id_m`,`ap_transaction_line`.`item_description` AS `item_description`,`ap_transaction_line`.`line_description` AS `line_description`,`ap_transaction_line`.`inv_line_quantity` AS `inv_line_quantity`,`ap_transaction_line`.`inv_unit_price` AS `inv_unit_price`,`ap_transaction_line`.`inv_line_price` AS `inv_line_price`,`ap_transaction_line`.`po_header_id` AS `po_header_id`,`ap_transaction_line`.`po_line_id` AS `po_line_id`,`ap_transaction_line`.`po_detail_id` AS `po_detail_id`,`ap_transaction_line`.`ref_transaction_header_id` AS `ref_transaction_header_id`,`ap_transaction_line`.`ref_transaction_line_id` AS `ref_transaction_line_id`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`ap_transaction_detail`.`ap_transaction_detail_id` AS `ap_transaction_detail_id`,`ap_transaction_detail`.`account_type` AS `account_type`,`ap_transaction_detail`.`description` AS `detail_description`,`ap_transaction_detail`.`amount` AS `amount`,`ap_transaction_detail`.`detail_ac_id` AS `detail_ac_id`,`ap_transaction_header`.`created_by` AS `created_by`,`ap_transaction_header`.`creation_date` AS `creation_date`,`ap_transaction_header`.`last_update_by` AS `last_update_by`,`ap_transaction_header`.`last_update_date` AS `last_update_date` from (((((((`ap_transaction_header` left join `supplier` on((`ap_transaction_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`ap_transaction_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`ap_transaction_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `ap_transaction_line` on((`ap_transaction_header`.`ap_transaction_header_id` = `ap_transaction_line`.`ap_transaction_header_id`))) left join `item` on(((`ap_transaction_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`item_id_m` = `item`.`item_id`)))) left join `ap_transaction_detail` on((`ap_transaction_line`.`ap_transaction_line_id` = `ap_transaction_detail`.`ap_transaction_line_id`))) left join `po_header` `ph` on((`ph`.`po_header_id` = `ap_transaction_line`.`po_header_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ap_transaction_all_v` AS select `ap_transaction_header`.`ap_transaction_header_id` AS `ap_transaction_header_id`,`ap_transaction_header`.`bu_org_id` AS `bu_org_id`,`ap_transaction_header`.`transaction_type` AS `transaction_type`,`ap_transaction_header`.`transaction_number` AS `transaction_number`,`ap_transaction_header`.`supplier_id` AS `supplier_id`,`ap_transaction_header`.`supplier_site_id` AS `supplier_site_id`,`ap_transaction_header`.`hr_employee_id` AS `hr_employee_id`,`ap_transaction_header`.`currency` AS `currency`,`ap_transaction_header`.`header_amount` AS `header_amount`,`ap_transaction_header`.`transaction_status` AS `transaction_status`,`ap_transaction_header`.`payment_term_id` AS `payment_term_id`,`ap_transaction_header`.`paid_amount` AS `paid_amount`,`ap_transaction_header`.`payment_status` AS `payment_status`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`ph`.`po_number` AS `po_number`,`ph`.`po_type` AS `po_type`,`ph`.`buyer` AS `buyer`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`ap_transaction_line`.`ap_transaction_line_id` AS `ap_transaction_line_id`,`ap_transaction_line`.`line_type` AS `line_type`,`ap_transaction_line`.`line_number` AS `line_number`,`ap_transaction_line`.`item_id_m` AS `item_id_m`,`ap_transaction_line`.`item_description` AS `item_description`,`ap_transaction_line`.`line_description` AS `line_description`,`ap_transaction_line`.`inv_line_quantity` AS `inv_line_quantity`,`ap_transaction_line`.`inv_unit_price` AS `inv_unit_price`,`ap_transaction_line`.`inv_line_price` AS `inv_line_price`,`ap_transaction_line`.`po_header_id` AS `po_header_id`,`ap_transaction_line`.`po_line_id` AS `po_line_id`,`ap_transaction_line`.`po_detail_id` AS `po_detail_id`,`ap_transaction_line`.`ref_transaction_header_id` AS `ref_transaction_header_id`,`ap_transaction_line`.`ref_transaction_line_id` AS `ref_transaction_line_id`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`ap_transaction_detail`.`ap_transaction_detail_id` AS `ap_transaction_detail_id`,`ap_transaction_detail`.`account_type` AS `account_type`,`ap_transaction_detail`.`description` AS `detail_description`,`ap_transaction_detail`.`amount` AS `amount`,`ap_transaction_detail`.`detail_ac_id` AS `detail_ac_id`,`ap_transaction_header`.`created_by` AS `created_by`,`ap_transaction_header`.`creation_date` AS `creation_date`,`ap_transaction_header`.`last_update_by` AS `last_update_by`,`ap_transaction_header`.`last_update_date` AS `last_update_date` from (((((((`ap_transaction_header` left join `supplier` on((`ap_transaction_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`ap_transaction_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`ap_transaction_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `ap_transaction_line` on((`ap_transaction_header`.`ap_transaction_header_id` = `ap_transaction_line`.`ap_transaction_header_id`))) left join `item` on(((`ap_transaction_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`item_id_m` = `item`.`item_id`)))) left join `ap_transaction_detail` on((`ap_transaction_line`.`ap_transaction_line_id` = `ap_transaction_detail`.`ap_transaction_line_id`))) left join `po_header` `ph` on((`ph`.`po_header_id` = `ap_transaction_line`.`po_header_id`)));
 
 -- --------------------------------------------------------
 
@@ -19773,7 +21762,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ap_transaction_all_v` AS 
 --
 DROP TABLE IF EXISTS `ar_customer_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ar_customer_v` AS select `ac`.`ar_customer_id` AS `ar_customer_id`,`ac`.`customer_number` AS `customer_number`,`ac`.`customer_name` AS `customer_name`,`acs`.`ar_customer_site_id` AS `ar_customer_site_id`,`acs`.`customer_site_number` AS `customer_site_number`,`acs`.`customer_site_name` AS `customer_site_name`,`ac`.`status` AS `status`,`ac`.`creation_date` AS `creation_date`,`ac`.`last_update_by` AS `last_update_by`,`ac`.`last_update_date` AS `last_update_date`,`acs`.`site_tax_country` AS `site_tax_country`,`acs`.`site_tax_reg_no` AS `site_tax_reg_no`,`acs`.`status` AS `site_status`,`acs`.`currency` AS `currency`,`acs`.`payment_term_id` AS `payment_term_id` from (`ar_customer` `ac` left join `ar_customer_site` `acs` on((`acs`.`ar_customer_id` = `ac`.`ar_customer_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ar_customer_v` AS select `ac`.`ar_customer_id` AS `ar_customer_id`,`ac`.`customer_number` AS `customer_number`,`ac`.`customer_name` AS `customer_name`,`acs`.`ar_customer_site_id` AS `ar_customer_site_id`,`acs`.`customer_site_number` AS `customer_site_number`,`acs`.`customer_site_name` AS `customer_site_name`,`ac`.`status` AS `status`,`ac`.`creation_date` AS `creation_date`,`ac`.`last_update_by` AS `last_update_by`,`ac`.`last_update_date` AS `last_update_date`,`acs`.`site_tax_country` AS `site_tax_country`,`acs`.`site_tax_reg_no` AS `site_tax_reg_no`,`acs`.`status` AS `site_status`,`acs`.`currency` AS `currency`,`acs`.`payment_term_id` AS `payment_term_id` from (`ar_customer` `ac` left join `ar_customer_site` `acs` on((`acs`.`ar_customer_id` = `ac`.`ar_customer_id`)));
 
 -- --------------------------------------------------------
 
@@ -19782,7 +21771,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ar_customer_v` AS select 
 --
 DROP TABLE IF EXISTS `ar_transaction_all_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ar_transaction_all_v` AS select `ath`.`ar_transaction_header_id` AS `ar_transaction_header_id`,`ath`.`bu_org_id` AS `bu_org_id`,`ath`.`transaction_type` AS `transaction_type`,`ath`.`transaction_class` AS `transaction_class`,`ath`.`transaction_number` AS `transaction_number`,`ath`.`ar_customer_id` AS `ar_customer_id`,`ath`.`ar_customer_site_id` AS `ar_customer_site_id`,`ath`.`document_owner` AS `document_owner`,`ath`.`description` AS `description`,`ath`.`ship_to_id` AS `ship_to_id`,`ath`.`bill_to_id` AS `bill_to_id`,`ath`.`header_amount` AS `header_amount`,`ath`.`receipt_amount` AS `receipt_amount`,`ath`.`tax_amount` AS `tax_amount`,`ath`.`currency` AS `currency`,`ath`.`doc_currency` AS `doc_currency`,`ath`.`receivable_ac_id` AS `receivable_ac_id`,`ath`.`payment_term_id` AS `payment_term_id`,`ath`.`exchange_rate_type` AS `exchange_rate_type`,`ath`.`exchange_rate` AS `exchange_rate`,`ath`.`transaction_status` AS `transaction_status`,`ath`.`document_date` AS `document_date`,`ath`.`document_number` AS `document_number`,`ath`.`ledger_id` AS `ledger_id`,`ath`.`period_id` AS `trnx_period_id`,`ath`.`payment_term_date` AS `payment_term_date`,`ath`.`sales_person` AS `sales_person`,`ath`.`receipt_method` AS `receipt_method`,`ath`.`approval_status` AS `approval_status`,`ath`.`receipt_status` AS `receipt_status`,`ath`.`reference_type` AS `trnx_reference_type`,`ath`.`reference_key_name` AS `trnx_reference_key_name`,`ath`.`reference_key_value` AS `trnx_reference_key_value`,`ath`.`sd_so_header_id` AS `trnx_sd_so_header_id`,`atl`.`ar_transaction_line_id` AS `ar_transaction_line_id`,`atl`.`line_number` AS `line_number`,`atl`.`item_id_m` AS `item_id_m`,`atl`.`item_description` AS `item_description`,`atl`.`inv_line_quantity` AS `inv_line_quantity`,`atl`.`inv_unit_price` AS `inv_unit_price`,`atl`.`tax_code_id` AS `tax_code_id`,`atl`.`tax_amount` AS `so_tax_amount`,`atl`.`gl_inv_line_price` AS `gl_inv_line_price`,`atl`.`gl_tax_amount` AS `gl_tax_amount`,`atl`.`inv_line_price` AS `inv_line_price`,`atl`.`line_type` AS `trnx_line_type`,`atl`.`line_description` AS `line_description`,`atl`.`asset_cb` AS `asset_cb`,`atl`.`uom_id` AS `uom_id`,`atl`.`status` AS `status`,`atl`.`line_source` AS `line_source`,`atl`.`sd_so_header_id` AS `sd_so_header_id`,`atl`.`sd_so_line_id` AS `trnx_sd_so_line_id`,`atl`.`sd_so_detail_id` AS `sd_so_detail_id`,`atl`.`period_id` AS `period_id`,`atl`.`reference_type` AS `reference_type`,`atl`.`reference_key_name` AS `reference_key_name`,`atl`.`reference_key_value` AS `reference_key_value`,`ar_customer`.`customer_name` AS `customer_name`,`ar_customer`.`customer_number` AS `customer_number`,`ar_customer_site`.`customer_site_name` AS `customer_site_name`,`ar_customer_site`.`customer_site_number` AS `customer_site_number`,`sdsl`.`sd_so_line_id` AS `sd_so_line_id`,`sdsl`.`line_type` AS `line_type`,`sdsl`.`line_number` AS `so_line_number`,`sdsl`.`kit_cb` AS `kit_cb`,`sdsl`.`kit_configured_cb` AS `kit_configured_cb`,`sdsl`.`bom_config_header_id` AS `bom_config_header_id`,`sdsl`.`wip_wo_header_id` AS `wip_wo_header_id`,`sdsl`.`line_quantity` AS `line_quantity`,`sdsl`.`picked_quantity` AS `picked_quantity`,`sdsl`.`shipped_quantity` AS `shipped_quantity`,`sdsl`.`unit_price` AS `unit_price`,`sdsl`.`line_price` AS `line_price`,`sdsl`.`line_status` AS `line_status`,`sdsl`.`requested_date` AS `requested_date`,`sdsl`.`promise_date` AS `promise_date`,`sdsl`.`schedule_ship_date` AS `schedule_ship_date`,`sdsl`.`actual_ship_date` AS `actual_ship_date`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `item_uom_id`,`item`.`item_status` AS `item_status`,`org`.`org` AS `org`,`sdsl`.`shipping_org_id` AS `shipping_org_id`,`sdsl`.`created_by` AS `created_by`,`sdsl`.`creation_date` AS `creation_date`,`sdsl`.`last_update_by` AS `last_update_by`,`sdsl`.`last_update_date` AS `last_update_date`,`ship_address`.`address` AS `address`,`ship_address`.`country` AS `country`,`ship_address`.`postal_code` AS `postal_code`,`ship_address`.`phone` AS `phone`,`ship_address`.`email` AS `email`,`ship_address`.`website` AS `website`,`bill_address`.`address` AS `address_b`,`bill_address`.`country` AS `country_b`,`bill_address`.`postal_code` AS `postal_code_b`,`bill_address`.`phone` AS `phone_b`,`bill_address`.`email` AS `email_b`,`bill_address`.`website` AS `website_b`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description` from (((`ar_customer` join `address` `ship_address`) join `address` `bill_address`) join (((((((`ar_transaction_line` `atl` left join `ar_transaction_header` `ath` on((`ath`.`ar_transaction_header_id` = `atl`.`ar_transaction_header_id`))) left join `ar_customer_site` on((`ath`.`ar_customer_site_id` = `ar_customer_site`.`ar_customer_site_id`))) left join `payment_term` on((`ath`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `sd_so_line` `sdsl` on((`atl`.`sd_so_line_id` = `sdsl`.`sd_so_line_id`))) left join `sd_so_header` `sdsh` on((`sdsh`.`sd_so_header_id` = `sdsl`.`sd_so_header_id`))) left join `org` on((`sdsl`.`shipping_org_id` = `org`.`org_id`))) left join `item` on(((`sdsl`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `sdsl`.`shipping_org_id`))))) where ((`ath`.`ar_customer_id` = `ar_customer`.`ar_customer_id`) and (`ship_address`.`address_id` = `ath`.`ship_to_id`) and (`bill_address`.`address_id` = `ath`.`bill_to_id`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ar_transaction_all_v` AS select `ath`.`ar_transaction_header_id` AS `ar_transaction_header_id`,`ath`.`bu_org_id` AS `bu_org_id`,`ath`.`transaction_type` AS `transaction_type`,`ath`.`transaction_class` AS `transaction_class`,`ath`.`transaction_number` AS `transaction_number`,`ath`.`ar_customer_id` AS `ar_customer_id`,`ath`.`ar_customer_site_id` AS `ar_customer_site_id`,`ath`.`document_owner` AS `document_owner`,`ath`.`description` AS `description`,`ath`.`ship_to_id` AS `ship_to_id`,`ath`.`bill_to_id` AS `bill_to_id`,`ath`.`header_amount` AS `header_amount`,`ath`.`receipt_amount` AS `receipt_amount`,`ath`.`tax_amount` AS `tax_amount`,`ath`.`currency` AS `currency`,`ath`.`doc_currency` AS `doc_currency`,`ath`.`receivable_ac_id` AS `receivable_ac_id`,`ath`.`payment_term_id` AS `payment_term_id`,`ath`.`exchange_rate_type` AS `exchange_rate_type`,`ath`.`exchange_rate` AS `exchange_rate`,`ath`.`transaction_status` AS `transaction_status`,`ath`.`document_date` AS `document_date`,`ath`.`document_number` AS `document_number`,`ath`.`ledger_id` AS `ledger_id`,`ath`.`period_id` AS `trnx_period_id`,`ath`.`payment_term_date` AS `payment_term_date`,`ath`.`sales_person` AS `sales_person`,`ath`.`receipt_method` AS `receipt_method`,`ath`.`approval_status` AS `approval_status`,`ath`.`receipt_status` AS `receipt_status`,`ath`.`reference_type` AS `trnx_reference_type`,`ath`.`reference_key_name` AS `trnx_reference_key_name`,`ath`.`reference_key_value` AS `trnx_reference_key_value`,`ath`.`sd_so_header_id` AS `trnx_sd_so_header_id`,`atl`.`ar_transaction_line_id` AS `ar_transaction_line_id`,`atl`.`line_number` AS `line_number`,`atl`.`item_id_m` AS `item_id_m`,`atl`.`item_description` AS `item_description`,`atl`.`inv_line_quantity` AS `inv_line_quantity`,`atl`.`inv_unit_price` AS `inv_unit_price`,`atl`.`tax_code_id` AS `tax_code_id`,`atl`.`tax_amount` AS `so_tax_amount`,`atl`.`gl_inv_line_price` AS `gl_inv_line_price`,`atl`.`gl_tax_amount` AS `gl_tax_amount`,`atl`.`inv_line_price` AS `inv_line_price`,`atl`.`line_type` AS `trnx_line_type`,`atl`.`line_description` AS `line_description`,`atl`.`asset_cb` AS `asset_cb`,`atl`.`uom_id` AS `uom_id`,`atl`.`status` AS `status`,`atl`.`line_source` AS `line_source`,`atl`.`sd_so_header_id` AS `sd_so_header_id`,`atl`.`sd_so_line_id` AS `trnx_sd_so_line_id`,`atl`.`sd_so_detail_id` AS `sd_so_detail_id`,`atl`.`period_id` AS `period_id`,`atl`.`reference_type` AS `reference_type`,`atl`.`reference_key_name` AS `reference_key_name`,`atl`.`reference_key_value` AS `reference_key_value`,`ar_customer`.`customer_name` AS `customer_name`,`ar_customer`.`customer_number` AS `customer_number`,`ar_customer_site`.`customer_site_name` AS `customer_site_name`,`ar_customer_site`.`customer_site_number` AS `customer_site_number`,`sdsl`.`sd_so_line_id` AS `sd_so_line_id`,`sdsl`.`line_type` AS `line_type`,`sdsl`.`line_number` AS `so_line_number`,`sdsl`.`kit_cb` AS `kit_cb`,`sdsl`.`kit_configured_cb` AS `kit_configured_cb`,`sdsl`.`bom_config_header_id` AS `bom_config_header_id`,`sdsl`.`wip_wo_header_id` AS `wip_wo_header_id`,`sdsl`.`line_quantity` AS `line_quantity`,`sdsl`.`picked_quantity` AS `picked_quantity`,`sdsl`.`shipped_quantity` AS `shipped_quantity`,`sdsl`.`unit_price` AS `unit_price`,`sdsl`.`line_price` AS `line_price`,`sdsl`.`line_status` AS `line_status`,`sdsl`.`requested_date` AS `requested_date`,`sdsl`.`promise_date` AS `promise_date`,`sdsl`.`schedule_ship_date` AS `schedule_ship_date`,`sdsl`.`actual_ship_date` AS `actual_ship_date`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `item_uom_id`,`item`.`item_status` AS `item_status`,`org`.`org` AS `org`,`sdsl`.`shipping_org_id` AS `shipping_org_id`,`sdsl`.`created_by` AS `created_by`,`sdsl`.`creation_date` AS `creation_date`,`sdsl`.`last_update_by` AS `last_update_by`,`sdsl`.`last_update_date` AS `last_update_date`,`ship_address`.`address` AS `address`,`ship_address`.`country` AS `country`,`ship_address`.`postal_code` AS `postal_code`,`ship_address`.`phone` AS `phone`,`ship_address`.`email` AS `email`,`ship_address`.`website` AS `website`,`bill_address`.`address` AS `address_b`,`bill_address`.`country` AS `country_b`,`bill_address`.`postal_code` AS `postal_code_b`,`bill_address`.`phone` AS `phone_b`,`bill_address`.`email` AS `email_b`,`bill_address`.`website` AS `website_b`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description` from (((`ar_customer` join `address` `ship_address`) join `address` `bill_address`) join (((((((`ar_transaction_line` `atl` left join `ar_transaction_header` `ath` on((`ath`.`ar_transaction_header_id` = `atl`.`ar_transaction_header_id`))) left join `ar_customer_site` on((`ath`.`ar_customer_site_id` = `ar_customer_site`.`ar_customer_site_id`))) left join `payment_term` on((`ath`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `sd_so_line` `sdsl` on((`atl`.`sd_so_line_id` = `sdsl`.`sd_so_line_id`))) left join `sd_so_header` `sdsh` on((`sdsh`.`sd_so_header_id` = `sdsl`.`sd_so_header_id`))) left join `org` on((`sdsl`.`shipping_org_id` = `org`.`org_id`))) left join `item` on(((`sdsl`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `sdsl`.`shipping_org_id`))))) where ((`ath`.`ar_customer_id` = `ar_customer`.`ar_customer_id`) and (`ship_address`.`address_id` = `ath`.`ship_to_id`) and (`bill_address`.`address_id` = `ath`.`bill_to_id`));
 
 -- --------------------------------------------------------
 
@@ -19791,7 +21780,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ar_transaction_all_v` AS 
 --
 DROP TABLE IF EXISTS `ar_unpaid_transaction_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ar_unpaid_transaction_v` AS select `arth`.`ar_transaction_header_id` AS `ar_transaction_header_id`,`arth`.`bu_org_id` AS `bu_org_id`,`arth`.`transaction_class` AS `transaction_class`,`arth`.`transaction_number` AS `transaction_number`,`arth`.`header_amount` AS `header_amount`,`arth`.`tax_amount` AS `tax_amount`,`arth`.`exchange_rate` AS `receipt_amount`,`arth`.`receipt_amount` AS `exchange_rate`,(ifnull(`arth`.`header_amount`,0) - ifnull(`arth`.`receipt_amount`,0)) AS `remaing_amount`,`arth`.`currency` AS `currency`,`arth`.`doc_currency` AS `doc_currency`,`arth`.`document_date` AS `document_date`,`arth`.`document_number` AS `document_number`,`arth`.`gl_journal_header_id` AS `gl_journal_header_id`,`arth`.`ledger_id` AS `ledger_id`,`arth`.`sd_so_header_id` AS `sd_so_header_id`,`arth`.`ar_customer_id` AS `ar_customer_id`,`arth`.`ar_customer_site_id` AS `ar_customer_site_id`,`arc`.`customer_name` AS `customer_name`,`arc`.`customer_number` AS `customer_number`,`arcs`.`customer_site_name` AS `customer_site_name`,`arcs`.`customer_site_number` AS `customer_site_number`,`sosh`.`so_number` AS `so_number` from (((`ar_transaction_header` `arth` left join `sd_so_header` `sosh` on((`arth`.`sd_so_header_id` = `sosh`.`sd_so_header_id`))) join `ar_customer` `arc`) join `ar_customer_site` `arcs`) where ((`arth`.`ar_customer_id` = `arc`.`ar_customer_id`) and (`arth`.`ar_customer_site_id` = `arcs`.`ar_customer_site_id`) and (`arth`.`ar_customer_id` = `arcs`.`ar_customer_id`) and (ifnull(`arth`.`header_amount`,0) > ifnull(`arth`.`receipt_amount`,0)) and (`arth`.`transaction_class` in ('INVOICE','DEPOSIT','CHARGE_BACK','PREPAYMENT','DEBIT_MEMO')));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ar_unpaid_transaction_v` AS select `arth`.`ar_transaction_header_id` AS `ar_transaction_header_id`,`arth`.`bu_org_id` AS `bu_org_id`,`arth`.`transaction_class` AS `transaction_class`,`arth`.`transaction_number` AS `transaction_number`,`arth`.`header_amount` AS `header_amount`,`arth`.`tax_amount` AS `tax_amount`,`arth`.`exchange_rate` AS `receipt_amount`,`arth`.`receipt_amount` AS `exchange_rate`,(ifnull(`arth`.`header_amount`,0) - ifnull(`arth`.`receipt_amount`,0)) AS `remaing_amount`,`arth`.`currency` AS `currency`,`arth`.`doc_currency` AS `doc_currency`,`arth`.`document_date` AS `document_date`,`arth`.`document_number` AS `document_number`,`arth`.`gl_journal_header_id` AS `gl_journal_header_id`,`arth`.`ledger_id` AS `ledger_id`,`arth`.`sd_so_header_id` AS `sd_so_header_id`,`arth`.`ar_customer_id` AS `ar_customer_id`,`arth`.`ar_customer_site_id` AS `ar_customer_site_id`,`arc`.`customer_name` AS `customer_name`,`arc`.`customer_number` AS `customer_number`,`arcs`.`customer_site_name` AS `customer_site_name`,`arcs`.`customer_site_number` AS `customer_site_number`,`sosh`.`so_number` AS `so_number`,`org`.`org` AS `org` from ((((`ar_transaction_header` `arth` left join `sd_so_header` `sosh` on((`arth`.`sd_so_header_id` = `sosh`.`sd_so_header_id`))) join `ar_customer` `arc`) join `ar_customer_site` `arcs`) join `org`) where ((`arth`.`ar_customer_id` = `arc`.`ar_customer_id`) and (`arth`.`ar_customer_site_id` = `arcs`.`ar_customer_site_id`) and (`arth`.`ar_customer_id` = `arcs`.`ar_customer_id`) and (`org`.`org_id` = `arth`.`bu_org_id`) and (ifnull(`arth`.`header_amount`,0) > ifnull(`arth`.`receipt_amount`,0)) and (`arth`.`transaction_class` in ('INVOICE','DEPOSIT','CHARGE_BACK','PREPAYMENT','DEBIT_MEMO')));
 
 -- --------------------------------------------------------
 
@@ -19800,7 +21789,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `ar_unpaid_transaction_v` 
 --
 DROP TABLE IF EXISTS `bom_all_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_all_v` AS select `bh`.`bom_header_id` AS `bom_header_id`,`bh`.`item_id_m` AS `item_id_m`,`bh`.`alternate_bom` AS `alternate_bom`,`bh`.`org_id` AS `org_id`,`bh`.`bom_revision` AS `bom_revision`,`bh`.`effective_date` AS `effective_date`,`bh`.`common_bom_item_id_m` AS `common_bom_item_id_m`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`uom_id` AS `uom_id`,`item`.`item_type` AS `item_type`,`item`.`item_status` AS `item_status`,`item`.`bom_type` AS `bom_type`,`item`.`costing_enabled_cb` AS `costing_enabled_cb`,`item`.`make_buy` AS `make_buy`,`org`.`org` AS `org`,`org`.`type` AS `org_type`,`org`.`status` AS `org_status`,`org`.`description` AS `org_description`,`org`.`code` AS `org_code` from ((`bom_header` `bh` left join `item` on(((`item`.`item_id_m` = `bh`.`item_id_m`) and (`item`.`org_id` = `bh`.`org_id`)))) left join `org` on((`org`.`org_id` = `bh`.`org_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bom_all_v` AS select `bh`.`bom_header_id` AS `bom_header_id`,`bh`.`item_id_m` AS `item_id_m`,`bh`.`alternate_bom` AS `alternate_bom`,`bh`.`org_id` AS `org_id`,`bh`.`bom_revision` AS `bom_revision`,`bh`.`effective_date` AS `effective_date`,`bh`.`common_bom_item_id_m` AS `common_bom_item_id_m`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`uom_id` AS `uom_id`,`item`.`item_type` AS `item_type`,`item`.`item_status` AS `item_status`,`item`.`bom_type` AS `bom_type`,`item`.`costing_enabled_cb` AS `costing_enabled_cb`,`item`.`make_buy` AS `make_buy`,`org`.`org` AS `org`,`org`.`type` AS `org_type`,`org`.`status` AS `org_status`,`org`.`description` AS `org_description`,`org`.`code` AS `org_code` from ((`bom_header` `bh` left join `item` on(((`item`.`item_id_m` = `bh`.`item_id_m`) and (`item`.`org_id` = `bh`.`org_id`)))) left join `org` on((`org`.`org_id` = `bh`.`org_id`)));
 
 -- --------------------------------------------------------
 
@@ -19809,7 +21798,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_all_v` AS select `bh`
 --
 DROP TABLE IF EXISTS `bom_line_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_line_v` AS select `bh`.`bom_header_id` AS `bom_header_id_h`,`bh`.`item_id_m` AS `item_id_m`,`bh`.`org_id` AS `org_id`,`bh`.`alternate_bom` AS `alternate_bom`,`bh`.`effective_date` AS `effective_date`,`bh`.`common_bom_item_id_m` AS `common_bom_item_id_m`,`bh`.`common_bom_org_id` AS `common_bom_org_id`,`bh`.`created_by` AS `h_created_by`,`bh`.`creation_date` AS `h_creation_date`,`bh`.`last_update_by` AS `h_last_update_by`,`bh`.`last_update_date` AS `h_last_update_date`,`bl`.`bom_header_id` AS `bom_header_id`,`bl`.`bom_line_id` AS `bom_line_id`,`bl`.`bom_sequence` AS `bom_sequence`,`bl`.`routing_sequence` AS `routing_sequence`,`bl`.`component_item_id_m` AS `component_item_id_m`,`bl`.`usage_basis` AS `usage_basis`,`bl`.`usage_quantity` AS `usage_quantity`,`bl`.`auto_request_material_cb` AS `auto_request_material_cb`,`bl`.`effective_start_date` AS `effective_start_date`,`bl`.`effective_end_date` AS `effective_end_date`,`bl`.`eco_number` AS `eco_number`,`bl`.`eco_implemented_cb` AS `eco_implemented_cb`,`bl`.`planning_percentage` AS `planning_percentage`,`bl`.`yield` AS `yield`,`bl`.`include_in_cost_rollup_cb` AS `include_in_cost_rollup_cb`,(case coalesce(`bl`.`wip_supply_type`,0) when '0' then (select `item`.`wip_supply_type` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`wip_supply_type` end) AS `wip_supply_type`,(case coalesce(`bl`.`supply_sub_inventory`,0) when '0' then (select `item`.`wip_supply_subinventory` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`supply_sub_inventory` end) AS `supply_sub_inventory`,(case coalesce(`bl`.`supply_locator`,0) when '0' then (select `item`.`wip_supply_locator` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`supply_locator` end) AS `supply_locator`,`bl`.`created_by` AS `created_by`,`bl`.`creation_date` AS `creation_date`,`bl`.`last_update_by` AS `last_update_by`,`bl`.`last_update_date` AS `last_update_date` from (`bom_line` `bl` join `bom_header` `bh`) where ((`bh`.`bom_header_id` = `bl`.`bom_header_id`) and (isnull(`bh`.`common_bom_item_id_m`) or (`bh`.`common_bom_item_id_m` = 0))) union select `bh`.`bom_header_id` AS `bom_header_id_h`,`bhc`.`item_id_m` AS `item_id_m`,`bhc`.`org_id` AS `org_id`,`bhc`.`alternate_bom` AS `alternate_bom`,`bhc`.`effective_date` AS `effective_date`,`bhc`.`common_bom_item_id_m` AS `common_bom_item_id_m`,`bhc`.`common_bom_org_id` AS `common_bom_org_id`,`bh`.`created_by` AS `h_created_by`,`bh`.`creation_date` AS `h_creation_date`,`bh`.`last_update_by` AS `h_last_update_by`,`bh`.`last_update_date` AS `h_last_update_date`,`bl`.`bom_header_id` AS `bom_header_id`,`bl`.`bom_line_id` AS `bom_line_id`,`bl`.`bom_sequence` AS `bom_sequence`,`bl`.`routing_sequence` AS `routing_sequence`,`bl`.`component_item_id_m` AS `component_item_id_m`,`bl`.`usage_basis` AS `usage_basis`,`bl`.`usage_quantity` AS `usage_quantity`,`bl`.`auto_request_material_cb` AS `auto_request_material_cb`,`bl`.`effective_start_date` AS `effective_start_date`,`bl`.`effective_end_date` AS `effective_end_date`,`bl`.`eco_number` AS `eco_number`,`bl`.`eco_implemented_cb` AS `eco_implemented_cb`,`bl`.`planning_percentage` AS `planning_percentage`,`bl`.`yield` AS `yield`,`bl`.`include_in_cost_rollup_cb` AS `include_in_cost_rollup_cb`,(case coalesce(`bl`.`wip_supply_type`,0) when '0' then (select `item`.`wip_supply_type` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`wip_supply_type` end) AS `wip_supply_type`,(case coalesce(`bl`.`supply_sub_inventory`,0) when '0' then (select `item`.`wip_supply_subinventory` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`supply_sub_inventory` end) AS `supply_sub_inventory`,(case coalesce(`bl`.`supply_locator`,0) when '0' then (select `item`.`wip_supply_locator` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`supply_locator` end) AS `supply_locator`,`bl`.`created_by` AS `created_by`,`bl`.`creation_date` AS `creation_date`,`bl`.`last_update_by` AS `last_update_by`,`bl`.`last_update_date` AS `last_update_date` from ((`bom_line` `bl` join `bom_header` `bh`) join `bom_header` `bhc`) where ((`bh`.`bom_header_id` = `bl`.`bom_header_id`) and ((`bhc`.`common_bom_item_id_m` is not null) or (`bhc`.`common_bom_item_id_m` = 0)) and (`bhc`.`common_bom_item_id_m` = `bh`.`item_id_m`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bom_line_v` AS select `bh`.`bom_header_id` AS `bom_header_id_h`,`bh`.`item_id_m` AS `item_id_m`,`bh`.`org_id` AS `org_id`,`bh`.`alternate_bom` AS `alternate_bom`,`bh`.`effective_date` AS `effective_date`,`bh`.`common_bom_item_id_m` AS `common_bom_item_id_m`,`bh`.`common_bom_org_id` AS `common_bom_org_id`,`bh`.`created_by` AS `h_created_by`,`bh`.`creation_date` AS `h_creation_date`,`bh`.`last_update_by` AS `h_last_update_by`,`bh`.`last_update_date` AS `h_last_update_date`,`bl`.`bom_header_id` AS `bom_header_id`,`bl`.`bom_line_id` AS `bom_line_id`,`bl`.`bom_sequence` AS `bom_sequence`,`bl`.`routing_sequence` AS `routing_sequence`,`bl`.`component_item_id_m` AS `component_item_id_m`,`bl`.`usage_basis` AS `usage_basis`,`bl`.`usage_quantity` AS `usage_quantity`,`bl`.`auto_request_material_cb` AS `auto_request_material_cb`,`bl`.`effective_start_date` AS `effective_start_date`,`bl`.`effective_end_date` AS `effective_end_date`,`bl`.`eco_number` AS `eco_number`,`bl`.`eco_implemented_cb` AS `eco_implemented_cb`,`bl`.`planning_percentage` AS `planning_percentage`,`bl`.`yield` AS `yield`,`bl`.`include_in_cost_rollup_cb` AS `include_in_cost_rollup_cb`,(case coalesce(`bl`.`wip_supply_type`,0) when '0' then (select `item`.`wip_supply_type` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`wip_supply_type` end) AS `wip_supply_type`,(case coalesce(`bl`.`supply_sub_inventory`,0) when '0' then (select `item`.`wip_supply_subinventory` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`supply_sub_inventory` end) AS `supply_sub_inventory`,(case coalesce(`bl`.`supply_locator`,0) when '0' then (select `item`.`wip_supply_locator` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`supply_locator` end) AS `supply_locator`,`bl`.`created_by` AS `created_by`,`bl`.`creation_date` AS `creation_date`,`bl`.`last_update_by` AS `last_update_by`,`bl`.`last_update_date` AS `last_update_date` from (`bom_line` `bl` join `bom_header` `bh`) where ((`bh`.`bom_header_id` = `bl`.`bom_header_id`) and (isnull(`bh`.`common_bom_item_id_m`) or (`bh`.`common_bom_item_id_m` = 0))) union select `bh`.`bom_header_id` AS `bom_header_id_h`,`bhc`.`item_id_m` AS `item_id_m`,`bhc`.`org_id` AS `org_id`,`bhc`.`alternate_bom` AS `alternate_bom`,`bhc`.`effective_date` AS `effective_date`,`bhc`.`common_bom_item_id_m` AS `common_bom_item_id_m`,`bhc`.`common_bom_org_id` AS `common_bom_org_id`,`bh`.`created_by` AS `h_created_by`,`bh`.`creation_date` AS `h_creation_date`,`bh`.`last_update_by` AS `h_last_update_by`,`bh`.`last_update_date` AS `h_last_update_date`,`bl`.`bom_header_id` AS `bom_header_id`,`bl`.`bom_line_id` AS `bom_line_id`,`bl`.`bom_sequence` AS `bom_sequence`,`bl`.`routing_sequence` AS `routing_sequence`,`bl`.`component_item_id_m` AS `component_item_id_m`,`bl`.`usage_basis` AS `usage_basis`,`bl`.`usage_quantity` AS `usage_quantity`,`bl`.`auto_request_material_cb` AS `auto_request_material_cb`,`bl`.`effective_start_date` AS `effective_start_date`,`bl`.`effective_end_date` AS `effective_end_date`,`bl`.`eco_number` AS `eco_number`,`bl`.`eco_implemented_cb` AS `eco_implemented_cb`,`bl`.`planning_percentage` AS `planning_percentage`,`bl`.`yield` AS `yield`,`bl`.`include_in_cost_rollup_cb` AS `include_in_cost_rollup_cb`,(case coalesce(`bl`.`wip_supply_type`,0) when '0' then (select `item`.`wip_supply_type` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`wip_supply_type` end) AS `wip_supply_type`,(case coalesce(`bl`.`supply_sub_inventory`,0) when '0' then (select `item`.`wip_supply_subinventory` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`supply_sub_inventory` end) AS `supply_sub_inventory`,(case coalesce(`bl`.`supply_locator`,0) when '0' then (select `item`.`wip_supply_locator` from `item` where ((`item`.`item_id_m` = `bl`.`component_item_id_m`) and (`item`.`org_id` = `bh`.`org_id`))) else `bl`.`supply_locator` end) AS `supply_locator`,`bl`.`created_by` AS `created_by`,`bl`.`creation_date` AS `creation_date`,`bl`.`last_update_by` AS `last_update_by`,`bl`.`last_update_date` AS `last_update_date` from ((`bom_line` `bl` join `bom_header` `bh`) join `bom_header` `bhc`) where ((`bh`.`bom_header_id` = `bl`.`bom_header_id`) and ((`bhc`.`common_bom_item_id_m` is not null) or (`bhc`.`common_bom_item_id_m` = 0)) and (`bhc`.`common_bom_item_id_m` = `bh`.`item_id_m`));
 
 -- --------------------------------------------------------
 
@@ -19818,7 +21807,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_line_v` AS select `bh
 --
 DROP TABLE IF EXISTS `bom_overhead_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_overhead_v` AS select `res`.`bom_overhead_resource_assignment_id` AS `bom_overhead_resource_assignment_id`,`res`.`bom_cost_type` AS `resource_bom_cost_type`,`res`.`resource_id` AS `resource_id`,`ora`.`bom_overhead_rate_assignment_id` AS `bom_overhead_rate_assignment_id`,`ora`.`bom_overhead_id` AS `bom_overhead_id`,`ora`.`bom_cost_type` AS `rate_bom_cost_type`,`ora`.`default_basis` AS `default_basis`,`ora`.`rate` AS `rate`,`bo`.`overhead` AS `overhead`,`bo`.`description` AS `description`,`bo`.`org_id` AS `org_id`,`bo`.`overhead_type` AS `overhead_type`,`bo`.`absorption_ac_id` AS `absorption_ac_id` from ((`bom_overhead_rate_assignment` `ora` left join `bom_overhead` `bo` on((`bo`.`bom_overhead_id` = `ora`.`bom_overhead_id`))) left join `bom_overhead_resource_assignment` `res` on((`res`.`bom_overhead_id` = `ora`.`bom_overhead_id`))) where (`res`.`bom_cost_type` = `ora`.`bom_cost_type`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bom_overhead_v` AS select `res`.`bom_overhead_resource_assignment_id` AS `bom_overhead_resource_assignment_id`,`res`.`bom_cost_type` AS `resource_bom_cost_type`,`res`.`resource_id` AS `resource_id`,`ora`.`bom_overhead_rate_assignment_id` AS `bom_overhead_rate_assignment_id`,`ora`.`bom_overhead_id` AS `bom_overhead_id`,`ora`.`bom_cost_type` AS `rate_bom_cost_type`,`ora`.`default_basis` AS `default_basis`,`ora`.`rate` AS `rate`,`bo`.`overhead` AS `overhead`,`bo`.`description` AS `description`,`bo`.`org_id` AS `org_id`,`bo`.`overhead_type` AS `overhead_type`,`bo`.`absorption_ac_id` AS `absorption_ac_id` from ((`bom_overhead_rate_assignment` `ora` left join `bom_overhead` `bo` on((`bo`.`bom_overhead_id` = `ora`.`bom_overhead_id`))) left join `bom_overhead_resource_assignment` `res` on((`res`.`bom_overhead_id` = `ora`.`bom_overhead_id`))) where (`res`.`bom_cost_type` = `ora`.`bom_cost_type`);
 
 -- --------------------------------------------------------
 
@@ -19827,7 +21816,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_overhead_v` AS select
 --
 DROP TABLE IF EXISTS `bom_routing_line_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_routing_line_v` AS select `brh`.`bom_routing_header_id` AS `bom_routing_header_id_h`,`brh`.`item_id_m` AS `item_id_m`,`brh`.`alternate_routing` AS `alternate_routing`,`brh`.`org_id` AS `org_id`,`brh`.`routing_revision` AS `routing_revision`,`brh`.`effective_date` AS `effective_date`,`brh`.`common_routing_item_id_m` AS `common_routing_item_id_m`,`brh`.`description` AS `description_h`,`brh`.`completion_subinventory` AS `completion_subinventory`,`brh`.`completion_locator` AS `completion_locator`,`brl`.`bom_routing_line_id` AS `bom_routing_line_id`,`brl`.`bom_routing_header_id` AS `bom_routing_header_id`,`brl`.`routing_sequence` AS `routing_sequence`,`brl`.`standard_operation_id` AS `standard_operation_id`,`brl`.`department_id` AS `department_id`,`brl`.`description` AS `description`,`brl`.`count_point_cb` AS `count_point_cb`,`brl`.`auto_charge_cb` AS `auto_charge_cb`,`brl`.`backflush_cb` AS `backflush_cb`,`brl`.`minimum_transfer_quantity` AS `minimum_transfer_quantity`,`brl`.`lead_time_percentage` AS `lead_time_percentage`,`brl`.`effective_start_date` AS `effective_start_date`,`brl`.`effective_end_date` AS `effective_end_date`,`brl`.`eco_number` AS `eco_number`,`brl`.`eco_implemented_cb` AS `eco_implemented_cb`,`brl`.`include_in_rollup_cb` AS `include_in_rollup_cb`,`brl`.`referenced_cb` AS `referenced_cb`,`brl`.`yield` AS `yield`,`brl`.`cumm_yield` AS `cumm_yield` from (`bom_routing_header` `brh` join `bom_routing_line` `brl`) where ((`brh`.`bom_routing_header_id` = `brl`.`bom_routing_header_id`) and (isnull(`brh`.`common_routing_item_id_m`) or (`brh`.`common_routing_item_id_m` = 0))) union select `brhc`.`bom_routing_header_id` AS `bom_routing_header_id_h`,`brhc`.`item_id_m` AS `item_id_m`,`brhc`.`alternate_routing` AS `alternate_routing`,`brhc`.`org_id` AS `org_id`,`brhc`.`routing_revision` AS `routing_revision`,`brhc`.`effective_date` AS `effective_date`,`brhc`.`common_routing_item_id_m` AS `common_routing_item_id_m`,`brhc`.`description` AS `description_h`,`brhc`.`completion_subinventory` AS `completion_subinventory`,`brhc`.`completion_locator` AS `completion_locator`,`brl`.`bom_routing_line_id` AS `bom_routing_line_id`,`brl`.`bom_routing_header_id` AS `bom_routing_header_id`,`brl`.`routing_sequence` AS `routing_sequence`,`brl`.`standard_operation_id` AS `standard_operation_id`,`brl`.`department_id` AS `department_id`,`brl`.`description` AS `description`,`brl`.`count_point_cb` AS `count_point_cb`,`brl`.`auto_charge_cb` AS `auto_charge_cb`,`brl`.`backflush_cb` AS `backflush_cb`,`brl`.`minimum_transfer_quantity` AS `minimum_transfer_quantity`,`brl`.`lead_time_percentage` AS `lead_time_percentage`,`brl`.`effective_start_date` AS `effective_start_date`,`brl`.`effective_end_date` AS `effective_end_date`,`brl`.`eco_number` AS `eco_number`,`brl`.`eco_implemented_cb` AS `eco_implemented_cb`,`brl`.`include_in_rollup_cb` AS `include_in_rollup_cb`,`brl`.`referenced_cb` AS `referenced_cb`,`brl`.`yield` AS `yield`,`brl`.`cumm_yield` AS `cumm_yield` from ((`bom_routing_header` `brh` join `bom_routing_header` `brhc`) join `bom_routing_line` `brl`) where ((`brh`.`bom_routing_header_id` = `brl`.`bom_routing_header_id`) and ((`brhc`.`common_routing_item_id_m` is not null) or (`brhc`.`common_routing_item_id_m` = 0)) and (`brhc`.`common_routing_item_id_m` = `brh`.`item_id_m`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bom_routing_line_v` AS select `brh`.`bom_routing_header_id` AS `bom_routing_header_id_h`,`brh`.`item_id_m` AS `item_id_m`,`brh`.`alternate_routing` AS `alternate_routing`,`brh`.`org_id` AS `org_id`,`brh`.`routing_revision` AS `routing_revision`,`brh`.`effective_date` AS `effective_date`,`brh`.`common_routing_item_id_m` AS `common_routing_item_id_m`,`brh`.`description` AS `description_h`,`brh`.`completion_subinventory` AS `completion_subinventory`,`brh`.`completion_locator` AS `completion_locator`,`brl`.`bom_routing_line_id` AS `bom_routing_line_id`,`brl`.`bom_routing_header_id` AS `bom_routing_header_id`,`brl`.`routing_sequence` AS `routing_sequence`,`brl`.`standard_operation_id` AS `standard_operation_id`,`brl`.`department_id` AS `department_id`,`brl`.`description` AS `description`,`brl`.`count_point_cb` AS `count_point_cb`,`brl`.`auto_charge_cb` AS `auto_charge_cb`,`brl`.`backflush_cb` AS `backflush_cb`,`brl`.`minimum_transfer_quantity` AS `minimum_transfer_quantity`,`brl`.`lead_time_percentage` AS `lead_time_percentage`,`brl`.`effective_start_date` AS `effective_start_date`,`brl`.`effective_end_date` AS `effective_end_date`,`brl`.`eco_number` AS `eco_number`,`brl`.`eco_implemented_cb` AS `eco_implemented_cb`,`brl`.`include_in_rollup_cb` AS `include_in_rollup_cb`,`brl`.`referenced_cb` AS `referenced_cb`,`brl`.`yield` AS `yield`,`brl`.`cumm_yield` AS `cumm_yield` from (`bom_routing_header` `brh` join `bom_routing_line` `brl`) where ((`brh`.`bom_routing_header_id` = `brl`.`bom_routing_header_id`) and (isnull(`brh`.`common_routing_item_id_m`) or (`brh`.`common_routing_item_id_m` = 0))) union select `brhc`.`bom_routing_header_id` AS `bom_routing_header_id_h`,`brhc`.`item_id_m` AS `item_id_m`,`brhc`.`alternate_routing` AS `alternate_routing`,`brhc`.`org_id` AS `org_id`,`brhc`.`routing_revision` AS `routing_revision`,`brhc`.`effective_date` AS `effective_date`,`brhc`.`common_routing_item_id_m` AS `common_routing_item_id_m`,`brhc`.`description` AS `description_h`,`brhc`.`completion_subinventory` AS `completion_subinventory`,`brhc`.`completion_locator` AS `completion_locator`,`brl`.`bom_routing_line_id` AS `bom_routing_line_id`,`brl`.`bom_routing_header_id` AS `bom_routing_header_id`,`brl`.`routing_sequence` AS `routing_sequence`,`brl`.`standard_operation_id` AS `standard_operation_id`,`brl`.`department_id` AS `department_id`,`brl`.`description` AS `description`,`brl`.`count_point_cb` AS `count_point_cb`,`brl`.`auto_charge_cb` AS `auto_charge_cb`,`brl`.`backflush_cb` AS `backflush_cb`,`brl`.`minimum_transfer_quantity` AS `minimum_transfer_quantity`,`brl`.`lead_time_percentage` AS `lead_time_percentage`,`brl`.`effective_start_date` AS `effective_start_date`,`brl`.`effective_end_date` AS `effective_end_date`,`brl`.`eco_number` AS `eco_number`,`brl`.`eco_implemented_cb` AS `eco_implemented_cb`,`brl`.`include_in_rollup_cb` AS `include_in_rollup_cb`,`brl`.`referenced_cb` AS `referenced_cb`,`brl`.`yield` AS `yield`,`brl`.`cumm_yield` AS `cumm_yield` from ((`bom_routing_header` `brh` join `bom_routing_header` `brhc`) join `bom_routing_line` `brl`) where ((`brh`.`bom_routing_header_id` = `brl`.`bom_routing_header_id`) and ((`brhc`.`common_routing_item_id_m` is not null) or (`brhc`.`common_routing_item_id_m` = 0)) and (`brhc`.`common_routing_item_id_m` = `brh`.`item_id_m`));
 
 -- --------------------------------------------------------
 
@@ -19836,7 +21825,16 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_routing_line_v` AS se
 --
 DROP TABLE IF EXISTS `bom_routing_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_routing_v` AS select `brh`.`bom_routing_header_id` AS `bom_routing_header_id`,`brh`.`item_id_m` AS `item_id_m`,`brh`.`alternate_routing` AS `alternate_routing`,`brh`.`org_id` AS `org_id`,`brh`.`routing_revision` AS `routing_revision`,`brh`.`effective_date` AS `effective_date`,`brh`.`common_routing_item_id_m` AS `common_routing_item_id_m`,`brh`.`description` AS `description`,`brh`.`completion_subinventory` AS `completion_subinventory`,`brh`.`completion_locator` AS `completion_locator`,`brh`.`ef_id` AS `ef_id`,`brh`.`created_by` AS `created_by`,`brh`.`creation_date` AS `creation_date`,`brh`.`last_update_by` AS `last_update_by`,`brh`.`last_update_date` AS `last_update_date`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`uom_id` AS `uom_id`,`item`.`item_type` AS `item_type`,`item`.`item_status` AS `item_status`,`item`.`bom_type` AS `bom_type`,`item`.`costing_enabled_cb` AS `costing_enabled_cb`,`item`.`make_buy` AS `make_buy`,`org`.`org` AS `org`,`org`.`type` AS `type`,`org`.`status` AS `status`,`org`.`description` AS `org_description`,`org`.`code` AS `code`,`sub`.`subinventory` AS `subinventory`,`loc`.`locator` AS `locator` from ((((`bom_routing_header` `brh` left join `item` on(((`item`.`item_id_m` = `brh`.`item_id_m`) and (`item`.`org_id` = `brh`.`org_id`)))) left join `org` on((`org`.`org_id` = `brh`.`org_id`))) left join `subinventory` `sub` on((`sub`.`subinventory_id` = `brh`.`completion_subinventory`))) left join `locator` `loc` on((`loc`.`locator_id` = `brh`.`completion_locator`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bom_routing_v` AS select `brh`.`bom_routing_header_id` AS `bom_routing_header_id`,`brh`.`item_id_m` AS `item_id_m`,`brh`.`alternate_routing` AS `alternate_routing`,`brh`.`org_id` AS `org_id`,`brh`.`routing_revision` AS `routing_revision`,`brh`.`effective_date` AS `effective_date`,`brh`.`common_routing_item_id_m` AS `common_routing_item_id_m`,`brh`.`description` AS `description`,`brh`.`completion_subinventory` AS `completion_subinventory`,`brh`.`completion_locator` AS `completion_locator`,`brh`.`ef_id` AS `ef_id`,`brh`.`created_by` AS `created_by`,`brh`.`creation_date` AS `creation_date`,`brh`.`last_update_by` AS `last_update_by`,`brh`.`last_update_date` AS `last_update_date`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`uom_id` AS `uom_id`,`item`.`item_type` AS `item_type`,`item`.`item_status` AS `item_status`,`item`.`bom_type` AS `bom_type`,`item`.`costing_enabled_cb` AS `costing_enabled_cb`,`item`.`make_buy` AS `make_buy`,`org`.`org` AS `org`,`org`.`type` AS `type`,`org`.`status` AS `status`,`org`.`description` AS `org_description`,`org`.`code` AS `code`,`sub`.`subinventory` AS `subinventory`,`loc`.`locator` AS `locator` from ((((`bom_routing_header` `brh` left join `item` on(((`item`.`item_id_m` = `brh`.`item_id_m`) and (`item`.`org_id` = `brh`.`org_id`)))) left join `org` on((`org`.`org_id` = `brh`.`org_id`))) left join `subinventory` `sub` on((`sub`.`subinventory_id` = `brh`.`completion_subinventory`))) left join `locator` `loc` on((`loc`.`locator_id` = `brh`.`completion_locator`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `cst_gross_margin_v`
+--
+DROP TABLE IF EXISTS `cst_gross_margin_v`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cst_gross_margin_v` AS select `ath`.`ar_transaction_header_id` AS `ar_transaction_header_id`,`ath`.`bu_org_id` AS `bu_org_id`,`ath`.`transaction_type` AS `transaction_type`,`ath`.`transaction_class` AS `transaction_class`,`ath`.`transaction_number` AS `transaction_number`,`ath`.`ar_customer_id` AS `ar_customer_id`,`ath`.`ar_customer_site_id` AS `ar_customer_site_id`,`ath`.`document_owner` AS `document_owner`,`ath`.`description` AS `description`,`ath`.`ship_to_id` AS `ship_to_id`,`ath`.`bill_to_id` AS `bill_to_id`,`ath`.`header_amount` AS `header_amount`,`ath`.`currency` AS `currency`,`ath`.`exchange_rate` AS `exchange_rate`,`ath`.`doc_currency` AS `doc_currency`,`ath`.`document_number` AS `document_number`,`ath`.`ledger_id` AS `ledger_id`,`ath`.`period_id` AS `period_id`,`gp`.`period_name` AS `period_name`,`ath`.`sales_person` AS `sales_person`,`ath`.`reference_key_name` AS `reference_key_name_ath`,`ath`.`reference_key_value` AS `reference_key_value_ath`,`ath`.`sd_so_header_id` AS `sd_so_header_id_ath`,`atl`.`ar_transaction_line_id` AS `ar_transaction_line_id`,`atl`.`line_number` AS `line_number`,`atl`.`item_id_m` AS `item_id_m`,`atl`.`ar_transaction_header_id` AS `ar_transaction_header_id_atl`,`atl`.`item_description` AS `item_description`,`atl`.`inv_line_quantity` AS `inv_line_quantity`,`atl`.`inv_unit_price` AS `inv_unit_price`,`atl`.`line_type` AS `line_type`,`atl`.`line_description` AS `line_description`,`atl`.`sd_so_header_id` AS `sd_so_header_id`,`atl`.`reference_key_name` AS `reference_key_name`,`atl`.`reference_key_value` AS `reference_key_value`,`ar_customer`.`customer_name` AS `customer_name`,`ar_customer`.`customer_number` AS `customer_number`,`ar_customer_site`.`customer_site_name` AS `customer_site_name`,`ar_customer_site`.`customer_site_number` AS `customer_site_number`,`sdsl`.`sd_so_line_id` AS `sd_so_line_id`,`sdsl`.`line_type` AS `line_type_so_line`,`sdsl`.`unit_price` AS `unit_price`,`item`.`item_number` AS `item_number`,`org`.`org` AS `org`,`sdsl`.`shipping_org_id` AS `shipping_org_id`,(`atl`.`inv_unit_price` * `ath`.`exchange_rate`) AS `inv_unit_price_ledgc`,`ship_address`.`address` AS `address`,`ship_address`.`country` AS `country`,`cich`.`cst_item_cost_header_id` AS `cst_item_cost_header_id`,sum(`cicl`.`amount`) AS `frozen_cost`,(ifnull((`atl`.`inv_unit_price` * `ath`.`exchange_rate`),0) - ifnull(sum(`cicl`.`amount`),0)) AS `gross_profit`,(round(((ifnull((`atl`.`inv_unit_price` * `ath`.`exchange_rate`),0) - ifnull(sum(`cicl`.`amount`),0)) / ifnull((`atl`.`inv_unit_price` * `ath`.`exchange_rate`),1)),5) * 100) AS `gross_margin` from (((`ar_customer` join `address` `ship_address`) join `gl_period` `gp`) join ((((((((`ar_transaction_line` `atl` left join `ar_transaction_header` `ath` on((`ath`.`ar_transaction_header_id` = `atl`.`ar_transaction_header_id`))) left join `ar_customer_site` on((`ath`.`ar_customer_site_id` = `ar_customer_site`.`ar_customer_site_id`))) left join `sd_so_line` `sdsl` on((`atl`.`sd_so_line_id` = `sdsl`.`sd_so_line_id`))) left join `sd_so_header` `sdsh` on((`sdsh`.`sd_so_header_id` = `sdsl`.`sd_so_header_id`))) left join `org` on((`sdsl`.`shipping_org_id` = `org`.`org_id`))) left join `item` on(((`sdsl`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `sdsl`.`shipping_org_id`)))) left join `cst_item_cost_header` `cich` on(((`cich`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `cich`.`org_id`) and (`cich`.`bom_cost_type` = 'FROZEN')))) left join `cst_item_cost_line` `cicl` on((`cicl`.`cst_item_cost_header_id` = `cich`.`cst_item_cost_header_id`)))) where ((`ath`.`ar_customer_id` = `ar_customer`.`ar_customer_id`) and (`ship_address`.`address_id` = `ath`.`ship_to_id`) and (`gp`.`gl_period_id` = `ath`.`period_id`)) group by `cich`.`cst_item_cost_header_id`,`atl`.`ar_transaction_line_id`;
 
 -- --------------------------------------------------------
 
@@ -19845,7 +21843,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_routing_v` AS select 
 --
 DROP TABLE IF EXISTS `cst_item_cost_sum_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `cst_item_cost_sum_v` AS select `ich`.`cst_item_cost_header_id` AS `cst_item_cost_header_id`,sum(`icl`.`amount`) AS `standard_cost` from (`cst_item_cost_header` `ich` join `cst_item_cost_line` `icl`) where (`icl`.`cst_item_cost_header_id` = `ich`.`cst_item_cost_header_id`) group by `ich`.`cst_item_cost_header_id`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cst_item_cost_sum_v` AS select `ich`.`cst_item_cost_header_id` AS `cst_item_cost_header_id`,sum(`icl`.`amount`) AS `standard_cost` from (`cst_item_cost_header` `ich` join `cst_item_cost_line` `icl`) where (`icl`.`cst_item_cost_header_id` = `ich`.`cst_item_cost_header_id`) group by `ich`.`cst_item_cost_header_id`;
 
 -- --------------------------------------------------------
 
@@ -19854,7 +21852,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `cst_item_cost_sum_v` AS s
 --
 DROP TABLE IF EXISTS `cst_item_cost_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `cst_item_cost_v` AS select `item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`cich`.`item_id_m` AS `item_id_m`,`cich`.`org_id` AS `org_id`,`org`.`org` AS `org`,`cich`.`sales_price` AS `sales_price`,`cich`.`purchase_price` AS `purchase_price`,`cich`.`cst_item_cost_header_id` AS `cst_item_cost_header_id`,`cich`.`bom_cost_type` AS `bom_cost_type`,`icsv`.`standard_cost` AS `standard_cost` from (((`cst_item_cost_header` `cich` join `cst_item_cost_sum_v` `icsv`) join `item`) join `org`) where ((`icsv`.`cst_item_cost_header_id` = `cich`.`cst_item_cost_header_id`) and (`item`.`item_id_m` = `cich`.`item_id_m`) and (`item`.`org_id` = `cich`.`org_id`) and (`org`.`org_id` = `cich`.`org_id`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cst_item_cost_v` AS select `item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`cich`.`item_id_m` AS `item_id_m`,`cich`.`org_id` AS `org_id`,`org`.`org` AS `org`,`cich`.`sales_price` AS `sales_price`,`cich`.`purchase_price` AS `purchase_price`,`cich`.`cst_item_cost_header_id` AS `cst_item_cost_header_id`,`cich`.`bom_cost_type` AS `bom_cost_type`,`icsv`.`standard_cost` AS `standard_cost` from (((`cst_item_cost_header` `cich` join `cst_item_cost_sum_v` `icsv`) join `item`) join `org`) where ((`icsv`.`cst_item_cost_header_id` = `cich`.`cst_item_cost_header_id`) and (`item`.`item_id_m` = `cich`.`item_id_m`) and (`item`.`org_id` = `cich`.`org_id`) and (`org`.`org_id` = `cich`.`org_id`));
 
 -- --------------------------------------------------------
 
@@ -19863,7 +21861,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `cst_item_cost_v` AS selec
 --
 DROP TABLE IF EXISTS `fp_forecast_line_date_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_forecast_line_date_v` AS select `fld`.`fp_forecast_line_date_id` AS `fp_forecast_line_date_id`,`fld`.`fp_forecast_line_id` AS `fp_forecast_line_id`,`fh`.`forecast` AS `forecast`,`fg`.`forecast_group` AS `forecast_group`,`org`.`org` AS `org`,`item`.`item_number` AS `item_number`,`uom`.`uom_name` AS `uom_name`,`item`.`item_description` AS `item_description`,`fld`.`forecast_date` AS `forecast_date`,`fl`.`bucket_type` AS `bucket_type`,`fld`.`original_quantity` AS `original_quantity`,`fld`.`current_quantity` AS `current_quantity`,`fld`.`source` AS `source`,`fl`.`item_id_m` AS `item_id_m`,`item`.`uom_id` AS `uom_id` from ((((`fp_forecast_line_date` `fld` join `fp_forecast_line` `fl`) join `org`) join (`fp_forecast_header` `fh` left join `fp_forecast_group` `fg` on((`fg`.`fp_forecast_group_id` = `fh`.`forecast_group_id`)))) join (`item` left join `uom` on((`uom`.`uom_id` = `item`.`uom_id`)))) where ((`fl`.`fp_forecast_line_id` = `fld`.`fp_forecast_line_id`) and (`fl`.`fp_forecast_header_id` = `fh`.`fp_forecast_header_id`) and (`item`.`item_id_m` = `fl`.`item_id_m`) and (`item`.`org_id` = `fh`.`org_id`) and (`org`.`org_id` = `fh`.`org_id`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fp_forecast_line_date_v` AS select `fld`.`fp_forecast_line_date_id` AS `fp_forecast_line_date_id`,`fld`.`fp_forecast_line_id` AS `fp_forecast_line_id`,`fh`.`forecast` AS `forecast`,`fg`.`forecast_group` AS `forecast_group`,`org`.`org` AS `org`,`item`.`item_number` AS `item_number`,`uom`.`uom_name` AS `uom_name`,`item`.`item_description` AS `item_description`,`fld`.`forecast_date` AS `forecast_date`,`fl`.`bucket_type` AS `bucket_type`,`fld`.`original_quantity` AS `original_quantity`,`fld`.`current_quantity` AS `current_quantity`,`fld`.`source` AS `source`,`fl`.`item_id_m` AS `item_id_m`,`item`.`uom_id` AS `uom_id` from ((((`fp_forecast_line_date` `fld` join `fp_forecast_line` `fl`) join `org`) join (`fp_forecast_header` `fh` left join `fp_forecast_group` `fg` on((`fg`.`fp_forecast_group_id` = `fh`.`forecast_group_id`)))) join (`item` left join `uom` on((`uom`.`uom_id` = `item`.`uom_id`)))) where ((`fl`.`fp_forecast_line_id` = `fld`.`fp_forecast_line_id`) and (`fl`.`fp_forecast_header_id` = `fh`.`fp_forecast_header_id`) and (`item`.`item_id_m` = `fl`.`item_id_m`) and (`item`.`org_id` = `fh`.`org_id`) and (`org`.`org_id` = `fh`.`org_id`));
 
 -- --------------------------------------------------------
 
@@ -19872,7 +21870,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_forecast_line_date_v` 
 --
 DROP TABLE IF EXISTS `fp_forecast_over_consumption_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_forecast_over_consumption_v` AS select `fg`.`forecast_group` AS `forecast_group`,`org`.`org` AS `org`,`sosh`.`so_number` AS `so_number`,`sosl`.`line_number` AS `line_number`,`item`.`item_number` AS `item_number`,`uom`.`uom_name` AS `uom_name`,`item`.`item_description` AS `item_description`,`sosl`.`schedule_ship_date` AS `schedule_ship_date`,`foc`.`quantity` AS `quantity`,`sosl`.`item_id_m` AS `item_id_m`,`item`.`uom_id` AS `uom_id`,`foc`.`fp_forecast_consumption_id` AS `fp_forecast_consumption_id`,`foc`.`sd_so_line_id` AS `sd_so_line_id`,`sosl`.`sd_so_header_id` AS `sd_so_header_id` from (((((`fp_forecast_consumption` `foc` join `fp_forecast_group` `fg`) join `sd_so_line` `sosl`) join `sd_so_header` `sosh`) join `org`) join (`item` left join `uom` on((`uom`.`uom_id` = `item`.`uom_id`)))) where ((`foc`.`sd_so_line_id` = `sosl`.`sd_so_line_id`) and (`fg`.`fp_forecast_group_id` = `foc`.`fp_forecast_group_id`) and (`item`.`item_id_m` = `sosl`.`item_id_m`) and (`item`.`org_id` = `sosl`.`shipping_org_id`) and (`org`.`org_id` = `sosl`.`shipping_org_id`) and (`sosh`.`sd_so_header_id` = `sosl`.`sd_so_header_id`) and (`foc`.`quantity` < 0));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fp_forecast_over_consumption_v` AS select `fg`.`forecast_group` AS `forecast_group`,`org`.`org` AS `org`,`sosh`.`so_number` AS `so_number`,`sosl`.`line_number` AS `line_number`,`item`.`item_number` AS `item_number`,`uom`.`uom_name` AS `uom_name`,`item`.`item_description` AS `item_description`,`sosl`.`schedule_ship_date` AS `schedule_ship_date`,`foc`.`quantity` AS `quantity`,`sosl`.`item_id_m` AS `item_id_m`,`item`.`uom_id` AS `uom_id`,`foc`.`fp_forecast_consumption_id` AS `fp_forecast_consumption_id`,`foc`.`sd_so_line_id` AS `sd_so_line_id`,`sosl`.`sd_so_header_id` AS `sd_so_header_id` from (((((`fp_forecast_consumption` `foc` join `fp_forecast_group` `fg`) join `sd_so_line` `sosl`) join `sd_so_header` `sosh`) join `org`) join (`item` left join `uom` on((`uom`.`uom_id` = `item`.`uom_id`)))) where ((`foc`.`sd_so_line_id` = `sosl`.`sd_so_line_id`) and (`fg`.`fp_forecast_group_id` = `foc`.`fp_forecast_group_id`) and (`item`.`item_id_m` = `sosl`.`item_id_m`) and (`item`.`org_id` = `sosl`.`shipping_org_id`) and (`org`.`org_id` = `sosl`.`shipping_org_id`) and (`sosh`.`sd_so_header_id` = `sosl`.`sd_so_header_id`) and (`foc`.`quantity` < 0));
 
 -- --------------------------------------------------------
 
@@ -19881,7 +21879,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_forecast_over_consumpt
 --
 DROP TABLE IF EXISTS `fp_kanban_demand_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_kanban_demand_v` AS select `mmh`.`plan_name` AS `plan_name`,`mmh`.`org_id` AS `org_id`,`mmh`.`planning_horizon_days` AS `planning_horizon_days`,`org`.`org` AS `org`,`fh`.`forecast` AS `forecast`,`fh`.`description` AS `forecast_description`,`fmd`.`fp_kanban_demand_id` AS `fp_kanban_demand_id`,`fmd`.`plan_id` AS `plan_id`,`fmd`.`item_id_m` AS `item_id_m`,`fmd`.`quantity` AS `quantity`,`fmd`.`demand_item_id_m` AS `demand_item_id_m`,`fmd`.`toplevel_demand_item_id_m` AS `toplevel_demand_item_id_m`,`fmd`.`demand_type` AS `demand_type`,`fmd`.`source` AS `source`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item2`.`item_number` AS `top_level_item_number`,`item2`.`item_description` AS `top_level_item_description`,`item3`.`item_number` AS `demand_item_number`,`item3`.`item_description` AS `demand_item_description`,`fmd`.`created_by` AS `created_by`,`fmd`.`creation_date` AS `creation_date`,`fmd`.`last_update_by` AS `last_update_by`,`fmd`.`last_update_date` AS `last_update_date` from ((((((`fp_kanban_demand` `fmd` left join `fp_kanban_planner_header` `mmh` on((`mmh`.`fp_kanban_planner_header_id` = `fmd`.`plan_id`))) left join `fp_forecast_header` `fh` on((`fh`.`fp_forecast_header_id` = `fmd`.`source`))) left join `item` on((`item`.`item_id_m` = `fmd`.`item_id_m`))) left join `item` `item2` on((`item2`.`item_id_m` = `fmd`.`toplevel_demand_item_id_m`))) left join `item` `item3` on((`item3`.`item_id_m` = `fmd`.`demand_item_id_m`))) left join `org` on((`org`.`org_id` = `mmh`.`org_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fp_kanban_demand_v` AS select `mmh`.`plan_name` AS `plan_name`,`mmh`.`org_id` AS `org_id`,`mmh`.`planning_horizon_days` AS `planning_horizon_days`,`org`.`org` AS `org`,`fh`.`forecast` AS `forecast`,`fh`.`description` AS `forecast_description`,`fmd`.`fp_kanban_demand_id` AS `fp_kanban_demand_id`,`fmd`.`plan_id` AS `plan_id`,`fmd`.`item_id_m` AS `item_id_m`,`fmd`.`quantity` AS `quantity`,`fmd`.`demand_item_id_m` AS `demand_item_id_m`,`fmd`.`toplevel_demand_item_id_m` AS `toplevel_demand_item_id_m`,`fmd`.`demand_type` AS `demand_type`,`fmd`.`source` AS `source`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item2`.`item_number` AS `top_level_item_number`,`item2`.`item_description` AS `top_level_item_description`,`item3`.`item_number` AS `demand_item_number`,`item3`.`item_description` AS `demand_item_description`,`fmd`.`created_by` AS `created_by`,`fmd`.`creation_date` AS `creation_date`,`fmd`.`last_update_by` AS `last_update_by`,`fmd`.`last_update_date` AS `last_update_date` from ((((((`fp_kanban_demand` `fmd` left join `fp_kanban_planner_header` `mmh` on((`mmh`.`fp_kanban_planner_header_id` = `fmd`.`plan_id`))) left join `fp_forecast_header` `fh` on((`fh`.`fp_forecast_header_id` = `fmd`.`source`))) left join `item` on((`item`.`item_id_m` = `fmd`.`item_id_m`))) left join `item` `item2` on((`item2`.`item_id_m` = `fmd`.`toplevel_demand_item_id_m`))) left join `item` `item3` on((`item3`.`item_id_m` = `fmd`.`demand_item_id_m`))) left join `org` on((`org`.`org_id` = `mmh`.`org_id`)));
 
 -- --------------------------------------------------------
 
@@ -19890,7 +21888,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_kanban_demand_v` AS se
 --
 DROP TABLE IF EXISTS `fp_kanban_line_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_kanban_line_v` AS select `kbl`.`fp_kanban_line_id` AS `fp_kanban_line_id`,`kbl`.`fp_kanban_header_id` AS `fp_kanban_header_id`,`kbl`.`description` AS `description`,`kbl`.`card_number` AS `card_number`,`kbl`.`card_status` AS `card_status`,`kbl`.`supply_status` AS `supply_status`,`kbl`.`kanban_size` AS `kanban_size`,`kbl`.`card_type` AS `card_type`,`kbh`.`org_id` AS `org_id`,`kbh`.`description` AS `kbh_description`,`kbh`.`item_id_m` AS `item_id_m`,`kbh`.`effective_from` AS `effective_from`,`kbh`.`effective_to` AS `effective_to`,`kbh`.`subinventory_id` AS `subinventory_id`,`kbh`.`locator_id` AS `locator_id`,`kbh`.`source_type` AS `source_type`,`kbh`.`supplier_id` AS `supplier_id`,`kbh`.`supplier_site_id` AS `supplier_site_id`,`kbh`.`from_org_id` AS `from_org_id`,`kbh`.`from_subinventory_id` AS `from_subinventory_id`,`kbh`.`from_locator_id` AS `from_locator_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`uom_id` AS `uom_id`,`item`.`list_price` AS `list_price`,`item`.`sourcing_rule_id` AS `sourcing_rule_id`,(ifnull(`item`.`pre_processing_lt`,0) + ifnull(`item`.`processing_lt`,0)) AS `lead_time`,`sub`.`subinventory` AS `subinventory`,`locator`.`locator` AS `locator`,`org`.`org` AS `org`,`org`.`business_org_id` AS `bu_org_id` from ((((`fp_kanban_line` `kbl` join `item`) join `subinventory` `sub`) join `org`) join (`fp_kanban_header` `kbh` left join `locator` on((`locator`.`locator_id` = `kbh`.`locator_id`)))) where ((`kbh`.`fp_kanban_header_id` = `kbl`.`fp_kanban_header_id`) and (`item`.`item_id_m` = `kbh`.`item_id_m`) and (`item`.`org_id` = `kbh`.`org_id`) and (`org`.`org_id` = `kbh`.`org_id`) and (`sub`.`subinventory_id` = `kbh`.`subinventory_id`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fp_kanban_line_v` AS select `kbl`.`fp_kanban_line_id` AS `fp_kanban_line_id`,`kbl`.`fp_kanban_header_id` AS `fp_kanban_header_id`,`kbl`.`description` AS `description`,`kbl`.`card_number` AS `card_number`,`kbl`.`card_status` AS `card_status`,`kbl`.`supply_status` AS `supply_status`,`kbl`.`kanban_size` AS `kanban_size`,`kbl`.`card_type` AS `card_type`,`kbh`.`org_id` AS `org_id`,`kbh`.`description` AS `kbh_description`,`kbh`.`item_id_m` AS `item_id_m`,`kbh`.`effective_from` AS `effective_from`,`kbh`.`effective_to` AS `effective_to`,`kbh`.`subinventory_id` AS `subinventory_id`,`kbh`.`locator_id` AS `locator_id`,`kbh`.`source_type` AS `source_type`,`kbh`.`supplier_id` AS `supplier_id`,`kbh`.`supplier_site_id` AS `supplier_site_id`,`kbh`.`from_org_id` AS `from_org_id`,`kbh`.`from_subinventory_id` AS `from_subinventory_id`,`kbh`.`from_locator_id` AS `from_locator_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`uom_id` AS `uom_id`,`item`.`list_price` AS `list_price`,`item`.`sourcing_rule_id` AS `sourcing_rule_id`,(ifnull(`item`.`pre_processing_lt`,0) + ifnull(`item`.`processing_lt`,0)) AS `lead_time`,`sub`.`subinventory` AS `subinventory`,`locator`.`locator` AS `locator`,`org`.`org` AS `org`,`org`.`business_org_id` AS `bu_org_id` from ((((`fp_kanban_line` `kbl` join `item`) join `subinventory` `sub`) join `org`) join (`fp_kanban_header` `kbh` left join `locator` on((`locator`.`locator_id` = `kbh`.`locator_id`)))) where ((`kbh`.`fp_kanban_header_id` = `kbl`.`fp_kanban_header_id`) and (`item`.`item_id_m` = `kbh`.`item_id_m`) and (`item`.`org_id` = `kbh`.`org_id`) and (`org`.`org_id` = `kbh`.`org_id`) and (`sub`.`subinventory_id` = `kbh`.`subinventory_id`));
 
 -- --------------------------------------------------------
 
@@ -19899,7 +21897,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_kanban_line_v` AS sele
 --
 DROP TABLE IF EXISTS `fp_kanban_suggestion_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_kanban_suggestion_v` AS select `mmh`.`plan_name` AS `plan_name`,`mmh`.`org_id` AS `org_id`,`mmh`.`planning_horizon_days` AS `planning_horizon_days`,`org`.`org` AS `org`,`fmd`.`item_id_m` AS `item_id_m`,`item`.`item_number` AS `item_number`,sum(`fmd`.`quantity`) AS `total_demand`,(sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`) AS `avg_daily_demand`,`item`.`saftey_stock_quantity` AS `saftey_stock_quantity`,((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) AS `lead_time`,`item`.`saftey_stock_days` AS `saftey_stock_days`,(((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0)) AS `minimum_quantity`,`item`.`fix_days_supply` AS `fix_days_supply`,if(((`item`.`fix_days_supply` * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) > (((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0))),(`item`.`fix_days_supply` * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)),((((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * 1.5) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0))) AS `maximum_quantity`,ifnull(`item`.`fix_days_supply`,30) AS `multibin_fix_days_supply`,ifnull(ifnull(`kh`.`noof_card`,(ceiling(((((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0)) / `kh`.`card_size`)) + 1)),2) AS `kanban_multibin_number`,ifnull(`kh`.`card_size`,((((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0)) / ifnull(`kh`.`noof_card`,ceiling((ifnull(((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`),0) / ifnull(`item`.`fix_days_supply`,30)))))) AS `kanban_multibin_size`,(((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0)) AS `kanban_twobin_size`,`fh`.`forecast` AS `forecast`,`fh`.`description` AS `forecast_description`,`fmd`.`fp_kanban_demand_id` AS `fp_kanban_demand_id`,`fmd`.`plan_id` AS `plan_id`,`fmd`.`demand_item_id_m` AS `demand_item_id_m`,`fmd`.`toplevel_demand_item_id_m` AS `toplevel_demand_item_id_m`,`fmd`.`demand_type` AS `demand_type`,`fmd`.`source` AS `source`,`item`.`item_description` AS `item_description`,`item2`.`item_number` AS `top_level_item_number`,`item2`.`item_description` AS `top_level_item_description`,`item3`.`item_number` AS `demand_item_number`,`item3`.`item_description` AS `demand_item_description`,`fmd`.`created_by` AS `created_by`,`fmd`.`creation_date` AS `creation_date`,`fmd`.`last_update_by` AS `last_update_by`,`fmd`.`last_update_date` AS `last_update_date`,`kh`.`fp_kanban_header_id` AS `fp_kanban_header_id` from (((((((`fp_kanban_demand` `fmd` left join `fp_kanban_planner_header` `mmh` on((`mmh`.`fp_kanban_planner_header_id` = `fmd`.`plan_id`))) left join `fp_forecast_header` `fh` on((`fh`.`fp_forecast_header_id` = `fmd`.`source`))) left join `item` on((`item`.`item_id_m` = `fmd`.`item_id_m`))) left join `item` `item2` on((`item2`.`item_id_m` = `fmd`.`toplevel_demand_item_id_m`))) left join `item` `item3` on((`item3`.`item_id_m` = `fmd`.`demand_item_id_m`))) left join `org` on((`org`.`org_id` = `mmh`.`org_id`))) left join `fp_kanban_header` `kh` on(((`kh`.`org_id` = `mmh`.`org_id`) and (`kh`.`item_id_m` = `fmd`.`item_id_m`)))) group by `fmd`.`item_id_m`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fp_kanban_suggestion_v` AS select `mmh`.`plan_name` AS `plan_name`,`mmh`.`org_id` AS `org_id`,`mmh`.`planning_horizon_days` AS `planning_horizon_days`,`org`.`org` AS `org`,`fmd`.`item_id_m` AS `item_id_m`,`item`.`item_number` AS `item_number`,sum(`fmd`.`quantity`) AS `total_demand`,(sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`) AS `avg_daily_demand`,`item`.`saftey_stock_quantity` AS `saftey_stock_quantity`,((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) AS `lead_time`,`item`.`saftey_stock_days` AS `saftey_stock_days`,(((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0)) AS `minimum_quantity`,`item`.`fix_days_supply` AS `fix_days_supply`,if(((`item`.`fix_days_supply` * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) > (((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0))),(`item`.`fix_days_supply` * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)),((((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * 1.5) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0))) AS `maximum_quantity`,ifnull(`item`.`fix_days_supply`,30) AS `multibin_fix_days_supply`,ifnull(ifnull(`kh`.`noof_card`,(ceiling(((((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0)) / `kh`.`card_size`)) + 1)),2) AS `kanban_multibin_number`,ifnull(`kh`.`card_size`,((((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0)) / ifnull(`kh`.`noof_card`,ceiling((ifnull(((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`),0) / ifnull(`item`.`fix_days_supply`,30)))))) AS `kanban_multibin_size`,(((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0)) AS `kanban_twobin_size`,`fh`.`forecast` AS `forecast`,`fh`.`description` AS `forecast_description`,`fmd`.`fp_kanban_demand_id` AS `fp_kanban_demand_id`,`fmd`.`plan_id` AS `plan_id`,`fmd`.`demand_item_id_m` AS `demand_item_id_m`,`fmd`.`toplevel_demand_item_id_m` AS `toplevel_demand_item_id_m`,`fmd`.`demand_type` AS `demand_type`,`fmd`.`source` AS `source`,`item`.`item_description` AS `item_description`,`item2`.`item_number` AS `top_level_item_number`,`item2`.`item_description` AS `top_level_item_description`,`item3`.`item_number` AS `demand_item_number`,`item3`.`item_description` AS `demand_item_description`,`fmd`.`created_by` AS `created_by`,`fmd`.`creation_date` AS `creation_date`,`fmd`.`last_update_by` AS `last_update_by`,`fmd`.`last_update_date` AS `last_update_date`,`kh`.`fp_kanban_header_id` AS `fp_kanban_header_id` from (((((((`fp_kanban_demand` `fmd` left join `fp_kanban_planner_header` `mmh` on((`mmh`.`fp_kanban_planner_header_id` = `fmd`.`plan_id`))) left join `fp_forecast_header` `fh` on((`fh`.`fp_forecast_header_id` = `fmd`.`source`))) left join `item` on((`item`.`item_id_m` = `fmd`.`item_id_m`))) left join `item` `item2` on((`item2`.`item_id_m` = `fmd`.`toplevel_demand_item_id_m`))) left join `item` `item3` on((`item3`.`item_id_m` = `fmd`.`demand_item_id_m`))) left join `org` on((`org`.`org_id` = `mmh`.`org_id`))) left join `fp_kanban_header` `kh` on(((`kh`.`org_id` = `mmh`.`org_id`) and (`kh`.`item_id_m` = `fmd`.`item_id_m`)))) group by `fmd`.`item_id_m`;
 
 -- --------------------------------------------------------
 
@@ -19908,7 +21906,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_kanban_suggestion_v` A
 --
 DROP TABLE IF EXISTS `fp_minmax_demand_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_minmax_demand_v` AS select `mmh`.`plan_name` AS `plan_name`,`mmh`.`org_id` AS `org_id`,`mmh`.`planning_horizon_days` AS `planning_horizon_days`,`org`.`org` AS `org`,`fh`.`forecast` AS `forecast`,`fh`.`description` AS `forecast_description`,`fmd`.`fp_minmax_demand_id` AS `fp_minmax_demand_id`,`fmd`.`plan_id` AS `plan_id`,`fmd`.`item_id_m` AS `item_id_m`,`fmd`.`quantity` AS `quantity`,`fmd`.`demand_item_id_m` AS `demand_item_id_m`,`fmd`.`toplevel_demand_item_id_m` AS `toplevel_demand_item_id_m`,`fmd`.`demand_type` AS `demand_type`,`fmd`.`source` AS `source`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item2`.`item_number` AS `top_level_item_number`,`item2`.`item_description` AS `top_level_item_description`,`item3`.`item_number` AS `demand_item_number`,`item3`.`item_description` AS `demand_item_description`,`fmd`.`created_by` AS `created_by`,`fmd`.`creation_date` AS `creation_date`,`fmd`.`last_update_by` AS `last_update_by`,`fmd`.`last_update_date` AS `last_update_date` from ((((((`fp_minmax_demand` `fmd` left join `fp_minmax_header` `mmh` on((`mmh`.`fp_minmax_header_id` = `fmd`.`plan_id`))) left join `fp_forecast_header` `fh` on((`fh`.`fp_forecast_header_id` = `fmd`.`source`))) left join `item` on((`item`.`item_id_m` = `fmd`.`item_id_m`))) left join `item` `item2` on((`item2`.`item_id_m` = `fmd`.`toplevel_demand_item_id_m`))) left join `item` `item3` on((`item3`.`item_id_m` = `fmd`.`demand_item_id_m`))) left join `org` on((`org`.`org_id` = `mmh`.`org_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fp_minmax_demand_v` AS select `mmh`.`plan_name` AS `plan_name`,`mmh`.`org_id` AS `org_id`,`mmh`.`planning_horizon_days` AS `planning_horizon_days`,`org`.`org` AS `org`,`fh`.`forecast` AS `forecast`,`fh`.`description` AS `forecast_description`,`fmd`.`fp_minmax_demand_id` AS `fp_minmax_demand_id`,`fmd`.`plan_id` AS `plan_id`,`fmd`.`item_id_m` AS `item_id_m`,`fmd`.`quantity` AS `quantity`,`fmd`.`demand_item_id_m` AS `demand_item_id_m`,`fmd`.`toplevel_demand_item_id_m` AS `toplevel_demand_item_id_m`,`fmd`.`demand_type` AS `demand_type`,`fmd`.`source` AS `source`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item2`.`item_number` AS `top_level_item_number`,`item2`.`item_description` AS `top_level_item_description`,`item3`.`item_number` AS `demand_item_number`,`item3`.`item_description` AS `demand_item_description`,`fmd`.`created_by` AS `created_by`,`fmd`.`creation_date` AS `creation_date`,`fmd`.`last_update_by` AS `last_update_by`,`fmd`.`last_update_date` AS `last_update_date` from ((((((`fp_minmax_demand` `fmd` left join `fp_minmax_header` `mmh` on((`mmh`.`fp_minmax_header_id` = `fmd`.`plan_id`))) left join `fp_forecast_header` `fh` on((`fh`.`fp_forecast_header_id` = `fmd`.`source`))) left join `item` on((`item`.`item_id_m` = `fmd`.`item_id_m`))) left join `item` `item2` on((`item2`.`item_id_m` = `fmd`.`toplevel_demand_item_id_m`))) left join `item` `item3` on((`item3`.`item_id_m` = `fmd`.`demand_item_id_m`))) left join `org` on((`org`.`org_id` = `mmh`.`org_id`)));
 
 -- --------------------------------------------------------
 
@@ -19917,7 +21915,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_minmax_demand_v` AS se
 --
 DROP TABLE IF EXISTS `fp_minmax_suggestion_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_minmax_suggestion_v` AS select `mmh`.`plan_name` AS `plan_name`,`mmh`.`org_id` AS `org_id`,`mmh`.`planning_horizon_days` AS `planning_horizon_days`,`org`.`org` AS `org`,`fmd`.`item_id_m` AS `item_id_m`,`item`.`item_number` AS `item_number`,sum(`fmd`.`quantity`) AS `total_demand`,(sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`) AS `avg_daily_demand`,`item`.`saftey_stock_quantity` AS `saftey_stock_quantity`,((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) AS `lead_time`,`item`.`saftey_stock_days` AS `saftey_stock_days`,(((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0)) AS `minimum_quantity`,`item`.`fix_days_supply` AS `fix_days_supply`,if(((`item`.`fix_days_supply` * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) > (((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0))),(`item`.`fix_days_supply` * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)),((((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * 1.5) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0))) AS `maximum_quantity`,ifnull(`item`.`fix_days_supply`,30) AS `multibin_fix_days_supply`,(ceiling((ifnull(((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`),0) / ifnull(`item`.`fix_days_supply`,30))) + 1) AS `minmax_multibin_number`,((((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0)) / ceiling((ifnull(((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`),0) / ifnull(`item`.`fix_days_supply`,30)))) AS `minmax_multibin_size`,((((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0)) + 1) AS `multibin_minmax_quantity`,`fh`.`forecast` AS `forecast`,`fh`.`description` AS `forecast_description`,`fmd`.`fp_minmax_demand_id` AS `fp_minmax_demand_id`,`fmd`.`plan_id` AS `plan_id`,`fmd`.`demand_item_id_m` AS `demand_item_id_m`,`fmd`.`toplevel_demand_item_id_m` AS `toplevel_demand_item_id_m`,`fmd`.`demand_type` AS `demand_type`,`fmd`.`source` AS `source`,`item`.`item_description` AS `item_description`,`item2`.`item_number` AS `top_level_item_number`,`item2`.`item_description` AS `top_level_item_description`,`item3`.`item_number` AS `demand_item_number`,`item3`.`item_description` AS `demand_item_description`,`fmd`.`created_by` AS `created_by`,`fmd`.`creation_date` AS `creation_date`,`fmd`.`last_update_by` AS `last_update_by`,`fmd`.`last_update_date` AS `last_update_date` from ((((((`fp_minmax_demand` `fmd` left join `fp_minmax_header` `mmh` on((`mmh`.`fp_minmax_header_id` = `fmd`.`plan_id`))) left join `fp_forecast_header` `fh` on((`fh`.`fp_forecast_header_id` = `fmd`.`source`))) left join `item` on((`item`.`item_id_m` = `fmd`.`item_id_m`))) left join `item` `item2` on((`item2`.`item_id_m` = `fmd`.`toplevel_demand_item_id_m`))) left join `item` `item3` on((`item3`.`item_id_m` = `fmd`.`demand_item_id_m`))) left join `org` on((`org`.`org_id` = `mmh`.`org_id`))) group by `fmd`.`item_id_m`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fp_minmax_suggestion_v` AS select `mmh`.`plan_name` AS `plan_name`,`mmh`.`org_id` AS `org_id`,`mmh`.`planning_horizon_days` AS `planning_horizon_days`,`org`.`org` AS `org`,`fmd`.`item_id_m` AS `item_id_m`,`item`.`item_number` AS `item_number`,sum(`fmd`.`quantity`) AS `total_demand`,(sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`) AS `avg_daily_demand`,`item`.`saftey_stock_quantity` AS `saftey_stock_quantity`,((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) AS `lead_time`,`item`.`saftey_stock_days` AS `saftey_stock_days`,(((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0)) AS `minimum_quantity`,`item`.`fix_days_supply` AS `fix_days_supply`,if(((`item`.`fix_days_supply` * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) > (((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0))),(`item`.`fix_days_supply` * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)),((((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * 1.5) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0))) AS `maximum_quantity`,ifnull(`item`.`fix_days_supply`,30) AS `multibin_fix_days_supply`,(ceiling((ifnull(((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`),0) / ifnull(`item`.`fix_days_supply`,30))) + 1) AS `minmax_multibin_number`,((((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0)) / ceiling((ifnull(((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`),0) / ifnull(`item`.`fix_days_supply`,30)))) AS `minmax_multibin_size`,((((((`item`.`pre_processing_lt` + `item`.`post_processing_lt`) + `item`.`processing_lt`) + ifnull(`item`.`saftey_stock_days`,0)) * (sum(`fmd`.`quantity`) / `mmh`.`planning_horizon_days`)) + ifnull(`item`.`saftey_stock_quantity`,0)) + 1) AS `multibin_minmax_quantity`,`fh`.`forecast` AS `forecast`,`fh`.`description` AS `forecast_description`,`fmd`.`fp_minmax_demand_id` AS `fp_minmax_demand_id`,`fmd`.`plan_id` AS `plan_id`,`fmd`.`demand_item_id_m` AS `demand_item_id_m`,`fmd`.`toplevel_demand_item_id_m` AS `toplevel_demand_item_id_m`,`fmd`.`demand_type` AS `demand_type`,`fmd`.`source` AS `source`,`item`.`item_description` AS `item_description`,`item2`.`item_number` AS `top_level_item_number`,`item2`.`item_description` AS `top_level_item_description`,`item3`.`item_number` AS `demand_item_number`,`item3`.`item_description` AS `demand_item_description`,`fmd`.`created_by` AS `created_by`,`fmd`.`creation_date` AS `creation_date`,`fmd`.`last_update_by` AS `last_update_by`,`fmd`.`last_update_date` AS `last_update_date` from ((((((`fp_minmax_demand` `fmd` left join `fp_minmax_header` `mmh` on((`mmh`.`fp_minmax_header_id` = `fmd`.`plan_id`))) left join `fp_forecast_header` `fh` on((`fh`.`fp_forecast_header_id` = `fmd`.`source`))) left join `item` on((`item`.`item_id_m` = `fmd`.`item_id_m`))) left join `item` `item2` on((`item2`.`item_id_m` = `fmd`.`toplevel_demand_item_id_m`))) left join `item` `item3` on((`item3`.`item_id_m` = `fmd`.`demand_item_id_m`))) left join `org` on((`org`.`org_id` = `mmh`.`org_id`))) group by `fmd`.`item_id_m`;
 
 -- --------------------------------------------------------
 
@@ -19926,7 +21924,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_minmax_suggestion_v` A
 --
 DROP TABLE IF EXISTS `fp_mrp_demand_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_mrp_demand_v` AS select `fmd`.`fp_mrp_demand_id` AS `fp_mrp_demand_id`,`fmd`.`fp_mrp_header_id` AS `fp_mrp_header_id`,`fmh`.`mrp_name` AS `mrp_name`,`fmd`.`org_id` AS `org_id`,`fmd`.`item_id_m` AS `item_id_m`,`fmd`.`demand_date` AS `demand_date`,`fmd`.`quantity` AS `quantity`,`fmd`.`demand_item_id_m` AS `demand_item_id_m`,`fmd`.`toplevel_demand_item_id_m` AS `toplevel_demand_item_id_m`,`fmd`.`source_type` AS `source_type`,`fmd`.`primary_source_type` AS `primary_source_type`,`fmd`.`source_header_id` AS `source_header_id`,`fmd`.`source_line_id` AS `source_line_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`planner` AS `planner`,`item`.`product_line` AS `product_line`,`cic`.`standard_cost` AS `standard_cost`,`cic`.`sales_price` AS `sales_price`,`cic`.`purchase_price` AS `purchase_price` from (((`fp_mrp_demand` `fmd` left join `item` on(((`item`.`item_id_m` = `fmd`.`item_id_m`) and (`item`.`org_id` = `fmd`.`org_id`)))) left join `cst_item_cost_v` `cic` on(((`cic`.`item_id_m` = `fmd`.`item_id_m`) and (`cic`.`org_id` = `cic`.`org_id`) and (`cic`.`bom_cost_type` = 'FROZEN')))) join `fp_mrp_header` `fmh`) where (`fmh`.`fp_mrp_header_id` = `fmd`.`fp_mrp_header_id`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fp_mrp_demand_v` AS select `fmd`.`fp_mrp_demand_id` AS `fp_mrp_demand_id`,`fmd`.`fp_mrp_header_id` AS `fp_mrp_header_id`,`fmh`.`mrp_name` AS `mrp_name`,`fmd`.`org_id` AS `org_id`,`fmd`.`item_id_m` AS `item_id_m`,`fmd`.`demand_date` AS `demand_date`,`fmd`.`quantity` AS `quantity`,`fmd`.`demand_item_id_m` AS `demand_item_id_m`,`fmd`.`toplevel_demand_item_id_m` AS `toplevel_demand_item_id_m`,`fmd`.`source_type` AS `source_type`,`fmd`.`primary_source_type` AS `primary_source_type`,`fmd`.`source_header_id` AS `source_header_id`,`fmd`.`source_line_id` AS `source_line_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`planner` AS `planner`,`item`.`product_line` AS `product_line`,`cic`.`standard_cost` AS `standard_cost`,`cic`.`sales_price` AS `sales_price`,`cic`.`purchase_price` AS `purchase_price` from (((`fp_mrp_demand` `fmd` left join `item` on(((`item`.`item_id_m` = `fmd`.`item_id_m`) and (`item`.`org_id` = `fmd`.`org_id`)))) left join `cst_item_cost_v` `cic` on(((`cic`.`item_id_m` = `fmd`.`item_id_m`) and (`cic`.`org_id` = `cic`.`org_id`) and (`cic`.`bom_cost_type` = 'FROZEN')))) join `fp_mrp_header` `fmh`) where (`fmh`.`fp_mrp_header_id` = `fmd`.`fp_mrp_header_id`);
 
 -- --------------------------------------------------------
 
@@ -19935,7 +21933,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_mrp_demand_v` AS selec
 --
 DROP TABLE IF EXISTS `fp_mrp_existing_supply_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_mrp_existing_supply_v` AS select `item`.`item_id_m` AS `item_id_m`,'PO' AS `document_type`,(`pd`.`quantity` - `pd`.`received_quantity`) AS `quantity`,ifnull(`pd`.`promise_date`,`pd`.`need_by_date`) AS `supply_date`,`pd`.`po_detail_id` AS `document_id` from (((`item` join `po_line` `pl`) join `po_detail` `pd`) join `po_header` `ph`) where ((`pl`.`item_id_m` = `item`.`item_id_m`) and (`pd`.`po_line_id` = `pl`.`po_line_id`) and (`pd`.`po_header_id` = `ph`.`po_header_id`)) union select `item`.`item_id_m` AS `item_id_m`,'Requisition' AS `document_type`,`prd`.`quantity` AS `quantity`,ifnull(`prd`.`promise_date`,`prd`.`need_by_date`) AS `supply_date`,`prd`.`po_requisition_detail_id` AS `document_id` from (((`item` join `po_requisition_line` `prl`) join `po_requisition_detail` `prd`) join `po_requisition_header` `prh`) where ((`prl`.`item_id_m` = `item`.`item_id_m`) and (`prd`.`po_requisition_line_id` = `prl`.`po_requisition_line_id`) and (`prd`.`po_requisition_header_id` = `prh`.`po_requisition_header_id`) and isnull(`prd`.`order_number`)) union select `item`.`item_id_m` AS `item_id_m`,'Onhand' AS `document_type`,sum(`oh`.`onhand`) AS `quantity`,curdate() AS `supply_date`,`oh`.`onhand_id` AS `document_id` from (`onhand` `oh` join `item`) where (`oh`.`item_id_m` = `item`.`item_id_m`) group by `oh`.`item_id_m` union select `item`.`item_id_m` AS `item_id_m`,'WO' AS `document_type`,((`wwh`.`nettable_quantity` - ifnull(`wwh`.`completed_quantity`,0)) - ifnull(`wwh`.`scrapped_quantity`,0)) AS `quantity`,`wwh`.`completion_date` AS `supply_date`,`wwh`.`wip_wo_header_id` AS `document_id` from (`wip_wo_header` `wwh` join `item`) where (`wwh`.`item_id_m` = `item`.`item_id_m`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fp_mrp_existing_supply_v` AS select `item`.`item_id_m` AS `item_id_m`,'PO' AS `document_type`,(`pd`.`quantity` - `pd`.`received_quantity`) AS `quantity`,ifnull(`pd`.`promise_date`,`pd`.`need_by_date`) AS `supply_date`,`pd`.`po_detail_id` AS `document_id` from (((`item` join `po_line` `pl`) join `po_detail` `pd`) join `po_header` `ph`) where ((`pl`.`item_id_m` = `item`.`item_id_m`) and (`pd`.`po_line_id` = `pl`.`po_line_id`) and (`pd`.`po_header_id` = `ph`.`po_header_id`)) union select `item`.`item_id_m` AS `item_id_m`,'Requisition' AS `document_type`,`prd`.`quantity` AS `quantity`,ifnull(`prd`.`promise_date`,`prd`.`need_by_date`) AS `supply_date`,`prd`.`po_requisition_detail_id` AS `document_id` from (((`item` join `po_requisition_line` `prl`) join `po_requisition_detail` `prd`) join `po_requisition_header` `prh`) where ((`prl`.`item_id_m` = `item`.`item_id_m`) and (`prd`.`po_requisition_line_id` = `prl`.`po_requisition_line_id`) and (`prd`.`po_requisition_header_id` = `prh`.`po_requisition_header_id`) and isnull(`prd`.`order_number`)) union select `item`.`item_id_m` AS `item_id_m`,'Onhand' AS `document_type`,sum(`oh`.`onhand`) AS `quantity`,curdate() AS `supply_date`,`oh`.`onhand_id` AS `document_id` from (`onhand` `oh` join `item`) where (`oh`.`item_id_m` = `item`.`item_id_m`) group by `oh`.`item_id_m` union select `item`.`item_id_m` AS `item_id_m`,'WO' AS `document_type`,((`wwh`.`nettable_quantity` - ifnull(`wwh`.`completed_quantity`,0)) - ifnull(`wwh`.`scrapped_quantity`,0)) AS `quantity`,`wwh`.`completion_date` AS `supply_date`,`wwh`.`wip_wo_header_id` AS `document_id` from (`wip_wo_header` `wwh` join `item`) where (`wwh`.`item_id_m` = `item`.`item_id_m`);
 
 -- --------------------------------------------------------
 
@@ -19944,7 +21942,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_mrp_existing_supply_v`
 --
 DROP TABLE IF EXISTS `fp_mrp_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_mrp_v` AS select `fmh`.`mrp_name` AS `mrp_name`,`fmh`.`org_id` AS `org_id`,`org`.`org` AS `org`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item2`.`item_number` AS `demand_item_number`,`item2`.`item_description` AS `demand_item_description`,`item3`.`item_number` AS `toplevel_demand_item_number`,`item3`.`item_description` AS `toplevel_demand_item_description`,`item`.`sourcing_rule_id` AS `sourcing_rule_id`,`fmd`.`fp_mrp_planned_order_id` AS `fp_mrp_planned_order_id`,`fmd`.`fp_mrp_header_id` AS `fp_mrp_header_id`,`fmd`.`order_type` AS `order_type`,`fmd`.`order_action` AS `order_action`,`fmd`.`item_id_m` AS `item_id_m`,`fmd`.`quantity` AS `quantity`,`fmd`.`need_by_date` AS `need_by_date`,`fmd`.`supplier_id` AS `supplier_id`,`fmd`.`supplier_site_id` AS `supplier_site_id`,`fmd`.`demand_item_id_m` AS `demand_item_id_m`,`fmd`.`toplevel_demand_item_id_m` AS `toplevel_demand_item_id_m`,`fmd`.`source_type` AS `source_type`,`fmd`.`primary_source_type` AS `primary_source_type`,`fmd`.`source_header_id` AS `source_header_id`,`fmd`.`source_line_id` AS `source_line_id`,`ssh`.`so_number` AS `so_number`,`ffh`.`forecast` AS `forecast`,`soline`.`line_number` AS `sales_order_line` from ((((((((`fp_mrp_planned_order` `fmd` left join `fp_mrp_header` `fmh` on((`fmh`.`fp_mrp_header_id` = `fmd`.`fp_mrp_header_id`))) left join `item` on((`item`.`item_id_m` = `fmd`.`item_id_m`))) left join `item` `item2` on((`item2`.`item_id_m` = `fmd`.`demand_item_id_m`))) left join `item` `item3` on((`item3`.`item_id_m` = `fmd`.`toplevel_demand_item_id_m`))) left join `sd_so_header` `ssh` on(((`ssh`.`sd_so_header_id` = `fmd`.`source_header_id`) and (`fmd`.`primary_source_type` = 'Sales_Order')))) left join `fp_forecast_header` `ffh` on(((`ffh`.`fp_forecast_header_id` = `fmd`.`source_header_id`) and (`fmd`.`primary_source_type` = 'Forecast')))) left join `sd_so_line` `soline` on(((`soline`.`sd_so_line_id` = `fmd`.`source_line_id`) and (`fmd`.`primary_source_type` = 'Sales_Order')))) left join `org` on((`org`.`org_id` = `fmh`.`org_id`))) order by `item`.`item_number`,`fmd`.`need_by_date`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `fp_mrp_v` AS select `fmh`.`mrp_name` AS `mrp_name`,`fmh`.`org_id` AS `org_id`,`org`.`org` AS `org`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item2`.`item_number` AS `demand_item_number`,`item2`.`item_description` AS `demand_item_description`,`item3`.`item_number` AS `toplevel_demand_item_number`,`item3`.`item_description` AS `toplevel_demand_item_description`,`item`.`sourcing_rule_id` AS `sourcing_rule_id`,`fmd`.`fp_mrp_planned_order_id` AS `fp_mrp_planned_order_id`,`fmd`.`fp_mrp_header_id` AS `fp_mrp_header_id`,`fmd`.`order_type` AS `order_type`,`fmd`.`order_action` AS `order_action`,`fmd`.`item_id_m` AS `item_id_m`,`fmd`.`quantity` AS `quantity`,`fmd`.`need_by_date` AS `need_by_date`,`fmd`.`supplier_id` AS `supplier_id`,`fmd`.`supplier_site_id` AS `supplier_site_id`,`fmd`.`demand_item_id_m` AS `demand_item_id_m`,`fmd`.`toplevel_demand_item_id_m` AS `toplevel_demand_item_id_m`,`fmd`.`source_type` AS `source_type`,`fmd`.`primary_source_type` AS `primary_source_type`,`fmd`.`source_header_id` AS `source_header_id`,`fmd`.`source_line_id` AS `source_line_id`,`ssh`.`so_number` AS `so_number`,`ffh`.`forecast` AS `forecast`,`soline`.`line_number` AS `sales_order_line` from ((((((((`fp_mrp_planned_order` `fmd` left join `fp_mrp_header` `fmh` on((`fmh`.`fp_mrp_header_id` = `fmd`.`fp_mrp_header_id`))) left join `item` on((`item`.`item_id_m` = `fmd`.`item_id_m`))) left join `item` `item2` on((`item2`.`item_id_m` = `fmd`.`demand_item_id_m`))) left join `item` `item3` on((`item3`.`item_id_m` = `fmd`.`toplevel_demand_item_id_m`))) left join `sd_so_header` `ssh` on(((`ssh`.`sd_so_header_id` = `fmd`.`source_header_id`) and (`fmd`.`primary_source_type` = 'Sales_Order')))) left join `fp_forecast_header` `ffh` on(((`ffh`.`fp_forecast_header_id` = `fmd`.`source_header_id`) and (`fmd`.`primary_source_type` = 'Forecast')))) left join `sd_so_line` `soline` on(((`soline`.`sd_so_line_id` = `fmd`.`source_line_id`) and (`fmd`.`primary_source_type` = 'Sales_Order')))) left join `org` on((`org`.`org_id` = `fmh`.`org_id`))) order by `item`.`item_number`,`fmd`.`need_by_date`;
 
 -- --------------------------------------------------------
 
@@ -19953,7 +21951,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `fp_mrp_v` AS select `fmh`
 --
 DROP TABLE IF EXISTS `gl_balance_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `gl_balance_v` AS select `gp`.`period_name` AS `period_name`,`gp`.`gl_period_id` AS `gl_period_id`,`cc`.`combination` AS `combination`,`cc`.`description` AS `description`,`gb`.`gl_balance_id` AS `gl_balance_id`,`gb`.`ledger_id` AS `ledger_id`,`gb`.`coa_combination_id` AS `coa_combination_id`,`gb`.`period_id` AS `period_id`,`gb`.`balance_type` AS `balance_type`,`gb`.`period_net_dr` AS `period_net_dr`,`gb`.`period_net_cr` AS `period_net_cr`,`gb`.`begin_balance_dr` AS `begin_balance_dr`,`gb`.`begin_balance_cr` AS `begin_balance_cr`,`gb`.`last_update_by` AS `last_update_by`,`gb`.`last_update_date` AS `last_update_date`,`cc`.`field1` AS `field1`,`cc`.`field2` AS `field2`,`cc`.`field3` AS `field3`,`cc`.`field4` AS `field4`,`cc`.`field5` AS `field5`,`cc`.`field6` AS `field6`,`cc`.`field7` AS `field7`,`cc`.`field8` AS `field8` from ((`gl_balance` `gb` left join `gl_period` `gp` on((`gp`.`gl_period_id` = `gb`.`period_id`))) left join `coa_combination` `cc` on((`cc`.`coa_combination_id` = `gb`.`coa_combination_id`))) order by `gp`.`gl_period_id` desc;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `gl_balance_v` AS select `gp`.`period_name` AS `period_name`,`gp`.`gl_period_id` AS `gl_period_id`,`cc`.`combination` AS `combination`,`cc`.`description` AS `description`,`gb`.`gl_balance_id` AS `gl_balance_id`,`gb`.`ledger_id` AS `ledger_id`,`gb`.`coa_combination_id` AS `coa_combination_id`,`gb`.`period_id` AS `period_id`,`gb`.`balance_type` AS `balance_type`,`gb`.`period_net_dr` AS `period_net_dr`,`gb`.`period_net_cr` AS `period_net_cr`,`gb`.`begin_balance_dr` AS `begin_balance_dr`,`gb`.`begin_balance_cr` AS `begin_balance_cr`,`gb`.`last_update_by` AS `last_update_by`,`gb`.`last_update_date` AS `last_update_date`,`cc`.`field1` AS `field1`,`cc`.`field2` AS `field2`,`cc`.`field3` AS `field3`,`cc`.`field4` AS `field4`,`cc`.`field5` AS `field5`,`cc`.`field6` AS `field6`,`cc`.`field7` AS `field7`,`cc`.`field8` AS `field8` from ((`gl_balance` `gb` left join `gl_period` `gp` on((`gp`.`gl_period_id` = `gb`.`period_id`))) left join `coa_combination` `cc` on((`cc`.`coa_combination_id` = `gb`.`coa_combination_id`))) order by `gp`.`gl_period_id` desc;
 
 -- --------------------------------------------------------
 
@@ -19962,7 +21960,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `gl_balance_v` AS select `
 --
 DROP TABLE IF EXISTS `gl_journal_line_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `gl_journal_line_v` AS select `cc`.`combination` AS `combination`,`gjl`.`code_combination_id` AS `code_combination_id`,`gp`.`period_name` AS `period_name`,`gjl`.`total_cr` AS `total_cr`,`gjl`.`total_dr` AS `total_dr`,`gjl`.`total_ac_dr` AS `total_ac_dr`,`gjl`.`total_ac_cr` AS `total_ac_cr`,`cc`.`coa_id` AS `coa_id`,`gjh`.`ledger_id` AS `ledger_id`,`cc`.`description` AS `combination_description`,`gjl`.`gl_journal_line_id` AS `gl_journal_line_id`,`gjl`.`status` AS `status`,`gjl`.`gl_journal_header_id` AS `gl_journal_header_id`,`gjl`.`line_num` AS `line_num`,`gjl`.`line_type` AS `line_type`,`gjl`.`description` AS `line_description`,`gjl`.`reference_type` AS `reference_type`,`gjl`.`reference_key_name` AS `reference_key_name`,`gjl`.`reference_key_value` AS `reference_key_value`,`cc`.`coa_structure_id` AS `coa_structure_id`,`cc`.`field1` AS `field1`,`cc`.`field2` AS `field2`,`cc`.`field3` AS `field3`,`cc`.`field4` AS `field4`,`cc`.`field5` AS `field5`,`cc`.`field6` AS `field6`,`cc`.`field7` AS `field7`,`cc`.`field8` AS `field8`,`gjh`.`balance_type` AS `balance_type`,`gjh`.`post_date` AS `post_date`,`gp`.`gl_period_id` AS `gl_period_id`,`gjl`.`created_by` AS `created_by`,`gjl`.`creation_date` AS `creation_date`,`gjl`.`last_update_by` AS `last_update_by`,`gjl`.`last_update_date` AS `last_update_date`,`gjh`.`reference_key_name` AS `reference_key_name_h`,`gjh`.`reference_key_value` AS `reference_key_value_h` from (((`gl_journal_line` `gjl` left join `gl_journal_header` `gjh` on((`gjl`.`gl_journal_header_id` = `gjh`.`gl_journal_header_id`))) left join `gl_period` `gp` on((`gp`.`gl_period_id` = `gjh`.`period_id`))) left join `coa_combination` `cc` on((`gjl`.`code_combination_id` = `cc`.`coa_combination_id`))) order by `gp`.`gl_period_id` desc,`cc`.`combination` desc;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `gl_journal_line_v` AS select `cc`.`combination` AS `combination`,`gjl`.`code_combination_id` AS `code_combination_id`,`gp`.`period_name` AS `period_name`,`gjl`.`total_cr` AS `total_cr`,`gjl`.`total_dr` AS `total_dr`,`gjl`.`total_ac_dr` AS `total_ac_dr`,`gjl`.`total_ac_cr` AS `total_ac_cr`,`cc`.`coa_id` AS `coa_id`,`gjh`.`ledger_id` AS `ledger_id`,`cc`.`description` AS `combination_description`,`gjl`.`gl_journal_line_id` AS `gl_journal_line_id`,`gjl`.`status` AS `status`,`gjl`.`gl_journal_header_id` AS `gl_journal_header_id`,`gjl`.`line_num` AS `line_num`,`gjl`.`line_type` AS `line_type`,`gjl`.`description` AS `line_description`,`gjl`.`reference_type` AS `reference_type`,`gjl`.`reference_key_name` AS `reference_key_name`,`gjl`.`reference_key_value` AS `reference_key_value`,`cc`.`coa_structure_id` AS `coa_structure_id`,`cc`.`field1` AS `field1`,`cc`.`field2` AS `field2`,`cc`.`field3` AS `field3`,`cc`.`field4` AS `field4`,`cc`.`field5` AS `field5`,`cc`.`field6` AS `field6`,`cc`.`field7` AS `field7`,`cc`.`field8` AS `field8`,`gjh`.`balance_type` AS `balance_type`,`gjh`.`post_date` AS `post_date`,`gp`.`gl_period_id` AS `gl_period_id`,`gjl`.`created_by` AS `created_by`,`gjl`.`creation_date` AS `creation_date`,`gjl`.`last_update_by` AS `last_update_by`,`gjl`.`last_update_date` AS `last_update_date`,`gjh`.`reference_key_name` AS `reference_key_name_h`,`gjh`.`reference_key_value` AS `reference_key_value_h` from (((`gl_journal_line` `gjl` left join `gl_journal_header` `gjh` on((`gjl`.`gl_journal_header_id` = `gjh`.`gl_journal_header_id`))) left join `gl_period` `gp` on((`gp`.`gl_period_id` = `gjh`.`period_id`))) left join `coa_combination` `cc` on((`gjl`.`code_combination_id` = `cc`.`coa_combination_id`))) order by `gp`.`gl_period_id` desc,`cc`.`combination` desc;
 
 -- --------------------------------------------------------
 
@@ -19971,7 +21969,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `gl_journal_line_v` AS sel
 --
 DROP TABLE IF EXISTS `gl_unposted_balance_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `gl_unposted_balance_v` AS select `cc`.`combination` AS `combination`,`gjl`.`code_combination_id` AS `code_combination_id`,`gp`.`period_name` AS `period_name`,`cc`.`coa_id` AS `coa_id`,sum(`gjl`.`total_cr`) AS `total_cr`,sum(`gjl`.`total_dr`) AS `total_dr`,sum(`gjl`.`total_ac_dr`) AS `total_ac_dr`,sum(`gjl`.`total_ac_cr`) AS `total_ac_cr`,`gjh`.`ledger_id` AS `ledger_id`,`cc`.`description` AS `description`,`gjl`.`gl_journal_line_id` AS `gl_journal_line_id`,`gjl`.`gl_journal_header_id` AS `gl_journal_header_id`,`gjl`.`line_num` AS `line_num`,`gjl`.`line_type` AS `line_type`,`gjl`.`description` AS `line_description`,`gjl`.`reference_type` AS `reference_type`,`gjl`.`reference_key_name` AS `reference_key_name`,`gjl`.`reference_key_value` AS `reference_key_value`,`cc`.`coa_structure_id` AS `coa_structure_id`,`cc`.`field1` AS `field1`,`cc`.`field2` AS `field2`,`cc`.`field3` AS `field3`,`cc`.`field4` AS `field4`,`cc`.`field5` AS `field5`,`cc`.`field6` AS `field6`,`cc`.`field7` AS `field7`,`cc`.`field8` AS `field8`,`gjh`.`balance_type` AS `balance_type`,`gjh`.`post_date` AS `post_date`,`gp`.`gl_period_id` AS `gl_period_id` from (((`gl_journal_line` `gjl` left join `gl_journal_header` `gjh` on((`gjl`.`gl_journal_header_id` = `gjh`.`gl_journal_header_id`))) left join `gl_period` `gp` on((`gp`.`gl_period_id` = `gjh`.`period_id`))) left join `coa_combination` `cc` on((`gjl`.`code_combination_id` = `cc`.`coa_combination_id`))) where (`gjl`.`status` = 'U') group by `gjl`.`code_combination_id`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `gl_unposted_balance_v` AS select `cc`.`combination` AS `combination`,`gjl`.`code_combination_id` AS `code_combination_id`,`gp`.`period_name` AS `period_name`,`cc`.`coa_id` AS `coa_id`,sum(`gjl`.`total_cr`) AS `total_cr`,sum(`gjl`.`total_dr`) AS `total_dr`,sum(`gjl`.`total_ac_dr`) AS `total_ac_dr`,sum(`gjl`.`total_ac_cr`) AS `total_ac_cr`,`gjh`.`ledger_id` AS `ledger_id`,`cc`.`description` AS `description`,`gjl`.`gl_journal_line_id` AS `gl_journal_line_id`,`gjl`.`gl_journal_header_id` AS `gl_journal_header_id`,`gjl`.`line_num` AS `line_num`,`gjl`.`line_type` AS `line_type`,`gjl`.`description` AS `line_description`,`gjl`.`reference_type` AS `reference_type`,`gjl`.`reference_key_name` AS `reference_key_name`,`gjl`.`reference_key_value` AS `reference_key_value`,`cc`.`coa_structure_id` AS `coa_structure_id`,`cc`.`field1` AS `field1`,`cc`.`field2` AS `field2`,`cc`.`field3` AS `field3`,`cc`.`field4` AS `field4`,`cc`.`field5` AS `field5`,`cc`.`field6` AS `field6`,`cc`.`field7` AS `field7`,`cc`.`field8` AS `field8`,`gjh`.`balance_type` AS `balance_type`,`gjh`.`post_date` AS `post_date`,`gp`.`gl_period_id` AS `gl_period_id` from (((`gl_journal_line` `gjl` left join `gl_journal_header` `gjh` on((`gjl`.`gl_journal_header_id` = `gjh`.`gl_journal_header_id`))) left join `gl_period` `gp` on((`gp`.`gl_period_id` = `gjh`.`period_id`))) left join `coa_combination` `cc` on((`gjl`.`code_combination_id` = `cc`.`coa_combination_id`))) where (`gjl`.`status` = 'U') group by `gjl`.`code_combination_id`;
 
 -- --------------------------------------------------------
 
@@ -19980,7 +21978,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `gl_unposted_balance_v` AS
 --
 DROP TABLE IF EXISTS `gl_unposted_journal_lines_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `gl_unposted_journal_lines_v` AS select `cc`.`combination` AS `combination`,`gjl`.`code_combination_id` AS `code_combination_id`,`gp`.`period_name` AS `period_name`,`cc`.`coa_id` AS `coa_id`,sum(`gjl`.`total_cr`) AS `sum_total_cr`,sum(`gjl`.`total_dr`) AS `sum_total_dr`,sum(`gjl`.`total_ac_dr`) AS `sum_total_ac_dr`,sum(`gjl`.`total_ac_cr`) AS `sum_total_ac_cr`,`gjh`.`ledger_id` AS `ledger_id`,`cc`.`description` AS `combination_description`,`gjl`.`gl_journal_line_id` AS `gl_journal_line_id`,`gjl`.`status` AS `status`,`gjl`.`gl_journal_header_id` AS `gl_journal_header_id`,`gjl`.`line_num` AS `line_num`,`gjl`.`line_type` AS `line_type`,`gjl`.`description` AS `line_description`,`gjl`.`reference_type` AS `reference_type`,`gjl`.`reference_key_name` AS `reference_key_name`,`gjl`.`reference_key_value` AS `reference_key_value`,`cc`.`coa_structure_id` AS `coa_structure_id`,`cc`.`field1` AS `field1`,`cc`.`field2` AS `field2`,`cc`.`field3` AS `field3`,`cc`.`field4` AS `field4`,`cc`.`field5` AS `field5`,`cc`.`field6` AS `field6`,`cc`.`field7` AS `field7`,`cc`.`field8` AS `field8`,`gjh`.`balance_type` AS `balance_type`,`gjh`.`post_date` AS `post_date`,`gp`.`gl_period_id` AS `gl_period_id`,`gjl`.`created_by` AS `created_by`,`gjl`.`creation_date` AS `creation_date`,`gjl`.`last_update_by` AS `last_update_by`,`gjl`.`last_update_date` AS `last_update_date`,`gjh`.`reference_key_name` AS `reference_key_name_h`,`gjh`.`reference_key_value` AS `reference_key_value_h` from (((`gl_journal_line` `gjl` left join `gl_journal_header` `gjh` on((`gjl`.`gl_journal_header_id` = `gjh`.`gl_journal_header_id`))) left join `gl_period` `gp` on((`gp`.`gl_period_id` = `gjh`.`period_id`))) left join `coa_combination` `cc` on((`gjl`.`code_combination_id` = `cc`.`coa_combination_id`))) group by `gjl`.`code_combination_id`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `gl_unposted_journal_lines_v` AS select `cc`.`combination` AS `combination`,`gjl`.`code_combination_id` AS `code_combination_id`,`gp`.`period_name` AS `period_name`,`cc`.`coa_id` AS `coa_id`,sum(`gjl`.`total_cr`) AS `sum_total_cr`,sum(`gjl`.`total_dr`) AS `sum_total_dr`,sum(`gjl`.`total_ac_dr`) AS `sum_total_ac_dr`,sum(`gjl`.`total_ac_cr`) AS `sum_total_ac_cr`,`gjh`.`ledger_id` AS `ledger_id`,`cc`.`description` AS `combination_description`,`gjl`.`gl_journal_line_id` AS `gl_journal_line_id`,`gjl`.`status` AS `status`,`gjl`.`gl_journal_header_id` AS `gl_journal_header_id`,`gjl`.`line_num` AS `line_num`,`gjl`.`line_type` AS `line_type`,`gjl`.`description` AS `line_description`,`gjl`.`reference_type` AS `reference_type`,`gjl`.`reference_key_name` AS `reference_key_name`,`gjl`.`reference_key_value` AS `reference_key_value`,`cc`.`coa_structure_id` AS `coa_structure_id`,`cc`.`field1` AS `field1`,`cc`.`field2` AS `field2`,`cc`.`field3` AS `field3`,`cc`.`field4` AS `field4`,`cc`.`field5` AS `field5`,`cc`.`field6` AS `field6`,`cc`.`field7` AS `field7`,`cc`.`field8` AS `field8`,`gjh`.`balance_type` AS `balance_type`,`gjh`.`post_date` AS `post_date`,`gp`.`gl_period_id` AS `gl_period_id`,`gjl`.`created_by` AS `created_by`,`gjl`.`creation_date` AS `creation_date`,`gjl`.`last_update_by` AS `last_update_by`,`gjl`.`last_update_date` AS `last_update_date`,`gjh`.`reference_key_name` AS `reference_key_name_h`,`gjh`.`reference_key_value` AS `reference_key_value_h` from (((`gl_journal_line` `gjl` left join `gl_journal_header` `gjh` on((`gjl`.`gl_journal_header_id` = `gjh`.`gl_journal_header_id`))) left join `gl_period` `gp` on((`gp`.`gl_period_id` = `gjh`.`period_id`))) left join `coa_combination` `cc` on((`gjl`.`code_combination_id` = `cc`.`coa_combination_id`))) group by `gjl`.`code_combination_id`;
 
 -- --------------------------------------------------------
 
@@ -19989,7 +21987,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `gl_unposted_journal_lines
 --
 DROP TABLE IF EXISTS `hr_employee_position_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `hr_employee_position_v` AS select `user`.`user_id` AS `user_id`,`user`.`username` AS `username`,`user`.`first_name` AS `first_name`,`user`.`last_name` AS `last_name`,`user`.`email` AS `email`,`user`.`hr_employee_id` AS `hr_employee_id`,`user`.`status` AS `status`,`he`.`identification_id` AS `identification_id`,`he`.`start_date` AS `emp_start_date`,`he`.`citizen_number` AS `citizen_number`,`he`.`first_name` AS `emp_first_name`,`he`.`last_name` AS `emp_last_name`,`he`.`phone` AS `phone`,`he`.`email` AS `emp_email`,`he`.`gender` AS `gender`,`he`.`person_type` AS `person_type`,`he`.`org_id` AS `org_id`,`he`.`job_id` AS `job_id`,`he`.`position_id` AS `position_id`,`he`.`expense_ac_id` AS `expense_ac_id`,`he`.`supervisor_employee_id` AS `supervisor_employee_id`,`hp`.`position_name` AS `position_name`,`he`.`org_id` AS `emp_org_id`,`hala`.`hr_approval_limit_header_id` AS `hr_approval_limit_header_id`,`hala`.`document_type` AS `document_type`,`hala`.`start_date` AS `limit_start_date`,`hall`.`limit_type` AS `limit_type`,`hall`.`limit_range_low` AS `limit_range_low`,`hall`.`limit_range_high` AS `limit_range_high`,`hall`.`amount_limit` AS `amount_limit`,`hall`.`limit_object` AS `limit_object`,`halh`.`bu_org_id` AS `bu_org_id`,`org_v`.`currency_code` AS `currency_code` from (((((((`user` left join `hr_employee` `he` on((`he`.`hr_employee_id` = `user`.`hr_employee_id`))) left join `hr_position` `hp` on((`hp`.`hr_position_id` = `he`.`position_id`))) left join `hr_approval_limit_assignment` `hala` on((`he`.`position_id` = `hala`.`position_id`))) left join `hr_approval_limit_line` `hall` on((`hala`.`hr_approval_limit_header_id` = `hall`.`hr_approval_limit_header_id`))) left join `hr_approval_object` `hao` on((`hao`.`hr_approval_object_id` = `hall`.`limit_object`))) left join `hr_approval_limit_header` `halh` on((`hall`.`hr_approval_limit_header_id` = `halh`.`hr_approval_limit_header_id`))) left join `org_v` on((`org_v`.`org_id` = `halh`.`bu_org_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `hr_employee_position_v` AS select `user`.`user_id` AS `user_id`,`user`.`username` AS `username`,`user`.`first_name` AS `first_name`,`user`.`last_name` AS `last_name`,`user`.`email` AS `email`,`user`.`hr_employee_id` AS `hr_employee_id`,`user`.`status` AS `status`,`he`.`identification_id` AS `identification_id`,`he`.`start_date` AS `emp_start_date`,`he`.`citizen_number` AS `citizen_number`,`he`.`first_name` AS `emp_first_name`,`he`.`last_name` AS `emp_last_name`,`he`.`phone` AS `phone`,`he`.`email` AS `emp_email`,`he`.`gender` AS `gender`,`he`.`person_type` AS `person_type`,`he`.`org_id` AS `org_id`,`he`.`job_id` AS `job_id`,`he`.`position_id` AS `position_id`,`he`.`expense_ac_id` AS `expense_ac_id`,`he`.`supervisor_employee_id` AS `supervisor_employee_id`,`hp`.`position_name` AS `position_name`,`he`.`org_id` AS `emp_org_id`,`hala`.`hr_approval_limit_header_id` AS `hr_approval_limit_header_id`,`hala`.`document_type` AS `document_type`,`hala`.`start_date` AS `limit_start_date`,`hall`.`limit_type` AS `limit_type`,`hall`.`limit_range_low` AS `limit_range_low`,`hall`.`limit_range_high` AS `limit_range_high`,`hall`.`amount_limit` AS `amount_limit`,`hall`.`limit_object` AS `limit_object`,`halh`.`bu_org_id` AS `bu_org_id`,`org_v`.`currency_code` AS `currency_code` from (((((((`user` left join `hr_employee` `he` on((`he`.`hr_employee_id` = `user`.`hr_employee_id`))) left join `hr_position` `hp` on((`hp`.`hr_position_id` = `he`.`position_id`))) left join `hr_approval_limit_assignment` `hala` on((`he`.`position_id` = `hala`.`position_id`))) left join `hr_approval_limit_line` `hall` on((`hala`.`hr_approval_limit_header_id` = `hall`.`hr_approval_limit_header_id`))) left join `hr_approval_object` `hao` on((`hao`.`hr_approval_object_id` = `hall`.`limit_object`))) left join `hr_approval_limit_header` `halh` on((`hall`.`hr_approval_limit_header_id` = `halh`.`hr_approval_limit_header_id`))) left join `org_v` on((`org_v`.`org_id` = `halh`.`bu_org_id`)));
 
 -- --------------------------------------------------------
 
@@ -19998,7 +21996,16 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `hr_employee_position_v` A
 --
 DROP TABLE IF EXISTS `hr_employee_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `hr_employee_v` AS select `user`.`user_id` AS `user_id`,`user`.`username` AS `username`,`user`.`first_name` AS `first_name`,`user`.`last_name` AS `last_name`,`user`.`email` AS `email`,`user`.`hr_employee_id` AS `hr_employee_id`,`user`.`status` AS `status`,`he`.`identification_id` AS `identification_id`,`he`.`start_date` AS `emp_start_date`,`he`.`citizen_number` AS `citizen_number`,`he`.`first_name` AS `emp_first_name`,`he`.`last_name` AS `emp_last_name`,`he`.`phone` AS `phone`,concat(`he`.`last_name`,', ',`he`.`first_name`) AS `employee_name`,`he`.`email` AS `emp_email`,`he`.`gender` AS `gender`,`he`.`person_type` AS `person_type`,`he`.`org_id` AS `org_id`,`he`.`job_id` AS `job_id`,`he`.`position_id` AS `position_id`,`he`.`expense_ac_id` AS `expense_ac_id`,`he`.`supervisor_employee_id` AS `supervisor_employee_id`,`org_v`.`currency_code` AS `currency_code`,`org_v`.`org` AS `org` from ((`hr_employee` `he` left join `user` on((`he`.`hr_employee_id` = `user`.`hr_employee_id`))) left join `org_v` on((`org_v`.`org_id` = `he`.`org_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `hr_employee_v` AS select `user`.`user_id` AS `user_id`,`user`.`username` AS `username`,`user`.`first_name` AS `first_name`,`user`.`last_name` AS `last_name`,`user`.`email` AS `email`,`user`.`hr_employee_id` AS `hr_employee_id`,`user`.`status` AS `status`,`he`.`identification_id` AS `identification_id`,`he`.`start_date` AS `emp_start_date`,`he`.`citizen_number` AS `citizen_number`,`he`.`first_name` AS `emp_first_name`,`he`.`last_name` AS `emp_last_name`,`he`.`phone` AS `phone`,concat(`he`.`last_name`,', ',`he`.`first_name`) AS `employee_name`,`he`.`email` AS `emp_email`,`he`.`gender` AS `gender`,`he`.`person_type` AS `person_type`,`he`.`org_id` AS `org_id`,`he`.`job_id` AS `job_id`,`he`.`position_id` AS `position_id`,`he`.`expense_ac_id` AS `expense_ac_id`,`he`.`supervisor_employee_id` AS `supervisor_employee_id`,`org_v`.`currency_code` AS `currency_code`,`org_v`.`org` AS `org` from ((`hr_employee` `he` left join `user` on((`he`.`hr_employee_id` = `user`.`hr_employee_id`))) left join `org_v` on((`org_v`.`org_id` = `he`.`org_id`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `hr_expense_all_v`
+--
+DROP TABLE IF EXISTS `hr_expense_all_v`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `hr_expense_all_v` AS select `eh`.`hr_expense_header_id` AS `hr_expense_header_id`,`eh`.`bu_org_id` AS `bu_org_id`,`eh`.`hr_employee_id` AS `hr_employee_id`,`eh`.`claim_date` AS `claim_date`,`eh`.`status` AS `status`,`eh`.`purpose` AS `purpose`,`eh`.`doc_currency` AS `doc_currency`,`eh`.`department_id` AS `department_id`,`eh`.`reason` AS `reason`,`eh`.`currency` AS `currency`,`eh`.`exchange_rate_type` AS `exchange_rate_type`,`eh`.`exchange_rate` AS `exchange_rate`,`eh`.`header_amount` AS `header_amount`,`el`.`hr_expense_line_id` AS `hr_expense_line_id`,`el`.`line_number` AS `line_number`,`el`.`claim_date` AS `line_claim_date`,`el`.`receipt_amount` AS `receipt_amount`,`el`.`receipt_currency` AS `receipt_currency`,`el`.`expense_type` AS `expense_type`,`el`.`status` AS `line_status`,`el`.`purpose` AS `line_purpose`,`el`.`start_date` AS `start_date`,`el`.`exchange_rate` AS `line_exchange_rate`,`user`.`supplier_id` AS `supplier_id` from ((`hr_expense_header` `eh` join `hr_expense_line` `el`) join `user`) where ((`el`.`hr_expense_header_id` = `eh`.`hr_expense_header_id`) and (`user`.`hr_employee_id` = `eh`.`hr_employee_id`));
 
 -- --------------------------------------------------------
 
@@ -20007,7 +22014,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `hr_employee_v` AS select 
 --
 DROP TABLE IF EXISTS `inv_count_entries_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `inv_count_entries_v` AS select `ice`.`inv_count_entries_id` AS `inv_count_entries_id`,`ice`.`inv_count_schedule_id` AS `inv_count_schedule_id`,`ice`.`item_id_m` AS `item_id_m`,`ice`.`uom_id` AS `uom_id`,`ice`.`org_id` AS `org_id`,`ice`.`subinventory_id` AS `subinventory_id`,`ice`.`locator_id` AS `locator_id`,`ice`.`lot_number` AS `lot_number`,`ice`.`serial_number` AS `serial_number`,`ice`.`schedule_date` AS `schedule_date`,`ice`.`adjustment_ac_id` AS `adjustment_ac_id`,`ice`.`status` AS `status`,`ice`.`reason` AS `reason`,`ice`.`reference` AS `reference`,`ice`.`counted_by` AS `counted_by`,`ice`.`count_date` AS `count_date`,`ice`.`count_qty` AS `count_qty`,`ice`.`system_qty` AS `system_qty`,`ice`.`adjusted_qty` AS `adjusted_qty`,`ice`.`description` AS `description`,`ice`.`created_by` AS `created_by`,`ice`.`creation_date` AS `creation_date`,`ice`.`last_update_by` AS `last_update_by`,`ice`.`last_update_date` AS `last_update_date`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`sin`.`subinventory` AS `subinventory`,`loc`.`locator` AS `locator`,`uom`.`uom_name` AS `uom_name`,`org`.`org` AS `org` from (((((`inv_count_entries` `ice` left join `item` on(((`item`.`item_id_m` = `ice`.`item_id_m`) and (`item`.`org_id` = `ice`.`org_id`)))) left join `subinventory` `sin` on((`sin`.`subinventory_id` = `ice`.`subinventory_id`))) left join `locator` `loc` on((`loc`.`locator_id` = `ice`.`locator_id`))) left join `uom` on((`uom`.`uom_id` = `ice`.`uom_id`))) left join `org` on((`org`.`org_id` = `ice`.`org_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `inv_count_entries_v` AS select `ice`.`inv_count_entries_id` AS `inv_count_entries_id`,`ice`.`inv_count_schedule_id` AS `inv_count_schedule_id`,`ice`.`item_id_m` AS `item_id_m`,`ice`.`uom_id` AS `uom_id`,`ice`.`org_id` AS `org_id`,`ice`.`subinventory_id` AS `subinventory_id`,`ice`.`locator_id` AS `locator_id`,`ice`.`lot_number` AS `lot_number`,`ice`.`serial_number` AS `serial_number`,`ice`.`schedule_date` AS `schedule_date`,`ice`.`adjustment_ac_id` AS `adjustment_ac_id`,`ice`.`status` AS `status`,`ice`.`reason` AS `reason`,`ice`.`reference` AS `reference`,`ice`.`counted_by` AS `counted_by`,`ice`.`count_date` AS `count_date`,`ice`.`count_qty` AS `count_qty`,`ice`.`system_qty` AS `system_qty`,`ice`.`adjusted_qty` AS `adjusted_qty`,`ice`.`description` AS `description`,`ice`.`created_by` AS `created_by`,`ice`.`creation_date` AS `creation_date`,`ice`.`last_update_by` AS `last_update_by`,`ice`.`last_update_date` AS `last_update_date`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`sin`.`subinventory` AS `subinventory`,`loc`.`locator` AS `locator`,`uom`.`uom_name` AS `uom_name`,`org`.`org` AS `org` from (((((`inv_count_entries` `ice` left join `item` on(((`item`.`item_id_m` = `ice`.`item_id_m`) and (`item`.`org_id` = `ice`.`org_id`)))) left join `subinventory` `sin` on((`sin`.`subinventory_id` = `ice`.`subinventory_id`))) left join `locator` `loc` on((`loc`.`locator_id` = `ice`.`locator_id`))) left join `uom` on((`uom`.`uom_id` = `ice`.`uom_id`))) left join `org` on((`org`.`org_id` = `ice`.`org_id`)));
 
 -- --------------------------------------------------------
 
@@ -20016,7 +22023,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `inv_count_entries_v` AS s
 --
 DROP TABLE IF EXISTS `inv_interorg_receipt_header`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `inv_interorg_receipt_header` AS select `inv_receipt_header`.`inv_receipt_header_id` AS `inv_receipt_header_id`,`inv_receipt_header`.`receipt_number` AS `receipt_number`,`inv_receipt_header`.`org_id` AS `org_id`,`inv_receipt_header`.`transaction_type_id` AS `transaction_type_id`,`inv_receipt_header`.`receipt_date` AS `receipt_date`,`inv_receipt_header`.`received_by` AS `received_by`,`inv_receipt_header`.`carrier` AS `carrier`,`inv_receipt_header`.`vechile_number` AS `vechile_number`,`inv_receipt_header`.`comment` AS `comment`,`inv_receipt_header`.`ef_id` AS `ef_id`,`inv_receipt_header`.`created_by` AS `created_by`,`inv_receipt_header`.`creation_date` AS `creation_date`,`inv_receipt_header`.`last_update_by` AS `last_update_by`,`inv_receipt_header`.`last_update_date` AS `last_update_date` from `inv_receipt_header` where (`inv_receipt_header`.`transaction_type_id` = '20');
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `inv_interorg_receipt_header` AS select `inv_receipt_header`.`inv_receipt_header_id` AS `inv_receipt_header_id`,`inv_receipt_header`.`receipt_number` AS `receipt_number`,`inv_receipt_header`.`org_id` AS `org_id`,`inv_receipt_header`.`transaction_type_id` AS `transaction_type_id`,`inv_receipt_header`.`receipt_date` AS `receipt_date`,`inv_receipt_header`.`received_by` AS `received_by`,`inv_receipt_header`.`carrier` AS `carrier`,`inv_receipt_header`.`vechile_number` AS `vechile_number`,`inv_receipt_header`.`comment` AS `comment`,`inv_receipt_header`.`ef_id` AS `ef_id`,`inv_receipt_header`.`created_by` AS `created_by`,`inv_receipt_header`.`creation_date` AS `creation_date`,`inv_receipt_header`.`last_update_by` AS `last_update_by`,`inv_receipt_header`.`last_update_date` AS `last_update_date` from `inv_receipt_header` where (`inv_receipt_header`.`transaction_type_id` = '20');
 
 -- --------------------------------------------------------
 
@@ -20025,7 +22032,16 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `inv_interorg_receipt_head
 --
 DROP TABLE IF EXISTS `inv_interorg_transfer_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `inv_interorg_transfer_v` AS select `ith`.`inv_interorg_transfer_header_id` AS `inv_interorg_transfer_header_id`,`ith`.`order_number` AS `order_number`,`ith`.`order_number` AS `io_order_number`,`itl`.`line_number` AS `line_number`,`itl`.`line_number` AS `io_line_number`,`item`.`item_number` AS `item_number`,`itl`.`status` AS `status`,`itl`.`inv_interorg_transfer_line_id` AS `inv_interorg_transfer_line_id`,`ith`.`comment` AS `comment`,`ith`.`from_org_id` AS `from_org_id`,`ith`.`transaction_type_id` AS `transaction_type_id`,`ith`.`to_org_id` AS `to_org_id`,`ith`.`carrier` AS `carrier`,`ith`.`vehicle_number` AS `vehicle_number`,`ith`.`waybill` AS `waybill`,`itl`.`uom_id` AS `uom_id`,`itl`.`from_subinventory_id` AS `from_subinventory_id`,`itl`.`from_locator_id` AS `from_locator_id`,`itl`.`item_id_m` AS `item_id_m`,`itl`.`item_description` AS `item_description`,`itl`.`to_subinventory_id` AS `to_subinventory_id`,`itl`.`to_locator_id` AS `to_locator_id`,`itl`.`transaction_quantity` AS `transaction_quantity`,`itl`.`serial_number` AS `serial_number`,`itl`.`lot_number` AS `lot_number` from ((`inv_interorg_transfer_header` `ith` join `inv_interorg_transfer_line` `itl`) join `item`) where ((`ith`.`inv_interorg_transfer_header_id` = `itl`.`inv_interorg_transfer_header_id`) and (`item`.`item_id_m` = `itl`.`item_id_m`) and (`item`.`org_id` = `ith`.`from_org_id`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `inv_interorg_transfer_v` AS select `ith`.`inv_interorg_transfer_header_id` AS `inv_interorg_transfer_header_id`,`ith`.`order_number` AS `order_number`,`ith`.`order_number` AS `io_order_number`,`itl`.`line_number` AS `line_number`,`itl`.`line_number` AS `io_line_number`,`item`.`item_number` AS `item_number`,`itl`.`status` AS `status`,`itl`.`inv_interorg_transfer_line_id` AS `inv_interorg_transfer_line_id`,`ith`.`comment` AS `comment`,`ith`.`from_org_id` AS `from_org_id`,`ith`.`transaction_type_id` AS `transaction_type_id`,`ith`.`to_org_id` AS `to_org_id`,`ith`.`carrier` AS `carrier`,`ith`.`vehicle_number` AS `vehicle_number`,`ith`.`waybill` AS `waybill`,`itl`.`uom_id` AS `uom_id`,`itl`.`from_subinventory_id` AS `from_subinventory_id`,`itl`.`from_locator_id` AS `from_locator_id`,`itl`.`item_id_m` AS `item_id_m`,`itl`.`item_description` AS `item_description`,`itl`.`to_subinventory_id` AS `to_subinventory_id`,`itl`.`to_locator_id` AS `to_locator_id`,`itl`.`transaction_quantity` AS `transaction_quantity`,`itl`.`serial_number` AS `serial_number`,`itl`.`lot_number` AS `lot_number` from ((`inv_interorg_transfer_header` `ith` join `inv_interorg_transfer_line` `itl`) join `item`) where ((`ith`.`inv_interorg_transfer_header_id` = `itl`.`inv_interorg_transfer_header_id`) and (`item`.`item_id_m` = `itl`.`item_id_m`) and (`item`.`org_id` = `ith`.`from_org_id`));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `inv_lot_onhand_v`
+--
+DROP TABLE IF EXISTS `inv_lot_onhand_v`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `inv_lot_onhand_v` AS select `ilo`.`inv_lot_onhand_id` AS `inv_lot_onhand_id`,`ilo`.`onhand_id` AS `onhand_id`,`ilo`.`inv_lot_number_id` AS `lot_inv_lot_number_id`,`ilo`.`lot_quantity` AS `lot_quantity`,`iln`.`lot_number` AS `lot_number`,`iln`.`inv_lot_number_id` AS `inv_lot_number_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`oh`.`org_id` AS `org_id`,`oh`.`item_id_m` AS `item_id_m`,`sub`.`subinventory` AS `subinventory`,`loc`.`locator` AS `locator`,`oh`.`uom_id` AS `uom_id`,`oh`.`onhand` AS `onhand`,`oh`.`subinventory_id` AS `subinventory_id`,`oh`.`locator_id` AS `locator_id` from (((((`inv_lot_onhand` `ilo` left join `inv_lot_number` `iln` on((`iln`.`inv_lot_number_id` = `ilo`.`inv_lot_number_id`))) left join `onhand` `oh` on((`oh`.`onhand_id` = `ilo`.`onhand_id`))) left join `item` on(((`item`.`item_id_m` = `oh`.`item_id_m`) and (`item`.`org_id` = `oh`.`org_id`)))) left join `subinventory` `sub` on((`sub`.`subinventory_id` = `oh`.`subinventory_id`))) left join `locator` `loc` on((`loc`.`locator_id` = `oh`.`locator_id`)));
 
 -- --------------------------------------------------------
 
@@ -20034,7 +22050,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `inv_interorg_transfer_v` 
 --
 DROP TABLE IF EXISTS `inv_lot_transaction_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `inv_lot_transaction_v` AS select `ist`.`inv_lot_transaction_id` AS `inv_lot_transaction_id`,`ist`.`inv_transaction_id` AS `inv_transaction_id`,`ist`.`inv_lot_number_id` AS `inv_lot_number_id`,`isn`.`lot_number` AS `lot_number`,`it`.`transaction_type_id` AS `transaction_type_id`,`tt`.`transaction_type` AS `transaction_type`,`it`.`org_id` AS `org_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`it`.`item_id_m` AS `item_id_m`,`subf`.`subinventory` AS `from_subinventory`,`subt`.`subinventory` AS `to_subinventory`,`locf`.`locator` AS `from_locator`,`loct`.`locator` AS `to_locator`,`it`.`uom_id` AS `uom_id`,`it`.`lot_number_id` AS `lot_number_id`,`it`.`document_type` AS `document_type`,`it`.`document_number` AS `document_number`,`it`.`document_id` AS `document_id`,`it`.`po_header_id` AS `po_header_id`,`it`.`po_line_id` AS `po_line_id`,`it`.`po_detail_id` AS `po_detail_id`,`it`.`sd_so_line_id` AS `sd_so_line_id`,`it`.`reason` AS `reason`,`it`.`reference_key_name` AS `reference_key_name`,`it`.`reference_key_value` AS `reference_key_value`,`it`.`description` AS `description`,`it`.`from_org_id` AS `from_org_id`,`it`.`from_subinventory_id` AS `from_subinventory_id`,`it`.`to_org_id` AS `to_org_id`,`it`.`to_subinventory_id` AS `to_subinventory_id`,`it`.`from_locator_id` AS `from_locator_id`,`it`.`to_locator_id` AS `to_locator_id` from ((((((((`inv_lot_transaction` `ist` left join `inv_lot_number` `isn` on((`isn`.`inv_lot_number_id` = `ist`.`inv_lot_number_id`))) left join `inv_transaction` `it` on((`it`.`inv_transaction_id` = `ist`.`inv_transaction_id`))) left join `item` on(((`item`.`item_id_m` = `it`.`item_id_m`) and (`item`.`org_id` = `it`.`org_id`)))) left join `transaction_type` `tt` on((`tt`.`transaction_type_id` = `it`.`transaction_type_id`))) left join `subinventory` `subf` on((`subf`.`subinventory_id` = `it`.`from_subinventory_id`))) left join `subinventory` `subt` on((`subt`.`subinventory_id` = `it`.`to_subinventory_id`))) left join `locator` `locf` on((`locf`.`locator_id` = `it`.`from_locator_id`))) left join `locator` `loct` on((`loct`.`locator_id` = `it`.`to_locator_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `inv_lot_transaction_v` AS select `ist`.`inv_lot_transaction_id` AS `inv_lot_transaction_id`,`ist`.`inv_transaction_id` AS `inv_transaction_id`,`ist`.`inv_lot_number_id` AS `inv_lot_number_id`,`isn`.`lot_number` AS `lot_number`,`it`.`transaction_type_id` AS `transaction_type_id`,`tt`.`transaction_type` AS `transaction_type`,`it`.`org_id` AS `org_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`it`.`item_id_m` AS `item_id_m`,`subf`.`subinventory` AS `from_subinventory`,`subt`.`subinventory` AS `to_subinventory`,`locf`.`locator` AS `from_locator`,`loct`.`locator` AS `to_locator`,`it`.`uom_id` AS `uom_id`,`it`.`lot_number_id` AS `lot_number_id`,`it`.`document_type` AS `document_type`,`it`.`document_number` AS `document_number`,`it`.`document_id` AS `document_id`,`it`.`po_header_id` AS `po_header_id`,`it`.`po_line_id` AS `po_line_id`,`it`.`po_detail_id` AS `po_detail_id`,`it`.`sd_so_line_id` AS `sd_so_line_id`,`it`.`reason` AS `reason`,`it`.`reference_key_name` AS `reference_key_name`,`it`.`reference_key_value` AS `reference_key_value`,`it`.`description` AS `description`,`it`.`from_org_id` AS `from_org_id`,`it`.`from_subinventory_id` AS `from_subinventory_id`,`it`.`to_org_id` AS `to_org_id`,`it`.`to_subinventory_id` AS `to_subinventory_id`,`it`.`from_locator_id` AS `from_locator_id`,`it`.`to_locator_id` AS `to_locator_id` from ((((((((`inv_lot_transaction` `ist` left join `inv_lot_number` `isn` on((`isn`.`inv_lot_number_id` = `ist`.`inv_lot_number_id`))) left join `inv_transaction` `it` on((`it`.`inv_transaction_id` = `ist`.`inv_transaction_id`))) left join `item` on(((`item`.`item_id_m` = `it`.`item_id_m`) and (`item`.`org_id` = `it`.`org_id`)))) left join `transaction_type` `tt` on((`tt`.`transaction_type_id` = `it`.`transaction_type_id`))) left join `subinventory` `subf` on((`subf`.`subinventory_id` = `it`.`from_subinventory_id`))) left join `subinventory` `subt` on((`subt`.`subinventory_id` = `it`.`to_subinventory_id`))) left join `locator` `locf` on((`locf`.`locator_id` = `it`.`from_locator_id`))) left join `locator` `loct` on((`loct`.`locator_id` = `it`.`to_locator_id`)));
 
 -- --------------------------------------------------------
 
@@ -20043,7 +22059,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `inv_lot_transaction_v` AS
 --
 DROP TABLE IF EXISTS `inv_serial_transaction_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `inv_serial_transaction_v` AS select `ist`.`inv_serial_transaction_id` AS `inv_serial_transaction_id`,`ist`.`inv_transaction_id` AS `inv_transaction_id`,`ist`.`inv_serial_number_id` AS `inv_serial_number_id`,`isn`.`serial_number` AS `serial_number`,`it`.`transaction_type_id` AS `transaction_type_id`,`tt`.`transaction_type` AS `transaction_type`,`it`.`org_id` AS `org_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`it`.`item_id_m` AS `item_id_m`,`subf`.`subinventory` AS `from_subinventory`,`subt`.`subinventory` AS `to_subinventory`,`locf`.`locator` AS `from_locator`,`loct`.`locator` AS `to_locator`,`it`.`uom_id` AS `uom_id`,`it`.`lot_number_id` AS `lot_number_id`,`it`.`document_type` AS `document_type`,`it`.`document_number` AS `document_number`,`it`.`document_id` AS `document_id`,`it`.`po_header_id` AS `po_header_id`,`it`.`po_line_id` AS `po_line_id`,`it`.`po_detail_id` AS `po_detail_id`,`it`.`sd_so_line_id` AS `sd_so_line_id`,`it`.`reason` AS `reason`,`it`.`reference_key_name` AS `reference_key_name`,`it`.`reference_key_value` AS `reference_key_value`,`it`.`description` AS `description`,`it`.`from_org_id` AS `from_org_id`,`it`.`from_subinventory_id` AS `from_subinventory_id`,`it`.`to_org_id` AS `to_org_id`,`it`.`to_subinventory_id` AS `to_subinventory_id`,`it`.`from_locator_id` AS `from_locator_id`,`it`.`to_locator_id` AS `to_locator_id` from ((((((((`inv_serial_transaction` `ist` left join `inv_serial_number` `isn` on((`isn`.`inv_serial_number_id` = `ist`.`inv_serial_number_id`))) left join `inv_transaction` `it` on((`it`.`inv_transaction_id` = `ist`.`inv_transaction_id`))) left join `item` on(((`item`.`item_id_m` = `it`.`item_id_m`) and (`item`.`org_id` = `it`.`org_id`)))) left join `transaction_type` `tt` on((`tt`.`transaction_type_id` = `it`.`transaction_type_id`))) left join `subinventory` `subf` on((`subf`.`subinventory_id` = `it`.`from_subinventory_id`))) left join `subinventory` `subt` on((`subt`.`subinventory_id` = `it`.`to_subinventory_id`))) left join `locator` `locf` on((`locf`.`locator_id` = `it`.`from_locator_id`))) left join `locator` `loct` on((`loct`.`locator_id` = `it`.`to_locator_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `inv_serial_transaction_v` AS select `ist`.`inv_serial_transaction_id` AS `inv_serial_transaction_id`,`ist`.`inv_transaction_id` AS `inv_transaction_id`,`ist`.`inv_serial_number_id` AS `inv_serial_number_id`,`isn`.`serial_number` AS `serial_number`,`it`.`transaction_type_id` AS `transaction_type_id`,`tt`.`transaction_type` AS `transaction_type`,`it`.`org_id` AS `org_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`it`.`item_id_m` AS `item_id_m`,`subf`.`subinventory` AS `from_subinventory`,`subt`.`subinventory` AS `to_subinventory`,`locf`.`locator` AS `from_locator`,`loct`.`locator` AS `to_locator`,`it`.`uom_id` AS `uom_id`,`it`.`lot_number_id` AS `lot_number_id`,`it`.`document_type` AS `document_type`,`it`.`document_number` AS `document_number`,`it`.`document_id` AS `document_id`,`it`.`po_header_id` AS `po_header_id`,`it`.`po_line_id` AS `po_line_id`,`it`.`po_detail_id` AS `po_detail_id`,`it`.`sd_so_line_id` AS `sd_so_line_id`,`it`.`reason` AS `reason`,`it`.`reference_key_name` AS `reference_key_name`,`it`.`reference_key_value` AS `reference_key_value`,`it`.`description` AS `description`,`it`.`from_org_id` AS `from_org_id`,`it`.`from_subinventory_id` AS `from_subinventory_id`,`it`.`to_org_id` AS `to_org_id`,`it`.`to_subinventory_id` AS `to_subinventory_id`,`it`.`from_locator_id` AS `from_locator_id`,`it`.`to_locator_id` AS `to_locator_id` from ((((((((`inv_serial_transaction` `ist` left join `inv_serial_number` `isn` on((`isn`.`inv_serial_number_id` = `ist`.`inv_serial_number_id`))) left join `inv_transaction` `it` on((`it`.`inv_transaction_id` = `ist`.`inv_transaction_id`))) left join `item` on(((`item`.`item_id_m` = `it`.`item_id_m`) and (`item`.`org_id` = `it`.`org_id`)))) left join `transaction_type` `tt` on((`tt`.`transaction_type_id` = `it`.`transaction_type_id`))) left join `subinventory` `subf` on((`subf`.`subinventory_id` = `it`.`from_subinventory_id`))) left join `subinventory` `subt` on((`subt`.`subinventory_id` = `it`.`to_subinventory_id`))) left join `locator` `locf` on((`locf`.`locator_id` = `it`.`from_locator_id`))) left join `locator` `loct` on((`loct`.`locator_id` = `it`.`to_locator_id`)));
 
 -- --------------------------------------------------------
 
@@ -20052,7 +22068,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `inv_serial_transaction_v`
 --
 DROP TABLE IF EXISTS `item_select_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `item_select_v` AS select distinct `item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`product_line` AS `product_line`,`item`.`item_id_m` AS `item_id_m` from `item`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `item_select_v` AS select distinct `item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`product_line` AS `product_line`,`item`.`item_id_m` AS `item_id_m` from `item`;
 
 -- --------------------------------------------------------
 
@@ -20061,7 +22077,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `item_select_v` AS select 
 --
 DROP TABLE IF EXISTS `locator_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `locator_v` AS select `org`.`org_id` AS `org_id`,`loca`.`locator` AS `locator`,`loca`.`alias` AS `alias`,`loca`.`locator_id` AS `locator_id`,`sub`.`subinventory` AS `subinventory`,`sub`.`subinventory_id` AS `subinventory_id`,`sub`.`description` AS `sub_description`,`org`.`org` AS `org`,`org`.`type` AS `type`,`org`.`code` AS `code`,`org`.`description` AS `description`,`org`.`enterprise_org_id` AS `enterprise_org_id`,`org`.`legal_org_id` AS `legal_org_id`,`org`.`business_org_id` AS `business_org_id`,`org`.`inventory_org_id` AS `inventory_org_id`,`org`.`address_id` AS `address_id`,`legal`.`ledger_id` AS `ledger_id`,`gl`.`ledger` AS `ledger`,`gl`.`coa_structure_id` AS `coa_structure_id`,`gl`.`currency_code` AS `currency_code` from ((((`org` join `subinventory` `sub`) join `locator` `loca`) join `legal`) join `gl_ledger` `gl`) where ((`sub`.`org_id` = `org`.`org_id`) and (`loca`.`subinventory_id` = `sub`.`subinventory_id`) and (`legal`.`org_id` = `org`.`legal_org_id`) and (`gl`.`gl_ledger_id` = `legal`.`ledger_id`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `locator_v` AS select `org`.`org_id` AS `org_id`,`loca`.`locator` AS `locator`,`loca`.`alias` AS `alias`,`loca`.`locator_id` AS `locator_id`,`sub`.`subinventory` AS `subinventory`,`sub`.`subinventory_id` AS `subinventory_id`,`sub`.`description` AS `sub_description`,`org`.`org` AS `org`,`org`.`type` AS `type`,`org`.`code` AS `code`,`org`.`description` AS `description`,`org`.`enterprise_org_id` AS `enterprise_org_id`,`org`.`legal_org_id` AS `legal_org_id`,`org`.`business_org_id` AS `business_org_id`,`org`.`inventory_org_id` AS `inventory_org_id`,`org`.`address_id` AS `address_id`,`legal`.`ledger_id` AS `ledger_id`,`gl`.`ledger` AS `ledger`,`gl`.`coa_structure_id` AS `coa_structure_id`,`gl`.`currency_code` AS `currency_code` from ((((`org` join `subinventory` `sub`) join `locator` `loca`) join `legal`) join `gl_ledger` `gl`) where ((`sub`.`org_id` = `org`.`org_id`) and (`loca`.`subinventory_id` = `sub`.`subinventory_id`) and (`legal`.`org_id` = `org`.`legal_org_id`) and (`gl`.`gl_ledger_id` = `legal`.`ledger_id`));
 
 -- --------------------------------------------------------
 
@@ -20070,7 +22086,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `locator_v` AS select `org
 --
 DROP TABLE IF EXISTS `mdm_bank_account_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `mdm_bank_account_v` AS select `mba`.`mdm_bank_account_id` AS `mdm_bank_account_id`,`mba`.`account_number` AS `account_number`,`mba`.`description` AS `account_description`,`mba`.`account_usage` AS `account_usage`,`mba`.`account_type` AS `account_type`,`mba`.`bu_org_id` AS `bu_org_id`,`mba`.`supplier_id` AS `supplier_id`,`mba`.`supplier_site_id` AS `supplier_site_id`,`mba`.`ar_customer_id` AS `ar_customer_id`,`mba`.`ar_customer_site_id` AS `ar_customer_site_id`,`mba`.`cash_ac_id` AS `cash_ac_id`,`mba`.`cash_clearing_ac_id` AS `cash_clearing_ac_id`,`mba`.`bank_charge_ac_id` AS `bank_charge_ac_id`,`mba`.`exchange_gl_ac_id` AS `exchange_gl_ac_id`,`mba`.`netting_ac_cb` AS `netting_ac_cb`,`mba`.`minimum_payment` AS `minimum_payment`,`mba`.`maximum_payment` AS `maximum_payment`,`mba`.`contact_id` AS `contact_id`,`mba`.`ap_payment_method_id` AS `ap_payment_method_id`,`mbh`.`mdm_bank_header_id` AS `mdm_bank_header_id`,`mbh`.`country` AS `country`,`mbh`.`bank_name` AS `bank_name`,`mbh`.`bank_number` AS `bank_number`,`mbh`.`description` AS `description`,`mbh`.`bank_name_short` AS `bank_name_short`,`mbh`.`bank_name_alt` AS `bank_name_alt`,`mbh`.`tax_reg_no` AS `tax_reg_no`,`mbh`.`tax_payer_id` AS `tax_payer_id`,`mbs`.`branch_name` AS `branch_name`,`mbs`.`country` AS `branch_country`,`mbs`.`branch_number` AS `branch_number`,`mbs`.`mdm_bank_site_id` AS `mdm_bank_site_id`,`mbs`.`branch_name_short` AS `branch_name_short`,`mbs`.`branch_name_alt` AS `branch_name_alt`,`mbs`.`ifsc_code` AS `ifsc_code`,`mbs`.`swift_code` AS `swift_code`,`mbs`.`routing_number` AS `routing_number`,`mbs`.`iban_code` AS `iban_code`,`mbs`.`tax_reg_no` AS `branch_tax_reg_no`,`mbs`.`tax_payer_id` AS `branch_tax_payer_id`,`mbs`.`site_address_id` AS `site_address_id`,`sav`.`supplier_name` AS `supplier_name`,`sav`.`supplier_site_name` AS `supplier_site_name`,`acv`.`customer_name` AS `customer_name`,`acv`.`customer_number` AS `customer_number` from (((((`mdm_bank_account` `mba` left join `supplier_all_v` `sav` on((`mba`.`supplier_site_id` = `sav`.`supplier_site_id`))) left join `ar_customer_v` `acv` on((`mba`.`ar_customer_site_id` = `acv`.`ar_customer_site_id`))) left join `org_v` `ov` on((`ov`.`org_id` = `mba`.`bu_org_id`))) join `mdm_bank_header` `mbh`) join `mdm_bank_site` `mbs`) where ((`mbs`.`mdm_bank_header_id` = `mbh`.`mdm_bank_header_id`) and (`mbh`.`mdm_bank_header_id` = `mba`.`mdm_bank_header_id`) and (`mbs`.`mdm_bank_site_id` = `mba`.`mdm_bank_site_id`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mdm_bank_account_v` AS select `mba`.`mdm_bank_account_id` AS `mdm_bank_account_id`,`mba`.`account_number` AS `account_number`,`mba`.`description` AS `account_description`,`mba`.`account_usage` AS `account_usage`,`mba`.`account_type` AS `account_type`,`mba`.`bu_org_id` AS `bu_org_id`,`mba`.`supplier_id` AS `supplier_id`,`mba`.`supplier_site_id` AS `supplier_site_id`,`mba`.`ar_customer_id` AS `ar_customer_id`,`mba`.`ar_customer_site_id` AS `ar_customer_site_id`,`mba`.`cash_ac_id` AS `cash_ac_id`,`mba`.`cash_clearing_ac_id` AS `cash_clearing_ac_id`,`mba`.`bank_charge_ac_id` AS `bank_charge_ac_id`,`mba`.`exchange_gl_ac_id` AS `exchange_gl_ac_id`,`mba`.`netting_ac_cb` AS `netting_ac_cb`,`mba`.`minimum_payment` AS `minimum_payment`,`mba`.`maximum_payment` AS `maximum_payment`,`mba`.`contact_id` AS `contact_id`,`mba`.`ap_payment_method_id` AS `ap_payment_method_id`,`mbh`.`mdm_bank_header_id` AS `mdm_bank_header_id`,`mbh`.`country` AS `country`,`mbh`.`bank_name` AS `bank_name`,`mbh`.`bank_number` AS `bank_number`,`mbh`.`description` AS `description`,`mbh`.`bank_name_short` AS `bank_name_short`,`mbh`.`bank_name_alt` AS `bank_name_alt`,`mbh`.`tax_reg_no` AS `tax_reg_no`,`mbh`.`tax_payer_id` AS `tax_payer_id`,`mbs`.`branch_name` AS `branch_name`,`mbs`.`country` AS `branch_country`,`mbs`.`branch_number` AS `branch_number`,`mbs`.`mdm_bank_site_id` AS `mdm_bank_site_id`,`mbs`.`branch_name_short` AS `branch_name_short`,`mbs`.`branch_name_alt` AS `branch_name_alt`,`mbs`.`ifsc_code` AS `ifsc_code`,`mbs`.`swift_code` AS `swift_code`,`mbs`.`routing_number` AS `routing_number`,`mbs`.`iban_code` AS `iban_code`,`mbs`.`tax_reg_no` AS `branch_tax_reg_no`,`mbs`.`tax_payer_id` AS `branch_tax_payer_id`,`mbs`.`site_address_id` AS `site_address_id`,`sav`.`supplier_name` AS `supplier_name`,`sav`.`supplier_site_name` AS `supplier_site_name`,`acv`.`customer_name` AS `customer_name`,`acv`.`customer_number` AS `customer_number` from (((((`mdm_bank_account` `mba` left join `supplier_all_v` `sav` on((`mba`.`supplier_site_id` = `sav`.`supplier_site_id`))) left join `ar_customer_v` `acv` on((`mba`.`ar_customer_site_id` = `acv`.`ar_customer_site_id`))) left join `org_v` `ov` on((`ov`.`org_id` = `mba`.`bu_org_id`))) join `mdm_bank_header` `mbh`) join `mdm_bank_site` `mbs`) where ((`mbs`.`mdm_bank_header_id` = `mbh`.`mdm_bank_header_id`) and (`mbh`.`mdm_bank_header_id` = `mba`.`mdm_bank_header_id`) and (`mbs`.`mdm_bank_site_id` = `mba`.`mdm_bank_site_id`));
 
 -- --------------------------------------------------------
 
@@ -20079,7 +22095,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `mdm_bank_account_v` AS se
 --
 DROP TABLE IF EXISTS `mdm_bank_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `mdm_bank_v` AS select `mbh`.`mdm_bank_header_id` AS `mdm_bank_header_id`,`mbh`.`country` AS `country`,`mbh`.`bank_name` AS `bank_name`,`mbh`.`bank_number` AS `bank_number`,`mbh`.`description` AS `description`,`mbh`.`bank_name_short` AS `bank_name_short`,`mbh`.`bank_name_alt` AS `bank_name_alt`,`mbh`.`tax_reg_no` AS `tax_reg_no`,`mbh`.`tax_payer_id` AS `tax_payer_id`,`mbs`.`branch_name` AS `branch_name`,`mbs`.`country` AS `branch_country`,`mbs`.`branch_number` AS `branch_number`,`mbs`.`mdm_bank_site_id` AS `mdm_bank_site_id`,`mbs`.`branch_name_short` AS `branch_name_short`,`mbs`.`branch_name_alt` AS `branch_name_alt`,`mbs`.`ifsc_code` AS `ifsc_code`,`mbs`.`swift_code` AS `swift_code`,`mbs`.`routing_number` AS `routing_number`,`mbs`.`iban_code` AS `iban_code`,`mbs`.`tax_reg_no` AS `branch_tax_reg_no`,`mbs`.`tax_payer_id` AS `branch_tax_payer_id`,`mbs`.`site_address_id` AS `site_address_id` from (`mdm_bank_header` `mbh` join `mdm_bank_site` `mbs`) where (`mbs`.`mdm_bank_header_id` = `mbh`.`mdm_bank_header_id`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mdm_bank_v` AS select `mbh`.`mdm_bank_header_id` AS `mdm_bank_header_id`,`mbh`.`country` AS `country`,`mbh`.`bank_name` AS `bank_name`,`mbh`.`bank_number` AS `bank_number`,`mbh`.`description` AS `description`,`mbh`.`bank_name_short` AS `bank_name_short`,`mbh`.`bank_name_alt` AS `bank_name_alt`,`mbh`.`tax_reg_no` AS `tax_reg_no`,`mbh`.`tax_payer_id` AS `tax_payer_id`,`mbs`.`branch_name` AS `branch_name`,`mbs`.`country` AS `branch_country`,`mbs`.`branch_number` AS `branch_number`,`mbs`.`mdm_bank_site_id` AS `mdm_bank_site_id`,`mbs`.`branch_name_short` AS `branch_name_short`,`mbs`.`branch_name_alt` AS `branch_name_alt`,`mbs`.`ifsc_code` AS `ifsc_code`,`mbs`.`swift_code` AS `swift_code`,`mbs`.`routing_number` AS `routing_number`,`mbs`.`iban_code` AS `iban_code`,`mbs`.`tax_reg_no` AS `branch_tax_reg_no`,`mbs`.`tax_payer_id` AS `branch_tax_payer_id`,`mbs`.`site_address_id` AS `site_address_id` from (`mdm_bank_header` `mbh` join `mdm_bank_site` `mbs`) where (`mbs`.`mdm_bank_header_id` = `mbh`.`mdm_bank_header_id`);
 
 -- --------------------------------------------------------
 
@@ -20088,7 +22104,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `mdm_bank_v` AS select `mb
 --
 DROP TABLE IF EXISTS `onhand_summary_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `onhand_summary_v` AS select `onhand`.`onhand_id` AS `onhand_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`org`.`org` AS `org_name`,`onhand`.`uom_id` AS `uom_id`,sum(`onhand`.`onhand`) AS `onhand`,`onhand`.`item_id_m` AS `item_id_m`,`onhand`.`org_id` AS `org_id`,`onhand`.`reservable_onhand` AS `reservable_onhand`,`onhand`.`transactable_onhand` AS `transactable_onhand` from ((`onhand` left join `item` on(((`onhand`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `onhand`.`org_id`)))) left join `org` on((`onhand`.`org_id` = `org`.`org_id`))) group by `onhand`.`item_id_m`,`onhand`.`org_id`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `onhand_summary_v` AS select `onhand`.`onhand_id` AS `onhand_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`org`.`org` AS `org_name`,`onhand`.`uom_id` AS `uom_id`,sum(`onhand`.`onhand`) AS `onhand`,`onhand`.`item_id_m` AS `item_id_m`,`onhand`.`org_id` AS `org_id`,`onhand`.`reservable_onhand` AS `reservable_onhand`,`onhand`.`transactable_onhand` AS `transactable_onhand` from ((`onhand` left join `item` on(((`onhand`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `onhand`.`org_id`)))) left join `org` on((`onhand`.`org_id` = `org`.`org_id`))) group by `onhand`.`item_id_m`,`onhand`.`org_id`;
 
 -- --------------------------------------------------------
 
@@ -20097,7 +22113,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `onhand_summary_v` AS sele
 --
 DROP TABLE IF EXISTS `onhand_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `onhand_v` AS select `onhand`.`onhand_id` AS `onhand_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`product_line` AS `product_line`,`org`.`org` AS `org_name`,`subinventory`.`subinventory` AS `subinventory`,`locator`.`locator` AS `locator`,`onhand`.`uom_id` AS `uom_id`,`onhand`.`onhand` AS `onhand`,`cic`.`standard_cost` AS `standard_cost`,(`onhand`.`onhand` * `cic`.`standard_cost`) AS `onhand_value`,`onhand`.`item_id_m` AS `item_id_m`,`onhand`.`revision_name` AS `revision_name`,`onhand`.`org_id` AS `org_id`,`onhand`.`subinventory_id` AS `subinventory_id`,`subinventory`.`type` AS `subinventory_type`,`onhand`.`locator_id` AS `locator_id`,`onhand`.`lot_id` AS `lot_id`,`onhand`.`serial_id` AS `serial_id`,`onhand`.`reservable_onhand` AS `reservable_onhand`,`onhand`.`transactable_onhand` AS `transactable_onhand`,`onhand`.`lot_status` AS `lot_status`,`onhand`.`serial_status` AS `serial_status`,`onhand`.`secondary_uom_id` AS `secondary_uom_id`,`onhand`.`onhand_status` AS `onhand_status`,`onhand`.`ef_id` AS `ef_id`,`onhand`.`created_by` AS `created_by`,`onhand`.`creation_date` AS `creation_date`,`onhand`.`last_update_by` AS `last_update_by`,`onhand`.`last_update_date` AS `last_update_date` from (((((`onhand` left join `item` on(((`onhand`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `onhand`.`org_id`)))) left join `org` on((`onhand`.`org_id` = `org`.`org_id`))) left join `subinventory` on((`onhand`.`subinventory_id` = `subinventory`.`subinventory_id`))) left join `locator` on((`onhand`.`locator_id` = `locator`.`locator_id`))) left join `cst_item_cost_v` `cic` on(((`cic`.`item_id_m` = `onhand`.`item_id_m`) and (`cic`.`bom_cost_type` = 'FROZEN') and (`cic`.`org_id` = `onhand`.`org_id`))));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `onhand_v` AS select `onhand`.`onhand_id` AS `onhand_id`,`item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`product_line` AS `product_line`,`org`.`org` AS `org_name`,`subinventory`.`subinventory` AS `subinventory`,`locator`.`locator` AS `locator`,`onhand`.`uom_id` AS `uom_id`,`onhand`.`onhand` AS `onhand`,(`onhand`.`onhand` - ifnull(sum(`ir`.`demand_quantity`),0)) AS `reservable_onhand`,sum(`ir`.`demand_quantity`) AS `reserved_quantity`,`cic`.`standard_cost` AS `standard_cost`,(`onhand`.`onhand` * `cic`.`standard_cost`) AS `onhand_value`,`onhand`.`item_id_m` AS `item_id_m`,`onhand`.`revision_name` AS `revision_name`,`onhand`.`org_id` AS `org_id`,`onhand`.`subinventory_id` AS `subinventory_id`,`subinventory`.`type` AS `subinventory_type`,`onhand`.`locator_id` AS `locator_id`,`onhand`.`lot_id` AS `lot_id`,`onhand`.`serial_id` AS `serial_id`,`onhand`.`transactable_onhand` AS `transactable_onhand`,`onhand`.`lot_status` AS `lot_status`,`onhand`.`serial_status` AS `serial_status`,`onhand`.`secondary_uom_id` AS `secondary_uom_id`,`onhand`.`onhand_status` AS `onhand_status`,`onhand`.`ef_id` AS `ef_id`,`onhand`.`created_by` AS `created_by`,`onhand`.`creation_date` AS `creation_date`,`onhand`.`last_update_by` AS `last_update_by`,`onhand`.`last_update_date` AS `last_update_date` from ((((((`onhand` left join `item` on(((`onhand`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `onhand`.`org_id`)))) left join `org` on((`onhand`.`org_id` = `org`.`org_id`))) left join `subinventory` on((`onhand`.`subinventory_id` = `subinventory`.`subinventory_id`))) left join `locator` on((`onhand`.`locator_id` = `locator`.`locator_id`))) left join `cst_item_cost_v` `cic` on(((`cic`.`item_id_m` = `onhand`.`item_id_m`) and (`cic`.`bom_cost_type` = 'FROZEN') and (`cic`.`org_id` = `onhand`.`org_id`)))) left join `inv_reservation` `ir` on(((`ir`.`item_id_m` = `onhand`.`item_id_m`) and (`ir`.`org_id` = `onhand`.`org_id`) and (`ir`.`subinventory_id` = `onhand`.`subinventory_id`) and ((`ir`.`locator_id` = `onhand`.`locator_id`) or isnull(`onhand`.`locator_id`))))) group by `onhand`.`item_id_m`,`onhand`.`org_id`,`onhand`.`subinventory_id`,`onhand`.`locator_id`;
 
 -- --------------------------------------------------------
 
@@ -20106,7 +22122,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `onhand_v` AS select `onha
 --
 DROP TABLE IF EXISTS `org_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `org_v` AS select `org`.`org_id` AS `org_id`,`org`.`org` AS `org`,`org`.`type` AS `type`,`org`.`code` AS `code`,`org`.`description` AS `description`,`org`.`enterprise_org_id` AS `enterprise_org_id`,`org`.`legal_org_id` AS `legal_org_id`,`org`.`business_org_id` AS `business_org_id`,`org`.`inventory_org_id` AS `inventory_org_id`,`org`.`address_id` AS `address_id`,`legal`.`ledger_id` AS `ledger_id`,`gl`.`ledger` AS `ledger`,`gl`.`coa_structure_id` AS `coa_structure_id`,`gl`.`currency_code` AS `currency_code` from ((`org` left join `legal` on((`legal`.`org_id` = `org`.`legal_org_id`))) left join `gl_ledger` `gl` on((`gl`.`gl_ledger_id` = `legal`.`ledger_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `org_v` AS select `org`.`org_id` AS `org_id`,`org`.`org` AS `org`,`org`.`type` AS `type`,`org`.`code` AS `code`,`org`.`description` AS `description`,`org`.`enterprise_org_id` AS `enterprise_org_id`,`org`.`legal_org_id` AS `legal_org_id`,`org`.`business_org_id` AS `business_org_id`,`org`.`inventory_org_id` AS `inventory_org_id`,`org`.`address_id` AS `address_id`,`legal`.`ledger_id` AS `ledger_id`,`gl`.`ledger` AS `ledger`,`gl`.`coa_structure_id` AS `coa_structure_id`,`gl`.`currency_code` AS `currency_code` from ((`org` left join `legal` on((`legal`.`org_id` = `org`.`legal_org_id`))) left join `gl_ledger` `gl` on((`gl`.`gl_ledger_id` = `legal`.`ledger_id`)));
 
 -- --------------------------------------------------------
 
@@ -20115,7 +22131,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `org_v` AS select `org`.`o
 --
 DROP TABLE IF EXISTS `po_all_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_all_v` AS select `po_header`.`po_header_id` AS `po_header_id`,`po_header`.`bu_org_id` AS `bu_org_id`,`po_header`.`po_type` AS `po_type`,`po_header`.`po_number` AS `po_number`,`po_header`.`supplier_id` AS `supplier_id`,`po_header`.`supplier_site_id` AS `supplier_site_id`,`po_header`.`buyer` AS `buyer`,`po_header`.`currency` AS `currency`,`po_header`.`doc_currency` AS `doc_currency`,`po_header`.`header_amount` AS `header_amount`,`po_header`.`po_status` AS `po_status`,`po_header`.`payment_term_id` AS `payment_term_id`,`po_header`.`exchange_rate` AS `exchange_rate`,`po_header`.`exchange_rate_type` AS `exchange_rate_type`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_line`.`po_line_id` AS `po_line_id`,`po_line`.`line_type` AS `line_type`,`po_line`.`line_number` AS `po_line_number`,`po_line`.`item_id_m` AS `item_id_m`,`po_line`.`kit_cb` AS `kit_cb`,`po_line`.`revision_name` AS `revision_name`,`po_line`.`item_description` AS `item_description`,`po_line`.`line_description` AS `line_description`,`po_line`.`line_quantity` AS `line_quantity`,`po_line`.`unit_price` AS `unit_price`,`po_line`.`line_price` AS `line_price`,`po_line`.`gl_line_price` AS `gl_line_price`,`po_line`.`gl_tax_amount` AS `gl_tax_amount`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`item`.`serial_generation` AS `serial_generation`,`item`.`lot_generation` AS `lot_generation`,`po_detail`.`po_detail_id` AS `po_detail_id`,`po_detail`.`shipment_number` AS `shipment_number`,`po_line`.`receving_org_id` AS `receving_org_id`,`po_line`.`receving_org_id` AS `org_id`,`po_detail`.`subinventory_id` AS `subinventory_id`,`po_detail`.`locator_id` AS `locator_id`,`po_detail`.`requestor` AS `requestor`,`po_detail`.`quantity` AS `quantity`,ifnull(`po_detail`.`received_quantity`,0) AS `received_quantity`,(`po_detail`.`quantity` - ifnull(`po_detail`.`received_quantity`,0)) AS `open_quantity`,`po_detail`.`need_by_date` AS `need_by_date`,`po_detail`.`promise_date` AS `promise_date`,`po_detail`.`accepted_quantity` AS `accepted_quantity`,`po_detail`.`delivered_quantity` AS `delivered_quantity`,`po_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_detail`.`paid_quantity` AS `paid_quantity`,`po_detail`.`charge_ac_id` AS `charge_ac_id`,`po_detail`.`accrual_ac_id` AS `accrual_ac_id`,`po_detail`.`budget_ac_id` AS `budget_ac_id`,`po_detail`.`ppv_ac_id` AS `ppv_ac_id`,`org`.`org` AS `receving_org`,`po_header`.`created_by` AS `created_by`,`po_header`.`creation_date` AS `creation_date`,`po_header`.`last_update_by` AS `last_update_by`,`po_header`.`last_update_date` AS `last_update_date` from (((((((`po_header` left join `supplier` on((`po_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_line` on((`po_header`.`po_header_id` = `po_line`.`po_header_id`))) left join `item` on(((`po_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_line`.`receving_org_id`)))) left join `po_detail` on((`po_line`.`po_line_id` = `po_detail`.`po_line_id`))) left join `org` on((`po_line`.`receving_org_id` = `org`.`org_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `po_all_v` AS select `po_header`.`po_header_id` AS `po_header_id`,`po_header`.`bu_org_id` AS `bu_org_id`,`po_header`.`po_type` AS `po_type`,`po_header`.`po_number` AS `po_number`,`po_header`.`supplier_id` AS `supplier_id`,`po_header`.`supplier_site_id` AS `supplier_site_id`,`po_header`.`buyer` AS `buyer`,`po_header`.`currency` AS `currency`,`po_header`.`doc_currency` AS `doc_currency`,`po_header`.`header_amount` AS `header_amount`,`po_header`.`po_status` AS `po_status`,`po_header`.`payment_term_id` AS `payment_term_id`,`po_header`.`exchange_rate` AS `exchange_rate`,`po_header`.`exchange_rate_type` AS `exchange_rate_type`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_line`.`po_line_id` AS `po_line_id`,`po_line`.`line_type` AS `line_type`,`po_line`.`line_number` AS `po_line_number`,`po_line`.`item_id_m` AS `item_id_m`,`po_line`.`kit_cb` AS `kit_cb`,`po_line`.`revision_name` AS `revision_name`,`po_line`.`item_description` AS `item_description`,`po_line`.`line_description` AS `line_description`,`po_line`.`line_quantity` AS `line_quantity`,`po_line`.`unit_price` AS `unit_price`,`po_line`.`line_price` AS `line_price`,`po_line`.`gl_line_price` AS `gl_line_price`,`po_line`.`gl_tax_amount` AS `gl_tax_amount`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`item`.`serial_generation` AS `serial_generation`,`item`.`lot_generation` AS `lot_generation`,`po_detail`.`po_detail_id` AS `po_detail_id`,`po_detail`.`shipment_number` AS `shipment_number`,`po_line`.`receving_org_id` AS `receving_org_id`,`po_line`.`receving_org_id` AS `org_id`,`po_detail`.`subinventory_id` AS `subinventory_id`,`po_detail`.`locator_id` AS `locator_id`,`po_detail`.`requestor` AS `requestor`,`po_detail`.`quantity` AS `quantity`,ifnull(`po_detail`.`received_quantity`,0) AS `received_quantity`,(`po_detail`.`quantity` - ifnull(`po_detail`.`received_quantity`,0)) AS `open_quantity`,`po_detail`.`need_by_date` AS `need_by_date`,`po_detail`.`promise_date` AS `promise_date`,`po_detail`.`accepted_quantity` AS `accepted_quantity`,`po_detail`.`delivered_quantity` AS `delivered_quantity`,`po_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_detail`.`paid_quantity` AS `paid_quantity`,`po_detail`.`charge_ac_id` AS `charge_ac_id`,`po_detail`.`accrual_ac_id` AS `accrual_ac_id`,`po_detail`.`budget_ac_id` AS `budget_ac_id`,`po_detail`.`ppv_ac_id` AS `ppv_ac_id`,`org`.`org` AS `receving_org`,`po_header`.`created_by` AS `created_by`,`po_header`.`creation_date` AS `creation_date`,`po_header`.`last_update_by` AS `last_update_by`,`po_header`.`last_update_date` AS `last_update_date` from (((((((`po_header` left join `supplier` on((`po_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_line` on((`po_header`.`po_header_id` = `po_line`.`po_header_id`))) left join `item` on(((`po_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_line`.`receving_org_id`)))) left join `po_detail` on((`po_line`.`po_line_id` = `po_detail`.`po_line_id`))) left join `org` on((`po_line`.`receving_org_id` = `org`.`org_id`)));
 
 -- --------------------------------------------------------
 
@@ -20124,7 +22140,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_all_v` AS select `po_h
 --
 DROP TABLE IF EXISTS `po_blanket_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_blanket_v` AS select `po_header`.`po_header_id` AS `po_header_id`,`po_header`.`bu_org_id` AS `bu_org_id`,`po_header`.`po_type` AS `po_type`,`po_header`.`po_number` AS `po_number`,`po_header`.`release_number` AS `release_number`,`po_header`.`supplier_id` AS `supplier_id`,`po_header`.`supplier_site_id` AS `supplier_site_id`,`po_header`.`buyer` AS `buyer`,`po_header`.`currency` AS `currency`,`po_header`.`header_amount` AS `header_amount`,`po_header`.`po_status` AS `po_status`,`po_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_header`.`agreement_start_date` AS `agreement_start_date`,`po_header`.`agreement_end_date` AS `agreement_end_date`,`po_line`.`po_line_id` AS `po_line_id`,`po_line`.`line_type` AS `line_type`,`po_line`.`line_number` AS `po_line_number`,`po_line`.`item_id_m` AS `item_id_m`,`po_line`.`item_description` AS `item_description`,`po_line`.`line_description` AS `line_description`,`po_line`.`line_quantity` AS `line_quantity`,`po_line`.`unit_price` AS `unit_price`,`po_line`.`line_price` AS `line_price`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_detail`.`po_detail_id` AS `po_detail_id`,`po_detail`.`shipment_number` AS `shipment_number`,`po_line`.`receving_org_id` AS `receving_org_id`,`po_detail`.`subinventory_id` AS `subinventory_id`,`po_detail`.`locator_id` AS `locator_id`,`po_detail`.`requestor` AS `requestor`,`po_detail`.`quantity` AS `quantity`,ifnull(`po_detail`.`received_quantity`,0) AS `received_quantity`,(`po_detail`.`quantity` - ifnull(`po_detail`.`received_quantity`,0)) AS `open_quantity`,`po_detail`.`need_by_date` AS `need_by_date`,`po_detail`.`promise_date` AS `promise_date`,`po_detail`.`accepted_quantity` AS `accepted_quantity`,`po_detail`.`delivered_quantity` AS `delivered_quantity`,`po_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_detail`.`paid_quantity` AS `paid_quantity`,`po_detail`.`charge_ac_id` AS `charge_ac_id`,`po_detail`.`accrual_ac_id` AS `accrual_ac_id`,`po_detail`.`budget_ac_id` AS `budget_ac_id`,`po_detail`.`ppv_ac_id` AS `ppv_ac_id`,`org`.`org` AS `receving_org`,`po_header`.`created_by` AS `created_by`,`po_header`.`creation_date` AS `creation_date`,`po_header`.`last_update_by` AS `last_update_by`,`po_header`.`last_update_date` AS `last_update_date` from (((((((`po_header` left join `supplier` on((`po_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_line` on((`po_header`.`po_header_id` = `po_line`.`po_header_id`))) left join `item` on(((`po_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_line`.`receving_org_id`)))) left join `po_detail` on((`po_line`.`po_line_id` = `po_detail`.`po_line_id`))) left join `org` on((`po_line`.`receving_org_id` = `org`.`org_id`))) where (`po_header`.`po_type` in ('BLANKET','BLANKET_RELEASE'));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `po_blanket_v` AS select `po_header`.`po_header_id` AS `po_header_id`,`po_header`.`bu_org_id` AS `bu_org_id`,`po_header`.`po_type` AS `po_type`,`po_header`.`po_number` AS `po_number`,`po_header`.`release_number` AS `release_number`,`po_header`.`supplier_id` AS `supplier_id`,`po_header`.`supplier_site_id` AS `supplier_site_id`,`po_header`.`buyer` AS `buyer`,`po_header`.`currency` AS `currency`,`po_header`.`header_amount` AS `header_amount`,`po_header`.`po_status` AS `po_status`,`po_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_header`.`agreement_start_date` AS `agreement_start_date`,`po_header`.`agreement_end_date` AS `agreement_end_date`,`po_line`.`po_line_id` AS `po_line_id`,`po_line`.`line_type` AS `line_type`,`po_line`.`line_number` AS `po_line_number`,`po_line`.`item_id_m` AS `item_id_m`,`po_line`.`item_description` AS `item_description`,`po_line`.`line_description` AS `line_description`,`po_line`.`line_quantity` AS `line_quantity`,`po_line`.`unit_price` AS `unit_price`,`po_line`.`line_price` AS `line_price`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_detail`.`po_detail_id` AS `po_detail_id`,`po_detail`.`shipment_number` AS `shipment_number`,`po_line`.`receving_org_id` AS `receving_org_id`,`po_detail`.`subinventory_id` AS `subinventory_id`,`po_detail`.`locator_id` AS `locator_id`,`po_detail`.`requestor` AS `requestor`,`po_detail`.`quantity` AS `quantity`,ifnull(`po_detail`.`received_quantity`,0) AS `received_quantity`,(`po_detail`.`quantity` - ifnull(`po_detail`.`received_quantity`,0)) AS `open_quantity`,`po_detail`.`need_by_date` AS `need_by_date`,`po_detail`.`promise_date` AS `promise_date`,`po_detail`.`accepted_quantity` AS `accepted_quantity`,`po_detail`.`delivered_quantity` AS `delivered_quantity`,`po_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_detail`.`paid_quantity` AS `paid_quantity`,`po_detail`.`charge_ac_id` AS `charge_ac_id`,`po_detail`.`accrual_ac_id` AS `accrual_ac_id`,`po_detail`.`budget_ac_id` AS `budget_ac_id`,`po_detail`.`ppv_ac_id` AS `ppv_ac_id`,`org`.`org` AS `receving_org`,`po_header`.`created_by` AS `created_by`,`po_header`.`creation_date` AS `creation_date`,`po_header`.`last_update_by` AS `last_update_by`,`po_header`.`last_update_date` AS `last_update_date` from (((((((`po_header` left join `supplier` on((`po_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_line` on((`po_header`.`po_header_id` = `po_line`.`po_header_id`))) left join `item` on(((`po_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_line`.`receving_org_id`)))) left join `po_detail` on((`po_line`.`po_line_id` = `po_detail`.`po_line_id`))) left join `org` on((`po_line`.`receving_org_id` = `org`.`org_id`))) where (`po_header`.`po_type` in ('BLANKET','BLANKET_RELEASE'));
 
 -- --------------------------------------------------------
 
@@ -20133,7 +22149,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_blanket_v` AS select `
 --
 DROP TABLE IF EXISTS `po_convert_requisition_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_convert_requisition_v` AS select `po_requisition_header`.`po_requisition_header_id` AS `po_requisition_header_id`,`po_requisition_header`.`bu_org_id` AS `bu_org_id`,`po_requisition_header`.`po_requisition_type` AS `po_requisition_type`,`po_requisition_header`.`po_requisition_number` AS `po_requisition_number`,`po_requisition_header`.`supplier_id` AS `supplier_id`,`po_requisition_header`.`supplier_site_id` AS `supplier_site_id`,`po_requisition_header`.`buyer` AS `buyer`,`po_requisition_header`.`currency` AS `currency`,`po_requisition_header`.`header_amount` AS `header_amount`,`po_requisition_header`.`requisition_status` AS `requisition_status`,ifnull(`po_requisition_header`.`payment_term_id`,`supplier_site`.`payment_term_id`) AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_requisition_line`.`po_requisition_line_id` AS `po_requisition_line_id`,`po_requisition_line`.`line_type` AS `line_type`,`po_requisition_line`.`line_number` AS `po_requisition_line_number`,`po_requisition_line`.`item_id_m` AS `item_id_m`,`po_requisition_line`.`bpa_po_line_id` AS `bpa_po_line_id`,`po_requisition_line`.`item_description` AS `item_description`,`po_requisition_line`.`line_description` AS `line_description`,`po_requisition_line`.`line_quantity` AS `line_quantity`,`po_requisition_line`.`unit_price` AS `unit_price`,`po_requisition_line`.`line_price` AS `line_price`,`po_requisition_line`.`receving_org_id` AS `receving_org_id`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_requisition_detail`.`po_requisition_detail_id` AS `po_requisition_detail_id`,`po_requisition_detail`.`shipment_number` AS `shipment_number`,`po_requisition_detail`.`subinventory_id` AS `subinventory_id`,`po_requisition_detail`.`locator_id` AS `locator_id`,`po_requisition_detail`.`requestor` AS `requestor`,`po_requisition_detail`.`quantity` AS `quantity`,`po_requisition_detail`.`need_by_date` AS `need_by_date`,`po_requisition_detail`.`promise_date` AS `promise_date`,`po_requisition_detail`.`received_quantity` AS `received_quantity`,`po_requisition_detail`.`accepted_quantity` AS `accepted_quantity`,`po_requisition_detail`.`delivered_quantity` AS `delivered_quantity`,`po_requisition_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_requisition_detail`.`paid_quantity` AS `paid_quantity`,`po_requisition_detail`.`order_number` AS `order_number`,`org`.`org` AS `ship_to_org`,`po_requisition_header`.`created_by` AS `created_by`,`po_requisition_header`.`creation_date` AS `creation_date`,`po_requisition_header`.`last_update_by` AS `last_update_by`,`po_requisition_header`.`last_update_date` AS `last_update_date` from (((((((`po_requisition_header` left join `supplier` on((`po_requisition_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_requisition_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_requisition_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_requisition_line` on((`po_requisition_header`.`po_requisition_header_id` = `po_requisition_line`.`po_requisition_header_id`))) left join `item` on(((`po_requisition_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_requisition_line`.`receving_org_id`)))) left join `po_requisition_detail` on((`po_requisition_line`.`po_requisition_line_id` = `po_requisition_detail`.`po_requisition_line_id`))) left join `org` on((`po_requisition_line`.`receving_org_id` = `org`.`org_id`))) where ((`po_requisition_header`.`requisition_status` = 'APPROVED') and (isnull(`po_requisition_detail`.`order_number`) or (`po_requisition_detail`.`order_number` = '')));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `po_convert_requisition_v` AS select `po_requisition_header`.`po_requisition_header_id` AS `po_requisition_header_id`,`po_requisition_header`.`bu_org_id` AS `bu_org_id`,`po_requisition_header`.`po_requisition_type` AS `po_requisition_type`,`po_requisition_header`.`po_requisition_number` AS `po_requisition_number`,`po_requisition_header`.`supplier_id` AS `supplier_id`,`po_requisition_header`.`supplier_site_id` AS `supplier_site_id`,`po_requisition_header`.`buyer` AS `buyer`,`po_requisition_header`.`currency` AS `currency`,`po_requisition_header`.`header_amount` AS `header_amount`,`po_requisition_header`.`requisition_status` AS `requisition_status`,ifnull(`po_requisition_header`.`payment_term_id`,`supplier_site`.`payment_term_id`) AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_requisition_line`.`po_requisition_line_id` AS `po_requisition_line_id`,`po_requisition_line`.`line_type` AS `line_type`,`po_requisition_line`.`line_number` AS `po_requisition_line_number`,`po_requisition_line`.`item_id_m` AS `item_id_m`,`po_requisition_line`.`bpa_po_line_id` AS `bpa_po_line_id`,`po_requisition_line`.`item_description` AS `item_description`,`po_requisition_line`.`line_description` AS `line_description`,`po_requisition_line`.`line_quantity` AS `line_quantity`,`po_requisition_line`.`unit_price` AS `unit_price`,`po_requisition_line`.`line_price` AS `line_price`,`po_requisition_line`.`receving_org_id` AS `receving_org_id`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_requisition_detail`.`po_requisition_detail_id` AS `po_requisition_detail_id`,`po_requisition_detail`.`shipment_number` AS `shipment_number`,`po_requisition_detail`.`subinventory_id` AS `subinventory_id`,`po_requisition_detail`.`locator_id` AS `locator_id`,`po_requisition_detail`.`requestor` AS `requestor`,`po_requisition_detail`.`quantity` AS `quantity`,`po_requisition_detail`.`need_by_date` AS `need_by_date`,`po_requisition_detail`.`promise_date` AS `promise_date`,`po_requisition_detail`.`received_quantity` AS `received_quantity`,`po_requisition_detail`.`accepted_quantity` AS `accepted_quantity`,`po_requisition_detail`.`delivered_quantity` AS `delivered_quantity`,`po_requisition_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_requisition_detail`.`paid_quantity` AS `paid_quantity`,`po_requisition_detail`.`order_number` AS `order_number`,`org`.`org` AS `ship_to_org`,`po_requisition_header`.`created_by` AS `created_by`,`po_requisition_header`.`creation_date` AS `creation_date`,`po_requisition_header`.`last_update_by` AS `last_update_by`,`po_requisition_header`.`last_update_date` AS `last_update_date` from (((((((`po_requisition_header` left join `supplier` on((`po_requisition_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_requisition_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_requisition_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_requisition_line` on((`po_requisition_header`.`po_requisition_header_id` = `po_requisition_line`.`po_requisition_header_id`))) left join `item` on(((`po_requisition_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_requisition_line`.`receving_org_id`)))) left join `po_requisition_detail` on((`po_requisition_line`.`po_requisition_line_id` = `po_requisition_detail`.`po_requisition_line_id`))) left join `org` on((`po_requisition_line`.`receving_org_id` = `org`.`org_id`))) where ((`po_requisition_header`.`requisition_status` = 'APPROVED') and (isnull(`po_requisition_detail`.`order_number`) or (`po_requisition_detail`.`order_number` = '')));
 
 -- --------------------------------------------------------
 
@@ -20142,7 +22158,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_convert_requisition_v`
 --
 DROP TABLE IF EXISTS `po_document_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_document_v` AS select `po_header`.`po_header_id` AS `po_header_id`,`po_header`.`bu_org_id` AS `bu_org_id`,`po_header`.`po_type` AS `po_type`,`po_header`.`po_number` AS `po_number`,`po_header`.`supplier_id` AS `supplier_id`,`po_header`.`supplier_site_id` AS `supplier_site_id`,`po_header`.`buyer` AS `buyer`,`po_header`.`currency` AS `currency`,`po_header`.`header_amount` AS `header_amount`,`po_header`.`po_status` AS `po_status`,`po_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_line`.`po_line_id` AS `po_line_id`,`po_line`.`line_type` AS `line_type`,`po_line`.`line_number` AS `po_line_number`,`po_line`.`item_id_m` AS `item_id_m`,`po_line`.`item_description` AS `item_description`,`po_line`.`line_description` AS `line_description`,`po_line`.`line_quantity` AS `line_quantity`,`po_line`.`unit_price` AS `unit_price`,`po_line`.`line_price` AS `line_price`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_detail`.`po_detail_id` AS `po_detail_id`,`po_detail`.`shipment_number` AS `shipment_number`,`po_line`.`receving_org_id` AS `receving_org_id`,`po_detail`.`subinventory_id` AS `subinventory_id`,`po_detail`.`locator_id` AS `locator_id`,`po_detail`.`requestor` AS `requestor`,`po_detail`.`quantity` AS `quantity`,ifnull(`po_detail`.`received_quantity`,0) AS `received_quantity`,(`po_detail`.`quantity` - ifnull(`po_detail`.`received_quantity`,0)) AS `open_quantity`,`po_detail`.`need_by_date` AS `need_by_date`,`po_detail`.`promise_date` AS `promise_date`,`po_detail`.`accepted_quantity` AS `accepted_quantity`,`po_detail`.`delivered_quantity` AS `delivered_quantity`,`po_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_detail`.`paid_quantity` AS `paid_quantity`,`po_detail`.`charge_ac_id` AS `charge_ac_id`,`po_detail`.`accrual_ac_id` AS `accrual_ac_id`,`po_detail`.`budget_ac_id` AS `budget_ac_id`,`po_detail`.`ppv_ac_id` AS `ppv_ac_id`,`org`.`org` AS `receving_org`,`po_header`.`created_by` AS `created_by`,`po_header`.`creation_date` AS `creation_date`,`po_header`.`last_update_by` AS `last_update_by`,`po_header`.`last_update_date` AS `last_update_date` from (((((((`po_header` left join `supplier` on((`po_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_line` on((`po_header`.`po_header_id` = `po_line`.`po_header_id`))) left join `item` on(((`po_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_line`.`receving_org_id`)))) left join `po_detail` on((`po_line`.`po_line_id` = `po_detail`.`po_line_id`))) left join `org` on((`po_line`.`receving_org_id` = `org`.`org_id`))) where (`po_header`.`po_type` in ('STANDARD','BLANKET','CONTRACT'));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `po_document_v` AS select `po_header`.`po_header_id` AS `po_header_id`,`po_header`.`bu_org_id` AS `bu_org_id`,`po_header`.`po_type` AS `po_type`,`po_header`.`po_number` AS `po_number`,`po_header`.`supplier_id` AS `supplier_id`,`po_header`.`supplier_site_id` AS `supplier_site_id`,`po_header`.`buyer` AS `buyer`,`po_header`.`currency` AS `currency`,`po_header`.`header_amount` AS `header_amount`,`po_header`.`po_status` AS `po_status`,`po_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_line`.`po_line_id` AS `po_line_id`,`po_line`.`line_type` AS `line_type`,`po_line`.`line_number` AS `po_line_number`,`po_line`.`item_id_m` AS `item_id_m`,`po_line`.`item_description` AS `item_description`,`po_line`.`line_description` AS `line_description`,`po_line`.`line_quantity` AS `line_quantity`,`po_line`.`unit_price` AS `unit_price`,`po_line`.`line_price` AS `line_price`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_detail`.`po_detail_id` AS `po_detail_id`,`po_detail`.`shipment_number` AS `shipment_number`,`po_line`.`receving_org_id` AS `receving_org_id`,`po_detail`.`subinventory_id` AS `subinventory_id`,`po_detail`.`locator_id` AS `locator_id`,`po_detail`.`requestor` AS `requestor`,`po_detail`.`quantity` AS `quantity`,ifnull(`po_detail`.`received_quantity`,0) AS `received_quantity`,(`po_detail`.`quantity` - ifnull(`po_detail`.`received_quantity`,0)) AS `open_quantity`,`po_detail`.`need_by_date` AS `need_by_date`,`po_detail`.`promise_date` AS `promise_date`,`po_detail`.`accepted_quantity` AS `accepted_quantity`,`po_detail`.`delivered_quantity` AS `delivered_quantity`,`po_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_detail`.`paid_quantity` AS `paid_quantity`,`po_detail`.`charge_ac_id` AS `charge_ac_id`,`po_detail`.`accrual_ac_id` AS `accrual_ac_id`,`po_detail`.`budget_ac_id` AS `budget_ac_id`,`po_detail`.`ppv_ac_id` AS `ppv_ac_id`,`org`.`org` AS `receving_org`,`po_header`.`created_by` AS `created_by`,`po_header`.`creation_date` AS `creation_date`,`po_header`.`last_update_by` AS `last_update_by`,`po_header`.`last_update_date` AS `last_update_date` from (((((((`po_header` left join `supplier` on((`po_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_line` on((`po_header`.`po_header_id` = `po_line`.`po_header_id`))) left join `item` on(((`po_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_line`.`receving_org_id`)))) left join `po_detail` on((`po_line`.`po_line_id` = `po_detail`.`po_line_id`))) left join `org` on((`po_line`.`receving_org_id` = `org`.`org_id`))) where (`po_header`.`po_type` in ('STANDARD','BLANKET','CONTRACT'));
 
 -- --------------------------------------------------------
 
@@ -20151,7 +22167,43 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_document_v` AS select 
 --
 DROP TABLE IF EXISTS `po_requisition_all_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_requisition_all_v` AS select `po_requisition_header`.`po_requisition_header_id` AS `po_requisition_header_id`,`po_requisition_header`.`bu_org_id` AS `bu_org_id`,`po_requisition_header`.`po_requisition_type` AS `po_requisition_type`,`po_requisition_header`.`po_requisition_number` AS `po_requisition_number`,`po_requisition_header`.`supplier_id` AS `supplier_id`,`po_requisition_header`.`supplier_site_id` AS `supplier_site_id`,`po_requisition_header`.`buyer` AS `buyer`,`po_requisition_header`.`currency` AS `currency`,`po_requisition_header`.`header_amount` AS `header_amount`,`po_requisition_header`.`requisition_status` AS `requisition_status`,`po_requisition_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_requisition_line`.`po_requisition_line_id` AS `po_requisition_line_id`,`po_requisition_line`.`line_type` AS `line_type`,`po_requisition_line`.`line_number` AS `po_requisition_line_number`,`po_requisition_line`.`item_id_m` AS `item_id_m`,`po_requisition_line`.`item_description` AS `item_description`,`po_requisition_line`.`line_description` AS `line_description`,`po_requisition_line`.`line_quantity` AS `line_quantity`,`po_requisition_line`.`unit_price` AS `unit_price`,`po_requisition_line`.`line_price` AS `line_price`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_requisition_detail`.`po_requisition_detail_id` AS `po_requisition_detail_id`,`po_requisition_detail`.`shipment_number` AS `shipment_number`,`po_requisition_detail`.`ship_to_inventory` AS `ship_to_inventory`,`po_requisition_detail`.`subinventory_id` AS `subinventory_id`,`po_requisition_detail`.`locator_id` AS `locator_id`,`po_requisition_detail`.`requestor` AS `requestor`,`po_requisition_detail`.`quantity` AS `quantity`,`po_requisition_detail`.`need_by_date` AS `need_by_date`,`po_requisition_detail`.`promise_date` AS `promise_date`,`po_requisition_detail`.`received_quantity` AS `received_quantity`,`po_requisition_detail`.`accepted_quantity` AS `accepted_quantity`,`po_requisition_detail`.`delivered_quantity` AS `delivered_quantity`,`po_requisition_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_requisition_detail`.`paid_quantity` AS `paid_quantity`,`po_requisition_detail`.`order_number` AS `order_number`,`org`.`org` AS `ship_to_org`,`po_requisition_header`.`created_by` AS `created_by`,`po_requisition_header`.`creation_date` AS `creation_date`,`po_requisition_header`.`last_update_by` AS `last_update_by`,`po_requisition_header`.`last_update_date` AS `last_update_date` from (((((((`po_requisition_header` left join `supplier` on((`po_requisition_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_requisition_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_requisition_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_requisition_line` on((`po_requisition_header`.`po_requisition_header_id` = `po_requisition_line`.`po_requisition_header_id`))) left join `item` on(((`po_requisition_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_requisition_line`.`receving_org_id`)))) left join `po_requisition_detail` on((`po_requisition_line`.`po_requisition_line_id` = `po_requisition_detail`.`po_requisition_line_id`))) left join `org` on((`po_requisition_detail`.`ship_to_inventory` = `org`.`org_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `po_requisition_all_v` AS select `po_requisition_header`.`po_requisition_header_id` AS `po_requisition_header_id`,`po_requisition_header`.`bu_org_id` AS `bu_org_id`,`po_requisition_header`.`po_requisition_type` AS `po_requisition_type`,`po_requisition_header`.`po_requisition_number` AS `po_requisition_number`,`po_requisition_header`.`supplier_id` AS `supplier_id`,`po_requisition_header`.`supplier_site_id` AS `supplier_site_id`,`po_requisition_header`.`buyer` AS `buyer`,`po_requisition_header`.`currency` AS `currency`,`po_requisition_header`.`header_amount` AS `header_amount`,`po_requisition_header`.`requisition_status` AS `requisition_status`,`po_requisition_header`.`payment_term_id` AS `payment_term_id`,`supplier`.`supplier_name` AS `supplier_name`,`supplier`.`supplier_number` AS `supplier_number`,`supplier_site`.`supplier_site_name` AS `supplier_site_name`,`supplier_site`.`supplier_site_number` AS `supplier_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`po_requisition_line`.`po_requisition_line_id` AS `po_requisition_line_id`,`po_requisition_line`.`line_type` AS `line_type`,`po_requisition_line`.`line_number` AS `po_requisition_line_number`,`po_requisition_line`.`item_id_m` AS `item_id_m`,`po_requisition_line`.`item_description` AS `item_description`,`po_requisition_line`.`line_description` AS `line_description`,`po_requisition_line`.`line_quantity` AS `line_quantity`,`po_requisition_line`.`unit_price` AS `unit_price`,`po_requisition_line`.`line_price` AS `line_price`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`po_requisition_detail`.`po_requisition_detail_id` AS `po_requisition_detail_id`,`po_requisition_detail`.`shipment_number` AS `shipment_number`,`po_requisition_detail`.`ship_to_inventory` AS `ship_to_inventory`,`po_requisition_detail`.`subinventory_id` AS `subinventory_id`,`po_requisition_detail`.`locator_id` AS `locator_id`,`po_requisition_detail`.`requestor` AS `requestor`,`po_requisition_detail`.`quantity` AS `quantity`,`po_requisition_detail`.`need_by_date` AS `need_by_date`,`po_requisition_detail`.`promise_date` AS `promise_date`,`po_requisition_detail`.`received_quantity` AS `received_quantity`,`po_requisition_detail`.`accepted_quantity` AS `accepted_quantity`,`po_requisition_detail`.`delivered_quantity` AS `delivered_quantity`,`po_requisition_detail`.`invoiced_quantity` AS `invoiced_quantity`,`po_requisition_detail`.`paid_quantity` AS `paid_quantity`,`po_requisition_detail`.`order_number` AS `order_number`,`org`.`org` AS `ship_to_org`,`po_requisition_header`.`created_by` AS `created_by`,`po_requisition_header`.`creation_date` AS `creation_date`,`po_requisition_header`.`last_update_by` AS `last_update_by`,`po_requisition_header`.`last_update_date` AS `last_update_date` from (((((((`po_requisition_header` left join `supplier` on((`po_requisition_header`.`supplier_id` = `supplier`.`supplier_id`))) left join `supplier_site` on((`po_requisition_header`.`supplier_site_id` = `supplier_site`.`supplier_site_id`))) left join `payment_term` on((`po_requisition_header`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `po_requisition_line` on((`po_requisition_header`.`po_requisition_header_id` = `po_requisition_line`.`po_requisition_header_id`))) left join `item` on(((`po_requisition_line`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `po_requisition_line`.`receving_org_id`)))) left join `po_requisition_detail` on((`po_requisition_line`.`po_requisition_line_id` = `po_requisition_detail`.`po_requisition_line_id`))) left join `org` on((`po_requisition_detail`.`ship_to_inventory` = `org`.`org_id`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `prj_burden_expenditure_v`
+--
+DROP TABLE IF EXISTS `prj_burden_expenditure_v`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `prj_burden_expenditure_v` AS select `pbe`.`prj_burden_expenditure_id` AS `prj_burden_expenditure_id`,`pph`.`project_number` AS `project_number`,`pbc`.`costcode` AS `costcode`,`pbc`.`description` AS `costcode_description`,`pbcb`.`cost_base` AS `cost_base`,`pbcb`.`description` AS `cost_base_description`,`bplh`.`burden_list` AS `burden_list`,`pel`.`prj_expenditure_line_id` AS `prj_expenditure_line_id`,`pel`.`prj_expenditure_header_id` AS `prj_expenditure_header_id`,`pel`.`org_id` AS `org_id`,`pel`.`prj_project_header_id` AS `prj_project_header_id`,`pel`.`prj_project_line_id` AS `prj_project_line_id`,`pel`.`prj_nlr_header_id` AS `prj_nlr_header_id`,`pel`.`prj_expenditure_type_header_id` AS `prj_expenditure_type_header_id`,`pel`.`uom_id` AS `uom_id`,`pel`.`quantity` AS `quantity`,`pbe`.`description` AS `description`,`pbe`.`prj_burden_list_header_id` AS `prj_burden_list_header_id`,`pbe`.`expenditure_date` AS `expenditure_date`,`pbe`.`prj_burden_structure_header_id` AS `prj_burden_structure_header_id`,`pbe`.`prj_burden_costcode_id` AS `prj_burden_costcode_id`,`pbe`.`multiplier` AS `multiplier`,`pbe`.`burden_value` AS `burden_value`,`pbe`.`burden_amount` AS `burden_amount` from (((((`prj_burden_expenditure` `pbe` join `prj_expenditure_line` `pel`) join `prj_project_header` `pph`) join `prj_burden_list_header` `bplh`) join `prj_burden_cost_base` `pbcb`) join `prj_burden_costcode` `pbc`) where ((`pbe`.`prj_expenditure_line_id` = `pel`.`prj_expenditure_line_id`) and (`pbcb`.`prj_burden_cost_base_id` = `pbe`.`prj_burden_cost_base_id`) and (`pbc`.`prj_burden_costcode_id` = `pbe`.`prj_burden_cost_base_id`) and (`pph`.`prj_project_header_id` = `pel`.`prj_project_header_id`) and (`bplh`.`prj_burden_list_header_id` = `pbe`.`prj_burden_list_header_id`));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `prj_expenditure_line_v`
+--
+DROP TABLE IF EXISTS `prj_expenditure_line_v`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `prj_expenditure_line_v` AS select `pel`.`prj_expenditure_line_id` AS `prj_expenditure_line_id`,`pel`.`prj_expenditure_header_id` AS `prj_expenditure_header_id`,`pel`.`org_id` AS `org_id`,`pel`.`hr_employee_id` AS `hr_employee_id`,`pel`.`description` AS `description`,`pel`.`job_id` AS `job_id`,`pel`.`expenditure_date` AS `expenditure_date`,`pel`.`prj_project_header_id` AS `prj_project_header_id`,`pel`.`prj_project_line_id` AS `prj_project_line_id`,`pel`.`prj_nlr_header_id` AS `prj_nlr_header_id`,`pel`.`prj_expenditure_type_header_id` AS `prj_expenditure_type_header_id`,`pel`.`uom_id` AS `uom_id`,`pel`.`quantity` AS `quantity`,`pel`.`rate` AS `rate`,`pel`.`debit_ac_id` AS `debit_ac_id`,`pel`.`credit_ac_id` AS `credit_ac_id`,`pel`.`burden_amount` AS `burden_amount`,`pel`.`gl_journal_header_id` AS `gl_journal_header_id`,`pel`.`gl_journal_interface_cb` AS `gl_journal_interface_cb`,`pel`.`status` AS `status`,`pph`.`project_number` AS `project_number`,`pph`.`bu_org_id` AS `bu_org_id`,`ppl`.`task_number` AS `task_number` from ((`prj_expenditure_line` `pel` join `prj_project_line` `ppl`) join `prj_project_header` `pph`) where ((`pel`.`prj_project_header_id` = `pph`.`prj_project_header_id`) and (`pel`.`prj_project_line_id` = `ppl`.`prj_project_line_id`));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `prj_percent_all_v`
+--
+DROP TABLE IF EXISTS `prj_percent_all_v`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `prj_percent_all_v` AS select `pp`.`prj_percent_header_id` AS `prj_percent_header_id`,`pp`.`percent` AS `percent`,`pp`.`description` AS `description`,`pp`.`as_of_date` AS `as_of_date`,`pp`.`status` AS `status`,`pp`.`created_by` AS `created_by`,`pp`.`creation_date` AS `creation_date`,`pp`.`last_update_by` AS `last_update_by`,`pp`.`last_update_date` AS `last_update_date`,`projh`.`project_number` AS `project_number`,`projh`.`description` AS `project_description`,`projh`.`prj_project_header_id` AS `prj_project_header_id` from (`prj_percent_header` `pp` join `prj_project_header` `projh`) where (`projh`.`prj_project_header_id` = `pp`.`prj_project_header_id`) union select NULL AS `prj_percent_header_id`,NULL AS `percent`,NULL AS `description`,NULL AS `as_of_date`,NULL AS `status`,NULL AS `created_by`,NULL AS `creation_date`,NULL AS `last_update_by`,NULL AS `last_update_date`,`projh`.`project_number` AS `project_number`,`projh`.`description` AS `project_description`,`projh`.`prj_project_header_id` AS `prj_project_header_id` from `prj_project_header` `projh` where (not(`projh`.`prj_project_header_id` in (select distinct `prj_percent_header`.`prj_project_header_id` from `prj_percent_header`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `prj_percent_line_v`
+--
+DROP TABLE IF EXISTS `prj_percent_line_v`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `prj_percent_line_v` AS select `ppl`.`prj_percent_line_id` AS `prj_percent_line_id`,`ppl`.`prj_percent_header_id` AS `prj_percent_header_id`,`ppl`.`percent` AS `percent`,`ppl`.`comment` AS `comment`,`ppl`.`as_of_date` AS `as_of_date`,`ppl`.`created_by` AS `created_by`,`ppl`.`creation_date` AS `creation_date`,`ppl`.`last_update_by` AS `last_update_by`,`ppl`.`last_update_date` AS `last_update_date`,`projl`.`prj_project_line_id` AS `prj_project_line_id`,`projl`.`prj_project_header_id` AS `prj_project_header_id`,`projl`.`task_number` AS `task_number`,`projl`.`task_name` AS `task_name`,`projl`.`task_level_weight` AS `task_level_weight`,`projl`.`parent_prj_task_num` AS `parent_prj_task_num`,`projl`.`description` AS `description` from (`prj_percent_line` `ppl` join `prj_project_line` `projl`) where ((`projl`.`prj_project_header_id` = `ppl`.`prj_project_header_id`) and (`projl`.`prj_project_line_id` = `ppl`.`prj_project_line_id`)) union select NULL AS `prj_percent_line_id`,NULL AS `prj_percent_line_id`,NULL AS `percent`,NULL AS `comment`,NULL AS `as_of_date`,NULL AS `created_by`,NULL AS `creation_date`,NULL AS `last_update_by`,NULL AS `last_update_date`,`projl`.`prj_project_line_id` AS `prj_project_line_id`,`projl`.`prj_project_header_id` AS `prj_project_header_id`,`projl`.`task_number` AS `task_number`,`projl`.`task_name` AS `task_name`,`projl`.`task_level_weight` AS `task_level_weight`,`projl`.`parent_prj_task_num` AS `parent_prj_task_num`,`projl`.`description` AS `description` from `prj_project_line` `projl` where (not(`projl`.`prj_project_line_id` in (select distinct `prj_percent_line`.`prj_project_line_id` from `prj_percent_line`)));
 
 -- --------------------------------------------------------
 
@@ -20160,7 +22212,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `po_requisition_all_v` AS 
 --
 DROP TABLE IF EXISTS `prj_project_all_lowesttask_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `prj_project_all_lowesttask_v` AS select `org`.`org` AS `org`,`prh`.`project_number` AS `project_number`,`prh`.`description` AS `description`,`prl`.`task_number` AS `task_number`,`prl`.`task_name` AS `task_name`,`prl`.`description` AS `task_description`,`prh`.`project_status` AS `project_status`,`prh`.`approval_status` AS `approval_status`,`prl`.`prj_project_line_id` AS `prj_project_line_id`,`prl`.`prj_project_header_id` AS `prj_project_header_id`,`prl`.`task_level_weight` AS `task_level_weight`,`prl`.`parent_prj_task_num` AS `parent_prj_task_num`,`prl`.`start_date` AS `task_start_date`,`prl`.`end_date` AS `task_end_date`,`prl`.`manager_user_id` AS `task_manager_user_id`,`prl`.`org_id` AS `org_id`,`prl`.`service_type` AS `service_type`,`prl`.`work_type` AS `work_type`,`prl`.`allow_charges_cb` AS `allow_charges_cb`,`prl`.`capitalizable_cb` AS `capitalizable_cb`,`prh`.`bu_org_id` AS `bu_org_id`,`prh`.`prj_project_type_id` AS `prj_project_type_id`,`prh`.`ar_customer_id` AS `ar_customer_id`,`prh`.`ar_customer_site_id` AS `ar_customer_site_id`,`prh`.`pm_employee_id` AS `pm_employee_id`,`prh`.`manager_user_id` AS `manager_user_id`,`prh`.`start_date` AS `start_date`,`prh`.`completion_date` AS `completion_date`,`prh`.`header_amount` AS `header_amount` from ((`prj_project_header` `prh` join `prj_project_line` `prl`) join `org`) where ((`prl`.`prj_project_header_id` = `prh`.`prj_project_header_id`) and (`prh`.`bu_org_id` = `org`.`org_id`) and (not(`prl`.`task_number` in (select `prl`.`parent_prj_task_num` from `prj_project_line` `prl` where (`prl`.`parent_prj_task_num` is not null)))));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `prj_project_all_lowesttask_v` AS select `org`.`org` AS `org`,`prh`.`project_number` AS `project_number`,`prh`.`description` AS `description`,`prl`.`task_number` AS `task_number`,`prl`.`task_name` AS `task_name`,`prl`.`description` AS `task_description`,`prh`.`project_status` AS `project_status`,`prh`.`approval_status` AS `approval_status`,`prl`.`prj_project_line_id` AS `prj_project_line_id`,`prl`.`prj_project_header_id` AS `prj_project_header_id`,`prl`.`task_level_weight` AS `task_level_weight`,`prl`.`parent_prj_task_num` AS `parent_prj_task_num`,`prl`.`start_date` AS `task_start_date`,`prl`.`end_date` AS `task_end_date`,`prl`.`manager_user_id` AS `task_manager_user_id`,`prl`.`org_id` AS `org_id`,`prl`.`service_type` AS `service_type`,`prl`.`work_type` AS `work_type`,`prl`.`allow_charges_cb` AS `allow_charges_cb`,`prl`.`capitalizable_cb` AS `capitalizable_cb`,`prh`.`bu_org_id` AS `bu_org_id`,`prh`.`prj_project_type_id` AS `prj_project_type_id`,`prh`.`ar_customer_id` AS `ar_customer_id`,`prh`.`ar_customer_site_id` AS `ar_customer_site_id`,`prh`.`pm_employee_id` AS `pm_employee_id`,`prh`.`manager_user_id` AS `manager_user_id`,`prh`.`start_date` AS `start_date`,`prh`.`completion_date` AS `completion_date`,`prh`.`header_amount` AS `header_amount` from ((`prj_project_header` `prh` join `prj_project_line` `prl`) join `org`) where ((`prl`.`prj_project_header_id` = `prh`.`prj_project_header_id`) and (`prh`.`bu_org_id` = `org`.`org_id`) and (not(`prl`.`task_number` in (select `prl`.`parent_prj_task_num` from `prj_project_line` `prl` where (`prl`.`parent_prj_task_num` is not null)))));
 
 -- --------------------------------------------------------
 
@@ -20169,7 +22221,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `prj_project_all_lowesttas
 --
 DROP TABLE IF EXISTS `prj_project_all_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `prj_project_all_v` AS select `org`.`org` AS `org`,`prh`.`project_number` AS `project_number`,`prh`.`description` AS `description`,`prl`.`task_number` AS `task_number`,`prl`.`task_name` AS `task_name`,`prl`.`description` AS `task_description`,`prh`.`project_status` AS `project_status`,`prh`.`approval_status` AS `approval_status`,`prl`.`prj_project_line_id` AS `prj_project_line_id`,`prl`.`prj_project_header_id` AS `prj_project_header_id`,`prl`.`task_level_weight` AS `task_level_weight`,`prl`.`parent_prj_task_num` AS `parent_prj_task_num`,`prl`.`start_date` AS `task_start_date`,`prl`.`end_date` AS `task_end_date`,`prl`.`manager_user_id` AS `task_manager_user_id`,`prl`.`org_id` AS `org_id`,`prl`.`service_type` AS `service_type`,`prl`.`work_type` AS `work_type`,`prl`.`allow_charges_cb` AS `allow_charges_cb`,`prl`.`capitalizable_cb` AS `capitalizable_cb`,`prh`.`bu_org_id` AS `bu_org_id`,`prh`.`prj_project_type_id` AS `prj_project_type_id`,`prh`.`ar_customer_id` AS `ar_customer_id`,`prh`.`ar_customer_site_id` AS `ar_customer_site_id`,`prh`.`pm_employee_id` AS `pm_employee_id`,`prh`.`manager_user_id` AS `manager_user_id`,`prh`.`start_date` AS `start_date`,`prh`.`completion_date` AS `completion_date`,`prh`.`header_amount` AS `header_amount` from ((`prj_project_header` `prh` join `prj_project_line` `prl`) join `org`) where ((`prl`.`prj_project_header_id` = `prh`.`prj_project_header_id`) and (`prh`.`bu_org_id` = `org`.`org_id`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `prj_project_all_v` AS select `org`.`org` AS `org`,`prh`.`project_number` AS `project_number`,`prh`.`description` AS `description`,`prl`.`task_number` AS `task_number`,`prl`.`task_name` AS `task_name`,`prl`.`description` AS `task_description`,`prh`.`project_status` AS `project_status`,`prh`.`approval_status` AS `approval_status`,`prl`.`prj_project_line_id` AS `prj_project_line_id`,`prl`.`prj_project_header_id` AS `prj_project_header_id`,`prl`.`task_level_weight` AS `task_level_weight`,`prl`.`parent_prj_task_num` AS `parent_prj_task_num`,`prl`.`start_date` AS `task_start_date`,`prl`.`end_date` AS `task_end_date`,`prl`.`manager_user_id` AS `task_manager_user_id`,`prl`.`org_id` AS `org_id`,`prl`.`service_type` AS `service_type`,`prl`.`work_type` AS `work_type`,`prl`.`allow_charges_cb` AS `allow_charges_cb`,`prl`.`capitalizable_cb` AS `capitalizable_cb`,`prh`.`bu_org_id` AS `bu_org_id`,`prh`.`prj_project_type_id` AS `prj_project_type_id`,`prh`.`ar_customer_id` AS `ar_customer_id`,`prh`.`ar_customer_site_id` AS `ar_customer_site_id`,`prh`.`pm_employee_id` AS `pm_employee_id`,`prh`.`manager_user_id` AS `manager_user_id`,`prh`.`start_date` AS `start_date`,`prh`.`completion_date` AS `completion_date`,`prh`.`header_amount` AS `header_amount` from ((`prj_project_header` `prh` join `prj_project_line` `prl`) join `org`) where ((`prl`.`prj_project_header_id` = `prh`.`prj_project_header_id`) and (`prh`.`bu_org_id` = `org`.`org_id`));
 
 -- --------------------------------------------------------
 
@@ -20178,7 +22230,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `prj_project_all_v` AS sel
 --
 DROP TABLE IF EXISTS `sd_delivery_all_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `sd_delivery_all_v` AS select `sddh`.`sd_delivery_header_id` AS `sd_delivery_header_id`,`sddh`.`delivery_number` AS `delivery_number`,`sddh`.`carrier` AS `carrier`,`sddh`.`vehicle_number` AS `vehicle_number`,`sddh`.`handling_instruction` AS `handling_instruction`,`sddl`.`shipped_quantity` AS `delivery_shipped_quantity`,`sddl`.`delivery_status` AS `delivery_status`,`sdsh`.`sd_so_header_id` AS `sd_so_header_id`,`sdsh`.`bu_org_id` AS `bu_org_id`,`sdsh`.`document_type` AS `document_type`,`sdsh`.`so_number` AS `so_number`,`sdsh`.`ar_customer_id` AS `ar_customer_id`,`sdsh`.`ship_to_id` AS `ship_to_id`,`sdsh`.`bill_to_id` AS `bill_to_id`,`sdsh`.`ar_customer_site_id` AS `ar_customer_site_id`,`sdsh`.`hr_employee_id` AS `hr_employee_id`,`sdsh`.`doc_currency` AS `doc_currency`,`sdsh`.`header_amount` AS `header_amount`,`sdsh`.`so_status` AS `so_status`,`sdsh`.`payment_term_id` AS `payment_term_id`,`ar_customer`.`customer_name` AS `customer_name`,`ar_customer`.`customer_number` AS `customer_number`,`ar_customer_site`.`customer_site_name` AS `customer_site_name`,`ar_customer_site`.`customer_site_number` AS `customer_site_number`,`sdsl`.`sd_so_line_id` AS `sd_so_line_id`,`sdsl`.`line_type` AS `line_type`,`sdsl`.`line_number` AS `line_number`,`sdsl`.`item_id_m` AS `item_id_m`,`sdsl`.`kit_cb` AS `kit_cb`,`sdsl`.`kit_configured_cb` AS `kit_configured_cb`,`sdsl`.`bom_config_header_id` AS `bom_config_header_id`,`sdsl`.`wip_wo_header_id` AS `wip_wo_header_id`,`sdsl`.`item_description` AS `item_description`,`sdsl`.`line_description` AS `line_description`,`sdsl`.`line_quantity` AS `line_quantity`,`sdsl`.`picked_quantity` AS `picked_quantity`,`sdsl`.`shipped_quantity` AS `shipped_quantity`,`sdsl`.`unit_price` AS `unit_price`,`sdsl`.`line_price` AS `line_price`,`sdsl`.`line_status` AS `line_status`,`sdsl`.`requested_date` AS `requested_date`,`sdsl`.`promise_date` AS `promise_date`,`sdsl`.`schedule_ship_date` AS `schedule_ship_date`,`sdsl`.`actual_ship_date` AS `actual_ship_date`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`org`.`org` AS `org`,`sdsl`.`shipping_org_id` AS `shipping_org_id`,`sdsl`.`created_by` AS `created_by`,`sdsl`.`creation_date` AS `creation_date`,`sdsl`.`last_update_by` AS `last_update_by`,`sdsl`.`last_update_date` AS `last_update_date`,`ship_address`.`address` AS `address`,`ship_address`.`country` AS `country`,`ship_address`.`postal_code` AS `postal_code`,`ship_address`.`phone` AS `phone`,`ship_address`.`email` AS `email`,`ship_address`.`website` AS `website`,`bill_address`.`address` AS `address_b`,`bill_address`.`country` AS `country_b`,`bill_address`.`postal_code` AS `postal_code_b`,`bill_address`.`phone` AS `phone_b`,`bill_address`.`email` AS `email_b`,`bill_address`.`website` AS `website_b`,concat(`hre`.`last_name`,', ',`hre`.`first_name`) AS `sales_person` from ((((((((`sd_delivery_header` `sddh` join `sd_delivery_line` `sddl`) join `ar_customer`) join `item`) join `org`) join `address` `ship_address`) join `address` `bill_address`) join ((`sd_so_header` `sdsh` left join `hr_employee` `hre` on((`sdsh`.`hr_employee_id` = `hre`.`hr_employee_id`))) left join `ar_customer_site` on((`sdsh`.`ar_customer_site_id` = `ar_customer_site`.`ar_customer_site_id`)))) join `sd_so_line` `sdsl`) where ((`sdsh`.`sd_so_header_id` = `sdsl`.`sd_so_header_id`) and (`sdsh`.`ar_customer_id` = `ar_customer`.`ar_customer_id`) and (`sdsl`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `sdsl`.`shipping_org_id`) and (`sdsl`.`shipping_org_id` = `org`.`org_id`) and (`sddh`.`sd_delivery_header_id` = `sddl`.`sd_delivery_header_id`) and (`sddl`.`sd_so_line_id` = `sdsl`.`sd_so_line_id`) and (`ship_address`.`address_id` = `sdsh`.`ship_to_id`) and (`bill_address`.`address_id` = `sdsh`.`bill_to_id`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `sd_delivery_all_v` AS select `sddh`.`sd_delivery_header_id` AS `sd_delivery_header_id`,`sddh`.`delivery_number` AS `delivery_number`,`sddh`.`carrier` AS `carrier`,`sddh`.`vehicle_number` AS `vehicle_number`,`sddh`.`handling_instruction` AS `handling_instruction`,`sddl`.`shipped_quantity` AS `delivery_shipped_quantity`,`sddl`.`delivery_status` AS `delivery_status`,`sdsh`.`sd_so_header_id` AS `sd_so_header_id`,`sdsh`.`bu_org_id` AS `bu_org_id`,`sdsh`.`document_type` AS `document_type`,`sdsh`.`so_number` AS `so_number`,`sdsh`.`ar_customer_id` AS `ar_customer_id`,`sdsh`.`ship_to_id` AS `ship_to_id`,`sdsh`.`bill_to_id` AS `bill_to_id`,`sdsh`.`ar_customer_site_id` AS `ar_customer_site_id`,`sdsh`.`hr_employee_id` AS `hr_employee_id`,`sdsh`.`doc_currency` AS `doc_currency`,`sdsh`.`header_amount` AS `header_amount`,`sdsh`.`so_status` AS `so_status`,`sdsh`.`payment_term_id` AS `payment_term_id`,`ar_customer`.`customer_name` AS `customer_name`,`ar_customer`.`customer_number` AS `customer_number`,`ar_customer_site`.`customer_site_name` AS `customer_site_name`,`ar_customer_site`.`customer_site_number` AS `customer_site_number`,`sdsl`.`sd_so_line_id` AS `sd_so_line_id`,`sdsl`.`line_type` AS `line_type`,`sdsl`.`line_number` AS `line_number`,`sdsl`.`item_id_m` AS `item_id_m`,`sdsl`.`kit_cb` AS `kit_cb`,`sdsl`.`kit_configured_cb` AS `kit_configured_cb`,`sdsl`.`bom_config_header_id` AS `bom_config_header_id`,`sdsl`.`wip_wo_header_id` AS `wip_wo_header_id`,`sdsl`.`item_description` AS `item_description`,`sdsl`.`line_description` AS `line_description`,`sdsl`.`line_quantity` AS `line_quantity`,`sdsl`.`picked_quantity` AS `picked_quantity`,`sdsl`.`shipped_quantity` AS `shipped_quantity`,`sdsl`.`unit_price` AS `unit_price`,`sdsl`.`line_price` AS `line_price`,`sdsl`.`line_status` AS `line_status`,`sdsl`.`requested_date` AS `requested_date`,`sdsl`.`promise_date` AS `promise_date`,`sdsl`.`schedule_ship_date` AS `schedule_ship_date`,`sdsl`.`actual_ship_date` AS `actual_ship_date`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`org`.`org` AS `org`,`sdsl`.`shipping_org_id` AS `shipping_org_id`,`sdsl`.`created_by` AS `created_by`,`sdsl`.`creation_date` AS `creation_date`,`sdsl`.`last_update_by` AS `last_update_by`,`sdsl`.`last_update_date` AS `last_update_date`,`ship_address`.`address` AS `address`,`ship_address`.`country` AS `country`,`ship_address`.`postal_code` AS `postal_code`,`ship_address`.`phone` AS `phone`,`ship_address`.`email` AS `email`,`ship_address`.`website` AS `website`,`bill_address`.`address` AS `address_b`,`bill_address`.`country` AS `country_b`,`bill_address`.`postal_code` AS `postal_code_b`,`bill_address`.`phone` AS `phone_b`,`bill_address`.`email` AS `email_b`,`bill_address`.`website` AS `website_b`,concat(`hre`.`last_name`,', ',`hre`.`first_name`) AS `sales_person` from ((((((((`sd_delivery_header` `sddh` join `sd_delivery_line` `sddl`) join `ar_customer`) join `item`) join `org`) join `address` `ship_address`) join `address` `bill_address`) join ((`sd_so_header` `sdsh` left join `hr_employee` `hre` on((`sdsh`.`hr_employee_id` = `hre`.`hr_employee_id`))) left join `ar_customer_site` on((`sdsh`.`ar_customer_site_id` = `ar_customer_site`.`ar_customer_site_id`)))) join `sd_so_line` `sdsl`) where ((`sdsh`.`sd_so_header_id` = `sdsl`.`sd_so_header_id`) and (`sdsh`.`ar_customer_id` = `ar_customer`.`ar_customer_id`) and (`sdsl`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `sdsl`.`shipping_org_id`) and (`sdsl`.`shipping_org_id` = `org`.`org_id`) and (`sddh`.`sd_delivery_header_id` = `sddl`.`sd_delivery_header_id`) and (`sddl`.`sd_so_line_id` = `sdsl`.`sd_so_line_id`) and (`ship_address`.`address_id` = `sdsh`.`ship_to_id`) and (`bill_address`.`address_id` = `sdsh`.`bill_to_id`));
 
 -- --------------------------------------------------------
 
@@ -20187,7 +22239,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `sd_delivery_all_v` AS sel
 --
 DROP TABLE IF EXISTS `sd_pick_list_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `sd_pick_list_v` AS select `sdsh`.`sd_so_header_id` AS `sd_so_header_id`,`sdsh`.`bu_org_id` AS `bu_org_id`,`sdsh`.`document_type` AS `document_type`,`sdsh`.`so_number` AS `so_number`,`sdsh`.`ar_customer_id` AS `ar_customer_id`,`sdsh`.`ar_customer_site_id` AS `ar_customer_site_id`,`sdsh`.`hr_employee_id` AS `hr_employee_id`,`sdsh`.`doc_currency` AS `doc_currency`,`sdsh`.`header_amount` AS `header_amount`,`sdsh`.`so_status` AS `so_status`,`sdsh`.`payment_term_id` AS `payment_term_id`,`osv`.`onhand` AS `onhand`,`ar_customer`.`customer_name` AS `customer_name`,`ar_customer`.`customer_number` AS `customer_number`,`ar_customer_site`.`customer_site_name` AS `customer_site_name`,`ar_customer_site`.`customer_site_number` AS `customer_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`sdsl`.`sd_so_line_id` AS `sd_so_line_id`,`sdsl`.`line_type` AS `line_type`,`sdsl`.`line_number` AS `line_number`,`sdsl`.`item_id_m` AS `item_id_m`,`sdsl`.`kit_cb` AS `kit_cb`,`sdsl`.`kit_configured_cb` AS `kit_configured_cb`,`sdsl`.`bom_config_header_id` AS `bom_config_header_id`,`sdsl`.`wip_wo_header_id` AS `wip_wo_header_id`,`sdsl`.`item_description` AS `item_description`,`sdsl`.`line_description` AS `line_description`,`sdsl`.`line_quantity` AS `line_quantity`,`sdsl`.`picked_quantity` AS `picked_quantity`,`sdsl`.`shipped_quantity` AS `shipped_quantity`,`sdsl`.`unit_price` AS `unit_price`,`sdsl`.`line_price` AS `line_price`,`sdsl`.`line_status` AS `line_status`,`ssc`.`staging_subinventory_id` AS `staging_subinventory_id`,`ssc`.`staging_locator_id` AS `staging_locator_id`,`subinventory`.`subinventory` AS `staging_subinventory`,`locator`.`locator` AS `staging_locator`,`sdsl`.`requested_date` AS `requested_date`,`sdsl`.`promise_date` AS `promise_date`,`sdsl`.`schedule_ship_date` AS `schedule_ship_date`,`sdsl`.`actual_ship_date` AS `actual_ship_date`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`org`.`org` AS `org`,`sdsl`.`shipping_org_id` AS `shipping_org_id`,`sdsl`.`created_by` AS `created_by`,`sdsl`.`creation_date` AS `creation_date`,`sdsl`.`last_update_by` AS `last_update_by`,`sdsl`.`last_update_date` AS `last_update_date` from (((((((`sd_so_header` `sdsh` left join `payment_term` on((`sdsh`.`payment_term_id` = `payment_term`.`payment_term_id`))) join `ar_customer`) join `ar_customer_site`) join (`sd_so_line` `sdsl` left join `onhand_summary_v` `osv` on(((`osv`.`item_id_m` = `sdsl`.`item_id_m`) and (`osv`.`org_id` = `sdsl`.`shipping_org_id`))))) join `item`) join `org`) join ((`sd_shipping_control` `ssc` left join `subinventory` on((`subinventory`.`subinventory_id` = `ssc`.`staging_subinventory_id`))) left join `locator` on((`locator`.`locator_id` = `ssc`.`staging_locator_id`)))) where ((`sdsh`.`sd_so_header_id` = `sdsl`.`sd_so_header_id`) and (`sdsh`.`ar_customer_id` = `ar_customer`.`ar_customer_id`) and (`sdsh`.`ar_customer_site_id` = `ar_customer_site`.`ar_customer_site_id`) and (`sdsl`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `sdsl`.`shipping_org_id`) and (`sdsl`.`shipping_org_id` = `org`.`org_id`) and (`ssc`.`org_id` = `sdsl`.`shipping_org_id`) and (`sdsh`.`so_status` = 'BOOKED') and (`sdsl`.`line_status` in ('AWAITING_PICKING','PARTIAL_PICKED','PARTIAL_SHIPPED')));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `sd_pick_list_v` AS select `sdsh`.`sd_so_header_id` AS `sd_so_header_id`,`sdsh`.`bu_org_id` AS `bu_org_id`,`sdsh`.`document_type` AS `document_type`,`sdsh`.`so_number` AS `so_number`,`sdsh`.`ar_customer_id` AS `ar_customer_id`,`sdsh`.`ar_customer_site_id` AS `ar_customer_site_id`,`sdsh`.`hr_employee_id` AS `hr_employee_id`,`sdsh`.`doc_currency` AS `doc_currency`,`sdsh`.`header_amount` AS `header_amount`,`sdsh`.`so_status` AS `so_status`,`sdsh`.`payment_term_id` AS `payment_term_id`,`osv`.`onhand` AS `onhand`,`ar_customer`.`customer_name` AS `customer_name`,`ar_customer`.`customer_number` AS `customer_number`,`ar_customer_site`.`customer_site_name` AS `customer_site_name`,`ar_customer_site`.`customer_site_number` AS `customer_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`sdsl`.`sd_so_line_id` AS `sd_so_line_id`,`sdsl`.`line_type` AS `line_type`,`sdsl`.`line_number` AS `line_number`,`sdsl`.`item_id_m` AS `item_id_m`,`sdsl`.`kit_cb` AS `kit_cb`,`sdsl`.`kit_configured_cb` AS `kit_configured_cb`,`sdsl`.`bom_config_header_id` AS `bom_config_header_id`,`sdsl`.`wip_wo_header_id` AS `wip_wo_header_id`,`sdsl`.`item_description` AS `item_description`,`sdsl`.`line_description` AS `line_description`,`sdsl`.`line_quantity` AS `line_quantity`,`sdsl`.`picked_quantity` AS `picked_quantity`,`sdsl`.`shipped_quantity` AS `shipped_quantity`,`sdsl`.`unit_price` AS `unit_price`,`sdsl`.`line_price` AS `line_price`,`sdsl`.`line_status` AS `line_status`,`ssc`.`staging_subinventory_id` AS `staging_subinventory_id`,`ssc`.`staging_locator_id` AS `staging_locator_id`,`subinventory`.`subinventory` AS `staging_subinventory`,`locator`.`locator` AS `staging_locator`,`sdsl`.`requested_date` AS `requested_date`,`sdsl`.`promise_date` AS `promise_date`,`sdsl`.`schedule_ship_date` AS `schedule_ship_date`,`sdsl`.`actual_ship_date` AS `actual_ship_date`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`item`.`serial_generation` AS `serial_generation`,`item`.`lot_generation` AS `lot_generation`,`org`.`org` AS `org`,`sdsl`.`shipping_org_id` AS `shipping_org_id`,`sdsl`.`created_by` AS `created_by`,`sdsl`.`creation_date` AS `creation_date`,`sdsl`.`last_update_by` AS `last_update_by`,`sdsl`.`last_update_date` AS `last_update_date` from (((((((`sd_so_header` `sdsh` left join `payment_term` on((`sdsh`.`payment_term_id` = `payment_term`.`payment_term_id`))) join `ar_customer`) join `ar_customer_site`) join (`sd_so_line` `sdsl` left join `onhand_summary_v` `osv` on(((`osv`.`item_id_m` = `sdsl`.`item_id_m`) and (`osv`.`org_id` = `sdsl`.`shipping_org_id`))))) join `item`) join `org`) join ((`sd_shipping_control` `ssc` left join `subinventory` on((`subinventory`.`subinventory_id` = `ssc`.`staging_subinventory_id`))) left join `locator` on((`locator`.`locator_id` = `ssc`.`staging_locator_id`)))) where ((`sdsh`.`sd_so_header_id` = `sdsl`.`sd_so_header_id`) and (`sdsh`.`ar_customer_id` = `ar_customer`.`ar_customer_id`) and (`sdsh`.`ar_customer_site_id` = `ar_customer_site`.`ar_customer_site_id`) and (`sdsl`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `sdsl`.`shipping_org_id`) and (`sdsl`.`shipping_org_id` = `org`.`org_id`) and (`ssc`.`org_id` = `sdsl`.`shipping_org_id`) and (`sdsh`.`so_status` = 'BOOKED') and (`sdsl`.`line_status` in ('AWAITING_PICKING','PARTIAL_PICKED','PARTIAL_SHIPPED')));
 
 -- --------------------------------------------------------
 
@@ -20196,7 +22248,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `sd_pick_list_v` AS select
 --
 DROP TABLE IF EXISTS `sd_sales_documents_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `sd_sales_documents_v` AS select `sd_lead`.`sd_lead_id` AS `document_id`,`sd_lead`.`lead_number` AS `docuemnt_number`,`sd_lead`.`sales_team` AS `sales_team`,`sd_lead`.`creation_date` AS `creation_date`,'lead' AS `document_type`,`sd_lead`.`status` AS `status` from `sd_lead` union select `sd_opportunity`.`sd_opportunity_id` AS `document_id`,`sd_opportunity`.`opportunity_number` AS `docuemnt_number`,`sd_opportunity`.`sales_team` AS `sales_team`,`sd_opportunity`.`creation_date` AS `creation_date`,'opportunity' AS `document_type`,`sd_opportunity`.`status` AS `status` from `sd_opportunity` union select `sd_quote_header`.`sd_quote_header_id` AS `document_id`,`sd_quote_header`.`quote_number` AS `docuemnt_number`,'Quote' AS `sales_team`,`sd_quote_header`.`creation_date` AS `creation_date`,'quote' AS `document_type`,`sd_quote_header`.`status` AS `status` from `sd_quote_header` union select `sd_so_header`.`sd_so_header_id` AS `document_id`,`sd_so_header`.`so_number` AS `docuemnt_number`,'SO' AS `sales_team`,`sd_so_header`.`creation_date` AS `creation_date`,'Sales Order' AS `document_type`,`sd_so_header`.`so_status` AS `status` from `sd_so_header`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `sd_sales_documents_v` AS select `sd_lead`.`sd_lead_id` AS `document_id`,`sd_lead`.`lead_number` AS `docuemnt_number`,`sd_lead`.`sales_team` AS `sales_team`,`sd_lead`.`creation_date` AS `creation_date`,'lead' AS `document_type`,`sd_lead`.`status` AS `status` from `sd_lead` union select `sd_opportunity`.`sd_opportunity_id` AS `document_id`,`sd_opportunity`.`opportunity_number` AS `docuemnt_number`,`sd_opportunity`.`sales_team` AS `sales_team`,`sd_opportunity`.`creation_date` AS `creation_date`,'opportunity' AS `document_type`,`sd_opportunity`.`status` AS `status` from `sd_opportunity` union select `sd_quote_header`.`sd_quote_header_id` AS `document_id`,`sd_quote_header`.`quote_number` AS `docuemnt_number`,'Quote' AS `sales_team`,`sd_quote_header`.`creation_date` AS `creation_date`,'quote' AS `document_type`,`sd_quote_header`.`status` AS `status` from `sd_quote_header` union select `sd_so_header`.`sd_so_header_id` AS `document_id`,`sd_so_header`.`so_number` AS `docuemnt_number`,'SO' AS `sales_team`,`sd_so_header`.`creation_date` AS `creation_date`,'Sales Order' AS `document_type`,`sd_so_header`.`so_status` AS `status` from `sd_so_header`;
 
 -- --------------------------------------------------------
 
@@ -20205,7 +22257,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `sd_sales_documents_v` AS 
 --
 DROP TABLE IF EXISTS `sd_so_all_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `sd_so_all_v` AS select `sdsh`.`sd_so_header_id` AS `sd_so_header_id`,`sdsh`.`bu_org_id` AS `bu_org_id`,`sdsh`.`document_type` AS `document_type`,`sdsh`.`so_number` AS `so_number`,`sdsh`.`ar_customer_id` AS `ar_customer_id`,`sdsh`.`ar_customer_site_id` AS `ar_customer_site_id`,`sdsh`.`hr_employee_id` AS `hr_employee_id`,`sdsh`.`doc_currency` AS `doc_currency`,`sdsh`.`header_amount` AS `header_amount`,`sdsh`.`so_status` AS `so_status`,`sdsh`.`payment_term_id` AS `payment_term_id`,`osv`.`onhand` AS `onhand`,`ar_customer`.`customer_name` AS `customer_name`,`ar_customer`.`customer_number` AS `customer_number`,`ar_customer_site`.`customer_site_name` AS `customer_site_name`,`ar_customer_site`.`customer_site_number` AS `customer_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`sdsl`.`sd_so_line_id` AS `sd_so_line_id`,`sdsl`.`line_type` AS `line_type`,`sdsl`.`line_number` AS `line_number`,`sdsl`.`item_id_m` AS `item_id_m`,`sdsl`.`kit_cb` AS `kit_cb`,`sdsl`.`kit_configured_cb` AS `kit_configured_cb`,`sdsl`.`bom_config_header_id` AS `bom_config_header_id`,`sdsl`.`wip_wo_header_id` AS `wip_wo_header_id`,`sdsl`.`item_description` AS `item_description`,`sdsl`.`line_description` AS `line_description`,`sdsl`.`line_quantity` AS `line_quantity`,`sdsl`.`picked_quantity` AS `picked_quantity`,`sdsl`.`shipped_quantity` AS `shipped_quantity`,`sdsl`.`unit_price` AS `unit_price`,`sdsl`.`line_price` AS `line_price`,`sdsl`.`line_status` AS `line_status`,`ssc`.`staging_subinventory_id` AS `staging_subinventory_id`,`ssc`.`staging_locator_id` AS `staging_locator_id`,`subinventory`.`subinventory` AS `staging_subinventory`,`locator`.`locator` AS `staging_locator`,`sdsl`.`requested_date` AS `requested_date`,`sdsl`.`promise_date` AS `promise_date`,`sdsl`.`schedule_ship_date` AS `schedule_ship_date`,`sdsl`.`actual_ship_date` AS `actual_ship_date`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`org`.`org` AS `org`,`sdsl`.`shipping_org_id` AS `shipping_org_id`,`sdsl`.`created_by` AS `created_by`,`sdsl`.`creation_date` AS `creation_date`,`sdsl`.`last_update_by` AS `last_update_by`,`sdsl`.`last_update_date` AS `last_update_date`,concat(`hre`.`last_name`,', ',`hre`.`first_name`) AS `sales_person` from ((((((((`sd_so_header` `sdsh` left join `hr_employee` `hre` on((`sdsh`.`hr_employee_id` = `hre`.`hr_employee_id`))) left join `payment_term` on((`sdsh`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `ar_customer_site` on((`sdsh`.`ar_customer_site_id` = `ar_customer_site`.`ar_customer_site_id`))) join `ar_customer`) join (`sd_so_line` `sdsl` left join `onhand_summary_v` `osv` on(((`osv`.`item_id_m` = `sdsl`.`item_id_m`) and (`osv`.`org_id` = `sdsl`.`shipping_org_id`))))) join `item`) join `org`) join ((`sd_shipping_control` `ssc` left join `subinventory` on((`subinventory`.`subinventory_id` = `ssc`.`staging_subinventory_id`))) left join `locator` on((`locator`.`locator_id` = `ssc`.`staging_locator_id`)))) where ((`sdsh`.`sd_so_header_id` = `sdsl`.`sd_so_header_id`) and (`sdsh`.`ar_customer_id` = `ar_customer`.`ar_customer_id`) and (`sdsl`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `sdsl`.`shipping_org_id`) and (`sdsl`.`shipping_org_id` = `org`.`org_id`) and (`ssc`.`org_id` = `sdsl`.`shipping_org_id`));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `sd_so_all_v` AS select `sdsh`.`sd_so_header_id` AS `sd_so_header_id`,`sdsh`.`bu_org_id` AS `bu_org_id`,`sdsh`.`document_type` AS `document_type`,`sdsh`.`so_number` AS `so_number`,`sdsh`.`ar_customer_id` AS `ar_customer_id`,`sdsh`.`ar_customer_site_id` AS `ar_customer_site_id`,`sdsh`.`hr_employee_id` AS `hr_employee_id`,`sdsh`.`doc_currency` AS `doc_currency`,`sdsh`.`header_amount` AS `header_amount`,`sdsh`.`so_status` AS `so_status`,`sdsh`.`payment_term_id` AS `payment_term_id`,`osv`.`onhand` AS `onhand`,`ar_customer`.`customer_name` AS `customer_name`,`ar_customer`.`customer_number` AS `customer_number`,`ar_customer_site`.`customer_site_name` AS `customer_site_name`,`ar_customer_site`.`customer_site_number` AS `customer_site_number`,`payment_term`.`payment_term` AS `payment_term`,`payment_term`.`description` AS `payment_term_description`,`sdsl`.`sd_so_line_id` AS `sd_so_line_id`,`sdsl`.`line_type` AS `line_type`,`sdsl`.`line_number` AS `line_number`,`sdsl`.`item_id_m` AS `item_id_m`,`sdsl`.`kit_cb` AS `kit_cb`,`sdsl`.`kit_configured_cb` AS `kit_configured_cb`,`sdsl`.`bom_config_header_id` AS `bom_config_header_id`,`sdsl`.`wip_wo_header_id` AS `wip_wo_header_id`,`sdsl`.`item_description` AS `item_description`,`sdsl`.`line_description` AS `line_description`,`sdsl`.`line_quantity` AS `line_quantity`,`sdsl`.`picked_quantity` AS `picked_quantity`,`sdsl`.`shipped_quantity` AS `shipped_quantity`,`sdsl`.`unit_price` AS `unit_price`,`sdsl`.`line_price` AS `line_price`,`sdsl`.`line_status` AS `line_status`,`ssc`.`staging_subinventory_id` AS `staging_subinventory_id`,`ssc`.`staging_locator_id` AS `staging_locator_id`,`subinventory`.`subinventory` AS `staging_subinventory`,`locator`.`locator` AS `staging_locator`,`sdsl`.`requested_date` AS `requested_date`,`sdsl`.`promise_date` AS `promise_date`,`sdsl`.`schedule_ship_date` AS `schedule_ship_date`,`sdsl`.`actual_ship_date` AS `actual_ship_date`,`item`.`item_number` AS `item_number`,`item`.`uom_id` AS `uom_id`,`item`.`item_status` AS `item_status`,`org`.`org` AS `org`,`sdsl`.`shipping_org_id` AS `shipping_org_id`,`sdsl`.`created_by` AS `created_by`,`sdsl`.`creation_date` AS `creation_date`,`sdsl`.`last_update_by` AS `last_update_by`,`sdsl`.`last_update_date` AS `last_update_date`,concat(`hre`.`last_name`,', ',`hre`.`first_name`) AS `sales_person` from ((((((((`sd_so_header` `sdsh` left join `hr_employee` `hre` on((`sdsh`.`hr_employee_id` = `hre`.`hr_employee_id`))) left join `payment_term` on((`sdsh`.`payment_term_id` = `payment_term`.`payment_term_id`))) left join `ar_customer_site` on((`sdsh`.`ar_customer_site_id` = `ar_customer_site`.`ar_customer_site_id`))) join `ar_customer`) join (`sd_so_line` `sdsl` left join `onhand_summary_v` `osv` on(((`osv`.`item_id_m` = `sdsl`.`item_id_m`) and (`osv`.`org_id` = `sdsl`.`shipping_org_id`))))) join `item`) join `org`) join ((`sd_shipping_control` `ssc` left join `subinventory` on((`subinventory`.`subinventory_id` = `ssc`.`staging_subinventory_id`))) left join `locator` on((`locator`.`locator_id` = `ssc`.`staging_locator_id`)))) where ((`sdsh`.`sd_so_header_id` = `sdsl`.`sd_so_header_id`) and (`sdsh`.`ar_customer_id` = `ar_customer`.`ar_customer_id`) and (`sdsl`.`item_id_m` = `item`.`item_id_m`) and (`item`.`org_id` = `sdsl`.`shipping_org_id`) and (`sdsl`.`shipping_org_id` = `org`.`org_id`) and (`ssc`.`org_id` = `sdsl`.`shipping_org_id`));
 
 -- --------------------------------------------------------
 
@@ -20214,7 +22266,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `sd_so_all_v` AS select `s
 --
 DROP TABLE IF EXISTS `supplier_all_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `supplier_all_v` AS select `su`.`supplier_id` AS `supplier_id`,`su`.`supplier_number` AS `supplier_number`,`su`.`supplier_name` AS `supplier_name`,`ss`.`supplier_site_id` AS `supplier_site_id`,`ss`.`supplier_site_number` AS `supplier_site_number`,`ss`.`supplier_site_name` AS `supplier_site_name`,`su`.`supplier_type` AS `supplier_type`,`su`.`tax_country` AS `tax_country`,`su`.`created_by` AS `created_by`,`su`.`ar_customer_id` AS `ar_customer_id`,`su`.`status` AS `status`,`su`.`creation_date` AS `creation_date`,`su`.`last_update_by` AS `last_update_by`,`su`.`last_update_date` AS `last_update_date`,`sb`.`supplier_bu_id` AS `supplier_bu_id`,`sb`.`org_id` AS `org_id`,`sb`.`liability_account_id` AS `liability_account_id`,`sb`.`payable_account_id` AS `payable_account_id`,`sb`.`payment_discount_account_id` AS `payment_discount_account_id`,`sb`.`pre_payment_account_id` AS `pre_payment_account_id`,`ss`.`site_tax_country` AS `site_tax_country`,`ss`.`site_tax_reg_no` AS `site_tax_reg_no`,`ss`.`status` AS `site_status`,`ss`.`currency` AS `currency`,`ss`.`payment_term_id` AS `payment_term_id` from ((`supplier` `su` left join `supplier_site` `ss` on((`ss`.`supplier_id` = `su`.`supplier_id`))) left join `supplier_bu` `sb` on((`su`.`supplier_id` = `sb`.`supplier_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `supplier_all_v` AS select `su`.`supplier_id` AS `supplier_id`,`su`.`supplier_number` AS `supplier_number`,`su`.`supplier_name` AS `supplier_name`,`ss`.`supplier_site_id` AS `supplier_site_id`,`ss`.`supplier_site_number` AS `supplier_site_number`,`ss`.`supplier_site_name` AS `supplier_site_name`,`su`.`supplier_type` AS `supplier_type`,`su`.`tax_country` AS `tax_country`,`su`.`created_by` AS `created_by`,`su`.`ar_customer_id` AS `ar_customer_id`,`su`.`status` AS `status`,`su`.`creation_date` AS `creation_date`,`su`.`last_update_by` AS `last_update_by`,`su`.`last_update_date` AS `last_update_date`,`sb`.`supplier_bu_id` AS `supplier_bu_id`,`sb`.`org_id` AS `org_id`,`sb`.`liability_account_id` AS `liability_account_id`,`sb`.`payable_account_id` AS `payable_account_id`,`sb`.`payment_discount_account_id` AS `payment_discount_account_id`,`sb`.`pre_payment_account_id` AS `pre_payment_account_id`,`ss`.`site_tax_country` AS `site_tax_country`,`ss`.`site_tax_reg_no` AS `site_tax_reg_no`,`ss`.`status` AS `site_status`,`ss`.`currency` AS `currency`,`ss`.`payment_term_id` AS `payment_term_id` from ((`supplier` `su` left join `supplier_site` `ss` on((`ss`.`supplier_id` = `su`.`supplier_id`))) left join `supplier_bu` `sb` on((`su`.`supplier_id` = `sb`.`supplier_id`)));
 
 -- --------------------------------------------------------
 
@@ -20223,7 +22275,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `supplier_all_v` AS select
 --
 DROP TABLE IF EXISTS `wip_wo_routing_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `wip_wo_routing_v` AS select `item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`uom_id` AS `uom_id`,`wwh`.`item_id_m` AS `item_id_m`,`wwh`.`wo_number` AS `wo_number`,`wwh`.`org_id` AS `org_id`,`wwh`.`wip_accounting_group_id` AS `wip_accounting_group_id`,`wwh`.`quantity` AS `quantity`,`wwh`.`completed_quantity` AS `completed_quantity`,`wwrl`.`routing_sequence` AS `routing_sequence`,`wwrl`.`department_id` AS `department_id`,`wwrd`.`wip_wo_routing_detail_id` AS `wip_wo_routing_detail_id`,`wwrd`.`wip_wo_routing_line_id` AS `wip_wo_routing_line_id`,`wwrd`.`wip_wo_header_id` AS `wip_wo_header_id`,`wwrd`.`resource_sequence` AS `resource_sequence`,`wwrd`.`resource_id` AS `resource_id`,`wwrd`.`resource_usage` AS `resource_usage`,`wwrd`.`resource_schedule` AS `resource_schedule`,`wwrd`.`required_quantity` AS `required_quantity`,`wwrd`.`applied_quantity` AS `applied_quantity`,`wwrd`.`charge_type` AS `charge_type` from (((`wip_wo_routing_detail` `wwrd` left join `wip_wo_routing_line` `wwrl` on((`wwrl`.`wip_wo_routing_line_id` = `wwrd`.`wip_wo_routing_line_id`))) left join `wip_wo_header` `wwh` on((`wwh`.`wip_wo_header_id` = `wwrd`.`wip_wo_header_id`))) left join `item` on(((`item`.`item_id_m` = `wwh`.`item_id_m`) and (`item`.`org_id` = `wwh`.`org_id`))));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `wip_wo_routing_v` AS select `item`.`item_number` AS `item_number`,`item`.`item_description` AS `item_description`,`item`.`uom_id` AS `uom_id`,`wwh`.`item_id_m` AS `item_id_m`,`wwh`.`wo_number` AS `wo_number`,`wwh`.`org_id` AS `org_id`,`wwh`.`wip_accounting_group_id` AS `wip_accounting_group_id`,`wwh`.`quantity` AS `quantity`,`wwh`.`completed_quantity` AS `completed_quantity`,`wwrl`.`routing_sequence` AS `routing_sequence`,`wwrl`.`department_id` AS `department_id`,`wwrd`.`wip_wo_routing_detail_id` AS `wip_wo_routing_detail_id`,`wwrd`.`wip_wo_routing_line_id` AS `wip_wo_routing_line_id`,`wwrd`.`wip_wo_header_id` AS `wip_wo_header_id`,`wwrd`.`resource_sequence` AS `resource_sequence`,`wwrd`.`resource_id` AS `resource_id`,`wwrd`.`resource_usage` AS `resource_usage`,`wwrd`.`resource_schedule` AS `resource_schedule`,`wwrd`.`required_quantity` AS `required_quantity`,`wwrd`.`applied_quantity` AS `applied_quantity`,`wwrd`.`charge_type` AS `charge_type` from (((`wip_wo_routing_detail` `wwrd` left join `wip_wo_routing_line` `wwrl` on((`wwrl`.`wip_wo_routing_line_id` = `wwrd`.`wip_wo_routing_line_id`))) left join `wip_wo_header` `wwh` on((`wwh`.`wip_wo_header_id` = `wwrd`.`wip_wo_header_id`))) left join `item` on(((`item`.`item_id_m` = `wwh`.`item_id_m`) and (`item`.`org_id` = `wwh`.`org_id`))));
 
 --
 -- Constraints for dumped tables

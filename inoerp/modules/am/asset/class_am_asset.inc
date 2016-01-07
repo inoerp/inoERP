@@ -55,6 +55,7 @@ class am_asset extends dbObject {
   'tag_number',
   'serial_number',
   'owning_department_id',
+  'owning_employee_id',
   'description',
   'status',
   'am_asset_category_id',
@@ -105,6 +106,7 @@ class am_asset extends dbObject {
  public $tag_number;
  public $serial_number;
  public $owning_department_id;
+ public $owning_employee_id;
  public $description;
  public $status;
  public $am_asset_category_id;

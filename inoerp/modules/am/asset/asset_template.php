@@ -7,8 +7,9 @@
      <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>
      <li><a href="#tabsHeader-2"><?php echo gettext('Tracking Info') ?></a></li>
      <li><a href="#tabsHeader-3"><?php echo gettext('References') ?></a></li>
-     <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-5"><?php echo gettext('Note') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Address Details') ?></a></li>
+     <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-6"><?php echo gettext('Note') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -38,7 +39,10 @@
       <ul class="column header_field">
        <li><?php $f->l_text_field_d('tag_number'); ?></li>
        <li><?php $f->l_select_field_from_object('owning_department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class->owning_department_id, '', $readonly, '', '', 1); ?></li>
-       <li><?php $f->l_address_field_d('address_id'); ?></li>
+       <li><?php
+        echo $f->l_val_field_d('employee_name', 'hr_employee_v', 'employee_name', '', 'vf_select_employee_name employee_name');
+        echo $f->hidden_field_withIdClass('owning_employee_id', $$class->owning_employee_id ,'hr_employee_id');
+        ?><i class="generic g_select_employee_name select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
        <li><?php $f->l_select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->subinventory_id, '', 'subinventory_id', '', $readonly); ?>       </li>
        <li><?php $f->l_select_field_from_object('locator_id', locator::find_all_of_subinventory($$class->subinventory_id), 'locator_id', 'locator', $$class->locator_id, '', 'locator_id', '', $readonly); ?>       </li>
        <li><?php $f->l_checkBox_field('maintainable_cb', $$class->maintainable_cb); ?></li>
@@ -56,9 +60,12 @@
       </ul>
      </div>
      <div id="tabsHeader-4" class="tabContent">
-      <div> <?php echo ino_attachement($file) ?> </div>
+      <div class="assign_address"><?php $f->address_field_d('address_id'); ?></div>
      </div>
      <div id="tabsHeader-5" class="tabContent">
+      <div> <?php echo ino_attachement($file) ?> </div>
+     </div>
+     <div id="tabsHeader-6" class="tabContent">
       <div id="comments">
        <div id="comment_list">
         <?php echo!(empty($comments)) ? $comments : ""; ?>
@@ -214,7 +221,7 @@
         </button>
        </li>
 
-     </ul>
+      </ul>
 
      </div>
      <div id="tabsLine-4" class="tabContent">

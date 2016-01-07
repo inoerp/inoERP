@@ -3,7 +3,7 @@ function setValFromSelectPage(user_id, username) {
  this.username = username;
 }
 
-setValFromSelectPage.prototype.setVal = function() {
+setValFromSelectPage.prototype.setVal = function () {
  var rowClass = '.' + localStorage.getItem("rowClass");
  rowClass = fieldClass.replace(/\s+/g, '.');
  if (this.username) {
@@ -15,29 +15,29 @@ setValFromSelectPage.prototype.setVal = function() {
  localStorage.removeItem("rowClass");
 };
 
-$(document).ready(function() {
+$(document).ready(function () {
  //Popup for selecting user
- $(".user_id.select_popup").click(function() {
-  var link = 'select.php?class_name=user';
-  var rowClass = $(this).closest('tr').prop('class');
-  localStorage.setItem("row_class", rowClass);
-  void window.open(link, '_blank',
-   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
- 
- $('#content').on('change', '.report_type', function() {
- if (!$(this).val()) {
-  return;
- }
+// $(".user_id.select_popup").click(function() {
+//  var link = 'select.php?class_name=user';
+//  var rowClass = $(this).closest('tr').prop('class');
+//  localStorage.setItem("row_class", rowClass);
+//  void window.open(link, '_blank',
+//   'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+// });
+// 
+ $('#content').on('change', '.report_type', function () {
+  if (!$(this).val()) {
+   return;
+  }
 
   getDBReportList({
-    'trClass' : $(this).closest('tr').attr('class'),
-    'report_type' : $(this).val()
+   'trClass': $(this).closest('tr').attr('class'),
+   'report_type': $(this).val()
   });
 
-});
+ });
 
- $('#content').on('blur', '.config_level', function() {
+ $('#content').on('blur', '.config_level', function () {
   if (!$(this).val()) {
    return;
   }
@@ -84,9 +84,13 @@ $(document).ready(function() {
 // user_dashboard_configSave.form_line_id = 'user_dashboard_config';
 // user_dashboard_configSave.saveMain();
 
+$('body').off('change' ,'#user_dashboard_config .report_id').on('change', '#user_dashboard_config .report_id' , function(){
+ $(this).closest('tr').find('.report_label').val($(this).find('option:selected').text());
 });
 
-$('#content').on('blur', '.config_level', function() {
+});
+
+$('#content').on('blur', '.config_level', function () {
  if (!$(this).val()) {
   return;
  }
@@ -111,5 +115,7 @@ $('#content').on('blur', '.config_level', function() {
    break;
 
  }
+
+
 
 });

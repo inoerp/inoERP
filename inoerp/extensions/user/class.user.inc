@@ -46,6 +46,7 @@ class user extends dbObject {
   'ar_customer_id',
   'supplier_id',
   'block_notif_count',
+  'use_personal_db_cb',
   'image_file_id',
   'default_theme',
   "created_by",
@@ -72,6 +73,7 @@ class user extends dbObject {
   'ar_customer_id',
   'supplier_id',
   'block_notif_count',
+  'use_personal_db_cb',
   'image_file_id',
   'default_theme',
   'default_theme',
@@ -90,6 +92,10 @@ class user extends dbObject {
   'address_id',
   'customer_name',
   'supplier_name'
+ ];
+ 
+  public $checkbox = [
+  "use_personal_db_cb"
  ];
  public $search = [
   '_show_update_path' => 1,
@@ -116,6 +122,7 @@ class user extends dbObject {
  public $user_language;
  public $phone;
  public $block_notif_count;
+ public $use_personal_db_cb;
  public $image_file_id;
  Public $email;
  Public $status;
@@ -260,7 +267,7 @@ $ret = false;
   }
   $sql = " SELECT user_id, username, first_name, last_name, email,  phone, hr_employee_id, user_language,
            default_theme, block_notif_count,  ar_customer_id, supplier_id,  created_by,    creation_date, 
-            last_update_by,    last_update_date , image_file_id FROM ";
+            last_update_by,    last_update_date , image_file_id, use_personal_db_cb FROM ";
   $sql.= static::$table_name;
   $sql.= " WHERE " . static::$primary_column . "= :primary_id ";
   $sql.= " LIMIT 1 ";
@@ -284,7 +291,7 @@ $ret = false;
  public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
   $sql = "SELECT user_id, username, first_name, last_name, email,  phone, hr_employee_id, user_language,
            default_theme, block_notif_count,  ar_customer_id, supplier_id,  created_by,    creation_date, 
-            last_update_by,    last_update_date , image_file_id  FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
+            last_update_by,    last_update_date , image_file_id , use_personal_db_cb FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
   $result_array = static::find_by_sql($sql);
   return !empty($result_array) ? ($result_array) : false;
  }

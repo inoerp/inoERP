@@ -27,4 +27,11 @@ if (!empty($$class->item_id_m)) {
   $$class->item_description = $item_i->item_description;
  }
 }
+
+if (!empty($$class->owning_employee_id)) {
+ $emp_details = hr_employee::find_by_id($$class->owning_employee_id);
+ if ($emp_details) {
+  $$class->employee_name = $emp_details->first_name . ' ' . $emp_details->last_name;
+ }
+}
 ?>

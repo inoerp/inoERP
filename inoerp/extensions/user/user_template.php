@@ -30,6 +30,7 @@
       <li><?php $f->l_select_field_from_object('user_language', user::all_languages(), 'option_line_code', 'description', $$class->user_language, 'user_language'); ?>  </li>
       <li><?php $f->l_select_field_from_object('default_theme', extn_theme::find_all_enabled_theme(), 'theme_name', 'theme_name', $$class->default_theme, 'default_theme'); ?>  </li>
       <li><?php $f->l_select_field_from_array('block_notif_count', dbObject::$position_array, $$class->block_notif_count); ?>  </li>
+      <li><?php  $f->l_checkBox_field_d('use_personal_db_cb'); ?>  </li>
      </ul>
     </div>
     <div id="tabsHeader-3" class="tabContent">
