@@ -150,7 +150,7 @@
            ?>
      <!--						 <tr><td>-->
            <div class="class_detail_form">
-            <fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
+            <fieldset class="form_detail_data_fs">
              <div class="tabsDetail">
               <ul class="tabMain">
                <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>">Basic</a></li>

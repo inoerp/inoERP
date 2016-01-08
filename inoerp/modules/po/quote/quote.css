@@ -1,13 +1,15 @@
+#po_quote_divId .class_detail_form{
+margin-left: -895px;
 
-.form_detail_data_fs{
-  width: 900px;
 }
 
-.class_detail_form{
- display : block;
- width: 900px;
- margin-left: -760px;
-float: left;
+#po_quote_divId .form_detail_data_fs{
+  width: 895px;
+  
+}
+
+#po_quote_divId fieldset.form_detail_data_fs{
+ margin-top: 24px;
 }
 
 

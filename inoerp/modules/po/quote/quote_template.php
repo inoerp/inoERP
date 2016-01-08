@@ -6,8 +6,10 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */-->
+
+<div id="po_quote_divId">
 <div id ="form_header"><span class="heading"><?php echo gettext('Quotation') ?></span>
- <form action=""  method="post" id="po_quote_header"  name="po_quote_header">
+ <form   method="post" id="po_quote_header"  name="po_quote_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -183,7 +185,7 @@
           }
           ?>
           <div class="class_detail_form">
-           <fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
+           <fieldset class="form_detail_data_fs">
             <div class="tabsDetail">
              <ul class="tabMain">
               <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>">Basic</a></li>
@@ -345,6 +347,7 @@
   </div>
  </form>
 
+</div>
 </div>
 
 <div id="js_data">
