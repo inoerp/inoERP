@@ -38,12 +38,13 @@
    'payment_term_id',
    'ship_to_id',
    'bill_to_id',
-   'ef_id',
+   'default_inv_org_id',
    'rev_enabled',
    'rev_number',
    'po_approval_hierarchy',
    'req_approval_hierarchy',
    'tax_ac_id',
+   'default_line_type',
    'created_by',
    'creation_date',
    'last_update_by',
@@ -92,9 +93,10 @@
   public $payment_term_id;
   public $ship_to_id;
   public $bill_to_id;
-  public $ef_id;
+  public $default_inv_org_id;
   public $po_approval_hierarchy;
   public $req_approval_hierarchy;
+  public $default_line_type;
   public $tax_ac_id;
   public $rev_enabled;
   public $rev_number;

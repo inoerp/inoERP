@@ -23,26 +23,27 @@ inoERP
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Purchasing Info') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>      
+     <li><a href="#tabsLine-2"><?php echo gettext('Address') ?> </a></li>      
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <div> 
        <ul class="column header_field"> 
         <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'medium', 1, $readonly); ?>        </li>
-        <li><?php $f->l_address_field_d('ship_to_id') ?> 							</li>
-        <li><?php $f->l_address_field_d('bill_to_id') ?> 							</li>
         <li><?php $f->l_select_field_from_array('po_approval_hierarchy', po_purchasing_control::$approval_hierarchy_a, $$class->po_approval_hierarchy) ?> 						</li>
         <li><?php $f->l_select_field_from_array('req_approval_hierarchy', po_purchasing_control::$approval_hierarchy_a, $$class->req_approval_hierarchy) ?> 						</li>
         <li><?php $f->l_ac_field_d('tax_ac_id'); ?></li> 
+        <li><?php $f->l_select_field_from_object('default_inv_org_id', org::find_all_inventory(), 'org_id', 'org', $$class->default_inv_org_id, 'default_inv_org_id', '', 1, $readonly); ?> </li>
+        <li><?php $f->l_select_field_from_object('default_line_type', po_line::po_line_types(), 'option_line_code', 'option_line_value', $$class->default_line_type, 'default_line_type', 'copyValue', 1, $readonly); ?></li>
        </ul> 
       </div> 
       <!--end of tab1 div three_column-->
      </div> 
      <!--              end of tab1-->
 
-     <div id="tabsLine-2"  class="tabContent">
-
+     <div id="tabsLine-2" class="tabContent">
+      <div class="shipto_address"><?php $f->address_field_d('ship_to_id'); ?></div>
+      <div class="billto_address"><?php $f->address_field_d('bill_to_id'); ?></div>
      </div>
     </div>
 

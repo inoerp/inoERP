@@ -13,11 +13,12 @@
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Description') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Address Details') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-6"><?php echo gettext('Actions') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Conditions') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Description') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Address Details') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-7"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -30,7 +31,12 @@
       <li><label><?php echo gettext('Quote Type') ?>(2)</label><?php echo $f->hidden_field_withId('bu_org_id', $$class->bu_org_id); ?>
        <?php echo $f->select_field_from_array('quote_type', po_quote_header::$po_quote_type_a, $$class->quote_type, 'quote_type', '', 1); ?>
       </li>
+      <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>        </li>
       <li><?php $f->l_text_field_d('quote_number', 'primary_column2'); ?> </li>
+      <li><?php 
+        echo $f->l_val_field_dm('supplier_name', 'supplier', 'supplier_name', '', 'supplier_name', 'vf_select_supplier_name');
+        echo $f->hidden_field_withId('supplier_id', $$class->supplier_id);
+        ?><i class="generic g_select_supplier_name select_popup clickable fa fa-search" data-class_name="supplier"></i></li>
       <li><?php
        echo $f->l_val_field_d('supplier_number', 'supplier', 'supplier_number', '', '', 'vf_select_supplier_number');
        ?><i class="generic g_select_supplier_number select_popup clickable fa fa-search" data-class_name="supplier"></i></li>
@@ -38,28 +44,32 @@
        $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
        echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
        ?> </li>
-      <li><?php $f->l_select_field_from_array('quote_status', po_quote_header::$po_quote_status_a, $$class->quote_status, 'quote_status'); ?>       </li>
+      <li><?php $f->l_select_field_from_array('quote_status', po_quote_header::$po_quote_status_a, $$class->quote_status, 'quote_status' , 'always_readonly', '',1); ?>       </li>
       <li><?php $f->l_checkBox_field_d('active_cb') ?>   </li>
       <li><?php $f->l_text_field_d('buyer'); ?></li> 
-      <li><?php $f->l_date_fieldAnyDay('effective_start_date', $$class->effective_start_date) ?>       </li>
-      <li><?php $f->l_date_fieldAnyDay('effective_end_date', $$class->effective_end_date) ?> </li>
-      <li><?php $f->l_date_fieldAnyDay('valid_date', $$class->valid_date) ?></li>
-      <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'doc_currency', '', '', $readonly); ?>       </li>
-      <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, 'payment_term_id', '', '', $readonly1); ?>       </li>
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
+     <ul class="column header_field">
+      <li><?php $f->l_date_fieldAnyDay('effective_start_date', $$class->effective_start_date) ?>       </li>
+      <li><?php $f->l_date_fieldAnyDay('effective_end_date', $$class->effective_end_date) ?> </li>
+      <li><?php $f->l_date_fieldAnyDay('valid_date', $$class->valid_date) ?></li>
+      <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'doc_currency', '', 1, $readonly); ?>       </li>
+      <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, 'payment_term_id', '', 1, $readonly1); ?>       </li>
+     </ul>
+    </div>
+    <div id="tabsHeader-3" class="tabContent">
      <div><label class="text_area_label"><?php echo gettext('Detailed Description') ?></label><?php
       echo $f->text_area_ap(array('name' => 'description', 'value' => $$class->description,
        'row_size' => '10', 'column_size' => '90'));
       ?> 	
      </div> 
     </div>
-    <div id="tabsHeader-3" class="tabContent">
+    <div id="tabsHeader-4" class="tabContent">
      <div class="shipto_address"><?php $f->address_field_d('ship_to_id'); ?></div>
      <div class="billto_address"><?php $f->address_field_d('bill_to_id'); ?></div>
     </div>
-    <div id="tabsHeader-4" class="tabContent">
+    <div id="tabsHeader-5" class="tabContent">
      <div> 
       <div id="comments">
        <div id="comment_list">
@@ -76,10 +86,10 @@
       </div>
      </div>
     </div>
-    <div id="tabsHeader-5" class="tabContent">
+    <div id="tabsHeader-6" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
     </div>
-    <div id="tabsHeader-6" class="tabContent">
+    <div id="tabsHeader-7" class="tabContent">
      <div> 
       <ul class="column four_column">
        <li id="document_print"><label><?php echo gettext('Document Print') ?></label>
@@ -298,6 +308,7 @@
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('Unit Price') ?></th>
         <th><?php echo gettext('Target Price') ?></th>
+        <th><?php echo gettext('Quote Price') ?></th>
         <th><?php echo gettext('Min Agreement Qty') ?></th>
         <th><?php echo gettext('Min Order Qty') ?>#</th>
         <th><?php echo gettext('Lot Multiplier') ?></th>
@@ -319,6 +330,7 @@
           ?></td>
          <td><?php echo ino_showDecimal($$class_second->unit_price); ?></td>
          <td><?php echo ino_showDecimal($$class_second->target_price); ?></td>
+         <td><?php $f->text_field_wid2s('quote_unit_price'); ?></td>
          <td><?php echo $f->number_field('minimum_agreement_quantity', $$class_second->minimum_agreement_quantity); ?></td>
          <td><?php echo $f->number_field('minimum_order_quantity', $$class_second->minimum_order_quantity); ?></td>
          <td><?php echo $f->number_field('fix_lot_multiplier', $$class_second->fix_lot_multiplier); ?></td>
