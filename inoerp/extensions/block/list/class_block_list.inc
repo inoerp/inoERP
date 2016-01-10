@@ -30,6 +30,3 @@ public static $table_name = "block";
 
 //end of block class
 ?>
-
-
-
