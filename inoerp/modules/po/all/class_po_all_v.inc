@@ -73,11 +73,10 @@ class po_all_v extends dbObject {
  ];
  public $initial_search = [
   "po_number",
-  'po_type',
   "supplier_number",
   "receving_org_id",
   "item_number",
-  'po_status',
+//  'po_status',
   'supplier_site_id'
  ];
  public $search_session_field = [
@@ -87,6 +86,7 @@ class po_all_v extends dbObject {
  public $column = [
   'po_number',
   'po_status',
+  'po_type',
   'supplier_name',
   'po_line_number',
   'shipment_number',
@@ -101,7 +101,7 @@ class po_all_v extends dbObject {
   'exchange_rate',
   'uom_id',
   'po_header_id',
-  'po_type',
+  
   'item_status',
   'po_detail_id',
   'supplier_site_name',
@@ -171,13 +171,15 @@ class po_all_v extends dbObject {
   'po_header_id',
   'po_line_id',
   'po_detail_id',
-  'po_status'
+  'po_status',
+  'po_type'
  ];
  public static $json_label_fields = [
   'po_number',
   'po_line_number',
   'shipment_number',
   'po_detail_id',
+  'po_type',
   'po_status',
   'supplier_name',
   'supplier_site_name',
@@ -203,8 +205,9 @@ class po_all_v extends dbObject {
  ];
  public $pageTitle = " PO - Find All Purchase Order Headers "; //page Title
  public $option_lists = [
-  'po_type' => 'PO_TYPE',
   'po_status' => 'PO_STATUS',
+  'po_type' => 'PO_TYPE',
+  
  ];
  public $ra_open_po_by_supplier_parameters = [
   'Organization' => 'search_org_name',

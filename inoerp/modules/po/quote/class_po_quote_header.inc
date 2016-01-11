@@ -41,7 +41,7 @@ class po_quote_header extends dbObject {
   'VIEW_HISTORY' => 'View History',
   'CANCEL' => 'Cancel',
   'CONVERT_STD_PO' => 'Convert to Standard PO',
-  'CONVERT_STD_BLANKET' => 'Convert to Blanket Agreement',
+  'CONVERT_BPA' => 'Convert to Blanket Agreement',
  ];
  public $checkbox = [
   "active_cb"
@@ -191,6 +191,15 @@ class po_quote_header extends dbObject {
   if (($this->action == 'CONVERT_STD_PO')) {
    if ($this->quote_status == 'ACCEPTED') {
     $this->_convert_quote_toStdPO();
+   } else {
+    echo "Change quote status to Accepted, and try again. Current status " . $this->quote_status;
+   }
+   return 10;
+  }
+
+  if (($this->action == 'CONVERT_BPA')) {
+   if ($this->quote_status == 'ACCEPTED') {
+    $this->_convert_quote_toBPA();
    } else {
     echo "Change quote status to Accepted, and try again. Current status " . $this->quote_status;
    }
@@ -370,70 +379,60 @@ class po_quote_header extends dbObject {
   }
  }
 
- private function _convert_requisition_toBPArelease($i, &$po_quote_cretaed) {
+ private function _convert_quote_toBPA() {
   global $dbc;
-  $po_quote_rd = new po_quote_requisition_detail();
-  $po_quote_rd->findBy_id($_POST['po_quote_requisition_detail_id'][$i]);
-  if (!empty($po_quote_rd->order_number)) {
-   return;
-  }
-  $po_quote_rls = new po_quote_header();
-  $bpa_line = new po_quote_line();
-  $bpa_line->findBy_id($_POST['bpa_po_quote_line_id'][$i]);
-  $po_quote_rls->findBy_id($bpa_line->po_quote_header_id);
-  $po_quote_rls->ref_po_quote_header_id = $po_quote_rls->po_quote_header_id;
-  $po_quote_rls->po_quote_header_id = null;
-  $po_quote_rls->release_number = $po_quote_rls->_find_relNumber($po_quote_rls->po_quote_header_id);
-  $po_quote_rls->po_quote_type = 'BLANKET_RELEASE';
-  $po_quote_rls->po_quote_status = 'ENTERED';
-  $po_quote_rls->audit_trial();
-  $po_quote_rls->save();
-  echo "<br> PO Header is succefully created. Header Id - " . $po_quote_rls->po_quote_header_id;
-  $line_number = 1;
-  $pol = new po_quote_line();
-  foreach ($bpa_line as $k => $v) {
-   $pol->$k = $v;
-  }
-  $pol->po_quote_line_id = null;
-  $pol->line_number = $line_number;
-  $pol->bpa_line_id = $bpa_line->po_quote_line_id;
-  $pol->line_type = 'GOODS';
-  $pol->po_quote_header_id = $po_quote_rls->po_quote_header_id;
-  $pol->receving_org_id = $_POST['receving_org_id'][$i];
-  $item = new item();
-  $item->findBy_id($pol->item_id_m);
-  $pol->item_description = $item->item_description;
-  $pol->uom_id = $item->uom_id;
-  $pol->line_quantity = $_POST['line_quantity'][$i];
-  $pol->line_price = $pol->line_quantity * $pol->unit_price;
-  $pol->reference_doc_type = 'po_quote_requisition_details';
-  $pol->reference_doc_number = $_POST['po_quote_requisition_detail_id'][$i];
-  $pol->audit_trial();
-  $pol->save();
-  echo "<br> PO Line is succefully created. Line Id - " . $pol->po_quote_line_id;
 
-  $pod = new po_quote_detail();
-  $pod->po_quote_header_id = $po_quote_rls->po_quote_header_id;
-  $pod->po_quote_line_id = $pol->po_quote_line_id;
-  $pod->shipment_number = 1;
-  $pod->need_by_date = $_POST['need_by_date'][$i];
-  $inv = new inventory();
-  $inv_i = $inv->findBy_org_id($pol->receving_org_id);
-  //ac id needs to be modified to req accounts
-  $pod->charge_ac_id = $inv_i->material_ac_id;
-  $pod->accrual_ac_id = $inv_i->inv_ap_accrual_ac_id;
-  $pod->ppv_ac_id = $inv_i->inv_ppv_ac_id;
-  $pod->audit_trial();
-  $pod->save();
-  echo "<br> PO Detail is succefully created. Detail Id - " . $pod->po_quote_detail_id;
+//   foreach($_POST['line_price'] as $amt_k => $amt_v ){
+//    $header_amt += $amt_v;
+//   }
+  $poh = new po_header();
 
-  $po_quote_rd->order_number = $po_quote_rls->po_quote_header_id;
-  $po_quote_rd->audit_trial();
-  $po_quote_rd->save();
+
+  foreach ($poh->field_a as $k => $v) {
+   if (property_exists($this, $v)) {
+    $poh->$v = $this->$v;
+   }
+  }
+  $poh->po_type = 'BLANKET';
+  $po_purchasing_control_i = po_purchasing_control::find_by_org_id($this->bu_org_id);
+  $poh->bill_to_id = $po_purchasing_control_i->ship_to_id;
+  $poh->ship_to_id = $po_purchasing_control_i->bill_to_id;
+  if (!empty($poh->supplier_site_id)) {
+   $supplier_site_details = supplier_site::find_by_id($poh->supplier_site_id);
+   $poh->doc_currency = $supplier_site_details->currency;
+   if (empty($poh->payment_term_id)) {
+    $poh->payment_term_id = $supplier_site_details->payment_term_id;
+   }
+  }
+  if (empty($poh->doc_currency)) {
+   $poh->doc_currency = $poh->currency;
+  }
+  if (empty($poh->payment_term_id)) {
+   $poh->payment_term_id = po_quote_purchasing_control::find_by_org_id($poh->bu_org_id)->payment_term_id;
+  }
+  $poh->exchange_rate_type = 'CORP';
+  $poh->header_amount = .01;
+  $poh->po_quote_status = 'ENTERED';
+  try {
+   $poh->_before_save();
+   $poh->save();
+   $poh->_after_save();
+   $dbc->confirm();
+   echo "<br> PO header is succefully created. Header Id - " . $poh->po_quote_header_id;
+  } catch (Exception $e) {
+   $dbc->rollback = true;
+   echo "<br>Failed to save PO header.Error @ file" . __FILE__ . ' @@ L ' . __LINE__;
+  }
+
+  if (!empty($poh->po_header_id)) {
+   //create PO line & details
+   $this->_create_BPAlines($poh, $po_purchasing_control_i);
+  }
  }
 
  private function _create_stdPOlines($poh, $po_purchasing_control_i) {
   global $dbc;
+  $header_amount = 0;
   $quote_lines = po_quote_line::find_by_parent_id($this->po_quote_header_id);
   if (empty($quote_lines)) {
    echo "<br>Failed to create any PO line as no quote lines found.Error @ file" . __FILE__ . ' @@ L ' . __LINE__;
@@ -456,6 +455,7 @@ class po_quote_header extends dbObject {
    $po_line->line_quantity = !empty($ql->minimum_order_quantity) ? $ql->minimum_order_quantity : 1;
    $po_line->unit_price = $ql->quote_unit_price;
    $po_line->line_price = $ql->quote_unit_price * $po_line->line_quantity;
+   $header_amount += $po_line->line_price;
    try {
     $po_line->_before_save();
     $po_line->save();
@@ -485,6 +485,53 @@ class po_quote_header extends dbObject {
     }
    }
   }
+
+  //update the header price
+  $poh->header_amount = $header_amount;
+  $poh->save();
+ }
+
+ private function _create_BPAlines($poh, $po_purchasing_control_i) {
+  global $dbc;
+  $header_amount = 0;
+  $quote_lines = po_quote_line::find_by_parent_id($this->po_quote_header_id);
+  if (empty($quote_lines)) {
+   echo "<br>Failed to create any PO line as no quote lines found.Error @ file" . __FILE__ . ' @@ L ' . __LINE__;
+   return;
+  }
+  $line_number = 0;
+
+  foreach ($quote_lines as $ql) {
+   $line_number++;
+   $po_line = new po_line();
+   foreach ($po_line->field_a as $k => $v) {
+    if (property_exists($ql, $v)) {
+     $po_line->$v = $ql->$v;
+    }
+   }
+   $po_line->po_header_id = $poh->po_header_id;
+   $po_line->receving_org_id = $po_purchasing_control_i->default_inv_org_id;
+   $po_line->line_number = $line_number;
+   $po_line->line_type = $po_purchasing_control_i->default_line_type;
+   $po_line->line_quantity = !empty($ql->minimum_order_quantity) ? $ql->minimum_order_quantity : 1;
+   $po_line->unit_price = $ql->quote_unit_price;
+   $po_line->line_price = $ql->quote_unit_price * $po_line->line_quantity;
+   $header_amount += $po_line->line_price;
+   try {
+    $po_line->_before_save();
+    $po_line->save();
+    $po_line->_after_save();
+    $dbc->confirm();
+    echo "<br> PO Line is succefully created. Line Id - " . $poh->po_quote_header_id;
+   } catch (Exception $e) {
+    $dbc->rollback = true;
+    echo "<br>Failed to save PO line.Error @ file" . __FILE__ . ' @@ L ' . __LINE__;
+   }
+  }
+
+  //update the header price
+  $poh->header_amount = $header_amount;
+  $poh->save();
  }
 
  public function notification_action($obj) {

@@ -43,7 +43,7 @@ $(document).ready(function () {
   $(this).attr('disabled', true);
  }
 
- $('body').off('change', '.po_type').on('change', '.po_type', function () {
+ $('body').off('change', '#po_header .po_type').on('change', '#po_header .po_type', function () {
   if ($(this).val() === 'BLANKET') {
    $('.class_detail_form').html('');
    $(this).attr('disabled', true);
