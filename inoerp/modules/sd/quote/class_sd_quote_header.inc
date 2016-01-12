@@ -67,7 +67,7 @@ class sd_quote_header extends dbObject {
   'aggrement_end_date',
   'exchange_rate_type',
   'exchange_rate',
-   'reference_type',
+  'reference_type',
   'reference_key_name',
   'reference_key_value',
   'rev_enabled_cb',
@@ -163,7 +163,7 @@ class sd_quote_header extends dbObject {
  public $exchange_rate_type;
  public $exchange_rate;
  public $rev_enabled_cb;
-  public $reference_type;
+ public $reference_type;
  public $reference_key_name;
  public $reference_key_value;
  public $rev_number;
@@ -229,23 +229,96 @@ class sd_quote_header extends dbObject {
    $sd_quote_header_id = $this->sd_quote_header_id;
    $quote_number = $sd_quote_header_id;
    $this->quote_number = $quote_number;
-   echo '<br/> New Quote number is ' . $quote_number;
+   echo '<br/> New Quote number is ' . $quote_number . '<br>';
    $this->update_soNumber();
   }
-  if ((!empty($this->sd_quote_header_id)) && ($this->action = 'CONVERT_SO')) {
+  if ((!empty($this->sd_quote_header_id)) && ($this->action == 'CONVERT_SO')) {
    if (empty($this->bu_org_id)) {
     echo gettext('No business organization found. Please enter a business org name in the quote');
-   } else if (in_array($this->status, ['ENTERED', 'OPEN'])) {
+   } else if (in_array($this->quote_status, ['ENTERED', 'OPEN'])) {
     //Conevrt to SO
     $this->_convert_to_so();
    } else {
-    echo gettext('Quote Status Error. You cannot convert quote in the current status to a sales order');
+    echo gettext('Quote Status Error. You cannot convert quote in the current status to a sales order ') . $this->status;
    }
   }
  }
- 
- private function _convert_to_so(){
-  //pending
+
+ private function _convert_to_so() {
+  global $dbc;
+
+  $soh = new sd_so_header();
+
+  foreach ($soh->field_a as $k => $v) {
+   if (property_exists($this, $v)) {
+    $soh->$v = $this->$v;
+   }
+  }
+  $sales_control_i = sd_sales_control::find_by_org_id($this->bu_org_id);
+  $soh->document_type = $sales_control_i->h_default_document_type_id;
+  $fin_details = org::find_financial_details_from_orgId($this->bu_org_id);
+  $soh->currency = $fin_details->currency_code;
+  $soh->exchange_rate_type = 'CORP';
+  $soh->header_amount = .01;
+  $soh->so_status = 'ENTERED';
+  $soh->order_source_type = 'QUOTE';
+  try {
+   $soh->_before_save();
+   $soh->save();
+   $soh->_after_save();
+   $dbc->confirm();
+   echo "<br> Sales Order header is succefully created. Header Id - " . $soh->sd_so_header_id;
+  } catch (Exception $e) {
+   $dbc->rollback = true;
+   echo "<br>Failed to save SO header.Error @ file" . __FILE__ . ' @@ L ' . __LINE__;
+  }
+
+  if (!empty($soh->sd_so_header_id)) {
+   //create SO line
+   $this->_create_SOlines($soh, $sales_control_i);
+  }
+ }
+
+ private function _create_SOlines($soh, $sales_control_i) {
+  global $dbc;
+  $header_amount = 0;
+  $quote_lines = sd_quote_line::find_by_parent_id($this->sd_quote_header_id);
+  if (empty($quote_lines)) {
+   echo "<br>Failed to create any SO line as no quote lines found.Error @ file" . __FILE__ . ' @@ L ' . __LINE__;
+   return;
+  }
+  $line_number = 0;
+
+  foreach ($quote_lines as $ql) {
+   $line_number++;
+   $so_line = new sd_so_line();
+   foreach ($so_line->field_a as $k => $v) {
+    if (property_exists($ql, $v)) {
+     $so_line->$v = $ql->$v;
+    }
+   }
+   $so_line->sd_so_header_id = $soh->sd_so_header_id;
+   $so_line->line_number = $line_number;
+   $so_line->line_type = $sales_control_i->l_default_document_type_id;
+   $so_line->line_status = 'ENTERED';
+   $so_line->reference_doc_type = 'sd_quote_line';
+   $so_line->line_status = $ql->sd_quote_line_id;
+   $header_amount += $so_line->line_price;
+   try {
+    $so_line->_before_save();
+    $so_line->save();
+    $so_line->_after_save();
+    $dbc->confirm();
+    echo "<br> SO Line is succefully created. Line Id - " . $so_line->sd_so_line_id;
+   } catch (Exception $e) {
+    $dbc->rollback = true;
+    echo "<br>Failed to save SO line.Error @ file" . __FILE__ . ' @@ L ' . __LINE__;
+   }
+  }
+
+  //update the header price
+  $soh->header_amount = $header_amount;
+  $soh->save();
  }
 
  private function update_soNumber() {

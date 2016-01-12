@@ -118,18 +118,10 @@ inoERP
         echo $f->l_val_field_d('sales_person', 'hr_employee_v', 'employee_name', '', 'vf_select_document_owner employee_name');
         echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id);
         ?><i class="generic g_select_document_owner select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
-       <li><?php $f->l_address_field_d('address_id'); ?></li> 
       </ul>
      </div>
      <div id="tabsLine-2" class="tabContent">
-      <ul class="address inline_list">
-       <li><?php $f->l_text_field_dr('phone'); ?></li>
-       <li><?php $f->l_text_field_dr('email'); ?></li>
-       <li><?php $f->l_text_field_dr('website'); ?></li>
-       <li><?php $f->l_text_field_dr('country'); ?></li>
-       <li><?php $f->l_text_field_dr('postal_code'); ?></li>
-       <li><textarea readonly name="address" id="address" cols="22" rows="3" placeholder="Select address Id"><?php echo trim(htmlentities($$class->address)); ?></textarea>       </li>
-      </ul>
+      <div class="address"><?php $f->address_field_d('address_id'); ?></div>
      </div>
      <div id="tabsLine-3" class="tabContent">
       <?php echo $f->contact_field('sd_opportunity', $$class->sd_opportunity_id, $all_contacts); ?>

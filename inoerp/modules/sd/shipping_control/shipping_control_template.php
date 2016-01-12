@@ -12,7 +12,7 @@ inoERP
   <div class="tabContainer">
    <ul class="column header_field">
     <?php echo form::hidden_field('sd_shipping_control_id', $$class->sd_shipping_control_id); ?>
-    <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>
+    <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', 'action', 1, $readonly1); ?>
      <a name="show" href="form.php?class_name=sd_shipping_control&<?php echo "mode=$mode"; ?>" class="show document_id sd_shipping_control_id">
       <i class="fa fa-refresh"></i></a> 
     </li>
@@ -29,9 +29,9 @@ inoERP
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <div> 
-       <ul class="column five_column"> 
+       <ul class="column header_field"> 
         <li><?php $f->l_select_field_from_object('staging_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->staging_subinventory_id, '', 'subinventory_id', '', $readonly); ?>        </li>
-        <li><?php  $f->l_select_field_from_object('staging_locator_id', locator::find_all_of_subinventory($$class->staging_subinventory_id), 'locator_id', 'locator', $$class->staging_locator_id, '', 'locator_id', '', $readonly); ?>        </li>
+        <li><?php $f->l_select_field_from_object('staging_locator_id', locator::find_all_of_subinventory($$class->staging_subinventory_id), 'locator_id', 'locator', $$class->staging_locator_id, '', 'locator_id', '', $readonly); ?>        </li>
         <li><?php $f->l_text_field_d('default_picking_rule_id') ?></li>
         <li><?php $f->l_checkBox_field_d('delivery_onpicking_cb') ?> </li>
         <li><?php $f->l_checkBox_field_d('autosplit_onpicking_cb') ?></li>

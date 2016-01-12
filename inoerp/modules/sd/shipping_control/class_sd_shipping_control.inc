@@ -38,6 +38,8 @@ class sd_shipping_control extends dbObject {
   'delivery_onpicking_cb',
   'autosplit_onpicking_cb',
   'deffer_invoicing_cb',
+  'h_default_document_type_id',
+  'l_default_document_type_id',
   'rev_enabled',
   'rev_number',
   'created_by',
@@ -86,6 +88,8 @@ class sd_shipping_control extends dbObject {
  public $autosplit_onpicking_cb;
  public $deffer_invoicing_cb;
  public $deffer_invoicing;
+ public $h_default_document_type_id;
+ public $l_default_document_type_id;
  public $ef_id;
  public $rev_enabled;
  public $rev_number;

@@ -40,6 +40,8 @@ class sd_sales_control extends dbObject {
   'default_requested_date_cb',
   'default_schedule_ship_date_cb',
   'default_promise_date_cb',
+  'h_default_document_type_id',
+  'l_default_document_type_id',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -74,6 +76,8 @@ class sd_sales_control extends dbObject {
  public $deffer_invoicing_cb;
  public $default_requested_date_cb;
  public $default_schedule_ship_date_cb;
+ public $h_default_document_type_id;
+ public $l_default_document_type_id;
  public $default_promise_date_cb;
  public $ef_id;
  public $rev_enabled;
@@ -85,6 +89,7 @@ class sd_sales_control extends dbObject {
  public $staging_subinventory;
  public $staging_locator;
  public $default_picking_rule;
+ 
 
  public function findBy_orgId($org_id) {
   $sql = "SELECT * FROM sd_sales_control where org_id=:org_id LIMIT 1";

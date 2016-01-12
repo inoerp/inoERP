@@ -31,7 +31,8 @@ inoERP
         <?php echo gettext('Customer Name') ?></label><?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
       <li><label class="auto_complete"><?php echo gettext('Customer Number') ?></label><?php $f->text_field_d('customer_number'); ?></li>
       <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
-      <li><label><?php echo gettext('Status') ?></label><span class="button"><?php echo!empty($$class->quote_status) ? $$class->quote_status : ""; ?></span></li>
+      
+      <li><?php $f->l_text_field_dr('quote_status', 'always_readonly'); ?> </li> 
       <li><?php $f->l_checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?></li> 
       <li><?php $f->l_text_field_d('rev_number'); ?> </li> 
       <li><?php $f->l_text_field_d('description'); ?></li> 
@@ -86,10 +87,10 @@ inoERP
         <a class="button" target="_blank"
            href="<?php echo HOME_URL ?>modules/sd/quote/quote_print.php?sd_quote_header_id=<?php echo!(empty($$class->sd_quote_header_id)) ? $$class->sd_quote_header_id : ""; ?>" >Print Quote</a>
        </li>
-       <li id="document_status"><label>Action: </label>
+       <li id="document_status"><label><?php echo gettext('Action') ?></label>
         <?php echo $f->select_field_from_array('action', sd_quote_header::$action_a, $$class->action, 'action'); ?>
        </li>
-       <li><label>SO BU Name</label><?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', '', 1); ?>						 </li>
+       <li><label><?php echo gettext('SO BU Name') ?></label><?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', '', 1); ?>						 </li>
       </ul>
      </div>
     </div>

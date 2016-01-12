@@ -11,7 +11,7 @@ inoERP
   <div class="tabContainer">
    <ul class="column header_field">
     <?php echo form::hidden_field('sd_sales_control_id', $$class->sd_sales_control_id); ?>
-    <li><?php $f->l_select_field_from_object('org_id', org::find_all_business(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>
+    <li><?php $f->l_select_field_from_object('org_id', org::find_all_business(), 'org_id', 'org', $$class->org_id, 'org_id', 'action', 1, $readonly1); ?>
      <a name="show" href="form.php?class_name=sd_sales_control&<?php echo "mode=$mode"; ?>" class="show document_id sd_sales_control_id">
       <i class='fa fa-refresh'></i></a> 
     </li>
@@ -28,6 +28,8 @@ inoERP
       <div> 
        <ul class="column header_field"> 
         <li><?php $f->l_select_field_from_object('mdm_price_list_header_id', mdm_price_list_header::find_all(), 'mdm_price_list_header_id', 'price_list', $$class->mdm_price_list_header_id); ?>        </li>
+        <li><label><?php echo gettext('Default Order Type') ?></label><?php echo $f->select_field_from_object('h_default_document_type_id', sd_document_type::find_all_header_levels(), 'sd_document_type_id', 'document_type_name', $$class->h_default_document_type_id, 'h_default_document_type_id', '', '', $readonly); ?></li>
+        <li><label><?php echo gettext('Default Line Type') ?></label><?php echo $f->select_field_from_object('l_default_document_type_id', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class->l_default_document_type_id, 'h_default_document_type_id', '', '', $readonly); ?></li>
         <li><?php $f->l_checkBox_field_d('default_requested_date_cb') ?>  </li>
         <li><?php $f->l_checkBox_field_d('default_schedule_ship_date_cb') ?></li>
         <li><?php $f->l_checkBox_field_d('default_promise_date_cb') ?> </li>
