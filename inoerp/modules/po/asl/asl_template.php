@@ -87,7 +87,7 @@ inoERP
          <td><?php form::text_field_wid2sr('po_asl_line_id'); ?></td>
          <td><?php $f->text_field_wid2sr('supplier_id'); ?></td>
          <td><?php $f->text_field_wid2('supplier_name', 'select_supplier_name'); ?>
-          <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_supplier_name select_popup clickable"></td>
+          <i class="fa fa-search select_supplier_name select_popup clickable"></i></td>
          <td><?php echo $supplier_site_name_statement; ?></td>
          <td><?php $f->status_field_d2('status'); ?></td>
          <td><?php $f->text_field_wid2s('manufacturer'); ?></td>
