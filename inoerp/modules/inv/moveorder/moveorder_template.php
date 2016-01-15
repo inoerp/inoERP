@@ -1,4 +1,4 @@
-<div id ="form_header"><span class="heading"><?php echo gettext('Move Order Header | in Development | ECD 15-Aug-2015') ?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Move Order Header') ?></span>
  <div id="tabsHeader">
   <ul class="tabMain">
    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -16,7 +16,8 @@
       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>       </li>
       <li><?php $f->l_text_field('order_number', $$class->order_number ,  '' , 'order_number','primary_column2','', $readonly1); ?> </li>
       <li><label><?php echo gettext('Date') ?></label><?php echo $f->date_fieldFromToday_d('transaction_date', ino_date($$class->transaction_date), $readonly1); ?></li>
-      <li><?php echo $f->l_select_field_from_array('transaction_type_id', inv_moveorder_header::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1, $readonly1, $readonly1); ?>       </li>
+      <li><?php $f->l_select_field_from_array('transaction_type_id', inv_moveorder_header::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1, $readonly1, $readonly1); ?>       </li>
+      <li><?php $f->l_select_field_from_array('status', inv_moveorder_header::$status_a, $$class->status, 'status', 'always_readonly', '', $readonly1, $readonly1); ?>       </li>
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
@@ -177,10 +178,10 @@
       <thead> 
        <tr>
         <th><?php echo gettext('Seq') ?>#</th>
-        <th>From Current Onhand</th>
-        <th>From Future Onhand </th>
-        <th>To Current Onhand</th>
-        <th>To Future Onhand</th>
+        <th><?php echo gettext('From Current Onhand') ?></th>
+        <th><?php echo gettext('From Future Onhand') ?> </th>
+        <th><?php echo gettext('To Current Onhand') ?></th>
+        <th><?php echo gettext('To Future Onhand') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

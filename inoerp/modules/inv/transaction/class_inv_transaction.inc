@@ -666,7 +666,7 @@ class inv_transaction extends dbObject {
    return $return_val;
   }
 
-  if (in_array($this->transaction_type_id, array(1, 3, 6, 7, 9, 12, 13, 14, 15, 18, 19, 20, 21, 22, 24, 25))) {
+  if (in_array($this->transaction_type_id, array(1, 3, 6, 7, 9, 12, 13, 14, 15, 18, 19, 20, 21, 22, 24, 25, 26))) {
    $this->_serial_type = 'ID';
   }
 
@@ -692,7 +692,7 @@ class inv_transaction extends dbObject {
    $return_val = $return_val1 && $return_val2;
   }
 
-  if (in_array($this->transaction_type_id, array(6, 18, 19, 13, 14, 15, 21, 24))) {
+  if (in_array($this->transaction_type_id, array(6, 18, 19, 13, 14, 15, 21, 24, 26))) {
    try {
     $return_val = $this->_transact_serial_issue();
    } catch (Exception $e) {
@@ -701,7 +701,7 @@ class inv_transaction extends dbObject {
   }
 
 
-  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 14, 23, 25))) {
+  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 14, 23, 25 , 26))) {
    $return_val = $this->_transact_serial_receipt();
   }
 
@@ -729,7 +729,7 @@ class inv_transaction extends dbObject {
    return $return_val;
   }
 
-  if (in_array($this->transaction_type_id, array(1, 3, 6, 9, 12, 13, 14, 15, 18, 19, 20, 21, 22, 24))) {
+  if (in_array($this->transaction_type_id, array(1, 3, 6, 9, 12, 13, 14, 15, 18, 19, 20, 21, 22, 24, 26))) {
    $this->_lot_type = 'ID';
   }
 
@@ -747,11 +747,11 @@ class inv_transaction extends dbObject {
    $return_val = $return_val1 && $return_val2;
   }
 
-  if (in_array($this->transaction_type_id, array(6, 18, 19, 13, 14, 21, 24))) {
+  if (in_array($this->transaction_type_id, array(6, 18, 19, 13, 14, 21, 24, 26))) {
    $return_val = $this->_transact_lot_issue();
   }
 
-  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 14, 23, 25))) {
+  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 14, 23, 25, 26))) {
    $return_val = $this->_transact_lot_receipt();
   }
 
@@ -1489,6 +1489,7 @@ class inv_transaction extends dbObject {
 
    case 3 :
    case 14 :
+   case 26 :
     $onhand->setProperty('_from_subinventory_id', $this->from_subinventory_id);
     $onhand->setProperty('_from_locator_id', $this->from_locator_id);
     $onhand->setProperty('_to_subinventory_id', $this->to_subinventory_id);
