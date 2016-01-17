@@ -70,6 +70,8 @@ class po_all_v extends dbObject {
   'accrual_ac_id',
   'budget_ac_id',
   'ppv_ac_id',
+    'reference_doc_type',
+  'reference_doc_number',
  ];
  public $initial_search = [
   "po_number",
@@ -137,6 +139,8 @@ class po_all_v extends dbObject {
   'accrual_ac_id',
   'budget_ac_id',
   'ppv_ac_id',
+    'reference_doc_type',
+  'reference_doc_number',
  ];
  public $multi_select_column = [
   'receving_org',
@@ -300,10 +304,9 @@ class po_all_v extends dbObject {
  public $accrual_ac_id;
  public $budget_ac_id;
  public $ppv_ac_id;
+ public $reference_doc_type;
+ public $reference_doc_number;
 
- public function __set($name, $value) {
-  $this->$name = $value;
- }
 
  private function create_po_all_v() {
   $sql = "
@@ -316,6 +319,7 @@ supplier_site_name, supplier_site_number,
 payment_term, payment_term_description,
 po_line_id, line_type, po_line_number,	item_id_m,  kit_cb, revision_name, item_description, line_description, line_quantity, 
 unit_price, line_price, gl_line_price, gl_tax_amount,
+reference_doc_type, reference_doc_number,
 item_number, uom_id, item_status,serial_generation, lot_generation,
 po_detail_id, shipment_number, receving_org_id, org_id, subinventory_id, locator_id, requestor, 
 quantity,received_quantity, open_quantity,
@@ -335,6 +339,7 @@ payment_term.payment_term, payment_term.description,
 po_line.po_line_id, po_line.line_type, po_line.line_number,	po_line.item_id_m, po_line.kit_cb,  po_line.revision_name, 
 po_line.item_description, po_line.line_description, 
 po_line.line_quantity, po_line.unit_price, po_line.line_price, po_line.gl_line_price, po_line.gl_tax_amount,
+ po_line.reference_doc_type, po_line.reference_doc_number,
 item.item_number, item.uom_id, item.item_status,item.serial_generation, item.lot_generation,
 po_detail.po_detail_id, po_detail.shipment_number, po_line.receving_org_id, po_line.receving_org_id, po_detail.subinventory_id, 
 po_detail.locator_id, po_detail.requestor, 
