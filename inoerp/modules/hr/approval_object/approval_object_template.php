@@ -1,12 +1,12 @@
 <div id ="form_header">
  <form action=""  method="post" id="hr_approval_object"  name="hr_approval_object">
-  <span class="heading"><?php echo gettext('Approval Object') ?> </span>
+  <span class="heading"><?php echo __('Approval Object') ?> </span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -48,15 +48,15 @@
 
    </div>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Details') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Object Value') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo gettext('Future') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo __('Object Value') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo __('Future') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
-      <div><label class="text_area_label"><?php echo gettext('Object Value') ?></label><?php
+      <div><label class="text_area_label"><?php echo __('Object Value') ?></label><?php
        echo $f->text_area_ap(array('name' => 'object_value', 'value' => $$class->object_value,
         'row_size' => '10', 'column_size' => '90'));
        ?> 	

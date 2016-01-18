@@ -1,13 +1,13 @@
-<div id ="form_header"><span class="heading"><?php echo gettext('AP Transaction Header') ?></span>
+<div id ="form_header"><span class="heading"><?php echo __('AP Transaction Header') ?></span>
  <form  method="post" id="ap_transaction_header"  name="ap_transaction_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Finance') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Payments') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Notes') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-6"><?php echo gettext('Actions') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Finance') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Payments') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo __('Notes') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo __('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -19,7 +19,7 @@
       <li><?php $f->l_text_field_d('transaction_number', 'primary_column2'); ?> </li>
       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>       </li>
       <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', '', 1, $readonly1); ?>       </li>
-      <li><label><?php echo gettext('Period Name') ?></label><?php
+      <li><label><?php echo __('Period Name') ?></label><?php
        if (!empty($period_name_stmt)) {
         echo $period_name_stmt;
        } else {
@@ -114,30 +114,30 @@
   </div>
  </form>
 </div>
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Transaction Lines & Details') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo __('Transaction Lines & Details') ?></span>
  <form  method="post" id="ap_transaction_line"  name="ap_transaction_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Finance') ?> </a></li>
-    <li><a href="#tabsLine-3"><?php echo gettext('References') ?> </a></li>
-    <li><a href="#tabsLine-4"><?php echo gettext('Actions') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo __('Finance') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo __('References') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo __('Actions') ?> </a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Seq') ?>#</th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Line') ?>#</th>
-        <th><?php echo gettext('Type') ?></th>
-        <th><?php echo gettext('Item Number') ?></th>
-        <th><?php echo gettext('Item Description') ?></th>
-        <th><?php echo gettext('UOM') ?></th>
-        <th><?php echo gettext('Quantity') ?></th>
-        <th><?php echo gettext('Accounting Details') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Seq') ?>#</th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('Line') ?>#</th>
+        <th><?php echo __('Type') ?></th>
+        <th><?php echo __('Item Number') ?></th>
+        <th><?php echo __('Item Description') ?></th>
+        <th><?php echo __('UOM') ?></th>
+        <th><?php echo __('Quantity') ?></th>
+        <th><?php echo __('Accounting Details') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -194,15 +194,15 @@
                <table class="form form_detail_data_table detail">
                 <thead>
                  <tr>
-                  <th><?php echo gettext('Action') ?></th>
-                  <th><?php echo gettext('Seq') ?>#</th>
-                  <th><?php echo gettext('Detail Id') ?></th>
-                  <th><?php echo gettext('Type') ?></th>
-                  <th><?php echo gettext('Account') ?></th>
-                  <th><?php echo gettext('Period') ?></th>
-                  <th><?php echo gettext('Amount') ?></th>
-                  <th><?php echo gettext('GL Amount') ?></th>
-                  <th><?php echo gettext('Description') ?></th>
+                  <th><?php echo __('Action') ?></th>
+                  <th><?php echo __('Seq') ?>#</th>
+                  <th><?php echo __('Detail Id') ?></th>
+                  <th><?php echo __('Type') ?></th>
+                  <th><?php echo __('Account') ?></th>
+                  <th><?php echo __('Period') ?></th>
+                  <th><?php echo __('Amount') ?></th>
+                  <th><?php echo __('GL Amount') ?></th>
+                  <th><?php echo __('Description') ?></th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody <?php echo $count ?>">
@@ -240,11 +240,11 @@
                <table class="form form_detail_data_table detail">
                 <thead>
                  <tr>
-                  <th><?php echo gettext('Seq') ?>#</th>
-                  <th><?php echo gettext('Ref Key Name') ?></th>
-                  <th><?php echo gettext('Ref Key Value') ?></th>
-                  <th><?php echo gettext('View Ref Doc') ?></th>
-                  <th><?php echo gettext('Status') ?>#</th>
+                  <th><?php echo __('Seq') ?>#</th>
+                  <th><?php echo __('Ref Key Name') ?></th>
+                  <th><?php echo __('Ref Key Value') ?></th>
+                  <th><?php echo __('View Ref Doc') ?></th>
+                  <th><?php echo __('Status') ?>#</th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody <?php echo $count ?>">
@@ -288,14 +288,14 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Seq') ?>#</th>
-        <th><?php echo gettext('Unit Price') ?></th>
-        <th><?php echo gettext('Line Amount') ?>#</th>
-        <th><?php echo gettext('Tax Code') ?></th>
-        <th><?php echo gettext('Tax Amount') ?></th>
-        <th><?php echo gettext('GL Line Price') ?></th>
-        <th><?php echo gettext('GL Tax Amount') ?></th>
-        <th><?php echo gettext('Line Description') ?></th>
+        <th><?php echo __('Seq') ?>#</th>
+        <th><?php echo __('Unit Price') ?></th>
+        <th><?php echo __('Line Amount') ?>#</th>
+        <th><?php echo __('Tax Code') ?></th>
+        <th><?php echo __('Tax Amount') ?></th>
+        <th><?php echo __('GL Line Price') ?></th>
+        <th><?php echo __('GL Tax Amount') ?></th>
+        <th><?php echo __('Line Description') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -326,20 +326,20 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Seq') ?>#</th>
-        <th><?php echo gettext('PO Header Id') ?></th>
-        <th><?php echo gettext('PO Line Id') ?></th>
-        <th><?php echo gettext('PO Detail Id') ?>#</th>
-        <th><?php echo gettext('Is Asset') ?></th>
-        <th><?php echo gettext('Asset Category') ?></th>
-        <th><?php echo gettext('Project Header Id') ?></th>
-        <th><?php echo gettext('Project Line Id') ?></th>
-        <th><?php echo gettext('Trnx Header Id') ?></th>
-        <th><?php echo gettext('Trnx Line Id') ?></th>
-        <th><?php echo gettext('Ref Key Name') ?></th>
-        <th><?php echo gettext('Ref Key Value') ?></th>
-        <th><?php echo gettext('View Ref Doc') ?></th>
-        <th><?php echo gettext('Status') ?></th>
+        <th><?php echo __('Seq') ?>#</th>
+        <th><?php echo __('PO Header Id') ?></th>
+        <th><?php echo __('PO Line Id') ?></th>
+        <th><?php echo __('PO Detail Id') ?>#</th>
+        <th><?php echo __('Is Asset') ?></th>
+        <th><?php echo __('Asset Category') ?></th>
+        <th><?php echo __('Project Header Id') ?></th>
+        <th><?php echo __('Project Line Id') ?></th>
+        <th><?php echo __('Trnx Header Id') ?></th>
+        <th><?php echo __('Trnx Line Id') ?></th>
+        <th><?php echo __('Ref Key Name') ?></th>
+        <th><?php echo __('Ref Key Value') ?></th>
+        <th><?php echo __('View Ref Doc') ?></th>
+        <th><?php echo __('Status') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -375,10 +375,10 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Seq') ?>#</th>
-        <th><?php echo gettext('Cancel Line') ?></th>
-        <th><?php echo gettext('Un match Only') ?></th>
-        <th><?php echo gettext('Change Quantity') ?>#</th>
+        <th><?php echo __('Seq') ?>#</th>
+        <th><?php echo __('Cancel Line') ?></th>
+        <th><?php echo __('Un match Only') ?></th>
+        <th><?php echo __('Change Quantity') ?>#</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

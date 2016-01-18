@@ -1,21 +1,21 @@
-<div id ="form_header"><span class="heading"><?php echo gettext('RMA Receipt Header') ?></span>
+<div id ="form_header"><span class="heading"><?php echo __('RMA Receipt Header') ?></span>
 
  <div id="tabsHeader">
   <ul class="tabMain">
-   <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-   <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
-   <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
-   <li><a href="#tabsHeader-4"><?php echo gettext('Actions') ?></a></li>
+   <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+   <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
+   <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
+   <li><a href="#tabsHeader-4"><?php echo __('Actions') ?></a></li>
   </ul>
   <div class="tabContainer">
    <form action=""  method="post" id="inv_receipt_header"  name="inv_receipt_header">
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
       <li><label> <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_receipt_header_id select_popup clickable">
-        <?php echo gettext('Receipt Header Id') ?></label><?php echo form::text_field_dsr('inv_receipt_header_id'); ?>
+        <?php echo __('Receipt Header Id') ?></label><?php echo form::text_field_dsr('inv_receipt_header_id'); ?>
        <a name="show" href="form.php?class_name=inv_rma_receipt_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_receipt_header_id"><i class='fa fa-refresh'></i></a> 
       </li>
-      <li><label><?php echo gettext('Inventory') ?></label><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>       </li>
+      <li><label><?php echo __('Inventory') ?></label><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>       </li>
       <li><?php echo $f->l_select_field_from_array('transaction_type_id', inv_rma_receipt_header::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1, $readonly1); ?>       </li>
       <li><?php echo $f->l_number_field('receipt_number', $$class->receipt_number, '8', '', 'primary_column2', '', $readonly1); ?></li>
       <li><?php echo $f->l_date_fieldFromToday('receipt_date', ino_date($$class->receipt_date), $readonly1); ?></li>      
@@ -40,7 +40,7 @@
     <div id="tabsHeader-4" class="tabContent">
      <div> 
       <ul class="column five_column">
-       <li><label><?php echo gettext('Action') ?></label>
+       <li><label><?php echo __('Action') ?></label>
         <select name="transaction_action[]" class=" select  transaction_action" id="transaction_action" >
          <option value="" ></option>
          <option value="CREATE_ACCOUNT" >Create Accounting</option>
@@ -61,25 +61,25 @@
  <form action=""  method="post" id="po_site"  name="inv_receipt_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('RMA Info') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Receipt') ?> </a></li>
-    <li><a href="#tabsLine-3"><?php echo gettext('Lot & Serial') ?> </a></li>
-    <li><a href="#tabsLine-4"><?php echo gettext('Customer') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo __('RMA Info') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo __('Receipt') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo __('Lot & Serial') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo __('Customer') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Receipt Line Id') ?></th>
-        <th><?php echo gettext('Line Number') ?></th>
-        <th><?php echo gettext('Header Id') ?></th>
-        <th><?php echo gettext('Sales Order #') ?></th>
-        <th><?php echo gettext('SO Line #') ?></th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Line Qty') ?></th>
-        <th><?php echo gettext('Received Qty') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Receipt Line Id') ?></th>
+        <th><?php echo __('Line Number') ?></th>
+        <th><?php echo __('Header Id') ?></th>
+        <th><?php echo __('Sales Order #') ?></th>
+        <th><?php echo __('SO Line #') ?></th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('Line Qty') ?></th>
+        <th><?php echo __('Received Qty') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -116,14 +116,14 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Item Id') ?></th>
-        <th><?php echo gettext('Item Number') ?></th>
-        <th><?php echo gettext('Revision') ?></th>
-        <th><?php echo gettext('Item Description') ?></th>
-        <th><?php echo gettext('UOM') ?></th>
-        <th><?php echo gettext('New Received Quantity') ?></th>
-        <th><?php echo gettext('Sub Inventory') ?></th>
-        <th><?php echo gettext('Locator') ?></th>
+        <th><?php echo __('Item Id') ?></th>
+        <th><?php echo __('Item Number') ?></th>
+        <th><?php echo __('Revision') ?></th>
+        <th><?php echo __('Item Description') ?></th>
+        <th><?php echo __('UOM') ?></th>
+        <th><?php echo __('New Received Quantity') ?></th>
+        <th><?php echo __('Sub Inventory') ?></th>
+        <th><?php echo __('Locator') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -153,8 +153,8 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Add Lot Numbers') ?></th>
-        <th><?php echo gettext('Add Serial Numbers') ?></th>
+        <th><?php echo __('Add Lot Numbers') ?></th>
+        <th><?php echo __('Add Serial Numbers') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -179,9 +179,9 @@
                <table class="form form_detail_data_table detail">
                 <thead>
                  <tr>
-                  <th><?php echo gettext('Action') ?></th>
-                  <th><?php echo gettext('Lot Number') ?></th>
-                  <th><?php echo gettext('Quantity') ?></th>
+                  <th><?php echo __('Action') ?></th>
+                  <th><?php echo __('Lot Number') ?></th>
+                  <th><?php echo __('Quantity') ?></th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody_ln">
@@ -253,8 +253,8 @@
                <table class="form form_detail_data_table detail">
                 <thead>
                  <tr>
-                  <th><?php echo gettext('Action') ?></th>
-                  <th><?php echo gettext('Serial Number') ?></th>
+                  <th><?php echo __('Action') ?></th>
+                  <th><?php echo __('Serial Number') ?></th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody">
@@ -327,12 +327,12 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Customer Id') ?></th>
-        <th><?php echo gettext('Customer Number') ?></th>
-        <th><?php echo gettext('Customer') ?></th>
-        <th><?php echo gettext('Site Id') ?></th>
-        <th><?php echo gettext('Site #') ?></th>
-        <th><?php echo gettext('Site') ?></th>
+        <th><?php echo __('Customer Id') ?></th>
+        <th><?php echo __('Customer Number') ?></th>
+        <th><?php echo __('Customer') ?></th>
+        <th><?php echo __('Site Id') ?></th>
+        <th><?php echo __('Site #') ?></th>
+        <th><?php echo __('Site') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

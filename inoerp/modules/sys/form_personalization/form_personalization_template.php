@@ -1,21 +1,21 @@
 <div id="view_divId">
- <div id ="form_header"> <span class="heading"><?php echo gettext('Form Personalization') ?></span>
+ <div id ="form_header"> <span class="heading"><?php echo __('Form Personalization') ?></span>
   <form action=""  method="post" id="sys_form_personalization_header"  name="sys_form_personalization_header">
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <div id="form_serach_header" class="tabContainer">
-      <label><?php        echo gettext('Object Name')     ?></label></label>
+      <label><?php        echo __('Object Name')     ?></label></label>
       <?php echo $f->select_field_from_object('obj_class_name', view::find_all_tables(), 'TABLE_NAME', 'TABLE_NAME', $obj_class_name_h, 'obj_class_name'); ?>
       <a name="show" href="form.php?class_name=sys_form_personalization&<?php echo "mode=$mode"; ?>" class="show document_id sys_form_personalization_id">
        <i class="fa fa-refresh"></i></a> 
      </div>
     </div>
    </div>
-   <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Form Personalization Details') ?></span>
+   <div id="form_line" class="form_line"><span class="heading"><?php echo __('Form Personalization Details') ?></span>
     <div id="tabsDetailD">
      <ul class="tabMain">
-      <li><a href="#tabsDetailD-1"><?php echo gettext('Template Code') ?></a></li>
-      <li><a href="#tabsDetailD-2"><?php echo gettext('Form View') ?></a></li>
+      <li><a href="#tabsDetailD-1"><?php echo __('Template Code') ?></a></li>
+      <li><a href="#tabsDetailD-2"><?php echo __('Form View') ?></a></li>
      </ul>
      <div class="tabContainer">
       <div id="tabsDetailD-1" class="tabContent">

@@ -3,14 +3,14 @@ if(empty($$class->hr_timesheet_period_id)){
  $$class->status = 'OPEN';
 }
 ?>
-<div id ="form_all"><span class="heading"><?php echo gettext('HR Timesheet Period') ?></span>
+<div id ="form_all"><span class="heading"><?php echo __('HR Timesheet Period') ?></span>
  <form  method="post" id="hr_timesheet_period"  name="hr_timesheet_period">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">

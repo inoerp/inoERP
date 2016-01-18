@@ -1,13 +1,13 @@
 <div id ="form_header">
  <form  method="post" id="hr_position"  name="hr_position">
-  <span class="heading"><?php echo gettext('Position Header') ?></span>
+  <span class="heading"><?php echo __('Position Header') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo gettext('Terms') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo __('Terms') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo __('Note') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -63,12 +63,12 @@
   <div id ="form_line" class="form_line"><span class="heading">Line Data </span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Details') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>
+     <li><a href="#tabsLine-1"><?php echo __('Details') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo __('Future') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
-      <div><label class="text_area_label"><?php echo gettext('Position Details') ?></label><?php
+      <div><label class="text_area_label"><?php echo __('Position Details') ?></label><?php
        echo $f->text_area_ap(array('name' => 'position_details', 'value' => $$class->position_details,
         'row_size' => '10', 'column_size' => '90'));
        ?> 	

@@ -1,15 +1,15 @@
 <div id="po_rfq_divId">
 
- <div id ="form_header"><span class="heading"><?php echo gettext('Request For Quotation') ?></span>
+ <div id ="form_header"><span class="heading"><?php echo __('Request For Quotation') ?></span>
   <form  method="post" id="po_rfq_header"  name="po_rfq_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo gettext('Description') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo gettext('Address Details') ?></a></li>
-     <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
-     <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-6"><?php echo gettext('Actions') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo __('Description') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo __('Address Details') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo __('Note') ?></a></li>
+     <li><a href="#tabsHeader-5"><?php echo __('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-6"><?php echo __('Actions') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -32,7 +32,7 @@
       </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
-      <div><label class="text_area_label"><?php echo gettext('Description') ?></label><?php
+      <div><label class="text_area_label"><?php echo __('Description') ?></label><?php
        echo $f->text_area_ap(array('name' => 'description', 'value' => $$class->description,
         'row_size' => '10', 'column_size' => '90'));
        ?> 	
@@ -65,11 +65,11 @@
      <div id="tabsHeader-6" class="tabContent">
       <div> 
        <ul class="column four_column">
-        <li id="document_print"><label><?php echo gettext('Document Print') ?></label>
+        <li id="document_print"><label><?php echo __('Document Print') ?></label>
          <a class="button" target="_blank"
             href="<?php echo HOME_URL ?>modules/po/po_rfq_print.php?po_rfq_header_id=<?php echo!(empty($$class->po_rfq_header_id)) ? $$class->po_rfq_header_id : ""; ?>" >Print RFQ</a>
         </li>
-        <li><label><?php echo gettext('Action') ?></label>
+        <li><label><?php echo __('Action') ?></label>
          <?php
          $action_readonly = ($$class->rfq_status == 'CLOSED') ? 1 : '';
          echo $f->select_field_from_array('action', $$class->action_a, '', 'action', '', '', $readonly, $action_readonly)
@@ -84,29 +84,29 @@
   </form>
  </div>
 
- <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('RFQ Lines & Details') ?></span>
+ <div id="form_line" class="form_line"><span class="heading"><?php echo __('RFQ Lines & Details') ?></span>
   <form  method="post" id="po_rfq_line"  name="po_rfq_line">
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo gettext('Factors') ?> </a></li>
+     <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo __('Factors') ?> </a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsLine-1" class="tabContent">
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo gettext('Action') ?></th>
-         <th><?php echo gettext('Seq') ?>#</th>
-         <th><?php echo gettext('Line Id') ?></th>
-         <th><?php echo gettext('Line') ?>#</th>
-         <th><?php echo gettext('Item Number') ?></th>
-         <th><?php echo gettext('Item Description') ?></th>
-         <th><?php echo gettext('MFG Part Number') ?></th>
-         <th><?php echo gettext('Manufacturer') ?></th>
-         <th><?php echo gettext('Min Quantity') ?></th>
-         <th><?php echo gettext('Max Quantity') ?></th>
-         <th><?php echo gettext('Requirements') ?></th>
+         <th><?php echo __('Action') ?></th>
+         <th><?php echo __('Seq') ?>#</th>
+         <th><?php echo __('Line Id') ?></th>
+         <th><?php echo __('Line') ?>#</th>
+         <th><?php echo __('Item Number') ?></th>
+         <th><?php echo __('Item Description') ?></th>
+         <th><?php echo __('MFG Part Number') ?></th>
+         <th><?php echo __('Manufacturer') ?></th>
+         <th><?php echo __('Min Quantity') ?></th>
+         <th><?php echo __('Max Quantity') ?></th>
+         <th><?php echo __('Requirements') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -161,13 +161,13 @@
                 <table class="form form_detail_data_table detail">
                  <thead>
                   <tr>
-                   <th><?php echo gettext('Action') ?></th>
-                   <th><?php echo gettext('Seq') ?></th>
-                   <th><?php echo gettext('Requirement Id') ?></th>
-                   <th><?php echo gettext('Requirement Number') ?></th>
-                   <th><?php echo gettext('Requirement Name') ?></th>
-                   <th><?php echo gettext('Type') ?></th>
-                   <th><?php echo gettext('Max Evaluation Points') ?></th>
+                   <th><?php echo __('Action') ?></th>
+                   <th><?php echo __('Seq') ?></th>
+                   <th><?php echo __('Requirement Id') ?></th>
+                   <th><?php echo __('Requirement Number') ?></th>
+                   <th><?php echo __('Requirement Name') ?></th>
+                   <th><?php echo __('Type') ?></th>
+                   <th><?php echo __('Max Evaluation Points') ?></th>
                   </tr>
                  </thead>
                  <tbody class="form_data_detail_tbody">
@@ -202,9 +202,9 @@
                 <table class="form form_detail_data_table detail">
                  <thead>
                   <tr>
-                   <th><?php echo gettext('Seq') ?>#</th>
-                   <th><?php echo gettext('Target Value') ?></th>
-                   <th><?php echo gettext('Description') ?></th>
+                   <th><?php echo __('Seq') ?>#</th>
+                   <th><?php echo __('Target Value') ?></th>
+                   <th><?php echo __('Description') ?></th>
                   </tr>
                  </thead>
                  <tbody class="form_data_detail_tbody">
@@ -252,11 +252,11 @@
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo gettext('Seq') ?>#</th>
-         <th><?php echo gettext('UOM') ?></th>
-         <th><?php echo gettext('Unit Price') ?></th>
-         <th><?php echo gettext('Target Price') ?></th>
-         <th><?php echo gettext('Line Description') ?></th>
+         <th><?php echo __('Seq') ?>#</th>
+         <th><?php echo __('UOM') ?></th>
+         <th><?php echo __('Unit Price') ?></th>
+         <th><?php echo __('Target Price') ?></th>
+         <th><?php echo __('Line Description') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">

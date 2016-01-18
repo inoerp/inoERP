@@ -7,18 +7,18 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id ="form_header"><span class="heading"><?php
-  echo gettext('Project Type')
+  echo __('Project Type')
   ?></span>
  <form method="post" id="prj_project_type_header"  name="prj_project_type_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Costing') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Budget') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Billing') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo gettext('Invoice Rules') ?></a></li>
-    <li><a href="#tabsHeader-6"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-7"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Costing') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Budget') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo __('Billing') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo __('Invoice Rules') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo __('Note') ?></a></li>
+    <li><a href="#tabsHeader-7"><?php echo __('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -107,12 +107,12 @@ inoERP
  </form>
 </div>
 
-<span class="heading"><?php echo gettext('Project Type Details') ?></span>
+<span class="heading"><?php echo __('Project Type Details') ?></span>
 
 <div id="tabsLine">
  <ul class="tabMain">
-  <li><a href="#tabsLine-1"><?php echo gettext('Classifications') ?></a></li>
-  <li><a href="#tabsLine-2"><?php echo gettext('Billing Processes') ?></a></li>
+  <li><a href="#tabsLine-1"><?php echo __('Classifications') ?></a></li>
+  <li><a href="#tabsLine-2"><?php echo __('Billing Processes') ?></a></li>
  </ul>
  <div class="tabContainer">
   <form method="post" id="prj_project_type_line"  name="prj_project_type_line" class="m-margin-top-20">
@@ -121,11 +121,11 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Category') ?>#</th>
-        <th><?php echo gettext('Description') ?></th>
-        <th><?php echo gettext('Required') ?>?</th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('Category') ?>#</th>
+        <th><?php echo __('Description') ?></th>
+        <th><?php echo __('Required') ?>?</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -163,13 +163,13 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Billing Id') ?></th>
-        <th><?php echo gettext('Extension') ?></th>
-        <th><?php echo gettext('Currency') ?></th>
-        <th><?php echo gettext('Amount') ?></th>
-        <th><?php echo gettext('Percentage') ?></th>
-        <th><?php echo gettext('Active') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Billing Id') ?></th>
+        <th><?php echo __('Extension') ?></th>
+        <th><?php echo __('Currency') ?></th>
+        <th><?php echo __('Amount') ?></th>
+        <th><?php echo __('Percentage') ?></th>
+        <th><?php echo __('Active') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody2 wip_wo_bom_values" >

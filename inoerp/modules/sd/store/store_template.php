@@ -1,16 +1,16 @@
 <div class="row small-left-padding">
 <div id="form_all">
  <form  method="post" id="sd_store"  name="sd_store">
-  <span class="heading"><?php echo gettext('Physical Store') ?></span>
+  <span class="heading"><?php echo __('Physical Store') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo gettext('Accounts') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo gettext('Address') ?></a></li>
-     <li><a href="#tabsHeader-4"><?php echo gettext('Contact') ?></a></li>
-     <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-6"><?php echo gettext('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo __('Accounts') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo __('Address') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo __('Contact') ?></a></li>
+     <li><a href="#tabsHeader-5"><?php echo __('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-6"><?php echo __('Notes') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -27,7 +27,7 @@
         <li><?php $f->l_text_field_d('description'); ?> </li> 
         <li><?php $f->l_status_field_d('status'); ?></li>
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-          <?php echo gettext('Address Id') ?></label><input type="text"  name="address_id[]" value="<?php echo htmlentities($sd_store->address_id);
+          <?php echo __('Address Id') ?></label><input type="text"  name="address_id[]" value="<?php echo htmlentities($sd_store->address_id);
           ?>" maxlength="50" id="address_id"> 
         </li> 
        </ul> 
@@ -50,7 +50,7 @@
        <li><?php echo $f->l_text_field('website', $address->website, '', '', '', '', 1); ?></li>
        <li><?php echo $f->l_text_field('country', $address->country, '', '', '', '', 1); ?></li>
        <li><?php echo $f->l_text_field('postal_code', $address->postal_code, '', '', '', '', 1); ?></li>
-       <li><label><?php echo gettext('Address') ?></label>  
+       <li><label><?php echo __('Address') ?></label>  
         <textarea readonly name="address" id="address" cols="22" rows="3" placeholder="Select address Id"><?php echo trim(htmlentities($address->address)); ?></textarea>
        </li>
       </ul>
@@ -64,7 +64,7 @@
       <div>
        <ul id="new_contact_reference">
         <li class='new_object1'><label><img class="extn_contact_id select_popup clickable"  src="<?php echo HOME_URL; ?>themes/images/serach.png"/>
-          <?php echo gettext('Associate Contact') ?></label>  
+          <?php echo __('Associate Contact') ?></label>  
          <?php
          echo $f->hidden_field('extn_contact_id_new', '');
          echo $f->text_field('contact_name_new', '', '20', '', 'select_contact');
@@ -97,10 +97,10 @@
    </div>
   </div>
  </form>
- <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Sub Inventories') ?></span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Sub Inventories') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Values') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Values') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <form action=""  method="post" id="sd_store_subinventory_line"  name="sd_store_subinventory_line">
@@ -108,14 +108,14 @@
       <table class="form_table">
        <thead> 
         <tr>
-         <th><?php echo gettext('Action') ?></th>
-         <th><?php echo gettext('Line Id') ?></th>
-         <th><?php echo gettext('Sub Inventory') ?>#</th>
-         <th><?php echo gettext('Building') ?></th>
-         <th><?php echo gettext('Floor') ?></th>
-         <th><?php echo gettext('Wing') ?></th>
-         <th><?php echo gettext('Description') ?></th>
-         <th><?php echo gettext('Status') ?></th>
+         <th><?php echo __('Action') ?></th>
+         <th><?php echo __('Line Id') ?></th>
+         <th><?php echo __('Sub Inventory') ?>#</th>
+         <th><?php echo __('Building') ?></th>
+         <th><?php echo __('Floor') ?></th>
+         <th><?php echo __('Wing') ?></th>
+         <th><?php echo __('Description') ?></th>
+         <th><?php echo __('Status') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody sd_store_subinventory_values" >

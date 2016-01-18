@@ -1,14 +1,14 @@
 <div class="row small-left-padding">
  <div id="form_all">
   <form  method="post" id="mdm_price_list_header"  name="mdm_price_list_header">
-   <span class="heading"><?php echo gettext('Price List') ?></span>
+   <span class="heading"><?php echo __('Price List') ?></span>
    <div id ="form_header">
     <div id="tabsHeader">
      <ul class="tabMain">
-      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-      <li><a href="#tabsHeader-2"><?php echo gettext('Other') ?></a></li>
-      <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
-      <li><a href="#tabsHeader-4"><?php echo gettext('Notes') ?></a></li>
+      <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+      <li><a href="#tabsHeader-2"><?php echo __('Other') ?></a></li>
+      <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
+      <li><a href="#tabsHeader-4"><?php echo __('Notes') ?></a></li>
      </ul>
      <div class="tabContainer">
       <div id="tabsHeader-1" class="tabContent">
@@ -59,9 +59,9 @@
   <div id ="form_line" class="form_line"><span class="heading">Price List Lines </span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Values') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo gettext('Prices') ?> </a></li>
-     <li><a href="#tabsLine-3"><?php echo gettext('Restrictions') ?> </a></li>
+     <li><a href="#tabsLine-1"><?php echo __('Values') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo __('Prices') ?> </a></li>
+     <li><a href="#tabsLine-3"><?php echo __('Restrictions') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <form action=""  method="post" id="mdm_price_list_line_line"  name="mdm_price_list_line_line">
@@ -69,17 +69,17 @@
        <table class="form_line_data_table">
         <thead> 
          <tr>
-          <th><?php echo gettext('Action') ?></th>
-          <th><?php echo gettext('Seq') ?>#</th>
-          <th><?php echo gettext('Line Id') ?></th>
-          <th><?php echo gettext('Type') ?></th>
-          <th><?php echo gettext('Item') ?></th>
-          <th><?php echo gettext('Description') ?></th>
-          <th><?php echo gettext('UOM') ?></th>
-          <th><?php echo gettext('Start Date') ?></th>
-          <th><?php echo gettext('End Date') ?></th>
-          <th><?php echo gettext('Price Break') ?></th>
-          <th><?php echo gettext('Price Details') ?></th>
+          <th><?php echo __('Action') ?></th>
+          <th><?php echo __('Seq') ?>#</th>
+          <th><?php echo __('Line Id') ?></th>
+          <th><?php echo __('Type') ?></th>
+          <th><?php echo __('Item') ?></th>
+          <th><?php echo __('Description') ?></th>
+          <th><?php echo __('UOM') ?></th>
+          <th><?php echo __('Start Date') ?></th>
+          <th><?php echo __('End Date') ?></th>
+          <th><?php echo __('Price Break') ?></th>
+          <th><?php echo __('Price Details') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody mdm_price_list_line_values" >
@@ -128,24 +128,24 @@
              <fieldset class="form_detail_data_fs">
               <div class="tabsDetail">
                <ul class="tabMain">
-                <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo gettext('Action') ?></a></li>
-                <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>"><?php echo gettext('Qualifier') ?></a></li>
+                <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo __('Action') ?></a></li>
+                <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>"><?php echo __('Qualifier') ?></a></li>
                </ul>
                <div class="tabContainer">
                 <div id="tabsDetail-1-<?php echo $count ?>" class="tabContent">
                  <table class="form form_detail_data_table detail">
                   <thead>
                    <tr>
-                    <th><?php echo gettext('Action') ?></th>
-                    <th><?php echo gettext('Seq') ?>#</th>
-                    <th><?php echo gettext('Detail Id') ?></th>
-                    <th><?php echo gettext('From Qty') ?></th>
-                    <th><?php echo gettext('To Qty') ?></th>
-                    <th><?php echo gettext('UOM') ?></th>
-                    <th><?php echo gettext('Start Date') ?></th>
-                    <th><?php echo gettext('End Date') ?></th>
-                    <th><?php echo gettext('Price') ?></th>
-                    <th><?php echo gettext('Description') ?></th>
+                    <th><?php echo __('Action') ?></th>
+                    <th><?php echo __('Seq') ?>#</th>
+                    <th><?php echo __('Detail Id') ?></th>
+                    <th><?php echo __('From Qty') ?></th>
+                    <th><?php echo __('To Qty') ?></th>
+                    <th><?php echo __('UOM') ?></th>
+                    <th><?php echo __('Start Date') ?></th>
+                    <th><?php echo __('End Date') ?></th>
+                    <th><?php echo __('Price') ?></th>
+                    <th><?php echo __('Description') ?></th>
                    </tr>
                   </thead>
                   <tbody class="form_data_detail_tbody <?php echo $count ?>">
@@ -184,10 +184,10 @@
                  <table class="form form_detail_data_table detail">
                   <thead>
                    <tr>
-                    <th><?php echo gettext('Seq') ?>#</th>
-                    <th><?php echo gettext('Ref Key Name') ?></th>
-                    <th><?php echo gettext('Ref Key Value') ?></th>
-                    <th><?php echo gettext('Formula') ?>#</th>
+                    <th><?php echo __('Seq') ?>#</th>
+                    <th><?php echo __('Ref Key Name') ?></th>
+                    <th><?php echo __('Ref Key Value') ?></th>
+                    <th><?php echo __('Formula') ?>#</th>
                    </tr>
                   </thead>
                   <tbody class="form_data_detail_tbody <?php echo $count ?>">
@@ -235,9 +235,9 @@
        <table class="form_line_data_table">
         <thead> 
          <tr>
-          <th><?php echo gettext('Seq') ?>#</th>
-          <th><?php echo gettext('Unit Price') ?></th>
-          <th><?php echo gettext('Formula') ?></th>
+          <th><?php echo __('Seq') ?>#</th>
+          <th><?php echo __('Unit Price') ?></th>
+          <th><?php echo __('Formula') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody mdm_price_list_line_values" >
@@ -268,7 +268,7 @@
        <table class="form_line_data_table">
         <thead> 
          <tr>
-          <th><?php echo gettext('Inventory Org') ?></th>
+          <th><?php echo __('Inventory Org') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody mdm_price_list_line_values" >

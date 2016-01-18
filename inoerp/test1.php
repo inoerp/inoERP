@@ -7,14 +7,14 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 
-<div id ="form_header"><span class="heading"><?php echo gettext('Expense Claim') ?></span>
+<div id ="form_header"><span class="heading"><?php echo __('Expense Claim') ?></span>
  <form action=""  method="post" id="so_header"  name="so_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Approval') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Approval') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo __('Notes') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -75,23 +75,23 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Expense Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo __('Expense Lines') ?></span>
  <form method="post" id="hr_expense_line"  name="hr_expense_line">
   <div id="accordion0" class="accordion">
-   <h3><i class="fa fa-minus-circle"></i> <?php echo gettext('Receipt Expense') ?></h3>
+   <h3><i class="fa fa-minus-circle"></i> <?php echo __('Receipt Expense') ?></h3>
    <div>
     <table class="form_line_data_table">
      <thead> 
       <tr>
-       <th><?php echo gettext('Action') ?></th>
-       <th><?php echo gettext('Line') ?>#</th>
-       <th><?php echo gettext('Expense Type') ?></th>
-       <th><?php echo gettext('Date') ?></th>
-       <th><?php echo gettext('Amount') ?></th>
-       <th><?php echo gettext('Purpose') ?></th>
-       <th><?php echo gettext('Exchange') ?></th>
-       <th><?php echo gettext('Vendor') ?></th>
-       <th><?php echo gettext('Vendor Details') ?></th>
+       <th><?php echo __('Action') ?></th>
+       <th><?php echo __('Line') ?>#</th>
+       <th><?php echo __('Expense Type') ?></th>
+       <th><?php echo __('Date') ?></th>
+       <th><?php echo __('Amount') ?></th>
+       <th><?php echo __('Purpose') ?></th>
+       <th><?php echo __('Exchange') ?></th>
+       <th><?php echo __('Vendor') ?></th>
+       <th><?php echo __('Vendor Details') ?></th>
       </tr>
      </thead>
      <tbody class="form_data_line_tbody">
@@ -122,20 +122,20 @@ inoERP
     </table>
    </div>
 
-   <h3><i class="fa fa-minus-circle"></i> <?php echo gettext('Per Diem') ?></h3>
+   <h3><i class="fa fa-minus-circle"></i> <?php echo __('Per Diem') ?></h3>
    <div>
     <table class="form_line_data_table">
      <thead> 
       <tr>
-       <th><?php echo gettext('Action') ?></th>
-       <th><?php echo gettext('Line') ?>#</th>
-       <th><?php echo gettext('Expense Type') ?></th>
-       <th><?php echo gettext('Date') ?></th>
-       <th><?php echo gettext('Receipt Amount') ?></th>
-       <th><?php echo gettext('Purpose') ?></th>
-       <th><?php echo gettext('Exchange') ?></th>
-       <th><?php echo gettext('Vendor') ?></th>
-       <th><?php echo gettext('Vendor Details') ?></th>
+       <th><?php echo __('Action') ?></th>
+       <th><?php echo __('Line') ?>#</th>
+       <th><?php echo __('Expense Type') ?></th>
+       <th><?php echo __('Date') ?></th>
+       <th><?php echo __('Receipt Amount') ?></th>
+       <th><?php echo __('Purpose') ?></th>
+       <th><?php echo __('Exchange') ?></th>
+       <th><?php echo __('Vendor') ?></th>
+       <th><?php echo __('Vendor Details') ?></th>
       </tr>
      </thead>
      <tbody class="form_data_line_tbody2">

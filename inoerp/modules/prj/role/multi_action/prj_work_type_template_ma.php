@@ -4,26 +4,26 @@
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
   <div id ="searchResult">
    <form method="post" id="prj_expenditure_type"  name="prj_expenditure_type">
-    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Expenditure Type') ?> </span>
+    <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Expenditure Type') ?> </span>
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1"><?php echo gettext('Basics') ?></a></li>
-       <li><a href="#tabsLine-2"><?php echo gettext('Controls') ?></a></li>
+       <li><a href="#tabsLine-1"><?php echo __('Basics') ?></a></li>
+       <li><a href="#tabsLine-2"><?php echo __('Controls') ?></a></li>
       </ul>
       <div class="tabContainer">
        <div id="tabsLine-1" class="tabContent">
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo gettext('Action') ?></th>
-           <th><?php echo gettext('Expn Type Id') ?></th>
-           <th><?php echo gettext('Expenditure Type') ?></th>
-           <th><?php echo gettext('Expn Category') ?></th>
-           <th><?php echo gettext('Revenue Category') ?></th>
-           <th><?php echo gettext('Description') ?></th>
-           <th><?php echo gettext('Eff. From') ?></th>
-           <th><?php echo gettext('Eff. To') ?></th>
-           <th><?php echo gettext('UOM') ?></th>
+           <th><?php echo __('Action') ?></th>
+           <th><?php echo __('Expn Type Id') ?></th>
+           <th><?php echo __('Expenditure Type') ?></th>
+           <th><?php echo __('Expn Category') ?></th>
+           <th><?php echo __('Revenue Category') ?></th>
+           <th><?php echo __('Description') ?></th>
+           <th><?php echo __('Eff. From') ?></th>
+           <th><?php echo __('Eff. To') ?></th>
+           <th><?php echo __('UOM') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">
@@ -61,14 +61,14 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo gettext('Inventory') ?></th>
-           <th><?php echo gettext('Burden') ?></th>
-           <th><?php echo gettext('Expense Reports') ?></th>
-           <th><?php echo gettext('Misc. Transaction') ?></th>
-           <th><?php echo gettext('Overtime') ?></th>
-           <th><?php echo gettext('Invoice') ?></th>
-           <th><?php echo gettext('Usage') ?></th>
-           <th><?php echo gettext('Work In Process') ?></th>
+           <th><?php echo __('Inventory') ?></th>
+           <th><?php echo __('Burden') ?></th>
+           <th><?php echo __('Expense Reports') ?></th>
+           <th><?php echo __('Misc. Transaction') ?></th>
+           <th><?php echo __('Overtime') ?></th>
+           <th><?php echo __('Invoice') ?></th>
+           <th><?php echo __('Usage') ?></th>
+           <th><?php echo __('Work In Process') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">

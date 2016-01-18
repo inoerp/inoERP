@@ -1,12 +1,12 @@
 <div id ="form_header">
  <form   method="post" id="hr_team_header"  name="hr_team_header">
-  <span class="heading"><?php echo gettext('HR Team') ?></span>
+  <span class="heading"><?php echo __('HR Team') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Objective') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Objective') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Note') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo __('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -59,26 +59,26 @@
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Team Members') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo __('Team Members') ?></span>
  <form method="post" id="hr_team_line"  name="hr_team_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Main') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Line Id') ?>#</th>
-        <th><?php echo gettext('Member Name') ?></th>
-        <th><?php echo gettext('Region') ?>#</th>
-        <th><?php echo gettext('Role') ?></th>
-        <th><?php echo gettext('Responsibility') ?></th>
-        <th><?php echo gettext('Start Date') ?></th>
-        <th><?php echo gettext('End Date') ?></th>
-        <th><?php echo gettext('Objective') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Line Id') ?>#</th>
+        <th><?php echo __('Member Name') ?></th>
+        <th><?php echo __('Region') ?>#</th>
+        <th><?php echo __('Role') ?></th>
+        <th><?php echo __('Responsibility') ?></th>
+        <th><?php echo __('Start Date') ?></th>
+        <th><?php echo __('End Date') ?></th>
+        <th><?php echo __('Objective') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

@@ -6,13 +6,13 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php echo gettext('Project Event') ?></span>
+<div id ="form_header"><span class="heading"><?php echo __('Project Event') ?></span>
  <form action=""  method="post" id="prj_event_header"  name="prj_event_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Note') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -56,28 +56,28 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Event Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo __('Event Lines') ?></span>
  <form action=""  method="post" id="prj_event_line"  name="prj_event_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Amounts') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('References') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Amounts') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo __('References') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Seq') ?>#</th>
-        <th><?php echo gettext('Line No') ?></th>
-        <th><?php echo gettext('Task') ?>#</th>
-        <th><?php echo gettext('Event Type') ?></th>
-        <th><?php echo gettext('Date') ?></th>
-        <th><?php echo gettext('Currency') ?></th>
-        <th><?php echo gettext('Billing Amount') ?></th>
-        <th><?php echo gettext('Revenue Amount') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('Seq') ?>#</th>
+        <th><?php echo __('Line No') ?></th>
+        <th><?php echo __('Task') ?>#</th>
+        <th><?php echo __('Event Type') ?></th>
+        <th><?php echo __('Date') ?></th>
+        <th><?php echo __('Currency') ?></th>
+        <th><?php echo __('Billing Amount') ?></th>
+        <th><?php echo __('Revenue Amount') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -118,12 +118,12 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Seq') ?>#</th>
-        <th><?php echo gettext('Description') ?></th>
-        <th><?php echo gettext('Is Billed ?')  ?></th>
-        <th><?php echo gettext('Revenue Distributed ?') ?></th>
-        <th><?php echo gettext('Reference Name') ?></th>
-        <th><?php echo gettext('Reference Value') ?></th>
+        <th><?php echo __('Seq') ?>#</th>
+        <th><?php echo __('Description') ?></th>
+        <th><?php echo __('Is Billed ?')  ?></th>
+        <th><?php echo __('Revenue Distributed ?') ?></th>
+        <th><?php echo __('Reference Name') ?></th>
+        <th><?php echo __('Reference Value') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

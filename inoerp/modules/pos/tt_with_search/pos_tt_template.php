@@ -12,7 +12,7 @@
      <div class="col-md-8 col-sm-8 col-lg-8">
       <div id="form_all">
        <div id ="form_line" class="form_line">
-        <span class="heading"><?php echo gettext('Hybrid Sales Items') ?></span>
+        <span class="heading"><?php echo __('Hybrid Sales Items') ?></span>
         <div id="tabsLine">
          <ul class="tabMain">
           <li><a href="#tabsLine-1">Lines</a></li>
@@ -23,14 +23,14 @@
             <table class="form_table">
              <thead> 
               <tr>
-               <th><?php echo gettext('Action') ?></th>
-               <th><?php echo gettext('Line Id') ?></th>
-               <th><?php echo gettext('Item') ?>#</th>
-               <th><?php echo gettext('Unit Price') ?></th>
-               <th><?php echo gettext('Quantity') ?></th>
-               <th><?php echo gettext('Discount Code') ?></th>
-               <th><?php echo gettext('Discount') ?></th>
-               <th><?php echo gettext('Line Amount') ?></th>
+               <th><?php echo __('Action') ?></th>
+               <th><?php echo __('Line Id') ?></th>
+               <th><?php echo __('Item') ?>#</th>
+               <th><?php echo __('Unit Price') ?></th>
+               <th><?php echo __('Quantity') ?></th>
+               <th><?php echo __('Discount Code') ?></th>
+               <th><?php echo __('Discount') ?></th>
+               <th><?php echo __('Line Amount') ?></th>
               </tr>
              </thead>
              <tbody class="form_data_line_tbody pos_transaction_line_values" >
@@ -75,13 +75,13 @@
         </div>
        </div> 
        <form action=""  method="post" id="pos_transaction_header"  name="pos_transaction_header">
-        <span class="heading"><?php echo gettext('POS Transaction') ?></span>
+        <span class="heading"><?php echo __('POS Transaction') ?></span>
         <div id ="form_header">
          <div id="tabsHeader">
           <ul class="tabMain">
-           <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-           <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
-           <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+           <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+           <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
+           <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
           </ul>
           <div class="tabContainer">
            <div id="tabsHeader-1" class="tabContent">
@@ -91,7 +91,7 @@
                <a name="show" href="form.php?class_name=pos_tt_header&<?php echo "mode=$mode"; ?>" class="show document_id pos_transaction_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
               </li>
               <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="pos_terminal_header_id select_popup clickable">
-                <?php echo gettext('Terminal') ?>#</label><?php echo $f->text_field_dm('terminal_name'); ?> 
+                <?php echo __('Terminal') ?>#</label><?php echo $f->text_field_dm('terminal_name'); ?> 
                <i class="fa fa-save save_terminal_name clickable" title="save terminal name for the current session"></i></li>
               <li><?php $f->l_number_field('header_amount', $$class->header_amount, '', 'header_amount'); ?> </li>
               <li><?php $f->l_number_field('tax_amount', $$class->tax_amount, '', 'tax_amount'); ?> </li>
@@ -191,15 +191,15 @@
      <div class="col-md-8 col-sm-8 col-lg-8">
       <div id="pos_transaction_line_cust_view">
        <div class="form_line">
-        <span class="heading"><?php echo gettext('Items') ?></span>
+        <span class="heading"><?php echo __('Items') ?></span>
         <div>
          <table class="form_table">
           <thead> 
            <tr>
-            <th><?php echo gettext('Item') ?></th>
-            <th><?php echo gettext('Unit Price') ?></th>
-            <th><?php echo gettext('Quantity') ?>#</th>
-            <th><?php echo gettext('Line Amount') ?></th>
+            <th><?php echo __('Item') ?></th>
+            <th><?php echo __('Unit Price') ?></th>
+            <th><?php echo __('Quantity') ?>#</th>
+            <th><?php echo __('Line Amount') ?></th>
            </tr>
           </thead>
           <tbody class="form_data_line_tbody pos_transaction_line_values" >

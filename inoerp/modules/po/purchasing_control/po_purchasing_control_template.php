@@ -7,7 +7,7 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 
-<div id ="form_header"><span class="heading"><?php echo gettext('Purchasing Control') ?></span>
+<div id ="form_header"><span class="heading"><?php echo __('Purchasing Control') ?></span>
  <form  method="post" id="po_purchasing_control"  name="po_purchasing_control">
   <div class="tabContainer">
    <ul class="column header_field">
@@ -19,11 +19,11 @@ inoERP
     <li><?php $f->l_text_field_d('rev_number'); ?> </li>
    </ul>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Details') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Purchasing Info') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo gettext('Address') ?> </a></li>      
+     <li><a href="#tabsLine-1"><?php echo __('Purchasing Info') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo __('Address') ?> </a></li>      
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">

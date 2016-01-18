@@ -1,12 +1,12 @@
 <div id="hr_location_divId" class="pagination_page">
  <div class='row small-left-padding'>
   <div id="form_header">
-   <span class="heading"><?php echo gettext('HR Locations') ?></span> 
+   <span class="heading"><?php echo __('HR Locations') ?></span> 
   </div>
   <div id ="form_line" class="hr_location">
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Location Details') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo __('Location Details') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <form method="post" id="hr_location_line"  name="hr_location_line">
@@ -14,13 +14,13 @@
        <table class="form_table">
         <thead> 
          <tr>
-          <th><?php echo gettext('Action') ?></th>
-          <th><?php echo gettext('Location Id') ?></th>
-          <th><?php echo gettext('Country') ?></th>
-          <th><?php echo gettext('State') ?></th>
-          <th><?php echo gettext('City') ?></th>
-          <th><?php echo gettext('Location') ?></th>
-          <th><?php echo gettext('Description') ?></th>
+          <th><?php echo __('Action') ?></th>
+          <th><?php echo __('Location Id') ?></th>
+          <th><?php echo __('Country') ?></th>
+          <th><?php echo __('State') ?></th>
+          <th><?php echo __('City') ?></th>
+          <th><?php echo __('Location') ?></th>
+          <th><?php echo __('Description') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody hr_location_values" >

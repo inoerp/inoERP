@@ -4,7 +4,7 @@
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
   <div id ="searchResult">
    <form  method="post" id="hr_grade"  name="hr_grade">
-    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('HR Grade') ?></span>
+    <div id ="form_line" class="form_line"><span class="heading"><?php echo __('HR Grade') ?></span>
      <div id="tabsLine">
       <ul class="tabMain">
        <li><a href="#tabsLine-1">Basics</a></li>
@@ -14,15 +14,15 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo gettext('Action') ?></th>
-           <th><?php echo gettext('Grade Id') ?></th>
-           <th><?php echo gettext('Grade') ?></th>
-           <th><?php echo gettext('Description') ?></th>
-           <th><?php echo gettext('Rank') ?></th>
-           <th><?php echo gettext('Alt Name') ?></th>
-           <th><?php echo gettext('Alt Description') ?></th>
-           <th><?php echo gettext('Grade') ?></th>
-           <th><?php echo gettext('Inactive Date') ?></th>
+           <th><?php echo __('Action') ?></th>
+           <th><?php echo __('Grade Id') ?></th>
+           <th><?php echo __('Grade') ?></th>
+           <th><?php echo __('Description') ?></th>
+           <th><?php echo __('Rank') ?></th>
+           <th><?php echo __('Alt Name') ?></th>
+           <th><?php echo __('Alt Description') ?></th>
+           <th><?php echo __('Grade') ?></th>
+           <th><?php echo __('Inactive Date') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">

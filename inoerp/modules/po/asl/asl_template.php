@@ -6,11 +6,11 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php echo gettext('Approved Supplier List') ?></span>
+<div id ="form_header"><span class="heading"><?php echo __('Approved Supplier List') ?></span>
  <form method="post" id="asl_header"  name="asl_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -21,7 +21,7 @@ inoERP
       </li>
       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>        </li>
       <li><?php $f->l_select_field_from_array('asl_type', po_asl_header::$asl_type_a, $$class->asl_type, 'asl_type', '', 1, $readonly1, $readonly1); ?>      </li>
-      <li><label><?php echo gettext('Item') ?></label><?php
+      <li><label><?php echo __('Item') ?></label><?php
        echo $f->hidden_field('item_id_m', $$class->item_id_m);
        echo $f->text_field_d('item_number', 'select_item_number');
        ?>
@@ -35,29 +35,29 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('ASL Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo __('ASL Lines') ?></span>
  <form method="post" id="asl_line"  name="asl_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Others') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Main') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo __('Others') ?> </a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Seq') ?>#</th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Supplier Id') ?>#</th>
-        <th><?php echo gettext('Supplier Name') ?></th>
-        <th><?php echo gettext('Supplier Site') ?></th>
-        <th><?php echo gettext('Status') ?></th>
-        <th><?php echo gettext('Manufacturer') ?></th>
-        <th><?php echo gettext('MPN') ?></th>
-        <th><?php echo gettext('Comment') ?></th>
-        <th><?php echo gettext('Documents') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Seq') ?>#</th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('Supplier Id') ?>#</th>
+        <th><?php echo __('Supplier Name') ?></th>
+        <th><?php echo __('Supplier Site') ?></th>
+        <th><?php echo __('Status') ?></th>
+        <th><?php echo __('Manufacturer') ?></th>
+        <th><?php echo __('MPN') ?></th>
+        <th><?php echo __('Comment') ?></th>
+        <th><?php echo __('Documents') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -106,11 +106,11 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Seq') ?>#</th>
-        <th><?php echo gettext('Release Method') ?></th>
-        <th><?php echo gettext('Min Order Qty') ?>#</th>
-        <th><?php echo gettext('Lot Multiplier') ?></th>
-        <th><?php echo gettext('Country of Origin') ?></th>
+        <th><?php echo __('Seq') ?>#</th>
+        <th><?php echo __('Release Method') ?></th>
+        <th><?php echo __('Min Order Qty') ?>#</th>
+        <th><?php echo __('Lot Multiplier') ?></th>
+        <th><?php echo __('Country of Origin') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

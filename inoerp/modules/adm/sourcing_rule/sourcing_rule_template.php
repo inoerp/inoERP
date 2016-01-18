@@ -6,13 +6,13 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  -->
- <div id ="form_header"><span class="heading"><?php echo gettext('Sourcing Rule Header') ?></span>
+ <div id ="form_header"><span class="heading"><?php echo __('Sourcing Rule Header') ?></span>
  <form method="post" id="po_sourcing_rule_header"  name="po_sourcing_rule_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Note') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -52,27 +52,27 @@ inoERP
 </div>
 
 <div id="form_line" class="form_line">
- <span class="heading"><?php echo gettext('Sourcing Lines') ?></span>
+ <span class="heading"><?php echo __('Sourcing Lines') ?></span>
  <form action=""  method="post" id="sourcing_rule_line"  name="sourcing_rule_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>      
+    <li><a href="#tabsLine-1"><?php echo __('Main') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo __('Future') ?> </a></li>      
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Source Type') ?>#</th>
-        <th><?php echo gettext('Rank') ?></th>
-        <th><?php echo gettext('Allocation % ') ?></th>
-        <th><?php echo gettext('Org') ?></th>
-        <th><?php echo gettext('Supplier Id') ?></th>
-        <th><?php echo gettext('Supplier Name') ?></th>
-        <th><?php echo gettext('Supplier Site') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('Source Type') ?>#</th>
+        <th><?php echo __('Rank') ?></th>
+        <th><?php echo __('Allocation % ') ?></th>
+        <th><?php echo __('Org') ?></th>
+        <th><?php echo __('Supplier Id') ?></th>
+        <th><?php echo __('Supplier Name') ?></th>
+        <th><?php echo __('Supplier Site') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

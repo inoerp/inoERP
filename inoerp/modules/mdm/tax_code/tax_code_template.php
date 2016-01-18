@@ -2,9 +2,9 @@
 <div id="form_all">
  <div id="form_headerDiv">
   <form  method="post" id="mdm_tax_code_line"  name="tax_code_line">
-   <span class="heading"><?php echo gettext('Tax Codes') ?></span>
+   <span class="heading"><?php echo __('Tax Codes') ?></span>
    <div id="form_serach_header" class="tabContainer">
-    <label><?php echo gettext('Business Org') ?></label></label>
+    <label><?php echo __('Business Org') ?></label></label>
     <?php echo $f->select_field_from_object('org_id', org::find_all_business(), 'org_id', 'org', $org_id_h, 'org_id', 'action'); ?>
     <a name="show" href="form.php?class_name=mdm_tax_code&<?php echo "mode=$mode"; ?>" class="show document_id mdm_tax_code_id action">
      <i class="fa fa-refresh"></i></a> 
@@ -12,26 +12,26 @@
    <div id ="form_line" class="mdm_tax_code"><span class="heading">Tax Details </span>
     <div id="tabsLine">
      <ul class="tabMain">
-      <li><a href="#tabsLine-1"><?php echo gettext('Tax Code') ?></a></li>
-      <li><a href="#tabsLine-2"><?php echo gettext('Control') ?></a></li>
-      <li><a href="#tabsLine-3"><?php echo gettext('Reporting') ?></a></li>
+      <li><a href="#tabsLine-1"><?php echo __('Tax Code') ?></a></li>
+      <li><a href="#tabsLine-2"><?php echo __('Control') ?></a></li>
+      <li><a href="#tabsLine-3"><?php echo __('Reporting') ?></a></li>
      </ul>
      <div class="tabContainer"> 
       <div id="tabsLine-1" class="tabContent">
        <table class="form_table">
         <thead> 
          <tr>
-          <th><?php echo gettext('Action') ?></th>
-          <th><?php echo gettext('Seq') ?>#</th>
-          <th><?php echo gettext('Id') ?></th>
-          <th><?php echo gettext('Code') ?>#</th>
-          <th><?php echo gettext('Type') ?>#</th>
-          <th><?php echo gettext('Description') ?></th>
-          <th><?php echo gettext('In or Out') ?></th>
-          <th><?php echo gettext('Dr or Cr') ?></th>
-          <th><?php echo gettext('Region Calculation') ?></th>
-          <th><?php echo gettext('Percentage') ?></th>
-          <th><?php echo gettext('Amount') ?></th>
+          <th><?php echo __('Action') ?></th>
+          <th><?php echo __('Seq') ?>#</th>
+          <th><?php echo __('Id') ?></th>
+          <th><?php echo __('Code') ?>#</th>
+          <th><?php echo __('Type') ?>#</th>
+          <th><?php echo __('Description') ?></th>
+          <th><?php echo __('In or Out') ?></th>
+          <th><?php echo __('Dr or Cr') ?></th>
+          <th><?php echo __('Region Calculation') ?></th>
+          <th><?php echo __('Percentage') ?></th>
+          <th><?php echo __('Amount') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody tax_code_values" >
@@ -73,13 +73,13 @@
        <table class="form_table">
         <thead> 
          <tr>
-          <th><?php echo gettext('Seq') ?>#</th>
-          <th><?php echo gettext('Start Date') ?></th>
-          <th><?php echo gettext('End Date') ?>#</th>
-          <th><?php echo gettext('Account') ?>#</th>
-          <th><?php echo gettext('Ad hoc Rate') ?></th>
-          <th><?php echo gettext('Exemption') ?></th>
-          <th><?php echo gettext('Status') ?></th>
+          <th><?php echo __('Seq') ?>#</th>
+          <th><?php echo __('Start Date') ?></th>
+          <th><?php echo __('End Date') ?>#</th>
+          <th><?php echo __('Account') ?>#</th>
+          <th><?php echo __('Ad hoc Rate') ?></th>
+          <th><?php echo __('Exemption') ?></th>
+          <th><?php echo __('Status') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody tax_code_values" >
@@ -116,11 +116,11 @@
        <table class="form_table">
         <thead> 
          <tr>
-          <th><?php echo gettext('Seq') ?>#</th>
-          <th><?php echo gettext('Regime') ?></th>
-          <th><?php echo gettext('Jurisdiction') ?>#</th>
-          <th><?php echo gettext('Printed Name') ?>#</th>
-          <th><?php echo gettext('Offset Tax') ?></th>
+          <th><?php echo __('Seq') ?>#</th>
+          <th><?php echo __('Regime') ?></th>
+          <th><?php echo __('Jurisdiction') ?>#</th>
+          <th><?php echo __('Printed Name') ?>#</th>
+          <th><?php echo __('Offset Tax') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody tax_code_values" >

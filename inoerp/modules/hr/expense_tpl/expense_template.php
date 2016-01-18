@@ -7,13 +7,13 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 
-<div id ="form_header"><span class="heading"><?php echo gettext('Expense Claim Template') ?></span>
+<div id ="form_header"><span class="heading"><?php echo __('Expense Claim Template') ?></span>
  <form method="post" id="hr_expense_tpl_header"  name="hr_expense_tpl_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -53,25 +53,25 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Expense Template Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo __('Expense Template Lines') ?></span>
  <form method="post" id="hr_expense_tpl_line"  name="hr_expense_tpl_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Expense Items') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Future') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Expense Items') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo __('Future') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Expense Item') ?></th>
-        <th><?php echo gettext('Category') ?></th>
-        <th><?php echo gettext('Tax Code') ?></th>
-        <th><?php echo gettext('GL Account') ?></th>
-        <th><?php echo gettext('Prj Expenditure Type') ?></th>
-        <th><?php echo gettext('Policy') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Expense Item') ?></th>
+        <th><?php echo __('Category') ?></th>
+        <th><?php echo __('Tax Code') ?></th>
+        <th><?php echo __('GL Account') ?></th>
+        <th><?php echo __('Prj Expenditure Type') ?></th>
+        <th><?php echo __('Policy') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

@@ -7,15 +7,15 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 
-<div id ="form_header"><span class="heading"><?php echo gettext('Timesheet Entry') ?></span>
+<div id ="form_header"><span class="heading"><?php echo __('Timesheet Entry') ?></span>
  <form method="post" id="hr_timesheet_header"  name="hr_timesheet_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Approver') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo gettext('Action') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Approver') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo __('Action') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -85,30 +85,30 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Timesheet Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo __('Timesheet Lines') ?></span>
  <form method="post" id="hr_timesheet_line"  name="hr_timesheet_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Project & Activities') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Comments') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Project & Activities') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo __('Comments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Seq') ?> #</th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Project') ?> #</th>
-        <th><?php echo gettext('Task') ?> #</th>
-        <th><?php echo gettext($day1) ?></th>
-        <th><?php echo gettext($day2) ?></th>
-        <th><?php echo gettext($day3) ?></th>
-        <th><?php echo gettext($day4) ?></th>
-        <th><?php echo gettext($day5) ?></th>
-        <th><?php echo gettext($day6) ?></th>
-        <th><?php echo gettext($day7) ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Seq') ?> #</th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('Project') ?> #</th>
+        <th><?php echo __('Task') ?> #</th>
+        <th><?php echo __($day1) ?></th>
+        <th><?php echo __($day2) ?></th>
+        <th><?php echo __($day3) ?></th>
+        <th><?php echo __($day4) ?></th>
+        <th><?php echo __($day5) ?></th>
+        <th><?php echo __($day6) ?></th>
+        <th><?php echo __($day7) ?></th>
 
        </tr>
       </thead>
@@ -157,11 +157,11 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Seq') ?>#</th>
-        <th><?php echo gettext('Work Type') ?></th>
-        <th><?php echo gettext('Purpose') ?></th>
-        <th><?php echo gettext('Description') ?></th>
-        <th><?php echo gettext('Status') ?></th>
+        <th><?php echo __('Seq') ?>#</th>
+        <th><?php echo __('Work Type') ?></th>
+        <th><?php echo __('Purpose') ?></th>
+        <th><?php echo __('Description') ?></th>
+        <th><?php echo __('Status') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

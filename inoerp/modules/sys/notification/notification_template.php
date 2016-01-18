@@ -1,13 +1,13 @@
 <div id ="form_header">
  <form method="post" id="sys_notification"  name="sys_notification">
-  <span class="heading"><?php echo gettext('Notification') ?></span>
+  <span class="heading"><?php echo __('Notification') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo gettext('Requirements') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-4"><?php echo gettext('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo __('Requirements') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo __('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -63,9 +63,9 @@
   <div id ="form_line" class="form_line"><span class="heading">Details & References </span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Notification Details') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo gettext('Responder Comment') ?> </a></li>
-     <li><a href="#tabsLine-3"><?php echo gettext('References') ?> </a></li>
+     <li><a href="#tabsLine-1"><?php echo __('Notification Details') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo __('Responder Comment') ?> </a></li>
+     <li><a href="#tabsLine-3"><?php echo __('References') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
@@ -85,7 +85,7 @@
         <li><?php $f->l_text_field_dr('reference_key_value'); ?> 					</li>
         <li><?php $f->l_text_field_dr('user_key_name'); ?> 					</li>
         <li><?php $f->l_text_field_dr('user_key_value'); ?> 					</li>
-        <li><label><?php echo gettext('Reference Doc') ?></label><?php echo $$class->ref_doc_stmt; ?> 					</li>
+        <li><label><?php echo __('Reference Doc') ?></label><?php echo $$class->ref_doc_stmt; ?> 					</li>
         <li><?php $f->l_text_field_dr('from_user_id'); ?> 					</li>
         <li><?php $f->l_text_field_dr('to_user_id'); ?> 					</li>
         <li><?php $f->l_text_field_dr('notification_name'); ?> 					</li>

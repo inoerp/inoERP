@@ -10,7 +10,7 @@
 			</div>
 			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 			<!--    End of place for showing error messages-->
-			<div id ="form_header"><span class="heading"><?php echo gettext('Shipping Control') ?></span>
+			<div id ="form_header"><span class="heading"><?php echo __('Shipping Control') ?></span>
 			 <form method="post" id="sd_shipping_control"  name="sd_shipping_control">
 				<div class="large_shadow_box">
 				 <ul class="column five_column"> 
@@ -22,11 +22,11 @@
           <li><?php echo $f->l_text_field_d('rev_number'); ?></li>
 				 </ul>
 				</div>
-				<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Details') ?> </span>
+				<div id ="form_line" class="form_line"><span class="heading"><?php echo __('Details') ?> </span>
 				 <div id="tabsLine">
 					<ul class="tabMain">
-					 <li><a href="#tabsLine-1"><?php echo gettext('Shipping Info') ?></a></li>
-					 <li><a href="#tabsLine-2"><?php echo gettext('Future') ?></a></li>
+					 <li><a href="#tabsLine-1"><?php echo __('Shipping Info') ?></a></li>
+					 <li><a href="#tabsLine-2"><?php echo __('Future') ?></a></li>
 					</ul>
 					<div class="tabContainer"> 
 					 <div id="tabsLine-1" class="tabContent">

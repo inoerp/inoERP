@@ -8,23 +8,23 @@
     <div id ="form_line" class="form_line"><span class="heading">Task status</span>
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
-       <li><a href="#tabsLine-2"><?php echo gettext('Details') ?></a></li>
+       <li><a href="#tabsLine-1"><?php echo __('Basic Info') ?></a></li>
+       <li><a href="#tabsLine-2"><?php echo __('Details') ?></a></li>
       </ul>
       <div class="tabContainer">
        <div id="tabsLine-1" class="tabContent">
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo gettext('Action') ?></th>
-           <th><?php echo gettext('Task Status Id') ?></th>
-           <th><?php echo gettext('Task Status') ?></th>
-           <th><?php echo gettext('Description') ?></th>
-           <th><?php echo gettext('Access Level') ?></th>
-           <th><?php echo gettext('From Date') ?></th>
-           <th><?php echo gettext('To Date') ?></th>
-           <th><?php echo gettext('Start By') ?></th>
-           <th><?php echo gettext('Due Date') ?></th>
+           <th><?php echo __('Action') ?></th>
+           <th><?php echo __('Task Status Id') ?></th>
+           <th><?php echo __('Task Status') ?></th>
+           <th><?php echo __('Description') ?></th>
+           <th><?php echo __('Access Level') ?></th>
+           <th><?php echo __('From Date') ?></th>
+           <th><?php echo __('To Date') ?></th>
+           <th><?php echo __('Start By') ?></th>
+           <th><?php echo __('Due Date') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">
@@ -62,11 +62,11 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo gettext('Task status Id') ?></th>
-           <th><?php echo gettext('Auto Notification') ?></th>
-           <th><?php echo gettext('Schedule') ?></th>
-           <th><?php echo gettext('Primary Task Type') ?></th>
-           <th><?php echo gettext('Usage') ?></th>
+           <th><?php echo __('Task status Id') ?></th>
+           <th><?php echo __('Auto Notification') ?></th>
+           <th><?php echo __('Schedule') ?></th>
+           <th><?php echo __('Primary Task Type') ?></th>
+           <th><?php echo __('Usage') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">

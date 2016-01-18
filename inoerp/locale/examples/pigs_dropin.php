@@ -76,7 +76,7 @@ else {
 print "<pre>";
 print _("This is how the story goes.\n\n");
 for ($number=6; $number>=0; $number--) {
-  print sprintf(T_ngettext("%d pig went to the market\n", 
+  print sprintf(T_n__("%d pig went to the market\n", 
 			  "%d pigs went to the market\n", $number), 
 		 $number );
 }

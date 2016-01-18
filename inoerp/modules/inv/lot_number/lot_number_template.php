@@ -1,13 +1,13 @@
 <form method="post" id="inv_lot_number"  name="inv_lot_number">
  <span class="heading"><?php
-  echo gettext('Lot Number')
+  echo __('Lot Number')
   ?></span>
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -21,7 +21,7 @@
          if (empty($$class->inv_lot_number_id)) {
           echo '<i class="select_item_number select_popup clickable fa fa-search"></i>';
          }
-         ?> <?php echo gettext('Item Number') ?></label>
+         ?> <?php echo __('Item Number') ?></label>
         <?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
         <?php
         if (empty($$class->inv_lot_number_id)) {
@@ -64,13 +64,13 @@
 
   </div>
  </div>
- <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Lot Number Details') ?></span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Lot Number Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Current') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('References') ?></a></li>
-    <li><a href="#tabsLine-3"><?php echo gettext('Transactions') ?></a></li>
-    <li><a href="#tabsLine-4"><?php echo gettext('Relations') ?></a></li>          
+    <li><a href="#tabsLine-1"><?php echo __('Current') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo __('References') ?></a></li>
+    <li><a href="#tabsLine-3"><?php echo __('Transactions') ?></a></li>
+    <li><a href="#tabsLine-4"><?php echo __('Relations') ?></a></li>          
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">
@@ -105,22 +105,22 @@
       <div id ="form_line" class="form_line">
        <div id="tabsDetail">
         <ul class="tabMain">
-         <li><a href="#tabsDetail-1"><?php echo gettext('Info-1') ?></a></li>
-         <li><a href="#tabsDetail-2"><?php echo gettext('Info-2') ?></a></li>
+         <li><a href="#tabsDetail-1"><?php echo __('Info-1') ?></a></li>
+         <li><a href="#tabsDetail-2"><?php echo __('Info-2') ?></a></li>
         </ul>
         <div class="tabContainer"> 
          <div id="tabsDetail-1" class="tabContent">
           <table class="form_table">
            <thead> 
             <tr>
-             <th><?php echo gettext('lot Number') ?></th>
-             <th><?php echo gettext('Item Number') ?></th>
-             <th><?php echo gettext('Item Description') ?></th>
-             <th><?php echo gettext('Org Id') ?></th>
-             <th><?php echo gettext('Transaction Type') ?></th>
-             <th><?php echo gettext('From Sub Inventory') ?></th>
-             <th><?php echo gettext('From Locator') ?></th>
-             <th><?php echo gettext('Transaction Details') ?></th>
+             <th><?php echo __('lot Number') ?></th>
+             <th><?php echo __('Item Number') ?></th>
+             <th><?php echo __('Item Description') ?></th>
+             <th><?php echo __('Org Id') ?></th>
+             <th><?php echo __('Transaction Type') ?></th>
+             <th><?php echo __('From Sub Inventory') ?></th>
+             <th><?php echo __('From Locator') ?></th>
+             <th><?php echo __('Transaction Details') ?></th>
             </tr>
            </thead>
            <tbody class="form_data_line_tbody inv_lot_transaction_entries_values" >
@@ -151,14 +151,14 @@
           <table class="form_table">
            <thead> 
             <tr>
-             <th><?php echo gettext('To SubInv') ?></th>
-             <th><?php echo gettext('To Locator') ?></th>
-             <th><?php echo gettext('Transaction Id') ?></th>
-             <th><?php echo gettext('Transaction Type Id') ?></th>
-             <th><?php echo gettext('From SubInv Id') ?></th>
-             <th><?php echo gettext('From Locator Id ') ?></th>
-             <th><?php echo gettext('To SubInv Id') ?></th>
-             <th><?php echo gettext('To Locator Id ') ?></th>
+             <th><?php echo __('To SubInv') ?></th>
+             <th><?php echo __('To Locator') ?></th>
+             <th><?php echo __('Transaction Id') ?></th>
+             <th><?php echo __('Transaction Type Id') ?></th>
+             <th><?php echo __('From SubInv Id') ?></th>
+             <th><?php echo __('From Locator Id ') ?></th>
+             <th><?php echo __('To SubInv Id') ?></th>
+             <th><?php echo __('To Locator Id ') ?></th>
             </tr>
            </thead>
            <tbody class="form_data_line_tbody inv_lot_transaction_entries_values" >

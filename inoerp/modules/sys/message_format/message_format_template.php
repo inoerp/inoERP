@@ -2,9 +2,9 @@
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Note') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -48,12 +48,12 @@
    </div>
   </div>
  </div>
- <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Message Details') ?></span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Message Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Body') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Secondary Fields') ?></a></li>
-    <li><a href="#tabsLine-3"><?php echo gettext('Message Codes') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Body') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo __('Secondary Fields') ?></a></li>
+    <li><a href="#tabsLine-3"><?php echo __('Message Codes') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">
@@ -64,12 +64,12 @@
     </div>
     <div id="tabsLine-3" class="tabContent">
      <ul class='column two_column'>
-      <li><label><?php echo gettext('Any Data') ?>: </label> {{table_name.field_name}}</li>
-      <li><label><?php echo gettext('User Name') ?> : </label> {{user.username}}</li>
-      <li><label><?php echo gettext('User Id') ?> : </label> {{user.user_id}}</li>
-      <li><label><?php echo gettext('User eMail') ?> : </label> {{user.email}}</li>
-      <li><label><?php echo gettext('Site Name') ?> : </label> {{site_info.site_name}}</li>
-      <li><label><?php echo gettext('Site eMail') ?> : </label> {{site_info.email}}</li>
+      <li><label><?php echo __('Any Data') ?>: </label> {{table_name.field_name}}</li>
+      <li><label><?php echo __('User Name') ?> : </label> {{user.username}}</li>
+      <li><label><?php echo __('User Id') ?> : </label> {{user.user_id}}</li>
+      <li><label><?php echo __('User eMail') ?> : </label> {{user.email}}</li>
+      <li><label><?php echo __('Site Name') ?> : </label> {{site_info.site_name}}</li>
+      <li><label><?php echo __('Site eMail') ?> : </label> {{site_info.email}}</li>
      </ul>
     </div> 
    </div>

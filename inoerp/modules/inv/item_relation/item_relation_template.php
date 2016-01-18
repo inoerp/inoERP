@@ -3,34 +3,34 @@
   <div id="form_headerDiv">
    <form method="post" id="inv_item_relation_line"  name="item_relation_line">
     <span class="heading"><?php
-     echo gettext('Item Relationships')
+     echo __('Item Relationships')
      ?></span>
     <div id="form_serach_header" class="tabContainer">
-     <label><?php echo gettext('Relationship Type') ?></label>
+     <label><?php echo __('Relationship Type') ?></label>
      <?php echo $f->select_field_from_object('relation_type_h', inv_item_relation::item_relation(), 'option_line_code', 'option_line_value', $relation_type_h, 'relation_type'); ?>
      <a name="show2" href="form.php?class_name=inv_item_relation&<?php echo "mode=$mode"; ?>" class="show2 document_id relation_type">
       <i class="fa fa-refresh"></i></a> 
     </div>
-    <div id ="form_line" class="inv_item_relation"><span class="heading"><?php echo gettext('Relationship Details') ?> </span>
+    <div id ="form_line" class="inv_item_relation"><span class="heading"><?php echo __('Relationship Details') ?> </span>
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+       <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
       </ul>
       <div class="tabContainer"> 
        <div id="tabsLine-1" class="tabContent">
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo gettext('Action') ?></th>
-           <th><?php echo gettext('Id') ?></th>
-           <th><?php echo gettext('From Item') ?></th>
-           <th><?php echo gettext('Relationship Type') ?></th>
-           <th><?php echo gettext('To Item') ?></th>
-           <th><?php echo gettext('Description') ?></th>
-           <th><?php echo gettext('From Date') ?></th>
-           <th><?php echo gettext('To Date') ?></th>
-           <th><?php echo gettext('Status') ?></th>
-           <th><?php echo gettext('Planned') ?></th>
+           <th><?php echo __('Action') ?></th>
+           <th><?php echo __('Id') ?></th>
+           <th><?php echo __('From Item') ?></th>
+           <th><?php echo __('Relationship Type') ?></th>
+           <th><?php echo __('To Item') ?></th>
+           <th><?php echo __('Description') ?></th>
+           <th><?php echo __('From Date') ?></th>
+           <th><?php echo __('To Date') ?></th>
+           <th><?php echo __('Status') ?></th>
+           <th><?php echo __('Planned') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody item_relation_values" >

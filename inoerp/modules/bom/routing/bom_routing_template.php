@@ -8,16 +8,16 @@ inoERP
 -->
 <div id='bom_routing_divId'>
  <span class="heading"><?php
-  echo gettext('Routing Header');
-  echo!empty($form_name_header) ? ' - ' . gettext($form_name_header) : ' ';
+  echo __('Routing Header');
+  echo!empty($form_name_header) ? ' - ' . __($form_name_header) : ' ';
   ?></span>
  <form action=""  method="bom_routingst" id="bom_routing_header"  name="bom_routing_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Common Routing') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Common Routing') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo __('Note') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -28,7 +28,7 @@ inoERP
       </li>
       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $bom_routing_header->org_id, 'org_id', '', 1, $readonly1); ?>        </li>
       <li><label>
-        <?php echo gettext('Item Number') ?></label>
+        <?php echo __('Item Number') ?></label>
        <?php
        echo $f->hidden_field_withId('item_id_m', $$class->item_id_m);
        echo $f->hidden_field_withCLass('bom_enabled_cb', '1', 'popup_value');
@@ -46,11 +46,11 @@ inoERP
     <div id="tabsHeader-2" class="tabContent">
      <div> 
       <ul class="column five_column">
-       <li><label><?php echo gettext('Item Number') ?></label><?php echo $f->hidden_field_withIdClass('common_routing_item_id_m', $$class->common_routing_item_id_m, 'item_id_m'); ?>
+       <li><label><?php echo __('Item Number') ?></label><?php echo $f->hidden_field_withIdClass('common_routing_item_id_m', $$class->common_routing_item_id_m, 'item_id_m'); ?>
         <?php $f->text_field_d('commonRouting_item_number', 'select_item_number'); ?>
         <i class="select_item_number2 select_popup clickable fa fa-search"></i>
        </li>
-       <li><label><?php echo gettext('Description') ?></label><?php $f->text_field_d('commonRouting_item_description', 'commonRouting_item_description'); ?>  </li>
+       <li><label><?php echo __('Description') ?></label><?php $f->text_field_d('commonRouting_item_description', 'commonRouting_item_description'); ?>  </li>
       </ul>
      </div>
     </div>
@@ -82,29 +82,29 @@ inoERP
   <form method="bom_routingst" id="bom_routing_line"  name="bom_routing_line">
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo gettext('Effectivity') ?> </a></li>
-     <li><a href="#tabsLine-3"><?php echo gettext('Data Collection') ?> </a></li>
+     <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo __('Effectivity') ?> </a></li>
+     <li><a href="#tabsLine-3"><?php echo __('Data Collection') ?> </a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsLine-1" class="tabContent">
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo gettext('Action') ?></th>
-         <th><?php echo gettext('Seq') ?>#</th>
-         <th><?php echo gettext('Line Id') ?></th>
-         <th><?php echo gettext('Routing Seq') ?></th>
-         <th><?php echo gettext('Standard Op') ?></th>
-         <th><?php echo gettext('Referenced') ?></th>
-         <th><?php echo gettext('Department') ?></th>
-         <th><?php echo gettext('Description') ?></th>
-         <th><?php echo gettext('Count Point') ?></th>
-         <th><?php echo gettext('Auto Charge') ?></th>
-         <th><?php echo gettext('Back flush') ?></th>
-         <th><?php echo gettext('MTQ') ?></th>
-         <th><?php echo gettext('Lead Time') ?>%</th>
-         <th><?php echo gettext('Operation Details') ?>#</th>
+         <th><?php echo __('Action') ?></th>
+         <th><?php echo __('Seq') ?>#</th>
+         <th><?php echo __('Line Id') ?></th>
+         <th><?php echo __('Routing Seq') ?></th>
+         <th><?php echo __('Standard Op') ?></th>
+         <th><?php echo __('Referenced') ?></th>
+         <th><?php echo __('Department') ?></th>
+         <th><?php echo __('Description') ?></th>
+         <th><?php echo __('Count Point') ?></th>
+         <th><?php echo __('Auto Charge') ?></th>
+         <th><?php echo __('Back flush') ?></th>
+         <th><?php echo __('MTQ') ?></th>
+         <th><?php echo __('Lead Time') ?>%</th>
+         <th><?php echo __('Operation Details') ?>#</th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -148,25 +148,25 @@ inoERP
             <fieldset class="form_detail_data_fs">
              <div class="tabsDetail">
               <ul class="tabMain">
-               <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo gettext('Resource') ?></a></li>
-               <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>"><?php echo gettext('Future') ?></a></li>
+               <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo __('Resource') ?></a></li>
+               <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>"><?php echo __('Future') ?></a></li>
               </ul>
               <div class="tabContainer">
                <div id="tabsDetail-1-<?php echo $count ?>" class="tabContent">
                 <table class="form form_detail_data_table detail">
                  <thead>
                   <tr>
-                   <th><?php echo gettext('Action') ?></th>
-                   <th><?php echo gettext('Detail Id') ?></th>
-                   <th><?php echo gettext('Resource Seq') ?></th>
-                   <th><?php echo gettext('Resource') ?></th>
-                   <th><?php echo gettext('Basis') ?></th>
-                   <th><?php echo gettext('Usage') ?></th>
-                   <th><?php echo gettext('Schedule') ?></th>
-                   <th><?php echo gettext('Units') ?></th>
-                   <th><?php echo gettext('24 Hours') ?></th>
-                   <th><?php echo gettext('Stnd. Rate') ?></th>
-                   <th><?php echo gettext('Charge Type') ?></th>
+                   <th><?php echo __('Action') ?></th>
+                   <th><?php echo __('Detail Id') ?></th>
+                   <th><?php echo __('Resource Seq') ?></th>
+                   <th><?php echo __('Resource') ?></th>
+                   <th><?php echo __('Basis') ?></th>
+                   <th><?php echo __('Usage') ?></th>
+                   <th><?php echo __('Schedule') ?></th>
+                   <th><?php echo __('Units') ?></th>
+                   <th><?php echo __('24 Hours') ?></th>
+                   <th><?php echo __('Stnd. Rate') ?></th>
+                   <th><?php echo __('Charge Type') ?></th>
                   </tr>
                  </thead>
                  <tbody class="form_data_detail_tbody">
@@ -225,14 +225,14 @@ inoERP
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo gettext('Seq') ?></th>
-         <th><?php echo gettext('Start Date') ?></th>
-         <th><?php echo gettext('End Date') ?></th>
-         <th><?php echo gettext('ECO Implemented') ?></th>
-         <th><?php echo gettext('ECO Number') ?></th>
-         <th><?php echo gettext('Roll up') ?></th>
-         <th><?php echo gettext('Yield') ?>%</th>
-         <th><?php echo gettext('Cumm. Yield') ?>%</th>
+         <th><?php echo __('Seq') ?></th>
+         <th><?php echo __('Start Date') ?></th>
+         <th><?php echo __('End Date') ?></th>
+         <th><?php echo __('ECO Implemented') ?></th>
+         <th><?php echo __('ECO Number') ?></th>
+         <th><?php echo __('Roll up') ?></th>
+         <th><?php echo __('Yield') ?>%</th>
+         <th><?php echo __('Cumm. Yield') ?>%</th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">

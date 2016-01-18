@@ -1,11 +1,11 @@
 <form action=""  method="post" id="fa_asset_book"  name="fa_asset_book">
- <span class="heading"><?php echo gettext('Asset Book') ?></span>
+ <span class="heading"><?php echo __('Asset Book') ?></span>
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Tracking Info') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Tracking Info') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Note') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -49,8 +49,8 @@
  <div id ="form_line" class="form_line"><span class="heading"> Asset Book Details </span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Class Controls') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Natural Accounts') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Class Controls') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo __('Natural Accounts') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">

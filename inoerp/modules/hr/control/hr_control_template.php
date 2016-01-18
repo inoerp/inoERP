@@ -7,7 +7,7 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 
-<div id ="form_header"><span class="heading"><?php echo gettext('HR Control') ?></span>
+<div id ="form_header"><span class="heading"><?php echo __('HR Control') ?></span>
  <form method="post" id="hr_control"  name="hr_control">
   <div class="tabContainer">
    <ul class="column header_field">
@@ -17,11 +17,11 @@ inoERP
     </li>
    </ul>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Details') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>      
+     <li><a href="#tabsLine-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo __('Future') ?> </a></li>      
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
@@ -37,7 +37,7 @@ inoERP
          echo $f->l_val_field_dm('expense_claim_supplier', 'supplier', 'supplier_name', '', 'expense_claim_supplier', 'vf_select_supplier_name');
          echo $f->hidden_field_withId('supplier_id', $$class->supplier_id);
          ?><i class="generic g_select_supplier_name select_popup clickable fa fa-search" data-class_name="supplier"></i></li>
-        <li><label><?php echo gettext('Expense Claim Supplier Site') ?></label><?php
+        <li><label><?php echo __('Expense Claim Supplier Site') ?></label><?php
          $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
          echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
          ?> </li>

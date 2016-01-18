@@ -6,13 +6,13 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php echo gettext('Burden Structure')   ?></span>
+<div id ="form_header"><span class="heading"><?php echo __('Burden Structure')   ?></span>
  <form  method="post" id="prj_burden_structure_header"  name="prj_burden_structure_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Note') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -54,12 +54,12 @@ inoERP
  </form>
 </div>
 
-<span class="heading"><?php echo gettext('Burden Structure Details') ?></span>
+<span class="heading"><?php echo __('Burden Structure Details') ?></span>
 
 <div id="tabsLine">
  <ul class="tabMain">
-  <li><a href="#tabsLine-1"><?php echo gettext('Cost Code') ?></a></li>
-  <li><a href="#tabsLine-2"><?php echo gettext('Expenditure Type') ?></a></li>
+  <li><a href="#tabsLine-1"><?php echo __('Cost Code') ?></a></li>
+  <li><a href="#tabsLine-2"><?php echo __('Expenditure Type') ?></a></li>
  </ul>
  <div class="tabContainer">
   <form action=""  method="post" id="prj_burden_structure_costcode"  name="prj_burden_structure_costcode" class="m-margin-top-20">
@@ -68,12 +68,12 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Cost Code') ?></th>
-        <th><?php echo gettext('Cost Base') ?></th>
-        <th><?php echo gettext('Description') ?></th>
-        <th><?php echo gettext('Priority') ?>?</th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('Cost Code') ?></th>
+        <th><?php echo __('Cost Base') ?></th>
+        <th><?php echo __('Description') ?></th>
+        <th><?php echo __('Priority') ?>?</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -112,11 +112,11 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Expenditure Type') ?></th>
-        <th><?php echo gettext('Cost Base') ?></th>
-        <th><?php echo gettext('Description') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('Expenditure Type') ?></th>
+        <th><?php echo __('Cost Base') ?></th>
+        <th><?php echo __('Description') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody2 wip_wo_bom_values" >

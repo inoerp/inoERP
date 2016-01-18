@@ -1,17 +1,17 @@
 <div id ="form_header">
  <form  method="post" id="inv_count_header"  name="inv_count_header">
-  <span class="heading"><?php echo gettext('Count Entry Header') ?></span>
+  <span class="heading"><?php echo __('Count Entry Header') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Line Defaults') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Line Defaults') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
       <li><?php echo $f->l_date_fieldFromToday('count_date', $$class->count_date, 1) ?></li>
       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_count_header_id select_popup clickable">
-        <?php echo gettext('Inventory Count Name') ?></label> <?php echo $f->hidden_field_withId('inv_count_header_id', $inv_count_header_id_h); ?>
+        <?php echo __('Inventory Count Name') ?></label> <?php echo $f->hidden_field_withId('inv_count_header_id', $inv_count_header_id_h); ?>
        <?php $f->text_field_dm('count_name'); ?>
        <a name="show" href="form.php?class_name=inv_count_entries&<?php echo "mode=$mode"; ?>" class="show2 document_id inv_count_entries_id"><i class="fa fa-refresh"></i></a> 
       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>       </li>
@@ -31,12 +31,12 @@
  </form>
 </div>
 
-<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Count Entries') ?></span>
+<div id ="form_line" class="form_line"><span class="heading"><?php echo __('Count Entries') ?></span>
  <div id="tabsLine">
   <ul class="tabMain">
-   <li><a href="#tabsLine-1"><?php echo gettext('Schedule') ?></a></li>
-   <li><a href="#tabsLine-2"><?php echo gettext('Reference') ?> </a></li>
-   <li><a href="#tabsLine-3"><?php echo gettext('Adjustments') ?> </a></li>
+   <li><a href="#tabsLine-1"><?php echo __('Schedule') ?></a></li>
+   <li><a href="#tabsLine-2"><?php echo __('Reference') ?> </a></li>
+   <li><a href="#tabsLine-3"><?php echo __('Adjustments') ?> </a></li>
   </ul>
   <div class="tabContainer"> 
    <form action=""  method="post" id="inv_count_entries_line"  name="inv_count_entries_line">
@@ -44,15 +44,15 @@
      <table class="form_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Count Id') ?></th>
-        <th><?php echo gettext('Master Item Id') ?></th>
-        <th><?php echo gettext('Item Number') ?></th>
-        <th><?php echo gettext('Item Description') ?></th>
-        <th><?php echo gettext('UOM') ?></th>
-        <th><?php echo gettext('Schedule Date') ?></th>
-        <th><?php echo gettext('Subinventory') ?></th>
-        <th><?php echo gettext('Locator') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Count Id') ?></th>
+        <th><?php echo __('Master Item Id') ?></th>
+        <th><?php echo __('Item Number') ?></th>
+        <th><?php echo __('Item Description') ?></th>
+        <th><?php echo __('UOM') ?></th>
+        <th><?php echo __('Schedule Date') ?></th>
+        <th><?php echo __('Subinventory') ?></th>
+        <th><?php echo __('Locator') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody inv_count_entries_values" >
@@ -86,13 +86,13 @@
      <table class="form_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Count Id') ?></th>
-        <th><?php echo gettext('Description') ?></th>
-        <th><?php echo gettext('Lot Number') ?></th>
-        <th><?php echo gettext('Serial Number') ?></th>
-        <th><?php echo gettext('Count By') ?></th>
-        <th><?php echo gettext('Count Date') ?></th>
-        <th><?php echo gettext('Adjustment Ac') ?></th>
+        <th><?php echo __('Count Id') ?></th>
+        <th><?php echo __('Description') ?></th>
+        <th><?php echo __('Lot Number') ?></th>
+        <th><?php echo __('Serial Number') ?></th>
+        <th><?php echo __('Count By') ?></th>
+        <th><?php echo __('Count Date') ?></th>
+        <th><?php echo __('Adjustment Ac') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody inv_count_entries_values" >
@@ -120,11 +120,11 @@
      <table class="form_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Count Id') ?></th>
-        <th><?php echo gettext('System Quantity') ?></th>
-        <th><?php echo gettext('Counted Quantity') ?></th>
-        <th><?php echo gettext('Adjusted Quantity') ?></th>
-        <th><?php echo gettext('Adjustment Amount') ?></th>
+        <th><?php echo __('Count Id') ?></th>
+        <th><?php echo __('System Quantity') ?></th>
+        <th><?php echo __('Counted Quantity') ?></th>
+        <th><?php echo __('Adjusted Quantity') ?></th>
+        <th><?php echo __('Adjustment Amount') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody inv_count_entries_values" >

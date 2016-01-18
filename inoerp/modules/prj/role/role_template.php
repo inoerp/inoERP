@@ -1,11 +1,11 @@
-<div id ="form_all"><span class="heading"><?php echo gettext('Project Role') ?></span>
+<div id ="form_all"><span class="heading"><?php echo __('Project Role') ?></span>
  <form method="post" id="prj_role"  name="prj_role">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -47,10 +47,10 @@
    </div>
   </div>
 
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Role Details') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Role Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Control Options') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo __('Control Options') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">

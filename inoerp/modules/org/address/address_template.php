@@ -1,12 +1,12 @@
 <div id ="form_header">
  <form action=""  method="post" id="address"  name="address">
-  <span class="heading"><?php echo gettext('Address Header') ?></span>
+  <span class="heading"><?php echo __('Address Header') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -17,7 +17,7 @@
         </li>
         <li><?php $f->l_select_field_from_object('type', address::address_types(), 'option_line_code', 'option_line_code', $address->type, 'type', '' , '' , $readonly); ?>    </li>
         <li><?php $f->l_text_field_dm('address_name'); ?>    </li>
-        <li><label><?php echo gettext('Tax Region') ?></label><?php $f->text_field_d('tax_region_name') ?>
+        <li><label><?php echo __('Tax Region') ?></label><?php $f->text_field_d('tax_region_name') ?>
         <i class="fa fa-search tax_region_id select_popup clickable"></i></li>
         <li><?php $f->l_text_field_d('description'); ?>    </li>
         <li><?php $f->l_status_field_d('status'); ?></li>
@@ -55,11 +55,11 @@
 
    </div>
   </div>
-  <span class="heading"><?php echo gettext('Address Details') ?></span>
+  <span class="heading"><?php echo __('Address Details') ?></span>
   <div id ="form_line">
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Address') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo __('Address') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
@@ -70,7 +70,7 @@
        <li><?php $f->l_text_field_d('phone'); ?></li>
        <li><?php $f->l_text_field_d('country'); ?></li>
        <li><?php $f->l_text_field_d('postal_code'); ?></li>
-       <li><label><?php echo gettext('Address') ?></label>  
+       <li><label><?php echo __('Address') ?></label>  
         <?php echo form::text_area('address', $address->address, '3', '22', '', 'Complete Address', 'address', $readonly); ?>
        </li>
       </ul>

@@ -6,15 +6,15 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php echo gettext('Project Budget') ?></span>
+<div id ="form_header"><span class="heading"><?php echo __('Project Budget') ?></span>
  <form  method="post" id="prj_budget_header"  name="prj_budget_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Basic-2') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo gettext('Actions') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Basic-2') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Note') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo __('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -84,29 +84,29 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Budget Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo __('Budget Lines') ?></span>
  <form action=""  method="post" id="prj_budget_line"  name="prj_budget_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Amounts') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Future') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Amounts') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo __('Future') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Sequence') ?></th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Task') ?>#</th>
-        <th><?php echo gettext('Resource') ?></th>
-        <th><?php echo gettext('Description') ?></th>
-        <th><?php echo gettext('Cost Qty') ?></th>
-        <th><?php echo gettext('Raw Amount') ?></th>
-        <th><?php echo gettext('Burden') ?></th>
-        <th><?php echo gettext('Rev Qty') ?></th>
-        <th><?php echo gettext('Rev Amount') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Sequence') ?></th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('Task') ?>#</th>
+        <th><?php echo __('Resource') ?></th>
+        <th><?php echo __('Description') ?></th>
+        <th><?php echo __('Cost Qty') ?></th>
+        <th><?php echo __('Raw Amount') ?></th>
+        <th><?php echo __('Burden') ?></th>
+        <th><?php echo __('Rev Qty') ?></th>
+        <th><?php echo __('Rev Amount') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

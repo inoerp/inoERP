@@ -1,13 +1,13 @@
 <div class="row small-left-padding">
  <div id="form_all">
   <form method="post" id="prj_burden_list_header"  name="prj_burden_list_header">
-   <span class="heading"><?php echo gettext('Burden  List') ?></span>
+   <span class="heading"><?php echo __('Burden  List') ?></span>
    <div id ="form_header">
     <div id="tabsHeader">
      <ul class="tabMain">
-      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-      <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
-      <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+      <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+      <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
+      <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
      </ul>
      <div class="tabContainer">
       <div id="tabsHeader-1" class="tabContent">
@@ -47,10 +47,10 @@
     </div>
    </div>
   </form>
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Burden List Lines') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Burden List Lines') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Values') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo __('Values') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <form action=""  method="post" id="prj_burden_list_line_line"  name="prj_burden_list_line_line">
@@ -58,15 +58,15 @@
        <table class="form_table">
         <thead> 
          <tr>
-          <th><?php echo gettext('Action') ?></th>
-          <th><?php echo gettext('Line Id') ?></th>
-          <th><?php echo gettext('Cost Code') ?></th>
-          <th><?php echo gettext('BU') ?></th>
-          <th><?php echo gettext('Multiplier') ?></th>
-          <th><?php echo gettext('Value') ?></th>
-          <th><?php echo gettext('Formula') ?></th>
-          <th><?php echo gettext('Start Date') ?></th>
-          <th><?php echo gettext('End Date') ?></th>
+          <th><?php echo __('Action') ?></th>
+          <th><?php echo __('Line Id') ?></th>
+          <th><?php echo __('Cost Code') ?></th>
+          <th><?php echo __('BU') ?></th>
+          <th><?php echo __('Multiplier') ?></th>
+          <th><?php echo __('Value') ?></th>
+          <th><?php echo __('Formula') ?></th>
+          <th><?php echo __('Start Date') ?></th>
+          <th><?php echo __('End Date') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody prj_burden_list_line_values" >

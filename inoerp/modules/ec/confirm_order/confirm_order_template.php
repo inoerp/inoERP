@@ -59,11 +59,11 @@
      <table class="table table-bordered table-large cart ">
       <thead> 
        <tr>
-        <th><?php echo gettext('Sequence') ?></th>
-        <th><?php echo gettext('Product') ?></th>
-        <th><?php echo gettext('Quantity') ?></th>
-        <th><?php echo gettext('Price') ?></th>
-        <th><?php echo gettext('Sub Total') ?></th>
+        <th><?php echo __('Sequence') ?></th>
+        <th><?php echo __('Product') ?></th>
+        <th><?php echo __('Quantity') ?></th>
+        <th><?php echo __('Price') ?></th>
+        <th><?php echo __('Sub Total') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody cart_values" >

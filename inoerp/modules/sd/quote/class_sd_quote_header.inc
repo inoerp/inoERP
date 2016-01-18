@@ -234,12 +234,12 @@ class sd_quote_header extends dbObject {
   }
   if ((!empty($this->sd_quote_header_id)) && ($this->action == 'CONVERT_SO')) {
    if (empty($this->bu_org_id)) {
-    echo gettext('No business organization found. Please enter a business org name in the quote');
+    echo __('No business organization found. Please enter a business org name in the quote');
    } else if (in_array($this->quote_status, ['ENTERED', 'OPEN'])) {
     //Conevrt to SO
     $this->_convert_to_so();
    } else {
-    echo gettext('Quote Status Error. You cannot convert quote in the current status to a sales order ') . $this->status;
+    echo __('Quote Status Error. You cannot convert quote in the current status to a sales order ') . $this->status;
    }
   }
  }

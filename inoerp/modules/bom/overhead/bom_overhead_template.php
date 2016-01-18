@@ -7,14 +7,14 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 
-<div id="form_all"><span class="heading"><?php echo gettext('Over Head') ?></span>
+<div id="form_all"><span class="heading"><?php echo __('Over Head') ?></span>
  <form action=""  method="post" id="bom_overhead"  name="bom_overhead">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -56,11 +56,11 @@ inoERP
    </div>
   </div>
  </form>
- <span class="heading"><?php echo gettext('Over Head Details') ?></span>
+ <span class="heading"><?php echo __('Over Head Details') ?></span>
  <div id="tabsLine">
   <ul class="tabMain">
-   <li><a href="#tabsLine-1"><?php echo gettext('Resource Assignment') ?></a></li>
-   <li><a href="#tabsLine-2"><?php echo gettext('Rate Assignment') ?> </a></li>
+   <li><a href="#tabsLine-1"><?php echo __('Resource Assignment') ?></a></li>
+   <li><a href="#tabsLine-2"><?php echo __('Rate Assignment') ?> </a></li>
   </ul>
   <div class="tabContainer"> 
    <div id="tabsLine-1" class="tabContent">
@@ -69,11 +69,11 @@ inoERP
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo gettext('Action') ?></th>
-         <th><?php echo gettext('Resource Assignment Id') ?>#</th>
-         <th><?php echo gettext('Cost Type') ?></th>
-         <th><?php echo gettext('Description') ?>#</th>
-         <th><?php echo gettext('Resource') ?>#</th>
+         <th><?php echo __('Action') ?></th>
+         <th><?php echo __('Resource Assignment Id') ?>#</th>
+         <th><?php echo __('Cost Type') ?></th>
+         <th><?php echo __('Description') ?>#</th>
+         <th><?php echo __('Resource') ?>#</th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody bom_overhead_resource_assignment_values" >
@@ -117,11 +117,11 @@ inoERP
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo gettext('Action') ?></th>
-         <th><?php echo gettext('Rate Assignment Id') ?>#</th>
-         <th><?php echo gettext('Cost Type') ?></th>
-         <th><?php echo gettext('Default Basis') ?>#</th>
-         <th><?php echo gettext('Rate') ?>#</th>
+         <th><?php echo __('Action') ?></th>
+         <th><?php echo __('Rate Assignment Id') ?>#</th>
+         <th><?php echo __('Cost Type') ?></th>
+         <th><?php echo __('Default Basis') ?>#</th>
+         <th><?php echo __('Rate') ?>#</th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody2 bom_overhead_rate_assignment_values" >

@@ -14,13 +14,13 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo gettext('Action') ?></th>
-           <th><?php echo gettext('Cost Code Id') ?></th>
-           <th><?php echo gettext('Cost Code') ?></th>
-           <th><?php echo gettext('Description') ?></th>
-           <th><?php echo gettext('Eff. From') ?></th>
-           <th><?php echo gettext('Eff. To') ?></th>
-           <th><?php echo gettext('Expenditure Type') ?></th>
+           <th><?php echo __('Action') ?></th>
+           <th><?php echo __('Cost Code Id') ?></th>
+           <th><?php echo __('Cost Code') ?></th>
+           <th><?php echo __('Description') ?></th>
+           <th><?php echo __('Eff. From') ?></th>
+           <th><?php echo __('Eff. To') ?></th>
+           <th><?php echo __('Expenditure Type') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">

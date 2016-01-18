@@ -1,11 +1,11 @@
-<div id ="form_header"><span class="heading"><?php echo gettext('Project Completion Status') ?></span>
+<div id ="form_header"><span class="heading"><?php echo __('Project Completion Status') ?></span>
  <form method="post" id="prj_percent_header"  name="prj_percent_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Revisions') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Revisions') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo __('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -36,13 +36,13 @@
       <table class="table  table-bordered form_line_data_table text-center">
        <thead> 
         <tr>
-         <th class='col-md-2 text-center'><?php echo gettext('Revision Id') ?></th>
-         <th class='col-md-2 text-center'><?php echo gettext('Percent Header Id') ?></th>
-         <th class='col-md-2 text-center'><?php echo gettext('Project Header Id') ?></th>
-         <th class='col-md-1 text-center'><?php echo gettext('Percent') ?></th>
-         <th class='col-md-2 text-center'><?php echo gettext('Description') ?></th>
-         <th class='col-md-1 text-center'><?php echo gettext('Date') ?></th>
-         <th class='col-md-1 text-center'><?php echo gettext('Status') ?></th>
+         <th class='col-md-2 text-center'><?php echo __('Revision Id') ?></th>
+         <th class='col-md-2 text-center'><?php echo __('Percent Header Id') ?></th>
+         <th class='col-md-2 text-center'><?php echo __('Project Header Id') ?></th>
+         <th class='col-md-1 text-center'><?php echo __('Percent') ?></th>
+         <th class='col-md-2 text-center'><?php echo __('Description') ?></th>
+         <th class='col-md-1 text-center'><?php echo __('Date') ?></th>
+         <th class='col-md-1 text-center'><?php echo __('Status') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -91,25 +91,25 @@
   </div>
  </form>
 </div>
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Task Completion Status') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo __('Task Completion Status') ?></span>
  <form method="post" id="prj_percent_line"  name="prj_percent_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Task Id') ?></th>
-        <th><?php echo gettext('Task') ?></th>
-        <th><?php echo gettext('Description') ?></th>
-        <th><?php echo gettext('Date') ?></th>
-        <th><?php echo gettext('Completion') ?> %</th>
-        <th><?php echo gettext('Comment') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('Task Id') ?></th>
+        <th><?php echo __('Task') ?></th>
+        <th><?php echo __('Description') ?></th>
+        <th><?php echo __('Date') ?></th>
+        <th><?php echo __('Completion') ?> %</th>
+        <th><?php echo __('Comment') ?></th>
 
        </tr>
       </thead>

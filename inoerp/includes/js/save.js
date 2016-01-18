@@ -281,7 +281,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
    $(form_header_id_h + " :required").each(function () {
     if (!$(this).val())
     {
-     missingMandatoryValues.push($(this).attr('class'));
+     missingMandatoryValues.push($(this).attr('name').replace(/(\[])|(\_)/g,' '));
      noOfRequiredFileValuesMissing++;
     }
    });
@@ -289,7 +289,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
    $(":required").each(function () {
     if (!$(this).val())
     {
-     missingMandatoryValues.push($(this).attr('class'));
+     missingMandatoryValues.push($(this).attr('name').replace(/(\[])|(\_)/g,' '));
      noOfRequiredFileValuesMissing++;
     }
    });
@@ -297,7 +297,8 @@ saveMainClass.prototype.saveMain = function (beforeSave)
   if (noOfRequiredFileValuesMissing > 0) {
    var showMessage = ' <div id="dialog_box" class="dialog mandatory_message"> ' + noOfRequiredFileValuesMissing + ' mandatory field(s) is/are missing....... <br>';
    $.map(missingMandatoryValues, function (val, i) {
-    showMessage += i + ' : ' + val.replace(/_+/, ' ') + ' <br>';
+    j = i + 1;
+    showMessage += j + ' : ' + val.replace(/_+/, ' ') + ' <br>';
    });
    showMessage += '</div>';
    $("#content").append(showMessage);

@@ -1,11 +1,11 @@
 <div id="form_all">
- <span class="heading"><?php echo gettext('Ledger Header') ?></span>
+ <span class="heading"><?php echo __('Ledger Header') ?></span>
  <form method="post" id="gl_ledger"  name="gl_ledger">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo gettext('Accounts') ?> </a></li>
+     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo __('Accounts') ?> </a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -38,11 +38,11 @@
    </div>
   </div>
  </form>
- <div id ="form_line" class="gl_ledger_balancing_values"><span class="heading"><?php echo gettext('Ledger Options') ?></span>
+ <div id ="form_line" class="gl_ledger_balancing_values"><span class="heading"><?php echo __('Ledger Options') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Balancing Segment Values') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Balancing Segment Values') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo __('Future') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <form  method="post" id="gl_ledger_balancing_values_line"  name="gl_ledger_balancing_values_line">
@@ -50,9 +50,9 @@
       <table class="form_table">
        <thead> 
         <tr>
-         <th><?php echo gettext('Action') ?></th>
-         <th><?php echo gettext('Line Id') ?></th>
-         <th><?php echo gettext('Balance Segment Value') ?></th>
+         <th><?php echo __('Action') ?></th>
+         <th><?php echo __('Line Id') ?></th>
+         <th><?php echo __('Balance Segment Value') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody gl_ledger_balancing_values_values" >

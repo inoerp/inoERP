@@ -12,12 +12,12 @@ inoERP
 
 
  <!--create empty form or a single id when search is not clicked and the id is referred from other page -->
- <div id ="form_header"><span class="heading"><?php echo gettext('Mainteance WO  Material Transaction') ?></span> 
+ <div id ="form_header"><span class="heading"><?php echo __('Mainteance WO  Material Transaction') ?></span> 
   <div id="form_serach_header" class="tabContainer">
    <ul class="column header_field">
     <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>    </li>
     <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="am_wo_header_id select_popup clickable">
-      <?php echo gettext('WO Header Id') ?></label> <?php $f->text_field_drm('am_wo_header_id'); ?>
+      <?php echo __('WO Header Id') ?></label> <?php $f->text_field_drm('am_wo_header_id'); ?>
     </li>
     <li><?php $f->l_text_field_d('wo_number'); ?> </li>
     <li><?php $f->l_select_field_from_array('transaction_type_id', am_material_transaction::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1); ?>
@@ -27,14 +27,14 @@ inoERP
    </ul>
   </div>
  </div>
- <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Transaction Details') ?></span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Transaction Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('General Info') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Transfer Info') ?></a></li>
-    <li><a href="#tabsLine-3"><?php echo gettext('Reference Info') ?></a></li>
-    <li><a href="#tabsLine-4"><?php echo gettext('Finance Info') ?></a></li>
-    <li><a href="#tabsLine-5"><?php echo gettext('Lot & Serial') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo __('General Info') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo __('Transfer Info') ?></a></li>
+    <li><a href="#tabsLine-3"><?php echo __('Reference Info') ?></a></li>
+    <li><a href="#tabsLine-4"><?php echo __('Finance Info') ?></a></li>
+    <li><a href="#tabsLine-5"><?php echo __('Lot & Serial') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <form action=""  method="post" id="am_material_transaction"  name="am_material_transaction">
@@ -42,15 +42,15 @@ inoERP
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo gettext('Action') ?></th>
-         <th><?php echo gettext('BOM Seq') ?></th>
-         <th><?php echo gettext('BOM Id') ?></th>
-         <th><?php echo gettext('Item Id') ?></th>
-         <th><?php echo gettext('Item Number') ?></th>
-         <th><?php echo gettext('Item Description') ?></th>
-         <th><?php echo gettext('UOM') ?></th>
-         <th><?php echo gettext('Quantity') ?></th>
-         <th><?php echo gettext('Transaction Id') ?></th>
+         <th><?php echo __('Action') ?></th>
+         <th><?php echo __('BOM Seq') ?></th>
+         <th><?php echo __('BOM Id') ?></th>
+         <th><?php echo __('Item Id') ?></th>
+         <th><?php echo __('Item Number') ?></th>
+         <th><?php echo __('Item Description') ?></th>
+         <th><?php echo __('UOM') ?></th>
+         <th><?php echo __('Quantity') ?></th>
+         <th><?php echo __('Transaction Id') ?></th>
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">
@@ -77,10 +77,10 @@ inoERP
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo gettext('From SubInv') ?></th>
-         <th><?php echo gettext('From Locator') ?></th>
-         <th><?php echo gettext('To SubInv') ?></th>
-         <th><?php echo gettext('To Locator') ?></th>
+         <th><?php echo __('From SubInv') ?></th>
+         <th><?php echo __('From Locator') ?></th>
+         <th><?php echo __('To SubInv') ?></th>
+         <th><?php echo __('To Locator') ?></th>
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">
@@ -105,14 +105,14 @@ inoERP
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo gettext('Document Type') ?></th>
-         <th><?php echo gettext('Doc. Number') ?></th>
-         <th><?php echo gettext('Doc. Id') ?></th>
-         <th><?php echo gettext('Ref Type') ?></th>
-         <th><?php echo gettext('Ref Name') ?></th>
-         <th><?php echo gettext('Ref Value') ?></th>
-         <th><?php echo gettext('Ref Doc') ?></th>
-         <th><?php echo gettext('WO BOM Line Id') ?></th>
+         <th><?php echo __('Document Type') ?></th>
+         <th><?php echo __('Doc. Number') ?></th>
+         <th><?php echo __('Doc. Id') ?></th>
+         <th><?php echo __('Ref Type') ?></th>
+         <th><?php echo __('Ref Name') ?></th>
+         <th><?php echo __('Ref Value') ?></th>
+         <th><?php echo __('Ref Doc') ?></th>
+         <th><?php echo __('WO BOM Line Id') ?></th>
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">
@@ -133,10 +133,10 @@ inoERP
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo gettext('Account') ?></th>
-         <th><?php echo gettext('Unit Cost') ?></th>
-         <th><?php echo gettext('Costed Amount') ?></th>
-         <th><?php echo gettext('Journal Id') ?></th>
+         <th><?php echo __('Account') ?></th>
+         <th><?php echo __('Unit Cost') ?></th>
+         <th><?php echo __('Costed Amount') ?></th>
+         <th><?php echo __('Journal Id') ?></th>
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">
@@ -154,8 +154,8 @@ inoERP
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo gettext('Add Lot Numbers') ?></th>
-         <th><?php echo gettext('Add Serial Numbers') ?></th>
+         <th><?php echo __('Add Lot Numbers') ?></th>
+         <th><?php echo __('Add Serial Numbers') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -176,9 +176,9 @@ inoERP
                <table class="form form_detail_data_table detail">
                 <thead>
                  <tr>
-                  <th><?php echo gettext('Action') ?></th>
-                  <th><?php echo gettext('Lot Number') ?></th>
-                  <th><?php echo gettext('Quantity') ?></th>
+                  <th><?php echo __('Action') ?></th>
+                  <th><?php echo __('Lot Number') ?></th>
+                  <th><?php echo __('Quantity') ?></th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody_ln">
@@ -250,8 +250,8 @@ inoERP
                <table class="form form_detail_data_table detail">
                 <thead>
                  <tr>
-                  <th><?php echo gettext('Action') ?></th>
-                  <th><?php echo gettext('Serial Number') ?></th>
+                  <th><?php echo __('Action') ?></th>
+                  <th><?php echo __('Serial Number') ?></th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody">

@@ -7,18 +7,18 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id ="form_header"><span class="heading"><?php
-  echo gettext('Project & Templates')
+  echo __('Project & Templates')
   ?></span>
  <form method="post" id="prj_project_header"  name="prj_project_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Basic - 2') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Finance') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('References') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-6"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-7"><?php echo gettext('Actions') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Basic - 2') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Finance') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo __('References') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo __('Note') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-7"><?php echo __('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -30,14 +30,14 @@ inoERP
       <li><?php $f->l_text_field_d('name'); ?></li>
       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', $readonly1, '', ''); ?>						 </li>
       <li><?php $f->l_select_field_from_object('prj_project_type_id', prj_project_type_header::find_all(), 'prj_project_type_header_id', 'project_type', $$class->prj_project_type_id, 'prj_project_type_header_id', 'medium', 1, $readonly1); ?>						 </li>
-      <li><label class="auto_complete"><?php echo gettext('Customer Name') ?></label><?php
+      <li><label class="auto_complete"><?php echo __('Customer Name') ?></label><?php
        echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id);
        echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1);
        ?>
        <i class="ar_customer_id select_popup clickable fa fa-search"></i></li>
-      <li><label class="auto_complete"><?php echo gettext('Customer Number') ?></label><?php $f->text_field_d('customer_number'); ?></li>
+      <li><label class="auto_complete"><?php echo __('Customer Number') ?></label><?php $f->text_field_d('customer_number'); ?></li>
       <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
-      <li><label><?php echo gettext('Project Manager') ?></label><?php $f->text_field_d('pm_employee_name', 'employee_name'); ?>
+      <li><label><?php echo __('Project Manager') ?></label><?php $f->text_field_d('pm_employee_name', 'employee_name'); ?>
        <?php echo $f->hidden_field_withId('pm_employee_id', $$class->pm_employee_id); ?>
        <i class="select_employee_name select_popup clickable fa fa-search"></i>
       </li>
@@ -116,7 +116,7 @@ inoERP
 
     <div id="tabsHeader-7" class="tabContent">
      <ul class="column header_field">
-      <li id="document_status"><label><?php echo gettext('Action') ?></label>
+      <li id="document_status"><label><?php echo __('Action') ?></label>
        <?php echo $f->select_field_from_array('action', $$class->action_a, '', 'action'); ?>
       </li>
      </ul>
@@ -127,14 +127,14 @@ inoERP
  </form>
 </div>
 
-<span class="heading"><?php echo gettext('Project Details') ?></span>
+<span class="heading"><?php echo __('Project Details') ?></span>
 
 <div id="tabsLine">
  <ul class="tabMain">
-  <li><a href="#tabsLine-1"><?php echo gettext('Tasks') ?></a></li>
-  <li><a href="#tabsLine-2"><?php echo gettext('Tasks-2') ?></a></li>
-  <li><a href="#tabsLine-3"><?php echo gettext('Members') ?> </a></li>
-  <li><a href="#tabsLine-4"><?php echo gettext('Controls') ?> </a></li>
+  <li><a href="#tabsLine-1"><?php echo __('Tasks') ?></a></li>
+  <li><a href="#tabsLine-2"><?php echo __('Tasks-2') ?></a></li>
+  <li><a href="#tabsLine-3"><?php echo __('Members') ?> </a></li>
+  <li><a href="#tabsLine-4"><?php echo __('Controls') ?> </a></li>
  </ul>
  <div class="tabContainer">
   <form method="post" id="prj_project_line"  name="prj_project_line" class="m-margin-top-20">
@@ -143,16 +143,16 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Seq') ?>#</th>
-        <th><?php echo gettext('Task') ?>#</th>
-        <th><?php echo gettext('Add Child') ?></th>
-        <th><?php echo gettext('Parent') ?></th>
-        <th><?php echo gettext('Task Name') ?></th>
-        <th><?php echo gettext('Description') ?></th>
-        <th><?php echo gettext('Start Date') ?></th>
-        <th><?php echo gettext('End Date') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('Seq') ?>#</th>
+        <th><?php echo __('Task') ?>#</th>
+        <th><?php echo __('Add Child') ?></th>
+        <th><?php echo __('Parent') ?></th>
+        <th><?php echo __('Task Name') ?></th>
+        <th><?php echo __('Description') ?></th>
+        <th><?php echo __('Start Date') ?></th>
+        <th><?php echo __('End Date') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -201,16 +201,16 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Task Seq') ?>#</th>
-        <th><?php echo gettext('Task') ?>#</th>
-        <th><?php echo gettext('Level Weight') ?>#</th>
-        <th><?php echo gettext('Service Type') ?></th>
-        <th><?php echo gettext('Work Type') ?></th>
-        <th><?php echo gettext('Allow Charges') ?></th>
-        <th><?php echo gettext('Capitalizable') ?></th>
-        <th><?php echo gettext('Milestone ?') ?></th>
-        <th><?php echo gettext('Task Status') ?></th>
-        <th><?php echo gettext('CIP Asset') ?></th>
+        <th><?php echo __('Task Seq') ?>#</th>
+        <th><?php echo __('Task') ?>#</th>
+        <th><?php echo __('Level Weight') ?>#</th>
+        <th><?php echo __('Service Type') ?></th>
+        <th><?php echo __('Work Type') ?></th>
+        <th><?php echo __('Allow Charges') ?></th>
+        <th><?php echo __('Capitalizable') ?></th>
+        <th><?php echo __('Milestone ?') ?></th>
+        <th><?php echo __('Task Status') ?></th>
+        <th><?php echo __('CIP Asset') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -252,13 +252,13 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Member Id') ?></th>
-        <th><?php echo gettext('User Name') ?></th>
-        <th><?php echo gettext('Role') ?></th>
-        <th><?php echo gettext('Description') ?></th>
-        <th><?php echo gettext('Start Date') ?></th>
-        <th><?php echo gettext('End Date') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Member Id') ?></th>
+        <th><?php echo __('User Name') ?></th>
+        <th><?php echo __('Role') ?></th>
+        <th><?php echo __('Description') ?></th>
+        <th><?php echo __('Start Date') ?></th>
+        <th><?php echo __('End Date') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody2 wip_wo_bom_values" >
@@ -304,16 +304,16 @@ inoERP
      <table class="form_line_data_table3">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Control Id') ?></th>
-        <th><?php echo gettext('Expenditure Type') ?></th>
-        <th><?php echo gettext('Expenditure Category') ?></th>
-        <th><?php echo gettext('Description') ?></th>
-        <th><?php echo gettext('Job') ?></th>
-        <th><?php echo gettext('Start Date') ?></th>
-        <th><?php echo gettext('End Date') ?></th>
-        <th><?php echo gettext('Chargeable') ?></th>
-        <th><?php echo gettext('Billable') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Control Id') ?></th>
+        <th><?php echo __('Expenditure Type') ?></th>
+        <th><?php echo __('Expenditure Category') ?></th>
+        <th><?php echo __('Description') ?></th>
+        <th><?php echo __('Job') ?></th>
+        <th><?php echo __('Start Date') ?></th>
+        <th><?php echo __('End Date') ?></th>
+        <th><?php echo __('Chargeable') ?></th>
+        <th><?php echo __('Billable') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody3 wip_wo_bom_values" >

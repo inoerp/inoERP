@@ -6,13 +6,13 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php      echo gettext('Specification')   ?></span>
+<div id ="form_header"><span class="heading"><?php      echo __('Specification')   ?></span>
  <form method="post" id="qa_specification_header"  name="qa_specification_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Note') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -66,28 +66,28 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Specification Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo __('Specification Lines') ?></span>
  <form action=""  method="post" id="qa_specification_line"  name="qa_specification_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Amounts') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Targets') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Amounts') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo __('Targets') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Sequence') ?></th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('uom_id') ?></th>
-        <th><?php echo gettext('User Low') ?>#</th>
-        <th><?php echo gettext('User High') ?></th>
-        <th><?php echo gettext('Spec Low') ?></th>
-        <th><?php echo gettext('Spec High') ?></th>
-        <th><?php echo gettext('Reasonable Low') ?></th>
-        <th><?php echo gettext('Reasonable High') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Sequence') ?></th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('uom_id') ?></th>
+        <th><?php echo __('User Low') ?>#</th>
+        <th><?php echo __('User High') ?></th>
+        <th><?php echo __('Spec Low') ?></th>
+        <th><?php echo __('Spec High') ?></th>
+        <th><?php echo __('Reasonable Low') ?></th>
+        <th><?php echo __('Reasonable High') ?></th>
 
        </tr>
       </thead>
@@ -124,10 +124,10 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Sequence') ?></th>
-        <th><?php echo gettext('user_target_value') ?></th>
-        <th><?php echo gettext('specification_target_value') ?>#</th>
-        <th><?php echo gettext('reasonable_target_value') ?></th>
+        <th><?php echo __('Sequence') ?></th>
+        <th><?php echo __('user_target_value') ?></th>
+        <th><?php echo __('specification_target_value') ?>#</th>
+        <th><?php echo __('reasonable_target_value') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

@@ -8,14 +8,14 @@ inoERP
 -->
 
 <div id="form_all">
- <span class="heading"><?php echo gettext('Department') ?></span>
+ <span class="heading"><?php echo __('Department') ?></span>
  <form action=""  method="post" id="bom_department"  name="bom_department" class="bom_department">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -55,11 +55,11 @@ inoERP
    </div>
   </div>
  </form>
- <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Department Details') ?></span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Department Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Resource Assignment') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Overhead Rate') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Resource Assignment') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo __('Overhead Rate') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <form action=""  method="post" id="bom_department_resource_assignment_line"  name="bom_department_resource_assignment_line">
@@ -67,13 +67,13 @@ inoERP
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo gettext('Action') ?></th>
-         <th><?php echo gettext('Resource Assignment Id') ?>#</th>
-         <th><?php echo gettext('Cost Type') ?></th>
-         <th><?php echo gettext('Resource') ?></th>
-         <th><?php echo gettext('Efficiency') ?>%</th>
-         <th><?php echo gettext('Utilization') ?>%</th>
-         <th><?php echo gettext('No of Units') ?></th>
+         <th><?php echo __('Action') ?></th>
+         <th><?php echo __('Resource Assignment Id') ?>#</th>
+         <th><?php echo __('Cost Type') ?></th>
+         <th><?php echo __('Resource') ?></th>
+         <th><?php echo __('Efficiency') ?>%</th>
+         <th><?php echo __('Utilization') ?>%</th>
+         <th><?php echo __('No of Units') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody bom_department_resource_assignment_values" >

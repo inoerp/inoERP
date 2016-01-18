@@ -1,7 +1,7 @@
 <table class="form_line_data_table extra_field">
  <thead> 
   <tr>
-   <th><?php echo gettext('Seq') ?>#</th>
+   <th><?php echo __('Seq') ?>#</th>
    <th><?php echo $extra_element_label; ?></th>
   </tr>
  </thead>
@@ -27,17 +27,17 @@
           <table class="form form_detail_data_table detail">
            <thead>
             <tr>
-             <th><?php echo gettext('Action') ?></th>
-             <th><?php echo gettext('Seq') ?>#</th>
-             <th><?php echo gettext('Instance Id') ?></th>
-             <th><?php echo gettext('Field Name') ?></th>
-             <th><?php echo gettext('Label') ?></th>
-             <th><?php echo gettext('Type') ?></th>
-             <th><?php echo gettext('Control Type') ?></th>
-             <th><?php echo gettext('Control Value') ?></th>
-             <th><?php echo gettext('Control UOM') ?></th>
-             <th><?php echo gettext('Display Weight') ?></th>
-             <th><?php echo gettext('Active') ?></th>
+             <th><?php echo __('Action') ?></th>
+             <th><?php echo __('Seq') ?>#</th>
+             <th><?php echo __('Instance Id') ?></th>
+             <th><?php echo __('Field Name') ?></th>
+             <th><?php echo __('Label') ?></th>
+             <th><?php echo __('Type') ?></th>
+             <th><?php echo __('Control Type') ?></th>
+             <th><?php echo __('Control Value') ?></th>
+             <th><?php echo __('Control UOM') ?></th>
+             <th><?php echo __('Display Weight') ?></th>
+             <th><?php echo __('Active') ?></th>
             </tr>
            </thead>
            <tbody class="form_data_detail_tbody_ln">
@@ -83,11 +83,11 @@
           <table class="form form_detail_data_table detail">
            <thead>
             <tr>
-             <th><?php echo gettext('Seq') ?>#</th>
-             <th><?php echo gettext('Lower Limit') ?></th>
-             <th><?php echo gettext('Upper Limit') ?></th>
-             <th><?php echo gettext('List Option Type') ?></th>
-             <th><?php echo gettext('Field Name') ?></th>
+             <th><?php echo __('Seq') ?>#</th>
+             <th><?php echo __('Lower Limit') ?></th>
+             <th><?php echo __('Upper Limit') ?></th>
+             <th><?php echo __('List Option Type') ?></th>
+             <th><?php echo __('Field Name') ?></th>
             </tr>
            </thead>
            <tbody class="form_data_detail_tbody_ln">

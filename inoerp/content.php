@@ -55,11 +55,10 @@ if (($content_privilage >= 6) && ($mode == 9)) {
   include_once(THEME_DIR . '/nondb_content_template.inc');
  } elseif ((!empty($category_id)) && ($content_type_name)) {
   include_once(THEME_DIR . '/contents_list_template.inc');
- } else {
+ } else if(SHOW_COTENT_LIST == 1) {
   include_once(THEME_DIR . '/contents_list_template.inc');
-//	echo $content->showSummaryList_byConteTypeCategory($pageno, $per_page, $query_string);
-//	require_once(INC_BASICS . DS . "list_page.inc");
-//	include_once(THEME_DIR . '/content_search.php');
+ }else {
+  echo ino_access_denied('Sorry!!! Requested content is not found');
  }
 }
 ?>

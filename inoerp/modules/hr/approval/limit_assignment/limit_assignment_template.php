@@ -1,7 +1,7 @@
 
 <div class="row small-left-padding">
  <div id="form_all">
-  <span class="heading"><?php echo gettext('Approval Limit Assignment') ?></span>
+  <span class="heading"><?php echo __('Approval Limit Assignment') ?></span>
   <div id="form_serach_header" class="tabContainer"><ul class="inline_list">
     <li><?php $f->l_select_field_from_object('position_id', hr_position::find_all(), 'hr_position_id', 'position_name', $position_id_h, 'position_id', $readonly1); ?>   </li>
     <li><?php $f->l_select_field_from_object('job_id', hr_job::find_all(), 'hr_job_id', 'job_name', $job_id_h, 'job_id', $readonly1); ?>   </li>
@@ -15,8 +15,8 @@
     <div id="tabsLine">
      <div id ="form_line" class="hr_approval_limit_assignment">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
-       <li><a href="#tabsLine-2"><?php echo gettext('Future') ?></a></li>
+       <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
+       <li><a href="#tabsLine-2"><?php echo __('Future') ?></a></li>
       </ul>
       <div class="tabContainer"> 
 
@@ -24,15 +24,15 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo gettext('Action') ?></th>
-           <th><?php echo gettext('Seq') ?>#</th>
-           <th><?php echo gettext('Id') ?></th>
-           <th><?php echo gettext('Document Type') ?></th>
-           <th><?php echo gettext('Approval Limit') ?></th>
-           <th><?php echo gettext('Start Date') ?></th>
-           <th><?php echo gettext('End Date') ?></th>
-           <th><?php echo gettext('Job') ?></th>
-           <th><?php echo gettext('Position') ?></th>
+           <th><?php echo __('Action') ?></th>
+           <th><?php echo __('Seq') ?>#</th>
+           <th><?php echo __('Id') ?></th>
+           <th><?php echo __('Document Type') ?></th>
+           <th><?php echo __('Approval Limit') ?></th>
+           <th><?php echo __('Start Date') ?></th>
+           <th><?php echo __('End Date') ?></th>
+           <th><?php echo __('Job') ?></th>
+           <th><?php echo __('Position') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody approval_limit_assignment_values" >
@@ -85,10 +85,10 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo gettext('Seq') ?>#</th>
-           <th><?php echo gettext('BU Org Id') ?></th>
-           <th><?php echo gettext('Job Id') ?></th>
-           <th><?php echo gettext('Position Id') ?></th>
+           <th><?php echo __('Seq') ?>#</th>
+           <th><?php echo __('BU Org Id') ?></th>
+           <th><?php echo __('Job Id') ?></th>
+           <th><?php echo __('Position Id') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody approval_limit_assignment_values" >

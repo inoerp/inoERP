@@ -1,11 +1,11 @@
 <div id ="form_header">
  <form  method="post" id="bc_label_request"  name="bc_label_request">
-  <span class="heading"><?php echo gettext('Label Request') ?></span>
+  <span class="heading"><?php echo __('Label Request') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo gettext('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo __('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -18,8 +18,8 @@
         <li><?php $f->l_select_field_from_object('transaction_type_id', transaction_type::find_all(), 'transaction_type_id', 'transaction_type', $$class->transaction_type_id, 'transaction_type_id', '', '', 1); ?>        </li>
         <li><?php $f->l_select_field_from_object('bc_label_format_header_id', bc_label_format_header::find_all(), 'bc_label_format_header_id', 'format_name', $$class->bc_label_format_header_id, 'bc_label_format_header_id', '', '', 1); ?>              </li>
         <li><?php $f->l_text_field_d('status'); ?> 					</li>
-        <li><label><?php echo gettext('No Of Copies') ?></label><?php echo $f->text_field_ap(array('name' => 'no_of_copies', 'value' => '', 'id' => 'no_of_copies')); ?> 					</li>
-        <li><label><?php echo gettext('Label') ?></label><button class="button btn btn-warning" id="print_label"><?php echo gettext('Reprint') ?></button></li>
+        <li><label><?php echo __('No Of Copies') ?></label><?php echo $f->text_field_ap(array('name' => 'no_of_copies', 'value' => '', 'id' => 'no_of_copies')); ?> 					</li>
+        <li><label><?php echo __('Label') ?></label><button class="button btn btn-warning" id="print_label"><?php echo __('Reprint') ?></button></li>
        </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
@@ -43,10 +43,10 @@
 
    </div>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Content') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Content') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Label Content') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo __('Label Content') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">

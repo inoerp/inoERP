@@ -1,11 +1,11 @@
 <div id ="form_header">
- <span class="heading"><?php echo gettext('Bank Names') ?></span>
+ <span class="heading"><?php echo __('Bank Names') ?></span>
  <form action=""  method="post" id="mdm_bank_header"  name="mdm_bank_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Address Details') ?> </a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Address Details') ?> </a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -29,7 +29,7 @@
      <div class="header_address"> 
       <ul class="column four_column">
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-         <?php echo gettext('Corporate Address Id'); ?></label><?php $f->text_field_d('address_id', 'address_id site_address_id'); ?>
+         <?php echo __('Corporate Address Id'); ?></label><?php $f->text_field_d('address_id', 'address_id site_address_id'); ?>
        </li>
        <li><?php $f->l_text_field_dr('header_address_name', 'address_name'); ?></li>
        <li><?php $f->l_text_field_dr('header_address', 'address'); ?></li>
@@ -49,7 +49,7 @@
  </form>
 </div>
 
-<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext("Bank Branches") ?></span>
+<div id ="form_line" class="form_line"><span class="heading"><?php echo __("Bank Branches") ?></span>
  <form method="post" id="mdm_bank_site"  name="mdm_bank_site">
   <div id='line_before_tab' class="ino-well"> 
    <ul class="column header_field "> 
@@ -64,12 +64,12 @@
   </div>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Transaction') ?> </a></li>
-    <li><a href="#tabsLine-3"><?php echo gettext('Site Address') ?> </a></li>
-    <li><a href="#tabsLine-4"><?php echo gettext('Contact') ?> </a></li>
-    <li><a href="#tabsLine-5"><?php echo gettext('Notes') ?> </a></li>
-    <li><a href="#tabsLine-6"><?php echo gettext('Secondary') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Main') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo __('Transaction') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo __('Site Address') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo __('Contact') ?> </a></li>
+    <li><a href="#tabsLine-5"><?php echo __('Notes') ?> </a></li>
+    <li><a href="#tabsLine-6"><?php echo __('Secondary') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
@@ -81,7 +81,7 @@
        <li><?php $f->l_text_field('branch_name_alt', $$class_second->branch_name_alt); ?>	</li>
        <li><?php $f->l_text_field('tax_reg_no', $$class_second->tax_reg_no); ?>	</li>
        <li><?php $f->l_text_field('tax_payer_id', $$class_second->tax_payer_id); ?>	</li>
-       <li><label><?php echo gettext('Status') ?></label> <?php echo form::status_field($$class_second->status, $readonly); ?> </li>
+       <li><label><?php echo __('Status') ?></label> <?php echo form::status_field($$class_second->status, $readonly); ?> </li>
       </ul>
      </div>
     </div> 
@@ -99,7 +99,7 @@
       <div class="site_address"> 
        <ul class="column four_column">
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-          <?php gettext('Site Address Id'); ?></label><?php $f->l_text_field('site_address_id', $$class_second->site_address_id, '', 'address_id', 'address_id'); ?></li>
+          <?php __('Site Address Id'); ?></label><?php $f->l_text_field('site_address_id', $$class_second->site_address_id, '', 'address_id', 'address_id'); ?></li>
         <li><?php $f->l_text_field('site_address_name', $$class_second->site_address_name, '', 'site_address_name', 'address_name', '', 1); ?></li>
         <li><?php $f->l_text_field('site_address', $$class_second->site_address, '', 'site_address', 'address', '', 1); ?></li>
         <li><?php $f->l_text_field('site_country', $$class_second->site_country, '', 'site_country', 'country', '', 1); ?></li>

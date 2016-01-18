@@ -1,6 +1,6 @@
 <div id ="form_header">
  <form  method="post" id="ar_receipt_source"  name="ar_receipt_source">
-  <span class="heading"><?php echo gettext('Receipt Source') ?></span>
+  <span class="heading"><?php echo __('Receipt Source') ?></span>
   <div class="tabContainer">
    <ul class="column header_field"> 
     <li><?php $f->l_text_field_dr_withSearch('ar_receipt_source_id') ?>
@@ -18,8 +18,8 @@
   <div id ="form_line" class="form_line"><span class="heading">Receipt Source Details </span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo gettext('Bank Account') ?> </a></li>
+     <li><a href="#tabsLine-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo __('Bank Account') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">

@@ -6,14 +6,14 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php   echo gettext('Service Activity')   ?></span>
+<div id ="form_header"><span class="heading"><?php   echo __('Service Activity')   ?></span>
  <form action=""  method="post" id="hd_service_activity_header"  name="hd_service_activity_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Billing Details') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Billing Details') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Note') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo __('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -64,24 +64,24 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Service Activity Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo __('Service Activity Lines') ?></span>
  <form action=""  method="post" id="hd_service_activity_line"  name="hd_service_activity_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Order Type') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Order Type') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Seq') ?>#</th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Business Org') ?></th>
-        <th><?php echo gettext('Header Type') ?></th>
-        <th><?php echo gettext('Line Type') ?></th>
-        <th><?php echo gettext('Description') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Seq') ?>#</th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('Business Org') ?></th>
+        <th><?php echo __('Header Type') ?></th>
+        <th><?php echo __('Line Type') ?></th>
+        <th><?php echo __('Description') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

@@ -1,0 +1,11 @@
+#Make sure no can access the directories through HTTP
+Options -Indexes
+
+#Make index.php as home page
+DirectoryIndex index.php 
+
+#for conten url alias
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule    ^content/([A-Za-z0-9-]+)/?$    content.php?$1    [NC,L]    

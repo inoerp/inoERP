@@ -2,7 +2,9 @@
 
 require_once __DIR__ . "/../functions/functions.inc";
 require_once __DIR__ . '/../../define_const.inc';
- const DS = DIRECTORY_SEPARATOR;
+const DS = DIRECTORY_SEPARATOR;
+
+defined('SHOW_COTENT_LIST') ? null : define('SHOW_COTENT_LIST', 0); //show content list when requested content not found 1 for true 2 for false
 
 /* ---------------------Dont Update anything Below-------------------------------------- */
 //Basic Paths 

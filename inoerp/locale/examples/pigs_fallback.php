@@ -26,11 +26,11 @@ error_reporting(E_ALL | E_STRICT);
 // define constants
 define('PROJECT_DIR', realpath('./'));
 define('LOCALE_DIR', PROJECT_DIR .'/locale');
-define('DEFAULT_LOCALE', 'en_US');
+define('DEFAULT_LOCALE', 'hi_IN');
 
 require_once('../gettext.inc');
 
-$supported_locales = array('en_US', 'sr_CS', 'de_CH');
+$supported_locales = array('en_US', 'sr_CS', 'de_CH' , 'hi_IN');
 $encoding = 'UTF-8';
 
 $locale = (isset($_GET['lang']))? $_GET['lang'] : DEFAULT_LOCALE;
@@ -75,7 +75,9 @@ else {
 print "<pre>";
 print T_("This is how the story goes.\n\n");
 for ($number=6; $number>=0; $number--) {
-  print sprintf( T_ngettext("%d pig went to the market\n", 
+   print sprintf(__("Address Name" ));
+   
+  print sprintf( T_n__("%d  Address Name", 
 			  "%d pigs went to the market\n", $number), 
 		 $number );
 }

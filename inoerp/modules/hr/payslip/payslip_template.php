@@ -2,7 +2,7 @@
  <div id="form_all">
   <div id="form_headerDiv">
    <form action=""  method="post" id="hr_payslip_header"  name="hr_payslip_header">
-    <span class="heading"><?php echo gettext('Employee Pay Slip') ?></span>
+    <span class="heading"><?php echo __('Employee Pay Slip') ?></span>
     <div class="tabContainer">
      <ul class="column header_field">
       <li><?php $f->l_text_field_dr_withSearch('hr_payslip_header_id') ?>
@@ -10,7 +10,7 @@
         <i class="fa fa-refresh"></i></a> 
       </li>
       <li data-employee_type="employee"><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
-        <?php echo gettext('Employee Name') ?></label><?php $f->text_field_d('employee_name'); ?>
+        <?php echo __('Employee Name') ?></label><?php $f->text_field_d('employee_name'); ?>
        <?php echo $f->hidden_field_withId('employee_id', $$class->employee_id); ?>
       </li>
       <li><?php $f->l_text_field_dr('identification_id'); ?>  </li>
@@ -32,26 +32,26 @@
       <li><?php $f->l_text_field_dr('status'); ?>  </li>
 <!--      <li><a  role="button" class="quick_select button btn btn-info" target="_blank" 
                                href="<?php // echo HOME_URL ?>form.php?class_name=hr_payslip_header&amp;router=pdf_print&amp;hr_payslip_header_id=<?php echo!(empty($$class->hr_payslip_header_id)) ? $$class->hr_payslip_header_id : ""; ?>" >
-         <?php // echo gettext('Print') ?></a></li>-->
+         <?php // echo __('Print') ?></a></li>-->
 
      </ul>
     </div>
    </form>
-   <div id ="form_line" class="hr_payslip_line"><span class="heading"><?php echo gettext('Salary Details') ?></span>
+   <div id ="form_line" class="hr_payslip_line"><span class="heading"><?php echo __('Salary Details') ?></span>
     <form action=""  method="post" id="hr_payslip_line"  name="hr_payslip_line">
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1"><?php echo gettext('Details') ?></a></li>
+       <li><a href="#tabsLine-1"><?php echo __('Details') ?></a></li>
       </ul>
       <div class="tabContainer"> 
        <div id="tabsLine-1" class="tabContent">
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo gettext('Action') ?></th>
-           <th><?php echo gettext('Id') ?></th>
-           <th><?php echo gettext('Compensation ELement') ?>#</th>
-           <th><?php echo gettext('Amount') ?></th>
+           <th><?php echo __('Action') ?></th>
+           <th><?php echo __('Id') ?></th>
+           <th><?php echo __('Compensation ELement') ?>#</th>
+           <th><?php echo __('Amount') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody payslip_line_values" >

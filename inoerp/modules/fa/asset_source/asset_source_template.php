@@ -7,17 +7,17 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 
-<div id ="form_header"><span class="heading"><?php echo gettext('Asset Source Lines') ?></span>
+<div id ="form_header"><span class="heading"><?php echo __('Asset Source Lines') ?></span>
  <div id="tabsHeader">
   <ul class="tabMain">
-   <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-   <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
-   <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
+   <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+   <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
+   <li><a href="#tabsHeader-3"><?php echo __('Note') ?></a></li>
   </ul>
   <div class="tabContainer"> 
    <div id="tabsHeader-1" class="tabContent">
     <ul class="column header_field">
-     <li><label><?php echo gettext('Asset Number') ?></label>
+     <li><label><?php echo __('Asset Number') ?></label>
       <?php
       echo $f->val_field('asset_number', $fa_asset->asset_number, '', 'asset_number', '', '', '', 'fa_asset', 'asset_number');
       echo $f->hidden_field_withIdClass('fa_asset_id', $fa_asset->fa_asset_id, 'fa_asset_id');
@@ -54,11 +54,11 @@ inoERP
   </div>
  </div>
 </div>
-<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Source Line Details') ?></span>
+<div id ="form_line" class="form_line"><span class="heading"><?php echo __('Source Line Details') ?></span>
  <div id="tabsLine">
   <ul class="tabMain">
-   <li><a href="#tabsLine-1"><?php echo gettext('Operation') ?></a></li>
-   <li><a href="#tabsLine-2"><?php echo gettext('Future') ?></a></li>
+   <li><a href="#tabsLine-1"><?php echo __('Operation') ?></a></li>
+   <li><a href="#tabsLine-2"><?php echo __('Future') ?></a></li>
   </ul>
   <div class="tabContainer"> 
    <form action=""  method="post" id="fa_asset_source"  name="fa_asset_source">
@@ -66,14 +66,14 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Asset Source Id') ?></th>
-        <th><?php echo gettext('Source Type') ?></th>
-        <th><?php echo gettext('Line') ?>#</th>
-        <th><?php echo gettext('Legacy Invoice') ?>#</th>
-        <th><?php echo gettext('AP Trnx Line Id') ?></th>
-        <th><?php echo gettext('Reference') ?></th>
-        <th><?php echo gettext('Line Amount') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Asset Source Id') ?></th>
+        <th><?php echo __('Source Type') ?></th>
+        <th><?php echo __('Line') ?>#</th>
+        <th><?php echo __('Legacy Invoice') ?>#</th>
+        <th><?php echo __('AP Trnx Line Id') ?></th>
+        <th><?php echo __('Reference') ?></th>
+        <th><?php echo __('Line Amount') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody fa_asset_source_line_values" >

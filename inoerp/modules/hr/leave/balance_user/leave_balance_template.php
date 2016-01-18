@@ -1,7 +1,7 @@
 <div id="form_all">
  <div id="form_headerDiv">
   <form action=""  method="post" id="hr_leave_balance_line"  name="leave_balance_line">
-   <span class="heading"><?php echo gettext('Leave Details') ?></span>
+   <span class="heading"><?php echo __('Leave Details') ?></span>
    <table class="form_table">
     <tr> 
      <td><?php $f->l_text_field_d('employee_name'); ?> </td>
@@ -9,22 +9,22 @@
     </tr>
    </table>
    <div id ="form_line" class="hr_leave_balance">
-    <span class="heading"><?php echo gettext('Current Balance') ?> </span>
+    <span class="heading"><?php echo __('Current Balance') ?> </span>
     <div id="tabsLine">
      <ul class="tabMain">
-      <li><a href="#tabsLine-1"><?php echo gettext('Details') ?></a></li>
+      <li><a href="#tabsLine-1"><?php echo __('Details') ?></a></li>
      </ul>
      <div class="tabContainer"> 
       <div id="tabsLine-1" class="tabContent">
        <table class="form_table">
         <thead> 
          <tr>
-          <th><?php echo gettext('Seq') ?></th>
-          <th><?php echo gettext('Type') ?>#</th>
-          <th><?php echo gettext('Leave/Year') ?></th>
-          <th><?php echo gettext('Available Balance') ?></th>
-          <th><?php echo gettext('Total Used') ?></th>
-          <th><?php echo gettext('Total Leave') ?></th>
+          <th><?php echo __('Seq') ?></th>
+          <th><?php echo __('Type') ?>#</th>
+          <th><?php echo __('Leave/Year') ?></th>
+          <th><?php echo __('Available Balance') ?></th>
+          <th><?php echo __('Total Used') ?></th>
+          <th><?php echo __('Total Leave') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody leave_balance_values" >

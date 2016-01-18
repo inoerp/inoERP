@@ -1,13 +1,13 @@
-<div id ="form_all"><span class="heading"><?php   echo gettext('Service Request')  ?></span>
+<div id ="form_all"><span class="heading"><?php   echo __('Service Request')  ?></span>
  <form method="post" id="hd_service_request"  name="hd_service_request">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo gettext('Request Details') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo gettext('Secondary') ?></a></li>
-     <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-5"><?php echo gettext('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo __('Request Details') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo __('Secondary') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo __('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-5"><?php echo __('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -25,19 +25,19 @@
        </li>
        <li><?php $f->l_text_field_d('requester_email', 'email'); ?></li>
        <li><?php $f->l_text_field_d('requester_phone', 'phone'); ?></li>
-       <li><label class="auto_complete"><?php echo gettext('Customer Name') ?></label><?php
+       <li><label class="auto_complete"><?php echo __('Customer Name') ?></label><?php
         echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id);
         echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1);
         ?>
         <i class="ar_customer_id select_popup clickable fa fa-search"></i></li>
-       <li><label class="auto_complete"><?php echo gettext('Customer Number') ?></label><?php $f->text_field_d('customer_number'); ?></li>
-       <li><label><?php echo gettext('Item Number') ?></label><?php
+       <li><label class="auto_complete"><?php echo __('Customer Number') ?></label><?php $f->text_field_d('customer_number'); ?></li>
+       <li><label><?php echo __('Item Number') ?></label><?php
         echo $f->hidden_field_withId('item_id_m', $$class->item_id_m);
         $f->text_field_dm('item_number', 'select_item_number');
         echo $f->hidden_field_withCLass('shippable_cb', '1', 'popup_value');
         ?><i class="select_item_number select_popup clickable fa fa-search"></i>
        </li>
-       <li><label><?php echo gettext('Serial Number') ?></label><?php
+       <li><label><?php echo __('Serial Number') ?></label><?php
         echo $f->hidden_field_withId('inv_serial_number_id', $$class->inv_serial_number_id);
         $f->text_field_dm('serial_number', 'select_serial_number');
         echo $f->hidden_field_withCLass('serial_status', 'OUT_STORE', 'popup_value');
@@ -86,13 +86,13 @@
    </div>
   </div>
 
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Request Details') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Request Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Problem Details') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo gettext('Assignment') ?></a></li>
-     <li><a href="#tabsLine-3"><?php echo gettext('Resolution') ?></a></li>
-     <li><a href="#tabsLine-4"><?php echo gettext('Closure') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo __('Problem Details') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo __('Assignment') ?></a></li>
+     <li><a href="#tabsLine-3"><?php echo __('Resolution') ?></a></li>
+     <li><a href="#tabsLine-4"><?php echo __('Closure') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">

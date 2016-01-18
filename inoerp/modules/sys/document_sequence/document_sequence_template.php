@@ -1,7 +1,7 @@
-<div id="form_all"><span class="heading"><?php echo gettext('Document Sequence') ?></span>
+<div id="form_all"><span class="heading"><?php echo __('Document Sequence') ?></span>
  <div id="form_headerDiv">
   <div id="form_serach_header">
-   <label><?php echo gettext('Business Org') ?></label>
+   <label><?php echo __('Business Org') ?></label>
    <?php echo form::select_field_from_object('org_id', org::find_all_business(), 'org_id', 'org', $org_id_h, 'org_id', $readonly1); ?>
    <a name="show" href="form.php?class_name=sys_document_sequence&<?php echo "mode=$mode"; ?>" class="show document_id sys_document_sequence_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
   </div>
@@ -9,8 +9,8 @@
    <div id="tabsLine">
     <div id ="form_line" class="sys_document_sequence">
      <ul class="tabMain">
-      <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
-      <li><a href="#tabsLine-2"><?php echo gettext('Future') ?></a></li>
+      <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
+      <li><a href="#tabsLine-2"><?php echo __('Future') ?></a></li>
      </ul>
      <div class="tabContainer"> 
 
@@ -18,16 +18,16 @@
        <table class="form_table">
         <thead> 
          <tr>
-          <th><?php echo gettext('Action') ?></th>
-          <th><?php echo gettext('Seq#') ?></th>
-          <th><?php echo gettext('Id') ?></th>
-          <th><?php echo gettext('Document Type') ?></th>
-          <th><?php echo gettext('Entry Type') ?></th>
-          <th><?php echo gettext('Prefix') ?></th>
-          <th><?php echo gettext('Seq Separator') ?></th>
-          <th><?php echo gettext('Next Number') ?></th>
-          <th><?php echo gettext('Start Date') ?></th>
-          <th><?php echo gettext('End Date') ?></th>
+          <th><?php echo __('Action') ?></th>
+          <th><?php echo __('Seq#') ?></th>
+          <th><?php echo __('Id') ?></th>
+          <th><?php echo __('Document Type') ?></th>
+          <th><?php echo __('Entry Type') ?></th>
+          <th><?php echo __('Prefix') ?></th>
+          <th><?php echo __('Seq Separator') ?></th>
+          <th><?php echo __('Next Number') ?></th>
+          <th><?php echo __('Start Date') ?></th>
+          <th><?php echo __('End Date') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody document_sequence_values" >

@@ -9,16 +9,16 @@ inoERP
 
 <div id ="form_header">
  <form action=""  method="post" id="bom_resource"  name="bom_resource">
-  <span class="heading"><?php echo gettext('Resources') ?>
+  <span class="heading"><?php echo __('Resources') ?>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Costing') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('OSP') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Employee') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo gettext('Equipment') ?></a></li>
-    <li><a href="#tabsHeader-6"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-7"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Costing') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('OSP') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo __('Employee') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo __('Equipment') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo __('Note') ?></a></li>
+    <li><a href="#tabsHeader-7"><?php echo __('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -48,7 +48,7 @@ inoERP
     <div id="tabsHeader-3" class="tabContent">
       <ul class="column five_column"> 
        <li><?php $f->l_checkBox_field_d('osp_cb'); ?> </li>
-       <li><label><?php echo gettext('Item Number') ?></label>
+       <li><label><?php echo __('Item Number') ?></label>
         <?php $f->text_field_wid('osp_item_number', 'select_item_number'); ?>
         <?php $f->hidden_field_withId('osp_item_id', $$class->osp_item_id); ?>
         <i class="select_item_number select_popup clickable fa fa-search"></i>
@@ -101,12 +101,12 @@ inoERP
     <table class="form_line_data_table">
      <thead> 
       <tr>
-       <th><?php echo gettext('Action') ?></th>
-       <th><?php echo gettext('Seq') ?>#</th>
-       <th><?php echo gettext('Resource Cost Id') ?>#</th>
-       <th><?php echo gettext('Cost Type') ?></th>
-       <th><?php echo gettext('Description') ?>#</th>
-       <th><?php echo gettext('Rate') ?>#</th>
+       <th><?php echo __('Action') ?></th>
+       <th><?php echo __('Seq') ?>#</th>
+       <th><?php echo __('Resource Cost Id') ?>#</th>
+       <th><?php echo __('Cost Type') ?></th>
+       <th><?php echo __('Description') ?>#</th>
+       <th><?php echo __('Rate') ?>#</th>
       </tr>
      </thead>
      <tbody class="form_data_line_tbody">

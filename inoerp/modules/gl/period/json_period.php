@@ -10,7 +10,7 @@ if ((!empty($_GET['open_next_gl_period'])) && (!empty($_GET['new_gl_calendar_id'
  try {
   $gl_p->save();
   $dbc->confirm();
-  echo '<div class="message">' . $gl_p->period_name . gettext(' is is Successfully Opened') . ' ' . ' </div>';
+  echo '<div class="message">' . $gl_p->period_name . __(' is is Successfully Opened') . ' ' . ' </div>';
  } catch (Exception $e) {
   echo "<br>Failed to open the period <br>" . $e->getMessage();
  }

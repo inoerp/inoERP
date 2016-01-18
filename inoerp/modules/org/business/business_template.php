@@ -1,11 +1,11 @@
 <div id ="form_header">
- <span class="heading"><?php echo gettext('Business Org') ?></span>
+ <span class="heading"><?php echo __('Business Org') ?></span>
  <form action=""  method="post" id="business"  name="business">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -47,19 +47,19 @@
   <div id ="form_line" class="form_line"><span class="heading">Business Org Details </span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo gettext('BO Details') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo __('BO Details') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsLine-1" class="tabContent">
       <div> 
        <ul class="column header_field"> 
-        <li><label><?php echo gettext('Type of Business Org') ?></label> 
+        <li><label><?php echo __('Type of Business Org') ?></label> 
          <input type="text" name="business_org_type" value="<?php
          echo (!empty($business->business_org_type)) ? htmlentities($business->business_org_type) : "";
          ?>" maxlength="50" id="business_org_type"> 
         </li> 
-        <li><label><?php echo gettext('Manager') ?></label> 
+        <li><label><?php echo __('Manager') ?></label> 
          <input type="text" name="manager" value="<?php
          echo (!empty($business->manager)) ? htmlentities($business->manager) : "";
          ?>" maxlength="50" id="manager"> 
@@ -73,10 +73,10 @@
      <div id="tabsLine-2" class="tabContent">
       <div> 
        <ul class="column three_column"> 
-        <li><label><?php echo gettext('Enterprise Name') ?></label> 
+        <li><label><?php echo __('Enterprise Name') ?></label> 
          <?php echo $f->select_field_from_object('enterprise_org_id', org::find_all_enterprise(), 'org_id', 'org', $$class->enterprise_org_id, 'enterprise_org_id', '', '', $readonly1); ?>
         </li>
-        <li><label><?php echo gettext('Legal Org') ?></label> 
+        <li><label><?php echo __('Legal Org') ?></label> 
          <?php echo $f->select_field_from_object('legal_org_id', org::find_all_legal(), 'org_id', 'org', $$class->legal_org_id, 'legal_org_id', 'legal_org_id', '', $readonly1); ?></li>
         <li><?php $f->l_text_field_dr('ledger'); ?></li>
         <li><?php $f->l_ac_field_d('cash_ac_id'); ?></li>

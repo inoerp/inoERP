@@ -372,7 +372,7 @@ class gettext_reader {
    * @param string number
    * @return translated plural form
    */
-  function ngettext($single, $plural, $number) {
+  function n__($single, $plural, $number) {
     if ($this->short_circuit) {
       if ($number != 1)
         return $plural;
@@ -407,7 +407,7 @@ class gettext_reader {
     }
   }
 
-  function pgettext($context, $msgid) {
+  function p__($context, $msgid) {
     $key = $context . chr(4) . $msgid;
     $ret = $this->translate($key);
     if (strpos($ret, "\004") !== FALSE) {
@@ -417,9 +417,9 @@ class gettext_reader {
     }
   }
 
-  function npgettext($context, $singular, $plural, $number) {
+  function np__($context, $singular, $plural, $number) {
     $key = $context . chr(4) . $singular;
-    $ret = $this->ngettext($key, $plural, $number);
+    $ret = $this->n__($key, $plural, $number);
     if (strpos($ret, "\004") !== FALSE) {
       return $singular;
     } else {

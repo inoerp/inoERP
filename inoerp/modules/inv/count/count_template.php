@@ -1,12 +1,12 @@
 <div class="row small-left-padding">
  <div id ="form_header">
   <form  method="post" id="inv_count_header"  name="inv_count_header">
-   <span class="heading"><?php echo gettext('Count Header') ?></span>
+   <span class="heading"><?php echo __('Count Header') ?></span>
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo gettext('Variance Limit/Approval') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo gettext('Count Frequence') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo __('Variance Limit/Approval') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo __('Count Frequence') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -28,24 +28,24 @@
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <ul class="column header_field">
-       <li><label><?php echo gettext('Quantity') ?>(+)</label> <?php $f->text_field_d('quantity_variance_positive'); ?> </li>
-       <li><label><?php echo gettext('Quantity') ?>(-)</label><?php $f->text_field_d('quantity_variance_negative'); ?> </li>
-       <li><label><?php echo gettext('Value') ?>(+)</label><?php $f->text_field_d('value_variance_positive'); ?> </li>
-       <li><label><?php echo gettext('Value') ?>(-)</label><?php $f->text_field_d('value_variance_negative'); ?> </li>
+       <li><label><?php echo __('Quantity') ?>(+)</label> <?php $f->text_field_d('quantity_variance_positive'); ?> </li>
+       <li><label><?php echo __('Quantity') ?>(-)</label><?php $f->text_field_d('quantity_variance_negative'); ?> </li>
+       <li><label><?php echo __('Value') ?>(+)</label><?php $f->text_field_d('value_variance_positive'); ?> </li>
+       <li><label><?php echo __('Value') ?>(-)</label><?php $f->text_field_d('value_variance_negative'); ?> </li>
        <li><?php $f->l_select_field_from_array('approval_required', inv_count_header::$approval_required_a, $$class->approval_required, 'approval_required'); ?> </li>
       </ul>
      </div>
      <div id="tabsHeader-3" class="tabContent">
       <div id="data_table">
        <ul class="column three_column">
-        <li><label><?php echo gettext('Action') ?> 
+        <li><label><?php echo __('Action') ?> 
           <?php echo $f->select_field_from_array('count_action', inv_count_header::$count_action_a, ''); ?> </label></li>
        </ul>
        <table class="form_table">
         <thead> 
          <tr>
-          <th><?php echo gettext('ABC Class') ?></th>
-          <th><?php echo gettext('Count Per Year') ?></th>
+          <th><?php echo __('ABC Class') ?></th>
+          <th><?php echo __('Count Per Year') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody inv_count_class_ref_values" >
@@ -79,7 +79,7 @@
  <div id ="form_line" class="form_line"><span class="heading">Count Schedules </span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Schedule') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Schedule') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <form action=""  method="post" id="inv_count_schedule_line"  name="inv_count_schedule_line">
@@ -87,16 +87,16 @@
       <table class="form_table">
        <thead> 
         <tr>
-         <th><?php echo gettext('Action') ?></th>
-         <th><?php echo gettext('Count Id') ?></th>
-         <th><?php echo gettext('Master Item Id') ?></th>
-         <th><?php echo gettext('Item Number') ?></th>
-         <th><?php echo gettext('Item Description') ?></th>
-         <th><?php echo gettext('Schedule Date') ?></th>
-         <th><?php echo gettext('StatusStatus') ?></th>
-         <th><?php echo gettext('Code On Count') ?></th>
-         <th><?php echo gettext('Subinventory') ?></th>
-         <th><?php echo gettext('Locator') ?></th>
+         <th><?php echo __('Action') ?></th>
+         <th><?php echo __('Count Id') ?></th>
+         <th><?php echo __('Master Item Id') ?></th>
+         <th><?php echo __('Item Number') ?></th>
+         <th><?php echo __('Item Description') ?></th>
+         <th><?php echo __('Schedule Date') ?></th>
+         <th><?php echo __('StatusStatus') ?></th>
+         <th><?php echo __('Code On Count') ?></th>
+         <th><?php echo __('Subinventory') ?></th>
+         <th><?php echo __('Locator') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody inv_count_schedule_values" >

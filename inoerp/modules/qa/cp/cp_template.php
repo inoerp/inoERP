@@ -6,13 +6,13 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php echo gettext('Collection Plan') ?></span>
+<div id ="form_header"><span class="heading"><?php echo __('Collection Plan') ?></span>
  <form method="post" id="qa_cp_header"  name="qa_cp_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Note') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -55,28 +55,28 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Collection Plan Elements') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo __('Collection Plan Elements') ?></span>
  <form  method="post" id="qa_cp_line"  name="qa_cp_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Amounts') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Amounts') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Sequence') ?></th>
-        <th><?php echo gettext('Element') ?>#</th>
-        <th><?php echo gettext('Prompt') ?></th>
-        <th><?php echo gettext('Enabled') ?></th>
-        <th><?php echo gettext('Mandatory') ?></th>
-        <th><?php echo gettext('Readonly') ?></th>
-        <th><?php echo gettext('Displayed') ?></th>
-        <th><?php echo gettext('Information Only') ?></th>
-        <th><?php echo gettext('Default') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('Sequence') ?></th>
+        <th><?php echo __('Element') ?>#</th>
+        <th><?php echo __('Prompt') ?></th>
+        <th><?php echo __('Enabled') ?></th>
+        <th><?php echo __('Mandatory') ?></th>
+        <th><?php echo __('Readonly') ?></th>
+        <th><?php echo __('Displayed') ?></th>
+        <th><?php echo __('Information Only') ?></th>
+        <th><?php echo __('Default') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

@@ -7,7 +7,7 @@
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
   <div id ="searchResult">
    <form  method="post" id="hr_timesheet_period"  name="hr_timesheet_period">
-    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('HR timesheet_period') ?></span>
+    <div id ="form_line" class="form_line"><span class="heading"><?php echo __('HR timesheet_period') ?></span>
      <div id="tabsLine">
       <ul class="tabMain">
        <li><a href="#tabsLine-1">Basics</a></li>
@@ -17,15 +17,15 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo gettext('Action') ?></th>
-           <th><?php echo gettext('Id') ?></th>
-           <th><?php echo gettext('From Date') ?></th>
-           <th><?php echo gettext('To Date') ?></th>
-           <th><?php echo gettext('Timesheet Period') ?></th>
-           <th><?php echo gettext('Description') ?></th>
-           <th><?php echo gettext('Max Work Hour') ?></th>
-           <th><?php echo gettext('Max Billable Hour') ?></th>
-           <th><?php echo gettext('Status') ?></th>
+           <th><?php echo __('Action') ?></th>
+           <th><?php echo __('Id') ?></th>
+           <th><?php echo __('From Date') ?></th>
+           <th><?php echo __('To Date') ?></th>
+           <th><?php echo __('Timesheet Period') ?></th>
+           <th><?php echo __('Description') ?></th>
+           <th><?php echo __('Max Work Hour') ?></th>
+           <th><?php echo __('Max Billable Hour') ?></th>
+           <th><?php echo __('Status') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">

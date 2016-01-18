@@ -18,24 +18,24 @@ if (count($po_detail_object) == 0) {
  <fieldset class="form_detail_data_fs">
   <div class="tabsDetail">
    <ul class="tabMain">
-    <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo gettext('Basic') ?></a></li>
-    <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>"><?php echo gettext('Delivery') ?></a></li>
-    <li class="tabLink"><a href="#tabsDetail-3-<?php echo $count ?>"><?php echo gettext('Finance') ?></a></li>
-    <li class="tabLink"><a href="#tabsDetail-4-<?php echo $count ?>"><?php echo gettext('Status') ?></a></li>
+    <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo __('Basic') ?></a></li>
+    <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>"><?php echo __('Delivery') ?></a></li>
+    <li class="tabLink"><a href="#tabsDetail-3-<?php echo $count ?>"><?php echo __('Finance') ?></a></li>
+    <li class="tabLink"><a href="#tabsDetail-4-<?php echo $count ?>"><?php echo __('Status') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsDetail-1-<?php echo $count ?>" class="tabContent">
      <table class="form form_detail_data_table detail">
       <thead>
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Seq') ?></th>
-        <th><?php echo gettext('Shipment Id') ?></th>
-        <th><?php echo gettext('Shipment Number') ?></th>
-        <th><?php echo gettext('Ship To Location') ?></th>
-        <th><?php echo gettext('Quantity') ?></th>
-        <th><?php echo gettext('Need By Date') ?></th>
-        <th><?php echo gettext('Promise Date') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Seq') ?></th>
+        <th><?php echo __('Shipment Id') ?></th>
+        <th><?php echo __('Shipment Number') ?></th>
+        <th><?php echo __('Ship To Location') ?></th>
+        <th><?php echo __('Quantity') ?></th>
+        <th><?php echo __('Need By Date') ?></th>
+        <th><?php echo __('Promise Date') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_detail_tbody">
@@ -71,11 +71,11 @@ if (count($po_detail_object) == 0) {
      <table class="form form_detail_data_table detail">
       <thead>
        <tr>
-        <th><?php echo gettext('Seq') ?>#</th>
-        <th><?php echo gettext('Sub inventory') ?></th>
-        <th><?php echo gettext('Locator') ?></th>
-        <th><?php echo gettext('Requestor') ?></th>
-        <th><?php echo gettext('Invoice Match Type') ?></th>
+        <th><?php echo __('Seq') ?>#</th>
+        <th><?php echo __('Sub inventory') ?></th>
+        <th><?php echo __('Locator') ?></th>
+        <th><?php echo __('Requestor') ?></th>
+        <th><?php echo __('Invoice Match Type') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_detail_tbody">
@@ -107,11 +107,11 @@ if (count($po_detail_object) == 0) {
      <table class="form form_detail_data_table detail">
       <thead>
        <tr>
-        <th><?php echo gettext('Seq') ?>#</th>
-        <th><?php echo gettext('Charge Ac') ?></th>
-        <th><?php echo gettext('Accrual Ac') ?></th>
-        <th><?php echo gettext('Budget Ac') ?></th>
-        <th><?php echo gettext('PPV Ac') ?></th>
+        <th><?php echo __('Seq') ?>#</th>
+        <th><?php echo __('Charge Ac') ?></th>
+        <th><?php echo __('Accrual Ac') ?></th>
+        <th><?php echo __('Budget Ac') ?></th>
+        <th><?php echo __('PPV Ac') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_detail_tbody">
@@ -139,12 +139,12 @@ if (count($po_detail_object) == 0) {
      <table class="form form_detail_data_table detail"><label>Quantities</label>
       <thead>
        <tr>
-        <th><?php echo gettext('Seq') ?>#</th>
-        <th><?php echo gettext('Received') ?></th>
-        <th><?php echo gettext('Accepted') ?></th>
-        <th><?php echo gettext('Delivered') ?></th>
-        <th><?php echo gettext('Invoiced') ?></th>
-        <th><?php echo gettext('Paid') ?></th>
+        <th><?php echo __('Seq') ?>#</th>
+        <th><?php echo __('Received') ?></th>
+        <th><?php echo __('Accepted') ?></th>
+        <th><?php echo __('Delivered') ?></th>
+        <th><?php echo __('Invoiced') ?></th>
+        <th><?php echo __('Paid') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_detail_tbody">

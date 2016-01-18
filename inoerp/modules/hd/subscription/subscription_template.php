@@ -6,16 +6,16 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header" class="erp-form"><span class="heading"><?php echo gettext('Membership Application') ?></span>
+<div id ="form_header" class="erp-form"><span class="heading"><?php echo __('Membership Application') ?></span>
  <form  method="post" id="hd_subscription_header"  name="hd_subscription_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Address Details') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Finance') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-6"><?php echo gettext('Actions') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Address Details') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Finance') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo __('Note') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo __('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -81,7 +81,7 @@ inoERP
     <div id="tabsHeader-6" class="tabContent">
      <div> 
       <ul class="column header_field">
-       <li id="document_status"><label><?php echo gettext('Action') ?></label>
+       <li id="document_status"><label><?php echo __('Action') ?></label>
         <?php echo $f->select_field_from_object('action', hd_subscription_header::so_status(), 'option_line_code', 'option_line_value', '', 'action'); ?>
        </li>
       </ul>
@@ -96,29 +96,29 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Membership Plan') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo __('Membership Plan') ?></span>
  <form action=""  method="post" id="hd_subscription_line"  name="hd_subscription_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Compulsory') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Compulsory') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Seq') ?>#</th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Line') ?>#</th>
-        <th><?php echo gettext('Type') ?></th>
-        <th><?php echo gettext('Membership') ?></th>
-        <th><?php echo gettext('Description') ?></th>
-        <th><?php echo gettext('UOM') ?></th>
-        <th><?php echo gettext('Quantity') ?></th>
-        <th><?php echo gettext('Price') ?></th>
-        <th><?php echo gettext('Line Price') ?></th>
-        <th><?php echo gettext('Additional') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Seq') ?>#</th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('Line') ?>#</th>
+        <th><?php echo __('Type') ?></th>
+        <th><?php echo __('Membership') ?></th>
+        <th><?php echo __('Description') ?></th>
+        <th><?php echo __('UOM') ?></th>
+        <th><?php echo __('Quantity') ?></th>
+        <th><?php echo __('Price') ?></th>
+        <th><?php echo __('Line Price') ?></th>
+        <th><?php echo __('Additional') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -170,23 +170,23 @@ inoERP
            <fieldset class="form_detail_data_fs">
             <div class="tabsDetail">
              <ul class="tabMain">
-              <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo gettext('Additional Plan') ?></a></li>
+              <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo __('Additional Plan') ?></a></li>
              </ul>
              <div class="tabContainer">
               <div id="tabsDetail-1-<?php echo $count ?>" class="tabContent">
                <table class="form form_detail_data_table detail">
                 <thead>
                  <tr>
-                  <th><?php echo gettext('Action') ?></th>
-                  <th><?php echo gettext('Detail Id') ?></th>
-                  <th><?php echo gettext('Line Type') ?></th>
-                  <th><?php echo gettext('Member Name') ?></th>
-                  <th><?php echo gettext('DOB') ?></th>
-                  <th><?php echo gettext('Vehcile No') ?></th>
-                  <th><?php echo gettext('Vehcile Reg') ?></th>
-                  <th><?php echo gettext('Tax Expiry Date') ?></th>
-                  <th><?php echo gettext('Vehcile Details') ?></th>
-                  <th><?php echo gettext('Description') ?></th>
+                  <th><?php echo __('Action') ?></th>
+                  <th><?php echo __('Detail Id') ?></th>
+                  <th><?php echo __('Line Type') ?></th>
+                  <th><?php echo __('Member Name') ?></th>
+                  <th><?php echo __('DOB') ?></th>
+                  <th><?php echo __('Vehcile No') ?></th>
+                  <th><?php echo __('Vehcile Reg') ?></th>
+                  <th><?php echo __('Tax Expiry Date') ?></th>
+                  <th><?php echo __('Vehcile Details') ?></th>
+                  <th><?php echo __('Description') ?></th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody <?php echo $count ?>">

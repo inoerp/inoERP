@@ -1,0 +1,1 @@
+<?php echo (!empty($ino_generic_html)) ? $ino_generic_html : "";  ?>     

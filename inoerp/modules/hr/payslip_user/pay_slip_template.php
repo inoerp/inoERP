@@ -2,7 +2,7 @@
  <div id="form_all">
   <div id="form_headerDiv">
    <form action=""  method="post" id="hr_payslip_header"  name="hr_payslip_header">
-    <span class="heading"><?php echo gettext('Employee Pay Slip') ?></span>
+    <span class="heading"><?php echo __('Employee Pay Slip') ?></span>
     <div class="tabContainer">
      <ul class="column header_field">
       <li><?php $f->l_text_field_dr('hr_payslip_header_id') ?>
@@ -30,20 +30,20 @@
      </ul>
     </div>
    </form>
-   <div id ="form_line" class="hr_payslip_line"><span class="heading"><?php echo gettext('Salary Details') ?></span>
+   <div id ="form_line" class="hr_payslip_line"><span class="heading"><?php echo __('Salary Details') ?></span>
     <form action=""  method="post" id="hr_payslip_line"  name="hr_payslip_line">
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1"><?php echo gettext('Details') ?></a></li>
+       <li><a href="#tabsLine-1"><?php echo __('Details') ?></a></li>
       </ul>
       <div class="tabContainer"> 
        <div id="tabsLine-1" class="tabContent">
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo gettext('Id') ?></th>
-           <th><?php echo gettext('Compensation ELement') ?>#</th>
-           <th><?php echo gettext('Amount') ?></th>
+           <th><?php echo __('Id') ?></th>
+           <th><?php echo __('Compensation ELement') ?>#</th>
+           <th><?php echo __('Amount') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody payslip_line_values" >

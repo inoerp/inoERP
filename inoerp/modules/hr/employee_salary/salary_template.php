@@ -1,20 +1,20 @@
 <div id ="form_header">
  <form action=""  method="post" id="hr_element_entry_header"  name="hr_element_entry_header">
-  <span class="heading"><?php echo gettext('Employee Salary') ?></span>
+  <span class="heading"><?php echo __('Employee Salary') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Basic Info') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
       <ul class="column header_field">
-       <li><label><?php echo gettext('Employee Name') ?></label><?php $f->text_field_d('employee_name'); ?>
+       <li><label><?php echo __('Employee Name') ?></label><?php $f->text_field_d('employee_name'); ?>
         <?php echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id); ?>
         <a name="show" href="form.php?class_name=hr_employee_salary" class="show hr_employee_id">
          <i class="fa fa-refresh"></i></a> 
        </li>
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
-         <?php echo gettext('Identification') ?></label><?php $f->text_field_d('identification_id'); ?>
+         <?php echo __('Identification') ?></label><?php $f->text_field_d('identification_id'); ?>
        </li>
       </ul>
     </div>
@@ -23,7 +23,7 @@
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Salary Component Break Up') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo __('Salary Component Break Up') ?></span>
  <form action=""  method="post" id="hr_element_entry_line"  name="hr_element_entry_line">
   <div id="tabsLine">
    <ul class="tabMain">

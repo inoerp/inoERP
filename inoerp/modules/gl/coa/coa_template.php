@@ -1,11 +1,11 @@
 <form method="post" id="coa"  name="coa">
- <span class="heading"><?php echo gettext('Chart Of Account') ?></span>
+ <span class="heading"><?php echo __('Chart Of Account') ?></span>
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ;?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Notes') ; ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ; ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ;?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Notes') ; ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Attachments') ; ?></a></li>
    </ul>
    <div class="tabContainer panel-ino-light-grey">
     <div id="tabsHeader-1" class="tabContent">
@@ -45,11 +45,11 @@
   </div>
 
  </div>
- <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Chart of Account Details') ?></span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Chart of Account Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Qualifiers') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Display') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Qualifiers') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo __('Display') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">

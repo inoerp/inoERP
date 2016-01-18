@@ -4,29 +4,29 @@
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
   <div id ="searchResult">
    <form  method="post" id="fp_kanban_header"  name="fp_kanban_header">
-    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Basic Info') ?><?php echo gettext('Kanban Strategy') ?></span>
+    <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Basic Info') ?><?php echo __('Kanban Strategy') ?></span>
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
-       <li><a href="#tabsLine-2"><?php echo gettext('Planning') ?></a></li>
-       <li><a href="#tabsLine-3"><?php echo gettext('Supply') ?></a></li>
+       <li><a href="#tabsLine-1"><?php echo __('Basic Info') ?></a></li>
+       <li><a href="#tabsLine-2"><?php echo __('Planning') ?></a></li>
+       <li><a href="#tabsLine-3"><?php echo __('Supply') ?></a></li>
       </ul>
       <div class="tabContainer">
        <div id="tabsLine-1" class="tabContent">
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo gettext('Action') ?></th>
-           <th><?php echo gettext('Seq') ?></th>
-           <th><?php echo gettext('Kanban Id') ?></th>
-           <th><?php echo gettext('Org Id') ?></th>
-           <th><?php echo gettext('Item Number') ?></th>
-           <th><?php echo gettext('Item Description') ?></th>
-           <th><?php echo gettext('Description') ?></th>
-           <th><?php echo gettext('Subinventory') ?></th>
-           <th><?php echo gettext('Locator') ?></th>
-           <th><?php echo gettext('Source Type') ?></th>
-           <th><?php echo gettext('Calculate') ?></th>
+           <th><?php echo __('Action') ?></th>
+           <th><?php echo __('Seq') ?></th>
+           <th><?php echo __('Kanban Id') ?></th>
+           <th><?php echo __('Org Id') ?></th>
+           <th><?php echo __('Item Number') ?></th>
+           <th><?php echo __('Item Description') ?></th>
+           <th><?php echo __('Description') ?></th>
+           <th><?php echo __('Subinventory') ?></th>
+           <th><?php echo __('Locator') ?></th>
+           <th><?php echo __('Source Type') ?></th>
+           <th><?php echo __('Calculate') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">
@@ -78,16 +78,16 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo gettext('Seq') ?></th>
-           <th><?php echo gettext('Card Size') ?></th>
-           <th><?php echo gettext('# of Cards') ?></th>
-           <th><?php echo gettext('MOQ') ?></th>
-           <th><?php echo gettext('Lead Time') ?></th>
-           <th><?php echo gettext('Allocation') ?>%</th>
-           <th><?php echo gettext('FLM') ?></th>
-           <th><?php echo gettext('SSD') ?></th>
-           <th><?php echo gettext('Planning Only') ?></th>
-           <th><?php echo gettext('Auto Request') ?></th>
+           <th><?php echo __('Seq') ?></th>
+           <th><?php echo __('Card Size') ?></th>
+           <th><?php echo __('# of Cards') ?></th>
+           <th><?php echo __('MOQ') ?></th>
+           <th><?php echo __('Lead Time') ?></th>
+           <th><?php echo __('Allocation') ?>%</th>
+           <th><?php echo __('FLM') ?></th>
+           <th><?php echo __('SSD') ?></th>
+           <th><?php echo __('Planning Only') ?></th>
+           <th><?php echo __('Auto Request') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">
@@ -124,13 +124,13 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo gettext('Seq') ?></th>
-           <th><?php echo gettext('From Org') ?></th>
-           <th><?php echo gettext('From SubInv') ?></th>
-           <th><?php echo gettext('From Locator') ?></th>
-           <th><?php echo gettext('Supplier') ?></th>
-           <th><?php echo gettext('Supplier Site') ?></th>
-           <th><?php echo gettext('RFID Reference') ?></th>
+           <th><?php echo __('Seq') ?></th>
+           <th><?php echo __('From Org') ?></th>
+           <th><?php echo __('From SubInv') ?></th>
+           <th><?php echo __('From Locator') ?></th>
+           <th><?php echo __('Supplier') ?></th>
+           <th><?php echo __('Supplier Site') ?></th>
+           <th><?php echo __('RFID Reference') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">

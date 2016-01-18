@@ -6,13 +6,13 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php echo gettext('Resource List') ?></span>
+<div id ="form_header"><span class="heading"><?php echo __('Resource List') ?></span>
  <form method="post" id="prj_resource_list_header"  name="prj_resource_list_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Note') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -51,27 +51,27 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Resource Details') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo __('Resource Details') ?></span>
  <form method="post" id="prj_resource_list_line"  name="prj_resource_list_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Resources') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Resources-2') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Resources') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo __('Resources-2') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Sequence') ?></th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Resource Type') ?></th>
-        <th><?php echo gettext('Description') ?></th>
-        <th><?php echo gettext('From Date') ?></th>
-        <th><?php echo gettext('To Date') ?></th>
-        <th><?php echo gettext('Org Id') ?></th>
-        <th><?php echo gettext('Employee') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Sequence') ?></th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('Resource Type') ?></th>
+        <th><?php echo __('Description') ?></th>
+        <th><?php echo __('From Date') ?></th>
+        <th><?php echo __('To Date') ?></th>
+        <th><?php echo __('Org Id') ?></th>
+        <th><?php echo __('Employee') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -108,12 +108,12 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Sequence') ?></th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Job') ?></th>
-        <th><?php echo gettext('Expenditure Type') ?></th>
-        <th><?php echo gettext('Expenditure Category') ?></th>
-        <th><?php echo gettext('Revenue Category') ?></th>
+        <th><?php echo __('Sequence') ?></th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('Job') ?></th>
+        <th><?php echo __('Expenditure Type') ?></th>
+        <th><?php echo __('Expenditure Category') ?></th>
+        <th><?php echo __('Revenue Category') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

@@ -1,7 +1,7 @@
 <div id="form_all">
  <div id="form_headerDiv">
   <form action=""  method="post" id="hr_employee_education_line"  name="employee_education_line">
-   <span class="heading"><?php echo gettext('Employee Education') ?></span>
+   <span class="heading"><?php echo __('Employee Education') ?></span>
    <div class="tabContainer">
     <label>Employee Name</label>
     <?php echo $f->select_field_from_object('employee_id', hr_employee::find_all(), 'hr_employee_id', array('first_name', 'last_name'), $employee_id_h, 'employee_id', $readonly1); ?>
@@ -11,24 +11,24 @@
    <div id ="form_line" class="hr_employee_education">
     <div id="tabsLine">
      <ul class="tabMain">
-      <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
-      <li><a href="#tabsLine-2"><?php echo gettext('Details Info') ?></a></li>
+      <li><a href="#tabsLine-1"><?php echo __('Basic Info') ?></a></li>
+      <li><a href="#tabsLine-2"><?php echo __('Details Info') ?></a></li>
      </ul>
      <div class="tabContainer"> 
       <div id="tabsLine-1" class="tabContent">
        <table class="form_table">
         <thead> 
          <tr>
-          <th><?php echo gettext('Action') ?></th>
-          <th><?php echo gettext('Seq') ?>#</th>
-          <th><?php echo gettext('Line Id') ?></th>
-          <th><?php echo gettext('Degree Name') ?>#</th>
-          <th><?php echo gettext('University') ?></th>
-          <th><?php echo gettext('Start Date') ?></th>
-          <th><?php echo gettext('End Date') ?></th>
-          <th><?php echo gettext('Mode') ?></th>
-          <th><?php echo gettext('Percentage') ?></th>
-          <th><?php echo gettext('Grade') ?></th>
+          <th><?php echo __('Action') ?></th>
+          <th><?php echo __('Seq') ?>#</th>
+          <th><?php echo __('Line Id') ?></th>
+          <th><?php echo __('Degree Name') ?>#</th>
+          <th><?php echo __('University') ?></th>
+          <th><?php echo __('Start Date') ?></th>
+          <th><?php echo __('End Date') ?></th>
+          <th><?php echo __('Mode') ?></th>
+          <th><?php echo __('Percentage') ?></th>
+          <th><?php echo __('Grade') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody employee_education_values" >
@@ -70,10 +70,10 @@
        <table class="form_table">
         <thead> 
          <tr>
-          <th><?php echo gettext('Seq') ?>#</th>
-          <th><?php echo gettext('Specialization') ?></th>
-          <th><?php echo gettext('University Address') ?>#</th>
-          <th><?php echo gettext('Notes') ?></th>
+          <th><?php echo __('Seq') ?>#</th>
+          <th><?php echo __('Specialization') ?></th>
+          <th><?php echo __('University Address') ?>#</th>
+          <th><?php echo __('Notes') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody employee_education_values" >

@@ -68,7 +68,7 @@
           if ($i == 0) {
            echo "<th>Select<br><i class='select_all fa fa-level-down clickable' title='Select All'></i>&nbsp;<i class='deselect_all fa fa-level-up clickable' title='Deselect All'></i></th>";
           }
-          echo '<th>' . gettext(ucwords(str_replace('_', ' ', $primary_column_v))) . '</th>';
+          echo '<th>' . __(ucwords(str_replace('_', ' ', $primary_column_v))) . '</th>';
           if (($i == 0) && (!empty($multi_selct_input_fields) && !is_array($multi_selct_input_fields))) {
            echo '<th>Line Action</th>';
           }

@@ -1,13 +1,13 @@
 <div class="row small-left-padding">
  <div id="form_all">
   <form action=""  method="post" id="pos_transaction_header"  name="pos_transaction_header">
-   <span class="heading"><?php echo gettext('POS Transaction') ?></span>
+   <span class="heading"><?php echo __('POS Transaction') ?></span>
    <div id ="form_header">
     <div id="tabsHeader">
      <ul class="tabMain">
-      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-      <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
-      <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+      <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+      <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
+      <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
      </ul>
      <div class="tabContainer">
       <div id="tabsHeader-1" class="tabContent">
@@ -61,16 +61,16 @@
        <table class="form_table">
         <thead> 
          <tr>
-          <th><?php echo gettext('Action') ?></th>
-          <th><?php echo gettext('Line Id') ?></th>
-          <th><?php echo gettext('Item') ?>#</th>
-          <th><?php echo gettext('Unit Price') ?></th>
-          <th><?php echo gettext('Quantity') ?></th>
-          <th><?php echo gettext('Discount Code') ?></th>
-          <th><?php echo gettext('Discount Amount') ?></th>
-          <th><?php echo gettext('Line Amount') ?></th>
-          <th><?php echo gettext('Final Amount') ?></th>
-          <th><?php echo gettext('Status') ?></th>
+          <th><?php echo __('Action') ?></th>
+          <th><?php echo __('Line Id') ?></th>
+          <th><?php echo __('Item') ?>#</th>
+          <th><?php echo __('Unit Price') ?></th>
+          <th><?php echo __('Quantity') ?></th>
+          <th><?php echo __('Discount Code') ?></th>
+          <th><?php echo __('Discount Amount') ?></th>
+          <th><?php echo __('Line Amount') ?></th>
+          <th><?php echo __('Final Amount') ?></th>
+          <th><?php echo __('Status') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody pos_transaction_line_values" >

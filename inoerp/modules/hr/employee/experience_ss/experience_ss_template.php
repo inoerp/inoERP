@@ -1,7 +1,7 @@
 <div id="form_all">
  <div id="form_headerDiv">
   <form action=""  method="post" id="hr_employee_experience_line"  name="employee_experience_line">
-   <span class="heading"><?php echo gettext('Employee Experience') ?></span>
+   <span class="heading"><?php echo __('Employee Experience') ?></span>
    <div id="tabsLine">
     <div id="form_serach_header" class="tabContainer">
      <?php $f->l_select_field_from_object('employee_id', $hr_emp_list, 'hr_employee_id', array('first_name', 'last_name'), $employee_id_h, 'employee_id', $readonly1); ?>
@@ -10,24 +10,24 @@
     </div>
     <div id ="form_line" class="hr_employee_experience">
      <ul class="tabMain">
-      <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
-      <li><a href="#tabsLine-2"><?php echo gettext('Details Info') ?></a></li>
+      <li><a href="#tabsLine-1"><?php echo __('Basic Info') ?></a></li>
+      <li><a href="#tabsLine-2"><?php echo __('Details Info') ?></a></li>
      </ul>
      <div class="tabContainer"> 
       <div id="tabsLine-1" class="tabContent">
        <table class="form_table">
         <thead> 
          <tr>
-          <th><?php echo gettext('Action') ?></th>
-          <th><?php echo gettext('Seq') ?>#</th>
-          <th><?php echo gettext('Line Id') ?></th>
-          <th><?php echo gettext('Organization Name') ?>#</th>
-          <th><?php echo gettext('Designation') ?></th>
-          <th><?php echo gettext('Start Date') ?></th>
-          <th><?php echo gettext('End Date') ?></th>
-          <th><?php echo gettext('Employee') ?>#</th>
-          <th><?php echo gettext('Department') ?></th>
-          <th><?php echo gettext('Last Manager') ?>#</th>
+          <th><?php echo __('Action') ?></th>
+          <th><?php echo __('Seq') ?>#</th>
+          <th><?php echo __('Line Id') ?></th>
+          <th><?php echo __('Organization Name') ?>#</th>
+          <th><?php echo __('Designation') ?></th>
+          <th><?php echo __('Start Date') ?></th>
+          <th><?php echo __('End Date') ?></th>
+          <th><?php echo __('Employee') ?>#</th>
+          <th><?php echo __('Department') ?></th>
+          <th><?php echo __('Last Manager') ?>#</th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody employee_experience_values" >
@@ -68,10 +68,10 @@
        <table class="form_table">
         <thead> 
          <tr>
-          <th><?php echo gettext('Seq') ?>#</th>
-          <th><?php echo gettext('Last Salary') ?></th>
-          <th><?php echo gettext('Communication Details') ?></th>
-          <th><?php echo gettext('Projects') ?>#</th>
+          <th><?php echo __('Seq') ?>#</th>
+          <th><?php echo __('Last Salary') ?></th>
+          <th><?php echo __('Communication Details') ?></th>
+          <th><?php echo __('Projects') ?>#</th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody employee_experience_values" >

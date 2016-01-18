@@ -2,7 +2,7 @@
  <div id="form_all">
   <div id="form_headerDiv">
    <form action=""  method="post" id="hr_perdiem_rate_line"  name="perdiem_rate_line">
-    <span class="heading"><?php echo gettext('Per Diem Rate') ?></span>
+    <span class="heading"><?php echo __('Per Diem Rate') ?></span>
     <div id="form_serach_header" class="tabContainer">
      <?php echo $f->select_field_from_object('hr_location_id',  hr_location::find_all(), 'hr_location_id', 'combination', $hr_location_id_h, 'hr_location_id', 'action'); ?>
      <a name="show" href="form.php?class_name=hr_perdiem_rate&<?php echo "mode=$mode"; ?>" class="show document_id hr_perdiem_rate_id action">
@@ -11,21 +11,21 @@
     <div id ="form_line" class="hr_perdiem_rate">
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1"><?php echo gettext('Details') ?></a></li>
+       <li><a href="#tabsLine-1"><?php echo __('Details') ?></a></li>
       </ul>
       <div class="tabContainer"> 
        <div id="tabsLine-1" class="tabContent">
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo gettext('Action') ?></th>
-           <th><?php echo gettext('Id') ?></th>
-           <th><?php echo gettext('Grade') ?></th>
-           <th><?php echo gettext('Currency') ?></th>
-           <th><?php echo gettext('Rate') ?></th>
-           <th><?php echo gettext('Description') ?></th>
-           <th><?php echo gettext('From Date') ?></th>
-           <th><?php echo gettext('To Date') ?></th
+           <th><?php echo __('Action') ?></th>
+           <th><?php echo __('Id') ?></th>
+           <th><?php echo __('Grade') ?></th>
+           <th><?php echo __('Currency') ?></th>
+           <th><?php echo __('Rate') ?></th>
+           <th><?php echo __('Description') ?></th>
+           <th><?php echo __('From Date') ?></th>
+           <th><?php echo __('To Date') ?></th
           </tr>
          </thead>
          <tbody class="form_data_line_tbody perdiem_rate_values" >

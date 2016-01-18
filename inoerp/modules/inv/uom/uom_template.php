@@ -1,11 +1,11 @@
-<div id ="form_all"><span class="heading"><?php echo gettext('Unit Of Measure') ?></span>
+<div id ="form_all"><span class="heading"><?php echo __('Unit Of Measure') ?></span>
  <form action=""  method="post" id="uom"  name="uom">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -45,11 +45,11 @@
    </div>
   </div>
 
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('UOM Details') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('UOM Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Relationship') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo gettext('Future') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo __('Relationship') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo __('Future') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
@@ -57,12 +57,12 @@
        <table class="form form_detail_data_table detail">
         <thead>
          <tr>
-          <th><?php echo gettext('UOM') ?></th>
-          <th><?php echo gettext('Equals') ?></th>
-          <th><?php echo gettext('Primary UOM Id') ?></th>
-          <th><?php echo gettext('Primary UOM') ?></th>
-          <th><?php echo gettext('Operator') ?></th>
-          <th><?php echo gettext('Relation Value') ?></th>
+          <th><?php echo __('UOM') ?></th>
+          <th><?php echo __('Equals') ?></th>
+          <th><?php echo __('Primary UOM Id') ?></th>
+          <th><?php echo __('Primary UOM') ?></th>
+          <th><?php echo __('Operator') ?></th>
+          <th><?php echo __('Relation Value') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_detail_tbody">

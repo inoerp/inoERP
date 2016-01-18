@@ -1,15 +1,15 @@
 <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Job') ?></th>
-        <th><?php echo gettext('Description') ?></th>
-        <th><?php echo gettext('UOM') ?></th>
-        <th><?php echo gettext('Rate') ?></th>
-        <th><?php echo gettext('Markup') ?></th>
-        <th><?php echo gettext('From Date') ?></th>
-        <th><?php echo gettext('To Date') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('Job') ?></th>
+        <th><?php echo __('Description') ?></th>
+        <th><?php echo __('UOM') ?></th>
+        <th><?php echo __('Rate') ?></th>
+        <th><?php echo __('Markup') ?></th>
+        <th><?php echo __('From Date') ?></th>
+        <th><?php echo __('To Date') ?></th>
 
        </tr>
       </thead>

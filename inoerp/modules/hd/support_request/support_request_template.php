@@ -1,13 +1,13 @@
 <div id ="form_all"><span class="heading"><?php
-  echo gettext('Support Request')
+  echo __('Support Request')
   ?></span>
  <form action=""  method="post" id="hd_support_request"  name="hd_support_request">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -66,13 +66,13 @@
    </div>
   </div>
 
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Request Details') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Request Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Description') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo gettext('Assignment') ?></a></li>
-     <li><a href="#tabsLine-3"><?php echo gettext('Resolution') ?></a></li>
-     <li><a href="#tabsLine-4"><?php echo gettext('Closure') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo __('Description') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo __('Assignment') ?></a></li>
+     <li><a href="#tabsLine-3"><?php echo __('Resolution') ?></a></li>
+     <li><a href="#tabsLine-4"><?php echo __('Closure') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">

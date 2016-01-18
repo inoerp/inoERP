@@ -311,7 +311,7 @@ trait dbObject_t {
   $sql.= " WHERE " . static::$primary_column . "= :primary_id ";
   $sql.= " LIMIT 1 ";
   $stmt = $dbc->connection->prepare(" $sql ");
-  $stmt->bindParam(':primary_id', $id);
+  $stmt->bindValue(':primary_id', $id);
   try {
    $stmt->execute();
    $result = $stmt->fetchObject();

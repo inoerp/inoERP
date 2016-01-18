@@ -6,13 +6,13 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php echo gettext('WIP Accounting Group') ?></span>
+<div id ="form_header"><span class="heading"><?php echo __('WIP Accounting Group') ?></span>
  <form method="post" id="wip_accounting_group"  name="wip_accounting_group">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Note') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -54,11 +54,11 @@ inoERP
   </div>
 
   <div id ="form_line" class="form_line">
-   <span class="heading"><?php echo gettext('Accounting Group Details') ?></span>
+   <span class="heading"><?php echo __('Accounting Group Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Actual Accounts') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo gettext('Variance Accounts') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo __('Actual Accounts') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo __('Variance Accounts') ?></a></li>
     </ul>
     <div class="tabContainer">
 

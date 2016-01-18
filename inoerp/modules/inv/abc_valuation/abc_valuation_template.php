@@ -1,6 +1,6 @@
 <div id ="form_header">
  <form action=""  method="post" id="inv_abc_valuation"  name="inv_abc_valuation">
-  <span class="heading"><?php  echo gettext('ABC Valuation') ?></span>
+  <span class="heading"><?php  echo __('ABC Valuation') ?></span>
   <div class="large_shadow_box tabContainer">
    <ul class="column header_field"> 
     <li><?php $f->l_text_field_dr_withSearch('inv_abc_valuation_id') ?>
@@ -14,11 +14,11 @@
     <li><?php $f->l_select_field_from_object('fp_forecast_header_id', fp_forecast_header::find_all(), 'fp_forecast_header_id', 'forecast', $$class->fp_forecast_header_id, 'fp_forecast_header_id', '', '', $readonly, '', '', '', 'org_id'); ?></li>
    </ul>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Valuation Details') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Valuation Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Scope') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo gettext('Action') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo __('Scope') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo __('Action') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">

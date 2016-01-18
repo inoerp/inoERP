@@ -7,7 +7,7 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <form  method="post" id="sd_document_type"  name="sd_document_type">
- <span class="heading"><?php echo gettext('Document Type') ?></span>
+ <span class="heading"><?php echo __('Document Type') ?></span>
  <div class="large_shadow_box tabContainer">
   <ul class="column header_field"> 
    <li><?php $f->l_text_field_dr_withSearch('sd_document_type_id') ?>
@@ -19,11 +19,11 @@ inoERP
    <li><?php $f->l_select_field_from_array('level', sd_document_type::$level_a, $$class->level); ?></li>
   </ul>
  </div>
- <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Document Type Details') ?></span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Document Type Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Defaults') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo __('Defaults') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">

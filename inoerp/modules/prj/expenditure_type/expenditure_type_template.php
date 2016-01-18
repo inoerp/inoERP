@@ -7,14 +7,14 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 
-<div id ="form_header"><span class="heading"><?php echo gettext('Expenditure Type') ?></span>
+<div id ="form_header"><span class="heading"><?php echo __('Expenditure Type') ?></span>
  <form action=""  method="post" id="prj_expenditure_type_header"  name="prj_expenditure_type_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Class Controls') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Class Controls') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Note') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo __('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -33,14 +33,14 @@ inoERP
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div class='col-md-3'>
-      <span class='heading bg-primary text-muted'><?php echo gettext('Labor Expenditures') ?></span>
+      <span class='heading bg-primary text-muted'><?php echo __('Labor Expenditures') ?></span>
       <ul class="column header_field"> 
        <li><?php $f->l_checkBox_field_d('direct_labor_cb'); ?></li> 
        <li><?php $f->l_checkBox_field_d('over_time_cb'); ?></li> 
       </ul>
      </div>
      <div class='col-md-9'>
-      <span class='heading bg-primary'><?php echo gettext('Non-Labor Expenditures') ?></span>
+      <span class='heading bg-primary'><?php echo __('Non-Labor Expenditures') ?></span>
       <ul class="column header_field"> 
        <li><?php $f->l_checkBox_field_d('inventory_cb'); ?></li> 
        <li><?php $f->l_checkBox_field_d('burden_cb'); ?></li> 
@@ -77,26 +77,26 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Cost Rates') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo __('Cost Rates') ?></span>
  <form action=""  method="post" id="prj_expenditure_type_line"  name="prj_expenditure_type_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Org Id') ?></th>
-        <th><?php echo gettext('Description') ?></th>
-        <th><?php echo gettext('From Date') ?></th>
-        <th><?php echo gettext('To Date') ?></th>
-        <th><?php echo gettext('Currency') ?></th>
-        <th><?php echo gettext('UOM') ?></th>
-        <th><?php echo gettext('Rate') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('Org Id') ?></th>
+        <th><?php echo __('Description') ?></th>
+        <th><?php echo __('From Date') ?></th>
+        <th><?php echo __('To Date') ?></th>
+        <th><?php echo __('Currency') ?></th>
+        <th><?php echo __('UOM') ?></th>
+        <th><?php echo __('Rate') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

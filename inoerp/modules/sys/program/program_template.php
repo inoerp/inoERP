@@ -1,4 +1,4 @@
-<div id ="form_header"><span class="heading"><?php echo gettext('Submitted Program Details') ?></span>
+<div id ="form_header"><span class="heading"><?php echo __('Submitted Program Details') ?></span>
  <form  method="post" id="sys_program"  name="sys_program">
   <div class="tabContainer"> 
    <ul class="column header_field"> 
@@ -23,25 +23,25 @@
 <div id ="form_line">
  <div id="tabsLine">
   <ul class="tabMain">
-   <li><a href="#tabsLine-1"><?php echo gettext('Program Output') ?></a></li>
-   <li><a href="#tabsLine-2"><?php echo gettext('Report Query') ?></a></li>
-   <li><a href="#tabsLine-3"><?php echo gettext('Email Address') ?></a></li>
+   <li><a href="#tabsLine-1"><?php echo __('Program Output') ?></a></li>
+   <li><a href="#tabsLine-2"><?php echo __('Report Query') ?></a></li>
+   <li><a href="#tabsLine-3"><?php echo __('Email Address') ?></a></li>
   </ul>
   <div class="tabContainer"> 
    <div id="tabsLine-1" class="tabContent">
-    <span class="heading"><?php echo gettext('Output') ?> </span><?php
+    <span class="heading"><?php echo __('Output') ?> </span><?php
     if (!empty($$class->output_path)) {
      $home_url_wos = rtrim(HOME_URL, '/');
      echo "<a href='" . $home_url_wos . $$class->output_path . "' target='new'> View </a> ";
     }
     ?>
-    <span class="heading"><?php echo gettext('Parameters') ?> </span>
+    <span class="heading"><?php echo __('Parameters') ?> </span>
     <?php
     echo '<pre>';
     print_r(unserialize($$class->parameters));
     echo '</pre>';
     ?>
-    <span class="heading"><?php echo gettext('Message Details') ?></span><?php echo $$class->message; ?>
+    <span class="heading"><?php echo __('Message Details') ?></span><?php echo $$class->message; ?>
    </div>
    <div id="tabsLine-2" class="tabContent"><label>SQL Query</label>
     <?php echo form::text_area('parameter', base64_decode($$class->report_query), '10', '150', '', '', '', 1); ?>

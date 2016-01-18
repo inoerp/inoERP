@@ -1,6 +1,6 @@
 <div id ="form_header">
  <form  method="post" id="ar_transaction_type"  name="ar_transaction_type">
-  <span class="heading"><?php echo gettext('AR Transaction Type') ?></span>
+  <span class="heading"><?php echo __('AR Transaction Type') ?></span>
   <div class="tabContainer">
    <ul class="column header_field"> 
     <li><?php $f->l_text_field_dr_withSearch('ar_transaction_type_id') ?>
@@ -14,11 +14,11 @@
     <li><?php $f->l_status_field_d('status'); ?></li>
    </ul>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Transaction Type Details') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Transaction Type Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo gettext('Finance') ?> </a></li>
+     <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo __('Finance') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">

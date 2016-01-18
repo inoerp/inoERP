@@ -1,12 +1,12 @@
-<div id ="form_header"><span class="heading"><?php echo gettext('Receipt Header') ?></span>
+<div id ="form_header"><span class="heading"><?php echo __('Receipt Header') ?></span>
  <form  method="post" id="ar_receipt_header"  name="ar_receipt_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Finance') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo gettext('Actions') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo __('Finance') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo __('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -18,7 +18,7 @@
       <li><?php $f->l_select_field_from_array('receipt_type', ar_receipt_header::$receipt_type_a, $$class->receipt_type, 'receipt_type'); ?></li>
       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?></li>
       <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', '', '', $readonly1, 1); ?></li>
-      <li><label><?php echo gettext('Period Name') ?></label><?php
+      <li><label><?php echo __('Period Name') ?></label><?php
        if (!empty($period_name_stmt)) {
         echo $period_name_stmt;
        } else {
@@ -89,30 +89,30 @@
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Receipt Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo __('Receipt Lines') ?></span>
  <form method="post" id="ar_receipt_line"  name="ar_receipt_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('References') ?> </a></li>
-    <li><a href="#tabsLine-3"><?php echo gettext('Notes') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo __('References') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo __('Notes') ?> </a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Seq') ?>#</th>
-        <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Line') ?>#</th>
-        <th><?php echo gettext('Trnx Number') ?></th>
-        <th><?php echo gettext('Receipt Amount') ?></th>
-        <th><?php echo gettext('Exchange Rate') ?></th>
-        <th><?php echo gettext('GL Amount') ?></th>
-        <th><?php echo gettext('Total Amount') ?></th>
-        <th><?php echo gettext('Cumulative Receipt') ?></th>
-        <th><?php echo gettext('Remaining') ?></th>
+        <th><?php echo __('Action') ?></th>
+        <th><?php echo __('Seq') ?>#</th>
+        <th><?php echo __('Line Id') ?></th>
+        <th><?php echo __('Line') ?>#</th>
+        <th><?php echo __('Trnx Number') ?></th>
+        <th><?php echo __('Receipt Amount') ?></th>
+        <th><?php echo __('Exchange Rate') ?></th>
+        <th><?php echo __('GL Amount') ?></th>
+        <th><?php echo __('Total Amount') ?></th>
+        <th><?php echo __('Cumulative Receipt') ?></th>
+        <th><?php echo __('Remaining') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -154,12 +154,12 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Seq') ?>#</th>
-        <th><?php echo gettext('Line Description') ?></th>
-        <th><?php echo gettext('Ref Key Name') ?>#</th>
-        <th><?php echo gettext('Ref Key Value') ?></th>
-        <th><?php echo gettext('View Ref Doc') ?></th>
-        <th><?php echo gettext('Status') ?></th>
+        <th><?php echo __('Seq') ?>#</th>
+        <th><?php echo __('Line Description') ?></th>
+        <th><?php echo __('Ref Key Name') ?>#</th>
+        <th><?php echo __('Ref Key Value') ?></th>
+        <th><?php echo __('View Ref Doc') ?></th>
+        <th><?php echo __('Status') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
